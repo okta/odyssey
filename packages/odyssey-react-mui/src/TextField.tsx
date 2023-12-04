@@ -10,7 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { InputAdornment, InputBase } from "@mui/material";
 import {
   ChangeEventHandler,
   FocusEventHandler,
@@ -19,10 +18,14 @@ import {
   memo,
   ReactElement,
   useCallback,
+  useRef,
 } from "react";
+import { InputAdornment, InputBase } from "@mui/material";
 
+import { FieldComponentProps } from "./FieldComponentProps";
 import { Field } from "./Field";
 import { SeleniumProps } from "./SeleniumProps";
+import { useInputValues, getControlState } from "./inputUtils";
 
 export const textFieldTypeValues = [
   "email",
@@ -40,49 +43,25 @@ export type TextFieldProps = {
    */
   autoCompleteType?: InputHTMLAttributes<HTMLInputElement>["autoComplete"];
   /**
+   * The default value. Use when the component is not controlled.
+   */
+  defaultValue?: string;
+  /**
    * End `InputAdornment` for this component.
    */
   endAdornment?: string | ReactElement;
-  /**
-   * If `error` is not undefined, the `input` will indicate an error.
-   */
-  errorMessage?: string;
   /**
    * If `true`, the component will receive focus automatically.
    */
   hasInitialFocus?: boolean;
   /**
-   * The helper text content.
-   */
-  hint?: string;
-  /**
-   * The id of the `input` element.
-   */
-  id?: string;
-  /**
-   * If `true`, the component is disabled.
-   */
-  isDisabled?: boolean;
-  /**
    * If `true`, a [TextareaAutosize](/material-ui/react-textarea-autosize/) element is rendered.
    */
   isMultiline?: boolean;
   /**
-   * If `true`, the `input` element is not required.
-   */
-  isOptional?: boolean;
-  /**
-   * It prevents the user from changing the value of the field
-   */
-  isReadOnly?: boolean;
-  /**
    * The label for the `input` element.
    */
   label: string;
-  /**
-   * The name of the `input` element. Defaults to the `id` if not set.
-   */
-  name?: string;
   /**
    * Callback fired when the `input` element loses focus.
    */
@@ -111,37 +90,66 @@ export type TextFieldProps = {
    * The value of the `input` element, required for a controlled component.
    */
   value?: string;
-} & SeleniumProps;
+} & FieldComponentProps &
+  SeleniumProps;
 
 const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (
     {
       autoCompleteType,
+      defaultValue,
       hasInitialFocus,
       endAdornment,
       errorMessage,
       hint,
       id: idOverride,
       isDisabled = false,
+      isFullWidth = false,
       isMultiline = false,
       isOptional = false,
       isReadOnly,
       label,
       name: nameOverride,
       onBlur,
-      onChange,
+      onChange: onChangeProp,
       onFocus,
       placeholder,
       startAdornment,
       testId,
       type = "text",
-      value,
+      value: value,
     },
     ref
   ) => {
+    const controlledStateRef = useRef(
+      getControlState({
+        controlledValue: value,
+        uncontrolledValue: defaultValue,
+      })
+    );
+    const inputValues = useInputValues({
+      defaultValue,
+      value,
+      controlState: controlledStateRef.current,
+    });
+
+    const onChange = useCallback<
+      NonNullable<ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>>
+    >(
+      (event) => {
+        onChangeProp?.(event);
+      },
+      [onChangeProp]
+    );
+
     const renderFieldComponent = useCallback(
-      ({ ariaDescribedBy, id }) => (
+      ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
         <InputBase
+          {...inputValues}
+          inputProps={{
+            "aria-errormessage": errorMessageElementId,
+            "aria-labelledby": labelElementId,
+          }}
           aria-describedby={ariaDescribedBy}
           autoComplete={autoCompleteType}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
@@ -168,18 +176,18 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             )
           }
           type={type}
-          value={value}
         />
       ),
       [
         autoCompleteType,
+        inputValues,
         hasInitialFocus,
         endAdornment,
         isMultiline,
         nameOverride,
+        onBlur,
         onChange,
         onFocus,
-        onBlur,
         placeholder,
         isOptional,
         isReadOnly,
@@ -187,7 +195,6 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         startAdornment,
         testId,
         type,
-        value,
       ]
     );
 
@@ -199,6 +206,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         hint={hint}
         id={idOverride}
         isDisabled={isDisabled}
+        isFullWidth={isFullWidth}
         isOptional={isOptional}
         label={label}
         renderFieldComponent={renderFieldComponent}

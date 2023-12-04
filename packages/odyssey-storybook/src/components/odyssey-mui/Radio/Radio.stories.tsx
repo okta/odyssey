@@ -15,6 +15,8 @@ import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
+
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { axeRun } from "../../../axe-util";
 
 const storybookMeta: Meta<RadioProps> = {
@@ -30,15 +32,7 @@ const storybookMeta: Meta<RadioProps> = {
         },
       },
     },
-    isDisabled: {
-      control: "boolean",
-      description: "If `true`, the radio button is disabled",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
+    isDisabled: fieldComponentPropsMetaData.isDisabled,
     isInvalid: {
       control: "boolean",
       description: "If `true`, the radio button has an invalid value",
@@ -61,15 +55,25 @@ const storybookMeta: Meta<RadioProps> = {
         name: "string",
       },
     },
-    name: {
-      control: "text",
-      description: "The name attribute of the radio button",
+    onChange: {
+      control: null,
+      description: "Callback fired when the the radio button value changes",
       table: {
         type: {
-          summary: "string",
+          summary: "func",
         },
       },
     },
+    onBlur: {
+      control: null,
+      description: "Callback fired when the blur event happens",
+      table: {
+        type: {
+          summary: "func",
+        },
+      },
+    },
+    name: fieldComponentPropsMetaData.name,
     value: {
       control: "text",
       description: "The value attribute of the radio button",
@@ -94,15 +98,17 @@ const storybookMeta: Meta<RadioProps> = {
 
 export default storybookMeta;
 
-export const Default: StoryObj<RadioProps> = {
+export const Default: StoryObj<typeof Radio> = {
   play: async ({ canvasElement, step }) => {
-    await step("select the radio button", async () => {
+    await step("select the radio button", async ({ args }) => {
       const canvas = within(canvasElement);
       const radio = canvas.getByRole("radio") as HTMLInputElement;
       if (radio) {
         userEvent.click(radio);
       }
       expect(radio).toBeChecked();
+      userEvent.click(canvasElement);
+      expect(args.onBlur).toHaveBeenCalled();
       axeRun("Radio Default");
     });
   },

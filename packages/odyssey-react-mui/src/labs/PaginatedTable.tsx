@@ -10,14 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { AlertProps, TablePaginationProps } from "@mui/material";
+import { AlertProps } from "@mui/material";
 import { Typography } from "../Typography";
-import MaterialReactTable, {
+import {
   MRT_PaginationState,
   type MRT_ColumnFiltersState,
   type MRT_RowSelectionState,
   type MRT_TableInstance,
   type MRT_Virtualizer,
+  useMaterialReactTable,
+  MaterialReactTable,
 } from "material-react-table";
 import {
   FunctionComponent,
@@ -55,8 +57,8 @@ export type PaginatedTableProps<TData extends DefaultMaterialReactTableData> = {
 };
 
 const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
-  columns,
-  data,
+  columns = [],
+  data = [],
   fetchMoreData,
   getRowId,
   hasError,
@@ -130,7 +132,9 @@ const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
       undefined
     >
   >(
-    ({ table }) => <>{ToolbarButtons && <ToolbarButtons table={table} />}</>,
+    ({ table }: { table: MRT_TableInstance<TData> }) => (
+      <>{ToolbarButtons && <ToolbarButtons table={table} />}</>
+    ),
     [ToolbarButtons]
   );
 
@@ -224,9 +228,7 @@ const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
     [hasError, t]
   );
 
-  const muiTablePaginationProps: Partial<
-    Omit<TablePaginationProps, "rowsPerPage">
-  > = useMemo(
+  const muiTablePaginationProps = useMemo(
     () => ({
       rowsPerPageOptions: [],
       showFirstButton: false,
@@ -246,31 +248,31 @@ const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
     []
   );
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      enableMultiRowSelection={hasRowSelection}
-      enablePagination
-      enableRowSelection={hasRowSelection}
-      enableSorting={false}
-      getRowId={getRowId}
-      initialState={modifiedInitialState}
-      muiSelectAllCheckboxProps={{ sx: muiCheckboxStyles }}
-      muiSelectCheckboxProps={{ sx: muiCheckboxStyles }}
-      muiTablePaginationProps={muiTablePaginationProps}
-      muiToolbarAlertBannerProps={muiToolbarAlertBannerProps}
-      onColumnFiltersChange={setColumnFilters}
-      onGlobalFilterChange={setGlobalFilter}
-      onPaginationChange={updatePagination}
-      onRowSelectionChange={setRowSelection}
-      renderBottomToolbarCustomActions={renderBottomToolbarCustomActions}
-      renderTopToolbarCustomActions={renderTopToolbarCustomActions}
-      rowVirtualizerInstanceRef={rowVirtualizerInstanceRef}
-      rowVirtualizerProps={{ overscan: 4 }}
-      state={modifiedState}
-    />
-  );
+  const table = useMaterialReactTable({
+    columns: columns,
+    data: data,
+    enableMultiRowSelection: hasRowSelection,
+    enablePagination: true,
+    enableRowSelection: hasRowSelection,
+    enableSorting: false,
+    getRowId: getRowId,
+    initialState: modifiedInitialState,
+    muiSelectAllCheckboxProps: { sx: muiCheckboxStyles },
+    muiSelectCheckboxProps: { sx: muiCheckboxStyles },
+    muiPaginationProps: muiTablePaginationProps,
+    muiToolbarAlertBannerProps: muiToolbarAlertBannerProps,
+    onColumnFiltersChange: setColumnFilters,
+    onGlobalFilterChange: setGlobalFilter,
+    onPaginationChange: updatePagination,
+    onRowSelectionChange: setRowSelection,
+    renderBottomToolbarCustomActions: renderBottomToolbarCustomActions,
+    renderTopToolbarCustomActions: renderTopToolbarCustomActions,
+    rowVirtualizerInstanceRef: rowVirtualizerInstanceRef,
+    rowVirtualizerOptions: { overscan: 4 },
+    state: modifiedState,
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 const MemoizedPaginatedTable = memo(PaginatedTable) as typeof PaginatedTable;

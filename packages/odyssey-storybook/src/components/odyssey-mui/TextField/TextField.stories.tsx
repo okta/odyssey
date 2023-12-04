@@ -14,13 +14,14 @@ import { Meta, StoryObj } from "@storybook/react";
 import {
   InputAdornment,
   TextField,
-  TextFieldProps,
   textFieldTypeValues,
 } from "@okta/odyssey-react-mui";
 
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { useCallback, useState } from "react";
 
-const storybookMeta: Meta<TextFieldProps> = {
+const storybookMeta: Meta<typeof TextField> = {
   title: "MUI Components/Forms/TextField",
   component: TextField,
   argTypes: {
@@ -34,6 +35,19 @@ const storybookMeta: Meta<TextFieldProps> = {
         },
       },
     },
+    defaultValue: {
+      control: "text",
+      description:
+        "The value of the `input` element. Use when the component is not controlled",
+      table: {
+        type: {
+          summary: "string",
+        },
+        defaultValue: {
+          summary: undefined,
+        },
+      },
+    },
     endAdornment: {
       control: "text",
       description: "End `InputAdornment` for this component",
@@ -43,16 +57,7 @@ const storybookMeta: Meta<TextFieldProps> = {
         },
       },
     },
-    errorMessage: {
-      control: "text",
-      description:
-        "If `error` is not undefined, the `input` will indicate an error",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
+    errorMessage: fieldComponentPropsMetaData.errorMessage,
     hasInitialFocus: {
       control: "boolean",
       description: "If `true`, the component will receive focus automatically",
@@ -62,36 +67,10 @@ const storybookMeta: Meta<TextFieldProps> = {
         },
       },
     },
-    hint: {
-      control: "text",
-      description: "The helper text content",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
-    id: {
-      control: "text",
-      description: "The id of the `input` element",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
-    isDisabled: {
-      control: "boolean",
-      description: "If `true`, the component is disabled",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-        defaultValue: {
-          summary: false,
-        },
-      },
-    },
+    hint: fieldComponentPropsMetaData.hint,
+    id: fieldComponentPropsMetaData.id,
+    isDisabled: fieldComponentPropsMetaData.isDisabled,
+    isFullWidth: fieldComponentPropsMetaData.isFullWidth,
     isMultiline: {
       control: "boolean",
       description: "If `true`, a TextareaAutosize element is rendered",
@@ -104,27 +83,8 @@ const storybookMeta: Meta<TextFieldProps> = {
         },
       },
     },
-    isOptional: {
-      control: "boolean",
-      description: "If `true`, the `input` element is not required",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-        defaultValue: {
-          summary: false,
-        },
-      },
-    },
-    isReadOnly: {
-      control: "boolean",
-      description: "It prevents the user from changing the value of the field",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
+    isOptional: fieldComponentPropsMetaData.isOptional,
+    isReadOnly: fieldComponentPropsMetaData.isReadOnly,
     label: {
       control: "text",
       description: "The label for the `input` element",
@@ -138,16 +98,7 @@ const storybookMeta: Meta<TextFieldProps> = {
         name: "string",
       },
     },
-    name: {
-      control: "text",
-      description:
-        "The name of the `input` element. Defaults to the `id` if not set.",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
+    name: fieldComponentPropsMetaData.name,
     onBlur: {
       control: null,
       description: "Callback fired when the `input` element loses focus",
@@ -221,6 +172,7 @@ const storybookMeta: Meta<TextFieldProps> = {
   },
   args: {
     label: "Destination",
+    defaultValue: undefined,
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
@@ -230,13 +182,13 @@ export default storybookMeta;
 
 // States
 
-export const Default: StoryObj<TextFieldProps> = {
+export const Default: StoryObj<typeof TextField> = {
   args: {
-    //
+    defaultValue: "",
   },
 };
 
-export const Disabled: StoryObj<TextFieldProps> = {
+export const Disabled: StoryObj<typeof TextField> = {
   parameters: {
     docs: {
       description: {
@@ -246,17 +198,18 @@ export const Disabled: StoryObj<TextFieldProps> = {
   },
   args: {
     isDisabled: true,
-    value: "Earth",
+    defaultValue: "Earth",
   },
 };
 
-export const Optional: StoryObj<TextFieldProps> = {
+export const Optional: StoryObj<typeof TextField> = {
   args: {
     isOptional: true,
+    defaultValue: "",
   },
 };
 
-export const ReadOnly: StoryObj<TextFieldProps> = {
+export const ReadOnly: StoryObj<typeof TextField> = {
   parameters: {
     docs: {
       description: {
@@ -270,19 +223,21 @@ export const ReadOnly: StoryObj<TextFieldProps> = {
   },
 };
 
-export const Error: StoryObj<TextFieldProps> = {
+export const Error: StoryObj<typeof TextField> = {
   args: {
     errorMessage: "This field is required.",
+    defaultValue: "",
   },
 };
 
-export const Hint: StoryObj<TextFieldProps> = {
+export const Hint: StoryObj<typeof TextField> = {
   args: {
     hint: "Specify your destination within the Sol system.",
+    defaultValue: "",
   },
 };
 
-export const Adornment: StoryObj<TextFieldProps> = {
+export const Adornment: StoryObj<typeof TextField> = {
   parameters: {
     docs: {
       description: {
@@ -293,19 +248,21 @@ export const Adornment: StoryObj<TextFieldProps> = {
   args: {
     label: "Cargo weight",
     endAdornment: <InputAdornment position="end">kg</InputAdornment>,
+    defaultValue: "",
   },
 };
 
 // Types
-export const Email: StoryObj<TextFieldProps> = {
+export const Email: StoryObj<typeof TextField> = {
   args: {
     autoCompleteType: "work email",
     label: "Company email",
     type: "email",
+    defaultValue: "",
   },
 };
 
-export const Multiline: StoryObj<TextFieldProps> = {
+export const Multiline: StoryObj<typeof TextField> = {
   parameters: {
     docs: {
       description: {
@@ -318,10 +275,11 @@ export const Multiline: StoryObj<TextFieldProps> = {
     autoCompleteType: "shipping street-address",
     label: "Permanent residence",
     isMultiline: true,
+    defaultValue: "",
   },
 };
 
-export const Tel: StoryObj<TextFieldProps> = {
+export const Tel: StoryObj<typeof TextField> = {
   parameters: {
     docs: {
       description: {
@@ -335,5 +293,28 @@ export const Tel: StoryObj<TextFieldProps> = {
     label: "Phone number",
     startAdornment: <InputAdornment position="start">+1</InputAdornment>,
     type: "tel",
+    defaultValue: "",
+  },
+};
+
+export const ControlledTextField: StoryObj<typeof TextField> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "When the component is controlled, the parent component is responsible for passing `value` to the component and listening for changes with `onChange`",
+      },
+    },
+  },
+  args: {
+    value: "Initial state",
+  },
+  render: function C({ ...props }) {
+    const [localValue, setLocalValue] = useState("Initial state");
+    const onChange = useCallback(
+      (event) => setLocalValue(event.target.value),
+      []
+    );
+    return <TextField {...props} value={localValue} onChange={onChange} />;
   },
 };

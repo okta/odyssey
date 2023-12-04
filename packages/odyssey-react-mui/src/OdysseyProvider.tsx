@@ -35,8 +35,7 @@ export type OdysseyProviderProps = OdysseyCacheProviderProps &
 const OdysseyProvider = ({
   children,
   designTokensOverride,
-  emotionRootElement,
-  shadowRootElement,
+  shadowDomElement,
   languageCode,
   nonce,
   stylisPlugins,
@@ -44,13 +43,13 @@ const OdysseyProvider = ({
   translationOverrides,
 }: OdysseyProviderProps) => (
   <OdysseyCacheProvider
-    emotionRootElement={emotionRootElement}
     nonce={nonce}
+    shadowDomElement={shadowDomElement}
     stylisPlugins={stylisPlugins}
   >
     <OdysseyThemeProvider
       designTokensOverride={designTokensOverride}
-      shadowRootElement={shadowRootElement}
+      shadowDomElement={shadowDomElement}
       themeOverride={themeOverride}
     >
       <ScopedCssBaseline>

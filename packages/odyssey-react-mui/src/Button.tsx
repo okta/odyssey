@@ -167,6 +167,7 @@ const Button = ({
       endIcon,
       id,
       isDisabled,
+      isFullWidth,
       isFullWidthProp,
       label,
       onClick,
@@ -180,13 +181,13 @@ const Button = ({
 
   return (
     <>
-      {tooltipText && (
+      {tooltipText && !isDisabled && (
         <Tooltip ariaType="description" placement="top" text={tooltipText}>
           <MuiPropsContext.Consumer>{renderButton}</MuiPropsContext.Consumer>
         </Tooltip>
       )}
 
-      {!tooltipText && renderButton(muiProps)}
+      {(isDisabled || !tooltipText) && renderButton(muiProps)}
     </>
   );
 };

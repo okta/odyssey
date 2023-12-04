@@ -10,13 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Autocomplete, AutocompleteProps } from "@okta/odyssey-react-mui";
+import { Autocomplete } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
-
-import { userEvent, waitFor, within, screen } from "@storybook/testing-library";
-import { axeRun } from "../../../axe-util";
 import { expect } from "@storybook/jest";
+import { userEvent, waitFor, within, screen } from "@storybook/testing-library";
+
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
+import { axeRun } from "../../../axe-util";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { useCallback, useState } from "react";
 
 const stations: ReadonlyArray<StationType> = [
   { label: "Anderson Station" },
@@ -50,15 +52,7 @@ const storybookMeta: Meta<typeof Autocomplete> = {
   title: "MUI Components/Forms/Autocomplete",
   component: Autocomplete,
   argTypes: {
-    errorMessage: {
-      control: "text",
-      description: "The error message for the select component",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
+    errorMessage: fieldComponentPropsMetaData.errorMessage,
     hasMultipleChoices: {
       control: "boolean",
       description: "Enables multiple choice selection",
@@ -68,24 +62,8 @@ const storybookMeta: Meta<typeof Autocomplete> = {
         },
       },
     },
-    hint: {
-      control: "text",
-      description: "The hint text for the autocomplete input",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
-    id: {
-      control: "text",
-      description: "The id attribute of the autocomplete component",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
+    hint: fieldComponentPropsMetaData.hint,
+    id: fieldComponentPropsMetaData.id,
     isCustomValueAllowed: {
       control: "boolean",
       description: "Allows the input of custom values",
@@ -95,15 +73,8 @@ const storybookMeta: Meta<typeof Autocomplete> = {
         },
       },
     },
-    isDisabled: {
-      control: "boolean",
-      description: "Disables the autocomplete input",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
+    isDisabled: fieldComponentPropsMetaData.isDisabled,
+    isFullWidth: fieldComponentPropsMetaData.isFullWidth,
     isLoading: {
       control: "boolean",
       description: "Displays a loading indicator",
@@ -113,27 +84,8 @@ const storybookMeta: Meta<typeof Autocomplete> = {
         },
       },
     },
-    isOptional: {
-      control: "boolean",
-      description: "If `true`, the select component is optional",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-        defaultValue: {
-          summary: false,
-        },
-      },
-    },
-    isReadOnly: {
-      control: "boolean",
-      description: "Makes the autocomplete input read-only",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
+    isOptional: fieldComponentPropsMetaData.isOptional,
+    isReadOnly: fieldComponentPropsMetaData.isReadOnly,
     label: {
       control: "text",
       description: "The label text for the autocomplete input",
@@ -147,16 +99,7 @@ const storybookMeta: Meta<typeof Autocomplete> = {
         name: "string",
       },
     },
-    name: {
-      control: "text",
-      description:
-        "The name of the select component. Defaults to the `id` if not set.",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
+    name: fieldComponentPropsMetaData.name,
     onBlur: {
       control: null,
       description:
@@ -234,11 +177,7 @@ const storybookMeta: Meta<typeof Autocomplete> = {
 export default storybookMeta;
 
 type StationType = { label: string };
-type AutocompleteType = AutocompleteProps<
-  StationType | undefined,
-  boolean | undefined,
-  boolean | undefined
->;
+type AutocompleteType = typeof Autocomplete<StationType, boolean, boolean>;
 
 export const Default: StoryObj<AutocompleteType> = {
   play: async ({ canvasElement, step }) => {
@@ -282,6 +221,7 @@ export const Disabled: StoryObj<AutocompleteType> = {
   args: {
     isDisabled: true,
     value: { label: "Tycho Station" },
+    getIsOptionEqualToValue: (option, value) => option.label === value.label,
   },
 };
 
@@ -368,7 +308,8 @@ export const MultipleDisabled: StoryObj<AutocompleteType> = {
   args: {
     hasMultipleChoices: true,
     isDisabled: true,
-    value: [{ label: "Tycho Station" }],
+    defaultValue: [{ label: "Tycho Station" }],
+    getIsOptionEqualToValue: (option, value) => option.label === value.label,
   },
 };
 
@@ -376,7 +317,8 @@ export const MultipleReadOnly: StoryObj<AutocompleteType> = {
   args: {
     hasMultipleChoices: true,
     isReadOnly: true,
-    value: [{ label: "Tycho Station" }],
+    defaultValue: [{ label: "Tycho Station" }],
+    getIsOptionEqualToValue: (option, value) => option.label === value.label,
   },
 };
 
@@ -389,6 +331,121 @@ export const Optional: StoryObj<AutocompleteType> = {
 export const ReadOnly: StoryObj<AutocompleteType> = {
   args: {
     isReadOnly: true,
-    value: { label: "Tycho Station" },
+    defaultValue: { label: "Tycho Station" },
+    getIsOptionEqualToValue: (option, value) => option.label === value.label,
+  },
+};
+
+type MoonMeta = {
+  id: string;
+  label: string;
+  diameterInKm: number;
+  description: string;
+};
+
+type JupiterMoonsAutocomplete = typeof Autocomplete<MoonMeta, boolean, boolean>;
+
+const jupiterGalileanMoons: MoonMeta[] = [
+  {
+    id: "ent1rs1yjAIYGKjX48g6",
+    label: "Io",
+    diameterInKm: 3643.2,
+    description:
+      "The innermost and third-largest of the four Galilean moons of the planet Jupiter.",
+  },
+  {
+    id: "ent1rs1ys3O7JDBxe8g6",
+    label: "Europa",
+    diameterInKm: 3121.6,
+    description:
+      "The smallest of the four Galilean moons orbiting Jupiter, and the sixth-closest to the planet of all the 95 known moons of Jupiter.",
+  },
+  {
+    id: "ent1rs21aA4w60TJG8g6",
+    label: "Ganymede",
+    diameterInKm: 5268.2,
+    description:
+      "The largest and most massive natural satellite of Jupiter as well as in the Solar System, being a planetary-mass moon.",
+  },
+  {
+    id: "ent1rs2qgOg42zhYV8g6",
+    label: "Callisto",
+    diameterInKm: 4820.6,
+    description:
+      "The third-largest moon after Ganymede and Saturn's largest moon Titan, and as large as the smallest planet Mercury",
+  },
+];
+
+export const ControlledMultipleAutocomplete: StoryObj<JupiterMoonsAutocomplete> =
+  {
+    parameters: {
+      docs: {
+        description: {
+          story:
+            "When the component is controlled, the parent component is responsible for managing the state of Autocomplete. `onChange` should be used to listen for component changes and to update the values in the `value` prop.",
+        },
+      },
+    },
+    args: {
+      options: jupiterGalileanMoons,
+      value: jupiterGalileanMoons.slice(0, 2),
+      hasMultipleChoices: true,
+      isReadOnly: false,
+      label: "label",
+      getIsOptionEqualToValue: (option, value) => option.id === value.id,
+    },
+    render: function C(props) {
+      const [localValue, setLocalValue] = useState<MoonMeta[] | undefined>(
+        jupiterGalileanMoons.slice(0, 2)
+      );
+      const onChange = useCallback((_, v) => setLocalValue(v), []);
+      return <Autocomplete {...props} value={localValue} onChange={onChange} />;
+    },
+  };
+
+export const UnontrolledMultipleAutocomplete: StoryObj<JupiterMoonsAutocomplete> =
+  {
+    args: {
+      options: jupiterGalileanMoons,
+      defaultValue: jupiterGalileanMoons.slice(0, 2),
+      hasMultipleChoices: true,
+      isReadOnly: false,
+      label: "label",
+      getIsOptionEqualToValue: (option, value) => option.id === value.id,
+    },
+  };
+
+export const ControlledAutocomplete: StoryObj<JupiterMoonsAutocomplete> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "When the component is controlled, the parent component is responsible for managing the state of Autocomplete. `onChange` should be used to listen for component changes and to update the values in the `value` prop.",
+      },
+    },
+  },
+  args: {
+    options: jupiterGalileanMoons,
+    value: jupiterGalileanMoons[0],
+    isReadOnly: false,
+    label: "label",
+    getIsOptionEqualToValue: (option, value) => option.id === value.id,
+  },
+  render: function C(props) {
+    const [localValue, setLocalValue] = useState<MoonMeta | undefined>(
+      jupiterGalileanMoons[0]
+    );
+    const onChange = useCallback((_, v) => setLocalValue(v), []);
+    return <Autocomplete {...props} value={localValue} onChange={onChange} />;
+  },
+};
+
+export const UncontrolledAutocomplete: StoryObj<JupiterMoonsAutocomplete> = {
+  args: {
+    options: jupiterGalileanMoons,
+    defaultValue: jupiterGalileanMoons[0],
+    isReadOnly: false,
+    label: "label",
+    getIsOptionEqualToValue: (option, value) => option.id === value.id,
   },
 };

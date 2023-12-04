@@ -13,7 +13,8 @@
 import * as Tokens from "@okta/odyssey-design-tokens";
 import { createContext, useContext } from "react";
 
-export const OdysseyDesignTokensContext = createContext<typeof Tokens>(Tokens);
+export type DesignTokens = typeof Tokens;
+export const OdysseyDesignTokensContext = createContext<DesignTokens>(Tokens);
 
 export const useOdysseyDesignTokens = () =>
   useContext(OdysseyDesignTokensContext);

@@ -10,11 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Radio as MuiRadio } from "@mui/material";
-import { memo } from "react";
+import {
+  FormControlLabel,
+  FormControlLabelProps as MuiFormControlLabelProps,
+  Radio as MuiRadio,
+  RadioProps as MuiRadioProps,
+} from "@mui/material";
+import { memo, useCallback } from "react";
 
-import { FormControlLabel } from "@mui/material";
-
+import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
 
 export type RadioProps = {
@@ -22,10 +26,6 @@ export type RadioProps = {
    * If `true`, the Radio is selected
    */
   isChecked?: boolean;
-  /**
-   * If `true`, the Radio is disabled
-   */
-  isDisabled?: boolean;
   /**
    * If `true`, the Radio has an invalid value
    */
@@ -35,14 +35,19 @@ export type RadioProps = {
    */
   label: string;
   /**
-   * The name attribute of the Radio
-   */
-  name?: string;
-  /**
    * The value attribute of the Radio
    */
   value: string;
-} & SeleniumProps;
+  /**
+   * Callback fired when the state is changed. Provides event and checked value.
+   */
+  onChange?: MuiRadioProps["onChange"];
+  /**
+   * Callback fired when the blur event happens. Provides event value.
+   */
+  onBlur?: MuiFormControlLabelProps["onBlur"];
+} & Pick<FieldComponentProps, "isDisabled" | "name"> &
+  SeleniumProps;
 
 const Radio = ({
   isChecked,
@@ -52,18 +57,37 @@ const Radio = ({
   name,
   testId,
   value,
-}: RadioProps) => (
-  <FormControlLabel
-    checked={isChecked}
-    className={isInvalid ? "Mui-error" : ""}
-    control={<MuiRadio />}
-    data-se={testId}
-    disabled={isDisabled}
-    label={label}
-    name={name}
-    value={value}
-  />
-);
+  onChange: onChangeProp,
+  onBlur: onBlurProp,
+}: RadioProps) => {
+  const onChange = useCallback<NonNullable<MuiRadioProps["onChange"]>>(
+    (event, checked) => {
+      onChangeProp?.(event, checked);
+    },
+    [onChangeProp]
+  );
+
+  const onBlur = useCallback<NonNullable<MuiFormControlLabelProps["onBlur"]>>(
+    (event) => {
+      onBlurProp?.(event);
+    },
+    [onBlurProp]
+  );
+
+  return (
+    <FormControlLabel
+      checked={isChecked}
+      className={isInvalid ? "Mui-error" : ""}
+      control={<MuiRadio onChange={onChange} />}
+      data-se={testId}
+      disabled={isDisabled}
+      label={label}
+      name={name}
+      value={value}
+      onBlur={onBlur}
+    />
+  );
+};
 
 const MemoizedRadio = memo(Radio);
 MemoizedRadio.displayName = "Radio";

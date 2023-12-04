@@ -6,7 +6,6 @@ import {
 import { CssBaseline, ScopedCssBaseline } from "@mui/material";
 import { ThemeProvider as StorybookThemeProvider } from "@storybook/theming";
 import type { Decorator } from "@storybook/react";
-import { Fragment } from "react";
 import * as odysseyTokens from "@okta/odyssey-design-tokens";
 
 const styles = {
@@ -16,19 +15,17 @@ const styles = {
 
 const odysseyTheme = createOdysseyMuiTheme({ odysseyTokens });
 
-export const MuiThemeDecorator: Decorator = (Story) => (
+export const MuiThemeDecorator: Decorator = (Story, context) => (
   <OdysseyThemeProvider>
-    <OdysseyTranslationProvider>
+    <OdysseyTranslationProvider languageCode={context.globals.locale}>
       {/* @ts-expect-error type mismatch on "typography" */}
       <StorybookThemeProvider theme={odysseyTheme}>
-        <Fragment>
-          <CssBaseline />
-          <div style={styles}>
-            <ScopedCssBaseline>
-              <Story />
-            </ScopedCssBaseline>
-          </div>
-        </Fragment>
+        <CssBaseline />
+        <div style={styles}>
+          <ScopedCssBaseline>
+            <Story />
+          </ScopedCssBaseline>
+        </div>
       </StorybookThemeProvider>
     </OdysseyTranslationProvider>
   </OdysseyThemeProvider>

@@ -1,0 +1,31 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Installation/Shadow DOM" />
+
+# Shadow DOM with Odyssey
+
+Sometimes, you may need to sandbox your application's styles so Odyssey components show up correctly in other applications. This typically happens when other global styles are on the page.
+
+To sandbox your application's styles, you need to use a Shadow DOM. Odyssey natively supports the use of a Shadow DOM and even exports some helper functions.
+
+To create a Shadow DOM, simply use the `createshadowDomElement` function from Odyssey:
+
+```tsx
+import { createshadowDomElement } from "@okta/odyssey-react-mui";
+
+const shadowDomElement = createshadowDomElement(
+  document.querySelector("#root") as HTMLElement
+);
+```
+
+Then render your React app into the Shadow DOM root element and pass it to Odyssey's top-level `OdysseyProvider` like so:
+
+```tsx
+ReactDOM.createRoot(shadowDomElement).render(
+  <OdysseyProvider shadowDomElement={shadowDomElement}>
+    <App />
+  </OdysseyProvider>
+);
+```
+
+If you're using separate `OdysseyThemeProvider` and `OdysseyCacheProvider` components, both of those also take the `shadowDomElement` element.

@@ -10,12 +10,17 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { RadioGroup as MuiRadioGroup } from "@mui/material";
-import { ChangeEventHandler, memo, ReactElement, useCallback } from "react";
+import {
+  RadioGroup as MuiRadioGroup,
+  type RadioGroupProps as MuiRadioGroupProps,
+} from "@mui/material";
+import { memo, ReactElement, useCallback, useRef } from "react";
 
 import { Radio, RadioProps } from "./Radio";
 import { Field } from "./Field";
+import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
+import { getControlState, useInputValues } from "./inputUtils";
 
 export type RadioGroupProps = {
   /**
@@ -27,38 +32,22 @@ export type RadioGroupProps = {
    */
   defaultValue?: string;
   /**
-   * The error text for an invalid RadioGroup
-   */
-  errorMessage?: string;
-  /**
-   * Optional hint text
-   */
-  hint?: string;
-  /**
-   * The id of the `input` element.
-   */
-  id?: string;
-  /**
-   * Disables the whole RadioGroup
-   */
-  isDisabled?: boolean;
-  /**
    * The text label for the RadioGroup
    */
   label: string;
   /**
-   * The name of the `input` element. Defaults to the `id` if not set.
-   */
-  name?: string;
-  /**
    * Listen for changes in the browser that change `value`
    */
-  onChange?: ChangeEventHandler<EventTarget>;
+  onChange?: MuiRadioGroupProps["onChange"];
   /**
    * The `value` on the selected Radio
    */
   value?: RadioProps["value"];
-} & SeleniumProps;
+} & Pick<
+  FieldComponentProps,
+  "errorMessage" | "hint" | "id" | "isDisabled" | "name"
+> &
+  SeleniumProps;
 
 const RadioGroup = ({
   children,
@@ -69,25 +58,41 @@ const RadioGroup = ({
   isDisabled,
   label,
   name: nameOverride,
-  onChange,
+  onChange: onChangeProp,
   testId,
   value,
 }: RadioGroupProps) => {
+  const controlledStateRef = useRef(
+    getControlState({ controlledValue: value, uncontrolledValue: defaultValue })
+  );
+  const inputValues = useInputValues({
+    defaultValue,
+    value,
+    controlState: controlledStateRef.current,
+  });
+
+  const onChange = useCallback<NonNullable<MuiRadioGroupProps["onChange"]>>(
+    (event, value) => {
+      onChangeProp?.(event, value);
+    },
+    [onChangeProp]
+  );
   const renderFieldComponent = useCallback(
-    ({ ariaDescribedBy, id }) => (
+    ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
       <MuiRadioGroup
+        {...inputValues}
         aria-describedby={ariaDescribedBy}
+        aria-errormessage={errorMessageElementId}
+        aria-labelledby={labelElementId}
         data-se={testId}
-        defaultValue={defaultValue}
         id={id}
         name={nameOverride ?? id}
         onChange={onChange}
-        value={value}
       >
         {children}
       </MuiRadioGroup>
     ),
-    [children, defaultValue, nameOverride, onChange, testId, value]
+    [children, inputValues, nameOverride, onChange, testId]
   );
 
   return (

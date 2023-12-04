@@ -18,25 +18,19 @@ import {
   useUniqueId,
 } from "./";
 import {
-  ButtonProps,
   Divider,
   ListSubheader,
-  Menu,
-  MenuProps,
+  Menu as MuiMenu,
+  PopoverOrigin,
 } from "@mui/material";
 import { ChevronDownIcon, MoreIcon } from "./icons.generated";
-import {
-  memo,
-  type ReactElement,
-  useCallback,
-  useMemo,
-  useState,
-  ReactFragment,
-} from "react";
+import { memo, type ReactElement, useCallback, useMemo, useState } from "react";
 
 import { MenuContext, MenuContextType } from "./MenuContext";
 import { NullElement } from "./NullElement";
 import type { SeleniumProps } from "./SeleniumProps";
+
+export const menuAlignmentValues = ["left", "right"] as const;
 
 export type MenuButtonProps = {
   /**
@@ -63,11 +57,12 @@ export type MenuButtonProps = {
    * The <MenuItem> components within the Menu.
    */
   children:
-    | ReactFragment
+    | ReactElement<typeof MenuItem | typeof Divider | typeof ListSubheader>
     | Array<
         | ReactElement<typeof MenuItem | typeof Divider | typeof ListSubheader>
         | NullElement
-      >;
+      >
+    | NullElement;
   /**
    * The end Icon on the trigggering Button
    */
@@ -83,15 +78,12 @@ export type MenuButtonProps = {
   /**
    * The horizontal alignment of the menu.
    */
-  menuAlignment?: "left" | "right";
+  menuAlignment?: (typeof menuAlignmentValues)[number];
   /**
-   * Optional function to fire on button click
+   * If true (the default), the menu will close when a child MenuItem is clicked.
+   * Otherwise, it will remain open.
    */
-  onClick?: ButtonProps["onClick"];
-  /**
-   * Optional function to fire on memu close
-   */
-  onClose?: MenuProps["onClose"];
+  shouldCloseOnSelect?: boolean;
   /**
    * The size of the button
    */
@@ -126,12 +118,11 @@ const MenuButton = ({
   buttonLabel = "",
   buttonVariant = "secondary",
   children,
+  shouldCloseOnSelect = true,
   endIcon: endIconProp,
   id: idOverride,
   isOverflow,
   menuAlignment = "left",
-  onClick,
-  onClose,
   size,
   testId,
   tooltipText,
@@ -140,8 +131,7 @@ const MenuButton = ({
 
   const isOpen = Boolean(anchorEl);
 
-  const closeMenu = useCallback((event, reason) => {
-    onClose?.(event, reason);
+  const closeMenu = useCallback(() => {
     setAnchorEl(null);
   }, []);
 
@@ -161,8 +151,9 @@ const MenuButton = ({
     () => ({
       closeMenu,
       openMenu,
+      shouldCloseOnSelect,
     }),
-    [closeMenu, openMenu]
+    [closeMenu, openMenu, shouldCloseOnSelect]
   );
 
   const endIcon = endIconProp ? (
@@ -171,6 +162,24 @@ const MenuButton = ({
     <MoreIcon />
   ) : (
     <ChevronDownIcon />
+  );
+
+  const anchorOrigin = useMemo(
+    () =>
+      ({
+        horizontal: menuAlignment,
+        vertical: "bottom",
+      } as PopoverOrigin),
+    [menuAlignment]
+  );
+
+  const transformOrigin = useMemo(
+    () =>
+      ({
+        horizontal: menuAlignment,
+        vertical: "top",
+      } as PopoverOrigin),
+    [menuAlignment]
   );
 
   return (
@@ -192,7 +201,9 @@ const MenuButton = ({
         variant={buttonVariant}
       />
 
-      <Menu
+      <MuiMenu
+        anchorOrigin={anchorOrigin}
+        transformOrigin={transformOrigin}
         anchorEl={anchorEl}
         anchorOrigin={{ horizontal: menuAlignment, vertical: "bottom" }}
         transformOrigin={{ horizontal: menuAlignment, vertical: "top" }}
@@ -204,7 +215,7 @@ const MenuButton = ({
         <MenuContext.Provider value={providerValue}>
           {children}
         </MenuContext.Provider>
-      </Menu>
+      </MuiMenu>
     </div>
   );
 };

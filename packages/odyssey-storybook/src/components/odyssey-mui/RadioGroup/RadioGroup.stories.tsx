@@ -10,10 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Radio, RadioGroup, RadioGroupProps } from "@okta/odyssey-react-mui";
+import { Radio, RadioGroup } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
+import { expect } from "@storybook/jest";
 
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { userEvent, within } from "@storybook/testing-library";
+import { axeRun } from "../../../axe-util";
+import { useCallback, useState } from "react";
 
 const storybookMeta: Meta<typeof RadioGroup> = {
   title: "MUI Components/Forms/RadioGroup",
@@ -43,43 +48,10 @@ const storybookMeta: Meta<typeof RadioGroup> = {
         },
       },
     },
-    errorMessage: {
-      control: "text",
-      description: "The error text for an invalid group",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
-    hint: {
-      control: "text",
-      description: "Optional hint text",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
-    id: {
-      control: "text",
-      description:
-        "The id of the `input` element. This will also be the input's `name` field",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
-    isDisabled: {
-      control: "boolean",
-      description: "Disables the whole radio group",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
+    errorMessage: fieldComponentPropsMetaData.errorMessage,
+    hint: fieldComponentPropsMetaData.hint,
+    id: fieldComponentPropsMetaData.id,
+    isDisabled: fieldComponentPropsMetaData.isDisabled,
     label: {
       control: "text",
       description: "The text label for the radio group",
@@ -121,7 +93,7 @@ const storybookMeta: Meta<typeof RadioGroup> = {
 
 export default storybookMeta;
 
-const Template: StoryObj<RadioGroupProps> = {
+const Template: StoryObj<typeof RadioGroup> = {
   render: function C(props) {
     return (
       <RadioGroup {...props}>
@@ -133,25 +105,30 @@ const Template: StoryObj<RadioGroupProps> = {
   },
 };
 
-export const Default: StoryObj<RadioGroupProps> = {
+export const Default: StoryObj<typeof RadioGroup> = {
   ...Template,
+  args: {
+    defaultValue: "",
+  },
 };
 
-export const Hint: StoryObj<RadioGroupProps> = {
+export const Hint: StoryObj<typeof RadioGroup> = {
   ...Template,
   args: {
     hint: "Select the speed at which you wish to travel.",
+    defaultValue: "",
   },
 };
 
-export const Disabled: StoryObj<RadioGroupProps> = {
+export const Disabled: StoryObj<typeof RadioGroup> = {
   ...Template,
   args: {
     isDisabled: true,
+    defaultValue: "",
   },
 };
 
-export const Error: StoryObj<RadioGroupProps> = {
+export const Error: StoryObj<typeof RadioGroup> = {
   ...Template,
   parameters: {
     docs: {
@@ -163,5 +140,64 @@ export const Error: StoryObj<RadioGroupProps> = {
   },
   args: {
     errorMessage: "This field is required.",
+    defaultValue: "",
+  },
+};
+
+export const UncontrolledRadioGroup: StoryObj<typeof RadioGroup> = {
+  ...Template,
+  args: {
+    defaultValue: "Warp Speed",
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("select controlled radio button", async () => {
+      const canvas = within(canvasElement);
+      const radiogroup = canvas.getByRole("radiogroup") as HTMLInputElement;
+      const radio = canvas.getByLabelText(
+        "Ludicrous Speed"
+      ) as HTMLInputElement;
+      if (radiogroup && radio) {
+        userEvent.click(radio);
+      }
+      expect(radio).toBeChecked();
+      axeRun("select controlled radio button");
+    });
+  },
+};
+
+export const ControlledRadioGroup: StoryObj<typeof RadioGroup> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "When the component is controlled, the parent component is responsible for managing the state of `RadioGroup`. `onChange` should be used to listen for component changes and to update the values in the `value` prop.",
+      },
+    },
+  },
+  args: {
+    value: "Ludicrous Speed",
+  },
+  render: function C(props) {
+    const [value, setValue] = useState("Ludicrous Speed");
+    const onChange = useCallback((_, value) => setValue(value), []);
+    return (
+      <RadioGroup {...{ ...props, value, onChange }}>
+        <Radio label="Light Speed" value="Light Speed" />
+        <Radio label="Warp Speed" value="Warp Speed" />
+        <Radio label="Ludicrous Speed" value="Ludicrous Speed" />
+      </RadioGroup>
+    );
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("select uncontrolled radio button", async () => {
+      const canvas = within(canvasElement);
+      const radiogroup = canvas.getByRole("radiogroup") as HTMLInputElement;
+      const radio = canvas.getByLabelText("Warp Speed") as HTMLInputElement;
+      if (radiogroup && radio) {
+        userEvent.click(radio);
+      }
+      expect(radio).toBeChecked();
+      axeRun("select uncontrolled radio button");
+    });
   },
 };

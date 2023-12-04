@@ -14,12 +14,16 @@ export { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 export { LocalizationProvider } from "@mui/x-date-pickers";
 export type { LocalizationProviderProps } from "@mui/x-date-pickers";
 
-export type { MRT_ColumnDef as TableColumn } from "material-react-table";
-
 export * from "./DatePicker";
 export * from "./datePickerTheme";
 
+export * from "./DataTable";
+export * from "./DataTablePagination";
+export * from "./DataFilters";
+
 export * from "./materialReactTableTypes";
-export * from "./PaginatedTable";
 export * from "./StaticTable";
+export * from "./PaginatedTable";
+
 export * from "./GroupPicker";
+export * from "./VirtualizedAutocomplete";

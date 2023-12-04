@@ -10,21 +10,27 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ReactNode, memo, useCallback, useMemo, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   Box,
-  Chip,
   Checkbox as MuiCheckbox,
+  Chip,
+  ListItemSecondaryAction,
   ListSubheader,
   MenuItem,
   Select as MuiSelect,
-  SelectChangeEvent,
-  ListItemSecondaryAction,
 } from "@mui/material";
 import { SelectProps as MuiSelectProps } from "@mui/material";
+
 import { Field } from "./Field";
-import type { SeleniumProps } from "./SeleniumProps";
+import { FieldComponentProps } from "./FieldComponentProps";
 import { CheckIcon } from "./icons.generated";
+import type { SeleniumProps } from "./SeleniumProps";
+import {
+  ComponentControlledState,
+  useInputValues,
+  getControlState,
+} from "./inputUtils";
 
 export type SelectOption = {
   text: string;
@@ -32,51 +38,42 @@ export type SelectOption = {
   value?: string;
 };
 
-export type SelectProps = {
+export type SelectValueType<HasMultipleChoices> =
+  HasMultipleChoices extends true ? string[] : string;
+
+export type SelectProps<
+  Value extends SelectValueType<HasMultipleChoices>,
+  HasMultipleChoices extends boolean
+> = {
   /**
-   * The error message for the Select
+   * The default value. Use when the component is not controlled.
    */
-  errorMessage?: string;
-  /**
-   * The hint text for the Select
-   */
-  hint?: string;
-  /**
-   * The id attribute of the Select
-   */
-  id?: string;
-  /**
-   * If `true`, the Select is disabled
-   */
-  isDisabled?: boolean;
+  defaultValue?: MuiSelectProps<Value>["defaultValue"];
   /**
    * If `true`, the Select allows multiple selections
    */
-  isMultiSelect?: boolean;
+  hasMultipleChoices?: HasMultipleChoices;
   /**
-   * If `true`, the Select is optional
+   * @deprecated Use `hasMultipleChoices` instead.
    */
-  isOptional?: boolean;
+  /** **Deprecated:** use `hasMultipleChoices` */
+  isMultiSelect?: HasMultipleChoices;
   /**
    * The label text for the Select
    */
   label: string;
   /**
-   * The name of the `input` element. Defaults to the `id` if not set.
-   */
-  name?: string;
-  /**
    * Callback fired when the Select loses focus
    */
-  onBlur?: MuiSelectProps["onBlur"];
+  onBlur?: MuiSelectProps<Value>["onBlur"];
   /**
    * Callback fired when the value of the Select changes
    */
-  onChange?: MuiSelectProps["onChange"];
+  onChange?: MuiSelectProps<Value>["onChange"];
   /**
    * Callback fired when the Select gains focus
    */
-  onFocus?: MuiSelectProps["onFocus"];
+  onFocus?: MuiSelectProps<Value>["onFocus"];
   /**
    * The options for the Select
    */
@@ -84,8 +81,18 @@ export type SelectProps = {
   /**
    * The value or values selected in the Select
    */
-  value?: string | string[];
-} & SeleniumProps;
+  value?: Value;
+} & Pick<
+  FieldComponentProps,
+  | "errorMessage"
+  | "hint"
+  | "id"
+  | "isDisabled"
+  | "isOptional"
+  | "name"
+  | "isFullWidth"
+> &
+  SeleniumProps;
 
 /**
  * Options in Odyssey <Select> are passed as an array, which can contain any combination
@@ -102,50 +109,68 @@ export type SelectProps = {
  *   - { text: string, type: "heading" } — Used to display a group heading with the text
  */
 
-const Select = ({
+const { CONTROLLED } = ComponentControlledState;
+const Select = <
+  Value extends SelectValueType<HasMultipleChoices>,
+  HasMultipleChoices extends boolean
+>({
+  defaultValue,
   errorMessage,
+  hasMultipleChoices: hasMultipleChoicesProp,
   hint,
   id: idOverride,
   isDisabled = false,
-  isMultiSelect = false,
+  isFullWidth = false,
+  isMultiSelect,
   isOptional = false,
   label,
   name: nameOverride,
   onBlur,
   onChange: onChangeProp,
   onFocus,
-  value,
-  testId,
   options,
-}: SelectProps) => {
-  // If there's no value set, we set it to a blank string (if it's a single-select)
-  // or an empty array (if it's a multi-select)
-  if (typeof value === "undefined") {
-    value = isMultiSelect ? [] : "";
-  }
+  testId,
+  value,
+}: SelectProps<Value, HasMultipleChoices>) => {
+  const hasMultipleChoices = useMemo(
+    () =>
+      hasMultipleChoicesProp === undefined
+        ? isMultiSelect
+        : hasMultipleChoicesProp,
+    [hasMultipleChoicesProp, isMultiSelect]
+  );
+  const controlledStateRef = useRef(
+    getControlState({ controlledValue: value, uncontrolledValue: defaultValue })
+  );
+  const [internalSelectedValues, setInternalSelectedValues] = useState(
+    controlledStateRef.current === CONTROLLED ? value : defaultValue
+  );
 
-  const [selectedValue, setSelectedValue] = useState<string | string[]>(value);
+  useEffect(() => {
+    if (controlledStateRef.current === CONTROLLED) {
+      setInternalSelectedValues(value);
+    }
+  }, [value]);
 
-  const onChange = useCallback(
-    (event: SelectChangeEvent<string | string[]>, child: ReactNode) => {
+  const inputValues = useInputValues({
+    defaultValue,
+    value,
+    controlState: controlledStateRef.current,
+  });
+
+  const onChange = useCallback<NonNullable<MuiSelectProps<Value>["onChange"]>>(
+    (event, child) => {
       const {
         target: { value },
       } = event;
-
-      // Set the field value, with some additional logic to handle array values
-      // for multi-selects
-      if (isMultiSelect) {
-        setSelectedValue(typeof value === "string" ? value.split(",") : value);
-      } else {
-        setSelectedValue(value);
+      if (controlledStateRef.current !== CONTROLLED) {
+        setInternalSelectedValues(
+          (typeof value === "string" ? value.split(",") : value) as Value
+        );
       }
-
-      // Trigger the onChange event, if one has been passed
-      if (onChangeProp) {
-        onChangeProp(event, child);
-      }
+      onChangeProp?.(event, child);
     },
-    [isMultiSelect, onChangeProp, setSelectedValue]
+    [onChangeProp]
   );
 
   // Normalize the options array to accommodate the various
@@ -165,7 +190,7 @@ const Select = ({
   );
 
   const renderValue = useCallback(
-    (selected: string | string[]) => {
+    (selected: Value) => {
       // If the selected value isn't an array, then we don't need to display
       // chips and should fall back to the default render behavior
       if (typeof selected === "string") {
@@ -206,14 +231,15 @@ const Select = ({
         if (option.type === "heading") {
           return <ListSubheader key={option.text}>{option.text}</ListSubheader>;
         }
-
         return (
           <MenuItem key={option.value} value={option.value}>
-            {isMultiSelect && (
-              <MuiCheckbox checked={selectedValue.includes(option.value)} />
+            {hasMultipleChoices && (
+              <MuiCheckbox
+                checked={internalSelectedValues?.includes(option.value)}
+              />
             )}
             {option.text}
-            {selectedValue == option.value && (
+            {internalSelectedValues === option.value && (
               <ListItemSecondaryAction>
                 <CheckIcon />
               </ListItemSecondaryAction>
@@ -221,36 +247,36 @@ const Select = ({
           </MenuItem>
         );
       }),
-    [isMultiSelect, normalizedOptions, selectedValue]
+    [hasMultipleChoices, normalizedOptions, internalSelectedValues]
   );
 
   const renderFieldComponent = useCallback(
-    ({ ariaDescribedBy, id }) => (
+    ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
       <MuiSelect
+        {...inputValues}
         aria-describedby={ariaDescribedBy}
+        aria-errormessage={errorMessageElementId}
         children={children}
         data-se={testId}
         id={id}
-        labelId={label}
-        multiple={isMultiSelect}
+        labelId={labelElementId}
+        multiple={hasMultipleChoices}
         name={nameOverride ?? id}
         onBlur={onBlur}
         onChange={onChange}
         onFocus={onFocus}
-        renderValue={isMultiSelect ? renderValue : undefined}
-        value={selectedValue}
+        renderValue={hasMultipleChoices ? renderValue : undefined}
       />
     ),
     [
       children,
-      isMultiSelect,
-      label,
+      inputValues,
+      hasMultipleChoices,
       nameOverride,
       onBlur,
       onChange,
       onFocus,
       renderValue,
-      selectedValue,
       testId,
     ]
   );
@@ -263,6 +289,7 @@ const Select = ({
       hint={hint}
       id={idOverride}
       isDisabled={isDisabled}
+      isFullWidth={isFullWidth}
       isOptional={isOptional}
       label={label}
       renderFieldComponent={renderFieldComponent}

@@ -17,13 +17,16 @@ import {
   forwardRef,
   memo,
   useCallback,
+  useRef,
   useState,
 } from "react";
 
 import { ShowIcon, HideIcon } from "./icons.generated";
 import { Field } from "./Field";
+import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
 import { useTranslation } from "react-i18next";
+import { getControlState, useInputValues } from "./inputUtils";
 
 export type PasswordFieldProps = {
   /**
@@ -33,9 +36,9 @@ export type PasswordFieldProps = {
    */
   autoCompleteType?: "current-password" | "new-password";
   /**
-   * If `error` is not undefined, the `input` will indicate an error.
+   * initial value for input. Use when component in uncontrolled.
    */
-  errorMessage?: string;
+  defaultValue?: string;
   /**
    * If `true`, the component will receive focus automatically.
    */
@@ -45,33 +48,9 @@ export type PasswordFieldProps = {
    */
   hasShowPassword?: boolean;
   /**
-   * The helper text content.
-   */
-  hint?: string;
-  /**
-   * The id of the `input` element.
-   */
-  id?: string;
-  /**
-   * If `true`, the component is disabled.
-   */
-  isDisabled?: boolean;
-  /**
-   * If `true`, the `input` element is not required.
-   */
-  isOptional?: boolean;
-  /**
-   * It prevents the user from changing the value of the field
-   */
-  isReadOnly?: boolean;
-  /**
    * The label for the `input` element.
    */
   label: string;
-  /**
-   * The name of the `input` element. Defaults to the `id` if not set.
-   */
-  name?: string;
   /**
    * Callback fired when the `input` element loses focus.
    */
@@ -89,26 +68,29 @@ export type PasswordFieldProps = {
    */
   placeholder?: string;
   /**
-   * The value of the `input` element, required for a controlled component.
+   * The value of the `input` element. Use when component is controlled.
    */
   value?: string;
-} & SeleniumProps;
+} & FieldComponentProps &
+  SeleniumProps;
 
 const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
   (
     {
       autoCompleteType,
+      defaultValue,
       errorMessage,
       hasInitialFocus,
       hint,
       id: idOverride,
       isDisabled = false,
+      isFullWidth = false,
       isOptional = false,
       hasShowPassword = true,
       isReadOnly,
       label,
       name: nameOverride,
-      onChange,
+      onChange: onChangeProp,
       onFocus,
       onBlur,
       placeholder,
@@ -126,11 +108,33 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       );
     }, []);
 
+    const controlledStateRef = useRef(
+      getControlState({
+        controlledValue: value,
+        uncontrolledValue: defaultValue,
+      })
+    );
+    const inputValues = useInputValues({
+      defaultValue,
+      value,
+      controlState: controlledStateRef.current,
+    });
+
+    const onChange = useCallback<
+      ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>
+    >(
+      (event) => {
+        onChangeProp?.(event);
+      },
+      [onChangeProp]
+    );
+
     const renderFieldComponent = useCallback(
-      ({ ariaDescribedBy, id }) => (
+      ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
         <InputBase
+          {...inputValues}
           aria-describedby={ariaDescribedBy}
-          autoComplete={autoCompleteType}
+          autoComplete={inputType === "password" ? autoCompleteType : "off"}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus={hasInitialFocus}
           data-se={testId}
@@ -151,7 +155,12 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
             )
           }
           id={id}
-          inputProps={{ role: "textbox" }}
+          inputProps={{
+            "aria-errormessage": errorMessageElementId,
+            "aria-labelledby": labelElementId,
+            // role: "textbox" Added because password inputs don't have an implicit role assigned. This causes problems with element selection.
+            role: "textbox",
+          }}
           name={nameOverride ?? id}
           onChange={onChange}
           onFocus={onFocus}
@@ -161,12 +170,12 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           ref={ref}
           required={!isOptional}
           type={inputType}
-          value={value}
         />
       ),
       [
         autoCompleteType,
         hasInitialFocus,
+        inputValues,
         t,
         togglePasswordVisibility,
         inputType,
@@ -180,7 +189,6 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
         hasShowPassword,
         ref,
         testId,
-        value,
       ]
     );
 
@@ -192,6 +200,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
         hint={hint}
         id={idOverride}
         isDisabled={isDisabled}
+        isFullWidth={isFullWidth}
         isOptional={isOptional}
         label={label}
         renderFieldComponent={renderFieldComponent}

@@ -63,14 +63,16 @@ const MenuItem = ({
   value,
   variant = "default",
 }: MenuItemProps) => {
-  const { closeMenu } = useContext(MenuContext);
+  const { closeMenu, shouldCloseOnSelect } = useContext(MenuContext);
 
   const onClick = useCallback<NonNullable<MuiMenuItemProps["onClick"]>>(
     (event) => {
       onClickProp?.(event);
-      closeMenu?.(event, "backdropClick");
+      if (shouldCloseOnSelect) {
+        closeMenu();
+      }
     },
-    [onClickProp, closeMenu]
+    [onClickProp, closeMenu, shouldCloseOnSelect]
   );
 
   return (

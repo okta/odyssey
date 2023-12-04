@@ -10,12 +10,23 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ReactElement, forwardRef, memo, useCallback } from "react";
-import { Select as MuiSelect } from "@mui/material";
-import { SelectProps as MuiSelectProps } from "@mui/material";
+import React, {
+  ReactElement,
+  forwardRef,
+  memo,
+  useCallback,
+  useMemo,
+  useRef,
+} from "react";
+import {
+  Select as MuiSelect,
+  SelectProps as MuiSelectProps,
+} from "@mui/material";
 import { Field } from "./Field";
-
+import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
+import { getControlState, useInputValues } from "./inputUtils";
+import { ForwardRefWithType } from "./@types/react-augment";
 
 export type NativeSelectOption = {
   text: string;
@@ -23,39 +34,30 @@ export type NativeSelectOption = {
   type?: "heading" | "option";
 };
 
-export type NativeSelectProps = {
+export type NativeSelectValueType<HasMultipleChoices> =
+  HasMultipleChoices extends true ? string[] : string;
+
+export type NativeSelectProps<
+  Value extends NativeSelectValueType<HasMultipleChoices>,
+  HasMultipleChoices extends boolean
+> = {
   /**
    * The options or optgroup elements within the NativeSelect
    */
   children?: ReactElement<"option"> | ReactElement<"optgroup">;
   /**
-   * The default value of the NativeSelect. Only applicable if `value` is not provided
+   * The default value of the NativeSelect. Use when component is uncontrolled
    */
-  defaultValue?: string;
+  defaultValue?: Value;
   /**
-   * The error message for the NativeSelect
+   * If `true`, the Select allows multiple selections
    */
-  errorMessage?: string;
+  hasMultipleChoices?: HasMultipleChoices;
   /**
-   * The hint text for the NativeSelect
+   * @deprecated Use `hasMultipleChoices` instead
    */
-  hint?: string;
-  /**
-   * The id attribute of the NativeSelect
-   */
-  id?: string;
-  /**
-   * If `true`, the NativeSelect is disabled
-   */
-  isDisabled?: boolean;
-  /**
-   * If `true`, the NativeSelect allows multiple selections
-   */
-  isMultiSelect?: boolean;
-  /**
-   * If `true`, the NativeSelect is optional
-   */
-  isOptional?: boolean;
+  /** **Deprecated:** use `hasMultipleChoices` */
+  isMultiSelect?: HasMultipleChoices;
   /**
    * The label text for the NativeSelect
    */
@@ -63,69 +65,110 @@ export type NativeSelectProps = {
   /**
    * Callback fired when the NativeSelect loses focus
    */
-  onBlur?: MuiSelectProps["onBlur"];
+  onBlur?: MuiSelectProps<Value>["onBlur"];
   /**
    * Callback fired when the value of the NativeSelect changes
    */
-  onChange?: MuiSelectProps["onChange"];
+  onChange?: MuiSelectProps<Value>["onChange"];
   /**
    * Callback fired when the NativeSelect gains focus
    */
-  onFocus?: MuiSelectProps["onFocus"];
+  onFocus?: MuiSelectProps<Value>["onFocus"];
+  options: Value;
   /**
-   * The value or values selected in the NativeSelect
+   * The value or values selected in the NativeSelect. Use when component is controlled
    */
-  value?: string | string[];
-} & SeleniumProps;
+  value?: Value;
+} & Pick<
+  FieldComponentProps,
+  "errorMessage" | "hint" | "id" | "isDisabled" | "isOptional" | "isFullWidth"
+> &
+  SeleniumProps;
 
-const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
-  (
+const NativeSelect: ForwardRefWithType = forwardRef(
+  <
+    Value extends NativeSelectValueType<HasMultipleChoices>,
+    HasMultipleChoices extends boolean
+  >(
     {
       defaultValue,
       errorMessage,
+      hasMultipleChoices: hasMultipleChoicesProp,
       hint,
       id: idOverride,
       isDisabled = false,
-      isMultiSelect = false,
+      isFullWidth = false,
+      isMultiSelect,
       isOptional = false,
       label,
       onBlur,
-      onChange,
+      onChange: onChangeProp,
       onFocus,
       testId,
       value,
       children,
-    },
-    ref
+    }: NativeSelectProps<Value, HasMultipleChoices>,
+    ref?: React.Ref<ReactElement>
   ) => {
+    const controlledStateRef = useRef(
+      getControlState({
+        controlledValue: value,
+        uncontrolledValue: defaultValue,
+      })
+    );
+    const inputValues = useInputValues({
+      defaultValue,
+      value,
+      controlState: controlledStateRef.current,
+    });
+
+    const onChange = useCallback<
+      NonNullable<MuiSelectProps<Value>["onChange"]>
+    >(
+      (event, child) => {
+        onChangeProp?.(event, child);
+      },
+      [onChangeProp]
+    );
+
+    const hasMultipleChoices = useMemo(
+      () =>
+        hasMultipleChoicesProp === undefined
+          ? isMultiSelect
+          : hasMultipleChoicesProp,
+      [hasMultipleChoicesProp, isMultiSelect]
+    );
     const renderFieldComponent = useCallback(
-      () => (
+      ({ ariaDescribedBy, errorMessageElementId, labelElementId }) => (
         <MuiSelect
+          {...inputValues}
+          aria-describedby={ariaDescribedBy}
+          children={children}
           data-se={testId}
-          defaultValue={defaultValue}
           id={idOverride}
+          inputProps={{
+            "aria-errormessage": errorMessageElementId,
+            "aria-labelledby": labelElementId,
+          }}
           name={idOverride}
-          multiple={isMultiSelect}
+          multiple={hasMultipleChoices}
           native={true}
           onBlur={onBlur}
           onChange={onChange}
           onFocus={onFocus}
           ref={ref}
-          value={value}
-          children={children}
         />
       ),
       [
         children,
-        defaultValue,
         idOverride,
-        isMultiSelect,
+        inputValues,
+        hasMultipleChoices,
         onBlur,
         onChange,
         onFocus,
         ref,
         testId,
-        value,
       ]
     );
 
@@ -137,6 +180,7 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
         hint={hint}
         id={idOverride}
         isDisabled={isDisabled}
+        isFullWidth={isFullWidth}
         isOptional={isOptional}
         label={label}
         renderFieldComponent={renderFieldComponent}

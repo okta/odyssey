@@ -16,13 +16,16 @@ import {
   checkboxValidityValues,
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
+
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { axeRun } from "../../../axe-util";
 import type { PlaywrightProps } from "../storybookTypes";
+import { useCallback, useState } from "react";
 
-const storybookMeta: Meta<CheckboxProps> = {
+const storybookMeta: Meta<typeof Checkbox> = {
   title: "MUI Components/Forms/Checkbox",
   component: Checkbox,
   argTypes: {
@@ -44,12 +47,13 @@ const storybookMeta: Meta<CheckboxProps> = {
         },
       },
     },
-    id: {
-      control: "text",
-      description: "The id of the `input` element",
+    id: fieldComponentPropsMetaData.id,
+    isChecked: {
+      control: "boolean",
+      description: "The checkbox checked state",
       table: {
         type: {
-          summary: "string",
+          summary: "boolean",
         },
       },
     },
@@ -60,20 +64,9 @@ const storybookMeta: Meta<CheckboxProps> = {
         type: {
           summary: "boolean",
         },
-        defaultValue: {
-          summary: false,
-        },
       },
     },
-    isDisabled: {
-      control: "boolean",
-      description: "If `true`, the checkbox is disabled",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
+    isDisabled: fieldComponentPropsMetaData.isDisabled,
     isIndeterminate: {
       control: "boolean",
       description: "If `true`, the checkbox is in an indeterminate state",
@@ -101,19 +94,28 @@ const storybookMeta: Meta<CheckboxProps> = {
         },
       },
     },
-    name: {
+    hint: {
       control: "text",
-      description:
-        "The name of the `input` element. Defaults to the `id` if not set.",
+      description: "The helper text content",
       table: {
         type: {
           summary: "string",
         },
       },
     },
+    name: fieldComponentPropsMetaData.name,
     onChange: {
       control: null,
       description: "Callback fired when the checkbox value changes",
+      table: {
+        type: {
+          summary: "func",
+        },
+      },
+    },
+    onBlur: {
+      control: null,
+      description: "Callback fired when the blur event happens",
       table: {
         type: {
           summary: "func",
@@ -153,7 +155,7 @@ export default storybookMeta;
 const checkTheBox =
   ({ canvasElement, step }: PlaywrightProps<CheckboxProps>) =>
   async (actionName: string) => {
-    await step("check the box", async () => {
+    await step("check the box", async ({ args }) => {
       const canvas = within(canvasElement);
       const checkBox = canvas.getByRole("checkbox") as HTMLInputElement;
       if (checkBox) {
@@ -161,20 +163,23 @@ const checkTheBox =
       }
       userEvent.tab();
       expect(checkBox).toBeChecked();
+      userEvent.click(canvasElement);
+      expect(args.onBlur).toHaveBeenCalled();
       axeRun(actionName);
     });
   };
 
-export const Default: StoryObj<CheckboxProps> = {
+export const Default: StoryObj<typeof Checkbox> = {
   args: {
     label: "Enable warp drive recalibration",
+    isDefaultChecked: false,
   },
   play: async ({ canvasElement, step }) => {
     checkTheBox({ canvasElement, step })("Checkbox Default");
   },
 };
 
-export const Required: StoryObj<CheckboxProps> = {
+export const Required: StoryObj<typeof Checkbox> = {
   parameters: {
     docs: {
       description: {
@@ -186,20 +191,21 @@ export const Required: StoryObj<CheckboxProps> = {
   args: {
     label: "I agree to the terms and conditions",
     isRequired: true,
+    isDefaultChecked: false,
   },
   play: async ({ canvasElement, step }) => {
     checkTheBox({ canvasElement, step })("Checkbox Required");
   },
 };
 
-export const Checked: StoryObj<CheckboxProps> = {
+export const Checked: StoryObj<typeof Checkbox> = {
   args: {
     label: "Pre-flight systems check complete",
     isDefaultChecked: true,
   },
 };
 
-export const Disabled: StoryObj<CheckboxProps> = {
+export const Disabled: StoryObj<typeof Checkbox> = {
   parameters: {
     docs: {
       description: {
@@ -211,10 +217,11 @@ export const Disabled: StoryObj<CheckboxProps> = {
   args: {
     label: "Pre-flight systems check complete",
     isDisabled: true,
+    isDefaultChecked: false,
   },
 };
 
-export const Indeterminate: StoryObj<CheckboxProps> = {
+export const Indeterminate: StoryObj<typeof Checkbox> = {
   parameters: {
     docs: {
       description: {
@@ -230,12 +237,58 @@ export const Indeterminate: StoryObj<CheckboxProps> = {
   },
 };
 
-export const Invalid: StoryObj<CheckboxProps> = {
+export const Invalid: StoryObj<typeof Checkbox> = {
   args: {
     label: "Pre-flight systems check complete",
     validity: "invalid",
+    isDefaultChecked: false,
   },
   play: async ({ canvasElement, step }) => {
     checkTheBox({ canvasElement, step })("Checkbox Disabled");
+  },
+};
+
+export const Hint: StoryObj<typeof Checkbox> = {
+  parameters: {
+    docs: {
+      description: {
+        story: "hint provides helper text to the Checkbox",
+      },
+    },
+  },
+  args: {
+    label: "I agree to the terms and conditions",
+    hint: "Really helpful hint",
+  },
+  play: async ({ canvasElement, step }) => {
+    checkTheBox({ canvasElement, step })("Checkbox Hint");
+  },
+};
+
+export const Controlled: StoryObj<typeof Checkbox> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "When the component is controlled, the parent component is responsible for managing the state of `Checkbox`. `onChange` should be used to listen for component changes and to update the values in the `value` prop.",
+      },
+    },
+  },
+  args: {
+    label: "Pre-flight systems check complete",
+    isChecked: true,
+    onChange: () => {},
+  },
+  render: function C(args) {
+    const [isChecked, setIsChecked] = useState(true);
+    const onChange = useCallback((_, checked) => setIsChecked(checked), []);
+    return (
+      <Checkbox
+        {...args}
+        isChecked={isChecked}
+        isDefaultChecked={undefined}
+        onChange={onChange}
+      />
+    );
   },
 };

@@ -14,11 +14,19 @@ import {
   Autocomplete as MuiAutocomplete,
   AutocompleteProps as MuiAutocompleteProps,
   InputBase,
+  UseAutocompleteProps,
+  AutocompleteValue,
 } from "@mui/material";
-import { memo, useCallback } from "react";
+import { memo, useCallback, useMemo, useRef } from "react";
 
 import { Field } from "./Field";
+import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
+import {
+  ComponentControlledState,
+  useInputValues,
+  getControlState,
+} from "./inputUtils";
 
 export type AutocompleteProps<
   OptionType,
@@ -26,9 +34,14 @@ export type AutocompleteProps<
   IsCustomValueAllowed extends boolean | undefined
 > = {
   /**
-   * The error message for the Select
+   * The default value. Use when the component is not controlled.
    */
-  errorMessage?: string;
+  defaultValue?: UseAutocompleteProps<
+    OptionType,
+    HasMultipleChoices,
+    undefined,
+    IsCustomValueAllowed
+  >["defaultValue"];
   /**
    * Enables multiple choice selection
    */
@@ -39,13 +52,14 @@ export type AutocompleteProps<
     IsCustomValueAllowed
   >["multiple"];
   /**
-   * The hint text for the Autocomplete input
+   * The value for the input
    */
-  hint?: string;
-  /**
-   * The id attribute of the Select
-   */
-  id?: string;
+  inputValue?: UseAutocompleteProps<
+    OptionType,
+    HasMultipleChoices,
+    undefined,
+    IsCustomValueAllowed
+  >["inputValue"];
   /**
    * Allows the input of custom values
    */
@@ -74,10 +88,6 @@ export type AutocompleteProps<
     IsCustomValueAllowed
   >["loading"];
   /**
-   * If `true`, the `input` element is not required.
-   */
-  isOptional?: boolean;
-  /**
    * Makes the Autocomplete input read-only
    */
   isReadOnly?: MuiAutocompleteProps<
@@ -91,10 +101,6 @@ export type AutocompleteProps<
    */
   label: string;
   /**
-   * The name of the `input` element. Defaults to the `id` if not set.
-   */
-  name?: string;
-  /**
    * Callback fired when the autocomplete loses focus.
    */
   onBlur?: MuiAutocompleteProps<
@@ -106,7 +112,7 @@ export type AutocompleteProps<
   /**
    * Callback fired when a selection is made.
    */
-  onChange?: MuiAutocompleteProps<
+  onChange?: UseAutocompleteProps<
     OptionType,
     HasMultipleChoices,
     undefined,
@@ -133,33 +139,45 @@ export type AutocompleteProps<
   /**
    * The options for the Autocomplete input
    */
-  options: MuiAutocompleteProps<
-    OptionType,
-    HasMultipleChoices,
-    undefined,
-    IsCustomValueAllowed
-  >["options"];
+  options: ReadonlyArray<OptionType>;
   /**
    * The value of the Autocomplete input
    */
-  value?: MuiAutocompleteProps<
+  value?: UseAutocompleteProps<
     OptionType,
     HasMultipleChoices,
     undefined,
     IsCustomValueAllowed
   >["value"];
-} & SeleniumProps;
+
+  /**
+   * Used to determine if the option represents the given value. Uses strict equality by default if none provided.
+   * Both arguments need to be handled, an option can only match with one value.
+   * option: the option to test
+   * value: the value to test against
+   *
+   * You will need to implement this function if your `option` items are objects.
+   */
+  getIsOptionEqualToValue?: (option: OptionType, value: OptionType) => boolean;
+} & Pick<
+  FieldComponentProps,
+  "errorMessage" | "hint" | "id" | "isOptional" | "name" | "isFullWidth"
+> &
+  SeleniumProps;
 
 const Autocomplete = <
   OptionType,
   HasMultipleChoices extends boolean | undefined,
   IsCustomValueAllowed extends boolean | undefined
 >({
+  defaultValue,
   errorMessage,
   hasMultipleChoices,
   id: idOverride,
+  inputValue,
   isCustomValueAllowed,
   isDisabled,
+  isFullWidth = false,
   isLoading,
   isOptional = false,
   isReadOnly,
@@ -167,13 +185,53 @@ const Autocomplete = <
   label,
   name: nameOverride,
   onBlur,
-  onChange,
-  onInputChange,
+  onChange: onChangeProp,
+  onInputChange: onInputChangeProp,
   onFocus,
   options,
   value,
+  getIsOptionEqualToValue,
   testId,
 }: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
+  const controlledStateRef = useRef(
+    getControlState({ controlledValue: value, uncontrolledValue: defaultValue })
+  );
+  const defaultValueProp = useMemo<
+    | AutocompleteValue<
+        OptionType,
+        HasMultipleChoices,
+        undefined,
+        IsCustomValueAllowed
+      >
+    | undefined
+  >(() => {
+    if (hasMultipleChoices) {
+      if (value === undefined) {
+        return defaultValue;
+      }
+      return [] as AutocompleteValue<
+        OptionType,
+        HasMultipleChoices,
+        undefined,
+        IsCustomValueAllowed
+      >;
+    }
+    return value === undefined ? defaultValue : undefined;
+  }, [defaultValue, hasMultipleChoices, value]);
+
+  const valueProps = useInputValues({
+    defaultValue: defaultValueProp,
+    value: value,
+    controlState: controlledStateRef.current,
+  });
+
+  const inputValueProp = useMemo(() => {
+    if (controlledStateRef.current === ComponentControlledState.CONTROLLED) {
+      return { inputValue };
+    }
+    return undefined;
+  }, [inputValue]);
+
   const renderInput = useCallback(
     ({ InputLabelProps, InputProps, ...params }) => (
       <Field
@@ -184,10 +242,20 @@ const Autocomplete = <
         hint={hint}
         label={label}
         isOptional={isOptional}
-        renderFieldComponent={({ ariaDescribedBy, id }) => (
+        renderFieldComponent={({
+          ariaDescribedBy,
+          id,
+          errorMessageElementId,
+          labelElementId,
+        }) => (
           <InputBase
             {...params}
             {...InputProps}
+            inputProps={{
+              ...params.inputProps,
+              "aria-errormessage": errorMessageElementId,
+              "aria-labelledby": labelElementId,
+            }}
             aria-describedby={ariaDescribedBy}
             id={id}
             name={nameOverride ?? id}
@@ -198,9 +266,42 @@ const Autocomplete = <
     ),
     [errorMessage, hint, isOptional, label, nameOverride]
   );
+  const onChange = useCallback<
+    NonNullable<
+      UseAutocompleteProps<
+        OptionType,
+        HasMultipleChoices,
+        undefined,
+        IsCustomValueAllowed
+      >["onChange"]
+    >
+  >(
+    (event, value, reason, details) => {
+      onChangeProp?.(event, value, reason, details);
+    },
+    [onChangeProp]
+  );
+
+  const onInputChange = useCallback<
+    NonNullable<
+      UseAutocompleteProps<
+        OptionType,
+        HasMultipleChoices,
+        undefined,
+        IsCustomValueAllowed
+      >["onInputChange"]
+    >
+  >(
+    (event, value, reason) => {
+      onInputChangeProp?.(event, value, reason);
+    },
+    [onInputChangeProp]
+  );
 
   return (
     <MuiAutocomplete
+      {...valueProps}
+      {...inputValueProp}
       // AutoComplete is wrapped in a div within MUI which does not get the disabled attr. So this aria-disabled gets set in the div
       aria-disabled={isDisabled}
       data-se={testId}
@@ -209,6 +310,7 @@ const Autocomplete = <
       freeSolo={isCustomValueAllowed}
       filterSelectedOptions={true}
       id={idOverride}
+      fullWidth={isFullWidth}
       loading={isLoading}
       multiple={hasMultipleChoices}
       onBlur={onBlur}
@@ -218,7 +320,7 @@ const Autocomplete = <
       options={options}
       readOnly={isReadOnly}
       renderInput={renderInput}
-      value={value}
+      isOptionEqualToValue={getIsOptionEqualToValue}
     />
   );
 };

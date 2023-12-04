@@ -10,13 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { MenuProps } from "@mui/material";
-import { createContext } from "react";
-import { ButtonProps } from "./Button";
+import { MouseEventHandler, createContext } from "react";
 
 export type MenuContextType = {
-  closeMenu: MenuProps["onClose"];
-  openMenu: ButtonProps["onClick"];
+  closeMenu: () => void;
+  openMenu: MouseEventHandler<HTMLElement>;
+  shouldCloseOnSelect: boolean;
 };
 
 export const MenuContext = createContext<MenuContextType>({
@@ -24,4 +23,5 @@ export const MenuContext = createContext<MenuContextType>({
   closeMenu: () => {},
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   openMenu: () => {},
+  shouldCloseOnSelect: true,
 });

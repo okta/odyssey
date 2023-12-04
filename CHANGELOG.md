@@ -3,6 +3,150 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.0](https://github.com/okta/odyssey/compare/v1.8.2...v1.9.0) (2023-12-04)
+
+### Features
+
+- add on blur for radio and checkbox OKTA-670768 ([#2049](https://github.com/okta/odyssey/issues/2049)) ([a08fe5d](https://github.com/okta/odyssey/commit/a08fe5dcbb9805e6466f00d709ddb0e32607d0d2))
+
+## [1.8.2](https://github.com/okta/odyssey/compare/v1.8.1...v1.8.2) (2023-12-01)
+
+**Note:** Version bump only for package odyssey
+
+## [1.8.1](https://github.com/okta/odyssey/compare/v1.8.0...v1.8.1) (2023-12-01)
+
+### Bug Fixes
+
+- support controlled and uncontrolled states in form components ([#2045](https://github.com/okta/odyssey/issues/2045)) ([eacf2b4](https://github.com/okta/odyssey/commit/eacf2b496e0650388c8f0bc6015c88a3fc1ef47d))
+
+## [1.8.0](https://github.com/okta/odyssey/compare/v1.7.1...v1.8.0) (2023-12-01)
+
+### Features
+
+- add hint prop to Checkbox ([#2050](https://github.com/okta/odyssey/issues/2050)) ([1fdc55e](https://github.com/okta/odyssey/commit/1fdc55e667c89b7768f300a160d550a62e6e8eb0))
+
+## [1.7.1](https://github.com/okta/odyssey/compare/v1.7.0...v1.7.1) (2023-12-01)
+
+**Note:** Version bump only for package odyssey
+
+## [1.7.0](https://github.com/okta/odyssey/compare/v1.6.21...v1.7.0) (2023-12-01)
+
+### Features
+
+- standardize DataTable story data ([#2053](https://github.com/okta/odyssey/issues/2053)) ([344abb3](https://github.com/okta/odyssey/commit/344abb31b01c0008f05bda32ded5fa17b0c657e4))
+
+## [1.6.21](https://github.com/okta/odyssey/compare/v1.6.20...v1.6.21) (2023-11-28)
+
+**Note:** Version bump only for package odyssey
+
+## [1.6.20](https://github.com/okta/odyssey/compare/v1.6.19...v1.6.20) (2023-11-28)
+
+**Note:** Version bump only for package odyssey
+
+## [1.6.19](https://github.com/okta/odyssey/compare/v1.6.18...v1.6.19) (2023-11-20)
+
+**Note:** Version bump only for package odyssey
+
+## [1.6.18](https://github.com/okta/odyssey/compare/v1.6.17...v1.6.18) (2023-11-15)
+
+### Bug Fixes
+
+- shadow DOM function using wrong return value ([#2043](https://github.com/okta/odyssey/issues/2043)) ([c701afb](https://github.com/okta/odyssey/commit/c701afb6b43fd52cbfd486cbaa41fdde65b6ba30))
+
+## [1.6.17](https://github.com/okta/odyssey/compare/v1.6.16...v1.6.17) (2023-11-14)
+
+**Note:** Version bump only for package odyssey
+
+## [1.6.16](https://github.com/okta/odyssey/compare/v1.6.15...v1.6.16) (2023-11-13)
+
+**Note:** Version bump only for package odyssey
+
+## [1.6.15](https://github.com/okta/odyssey/compare/v1.6.14...v1.6.15) (2023-11-13)
+
+**Note:** Version bump only for package odyssey
+
+## [1.6.14](https://github.com/okta/odyssey/compare/v1.6.13...v1.6.14) (2023-11-13)
+
+**Note:** Version bump only for package odyssey
+
+## [1.6.13](https://github.com/okta/odyssey/compare/v1.6.12...v1.6.13) (2023-11-13)
+
+**Note:** Version bump only for package odyssey
+
+## [1.6.12](https://github.com/okta/odyssey/compare/v1.6.11...v1.6.12) (2023-11-13)
+
+**Note:** Version bump only for package odyssey
+
+## [1.6.11](https://github.com/okta/odyssey/compare/v1.6.10...v1.6.11) (2023-11-13)
+
+**Note:** Version bump only for package odyssey
+
+## [1.6.10](https://github.com/okta/odyssey/compare/v1.6.9...v1.6.10) (2023-11-13)
+
+**Note:** Version bump only for package odyssey
+
+## [1.6.9](https://github.com/okta/odyssey/compare/v1.6.8...v1.6.9) (2023-11-13)
+
+**Note:** Version bump only for package odyssey
+
+## [1.6.8](https://github.com/okta/odyssey/compare/v1.6.7...v1.6.8) (2023-11-13)
+
+**Note:** Version bump only for package odyssey
+
+## [1.6.7](https://github.com/okta/odyssey/compare/v1.6.6...v1.6.7) (2023-11-13)
+
+**Note:** Version bump only for package odyssey
+
+## [1.6.6](https://github.com/okta/odyssey/compare/v1.6.5...v1.6.6) (2023-11-13)
+
+**Note:** Version bump only for package odyssey
+
+## [1.6.5](https://github.com/okta/odyssey/compare/v1.6.4...v1.6.5) (2023-11-13)
+
+**Note:** Version bump only for package odyssey
+
+## [1.6.4](https://github.com/okta/odyssey/compare/v1.6.3...v1.6.4) (2023-11-13)
+
+**Note:** Version bump only for package odyssey
+
+## [1.6.3](https://github.com/okta/odyssey/compare/v1.6.2...v1.6.3) (2023-11-13)
+
+**Note:** Version bump only for package odyssey
+
+## [1.6.2](https://github.com/okta/odyssey/compare/v1.6.1...v1.6.2) (2023-11-09)
+
+**Note:** Version bump only for package odyssey
+
+## [1.6.1](https://github.com/okta/odyssey/compare/v1.6.0...v1.6.1) (2023-11-08)
+
+### Bug Fixes
+
+- @babel/traverse vuln by allowing @storybook/csf-tools to update to latest ([f4e4199](https://github.com/okta/odyssey/commit/f4e419962be15cc7358f4e3ba6257cf100897dd4))
+- issue with Odyssey rendering <style> tags in a <style> tag in Shadow DOM ([#2037](https://github.com/okta/odyssey/issues/2037)) ([9279c0b](https://github.com/okta/odyssey/commit/9279c0bf7a6139b1497e09a7ea58a08c3411727c))
+- **odyssey-react-mui:** add padding to Tabs label ([78a5e80](https://github.com/okta/odyssey/commit/78a5e806bbfb97aac6babb61ecb2d94918c406e0))
+- **odyssey-react-mui:** remove color logic from Tabs label ([b05c0cc](https://github.com/okta/odyssey/commit/b05c0ccaefc62bd0545d2ebaa676cb7df76b700f))
+- **odyssey-react-mui:** update default Tabs label color ([f79272e](https://github.com/okta/odyssey/commit/f79272ea5e7abc8ec878a6b8d8a7789339a932ea))
+
+## [1.6.0](https://github.com/okta/odyssey/compare/v1.5.0...v1.6.0) (2023-11-02)
+
+### Features
+
+- **odyssey-react-mui:** wrapped typography component with context ([#2013](https://github.com/okta/odyssey/issues/2013)) ([4ae50de](https://github.com/okta/odyssey/commit/4ae50debc051299774847804509aa1dae0dad831))
+
+### Bug Fixes
+
+- revert [#2013](https://github.com/okta/odyssey/issues/2013) ([#2029](https://github.com/okta/odyssey/issues/2029)) ([9f75603](https://github.com/okta/odyssey/commit/9f7560336221ea00014b21627488932ade2d6e16))
+
+## [1.5.0](https://github.com/okta/odyssey/compare/v1.4.0...v1.5.0) (2023-10-27)
+
+### Features
+
+- update secondary Button style ([#2011](https://github.com/okta/odyssey/issues/2011)) ([0d02217](https://github.com/okta/odyssey/commit/0d02217c3c4de1788a4e5a786b041ae749f96c2d))
+
+### Bug Fixes
+
+- remove ":" from ScreenReaderText ([37393e5](https://github.com/okta/odyssey/commit/37393e5025a3b8694074554de8c74e33feebc5a7))
+
 ## [1.4.0](https://github.com/okta/odyssey/compare/v1.3.0...v1.4.0) (2023-10-23)
 
 ### Features

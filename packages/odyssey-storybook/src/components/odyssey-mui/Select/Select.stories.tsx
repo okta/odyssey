@@ -16,8 +16,10 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, waitFor, screen } from "@storybook/testing-library";
 import { axeRun } from "../../../axe-util";
 import { expect } from "@storybook/jest";
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
+import { useCallback, useState } from "react";
 
-const optionsArray: SelectProps["options"] = [
+const optionsArray: SelectProps<string | string[], boolean>["options"] = [
   "Earth",
   "Mars",
   "Ceres",
@@ -27,7 +29,7 @@ const optionsArray: SelectProps["options"] = [
   "Ganymede",
 ];
 
-const optionsObject: SelectProps["options"] = [
+const optionsObject: SelectProps<string | string[], boolean>["options"] = [
   {
     text: "Earth",
     value: "earth",
@@ -58,7 +60,7 @@ const optionsObject: SelectProps["options"] = [
   },
 ];
 
-const optionsGrouped: SelectProps["options"] = [
+const optionsGrouped: SelectProps<string | string[], boolean>["options"] = [
   {
     text: "Sol System",
     type: "heading",
@@ -102,50 +104,25 @@ const optionsGrouped: SelectProps["options"] = [
   "New Terra",
 ];
 
-const storybookMeta: Meta<SelectProps> = {
+const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
   title: "MUI Components/Forms/Select",
   component: Select,
   argTypes: {
-    errorMessage: {
+    defaultValue: {
       control: "text",
-      description: "The error message for the select component",
+      description:
+        "The default value. Use when the component is not controlled.",
       table: {
         type: {
-          summary: "string",
-        },
-      },
-    },
-    hint: {
-      control: "text",
-      description: "The hint text for the select component",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
-    id: {
-      control: "text",
-      description: "The id attribute of the select component",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
-    isDisabled: {
-      control: "boolean",
-      description: "If `true`, the select component is disabled",
-      table: {
-        type: {
-          summary: "boolean",
+          summary: "string | string[]",
         },
         defaultValue: {
-          summary: false,
+          summary: undefined,
         },
       },
     },
-    isMultiSelect: {
+    errorMessage: fieldComponentPropsMetaData.errorMessage,
+    hasMultipleChoices: {
       control: "boolean",
       description: "If `true`, the select component allows multiple selections",
       table: {
@@ -157,6 +134,10 @@ const storybookMeta: Meta<SelectProps> = {
         },
       },
     },
+    hint: fieldComponentPropsMetaData.hint,
+    id: fieldComponentPropsMetaData.id,
+    isDisabled: fieldComponentPropsMetaData.isFullWidth,
+    isFullWidth: fieldComponentPropsMetaData.isFullWidth,
     isOptional: {
       control: "boolean",
       description: "If `true`, the select component is optional",
@@ -182,16 +163,7 @@ const storybookMeta: Meta<SelectProps> = {
         name: "string",
       },
     },
-    name: {
-      control: "text",
-      description:
-        "The name of the select component. Defaults to the `id` if not set.",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
+    name: fieldComponentPropsMetaData.name,
     onBlur: {
       control: null,
       description: "Callback fired when the select component loses focus",
@@ -236,7 +208,8 @@ const storybookMeta: Meta<SelectProps> = {
     },
     value: {
       control: "text",
-      description: "The value or values selected in the select component",
+      description:
+        "The `input` value. Use when the component is controlled.\n\nProviding an empty string will select no options.\n\nSet to an empty string `''` if you don't want any of the available options to be selected.",
       table: {
         type: {
           summary: "string | string[]",
@@ -255,7 +228,7 @@ const storybookMeta: Meta<SelectProps> = {
 
 export default storybookMeta;
 
-export const Default: StoryObj<SelectProps> = {
+export const Default: StoryObj<typeof Select> = {
   play: async ({ canvasElement, step }) => {
     await step("Select Earth from the listbox", async () => {
       const comboBoxElement = canvasElement.querySelector(
@@ -276,17 +249,19 @@ export const Default: StoryObj<SelectProps> = {
     });
   },
 };
-Default.args = {};
+Default.args = { defaultValue: "" };
 
-export const Disabled: StoryObj<SelectProps> = {
+export const Disabled: StoryObj<typeof Select> = {
   args: {
     isDisabled: true,
+    defaultValue: "",
   },
 };
 
-export const Error: StoryObj<SelectProps> = {
+export const Error: StoryObj<typeof Select> = {
   args: {
     errorMessage: "Select your destination.",
+    defaultValue: "",
   },
   play: async ({ step }) => {
     await step("Check for a11y errors on Select Error", async () => {
@@ -295,9 +270,10 @@ export const Error: StoryObj<SelectProps> = {
   },
 };
 
-export const OptionsObject: StoryObj<SelectProps> = {
+export const OptionsObject: StoryObj<typeof Select> = {
   args: {
     options: optionsObject,
+    defaultValue: "",
   },
   parameters: {
     docs: {
@@ -309,9 +285,10 @@ export const OptionsObject: StoryObj<SelectProps> = {
   },
 };
 
-export const OptionsGrouped: StoryObj<SelectProps> = {
+export const OptionsGrouped: StoryObj<typeof Select> = {
   args: {
     options: optionsGrouped,
+    defaultValue: "",
   },
   parameters: {
     docs: {
@@ -323,9 +300,10 @@ export const OptionsGrouped: StoryObj<SelectProps> = {
   },
 };
 
-export const MultiSelect: StoryObj<SelectProps> = {
+export const MultiSelect: StoryObj<typeof Select> = {
   args: {
     isMultiSelect: true,
+    defaultValue: [],
   },
   play: async ({ canvasElement, step }) => {
     await step("Select Multiple items from the listbox", async () => {
@@ -347,5 +325,73 @@ export const MultiSelect: StoryObj<SelectProps> = {
         await waitFor(() => axeRun("Select Multiple"));
       }
     });
+  },
+};
+
+export const ControlledSelect: StoryObj<typeof Select> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "When the component is controlled, the parent component is responsible for managing the state of `Select`. `onChange` should be used to listen for component changes and to update the values in the `value` prop.",
+      },
+    },
+  },
+  args: {
+    value: "",
+  },
+  render: function C(props) {
+    const [localValue, setLocalValue] = useState("");
+    const onChange = useCallback(
+      (event) => setLocalValue(event.target.value),
+      []
+    );
+    return <Select {...props} value={localValue} onChange={onChange} />;
+  },
+};
+
+export const ControlledMultipleSelect: StoryObj<typeof Select> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'When the component is controlled, the parent component is responsible for managing the state of `Select`. `onChange` should be used to listen for component changes and to update the values in the `value` prop.\n\nWhen `hasMultipleChoices` is `true` and nothing is preselected, pass `[""]` as this initial controlled `value`',
+      },
+    },
+  },
+  args: {
+    value: [],
+    hasMultipleChoices: true,
+  },
+  render: function C(props) {
+    const [localValue, setLocalValue] = useState([""]);
+    const onChange = useCallback(
+      (event) => setLocalValue(event.target.value),
+      []
+    );
+    return <Select {...props} value={localValue} onChange={onChange} />;
+  },
+};
+
+export const ControlledPreselectedMultipleSelect: StoryObj<typeof Select> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "When the component is controlled, the parent component is responsible for managing the state of `Select`. `onChange` should be used to listen for component changes and to update the values in the `value` prop.",
+      },
+    },
+  },
+  args: {
+    value: [],
+    hasMultipleChoices: true,
+  },
+  render: function C(props) {
+    const [localValue, setLocalValue] = useState(["Earth", "Mars"]);
+    const onChange = useCallback(
+      (event) => setLocalValue(event.target.value),
+      []
+    );
+    return <Select {...props} value={localValue} onChange={onChange} />;
   },
 };

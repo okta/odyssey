@@ -18,7 +18,7 @@ import {
   useState,
 } from "react";
 import * as Tokens from "@okta/odyssey-design-tokens";
-import { StaticTable, type TableColumn } from "@okta/odyssey-react-mui/labs";
+import { DataColumn, DataTable } from "@okta/odyssey-react-mui/labs";
 import { Typography } from "@okta/odyssey-react-mui";
 
 type TokenName = keyof typeof Tokens;
@@ -270,14 +270,14 @@ function getDisplayedValue(tableName: string, value: TokenValue) {
   return tokenValue.name;
 }
 
-const columns: TableColumn<TokenTableItem>[] = [
+const columns: DataColumn[] = [
   {
     accessorKey: "name",
     Cell: ({ cell }) => <Typography>{cell.getValue<TokenValue>()}</Typography>,
     header: "Token Name",
   },
   {
-    accessorFn: ({ name }) => `${name} example`,
+    accessorKey: "example",
     Cell: ({ cell }) => {
       const name = cell.row.getValue<TokenName>("name");
       const value = Tokens[name] as TokenValue;
@@ -359,21 +359,14 @@ const columns: TableColumn<TokenTableItem>[] = [
   },
 ];
 
-const getRowId = ({ name }: { name: TokenDataItem["name"] }) => name;
-
-const initialState = {
-  columnVisibility: {
-    tableName: false,
-  },
-};
-
 export const TokenTables = (): ReactNode =>
   tokenTables.map(({ name, values }) => (
-    <StaticTable
+    <DataTable
       columns={columns}
       data={values}
-      getRowId={getRowId}
-      initialState={initialState}
+      fetchDataFn={() => values}
+      getRowId={({ id }) => id}
       key={name}
+      hasSorting={false}
     />
   ));
