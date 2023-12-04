@@ -25,15 +25,17 @@ import {
   OdysseyTranslationProvider,
   OdysseyTranslationProviderProps,
 } from "./OdysseyTranslationProvider";
+import { OktaSupportedLanguages } from "./OdysseyTranslationProvider.types";
 
-export type OdysseyProviderProps<Languages extends string> =
-  OdysseyCacheProviderProps &
-    OdysseyThemeProviderProps &
-    OdysseyTranslationProviderProps<Languages> & {
-      children: ReactNode;
-    };
+export type OdysseyProviderProps<
+  SupportedLanguages extends string = OktaSupportedLanguages
+> = OdysseyCacheProviderProps &
+  OdysseyThemeProviderProps &
+  OdysseyTranslationProviderProps<SupportedLanguages> & {
+    children: ReactNode;
+  };
 
-const OdysseyProvider = <Languages extends string>({
+const OdysseyProvider = <SupportedLanguages extends string>({
   children,
   designTokensOverride,
   emotionRoot,
@@ -43,7 +45,7 @@ const OdysseyProvider = <Languages extends string>({
   stylisPlugins,
   themeOverride,
   translationOverrides,
-}: OdysseyProviderProps<Languages>) => (
+}: OdysseyProviderProps<SupportedLanguages>) => (
   <OdysseyCacheProvider
     nonce={nonce}
     emotionRoot={emotionRoot}
@@ -58,7 +60,7 @@ const OdysseyProvider = <Languages extends string>({
       withCache={false}
     >
       <ScopedCssBaseline>
-        <OdysseyTranslationProvider
+        <OdysseyTranslationProvider<SupportedLanguages>
           languageCode={languageCode}
           translationOverrides={translationOverrides}
         >

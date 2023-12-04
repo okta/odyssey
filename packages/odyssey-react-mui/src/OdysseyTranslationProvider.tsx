@@ -34,22 +34,19 @@ const mergeBundleOverrides = (
   };
 };
 
-export type OdysseyTranslationProviderProps<SupportedLanguages extends string> =
-  {
-    children: ReactNode;
-    languageCode?: SupportedLanguages;
-    translationOverrides?: TranslationOverrides;
-  };
-
-export const OdysseyTranslationProvider = <
+export type OdysseyTranslationProviderProps<
   SupportedLanguages extends string = OktaSupportedLanguages
->({
+> = {
+  children: ReactNode;
+  languageCode?: SupportedLanguages | OktaSupportedLanguages;
+  translationOverrides?: TranslationOverrides;
+};
+
+export const OdysseyTranslationProvider = <SupportedLanguages extends string>({
   children,
   languageCode,
   translationOverrides,
-}: OdysseyTranslationProviderProps<
-  SupportedLanguages | OktaSupportedLanguages
->) => {
+}: OdysseyTranslationProviderProps<SupportedLanguages>) => {
   useEffect(() => {
     // Defaults to the browser's language if available otherwise `en` will be used
     i18n.changeLanguage(languageCode || window.navigator.language);
