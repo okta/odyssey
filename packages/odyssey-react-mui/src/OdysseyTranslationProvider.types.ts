@@ -42,4 +42,4 @@ export const supportedLanguages = [
   "zh_TW", // Chinese
 ] as const;
 
-export type SupportedLanguages = (typeof supportedLanguages)[number];
+export type OktaSupportedLanguages = (typeof supportedLanguages)[number];

@@ -12,7 +12,7 @@
 
 import { ReactNode, useEffect } from "react";
 
-import { SupportedLanguages } from "./OdysseyTranslationProvider.types";
+import { OktaSupportedLanguages } from "./OdysseyTranslationProvider.types";
 
 import { i18n, defaultNS, resources } from "./i18n";
 import { I18nextProvider } from "react-i18next";
@@ -22,13 +22,11 @@ export type TranslationOverrides = Record<
   Partial<(typeof resources)["en"]>
 >;
 
-const mergeBundleOverrides = <CustomLanguages extends string>(
-  languageCode: CustomLanguages extends SupportedLanguages
-    ? CustomLanguages
-    : CustomLanguages | SupportedLanguages,
+const mergeBundleOverrides = (
+  languageCode: string,
   translationOverrides: TranslationOverrides
 ) => {
-  const bundle = resources[languageCode];
+  const bundle = resources[languageCode] || {};
   const overrides = translationOverrides[languageCode];
   return {
     ...bundle,
@@ -36,19 +34,22 @@ const mergeBundleOverrides = <CustomLanguages extends string>(
   };
 };
 
-export type OdysseyTranslationProviderProps<Languages extends string> = {
-  children: ReactNode;
-  languageCode?: Languages;
-  translationOverrides?: TranslationOverrides;
-};
+export type OdysseyTranslationProviderProps<SupportedLanguages extends string> =
+  {
+    children: ReactNode;
+    languageCode?: SupportedLanguages;
+    translationOverrides?: TranslationOverrides;
+  };
 
 export const OdysseyTranslationProvider = <
-  Languages extends string = SupportedLanguages
+  SupportedLanguages extends string = OktaSupportedLanguages
 >({
   children,
   languageCode,
   translationOverrides,
-}: OdysseyTranslationProviderProps<Languages>) => {
+}: OdysseyTranslationProviderProps<
+  SupportedLanguages | OktaSupportedLanguages
+>) => {
   useEffect(() => {
     // Defaults to the browser's language if available otherwise `en` will be used
     i18n.changeLanguage(languageCode || window.navigator.language);

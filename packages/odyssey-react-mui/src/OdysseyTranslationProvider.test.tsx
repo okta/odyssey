@@ -18,7 +18,7 @@ import { TextField } from "./TextField";
 describe("OdysseyTranslationProvider", () => {
   it("defaults to 'en' translation bundle", () => {
     render(
-      <OdysseyTranslationProvider>
+      <OdysseyTranslationProvider languageCode="">
         <span>{odysseyTranslate("fieldlabel.optional.text")}</span>
       </OdysseyTranslationProvider>
     );
@@ -28,12 +28,34 @@ describe("OdysseyTranslationProvider", () => {
 
   it("defaults to 'en' for unsupported langauges", () => {
     render(
-      <OdysseyTranslationProvider languageCode="test">
-        <span>{i18n.t("fieldlabel.optional.text")}</span>
+      <OdysseyTranslationProvider<"ar" | "yi"> languageCode="ar">
+        <span>{odysseyTranslate("fieldlabel.optional.text")}</span>
       </OdysseyTranslationProvider>
     );
 
     expect(screen.getByText("Optional"));
+  });
+
+  it("allows translations for non-okta supported languages for existing keys", () => {
+    const translationOverrides = {
+      ar: {
+        "fieldlabel.optional.text":
+          "\u063A\u064A\u0631 \u0645\u0637\u0644\u0648\u0628",
+      },
+    };
+
+    render(
+      <OdysseyTranslationProvider<"ar">
+        languageCode="ar"
+        translationOverrides={translationOverrides}
+      >
+        <TextField label={""} isOptional />
+      </OdysseyTranslationProvider>
+    );
+
+    expect(
+      screen.getByText("\u063A\u064A\u0631 \u0645\u0637\u0644\u0648\u0628")
+    );
   });
 
   it("can modify a translation bundle with translantionOverrides", () => {
