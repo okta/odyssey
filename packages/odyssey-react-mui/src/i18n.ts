@@ -45,7 +45,7 @@ import { translation as znTW } from "./properties/ts/odyssey-react-mui_zh_TW";
 
 export const defaultLNG = "en";
 export const defaultNS = "translations";
-type OktaI18nResources = Record<string, typeof en>;
+export type OktaI18nResources = Record<string, typeof en>;
 export const resources: OktaI18nResources = {
   cs,
   da,

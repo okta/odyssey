@@ -18,7 +18,7 @@ import { TextField } from "./TextField";
 describe("OdysseyTranslationProvider", () => {
   it("defaults to 'en' translation bundle", () => {
     render(
-      <OdysseyTranslationProvider languageCode="">
+      <OdysseyTranslationProvider>
         <span>{odysseyTranslate("fieldlabel.optional.text")}</span>
       </OdysseyTranslationProvider>
     );
@@ -28,7 +28,7 @@ describe("OdysseyTranslationProvider", () => {
 
   it("defaults to 'en' for unsupported langauges", () => {
     render(
-      <OdysseyTranslationProvider<"ar" | "yi"> languageCode="ar">
+      <OdysseyTranslationProvider languageCode="test">
         <span>{odysseyTranslate("fieldlabel.optional.text")}</span>
       </OdysseyTranslationProvider>
     );
