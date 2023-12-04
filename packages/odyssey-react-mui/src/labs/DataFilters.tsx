@@ -176,16 +176,50 @@ const DataFilters = ({
   }, [onChangeSearch, searchValue, searchDelayTime, hasSearchSubmitButton]);
 
   const handleInputChange = useCallback(
-    (filterId: string, value: DataFilterValue, submit: boolean = false) => {
-      setInputValues({ ...inputValues, [filterId]: value });
+    (
+      filterId: string,
+      value:
+        | string
+        | { label: string }
+        | null
+        | undefined
+        | (string | { label: string })[],
+      submit: boolean = false
+    ) => {
+      let extractedLabel: string | undefined = undefined;
 
-      if (submit) {
-        const updatedFilters = filtersProp.map((filter) => ({
-          ...filter,
-          value: filter.id === filterId ? value : inputValues[filter.id],
-        }));
+      if (Array.isArray(value)) {
+        // Extract the first valid string or { label: string } object from the array
+        const validValue = value.find(
+          (v) =>
+            typeof v === "string" || (typeof v === "object" && "label" in v)
+        );
 
-        setFilters(updatedFilters);
+        if (validValue) {
+          extractedLabel =
+            typeof validValue === "string" ? validValue : validValue.label;
+        }
+      } else if (
+        value !== null &&
+        value !== undefined &&
+        (typeof value === "string" ||
+          (typeof value === "object" && "label" in value))
+      ) {
+        extractedLabel = typeof value === "string" ? value : value.label;
+      }
+
+      if (extractedLabel !== undefined) {
+        setInputValues({ ...inputValues, [filterId]: extractedLabel });
+
+        if (submit) {
+          const updatedFilters = filtersProp.map((filter) => ({
+            ...filter,
+            value:
+              filter.id === filterId ? extractedLabel : inputValues[filter.id],
+          }));
+
+          setFilters(updatedFilters);
+        }
       }
     },
     [inputValues, filtersProp]
@@ -383,15 +417,9 @@ const DataFilters = ({
                                 ] as string) ?? ""
                               }
                               onChange={(_, value) => {
-                                const label =
-                                  typeof value === "object" &&
-                                  value !== null &&
-                                  "label" in value
-                                    ? (value as { label: string }).label
-                                    : (value as string);
                                 handleInputChange(
                                   filterPopoverCurrentFilter.id,
-                                  label
+                                  value
                                 );
                               }}
                               options={filterPopoverCurrentFilter.options.map(
