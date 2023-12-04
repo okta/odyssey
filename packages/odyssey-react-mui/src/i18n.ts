@@ -43,8 +43,6 @@ import { translation as vi } from "./properties/ts/odyssey-react-mui_vi";
 import { translation as zhCN } from "./properties/ts/odyssey-react-mui_zh_CN";
 import { translation as znTW } from "./properties/ts/odyssey-react-mui_zh_TW";
 
-import { supportedLanguages } from "./OdysseyTranslationProvider.types";
-
 export const defaultLNG = "en";
 export const defaultNS = "translations";
 type OktaI18nResources = Record<string, typeof en>;
@@ -84,7 +82,6 @@ i18n.use(initReactI18next).init({
   defaultNS,
   ns: [defaultNS],
   fallbackLng: defaultLNG,
-  supportedLngs: supportedLanguages,
   load: "currentOnly",
   keySeparator: false,
   interpolation: {
