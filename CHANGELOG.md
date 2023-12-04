@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.0](https://github.com/okta/odyssey/compare/v1.8.2...v1.9.0) (2023-12-04)
+
+### Features
+
+- add on blur for radio and checkbox OKTA-670768 ([#2049](https://github.com/okta/odyssey/issues/2049)) ([a08fe5d](https://github.com/okta/odyssey/commit/a08fe5dcbb9805e6466f00d709ddb0e32607d0d2))
+
 ## [1.8.2](https://github.com/okta/odyssey/compare/v1.8.1...v1.8.2) (2023-12-01)
 
 **Note:** Version bump only for package odyssey
