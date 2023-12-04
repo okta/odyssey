@@ -176,54 +176,48 @@ const DataFilters = ({
   }, [onChangeSearch, searchValue, searchDelayTime, hasSearchSubmitButton]);
 
   const handleInputChange = useCallback(
-    (
-      filterId: string,
-      value:
-        | string
-        | { label: string }
-        | null
-        | undefined
-        | (string | { label: string })[],
-      submit: boolean = false
-    ) => {
-      let extractedLabel: string | undefined = undefined;
+    (filterId: string, value: DataFilterValue, submit: boolean = false) => {
+      setInputValues({ ...inputValues, [filterId]: value });
 
-      if (Array.isArray(value)) {
-        // Extract the first valid string or { label: string } object from the array
-        const validValue = value.find(
-          (v) =>
-            typeof v === "string" || (typeof v === "object" && "label" in v)
-        );
+      if (submit) {
+        const updatedFilters = filtersProp.map((filter) => ({
+          ...filter,
+          value: filter.id === filterId ? value : inputValues[filter.id],
+        }));
 
-        if (validValue) {
-          extractedLabel =
-            typeof validValue === "string" ? validValue : validValue.label;
-        }
-      } else if (
-        value !== null &&
-        value !== undefined &&
-        (typeof value === "string" ||
-          (typeof value === "object" && "label" in value))
-      ) {
-        extractedLabel = typeof value === "string" ? value : value.label;
-      }
-
-      if (extractedLabel !== undefined) {
-        setInputValues({ ...inputValues, [filterId]: extractedLabel });
-
-        if (submit) {
-          const updatedFilters = filtersProp.map((filter) => ({
-            ...filter,
-            value:
-              filter.id === filterId ? extractedLabel : inputValues[filter.id],
-          }));
-
-          setFilters(updatedFilters);
-        }
+        setFilters(updatedFilters);
       }
     },
     [inputValues, filtersProp]
   );
+
+  const getAutoCompleteLabel = (
+    value:
+      | string
+      | { label: string }
+      | null
+      | undefined
+      | (string | { label: string })[]
+  ): string => {
+    if (Array.isArray(value)) {
+      // Iterating to find the label
+      for (const valueElement of value) {
+        if (typeof valueElement !== "string") {
+          return valueElement.label;
+        }
+      }
+    } else if (
+      value !== null &&
+      value !== undefined &&
+      typeof value === "object" &&
+      "label" in value
+    ) {
+      // If the value is a single object with a label property, return its label
+      return value.label;
+    }
+
+    return value as string;
+  };
 
   const handleMultiSelectChange = useCallback(
     (filterId: string, value: string, submit: boolean = false) => {
@@ -417,9 +411,10 @@ const DataFilters = ({
                                 ] as string) ?? ""
                               }
                               onChange={(_, value) => {
+                                const label = getAutoCompleteLabel(value);
                                 handleInputChange(
                                   filterPopoverCurrentFilter.id,
-                                  value
+                                  label
                                 );
                               }}
                               options={filterPopoverCurrentFilter.options.map(
