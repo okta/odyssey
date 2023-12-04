@@ -475,7 +475,7 @@ export const components = ({
             transitionTimingFunction: "linear",
 
             "&:hover": {
-              backgroundColor: odysseyTokens.HueNeutral200,
+              backgroundColor: odysseyTokens.HueNeutral100,
               color: odysseyTokens.TypographyColorBody,
             },
 
