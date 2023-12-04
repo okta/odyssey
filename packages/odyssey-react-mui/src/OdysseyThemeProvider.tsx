@@ -21,6 +21,8 @@ import { deepmerge } from "@mui/utils";
 import { createOdysseyMuiTheme, DesignTokensOverride } from "./theme";
 import * as Tokens from "@okta/odyssey-design-tokens";
 import { OdysseyDesignTokensContext } from "./OdysseyDesignTokensContext";
+import { CacheProvider } from "@emotion/react";
+import createCache from "@emotion/cache";
 
 export type OdysseyThemeProviderProps = {
   children: ReactNode;
@@ -53,12 +55,24 @@ const OdysseyThemeProvider = ({
     [odysseyTheme, themeOverride]
   );
 
+  const cache = useMemo(
+    () =>
+      createCache({
+        key: "css",
+        prepend: true,
+        nonce: window.cspNonce,
+      }),
+    []
+  );
+
   return (
-    <MuiThemeProvider theme={customOdysseyTheme ?? odysseyTheme}>
-      <OdysseyDesignTokensContext.Provider value={odysseyTokens}>
-        {children}
-      </OdysseyDesignTokensContext.Provider>
-    </MuiThemeProvider>
+    <CacheProvider value={cache}>
+      <MuiThemeProvider theme={customOdysseyTheme ?? odysseyTheme}>
+        <OdysseyDesignTokensContext.Provider value={odysseyTokens}>
+          {children}
+        </OdysseyDesignTokensContext.Provider>
+      </MuiThemeProvider>
+    </CacheProvider>
   );
 };
 
