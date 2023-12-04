@@ -43,14 +43,12 @@ import { translation as vi } from "./properties/ts/odyssey-react-mui_vi";
 import { translation as zhCN } from "./properties/ts/odyssey-react-mui_zh_CN";
 import { translation as znTW } from "./properties/ts/odyssey-react-mui_zh_TW";
 
-import {
-  SupportedLanguages,
-  supportedLanguages,
-} from "./OdysseyTranslationProvider.types";
+import { supportedLanguages } from "./OdysseyTranslationProvider.types";
 
-export const defaultLNG: SupportedLanguages = "en";
+export const defaultLNG = " en";
 export const defaultNS = "translations";
-export const resources = {
+type OktaI18nResources = Record<string, typeof en>;
+export const resources: OktaI18nResources = {
   cs,
   da,
   de,
