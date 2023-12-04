@@ -25,13 +25,14 @@ import {
   OdysseyTranslationProviderProps,
 } from "./OdysseyTranslationProvider";
 
-export type OdysseyProviderProps = OdysseyCacheProviderProps &
-  OdysseyThemeProviderProps &
-  OdysseyTranslationProviderProps & {
-    children: ReactNode;
-  };
+export type OdysseyProviderProps<Languages extends string> =
+  OdysseyCacheProviderProps &
+    OdysseyThemeProviderProps &
+    OdysseyTranslationProviderProps<Languages> & {
+      children: ReactNode;
+    };
 
-const OdysseyProvider = ({
+const OdysseyProvider = <Languages extends string>({
   children,
   designTokensOverride,
   languageCode,
@@ -39,7 +40,7 @@ const OdysseyProvider = ({
   stylisPlugins,
   themeOverride,
   translationOverrides,
-}: OdysseyProviderProps) => (
+}: OdysseyProviderProps<Languages>) => (
   <OdysseyCacheProvider nonce={nonce} stylisPlugins={stylisPlugins}>
     <OdysseyThemeProvider
       themeOverride={themeOverride}
