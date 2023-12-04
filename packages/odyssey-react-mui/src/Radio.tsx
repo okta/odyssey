@@ -12,6 +12,7 @@
 
 import {
   FormControlLabel,
+  FormControlLabelProps as MuiFormControlLabelProps,
   Radio as MuiRadio,
   RadioProps as MuiRadioProps,
 } from "@mui/material";
@@ -41,6 +42,10 @@ export type RadioProps = {
    * Callback fired when the state is changed. Provides event and checked value.
    */
   onChange?: MuiRadioProps["onChange"];
+  /**
+   * Callback fired when the blur event happens. Provides event value.
+   */
+  onBlur?: MuiFormControlLabelProps["onBlur"];
 } & Pick<FieldComponentProps, "isDisabled" | "name"> &
   SeleniumProps;
 
@@ -53,12 +58,20 @@ const Radio = ({
   testId,
   value,
   onChange: onChangeProp,
+  onBlur: onBlurProp,
 }: RadioProps) => {
   const onChange = useCallback<NonNullable<MuiRadioProps["onChange"]>>(
     (event, checked) => {
       onChangeProp?.(event, checked);
     },
     [onChangeProp]
+  );
+
+  const onBlur = useCallback<NonNullable<MuiFormControlLabelProps["onBlur"]>>(
+    (event) => {
+      onBlurProp?.(event);
+    },
+    [onBlurProp]
   );
 
   return (
@@ -71,6 +84,7 @@ const Radio = ({
       label={label}
       name={name}
       value={value}
+      onBlur={onBlur}
     />
   );
 };

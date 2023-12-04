@@ -64,6 +64,15 @@ const storybookMeta: Meta<RadioProps> = {
         },
       },
     },
+    onBlur: {
+      control: null,
+      description: "Callback fired when the blur event happens",
+      table: {
+        type: {
+          summary: "func",
+        },
+      },
+    },
     name: fieldComponentPropsMetaData.name,
     value: {
       control: "text",
@@ -91,13 +100,15 @@ export default storybookMeta;
 
 export const Default: StoryObj<typeof Radio> = {
   play: async ({ canvasElement, step }) => {
-    await step("select the radio button", async () => {
+    await step("select the radio button", async ({ args }) => {
       const canvas = within(canvasElement);
       const radio = canvas.getByRole("radio") as HTMLInputElement;
       if (radio) {
         userEvent.click(radio);
       }
       expect(radio).toBeChecked();
+      userEvent.click(canvasElement);
+      expect(args.onBlur).toHaveBeenCalled();
       axeRun("Radio Default");
     });
   },
