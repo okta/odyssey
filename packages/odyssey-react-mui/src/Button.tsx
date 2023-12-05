@@ -12,7 +12,7 @@
 
 import { Button as MuiButton } from "@mui/material";
 import type { ButtonProps as MuiButtonProps } from "@mui/material";
-import { memo, ReactElement, useCallback } from "react";
+import { forwardRef, memo, ReactElement, useCallback } from "react";
 
 import { MuiPropsContext, useMuiProps } from "./MuiPropsContext";
 import { Tooltip } from "./Tooltip";
@@ -104,47 +104,9 @@ export type ButtonProps = {
 ) &
   SeleniumProps;
 
-const Button = ({
-  ariaDescribedBy,
-  ariaLabel,
-  ariaLabelledBy,
-  endIcon,
-  id,
-  isDisabled,
-  isFullWidth,
-  label = "",
-  onClick,
-  size = "medium",
-  startIcon,
-  testId,
-  tooltipText,
-  type = "button",
-  variant,
-}: ButtonProps) => {
-  const muiProps = useMuiProps();
-
-  const renderButton = useCallback(
-    (muiProps) => (
-      <MuiButton
-        {...muiProps}
-        aria-label={ariaLabel}
-        aria-labelledby={ariaLabelledBy}
-        aria-describedby={ariaDescribedBy}
-        data-se={testId}
-        disabled={isDisabled}
-        endIcon={endIcon}
-        fullWidth={isFullWidth}
-        id={id}
-        onClick={onClick}
-        size={size}
-        startIcon={startIcon}
-        type={type}
-        variant={variant}
-      >
-        {label}
-      </MuiButton>
-    ),
-    [
+const Button = forwardRef<HTMLElement, ButtonProps>(
+  (
+    {
       ariaDescribedBy,
       ariaLabel,
       ariaLabelledBy,
@@ -152,28 +114,73 @@ const Button = ({
       id,
       isDisabled,
       isFullWidth,
-      label,
+      label = "",
       onClick,
-      size,
+      size = "medium",
       startIcon,
       testId,
-      type,
+      tooltipText,
+      type = "button",
       variant,
-    ]
-  );
+    }: ButtonProps,
+    ref
+  ) => {
+    const muiProps = useMuiProps();
 
-  return (
-    <>
-      {tooltipText && !isDisabled && (
-        <Tooltip ariaType="description" placement="top" text={tooltipText}>
-          <MuiPropsContext.Consumer>{renderButton}</MuiPropsContext.Consumer>
-        </Tooltip>
-      )}
+    const renderButton = useCallback(
+      (muiProps) => (
+        <MuiButton
+          {...muiProps}
+          aria-label={ariaLabel}
+          aria-labelledby={ariaLabelledBy}
+          aria-describedby={ariaDescribedBy}
+          data-se={testId}
+          disabled={isDisabled}
+          endIcon={endIcon}
+          fullWidth={isFullWidth}
+          id={id}
+          onClick={onClick}
+          size={size}
+          startIcon={startIcon}
+          type={type}
+          variant={variant}
+          ref={ref}
+        >
+          {label}
+        </MuiButton>
+      ),
+      [
+        ariaDescribedBy,
+        ariaLabel,
+        ariaLabelledBy,
+        endIcon,
+        id,
+        isDisabled,
+        isFullWidth,
+        label,
+        onClick,
+        size,
+        startIcon,
+        testId,
+        type,
+        variant,
+        ref,
+      ]
+    );
 
-      {(isDisabled || !tooltipText) && renderButton(muiProps)}
-    </>
-  );
-};
+    return (
+      <>
+        {tooltipText && !isDisabled && (
+          <Tooltip ariaType="description" placement="top" text={tooltipText}>
+            <MuiPropsContext.Consumer>{renderButton}</MuiPropsContext.Consumer>
+          </Tooltip>
+        )}
+
+        {(isDisabled || !tooltipText) && renderButton(muiProps)}
+      </>
+    );
+  }
+);
 
 const MemoizedButton = memo(Button);
 MemoizedButton.displayName = "Button";
