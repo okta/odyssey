@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.1](https://github.com/okta/odyssey/compare/v1.9.0...v1.9.1) (2023-12-05)
+
+### Bug Fixes
+
+- fixed typing for shadow root element. updated tests to reflect changes ([#2048](https://github.com/okta/odyssey/issues/2048)) ([3ae92a1](https://github.com/okta/odyssey/commit/3ae92a1b91451c6bb9bb2a512571fbbe4b833022))
+
 ## [1.9.0](https://github.com/okta/odyssey/compare/v1.8.2...v1.9.0) (2023-12-04)
 
 ### Features
