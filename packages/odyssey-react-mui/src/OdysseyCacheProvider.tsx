@@ -47,7 +47,7 @@ const OdysseyCacheProvider = ({
 
   const emotionCache = useMemo(() => {
     return createCache({
-      container: emotionRoot,
+      ...(emotionRoot && { container: emotionRoot }),
       key: uniqueAlphabeticalId,
       nonce: window.cspNonce,
       prepend: true,
