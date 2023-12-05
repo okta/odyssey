@@ -8,12 +8,22 @@ Sometimes, you may need to sandbox your application's styles so Odyssey componen
 
 To sandbox your application's styles, you need to use a Shadow DOM. Odyssey natively supports the use of a Shadow DOM and even exports some helper functions.
 
+When creating the shadow root for your application, `createshadowDomElement` will return 2 elements in a tuple:
+
+<dl>
+  <dt>emotionRoot</dt>
+  <dd>A `style` node within the shadow root of the root node of your application. Emotion will cache styles here.</dd>
+
+  <dt>shadowDomElementRoot</dt>
+  <dd>A `div` node within the shadow root of your root node of your application. React-DOM should use this to create a root to render your application to.</dd>
+</dl>
+
 To create a Shadow DOM, simply use the `createshadowDomElement` function from Odyssey:
 
 ```tsx
 import { createshadowDomElement } from "@okta/odyssey-react-mui";
 
-const shadowDomElement = createshadowDomElement(
+const [emotionRoot, shadowDomElementRoot] = createshadowDomElement(
   document.querySelector("#root") as HTMLElement
 );
 ```
@@ -21,11 +31,63 @@ const shadowDomElement = createshadowDomElement(
 Then render your React app into the Shadow DOM root element and pass it to Odyssey's top-level `OdysseyProvider` like so:
 
 ```tsx
-ReactDOM.createRoot(shadowDomElement).render(
-  <OdysseyProvider shadowDomElement={shadowDomElement}>
+ReactDOM.createRoot(shadowDomElementRoot).render(
+  <OdysseyProvider
+    emotionRoot={emotionRoot}
+    shadowDomElement={shadowDomElementRoot}
+  >
     <App />
   </OdysseyProvider>
 );
+```
+
+If you are using a shadow DOM and a separate Emotion Cache in your application for other CSS styles within your app, you will need to create an instance of `Emotion`
+and supply it a container reference to the created `emotionRoot` above:
+
+```ts
+// utils.ts
+
+// Assumes the ID of the root element of your web application to be `root`
+// The ID of the `emotionRoot` style element is `style-root`
+
+import createEmotion from "@emotion/css/create-instance";
+
+export const getCss = () => {
+  const { css } = createEmotion({
+    key: "css",
+    nonce: window.cspNonce,
+    speedy: false,
+    prepend: true,
+    container:
+      document
+        .querySelector("#root")
+        ?.shadowRoot?.querySelector("#style-root") || undefined,
+  });
+  return css;
+};
+```
+
+The in your code, you can do something like:
+
+```tsx
+// MyComponent.tsx
+
+import { getCss } from "./utils"
+
+export const MyComponent = () => {
+
+  const css = getCss();
+
+  const componentStyle = css`
+    backgroundColor: white
+  `;
+
+  return (
+    <div className={componentStyle}>
+      { //... things }
+    </div>
+  )
+}
 ```
 
 If you're using separate `OdysseyThemeProvider` and `OdysseyCacheProvider` components, both of those also take the `shadowDomElement` element.

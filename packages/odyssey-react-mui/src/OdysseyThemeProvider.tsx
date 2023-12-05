@@ -29,7 +29,7 @@ export type OdysseyThemeProviderProps = {
   children: ReactNode;
   designTokensOverride?: DesignTokensOverride;
   emotionRoot?: HTMLStyleElement;
-  shadowDomElement?: HTMLDivElement;
+  shadowDomElement?: HTMLDivElement | HTMLElement | undefined;
   themeOverride?: ThemeOptions;
   withCache?: boolean;
 };
