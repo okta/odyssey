@@ -16,6 +16,8 @@ import { ScreenReaderText } from "./ScreenReaderText";
 import { useTranslation } from "react-i18next";
 
 import type { SeleniumProps } from "./SeleniumProps";
+import { Link } from "./Link";
+import { Paragraph } from "./Typography";
 
 export const calloutRoleValues = ["status", "alert"] as const;
 export const calloutSeverityValues = [
@@ -31,6 +33,16 @@ export type CalloutProps = {
    */
   children: ReactNode;
   /**
+   * If linkUrl is not undefined, this is the text of the link.
+   * If left blank, it defaults to "Learn more".
+   * Note that linkText does nothing if linkUrl is not defined
+   */
+  linkText?: string;
+  /**
+   * If defined, the Toast will include a link to the URL
+   */
+  linkUrl?: string;
+  /**
    * Sets the ARIA role of the Callout
    * ("status" for something that dynamically updates, "alert" for errors, null for something
    * unchanging)
@@ -41,19 +53,38 @@ export type CalloutProps = {
    */
   severity: (typeof calloutSeverityValues)[number];
   /**
+   * The text content of the Toast
+   */
+  text: string;
+  /**
    * The title of the Callout
    */
   title?: string;
 } & SeleniumProps;
 
-const Callout = ({ children, role, severity, testId, title }: CalloutProps) => {
+const Callout = ({
+  children,
+  linkText,
+  linkUrl,
+  role,
+  severity,
+  testId,
+  text,
+  title,
+}: CalloutProps) => {
   const { t } = useTranslation();
 
   return (
     <Alert data-se={testId} role={role} severity={severity} variant="callout">
       <ScreenReaderText>{t(`severity.${severity}`)}</ScreenReaderText>
       {title && <AlertTitle>{title}</AlertTitle>}
-      <Box component="div">{children}</Box>
+      {children && <Box component="div">{children}</Box>}
+      {text && <Paragraph>{text}</Paragraph>}
+      {linkUrl && (
+        <Link href={linkUrl} variant="monochrome">
+          {linkText}
+        </Link>
+      )}
     </Alert>
   );
 };

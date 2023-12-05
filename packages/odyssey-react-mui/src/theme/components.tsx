@@ -22,6 +22,7 @@ import { formControlLabelClasses } from "@mui/material/FormControlLabel";
 import { formLabelClasses } from "@mui/material/FormLabel";
 import { inputAdornmentClasses } from "@mui/material/InputAdornment";
 import { inputBaseClasses } from "@mui/material/InputBase";
+import { linkClasses } from "@mui/material/Link";
 import { listItemIconClasses } from "@mui/material/ListItemIcon";
 import { listItemTextClasses } from "@mui/material/ListItemText";
 import { menuItemClasses } from "@mui/material/MenuItem";
@@ -219,6 +220,10 @@ export const components = ({
             ...(ownerState.variant === "banner" && {
               marginBlockEnd: 0,
             }),
+            ...(ownerState.variant === "callout" && {
+              fontSize: odysseyTokens.TypographySizeHeading5,
+              lineHeight: odysseyTokens.TypographyLineHeightHeading5,
+            }),
           },
 
           // Alert variant styling
@@ -234,6 +239,7 @@ export const components = ({
           }),
           ...(ownerState.variant === "callout" && {
             borderRadius: odysseyTokens.BorderRadiusMain,
+            padding: odysseyTokens.Spacing5,
             "&:not(:last-child)": {
               marginBottom: odysseyTokens.Spacing6,
             },
@@ -296,6 +302,10 @@ export const components = ({
             marginBlock: odysseyTokens.Spacing2,
           }),
 
+          ...(ownerState.variant === "callout" && {
+            marginBlock: 1.5,
+          }),
+
           [`& .${svgIconClasses.root}`]: {
             alignSelf: "center",
             fontSize: odysseyTokens.TypographySizeHeading6,
@@ -313,6 +323,10 @@ export const components = ({
             flexGrow: 1,
             marginBlock: odysseyTokens.Spacing2,
           }),
+          [`& .${linkClasses.root}`]: {
+            display: "inline-block",
+            marginTop: odysseyTokens.Spacing5,
+          },
         }),
       },
     },
