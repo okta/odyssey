@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, ReactElement } from "react";
+import { forwardRef, memo, ReactElement } from "react";
 import { ExternalLinkIcon } from "./icons.generated";
 import type { SeleniumProps } from "./SeleniumProps";
 
@@ -54,34 +54,31 @@ export type LinkProps = {
   variant?: (typeof linkVariantValues)[number];
 } & SeleniumProps;
 
-const Link = ({
-  children,
-  href,
-  icon,
-  rel,
-  target,
-  testId,
-  variant,
-  onClick,
-}: LinkProps) => (
-  <MuiLink
-    data-se={testId}
-    href={href}
-    rel={rel}
-    target={target}
-    variant={variant}
-    onClick={onClick}
-  >
-    {icon && <span className="Link-icon">{icon}</span>}
+const Link = forwardRef<HTMLAnchorElement, LinkProps>(
+  (
+    { children, href, icon, rel, target, testId, variant, onClick }: LinkProps,
+    ref
+  ) => (
+    <MuiLink
+      data-se={testId}
+      href={href}
+      rel={rel}
+      target={target}
+      variant={variant}
+      onClick={onClick}
+      ref={ref}
+    >
+      {icon && <span className="Link-icon">{icon}</span>}
 
-    {children}
+      {children}
 
-    {target === "_blank" && (
-      <span className="Link-indicator" role="presentation">
-        <ExternalLinkIcon />
-      </span>
-    )}
-  </MuiLink>
+      {target === "_blank" && (
+        <span className="Link-indicator" role="presentation">
+          <ExternalLinkIcon />
+        </span>
+      )}
+    </MuiLink>
+  )
 );
 
 const MemoizedLink = memo(Link);

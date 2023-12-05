@@ -10,7 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { useState, useRef } from "react";
 import type { StoryObj } from "@storybook/react";
+import { Box } from "@mui/material";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { Link, LinkProps, linkVariantValues } from "@okta/odyssey-react-mui";
@@ -101,6 +103,15 @@ export default {
         defaultValue: "",
       },
     },
+    ref: {
+      control: null,
+      description: "The ref is forwarded to the root element.",
+      table: {
+        type: {
+          summary: "HTMLElement",
+        },
+      },
+    },
   },
   decorators: [MuiThemeDecorator],
 };
@@ -135,5 +146,34 @@ export const External: StoryObj<LinkProps> = {
     children: "Visit okta.com",
     rel: "noopener",
     target: "_blank",
+  },
+};
+
+export const WithRef: StoryObj<typeof Link> = {
+  args: {
+    href: "#anchor",
+    variant: "default",
+    children: "Anchor link",
+  },
+  render: function C(args) {
+    const [refHtml, setRefHtml] = useState("");
+    const ref = useRef<HTMLAnchorElement>(null);
+
+    const handleGetRefInnerHtml = () => {
+      setRefHtml(ref.current?.outerHTML as string);
+    };
+
+    return (
+      <Box
+        component="div"
+        sx={{ display: "flex", flexFlow: "column", gap: "1rem" }}
+      >
+        <Link {...args} ref={ref} />
+        <Box>
+          <button onClick={handleGetRefInnerHtml}>Get ref Html</button>
+        </Box>
+        <div>Ref HTML: {refHtml}</div>
+      </Box>
+    );
   },
 };
