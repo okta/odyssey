@@ -242,7 +242,10 @@ export const components = ({
             maxWidth: odysseyTokens.TypographyLineLengthMax,
             borderRadius: odysseyTokens.BorderRadiusOuter,
             position: "relative",
-            alignItems: "center",
+            paddingInlineStart: odysseyTokens.Spacing5,
+            paddingInlineEnd: odysseyTokens.Spacing4,
+            paddingBlock: odysseyTokens.Spacing3,
+            alignItems: "flex-start",
             backdropFilter: "blur(10px)",
           }),
         }),
@@ -257,8 +260,18 @@ export const components = ({
           }),
           ...(ownerState.variant === "toast" && {
             padding: 0,
-            marginInlineStart: 0,
-            marginInlineEnd: 0,
+            marginInline: 0,
+            marginBlock: 1,
+
+            [`& .${buttonClasses.root}`]: {
+              "&:hover, &:focus": {
+                backgroundColor: odysseyTokens.PaletteNeutralDark.concat("11"),
+              },
+
+              "&:active": {
+                backgroundColor: odysseyTokens.PaletteNeutralDark.concat("22"),
+              },
+            },
           }),
         }),
         icon: ({ ownerState }) => ({
@@ -276,7 +289,11 @@ export const components = ({
             color: odysseyTokens.PaletteSuccessMain,
           }),
           ...(ownerState.severity === "warning" && {
-            color: odysseyTokens.PaletteWarningDark,
+            color: odysseyTokens.HueYellow400,
+          }),
+
+          ...(ownerState.variant === "toast" && {
+            marginBlock: odysseyTokens.Spacing2,
           }),
 
           [`& .${svgIconClasses.root}`]: {
@@ -294,6 +311,7 @@ export const components = ({
           }),
           ...(ownerState.variant === "toast" && {
             flexGrow: 1,
+            marginBlock: odysseyTokens.Spacing2,
           }),
         }),
       },
