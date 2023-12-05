@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { useState, useRef } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import {
   Typography,
@@ -28,6 +29,7 @@ import {
   typographyVariantMapping,
   TypographyVariantValue,
 } from "@okta/odyssey-react-mui";
+import { Box } from "@mui/material";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { axeRun } from "../../../axe-util";
 import { createElement } from "react";
@@ -45,7 +47,7 @@ const variantMapping = {
   legend: Legend,
 };
 
-const storybookMeta: Meta<TypographyProps> = {
+const storybookMeta: Meta<typeof Typography> = {
   title: "MUI Components/Typography",
   component: Typography,
   parameters: {
@@ -124,6 +126,15 @@ const storybookMeta: Meta<TypographyProps> = {
         },
       },
     },
+    ref: {
+      control: null,
+      description: "The ref is forwarded to the root element.",
+      table: {
+        type: {
+          summary: "HTMLElement",
+        },
+      },
+    },
   },
   args: {
     children: "Spice is vital for space travel.",
@@ -133,7 +144,7 @@ const storybookMeta: Meta<TypographyProps> = {
 
 export default storybookMeta;
 
-export const TypographyStory: StoryObj<TypographyProps> = {
+export const TypographyWithRefStory: StoryObj<TypographyProps> = {
   name: "Generic Typography",
   args: {
     children: "This is standard text.",
@@ -144,6 +155,39 @@ export const TypographyStory: StoryObj<TypographyProps> = {
     return createElement(
       variantMapping[variant as TypographyVariantValue],
       props as TypographyProps
+    );
+  },
+};
+
+export const TypographyStory: StoryObj<TypographyProps> = {
+  name: "Generic Typography",
+  args: {
+    children: "This is standard text.",
+    variant: "body",
+  },
+  render: function C(args) {
+    const [refHtml, setRefHtml] = useState("");
+    const ref = useRef<HTMLElement>(null);
+
+    const handleGetRefInnerHtml = () => {
+      setRefHtml(ref.current?.outerHTML as string);
+    };
+
+    return (
+      <Box
+        component="div"
+        sx={{ display: "flex", flexFlow: "column", gap: "1rem" }}
+      >
+        <Box>
+          <Typography {...args} ref={ref}>
+            {args.children}
+          </Typography>
+        </Box>
+        <Box>
+          <button onClick={handleGetRefInnerHtml}>Get ref Html</button>
+        </Box>
+        <div>Ref HTML: {refHtml}</div>
+      </Box>
     );
   },
 };

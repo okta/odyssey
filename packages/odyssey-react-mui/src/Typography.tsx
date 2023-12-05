@@ -14,7 +14,7 @@ import {
   Typography as MuiTypography,
   TypographyProps as MuiTypographyProps,
 } from "@mui/material";
-import { ElementType, ReactNode, memo, useMemo } from "react";
+import { ElementType, ReactNode, forwardRef, memo, useMemo } from "react";
 import { SeleniumProps } from "./SeleniumProps";
 
 export type TypographyVariantValue =
@@ -84,42 +84,48 @@ export type TypographyProps = {
   variant?: keyof typeof typographyVariantMapping;
 } & SeleniumProps;
 
-const Typography = ({
-  ariaDescribedBy,
-  ariaLabel,
-  ariaLabelledBy,
-  children,
-  color,
-  component: componentProp,
-  testId,
-  variant = "body",
-}: TypographyProps) => {
-  const component = useMemo(() => {
-    if (!componentProp) {
-      if (variant === "body") {
-        return "p";
-      } else if (variant === "subordinate" || variant === "support") {
-        return "p";
-      } else {
-        return variant;
+const Typography = forwardRef<HTMLElement, TypographyProps>(
+  (
+    {
+      ariaDescribedBy,
+      ariaLabel,
+      ariaLabelledBy,
+      children,
+      color,
+      component: componentProp,
+      testId,
+      variant = "body",
+    }: TypographyProps,
+    ref
+  ) => {
+    const component = useMemo(() => {
+      if (!componentProp) {
+        if (variant === "body") {
+          return "p";
+        } else if (variant === "subordinate" || variant === "support") {
+          return "p";
+        } else {
+          return variant;
+        }
       }
-    }
-    return componentProp;
-  }, [componentProp, variant]);
+      return componentProp;
+    }, [componentProp, variant]);
 
-  return (
-    <MuiTypography
-      aria-describedby={ariaDescribedBy}
-      aria-label={ariaLabel}
-      aria-labelledby={ariaLabelledBy}
-      children={children}
-      color={color}
-      component={component}
-      data-se={testId}
-      variant={typographyVariantMapping[variant]}
-    />
-  );
-};
+    return (
+      <MuiTypography
+        aria-describedby={ariaDescribedBy}
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
+        children={children}
+        color={color}
+        component={component}
+        data-se={testId}
+        variant={typographyVariantMapping[variant]}
+        ref={ref}
+      />
+    );
+  }
+);
 
 const MemoizedTypography = memo(Typography);
 MemoizedTypography.displayName = "Typography";
