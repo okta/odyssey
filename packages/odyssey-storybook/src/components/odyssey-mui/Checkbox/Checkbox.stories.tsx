@@ -148,7 +148,7 @@ const storybookMeta: Meta<typeof Checkbox> = {
       },
     },
     ref: {
-      control: "ref",
+      control: null,
       description: "Forwarded ref from of internal input element",
       table: {
         type: {
@@ -313,7 +313,6 @@ export const WithInputRef: StoryObj<typeof Checkbox> = {
     const ref = useRef<HTMLInputElement>(null);
 
     const handleGetRefInnerHtml = () => {
-      console.log(ref.current?.outerHTML);
       setRefHtml(ref.current?.outerHTML as string);
     };
 

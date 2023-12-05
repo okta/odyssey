@@ -16,7 +16,7 @@ import {
   Radio as MuiRadio,
   RadioProps as MuiRadioProps,
 } from "@mui/material";
-import { memo, useCallback } from "react";
+import { memo, useCallback, forwardRef } from "react";
 
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
@@ -49,45 +49,50 @@ export type RadioProps = {
 } & Pick<FieldComponentProps, "isDisabled" | "name"> &
   SeleniumProps;
 
-const Radio = ({
-  isChecked,
-  isDisabled,
-  isInvalid,
-  label,
-  name,
-  testId,
-  value,
-  onChange: onChangeProp,
-  onBlur: onBlurProp,
-}: RadioProps) => {
-  const onChange = useCallback<NonNullable<MuiRadioProps["onChange"]>>(
-    (event, checked) => {
-      onChangeProp?.(event, checked);
-    },
-    [onChangeProp]
-  );
+const Radio = forwardRef<HTMLInputElement, RadioProps>(
+  (
+    {
+      isChecked,
+      isDisabled,
+      isInvalid,
+      label,
+      name,
+      testId,
+      value,
+      onChange: onChangeProp,
+      onBlur: onBlurProp,
+    }: RadioProps,
+    inputRef
+  ) => {
+    const onChange = useCallback<NonNullable<MuiRadioProps["onChange"]>>(
+      (event, checked) => {
+        onChangeProp?.(event, checked);
+      },
+      [onChangeProp]
+    );
 
-  const onBlur = useCallback<NonNullable<MuiFormControlLabelProps["onBlur"]>>(
-    (event) => {
-      onBlurProp?.(event);
-    },
-    [onBlurProp]
-  );
+    const onBlur = useCallback<NonNullable<MuiFormControlLabelProps["onBlur"]>>(
+      (event) => {
+        onBlurProp?.(event);
+      },
+      [onBlurProp]
+    );
 
-  return (
-    <FormControlLabel
-      checked={isChecked}
-      className={isInvalid ? "Mui-error" : ""}
-      control={<MuiRadio onChange={onChange} />}
-      data-se={testId}
-      disabled={isDisabled}
-      label={label}
-      name={name}
-      value={value}
-      onBlur={onBlur}
-    />
-  );
-};
+    return (
+      <FormControlLabel
+        checked={isChecked}
+        className={isInvalid ? "Mui-error" : ""}
+        control={<MuiRadio inputRef={inputRef} onChange={onChange} />}
+        data-se={testId}
+        disabled={isDisabled}
+        label={label}
+        name={name}
+        value={value}
+        onBlur={onBlur}
+      />
+    );
+  }
+);
 
 const MemoizedRadio = memo(Radio);
 MemoizedRadio.displayName = "Radio";

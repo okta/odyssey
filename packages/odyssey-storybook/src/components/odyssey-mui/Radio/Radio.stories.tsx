@@ -10,8 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Radio, RadioProps } from "@okta/odyssey-react-mui";
+import { useState, useRef } from "react";
+import { Radio } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
+import { Box } from "@mui/material";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
@@ -19,7 +21,7 @@ import { expect } from "@storybook/jest";
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { axeRun } from "../../../axe-util";
 
-const storybookMeta: Meta<RadioProps> = {
+const storybookMeta: Meta<typeof Radio> = {
   title: "MUI Components/Forms/Radio",
   component: Radio,
   argTypes: {
@@ -87,6 +89,15 @@ const storybookMeta: Meta<RadioProps> = {
         name: "string",
       },
     },
+    ref: {
+      control: null,
+      description: "Forwarded ref from of internal input element",
+      table: {
+        type: {
+          summary: "HTMLInputElement",
+        },
+      },
+    },
   },
   args: {
     label: "Label",
@@ -111,5 +122,32 @@ export const Default: StoryObj<typeof Radio> = {
       expect(args.onBlur).toHaveBeenCalled();
       axeRun("Radio Default");
     });
+  },
+};
+
+export const WithInputRef: StoryObj<typeof Radio> = {
+  args: {
+    label: "Display input html of forwarded inputRef",
+  },
+  render: function C(args) {
+    const [refHtml, setRefHtml] = useState("");
+    const ref = useRef<HTMLInputElement>(null);
+
+    const handleGetRefInnerHtml = () => {
+      setRefHtml(ref.current?.outerHTML as string);
+    };
+
+    return (
+      <Box
+        component="div"
+        sx={{ display: "flex", flexFlow: "column", gap: "1rem" }}
+      >
+        <Radio {...args} ref={ref} />
+        <Box>
+          <button onClick={handleGetRefInnerHtml}>Get ref Html</button>
+        </Box>
+        <div>Ref HTML: {refHtml}</div>
+      </Box>
+    );
   },
 };
