@@ -69,7 +69,7 @@ const OdysseyThemeProvider = ({
         key: uniqueAlphabeticalId,
         prepend: true,
         nonce: window.cspNonce,
-        speedy: false,
+        speedy: false, // <-- Needs to be set to false when shadow-dom is used!! https://github.com/emotion-js/emotion/issues/2053#issuecomment-713429122
       }),
     [emotionRoot, uniqueAlphabeticalId]
   );
@@ -86,7 +86,7 @@ const OdysseyThemeProvider = ({
     );
   }
   return (
-    <MuiThemeProvider theme={odysseyTheme}>
+    <MuiThemeProvider theme={customOdysseyTheme ?? odysseyTheme}>
       <OdysseyDesignTokensContext.Provider value={odysseyTokens}>
         {children}
       </OdysseyDesignTokensContext.Provider>

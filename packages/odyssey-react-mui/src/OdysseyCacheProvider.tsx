@@ -21,8 +21,6 @@ import { memo, useMemo, ReactNode } from "react";
 import { useUniqueAlphabeticalId } from "./useUniqueAlphabeticalId";
 import { CacheProvider } from "@emotion/react";
 
-// import { useUniqueAlphabeticalId } from "./useUniqueAlphabeticalId";
-
 export type OdysseyCacheProviderProps = {
   children: ReactNode;
   nonce?: string;
@@ -51,7 +49,7 @@ const OdysseyCacheProvider = ({
       key: uniqueAlphabeticalId,
       nonce: window.cspNonce,
       prepend: true,
-      speedy: false, // <-- Needs to be set to false when shadow-dom is used!!
+      speedy: false, // <-- Needs to be set to false when shadow-dom is used!! https://github.com/emotion-js/emotion/issues/2053#issuecomment-713429122
     });
   }, [emotionRoot, uniqueAlphabeticalId]);
 
