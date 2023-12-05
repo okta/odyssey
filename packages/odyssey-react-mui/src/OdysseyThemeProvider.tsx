@@ -23,19 +23,24 @@ import * as Tokens from "@okta/odyssey-design-tokens";
 import { OdysseyDesignTokensContext } from "./OdysseyDesignTokensContext";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
+import { useUniqueAlphabeticalId } from "./useUniqueAlphabeticalId";
 
 export type OdysseyThemeProviderProps = {
   children: ReactNode;
   designTokensOverride?: DesignTokensOverride;
-  shadowDomElement?: HTMLElement;
+  emotionRoot?: HTMLStyleElement;
+  shadowDomElement?: HTMLDivElement;
   themeOverride?: ThemeOptions;
+  withCache?: boolean;
 };
 
 const OdysseyThemeProvider = ({
   children,
   designTokensOverride,
+  emotionRoot,
   shadowDomElement,
   themeOverride,
+  withCache = true,
 }: OdysseyThemeProviderProps) => {
   const odysseyTokens = useMemo(
     () => ({ ...Tokens, ...designTokensOverride }),
@@ -55,24 +60,37 @@ const OdysseyThemeProvider = ({
     [odysseyTheme, themeOverride]
   );
 
+  const uniqueAlphabeticalId = useUniqueAlphabeticalId();
+
   const cache = useMemo(
     () =>
       createCache({
-        key: "css",
+        ...(emotionRoot && { container: emotionRoot }),
+        key: uniqueAlphabeticalId,
         prepend: true,
         nonce: window.cspNonce,
+        speedy: false,
       }),
-    []
+    [emotionRoot, uniqueAlphabeticalId]
   );
 
+  if (withCache) {
+    return (
+      <CacheProvider value={cache}>
+        <MuiThemeProvider theme={customOdysseyTheme ?? odysseyTheme}>
+          <OdysseyDesignTokensContext.Provider value={odysseyTokens}>
+            {children}
+          </OdysseyDesignTokensContext.Provider>
+        </MuiThemeProvider>
+      </CacheProvider>
+    );
+  }
   return (
-    <CacheProvider value={cache}>
-      <MuiThemeProvider theme={customOdysseyTheme ?? odysseyTheme}>
-        <OdysseyDesignTokensContext.Provider value={odysseyTokens}>
-          {children}
-        </OdysseyDesignTokensContext.Provider>
-      </MuiThemeProvider>
-    </CacheProvider>
+    <MuiThemeProvider theme={odysseyTheme}>
+      <OdysseyDesignTokensContext.Provider value={odysseyTokens}>
+        {children}
+      </OdysseyDesignTokensContext.Provider>
+    </MuiThemeProvider>
   );
 };
 

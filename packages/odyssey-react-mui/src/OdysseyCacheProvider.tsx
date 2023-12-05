@@ -17,51 +17,43 @@ declare global {
 }
 
 import createCache, { StylisPlugin } from "@emotion/cache";
-import { CacheProvider } from "@emotion/react";
-import { memo, ReactNode, useMemo } from "react";
-
+import { memo, useMemo, ReactNode } from "react";
 import { useUniqueAlphabeticalId } from "./useUniqueAlphabeticalId";
+import { CacheProvider } from "@emotion/react";
+
+// import { useUniqueAlphabeticalId } from "./useUniqueAlphabeticalId";
 
 export type OdysseyCacheProviderProps = {
   children: ReactNode;
+  nonce?: string;
+  /**
+   * Emotion caches styles into the style element.
+   * When enabling this prop, Emotion caches the styles at this element, rather than in <head>.
+   */
+  emotionRoot?: HTMLStyleElement;
   /**
    * Emotion renders into this HTML element.
    * When enabling this prop, Emotion renders at the top of this component rather than the bottom like it does in the HTML `<head>`.
    */
-  nonce?: string;
-  shadowDomElement?: HTMLElement;
+  shadowDomElement?: HTMLDivElement | HTMLElement;
   stylisPlugins?: StylisPlugin[];
 };
 
 const OdysseyCacheProvider = ({
   children,
-  nonce,
-  shadowDomElement,
-  stylisPlugins,
+  emotionRoot,
 }: OdysseyCacheProviderProps) => {
   const uniqueAlphabeticalId = useUniqueAlphabeticalId();
 
-  const emotionRootElement = useMemo(() => {
-    const emotionRootElement = document.createElement("div");
-
-    emotionRootElement.setAttribute("data-emotion-root", "data-emotion-root");
-
-    shadowDomElement?.prepend?.(emotionRootElement);
-
-    return emotionRootElement;
-  }, [shadowDomElement]);
-
-  const emotionCache = useMemo(
-    () =>
-      createCache({
-        container: emotionRootElement,
-        key: uniqueAlphabeticalId,
-        nonce: nonce || window.cspNonce,
-        prepend: Boolean(emotionRootElement),
-        stylisPlugins,
-      }),
-    [emotionRootElement, nonce, stylisPlugins, uniqueAlphabeticalId]
-  );
+  const emotionCache = useMemo(() => {
+    return createCache({
+      container: emotionRoot,
+      key: uniqueAlphabeticalId,
+      nonce: window.cspNonce,
+      prepend: true,
+      speedy: false, // <-- Needs to be set to false when shadow-dom is used!!
+    });
+  }, [emotionRoot, uniqueAlphabeticalId]);
 
   return <CacheProvider value={emotionCache}>{children}</CacheProvider>;
 };
