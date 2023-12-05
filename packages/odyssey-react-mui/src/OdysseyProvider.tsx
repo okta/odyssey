@@ -25,10 +25,10 @@ import {
   OdysseyTranslationProvider,
   OdysseyTranslationProviderProps,
 } from "./OdysseyTranslationProvider";
-import { OktaSupportedLanguages } from "./OdysseyTranslationProvider.types";
+import { DefaultSupportedLanguages } from "./OdysseyTranslationProvider.types";
 
 export type OdysseyProviderProps<
-  SupportedLanguages extends string = OktaSupportedLanguages
+  SupportedLanguages extends string = DefaultSupportedLanguages
 > = OdysseyCacheProviderProps &
   OdysseyThemeProviderProps &
   OdysseyTranslationProviderProps<SupportedLanguages> & {

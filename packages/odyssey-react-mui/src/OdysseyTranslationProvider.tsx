@@ -12,7 +12,7 @@
 
 import { ReactNode, useEffect } from "react";
 
-import { OktaSupportedLanguages } from "./OdysseyTranslationProvider.types";
+import { DefaultSupportedLanguages } from "./OdysseyTranslationProvider.types";
 
 import { i18n, defaultNS, resources } from "./i18n";
 import { I18nextProvider } from "react-i18next";
@@ -35,10 +35,10 @@ const mergeBundleOverrides = (
 };
 
 export type OdysseyTranslationProviderProps<
-  SupportedLanguages extends string = OktaSupportedLanguages
+  SupportedLanguages extends string = DefaultSupportedLanguages
 > = {
   children: ReactNode;
-  languageCode?: SupportedLanguages | OktaSupportedLanguages;
+  languageCode?: SupportedLanguages | DefaultSupportedLanguages;
   translationOverrides?: TranslationOverrides;
 };
 
