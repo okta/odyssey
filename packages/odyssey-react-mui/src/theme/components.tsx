@@ -948,8 +948,8 @@ export const components = ({
     },
     MuiCircularProgress: {
       defaultProps: {
-        size: odysseyTokens.TypographyScale2,
-        thickness: 8,
+        size: odysseyTokens.Spacing5,
+        thickness: 10,
         color: "primary",
         disableShrink: false,
         variant: "indeterminate",
@@ -957,7 +957,7 @@ export const components = ({
       styleOverrides: {
         root: ({ ownerState }) => ({
           ...(ownerState.color !== "inherit" && {
-            color: odysseyTokens.PalettePrimaryDark,
+            color: odysseyTokens.PalettePrimaryMain,
           }),
         }),
         circle: ({ ownerState }) => ({
