@@ -445,7 +445,7 @@ export const KitchenSink: StoryObj<ButtonProps> = {
   ),
 };
 
-export const WithInputRef: StoryObj<typeof Button> = {
+export const WithRef: StoryObj<typeof Button> = {
   args: {
     label: "Button with Ref",
   },
