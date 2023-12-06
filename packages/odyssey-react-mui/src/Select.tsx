@@ -10,7 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useImperativeHandle,
+} from "react";
 import {
   Box,
   Checkbox as MuiCheckbox,
@@ -82,6 +90,10 @@ export type SelectProps<
    * The value or values selected in the Select
    */
   value?: Value;
+  /**
+   * The ref is forwarded to input element in the Select
+   */
+  inputRef: React.RefObject<HTMLInputElement>;
 } & Pick<
   FieldComponentProps,
   | "errorMessage"
@@ -133,6 +145,7 @@ const Select = <
   options,
   testId,
   value,
+  inputRef,
 }: SelectProps<Value, HasMultipleChoices>) => {
   const hasMultipleChoices = useMemo(
     () =>
@@ -147,6 +160,7 @@ const Select = <
   const [internalSelectedValues, setInternalSelectedValues] = useState(
     controlledStateRef.current === CONTROLLED ? value : defaultValue
   );
+  const ref = useRef(null);
 
   useEffect(() => {
     if (controlledStateRef.current === CONTROLLED) {
@@ -159,6 +173,17 @@ const Select = <
     value,
     controlState: controlledStateRef.current,
   });
+
+  useImperativeHandle(
+    inputRef,
+    () => {
+      const inputElement = (
+        ref.current as unknown as HTMLElement
+      ).querySelector("input");
+      return inputElement as HTMLInputElement;
+    },
+    []
+  );
 
   const onChange = useCallback<NonNullable<MuiSelectProps<Value>["onChange"]>>(
     (event, child) => {
@@ -268,6 +293,7 @@ const Select = <
         onChange={onChange}
         onFocus={onFocus}
         renderValue={hasMultipleChoices ? renderValue : undefined}
+        ref={ref}
       />
     ),
     [
