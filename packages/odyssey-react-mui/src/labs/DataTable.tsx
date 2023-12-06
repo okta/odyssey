@@ -404,6 +404,13 @@ const DataTable = ({
     }
   };
 
+  const resetDraggingAndHoveredRow = (
+    table: MRT_TableInstance<MRT_RowData>
+  ) => {
+    setDraggingRow(null);
+    table.setHoveredRow(null);
+  };
+
   const table = useMaterialReactTable({
     columns: columns,
     data: data,
@@ -503,15 +510,25 @@ const DataTable = ({
 
     muiRowDragHandleProps: ({ table, row }) => {
       return {
-        title:
-          "Drag or press space key to enable row reordering. Press space key again to stop reordering",
+        title: "Drag row or press space/enter key to start and stop reordering",
+        ariaLabel:
+          "Drag row to reorder. Or, press space or enter to start and stop reordering and esc to cancel.",
         onKeyDown: (event: KeyboardEvent<HTMLButtonElement>) => {
           const { hoveredRow } = table.getState();
 
           const { key } = event;
-          const isSpacebar = key === " ";
+          const isSpaceKey = key === " ";
+          const isEnterKey = key === "Enter";
+          const isEscapeKey = key === "Escape";
 
-          if (isSpacebar) {
+          if (isEscapeKey) {
+            resetDraggingAndHoveredRow(table);
+            return;
+          }
+
+          const isSpaceOrEnter = isSpaceKey || isEnterKey;
+
+          if (isSpaceOrEnter) {
             event.preventDefault();
           }
 
@@ -524,13 +541,15 @@ const DataTable = ({
             if (hoveredRow && hoveredRow.index) {
               const { index } = hoveredRow;
 
-              if (isSpacebar && index != currentIndex) {
+              if (isSpaceOrEnter && index != currentIndex) {
                 handleReordering({
                   rowId: row.id,
                   newIndex: index,
                 });
-                setDraggingRow(null);
-                table.setHoveredRow(null);
+
+                setTimeout(() => {
+                  resetDraggingAndHoveredRow(table);
+                }, 1000);
                 return;
               }
 
@@ -583,14 +602,13 @@ const DataTable = ({
               }
             }
           } else {
-            if (isSpacebar) {
+            if (isSpaceOrEnter) {
               setDraggingRow(row);
             }
           }
         },
         onBlur: () => {
-          setDraggingRow(null);
-          table.setHoveredRow(null);
+          resetDraggingAndHoveredRow(table);
         },
         onDragEnd: () => {
           const cols = table.getAllColumns();
