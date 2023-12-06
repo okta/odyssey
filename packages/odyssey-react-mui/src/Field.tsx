@@ -15,7 +15,10 @@ import { memo, ReactElement, useMemo } from "react";
 import {
   FormControl as MuiFormControl,
   FormLabel as MuiFormLabel,
+  List as MuiList,
+  ListItem as MuiListItem,
 } from "@mui/material";
+import { FormHelperText } from "@mui/material";
 import { FieldError } from "./FieldError";
 import { FieldHint } from "./FieldHint";
 import { FieldLabel } from "./FieldLabel";
@@ -31,6 +34,7 @@ export type FieldProps = {
    * If `error` is not undefined, the `input` will indicate an error.
    */
   errorMessage?: string;
+  errorMessages?: string[];
   /**
    * The field type determines how ARIA components are setup. It's important to use this to denote if you expect only one component (like a text field) or multiple (like a radio group).
    */
@@ -95,6 +99,7 @@ export type FieldProps = {
 
 const Field = ({
   errorMessage,
+  errorMessages,
   fieldType,
   hasVisibleLabel,
   hint,
@@ -163,6 +168,29 @@ const Field = ({
 
       {errorMessage && (
         <FieldError id={errorMessageElementId} text={errorMessage} />
+      )}
+
+      {errorMessages && (
+        <FormHelperText role="alert" error sx={{ textAlign: "start" }}>
+          <MuiList
+            disablePadding
+            dense
+            sx={{ listStyle: "disc", paddingInlineStart: 4 }}
+          >
+            {errorMessages.map((errorMessage) => (
+              <MuiListItem
+                disablePadding
+                dense
+                sx={{
+                  paddingLeft: 0,
+                  display: "list-item",
+                }}
+              >
+                {errorMessage}
+              </MuiListItem>
+            ))}
+          </MuiList>
+        </FormHelperText>
       )}
     </MuiFormControl>
   );

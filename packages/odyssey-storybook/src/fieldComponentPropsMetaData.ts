@@ -26,6 +26,16 @@ export const fieldComponentPropsMetaData: Partial<
       },
     },
   },
+  errorMessages: {
+    control: "array",
+    description:
+      "If `error` is not undefined, the `input` will indicate an error",
+    table: {
+      type: {
+        summary: "string",
+      },
+    },
+  },
   hint: {
     control: "text",
     description: "The helper text content",
