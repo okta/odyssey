@@ -89,9 +89,9 @@ const storybookMeta: Meta<typeof Radio> = {
         name: "string",
       },
     },
-    ref: {
+    inputRef: {
       control: null,
-      description: "Forwarded ref from of internal input element",
+      description: "The ref is forwarded to input element in the Radio",
       table: {
         type: {
           summary: "HTMLInputElement",
@@ -142,7 +142,7 @@ export const WithInputRef: StoryObj<typeof Radio> = {
         component="div"
         sx={{ display: "flex", flexFlow: "column", gap: "1rem" }}
       >
-        <Radio {...args} ref={ref} />
+        <Radio {...args} inputRef={ref} />
         <Box>
           <button onClick={handleGetRefInnerHtml}>Get ref Html</button>
         </Box>
