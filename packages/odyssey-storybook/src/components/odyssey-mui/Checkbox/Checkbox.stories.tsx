@@ -147,9 +147,9 @@ const storybookMeta: Meta<typeof Checkbox> = {
         },
       },
     },
-    ref: {
+    inputRef: {
       control: null,
-      description: "Forwarded ref from of internal input element",
+      description: "The ref is forwarded to input element in the Checkbox",
       table: {
         type: {
           summary: "HTMLInputElement",
@@ -321,7 +321,7 @@ export const WithInputRef: StoryObj<typeof Checkbox> = {
         component="div"
         sx={{ display: "flex", flexFlow: "column", gap: "1rem" }}
       >
-        <Checkbox {...args} ref={ref} />
+        <Checkbox {...args} inputRef={ref} />
         <Box>
           <button onClick={handleGetRefInnerHtml}>Get ref Html</button>
         </Box>
