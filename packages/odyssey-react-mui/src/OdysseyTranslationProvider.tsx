@@ -17,17 +17,22 @@ import { DefaultSupportedLanguages } from "./OdysseyTranslationProvider.types";
 import { i18n, defaultNS, resources } from "./i18n";
 import { I18nextProvider } from "react-i18next";
 
-export type TranslationOverrides = Record<
-  string,
-  Partial<(typeof resources)["en"]>
+export type OdysseyI18nResourceKeys = (typeof resources)["en"];
+
+export type TranslationOverrides<SupportedLanguages extends string> = Record<
+  SupportedLanguages,
+  Partial<OdysseyI18nResourceKeys>
 >;
 
-const mergeBundleOverrides = (
+const mergeBundleOverrides = <SupportedLanguages extends string>(
   languageCode: string,
-  translationOverrides: TranslationOverrides
+  translationOverrides: TranslationOverrides<SupportedLanguages>
 ) => {
   const bundle = resources[languageCode] || {};
-  const overrides = translationOverrides[languageCode];
+  const overrides =
+    translationOverrides[
+      languageCode as keyof TranslationOverrides<SupportedLanguages>
+    ];
   return {
     ...bundle,
     ...overrides,
@@ -39,7 +44,7 @@ export type OdysseyTranslationProviderProps<
 > = {
   children: ReactNode;
   languageCode?: SupportedLanguages | DefaultSupportedLanguages;
-  translationOverrides?: TranslationOverrides;
+  translationOverrides?: TranslationOverrides<SupportedLanguages>;
 };
 
 export const OdysseyTranslationProvider = <SupportedLanguages extends string>({
@@ -55,7 +60,10 @@ export const OdysseyTranslationProvider = <SupportedLanguages extends string>({
   useEffect(() => {
     if (translationOverrides) {
       Object.keys(translationOverrides).forEach((language) => {
-        const bundle = mergeBundleOverrides(language, translationOverrides);
+        const bundle = mergeBundleOverrides<SupportedLanguages>(
+          language,
+          translationOverrides
+        );
         i18n.addResourceBundle(language, defaultNS, bundle);
       });
     }
