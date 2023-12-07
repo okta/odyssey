@@ -71,6 +71,6 @@ const OdysseyProvider = <SupportedLanguages extends string>({
   </OdysseyCacheProvider>
 );
 
-const MemoizedThemeProvider = memo(OdysseyProvider);
+const MemoizedThemeProvider = memo(OdysseyProvider) as typeof OdysseyProvider;
 
 export { MemoizedThemeProvider as OdysseyProvider };
