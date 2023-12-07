@@ -28,11 +28,10 @@ export const fieldComponentPropsMetaData: Partial<
   },
   errorMessages: {
     control: "array",
-    description:
-      "If `error` is not undefined, the `input` will indicate an error",
+    description: "Prop to render multiple level errors",
     table: {
       type: {
-        summary: "string",
+        summary: "string[]",
       },
     },
   },

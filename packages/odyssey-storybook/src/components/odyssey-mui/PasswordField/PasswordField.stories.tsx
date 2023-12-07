@@ -219,7 +219,6 @@ export const Errors: StoryObj<typeof PasswordField> = {
       "A number",
       "A symbol",
     ],
-    // defaultValue: [""],
   },
 };
 

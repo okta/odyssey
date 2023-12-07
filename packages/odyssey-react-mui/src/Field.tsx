@@ -17,8 +17,8 @@ import {
   FormLabel as MuiFormLabel,
   List as MuiList,
   ListItem as MuiListItem,
+  FormHelperText as MuiFormHelperText,
 } from "@mui/material";
-import { FormHelperText } from "@mui/material";
 import { FieldError } from "./FieldError";
 import { FieldHint } from "./FieldHint";
 import { FieldLabel } from "./FieldLabel";
@@ -34,6 +34,9 @@ export type FieldProps = {
    * If `error` is not undefined, the `input` will indicate an error.
    */
   errorMessage?: string;
+  /**
+   * Prop to render multiple level errors
+   */
   errorMessages?: string[];
   /**
    * The field type determines how ARIA components are setup. It's important to use this to denote if you expect only one component (like a text field) or multiple (like a radio group).
@@ -171,7 +174,7 @@ const Field = ({
       )}
 
       {errorMessages && (
-        <FormHelperText role="alert" error sx={{ textAlign: "start" }}>
+        <MuiFormHelperText role="alert" error sx={{ textAlign: "start" }}>
           <MuiList
             disablePadding
             dense
@@ -190,7 +193,7 @@ const Field = ({
               </MuiListItem>
             ))}
           </MuiList>
-        </FormHelperText>
+        </MuiFormHelperText>
       )}
     </MuiFormControl>
   );
