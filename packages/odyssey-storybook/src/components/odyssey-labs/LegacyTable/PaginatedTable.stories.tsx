@@ -19,7 +19,7 @@ import {
 } from "@okta/odyssey-react-mui/labs";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 const storybookMeta: Meta = {
   title: "Labs Components/Legacy Table/PaginatedTable",
@@ -541,7 +541,7 @@ export const Pagination: StoryObj<PaginatedTableProps<Person>> = {
   },
   render: function C(args) {
     const countRef = useRef(15);
-    const dataArg = useMemo(() => args.data ?? [], [args.data]);
+    const dataArg = args.data ?? [];
 
     const [data, setData] = useState(dataArg.slice(0, countRef.current));
 
@@ -549,7 +549,7 @@ export const Pagination: StoryObj<PaginatedTableProps<Person>> = {
       countRef.current = countRef.current + 10;
 
       setData(dataArg.slice(0, Math.min(countRef.current, dataArg.length)));
-    }, [countRef, dataArg]);
+    }, [args.data, dataArg]);
 
     return (
       <PaginatedTable {...args} data={data} fetchMoreData={fetchMoreData} />
