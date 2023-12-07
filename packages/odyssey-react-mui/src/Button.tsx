@@ -145,8 +145,8 @@ const Button = ({
       </MuiButton>
     ),
     [
-      ariaDescribedBy,
       ariaLabel,
+      ariaDescribedBy,
       ariaLabelledBy,
       endIcon,
       id,
