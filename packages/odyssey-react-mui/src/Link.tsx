@@ -63,28 +63,26 @@ const Link = ({
   testId,
   variant,
   onClick,
-}: LinkProps) => {
-  return (
-    <MuiLink
-      data-se={testId}
-      href={href}
-      rel={rel}
-      target={target}
-      variant={variant}
-      onClick={onClick}
-    >
-      {icon && <span className="Link-icon">{icon}</span>}
+}: LinkProps) => (
+  <MuiLink
+    data-se={testId}
+    href={href}
+    rel={rel}
+    target={target}
+    variant={variant}
+    onClick={onClick}
+  >
+    {icon && <span className="Link-icon">{icon}</span>}
 
-      {children}
+    {children}
 
-      {target === "_blank" && (
-        <span className="Link-indicator" role="presentation">
-          <ExternalLinkIcon />
-        </span>
-      )}
-    </MuiLink>
-  );
-};
+    {target === "_blank" && (
+      <span className="Link-indicator" role="presentation">
+        <ExternalLinkIcon />
+      </span>
+    )}
+  </MuiLink>
+);
 
 const MemoizedLink = memo(Link);
 
