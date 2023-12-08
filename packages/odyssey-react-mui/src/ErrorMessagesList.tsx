@@ -20,12 +20,17 @@ export const ErrorMessagesList = ({
   errorMessages,
 }: ErrorMessagesListProps) => {
   return (
-    <MuiList disablePadding dense>
+    <MuiList
+      disablePadding
+      dense
+      sx={{ listStyle: "disc", paddingInlineStart: 4 }}
+    >
       {errorMessages.map((error) => (
         <MuiListItem
           disablePadding
           dense
           sx={{
+            display: "list-item",
             paddingInlineStart: 0,
           }}
         >
