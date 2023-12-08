@@ -21,7 +21,6 @@ import { FieldHint } from "./FieldHint";
 import { FieldLabel } from "./FieldLabel";
 import { Typography } from "./Typography";
 import { useFieldset } from "./FieldsetContext";
-import { ErrorMessagesList } from "./ErrorMessagesList";
 import { useTranslation } from "react-i18next";
 import { useUniqueId } from "./useUniqueId";
 
@@ -162,15 +161,8 @@ const Field = ({
         labelElementId,
       })}
 
-      {typeof errorMessage === "string" && (
+      {errorMessage && (
         <FieldError id={errorMessageElementId} text={errorMessage} />
-      )}
-
-      {Array.isArray(errorMessage) && (
-        <ErrorMessagesList
-          id={errorMessageElementId}
-          errorMessages={errorMessage}
-        />
       )}
     </MuiFormControl>
   );
