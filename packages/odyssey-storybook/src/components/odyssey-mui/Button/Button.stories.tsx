@@ -10,7 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useState, useRef } from "react";
 import { Box } from "@mui/material";
 import {
   Button,
@@ -164,15 +163,6 @@ const storybookMeta: Meta<typeof Button> = {
         required: true,
         name: "other",
         value: "radio",
-      },
-    },
-    ref: {
-      control: null,
-      description: "The ref is forwarded to the root element.",
-      table: {
-        type: {
-          summary: "HTMLElement",
-        },
       },
     },
   },
@@ -443,33 +433,4 @@ export const KitchenSink: StoryObj<ButtonProps> = {
       <Button ariaLabel="Add" startIcon={<AddIcon />} variant="primary" />
     </Box>
   ),
-};
-
-export const WithRef: StoryObj<typeof Button> = {
-  args: {
-    label: "Button with Ref",
-  },
-  render: function C(args) {
-    const [refHtml, setRefHtml] = useState("");
-    const ref = useRef<HTMLElement>(null);
-
-    const handleGetRefInnerHtml = () => {
-      setRefHtml(ref.current?.outerHTML as string);
-    };
-
-    return (
-      <Box
-        component="div"
-        sx={{ display: "flex", flexFlow: "column", gap: "1rem" }}
-      >
-        <Box>
-          <Button {...args} ref={ref} />
-        </Box>
-        <Box>
-          <button onClick={handleGetRefInnerHtml}>Get ref Html</button>
-        </Box>
-        <div>Ref HTML: {refHtml}</div>
-      </Box>
-    );
-  },
 };

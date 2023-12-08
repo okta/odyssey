@@ -12,11 +12,19 @@
 
 import { Button as MuiButton } from "@mui/material";
 import type { ButtonProps as MuiButtonProps } from "@mui/material";
-import { forwardRef, memo, ReactElement, useCallback } from "react";
+import {
+  forwardRef,
+  memo,
+  ReactElement,
+  useCallback,
+  useImperativeHandle,
+  useRef,
+} from "react";
 
 import { MuiPropsContext, useMuiProps } from "./MuiPropsContext";
 import { Tooltip } from "./Tooltip";
 import type { SeleniumProps } from "./SeleniumProps";
+import { FocusHandle } from "./@types/react-augment";
 
 export const buttonSizeValues = ["small", "medium", "large"] as const;
 export const buttonTypeValues = ["button", "submit", "reset"] as const;
@@ -104,7 +112,7 @@ export type ButtonProps = {
 ) &
   SeleniumProps;
 
-const Button = forwardRef<HTMLElement, ButtonProps>(
+const Button = forwardRef<FocusHandle, ButtonProps>(
   (
     {
       ariaDescribedBy,
@@ -126,6 +134,7 @@ const Button = forwardRef<HTMLElement, ButtonProps>(
     ref
   ) => {
     const muiProps = useMuiProps();
+    const buttonRef = useRef(null);
 
     const renderButton = useCallback(
       (muiProps) => (
@@ -144,7 +153,7 @@ const Button = forwardRef<HTMLElement, ButtonProps>(
           startIcon={startIcon}
           type={type}
           variant={variant}
-          ref={ref}
+          ref={buttonRef}
         >
           {label}
         </MuiButton>
@@ -164,8 +173,19 @@ const Button = forwardRef<HTMLElement, ButtonProps>(
         testId,
         type,
         variant,
-        ref,
       ]
+    );
+
+    useImperativeHandle(
+      ref,
+      () => {
+        return {
+          focus: () => {
+            (buttonRef.current! as HTMLButtonElement).focus();
+          },
+        };
+      },
+      []
     );
 
     return (
