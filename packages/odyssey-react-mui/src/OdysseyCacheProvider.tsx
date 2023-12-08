@@ -40,6 +40,8 @@ export type OdysseyCacheProviderProps = {
 const OdysseyCacheProvider = ({
   children,
   emotionRoot,
+  nonce,
+  stylisPlugins,
 }: OdysseyCacheProviderProps) => {
   const uniqueAlphabeticalId = useUniqueAlphabeticalId();
 
@@ -47,11 +49,12 @@ const OdysseyCacheProvider = ({
     return createCache({
       ...(emotionRoot && { container: emotionRoot }),
       key: uniqueAlphabeticalId,
-      nonce: window.cspNonce,
+      nonce: nonce ?? window.cspNonce,
       prepend: true,
       speedy: false, // <-- Needs to be set to false when shadow-dom is used!! https://github.com/emotion-js/emotion/issues/2053#issuecomment-713429122
+      ...(stylisPlugins && { stylisPlugins }),
     });
-  }, [emotionRoot, uniqueAlphabeticalId]);
+  }, [emotionRoot, nonce, stylisPlugins, uniqueAlphabeticalId]);
 
   return <CacheProvider value={emotionCache}>{children}</CacheProvider>;
 };
