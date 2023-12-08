@@ -827,45 +827,6 @@ export const components = ({
             marginInlineEnd: odysseyTokens.Spacing1,
           },
 
-          ...(ownerState.variant === "lamp" && {
-            paddingBlock: 0,
-            paddingInline: 0,
-            borderRadius: 0,
-            border: 0,
-            backgroundColor: "transparent",
-            color: odysseyTokens.TypographyColorBody,
-
-            "&::before": {
-              content: "''",
-              width: ".64em",
-              height: ".64em",
-              marginInlineEnd: odysseyTokens.Spacing2,
-              borderRadius: "100%",
-              backgroundColor: odysseyTokens.HueNeutral600,
-            },
-
-            [`&.${chipClasses.colorError}`]: {
-              "&::before": {
-                border: 0,
-                backgroundColor: odysseyTokens.PaletteDangerMain,
-              },
-            },
-
-            [`&.${chipClasses.colorSuccess}`]: {
-              "&::before": {
-                border: 0,
-                backgroundColor: odysseyTokens.PaletteSuccessMain,
-              },
-            },
-
-            [`&.${chipClasses.colorWarning}`]: {
-              "&::before": {
-                border: 0,
-                backgroundColor: odysseyTokens.HueYellow200,
-              },
-            },
-          }),
-
           ...(ownerState.variant === "pill" && {
             paddingBlock: odysseyTokens.Spacing1,
             paddingInline: odysseyTokens.Spacing2,
@@ -875,15 +836,17 @@ export const components = ({
             lineHeight: odysseyTokens.TypographyLineHeightOverline,
             backgroundColor: odysseyTokens.HueNeutral50,
             color: odysseyTokens.TypographyColorSubordinate,
-            fontSize: odysseyTokens.TypographySizeSubordinate,
+            fontSize: "0.71428571rem",
+            textTransform: "uppercase",
+            letterSpacing: "5%",
 
             "&::before": {
               content: "''",
-              width: ".64em",
-              height: ".64em",
-              marginInlineEnd: odysseyTokens.Spacing1,
+              width: "0.42857143rem",
+              height: "0.42857143rem",
+              marginInlineEnd: odysseyTokens.Spacing2,
               borderRadius: "100%",
-              backgroundColor: odysseyTokens.HueNeutral600,
+              backgroundColor: odysseyTokens.HueNeutral400,
             },
 
             [`&.${chipClasses.colorError}`]: {
