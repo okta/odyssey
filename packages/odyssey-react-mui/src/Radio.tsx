@@ -49,7 +49,9 @@ export type RadioProps = {
   /**
    * The ref is forwarded to input element in the Radio
    */
-  inputRef?: React.RefObject<HTMLInputElement>;
+  inputRef?: React.RefObject<{
+    focus: () => void;
+  } | null>;
 } & Pick<FieldComponentProps, "isDisabled" | "name"> &
   SeleniumProps;
 
@@ -71,11 +73,16 @@ const Radio = ({
     inputRef,
     () => {
       const element = ref.current as unknown as HTMLElement;
-      if (element.tagName === "INPUT") {
-        return element as HTMLInputElement;
+      const inputElement =
+        element.tagName === "INPUT"
+          ? element
+          : (element.querySelector("input") as HTMLInputElement);
+      if (!inputElement) {
+        return null;
       }
-      const inputElement = element.querySelector("input");
-      return inputElement as HTMLInputElement;
+      return {
+        focus: inputElement.focus,
+      };
     },
     []
   );
