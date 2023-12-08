@@ -10,7 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useRef } from "react";
 import {
   Checkbox,
   CheckboxProps,
@@ -19,7 +18,6 @@ import {
 import { Meta, StoryObj } from "@storybook/react";
 import { userEvent, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
-import { Box } from "@mui/material";
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -144,15 +142,6 @@ const storybookMeta: Meta<typeof Checkbox> = {
       table: {
         type: {
           summary: "string",
-        },
-      },
-    },
-    inputRef: {
-      control: null,
-      description: "The ref is forwarded to input element in the Checkbox",
-      table: {
-        type: {
-          summary: "HTMLInputElement",
         },
       },
     },
@@ -300,33 +289,6 @@ export const Controlled: StoryObj<typeof Checkbox> = {
         isDefaultChecked={undefined}
         onChange={onChange}
       />
-    );
-  },
-};
-
-export const WithInputRef: StoryObj<typeof Checkbox> = {
-  args: {
-    label: "Display input html of forwarded inputRef",
-  },
-  render: function C(args) {
-    const [refHtml, setRefHtml] = useState("");
-    const ref = useRef<HTMLInputElement>(null);
-
-    const handleGetRefInnerHtml = () => {
-      setRefHtml(ref.current?.outerHTML as string);
-    };
-
-    return (
-      <Box
-        component="div"
-        sx={{ display: "flex", flexFlow: "column", gap: "1rem" }}
-      >
-        <Checkbox {...args} inputRef={ref} />
-        <Box>
-          <button onClick={handleGetRefInnerHtml}>Get ref Html</button>
-        </Box>
-        <div>Ref HTML: {refHtml}</div>
-      </Box>
     );
   },
 };
