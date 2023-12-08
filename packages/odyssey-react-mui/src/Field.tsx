@@ -33,11 +33,7 @@ export type FieldProps = {
   /**
    * If `error` is not undefined, the `input` will indicate an error.
    */
-  errorMessage?: string;
-  /**
-   * Prop to render multiple level errors
-   */
-  errorMessages?: string[];
+  errorMessage?: string | string[];
   /**
    * The field type determines how ARIA components are setup. It's important to use this to denote if you expect only one component (like a text field) or multiple (like a radio group).
    */
@@ -102,7 +98,6 @@ export type FieldProps = {
 
 const Field = ({
   errorMessage,
-  errorMessages,
   fieldType,
   hasVisibleLabel,
   hint,
@@ -169,27 +164,22 @@ const Field = ({
         labelElementId,
       })}
 
-      {errorMessage && (
+      {typeof errorMessage === "string" && (
         <FieldError id={errorMessageElementId} text={errorMessage} />
       )}
 
-      {errorMessages && (
+      {Array.isArray(errorMessage) && (
         <MuiFormHelperText role="alert" error sx={{ textAlign: "start" }}>
-          <MuiList
-            disablePadding
-            dense
-            sx={{ listStyle: "disc", paddingInlineStart: 4 }}
-          >
-            {errorMessages.map((errorMessage) => (
+          <MuiList disablePadding dense>
+            {errorMessage.map((error) => (
               <MuiListItem
                 disablePadding
                 dense
                 sx={{
                   paddingLeft: 0,
-                  display: "list-item",
                 }}
               >
-                {errorMessage}
+                {error}
               </MuiListItem>
             ))}
           </MuiList>

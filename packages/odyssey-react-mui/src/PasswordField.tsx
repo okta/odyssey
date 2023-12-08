@@ -80,7 +80,6 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       autoCompleteType,
       defaultValue,
       errorMessage,
-      errorMessages,
       hasInitialFocus,
       hint,
       id: idOverride,
@@ -196,7 +195,6 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
     return (
       <Field
         errorMessage={errorMessage}
-        errorMessages={errorMessages}
         fieldType="single"
         hasVisibleLabel
         hint={hint}

@@ -14,11 +14,7 @@ export type FieldComponentProps = {
   /**
    * If `error` is not undefined, the `input` will indicate an error.
    */
-  errorMessage?: string;
-  /**
-   * Prop to render multiple level errors
-   */
-  errorMessages?: string[];
+  errorMessage?: string | string[];
   /**
    * The helper text content.
    */

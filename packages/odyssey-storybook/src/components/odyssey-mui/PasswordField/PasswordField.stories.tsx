@@ -50,7 +50,6 @@ const storybookMeta: Meta<typeof PasswordField> = {
       },
     },
     errorMessage: fieldComponentPropsMetaData.errorMessage,
-    errorMessages: fieldComponentPropsMetaData.errorMessages,
     hasInitialFocus: {
       control: "boolean",
       description: "If `true`, the component will receive focus automatically",
@@ -213,7 +212,7 @@ export const Error: StoryObj<typeof PasswordField> = {
 
 export const Errors: StoryObj<typeof PasswordField> = {
   args: {
-    errorMessages: [
+    errorMessage: [
       "At least 8 chars",
       "An uppercase letter",
       "A number",
