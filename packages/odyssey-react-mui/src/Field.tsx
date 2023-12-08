@@ -15,15 +15,13 @@ import { memo, ReactElement, useMemo } from "react";
 import {
   FormControl as MuiFormControl,
   FormLabel as MuiFormLabel,
-  List as MuiList,
-  ListItem as MuiListItem,
-  FormHelperText as MuiFormHelperText,
 } from "@mui/material";
 import { FieldError } from "./FieldError";
 import { FieldHint } from "./FieldHint";
 import { FieldLabel } from "./FieldLabel";
 import { Typography } from "./Typography";
 import { useFieldset } from "./FieldsetContext";
+import { ErrorMessagesList } from "./ErrorMessagesList";
 import { useTranslation } from "react-i18next";
 import { useUniqueId } from "./useUniqueId";
 
@@ -169,21 +167,10 @@ const Field = ({
       )}
 
       {Array.isArray(errorMessage) && (
-        <MuiFormHelperText role="alert" error sx={{ textAlign: "start" }}>
-          <MuiList disablePadding dense>
-            {errorMessage.map((error) => (
-              <MuiListItem
-                disablePadding
-                dense
-                sx={{
-                  paddingLeft: 0,
-                }}
-              >
-                {error}
-              </MuiListItem>
-            ))}
-          </MuiList>
-        </MuiFormHelperText>
+        <ErrorMessagesList
+          id={errorMessageElementId}
+          errorMessages={errorMessage}
+        />
       )}
     </MuiFormControl>
   );
