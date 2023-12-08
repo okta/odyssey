@@ -183,7 +183,7 @@ const Select = <
       ).querySelector("input");
       return {
         focus: () => {
-          inputElement?.focus();
+          inputElement && inputElement.focus();
         },
       };
     },

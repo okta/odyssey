@@ -124,7 +124,7 @@ const Checkbox = ({
         element.tagName === "INPUT" ? element : element.querySelector("input");
       return {
         focus: () => {
-          inputElement?.focus();
+          inputElement && inputElement.focus();
         },
       };
     },

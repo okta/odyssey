@@ -126,7 +126,7 @@ const Typography = forwardRef<FocusHandle, TypographyProps>(
       () => {
         return {
           focus: () => {
-            typographyRef.current?.focus();
+            typographyRef.current && typographyRef.current.focus();
           },
         };
       },
