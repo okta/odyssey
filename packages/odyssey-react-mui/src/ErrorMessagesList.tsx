@@ -10,36 +10,28 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {
-  FormHelperText as MuiFormHelperText,
-  List as MuiList,
-  ListItem as MuiListItem,
-} from "@mui/material";
+import { List as MuiList, ListItem as MuiListItem } from "@mui/material";
 
 export type ErrorMessagesListProps = {
-  id?: string;
   errorMessages: string[];
 };
 
 export const ErrorMessagesList = ({
-  id,
   errorMessages,
 }: ErrorMessagesListProps) => {
   return (
-    <MuiFormHelperText id={id} role="alert" error sx={{ textAlign: "start" }}>
-      <MuiList disablePadding dense>
-        {errorMessages.map((error) => (
-          <MuiListItem
-            disablePadding
-            dense
-            sx={{
-              paddingInlineStart: 0,
-            }}
-          >
-            {error}
-          </MuiListItem>
-        ))}
-      </MuiList>
-    </MuiFormHelperText>
+    <MuiList disablePadding dense>
+      {errorMessages.map((error) => (
+        <MuiListItem
+          disablePadding
+          dense
+          sx={{
+            paddingInlineStart: 0,
+          }}
+        >
+          {error}
+        </MuiListItem>
+      ))}
+    </MuiList>
   );
 };
