@@ -10,8 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useRef } from "react";
-import { Box } from "@mui/material";
 import { Meta, StoryObj } from "@storybook/react";
 import { Select, SelectProps } from "@okta/odyssey-react-mui";
 import { userEvent, waitFor, screen } from "@storybook/testing-library";
@@ -209,15 +207,6 @@ const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
         },
       },
     },
-    inputRef: {
-      control: null,
-      description: "The ref is forwarded to the root element.",
-      table: {
-        type: {
-          summary: "HTMLElement",
-        },
-      },
-    },
   },
   args: {
     hint: "Select your destination in the Sol system.",
@@ -395,33 +384,5 @@ export const ControlledPreselectedMultipleSelect: StoryObj<typeof Select> = {
       []
     );
     return <Select {...props} value={localValue} onChange={onChange} />;
-  },
-};
-
-export const WithRef: StoryObj<typeof Select> = {
-  args: {
-    value: [],
-    hasMultipleChoices: true,
-  },
-  render: function C(args) {
-    const [refHtml, setRefHtml] = useState("");
-    const ref = useRef<HTMLInputElement>(null);
-
-    const handleGetRefInnerHtml = () => {
-      setRefHtml(ref.current?.outerHTML as string);
-    };
-
-    return (
-      <Box
-        component="div"
-        sx={{ display: "flex", flexFlow: "column", gap: "1rem" }}
-      >
-        <Select {...args} inputRef={ref} />
-        <Box>
-          <button onClick={handleGetRefInnerHtml}>Get ref Html</button>
-        </Box>
-        <div>Ref HTML: {refHtml}</div>
-      </Box>
-    );
   },
 };

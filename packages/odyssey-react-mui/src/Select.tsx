@@ -93,7 +93,9 @@ export type SelectProps<
   /**
    * The ref is forwarded to input element in the Select
    */
-  inputRef: React.RefObject<HTMLInputElement>;
+  inputRef: React.RefObject<{
+    focus: () => void;
+  } | null>;
 } & Pick<
   FieldComponentProps,
   | "errorMessage"
@@ -180,7 +182,12 @@ const Select = <
       const inputElement = (
         ref.current as unknown as HTMLElement
       ).querySelector("input");
-      return inputElement as HTMLInputElement;
+      if (!inputElement) {
+        return null;
+      }
+      return {
+        focus: inputElement.focus,
+      };
     },
     []
   );
