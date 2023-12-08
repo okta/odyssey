@@ -463,7 +463,9 @@ const DataTable = ({
     onSortingChange: handleSortingChange,
     onRowSelectionChange: handleRowSelectionChange,
     enableRowActions:
-      hasRowReordering || rowActionButtons || rowActionMenuItems ? true : false,
+      hasRowReordering === true || rowActionButtons || rowActionMenuItems
+        ? true
+        : false,
     positionActionsColumn: "last",
 
     muiTableHeadCellProps: ({ column }) => ({

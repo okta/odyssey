@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.1](https://github.com/okta/odyssey/compare/v1.9.0...v1.9.1) (2023-12-05)
+
+### Bug Fixes
+
+- fixed typing for shadow root element. updated tests to reflect changes ([#2048](https://github.com/okta/odyssey/issues/2048)) ([3ae92a1](https://github.com/okta/odyssey/commit/3ae92a1b91451c6bb9bb2a512571fbbe4b833022))
+
+## [1.9.0](https://github.com/okta/odyssey/compare/v1.8.2...v1.9.0) (2023-12-04)
+
+### Features
+
+- add on blur for radio and checkbox OKTA-670768 ([#2049](https://github.com/okta/odyssey/issues/2049)) ([a08fe5d](https://github.com/okta/odyssey/commit/a08fe5dcbb9805e6466f00d709ddb0e32607d0d2))
+
+## [1.8.2](https://github.com/okta/odyssey/compare/v1.8.1...v1.8.2) (2023-12-01)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.8.1](https://github.com/okta/odyssey/compare/v1.8.0...v1.8.1) (2023-12-01)
+
+### Bug Fixes
+
+- support controlled and uncontrolled states in form components ([#2045](https://github.com/okta/odyssey/issues/2045)) ([eacf2b4](https://github.com/okta/odyssey/commit/eacf2b496e0650388c8f0bc6015c88a3fc1ef47d))
+
+## [1.8.0](https://github.com/okta/odyssey/compare/v1.7.1...v1.8.0) (2023-12-01)
+
+### Features
+
+- add hint prop to Checkbox ([#2050](https://github.com/okta/odyssey/issues/2050)) ([1fdc55e](https://github.com/okta/odyssey/commit/1fdc55e667c89b7768f300a160d550a62e6e8eb0))
+
+## [1.7.1](https://github.com/okta/odyssey/compare/v1.7.0...v1.7.1) (2023-12-01)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.7.0](https://github.com/okta/odyssey/compare/v1.6.21...v1.7.0) (2023-12-01)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
 ## [1.6.21](https://github.com/okta/odyssey/compare/v1.6.20...v1.6.21) (2023-11-28)
 
 **Note:** Version bump only for package @okta/odyssey-react-mui

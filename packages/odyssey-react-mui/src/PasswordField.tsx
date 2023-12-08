@@ -17,6 +17,7 @@ import {
   forwardRef,
   memo,
   useCallback,
+  useRef,
   useState,
 } from "react";
 
@@ -25,6 +26,7 @@ import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
 import { useTranslation } from "react-i18next";
+import { getControlState, useInputValues } from "./inputUtils";
 
 export type PasswordFieldProps = {
   /**
@@ -33,6 +35,10 @@ export type PasswordFieldProps = {
    * You can learn more about it [following the specification](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill).
    */
   autoCompleteType?: "current-password" | "new-password";
+  /**
+   * initial value for input. Use when component in uncontrolled.
+   */
+  defaultValue?: string;
   /**
    * If `true`, the component will receive focus automatically.
    */
@@ -62,7 +68,7 @@ export type PasswordFieldProps = {
    */
   placeholder?: string;
   /**
-   * The value of the `input` element, required for a controlled component.
+   * The value of the `input` element. Use when component is controlled.
    */
   value?: string;
 } & FieldComponentProps &
@@ -72,17 +78,19 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
   (
     {
       autoCompleteType,
+      defaultValue,
       errorMessage,
       hasInitialFocus,
       hint,
       id: idOverride,
       isDisabled = false,
+      isFullWidth = false,
       isOptional = false,
       hasShowPassword = true,
       isReadOnly,
       label,
       name: nameOverride,
-      onChange,
+      onChange: onChangeProp,
       onFocus,
       onBlur,
       placeholder,
@@ -100,9 +108,31 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       );
     }, []);
 
+    const controlledStateRef = useRef(
+      getControlState({
+        controlledValue: value,
+        uncontrolledValue: defaultValue,
+      })
+    );
+    const inputValues = useInputValues({
+      defaultValue,
+      value,
+      controlState: controlledStateRef.current,
+    });
+
+    const onChange = useCallback<
+      ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>
+    >(
+      (event) => {
+        onChangeProp?.(event);
+      },
+      [onChangeProp]
+    );
+
     const renderFieldComponent = useCallback(
       ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
         <InputBase
+          {...inputValues}
           aria-describedby={ariaDescribedBy}
           autoComplete={inputType === "password" ? autoCompleteType : "off"}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
@@ -140,12 +170,12 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           ref={ref}
           required={!isOptional}
           type={inputType}
-          value={value}
         />
       ),
       [
         autoCompleteType,
         hasInitialFocus,
+        inputValues,
         t,
         togglePasswordVisibility,
         inputType,
@@ -159,7 +189,6 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
         hasShowPassword,
         ref,
         testId,
-        value,
       ]
     );
 
@@ -171,6 +200,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
         hint={hint}
         id={idOverride}
         isDisabled={isDisabled}
+        isFullWidth={isFullWidth}
         isOptional={isOptional}
         label={label}
         renderFieldComponent={renderFieldComponent}

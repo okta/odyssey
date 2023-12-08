@@ -461,3 +461,74 @@ export const Default: StoryObj<DataTableProps> = {
     );
   },
 };
+
+export const NoActions: StoryObj<DataTableProps> = {
+  args: {
+    hasChangeableDensity: true,
+    hasColumnResizing: true,
+    hasColumnVisibility: true,
+    hasFilters: true,
+    hasPagination: true,
+    hasRowSelection: true,
+    hasSearch: true,
+    hasSorting: true,
+    hasRowReordering: false,
+    paginationType: "paged",
+  },
+  render: function C(props) {
+    const data = incomingData;
+
+    const fetchData = ({
+      page,
+      resultsPerPage,
+      search,
+      filters,
+      sort,
+    }: {
+      page?: number;
+      resultsPerPage?: number;
+      search?: string;
+      filters?: DataFilter[];
+      sort?: MRT_SortingState;
+    }) => {
+      return processData({
+        initialData: data,
+        page: page,
+        resultsPerPage: resultsPerPage,
+        search: search,
+        filters: filters,
+        sort: sort,
+      });
+    };
+
+    const startingData = fetchData({});
+
+    return (
+      <Box>
+        <Callout severity="info">
+          Data in this table is procedurally-generated and will change on each
+          page refresh. Any resemblance to real information is coincidental.
+        </Callout>
+        <DataTable
+          columns={columns}
+          data={startingData}
+          totalRows={data.length}
+          getRowId={({ id }) => id}
+          fetchDataFn={fetchData}
+          hasSearchSubmitButton={true}
+          hasChangeableDensity={props.hasChangeableDensity}
+          hasColumnResizing={props.hasColumnResizing}
+          hasColumnVisibility={props.hasColumnVisibility}
+          hasFilters={props.hasFilters}
+          hasPagination={props.hasPagination}
+          hasRowSelection={props.hasRowSelection}
+          hasRowReordering={props.hasRowReordering}
+          hasSearch={props.hasSearch}
+          hasSorting={props.hasSorting}
+          paginationType={props.paginationType}
+          onRowSelectionChange={(rowSelection) => console.log(rowSelection)}
+        />
+      </Box>
+    );
+  },
+};

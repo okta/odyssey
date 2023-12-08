@@ -94,10 +94,28 @@ const storybookMeta: Meta<typeof Checkbox> = {
         },
       },
     },
+    hint: {
+      control: "text",
+      description: "The helper text content",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     name: fieldComponentPropsMetaData.name,
     onChange: {
       control: null,
       description: "Callback fired when the checkbox value changes",
+      table: {
+        type: {
+          summary: "func",
+        },
+      },
+    },
+    onBlur: {
+      control: null,
+      description: "Callback fired when the blur event happens",
       table: {
         type: {
           summary: "func",
@@ -137,7 +155,7 @@ export default storybookMeta;
 const checkTheBox =
   ({ canvasElement, step }: PlaywrightProps<CheckboxProps>) =>
   async (actionName: string) => {
-    await step("check the box", async () => {
+    await step("check the box", async ({ args }) => {
       const canvas = within(canvasElement);
       const checkBox = canvas.getByRole("checkbox") as HTMLInputElement;
       if (checkBox) {
@@ -145,6 +163,8 @@ const checkTheBox =
       }
       userEvent.tab();
       expect(checkBox).toBeChecked();
+      userEvent.click(canvasElement);
+      expect(args.onBlur).toHaveBeenCalled();
       axeRun(actionName);
     });
   };
@@ -152,6 +172,7 @@ const checkTheBox =
 export const Default: StoryObj<typeof Checkbox> = {
   args: {
     label: "Enable warp drive recalibration",
+    isDefaultChecked: false,
   },
   play: async ({ canvasElement, step }) => {
     checkTheBox({ canvasElement, step })("Checkbox Default");
@@ -170,6 +191,7 @@ export const Required: StoryObj<typeof Checkbox> = {
   args: {
     label: "I agree to the terms and conditions",
     isRequired: true,
+    isDefaultChecked: false,
   },
   play: async ({ canvasElement, step }) => {
     checkTheBox({ canvasElement, step })("Checkbox Required");
@@ -195,6 +217,7 @@ export const Disabled: StoryObj<typeof Checkbox> = {
   args: {
     label: "Pre-flight systems check complete",
     isDisabled: true,
+    isDefaultChecked: false,
   },
 };
 
@@ -218,20 +241,39 @@ export const Invalid: StoryObj<typeof Checkbox> = {
   args: {
     label: "Pre-flight systems check complete",
     validity: "invalid",
+    isDefaultChecked: false,
   },
   play: async ({ canvasElement, step }) => {
     checkTheBox({ canvasElement, step })("Checkbox Disabled");
   },
 };
 
-export const Uncontrolled: StoryObj<typeof Checkbox> = {
+export const Hint: StoryObj<typeof Checkbox> = {
+  parameters: {
+    docs: {
+      description: {
+        story: "hint provides helper text to the Checkbox",
+      },
+    },
+  },
   args: {
-    label: "Pre-flight systems check complete",
-    isDefaultChecked: true,
+    label: "I agree to the terms and conditions",
+    hint: "Really helpful hint",
+  },
+  play: async ({ canvasElement, step }) => {
+    checkTheBox({ canvasElement, step })("Checkbox Hint");
   },
 };
 
 export const Controlled: StoryObj<typeof Checkbox> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "When the component is controlled, the parent component is responsible for managing the state of `Checkbox`. `onChange` should be used to listen for component changes and to update the values in the `value` prop.",
+      },
+    },
+  },
   args: {
     label: "Pre-flight systems check complete",
     isChecked: true,

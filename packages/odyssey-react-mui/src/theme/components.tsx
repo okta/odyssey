@@ -53,7 +53,7 @@ export const components = ({
   shadowDomElement,
 }: {
   odysseyTokens: DesignTokens;
-  shadowDomElement?: HTMLDivElement;
+  shadowDomElement?: HTMLElement;
 }): ThemeOptions["components"] => {
   return {
     MuiAccordion: {
@@ -2208,7 +2208,6 @@ export const components = ({
       styleOverrides: {
         root: ({ theme, ownerState }) => ({
           ...theme.typography.body1,
-          maxWidth: odysseyTokens.TypographyLineLengthMax,
           borderBottom: `${odysseyTokens.BorderWidthMain} ${odysseyTokens.BorderStyleMain} ${odysseyTokens.HueNeutral100}`,
           textAlign: "start",
           verticalAlign: "baseline",
@@ -2333,8 +2332,10 @@ export const components = ({
           },
 
           [`& .${dividerClasses.vertical}`]: {
-            borderStyle: "dotted",
+            borderStyle: "none none none dotted",
             borderWidth: 2,
+            borderRadius: 0,
+            marginRight: 2,
           },
         }),
       },
@@ -2352,6 +2353,7 @@ export const components = ({
           marginBlockEnd: odysseyTokens.Spacing4,
           marginInline: 0,
           overflowX: "auto",
+          display: "block !important",
 
           "&:last-child": {
             marginBlock: 0,

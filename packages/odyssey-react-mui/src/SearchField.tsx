@@ -10,7 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useState, useEffect } from "react";
 import { InputAdornment, InputBase, IconButton } from "@mui/material";
 import {
   ChangeEventHandler,
@@ -19,12 +18,14 @@ import {
   InputHTMLAttributes,
   memo,
   useCallback,
+  useRef,
 } from "react";
 
 import { CloseCircleFilledIcon, SearchIcon } from "./icons.generated";
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
+import { getControlState, useInputValues } from "./inputUtils";
 
 export type SearchFieldProps = {
   /**
@@ -33,6 +34,10 @@ export type SearchFieldProps = {
    * You can learn more about it [following the specification](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill).
    */
   autoCompleteType?: InputHTMLAttributes<HTMLInputElement>["autoComplete"];
+  /**
+   * The value of the `input` element to use when uncontrolled.
+   */
+  defaultValue?: string;
   /**
    * If `true`, the component will receive focus automatically.
    */
@@ -70,19 +75,21 @@ export type SearchFieldProps = {
    */
   placeholder?: string;
   /**
-   * The value of the `input` element, required for a controlled component.
+   * The value of the `input` element, to use when controlled.
    */
   value?: string;
-} & Pick<FieldComponentProps, "id" | "isDisabled" | "name"> &
+} & Pick<FieldComponentProps, "id" | "isDisabled" | "name" | "isFullWidth"> &
   SeleniumProps;
 
 const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
   (
     {
       autoCompleteType,
+      defaultValue,
       hasInitialFocus,
       id: idOverride,
       isDisabled = false,
+      isFullWidth = false,
       label,
       name: nameOverride,
       onChange: onChangeProp,
@@ -91,42 +98,45 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       onClear: onClearProp,
       placeholder,
       testId,
-      value: controlledValue,
+      value,
     },
     ref
   ) => {
-    const [uncontrolledValue, setUncontrolledValue] = useState("");
-
     const onChange: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> =
       useCallback(
         (event) => {
-          setUncontrolledValue(event.currentTarget.value);
           onChangeProp?.(event);
         },
         [onChangeProp]
       );
 
     const onClear = useCallback(() => {
-      setUncontrolledValue("");
       onClearProp?.();
     }, [onClearProp]);
 
-    useEffect(() => {
-      if (controlledValue !== undefined) {
-        setUncontrolledValue(controlledValue);
-      }
-    }, [controlledValue]);
+    const controlledStateRef = useRef(
+      getControlState({
+        controlledValue: value,
+        uncontrolledValue: defaultValue,
+      })
+    );
+    const inputValues = useInputValues({
+      defaultValue,
+      value,
+      controlState: controlledStateRef.current,
+    });
 
     const renderFieldComponent = useCallback(
       ({ ariaDescribedBy, id }) => (
         <InputBase
+          {...inputValues}
           aria-describedby={ariaDescribedBy}
           autoComplete={autoCompleteType}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus={hasInitialFocus}
           data-se={testId}
           endAdornment={
-            uncontrolledValue && (
+            defaultValue && (
               <InputAdornment position="end">
                 <IconButton
                   aria-label="Clear"
@@ -152,15 +162,13 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
             </InputAdornment>
           }
           type="search"
-          value={
-            controlledValue === undefined ? uncontrolledValue : controlledValue
-          }
         />
       ),
       [
         autoCompleteType,
-        controlledValue,
+        defaultValue,
         hasInitialFocus,
+        inputValues,
         isDisabled,
         nameOverride,
         onBlur,
@@ -170,7 +178,6 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         placeholder,
         ref,
         testId,
-        uncontrolledValue,
       ]
     );
 
@@ -180,6 +187,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         hasVisibleLabel={false}
         id={idOverride}
         isDisabled={isDisabled}
+        isFullWidth={isFullWidth}
         isOptional={true}
         label={label}
         renderFieldComponent={renderFieldComponent}

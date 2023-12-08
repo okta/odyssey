@@ -12,11 +12,7 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import { within } from "@storybook/testing-library";
-import {
-  PasswordField,
-  PasswordFieldProps,
-  odysseyTranslate,
-} from "@okta/odyssey-react-mui";
+import { PasswordField, odysseyTranslate } from "@okta/odyssey-react-mui";
 import { userEvent, waitFor } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 
@@ -24,8 +20,9 @@ import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaDat
 import { axeRun } from "../../../axe-util";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { useCallback, useState } from "react";
 
-const storybookMeta: Meta<PasswordFieldProps> = {
+const storybookMeta: Meta<typeof PasswordField> = {
   title: "MUI Components/Forms/PasswordField",
   component: PasswordField,
   argTypes: {
@@ -36,6 +33,19 @@ const storybookMeta: Meta<PasswordFieldProps> = {
       table: {
         type: {
           summary: "string",
+        },
+      },
+    },
+    defaultValue: {
+      control: "text",
+      description:
+        "The value of the `input` element. Use when the component is not controlled",
+      table: {
+        type: {
+          summary: "string",
+        },
+        defaultValue: {
+          summary: undefined,
         },
       },
     },
@@ -64,6 +74,7 @@ const storybookMeta: Meta<PasswordFieldProps> = {
     hint: fieldComponentPropsMetaData.hint,
     id: fieldComponentPropsMetaData.id,
     isDisabled: fieldComponentPropsMetaData.isDisabled,
+    isFullWidth: fieldComponentPropsMetaData.isFullWidth,
     isOptional: fieldComponentPropsMetaData.isOptional,
     isReadOnly: fieldComponentPropsMetaData.isReadOnly,
     label: {
@@ -121,7 +132,7 @@ const storybookMeta: Meta<PasswordFieldProps> = {
     value: {
       control: "text",
       description:
-        "The value of the `input` element, required for a controlled component",
+        "The value of the `input` element. Use when component is controlled",
       table: {
         type: {
           summary: "string",
@@ -141,7 +152,7 @@ const storybookMeta: Meta<PasswordFieldProps> = {
 
 export default storybookMeta;
 
-export const Default: StoryObj<PasswordFieldProps> = {
+export const Default: StoryObj<typeof PasswordField> = {
   play: async ({ canvasElement, step }) => {
     await step("toggle password", async () => {
       const canvas = within(canvasElement);
@@ -178,7 +189,7 @@ export const Default: StoryObj<PasswordFieldProps> = {
   },
 };
 
-export const Disabled: StoryObj<PasswordFieldProps> = {
+export const Disabled: StoryObj<typeof PasswordField> = {
   parameters: {
     docs: {
       description: {
@@ -188,25 +199,28 @@ export const Disabled: StoryObj<PasswordFieldProps> = {
   },
   args: {
     isDisabled: true,
-    value: "PasswordValue",
+    defaultValue: "PasswordValue",
   },
 };
 
-export const Error: StoryObj<PasswordFieldProps> = {
+export const Error: StoryObj<typeof PasswordField> = {
   args: {
     errorMessage: "This password is incorrect",
+    defaultValue: "",
   },
 };
 
-export const Hint: StoryObj<PasswordFieldProps> = {
+export const Hint: StoryObj<typeof PasswordField> = {
   args: {
     hint: "Your first pet's name",
+    defaultValue: "",
   },
 };
 
-export const NoShowPassword: StoryObj<PasswordFieldProps> = {
+export const NoShowPassword: StoryObj<typeof PasswordField> = {
   args: {
     hasShowPassword: false,
+    defaultValue: "",
   },
   play: async ({ canvasElement, step }) => {
     await step("toggle password", async () => {
@@ -224,13 +238,14 @@ export const NoShowPassword: StoryObj<PasswordFieldProps> = {
   },
 };
 
-export const Optional: StoryObj<PasswordFieldProps> = {
+export const Optional: StoryObj<typeof PasswordField> = {
   args: {
     isOptional: true,
+    defaultValue: "",
   },
 };
 
-export const ReadOnly: StoryObj<PasswordFieldProps> = {
+export const ReadOnly: StoryObj<typeof PasswordField> = {
   parameters: {
     docs: {
       description: {
@@ -240,6 +255,64 @@ export const ReadOnly: StoryObj<PasswordFieldProps> = {
   },
   args: {
     isReadOnly: true,
+    defaultValue: "PasswordValue",
+  },
+};
+
+export const Controlled: StoryObj<typeof PasswordField> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Provide `value` when component is to be controlled by parent. Update `value` based on updates from `onChange` event.",
+      },
+    },
+  },
+  args: {
+    value: "",
+  },
+  render: function C(props) {
+    const [localValue, setLocalValue] = useState("");
+    const onChange = useCallback(
+      (event) => setLocalValue(event?.target.value),
+      []
+    );
+    return (
+      <PasswordField
+        {...props}
+        defaultValue={undefined}
+        value={localValue}
+        onChange={onChange}
+      />
+    );
+  },
+};
+
+export const ControlledDefaultInput: StoryObj<typeof PasswordField> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Provide `value` when component is to be controlled by parent. Update `value` based on updates from `onChange` event.",
+      },
+    },
+  },
+  args: {
     value: "PasswordValue",
+  },
+  render: function C(props) {
+    const [localValue, setLocalValue] = useState("PasswordValue");
+    const onChange = useCallback(
+      (event) => setLocalValue(event?.target.value),
+      []
+    );
+    return (
+      <PasswordField
+        {...props}
+        defaultValue={undefined}
+        value={localValue}
+        onChange={onChange}
+      />
+    );
   },
 };

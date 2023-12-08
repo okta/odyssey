@@ -11,17 +11,19 @@
  */
 
 import { useTranslation } from "react-i18next";
-import { memo, useCallback, useMemo } from "react";
+import { memo, useCallback, useMemo, useRef } from "react";
 import {
   Checkbox as MuiCheckbox,
   CheckboxProps as MuiCheckboxProps,
   FormControlLabel,
+  FormControlLabelProps as MuiFormControlLabelProps,
+  FormHelperText,
 } from "@mui/material";
 
 import { FieldComponentProps } from "./FieldComponentProps";
 import { Typography } from "./Typography";
 import type { SeleniumProps } from "./SeleniumProps";
-import { useControlledState } from "./useControlledState";
+import { ComponentControlledState, getControlState } from "./inputUtils";
 import { CheckedFieldProps } from "./FormCheckedProps";
 
 export const checkboxValidityValues = ["valid", "invalid", "inherit"] as const;
@@ -56,6 +58,10 @@ export type CheckboxProps = {
    */
   label?: string;
   /**
+   * The helper text content
+   */
+  hint?: string;
+  /**
    * The checkbox validity, if different from its enclosing group. Defaults to "inherit".
    */
   validity?: (typeof checkboxValidityValues)[number];
@@ -63,6 +69,10 @@ export type CheckboxProps = {
    * The value attribute of the Checkbox
    */
   value?: string;
+  /**
+   * Callback fired when the blur event happens. Provides event value.
+   */
+  onBlur?: MuiFormControlLabelProps["onBlur"];
 } & Pick<FieldComponentProps, "id" | "isDisabled" | "name"> &
   CheckedFieldProps<MuiCheckboxProps> &
   SeleniumProps;
@@ -77,43 +87,62 @@ const Checkbox = ({
   isIndeterminate,
   isRequired,
   label: labelProp,
+  hint,
   name: nameOverride,
   onChange: onChangeProp,
+  onBlur: onBlurProp,
   testId,
   validity = "inherit",
   value,
 }: CheckboxProps) => {
   const { t } = useTranslation();
-  const [isLocalChecked, setIsLocalChecked] = useControlledState({
-    controlledValue: isChecked,
-    uncontrolledValue: isDefaultChecked,
-  });
+  const controlledStateRef = useRef(
+    getControlState({
+      controlledValue: isChecked,
+      uncontrolledValue: isDefaultChecked,
+    })
+  );
+  const inputValues = useMemo(() => {
+    if (controlledStateRef.current === ComponentControlledState.CONTROLLED) {
+      return { checked: isChecked };
+    }
+    return { defaultChecked: isDefaultChecked };
+  }, [isDefaultChecked, isChecked]);
 
   const label = useMemo(() => {
-    if (isRequired) {
-      return (
-        <>
-          {labelProp}{" "}
-          <Typography component="span" color="textSecondary">
-            ({t("fieldlabel.required.text")})
-          </Typography>
-        </>
-      );
-    } else {
-      return <>{labelProp}</>;
-    }
-  }, [isRequired, labelProp, t]);
+    return (
+      <>
+        {labelProp}
+        {isRequired && (
+          <>
+            {" "}
+            <Typography component="span" color="textSecondary">
+              ({t("fieldlabel.required.text")})
+            </Typography>
+          </>
+        )}
+        {hint && <FormHelperText>{hint}</FormHelperText>}
+      </>
+    );
+  }, [isRequired, labelProp, hint, t]);
 
   const onChange = useCallback<NonNullable<MuiCheckboxProps["onChange"]>>(
     (event, checked) => {
-      setIsLocalChecked(checked);
       onChangeProp?.(event, checked);
     },
-    [onChangeProp, setIsLocalChecked]
+    [onChangeProp]
+  );
+
+  const onBlur = useCallback<NonNullable<MuiFormControlLabelProps["onBlur"]>>(
+    (event) => {
+      onBlurProp?.(event);
+    },
+    [onBlurProp]
   );
 
   return (
     <FormControlLabel
+      sx={{ alignItems: "flex-start" }}
       aria-label={ariaLabel}
       aria-labelledby={ariaLabelledBy}
       className={
@@ -125,10 +154,13 @@ const Checkbox = ({
       }
       control={
         <MuiCheckbox
-          checked={isLocalChecked}
+          {...inputValues}
           indeterminate={isIndeterminate}
           onChange={onChange}
           required={isRequired}
+          sx={() => ({
+            marginBlockStart: "2px",
+          })}
         />
       }
       data-se={testId}
@@ -138,6 +170,7 @@ const Checkbox = ({
       name={nameOverride ?? idOverride}
       value={value}
       required={isRequired}
+      onBlur={onBlur}
     />
   );
 };
