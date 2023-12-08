@@ -107,7 +107,7 @@ const Typography = forwardRef<FocusHandle, TypographyProps>(
     }: TypographyProps,
     ref
   ) => {
-    const typographyRef = useRef(null);
+    const typographyRef = useRef<HTMLElement | null>(null);
     const component = useMemo(() => {
       if (!componentProp) {
         if (variant === "body") {
@@ -126,7 +126,7 @@ const Typography = forwardRef<FocusHandle, TypographyProps>(
       () => {
         return {
           focus: () => {
-            (typographyRef.current! as HTMLElement).focus();
+            typographyRef.current?.focus();
           },
         };
       },

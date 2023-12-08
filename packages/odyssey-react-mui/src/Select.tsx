@@ -39,6 +39,7 @@ import {
   useInputValues,
   getControlState,
 } from "./inputUtils";
+import { FocusHandle } from "./@types/react-augment";
 
 export type SelectOption = {
   text: string;
@@ -93,9 +94,7 @@ export type SelectProps<
   /**
    * The ref is forwarded to input element in the Select
    */
-  inputRef: React.RefObject<{
-    focus: () => void;
-  } | null>;
+  inputRef: React.RefObject<FocusHandle>;
 } & Pick<
   FieldComponentProps,
   | "errorMessage"
@@ -182,11 +181,10 @@ const Select = <
       const inputElement = (
         ref.current as unknown as HTMLElement
       ).querySelector("input");
-      if (!inputElement) {
-        return null;
-      }
       return {
-        focus: inputElement.focus,
+        focus: () => {
+          inputElement?.focus();
+        },
       };
     },
     []

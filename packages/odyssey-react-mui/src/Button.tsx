@@ -134,7 +134,7 @@ const Button = forwardRef<FocusHandle, ButtonProps>(
     ref
   ) => {
     const muiProps = useMuiProps();
-    const buttonRef = useRef(null);
+    const buttonRef = useRef<HTMLButtonElement | null>(null);
 
     const renderButton = useCallback(
       (muiProps) => (
@@ -181,7 +181,7 @@ const Button = forwardRef<FocusHandle, ButtonProps>(
       () => {
         return {
           focus: () => {
-            (buttonRef.current! as HTMLButtonElement).focus();
+            buttonRef.current?.focus();
           },
         };
       },

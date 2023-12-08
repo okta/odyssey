@@ -20,6 +20,7 @@ import { memo, useCallback, useRef, useImperativeHandle } from "react";
 
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
+import { FocusHandle } from "./@types/react-augment";
 
 export type RadioProps = {
   /**
@@ -49,9 +50,7 @@ export type RadioProps = {
   /**
    * The ref is forwarded to input element in the Radio
    */
-  inputRef?: React.RefObject<{
-    focus: () => void;
-  } | null>;
+  inputRef?: React.RefObject<FocusHandle>;
 } & Pick<FieldComponentProps, "isDisabled" | "name"> &
   SeleniumProps;
 
@@ -74,14 +73,11 @@ const Radio = ({
     () => {
       const element = ref.current as unknown as HTMLElement;
       const inputElement =
-        element.tagName === "INPUT"
-          ? element
-          : (element.querySelector("input") as HTMLInputElement);
-      if (!inputElement) {
-        return null;
-      }
+        element.tagName === "INPUT" ? element : element.querySelector("input");
       return {
-        focus: inputElement.focus,
+        focus: () => {
+          inputElement?.focus();
+        },
       };
     },
     []

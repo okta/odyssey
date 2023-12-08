@@ -34,7 +34,7 @@ type playType = {
   step: PlaywrightProps<ButtonProps>["step"];
 };
 
-const storybookMeta: Meta<typeof Button> = {
+const storybookMeta: Meta<ButtonProps> = {
   title: "MUI Components/Button",
   component: Button,
   argTypes: {

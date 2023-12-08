@@ -10,11 +10,18 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { forwardRef, memo, ReactElement } from "react";
+import {
+  forwardRef,
+  memo,
+  ReactElement,
+  useRef,
+  useImperativeHandle,
+} from "react";
 import { ExternalLinkIcon } from "./icons.generated";
 import type { SeleniumProps } from "./SeleniumProps";
 
 import { Link as MuiLink, LinkProps as MuiLinkProps } from "@mui/material";
+import { FocusHandle } from "./@types/react-augment";
 
 export const linkVariantValues = ["default", "monochrome"] as const;
 
@@ -54,31 +61,47 @@ export type LinkProps = {
   variant?: (typeof linkVariantValues)[number];
 } & SeleniumProps;
 
-const Link = forwardRef<HTMLAnchorElement, LinkProps>(
+const Link = forwardRef<FocusHandle, LinkProps>(
   (
     { children, href, icon, rel, target, testId, variant, onClick }: LinkProps,
     ref
-  ) => (
-    <MuiLink
-      data-se={testId}
-      href={href}
-      rel={rel}
-      target={target}
-      variant={variant}
-      onClick={onClick}
-      ref={ref}
-    >
-      {icon && <span className="Link-icon">{icon}</span>}
+  ) => {
+    const linkRef = useRef<HTMLAnchorElement | null>(null);
 
-      {children}
+    useImperativeHandle(
+      ref,
+      () => {
+        return {
+          focus: () => {
+            linkRef.current?.focus();
+          },
+        };
+      },
+      []
+    );
 
-      {target === "_blank" && (
-        <span className="Link-indicator" role="presentation">
-          <ExternalLinkIcon />
-        </span>
-      )}
-    </MuiLink>
-  )
+    return (
+      <MuiLink
+        data-se={testId}
+        href={href}
+        rel={rel}
+        target={target}
+        variant={variant}
+        onClick={onClick}
+        ref={linkRef}
+      >
+        {icon && <span className="Link-icon">{icon}</span>}
+
+        {children}
+
+        {target === "_blank" && (
+          <span className="Link-indicator" role="presentation">
+            <ExternalLinkIcon />
+          </span>
+        )}
+      </MuiLink>
+    );
+  }
 );
 
 const MemoizedLink = memo(Link);

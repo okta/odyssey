@@ -25,6 +25,7 @@ import { Typography } from "./Typography";
 import type { SeleniumProps } from "./SeleniumProps";
 import { ComponentControlledState, getControlState } from "./inputUtils";
 import { CheckedFieldProps } from "./FormCheckedProps";
+import { FocusHandle } from "./@types/react-augment";
 
 export const checkboxValidityValues = ["valid", "invalid", "inherit"] as const;
 
@@ -76,9 +77,7 @@ export type CheckboxProps = {
   /**
    * The ref is forwarded to input element in the Checkbox
    */
-  inputRef?: React.RefObject<{
-    focus: () => void;
-  } | null>;
+  inputRef?: React.RefObject<FocusHandle>;
 } & Pick<FieldComponentProps, "id" | "isDisabled" | "name"> &
   CheckedFieldProps<MuiCheckboxProps> &
   SeleniumProps;
@@ -122,14 +121,11 @@ const Checkbox = ({
     () => {
       const element = ref.current as unknown as HTMLElement;
       const inputElement =
-        element.tagName === "INPUT"
-          ? element
-          : (element.querySelector("input") as HTMLInputElement);
-      if (!inputElement) {
-        return null;
-      }
+        element.tagName === "INPUT" ? element : element.querySelector("input");
       return {
-        focus: inputElement.focus,
+        focus: () => {
+          inputElement?.focus();
+        },
       };
     },
     []
