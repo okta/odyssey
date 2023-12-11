@@ -49,7 +49,7 @@ describe("OdysseyTranslationProvider", () => {
         languageCode="ar"
         translationOverrides={translationOverrides}
       >
-        <TextField label={""} isOptional />
+        <TextField label="" isOptional />
       </OdysseyTranslationProvider>
     );
 
@@ -67,7 +67,7 @@ describe("OdysseyTranslationProvider", () => {
 
     render(
       <OdysseyTranslationProvider translationOverrides={translationOverrides}>
-        <TextField label={""} isOptional />
+        <TextField label="" isOptional />
       </OdysseyTranslationProvider>
     );
 
@@ -86,7 +86,7 @@ describe("OdysseyTranslationProvider", () => {
         languageCode="fr"
         translationOverrides={translationOverrides}
       >
-        <TextField label={""} isOptional />
+        <TextField label="" isOptional />
       </OdysseyTranslationProvider>
     );
 

@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export const supportedLanguages = [
+export const defaultSupportedLanguages = [
   "cs", // Czech
   "da", // Danish
   "de", // German
@@ -42,4 +42,5 @@ export const supportedLanguages = [
   "zh_TW", // Chinese
 ] as const;
 
-export type DefaultSupportedLanguages = (typeof supportedLanguages)[number];
+export type DefaultSupportedLanguages =
+  (typeof defaultSupportedLanguages)[number];

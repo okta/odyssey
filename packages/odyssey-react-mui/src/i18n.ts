@@ -45,6 +45,8 @@ import { translation as znTW } from "./properties/ts/odyssey-react-mui_zh_TW";
 
 export const defaultLNG = "en";
 export const defaultNS = "translations";
+
+// Note: This is type "string" to allow translation overrides from other languages
 export type I18nResources = Record<string, typeof en>;
 export const resources: I18nResources = {
   cs,
