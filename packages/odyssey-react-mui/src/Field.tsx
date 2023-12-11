@@ -32,6 +32,10 @@ export type FieldProps = {
    */
   errorMessage?: string | string[];
   /**
+   * Introductory text for multiple level errors
+   */
+  errorMessageIntro?: string;
+  /**
    * The field type determines how ARIA components are setup. It's important to use this to denote if you expect only one component (like a text field) or multiple (like a radio group).
    */
   fieldType: (typeof fieldTypeValues)[number];
@@ -95,6 +99,7 @@ export type FieldProps = {
 
 const Field = ({
   errorMessage,
+  errorMessageIntro,
   fieldType,
   hasVisibleLabel,
   hint,
@@ -162,7 +167,11 @@ const Field = ({
       })}
 
       {errorMessage && (
-        <FieldError id={errorMessageElementId} text={errorMessage} />
+        <FieldError
+          id={errorMessageElementId}
+          intro={errorMessageIntro}
+          text={errorMessage}
+        />
       )}
     </MuiFormControl>
   );

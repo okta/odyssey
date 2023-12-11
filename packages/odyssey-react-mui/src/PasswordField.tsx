@@ -195,6 +195,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
     return (
       <Field
         errorMessage={errorMessage}
+        errorMessageIntro={t("passwordfield.error.intro")}
         fieldType="single"
         hasVisibleLabel
         hint={hint}

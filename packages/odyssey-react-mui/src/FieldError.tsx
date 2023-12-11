@@ -21,10 +21,11 @@ import type { SeleniumProps } from "./SeleniumProps";
 
 export type FieldErrorProps = {
   id?: string;
+  intro?: string;
   text: string | string[];
 } & SeleniumProps;
 
-const FieldError = ({ id, testId, text }: FieldErrorProps) => {
+const FieldError = ({ id, testId, text, intro }: FieldErrorProps) => {
   const { t } = useTranslation();
 
   return (
@@ -32,6 +33,7 @@ const FieldError = ({ id, testId, text }: FieldErrorProps) => {
       <ScreenReaderText>{`${t(
         "fielderror.screenreader.text"
       )}:`}</ScreenReaderText>
+      {intro && intro}
       {Array.isArray(text) ? <ErrorMessagesList errorMessages={text} /> : text}
     </FormHelperText>
   );
