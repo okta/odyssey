@@ -36,14 +36,13 @@ export type StatusProps = {
    * The style of the Status indicator
    */
   variant?: (typeof statusVariantValues)[number];
+  /**
+   * @deprecated All Statuses are now `pill` variant.
+   */
+  /** **Deprecated:** All Statuses are now `pill` variant */
 } & SeleniumProps;
 
-export const Status = ({
-  label,
-  severity,
-  testId,
-  variant = "lamp",
-}: StatusProps) => {
+export const Status = ({ label, severity, testId }: StatusProps) => {
   const muiProps = useMuiProps();
 
   return (
@@ -52,7 +51,7 @@ export const Status = ({
       color={severity}
       data-se={testId}
       label={label}
-      variant={variant}
+      variant="pill"
     />
   );
 };
