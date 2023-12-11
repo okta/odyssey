@@ -75,5 +75,5 @@ Thank you for contributing! Please follow the steps below to help us process you
 
 ### Testing and validation
 
-- [ ] Work shared in [Craft](https://docs.google.com/document/d/1dqaEzKW3SlKccw2ILjX7y3LQY0toeNe9OuwpOs2XxcI/edit#heading=h.j8zakyclqze5) to get feedback from the Odyssey team
+- [ ] Share work in [Craft](https://docs.google.com/document/d/1dqaEzKW3SlKccw2ILjX7y3LQY0toeNe9OuwpOs2XxcI/edit#heading=h.j8zakyclqze5) to get feedback from the Odyssey team
 - [ ] Share work to get feedback from pillar design captains or product designers in [#design-team](https://okta.slack.com/archives/G7REPJFUY) as customer feedback is essential to help us validate our assumptions, identify pain points, and improve our user experience
