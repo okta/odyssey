@@ -838,7 +838,6 @@ export const components = ({
             color: odysseyTokens.TypographyColorSubordinate,
             fontSize: "0.71428571rem",
             textTransform: "uppercase",
-            letterSpacing: "5%",
 
             "&::before": {
               content: "''",
@@ -2125,9 +2124,43 @@ export const components = ({
           marginBottom: odysseyTokens.Spacing5,
         },
 
+        scroller: {
+          borderBottom: `${odysseyTokens.BorderWidthMain} ${odysseyTokens.BorderStyleMain} ${odysseyTokens.BorderColorDisplay}`,
+        },
+
         flexContainer: {
           gap: odysseyTokens.Spacing5,
-          borderBottom: `${odysseyTokens.BorderWidthMain} ${odysseyTokens.BorderStyleMain} ${odysseyTokens.BorderColorDisplay}`,
+        },
+
+        scrollButtons: {
+          zIndex: 1,
+          transitionProperty: "opacity",
+          transitionDuration: odysseyTokens.TransitionDurationMain,
+          transitionTimingFunction: odysseyTokens.TransitionTimingMain,
+
+          "& svg": {
+            width: odysseyTokens.Spacing4,
+            height: odysseyTokens.Spacing4,
+            color: odysseyTokens.PaletteNeutralDark,
+          },
+
+          "&::after": {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            bottom: 0,
+            width: odysseyTokens.Spacing3,
+          },
+          "&:first-of-type::after": {
+            right: `-${odysseyTokens.Spacing3}`,
+            background:
+              "linear-gradient(90deg, #FFF 0%, #FFF 72.49%, rgba(255, 255, 255, 0.70) 86.5%, rgba(255, 255, 255, 0.00) 100%)",
+          },
+          "&:last-of-type::after": {
+            left: `-${odysseyTokens.Spacing3}`,
+            background:
+              "linear-gradient(-90deg, #FFF 0%, #FFF 72.49%, rgba(255, 255, 255, 0.70) 86.5%, rgba(255, 255, 255, 0.00) 100%)",
+          },
         },
       },
     },

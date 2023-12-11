@@ -99,7 +99,11 @@ const Tabs = ({
 
   return (
     <MuiTabContext value={tabState}>
-      <MuiTabList onChange={onChange} aria-label={ariaLabel}>
+      <MuiTabList
+        onChange={onChange}
+        aria-label={ariaLabel}
+        variant="scrollable"
+      >
         {tabs.map((tab, index) => (
           <MuiTab
             data-se={tab.testId}

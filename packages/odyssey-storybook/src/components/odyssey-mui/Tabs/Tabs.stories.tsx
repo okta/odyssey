@@ -243,3 +243,87 @@ export const Controlled: StoryObj<TabItemProps> = {
     );
   },
 };
+
+export const Overflow: StoryObj<TabItemProps> = {
+  render: function C() {
+    const tabs: TabItemProps[] = [
+      {
+        label: "Planets",
+        value: "planets",
+        children: "Information about Planets",
+      },
+      {
+        label: "Moons",
+        value: "moons",
+        children: "Information about Moons",
+      },
+      {
+        label: "Galaxies",
+        value: "galaxies",
+        children: "Information about Galaxies",
+      },
+      {
+        label: "Stars",
+        value: "stars",
+        children: "Information about Stars",
+      },
+      {
+        label: "Asteroids",
+        value: "asteroids",
+        children: "Information about Asteroids",
+      },
+      {
+        label: "Comets",
+        value: "comets",
+        children: "Information about Comets",
+      },
+      {
+        label: "Black Holes",
+        value: "black_holes",
+        children: "Information about Black Holes",
+      },
+      {
+        label: "Nebulae",
+        value: "nebulae",
+        children: "Information about Nebulae",
+      },
+      {
+        label: "Space Missions",
+        value: "space_missions",
+        children: "Information about Space Missions",
+      },
+      {
+        label: "Exoplanets",
+        value: "exoplanets",
+        children: "Information about Exoplanets",
+      },
+      {
+        label: "Spacecrafts",
+        value: "spacecrafts",
+        children: "Information about Spacecrafts",
+      },
+      {
+        label: "Astronauts",
+        value: "astronauts",
+        children: "Information about Astronauts",
+      },
+      {
+        label: "Cosmology",
+        value: "cosmology",
+        children: "Information about Cosmology",
+      },
+      {
+        label: "Space Stations",
+        value: "space_stations",
+        children: "Information about Space Stations",
+      },
+      {
+        label: "Alien Life",
+        value: "alien_life",
+        children: "Information about Alien Life",
+      },
+    ];
+
+    return <Tabs tabs={tabs} />;
+  },
+};
