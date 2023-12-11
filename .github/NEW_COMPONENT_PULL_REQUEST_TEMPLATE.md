@@ -19,7 +19,7 @@ Thank you for contributing! Please follow the steps below to help us process you
 
 ## Component checklist
 
-<!-- Pease track and mark relevant items as part of the component development process -->
+<!-- Pease track and mark relevant items as part of the component development process. Remove any non-applicable items. -->
 
 ### Code structure
 
@@ -39,7 +39,7 @@ Thank you for contributing! Please follow the steps below to help us process you
 - [ ] Separate text content from the component's code for translation.
 - [ ] Ensure the component renders correctly when language changes.
 
-### Responsive implementation
+### Responsive implementation (if applicable)
 
 - [ ] Use CSS media queries to define breakpoints and apply styles.
 - [ ] Test fluid layouts and resizing behavior at each breakpoint as needed.
@@ -59,8 +59,6 @@ Thank you for contributing! Please follow the steps below to help us process you
 
 ### Finalize code
 
-- [ ] Review PR for final detailing
-- [ ] Approve PR in GitHub
 - [ ] Interaction designers, UI eng and visual designers need to review that the Storybook code matches the intended Figma design
 - [ ] Interaction designers need to confirm Storybook code matches Supernova
 - [ ] Interaction and visual designers merge Figma and code at the same time
