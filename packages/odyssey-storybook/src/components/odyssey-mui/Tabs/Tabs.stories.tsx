@@ -101,6 +101,32 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
         },
       },
     },
+    badgeContent: {
+      control: { type: "number" },
+      description: "The value associated with the Badge",
+      table: {
+        type: {
+          summary: "number",
+        },
+      },
+    },
+    badgeContentMax: {
+      control: { type: "number" },
+      description:
+        "The limit at which the badge will show '`{badgeContentMax}`+'. A number between 0-999",
+      table: {
+        type: {
+          summary: "number",
+        },
+        defaultValue: {
+          summary: "999",
+        },
+      },
+      type: {
+        required: false,
+        name: "number",
+      },
+    },
   },
   args: {
     value: "stars",
@@ -248,36 +274,8 @@ export const Controlled: StoryObj<TabItemProps> = {
 
 export const WithBadge: StoryObj<TabItemProps> = {
   ...DefaultTemplate,
-  argTypes: {
-    badgeContent: {
-      control: { type: "number" },
-      description: "The value associated with the Badge",
-      table: {
-        type: {
-          summary: "number",
-        },
-      },
-    },
-    badgeContentMax: {
-      control: { type: "number" },
-      description:
-        "The limit at which the badge will show '`{badgeContentMax}`+'. A number between 0-999",
-      table: {
-        type: {
-          summary: "number",
-        },
-        defaultValue: {
-          summary: "999",
-        },
-      },
-      type: {
-        required: false,
-        name: "number",
-      },
-    },
-  },
   args: {
-    badgeContent: 9,
+    badgeContent: 0,
     label: "Xenomorphs",
     value: "xenomorphs",
     children: <ExampleTabContent label="Xenomorphs" />,

@@ -126,10 +126,12 @@ const Tabs = ({
             return (
               <>
                 {label}
-                {badgeContent && (
+                {!!badgeContent && badgeContent > 0 && (
                   <Box
                     sx={{
-                      marginInlineStart: odysseyDesignTokens.Spacing2,
+                      marginInlineStart: badgeContent
+                        ? odysseyDesignTokens.Spacing2
+                        : 0,
                     }}
                   >
                     <Badge
@@ -142,6 +144,7 @@ const Tabs = ({
               </>
             );
           };
+
           return (
             <MuiTab
               data-se={testId}
