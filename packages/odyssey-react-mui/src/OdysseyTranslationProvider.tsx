@@ -12,38 +12,43 @@
 
 import { ReactNode, useEffect } from "react";
 
-import { SupportedLanguages } from "./OdysseyTranslationProvider.types";
+import { DefaultSupportedLanguages } from "./OdysseyTranslationProvider.types";
 
 import { i18n, defaultNS, resources } from "./i18n";
 import { I18nextProvider } from "react-i18next";
+import { getTypedObjectKeys } from "./getTypedObjectKeys";
 
-export type TranslationOverrides = {
-  [key in SupportedLanguages]?: Partial<(typeof resources)["en"]>;
-};
+export type OdysseyI18nResourceKeys = (typeof resources)["en"];
 
-const mergeBundleOverrides = (
+export type TranslationOverrides<
+  SupportedLanguages extends string = DefaultSupportedLanguages
+> = Record<SupportedLanguages, Partial<OdysseyI18nResourceKeys>>;
+
+const mergeBundleOverrides = <SupportedLanguages extends string>(
   languageCode: SupportedLanguages,
-  translationOverrides: TranslationOverrides
+  translationOverrides: TranslationOverrides<SupportedLanguages>
 ) => {
-  const bundle = resources[languageCode];
-  const overrides = translationOverrides[languageCode];
+  const translationStrings = resources[languageCode] || {};
+  const translationStringOverrides = translationOverrides[languageCode];
   return {
-    ...bundle,
-    ...overrides,
+    ...translationStrings,
+    ...translationStringOverrides,
   };
 };
 
-export type OdysseyTranslationProviderProps = {
+export type OdysseyTranslationProviderProps<
+  SupportedLanguages extends string = DefaultSupportedLanguages
+> = {
   children: ReactNode;
-  languageCode?: SupportedLanguages;
-  translationOverrides?: TranslationOverrides;
+  languageCode?: SupportedLanguages | DefaultSupportedLanguages;
+  translationOverrides?: TranslationOverrides<SupportedLanguages>;
 };
 
-export const OdysseyTranslationProvider = ({
+export const OdysseyTranslationProvider = <SupportedLanguages extends string>({
   children,
   languageCode,
   translationOverrides,
-}: OdysseyTranslationProviderProps) => {
+}: OdysseyTranslationProviderProps<SupportedLanguages>) => {
   useEffect(() => {
     // Defaults to the browser's language if available otherwise `en` will be used
     i18n.changeLanguage(languageCode || window.navigator.language);
@@ -51,9 +56,9 @@ export const OdysseyTranslationProvider = ({
 
   useEffect(() => {
     if (translationOverrides) {
-      Object.keys(translationOverrides).forEach((language) => {
-        const bundle = mergeBundleOverrides(
-          language as SupportedLanguages,
+      getTypedObjectKeys(translationOverrides).forEach((language) => {
+        const bundle = mergeBundleOverrides<SupportedLanguages>(
+          language,
           translationOverrides
         );
         i18n.addResourceBundle(language, defaultNS, bundle);
