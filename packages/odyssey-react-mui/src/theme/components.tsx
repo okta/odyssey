@@ -1603,12 +1603,12 @@ export const components = ({
           },
 
           [`&.${inputBaseClasses.error}:hover`]: {
-            borderColor: odysseyTokens.BorderColorDangerDark,
+            borderColor: odysseyTokens.HueNeutral900,
           },
 
           [`&.${inputBaseClasses.error}.${inputBaseClasses.focused}`]: {
-            borderColor: odysseyTokens.BorderColorDangerControl,
-            boxShadow: `0 0 0 1px ${odysseyTokens.PaletteDangerMain}`,
+            borderColor: odysseyTokens.FocusOutlineColorPrimary,
+            boxShadow: `0 0 0 1px ${odysseyTokens.FocusOutlineColorPrimary}`,
           },
 
           [`&.${inputBaseClasses.disabled}`]: {
