@@ -146,6 +146,8 @@ const DefaultTemplate: StoryObj<TabItemProps> = {
 
     if (args?.label) {
       tabs.push({
+        badgeContent: args?.badgeContent,
+        badgeContentMax: args?.badgeContentMax,
         label: args.label,
         value: args.value,
         isDisabled: args.isDisabled,
@@ -241,5 +243,46 @@ export const Controlled: StoryObj<TabItemProps> = {
         </Box>
       </>
     );
+  },
+};
+
+export const WithBadge: StoryObj<TabItemProps> = {
+  ...DefaultTemplate,
+  argTypes: {
+    badgeContent: {
+      control: { type: "number" },
+      description: "The value associated with the Badge",
+      table: {
+        type: {
+          summary: "number",
+        },
+      },
+    },
+    badgeContentMax: {
+      control: { type: "number" },
+      description:
+        "The limit at which the badge will show '`{badgeContentMax}`+'. A number between 0-999",
+      table: {
+        type: {
+          summary: "number",
+        },
+        defaultValue: {
+          summary: "999",
+        },
+      },
+      type: {
+        required: false,
+        name: "number",
+      },
+    },
+  },
+  args: {
+    badgeContent: 9,
+    label: "Xenomorphs",
+    value: "xenomorphs",
+    children: <ExampleTabContent label="Xenomorphs" />,
+  },
+  play: async ({ canvasElement, step }) => {
+    selectTab({ canvasElement, step })("Tab Icon", "Xenomorphs");
   },
 };
