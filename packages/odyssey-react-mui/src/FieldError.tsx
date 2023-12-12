@@ -33,8 +33,14 @@ const FieldError = ({ id, testId, text, intro }: FieldErrorProps) => {
       <ScreenReaderText>{`${t(
         "fielderror.screenreader.text"
       )}:`}</ScreenReaderText>
-      {intro && intro}
-      {Array.isArray(text) ? <ErrorMessagesList errorMessages={text} /> : text}
+      {Array.isArray(text) ? (
+        <>
+          {intro && intro}
+          <ErrorMessagesList errorMessages={text} />
+        </>
+      ) : (
+        text
+      )}
     </FormHelperText>
   );
 };
