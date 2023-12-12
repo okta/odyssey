@@ -150,6 +150,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
             )
           }
           id={id}
+          className="ODS-Search"
           name={nameOverride ?? id}
           onBlur={onBlur}
           onChange={onChange}

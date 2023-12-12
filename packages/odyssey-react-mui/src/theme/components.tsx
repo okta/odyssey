@@ -1620,8 +1620,8 @@ export const components = ({
           },
         }),
         input: {
-          boxSizing: "border-box",
-          height: "auto",
+          // Set total height to 40px, factoring in borders on outer container
+          height: `calc(${odysseyTokens.Spacing4} - (${odysseyTokens.BorderWidthMain} * 2))`,
           paddingBlock: odysseyTokens.Spacing3,
           paddingInline: odysseyTokens.Spacing3,
           boxShadow: "none",
@@ -1660,6 +1660,12 @@ export const components = ({
 
           [`&::-ms-clear`]: {
             display: "none",
+          },
+
+          // [`.ODS-Search &::placeholder`]: {
+          ["&::placeholder"]: {
+            color: odysseyTokens.TypographyColorSupport,
+            opacity: 1,
           },
         },
       },
