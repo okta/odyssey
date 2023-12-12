@@ -2072,6 +2072,7 @@ export const components = ({
         select: {
           paddingBlock: odysseyTokens.Spacing3,
           paddingInline: odysseyTokens.Spacing3,
+          minHeight: 0,
 
           "&:focus": {
             backgroundColor: "transparent",

@@ -17,14 +17,15 @@ import {
   Chip,
   ListItemSecondaryAction,
   ListSubheader,
-  MenuItem,
+  MenuItem as MuiMenuItem,
   Select as MuiSelect,
+  SelectChangeEvent,
 } from "@mui/material";
 import { SelectProps as MuiSelectProps } from "@mui/material";
 
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
-import { CheckIcon } from "./icons.generated";
+import { CheckIcon, CloseCircleFilledIcon } from "./icons.generated";
 import type { SeleniumProps } from "./SeleniumProps";
 import {
   ComponentControlledState,
@@ -173,6 +174,21 @@ const Select = <
     [onChangeProp]
   );
 
+  const handleDelete = useCallback(
+    (itemToDelete: string) => {
+      const newValue = internalSelectedValues!.filter(
+        (item) => item !== itemToDelete
+      );
+
+      const syntheticEvent = {
+        target: { value: newValue },
+      } as SelectChangeEvent<Value>;
+
+      onChange(syntheticEvent, null);
+    },
+    [internalSelectedValues, onChange]
+  );
+
   // Normalize the options array to accommodate the various
   // data types that might be passed
   const normalizedOptions = useMemo(
@@ -208,7 +224,24 @@ const Select = <
             return null;
           }
 
-          return <Chip key={item} label={selectedOption.text} />;
+          return (
+            <Chip
+              key={item}
+              label={selectedOption.text}
+              onDelete={
+                controlledStateRef.current === CONTROLLED
+                  ? () => handleDelete(item)
+                  : undefined
+              }
+              deleteIcon={
+                // We need to stop event propagation on mouse down to prevent the deletion
+                // from being blocked by the Select list opening
+                <CloseCircleFilledIcon
+                  onMouseDown={(event) => event.stopPropagation()}
+                />
+              }
+            />
+          );
         })
         .filter(Boolean);
 
@@ -220,7 +253,7 @@ const Select = <
       // proper styling
       return <Box>{renderedChips}</Box>;
     },
-    [normalizedOptions]
+    [normalizedOptions, handleDelete]
   );
 
   // Convert the options into the ReactNode children
@@ -231,20 +264,25 @@ const Select = <
         if (option.type === "heading") {
           return <ListSubheader key={option.text}>{option.text}</ListSubheader>;
         }
+
+        const isSelected = hasMultipleChoices
+          ? internalSelectedValues?.includes(option.value)
+          : internalSelectedValues === option.value;
+
         return (
-          <MenuItem key={option.value} value={option.value}>
-            {hasMultipleChoices && (
-              <MuiCheckbox
-                checked={internalSelectedValues?.includes(option.value)}
-              />
-            )}
+          <MuiMenuItem
+            key={option.value}
+            value={option.value}
+            selected={isSelected}
+          >
+            {hasMultipleChoices && <MuiCheckbox checked={isSelected} />}
             {option.text}
-            {internalSelectedValues === option.value && (
+            {isSelected && !hasMultipleChoices && (
               <ListItemSecondaryAction>
                 <CheckIcon />
               </ListItemSecondaryAction>
             )}
-          </MenuItem>
+          </MuiMenuItem>
         );
       }),
     [hasMultipleChoices, normalizedOptions, internalSelectedValues]
@@ -272,6 +310,7 @@ const Select = <
       children,
       inputValues,
       hasMultipleChoices,
+      normalizedOptions,
       nameOverride,
       onBlur,
       onChange,
