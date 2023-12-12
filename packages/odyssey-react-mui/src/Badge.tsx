@@ -51,20 +51,21 @@ const Badge = ({
 }: BadgeProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
-  const greaterThanZeroContentMax = badgeContentMax > 0 ? badgeContentMax : 1;
-  const threeDigitLimitedMax =
-    greaterThanZeroContentMax > 999 ? 999 : greaterThanZeroContentMax;
-  const isOverContentMax = Boolean(
-    badgeContent && badgeContent > threeDigitLimitedMax
-  );
-  const overContentMaxMessage = `${greaterThanZeroContentMax}+`;
-  const formattedContent = isOverContentMax
-    ? overContentMaxMessage
-    : badgeContent;
-  const contentIsLongerThanOneChar = formattedContent?.toString()?.length > 1;
+  const renderBadge = useMemo(() => {
+    const greaterThanZeroContentMax = badgeContentMax > 0 ? badgeContentMax : 1;
+    const threeDigitLimitedMax =
+      greaterThanZeroContentMax > 999 ? 999 : greaterThanZeroContentMax;
+    const isOverContentMax = Boolean(
+      badgeContent && badgeContent > threeDigitLimitedMax
+    );
+    const overContentMaxMessage = `${greaterThanZeroContentMax}+`;
+    const formattedContent = isOverContentMax
+      ? overContentMaxMessage
+      : badgeContent;
 
-  const badgeStyles = useMemo<CSSProperties>(
-    () => ({
+    const contentIsLongerThanOneChar = formattedContent?.toString()?.length > 1;
+
+    const badgeStyles: CSSProperties = {
       display: "inline-flex",
       alignItems: "center",
       justifyContent: "center",
@@ -84,21 +85,18 @@ const Badge = ({
       lineHeight: 1,
       transitionDuration: `${odysseyDesignTokens.TransitionDurationMain}`,
       transitionProperty: `background-color, color`,
-    }),
-    [type, contentIsLongerThanOneChar, odysseyDesignTokens]
-  );
+    };
 
-  const shouldHideBadge = badgeContent <= 0 || !badgeContent;
+    const shouldHideBadge = badgeContent <= 0 || !badgeContent;
 
-  if (shouldHideBadge) {
-    return null;
-  }
+    if (shouldHideBadge) {
+      return null;
+    }
 
-  return (
-    <Box sx={badgeStyles} data-se={testId} translate={translate}>
-      {formattedContent}
-    </Box>
-  );
+    return <Box sx={badgeStyles}>{formattedContent}</Box>;
+  }, [badgeContent, badgeContentMax, type]);
+
+  return renderBadge;
 };
 
 const MemoizedBadge = memo(Badge);
