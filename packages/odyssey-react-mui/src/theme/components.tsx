@@ -1543,7 +1543,7 @@ export const components = ({
           whiteSpace: "nowrap",
           color: odysseyTokens.TypographyColorSubordinate,
           ...(ownerState.position === "start" && {
-            marginInlineStart: odysseyTokens.Spacing2,
+            marginInlineStart: odysseyTokens.Spacing3,
           }),
           ...(ownerState.position === "end" && {
             marginInlineEnd: odysseyTokens.Spacing2,
@@ -1577,6 +1577,29 @@ export const components = ({
               duration: odysseyTokens.TransitionDurationMain,
             }
           ),
+
+          ["&[data-ods-type='search']"]: {
+            borderColor: odysseyTokens.HueNeutral400,
+
+            [`& .${inputBaseClasses.input}::placeholder`]: {
+              color: odysseyTokens.TypographyColorSupport,
+              opacity: 1,
+            },
+          },
+
+          ["&[data-ods-variant='filled']"]: {
+            backgroundColor: odysseyTokens.HueNeutral50,
+            borderColor: odysseyTokens.HueNeutral50,
+
+            [`&:hover`]: {
+              borderColor: odysseyTokens.HueNeutral400,
+            },
+
+            [`&.${inputBaseClasses.focused}`]: {
+              borderColor: odysseyTokens.FocusOutlineColorPrimary,
+              boxShadow: `0 0 0 1px ${odysseyTokens.FocusOutlineColorPrimary}`,
+            },
+          },
 
           ...(ownerState.fullWidth && {
             width: "100%",
@@ -1642,7 +1665,7 @@ export const components = ({
 
           [`label[data-shrink=false] + .${inputBaseClasses.formControl} &`]: {
             "&::placeholder": {
-              color: odysseyTokens.TypographyColorSubordinate,
+              color: odysseyTokens.TypographyColorSupport,
               opacity: "1 !important",
             },
           },
@@ -1660,12 +1683,6 @@ export const components = ({
 
           [`&::-ms-clear`]: {
             display: "none",
-          },
-
-          // [`.ODS-Search &::placeholder`]: {
-          ["&::placeholder"]: {
-            color: odysseyTokens.TypographyColorSupport,
-            opacity: 1,
           },
         },
       },
