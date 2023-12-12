@@ -2212,7 +2212,8 @@ export const components = ({
           padding: `${odysseyTokens.Spacing4} ${odysseyTokens.Spacing1}`,
           fontSize: odysseyTokens.TypographySizeHeading6,
           fontFamily: odysseyTokens.TypographyFamilyHeading,
-          lineHeight: odysseyTokens.TypographyLineHeightUi,
+          // Increased line-height to avoid visual jump when Badge is rendered in a Tab
+          lineHeight: 1.5,
           overflow: "visible",
           color: odysseyTokens.HueNeutral600,
           opacity: 1,
