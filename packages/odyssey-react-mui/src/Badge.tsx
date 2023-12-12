@@ -82,6 +82,8 @@ const Badge = ({
       fontFamily: `${odysseyDesignTokens.TypographyFamilyMono}`,
       fontWeight: `${odysseyDesignTokens.TypographyWeightBodyBold}`,
       lineHeight: 1,
+      transitionDuration: `${odysseyDesignTokens.TransitionDurationMain}`,
+      transitionProperty: `background-color, color`,
     }),
     [type, contentIsLongerThanOneChar, odysseyDesignTokens]
   );
