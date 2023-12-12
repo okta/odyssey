@@ -1626,6 +1626,11 @@ export const components = ({
           paddingInline: odysseyTokens.Spacing3,
           boxShadow: "none",
 
+          // TODO: Consider if we want manual resizing.
+          // [`.${inputBaseClasses.multiline} &`]: {
+          //   resize: "vertical",
+          // },
+
           [`.${inputBaseClasses.disabled} &`]: {
             pointerEvents: "auto",
             cursor: "not-allowed",
