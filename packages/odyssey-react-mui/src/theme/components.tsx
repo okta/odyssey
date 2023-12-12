@@ -801,8 +801,12 @@ export const components = ({
           [`&.${chipClasses.disabled}`]: {
             opacity: 1,
             pointerEvents: "none",
-            backgroundColor: odysseyTokens.HueNeutral200,
+            borderColor: odysseyTokens.BorderColorDisabled,
             color: odysseyTokens.TypographyColorDisabled,
+
+            [`& .${chipClasses.deleteIcon}`]: {
+              color: odysseyTokens.HueNeutral300,
+            },
           },
 
           ...(ownerState.clickable && {
