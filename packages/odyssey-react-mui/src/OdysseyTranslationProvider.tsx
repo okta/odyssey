@@ -46,7 +46,7 @@ export type OdysseyTranslationProviderProps<
 
 const formatLanguageCodeToHyphenated = <SupportedLanguages extends string>(
   languageCode: OdysseyTranslationProviderProps<SupportedLanguages>["languageCode"]
-) => languageCode?.replace(/_/g, "-");
+) => languageCode?.replaceAll("_", "-");
 
 export const OdysseyTranslationProvider = <SupportedLanguages extends string>({
   children,
