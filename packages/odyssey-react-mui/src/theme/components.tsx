@@ -1543,7 +1543,7 @@ export const components = ({
           whiteSpace: "nowrap",
           color: odysseyTokens.TypographyColorSubordinate,
           ...(ownerState.position === "start" && {
-            marginInlineStart: odysseyTokens.Spacing2,
+            marginInlineStart: odysseyTokens.Spacing3,
           }),
           ...(ownerState.position === "end" && {
             marginInlineEnd: odysseyTokens.Spacing2,
@@ -1578,6 +1578,29 @@ export const components = ({
             }
           ),
 
+          ["&[data-ods-type='search']"]: {
+            borderColor: odysseyTokens.HueNeutral400,
+
+            [`& .${inputBaseClasses.input}::placeholder`]: {
+              color: odysseyTokens.TypographyColorSupport,
+              opacity: 1,
+            },
+          },
+
+          ["&[data-ods-variant='filled']"]: {
+            backgroundColor: odysseyTokens.HueNeutral50,
+            borderColor: odysseyTokens.HueNeutral50,
+
+            [`&:hover`]: {
+              borderColor: odysseyTokens.HueNeutral400,
+            },
+
+            [`&.${inputBaseClasses.focused}`]: {
+              borderColor: odysseyTokens.FocusOutlineColorPrimary,
+              boxShadow: `0 0 0 1px ${odysseyTokens.FocusOutlineColorPrimary}`,
+            },
+          },
+
           ...(ownerState.fullWidth && {
             width: "100%",
           }),
@@ -1603,12 +1626,12 @@ export const components = ({
           },
 
           [`&.${inputBaseClasses.error}:hover`]: {
-            borderColor: odysseyTokens.BorderColorDangerDark,
+            borderColor: odysseyTokens.HueNeutral900,
           },
 
           [`&.${inputBaseClasses.error}.${inputBaseClasses.focused}`]: {
-            borderColor: odysseyTokens.BorderColorDangerControl,
-            boxShadow: `0 0 0 1px ${odysseyTokens.PaletteDangerMain}`,
+            borderColor: odysseyTokens.FocusOutlineColorPrimary,
+            boxShadow: `0 0 0 1px ${odysseyTokens.FocusOutlineColorPrimary}`,
           },
 
           [`&.${inputBaseClasses.disabled}`]: {
@@ -1620,11 +1643,16 @@ export const components = ({
           },
         }),
         input: {
-          boxSizing: "border-box",
-          height: "auto",
+          // Set total height to 40px, factoring in borders on outer container
+          height: `calc(${odysseyTokens.Spacing4} - (${odysseyTokens.BorderWidthMain} * 2))`,
           paddingBlock: odysseyTokens.Spacing3,
           paddingInline: odysseyTokens.Spacing3,
           boxShadow: "none",
+
+          // TODO: Consider if we want manual resizing.
+          // [`.${inputBaseClasses.multiline} &`]: {
+          //   resize: "vertical",
+          // },
 
           [`.${inputBaseClasses.disabled} &`]: {
             pointerEvents: "auto",
@@ -1637,7 +1665,7 @@ export const components = ({
 
           [`label[data-shrink=false] + .${inputBaseClasses.formControl} &`]: {
             "&::placeholder": {
-              color: odysseyTokens.TypographyColorSubordinate,
+              color: odysseyTokens.TypographyColorSupport,
               opacity: "1 !important",
             },
           },
@@ -2044,6 +2072,7 @@ export const components = ({
         select: {
           paddingBlock: odysseyTokens.Spacing3,
           paddingInline: odysseyTokens.Spacing3,
+          minHeight: 0,
 
           "&:focus": {
             backgroundColor: "transparent",

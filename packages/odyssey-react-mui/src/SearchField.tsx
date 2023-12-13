@@ -27,6 +27,8 @@ import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
 import { getControlState, useInputValues } from "./inputUtils";
 
+export const searchVariantValues = ["outline", "filled"] as const;
+
 export type SearchFieldProps = {
   /**
    * This prop helps users to fill forms faster, especially on mobile devices.
@@ -78,6 +80,10 @@ export type SearchFieldProps = {
    * The value of the `input` element, to use when controlled.
    */
   value?: string;
+  /**
+   * Whether the SearchField has a gray or white background
+   */
+  variant?: (typeof searchVariantValues)[number];
 } & Pick<FieldComponentProps, "id" | "isDisabled" | "name" | "isFullWidth"> &
   SeleniumProps;
 
@@ -99,6 +105,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       placeholder,
       testId,
       value,
+      variant = "outline",
     },
     ref
   ) => {
@@ -150,6 +157,8 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
             )
           }
           id={id}
+          data-ods-type="search"
+          data-ods-variant={variant}
           name={nameOverride ?? id}
           onBlur={onBlur}
           onChange={onChange}
