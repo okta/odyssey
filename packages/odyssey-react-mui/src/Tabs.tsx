@@ -45,6 +45,10 @@ export type TabItemProps = {
    */
   label: string;
   /**
+   * The content for an optional notification badge
+   */
+  notificationCount?: BadgeProps["badgeContent"];
+  /**
    * An optional icon to display at the start of the TabItem
    */
   startIcon?: ReactElement;
@@ -52,10 +56,6 @@ export type TabItemProps = {
    * The value associated with the TabItem
    */
   value?: string;
-  /**
-   * The content for an optional badge
-   */
-  badgeContent?: BadgeProps["badgeContent"];
 } & Pick<BadgeProps, "badgeContentMax"> &
   AllowedProps;
 
@@ -118,7 +118,7 @@ const Tabs = ({
             label,
             startIcon,
             value,
-            badgeContent,
+            notificationCount,
             badgeContentMax,
           } = tab;
 
@@ -126,21 +126,22 @@ const Tabs = ({
             return (
               <>
                 {label}
-                {!!badgeContent && badgeContent > 0 && (
-                  <Box
-                    sx={{
-                      marginInlineStart: badgeContent
-                        ? odysseyDesignTokens.Spacing2
-                        : 0,
-                    }}
-                  >
-                    <Badge
-                      badgeContent={badgeContent}
-                      badgeContentMax={badgeContentMax}
-                      type={value === tabState ? "attention" : "default"}
-                    />
-                  </Box>
-                )}
+                {typeof notificationCount === "number" &&
+                  notificationCount > 0 && (
+                    <Box
+                      sx={{
+                        marginInlineStart: notificationCount
+                          ? odysseyDesignTokens.Spacing2
+                          : 0,
+                      }}
+                    >
+                      <Badge
+                        badgeContent={notificationCount}
+                        badgeContentMax={badgeContentMax}
+                        type={value === tabState ? "attention" : "default"}
+                      />
+                    </Box>
+                  )}
               </>
             );
           };

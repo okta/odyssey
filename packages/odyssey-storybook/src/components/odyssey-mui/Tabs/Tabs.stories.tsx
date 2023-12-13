@@ -101,7 +101,7 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
         },
       },
     },
-    badgeContent: {
+    notificationCount: {
       control: { type: "number" },
       description: "The value associated with the Badge",
       table: {
@@ -172,7 +172,7 @@ const DefaultTemplate: StoryObj<TabItemProps> = {
 
     if (args?.label) {
       tabs.push({
-        badgeContent: args?.badgeContent,
+        notificationCount: args?.notificationCount,
         badgeContentMax: args?.badgeContentMax,
         label: args.label,
         value: args.value,
