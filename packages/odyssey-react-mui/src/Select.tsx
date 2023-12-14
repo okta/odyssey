@@ -25,7 +25,7 @@ import { SelectProps as MuiSelectProps } from "@mui/material";
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import { CheckIcon } from "./icons.generated";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { AllowedProps } from "./AllowedProps";
 import {
   ComponentControlledState,
   useInputValues,
@@ -93,7 +93,7 @@ export type SelectProps<
   | "isOptional"
   | "name"
 > &
-  SeleniumProps;
+  AllowedProps;
 
 /**
  * Options in Odyssey <Select> are passed as an array, which can contain any combination
@@ -132,6 +132,7 @@ const Select = <
   onFocus,
   options,
   testId,
+  translate,
   value,
 }: SelectProps<Value, HasMultipleChoices>) => {
   const hasMultipleChoices = useMemo(
@@ -268,6 +269,7 @@ const Select = <
         onChange={onChange}
         onFocus={onFocus}
         renderValue={hasMultipleChoices ? renderValue : undefined}
+        translate={translate}
       />
     ),
     [
@@ -280,6 +282,7 @@ const Select = <
       onFocus,
       renderValue,
       testId,
+      translate,
     ]
   );
 

@@ -12,7 +12,7 @@
 
 import { memo, ReactElement } from "react";
 import { ExternalLinkIcon } from "./icons.generated";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { AllowedProps } from "./AllowedProps";
 
 import { Link as MuiLink, LinkProps as MuiLinkProps } from "@mui/material";
 
@@ -52,7 +52,7 @@ export type LinkProps = {
    * The visual presentation of the Link (default or monochrome)
    */
   variant?: (typeof linkVariantValues)[number];
-} & SeleniumProps;
+} & AllowedProps;
 
 const Link = ({
   children,
@@ -61,6 +61,7 @@ const Link = ({
   rel,
   target,
   testId,
+  translate,
   variant,
   onClick,
 }: LinkProps) => (
@@ -69,6 +70,7 @@ const Link = ({
     href={href}
     rel={rel}
     target={target}
+    translate={translate}
     variant={variant}
     onClick={onClick}
   >

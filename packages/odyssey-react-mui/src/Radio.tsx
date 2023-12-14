@@ -19,7 +19,7 @@ import {
 import { memo, useCallback } from "react";
 
 import { FieldComponentProps } from "./FieldComponentProps";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { AllowedProps } from "./AllowedProps";
 
 export type RadioProps = {
   /**
@@ -47,7 +47,7 @@ export type RadioProps = {
    */
   onBlur?: MuiFormControlLabelProps["onBlur"];
 } & Pick<FieldComponentProps, "isDisabled" | "name"> &
-  SeleniumProps;
+  AllowedProps;
 
 const Radio = ({
   isChecked,
@@ -56,6 +56,7 @@ const Radio = ({
   label,
   name,
   testId,
+  translate,
   value,
   onChange: onChangeProp,
   onBlur: onBlurProp,
@@ -83,6 +84,7 @@ const Radio = ({
       disabled={isDisabled}
       label={label}
       name={name}
+      translate={translate}
       value={value}
       onBlur={onBlur}
     />

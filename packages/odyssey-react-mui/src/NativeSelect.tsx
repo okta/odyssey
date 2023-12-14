@@ -24,7 +24,7 @@ import {
 } from "@mui/material";
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { AllowedProps } from "./AllowedProps";
 import { getControlState, useInputValues } from "./inputUtils";
 import { ForwardRefWithType } from "./@types/react-augment";
 
@@ -89,7 +89,7 @@ export type NativeSelectProps<
   | "isFullWidth"
   | "isOptional"
 > &
-  SeleniumProps;
+  AllowedProps;
 
 const NativeSelect: ForwardRefWithType = forwardRef(
   <
@@ -112,6 +112,7 @@ const NativeSelect: ForwardRefWithType = forwardRef(
       onChange: onChangeProp,
       onFocus,
       testId,
+      translate,
       value,
       children,
     }: NativeSelectProps<Value, HasMultipleChoices>,
@@ -164,6 +165,7 @@ const NativeSelect: ForwardRefWithType = forwardRef(
           onChange={onChange}
           onFocus={onFocus}
           ref={ref}
+          translate={translate}
         />
       ),
       [
@@ -176,6 +178,7 @@ const NativeSelect: ForwardRefWithType = forwardRef(
         onFocus,
         ref,
         testId,
+        translate,
       ]
     );
 

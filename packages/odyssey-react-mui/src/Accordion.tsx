@@ -11,7 +11,7 @@
  */
 
 import { ReactNode, memo } from "react";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { AllowedProps } from "./AllowedProps";
 import {
   Accordion as MuiAccordion,
   AccordionDetails as MuiAccordionDetails,
@@ -60,7 +60,7 @@ export type AccordionProps = {
       isExpanded?: never;
     }
 ) &
-  SeleniumProps;
+  AllowedProps;
 
 const Accordion = ({
   children,
@@ -70,6 +70,7 @@ const Accordion = ({
   isDisabled,
   isExpanded,
   onChange,
+  translate,
 }: AccordionProps) => {
   return (
     <MuiAccordion
@@ -81,7 +82,9 @@ const Accordion = ({
       className={hasShadow ? `hasShadow` : undefined}
     >
       <MuiAccordionSummary expandIcon={<ChevronDownIcon />}>
-        <Support component="div">{label}</Support>
+        <Support component="div" translate={translate}>
+          {label}
+        </Support>
       </MuiAccordionSummary>
       <MuiAccordionDetails>{children}</MuiAccordionDetails>
     </MuiAccordion>

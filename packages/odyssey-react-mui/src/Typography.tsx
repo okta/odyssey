@@ -15,7 +15,7 @@ import {
   TypographyProps as MuiTypographyProps,
 } from "@mui/material";
 import { ElementType, ReactNode, memo, useMemo } from "react";
-import { SeleniumProps } from "./SeleniumProps";
+import { AllowedProps } from "./AllowedProps";
 
 export type TypographyVariantValue =
   | "h1"
@@ -82,7 +82,7 @@ export type TypographyProps = {
    * The variant of Typography to render.
    */
   variant?: keyof typeof typographyVariantMapping;
-} & SeleniumProps;
+} & AllowedProps;
 
 const Typography = ({
   ariaDescribedBy,
@@ -92,6 +92,7 @@ const Typography = ({
   color,
   component: componentProp,
   testId,
+  translate,
   variant = "body",
 }: TypographyProps) => {
   const component = useMemo(() => {
@@ -108,16 +109,19 @@ const Typography = ({
   }, [componentProp, variant]);
 
   return (
-    <MuiTypography
-      aria-describedby={ariaDescribedBy}
-      aria-label={ariaLabel}
-      aria-labelledby={ariaLabelledBy}
-      children={children}
-      color={color}
-      component={component}
-      data-se={testId}
-      variant={typographyVariantMapping[variant]}
-    />
+    <>
+      <MuiTypography
+        aria-describedby={ariaDescribedBy}
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
+        children={children}
+        color={color}
+        component={component}
+        data-se={testId}
+        translate={translate}
+        variant={typographyVariantMapping[variant]}
+      />
+    </>
   );
 };
 
@@ -132,6 +136,7 @@ const Heading1 = ({
   color,
   component,
   testId,
+  translate,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
@@ -141,6 +146,7 @@ const Heading1 = ({
     color={color}
     component={component}
     data-se={testId}
+    translate={translate}
     variant="h1"
   />
 );
@@ -156,6 +162,7 @@ const Heading2 = ({
   color,
   component,
   testId,
+  translate,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
@@ -165,6 +172,7 @@ const Heading2 = ({
     color={color}
     component={component}
     data-se={testId}
+    translate={translate}
     variant="h2"
   />
 );
@@ -180,6 +188,7 @@ const Heading3 = ({
   color,
   component,
   testId,
+  translate,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
@@ -189,6 +198,7 @@ const Heading3 = ({
     color={color}
     component={component}
     data-se={testId}
+    translate={translate}
     variant="h3"
   />
 );
@@ -204,6 +214,7 @@ const Heading4 = ({
   color,
   component,
   testId,
+  translate,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
@@ -213,6 +224,7 @@ const Heading4 = ({
     color={color}
     component={component}
     data-se={testId}
+    translate={translate}
     variant="h4"
   />
 );
@@ -228,6 +240,7 @@ const Heading5 = ({
   color,
   component,
   testId,
+  translate,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
@@ -237,6 +250,7 @@ const Heading5 = ({
     color={color}
     component={component}
     data-se={testId}
+    translate={translate}
     variant="h5"
   />
 );
@@ -252,6 +266,7 @@ const Heading6 = ({
   color,
   component,
   testId,
+  translate,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
@@ -261,6 +276,7 @@ const Heading6 = ({
     color={color}
     component={component}
     data-se={testId}
+    translate={translate}
     variant="h6"
   />
 );
@@ -276,6 +292,7 @@ const Paragraph = ({
   color,
   component,
   testId,
+  translate,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
@@ -284,7 +301,9 @@ const Paragraph = ({
     children={children}
     color={color}
     component={component}
-    data-se={testId}
+    data-nt={testId}
+    data-se={"hello"}
+    translate={translate}
     variant="body"
   />
 );
@@ -300,6 +319,7 @@ const Subordinate = ({
   color,
   component,
   testId,
+  translate,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
@@ -309,6 +329,7 @@ const Subordinate = ({
     color={color}
     component={component}
     data-se={testId}
+    translate={translate}
     variant="subordinate"
   />
 );
@@ -324,6 +345,7 @@ const Support = ({
   color,
   component,
   testId,
+  translate,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
@@ -333,6 +355,7 @@ const Support = ({
     color={color}
     component={component}
     data-se={testId}
+    translate={translate}
     variant="support"
   />
 );
@@ -348,6 +371,7 @@ const Legend = ({
   color,
   component,
   testId,
+  translate,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
@@ -357,6 +381,7 @@ const Legend = ({
     color={color}
     component={component}
     data-se={testId}
+    translate={translate}
     variant="legend"
   />
 );

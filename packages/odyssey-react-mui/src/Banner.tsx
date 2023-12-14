@@ -16,7 +16,7 @@ import { ScreenReaderText } from "./ScreenReaderText";
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
 
-import type { SeleniumProps } from "./SeleniumProps";
+import type { AllowedProps } from "./AllowedProps";
 
 export const bannerRoleValues = ["status", "alert"] as const;
 export const bannerSeverityValues: AlertColor[] = [
@@ -56,7 +56,7 @@ export type BannerProps = {
    * The text content of the alert
    */
   text: string;
-} & SeleniumProps;
+} & AllowedProps;
 
 const Banner = ({
   linkUrl,
@@ -66,6 +66,7 @@ const Banner = ({
   severity,
   text,
   testId,
+  translate,
 }: BannerProps) => {
   const { t } = useTranslation();
 
@@ -78,9 +79,9 @@ const Banner = ({
       variant="banner"
     >
       <ScreenReaderText>{t(`severity.${severity}`)}:</ScreenReaderText>
-      <AlertTitle>{text}</AlertTitle>
+      <AlertTitle translate={translate}>{text}</AlertTitle>
       {linkUrl && (
-        <Link href={linkUrl} variant="monochrome">
+        <Link href={linkUrl} variant="monochrome" translate={translate}>
           {linkText}
         </Link>
       )}
