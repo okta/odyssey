@@ -448,15 +448,13 @@ const DataTable = ({
           const { index } = hoveredRow;
 
           if (isSpaceOrEnter) {
-            const indexByPage =
-              zeroIndexedPageNumber > 0
-                ? index + zeroIndexedPageNumber * resultsPerPage
-                : index;
+            const pageRelativeIndex =
+              index + zeroIndexedPageNumber * resultsPerPage;
 
-            if (indexByPage !== currentIndex) {
+            if (pageRelativeIndex !== currentIndex) {
               handleRowReordering({
                 rowId: row.id,
-                newIndex: indexByPage,
+                newIndex: pageRelativeIndex,
               });
 
               // Can't transition CSS hover effect. Use timeout to delay hovered row effect removal
