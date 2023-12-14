@@ -412,6 +412,90 @@ const DataTable = ({
     table.setHoveredRow(null);
   };
 
+  type HandleDragHandleKeyDownArgs = {
+    table: MRT_TableInstance<MRT_RowData>;
+    row: MRT_Row<MRT_RowData>;
+    event: KeyboardEvent<HTMLButtonElement>;
+  };
+
+  const handleDragHandleKeyDown = ({
+    table,
+    row,
+    event,
+  }: HandleDragHandleKeyDownArgs) => {
+    const { hoveredRow } = table.getState();
+
+    const { key } = event;
+
+    const isSpaceKey = key === " ";
+    const isEnterKey = key === "Enter";
+    const isEscapeKey = key === "Escape";
+    const isArrowDown = key === "ArrowDown";
+    const isArrowUp = key === "ArrowUp";
+    const isSpaceOrEnter = isSpaceKey || isEnterKey;
+    const zeroIndexedPageNumber = page - 1;
+    const currentIndex = row.index + zeroIndexedPageNumber * resultsPerPage;
+
+    if (isEscapeKey) {
+      resetDraggingAndHoveredRow(table);
+      return;
+    }
+
+    if (isSpaceOrEnter) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    if (draggingRow) {
+      if (typeof hoveredRow?.index === "number") {
+        const { index } = hoveredRow;
+
+        if (isSpaceOrEnter) {
+          const indexByPage =
+            zeroIndexedPageNumber > 0
+              ? index + zeroIndexedPageNumber * resultsPerPage
+              : index;
+
+          if (indexByPage !== currentIndex) {
+            handleRowReordering({
+              rowId: row.id,
+              newIndex: indexByPage,
+            });
+
+            // Can't transition CSS hover effect. Use timeout to delay hovered row effect removal
+            setTimeout(() => {
+              resetDraggingAndHoveredRow(table);
+            }, odysseyDesignTokens.TransitionDurationMainAsNumber);
+            return;
+          }
+        }
+
+        if (isArrowDown || isArrowUp) {
+          const nextIndex = isArrowDown ? index + 1 : index - 1;
+          const nextRowFromData = data[nextIndex];
+
+          if (nextRowFromData) {
+            getRowFromTableAndSetHovered(table, nextRowFromData.id);
+          }
+        }
+      } else {
+        if (isArrowDown || isArrowUp) {
+          const nextIndex = isArrowDown ? row.index + 1 : row.index - 1;
+
+          const nextRowFromData = data[nextIndex];
+
+          if (nextRowFromData) {
+            getRowFromTableAndSetHovered(table, nextRowFromData.id);
+          }
+        }
+      }
+    } else {
+      if (isSpaceOrEnter) {
+        setDraggingRow(row);
+      }
+    }
+  };
+
   const table = useMaterialReactTable({
     columns: columns,
     data: data,
@@ -513,79 +597,7 @@ const DataTable = ({
       title: "Drag row or press space/enter key to start and stop reordering",
       ariaLabel:
         "Drag row to reorder. Or, press space or enter to start and stop reordering and esc to cancel.",
-      onKeyDown: (event: KeyboardEvent<HTMLButtonElement>) => {
-        const { hoveredRow } = table.getState();
-
-        const { key } = event;
-
-        const isSpaceKey = key === " ";
-        const isEnterKey = key === "Enter";
-        const isEscapeKey = key === "Escape";
-        const isArrowDown = key === "ArrowDown";
-        const isArrowUp = key === "ArrowUp";
-        const isSpaceOrEnter = isSpaceKey || isEnterKey;
-        const zeroIndexedPageNumber = page - 1;
-        const currentIndex = row.index + zeroIndexedPageNumber * resultsPerPage;
-
-        if (isEscapeKey) {
-          resetDraggingAndHoveredRow(table);
-          return;
-        }
-
-        if (isSpaceOrEnter) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-
-        if (draggingRow) {
-          if (typeof hoveredRow?.index === "number") {
-            const { index } = hoveredRow;
-
-            if (isSpaceOrEnter) {
-              const indexByPage =
-                zeroIndexedPageNumber > 0
-                  ? index + zeroIndexedPageNumber * resultsPerPage
-                  : index;
-
-              if (indexByPage !== currentIndex) {
-                handleRowReordering({
-                  rowId: row.id,
-                  newIndex: indexByPage,
-                });
-
-                // Can't transition CSS hover effect. Use timeout to delay hovered row effect removal
-                setTimeout(() => {
-                  resetDraggingAndHoveredRow(table);
-                }, odysseyDesignTokens.TransitionDurationMainAsNumber);
-                return;
-              }
-            }
-
-            if (isArrowDown || isArrowUp) {
-              const nextIndex = isArrowDown ? index + 1 : index - 1;
-              const nextRowFromData = data[nextIndex];
-
-              if (nextRowFromData) {
-                getRowFromTableAndSetHovered(table, nextRowFromData.id);
-              }
-            }
-          } else {
-            if (isArrowDown || isArrowUp) {
-              const nextIndex = isArrowDown ? row.index + 1 : row.index - 1;
-
-              const nextRowFromData = data[nextIndex];
-
-              if (nextRowFromData) {
-                getRowFromTableAndSetHovered(table, nextRowFromData.id);
-              }
-            }
-          }
-        } else {
-          if (isSpaceOrEnter) {
-            setDraggingRow(row);
-          }
-        }
-      },
+      onKeyDown: (event) => handleDragHandleKeyDown({ table, row, event }),
       onBlur: () => {
         resetDraggingAndHoveredRow(table);
       },
