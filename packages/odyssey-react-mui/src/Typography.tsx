@@ -301,8 +301,7 @@ const Paragraph = ({
     children={children}
     color={color}
     component={component}
-    data-nt={testId}
-    data-se={"hello"}
+    data-se={testId}
     translate={translate}
     variant="body"
   />
