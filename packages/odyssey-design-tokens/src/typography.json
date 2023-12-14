@@ -40,7 +40,7 @@
       "system": {
         "value": "'-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Oxygen-Sans', 'Ubuntu', 'Cantarell'"
       },
-      "fallBack": {
+      "fallback": {
         "value": "'Helvetica Neue', sans-serif"
       },
       "aeonik": {
@@ -50,10 +50,10 @@
         "value": "'Inter'"
       },
       "body": {
-        "value": "{typography.family.inter.value}, {typography.family.system.value}, {typography.family.fallBack.value}"
+        "value": "{typography.family.inter.value}, {typography.family.system.value}, {typography.family.fallback.value}"
       },
       "heading": {
-        "value": "{typography.family.aeonik.value}, {typography.family.inter.value}, {typography.family.system.value}, {typography.family.fallBack.value}"
+        "value": "{typography.family.aeonik.value}, {typography.family.inter.value}, {typography.family.system.value}, {typography.family.fallback.value}"
       },
       "button": {
         "value": "{typography.family.heading.value}"
