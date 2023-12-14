@@ -380,6 +380,14 @@ const DataTable = ({
     onRowSelectionChange?.(rowSelection);
   }, [rowSelection, onRowSelectionChange]);
 
+  const tableDensityCellClassName = useMemo(() => {
+    return density === "spacious"
+      ? "MuiTableCell-spacious"
+      : density === "compact"
+      ? "MuiTableCell-compact"
+      : "MuiTableCell-default";
+  }, [density]);
+
   const rowVirtualizerInstanceRef =
     useRef<MRT_Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
 
@@ -411,8 +419,25 @@ const DataTable = ({
     selectAllMode: "all",
     enableColumnActions: false,
     layoutMode: "grid-no-grow",
+    defaultColumn: {
+      Cell: ({ cell }) => {
+        const value = cell.getValue<string>();
+        return (
+          <Box
+            sx={{
+              whiteSpace: "nowrap",
+              textOverflow: "ellipsis",
+              overflow: "hidden",
+            }}
+          >
+            {value}
+          </Box>
+        );
+      },
+    },
     displayColumnDefOptions: {
       "mrt-row-actions": {
+        header: "",
         muiTableBodyCellProps: {
           align: "right",
           sx: {
@@ -435,12 +460,21 @@ const DataTable = ({
             minWidth: 0,
             width: 32,
           },
+          className: "ods-drag-handle",
         },
         muiTableHeadCellProps: {
           sx: {
             minWidth: 0,
             width: 32,
           },
+        },
+      },
+      "mrt-row-select": {
+        muiTableHeadCellProps: {
+          padding: "checkbox",
+        },
+        muiTableBodyCellProps: {
+          padding: "checkbox",
         },
       },
     },
@@ -465,6 +499,10 @@ const DataTable = ({
       className: sorting.find((item) => item.id === column.id)
         ? "isSorted"
         : "isUnsorted",
+    }),
+
+    muiTableBodyCellProps: () => ({
+      className: tableDensityCellClassName,
     }),
 
     muiTableBodyRowProps: ({ table, row }) => ({
@@ -628,7 +666,14 @@ const DataTable = ({
         )}
       </>
     ),
-    [density, columnVisibility, columns, hasChangeableDensity]
+    [
+      density,
+      columnVisibility,
+      columns,
+      hasChangeableDensity,
+      handleColumnVisibility,
+      hasColumnVisibility,
+    ]
   );
 
   return (

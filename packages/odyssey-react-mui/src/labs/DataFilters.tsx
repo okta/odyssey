@@ -29,7 +29,9 @@ import { Button } from "../Button";
 import {
   IconButton as MuiIconButton,
   Menu as MuiMenu,
+  MenuItem as MuiMenuItem,
   Popover as MuiPopover,
+  Typography as MuiTypography,
 } from "@mui/material";
 import {
   CheckIcon,
@@ -37,8 +39,7 @@ import {
   CloseCircleFilledIcon,
   FilterIcon,
 } from "../icons.generated";
-import { MenuItem } from "../MenuItem";
-import { Paragraph, Subordinate } from "../Typography";
+import { Subordinate } from "../Typography";
 import { TextField } from "../TextField";
 import { CheckboxGroup } from "../CheckboxGroup";
 import { Checkbox } from "../Checkbox";
@@ -283,13 +284,23 @@ const DataFilters = ({
             )?.value;
 
             return (
-              <MenuItem
+              <MuiMenuItem
                 key={filter.id}
                 onClick={(event) => {
                   setIsFilterPopoverOpen(true);
                   setFilterPopoverAnchorElement(event.currentTarget);
                   setFilterPopoverCurrentFilter(filter);
                 }}
+                selected={
+                  filterPopoverCurrentFilter === filter &&
+                  isFilterPopoverOpen === true
+                }
+                className={
+                  filterPopoverCurrentFilter === filter &&
+                  isFilterPopoverOpen === true
+                    ? "isVisiblySelected"
+                    : undefined
+                }
               >
                 <Box
                   sx={{
@@ -298,10 +309,14 @@ const DataFilters = ({
                     justifyContent: "space-between",
                     width: "100%",
                     minWidth: 180,
+                    paddingBlock: 1,
+                    paddingInlineStart: 2,
                   }}
                 >
                   <Box sx={{ marginRight: 2 }}>
-                    <Paragraph component="div">{filter.label}</Paragraph>
+                    <MuiTypography fontWeight="500" sx={{ marginBlockEnd: 2 }}>
+                      {filter.label}
+                    </MuiTypography>
                     <Subordinate component="div">
                       {!latestFilterValue ||
                       (Array.isArray(latestFilterValue) &&
@@ -314,13 +329,20 @@ const DataFilters = ({
                   </Box>
                   <ChevronRightIcon />
                 </Box>
-              </MenuItem>
+              </MuiMenuItem>
             );
           })}
         </MuiMenu>
       </>
     ),
-    [isFiltersMenuOpen, filtersMenuAnchorElement, filtersProp, filters]
+    [
+      isFiltersMenuOpen,
+      filterPopoverCurrentFilter,
+      isFilterPopoverOpen,
+      filtersMenuAnchorElement,
+      filtersProp,
+      filters,
+    ]
   );
 
   return (
@@ -337,6 +359,8 @@ const DataFilters = ({
               <MuiPopover
                 anchorEl={filterPopoverAnchorElement}
                 open={isFilterPopoverOpen}
+                elevation={2}
+                sx={{ marginLeft: 2, marginTop: -1 }}
                 anchorOrigin={{ vertical: "top", horizontal: "right" }}
                 onClose={(ev: MouseEvent) => {
                   if (menuRef.current) {
@@ -531,19 +555,22 @@ const DataFilters = ({
               }}
             >
               <Box sx={{ display: "flex", gap: 2, width: "100%" }}>
-                <SearchField
-                  value={searchValue}
-                  label="Search"
-                  onClear={() => {
-                    setSearchValue("");
-                    onChangeSearch("");
-                  }}
-                  onChange={(ev) => setSearchValue(ev.target.value)}
-                />
+                <Box sx={{ width: "100%" }}>
+                  <SearchField
+                    variant="filled"
+                    value={searchValue}
+                    label="Search"
+                    onClear={() => {
+                      setSearchValue("");
+                      onChangeSearch("");
+                    }}
+                    onChange={(ev) => setSearchValue(ev.target.value)}
+                  />
+                </Box>
                 {hasSearchSubmitButton && (
                   <Box>
                     <Button
-                      variant="primary"
+                      variant="secondary"
                       label="Search"
                       onClick={() => onChangeSearch(searchValue)}
                     />
@@ -571,15 +598,7 @@ const DataFilters = ({
 
       {/* Lower section */}
       {activeFilters.length > 0 && (
-        <Box
-          sx={{
-            borderTopWidth: 1,
-            borderTopColor: "#eeeeee",
-            borderTopStyle: "solid",
-            paddingTop: 4,
-            marginTop: 4,
-          }}
-        >
+        <Box sx={{ marginTop: 4 }}>
           <TagList>
             {activeFilters.map((filter) => (
               <Tag

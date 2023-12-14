@@ -140,6 +140,7 @@ const Button = ({
         startIcon={startIcon}
         type={type}
         variant={variant}
+        className={!label ? "isIconOnly" : undefined}
       >
         {label}
       </MuiButton>
