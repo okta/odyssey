@@ -492,7 +492,7 @@ const DataTable = ({
         }
       }
     },
-    [draggingRow]
+    [draggingRow, data]
   );
 
   const handleDragHandleOnDragEnd = useCallback(
