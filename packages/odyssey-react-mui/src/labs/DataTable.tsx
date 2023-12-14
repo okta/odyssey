@@ -283,7 +283,7 @@ const DataTable = ({
   hasSearch,
   hasSorting,
 }: DataTableProps) => {
-  const odysseyTokens = useOdysseyDesignTokens();
+  const odysseyDesignTokens = useOdysseyDesignTokens();
   const [draggingRow, setDraggingRow] = useState<MRT_Row<MRT_RowData> | null>();
   const [showSkeletons, setShowSkeletons] = useState<boolean>(true);
   const [data, setData] =
@@ -399,6 +399,7 @@ const DataTable = ({
     id: MRT_RowData["id"]
   ) => {
     const nextRow: MRT_RowData = table.getRow(id);
+    console.log({ nextRow });
     if (nextRow) {
       table.setHoveredRow(nextRow);
     }
@@ -508,140 +509,117 @@ const DataTable = ({
           : undefined,
     }),
 
-    muiRowDragHandleProps: ({ table, row }) => {
-      return {
-        title: "Drag row or press space/enter key to start and stop reordering",
-        ariaLabel:
-          "Drag row to reorder. Or, press space or enter to start and stop reordering and esc to cancel.",
-        onKeyDown: (event: KeyboardEvent<HTMLButtonElement>) => {
-          const { hoveredRow } = table.getState();
+    muiRowDragHandleProps: ({ table, row }) => ({
+      title: "Drag row or press space/enter key to start and stop reordering",
+      ariaLabel:
+        "Drag row to reorder. Or, press space or enter to start and stop reordering and esc to cancel.",
+      onKeyDown: (event: KeyboardEvent<HTMLButtonElement>) => {
+        const { hoveredRow } = table.getState();
 
-          const { key } = event;
-          const isSpaceKey = key === " ";
-          const isEnterKey = key === "Enter";
-          const isEscapeKey = key === "Escape";
+        const { key } = event;
 
-          if (isEscapeKey) {
-            resetDraggingAndHoveredRow(table);
-            return;
-          }
+        const isSpaceKey = key === " ";
+        const isEnterKey = key === "Enter";
+        const isEscapeKey = key === "Escape";
+        const isArrowDown = key === "ArrowDown";
+        const isArrowUp = key === "ArrowUp";
+        const isSpaceOrEnter = isSpaceKey || isEnterKey;
+        const zeroIndexedPageNumber = page - 1;
+        const currentIndex = row.index + zeroIndexedPageNumber * resultsPerPage;
 
-          const isSpaceOrEnter = isSpaceKey || isEnterKey;
+        if (isEscapeKey) {
+          resetDraggingAndHoveredRow(table);
+          return;
+        }
 
-          if (isSpaceOrEnter) {
-            event.preventDefault();
-          }
+        if (isSpaceOrEnter) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
 
-          const isArrowDown = key === "ArrowDown";
-          const isArrowUp = key === "ArrowUp";
+        if (draggingRow) {
+          if (typeof hoveredRow?.index === "number") {
+            const { index } = hoveredRow;
 
-          const currentIndex = row.index + (page - 1) * resultsPerPage;
+            if (isSpaceOrEnter) {
+              const indexByPage =
+                zeroIndexedPageNumber > 0
+                  ? index + zeroIndexedPageNumber * resultsPerPage
+                  : index;
 
-          if (draggingRow) {
-            if (hoveredRow && hoveredRow.index) {
-              const { index } = hoveredRow;
-
-              if (isSpaceOrEnter && index != currentIndex) {
+              if (indexByPage !== currentIndex) {
                 handleReordering({
                   rowId: row.id,
-                  newIndex: index,
+                  newIndex: indexByPage,
                 });
 
+                // Can't transition CSS hover effect. Use timeout to delay hovered row effect removal
                 setTimeout(() => {
                   resetDraggingAndHoveredRow(table);
-                }, 1000);
+                }, odysseyDesignTokens.TransitionDurationMainAsNumber);
                 return;
               }
+            }
 
-              if (isArrowDown) {
-                const nextRowFromDataAfterDownArrow = data[index + 1];
+            if (isArrowDown || isArrowUp) {
+              const nextIndex = isArrowDown ? index + 1 : index - 1;
+              const nextRowFromData = data[nextIndex];
 
-                if (nextRowFromDataAfterDownArrow) {
-                  getRowFromTableAndSetHovered(
-                    table,
-                    nextRowFromDataAfterDownArrow.id
-                  );
-                }
-              }
-
-              if (isArrowUp) {
-                const nextRowFromDataAfterUpArrow = data[index - 1];
-
-                if (nextRowFromDataAfterUpArrow) {
-                  getRowFromTableAndSetHovered(
-                    table,
-                    nextRowFromDataAfterUpArrow.id
-                  );
-                }
-              }
-            } else {
-              if (isArrowDown || isArrowUp) {
-                if (isArrowDown) {
-                  const shouldDisableReOrder =
-                    currentIndex === page * resultsPerPage - 1;
-                  if (shouldDisableReOrder) {
-                    return;
-                  }
-                }
-
-                if (isArrowUp) {
-                  const shouldDisableReOrder =
-                    currentIndex === 0 ||
-                    currentIndex === (page - 1) * resultsPerPage;
-                  if (shouldDisableReOrder) {
-                    return;
-                  }
-                }
-
-                const nextIndex = isArrowDown ? row.index + 1 : row.index - 1;
-                const nextRowFromData = data[nextIndex];
-
-                if (nextRowFromData) {
-                  getRowFromTableAndSetHovered(table, nextRowFromData.id);
-                }
+              if (nextRowFromData) {
+                getRowFromTableAndSetHovered(table, nextRowFromData.id);
               }
             }
           } else {
-            if (isSpaceOrEnter) {
-              setDraggingRow(row);
+            if (isArrowDown || isArrowUp) {
+              const nextIndex = isArrowDown ? row.index + 1 : row.index - 1;
+
+              const nextRowFromData = data[nextIndex];
+
+              if (nextRowFromData) {
+                getRowFromTableAndSetHovered(table, nextRowFromData.id);
+              }
             }
           }
-        },
-        onBlur: () => {
-          resetDraggingAndHoveredRow(table);
-        },
-        onDragEnd: () => {
-          const cols = table.getAllColumns();
-          cols[0].toggleVisibility();
-
-          const { draggingRow, hoveredRow } = table.getState();
-          if (draggingRow) {
-            handleReordering({
-              rowId: draggingRow.id,
-              newIndex: (hoveredRow as MRT_RowData).index,
-            });
+        } else {
+          if (isSpaceOrEnter) {
+            setDraggingRow(row);
           }
+        }
+      },
+      onBlur: () => {
+        resetDraggingAndHoveredRow(table);
+      },
+      onDragEnd: () => {
+        const cols = table.getAllColumns();
+        cols[0].toggleVisibility();
 
-          setDraggingRow(null);
-        },
+        const { draggingRow, hoveredRow } = table.getState();
+        if (draggingRow) {
+          handleReordering({
+            rowId: draggingRow.id,
+            newIndex: (hoveredRow as MRT_RowData).index,
+          });
+        }
 
-        onDragCapture: () => {
-          if (!draggingRow && table.getState().draggingRow?.id) {
-            setDraggingRow(table.getState().draggingRow);
-          }
-        },
-        sx: {
-          padding: odysseyTokens.Spacing1,
-          borderRadius: odysseyTokens.BorderRadiusMain,
+        setDraggingRow(null);
+      },
 
-          "&:focus-visible": {
-            boxShadow: `0 0 0 2px ${odysseyTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyTokens.PalettePrimaryMain}`,
-            outline: "2px solid transparent",
-            outlineOffset: "1px",
-          },
+      onDragCapture: () => {
+        if (!draggingRow && table.getState().draggingRow?.id) {
+          setDraggingRow(table.getState().draggingRow);
+        }
+      },
+      sx: {
+        padding: odysseyDesignTokens.Spacing1,
+        borderRadius: odysseyDesignTokens.BorderRadiusMain,
+
+        "&:focus-visible": {
+          boxShadow: `0 0 0 2px ${odysseyDesignTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyDesignTokens.PalettePrimaryMain}`,
+          outline: "2px solid transparent",
+          outlineOffset: "1px",
         },
-      };
-    },
+      },
+    }),
 
     renderRowActions: ({ row }) => {
       const currentIndex = row.index + (page - 1) * resultsPerPage;
