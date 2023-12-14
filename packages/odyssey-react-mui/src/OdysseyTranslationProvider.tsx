@@ -46,7 +46,7 @@ export type OdysseyTranslationProviderProps<
 
 const formatLanguageCodeToHyphenated = <SupportedLanguages extends string>(
   languageCode: OdysseyTranslationProviderProps<SupportedLanguages>["languageCode"]
-) => languageCode?.replaceAll("_", "-");
+) => languageCode?.replace(/_/g, "-");
 
 export const OdysseyTranslationProvider = <SupportedLanguages extends string>({
   children,
@@ -60,7 +60,7 @@ export const OdysseyTranslationProvider = <SupportedLanguages extends string>({
       ? formatLanguageCodeToHyphenated<SupportedLanguages>(languageCode)
       : languageCode;
 
-    const changeHtmlLangAttr = () => {
+    const changeHtmlElementLanguageAttribute = () => {
       window.document.documentElement.setAttribute(
         "lang",
         normalizedLanguageCode || "en"
@@ -69,7 +69,7 @@ export const OdysseyTranslationProvider = <SupportedLanguages extends string>({
     // Defaults to the browser's language if available otherwise `en` will be used
     i18n.changeLanguage(
       normalizedLanguageCode || window.navigator.language,
-      changeHtmlLangAttr
+      changeHtmlElementLanguageAttribute
     );
   }, [languageCode]);
 
