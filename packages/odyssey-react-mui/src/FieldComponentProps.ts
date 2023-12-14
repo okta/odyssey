@@ -12,7 +12,7 @@
 
 import { ReactElement } from "react";
 
-import { Link } from "./Link";
+import { HintLink } from "./HintLink";
 
 export type FieldComponentProps = {
   /**
@@ -26,7 +26,7 @@ export type FieldComponentProps = {
   /**
    * A `Link` component to provide greater context that is rendered at the end of the `hint` text
    */
-  HintLinkComponent?: ReactElement<typeof Link>;
+  HintLinkComponent?: ReactElement<typeof HintLink>;
   /**
    * The id of the `input` element.
    */
