@@ -2141,6 +2141,7 @@ export const components = ({
 
           ...(ownerState.disabled && {
             color: odysseyTokens.TypographyColorDisabled,
+            // !important used to override more specific .Mui-Disabled class selector
             opacity: "1 !important",
           }),
 
