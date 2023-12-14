@@ -257,6 +257,8 @@ export type DataTableProps = {
   ) => ReactElement<typeof MenuItem | typeof Fragment>;
 };
 
+type TableType = MRT_TableInstance<MRT_RowData>;
+
 const DataTable = ({
   columns,
   data: dataProp,
@@ -395,7 +397,7 @@ const DataTable = ({
     useRef<MRT_Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
 
   const getRowFromTableAndSetHovered = (
-    table: MRT_TableInstance<MRT_RowData>,
+    table: TableType,
     id: MRT_RowData["id"]
   ) => {
     const nextRow: MRT_RowData = table.getRow(id);
@@ -405,15 +407,13 @@ const DataTable = ({
     }
   };
 
-  const resetDraggingAndHoveredRow = (
-    table: MRT_TableInstance<MRT_RowData>
-  ) => {
+  const resetDraggingAndHoveredRow = (table: TableType) => {
     setDraggingRow(null);
     table.setHoveredRow(null);
   };
 
   type HandleDragHandleKeyDownArgs = {
-    table: MRT_TableInstance<MRT_RowData>;
+    table: TableType;
     row: MRT_Row<MRT_RowData>;
     event: KeyboardEvent<HTMLButtonElement>;
   };
@@ -490,6 +490,33 @@ const DataTable = ({
         if (isSpaceOrEnter) {
           setDraggingRow(row);
         }
+      }
+    },
+    [draggingRow]
+  );
+
+  const handleDragHandleOnDragEnd = useCallback(
+    (table: TableType) => {
+      const cols = table.getAllColumns();
+      cols[0].toggleVisibility();
+
+      const { draggingRow, hoveredRow } = table.getState();
+      if (draggingRow) {
+        handleRowReordering({
+          rowId: draggingRow.id,
+          newIndex: (hoveredRow as MRT_RowData).index,
+        });
+      }
+
+      setDraggingRow(null);
+    },
+    [draggingRow]
+  );
+
+  const handleDragHandleOnDragCapture = useCallback(
+    (table: TableType) => {
+      if (!draggingRow && table.getState().draggingRow?.id) {
+        setDraggingRow(table.getState().draggingRow);
       }
     },
     [draggingRow]
@@ -600,26 +627,8 @@ const DataTable = ({
       onBlur: () => {
         resetDraggingAndHoveredRow(table);
       },
-      onDragEnd: () => {
-        const cols = table.getAllColumns();
-        cols[0].toggleVisibility();
-
-        const { draggingRow, hoveredRow } = table.getState();
-        if (draggingRow) {
-          handleRowReordering({
-            rowId: draggingRow.id,
-            newIndex: (hoveredRow as MRT_RowData).index,
-          });
-        }
-
-        setDraggingRow(null);
-      },
-
-      onDragCapture: () => {
-        if (!draggingRow && table.getState().draggingRow?.id) {
-          setDraggingRow(table.getState().draggingRow);
-        }
-      },
+      onDragEnd: () => handleDragHandleOnDragEnd(table),
+      onDragCapture: () => handleDragHandleOnDragCapture(table),
       sx: {
         padding: odysseyDesignTokens.Spacing1,
         borderRadius: odysseyDesignTokens.BorderRadiusMain,
