@@ -363,7 +363,7 @@ const DataTable = ({
     [rowSelection]
   );
 
-  const handleReordering = useCallback(
+  const handleRowReordering = useCallback(
     ({ rowId, newIndex }: { rowId: string; newIndex: number }) => {
       if (newIndex < 0) {
         return;
@@ -399,7 +399,7 @@ const DataTable = ({
     id: MRT_RowData["id"]
   ) => {
     const nextRow: MRT_RowData = table.getRow(id);
-    console.log({ nextRow });
+
     if (nextRow) {
       table.setHoveredRow(nextRow);
     }
@@ -548,7 +548,7 @@ const DataTable = ({
                   : index;
 
               if (indexByPage !== currentIndex) {
-                handleReordering({
+                handleRowReordering({
                   rowId: row.id,
                   newIndex: indexByPage,
                 });
@@ -595,7 +595,7 @@ const DataTable = ({
 
         const { draggingRow, hoveredRow } = table.getState();
         if (draggingRow) {
-          handleReordering({
+          handleRowReordering({
             rowId: draggingRow.id,
             newIndex: (hoveredRow as MRT_RowData).index,
           });
@@ -643,14 +643,16 @@ const DataTable = ({
               )}
               <MenuItem
                 isDisabled={currentIndex <= 0}
-                onClick={() => handleReordering({ rowId: row.id, newIndex: 0 })}
+                onClick={() =>
+                  handleRowReordering({ rowId: row.id, newIndex: 0 })
+                }
               >
                 <ArrowTopIcon /> Bring to front
               </MenuItem>
               <MenuItem
                 isDisabled={currentIndex <= 0}
                 onClick={() =>
-                  handleReordering({
+                  handleRowReordering({
                     rowId: row.id,
                     newIndex: currentIndex <= 0 ? 0 : currentIndex - 1,
                   })
@@ -661,7 +663,7 @@ const DataTable = ({
               <MenuItem
                 isDisabled={totalRows ? currentIndex >= totalRows - 1 : false}
                 onClick={() =>
-                  handleReordering({
+                  handleRowReordering({
                     rowId: row.id,
                     newIndex: currentIndex + 1,
                   })
@@ -674,7 +676,7 @@ const DataTable = ({
                   <MenuItem
                     isDisabled={currentIndex >= totalRows - 1}
                     onClick={() =>
-                      handleReordering({
+                      handleRowReordering({
                         rowId: row.id,
                         newIndex: totalRows,
                       })
