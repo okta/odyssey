@@ -418,83 +418,82 @@ const DataTable = ({
     event: KeyboardEvent<HTMLButtonElement>;
   };
 
-  const handleDragHandleKeyDown = ({
-    table,
-    row,
-    event,
-  }: HandleDragHandleKeyDownArgs) => {
-    const { hoveredRow } = table.getState();
+  const handleDragHandleKeyDown = useCallback(
+    ({ table, row, event }: HandleDragHandleKeyDownArgs) => {
+      const { hoveredRow } = table.getState();
 
-    const { key } = event;
+      const { key } = event;
 
-    const isSpaceKey = key === " ";
-    const isEnterKey = key === "Enter";
-    const isEscapeKey = key === "Escape";
-    const isArrowDown = key === "ArrowDown";
-    const isArrowUp = key === "ArrowUp";
-    const isSpaceOrEnter = isSpaceKey || isEnterKey;
-    const zeroIndexedPageNumber = page - 1;
-    const currentIndex = row.index + zeroIndexedPageNumber * resultsPerPage;
+      const isSpaceKey = key === " ";
+      const isEnterKey = key === "Enter";
+      const isEscapeKey = key === "Escape";
+      const isArrowDown = key === "ArrowDown";
+      const isArrowUp = key === "ArrowUp";
+      const isSpaceOrEnter = isSpaceKey || isEnterKey;
+      const zeroIndexedPageNumber = page - 1;
+      const currentIndex = row.index + zeroIndexedPageNumber * resultsPerPage;
 
-    if (isEscapeKey) {
-      resetDraggingAndHoveredRow(table);
-      return;
-    }
+      if (isEscapeKey) {
+        resetDraggingAndHoveredRow(table);
+        return;
+      }
 
-    if (isSpaceOrEnter) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+      if (isSpaceOrEnter) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
 
-    if (draggingRow) {
-      if (typeof hoveredRow?.index === "number") {
-        const { index } = hoveredRow;
+      if (draggingRow) {
+        if (typeof hoveredRow?.index === "number") {
+          const { index } = hoveredRow;
 
-        if (isSpaceOrEnter) {
-          const indexByPage =
-            zeroIndexedPageNumber > 0
-              ? index + zeroIndexedPageNumber * resultsPerPage
-              : index;
+          if (isSpaceOrEnter) {
+            const indexByPage =
+              zeroIndexedPageNumber > 0
+                ? index + zeroIndexedPageNumber * resultsPerPage
+                : index;
 
-          if (indexByPage !== currentIndex) {
-            handleRowReordering({
-              rowId: row.id,
-              newIndex: indexByPage,
-            });
+            if (indexByPage !== currentIndex) {
+              handleRowReordering({
+                rowId: row.id,
+                newIndex: indexByPage,
+              });
 
-            // Can't transition CSS hover effect. Use timeout to delay hovered row effect removal
-            setTimeout(() => {
-              resetDraggingAndHoveredRow(table);
-            }, odysseyDesignTokens.TransitionDurationMainAsNumber);
-            return;
+              // Can't transition CSS hover effect. Use timeout to delay hovered row effect removal
+              setTimeout(() => {
+                resetDraggingAndHoveredRow(table);
+              }, odysseyDesignTokens.TransitionDurationMainAsNumber);
+              return;
+            }
           }
-        }
 
-        if (isArrowDown || isArrowUp) {
-          const nextIndex = isArrowDown ? index + 1 : index - 1;
-          const nextRowFromData = data[nextIndex];
+          if (isArrowDown || isArrowUp) {
+            const nextIndex = isArrowDown ? index + 1 : index - 1;
+            const nextRowFromData = data[nextIndex];
 
-          if (nextRowFromData) {
-            getRowFromTableAndSetHovered(table, nextRowFromData.id);
+            if (nextRowFromData) {
+              getRowFromTableAndSetHovered(table, nextRowFromData.id);
+            }
+          }
+        } else {
+          if (isArrowDown || isArrowUp) {
+            const nextIndex = isArrowDown ? row.index + 1 : row.index - 1;
+
+            const nextRowFromData = data[nextIndex];
+
+            if (nextRowFromData) {
+              getRowFromTableAndSetHovered(table, nextRowFromData.id);
+            }
           }
         }
       } else {
-        if (isArrowDown || isArrowUp) {
-          const nextIndex = isArrowDown ? row.index + 1 : row.index - 1;
-
-          const nextRowFromData = data[nextIndex];
-
-          if (nextRowFromData) {
-            getRowFromTableAndSetHovered(table, nextRowFromData.id);
-          }
+        if (isSpaceOrEnter) {
+          setDraggingRow(row);
         }
       }
-    } else {
-      if (isSpaceOrEnter) {
-        setDraggingRow(row);
-      }
-    }
-  };
+    },
+    [draggingRow]
+  );
 
   const table = useMaterialReactTable({
     columns: columns,
