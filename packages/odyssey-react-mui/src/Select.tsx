@@ -176,8 +176,12 @@ const Select = <
 
   const handleDelete = useCallback(
     (itemToDelete: string) => {
+      if (!Array.isArray(internalSelectedValues)) {
+        return;
+      }
+
       const newValue = internalSelectedValues!.filter(
-        (item) => item !== itemToDelete
+        (item: string) => item !== itemToDelete
       );
 
       const syntheticEvent = {
