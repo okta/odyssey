@@ -54,11 +54,8 @@ export const OdysseyTranslationProvider = <SupportedLanguages extends string>({
   translationOverrides,
 }: OdysseyTranslationProviderProps<SupportedLanguages>) => {
   useEffect(() => {
-    const languageCodeIncludesUnderscore = languageCode?.includes("_");
-
-    const normalizedLanguageCode = languageCodeIncludesUnderscore
-      ? formatLanguageCodeToHyphenated<SupportedLanguages>(languageCode)
-      : languageCode;
+    const normalizedLanguageCode =
+      formatLanguageCodeToHyphenated<SupportedLanguages>(languageCode);
 
     const changeHtmlElementLanguageAttribute = () => {
       window.document.documentElement.setAttribute(
