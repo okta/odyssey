@@ -110,10 +110,10 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
         },
       },
     },
-    badgeContentMax: {
+    notificationCountMax: {
       control: { type: "number" },
       description:
-        "The limit at which the badge will show '`{badgeContentMax}`+'. A number between 0-999",
+        "The limit at which the badge will show '`{notificationCountMax}`+'. A number between 0-999",
       table: {
         type: {
           summary: "number",
@@ -173,7 +173,7 @@ const DefaultTemplate: StoryObj<TabItemProps> = {
     if (args?.label) {
       tabs.push({
         notificationCount: args?.notificationCount,
-        badgeContentMax: args?.badgeContentMax,
+        notificationCountMax: args?.notificationCountMax,
         label: args.label,
         value: args.value,
         isDisabled: args.isDisabled,
@@ -275,7 +275,7 @@ export const Controlled: StoryObj<TabItemProps> = {
 export const WithBadge: StoryObj<TabItemProps> = {
   ...DefaultTemplate,
   args: {
-    badgeContent: 0,
+    notificationCount: 0,
     label: "Xenomorphs",
     value: "xenomorphs",
     children: <ExampleTabContent label="Xenomorphs" />,

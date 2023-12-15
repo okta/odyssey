@@ -45,10 +45,6 @@ export type TabItemProps = {
    */
   label: string;
   /**
-   * The content for an optional notification badge
-   */
-  notificationCount?: BadgeProps["badgeContent"];
-  /**
    * An optional icon to display at the start of the TabItem
    */
   startIcon?: ReactElement;
@@ -56,8 +52,10 @@ export type TabItemProps = {
    * The value associated with the TabItem
    */
   value?: string;
-} & Pick<BadgeProps, "badgeContentMax"> &
-  AllowedProps;
+} & {
+  notificationCount?: BadgeProps["badgeContent"];
+  notificationCountMax?: BadgeProps["badgeContentMax"];
+} & AllowedProps;
 
 export type TabsProps = {
   /**
@@ -83,6 +81,42 @@ export type TabsProps = {
   onChange?: MuiTabListProps["onChange"];
 };
 
+const TabLabel = ({
+  label,
+  notificationCount,
+  notificationCountMax,
+  tabState,
+  value,
+}: Pick<
+  TabItemProps,
+  "label" | "notificationCount" | "notificationCountMax" | "value"
+> & {
+  tabState: string;
+}) => {
+  const odysseyDesignTokens = useOdysseyDesignTokens();
+
+  return (
+    <>
+      {label}
+      {typeof notificationCount === "number" && notificationCount > 0 && (
+        <Box
+          sx={{
+            marginInlineStart: notificationCount
+              ? odysseyDesignTokens.Spacing2
+              : 0,
+          }}
+        >
+          <Badge
+            badgeContent={notificationCount}
+            badgeContentMax={notificationCountMax}
+            type={value === tabState ? "attention" : "default"}
+          />
+        </Box>
+      )}
+    </>
+  );
+};
+
 const Tabs = ({
   ariaLabel,
   initialValue,
@@ -90,8 +124,6 @@ const Tabs = ({
   value,
   onChange: onChangeProp,
 }: TabsProps) => {
-  const odysseyDesignTokens = useOdysseyDesignTokens();
-
   const [tabState, setTabState] = useState(initialValue ?? value ?? "0");
 
   const onChange = useCallback<NonNullable<MuiTabListProps["onChange"]>>(
@@ -108,55 +140,44 @@ const Tabs = ({
     }
   }, [value]);
 
+  const renderTab = useCallback(
+    (tab, index) => {
+      const {
+        testId,
+        isDisabled,
+        label,
+        startIcon,
+        value,
+        notificationCount,
+        notificationCountMax,
+      } = tab;
+
+      return (
+        <MuiTab
+          data-se={testId}
+          disabled={isDisabled}
+          icon={startIcon}
+          label={
+            <TabLabel
+              label={label}
+              notificationCount={notificationCount}
+              notificationCountMax={notificationCountMax}
+              tabState={tabState}
+              value={value}
+            />
+          }
+          value={value ? value : index.toString()}
+          key={value ? value : index.toString()}
+        />
+      );
+    },
+    [tabState, value]
+  );
+
   return (
     <MuiTabContext value={tabState}>
       <MuiTabList onChange={onChange} aria-label={ariaLabel}>
-        {tabs.map((tab, index) => {
-          const {
-            testId,
-            isDisabled,
-            label,
-            startIcon,
-            value,
-            notificationCount,
-            badgeContentMax,
-          } = tab;
-
-          const BadgeLabel = () => {
-            return (
-              <>
-                {label}
-                {typeof notificationCount === "number" &&
-                  notificationCount > 0 && (
-                    <Box
-                      sx={{
-                        marginInlineStart: notificationCount
-                          ? odysseyDesignTokens.Spacing2
-                          : 0,
-                      }}
-                    >
-                      <Badge
-                        badgeContent={notificationCount}
-                        badgeContentMax={badgeContentMax}
-                        type={value === tabState ? "attention" : "default"}
-                      />
-                    </Box>
-                  )}
-              </>
-            );
-          };
-
-          return (
-            <MuiTab
-              data-se={testId}
-              disabled={isDisabled}
-              icon={startIcon}
-              label={<BadgeLabel />}
-              value={value ? value : index.toString()}
-              key={value ? value : index.toString()}
-            />
-          );
-        })}
+        {tabs.map((tab, index) => renderTab(tab, index))}
       </MuiTabList>
       {tabs.map((tab, index) => (
         <MuiTabPanel
