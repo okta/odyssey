@@ -400,6 +400,10 @@ const DataTable = ({
     table: TableType,
     id: MRT_RowData["id"]
   ) => {
+    if (!id) {
+      return;
+    }
+
     const nextRow: MRT_RowData = table.getRow(id);
 
     if (nextRow) {
@@ -411,6 +415,13 @@ const DataTable = ({
     setDraggingRow(null);
     table.setHoveredRow(null);
   };
+
+  const handleDragHandleArrowKeyClick = useCallback(
+    (table: TableType, nextIndex: number) => {
+      getRowFromTableAndSetHovered(table, data[nextIndex]?.id);
+    },
+    [data]
+  );
 
   type HandleDragHandleKeyDownArgs = {
     table: TableType;
@@ -466,22 +477,17 @@ const DataTable = ({
           }
 
           if (isArrowDown || isArrowUp) {
-            const nextIndex = isArrowDown ? index + 1 : index - 1;
-            const nextRowFromData = data[nextIndex];
-
-            if (nextRowFromData) {
-              getRowFromTableAndSetHovered(table, nextRowFromData.id);
-            }
+            handleDragHandleArrowKeyClick(
+              table,
+              isArrowDown ? index + 1 : index - 1
+            );
           }
         } else {
           if (isArrowDown || isArrowUp) {
-            const nextIndex = isArrowDown ? row.index + 1 : row.index - 1;
-
-            const nextRowFromData = data[nextIndex];
-
-            if (nextRowFromData) {
-              getRowFromTableAndSetHovered(table, nextRowFromData.id);
-            }
+            handleDragHandleArrowKeyClick(
+              table,
+              isArrowDown ? row.index + 1 : row.index - 1
+            );
           }
         }
       } else {
