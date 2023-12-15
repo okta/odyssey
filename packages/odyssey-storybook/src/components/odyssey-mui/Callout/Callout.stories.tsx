@@ -35,7 +35,7 @@ const storybookMeta: Meta<CalloutProps> = {
     },
     linkUrl: {
       control: "text",
-      description: "If defined, the alert will include a link to the URL",
+      description: "If defined, the Callout will include a link to the URL",
       table: {
         type: {
           summary: "string",
@@ -46,7 +46,7 @@ const storybookMeta: Meta<CalloutProps> = {
       options: calloutRoleValues,
       control: { type: "radio" },
       description:
-        "Sets the ARIA role of the alert ('status' for something that dynamically updates, 'alert' for errors, null for something unchanging)",
+        "Sets the ARIA role of the Callout ('status' for something that dynamically updates, 'alert' for errors, null for something unchanging)",
       table: {
         type: {
           summary: calloutRoleValues.join(" | "),
@@ -56,34 +56,32 @@ const storybookMeta: Meta<CalloutProps> = {
     severity: {
       options: calloutSeverityValues,
       control: { type: "radio" },
-      description: "Determine the color and icon of the alert",
+      description: "Determine the color and icon of the Callout",
       table: {
         type: {
           summary: calloutSeverityValues.join(" | "),
         },
       },
       type: {
-        required: true,
         name: "other",
         value: "radio",
       },
     },
     text: {
       control: "text",
-      description: "The text content of the alert",
+      description: "The text content of the Callout",
       table: {
         type: {
           summary: "string",
         },
       },
       type: {
-        required: true,
         name: "string",
       },
     },
     title: {
       control: "text",
-      description: "The title of the alert",
+      description: "The title of the Callout",
       table: {
         type: {
           summary: "string",

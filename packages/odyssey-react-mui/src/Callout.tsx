@@ -31,7 +31,7 @@ export type CalloutProps = {
   /**
    * The contents of the Callout
    */
-  children: ReactNode;
+  children?: ReactNode;
   /**
    * If linkUrl is not undefined, this is the text of the link.
    * If left blank, it defaults to "Learn more".
@@ -53,14 +53,24 @@ export type CalloutProps = {
    */
   severity: (typeof calloutSeverityValues)[number];
   /**
-   * The text content of the Toast
+   * The text content of the Callout
    */
-  text: string;
+  text?: string;
   /**
    * The title of the Callout
    */
   title?: string;
-} & SeleniumProps;
+} & (
+  | {
+      text?: string;
+      children: ReactNode;
+    }
+  | {
+      text: string;
+      children?: ReactNode;
+    }
+) &
+  SeleniumProps;
 
 const Callout = ({
   children,
