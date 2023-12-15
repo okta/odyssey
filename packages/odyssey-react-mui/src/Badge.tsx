@@ -87,14 +87,14 @@ const Badge = ({
       transitionProperty: `background-color, color`,
     };
 
-    const shouldHideBadge = badgeContent <= 0 || !badgeContent;
+    const shouldRenderBadge = badgeContent && badgeContent > 0;
 
-    if (shouldHideBadge) {
+    if (shouldRenderBadge) {
+      return <Box sx={badgeStyles}>{formattedContent}</Box>;
+    } else {
       return null;
     }
-
-    return <Box sx={badgeStyles}>{formattedContent}</Box>;
-  }, [badgeContent, badgeContentMax, type]);
+  }, [badgeContent, badgeContentMax, odysseyDesignTokens, type]);
 
   return renderBadge;
 };
