@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.4](https://github.com/okta/odyssey/compare/v1.9.3...v1.9.4) (2023-12-15)
+
+### Features
+
+- commit template for new component contributions ([a43283a](https://github.com/okta/odyssey/commit/a43283aa7794ac8240d7cf48ed40ab00763ec0b7))
+
+### Bug Fixes
+
+- remove irrelevant and confusing items ([06891c4](https://github.com/okta/odyssey/commit/06891c4ad2d88ead4ba46d0df90ab2e57b5a1063))
+- update language ([f998b6a](https://github.com/okta/odyssey/commit/f998b6a30fc843bb39b525d9bcc7675ca4d1506e))
+
 ## [1.9.3](https://github.com/okta/odyssey/compare/v1.9.2...v1.9.3) (2023-12-12)
 
 **Note:** Version bump only for package odyssey
