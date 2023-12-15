@@ -112,6 +112,7 @@ const Tabs = ({
             label={tab.label}
             value={tab.value ? tab.value : index.toString()}
             key={tab.value ? tab.value : index.toString()}
+            tabIndex={0}
           />
         ))}
       </MuiTabList>
