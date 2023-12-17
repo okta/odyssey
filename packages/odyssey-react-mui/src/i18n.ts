@@ -43,14 +43,12 @@ import { translation as vi } from "./properties/ts/odyssey-react-mui_vi";
 import { translation as zhCN } from "./properties/ts/odyssey-react-mui_zh_CN";
 import { translation as znTW } from "./properties/ts/odyssey-react-mui_zh_TW";
 
-import {
-  SupportedLanguages,
-  supportedLanguages,
-} from "./OdysseyTranslationProvider.types";
-
-export const defaultLNG: SupportedLanguages = "en";
+export const defaultLNG = "en";
 export const defaultNS = "translations";
-export const resources = {
+
+// Note: This is type "string" to allow translation overrides from other languages
+export type I18nResources = Record<string, typeof en>;
+export const resources: I18nResources = {
   cs,
   da,
   de,
@@ -86,7 +84,6 @@ i18n.use(initReactI18next).init({
   defaultNS,
   ns: [defaultNS],
   fallbackLng: defaultLNG,
-  supportedLngs: supportedLanguages,
   load: "currentOnly",
   keySeparator: false,
   interpolation: {

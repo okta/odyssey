@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.4](https://github.com/okta/odyssey/compare/v1.9.3...v1.9.4) (2023-12-15)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.3](https://github.com/okta/odyssey/compare/v1.9.2...v1.9.3) (2023-12-12)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.2](https://github.com/okta/odyssey/compare/v1.9.1...v1.9.2) (2023-12-08)
+
+### Bug Fixes
+
+- add back props removed from odyssey cache provider ([#2066](https://github.com/okta/odyssey/issues/2066)) ([782475c](https://github.com/okta/odyssey/commit/782475cc222069f0417b08cb40ed57d298903b1d))
+
 ## [1.9.1](https://github.com/okta/odyssey/compare/v1.9.0...v1.9.1) (2023-12-05)
 
 ### Bug Fixes

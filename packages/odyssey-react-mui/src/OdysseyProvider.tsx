@@ -25,14 +25,17 @@ import {
   OdysseyTranslationProvider,
   OdysseyTranslationProviderProps,
 } from "./OdysseyTranslationProvider";
+import { DefaultSupportedLanguages } from "./OdysseyTranslationProvider.types";
 
-export type OdysseyProviderProps = OdysseyCacheProviderProps &
+export type OdysseyProviderProps<
+  SupportedLanguages extends string = DefaultSupportedLanguages
+> = OdysseyCacheProviderProps &
   OdysseyThemeProviderProps &
-  OdysseyTranslationProviderProps & {
+  OdysseyTranslationProviderProps<SupportedLanguages> & {
     children: ReactNode;
   };
 
-const OdysseyProvider = ({
+const OdysseyProvider = <SupportedLanguages extends string>({
   children,
   designTokensOverride,
   emotionRoot,
@@ -42,7 +45,7 @@ const OdysseyProvider = ({
   stylisPlugins,
   themeOverride,
   translationOverrides,
-}: OdysseyProviderProps) => (
+}: OdysseyProviderProps<SupportedLanguages>) => (
   <OdysseyCacheProvider
     nonce={nonce}
     emotionRoot={emotionRoot}
@@ -57,7 +60,7 @@ const OdysseyProvider = ({
       withCache={false}
     >
       <ScopedCssBaseline>
-        <OdysseyTranslationProvider
+        <OdysseyTranslationProvider<SupportedLanguages>
           languageCode={languageCode}
           translationOverrides={translationOverrides}
         >
@@ -68,6 +71,6 @@ const OdysseyProvider = ({
   </OdysseyCacheProvider>
 );
 
-const MemoizedThemeProvider = memo(OdysseyProvider);
+const MemoizedThemeProvider = memo(OdysseyProvider) as typeof OdysseyProvider;
 
 export { MemoizedThemeProvider as OdysseyProvider };

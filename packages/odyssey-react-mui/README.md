@@ -118,6 +118,14 @@ const YourAppRoot = ({ children }) => (
 );
 ```
 
+### Generating ok-PL and ok-SK files
+
+Right now we do not have the code to generate these files in Odyssey.
+
+If you are an Okta employee, the easiest way to generate these files is to replace the English properties file of another project and run the build commands to get the ok-PL and ok-SK versions. For ok-SK, you will also need to replace the prefix with `odyssey:odyssey-react-mui: `.
+
+If you are not an Okta employee, please file an issue request for assistance.
+
 ## Components
 
 Components are published in an ESM format transpiled for the modern browsers
