@@ -14,8 +14,6 @@ import { memo } from "react";
 
 import { FormHelperText } from "@mui/material";
 
-import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
-import { Box } from "./Box";
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
 
@@ -26,20 +24,13 @@ export type FieldHintProps = {
 } & SeleniumProps;
 
 const FieldHint = ({ id, LinkComponent, testId, text }: FieldHintProps) => {
-  const odysseyDesignTokens = useOdysseyDesignTokens();
-
   return (
     <FormHelperText data-se={testId} id={id}>
       {text}
       {LinkComponent && (
-        <Box
-          component="span"
-          sx={{
-            marginInlineStart: odysseyDesignTokens.Spacing1,
-          }}
-        >
-          {LinkComponent}
-        </Box>
+        <>
+          <span>&nbsp;{LinkComponent}</span>
+        </>
       )}
     </FormHelperText>
   );
