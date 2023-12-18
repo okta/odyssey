@@ -628,7 +628,14 @@ const DataTable = ({
         )}
       </>
     ),
-    [density, columnVisibility, columns, hasChangeableDensity]
+    [
+      columnVisibility,
+      columns,
+      density,
+      hasChangeableDensity,
+      handleColumnVisibility,
+      hasColumnVisibility,
+    ]
   );
 
   return (
