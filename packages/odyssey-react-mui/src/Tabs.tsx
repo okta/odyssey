@@ -171,7 +171,7 @@ const Tabs = ({
         />
       );
     },
-    [tabState, value]
+    [tabState]
   );
 
   return (
