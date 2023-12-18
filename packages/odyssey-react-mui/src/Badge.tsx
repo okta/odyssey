@@ -55,16 +55,11 @@ const Badge = ({
     const greaterThanZeroContentMax = badgeContentMax > 0 ? badgeContentMax : 1;
     const threeDigitLimitedMax =
       greaterThanZeroContentMax > 999 ? 999 : greaterThanZeroContentMax;
-    const isOverContentMax = Boolean(
-      badgeContent && badgeContent > threeDigitLimitedMax
-    );
+    const isOverContentMax = badgeContent > threeDigitLimitedMax;
     const overContentMaxMessage = `${greaterThanZeroContentMax}+`;
     const formattedContent = isOverContentMax
       ? overContentMaxMessage
       : badgeContent.toString();
-
-    const contentIsLongerThanOneChar =
-      formattedContent && formattedContent.length > 1;
 
     const badgeStyles: CSSProperties = {
       display: "inline-flex",
@@ -77,9 +72,10 @@ const Badge = ({
       padding: "0 6px",
       backgroundColor: badgeTypeColors(odysseyDesignTokens)[type].background,
       color: badgeTypeColors(odysseyDesignTokens)[type].font,
-      borderRadius: contentIsLongerThanOneChar
-        ? `${odysseyDesignTokens.BorderRadiusOuter}`
-        : "50%",
+      borderRadius:
+        formattedContent.length > 1
+          ? `${odysseyDesignTokens.BorderRadiusOuter}`
+          : "50%",
       fontSize: `${odysseyDesignTokens.TypographyScale0}`,
       fontFamily: `${odysseyDesignTokens.TypographyFamilyMono}`,
       fontWeight: `${odysseyDesignTokens.TypographyWeightBodyBold}`,
