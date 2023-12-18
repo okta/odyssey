@@ -1504,6 +1504,9 @@ export const components = ({
       },
       styleOverrides: {
         root: {
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "center",
           fontSize: odysseyTokens.TypographySizeSubordinate,
           lineHeight: odysseyTokens.TypographyLineHeightBody,
           marginBlockStart: odysseyTokens.Spacing2,
@@ -1516,6 +1519,10 @@ export const components = ({
             marginBlockEnd: 0,
           },
           textAlign: "start",
+
+          ".field-hint-link-component": {
+            marginInlineStart: odysseyTokens.Spacing1,
+          },
         },
       },
     },
