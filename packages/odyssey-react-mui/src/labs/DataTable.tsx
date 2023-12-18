@@ -400,14 +400,12 @@ const DataTable = ({
     table: TableType,
     id: MRT_RowData["id"]
   ) => {
-    if (!id) {
-      return;
-    }
+    if (id) {
+      const nextRow: MRT_RowData = table.getRow(id);
 
-    const nextRow: MRT_RowData = table.getRow(id);
-
-    if (nextRow) {
-      table.setHoveredRow(nextRow);
+      if (nextRow) {
+        table.setHoveredRow(nextRow);
+      }
     }
   };
 
@@ -415,13 +413,6 @@ const DataTable = ({
     setDraggingRow(null);
     table.setHoveredRow(null);
   };
-
-  const handleDragHandleArrowKeyClick = useCallback(
-    (table: TableType, nextIndex: number) => {
-      getRowFromTableAndSetHovered(table, data[nextIndex]?.id);
-    },
-    [data]
-  );
 
   type HandleDragHandleKeyDownArgs = {
     table: TableType;
@@ -477,17 +468,13 @@ const DataTable = ({
           }
 
           if (isArrowDown || isArrowUp) {
-            handleDragHandleArrowKeyClick(
-              table,
-              isArrowDown ? index + 1 : index - 1
-            );
+            const nextIndex = isArrowDown ? index + 1 : index - 1;
+            getRowFromTableAndSetHovered(table, data[nextIndex]?.id);
           }
         } else {
           if (isArrowDown || isArrowUp) {
-            handleDragHandleArrowKeyClick(
-              table,
-              isArrowDown ? row.index + 1 : row.index - 1
-            );
+            const nextIndex = isArrowDown ? row.index + 1 : row.index - 1;
+            getRowFromTableAndSetHovered(table, data[nextIndex]?.id);
           }
         }
       } else {
@@ -625,7 +612,7 @@ const DataTable = ({
 
     muiRowDragHandleProps: ({ table, row }) => ({
       title: "Drag row or press space/enter key to start and stop reordering",
-      ariaLabel:
+      "aria-label":
         "Drag row to reorder. Or, press space or enter to start and stop reordering and esc to cancel.",
       onKeyDown: (event) => handleDragHandleKeyDown({ table, row, event }),
       onBlur: () => {
