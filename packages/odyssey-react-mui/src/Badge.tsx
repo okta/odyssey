@@ -61,9 +61,10 @@ const Badge = ({
     const overContentMaxMessage = `${greaterThanZeroContentMax}+`;
     const formattedContent = isOverContentMax
       ? overContentMaxMessage
-      : badgeContent;
+      : badgeContent.toString();
 
-    const contentIsLongerThanOneChar = formattedContent?.toString()?.length > 1;
+    const contentIsLongerThanOneChar =
+      formattedContent && formattedContent.length > 1;
 
     const badgeStyles: CSSProperties = {
       display: "inline-flex",
@@ -73,7 +74,7 @@ const Badge = ({
       height: `calc(${odysseyDesignTokens.Spacing4} + ${odysseyDesignTokens.Spacing1})`,
       minHeight: `calc(${odysseyDesignTokens.Spacing4} + ${odysseyDesignTokens.Spacing1})`,
       // 6px horizontal padding per design requirements
-      padding: `0 calc(${odysseyDesignTokens.Spacing1} * 1.5)`,
+      padding: "0 6px",
       backgroundColor: badgeTypeColors(odysseyDesignTokens)[type].background,
       color: badgeTypeColors(odysseyDesignTokens)[type].font,
       borderRadius: contentIsLongerThanOneChar
@@ -87,13 +88,11 @@ const Badge = ({
       transitionProperty: `background-color, color`,
     };
 
-    const shouldRenderBadge = badgeContent && badgeContent > 0;
+    const hasNotificationCount = badgeContent && badgeContent > 0;
 
-    if (shouldRenderBadge) {
-      return <Box sx={badgeStyles}>{formattedContent}</Box>;
-    } else {
-      return null;
-    }
+    return hasNotificationCount ? (
+      <Box sx={badgeStyles}>{formattedContent}</Box>
+    ) : null;
   }, [badgeContent, badgeContentMax, odysseyDesignTokens, type]);
 
   return renderBadge;
