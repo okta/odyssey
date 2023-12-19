@@ -17,7 +17,6 @@ import {
 import {
   ElementType,
   ReactNode,
-  forwardRef,
   memo,
   useMemo,
   useRef,
@@ -91,63 +90,63 @@ export type TypographyProps = {
    * The variant of Typography to render.
    */
   variant?: keyof typeof typographyVariantMapping;
+  /**
+   * The ref is forwarded to focus handle
+   */
+  typographyRef?: React.RefObject<FocusHandle>;
 } & SeleniumProps;
 
-const Typography = forwardRef<FocusHandle, TypographyProps>(
-  (
-    {
-      ariaDescribedBy,
-      ariaLabel,
-      ariaLabelledBy,
-      children,
-      color,
-      component: componentProp,
-      testId,
-      variant = "body",
-    }: TypographyProps,
-    ref
-  ) => {
-    const typographyRef = useRef<HTMLElement | null>(null);
-    const component = useMemo(() => {
-      if (!componentProp) {
-        if (variant === "body") {
-          return "p";
-        } else if (variant === "subordinate" || variant === "support") {
-          return "p";
-        } else {
-          return variant;
-        }
+const Typography = ({
+  ariaDescribedBy,
+  ariaLabel,
+  ariaLabelledBy,
+  children,
+  color,
+  component: componentProp,
+  testId,
+  variant = "body",
+  typographyRef,
+}: TypographyProps) => {
+  const ref = useRef<HTMLElement>(null);
+  const component = useMemo(() => {
+    if (!componentProp) {
+      if (variant === "body") {
+        return "p";
+      } else if (variant === "subordinate" || variant === "support") {
+        return "p";
+      } else {
+        return variant;
       }
-      return componentProp;
-    }, [componentProp, variant]);
+    }
+    return componentProp;
+  }, [componentProp, variant]);
 
-    useImperativeHandle(
-      ref,
-      () => {
-        return {
-          focus: () => {
-            typographyRef.current && typographyRef.current.focus();
-          },
-        };
-      },
-      []
-    );
+  useImperativeHandle(
+    typographyRef,
+    () => {
+      return {
+        focus: () => {
+          ref.current && ref.current.focus();
+        },
+      };
+    },
+    []
+  );
 
-    return (
-      <MuiTypography
-        aria-describedby={ariaDescribedBy}
-        aria-label={ariaLabel}
-        aria-labelledby={ariaLabelledBy}
-        children={children}
-        color={color}
-        component={component}
-        data-se={testId}
-        variant={typographyVariantMapping[variant]}
-        ref={typographyRef}
-      />
-    );
-  }
-);
+  return (
+    <MuiTypography
+      aria-describedby={ariaDescribedBy}
+      aria-label={ariaLabel}
+      aria-labelledby={ariaLabelledBy}
+      children={children}
+      color={color}
+      component={component}
+      data-se={testId}
+      variant={typographyVariantMapping[variant]}
+      ref={ref}
+    />
+  );
+};
 
 const MemoizedTypography = memo(Typography);
 MemoizedTypography.displayName = "Typography";

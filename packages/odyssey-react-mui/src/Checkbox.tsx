@@ -114,17 +114,15 @@ const Checkbox = ({
     }
     return { defaultChecked: isDefaultChecked };
   }, [isDefaultChecked, isChecked]);
-  const ref = useRef(null);
+  const ref = useRef<HTMLInputElement>(null);
 
   useImperativeHandle(
     inputRef,
     () => {
-      const element = ref.current as unknown as HTMLElement;
-      const inputElement =
-        element.tagName === "INPUT" ? element : element.querySelector("input");
+      const element = ref.current;
       return {
         focus: () => {
-          inputElement && inputElement.focus();
+          element && element.focus();
         },
       };
     },

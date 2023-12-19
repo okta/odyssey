@@ -161,7 +161,7 @@ const Select = <
   const [internalSelectedValues, setInternalSelectedValues] = useState(
     controlledStateRef.current === CONTROLLED ? value : defaultValue
   );
-  const ref = useRef(null);
+  const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (controlledStateRef.current === CONTROLLED) {
@@ -178,9 +178,7 @@ const Select = <
   useImperativeHandle(
     inputRef,
     () => {
-      const inputElement = (
-        ref.current as unknown as HTMLElement
-      ).querySelector("input");
+      const inputElement = (ref.current as HTMLElement).querySelector("input");
       return {
         focus: () => {
           inputElement && inputElement.focus();
