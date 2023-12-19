@@ -110,8 +110,6 @@ const processData = ({
         ) {
           aValue = parseCustomDate(aValue);
           bValue = parseCustomDate(bValue);
-
-          console.log(aValue, bValue);
         }
 
         if (aValue < bValue) return desc ? 1 : -1;
