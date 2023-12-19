@@ -16,6 +16,10 @@ export type FieldComponentProps = {
    */
   errorMessage?: string;
   /**
+   * Display multiple level errors
+   */
+  errorMessagesList?: string[];
+  /**
    * The helper text content.
    */
   hint?: string;
