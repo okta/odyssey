@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-storybook",
-  "version": "1.9.6",
+  "version": "1.9.7",
   "description": "Documentation for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -15,9 +15,9 @@
   },
   "dependencies": {
     "@faker-js/faker": "^8.2.0",
+    "@okta/odyssey-design-tokens": "workspace:*",
     "@okta/odyssey-react-mui": "workspace:*",
-    "@storybook/theming": "^7.2.0",
-    "@okta/odyssey-design-tokens": "workspace:*"
+    "@storybook/theming": "^7.2.0"
   },
   "devDependencies": {
     "@applitools/eyes-storybook": "^3.34.2",
