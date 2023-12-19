@@ -20,6 +20,7 @@ import { chipClasses } from "@mui/material/Chip";
 import { dividerClasses } from "@mui/material/Divider";
 import { formControlLabelClasses } from "@mui/material/FormControlLabel";
 import { formLabelClasses } from "@mui/material/FormLabel";
+import { formGroupClasses } from "@mui/material/FormGroup";
 import { inputAdornmentClasses } from "@mui/material/InputAdornment";
 import { inputBaseClasses } from "@mui/material/InputBase";
 import { listItemIconClasses } from "@mui/material/ListItemIcon";
@@ -782,7 +783,7 @@ export const components = ({
             },
 
             [`.${svgIconClasses.root}`]: {
-              color: odysseyTokens.HueNeutral900,
+              color: odysseyTokens.HueNeutral300,
             },
           },
         }),
@@ -1461,6 +1462,9 @@ export const components = ({
           ...(ownerState.fullWidth && {
             maxWidth: "100%",
           }),
+          [`& .${formGroupClasses.root}`]: {
+            marginBlockStart: odysseyTokens.Spacing1,
+          },
         }),
       },
     },
@@ -1486,6 +1490,9 @@ export const components = ({
           "&.Mui-disabled": {
             pointerEvents: "none",
           },
+          [`& .${checkboxClasses.root}`]: {
+            marginBlockStart: 0,
+          },
           [`&:hover .${radioClasses.root}, &:hover .${checkboxClasses.root}`]: {
             color: odysseyTokens.TypographyColorBody,
           },
@@ -1504,6 +1511,7 @@ export const components = ({
         }),
         label: {
           gap: odysseyTokens.Spacing1,
+          lineHeight: odysseyTokens.TypographyLineHeightUi,
         },
         asterisk: () => ({
           display: "none",
@@ -2006,8 +2014,8 @@ export const components = ({
           "&::before": {
             content: "''",
             position: "absolute",
-            width: "0.5em",
-            height: "0.5em",
+            width: odysseyTokens.Spacing2,
+            height: odysseyTokens.Spacing2,
             borderRadius: "50%",
             backgroundColor: "transparent",
             transition: theme.transitions.create(["background-color"], {
@@ -2051,10 +2059,10 @@ export const components = ({
           },
           "&.Mui-disabled": {
             backgroundColor: odysseyTokens.HueNeutral50,
-            borderColor: odysseyTokens.HueNeutral300,
+            borderColor: odysseyTokens.BorderColorDisabled,
 
             "&.Mui-checked::before": {
-              backgroundColor: odysseyTokens.HueNeutral300,
+              backgroundColor: odysseyTokens.BorderColorDisabled,
             },
           },
         }),
