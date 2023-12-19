@@ -19,7 +19,7 @@ import { I18nextProvider } from "react-i18next";
 import { getTypedObjectKeys } from "./getTypedObjectKeys";
 
 export type OdysseyI18nResourceKeys = (typeof resources)["en"];
-export const OdysseyI18nResourceKeysList = getTypedObjectKeys(resources["en"]);
+export const odysseyI18nResourceKeysList = getTypedObjectKeys(resources["en"]);
 
 export type TranslationOverrides<
   SupportedLanguages extends string = DefaultSupportedLanguages
