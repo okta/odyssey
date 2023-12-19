@@ -191,32 +191,25 @@ const DataFilters = ({
     [inputValues, filtersProp]
   );
 
-  const getAutoCompleteLabel = (
-    value:
-      | string
-      | { label: string }
-      | null
-      | undefined
-      | (string | { label: string })[]
-  ): string => {
+  const getAutoCompleteLabel = <
+    Value extends { label: string } | Array<{ label: string }>
+  >(
+    value: Value
+  ) => {
     if (Array.isArray(value)) {
       // Iterating to find the label
-      for (const valueElement of value) {
-        if (typeof valueElement !== "string") {
-          return valueElement.label;
-        }
-      }
-    } else if (
-      value !== null &&
-      value !== undefined &&
-      typeof value === "object" &&
-      "label" in value
-    ) {
-      // If the value is a single object with a label property, return its label
-      return value.label;
+      return value
+        .map((valueElement) => {
+          if (typeof valueElement !== "string") {
+            return valueElement.label;
+          }
+
+          return;
+        })
+        .filter((item): item is string => Boolean(item));
     }
 
-    return value as string;
+    return value?.label;
   };
 
   const handleMultiSelectChange = useCallback(
@@ -406,12 +399,24 @@ const DataFilters = ({
                             <Autocomplete
                               label={filterPopoverCurrentFilter.label}
                               value={
-                                (inputValues[
-                                  filterPopoverCurrentFilter.id
-                                ] as string) ?? ""
+                                inputValues[filterPopoverCurrentFilter.id] ?? ""
                               }
                               onChange={(_, value) => {
-                                const label = getAutoCompleteLabel(value);
+                                const label =
+                                  typeof value === "string"
+                                    ? getAutoCompleteLabel({ label: value })
+                                    : Array.isArray(value)
+                                    ? getAutoCompleteLabel(
+                                        value.map((item) =>
+                                          typeof item === "string"
+                                            ? { label: item }
+                                            : item
+                                        )
+                                      )
+                                    : value
+                                    ? getAutoCompleteLabel(value)
+                                    : "";
+
                                 handleInputChange(
                                   filterPopoverCurrentFilter.id,
                                   label
