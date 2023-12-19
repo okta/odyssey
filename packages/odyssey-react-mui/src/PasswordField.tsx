@@ -71,6 +71,10 @@ export type PasswordFieldProps = {
    * The value of the `input` element. Use when component is controlled.
    */
   value?: string;
+  /**
+   * Display multiple level errors
+   */
+  errorMessagesList: string[];
 } & FieldComponentProps &
   SeleniumProps;
 
@@ -80,6 +84,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       autoCompleteType,
       defaultValue,
       errorMessage,
+      errorMessagesList,
       hasInitialFocus,
       hint,
       id: idOverride,
@@ -194,8 +199,8 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
 
     return (
       <Field
-        errorMessage={errorMessage}
-        errorMessageIntro={t("passwordfield.error.intro")}
+        errorMessage={errorMessage || t("passwordfield.error.intro")}
+        errorMessagesList={errorMessagesList}
         fieldType="single"
         hasVisibleLabel
         hint={hint}

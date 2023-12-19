@@ -14,7 +14,7 @@ export type FieldComponentProps = {
   /**
    * If `error` is not undefined, the `input` will indicate an error.
    */
-  errorMessage?: string | string[];
+  errorMessage?: string;
   /**
    * The helper text content.
    */
