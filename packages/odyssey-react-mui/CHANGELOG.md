@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.7](https://github.com/okta/odyssey/compare/v1.9.6...v1.9.7) (2023-12-19)
+
+### Bug Fixes
+
+- align CircularProgress with Figma ([#2060](https://github.com/okta/odyssey/issues/2060)) ([a900bcf](https://github.com/okta/odyssey/commit/a900bcf83cd408871545e9d8e840f9756e71bd79))
+- align radio and checkbox styles with Figma ([#2059](https://github.com/okta/odyssey/issues/2059)) ([99b7e7a](https://github.com/okta/odyssey/commit/99b7e7a193941fc8a79c7ecb16a8a7b82b086a39))
+
 ## [1.9.6](https://github.com/okta/odyssey/compare/v1.9.5...v1.9.6) (2023-12-18)
 
 **Note:** Version bump only for package @okta/odyssey-react-mui
