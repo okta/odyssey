@@ -62,14 +62,24 @@ export type CalloutProps = {
   title?: string;
 } & (
   | {
-      text?: string;
-      children: ReactNode;
+      text: string;
+      children?: never;
     }
   | {
-      text: string;
-      children?: ReactNode;
+      text?: never;
+      children: ReactNode;
     }
 ) &
+  (
+    | {
+        linkUrl: string;
+        linkText: string;
+      }
+    | {
+        linkUrl?: never;
+        linkText?: never;
+      }
+  ) &
   SeleniumProps;
 
 const Callout = ({
