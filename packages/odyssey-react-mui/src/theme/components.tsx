@@ -453,34 +453,46 @@ export const components = ({
     MuiBreadcrumbs: {
       styleOverrides: {
         li: {
-          fontSize: odysseyTokens.TypographySizeBody,
-          lineHeight: odysseyTokens.TypographyLineHeightUi,
+          fontSize: odysseyTokens.TypographySizeSubordinate,
+
+          "& svg": {
+            width: odysseyTokens.Spacing3,
+          },
+
+          "& > p": {
+            paddingInline: odysseyTokens.Spacing1,
+          },
 
           "& > a, & > button": {
             borderRadius: odysseyTokens.BorderRadiusTight,
             color: odysseyTokens.TypographyColorSubordinate,
             display: "flex",
             gap: odysseyTokens.Spacing1,
-            padding: odysseyTokens.Spacing1,
+            paddingInline: odysseyTokens.Spacing1,
+            paddingBlock: 2,
             transitionProperty: "color, background-color",
             transitionDuration: "100ms",
             transitionTimingFunction: "linear",
 
             "&:hover": {
-              backgroundColor: odysseyTokens.HueNeutral200,
+              backgroundColor: odysseyTokens.HueNeutral100,
               color: odysseyTokens.TypographyColorBody,
             },
 
             "&:focus-visible": {
-              boxShadow: `0 0 0 2px ${odysseyTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyTokens.PalettePrimaryMain}`,
-              outline: "2px solid transparent",
-              outlineOffset: "1px",
+              outlineWidth: 2,
+              outlineStyle: "solid",
+              outlineColor: odysseyTokens.PalettePrimaryMain,
+              outlineOffset: -2,
             },
           },
         },
         separator: {
           color: odysseyTokens.BorderColorDisplay,
-          marginInline: odysseyTokens.Spacing1,
+          fontSize: odysseyTokens.TypographySizeSubordinate,
+          fontWeight: odysseyTokens.TypographyWeightBodyBold,
+          marginInlineStart: 6,
+          marginInlineEnd: 4,
         },
       },
     },

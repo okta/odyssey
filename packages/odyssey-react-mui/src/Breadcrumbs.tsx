@@ -27,7 +27,7 @@ import {
   useState,
 } from "react";
 import { GroupIcon, HomeIcon, UserIcon } from "./icons.generated";
-import { Typography } from "./Typography";
+import { Subordinate } from "./Typography";
 import { useTranslation } from "react-i18next";
 
 export type BreadcrumbType = "listItem" | "menuItem" | "currentPage";
@@ -71,7 +71,7 @@ export const Breadcrumb = ({ children, href, iconName }: BreadcrumbProps) => {
   }
 
   if (breadcrumbType === "currentPage") {
-    return <Typography>{breadcrumbContent}</Typography>;
+    return <Subordinate color="textPrimary">{breadcrumbContent}</Subordinate>;
   }
 
   // breadcrumbType === "listItem" is the default
@@ -152,7 +152,7 @@ const BreadcrumbList = ({
 
       {breadcrumbSections.insideMenu && (
         <>
-          <ButtonBase onClick={onMenuButtonClick}>…</ButtonBase>
+          <ButtonBase onClick={onMenuButtonClick}>...</ButtonBase>
           <Menu
             open={Boolean(anchorEl)}
             onClose={onCloseMenu}
