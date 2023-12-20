@@ -43,6 +43,10 @@ export type CheckboxProps = {
    */
   id?: string;
   /**
+   * The ref forwarded to the Checkbox to expose focus()
+   */
+  inputFocusRef?: React.RefObject<FocusHandle>;
+  /**
    * Determines whether the Checkbox is disabled
    */
   isDisabled?: boolean;
@@ -74,10 +78,6 @@ export type CheckboxProps = {
    * Callback fired when the blur event happens. Provides event value.
    */
   onBlur?: MuiFormControlLabelProps["onBlur"];
-  /**
-   * The ref is forwarded to input element in the Checkbox
-   */
-  inputRef?: React.RefObject<FocusHandle>;
 } & Pick<FieldComponentProps, "id" | "isDisabled" | "name"> &
   CheckedFieldProps<MuiCheckboxProps> &
   SeleniumProps;
@@ -86,6 +86,7 @@ const Checkbox = ({
   ariaLabel,
   ariaLabelledBy,
   id: idOverride,
+  inputFocusRef,
   isChecked,
   isDefaultChecked,
   isDisabled,
@@ -99,7 +100,6 @@ const Checkbox = ({
   testId,
   validity = "inherit",
   value,
-  inputRef,
 }: CheckboxProps) => {
   const { t } = useTranslation();
   const controlledStateRef = useRef(
@@ -114,12 +114,12 @@ const Checkbox = ({
     }
     return { defaultChecked: isDefaultChecked };
   }, [isDefaultChecked, isChecked]);
-  const ref = useRef<HTMLInputElement>(null);
 
+  const inputRef = useRef<HTMLInputElement>(null);
   useImperativeHandle(
-    inputRef,
+    inputFocusRef,
     () => {
-      const element = ref.current;
+      const element = inputRef.current;
       return {
         focus: () => {
           element && element.focus();
@@ -178,7 +178,7 @@ const Checkbox = ({
           indeterminate={isIndeterminate}
           onChange={onChange}
           required={isRequired}
-          inputRef={ref}
+          inputRef={inputRef}
           sx={() => ({
             marginBlockStart: "2px",
           })}

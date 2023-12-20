@@ -87,13 +87,13 @@ export type TypographyProps = {
    */
   component?: ElementType;
   /**
+   * The ref forwarded to the Typography to expose focus()
+   */
+  typographyFocusRef?: React.RefObject<FocusHandle>;
+  /**
    * The variant of Typography to render.
    */
   variant?: keyof typeof typographyVariantMapping;
-  /**
-   * The ref is forwarded to focus handle
-   */
-  typographyRef?: React.RefObject<FocusHandle>;
 } & SeleniumProps;
 
 const Typography = ({
@@ -104,10 +104,9 @@ const Typography = ({
   color,
   component: componentProp,
   testId,
+  typographyFocusRef,
   variant = "body",
-  typographyRef,
 }: TypographyProps) => {
-  const ref = useRef<HTMLElement>(null);
   const component = useMemo(() => {
     if (!componentProp) {
       if (variant === "body") {
@@ -121,12 +120,14 @@ const Typography = ({
     return componentProp;
   }, [componentProp, variant]);
 
+  const ref = useRef<HTMLElement>(null);
   useImperativeHandle(
-    typographyRef,
+    typographyFocusRef,
     () => {
+      const element = ref.current;
       return {
         focus: () => {
-          ref.current && ref.current.focus();
+          element && element.focus();
         },
       };
     },
@@ -142,8 +143,9 @@ const Typography = ({
       color={color}
       component={component}
       data-se={testId}
-      variant={typographyVariantMapping[variant]}
       ref={ref}
+      tabIndex={-1}
+      variant={typographyVariantMapping[variant]}
     />
   );
 };

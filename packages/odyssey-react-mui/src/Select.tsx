@@ -63,6 +63,10 @@ export type SelectProps<
    */
   hasMultipleChoices?: HasMultipleChoices;
   /**
+   * The ref forwarded to the Select to expose focus()
+   */
+  inputFocusRef?: React.RefObject<FocusHandle>;
+  /**
    * @deprecated Use `hasMultipleChoices` instead.
    */
   /** **Deprecated:** use `hasMultipleChoices` */
@@ -91,10 +95,6 @@ export type SelectProps<
    * The value or values selected in the Select
    */
   value?: Value;
-  /**
-   * The ref is forwarded to input element in the Select
-   */
-  inputRef: React.RefObject<FocusHandle>;
 } & Pick<
   FieldComponentProps,
   | "errorMessage"
@@ -134,6 +134,7 @@ const Select = <
   hint,
   HintLinkComponent,
   id: idOverride,
+  inputFocusRef,
   isDisabled = false,
   isFullWidth = false,
   isMultiSelect,
@@ -146,7 +147,6 @@ const Select = <
   options,
   testId,
   value,
-  inputRef,
 }: SelectProps<Value, HasMultipleChoices>) => {
   const hasMultipleChoices = useMemo(
     () =>
@@ -161,7 +161,20 @@ const Select = <
   const [internalSelectedValues, setInternalSelectedValues] = useState(
     controlledStateRef.current === CONTROLLED ? value : defaultValue
   );
-  const ref = useRef<HTMLElement>(null);
+  const inputRef = useRef<HTMLSelectElement>(null);
+
+  useImperativeHandle(
+    inputFocusRef,
+    () => {
+      const element = inputRef.current;
+      return {
+        focus: () => {
+          element && element.focus();
+        },
+      };
+    },
+    []
+  );
 
   useEffect(() => {
     if (controlledStateRef.current === CONTROLLED) {
@@ -174,19 +187,6 @@ const Select = <
     value,
     controlState: controlledStateRef.current,
   });
-
-  useImperativeHandle(
-    inputRef,
-    () => {
-      const inputElement = (ref.current as HTMLElement).querySelector("input");
-      return {
-        focus: () => {
-          inputElement && inputElement.focus();
-        },
-      };
-    },
-    []
-  );
 
   const onChange = useCallback<NonNullable<MuiSelectProps<Value>["onChange"]>>(
     (event, child) => {
@@ -289,6 +289,7 @@ const Select = <
         children={children}
         data-se={testId}
         id={id}
+        inputRef={inputRef}
         labelId={labelElementId}
         multiple={hasMultipleChoices}
         name={nameOverride ?? id}
@@ -296,7 +297,6 @@ const Select = <
         onChange={onChange}
         onFocus={onFocus}
         renderValue={hasMultipleChoices ? renderValue : undefined}
-        ref={ref}
       />
     ),
     [

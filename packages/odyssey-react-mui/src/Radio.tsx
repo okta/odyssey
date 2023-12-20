@@ -24,6 +24,10 @@ import { FocusHandle } from "./@types/react-augment";
 
 export type RadioProps = {
   /**
+   * The ref forwarded to the Radio to expose focus()
+   */
+  inputFocusRef?: React.RefObject<FocusHandle>;
+  /**
    * If `true`, the Radio is selected
    */
   isChecked?: boolean;
@@ -47,14 +51,11 @@ export type RadioProps = {
    * Callback fired when the blur event happens. Provides event value.
    */
   onBlur?: MuiFormControlLabelProps["onBlur"];
-  /**
-   * The ref is forwarded to input element in the Radio
-   */
-  inputRef?: React.RefObject<FocusHandle>;
 } & Pick<FieldComponentProps, "isDisabled" | "name"> &
   SeleniumProps;
 
 const Radio = ({
+  inputFocusRef,
   isChecked,
   isDisabled,
   isInvalid,
@@ -64,12 +65,10 @@ const Radio = ({
   value,
   onChange: onChangeProp,
   onBlur: onBlurProp,
-  inputRef,
 }: RadioProps) => {
   const ref = useRef<HTMLInputElement>(null);
-
   useImperativeHandle(
-    inputRef,
+    inputFocusRef,
     () => {
       const element = ref.current;
       return {
