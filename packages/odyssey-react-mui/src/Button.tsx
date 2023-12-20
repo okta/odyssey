@@ -49,6 +49,10 @@ export type ButtonProps = {
    */
   ariaDescribedBy?: string;
   /**
+   * The ref forwarded to the Button to expose focus()
+   */
+  buttonFocusRef?: React.RefObject<FocusHandle>;
+  /**
    * The icon element to display at the end of the Button
    */
   endIcon?: ReactElement;
@@ -56,10 +60,6 @@ export type ButtonProps = {
    * The ID of the Button
    */
   id?: string;
-  /**
-   * The ref forwarded to the Button to expose focus()
-   */
-  buttonFocusRef?: React.RefObject<FocusHandle>;
   /**
    * Determines whether the Button is disabled
    */
