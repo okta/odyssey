@@ -83,7 +83,7 @@ const storybookMeta: Meta<SwitchProps> = {
 
 export default storybookMeta;
 
-export const Default: StoryObj<SwitchProps> = {
+export const Default: StoryObj<typeof Switch> = {
   play: async ({ canvasElement, step }) => {
     await step("select the switch button", async () => {
       const canvas = within(canvasElement);
