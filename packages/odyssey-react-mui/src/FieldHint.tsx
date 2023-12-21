@@ -23,7 +23,13 @@ export type FieldHintProps = {
   text: string;
 } & AllowedProps;
 
-const FieldHint = ({ id, LinkComponent, testId, text, translate }: FieldHintProps) => {
+const FieldHint = ({
+  id,
+  LinkComponent,
+  testId,
+  text,
+  translate,
+}: FieldHintProps) => {
   return (
     <FormHelperText data-se={testId} id={id} translate={translate}>
       {text}

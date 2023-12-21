@@ -38,7 +38,7 @@ export type CheckboxGroupProps = {
   "errorMessage" | "hint" | "HintLinkComponent" | "isDisabled"
 > &
   AllowedProps;
-  
+
 const CheckboxGroup = ({
   children,
   errorMessage,
