@@ -96,6 +96,7 @@ export * from "./TextField";
 export * from "./theme";
 export * from "./Toast";
 export * from "./ToastStack";
+export * from "./labs/Switch";
 export * from "./Tooltip";
 export * from "./Typography";
 export * from "./useUniqueId";
