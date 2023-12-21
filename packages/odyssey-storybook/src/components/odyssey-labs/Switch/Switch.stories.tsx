@@ -93,6 +93,7 @@ export const Default: StoryObj<typeof Switch> = {
       }
       expect(switchCheckbox).toBeChecked();
       axeRun("Switch Default");
+      userEvent.tab();
     });
   },
 };
