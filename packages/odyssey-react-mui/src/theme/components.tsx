@@ -1381,6 +1381,13 @@ export const components = ({
               backgroundColor: "transparent !important",
             }),
           },
+          // Had to use `Mui-focusVisible` class here. `:focus-visible` was not being triggered correctly.
+          "&.Mui-focusVisible": {
+            // Focus styles applied this way due to MUI not applying `Mui-focusVisible` class to the correct element see: https://github.com/mui/material-ui/issues/34986
+            " + .MuiSwitch-track": {
+              boxShadow: `0 0 0 2px ${odysseyTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyTokens.PalettePrimaryMain}`,
+            },
+          },
         }),
         thumb: {
           width: odysseyTokens.Spacing4,
