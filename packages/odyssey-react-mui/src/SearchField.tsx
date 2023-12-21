@@ -180,6 +180,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         placeholder,
         ref,
         testId,
+        translate,
       ]
     );
 
