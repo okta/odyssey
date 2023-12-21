@@ -21,10 +21,11 @@ import {
 } from "react";
 import {
   Switch as MuiSwitch,
-  CheckboxProps as MuiCheckboxProps,
+  SwitchProps as MuiSwitchProps,
   FormControlLabel,
 } from "@mui/material";
 
+const { CONTROLLED } = ComponentControlledState;
 import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext";
 import { Box } from "../Box";
 import { FieldComponentProps } from "../FieldComponentProps";
@@ -60,7 +61,7 @@ export type SwitchProps = {
   FieldComponentProps,
   "hint" | "id" | "isFullWidth" | "isDisabled" | "name"
 > &
-  CheckedFieldProps<MuiCheckboxProps> &
+  CheckedFieldProps<MuiSwitchProps> &
   SeleniumProps;
 
 type SwitchLabelProps = {
@@ -142,17 +143,23 @@ const Switch = ({
     })
   );
   const inputValues = useMemo(() => {
-    if (controlledStateRef.current === ComponentControlledState.CONTROLLED) {
+    if (controlledStateRef.current === CONTROLLED) {
       return { checked: isChecked };
     }
     return { defaultChecked: isDefaultChecked };
   }, [isDefaultChecked, isChecked]);
 
-  const [checked, setChecked] = useState(
-    Boolean(inputValues.checked || inputValues.defaultChecked)
+  const [internalSwitchChecked, setInternalSwitchChecked] = useState(
+    controlledStateRef.current === CONTROLLED
+      ? Boolean(isChecked)
+      : Boolean(isDefaultChecked)
   );
 
-  useEffect(() => setChecked(Boolean(isChecked)), [isChecked]);
+  useEffect(() => {
+    if (controlledStateRef.current === CONTROLLED) {
+      setInternalSwitchChecked(Boolean(isChecked));
+    }
+  }, [isChecked]);
 
   const id = useUniqueId(_id);
 
@@ -161,20 +168,20 @@ const Switch = ({
 
   const handleOnChange = useCallback(
     (_: SyntheticEvent<Element, Event>, checked: boolean) => {
-      setChecked(checked);
+      setInternalSwitchChecked(checked);
       onChange?.({ checked, value });
     },
-    [onChange, value]
+    [onChange, setInternalSwitchChecked, value]
   );
 
   const renderSwitchComponent = useMemo(
     () => (
       <MuiSwitch
-        checked={checked}
+        {...inputValues}
         disabled={isDisabled}
         disableRipple
         inputProps={{
-          "aria-checked": checked,
+          "aria-checked": internalSwitchChecked,
           "aria-describedby": hintId,
           "aria-label": label,
           "aria-labelledby": labelElementId,
@@ -184,9 +191,10 @@ const Switch = ({
       />
     ),
     [
-      checked,
       handleOnChange,
       hintId,
+      inputValues,
+      internalSwitchChecked,
       id,
       isDisabled,
       label,
@@ -202,14 +210,14 @@ const Switch = ({
       }}
     >
       <FormControlLabel
-        checked={checked}
+        checked={internalSwitchChecked}
         control={renderSwitchComponent}
         data-se={testId}
         disabled={isDisabled}
         id={labelElementId}
         label={
           <SwitchLabel
-            checked={checked}
+            checked={internalSwitchChecked}
             hint={hint}
             hintId={hintId}
             isFullWidth={isFullWidth}

@@ -75,7 +75,7 @@ const storybookMeta: Meta<SwitchProps> = {
   args: {
     hint: "Some hint text goes here",
     label: "The label for the switch",
-    value: "Value",
+    value: "Switch value",
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
