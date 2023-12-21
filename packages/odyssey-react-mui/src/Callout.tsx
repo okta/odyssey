@@ -58,7 +58,9 @@ const Callout = ({
 
   return (
     <Alert data-se={testId} role={role} severity={severity} variant="callout">
-      <ScreenReaderText>{t(`severity.${severity}`)}</ScreenReaderText>
+      <ScreenReaderText translate={translate}>
+        {t(`severity.${severity}`)}
+      </ScreenReaderText>
       {title && <AlertTitle translate={translate}>{title}</AlertTitle>}
       <Box component="div">{children}</Box>
     </Alert>

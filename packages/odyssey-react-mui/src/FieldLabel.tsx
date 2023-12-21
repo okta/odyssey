@@ -57,7 +57,7 @@ const FieldLabel = ({
   return hasVisibleLabel ? (
     inputLabel
   ) : (
-    <ScreenReaderText>{inputLabel}</ScreenReaderText>
+    <ScreenReaderText translate={translate}>{inputLabel}</ScreenReaderText>
   );
 };
 

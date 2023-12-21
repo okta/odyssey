@@ -78,7 +78,9 @@ const Banner = ({
       severity={severity}
       variant="banner"
     >
-      <ScreenReaderText>{t(`severity.${severity}`)}:</ScreenReaderText>
+      <ScreenReaderText translate={translate}>
+        {t(`severity.${severity}`)}:
+      </ScreenReaderText>
       <AlertTitle translate={translate}>{text}</AlertTitle>
       {linkUrl && (
         <Link href={linkUrl} variant="monochrome" translate={translate}>
