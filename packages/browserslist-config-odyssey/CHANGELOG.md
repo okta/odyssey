@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.11](https://github.com/okta/odyssey/compare/v1.9.10...v1.9.11) (2023-12-22)
+
+**Note:** Version bump only for package @okta/browserslist-config-odyssey
+
 ## [1.9.10](https://github.com/okta/odyssey/compare/v1.9.9...v1.9.10) (2023-12-21)
 
 **Note:** Version bump only for package @okta/browserslist-config-odyssey
