@@ -25,7 +25,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { SeleniumProps } from "./SeleniumProps";
+import { AllowedProps } from "./AllowedProps";
 
 export type TabItemProps = {
   /**
@@ -48,7 +48,7 @@ export type TabItemProps = {
    * The value associated with the TabItem
    */
   value?: string;
-} & SeleniumProps;
+} & AllowedProps;
 
 export type TabsProps = {
   /**

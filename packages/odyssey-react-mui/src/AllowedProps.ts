@@ -10,11 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export type SeleniumProps = {
+export type AllowedProps = {
   /**
    * This prop puts a `data` attribute on an HTML element in this component with the value provided.
    *
    * @deprecated **WARNING:** You should be using Semantic Selectors instead of this property. This is a temporary measure for backwards compatibility with existing Selenium tests.
    */
   testId?: string;
+  /**
+   * This prop puts a `translate` attribute on an HTML element. It should be used to indicate whether text within the element should be translated.
+   */
+  translate?: "yes" | "no";
 };

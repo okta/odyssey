@@ -17,7 +17,7 @@ import {
   DesignTokens,
 } from "./OdysseyDesignTokensContext";
 import { Box } from "./Box";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { AllowedProps } from "./AllowedProps";
 
 export const badgeTypeValues = ["default", "attention", "danger"] as const;
 
@@ -25,7 +25,7 @@ export type BadgeProps = {
   badgeContent: number;
   badgeContentMax?: number;
   type?: (typeof badgeTypeValues)[number];
-} & SeleniumProps;
+} & AllowedProps;
 
 const badgeTypeColors = (odysseyTokens: DesignTokens) => ({
   default: {
@@ -45,6 +45,8 @@ const badgeTypeColors = (odysseyTokens: DesignTokens) => ({
 const Badge = ({
   badgeContent,
   badgeContentMax = 999,
+  testId,
+  translate,
   type = "default",
 }: BadgeProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
@@ -90,7 +92,11 @@ const Badge = ({
     return null;
   }
 
-  return <Box sx={badgeStyles}>{formattedContent}</Box>;
+  return (
+    <Box sx={badgeStyles} data-se={testId} translate={translate}>
+      {formattedContent}
+    </Box>
+  );
 };
 
 const MemoizedBadge = memo(Badge);

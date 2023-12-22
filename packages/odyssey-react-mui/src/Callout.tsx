@@ -15,7 +15,7 @@ import { Alert, AlertTitle, Box } from "@mui/material";
 import { ScreenReaderText } from "./ScreenReaderText";
 import { useTranslation } from "react-i18next";
 
-import type { SeleniumProps } from "./SeleniumProps";
+import type { AllowedProps } from "./AllowedProps";
 
 export const calloutRoleValues = ["status", "alert"] as const;
 export const calloutSeverityValues = [
@@ -44,15 +44,24 @@ export type CalloutProps = {
    * The title of the Callout
    */
   title?: string;
-} & SeleniumProps;
+} & AllowedProps;
 
-const Callout = ({ children, role, severity, testId, title }: CalloutProps) => {
+const Callout = ({
+  children,
+  role,
+  severity,
+  testId,
+  title,
+  translate,
+}: CalloutProps) => {
   const { t } = useTranslation();
 
   return (
     <Alert data-se={testId} role={role} severity={severity} variant="callout">
-      <ScreenReaderText>{t(`severity.${severity}`)}</ScreenReaderText>
-      {title && <AlertTitle>{title}</AlertTitle>}
+      <ScreenReaderText translate={translate}>
+        {t(`severity.${severity}`)}
+      </ScreenReaderText>
+      {title && <AlertTitle translate={translate}>{title}</AlertTitle>}
       <Box component="div">{children}</Box>
     </Alert>
   );

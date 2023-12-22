@@ -19,7 +19,7 @@ import {
 import { memo, useCallback, useRef, useImperativeHandle } from "react";
 
 import { FieldComponentProps } from "./FieldComponentProps";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { AllowedProps } from "./AllowedProps";
 import { FocusHandle } from "./@types/react-augment";
 
 export type RadioProps = {
@@ -52,7 +52,7 @@ export type RadioProps = {
    */
   onBlur?: MuiFormControlLabelProps["onBlur"];
 } & Pick<FieldComponentProps, "isDisabled" | "name"> &
-  SeleniumProps;
+  AllowedProps;
 
 const Radio = ({
   inputFocusRef,
@@ -62,6 +62,7 @@ const Radio = ({
   label,
   name,
   testId,
+  translate,
   value,
   onChange: onChangeProp,
   onBlur: onBlurProp,
@@ -103,6 +104,7 @@ const Radio = ({
       disabled={isDisabled}
       label={label}
       name={name}
+      translate={translate}
       value={value}
       onBlur={onBlur}
     />

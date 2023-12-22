@@ -22,7 +22,7 @@ import {
 
 import { FieldComponentProps } from "./FieldComponentProps";
 import { Typography } from "./Typography";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { AllowedProps } from "./AllowedProps";
 import { ComponentControlledState, getControlState } from "./inputUtils";
 import { CheckedFieldProps } from "./FormCheckedProps";
 import { FocusHandle } from "./@types/react-augment";
@@ -80,7 +80,7 @@ export type CheckboxProps = {
   onBlur?: MuiFormControlLabelProps["onBlur"];
 } & Pick<FieldComponentProps, "id" | "isDisabled" | "name"> &
   CheckedFieldProps<MuiCheckboxProps> &
-  SeleniumProps;
+  AllowedProps;
 
 const Checkbox = ({
   ariaLabel,
@@ -98,6 +98,7 @@ const Checkbox = ({
   onChange: onChangeProp,
   onBlur: onBlurProp,
   testId,
+  translate,
   validity = "inherit",
   value,
 }: CheckboxProps) => {
@@ -141,10 +142,10 @@ const Checkbox = ({
             </Typography>
           </>
         )}
-        {hint && <FormHelperText>{hint}</FormHelperText>}
+        {hint && <FormHelperText translate={translate}>{hint}</FormHelperText>}
       </>
     );
-  }, [isRequired, labelProp, hint, t]);
+  }, [isRequired, labelProp, hint, t, translate]);
 
   const onChange = useCallback<NonNullable<MuiCheckboxProps["onChange"]>>(
     (event, checked) => {
@@ -192,6 +193,7 @@ const Checkbox = ({
       value={value}
       required={isRequired}
       onBlur={onBlur}
+      translate={translate}
     />
   );
 };
