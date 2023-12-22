@@ -16,12 +16,17 @@ import {
   Radio as MuiRadio,
   RadioProps as MuiRadioProps,
 } from "@mui/material";
-import { memo, useCallback } from "react";
+import { memo, useCallback, useRef, useImperativeHandle } from "react";
 
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
+import { FocusHandle } from "./@types/react-augment";
 
 export type RadioProps = {
+  /**
+   * The ref forwarded to the Radio to expose focus()
+   */
+  inputFocusRef?: React.RefObject<FocusHandle>;
   /**
    * If `true`, the Radio is selected
    */
@@ -50,6 +55,7 @@ export type RadioProps = {
   SeleniumProps;
 
 const Radio = ({
+  inputFocusRef,
   isChecked,
   isDisabled,
   isInvalid,
@@ -60,6 +66,20 @@ const Radio = ({
   onChange: onChangeProp,
   onBlur: onBlurProp,
 }: RadioProps) => {
+  const ref = useRef<HTMLInputElement>(null);
+  useImperativeHandle(
+    inputFocusRef,
+    () => {
+      const element = ref.current;
+      return {
+        focus: () => {
+          element && element.focus();
+        },
+      };
+    },
+    []
+  );
+
   const onChange = useCallback<NonNullable<MuiRadioProps["onChange"]>>(
     (event, checked) => {
       onChangeProp?.(event, checked);
@@ -78,7 +98,7 @@ const Radio = ({
     <FormControlLabel
       checked={isChecked}
       className={isInvalid ? "Mui-error" : ""}
-      control={<MuiRadio onChange={onChange} />}
+      control={<MuiRadio inputRef={ref} onChange={onChange} />}
       data-se={testId}
       disabled={isDisabled}
       label={label}

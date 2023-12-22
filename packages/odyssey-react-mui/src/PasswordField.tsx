@@ -17,6 +17,7 @@ import {
   forwardRef,
   memo,
   useCallback,
+  useImperativeHandle,
   useRef,
   useState,
 } from "react";
@@ -27,6 +28,7 @@ import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
 import { useTranslation } from "react-i18next";
 import { getControlState, useInputValues } from "./inputUtils";
+import { FocusHandle } from "./@types/react-augment";
 
 export type PasswordFieldProps = {
   /**
@@ -47,6 +49,10 @@ export type PasswordFieldProps = {
    * If `true`, the show/hide icon is not shown to the user
    */
   hasShowPassword?: boolean;
+  /**
+   * The ref forwarded to the TextField to expose focus()
+   */
+  inputFocusRef?: React.RefObject<FocusHandle>;
   /**
    * The label for the `input` element.
    */
@@ -83,6 +89,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       hasInitialFocus,
       hint,
       id: idOverride,
+      inputFocusRef,
       isDisabled = false,
       isFullWidth = false,
       isOptional = false,
@@ -119,6 +126,20 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       value,
       controlState: controlledStateRef.current,
     });
+
+    const inputRef = useRef<HTMLInputElement>(null);
+    useImperativeHandle(
+      inputFocusRef,
+      () => {
+        const element = inputRef.current;
+        return {
+          focus: () => {
+            element && element.focus();
+          },
+        };
+      },
+      []
+    );
 
     const onChange = useCallback<
       ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>
@@ -161,6 +182,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
             // role: "textbox" Added because password inputs don't have an implicit role assigned. This causes problems with element selection.
             role: "textbox",
           }}
+          inputRef={inputRef}
           name={nameOverride ?? id}
           onChange={onChange}
           onFocus={onFocus}
