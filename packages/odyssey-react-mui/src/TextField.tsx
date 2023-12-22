@@ -25,7 +25,7 @@ import { InputAdornment, InputBase } from "@mui/material";
 
 import { FieldComponentProps } from "./FieldComponentProps";
 import { Field } from "./Field";
-import { SeleniumProps } from "./SeleniumProps";
+import { AllowedProps } from "./AllowedProps";
 import { useInputValues, getControlState } from "./inputUtils";
 import { FocusHandle } from "./@types/react-augment";
 
@@ -97,7 +97,7 @@ export type TextFieldProps = {
    */
   value?: string;
 } & FieldComponentProps &
-  SeleniumProps;
+  AllowedProps;
 
 const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (
@@ -124,6 +124,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       placeholder,
       startAdornment,
       testId,
+      translate,
       type = "text",
       value: value,
     },
@@ -179,7 +180,9 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           data-se={testId}
           endAdornment={
             endAdornment && (
-              <InputAdornment position="end">{endAdornment}</InputAdornment>
+              <InputAdornment position="end" translate={translate}>
+                {endAdornment}
+              </InputAdornment>
             )
           }
           id={id}
@@ -195,10 +198,13 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           required={!isOptional}
           startAdornment={
             startAdornment && (
-              <InputAdornment position="start">{startAdornment}</InputAdornment>
+              <InputAdornment position="start" translate={translate}>
+                {startAdornment}
+              </InputAdornment>
             )
           }
           type={type}
+          translate={translate}
         />
       ),
       [
@@ -217,6 +223,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         ref,
         startAdornment,
         testId,
+        translate,
         type,
       ]
     );

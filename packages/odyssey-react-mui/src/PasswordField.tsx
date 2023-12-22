@@ -25,7 +25,7 @@ import {
 import { ShowIcon, HideIcon } from "./icons.generated";
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { AllowedProps } from "./AllowedProps";
 import { useTranslation } from "react-i18next";
 import { getControlState, useInputValues } from "./inputUtils";
 import { FocusHandle } from "./@types/react-augment";
@@ -78,7 +78,7 @@ export type PasswordFieldProps = {
    */
   value?: string;
 } & FieldComponentProps &
-  SeleniumProps;
+  AllowedProps;
 
 const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
   (
@@ -102,6 +102,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       onBlur,
       placeholder,
       testId,
+      translate,
       value,
     },
     ref
@@ -191,6 +192,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           readOnly={isReadOnly}
           ref={ref}
           required={!isOptional}
+          translate={translate}
           type={inputType}
         />
       ),
@@ -211,6 +213,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
         hasShowPassword,
         ref,
         testId,
+        translate,
       ]
     );
 

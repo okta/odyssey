@@ -22,7 +22,7 @@ import {
 
 import { MuiPropsContext, useMuiProps } from "./MuiPropsContext";
 import { Tooltip } from "./Tooltip";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { AllowedProps } from "./AllowedProps";
 import { FocusHandle } from "./@types/react-augment";
 
 export const buttonSizeValues = ["small", "medium", "large"] as const;
@@ -113,7 +113,7 @@ export type ButtonProps = {
       startIcon?: ReactElement;
     }
 ) &
-  SeleniumProps;
+  AllowedProps;
 
 const Button = ({
   ariaDescribedBy,
@@ -130,6 +130,7 @@ const Button = ({
   startIcon,
   testId,
   tooltipText,
+  translate,
   type = "button",
   variant,
 }: ButtonProps) => {
@@ -165,6 +166,7 @@ const Button = ({
         ref={ref}
         size={size}
         startIcon={startIcon}
+        translate={translate}
         type={type}
         variant={variant}
       >
@@ -184,6 +186,7 @@ const Button = ({
       size,
       startIcon,
       testId,
+      translate,
       type,
       variant,
     ]
