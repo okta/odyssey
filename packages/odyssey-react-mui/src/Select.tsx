@@ -10,7 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useImperativeHandle,
+} from "react";
 import {
   Box,
   Checkbox as MuiCheckbox,
@@ -31,6 +39,7 @@ import {
   useInputValues,
   getControlState,
 } from "./inputUtils";
+import { FocusHandle } from "./@types/react-augment";
 
 export type SelectOption = {
   text: string;
@@ -53,6 +62,10 @@ export type SelectProps<
    * If `true`, the Select allows multiple selections
    */
   hasMultipleChoices?: HasMultipleChoices;
+  /**
+   * The ref forwarded to the Select to expose focus()
+   */
+  inputFocusRef?: React.RefObject<FocusHandle>;
   /**
    * @deprecated Use `hasMultipleChoices` instead.
    */
@@ -121,6 +134,7 @@ const Select = <
   hint,
   HintLinkComponent,
   id: idOverride,
+  inputFocusRef,
   isDisabled = false,
   isFullWidth = false,
   isMultiSelect,
@@ -147,6 +161,20 @@ const Select = <
   );
   const [internalSelectedValues, setInternalSelectedValues] = useState(
     controlledStateRef.current === CONTROLLED ? value : defaultValue
+  );
+  const inputRef = useRef<HTMLSelectElement>(null);
+
+  useImperativeHandle(
+    inputFocusRef,
+    () => {
+      const element = inputRef.current;
+      return {
+        focus: () => {
+          element && element.focus();
+        },
+      };
+    },
+    []
   );
 
   useEffect(() => {
@@ -262,6 +290,7 @@ const Select = <
         children={children}
         data-se={testId}
         id={id}
+        inputRef={inputRef}
         labelId={labelElementId}
         multiple={hasMultipleChoices}
         name={nameOverride ?? id}

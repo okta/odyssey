@@ -12,11 +12,18 @@
 
 import { Button as MuiButton } from "@mui/material";
 import type { ButtonProps as MuiButtonProps } from "@mui/material";
-import { memo, ReactElement, useCallback } from "react";
+import {
+  memo,
+  ReactElement,
+  useCallback,
+  useImperativeHandle,
+  useRef,
+} from "react";
 
 import { MuiPropsContext, useMuiProps } from "./MuiPropsContext";
 import { Tooltip } from "./Tooltip";
 import type { AllowedProps } from "./AllowedProps";
+import { FocusHandle } from "./@types/react-augment";
 
 export const buttonSizeValues = ["small", "medium", "large"] as const;
 export const buttonTypeValues = ["button", "submit", "reset"] as const;
@@ -41,6 +48,10 @@ export type ButtonProps = {
    * The ID of the element that describes the Button
    */
   ariaDescribedBy?: string;
+  /**
+   * The ref forwarded to the Button to expose focus()
+   */
+  buttonFocusRef?: React.RefObject<FocusHandle>;
   /**
    * The icon element to display at the end of the Button
    */
@@ -108,6 +119,7 @@ const Button = ({
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
+  buttonFocusRef,
   endIcon,
   id,
   isDisabled,
@@ -124,6 +136,20 @@ const Button = ({
 }: ButtonProps) => {
   const muiProps = useMuiProps();
 
+  const ref = useRef<HTMLButtonElement>(null);
+  useImperativeHandle(
+    buttonFocusRef,
+    () => {
+      const element = ref.current;
+      return {
+        focus: () => {
+          element && element.focus();
+        },
+      };
+    },
+    []
+  );
+
   const renderButton = useCallback(
     (muiProps) => (
       <MuiButton
@@ -137,6 +163,7 @@ const Button = ({
         fullWidth={isFullWidth}
         id={id}
         onClick={onClick}
+        ref={ref}
         size={size}
         startIcon={startIcon}
         translate={translate}

@@ -14,8 +14,16 @@ import {
   Typography as MuiTypography,
   TypographyProps as MuiTypographyProps,
 } from "@mui/material";
-import { ElementType, ReactNode, memo, useMemo } from "react";
+import {
+  ElementType,
+  ReactNode,
+  memo,
+  useMemo,
+  useRef,
+  useImperativeHandle,
+} from "react";
 import { AllowedProps } from "./AllowedProps";
+import { FocusHandle } from "./@types/react-augment";
 
 export type TypographyVariantValue =
   | "h1"
@@ -79,6 +87,10 @@ export type TypographyProps = {
    */
   component?: ElementType;
   /**
+   * The ref forwarded to the Typography to expose focus()
+   */
+  typographyFocusRef?: React.RefObject<FocusHandle>;
+  /**
    * The variant of Typography to render.
    */
   variant?: keyof typeof typographyVariantMapping;
@@ -93,6 +105,7 @@ const Typography = ({
   component: componentProp,
   testId,
   translate,
+  typographyFocusRef,
   variant = "body",
 }: TypographyProps) => {
   const component = useMemo(() => {
@@ -108,20 +121,34 @@ const Typography = ({
     return componentProp;
   }, [componentProp, variant]);
 
+  const ref = useRef<HTMLElement>(null);
+  useImperativeHandle(
+    typographyFocusRef,
+    () => {
+      const element = ref.current;
+      return {
+        focus: () => {
+          element && element.focus();
+        },
+      };
+    },
+    []
+  );
+
   return (
-    <>
-      <MuiTypography
-        aria-describedby={ariaDescribedBy}
-        aria-label={ariaLabel}
-        aria-labelledby={ariaLabelledBy}
-        children={children}
-        color={color}
-        component={component}
-        data-se={testId}
-        translate={translate}
-        variant={typographyVariantMapping[variant]}
-      />
-    </>
+    <MuiTypography
+      aria-describedby={ariaDescribedBy}
+      aria-label={ariaLabel}
+      aria-labelledby={ariaLabelledBy}
+      children={children}
+      color={color}
+      component={component}
+      data-se={testId}
+      ref={ref}
+      tabIndex={-1}
+      translate={translate}
+      variant={typographyVariantMapping[variant]}
+    />
   );
 };
 

@@ -11,7 +11,7 @@
  */
 
 import { useTranslation } from "react-i18next";
-import { memo, useCallback, useMemo, useRef } from "react";
+import { memo, useCallback, useMemo, useRef, useImperativeHandle } from "react";
 import {
   Checkbox as MuiCheckbox,
   CheckboxProps as MuiCheckboxProps,
@@ -25,6 +25,7 @@ import { Typography } from "./Typography";
 import type { AllowedProps } from "./AllowedProps";
 import { ComponentControlledState, getControlState } from "./inputUtils";
 import { CheckedFieldProps } from "./FormCheckedProps";
+import { FocusHandle } from "./@types/react-augment";
 
 export const checkboxValidityValues = ["valid", "invalid", "inherit"] as const;
 
@@ -41,6 +42,10 @@ export type CheckboxProps = {
    * The id of the `input` element.
    */
   id?: string;
+  /**
+   * The ref forwarded to the Checkbox to expose focus()
+   */
+  inputFocusRef?: React.RefObject<FocusHandle>;
   /**
    * Determines whether the Checkbox is disabled
    */
@@ -81,6 +86,7 @@ const Checkbox = ({
   ariaLabel,
   ariaLabelledBy,
   id: idOverride,
+  inputFocusRef,
   isChecked,
   isDefaultChecked,
   isDisabled,
@@ -109,6 +115,20 @@ const Checkbox = ({
     }
     return { defaultChecked: isDefaultChecked };
   }, [isDefaultChecked, isChecked]);
+
+  const inputRef = useRef<HTMLInputElement>(null);
+  useImperativeHandle(
+    inputFocusRef,
+    () => {
+      const element = inputRef.current;
+      return {
+        focus: () => {
+          element && element.focus();
+        },
+      };
+    },
+    []
+  );
 
   const label = useMemo(() => {
     return (
@@ -159,6 +179,7 @@ const Checkbox = ({
           indeterminate={isIndeterminate}
           onChange={onChange}
           required={isRequired}
+          inputRef={inputRef}
           sx={() => ({
             marginBlockStart: "2px",
           })}

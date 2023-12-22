@@ -18,6 +18,7 @@ import {
   memo,
   ReactElement,
   useCallback,
+  useImperativeHandle,
   useRef,
 } from "react";
 import { InputAdornment, InputBase } from "@mui/material";
@@ -26,6 +27,7 @@ import { FieldComponentProps } from "./FieldComponentProps";
 import { Field } from "./Field";
 import { AllowedProps } from "./AllowedProps";
 import { useInputValues, getControlState } from "./inputUtils";
+import { FocusHandle } from "./@types/react-augment";
 
 export const textFieldTypeValues = [
   "email",
@@ -54,6 +56,10 @@ export type TextFieldProps = {
    * If `true`, the component will receive focus automatically.
    */
   hasInitialFocus?: boolean;
+  /**
+   * The ref forwarded to the TextField to expose focus()
+   */
+  inputFocusRef?: React.RefObject<FocusHandle>;
   /**
    * If `true`, a [TextareaAutosize](/material-ui/react-textarea-autosize/) element is rendered.
    */
@@ -104,6 +110,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       hint,
       HintLinkComponent,
       id: idOverride,
+      inputFocusRef,
       isDisabled = false,
       isFullWidth = false,
       isMultiline = false,
@@ -135,6 +142,20 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       controlState: controlledStateRef.current,
     });
 
+    const inputRef = useRef<HTMLInputElement>(null);
+    useImperativeHandle(
+      inputFocusRef,
+      () => {
+        const element = inputRef.current;
+        return {
+          focus: () => {
+            element && element.focus();
+          },
+        };
+      },
+      []
+    );
+
     const onChange = useCallback<
       NonNullable<ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>>
     >(
@@ -165,6 +186,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             )
           }
           id={id}
+          inputRef={inputRef}
           multiline={isMultiline}
           name={nameOverride ?? id}
           onBlur={onBlur}
