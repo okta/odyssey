@@ -61,7 +61,7 @@ export type SwitchProps = {
   value: string;
 } & Pick<
   FieldComponentProps,
-  "hint" | "id" | "isFullWidth" | "isDisabled" | "name"
+  "hint" | "HintLinkComponent" | "id" | "isFullWidth" | "isDisabled" | "name"
 > &
   CheckedFieldProps<MuiSwitchProps> &
   Pick<HtmlProps, "testId">;
@@ -70,6 +70,8 @@ type SwitchLabelProps = {
   checked: boolean;
   hint: SwitchProps["hint"];
   hintId?: string;
+  HintLinkComponent: SwitchProps["HintLinkComponent"];
+  isDisabled: SwitchProps["isDisabled"];
   isFullWidth: SwitchProps["isFullWidth"];
   label: SwitchProps["label"];
 };
@@ -78,11 +80,25 @@ const SwitchLabel = ({
   checked,
   hint,
   hintId,
+  HintLinkComponent,
+  isDisabled,
   isFullWidth,
   label,
 }: SwitchLabelProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
+
+  const statusTextColor = isDisabled
+    ? odysseyDesignTokens.TypographyColorDisabled
+    : checked
+    ? odysseyDesignTokens.PaletteSuccessText
+    : odysseyDesignTokens.HueNeutral700;
+
+  const statusBackgroundColor = isDisabled
+    ? odysseyDesignTokens.HueNeutral100
+    : checked
+    ? odysseyDesignTokens.PaletteSuccessLighter
+    : odysseyDesignTokens.HueNeutral100;
 
   return (
     <>
@@ -103,13 +119,9 @@ const SwitchLabel = ({
         <Box
           sx={{
             padding: "2px 4px",
-            backgroundColor: checked
-              ? odysseyDesignTokens.PaletteSuccessLighter
-              : odysseyDesignTokens.HueNeutral100,
+            backgroundColor: statusBackgroundColor,
             borderRadius: odysseyDesignTokens.BorderRadiusMain,
-            color: checked
-              ? odysseyDesignTokens.PaletteSuccessText
-              : odysseyDesignTokens.HueNeutral700,
+            color: statusTextColor,
             fontWeight: odysseyDesignTokens.TypographyWeightBodyBold,
             fontSize: odysseyDesignTokens.TypographyScale0,
             lineHeight: odysseyDesignTokens.TypographyLineHeightOverline,
@@ -120,13 +132,16 @@ const SwitchLabel = ({
           {checked ? t("switch.active") : t("switch.inactive")}
         </Box>
       </Box>
-      {hint && <FieldHint id={hintId} text={hint} />}
+      {hint && (
+        <FieldHint id={hintId} text={hint} LinkComponent={HintLinkComponent} />
+      )}
     </>
   );
 };
 
 const Switch = ({
   hint,
+  HintLinkComponent,
   id: _id,
   isChecked,
   isDefaultChecked,
@@ -224,6 +239,8 @@ const Switch = ({
             checked={internalSwitchChecked}
             hint={hint}
             hintId={hintId}
+            HintLinkComponent={HintLinkComponent}
+            isDisabled={isDisabled}
             isFullWidth={isFullWidth}
             label={label}
           />
