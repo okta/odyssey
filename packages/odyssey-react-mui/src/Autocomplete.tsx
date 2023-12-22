@@ -21,7 +21,7 @@ import { memo, useCallback, useMemo, useRef } from "react";
 
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { AllowedProps } from "./AllowedProps";
 import {
   ComponentControlledState,
   useInputValues,
@@ -170,7 +170,7 @@ export type AutocompleteProps<
   | "isOptional"
   | "name"
 > &
-  SeleniumProps;
+  AllowedProps;
 
 const Autocomplete = <
   OptionType,
@@ -201,6 +201,7 @@ const Autocomplete = <
   value,
   getIsOptionEqualToValue,
   testId,
+  translate,
 }: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
   const controlledStateRef = useRef(
     getControlState({ controlledValue: value, uncontrolledValue: defaultValue })
@@ -340,6 +341,7 @@ const Autocomplete = <
       readOnly={isReadOnly}
       renderInput={renderInput}
       isOptionEqualToValue={getIsOptionEqualToValue}
+      translate={translate}
     />
   );
 };

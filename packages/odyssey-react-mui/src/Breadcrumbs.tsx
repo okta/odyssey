@@ -29,6 +29,7 @@ import {
 import { GroupIcon, HomeIcon, UserIcon } from "./icons.generated";
 import { Subordinate } from "./Typography";
 import { useTranslation } from "react-i18next";
+import { AllowedProps } from "./AllowedProps";
 
 export type BreadcrumbType = "listItem" | "menuItem" | "currentPage";
 
@@ -42,7 +43,7 @@ export type BreadcrumbsProps = {
   children: ReactElement<typeof Breadcrumb>[];
   homeHref?: string;
   maxVisibleItems?: number;
-};
+} & AllowedProps;
 
 export type BreadcrumbContextType = {
   breadcrumbType: BreadcrumbType;
@@ -101,6 +102,8 @@ const BreadcrumbList = ({
   children,
   homeHref,
   maxVisibleItems = defaultTruncationValue,
+  testId,
+  translate,
 }: BreadcrumbsProps) => {
   const { t } = useTranslation();
 
@@ -137,6 +140,8 @@ const BreadcrumbList = ({
     <MuiBreadcrumbs
       maxItems={children.length + 1}
       aria-label={t("breadcrumbs.label.text")}
+      data-se={testId}
+      translate={translate}
     >
       {homeHref && (
         <ButtonBase href={homeHref} aria-label={t("breadcrumbs.home.text")}>

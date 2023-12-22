@@ -17,21 +17,27 @@ import { ScreenReaderText } from "./ScreenReaderText";
 import { ErrorMessagesList } from "./ErrorMessagesList";
 import { useTranslation } from "react-i18next";
 
-import type { SeleniumProps } from "./SeleniumProps";
+import type { AllowedProps } from "./AllowedProps";
 import { Box } from "./Box";
 
 export type FieldErrorProps = {
   id?: string;
   message?: string;
   messagesList?: string[];
-} & SeleniumProps;
+} & AllowedProps;
 
-const FieldError = ({ id, message, messagesList, testId }: FieldErrorProps) => {
+const FieldError = ({
+  id,
+  message,
+  messagesList,
+  testId,
+  translate,
+}: FieldErrorProps) => {
   const { t } = useTranslation();
 
   return (
-    <FormHelperText data-se={testId} error id={id}>
-      <ScreenReaderText>{`${t(
+    <FormHelperText data-se={testId} error id={id} translate={translate}>
+      <ScreenReaderText translate={translate}>{`${t(
         "fielderror.screenreader.text"
       )}:`}</ScreenReaderText>
       <Box>

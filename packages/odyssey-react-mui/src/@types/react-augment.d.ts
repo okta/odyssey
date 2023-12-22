@@ -17,3 +17,7 @@ export interface ForwardRefWithType extends FC<WithForwardRefProps<Option>> {
     FC<WithForwardRefProps<T>>
   >;
 }
+
+export type FocusHandle = {
+  focus: () => void;
+};

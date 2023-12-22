@@ -16,7 +16,7 @@ import { memo, ReactElement, useCallback } from "react";
 import { Checkbox } from "./Checkbox";
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { AllowedProps } from "./AllowedProps";
 
 export type CheckboxGroupProps = {
   /**
@@ -41,7 +41,7 @@ export type CheckboxGroupProps = {
   | "HintLinkComponent"
   | "isDisabled"
 > &
-  SeleniumProps;
+  AllowedProps;
 
 const CheckboxGroup = ({
   children,
@@ -53,6 +53,7 @@ const CheckboxGroup = ({
   isRequired = false,
   label,
   testId,
+  translate,
 }: CheckboxGroupProps) => {
   const renderFieldComponent = useCallback(
     ({ ariaDescribedBy, errorMessageElementId, labelElementId }) => (
@@ -61,11 +62,12 @@ const CheckboxGroup = ({
         aria-errormessage={errorMessageElementId}
         aria-labelledby={labelElementId}
         data-se={testId}
+        translate={translate}
       >
         {children}
       </MuiFormGroup>
     ),
-    [children, testId]
+    [children, testId, translate]
   );
 
   return (
