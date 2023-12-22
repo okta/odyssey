@@ -14,8 +14,16 @@ import {
   Typography as MuiTypography,
   TypographyProps as MuiTypographyProps,
 } from "@mui/material";
-import { ElementType, ReactNode, memo, useMemo } from "react";
+import {
+  ElementType,
+  ReactNode,
+  memo,
+  useMemo,
+  useRef,
+  useImperativeHandle,
+} from "react";
 import { SeleniumProps } from "./SeleniumProps";
+import { FocusHandle } from "./@types/react-augment";
 
 export type TypographyVariantValue =
   | "h1"
@@ -79,6 +87,10 @@ export type TypographyProps = {
    */
   component?: ElementType;
   /**
+   * The ref forwarded to the Typography to expose focus()
+   */
+  typographyFocusRef?: React.RefObject<FocusHandle>;
+  /**
    * The variant of Typography to render.
    */
   variant?: keyof typeof typographyVariantMapping;
@@ -92,6 +104,7 @@ const Typography = ({
   color,
   component: componentProp,
   testId,
+  typographyFocusRef,
   variant = "body",
 }: TypographyProps) => {
   const component = useMemo(() => {
@@ -107,6 +120,20 @@ const Typography = ({
     return componentProp;
   }, [componentProp, variant]);
 
+  const ref = useRef<HTMLElement>(null);
+  useImperativeHandle(
+    typographyFocusRef,
+    () => {
+      const element = ref.current;
+      return {
+        focus: () => {
+          element && element.focus();
+        },
+      };
+    },
+    []
+  );
+
   return (
     <MuiTypography
       aria-describedby={ariaDescribedBy}
@@ -116,6 +143,8 @@ const Typography = ({
       color={color}
       component={component}
       data-se={testId}
+      ref={ref}
+      tabIndex={-1}
       variant={typographyVariantMapping[variant]}
     />
   );
