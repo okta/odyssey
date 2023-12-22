@@ -1495,6 +1495,7 @@ export const components = ({
           top: odysseyTokens.Spacing1,
           left: odysseyTokens.Spacing1,
           padding: `${odysseyTokens.Spacing0} 0`,
+          transition: `background-color ${odysseyTokens.TransitionDurationMain}, transform ${odysseyTokens.TransitionDurationMain}`,
 
           ...(ownerState.checked === true && {
             color: `${odysseyTokens.HueNeutralWhite} !important`,
@@ -1516,20 +1517,32 @@ export const components = ({
             },
           },
         }),
-        thumb: {
+        thumb: ({ ownerState }) => ({
           width: odysseyTokens.Spacing4,
           height: odysseyTokens.Spacing4,
           boxShadow: "none",
-        },
+          transition: `background-color ${odysseyTokens.TransitionDurationMain}`,
+
+          ...(ownerState.disabled && {
+            backgroundColor: odysseyTokens.HueNeutral50,
+          }),
+        }),
         track: ({ ownerState }) => ({
           borderRadius: odysseyTokens.BorderRadiusRound,
-          backgroundColor: `${odysseyTokens.HueNeutral300}`,
+          backgroundColor: odysseyTokens.HueNeutral300,
           opacity: 1,
+          transition: `background-color ${odysseyTokens.TransitionDurationMain}`,
 
-          ...(ownerState.checked === true && {
+          ...(ownerState.checked && {
             // !important used to override more specific .Mui-checked class
             opacity: "1 !important",
             backgroundColor: `${odysseyTokens.PaletteSuccessLight} !important`,
+          }),
+
+          ...(ownerState.disabled && {
+            // !important used to override more specific .Mui-disabled class
+            opacity: "1 !important",
+            backgroundColor: `${odysseyTokens.HueNeutral200} !important`,
           }),
         }),
         input: {
@@ -1675,6 +1688,7 @@ export const components = ({
           },
           "&.Mui-disabled": {
             pointerEvents: "none",
+            color: odysseyTokens.TypographyColorDisabled,
           },
           [`:has(> .${radioClasses.root})`]: {
             alignItems: "flex-start",
@@ -1695,10 +1709,14 @@ export const components = ({
               color: odysseyTokens.PaletteDangerDark,
             },
         }),
-        label: {
+        label: ({ ownerState }) => ({
           gap: odysseyTokens.Spacing1,
           lineHeight: odysseyTokens.TypographyLineHeightUi,
-        },
+          // !important used to override more specific .Mui-disabled class
+          ...(ownerState.disabled && {
+            color: `${odysseyTokens.TypographyColorDisabled} !important`,
+          }),
+        }),
         asterisk: () => ({
           display: "none",
         }),
@@ -1728,6 +1746,14 @@ export const components = ({
 
           ".field-hint-link-component": {
             marginInlineStart: odysseyTokens.Spacing1,
+          },
+
+          ".Mui-disabled &": {
+            color: odysseyTokens.TypographyColorDisabled,
+
+            a: {
+              color: odysseyTokens.TypographyColorDisabled,
+            },
           },
         },
       },
