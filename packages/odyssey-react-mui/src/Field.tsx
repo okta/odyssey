@@ -16,6 +16,8 @@ import {
   FormControl as MuiFormControl,
   FormLabel as MuiFormLabel,
 } from "@mui/material";
+
+import { FieldComponentProps } from "./FieldComponentProps";
 import { FieldError } from "./FieldError";
 import { FieldHint } from "./FieldHint";
 import { FieldLabel } from "./FieldLabel";
@@ -44,14 +46,6 @@ export type FieldProps = {
    */
   hasVisibleLabel: boolean;
   /**
-   * The helper text content.
-   */
-  hint?: string;
-  /**
-   * The id of the `input` element.
-   */
-  id?: string;
-  /**
    * Important for narrowing down the `fieldset` role to "radiogroup".
    */
   isRadioGroup?: boolean;
@@ -59,18 +53,6 @@ export type FieldProps = {
    * Important for determining if children inherit error state
    */
   isCheckboxGroup?: boolean;
-  /**
-   * If `true`, the component is disabled.
-   */
-  isDisabled?: boolean;
-  /**
-   * If `true`, the component can stretch to fill the width of the container.
-   */
-  isFullWidth?: boolean;
-  /**
-   * If `true`, the `input` element is not required.
-   */
-  isOptional?: boolean;
   /**
    * The label for the `input` element.
    */
@@ -103,6 +85,7 @@ const Field = ({
   fieldType,
   hasVisibleLabel,
   hint,
+  HintLinkComponent,
   id: idOverride,
   isDisabled: isDisabledProp = false,
   isFullWidth = false,
@@ -110,7 +93,18 @@ const Field = ({
   isOptional = false,
   label,
   renderFieldComponent,
-}: FieldProps) => {
+}: FieldProps &
+  Pick<
+    FieldComponentProps,
+    | "errorMessage"
+    | "errorMessagesList"
+    | "hint"
+    | "HintLinkComponent"
+    | "id"
+    | "isDisabled"
+    | "isFullWidth"
+    | "isOptional"
+  >) => {
   const { t } = useTranslation();
 
   const id = useUniqueId(idOverride);
@@ -158,7 +152,9 @@ const Field = ({
         />
       )}
 
-      {hint && <FieldHint id={hintId} text={hint} />}
+      {hint && (
+        <FieldHint id={hintId} LinkComponent={HintLinkComponent} text={hint} />
+      )}
 
       {renderFieldComponent({
         ariaDescribedBy,

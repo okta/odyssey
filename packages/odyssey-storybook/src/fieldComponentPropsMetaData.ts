@@ -46,6 +46,15 @@ export const fieldComponentPropsMetaData: Partial<
       },
     },
   },
+  HintLinkComponent: {
+    description:
+      "A `HintLink` component to provide greater context that is rendered at the end of the `hint` text",
+    table: {
+      type: {
+        summary: "ReactNode",
+      },
+    },
+  },
   isDisabled: {
     control: "boolean",
     description: "If `true`, the component is disabled",

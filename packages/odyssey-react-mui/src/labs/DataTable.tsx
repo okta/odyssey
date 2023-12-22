@@ -190,6 +190,12 @@ export type DataTableProps = {
    */
   hasSearchSubmitButton?: boolean;
   /**
+   * The debounce time, in milliseconds, for the search input firing
+   * `onChangeSearch` when changed. If `hasSearchSubmitButton` is true,
+   * this doesn't do anything.
+   */
+  searchDelayTime?: number;
+  /**
    * Callback that fires when a row (or rows) is selected or unselected.
    */
   onRowSelectionChange?: (rowSelection: MRT_RowSelectionState) => void;
@@ -259,6 +265,7 @@ const DataTable = ({
   reorderDataFn,
   totalRows,
   hasSearchSubmitButton,
+  searchDelayTime,
   paginationType = "paged",
   onRowSelectionChange,
   rowActionButtons,
@@ -628,7 +635,14 @@ const DataTable = ({
         )}
       </>
     ),
-    [density, columnVisibility, columns, hasChangeableDensity]
+    [
+      columnVisibility,
+      columns,
+      density,
+      hasChangeableDensity,
+      handleColumnVisibility,
+      hasColumnVisibility,
+    ]
   );
 
   return (
@@ -637,6 +651,7 @@ const DataTable = ({
         onChangeSearch={hasSearch ? handleSearch : undefined}
         onChangeFilters={handleFilters}
         hasSearchSubmitButton={hasSearchSubmitButton}
+        searchDelayTime={searchDelayTime}
         additionalActions={tableSettings}
         filters={
           hasFilters

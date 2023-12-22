@@ -87,11 +87,12 @@ export type SelectProps<
   | "errorMessage"
   | "errorMessagesList"
   | "hint"
+  | "HintLinkComponent"
   | "id"
   | "isDisabled"
+  | "isFullWidth"
   | "isOptional"
   | "name"
-  | "isFullWidth"
 > &
   SeleniumProps;
 
@@ -120,6 +121,7 @@ const Select = <
   errorMessagesList,
   hasMultipleChoices: hasMultipleChoicesProp,
   hint,
+  HintLinkComponent,
   id: idOverride,
   isDisabled = false,
   isFullWidth = false,
@@ -290,6 +292,7 @@ const Select = <
       fieldType="single"
       hasVisibleLabel
       hint={hint}
+      HintLinkComponent={HintLinkComponent}
       id={idOverride}
       isDisabled={isDisabled}
       isFullWidth={isFullWidth}

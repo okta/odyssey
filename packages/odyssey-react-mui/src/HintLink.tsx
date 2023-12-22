@@ -10,22 +10,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-export { LocalizationProvider } from "@mui/x-date-pickers";
-export type { LocalizationProviderProps } from "@mui/x-date-pickers";
+import { memo } from "react";
 
-export * from "./DatePicker";
-export * from "./datePickerTheme";
+import { Link, LinkProps } from "./Link";
 
-export * from "./DataTable";
-export * from "./DataTablePagination";
-export * from "./DataFilters";
+const HintLink = (
+  props: Pick<
+    LinkProps,
+    "children" | "href" | "onClick" | "rel" | "target" | "testId"
+  >
+) => <Link {...props} variant="default" />;
 
-export * from "./materialReactTableTypes";
-export * from "./StaticTable";
-export * from "./PaginatedTable";
+const MemoizedHintLink = memo(HintLink);
 
-export * from "./GroupPicker";
-export * from "./VirtualizedAutocomplete";
+MemoizedHintLink.displayName = "HintLink";
 
-export * from "./Switch";
+export { MemoizedHintLink as HintLink };

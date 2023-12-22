@@ -103,6 +103,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       errorMessage,
       errorMessagesList,
       hint,
+      HintLinkComponent,
       id: idOverride,
       isDisabled = false,
       isFullWidth = false,
@@ -206,6 +207,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         fieldType="single"
         hasVisibleLabel
         hint={hint}
+        HintLinkComponent={HintLinkComponent}
         id={idOverride}
         isDisabled={isDisabled}
         isFullWidth={isFullWidth}

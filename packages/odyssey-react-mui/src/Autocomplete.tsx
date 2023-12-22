@@ -164,10 +164,11 @@ export type AutocompleteProps<
   | "errorMessage"
   | "errorMessagesList"
   | "hint"
+  | "HintLinkComponent"
   | "id"
+  | "isFullWidth"
   | "isOptional"
   | "name"
-  | "isFullWidth"
 > &
   SeleniumProps;
 
@@ -189,6 +190,7 @@ const Autocomplete = <
   isOptional = false,
   isReadOnly,
   hint,
+  HintLinkComponent,
   label,
   name: nameOverride,
   onBlur,
@@ -248,6 +250,7 @@ const Autocomplete = <
         hasVisibleLabel
         id={InputLabelProps.htmlFor}
         hint={hint}
+        HintLinkComponent={HintLinkComponent}
         label={label}
         isOptional={isOptional}
         renderFieldComponent={({
@@ -272,7 +275,15 @@ const Autocomplete = <
         )}
       />
     ),
-    [errorMessage, hint, isOptional, label, nameOverride]
+    [
+      errorMessage,
+      errorMessagesList,
+      hint,
+      HintLinkComponent,
+      isOptional,
+      label,
+      nameOverride,
+    ]
   );
   const onChange = useCallback<
     NonNullable<

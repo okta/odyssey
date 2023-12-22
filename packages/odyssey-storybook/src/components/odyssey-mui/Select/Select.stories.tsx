@@ -12,12 +12,13 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import { Select, SelectProps } from "@okta/odyssey-react-mui";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, waitFor, screen } from "@storybook/testing-library";
-import { axeRun } from "../../../axe-util";
 import { expect } from "@storybook/jest";
-import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { useCallback, useState } from "react";
+
+import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { axeRun } from "../../../axe-util";
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 
 const optionsArray: SelectProps<string | string[], boolean>["options"] = [
   "Earth",
@@ -135,21 +136,11 @@ const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
       },
     },
     hint: fieldComponentPropsMetaData.hint,
+    HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
     id: fieldComponentPropsMetaData.id,
     isDisabled: fieldComponentPropsMetaData.isFullWidth,
     isFullWidth: fieldComponentPropsMetaData.isFullWidth,
-    isOptional: {
-      control: "boolean",
-      description: "If `true`, the select component is optional",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-        defaultValue: {
-          summary: false,
-        },
-      },
-    },
+    isOptional: fieldComponentPropsMetaData.isOptional,
     label: {
       control: "text",
       description: "The label text for the select component",

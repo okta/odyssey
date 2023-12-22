@@ -19,6 +19,7 @@ import { I18nextProvider } from "react-i18next";
 import { getTypedObjectKeys } from "./getTypedObjectKeys";
 
 export type OdysseyI18nResourceKeys = (typeof resources)["en"];
+export const odysseyI18nResourceKeysList = getTypedObjectKeys(resources["en"]);
 
 export type TranslationOverrides<
   SupportedLanguages extends string = DefaultSupportedLanguages
@@ -44,14 +45,30 @@ export type OdysseyTranslationProviderProps<
   translationOverrides?: TranslationOverrides<SupportedLanguages>;
 };
 
+const formatLanguageCodeToHyphenated = <SupportedLanguages extends string>(
+  languageCode: OdysseyTranslationProviderProps<SupportedLanguages>["languageCode"]
+) => languageCode?.replaceAll("_", "-");
+
 export const OdysseyTranslationProvider = <SupportedLanguages extends string>({
   children,
   languageCode,
   translationOverrides,
 }: OdysseyTranslationProviderProps<SupportedLanguages>) => {
   useEffect(() => {
+    const normalizedLanguageCode =
+      formatLanguageCodeToHyphenated<SupportedLanguages>(languageCode);
+
+    const changeHtmlElementLanguageAttribute = () => {
+      window.document.documentElement.setAttribute(
+        "lang",
+        normalizedLanguageCode || "en"
+      );
+    };
     // Defaults to the browser's language if available otherwise `en` will be used
-    i18n.changeLanguage(languageCode || window.navigator.language);
+    i18n.changeLanguage(
+      normalizedLanguageCode || window.navigator.language,
+      changeHtmlElementLanguageAttribute
+    );
   }, [languageCode]);
 
   useEffect(() => {

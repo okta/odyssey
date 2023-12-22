@@ -20,6 +20,7 @@ import { chipClasses } from "@mui/material/Chip";
 import { dividerClasses } from "@mui/material/Divider";
 import { formControlLabelClasses } from "@mui/material/FormControlLabel";
 import { formLabelClasses } from "@mui/material/FormLabel";
+import { formGroupClasses } from "@mui/material/FormGroup";
 import { inputAdornmentClasses } from "@mui/material/InputAdornment";
 import { inputBaseClasses } from "@mui/material/InputBase";
 import { listItemIconClasses } from "@mui/material/ListItemIcon";
@@ -453,34 +454,46 @@ export const components = ({
     MuiBreadcrumbs: {
       styleOverrides: {
         li: {
-          fontSize: odysseyTokens.TypographySizeBody,
-          lineHeight: odysseyTokens.TypographyLineHeightUi,
+          fontSize: odysseyTokens.TypographySizeSubordinate,
+
+          "& svg": {
+            width: odysseyTokens.Spacing3,
+          },
+
+          "& > p": {
+            paddingInline: odysseyTokens.Spacing1,
+          },
 
           "& > a, & > button": {
             borderRadius: odysseyTokens.BorderRadiusTight,
             color: odysseyTokens.TypographyColorSubordinate,
             display: "flex",
             gap: odysseyTokens.Spacing1,
-            padding: odysseyTokens.Spacing1,
+            paddingInline: odysseyTokens.Spacing1,
+            paddingBlock: 2,
             transitionProperty: "color, background-color",
             transitionDuration: "100ms",
             transitionTimingFunction: "linear",
 
             "&:hover": {
-              backgroundColor: odysseyTokens.HueNeutral200,
+              backgroundColor: odysseyTokens.HueNeutral100,
               color: odysseyTokens.TypographyColorBody,
             },
 
             "&:focus-visible": {
-              boxShadow: `0 0 0 2px ${odysseyTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyTokens.PalettePrimaryMain}`,
-              outline: "2px solid transparent",
-              outlineOffset: "1px",
+              outlineWidth: 2,
+              outlineStyle: "solid",
+              outlineColor: odysseyTokens.PalettePrimaryMain,
+              outlineOffset: -2,
             },
           },
         },
         separator: {
           color: odysseyTokens.BorderColorDisplay,
-          marginInline: odysseyTokens.Spacing1,
+          fontSize: odysseyTokens.TypographySizeSubordinate,
+          fontWeight: odysseyTokens.TypographyWeightBodyBold,
+          marginInlineStart: 6,
+          marginInlineEnd: 4,
         },
       },
     },
@@ -770,7 +783,7 @@ export const components = ({
             },
 
             [`.${svgIconClasses.root}`]: {
-              color: odysseyTokens.HueNeutral900,
+              color: odysseyTokens.HueNeutral300,
             },
           },
         }),
@@ -948,8 +961,8 @@ export const components = ({
     },
     MuiCircularProgress: {
       defaultProps: {
-        size: odysseyTokens.TypographyScale2,
-        thickness: 8,
+        size: odysseyTokens.Spacing5,
+        thickness: 10,
         color: "primary",
         disableShrink: false,
         variant: "indeterminate",
@@ -957,7 +970,7 @@ export const components = ({
       styleOverrides: {
         root: ({ ownerState }) => ({
           ...(ownerState.color !== "inherit" && {
-            color: odysseyTokens.PalettePrimaryDark,
+            color: odysseyTokens.PalettePrimaryMain,
           }),
         }),
         circle: ({ ownerState }) => ({
@@ -972,6 +985,32 @@ export const components = ({
       html {
         font-size: calc((${themeParam.typography.fontSize} / 16) * 100%);
       }
+
+      :not(code) &, :not(pre) & {
+          :lang(el) {
+            font-family: 'Noto Sans', sans-serif;
+          }
+
+          :lang(ja) {
+            font-family: 'Noto Sans JP', sans-serif;
+          }
+
+          :lang(ko) {
+            font-family: 'Noto Sans KR', sans-serif;
+          }
+
+          :lang(th) {
+            font-family: 'Noto Sans Thai', sans-serif;
+          }
+
+          :lang(zh-CN) {
+            font-family: 'Noto Sans SC', sans-serif;
+          }
+
+          :lang(zh-TW) {
+            font-family: 'Noto Sans TC', sans-serif;
+          }
+        }
     `,
     },
     MuiScopedCssBaseline: {
@@ -1316,6 +1355,62 @@ export const components = ({
         },
       },
     },
+    MuiSwitch: {
+      styleOverrides: {
+        root: {
+          position: "relative",
+          padding: `${odysseyTokens.Spacing0} 0`,
+          width: odysseyTokens.Spacing7,
+          height: odysseyTokens.Spacing5,
+          overflow: "visible",
+        },
+        switchBase: ({ ownerState }) => ({
+          top: odysseyTokens.Spacing1,
+          left: odysseyTokens.Spacing1,
+          padding: `${odysseyTokens.Spacing0} 0`,
+
+          ...(ownerState.checked === true && {
+            color: `${odysseyTokens.HueNeutralWhite} !important`,
+            transform: `translateX(${odysseyTokens.Spacing4}) !important`,
+          }),
+
+          "&:hover": {
+            backgroundColor: "transparent",
+
+            ...(ownerState.checked === true && {
+              backgroundColor: "transparent !important",
+            }),
+          },
+          // Had to use `Mui-focusVisible` class here. `:focus-visible` was not being triggered correctly.
+          "&.Mui-focusVisible": {
+            // Focus styles applied this way due to MUI not applying `Mui-focusVisible` class to the correct element see: https://github.com/mui/material-ui/issues/34986
+            " + .MuiSwitch-track": {
+              boxShadow: `0 0 0 2px ${odysseyTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyTokens.PalettePrimaryMain}`,
+            },
+          },
+        }),
+        thumb: {
+          width: odysseyTokens.Spacing4,
+          height: odysseyTokens.Spacing4,
+          boxShadow: "none",
+        },
+        track: ({ ownerState }) => ({
+          borderRadius: odysseyTokens.BorderRadiusRound,
+          backgroundColor: `${odysseyTokens.HueNeutral300}`,
+          opacity: 1,
+
+          ...(ownerState.checked === true && {
+            // !important used to override more specific .Mui-checked class
+            opacity: "1 !important",
+            backgroundColor: `${odysseyTokens.PaletteSuccessLight} !important`,
+          }),
+        }),
+        input: {
+          height: "44px",
+          top: "-14px",
+        },
+      },
+    },
     MuiDialog: {
       defaultProps: {
         scroll: "paper",
@@ -1423,6 +1518,9 @@ export const components = ({
           ...(ownerState.fullWidth && {
             maxWidth: "100%",
           }),
+          [`& .${formGroupClasses.root}`]: {
+            marginBlockStart: odysseyTokens.Spacing1,
+          },
         }),
       },
     },
@@ -1448,6 +1546,9 @@ export const components = ({
           "&.Mui-disabled": {
             pointerEvents: "none",
           },
+          [`& .${checkboxClasses.root}`]: {
+            marginBlockStart: 0,
+          },
           [`&:hover .${radioClasses.root}, &:hover .${checkboxClasses.root}`]: {
             color: odysseyTokens.TypographyColorBody,
           },
@@ -1466,6 +1567,7 @@ export const components = ({
         }),
         label: {
           gap: odysseyTokens.Spacing1,
+          lineHeight: odysseyTokens.TypographyLineHeightUi,
         },
         asterisk: () => ({
           display: "none",
@@ -1478,6 +1580,9 @@ export const components = ({
       },
       styleOverrides: {
         root: {
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "center",
           fontSize: odysseyTokens.TypographySizeSubordinate,
           lineHeight: odysseyTokens.TypographyLineHeightBody,
           marginBlockStart: odysseyTokens.Spacing2,
@@ -1490,6 +1595,10 @@ export const components = ({
             marginBlockEnd: 0,
           },
           textAlign: "start",
+
+          ".field-hint-link-component": {
+            marginInlineStart: odysseyTokens.Spacing1,
+          },
         },
       },
     },
@@ -1961,8 +2070,8 @@ export const components = ({
           "&::before": {
             content: "''",
             position: "absolute",
-            width: "0.5em",
-            height: "0.5em",
+            width: odysseyTokens.Spacing2,
+            height: odysseyTokens.Spacing2,
             borderRadius: "50%",
             backgroundColor: "transparent",
             transition: theme.transitions.create(["background-color"], {
@@ -2006,10 +2115,10 @@ export const components = ({
           },
           "&.Mui-disabled": {
             backgroundColor: odysseyTokens.HueNeutral50,
-            borderColor: odysseyTokens.HueNeutral300,
+            borderColor: odysseyTokens.BorderColorDisabled,
 
             "&.Mui-checked::before": {
-              backgroundColor: odysseyTokens.HueNeutral300,
+              backgroundColor: odysseyTokens.BorderColorDisabled,
             },
           },
         }),
@@ -2115,6 +2224,8 @@ export const components = ({
 
           ...(ownerState.disabled && {
             color: odysseyTokens.TypographyColorDisabled,
+            // !important used to override more specific .Mui-Disabled class selector
+            opacity: "1 !important",
           }),
 
           ...(ownerState.wrapped && {
