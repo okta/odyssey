@@ -115,7 +115,8 @@ const Field = ({
 
   const id = useUniqueId(idOverride);
   const hintId = hint ? `${id}-hint` : undefined;
-  const errorMessageElementId = errorMessage ? `${id}-error` : undefined;
+  const errorMessageElementId =
+    errorMessage || errorMessagesList ? `${id}-error` : undefined;
   const labelElementId = `${id}-label`;
 
   const ariaDescribedBy = useMemo(
@@ -134,7 +135,7 @@ const Field = ({
     <MuiFormControl
       component={fieldType === "group" ? "fieldset" : "div"}
       disabled={isDisabled}
-      error={Boolean(errorMessage)}
+      error={Boolean(errorMessage) || Boolean(errorMessagesList)}
       role={isRadioGroup ? "radiogroup" : undefined}
       fullWidth={isFullWidth}
     >
@@ -166,11 +167,11 @@ const Field = ({
         labelElementId,
       })}
 
-      {errorMessage && (
+      {(errorMessage || errorMessagesList) && (
         <FieldError
           id={errorMessageElementId}
-          text={errorMessage}
-          list={errorMessagesList}
+          message={errorMessage}
+          messagesList={errorMessagesList}
         />
       )}
     </MuiFormControl>

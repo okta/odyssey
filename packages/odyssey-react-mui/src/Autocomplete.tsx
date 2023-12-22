@@ -161,7 +161,13 @@ export type AutocompleteProps<
   getIsOptionEqualToValue?: (option: OptionType, value: OptionType) => boolean;
 } & Pick<
   FieldComponentProps,
-  "errorMessage" | "hint" | "id" | "isOptional" | "name" | "isFullWidth"
+  | "errorMessage"
+  | "errorMessagesList"
+  | "hint"
+  | "id"
+  | "isOptional"
+  | "name"
+  | "isFullWidth"
 > &
   SeleniumProps;
 
@@ -172,6 +178,7 @@ const Autocomplete = <
 >({
   defaultValue,
   errorMessage,
+  errorMessagesList,
   hasMultipleChoices,
   id: idOverride,
   inputValue,
@@ -236,6 +243,7 @@ const Autocomplete = <
     ({ InputLabelProps, InputProps, ...params }) => (
       <Field
         errorMessage={errorMessage}
+        errorMessagesList={errorMessagesList}
         fieldType="single"
         hasVisibleLabel
         id={InputLabelProps.htmlFor}

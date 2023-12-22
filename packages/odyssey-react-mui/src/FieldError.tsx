@@ -18,14 +18,15 @@ import { ErrorMessagesList } from "./ErrorMessagesList";
 import { useTranslation } from "react-i18next";
 
 import type { SeleniumProps } from "./SeleniumProps";
+import { Box } from "./Box";
 
 export type FieldErrorProps = {
   id?: string;
-  text: string;
-  list?: string[];
+  message?: string;
+  messagesList?: string[];
 } & SeleniumProps;
 
-const FieldError = ({ id, testId, text, list }: FieldErrorProps) => {
+const FieldError = ({ id, message, messagesList, testId }: FieldErrorProps) => {
   const { t } = useTranslation();
 
   return (
@@ -33,8 +34,10 @@ const FieldError = ({ id, testId, text, list }: FieldErrorProps) => {
       <ScreenReaderText>{`${t(
         "fielderror.screenreader.text"
       )}:`}</ScreenReaderText>
-      {text && text}
-      {list && <ErrorMessagesList errorMessages={list} />}
+      <Box>
+        {message && message}
+        {messagesList && <ErrorMessagesList errorMessages={messagesList} />}
+      </Box>
     </FormHelperText>
   );
 };

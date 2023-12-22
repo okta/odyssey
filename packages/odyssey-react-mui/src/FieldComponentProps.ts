@@ -16,7 +16,7 @@ export type FieldComponentProps = {
    */
   errorMessage?: string;
   /**
-   * Display multiple level errors
+   * If `error` is not undefined, the `input` will indicate multiple errors.
    */
   errorMessagesList?: string[];
   /**

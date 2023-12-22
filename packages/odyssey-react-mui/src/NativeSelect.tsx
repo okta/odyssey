@@ -81,7 +81,13 @@ export type NativeSelectProps<
   value?: Value;
 } & Pick<
   FieldComponentProps,
-  "errorMessage" | "hint" | "id" | "isDisabled" | "isOptional" | "isFullWidth"
+  | "errorMessage"
+  | "errorMessagesList"
+  | "hint"
+  | "id"
+  | "isDisabled"
+  | "isOptional"
+  | "isFullWidth"
 > &
   SeleniumProps;
 
@@ -93,6 +99,7 @@ const NativeSelect: ForwardRefWithType = forwardRef(
     {
       defaultValue,
       errorMessage,
+      errorMessagesList,
       hasMultipleChoices: hasMultipleChoicesProp,
       hint,
       id: idOverride,
@@ -175,6 +182,7 @@ const NativeSelect: ForwardRefWithType = forwardRef(
     return (
       <Field
         errorMessage={errorMessage}
+        errorMessagesList={errorMessagesList}
         fieldType="single"
         hasVisibleLabel
         hint={hint}

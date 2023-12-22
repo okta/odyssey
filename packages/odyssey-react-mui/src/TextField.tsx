@@ -101,6 +101,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       hasInitialFocus,
       endAdornment,
       errorMessage,
+      errorMessagesList,
       hint,
       id: idOverride,
       isDisabled = false,
@@ -201,6 +202,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     return (
       <Field
         errorMessage={errorMessage}
+        errorMessagesList={errorMessagesList}
         fieldType="single"
         hasVisibleLabel
         hint={hint}
