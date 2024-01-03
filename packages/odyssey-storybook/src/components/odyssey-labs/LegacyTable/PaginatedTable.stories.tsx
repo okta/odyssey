@@ -549,7 +549,7 @@ export const Pagination: StoryObj<PaginatedTableProps<Person>> = {
       countRef.current = countRef.current + 10;
 
       setData(dataArg.slice(0, Math.min(countRef.current, dataArg.length)));
-    }, [args.data, dataArg]);
+    }, [dataArg]);
 
     return (
       <PaginatedTable {...args} data={data} fetchMoreData={fetchMoreData} />
