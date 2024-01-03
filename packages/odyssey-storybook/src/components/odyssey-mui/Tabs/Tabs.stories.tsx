@@ -275,7 +275,7 @@ export const Controlled: StoryObj<TabItemProps> = {
 export const WithBadge: StoryObj<TabItemProps> = {
   ...DefaultTemplate,
   args: {
-    notificationCount: 0,
+    notificationCount: 1,
     label: "Xenomorphs",
     value: "xenomorphs",
     children: <ExampleTabContent label="Xenomorphs" />,
