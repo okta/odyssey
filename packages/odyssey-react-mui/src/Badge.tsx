@@ -87,7 +87,9 @@ const Badge = ({
     const hasNotificationCount = badgeContent && badgeContent > 0;
 
     return hasNotificationCount ? (
-      <Box sx={badgeStyles}>{formattedContent}</Box>
+      <Box sx={badgeStyles} data-se={testId} translate={translate}>
+        {formattedContent}
+      </Box>
     ) : null;
   }, [badgeContent, badgeContentMax, odysseyDesignTokens, type]);
 
