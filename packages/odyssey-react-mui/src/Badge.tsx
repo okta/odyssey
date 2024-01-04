@@ -91,7 +91,14 @@ const Badge = ({
         {formattedContent}
       </Box>
     ) : null;
-  }, [badgeContent, badgeContentMax, odysseyDesignTokens, type]);
+  }, [
+    badgeContent,
+    badgeContentMax,
+    odysseyDesignTokens,
+    testId,
+    translate,
+    type,
+  ]);
 
   return renderBadge;
 };
