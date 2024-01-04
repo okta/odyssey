@@ -98,7 +98,7 @@ const TabLabel = ({
   return (
     <>
       {label}
-      {typeof notificationCount === "number" && notificationCount > 0 && (
+      {notificationCount !== undefined && notificationCount > 0 && (
         <Box
           sx={{
             marginInlineStart: notificationCount
