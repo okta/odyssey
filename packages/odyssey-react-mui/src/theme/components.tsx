@@ -2208,7 +2208,7 @@ export const components = ({
         root: ({ ownerState }) => ({
           maxWidth: `calc(${odysseyTokens.TypographyLineLengthMax} / 2)`,
           minWidth: "unset",
-          minHeight: "unset",
+          minHeight: odysseyTokens.Spacing9,
           padding: `${odysseyTokens.Spacing4} ${odysseyTokens.Spacing1}`,
           fontSize: odysseyTokens.TypographySizeHeading6,
           fontFamily: odysseyTokens.TypographyFamilyHeading,
