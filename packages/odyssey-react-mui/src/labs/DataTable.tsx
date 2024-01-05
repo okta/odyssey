@@ -259,6 +259,30 @@ export type DataTableProps = {
 
 type TableType = MRT_TableInstance<MRT_RowData>;
 
+const reorderDataRowsLocally = ({
+  currentData,
+  rowId,
+  newIndex,
+}: {
+  currentData: MRT_TableOptions<MRT_RowData>["data"];
+  rowId: string;
+  newIndex: number;
+}) => {
+  const updatedData = [...currentData];
+
+  const rowIndex = updatedData.findIndex((row) => row.id === rowId);
+
+  if (rowIndex !== -1) {
+    // Remove the row from its current position
+    const [removedRow] = updatedData.splice(rowIndex, 1);
+
+    // Insert the row at the new index
+    updatedData.splice(newIndex, 0, removedRow);
+  }
+
+  return updatedData;
+};
+
 const DataTable = ({
   columns,
   data: dataProp,
@@ -311,6 +335,14 @@ const DataTable = ({
   const [globalFilter, setGlobalFilter] = useState<string>("");
   const [filters, setFilters] = useState<Array<DataFilter>>();
 
+  useEffect(() => {
+    setShowSkeletons(false);
+  }, [data]);
+
+  useEffect(() => {
+    onRowSelectionChange?.(rowSelection);
+  }, [rowSelection, onRowSelectionChange]);
+
   const refreshData = useCallback(async () => {
     setShowSkeletons(true);
     try {
@@ -324,10 +356,13 @@ const DataTable = ({
       setData(newData);
       setShowSkeletons(false);
     } catch (error) {
-      console.log(error);
       setShowSkeletons(false);
     }
   }, [page, resultsPerPage, sorting, globalFilter, filters, fetchDataFn]);
+
+  useEffect(() => {
+    refreshData();
+  }, [refreshData, page, resultsPerPage, sorting, globalFilter, filters]);
 
   const handleSortingChange = useCallback(
     (updater: MRT_Updater<MRT_SortingState>) => {
@@ -365,7 +400,7 @@ const DataTable = ({
     [rowSelection]
   );
 
-  const handleRowReordering = useCallback(
+  const updateRowOrder = useCallback(
     ({ rowId, newIndex }: { rowId: string; newIndex: number }) => {
       if (newIndex < 0) {
         return;
@@ -375,23 +410,18 @@ const DataTable = ({
         return;
       }
 
+      const newData = reorderDataRowsLocally({
+        currentData: data,
+        rowId,
+        newIndex,
+      });
+
+      setData(newData);
       reorderDataFn?.({ rowId, newIndex });
       refreshData();
     },
-    [totalRows, reorderDataFn, refreshData]
+    [data, totalRows, reorderDataFn, refreshData]
   );
-
-  useEffect(() => {
-    setShowSkeletons(false);
-  }, [data]);
-
-  useEffect(() => {
-    refreshData();
-  }, [refreshData, page, resultsPerPage, sorting, globalFilter, filters]);
-
-  useEffect(() => {
-    onRowSelectionChange?.(rowSelection);
-  }, [rowSelection, onRowSelectionChange]);
 
   const rowVirtualizerInstanceRef =
     useRef<MRT_Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
@@ -454,7 +484,7 @@ const DataTable = ({
               index + zeroIndexedPageNumber * resultsPerPage;
 
             if (pageRelativeIndex !== currentIndex) {
-              handleRowReordering({
+              updateRowOrder({
                 rowId: row.id,
                 newIndex: pageRelativeIndex,
               });
@@ -483,7 +513,14 @@ const DataTable = ({
         }
       }
     },
-    [draggingRow, data]
+    [
+      data,
+      draggingRow,
+      odysseyDesignTokens,
+      page,
+      resultsPerPage,
+      updateRowOrder,
+    ]
   );
 
   const handleDragHandleOnDragEnd = useCallback(
@@ -493,7 +530,7 @@ const DataTable = ({
 
       const { draggingRow, hoveredRow } = table.getState();
       if (draggingRow) {
-        handleRowReordering({
+        updateRowOrder({
           rowId: draggingRow.id,
           newIndex: (hoveredRow as MRT_RowData).index,
         });
@@ -501,7 +538,7 @@ const DataTable = ({
 
       setDraggingRow(null);
     },
-    [draggingRow]
+    [draggingRow, updateRowOrder]
   );
 
   const handleDragHandleOnDragCapture = useCallback(
@@ -654,16 +691,14 @@ const DataTable = ({
               )}
               <MenuItem
                 isDisabled={currentIndex <= 0}
-                onClick={() =>
-                  handleRowReordering({ rowId: row.id, newIndex: 0 })
-                }
+                onClick={() => updateRowOrder({ rowId: row.id, newIndex: 0 })}
               >
                 <ArrowTopIcon /> Bring to front
               </MenuItem>
               <MenuItem
                 isDisabled={currentIndex <= 0}
                 onClick={() =>
-                  handleRowReordering({
+                  updateRowOrder({
                     rowId: row.id,
                     newIndex: currentIndex <= 0 ? 0 : currentIndex - 1,
                   })
@@ -674,7 +709,7 @@ const DataTable = ({
               <MenuItem
                 isDisabled={totalRows ? currentIndex >= totalRows - 1 : false}
                 onClick={() =>
-                  handleRowReordering({
+                  updateRowOrder({
                     rowId: row.id,
                     newIndex: currentIndex + 1,
                   })
@@ -687,7 +722,7 @@ const DataTable = ({
                   <MenuItem
                     isDisabled={currentIndex >= totalRows - 1}
                     onClick={() =>
-                      handleRowReordering({
+                      updateRowOrder({
                         rowId: row.id,
                         newIndex: totalRows,
                       })
