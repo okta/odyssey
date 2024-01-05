@@ -66,7 +66,7 @@ export const OdysseyTranslationProvider = <SupportedLanguages extends string>({
     };
     // Defaults to the browser's language if available otherwise `en` will be used
     i18n.changeLanguage(
-      normalizedLanguageCode || window.navigator.language,
+      languageCode || window.navigator.language,
       changeHtmlElementLanguageAttribute
     );
   }, [languageCode]);
