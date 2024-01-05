@@ -538,7 +538,7 @@ const DataTable = ({
 
       setDraggingRow(null);
     },
-    [draggingRow, updateRowOrder]
+    [updateRowOrder]
   );
 
   const handleDragHandleOnDragCapture = useCallback(
