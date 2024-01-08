@@ -25,7 +25,6 @@ import {
   FormControlLabel,
 } from "@mui/material";
 
-const { CONTROLLED } = ComponentControlledState;
 import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext";
 import { Box } from "../Box";
 import { FieldComponentProps } from "../FieldComponentProps";
@@ -34,6 +33,8 @@ import type { AllowedProps } from "../AllowedProps";
 import { useUniqueId } from "../useUniqueId";
 import { ComponentControlledState, getControlState } from "../inputUtils";
 import { CheckedFieldProps } from "../FormCheckedProps";
+
+const { CONTROLLED } = ComponentControlledState;
 
 type OnChangeCallbackArguments = {
   checked: boolean;
