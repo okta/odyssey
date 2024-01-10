@@ -126,7 +126,7 @@ const Button = ({
   isFullWidth,
   label = "",
   onClick,
-  size = "medium",
+  size = "small",
   startIcon,
   testId,
   tooltipText,
