@@ -101,6 +101,32 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
         },
       },
     },
+    notificationCount: {
+      control: { type: "number" },
+      description: "The value associated with the Badge",
+      table: {
+        type: {
+          summary: "number",
+        },
+      },
+    },
+    notificationCountMax: {
+      control: { type: "number" },
+      description:
+        "The limit at which the badge will show '`{notificationCountMax}`+'. A number between 0-999",
+      table: {
+        type: {
+          summary: "number",
+        },
+        defaultValue: {
+          summary: "999",
+        },
+      },
+      type: {
+        required: false,
+        name: "number",
+      },
+    },
   },
   args: {
     value: "stars",
@@ -146,6 +172,8 @@ const DefaultTemplate: StoryObj<TabItemProps> = {
 
     if (args?.label) {
       tabs.push({
+        notificationCount: args?.notificationCount,
+        notificationCountMax: args?.notificationCountMax,
         label: args.label,
         value: args.value,
         isDisabled: args.isDisabled,
@@ -241,5 +269,18 @@ export const Controlled: StoryObj<TabItemProps> = {
         </Box>
       </>
     );
+  },
+};
+
+export const WithBadge: StoryObj<TabItemProps> = {
+  ...DefaultTemplate,
+  args: {
+    notificationCount: 1,
+    label: "Xenomorphs",
+    value: "xenomorphs",
+    children: <ExampleTabContent label="Xenomorphs" />,
+  },
+  play: async ({ canvasElement, step }) => {
+    selectTab({ canvasElement, step })("Tab Icon", "Xenomorphs");
   },
 };

@@ -18,14 +18,16 @@ import {
   memo,
   ReactElement,
   useCallback,
+  useImperativeHandle,
   useRef,
 } from "react";
 import { InputAdornment, InputBase } from "@mui/material";
 
 import { FieldComponentProps } from "./FieldComponentProps";
 import { Field } from "./Field";
-import { SeleniumProps } from "./SeleniumProps";
+import { AllowedProps } from "./AllowedProps";
 import { useInputValues, getControlState } from "./inputUtils";
+import { FocusHandle } from "./@types/react-augment";
 
 export const textFieldTypeValues = [
   "email",
@@ -54,6 +56,10 @@ export type TextFieldProps = {
    * If `true`, the component will receive focus automatically.
    */
   hasInitialFocus?: boolean;
+  /**
+   * The ref forwarded to the TextField to expose focus()
+   */
+  inputFocusRef?: React.RefObject<FocusHandle>;
   /**
    * If `true`, a [TextareaAutosize](/material-ui/react-textarea-autosize/) element is rendered.
    */
@@ -91,7 +97,7 @@ export type TextFieldProps = {
    */
   value?: string;
 } & FieldComponentProps &
-  SeleniumProps;
+  AllowedProps;
 
 const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (
@@ -102,7 +108,9 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       endAdornment,
       errorMessage,
       hint,
+      HintLinkComponent,
       id: idOverride,
+      inputFocusRef,
       isDisabled = false,
       isFullWidth = false,
       isMultiline = false,
@@ -116,6 +124,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       placeholder,
       startAdornment,
       testId,
+      translate,
       type = "text",
       value: value,
     },
@@ -132,6 +141,20 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       value,
       controlState: controlledStateRef.current,
     });
+
+    const inputRef = useRef<HTMLInputElement>(null);
+    useImperativeHandle(
+      inputFocusRef,
+      () => {
+        const element = inputRef.current;
+        return {
+          focus: () => {
+            element && element.focus();
+          },
+        };
+      },
+      []
+    );
 
     const onChange = useCallback<
       NonNullable<ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>>
@@ -157,10 +180,13 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           data-se={testId}
           endAdornment={
             endAdornment && (
-              <InputAdornment position="end">{endAdornment}</InputAdornment>
+              <InputAdornment position="end" translate={translate}>
+                {endAdornment}
+              </InputAdornment>
             )
           }
           id={id}
+          inputRef={inputRef}
           multiline={isMultiline}
           name={nameOverride ?? id}
           onBlur={onBlur}
@@ -172,10 +198,13 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           required={!isOptional}
           startAdornment={
             startAdornment && (
-              <InputAdornment position="start">{startAdornment}</InputAdornment>
+              <InputAdornment position="start" translate={translate}>
+                {startAdornment}
+              </InputAdornment>
             )
           }
           type={type}
+          translate={translate}
         />
       ),
       [
@@ -194,6 +223,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         ref,
         startAdornment,
         testId,
+        translate,
         type,
       ]
     );
@@ -204,6 +234,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         fieldType="single"
         hasVisibleLabel
         hint={hint}
+        HintLinkComponent={HintLinkComponent}
         id={idOverride}
         isDisabled={isDisabled}
         isFullWidth={isFullWidth}

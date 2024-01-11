@@ -28,7 +28,7 @@ import {
   ReactElement,
 } from "react";
 
-import type { SeleniumProps } from "./SeleniumProps";
+import type { AllowedProps } from "./AllowedProps";
 
 export type DialogProps = {
   /**
@@ -60,7 +60,7 @@ export type DialogProps = {
    */
   title: string;
   ariaLabel: string;
-} & SeleniumProps;
+} & AllowedProps;
 
 const Dialog = ({
   callToActionFirstComponent,
@@ -71,6 +71,7 @@ const Dialog = ({
   onClose,
   testId,
   title,
+  translate,
   ariaLabel,
 }: DialogProps) => {
   const [isContentScrollable, setIsContentScrollable] = useState(false);
@@ -107,7 +108,7 @@ const Dialog = ({
 
   return (
     <MuiDialog data-se={testId} open={isOpen} onClose={onClose}>
-      <DialogTitle>
+      <DialogTitle translate={translate}>
         {title}
         <Button
           ariaLabel={ariaLabel}

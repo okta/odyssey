@@ -10,7 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useImperativeHandle,
+} from "react";
 import {
   Box,
   Checkbox as MuiCheckbox,
@@ -26,12 +34,13 @@ import { SelectProps as MuiSelectProps } from "@mui/material";
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import { CheckIcon, CloseCircleFilledIcon } from "./icons.generated";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { AllowedProps } from "./AllowedProps";
 import {
   ComponentControlledState,
   useInputValues,
   getControlState,
 } from "./inputUtils";
+import { FocusHandle } from "./@types/react-augment";
 
 export type SelectOption = {
   text: string;
@@ -54,6 +63,10 @@ export type SelectProps<
    * If `true`, the Select allows multiple selections
    */
   hasMultipleChoices?: HasMultipleChoices;
+  /**
+   * The ref forwarded to the Select to expose focus()
+   */
+  inputFocusRef?: React.RefObject<FocusHandle>;
   /**
    * @deprecated Use `hasMultipleChoices` instead.
    */
@@ -87,13 +100,14 @@ export type SelectProps<
   FieldComponentProps,
   | "errorMessage"
   | "hint"
+  | "HintLinkComponent"
   | "id"
   | "isDisabled"
+  | "isFullWidth"
   | "isOptional"
   | "name"
-  | "isFullWidth"
 > &
-  SeleniumProps;
+  AllowedProps;
 
 /**
  * Options in Odyssey <Select> are passed as an array, which can contain any combination
@@ -119,7 +133,9 @@ const Select = <
   errorMessage,
   hasMultipleChoices: hasMultipleChoicesProp,
   hint,
+  HintLinkComponent,
   id: idOverride,
+  inputFocusRef,
   isDisabled = false,
   isFullWidth = false,
   isMultiSelect,
@@ -131,6 +147,7 @@ const Select = <
   onFocus,
   options,
   testId,
+  translate,
   value,
 }: SelectProps<Value, HasMultipleChoices>) => {
   const hasMultipleChoices = useMemo(
@@ -145,6 +162,20 @@ const Select = <
   );
   const [internalSelectedValues, setInternalSelectedValues] = useState(
     controlledStateRef.current === CONTROLLED ? value : defaultValue
+  );
+  const inputRef = useRef<HTMLSelectElement>(null);
+
+  useImperativeHandle(
+    inputFocusRef,
+    () => {
+      const element = inputRef.current;
+      return {
+        focus: () => {
+          element && element.focus();
+        },
+      };
+    },
+    []
   );
 
   useEffect(() => {
@@ -301,6 +332,7 @@ const Select = <
         children={children}
         data-se={testId}
         id={id}
+        inputRef={inputRef}
         labelId={labelElementId}
         multiple={hasMultipleChoices}
         name={nameOverride ?? id}
@@ -308,6 +340,7 @@ const Select = <
         onChange={onChange}
         onFocus={onFocus}
         renderValue={hasMultipleChoices ? renderValue : undefined}
+        translate={translate}
       />
     ),
     [
@@ -321,6 +354,7 @@ const Select = <
       onFocus,
       renderValue,
       testId,
+      translate,
     ]
   );
 
@@ -330,6 +364,7 @@ const Select = <
       fieldType="single"
       hasVisibleLabel
       hint={hint}
+      HintLinkComponent={HintLinkComponent}
       id={idOverride}
       isDisabled={isDisabled}
       isFullWidth={isFullWidth}

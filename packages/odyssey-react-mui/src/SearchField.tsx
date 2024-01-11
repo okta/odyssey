@@ -24,7 +24,7 @@ import {
 import { CloseCircleFilledIcon, SearchIcon } from "./icons.generated";
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { AllowedProps } from "./AllowedProps";
 import { getControlState, useInputValues } from "./inputUtils";
 
 export const searchVariantValues = ["outline", "filled"] as const;
@@ -85,7 +85,7 @@ export type SearchFieldProps = {
    */
   variant?: (typeof searchVariantValues)[number];
 } & Pick<FieldComponentProps, "id" | "isDisabled" | "name" | "isFullWidth"> &
-  SeleniumProps;
+  AllowedProps;
 
 const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
   (
@@ -104,6 +104,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       onClear: onClearProp,
       placeholder,
       testId,
+      translate,
       value,
       variant = "outline",
     },
@@ -170,6 +171,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
               <SearchIcon />
             </InputAdornment>
           }
+          translate={translate}
           type="search"
         />
       ),
@@ -187,6 +189,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         placeholder,
         ref,
         testId,
+        translate,
       ]
     );
 
