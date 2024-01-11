@@ -23,6 +23,7 @@ import { formLabelClasses } from "@mui/material/FormLabel";
 import { formGroupClasses } from "@mui/material/FormGroup";
 import { inputAdornmentClasses } from "@mui/material/InputAdornment";
 import { inputBaseClasses } from "@mui/material/InputBase";
+import { linkClasses } from "@mui/material/Link";
 import { listItemIconClasses } from "@mui/material/ListItemIcon";
 import { listItemTextClasses } from "@mui/material/ListItemText";
 import { menuItemClasses } from "@mui/material/MenuItem";
@@ -220,6 +221,10 @@ export const components = ({
             ...(ownerState.variant === "banner" && {
               marginBlockEnd: 0,
             }),
+            ...(ownerState.variant === "callout" && {
+              fontSize: odysseyTokens.TypographySizeHeading5,
+              lineHeight: odysseyTokens.TypographyLineHeightHeading5,
+            }),
           },
 
           // Alert variant styling
@@ -235,6 +240,7 @@ export const components = ({
           }),
           ...(ownerState.variant === "callout" && {
             borderRadius: odysseyTokens.BorderRadiusMain,
+            padding: odysseyTokens.Spacing5,
             "&:not(:last-child)": {
               marginBottom: odysseyTokens.Spacing6,
             },
@@ -243,7 +249,10 @@ export const components = ({
             maxWidth: odysseyTokens.TypographyLineLengthMax,
             borderRadius: odysseyTokens.BorderRadiusOuter,
             position: "relative",
-            alignItems: "center",
+            paddingInlineStart: odysseyTokens.Spacing5,
+            paddingInlineEnd: odysseyTokens.Spacing4,
+            paddingBlock: odysseyTokens.Spacing3,
+            alignItems: "flex-start",
             backdropFilter: "blur(10px)",
           }),
         }),
@@ -258,8 +267,18 @@ export const components = ({
           }),
           ...(ownerState.variant === "toast" && {
             padding: 0,
-            marginInlineStart: 0,
-            marginInlineEnd: 0,
+            marginInline: 0,
+            marginBlock: 1,
+
+            [`& .${buttonClasses.root}`]: {
+              "&:hover, &:focus": {
+                backgroundColor: odysseyTokens.PaletteNeutralDark.concat("11"),
+              },
+
+              "&:active": {
+                backgroundColor: odysseyTokens.PaletteNeutralDark.concat("22"),
+              },
+            },
           }),
         }),
         icon: ({ ownerState }) => ({
@@ -277,7 +296,15 @@ export const components = ({
             color: odysseyTokens.PaletteSuccessMain,
           }),
           ...(ownerState.severity === "warning" && {
-            color: odysseyTokens.PaletteWarningDark,
+            color: odysseyTokens.HueYellow400,
+          }),
+
+          ...(ownerState.variant === "toast" && {
+            marginBlock: odysseyTokens.Spacing2,
+          }),
+
+          ...(ownerState.variant === "callout" && {
+            marginBlock: 1.5,
           }),
 
           [`& .${svgIconClasses.root}`]: {
@@ -295,7 +322,12 @@ export const components = ({
           }),
           ...(ownerState.variant === "toast" && {
             flexGrow: 1,
+            marginBlock: odysseyTokens.Spacing2,
           }),
+          [`& .${linkClasses.root}`]: {
+            display: "inline-block",
+            marginTop: odysseyTokens.Spacing5,
+          },
         }),
       },
     },
