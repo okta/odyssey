@@ -19,11 +19,13 @@ import {
 import { Box } from "./Box";
 import type { AllowedProps } from "./AllowedProps";
 
+export type BadgeContentMax = 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | 100;
+
 export const badgeTypeValues = ["default", "attention", "danger"] as const;
 
 export type BadgeProps = {
   badgeContent: number;
-  badgeContentMax?: number;
+  badgeContentMax?: BadgeContentMax;
   type?: (typeof badgeTypeValues)[number];
 } & AllowedProps;
 
@@ -44,7 +46,7 @@ const badgeTypeColors = (odysseyTokens: DesignTokens) => ({
 
 const Badge = ({
   badgeContent,
-  badgeContentMax = 999,
+  badgeContentMax = 100,
   testId,
   translate,
   type = "default",
