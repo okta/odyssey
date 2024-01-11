@@ -846,8 +846,12 @@ export const components = ({
           [`&.${chipClasses.disabled}`]: {
             opacity: 1,
             pointerEvents: "none",
-            backgroundColor: odysseyTokens.HueNeutral200,
+            borderColor: odysseyTokens.BorderColorDisabled,
             color: odysseyTokens.TypographyColorDisabled,
+
+            [`& .${chipClasses.deleteIcon}`]: {
+              color: odysseyTokens.HueNeutral300,
+            },
           },
 
           ...(ownerState.clickable && {
@@ -872,45 +876,6 @@ export const components = ({
             marginInlineEnd: odysseyTokens.Spacing1,
           },
 
-          ...(ownerState.variant === "lamp" && {
-            paddingBlock: 0,
-            paddingInline: 0,
-            borderRadius: 0,
-            border: 0,
-            backgroundColor: "transparent",
-            color: odysseyTokens.TypographyColorBody,
-
-            "&::before": {
-              content: "''",
-              width: ".64em",
-              height: ".64em",
-              marginInlineEnd: odysseyTokens.Spacing2,
-              borderRadius: "100%",
-              backgroundColor: odysseyTokens.HueNeutral600,
-            },
-
-            [`&.${chipClasses.colorError}`]: {
-              "&::before": {
-                border: 0,
-                backgroundColor: odysseyTokens.PaletteDangerMain,
-              },
-            },
-
-            [`&.${chipClasses.colorSuccess}`]: {
-              "&::before": {
-                border: 0,
-                backgroundColor: odysseyTokens.PaletteSuccessMain,
-              },
-            },
-
-            [`&.${chipClasses.colorWarning}`]: {
-              "&::before": {
-                border: 0,
-                backgroundColor: odysseyTokens.HueYellow200,
-              },
-            },
-          }),
-
           ...(ownerState.variant === "pill" && {
             paddingBlock: odysseyTokens.Spacing1,
             paddingInline: odysseyTokens.Spacing2,
@@ -920,15 +885,16 @@ export const components = ({
             lineHeight: odysseyTokens.TypographyLineHeightOverline,
             backgroundColor: odysseyTokens.HueNeutral50,
             color: odysseyTokens.TypographyColorSubordinate,
-            fontSize: odysseyTokens.TypographySizeSubordinate,
+            fontSize: "0.71428571rem",
+            textTransform: "uppercase",
 
             "&::before": {
               content: "''",
-              width: ".64em",
-              height: ".64em",
-              marginInlineEnd: odysseyTokens.Spacing1,
+              width: "0.42857143rem",
+              height: "0.42857143rem",
+              marginInlineEnd: odysseyTokens.Spacing2,
               borderRadius: "100%",
-              backgroundColor: odysseyTokens.HueNeutral600,
+              backgroundColor: odysseyTokens.HueNeutral400,
             },
 
             [`&.${chipClasses.colorError}`]: {
@@ -2305,9 +2271,43 @@ export const components = ({
           marginBottom: odysseyTokens.Spacing5,
         },
 
+        scroller: {
+          borderBottom: `${odysseyTokens.BorderWidthMain} ${odysseyTokens.BorderStyleMain} ${odysseyTokens.BorderColorDisplay}`,
+        },
+
         flexContainer: {
           gap: odysseyTokens.Spacing5,
-          borderBottom: `${odysseyTokens.BorderWidthMain} ${odysseyTokens.BorderStyleMain} ${odysseyTokens.BorderColorDisplay}`,
+        },
+
+        scrollButtons: {
+          zIndex: 1,
+          transitionProperty: "opacity",
+          transitionDuration: odysseyTokens.TransitionDurationMain,
+          transitionTimingFunction: odysseyTokens.TransitionTimingMain,
+
+          "& svg": {
+            width: odysseyTokens.Spacing4,
+            height: odysseyTokens.Spacing4,
+            color: odysseyTokens.PaletteNeutralDark,
+          },
+
+          "&::after": {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            bottom: 0,
+            width: odysseyTokens.Spacing3,
+          },
+          "&:first-of-type::after": {
+            right: `-${odysseyTokens.Spacing3}`,
+            background:
+              "linear-gradient(90deg, #FFF 0%, #FFF 72.49%, rgba(255, 255, 255, 0.70) 86.5%, rgba(255, 255, 255, 0.00) 100%)",
+          },
+          "&:last-of-type::after": {
+            left: `-${odysseyTokens.Spacing3}`,
+            background:
+              "linear-gradient(-90deg, #FFF 0%, #FFF 72.49%, rgba(255, 255, 255, 0.70) 86.5%, rgba(255, 255, 255, 0.00) 100%)",
+          },
         },
       },
     },

@@ -157,6 +157,7 @@ const Tabs = ({
           data-se={testId}
           disabled={isDisabled}
           icon={startIcon}
+          tabIndex={0}
           label={
             <TabLabel
               label={label}
@@ -176,7 +177,11 @@ const Tabs = ({
 
   return (
     <MuiTabContext value={tabState}>
-      <MuiTabList onChange={onChange} aria-label={ariaLabel}>
+      <MuiTabList
+        onChange={onChange}
+        aria-label={ariaLabel}
+        variant="scrollable"
+      >
         {tabs.map((tab, index) => renderTab(tab, index))}
       </MuiTabList>
       {tabs.map((tab, index) => (
