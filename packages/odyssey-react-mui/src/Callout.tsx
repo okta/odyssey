@@ -16,6 +16,8 @@ import { ScreenReaderText } from "./ScreenReaderText";
 import { useTranslation } from "react-i18next";
 
 import type { AllowedProps } from "./AllowedProps";
+import { Link } from "./Link";
+import { Paragraph } from "./Typography";
 
 export const calloutRoleValues = ["status", "alert"] as const;
 export const calloutSeverityValues = [
@@ -29,7 +31,7 @@ export type CalloutProps = {
   /**
    * The contents of the Callout
    */
-  children: ReactNode;
+  children?: ReactNode;
   /**
    * Sets the ARIA role of the Callout
    * ("status" for something that dynamically updates, "alert" for errors, null for something
@@ -41,16 +43,51 @@ export type CalloutProps = {
    */
   severity: (typeof calloutSeverityValues)[number];
   /**
+   * The text content of the Callout
+   */
+  text?: string;
+  /**
    * The title of the Callout
    */
   title?: string;
-} & AllowedProps;
+} & (
+  | {
+      text: string;
+      children?: never;
+    }
+  | {
+      text?: never;
+      children: ReactNode;
+    }
+) &
+  (
+    | {
+        /**
+         * If linkUrl is not undefined, this is the text of the link.
+         * If left blank, it defaults to "Learn more".
+         * Note that linkText does nothing if linkUrl is not defined
+         */
+        linkUrl: string;
+        /**
+         * If defined, the Toast will include a link to the URL
+         */
+        linkText: string;
+      }
+    | {
+        linkUrl?: never;
+        linkText?: never;
+      }
+  ) &
+  AllowedProps;
 
 const Callout = ({
   children,
+  linkText,
+  linkUrl,
   role,
   severity,
   testId,
+  text,
   title,
   translate,
 }: CalloutProps) => {
@@ -62,7 +99,13 @@ const Callout = ({
         {t(`severity.${severity}`)}
       </ScreenReaderText>
       {title && <AlertTitle translate={translate}>{title}</AlertTitle>}
-      <Box component="div">{children}</Box>
+      {children && <Box component="div">{children}</Box>}
+      {text && <Paragraph>{text}</Paragraph>}
+      {linkUrl && (
+        <Link href={linkUrl} variant="monochrome">
+          {linkText}
+        </Link>
+      )}
     </Alert>
   );
 };

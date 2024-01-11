@@ -16,8 +16,6 @@ import {
   CalloutProps,
   calloutRoleValues,
   calloutSeverityValues,
-  Link,
-  Paragraph,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
@@ -25,25 +23,30 @@ const storybookMeta: Meta<CalloutProps> = {
   title: "MUI Components/Callout",
   component: Callout,
   argTypes: {
-    children: {
-      control: null,
-      description: "The contents of the alert",
+    linkText: {
+      control: "text",
+      description:
+        "If linkUrl is defined, this is the text of the link. If left blank, it defaults to 'Learn more'. Note that linkText does nothing if linkUrl is not defined",
       table: {
         type: {
-          summary: "ReactNode",
+          summary: "string",
         },
       },
-      type: {
-        required: true,
-        name: "other",
-        value: "ReactNode",
+    },
+    linkUrl: {
+      control: "text",
+      description: "If defined, the Callout will include a link to the URL",
+      table: {
+        type: {
+          summary: "string",
+        },
       },
     },
     role: {
       options: calloutRoleValues,
       control: { type: "radio" },
       description:
-        "Sets the ARIA role of the alert ('status' for something that dynamically updates, 'alert' for errors, null for something unchanging)",
+        "Sets the ARIA role of the Callout ('status' for something that dynamically updates, 'alert' for errors, null for something unchanging)",
       table: {
         type: {
           summary: calloutRoleValues.join(" | "),
@@ -53,21 +56,32 @@ const storybookMeta: Meta<CalloutProps> = {
     severity: {
       options: calloutSeverityValues,
       control: { type: "radio" },
-      description: "Determine the color and icon of the alert",
+      description: "Determine the color and icon of the Callout",
       table: {
         type: {
           summary: calloutSeverityValues.join(" | "),
         },
       },
       type: {
-        required: true,
         name: "other",
         value: "radio",
       },
     },
+    text: {
+      control: "text",
+      description: "The text content of the Callout",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+      type: {
+        name: "string",
+      },
+    },
     title: {
       control: "text",
-      description: "The title of the alert",
+      description: "The title of the Callout",
       table: {
         type: {
           summary: "string",
@@ -76,11 +90,7 @@ const storybookMeta: Meta<CalloutProps> = {
     },
   },
   args: {
-    children: (
-      <Paragraph>
-        You're signed in from Moonbase Alpha-6, located on Luna.
-      </Paragraph>
-    ),
+    text: "You're signed in from Moonbase Alpha-6, located on Luna.",
     severity: "info",
   },
   decorators: [MuiThemeDecorator],
@@ -91,71 +101,46 @@ export default storybookMeta;
 
 export const Info: StoryObj<CalloutProps> = {
   args: {
-    children: (
-      <Paragraph>
-        You're signed in from Moonbase Alpha-6, located on Luna.
-      </Paragraph>
-    ),
     severity: "info",
+    title: "Authentication status",
+    text: "You're signed in from Moonbase Alpha-6, located on Luna.",
   },
 };
 
 export const Error: StoryObj<CalloutProps> = {
   args: {
-    children: (
-      <Paragraph>
-        Reconfigure the fuel mixture ratios and perform safety checks again.
-      </Paragraph>
-    ),
     role: "alert",
     severity: "error",
     title: "Safety checks failed",
+    text: "Reconfigure the fuel mixture ratios and perform safety checks again.",
   },
 };
 
 export const Warning: StoryObj<CalloutProps> = {
   args: {
-    children: (
-      <Paragraph>
-        Complete all safety checks before requesting approval to launch your
-        mission.
-      </Paragraph>
-    ),
     role: "status",
     severity: "warning",
     title: "Safety checks incomplete",
+    text: "Complete all safety checks before requesting approval to launch your mission.",
   },
 };
 
 export const Success: StoryObj<CalloutProps> = {
   args: {
-    children: (
-      <Paragraph>
-        Safety checks are complete. Your mission is ready for liftoff.
-      </Paragraph>
-    ),
     role: "status",
     severity: "success",
     title: "Approved for launch",
+    text: "Safety checks are complete. Your mission is ready for liftoff.",
   },
 };
 
-export const BlockLink: StoryObj<CalloutProps> = {
+export const WithLink: StoryObj<CalloutProps> = {
   args: {
-    children: (
-      <>
-        <Paragraph>
-          There is an issue with the fuel mixture ratios. Reconfigure the fuel
-          mixture and perform the safety checks again.
-        </Paragraph>
-
-        <Link href="#" variant="monochrome">
-          Visit fueling console
-        </Link>
-      </>
-    ),
     role: "alert",
     severity: "error",
     title: "Safety checks failed",
+    text: "There is an issue with the fuel mixture ratios. Reconfigure the fuel mixture and perform the safety checks again.",
+    linkText: "Visit fueling console",
+    linkUrl: "#",
   },
 };
