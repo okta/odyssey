@@ -18,7 +18,7 @@ import { FieldsetContext } from "./FieldsetContext";
 import { Legend, Support } from "./Typography";
 import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
 import { useUniqueId } from "./useUniqueId";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { AllowedProps } from "./AllowedProps";
 
 export type FieldsetProps = {
   /**
@@ -49,7 +49,7 @@ export type FieldsetProps = {
    * The name associated with the group.
    */
   name?: string;
-} & SeleniumProps;
+} & AllowedProps;
 
 const Fieldset = ({
   alert,
@@ -60,6 +60,7 @@ const Fieldset = ({
   legend,
   name,
   testId,
+  translate,
 }: FieldsetProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const id = useUniqueId(idOverride);
@@ -90,9 +91,9 @@ const Fieldset = ({
         },
       }}
     >
-      <Legend>{legend}</Legend>
+      <Legend translate={translate}>{legend}</Legend>
 
-      {description && <Support>{description}</Support>}
+      {description && <Support translate={translate}>{description}</Support>}
 
       {alert}
 

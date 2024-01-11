@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { useCallback, useMemo, useRef, useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { Button } from "@okta/odyssey-react-mui";
 import {
@@ -19,7 +20,6 @@ import {
 } from "@okta/odyssey-react-mui/labs";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { useCallback, useRef, useState } from "react";
 
 const storybookMeta: Meta = {
   title: "Labs Components/Legacy Table/PaginatedTable",
@@ -541,7 +541,7 @@ export const Pagination: StoryObj<PaginatedTableProps<Person>> = {
   },
   render: function C(args) {
     const countRef = useRef(15);
-    const dataArg = args.data ?? [];
+    const dataArg = useMemo(() => args.data ?? [], [args]);
 
     const [data, setData] = useState(dataArg.slice(0, countRef.current));
 
@@ -549,7 +549,7 @@ export const Pagination: StoryObj<PaginatedTableProps<Person>> = {
       countRef.current = countRef.current + 10;
 
       setData(dataArg.slice(0, Math.min(countRef.current, dataArg.length)));
-    }, [args.data, dataArg]);
+    }, [dataArg]);
 
     return (
       <PaginatedTable {...args} data={data} fetchMoreData={fetchMoreData} />

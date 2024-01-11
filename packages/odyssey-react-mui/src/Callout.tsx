@@ -15,7 +15,7 @@ import { Alert, AlertTitle, Box } from "@mui/material";
 import { ScreenReaderText } from "./ScreenReaderText";
 import { useTranslation } from "react-i18next";
 
-import type { SeleniumProps } from "./SeleniumProps";
+import type { AllowedProps } from "./AllowedProps";
 import { Link } from "./Link";
 import { Paragraph } from "./Typography";
 
@@ -32,16 +32,6 @@ export type CalloutProps = {
    * The contents of the Callout
    */
   children?: ReactNode;
-  /**
-   * If linkUrl is not undefined, this is the text of the link.
-   * If left blank, it defaults to "Learn more".
-   * Note that linkText does nothing if linkUrl is not defined
-   */
-  linkText?: string;
-  /**
-   * If defined, the Toast will include a link to the URL
-   */
-  linkUrl?: string;
   /**
    * Sets the ARIA role of the Callout
    * ("status" for something that dynamically updates, "alert" for errors, null for something
@@ -72,7 +62,15 @@ export type CalloutProps = {
 ) &
   (
     | {
+        /**
+         * If linkUrl is not undefined, this is the text of the link.
+         * If left blank, it defaults to "Learn more".
+         * Note that linkText does nothing if linkUrl is not defined
+         */
         linkUrl: string;
+        /**
+         * If defined, the Toast will include a link to the URL
+         */
         linkText: string;
       }
     | {
@@ -80,7 +78,7 @@ export type CalloutProps = {
         linkText?: never;
       }
   ) &
-  SeleniumProps;
+  AllowedProps;
 
 const Callout = ({
   children,
@@ -91,13 +89,16 @@ const Callout = ({
   testId,
   text,
   title,
+  translate,
 }: CalloutProps) => {
   const { t } = useTranslation();
 
   return (
     <Alert data-se={testId} role={role} severity={severity} variant="callout">
-      <ScreenReaderText>{t(`severity.${severity}`)}</ScreenReaderText>
-      {title && <AlertTitle>{title}</AlertTitle>}
+      <ScreenReaderText translate={translate}>
+        {t(`severity.${severity}`)}
+      </ScreenReaderText>
+      {title && <AlertTitle translate={translate}>{title}</AlertTitle>}
       {children && <Box component="div">{children}</Box>}
       {text && <Paragraph>{text}</Paragraph>}
       {linkUrl && (

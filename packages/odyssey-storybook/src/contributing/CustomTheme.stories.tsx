@@ -20,13 +20,13 @@ import {
   ListItemText,
   MenuItem,
   MenuList,
-  OdysseyThemeProvider,
   Paper,
   Radio,
   RadioGroup,
   TextField,
   ThemeOptions,
   ThemeProvider as MuiThemeProvider,
+  OdysseyProvider,
 } from "@okta/odyssey-react-mui";
 
 import { MuiThemeDecorator } from "../../.storybook/components/MuiThemeDecorator";
@@ -39,21 +39,32 @@ export default {
 };
 
 export const ButtonStory: StoryObj = {
+  decorators: [
+    (Story, context) => {
+      const odysseyDesignTokensOverrides: DesignTokensOverride = {
+        BorderRadiusMain: "12px",
+        HueBlue500: "green", //base background color
+        HueBlue900: "rgb(150,0,0,1)", //used for hover/focus
+        TypographyLineHeightHeading1: 1.2,
+        Spacing0: "1rem",
+      };
+      const shadowRootElement =
+        context.canvasElement.parentElement ?? undefined;
+      return (
+        <OdysseyProvider
+          designTokensOverride={odysseyDesignTokensOverrides}
+          shadowDomElement={shadowRootElement}
+        >
+          <Story />
+        </OdysseyProvider>
+      );
+    },
+  ],
   render: function C() {
-    const odysseyDesignTokensOverrides: DesignTokensOverride = {
-      BorderRadiusMain: "12px",
-      HueBlue500: "green", //base background color
-      HueBlue900: "rgb(150,0,0,1)", //used for hover/focus
-      TypographyLineHeightHeading1: 1.2,
-      Spacing0: "1rem",
-    };
-
     return (
-      <OdysseyThemeProvider designTokensOverride={odysseyDesignTokensOverrides}>
-        <div>
-          <Button label="Primary" variant="primary" />
-        </div>
-      </OdysseyThemeProvider>
+      <div>
+        <Button label="Primary" variant="primary" />
+      </div>
     );
   },
 };
@@ -61,21 +72,28 @@ export const ButtonStory: StoryObj = {
 ButtonStory.storyName = "Button";
 
 export const TextFieldStory: StoryObj = {
+  decorators: [
+    (Story, context) => {
+      const odysseyDesignTokensOverrides: DesignTokensOverride = {
+        HueBlue500: "orange",
+      };
+      const shadowRootElement =
+        context.canvasElement.parentElement ?? undefined;
+      return (
+        <OdysseyProvider
+          designTokensOverride={odysseyDesignTokensOverrides}
+          shadowDomElement={shadowRootElement}
+        >
+          <Story />
+        </OdysseyProvider>
+      );
+    },
+  ],
   render: function C() {
-    const odysseyDesignTokensOverrides: DesignTokensOverride = {
-      HueBlue500: "orange",
-    };
-
     return (
       <>
         <TextField autoCompleteType="name" label="Name" type="text" />
-        <OdysseyThemeProvider
-          designTokensOverride={odysseyDesignTokensOverrides}
-        >
-          <div>
-            <TextField autoCompleteType="name" label="Password" type="text" />
-          </div>
-        </OdysseyThemeProvider>
+        <TextField autoCompleteType="name" label="Password" type="text" />
       </>
     );
   },
@@ -84,26 +102,35 @@ export const TextFieldStory: StoryObj = {
 TextFieldStory.storyName = "TextField";
 
 export const RadioGroupStory: StoryObj = {
+  decorators: [
+    (Story, context) => {
+      const odysseyDesignTokensOverrides: DesignTokensOverride = {
+        HueBlue500: "rgba(0, 160, 100, 1)", // THIS IS A SAMPLE. DO NOT USE!
+      };
+      const shadowRootElement =
+        context.canvasElement.parentElement ?? undefined;
+      return (
+        <OdysseyProvider
+          designTokensOverride={odysseyDesignTokensOverrides}
+          shadowDomElement={shadowRootElement}
+        >
+          <Story />
+        </OdysseyProvider>
+      );
+    },
+  ],
   render: function C() {
-    const odysseyDesignTokensOverrides: DesignTokensOverride = {
-      HueBlue500: "rgba(0, 160, 100, 1)", // THIS IS A SAMPLE. DO NOT USE!
-    };
-
     return (
-      <OdysseyThemeProvider designTokensOverride={odysseyDesignTokensOverrides}>
-        <div>
-          <RadioGroup
-            defaultValue="Lightspeed"
-            id="radio-buttons-group"
-            label="Speed"
-            aria-describedby="radio-hint radio-error"
-          >
-            <Radio value="lightspeed" label="Lightspeed" />
-            <Radio value="Warp Speed" label="Warp Speed" />
-            <Radio value="Ludicrous Speed" label="Ludicrous Speed" />
-          </RadioGroup>
-        </div>
-      </OdysseyThemeProvider>
+      <RadioGroup
+        defaultValue="Lightspeed"
+        id="radio-buttons-group"
+        label="Speed"
+        aria-describedby="radio-hint radio-error"
+      >
+        <Radio value="lightspeed" label="Lightspeed" />
+        <Radio value="Warp Speed" label="Warp Speed" />
+        <Radio value="Ludicrous Speed" label="Ludicrous Speed" />
+      </RadioGroup>
     );
   },
 };

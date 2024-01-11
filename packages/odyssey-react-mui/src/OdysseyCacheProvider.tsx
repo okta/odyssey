@@ -17,51 +17,44 @@ declare global {
 }
 
 import createCache, { StylisPlugin } from "@emotion/cache";
-import { CacheProvider } from "@emotion/react";
-import { memo, ReactNode, useMemo } from "react";
-
+import { memo, useMemo, ReactNode } from "react";
 import { useUniqueAlphabeticalId } from "./useUniqueAlphabeticalId";
+import { CacheProvider } from "@emotion/react";
 
 export type OdysseyCacheProviderProps = {
   children: ReactNode;
+  nonce?: string;
+  /**
+   * Emotion caches styles into the style element.
+   * When enabling this prop, Emotion caches the styles at this element, rather than in <head>.
+   */
+  emotionRoot?: HTMLStyleElement;
   /**
    * Emotion renders into this HTML element.
    * When enabling this prop, Emotion renders at the top of this component rather than the bottom like it does in the HTML `<head>`.
    */
-  nonce?: string;
-  shadowDomElement?: HTMLDivElement;
+  shadowDomElement?: HTMLDivElement | HTMLElement;
   stylisPlugins?: StylisPlugin[];
 };
 
 const OdysseyCacheProvider = ({
   children,
+  emotionRoot,
   nonce,
-  shadowDomElement,
   stylisPlugins,
 }: OdysseyCacheProviderProps) => {
   const uniqueAlphabeticalId = useUniqueAlphabeticalId();
 
-  const emotionRootElement = useMemo(() => {
-    const emotionRootElement = document.createElement("div");
-
-    emotionRootElement.setAttribute("data-emotion-root", "data-emotion-root");
-
-    shadowDomElement?.prepend?.(emotionRootElement);
-
-    return emotionRootElement;
-  }, [shadowDomElement]);
-
-  const emotionCache = useMemo(
-    () =>
-      createCache({
-        container: emotionRootElement,
-        key: uniqueAlphabeticalId,
-        nonce: nonce || window.cspNonce,
-        prepend: Boolean(emotionRootElement),
-        stylisPlugins,
-      }),
-    [emotionRootElement, nonce, stylisPlugins, uniqueAlphabeticalId]
-  );
+  const emotionCache = useMemo(() => {
+    return createCache({
+      ...(emotionRoot && { container: emotionRoot }),
+      key: uniqueAlphabeticalId,
+      nonce: nonce ?? window.cspNonce,
+      prepend: true,
+      speedy: false, // <-- Needs to be set to false when shadow-dom is used!! https://github.com/emotion-js/emotion/issues/2053#issuecomment-713429122
+      ...(stylisPlugins && { stylisPlugins }),
+    });
+  }, [emotionRoot, nonce, stylisPlugins, uniqueAlphabeticalId]);
 
   return <CacheProvider value={emotionCache}>{children}</CacheProvider>;
 };

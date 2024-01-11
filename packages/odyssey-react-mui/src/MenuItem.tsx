@@ -18,7 +18,7 @@ import { menuItemClasses } from "@mui/material/MenuItem";
 import { memo, useCallback, useContext, type ReactNode } from "react";
 
 import { MenuContext } from "./MenuContext";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { AllowedProps } from "./AllowedProps";
 
 export type MenuItemProps = {
   /**
@@ -51,7 +51,7 @@ export type MenuItemProps = {
    * - "destructive": A variant indicating a destructive action.
    */
   variant?: "default" | "destructive";
-} & SeleniumProps;
+} & AllowedProps;
 
 const MenuItem = ({
   children,

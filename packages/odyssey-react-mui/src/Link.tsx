@@ -10,11 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, ReactElement } from "react";
+import { memo, ReactElement, useImperativeHandle, useRef } from "react";
 import { ExternalLinkIcon } from "./icons.generated";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { AllowedProps } from "./AllowedProps";
 
 import { Link as MuiLink, LinkProps as MuiLinkProps } from "@mui/material";
+import { FocusHandle } from "./@types/react-augment";
 
 export const linkVariantValues = ["default", "monochrome"] as const;
 
@@ -31,6 +32,10 @@ export type LinkProps = {
    * An optional Icon component at the start of the Link
    */
   icon?: ReactElement;
+  /**
+   * The ref forwarded to the TextField to expose focus()
+   */
+  linkFocusRef?: React.RefObject<FocusHandle>;
   /**
    * The click event handler for the Link
    */
@@ -52,37 +57,57 @@ export type LinkProps = {
    * The visual presentation of the Link (default or monochrome)
    */
   variant?: (typeof linkVariantValues)[number];
-} & SeleniumProps;
+} & AllowedProps;
 
 const Link = ({
   children,
   href,
   icon,
+  linkFocusRef,
   rel,
   target,
   testId,
+  translate,
   variant,
   onClick,
-}: LinkProps) => (
-  <MuiLink
-    data-se={testId}
-    href={href}
-    rel={rel}
-    target={target}
-    variant={variant}
-    onClick={onClick}
-  >
-    {icon && <span className="Link-icon">{icon}</span>}
+}: LinkProps) => {
+  const ref = useRef<HTMLAnchorElement>(null);
+  useImperativeHandle(
+    linkFocusRef,
+    () => {
+      const element = ref.current;
+      return {
+        focus: () => {
+          element && element.focus();
+        },
+      };
+    },
+    []
+  );
 
-    {children}
+  return (
+    <MuiLink
+      data-se={testId}
+      href={href}
+      ref={ref}
+      rel={rel}
+      target={target}
+      translate={translate}
+      variant={variant}
+      onClick={onClick}
+    >
+      {icon && <span className="Link-icon">{icon}</span>}
 
-    {target === "_blank" && (
-      <span className="Link-indicator" role="presentation">
-        <ExternalLinkIcon />
-      </span>
-    )}
-  </MuiLink>
-);
+      {children}
+
+      {target === "_blank" && (
+        <span className="Link-indicator" role="presentation">
+          <ExternalLinkIcon />
+        </span>
+      )}
+    </MuiLink>
+  );
+};
 
 const MemoizedLink = memo(Link);
 

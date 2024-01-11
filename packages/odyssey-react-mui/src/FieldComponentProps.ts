@@ -10,6 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { ReactElement } from "react";
+
+import { HintLink } from "./HintLink";
+
 export type FieldComponentProps = {
   /**
    * If `error` is not undefined, the `input` will indicate an error.
@@ -19,6 +23,10 @@ export type FieldComponentProps = {
    * The helper text content.
    */
   hint?: string;
+  /**
+   * A `Link` component to provide greater context that is rendered at the end of the `hint` text
+   */
+  HintLinkComponent?: ReactElement<typeof HintLink>;
   /**
    * The id of the `input` element.
    */
