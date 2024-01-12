@@ -25,6 +25,7 @@ module.exports = {
   exitcode: true,
   matchLevel: "Strict",
   parentBranchName,
+  serverUrl: "https://oktaeyes.applitools.com",
   showStorybookOutput: true,
   testConcurrency: 10,
 };
