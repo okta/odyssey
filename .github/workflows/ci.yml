@@ -116,5 +116,4 @@ jobs:
         env:
           APPLITOOLS_API_KEY: ${{ secrets.OKTA_474937 }}
           APPLITOOLS_BATCH_ID: ${{ github.event.pull_request.head.sha }}
-          APPLITOOLS_SERVER_URL: ${{ secrets.APPLITOOLS_SERVER_URL }}
         run: yarn workspace @okta/odyssey-storybook eyes-storybook -u ${{ env.URL_STORYBOOK }}
