@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.21](https://github.com/okta/odyssey/compare/v1.9.20...v1.9.21) (2024-01-12)
+
+### Bug Fixes
+
+- moves Applitools server URL to in-repo config rather than GitHub Secrets ([#2086](https://github.com/okta/odyssey/issues/2086)) ([68e1027](https://github.com/okta/odyssey/commit/68e1027dea8dd30ce94c832db22c4a69d46de4c4))
+
 ## [1.9.20](https://github.com/okta/odyssey/compare/v1.9.19...v1.9.20) (2024-01-11)
 
 **Note:** Version bump only for package @okta/odyssey-storybook
