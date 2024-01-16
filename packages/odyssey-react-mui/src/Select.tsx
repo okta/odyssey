@@ -20,9 +20,9 @@ import {
   useImperativeHandle,
 } from "react";
 import {
-  Box,
+  Box as MuiBox,
   Checkbox as MuiCheckbox,
-  Chip,
+  Chip as MuiChip,
   ListItemSecondaryAction,
   ListSubheader,
   MenuItem as MuiMenuItem,
@@ -241,7 +241,13 @@ const Select = <
   );
 
   const renderValue = useCallback(
-    (selected: Value) => {
+    ({
+      selected,
+      isPlaceholder = false,
+    }: {
+      selected: Value;
+      isPlaceholder?: boolean;
+    }) => {
       // If the selected value isn't an array, then we don't need to display
       // chips and should fall back to the default render behavior
       if (typeof selected === "string") {
@@ -260,18 +266,38 @@ const Select = <
           }
 
           return (
-            <Chip
+            <MuiChip
               key={item}
-              label={selectedOption.text}
+              label={
+                <>
+                  {selectedOption.text}
+                  {!isPlaceholder &&
+                    controlledStateRef.current === CONTROLLED &&
+                    hasMultipleChoices && (
+                      <CloseCircleFilledIcon
+                        sx={{
+                          marginInlineStart: 2,
+                          fontSize: "1em",
+                          marginInlineEnd: -1,
+                        }}
+                      />
+                    )}
+                </>
+              }
+              tabIndex={-1}
               onDelete={
-                controlledStateRef.current === CONTROLLED
-                  ? () => handleDelete(item)
+                isPlaceholder
+                  ? controlledStateRef.current === CONTROLLED
+                    ? () => handleDelete(item)
+                    : undefined
                   : undefined
               }
               deleteIcon={
                 // We need to stop event propagation on mouse down to prevent the deletion
-                // from being blocked by the Select list opening
+                // from being blocked by the Select list opening, and also ensure that
+                // the pointerEvent is registered even when the parent's are not
                 <CloseCircleFilledIcon
+                  sx={{ pointerEvents: "auto" }}
                   onMouseDown={(event) => event.stopPropagation()}
                 />
               }
@@ -284,9 +310,25 @@ const Select = <
         return null;
       }
 
-      // We need the <Box> to surround the <Chip>s for
-      // proper styling
-      return <Box>{renderedChips}</Box>;
+      // We need the <Box> to surround the <Chip>s for proper styling
+      // and disable
+      if (hasMultipleChoices && controlledStateRef.current === CONTROLLED) {
+        return (
+          <MuiBox
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 1,
+              pointerEvents: "none",
+              opacity: isPlaceholder ? 1 : 0,
+            }}
+          >
+            {renderedChips}
+          </MuiBox>
+        );
+      }
+
+      return <MuiBox>{renderedChips}</MuiBox>;
     },
     [normalizedOptions, handleDelete]
   );
@@ -325,23 +367,52 @@ const Select = <
 
   const renderFieldComponent = useCallback(
     ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
-      <MuiSelect
-        {...inputValues}
-        aria-describedby={ariaDescribedBy}
-        aria-errormessage={errorMessageElementId}
-        children={children}
-        data-se={testId}
-        id={id}
-        inputRef={inputRef}
-        labelId={labelElementId}
-        multiple={hasMultipleChoices}
-        name={nameOverride ?? id}
-        onBlur={onBlur}
-        onChange={onChange}
-        onFocus={onFocus}
-        renderValue={hasMultipleChoices ? renderValue : undefined}
-        translate={translate}
-      />
+      <MuiBox
+        sx={{
+          position: "relative",
+          width: "100%",
+          display: "flex",
+        }}
+      >
+        <MuiSelect
+          {...inputValues}
+          aria-describedby={ariaDescribedBy}
+          aria-errormessage={errorMessageElementId}
+          children={children}
+          data-se={testId}
+          id={id}
+          inputRef={inputRef}
+          labelId={labelElementId}
+          multiple={hasMultipleChoices}
+          name={nameOverride ?? id}
+          onBlur={onBlur}
+          onChange={onChange}
+          onFocus={onFocus}
+          renderValue={
+            hasMultipleChoices
+              ? (value) => renderValue({ selected: value })
+              : undefined
+          }
+          translate={translate}
+        />
+        {hasMultipleChoices && (
+          <MuiBox
+            children={
+              value
+                ? renderValue({ selected: value, isPlaceholder: true })
+                : undefined
+            }
+            sx={{
+              position: "absolute",
+              top: 5,
+              left: 5,
+              right: 14,
+              opacity: 1,
+              pointerEvents: "none",
+            }}
+          />
+        )}
+      </MuiBox>
     ),
     [
       children,
