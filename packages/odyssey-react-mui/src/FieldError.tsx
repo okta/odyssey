@@ -41,7 +41,7 @@ const FieldError = ({
         "fielderror.screenreader.text"
       )}:`}</ScreenReaderText>
       <Box>
-        {message && message}
+        {message}
         {messagesList && <ErrorMessagesList errorMessages={messagesList} />}
       </Box>
     </FormHelperText>

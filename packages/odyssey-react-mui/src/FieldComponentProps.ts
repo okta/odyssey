@@ -55,17 +55,4 @@ export type FieldComponentProps = {
    * The name of the `input` element. Defaults to the `id` if not set.
    */
   name?: string;
-} & (
-  | {
-      errorMessage: string;
-      errorMessagesList?: never;
-    }
-  | {
-      errorMessage?: never;
-      errorMessagesList: string[];
-    }
-  | {
-      errorMessage?: never;
-      errorMessagesList?: never;
-    }
-);
+};

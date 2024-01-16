@@ -129,7 +129,10 @@ const Field = ({
     <MuiFormControl
       component={fieldType === "group" ? "fieldset" : "div"}
       disabled={isDisabled}
-      error={Boolean(errorMessage) || Boolean(errorMessagesList)}
+      error={
+        Boolean(errorMessage) ||
+        (Array.isArray(errorMessagesList) && errorMessagesList.length > 0)
+      }
       role={isRadioGroup ? "radiogroup" : undefined}
       fullWidth={isFullWidth}
     >

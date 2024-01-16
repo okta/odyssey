@@ -47,7 +47,7 @@ export const defaultLNG = "en";
 export const defaultNS = "translations";
 
 // Note: This is type "string" to allow translation overrides from other languages
-export type I18nResources = Record<string, Partial<typeof en>>;
+export type I18nResources = Record<string, typeof en>;
 export const resources: I18nResources = {
   cs,
   da,

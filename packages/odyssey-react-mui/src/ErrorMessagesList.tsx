@@ -12,14 +12,13 @@
 
 import { List as MuiList, ListItem as MuiListItem } from "@mui/material";
 import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
+import { memo } from "react";
 
 export type ErrorMessagesListProps = {
   errorMessages: string[];
 };
 
-export const ErrorMessagesList = ({
-  errorMessages,
-}: ErrorMessagesListProps) => {
+const ErrorMessagesList = ({ errorMessages }: ErrorMessagesListProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   return (
@@ -31,7 +30,7 @@ export const ErrorMessagesList = ({
         paddingInlineStart: odysseyDesignTokens.Spacing4,
       }}
     >
-      {errorMessages.map((error) => (
+      {errorMessages.map((errorMessage) => (
         <MuiListItem
           disablePadding
           dense
@@ -40,9 +39,14 @@ export const ErrorMessagesList = ({
             paddingInlineStart: 0,
           }}
         >
-          {error}
+          {errorMessage}
         </MuiListItem>
       ))}
     </MuiList>
   );
 };
+
+const MemoizedErrorMessagesList = memo(ErrorMessagesList);
+MemoizedErrorMessagesList.displayName = "ErrorMessagesList";
+
+export { MemoizedErrorMessagesList as ErrorMessagesList };

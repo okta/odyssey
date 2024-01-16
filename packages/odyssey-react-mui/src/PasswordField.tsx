@@ -220,10 +220,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
 
     return (
       <Field
-        errorMessage={
-          errorMessage ||
-          (errorMessagesList ? t("passwordfield.error.intro") : undefined)
-        }
+        errorMessage={errorMessage}
         errorMessagesList={errorMessagesList}
         fieldType="single"
         hasVisibleLabel
