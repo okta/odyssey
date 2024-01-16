@@ -18,6 +18,11 @@ export type ErrorMessagesListProps = {
   errorMessages: string[];
 };
 
+const listItemStyles = {
+  display: "list-item",
+  paddingInlineStart: 0,
+};
+
 const ErrorMessagesList = ({ errorMessages }: ErrorMessagesListProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
@@ -31,14 +36,7 @@ const ErrorMessagesList = ({ errorMessages }: ErrorMessagesListProps) => {
       }}
     >
       {errorMessages.map((errorMessage) => (
-        <MuiListItem
-          disablePadding
-          dense
-          sx={{
-            display: "list-item",
-            paddingInlineStart: 0,
-          }}
-        >
+        <MuiListItem disablePadding dense sx={listItemStyles}>
           {errorMessage}
         </MuiListItem>
       ))}
