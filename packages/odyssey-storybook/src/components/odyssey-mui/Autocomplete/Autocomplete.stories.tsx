@@ -63,6 +63,7 @@ const storybookMeta: Meta<typeof Autocomplete> = {
       },
     },
     hint: fieldComponentPropsMetaData.hint,
+    HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
     id: fieldComponentPropsMetaData.id,
     isCustomValueAllowed: {
       control: "boolean",

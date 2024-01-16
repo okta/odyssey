@@ -17,7 +17,7 @@ import { Button } from "./Button";
 import { Callout } from "./Callout";
 import { Heading4, Support } from "./Typography";
 import { useUniqueId } from "./useUniqueId";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { AllowedProps } from "./AllowedProps";
 
 export const formEncodingTypeValues = [
   "application/x-www-form-urlencoded",
@@ -85,7 +85,7 @@ export type FormProps = {
    * The title of the Form
    */
   title?: string;
-} & SeleniumProps;
+} & AllowedProps;
 
 const Form = ({
   alert,
@@ -101,6 +101,7 @@ const Form = ({
   target,
   testId,
   title,
+  translate,
 }: FormProps) => {
   const id = useUniqueId(idOverride);
 
@@ -127,8 +128,12 @@ const Form = ({
           marginBlockEnd: (theme) => theme.spacing(4),
         }}
       >
-        {title && <Heading4 component="h1">{title}</Heading4>}
-        {description && <Support>{description}</Support>}
+        {title && (
+          <Heading4 component="h1" translate={translate}>
+            {title}
+          </Heading4>
+        )}
+        {description && <Support translate={translate}>{description}</Support>}
         {alert}
       </Box>
       <Box component="div">{children}</Box>

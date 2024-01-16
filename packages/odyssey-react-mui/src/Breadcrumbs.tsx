@@ -27,8 +27,9 @@ import {
   useState,
 } from "react";
 import { GroupIcon, HomeIcon, UserIcon } from "./icons.generated";
-import { Typography } from "./Typography";
+import { Subordinate } from "./Typography";
 import { useTranslation } from "react-i18next";
+import { AllowedProps } from "./AllowedProps";
 
 export type BreadcrumbType = "listItem" | "menuItem" | "currentPage";
 
@@ -42,7 +43,7 @@ export type BreadcrumbsProps = {
   children: ReactElement<typeof Breadcrumb>[];
   homeHref?: string;
   maxVisibleItems?: number;
-};
+} & AllowedProps;
 
 export type BreadcrumbContextType = {
   breadcrumbType: BreadcrumbType;
@@ -71,7 +72,7 @@ export const Breadcrumb = ({ children, href, iconName }: BreadcrumbProps) => {
   }
 
   if (breadcrumbType === "currentPage") {
-    return <Typography>{breadcrumbContent}</Typography>;
+    return <Subordinate color="textPrimary">{breadcrumbContent}</Subordinate>;
   }
 
   // breadcrumbType === "listItem" is the default
@@ -101,6 +102,8 @@ const BreadcrumbList = ({
   children,
   homeHref,
   maxVisibleItems = defaultTruncationValue,
+  testId,
+  translate,
 }: BreadcrumbsProps) => {
   const { t } = useTranslation();
 
@@ -137,6 +140,8 @@ const BreadcrumbList = ({
     <MuiBreadcrumbs
       maxItems={children.length + 1}
       aria-label={t("breadcrumbs.label.text")}
+      data-se={testId}
+      translate={translate}
     >
       {homeHref && (
         <ButtonBase href={homeHref} aria-label={t("breadcrumbs.home.text")}>
@@ -152,7 +157,7 @@ const BreadcrumbList = ({
 
       {breadcrumbSections.insideMenu && (
         <>
-          <ButtonBase onClick={onMenuButtonClick}>…</ButtonBase>
+          <ButtonBase onClick={onMenuButtonClick}>...</ButtonBase>
           <Menu
             open={Boolean(anchorEl)}
             onClose={onCloseMenu}

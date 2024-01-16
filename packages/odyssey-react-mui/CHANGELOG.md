@@ -3,6 +3,83 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.21](https://github.com/okta/odyssey/compare/v1.9.20...v1.9.21) (2024-01-12)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.20](https://github.com/okta/odyssey/compare/v1.9.19...v1.9.20) (2024-01-11)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.19](https://github.com/okta/odyssey/compare/v1.9.18...v1.9.19) (2024-01-11)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.18](https://github.com/okta/odyssey/compare/v1.9.17...v1.9.18) (2024-01-11)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.17](https://github.com/okta/odyssey/compare/v1.9.16...v1.9.17) (2024-01-11)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.16](https://github.com/okta/odyssey/compare/v1.9.15...v1.9.16) (2024-01-08)
+
+### Bug Fixes
+
+- (odyssey-react-mui): move variable declaration below import ([#2082](https://github.com/okta/odyssey/issues/2082)) ([910e4fc](https://github.com/okta/odyssey/commit/910e4fc120371df48cfc5908f06e175c61cbcaba))
+
+## [1.9.15](https://github.com/okta/odyssey/compare/v1.9.14...v1.9.15) (2024-01-08)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.14](https://github.com/okta/odyssey/compare/v1.9.13...v1.9.14) (2024-01-05)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.13](https://github.com/okta/odyssey/compare/v1.9.12...v1.9.13) (2024-01-04)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.12](https://github.com/okta/odyssey/compare/v1.9.11...v1.9.12) (2023-12-22)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.11](https://github.com/okta/odyssey/compare/v1.9.10...v1.9.11) (2023-12-22)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.10](https://github.com/okta/odyssey/compare/v1.9.9...v1.9.10) (2023-12-21)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.9](https://github.com/okta/odyssey/compare/v1.9.8...v1.9.9) (2023-12-20)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.8](https://github.com/okta/odyssey/compare/v1.9.7...v1.9.8) (2023-12-19)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.7](https://github.com/okta/odyssey/compare/v1.9.6...v1.9.7) (2023-12-19)
+
+### Bug Fixes
+
+- align CircularProgress with Figma ([#2060](https://github.com/okta/odyssey/issues/2060)) ([a900bcf](https://github.com/okta/odyssey/commit/a900bcf83cd408871545e9d8e840f9756e71bd79))
+- align radio and checkbox styles with Figma ([#2059](https://github.com/okta/odyssey/issues/2059)) ([99b7e7a](https://github.com/okta/odyssey/commit/99b7e7a193941fc8a79c7ecb16a8a7b82b086a39))
+
+## [1.9.6](https://github.com/okta/odyssey/compare/v1.9.5...v1.9.6) (2023-12-18)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.5](https://github.com/okta/odyssey/compare/v1.9.4...v1.9.5) (2023-12-18)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.4](https://github.com/okta/odyssey/compare/v1.9.3...v1.9.4) (2023-12-15)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
 ## [1.9.3](https://github.com/okta/odyssey/compare/v1.9.2...v1.9.3) (2023-12-12)
 
 **Note:** Version bump only for package @okta/odyssey-react-mui
