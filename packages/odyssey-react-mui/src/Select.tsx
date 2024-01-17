@@ -98,6 +98,7 @@ export type SelectProps<
 } & Pick<
   FieldComponentProps,
   | "errorMessage"
+  | "errorMessageList"
   | "hint"
   | "HintLinkComponent"
   | "id"
@@ -130,6 +131,7 @@ const Select = <
 >({
   defaultValue,
   errorMessage,
+  errorMessageList,
   hasMultipleChoices: hasMultipleChoicesProp,
   hint,
   HintLinkComponent,
@@ -318,6 +320,7 @@ const Select = <
   return (
     <Field
       errorMessage={errorMessage}
+      errorMessageList={errorMessageList}
       fieldType="single"
       hasVisibleLabel
       hint={hint}
