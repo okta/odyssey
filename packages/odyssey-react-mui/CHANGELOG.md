@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.22](https://github.com/okta/odyssey/compare/v1.9.21...v1.9.22) (2024-01-17)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
 ## [1.9.21](https://github.com/okta/odyssey/compare/v1.9.20...v1.9.21) (2024-01-12)
 
 **Note:** Version bump only for package @okta/odyssey-react-mui
