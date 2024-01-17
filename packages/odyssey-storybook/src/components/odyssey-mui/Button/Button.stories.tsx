@@ -254,30 +254,6 @@ export const ButtonSecondaryDisabled: StoryObj<ButtonProps> = {
   },
 };
 
-export const ButtonTertiary: StoryObj<ButtonProps> = {
-  name: "Tertiary",
-  args: {
-    label: "Add crew",
-    variant: "tertiary",
-  },
-  play: async ({ args, canvasElement, step }: playType) => {
-    interactWithButton({ canvasElement, step })({
-      args,
-      actionName: "Button Tertiary",
-      hoverState: false,
-    });
-  },
-};
-
-export const ButtonTertiaryDisabled: StoryObj<ButtonProps> = {
-  name: "Tertiary, Disabled",
-  args: {
-    label: "Add crew",
-    isDisabled: true,
-    variant: "tertiary",
-  },
-};
-
 export const ButtonDanger: StoryObj<ButtonProps> = {
   name: "Danger",
   args: {

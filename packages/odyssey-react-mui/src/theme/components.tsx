@@ -618,26 +618,6 @@ export const components = ({
             },
           }),
 
-          ...(ownerState.variant === "tertiary" && {
-            backgroundColor: odysseyTokens.HueNeutral100,
-            color: odysseyTokens.HueNeutral700,
-
-            "&:hover": {
-              backgroundColor: odysseyTokens.HueNeutral200,
-              color: odysseyTokens.HueNeutral800,
-            },
-
-            "&:active": {
-              backgroundColor: odysseyTokens.HueNeutral300,
-              color: odysseyTokens.HueNeutral800,
-            },
-
-            "&:disabled": {
-              backgroundColor: odysseyTokens.HueNeutral100,
-              color: odysseyTokens.TypographyColorDisabled,
-            },
-          }),
-
           ...(ownerState.variant === "danger" && {
             backgroundColor: odysseyTokens.PaletteDangerMain,
             color: odysseyTokens.HueNeutralWhite,
@@ -688,7 +668,6 @@ export const components = ({
             paddingInline: odysseyTokens.Spacing4,
           }),
           ...(ownerState.fullWidth === true && {
-            display: "block",
             width: "100%",
             marginBlock: "0",
             marginInline: "0",
@@ -707,6 +686,10 @@ export const components = ({
 
             ...(ownerState.size === "small" && {
               padding: odysseyTokens.Spacing2,
+            }),
+
+            ...(ownerState.size === "large" && {
+              padding: odysseyTokens.Spacing4,
             }),
           }),
         }),

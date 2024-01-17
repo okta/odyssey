@@ -30,7 +30,6 @@ export const buttonTypeValues = ["button", "submit", "reset"] as const;
 export const buttonVariantValues = [
   "primary",
   "secondary",
-  "tertiary",
   "danger",
   "floating",
 ] as const;
@@ -95,7 +94,7 @@ export type ButtonProps = {
   /**
    * The variant of the Button
    */
-  variant: (typeof buttonVariantValues)[number];
+  variant: (typeof buttonVariantValues)[number] | "tertiary";
 } & (
   | {
       endIcon?: ReactElement;
@@ -132,9 +131,13 @@ const Button = ({
   tooltipText,
   translate,
   type = "button",
-  variant,
+  variant: variantProp,
 }: ButtonProps) => {
   const muiProps = useMuiProps();
+
+  // We're deprecating the "tertiary" variant, so map it to
+  // "secondary" in lieu of making a breaking change
+  const variant = variantProp === "tertiary" ? "secondary" : variantProp;
 
   const ref = useRef<HTMLButtonElement>(null);
   useImperativeHandle(
@@ -160,7 +163,7 @@ const Button = ({
         data-se={testId}
         disabled={isDisabled}
         endIcon={endIcon}
-        fullWidth={isFullWidth}
+        fullWidth={label ? isFullWidth : false}
         id={id}
         onClick={onClick}
         ref={ref}
