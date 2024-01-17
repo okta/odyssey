@@ -367,13 +367,7 @@ const Select = <
 
   const renderFieldComponent = useCallback(
     ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
-      <MuiBox
-        sx={{
-          position: "relative",
-          width: "100%",
-          display: "flex",
-        }}
-      >
+      <div className="OdsSelect-container">
         <MuiSelect
           {...inputValues}
           aria-describedby={ariaDescribedBy}
@@ -395,24 +389,12 @@ const Select = <
           }
           translate={translate}
         />
-        {hasMultipleChoices && (
-          <MuiBox
-            children={
-              value
-                ? renderValue({ selected: value, isPlaceholder: true })
-                : undefined
-            }
-            sx={{
-              position: "absolute",
-              top: 5,
-              left: 5,
-              right: 14,
-              opacity: 1,
-              pointerEvents: "none",
-            }}
-          />
+        {hasMultipleChoices && value && (
+          <div className="OdsSelect-placeholderValues">
+            {renderValue({ selected: value, isPlaceholder: true })}
+          </div>
         )}
-      </MuiBox>
+      </div>
     ),
     [
       children,
