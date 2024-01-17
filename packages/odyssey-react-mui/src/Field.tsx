@@ -30,6 +30,14 @@ export const fieldTypeValues = ["single", "group"] as const;
 
 export type FieldProps = {
   /**
+   * If `error` is not undefined, the `input` will indicate an error.
+   */
+  errorMessage?: string;
+  /**
+   * If `error` is not undefined, the `input` will indicate an error.
+   */
+  errorMessageList?: string[];
+  /**
    * The field type determines how ARIA components are setup. It's important to use this to denote if you expect only one component (like a text field) or multiple (like a radio group).
    */
   fieldType: (typeof fieldTypeValues)[number];
@@ -73,6 +81,7 @@ export type FieldProps = {
 
 const Field = ({
   errorMessage,
+  errorMessageList,
   fieldType,
   hasVisibleLabel,
   hint,
@@ -88,6 +97,7 @@ const Field = ({
   Pick<
     FieldComponentProps,
     | "errorMessage"
+    | "errorMessageList"
     | "hint"
     | "HintLinkComponent"
     | "id"
@@ -99,7 +109,8 @@ const Field = ({
 
   const id = useUniqueId(idOverride);
   const hintId = hint ? `${id}-hint` : undefined;
-  const errorMessageElementId = errorMessage ? `${id}-error` : undefined;
+  const errorMessageElementId =
+    errorMessage || errorMessageList ? `${id}-error` : undefined;
   const labelElementId = `${id}-label`;
 
   const ariaDescribedBy = useMemo(
@@ -118,7 +129,10 @@ const Field = ({
     <MuiFormControl
       component={fieldType === "group" ? "fieldset" : "div"}
       disabled={isDisabled}
-      error={Boolean(errorMessage)}
+      error={
+        Boolean(errorMessage) ||
+        (Array.isArray(errorMessageList) && errorMessageList.length > 0)
+      }
       role={isRadioGroup ? "radiogroup" : undefined}
       fullWidth={isFullWidth}
     >
@@ -152,8 +166,12 @@ const Field = ({
         labelElementId,
       })}
 
-      {errorMessage && (
-        <FieldError id={errorMessageElementId} text={errorMessage} />
+      {(errorMessage || errorMessageList) && (
+        <FieldError
+          id={errorMessageElementId}
+          message={errorMessage}
+          messageList={errorMessageList}
+        />
       )}
     </MuiFormControl>
   );

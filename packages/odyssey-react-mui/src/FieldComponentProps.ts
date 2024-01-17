@@ -20,6 +20,10 @@ export type FieldComponentProps = {
    */
   errorMessage?: string;
   /**
+   * If `error` is not undefined, the `input` will indicate multiple errors.
+   */
+  errorMessageList?: string[];
+  /**
    * The helper text content.
    */
   hint?: string;

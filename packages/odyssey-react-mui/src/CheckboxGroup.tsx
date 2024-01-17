@@ -35,13 +35,18 @@ export type CheckboxGroupProps = {
   label: string;
 } & Pick<
   FieldComponentProps,
-  "errorMessage" | "hint" | "HintLinkComponent" | "isDisabled"
+  | "errorMessage"
+  | "errorMessageList"
+  | "hint"
+  | "HintLinkComponent"
+  | "isDisabled"
 > &
   AllowedProps;
 
 const CheckboxGroup = ({
   children,
   errorMessage,
+  errorMessageList,
   hint,
   HintLinkComponent,
   isDisabled,
@@ -68,6 +73,7 @@ const CheckboxGroup = ({
   return (
     <Field
       errorMessage={errorMessage}
+      errorMessageList={errorMessageList}
       fieldType="group"
       hasVisibleLabel={true}
       hint={hint}
