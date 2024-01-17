@@ -12,7 +12,7 @@
 
 import { List as MuiList, ListItem as MuiListItem } from "@mui/material";
 import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
-import { memo } from "react";
+import { memo, useMemo } from "react";
 
 export type ErrorMessagesListProps = {
   errorMessages: string[];
@@ -26,15 +26,16 @@ const listItemStyles = {
 const ErrorMessagesList = ({ errorMessages }: ErrorMessagesListProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
+  const listStyles = useMemo(
+    () => ({
+      listStyle: "disc",
+      paddingInlineStart: odysseyDesignTokens.Spacing4,
+    }),
+    [odysseyDesignTokens]
+  );
+
   return (
-    <MuiList
-      disablePadding
-      dense
-      sx={{
-        listStyle: "disc",
-        paddingInlineStart: odysseyDesignTokens.Spacing4,
-      }}
-    >
+    <MuiList disablePadding dense sx={listStyles}>
       {errorMessages.map((errorMessage) => (
         <MuiListItem disablePadding dense sx={listItemStyles}>
           {errorMessage}
