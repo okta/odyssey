@@ -1,6 +1,6 @@
 {
   "name": "@okta/conventional-changelog-odyssey",
-  "version": "1.9.22",
+  "version": "1.9.23",
   "main": "index.js",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
