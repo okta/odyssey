@@ -22,7 +22,7 @@ export type FieldComponentProps = {
   /**
    * If `error` is not undefined, the `input` will indicate multiple errors.
    */
-  errorMessagesList?: string[];
+  errorMessageList?: string[];
   /**
    * The helper text content.
    */

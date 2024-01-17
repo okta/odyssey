@@ -14,7 +14,7 @@ import { memo } from "react";
 
 import { FormHelperText } from "@mui/material";
 import { ScreenReaderText } from "./ScreenReaderText";
-import { ErrorMessagesList } from "./ErrorMessagesList";
+import { ErrorMessageList } from "./ErrorMessageList";
 import { useTranslation } from "react-i18next";
 
 import type { AllowedProps } from "./AllowedProps";
@@ -23,13 +23,13 @@ import { Box } from "./Box";
 export type FieldErrorProps = {
   id?: string;
   message?: string;
-  messagesList?: string[];
+  messageList?: string[];
 } & AllowedProps;
 
 const FieldError = ({
   id,
   message,
-  messagesList,
+  messageList,
   testId,
   translate,
 }: FieldErrorProps) => {
@@ -42,7 +42,7 @@ const FieldError = ({
       )}:`}</ScreenReaderText>
       <Box>
         {message}
-        {messagesList && <ErrorMessagesList errorMessages={messagesList} />}
+        {messageList && <ErrorMessageList errorMessages={messageList} />}
       </Box>
     </FormHelperText>
   );

@@ -168,7 +168,7 @@ export type AutocompleteProps<
   getIsOptionEqualToValue?: (option: OptionType, value: OptionType) => boolean;
 } & Pick<
   FieldComponentProps,
-  "errorMessage" | "errorMessagesList" | "hint" | "id" | "isOptional" | "name"
+  "errorMessage" | "errorMessageList" | "hint" | "id" | "isOptional" | "name"
 > &
   AllowedProps;
 
@@ -179,7 +179,7 @@ const VirtualizedAutocomplete = <
 >({
   defaultValue,
   errorMessage,
-  errorMessagesList,
+  errorMessageList,
   hasMultipleChoices,
   id: idOverride,
   inputValue,
@@ -244,7 +244,7 @@ const VirtualizedAutocomplete = <
     ({ InputLabelProps, InputProps, ...params }) => (
       <Field
         errorMessage={errorMessage}
-        errorMessagesList={errorMessagesList}
+        errorMessageList={errorMessageList}
         fieldType="single"
         hasVisibleLabel
         id={InputLabelProps.htmlFor}

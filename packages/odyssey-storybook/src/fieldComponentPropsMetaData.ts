@@ -17,14 +17,12 @@ export const fieldComponentPropsMetaData: Partial<
   ArgTypes<FieldComponentProps>
 > = {
   errorMessage: {
-    control: {
-      type: "text",
-    },
+    control: "text",
     description:
       "If `error` is not undefined, the `input` will indicate an error",
     table: {
       type: {
-        summary: "string | string[]",
+        summary: "string",
       },
     },
   },

@@ -14,7 +14,7 @@ import { List as MuiList, ListItem as MuiListItem } from "@mui/material";
 import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
 import { memo, useMemo } from "react";
 
-export type ErrorMessagesListProps = {
+export type ErrorMessageListProps = {
   errorMessages: string[];
 };
 
@@ -23,7 +23,7 @@ const listItemStyles = {
   paddingInlineStart: 0,
 };
 
-const ErrorMessagesList = ({ errorMessages }: ErrorMessagesListProps) => {
+const ErrorMessageList = ({ errorMessages }: ErrorMessageListProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const listStyles = useMemo(
@@ -45,7 +45,7 @@ const ErrorMessagesList = ({ errorMessages }: ErrorMessagesListProps) => {
   );
 };
 
-const MemoizedErrorMessagesList = memo(ErrorMessagesList);
-MemoizedErrorMessagesList.displayName = "ErrorMessagesList";
+const MemoizedErrorMessageList = memo(ErrorMessageList);
+MemoizedErrorMessageList.displayName = "ErrorMessageList";
 
-export { MemoizedErrorMessagesList as ErrorMessagesList };
+export { MemoizedErrorMessageList as ErrorMessageList };

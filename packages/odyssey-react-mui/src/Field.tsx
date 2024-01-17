@@ -36,7 +36,7 @@ export type FieldProps = {
   /**
    * If `error` is not undefined, the `input` will indicate an error.
    */
-  errorMessagesList?: string[];
+  errorMessageList?: string[];
   /**
    * The field type determines how ARIA components are setup. It's important to use this to denote if you expect only one component (like a text field) or multiple (like a radio group).
    */
@@ -81,7 +81,7 @@ export type FieldProps = {
 
 const Field = ({
   errorMessage,
-  errorMessagesList,
+  errorMessageList,
   fieldType,
   hasVisibleLabel,
   hint,
@@ -97,7 +97,7 @@ const Field = ({
   Pick<
     FieldComponentProps,
     | "errorMessage"
-    | "errorMessagesList"
+    | "errorMessageList"
     | "hint"
     | "HintLinkComponent"
     | "id"
@@ -110,7 +110,7 @@ const Field = ({
   const id = useUniqueId(idOverride);
   const hintId = hint ? `${id}-hint` : undefined;
   const errorMessageElementId =
-    errorMessage || errorMessagesList ? `${id}-error` : undefined;
+    errorMessage || errorMessageList ? `${id}-error` : undefined;
   const labelElementId = `${id}-label`;
 
   const ariaDescribedBy = useMemo(
@@ -131,7 +131,7 @@ const Field = ({
       disabled={isDisabled}
       error={
         Boolean(errorMessage) ||
-        (Array.isArray(errorMessagesList) && errorMessagesList.length > 0)
+        (Array.isArray(errorMessageList) && errorMessageList.length > 0)
       }
       role={isRadioGroup ? "radiogroup" : undefined}
       fullWidth={isFullWidth}
@@ -166,11 +166,11 @@ const Field = ({
         labelElementId,
       })}
 
-      {(errorMessage || errorMessagesList) && (
+      {(errorMessage || errorMessageList) && (
         <FieldError
           id={errorMessageElementId}
           message={errorMessage}
-          messagesList={errorMessagesList}
+          messageList={errorMessageList}
         />
       )}
     </MuiFormControl>

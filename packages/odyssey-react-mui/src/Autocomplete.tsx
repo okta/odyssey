@@ -162,7 +162,7 @@ export type AutocompleteProps<
 } & Pick<
   FieldComponentProps,
   | "errorMessage"
-  | "errorMessagesList"
+  | "errorMessageList"
   | "hint"
   | "HintLinkComponent"
   | "id"
@@ -179,7 +179,7 @@ const Autocomplete = <
 >({
   defaultValue,
   errorMessage,
-  errorMessagesList,
+  errorMessageList,
   hasMultipleChoices,
   id: idOverride,
   inputValue,
@@ -246,7 +246,7 @@ const Autocomplete = <
     ({ InputLabelProps, InputProps, ...params }) => (
       <Field
         errorMessage={errorMessage}
-        errorMessagesList={errorMessagesList}
+        errorMessageList={errorMessageList}
         fieldType="single"
         hasVisibleLabel
         id={InputLabelProps.htmlFor}
@@ -278,7 +278,7 @@ const Autocomplete = <
     ),
     [
       errorMessage,
-      errorMessagesList,
+      errorMessageList,
       hint,
       HintLinkComponent,
       isOptional,

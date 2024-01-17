@@ -36,7 +36,7 @@ export type CheckboxGroupProps = {
 } & Pick<
   FieldComponentProps,
   | "errorMessage"
-  | "errorMessagesList"
+  | "errorMessageList"
   | "hint"
   | "HintLinkComponent"
   | "isDisabled"
@@ -46,7 +46,7 @@ export type CheckboxGroupProps = {
 const CheckboxGroup = ({
   children,
   errorMessage,
-  errorMessagesList,
+  errorMessageList,
   hint,
   HintLinkComponent,
   isDisabled,
@@ -73,7 +73,7 @@ const CheckboxGroup = ({
   return (
     <Field
       errorMessage={errorMessage}
-      errorMessagesList={errorMessagesList}
+      errorMessageList={errorMessageList}
       fieldType="group"
       hasVisibleLabel={true}
       hint={hint}
