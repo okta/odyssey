@@ -175,18 +175,21 @@ const DataFilters = ({
     }
   }, [onChangeSearch, searchValue, searchDelayTime, hasSearchSubmitButton]);
 
-  const handleInputChange = useCallback(
-    (filterId: string, value: DataFilterValue, submit: boolean = false) => {
+  const updateInputValue = useCallback(
+    ({ filterId, value }: { filterId: string; value: DataFilterValue }) => {
       setInputValues({ ...inputValues, [filterId]: value });
+    },
+    [inputValues, filtersProp]
+  );
 
-      if (submit) {
-        const updatedFilters = filtersProp.map((filter) => ({
-          ...filter,
-          value: filter.id === filterId ? value : inputValues[filter.id],
-        }));
+  const updateFilters = useCallback(
+    ({ filterId, value }: { filterId: string; value: DataFilterValue }) => {
+      const updatedFilters = filtersProp.map((filter) => ({
+        ...filter,
+        value: filter.id === filterId ? value : inputValues[filter.id],
+      }));
 
-        setFilters(updatedFilters);
-      }
+      setFilters(updatedFilters);
     },
     [inputValues, filtersProp]
   );
@@ -417,10 +420,10 @@ const DataFilters = ({
                                     ? getAutoCompleteLabel(value)
                                     : "";
 
-                                handleInputChange(
-                                  filterPopoverCurrentFilter.id,
-                                  label
-                                );
+                                updateInputValue({
+                                  filterId: filterPopoverCurrentFilter.id,
+                                  value: label,
+                                });
                               }}
                               options={filterPopoverCurrentFilter.options.map(
                                 (option: { label: string }) => ({
@@ -461,10 +464,10 @@ const DataFilters = ({
                               ] as string) ?? ""
                             }
                             onChange={(ev) =>
-                              handleInputChange(
-                                filterPopoverCurrentFilter.id,
-                                ev.currentTarget.value
-                              )
+                              updateInputValue({
+                                filterId: filterPopoverCurrentFilter.id,
+                                value: ev.currentTarget.value,
+                              })
                             }
                             endAdornment={
                               inputValues[filterPopoverCurrentFilter.id] && (
@@ -472,11 +475,15 @@ const DataFilters = ({
                                   size="small"
                                   aria-label="Clear filter"
                                   onClick={() => {
-                                    handleInputChange(
-                                      filterPopoverCurrentFilter.id,
-                                      undefined,
-                                      true
-                                    );
+                                    updateInputValue({
+                                      filterId: filterPopoverCurrentFilter.id,
+                                      value: undefined,
+                                    });
+
+                                    updateFilters({
+                                      filterId: filterPopoverCurrentFilter.id,
+                                      value: undefined,
+                                    });
                                   }}
                                 >
                                   <CloseCircleFilledIcon />
@@ -531,13 +538,17 @@ const DataFilters = ({
                       filterPopoverCurrentFilter?.options && (
                         <RadioGroup
                           label={filterPopoverCurrentFilter.label}
-                          onChange={(_, value) =>
-                            handleInputChange(
-                              filterPopoverCurrentFilter.id,
+                          onChange={(_, value) => {
+                            updateInputValue({
+                              filterId: filterPopoverCurrentFilter.id,
                               value,
-                              true
-                            )
-                          }
+                            });
+
+                            updateFilters({
+                              filterId: filterPopoverCurrentFilter.id,
+                              value,
+                            });
+                          }}
                         >
                           <Radio
                             label="Any"
@@ -612,7 +623,7 @@ const DataFilters = ({
               <Button
                 variant="secondary"
                 label="Clear filters"
-                onClick={() => clearAllFilters()}
+                onClick={clearAllFilters}
               />
             </Box>
           )}
@@ -636,7 +647,17 @@ const DataFilters = ({
               <Tag
                 key={filter.label}
                 label={`${filter.label}: ${filter.value}`}
-                onRemove={() => handleInputChange(filter.id, undefined, true)}
+                onRemove={() => {
+                  updateInputValue({
+                    filterId: filter.id,
+                    value: undefined,
+                  });
+
+                  updateFilters({
+                    filterId: filter.id,
+                    value: undefined,
+                  });
+                }}
               />
             ))}
           </TagList>
