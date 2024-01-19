@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.0](https://github.com/okta/odyssey/compare/v1.9.23...v1.10.0) (2024-01-19)
+
+### Features
+
+- support inputmode prop in TextField ([#2091](https://github.com/okta/odyssey/issues/2091)) ([ac9f17f](https://github.com/okta/odyssey/commit/ac9f17f87e324b9861e794409e72e77f20d267c8))
+
 ## [1.9.23](https://github.com/okta/odyssey/compare/v1.9.22...v1.9.23) (2024-01-17)
 
 **Note:** Version bump only for package odyssey
