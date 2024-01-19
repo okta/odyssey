@@ -41,7 +41,7 @@ export type TextFieldProps = {
   /**
    * This prop helps users to fill forms faster, especially on mobile devices.
    * The name can be confusing, as it's more like an autofill.
-   * You can learn more about it [following the specification](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill).
+   * @see https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill
    */
   autoCompleteType?: InputHTMLAttributes<HTMLInputElement>["autoComplete"];
   /**
@@ -60,6 +60,11 @@ export type TextFieldProps = {
    * The ref forwarded to the TextField to expose focus()
    */
   inputFocusRef?: React.RefObject<FocusHandle>;
+  /**
+   * Hints at the type of data that might be entered by the user while editing the element or its contents
+   * @see https://html.spec.whatwg.org/multipage/interaction.html#input-modalities:-the-inputmode-attribute
+   */
+  inputMode?: InputHTMLAttributes<HTMLInputElement>["inputMode"];
   /**
    * If `true`, a [TextareaAutosize](/material-ui/react-textarea-autosize/) element is rendered.
    */
@@ -112,6 +117,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       HintLinkComponent,
       id: idOverride,
       inputFocusRef,
+      inputMode,
       isDisabled = false,
       isFullWidth = false,
       isMultiline = false,
@@ -170,10 +176,6 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
         <InputBase
           {...inputValues}
-          inputProps={{
-            "aria-errormessage": errorMessageElementId,
-            "aria-labelledby": labelElementId,
-          }}
           aria-describedby={ariaDescribedBy}
           autoComplete={autoCompleteType}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
@@ -187,6 +189,11 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             )
           }
           id={id}
+          inputMode={inputMode}
+          inputProps={{
+            "aria-errormessage": errorMessageElementId,
+            "aria-labelledby": labelElementId,
+          }}
           inputRef={inputRef}
           multiline={isMultiline}
           name={nameOverride ?? id}
