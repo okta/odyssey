@@ -14,24 +14,36 @@ import { memo } from "react";
 
 import { FormHelperText } from "@mui/material";
 import { ScreenReaderText } from "./ScreenReaderText";
+import { ErrorMessageList } from "./ErrorMessageList";
 import { useTranslation } from "react-i18next";
 
-import type { SeleniumProps } from "./SeleniumProps";
+import type { AllowedProps } from "./AllowedProps";
+import { Box } from "./Box";
 
 export type FieldErrorProps = {
   id?: string;
-  text: string;
-} & SeleniumProps;
+  message?: string;
+  messageList?: string[];
+} & AllowedProps;
 
-const FieldError = ({ id, testId, text }: FieldErrorProps) => {
+const FieldError = ({
+  id,
+  message,
+  messageList,
+  testId,
+  translate,
+}: FieldErrorProps) => {
   const { t } = useTranslation();
 
   return (
-    <FormHelperText data-se={testId} error id={id}>
-      <ScreenReaderText>{`${t(
+    <FormHelperText data-se={testId} error id={id} translate={translate}>
+      <ScreenReaderText translate={translate}>{`${t(
         "fielderror.screenreader.text"
       )}:`}</ScreenReaderText>
-      {text}
+      <Box>
+        {message}
+        {messageList && <ErrorMessageList errorMessages={messageList} />}
+      </Box>
     </FormHelperText>
   );
 };

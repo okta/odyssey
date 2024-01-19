@@ -21,7 +21,7 @@ import { memo, useCallback, useMemo, useRef } from "react";
 
 import { Field } from "../Field";
 import { FieldComponentProps } from "../FieldComponentProps";
-import type { SeleniumProps } from "../SeleniumProps";
+import type { AllowedProps } from "../AllowedProps";
 import {
   ComponentControlledState,
   getControlState,
@@ -168,9 +168,9 @@ export type AutocompleteProps<
   getIsOptionEqualToValue?: (option: OptionType, value: OptionType) => boolean;
 } & Pick<
   FieldComponentProps,
-  "errorMessage" | "hint" | "id" | "isOptional" | "name"
+  "errorMessage" | "errorMessageList" | "hint" | "id" | "isOptional" | "name"
 > &
-  SeleniumProps;
+  AllowedProps;
 
 const VirtualizedAutocomplete = <
   OptionType,
@@ -179,6 +179,7 @@ const VirtualizedAutocomplete = <
 >({
   defaultValue,
   errorMessage,
+  errorMessageList,
   hasMultipleChoices,
   id: idOverride,
   inputValue,
@@ -199,6 +200,7 @@ const VirtualizedAutocomplete = <
   value,
   getIsOptionEqualToValue,
   testId,
+  translate,
 }: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
   const controlledStateRef = useRef(
     getControlState({ controlledValue: value, uncontrolledValue: defaultValue })
@@ -242,6 +244,7 @@ const VirtualizedAutocomplete = <
     ({ InputLabelProps, InputProps, ...params }) => (
       <Field
         errorMessage={errorMessage}
+        errorMessageList={errorMessageList}
         fieldType="single"
         hasVisibleLabel
         id={InputLabelProps.htmlFor}
@@ -327,6 +330,7 @@ const VirtualizedAutocomplete = <
       readOnly={isReadOnly}
       renderInput={renderInput}
       isOptionEqualToValue={getIsOptionEqualToValue}
+      translate={translate}
     />
   );
 };

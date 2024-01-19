@@ -21,7 +21,7 @@ import { memo, useCallback, useMemo, useRef } from "react";
 
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { AllowedProps } from "./AllowedProps";
 import {
   ComponentControlledState,
   useInputValues,
@@ -161,9 +161,16 @@ export type AutocompleteProps<
   getIsOptionEqualToValue?: (option: OptionType, value: OptionType) => boolean;
 } & Pick<
   FieldComponentProps,
-  "errorMessage" | "hint" | "id" | "isOptional" | "name" | "isFullWidth"
+  | "errorMessage"
+  | "errorMessageList"
+  | "hint"
+  | "HintLinkComponent"
+  | "id"
+  | "isFullWidth"
+  | "isOptional"
+  | "name"
 > &
-  SeleniumProps;
+  AllowedProps;
 
 const Autocomplete = <
   OptionType,
@@ -172,6 +179,7 @@ const Autocomplete = <
 >({
   defaultValue,
   errorMessage,
+  errorMessageList,
   hasMultipleChoices,
   id: idOverride,
   inputValue,
@@ -182,6 +190,7 @@ const Autocomplete = <
   isOptional = false,
   isReadOnly,
   hint,
+  HintLinkComponent,
   label,
   name: nameOverride,
   onBlur,
@@ -192,6 +201,7 @@ const Autocomplete = <
   value,
   getIsOptionEqualToValue,
   testId,
+  translate,
 }: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
   const controlledStateRef = useRef(
     getControlState({ controlledValue: value, uncontrolledValue: defaultValue })
@@ -236,10 +246,12 @@ const Autocomplete = <
     ({ InputLabelProps, InputProps, ...params }) => (
       <Field
         errorMessage={errorMessage}
+        errorMessageList={errorMessageList}
         fieldType="single"
         hasVisibleLabel
         id={InputLabelProps.htmlFor}
         hint={hint}
+        HintLinkComponent={HintLinkComponent}
         label={label}
         isOptional={isOptional}
         renderFieldComponent={({
@@ -264,7 +276,15 @@ const Autocomplete = <
         )}
       />
     ),
-    [errorMessage, hint, isOptional, label, nameOverride]
+    [
+      errorMessage,
+      errorMessageList,
+      hint,
+      HintLinkComponent,
+      isOptional,
+      label,
+      nameOverride,
+    ]
   );
   const onChange = useCallback<
     NonNullable<
@@ -321,6 +341,7 @@ const Autocomplete = <
       readOnly={isReadOnly}
       renderInput={renderInput}
       isOptionEqualToValue={getIsOptionEqualToValue}
+      translate={translate}
     />
   );
 };

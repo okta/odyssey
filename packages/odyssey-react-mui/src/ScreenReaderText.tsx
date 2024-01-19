@@ -13,13 +13,14 @@
 import { memo, ReactNode } from "react";
 import { Box } from "@mui/material";
 import { visuallyHidden } from "@mui/utils";
+import { AllowedProps } from "./AllowedProps";
 
 export type ScreenReaderTextProps = {
   /**
    * The visually-hidden text.
    */
   children: ReactNode;
-};
+} & AllowedProps;
 
 /**
  * MUI sx expects you pass in a CSS object, not an object with CSS.
@@ -28,8 +29,8 @@ export type ScreenReaderTextProps = {
  */
 const style = { ...visuallyHidden };
 
-const ScreenReaderText = ({ children }: ScreenReaderTextProps) => (
-  <Box sx={style} component="span">
+const ScreenReaderText = ({ children, translate }: ScreenReaderTextProps) => (
+  <Box sx={style} component="span" translate={translate}>
     {children}
   </Box>
 );

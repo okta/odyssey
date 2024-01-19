@@ -44,6 +44,7 @@ const storybookMeta: Meta<typeof NativeSelect> = {
     },
     errorMessage: fieldComponentPropsMetaData.errorMessage,
     hint: fieldComponentPropsMetaData.hint,
+    HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
     id: fieldComponentPropsMetaData.id,
     isDisabled: fieldComponentPropsMetaData.isDisabled,
     isFullWidth: fieldComponentPropsMetaData.isFullWidth,

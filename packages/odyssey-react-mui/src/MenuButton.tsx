@@ -28,7 +28,7 @@ import { memo, type ReactElement, useCallback, useMemo, useState } from "react";
 
 import { MenuContext, MenuContextType } from "./MenuContext";
 import { NullElement } from "./NullElement";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { AllowedProps } from "./AllowedProps";
 
 export const menuAlignmentValues = ["left", "right"] as const;
 
@@ -109,7 +109,7 @@ export type MenuButtonProps = {
       buttonLabel?: undefined | "";
     }
 ) &
-  SeleniumProps;
+  AllowedProps;
 
 const MenuButton = ({
   ariaLabel,
@@ -126,6 +126,7 @@ const MenuButton = ({
   size,
   testId,
   tooltipText,
+  translate,
 }: MenuButtonProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -197,6 +198,7 @@ const MenuButton = ({
         onClick={openMenu}
         size={size}
         tooltipText={tooltipText}
+        translate={translate}
         variant={buttonVariant}
       />
 

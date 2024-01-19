@@ -14,7 +14,7 @@ import { Chip as MuiChip, ChipProps as MuiChipProps } from "@mui/material";
 import { memo, ReactElement, useCallback, useContext } from "react";
 import { TagListContext } from "./TagListContext";
 import { MuiPropsContext } from "./MuiPropsContext";
-import { SeleniumProps } from "./SeleniumProps";
+import { AllowedProps } from "./AllowedProps";
 
 export type TagProps = {
   icon?: ReactElement;
@@ -31,7 +31,7 @@ export type TagProps = {
    * Callback fired when the remove button of the Tag is clicked
    */
   onRemove?: MuiChipProps["onDelete"];
-} & SeleniumProps;
+} & AllowedProps;
 
 const Tag = ({
   icon,
@@ -40,6 +40,7 @@ const Tag = ({
   onClick,
   onRemove,
   testId,
+  translate,
 }: TagProps) => {
   const { chipElementType } = useContext(TagListContext);
 
@@ -56,9 +57,19 @@ const Tag = ({
         label={label}
         onClick={onClick}
         onDelete={onRemove}
+        translate={translate}
       />
     ),
-    [chipElementType, icon, isDisabled, label, onClick, onRemove, testId]
+    [
+      chipElementType,
+      icon,
+      isDisabled,
+      label,
+      onClick,
+      onRemove,
+      testId,
+      translate,
+    ]
   );
 
   return <MuiPropsContext.Consumer>{renderTag}</MuiPropsContext.Consumer>;

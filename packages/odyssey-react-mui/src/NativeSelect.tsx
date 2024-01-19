@@ -24,7 +24,7 @@ import {
 } from "@mui/material";
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { AllowedProps } from "./AllowedProps";
 import { getControlState, useInputValues } from "./inputUtils";
 import { ForwardRefWithType } from "./@types/react-augment";
 
@@ -81,9 +81,16 @@ export type NativeSelectProps<
   value?: Value;
 } & Pick<
   FieldComponentProps,
-  "errorMessage" | "hint" | "id" | "isDisabled" | "isOptional" | "isFullWidth"
+  | "errorMessage"
+  | "errorMessageList"
+  | "hint"
+  | "HintLinkComponent"
+  | "id"
+  | "isDisabled"
+  | "isFullWidth"
+  | "isOptional"
 > &
-  SeleniumProps;
+  AllowedProps;
 
 const NativeSelect: ForwardRefWithType = forwardRef(
   <
@@ -93,8 +100,10 @@ const NativeSelect: ForwardRefWithType = forwardRef(
     {
       defaultValue,
       errorMessage,
+      errorMessageList,
       hasMultipleChoices: hasMultipleChoicesProp,
       hint,
+      HintLinkComponent,
       id: idOverride,
       isDisabled = false,
       isFullWidth = false,
@@ -105,6 +114,7 @@ const NativeSelect: ForwardRefWithType = forwardRef(
       onChange: onChangeProp,
       onFocus,
       testId,
+      translate,
       value,
       children,
     }: NativeSelectProps<Value, HasMultipleChoices>,
@@ -157,6 +167,7 @@ const NativeSelect: ForwardRefWithType = forwardRef(
           onChange={onChange}
           onFocus={onFocus}
           ref={ref}
+          translate={translate}
         />
       ),
       [
@@ -169,15 +180,18 @@ const NativeSelect: ForwardRefWithType = forwardRef(
         onFocus,
         ref,
         testId,
+        translate,
       ]
     );
 
     return (
       <Field
         errorMessage={errorMessage}
+        errorMessageList={errorMessageList}
         fieldType="single"
         hasVisibleLabel
         hint={hint}
+        HintLinkComponent={HintLinkComponent}
         id={idOverride}
         isDisabled={isDisabled}
         isFullWidth={isFullWidth}
