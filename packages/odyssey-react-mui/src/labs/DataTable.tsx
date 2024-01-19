@@ -634,6 +634,11 @@ const DataTable = ({
             minWidth: 0,
             width: "auto",
           },
+          children: (
+            <Box sx={{ marginInline: "-0.1rem" }}>
+              <DragIndicatorIcon sx={{ marginInline: 1, opacity: 0 }} />
+            </Box>
+          ),
         },
       },
       "mrt-row-select": {
