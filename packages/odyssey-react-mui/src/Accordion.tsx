@@ -31,10 +31,6 @@ export type AccordionProps = {
    */
   label: string;
   /**
-   * If true, the Accordion item will have a shadow.
-   */
-  hasShadow?: boolean;
-  /**
    * Whether the item is expanded by default
    */
   isDefaultExpanded?: boolean;
@@ -65,7 +61,6 @@ export type AccordionProps = {
 const Accordion = ({
   children,
   label,
-  hasShadow = true,
   isDefaultExpanded,
   isDisabled,
   isExpanded,
@@ -79,7 +74,6 @@ const Accordion = ({
       disableGutters
       expanded={isExpanded}
       onChange={onChange}
-      className={hasShadow ? `hasShadow` : undefined}
     >
       <MuiAccordionSummary expandIcon={<ChevronDownIcon />}>
         <Support component="div" translate={translate}>
