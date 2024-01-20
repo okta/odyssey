@@ -1,0 +1,32 @@
+{
+  "name": "@okta/babel-plugin-fully-specified",
+  "version": "1.9.12",
+  "private": true,
+  "description": "Babel plugin to generate fully specified ESM module syntax",
+  "author": "Okta, Inc.",
+  "license": "Apache-2.0",
+  "sideEffects": false,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/okta/odyssey",
+    "directory": "packages/babel-plugin-fully-specified"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "prepack": "yarn exec prepack"
+  },
+  "dependencies": {
+    "@babel/types": "^7.19.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.19.3",
+    "@okta/odyssey-lifecycle": "workspace:*",
+    "@okta/odyssey-typescript": "workspace:*",
+    "jest": "^29.6.1",
+    "jest-environment-jsdom": "^29.6.1",
+    "typescript": "^5.1.6"
+  }
+}

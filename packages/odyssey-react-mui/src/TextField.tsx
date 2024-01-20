@@ -189,10 +189,10 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             )
           }
           id={id}
-          inputMode={inputMode}
           inputProps={{
             "aria-errormessage": errorMessageElementId,
             "aria-labelledby": labelElementId,
+            inputmode: inputMode,
           }}
           inputRef={inputRef}
           multiline={isMultiline}
@@ -220,6 +220,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         inputValues,
         hasInitialFocus,
         endAdornment,
+        inputMode,
         isMultiline,
         nameOverride,
         onBlur,

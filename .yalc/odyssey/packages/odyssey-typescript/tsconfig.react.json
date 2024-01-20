@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.strict.json",
+
+  "compilerOptions": {
+    "isolatedModules": true,
+    "jsx": "react",
+    "lib": ["dom", "es2022"],
+    "module": "es2020",
+    "noEmit": true,
+    "target": "es2020"
+  }
+}
