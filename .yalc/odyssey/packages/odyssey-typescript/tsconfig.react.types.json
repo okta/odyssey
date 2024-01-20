@@ -1,9 +1,0 @@
-{
-  "extends": "./tsconfig.react.json",
-  "compilerOptions": {
-    "noEmit": false,
-    "emitDeclarationOnly": true,
-    "declaration": true,
-    "declarationMap": true
-  }
-}
