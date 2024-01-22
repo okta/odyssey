@@ -1935,6 +1935,10 @@ export const components = ({
 
           [`&.${menuItemClasses.root}-destructive`]: {
             color: odysseyTokens.TypographyColorDanger,
+
+            ".MuiTypography-root": {
+              color: "inherit",
+            },
           },
 
           [`&.${menuItemClasses.selected}`]: {
@@ -1961,6 +1965,10 @@ export const components = ({
           [`&.${menuItemClasses.disabled}`]: {
             opacity: 1,
             color: odysseyTokens.TypographyColorDisabled,
+
+            ".MuiTypography-root": {
+              color: "inherit",
+            },
           },
 
           [`& + .${dividerClasses.root}`]: {
