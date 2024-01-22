@@ -179,7 +179,7 @@ const DataFilters = ({
     ({ filterId, value }: { filterId: string; value: DataFilterValue }) => {
       setInputValues({ ...inputValues, [filterId]: value });
     },
-    [inputValues, filtersProp]
+    [inputValues]
   );
 
   const updateFilters = useCallback(
