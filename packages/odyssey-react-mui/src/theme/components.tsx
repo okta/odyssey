@@ -18,6 +18,7 @@ import { buttonClasses } from "@mui/material/Button";
 import { checkboxClasses } from "@mui/material/Checkbox";
 import { chipClasses } from "@mui/material/Chip";
 import { dividerClasses } from "@mui/material/Divider";
+import { drawerClasses } from "@mui/material/Drawer";
 import { formControlLabelClasses } from "@mui/material/FormControlLabel";
 import { formLabelClasses } from "@mui/material/FormLabel";
 import { formGroupClasses } from "@mui/material/FormGroup";
@@ -1011,6 +1012,43 @@ export const components = ({
           }
         }
     `,
+    },
+    MuiDrawer: {
+      styleOverrides: {
+        root: {
+          [`& .${drawerClasses.root}-title`]: {
+            fontSize: odysseyTokens.TypographySizeHeading5,
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBlockEnd: 0,
+            padding: 0,
+            fontFamily: odysseyTokens.TypographyFamilyHeading,
+            [`.${buttonClasses.root}`]: {
+              // Pull close button by inline padding amount
+              marginInlineEnd: `-${odysseyTokens.Spacing3}`,
+            },
+          },
+        },
+        paper: ({ ownerState }) => ({
+          width: ownerState.variant === "temporary" ? "400px" : "360px",
+          paddingBlockStart: odysseyTokens.Spacing4,
+          paddingBlockEnd: odysseyTokens.Spacing3,
+          paddingInline: odysseyTokens.Spacing5,
+
+          ...(ownerState.variant === "persistent" && {
+            borderRadius: "16px",
+          }),
+
+          // ...(ownerState.variant === "temporary" && {
+          //   boxShwodow: "0px 1px 4px 0px rgba(39, 39, 39, 0.08), 0px 4px 10px 0px rgba(39, 39, 39, 0.08), 0px",
+          //from dialog:
+          //   boxShadow: "none",
+          //   filter:
+          //     "drop-shadow(0px 1px 4px rgba(29, 29, 33, 0.08)) drop-shadow(0px 4px 10px rgba(29, 29, 33, 0.08)) drop-shadow(0px 8px 30px rgba(29, 29, 33, 0.1))",
+          // }),
+        }),
+      },
     },
     MuiScopedCssBaseline: {
       styleOverrides: {

@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Autocomplete } from "@okta/odyssey-react-mui";
+import { Autocomplete, AutocompleteProps } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 import { expect } from "@storybook/jest";
 import { userEvent, waitFor, within, screen } from "@storybook/testing-library";
@@ -63,7 +63,6 @@ const storybookMeta: Meta<typeof Autocomplete> = {
       },
     },
     hint: fieldComponentPropsMetaData.hint,
-    HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
     id: fieldComponentPropsMetaData.id,
     isCustomValueAllowed: {
       control: "boolean",
@@ -75,7 +74,6 @@ const storybookMeta: Meta<typeof Autocomplete> = {
       },
     },
     isDisabled: fieldComponentPropsMetaData.isDisabled,
-    isFullWidth: fieldComponentPropsMetaData.isFullWidth,
     isLoading: {
       control: "boolean",
       description: "Displays a loading indicator",
@@ -178,7 +176,11 @@ const storybookMeta: Meta<typeof Autocomplete> = {
 export default storybookMeta;
 
 type StationType = { label: string };
-type AutocompleteType = typeof Autocomplete<StationType, boolean, boolean>;
+type AutocompleteType = AutocompleteProps<
+  StationType | undefined,
+  boolean | undefined,
+  boolean | undefined
+>;
 
 export const Default: StoryObj<AutocompleteType> = {
   play: async ({ canvasElement, step }) => {
@@ -222,7 +224,6 @@ export const Disabled: StoryObj<AutocompleteType> = {
   args: {
     isDisabled: true,
     value: { label: "Tycho Station" },
-    getIsOptionEqualToValue: (option, value) => option.label === value.label,
   },
 };
 
@@ -309,8 +310,7 @@ export const MultipleDisabled: StoryObj<AutocompleteType> = {
   args: {
     hasMultipleChoices: true,
     isDisabled: true,
-    defaultValue: [{ label: "Tycho Station" }],
-    getIsOptionEqualToValue: (option, value) => option.label === value.label,
+    value: [{ label: "Tycho Station" }],
   },
 };
 
@@ -318,8 +318,7 @@ export const MultipleReadOnly: StoryObj<AutocompleteType> = {
   args: {
     hasMultipleChoices: true,
     isReadOnly: true,
-    defaultValue: [{ label: "Tycho Station" }],
-    getIsOptionEqualToValue: (option, value) => option.label === value.label,
+    value: [{ label: "Tycho Station" }],
   },
 };
 
@@ -332,8 +331,7 @@ export const Optional: StoryObj<AutocompleteType> = {
 export const ReadOnly: StoryObj<AutocompleteType> = {
   args: {
     isReadOnly: true,
-    defaultValue: { label: "Tycho Station" },
-    getIsOptionEqualToValue: (option, value) => option.label === value.label,
+    value: { label: "Tycho Station" },
   },
 };
 
@@ -379,14 +377,6 @@ const jupiterGalileanMoons: MoonMeta[] = [
 
 export const ControlledMultipleAutocomplete: StoryObj<JupiterMoonsAutocomplete> =
   {
-    parameters: {
-      docs: {
-        description: {
-          story:
-            "When the component is controlled, the parent component is responsible for managing the state of Autocomplete. `onChange` should be used to listen for component changes and to update the values in the `value` prop.",
-        },
-      },
-    },
     args: {
       options: jupiterGalileanMoons,
       value: jupiterGalileanMoons.slice(0, 2),
@@ -417,14 +407,6 @@ export const UnontrolledMultipleAutocomplete: StoryObj<JupiterMoonsAutocomplete>
   };
 
 export const ControlledAutocomplete: StoryObj<JupiterMoonsAutocomplete> = {
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "When the component is controlled, the parent component is responsible for managing the state of Autocomplete. `onChange` should be used to listen for component changes and to update the values in the `value` prop.",
-      },
-    },
-  },
   args: {
     options: jupiterGalileanMoons,
     value: jupiterGalileanMoons[0],
