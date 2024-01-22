@@ -27,8 +27,7 @@ import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { AllowedProps } from "./AllowedProps";
 import { useTranslation } from "react-i18next";
-import { getControlState, useInputValues } from "./inputUtils";
-import { FocusHandle } from "./@types/react-augment";
+import { FocusHandle, getControlState, useInputValues } from "./inputUtils";
 
 export type PasswordFieldProps = {
   /**
@@ -160,7 +159,6 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           autoComplete={inputType === "password" ? autoCompleteType : "off"}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus={hasInitialFocus}
-          data-se={testId}
           endAdornment={
             hasShowPassword && (
               <InputAdornment position="end">
@@ -181,6 +179,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           inputProps={{
             "aria-errormessage": errorMessageElementId,
             "aria-labelledby": labelElementId,
+            "data-se": testId,
             // role: "textbox" Added because password inputs don't have an implicit role assigned. This causes problems with element selection.
             role: "textbox",
           }}

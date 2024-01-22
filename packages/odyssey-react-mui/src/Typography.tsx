@@ -23,7 +23,7 @@ import {
   useImperativeHandle,
 } from "react";
 import { AllowedProps } from "./AllowedProps";
-import { FocusHandle } from "./@types/react-augment";
+import { FocusHandle } from "./inputUtils";
 
 export type TypographyVariantValue =
   | "h1"

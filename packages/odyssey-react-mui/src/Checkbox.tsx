@@ -23,9 +23,12 @@ import {
 import { FieldComponentProps } from "./FieldComponentProps";
 import { Typography } from "./Typography";
 import type { AllowedProps } from "./AllowedProps";
-import { ComponentControlledState, getControlState } from "./inputUtils";
+import {
+  ComponentControlledState,
+  FocusHandle,
+  getControlState,
+} from "./inputUtils";
 import { CheckedFieldProps } from "./FormCheckedProps";
-import { FocusHandle } from "./@types/react-augment";
 
 export const checkboxValidityValues = ["valid", "invalid", "inherit"] as const;
 
@@ -179,13 +182,15 @@ const Checkbox = ({
           indeterminate={isIndeterminate}
           onChange={onChange}
           required={isRequired}
+          inputProps={{
+            "data-se": testId,
+          }}
           inputRef={inputRef}
           sx={() => ({
             marginBlockStart: "2px",
           })}
         />
       }
-      data-se={testId}
       disabled={isDisabled}
       id={idOverride}
       label={label}

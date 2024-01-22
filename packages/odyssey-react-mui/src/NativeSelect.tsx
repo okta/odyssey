@@ -154,11 +154,11 @@ const NativeSelect: ForwardRefWithType = forwardRef(
           {...inputValues}
           aria-describedby={ariaDescribedBy}
           children={children}
-          data-se={testId}
           id={idOverride}
           inputProps={{
             "aria-errormessage": errorMessageElementId,
             "aria-labelledby": labelElementId,
+            "data-se": testId,
           }}
           name={idOverride}
           multiple={hasMultipleChoices}

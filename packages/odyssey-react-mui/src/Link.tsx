@@ -13,9 +13,9 @@
 import { memo, ReactElement, useImperativeHandle, useRef } from "react";
 import { ExternalLinkIcon } from "./icons.generated";
 import type { AllowedProps } from "./AllowedProps";
+import { FocusHandle } from "./inputUtils";
 
 import { Link as MuiLink, LinkProps as MuiLinkProps } from "@mui/material";
-import { FocusHandle } from "./@types/react-augment";
 
 export const linkVariantValues = ["default", "monochrome"] as const;
 

@@ -20,7 +20,7 @@ import { memo, useCallback, useRef, useImperativeHandle } from "react";
 
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { AllowedProps } from "./AllowedProps";
-import { FocusHandle } from "./@types/react-augment";
+import { FocusHandle } from "./inputUtils";
 
 export type RadioProps = {
   /**
@@ -99,8 +99,15 @@ const Radio = ({
     <FormControlLabel
       checked={isChecked}
       className={isInvalid ? "Mui-error" : ""}
-      control={<MuiRadio inputRef={ref} onChange={onChange} />}
-      data-se={testId}
+      control={
+        <MuiRadio
+          inputProps={{
+            "data-se": testId,
+          }}
+          inputRef={ref}
+          onChange={onChange}
+        />
+      }
       disabled={isDisabled}
       label={label}
       name={name}

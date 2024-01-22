@@ -186,6 +186,7 @@ const Switch = ({
           "aria-describedby": hintId,
           "aria-label": label,
           "aria-labelledby": labelElementId,
+          "data-se": testId,
         }}
         name={_name ?? id}
         onChange={handleOnChange}
@@ -201,6 +202,7 @@ const Switch = ({
       label,
       labelElementId,
       _name,
+      testId,
     ]
   );
 
@@ -213,7 +215,6 @@ const Switch = ({
       <FormControlLabel
         checked={internalSwitchChecked}
         control={renderSwitchComponent}
-        data-se={testId}
         disabled={isDisabled}
         id={labelElementId}
         label={

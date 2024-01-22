@@ -26,8 +26,7 @@ import { InputAdornment, InputBase } from "@mui/material";
 import { FieldComponentProps } from "./FieldComponentProps";
 import { Field } from "./Field";
 import { AllowedProps } from "./AllowedProps";
-import { useInputValues, getControlState } from "./inputUtils";
-import { FocusHandle } from "./@types/react-augment";
+import { FocusHandle, useInputValues, getControlState } from "./inputUtils";
 
 export const textFieldTypeValues = [
   "email",
@@ -180,7 +179,6 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           autoComplete={autoCompleteType}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus={hasInitialFocus}
-          data-se={testId}
           endAdornment={
             endAdornment && (
               <InputAdornment position="end" translate={translate}>
@@ -192,6 +190,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           inputProps={{
             "aria-errormessage": errorMessageElementId,
             "aria-labelledby": labelElementId,
+            "data-se": testId,
             inputmode: inputMode,
           }}
           inputRef={inputRef}

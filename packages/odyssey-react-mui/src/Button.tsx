@@ -23,7 +23,7 @@ import {
 import { MuiPropsContext, useMuiProps } from "./MuiPropsContext";
 import { Tooltip } from "./Tooltip";
 import type { AllowedProps } from "./AllowedProps";
-import { FocusHandle } from "./@types/react-augment";
+import { FocusHandle } from "./inputUtils";
 
 export const buttonSizeValues = ["small", "medium", "large"] as const;
 export const buttonTypeValues = ["button", "submit", "reset"] as const;

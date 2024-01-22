@@ -10,14 +10,18 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { FC } from "react";
-
+import "react";
 export interface ForwardRefWithType extends FC<WithForwardRefProps<Option>> {
   <T extends Option>(props: WithForwardRefProps<T>): ReturnType<
     FC<WithForwardRefProps<T>>
   >;
 }
 
-export type FocusHandle = {
-  focus: () => void;
-};
+type DataAttributeKey = `data-${string}`;
+declare module "react" {
+  interface HTMLAttributes {
+    // Allows data-* props to be passed to inputProps in nested MUI components
+    // see: https://github.com/mui/material-ui/issues/20160
+    [dataAttribute: DataAttributeKey]: string | undefined;
+  }
+}

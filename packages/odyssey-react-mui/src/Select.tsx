@@ -36,10 +36,10 @@ import { CheckIcon } from "./icons.generated";
 import type { AllowedProps } from "./AllowedProps";
 import {
   ComponentControlledState,
+  FocusHandle,
   useInputValues,
   getControlState,
 } from "./inputUtils";
-import { FocusHandle } from "./@types/react-augment";
 
 export type SelectOption = {
   text: string;
@@ -290,8 +290,8 @@ const Select = <
         aria-describedby={ariaDescribedBy}
         aria-errormessage={errorMessageElementId}
         children={children}
-        data-se={testId}
         id={id}
+        inputProps={{ "data-se": testId }}
         inputRef={inputRef}
         labelId={labelElementId}
         multiple={hasMultipleChoices}
