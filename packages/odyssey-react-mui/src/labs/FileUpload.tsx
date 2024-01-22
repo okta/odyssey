@@ -19,19 +19,17 @@ import {
   useState,
 } from "react";
 import styled from "@emotion/styled";
-import { IconButton } from "@mui/material";
 
 import { Button } from "../Button";
-import { DeleteIcon, UploadIcon } from "../icons.generated";
+import { UploadIcon } from "../icons.generated";
 import { Field } from "../Field";
 import { FieldComponentProps } from "../FieldComponentProps";
-import { MuiPropsContext } from "../MuiPropsContext";
-import { Tooltip } from "../Tooltip";
 import { Support } from "../Typography";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
 } from "../OdysseyDesignTokensContext";
+import { FileUploadPreview } from "./FileUploadPreview";
 
 export const fileUploadTypes = ["single", "multiple"] as const;
 export const fileUploadVariants = [
@@ -39,37 +37,6 @@ export const fileUploadVariants = [
   "dragAndDrop",
   "dragAndDropWithIcon",
 ] as const;
-
-export type FileUploadProps = {
-  /**
-   * an array of file types the user is able to upload. See https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept#unique_file_type_specifiers for examples
-   */
-  acceptedFileTypes?: string[];
-  /**
-   * If `true` the drag and drop area will not be rendered
-   */
-  isButtonOnly?: boolean;
-  /**
-   * The label for the `input` element.
-   */
-  label: string;
-  /**
-   * Function that is called when the list of ifles to upload is changed
-   */
-  onChange: (files: File[]) => void;
-  /**
-   * If `true` multiple files can be uploaded.
-   */
-  type?: (typeof fileUploadTypes)[number];
-} & Pick<
-  FieldComponentProps,
-  | "errorMessage"
-  | "hint"
-  | "HintLinkComponent"
-  | "id"
-  | "isDisabled"
-  | "isOptional"
->;
 
 const BaseInputWrapper = styled.div`
   position: relative;
@@ -140,62 +107,6 @@ const ButtonAndInfoContainer = styled.div`
   justify-content: center;
 `;
 
-const PreviewContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{
-  isDisabled: FileUploadProps["isDisabled"];
-  odysseyDesignTokens: DesignTokens;
-}>`
-  margin-block-start: ${({ odysseyDesignTokens }) =>
-    odysseyDesignTokens.Spacing2};
-  pointer-events: ${({ isDisabled }) => (isDisabled ? "none" : "normal")};
-  color: ${({ isDisabled, odysseyDesignTokens }) =>
-    isDisabled ? odysseyDesignTokens.TypographyColorDisabled : "inherit"};
-`;
-
-const UploadedFileContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{
-  odysseyDesignTokens: DesignTokens;
-}>`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: ${({ odysseyDesignTokens }) =>
-    `${odysseyDesignTokens.Spacing1} ${odysseyDesignTokens.Spacing2}`};
-  border-radius: ${({ odysseyDesignTokens }) =>
-    odysseyDesignTokens.BorderRadiusMain};
-  transition: ${({ odysseyDesignTokens }) =>
-    `background-color ${odysseyDesignTokens.TransitionTimingMain}`};
-
-  button {
-    transform: scale(0);
-  }
-
-  &:hover,
-  &:focus-within,
-  &:focus {
-    button {
-      transform: scale(1);
-    }
-  }
-
-  &:hover,
-  &:focus-within {
-    background-color: ${({ odysseyDesignTokens }) =>
-      odysseyDesignTokens.HueNeutral100};
-  }
-
-  &:focus {
-    border-color: ${({ odysseyDesignTokens }) =>
-      odysseyDesignTokens.FocusOutlineColorPrimary};
-    box-shadow: ${({ odysseyDesignTokens }) =>
-      `0 0 0 2px ${odysseyDesignTokens.FocusOutlineColorPrimary}`};
-    outline: ${({ odysseyDesignTokens }) =>
-      `${odysseyDesignTokens.FocusOutlineWidthMain} ${odysseyDesignTokens.FocusOutlineStyle} transparent`};
-  }
-`;
-
 const UploadIllustrationContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{
@@ -215,83 +126,6 @@ const UploadIllustrationContainer = styled("div", {
   }
 `;
 
-type UploadedFileProps = {
-  name: string;
-  handleFileRemoval?: (name: string) => void;
-};
-
-const UploadedFile = ({
-  name,
-  handleFileRemoval,
-  ...rest
-}: UploadedFileProps) => {
-  const odysseyDesignTokens = useOdysseyDesignTokens();
-
-  const deleteHandler = useCallback(() => {
-    handleFileRemoval?.(name);
-  }, [handleFileRemoval, name]);
-
-  const renderDeleteButton = useCallback(
-    (muiProps) => {
-      return (
-        <IconButton
-          {...muiProps}
-          aria-label="Clear"
-          onClick={deleteHandler}
-          size="small"
-        >
-          <DeleteIcon />
-        </IconButton>
-      );
-    },
-    [deleteHandler]
-  );
-
-  return (
-    <UploadedFileContainer
-      {...rest}
-      tabIndex={0}
-      odysseyDesignTokens={odysseyDesignTokens}
-    >
-      {name}
-      <Tooltip ariaType="description" placement="top" text="Delete">
-        <MuiPropsContext.Consumer>
-          {renderDeleteButton}
-        </MuiPropsContext.Consumer>
-      </Tooltip>
-    </UploadedFileContainer>
-  );
-};
-
-type UploadedFilesPreviewProps = {
-  fileNames: string[];
-  handleFileRemoval?: (name: string) => void;
-  isDisabled: FileUploadProps["isDisabled"];
-};
-
-const UploadedFilesPreview = ({
-  fileNames,
-  handleFileRemoval,
-  isDisabled,
-}: UploadedFilesPreviewProps) => {
-  const odysseyDesignTokens = useOdysseyDesignTokens();
-
-  return (
-    <PreviewContainer
-      isDisabled={isDisabled}
-      odysseyDesignTokens={odysseyDesignTokens}
-    >
-      {fileNames?.map((name: string, index: number) => (
-        <UploadedFile
-          key={`${index}-${name}`}
-          handleFileRemoval={handleFileRemoval}
-          name={name}
-        />
-      ))}
-    </PreviewContainer>
-  );
-};
-
 const UploadIllustration = () => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
@@ -310,6 +144,37 @@ const UploadIllustration = () => {
     </UploadIllustrationContainer>
   );
 };
+
+export type FileUploadProps = {
+  /**
+   * an array of file types the user is able to upload. See https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept#unique_file_type_specifiers for examples
+   */
+  acceptedFileTypes?: string[];
+  /**
+   * If `true` the drag and drop area will not be rendered
+   */
+  isButtonOnly?: boolean;
+  /**
+   * The label for the `input` element.
+   */
+  label: string;
+  /**
+   * Function that is called when the list of ifles to upload is changed
+   */
+  onChange: (files: File[]) => void;
+  /**
+   * If `true` multiple files can be uploaded.
+   */
+  type?: (typeof fileUploadTypes)[number];
+} & Pick<
+  FieldComponentProps,
+  | "errorMessage"
+  | "hint"
+  | "HintLinkComponent"
+  | "id"
+  | "isDisabled"
+  | "isOptional"
+>;
 
 const FileUpload = ({
   acceptedFileTypes,
@@ -396,7 +261,7 @@ const FileUpload = ({
                 variant="secondary"
               />
             </BaseInputWrapper>
-            <UploadedFilesPreview
+            <FileUploadPreview
               fileNames={fileNames}
               handleFileRemoval={handleFileRemoval}
               isDisabled={isDisabled}
@@ -423,7 +288,7 @@ const FileUpload = ({
               />
             </ButtonAndInfoContainer>
           </InputContainer>
-          <UploadedFilesPreview
+          <FileUploadPreview
             fileNames={fileNames}
             handleFileRemoval={handleFileRemoval}
             isDisabled={isDisabled}
