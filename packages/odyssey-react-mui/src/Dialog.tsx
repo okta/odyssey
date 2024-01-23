@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { useTranslation } from "react-i18next";
 import { Dialog as MuiDialog } from "@mui/material";
 import {
   DialogTitle,
@@ -59,7 +60,6 @@ export type DialogProps = {
    * The title of the Dialog
    */
   title: string;
-  ariaLabel: string;
 } & AllowedProps;
 
 const Dialog = ({
@@ -72,8 +72,8 @@ const Dialog = ({
   testId,
   title,
   translate,
-  ariaLabel,
 }: DialogProps) => {
+  const { t } = useTranslation();
   const [isContentScrollable, setIsContentScrollable] = useState(false);
   const dialogContentRef = useRef<HTMLDivElement>(null);
 
@@ -111,7 +111,7 @@ const Dialog = ({
       <DialogTitle translate={translate}>
         {title}
         <Button
-          ariaLabel={ariaLabel}
+          ariaLabel={t("close.text")}
           label=""
           onClick={onClose}
           size="small"
