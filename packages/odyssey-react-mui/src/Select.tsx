@@ -288,7 +288,8 @@ const Select = <
               />
             )}
             {option.text}
-            {internalSelectedValues === option?.value && (
+            {(internalSelectedValues?.includes(option.value) ||
+              internalSelectedValues === option.value) && (
               <ListItemSecondaryAction>
                 <CheckIcon />
               </ListItemSecondaryAction>
