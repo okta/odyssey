@@ -16,12 +16,10 @@ const odysseyTheme = createOdysseyMuiTheme({ odysseyTokens });
 
 export const MuiThemeDecorator: Decorator = (Story, context) => {
   const {
-    canvasElement,
     globals: { locale },
   } = context;
-  const shadowRootElement = canvasElement.parentElement ?? undefined;
   return (
-    <OdysseyProvider languageCode={locale} shadowDomElement={shadowRootElement}>
+    <OdysseyProvider languageCode={locale}>
       {/* @ts-expect-error type mismatch on "typography" */}
       <StorybookThemeProvider theme={odysseyTheme}>
         <CssBaseline />
