@@ -273,7 +273,7 @@ const VirtualizedAutocomplete = <
         )}
       />
     ),
-    [errorMessage, hint, isOptional, label, nameOverride]
+    [errorMessage, errorMessageList, hint, isOptional, label, nameOverride]
   );
   const onChange = useCallback<
     NonNullable<
