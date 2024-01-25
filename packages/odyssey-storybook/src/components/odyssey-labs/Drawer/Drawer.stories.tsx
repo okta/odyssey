@@ -162,18 +162,10 @@ const DefaultTemplate: StoryObj<DrawerProps> = {
         <Drawer
           {...props}
           callToActionFirstComponent={
-            <Button
-              label="Primary action"
-              onClick={onClose}
-              variant="primary"
-            />
+            <Button label="Primary" onClick={onClose} variant="primary" />
           }
           callToActionSecondComponent={
-            <Button
-              label="Secondary action"
-              onClick={onClose}
-              variant="secondary"
-            />
+            <Button label="Secondary" onClick={onClose} variant="secondary" />
           }
           callToActionLastComponent={
             <Button label="Cancel" onClick={onClose} variant="floating" />

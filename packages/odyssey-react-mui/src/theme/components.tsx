@@ -1015,28 +1015,45 @@ export const components = ({
     MuiDrawer: {
       styleOverrides: {
         root: {
-          [`& .${drawerClasses.root}-title`]: {
+          [`& .${drawerClasses.root}-header`]: {
             fontSize: odysseyTokens.TypographySizeHeading5,
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
             marginBlockEnd: 0,
-            padding: 0,
+            padding: `0 0 ${odysseyTokens.Spacing4} 0`,
             fontFamily: odysseyTokens.TypographyFamilyHeading,
+            color: odysseyTokens.HueNeutral900,
             [`.${buttonClasses.root}`]: {
               // Pull close button by inline padding amount
               marginInlineEnd: `-${odysseyTokens.Spacing3}`,
             },
           },
+          [`& .${drawerClasses.root}-footer`]: {
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "nowrap",
+            justifyContent: "flex-end",
+            alignItems: "center",
+            alignContent: "center",
+          },
         },
         paper: ({ ownerState }) => ({
           width: ownerState.variant === "temporary" ? "400px" : "360px",
           paddingBlockStart: odysseyTokens.Spacing4,
-          paddingBlockEnd: odysseyTokens.Spacing3,
+          paddingBlockEnd: odysseyTokens.Spacing4,
           paddingInline: odysseyTokens.Spacing5,
+          display: "flex",
+          flexDirection: "column",
+          flexWrap: "nowrap",
+          justifyContent: "space-between",
+          alignItems: "stretch",
+          alignContent: "flex-end",
+          color: odysseyTokens.HueNeutral700,
 
           ...(ownerState.variant === "persistent" && {
             borderRadius: "16px",
+            border: "0px",
           }),
 
           // ...(ownerState.variant === "temporary" && {

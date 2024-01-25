@@ -117,35 +117,36 @@ const Drawer = ({
       onClose={onClose}
       variant={variant}
     >
-      <div className={`${drawerClasses.root}-title`}>
-        {title}
-        <Button
-          ariaLabel={ariaLabel}
-          label=""
-          onClick={onClose}
-          size="small"
-          startIcon={<CloseIcon />}
-          variant="floating"
-        />
+      <div>
+        <div className={`${drawerClasses.root}-header`}>
+          {title}
+          <Button
+            ariaLabel={ariaLabel}
+            label=""
+            onClick={onClose}
+            size="small"
+            startIcon={<CloseIcon />}
+            variant="floating"
+          />
+        </div>
+        <Box
+          // dividers={isContentScrollable}
+          ref={dialogContentRef}
+          {...(isContentScrollable && {
+            tabIndex: 0,
+          })}
+        >
+          {content}
+        </Box>
       </div>
-      <Box
-        // dividers={isContentScrollable}
-        ref={dialogContentRef}
-        {...(isContentScrollable && {
-          tabIndex: 0,
-        })}
-      >
-        {content}
-      </Box>
-
       {(callToActionFirstComponent ||
         callToActionSecondComponent ||
         callToActionLastComponent) && (
-        <Box>
+        <div className={`${drawerClasses.root}-footer`}>
           {callToActionLastComponent}
           {callToActionSecondComponent}
           {callToActionFirstComponent}
-        </Box>
+        </div>
       )}
     </MuiDrawer>
   );
