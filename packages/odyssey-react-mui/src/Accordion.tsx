@@ -20,6 +20,7 @@ import {
 } from "@mui/material";
 import { ChevronDownIcon } from "./icons.generated";
 import { Support } from "./Typography";
+import { useUniqueId } from "./useUniqueId";
 
 export type AccordionProps = {
   /**
@@ -50,6 +51,10 @@ export type AccordionProps = {
    * Event fired when the expansion state of the accordion is changed
    */
   onChange?: MuiAccordionProps["onChange"];
+  /**
+   * Defines IDs for the header and the content of the Accordion
+   */
+  id?: string;
 } & (
   | {
       isExpanded: boolean;
@@ -71,7 +76,11 @@ const Accordion = ({
   isExpanded,
   onChange,
   translate,
+  id: idOverride,
 }: AccordionProps) => {
+  const id = useUniqueId(idOverride);
+  const headerId = `${id}-header`;
+  const contentId = `${id}-content`;
   return (
     <MuiAccordion
       defaultExpanded={isDefaultExpanded}
@@ -81,7 +90,11 @@ const Accordion = ({
       onChange={onChange}
       className={hasShadow ? `hasShadow` : undefined}
     >
-      <MuiAccordionSummary expandIcon={<ChevronDownIcon />}>
+      <MuiAccordionSummary
+        expandIcon={<ChevronDownIcon />}
+        id={headerId}
+        aria-controls={contentId}
+      >
         <Support component="div" translate={translate}>
           {label}
         </Support>
