@@ -11,10 +11,12 @@
  */
 
 import React, {
+  InputHTMLAttributes,
   ReactElement,
   forwardRef,
   memo,
   useCallback,
+  useImperativeHandle,
   useMemo,
   useRef,
 } from "react";
@@ -25,7 +27,7 @@ import {
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { AllowedProps } from "./AllowedProps";
-import { getControlState, useInputValues } from "./inputUtils";
+import { FocusHandle, getControlState, useInputValues } from "./inputUtils";
 import { ForwardRefWithType } from "./@types/react-augment";
 
 export type NativeSelectOption = {
@@ -42,6 +44,12 @@ export type NativeSelectProps<
   HasMultipleChoices extends boolean
 > = {
   /**
+   * This prop helps users to fill forms faster, especially on mobile devices.
+   * The name can be confusing, as it's more like an autofill.
+   * @see https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill
+   */
+  autoCompleteType?: InputHTMLAttributes<HTMLInputElement>["autoComplete"];
+  /**
    * The options or optgroup elements within the NativeSelect
    */
   children?: ReactElement<"option"> | ReactElement<"optgroup">;
@@ -53,6 +61,10 @@ export type NativeSelectProps<
    * If `true`, the Select allows multiple selections
    */
   hasMultipleChoices?: HasMultipleChoices;
+  /**
+   * The ref forwarded to the NativeSelect to expose focus()
+   */
+  inputFocusRef?: React.RefObject<FocusHandle>;
   /**
    * @deprecated Use `hasMultipleChoices` instead
    */
@@ -98,6 +110,7 @@ const NativeSelect: ForwardRefWithType = forwardRef(
     HasMultipleChoices extends boolean
   >(
     {
+      autoCompleteType,
       defaultValue,
       errorMessage,
       errorMessageList,
@@ -105,6 +118,7 @@ const NativeSelect: ForwardRefWithType = forwardRef(
       hint,
       HintLinkComponent,
       id: idOverride,
+      inputFocusRef,
       isDisabled = false,
       isFullWidth = false,
       isMultiSelect,
@@ -126,6 +140,21 @@ const NativeSelect: ForwardRefWithType = forwardRef(
         uncontrolledValue: defaultValue,
       })
     );
+    const inputRef = useRef<HTMLSelectElement>(null);
+
+    useImperativeHandle(
+      inputFocusRef,
+      () => {
+        const element = inputRef.current;
+        return {
+          focus: () => {
+            element && element.focus();
+          },
+        };
+      },
+      []
+    );
+
     const inputValues = useInputValues({
       defaultValue,
       value,
@@ -153,6 +182,7 @@ const NativeSelect: ForwardRefWithType = forwardRef(
         <MuiSelect
           {...inputValues}
           aria-describedby={ariaDescribedBy}
+          autoComplete={autoCompleteType}
           children={children}
           id={idOverride}
           inputProps={{
@@ -160,6 +190,7 @@ const NativeSelect: ForwardRefWithType = forwardRef(
             "aria-labelledby": labelElementId,
             "data-se": testId,
           }}
+          inputRef={inputRef}
           name={idOverride}
           multiple={hasMultipleChoices}
           native={true}
@@ -171,6 +202,7 @@ const NativeSelect: ForwardRefWithType = forwardRef(
         />
       ),
       [
+        autoCompleteType,
         children,
         idOverride,
         inputValues,
