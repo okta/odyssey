@@ -33,6 +33,11 @@ import type { AllowedProps } from "./AllowedProps";
 
 export type DialogProps = {
   /**
+   * @deprecated `aria-label` for close button comes from translation file
+   */
+  /** **Deprecated:** `aria-label` for close button comes from translation file */
+  ariaLabel?: string;
+  /**
    * An optional Button object to be situated in the Dialog footer. Should almost always be of variant `primary`.
    */
   callToActionFirstComponent?: ReactElement<typeof Button>;
