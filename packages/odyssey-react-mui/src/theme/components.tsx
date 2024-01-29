@@ -685,7 +685,7 @@ export const components = ({
             paddingInline: odysseyTokens.Spacing4,
           }),
           ...(ownerState.fullWidth === true && {
-            display: "block",
+            // display: "block",
             width: "100%",
             marginBlock: "0",
             marginInline: "0",
@@ -701,6 +701,10 @@ export const components = ({
             [`.${buttonClasses.endIcon}, .${buttonClasses.startIcon}`]: {
               margin: "0",
             },
+
+            ...(ownerState.size === "large" && {
+              padding: odysseyTokens.Spacing4,
+            }),
 
             ...(ownerState.size === "small" && {
               padding: odysseyTokens.Spacing2,
