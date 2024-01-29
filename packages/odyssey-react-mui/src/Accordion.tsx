@@ -99,7 +99,9 @@ const Accordion = ({
           {label}
         </Support>
       </MuiAccordionSummary>
-      <MuiAccordionDetails>{children}</MuiAccordionDetails>
+      <MuiAccordionDetails
+        aria-labelledby={headerId}
+      >{children}</MuiAccordionDetails>
     </MuiAccordion>
   );
 };
