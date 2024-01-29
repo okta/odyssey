@@ -35,6 +35,7 @@ export type CheckboxGroupProps = {
   label: string;
 } & Pick<
   FieldComponentProps,
+  | "ariaDescribedBy"
   | "errorMessage"
   | "errorMessageList"
   | "hint"
@@ -45,6 +46,7 @@ export type CheckboxGroupProps = {
   AllowedProps;
 
 const CheckboxGroup = ({
+  ariaDescribedBy,
   children,
   errorMessage,
   errorMessageList,
@@ -75,6 +77,7 @@ const CheckboxGroup = ({
 
   return (
     <Field
+      ariaDescribedBy={ariaDescribedBy}
       errorMessage={errorMessage}
       errorMessageList={errorMessageList}
       fieldType="group"

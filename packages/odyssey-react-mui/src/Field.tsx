@@ -80,6 +80,7 @@ export type FieldProps = {
 };
 
 const Field = ({
+  ariaDescribedBy,
   errorMessage,
   errorMessageList,
   fieldType,
@@ -96,6 +97,7 @@ const Field = ({
 }: FieldProps &
   Pick<
     FieldComponentProps,
+    | "ariaDescribedBy"
     | "errorMessage"
     | "errorMessageList"
     | "hint"
@@ -113,9 +115,11 @@ const Field = ({
     errorMessage || errorMessageList ? `${id}-error` : undefined;
   const labelElementId = `${id}-label`;
 
-  const ariaDescribedBy = useMemo(
-    () => [hintId, errorMessageElementId].join(" ").trim() || undefined,
-    [errorMessageElementId, hintId]
+  const localAriaDescribedBy = useMemo(
+    () =>
+      [hintId, errorMessageElementId, ariaDescribedBy].join(" ").trim() ||
+      undefined,
+    [ariaDescribedBy, errorMessageElementId, hintId]
   );
 
   const { isDisabled: isFieldsetDisabled } = useFieldset();
@@ -160,7 +164,7 @@ const Field = ({
       )}
 
       {renderFieldComponent({
-        ariaDescribedBy,
+        ariaDescribedBy: localAriaDescribedBy,
         errorMessageElementId,
         id,
         labelElementId,

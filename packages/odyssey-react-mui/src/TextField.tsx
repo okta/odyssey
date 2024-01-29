@@ -106,6 +106,7 @@ export type TextFieldProps = {
 const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (
     {
+      ariaDescribedBy,
       autoCompleteType,
       defaultValue,
       hasInitialFocus,
@@ -237,6 +238,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 
     return (
       <Field
+        ariaDescribedBy={ariaDescribedBy}
         errorMessage={errorMessage}
         errorMessageList={errorMessageList}
         fieldType="single"
