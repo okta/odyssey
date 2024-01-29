@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.0](https://github.com/okta/odyssey/compare/v1.10.3...v1.11.0) (2024-01-29)
+
+### Features
+
+- support aria-controls and aria-pressed in PasswordField ([#2102](https://github.com/okta/odyssey/issues/2102)) ([196a68e](https://github.com/okta/odyssey/commit/196a68e22199d70cd02a2b8ad5e8b0b4c456cf19))
+- Support id for Accordion ([#2101](https://github.com/okta/odyssey/issues/2101)) ([3ecb265](https://github.com/okta/odyssey/commit/3ecb265d758a7766a6670c0d1786c8053eefec16))
+
 ## [1.10.3](https://github.com/okta/odyssey/compare/v1.10.2...v1.10.3) (2024-01-29)
 
 **Note:** Version bump only for package @okta/odyssey-react-mui
