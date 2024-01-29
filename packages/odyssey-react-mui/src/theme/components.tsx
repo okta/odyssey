@@ -1523,25 +1523,6 @@ export const components = ({
           [`& .${formGroupClasses.root}`]: {
             marginBlockStart: odysseyTokens.Spacing1,
           },
-
-          ["& .OdsSelect-container"]: {
-            position: "relative",
-            width: "100%",
-            display: "flex",
-          },
-
-          ["& .OdsSelect-placeholderValues"]: {
-            position: "absolute",
-            top: odysseyTokens.Spacing0,
-            bottom: odysseyTokens.Spacing0,
-            left: odysseyTokens.Spacing1,
-            marginInlineStart: odysseyTokens.BorderWidthMain,
-            right: odysseyTokens.Spacing5,
-            opacity: 1,
-            pointerEvents: "none",
-            display: "flex",
-            alignItems: "center",
-          },
         }),
       },
     },

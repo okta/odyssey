@@ -41,12 +41,66 @@ import {
   getControlState,
 } from "./inputUtils";
 import { FocusHandle } from "./@types/react-augment";
+import styled from "@emotion/styled";
+import {
+  useOdysseyDesignTokens,
+  DesignTokens,
+} from "./OdysseyDesignTokensContext";
 
 export type SelectOption = {
   text: string;
   type?: "heading" | "option";
   value?: string;
 };
+
+const SelectContainer = styled.div`
+  position: relative;
+  width: 100%;
+  display: flex;
+`;
+
+const PlaceholderValuesContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>`
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing0};
+  right: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing5};
+  bottom: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing0};
+  left: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing1};
+  margin-inline-start: ${({ odysseyDesignTokens }) =>
+    odysseyDesignTokens.BorderWidthMain};
+  opacity: 1;
+  pointer-events: none;
+`;
+
+const PlaceholderIcon = styled(CloseCircleFilledIcon, {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>`
+  font-size: 1em;
+  margin-inline-start: ${({ odysseyDesignTokens }) =>
+    odysseyDesignTokens.BorderWidthHeavy};
+  margin-inline-end: -${({ odysseyDesignTokens }) => odysseyDesignTokens.BorderWidthMain};
+`;
+
+const ChipContainer = styled(MuiBox, {
+  shouldForwardProp: (prop) =>
+    prop !== "isPlaceholder" && prop !== "odysseyDesignTokens",
+})<{
+  isPlaceholder?: boolean;
+  odysseyDesignTokens: DesignTokens;
+}>`
+  display: flex;
+  flex-wrap: wrap;
+  gap: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing1};
+  pointer-events: none;
+  opacity: ${({ isPlaceholder }) => (isPlaceholder ? 1 : 0)};
+`;
 
 export type SelectValueType<HasMultipleChoices> =
   HasMultipleChoices extends true ? string[] : string;
@@ -166,6 +220,7 @@ const Select = <
     controlledStateRef.current === CONTROLLED ? value : defaultValue
   );
   const inputRef = useRef<HTMLSelectElement>(null);
+  const odysseyDesignTokens = useOdysseyDesignTokens();
 
   useImperativeHandle(
     inputFocusRef,
@@ -276,12 +331,8 @@ const Select = <
                   {!isPlaceholder &&
                     controlledStateRef.current === CONTROLLED &&
                     hasMultipleChoices && (
-                      <CloseCircleFilledIcon
-                        sx={{
-                          marginInlineStart: 2,
-                          fontSize: "1em",
-                          marginInlineEnd: -1,
-                        }}
+                      <PlaceholderIcon
+                        odysseyDesignTokens={odysseyDesignTokens}
                       />
                     )}
                 </>
@@ -316,17 +367,12 @@ const Select = <
       // and disable
       if (hasMultipleChoices && controlledStateRef.current === CONTROLLED) {
         return (
-          <MuiBox
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: 1,
-              pointerEvents: "none",
-              opacity: isPlaceholder ? 1 : 0,
-            }}
+          <ChipContainer
+            isPlaceholder={isPlaceholder}
+            odysseyDesignTokens={odysseyDesignTokens}
           >
             {renderedChips}
-          </MuiBox>
+          </ChipContainer>
         );
       }
 
@@ -369,7 +415,7 @@ const Select = <
 
   const renderFieldComponent = useCallback(
     ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
-      <div className="OdsSelect-container">
+      <SelectContainer>
         <MuiSelect
           {...inputValues}
           aria-describedby={ariaDescribedBy}
@@ -392,11 +438,11 @@ const Select = <
           translate={translate}
         />
         {hasMultipleChoices && value && (
-          <div className="OdsSelect-placeholderValues">
+          <PlaceholderValuesContainer odysseyDesignTokens={odysseyDesignTokens}>
             {renderValue({ selected: value, isPlaceholder: true })}
-          </div>
+          </PlaceholderValuesContainer>
         )}
-      </div>
+      </SelectContainer>
     ),
     [
       children,
