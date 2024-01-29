@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.1](https://github.com/okta/odyssey/compare/v1.11.0...v1.11.1) (2024-01-29)
+
+### Bug Fixes
+
+- move testId to inputProps for all input components ([#2096](https://github.com/okta/odyssey/issues/2096)) ([94ec2ea](https://github.com/okta/odyssey/commit/94ec2ea88f56beb3dd7ac143a6aaec5c173d6261))
+
 ## [1.11.0](https://github.com/okta/odyssey/compare/v1.10.3...v1.11.0) (2024-01-29)
 
 ### Features
