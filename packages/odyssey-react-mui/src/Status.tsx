@@ -21,7 +21,6 @@ export const statusSeverityValues = [
   "success",
   "warning",
 ] as const;
-export const statusVariantValues = ["lamp", "pill"] as const;
 
 export type StatusProps = {
   /**
@@ -32,19 +31,9 @@ export type StatusProps = {
    * Determine the color and icon of the Status
    */
   severity: (typeof statusSeverityValues)[number];
-  /**
-   * The style of the Status indicator
-   */
-  variant?: (typeof statusVariantValues)[number];
 } & AllowedProps;
 
-export const Status = ({
-  label,
-  severity,
-  testId,
-  translate,
-  variant = "lamp",
-}: StatusProps) => {
+export const Status = ({ label, severity, testId, translate }: StatusProps) => {
   const muiProps = useMuiProps();
 
   return (
@@ -54,7 +43,7 @@ export const Status = ({
       data-se={testId}
       label={label}
       translate={translate}
-      variant={variant}
+      variant="pill"
     />
   );
 };

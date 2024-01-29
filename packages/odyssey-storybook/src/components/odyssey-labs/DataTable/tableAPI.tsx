@@ -60,7 +60,6 @@ export const columns: DataColumn[] = [
         <Status
           label={value.charAt(0).toUpperCase() + value.slice(1)}
           severity={severity}
-          variant="pill"
         />
       );
     },

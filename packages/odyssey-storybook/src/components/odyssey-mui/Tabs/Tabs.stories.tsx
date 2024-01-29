@@ -119,7 +119,7 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
           summary: "number",
         },
         defaultValue: {
-          summary: "999",
+          summary: "100",
         },
       },
       type: {

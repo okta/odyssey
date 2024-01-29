@@ -42,7 +42,7 @@ export const columns: DataColumn[] = [
           : value === "Not started"
           ? "error"
           : "default";
-      return <Status label={value} severity={severity} variant="pill" />;
+      return <Status label={value} severity={severity} />;
     },
   },
   {
