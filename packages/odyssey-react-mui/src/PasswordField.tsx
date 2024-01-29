@@ -165,11 +165,13 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
             hasShowPassword && (
               <InputAdornment position="end">
                 <IconButton
+                  aria-controls={id}
                   aria-label={
                     inputType === "password"
                       ? t("passwordfield.icon.label.show")
                       : t("passwordfield.icon.label.hide")
                   }
+                  aria-pressed={inputType === "text"}
                   onClick={togglePasswordVisibility}
                 >
                   {inputType === "password" ? <ShowIcon /> : <HideIcon />}
