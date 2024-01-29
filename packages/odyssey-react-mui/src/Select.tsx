@@ -36,10 +36,10 @@ import { CheckIcon } from "./icons.generated";
 import type { AllowedProps } from "./AllowedProps";
 import {
   ComponentControlledState,
+  FocusHandle,
   useInputValues,
   getControlState,
 } from "./inputUtils";
-import { FocusHandle } from "./@types/react-augment";
 
 export type SelectOption = {
   text: string;
@@ -63,9 +63,9 @@ export type SelectProps<
    */
   hasMultipleChoices?: HasMultipleChoices;
   /**
-   * The ref forwarded to the Select to expose focus()
+   * The ref forwarded to the Select
    */
-  inputFocusRef?: React.RefObject<FocusHandle>;
+  inputRef?: React.RefObject<FocusHandle>;
   /**
    * @deprecated Use `hasMultipleChoices` instead.
    */
@@ -136,7 +136,7 @@ const Select = <
   hint,
   HintLinkComponent,
   id: idOverride,
-  inputFocusRef,
+  inputRef,
   isDisabled = false,
   isFullWidth = false,
   isMultiSelect,
@@ -164,15 +164,14 @@ const Select = <
   const [internalSelectedValues, setInternalSelectedValues] = useState(
     controlledStateRef.current === CONTROLLED ? value : defaultValue
   );
-  const inputRef = useRef<HTMLSelectElement>(null);
+  const localInputRef = useRef<HTMLSelectElement>(null);
 
   useImperativeHandle(
-    inputFocusRef,
+    inputRef,
     () => {
-      const element = inputRef.current;
       return {
         focus: () => {
-          element && element.focus();
+          localInputRef.current?.focus();
         },
       };
     },
@@ -290,9 +289,9 @@ const Select = <
         aria-describedby={ariaDescribedBy}
         aria-errormessage={errorMessageElementId}
         children={children}
-        data-se={testId}
         id={id}
-        inputRef={inputRef}
+        inputProps={{ "data-se": testId }}
+        inputRef={localInputRef}
         labelId={labelElementId}
         multiple={hasMultipleChoices}
         name={nameOverride ?? id}

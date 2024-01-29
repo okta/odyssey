@@ -267,6 +267,7 @@ const Autocomplete = <
               ...params.inputProps,
               "aria-errormessage": errorMessageElementId,
               "aria-labelledby": labelElementId,
+              "data-se": testId,
             }}
             aria-describedby={ariaDescribedBy}
             id={id}
@@ -284,6 +285,7 @@ const Autocomplete = <
       isOptional,
       label,
       nameOverride,
+      testId,
     ]
   );
   const onChange = useCallback<
@@ -324,7 +326,6 @@ const Autocomplete = <
       {...inputValueProp}
       // AutoComplete is wrapped in a div within MUI which does not get the disabled attr. So this aria-disabled gets set in the div
       aria-disabled={isDisabled}
-      data-se={testId}
       disableCloseOnSelect={hasMultipleChoices}
       disabled={isDisabled}
       freeSolo={isCustomValueAllowed}
