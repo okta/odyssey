@@ -26,8 +26,7 @@ import { InputAdornment, InputBase } from "@mui/material";
 import { FieldComponentProps } from "./FieldComponentProps";
 import { Field } from "./Field";
 import { AllowedProps } from "./AllowedProps";
-import { useInputValues, getControlState } from "./inputUtils";
-import { FocusHandle } from "./@types/react-augment";
+import { FocusHandle, useInputValues, getControlState } from "./inputUtils";
 
 export const textFieldTypeValues = [
   "email",
@@ -57,9 +56,9 @@ export type TextFieldProps = {
    */
   hasInitialFocus?: boolean;
   /**
-   * The ref forwarded to the TextField to expose focus()
+   * The ref forwarded to the TextField
    */
-  inputFocusRef?: React.RefObject<FocusHandle>;
+  inputRef?: React.RefObject<FocusHandle>;
   /**
    * Hints at the type of data that might be entered by the user while editing the element or its contents
    * @see https://html.spec.whatwg.org/multipage/interaction.html#input-modalities:-the-inputmode-attribute
@@ -116,7 +115,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       hint,
       HintLinkComponent,
       id: idOverride,
-      inputFocusRef,
+      inputRef,
       inputMode,
       isDisabled = false,
       isFullWidth = false,
@@ -149,14 +148,13 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       controlState: controlledStateRef.current,
     });
 
-    const inputRef = useRef<HTMLInputElement>(null);
+    const localInputRef = useRef<HTMLInputElement>(null);
     useImperativeHandle(
-      inputFocusRef,
+      inputRef,
       () => {
-        const element = inputRef.current;
         return {
           focus: () => {
-            element && element.focus();
+            localInputRef.current?.focus();
           },
         };
       },
@@ -180,7 +178,6 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           autoComplete={autoCompleteType}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus={hasInitialFocus}
-          data-se={testId}
           endAdornment={
             endAdornment && (
               <InputAdornment position="end" translate={translate}>
@@ -192,9 +189,10 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           inputProps={{
             "aria-errormessage": errorMessageElementId,
             "aria-labelledby": labelElementId,
+            "data-se": testId,
             inputmode: inputMode,
           }}
-          inputRef={inputRef}
+          inputRef={localInputRef}
           multiline={isMultiline}
           name={nameOverride ?? id}
           onBlur={onBlur}
