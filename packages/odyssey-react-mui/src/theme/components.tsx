@@ -553,7 +553,7 @@ export const components = ({
           borderRadius: odysseyTokens.BorderRadiusMain,
           borderColor: "transparent",
           fontSize: odysseyTokens.TypographySizeBody,
-          fontWeight: 500,
+          fontWeight: odysseyTokens.TypographyWeightHeading,
           fontFamily: odysseyTokens.TypographyFamilyButton,
           lineHeight: odysseyTokens.TypographyLineHeightUi,
           whiteSpace: "nowrap",
