@@ -1016,6 +1016,7 @@ export const components = ({
     MuiDrawer: {
       styleOverrides: {
         root: {
+          height: "100%",
           [`& .${drawerClasses.root}-header`]: {
             fontSize: odysseyTokens.TypographySizeHeading5,
             display: "flex",
@@ -1053,6 +1054,7 @@ export const components = ({
           color: odysseyTokens.HueNeutral700,
 
           ...(ownerState.variant === "persistent" && {
+            position: "static",
             borderRadius: "16px",
             border: "0px",
           }),
