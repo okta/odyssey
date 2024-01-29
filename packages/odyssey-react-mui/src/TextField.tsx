@@ -56,9 +56,9 @@ export type TextFieldProps = {
    */
   hasInitialFocus?: boolean;
   /**
-   * The ref forwarded to the TextField to expose focus()
+   * The ref forwarded to the TextField
    */
-  inputFocusRef?: React.RefObject<FocusHandle>;
+  inputRef?: React.RefObject<FocusHandle>;
   /**
    * Hints at the type of data that might be entered by the user while editing the element or its contents
    * @see https://html.spec.whatwg.org/multipage/interaction.html#input-modalities:-the-inputmode-attribute
@@ -115,7 +115,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       hint,
       HintLinkComponent,
       id: idOverride,
-      inputFocusRef,
+      inputRef,
       inputMode,
       isDisabled = false,
       isFullWidth = false,
@@ -148,14 +148,13 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       controlState: controlledStateRef.current,
     });
 
-    const inputRef = useRef<HTMLInputElement>(null);
+    const localInputRef = useRef<HTMLInputElement>(null);
     useImperativeHandle(
-      inputFocusRef,
+      inputRef,
       () => {
-        const element = inputRef.current;
         return {
           focus: () => {
-            element && element.focus();
+            localInputRef.current?.focus();
           },
         };
       },
@@ -193,7 +192,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             "data-se": testId,
             inputmode: inputMode,
           }}
-          inputRef={inputRef}
+          inputRef={localInputRef}
           multiline={isMultiline}
           name={nameOverride ?? id}
           onBlur={onBlur}

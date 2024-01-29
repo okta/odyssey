@@ -46,9 +46,9 @@ export type CheckboxProps = {
    */
   id?: string;
   /**
-   * The ref forwarded to the Checkbox to expose focus()
+   * The ref forwarded to the Checkbox
    */
-  inputFocusRef?: React.RefObject<FocusHandle>;
+  inputRef?: React.RefObject<FocusHandle>;
   /**
    * Determines whether the Checkbox is disabled
    */
@@ -89,7 +89,7 @@ const Checkbox = ({
   ariaLabel,
   ariaLabelledBy,
   id: idOverride,
-  inputFocusRef,
+  inputRef,
   isChecked,
   isDefaultChecked,
   isDisabled,
@@ -119,14 +119,13 @@ const Checkbox = ({
     return { defaultChecked: isDefaultChecked };
   }, [isDefaultChecked, isChecked]);
 
-  const inputRef = useRef<HTMLInputElement>(null);
+  const localInputRef = useRef<HTMLInputElement>(null);
   useImperativeHandle(
-    inputFocusRef,
+    inputRef,
     () => {
-      const element = inputRef.current;
       return {
         focus: () => {
-          element && element.focus();
+          localInputRef.current?.focus();
         },
       };
     },
@@ -185,7 +184,7 @@ const Checkbox = ({
           inputProps={{
             "data-se": testId,
           }}
-          inputRef={inputRef}
+          inputRef={localInputRef}
           sx={() => ({
             marginBlockStart: "2px",
           })}

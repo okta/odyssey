@@ -62,9 +62,9 @@ export type NativeSelectProps<
    */
   hasMultipleChoices?: HasMultipleChoices;
   /**
-   * The ref forwarded to the NativeSelect to expose focus()
+   * The ref forwarded to the NativeSelect
    */
-  inputFocusRef?: React.RefObject<FocusHandle>;
+  inputRef?: React.RefObject<FocusHandle>;
   /**
    * @deprecated Use `hasMultipleChoices` instead
    */
@@ -118,7 +118,7 @@ const NativeSelect: ForwardRefWithType = forwardRef(
       hint,
       HintLinkComponent,
       id: idOverride,
-      inputFocusRef,
+      inputRef,
       isDisabled = false,
       isFullWidth = false,
       isMultiSelect,
@@ -140,15 +140,14 @@ const NativeSelect: ForwardRefWithType = forwardRef(
         uncontrolledValue: defaultValue,
       })
     );
-    const inputRef = useRef<HTMLSelectElement>(null);
+    const localInputRef = useRef<HTMLSelectElement>(null);
 
     useImperativeHandle(
-      inputFocusRef,
+      inputRef,
       () => {
-        const element = inputRef.current;
         return {
           focus: () => {
-            element && element.focus();
+            localInputRef.current?.focus();
           },
         };
       },
@@ -190,7 +189,7 @@ const NativeSelect: ForwardRefWithType = forwardRef(
             "aria-labelledby": labelElementId,
             "data-se": testId,
           }}
-          inputRef={inputRef}
+          inputRef={localInputRef}
           name={idOverride}
           multiple={hasMultipleChoices}
           native={true}

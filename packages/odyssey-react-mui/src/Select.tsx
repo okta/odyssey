@@ -63,9 +63,9 @@ export type SelectProps<
    */
   hasMultipleChoices?: HasMultipleChoices;
   /**
-   * The ref forwarded to the Select to expose focus()
+   * The ref forwarded to the Select
    */
-  inputFocusRef?: React.RefObject<FocusHandle>;
+  inputRef?: React.RefObject<FocusHandle>;
   /**
    * @deprecated Use `hasMultipleChoices` instead.
    */
@@ -136,7 +136,7 @@ const Select = <
   hint,
   HintLinkComponent,
   id: idOverride,
-  inputFocusRef,
+  inputRef,
   isDisabled = false,
   isFullWidth = false,
   isMultiSelect,
@@ -164,15 +164,14 @@ const Select = <
   const [internalSelectedValues, setInternalSelectedValues] = useState(
     controlledStateRef.current === CONTROLLED ? value : defaultValue
   );
-  const inputRef = useRef<HTMLSelectElement>(null);
+  const localInputRef = useRef<HTMLSelectElement>(null);
 
   useImperativeHandle(
-    inputFocusRef,
+    inputRef,
     () => {
-      const element = inputRef.current;
       return {
         focus: () => {
-          element && element.focus();
+          localInputRef.current?.focus();
         },
       };
     },
@@ -292,7 +291,7 @@ const Select = <
         children={children}
         id={id}
         inputProps={{ "data-se": testId }}
-        inputRef={inputRef}
+        inputRef={localInputRef}
         labelId={labelElementId}
         multiple={hasMultipleChoices}
         name={nameOverride ?? id}

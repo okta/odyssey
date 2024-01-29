@@ -33,9 +33,9 @@ export type LinkProps = {
    */
   icon?: ReactElement;
   /**
-   * The ref forwarded to the TextField to expose focus()
+   * The ref forwarded to the TextField
    */
-  linkFocusRef?: React.RefObject<FocusHandle>;
+  linkRef?: React.RefObject<FocusHandle>;
   /**
    * The click event handler for the Link
    */
@@ -63,7 +63,7 @@ const Link = ({
   children,
   href,
   icon,
-  linkFocusRef,
+  linkRef,
   rel,
   target,
   testId,
@@ -71,14 +71,13 @@ const Link = ({
   variant,
   onClick,
 }: LinkProps) => {
-  const ref = useRef<HTMLAnchorElement>(null);
+  const localLinkRef = useRef<HTMLAnchorElement>(null);
   useImperativeHandle(
-    linkFocusRef,
+    linkRef,
     () => {
-      const element = ref.current;
       return {
         focus: () => {
-          element && element.focus();
+          localLinkRef.current?.focus();
         },
       };
     },
@@ -89,7 +88,7 @@ const Link = ({
     <MuiLink
       data-se={testId}
       href={href}
-      ref={ref}
+      ref={localLinkRef}
       rel={rel}
       target={target}
       translate={translate}

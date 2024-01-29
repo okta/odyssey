@@ -49,9 +49,9 @@ export type PasswordFieldProps = {
    */
   hasShowPassword?: boolean;
   /**
-   * The ref forwarded to the TextField to expose focus()
+   * The ref forwarded to the TextField
    */
-  inputFocusRef?: React.RefObject<FocusHandle>;
+  inputRef?: React.RefObject<FocusHandle>;
   /**
    * The label for the `input` element.
    */
@@ -89,7 +89,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       hasInitialFocus,
       hint,
       id: idOverride,
-      inputFocusRef,
+      inputRef,
       isDisabled = false,
       isFullWidth = false,
       isOptional = false,
@@ -128,14 +128,13 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       controlState: controlledStateRef.current,
     });
 
-    const inputRef = useRef<HTMLInputElement>(null);
+    const localInputRef = useRef<HTMLInputElement>(null);
     useImperativeHandle(
-      inputFocusRef,
+      inputRef,
       () => {
-        const element = inputRef.current;
         return {
           focus: () => {
-            element && element.focus();
+            localInputRef.current?.focus();
           },
         };
       },
@@ -183,7 +182,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
             // role: "textbox" Added because password inputs don't have an implicit role assigned. This causes problems with element selection.
             role: "textbox",
           }}
-          inputRef={inputRef}
+          inputRef={localInputRef}
           name={nameOverride ?? id}
           onChange={onChange}
           onFocus={onFocus}

@@ -49,9 +49,9 @@ export type ButtonProps = {
    */
   ariaDescribedBy?: string;
   /**
-   * The ref forwarded to the Button to expose focus()
+   * The ref forwarded to the Button
    */
-  buttonFocusRef?: React.RefObject<FocusHandle>;
+  buttonRef?: React.RefObject<FocusHandle>;
   /**
    * The icon element to display at the end of the Button
    */
@@ -119,7 +119,7 @@ const Button = ({
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
-  buttonFocusRef,
+  buttonRef,
   endIcon,
   id,
   isDisabled,
@@ -136,14 +136,13 @@ const Button = ({
 }: ButtonProps) => {
   const muiProps = useMuiProps();
 
-  const ref = useRef<HTMLButtonElement>(null);
+  const localButtonRef = useRef<HTMLButtonElement>(null);
   useImperativeHandle(
-    buttonFocusRef,
+    buttonRef,
     () => {
-      const element = ref.current;
       return {
         focus: () => {
-          element && element.focus();
+          localButtonRef.current?.focus();
         },
       };
     },
@@ -163,7 +162,7 @@ const Button = ({
         fullWidth={isFullWidth}
         id={id}
         onClick={onClick}
-        ref={ref}
+        ref={localButtonRef}
         size={size}
         startIcon={startIcon}
         translate={translate}
