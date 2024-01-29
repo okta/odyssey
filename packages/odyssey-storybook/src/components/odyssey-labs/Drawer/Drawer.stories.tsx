@@ -155,24 +155,119 @@ const DefaultTemplate: StoryObj<DrawerProps> = {
     const onClose = useCallback(() => {
       setIsVisible(false);
     }, []);
-
+    console.log(props.variant);
     return (
       <>
-        <Button label="Open drawer" onClick={onOpen} variant="primary" />
-        <Drawer
-          {...props}
-          callToActionFirstComponent={
-            <Button label="Primary" onClick={onClose} variant="primary" />
-          }
-          callToActionSecondComponent={
-            <Button label="Secondary" onClick={onClose} variant="secondary" />
-          }
-          callToActionLastComponent={
-            <Button label="Cancel" onClick={onClose} variant="floating" />
-          }
-          onClose={onClose}
-          isOpen={isVisible}
-        />
+        {props.variant === "persistent" ? (
+          <>
+            <Button label="Open drawer" onClick={onOpen} variant="primary" />
+            <div
+              style={{
+                display: "flex",
+                padding: "24px",
+                marginTop: "24px",
+                justifyContent: "space-between",
+                alignItems: "stretch",
+              }}
+            >
+              <div style={{ flex: 2 }}>
+                <p>
+                  You distribute the Source Code version of Licensed Product has
+                  been generated from a designated place, then offering
+                  equivalent access to copy the source code. Distribution
+                  Mechanism"). The Source Code of the date that such additional
+                  attribution requirements to the following terms are defined
+                  when they are first used, and the date it initially became
+                  available, or at least the "copyright" line and a pointer to
+                  where the Work unless that component is used with the
+                  Wikimedia community. Text from external sources may attach
+                  additional attribution requirements to the terms of this
+                  License Agreement will be guided by the terms under which it
+                  was received. In addition, after a new version of the
+                  Derivative Works that consist of the use or not licensed at no
+                  charge to all third parties, if you received it.
+                </p>
+                <p>
+                  Distribution of only part of the Work and reproducing the
+                  content of the Work, but excluding communication that is used
+                  under "fair use" exemptions, or similar exemptions of
+                  copyright (separated by comma, not as a result of any
+                  warranty; and give any other trademarks, service marks, logos
+                  or trade names "Apple", "Apple Computer", "Mac", "Mac OS",
+                  "QuickTime", "QuickTime Streaming Server" or any subsequent
+                  version of the Initial Developer or such Contributor by reason
+                  of your rights to a patent infringement against Apple;
+                  provided that you receive from any Contributor. Disclaimer of
+                  Warranty: THE PACKAGE IS PROVIDED "AS IS" BASIS, WITHOUT
+                  WARRANTY OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+                  PURPOSE. THE ENTIRE RISK AS TO THE WARRANTIES OF
+                  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE ARE
+                  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE
+                  TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL
+                  OR CONSEQUENTIAL DAMAGES, SO THIS LIMITATION OF LIABILITY
+                  SHALL NOT BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL
+                  DAMAGES (INCLUDING, BUT NOT LIMITED TO THE LICENSED PRODUCT IS
+                  FREE OF CHARGE, THERE IS NO WARRANTY EXCEPT AS EXPRESSLY SET
+                  FORTH IN THIS AGREEMENT, NEITHER RECIPIENT NOR ANY
+                  CONTRIBUTORS SHALL HAVE ANY LIABILITY FOR ANY CLAIM, DAMAGES
+                  OR OTHER TORTIOUS ACTION, ARISING OUT OF THE POSSIBILITY OF
+                  SUCH DAMAGES. GENERAL If any Recipient extracts Embedded Fonts
+                  of the Licensed Program.
+                </p>
+              </div>
+              <div style={{ flex: 1 }}>
+                <Drawer
+                  {...props}
+                  callToActionFirstComponent={
+                    <Button
+                      label="Primary"
+                      onClick={onClose}
+                      variant="primary"
+                    />
+                  }
+                  callToActionSecondComponent={
+                    <Button
+                      label="Secondary"
+                      onClick={onClose}
+                      variant="secondary"
+                    />
+                  }
+                  callToActionLastComponent={
+                    <Button
+                      label="Cancel"
+                      onClick={onClose}
+                      variant="floating"
+                    />
+                  }
+                  onClose={onClose}
+                  isOpen={isVisible}
+                />
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <Button label="Open drawer" onClick={onOpen} variant="primary" />
+            <Drawer
+              {...props}
+              callToActionFirstComponent={
+                <Button label="Primary" onClick={onClose} variant="primary" />
+              }
+              callToActionSecondComponent={
+                <Button
+                  label="Secondary"
+                  onClick={onClose}
+                  variant="secondary"
+                />
+              }
+              callToActionLastComponent={
+                <Button label="Cancel" onClick={onClose} variant="floating" />
+              }
+              onClose={onClose}
+              isOpen={isVisible}
+            />
+          </>
+        )}
       </>
     );
   },
