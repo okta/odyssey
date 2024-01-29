@@ -28,6 +28,10 @@ export type AccordionProps = {
    */
   children: ReactNode;
   /**
+   * Defines IDs for the header and the content of the Accordion
+   */
+  id?: string;
+  /**
    * The label text for the AccordionSummary
    */
   label: string;
@@ -51,10 +55,6 @@ export type AccordionProps = {
    * Event fired when the expansion state of the accordion is changed
    */
   onChange?: MuiAccordionProps["onChange"];
-  /**
-   * Defines IDs for the header and the content of the Accordion
-   */
-  id?: string;
 } & (
   | {
       isExpanded: boolean;
@@ -71,12 +71,12 @@ const Accordion = ({
   children,
   label,
   hasShadow = true,
+  id: idOverride,
   isDefaultExpanded,
   isDisabled,
   isExpanded,
   onChange,
   translate,
-  id: idOverride,
 }: AccordionProps) => {
   const id = useUniqueId(idOverride);
   const headerId = `${id}-header`;
@@ -91,17 +91,17 @@ const Accordion = ({
       className={hasShadow ? `hasShadow` : undefined}
     >
       <MuiAccordionSummary
+        aria-controls={contentId}
         expandIcon={<ChevronDownIcon />}
         id={headerId}
-        aria-controls={contentId}
       >
         <Support component="div" translate={translate}>
           {label}
         </Support>
       </MuiAccordionSummary>
-      <MuiAccordionDetails
-        aria-labelledby={headerId}
-      >{children}</MuiAccordionDetails>
+      <MuiAccordionDetails aria-labelledby={headerId}>
+        {children}
+      </MuiAccordionDetails>
     </MuiAccordion>
   );
 };
