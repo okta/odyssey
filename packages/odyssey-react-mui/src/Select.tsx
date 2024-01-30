@@ -84,8 +84,8 @@ const PlaceholderIcon = styled(CloseCircleFilledIcon, {
 }>`
   font-size: 1em;
   margin-inline-start: ${({ odysseyDesignTokens }) =>
-    odysseyDesignTokens.BorderWidthHeavy};
-  margin-inline-end: -${({ odysseyDesignTokens }) => odysseyDesignTokens.BorderWidthMain};
+    odysseyDesignTokens.Spacing2};
+  margin-inline-end: -${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing1};
 `;
 
 const ChipContainer = styled(MuiBox, {
