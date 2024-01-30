@@ -265,7 +265,6 @@ const Select = <
     },
     [normalizedOptions]
   );
-
   // Convert the options into the ReactNode children
   // that will populate the <Select>
   const children = useMemo(
@@ -288,12 +287,13 @@ const Select = <
               />
             )}
             {option.text}
-            {(internalSelectedValues?.includes(option.value) ||
-              internalSelectedValues === option.value) && (
-              <ListItemSecondaryAction>
-                <CheckIcon />
-              </ListItemSecondaryAction>
-            )}
+            {!hasMultipleChoices &&
+              (internalSelectedValues?.includes(option.value) ||
+                internalSelectedValues === option.value) && (
+                <ListItemSecondaryAction>
+                  <CheckIcon />
+                </ListItemSecondaryAction>
+              )}
           </MenuItem>
         );
       }),
