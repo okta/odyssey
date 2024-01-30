@@ -45,6 +45,7 @@ export type RadioGroupProps = {
   value?: RadioProps["value"];
 } & Pick<
   FieldComponentProps,
+  | "ariaDescribedBy"
   | "errorMessage"
   | "errorMessageList"
   | "hint"
@@ -56,6 +57,7 @@ export type RadioGroupProps = {
   AllowedProps;
 
 const RadioGroup = ({
+  ariaDescribedBy,
   children,
   defaultValue,
   errorMessage,
@@ -107,6 +109,7 @@ const RadioGroup = ({
 
   return (
     <Field
+      ariaDescribedBy={ariaDescribedBy}
       errorMessage={errorMessage}
       errorMessageList={errorMessageList}
       fieldType="group"

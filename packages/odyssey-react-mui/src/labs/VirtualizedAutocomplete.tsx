@@ -168,7 +168,13 @@ export type AutocompleteProps<
   getIsOptionEqualToValue?: (option: OptionType, value: OptionType) => boolean;
 } & Pick<
   FieldComponentProps,
-  "errorMessage" | "errorMessageList" | "hint" | "id" | "isOptional" | "name"
+  | "ariaDescribedBy"
+  | "errorMessage"
+  | "errorMessageList"
+  | "hint"
+  | "id"
+  | "isOptional"
+  | "name"
 > &
   AllowedProps;
 
@@ -177,6 +183,7 @@ const VirtualizedAutocomplete = <
   HasMultipleChoices extends boolean | undefined,
   IsCustomValueAllowed extends boolean | undefined
 >({
+  ariaDescribedBy,
   defaultValue,
   errorMessage,
   errorMessageList,
@@ -243,6 +250,7 @@ const VirtualizedAutocomplete = <
   const renderInput = useCallback(
     ({ InputLabelProps, InputProps, ...params }) => (
       <Field
+        ariaDescribedBy={ariaDescribedBy}
         errorMessage={errorMessage}
         errorMessageList={errorMessageList}
         fieldType="single"
@@ -275,6 +283,7 @@ const VirtualizedAutocomplete = <
       />
     ),
     [
+      ariaDescribedBy,
       errorMessage,
       errorMessageList,
       hint,

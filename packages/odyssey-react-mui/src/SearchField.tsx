@@ -78,12 +78,16 @@ export type SearchFieldProps = {
    * The value of the `input` element, to use when controlled.
    */
   value?: string;
-} & Pick<FieldComponentProps, "id" | "isDisabled" | "name" | "isFullWidth"> &
+} & Pick<
+  FieldComponentProps,
+  "ariaDescribedBy" | "id" | "isDisabled" | "name" | "isFullWidth"
+> &
   AllowedProps;
 
 const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
   (
     {
+      ariaDescribedBy,
       autoCompleteType,
       defaultValue,
       hasInitialFocus,
@@ -186,6 +190,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
 
     return (
       <Field
+        ariaDescribedBy={ariaDescribedBy}
         fieldType="single"
         hasVisibleLabel={false}
         id={idOverride}

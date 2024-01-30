@@ -82,6 +82,7 @@ export type PasswordFieldProps = {
 const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
   (
     {
+      ariaDescribedBy,
       autoCompleteType,
       defaultValue,
       errorMessage,
@@ -220,6 +221,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
 
     return (
       <Field
+        ariaDescribedBy={ariaDescribedBy}
         errorMessage={errorMessage}
         errorMessageList={errorMessageList}
         fieldType="single"
