@@ -13,6 +13,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 
 import {
+  Accordion,
   Box,
   Button,
   Drawer,
@@ -25,6 +26,70 @@ import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { axeRun } from "../../../axe-util";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+
+const gridStubText = (
+  <>
+    <p>
+      Curabitur lacinia pharetra placerat. Duis sed aliquet nunc, a sollicitudin
+      orci. Aliquam non rhoncus mauris, in pellentesque mi. Nulla nec justo
+      nisi. Duis pretium mauris ante, et sollicitudin nibh fermentum vel. Nullam
+      a dolor nulla. In vulputate sagittis lacinia. Morbi finibus non quam eget
+      tincidunt. Ut viverra, elit vel dignissim tincidunt, nulla ligula lobortis
+      tellus, sed pellentesque augue nulla nec massa. Orci varius natoque
+      penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed et
+      eros interdum, gravida dolor id, placerat nisl. Cras vel lorem eget ligula
+      vestibulum tincidunt quis sed odio.
+    </p>
+    <p>
+      Ut feugiat eget ipsum a egestas. Praesent vitae eros egestas, tincidunt
+      magna eu, fermentum nulla. Aliquam suscipit, tellus ut interdum congue,
+      magna ex dignissim mi, quis semper turpis dolor eu justo. Maecenas finibus
+      faucibus lacus, non bibendum nisl bibendum dignissim. Nam sollicitudin
+      sollicitudin sapien nec efficitur. Proin faucibus at ante ut dictum.
+      Aenean non nisl felis. In sollicitudin elit vel ligula commodo, at
+      malesuada elit pellentesque. Nullam pretium placerat massa, vitae
+      ullamcorper ipsum euismod eget. Interdum et malesuada fames ac ante ipsum
+      primis in faucibus. Nam sodales vitae ante ac euismod.
+    </p>
+  </>
+);
+
+const drawerLongText = (
+  <>
+    <p>
+      There's no silver bullet when it comes to achieving a Zero Trust security
+      architecture. That's because every organization is at a different stage of
+      its journey, but identity is at the heart of any successful adoption.
+      We've broken down the stages of Identity adoption and progression through
+      a Zero Trust journey for you to base yourself against.
+    </p>
+    <p>
+      Okta seamlessly integrates your identity solution across your entire
+      technology ecosystem, and partners with other security leaders, to unify
+      your approach to Zero Trust. Interested in where your organization falls
+      on this maturity curve? Take our Zero Trust Assessment to get personalized
+      recommendations on how to tackle the Zero Trust journey with identity and
+      secure your organization.Customer Identity is so much more than just the
+      login box - from keeping every click safe to increasing acquisition and
+      retention. Empower app developers, digital leaders, and security teams to
+      accelerate time to market and grow your business. Customer Identity is so
+      much more than just the login box - from keeping every click safe to
+      increasing acquisition and retention.
+    </p>
+    <p>
+      Empower app developers, digital leaders, and security teams to accelerate
+      time to market and grow your business. Customer Identity and Access
+      Management is how companies give end users access to their digital
+      properties. It's also how they govern, collect, analyze, and securely
+      store all that user data. So if an awesome registration and login
+      experience is currently delighting your customers, you're likely doing
+      Identity right. Not quite there yet? It's OK. That's why we created the
+      Customer Identity Cloud — so you could leave authentication to us. Okta's
+      Customer Identity Cloud helps you build strong digital relationships, keep
+      users' clicks safe, and free up developers' time for other projects.
+    </p>
+  </>
+);
 
 const storybookMeta: Meta<DrawerProps> = {
   title: "MUI Components/Drawer",
@@ -133,9 +198,7 @@ const storybookMeta: Meta<DrawerProps> = {
     },
   },
   args: {
-    children:
-      "You are initiating this ship's self-destruct protocol. This ship, and its occupants, will be destroyed.",
-    title: "Initiate self-destruct protocol",
+    children: drawerLongText,
     ariaLabel: "close",
   },
   decorators: [MuiThemeDecorator],
@@ -155,7 +218,6 @@ const DefaultTemplate: StoryObj<DrawerProps> = {
     const onClose = useCallback(() => {
       setIsVisible(false);
     }, []);
-    console.log(props.variant);
     return (
       <>
         {props.variant === "persistent" ? (
@@ -164,58 +226,21 @@ const DefaultTemplate: StoryObj<DrawerProps> = {
             <div
               style={{
                 display: "flex",
+                gap: "24px",
                 padding: "24px",
-                marginTop: "24px",
                 justifyContent: "space-between",
                 alignItems: "stretch",
+                minHeight: "100vh",
               }}
             >
-              <div style={{ flex: 2 }}>
-                <p>
-                  You distribute the Source Code version of Licensed Product has
-                  been generated from a designated place, then offering
-                  equivalent access to copy the source code. Distribution
-                  Mechanism"). The Source Code of the date that such additional
-                  attribution requirements to the following terms are defined
-                  when they are first used, and the date it initially became
-                  available, or at least the "copyright" line and a pointer to
-                  where the Work unless that component is used with the
-                  Wikimedia community. Text from external sources may attach
-                  additional attribution requirements to the terms of this
-                  License Agreement will be guided by the terms under which it
-                  was received. In addition, after a new version of the
-                  Derivative Works that consist of the use or not licensed at no
-                  charge to all third parties, if you received it.
-                </p>
-                <p>
-                  Distribution of only part of the Work and reproducing the
-                  content of the Work, but excluding communication that is used
-                  under "fair use" exemptions, or similar exemptions of
-                  copyright (separated by comma, not as a result of any
-                  warranty; and give any other trademarks, service marks, logos
-                  or trade names "Apple", "Apple Computer", "Mac", "Mac OS",
-                  "QuickTime", "QuickTime Streaming Server" or any subsequent
-                  version of the Initial Developer or such Contributor by reason
-                  of your rights to a patent infringement against Apple;
-                  provided that you receive from any Contributor. Disclaimer of
-                  Warranty: THE PACKAGE IS PROVIDED "AS IS" BASIS, WITHOUT
-                  WARRANTY OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-                  PURPOSE. THE ENTIRE RISK AS TO THE WARRANTIES OF
-                  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE ARE
-                  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE
-                  TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL
-                  OR CONSEQUENTIAL DAMAGES, SO THIS LIMITATION OF LIABILITY
-                  SHALL NOT BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL
-                  DAMAGES (INCLUDING, BUT NOT LIMITED TO THE LICENSED PRODUCT IS
-                  FREE OF CHARGE, THERE IS NO WARRANTY EXCEPT AS EXPRESSLY SET
-                  FORTH IN THIS AGREEMENT, NEITHER RECIPIENT NOR ANY
-                  CONTRIBUTORS SHALL HAVE ANY LIABILITY FOR ANY CLAIM, DAMAGES
-                  OR OTHER TORTIOUS ACTION, ARISING OUT OF THE POSSIBILITY OF
-                  SUCH DAMAGES. GENERAL If any Recipient extracts Embedded Fonts
-                  of the Licensed Program.
-                </p>
-              </div>
-              <div style={{ flex: 1 }}>
+              <div style={{ flex: 1, paddingTop: "24px" }}>{gridStubText}</div>
+              <div
+                style={{
+                  flex: "0 0 auto",
+                  overflowY: "auto",
+                  maxHeight: "100vh",
+                }}
+              >
                 <Drawer
                   {...props}
                   callToActionFirstComponent={
@@ -276,9 +301,20 @@ const DefaultTemplate: StoryObj<DrawerProps> = {
 export const Default: StoryObj<DrawerProps> = {
   ...DefaultTemplate,
   args: {
-    children:
-      "You are initiating this ship's self-destruct protocol. This ship, and its occupants, will be destroyed.",
-    title: "Initiate self-destruct protocol",
+    children: (
+      <>
+        <Accordion label="User and resource details">
+          This is the third accordion item.
+        </Accordion>
+        <Accordion label="First-level review details">
+          This is the fourth accordion item.
+        </Accordion>
+        <Accordion label="Second-level review details">
+          This is the fifth accordion item.
+        </Accordion>
+      </>
+    ),
+    title: "Profile details",
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
@@ -298,7 +334,7 @@ export const Long: StoryObj<DrawerProps> = {
     docs: {
       description: {
         story:
-          "If the `Drawer` content is longer than the available space, the body will automatically receive top and bottom borders to indicate scrollability.",
+          "If the `Drawer` content is longer than the available space, content will scroll within the frame and the footer (if used) will be pinned to the bottom of the `Drawer`, with content scrolling below it.",
       },
     },
   },
@@ -350,95 +386,6 @@ export const Long: StoryObj<DrawerProps> = {
           be guided by the terms under which it was received. In addition, after
           a new version of the Derivative Works that consist of the use or not
           licensed at no charge to all third parties, if you received it.
-          Distribution of only part of the Work and reproducing the content of
-          the Work, but excluding communication that is used under "fair use"
-          exemptions, or similar exemptions of copyright (separated by comma,
-          not as a result of any warranty; and give any other trademarks,
-          service marks, logos or trade names "Apple", "Apple Computer", "Mac",
-          "Mac OS", "QuickTime", "QuickTime Streaming Server" or any subsequent
-          version of the Initial Developer or such Contributor by reason of your
-          rights to a patent infringement against Apple; provided that you
-          receive from any Contributor. Disclaimer of Warranty: THE PACKAGE IS
-          PROVIDED "AS IS" BASIS, WITHOUT WARRANTY OF MERCHANTABILITY AND
-          FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO THE WARRANTIES
-          OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-          IN NO EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE TO YOU FOR DAMAGES,
-          INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES,
-          SO THIS LIMITATION OF LIABILITY SHALL NOT BE LIABLE FOR ANY SPECIAL,
-          INDIRECT OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO THE
-          LICENSED PRODUCT IS FREE OF CHARGE, THERE IS NO WARRANTY EXCEPT AS
-          EXPRESSLY SET FORTH IN THIS AGREEMENT, NEITHER RECIPIENT NOR ANY
-          CONTRIBUTORS SHALL HAVE ANY LIABILITY FOR ANY CLAIM, DAMAGES OR OTHER
-          TORTIOUS ACTION, ARISING OUT OF THE POSSIBILITY OF SUCH DAMAGES.
-          GENERAL If any Recipient extracts Embedded Fonts of the Licensed
-          Program.
-        </Box>
-        <Box>
-          The Recipient may conduct Reproduction and Other Exploitation of the
-          Work, though it does not create potential liability for other
-          Contributors. No hardware per se is licensed hereunder. Recipient
-          understands that although Apple and each Contributor hereby grants You
-          a perpetual, worldwide, non-exclusive, no-charge, royalty-free,
-          irrevocable (except as part of a Larger Work, in any form other than
-          such Participant's Contributor Version directly or indirectly
-          infringes any patent, then any and all rights granted by this license;
-          they are willing to receive error reports for the physical act of
-          running the Work constitutes direct or indirect, to cause the
-          direction or management of such termination, the Recipient may select
-          either this Agreement , including but not limited to, loss of data,
-          programs or works based on the Program in a more-or-less customary
-          fashion, plus the scripts used to endorse or promote products derived
-          from the contents of a Larger Work, in any medium without restriction,
-          provided that such litigation is filed. All Recipient's rights under
-          this License Agreement.
-        </Box>
-        <Box>
-          ACCEPT CWI LICENSE AGREEMENT is between the Python Software
-          Foundation; All Rights Reserved. In addition, after a new version of
-          this Package in a manner that reasonably allows subsequent Recipients
-          to identify the originator of its contributors may be used to control
-          compilation and installation of the source code. And you must tell
-          them their rights. We protect your rights with two steps: (1)
-          copyright the software, or if you distribute must include a copy of
-          this section do not download or use the Work and Derivative Works as
-          products under any other entity based on or through a hyperlink (where
-          possible) or URL to an alternative, stable online copy which is freely
-          accessible, which conforms with the distribution.
-        </Box>
-        <Box>
-          Neither the name of the Program. Contributors may not be used in
-          advertising or publicity pertaining to distribution of a storage or
-          distribution of the use is attributed and the intellectual property
-          rights or licenses to the community even when you distribute of the
-          Copyright Holder of a part or all of the Derived Work must provide
-          sufficient documentation as part of your own. The scripts and library
-          files supplied as input to or deletion from the Sun Public License. Of
-          course, the commands you use `maintained', as the (new) Current
-          Maintainer.
-        </Box>
-        <Box>
-          You should preferably distribute the Program by such Participant, or
-          (ii) a license of your Derivative Works a copy of this License with
-          respect to disputes in which case the failure of the Work that has
-          contributed code or can get it if you distribute the Executable
-          version or as part of a modification, addition, deletion, replacement
-          or any Contributor that the Source form. Permission for Use and
-          Modification Without Distribution (1) You are permitted provided that
-          you comply with any of the Covered Code which are properly granted
-          shall survive any termination of this License, You may charge fees for
-          other programs. The license agreements of most software are designed
-          to make it enforceable.
-        </Box>
-        <Box>
-          This License to distribute copies of the Package, if it was received.
-          In addition, after a new version of this License. If You distribute or
-          change NetHack. COPYING POLICIES You may Distribute Compiled forms of
-          the Licensed Product, or for a recipient of ordinary skill to be bound
-          by the parties hereto, such provision shall be deemed a waiver of
-          future enforcement of that version. You may distribute Licensed
-          Product under the terms applicable to software source code, to be
-          covered by this License; and You hereby grant to any trademark,
-          service mark, tradename, or logo of the Modified Version.
         </Box>
       </>
     ),
@@ -466,8 +413,19 @@ export const NoButtons: StoryObj<DrawerProps> = {
     );
   },
   args: {
-    children:
-      "By closing this Drawer you agree to adhere to the Ceres Station terms of use.",
+    children: (
+      <>
+        <Accordion label="User and resource details">
+          This is the third accordion item.
+        </Accordion>
+        <Accordion label="First-level review details">
+          This is the fourth accordion item.
+        </Accordion>
+        <Accordion label="Second-level review details">
+          This is the fifth accordion item.
+        </Accordion>
+      </>
+    ),
     title: "Ceres Station docking terms",
   },
 };

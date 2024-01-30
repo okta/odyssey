@@ -1032,17 +1032,20 @@ export const components = ({
           },
           [`& .${drawerClasses.root}-footer`]: {
             display: "flex",
+            position: "sticky",
+            bottom: 0,
+            backgroundColor: odysseyTokens.HueNeutralWhite,
             flexDirection: "row",
             flexWrap: "nowrap",
             justifyContent: "flex-end",
             alignItems: "center",
+            padding: `${odysseyTokens.Spacing4}`,
             alignContent: "center",
           },
         },
         paper: ({ ownerState }) => ({
           width: ownerState.variant === "temporary" ? "400px" : "360px",
           paddingBlockStart: odysseyTokens.Spacing4,
-          paddingBlockEnd: odysseyTokens.Spacing4,
           paddingInline: odysseyTokens.Spacing5,
           display: "flex",
           flexDirection: "column",
@@ -1058,13 +1061,13 @@ export const components = ({
             border: "0px",
           }),
 
-          // ...(ownerState.variant === "temporary" && {
-          //   boxShwodow: "0px 1px 4px 0px rgba(39, 39, 39, 0.08), 0px 4px 10px 0px rgba(39, 39, 39, 0.08), 0px",
-          //from dialog:
-          //   boxShadow: "none",
-          //   filter:
-          //     "drop-shadow(0px 1px 4px rgba(29, 29, 33, 0.08)) drop-shadow(0px 4px 10px rgba(29, 29, 33, 0.08)) drop-shadow(0px 8px 30px rgba(29, 29, 33, 0.1))",
-          // }),
+          ...(ownerState.variant === "temporary" && {
+            boxShwodow:
+              "0px 1px 4px 0px rgba(39, 39, 39, 0.08), 0px 4px 10px 0px rgba(39, 39, 39, 0.08), 0px",
+            boxShadow: "none",
+            filter:
+              "drop-shadow(0px 1px 4px rgba(29, 29, 33, 0.08)) drop-shadow(0px 4px 10px rgba(29, 29, 33, 0.08)) drop-shadow(0px 8px 30px rgba(29, 29, 33, 0.1))",
+          }),
         }),
       },
     },
