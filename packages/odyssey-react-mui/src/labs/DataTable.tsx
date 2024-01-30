@@ -57,6 +57,7 @@ import { Button } from "../Button";
 import { Box } from "../Box";
 import { MenuButton, MenuItem } from "..";
 import { ArrowUnsortedIcon } from "../icons.generated";
+import { useTranslation } from "react-i18next";
 
 export const densityValues = ["comfortable", "spacious", "compact"] as const;
 
@@ -321,6 +322,8 @@ const DataTable = ({
   const [sorting, setSorting] = useState<MRT_SortingState>([]);
   const [density, setDensity] = useState<MRT_DensityState>(initialDensity);
 
+  const { t } = useTranslation();
+
   const initialColumnVisibility = useMemo(() => {
     return columns.reduce((acc, column) => {
       acc[column.accessorKey as string] = true;
@@ -580,6 +583,7 @@ const DataTable = ({
     layoutMode: "grid-no-grow",
     displayColumnDefOptions: {
       "mrt-row-actions": {
+        header: t("table.actions"),
         muiTableBodyCellProps: {
           align: "right",
           sx: {
@@ -648,9 +652,8 @@ const DataTable = ({
     }),
 
     muiRowDragHandleProps: ({ table, row }) => ({
-      title: "Drag row or press space/enter key to start and stop reordering",
-      "aria-label":
-        "Drag row to reorder. Or, press space or enter to start and stop reordering and esc to cancel.",
+      title: t("table.draghandle.tooltip"),
+      "aria-label": t("table.draghandle.arialabel"),
       onKeyDown: (event) => handleDragHandleKeyDown({ table, row, event }),
       onBlur: () => {
         resetDraggingAndHoveredRow(table);
@@ -680,7 +683,7 @@ const DataTable = ({
               endIcon={<MoreIcon />}
               size="small"
               buttonVariant="floating"
-              ariaLabel="More actions"
+              ariaLabel={t("table.moreactions.arialabel")}
               menuAlignment="right"
             >
               {rowActionMenuItems && (
@@ -693,7 +696,7 @@ const DataTable = ({
                 isDisabled={currentIndex <= 0}
                 onClick={() => updateRowOrder({ rowId: row.id, newIndex: 0 })}
               >
-                <ArrowTopIcon /> Bring to front
+                <ArrowTopIcon /> {t("table.reorder.tofront")}
               </MenuItem>
               <MenuItem
                 isDisabled={currentIndex <= 0}
@@ -704,7 +707,7 @@ const DataTable = ({
                   })
                 }
               >
-                <ArrowUpIcon /> Bring forward
+                <ArrowUpIcon /> {t("table.reorder.forward")}
               </MenuItem>
               <MenuItem
                 isDisabled={totalRows ? currentIndex >= totalRows - 1 : false}
@@ -715,7 +718,7 @@ const DataTable = ({
                   })
                 }
               >
-                <ArrowDownIcon /> Send backward
+                <ArrowDownIcon /> {t("table.reorder.backward")}
               </MenuItem>
               <>
                 {totalRows && (
@@ -728,7 +731,7 @@ const DataTable = ({
                       })
                     }
                   >
-                    <ArrowBottomIcon /> Send to back
+                    <ArrowBottomIcon /> {t("table.reorder.toback")}
                   </MenuItem>
                 )}
               </>
@@ -745,7 +748,7 @@ const DataTable = ({
         {hasChangeableDensity && (
           <MenuButton
             endIcon={<ListIcon />}
-            ariaLabel="Table density"
+            ariaLabel={t("table.density.arialabel")}
             menuAlignment="right"
             shouldCloseOnSelect={false}
           >
@@ -766,7 +769,7 @@ const DataTable = ({
         {hasColumnVisibility && (
           <MenuButton
             endIcon={<ShowIcon />}
-            ariaLabel="Show/hide columns"
+            ariaLabel={t("table.columnvisibility.arialabel")}
             menuAlignment="right"
             shouldCloseOnSelect={false}
           >

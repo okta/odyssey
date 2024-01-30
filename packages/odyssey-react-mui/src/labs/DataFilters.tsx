@@ -45,6 +45,7 @@ import { Checkbox } from "../Checkbox";
 import { RadioGroup } from "../RadioGroup";
 import { Radio } from "../Radio";
 import { MRT_ColumnDef, MRT_RowData } from "material-react-table";
+import { Trans, useTranslation } from "react-i18next";
 
 export type DataFilterValue = string | string[] | undefined;
 
@@ -126,6 +127,8 @@ const DataFilters = ({
   additionalActions,
   filters: filtersProp = [],
 }: DataFiltersProps) => {
+  const { t } = useTranslation();
+
   const [filters, setFilters] = useState<DataFilter[]>(filtersProp);
 
   const initialInputValues = useMemo(() => {
@@ -253,7 +256,7 @@ const DataFilters = ({
             aria-controls={isFiltersMenuOpen ? "filters-menu" : undefined}
             aria-expanded={isFiltersMenuOpen ? "true" : undefined}
             aria-haspopup="true"
-            ariaLabel="Filters"
+            ariaLabel={t("filters.filters.arialabel")}
             endIcon={<FilterIcon />}
             onClick={(event) => {
               setFiltersMenuAnchorElement(event.currentTarget);
@@ -305,11 +308,24 @@ const DataFilters = ({
                     <Subordinate component="div">
                       {!latestFilterValue ||
                       (Array.isArray(latestFilterValue) &&
-                        latestFilterValue.length === 0)
-                        ? `Any ${filter.label.toLowerCase()}`
-                        : Array.isArray(latestFilterValue)
-                        ? `${latestFilterValue.length} selected`
-                        : latestFilterValue}
+                        latestFilterValue.length === 0) ? (
+                        <Trans
+                          i18nKey="filters.menuitem.any"
+                          values={{
+                            label: filter.label.toLowerCase(),
+                          }}
+                        />
+                      ) : Array.isArray(latestFilterValue) ? (
+                        <Trans
+                          count={latestFilterValue.length}
+                          i18nKey="filters.menuitem.selected"
+                          values={{
+                            selected: latestFilterValue.length,
+                          }}
+                        />
+                      ) : (
+                        latestFilterValue
+                      )}
                     </Subordinate>
                   </Box>
                   <ChevronRightIcon />
@@ -419,7 +435,7 @@ const DataFilters = ({
                               inputValues[filterPopoverCurrentFilter.id] && (
                                 <MuiIconButton
                                   size="small"
-                                  aria-label="Clear filter"
+                                  aria-label={t("filters.filter.clear")}
                                   onClick={() => {
                                     handleInputChange(
                                       filterPopoverCurrentFilter.id,
@@ -489,7 +505,7 @@ const DataFilters = ({
                           }
                         >
                           <Radio
-                            label="Any"
+                            label={t("filters.filter.any")}
                             value={""}
                             isChecked={
                               !inputValues[filterPopoverCurrentFilter.id]
@@ -533,7 +549,7 @@ const DataFilters = ({
               <Box sx={{ display: "flex", gap: 2, width: "100%" }}>
                 <SearchField
                   value={searchValue}
-                  label="Search"
+                  label={t("filters.search.label")}
                   onClear={() => {
                     setSearchValue("");
                     onChangeSearch("");
@@ -544,7 +560,7 @@ const DataFilters = ({
                   <Box>
                     <Button
                       variant="primary"
-                      label="Search"
+                      label={t("filters.search.label")}
                       onClick={() => onChangeSearch(searchValue)}
                     />
                   </Box>
@@ -560,7 +576,7 @@ const DataFilters = ({
             <Box>
               <Button
                 variant="secondary"
-                label="Clear filters"
+                label={t("filters.clear.label")}
                 onClick={() => clearAllFilters()}
               />
             </Box>
