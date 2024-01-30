@@ -11,13 +11,17 @@
  */
 
 import { FC } from "react";
-
 export interface ForwardRefWithType extends FC<WithForwardRefProps<Option>> {
   <T extends Option>(props: WithForwardRefProps<T>): ReturnType<
     FC<WithForwardRefProps<T>>
   >;
 }
 
-export type FocusHandle = {
-  focus: () => void;
-};
+declare module "react" {
+  type DataAttributeKey = `data-${string}`;
+  interface InputHTMLAttributes<T> extends HTMLAttributes<T> {
+    // Allows data-* props to be passed to inputProps in nested MUI components
+    // see: https://github.com/mui/material-ui/issues/20160
+    [dataAttribute: DataAttributeKey]: string | undefined;
+  }
+}

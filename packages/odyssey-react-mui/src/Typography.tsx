@@ -23,7 +23,7 @@ import {
   useImperativeHandle,
 } from "react";
 import { AllowedProps } from "./AllowedProps";
-import { FocusHandle } from "./@types/react-augment";
+import { FocusHandle } from "./inputUtils";
 
 export type TypographyVariantValue =
   | "h1"
@@ -87,9 +87,9 @@ export type TypographyProps = {
    */
   component?: ElementType;
   /**
-   * The ref forwarded to the Typography to expose focus()
+   * The ref forwarded to the Typography
    */
-  typographyFocusRef?: React.RefObject<FocusHandle>;
+  typographyRef?: React.RefObject<FocusHandle>;
   /**
    * The variant of Typography to render.
    */
@@ -105,7 +105,7 @@ const Typography = ({
   component: componentProp,
   testId,
   translate,
-  typographyFocusRef,
+  typographyRef,
   variant = "body",
 }: TypographyProps) => {
   const component = useMemo(() => {
@@ -121,14 +121,13 @@ const Typography = ({
     return componentProp;
   }, [componentProp, variant]);
 
-  const ref = useRef<HTMLElement>(null);
+  const localTypographyRef = useRef<HTMLElement>(null);
   useImperativeHandle(
-    typographyFocusRef,
+    typographyRef,
     () => {
-      const element = ref.current;
       return {
         focus: () => {
-          element && element.focus();
+          localTypographyRef.current?.focus();
         },
       };
     },
@@ -144,7 +143,7 @@ const Typography = ({
       color={color}
       component={component}
       data-se={testId}
-      ref={ref}
+      ref={localTypographyRef}
       tabIndex={-1}
       translate={translate}
       variant={typographyVariantMapping[variant]}
