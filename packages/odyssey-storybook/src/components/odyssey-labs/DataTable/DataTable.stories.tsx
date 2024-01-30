@@ -396,8 +396,8 @@ export const Default: StoryObj<DataTableProps> = {
     return (
       <Box>
         <Callout severity="info">
-          Data in this table is procedurally-generated and will change on each
-          page refresh. Any resemblance to real information is coincidental.
+          Data in this table is procedurally-generated. Any resemblance to real
+          information is coincidental.
         </Callout>
         <DataTable
           columns={columns}
@@ -506,8 +506,8 @@ export const NoActions: StoryObj<DataTableProps> = {
     return (
       <Box>
         <Callout severity="info">
-          Data in this table is procedurally-generated and will change on each
-          page refresh. Any resemblance to real information is coincidental.
+          Data in this table is procedurally-generated. Any resemblance to real
+          information is coincidental.
         </Callout>
         <DataTable
           columns={columns}
