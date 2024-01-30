@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.0](https://github.com/okta/odyssey/compare/v1.11.1...v1.12.0) (2024-01-30)
+
+### Features
+
+- support aria-describedby as prop for Field components ([#2103](https://github.com/okta/odyssey/issues/2103)) ([a6098d7](https://github.com/okta/odyssey/commit/a6098d7bc47261713890725ea09e8decf1e2d76d))
+
 ## [1.11.1](https://github.com/okta/odyssey/compare/v1.11.0...v1.11.1) (2024-01-29)
 
 ### Bug Fixes
