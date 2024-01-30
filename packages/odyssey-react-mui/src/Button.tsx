@@ -136,7 +136,7 @@ const Button = ({
 }: ButtonProps) => {
   const muiProps = useMuiProps();
 
-  const localButtonRef = useRef<HTMLButtonElement>(null);
+  const localButtonRef = useRef<HTMLButtonElement>();
   useImperativeHandle(
     buttonRef,
     () => {
@@ -162,7 +162,10 @@ const Button = ({
         fullWidth={isFullWidth}
         id={id}
         onClick={onClick}
-        ref={localButtonRef}
+        ref={(element: HTMLButtonElement) => {
+          muiProps?.ref(element);
+          localButtonRef.current = element;
+        }}
         size={size}
         startIcon={startIcon}
         translate={translate}
