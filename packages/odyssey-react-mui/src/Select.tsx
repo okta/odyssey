@@ -40,6 +40,7 @@ import {
   useInputValues,
   getControlState,
 } from "./inputUtils";
+import { normalizedKey } from "./useNormalizedKey";
 
 export type SelectOption = {
   text: string;
@@ -213,7 +214,10 @@ const Select = <
         typeof option === "object"
           ? {
               text: option.text,
-              value: option.value,
+              value:
+                option?.value === ""
+                  ? option.value
+                  : option.value || option.text,
               type: option.type === "heading" ? "heading" : "option",
             }
           : { text: option, value: option, type: "option" }
@@ -259,12 +263,15 @@ const Select = <
   // that will populate the <Select>
   const children = useMemo(
     () =>
-      normalizedOptions.map((option) => {
+      normalizedOptions.map((option, index) => {
         if (option.type === "heading") {
           return <ListSubheader key={option.text}>{option.text}</ListSubheader>;
         }
         return (
-          <MenuItem key={option.value} value={option.value}>
+          <MenuItem
+            key={normalizedKey(option.text, index.toString())}
+            value={option.value}
+          >
             {hasMultipleChoices && (
               <MuiCheckbox
                 checked={
@@ -274,7 +281,7 @@ const Select = <
               />
             )}
             {option.text}
-            {internalSelectedValues === option.value && (
+            {internalSelectedValues === option?.value && (
               <ListItemSecondaryAction>
                 <CheckIcon />
               </ListItemSecondaryAction>
