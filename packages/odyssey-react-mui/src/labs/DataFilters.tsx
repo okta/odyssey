@@ -20,6 +20,7 @@ import {
   useRef,
   useState,
 } from "react";
+import styled from "@emotion/styled";
 import { Autocomplete } from "../Autocomplete";
 import { Box } from "../Box";
 import { TagList } from "../TagList";
@@ -203,11 +204,10 @@ const DataFilters = ({
       // Iterating to find the label
       return value
         .map((valueElement) => {
-          if (typeof valueElement !== "string") {
-            return valueElement.label;
+          if (typeof valueElement === "string") {
+            return undefined;
           }
-
-          return;
+          return valueElement.label;
         })
         .filter((item): item is string => Boolean(item));
     }
@@ -269,6 +269,15 @@ const DataFilters = ({
     setFilters(updatedFilters);
   }, [inputValues, filtersProp]);
 
+  const AutocompleteOuterContainer = styled.div`
+    display: flex;
+    gap: 2;
+    align-items: center;
+    alignitems: "flex-end";
+  `;
+  const AutocompleteInnerContainer = styled.div`
+    width: "100%";
+  `;
   const filterMenu = useMemo(
     () => (
       <>
@@ -391,14 +400,8 @@ const DataFilters = ({
                     {/* Autocomplete */}
                     {filterPopoverCurrentFilter?.variant === "autocomplete" &&
                       filterPopoverCurrentFilter?.options && (
-                        <Box
-                          sx={{
-                            display: "flex",
-                            gap: 2,
-                            alignItems: "flex-end",
-                          }}
-                        >
-                          <Box sx={{ width: "100%" }}>
+                        <AutocompleteOuterContainer>
+                          <AutocompleteInnerContainer>
                             <Autocomplete
                               label={filterPopoverCurrentFilter.label}
                               value={
@@ -431,13 +434,13 @@ const DataFilters = ({
                                 })
                               )}
                             />
-                          </Box>
+                          </AutocompleteInnerContainer>
                           <Button
                             variant="primary"
                             endIcon={<CheckIcon />}
                             type="submit"
                           />
-                        </Box>
+                        </AutocompleteOuterContainer>
                       )}
                     {/* Text or Number */}
                     {(filterPopoverCurrentFilter?.variant === "text" ||
