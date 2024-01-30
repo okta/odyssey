@@ -93,6 +93,7 @@ export type NativeSelectProps<
   value?: Value;
 } & Pick<
   FieldComponentProps,
+  | "ariaDescribedBy"
   | "errorMessage"
   | "errorMessageList"
   | "hint"
@@ -110,6 +111,7 @@ const NativeSelect: ForwardRefWithType = forwardRef(
     HasMultipleChoices extends boolean
   >(
     {
+      ariaDescribedBy,
       autoCompleteType,
       defaultValue,
       errorMessage,
@@ -217,6 +219,7 @@ const NativeSelect: ForwardRefWithType = forwardRef(
 
     return (
       <Field
+        ariaDescribedBy={ariaDescribedBy}
         errorMessage={errorMessage}
         errorMessageList={errorMessageList}
         fieldType="single"

@@ -97,6 +97,7 @@ export type SelectProps<
   value?: Value;
 } & Pick<
   FieldComponentProps,
+  | "ariaDescribedBy"
   | "errorMessage"
   | "errorMessageList"
   | "hint"
@@ -129,6 +130,7 @@ const Select = <
   Value extends SelectValueType<HasMultipleChoices>,
   HasMultipleChoices extends boolean
 >({
+  ariaDescribedBy,
   defaultValue,
   errorMessage,
   errorMessageList,
@@ -318,6 +320,7 @@ const Select = <
 
   return (
     <Field
+      ariaDescribedBy={ariaDescribedBy}
       errorMessage={errorMessage}
       errorMessageList={errorMessageList}
       fieldType="single"
