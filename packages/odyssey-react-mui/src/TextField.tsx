@@ -26,8 +26,7 @@ import { InputAdornment, InputBase } from "@mui/material";
 import { FieldComponentProps } from "./FieldComponentProps";
 import { Field } from "./Field";
 import { AllowedProps } from "./AllowedProps";
-import { useInputValues, getControlState } from "./inputUtils";
-import { FocusHandle } from "./@types/react-augment";
+import { FocusHandle, useInputValues, getControlState } from "./inputUtils";
 
 export const textFieldTypeValues = [
   "email",
@@ -41,7 +40,7 @@ export type TextFieldProps = {
   /**
    * This prop helps users to fill forms faster, especially on mobile devices.
    * The name can be confusing, as it's more like an autofill.
-   * You can learn more about it [following the specification](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill).
+   * @see https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill
    */
   autoCompleteType?: InputHTMLAttributes<HTMLInputElement>["autoComplete"];
   /**
@@ -57,9 +56,14 @@ export type TextFieldProps = {
    */
   hasInitialFocus?: boolean;
   /**
-   * The ref forwarded to the TextField to expose focus()
+   * The ref forwarded to the TextField
    */
-  inputFocusRef?: React.RefObject<FocusHandle>;
+  inputRef?: React.RefObject<FocusHandle>;
+  /**
+   * Hints at the type of data that might be entered by the user while editing the element or its contents
+   * @see https://html.spec.whatwg.org/multipage/interaction.html#input-modalities:-the-inputmode-attribute
+   */
+  inputMode?: InputHTMLAttributes<HTMLInputElement>["inputMode"];
   /**
    * If `true`, a [TextareaAutosize](/material-ui/react-textarea-autosize/) element is rendered.
    */
@@ -111,7 +115,8 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       hint,
       HintLinkComponent,
       id: idOverride,
-      inputFocusRef,
+      inputRef,
+      inputMode,
       isDisabled = false,
       isFullWidth = false,
       isMultiline = false,
@@ -143,14 +148,13 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       controlState: controlledStateRef.current,
     });
 
-    const inputRef = useRef<HTMLInputElement>(null);
+    const localInputRef = useRef<HTMLInputElement>(null);
     useImperativeHandle(
-      inputFocusRef,
+      inputRef,
       () => {
-        const element = inputRef.current;
         return {
           focus: () => {
-            element && element.focus();
+            localInputRef.current?.focus();
           },
         };
       },
@@ -170,15 +174,10 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
         <InputBase
           {...inputValues}
-          inputProps={{
-            "aria-errormessage": errorMessageElementId,
-            "aria-labelledby": labelElementId,
-          }}
           aria-describedby={ariaDescribedBy}
           autoComplete={autoCompleteType}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus={hasInitialFocus}
-          data-se={testId}
           endAdornment={
             endAdornment && (
               <InputAdornment position="end" translate={translate}>
@@ -187,7 +186,13 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             )
           }
           id={id}
-          inputRef={inputRef}
+          inputProps={{
+            "aria-errormessage": errorMessageElementId,
+            "aria-labelledby": labelElementId,
+            "data-se": testId,
+            inputmode: inputMode,
+          }}
+          inputRef={localInputRef}
           multiline={isMultiline}
           name={nameOverride ?? id}
           onBlur={onBlur}
@@ -213,6 +218,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         inputValues,
         hasInitialFocus,
         endAdornment,
+        inputMode,
         isMultiline,
         nameOverride,
         onBlur,
