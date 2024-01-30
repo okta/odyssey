@@ -293,7 +293,7 @@ const Select = <
         children={children}
         data-se={testId}
         displayEmpty={
-          controlledStateRef.current === CONTROLLED && inputValues?.value === ""
+          inputValues?.value === "" || inputValues?.defaultValue === ""
         }
         id={id}
         inputProps={{ "data-se": testId }}
