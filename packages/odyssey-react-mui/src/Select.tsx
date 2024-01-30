@@ -228,6 +228,7 @@ const Select = <
       if (typeof selected === "string") {
         return undefined;
       }
+
       // Convert the selected options array into <Chip>s
       const renderedChips = selected
         .map((item: string) => {
