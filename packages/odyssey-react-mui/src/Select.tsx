@@ -213,7 +213,7 @@ const Select = <
         typeof option === "object"
           ? {
               text: option.text,
-              value: option.value || option.text,
+              value: option.value,
               type: option.type === "heading" ? "heading" : "option",
             }
           : { text: option, value: option, type: "option" }
@@ -228,7 +228,6 @@ const Select = <
       if (typeof selected === "string") {
         return undefined;
       }
-
       // Convert the selected options array into <Chip>s
       const renderedChips = selected
         .map((item: string) => {
@@ -267,7 +266,10 @@ const Select = <
           <MenuItem key={option.value} value={option.value}>
             {hasMultipleChoices && (
               <MuiCheckbox
-                checked={internalSelectedValues?.includes(option.value)}
+                checked={
+                  option.value !== undefined &&
+                  internalSelectedValues?.includes(option.value)
+                }
               />
             )}
             {option.text}
@@ -289,6 +291,10 @@ const Select = <
         aria-describedby={ariaDescribedBy}
         aria-errormessage={errorMessageElementId}
         children={children}
+        data-se={testId}
+        displayEmpty={
+          controlledStateRef.current === CONTROLLED && inputValues?.value === ""
+        }
         id={id}
         inputProps={{ "data-se": testId }}
         inputRef={localInputRef}
