@@ -281,6 +281,7 @@ const Autocomplete = <
       />
     ),
     [
+      ariaDescribedBy,
       errorMessage,
       errorMessageList,
       hint,

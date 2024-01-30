@@ -283,6 +283,7 @@ const VirtualizedAutocomplete = <
       />
     ),
     [
+      ariaDescribedBy,
       errorMessage,
       errorMessageList,
       hint,
