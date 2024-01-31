@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /*!
  * Copyright (c) 2023-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
@@ -10,29 +11,29 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-// Part of this has been copied over from @okta/ui-build-tools' own internal node script
+// This was originally copied over from @okta/ui-build-tools' own internal node script:
 // https://github.com/okta/ui-build-tools/blob/main/packages/clis/i18n/properties-to-json.js
 
-const { resolve, join, basename, extname } = require("node:path");
-const {
-  readFileSync,
-  writeFileSync,
-  rmSync,
+import { basename, extname, join, resolve } from "node:path";
+import {
   existsSync,
   mkdirSync,
-} = require("node:fs");
-const properties = require("properties");
-const readdir = require("recursive-readdir");
-const yargs = require("yargs");
-const { hideBin } = require("yargs/helpers");
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from "node:fs";
+import { readdir } from "node:fs/promises";
+import properties from "properties";
+import { hideBin } from "yargs/helpers";
+import yargs from "yargs/yargs";
 
-const convert = (baseFiles, propertiesTargetDir) => {
-  for (const src of baseFiles) {
+const convert = (baseFiles: string[], propertiesTargetDir: string) => {
+  baseFiles.forEach((src) => {
     const filename = basename(src);
     const extension = extname(src);
     const source = `${readFileSync(src)}`;
 
-    properties.parse(source, function (error, obj) {
+    properties.parse(source, function (error, propertiesJson) {
       if (error) {
         return console.error(error);
       }
@@ -41,55 +42,71 @@ const convert = (baseFiles, propertiesTargetDir) => {
         propertiesTargetDir,
         filename.replace(extension, ".ts")
       );
+
       writeFileSync(
         targetFile,
-        `export const translation = ${JSON.stringify(obj)};`
+        `export const translation = ${JSON.stringify(propertiesJson)};`
       );
     });
-  }
+  });
 };
 
-async function convertPropertiesToJson({ resourcePath, targetJsonPath }) {
+async function convertPropertiesToJson({
+  resourcePath,
+  targetJsonPath,
+}: {
+  resourcePath: string;
+  targetJsonPath: string;
+}) {
   const sourceDirectory = resolve(resourcePath);
   const propertiesTargetDirectory = resolve(targetJsonPath);
 
   if (!existsSync(sourceDirectory)) {
     mkdirSync(sourceDirectory);
   }
+
   if (existsSync(propertiesTargetDirectory)) {
     rmSync(propertiesTargetDirectory, { recursive: true, force: true });
   }
+
   mkdirSync(propertiesTargetDirectory);
 
-  let baseFiles = await readdir(sourceDirectory);
-  convert(baseFiles, propertiesTargetDirectory);
+  const propertiesFilePaths = await readdir(sourceDirectory, {
+    recursive: true,
+  });
+
+  convert(
+    propertiesFilePaths
+      .filter((propertiesFilePath) =>
+        propertiesFilePath.endsWith(".properties")
+      )
+      .map((propertiesFilePath) => join(sourceDirectory, propertiesFilePath)),
+    propertiesTargetDirectory
+  );
 }
 
 yargs(hideBin(process.argv))
   .scriptName("properties-to-ts")
   .usage("$0 <cmd> [args]")
   .command(
-    "bundle",
-    "Converts properties file to ts",
-    (yargs) => {
+    "bundle [resourcePath] [targetJsonPath]",
+    "Converts `properties` files to TypeScript types.",
+    (yargs) =>
       yargs
         .positional("resourcePath", {
-          type: "string",
           default: "src/properties",
           describe: "A relative path to resources based on cwd.",
+          type: "string",
         })
         .positional("targetJsonPath", {
-          type: "string",
           default: "src/properties/ts",
           describe: "A relative path to directory for ts file output",
-        });
-    },
-    function (argv) {
-      const { resourcePath, targetJsonPath } = argv;
-
+          type: "string",
+        }),
+    (argv) => {
       convertPropertiesToJson({
-        resourcePath,
-        targetJsonPath,
+        resourcePath: argv.resourcePath,
+        targetJsonPath: argv.targetJsonPath,
       });
     }
   )

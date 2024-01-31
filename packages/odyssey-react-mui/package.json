@@ -96,7 +96,6 @@
     "@types/jest-axe": "^3.5.1",
     "@types/react": "^17.0.30",
     "@types/react-dom": "^17.0.5",
-    "@types/yargs": "^17",
     "babel-plugin-import": "^1.13.5",
     "eslint": "^8.44.0",
     "jest": "^29.6.1",
