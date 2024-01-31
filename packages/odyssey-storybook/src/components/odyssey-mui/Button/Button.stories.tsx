@@ -403,7 +403,6 @@ export const KitchenSink: StoryObj<ButtonProps> = {
     <Box sx={{ display: "flex", flexWrap: "wrap", rowGap: 2 }}>
       <Button label="Primary" variant="primary" />
       <Button label="Secondary" variant="secondary" />
-      <Button label="Tertiary" variant="tertiary" />
       <Button label="Danger" variant="danger" />
       <Button label="Floating" variant="floating" />
       <Button ariaLabel="Add" startIcon={<AddIcon />} variant="primary" />
