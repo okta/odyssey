@@ -42,6 +42,14 @@ export type AutocompleteProps<
     undefined,
     IsCustomValueAllowed
   >["defaultValue"];
+
+  filterOptions?: MuiAutocompleteProps<
+    OptionType,
+    HasMultipleChoices,
+    undefined,
+    IsCustomValueAllowed
+  >["filterOptions"];
+
   /**
    * Enables multiple choice selection
    */
@@ -143,6 +151,12 @@ export type AutocompleteProps<
   /**
    * The value of the Autocomplete input
    */
+  renderOption?: MuiAutocompleteProps<
+    OptionType,
+    HasMultipleChoices,
+    undefined,
+    IsCustomValueAllowed
+  >["renderOption"];
   value?: UseAutocompleteProps<
     OptionType,
     HasMultipleChoices,
@@ -182,6 +196,8 @@ const Autocomplete = <
   defaultValue,
   errorMessage,
   errorMessageList,
+  filterOptions,
+  getIsOptionEqualToValue,
   hasMultipleChoices,
   id: idOverride,
   inputValue,
@@ -200,10 +216,10 @@ const Autocomplete = <
   onInputChange: onInputChangeProp,
   onFocus,
   options,
-  value,
-  getIsOptionEqualToValue,
+  renderOption,
   testId,
   translate,
+  value,
 }: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
   const controlledStateRef = useRef(
     getControlState({ controlledValue: value, uncontrolledValue: defaultValue })
@@ -332,9 +348,11 @@ const Autocomplete = <
       aria-disabled={isDisabled}
       disableCloseOnSelect={hasMultipleChoices}
       disabled={isDisabled}
-      freeSolo={isCustomValueAllowed}
+      filterOptions={filterOptions}
       filterSelectedOptions={true}
+      freeSolo={isCustomValueAllowed}
       id={idOverride}
+      isOptionEqualToValue={getIsOptionEqualToValue}
       fullWidth={isFullWidth}
       loading={isLoading}
       multiple={hasMultipleChoices}
@@ -345,7 +363,7 @@ const Autocomplete = <
       options={options}
       readOnly={isReadOnly}
       renderInput={renderInput}
-      isOptionEqualToValue={getIsOptionEqualToValue}
+      renderOption={renderOption}
       translate={translate}
     />
   );
