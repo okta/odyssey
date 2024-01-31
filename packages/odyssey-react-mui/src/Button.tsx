@@ -163,7 +163,9 @@ const Button = ({
         id={id}
         onClick={onClick}
         ref={(element: HTMLButtonElement) => {
-          muiProps?.ref(element);
+          if (muiProps?.ref) {
+            muiProps?.ref(element);
+          }
           localButtonRef.current = element;
         }}
         size={size}
@@ -194,17 +196,15 @@ const Button = ({
     ]
   );
 
-  return (
-    <>
-      {tooltipText && !isDisabled && (
-        <Tooltip ariaType="description" placement="top" text={tooltipText}>
-          <MuiPropsContext.Consumer>{renderButton}</MuiPropsContext.Consumer>
-        </Tooltip>
-      )}
+  if (tooltipText) {
+    return (
+      <Tooltip ariaType="description" placement="top" text={tooltipText}>
+        <MuiPropsContext.Consumer>{renderButton}</MuiPropsContext.Consumer>
+      </Tooltip>
+    );
+  }
 
-      {(isDisabled || !tooltipText) && renderButton(muiProps)}
-    </>
-  );
+  return renderButton(muiProps);
 };
 
 const MemoizedButton = memo(Button);
