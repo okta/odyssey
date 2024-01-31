@@ -45,14 +45,23 @@ export type RadioGroupProps = {
   value?: RadioProps["value"];
 } & Pick<
   FieldComponentProps,
-  "errorMessage" | "hint" | "HintLinkComponent" | "id" | "isDisabled" | "name"
+  | "ariaDescribedBy"
+  | "errorMessage"
+  | "errorMessageList"
+  | "hint"
+  | "HintLinkComponent"
+  | "id"
+  | "isDisabled"
+  | "name"
 > &
   AllowedProps;
 
 const RadioGroup = ({
+  ariaDescribedBy,
   children,
   defaultValue,
   errorMessage,
+  errorMessageList,
   hint,
   HintLinkComponent,
   id: idOverride,
@@ -100,7 +109,9 @@ const RadioGroup = ({
 
   return (
     <Field
+      ariaDescribedBy={ariaDescribedBy}
       errorMessage={errorMessage}
+      errorMessageList={errorMessageList}
       fieldType="group"
       hasVisibleLabel={false}
       hint={hint}

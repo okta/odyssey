@@ -168,7 +168,13 @@ export type AutocompleteProps<
   getIsOptionEqualToValue?: (option: OptionType, value: OptionType) => boolean;
 } & Pick<
   FieldComponentProps,
-  "errorMessage" | "hint" | "id" | "isOptional" | "name"
+  | "ariaDescribedBy"
+  | "errorMessage"
+  | "errorMessageList"
+  | "hint"
+  | "id"
+  | "isOptional"
+  | "name"
 > &
   AllowedProps;
 
@@ -177,8 +183,10 @@ const VirtualizedAutocomplete = <
   HasMultipleChoices extends boolean | undefined,
   IsCustomValueAllowed extends boolean | undefined
 >({
+  ariaDescribedBy,
   defaultValue,
   errorMessage,
+  errorMessageList,
   hasMultipleChoices,
   id: idOverride,
   inputValue,
@@ -242,7 +250,9 @@ const VirtualizedAutocomplete = <
   const renderInput = useCallback(
     ({ InputLabelProps, InputProps, ...params }) => (
       <Field
+        ariaDescribedBy={ariaDescribedBy}
         errorMessage={errorMessage}
+        errorMessageList={errorMessageList}
         fieldType="single"
         hasVisibleLabel
         id={InputLabelProps.htmlFor}
@@ -262,6 +272,7 @@ const VirtualizedAutocomplete = <
               ...params.inputProps,
               "aria-errormessage": errorMessageElementId,
               "aria-labelledby": labelElementId,
+              "data-se": testId,
             }}
             aria-describedby={ariaDescribedBy}
             id={id}
@@ -271,7 +282,16 @@ const VirtualizedAutocomplete = <
         )}
       />
     ),
-    [errorMessage, hint, isOptional, label, nameOverride]
+    [
+      ariaDescribedBy,
+      errorMessage,
+      errorMessageList,
+      hint,
+      isOptional,
+      label,
+      nameOverride,
+      testId,
+    ]
   );
   const onChange = useCallback<
     NonNullable<
@@ -311,7 +331,6 @@ const VirtualizedAutocomplete = <
       {...inputValueProp}
       // AutoComplete is wrapped in a div within MUI which does not get the disabled attr. So this aria-disabled gets set in the div
       aria-disabled={isDisabled}
-      data-se={testId}
       disableCloseOnSelect={hasMultipleChoices}
       disabled={isDisabled}
       freeSolo={isCustomValueAllowed}

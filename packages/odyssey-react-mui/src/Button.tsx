@@ -23,7 +23,7 @@ import {
 import { MuiPropsContext, useMuiProps } from "./MuiPropsContext";
 import { Tooltip } from "./Tooltip";
 import type { AllowedProps } from "./AllowedProps";
-import { FocusHandle } from "./@types/react-augment";
+import { FocusHandle } from "./inputUtils";
 
 export const buttonSizeValues = ["small", "medium", "large"] as const;
 export const buttonTypeValues = ["button", "submit", "reset"] as const;
@@ -48,9 +48,9 @@ export type ButtonProps = {
    */
   ariaDescribedBy?: string;
   /**
-   * The ref forwarded to the Button to expose focus()
+   * The ref forwarded to the Button
    */
-  buttonFocusRef?: React.RefObject<FocusHandle>;
+  buttonRef?: React.RefObject<FocusHandle>;
   /**
    * The icon element to display at the end of the Button
    */
@@ -118,7 +118,7 @@ const Button = ({
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
-  buttonFocusRef,
+  buttonRef,
   endIcon,
   id,
   isDisabled,
@@ -138,15 +138,14 @@ const Button = ({
   // We're deprecating the "tertiary" variant, so map it to
   // "secondary" in lieu of making a breaking change
   const variant = variantProp === "tertiary" ? "secondary" : variantProp;
+  const localButtonRef = useRef<HTMLButtonElement>(null);
 
-  const ref = useRef<HTMLButtonElement>(null);
   useImperativeHandle(
-    buttonFocusRef,
+    buttonRef,
     () => {
-      const element = ref.current;
       return {
         focus: () => {
-          element && element.focus();
+          localButtonRef.current?.focus();
         },
       };
     },
@@ -166,7 +165,7 @@ const Button = ({
         fullWidth={isFullWidth}
         id={id}
         onClick={onClick}
-        ref={ref}
+        ref={localButtonRef}
         size={size}
         startIcon={startIcon}
         translate={translate}

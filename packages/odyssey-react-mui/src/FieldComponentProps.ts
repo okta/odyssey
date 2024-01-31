@@ -16,9 +16,17 @@ import { HintLink } from "./HintLink";
 
 export type FieldComponentProps = {
   /**
+   * The ID of the element that describes the Field
+   */
+  ariaDescribedBy?: string;
+  /**
    * If `error` is not undefined, the `input` will indicate an error.
    */
   errorMessage?: string;
+  /**
+   * If `error` is not undefined, the `input` will indicate multiple errors.
+   */
+  errorMessageList?: string[];
   /**
    * The helper text content.
    */

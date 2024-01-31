@@ -3,6 +3,61 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.2](https://github.com/okta/odyssey/compare/v1.12.1...v1.12.2) (2024-01-31)
+
+### Bug Fixes
+
+- resolve missing types in package ([#2087](https://github.com/okta/odyssey/issues/2087)) ([5b122fd](https://github.com/okta/odyssey/commit/5b122fdc2a2829803d20ad8639b2df1bc2e696cc))
+
+## [1.12.1](https://github.com/okta/odyssey/compare/v1.12.0...v1.12.1) (2024-01-30)
+
+**Note:** Version bump only for package odyssey
+
+## [1.12.0](https://github.com/okta/odyssey/compare/v1.11.1...v1.12.0) (2024-01-30)
+
+### Features
+
+- support aria-describedby as prop for Field components ([#2103](https://github.com/okta/odyssey/issues/2103)) ([a6098d7](https://github.com/okta/odyssey/commit/a6098d7bc47261713890725ea09e8decf1e2d76d))
+
+## [1.11.1](https://github.com/okta/odyssey/compare/v1.11.0...v1.11.1) (2024-01-29)
+
+### Bug Fixes
+
+- move testId to inputProps for all input components ([#2096](https://github.com/okta/odyssey/issues/2096)) ([94ec2ea](https://github.com/okta/odyssey/commit/94ec2ea88f56beb3dd7ac143a6aaec5c173d6261))
+
+## [1.11.0](https://github.com/okta/odyssey/compare/v1.10.3...v1.11.0) (2024-01-29)
+
+### Features
+
+- support aria-controls and aria-pressed in PasswordField ([#2102](https://github.com/okta/odyssey/issues/2102)) ([196a68e](https://github.com/okta/odyssey/commit/196a68e22199d70cd02a2b8ad5e8b0b4c456cf19))
+- Support id for Accordion ([#2101](https://github.com/okta/odyssey/issues/2101)) ([3ecb265](https://github.com/okta/odyssey/commit/3ecb265d758a7766a6670c0d1786c8053eefec16))
+
+## [1.10.3](https://github.com/okta/odyssey/compare/v1.10.2...v1.10.3) (2024-01-29)
+
+**Note:** Version bump only for package odyssey
+
+## [1.10.2](https://github.com/okta/odyssey/compare/v1.10.1...v1.10.2) (2024-01-24)
+
+**Note:** Version bump only for package odyssey
+
+## [1.10.1](https://github.com/okta/odyssey/compare/v1.10.0...v1.10.1) (2024-01-22)
+
+**Note:** Version bump only for package odyssey
+
+## [1.10.0](https://github.com/okta/odyssey/compare/v1.9.23...v1.10.0) (2024-01-19)
+
+### Features
+
+- support inputmode prop in TextField ([#2091](https://github.com/okta/odyssey/issues/2091)) ([ac9f17f](https://github.com/okta/odyssey/commit/ac9f17f87e324b9861e794409e72e77f20d267c8))
+
+## [1.9.23](https://github.com/okta/odyssey/compare/v1.9.22...v1.9.23) (2024-01-17)
+
+**Note:** Version bump only for package odyssey
+
+## [1.9.22](https://github.com/okta/odyssey/compare/v1.9.21...v1.9.22) (2024-01-17)
+
+**Note:** Version bump only for package odyssey
+
 ## [1.9.21](https://github.com/okta/odyssey/compare/v1.9.20...v1.9.21) (2024-01-12)
 
 ### Bug Fixes

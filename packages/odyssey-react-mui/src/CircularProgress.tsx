@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { memo } from "react";
 import { CircularProgress as MuiCircularProgress } from "@mui/material";
 
 import type { AllowedProps } from "./AllowedProps";
@@ -26,7 +27,7 @@ export type CircularProgressProps = {
   value?: number;
 } & AllowedProps;
 
-export const CircularProgress = ({
+const CircularProgress = ({
   ariaLabel,
   testId,
   value,
@@ -38,3 +39,8 @@ export const CircularProgress = ({
     aria-label={ariaLabel}
   />
 );
+
+const MemoizedCircularProgress = memo(CircularProgress);
+MemoizedCircularProgress.displayName = "CircularProgress";
+
+export { MemoizedCircularProgress as CircularProgress };

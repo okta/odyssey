@@ -73,8 +73,8 @@ const storybookMeta: Meta<SwitchProps> = {
     },
   },
   args: {
-    hint: "Some hint text goes here",
-    label: "The label for the switch",
+    hint: "Optional hint text",
+    label: "Switch label",
     value: "Switch value",
   },
   decorators: [MuiThemeDecorator],

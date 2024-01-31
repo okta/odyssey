@@ -35,15 +35,24 @@ export type CheckboxGroupProps = {
   label: string;
 } & Pick<
   FieldComponentProps,
-  "errorMessage" | "hint" | "HintLinkComponent" | "isDisabled"
+  | "ariaDescribedBy"
+  | "errorMessage"
+  | "errorMessageList"
+  | "hint"
+  | "HintLinkComponent"
+  | "id"
+  | "isDisabled"
 > &
   AllowedProps;
 
 const CheckboxGroup = ({
+  ariaDescribedBy,
   children,
   errorMessage,
+  errorMessageList,
   hint,
   HintLinkComponent,
+  id: idOverride,
   isDisabled,
   isRequired = false,
   label,
@@ -51,12 +60,13 @@ const CheckboxGroup = ({
   translate,
 }: CheckboxGroupProps) => {
   const renderFieldComponent = useCallback(
-    ({ ariaDescribedBy, errorMessageElementId, labelElementId }) => (
+    ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
       <MuiFormGroup
         aria-describedby={ariaDescribedBy}
         aria-errormessage={errorMessageElementId}
         aria-labelledby={labelElementId}
         data-se={testId}
+        id={id}
         translate={translate}
       >
         {children}
@@ -67,11 +77,14 @@ const CheckboxGroup = ({
 
   return (
     <Field
+      ariaDescribedBy={ariaDescribedBy}
       errorMessage={errorMessage}
+      errorMessageList={errorMessageList}
       fieldType="group"
       hasVisibleLabel={true}
       hint={hint}
       HintLinkComponent={HintLinkComponent}
+      id={idOverride}
       isDisabled={isDisabled}
       isOptional={!isRequired}
       label={label}

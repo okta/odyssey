@@ -27,8 +27,7 @@ import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { AllowedProps } from "./AllowedProps";
 import { useTranslation } from "react-i18next";
-import { getControlState, useInputValues } from "./inputUtils";
-import { FocusHandle } from "./@types/react-augment";
+import { FocusHandle, getControlState, useInputValues } from "./inputUtils";
 
 export type PasswordFieldProps = {
   /**
@@ -50,9 +49,9 @@ export type PasswordFieldProps = {
    */
   hasShowPassword?: boolean;
   /**
-   * The ref forwarded to the TextField to expose focus()
+   * The ref forwarded to the TextField
    */
-  inputFocusRef?: React.RefObject<FocusHandle>;
+  inputRef?: React.RefObject<FocusHandle>;
   /**
    * The label for the `input` element.
    */
@@ -83,13 +82,15 @@ export type PasswordFieldProps = {
 const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
   (
     {
+      ariaDescribedBy,
       autoCompleteType,
       defaultValue,
       errorMessage,
+      errorMessageList,
       hasInitialFocus,
       hint,
       id: idOverride,
-      inputFocusRef,
+      inputRef,
       isDisabled = false,
       isFullWidth = false,
       isOptional = false,
@@ -128,14 +129,13 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       controlState: controlledStateRef.current,
     });
 
-    const inputRef = useRef<HTMLInputElement>(null);
+    const localInputRef = useRef<HTMLInputElement>(null);
     useImperativeHandle(
-      inputFocusRef,
+      inputRef,
       () => {
-        const element = inputRef.current;
         return {
           focus: () => {
-            element && element.focus();
+            localInputRef.current?.focus();
           },
         };
       },
@@ -159,16 +159,17 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           autoComplete={inputType === "password" ? autoCompleteType : "off"}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus={hasInitialFocus}
-          data-se={testId}
           endAdornment={
             hasShowPassword && (
               <InputAdornment position="end">
                 <IconButton
+                  aria-controls={id}
                   aria-label={
                     inputType === "password"
                       ? t("passwordfield.icon.label.show")
                       : t("passwordfield.icon.label.hide")
                   }
+                  aria-pressed={inputType === "text"}
                   onClick={togglePasswordVisibility}
                 >
                   {inputType === "password" ? <ShowIcon /> : <HideIcon />}
@@ -180,10 +181,11 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           inputProps={{
             "aria-errormessage": errorMessageElementId,
             "aria-labelledby": labelElementId,
+            "data-se": testId,
             // role: "textbox" Added because password inputs don't have an implicit role assigned. This causes problems with element selection.
             role: "textbox",
           }}
-          inputRef={inputRef}
+          inputRef={localInputRef}
           name={nameOverride ?? id}
           onChange={onChange}
           onFocus={onFocus}
@@ -219,7 +221,9 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
 
     return (
       <Field
+        ariaDescribedBy={ariaDescribedBy}
         errorMessage={errorMessage}
+        errorMessageList={errorMessageList}
         fieldType="single"
         hasVisibleLabel
         hint={hint}
