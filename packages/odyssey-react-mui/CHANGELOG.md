@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.2](https://github.com/okta/odyssey/compare/v1.12.1...v1.12.2) (2024-01-31)
+
+### Bug Fixes
+
+- resolve missing types in package ([#2087](https://github.com/okta/odyssey/issues/2087)) ([5b122fd](https://github.com/okta/odyssey/commit/5b122fdc2a2829803d20ad8639b2df1bc2e696cc))
+
 ## [1.12.1](https://github.com/okta/odyssey/compare/v1.12.0...v1.12.1) (2024-01-30)
 
 **Note:** Version bump only for package @okta/odyssey-react-mui
