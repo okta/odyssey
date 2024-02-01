@@ -1583,7 +1583,7 @@ export const components = ({
           alignItems: "center",
           fontSize: odysseyTokens.TypographySizeSubordinate,
           lineHeight: odysseyTokens.TypographyLineHeightBody,
-          marginBlockStart: odysseyTokens.Spacing2,
+          marginBlockStart: odysseyTokens.Spacing1,
           [`.${formLabelClasses.root} + &`]: {
             marginBlockStart: `-${odysseyTokens.Spacing1}`,
             color: odysseyTokens.TypographyColorSubordinate,
