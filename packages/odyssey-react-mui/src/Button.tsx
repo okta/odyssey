@@ -135,8 +135,8 @@ const Button = ({
   variant,
 }: ButtonProps) => {
   const muiProps = useMuiProps();
+  const localButtonRef = useRef<HTMLButtonElement>(null);
 
-  const localButtonRef = useRef<HTMLButtonElement>();
   useImperativeHandle(
     buttonRef,
     () => {
@@ -150,33 +150,32 @@ const Button = ({
   );
 
   const renderButton = useCallback(
-    (muiProps) => (
-      <MuiButton
-        {...muiProps}
-        aria-label={ariaLabel}
-        aria-labelledby={ariaLabelledBy}
-        aria-describedby={ariaDescribedBy}
-        data-se={testId}
-        disabled={isDisabled}
-        endIcon={endIcon}
-        fullWidth={isFullWidth}
-        id={id}
-        onClick={onClick}
-        ref={(element: HTMLButtonElement) => {
-          if (muiProps?.ref) {
-            muiProps?.ref(element);
-          }
-          localButtonRef.current = element;
-        }}
-        size={size}
-        startIcon={startIcon}
-        translate={translate}
-        type={type}
-        variant={variant}
-      >
-        {label}
-      </MuiButton>
-    ),
+    (muiProps) => {
+      muiProps.ref?.(localButtonRef.current);
+
+      return (
+        <MuiButton
+          {...muiProps}
+          aria-label={ariaLabel}
+          aria-labelledby={ariaLabelledBy}
+          aria-describedby={ariaDescribedBy}
+          data-se={testId}
+          disabled={isDisabled}
+          endIcon={endIcon}
+          fullWidth={isFullWidth}
+          id={id}
+          onClick={onClick}
+          ref={localButtonRef}
+          size={size}
+          startIcon={startIcon}
+          translate={translate}
+          type={type}
+          variant={variant}
+        >
+          {label}
+        </MuiButton>
+      );
+    },
     [
       ariaDescribedBy,
       ariaLabel,
