@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.5](https://github.com/okta/odyssey/compare/v1.12.4...v1.12.5) (2024-02-01)
+
+### Bug Fixes
+
+- fixed the inputMode attr name and added comment to a prior change ([#2111](https://github.com/okta/odyssey/issues/2111)) ([2641612](https://github.com/okta/odyssey/commit/2641612e7cf8c0fca09b36df6af1fc173a6bb1e4))
+
 ## [1.12.4](https://github.com/okta/odyssey/compare/v1.12.3...v1.12.4) (2024-02-01)
 
 **Note:** Version bump only for package odyssey
