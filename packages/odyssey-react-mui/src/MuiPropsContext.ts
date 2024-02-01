@@ -10,9 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createContext, useContext } from "react";
+import { ForwardedRef, createContext, useContext } from "react";
 
-export type MuiPropsContextType = Record<string, unknown>;
+export type MuiPropsContextType =
+  | Record<string, unknown>
+  | { ref: ForwardedRef<HTMLElement> };
 
 export const MuiPropsContext = createContext<MuiPropsContextType>({});
 
