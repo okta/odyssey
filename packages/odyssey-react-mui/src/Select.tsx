@@ -265,6 +265,7 @@ const Select = <
     },
     [normalizedOptions]
   );
+
   // Convert the options into the ReactNode children
   // that will populate the <Select>
   const children = useMemo(
