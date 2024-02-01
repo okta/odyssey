@@ -191,7 +191,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             "aria-errormessage": errorMessageElementId,
             "aria-labelledby": labelElementId,
             "data-se": testId,
-            inputmode: inputMode,
+            inputMode,
           }}
           inputRef={localInputRef}
           multiline={isMultiline}
