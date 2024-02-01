@@ -1,6 +1,6 @@
 {
   "name": "@okta/eslint-plugin-odyssey",
-  "version": "1.12.4",
+  "version": "1.12.5",
   "main": "src/index.js",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
