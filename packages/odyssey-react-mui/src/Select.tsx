@@ -212,18 +212,23 @@ const Select = <
   // data types that might be passed
   const normalizedOptions = useMemo(
     () =>
-      options.map((option) =>
-        typeof option === "object"
-          ? {
-              text: option.text,
-              value:
-                option?.value === ""
-                  ? option.value
-                  : option.value || option.text,
-              type: option.type === "heading" ? "heading" : "option",
-            }
-          : { text: option, value: option, type: "option" }
-      ),
+      options.map((option) => {
+        if (typeof option === "object") {
+          /**
+           * If the value of `option?.value is an empty string, we need to make sure that we
+           * set an empty string to `value` in the normalized option so that the select component
+           * can potentially set it as the selected one in the text input
+           */
+          const value =
+            option?.value === "" ? option.value : option.value || option.text;
+          return {
+            text: option.text,
+            value,
+            type: option.type === "heading" ? "heading" : "option",
+          };
+        }
+        return { text: option, value: option, type: "option" };
+      }),
     [options]
   );
 
