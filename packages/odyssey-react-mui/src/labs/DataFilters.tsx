@@ -176,6 +176,21 @@ const DataFilters = ({
     }
   }, [onChangeSearch, searchValue, searchDelayTime, hasSearchSubmitButton]);
 
+  const autocompleteOptions = useMemo(() => {
+    // Check if filterPopoverCurrentFilter and filterPopoverCurrentFilter.options are defined
+    if (
+      filterPopoverCurrentFilter?.variant === "autocomplete" &&
+      filterPopoverCurrentFilter?.options
+    ) {
+      return filterPopoverCurrentFilter.options.map((option) => ({
+        label: option.label,
+      }));
+    }
+
+    // if filterPopoverCurrentFilter or filterPopoverCurrentFilter.options is undefined
+    return [];
+  }, [filterPopoverCurrentFilter]);
+
   const updateInputValue = useCallback(
     ({ filterId, value }: { filterId: string; value: DataFilterValue }) => {
       setInputValues({ ...inputValues, [filterId]: value });
@@ -428,11 +443,7 @@ const DataFilters = ({
                                   value: label,
                                 });
                               }}
-                              options={filterPopoverCurrentFilter.options.map(
-                                (option: { label: string }) => ({
-                                  label: option.label,
-                                })
-                              )}
+                              options={autocompleteOptions}
                             />
                           </AutocompleteInnerContainer>
                           <Button
