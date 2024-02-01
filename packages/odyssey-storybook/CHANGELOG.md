@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.3](https://github.com/okta/odyssey/compare/v1.12.2...v1.12.3) (2024-02-01)
+
+### Bug Fixes
+
+- allow empty string value for option value and value prop ([#2104](https://github.com/okta/odyssey/issues/2104)) ([c1d5f1b](https://github.com/okta/odyssey/commit/c1d5f1b052f8c8adc3eacd71071b1d6078491811))
+
 ## [1.12.2](https://github.com/okta/odyssey/compare/v1.12.1...v1.12.2) (2024-01-31)
 
 **Note:** Version bump only for package @okta/odyssey-storybook
