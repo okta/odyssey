@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.6](https://github.com/okta/odyssey/compare/v1.12.5...v1.12.6) (2024-02-01)
+
+### Bug Fixes
+
+- add memo to autocomplete options ([c6c0d5d](https://github.com/okta/odyssey/commit/c6c0d5db40f11eaf4648a3e4f7112b0f29bc1cbe))
+- decouple onChange logic ([d26bbc2](https://github.com/okta/odyssey/commit/d26bbc2306ed05425f72e046a4cd9dc1706e808e))
+- fix warning in DataFilters file ([5fdecf1](https://github.com/okta/odyssey/commit/5fdecf1a72734b8bb28f190fd9238312af9b5fd6))
+- implement requested PR changes ([6383c3b](https://github.com/okta/odyssey/commit/6383c3bca821488d233f0ebe15b835a2e4c5e832))
+- onchange for autocomplete in datafilters ([e82bbd5](https://github.com/okta/odyssey/commit/e82bbd5a5bee5e6cb5d3768af3aafd14496d76e2))
+
 ## [1.12.5](https://github.com/okta/odyssey/compare/v1.12.4...v1.12.5) (2024-02-01)
 
 ### Bug Fixes
