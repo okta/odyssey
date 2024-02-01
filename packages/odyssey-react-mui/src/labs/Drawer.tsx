@@ -11,7 +11,6 @@
  */
 
 import { Drawer as MuiDrawer } from "@mui/material";
-import { drawerClasses } from "@mui/material/Drawer";
 import { Button } from "../Button";
 import { Box } from "../Box";
 import { CloseIcon } from "../icons.generated";
@@ -23,6 +22,12 @@ import {
   useRef,
   ReactElement,
 } from "react";
+import {
+  useOdysseyDesignTokens,
+  DesignTokens,
+} from "../OdysseyDesignTokensContext";
+
+import styled from "@emotion/styled";
 
 import type { AllowedProps } from "../AllowedProps";
 
@@ -64,6 +69,46 @@ export type DrawerProps = {
   ariaLabel: string;
 } & AllowedProps;
 
+const DrawerHeader = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>`
+  position: relative;
+  font-size: ${({ odysseyDesignTokens }) =>
+    odysseyDesignTokens.TypographySizeHeading5};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-block-end: 0;
+  padding: 0 0 ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing4} 0;
+  font-family: ${({ odysseyDesignTokens }) =>
+    odysseyDesignTokens.TypographyFamilyHeading};
+  color: ${({ odysseyDesignTokens }) => odysseyDesignTokens.HueNeutral900};
+`;
+
+const DrawerFooter = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>`
+  display: flex;
+  position: sticky;
+  bottom: 0;
+  background-color: ${({ odysseyDesignTokens }) =>
+    odysseyDesignTokens.HueNeutralWhite};
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: center;
+  padding: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing4};
+  align-content: center;
+  .MuiButton-root {
+    margin-inline-end: ${({ odysseyDesignTokens }) =>
+      odysseyDesignTokens.Spacing1};
+  }
+`;
+
 const Drawer = ({
   callToActionFirstComponent,
   callToActionSecondComponent,
@@ -79,6 +124,7 @@ const Drawer = ({
 }: DrawerProps) => {
   const [isContentScrollable, setIsContentScrollable] = useState(false);
   const dialogContentRef = useRef<HTMLDivElement>(null);
+  const odysseyDesignTokens = useOdysseyDesignTokens();
 
   useEffect(() => {
     let frameId: number;
@@ -118,7 +164,7 @@ const Drawer = ({
       variant={variant}
     >
       <div>
-        <div className={`${drawerClasses.root}-header`}>
+        <DrawerHeader odysseyDesignTokens={odysseyDesignTokens}>
           {title}
           <Button
             ariaLabel={ariaLabel}
@@ -128,9 +174,8 @@ const Drawer = ({
             startIcon={<CloseIcon />}
             variant="floating"
           />
-        </div>
+        </DrawerHeader>
         <Box
-          // dividers={isContentScrollable}
           ref={dialogContentRef}
           {...(isContentScrollable && {
             tabIndex: 0,
@@ -142,11 +187,11 @@ const Drawer = ({
       {(callToActionFirstComponent ||
         callToActionSecondComponent ||
         callToActionLastComponent) && (
-        <div className={`${drawerClasses.root}-footer`}>
+        <DrawerFooter odysseyDesignTokens={odysseyDesignTokens}>
           {callToActionLastComponent}
           {callToActionSecondComponent}
           {callToActionFirstComponent}
-        </div>
+        </DrawerFooter>
       )}
     </MuiDrawer>
   );

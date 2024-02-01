@@ -223,8 +223,8 @@ const DefaultTemplate: StoryObj<DrawerProps> = {
         {props.variant === "persistent" ? (
           <>
             <Button label="Open drawer" onClick={onOpen} variant="primary" />
-            <div
-              style={{
+            <Box
+              sx={{
                 display: "flex",
                 gap: "24px",
                 padding: "24px",
@@ -233,9 +233,9 @@ const DefaultTemplate: StoryObj<DrawerProps> = {
                 minHeight: "100vh",
               }}
             >
-              <div style={{ flex: 1, paddingTop: "24px" }}>{gridStubText}</div>
-              <div
-                style={{
+              <Box sx={{ flex: 1, paddingTop: "24px" }}>{gridStubText}</Box>
+              <Box
+                sx={{
                   flex: "0 0 auto",
                   overflowY: "auto",
                   maxHeight: "100vh",
@@ -267,8 +267,8 @@ const DefaultTemplate: StoryObj<DrawerProps> = {
                   onClose={onClose}
                   isOpen={isVisible}
                 />
-              </div>
-            </div>
+              </Box>
+            </Box>
           </>
         ) : (
           <>
