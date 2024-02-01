@@ -28,7 +28,6 @@ import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { HtmlProps } from "./HtmlProps";
 import { FocusHandle, getControlState, useInputValues } from "./inputUtils";
-import { ForwardRefWithType } from "./@types/react-augment";
 
 export type NativeSelectOption = {
   text: string;
@@ -105,7 +104,7 @@ export type NativeSelectProps<
 > &
   HtmlProps;
 
-const NativeSelect: ForwardRefWithType = forwardRef(
+const NativeSelect = forwardRef(
   <
     Value extends NativeSelectValueType<HasMultipleChoices>,
     HasMultipleChoices extends boolean
