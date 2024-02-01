@@ -67,7 +67,7 @@ export const getCss = () => {
 };
 ```
 
-The in your code, you can do something like:
+Then in your code, you can do something like:
 
 ```tsx
 // MyComponent.tsx
@@ -75,7 +75,6 @@ The in your code, you can do something like:
 import { getCss } from "./utils"
 
 export const MyComponent = () => {
-
   const css = getCss();
 
   const componentStyle = css`
@@ -84,7 +83,7 @@ export const MyComponent = () => {
 
   return (
     <div className={componentStyle}>
-      { //... things }
+      { /* ... */ }
     </div>
   )
 }

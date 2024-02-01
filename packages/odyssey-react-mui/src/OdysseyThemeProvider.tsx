@@ -29,6 +29,11 @@ export type OdysseyThemeProviderProps = {
   themeOverride?: ThemeOptions;
 };
 
+/**
+ * This function doesn't include the Emotion Cache or Translations. You should probably be using `OdysseyProvider`.
+ *
+ * Some teams have a need to wrap separately (SIW), but most teams will never need to use this explicitly.
+ */
 const OdysseyThemeProvider = ({
   children,
   designTokensOverride,
