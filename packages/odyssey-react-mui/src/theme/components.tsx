@@ -1936,7 +1936,7 @@ export const components = ({
           [`&.${menuItemClasses.root}-destructive`]: {
             color: odysseyTokens.TypographyColorDanger,
 
-            "*": {
+            [`.${typographyClasses.root}`]: {
               color: "inherit",
             },
           },
@@ -1966,7 +1966,7 @@ export const components = ({
             opacity: 1,
             color: odysseyTokens.TypographyColorDisabled,
 
-            "*": {
+            [`.${typographyClasses.root}`]: {
               color: "inherit",
             },
           },

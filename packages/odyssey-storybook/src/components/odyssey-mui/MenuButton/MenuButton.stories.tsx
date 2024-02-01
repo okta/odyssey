@@ -210,7 +210,7 @@ export const Simple: StoryObj<MenuButtonProps> = {
 export const ActionIcons: StoryObj<MenuButtonProps> = {
   args: {
     children: [
-      <MenuItem key="1">
+      <MenuItem key="1" isDisabled>
         <ListItemIcon>
           <GroupIcon />
         </ListItemIcon>
