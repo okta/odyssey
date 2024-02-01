@@ -18,7 +18,6 @@ import { buttonClasses } from "@mui/material/Button";
 import { checkboxClasses } from "@mui/material/Checkbox";
 import { chipClasses } from "@mui/material/Chip";
 import { dividerClasses } from "@mui/material/Divider";
-import { drawerClasses } from "@mui/material/Drawer";
 import { formControlLabelClasses } from "@mui/material/FormControlLabel";
 import { formLabelClasses } from "@mui/material/FormLabel";
 import { formGroupClasses } from "@mui/material/FormGroup";
@@ -1017,32 +1016,6 @@ export const components = ({
       styleOverrides: {
         root: {
           height: "100%",
-          [`& .${drawerClasses.root}-header`]: {
-            fontSize: odysseyTokens.TypographySizeHeading5,
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginBlockEnd: 0,
-            padding: `0 0 ${odysseyTokens.Spacing4} 0`,
-            fontFamily: odysseyTokens.TypographyFamilyHeading,
-            color: odysseyTokens.HueNeutral900,
-            [`.${buttonClasses.root}`]: {
-              // Pull close button by inline padding amount
-              marginInlineEnd: `-${odysseyTokens.Spacing3}`,
-            },
-          },
-          [`& .${drawerClasses.root}-footer`]: {
-            display: "flex",
-            position: "sticky",
-            bottom: 0,
-            backgroundColor: odysseyTokens.HueNeutralWhite,
-            flexDirection: "row",
-            flexWrap: "nowrap",
-            justifyContent: "flex-end",
-            alignItems: "center",
-            padding: `${odysseyTokens.Spacing4}`,
-            alignContent: "center",
-          },
         },
         paper: ({ ownerState }) => ({
           width: ownerState.variant === "temporary" ? "400px" : "360px",
