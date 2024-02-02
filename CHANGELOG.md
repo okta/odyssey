@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.9](https://github.com/okta/odyssey/compare/v1.12.8...v1.12.9) (2024-02-02)
+
+### Bug Fixes
+
+- change spacing on checkbox label and hint ([08fb4f9](https://github.com/okta/odyssey/commit/08fb4f9b6e9579b110ef640035a2776687f6f3d1))
+
 ## [1.12.8](https://github.com/okta/odyssey/compare/v1.12.7...v1.12.8) (2024-02-02)
 
 **Note:** Version bump only for package odyssey
