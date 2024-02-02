@@ -3,6 +3,46 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.9](https://github.com/okta/odyssey/compare/v1.12.8...v1.12.9) (2024-02-02)
+
+### Bug Fixes
+
+- change spacing on checkbox label and hint ([08fb4f9](https://github.com/okta/odyssey/commit/08fb4f9b6e9579b110ef640035a2776687f6f3d1))
+
+## [1.12.8](https://github.com/okta/odyssey/compare/v1.12.7...v1.12.8) (2024-02-02)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.12.7](https://github.com/okta/odyssey/compare/v1.12.6...v1.12.7) (2024-02-02)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.12.6](https://github.com/okta/odyssey/compare/v1.12.5...v1.12.6) (2024-02-01)
+
+### Bug Fixes
+
+- add memo to autocomplete options ([c6c0d5d](https://github.com/okta/odyssey/commit/c6c0d5db40f11eaf4648a3e4f7112b0f29bc1cbe))
+- decouple onChange logic ([d26bbc2](https://github.com/okta/odyssey/commit/d26bbc2306ed05425f72e046a4cd9dc1706e808e))
+- fix warning in DataFilters file ([5fdecf1](https://github.com/okta/odyssey/commit/5fdecf1a72734b8bb28f190fd9238312af9b5fd6))
+- implement requested PR changes ([6383c3b](https://github.com/okta/odyssey/commit/6383c3bca821488d233f0ebe15b835a2e4c5e832))
+- onchange for autocomplete in datafilters ([e82bbd5](https://github.com/okta/odyssey/commit/e82bbd5a5bee5e6cb5d3768af3aafd14496d76e2))
+
+## [1.12.5](https://github.com/okta/odyssey/compare/v1.12.4...v1.12.5) (2024-02-01)
+
+### Bug Fixes
+
+- fixed the inputMode attr name and added comment to a prior change ([#2111](https://github.com/okta/odyssey/issues/2111)) ([2641612](https://github.com/okta/odyssey/commit/2641612e7cf8c0fca09b36df6af1fc173a6bb1e4))
+
+## [1.12.4](https://github.com/okta/odyssey/compare/v1.12.3...v1.12.4) (2024-02-01)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.12.3](https://github.com/okta/odyssey/compare/v1.12.2...v1.12.3) (2024-02-01)
+
+### Bug Fixes
+
+- allow empty string value for option value and value prop ([#2104](https://github.com/okta/odyssey/issues/2104)) ([c1d5f1b](https://github.com/okta/odyssey/commit/c1d5f1b052f8c8adc3eacd71071b1d6078491811))
+
 ## [1.12.2](https://github.com/okta/odyssey/compare/v1.12.1...v1.12.2) (2024-01-31)
 
 ### Bug Fixes

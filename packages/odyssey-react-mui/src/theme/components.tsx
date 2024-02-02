@@ -1583,7 +1583,7 @@ export const components = ({
           alignItems: "center",
           fontSize: odysseyTokens.TypographySizeSubordinate,
           lineHeight: odysseyTokens.TypographyLineHeightBody,
-          marginBlockStart: odysseyTokens.Spacing2,
+          marginBlockStart: odysseyTokens.Spacing1,
           [`.${formLabelClasses.root} + &`]: {
             marginBlockStart: `-${odysseyTokens.Spacing1}`,
             color: odysseyTokens.TypographyColorSubordinate,
@@ -1935,6 +1935,10 @@ export const components = ({
 
           [`&.${menuItemClasses.root}-destructive`]: {
             color: odysseyTokens.TypographyColorDanger,
+
+            [`.${typographyClasses.root}`]: {
+              color: "inherit",
+            },
           },
 
           [`&.${menuItemClasses.selected}`]: {
@@ -1961,6 +1965,10 @@ export const components = ({
           [`&.${menuItemClasses.disabled}`]: {
             opacity: 1,
             color: odysseyTokens.TypographyColorDisabled,
+
+            [`.${typographyClasses.root}`]: {
+              color: "inherit",
+            },
           },
 
           [`& + .${dividerClasses.root}`]: {

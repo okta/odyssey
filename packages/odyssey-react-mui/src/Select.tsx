@@ -40,6 +40,7 @@ import {
   useInputValues,
   getControlState,
 } from "./inputUtils";
+import { normalizedKey } from "./useNormalizedKey";
 
 export type SelectOption = {
   text: string;
@@ -211,15 +212,23 @@ const Select = <
   // data types that might be passed
   const normalizedOptions = useMemo(
     () =>
-      options.map((option) =>
-        typeof option === "object"
-          ? {
-              text: option.text,
-              value: option.value || option.text,
-              type: option.type === "heading" ? "heading" : "option",
-            }
-          : { text: option, value: option, type: "option" }
-      ),
+      options.map((option) => {
+        if (typeof option === "object") {
+          /**
+           * If the value of `option?.value is an empty string, we need to make sure that we
+           * set an empty string to `value` in the normalized option so that the select component
+           * can potentially set it as the selected one in the text input
+           */
+          const value =
+            option?.value === "" ? option.value : option.value || option.text;
+          return {
+            text: option.text,
+            value,
+            type: option.type === "heading" ? "heading" : "option",
+          };
+        }
+        return { text: option, value: option, type: "option" };
+      }),
     [options]
   );
 
@@ -261,19 +270,25 @@ const Select = <
   // that will populate the <Select>
   const children = useMemo(
     () =>
-      normalizedOptions.map((option) => {
+      normalizedOptions.map((option, index) => {
         if (option.type === "heading") {
           return <ListSubheader key={option.text}>{option.text}</ListSubheader>;
         }
         return (
-          <MenuItem key={option.value} value={option.value}>
+          <MenuItem
+            key={normalizedKey(option.text, index.toString())}
+            value={option.value}
+          >
             {hasMultipleChoices && (
               <MuiCheckbox
-                checked={internalSelectedValues?.includes(option.value)}
+                checked={
+                  option.value !== undefined &&
+                  internalSelectedValues?.includes(option.value)
+                }
               />
             )}
             {option.text}
-            {internalSelectedValues === option.value && (
+            {internalSelectedValues === option?.value && (
               <ListItemSecondaryAction>
                 <CheckIcon />
               </ListItemSecondaryAction>
@@ -291,6 +306,10 @@ const Select = <
         aria-describedby={ariaDescribedBy}
         aria-errormessage={errorMessageElementId}
         children={children}
+        data-se={testId}
+        displayEmpty={
+          inputValues?.value === "" || inputValues?.defaultValue === ""
+        }
         id={id}
         inputProps={{ "data-se": testId }}
         inputRef={localInputRef}
