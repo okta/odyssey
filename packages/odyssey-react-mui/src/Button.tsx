@@ -151,7 +151,7 @@ const Button = ({
 
   const renderButton = useCallback(
     (muiProps) => {
-      muiProps.ref?.(localButtonRef.current);
+      muiProps?.ref?.(localButtonRef.current);
 
       return (
         <MuiButton
