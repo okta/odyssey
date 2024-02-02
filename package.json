@@ -51,6 +51,7 @@
     "stylelint": "^15.10.1"
   },
   "resolutions": {
+    "rimraf@<4.2.0": "rimraf@^4.2.0",
     "webdriver@npm:7": "webdriver@~8.24.10",
     "webdriver@npm:7.3.0": "webdriver@~8.24.10"
   },
