@@ -50,6 +50,9 @@
     "prettier": "^2.8.8",
     "stylelint": "^15.10.1"
   },
+  "resolutions": {
+    "webdriver@7.3.0": "webdriver@8.0.0"
+  },
   "version": "0.5.0",
   "packageManager": "yarn@3.6.3"
 }
