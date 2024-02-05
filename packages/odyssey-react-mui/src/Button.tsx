@@ -13,6 +13,7 @@
 import { Button as MuiButton } from "@mui/material";
 import type { ButtonProps as MuiButtonProps } from "@mui/material";
 import {
+  ComponentPropsWithoutRef,
   memo,
   ReactElement,
   useCallback,
@@ -34,6 +35,8 @@ export const buttonVariantValues = [
   "danger",
   "floating",
 ] as const;
+
+type NativeButtonProps = ComponentPropsWithoutRef<"button">;
 
 export type ButtonProps = {
   /**
@@ -113,7 +116,8 @@ export type ButtonProps = {
       startIcon?: ReactElement;
     }
 ) &
-  AllowedProps;
+  AllowedProps &
+  NativeButtonProps;
 
 const Button = ({
   ariaDescribedBy,
@@ -133,6 +137,7 @@ const Button = ({
   translate,
   type = "button",
   variant,
+  ...nativeButtonProps
 }: ButtonProps) => {
   const muiProps = useMuiProps();
   const localButtonRef = useRef<HTMLButtonElement>(null);
@@ -155,6 +160,7 @@ const Button = ({
 
       return (
         <MuiButton
+          {...nativeButtonProps}
           {...muiProps}
           aria-label={ariaLabel}
           aria-labelledby={ariaLabelledBy}
