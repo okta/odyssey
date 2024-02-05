@@ -135,8 +135,8 @@ const Button = ({
   variant,
 }: ButtonProps) => {
   const muiProps = useMuiProps();
-
   const localButtonRef = useRef<HTMLButtonElement>(null);
+
   useImperativeHandle(
     buttonRef,
     () => {
@@ -150,28 +150,32 @@ const Button = ({
   );
 
   const renderButton = useCallback(
-    (muiProps) => (
-      <MuiButton
-        {...muiProps}
-        aria-label={ariaLabel}
-        aria-labelledby={ariaLabelledBy}
-        aria-describedby={ariaDescribedBy}
-        data-se={testId}
-        disabled={isDisabled}
-        endIcon={endIcon}
-        fullWidth={isFullWidth}
-        id={id}
-        onClick={onClick}
-        ref={localButtonRef}
-        size={size}
-        startIcon={startIcon}
-        translate={translate}
-        type={type}
-        variant={variant}
-      >
-        {label}
-      </MuiButton>
-    ),
+    (muiProps) => {
+      muiProps?.ref?.(localButtonRef.current);
+
+      return (
+        <MuiButton
+          {...muiProps}
+          aria-label={ariaLabel}
+          aria-labelledby={ariaLabelledBy}
+          aria-describedby={ariaDescribedBy}
+          data-se={testId}
+          disabled={isDisabled}
+          endIcon={endIcon}
+          fullWidth={isFullWidth}
+          id={id}
+          onClick={onClick}
+          ref={localButtonRef}
+          size={size}
+          startIcon={startIcon}
+          translate={translate}
+          type={type}
+          variant={variant}
+        >
+          {label}
+        </MuiButton>
+      );
+    },
     [
       ariaDescribedBy,
       ariaLabel,
@@ -191,17 +195,15 @@ const Button = ({
     ]
   );
 
-  return (
-    <>
-      {tooltipText && !isDisabled && (
-        <Tooltip ariaType="description" placement="top" text={tooltipText}>
-          <MuiPropsContext.Consumer>{renderButton}</MuiPropsContext.Consumer>
-        </Tooltip>
-      )}
+  if (tooltipText) {
+    return (
+      <Tooltip ariaType="description" placement="top" text={tooltipText}>
+        <MuiPropsContext.Consumer>{renderButton}</MuiPropsContext.Consumer>
+      </Tooltip>
+    );
+  }
 
-      {(isDisabled || !tooltipText) && renderButton(muiProps)}
-    </>
-  );
+  return renderButton(muiProps);
 };
 
 const MemoizedButton = memo(Button);
