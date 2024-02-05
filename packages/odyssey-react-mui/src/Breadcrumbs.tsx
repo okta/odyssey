@@ -29,7 +29,7 @@ import {
 import { GroupIcon, HomeIcon, UserIcon } from "./icons.generated";
 import { Subordinate } from "./Typography";
 import { useTranslation } from "react-i18next";
-import { AllowedProps } from "./AllowedProps";
+import { HtmlProps } from "./HtmlProps";
 
 export type BreadcrumbType = "listItem" | "menuItem" | "currentPage";
 
@@ -43,7 +43,7 @@ export type BreadcrumbsProps = {
   children: ReactElement<typeof Breadcrumb>[];
   homeHref?: string;
   maxVisibleItems?: number;
-} & AllowedProps;
+} & HtmlProps;
 
 export type BreadcrumbContextType = {
   breadcrumbType: BreadcrumbType;

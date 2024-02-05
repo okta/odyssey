@@ -16,7 +16,7 @@ import { ScreenReaderText } from "./ScreenReaderText";
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
 
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 
 export const bannerRoleValues = ["status", "alert"] as const;
 export const bannerSeverityValues: AlertColor[] = [
@@ -56,7 +56,7 @@ export type BannerProps = {
    * The text content of the alert
    */
   text: string;
-} & AllowedProps;
+} & HtmlProps;
 
 const Banner = ({
   linkUrl,

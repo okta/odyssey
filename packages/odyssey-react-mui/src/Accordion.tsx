@@ -11,7 +11,7 @@
  */
 
 import { ReactNode, memo } from "react";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 import {
   Accordion as MuiAccordion,
   AccordionDetails as MuiAccordionDetails,
@@ -65,7 +65,7 @@ export type AccordionProps = {
       isExpanded?: never;
     }
 ) &
-  AllowedProps;
+  HtmlProps;
 
 const Accordion = ({
   children,

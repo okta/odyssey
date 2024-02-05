@@ -29,7 +29,7 @@ import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext";
 import { Box } from "../Box";
 import { FieldComponentProps } from "../FieldComponentProps";
 import { FieldHint } from "../FieldHint";
-import type { AllowedProps } from "../AllowedProps";
+import type { HtmlProps } from "../HtmlProps";
 import { useUniqueId } from "../useUniqueId";
 import { ComponentControlledState, getControlState } from "../inputUtils";
 import { CheckedFieldProps } from "../FormCheckedProps";
@@ -63,7 +63,7 @@ export type SwitchProps = {
   "hint" | "id" | "isFullWidth" | "isDisabled" | "name"
 > &
   CheckedFieldProps<MuiSwitchProps> &
-  AllowedProps;
+  HtmlProps;
 
 type SwitchLabelProps = {
   checked: boolean;

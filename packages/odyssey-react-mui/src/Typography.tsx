@@ -22,7 +22,7 @@ import {
   useRef,
   useImperativeHandle,
 } from "react";
-import { AllowedProps } from "./AllowedProps";
+import { HtmlProps } from "./HtmlProps";
 import { FocusHandle } from "./inputUtils";
 
 export type TypographyVariantValue =
@@ -94,7 +94,7 @@ export type TypographyProps = {
    * The variant of Typography to render.
    */
   variant?: keyof typeof typographyVariantMapping;
-} & AllowedProps;
+} & HtmlProps;
 
 const Typography = ({
   ariaDescribedBy,
