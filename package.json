@@ -52,6 +52,8 @@
   },
   "resolutions": {
     "@wdio/config@npm:8.0.14": "^8.29.3",
+    "node-gyp@npm:^9.0.0": "^10.0.0",
+    "node-gyp@npm:latest": "^10.0.0",
     "rimraf@npm:2": "^4.2.0",
     "rimraf@npm:2.x": "^4.2.0",
     "rimraf@2.7.1": "^4.2.0",
