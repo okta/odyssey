@@ -10,7 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useEffect, useRef } from "react";
 import { Box } from "@mui/material";
 import {
   Button,
@@ -419,13 +418,6 @@ export const IconOnly: StoryObj<ButtonProps> = {
     ariaLabel: "Add crew",
     label: undefined,
     tooltipText: "Add crew",
-  },
-  render: function C(args) {
-    const buttonRef = useRef<HTMLButtonElement>();
-    useEffect(() => {
-      buttonRef?.current?.focus();
-    }, []);
-    return <Button {...args} buttonRef={buttonRef} />;
   },
 };
 
