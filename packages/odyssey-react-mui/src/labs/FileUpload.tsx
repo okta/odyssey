@@ -22,7 +22,7 @@ import styled from "@emotion/styled";
 
 import { Button } from "../Button";
 import { UploadIcon } from "../icons.generated";
-import { Field } from "../Field";
+import { Field, RenderFieldComponentProps } from "../Field";
 import { FieldComponentProps } from "../FieldComponentProps";
 import { Support } from "../Typography";
 import {
@@ -110,7 +110,7 @@ const ButtonAndInfoContainer = styled.div`
 
 export type FileUploadProps = {
   /**
-   * an array of file types the user is able to upload. See https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept#unique_file_type_specifiers for examples
+   * an array of file types the user is able to upload. @see https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept#unique_file_type_specifiers for examples
    */
   acceptedFileTypes?: string[];
   /**
@@ -126,7 +126,7 @@ export type FileUploadProps = {
    */
   onChange: (files: File[]) => void;
   /**
-   * If `true` multiple files can be uploaded.
+   * Either `single` or `multiple`. If `multiple`, multiple files can be uploaded
    */
   type?: (typeof fileUploadTypes)[number];
 } & Pick<
@@ -138,6 +138,8 @@ export type FileUploadProps = {
   | "isDisabled"
   | "isOptional"
 >;
+
+type RemoveFileFromFilesToUploadList = (name: string) => void;
 
 const FileUpload = ({
   acceptedFileTypes,
@@ -161,7 +163,7 @@ const FileUpload = ({
     onChange(filesToUpload);
   }, [filesToUpload, onChange]);
 
-  const handleFileInputChange = useCallback(
+  const updateFilesToUpload = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       const { files } = event.target;
 
@@ -177,34 +179,41 @@ const FileUpload = ({
     [type, filesToUpload]
   );
 
-  const handleUploadButtonClick = useCallback(() => {
+  const triggerFileInputClick = useCallback(() => {
     inputRef?.current?.click();
   }, [inputRef]);
 
-  const handleFileRemoval = useCallback(
-    (name: string) => {
-      const deletedFileFilteredOut = filesToUpload.filter(
-        (file) => file.name != name
-      );
-      setFilesToUpload(deletedFileFilteredOut);
-    },
-    [filesToUpload]
-  );
+  const removeFileFromFilesToUploadList =
+    useCallback<RemoveFileFromFilesToUploadList>(
+      (name) => {
+        const deletedFileFilteredOut = filesToUpload.filter(
+          (file) => file.name !== name
+        );
+        setFilesToUpload(deletedFileFilteredOut);
+      },
+      [filesToUpload]
+    );
 
   const renderFileInput = useCallback(
-    ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => {
+    ({
+      ariaDescribedBy,
+      errorMessageElementId,
+      id,
+      labelElementId,
+    }: RenderFieldComponentProps) => {
       const fileNames = filesToUpload.map((file) => file.name);
+      const acceptedFileTypesAsString = acceptedFileTypes?.join(",");
 
       const Input = () => (
         <input
-          accept={acceptedFileTypes?.toString()}
+          accept={acceptedFileTypesAsString}
           aria-describedby={ariaDescribedBy}
           aria-errormessage={errorMessageElementId}
           aria-labelledby={labelElementId}
           disabled={isDisabled}
           id={id}
           multiple={type === "multiple"}
-          onChange={handleFileInputChange}
+          onChange={updateFilesToUpload}
           ref={inputRef}
           title=""
           type="file"
@@ -219,14 +228,14 @@ const FileUpload = ({
               <Button
                 isDisabled={isDisabled}
                 label="Upload Files"
-                onClick={handleUploadButtonClick}
+                onClick={triggerFileInputClick}
                 startIcon={<UploadIcon />}
                 variant="secondary"
               />
             </BaseInputWrapper>
             <FileUploadPreview
               fileNames={fileNames}
-              handleFileRemoval={handleFileRemoval}
+              onFileRemove={removeFileFromFilesToUploadList}
               isDisabled={isDisabled}
             />
           </>
@@ -245,7 +254,7 @@ const FileUpload = ({
               <Button
                 isDisabled={isDisabled}
                 label="Add Files"
-                onClick={handleUploadButtonClick}
+                onClick={triggerFileInputClick}
                 startIcon={<UploadIcon />}
                 variant="secondary"
               />
@@ -253,7 +262,7 @@ const FileUpload = ({
           </InputContainer>
           <FileUploadPreview
             fileNames={fileNames}
-            handleFileRemoval={handleFileRemoval}
+            onFileRemove={removeFileFromFilesToUploadList}
             isDisabled={isDisabled}
           />
         </>
@@ -262,14 +271,14 @@ const FileUpload = ({
     [
       acceptedFileTypes,
       filesToUpload,
-      handleFileInputChange,
-      handleFileRemoval,
-      handleUploadButtonClick,
       isButtonOnly,
       isDisabled,
       inputRef,
       odysseyDesignTokens,
+      removeFileFromFilesToUploadList,
+      triggerFileInputClick,
       type,
+      updateFilesToUpload,
     ]
   );
 
