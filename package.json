@@ -70,6 +70,7 @@
     "rimraf@npm:^3.0.0": "^4.2.0",
     "rimraf@npm:3.0.2": "^4.2.0",
     "rimraf@npm:^3.0.2": "^4.2.0",
+    "test-exclude/glob@^7.1.4": "^9.0.0",
     "webdriver@npm:7": "webdriver@~8.24.10",
     "webdriver@npm:7.3.0": "webdriver@~8.24.10"
   },
