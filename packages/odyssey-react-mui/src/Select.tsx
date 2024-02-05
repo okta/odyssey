@@ -288,11 +288,13 @@ const Select = <
               />
             )}
             {option.text}
-            {internalSelectedValues === option?.value && (
-              <ListItemSecondaryAction>
-                <CheckIcon />
-              </ListItemSecondaryAction>
-            )}
+            {!hasMultipleChoices &&
+              (internalSelectedValues?.includes(option.value) ||
+                internalSelectedValues === option.value) && (
+                <ListItemSecondaryAction>
+                  <CheckIcon />
+                </ListItemSecondaryAction>
+              )}
           </MenuItem>
         );
       }),
