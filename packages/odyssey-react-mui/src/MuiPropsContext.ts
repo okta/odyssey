@@ -13,7 +13,6 @@
 import { createContext, useContext } from "react";
 
 export type MuiPropsContextType = Record<string, unknown>;
-
 export const MuiPropsContext = createContext<MuiPropsContextType>({});
 
 export const useMuiProps = () => useContext(MuiPropsContext);
