@@ -81,19 +81,15 @@ const UploadedFileContainer = styled("div", {
 
 type UploadedFileProps = {
   name: string;
-  handleFileRemoval?: (name: string) => void;
+  onFileRemove?: (name: string) => void;
 };
 
-const UploadedFile = ({
-  name,
-  handleFileRemoval,
-  ...rest
-}: UploadedFileProps) => {
+const UploadedFile = ({ name, onFileRemove }: UploadedFileProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const deleteHandler = useCallback(() => {
-    handleFileRemoval?.(name);
-  }, [handleFileRemoval, name]);
+    onFileRemove?.(name);
+  }, [onFileRemove, name]);
 
   const renderDeleteButton = useCallback(
     (muiProps) => {
@@ -113,7 +109,7 @@ const UploadedFile = ({
 
   return (
     <UploadedFileContainer
-      {...rest}
+      // tabindex added to make div focusable
       tabIndex={0}
       odysseyDesignTokens={odysseyDesignTokens}
     >
@@ -129,14 +125,14 @@ const UploadedFile = ({
 
 type FileUploadPreviewProps = {
   fileNames: string[];
-  handleFileRemoval?: (name: string) => void;
   isDisabled: FileUploadProps["isDisabled"];
+  onFileRemove?: (name: string) => void;
 };
 
 const FileUploadPreview = ({
   fileNames,
-  handleFileRemoval,
   isDisabled,
+  onFileRemove,
 }: FileUploadPreviewProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
@@ -148,7 +144,7 @@ const FileUploadPreview = ({
       {fileNames?.map((name: string, index: number) => (
         <UploadedFile
           key={`${index}-${name}`}
-          handleFileRemoval={handleFileRemoval}
+          onFileRemove={onFileRemove}
           name={name}
         />
       ))}
