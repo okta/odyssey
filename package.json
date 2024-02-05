@@ -51,6 +51,7 @@
     "stylelint": "^15.10.1"
   },
   "resolutions": {
+    "@commitlint/config-lerna-scopes/glob@^8.0.3": "^9.0.0",
     "@wdio/config@npm:8.0.14": "^8.29.3",
     "node-gyp@npm:^9.0.0": "^10.0.0",
     "node-gyp@npm:latest": "^10.0.0",
