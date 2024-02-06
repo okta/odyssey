@@ -38,7 +38,7 @@
     "@storybook/client-api": "^7.4.0",
     "@storybook/components": "^7.4.0",
     "@storybook/core-events": "^7.4.0",
-    "@storybook/jest": "^0.1.0",
+    "@storybook/jest": "^0.2.0",
     "@storybook/manager-api": "^7.4.0",
     "@storybook/react": "^7.4.0",
     "@storybook/react-vite": "^7.4.0",
