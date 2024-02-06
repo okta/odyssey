@@ -14,7 +14,6 @@ import { Button as MuiButton } from "@mui/material";
 import type { ButtonProps as MuiButtonProps } from "@mui/material";
 import {
   ComponentProps,
-  HTMLAttributes,
   memo,
   ReactElement,
   useCallback,
