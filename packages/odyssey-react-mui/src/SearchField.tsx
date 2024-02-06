@@ -24,7 +24,7 @@ import {
 import { CloseCircleFilledIcon, SearchIcon } from "./icons.generated";
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 import { getControlState, useInputValues } from "./inputUtils";
 
 export type SearchFieldProps = {
@@ -82,7 +82,7 @@ export type SearchFieldProps = {
   FieldComponentProps,
   "ariaDescribedBy" | "id" | "isDisabled" | "name" | "isFullWidth"
 > &
-  AllowedProps;
+  HtmlProps;
 
 const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
   (

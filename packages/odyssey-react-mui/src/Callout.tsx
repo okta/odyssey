@@ -15,7 +15,7 @@ import { Alert, AlertTitle, Box } from "@mui/material";
 import { ScreenReaderText } from "./ScreenReaderText";
 import { useTranslation } from "react-i18next";
 
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 import { Link } from "./Link";
 import { Paragraph } from "./Typography";
 
@@ -78,7 +78,7 @@ export type CalloutProps = {
         linkText?: never;
       }
   ) &
-  AllowedProps;
+  HtmlProps;
 
 const Callout = ({
   children,

@@ -17,7 +17,7 @@ import { Button } from "./Button";
 import { Callout } from "./Callout";
 import { Heading4, Support } from "./Typography";
 import { useUniqueId } from "./useUniqueId";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 
 export const formEncodingTypeValues = [
   "application/x-www-form-urlencoded",
@@ -85,7 +85,7 @@ export type FormProps = {
    * The title of the Form
    */
   title?: string;
-} & AllowedProps;
+} & HtmlProps;
 
 const Form = ({
   alert,
