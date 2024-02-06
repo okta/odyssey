@@ -53,11 +53,12 @@
   "resolutions": {
     "@commitlint/config-lerna-scopes/glob@^8.0.3": "^9.0.0",
     "@joshwooding/vite-plugin-react-docgen-typescript/glob@^7.2.0": "^9.0.0",
+    "@lerna/create@npm:7.2.0/npm-packlist": "^6.0.0",
     "@svgr/cli/glob@^8.0.3": "^9.0.0",
     "@wdio/config@npm:7.31.1": "^8.29.3",
+    "cacache@npm:12.0.4/glob": "^9.0.0",
     "node-gyp@npm:^9.0.0": "^10.0.0",
     "node-gyp@npm:latest": "^10.0.0",
-    "@lerna/create@npm:7.2.0/npm-packlist": "^6.0.0",
     "lerna@npm:7.2.0/npm-packlist": "^6.0.0",
     "rimraf@npm:2": "^4.2.0",
     "rimraf@npm:2.x": "^4.2.0",
