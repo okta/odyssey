@@ -26,7 +26,9 @@ import {
   Paragraph,
   TextField,
 } from "@okta/odyssey-react-mui";
+
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 
 const storybookMeta: Meta<FormProps> = {
   title: "MUI Components/Forms/Form",
@@ -84,6 +86,7 @@ const storybookMeta: Meta<FormProps> = {
         },
       },
     },
+    isFullWidth: fieldComponentPropsMetaData.isFullWidth,
     name: {
       control: "text",
       description:
@@ -172,7 +175,7 @@ const storybookMeta: Meta<FormProps> = {
     ),
     formActions: (
       <>
-        <Button label="Submit" variant="primary" />
+        <Button type="submit" label="Submit" variant="primary" />
         <Button label="Reset" variant="secondary" />
       </>
     ),
@@ -187,17 +190,17 @@ const Template: StoryObj<FormProps> = {
   render: function (args) {
     return (
       <Form
-        title={args.title}
-        name={args.name}
-        description={args.description}
-        formActions={args.formActions}
         alert={args.alert}
         autoCompleteType={args.autoCompleteType}
+        description={args.description}
         encodingType={args.encodingType}
+        formActions={args.formActions}
+        id={args.id}
         method={args.method}
+        name={args.name}
         noValidate={args.noValidate}
         target={args.target}
-        id={args.id}
+        title={args.title}
       >
         {args.children}
       </Form>
