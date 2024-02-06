@@ -134,6 +134,7 @@ const Template: StoryObj<typeof NativeSelect> = {
   render: function C(args) {
     return (
       <NativeSelect
+        {...args}
         id={args.id}
         label={args.label}
         hint={args.hint}
