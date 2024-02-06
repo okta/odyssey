@@ -16,7 +16,7 @@ import { memo, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { ScreenReaderText } from "./ScreenReaderText";
 import { Subordinate } from "./Typography";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 
 export type FieldLabelProps = {
   hasVisibleLabel: boolean;
@@ -24,7 +24,7 @@ export type FieldLabelProps = {
   inputId: string;
   isOptional: boolean;
   text: string;
-} & AllowedProps;
+} & HtmlProps;
 
 const FieldLabel = ({
   hasVisibleLabel,

@@ -25,7 +25,7 @@ import { InputAdornment, InputBase } from "@mui/material";
 
 import { FieldComponentProps } from "./FieldComponentProps";
 import { Field } from "./Field";
-import { AllowedProps } from "./AllowedProps";
+import { HtmlProps } from "./HtmlProps";
 import { FocusHandle, useInputValues, getControlState } from "./inputUtils";
 
 export const textFieldTypeValues = [
@@ -101,7 +101,7 @@ export type TextFieldProps = {
    */
   value?: string;
 } & FieldComponentProps &
-  AllowedProps;
+  HtmlProps;
 
 const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (

@@ -26,7 +26,7 @@ import {
 } from "@mui/material";
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 import { FocusHandle, getControlState, useInputValues } from "./inputUtils";
 import { ForwardRefWithType } from "./@types/react-augment";
 
@@ -103,7 +103,7 @@ export type NativeSelectProps<
   | "isFullWidth"
   | "isOptional"
 > &
-  AllowedProps;
+  HtmlProps;
 
 const NativeSelect: ForwardRefWithType = forwardRef(
   <

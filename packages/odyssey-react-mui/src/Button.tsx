@@ -22,7 +22,7 @@ import {
 
 import { MuiPropsContext, useMuiProps } from "./MuiPropsContext";
 import { Tooltip } from "./Tooltip";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 import { FocusHandle } from "./inputUtils";
 
 export const buttonSizeValues = ["small", "medium", "large"] as const;
@@ -113,7 +113,7 @@ export type ButtonProps = {
       startIcon?: ReactElement;
     }
 ) &
-  AllowedProps;
+  HtmlProps;
 
 const Button = ({
   ariaDescribedBy,

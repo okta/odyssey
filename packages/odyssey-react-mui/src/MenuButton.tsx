@@ -29,7 +29,7 @@ import { ChevronDownIcon, MoreIcon } from "./icons.generated";
 import { FieldComponentProps } from "./FieldComponentProps";
 import { MenuContext, MenuContextType } from "./MenuContext";
 import { NullElement } from "./NullElement";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 
 export const menuAlignmentValues = ["left", "right"] as const;
 
@@ -111,7 +111,7 @@ export type MenuButtonProps = {
     }
 ) &
   Pick<FieldComponentProps, "isDisabled"> &
-  AllowedProps;
+  HtmlProps;
 
 const MenuButton = ({
   ariaLabel,

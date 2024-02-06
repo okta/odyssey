@@ -12,7 +12,7 @@
 
 import { memo, ReactElement, useImperativeHandle, useRef } from "react";
 import { ExternalLinkIcon } from "./icons.generated";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 import { FocusHandle } from "./inputUtils";
 
 import { Link as MuiLink, LinkProps as MuiLinkProps } from "@mui/material";
@@ -57,7 +57,7 @@ export type LinkProps = {
    * The visual presentation of the Link (default or monochrome)
    */
   variant?: (typeof linkVariantValues)[number];
-} & AllowedProps;
+} & HtmlProps;
 
 const Link = ({
   children,
