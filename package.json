@@ -74,7 +74,9 @@
     "rimraf@npm:^3.0.2": "^4.2.0",
     "test-exclude/glob@^7.1.4": "^9.0.0",
     "webdriver@npm:7": "webdriver@~8.24.10",
-    "webdriver@npm:7.3.0": "webdriver@~8.24.10"
+    "webdriver@npm:7.3.0": "webdriver@~8.24.10",
+    "nyc@^15.1.0": "patch:nyc@npm:15.1.0#.yarn/patches/nyc-npm-15.1.0-f134b19668.patch",
+    "nyc/glob": "^9.0.0"
   },
   "version": "0.5.0",
   "packageManager": "yarn@3.6.3"
