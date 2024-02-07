@@ -1018,7 +1018,6 @@ export const components = ({
         },
         paper: ({ ownerState }) => ({
           width: ownerState.variant === "temporary" ? "400px" : "360px",
-          paddingBlockStart: odysseyTokens.Spacing4,
           paddingInline: odysseyTokens.Spacing5,
           display: "flex",
           flexDirection: "column",
@@ -1027,7 +1026,6 @@ export const components = ({
           alignItems: "stretch",
           alignContent: "flex-end",
           color: odysseyTokens.HueNeutral700,
-
           ...(ownerState.variant === "persistent" && {
             position: "static",
             borderRadius: "16px",

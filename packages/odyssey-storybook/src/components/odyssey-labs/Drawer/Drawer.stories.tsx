@@ -29,65 +29,77 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const gridStubText = (
   <>
-    <p>
-      Curabitur lacinia pharetra placerat. Duis sed aliquet nunc, a sollicitudin
-      orci. Aliquam non rhoncus mauris, in pellentesque mi. Nulla nec justo
-      nisi. Duis pretium mauris ante, et sollicitudin nibh fermentum vel. Nullam
-      a dolor nulla. In vulputate sagittis lacinia. Morbi finibus non quam eget
-      tincidunt. Ut viverra, elit vel dignissim tincidunt, nulla ligula lobortis
-      tellus, sed pellentesque augue nulla nec massa. Orci varius natoque
-      penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed et
-      eros interdum, gravida dolor id, placerat nisl. Cras vel lorem eget ligula
-      vestibulum tincidunt quis sed odio.
-    </p>
-    <p>
-      Ut feugiat eget ipsum a egestas. Praesent vitae eros egestas, tincidunt
-      magna eu, fermentum nulla. Aliquam suscipit, tellus ut interdum congue,
-      magna ex dignissim mi, quis semper turpis dolor eu justo. Maecenas finibus
-      faucibus lacus, non bibendum nisl bibendum dignissim. Nam sollicitudin
-      sollicitudin sapien nec efficitur. Proin faucibus at ante ut dictum.
-      Aenean non nisl felis. In sollicitudin elit vel ligula commodo, at
-      malesuada elit pellentesque. Nullam pretium placerat massa, vitae
-      ullamcorper ipsum euismod eget. Interdum et malesuada fames ac ante ipsum
-      primis in faucibus. Nam sodales vitae ante ac euismod.
-    </p>
+    <div>
+      Multifactor authentication (MFA) means that users must verify their
+      identity in two or more ways to gain access to their account. This makes
+      it harder for unauthorized parties to sign in to a user’s account because
+      it’s unlikely that they have access to all of the user’s authentication
+      methods. Adding authenticators with different factor types and method
+      characteristics strengthens your MFA strategy. You can require
+      authenticators for apps or groups of users and specify which ones can be
+      used for account recovery.
+    </div>
+    <br />
+    <ul>
+      <li>
+        Device-bound: These authenticators are associated with a specific
+        device.
+      </li>
+      <li>
+        Hardware-protected: These authenticators require a physical device to
+        authenticate.
+      </li>
+      <li>
+        Phishing-resistant: These authenticators don’t provide any
+        authentication data that a user can share with others. Users therefore
+        can’t be tricked into sharing their credentials in phishing campaigns.
+        See Phishing-resistant authentication and Okta solutions for phishing
+        resistance.
+      </li>
+      <li>User presence: These authenticators require human interaction.</li>
+      <li>
+        User verifying: These authenticators prove that a specific user is the
+        one who is authenticating.
+      </li>
+    </ul>
   </>
 );
 
 const drawerLongText = (
   <>
-    <p>
-      There's no silver bullet when it comes to achieving a Zero Trust security
-      architecture. That's because every organization is at a different stage of
-      its journey, but identity is at the heart of any successful adoption.
-      We've broken down the stages of Identity adoption and progression through
-      a Zero Trust journey for you to base yourself against.
-    </p>
-    <p>
-      Okta seamlessly integrates your identity solution across your entire
-      technology ecosystem, and partners with other security leaders, to unify
-      your approach to Zero Trust. Interested in where your organization falls
-      on this maturity curve? Take our Zero Trust Assessment to get personalized
-      recommendations on how to tackle the Zero Trust journey with identity and
-      secure your organization.Customer Identity is so much more than just the
-      login box - from keeping every click safe to increasing acquisition and
-      retention. Empower app developers, digital leaders, and security teams to
-      accelerate time to market and grow your business. Customer Identity is so
-      much more than just the login box - from keeping every click safe to
-      increasing acquisition and retention.
-    </p>
-    <p>
-      Empower app developers, digital leaders, and security teams to accelerate
-      time to market and grow your business. Customer Identity and Access
-      Management is how companies give end users access to their digital
-      properties. It's also how they govern, collect, analyze, and securely
-      store all that user data. So if an awesome registration and login
-      experience is currently delighting your customers, you're likely doing
-      Identity right. Not quite there yet? It's OK. That's why we created the
-      Customer Identity Cloud — so you could leave authentication to us. Okta's
-      Customer Identity Cloud helps you build strong digital relationships, keep
-      users' clicks safe, and free up developers' time for other projects.
-    </p>
+    <div>
+      Okta Privileged Access is a Privileged Access Management (PAM) solution
+      designed to help customers mitigate the risk of unauthorized access to
+      resources, a critical area of security and risk management in any
+      organization. Okta Privileged Access builds on the current server access
+      control capabilities provided with Okta Advanced Server Access and
+      delivers a unified approach to managing access to all your privileged
+      accounts. It securely connects people, machines, and applications to
+      privileged resources such as servers, containers, and enterprise apps.
+    </div>
+    <div>
+      A critical capability that Okta Privileged Access offers is the separation
+      of administrative roles and responsibilities. Management of users and
+      groups, resources, and security are separated, with each administrative
+      role designed to perform a specific function. For example, the management
+      of security policies to access resources is separated and decoupled from
+      the administration of the resources. To meet this requirement, the team
+      that sets the policy is separated from the team that administers the
+      resource. Likewise, the administrator managing users and groups can only
+      perform user and group management tasks and isn't involved in
+      administering resources or creating security policies.
+    </div>
+    <div>
+      The level of access within a Okta Privileged Access team depends on the
+      role that you're assigned and the permissions granted to that role. The
+      table below discusses the types of roles, and each has a unique set of
+      permissions and restrictions.To start using Okta Privileged Access, you
+      need to add the Okta Privileged Access OIN application to your Okta org.
+      You can then sync your users and groups from the Okta Universal Directory
+      by configuring SCIM. End users must install the Okta Privileged Access
+      client in their local machine, enroll the client, and then access their
+      dashboard using the link provided by their team administrator.
+    </div>
   </>
 );
 
@@ -131,6 +143,7 @@ const storybookMeta: Meta<DrawerProps> = {
         "The content of the Drawer. May be a `string` or any other `ReactNode` or array of `ReactNode`s.",
       table: {
         type: {
+          required: true,
           summary: "ReactNode | Array<ReactNode>",
         },
       },
@@ -140,16 +153,32 @@ const storybookMeta: Meta<DrawerProps> = {
         value: "ReactNode | Array<ReactNode>",
       },
     },
-    isOpen: {
+    hasVisibleTitle: {
       control: "boolean",
-      description: "When set to `true`, the drawer will be visible.",
+      description: "When set to `true`, title text is visible",
       table: {
         type: {
           summary: "boolean",
         },
       },
       type: {
-        required: true,
+        required: false,
+        name: "boolean",
+      },
+      defaultValue: {
+        summary: "true",
+      },
+    },
+    isOpen: {
+      control: "boolean",
+      description: "When set to `true`, the drawer will be visible.",
+      table: {
+        type: {
+          required: true,
+          summary: "boolean",
+        },
+      },
+      type: {
         name: "boolean",
       },
     },
@@ -167,6 +196,7 @@ const storybookMeta: Meta<DrawerProps> = {
       control: "text",
       table: {
         type: {
+          required: true,
           summary: "string",
         },
       },
@@ -181,6 +211,7 @@ const storybookMeta: Meta<DrawerProps> = {
       description: "The type of drawer",
       table: {
         type: {
+          required: true,
           summary: variantValues.join(" | "),
         },
         defaultValue: {
@@ -218,6 +249,7 @@ const DefaultTemplate: StoryObj<DrawerProps> = {
     const onClose = useCallback(() => {
       setIsVisible(false);
     }, []);
+
     return (
       <>
         {props.variant === "persistent" ? (
@@ -230,15 +262,24 @@ const DefaultTemplate: StoryObj<DrawerProps> = {
                 padding: "24px",
                 justifyContent: "space-between",
                 alignItems: "stretch",
-                minHeight: "100vh",
+                minHeight: "80vh",
+                transition: "width ease-out 250ms",
               }}
             >
-              <Box sx={{ flex: 1, paddingTop: "24px" }}>{gridStubText}</Box>
+              <Box
+                sx={{
+                  flex: 1,
+                  paddingTop: "24px",
+                }}
+              >
+                {gridStubText}
+              </Box>
               <Box
                 sx={{
                   flex: "0 0 auto",
                   overflowY: "auto",
-                  maxHeight: "100vh",
+                  maxHeight: "80vh",
+                  width: isVisible ? "auto" : 0,
                 }}
               >
                 <Drawer
@@ -298,9 +339,44 @@ const DefaultTemplate: StoryObj<DrawerProps> = {
   },
 };
 
-export const Default: StoryObj<DrawerProps> = {
+export const Overlay: StoryObj<DrawerProps> = {
   ...DefaultTemplate,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Overlay blocks all other page actions and sits on top page content.",
+      },
+    },
+  },
   args: {
+    children: drawerLongText,
+    title: "Okta Privileged Access",
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    await step("open Default Drawer", async () => {
+      const buttonElement = canvas.getByText("Open drawer");
+      userEvent.click(buttonElement);
+      await waitFor(() => {
+        axeRun("Default Drawer");
+      });
+    });
+  },
+};
+
+export const Persistent: StoryObj<DrawerProps> = {
+  ...DefaultTemplate,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Persistent is embedded in the content like a dismissable sidebar",
+      },
+    },
+  },
+  args: {
+    variant: "persistent",
     children: (
       <>
         <Accordion label="User and resource details">
@@ -316,84 +392,9 @@ export const Default: StoryObj<DrawerProps> = {
     ),
     title: "Profile details",
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    await step("open Default Drawer", async () => {
-      const buttonElement = canvas.getByText("Open drawer");
-      userEvent.click(buttonElement);
-      await waitFor(() => {
-        axeRun("Default Drawer");
-      });
-    });
-  },
 };
 
-export const Long: StoryObj<DrawerProps> = {
-  ...DefaultTemplate,
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "If the `Drawer` content is longer than the available space, content will scroll within the frame and the footer (if used) will be pinned to the bottom of the `Drawer`, with content scrolling below it.",
-      },
-    },
-  },
-  args: {
-    children: (
-      <>
-        <Box>
-          For example, a Contributor (the Initial Developer in (a) the power,
-          direct or indirect, to cause the whole must be sufficiently detailed
-          for a particular version of the Work, you may distribute a complete,
-          unmodified copy of the operating system on which the editorial
-          revisions, annotations, elaborations, or other work as a result of any
-          kind, either expressed or implied, including, without limitation,
-          Section 2. Any Modifications that alter or restrict this License
-          incorporates the limitation as if written in the Work that has
-          Contributed a Contribution incorporated within the Work. This license
-          has been advised of the Work. This could, for example, why
-          distributing LaTeX under the GNU Library General Public License from
-          time to time. Each version will be given a distinguishing version
-          number.
-        </Box>
-        <Box>
-          If the Recipient may use this wording to make the derivative work
-          available to such recipients. You are located in the case of each
-          Contributor, changes to the combination of their Contribution(s) alone
-          or when combined with the complete corresponding machine-readable
-          source code, which must be included with each copy of this License
-          Agreement (except that you distribute, to contain a file containing
-          Original Code or Modifications that you include complete instructions
-          on demand or cease distribution within thirty (30) days of becoming
-          aware of the LaTeX Project Public License, either version 2 of the
-          date You accept this license. Provisions that, by their nature, should
-          remain in effect beyond the termination of this Agreement more than
-          fifty percent (50%) of the Source Code or any derivative version,
-          provided, however, that the Source Code of Your Externally Deployed
-          Modifications must be included in the course of creating the Derived
-          Work.
-        </Box>
-        <Box>
-          You distribute the Source Code version of Licensed Product has been
-          generated from a designated place, then offering equivalent access to
-          copy the source code. Distribution Mechanism"). The Source Code of the
-          date that such additional attribution requirements to the following
-          terms are defined when they are first used, and the date it initially
-          became available, or at least the "copyright" line and a pointer to
-          where the Work unless that component is used with the Wikimedia
-          community. Text from external sources may attach additional
-          attribution requirements to the terms of this License Agreement will
-          be guided by the terms under which it was received. In addition, after
-          a new version of the Derivative Works that consist of the use or not
-          licensed at no charge to all third parties, if you received it.
-        </Box>
-      </>
-    ),
-    title: "Cryosleep liability waiver",
-  },
-};
-
-export const NoButtons: StoryObj<DrawerProps> = {
+export const NoFooter: StoryObj<DrawerProps> = {
   render: function C(props) {
     const [isVisible, setIsVisible] = useState(false);
 
@@ -413,6 +414,24 @@ export const NoButtons: StoryObj<DrawerProps> = {
     );
   },
   args: {
+    children: drawerLongText,
+    title: "Okta Privileged Access",
+  },
+};
+
+export const NoVisibleTitle: StoryObj<DrawerProps> = {
+  ...DefaultTemplate,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Persistent is embedded in the content like a dismissable sidebar",
+      },
+    },
+  },
+  args: {
+    variant: "persistent",
+    hasVisibleTitle: false,
     children: (
       <>
         <Accordion label="User and resource details">
@@ -426,6 +445,6 @@ export const NoButtons: StoryObj<DrawerProps> = {
         </Accordion>
       </>
     ),
-    title: "Ceres Station docking terms",
+    title: "Profile details",
   },
 };
