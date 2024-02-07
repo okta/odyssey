@@ -80,8 +80,8 @@ const DataTableSettings = ({
                   setColumnVisibility((prevVisibility) => ({
                     ...prevVisibility,
                     [columnId]: prevVisibility
-                      ? !prevVisibility[columnId]
-                      : true,
+                      ? prevVisibility[columnId] === false
+                      : false,
                   }));
                 }}
               >
@@ -89,7 +89,7 @@ const DataTableSettings = ({
                   checked={
                     columnVisibility
                       ? columnVisibility[column.accessorKey as string] !== false
-                      : false
+                      : true
                   }
                 />
                 {column.header}
