@@ -26,10 +26,11 @@ import {
 } from "@mui/lab";
 import { Tab as MuiTab } from "@mui/material";
 
-import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
+import type { AriaAttributeProps } from "./AriaAttributeProps";
 import { Badge, BadgeProps } from "./Badge";
-import { HtmlProps } from "./HtmlProps";
 import { Box } from "./Box";
+import { HtmlProps } from "./HtmlProps";
+import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
 
 export type TabItemProps = {
   /**
@@ -58,10 +59,6 @@ export type TabItemProps = {
 } & HtmlProps;
 
 export type TabsProps = {
-  /**
-   * The ARIA label for the full Tabs group
-   */
-  ariaLabel?: string;
   /**
    * @deprecated please use the `value` prop instead
    * When `value` is provided, `initialValue` isn't used.
@@ -123,7 +120,7 @@ const Tabs = ({
   tabs,
   value,
   onChange: onChangeProp,
-}: TabsProps) => {
+}: TabsProps & Pick<AriaAttributeProps, "ariaLabel">) => {
   const [tabState, setTabState] = useState(initialValue ?? value ?? "0");
 
   const onChange = useCallback<NonNullable<MuiTabListProps["onChange"]>>(
