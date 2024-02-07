@@ -18,6 +18,7 @@ import {
   PopoverOrigin,
 } from "@mui/material";
 
+import type { AriaAttributeProps } from "./AriaAttributeProps";
 import {
   Button,
   buttonSizeValues,
@@ -34,18 +35,6 @@ import type { HtmlProps } from "./HtmlProps";
 export const menuAlignmentValues = ["left", "right"] as const;
 
 export type MenuButtonProps = {
-  /**
-   * The ARIA label for the Button
-   */
-  ariaLabel?: string;
-  /**
-   * The ID of the element that labels the Button
-   */
-  ariaLabelledBy?: string;
-  /**
-   * The ID of the element that describes the Button
-   */
-  ariaDescribedBy?: string;
   /**
    * The label on the triggering Button
    */
@@ -93,23 +82,27 @@ export type MenuButtonProps = {
    * The tooltip text for the Button if it's icon-only
    */
   tooltipText?: string;
-} & (
-  | {
-      ariaLabel?: string;
-      ariaLabelledBy?: string;
-      buttonLabel: string;
-    }
-  | {
-      ariaLabel: string;
-      ariaLabelledBy?: string;
-      buttonLabel?: undefined | "";
-    }
-  | {
-      ariaLabel?: string;
-      ariaLabelledBy: string;
-      buttonLabel?: undefined | "";
-    }
-) &
+} & Pick<
+  AriaAttributeProps,
+  "ariaDescribedBy" | "ariaLabel" | "ariaLabelledBy"
+> &
+  (
+    | {
+        ariaLabel?: string;
+        ariaLabelledBy?: string;
+        buttonLabel: string;
+      }
+    | {
+        ariaLabel: string;
+        ariaLabelledBy?: string;
+        buttonLabel?: undefined | "";
+      }
+    | {
+        ariaLabel?: string;
+        ariaLabelledBy: string;
+        buttonLabel?: undefined | "";
+      }
+  ) &
   Pick<FieldComponentProps, "isDisabled"> &
   HtmlProps;
 
