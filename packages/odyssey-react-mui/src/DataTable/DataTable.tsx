@@ -340,6 +340,12 @@ const DataTable = ({
     layoutMode: "grid-no-grow",
     manualFiltering: true,
     manualSorting: true,
+    muiTablePaperProps: {
+      elevation: 0,
+      sx: {
+        overflow: "visible",
+      },
+    },
     selectAllMode: "all",
     displayColumnDefOptions:
       displayColumnDefOptions as MRT_TableOptions<MRT_RowData>["displayColumnDefOptions"],
