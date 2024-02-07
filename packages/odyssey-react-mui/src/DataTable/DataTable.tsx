@@ -40,6 +40,7 @@ import {
   DataTableRowActionsProps,
 } from "./components/DataTableRowActions";
 import { useRowReordering } from "./hooks/useRowReordering";
+import { DataTableSettings } from "./components/DataTableSettings";
 
 export type DataTableProps = {
   /**
@@ -401,8 +402,18 @@ const DataTable = ({
         onChangeFilters={setFilters}
         hasSearchSubmitButton={hasSearchSubmitButton}
         searchDelayTime={searchDelayTime}
-        // additionalActions={tableSettings}
         filters={hasFilters ? dataTableFilters : undefined}
+        additionalActions={
+          <DataTableSettings
+            hasChangeableDensity={hasChangeableDensity}
+            rowDensity={rowDensity}
+            setRowDensity={setRowDensity}
+            hasColumnVisibility={hasColumnVisibility}
+            columns={columns}
+            columnVisibility={columnVisibility}
+            setColumnVisibility={setColumnVisibility}
+          />
+        }
       />
     ),
 

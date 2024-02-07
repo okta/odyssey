@@ -10,17 +10,95 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-// import { memo } from "react";
+import { Dispatch, SetStateAction, memo } from "react";
+import { Checkbox as MuiCheckbox } from "@mui/material";
+import { MenuButton } from "../../MenuButton";
+import { MenuItem } from "../../MenuItem";
+import { ListIcon, ShowIcon } from "../../icons.generated";
+import { densityValues } from "../utils/constants";
+import { DataTableProps } from "../DataTable";
+import { MRT_VisibilityState } from "material-react-table";
 
-// export type DataTableSettingsProps = {
+export type DataTableSettingsProps = {
+  hasChangeableDensity: DataTableProps["hasChangeableDensity"];
+  rowDensity: (typeof densityValues)[number];
+  setRowDensity: Dispatch<SetStateAction<(typeof densityValues)[number]>>;
+  hasColumnVisibility: DataTableProps["hasColumnVisibility"];
+  columns: DataTableProps["columns"];
+  columnVisibility?: MRT_VisibilityState;
+  setColumnVisibility: Dispatch<
+    SetStateAction<MRT_VisibilityState | undefined>
+  >;
+};
 
-// };
+const DataTableSettings = ({
+  hasChangeableDensity,
+  rowDensity,
+  setRowDensity,
+  hasColumnVisibility,
+  columns,
+  columnVisibility,
+  setColumnVisibility,
+}: DataTableSettingsProps) => (
+  <>
+    {hasChangeableDensity && (
+      <MenuButton
+        endIcon={<ListIcon />}
+        ariaLabel="Table density"
+        menuAlignment="right"
+        shouldCloseOnSelect={false}
+      >
+        <>
+          {densityValues.map((value: (typeof densityValues)[number]) => (
+            <MenuItem
+              key={value}
+              isSelected={rowDensity === value}
+              onClick={() => setRowDensity(value)}
+            >
+              {`${value.charAt(0).toUpperCase()}${value.slice(1)}`}
+            </MenuItem>
+          ))}
+        </>
+      </MenuButton>
+    )}
 
-// const DataTableSettings = ({ }: DataTableSettingsProps) => {
-//   return (
-//     <>Settings.</>
-//   );
-// };
-
-// const MemoizedDataTableSettings = memo(DataTableSettings);
-// export { MemoizedDataTableSettings as DataTableSettings };
+    {hasColumnVisibility && (
+      <MenuButton
+        endIcon={<ShowIcon />}
+        ariaLabel="Show/hide columns"
+        menuAlignment="right"
+        shouldCloseOnSelect={false}
+      >
+        <>
+          {columns
+            .filter((column) => column.enableHiding !== false)
+            .map((column) => (
+              <MenuItem
+                key={column.accessorKey}
+                onClick={() => {
+                  const columnId = column.id as string;
+                  setColumnVisibility((prevVisibility) => ({
+                    ...prevVisibility,
+                    [columnId]: prevVisibility
+                      ? !prevVisibility[columnId]
+                      : true,
+                  }));
+                }}
+              >
+                <MuiCheckbox
+                  checked={
+                    columnVisibility
+                      ? columnVisibility[column.accessorKey as string] !== false
+                      : false
+                  }
+                />
+                {column.header}
+              </MenuItem>
+            ))}
+        </>
+      </MenuButton>
+    )}
+  </>
+);
+const MemoizedDataTableSettings = memo(DataTableSettings);
+export { MemoizedDataTableSettings as DataTableSettings };
