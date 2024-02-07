@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, useCallback, useEffect, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   MRT_ColumnDef,
   MRT_DensityState,
@@ -18,10 +18,10 @@ import {
   MRT_RowData,
   MRT_RowSelectionState,
   MRT_SortingState,
-  MRT_TableContainer,
   MRT_TableOptions,
   MRT_Virtualizer,
   MRT_VisibilityState,
+  MaterialReactTable,
   useMaterialReactTable,
 } from "material-react-table";
 import {
@@ -30,8 +30,11 @@ import {
   DragIndicatorIcon,
 } from "../icons.generated";
 import { densityValues } from "./utils/constants";
-import { paginationTypeValues } from "../labs/DataTablePagination";
-import { DataFilter } from "../labs/DataFilters";
+import {
+  DataTablePagination,
+  paginationTypeValues,
+} from "../labs/DataTablePagination";
+import { DataFilter, DataFilters } from "../labs/DataFilters";
 import {
   DataTableRowActions,
   DataTableRowActionsProps,
@@ -238,6 +241,7 @@ const DataTable = ({
   const [rowDensity, setRowDensity] =
     useState<MRT_DensityState>(initialDensity);
   const [search, setSearch] = useState<string>("");
+  const [filters, setFilters] = useState<DataFilter[]>();
 
   // TODO: Remove this!
   console.log(
@@ -290,6 +294,21 @@ const DataTable = ({
       );
     },
     [pagination, rowActionButtons, rowActionMenuItems, hasRowReordering]
+  );
+
+  const dataTableFilters = useMemo(
+    () =>
+      columns
+        .filter((column) => column.enableColumnFilter !== false)
+        .map((column) => {
+          return {
+            id: column.accessorKey as string,
+            label: column.header,
+            variant: column.filterVariant ?? "text",
+            options: column.filterSelectOptions,
+          } as DataFilter;
+        }),
+    [columns]
   );
 
   const dataTable = useMaterialReactTable({
@@ -374,6 +393,50 @@ const DataTable = ({
     rowVirtualizerOptions: {
       overscan: 4,
     },
+
+    // Filters
+    renderTopToolbar: () => (
+      <DataFilters
+        onChangeSearch={hasSearch ? setSearch : undefined}
+        onChangeFilters={setFilters}
+        hasSearchSubmitButton={hasSearchSubmitButton}
+        searchDelayTime={searchDelayTime}
+        // additionalActions={tableSettings}
+        filters={hasFilters ? dataTableFilters : undefined}
+      />
+    ),
+
+    // Pagination
+    renderBottomToolbar: hasPagination
+      ? () => (
+          <DataTablePagination
+            paginationType={paginationType}
+            currentNumberOfResults={data.length}
+            currentPage={pagination.pageIndex}
+            isPreviousButtonDisabled={pagination.pageIndex <= 1}
+            isNextButtonDisabled={false} // TODO: Add logic for disabling next/load more button
+            onClickPrevious={() =>
+              setPagination({
+                pageIndex: pagination.pageIndex - 1,
+                pageSize: pagination.pageSize,
+              })
+            }
+            onClickNext={() => {
+              if (paginationType === "loadMore") {
+                setPagination({
+                  pageSize: pagination.pageSize,
+                  pageIndex: pagination.pageSize + resultsPerPage,
+                });
+              } else {
+                setPagination({
+                  pageSize: pagination.pageSize,
+                  pageIndex: pagination.pageIndex + 1,
+                });
+              }
+            }}
+          />
+        )
+      : undefined,
   });
 
   // Effects
@@ -388,7 +451,7 @@ const DataTable = ({
           page: pagination.pageIndex,
           resultsPerPage: pagination.pageSize,
           search,
-          // filters
+          filters,
           sort: columnSorting,
         });
         setData(incomingData);
@@ -396,10 +459,10 @@ const DataTable = ({
       } finally {
       }
     })();
-  }, [pagination, columnSorting, search, onChangeQuery]);
+  }, [pagination, columnSorting, search, filters, onChangeQuery]);
 
   // Render the table
-  return <MRT_TableContainer table={dataTable} />;
+  return <MaterialReactTable table={dataTable} />;
 };
 
 const MemoizedDataTable = memo(DataTable);
