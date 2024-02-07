@@ -104,7 +104,6 @@ export type ButtonProps = {
       startIcon?: ReactElement;
     }
 ) &
-  HtmlProps &
   Pick<
     AriaAttributeProps,
     | "ariaControls"
@@ -113,7 +112,8 @@ export type ButtonProps = {
     | "ariaHasPopup"
     | "ariaLabel"
     | "ariaLabelledBy"
-  >;
+  > &
+  HtmlProps;
 
 const Button = ({
   ariaControls,
