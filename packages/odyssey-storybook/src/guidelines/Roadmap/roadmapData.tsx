@@ -11,7 +11,7 @@
  */
 
 import { Status } from "@okta/odyssey-react-mui";
-import { DataColumn } from "@okta/odyssey-react-mui/labs";
+import { DataColumn } from "@okta/odyssey-react-mui";
 
 export type OdysseyComponent = {
   name: string;

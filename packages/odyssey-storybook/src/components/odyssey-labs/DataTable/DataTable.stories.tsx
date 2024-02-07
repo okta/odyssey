@@ -13,14 +13,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { columns, data as incomingData, Person } from "./tableAPI";
 import { Box, Button, Callout, MenuItem } from "@okta/odyssey-react-mui";
+import { DataFilter, paginationTypeValues } from "@okta/odyssey-react-mui/labs";
 import {
-  DataFilter,
   DataTable,
   DataTableProps,
   MRT_SortingState,
   densityValues,
-  paginationTypeValues,
-} from "@okta/odyssey-react-mui/labs";
+} from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { useState } from "react";
 import { DeleteIcon } from "@okta/odyssey-react-mui/icons";
@@ -170,7 +169,7 @@ const storybookMeta: Meta<DataTableProps> = {
         },
       },
     },
-    onRowSelectionChange: {
+    onChangeRowSelection: {
       control: null,
       description: "",
       table: {
@@ -396,16 +395,16 @@ export const Default: StoryObj<DataTableProps> = {
     return (
       <Box>
         <Callout severity="info">
-          Data in this table is procedurally-generated and will change on each
-          page refresh. Any resemblance to real information is coincidental.
+          Data in this table is procedurally-generated. Any resemblance to real
+          information is coincidental.
         </Callout>
         <DataTable
           columns={columns}
           data={startingData}
           totalRows={data.length}
           getRowId={({ id }) => id}
-          fetchDataFn={fetchData}
-          reorderDataFn={reorderData}
+          onChangeQuery={fetchData}
+          onReorderRows={reorderData}
           hasSearchSubmitButton={true}
           hasChangeableDensity={props.hasChangeableDensity}
           hasColumnResizing={props.hasColumnResizing}
@@ -417,7 +416,7 @@ export const Default: StoryObj<DataTableProps> = {
           hasSearch={props.hasSearch}
           hasSorting={props.hasSorting}
           paginationType={props.paginationType}
-          onRowSelectionChange={(rowSelection) => console.log(rowSelection)}
+          onChangeRowSelection={(rowSelection) => console.log(rowSelection)}
           rowActionButtons={(row) => (
             <Button
               endIcon={<DeleteIcon />}
@@ -526,7 +525,7 @@ export const NoActions: StoryObj<DataTableProps> = {
           hasSearch={props.hasSearch}
           hasSorting={props.hasSorting}
           paginationType={props.paginationType}
-          onRowSelectionChange={(rowSelection) => console.log(rowSelection)}
+          onChangeRowSelection={(rowSelection) => console.log(rowSelection)}
         />
       </Box>
     );

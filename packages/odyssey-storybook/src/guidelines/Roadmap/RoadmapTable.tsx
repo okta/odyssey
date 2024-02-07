@@ -10,11 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {
-  DataFilter,
-  DataTable,
-  MRT_SortingState,
-} from "@okta/odyssey-react-mui/labs";
+import { DataFilter } from "@okta/odyssey-react-mui/labs";
+import { DataTable, MRT_SortingState } from "@okta/odyssey-react-mui";
 import { columns, data as incomingData, OdysseyComponent } from "./roadmapData";
 import {
   Callout,

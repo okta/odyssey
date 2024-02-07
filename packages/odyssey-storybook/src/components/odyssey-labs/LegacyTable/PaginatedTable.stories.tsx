@@ -14,10 +14,10 @@ import { useCallback, useMemo, useRef, useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { Button } from "@okta/odyssey-react-mui";
 import {
-  TableColumn,
   PaginatedTable,
   PaginatedTableProps,
 } from "@okta/odyssey-react-mui/labs";
+import { TableColumn } from "@okta/odyssey-react-mui";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 

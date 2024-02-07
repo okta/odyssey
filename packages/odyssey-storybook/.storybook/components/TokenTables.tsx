@@ -18,7 +18,7 @@ import {
   useState,
 } from "react";
 import * as Tokens from "@okta/odyssey-design-tokens";
-import { DataColumn, DataTable } from "@okta/odyssey-react-mui/labs";
+import { DataColumn, DataTable } from "@okta/odyssey-react-mui";
 import { Typography } from "@okta/odyssey-react-mui";
 
 type TokenName = keyof typeof Tokens;

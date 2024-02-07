@@ -17,7 +17,7 @@ export type { LocalizationProviderProps } from "@mui/x-date-pickers";
 export * from "./DatePicker";
 export * from "./datePickerTheme";
 
-export * from "./DataTable";
+// export * from "./DataTable";
 export * from "./DataTablePagination";
 export * from "./DataFilters";
 
