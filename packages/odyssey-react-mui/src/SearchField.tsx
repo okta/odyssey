@@ -188,6 +188,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         onFocus,
         placeholder,
         ref,
+        tabIndex,
         testId,
         translate,
       ]

@@ -192,6 +192,7 @@ const Button = ({
       onClick,
       size,
       startIcon,
+      tabIndex,
       testId,
       translate,
       type,
