@@ -139,6 +139,9 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       ({ ariaDescribedBy, id }) => (
         <InputBase
           {...inputValues}
+          inputProps={{
+            tabIndex,
+          }}
           aria-describedby={ariaDescribedBy}
           autoComplete={autoCompleteType}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
@@ -170,7 +173,6 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
               <SearchIcon />
             </InputAdornment>
           }
-          tabIndex={tabIndex}
           translate={translate}
           type="search"
         />
