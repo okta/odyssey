@@ -27,7 +27,6 @@ import {
   MRT_RowData,
   MRT_RowSelectionState,
   MRT_SortingState,
-  MRT_TableInstance,
   MRT_TableOptions,
   MRT_Virtualizer,
   MRT_VisibilityState,
@@ -38,6 +37,7 @@ import {
   ArrowDownIcon,
   ArrowUnsortedIcon,
   DragIndicatorIcon,
+  MoreIcon,
 } from "../icons.generated";
 import { densityValues } from "./utils/constants";
 import {
@@ -52,13 +52,7 @@ import {
 import { useRowReordering } from "./hooks/useRowReordering";
 import { DataTableSettings } from "./components/DataTableSettings";
 import { MenuItem } from "../MenuItem";
-import { Button } from "../Button";
 import { MenuButton } from "../MenuButton";
-import styled from "@emotion/styled";
-import {
-  useOdysseyDesignTokens,
-  DesignTokens,
-} from "../OdysseyDesignTokensContext";
 
 export type DataTableProps = {
   /**
@@ -185,40 +179,13 @@ export type DataTableProps = {
    * Menu items to include in the optional actions menu on each row.
    */
   rowActionMenuItems?: DataTableRowActionsProps["rowActionMenuItems"];
-  /**
-   * Actions to include above the table, which will always be visible
-   */
-  tableActionButtons?: (
-    table: MRT_TableInstance<MRT_RowData>
-  ) => ReactElement<typeof Button | typeof MenuButton | typeof Fragment>;
   /**`
    * Menu items to include in the bulk actions menu, which appears above the table if a row or rows are selected
    */
   bulkActionMenuItems?: (
     selectedRows: MRT_RowSelectionState
   ) => ReactElement<typeof MenuItem | typeof Fragment>;
-  /**`
-   * Buttons which appear above the table if a row or rows are selected
-   */
-  bulkActionButtons?: (
-    selectedRows: MRT_RowSelectionState
-  ) => ReactElement<typeof Button | typeof Fragment>;
 };
-
-const TableActionsContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{
-  odysseyDesignTokens: DesignTokens;
-}>`
-  display: flex;
-  margin-block-end: ${({ odysseyDesignTokens }) =>
-    odysseyDesignTokens.Spacing4};
-
-  > * {
-    margin-inline-end: ${({ odysseyDesignTokens }) =>
-      odysseyDesignTokens.Spacing2};
-  }
-`;
 
 const displayColumnDefOptions = {
   "mrt-row-actions": {
@@ -278,8 +245,6 @@ const DataTable = ({
   hasRowSelection,
   hasSearch,
   hasSorting,
-  tableActionButtons,
-  bulkActionButtons,
   bulkActionMenuItems,
 }: DataTableProps) => {
   const [data, setData] = useState<DataTableProps["data"]>(dataProp);
@@ -335,8 +300,6 @@ const DataTable = ({
     resultsPerPage: pagination.pageSize,
     page: pagination.pageIndex,
   });
-
-  const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const renderRowActions = useCallback(
     ({ row }) => {
@@ -470,33 +433,31 @@ const DataTable = ({
           searchDelayTime={searchDelayTime}
           filters={hasFilters ? dataTableFilters : undefined}
           additionalActions={
-            <DataTableSettings
-              hasChangeableDensity={hasChangeableDensity}
-              rowDensity={rowDensity}
-              setRowDensity={setRowDensity}
-              hasColumnVisibility={hasColumnVisibility}
-              columns={columns}
-              columnVisibility={columnVisibility}
-              setColumnVisibility={setColumnVisibility}
-            />
+            <>
+              <DataTableSettings
+                hasChangeableDensity={hasChangeableDensity}
+                rowDensity={rowDensity}
+                setRowDensity={setRowDensity}
+                hasColumnVisibility={hasColumnVisibility}
+                columns={columns}
+                columnVisibility={columnVisibility}
+                setColumnVisibility={setColumnVisibility}
+              />
+              {bulkActionMenuItems && (
+                <>
+                  <MenuButton
+                    buttonVariant="secondary"
+                    endIcon={<MoreIcon />}
+                    isDisabled={numberOfRowsSelected === 0}
+                    ariaLabel="More actions"
+                  >
+                    {bulkActionMenuItems(dataTable.getState().rowSelection)}
+                  </MenuButton>
+                </>
+              )}
+            </>
           }
         />
-        {(tableActionButtons || bulkActionButtons || bulkActionMenuItems) && (
-          <TableActionsContainer odysseyDesignTokens={odysseyDesignTokens}>
-            {bulkActionMenuItems && numberOfRowsSelected > 0 && (
-              <MenuButton
-                buttonVariant="primary"
-                buttonLabel={`${numberOfRowsSelected} selected`}
-              >
-                {bulkActionMenuItems(dataTable.getState().rowSelection)}
-              </MenuButton>
-            )}
-            {bulkActionButtons &&
-              numberOfRowsSelected > 0 &&
-              bulkActionButtons?.(dataTable.getState().rowSelection)}
-            {tableActionButtons?.(dataTable)}
-          </TableActionsContainer>
-        )}
       </>
     ),
 

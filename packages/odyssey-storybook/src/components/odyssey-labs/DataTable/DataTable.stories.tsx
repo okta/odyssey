@@ -417,34 +417,6 @@ export const Default: StoryObj<DataTableProps> = {
           hasSorting={props.hasSorting}
           paginationType={props.paginationType}
           onChangeRowSelection={(rowSelection) => console.log(rowSelection)}
-          tableActionButtons={(table) => (
-            <>
-              <Button
-                variant="secondary"
-                label="Action 1"
-                onClick={() => console.log(table)}
-              />
-              <Button
-                variant="secondary"
-                label="Action 2"
-                onClick={() => console.log(table)}
-              />
-            </>
-          )}
-          bulkActionButtons={(selectedRows) => (
-            <>
-              <Button
-                onClick={() => console.log(selectedRows)}
-                label="Bulk action"
-                variant="secondary"
-              />
-              <Button
-                onClick={() => console.log(selectedRows)}
-                label="Bulk action"
-                variant="secondary"
-              />
-            </>
-          )}
           bulkActionMenuItems={(selectedRows) => (
             <>
               <MenuItem onClick={() => console.log(selectedRows)}>
