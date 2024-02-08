@@ -10,12 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { FC } from "react";
-export interface ForwardRefWithType extends FC<WithForwardRefProps<Option>> {
-  <T extends Option>(props: WithForwardRefProps<T>): ReturnType<
-    FC<WithForwardRefProps<T>>
-  >;
-}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import React from "react";
 
 declare module "react" {
   type DataAttributeKey = `data-${string}`;
