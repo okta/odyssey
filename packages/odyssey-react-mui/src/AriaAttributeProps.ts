@@ -42,7 +42,7 @@ export type AriaAttributeProps = {
    *
    * Value: The value of the id of the element containing the error message for the current element
    */
-  ariaErrormessage?: HTMLAttributes<HTMLElement>["aria-errormessage"];
+  ariaErrorMessage?: HTMLAttributes<HTMLElement>["aria-errormessage"];
   /**
    * The `aria-expanded` attribute is set on an element to indicate if a control is expanded or collapsed, and whether or not the controlled elements are displayed or hidden.
    */
