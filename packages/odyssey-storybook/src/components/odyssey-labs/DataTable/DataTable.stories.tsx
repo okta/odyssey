@@ -12,7 +12,13 @@
 
 import type { Meta, StoryObj } from "@storybook/react";
 import { columns, data as incomingData, Person } from "./tableAPI";
-import { Box, Button, Callout, MenuItem } from "@okta/odyssey-react-mui";
+import {
+  Box,
+  Button,
+  Callout,
+  DataTableEmptyState,
+  MenuItem,
+} from "@okta/odyssey-react-mui";
 import { DataFilter, paginationTypeValues } from "@okta/odyssey-react-mui/labs";
 import {
   DataTable,
@@ -417,6 +423,21 @@ export const Default: StoryObj<DataTableProps> = {
           hasSorting={props.hasSorting}
           paginationType={props.paginationType}
           onChangeRowSelection={(rowSelection) => console.log(rowSelection)}
+          isEmpty
+          emptyPlaceholder={
+            <DataTableEmptyState
+              heading="Start by adding data assets"
+              text="All relevant data will be displayed and can be searched and filtered"
+              primaryButton={<Button variant="primary" label="Primary" />}
+              secondaryButton={<Button variant="secondary" label="Secondary" />}
+            />
+          }
+          noResultsPlaceholder={
+            <DataTableEmptyState
+              heading="Whoops, there's nothing here!"
+              text="You should try searching or filtering for something else."
+            />
+          }
           rowActionButtons={(row) => (
             <Button
               endIcon={<DeleteIcon />}

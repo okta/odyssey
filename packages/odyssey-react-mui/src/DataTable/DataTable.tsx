@@ -10,7 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  ReactElement,
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import {
   MRT_ColumnDef,
   MRT_DensityState,
@@ -41,6 +49,8 @@ import {
 } from "./components/DataTableRowActions";
 import { useRowReordering } from "./hooks/useRowReordering";
 import { DataTableSettings } from "./components/DataTableSettings";
+import { Callout } from "../Callout";
+import { DataTableEmptyState } from "./components/DataTableEmptyState";
 
 export type DataTableProps = {
   /**
@@ -167,6 +177,27 @@ export type DataTableProps = {
    * Menu items to include in the optional actions menu on each row.
    */
   rowActionMenuItems?: DataTableRowActionsProps["rowActionMenuItems"];
+  /**
+   * If `error` is not undefined, the DataTable will indicate an error.
+   */
+  errorMessage?: string;
+  /**
+   * If true, the table will show the loading state, regardless of
+   * whether it's loading data internally
+   */
+  isLoading?: boolean;
+  /**
+   * If true, the table will show the initial empty state
+   */
+  isEmpty?: boolean;
+  /**
+   * The component to display when the table is displaying the initial empty state
+   */
+  emptyPlaceholder?: ReactElement<typeof DataTableEmptyState>;
+  /**
+   * The component to display when the query returns no results
+   */
+  noResultsPlaceholder?: ReactElement<typeof DataTableEmptyState>;
 };
 
 const displayColumnDefOptions = {
@@ -227,6 +258,11 @@ const DataTable = ({
   hasRowSelection,
   hasSearch,
   hasSorting,
+  errorMessage,
+  isLoading: isLoadingProp,
+  isEmpty,
+  emptyPlaceholder,
+  noResultsPlaceholder,
 }: DataTableProps) => {
   const [data, setData] = useState<DataTableProps["data"]>(dataProp);
   const [pagination, setPagination] = useState({
@@ -243,6 +279,9 @@ const DataTable = ({
     useState<MRT_DensityState>(initialDensity);
   const [search, setSearch] = useState<string>("");
   const [filters, setFilters] = useState<DataFilter[]>();
+  const [isLoading, setIsLoading] = useState<boolean | undefined>(
+    isLoadingProp
+  );
 
   // TODO: Remove this!
   console.log(
@@ -256,7 +295,8 @@ const DataTable = ({
     setPagination,
     setColumnVisibility,
     setRowDensity,
-    setSearch
+    setSearch,
+    setIsLoading
   );
 
   const {
@@ -314,13 +354,14 @@ const DataTable = ({
 
   const dataTable = useMaterialReactTable({
     columns: columns,
-    data: data,
+    data: isEmpty ? [] : data,
     getRowId: getRowId,
     state: {
       density: rowDensity,
       sorting: columnSorting,
       globalFilter: search,
       columnVisibility,
+      isLoading,
     },
     icons: {
       ArrowDownwardIcon: ArrowDownIcon,
@@ -401,26 +442,45 @@ const DataTable = ({
       overscan: 4,
     },
 
+    // States
+    renderEmptyRowsFallback: () => {
+      if (emptyPlaceholder && isEmpty) {
+        return emptyPlaceholder;
+      }
+
+      return noResultsPlaceholder ? (
+        noResultsPlaceholder
+      ) : (
+        <DataTableEmptyState
+          heading="There are no results."
+          text="Try a different query."
+        />
+      );
+    },
+
     // Filters
     renderTopToolbar: () => (
-      <DataFilters
-        onChangeSearch={hasSearch ? setSearch : undefined}
-        onChangeFilters={setFilters}
-        hasSearchSubmitButton={hasSearchSubmitButton}
-        searchDelayTime={searchDelayTime}
-        filters={hasFilters ? dataTableFilters : undefined}
-        additionalActions={
-          <DataTableSettings
-            hasChangeableDensity={hasChangeableDensity}
-            rowDensity={rowDensity}
-            setRowDensity={setRowDensity}
-            hasColumnVisibility={hasColumnVisibility}
-            columns={columns}
-            columnVisibility={columnVisibility}
-            setColumnVisibility={setColumnVisibility}
-          />
-        }
-      />
+      <>
+        {errorMessage && <Callout severity="error" text={errorMessage} />}
+        <DataFilters
+          onChangeSearch={hasSearch ? setSearch : undefined}
+          onChangeFilters={setFilters}
+          hasSearchSubmitButton={hasSearchSubmitButton}
+          searchDelayTime={searchDelayTime}
+          filters={hasFilters ? dataTableFilters : undefined}
+          additionalActions={
+            <DataTableSettings
+              hasChangeableDensity={hasChangeableDensity}
+              rowDensity={rowDensity}
+              setRowDensity={setRowDensity}
+              hasColumnVisibility={hasColumnVisibility}
+              columns={columns}
+              columnVisibility={columnVisibility}
+              setColumnVisibility={setColumnVisibility}
+            />
+          }
+        />
+      </>
     ),
 
     // Pagination
@@ -462,6 +522,7 @@ const DataTable = ({
   }, [dataTable.getState().rowSelection]);
 
   useEffect(() => {
+    setIsLoading(true);
     (async () => {
       try {
         const incomingData = await onChangeQuery?.({
@@ -474,6 +535,7 @@ const DataTable = ({
         setData(incomingData);
       } catch (error) {
       } finally {
+        setIsLoading(isLoadingProp);
       }
     })();
   }, [pagination, columnSorting, search, filters, onChangeQuery]);

@@ -11,6 +11,7 @@
  */
 
 import { DataTable } from "./DataTable";
+import { DataTableEmptyState } from "./components/DataTableEmptyState";
 import { densityValues } from "./utils/constants";
 
-export { DataTable, densityValues };
+export { DataTable, DataTableEmptyState, densityValues };
