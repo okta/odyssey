@@ -18,7 +18,16 @@ import {
   AutocompleteValue,
   AutocompleteRenderInputParams,
 } from "@mui/material";
-import { memo, useCallback, useMemo, useRef } from "react";
+import React, {
+  createContext,
+  forwardRef,
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+} from "react";
+import { VariableSizeList, ListChildComponentProps } from "react-window";
 
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
@@ -160,6 +169,13 @@ export type AutocompleteProps<
    * You will need to implement this function if your `option` items are objects.
    */
   getIsOptionEqualToValue?: (option: OptionType, value: OptionType) => boolean;
+
+  /**
+   * If this component is required to display a virtualized list of options, this value needs
+   * to be toggled to true.
+   * It is recommended if you're options are on the order of 10's of hundreds or more
+   */
+  isVirtualized?: boolean;
 } & Pick<
   FieldComponentProps,
   | "errorMessage"
@@ -204,6 +220,7 @@ const Autocomplete = <
   getIsOptionEqualToValue,
   testId,
   translate,
+  isVirtualized = false,
 }: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
   const controlledStateRef = useRef(
     getControlState({
@@ -300,6 +317,96 @@ const Autocomplete = <
       testId,
     ],
   );
+
+  const renderVirtualizedRow = (props: ListChildComponentProps) => {
+    const { data, index } = props;
+    const dataSet = data[index];
+
+    if (dataSet.hasOwnProperty("group")) {
+      return (
+        <ListSubheader key={dataSet.key} component="div">
+          {dataSet.group}
+        </ListSubheader>
+      );
+    }
+
+    return (
+      <Typography component="li" {...dataSet[0]} noWrap>
+        {`#${dataSet[2] + 1} - ${dataSet[1]}`}
+      </Typography>
+    );
+  };
+
+  const OuterListboxContext = createContext({});
+
+  const OuterListboxElementType = React.forwardRef<HTMLDivElement>(
+    (props, ref) => {
+      const outerProps = React.useContext(OuterListboxContext);
+      return <div ref={ref} {...props} {...outerProps} />;
+    }
+  );
+
+  function useResetCache(length: number) {
+    const ref = React.useRef<VariableSizeList>(null);
+    useEffect(() => {
+      if (ref.current != null) {
+        ref.current.resetAfterIndex(0, true);
+      }
+    }, [length]);
+    return ref;
+  }
+
+  const ListboxComponent = forwardRef<
+    HTMLDivElement,
+    React.HTMLAttributes<HTMLElement>
+  >(function (props, ref) {
+    const { children, ...other } = props;
+    const itemData: React.ReactElement[] = [];
+    (children as React.ReactElement[]).forEach(
+      (item: React.ReactElement & { children?: React.ReactElement[] }) => {
+        itemData.push(item);
+        itemData.push(...(item.children || []));
+      }
+    );
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const getChildSize = (_child: React.ReactElement): number => {
+      // TODO: figure out what the height should be and if it differs based on display size
+      return 48;
+    };
+
+    const getHeight = (): number => {
+      if (itemData.length > 8) {
+        // FIXME: making another height assumption here...
+        return 8 * 48;
+      }
+      return itemData.map(getChildSize).reduce((a, b) => a + b, 0);
+    };
+
+    const listboxPadding = 8; // px
+
+    const gridRef = useResetCache(itemData.length);
+    return (
+      <div ref={ref}>
+        <OuterListboxContext.Provider value={other}>
+          <VariableSizeList
+            innerElementType="ul"
+            itemData={itemData}
+            itemCount={itemData.length}
+            itemSize={(index) => getChildSize(itemData[index])}
+            height={getHeight() + 2 * listboxPadding}
+            width="100%"
+            ref={gridRef}
+            outerElementType={OuterListboxElementType}
+            overscanCount={8}
+          >
+            {renderVirtualizedRow}
+          </VariableSizeList>
+        </OuterListboxContext.Provider>
+      </div>
+    );
+  });
+
   const onChange = useCallback<
     NonNullable<
       UseAutocompleteProps<
@@ -336,6 +443,8 @@ const Autocomplete = <
     <MuiAutocomplete
       {...valueProps}
       {...inputValueProp}
+      // conditionally provide the ListboxComponent if this needs to be virtualized
+      {...(isVirtualized && { ListboxComponent })}
       // AutoComplete is wrapped in a div within MUI which does not get the disabled attr. So this aria-disabled gets set in the div
       aria-disabled={isDisabled}
       disableCloseOnSelect={hasMultipleChoices}
