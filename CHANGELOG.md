@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.2](https://github.com/okta/odyssey/compare/v1.13.1...v1.13.2) (2024-02-08)
+
+### Bug Fixes
+
+- remove unused type ([#2112](https://github.com/okta/odyssey/issues/2112)) ([9083d7c](https://github.com/okta/odyssey/commit/9083d7c7a6a2088fb5b40290d1a2c2e047f3d354))
+
 ## [1.13.1](https://github.com/okta/odyssey/compare/v1.13.0...v1.13.1) (2024-02-08)
 
 **Note:** Version bump only for package odyssey
