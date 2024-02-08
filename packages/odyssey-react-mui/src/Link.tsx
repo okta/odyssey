@@ -21,6 +21,10 @@ export const linkVariantValues = ["default", "monochrome"] as const;
 
 export type LinkProps = {
   /**
+   * The ARIA label for the Link
+   */
+  ariaLabel?: string;
+  /**
    * The content within the Link
    */
   children: React.ReactNode;
@@ -60,6 +64,7 @@ export type LinkProps = {
 } & HtmlProps;
 
 const Link = ({
+  ariaLabel,
   children,
   href,
   icon,
@@ -86,6 +91,7 @@ const Link = ({
 
   return (
     <MuiLink
+      aria-label={ariaLabel}
       data-se={testId}
       href={href}
       ref={localLinkRef}
