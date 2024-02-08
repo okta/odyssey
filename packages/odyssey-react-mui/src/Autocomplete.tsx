@@ -322,19 +322,7 @@ const Autocomplete = <
     const { data, index } = props;
     const dataSet = data[index];
 
-    if (dataSet.hasOwnProperty("group")) {
-      return (
-        <ListSubheader key={dataSet.key} component="div">
-          {dataSet.group}
-        </ListSubheader>
-      );
-    }
-
-    return (
-      <Typography component="li" {...dataSet[0]} noWrap>
-        {`#${dataSet[2] + 1} - ${dataSet[1]}`}
-      </Typography>
-    );
+    return dataSet;
   };
 
   const OuterListboxContext = createContext({});
@@ -369,18 +357,26 @@ const Autocomplete = <
       }
     );
 
+    const maxOptionsVisible = 8;
+    const optionHeight = 45; //px
+    const borderHeight = 1; //px
+
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const getChildSize = (_child: React.ReactElement): number => {
       // TODO: figure out what the height should be and if it differs based on display size
-      return 48;
+      return optionHeight;
     };
 
     const getHeight = (): number => {
-      if (itemData.length > 8) {
-        // FIXME: making another height assumption here...
-        return 8 * 48;
+      let optionsHeight = 0;
+      if (itemData.length > maxOptionsVisible) {
+        // Limits the options height to at most 10 visible options at a time
+        // to avoid an options list that is too large
+        optionsHeight = maxOptionsVisible * optionHeight;
+      } else {
+        optionsHeight = itemData.map(getChildSize).reduce((a, b) => a + b, 0);
       }
-      return itemData.map(getChildSize).reduce((a, b) => a + b, 0);
+      return optionsHeight + 2 * borderHeight + 2 * listboxPadding;
     };
 
     const listboxPadding = 8; // px
@@ -393,8 +389,9 @@ const Autocomplete = <
             innerElementType="ul"
             itemData={itemData}
             itemCount={itemData.length}
-            itemSize={(index) => getChildSize(itemData[index])}
-            height={getHeight() + 2 * listboxPadding}
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            itemSize={(_index) => optionHeight}
+            height={getHeight()}
             width="100%"
             ref={gridRef}
             outerElementType={OuterListboxElementType}

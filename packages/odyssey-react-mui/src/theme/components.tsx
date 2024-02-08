@@ -432,6 +432,11 @@ export const components = ({
               },
             },
           },
+          "& > ul": {
+            paddingInlineStart: 0,
+            marginBlockStart: 0,
+            marginBlockEnd: 0,
+          },
         },
         loading: {
           paddingBlock: odysseyTokens.Spacing3,

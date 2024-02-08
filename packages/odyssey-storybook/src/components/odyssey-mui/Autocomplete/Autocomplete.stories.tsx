@@ -87,6 +87,16 @@ const storybookMeta: Meta<typeof Autocomplete> = {
     },
     isOptional: fieldComponentPropsMetaData.isOptional,
     isReadOnly: fieldComponentPropsMetaData.isReadOnly,
+    isVirtualized: {
+      control: "boolean",
+      description: "Let's the component know it should virtualize the list",
+      table: {
+        type: {
+          required: false,
+          summary: "boolean",
+        },
+      },
+    },
     label: {
       control: "text",
       description: "The label text for the autocomplete input",
@@ -456,6 +466,33 @@ export const ControlledAutocomplete: StoryObj<JupiterMoonsAutocomplete> = {
     return <Autocomplete {...props} value={localValue} onChange={onChange} />;
   },
 };
+
+export const ControlledVirtualizedAutocomplete: StoryObj<JupiterMoonsAutocomplete> =
+  {
+    parameters: {
+      docs: {
+        description: {
+          story:
+            "When the component is controlled, the parent component is responsible for managing the state of Autocomplete. `onChange` should be used to listen for component changes and to update the values in the `value` prop.",
+        },
+      },
+    },
+    args: {
+      isVirtualized: true,
+      options: jupiterGalileanMoons,
+      value: jupiterGalileanMoons[0],
+      isReadOnly: false,
+      label: "label",
+      getIsOptionEqualToValue: (option, value) => option.id === value.id,
+    },
+    render: function C(props) {
+      const [localValue, setLocalValue] = useState<MoonMeta | undefined>(
+        jupiterGalileanMoons[0]
+      );
+      const onChange = useCallback((_, v) => setLocalValue(v), []);
+      return <Autocomplete {...props} value={localValue} onChange={onChange} />;
+    },
+  };
 
 export const UncontrolledAutocomplete: StoryObj<JupiterMoonsAutocomplete> = {
   args: {
