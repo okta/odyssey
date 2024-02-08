@@ -13,6 +13,7 @@
 import { Button as MuiButton } from "@mui/material";
 import type { ButtonProps as MuiButtonProps } from "@mui/material";
 import {
+  HTMLAttributes,
   memo,
   ReactElement,
   useCallback,
@@ -84,6 +85,7 @@ export type ButtonProps = {
    * The icon element to display at the start of the Button
    */
   startIcon?: ReactElement;
+  tabIndex?: HTMLAttributes<HTMLElement>["tabIndex"];
   /**
    * The tooltip text for the Button if it's icon-only
    */
@@ -128,6 +130,7 @@ const Button = ({
   onClick,
   size = "medium",
   startIcon,
+  tabIndex,
   testId,
   tooltipText,
   translate,
@@ -168,6 +171,7 @@ const Button = ({
           ref={localButtonRef}
           size={size}
           startIcon={startIcon}
+          tabIndex={tabIndex}
           translate={translate}
           type={type}
           variant={variant}

@@ -15,6 +15,7 @@ import {
   ChangeEventHandler,
   FocusEventHandler,
   forwardRef,
+  HTMLAttributes,
   InputHTMLAttributes,
   memo,
   useCallback,
@@ -74,6 +75,8 @@ export type SearchFieldProps = {
    * The short hint displayed in the `input` before the user enters a value.
    */
   placeholder?: string;
+
+  tabIndex?: HTMLAttributes<HTMLElement>["tabIndex"];
   /**
    * The value of the `input` element, to use when controlled.
    */
@@ -101,6 +104,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       onBlur,
       onClear: onClearProp,
       placeholder,
+      tabIndex,
       testId,
       translate,
       value,
@@ -166,6 +170,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
               <SearchIcon />
             </InputAdornment>
           }
+          tabIndex={tabIndex}
           translate={translate}
           type="search"
         />
