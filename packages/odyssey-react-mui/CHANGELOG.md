@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.0](https://github.com/okta/odyssey/compare/v1.12.11...v1.13.0) (2024-02-08)
+
+### Features
+
+- support aria-label in Link ([#2119](https://github.com/okta/odyssey/issues/2119)) ([0e468bb](https://github.com/okta/odyssey/commit/0e468bb70824a3db7706b5805b33cf9ec6bf1cf8))
+
 ## [1.12.11](https://github.com/okta/odyssey/compare/v1.12.10...v1.12.11) (2024-02-06)
 
 **Note:** Version bump only for package @okta/odyssey-react-mui
