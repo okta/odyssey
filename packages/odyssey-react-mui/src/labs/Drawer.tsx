@@ -129,7 +129,7 @@ const Drawer = ({
   ariaLabel,
 }: DrawerProps) => {
   const [isContentScrollable, setIsContentScrollable] = useState(false);
-  const drawerContentRef = useRef<HTMLDivElement>(null);
+  const drawerontentRef = useRef<HTMLDivElement>(null);
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   //If RTL is set in the theme, align the drawer on the left side of the screen, uses right by default.
@@ -140,7 +140,7 @@ const Drawer = ({
     let frameId: number;
 
     const handleContentScroll = () => {
-      const drawerontentElement = drawerContentRef.current;
+      const drawerontentElement = drawerontentRef.current;
       if (drawerontentElement) {
         setIsContentScrollable(
           drawerontentElement.scrollHeight > drawerontentElement.clientHeight
@@ -172,6 +172,13 @@ const Drawer = ({
       open={isOpen}
       onClose={onClose}
       variant={variant}
+      sx={{
+        ...(variant === "persistent" && {
+          "& .MuiDrawer-paper": {
+            transition: "none",
+          },
+        }),
+      }}
     >
       <Box>
         <DrawerHeader odysseyDesignTokens={odysseyDesignTokens}>
@@ -186,7 +193,7 @@ const Drawer = ({
           />
         </DrawerHeader>
         <Box
-          ref={drawerContentRef}
+          ref={drawerontentRef}
           {...(isContentScrollable && {
             tabIndex: 0,
           })}
@@ -206,6 +213,7 @@ const Drawer = ({
     </MuiDrawer>
   );
 };
+
 Drawer.defaultProps = {
   variant: "temporary",
 };
