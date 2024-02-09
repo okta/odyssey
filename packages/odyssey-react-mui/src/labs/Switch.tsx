@@ -117,7 +117,7 @@ const SwitchLabel = ({
             transitionDuration: odysseyDesignTokens.TransitionDurationMain,
           }}
         >
-          {checked ? t("switch.Active") : t("switch.Inactive")}
+          {checked ? t("switch.active") : t("switch.inactive")}
         </Box>
       </Box>
       {hint && <FieldHint id={hintId} text={hint} />}
