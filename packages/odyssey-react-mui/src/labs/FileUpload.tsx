@@ -24,13 +24,13 @@ import { Button } from "../Button";
 import { UploadIcon } from "../icons.generated";
 import { Field, RenderFieldComponentProps } from "../Field";
 import { FieldComponentProps } from "../FieldComponentProps";
-import { Support } from "../Typography";
+import { FileUploadPreview } from "./FileUploadPreview";
+import { FileUploadIllustration } from "./FileUploadIllustration";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
 } from "../OdysseyDesignTokensContext";
-import { FileUploadPreview } from "./FileUploadPreview";
-import { FileUploadIllustration } from "./FileUploadIllustration";
+import { Support } from "../Typography";
 
 export const fileUploadTypes = ["single", "multiple"] as const;
 export const fileUploadVariants = [
