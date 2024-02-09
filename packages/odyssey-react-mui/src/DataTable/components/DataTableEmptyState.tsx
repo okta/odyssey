@@ -35,8 +35,8 @@ const EmptyContainer = styled("div", {
 export type DataTableEmptyStateProps = {
   heading: string;
   text: string;
-  primaryButton: ReactElement<typeof Button>;
-  secondaryButton: ReactElement<typeof Button>;
+  primaryButton?: ReactElement<typeof Button>;
+  secondaryButton?: ReactElement<typeof Button>;
 };
 
 const DataTableEmptyState = ({

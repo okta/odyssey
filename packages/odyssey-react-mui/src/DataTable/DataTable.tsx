@@ -51,6 +51,7 @@ import { useRowReordering } from "./hooks/useRowReordering";
 import { DataTableSettings } from "./components/DataTableSettings";
 import { Callout } from "../Callout";
 import { DataTableEmptyState } from "./components/DataTableEmptyState";
+import { Box } from "../Box";
 
 export type DataTableProps = {
   /**
@@ -258,7 +259,7 @@ const DataTable = ({
   hasRowSelection,
   hasSearch,
   hasSorting,
-  errorMessage,
+  errorMessage: errorMessageProp,
   isLoading: isLoadingProp,
   isEmpty,
   emptyPlaceholder,
@@ -282,6 +283,9 @@ const DataTable = ({
   const [isLoading, setIsLoading] = useState<boolean | undefined>(
     isLoadingProp
   );
+  const [errorMessage, setErrorMessage] = useState<string | undefined>(
+    errorMessageProp
+  );
 
   // TODO: Remove this!
   console.log(
@@ -296,7 +300,9 @@ const DataTable = ({
     setColumnVisibility,
     setRowDensity,
     setSearch,
-    setIsLoading
+    setIsLoading,
+    Callout,
+    errorMessage
   );
 
   const {
@@ -461,7 +467,6 @@ const DataTable = ({
     // Filters
     renderTopToolbar: () => (
       <>
-        {errorMessage && <Callout severity="error" text={errorMessage} />}
         <DataFilters
           onChangeSearch={hasSearch ? setSearch : undefined}
           onChangeFilters={setFilters}
@@ -480,6 +485,12 @@ const DataTable = ({
             />
           }
         />
+
+        {errorMessage && (
+          <Box sx={{ marginBlockEnd: 2 }}>
+            <Callout severity="error" text={errorMessage} />
+          </Box>
+        )}
       </>
     ),
 
@@ -533,7 +544,9 @@ const DataTable = ({
           sort: columnSorting,
         });
         setData(incomingData);
+        setErrorMessage(errorMessageProp);
       } catch (error) {
+        setErrorMessage("Something went wrong, please try again.");
       } finally {
         setIsLoading(isLoadingProp);
       }

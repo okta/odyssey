@@ -423,6 +423,7 @@ export const Default: StoryObj<DataTableProps> = {
           hasSorting={props.hasSorting}
           paginationType={props.paginationType}
           onChangeRowSelection={(rowSelection) => console.log(rowSelection)}
+          // errorMessage="This is an error message."
           isEmpty
           emptyPlaceholder={
             <DataTableEmptyState
