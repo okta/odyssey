@@ -744,6 +744,7 @@ export const components = ({
       styleOverrides: {
         root: ({ theme }) => ({
           width: `${odysseyTokens.TypographyLineHeightUi}em`,
+          minWidth: `${odysseyTokens.TypographyLineHeightUi}em`,
           height: `${odysseyTokens.TypographyLineHeightUi}em`,
           borderRadius: odysseyTokens.BorderRadiusTight,
           borderWidth: odysseyTokens.BorderWidthMain,
@@ -1544,6 +1545,9 @@ export const components = ({
           "&.Mui-disabled": {
             pointerEvents: "none",
           },
+          [`:has(> .${radioClasses.root})`]: {
+            alignItems: "flex-start",
+          },
           [`& .${checkboxClasses.root}`]: {
             marginBlockStart: 0,
           },
@@ -2059,6 +2063,7 @@ export const components = ({
       styleOverrides: {
         root: ({ theme }) => ({
           width: `${odysseyTokens.TypographyLineHeightUi}em`,
+          minWidth: `${odysseyTokens.TypographyLineHeightUi}em`,
           height: `${odysseyTokens.TypographyLineHeightUi}em`,
           borderRadius: `${odysseyTokens.TypographyLineHeightUi}em`,
           borderWidth: odysseyTokens.BorderWidthMain,
