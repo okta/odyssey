@@ -28,9 +28,9 @@ import {
   useRef,
   ReactElement,
 } from "react";
-import { useTheme } from "@mui/material/styles";
-import styled from "@emotion/styled";
 
+import styled from "@emotion/styled";
+import { useTranslation } from "react-i18next";
 import type { AllowedProps } from "../AllowedProps";
 
 export const variantValues = ["temporary", "persistent"] as const;
@@ -52,10 +52,6 @@ export type DrawerProps = {
    * The content of the Drawer. May be a `string` or any other `ReactNode` or array of `ReactNode`s.
    */
   children?: ReactNode;
-  /**
-   * When set to `true`, title text is visible
-   */
-  hasVisibleTitle: boolean;
   /**
    * When set to `true`, the Drawer will be visible.
    */
@@ -101,17 +97,6 @@ const DrawerHeader = styled("div", {
   }
 `;
 
-const VisuallyHiddenTitle = styled.h2`
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-`;
-
 const DrawerFooter = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{
@@ -128,11 +113,6 @@ const DrawerFooter = styled("div", {
   align-items: center;
   padding: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing4};
   align-content: center;
-
-  .MuiButton-root {
-    margin-inline-end: ${({ odysseyDesignTokens }) =>
-      odysseyDesignTokens.Spacing1};
-  }
 `;
 
 const Drawer = ({
@@ -140,7 +120,6 @@ const Drawer = ({
   callToActionSecondComponent,
   callToActionLastComponent,
   children,
-  hasVisibleTitle,
   isOpen,
   onClose,
   testId,
@@ -150,17 +129,18 @@ const Drawer = ({
   ariaLabel,
 }: DrawerProps) => {
   const [isContentScrollable, setIsContentScrollable] = useState(false);
-  const drawerontentRef = useRef<HTMLDivElement>(null);
+  const drawerContentRef = useRef<HTMLDivElement>(null);
   const odysseyDesignTokens = useOdysseyDesignTokens();
-  const theme = useTheme();
+
   //If RTL is set in the theme, align the drawer on the left side of the screen, uses right by default.
-  const anchorDirection = theme.direction === "rtl" ? "left" : "right";
+  const i18nRTL = useTranslation();
+  const anchorDirection = i18nRTL.i18n.dir() === "rtl" ? "left" : "right";
 
   useEffect(() => {
     let frameId: number;
 
     const handleContentScroll = () => {
-      const drawerontentElement = drawerontentRef.current;
+      const drawerontentElement = drawerContentRef.current;
       if (drawerontentElement) {
         setIsContentScrollable(
           drawerontentElement.scrollHeight > drawerontentElement.clientHeight
@@ -195,13 +175,7 @@ const Drawer = ({
     >
       <Box>
         <DrawerHeader odysseyDesignTokens={odysseyDesignTokens}>
-          {hasVisibleTitle ? (
-            <h2>{title}</h2>
-          ) : (
-            <Box>
-              <VisuallyHiddenTitle>{title}</VisuallyHiddenTitle>
-            </Box>
-          )}
+          <h2>{title}</h2>
           <Button
             ariaLabel={ariaLabel}
             label=""
@@ -212,7 +186,7 @@ const Drawer = ({
           />
         </DrawerHeader>
         <Box
-          ref={drawerontentRef}
+          ref={drawerContentRef}
           {...(isContentScrollable && {
             tabIndex: 0,
           })}
@@ -234,7 +208,6 @@ const Drawer = ({
 };
 Drawer.defaultProps = {
   variant: "temporary",
-  hasVisibleTitle: true,
 };
 
 const MemoizedDrawer = memo(Drawer);
