@@ -1031,9 +1031,6 @@ export const components = ({
             borderRadius: "16px",
             border: "0px",
           }),
-          ...(ownerState.variant === "persistent" && {
-            transition: "none !important",
-          }),
           ...(ownerState.variant === "temporary" && {
             boxShwodow:
               "0px 1px 4px 0px rgba(39, 39, 39, 0.08), 0px 4px 10px 0px rgba(39, 39, 39, 0.08), 0px",
