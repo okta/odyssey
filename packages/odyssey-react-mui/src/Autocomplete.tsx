@@ -319,10 +319,15 @@ const Autocomplete = <
   );
 
   const renderVirtualizedRow = (props: ListChildComponentProps) => {
-    const { data, index } = props;
-    const dataSet = data[index];
-
-    return dataSet;
+    const { data, index, style } = props;
+    const baseOption = data[index];
+    /**
+     * react-window calculates the absolute positions of the list items, via an inline style, so
+     * we need to add it to each list item that is being rendered in the viewable list window.
+     * See here if you need to know more: https://github.com/bvaughn/react-window?tab=readme-ov-file#why-is-my-list-blank-when-i-scroll
+     */
+    const optionItem = { ...baseOption, props: { ...baseOption.props, style } };
+    return optionItem;
   };
 
   const OuterListboxContext = createContext({});
