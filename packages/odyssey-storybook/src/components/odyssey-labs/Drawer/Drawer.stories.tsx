@@ -29,7 +29,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const gridStubText = (
   <>
-    <div>
+    <Box sx={{ maxWidth: "850px" }}>
       Multifactor authentication (MFA) means that users must verify their
       identity in two or more ways to gain access to their account. This makes
       it harder for unauthorized parties to sign in to a user’s account because
@@ -38,7 +38,7 @@ const gridStubText = (
       characteristics strengthens your MFA strategy. You can require
       authenticators for apps or groups of users and specify which ones can be
       used for account recovery.
-    </div>
+    </Box>
     <br />
     <ul>
       <li>
@@ -153,22 +153,6 @@ const storybookMeta: Meta<DrawerProps> = {
         value: "ReactNode | Array<ReactNode>",
       },
     },
-    hasVisibleTitle: {
-      control: "boolean",
-      description: "When set to `true`, title text is visible",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-      type: {
-        required: false,
-        name: "boolean",
-      },
-      defaultValue: {
-        summary: "true",
-      },
-    },
     isOpen: {
       control: "boolean",
       description: "When set to `true`, the drawer will be visible.",
@@ -241,7 +225,6 @@ export default storybookMeta;
 const DefaultTemplate: StoryObj<DrawerProps> = {
   render: function C(props) {
     const [isVisible, setIsVisible] = useState(false);
-
     const onOpen = useCallback(() => {
       setIsVisible(true);
     }, []);
@@ -250,66 +233,76 @@ const DefaultTemplate: StoryObj<DrawerProps> = {
       setIsVisible(false);
     }, []);
 
+    const gridLayout = (
+      <Box
+        sx={{
+          "@keyframes animate-drawer-open": {
+            "0%": {
+              gridTemplateColumns: "minmax(0, 2fr) 0",
+            },
+            "100%": {
+              gridTemplateColumns: "minmax(0, 2fr) 360px",
+            },
+          },
+          "@keyframes animate-drawer-close": {
+            "0%": {
+              gridTemplateColumns: "minmax(0, 2fr) 360px",
+            },
+            "100%": {
+              gridTemplateColumns: "minmax(0, 2fr) 0",
+            },
+          },
+          display: "grid",
+          maxWidth: "1000px",
+          padding: "24px",
+          gridColumnGap: "24px",
+          gridTemplateColumns: "minmax(0, 2fr) auto",
+          animation: isVisible
+            ? "animate-drawer-open 225ms cubic-bezier(0, 0, 0.2, 1)"
+            : "animate-drawer-close 225ms cubic-bezier(0, 0, 0.2, 1)",
+        }}
+      >
+        <Box>
+          <h2>CSS Grid Layout</h2>
+          {gridStubText}
+        </Box>
+        {isVisible ? (
+          <Box>
+            <Drawer
+              {...props}
+              callToActionFirstComponent={
+                <Button label="Primary" onClick={onClose} variant="primary" />
+              }
+              callToActionSecondComponent={
+                <Button
+                  label="Secondary"
+                  onClick={onClose}
+                  variant="secondary"
+                />
+              }
+              callToActionLastComponent={
+                <Button label="Cancel" onClick={onClose} variant="floating" />
+              }
+              onClose={onClose}
+              isOpen={isVisible}
+            />
+          </Box>
+        ) : null}
+      </Box>
+    );
+
     return (
       <>
         {props.variant === "persistent" ? (
           <>
-            <Button label="Open drawer" onClick={onOpen} variant="primary" />
-            <Box
-              sx={{
-                display: "flex",
-                gap: "24px",
-                padding: "24px",
-                justifyContent: "space-between",
-                alignItems: "stretch",
-                minHeight: "80vh",
-                transition: "width ease-out 250ms",
+            <Button
+              label={isVisible ? "Close drawer" : "Open drawer"}
+              onClick={() => {
+                isVisible ? onClose() : onOpen();
               }}
-            >
-              <Box
-                sx={{
-                  flex: 1,
-                  paddingTop: "24px",
-                }}
-              >
-                {gridStubText}
-              </Box>
-              <Box
-                sx={{
-                  flex: "0 0 auto",
-                  overflowY: "auto",
-                  maxHeight: "80vh",
-                  width: isVisible ? "auto" : 0,
-                }}
-              >
-                <Drawer
-                  {...props}
-                  callToActionFirstComponent={
-                    <Button
-                      label="Primary"
-                      onClick={onClose}
-                      variant="primary"
-                    />
-                  }
-                  callToActionSecondComponent={
-                    <Button
-                      label="Secondary"
-                      onClick={onClose}
-                      variant="secondary"
-                    />
-                  }
-                  callToActionLastComponent={
-                    <Button
-                      label="Cancel"
-                      onClick={onClose}
-                      variant="floating"
-                    />
-                  }
-                  onClose={onClose}
-                  isOpen={isVisible}
-                />
-              </Box>
-            </Box>
+              variant="primary"
+            />
+            {gridLayout}
           </>
         ) : (
           <>
@@ -416,35 +409,5 @@ export const NoFooter: StoryObj<DrawerProps> = {
   args: {
     children: drawerLongText,
     title: "Okta Privileged Access",
-  },
-};
-
-export const NoVisibleTitle: StoryObj<DrawerProps> = {
-  ...DefaultTemplate,
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "Persistent is embedded in the content like a dismissable sidebar",
-      },
-    },
-  },
-  args: {
-    variant: "persistent",
-    hasVisibleTitle: false,
-    children: (
-      <>
-        <Accordion label="User and resource details">
-          This is the third accordion item.
-        </Accordion>
-        <Accordion label="First-level review details">
-          This is the fourth accordion item.
-        </Accordion>
-        <Accordion label="Second-level review details">
-          This is the fifth accordion item.
-        </Accordion>
-      </>
-    ),
-    title: "Profile details",
   },
 };
