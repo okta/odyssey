@@ -32,7 +32,7 @@ import { VariableSizeList, ListChildComponentProps } from "react-window";
 import _AutoSizer, { Props } from "react-virtualized-auto-sizer";
 
 // This is required to get around a react-types issue for "AutoSizer is not a valid JSX element."
-// See here: https://github.com/bvaughn/react-virtualized/issues/1739#issuecomment-1291444246
+// @see https://github.com/bvaughn/react-virtualized/issues/1739#issuecomment-1291444246
 const AutoSizer = _AutoSizer as unknown as FC<Props>;
 
 import { Field } from "./Field";
@@ -177,9 +177,9 @@ export type AutocompleteProps<
   getIsOptionEqualToValue?: (option: OptionType, value: OptionType) => boolean;
 
   /**
-   * If this component is required to display a virtualized list of options, this value needs
-   * to be toggled to true.
-   * It is recommended if you're options are on the order of 10's of hundreds or more
+   * If this component is required to display a virtualized list of options,
+   * then this value needs to be set to true.
+   * It is recommended if you're options are on the order of 10's of hundreds or more.
    */
   isVirtualized?: boolean;
 } & Pick<
@@ -213,6 +213,7 @@ const Autocomplete = <
   isLoading,
   isOptional = false,
   isReadOnly,
+  isVirtualized: isVirtualizedProp = false,
   hint,
   HintLinkComponent,
   label,
@@ -226,13 +227,16 @@ const Autocomplete = <
   getIsOptionEqualToValue,
   testId,
   translate,
-  isVirtualized = false,
 }: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
   const controlledStateRef = useRef(
     getControlState({
       controlledValue: value,
       uncontrolledValue: defaultValue,
     }),
+  );
+
+  const isVirtualized = useRef(
+    isVirtualizedProp !== undefined && isVirtualizedProp === true
   );
   const defaultValueProp = useMemo<
     | AutocompleteValue<
@@ -324,8 +328,11 @@ const Autocomplete = <
     ],
   );
 
-  const renderVirtualizedRow = (props: ListChildComponentProps) => {
-    const { data, index, style } = props;
+  const renderVirtualizedRow = ({
+    data,
+    index,
+    style,
+  }: ListChildComponentProps) => {
     const baseOption = data[index];
     /**
      * react-window calculates the absolute positions of the list items, via an inline style, so
@@ -434,7 +441,7 @@ const Autocomplete = <
       {...valueProps}
       {...inputValueProp}
       // conditionally provide the ListboxComponent if this needs to be virtualized
-      {...(isVirtualized && { ListboxComponent })}
+      {...(isVirtualized.current && { ListboxComponent })}
       // AutoComplete is wrapped in a div within MUI which does not get the disabled attr. So this aria-disabled gets set in the div
       aria-disabled={isDisabled}
       disableCloseOnSelect={hasMultipleChoices}
