@@ -175,8 +175,8 @@ const storybookMeta: Meta<FormProps> = {
     ),
     formActions: (
       <>
-        <Button type="submit" label="Submit" variant="primary" />
         <Button label="Reset" variant="secondary" />
+        <Button type="submit" label="Submit" variant="primary" />
       </>
     ),
   },
@@ -188,23 +188,8 @@ export default storybookMeta;
 
 const Template: StoryObj<FormProps> = {
   render: function (args) {
-    return (
-      <Form
-        alert={args.alert}
-        autoCompleteType={args.autoCompleteType}
-        description={args.description}
-        encodingType={args.encodingType}
-        formActions={args.formActions}
-        id={args.id}
-        method={args.method}
-        name={args.name}
-        noValidate={args.noValidate}
-        target={args.target}
-        title={args.title}
-      >
-        {args.children}
-      </Form>
-    );
+    const { children } = args;
+    return <Form {...args}>{children}</Form>;
   },
 };
 
@@ -254,6 +239,19 @@ export const Alert: StoryObj<FormProps> = {
       <Callout severity="error" role="alert" title="Something went wrong">
         Please try your request again later.
       </Callout>
+    ),
+  },
+};
+
+export const FullWidth: StoryObj<FormProps> = {
+  ...Template,
+  args: {
+    isFullWidth: true,
+    children: (
+      <>
+        <TextField isFullWidth label="Vessel name" />
+        <TextField isFullWidth isMultiline label="Reason for visit" />
+      </>
     ),
   },
 };
