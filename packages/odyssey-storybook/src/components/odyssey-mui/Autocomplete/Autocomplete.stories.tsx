@@ -505,3 +505,31 @@ export const ControlledVirtualizedAutocomplete: StoryObj<
     return <Autocomplete {...props} value={localValue} onChange={onChange} />;
   },
 };
+
+export const ControlledMultipleVirtualizedAutocomplete: StoryObj<
+  typeof Autocomplete<LargeDataSet, boolean, boolean>
+> = {
+  parameters: {
+    docs: {
+      description: {
+        story: "Rendering a list of 10,000 options in the autocomplete",
+      },
+    },
+  },
+  args: {
+    hasMultipleChoices: true,
+    isVirtualized: true,
+    options: largeDataSet,
+    value: largeDataSet.slice(0, 2),
+    isReadOnly: false,
+    label: "label",
+    getIsOptionEqualToValue: (option, value) => option.id === value.id,
+  },
+  render: function C(props) {
+    const [localValue, setLocalValue] = useState<LargeDataSet[] | undefined>(
+      largeDataSet.slice(0, 2)
+    );
+    const onChange = useCallback((_, v) => setLocalValue(v), []);
+    return <Autocomplete {...props} value={localValue} onChange={onChange} />;
+  },
+};

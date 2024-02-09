@@ -20,6 +20,7 @@ import {
 } from "@mui/material";
 import React, {
   createContext,
+  FC,
   forwardRef,
   memo,
   useCallback,
@@ -28,6 +29,11 @@ import React, {
   useRef,
 } from "react";
 import { VariableSizeList, ListChildComponentProps } from "react-window";
+import _AutoSizer, { Props } from "react-virtualized-auto-sizer";
+
+// This is required to get around a react-types issue for "AutoSizer is not a valid JSX element."
+// See here: https://github.com/bvaughn/react-virtualized/issues/1739#issuecomment-1291444246
+const AutoSizer = _AutoSizer as unknown as FC<Props>;
 
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
@@ -362,48 +368,30 @@ const Autocomplete = <
       }
     );
 
-    const maxOptionsVisible = 8;
     const optionHeight = 45; //px
-    const borderHeight = 1; //px
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const getChildSize = (_child: React.ReactElement): number => {
-      // TODO: figure out what the height should be and if it differs based on display size
-      return optionHeight;
-    };
-
-    const getHeight = (): number => {
-      let optionsHeight = 0;
-      if (itemData.length > maxOptionsVisible) {
-        // Limits the options height to at most 10 visible options at a time
-        // to avoid an options list that is too large
-        optionsHeight = maxOptionsVisible * optionHeight;
-      } else {
-        optionsHeight = itemData.map(getChildSize).reduce((a, b) => a + b, 0);
-      }
-      return optionsHeight + 2 * borderHeight + 2 * listboxPadding;
-    };
-
-    const listboxPadding = 8; // px
-
     const gridRef = useResetCache(itemData.length);
+
     return (
-      <div ref={ref}>
+      <div ref={ref} style={{ width: "100%", height: "100%" }}>
         <OuterListboxContext.Provider value={other}>
-          <VariableSizeList
-            innerElementType="ul"
-            itemData={itemData}
-            itemCount={itemData.length}
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            itemSize={(_index) => optionHeight}
-            height={getHeight()}
-            width="100%"
-            ref={gridRef}
-            outerElementType={OuterListboxElementType}
-            overscanCount={8}
-          >
-            {renderVirtualizedRow}
-          </VariableSizeList>
+          <AutoSizer>
+            {({ height, width }) => (
+              <VariableSizeList
+                innerElementType="ul"
+                itemData={itemData}
+                itemCount={itemData.length}
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                itemSize={(_index) => optionHeight}
+                height={height}
+                width={width}
+                ref={gridRef}
+                outerElementType={OuterListboxElementType}
+                overscanCount={8}
+              >
+                {renderVirtualizedRow}
+              </VariableSizeList>
+            )}
+          </AutoSizer>
         </OuterListboxContext.Provider>
       </div>
     );

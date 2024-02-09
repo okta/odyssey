@@ -449,6 +449,10 @@ export const components = ({
         popper: {
           background: "transparent",
           paddingBlockStart: odysseyTokens.Spacing1,
+          height: "100%",
+        },
+        paper: {
+          height: "100%",
         },
         inputRoot: ({ ownerState }) => ({
           ...(ownerState.readOnly === true && {
