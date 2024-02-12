@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { FormEvent, FormEventHandler, memo, ReactElement } from "react";
+import { FormEventHandler, memo, ReactElement } from "react";
 import { Box } from "@mui/material";
 
 import { Button } from "./Button";
@@ -80,7 +80,7 @@ export type FormProps = {
   /**
    * Callback that passes the submit event to the consumer
    */
-  onSubmit?: (event: FormEvent, formattedData: FormData) => void;
+  onSubmit?: FormEventHandler<HTMLFormElement>;
   /**
    * Indicates where to display the response after submitting the form. It is a name/keyword for a browsing context (for example, tab, window, or iframe).
    * This value can be overridden by a formtarget attribute on a <button>, <input type="submit">, or <input type="image"> element.
@@ -113,13 +113,6 @@ const Form = ({
 }: FormProps) => {
   const id = useUniqueId(idOverride);
 
-  const onFormSubmit: FormEventHandler = (event) => {
-    const formElement = event.target as HTMLFormElement;
-    const formData = new FormData(formElement);
-
-    onSubmit?.(event, formData);
-  };
-
   return (
     <Box
       autoComplete={autoCompleteType}
@@ -130,7 +123,7 @@ const Form = ({
       method={method}
       name={name}
       noValidate={noValidate}
-      onSubmit={onFormSubmit}
+      onSubmit={onSubmit}
       target={target}
       sx={{
         maxWidth: (theme) => (isFullWidth ? "100%" : theme.mixins.maxWidth),
