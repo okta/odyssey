@@ -10,7 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, ReactElement, useImperativeHandle, useRef } from "react";
+import {
+  memo,
+  ReactElement,
+  ReactNode,
+  RefObject,
+  useImperativeHandle,
+  useRef,
+} from "react";
 import { ExternalLinkIcon } from "./icons.generated";
 import type { HtmlProps } from "./HtmlProps";
 import { FocusHandle } from "./inputUtils";
@@ -27,7 +34,7 @@ export type LinkProps = {
   /**
    * The content within the Link
    */
-  children: React.ReactNode;
+  children?: ReactNode;
   /**
    * The Link destination
    */
@@ -39,7 +46,7 @@ export type LinkProps = {
   /**
    * The ref forwarded to the TextField
    */
-  linkRef?: React.RefObject<FocusHandle>;
+  linkRef?: RefObject<FocusHandle>;
   /**
    * The click event handler for the Link
    */
