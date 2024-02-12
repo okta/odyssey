@@ -24,6 +24,7 @@ import {
   SwitchProps as MuiSwitchProps,
   FormControlLabel,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext";
 import { Box } from "../Box";
@@ -81,6 +82,7 @@ const SwitchLabel = ({
   label,
 }: SwitchLabelProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -115,7 +117,7 @@ const SwitchLabel = ({
             transitionDuration: odysseyDesignTokens.TransitionDurationMain,
           }}
         >
-          {checked ? "Active" : "Inactive"}
+          {checked ? t("switch.active") : t("switch.inactive")}
         </Box>
       </Box>
       {hint && <FieldHint id={hintId} text={hint} />}
