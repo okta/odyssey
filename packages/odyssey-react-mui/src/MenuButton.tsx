@@ -18,7 +18,6 @@ import {
   PopoverOrigin,
 } from "@mui/material";
 
-import type { AriaAttributeProps } from "./AriaAttributeProps";
 import {
   Button,
   buttonSizeValues,
@@ -83,8 +82,8 @@ export type MenuButtonProps = {
    */
   tooltipText?: string;
 } & Pick<
-  AriaAttributeProps,
-  "ariaDescribedBy" | "ariaLabel" | "ariaLabelledBy"
+  HtmlProps,
+  "ariaDescribedBy" | "ariaLabel" | "ariaLabelledBy" | "testId" | "translate"
 > &
   (
     | {
@@ -103,8 +102,7 @@ export type MenuButtonProps = {
         buttonLabel?: undefined | "";
       }
   ) &
-  Pick<FieldComponentProps, "isDisabled"> &
-  HtmlProps;
+  Pick<FieldComponentProps, "isDisabled">;
 
 const MenuButton = ({
   ariaLabel,

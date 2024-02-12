@@ -23,7 +23,6 @@ import {
   TypographyProps as MuiTypographyProps,
 } from "@mui/material";
 
-import type { AriaAttributeProps } from "./AriaAttributeProps";
 import { HtmlProps } from "./HtmlProps";
 import { FocusHandle } from "./inputUtils";
 
@@ -85,10 +84,9 @@ export type TypographyProps = {
    */
   variant?: keyof typeof typographyVariantMapping;
 } & Pick<
-  AriaAttributeProps,
-  "ariaDescribedBy" | "ariaLabel" | "ariaLabelledBy"
-> &
-  HtmlProps;
+  HtmlProps,
+  "ariaDescribedBy" | "ariaLabel" | "ariaLabelledBy" | "testId" | "translate"
+>;
 
 const Typography = ({
   ariaDescribedBy,

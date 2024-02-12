@@ -26,7 +26,6 @@ import {
 } from "@mui/lab";
 import { Tab as MuiTab } from "@mui/material";
 
-import type { AriaAttributeProps } from "./AriaAttributeProps";
 import { Badge, BadgeProps } from "./Badge";
 import { Box } from "./Box";
 import { HtmlProps } from "./HtmlProps";
@@ -56,7 +55,7 @@ export type TabItemProps = {
 } & {
   notificationCount?: BadgeProps["badgeContent"];
   notificationCountMax?: BadgeProps["badgeContentMax"];
-} & HtmlProps;
+} & Pick<HtmlProps, "testId" | "translate">;
 
 export type TabsProps = {
   /**
@@ -120,7 +119,7 @@ const Tabs = ({
   tabs,
   value,
   onChange: onChangeProp,
-}: TabsProps & Pick<AriaAttributeProps, "ariaLabel">) => {
+}: TabsProps & Pick<HtmlProps, "ariaLabel">) => {
   const [tabState, setTabState] = useState(initialValue ?? value ?? "0");
 
   const onChange = useCallback<NonNullable<MuiTabListProps["onChange"]>>(

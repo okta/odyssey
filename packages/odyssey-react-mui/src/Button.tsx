@@ -74,7 +74,6 @@ export type ButtonProps = {
    * The icon element to display at the start of the Button
    */
   startIcon?: ReactElement;
-  tabIndex?: HTMLAttributes<HTMLElement>["tabIndex"];
   /**
    * The tooltip text for the Button if it's icon-only
    */
@@ -105,15 +104,17 @@ export type ButtonProps = {
     }
 ) &
   Pick<
-    AriaAttributeProps,
+    HtmlProps,
     | "ariaControls"
     | "ariaDescribedBy"
     | "ariaExpanded"
     | "ariaHasPopup"
     | "ariaLabel"
     | "ariaLabelledBy"
-  > &
-  HtmlProps;
+    | "tabIndex"
+    | "testId"
+    | "translate"
+  >;
 
 const Button = ({
   ariaControls,

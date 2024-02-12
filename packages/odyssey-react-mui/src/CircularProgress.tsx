@@ -13,7 +13,6 @@
 import { memo } from "react";
 import { CircularProgress as MuiCircularProgress } from "@mui/material";
 
-import type { AriaAttributeProps } from "./AriaAttributeProps";
 import type { HtmlProps } from "./HtmlProps";
 
 export type CircularProgressProps = {
@@ -22,8 +21,7 @@ export type CircularProgressProps = {
    * If undefined, the spinner will spin perpetually.
    */
   value?: number;
-} & Pick<AriaAttributeProps, "ariaLabel"> &
-  HtmlProps;
+} & Pick<HtmlProps, "ariaLabel" | "testId">;
 
 const CircularProgress = ({
   ariaLabel,

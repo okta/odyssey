@@ -20,7 +20,6 @@ import {
   FormHelperText,
 } from "@mui/material";
 
-import type { AriaAttributeProps } from "./AriaAttributeProps";
 import { CheckedFieldProps } from "./FormCheckedProps";
 import type { HtmlProps } from "./HtmlProps";
 import {
@@ -62,10 +61,9 @@ export type CheckboxProps = {
    * Callback fired when the blur event happens. Provides event value.
    */
   onBlur?: MuiFormControlLabelProps["onBlur"];
-} & Pick<AriaAttributeProps, "ariaLabel" | "ariaLabelledBy"> &
-  Pick<FieldComponentProps, "hint" | "id" | "isDisabled" | "name"> &
+} & Pick<FieldComponentProps, "hint" | "id" | "isDisabled" | "name"> &
   CheckedFieldProps<MuiCheckboxProps> &
-  HtmlProps;
+  Pick<HtmlProps, "ariaLabel" | "ariaLabelledBy" | "testId" | "translate">;
 
 const Checkbox = ({
   ariaLabel,
