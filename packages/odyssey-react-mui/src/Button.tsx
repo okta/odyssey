@@ -21,7 +21,6 @@ import {
   useRef,
 } from "react";
 
-import type { AriaAttributeProps } from "./AriaAttributeProps";
 import { useButton } from "./ButtonContext";
 import type { HtmlProps } from "./HtmlProps";
 import { FocusHandle } from "./inputUtils";

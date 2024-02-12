@@ -31,7 +31,7 @@ export type TagProps = {
    * Callback fired when the remove button of the Tag is clicked
    */
   onRemove?: MuiChipProps["onDelete"];
-} & HtmlProps;
+} & Pick<HtmlProps, "testId" | "translate">;
 
 const Tag = ({
   icon,

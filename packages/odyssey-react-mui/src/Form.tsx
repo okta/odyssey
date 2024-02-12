@@ -90,8 +90,7 @@ export type FormProps = {
    * The title of the Form
    */
   title?: string;
-} & Pick<FieldComponentProps, "isFullWidth"> &
-  HtmlProps;
+} & Pick<FieldComponentProps, "isFullWidth"> & Pick<HtmlProps, "testId" | "translate">;
 
 const Form = ({
   alert,

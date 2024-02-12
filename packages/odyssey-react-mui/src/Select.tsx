@@ -170,7 +170,6 @@ export type SelectProps<
   value?: Value;
 } & Pick<
   FieldComponentProps,
-  | "ariaDescribedBy"
   | "errorMessage"
   | "errorMessageList"
   | "hint"
@@ -181,7 +180,7 @@ export type SelectProps<
   | "isOptional"
   | "name"
 > &
-  HtmlProps;
+  Pick<HtmlProps, "ariaDescribedBy" | "testId" | "translate">;
 
 type SelectRenderProps = Partial<
   Pick<FieldComponentRenderProps, "ariaDescribedBy" | "errorMessageElementId">

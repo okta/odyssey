@@ -20,7 +20,7 @@ export type ScreenReaderTextProps = {
    * The visually-hidden text.
    */
   children: ReactNode;
-} & HtmlProps;
+} & Pick<HtmlProps, "translate">;
 
 /**
  * MUI sx expects you pass in a CSS object, not an object with CSS.
