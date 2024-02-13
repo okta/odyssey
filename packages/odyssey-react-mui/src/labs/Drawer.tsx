@@ -23,6 +23,7 @@ import { useTranslation } from "react-i18next";
 import { Drawer as MuiDrawer } from "@mui/material";
 
 import type { HtmlProps } from "../HtmlProps";
+
 import { Box } from "../Box";
 import { Button } from "../Button";
 import { CloseIcon } from "../icons.generated";
