@@ -85,24 +85,16 @@ export type MenuButtonProps = {
   HtmlProps,
   "ariaDescribedBy" | "ariaLabel" | "ariaLabelledBy" | "testId" | "translate"
 > &
+  Pick<FieldComponentProps, "isDisabled"> &
   (
-    | {
-        ariaLabel?: string;
-        ariaLabelledBy?: string;
-        buttonLabel: string;
-      }
-    | {
-        ariaLabel: string;
-        ariaLabelledBy?: string;
+    | { buttonLabel: string }
+    | (Required<Pick<HtmlProps, "ariaLabelledBy">> & {
         buttonLabel?: undefined | "";
-      }
-    | {
-        ariaLabel?: string;
-        ariaLabelledBy: string;
+      })
+    | (Required<Pick<HtmlProps, "ariaLabel">> & {
         buttonLabel?: undefined | "";
-      }
-  ) &
-  Pick<FieldComponentProps, "isDisabled">;
+      })
+  );
 
 const MenuButton = ({
   ariaLabel,
