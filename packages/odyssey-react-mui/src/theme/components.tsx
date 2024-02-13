@@ -92,18 +92,6 @@ export const components = ({
             borderBottomStyle: "solid",
             borderBottomWidth: odysseyTokens.BorderWidthMain,
           },
-
-          // "&:first-of-type": {
-          //   borderTopLeftRadius: odysseyTokens.BorderRadiusMain,
-          //   borderTopRightRadius: odysseyTokens.BorderRadiusMain,
-          //   borderBlockStartStyle: "solid",
-          // },
-
-          // "&:last-of-type": {
-          //   borderBottomLeftRadius: odysseyTokens.BorderRadiusMain,
-          //   borderBottomRightRadius: odysseyTokens.BorderRadiusMain,
-          //   borderBlockEndStyle: "solid",
-          // },
         }),
       },
     },
@@ -112,21 +100,6 @@ export const components = ({
         root: () => ({
           paddingBlock: odysseyTokens.Spacing4,
           paddingInline: odysseyTokens.Spacing3,
-
-          // ".MuiAccordion-root:first-of-type &": {
-          //   borderTopLeftRadius: odysseyTokens.BorderRadiusMain,
-          //   borderTopRightRadius: odysseyTokens.BorderRadiusMain,
-          // },
-
-          // ".MuiAccordion-root:last-of-type &": {
-          //   borderBottomLeftRadius: odysseyTokens.BorderRadiusMain,
-          //   borderBottomRightRadius: odysseyTokens.BorderRadiusMain,
-          // },
-
-          // ".MuiAccordion-root.Mui-expanded &": {
-          //   borderBottomLeftRadius: 0,
-          //   borderBottomRightRadius: 0,
-          // },
 
           "&:hover": {
             backgroundColor: odysseyTokens.HueNeutral50,
