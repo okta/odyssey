@@ -10,16 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Drawer as MuiDrawer } from "@mui/material";
-
-import {
-  useOdysseyDesignTokens,
-  DesignTokens,
-} from "../OdysseyDesignTokensContext";
-
-import { Button } from "../Button";
-import { Box } from "../Box";
-import { CloseIcon } from "../icons.generated";
 import {
   memo,
   ReactNode,
@@ -28,10 +18,19 @@ import {
   useRef,
   ReactElement,
 } from "react";
-
 import styled from "@emotion/styled";
 import { useTranslation } from "react-i18next";
+import { Drawer as MuiDrawer } from "@mui/material";
+
 import type { AllowedProps } from "../AllowedProps";
+import { Box } from "../Box";
+import { Button } from "../Button";
+import { CloseIcon } from "../icons.generated";
+import { Heading5 } from "../Typography";
+import {
+  useOdysseyDesignTokens,
+  DesignTokens,
+} from "../OdysseyDesignTokensContext";
 
 export const variantValues = ["temporary", "persistent"] as const;
 
@@ -39,15 +38,15 @@ export type DrawerProps = {
   /**
    * An optional Button object to be situated in the Drawerfooter. Should almost always be of variant `primary`.
    */
-  callToActionFirstComponent?: ReactElement<typeof Button>;
+  primaryCallToActionComponent?: ReactElement<typeof Button>;
   /**
    * An optional Button object to be situated in the Drawer footer, alongside the `callToActionPrimaryComponent`.
    */
-  callToActionSecondComponent?: ReactElement<typeof Button>;
+  secondaryCallToActionComponent?: ReactElement<typeof Button>;
   /**
    * An optional Button object to be situated in the Drawer footer, alongside the other two `callToAction` components.
    */
-  callToActionLastComponent?: ReactElement<typeof Button>;
+  tertiaryCallToActionComponent?: ReactElement<typeof Button>;
   /**
    * The content of the Drawer. May be a `string` or any other `ReactNode` or array of `ReactNode`s.
    */
@@ -61,6 +60,10 @@ export type DrawerProps = {
    */
   onClose: () => void;
   /**
+   * Shows divider lines separating header, content, and footer (if using action buttons)
+   */
+  showDividers: boolean;
+  /**
    * The title of the Drawer
    */
   title?: string;
@@ -71,57 +74,71 @@ export type DrawerProps = {
   ariaLabel: string;
 } & AllowedProps;
 
+interface DrawerStyleProps {
+  odysseyDesignTokens: DesignTokens;
+  showDividers: boolean;
+}
 const DrawerHeader = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<DrawerStyleProps>`
+  position: sticky;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  top: 0;
+  background-color: ${({ odysseyDesignTokens }) =>
+    odysseyDesignTokens.HueNeutralWhite};
+  margin: 0;
+  padding: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing4}
+    ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing5};
+  font-family: ${({ odysseyDesignTokens }) =>
+    odysseyDesignTokens.TypographyFamilyHeading};
+  color: ${({ odysseyDesignTokens }) => odysseyDesignTokens.HueNeutral900};
+  border-bottom: ${({ showDividers, odysseyDesignTokens }) =>
+    showDividers ? `1px solid ${odysseyDesignTokens.HueNeutral200}` : "none"};
+`;
+
+const DrawerContentWrapper = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{
   odysseyDesignTokens: DesignTokens;
 }>`
-  position: sticky;
-  display: flex;
-  top: 0;
-  background-color: ${({ odysseyDesignTokens }) =>
-    odysseyDesignTokens.HueNeutralWhite};
-  justify-content: space-between;
-  align-items: center;
-  margin: 0;
-  padding: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing4} 0;
-  font-family: ${({ odysseyDesignTokens }) =>
-    odysseyDesignTokens.TypographyFamilyHeading};
-  color: ${({ odysseyDesignTokens }) => odysseyDesignTokens.HueNeutral900};
+  overflow-y: auto;
+`;
 
-  h2 {
-    margin: 0;
-    font-size: ${({ odysseyDesignTokens }) =>
-      odysseyDesignTokens.TypographySizeHeading5};
-    font-weight: 500;
-  }
+const DrawerContent = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<DrawerStyleProps>`
+  padding: ${({ showDividers, odysseyDesignTokens }) =>
+    showDividers
+      ? `${odysseyDesignTokens.Spacing5}`
+      : `0 ${odysseyDesignTokens.Spacing5}`};
 `;
 
 const DrawerFooter = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{
-  odysseyDesignTokens: DesignTokens;
-}>`
-  display: flex;
+})<DrawerStyleProps>`
   position: sticky;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   bottom: 0;
   background-color: ${({ odysseyDesignTokens }) =>
     odysseyDesignTokens.HueNeutralWhite};
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: flex-end;
-  align-items: center;
   padding: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing4};
   align-content: center;
+  border-top: ${({ showDividers, odysseyDesignTokens }) =>
+    showDividers ? `1px solid ${odysseyDesignTokens.HueNeutral200}` : "none"};
 `;
 
 const Drawer = ({
-  callToActionFirstComponent,
-  callToActionSecondComponent,
-  callToActionLastComponent,
+  primaryCallToActionComponent,
+  secondaryCallToActionComponent,
+  tertiaryCallToActionComponent,
   children,
   isOpen,
   onClose,
+  showDividers,
   testId,
   title,
   translate,
@@ -129,21 +146,20 @@ const Drawer = ({
   ariaLabel,
 }: DrawerProps) => {
   const [isContentScrollable, setIsContentScrollable] = useState(false);
-  const drawerontentRef = useRef<HTMLDivElement>(null);
+  const drawerContentRef = useRef<HTMLDivElement>(null);
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   //If RTL is set in the theme, align the drawer on the left side of the screen, uses right by default.
-  const i18nRTL = useTranslation();
-  const anchorDirection = i18nRTL.i18n.dir() === "rtl" ? "left" : "right";
-
+  const { i18n } = useTranslation();
+  const anchorDirection = i18n.dir() === "rtl" ? "left" : "right";
   useEffect(() => {
     let frameId: number;
 
     const handleContentScroll = () => {
-      const drawerontentElement = drawerontentRef.current;
-      if (drawerontentElement) {
+      const drawerContentElement = drawerContentRef.current;
+      if (drawerContentElement) {
         setIsContentScrollable(
-          drawerontentElement.scrollHeight > drawerontentElement.clientHeight
+          drawerContentElement.scrollHeight > drawerContentElement.clientHeight
         );
       }
       frameId = requestAnimationFrame(handleContentScroll);
@@ -157,7 +173,6 @@ const Drawer = ({
       cancelAnimationFrame(frameId);
     };
   }, [isOpen]);
-
   const content =
     typeof children === "string" ? (
       <Box translate={translate}>{children}</Box>
@@ -180,9 +195,18 @@ const Drawer = ({
         }),
       }}
     >
-      <Box>
-        <DrawerHeader odysseyDesignTokens={odysseyDesignTokens}>
-          <h2>{title}</h2>
+      <DrawerContentWrapper
+        odysseyDesignTokens={odysseyDesignTokens}
+        ref={drawerContentRef}
+        {...(isContentScrollable && {
+          tabIndex: 0,
+        })}
+      >
+        <DrawerHeader
+          odysseyDesignTokens={odysseyDesignTokens}
+          showDividers={showDividers || isContentScrollable}
+        >
+          <Heading5>{title}</Heading5>
           <Button
             ariaLabel={ariaLabel}
             label=""
@@ -192,22 +216,23 @@ const Drawer = ({
             variant="floating"
           />
         </DrawerHeader>
-        <Box
-          ref={drawerontentRef}
-          {...(isContentScrollable && {
-            tabIndex: 0,
-          })}
+        <DrawerContent
+          showDividers={showDividers || isContentScrollable}
+          odysseyDesignTokens={odysseyDesignTokens}
         >
           {content}
-        </Box>
-      </Box>
-      {(callToActionFirstComponent ||
-        callToActionSecondComponent ||
-        callToActionLastComponent) && (
-        <DrawerFooter odysseyDesignTokens={odysseyDesignTokens}>
-          {callToActionLastComponent}
-          {callToActionSecondComponent}
-          {callToActionFirstComponent}
+        </DrawerContent>
+      </DrawerContentWrapper>
+      {(primaryCallToActionComponent ||
+        secondaryCallToActionComponent ||
+        tertiaryCallToActionComponent) && (
+        <DrawerFooter
+          odysseyDesignTokens={odysseyDesignTokens}
+          showDividers={showDividers || isContentScrollable}
+        >
+          {tertiaryCallToActionComponent}
+          {secondaryCallToActionComponent}
+          {primaryCallToActionComponent}
         </DrawerFooter>
       )}
     </MuiDrawer>

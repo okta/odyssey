@@ -13,14 +13,12 @@
 import { Meta, StoryObj } from "@storybook/react";
 
 import {
-  Accordion,
-  Box,
-  Button,
   Drawer,
-  variantValues,
   DrawerProps,
-} from "@okta/odyssey-react-mui";
+  variantValues,
+} from "@okta/odyssey-react-mui/labs";
 
+import { Accordion, Box, Button } from "@okta/odyssey-react-mui";
 import { useCallback, useState } from "react";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { axeRun } from "../../../axe-util";
@@ -107,7 +105,7 @@ const storybookMeta: Meta<DrawerProps> = {
   title: "MUI Components/Drawer",
   component: Drawer,
   argTypes: {
-    callToActionFirstComponent: {
+    primaryCallToActionComponent: {
       control: null,
       description:
         "An optional Button object to be situated in the Drawer footer. Should almost always be of variant `primary`.",
@@ -117,7 +115,7 @@ const storybookMeta: Meta<DrawerProps> = {
         },
       },
     },
-    callToActionSecondComponent: {
+    secondaryCallToActionComponent: {
       control: null,
       description:
         "An optional Button object to be situated in the Drawer footer, alongside the `callToActionPrimaryComponent`.",
@@ -127,7 +125,7 @@ const storybookMeta: Meta<DrawerProps> = {
         },
       },
     },
-    callToActionLastComponent: {
+    tertiaryCallToActionComponent: {
       control: null,
       description:
         "An optional Button object to be situated in the Drawer footer, alongside the other two `callToAction` components.",
@@ -270,17 +268,17 @@ const DefaultTemplate: StoryObj<DrawerProps> = {
           <Box>
             <Drawer
               {...props}
-              callToActionFirstComponent={
+              primaryCallToActionComponent={
                 <Button label="Primary" onClick={onClose} variant="primary" />
               }
-              callToActionSecondComponent={
+              secondaryCallToActionComponent={
                 <Button
                   label="Secondary"
                   onClick={onClose}
                   variant="secondary"
                 />
               }
-              callToActionLastComponent={
+              tertiaryCallToActionComponent={
                 <Button label="Cancel" onClick={onClose} variant="floating" />
               }
               onClose={onClose}
@@ -309,17 +307,17 @@ const DefaultTemplate: StoryObj<DrawerProps> = {
             <Button label="Open drawer" onClick={onOpen} variant="primary" />
             <Drawer
               {...props}
-              callToActionFirstComponent={
+              primaryCallToActionComponent={
                 <Button label="Primary" onClick={onClose} variant="primary" />
               }
-              callToActionSecondComponent={
+              secondaryCallToActionComponent={
                 <Button
                   label="Secondary"
                   onClick={onClose}
                   variant="secondary"
                 />
               }
-              callToActionLastComponent={
+              tertiaryCallToActionComponent={
                 <Button label="Cancel" onClick={onClose} variant="floating" />
               }
               onClose={onClose}
@@ -370,6 +368,35 @@ export const Persistent: StoryObj<DrawerProps> = {
   },
   args: {
     variant: "persistent",
+    children: (
+      <>
+        <Accordion label="User and resource details">
+          This is the third accordion item.
+        </Accordion>
+        <Accordion label="First-level review details">
+          This is the fourth accordion item.
+        </Accordion>
+        <Accordion label="Second-level review details">
+          This is the fifth accordion item.
+        </Accordion>
+      </>
+    ),
+    title: "Profile details",
+  },
+};
+
+export const ShowDividers: StoryObj<DrawerProps> = {
+  ...DefaultTemplate,
+  parameters: {
+    docs: {
+      description: {
+        story: "Persistent Drawer with Dividers lines enabled",
+      },
+    },
+  },
+  args: {
+    variant: "persistent",
+    showDividers: true,
     children: (
       <>
         <Accordion label="User and resource details">

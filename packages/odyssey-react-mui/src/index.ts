@@ -68,7 +68,6 @@ export * from "./CssBaseline";
 export * from "./createShadowRootElement";
 export * from "./createUniqueId";
 export * from "./Dialog";
-export * from "./labs/Drawer";
 export * from "./Fieldset";
 export * from "./FieldComponentProps";
 export * from "./Form";
