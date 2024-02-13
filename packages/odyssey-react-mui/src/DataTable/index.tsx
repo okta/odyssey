@@ -11,6 +11,6 @@
  */
 
 import { DataTable } from "./DataTable";
-import { densityValues } from "./utils/constants";
+import { densityValues, paginationTypeValues } from "./utils/constants";
 
-export { DataTable, densityValues };
+export { DataTable, densityValues, paginationTypeValues };

@@ -29,11 +29,8 @@ import {
   ArrowUnsortedIcon,
   DragIndicatorIcon,
 } from "../icons.generated";
-import { densityValues } from "./utils/constants";
-import {
-  DataTablePagination,
-  paginationTypeValues,
-} from "../labs/DataTablePagination";
+import { densityValues, paginationTypeValues } from "./utils/constants";
+import { DataTablePagination } from "./components/DataTablePagination";
 import { DataFilter, DataFilters } from "../labs/DataFilters";
 import {
   DataTableRowActions,
@@ -427,30 +424,9 @@ const DataTable = ({
     renderBottomToolbar: hasPagination
       ? () => (
           <DataTablePagination
-            paginationType={paginationType}
-            currentNumberOfResults={data.length}
-            currentPage={pagination.pageIndex}
-            isPreviousButtonDisabled={pagination.pageIndex <= 1}
-            isNextButtonDisabled={false} // TODO: Add logic for disabling next/load more button
-            onClickPrevious={() =>
-              setPagination({
-                pageIndex: pagination.pageIndex - 1,
-                pageSize: pagination.pageSize,
-              })
-            }
-            onClickNext={() => {
-              if (paginationType === "loadMore") {
-                setPagination({
-                  pageSize: pagination.pageSize,
-                  pageIndex: pagination.pageSize + resultsPerPage,
-                });
-              } else {
-                setPagination({
-                  pageSize: pagination.pageSize,
-                  pageIndex: pagination.pageIndex + 1,
-                });
-              }
-            }}
+            pagination={pagination}
+            setPagination={setPagination}
+            totalRows={totalRows}
           />
         )
       : undefined,
