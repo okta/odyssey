@@ -20,7 +20,7 @@
     "@storybook/theming": "^7.2.0"
   },
   "devDependencies": {
-    "@applitools/eyes-storybook": "^3.34.2",
+    "@applitools/eyes-storybook": "^3.43.2",
     "@babel/core": "^7.19.3",
     "@mui/material": "^5.12.3",
     "@okta/odyssey-babel-loader": "workspace:*",
@@ -38,11 +38,11 @@
     "@storybook/client-api": "^7.4.0",
     "@storybook/components": "^7.4.0",
     "@storybook/core-events": "^7.4.0",
-    "@storybook/jest": "^0.1.0",
+    "@storybook/jest": "^0.2.0",
     "@storybook/manager-api": "^7.4.0",
     "@storybook/react": "^7.4.0",
     "@storybook/react-vite": "^7.4.0",
-    "@storybook/test-runner": "^0.10.0",
+    "@storybook/test-runner": "^0.11.0",
     "@storybook/testing-library": "^0.1.0",
     "@storybook/theming": "^7.4.0",
     "@types/mdx": "^2.0.1",
