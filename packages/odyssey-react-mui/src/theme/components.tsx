@@ -1014,13 +1014,11 @@ export const components = ({
     },
     MuiDrawer: {
       styleOverrides: {
-        root: {
-          height: "100%",
-        },
+        root: {},
         paper: ({ ownerState }) => ({
           width: ownerState.variant === "temporary" ? "400px" : "360px",
-          paddingInline: odysseyTokens.Spacing5,
           display: "flex",
+          overflowY: "auto",
           flexDirection: "column",
           flexWrap: "nowrap",
           justifyContent: "space-between",
