@@ -25,7 +25,7 @@ import { InputAdornment, InputBase } from "@mui/material";
 
 import { FieldComponentProps } from "./FieldComponentProps";
 import { Field } from "./Field";
-import { AllowedProps } from "./AllowedProps";
+import { HtmlProps } from "./HtmlProps";
 import { FocusHandle, useInputValues, getControlState } from "./inputUtils";
 
 export const textFieldTypeValues = [
@@ -101,11 +101,12 @@ export type TextFieldProps = {
    */
   value?: string;
 } & FieldComponentProps &
-  AllowedProps;
+  HtmlProps;
 
 const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (
     {
+      ariaDescribedBy,
       autoCompleteType,
       defaultValue,
       hasInitialFocus,
@@ -190,7 +191,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             "aria-errormessage": errorMessageElementId,
             "aria-labelledby": labelElementId,
             "data-se": testId,
-            inputmode: inputMode,
+            inputMode,
           }}
           inputRef={localInputRef}
           multiline={isMultiline}
@@ -237,6 +238,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 
     return (
       <Field
+        ariaDescribedBy={ariaDescribedBy}
         errorMessage={errorMessage}
         errorMessageList={errorMessageList}
         fieldType="single"

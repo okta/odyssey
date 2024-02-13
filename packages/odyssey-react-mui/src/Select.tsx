@@ -34,13 +34,14 @@ import { SelectProps as MuiSelectProps } from "@mui/material";
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import { CheckIcon, CloseCircleFilledIcon } from "./icons.generated";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 import {
   ComponentControlledState,
   FocusHandle,
   useInputValues,
   getControlState,
 } from "./inputUtils";
+import { normalizedKey } from "./useNormalizedKey";
 import styled from "@emotion/styled";
 import {
   useOdysseyDesignTokens,
@@ -59,47 +60,38 @@ const SelectContainer = styled.div`
   display: flex;
 `;
 
-const PlaceholderValuesContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{
+const PlaceholderValuesContainer = styled.div<{
   odysseyDesignTokens: DesignTokens;
 }>`
   display: flex;
   align-items: center;
   position: absolute;
-  top: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing0};
-  right: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing5};
-  bottom: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing0};
-  left: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing1};
-  margin-inline-start: ${({ odysseyDesignTokens }) =>
-    odysseyDesignTokens.BorderWidthMain};
+  top: ${(props) => props.odysseyDesignTokens.Spacing0};
+  right: ${(props) => props.odysseyDesignTokens.Spacing5};
+  bottom: ${(props) => props.odysseyDesignTokens.Spacing0};
+  left: ${(props) => props.odysseyDesignTokens.Spacing1};
+  margin-inline-start: ${(props) => props.odysseyDesignTokens.BorderWidthMain};
   opacity: 1;
   pointer-events: none;
 `;
 
-const PlaceholderIcon = styled(CloseCircleFilledIcon, {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{
+const PlaceholderIcon = styled(CloseCircleFilledIcon)<{
   odysseyDesignTokens: DesignTokens;
 }>`
   font-size: 1em;
-  margin-inline-start: ${({ odysseyDesignTokens }) =>
-    odysseyDesignTokens.Spacing2};
-  margin-inline-end: -${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing1};
+  margin-inline-start: ${(props) => props.odysseyDesignTokens.Spacing2};
+  margin-inline-end: -${(props) => props.odysseyDesignTokens.Spacing1};
 `;
 
-const ChipContainer = styled(MuiBox, {
-  shouldForwardProp: (prop) =>
-    prop !== "isPlaceholder" && prop !== "odysseyDesignTokens",
-})<{
+const ChipContainer = styled(MuiBox)<{
   isPlaceholder?: boolean;
   odysseyDesignTokens: DesignTokens;
 }>`
   display: flex;
   flex-wrap: wrap;
-  gap: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing1};
+  gap: ${(props) => props.odysseyDesignTokens.Spacing1};
   pointer-events: none;
-  opacity: ${({ isPlaceholder }) => (isPlaceholder ? 1 : 0)};
+  opacity: ${(props) => (props.isPlaceholder ? 1 : 0)};
 `;
 
 export type SelectValueType<HasMultipleChoices> =
@@ -152,6 +144,7 @@ export type SelectProps<
   value?: Value;
 } & Pick<
   FieldComponentProps,
+  | "ariaDescribedBy"
   | "errorMessage"
   | "errorMessageList"
   | "hint"
@@ -162,7 +155,7 @@ export type SelectProps<
   | "isOptional"
   | "name"
 > &
-  AllowedProps;
+  HtmlProps;
 
 /**
  * Options in Odyssey <Select> are passed as an array, which can contain any combination
@@ -184,6 +177,7 @@ const Select = <
   Value extends SelectValueType<HasMultipleChoices>,
   HasMultipleChoices extends boolean
 >({
+  ariaDescribedBy,
   defaultValue,
   errorMessage,
   errorMessageList,
@@ -261,14 +255,14 @@ const Select = <
     [onChangeProp]
   );
 
-  const handleDelete = useCallback(
-    (itemToDelete: string) => {
+  const removeSelection = useCallback(
+    (itemToRemove: string) => {
       if (!Array.isArray(internalSelectedValues)) {
         return;
       }
 
       const newValue = internalSelectedValues!.filter(
-        (item: string) => item !== itemToDelete
+        (item: string) => item !== itemToRemove
       );
 
       const syntheticEvent = {
@@ -284,15 +278,23 @@ const Select = <
   // data types that might be passed
   const normalizedOptions = useMemo(
     () =>
-      options.map((option) =>
-        typeof option === "object"
-          ? {
-              text: option.text,
-              value: option.value || option.text,
-              type: option.type === "heading" ? "heading" : "option",
-            }
-          : { text: option, value: option, type: "option" }
-      ),
+      options.map((option) => {
+        if (typeof option === "object") {
+          /**
+           * If the value of `option?.value is an empty string, we need to make sure that we
+           * set an empty string to `value` in the normalized option so that the select component
+           * can potentially set it as the selected one in the text input
+           */
+          const value =
+            option?.value === "" ? option.value : option.value || option.text;
+          return {
+            text: option.text,
+            value,
+            type: option.type === "heading" ? "heading" : "option",
+          };
+        }
+        return { text: option, value: option, type: "option" };
+      }),
     [options]
   );
 
@@ -340,7 +342,7 @@ const Select = <
               onDelete={
                 isPlaceholder
                   ? controlledStateRef.current === CONTROLLED
-                    ? () => handleDelete(item)
+                    ? () => removeSelection(item)
                     : undefined
                   : undefined
               }
@@ -377,14 +379,14 @@ const Select = <
 
       return <MuiBox>{renderedChips}</MuiBox>;
     },
-    [normalizedOptions, handleDelete]
+    [normalizedOptions, removeSelection]
   );
 
   // Convert the options into the ReactNode children
   // that will populate the <Select>
   const children = useMemo(
     () =>
-      normalizedOptions.map((option) => {
+      normalizedOptions.map((option, index) => {
         if (option.type === "heading") {
           return <ListSubheader key={option.text}>{option.text}</ListSubheader>;
         }
@@ -395,17 +397,19 @@ const Select = <
 
         return (
           <MuiMenuItem
-            key={option.value}
+            key={normalizedKey(option.text, index.toString())}
             value={option.value}
             selected={isSelected}
           >
             {hasMultipleChoices && <MuiCheckbox checked={isSelected} />}
             {option.text}
-            {isSelected && !hasMultipleChoices && (
-              <ListItemSecondaryAction>
-                <CheckIcon />
-              </ListItemSecondaryAction>
-            )}
+            {!hasMultipleChoices &&
+              (internalSelectedValues?.includes(option.value) ||
+                internalSelectedValues === option.value) && (
+                <ListItemSecondaryAction>
+                  <CheckIcon />
+                </ListItemSecondaryAction>
+              )}
           </MuiMenuItem>
         );
       }),
@@ -460,6 +464,7 @@ const Select = <
 
   return (
     <Field
+      ariaDescribedBy={ariaDescribedBy}
       errorMessage={errorMessage}
       errorMessageList={errorMessageList}
       fieldType="single"

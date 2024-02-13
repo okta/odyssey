@@ -15,6 +15,7 @@ import {
   ChangeEventHandler,
   FocusEventHandler,
   forwardRef,
+  HTMLAttributes,
   InputHTMLAttributes,
   memo,
   useCallback,
@@ -24,7 +25,7 @@ import {
 import { CloseCircleFilledIcon, SearchIcon } from "./icons.generated";
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 import { getControlState, useInputValues } from "./inputUtils";
 
 export const searchVariantValues = ["outline", "filled"] as const;
@@ -76,6 +77,8 @@ export type SearchFieldProps = {
    * The short hint displayed in the `input` before the user enters a value.
    */
   placeholder?: string;
+
+  tabIndex?: HTMLAttributes<HTMLElement>["tabIndex"];
   /**
    * The value of the `input` element, to use when controlled.
    */
@@ -84,12 +87,16 @@ export type SearchFieldProps = {
    * Whether the SearchField has a gray or white background
    */
   variant?: (typeof searchVariantValues)[number];
-} & Pick<FieldComponentProps, "id" | "isDisabled" | "name" | "isFullWidth"> &
-  AllowedProps;
+} & Pick<
+  FieldComponentProps,
+  "ariaDescribedBy" | "id" | "isDisabled" | "name" | "isFullWidth"
+> &
+  HtmlProps;
 
 const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
   (
     {
+      ariaDescribedBy,
       autoCompleteType,
       defaultValue,
       hasInitialFocus,
@@ -103,6 +110,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       onBlur,
       onClear: onClearProp,
       placeholder,
+      tabIndex,
       testId,
       translate,
       value,
@@ -138,6 +146,9 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       ({ ariaDescribedBy, id }) => (
         <InputBase
           {...inputValues}
+          inputProps={{
+            tabIndex,
+          }}
           aria-describedby={ariaDescribedBy}
           autoComplete={autoCompleteType}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
@@ -188,13 +199,16 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         onFocus,
         placeholder,
         ref,
+        tabIndex,
         testId,
         translate,
+        variant,
       ]
     );
 
     return (
       <Field
+        ariaDescribedBy={ariaDescribedBy}
         fieldType="single"
         hasVisibleLabel={false}
         id={idOverride}

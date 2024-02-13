@@ -16,7 +16,7 @@ import { memo, ReactElement, useCallback } from "react";
 import { Checkbox } from "./Checkbox";
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 
 export type CheckboxGroupProps = {
   /**
@@ -35,6 +35,7 @@ export type CheckboxGroupProps = {
   label: string;
 } & Pick<
   FieldComponentProps,
+  | "ariaDescribedBy"
   | "errorMessage"
   | "errorMessageList"
   | "hint"
@@ -42,9 +43,10 @@ export type CheckboxGroupProps = {
   | "id"
   | "isDisabled"
 > &
-  AllowedProps;
+  HtmlProps;
 
 const CheckboxGroup = ({
+  ariaDescribedBy,
   children,
   errorMessage,
   errorMessageList,
@@ -75,6 +77,7 @@ const CheckboxGroup = ({
 
   return (
     <Field
+      ariaDescribedBy={ariaDescribedBy}
       errorMessage={errorMessage}
       errorMessageList={errorMessageList}
       fieldType="group"

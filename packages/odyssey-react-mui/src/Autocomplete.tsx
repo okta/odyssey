@@ -21,7 +21,7 @@ import { memo, useCallback, useMemo, useRef } from "react";
 
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 import {
   ComponentControlledState,
   useInputValues,
@@ -161,6 +161,7 @@ export type AutocompleteProps<
   getIsOptionEqualToValue?: (option: OptionType, value: OptionType) => boolean;
 } & Pick<
   FieldComponentProps,
+  | "ariaDescribedBy"
   | "errorMessage"
   | "errorMessageList"
   | "hint"
@@ -170,13 +171,14 @@ export type AutocompleteProps<
   | "isOptional"
   | "name"
 > &
-  AllowedProps;
+  HtmlProps;
 
 const Autocomplete = <
   OptionType,
   HasMultipleChoices extends boolean | undefined,
   IsCustomValueAllowed extends boolean | undefined
 >({
+  ariaDescribedBy,
   defaultValue,
   errorMessage,
   errorMessageList,
@@ -245,6 +247,7 @@ const Autocomplete = <
   const renderInput = useCallback(
     ({ InputLabelProps, InputProps, ...params }) => (
       <Field
+        ariaDescribedBy={ariaDescribedBy}
         errorMessage={errorMessage}
         errorMessageList={errorMessageList}
         fieldType="single"
@@ -278,6 +281,7 @@ const Autocomplete = <
       />
     ),
     [
+      ariaDescribedBy,
       errorMessage,
       errorMessageList,
       hint,

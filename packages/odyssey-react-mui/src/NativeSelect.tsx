@@ -26,9 +26,8 @@ import {
 } from "@mui/material";
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 import { FocusHandle, getControlState, useInputValues } from "./inputUtils";
-import { ForwardRefWithType } from "./@types/react-augment";
 
 export type NativeSelectOption = {
   text: string;
@@ -93,6 +92,7 @@ export type NativeSelectProps<
   value?: Value;
 } & Pick<
   FieldComponentProps,
+  | "ariaDescribedBy"
   | "errorMessage"
   | "errorMessageList"
   | "hint"
@@ -102,14 +102,15 @@ export type NativeSelectProps<
   | "isFullWidth"
   | "isOptional"
 > &
-  AllowedProps;
+  HtmlProps;
 
-const NativeSelect: ForwardRefWithType = forwardRef(
+const NativeSelect = forwardRef(
   <
     Value extends NativeSelectValueType<HasMultipleChoices>,
     HasMultipleChoices extends boolean
   >(
     {
+      ariaDescribedBy,
       autoCompleteType,
       defaultValue,
       errorMessage,
@@ -217,6 +218,7 @@ const NativeSelect: ForwardRefWithType = forwardRef(
 
     return (
       <Field
+        ariaDescribedBy={ariaDescribedBy}
         errorMessage={errorMessage}
         errorMessageList={errorMessageList}
         fieldType="single"

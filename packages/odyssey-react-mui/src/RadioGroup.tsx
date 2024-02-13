@@ -19,7 +19,7 @@ import { memo, ReactElement, useCallback, useRef } from "react";
 import { Radio, RadioProps } from "./Radio";
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 import { getControlState, useInputValues } from "./inputUtils";
 
 export type RadioGroupProps = {
@@ -45,6 +45,7 @@ export type RadioGroupProps = {
   value?: RadioProps["value"];
 } & Pick<
   FieldComponentProps,
+  | "ariaDescribedBy"
   | "errorMessage"
   | "errorMessageList"
   | "hint"
@@ -53,9 +54,10 @@ export type RadioGroupProps = {
   | "isDisabled"
   | "name"
 > &
-  AllowedProps;
+  HtmlProps;
 
 const RadioGroup = ({
+  ariaDescribedBy,
   children,
   defaultValue,
   errorMessage,
@@ -107,6 +109,7 @@ const RadioGroup = ({
 
   return (
     <Field
+      ariaDescribedBy={ariaDescribedBy}
       errorMessage={errorMessage}
       errorMessageList={errorMessageList}
       fieldType="group"

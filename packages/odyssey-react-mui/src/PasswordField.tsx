@@ -25,7 +25,7 @@ import {
 import { ShowIcon, HideIcon } from "./icons.generated";
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 import { useTranslation } from "react-i18next";
 import { FocusHandle, getControlState, useInputValues } from "./inputUtils";
 
@@ -77,11 +77,12 @@ export type PasswordFieldProps = {
    */
   value?: string;
 } & FieldComponentProps &
-  AllowedProps;
+  HtmlProps;
 
 const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
   (
     {
+      ariaDescribedBy,
       autoCompleteType,
       defaultValue,
       errorMessage,
@@ -220,6 +221,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
 
     return (
       <Field
+        ariaDescribedBy={ariaDescribedBy}
         errorMessage={errorMessage}
         errorMessageList={errorMessageList}
         fieldType="single"
