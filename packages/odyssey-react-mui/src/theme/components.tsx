@@ -752,6 +752,7 @@ export const components = ({
       styleOverrides: {
         root: ({ theme }) => ({
           width: `${odysseyTokens.TypographyLineHeightUi}em`,
+          minWidth: `${odysseyTokens.TypographyLineHeightUi}em`,
           height: `${odysseyTokens.TypographyLineHeightUi}em`,
           borderRadius: odysseyTokens.BorderRadiusTight,
           borderWidth: odysseyTokens.BorderWidthMain,
@@ -1552,6 +1553,9 @@ export const components = ({
           "&.Mui-disabled": {
             pointerEvents: "none",
           },
+          [`:has(> .${radioClasses.root})`]: {
+            alignItems: "flex-start",
+          },
           [`& .${checkboxClasses.root}`]: {
             marginBlockStart: 0,
           },
@@ -1591,7 +1595,7 @@ export const components = ({
           alignItems: "center",
           fontSize: odysseyTokens.TypographySizeSubordinate,
           lineHeight: odysseyTokens.TypographyLineHeightBody,
-          marginBlockStart: odysseyTokens.Spacing2,
+          marginBlockStart: odysseyTokens.Spacing1,
           [`.${formLabelClasses.root} + &`]: {
             marginBlockStart: `-${odysseyTokens.Spacing1}`,
             color: odysseyTokens.TypographyColorSubordinate,
@@ -1943,6 +1947,10 @@ export const components = ({
 
           [`&.${menuItemClasses.root}-destructive`]: {
             color: odysseyTokens.TypographyColorDanger,
+
+            [`.${typographyClasses.root}`]: {
+              color: "inherit",
+            },
           },
 
           [`&.${menuItemClasses.selected}`]: {
@@ -1969,6 +1977,10 @@ export const components = ({
           [`&.${menuItemClasses.disabled}`]: {
             opacity: 1,
             color: odysseyTokens.TypographyColorDisabled,
+
+            [`.${typographyClasses.root}`]: {
+              color: "inherit",
+            },
           },
 
           [`& + .${dividerClasses.root}`]: {
@@ -2059,6 +2071,7 @@ export const components = ({
       styleOverrides: {
         root: ({ theme }) => ({
           width: `${odysseyTokens.TypographyLineHeightUi}em`,
+          minWidth: `${odysseyTokens.TypographyLineHeightUi}em`,
           height: `${odysseyTokens.TypographyLineHeightUi}em`,
           borderRadius: `${odysseyTokens.TypographyLineHeightUi}em`,
           borderWidth: odysseyTokens.BorderWidthMain,

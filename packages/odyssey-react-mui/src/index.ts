@@ -52,6 +52,8 @@ export type {
   ThemeOptions,
 } from "@mui/material";
 
+export type { FocusHandle } from "./inputUtils";
+
 export { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
 
 export * from "./Accordion";

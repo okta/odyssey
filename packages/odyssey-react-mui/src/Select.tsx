@@ -33,13 +33,14 @@ import { SelectProps as MuiSelectProps } from "@mui/material";
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import { CheckIcon } from "./icons.generated";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 import {
   ComponentControlledState,
+  FocusHandle,
   useInputValues,
   getControlState,
 } from "./inputUtils";
-import { FocusHandle } from "./@types/react-augment";
+import { normalizedKey } from "./useNormalizedKey";
 
 export type SelectOption = {
   text: string;
@@ -63,9 +64,9 @@ export type SelectProps<
    */
   hasMultipleChoices?: HasMultipleChoices;
   /**
-   * The ref forwarded to the Select to expose focus()
+   * The ref forwarded to the Select
    */
-  inputFocusRef?: React.RefObject<FocusHandle>;
+  inputRef?: React.RefObject<FocusHandle>;
   /**
    * @deprecated Use `hasMultipleChoices` instead.
    */
@@ -97,6 +98,7 @@ export type SelectProps<
   value?: Value;
 } & Pick<
   FieldComponentProps,
+  | "ariaDescribedBy"
   | "errorMessage"
   | "errorMessageList"
   | "hint"
@@ -107,7 +109,7 @@ export type SelectProps<
   | "isOptional"
   | "name"
 > &
-  AllowedProps;
+  HtmlProps;
 
 /**
  * Options in Odyssey <Select> are passed as an array, which can contain any combination
@@ -129,6 +131,7 @@ const Select = <
   Value extends SelectValueType<HasMultipleChoices>,
   HasMultipleChoices extends boolean
 >({
+  ariaDescribedBy,
   defaultValue,
   errorMessage,
   errorMessageList,
@@ -136,7 +139,7 @@ const Select = <
   hint,
   HintLinkComponent,
   id: idOverride,
-  inputFocusRef,
+  inputRef,
   isDisabled = false,
   isFullWidth = false,
   isMultiSelect,
@@ -164,15 +167,14 @@ const Select = <
   const [internalSelectedValues, setInternalSelectedValues] = useState(
     controlledStateRef.current === CONTROLLED ? value : defaultValue
   );
-  const inputRef = useRef<HTMLSelectElement>(null);
+  const localInputRef = useRef<HTMLSelectElement>(null);
 
   useImperativeHandle(
-    inputFocusRef,
+    inputRef,
     () => {
-      const element = inputRef.current;
       return {
         focus: () => {
-          element && element.focus();
+          localInputRef.current?.focus();
         },
       };
     },
@@ -210,15 +212,23 @@ const Select = <
   // data types that might be passed
   const normalizedOptions = useMemo(
     () =>
-      options.map((option) =>
-        typeof option === "object"
-          ? {
-              text: option.text,
-              value: option.value || option.text,
-              type: option.type === "heading" ? "heading" : "option",
-            }
-          : { text: option, value: option, type: "option" }
-      ),
+      options.map((option) => {
+        if (typeof option === "object") {
+          /**
+           * If the value of `option?.value is an empty string, we need to make sure that we
+           * set an empty string to `value` in the normalized option so that the select component
+           * can potentially set it as the selected one in the text input
+           */
+          const value =
+            option?.value === "" ? option.value : option.value || option.text;
+          return {
+            text: option.text,
+            value,
+            type: option.type === "heading" ? "heading" : "option",
+          };
+        }
+        return { text: option, value: option, type: "option" };
+      }),
     [options]
   );
 
@@ -260,23 +270,31 @@ const Select = <
   // that will populate the <Select>
   const children = useMemo(
     () =>
-      normalizedOptions.map((option) => {
+      normalizedOptions.map((option, index) => {
         if (option.type === "heading") {
           return <ListSubheader key={option.text}>{option.text}</ListSubheader>;
         }
         return (
-          <MenuItem key={option.value} value={option.value}>
+          <MenuItem
+            key={normalizedKey(option.text, index.toString())}
+            value={option.value}
+          >
             {hasMultipleChoices && (
               <MuiCheckbox
-                checked={internalSelectedValues?.includes(option.value)}
+                checked={
+                  option.value !== undefined &&
+                  internalSelectedValues?.includes(option.value)
+                }
               />
             )}
             {option.text}
-            {internalSelectedValues === option.value && (
-              <ListItemSecondaryAction>
-                <CheckIcon />
-              </ListItemSecondaryAction>
-            )}
+            {!hasMultipleChoices &&
+              (internalSelectedValues?.includes(option.value) ||
+                internalSelectedValues === option.value) && (
+                <ListItemSecondaryAction>
+                  <CheckIcon />
+                </ListItemSecondaryAction>
+              )}
           </MenuItem>
         );
       }),
@@ -291,8 +309,12 @@ const Select = <
         aria-errormessage={errorMessageElementId}
         children={children}
         data-se={testId}
+        displayEmpty={
+          inputValues?.value === "" || inputValues?.defaultValue === ""
+        }
         id={id}
-        inputRef={inputRef}
+        inputProps={{ "data-se": testId }}
+        inputRef={localInputRef}
         labelId={labelElementId}
         multiple={hasMultipleChoices}
         name={nameOverride ?? id}
@@ -319,6 +341,7 @@ const Select = <
 
   return (
     <Field
+      ariaDescribedBy={ariaDescribedBy}
       errorMessage={errorMessage}
       errorMessageList={errorMessageList}
       fieldType="single"

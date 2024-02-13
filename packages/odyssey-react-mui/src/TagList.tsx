@@ -14,14 +14,14 @@ import { Tag } from "./Tag";
 import { Stack } from "@mui/material";
 import { memo, ReactElement, useMemo } from "react";
 import { ChipElementType, TagListContext } from "./TagListContext";
-import { AllowedProps } from "./AllowedProps";
+import { HtmlProps } from "./HtmlProps";
 
 export type TagListProps = {
   /**
    * The Tag or array of Tags within the TagList
    */
   children: ReactElement<typeof Tag> | Array<ReactElement<typeof Tag>>;
-} & AllowedProps;
+} & HtmlProps;
 
 const TagList = ({ children, testId }: TagListProps) => {
   const providerValue = useMemo<{

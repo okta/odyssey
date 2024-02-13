@@ -13,7 +13,7 @@
 import { Chip } from "@mui/material";
 
 import { useMuiProps } from "./MuiPropsContext";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 
 export const statusSeverityValues = [
   "default",
@@ -31,7 +31,7 @@ export type StatusProps = {
    * Determine the color and icon of the Status
    */
   severity: (typeof statusSeverityValues)[number];
-} & AllowedProps;
+} & HtmlProps;
 
 export const Status = ({ label, severity, testId, translate }: StatusProps) => {
   const muiProps = useMuiProps();

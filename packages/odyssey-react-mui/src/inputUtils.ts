@@ -12,6 +12,10 @@
 
 import { useMemo } from "react";
 
+export type FocusHandle = {
+  focus: () => void;
+};
+
 type UseControlledStateProps<Value> = {
   controlledValue?: Value;
   uncontrolledValue?: Value;

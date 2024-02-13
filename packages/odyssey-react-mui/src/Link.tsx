@@ -12,14 +12,18 @@
 
 import { memo, ReactElement, useImperativeHandle, useRef } from "react";
 import { ExternalLinkIcon } from "./icons.generated";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
+import { FocusHandle } from "./inputUtils";
 
 import { Link as MuiLink, LinkProps as MuiLinkProps } from "@mui/material";
-import { FocusHandle } from "./@types/react-augment";
 
 export const linkVariantValues = ["default", "monochrome"] as const;
 
 export type LinkProps = {
+  /**
+   * The ARIA label for the Link
+   */
+  ariaLabel?: string;
   /**
    * The content within the Link
    */
@@ -33,9 +37,9 @@ export type LinkProps = {
    */
   icon?: ReactElement;
   /**
-   * The ref forwarded to the TextField to expose focus()
+   * The ref forwarded to the TextField
    */
-  linkFocusRef?: React.RefObject<FocusHandle>;
+  linkRef?: React.RefObject<FocusHandle>;
   /**
    * The click event handler for the Link
    */
@@ -57,13 +61,14 @@ export type LinkProps = {
    * The visual presentation of the Link (default or monochrome)
    */
   variant?: (typeof linkVariantValues)[number];
-} & AllowedProps;
+} & HtmlProps;
 
 const Link = ({
+  ariaLabel,
   children,
   href,
   icon,
-  linkFocusRef,
+  linkRef,
   rel,
   target,
   testId,
@@ -71,14 +76,13 @@ const Link = ({
   variant,
   onClick,
 }: LinkProps) => {
-  const ref = useRef<HTMLAnchorElement>(null);
+  const localLinkRef = useRef<HTMLAnchorElement>(null);
   useImperativeHandle(
-    linkFocusRef,
+    linkRef,
     () => {
-      const element = ref.current;
       return {
         focus: () => {
-          element && element.focus();
+          localLinkRef.current?.focus();
         },
       };
     },
@@ -87,9 +91,10 @@ const Link = ({
 
   return (
     <MuiLink
+      aria-label={ariaLabel}
       data-se={testId}
       href={href}
-      ref={ref}
+      ref={localLinkRef}
       rel={rel}
       target={target}
       translate={translate}

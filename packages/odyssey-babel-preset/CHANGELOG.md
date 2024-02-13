@@ -3,6 +3,98 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.4](https://github.com/okta/odyssey/compare/v1.13.3...v1.13.4) (2024-02-12)
+
+**Note:** Version bump only for package @okta/odyssey-babel-preset
+
+## [1.13.3](https://github.com/okta/odyssey/compare/v1.13.2...v1.13.3) (2024-02-09)
+
+**Note:** Version bump only for package @okta/odyssey-babel-preset
+
+## [1.13.2](https://github.com/okta/odyssey/compare/v1.13.1...v1.13.2) (2024-02-08)
+
+**Note:** Version bump only for package @okta/odyssey-babel-preset
+
+## [1.13.1](https://github.com/okta/odyssey/compare/v1.13.0...v1.13.1) (2024-02-08)
+
+**Note:** Version bump only for package @okta/odyssey-babel-preset
+
+## [1.13.0](https://github.com/okta/odyssey/compare/v1.12.11...v1.13.0) (2024-02-08)
+
+**Note:** Version bump only for package @okta/odyssey-babel-preset
+
+## [1.12.11](https://github.com/okta/odyssey/compare/v1.12.10...v1.12.11) (2024-02-06)
+
+**Note:** Version bump only for package @okta/odyssey-babel-preset
+
+## [1.12.10](https://github.com/okta/odyssey/compare/v1.12.9...v1.12.10) (2024-02-05)
+
+**Note:** Version bump only for package @okta/odyssey-babel-preset
+
+## [1.12.9](https://github.com/okta/odyssey/compare/v1.12.8...v1.12.9) (2024-02-02)
+
+**Note:** Version bump only for package @okta/odyssey-babel-preset
+
+## [1.12.8](https://github.com/okta/odyssey/compare/v1.12.7...v1.12.8) (2024-02-02)
+
+**Note:** Version bump only for package @okta/odyssey-babel-preset
+
+## [1.12.7](https://github.com/okta/odyssey/compare/v1.12.6...v1.12.7) (2024-02-02)
+
+**Note:** Version bump only for package @okta/odyssey-babel-preset
+
+## [1.12.6](https://github.com/okta/odyssey/compare/v1.12.5...v1.12.6) (2024-02-01)
+
+**Note:** Version bump only for package @okta/odyssey-babel-preset
+
+## [1.12.5](https://github.com/okta/odyssey/compare/v1.12.4...v1.12.5) (2024-02-01)
+
+**Note:** Version bump only for package @okta/odyssey-babel-preset
+
+## [1.12.4](https://github.com/okta/odyssey/compare/v1.12.3...v1.12.4) (2024-02-01)
+
+**Note:** Version bump only for package @okta/odyssey-babel-preset
+
+## [1.12.3](https://github.com/okta/odyssey/compare/v1.12.2...v1.12.3) (2024-02-01)
+
+**Note:** Version bump only for package @okta/odyssey-babel-preset
+
+## [1.12.2](https://github.com/okta/odyssey/compare/v1.12.1...v1.12.2) (2024-01-31)
+
+**Note:** Version bump only for package @okta/odyssey-babel-preset
+
+## [1.12.1](https://github.com/okta/odyssey/compare/v1.12.0...v1.12.1) (2024-01-30)
+
+**Note:** Version bump only for package @okta/odyssey-babel-preset
+
+## [1.12.0](https://github.com/okta/odyssey/compare/v1.11.1...v1.12.0) (2024-01-30)
+
+**Note:** Version bump only for package @okta/odyssey-babel-preset
+
+## [1.11.1](https://github.com/okta/odyssey/compare/v1.11.0...v1.11.1) (2024-01-29)
+
+**Note:** Version bump only for package @okta/odyssey-babel-preset
+
+## [1.11.0](https://github.com/okta/odyssey/compare/v1.10.3...v1.11.0) (2024-01-29)
+
+**Note:** Version bump only for package @okta/odyssey-babel-preset
+
+## [1.10.3](https://github.com/okta/odyssey/compare/v1.10.2...v1.10.3) (2024-01-29)
+
+**Note:** Version bump only for package @okta/odyssey-babel-preset
+
+## [1.10.2](https://github.com/okta/odyssey/compare/v1.10.1...v1.10.2) (2024-01-24)
+
+**Note:** Version bump only for package @okta/odyssey-babel-preset
+
+## [1.10.1](https://github.com/okta/odyssey/compare/v1.10.0...v1.10.1) (2024-01-22)
+
+**Note:** Version bump only for package @okta/odyssey-babel-preset
+
+## [1.10.0](https://github.com/okta/odyssey/compare/v1.9.23...v1.10.0) (2024-01-19)
+
+**Note:** Version bump only for package @okta/odyssey-babel-preset
+
 ## [1.9.23](https://github.com/okta/odyssey/compare/v1.9.22...v1.9.23) (2024-01-17)
 
 **Note:** Version bump only for package @okta/odyssey-babel-preset

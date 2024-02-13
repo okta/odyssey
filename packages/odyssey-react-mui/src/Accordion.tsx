@@ -11,7 +11,7 @@
  */
 
 import { ReactNode, memo } from "react";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 import {
   Accordion as MuiAccordion,
   AccordionDetails as MuiAccordionDetails,
@@ -20,12 +20,17 @@ import {
 } from "@mui/material";
 import { ChevronDownIcon } from "./icons.generated";
 import { Support } from "./Typography";
+import { useUniqueId } from "./useUniqueId";
 
 export type AccordionProps = {
   /**
    * The content of the Accordion itself
    */
   children: ReactNode;
+  /**
+   * Defines IDs for the header and the content of the Accordion
+   */
+  id?: string;
   /**
    * The label text for the AccordionSummary
    */
@@ -56,17 +61,21 @@ export type AccordionProps = {
       isExpanded?: never;
     }
 ) &
-  AllowedProps;
+  HtmlProps;
 
 const Accordion = ({
   children,
   label,
+  id: idOverride,
   isDefaultExpanded,
   isDisabled,
   isExpanded,
   onChange,
   translate,
 }: AccordionProps) => {
+  const id = useUniqueId(idOverride);
+  const headerId = `${id}-header`;
+  const contentId = `${id}-content`;
   return (
     <MuiAccordion
       defaultExpanded={isDefaultExpanded}
@@ -75,12 +84,18 @@ const Accordion = ({
       expanded={isExpanded}
       onChange={onChange}
     >
-      <MuiAccordionSummary expandIcon={<ChevronDownIcon />}>
+      <MuiAccordionSummary
+        aria-controls={contentId}
+        expandIcon={<ChevronDownIcon />}
+        id={headerId}
+      >
         <Support component="div" translate={translate}>
           {label}
         </Support>
       </MuiAccordionSummary>
-      <MuiAccordionDetails>{children}</MuiAccordionDetails>
+      <MuiAccordionDetails aria-labelledby={headerId}>
+        {children}
+      </MuiAccordionDetails>
     </MuiAccordion>
   );
 };

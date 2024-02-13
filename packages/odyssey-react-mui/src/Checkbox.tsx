@@ -21,11 +21,14 @@ import {
 } from "@mui/material";
 
 import { FieldComponentProps } from "./FieldComponentProps";
-import { Typography } from "./Typography";
-import type { AllowedProps } from "./AllowedProps";
-import { ComponentControlledState, getControlState } from "./inputUtils";
 import { CheckedFieldProps } from "./FormCheckedProps";
-import { FocusHandle } from "./@types/react-augment";
+import type { HtmlProps } from "./HtmlProps";
+import {
+  ComponentControlledState,
+  FocusHandle,
+  getControlState,
+} from "./inputUtils";
+import { Typography } from "./Typography";
 
 export const checkboxValidityValues = ["valid", "invalid", "inherit"] as const;
 
@@ -43,9 +46,9 @@ export type CheckboxProps = {
    */
   id?: string;
   /**
-   * The ref forwarded to the Checkbox to expose focus()
+   * The ref forwarded to the Checkbox
    */
-  inputFocusRef?: React.RefObject<FocusHandle>;
+  inputRef?: React.RefObject<FocusHandle>;
   /**
    * Determines whether the Checkbox is disabled
    */
@@ -80,13 +83,13 @@ export type CheckboxProps = {
   onBlur?: MuiFormControlLabelProps["onBlur"];
 } & Pick<FieldComponentProps, "id" | "isDisabled" | "name"> &
   CheckedFieldProps<MuiCheckboxProps> &
-  AllowedProps;
+  HtmlProps;
 
 const Checkbox = ({
   ariaLabel,
   ariaLabelledBy,
   id: idOverride,
-  inputFocusRef,
+  inputRef,
   isChecked,
   isDefaultChecked,
   isDisabled,
@@ -116,14 +119,13 @@ const Checkbox = ({
     return { defaultChecked: isDefaultChecked };
   }, [isDefaultChecked, isChecked]);
 
-  const inputRef = useRef<HTMLInputElement>(null);
+  const localInputRef = useRef<HTMLInputElement>(null);
   useImperativeHandle(
-    inputFocusRef,
+    inputRef,
     () => {
-      const element = inputRef.current;
       return {
         focus: () => {
-          element && element.focus();
+          localInputRef.current?.focus();
         },
       };
     },
@@ -179,13 +181,15 @@ const Checkbox = ({
           indeterminate={isIndeterminate}
           onChange={onChange}
           required={isRequired}
-          inputRef={inputRef}
+          inputProps={{
+            "data-se": testId,
+          }}
+          inputRef={localInputRef}
           sx={() => ({
             marginBlockStart: "2px",
           })}
         />
       }
-      data-se={testId}
       disabled={isDisabled}
       id={idOverride}
       label={label}
