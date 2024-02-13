@@ -254,30 +254,6 @@ export const ButtonSecondaryDisabled: StoryObj<ButtonProps> = {
   },
 };
 
-export const ButtonTertiary: StoryObj<ButtonProps> = {
-  name: "Tertiary",
-  args: {
-    label: "Add crew",
-    variant: "tertiary",
-  },
-  play: async ({ args, canvasElement, step }: playType) => {
-    interactWithButton({ canvasElement, step })({
-      args,
-      actionName: "Button Tertiary",
-      hoverState: false,
-    });
-  },
-};
-
-export const ButtonTertiaryDisabled: StoryObj<ButtonProps> = {
-  name: "Tertiary, Disabled",
-  args: {
-    label: "Add crew",
-    isDisabled: true,
-    variant: "tertiary",
-  },
-};
-
 export const ButtonDanger: StoryObj<ButtonProps> = {
   name: "Danger",
   args: {
@@ -427,7 +403,6 @@ export const KitchenSink: StoryObj<ButtonProps> = {
     <Box sx={{ display: "flex", flexWrap: "wrap", rowGap: 2 }}>
       <Button label="Primary" variant="primary" />
       <Button label="Secondary" variant="secondary" />
-      <Button label="Tertiary" variant="tertiary" />
       <Button label="Danger" variant="danger" />
       <Button label="Floating" variant="floating" />
       <Button ariaLabel="Add" startIcon={<AddIcon />} variant="primary" />
