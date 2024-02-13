@@ -540,6 +540,7 @@ export const components = ({
           paddingBlock: odysseyTokens.Spacing3,
           paddingInline: odysseyTokens.Spacing4,
           display: "inline-flex",
+          height: odysseyTokens.Spacing7,
           position: "relative",
           marginBlock: "0",
           marginInline: "0",
@@ -552,7 +553,7 @@ export const components = ({
           borderRadius: odysseyTokens.BorderRadiusMain,
           borderColor: "transparent",
           fontSize: odysseyTokens.TypographySizeBody,
-          fontWeight: odysseyTokens.TypographyWeightBodyBold,
+          fontWeight: odysseyTokens.TypographyWeightHeading,
           fontFamily: odysseyTokens.TypographyFamilyButton,
           lineHeight: odysseyTokens.TypographyLineHeightUi,
           whiteSpace: "nowrap",
@@ -617,26 +618,6 @@ export const components = ({
             },
           }),
 
-          ...(ownerState.variant === "tertiary" && {
-            backgroundColor: odysseyTokens.HueNeutral100,
-            color: odysseyTokens.HueNeutral700,
-
-            "&:hover": {
-              backgroundColor: odysseyTokens.HueNeutral200,
-              color: odysseyTokens.HueNeutral800,
-            },
-
-            "&:active": {
-              backgroundColor: odysseyTokens.HueNeutral300,
-              color: odysseyTokens.HueNeutral800,
-            },
-
-            "&:disabled": {
-              backgroundColor: odysseyTokens.HueNeutral100,
-              color: odysseyTokens.TypographyColorDisabled,
-            },
-          }),
-
           ...(ownerState.variant === "danger" && {
             backgroundColor: odysseyTokens.PaletteDangerMain,
             color: odysseyTokens.HueNeutralWhite,
@@ -676,16 +657,17 @@ export const components = ({
             },
           }),
           ...(ownerState.size === "small" && {
+            height: odysseyTokens.Spacing6,
             paddingBlock: odysseyTokens.Spacing2,
             paddingInline: odysseyTokens.Spacing3,
             fontSize: odysseyTokens.TypographySizeBody,
           }),
           ...(ownerState.size === "large" && {
+            height: odysseyTokens.Spacing8,
             paddingBlock: odysseyTokens.Spacing4,
             paddingInline: odysseyTokens.Spacing4,
           }),
           ...(ownerState.fullWidth === true && {
-            display: "block",
             width: "100%",
             marginBlock: "0",
             marginInline: "0",
@@ -704,6 +686,10 @@ export const components = ({
 
             ...(ownerState.size === "small" && {
               padding: odysseyTokens.Spacing2,
+            }),
+
+            ...(ownerState.size === "large" && {
+              padding: odysseyTokens.Spacing4,
             }),
           }),
         }),
