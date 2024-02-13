@@ -169,15 +169,9 @@ export type AutocompleteProps<
   getIsOptionEqualToValue?: (option: OptionType, value: OptionType) => boolean;
 } & Pick<
   FieldComponentProps,
-  | "ariaDescribedBy"
-  | "errorMessage"
-  | "errorMessageList"
-  | "hint"
-  | "id"
-  | "isOptional"
-  | "name"
+  "errorMessage" | "errorMessageList" | "hint" | "id" | "isOptional" | "name"
 > &
-  HtmlProps;
+  Pick<HtmlProps, "ariaDescribedBy" | "testId" | "translate">;
 
 const VirtualizedAutocomplete = <
   OptionType,
