@@ -65,7 +65,6 @@ const storybookMeta: Meta = {
       ],
     },
   },
-  tags: ["autodocs"],
 };
 
 export default storybookMeta;
