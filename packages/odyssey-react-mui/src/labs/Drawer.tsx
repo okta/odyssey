@@ -22,7 +22,7 @@ import styled from "@emotion/styled";
 import { useTranslation } from "react-i18next";
 import { Drawer as MuiDrawer } from "@mui/material";
 
-import type { AllowedProps } from "../AllowedProps";
+import type { HtmlProps } from "../HtmlProps";
 import { Box } from "../Box";
 import { Button } from "../Button";
 import { CloseIcon } from "../icons.generated";
@@ -72,7 +72,7 @@ export type DrawerProps = {
    */
   variant?: (typeof variantValues)[number];
   ariaLabel: string;
-} & AllowedProps;
+} & HtmlProps;
 
 interface DrawerStyleProps {
   odysseyDesignTokens: DesignTokens;
