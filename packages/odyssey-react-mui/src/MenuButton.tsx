@@ -139,8 +139,7 @@ const MenuButton = ({
     setAnchorEl(null);
   }, []);
 
-  const openMenu = useCallback((event) => {
-    onClick?.(event);
+  const openMenu = useCallback<MenuContextType["openMenu"]>((event) => {
     setAnchorEl(event.currentTarget);
   }, []);
 
@@ -211,8 +210,6 @@ const MenuButton = ({
         anchorOrigin={anchorOrigin}
         transformOrigin={transformOrigin}
         anchorEl={anchorEl}
-        anchorOrigin={{ horizontal: menuAlignment, vertical: "bottom" }}
-        transformOrigin={{ horizontal: menuAlignment, vertical: "top" }}
         id={`${uniqueId}-menu`}
         MenuListProps={menuListProps}
         onClose={closeMenu}

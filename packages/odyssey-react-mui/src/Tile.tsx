@@ -10,20 +10,25 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ReactElement, memo, useCallback, useMemo } from "react";
+import { ReactElement, memo, useMemo } from "react";
 
-import type { SeleniumProps } from "./SeleniumProps";
 import { NullElement } from "./NullElement";
 import {
   Card as MuiCard,
   CardActions as MuiCardActions,
   CardActionArea as MuiCardActionArea,
 } from "@mui/material";
-import { Button, ButtonContext } from "./Button";
-import { Box } from "./Box";
+import { Button } from "./Button";
+import { ButtonContext } from "./ButtonContext";
 import { Heading5, Paragraph, Support } from "./Typography";
-import { MenuButton } from ".";
 import { MoreIcon } from "./icons.generated";
+import { HtmlProps } from "./HtmlProps";
+import styled from "@emotion/styled";
+import {
+  DesignTokens,
+  useOdysseyDesignTokens,
+} from "./OdysseyDesignTokensContext";
+import { MenuButton } from "./MenuButton";
 
 export type TileProps = {
   description?: string;
@@ -33,19 +38,35 @@ export type TileProps = {
   title?: string;
 } & ( // You can't have actions and onClick at the same time
   | {
-      button?: ReactElement<typeof Button> | NullElement;
       onClick: () => void;
+      button?: never;
+      menuItems?: never;
     }
   | {
-      button: ReactElement<typeof Button> | NullElement;
-      onClick?: () => void;
-    }
-  | {
-      button: undefined | null;
-      onClick: undefined | null;
+      onClick?: never;
+      button?: ReactElement<typeof Button> | NullElement;
+      menuItems?: ReactElement;
     }
 ) &
-  SeleniumProps;
+  HtmlProps;
+
+const ImageContainer = styled.div<{
+  odysseyDesignTokens: DesignTokens;
+  hasMenuItems: boolean;
+}>`
+  display: flex;
+  align-items: flex-start;
+  max-height: 4.5714285714rem;
+  margin-block-end: ${(props) => props.odysseyDesignTokens.Spacing5};
+  padding-right: ${(props) =>
+    props.hasMenuItems ? props.odysseyDesignTokens.Spacing5 : 0};
+`;
+
+const MenuButtonContainer = styled.div<{ odysseyDesignTokens: DesignTokens }>`
+  position: absolute;
+  right: ${(props) => props.odysseyDesignTokens.Spacing3};
+  top: ${(props) => props.odysseyDesignTokens.Spacing3};
+`;
 
 const Tile = ({
   button,
@@ -56,25 +77,18 @@ const Tile = ({
   overline,
   title,
 }: TileProps) => {
-  const preventClickPropagation = useCallback((event) => {
-    event.stopPropagation();
-  }, []);
+  const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const cardContent = useMemo(() => {
     return (
       <>
         {image && (
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "flex-start",
-              maxHeight: "64px",
-              marginBlockEnd: 5,
-              paddingRight: menuItems ? "20px" : 0,
-            }}
+          <ImageContainer
+            odysseyDesignTokens={odysseyDesignTokens}
+            hasMenuItems={menuItems ? true : false}
           >
             {image}
-          </Box>
+          </ImageContainer>
         )}
 
         {overline && <Support component="div">{overline}</Support>}
@@ -92,7 +106,15 @@ const Tile = ({
         )}
       </>
     );
-  }, [button, description, image, menuItems, overline, title]);
+  }, [
+    button,
+    description,
+    image,
+    menuItems,
+    overline,
+    title,
+    odysseyDesignTokens,
+  ]);
 
   return (
     <MuiCard className={onClick ? "isClickable" : ""}>
@@ -103,25 +125,17 @@ const Tile = ({
       {!onClick && cardContent}
 
       {menuItems && (
-        <Box
-          sx={{
-            position: "absolute",
-            right: "8px",
-            top: "8px",
-          }}
-        >
+        <MenuButtonContainer odysseyDesignTokens={odysseyDesignTokens}>
           <MenuButton
             endIcon={<MoreIcon />}
             ariaLabel="Tile menu"
             buttonVariant="floating"
             menuAlignment="right"
             size="small"
-            onClick={preventClickPropagation}
-            onClose={preventClickPropagation}
           >
             {menuItems}
           </MenuButton>
-        </Box>
+        </MenuButtonContainer>
       )}
     </MuiCard>
   );

@@ -737,17 +737,20 @@ export const components = ({
     MuiCard: {
       styleOverrides: {
         root: () => ({
+          backgroundColor: odysseyTokens.HueNeutralWhite,
           borderRadius: odysseyTokens.BorderRadiusOuter,
-          boxShadow: odysseyTokens.DepthDialog,
+          boxShadow: odysseyTokens.DepthMedium,
           padding: odysseyTokens.Spacing5,
           position: "relative",
+          transition: `all ${odysseyTokens.TransitionDurationMain} ${odysseyTokens.TransitionTimingMain}`,
 
           "& img": {
             height: "64px",
           },
 
           "&.isClickable:hover": {
-            boxShadow: odysseyTokens.DepthDrawer,
+            backgroundColor: odysseyTokens.HueNeutral50,
+            boxShadow: odysseyTokens.DepthHigh,
           },
 
           [`& .${typographyClasses.h5}`]: {
@@ -780,8 +783,6 @@ export const components = ({
           width: `calc(100% + (${odysseyTokens.Spacing5} * 2))`,
 
           "&:hover": {
-            background: odysseyTokens.HueNeutralWhite,
-
             "& .MuiCardActionArea-focusHighlight": {
               display: "none",
             },

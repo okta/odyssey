@@ -12,7 +12,7 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { Box, Button, Callout, Tile, MenuItem } from "@okta/odyssey-react-mui";
+import { Box, Button, Tile, MenuItem } from "@okta/odyssey-react-mui";
 
 const storybookMeta: Meta = {
   title: "Labs Components/Tile",
@@ -48,39 +48,19 @@ const storybookMeta: Meta = {
         defaultValue: "",
       },
     },
-    hasButton: {
-      control: "boolean",
-      description: "STORY ONLY: Does the card include a button?",
-    },
-    hasImage: {
-      control: "boolean",
-      description: "STORY ONLY: Does the card include an image?",
-    },
-    hasMenu: {
-      control: "boolean",
-      description: "STORY ONLY: Does the card include a menu?",
-    },
-    isClickable: {
-      control: "boolean",
-      description: "STORY ONLY: Is the card itself clickable?",
-    },
   },
   args: {
     title: "Title",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor...",
     overline: "Overline",
-    isClickable: false,
-    hasMenu: true,
-    hasImage: true,
-    hasButton: true,
   },
   decorators: [MuiThemeDecorator],
   parameters: {
     backgrounds: {
       default: "gray",
       values: [
-        { name: "gray", value: "#d7d7d7" },
+        { name: "gray", value: "#f4f4f4" },
         { name: "white", value: "#ffffff" },
       ],
     },
@@ -92,55 +72,93 @@ export default storybookMeta;
 
 export const Default: StoryObj = {
   render: function C(props: {
-    hasButton?: boolean;
-    isClickable?: boolean;
     title?: string;
     description?: string;
     overline?: string;
-    hasImage?: boolean;
-    hasMenu?: boolean;
+  }) {
+    return (
+      <Box sx={{ maxWidth: 262 }}>
+        <Tile
+          title={props.title}
+          description={props.description}
+          overline={props.overline}
+          image={<img src="https://placehold.co/128" alt="Example logo" />}
+          menuItems={
+            <>
+              <MenuItem>Menu option</MenuItem>
+              <MenuItem>Menu option</MenuItem>
+              <MenuItem>Menu option</MenuItem>
+            </>
+          }
+          button={<Button variant="primary" label="Button" />}
+        />
+      </Box>
+    );
+  },
+};
+
+export const Clickable: StoryObj = {
+  render: function C(props: {
+    title?: string;
+    description?: string;
+    overline?: string;
   }) {
     const onClick = () => {
       alert("Clicked!");
     };
 
     return (
-      <>
-        {props.isClickable && props.hasButton && (
-          <Callout severity="error">
-            A card can't include a button while also being clickable. The button
-            has been disabled while isClickable is true.
-          </Callout>
-        )}
+      <Box sx={{ maxWidth: 262 }}>
+        <Tile
+          title={props.title}
+          description={props.description}
+          overline={props.overline}
+          image={<img src="https://placehold.co/128" alt="Example logo" />}
+          onClick={onClick}
+        />
+      </Box>
+    );
+  },
+};
 
-        <Box sx={{ maxWidth: 242 }}>
-          <Tile
-            title={props.title}
-            description={props.description}
-            overline={props.overline}
-            image={
-              props.hasImage ? (
-                <img src="https://placehold.co/128" alt="Example logo" />
-              ) : undefined
-            }
-            menuItems={
-              props.hasMenu ? (
-                <>
-                  <MenuItem>Menu option</MenuItem>
-                  <MenuItem>Menu option</MenuItem>
-                  <MenuItem>Menu option</MenuItem>
-                </>
-              ) : undefined
-            }
-            button={
-              !props.isClickable && props.hasButton ? (
-                <Button variant="primary" label="Button" />
-              ) : undefined
-            }
-            onClick={props.isClickable ? onClick : undefined}
-          />
-        </Box>
-      </>
+export const ClickableWithoutImage: StoryObj = {
+  render: function C(props: {
+    title?: string;
+    description?: string;
+    overline?: string;
+  }) {
+    const onClick = () => {
+      alert("Clicked!");
+    };
+
+    return (
+      <Box sx={{ maxWidth: 262 }}>
+        <Tile
+          title={props.title}
+          description={props.description}
+          overline={props.overline}
+          onClick={onClick}
+        />
+      </Box>
+    );
+  },
+};
+
+export const ButtonWithoutImage: StoryObj = {
+  render: function C(props: {
+    title?: string;
+    description?: string;
+    overline?: string;
+  }) {
+    return (
+      <Box sx={{ maxWidth: 262 }}>
+        <Tile
+          title={props.title}
+          description={props.description}
+          overline={props.overline}
+          button={<Button variant="primary" label="Button" />}
+        />
+      </Box>
     );
   },
 };

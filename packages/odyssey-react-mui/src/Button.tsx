@@ -26,6 +26,7 @@ import { MuiPropsContext, useMuiProps } from "./MuiPropsContext";
 import { Tooltip } from "./Tooltip";
 import type { HtmlProps } from "./HtmlProps";
 import { FocusHandle } from "./inputUtils";
+import { useButton } from "./ButtonContext";
 
 export const buttonSizeValues = ["small", "medium", "large"] as const;
 export const buttonTypeValues = ["button", "submit", "reset"] as const;
@@ -140,7 +141,7 @@ const Button = ({
   endIcon,
   id,
   isDisabled,
-  isFullWidth,
+  isFullWidth: isFullWidthProp,
   label = "",
   onClick,
   size = "medium",
@@ -154,6 +155,10 @@ const Button = ({
 }: ButtonProps) => {
   const muiProps = useMuiProps();
   const localButtonRef = useRef<HTMLButtonElement>(null);
+  const buttonContext = useButton();
+  const isFullWidth = buttonContext.isFullWidth
+    ? buttonContext.isFullWidth
+    : isFullWidthProp;
 
   useImperativeHandle(
     buttonRef,
