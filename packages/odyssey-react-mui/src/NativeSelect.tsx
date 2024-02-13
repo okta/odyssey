@@ -11,10 +11,12 @@
  */
 
 import React, {
+  InputHTMLAttributes,
   ReactElement,
   forwardRef,
   memo,
   useCallback,
+  useImperativeHandle,
   useMemo,
   useRef,
 } from "react";
@@ -24,9 +26,8 @@ import {
 } from "@mui/material";
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
-import type { SeleniumProps } from "./SeleniumProps";
-import { getControlState, useInputValues } from "./inputUtils";
-import { ForwardRefWithType } from "./@types/react-augment";
+import type { HtmlProps } from "./HtmlProps";
+import { FocusHandle, getControlState, useInputValues } from "./inputUtils";
 
 export type NativeSelectOption = {
   text: string;
@@ -42,6 +43,12 @@ export type NativeSelectProps<
   HasMultipleChoices extends boolean
 > = {
   /**
+   * This prop helps users to fill forms faster, especially on mobile devices.
+   * The name can be confusing, as it's more like an autofill.
+   * @see https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill
+   */
+  autoCompleteType?: InputHTMLAttributes<HTMLInputElement>["autoComplete"];
+  /**
    * The options or optgroup elements within the NativeSelect
    */
   children?: ReactElement<"option"> | ReactElement<"optgroup">;
@@ -53,6 +60,10 @@ export type NativeSelectProps<
    * If `true`, the Select allows multiple selections
    */
   hasMultipleChoices?: HasMultipleChoices;
+  /**
+   * The ref forwarded to the NativeSelect
+   */
+  inputRef?: React.RefObject<FocusHandle>;
   /**
    * @deprecated Use `hasMultipleChoices` instead
    */
@@ -81,21 +92,34 @@ export type NativeSelectProps<
   value?: Value;
 } & Pick<
   FieldComponentProps,
-  "errorMessage" | "hint" | "id" | "isDisabled" | "isOptional" | "isFullWidth"
+  | "ariaDescribedBy"
+  | "errorMessage"
+  | "errorMessageList"
+  | "hint"
+  | "HintLinkComponent"
+  | "id"
+  | "isDisabled"
+  | "isFullWidth"
+  | "isOptional"
 > &
-  SeleniumProps;
+  HtmlProps;
 
-const NativeSelect: ForwardRefWithType = forwardRef(
+const NativeSelect = forwardRef(
   <
     Value extends NativeSelectValueType<HasMultipleChoices>,
     HasMultipleChoices extends boolean
   >(
     {
+      ariaDescribedBy,
+      autoCompleteType,
       defaultValue,
       errorMessage,
+      errorMessageList,
       hasMultipleChoices: hasMultipleChoicesProp,
       hint,
+      HintLinkComponent,
       id: idOverride,
+      inputRef,
       isDisabled = false,
       isFullWidth = false,
       isMultiSelect,
@@ -105,6 +129,7 @@ const NativeSelect: ForwardRefWithType = forwardRef(
       onChange: onChangeProp,
       onFocus,
       testId,
+      translate,
       value,
       children,
     }: NativeSelectProps<Value, HasMultipleChoices>,
@@ -116,6 +141,20 @@ const NativeSelect: ForwardRefWithType = forwardRef(
         uncontrolledValue: defaultValue,
       })
     );
+    const localInputRef = useRef<HTMLSelectElement>(null);
+
+    useImperativeHandle(
+      inputRef,
+      () => {
+        return {
+          focus: () => {
+            localInputRef.current?.focus();
+          },
+        };
+      },
+      []
+    );
+
     const inputValues = useInputValues({
       defaultValue,
       value,
@@ -143,13 +182,15 @@ const NativeSelect: ForwardRefWithType = forwardRef(
         <MuiSelect
           {...inputValues}
           aria-describedby={ariaDescribedBy}
+          autoComplete={autoCompleteType}
           children={children}
-          data-se={testId}
           id={idOverride}
           inputProps={{
             "aria-errormessage": errorMessageElementId,
             "aria-labelledby": labelElementId,
+            "data-se": testId,
           }}
+          inputRef={localInputRef}
           name={idOverride}
           multiple={hasMultipleChoices}
           native={true}
@@ -157,9 +198,11 @@ const NativeSelect: ForwardRefWithType = forwardRef(
           onChange={onChange}
           onFocus={onFocus}
           ref={ref}
+          translate={translate}
         />
       ),
       [
+        autoCompleteType,
         children,
         idOverride,
         inputValues,
@@ -169,15 +212,19 @@ const NativeSelect: ForwardRefWithType = forwardRef(
         onFocus,
         ref,
         testId,
+        translate,
       ]
     );
 
     return (
       <Field
+        ariaDescribedBy={ariaDescribedBy}
         errorMessage={errorMessage}
+        errorMessageList={errorMessageList}
         fieldType="single"
         hasVisibleLabel
         hint={hint}
+        HintLinkComponent={HintLinkComponent}
         id={idOverride}
         isDisabled={isDisabled}
         isFullWidth={isFullWidth}

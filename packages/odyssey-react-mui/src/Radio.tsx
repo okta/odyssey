@@ -16,12 +16,17 @@ import {
   Radio as MuiRadio,
   RadioProps as MuiRadioProps,
 } from "@mui/material";
-import { memo, useCallback } from "react";
+import { memo, useCallback, useRef, useImperativeHandle } from "react";
 
 import { FieldComponentProps } from "./FieldComponentProps";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { HtmlProps } from "./HtmlProps";
+import { FocusHandle } from "./inputUtils";
 
 export type RadioProps = {
+  /**
+   * The ref forwarded to the Radio
+   */
+  inputRef?: React.RefObject<FocusHandle>;
   /**
    * If `true`, the Radio is selected
    */
@@ -47,19 +52,34 @@ export type RadioProps = {
    */
   onBlur?: MuiFormControlLabelProps["onBlur"];
 } & Pick<FieldComponentProps, "isDisabled" | "name"> &
-  SeleniumProps;
+  HtmlProps;
 
 const Radio = ({
+  inputRef,
   isChecked,
   isDisabled,
   isInvalid,
   label,
   name,
   testId,
+  translate,
   value,
   onChange: onChangeProp,
   onBlur: onBlurProp,
 }: RadioProps) => {
+  const localInputRef = useRef<HTMLInputElement>(null);
+  useImperativeHandle(
+    inputRef,
+    () => {
+      return {
+        focus: () => {
+          localInputRef.current?.focus();
+        },
+      };
+    },
+    []
+  );
+
   const onChange = useCallback<NonNullable<MuiRadioProps["onChange"]>>(
     (event, checked) => {
       onChangeProp?.(event, checked);
@@ -78,11 +98,19 @@ const Radio = ({
     <FormControlLabel
       checked={isChecked}
       className={isInvalid ? "Mui-error" : ""}
-      control={<MuiRadio onChange={onChange} />}
-      data-se={testId}
+      control={
+        <MuiRadio
+          inputProps={{
+            "data-se": testId,
+          }}
+          inputRef={localInputRef}
+          onChange={onChange}
+        />
+      }
       disabled={isDisabled}
       label={label}
       name={name}
+      translate={translate}
       value={value}
       onBlur={onBlur}
     />

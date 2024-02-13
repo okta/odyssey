@@ -13,16 +13,19 @@
 import { Button as MuiButton } from "@mui/material";
 import type { ButtonProps as MuiButtonProps } from "@mui/material";
 import {
-  createContext,
+  ComponentProps,
+  HTMLAttributes,
   memo,
   ReactElement,
   useCallback,
-  useContext,
+  useImperativeHandle,
+  useRef,
 } from "react";
 
 import { MuiPropsContext, useMuiProps } from "./MuiPropsContext";
 import { Tooltip } from "./Tooltip";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { HtmlProps } from "./HtmlProps";
+import { FocusHandle } from "./inputUtils";
 
 export const buttonSizeValues = ["small", "medium", "large"] as const;
 export const buttonTypeValues = ["button", "submit", "reset"] as const;
@@ -36,6 +39,20 @@ export const buttonVariantValues = [
 
 export type ButtonProps = {
   /**
+   * The global `aria-controls` property identifies the element (or elements) whose contents or presence are controlled by the element on which this attribute is set.
+   *
+   * value: A space-separated list of one or more ID values referencing the elements being controlled by the current element
+   */
+  ariaControls?: ComponentProps<"button">["aria-controls"];
+  /**
+   * The `aria-expanded` attribute is set on an element to indicate if a control is expanded or collapsed, and whether or not the controlled elements are displayed or hidden.
+   */
+  ariaExpanded?: ComponentProps<"button">["aria-expanded"];
+  /**
+   * The `aria-haspopup` attribute indicates the availability and type of interactive popup element that can be triggered by the element on which the attribute is set.
+   */
+  ariaHasPopup?: ComponentProps<"button">["aria-haspopup"];
+  /**
    * The ARIA label for the Button
    */
   ariaLabel?: string;
@@ -47,6 +64,10 @@ export type ButtonProps = {
    * The ID of the element that describes the Button
    */
   ariaDescribedBy?: string;
+  /**
+   * The ref forwarded to the Button
+   */
+  buttonRef?: React.RefObject<FocusHandle>;
   /**
    * The icon element to display at the end of the Button
    */
@@ -79,6 +100,7 @@ export type ButtonProps = {
    * The icon element to display at the start of the Button
    */
   startIcon?: ReactElement;
+  tabIndex?: HTMLAttributes<HTMLElement>["tabIndex"];
   /**
    * The tooltip text for the Button if it's icon-only
    */
@@ -108,58 +130,71 @@ export type ButtonProps = {
       startIcon?: ReactElement;
     }
 ) &
-  SeleniumProps;
-
-export type ButtonContextValue = {
-  isFullWidth?: boolean;
-};
-
-export const ButtonContext = createContext<ButtonContextValue>({
-  isFullWidth: undefined,
-});
+  HtmlProps;
 
 const Button = ({
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
+  buttonRef,
   endIcon,
   id,
   isDisabled,
-  isFullWidth: isFullWidthProp,
+  isFullWidth,
   label = "",
   onClick,
   size = "medium",
   startIcon,
+  tabIndex,
   testId,
   tooltipText,
+  translate,
   type = "button",
   variant,
 }: ButtonProps) => {
   const muiProps = useMuiProps();
+  const localButtonRef = useRef<HTMLButtonElement>(null);
 
-  const { isFullWidth } = useContext(ButtonContext);
+  useImperativeHandle(
+    buttonRef,
+    () => {
+      return {
+        focus: () => {
+          localButtonRef.current?.focus();
+        },
+      };
+    },
+    []
+  );
 
   const renderButton = useCallback(
-    (muiProps) => (
-      <MuiButton
-        {...muiProps}
-        aria-label={ariaLabel}
-        aria-labelledby={ariaLabelledBy}
-        aria-describedby={ariaDescribedBy}
-        data-se={testId}
-        disabled={isDisabled}
-        endIcon={endIcon}
-        fullWidth={isFullWidth ?? isFullWidthProp}
-        id={id}
-        onClick={onClick}
-        size={size}
-        startIcon={startIcon}
-        type={type}
-        variant={variant}
-      >
-        {label}
-      </MuiButton>
-    ),
+    (muiProps) => {
+      muiProps?.ref?.(localButtonRef.current);
+
+      return (
+        <MuiButton
+          {...muiProps}
+          aria-label={ariaLabel}
+          aria-labelledby={ariaLabelledBy}
+          aria-describedby={ariaDescribedBy}
+          data-se={testId}
+          disabled={isDisabled}
+          endIcon={endIcon}
+          fullWidth={isFullWidth}
+          id={id}
+          onClick={onClick}
+          ref={localButtonRef}
+          size={size}
+          startIcon={startIcon}
+          tabIndex={tabIndex}
+          translate={translate}
+          type={type}
+          variant={variant}
+        >
+          {label}
+        </MuiButton>
+      );
+    },
     [
       ariaDescribedBy,
       ariaLabel,
@@ -168,28 +203,27 @@ const Button = ({
       id,
       isDisabled,
       isFullWidth,
-      isFullWidthProp,
       label,
       onClick,
       size,
       startIcon,
+      tabIndex,
       testId,
+      translate,
       type,
       variant,
     ]
   );
 
-  return (
-    <>
-      {tooltipText && !isDisabled && (
-        <Tooltip ariaType="description" placement="top" text={tooltipText}>
-          <MuiPropsContext.Consumer>{renderButton}</MuiPropsContext.Consumer>
-        </Tooltip>
-      )}
+  if (tooltipText) {
+    return (
+      <Tooltip ariaType="description" placement="top" text={tooltipText}>
+        <MuiPropsContext.Consumer>{renderButton}</MuiPropsContext.Consumer>
+      </Tooltip>
+    );
+  }
 
-      {(isDisabled || !tooltipText) && renderButton(muiProps)}
-    </>
-  );
+  return renderButton(muiProps);
 };
 
 const MemoizedButton = memo(Button);

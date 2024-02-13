@@ -10,7 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useImperativeHandle,
+} from "react";
 import {
   Box,
   Checkbox as MuiCheckbox,
@@ -25,12 +33,14 @@ import { SelectProps as MuiSelectProps } from "@mui/material";
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import { CheckIcon } from "./icons.generated";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { HtmlProps } from "./HtmlProps";
 import {
   ComponentControlledState,
+  FocusHandle,
   useInputValues,
   getControlState,
 } from "./inputUtils";
+import { normalizedKey } from "./useNormalizedKey";
 
 export type SelectOption = {
   text: string;
@@ -53,6 +63,10 @@ export type SelectProps<
    * If `true`, the Select allows multiple selections
    */
   hasMultipleChoices?: HasMultipleChoices;
+  /**
+   * The ref forwarded to the Select
+   */
+  inputRef?: React.RefObject<FocusHandle>;
   /**
    * @deprecated Use `hasMultipleChoices` instead.
    */
@@ -84,15 +98,18 @@ export type SelectProps<
   value?: Value;
 } & Pick<
   FieldComponentProps,
+  | "ariaDescribedBy"
   | "errorMessage"
+  | "errorMessageList"
   | "hint"
+  | "HintLinkComponent"
   | "id"
   | "isDisabled"
+  | "isFullWidth"
   | "isOptional"
   | "name"
-  | "isFullWidth"
 > &
-  SeleniumProps;
+  HtmlProps;
 
 /**
  * Options in Odyssey <Select> are passed as an array, which can contain any combination
@@ -114,11 +131,15 @@ const Select = <
   Value extends SelectValueType<HasMultipleChoices>,
   HasMultipleChoices extends boolean
 >({
+  ariaDescribedBy,
   defaultValue,
   errorMessage,
+  errorMessageList,
   hasMultipleChoices: hasMultipleChoicesProp,
   hint,
+  HintLinkComponent,
   id: idOverride,
+  inputRef,
   isDisabled = false,
   isFullWidth = false,
   isMultiSelect,
@@ -130,6 +151,7 @@ const Select = <
   onFocus,
   options,
   testId,
+  translate,
   value,
 }: SelectProps<Value, HasMultipleChoices>) => {
   const hasMultipleChoices = useMemo(
@@ -144,6 +166,19 @@ const Select = <
   );
   const [internalSelectedValues, setInternalSelectedValues] = useState(
     controlledStateRef.current === CONTROLLED ? value : defaultValue
+  );
+  const localInputRef = useRef<HTMLSelectElement>(null);
+
+  useImperativeHandle(
+    inputRef,
+    () => {
+      return {
+        focus: () => {
+          localInputRef.current?.focus();
+        },
+      };
+    },
+    []
   );
 
   useEffect(() => {
@@ -177,15 +212,23 @@ const Select = <
   // data types that might be passed
   const normalizedOptions = useMemo(
     () =>
-      options.map((option) =>
-        typeof option === "object"
-          ? {
-              text: option.text,
-              value: option.value || option.text,
-              type: option.type === "heading" ? "heading" : "option",
-            }
-          : { text: option, value: option, type: "option" }
-      ),
+      options.map((option) => {
+        if (typeof option === "object") {
+          /**
+           * If the value of `option?.value is an empty string, we need to make sure that we
+           * set an empty string to `value` in the normalized option so that the select component
+           * can potentially set it as the selected one in the text input
+           */
+          const value =
+            option?.value === "" ? option.value : option.value || option.text;
+          return {
+            text: option.text,
+            value,
+            type: option.type === "heading" ? "heading" : "option",
+          };
+        }
+        return { text: option, value: option, type: "option" };
+      }),
     [options]
   );
 
@@ -227,23 +270,31 @@ const Select = <
   // that will populate the <Select>
   const children = useMemo(
     () =>
-      normalizedOptions.map((option) => {
+      normalizedOptions.map((option, index) => {
         if (option.type === "heading") {
           return <ListSubheader key={option.text}>{option.text}</ListSubheader>;
         }
         return (
-          <MenuItem key={option.value} value={option.value}>
+          <MenuItem
+            key={normalizedKey(option.text, index.toString())}
+            value={option.value}
+          >
             {hasMultipleChoices && (
               <MuiCheckbox
-                checked={internalSelectedValues?.includes(option.value)}
+                checked={
+                  option.value !== undefined &&
+                  internalSelectedValues?.includes(option.value)
+                }
               />
             )}
             {option.text}
-            {internalSelectedValues === option.value && (
-              <ListItemSecondaryAction>
-                <CheckIcon />
-              </ListItemSecondaryAction>
-            )}
+            {!hasMultipleChoices &&
+              (internalSelectedValues?.includes(option.value) ||
+                internalSelectedValues === option.value) && (
+                <ListItemSecondaryAction>
+                  <CheckIcon />
+                </ListItemSecondaryAction>
+              )}
           </MenuItem>
         );
       }),
@@ -258,7 +309,12 @@ const Select = <
         aria-errormessage={errorMessageElementId}
         children={children}
         data-se={testId}
+        displayEmpty={
+          inputValues?.value === "" || inputValues?.defaultValue === ""
+        }
         id={id}
+        inputProps={{ "data-se": testId }}
+        inputRef={localInputRef}
         labelId={labelElementId}
         multiple={hasMultipleChoices}
         name={nameOverride ?? id}
@@ -266,6 +322,7 @@ const Select = <
         onChange={onChange}
         onFocus={onFocus}
         renderValue={hasMultipleChoices ? renderValue : undefined}
+        translate={translate}
       />
     ),
     [
@@ -278,15 +335,19 @@ const Select = <
       onFocus,
       renderValue,
       testId,
+      translate,
     ]
   );
 
   return (
     <Field
+      ariaDescribedBy={ariaDescribedBy}
       errorMessage={errorMessage}
+      errorMessageList={errorMessageList}
       fieldType="single"
       hasVisibleLabel
       hint={hint}
+      HintLinkComponent={HintLinkComponent}
       id={idOverride}
       isDisabled={isDisabled}
       isFullWidth={isFullWidth}

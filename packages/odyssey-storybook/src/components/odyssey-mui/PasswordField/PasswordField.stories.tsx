@@ -210,6 +210,18 @@ export const Error: StoryObj<typeof PasswordField> = {
   },
 };
 
+export const Errors: StoryObj<typeof PasswordField> = {
+  args: {
+    errorMessage: "Password requires: ",
+    errorMessageList: [
+      "At least 8 chars",
+      "An uppercase letter",
+      "A number",
+      "A symbol",
+    ],
+  },
+};
+
 export const Hint: StoryObj<typeof PasswordField> = {
   args: {
     hint: "Your first pet's name",

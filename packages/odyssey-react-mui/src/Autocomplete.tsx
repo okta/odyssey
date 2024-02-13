@@ -21,7 +21,7 @@ import { memo, useCallback, useMemo, useRef } from "react";
 
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { HtmlProps } from "./HtmlProps";
 import {
   ComponentControlledState,
   useInputValues,
@@ -161,17 +161,27 @@ export type AutocompleteProps<
   getIsOptionEqualToValue?: (option: OptionType, value: OptionType) => boolean;
 } & Pick<
   FieldComponentProps,
-  "errorMessage" | "hint" | "id" | "isOptional" | "name" | "isFullWidth"
+  | "ariaDescribedBy"
+  | "errorMessage"
+  | "errorMessageList"
+  | "hint"
+  | "HintLinkComponent"
+  | "id"
+  | "isFullWidth"
+  | "isOptional"
+  | "name"
 > &
-  SeleniumProps;
+  HtmlProps;
 
 const Autocomplete = <
   OptionType,
   HasMultipleChoices extends boolean | undefined,
   IsCustomValueAllowed extends boolean | undefined
 >({
+  ariaDescribedBy,
   defaultValue,
   errorMessage,
+  errorMessageList,
   hasMultipleChoices,
   id: idOverride,
   inputValue,
@@ -182,6 +192,7 @@ const Autocomplete = <
   isOptional = false,
   isReadOnly,
   hint,
+  HintLinkComponent,
   label,
   name: nameOverride,
   onBlur,
@@ -192,6 +203,7 @@ const Autocomplete = <
   value,
   getIsOptionEqualToValue,
   testId,
+  translate,
 }: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
   const controlledStateRef = useRef(
     getControlState({ controlledValue: value, uncontrolledValue: defaultValue })
@@ -235,11 +247,14 @@ const Autocomplete = <
   const renderInput = useCallback(
     ({ InputLabelProps, InputProps, ...params }) => (
       <Field
+        ariaDescribedBy={ariaDescribedBy}
         errorMessage={errorMessage}
+        errorMessageList={errorMessageList}
         fieldType="single"
         hasVisibleLabel
         id={InputLabelProps.htmlFor}
         hint={hint}
+        HintLinkComponent={HintLinkComponent}
         label={label}
         isOptional={isOptional}
         renderFieldComponent={({
@@ -255,6 +270,7 @@ const Autocomplete = <
               ...params.inputProps,
               "aria-errormessage": errorMessageElementId,
               "aria-labelledby": labelElementId,
+              "data-se": testId,
             }}
             aria-describedby={ariaDescribedBy}
             id={id}
@@ -264,7 +280,17 @@ const Autocomplete = <
         )}
       />
     ),
-    [errorMessage, hint, isOptional, label, nameOverride]
+    [
+      ariaDescribedBy,
+      errorMessage,
+      errorMessageList,
+      hint,
+      HintLinkComponent,
+      isOptional,
+      label,
+      nameOverride,
+      testId,
+    ]
   );
   const onChange = useCallback<
     NonNullable<
@@ -304,7 +330,6 @@ const Autocomplete = <
       {...inputValueProp}
       // AutoComplete is wrapped in a div within MUI which does not get the disabled attr. So this aria-disabled gets set in the div
       aria-disabled={isDisabled}
-      data-se={testId}
       disableCloseOnSelect={hasMultipleChoices}
       disabled={isDisabled}
       freeSolo={isCustomValueAllowed}
@@ -321,6 +346,7 @@ const Autocomplete = <
       readOnly={isReadOnly}
       renderInput={renderInput}
       isOptionEqualToValue={getIsOptionEqualToValue}
+      translate={translate}
     />
   );
 };

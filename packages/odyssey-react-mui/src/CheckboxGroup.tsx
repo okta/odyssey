@@ -16,7 +16,7 @@ import { memo, ReactElement, useCallback } from "react";
 import { Checkbox } from "./Checkbox";
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { HtmlProps } from "./HtmlProps";
 
 export type CheckboxGroupProps = {
   /**
@@ -33,38 +33,58 @@ export type CheckboxGroupProps = {
    * The label text for the CheckboxGroup
    */
   label: string;
-} & Pick<FieldComponentProps, "errorMessage" | "hint" | "isDisabled"> &
-  SeleniumProps;
+} & Pick<
+  FieldComponentProps,
+  | "ariaDescribedBy"
+  | "errorMessage"
+  | "errorMessageList"
+  | "hint"
+  | "HintLinkComponent"
+  | "id"
+  | "isDisabled"
+> &
+  HtmlProps;
 
 const CheckboxGroup = ({
+  ariaDescribedBy,
   children,
   errorMessage,
+  errorMessageList,
   hint,
+  HintLinkComponent,
+  id: idOverride,
   isDisabled,
   isRequired = false,
   label,
   testId,
+  translate,
 }: CheckboxGroupProps) => {
   const renderFieldComponent = useCallback(
-    ({ ariaDescribedBy, errorMessageElementId, labelElementId }) => (
+    ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
       <MuiFormGroup
         aria-describedby={ariaDescribedBy}
         aria-errormessage={errorMessageElementId}
         aria-labelledby={labelElementId}
         data-se={testId}
+        id={id}
+        translate={translate}
       >
         {children}
       </MuiFormGroup>
     ),
-    [children, testId]
+    [children, testId, translate]
   );
 
   return (
     <Field
+      ariaDescribedBy={ariaDescribedBy}
       errorMessage={errorMessage}
+      errorMessageList={errorMessageList}
       fieldType="group"
       hasVisibleLabel={true}
       hint={hint}
+      HintLinkComponent={HintLinkComponent}
+      id={idOverride}
       isDisabled={isDisabled}
       isOptional={!isRequired}
       label={label}

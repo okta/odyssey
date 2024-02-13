@@ -17,6 +17,7 @@ import {
   forwardRef,
   memo,
   useCallback,
+  useImperativeHandle,
   useRef,
   useState,
 } from "react";
@@ -24,9 +25,9 @@ import {
 import { ShowIcon, HideIcon } from "./icons.generated";
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { HtmlProps } from "./HtmlProps";
 import { useTranslation } from "react-i18next";
-import { getControlState, useInputValues } from "./inputUtils";
+import { FocusHandle, getControlState, useInputValues } from "./inputUtils";
 
 export type PasswordFieldProps = {
   /**
@@ -47,6 +48,10 @@ export type PasswordFieldProps = {
    * If `true`, the show/hide icon is not shown to the user
    */
   hasShowPassword?: boolean;
+  /**
+   * The ref forwarded to the TextField
+   */
+  inputRef?: React.RefObject<FocusHandle>;
   /**
    * The label for the `input` element.
    */
@@ -72,17 +77,20 @@ export type PasswordFieldProps = {
    */
   value?: string;
 } & FieldComponentProps &
-  SeleniumProps;
+  HtmlProps;
 
 const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
   (
     {
+      ariaDescribedBy,
       autoCompleteType,
       defaultValue,
       errorMessage,
+      errorMessageList,
       hasInitialFocus,
       hint,
       id: idOverride,
+      inputRef,
       isDisabled = false,
       isFullWidth = false,
       isOptional = false,
@@ -95,6 +103,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       onBlur,
       placeholder,
       testId,
+      translate,
       value,
     },
     ref
@@ -120,6 +129,19 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       controlState: controlledStateRef.current,
     });
 
+    const localInputRef = useRef<HTMLInputElement>(null);
+    useImperativeHandle(
+      inputRef,
+      () => {
+        return {
+          focus: () => {
+            localInputRef.current?.focus();
+          },
+        };
+      },
+      []
+    );
+
     const onChange = useCallback<
       ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>
     >(
@@ -137,16 +159,17 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           autoComplete={inputType === "password" ? autoCompleteType : "off"}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus={hasInitialFocus}
-          data-se={testId}
           endAdornment={
             hasShowPassword && (
               <InputAdornment position="end">
                 <IconButton
+                  aria-controls={id}
                   aria-label={
                     inputType === "password"
                       ? t("passwordfield.icon.label.show")
                       : t("passwordfield.icon.label.hide")
                   }
+                  aria-pressed={inputType === "text"}
                   onClick={togglePasswordVisibility}
                 >
                   {inputType === "password" ? <ShowIcon /> : <HideIcon />}
@@ -158,9 +181,11 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           inputProps={{
             "aria-errormessage": errorMessageElementId,
             "aria-labelledby": labelElementId,
+            "data-se": testId,
             // role: "textbox" Added because password inputs don't have an implicit role assigned. This causes problems with element selection.
             role: "textbox",
           }}
+          inputRef={localInputRef}
           name={nameOverride ?? id}
           onChange={onChange}
           onFocus={onFocus}
@@ -169,6 +194,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           readOnly={isReadOnly}
           ref={ref}
           required={!isOptional}
+          translate={translate}
           type={inputType}
         />
       ),
@@ -189,12 +215,15 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
         hasShowPassword,
         ref,
         testId,
+        translate,
       ]
     );
 
     return (
       <Field
+        ariaDescribedBy={ariaDescribedBy}
         errorMessage={errorMessage}
+        errorMessageList={errorMessageList}
         fieldType="single"
         hasVisibleLabel
         hint={hint}

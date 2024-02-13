@@ -52,6 +52,8 @@ export type {
   ThemeOptions,
 } from "@mui/material";
 
+export type { FocusHandle } from "./inputUtils";
+
 export { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
 
 export * from "./Accordion";
@@ -72,6 +74,7 @@ export * from "./Dialog";
 export * from "./Fieldset";
 export * from "./FieldComponentProps";
 export * from "./Form";
+export * from "./HintLink";
 export * from "./Link";
 export * from "./MenuButton";
 export * from "./MenuItem";
@@ -96,6 +99,7 @@ export * from "./TextField";
 export * from "./theme";
 export * from "./Toast";
 export * from "./ToastStack";
+export * from "./labs/Switch";
 export * from "./Tooltip";
 export * from "./Typography";
 export * from "./useUniqueId";

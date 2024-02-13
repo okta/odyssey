@@ -107,19 +107,11 @@ const storybookMeta: Meta<DialogProps> = {
         name: "string",
       },
     },
-    ariaLabel: {
-      type: {
-        required: true,
-        name: "string",
-      },
-      control: "text",
-    },
   },
   args: {
     children:
       "You are initiating this ship's self-destruct protocol. This ship, and its occupants, will be destroyed.",
     title: "Initiate self-destruct protocol",
-    ariaLabel: "close",
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],

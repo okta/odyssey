@@ -10,6 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { memo, type ReactElement, useCallback, useMemo, useState } from "react";
+import {
+  Divider,
+  ListSubheader,
+  Menu as MuiMenu,
+  PopoverOrigin,
+} from "@mui/material";
+
 import {
   Button,
   buttonSizeValues,
@@ -17,18 +25,11 @@ import {
   MenuItem,
   useUniqueId,
 } from "./";
-import {
-  Divider,
-  ListSubheader,
-  Menu as MuiMenu,
-  PopoverOrigin,
-} from "@mui/material";
 import { ChevronDownIcon, MoreIcon } from "./icons.generated";
-import { memo, type ReactElement, useCallback, useMemo, useState } from "react";
-
+import { FieldComponentProps } from "./FieldComponentProps";
 import { MenuContext, MenuContextType } from "./MenuContext";
 import { NullElement } from "./NullElement";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { HtmlProps } from "./HtmlProps";
 
 export const menuAlignmentValues = ["left", "right"] as const;
 
@@ -109,7 +110,8 @@ export type MenuButtonProps = {
       buttonLabel?: undefined | "";
     }
 ) &
-  SeleniumProps;
+  Pick<FieldComponentProps, "isDisabled"> &
+  HtmlProps;
 
 const MenuButton = ({
   ariaLabel,
@@ -121,11 +123,13 @@ const MenuButton = ({
   shouldCloseOnSelect = true,
   endIcon: endIconProp,
   id: idOverride,
+  isDisabled,
   isOverflow,
   menuAlignment = "left",
   size,
   testId,
   tooltipText,
+  translate,
 }: MenuButtonProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -185,19 +189,21 @@ const MenuButton = ({
   return (
     <div>
       <Button
-        aria-controls={isOpen ? `${uniqueId}-menu` : undefined}
-        aria-expanded={isOpen ? "true" : undefined}
-        aria-haspopup="true"
+        ariaControls={isOpen ? `${uniqueId}-menu` : undefined}
+        ariaExpanded={isOpen ? "true" : undefined}
+        ariaHasPopup="true"
         ariaDescribedBy={ariaDescribedBy}
         ariaLabel={ariaLabel}
         ariaLabelledBy={ariaLabelledBy}
         data-se={testId}
         endIcon={endIcon}
         id={`${uniqueId}-button`}
+        isDisabled={isDisabled}
         label={buttonLabel}
         onClick={openMenu}
         size={size}
         tooltipText={tooltipText}
+        translate={translate}
         variant={buttonVariant}
       />
 

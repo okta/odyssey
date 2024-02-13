@@ -3,6 +3,234 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.6](https://github.com/okta/odyssey/compare/v1.13.5...v1.13.6) (2024-02-13)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.13.5](https://github.com/okta/odyssey/compare/v1.13.4...v1.13.5) (2024-02-13)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.13.4](https://github.com/okta/odyssey/compare/v1.13.3...v1.13.4) (2024-02-12)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.13.3](https://github.com/okta/odyssey/compare/v1.13.2...v1.13.3) (2024-02-09)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.13.2](https://github.com/okta/odyssey/compare/v1.13.1...v1.13.2) (2024-02-08)
+
+### Bug Fixes
+
+- remove unused type ([#2112](https://github.com/okta/odyssey/issues/2112)) ([9083d7c](https://github.com/okta/odyssey/commit/9083d7c7a6a2088fb5b40290d1a2c2e047f3d354))
+
+## [1.13.1](https://github.com/okta/odyssey/compare/v1.13.0...v1.13.1) (2024-02-08)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.13.0](https://github.com/okta/odyssey/compare/v1.12.11...v1.13.0) (2024-02-08)
+
+### Features
+
+- support aria-label in Link ([#2119](https://github.com/okta/odyssey/issues/2119)) ([0e468bb](https://github.com/okta/odyssey/commit/0e468bb70824a3db7706b5805b33cf9ec6bf1cf8))
+
+## [1.12.11](https://github.com/okta/odyssey/compare/v1.12.10...v1.12.11) (2024-02-06)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.12.10](https://github.com/okta/odyssey/compare/v1.12.9...v1.12.10) (2024-02-05)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.12.9](https://github.com/okta/odyssey/compare/v1.12.8...v1.12.9) (2024-02-02)
+
+### Bug Fixes
+
+- change spacing on checkbox label and hint ([08fb4f9](https://github.com/okta/odyssey/commit/08fb4f9b6e9579b110ef640035a2776687f6f3d1))
+
+## [1.12.8](https://github.com/okta/odyssey/compare/v1.12.7...v1.12.8) (2024-02-02)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.12.7](https://github.com/okta/odyssey/compare/v1.12.6...v1.12.7) (2024-02-02)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.12.6](https://github.com/okta/odyssey/compare/v1.12.5...v1.12.6) (2024-02-01)
+
+### Bug Fixes
+
+- add memo to autocomplete options ([c6c0d5d](https://github.com/okta/odyssey/commit/c6c0d5db40f11eaf4648a3e4f7112b0f29bc1cbe))
+- decouple onChange logic ([d26bbc2](https://github.com/okta/odyssey/commit/d26bbc2306ed05425f72e046a4cd9dc1706e808e))
+- fix warning in DataFilters file ([5fdecf1](https://github.com/okta/odyssey/commit/5fdecf1a72734b8bb28f190fd9238312af9b5fd6))
+- implement requested PR changes ([6383c3b](https://github.com/okta/odyssey/commit/6383c3bca821488d233f0ebe15b835a2e4c5e832))
+- onchange for autocomplete in datafilters ([e82bbd5](https://github.com/okta/odyssey/commit/e82bbd5a5bee5e6cb5d3768af3aafd14496d76e2))
+
+## [1.12.5](https://github.com/okta/odyssey/compare/v1.12.4...v1.12.5) (2024-02-01)
+
+### Bug Fixes
+
+- fixed the inputMode attr name and added comment to a prior change ([#2111](https://github.com/okta/odyssey/issues/2111)) ([2641612](https://github.com/okta/odyssey/commit/2641612e7cf8c0fca09b36df6af1fc173a6bb1e4))
+
+## [1.12.4](https://github.com/okta/odyssey/compare/v1.12.3...v1.12.4) (2024-02-01)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.12.3](https://github.com/okta/odyssey/compare/v1.12.2...v1.12.3) (2024-02-01)
+
+### Bug Fixes
+
+- allow empty string value for option value and value prop ([#2104](https://github.com/okta/odyssey/issues/2104)) ([c1d5f1b](https://github.com/okta/odyssey/commit/c1d5f1b052f8c8adc3eacd71071b1d6078491811))
+
+## [1.12.2](https://github.com/okta/odyssey/compare/v1.12.1...v1.12.2) (2024-01-31)
+
+### Bug Fixes
+
+- resolve missing types in package ([#2087](https://github.com/okta/odyssey/issues/2087)) ([5b122fd](https://github.com/okta/odyssey/commit/5b122fdc2a2829803d20ad8639b2df1bc2e696cc))
+
+## [1.12.1](https://github.com/okta/odyssey/compare/v1.12.0...v1.12.1) (2024-01-30)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.12.0](https://github.com/okta/odyssey/compare/v1.11.1...v1.12.0) (2024-01-30)
+
+### Features
+
+- support aria-describedby as prop for Field components ([#2103](https://github.com/okta/odyssey/issues/2103)) ([a6098d7](https://github.com/okta/odyssey/commit/a6098d7bc47261713890725ea09e8decf1e2d76d))
+
+## [1.11.1](https://github.com/okta/odyssey/compare/v1.11.0...v1.11.1) (2024-01-29)
+
+### Bug Fixes
+
+- move testId to inputProps for all input components ([#2096](https://github.com/okta/odyssey/issues/2096)) ([94ec2ea](https://github.com/okta/odyssey/commit/94ec2ea88f56beb3dd7ac143a6aaec5c173d6261))
+
+## [1.11.0](https://github.com/okta/odyssey/compare/v1.10.3...v1.11.0) (2024-01-29)
+
+### Features
+
+- support aria-controls and aria-pressed in PasswordField ([#2102](https://github.com/okta/odyssey/issues/2102)) ([196a68e](https://github.com/okta/odyssey/commit/196a68e22199d70cd02a2b8ad5e8b0b4c456cf19))
+- Support id for Accordion ([#2101](https://github.com/okta/odyssey/issues/2101)) ([3ecb265](https://github.com/okta/odyssey/commit/3ecb265d758a7766a6670c0d1786c8053eefec16))
+
+## [1.10.3](https://github.com/okta/odyssey/compare/v1.10.2...v1.10.3) (2024-01-29)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.10.2](https://github.com/okta/odyssey/compare/v1.10.1...v1.10.2) (2024-01-24)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.10.1](https://github.com/okta/odyssey/compare/v1.10.0...v1.10.1) (2024-01-22)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.10.0](https://github.com/okta/odyssey/compare/v1.9.23...v1.10.0) (2024-01-19)
+
+### Features
+
+- support inputmode prop in TextField ([#2091](https://github.com/okta/odyssey/issues/2091)) ([ac9f17f](https://github.com/okta/odyssey/commit/ac9f17f87e324b9861e794409e72e77f20d267c8))
+
+## [1.9.23](https://github.com/okta/odyssey/compare/v1.9.22...v1.9.23) (2024-01-17)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.22](https://github.com/okta/odyssey/compare/v1.9.21...v1.9.22) (2024-01-17)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.21](https://github.com/okta/odyssey/compare/v1.9.20...v1.9.21) (2024-01-12)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.20](https://github.com/okta/odyssey/compare/v1.9.19...v1.9.20) (2024-01-11)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.19](https://github.com/okta/odyssey/compare/v1.9.18...v1.9.19) (2024-01-11)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.18](https://github.com/okta/odyssey/compare/v1.9.17...v1.9.18) (2024-01-11)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.17](https://github.com/okta/odyssey/compare/v1.9.16...v1.9.17) (2024-01-11)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.16](https://github.com/okta/odyssey/compare/v1.9.15...v1.9.16) (2024-01-08)
+
+### Bug Fixes
+
+- (odyssey-react-mui): move variable declaration below import ([#2082](https://github.com/okta/odyssey/issues/2082)) ([910e4fc](https://github.com/okta/odyssey/commit/910e4fc120371df48cfc5908f06e175c61cbcaba))
+
+## [1.9.15](https://github.com/okta/odyssey/compare/v1.9.14...v1.9.15) (2024-01-08)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.14](https://github.com/okta/odyssey/compare/v1.9.13...v1.9.14) (2024-01-05)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.13](https://github.com/okta/odyssey/compare/v1.9.12...v1.9.13) (2024-01-04)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.12](https://github.com/okta/odyssey/compare/v1.9.11...v1.9.12) (2023-12-22)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.11](https://github.com/okta/odyssey/compare/v1.9.10...v1.9.11) (2023-12-22)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.10](https://github.com/okta/odyssey/compare/v1.9.9...v1.9.10) (2023-12-21)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.9](https://github.com/okta/odyssey/compare/v1.9.8...v1.9.9) (2023-12-20)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.8](https://github.com/okta/odyssey/compare/v1.9.7...v1.9.8) (2023-12-19)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.7](https://github.com/okta/odyssey/compare/v1.9.6...v1.9.7) (2023-12-19)
+
+### Bug Fixes
+
+- align CircularProgress with Figma ([#2060](https://github.com/okta/odyssey/issues/2060)) ([a900bcf](https://github.com/okta/odyssey/commit/a900bcf83cd408871545e9d8e840f9756e71bd79))
+- align radio and checkbox styles with Figma ([#2059](https://github.com/okta/odyssey/issues/2059)) ([99b7e7a](https://github.com/okta/odyssey/commit/99b7e7a193941fc8a79c7ecb16a8a7b82b086a39))
+
+## [1.9.6](https://github.com/okta/odyssey/compare/v1.9.5...v1.9.6) (2023-12-18)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.5](https://github.com/okta/odyssey/compare/v1.9.4...v1.9.5) (2023-12-18)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.4](https://github.com/okta/odyssey/compare/v1.9.3...v1.9.4) (2023-12-15)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.3](https://github.com/okta/odyssey/compare/v1.9.2...v1.9.3) (2023-12-12)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.9.2](https://github.com/okta/odyssey/compare/v1.9.1...v1.9.2) (2023-12-08)
+
+### Bug Fixes
+
+- add back props removed from odyssey cache provider ([#2066](https://github.com/okta/odyssey/issues/2066)) ([782475c](https://github.com/okta/odyssey/commit/782475cc222069f0417b08cb40ed57d298903b1d))
+
+## [1.9.1](https://github.com/okta/odyssey/compare/v1.9.0...v1.9.1) (2023-12-05)
+
+### Bug Fixes
+
+- fixed typing for shadow root element. updated tests to reflect changes ([#2048](https://github.com/okta/odyssey/issues/2048)) ([3ae92a1](https://github.com/okta/odyssey/commit/3ae92a1b91451c6bb9bb2a512571fbbe4b833022))
+
 ## [1.9.0](https://github.com/okta/odyssey/compare/v1.8.2...v1.9.0) (2023-12-04)
 
 ### Features

@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { useTranslation } from "react-i18next";
 import { Dialog as MuiDialog } from "@mui/material";
 import {
   DialogTitle,
@@ -28,9 +29,13 @@ import {
   ReactElement,
 } from "react";
 
-import type { SeleniumProps } from "./SeleniumProps";
+import type { HtmlProps } from "./HtmlProps";
 
 export type DialogProps = {
+  /**
+   * @deprecated `aria-label` for close button comes from translation file
+   */
+  ariaLabel?: string;
   /**
    * An optional Button object to be situated in the Dialog footer. Should almost always be of variant `primary`.
    */
@@ -59,8 +64,7 @@ export type DialogProps = {
    * The title of the Dialog
    */
   title: string;
-  ariaLabel: string;
-} & SeleniumProps;
+} & HtmlProps;
 
 const Dialog = ({
   callToActionFirstComponent,
@@ -71,8 +75,9 @@ const Dialog = ({
   onClose,
   testId,
   title,
-  ariaLabel,
+  translate,
 }: DialogProps) => {
+  const { t } = useTranslation();
   const [isContentScrollable, setIsContentScrollable] = useState(false);
   const dialogContentRef = useRef<HTMLDivElement>(null);
 
@@ -107,10 +112,10 @@ const Dialog = ({
 
   return (
     <MuiDialog data-se={testId} open={isOpen} onClose={onClose}>
-      <DialogTitle>
+      <DialogTitle translate={translate}>
         {title}
         <Button
-          ariaLabel={ariaLabel}
+          ariaLabel={t("close.text")}
           label=""
           onClick={onClose}
           size="small"

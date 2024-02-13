@@ -24,14 +24,11 @@ yarn add @okta/odyssey-react-mui
 Include fonts:
 
 ```html
-<link rel="preconnect" href="https://fonts.gstatic.com" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
   rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,600;1,400;1,600&display=swap"
-/>
-<link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap"
 />
 ```
 
@@ -117,6 +114,14 @@ const YourAppRoot = ({ children }) => (
   </OdysseyProvider>
 );
 ```
+
+### Generating ok-PL and ok-SK files
+
+Right now we do not have the code to generate these files in Odyssey.
+
+If you are an Okta employee, the easiest way to generate these files is to replace the English properties file of another project and run the build commands to get the ok-PL and ok-SK versions. For ok-SK, you will also need to replace the prefix with `odyssey:odyssey-react-mui: `.
+
+If you are not an Okta employee, please file an issue request for assistance.
 
 ## Components
 

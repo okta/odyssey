@@ -16,6 +16,8 @@ import {
   FormControl as MuiFormControl,
   FormLabel as MuiFormLabel,
 } from "@mui/material";
+
+import { FieldComponentProps } from "./FieldComponentProps";
 import { FieldError } from "./FieldError";
 import { FieldHint } from "./FieldHint";
 import { FieldLabel } from "./FieldLabel";
@@ -32,6 +34,10 @@ export type FieldProps = {
    */
   errorMessage?: string;
   /**
+   * If `error` is not undefined, the `input` will indicate an error.
+   */
+  errorMessageList?: string[];
+  /**
    * The field type determines how ARIA components are setup. It's important to use this to denote if you expect only one component (like a text field) or multiple (like a radio group).
    */
   fieldType: (typeof fieldTypeValues)[number];
@@ -40,14 +46,6 @@ export type FieldProps = {
    */
   hasVisibleLabel: boolean;
   /**
-   * The helper text content.
-   */
-  hint?: string;
-  /**
-   * The id of the `input` element.
-   */
-  id?: string;
-  /**
    * Important for narrowing down the `fieldset` role to "radiogroup".
    */
   isRadioGroup?: boolean;
@@ -55,18 +53,6 @@ export type FieldProps = {
    * Important for determining if children inherit error state
    */
   isCheckboxGroup?: boolean;
-  /**
-   * If `true`, the component is disabled.
-   */
-  isDisabled?: boolean;
-  /**
-   * If `true`, the component can stretch to fill the width of the container.
-   */
-  isFullWidth?: boolean;
-  /**
-   * If `true`, the `input` element is not required.
-   */
-  isOptional?: boolean;
   /**
    * The label for the `input` element.
    */
@@ -94,10 +80,13 @@ export type FieldProps = {
 };
 
 const Field = ({
+  ariaDescribedBy,
   errorMessage,
+  errorMessageList,
   fieldType,
   hasVisibleLabel,
   hint,
+  HintLinkComponent,
   id: idOverride,
   isDisabled: isDisabledProp = false,
   isFullWidth = false,
@@ -105,17 +94,32 @@ const Field = ({
   isOptional = false,
   label,
   renderFieldComponent,
-}: FieldProps) => {
+}: FieldProps &
+  Pick<
+    FieldComponentProps,
+    | "ariaDescribedBy"
+    | "errorMessage"
+    | "errorMessageList"
+    | "hint"
+    | "HintLinkComponent"
+    | "id"
+    | "isDisabled"
+    | "isFullWidth"
+    | "isOptional"
+  >) => {
   const { t } = useTranslation();
 
   const id = useUniqueId(idOverride);
   const hintId = hint ? `${id}-hint` : undefined;
-  const errorMessageElementId = errorMessage ? `${id}-error` : undefined;
+  const errorMessageElementId =
+    errorMessage || errorMessageList ? `${id}-error` : undefined;
   const labelElementId = `${id}-label`;
 
-  const ariaDescribedBy = useMemo(
-    () => [hintId, errorMessageElementId].join(" ").trim() || undefined,
-    [errorMessageElementId, hintId]
+  const localAriaDescribedBy = useMemo(
+    () =>
+      [hintId, errorMessageElementId, ariaDescribedBy].join(" ").trim() ||
+      undefined,
+    [ariaDescribedBy, errorMessageElementId, hintId]
   );
 
   const { isDisabled: isFieldsetDisabled } = useFieldset();
@@ -129,7 +133,10 @@ const Field = ({
     <MuiFormControl
       component={fieldType === "group" ? "fieldset" : "div"}
       disabled={isDisabled}
-      error={Boolean(errorMessage)}
+      error={
+        Boolean(errorMessage) ||
+        (Array.isArray(errorMessageList) && errorMessageList.length > 0)
+      }
       role={isRadioGroup ? "radiogroup" : undefined}
       fullWidth={isFullWidth}
     >
@@ -152,17 +159,23 @@ const Field = ({
         />
       )}
 
-      {hint && <FieldHint id={hintId} text={hint} />}
+      {hint && (
+        <FieldHint id={hintId} LinkComponent={HintLinkComponent} text={hint} />
+      )}
 
       {renderFieldComponent({
-        ariaDescribedBy,
+        ariaDescribedBy: localAriaDescribedBy,
         errorMessageElementId,
         id,
         labelElementId,
       })}
 
-      {errorMessage && (
-        <FieldError id={errorMessageElementId} text={errorMessage} />
+      {(errorMessage || errorMessageList) && (
+        <FieldError
+          id={errorMessageElementId}
+          message={errorMessage}
+          messageList={errorMessageList}
+        />
       )}
     </MuiFormControl>
   );

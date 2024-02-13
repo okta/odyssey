@@ -10,12 +10,22 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export const createShadowRootElement = (containerElement: HTMLElement) => {
+export const createShadowRootElement = (
+  containerElement: HTMLElement
+): [HTMLStyleElement, HTMLDivElement] => {
   const shadowRoot = containerElement.attachShadow({ mode: "open" });
 
+  // the element that styles will be cached into
+  const emotionRoot = document.createElement("style");
+  emotionRoot.setAttribute("id", "style-root");
+  emotionRoot.setAttribute("nonce", window.cspNonce);
+
+  // the element that emotion renders html into
   const shadowRootElement = document.createElement("div");
+  shadowRootElement.setAttribute("id", "shadow-root");
 
-  shadowRoot.append(shadowRootElement);
+  shadowRoot.appendChild(emotionRoot);
+  shadowRoot.appendChild(shadowRootElement);
 
-  return shadowRoot;
+  return [emotionRoot, shadowRootElement];
 };

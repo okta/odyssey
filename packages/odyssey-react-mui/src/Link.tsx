@@ -10,15 +10,20 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, ReactElement } from "react";
+import { memo, ReactElement, useImperativeHandle, useRef } from "react";
 import { ExternalLinkIcon } from "./icons.generated";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { HtmlProps } from "./HtmlProps";
+import { FocusHandle } from "./inputUtils";
 
 import { Link as MuiLink, LinkProps as MuiLinkProps } from "@mui/material";
 
 export const linkVariantValues = ["default", "monochrome"] as const;
 
 export type LinkProps = {
+  /**
+   * The ARIA label for the Link
+   */
+  ariaLabel?: string;
   /**
    * The content within the Link
    */
@@ -31,6 +36,10 @@ export type LinkProps = {
    * An optional Icon component at the start of the Link
    */
   icon?: ReactElement;
+  /**
+   * The ref forwarded to the TextField
+   */
+  linkRef?: React.RefObject<FocusHandle>;
   /**
    * The click event handler for the Link
    */
@@ -52,37 +61,58 @@ export type LinkProps = {
    * The visual presentation of the Link (default or monochrome)
    */
   variant?: (typeof linkVariantValues)[number];
-} & SeleniumProps;
+} & HtmlProps;
 
 const Link = ({
+  ariaLabel,
   children,
   href,
   icon,
+  linkRef,
   rel,
   target,
   testId,
+  translate,
   variant,
   onClick,
-}: LinkProps) => (
-  <MuiLink
-    data-se={testId}
-    href={href}
-    rel={rel}
-    target={target}
-    variant={variant}
-    onClick={onClick}
-  >
-    {icon && <span className="Link-icon">{icon}</span>}
+}: LinkProps) => {
+  const localLinkRef = useRef<HTMLAnchorElement>(null);
+  useImperativeHandle(
+    linkRef,
+    () => {
+      return {
+        focus: () => {
+          localLinkRef.current?.focus();
+        },
+      };
+    },
+    []
+  );
 
-    {children}
+  return (
+    <MuiLink
+      aria-label={ariaLabel}
+      data-se={testId}
+      href={href}
+      ref={localLinkRef}
+      rel={rel}
+      target={target}
+      translate={translate}
+      variant={variant}
+      onClick={onClick}
+    >
+      {icon && <span className="Link-icon">{icon}</span>}
 
-    {target === "_blank" && (
-      <span className="Link-indicator" role="presentation">
-        <ExternalLinkIcon />
-      </span>
-    )}
-  </MuiLink>
-);
+      {children}
+
+      {target === "_blank" && (
+        <span className="Link-indicator" role="presentation">
+          <ExternalLinkIcon />
+        </span>
+      )}
+    </MuiLink>
+  );
+};
 
 const MemoizedLink = memo(Link);
 

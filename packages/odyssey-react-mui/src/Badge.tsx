@@ -17,15 +17,17 @@ import {
   DesignTokens,
 } from "./OdysseyDesignTokensContext";
 import { Box } from "./Box";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { HtmlProps } from "./HtmlProps";
+
+export type BadgeContentMax = 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | 100;
 
 export const badgeTypeValues = ["default", "attention", "danger"] as const;
 
 export type BadgeProps = {
   badgeContent: number;
-  badgeContentMax?: number;
+  badgeContentMax?: BadgeContentMax;
   type?: (typeof badgeTypeValues)[number];
-} & SeleniumProps;
+} & HtmlProps;
 
 const badgeTypeColors = (odysseyTokens: DesignTokens) => ({
   default: {
@@ -44,25 +46,24 @@ const badgeTypeColors = (odysseyTokens: DesignTokens) => ({
 
 const Badge = ({
   badgeContent,
-  badgeContentMax = 999,
+  badgeContentMax = 100,
+  testId,
+  translate,
   type = "default",
 }: BadgeProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
-  const greaterThanZeroContentMax = badgeContentMax > 0 ? badgeContentMax : 1;
-  const threeDigitLimitedMax =
-    greaterThanZeroContentMax > 999 ? 999 : greaterThanZeroContentMax;
-  const isOverContentMax = Boolean(
-    badgeContent && badgeContent > threeDigitLimitedMax
-  );
-  const overContentMaxMessage = `${greaterThanZeroContentMax}+`;
-  const formattedContent = isOverContentMax
-    ? overContentMaxMessage
-    : badgeContent;
-  const contentIsLongerThanOneChar = formattedContent?.toString()?.length > 1;
+  const renderBadge = useMemo(() => {
+    const greaterThanZeroContentMax = badgeContentMax > 0 ? badgeContentMax : 1;
+    const threeDigitLimitedMax =
+      greaterThanZeroContentMax > 999 ? 999 : greaterThanZeroContentMax;
+    const isOverContentMax = badgeContent > threeDigitLimitedMax;
+    const overContentMaxMessage = `${greaterThanZeroContentMax}+`;
+    const formattedContent = isOverContentMax
+      ? overContentMaxMessage
+      : badgeContent.toString();
 
-  const badgeStyles = useMemo<CSSProperties>(
-    () => ({
+    const badgeStyles: CSSProperties = {
       display: "inline-flex",
       alignItems: "center",
       justifyContent: "center",
@@ -70,27 +71,38 @@ const Badge = ({
       height: `calc(${odysseyDesignTokens.Spacing4} + ${odysseyDesignTokens.Spacing1})`,
       minHeight: `calc(${odysseyDesignTokens.Spacing4} + ${odysseyDesignTokens.Spacing1})`,
       // 6px horizontal padding per design requirements
-      padding: `0 calc(${odysseyDesignTokens.Spacing1} * 1.5)`,
+      padding: "0 6px",
       backgroundColor: badgeTypeColors(odysseyDesignTokens)[type].background,
       color: badgeTypeColors(odysseyDesignTokens)[type].font,
-      borderRadius: contentIsLongerThanOneChar
-        ? `${odysseyDesignTokens.BorderRadiusOuter}`
-        : "50%",
+      borderRadius:
+        formattedContent.length > 1
+          ? `${odysseyDesignTokens.BorderRadiusOuter}`
+          : "50%",
       fontSize: `${odysseyDesignTokens.TypographyScale0}`,
       fontFamily: `${odysseyDesignTokens.TypographyFamilyMono}`,
       fontWeight: `${odysseyDesignTokens.TypographyWeightBodyBold}`,
       lineHeight: 1,
-    }),
-    [type, contentIsLongerThanOneChar, odysseyDesignTokens]
-  );
+      transitionDuration: `${odysseyDesignTokens.TransitionDurationMain}`,
+      transitionProperty: `background-color, color`,
+    };
 
-  const shouldHideBadge = badgeContent <= 0 || !badgeContent;
+    const hasNotificationCount = badgeContent && badgeContent > 0;
 
-  if (shouldHideBadge) {
-    return null;
-  }
+    return hasNotificationCount ? (
+      <Box sx={badgeStyles} data-se={testId} translate={translate}>
+        {formattedContent}
+      </Box>
+    ) : null;
+  }, [
+    badgeContent,
+    badgeContentMax,
+    odysseyDesignTokens,
+    testId,
+    translate,
+    type,
+  ]);
 
-  return <Box sx={badgeStyles}>{formattedContent}</Box>;
+  return renderBadge;
 };
 
 const MemoizedBadge = memo(Badge);

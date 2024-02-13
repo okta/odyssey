@@ -44,10 +44,11 @@ const storybookMeta: Meta<typeof NativeSelect> = {
     },
     errorMessage: fieldComponentPropsMetaData.errorMessage,
     hint: fieldComponentPropsMetaData.hint,
+    HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
     id: fieldComponentPropsMetaData.id,
     isDisabled: fieldComponentPropsMetaData.isDisabled,
     isFullWidth: fieldComponentPropsMetaData.isFullWidth,
-    isMultiSelect: {
+    hasMultipleChoices: {
       control: "boolean",
       description:
         "If `true`, the native select component allows multiple selections",
@@ -133,6 +134,7 @@ const Template: StoryObj<typeof NativeSelect> = {
   render: function C(args) {
     return (
       <NativeSelect
+        {...args}
         id={args.id}
         label={args.label}
         hint={args.hint}
@@ -212,7 +214,7 @@ export const DefaultGrouped: StoryObj<typeof NativeSelect> = {
 export const Multi: StoryObj<typeof NativeSelect> = {
   ...Template,
   args: {
-    isMultiSelect: true,
+    hasMultipleChoices: true,
     defaultValue: [],
   },
 };
@@ -286,7 +288,7 @@ export const ControlledMultiselect: StoryObj<typeof NativeSelect> = {
       <NativeSelect
         {...args}
         defaultValue={undefined}
-        isMultiSelect={true}
+        hasMultipleChoices={true}
         value={localValue}
         onChange={onChange}
         children={
@@ -382,7 +384,7 @@ export const ControlledPreselectedMultiselect: StoryObj<typeof NativeSelect> = {
       <NativeSelect
         {...args}
         defaultValue={undefined}
-        isMultiSelect={true}
+        hasMultipleChoices={true}
         value={localValue}
         onChange={onChange}
         children={

@@ -19,7 +19,7 @@ import { memo, ReactElement, useCallback, useRef } from "react";
 import { Radio, RadioProps } from "./Radio";
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
-import type { SeleniumProps } from "./SeleniumProps";
+import type { HtmlProps } from "./HtmlProps";
 import { getControlState, useInputValues } from "./inputUtils";
 
 export type RadioGroupProps = {
@@ -45,21 +45,32 @@ export type RadioGroupProps = {
   value?: RadioProps["value"];
 } & Pick<
   FieldComponentProps,
-  "errorMessage" | "hint" | "id" | "isDisabled" | "name"
+  | "ariaDescribedBy"
+  | "errorMessage"
+  | "errorMessageList"
+  | "hint"
+  | "HintLinkComponent"
+  | "id"
+  | "isDisabled"
+  | "name"
 > &
-  SeleniumProps;
+  HtmlProps;
 
 const RadioGroup = ({
+  ariaDescribedBy,
   children,
   defaultValue,
   errorMessage,
+  errorMessageList,
   hint,
+  HintLinkComponent,
   id: idOverride,
   isDisabled,
   label,
   name: nameOverride,
   onChange: onChangeProp,
   testId,
+  translate,
   value,
 }: RadioGroupProps) => {
   const controlledStateRef = useRef(
@@ -88,19 +99,23 @@ const RadioGroup = ({
         id={id}
         name={nameOverride ?? id}
         onChange={onChange}
+        translate={translate}
       >
         {children}
       </MuiRadioGroup>
     ),
-    [children, inputValues, nameOverride, onChange, testId]
+    [children, inputValues, nameOverride, onChange, testId, translate]
   );
 
   return (
     <Field
+      ariaDescribedBy={ariaDescribedBy}
       errorMessage={errorMessage}
+      errorMessageList={errorMessageList}
       fieldType="group"
       hasVisibleLabel={false}
       hint={hint}
+      HintLinkComponent={HintLinkComponent}
       id={idOverride}
       isDisabled={isDisabled}
       label={label}

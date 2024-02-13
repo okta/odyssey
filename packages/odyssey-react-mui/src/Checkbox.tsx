@@ -11,7 +11,7 @@
  */
 
 import { useTranslation } from "react-i18next";
-import { memo, useCallback, useMemo, useRef } from "react";
+import { memo, useCallback, useMemo, useRef, useImperativeHandle } from "react";
 import {
   Checkbox as MuiCheckbox,
   CheckboxProps as MuiCheckboxProps,
@@ -21,10 +21,14 @@ import {
 } from "@mui/material";
 
 import { FieldComponentProps } from "./FieldComponentProps";
-import { Typography } from "./Typography";
-import type { SeleniumProps } from "./SeleniumProps";
-import { ComponentControlledState, getControlState } from "./inputUtils";
 import { CheckedFieldProps } from "./FormCheckedProps";
+import type { HtmlProps } from "./HtmlProps";
+import {
+  ComponentControlledState,
+  FocusHandle,
+  getControlState,
+} from "./inputUtils";
+import { Typography } from "./Typography";
 
 export const checkboxValidityValues = ["valid", "invalid", "inherit"] as const;
 
@@ -41,6 +45,10 @@ export type CheckboxProps = {
    * The id of the `input` element.
    */
   id?: string;
+  /**
+   * The ref forwarded to the Checkbox
+   */
+  inputRef?: React.RefObject<FocusHandle>;
   /**
    * Determines whether the Checkbox is disabled
    */
@@ -75,12 +83,13 @@ export type CheckboxProps = {
   onBlur?: MuiFormControlLabelProps["onBlur"];
 } & Pick<FieldComponentProps, "id" | "isDisabled" | "name"> &
   CheckedFieldProps<MuiCheckboxProps> &
-  SeleniumProps;
+  HtmlProps;
 
 const Checkbox = ({
   ariaLabel,
   ariaLabelledBy,
   id: idOverride,
+  inputRef,
   isChecked,
   isDefaultChecked,
   isDisabled,
@@ -92,6 +101,7 @@ const Checkbox = ({
   onChange: onChangeProp,
   onBlur: onBlurProp,
   testId,
+  translate,
   validity = "inherit",
   value,
 }: CheckboxProps) => {
@@ -109,6 +119,19 @@ const Checkbox = ({
     return { defaultChecked: isDefaultChecked };
   }, [isDefaultChecked, isChecked]);
 
+  const localInputRef = useRef<HTMLInputElement>(null);
+  useImperativeHandle(
+    inputRef,
+    () => {
+      return {
+        focus: () => {
+          localInputRef.current?.focus();
+        },
+      };
+    },
+    []
+  );
+
   const label = useMemo(() => {
     return (
       <>
@@ -121,10 +144,10 @@ const Checkbox = ({
             </Typography>
           </>
         )}
-        {hint && <FormHelperText>{hint}</FormHelperText>}
+        {hint && <FormHelperText translate={translate}>{hint}</FormHelperText>}
       </>
     );
-  }, [isRequired, labelProp, hint, t]);
+  }, [isRequired, labelProp, hint, t, translate]);
 
   const onChange = useCallback<NonNullable<MuiCheckboxProps["onChange"]>>(
     (event, checked) => {
@@ -158,12 +181,15 @@ const Checkbox = ({
           indeterminate={isIndeterminate}
           onChange={onChange}
           required={isRequired}
+          inputProps={{
+            "data-se": testId,
+          }}
+          inputRef={localInputRef}
           sx={() => ({
             marginBlockStart: "2px",
           })}
         />
       }
-      data-se={testId}
       disabled={isDisabled}
       id={idOverride}
       label={label}
@@ -171,6 +197,7 @@ const Checkbox = ({
       value={value}
       required={isRequired}
       onBlur={onBlur}
+      translate={translate}
     />
   );
 };

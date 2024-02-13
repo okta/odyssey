@@ -1,7 +1,8 @@
 {
   "transition": {
     "duration": {
-      "main": { "value": "100ms" }
+      "main": { "value": "100ms" },
+      "mainAsNumber": { "value": 100 }
     },
     "timing": {
       "main": { "value": "linear" }
