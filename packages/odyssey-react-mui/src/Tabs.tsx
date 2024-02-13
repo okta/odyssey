@@ -28,7 +28,7 @@ import { Tab as MuiTab } from "@mui/material";
 
 import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
 import { Badge, BadgeProps } from "./Badge";
-import { AllowedProps } from "./AllowedProps";
+import { HtmlProps } from "./HtmlProps";
 import { Box } from "./Box";
 
 export type TabItemProps = {
@@ -55,7 +55,7 @@ export type TabItemProps = {
 } & {
   notificationCount?: BadgeProps["badgeContent"];
   notificationCountMax?: BadgeProps["badgeContentMax"];
-} & AllowedProps;
+} & HtmlProps;
 
 export type TabsProps = {
   /**

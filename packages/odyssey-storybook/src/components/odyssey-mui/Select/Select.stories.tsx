@@ -386,3 +386,22 @@ export const ControlledPreselectedMultipleSelect: StoryObj<typeof Select> = {
     return <Select {...props} value={localValue} onChange={onChange} />;
   },
 };
+
+export const ControlledEmptyValue: StoryObj<typeof Select> = {
+  args: {
+    value: "",
+    options: [
+      { value: "", text: "Default option" },
+      { value: "value1", text: "Value 1" },
+      { value: "value2", text: "Value 2" },
+    ],
+  },
+  render: function C(props) {
+    const [localValue, setLocalValue] = useState("");
+    const onChange = useCallback(
+      (event) => setLocalValue(event.target.value),
+      []
+    );
+    return <Select {...props} value={localValue} onChange={onChange} />;
+  },
+};

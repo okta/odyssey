@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2023-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -10,9 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createContext, useContext } from "react";
-
-export type MuiPropsContextType = Record<string, unknown>;
-export const MuiPropsContext = createContext<MuiPropsContextType>({});
-
-export const useMuiProps = () => useContext(MuiPropsContext);
+export const normalizedKey = (...keyParts: string[]): string => {
+  const SEPARATOR = "-";
+  // Joins all strings together with SEPARATOR, replaces any non-alphanumeric character with SEPARATOR and casts all to lowercase
+  return keyParts.join(SEPARATOR).replace(/\W+/g, SEPARATOR).toLowerCase();
+};

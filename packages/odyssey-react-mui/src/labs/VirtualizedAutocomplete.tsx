@@ -21,7 +21,7 @@ import { memo, useCallback, useMemo, useRef } from "react";
 
 import { Field } from "../Field";
 import { FieldComponentProps } from "../FieldComponentProps";
-import type { AllowedProps } from "../AllowedProps";
+import type { HtmlProps } from "../HtmlProps";
 import {
   ComponentControlledState,
   getControlState,
@@ -176,7 +176,7 @@ export type AutocompleteProps<
   | "isOptional"
   | "name"
 > &
-  AllowedProps;
+  HtmlProps;
 
 const VirtualizedAutocomplete = <
   OptionType,

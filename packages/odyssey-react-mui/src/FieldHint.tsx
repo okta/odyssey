@@ -15,13 +15,13 @@ import { memo } from "react";
 import { FormHelperText } from "@mui/material";
 
 import { FieldComponentProps } from "./FieldComponentProps";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 
 export type FieldHintProps = {
   LinkComponent?: FieldComponentProps["HintLinkComponent"];
   id?: string;
   text: string;
-} & AllowedProps;
+} & HtmlProps;
 
 const FieldHint = ({
   id,
