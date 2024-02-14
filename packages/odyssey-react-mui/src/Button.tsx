@@ -13,6 +13,7 @@
 import { Button as MuiButton } from "@mui/material";
 import type { ButtonProps as MuiButtonProps } from "@mui/material";
 import {
+  ComponentProps,
   HTMLAttributes,
   memo,
   ReactElement,
@@ -31,12 +32,25 @@ export const buttonTypeValues = ["button", "submit", "reset"] as const;
 export const buttonVariantValues = [
   "primary",
   "secondary",
-  "tertiary",
   "danger",
   "floating",
 ] as const;
 
 export type ButtonProps = {
+  /**
+   * The global `aria-controls` property identifies the element (or elements) whose contents or presence are controlled by the element on which this attribute is set.
+   *
+   * value: A space-separated list of one or more ID values referencing the elements being controlled by the current element
+   */
+  ariaControls?: ComponentProps<"button">["aria-controls"];
+  /**
+   * The `aria-expanded` attribute is set on an element to indicate if a control is expanded or collapsed, and whether or not the controlled elements are displayed or hidden.
+   */
+  ariaExpanded?: ComponentProps<"button">["aria-expanded"];
+  /**
+   * The `aria-haspopup` attribute indicates the availability and type of interactive popup element that can be triggered by the element on which the attribute is set.
+   */
+  ariaHasPopup?: ComponentProps<"button">["aria-haspopup"];
   /**
    * The ARIA label for the Button
    */
@@ -97,7 +111,7 @@ export type ButtonProps = {
   /**
    * The variant of the Button
    */
-  variant: (typeof buttonVariantValues)[number];
+  variant: (typeof buttonVariantValues)[number] | "tertiary";
 } & (
   | {
       endIcon?: ReactElement;
@@ -135,9 +149,13 @@ const Button = ({
   tooltipText,
   translate,
   type = "button",
-  variant,
+  variant: variantProp,
 }: ButtonProps) => {
   const muiProps = useMuiProps();
+
+  // We're deprecating the "tertiary" variant, so map it to
+  // "secondary" in lieu of making a breaking change
+  const variant = variantProp === "tertiary" ? "secondary" : variantProp;
   const localButtonRef = useRef<HTMLButtonElement>(null);
 
   useImperativeHandle(
