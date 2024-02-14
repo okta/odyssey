@@ -186,13 +186,6 @@ const storybookMeta: Meta<FormProps> = {
 
 export default storybookMeta;
 
-// const Template: StoryObj<FormProps> = {
-//   render: function (args) {
-//     const { children } = args;
-//     return <Form {...args}>{children}</Form>;
-//   },
-// };
-
 // States
 
 export const Simple: StoryObj<FormProps> = {
