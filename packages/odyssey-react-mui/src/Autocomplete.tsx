@@ -18,22 +18,28 @@ import {
   AutocompleteValue,
   AutocompleteRenderInputParams,
 } from "@mui/material";
-import React, {
+import {
   createContext,
   FC,
   forwardRef,
+  HTMLAttributes,
   memo,
+  ReactElement,
   useCallback,
+  useContext,
   useEffect,
   useMemo,
   useRef,
 } from "react";
+import styled from "@emotion/styled";
 import { VariableSizeList, ListChildComponentProps } from "react-window";
-import _AutoSizer, { Props } from "react-virtualized-auto-sizer";
+import _AutoSizer, {
+  Props as AutoSizerProps,
+} from "react-virtualized-auto-sizer";
 
 // This is required to get around a react-types issue for "AutoSizer is not a valid JSX element."
 // @see https://github.com/bvaughn/react-virtualized/issues/1739#issuecomment-1291444246
-const AutoSizer = _AutoSizer as unknown as FC<Props>;
+const AutoSizer = _AutoSizer as unknown as FC<AutoSizerProps>;
 
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
@@ -195,6 +201,11 @@ export type AutocompleteProps<
 > &
   Pick<HtmlProps, "ariaDescribedBy" | "testId" | "translate">;
 
+const ListboxContainer = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
 const Autocomplete = <
   OptionType,
   HasMultipleChoices extends boolean | undefined,
@@ -235,9 +246,7 @@ const Autocomplete = <
     }),
   );
 
-  const isVirtualized = useRef(
-    isVirtualizedProp !== undefined && isVirtualizedProp === true
-  );
+  const isVirtualized = useRef(Boolean(isVirtualizedProp));
   const defaultValueProp = useMemo<
     | AutocompleteValue<
         OptionType,
@@ -345,17 +354,15 @@ const Autocomplete = <
 
   const OuterListboxContext = createContext({});
 
-  const OuterListboxElementType = React.forwardRef<HTMLDivElement>(
-    (props, ref) => {
-      const outerProps = React.useContext(OuterListboxContext);
-      return <div ref={ref} {...props} {...outerProps} />;
-    }
-  );
+  const OuterListboxElementType = forwardRef<HTMLDivElement>((props, ref) => {
+    const outerProps = useContext(OuterListboxContext);
+    return <div ref={ref} {...props} {...outerProps} />;
+  });
 
   function useResetCache(length: number) {
-    const ref = React.useRef<VariableSizeList>(null);
+    const ref = useRef<VariableSizeList>(null);
     useEffect(() => {
-      if (ref.current != null) {
+      if (ref.current) {
         ref.current.resetAfterIndex(0, true);
       }
     }, [length]);
@@ -364,22 +371,24 @@ const Autocomplete = <
 
   const ListboxComponent = forwardRef<
     HTMLDivElement,
-    React.HTMLAttributes<HTMLElement>
+    HTMLAttributes<HTMLElement>
   >(function (props, ref) {
     const { children, ...other } = props;
-    const itemData: React.ReactElement[] = [];
-    (children as React.ReactElement[]).forEach(
-      (item: React.ReactElement & { children?: React.ReactElement[] }) => {
-        itemData.push(item);
-        itemData.push(...(item.children || []));
-      }
+    const itemData: ReactElement[] = (children as ReactElement[]).flatMap(
+      (item: ReactElement & { children?: ReactElement[] }) =>
+        [item].concat(item.children || [])
     );
 
+    // the height of an Odyssey autocomplete option item that is used to calculate height of window
     const optionHeight = 45; //px
+
+    // The number of items (rows or columns) to render outside of the visible area for performance and scrolling reasons
+    const overscanRowCount = 8;
+
     const gridRef = useResetCache(itemData.length);
 
     return (
-      <div ref={ref} style={{ width: "100%", height: "100%" }}>
+      <ListboxContainer ref={ref}>
         <OuterListboxContext.Provider value={other}>
           <AutoSizer>
             {({ height, width }) => (
@@ -388,19 +397,19 @@ const Autocomplete = <
                 itemData={itemData}
                 itemCount={itemData.length}
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                itemSize={(_index) => optionHeight}
+                itemSize={() => optionHeight}
                 height={height}
                 width={width}
                 ref={gridRef}
                 outerElementType={OuterListboxElementType}
-                overscanCount={8}
+                overscanCount={overscanRowCount}
               >
                 {renderVirtualizedRow}
               </VariableSizeList>
             )}
           </AutoSizer>
         </OuterListboxContext.Provider>
-      </div>
+      </ListboxContainer>
     );
   });
 
