@@ -52,7 +52,6 @@ export type {
   ThemeOptions,
 } from "@mui/material";
 
-export type { ForwardRefWithType } from "./@types/react-augment";
 export type { FocusHandle } from "./inputUtils";
 
 export { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";

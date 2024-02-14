@@ -33,7 +33,7 @@ import { SelectProps as MuiSelectProps } from "@mui/material";
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import { CheckIcon } from "./icons.generated";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 import {
   ComponentControlledState,
   FocusHandle,
@@ -109,7 +109,7 @@ export type SelectProps<
   | "isOptional"
   | "name"
 > &
-  AllowedProps;
+  HtmlProps;
 
 /**
  * Options in Odyssey <Select> are passed as an array, which can contain any combination

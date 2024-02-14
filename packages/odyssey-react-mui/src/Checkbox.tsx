@@ -21,14 +21,14 @@ import {
 } from "@mui/material";
 
 import { FieldComponentProps } from "./FieldComponentProps";
-import { Typography } from "./Typography";
-import type { AllowedProps } from "./AllowedProps";
+import { CheckedFieldProps } from "./FormCheckedProps";
+import type { HtmlProps } from "./HtmlProps";
 import {
   ComponentControlledState,
   FocusHandle,
   getControlState,
 } from "./inputUtils";
-import { CheckedFieldProps } from "./FormCheckedProps";
+import { Typography } from "./Typography";
 
 export const checkboxValidityValues = ["valid", "invalid", "inherit"] as const;
 
@@ -83,7 +83,7 @@ export type CheckboxProps = {
   onBlur?: MuiFormControlLabelProps["onBlur"];
 } & Pick<FieldComponentProps, "id" | "isDisabled" | "name"> &
   CheckedFieldProps<MuiCheckboxProps> &
-  AllowedProps;
+  HtmlProps;
 
 const Checkbox = ({
   ariaLabel,

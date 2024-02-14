@@ -11,7 +11,7 @@
  */
 
 import { ReactNode, memo } from "react";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 import {
   Accordion as MuiAccordion,
   AccordionDetails as MuiAccordionDetails,
@@ -35,10 +35,6 @@ export type AccordionProps = {
    * The label text for the AccordionSummary
    */
   label: string;
-  /**
-   * If true, the Accordion item will have a shadow.
-   */
-  hasShadow?: boolean;
   /**
    * Whether the item is expanded by default
    */
@@ -65,12 +61,11 @@ export type AccordionProps = {
       isExpanded?: never;
     }
 ) &
-  AllowedProps;
+  HtmlProps;
 
 const Accordion = ({
   children,
   label,
-  hasShadow = true,
   id: idOverride,
   isDefaultExpanded,
   isDisabled,
@@ -88,7 +83,6 @@ const Accordion = ({
       disableGutters
       expanded={isExpanded}
       onChange={onChange}
-      className={hasShadow ? `hasShadow` : undefined}
     >
       <MuiAccordionSummary
         aria-controls={contentId}
