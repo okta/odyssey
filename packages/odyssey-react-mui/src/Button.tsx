@@ -132,7 +132,10 @@ export type ButtonProps = {
   HtmlProps;
 
 const Button = ({
+  ariaControls,
   ariaDescribedBy,
+  ariaExpanded,
+  ariaHasPopup,
   ariaLabel,
   ariaLabelledBy,
   buttonRef,
@@ -177,9 +180,12 @@ const Button = ({
       return (
         <MuiButton
           {...muiProps}
+          aria-controls={ariaControls}
+          aria-describedby={ariaDescribedBy}
+          aria-expanded={ariaExpanded}
+          aria-haspopup={ariaHasPopup}
           aria-label={ariaLabel}
           aria-labelledby={ariaLabelledBy}
-          aria-describedby={ariaDescribedBy}
           data-se={testId}
           disabled={isDisabled}
           endIcon={endIcon}
@@ -199,7 +205,10 @@ const Button = ({
       );
     },
     [
+      ariaControls,
       ariaDescribedBy,
+      ariaExpanded,
+      ariaHasPopup,
       ariaLabel,
       ariaLabelledBy,
       endIcon,
