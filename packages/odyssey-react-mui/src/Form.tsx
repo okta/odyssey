@@ -10,14 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, ReactElement } from "react";
-
+import { FormEventHandler, memo, ReactElement } from "react";
 import { Box } from "@mui/material";
+
 import { Button } from "./Button";
 import { Callout } from "./Callout";
+import { FieldComponentProps } from "./FieldComponentProps";
+import type { HtmlProps } from "./HtmlProps";
 import { Heading4, Support } from "./Typography";
 import { useUniqueId } from "./useUniqueId";
-import type { HtmlProps } from "./HtmlProps";
 
 export const formEncodingTypeValues = [
   "application/x-www-form-urlencoded",
@@ -77,6 +78,10 @@ export type FormProps = {
    */
   noValidate?: boolean;
   /**
+   * Callback that passes the submit event to the consumer
+   */
+  onSubmit?: FormEventHandler<HTMLFormElement>;
+  /**
    * Indicates where to display the response after submitting the form. It is a name/keyword for a browsing context (for example, tab, window, or iframe).
    * This value can be overridden by a formtarget attribute on a <button>, <input type="submit">, or <input type="image"> element.
    */
@@ -85,7 +90,8 @@ export type FormProps = {
    * The title of the Form
    */
   title?: string;
-} & HtmlProps;
+} & Pick<FieldComponentProps, "isFullWidth"> &
+  HtmlProps;
 
 const Form = ({
   alert,
@@ -95,9 +101,11 @@ const Form = ({
   encodingType,
   formActions,
   id: idOverride,
+  isFullWidth,
   method,
   name,
   noValidate = false,
+  onSubmit,
   target,
   testId,
   title,
@@ -115,9 +123,10 @@ const Form = ({
       method={method}
       name={name}
       noValidate={noValidate}
+      onSubmit={onSubmit}
       target={target}
       sx={{
-        maxWidth: (theme) => theme.mixins.maxWidth,
+        maxWidth: (theme) => (isFullWidth ? "100%" : theme.mixins.maxWidth),
         margin: (theme) => theme.spacing(0),
         padding: (theme) => theme.spacing(0),
       }}
@@ -142,7 +151,7 @@ const Form = ({
           component="div"
           sx={{
             display: "flex",
-            justifyContent: "flex-start",
+            justifyContent: "flex-end",
             gap: (theme) => theme.spacing(1),
             marginBlockStart: (theme) => theme.spacing(7),
           }}
