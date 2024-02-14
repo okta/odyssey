@@ -186,17 +186,16 @@ const storybookMeta: Meta<FormProps> = {
 
 export default storybookMeta;
 
-const Template: StoryObj<FormProps> = {
-  render: function (args) {
-    const { children } = args;
-    return <Form {...args}>{children}</Form>;
-  },
-};
+// const Template: StoryObj<FormProps> = {
+//   render: function (args) {
+//     const { children } = args;
+//     return <Form {...args}>{children}</Form>;
+//   },
+// };
 
 // States
 
 export const Simple: StoryObj<FormProps> = {
-  ...Template,
   args: {
     children: (
       <>
@@ -208,7 +207,6 @@ export const Simple: StoryObj<FormProps> = {
 };
 
 export const Fieldsets: StoryObj<FormProps> = {
-  ...Template,
   args: {
     children: (
       <>
@@ -226,14 +224,12 @@ export const Fieldsets: StoryObj<FormProps> = {
 };
 
 export const Description: StoryObj<FormProps> = {
-  ...Template,
   args: {
     description: "Register your ship before docking with the station.",
   },
 };
 
 export const Alert: StoryObj<FormProps> = {
-  ...Template,
   args: {
     alert: (
       <Callout severity="error" role="alert" title="Something went wrong">
@@ -244,7 +240,6 @@ export const Alert: StoryObj<FormProps> = {
 };
 
 export const FullWidth: StoryObj<FormProps> = {
-  ...Template,
   args: {
     isFullWidth: true,
     children: (
@@ -257,7 +252,6 @@ export const FullWidth: StoryObj<FormProps> = {
 };
 
 export const KitchenSink: StoryObj<FormProps> = {
-  ...Template,
   args: {
     alert: (
       <Callout severity="error" role="alert" title="Something went wrong">
