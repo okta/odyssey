@@ -754,7 +754,7 @@ export const components = ({
           },
 
           [`& .${typographyClasses.h5}`]: {
-            lineHeight: 1.3,
+            lineHeight: odysseyTokens.TypographyLineHeightHeading5,
             marginBottom: odysseyTokens.Spacing3,
           },
 
@@ -762,15 +762,15 @@ export const components = ({
             marginBottom: odysseyTokens.Spacing1,
             textTransform: "uppercase",
             fontWeight: odysseyTokens.TypographyWeightBodyBold,
-            fontSize: 10,
-            lineHeight: 1.3,
+            fontSize: odysseyTokens.TypographySizeOverline,
+            lineHeight: odysseyTokens.TypographyLineHeightOverline,
             color: odysseyTokens.TypographyColorSubordinate,
             letterSpacing: 1.3,
           },
 
           [`& .${typographyClasses.body1}`]: {
             fontSize: odysseyTokens.TypographySizeSubordinate,
-            lineHeight: 1.5,
+            lineHeight: odysseyTokens.TypographyLineHeightBody,
           },
         }),
       },

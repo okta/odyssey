@@ -78,9 +78,7 @@ export const Default: StoryObj = {
     return (
       <Box sx={{ maxWidth: 262 }}>
         <Tile
-          title={props.title}
-          description={props.description}
-          overline={props.overline}
+          {...props}
           image={<img src="https://placehold.co/128" alt="Example logo" />}
           menuItems={
             <>
@@ -109,9 +107,7 @@ export const Clickable: StoryObj = {
     return (
       <Box sx={{ maxWidth: 262 }}>
         <Tile
-          title={props.title}
-          description={props.description}
-          overline={props.overline}
+          {...props}
           image={<img src="https://placehold.co/128" alt="Example logo" />}
           onClick={onClick}
         />
@@ -132,12 +128,7 @@ export const ClickableWithoutImage: StoryObj = {
 
     return (
       <Box sx={{ maxWidth: 262 }}>
-        <Tile
-          title={props.title}
-          description={props.description}
-          overline={props.overline}
-          onClick={onClick}
-        />
+        <Tile {...props} onClick={onClick} />
       </Box>
     );
   },
@@ -151,12 +142,7 @@ export const ButtonWithoutImage: StoryObj = {
   }) {
     return (
       <Box sx={{ maxWidth: 262 }}>
-        <Tile
-          title={props.title}
-          description={props.description}
-          overline={props.overline}
-          button={<Button variant="primary" label="Button" />}
-        />
+        <Tile {...props} button={<Button variant="primary" label="Button" />} />
       </Box>
     );
   },

@@ -19,6 +19,7 @@ import {
   ReactElement,
   useCallback,
   useImperativeHandle,
+  useMemo,
   useRef,
 } from "react";
 
@@ -156,9 +157,11 @@ const Button = ({
   const muiProps = useMuiProps();
   const localButtonRef = useRef<HTMLButtonElement>(null);
   const buttonContext = useButton();
-  const isFullWidth = buttonContext.isFullWidth
-    ? buttonContext.isFullWidth
-    : isFullWidthProp;
+  const isFullWidth = useMemo(
+    () =>
+      buttonContext.isFullWidth ? buttonContext.isFullWidth : isFullWidthProp,
+    [buttonContext, isFullWidthProp]
+  );
 
   useImperativeHandle(
     buttonRef,

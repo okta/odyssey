@@ -56,7 +56,7 @@ const ImageContainer = styled.div<{
 }>`
   display: flex;
   align-items: flex-start;
-  max-height: 4.5714285714rem;
+  max-height: 64px;
   margin-block-end: ${(props) => props.odysseyDesignTokens.Spacing5};
   padding-right: ${(props) =>
     props.hasMenuItems ? props.odysseyDesignTokens.Spacing5 : 0};
@@ -85,7 +85,7 @@ const Tile = ({
         {image && (
           <ImageContainer
             odysseyDesignTokens={odysseyDesignTokens}
-            hasMenuItems={menuItems ? true : false}
+            hasMenuItems={Boolean(menuItems)}
           >
             {image}
           </ImageContainer>
