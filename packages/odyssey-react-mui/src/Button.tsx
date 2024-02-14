@@ -205,7 +205,10 @@ const Button = ({
       );
     },
     [
+      ariaControls,
       ariaDescribedBy,
+      ariaExpanded,
+      ariaHasPopup,
       ariaLabel,
       ariaLabelledBy,
       endIcon,
