@@ -62,14 +62,12 @@ export const components = ({
       styleOverrides: {
         root: () => ({
           backgroundColor: odysseyTokens.HueNeutralWhite,
-          borderWidth: 1,
-          borderInlineStyle: "solid",
-          borderColor: odysseyTokens.HueNeutral100,
+          border: 0,
+          borderBottomColor: odysseyTokens.BorderColorDisplay,
+          borderBottomStyle: "solid",
+          borderBottomWidth: odysseyTokens.BorderWidthMain,
+          borderRadius: 0,
           boxShadow: "none",
-
-          "&.hasShadow": {
-            boxShadow: odysseyTokens.DepthLow,
-          },
 
           "&.Mui-disabled": {
             backgroundColor: odysseyTokens.HueNeutralWhite,
@@ -81,21 +79,18 @@ export const components = ({
             },
           },
 
-          "&::before": {
-            backgroundColor: odysseyTokens.BorderColorDisplay,
-            opacity: "1 !important",
-          },
-
           "&:first-of-type": {
-            borderTopLeftRadius: odysseyTokens.BorderRadiusMain,
-            borderTopRightRadius: odysseyTokens.BorderRadiusMain,
-            borderBlockStartStyle: "solid",
+            borderRadius: 0,
+            borderTopColor: odysseyTokens.BorderColorDisplay,
+            borderTopStyle: "solid",
+            borderTopWidth: odysseyTokens.BorderWidthMain,
           },
 
           "&:last-of-type": {
-            borderBottomLeftRadius: odysseyTokens.BorderRadiusMain,
-            borderBottomRightRadius: odysseyTokens.BorderRadiusMain,
-            borderBlockEndStyle: "solid",
+            borderRadius: 0,
+            borderBottomColor: odysseyTokens.BorderColorDisplay,
+            borderBottomStyle: "solid",
+            borderBottomWidth: odysseyTokens.BorderWidthMain,
           },
         }),
       },
@@ -106,26 +101,12 @@ export const components = ({
           paddingBlock: odysseyTokens.Spacing4,
           paddingInline: odysseyTokens.Spacing3,
 
-          ".MuiAccordion-root:first-of-type &": {
-            borderTopLeftRadius: odysseyTokens.BorderRadiusMain,
-            borderTopRightRadius: odysseyTokens.BorderRadiusMain,
-          },
-
-          ".MuiAccordion-root:last-of-type &": {
-            borderBottomLeftRadius: odysseyTokens.BorderRadiusMain,
-            borderBottomRightRadius: odysseyTokens.BorderRadiusMain,
-          },
-
-          ".MuiAccordion-root.Mui-expanded &": {
-            borderBottomLeftRadius: 0,
-            borderBottomRightRadius: 0,
-          },
-
-          "&:hover, &:focus": {
+          "&:hover": {
             backgroundColor: odysseyTokens.HueNeutral50,
           },
 
           "&:focus-visible": {
+            backgroundColor: odysseyTokens.HueNeutral50,
             outlineColor: odysseyTokens.PalettePrimaryMain,
             outlineWidth: 2,
             outlineStyle: "solid",
