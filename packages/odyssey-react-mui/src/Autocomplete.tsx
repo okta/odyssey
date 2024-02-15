@@ -385,29 +385,34 @@ const Autocomplete = <
     // The number of items (rows or columns) to render outside of the visible area for performance and scrolling reasons
     const overscanRowCount = 8;
 
+    const itemSize = useCallback(() => optionHeight, []);
+
     const gridRef = useResetCache(itemData.length);
+
+    const renderWindow = useCallback(
+      ({ height, width }) => (
+        <VariableSizeList
+          innerElementType="ul"
+          itemData={itemData}
+          itemCount={itemData.length}
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          itemSize={itemSize}
+          height={height}
+          width={width}
+          ref={gridRef}
+          outerElementType={OuterListboxElementType}
+          overscanCount={overscanRowCount}
+        >
+          {renderVirtualizedRow}
+        </VariableSizeList>
+      ),
+      [itemData, gridRef, itemSize]
+    );
 
     return (
       <ListboxContainer ref={ref}>
         <OuterListboxContext.Provider value={other}>
-          <AutoSizer>
-            {({ height, width }) => (
-              <VariableSizeList
-                innerElementType="ul"
-                itemData={itemData}
-                itemCount={itemData.length}
-                // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                itemSize={() => optionHeight}
-                height={height}
-                width={width}
-                ref={gridRef}
-                outerElementType={OuterListboxElementType}
-                overscanCount={overscanRowCount}
-              >
-                {renderVirtualizedRow}
-              </VariableSizeList>
-            )}
-          </AutoSizer>
+          <AutoSizer>{renderWindow}</AutoSizer>
         </OuterListboxContext.Provider>
       </ListboxContainer>
     );
