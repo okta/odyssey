@@ -340,10 +340,8 @@ const Select = <
               }
               tabIndex={-1}
               onDelete={
-                isPlaceholder
-                  ? controlledStateRef.current === CONTROLLED
-                    ? () => removeSelection(item)
-                    : undefined
+                isPlaceholder && controlledStateRef.current === CONTROLLED
+                  ? () => removeSelection(item)
                   : undefined
               }
               deleteIcon={
