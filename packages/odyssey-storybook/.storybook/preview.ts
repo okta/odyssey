@@ -67,7 +67,7 @@ const preview: Preview = {
     actions: { argTypesRegex: "^on[A-Z].*" },
     options: {
       storySort: {
-        method: "",
+        method: "alphabetical",
         order: [
           "Welcome",
           ["Introduction (README)", "Docs Status"],
@@ -90,8 +90,12 @@ const preview: Preview = {
       // default: "white",
       values: [
         {
-          name: "Page Background",
+          name: "White",
           value: "#ffffff",
+        },
+        {
+          name: "Gray",
+          value: "#f4f4f4",
         },
         {
           name: "Page Background (dark)",
