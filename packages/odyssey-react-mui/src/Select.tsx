@@ -33,7 +33,7 @@ import { SelectProps as MuiSelectProps } from "@mui/material";
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import { CheckIcon } from "./icons.generated";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 import {
   ComponentControlledState,
   FocusHandle,
@@ -109,7 +109,7 @@ export type SelectProps<
   | "isOptional"
   | "name"
 > &
-  AllowedProps;
+  HtmlProps;
 
 /**
  * Options in Odyssey <Select> are passed as an array, which can contain any combination
@@ -288,11 +288,13 @@ const Select = <
               />
             )}
             {option.text}
-            {internalSelectedValues === option?.value && (
-              <ListItemSecondaryAction>
-                <CheckIcon />
-              </ListItemSecondaryAction>
-            )}
+            {!hasMultipleChoices &&
+              (internalSelectedValues?.includes(option.value) ||
+                internalSelectedValues === option.value) && (
+                <ListItemSecondaryAction>
+                  <CheckIcon />
+                </ListItemSecondaryAction>
+              )}
           </MenuItem>
         );
       }),

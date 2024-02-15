@@ -17,14 +17,14 @@ import { ScreenReaderText } from "./ScreenReaderText";
 import { ErrorMessageList } from "./ErrorMessageList";
 import { useTranslation } from "react-i18next";
 
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 import { Box } from "./Box";
 
 export type FieldErrorProps = {
   id?: string;
   message?: string;
   messageList?: string[];
-} & AllowedProps;
+} & HtmlProps;
 
 const FieldError = ({
   id,

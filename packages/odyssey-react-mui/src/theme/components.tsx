@@ -62,14 +62,12 @@ export const components = ({
       styleOverrides: {
         root: () => ({
           backgroundColor: odysseyTokens.HueNeutralWhite,
-          borderWidth: 1,
-          borderInlineStyle: "solid",
-          borderColor: odysseyTokens.HueNeutral100,
+          border: 0,
+          borderBottomColor: odysseyTokens.BorderColorDisplay,
+          borderBottomStyle: "solid",
+          borderBottomWidth: odysseyTokens.BorderWidthMain,
+          borderRadius: 0,
           boxShadow: "none",
-
-          "&.hasShadow": {
-            boxShadow: odysseyTokens.DepthLow,
-          },
 
           "&.Mui-disabled": {
             backgroundColor: odysseyTokens.HueNeutralWhite,
@@ -81,21 +79,18 @@ export const components = ({
             },
           },
 
-          "&::before": {
-            backgroundColor: odysseyTokens.BorderColorDisplay,
-            opacity: "1 !important",
-          },
-
           "&:first-of-type": {
-            borderTopLeftRadius: odysseyTokens.BorderRadiusMain,
-            borderTopRightRadius: odysseyTokens.BorderRadiusMain,
-            borderBlockStartStyle: "solid",
+            borderRadius: 0,
+            borderTopColor: odysseyTokens.BorderColorDisplay,
+            borderTopStyle: "solid",
+            borderTopWidth: odysseyTokens.BorderWidthMain,
           },
 
           "&:last-of-type": {
-            borderBottomLeftRadius: odysseyTokens.BorderRadiusMain,
-            borderBottomRightRadius: odysseyTokens.BorderRadiusMain,
-            borderBlockEndStyle: "solid",
+            borderRadius: 0,
+            borderBottomColor: odysseyTokens.BorderColorDisplay,
+            borderBottomStyle: "solid",
+            borderBottomWidth: odysseyTokens.BorderWidthMain,
           },
         }),
       },
@@ -106,26 +101,12 @@ export const components = ({
           paddingBlock: odysseyTokens.Spacing4,
           paddingInline: odysseyTokens.Spacing3,
 
-          ".MuiAccordion-root:first-of-type &": {
-            borderTopLeftRadius: odysseyTokens.BorderRadiusMain,
-            borderTopRightRadius: odysseyTokens.BorderRadiusMain,
-          },
-
-          ".MuiAccordion-root:last-of-type &": {
-            borderBottomLeftRadius: odysseyTokens.BorderRadiusMain,
-            borderBottomRightRadius: odysseyTokens.BorderRadiusMain,
-          },
-
-          ".MuiAccordion-root.Mui-expanded &": {
-            borderBottomLeftRadius: 0,
-            borderBottomRightRadius: 0,
-          },
-
-          "&:hover, &:focus": {
+          "&:hover": {
             backgroundColor: odysseyTokens.HueNeutral50,
           },
 
           "&:focus-visible": {
+            backgroundColor: odysseyTokens.HueNeutral50,
             outlineColor: odysseyTokens.PalettePrimaryMain,
             outlineWidth: 2,
             outlineStyle: "solid",
@@ -540,6 +521,7 @@ export const components = ({
           paddingBlock: odysseyTokens.Spacing3,
           paddingInline: odysseyTokens.Spacing4,
           display: "inline-flex",
+          height: odysseyTokens.Spacing7,
           position: "relative",
           marginBlock: "0",
           marginInline: "0",
@@ -552,7 +534,7 @@ export const components = ({
           borderRadius: odysseyTokens.BorderRadiusMain,
           borderColor: "transparent",
           fontSize: odysseyTokens.TypographySizeBody,
-          fontWeight: odysseyTokens.TypographyWeightBodyBold,
+          fontWeight: odysseyTokens.TypographyWeightHeading,
           fontFamily: odysseyTokens.TypographyFamilyButton,
           lineHeight: odysseyTokens.TypographyLineHeightUi,
           whiteSpace: "nowrap",
@@ -617,26 +599,6 @@ export const components = ({
             },
           }),
 
-          ...(ownerState.variant === "tertiary" && {
-            backgroundColor: odysseyTokens.HueNeutral100,
-            color: odysseyTokens.HueNeutral700,
-
-            "&:hover": {
-              backgroundColor: odysseyTokens.HueNeutral200,
-              color: odysseyTokens.HueNeutral800,
-            },
-
-            "&:active": {
-              backgroundColor: odysseyTokens.HueNeutral300,
-              color: odysseyTokens.HueNeutral800,
-            },
-
-            "&:disabled": {
-              backgroundColor: odysseyTokens.HueNeutral100,
-              color: odysseyTokens.TypographyColorDisabled,
-            },
-          }),
-
           ...(ownerState.variant === "danger" && {
             backgroundColor: odysseyTokens.PaletteDangerMain,
             color: odysseyTokens.HueNeutralWhite,
@@ -676,16 +638,17 @@ export const components = ({
             },
           }),
           ...(ownerState.size === "small" && {
+            height: odysseyTokens.Spacing6,
             paddingBlock: odysseyTokens.Spacing2,
             paddingInline: odysseyTokens.Spacing3,
             fontSize: odysseyTokens.TypographySizeBody,
           }),
           ...(ownerState.size === "large" && {
+            height: odysseyTokens.Spacing8,
             paddingBlock: odysseyTokens.Spacing4,
             paddingInline: odysseyTokens.Spacing4,
           }),
           ...(ownerState.fullWidth === true && {
-            display: "block",
             width: "100%",
             marginBlock: "0",
             marginInline: "0",
@@ -704,6 +667,10 @@ export const components = ({
 
             ...(ownerState.size === "small" && {
               padding: odysseyTokens.Spacing2,
+            }),
+
+            ...(ownerState.size === "large" && {
+              padding: odysseyTokens.Spacing4,
             }),
           }),
         }),
@@ -734,6 +701,70 @@ export const components = ({
         disableRipple: true,
       },
     },
+    MuiCard: {
+      styleOverrides: {
+        root: () => ({
+          backgroundColor: odysseyTokens.HueNeutralWhite,
+          borderRadius: odysseyTokens.BorderRadiusOuter,
+          boxShadow: odysseyTokens.DepthMedium,
+          padding: odysseyTokens.Spacing5,
+          position: "relative",
+          transition: `all ${odysseyTokens.TransitionDurationMain} ${odysseyTokens.TransitionTimingMain}`,
+
+          "& img": {
+            height: "64px",
+          },
+
+          "&.isClickable:hover": {
+            backgroundColor: odysseyTokens.HueNeutral50,
+            boxShadow: odysseyTokens.DepthHigh,
+          },
+
+          [`& .${typographyClasses.h5}`]: {
+            lineHeight: odysseyTokens.TypographyLineHeightHeading5,
+            marginBottom: odysseyTokens.Spacing3,
+          },
+
+          [`& .${typographyClasses.subtitle2}`]: {
+            marginBottom: odysseyTokens.Spacing1,
+            textTransform: "uppercase",
+            fontWeight: odysseyTokens.TypographyWeightBodyBold,
+            fontSize: odysseyTokens.TypographySizeOverline,
+            lineHeight: odysseyTokens.TypographyLineHeightOverline,
+            color: odysseyTokens.TypographyColorSubordinate,
+            letterSpacing: 1.3,
+          },
+
+          [`& .${typographyClasses.body1}`]: {
+            fontSize: odysseyTokens.TypographySizeSubordinate,
+            lineHeight: odysseyTokens.TypographyLineHeightBody,
+          },
+        }),
+      },
+    },
+    MuiCardActionArea: {
+      styleOverrides: {
+        root: () => ({
+          margin: `-${odysseyTokens.Spacing5}`,
+          padding: odysseyTokens.Spacing5,
+          width: `calc(100% + (${odysseyTokens.Spacing5} * 2))`,
+
+          "&:hover": {
+            "& .MuiCardActionArea-focusHighlight": {
+              display: "none",
+            },
+          },
+        }),
+      },
+    },
+    MuiCardActions: {
+      styleOverrides: {
+        root: () => ({
+          marginBlockStart: odysseyTokens.Spacing5,
+          padding: 0,
+        }),
+      },
+    },
     MuiCheckbox: {
       defaultProps: {
         size: "small",
@@ -744,6 +775,7 @@ export const components = ({
       styleOverrides: {
         root: ({ theme }) => ({
           width: `${odysseyTokens.TypographyLineHeightUi}em`,
+          minWidth: `${odysseyTokens.TypographyLineHeightUi}em`,
           height: `${odysseyTokens.TypographyLineHeightUi}em`,
           borderRadius: odysseyTokens.BorderRadiusTight,
           borderWidth: odysseyTokens.BorderWidthMain,
@@ -1544,6 +1576,9 @@ export const components = ({
           "&.Mui-disabled": {
             pointerEvents: "none",
           },
+          [`:has(> .${radioClasses.root})`]: {
+            alignItems: "flex-start",
+          },
           [`& .${checkboxClasses.root}`]: {
             marginBlockStart: 0,
           },
@@ -2059,6 +2094,7 @@ export const components = ({
       styleOverrides: {
         root: ({ theme }) => ({
           width: `${odysseyTokens.TypographyLineHeightUi}em`,
+          minWidth: `${odysseyTokens.TypographyLineHeightUi}em`,
           height: `${odysseyTokens.TypographyLineHeightUi}em`,
           borderRadius: `${odysseyTokens.TypographyLineHeightUi}em`,
           borderWidth: odysseyTokens.BorderWidthMain,

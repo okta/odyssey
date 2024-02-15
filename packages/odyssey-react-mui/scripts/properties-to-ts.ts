@@ -52,7 +52,7 @@ async function convertPropertiesToJson({
   jsonOutputPath,
   propertiesFilesPath,
 }: {
-  resourcjsonOutputPathePath: string;
+  jsonOutputPath: string;
   propertiesFilesPath: string;
 }) {
   const sourceDirectory = resolve(propertiesFilesPath);

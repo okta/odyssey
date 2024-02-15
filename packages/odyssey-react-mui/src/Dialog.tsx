@@ -29,7 +29,7 @@ import {
   ReactElement,
 } from "react";
 
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 
 export type DialogProps = {
   /**
@@ -64,7 +64,7 @@ export type DialogProps = {
    * The title of the Dialog
    */
   title: string;
-} & AllowedProps;
+} & HtmlProps;
 
 const Dialog = ({
   callToActionFirstComponent,

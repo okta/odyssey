@@ -26,7 +26,9 @@ import {
   Paragraph,
   TextField,
 } from "@okta/odyssey-react-mui";
+
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 
 const storybookMeta: Meta<FormProps> = {
   title: "MUI Components/Forms/Form",
@@ -84,6 +86,7 @@ const storybookMeta: Meta<FormProps> = {
         },
       },
     },
+    isFullWidth: fieldComponentPropsMetaData.isFullWidth,
     name: {
       control: "text",
       description:
@@ -172,8 +175,8 @@ const storybookMeta: Meta<FormProps> = {
     ),
     formActions: (
       <>
-        <Button label="Submit" variant="primary" />
         <Button label="Reset" variant="secondary" />
+        <Button type="submit" label="Submit" variant="primary" />
       </>
     ),
   },
@@ -183,32 +186,9 @@ const storybookMeta: Meta<FormProps> = {
 
 export default storybookMeta;
 
-const Template: StoryObj<FormProps> = {
-  render: function (args) {
-    return (
-      <Form
-        title={args.title}
-        name={args.name}
-        description={args.description}
-        formActions={args.formActions}
-        alert={args.alert}
-        autoCompleteType={args.autoCompleteType}
-        encodingType={args.encodingType}
-        method={args.method}
-        noValidate={args.noValidate}
-        target={args.target}
-        id={args.id}
-      >
-        {args.children}
-      </Form>
-    );
-  },
-};
-
 // States
 
 export const Simple: StoryObj<FormProps> = {
-  ...Template,
   args: {
     children: (
       <>
@@ -220,7 +200,6 @@ export const Simple: StoryObj<FormProps> = {
 };
 
 export const Fieldsets: StoryObj<FormProps> = {
-  ...Template,
   args: {
     children: (
       <>
@@ -238,14 +217,12 @@ export const Fieldsets: StoryObj<FormProps> = {
 };
 
 export const Description: StoryObj<FormProps> = {
-  ...Template,
   args: {
     description: "Register your ship before docking with the station.",
   },
 };
 
 export const Alert: StoryObj<FormProps> = {
-  ...Template,
   args: {
     alert: (
       <Callout severity="error" role="alert" title="Something went wrong">
@@ -255,8 +232,19 @@ export const Alert: StoryObj<FormProps> = {
   },
 };
 
+export const FullWidth: StoryObj<FormProps> = {
+  args: {
+    isFullWidth: true,
+    children: (
+      <>
+        <TextField isFullWidth label="Vessel name" />
+        <TextField isFullWidth isMultiline label="Reason for visit" />
+      </>
+    ),
+  },
+};
+
 export const KitchenSink: StoryObj<FormProps> = {
-  ...Template,
   args: {
     alert: (
       <Callout severity="error" role="alert" title="Something went wrong">

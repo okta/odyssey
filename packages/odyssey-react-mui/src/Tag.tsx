@@ -14,7 +14,7 @@ import { Chip as MuiChip, ChipProps as MuiChipProps } from "@mui/material";
 import { memo, ReactElement, useCallback, useContext } from "react";
 import { TagListContext } from "./TagListContext";
 import { MuiPropsContext } from "./MuiPropsContext";
-import { AllowedProps } from "./AllowedProps";
+import { HtmlProps } from "./HtmlProps";
 
 export type TagProps = {
   icon?: ReactElement;
@@ -31,7 +31,7 @@ export type TagProps = {
    * Callback fired when the remove button of the Tag is clicked
    */
   onRemove?: MuiChipProps["onDelete"];
-} & AllowedProps;
+} & HtmlProps;
 
 const Tag = ({
   icon,
