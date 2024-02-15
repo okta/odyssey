@@ -6430,7 +6430,6 @@ __metadata:
     react: ^17.0.2
     react-dom: ^17.0.2
     react-i18next: ^12.2.2
-    recursive-readdir: ^2.2.2
     regenerator-runtime: ^0.13.7
     rimraf: ^5.0.1
     stylelint: ^14.13.0
@@ -24095,15 +24094,6 @@ __metadata:
   dependencies:
     resolve: ^1.1.6
   checksum: fe76bf9c21875ac16e235defedd7cbd34f333c02a92546142b7911a0f7c7059d2e16f441fe6fb9ae203f459c05a31b2bcf26202896d89e390eda7514d5d2702b
-  languageName: node
-  linkType: hard
-
-"recursive-readdir@npm:^2.2.2":
-  version: 2.2.3
-  resolution: "recursive-readdir@npm:2.2.3"
-  dependencies:
-    minimatch: ^3.0.5
-  checksum: 88ec96e276237290607edc0872b4f9842837b95cfde0cdbb1e00ba9623dfdf3514d44cdd14496ab60a0c2dd180a6ef8a3f1c34599e6cf2273afac9b72a6fb2b5
   languageName: node
   linkType: hard
 
