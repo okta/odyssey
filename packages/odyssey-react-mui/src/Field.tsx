@@ -141,7 +141,7 @@ const Field = ({
       fullWidth={isFullWidth}
     >
       {fieldType === "group" ? (
-        <MuiFormLabel component="legend">
+        <MuiFormLabel component="legend" id={labelElementId}>
           {label}{" "}
           {isOptional && label && (
             <Typography component="span" color="textSecondary">
