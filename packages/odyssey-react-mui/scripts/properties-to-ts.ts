@@ -33,15 +33,12 @@ const convert = (baseFiles: string[], propertiesTargetDir: string) => {
     const filename = basename(src, extension);
     const source = `${readFileSync(src)}`;
 
-    properties.parse(source, function (error, propertiesJson) {
+    properties.parse(source, (error, propertiesJson) => {
       if (error) {
         return console.error(error);
       }
 
-      const targetFile = join(
-        propertiesTargetDir,
-        filename.concat(".ts")
-      );
+      const targetFile = join(propertiesTargetDir, filename.concat(".ts"));
 
       writeFileSync(
         targetFile,
