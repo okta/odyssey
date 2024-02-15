@@ -87,4 +87,3 @@ export * from "./User";
 export * from "./Video";
 export * from "./Warning";
 export * from "./WarningFilled";
-export * from "./index";
