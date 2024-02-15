@@ -120,7 +120,7 @@ const storybookMeta: Meta<TileProps> = {
 export default storybookMeta;
 
 export const Default: StoryObj<TileProps> = {
-  render: (props) => (
+  render: ({ ...props }) => (
     <Box sx={{ maxWidth: 262 }}>
       <Tile
         {...props}
