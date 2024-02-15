@@ -19,6 +19,7 @@ import {
   ReactElement,
   useCallback,
   useImperativeHandle,
+  useMemo,
   useRef,
 } from "react";
 
@@ -26,6 +27,7 @@ import { MuiPropsContext, useMuiProps } from "./MuiPropsContext";
 import { Tooltip } from "./Tooltip";
 import type { HtmlProps } from "./HtmlProps";
 import { FocusHandle } from "./inputUtils";
+import { useButton } from "./ButtonContext";
 
 export const buttonSizeValues = ["small", "medium", "large"] as const;
 export const buttonTypeValues = ["button", "submit", "reset"] as const;
@@ -142,7 +144,7 @@ const Button = ({
   endIcon,
   id,
   isDisabled,
-  isFullWidth,
+  isFullWidth: isFullWidthProp,
   label = "",
   onClick,
   size = "medium",
@@ -160,6 +162,12 @@ const Button = ({
   // "secondary" in lieu of making a breaking change
   const variant = variantProp === "tertiary" ? "secondary" : variantProp;
   const localButtonRef = useRef<HTMLButtonElement>(null);
+  const buttonContext = useButton();
+  const isFullWidth = useMemo(
+    () =>
+      buttonContext.isFullWidth ? buttonContext.isFullWidth : isFullWidthProp,
+    [buttonContext, isFullWidthProp]
+  );
 
   useImperativeHandle(
     buttonRef,
