@@ -49,14 +49,14 @@ const convert = (baseFiles: string[], propertiesTargetDir: string) => {
 };
 
 async function convertPropertiesToJson({
-  resourcePath,
-  targetJsonPath,
+  jsonOutputPath,
+  propertiesFilesPath,
 }: {
-  resourcePath: string;
-  targetJsonPath: string;
+  resourcjsonOutputPathePath: string;
+  propertiesFilesPath: string;
 }) {
-  const sourceDirectory = resolve(resourcePath);
-  const propertiesTargetDirectory = resolve(targetJsonPath);
+  const sourceDirectory = resolve(propertiesFilesPath);
+  const propertiesTargetDirectory = resolve(jsonOutputPath);
 
   if (!existsSync(sourceDirectory)) {
     mkdirSync(sourceDirectory);
@@ -86,24 +86,24 @@ yargs(hideBin(process.argv))
   .scriptName("properties-to-ts")
   .usage("$0 <cmd> [args]")
   .command(
-    "bundle [resourcePath] [targetJsonPath]",
+    "bundle [propertiesFilesPath] [jsonOutputPath]",
     "Converts `properties` files to TypeScript types.",
     (yargs) =>
       yargs
-        .positional("resourcePath", {
+        .positional("propertiesFilesPath", {
           default: "src/properties",
           describe: "A relative path to resources based on cwd.",
           type: "string",
         })
-        .positional("targetJsonPath", {
+        .positional("jsonOutputPath", {
           default: "src/properties/ts",
           describe: "A relative path to directory for ts file output",
           type: "string",
         }),
     (argv) => {
       convertPropertiesToJson({
-        resourcePath: argv.resourcePath,
-        targetJsonPath: argv.targetJsonPath,
+        jsonOutputPath: argv.jsonOutputPath,
+        propertiesFilesPath: argv.propertiesFilesPath,
       });
     }
   )
