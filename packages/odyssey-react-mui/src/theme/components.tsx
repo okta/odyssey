@@ -36,6 +36,8 @@ import { tableRowClasses } from "@mui/material/TableRow";
 import { tooltipClasses } from "@mui/material/Tooltip";
 import { typographyClasses } from "@mui/material/Typography";
 
+import { TILE_IMAGE_HEIGHT } from "../Tile";
+
 import {
   CheckCircleFilledIcon,
   CheckIcon,
@@ -712,7 +714,7 @@ export const components = ({
           transition: `all ${odysseyTokens.TransitionDurationMain} ${odysseyTokens.TransitionTimingMain}`,
 
           "& img": {
-            height: "64px",
+            height: TILE_IMAGE_HEIGHT,
           },
 
           "&.isClickable:hover": {

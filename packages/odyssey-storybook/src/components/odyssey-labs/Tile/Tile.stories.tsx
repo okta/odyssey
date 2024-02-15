@@ -12,15 +12,21 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { Box, Button, Tile, MenuItem } from "@okta/odyssey-react-mui";
+import {
+  Box,
+  Button,
+  Tile,
+  MenuItem,
+  TileProps,
+} from "@okta/odyssey-react-mui";
 
-const storybookMeta: Meta = {
+const storybookMeta: Meta<TileProps> = {
   title: "Labs Components/Tile",
   component: Tile,
   argTypes: {
     title: {
       control: "text",
-      description: "",
+      description: "The heading of the tile.",
       table: {
         type: {
           summary: "string",
@@ -30,7 +36,8 @@ const storybookMeta: Meta = {
     },
     description: {
       control: "text",
-      description: "",
+      description:
+        "The body text of the tile. The consumer is responsible for truncating this string.",
       table: {
         type: {
           summary: "string",
@@ -40,10 +47,53 @@ const storybookMeta: Meta = {
     },
     overline: {
       control: "text",
-      description: "",
+      description: 'The "eyebrow" text above the tile title.',
       table: {
         type: {
           summary: "string",
+        },
+        defaultValue: "",
+      },
+    },
+    image: {
+      control: null,
+      description:
+        "An optional image or icon at the top of the tile, preferably as an img or svg element.",
+      table: {
+        type: {
+          summary: "ReactElement",
+        },
+        defaultValue: "",
+      },
+    },
+    onClick: {
+      control: null,
+      description: "The event handler for when the user clicks the tile.",
+      table: {
+        type: {
+          summary: "MouseEventHandler",
+        },
+        defaultValue: "",
+      },
+    },
+    button: {
+      control: null,
+      description:
+        "The main action button for the tile. Not valid if the tile itself is clickable.",
+      table: {
+        type: {
+          summary: "ReactElement<typeof Button>",
+        },
+        defaultValue: "",
+      },
+    },
+    menuButtonChildren: {
+      control: null,
+      description:
+        "Menu items to be rendered in the tile's optional menu button. If this prop is undefined, the menu button will not be shown.Not valid if the tile itself is clickable.",
+      table: {
+        type: {
+          summary: "[MenuItem | Divider | ListSubheader]",
         },
         defaultValue: "",
       },
@@ -69,37 +119,27 @@ const storybookMeta: Meta = {
 
 export default storybookMeta;
 
-export const Default: StoryObj = {
-  render: function C(props: {
-    title?: string;
-    description?: string;
-    overline?: string;
-  }) {
-    return (
-      <Box sx={{ maxWidth: 262 }}>
-        <Tile
-          {...props}
-          image={<img src="https://placehold.co/128" alt="Example logo" />}
-          menuItems={
-            <>
-              <MenuItem>Menu option</MenuItem>
-              <MenuItem>Menu option</MenuItem>
-              <MenuItem>Menu option</MenuItem>
-            </>
-          }
-          button={<Button variant="primary" label="Button" />}
-        />
-      </Box>
-    );
-  },
+export const Default: StoryObj<TileProps> = {
+  render: (props) => (
+    <Box sx={{ maxWidth: 262 }}>
+      <Tile
+        {...props}
+        image={<img src="https://placehold.co/128" alt="Example logo" />}
+        menuButtonChildren={
+          <>
+            <MenuItem>Menu option</MenuItem>
+            <MenuItem>Menu option</MenuItem>
+            <MenuItem>Menu option</MenuItem>
+          </>
+        }
+        button={<Button variant="primary" label="Button" />}
+      />
+    </Box>
+  ),
 };
 
-export const Clickable: StoryObj = {
-  render: function C(props: {
-    title?: string;
-    description?: string;
-    overline?: string;
-  }) {
+export const Clickable: StoryObj<TileProps> = {
+  render: ({ ...props }) => {
     const onClick = () => {
       alert("Clicked!");
     };
@@ -116,12 +156,8 @@ export const Clickable: StoryObj = {
   },
 };
 
-export const ClickableWithoutImage: StoryObj = {
-  render: function C(props: {
-    title?: string;
-    description?: string;
-    overline?: string;
-  }) {
+export const ClickableWithoutImage: StoryObj<TileProps> = {
+  render: ({ ...props }) => {
     const onClick = () => {
       alert("Clicked!");
     };
@@ -134,16 +170,10 @@ export const ClickableWithoutImage: StoryObj = {
   },
 };
 
-export const ButtonWithoutImage: StoryObj = {
-  render: function C(props: {
-    title?: string;
-    description?: string;
-    overline?: string;
-  }) {
-    return (
-      <Box sx={{ maxWidth: 262 }}>
-        <Tile {...props} button={<Button variant="primary" label="Button" />} />
-      </Box>
-    );
-  },
+export const ButtonWithoutImage: StoryObj<typeof Tile> = {
+  render: ({ ...props }) => (
+    <Box sx={{ maxWidth: 262 }}>
+      <Tile {...props} />
+    </Box>
+  ),
 };

@@ -19,7 +19,6 @@ import {
   ReactElement,
   useCallback,
   useImperativeHandle,
-  useMemo,
   useRef,
 } from "react";
 
@@ -144,7 +143,7 @@ const Button = ({
   endIcon,
   id,
   isDisabled,
-  isFullWidth: isFullWidthProp,
+  isFullWidth,
   label = "",
   onClick,
   size = "medium",
@@ -163,11 +162,6 @@ const Button = ({
   const variant = variantProp === "tertiary" ? "secondary" : variantProp;
   const localButtonRef = useRef<HTMLButtonElement>(null);
   const buttonContext = useButton();
-  const isFullWidth = useMemo(
-    () =>
-      buttonContext.isFullWidth ? buttonContext.isFullWidth : isFullWidthProp,
-    [buttonContext, isFullWidthProp]
-  );
 
   useImperativeHandle(
     buttonRef,
@@ -197,7 +191,9 @@ const Button = ({
           data-se={testId}
           disabled={isDisabled}
           endIcon={endIcon}
-          fullWidth={isFullWidth}
+          fullWidth={
+            buttonContext.isFullWidth ? buttonContext.isFullWidth : isFullWidth
+          }
           id={id}
           onClick={onClick}
           ref={localButtonRef}
