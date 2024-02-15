@@ -370,10 +370,10 @@ export const Default: StoryObj<DataTableProps> = {
 
     const reorderData = ({
       rowId,
-      newIndex,
+      newRowIndex,
     }: {
       rowId: string;
-      newIndex: number;
+      newRowIndex: number;
     }) => {
       const updatedData = incomingData;
 
@@ -384,13 +384,11 @@ export const Default: StoryObj<DataTableProps> = {
         const [removedRow] = updatedData.splice(rowIndex, 1);
 
         // Insert the row at the new index
-        updatedData.splice(newIndex, 0, removedRow);
+        updatedData.splice(newRowIndex, 0, removedRow);
       }
 
       setData(updatedData);
     };
-
-    const startingData = fetchData({});
 
     return (
       <Box>
@@ -400,10 +398,9 @@ export const Default: StoryObj<DataTableProps> = {
         </Callout>
         <DataTable
           columns={columns}
-          data={startingData}
           totalRows={data.length}
           getRowId={({ id }) => id}
-          onChangeQuery={fetchData}
+          getData={fetchData}
           onReorderRows={reorderData}
           hasSearchSubmitButton={true}
           hasChangeableDensity={props.hasChangeableDensity}
@@ -500,8 +497,6 @@ export const NoActions: StoryObj<DataTableProps> = {
       });
     };
 
-    const startingData = fetchData({});
-
     return (
       <Box>
         <Callout severity="info">
@@ -510,10 +505,9 @@ export const NoActions: StoryObj<DataTableProps> = {
         </Callout>
         <DataTable
           columns={columns}
-          data={startingData}
           totalRows={data.length}
           getRowId={({ id }) => id}
-          fetchDataFn={fetchData}
+          getData={fetchData}
           hasSearchSubmitButton={true}
           hasChangeableDensity={props.hasChangeableDensity}
           hasColumnResizing={props.hasColumnResizing}

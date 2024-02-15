@@ -48,11 +48,6 @@ export type DataTableProps = {
    */
   columns: MRT_ColumnDef<MRT_RowData>[];
   /**
-   * The data that goes into the table, which will be displayed
-   * as the table rows
-   */
-  data: MRT_TableOptions<MRT_RowData>["data"];
-  /**
    * The total number of rows in the table. Optional, because it's sometimes impossible
    * to calculate. Used in table pagination to know when to disable the "next"/"more" button.
    */
@@ -122,7 +117,7 @@ export type DataTableProps = {
    * Callback that fires whenever the table needs to fetch new data, due to changes in
    * page, results per page, search input, filters, or sorting
    */
-  onChangeQuery: ({
+  getData: ({
     page,
     resultsPerPage,
     search,
@@ -204,12 +199,11 @@ const displayColumnDefOptions = {
 
 const DataTable = ({
   columns,
-  data: dataProp,
   getRowId,
   currentPage = 1,
   initialDensity = densityValues[0],
   resultsPerPage = 20,
-  onChangeQuery,
+  getData,
   onReorderRows,
   totalRows,
   hasSearchSubmitButton,
@@ -228,7 +222,7 @@ const DataTable = ({
   hasSearch,
   hasSorting,
 }: DataTableProps) => {
-  const [data, setData] = useState<DataTableProps["data"]>(dataProp);
+  const [data, setData] = useState<DataTableProps["data"]>([]);
   const [pagination, setPagination] = useState({
     pageIndex: currentPage,
     pageSize: resultsPerPage,
@@ -464,7 +458,7 @@ const DataTable = ({
   useEffect(() => {
     (async () => {
       try {
-        const incomingData = await onChangeQuery?.({
+        const incomingData = await getData?.({
           page: pagination.pageIndex,
           resultsPerPage: pagination.pageSize,
           search,
@@ -476,7 +470,7 @@ const DataTable = ({
       } finally {
       }
     })();
-  }, [pagination, columnSorting, search, filters, onChangeQuery]);
+  }, [pagination, columnSorting, search, filters, getData]);
 
   // Render the table
   return <MaterialReactTable table={dataTable} />;
