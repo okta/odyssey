@@ -15,6 +15,7 @@ import {
   ReactNode,
   useState,
   useEffect,
+  useMemo,
   useRef,
   ReactElement,
 } from "react";
@@ -23,8 +24,6 @@ import { useTranslation } from "react-i18next";
 import { Drawer as MuiDrawer } from "@mui/material";
 
 import type { HtmlProps } from "../HtmlProps";
-
-import { Box } from "../Box";
 import { Button } from "../Button";
 import { CloseIcon } from "../icons.generated";
 import { Heading5 } from "../Typography";
@@ -133,18 +132,18 @@ const DrawerFooter = styled("div", {
 `;
 
 const Drawer = ({
-  primaryCallToActionComponent,
-  secondaryCallToActionComponent,
-  tertiaryCallToActionComponent,
+  ariaLabel,
   children,
   isOpen,
   onClose,
-  showDividers,
+  primaryCallToActionComponent,
+  secondaryCallToActionComponent,
+  showDividers = false,
+  tertiaryCallToActionComponent,
   testId,
   title,
   translate,
   variant = "temporary",
-  ariaLabel,
 }: DrawerProps) => {
   const [isContentScrollable, setIsContentScrollable] = useState(false);
   const drawerContentRef = useRef<HTMLDivElement>(null);
@@ -153,33 +152,55 @@ const Drawer = ({
   //If RTL is set in the theme, align the drawer on the left side of the screen, uses right by default.
   const { i18n } = useTranslation();
   const anchorDirection = i18n.dir() === "rtl" ? "left" : "right";
+
   useEffect(() => {
     let frameId: number;
+    let timeoutId: NodeJS.Timeout;
 
     const handleContentScroll = () => {
-      const drawerContentElement = drawerContentRef.current;
-      if (drawerContentElement) {
-        setIsContentScrollable(
-          drawerContentElement.scrollHeight > drawerContentElement.clientHeight
-        );
-      }
-      frameId = requestAnimationFrame(handleContentScroll);
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        const drawerContentElement = drawerContentRef.current;
+        if (drawerContentElement) {
+          setIsContentScrollable(
+            drawerContentElement.scrollHeight >
+              drawerContentElement.clientHeight
+          );
+        }
+      }, 200);
+    };
+
+    const handleResize = () => {
+      handleContentScroll();
     };
 
     if (isOpen) {
       frameId = requestAnimationFrame(handleContentScroll);
+      window.addEventListener("resize", handleResize);
     }
 
     return () => {
       cancelAnimationFrame(frameId);
+      clearTimeout(timeoutId);
+      window.removeEventListener("resize", handleResize);
     };
   }, [isOpen]);
-  const content =
-    typeof children === "string" ? (
-      <Box translate={translate}>{children}</Box>
-    ) : (
-      children
-    );
+
+  const dividersVisible = useMemo(() => {
+    return showDividers || isContentScrollable;
+  }, [showDividers, isContentScrollable]);
+
+  const hasFooter = useMemo(
+    () =>
+      primaryCallToActionComponent ||
+      secondaryCallToActionComponent ||
+      tertiaryCallToActionComponent,
+    [
+      primaryCallToActionComponent,
+      secondaryCallToActionComponent,
+      tertiaryCallToActionComponent,
+    ]
+  );
 
   return (
     <MuiDrawer
@@ -204,8 +225,9 @@ const Drawer = ({
         })}
       >
         <DrawerHeader
+          translate={translate}
           odysseyDesignTokens={odysseyDesignTokens}
-          showDividers={showDividers || isContentScrollable}
+          showDividers={dividersVisible}
         >
           <Heading5>{title}</Heading5>
           <Button
@@ -218,18 +240,16 @@ const Drawer = ({
           />
         </DrawerHeader>
         <DrawerContent
-          showDividers={showDividers || isContentScrollable}
+          showDividers={dividersVisible}
           odysseyDesignTokens={odysseyDesignTokens}
         >
-          {content}
+          {children}
         </DrawerContent>
       </DrawerContentWrapper>
-      {(primaryCallToActionComponent ||
-        secondaryCallToActionComponent ||
-        tertiaryCallToActionComponent) && (
+      {hasFooter && (
         <DrawerFooter
           odysseyDesignTokens={odysseyDesignTokens}
-          showDividers={showDividers || isContentScrollable}
+          showDividers={dividersVisible}
         >
           {tertiaryCallToActionComponent}
           {secondaryCallToActionComponent}
@@ -238,10 +258,6 @@ const Drawer = ({
       )}
     </MuiDrawer>
   );
-};
-
-Drawer.defaultProps = {
-  variant: "temporary",
 };
 
 const MemoizedDrawer = memo(Drawer);

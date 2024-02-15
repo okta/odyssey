@@ -1027,15 +1027,11 @@ export const components = ({
           color: odysseyTokens.HueNeutral700,
           ...(ownerState.variant === "persistent" && {
             position: "static",
-            borderRadius: "16px",
-            border: "0px",
+            borderRadius: odysseyTokens.BorderRadiusOuter,
+            border: "0",
           }),
           ...(ownerState.variant === "temporary" && {
-            boxShwodow:
-              "0px 1px 4px 0px rgba(39, 39, 39, 0.08), 0px 4px 10px 0px rgba(39, 39, 39, 0.08), 0px",
-            boxShadow: "none",
-            filter:
-              "drop-shadow(0px 1px 4px rgba(29, 29, 33, 0.08)) drop-shadow(0px 4px 10px rgba(29, 29, 33, 0.08)) drop-shadow(0px 8px 30px rgba(29, 29, 33, 0.1))",
+            boxShadow: odysseyTokens.ShadowScale1,
           }),
         }),
       },
