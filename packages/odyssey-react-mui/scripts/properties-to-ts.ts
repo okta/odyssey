@@ -29,8 +29,8 @@ import yargs from "yargs/yargs";
 
 const convert = (baseFiles: string[], propertiesTargetDir: string) => {
   baseFiles.forEach((src) => {
-    const filename = basename(src);
     const extension = extname(src);
+    const filename = basename(src, extension);
     const source = `${readFileSync(src)}`;
 
     properties.parse(source, function (error, propertiesJson) {
@@ -40,7 +40,7 @@ const convert = (baseFiles: string[], propertiesTargetDir: string) => {
 
       const targetFile = join(
         propertiesTargetDir,
-        filename.replace(extension, ".ts")
+        filename.concat(".ts")
       );
 
       writeFileSync(
