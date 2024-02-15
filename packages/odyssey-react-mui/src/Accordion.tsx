@@ -36,10 +36,6 @@ export type AccordionProps = {
    */
   label: string;
   /**
-   * If true, the Accordion item will have a shadow.
-   */
-  hasShadow?: boolean;
-  /**
    * Whether the item is expanded by default
    */
   isDefaultExpanded?: boolean;
@@ -70,7 +66,6 @@ export type AccordionProps = {
 const Accordion = ({
   children,
   label,
-  hasShadow = true,
   id: idOverride,
   isDefaultExpanded,
   isDisabled,
@@ -88,7 +83,6 @@ const Accordion = ({
       disableGutters
       expanded={isExpanded}
       onChange={onChange}
-      className={hasShadow ? `hasShadow` : undefined}
     >
       <MuiAccordionSummary
         aria-controls={contentId}

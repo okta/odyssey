@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2023-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -10,18 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { MouseEventHandler, createContext } from "react";
+import { createContext, useContext } from "react";
 
-export type MenuContextType = {
-  closeMenu: () => void;
-  openMenu: MouseEventHandler<HTMLElement>;
-  shouldCloseOnSelect: boolean;
+export type ButtonContextValue = {
+  isFullWidth: boolean;
 };
 
-export const MenuContext = createContext<MenuContextType>({
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  closeMenu: () => {},
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  openMenu: () => {},
-  shouldCloseOnSelect: true,
+export const ButtonContext = createContext<ButtonContextValue>({
+  isFullWidth: false,
 });
+
+export const useButton = () => useContext(ButtonContext);

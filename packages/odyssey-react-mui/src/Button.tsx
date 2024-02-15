@@ -19,6 +19,7 @@ import {
   ReactElement,
   useCallback,
   useImperativeHandle,
+  useMemo,
   useRef,
 } from "react";
 
@@ -26,13 +27,13 @@ import { MuiPropsContext, useMuiProps } from "./MuiPropsContext";
 import { Tooltip } from "./Tooltip";
 import type { HtmlProps } from "./HtmlProps";
 import { FocusHandle } from "./inputUtils";
+import { useButton } from "./ButtonContext";
 
 export const buttonSizeValues = ["small", "medium", "large"] as const;
 export const buttonTypeValues = ["button", "submit", "reset"] as const;
 export const buttonVariantValues = [
   "primary",
   "secondary",
-  "tertiary",
   "danger",
   "floating",
 ] as const;
@@ -112,7 +113,7 @@ export type ButtonProps = {
   /**
    * The variant of the Button
    */
-  variant: (typeof buttonVariantValues)[number];
+  variant: (typeof buttonVariantValues)[number] | "tertiary";
 } & (
   | {
       endIcon?: ReactElement;
@@ -133,14 +134,17 @@ export type ButtonProps = {
   HtmlProps;
 
 const Button = ({
+  ariaControls,
   ariaDescribedBy,
+  ariaExpanded,
+  ariaHasPopup,
   ariaLabel,
   ariaLabelledBy,
   buttonRef,
   endIcon,
   id,
   isDisabled,
-  isFullWidth,
+  isFullWidth: isFullWidthProp,
   label = "",
   onClick,
   size = "medium",
@@ -150,10 +154,20 @@ const Button = ({
   tooltipText,
   translate,
   type = "button",
-  variant,
+  variant: variantProp,
 }: ButtonProps) => {
   const muiProps = useMuiProps();
+
+  // We're deprecating the "tertiary" variant, so map it to
+  // "secondary" in lieu of making a breaking change
+  const variant = variantProp === "tertiary" ? "secondary" : variantProp;
   const localButtonRef = useRef<HTMLButtonElement>(null);
+  const buttonContext = useButton();
+  const isFullWidth = useMemo(
+    () =>
+      buttonContext.isFullWidth ? buttonContext.isFullWidth : isFullWidthProp,
+    [buttonContext, isFullWidthProp]
+  );
 
   useImperativeHandle(
     buttonRef,
@@ -174,9 +188,12 @@ const Button = ({
       return (
         <MuiButton
           {...muiProps}
+          aria-controls={ariaControls}
+          aria-describedby={ariaDescribedBy}
+          aria-expanded={ariaExpanded}
+          aria-haspopup={ariaHasPopup}
           aria-label={ariaLabel}
           aria-labelledby={ariaLabelledBy}
-          aria-describedby={ariaDescribedBy}
           data-se={testId}
           disabled={isDisabled}
           endIcon={endIcon}
@@ -196,7 +213,10 @@ const Button = ({
       );
     },
     [
+      ariaControls,
       ariaDescribedBy,
+      ariaExpanded,
+      ariaHasPopup,
       ariaLabel,
       ariaLabelledBy,
       endIcon,
