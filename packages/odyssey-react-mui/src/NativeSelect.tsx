@@ -40,7 +40,7 @@ export type NativeSelectValueType<HasMultipleChoices> =
 
 export type NativeSelectProps<
   Value extends NativeSelectValueType<HasMultipleChoices>,
-  HasMultipleChoices extends boolean
+  HasMultipleChoices extends boolean,
 > = {
   /**
    * This prop helps users to fill forms faster, especially on mobile devices.
@@ -107,7 +107,7 @@ export type NativeSelectProps<
 const NativeSelect = forwardRef(
   <
     Value extends NativeSelectValueType<HasMultipleChoices>,
-    HasMultipleChoices extends boolean
+    HasMultipleChoices extends boolean,
   >(
     {
       ariaDescribedBy,
@@ -133,13 +133,13 @@ const NativeSelect = forwardRef(
       value,
       children,
     }: NativeSelectProps<Value, HasMultipleChoices>,
-    ref?: React.Ref<ReactElement>
+    ref?: React.Ref<ReactElement>,
   ) => {
     const controlledStateRef = useRef(
       getControlState({
         controlledValue: value,
         uncontrolledValue: defaultValue,
-      })
+      }),
     );
     const localInputRef = useRef<HTMLSelectElement>(null);
 
@@ -152,7 +152,7 @@ const NativeSelect = forwardRef(
           },
         };
       },
-      []
+      [],
     );
 
     const inputValues = useInputValues({
@@ -167,7 +167,7 @@ const NativeSelect = forwardRef(
       (event, child) => {
         onChangeProp?.(event, child);
       },
-      [onChangeProp]
+      [onChangeProp],
     );
 
     const hasMultipleChoices = useMemo(
@@ -175,9 +175,10 @@ const NativeSelect = forwardRef(
         hasMultipleChoicesProp === undefined
           ? isMultiSelect
           : hasMultipleChoicesProp,
-      [hasMultipleChoicesProp, isMultiSelect]
+      [hasMultipleChoicesProp, isMultiSelect],
     );
     const renderFieldComponent = useCallback(
+      // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
       ({ ariaDescribedBy, errorMessageElementId, labelElementId }) => (
         <MuiSelect
           {...inputValues}
@@ -213,7 +214,7 @@ const NativeSelect = forwardRef(
         ref,
         testId,
         translate,
-      ]
+      ],
     );
 
     return (
@@ -230,10 +231,11 @@ const NativeSelect = forwardRef(
         isFullWidth={isFullWidth}
         isOptional={isOptional}
         label={label}
+        // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
         renderFieldComponent={renderFieldComponent}
       />
     );
-  }
+  },
 );
 
 const MemoizedNativeSelect = memo(NativeSelect);

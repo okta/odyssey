@@ -166,7 +166,7 @@ const Button = ({
   const isFullWidth = useMemo(
     () =>
       buttonContext.isFullWidth ? buttonContext.isFullWidth : isFullWidthProp,
-    [buttonContext, isFullWidthProp]
+    [buttonContext, isFullWidthProp],
   );
 
   useImperativeHandle(
@@ -178,10 +178,11 @@ const Button = ({
         },
       };
     },
-    []
+    [],
   );
 
   const renderButton = useCallback(
+    // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
     (muiProps) => {
       muiProps?.ref?.(localButtonRef.current);
 
@@ -232,7 +233,7 @@ const Button = ({
       translate,
       type,
       variant,
-    ]
+    ],
   );
 
   if (tooltipText) {

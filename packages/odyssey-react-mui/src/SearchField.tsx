@@ -109,14 +109,14 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       translate,
       value,
     },
-    ref
+    ref,
   ) => {
     const onChange: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> =
       useCallback(
         (event) => {
           onChangeProp?.(event);
         },
-        [onChangeProp]
+        [onChangeProp],
       );
 
     const onClear = useCallback(() => {
@@ -127,7 +127,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       getControlState({
         controlledValue: value,
         uncontrolledValue: defaultValue,
-      })
+      }),
     );
     const inputValues = useInputValues({
       defaultValue,
@@ -136,6 +136,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
     });
 
     const renderFieldComponent = useCallback(
+      // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
       ({ ariaDescribedBy, id }) => (
         <InputBase
           {...inputValues}
@@ -193,7 +194,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         tabIndex,
         testId,
         translate,
-      ]
+      ],
     );
 
     return (
@@ -206,10 +207,11 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         isFullWidth={isFullWidth}
         isOptional={true}
         label={label}
+        // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
         renderFieldComponent={renderFieldComponent}
       />
     );
-  }
+  },
 );
 
 const MemoizedSearchField = memo(SearchField);

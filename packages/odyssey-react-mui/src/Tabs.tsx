@@ -131,7 +131,7 @@ const Tabs = ({
       setTabState(value);
       onChangeProp?.(event, value);
     },
-    [onChangeProp]
+    [onChangeProp],
   );
 
   useEffect(() => {
@@ -141,6 +141,7 @@ const Tabs = ({
   }, [value]);
 
   const renderTab = useCallback(
+    // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
     (tab, index) => {
       const {
         testId,
@@ -172,7 +173,7 @@ const Tabs = ({
         />
       );
     },
-    [tabState]
+    [tabState],
   );
 
   return (

@@ -45,6 +45,7 @@ const Tag = ({
   const { chipElementType } = useContext(TagListContext);
 
   const renderTag = useCallback(
+    // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
     (muiProps) => (
       <MuiChip
         {...muiProps}
@@ -69,7 +70,7 @@ const Tag = ({
       onRemove,
       testId,
       translate,
-    ]
+    ],
   );
 
   return <MuiPropsContext.Consumer>{renderTag}</MuiPropsContext.Consumer>;

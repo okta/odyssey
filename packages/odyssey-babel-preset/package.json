@@ -17,15 +17,15 @@
     "prepack": "yarn exec prepack"
   },
   "dependencies": {
-    "@babel/core": "^7.22.9",
-    "@babel/preset-env": "^7.22.9",
-    "@babel/preset-react": "^7.22.5",
-    "@babel/preset-typescript": "^7.22.5"
+    "@babel/core": "^7.23.9",
+    "@babel/preset-env": "^7.23.9",
+    "@babel/preset-react": "^7.23.3",
+    "@babel/preset-typescript": "^7.23.3"
   },
   "devDependencies": {
     "@okta/odyssey-lifecycle": "workspace:*",
     "@okta/odyssey-typescript": "workspace:*",
-    "@types/babel__core": "^7.1.19",
-    "typescript": "^5.1.6"
+    "@types/babel__core": "^7.20.5",
+    "typescript": "^5.3.3"
   }
 }

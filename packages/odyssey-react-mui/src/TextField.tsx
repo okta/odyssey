@@ -135,13 +135,13 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       type = "text",
       value: value,
     },
-    ref
+    ref,
   ) => {
     const controlledStateRef = useRef(
       getControlState({
         controlledValue: value,
         uncontrolledValue: defaultValue,
-      })
+      }),
     );
     const inputValues = useInputValues({
       defaultValue,
@@ -159,7 +159,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           },
         };
       },
-      []
+      [],
     );
 
     const onChange = useCallback<
@@ -168,10 +168,11 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       (event) => {
         onChangeProp?.(event);
       },
-      [onChangeProp]
+      [onChangeProp],
     );
 
     const renderFieldComponent = useCallback(
+      // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
       ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
         <InputBase
           {...inputValues}
@@ -233,7 +234,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         testId,
         translate,
         type,
-      ]
+      ],
     );
 
     return (
@@ -250,10 +251,11 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         isFullWidth={isFullWidth}
         isOptional={isOptional}
         label={label}
+        // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
         renderFieldComponent={renderFieldComponent}
       />
     );
-  }
+  },
 );
 
 const MemoizedTextField = memo(TextField);

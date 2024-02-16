@@ -31,7 +31,7 @@ import {
 export type AutocompleteProps<
   OptionType,
   HasMultipleChoices extends boolean | undefined,
-  IsCustomValueAllowed extends boolean | undefined
+  IsCustomValueAllowed extends boolean | undefined,
 > = {
   /**
    * The default value. Use when the component is not controlled.
@@ -176,7 +176,7 @@ export type AutocompleteProps<
 const Autocomplete = <
   OptionType,
   HasMultipleChoices extends boolean | undefined,
-  IsCustomValueAllowed extends boolean | undefined
+  IsCustomValueAllowed extends boolean | undefined,
 >({
   ariaDescribedBy,
   defaultValue,
@@ -206,7 +206,10 @@ const Autocomplete = <
   translate,
 }: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
   const controlledStateRef = useRef(
-    getControlState({ controlledValue: value, uncontrolledValue: defaultValue })
+    getControlState({
+      controlledValue: value,
+      uncontrolledValue: defaultValue,
+    }),
   );
   const defaultValueProp = useMemo<
     | AutocompleteValue<
@@ -245,6 +248,7 @@ const Autocomplete = <
   }, [inputValue]);
 
   const renderInput = useCallback(
+    // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
     ({ InputLabelProps, InputProps, ...params }) => (
       <Field
         ariaDescribedBy={ariaDescribedBy}
@@ -290,7 +294,7 @@ const Autocomplete = <
       label,
       nameOverride,
       testId,
-    ]
+    ],
   );
   const onChange = useCallback<
     NonNullable<
@@ -305,7 +309,7 @@ const Autocomplete = <
     (event, value, reason, details) => {
       onChangeProp?.(event, value, reason, details);
     },
-    [onChangeProp]
+    [onChangeProp],
   );
 
   const onInputChange = useCallback<
@@ -321,7 +325,7 @@ const Autocomplete = <
     (event, value, reason) => {
       onInputChangeProp?.(event, value, reason);
     },
-    [onInputChangeProp]
+    [onInputChangeProp],
   );
 
   return (

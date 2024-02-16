@@ -74,7 +74,10 @@ const RadioGroup = ({
   value,
 }: RadioGroupProps) => {
   const controlledStateRef = useRef(
-    getControlState({ controlledValue: value, uncontrolledValue: defaultValue })
+    getControlState({
+      controlledValue: value,
+      uncontrolledValue: defaultValue,
+    }),
   );
   const inputValues = useInputValues({
     defaultValue,
@@ -86,9 +89,10 @@ const RadioGroup = ({
     (event, value) => {
       onChangeProp?.(event, value);
     },
-    [onChangeProp]
+    [onChangeProp],
   );
   const renderFieldComponent = useCallback(
+    // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
     ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
       <MuiRadioGroup
         {...inputValues}
@@ -104,7 +108,7 @@ const RadioGroup = ({
         {children}
       </MuiRadioGroup>
     ),
-    [children, inputValues, nameOverride, onChange, testId, translate]
+    [children, inputValues, nameOverride, onChange, testId, translate],
   );
 
   return (
@@ -119,6 +123,7 @@ const RadioGroup = ({
       id={idOverride}
       isDisabled={isDisabled}
       label={label}
+      // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
       renderFieldComponent={renderFieldComponent}
     />
   );

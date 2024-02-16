@@ -31,7 +31,7 @@ import {
 export type AutocompleteProps<
   OptionType,
   HasMultipleChoices extends boolean | undefined,
-  IsCustomValueAllowed extends boolean | undefined
+  IsCustomValueAllowed extends boolean | undefined,
 > = {
   /**
    * The default value. Use when the component is not controlled.
@@ -181,7 +181,7 @@ export type AutocompleteProps<
 const VirtualizedAutocomplete = <
   OptionType,
   HasMultipleChoices extends boolean | undefined,
-  IsCustomValueAllowed extends boolean | undefined
+  IsCustomValueAllowed extends boolean | undefined,
 >({
   ariaDescribedBy,
   defaultValue,
@@ -210,7 +210,10 @@ const VirtualizedAutocomplete = <
   translate,
 }: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
   const controlledStateRef = useRef(
-    getControlState({ controlledValue: value, uncontrolledValue: defaultValue })
+    getControlState({
+      controlledValue: value,
+      uncontrolledValue: defaultValue,
+    }),
   );
   const defaultValueProp = useMemo<
     | AutocompleteValue<
@@ -248,6 +251,7 @@ const VirtualizedAutocomplete = <
   }, [inputValue]);
 
   const renderInput = useCallback(
+    // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
     ({ InputLabelProps, InputProps, ...params }) => (
       <Field
         ariaDescribedBy={ariaDescribedBy}
@@ -291,7 +295,7 @@ const VirtualizedAutocomplete = <
       label,
       nameOverride,
       testId,
-    ]
+    ],
   );
   const onChange = useCallback<
     NonNullable<
@@ -306,7 +310,7 @@ const VirtualizedAutocomplete = <
     (event, value, reason, details) => {
       onChangeProp?.(event, value, reason, details);
     },
-    [onChangeProp]
+    [onChangeProp],
   );
 
   const onInputChange = useCallback<
@@ -322,7 +326,7 @@ const VirtualizedAutocomplete = <
     (event, value, reason) => {
       onInputChangeProp?.(event, value, reason);
     },
-    [onInputChangeProp]
+    [onInputChangeProp],
   );
 
   return (
@@ -354,7 +358,7 @@ const VirtualizedAutocomplete = <
 
 // Need the `typeof Autocomplete` because generics don't get passed through
 const MemoizedAutocomplete = memo(
-  VirtualizedAutocomplete
+  VirtualizedAutocomplete,
 ) as typeof VirtualizedAutocomplete;
 // @ts-expect-error displayName is expected to not be on `typeof Autocomplete`
 MemoizedAutocomplete.displayName = "Autocomplete";

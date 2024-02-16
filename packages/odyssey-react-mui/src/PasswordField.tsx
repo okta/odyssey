@@ -106,14 +106,14 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       translate,
       value,
     },
-    ref
+    ref,
   ) => {
     const { t } = useTranslation();
     const [inputType, setInputType] = useState("password");
 
     const togglePasswordVisibility = useCallback(() => {
       setInputType((inputType) =>
-        inputType === "password" ? "text" : "password"
+        inputType === "password" ? "text" : "password",
       );
     }, []);
 
@@ -121,7 +121,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       getControlState({
         controlledValue: value,
         uncontrolledValue: defaultValue,
-      })
+      }),
     );
     const inputValues = useInputValues({
       defaultValue,
@@ -139,7 +139,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           },
         };
       },
-      []
+      [],
     );
 
     const onChange = useCallback<
@@ -148,10 +148,11 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       (event) => {
         onChangeProp?.(event);
       },
-      [onChangeProp]
+      [onChangeProp],
     );
 
     const renderFieldComponent = useCallback(
+      // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
       ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
         <InputBase
           {...inputValues}
@@ -216,7 +217,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
         ref,
         testId,
         translate,
-      ]
+      ],
     );
 
     return (
@@ -232,10 +233,11 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
         isFullWidth={isFullWidth}
         isOptional={isOptional}
         label={label}
+        // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
         renderFieldComponent={renderFieldComponent}
       />
     );
-  }
+  },
 );
 
 const MemoizedPasswordField = memo(PasswordField);

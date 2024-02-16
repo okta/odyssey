@@ -60,6 +60,7 @@ const CheckboxGroup = ({
   translate,
 }: CheckboxGroupProps) => {
   const renderFieldComponent = useCallback(
+    // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
     ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
       <MuiFormGroup
         aria-describedby={ariaDescribedBy}
@@ -72,7 +73,7 @@ const CheckboxGroup = ({
         {children}
       </MuiFormGroup>
     ),
-    [children, testId, translate]
+    [children, testId, translate],
   );
 
   return (
@@ -88,6 +89,7 @@ const CheckboxGroup = ({
       isDisabled={isDisabled}
       isOptional={!isRequired}
       label={label}
+      // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
       renderFieldComponent={renderFieldComponent}
     />
   );

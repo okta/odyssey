@@ -53,7 +53,7 @@ export function plugin({
           | BabelTypes.ExportNamedDeclaration
           | BabelTypes.ExportAllDeclaration
         >,
-        state: Babel.PluginPass
+        state: Babel.PluginPass,
       ): void => {
         if (!state.filename) {
           return;
@@ -82,25 +82,28 @@ export function plugin({
         const fullySpecifiedLiteral = t.stringLiteral(
           existsSync(dirPath) && lstatSync(dirPath).isDirectory()
             ? `${candidate}${candidate.endsWith("/") ? "" : "/"}index.js`
-            : `${candidate}.js`
+            : `${candidate}.js`,
         );
 
         switch (path.node.type) {
           case "ImportDeclaration":
             path.replaceWith(
-              t.importDeclaration(path.node.specifiers, fullySpecifiedLiteral)
+              // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
+              t.importDeclaration(path.node.specifiers, fullySpecifiedLiteral),
             );
             return;
           case "ExportNamedDeclaration":
             path.replaceWith(
+              // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
               t.exportNamedDeclaration(
                 path.node.declaration,
                 path.node.specifiers,
-                fullySpecifiedLiteral
-              )
+                fullySpecifiedLiteral,
+              ),
             );
             return;
           case "ExportAllDeclaration":
+            // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
             path.replaceWith(t.exportAllDeclaration(fullySpecifiedLiteral));
             return;
           default:

@@ -153,7 +153,7 @@ export const components = ({
 
             ...(ownerState.variant === "toast" && {
               backgroundColor: odysseyTokens.HueGreen100.concat(
-                odysseyTokens.PaletteAlphaSemi
+                odysseyTokens.PaletteAlphaSemi,
               ),
             }),
           }),
@@ -162,7 +162,7 @@ export const components = ({
 
             ...(ownerState.variant === "toast" && {
               backgroundColor: odysseyTokens.HueBlue100.concat(
-                odysseyTokens.PaletteAlphaSemi
+                odysseyTokens.PaletteAlphaSemi,
               ),
             }),
           }),
@@ -171,7 +171,7 @@ export const components = ({
 
             ...(ownerState.variant === "toast" && {
               backgroundColor: odysseyTokens.HueRed100.concat(
-                odysseyTokens.PaletteAlphaSemi
+                odysseyTokens.PaletteAlphaSemi,
               ),
             }),
           }),
@@ -180,7 +180,7 @@ export const components = ({
 
             ...(ownerState.variant === "toast" && {
               backgroundColor: odysseyTokens.HueYellow100.concat(
-                odysseyTokens.PaletteAlphaSemi
+                odysseyTokens.PaletteAlphaSemi,
               ),
             }),
           }),
@@ -787,7 +787,7 @@ export const components = ({
             ["border-color", "background-color", "box-shadow"],
             {
               duration: odysseyTokens.TransitionDurationMain,
-            }
+            },
           ),
 
           [`.${svgIconClasses.root}`]: {
@@ -1717,7 +1717,7 @@ export const components = ({
             ["border-color", "background-color", "box-shadow"],
             {
               duration: odysseyTokens.TransitionDurationMain,
-            }
+            },
           ),
 
           ...(ownerState.fullWidth && {
@@ -2106,7 +2106,7 @@ export const components = ({
             ["border-color", "background-color", "box-shadow"],
             {
               duration: odysseyTokens.TransitionDurationMain,
-            }
+            },
           ),
 
           "&::before": {
@@ -2529,7 +2529,6 @@ export const components = ({
     },
     MuiTableContainer: {
       defaultProps: {
-        // @ts-expect-error valid prop and value; MUI TS bug
         component: "figure",
       },
       styleOverrides: {
