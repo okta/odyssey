@@ -20,7 +20,7 @@ import {
   useRef,
   useState,
 } from "react";
-import styled from "@emotion/styled";
+// import styled from "@emotion/styled";
 import { Autocomplete } from "../Autocomplete";
 import { Box } from "../Box";
 import { TagList } from "../TagList";
@@ -284,15 +284,15 @@ const DataFilters = ({
     setFilters(updatedFilters);
   }, [inputValues, filtersProp]);
 
-  const AutocompleteOuterContainer = styled.div`
-    display: flex;
-    gap: 2;
-    align-items: center;
-    alignitems: "flex-end";
-  `;
-  const AutocompleteInnerContainer = styled.div`
-    width: "100%";
-  `;
+  // const AutocompleteOuterContainer = styled.div`
+  //   display: flex;
+  //   gap: 2;
+  //   align-items: center;
+  //   alignitems: "flex-end";
+  // `;
+  // const AutocompleteInnerContainer = styled.div`
+  //   width: "100%";
+  // `;
   const filterMenu = useMemo(
     () => (
       <>
@@ -415,8 +415,8 @@ const DataFilters = ({
                     {/* Autocomplete */}
                     {filterPopoverCurrentFilter?.variant === "autocomplete" &&
                       filterPopoverCurrentFilter?.options && (
-                        <AutocompleteOuterContainer>
-                          <AutocompleteInnerContainer>
+                        <div>
+                          <div>
                             <Autocomplete
                               label={filterPopoverCurrentFilter.label}
                               value={
@@ -445,13 +445,13 @@ const DataFilters = ({
                               }}
                               options={autocompleteOptions}
                             />
-                          </AutocompleteInnerContainer>
+                          </div>
                           <Button
                             variant="primary"
                             endIcon={<CheckIcon />}
                             type="submit"
                           />
-                        </AutocompleteOuterContainer>
+                        </div>
                       )}
                     {/* Text or Number */}
                     {(filterPopoverCurrentFilter?.variant === "text" ||

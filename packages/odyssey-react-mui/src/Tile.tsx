@@ -23,9 +23,9 @@ import { ButtonContext } from "./ButtonContext";
 import { Heading5, Paragraph, Support } from "./Typography";
 import { MoreIcon } from "./icons.generated";
 import { HtmlProps } from "./HtmlProps";
-import styled from "@emotion/styled";
+// import styled from "@emotion/styled";
 import {
-  DesignTokens,
+  // DesignTokens,
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext";
 import { MenuButton } from "./MenuButton";
@@ -50,23 +50,23 @@ export type TileProps = {
 ) &
   HtmlProps;
 
-const ImageContainer = styled.div<{
-  odysseyDesignTokens: DesignTokens;
-  hasMenuItems: boolean;
-}>`
-  display: flex;
-  align-items: flex-start;
-  max-height: 64px;
-  margin-block-end: ${(props) => props.odysseyDesignTokens.Spacing5};
-  padding-right: ${(props) =>
-    props.hasMenuItems ? props.odysseyDesignTokens.Spacing5 : 0};
-`;
+// const ImageContainer = styled.div<{
+//   odysseyDesignTokens: DesignTokens;
+//   hasMenuItems: boolean;
+// }>`
+//   display: flex;
+//   align-items: flex-start;
+//   max-height: 64px;
+//   margin-block-end: ${(props) => props.odysseyDesignTokens.Spacing5};
+//   padding-right: ${(props) =>
+//     props.hasMenuItems ? props.odysseyDesignTokens.Spacing5 : 0};
+// `;
 
-const MenuButtonContainer = styled.div<{ odysseyDesignTokens: DesignTokens }>`
-  position: absolute;
-  right: ${(props) => props.odysseyDesignTokens.Spacing3};
-  top: ${(props) => props.odysseyDesignTokens.Spacing3};
-`;
+// const MenuButtonContainer = styled.div<{ odysseyDesignTokens: DesignTokens }>`
+//   position: absolute;
+//   right: ${(props) => props.odysseyDesignTokens.Spacing3};
+//   top: ${(props) => props.odysseyDesignTokens.Spacing3};
+// `;
 
 const Tile = ({
   button,
@@ -82,14 +82,7 @@ const Tile = ({
   const cardContent = useMemo(() => {
     return (
       <>
-        {image && (
-          <ImageContainer
-            odysseyDesignTokens={odysseyDesignTokens}
-            hasMenuItems={Boolean(menuItems)}
-          >
-            {image}
-          </ImageContainer>
-        )}
+        {image && <div>{image}</div>}
 
         {overline && <Support component="div">{overline}</Support>}
         {title && <Heading5 component="div">{title}</Heading5>}
@@ -125,7 +118,7 @@ const Tile = ({
       {!onClick && cardContent}
 
       {menuItems && (
-        <MenuButtonContainer odysseyDesignTokens={odysseyDesignTokens}>
+        <div>
           <MenuButton
             endIcon={<MoreIcon />}
             ariaLabel="Tile menu"
@@ -135,7 +128,7 @@ const Tile = ({
           >
             {menuItems}
           </MenuButton>
-        </MenuButtonContainer>
+        </div>
       )}
     </MuiCard>
   );

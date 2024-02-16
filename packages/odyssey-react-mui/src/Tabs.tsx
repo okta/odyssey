@@ -141,7 +141,7 @@ const Tabs = ({
   }, [value]);
 
   const renderTab = useCallback(
-    (tab, index) => {
+    (tab: TabItemProps, index: number) => {
       const {
         testId,
         isDisabled,

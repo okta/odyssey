@@ -23,7 +23,11 @@ import {
   useRef,
 } from "react";
 
-import { MuiPropsContext, useMuiProps } from "./MuiPropsContext";
+import {
+  MuiPropsContext,
+  MuiPropsContextType,
+  useMuiProps,
+} from "./MuiPropsContext";
 import { Tooltip } from "./Tooltip";
 import type { HtmlProps } from "./HtmlProps";
 import { FocusHandle } from "./inputUtils";
@@ -182,7 +186,9 @@ const Button = ({
   );
 
   const renderButton = useCallback(
-    (muiProps) => {
+    (muiProps: MuiPropsContextType) => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-expect-error
       muiProps?.ref?.(localButtonRef.current);
 
       return (

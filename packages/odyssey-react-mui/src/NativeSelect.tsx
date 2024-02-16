@@ -178,7 +178,15 @@ const NativeSelect = forwardRef(
       [hasMultipleChoicesProp, isMultiSelect]
     );
     const renderFieldComponent = useCallback(
-      ({ ariaDescribedBy, errorMessageElementId, labelElementId }) => (
+      ({
+        ariaDescribedBy,
+        errorMessageElementId,
+        labelElementId,
+      }: {
+        ariaDescribedBy?: string;
+        errorMessageElementId?: string;
+        labelElementId: string;
+      }) => (
         <MuiSelect
           {...inputValues}
           aria-describedby={ariaDescribedBy}

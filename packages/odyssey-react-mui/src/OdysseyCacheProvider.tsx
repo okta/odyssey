@@ -17,7 +17,7 @@ declare global {
 }
 
 import createCache, { StylisPlugin } from "@emotion/cache";
-import { memo, useMemo, ReactNode } from "react";
+import { ReactNode } from "react";
 import { useUniqueAlphabeticalId } from "./useUniqueAlphabeticalId";
 import { CacheProvider } from "@emotion/react";
 
@@ -37,29 +37,31 @@ export type OdysseyCacheProviderProps = {
   stylisPlugins?: StylisPlugin[];
 };
 
-const OdysseyCacheProvider = ({
+export const OdysseyCacheProvider = ({
   children,
   emotionRoot,
   nonce,
   stylisPlugins,
 }: OdysseyCacheProviderProps) => {
   const uniqueAlphabeticalId = useUniqueAlphabeticalId();
-
-  const emotionCache = useMemo(() => {
-    return createCache({
-      ...(emotionRoot && { container: emotionRoot }),
-      key: uniqueAlphabeticalId,
-      nonce: nonce ?? window.cspNonce,
-      prepend: true,
-      speedy: false, // <-- Needs to be set to false when shadow-dom is used!! https://github.com/emotion-js/emotion/issues/2053#issuecomment-713429122
-      ...(stylisPlugins && { stylisPlugins }),
-    });
-  }, [emotionRoot, nonce, stylisPlugins, uniqueAlphabeticalId]);
+  console.log("HERE");
+  console.log(createCache);
+  console.log("/HERE");
+  const emotionCache = createCache({
+    ...(emotionRoot && { container: emotionRoot }),
+    key: uniqueAlphabeticalId,
+    nonce: nonce ?? window.cspNonce,
+    prepend: true,
+    speedy: false, // <-- Needs to be set to false when shadow-dom is used!! https://github.com/emotion-js/emotion/issues/2053#issuecomment-713429122
+    ...(stylisPlugins && { stylisPlugins }),
+  });
+  // }, [emotionRoot, nonce, stylisPlugins, uniqueAlphabeticalId]);
 
   return <CacheProvider value={emotionCache}>{children}</CacheProvider>;
 };
 
-const MemoizedOdysseyCacheProvider = memo(OdysseyCacheProvider);
-MemoizedOdysseyCacheProvider.displayName = "OdysseyCacheProvider";
+// const MemoizedOdysseyCacheProvider = memo(OdysseyCacheProvider);
+// MemoizedOdysseyCacheProvider.displayName = "OdysseyCacheProvider";
+// const Foo = MemoizedOdysseyCacheProvider as unknown as ReactElement;
 
-export { MemoizedOdysseyCacheProvider as OdysseyCacheProvider };
+// export { Foo as OdysseyCacheProvider };

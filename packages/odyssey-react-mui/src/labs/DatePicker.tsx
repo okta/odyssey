@@ -34,7 +34,8 @@ export const DatePicker = <TInputDate, TDate>({
   value = null,
 }: DatePickerProps<TInputDate, TDate>) => {
   const renderInput = useCallback(
-    ({ InputProps, ...props }) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ({ InputProps, ...props }: any) => {
       const combinedProps = {
         ...InputProps,
         ...props,

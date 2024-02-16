@@ -154,6 +154,8 @@ const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
   const dataLengthRef = useRef(data.length);
 
   const updatePagination = useCallback(
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-expect-error
     (paginationFunction) => {
       if (data.length === dataLengthRef.current) {
         setPagination((previousPagination) => {
@@ -238,6 +240,8 @@ const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
   );
 
   const muiCheckboxStyles = useCallback(
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
     (theme) =>
       typeof theme.components?.MuiCheckbox?.styleOverrides?.root === "function"
         ? theme.components?.MuiCheckbox?.styleOverrides?.root?.({

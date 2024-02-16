@@ -16,6 +16,7 @@ import {
   InputBase,
   UseAutocompleteProps,
   AutocompleteValue,
+  AutocompleteRenderInputParams,
 } from "@mui/material";
 import { memo, useCallback, useMemo, useRef } from "react";
 
@@ -245,13 +246,19 @@ const Autocomplete = <
   }, [inputValue]);
 
   const renderInput = useCallback(
-    ({ InputLabelProps, InputProps, ...params }) => (
+    ({
+      InputLabelProps,
+      InputProps,
+      ...params
+    }: AutocompleteRenderInputParams) => (
       <Field
         ariaDescribedBy={ariaDescribedBy}
         errorMessage={errorMessage}
         errorMessageList={errorMessageList}
         fieldType="single"
         hasVisibleLabel
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //@ts-ignore
         id={InputLabelProps.htmlFor}
         hint={hint}
         HintLinkComponent={HintLinkComponent}

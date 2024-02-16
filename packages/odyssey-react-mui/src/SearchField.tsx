@@ -136,7 +136,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
     });
 
     const renderFieldComponent = useCallback(
-      ({ ariaDescribedBy, id }) => (
+      ({ ariaDescribedBy, id }: { ariaDescribedBy?: string; id: string }) => (
         <InputBase
           {...inputValues}
           inputProps={{
