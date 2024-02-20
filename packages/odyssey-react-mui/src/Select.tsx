@@ -60,38 +60,40 @@ const SelectContainer = styled.div`
   display: flex;
 `;
 
-const PlaceholderValuesContainer = styled.div<{
+const ChipsPositioningContainer = styled.div<{
   odysseyDesignTokens: DesignTokens;
 }>`
   display: flex;
   align-items: center;
   position: absolute;
-  top: ${(props) => props.odysseyDesignTokens.Spacing0};
-  right: ${(props) => props.odysseyDesignTokens.Spacing5};
-  bottom: ${(props) => props.odysseyDesignTokens.Spacing0};
-  left: ${(props) => props.odysseyDesignTokens.Spacing1};
-  margin-inline-start: ${(props) => props.odysseyDesignTokens.BorderWidthMain};
+  top: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing0};
+  right: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing5};
+  bottom: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing0};
+  left: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing1};
+  margin-inline-start: ${({ odysseyDesignTokens }) =>
+    odysseyDesignTokens.BorderWidthMain};
   opacity: 1;
   pointer-events: none;
 `;
 
-const PlaceholderIcon = styled(CloseCircleFilledIcon)<{
+const NonInteractiveIcon = styled(CloseCircleFilledIcon)<{
   odysseyDesignTokens: DesignTokens;
 }>`
   font-size: 1em;
-  margin-inline-start: ${(props) => props.odysseyDesignTokens.Spacing2};
-  margin-inline-end: -${(props) => props.odysseyDesignTokens.Spacing1};
+  margin-inline-start: ${({ odysseyDesignTokens }) =>
+    odysseyDesignTokens.Spacing2};
+  margin-inline-end: -${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing1};
 `;
 
-const ChipContainer = styled(MuiBox)<{
-  isPlaceholder?: boolean;
+const ChipsInnerContainer = styled(MuiBox)<{
+  isInteractive?: boolean;
   odysseyDesignTokens: DesignTokens;
 }>`
   display: flex;
   flex-wrap: wrap;
-  gap: ${(props) => props.odysseyDesignTokens.Spacing1};
-  pointer-events: none;
-  opacity: ${(props) => (props.isPlaceholder ? 1 : 0)};
+  gap: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing1};
+  pointer-events: ${({ isInteractive }) => (isInteractive ? "auto" : "none")};
+  opacity: ${({ isInteractive }) => (isInteractive ? 1 : 0)};
 `;
 
 export type SelectValueType<HasMultipleChoices> =
@@ -257,19 +259,17 @@ const Select = <
 
   const removeSelection = useCallback(
     (itemToRemove: string) => {
-      if (!Array.isArray(internalSelectedValues)) {
-        return;
+      if (Array.isArray(internalSelectedValues)) {
+        const newValue = internalSelectedValues.filter(
+          (item: string) => item !== itemToRemove
+        );
+
+        const syntheticEvent = {
+          target: { value: newValue },
+        } as SelectChangeEvent<Value>;
+
+        onChange(syntheticEvent, null);
       }
-
-      const newValue = internalSelectedValues!.filter(
-        (item: string) => item !== itemToRemove
-      );
-
-      const syntheticEvent = {
-        target: { value: newValue },
-      } as SelectChangeEvent<Value>;
-
-      onChange(syntheticEvent, null);
     },
     [internalSelectedValues, onChange]
   );
@@ -298,86 +298,52 @@ const Select = <
     [options]
   );
 
-  const renderValue = useCallback(
-    ({
-      selected,
-      isPlaceholder = false,
-    }: {
-      selected: Value;
-      isPlaceholder?: boolean;
-    }) => {
-      // If the selected value isn't an array, then we don't need to display
-      // chips and should fall back to the default render behavior
-      if (typeof selected === "string") {
-        return undefined;
-      }
-
-      // Convert the selected options array into <Chip>s
-      const renderedChips = selected
-        .map((item: string) => {
-          const selectedOption = normalizedOptions.find(
-            (option) => option.value === item
-          );
-
-          if (!selectedOption) {
-            return null;
+  const Chips = ({
+    selection,
+    isInteractive,
+  }: {
+    selection: string[];
+    isInteractive: boolean;
+  }) => (
+    <ChipsInnerContainer
+      isInteractive={isInteractive}
+      odysseyDesignTokens={odysseyDesignTokens}
+    >
+      {selection.map((item: string) => (
+        <MuiChip
+          key={item}
+          label={
+            <>
+              {item}
+              {!isInteractive &&
+                controlledStateRef.current === CONTROLLED &&
+                hasMultipleChoices && (
+                  <NonInteractiveIcon
+                    odysseyDesignTokens={odysseyDesignTokens}
+                  />
+                )}
+            </>
           }
-
-          return (
-            <MuiChip
-              key={item}
-              label={
-                <>
-                  {selectedOption.text}
-                  {!isPlaceholder &&
-                    controlledStateRef.current === CONTROLLED &&
-                    hasMultipleChoices && (
-                      <PlaceholderIcon
-                        odysseyDesignTokens={odysseyDesignTokens}
-                      />
-                    )}
-                </>
-              }
-              tabIndex={-1}
-              onDelete={
-                isPlaceholder && controlledStateRef.current === CONTROLLED
-                  ? () => removeSelection(item)
-                  : undefined
-              }
-              deleteIcon={
-                // We need to stop event propagation on mouse down to prevent the deletion
-                // from being blocked by the Select list opening, and also ensure that
-                // the pointerEvent is registered even when the parent's are not
-                <CloseCircleFilledIcon
-                  sx={{ pointerEvents: "auto" }}
-                  onMouseDown={(event) => event.stopPropagation()}
-                />
-              }
+          tabIndex={-1}
+          onDelete={
+            isInteractive
+              ? controlledStateRef.current === CONTROLLED
+                ? () => removeSelection(item)
+                : undefined
+              : undefined
+          }
+          deleteIcon={
+            <CloseCircleFilledIcon
+              sx={{ pointerEvents: "auto" }}
+              // We need to stop event propagation on mouse down to prevent the deletion
+              // from being blocked by the Select list opening, and also ensure that
+              // the pointerEvent is registered even when the parent's are not
+              onMouseDown={(event) => event.stopPropagation()}
             />
-          );
-        })
-        .filter(Boolean);
-
-      if (renderedChips.length === 0) {
-        return null;
-      }
-
-      // We need the <Box> to surround the <Chip>s for proper styling
-      // and disable
-      if (hasMultipleChoices && controlledStateRef.current === CONTROLLED) {
-        return (
-          <ChipContainer
-            isPlaceholder={isPlaceholder}
-            odysseyDesignTokens={odysseyDesignTokens}
-          >
-            {renderedChips}
-          </ChipContainer>
-        );
-      }
-
-      return <MuiBox>{renderedChips}</MuiBox>;
-    },
-    [normalizedOptions, removeSelection]
+          }
+        />
+      ))}
+    </ChipsInnerContainer>
   );
 
   // Convert the options into the ReactNode children
@@ -386,7 +352,9 @@ const Select = <
     () =>
       normalizedOptions.map((option, index) => {
         if (option.type === "heading") {
-          return <ListSubheader key={option.text}>{option.text}</ListSubheader>;
+          return (
+            <ListSubheader key={option.text}> {option.text} </ListSubheader>
+          );
         }
 
         const isSelected = hasMultipleChoices
@@ -432,16 +400,18 @@ const Select = <
           onChange={onChange}
           onFocus={onFocus}
           renderValue={
-            hasMultipleChoices
-              ? (value) => renderValue({ selected: value })
+            hasMultipleChoices && Array.isArray(value)
+              ? (value: Value) => (
+                  <Chips selection={value as string[]} isInteractive={false} />
+                )
               : undefined
           }
           translate={translate}
         />
-        {hasMultipleChoices && value && (
-          <PlaceholderValuesContainer odysseyDesignTokens={odysseyDesignTokens}>
-            {renderValue({ selected: value, isPlaceholder: true })}
-          </PlaceholderValuesContainer>
+        {hasMultipleChoices && Array.isArray(value) && (
+          <ChipsPositioningContainer odysseyDesignTokens={odysseyDesignTokens}>
+            <Chips selection={value} isInteractive={true} />
+          </ChipsPositioningContainer>
         )}
       </SelectContainer>
     ),
@@ -454,7 +424,6 @@ const Select = <
       onBlur,
       onChange,
       onFocus,
-      renderValue,
       testId,
       translate,
     ]
