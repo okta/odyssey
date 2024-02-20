@@ -446,7 +446,7 @@ export const ControlledAutocomplete: StoryObj<JupiterMoonsAutocomplete> = {
       (
         _event: SyntheticEvent<Element, Event>,
         value: string | MoonMeta | (string | MoonMeta)[] | null,
-      ) => setLocalValue(value as MoonMeta[]),
+      ) => setLocalValue(value ? (value as MoonMeta) : undefined),
       [],
     );
     return <Autocomplete {...props} value={localValue} onChange={onChange} />;
