@@ -192,7 +192,7 @@ const Button = ({
           disabled={isDisabled}
           endIcon={endIcon}
           fullWidth={
-            buttonContext.isFullWidth ? buttonContext.isFullWidth : isFullWidth
+            buttonContext.isFullWidth ?? isFullWidth
           }
           id={id}
           onClick={onClick}
