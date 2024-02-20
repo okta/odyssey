@@ -42,7 +42,7 @@ const convert = (baseFiles: string[], propertiesTargetDir: string) => {
 
       writeFileSync(
         targetFile,
-        `export const translation = ${JSON.stringify(propertiesJson)};`
+        `export const translation = ${JSON.stringify(propertiesJson)};`,
       );
     });
   });
@@ -75,10 +75,10 @@ async function convertPropertiesToJson({
   convert(
     propertiesFilePaths
       .filter((propertiesFilePath) =>
-        propertiesFilePath.endsWith(".properties")
+        propertiesFilePath.endsWith(".properties"),
       )
       .map((propertiesFilePath) => join(sourceDirectory, propertiesFilePath)),
-    propertiesTargetDirectory
+    propertiesTargetDirectory,
   );
 }
 
@@ -105,6 +105,6 @@ yargs(hideBin(process.argv))
         jsonOutputPath: argv.jsonOutputPath,
         propertiesFilesPath: argv.propertiesFilesPath,
       });
-    }
+    },
   )
   .help().argv;

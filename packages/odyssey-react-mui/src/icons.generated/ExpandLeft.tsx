@@ -37,7 +37,7 @@ export const ExpandLeftIcon = forwardRef<SVGSVGElement, ExpandLeftIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 ExpandLeftIcon.displayName = "ExpandLeftIcon";

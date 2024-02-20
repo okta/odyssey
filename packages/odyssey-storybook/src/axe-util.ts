@@ -34,14 +34,14 @@ export const axeRun = async (interaction = "") => {
           `Accessibility issues found in "${interaction}". ${JSON.stringify(
             results.violations,
             null,
-            2
-          )}`
+            2,
+          )}`,
         );
       }
     })
     .catch((e) => {
       throw new Error(
-        e instanceof Error ? e.message : "Unknown Error in play-test"
+        e instanceof Error ? e.message : "Unknown Error in play-test",
       );
     });
 };

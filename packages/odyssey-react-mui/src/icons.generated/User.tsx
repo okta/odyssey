@@ -37,7 +37,7 @@ export const UserIcon = forwardRef<SVGSVGElement, UserIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 UserIcon.displayName = "UserIcon";

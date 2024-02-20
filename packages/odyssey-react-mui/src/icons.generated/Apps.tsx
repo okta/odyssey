@@ -37,7 +37,7 @@ export const AppsIcon = forwardRef<SVGSVGElement, AppsIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 AppsIcon.displayName = "AppsIcon";

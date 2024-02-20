@@ -37,7 +37,7 @@ export const LinkIcon = forwardRef<SVGSVGElement, LinkIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 LinkIcon.displayName = "LinkIcon";

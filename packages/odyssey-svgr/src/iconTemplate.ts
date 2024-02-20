@@ -27,8 +27,10 @@ export const iconTemplate: Template = ({ componentName, jsx }, { tpl }) => {
   const fragmentJsx = jsxFragment(
     jsxOpeningFragment(),
     jsxClosingFragment(),
-    jsx.children
+    // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
+    jsx.children,
   );
+  // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
   const svgChildren = generate(fragmentJsx).code;
 
   const icon = `<SvgIcon

@@ -37,7 +37,7 @@ export const SyncIcon = forwardRef<SVGSVGElement, SyncIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 SyncIcon.displayName = "SyncIcon";

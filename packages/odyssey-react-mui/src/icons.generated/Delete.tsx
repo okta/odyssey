@@ -37,7 +37,7 @@ export const DeleteIcon = forwardRef<SVGSVGElement, DeleteIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 DeleteIcon.displayName = "DeleteIcon";

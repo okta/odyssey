@@ -37,7 +37,7 @@ export const ArrowRightIcon = forwardRef<SVGSVGElement, ArrowRightIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 ArrowRightIcon.displayName = "ArrowRightIcon";

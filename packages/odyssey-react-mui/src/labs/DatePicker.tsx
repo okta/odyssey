@@ -34,6 +34,7 @@ export const DatePicker = <TInputDate, TDate>({
   value = null,
 }: DatePickerProps<TInputDate, TDate>) => {
   const renderInput = useCallback(
+    // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
     ({ InputProps, ...props }) => {
       const combinedProps = {
         ...InputProps,
@@ -42,13 +43,14 @@ export const DatePicker = <TInputDate, TDate>({
 
       return <InputBase {...combinedProps} required={!isOptional} />;
     },
-    [isOptional]
+    [isOptional],
   );
 
   return (
     <MuiDatePicker
       label={label}
       onChange={onChange}
+      // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
       renderInput={renderInput}
       value={value}
     />

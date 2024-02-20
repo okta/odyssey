@@ -20,7 +20,7 @@ import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaDat
 import { axeRun } from "../../../axe-util";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { useCallback, useState } from "react";
+import { ChangeEvent, useCallback, useState } from "react";
 
 const storybookMeta: Meta<typeof PasswordField> = {
   title: "MUI Components/Forms/PasswordField",
@@ -171,14 +171,14 @@ export const Default: StoryObj<typeof PasswordField> = {
         await waitFor(() => {
           expect(fieldElement).toHaveAttribute("type", "text");
           expect(buttonElement.ariaLabel).toBe(
-            odysseyTranslate("passwordfield.icon.label.hide")
+            odysseyTranslate("passwordfield.icon.label.hide"),
           );
         });
         userEvent.click(buttonElement);
         await waitFor(() => {
           expect(fieldElement).toHaveAttribute("type", "password");
           expect(buttonElement.ariaLabel).toBe(
-            odysseyTranslate("passwordfield.icon.label.show")
+            odysseyTranslate("passwordfield.icon.label.show"),
           );
         });
       }
@@ -286,8 +286,9 @@ export const Controlled: StoryObj<typeof PasswordField> = {
   render: function C(props) {
     const [localValue, setLocalValue] = useState("");
     const onChange = useCallback(
-      (event) => setLocalValue(event?.target.value),
-      []
+      (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+        setLocalValue(event?.target.value),
+      [],
     );
     return (
       <PasswordField
@@ -315,8 +316,9 @@ export const ControlledDefaultInput: StoryObj<typeof PasswordField> = {
   render: function C(props) {
     const [localValue, setLocalValue] = useState("PasswordValue");
     const onChange = useCallback(
-      (event) => setLocalValue(event?.target.value),
-      []
+      (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+        setLocalValue(event?.target.value),
+      [],
     );
     return (
       <PasswordField

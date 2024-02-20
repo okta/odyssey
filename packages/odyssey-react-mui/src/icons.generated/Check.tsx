@@ -37,7 +37,7 @@ export const CheckIcon = forwardRef<SVGSVGElement, CheckIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 CheckIcon.displayName = "CheckIcon";

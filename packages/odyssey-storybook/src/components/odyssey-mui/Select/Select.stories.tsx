@@ -19,6 +19,7 @@ import { useCallback, useState } from "react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { axeRun } from "../../../axe-util";
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
+import { SelectChangeEvent } from "@mui/material";
 
 const optionsArray: SelectProps<string | string[], boolean>["options"] = [
   "Earth",
@@ -223,7 +224,7 @@ export const Default: StoryObj<typeof Select> = {
   play: async ({ canvasElement, step }) => {
     await step("Select Earth from the listbox", async () => {
       const comboBoxElement = canvasElement.querySelector(
-        '[aria-haspopup="listbox"]'
+        '[aria-haspopup="listbox"]',
       );
       if (comboBoxElement) {
         userEvent.click(comboBoxElement);
@@ -299,7 +300,7 @@ export const MultiSelect: StoryObj<typeof Select> = {
   play: async ({ canvasElement, step }) => {
     await step("Select Multiple items from the listbox", async () => {
       const comboBoxElement = canvasElement.querySelector(
-        '[aria-haspopup="listbox"]'
+        '[aria-haspopup="listbox"]',
       );
       if (comboBoxElement) {
         userEvent.click(comboBoxElement);
@@ -334,8 +335,9 @@ export const ControlledSelect: StoryObj<typeof Select> = {
   render: function C(props) {
     const [localValue, setLocalValue] = useState("");
     const onChange = useCallback(
-      (event) => setLocalValue(event.target.value),
-      []
+      (event: SelectChangeEvent<string | string[]>) =>
+        setLocalValue(event.target.value as string),
+      [],
     );
     return <Select {...props} value={localValue} onChange={onChange} />;
   },
@@ -357,8 +359,9 @@ export const ControlledMultipleSelect: StoryObj<typeof Select> = {
   render: function C(props) {
     const [localValue, setLocalValue] = useState([""]);
     const onChange = useCallback(
-      (event) => setLocalValue(event.target.value),
-      []
+      (event: SelectChangeEvent<string | string[]>) =>
+        setLocalValue(event.target.value as string[]),
+      [],
     );
     return <Select {...props} value={localValue} onChange={onChange} />;
   },
@@ -380,8 +383,9 @@ export const ControlledPreselectedMultipleSelect: StoryObj<typeof Select> = {
   render: function C(props) {
     const [localValue, setLocalValue] = useState(["Earth", "Mars"]);
     const onChange = useCallback(
-      (event) => setLocalValue(event.target.value),
-      []
+      (event: SelectChangeEvent<string | string[]>) =>
+        setLocalValue(event.target.value as string[]),
+      [],
     );
     return <Select {...props} value={localValue} onChange={onChange} />;
   },
@@ -399,8 +403,9 @@ export const ControlledEmptyValue: StoryObj<typeof Select> = {
   render: function C(props) {
     const [localValue, setLocalValue] = useState("");
     const onChange = useCallback(
-      (event) => setLocalValue(event.target.value),
-      []
+      (event: SelectChangeEvent<string | string[]>) =>
+        setLocalValue(event.target.value as string),
+      [],
     );
     return <Select {...props} value={localValue} onChange={onChange} />;
   },

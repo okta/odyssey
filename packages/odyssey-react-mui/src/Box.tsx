@@ -33,7 +33,7 @@ const Box = forwardRef<HTMLElement, BoxProps>(
       sx={sx}
       translate={translate}
     />
-  )
+  ),
 );
 
 const MemoizedBox = memo(Box);

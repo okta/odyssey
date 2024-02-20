@@ -94,7 +94,7 @@ export const DatePickerStandard: StoryObj<DatePickerProps<string, string>> = {
         onChange: (newValue) => setValue(newValue ?? ""),
         value,
       }),
-      [props, value]
+      [props, value],
     );
 
     return <DatePicker {...datePickerProps} />;

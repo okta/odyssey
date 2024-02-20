@@ -37,7 +37,7 @@ export const ClockIcon = forwardRef<SVGSVGElement, ClockIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 ClockIcon.displayName = "ClockIcon";

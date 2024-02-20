@@ -23,7 +23,11 @@ import {
   useRef,
 } from "react";
 
-import { MuiPropsContext, useMuiProps } from "./MuiPropsContext";
+import {
+  MuiPropsContext,
+  MuiPropsContextType,
+  useMuiProps,
+} from "./MuiPropsContext";
 import { Tooltip } from "./Tooltip";
 import type { HtmlProps } from "./HtmlProps";
 import { FocusHandle } from "./inputUtils";
@@ -166,7 +170,7 @@ const Button = ({
   const isFullWidth = useMemo(
     () =>
       buttonContext.isFullWidth ? buttonContext.isFullWidth : isFullWidthProp,
-    [buttonContext, isFullWidthProp]
+    [buttonContext, isFullWidthProp],
   );
 
   useImperativeHandle(
@@ -178,11 +182,12 @@ const Button = ({
         },
       };
     },
-    []
+    [],
   );
 
   const renderButton = useCallback(
-    (muiProps) => {
+    (muiProps: MuiPropsContextType) => {
+      //@ts-expect-error ref is not an optional prop on the props context type
       muiProps?.ref?.(localButtonRef.current);
 
       return (
@@ -232,7 +237,7 @@ const Button = ({
       translate,
       type,
       variant,
-    ]
+    ],
   );
 
   if (tooltipText) {

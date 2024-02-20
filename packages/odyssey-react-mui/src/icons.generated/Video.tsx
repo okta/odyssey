@@ -37,7 +37,7 @@ export const VideoIcon = forwardRef<SVGSVGElement, VideoIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 VideoIcon.displayName = "VideoIcon";
