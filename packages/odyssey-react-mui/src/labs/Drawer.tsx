@@ -155,34 +155,24 @@ const Drawer = ({
 
   useEffect(() => {
     let frameId: number;
-    let timeoutId: NodeJS.Timeout;
 
     const handleContentScroll = () => {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        const drawerContentElement = drawerContentRef.current;
-        if (drawerContentElement) {
-          setIsContentScrollable(
-            drawerContentElement.scrollHeight >
-              drawerContentElement.clientHeight
-          );
-        }
-      }, 200);
-    };
-
-    const handleResize = () => {
-      handleContentScroll();
+      const drawerContentElement = drawerContentRef.current;
+      if (drawerContentElement) {
+        cancelAnimationFrame(frameId);
+        setIsContentScrollable(
+          drawerContentElement.scrollHeight > drawerContentElement.clientHeight
+        );
+      }
+      frameId = requestAnimationFrame(handleContentScroll);
     };
 
     if (isOpen) {
       frameId = requestAnimationFrame(handleContentScroll);
-      window.addEventListener("resize", handleResize);
     }
 
     return () => {
       cancelAnimationFrame(frameId);
-      clearTimeout(timeoutId);
-      window.removeEventListener("resize", handleResize);
     };
   }, [isOpen]);
 
@@ -210,6 +200,7 @@ const Drawer = ({
       onClose={onClose}
       variant={variant}
       sx={{
+        //Overrides defualt MUI inline style
         ...(variant === "persistent" && {
           "& .MuiDrawer-paper": {
             transition: "none",
@@ -218,11 +209,12 @@ const Drawer = ({
       }}
     >
       <DrawerContentWrapper
-        odysseyDesignTokens={odysseyDesignTokens}
-        ref={drawerContentRef}
         {...(isContentScrollable && {
+          //Sets tabIndex on content element if scrollable so content is easier to navigate with the keyboard
           tabIndex: 0,
         })}
+        odysseyDesignTokens={odysseyDesignTokens}
+        ref={drawerContentRef}
       >
         <DrawerHeader
           translate={translate}

@@ -50,6 +50,12 @@ import {
 import { DesignTokens } from "./theme";
 import { CSSProperties } from "react";
 
+//Widths used in `Drawer` component
+const drawerSizes = {
+  persistent: "25.714rem", //~360px
+  temporary: "28.571rem", //~400px
+};
+
 export const components = ({
   odysseyTokens,
   shadowDomElement,
@@ -1047,7 +1053,10 @@ export const components = ({
       styleOverrides: {
         root: {},
         paper: ({ ownerState }) => ({
-          width: ownerState.variant === "temporary" ? "400px" : "360px",
+          width:
+            ownerState.variant === "temporary"
+              ? drawerSizes.temporary
+              : drawerSizes.persistent, //Temporary = overlay drawer, Persistent = inline drawer
           display: "flex",
           overflowY: "auto",
           flexDirection: "column",

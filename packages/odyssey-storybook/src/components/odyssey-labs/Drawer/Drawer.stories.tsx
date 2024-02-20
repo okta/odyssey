@@ -174,6 +174,20 @@ const storybookMeta: Meta<DrawerProps> = {
         },
       },
     },
+    showDividers: {
+      control: "text",
+      description:
+        "Shows divider lines separating header, content, and footer (if using action buttons)",
+      table: {
+        type: {
+          required: false,
+          summary: "boolean",
+        },
+        defaultValue: {
+          summary: "false",
+        },
+      },
+    },
     title: {
       control: "text",
       table: {
