@@ -400,10 +400,11 @@ const Select = <
           onChange={onChange}
           onFocus={onFocus}
           renderValue={
-            hasMultipleChoices && Array.isArray(value)
-              ? (value: Value) => (
-                  <Chips selection={value as string[]} isInteractive={false} />
-                )
+            hasMultipleChoices
+              ? (value: Value) =>
+                  Array.isArray(value) && (
+                    <Chips selection={value} isInteractive={false} />
+                  )
               : undefined
           }
           translate={translate}
