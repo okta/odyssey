@@ -5008,7 +5008,7 @@ __metadata:
   resolution: "@okta/odyssey-stylelint@workspace:packages/odyssey-stylelint"
   dependencies:
     jest: "npm:^29.7.0"
-    jest-preset-stylelint: "npm:^6.0.0"
+    jest-preset-stylelint: "npm:^6.1.0"
     postcss: "npm:^8.4.16"
     postcss-scss: "npm:^4.0.5"
     stylelint-checkstyle-formatter: "npm:^0.1.2"
@@ -17039,12 +17039,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-preset-stylelint@npm:^6.0.0":
-  version: 6.1.0
-  resolution: "jest-preset-stylelint@npm:6.1.0"
+"jest-preset-stylelint@npm:^6.1.0":
+  version: 6.3.2
+  resolution: "jest-preset-stylelint@npm:6.3.2"
   peerDependencies:
     jest: ^29.0.2
-  checksum: 10/e34cae2ad66c8f37123d00968cb2c204cdad43dc7b0acd245c02de645c0611abe72b21f52c1ea75e6668e6c08451a28ce210a9144593c4f5e623c70b81952f1a
+  checksum: 10/1d96bb19548147d88438095853ad5f66b7b69bea3df83b57c5395f59565429649f08b7a6322e80dee2388d04b4234ced40ccf8d50e58a6df6404dcbc29dfff33
   languageName: node
   linkType: hard
 

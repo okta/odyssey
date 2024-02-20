@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "jest": "^29.7.0",
-    "jest-preset-stylelint": "^6.0.0",
+    "jest-preset-stylelint": "^6.1.0",
     "postcss": "^8.4.16",
     "postcss-scss": "^4.0.5"
   },
