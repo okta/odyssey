@@ -48,6 +48,7 @@ export const columns: DataColumn[] = [
   {
     accessorKey: "startDate",
     header: "Start date",
+    //@ts-expect-error need to address typing here
     Cell: ({ cell }) => {
       return cell.getValue() ? cell.getValue() : "—";
     },
@@ -55,6 +56,7 @@ export const columns: DataColumn[] = [
   {
     accessorKey: "labsRelease",
     header: "Available in Odyssey Labs",
+    //@ts-expect-error need to address typing here
     Cell: ({ cell }) => {
       return cell.getValue() ? cell.getValue() : "—";
     },
@@ -62,6 +64,7 @@ export const columns: DataColumn[] = [
   {
     accessorKey: "fullRelease",
     header: "Available in full release",
+    //@ts-expect-error need to address typing here
     Cell: ({ cell }) => {
       return cell.getValue() ? cell.getValue() : "—";
     },

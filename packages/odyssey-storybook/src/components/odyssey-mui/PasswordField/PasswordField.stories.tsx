@@ -20,7 +20,7 @@ import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaDat
 import { axeRun } from "../../../axe-util";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { useCallback, useState } from "react";
+import { ChangeEvent, useCallback, useState } from "react";
 
 const storybookMeta: Meta<typeof PasswordField> = {
   title: "MUI Components/Forms/PasswordField",
@@ -286,7 +286,8 @@ export const Controlled: StoryObj<typeof PasswordField> = {
   render: function C(props) {
     const [localValue, setLocalValue] = useState("");
     const onChange = useCallback(
-      (event) => setLocalValue(event?.target.value),
+      (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+        setLocalValue(event?.target.value),
       [],
     );
     return (
@@ -315,7 +316,8 @@ export const ControlledDefaultInput: StoryObj<typeof PasswordField> = {
   render: function C(props) {
     const [localValue, setLocalValue] = useState("PasswordValue");
     const onChange = useCallback(
-      (event) => setLocalValue(event?.target.value),
+      (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+        setLocalValue(event?.target.value),
       [],
     );
     return (

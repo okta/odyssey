@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useCallback, useState } from "react";
+import { ChangeEvent, useCallback, useState } from "react";
 import { Radio, RadioGroup } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 import { expect } from "@storybook/jest";
@@ -180,7 +180,10 @@ export const ControlledRadioGroup: StoryObj<typeof RadioGroup> = {
   },
   render: function C(props) {
     const [value, setValue] = useState("Ludicrous Speed");
-    const onChange = useCallback((_, value) => setValue(value), []);
+    const onChange = useCallback(
+      (_event: ChangeEvent<HTMLInputElement>, value: string) => setValue(value),
+      [],
+    );
     return (
       <RadioGroup {...{ ...props, value, onChange }}>
         <Radio label="Light Speed" value="Light Speed" />

@@ -18,7 +18,7 @@ import { userEvent, waitFor, within, screen } from "@storybook/testing-library";
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { axeRun } from "../../../axe-util";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { useCallback, useState } from "react";
+import { SyntheticEvent, useCallback, useState } from "react";
 
 const stations: ReadonlyArray<StationType> = [
   { label: "Anderson Station" },
@@ -399,7 +399,13 @@ export const ControlledMultipleAutocomplete: StoryObj<JupiterMoonsAutocomplete> 
       const [localValue, setLocalValue] = useState<MoonMeta[] | undefined>(
         jupiterGalileanMoons.slice(0, 2),
       );
-      const onChange = useCallback((_, v) => setLocalValue(v), []);
+      const onChange = useCallback(
+        (
+          _event: SyntheticEvent<Element, Event>,
+          value: string | MoonMeta | (string | MoonMeta)[] | null,
+        ) => setLocalValue(value as MoonMeta[]),
+        [],
+      );
       return <Autocomplete {...props} value={localValue} onChange={onChange} />;
     },
   };
@@ -436,7 +442,13 @@ export const ControlledAutocomplete: StoryObj<JupiterMoonsAutocomplete> = {
     const [localValue, setLocalValue] = useState<MoonMeta | undefined>(
       jupiterGalileanMoons[0],
     );
-    const onChange = useCallback((_, v) => setLocalValue(v), []);
+    const onChange = useCallback(
+      (
+        _event: SyntheticEvent<Element, Event>,
+        value: string | MoonMeta | (string | MoonMeta)[] | null,
+      ) => setLocalValue(value as MoonMeta[]),
+      [],
+    );
     return <Autocomplete {...props} value={localValue} onChange={onChange} />;
   },
 };

@@ -19,6 +19,7 @@ import { useCallback, useState } from "react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { axeRun } from "../../../axe-util";
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
+import { SelectChangeEvent } from "@mui/material";
 
 const optionsArray: SelectProps<string | string[], boolean>["options"] = [
   "Earth",
@@ -334,7 +335,8 @@ export const ControlledSelect: StoryObj<typeof Select> = {
   render: function C(props) {
     const [localValue, setLocalValue] = useState("");
     const onChange = useCallback(
-      (event) => setLocalValue(event.target.value),
+      (event: SelectChangeEvent<string | string[]>) =>
+        setLocalValue(event.target.value as string),
       [],
     );
     return <Select {...props} value={localValue} onChange={onChange} />;
@@ -357,7 +359,8 @@ export const ControlledMultipleSelect: StoryObj<typeof Select> = {
   render: function C(props) {
     const [localValue, setLocalValue] = useState([""]);
     const onChange = useCallback(
-      (event) => setLocalValue(event.target.value),
+      (event: SelectChangeEvent<string | string[]>) =>
+        setLocalValue(event.target.value as string[]),
       [],
     );
     return <Select {...props} value={localValue} onChange={onChange} />;
@@ -380,7 +383,8 @@ export const ControlledPreselectedMultipleSelect: StoryObj<typeof Select> = {
   render: function C(props) {
     const [localValue, setLocalValue] = useState(["Earth", "Mars"]);
     const onChange = useCallback(
-      (event) => setLocalValue(event.target.value),
+      (event: SelectChangeEvent<string | string[]>) =>
+        setLocalValue(event.target.value as string[]),
       [],
     );
     return <Select {...props} value={localValue} onChange={onChange} />;
@@ -399,7 +403,8 @@ export const ControlledEmptyValue: StoryObj<typeof Select> = {
   render: function C(props) {
     const [localValue, setLocalValue] = useState("");
     const onChange = useCallback(
-      (event) => setLocalValue(event.target.value),
+      (event: SelectChangeEvent<string | string[]>) =>
+        setLocalValue(event.target.value as string),
       [],
     );
     return <Select {...props} value={localValue} onChange={onChange} />;
