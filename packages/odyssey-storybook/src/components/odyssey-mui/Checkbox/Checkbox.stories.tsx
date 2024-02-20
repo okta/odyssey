@@ -23,7 +23,7 @@ import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaDat
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { axeRun } from "../../../axe-util";
 import type { PlaywrightProps } from "../storybookTypes";
-import { useCallback, useState } from "react";
+import { ChangeEvent, useCallback, useState } from "react";
 
 const storybookMeta: Meta<typeof Checkbox> = {
   title: "MUI Components/Forms/Checkbox",
@@ -281,7 +281,11 @@ export const Controlled: StoryObj<typeof Checkbox> = {
   },
   render: function C(args) {
     const [isChecked, setIsChecked] = useState(true);
-    const onChange = useCallback((_, checked) => setIsChecked(checked), []);
+    const onChange = useCallback(
+      (_event: ChangeEvent<HTMLInputElement>, checked: boolean) =>
+        setIsChecked(checked),
+      [],
+    );
     return (
       <Checkbox
         {...args}

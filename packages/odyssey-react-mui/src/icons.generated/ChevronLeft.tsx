@@ -37,7 +37,7 @@ export const ChevronLeftIcon = forwardRef<SVGSVGElement, ChevronLeftIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 ChevronLeftIcon.displayName = "ChevronLeftIcon";

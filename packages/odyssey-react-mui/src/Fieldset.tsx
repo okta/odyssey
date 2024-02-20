@@ -69,7 +69,7 @@ const Fieldset = ({
     () => ({
       isDisabled,
     }),
-    [isDisabled]
+    [isDisabled],
   );
 
   return (

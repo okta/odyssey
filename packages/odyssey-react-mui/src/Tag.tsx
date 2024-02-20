@@ -13,7 +13,7 @@
 import { Chip as MuiChip, ChipProps as MuiChipProps } from "@mui/material";
 import { memo, ReactElement, useCallback, useContext } from "react";
 import { TagListContext } from "./TagListContext";
-import { MuiPropsContext } from "./MuiPropsContext";
+import { MuiPropsContext, MuiPropsContextType } from "./MuiPropsContext";
 import { HtmlProps } from "./HtmlProps";
 
 export type TagProps = {
@@ -45,7 +45,7 @@ const Tag = ({
   const { chipElementType } = useContext(TagListContext);
 
   const renderTag = useCallback(
-    (muiProps) => (
+    (muiProps: MuiPropsContextType) => (
       <MuiChip
         {...muiProps}
         aria-disabled={isDisabled}
@@ -69,7 +69,7 @@ const Tag = ({
       onRemove,
       testId,
       translate,
-    ]
+    ],
   );
 
   return <MuiPropsContext.Consumer>{renderTag}</MuiPropsContext.Consumer>;

@@ -72,7 +72,7 @@ const MenuItem = ({
         closeMenu();
       }
     },
-    [onClickProp, closeMenu, shouldCloseOnSelect]
+    [onClickProp, closeMenu, shouldCloseOnSelect],
   );
 
   return (

@@ -28,7 +28,7 @@ import {
 import { DefaultSupportedLanguages } from "./OdysseyTranslationProvider.types";
 
 export type OdysseyProviderProps<
-  SupportedLanguages extends string = DefaultSupportedLanguages
+  SupportedLanguages extends string = DefaultSupportedLanguages,
 > = OdysseyCacheProviderProps &
   OdysseyThemeProviderProps &
   OdysseyTranslationProviderProps<SupportedLanguages> & {

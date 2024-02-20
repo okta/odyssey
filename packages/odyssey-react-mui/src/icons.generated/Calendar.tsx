@@ -37,7 +37,7 @@ export const CalendarIcon = forwardRef<SVGSVGElement, CalendarIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 CalendarIcon.displayName = "CalendarIcon";

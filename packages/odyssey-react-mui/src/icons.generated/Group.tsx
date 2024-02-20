@@ -37,7 +37,7 @@ export const GroupIcon = forwardRef<SVGSVGElement, GroupIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 GroupIcon.displayName = "GroupIcon";

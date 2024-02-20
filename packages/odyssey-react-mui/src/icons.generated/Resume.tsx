@@ -37,7 +37,7 @@ export const ResumeIcon = forwardRef<SVGSVGElement, ResumeIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 ResumeIcon.displayName = "ResumeIcon";

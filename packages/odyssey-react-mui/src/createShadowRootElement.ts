@@ -11,7 +11,7 @@
  */
 
 export const createShadowRootElement = (
-  containerElement: HTMLElement
+  containerElement: HTMLElement,
 ): [HTMLStyleElement, HTMLDivElement] => {
   const shadowRoot = containerElement.attachShadow({ mode: "open" });
 

@@ -147,7 +147,7 @@ const MenuButton = ({
 
   const menuListProps = useMemo(
     () => ({ "aria-labelledby": `${uniqueId}-button` }),
-    [uniqueId]
+    [uniqueId],
   );
 
   const providerValue = useMemo<MenuContextType>(
@@ -156,7 +156,7 @@ const MenuButton = ({
       openMenu,
       shouldCloseOnSelect,
     }),
-    [closeMenu, openMenu, shouldCloseOnSelect]
+    [closeMenu, openMenu, shouldCloseOnSelect],
   );
 
   const endIcon = endIconProp ? (
@@ -172,8 +172,8 @@ const MenuButton = ({
       ({
         horizontal: menuAlignment,
         vertical: "bottom",
-      } as PopoverOrigin),
-    [menuAlignment]
+      }) as PopoverOrigin,
+    [menuAlignment],
   );
 
   const transformOrigin = useMemo(
@@ -181,8 +181,8 @@ const MenuButton = ({
       ({
         horizontal: menuAlignment,
         vertical: "top",
-      } as PopoverOrigin),
-    [menuAlignment]
+      }) as PopoverOrigin,
+    [menuAlignment],
   );
 
   return (

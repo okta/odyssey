@@ -38,7 +38,7 @@ const FieldError = ({
   return (
     <FormHelperText data-se={testId} error id={id} translate={translate}>
       <ScreenReaderText translate={translate}>{`${t(
-        "fielderror.screenreader.text"
+        "fielderror.screenreader.text",
       )}:`}</ScreenReaderText>
       <Box>
         {message}

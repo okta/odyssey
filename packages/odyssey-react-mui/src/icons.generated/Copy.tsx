@@ -37,7 +37,7 @@ export const CopyIcon = forwardRef<SVGSVGElement, CopyIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 CopyIcon.displayName = "CopyIcon";

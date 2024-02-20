@@ -72,7 +72,10 @@ export type TileProps = {
 ) &
   HtmlProps;
 
-const ImageContainer = styled.div<{
+const ImageContainer = styled("div", {
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "hasMenuButtonChildren",
+})<{
   odysseyDesignTokens: DesignTokens;
   hasMenuButtonChildren: boolean;
 }>`
@@ -81,11 +84,13 @@ const ImageContainer = styled.div<{
   max-height: ${TILE_IMAGE_HEIGHT};
   margin-block-end: ${({ odysseyDesignTokens }) =>
     odysseyDesignTokens.Spacing5};
-  padding-right: ${({ odysseyDesignTokens, hasmenuButtonChildren }) =>
-    hasmenuButtonChildren ? odysseyDesignTokens.Spacing5 : 0};
+  padding-right: ${({ odysseyDesignTokens, hasMenuButtonChildren }) =>
+    hasMenuButtonChildren ? odysseyDesignTokens.Spacing5 : 0};
 `;
 
-const MenuButtonContainer = styled.div<{ odysseyDesignTokens: DesignTokens }>`
+const MenuButtonContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{ odysseyDesignTokens: DesignTokens }>`
   position: absolute;
   right: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing3};
   top: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing3};
@@ -110,7 +115,7 @@ const Tile = ({
         {image && (
           <ImageContainer
             odysseyDesignTokens={odysseyDesignTokens}
-            hasmenuButtonChildren={Boolean(menuButtonChildren)}
+            hasMenuButtonChildren={Boolean(menuButtonChildren)}
           >
             {image}
           </ImageContainer>
@@ -139,7 +144,7 @@ const Tile = ({
       overline,
       title,
       odysseyDesignTokens,
-    ]
+    ],
   );
 
   return (

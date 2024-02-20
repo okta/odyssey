@@ -20,7 +20,7 @@ describe("OdysseyTranslationProvider", () => {
     render(
       <OdysseyTranslationProvider>
         <span>{odysseyTranslate("fieldlabel.optional.text")}</span>
-      </OdysseyTranslationProvider>
+      </OdysseyTranslationProvider>,
     );
 
     expect(screen.getByText("Optional"));
@@ -30,7 +30,7 @@ describe("OdysseyTranslationProvider", () => {
     render(
       <OdysseyTranslationProvider languageCode="test">
         <span>{odysseyTranslate("fieldlabel.optional.text")}</span>
-      </OdysseyTranslationProvider>
+      </OdysseyTranslationProvider>,
     );
 
     expect(screen.getByText("Optional"));
@@ -50,11 +50,11 @@ describe("OdysseyTranslationProvider", () => {
         translationOverrides={translationOverrides}
       >
         <TextField label="" isOptional />
-      </OdysseyTranslationProvider>
+      </OdysseyTranslationProvider>,
     );
 
     expect(
-      screen.getByText("\u063A\u064A\u0631 \u0645\u0637\u0644\u0648\u0628")
+      screen.getByText("\u063A\u064A\u0631 \u0645\u0637\u0644\u0648\u0628"),
     );
   });
 
@@ -68,7 +68,7 @@ describe("OdysseyTranslationProvider", () => {
     render(
       <OdysseyTranslationProvider translationOverrides={translationOverrides}>
         <TextField label="" isOptional />
-      </OdysseyTranslationProvider>
+      </OdysseyTranslationProvider>,
     );
 
     expect(screen.getByText("Non Required"));
@@ -87,7 +87,7 @@ describe("OdysseyTranslationProvider", () => {
         translationOverrides={translationOverrides}
       >
         <TextField label="" isOptional />
-      </OdysseyTranslationProvider>
+      </OdysseyTranslationProvider>,
     );
 
     expect(screen.getByText("Optionnel"));
