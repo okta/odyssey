@@ -141,8 +141,7 @@ const Tabs = ({
   }, [value]);
 
   const renderTab = useCallback(
-    // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
-    (tab, index) => {
+    (tab: TabItemProps, index: number) => {
       const {
         testId,
         isDisabled,

@@ -24,7 +24,10 @@ import {
 
 import { CloseCircleFilledIcon, SearchIcon } from "./icons.generated";
 import { Field } from "./Field";
-import { FieldComponentProps } from "./FieldComponentProps";
+import {
+  FieldComponentProps,
+  FieldComponentRenderProps,
+} from "./FieldComponentProps";
 import type { HtmlProps } from "./HtmlProps";
 import { getControlState, useInputValues } from "./inputUtils";
 
@@ -87,6 +90,11 @@ export type SearchFieldProps = {
 > &
   HtmlProps;
 
+type FieldRenderProps = Partial<
+  Pick<FieldComponentRenderProps, "ariaDescribedBy">
+> &
+  Pick<FieldComponentRenderProps, "id">;
+
 const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
   (
     {
@@ -136,8 +144,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
     });
 
     const renderFieldComponent = useCallback(
-      // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
-      ({ ariaDescribedBy, id }) => (
+      ({ ariaDescribedBy, id }: FieldRenderProps) => (
         <InputBase
           {...inputValues}
           inputProps={{
@@ -207,7 +214,6 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         isFullWidth={isFullWidth}
         isOptional={true}
         label={label}
-        // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
         renderFieldComponent={renderFieldComponent}
       />
     );

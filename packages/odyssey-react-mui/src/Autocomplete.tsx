@@ -16,6 +16,7 @@ import {
   InputBase,
   UseAutocompleteProps,
   AutocompleteValue,
+  AutocompleteRenderInputParams,
 } from "@mui/material";
 import { memo, useCallback, useMemo, useRef } from "react";
 
@@ -248,14 +249,18 @@ const Autocomplete = <
   }, [inputValue]);
 
   const renderInput = useCallback(
-    // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
-    ({ InputLabelProps, InputProps, ...params }) => (
+    ({
+      InputLabelProps,
+      InputProps,
+      ...params
+    }: AutocompleteRenderInputParams) => (
       <Field
         ariaDescribedBy={ariaDescribedBy}
         errorMessage={errorMessage}
         errorMessageList={errorMessageList}
         fieldType="single"
         hasVisibleLabel
+        //@ts-expect-error htmlFor does not exist ont he InputLabelProps for autocomplete
         id={InputLabelProps.htmlFor}
         hint={hint}
         HintLinkComponent={HintLinkComponent}

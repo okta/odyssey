@@ -25,7 +25,10 @@ import {
   SelectProps as MuiSelectProps,
 } from "@mui/material";
 import { Field } from "./Field";
-import { FieldComponentProps } from "./FieldComponentProps";
+import {
+  FieldComponentProps,
+  FieldComponentRenderProps,
+} from "./FieldComponentProps";
 import type { HtmlProps } from "./HtmlProps";
 import { FocusHandle, getControlState, useInputValues } from "./inputUtils";
 
@@ -104,6 +107,11 @@ export type NativeSelectProps<
 > &
   HtmlProps;
 
+type NativeSelectRenderProps = Partial<
+  Pick<FieldComponentRenderProps, "ariaDescribedBy" | "errorMessageElementId">
+> &
+  Pick<FieldComponentRenderProps, "labelElementId">;
+
 const NativeSelect = forwardRef(
   <
     Value extends NativeSelectValueType<HasMultipleChoices>,
@@ -178,8 +186,11 @@ const NativeSelect = forwardRef(
       [hasMultipleChoicesProp, isMultiSelect],
     );
     const renderFieldComponent = useCallback(
-      // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
-      ({ ariaDescribedBy, errorMessageElementId, labelElementId }) => (
+      ({
+        ariaDescribedBy,
+        errorMessageElementId,
+        labelElementId,
+      }: NativeSelectRenderProps) => (
         <MuiSelect
           {...inputValues}
           aria-describedby={ariaDescribedBy}
@@ -231,7 +242,6 @@ const NativeSelect = forwardRef(
         isFullWidth={isFullWidth}
         isOptional={isOptional}
         label={label}
-        // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
         renderFieldComponent={renderFieldComponent}
       />
     );

@@ -23,7 +23,10 @@ import {
 } from "react";
 import { InputAdornment, InputBase } from "@mui/material";
 
-import { FieldComponentProps } from "./FieldComponentProps";
+import {
+  FieldComponentProps,
+  FieldComponentRenderProps,
+} from "./FieldComponentProps";
 import { Field } from "./Field";
 import { HtmlProps } from "./HtmlProps";
 import { FocusHandle, useInputValues, getControlState } from "./inputUtils";
@@ -103,6 +106,11 @@ export type TextFieldProps = {
 } & FieldComponentProps &
   HtmlProps;
 
+type FieldRenderProps = Partial<
+  Pick<FieldComponentRenderProps, "ariaDescribedBy" | "errorMessageElementId">
+> &
+  Pick<FieldComponentRenderProps, "id" | "labelElementId">;
+
 const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (
     {
@@ -172,8 +180,12 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     );
 
     const renderFieldComponent = useCallback(
-      // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
-      ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
+      ({
+        ariaDescribedBy,
+        errorMessageElementId,
+        id,
+        labelElementId,
+      }: FieldRenderProps) => (
         <InputBase
           {...inputValues}
           aria-describedby={ariaDescribedBy}
@@ -251,7 +263,6 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         isFullWidth={isFullWidth}
         isOptional={isOptional}
         label={label}
-        // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
         renderFieldComponent={renderFieldComponent}
       />
     );

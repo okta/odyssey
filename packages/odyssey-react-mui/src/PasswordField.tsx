@@ -24,7 +24,10 @@ import {
 
 import { ShowIcon, HideIcon } from "./icons.generated";
 import { Field } from "./Field";
-import { FieldComponentProps } from "./FieldComponentProps";
+import {
+  FieldComponentProps,
+  FieldComponentRenderProps,
+} from "./FieldComponentProps";
 import type { HtmlProps } from "./HtmlProps";
 import { useTranslation } from "react-i18next";
 import { FocusHandle, getControlState, useInputValues } from "./inputUtils";
@@ -78,6 +81,11 @@ export type PasswordFieldProps = {
   value?: string;
 } & FieldComponentProps &
   HtmlProps;
+
+type FieldRenderProps = Partial<
+  Pick<FieldComponentRenderProps, "ariaDescribedBy" | "errorMessageElementId">
+> &
+  Pick<FieldComponentRenderProps, "id" | "labelElementId">;
 
 const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
   (
@@ -152,8 +160,12 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
     );
 
     const renderFieldComponent = useCallback(
-      // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
-      ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
+      ({
+        ariaDescribedBy,
+        errorMessageElementId,
+        id,
+        labelElementId,
+      }: FieldRenderProps) => (
         <InputBase
           {...inputValues}
           aria-describedby={ariaDescribedBy}
@@ -233,7 +245,6 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
         isFullWidth={isFullWidth}
         isOptional={isOptional}
         label={label}
-        // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
         renderFieldComponent={renderFieldComponent}
       />
     );

@@ -31,7 +31,10 @@ import {
 import { SelectProps as MuiSelectProps } from "@mui/material";
 
 import { Field } from "./Field";
-import { FieldComponentProps } from "./FieldComponentProps";
+import {
+  FieldComponentProps,
+  FieldComponentRenderProps,
+} from "./FieldComponentProps";
 import { CheckIcon } from "./icons.generated";
 import type { HtmlProps } from "./HtmlProps";
 import {
@@ -110,6 +113,11 @@ export type SelectProps<
   | "name"
 > &
   HtmlProps;
+
+type SelectRenderProps = Partial<
+  Pick<FieldComponentRenderProps, "ariaDescribedBy" | "errorMessageElementId">
+> &
+  Pick<FieldComponentRenderProps, "id" | "labelElementId">;
 
 /**
  * Options in Odyssey <Select> are passed as an array, which can contain any combination
@@ -305,8 +313,12 @@ const Select = <
   );
 
   const renderFieldComponent = useCallback(
-    // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
-    ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
+    ({
+      ariaDescribedBy,
+      errorMessageElementId,
+      id,
+      labelElementId,
+    }: SelectRenderProps) => (
       <MuiSelect
         {...inputValues}
         aria-describedby={ariaDescribedBy}
@@ -357,7 +369,6 @@ const Select = <
       isFullWidth={isFullWidth}
       isOptional={isOptional}
       label={label}
-      // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
       renderFieldComponent={renderFieldComponent}
     />
   );

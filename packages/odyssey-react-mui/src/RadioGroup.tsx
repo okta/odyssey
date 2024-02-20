@@ -18,7 +18,10 @@ import { memo, ReactElement, useCallback, useRef } from "react";
 
 import { Radio, RadioProps } from "./Radio";
 import { Field } from "./Field";
-import { FieldComponentProps } from "./FieldComponentProps";
+import {
+  FieldComponentProps,
+  FieldComponentRenderProps,
+} from "./FieldComponentProps";
 import type { HtmlProps } from "./HtmlProps";
 import { getControlState, useInputValues } from "./inputUtils";
 
@@ -56,6 +59,11 @@ export type RadioGroupProps = {
 > &
   HtmlProps;
 
+type FieldRenderProps = Partial<
+  Pick<FieldComponentRenderProps, "ariaDescribedBy" | "errorMessageElementId">
+> &
+  Pick<FieldComponentRenderProps, "id" | "labelElementId">;
+
 const RadioGroup = ({
   ariaDescribedBy,
   children,
@@ -92,8 +100,12 @@ const RadioGroup = ({
     [onChangeProp],
   );
   const renderFieldComponent = useCallback(
-    // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
-    ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
+    ({
+      ariaDescribedBy,
+      errorMessageElementId,
+      id,
+      labelElementId,
+    }: FieldRenderProps) => (
       <MuiRadioGroup
         {...inputValues}
         aria-describedby={ariaDescribedBy}
@@ -123,7 +135,6 @@ const RadioGroup = ({
       id={idOverride}
       isDisabled={isDisabled}
       label={label}
-      // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
       renderFieldComponent={renderFieldComponent}
     />
   );

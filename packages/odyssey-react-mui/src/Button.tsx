@@ -23,7 +23,11 @@ import {
   useRef,
 } from "react";
 
-import { MuiPropsContext, useMuiProps } from "./MuiPropsContext";
+import {
+  MuiPropsContext,
+  MuiPropsContextType,
+  useMuiProps,
+} from "./MuiPropsContext";
 import { Tooltip } from "./Tooltip";
 import type { HtmlProps } from "./HtmlProps";
 import { FocusHandle } from "./inputUtils";
@@ -182,8 +186,8 @@ const Button = ({
   );
 
   const renderButton = useCallback(
-    // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
-    (muiProps) => {
+    (muiProps: MuiPropsContextType) => {
+      //@ts-expect-error ref is not an optional prop on the props context type
       muiProps?.ref?.(localButtonRef.current);
 
       return (

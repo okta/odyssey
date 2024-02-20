@@ -10,16 +10,20 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { AutocompleteGetTagProps } from "@mui/material/useAutocomplete";
+import type {
+  AutocompleteFreeSoloValueMapping,
+  AutocompleteGetTagProps,
+} from "@mui/material/useAutocomplete";
 
 import {
   Autocomplete as MuiAutocomplete,
   Avatar as MuiAvatar,
   Box,
   InputBase,
+  AutocompleteRenderInputParams,
 } from "@mui/material";
 import { avatarClasses } from "@mui/material/Avatar";
-import { memo, useCallback } from "react";
+import { HTMLAttributes, memo, useCallback } from "react";
 
 import { AutocompleteProps } from "../Autocomplete";
 import { Field } from "../Field";
@@ -72,19 +76,26 @@ const GroupPicker = <
 }: GroupPickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
-  // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
-  const isOptionEqualToValue = useCallback((sourceValue, targetValue) => {
-    return sourceValue.id === targetValue.id;
-  }, []);
+  const isOptionEqualToValue = useCallback(
+    (sourceValue: OptionType, targetValue: OptionType) => {
+      return sourceValue.id === targetValue.id;
+    },
+    [],
+  );
 
-  // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
-  const getOptionLabel = useCallback((option) => {
-    return option.name;
-  }, []);
+  const getOptionLabel = useCallback(
+    (
+      option:
+        | OptionType
+        | AutocompleteFreeSoloValueMapping<IsCustomValueAllowed>,
+    ) => {
+      return (option as OptionType).name;
+    },
+    [],
+  );
 
   const renderOption = useCallback(
-    // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
-    (props, option) => {
+    (props: HTMLAttributes<HTMLElement>, option: OptionType) => {
       return (
         <li {...props} key={option.id}>
           <Box
@@ -193,11 +204,15 @@ const GroupPicker = <
   );
 
   const renderInput = useCallback(
-    // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
-    ({ InputLabelProps, InputProps, ...params }) => (
+    ({
+      InputLabelProps,
+      InputProps,
+      ...params
+    }: AutocompleteRenderInputParams) => (
       <Field
         fieldType="single"
         hasVisibleLabel
+        //@ts-expect-error htmlFor is not available on the currently typed params
         id={InputLabelProps.htmlFor}
         hint={hint}
         label={label}

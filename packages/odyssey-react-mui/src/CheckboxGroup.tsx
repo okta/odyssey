@@ -15,7 +15,10 @@ import { memo, ReactElement, useCallback } from "react";
 
 import { Checkbox } from "./Checkbox";
 import { Field } from "./Field";
-import { FieldComponentProps } from "./FieldComponentProps";
+import {
+  FieldComponentProps,
+  FieldComponentRenderProps,
+} from "./FieldComponentProps";
 import type { HtmlProps } from "./HtmlProps";
 
 export type CheckboxGroupProps = {
@@ -45,6 +48,14 @@ export type CheckboxGroupProps = {
 > &
   HtmlProps;
 
+type CheckboxGroupRenderProps = Pick<
+  FieldComponentRenderProps,
+  "id" | "labelElementId"
+> &
+  Partial<
+    Pick<FieldComponentRenderProps, "ariaDescribedBy" | "errorMessageElementId">
+  >;
+
 const CheckboxGroup = ({
   ariaDescribedBy,
   children,
@@ -60,8 +71,12 @@ const CheckboxGroup = ({
   translate,
 }: CheckboxGroupProps) => {
   const renderFieldComponent = useCallback(
-    // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
-    ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
+    ({
+      ariaDescribedBy,
+      errorMessageElementId,
+      id,
+      labelElementId,
+    }: CheckboxGroupRenderProps) => (
       <MuiFormGroup
         aria-describedby={ariaDescribedBy}
         aria-errormessage={errorMessageElementId}
@@ -89,7 +104,6 @@ const CheckboxGroup = ({
       isDisabled={isDisabled}
       isOptional={!isRequired}
       label={label}
-      // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
       renderFieldComponent={renderFieldComponent}
     />
   );
