@@ -37,7 +37,7 @@ export const FilterIcon = forwardRef<SVGSVGElement, FilterIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 FilterIcon.displayName = "FilterIcon";

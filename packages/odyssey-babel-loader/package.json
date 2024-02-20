@@ -19,7 +19,7 @@
     "babel-loader": "^9.1.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.9",
+    "@babel/core": "^7.23.9",
     "@okta/odyssey-lifecycle": "workspace:*",
     "webpack": "4.46.0"
   }

@@ -37,7 +37,7 @@ export const DownloadIcon = forwardRef<SVGSVGElement, DownloadIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 DownloadIcon.displayName = "DownloadIcon";

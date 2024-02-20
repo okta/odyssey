@@ -37,7 +37,7 @@ export const UploadIcon = forwardRef<SVGSVGElement, UploadIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 UploadIcon.displayName = "UploadIcon";

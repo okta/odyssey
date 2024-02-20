@@ -37,7 +37,7 @@ export const ChatIcon = forwardRef<SVGSVGElement, ChatIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 ChatIcon.displayName = "ChatIcon";

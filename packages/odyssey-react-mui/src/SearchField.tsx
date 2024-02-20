@@ -24,7 +24,10 @@ import {
 
 import { CloseCircleFilledIcon, SearchIcon } from "./icons.generated";
 import { Field } from "./Field";
-import { FieldComponentProps } from "./FieldComponentProps";
+import {
+  FieldComponentProps,
+  FieldComponentRenderProps,
+} from "./FieldComponentProps";
 import type { HtmlProps } from "./HtmlProps";
 import { getControlState, useInputValues } from "./inputUtils";
 
@@ -87,6 +90,11 @@ export type SearchFieldProps = {
 > &
   HtmlProps;
 
+type FieldRenderProps = Partial<
+  Pick<FieldComponentRenderProps, "ariaDescribedBy">
+> &
+  Pick<FieldComponentRenderProps, "id">;
+
 const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
   (
     {
@@ -109,14 +117,14 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       translate,
       value,
     },
-    ref
+    ref,
   ) => {
     const onChange: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> =
       useCallback(
         (event) => {
           onChangeProp?.(event);
         },
-        [onChangeProp]
+        [onChangeProp],
       );
 
     const onClear = useCallback(() => {
@@ -127,7 +135,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       getControlState({
         controlledValue: value,
         uncontrolledValue: defaultValue,
-      })
+      }),
     );
     const inputValues = useInputValues({
       defaultValue,
@@ -136,7 +144,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
     });
 
     const renderFieldComponent = useCallback(
-      ({ ariaDescribedBy, id }) => (
+      ({ ariaDescribedBy, id }: FieldRenderProps) => (
         <InputBase
           {...inputValues}
           inputProps={{
@@ -193,7 +201,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         tabIndex,
         testId,
         translate,
-      ]
+      ],
     );
 
     return (
@@ -209,7 +217,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         renderFieldComponent={renderFieldComponent}
       />
     );
-  }
+  },
 );
 
 const MemoizedSearchField = memo(SearchField);

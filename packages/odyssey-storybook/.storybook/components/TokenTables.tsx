@@ -177,7 +177,7 @@ const renderTransition = ({ name, value }: TokenDataItem) => {
       }`,
       width: "1.5em",
     }),
-    [name, value]
+    [name, value],
   );
 
   const [styles, setStyles] = useState(defaultTransitionStyles);

@@ -18,7 +18,7 @@ const HintLink = (
   props: Pick<
     LinkProps,
     "children" | "href" | "onClick" | "rel" | "target" | "testId"
-  >
+  >,
 ) => <Link {...props} variant="default" />;
 
 const MemoizedHintLink = memo(HintLink);

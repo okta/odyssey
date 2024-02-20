@@ -37,7 +37,7 @@ export const DirectoryIcon = forwardRef<SVGSVGElement, DirectoryIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 DirectoryIcon.displayName = "DirectoryIcon";

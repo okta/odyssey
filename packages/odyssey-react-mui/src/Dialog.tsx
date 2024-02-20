@@ -89,7 +89,7 @@ const Dialog = ({
       if (dialogContentElement) {
         cancelAnimationFrame(frameId);
         setIsContentScrollable(
-          dialogContentElement.scrollHeight > dialogContentElement.clientHeight
+          dialogContentElement.scrollHeight > dialogContentElement.clientHeight,
         );
       }
       frameId = requestAnimationFrame(handleContentScroll);

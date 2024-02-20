@@ -37,7 +37,7 @@ export const ListIcon = forwardRef<SVGSVGElement, ListIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 ListIcon.displayName = "ListIcon";

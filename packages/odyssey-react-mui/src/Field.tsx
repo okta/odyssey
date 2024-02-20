@@ -119,14 +119,14 @@ const Field = ({
     () =>
       [hintId, errorMessageElementId, ariaDescribedBy].join(" ").trim() ||
       undefined,
-    [ariaDescribedBy, errorMessageElementId, hintId]
+    [ariaDescribedBy, errorMessageElementId, hintId],
   );
 
   const { isDisabled: isFieldsetDisabled } = useFieldset();
 
   const isDisabled = useMemo(
     () => isDisabledProp || isFieldsetDisabled,
-    [isDisabledProp, isFieldsetDisabled]
+    [isDisabledProp, isFieldsetDisabled],
   );
 
   return (

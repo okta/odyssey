@@ -37,7 +37,7 @@ export const DevicesIcon = forwardRef<SVGSVGElement, DevicesIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 DevicesIcon.displayName = "DevicesIcon";

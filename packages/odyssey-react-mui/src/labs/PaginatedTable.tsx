@@ -78,7 +78,7 @@ const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
     useRef<MRT_Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
 
   const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>(
-    []
+    [],
   );
 
   const [globalFilter, setGlobalFilter] = useState<string>();
@@ -123,7 +123,7 @@ const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
           />
         </Typography>
       ),
-    [fetchMoreData, totalFetchedRows]
+    [fetchMoreData, totalFetchedRows],
   );
 
   const renderTopToolbarCustomActions = useCallback<
@@ -135,7 +135,7 @@ const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
     ({ table }: { table: MRT_TableInstance<TData> }) => (
       <>{ToolbarButtons && <ToolbarButtons table={table} />}</>
     ),
-    [ToolbarButtons]
+    [ToolbarButtons],
   );
 
   const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
@@ -148,12 +148,13 @@ const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
     initialState?.pagination || {
       pageIndex: 0,
       pageSize: rowsPerPage,
-    }
+    },
   );
 
   const dataLengthRef = useRef(data.length);
 
   const updatePagination = useCallback(
+    // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
     (paginationFunction) => {
       if (data.length === dataLengthRef.current) {
         setPagination((previousPagination) => {
@@ -164,7 +165,7 @@ const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
         dataLengthRef.current = data.length;
       }
     },
-    [data.length]
+    [data.length],
   );
 
   useEffect(() => {
@@ -193,7 +194,7 @@ const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
       pagination,
       ...initialState,
     }),
-    [initialState, pagination]
+    [initialState, pagination],
   );
 
   const modifiedState = useMemo(
@@ -214,7 +215,7 @@ const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
       globalFilter,
       columnFilters,
       state,
-    ]
+    ],
   );
 
   const muiToolbarAlertBannerProps: AlertProps = useMemo(
@@ -225,7 +226,7 @@ const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
             severity: "error",
           }
         : {},
-    [hasError, t]
+    [hasError, t],
   );
 
   const muiTablePaginationProps = useMemo(
@@ -234,10 +235,11 @@ const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
       showFirstButton: false,
       showLastButton: false,
     }),
-    []
+    [],
   );
 
   const muiCheckboxStyles = useCallback(
+    // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
     (theme) =>
       typeof theme.components?.MuiCheckbox?.styleOverrides?.root === "function"
         ? theme.components?.MuiCheckbox?.styleOverrides?.root?.({
@@ -245,7 +247,7 @@ const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
             theme,
           })
         : "",
-    []
+    [],
   );
 
   const table = useMaterialReactTable({

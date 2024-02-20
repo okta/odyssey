@@ -110,7 +110,7 @@ const Checkbox = ({
     getControlState({
       controlledValue: isChecked,
       uncontrolledValue: isDefaultChecked,
-    })
+    }),
   );
   const inputValues = useMemo(() => {
     if (controlledStateRef.current === ComponentControlledState.CONTROLLED) {
@@ -129,7 +129,7 @@ const Checkbox = ({
         },
       };
     },
-    []
+    [],
   );
 
   const label = useMemo(() => {
@@ -153,14 +153,14 @@ const Checkbox = ({
     (event, checked) => {
       onChangeProp?.(event, checked);
     },
-    [onChangeProp]
+    [onChangeProp],
   );
 
   const onBlur = useCallback<NonNullable<MuiFormControlLabelProps["onBlur"]>>(
     (event) => {
       onBlurProp?.(event);
     },
-    [onBlurProp]
+    [onBlurProp],
   );
 
   return (
@@ -172,8 +172,8 @@ const Checkbox = ({
         validity === "invalid"
           ? "Mui-error"
           : validity === "valid"
-          ? "Mui-valid"
-          : ""
+            ? "Mui-valid"
+            : ""
       }
       control={
         <MuiCheckbox

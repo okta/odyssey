@@ -131,7 +131,7 @@ const Typography = ({
         },
       };
     },
-    []
+    [],
   );
 
   return (

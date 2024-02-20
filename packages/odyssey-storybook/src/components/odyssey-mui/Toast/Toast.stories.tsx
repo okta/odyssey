@@ -164,7 +164,7 @@ const openToast =
         const toastElement = canvas.getAllByRole(args.role || "status")[0];
         if (toastElement) {
           const dismissToastButton = toastElement.querySelector(
-            '[aria-label="close"]'
+            '[aria-label="close"]',
           );
           if (dismissToastButton) {
             userEvent.click(dismissToastButton);

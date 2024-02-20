@@ -145,7 +145,7 @@ declare module "properties" {
    */
   export function parse(
     data: string,
-    cb: (err: Error, result: { [key: string]: unknown } | undefined) => void
+    cb: (err: Error, result: { [key: string]: unknown } | undefined) => void,
   ): void;
 
   /**
@@ -160,7 +160,7 @@ declare module "properties" {
   export function parse(
     data: string,
     options: ParseOptions | undefined,
-    cb: (err: Error, result: { [key: string]: unknown } | undefined) => void
+    cb: (err: Error, result: { [key: string]: unknown } | undefined) => void,
   ): void;
 
   export interface StringifyOptions {
@@ -248,7 +248,7 @@ declare module "properties" {
   export function stringify(
     obj: object,
     options: StringifyOptions | undefined,
-    cb: (err: Error, result: string) => void
+    cb: (err: Error, result: string) => void,
   ): void;
 
   /**
