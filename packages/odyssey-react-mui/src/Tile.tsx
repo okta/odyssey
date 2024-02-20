@@ -74,7 +74,7 @@ export type TileProps = {
 
 const ImageContainer = styled.div<{
   odysseyDesignTokens: DesignTokens;
-  hasmenuButtonChildren: boolean;
+  hasMenuButtonChildren: boolean;
 }>`
   display: flex;
   align-items: flex-start;
