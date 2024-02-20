@@ -60,7 +60,9 @@ const SelectContainer = styled.div`
   display: flex;
 `;
 
-const ChipsPositioningContainer = styled.div<{
+const ChipsPositioningContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
   odysseyDesignTokens: DesignTokens;
 }>`
   display: flex;
@@ -76,7 +78,9 @@ const ChipsPositioningContainer = styled.div<{
   pointer-events: none;
 `;
 
-const NonInteractiveIcon = styled(CloseCircleFilledIcon)<{
+const NonInteractiveIcon = styled(CloseCircleFilledIcon, {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
   odysseyDesignTokens: DesignTokens;
 }>`
   font-size: 1em;
@@ -85,7 +89,10 @@ const NonInteractiveIcon = styled(CloseCircleFilledIcon)<{
   margin-inline-end: -${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing1};
 `;
 
-const ChipsInnerContainer = styled(MuiBox)<{
+const ChipsInnerContainer = styled(MuiBox, {
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "isInteractive",
+})<{
   isInteractive?: boolean;
   odysseyDesignTokens: DesignTokens;
 }>`
