@@ -233,7 +233,7 @@ export const Controlled: StoryObj<typeof NativeSelect> = {
     const [localValue, setLocalValue] = useState("");
     const onChange = useCallback(
       (event) => setLocalValue(event.target.value),
-      []
+      [],
     );
     return (
       <NativeSelect
@@ -330,7 +330,7 @@ export const ControlledPreselected: StoryObj<typeof NativeSelect> = {
     const [localValue, setLocalValue] = useState("Laconia");
     const onChange = useCallback(
       (event) => setLocalValue(event.target.value),
-      []
+      [],
     );
     return (
       <NativeSelect

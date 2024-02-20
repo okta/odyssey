@@ -314,7 +314,7 @@ export const ControlledTextField: StoryObj<typeof TextField> = {
     const [localValue, setLocalValue] = useState("Initial state");
     const onChange = useCallback(
       (event) => setLocalValue(event.target.value),
-      []
+      [],
     );
     return <TextField {...props} value={localValue} onChange={onChange} />;
   },

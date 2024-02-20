@@ -37,7 +37,7 @@ export const ServerIcon = forwardRef<SVGSVGElement, ServerIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 ServerIcon.displayName = "ServerIcon";

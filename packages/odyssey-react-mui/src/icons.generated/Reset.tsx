@@ -37,7 +37,7 @@ export const ResetIcon = forwardRef<SVGSVGElement, ResetIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 ResetIcon.displayName = "ResetIcon";

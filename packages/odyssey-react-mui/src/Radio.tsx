@@ -77,21 +77,21 @@ const Radio = ({
         },
       };
     },
-    []
+    [],
   );
 
   const onChange = useCallback<NonNullable<MuiRadioProps["onChange"]>>(
     (event, checked) => {
       onChangeProp?.(event, checked);
     },
-    [onChangeProp]
+    [onChangeProp],
   );
 
   const onBlur = useCallback<NonNullable<MuiFormControlLabelProps["onBlur"]>>(
     (event) => {
       onBlurProp?.(event);
     },
-    [onBlurProp]
+    [onBlurProp],
   );
 
   return (

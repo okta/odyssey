@@ -35,8 +35,8 @@ export default function assertEnv(env: string): AssertEnvReturn {
         `@okta/odyssey-babel must be run with an explicit NODE_ENV environment variable set.
         Valid environments are 'test', 'development' and 'production'`.replace(
           /\n\s+/,
-          "\n"
-        )
+          "\n",
+        ),
       );
   }
 }

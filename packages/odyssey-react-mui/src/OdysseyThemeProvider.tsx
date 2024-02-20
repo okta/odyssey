@@ -44,7 +44,7 @@ const OdysseyThemeProvider = ({
 }: OdysseyThemeProviderProps) => {
   const odysseyTokens = useMemo(
     () => ({ ...Tokens, ...designTokensOverride }),
-    [designTokensOverride]
+    [designTokensOverride],
   );
   const odysseyTheme = useMemo(
     () =>
@@ -52,12 +52,12 @@ const OdysseyThemeProvider = ({
         odysseyTokens,
         shadowDomElement,
       }),
-    [odysseyTokens, shadowDomElement]
+    [odysseyTokens, shadowDomElement],
   );
 
   const customOdysseyTheme = useMemo(
     () => themeOverride && createTheme(deepmerge(odysseyTheme, themeOverride)),
-    [odysseyTheme, themeOverride]
+    [odysseyTheme, themeOverride],
   );
 
   const uniqueAlphabeticalId = useUniqueAlphabeticalId();
@@ -71,7 +71,7 @@ const OdysseyThemeProvider = ({
         nonce: window.cspNonce,
         speedy: false, // <-- Needs to be set to false when shadow-dom is used!! https://github.com/emotion-js/emotion/issues/2053#issuecomment-713429122
       }),
-    [emotionRoot, uniqueAlphabeticalId]
+    [emotionRoot, uniqueAlphabeticalId],
   );
 
   if (withCache) {

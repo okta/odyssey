@@ -171,14 +171,14 @@ export const Default: StoryObj<typeof PasswordField> = {
         await waitFor(() => {
           expect(fieldElement).toHaveAttribute("type", "text");
           expect(buttonElement.ariaLabel).toBe(
-            odysseyTranslate("passwordfield.icon.label.hide")
+            odysseyTranslate("passwordfield.icon.label.hide"),
           );
         });
         userEvent.click(buttonElement);
         await waitFor(() => {
           expect(fieldElement).toHaveAttribute("type", "password");
           expect(buttonElement.ariaLabel).toBe(
-            odysseyTranslate("passwordfield.icon.label.show")
+            odysseyTranslate("passwordfield.icon.label.show"),
           );
         });
       }
@@ -287,7 +287,7 @@ export const Controlled: StoryObj<typeof PasswordField> = {
     const [localValue, setLocalValue] = useState("");
     const onChange = useCallback(
       (event) => setLocalValue(event?.target.value),
-      []
+      [],
     );
     return (
       <PasswordField
@@ -316,7 +316,7 @@ export const ControlledDefaultInput: StoryObj<typeof PasswordField> = {
     const [localValue, setLocalValue] = useState("PasswordValue");
     const onChange = useCallback(
       (event) => setLocalValue(event?.target.value),
-      []
+      [],
     );
     return (
       <PasswordField

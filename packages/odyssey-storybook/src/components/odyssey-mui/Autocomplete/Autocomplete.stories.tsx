@@ -397,7 +397,7 @@ export const ControlledMultipleAutocomplete: StoryObj<JupiterMoonsAutocomplete> 
     },
     render: function C(props) {
       const [localValue, setLocalValue] = useState<MoonMeta[] | undefined>(
-        jupiterGalileanMoons.slice(0, 2)
+        jupiterGalileanMoons.slice(0, 2),
       );
       const onChange = useCallback((_, v) => setLocalValue(v), []);
       return <Autocomplete {...props} value={localValue} onChange={onChange} />;
@@ -434,7 +434,7 @@ export const ControlledAutocomplete: StoryObj<JupiterMoonsAutocomplete> = {
   },
   render: function C(props) {
     const [localValue, setLocalValue] = useState<MoonMeta | undefined>(
-      jupiterGalileanMoons[0]
+      jupiterGalileanMoons[0],
     );
     const onChange = useCallback((_, v) => setLocalValue(v), []);
     return <Autocomplete {...props} value={localValue} onChange={onChange} />;

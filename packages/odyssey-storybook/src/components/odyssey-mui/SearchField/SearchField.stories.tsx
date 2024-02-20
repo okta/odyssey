@@ -166,7 +166,7 @@ export const ControlledSearch: StoryObj<typeof SearchField> = {
     const [constrolledValue, setControlledValue] = useState("Jupiter");
     const onChange = useCallback(
       (event) => setControlledValue(event.target.value),
-      []
+      [],
     );
     return (
       <SearchField {...props} value={constrolledValue} onChange={onChange} />

@@ -86,7 +86,7 @@ const Link = ({
         },
       };
     },
-    []
+    [],
   );
 
   return (

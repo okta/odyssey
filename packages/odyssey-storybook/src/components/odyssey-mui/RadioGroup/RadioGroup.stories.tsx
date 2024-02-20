@@ -155,7 +155,7 @@ export const UncontrolledRadioGroup: StoryObj<typeof RadioGroup> = {
       const canvas = within(canvasElement);
       const radiogroup = canvas.getByRole("radiogroup") as HTMLInputElement;
       const radio = canvas.getByLabelText(
-        "Ludicrous Speed"
+        "Ludicrous Speed",
       ) as HTMLInputElement;
       if (radiogroup && radio) {
         userEvent.click(radio);

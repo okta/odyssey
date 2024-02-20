@@ -36,12 +36,12 @@ export const columns: DataColumn[] = [
         value === "Fully released"
           ? "success"
           : value === "In Labs"
-          ? "warning"
-          : value === "In progress"
-          ? "default"
-          : value === "Not started"
-          ? "error"
-          : "default";
+            ? "warning"
+            : value === "In progress"
+              ? "default"
+              : value === "Not started"
+                ? "error"
+                : "default";
       return <Status label={value} severity={severity} />;
     },
   },

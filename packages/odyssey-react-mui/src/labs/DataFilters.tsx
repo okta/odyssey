@@ -130,10 +130,13 @@ const DataFilters = ({
   const [filters, setFilters] = useState<DataFilter[]>(filtersProp);
 
   const initialInputValues = useMemo(() => {
-    return filtersProp.reduce((accumulator, filter) => {
-      accumulator[filter.id] = filter.value;
-      return accumulator;
-    }, {} as Record<string, DataFilterValue>);
+    return filtersProp.reduce(
+      (accumulator, filter) => {
+        accumulator[filter.id] = filter.value;
+        return accumulator;
+      },
+      {} as Record<string, DataFilterValue>,
+    );
   }, [filtersProp]);
 
   const [inputValues, setInputValues] = useState(initialInputValues);
@@ -141,7 +144,7 @@ const DataFilters = ({
   const [searchValue, setSearchValue] = useState<string>(defaultSearchTerm);
   const activeFilters = useMemo(() => {
     return filters.filter(
-      (filter) => typeof filter.value === "string" && filter.value
+      (filter) => typeof filter.value === "string" && filter.value,
     );
   }, [filters]);
   const [isFiltersMenuOpen, setIsFiltersMenuOpen] = useState<boolean>(false);
@@ -195,7 +198,7 @@ const DataFilters = ({
     ({ filterId, value }: { filterId: string; value: DataFilterValue }) => {
       setInputValues({ ...inputValues, [filterId]: value });
     },
-    [inputValues]
+    [inputValues],
   );
 
   const updateFilters = useCallback(
@@ -207,13 +210,13 @@ const DataFilters = ({
 
       setFilters(updatedFilters);
     },
-    [inputValues, filtersProp]
+    [inputValues, filtersProp],
   );
 
   const getAutoCompleteLabel = <
-    Value extends { label: string } | Array<{ label: string }>
+    Value extends { label: string } | Array<{ label: string }>,
   >(
-    value: Value
+    value: Value,
   ) => {
     if (Array.isArray(value)) {
       // Iterating to find the label
@@ -256,14 +259,17 @@ const DataFilters = ({
         setFilters(updatedFilters);
       }
     },
-    [inputValues, filtersProp]
+    [inputValues, filtersProp],
   );
 
   const clearAllFilters = useCallback(() => {
-    const updatedInputValues = filtersProp.reduce((accumulator, filter) => {
-      accumulator[filter.id] = undefined;
-      return accumulator;
-    }, {} as Record<string, DataFilterValue>);
+    const updatedInputValues = filtersProp.reduce(
+      (accumulator, filter) => {
+        accumulator[filter.id] = undefined;
+        return accumulator;
+      },
+      {} as Record<string, DataFilterValue>,
+    );
 
     setInputValues(updatedInputValues);
 
@@ -327,7 +333,7 @@ const DataFilters = ({
             // `filter` is the initial set of filters provided to the comoponent, so its
             // value prop may not reflect the current value of the filter.
             const latestFilterValue = filters.find(
-              (f) => f.id === filter.id
+              (f) => f.id === filter.id,
             )?.value;
 
             return (
@@ -356,8 +362,8 @@ const DataFilters = ({
                         latestFilterValue.length === 0)
                         ? `Any ${filter.label.toLowerCase()}`
                         : Array.isArray(latestFilterValue)
-                        ? `${latestFilterValue.length} selected`
-                        : latestFilterValue}
+                          ? `${latestFilterValue.length} selected`
+                          : latestFilterValue}
                     </Subordinate>
                   </Box>
                   <ChevronRightIcon />
@@ -368,7 +374,7 @@ const DataFilters = ({
         </MuiMenu>
       </>
     ),
-    [isFiltersMenuOpen, filtersMenuAnchorElement, filtersProp, filters]
+    [isFiltersMenuOpen, filtersMenuAnchorElement, filtersProp, filters],
   );
 
   return (
@@ -427,16 +433,16 @@ const DataFilters = ({
                                   typeof value === "string"
                                     ? getAutoCompleteLabel({ label: value })
                                     : Array.isArray(value)
-                                    ? getAutoCompleteLabel(
-                                        value.map((item) =>
-                                          typeof item === "string"
-                                            ? { label: item }
-                                            : item
+                                      ? getAutoCompleteLabel(
+                                          value.map((item) =>
+                                            typeof item === "string"
+                                              ? { label: item }
+                                              : item,
+                                          ),
                                         )
-                                      )
-                                    : value
-                                    ? getAutoCompleteLabel(value)
-                                    : "";
+                                      : value
+                                        ? getAutoCompleteLabel(value)
+                                        : "";
 
                                 updateInputValue({
                                   filterId: filterPopoverCurrentFilter.id,
@@ -538,11 +544,11 @@ const DataFilters = ({
                                   handleMultiSelectChange(
                                     filterPopoverCurrentFilter.id,
                                     option.value,
-                                    true
+                                    true,
                                   )
                                 }
                               />
-                            )
+                            ),
                           )}
                         </CheckboxGroup>
                       )}
@@ -584,7 +590,7 @@ const DataFilters = ({
                                     ] === option.value
                                   }
                                 />
-                              )
+                              ),
                             )}
                           </>
                         </RadioGroup>
