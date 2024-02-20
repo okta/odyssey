@@ -37,8 +37,8 @@ readdir("./src/icons.generated")
       filenames
         .map((filename) => basename(filename, extname(filename)))
         .map((filename) => `export * from "./${filename}";`)
-        .join("\n")
-    )
+        .join("\n"),
+    ),
   )
   .then((content) => writeFile("./src/icons.generated/index.ts", content))
   .then(() => {

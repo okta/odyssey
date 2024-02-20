@@ -25,7 +25,10 @@ import {
   SelectProps as MuiSelectProps,
 } from "@mui/material";
 import { Field } from "./Field";
-import { FieldComponentProps } from "./FieldComponentProps";
+import {
+  FieldComponentProps,
+  FieldComponentRenderProps,
+} from "./FieldComponentProps";
 import type { HtmlProps } from "./HtmlProps";
 import { FocusHandle, getControlState, useInputValues } from "./inputUtils";
 
@@ -40,7 +43,7 @@ export type NativeSelectValueType<HasMultipleChoices> =
 
 export type NativeSelectProps<
   Value extends NativeSelectValueType<HasMultipleChoices>,
-  HasMultipleChoices extends boolean
+  HasMultipleChoices extends boolean,
 > = {
   /**
    * This prop helps users to fill forms faster, especially on mobile devices.
@@ -104,10 +107,15 @@ export type NativeSelectProps<
 > &
   HtmlProps;
 
+type NativeSelectRenderProps = Partial<
+  Pick<FieldComponentRenderProps, "ariaDescribedBy" | "errorMessageElementId">
+> &
+  Pick<FieldComponentRenderProps, "labelElementId">;
+
 const NativeSelect = forwardRef(
   <
     Value extends NativeSelectValueType<HasMultipleChoices>,
-    HasMultipleChoices extends boolean
+    HasMultipleChoices extends boolean,
   >(
     {
       ariaDescribedBy,
@@ -133,13 +141,13 @@ const NativeSelect = forwardRef(
       value,
       children,
     }: NativeSelectProps<Value, HasMultipleChoices>,
-    ref?: React.Ref<ReactElement>
+    ref?: React.Ref<ReactElement>,
   ) => {
     const controlledStateRef = useRef(
       getControlState({
         controlledValue: value,
         uncontrolledValue: defaultValue,
-      })
+      }),
     );
     const localInputRef = useRef<HTMLSelectElement>(null);
 
@@ -152,7 +160,7 @@ const NativeSelect = forwardRef(
           },
         };
       },
-      []
+      [],
     );
 
     const inputValues = useInputValues({
@@ -167,7 +175,7 @@ const NativeSelect = forwardRef(
       (event, child) => {
         onChangeProp?.(event, child);
       },
-      [onChangeProp]
+      [onChangeProp],
     );
 
     const hasMultipleChoices = useMemo(
@@ -175,10 +183,14 @@ const NativeSelect = forwardRef(
         hasMultipleChoicesProp === undefined
           ? isMultiSelect
           : hasMultipleChoicesProp,
-      [hasMultipleChoicesProp, isMultiSelect]
+      [hasMultipleChoicesProp, isMultiSelect],
     );
     const renderFieldComponent = useCallback(
-      ({ ariaDescribedBy, errorMessageElementId, labelElementId }) => (
+      ({
+        ariaDescribedBy,
+        errorMessageElementId,
+        labelElementId,
+      }: NativeSelectRenderProps) => (
         <MuiSelect
           {...inputValues}
           aria-describedby={ariaDescribedBy}
@@ -213,7 +225,7 @@ const NativeSelect = forwardRef(
         ref,
         testId,
         translate,
-      ]
+      ],
     );
 
     return (
@@ -233,7 +245,7 @@ const NativeSelect = forwardRef(
         renderFieldComponent={renderFieldComponent}
       />
     );
-  }
+  },
 );
 
 const MemoizedNativeSelect = memo(NativeSelect);

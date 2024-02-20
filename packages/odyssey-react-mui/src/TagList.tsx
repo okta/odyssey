@@ -30,7 +30,7 @@ const TagList = ({ children, testId }: TagListProps) => {
     () => ({
       chipElementType: "li",
     }),
-    []
+    [],
   );
 
   return (

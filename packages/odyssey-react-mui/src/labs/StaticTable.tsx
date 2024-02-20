@@ -62,7 +62,7 @@ const StaticTable = <TData extends DefaultMaterialReactTableData>({
     useRef<MRT_Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
 
   const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>(
-    []
+    [],
   );
 
   const [globalFilter, setGlobalFilter] = useState<string>();
@@ -79,7 +79,7 @@ const StaticTable = <TData extends DefaultMaterialReactTableData>({
       columnFilters,
       ...state,
     }),
-    [globalFilter, columnFilters, state]
+    [globalFilter, columnFilters, state],
   );
 
   const renderTopToolbarCustomActions = useCallback<
@@ -89,7 +89,7 @@ const StaticTable = <TData extends DefaultMaterialReactTableData>({
     >
   >(
     ({ table }) => <>{ToolbarButtons && <ToolbarButtons table={table} />}</>,
-    [ToolbarButtons]
+    [ToolbarButtons],
   );
 
   useEffect(() => {

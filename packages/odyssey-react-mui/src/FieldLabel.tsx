@@ -51,7 +51,7 @@ const FieldLabel = ({
         )}
       </MuiInputLabel>
     ),
-    [id, inputId, isOptional, testId, translate, text, t]
+    [id, inputId, isOptional, testId, translate, text, t],
   );
 
   return hasVisibleLabel ? (

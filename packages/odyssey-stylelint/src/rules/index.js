@@ -17,5 +17,5 @@ const dir = __dirname;
 module.exports = readdirSync(dir).reduce(
   (memo, path) =>
     path.endsWith("index.js") ? memo : memo.concat(require(join(dir, path))),
-  []
+  [],
 );

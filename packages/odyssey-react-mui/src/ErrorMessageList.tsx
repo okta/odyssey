@@ -31,7 +31,7 @@ const ErrorMessageList = ({ errorMessages }: ErrorMessageListProps) => {
       listStyle: "disc",
       paddingInlineStart: odysseyDesignTokens.Spacing4,
     }),
-    [odysseyDesignTokens]
+    [odysseyDesignTokens],
   );
 
   return (

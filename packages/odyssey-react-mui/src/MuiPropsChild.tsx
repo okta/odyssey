@@ -25,7 +25,7 @@ const MuiPropsChild = forwardRef<HTMLElement, MuiPropsChildProps>(
         ...muiProps,
         ref,
       }),
-      [muiProps, ref]
+      [muiProps, ref],
     );
 
     return (
@@ -33,7 +33,7 @@ const MuiPropsChild = forwardRef<HTMLElement, MuiPropsChildProps>(
         {children}
       </MuiPropsContext.Provider>
     );
-  }
+  },
 );
 
 const MemoizedMuiPropsChild = memo(MuiPropsChild);

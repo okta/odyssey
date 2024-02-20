@@ -37,7 +37,7 @@ export const CallIcon = forwardRef<SVGSVGElement, CallIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 CallIcon.displayName = "CallIcon";

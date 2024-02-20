@@ -40,7 +40,7 @@ export const GridIcon = forwardRef<SVGSVGElement, GridIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 GridIcon.displayName = "GridIcon";

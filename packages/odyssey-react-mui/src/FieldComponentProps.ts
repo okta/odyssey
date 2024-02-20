@@ -60,3 +60,11 @@ export type FieldComponentProps = {
    */
   name?: string;
 };
+
+export type FieldComponentRenderProps = {
+  ariaDescribedBy: string;
+  dataSe: string;
+  errorMessageElementId: string;
+  id: string;
+  labelElementId: string;
+};

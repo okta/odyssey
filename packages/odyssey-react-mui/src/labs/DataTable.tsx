@@ -247,13 +247,13 @@ export type DataTableProps = {
    * Action buttons to display in each row
    */
   rowActionButtons?: (
-    row: MRT_RowData
+    row: MRT_RowData,
   ) => ReactElement<typeof Button | typeof Fragment>;
   /**
    * Menu items to include in the optional actions menu on each row.
    */
   rowActionMenuItems?: (
-    row: MRT_RowData
+    row: MRT_RowData,
   ) => ReactElement<typeof MenuItem | typeof Fragment>;
 };
 
@@ -329,7 +329,7 @@ const DataTable = ({
   }, [columns]);
 
   const [columnVisibility, setColumnVisibility] = useState<MRT_VisibilityState>(
-    initialColumnVisibility
+    initialColumnVisibility,
   );
 
   const [globalFilter, setGlobalFilter] = useState<string>("");
@@ -367,10 +367,10 @@ const DataTable = ({
   const handleSortingChange = useCallback(
     (updater: MRT_Updater<MRT_SortingState>) => {
       setSorting((prevSorting) =>
-        updater instanceof Function ? updater(prevSorting) : sorting
+        updater instanceof Function ? updater(prevSorting) : sorting,
       );
     },
-    [sorting]
+    [sorting],
   );
 
   const handleColumnVisibility = useCallback(
@@ -380,7 +380,7 @@ const DataTable = ({
         [columnId]: !columnVisibility[columnId],
       }));
     },
-    [columnVisibility]
+    [columnVisibility],
   );
 
   const handleSearch = useCallback((value: string) => {
@@ -394,10 +394,10 @@ const DataTable = ({
   const handleRowSelectionChange = useCallback(
     (updater: MRT_Updater<MRT_RowSelectionState>) => {
       setRowSelection((prevRowSelection) =>
-        updater instanceof Function ? updater(prevRowSelection) : rowSelection
+        updater instanceof Function ? updater(prevRowSelection) : rowSelection,
       );
     },
-    [rowSelection]
+    [rowSelection],
   );
 
   const updateRowOrder = useCallback(
@@ -420,7 +420,7 @@ const DataTable = ({
       reorderDataFn?.({ rowId, newIndex });
       refreshData();
     },
-    [data, totalRows, reorderDataFn, refreshData]
+    [data, totalRows, reorderDataFn, refreshData],
   );
 
   const rowVirtualizerInstanceRef =
@@ -428,7 +428,7 @@ const DataTable = ({
 
   const getRowFromTableAndSetHovered = (
     table: TableType,
-    id: MRT_RowData["id"]
+    id: MRT_RowData["id"],
   ) => {
     if (id) {
       const nextRow: MRT_RowData = table.getRow(id);
@@ -520,7 +520,7 @@ const DataTable = ({
       page,
       resultsPerPage,
       updateRowOrder,
-    ]
+    ],
   );
 
   const handleDragHandleOnDragEnd = useCallback(
@@ -538,7 +538,7 @@ const DataTable = ({
 
       setDraggingRow(null);
     },
-    [updateRowOrder]
+    [updateRowOrder],
   );
 
   const handleDragHandleOnDragCapture = useCallback(
@@ -547,7 +547,7 @@ const DataTable = ({
         setDraggingRow(table.getState().draggingRow);
       }
     },
-    [draggingRow]
+    [draggingRow],
   );
 
   const table = useMaterialReactTable({
@@ -639,12 +639,12 @@ const DataTable = ({
         draggingRow?.id === row.id && table.getState().hoveredRow?.id !== row.id
           ? "isDragging"
           : table.getState().hoveredRow?.id === row.id &&
-            draggingRow?.id !== row.id
-          ? "isDragTarget"
-          : draggingRow?.id === row.id &&
-            table.getState().hoveredRow?.id === row.id
-          ? "isDragging isDragTarget"
-          : undefined,
+              draggingRow?.id !== row.id
+            ? "isDragTarget"
+            : draggingRow?.id === row.id &&
+                table.getState().hoveredRow?.id === row.id
+              ? "isDragging isDragTarget"
+              : undefined,
     }),
 
     muiRowDragHandleProps: ({ table, row }) => ({
@@ -800,7 +800,7 @@ const DataTable = ({
       hasChangeableDensity,
       handleColumnVisibility,
       hasColumnVisibility,
-    ]
+    ],
   );
 
   return (
