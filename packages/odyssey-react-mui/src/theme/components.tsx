@@ -50,6 +50,12 @@ import {
 import { DesignTokens } from "./theme";
 import { CSSProperties } from "react";
 
+//Widths used in `Drawer` component
+const drawerSizes = {
+  persistent: "25.714rem", //~360px
+  temporary: "28.571rem", //~400px
+};
+
 export const components = ({
   odysseyTokens,
   shadowDomElement,
@@ -1042,6 +1048,33 @@ export const components = ({
           }
         }
     `,
+    },
+    MuiDrawer: {
+      styleOverrides: {
+        root: {},
+        paper: ({ ownerState }) => ({
+          width:
+            ownerState.variant === "temporary"
+              ? drawerSizes.temporary
+              : drawerSizes.persistent, //Temporary = overlay drawer, Persistent = inline drawer
+          display: "flex",
+          overflowY: "auto",
+          flexDirection: "column",
+          flexWrap: "nowrap",
+          justifyContent: "space-between",
+          alignItems: "stretch",
+          alignContent: "flex-end",
+          color: odysseyTokens.HueNeutral700,
+          ...(ownerState.variant === "persistent" && {
+            position: "static",
+            borderRadius: odysseyTokens.BorderRadiusOuter,
+            border: "0",
+          }),
+          ...(ownerState.variant === "temporary" && {
+            boxShadow: odysseyTokens.ShadowScale1,
+          }),
+        }),
+      },
     },
     MuiScopedCssBaseline: {
       styleOverrides: {
