@@ -408,7 +408,7 @@ const Select = <
   const renderValue = useCallback(
     (value: Value) =>
       Array.isArray(value) && <Chips selection={value} isInteractive={false} />,
-    [],
+    [Chips],
   );
 
   const renderFieldComponent = useCallback(
@@ -445,15 +445,19 @@ const Select = <
     ),
     [
       children,
+      Chips,
       inputValues,
       hasMultipleChoices,
       normalizedOptions,
       nameOverride,
+      odysseyDesignTokens,
       onBlur,
       onChange,
       onFocus,
+      renderValue,
       testId,
       translate,
+      value,
     ],
   );
 
