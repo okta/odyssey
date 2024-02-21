@@ -142,8 +142,8 @@ export const Linked: StoryObj<BannerProps> = {
     await step("check for the link text", async () => {
       const canvas = within(canvasElement);
       const link = canvas.getByText("View report") as HTMLAnchorElement;
-      expect(link?.tagName).toBe("A");
-      expect(link?.href).toBe(`${link?.baseURI}#anchor`);
+      await expect(link?.tagName).toBe("A");
+      await expect(link?.href).toBe(`${link?.baseURI}#anchor`);
     });
   },
 };
@@ -156,9 +156,9 @@ export const Dismissible: StoryObj<BannerProps> = {
     await step("dismiss the banner on click", async () => {
       const canvas = within(canvasElement);
       const button = canvas.getByTitle("Close");
-      userEvent.click(button);
-      userEvent.tab();
-      expect(args.onClose).toHaveBeenCalled();
+      await userEvent.click(button);
+      await userEvent.tab();
+      await expect(args.onClose).toHaveBeenCalled();
       await axeRun("Dismissible Banner");
     });
   },
