@@ -117,7 +117,6 @@ const Dialog = ({
         {title}
         <Button
           ariaLabel={t("close.text")}
-          label=""
           onClick={onClose}
           size="small"
           startIcon={<CloseIcon />}

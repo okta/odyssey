@@ -362,7 +362,7 @@ export const Overlay: StoryObj<DrawerProps> = {
     const canvas = within(canvasElement);
     await step("open Default Drawer", async () => {
       const buttonElement = canvas.getByText("Open drawer");
-      userEvent.click(buttonElement);
+      await userEvent.click(buttonElement);
       await waitFor(() => {
         axeRun("Default Drawer");
       });

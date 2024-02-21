@@ -224,7 +224,6 @@ const Drawer = ({
           <Heading5>{title}</Heading5>
           <Button
             ariaLabel={ariaLabel}
-            label=""
             onClick={onClose}
             size="small"
             startIcon={<CloseIcon />}
