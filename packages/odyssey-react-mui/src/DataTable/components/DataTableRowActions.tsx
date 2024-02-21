@@ -14,8 +14,8 @@ import { MRT_Row, MRT_RowData } from "material-react-table";
 import { Fragment, ReactElement, memo } from "react";
 import { Button } from "../../Button";
 import { MenuItem } from "../../MenuItem";
-import { Box } from "@mui/material";
-import { MenuButton } from "../../MenuButton";
+import { Box as MuiBox } from "@mui/material";
+import { MenuButton, MenuButtonProps } from "../../MenuButton";
 import {
   ArrowBottomIcon,
   ArrowDownIcon,
@@ -29,11 +29,9 @@ export type DataTableRowActionsProps = {
   row: MRT_Row<MRT_RowData>;
   rowIndex: number;
   rowActionButtons?: (
-    row: MRT_RowData
+    row: MRT_RowData,
   ) => ReactElement<typeof Button | typeof Fragment>;
-  rowActionMenuItems?: (
-    row: MRT_RowData
-  ) => ReactElement<typeof MenuItem | typeof Fragment>;
+  rowActionMenuItems?: (row: MRT_RowData) => MenuButtonProps["children"];
   totalRows?: DataTableProps["totalRows"];
   updateRowOrder?: ({
     rowId,
@@ -52,7 +50,7 @@ const DataTableRowActions = ({
   totalRows,
   updateRowOrder,
 }: DataTableRowActionsProps) => (
-  <Box display="flex">
+  <MuiBox display="flex">
     {rowActionButtons?.(row)}
     {(rowActionMenuItems || updateRowOrder) && (
       <MenuButton
@@ -62,7 +60,7 @@ const DataTableRowActions = ({
         ariaLabel="More actions"
         menuAlignment="right"
       >
-        {rowActionMenuItems && rowActionMenuItems(row)}
+        {rowActionMenuItems && <>{rowActionMenuItems(row)}</>}
         {rowActionMenuItems && updateRowOrder && <hr />}
         {updateRowOrder && (
           <>
@@ -113,7 +111,7 @@ const DataTableRowActions = ({
         )}
       </MenuButton>
     )}
-  </Box>
+  </MuiBox>
 );
 
 const MemoizedDataTableRowActions = memo(DataTableRowActions);

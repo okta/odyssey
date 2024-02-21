@@ -222,7 +222,7 @@ const DataTable = ({
   hasSearch,
   hasSorting,
 }: DataTableProps) => {
-  const [data, setData] = useState<DataTableProps["data"]>([]);
+  const [data, setData] = useState<MRT_RowData[]>([]);
   const [pagination, setPagination] = useState({
     pageIndex: currentPage,
     pageSize: resultsPerPage,
@@ -250,7 +250,7 @@ const DataTable = ({
     setPagination,
     setColumnVisibility,
     setRowDensity,
-    setSearch
+    setSearch,
   );
 
   const {
@@ -274,7 +274,7 @@ const DataTable = ({
   });
 
   const renderRowActions = useCallback(
-    ({ row }) => {
+    ({ row }: { row: MRT_Row<MRT_RowData> }) => {
       const currentIndex =
         row.index + pagination.pageIndex * pagination.pageSize;
       return (
@@ -288,7 +288,7 @@ const DataTable = ({
         />
       );
     },
-    [pagination, rowActionButtons, rowActionMenuItems, hasRowReordering]
+    [pagination, rowActionButtons, rowActionMenuItems, hasRowReordering],
   );
 
   const dataTableFilters = useMemo(
@@ -303,7 +303,7 @@ const DataTable = ({
             options: column.filterSelectOptions,
           } as DataFilter;
         }),
-    [columns]
+    [columns],
   );
 
   const dataTable = useMaterialReactTable({
@@ -380,7 +380,7 @@ const DataTable = ({
     onSortingChange: setColumnSorting,
     muiTableHeadCellProps: ({ column: currentColumn }) => ({
       className: columnSorting.find(
-        (sortedColumn) => sortedColumn.id === currentColumn.id
+        (sortedColumn) => sortedColumn.id === currentColumn.id,
       )
         ? "isSorted"
         : "isUnsorted",

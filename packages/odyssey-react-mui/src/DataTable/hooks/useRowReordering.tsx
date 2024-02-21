@@ -28,8 +28,8 @@ export const useRowReordering = ({
 }: {
   totalRows: DataTableProps["totalRows"];
   onReorderRows: DataTableProps["onReorderRows"];
-  data: DataTableProps["data"];
-  setData: Dispatch<SetStateAction<DataTableProps["data"]>>;
+  data: MRT_RowData[];
+  setData: Dispatch<SetStateAction<MRT_RowData[]>>;
   draggingRow?: MRT_Row<MRT_RowData> | null;
   setDraggingRow: Dispatch<
     SetStateAction<MRT_Row<MRT_RowData> | null | undefined>
@@ -106,7 +106,7 @@ export const useRowReordering = ({
 
   const getRowFromTableAndSetHovered = (
     table: MRT_TableInstance<MRT_RowData>,
-    id: MRT_RowData["id"]
+    id: MRT_RowData["id"],
   ) => {
     if (id) {
       const nextRow: MRT_RowData = table.getRow(id);
@@ -206,7 +206,7 @@ export const useRowReordering = ({
   };
 
   const handleDragHandleOnDragCapture = (
-    table: MRT_TableInstance<MRT_RowData>
+    table: MRT_TableInstance<MRT_RowData>,
   ) => {
     if (!draggingRow && table.getState().draggingRow?.id) {
       setDraggingRow(table.getState().draggingRow);
@@ -214,7 +214,7 @@ export const useRowReordering = ({
   };
 
   const resetDraggingAndHoveredRow = (
-    table: MRT_TableInstance<MRT_RowData>
+    table: MRT_TableInstance<MRT_RowData>,
   ) => {
     setDraggingRow(null);
     table.setHoveredRow(null);
