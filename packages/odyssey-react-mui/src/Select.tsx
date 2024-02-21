@@ -32,7 +32,10 @@ import {
 import { SelectProps as MuiSelectProps } from "@mui/material";
 
 import { Field } from "./Field";
-import { FieldComponentProps } from "./FieldComponentProps";
+import {
+  FieldComponentProps,
+  FieldComponentRenderProps,
+} from "./FieldComponentProps";
 import { CheckIcon, CloseCircleFilledIcon } from "./icons.generated";
 import type { HtmlProps } from "./HtmlProps";
 import {
@@ -166,6 +169,11 @@ export type SelectProps<
   | "name"
 > &
   HtmlProps;
+
+type SelectRenderProps = Partial<
+  Pick<FieldComponentRenderProps, "ariaDescribedBy" | "errorMessageElementId">
+> &
+  Pick<FieldComponentRenderProps, "id" | "labelElementId">;
 
 /**
  * Options in Odyssey <Select> are passed as an array, which can contain any combination
@@ -394,7 +402,12 @@ const Select = <
   );
 
   const renderFieldComponent = useCallback(
-    ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
+    ({
+      ariaDescribedBy,
+      errorMessageElementId,
+      id,
+      labelElementId,
+    }: SelectRenderProps) => (
       <SelectContainer>
         <MuiSelect
           {...inputValues}
