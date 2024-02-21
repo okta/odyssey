@@ -108,6 +108,18 @@ const ChipsInnerContainer = styled(MuiBox, {
   opacity: ${({ isInteractive }) => (isInteractive ? 1 : 0)};
 `;
 
+const ChipsSpacer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>`
+  display: inline-block;
+  border-color: transparent;
+  border-style: solid none;
+  border-width: 1px;
+  height: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing6};
+`;
+
 export type SelectValueType<HasMultipleChoices> =
   HasMultipleChoices extends true ? string[] : string;
 
@@ -334,6 +346,7 @@ const Select = <
       isInteractive={isInteractive}
       odysseyDesignTokens={odysseyDesignTokens}
     >
+      <ChipsSpacer odysseyDesignTokens={odysseyDesignTokens} />
       {selection.map(
         (item: string) =>
           item.length > 0 && (
