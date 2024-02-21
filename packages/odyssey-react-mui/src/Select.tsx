@@ -18,6 +18,7 @@ import {
   useRef,
   useState,
   useImperativeHandle,
+  MouseEvent,
 } from "react";
 import {
   Box as MuiBox,
@@ -293,6 +294,11 @@ const Select = <
     [internalSelectedValues, onChange],
   );
 
+  const stopPropagation = useCallback(
+    (event: MouseEvent<SVGSVGElement>) => event.stopPropagation(),
+    [],
+  );
+
   // Normalize the options array to accommodate the various
   // data types that might be passed
   const normalizedOptions = useMemo(
@@ -345,10 +351,8 @@ const Select = <
           }
           tabIndex={-1}
           onDelete={
-            isInteractive
-              ? controlledStateRef.current === CONTROLLED
-                ? () => removeSelection(item)
-                : undefined
+            isInteractive && controlledStateRef.current === CONTROLLED
+              ? removeSelection
               : undefined
           }
           deleteIcon={
@@ -357,7 +361,7 @@ const Select = <
               // We need to stop event propagation on mouse down to prevent the deletion
               // from being blocked by the Select list opening, and also ensure that
               // the pointerEvent is registered even when the parent's are not
-              onMouseDown={(event) => event.stopPropagation()}
+              onMouseDown={stopPropagation}
             />
           }
         />
@@ -401,6 +405,12 @@ const Select = <
     [hasMultipleChoices, normalizedOptions, internalSelectedValues],
   );
 
+  const renderValue = useCallback(
+    (value: Value) =>
+      Array.isArray(value) && <Chips selection={value} isInteractive={false} />,
+    [],
+  );
+
   const renderFieldComponent = useCallback(
     ({
       ariaDescribedBy,
@@ -423,14 +433,7 @@ const Select = <
           onBlur={onBlur}
           onChange={onChange}
           onFocus={onFocus}
-          renderValue={
-            hasMultipleChoices
-              ? (value: Value) =>
-                  Array.isArray(value) && (
-                    <Chips selection={value} isInteractive={false} />
-                  )
-              : undefined
-          }
+          renderValue={hasMultipleChoices ? renderValue : undefined}
           translate={translate}
         />
         {hasMultipleChoices && Array.isArray(value) && (
