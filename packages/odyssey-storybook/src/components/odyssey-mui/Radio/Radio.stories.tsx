@@ -104,12 +104,12 @@ export const Default: StoryObj<typeof Radio> = {
       const canvas = within(canvasElement);
       const radio = canvas.getByRole("radio") as HTMLInputElement;
       if (radio) {
-        userEvent.click(radio);
+        await userEvent.click(radio);
       }
-      expect(radio).toBeChecked();
-      userEvent.click(canvasElement);
-      expect(args.onBlur).toHaveBeenCalled();
-      axeRun("Radio Default");
+      await expect(radio).toBeChecked();
+      await userEvent.click(canvasElement);
+      await expect(args.onBlur).toHaveBeenCalled();
+      await axeRun("Radio Default");
     });
   },
 };
