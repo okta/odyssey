@@ -53,7 +53,6 @@ export type {
 } from "@mui/material";
 
 export type { FocusHandle } from "./inputUtils";
-
 export { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
 
 export * from "./Accordion";
@@ -62,6 +61,7 @@ export * from "./Banner";
 export * from "./Box";
 export * from "./Breadcrumbs";
 export * from "./Button";
+export * from "./Tile";
 export * from "./Callout";
 export * from "./Checkbox";
 export * from "./CheckboxGroup";

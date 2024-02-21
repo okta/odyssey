@@ -37,7 +37,7 @@ export const SearchIcon = forwardRef<SVGSVGElement, SearchIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 SearchIcon.displayName = "SearchIcon";

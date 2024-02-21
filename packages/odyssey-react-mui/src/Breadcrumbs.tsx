@@ -130,7 +130,7 @@ const BreadcrumbList = ({
 
   const onMenuButtonClick = useCallback<MouseEventHandler<HTMLButtonElement>>(
     (event) => setAnchorEl(event.currentTarget),
-    []
+    [],
   );
   const onCloseMenu = useCallback(() => {
     setAnchorEl(null);

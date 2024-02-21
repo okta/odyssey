@@ -37,7 +37,7 @@ export const WarningIcon = forwardRef<SVGSVGElement, WarningIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 WarningIcon.displayName = "WarningIcon";

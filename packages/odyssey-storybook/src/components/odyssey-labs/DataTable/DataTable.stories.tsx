@@ -275,8 +275,8 @@ const processData = ({
   if (search) {
     filteredData = filteredData.filter((row) =>
       Object.values(row).some((value) =>
-        value.toString().toLowerCase().includes(search.toLowerCase())
-      )
+        value.toString().toLowerCase().includes(search.toLowerCase()),
+      ),
     );
   }
 
@@ -422,7 +422,7 @@ export const Default: StoryObj<DataTableProps> = {
               size="small"
               onClick={() =>
                 console.log(
-                  `Clicking this would delete the item with the id ${row.id}`
+                  `Clicking this would delete the item with the id ${row.id}`,
                 )
               }
             />

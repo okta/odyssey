@@ -153,7 +153,7 @@ export const components = ({
 
             ...(ownerState.variant === "toast" && {
               backgroundColor: odysseyTokens.HueGreen100.concat(
-                odysseyTokens.PaletteAlphaSemi
+                odysseyTokens.PaletteAlphaSemi,
               ),
             }),
           }),
@@ -162,7 +162,7 @@ export const components = ({
 
             ...(ownerState.variant === "toast" && {
               backgroundColor: odysseyTokens.HueBlue100.concat(
-                odysseyTokens.PaletteAlphaSemi
+                odysseyTokens.PaletteAlphaSemi,
               ),
             }),
           }),
@@ -171,7 +171,7 @@ export const components = ({
 
             ...(ownerState.variant === "toast" && {
               backgroundColor: odysseyTokens.HueRed100.concat(
-                odysseyTokens.PaletteAlphaSemi
+                odysseyTokens.PaletteAlphaSemi,
               ),
             }),
           }),
@@ -180,7 +180,7 @@ export const components = ({
 
             ...(ownerState.variant === "toast" && {
               backgroundColor: odysseyTokens.HueYellow100.concat(
-                odysseyTokens.PaletteAlphaSemi
+                odysseyTokens.PaletteAlphaSemi,
               ),
             }),
           }),
@@ -701,6 +701,70 @@ export const components = ({
         disableRipple: true,
       },
     },
+    MuiCard: {
+      styleOverrides: {
+        root: () => ({
+          backgroundColor: odysseyTokens.HueNeutralWhite,
+          borderRadius: odysseyTokens.BorderRadiusOuter,
+          boxShadow: odysseyTokens.DepthMedium,
+          padding: odysseyTokens.Spacing5,
+          position: "relative",
+          transition: `all ${odysseyTokens.TransitionDurationMain} ${odysseyTokens.TransitionTimingMain}`,
+
+          "& img": {
+            height: "64px",
+          },
+
+          "&.isClickable:hover": {
+            backgroundColor: odysseyTokens.HueNeutral50,
+            boxShadow: odysseyTokens.DepthHigh,
+          },
+
+          [`& .${typographyClasses.h5}`]: {
+            lineHeight: odysseyTokens.TypographyLineHeightHeading5,
+            marginBottom: odysseyTokens.Spacing3,
+          },
+
+          [`& .${typographyClasses.subtitle2}`]: {
+            marginBottom: odysseyTokens.Spacing1,
+            textTransform: "uppercase",
+            fontWeight: odysseyTokens.TypographyWeightBodyBold,
+            fontSize: odysseyTokens.TypographySizeOverline,
+            lineHeight: odysseyTokens.TypographyLineHeightOverline,
+            color: odysseyTokens.TypographyColorSubordinate,
+            letterSpacing: 1.3,
+          },
+
+          [`& .${typographyClasses.body1}`]: {
+            fontSize: odysseyTokens.TypographySizeSubordinate,
+            lineHeight: odysseyTokens.TypographyLineHeightBody,
+          },
+        }),
+      },
+    },
+    MuiCardActionArea: {
+      styleOverrides: {
+        root: () => ({
+          margin: `-${odysseyTokens.Spacing5}`,
+          padding: odysseyTokens.Spacing5,
+          width: `calc(100% + (${odysseyTokens.Spacing5} * 2))`,
+
+          "&:hover": {
+            "& .MuiCardActionArea-focusHighlight": {
+              display: "none",
+            },
+          },
+        }),
+      },
+    },
+    MuiCardActions: {
+      styleOverrides: {
+        root: () => ({
+          marginBlockStart: odysseyTokens.Spacing5,
+          padding: 0,
+        }),
+      },
+    },
     MuiCheckbox: {
       defaultProps: {
         size: "small",
@@ -723,7 +787,7 @@ export const components = ({
             ["border-color", "background-color", "box-shadow"],
             {
               duration: odysseyTokens.TransitionDurationMain,
-            }
+            },
           ),
 
           [`.${svgIconClasses.root}`]: {
@@ -1653,7 +1717,7 @@ export const components = ({
             ["border-color", "background-color", "box-shadow"],
             {
               duration: odysseyTokens.TransitionDurationMain,
-            }
+            },
           ),
 
           ...(ownerState.fullWidth && {
@@ -2042,7 +2106,7 @@ export const components = ({
             ["border-color", "background-color", "box-shadow"],
             {
               duration: odysseyTokens.TransitionDurationMain,
-            }
+            },
           ),
 
           "&::before": {
@@ -2465,7 +2529,6 @@ export const components = ({
     },
     MuiTableContainer: {
       defaultProps: {
-        // @ts-expect-error valid prop and value; MUI TS bug
         component: "figure",
       },
       styleOverrides: {

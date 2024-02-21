@@ -31,7 +31,10 @@ import {
 import { SelectProps as MuiSelectProps } from "@mui/material";
 
 import { Field } from "./Field";
-import { FieldComponentProps } from "./FieldComponentProps";
+import {
+  FieldComponentProps,
+  FieldComponentRenderProps,
+} from "./FieldComponentProps";
 import { CheckIcon } from "./icons.generated";
 import type { HtmlProps } from "./HtmlProps";
 import {
@@ -53,7 +56,7 @@ export type SelectValueType<HasMultipleChoices> =
 
 export type SelectProps<
   Value extends SelectValueType<HasMultipleChoices>,
-  HasMultipleChoices extends boolean
+  HasMultipleChoices extends boolean,
 > = {
   /**
    * The default value. Use when the component is not controlled.
@@ -111,6 +114,11 @@ export type SelectProps<
 > &
   HtmlProps;
 
+type SelectRenderProps = Partial<
+  Pick<FieldComponentRenderProps, "ariaDescribedBy" | "errorMessageElementId">
+> &
+  Pick<FieldComponentRenderProps, "id" | "labelElementId">;
+
 /**
  * Options in Odyssey <Select> are passed as an array, which can contain any combination
  * of the following:
@@ -129,7 +137,7 @@ export type SelectProps<
 const { CONTROLLED } = ComponentControlledState;
 const Select = <
   Value extends SelectValueType<HasMultipleChoices>,
-  HasMultipleChoices extends boolean
+  HasMultipleChoices extends boolean,
 >({
   ariaDescribedBy,
   defaultValue,
@@ -159,13 +167,16 @@ const Select = <
       hasMultipleChoicesProp === undefined
         ? isMultiSelect
         : hasMultipleChoicesProp,
-    [hasMultipleChoicesProp, isMultiSelect]
+    [hasMultipleChoicesProp, isMultiSelect],
   );
   const controlledStateRef = useRef(
-    getControlState({ controlledValue: value, uncontrolledValue: defaultValue })
+    getControlState({
+      controlledValue: value,
+      uncontrolledValue: defaultValue,
+    }),
   );
   const [internalSelectedValues, setInternalSelectedValues] = useState(
-    controlledStateRef.current === CONTROLLED ? value : defaultValue
+    controlledStateRef.current === CONTROLLED ? value : defaultValue,
   );
   const localInputRef = useRef<HTMLSelectElement>(null);
 
@@ -178,7 +189,7 @@ const Select = <
         },
       };
     },
-    []
+    [],
   );
 
   useEffect(() => {
@@ -200,12 +211,12 @@ const Select = <
       } = event;
       if (controlledStateRef.current !== CONTROLLED) {
         setInternalSelectedValues(
-          (typeof value === "string" ? value.split(",") : value) as Value
+          (typeof value === "string" ? value.split(",") : value) as Value,
         );
       }
       onChangeProp?.(event, child);
     },
-    [onChangeProp]
+    [onChangeProp],
   );
 
   // Normalize the options array to accommodate the various
@@ -229,7 +240,7 @@ const Select = <
         }
         return { text: option, value: option, type: "option" };
       }),
-    [options]
+    [options],
   );
 
   const renderValue = useCallback(
@@ -244,7 +255,7 @@ const Select = <
       const renderedChips = selected
         .map((item: string) => {
           const selectedOption = normalizedOptions.find(
-            (option) => option.value === item
+            (option) => option.value === item,
           );
 
           if (!selectedOption) {
@@ -263,7 +274,7 @@ const Select = <
       // proper styling
       return <Box>{renderedChips}</Box>;
     },
-    [normalizedOptions]
+    [normalizedOptions],
   );
 
   // Convert the options into the ReactNode children
@@ -298,11 +309,16 @@ const Select = <
           </MenuItem>
         );
       }),
-    [hasMultipleChoices, normalizedOptions, internalSelectedValues]
+    [hasMultipleChoices, normalizedOptions, internalSelectedValues],
   );
 
   const renderFieldComponent = useCallback(
-    ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
+    ({
+      ariaDescribedBy,
+      errorMessageElementId,
+      id,
+      labelElementId,
+    }: SelectRenderProps) => (
       <MuiSelect
         {...inputValues}
         aria-describedby={ariaDescribedBy}
@@ -336,7 +352,7 @@ const Select = <
       renderValue,
       testId,
       translate,
-    ]
+    ],
   );
 
   return (

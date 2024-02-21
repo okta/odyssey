@@ -156,7 +156,7 @@ export const CustomComponentStory: StoryObj = {
     const customOdysseyTheme = useMemo(
       () =>
         themeOverrides && createTheme(deepmerge(odysseyTheme, themeOverrides)),
-      [odysseyTheme, themeOverrides]
+      [odysseyTheme, themeOverrides],
     );
 
     return (

@@ -15,7 +15,7 @@ import { SearchField } from "@okta/odyssey-react-mui";
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { useCallback, useState } from "react";
+import { ChangeEvent, useCallback, useState } from "react";
 
 const storybookMeta: Meta<typeof SearchField> = {
   title: "MUI Components/Forms/SearchField",
@@ -165,8 +165,9 @@ export const ControlledSearch: StoryObj<typeof SearchField> = {
   render: function C(props) {
     const [constrolledValue, setControlledValue] = useState("Jupiter");
     const onChange = useCallback(
-      (event) => setControlledValue(event.target.value),
-      []
+      (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+        setControlledValue(event.target.value),
+      [],
     );
     return (
       <SearchField {...props} value={constrolledValue} onChange={onChange} />

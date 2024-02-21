@@ -38,6 +38,6 @@ function toRegexpString(include) {
   if (typeof include === "string") return include;
   if (include instanceof RegExp) return include.toString().slice(1, -1);
   throw new Error(
-    "[@okta/odyssey-babel-loader]: invalid include option, must be an array of regular expressions or escaped string regular expressions"
+    "[@okta/odyssey-babel-loader]: invalid include option, must be an array of regular expressions or escaped string regular expressions",
   );
 }

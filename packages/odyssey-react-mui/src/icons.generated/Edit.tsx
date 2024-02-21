@@ -37,7 +37,7 @@ export const EditIcon = forwardRef<SVGSVGElement, EditIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 EditIcon.displayName = "EditIcon";

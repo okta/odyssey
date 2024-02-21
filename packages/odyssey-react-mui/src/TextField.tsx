@@ -23,7 +23,10 @@ import {
 } from "react";
 import { InputAdornment, InputBase } from "@mui/material";
 
-import { FieldComponentProps } from "./FieldComponentProps";
+import {
+  FieldComponentProps,
+  FieldComponentRenderProps,
+} from "./FieldComponentProps";
 import { Field } from "./Field";
 import { HtmlProps } from "./HtmlProps";
 import { FocusHandle, useInputValues, getControlState } from "./inputUtils";
@@ -103,6 +106,11 @@ export type TextFieldProps = {
 } & FieldComponentProps &
   HtmlProps;
 
+type FieldRenderProps = Partial<
+  Pick<FieldComponentRenderProps, "ariaDescribedBy" | "errorMessageElementId">
+> &
+  Pick<FieldComponentRenderProps, "id" | "labelElementId">;
+
 const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (
     {
@@ -135,13 +143,13 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       type = "text",
       value: value,
     },
-    ref
+    ref,
   ) => {
     const controlledStateRef = useRef(
       getControlState({
         controlledValue: value,
         uncontrolledValue: defaultValue,
-      })
+      }),
     );
     const inputValues = useInputValues({
       defaultValue,
@@ -159,7 +167,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           },
         };
       },
-      []
+      [],
     );
 
     const onChange = useCallback<
@@ -168,11 +176,16 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       (event) => {
         onChangeProp?.(event);
       },
-      [onChangeProp]
+      [onChangeProp],
     );
 
     const renderFieldComponent = useCallback(
-      ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
+      ({
+        ariaDescribedBy,
+        errorMessageElementId,
+        id,
+        labelElementId,
+      }: FieldRenderProps) => (
         <InputBase
           {...inputValues}
           aria-describedby={ariaDescribedBy}
@@ -233,7 +246,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         testId,
         translate,
         type,
-      ]
+      ],
     );
 
     return (
@@ -253,7 +266,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         renderFieldComponent={renderFieldComponent}
       />
     );
-  }
+  },
 );
 
 const MemoizedTextField = memo(TextField);

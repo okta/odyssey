@@ -131,7 +131,7 @@ const Tabs = ({
       setTabState(value);
       onChangeProp?.(event, value);
     },
-    [onChangeProp]
+    [onChangeProp],
   );
 
   useEffect(() => {
@@ -141,7 +141,7 @@ const Tabs = ({
   }, [value]);
 
   const renderTab = useCallback(
-    (tab, index) => {
+    (tab: TabItemProps, index: number) => {
       const {
         testId,
         isDisabled,
@@ -172,7 +172,7 @@ const Tabs = ({
         />
       );
     },
-    [tabState]
+    [tabState],
   );
 
   return (

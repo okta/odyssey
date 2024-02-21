@@ -37,7 +37,7 @@ export const ShowIcon = forwardRef<SVGSVGElement, ShowIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 ShowIcon.displayName = "ShowIcon";

@@ -119,14 +119,14 @@ const Field = ({
     () =>
       [hintId, errorMessageElementId, ariaDescribedBy].join(" ").trim() ||
       undefined,
-    [ariaDescribedBy, errorMessageElementId, hintId]
+    [ariaDescribedBy, errorMessageElementId, hintId],
   );
 
   const { isDisabled: isFieldsetDisabled } = useFieldset();
 
   const isDisabled = useMemo(
     () => isDisabledProp || isFieldsetDisabled,
-    [isDisabledProp, isFieldsetDisabled]
+    [isDisabledProp, isFieldsetDisabled],
   );
 
   return (
@@ -141,7 +141,7 @@ const Field = ({
       fullWidth={isFullWidth}
     >
       {fieldType === "group" ? (
-        <MuiFormLabel component="legend">
+        <MuiFormLabel component="legend" id={labelElementId}>
           {label}{" "}
           {isOptional && label && (
             <Typography component="span" color="textSecondary">

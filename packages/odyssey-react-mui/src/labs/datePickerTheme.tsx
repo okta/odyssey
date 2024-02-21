@@ -220,7 +220,7 @@ export const datePickerTheme: ThemeOptions = {
           marginBottom: theme.spacing(1),
           marginTop: 0,
           paddingLeft: `calc(${theme.spacing(
-            popupSpacingValue
+            popupSpacingValue,
           )} + ${theme.spacing(2)})`,
           paddingRight: theme.spacing(popupSpacingValue),
           width: "auto",
@@ -303,17 +303,19 @@ export const datePickerTheme: ThemeOptions = {
     PrivatePickersYear: {
       styleOverrides: {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error TEMP. Arrays are valid styles return values for Emotion.
+        // @ts-ignore TEMP. Arrays are valid styles return values for Emotion.
         button: ({ theme }) => [
           yearStyles.default({ theme }),
           {
             alignItems: "center",
             borderRadius: 0,
             display: "flex",
+            // @ts-expect-error TEMP. This broken when upgrading MUI.
             fontSize: theme.typography.body1.fontSize,
             justifyContent: "flex-start",
             marginBottom: 0,
             marginTop: 0,
+            // @ts-expect-error TEMP. This broken when upgrading MUI.
             paddingLeft: theme.spacing(7),
             position: "relative",
             width: "100%",

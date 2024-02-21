@@ -11,5 +11,5 @@
  */
 
 export const getTypedObjectKeys: <ObjectType>(
-  object: ObjectType
+  object: ObjectType,
 ) => Array<keyof ObjectType> = Object.keys;

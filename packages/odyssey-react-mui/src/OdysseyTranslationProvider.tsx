@@ -22,12 +22,12 @@ export type OdysseyI18nResourceKeys = (typeof resources)["en"];
 export const odysseyI18nResourceKeysList = getTypedObjectKeys(resources["en"]);
 
 export type TranslationOverrides<
-  SupportedLanguages extends string = DefaultSupportedLanguages
+  SupportedLanguages extends string = DefaultSupportedLanguages,
 > = Record<SupportedLanguages, Partial<OdysseyI18nResourceKeys>>;
 
 const mergeBundleOverrides = <SupportedLanguages extends string>(
   languageCode: SupportedLanguages,
-  translationOverrides: TranslationOverrides<SupportedLanguages>
+  translationOverrides: TranslationOverrides<SupportedLanguages>,
 ) => {
   const translationStrings = resources[languageCode] || {};
   const translationStringOverrides = translationOverrides[languageCode];
@@ -38,7 +38,7 @@ const mergeBundleOverrides = <SupportedLanguages extends string>(
 };
 
 export type OdysseyTranslationProviderProps<
-  SupportedLanguages extends string = DefaultSupportedLanguages
+  SupportedLanguages extends string = DefaultSupportedLanguages,
 > = {
   children: ReactNode;
   languageCode?: SupportedLanguages | DefaultSupportedLanguages;
@@ -46,7 +46,7 @@ export type OdysseyTranslationProviderProps<
 };
 
 const formatLanguageCodeToHyphenated = <SupportedLanguages extends string>(
-  languageCode: OdysseyTranslationProviderProps<SupportedLanguages>["languageCode"]
+  languageCode: OdysseyTranslationProviderProps<SupportedLanguages>["languageCode"],
 ) => languageCode?.replaceAll("_", "-");
 
 export const OdysseyTranslationProvider = <SupportedLanguages extends string>({
@@ -61,13 +61,13 @@ export const OdysseyTranslationProvider = <SupportedLanguages extends string>({
     const changeHtmlElementLanguageAttribute = () => {
       window.document.documentElement.setAttribute(
         "lang",
-        normalizedLanguageCode || "en"
+        normalizedLanguageCode || "en",
       );
     };
     // Defaults to the browser's language if available otherwise `en` will be used
     i18n.changeLanguage(
       languageCode || window.navigator.language,
-      changeHtmlElementLanguageAttribute
+      changeHtmlElementLanguageAttribute,
     );
   }, [languageCode]);
 
@@ -76,7 +76,7 @@ export const OdysseyTranslationProvider = <SupportedLanguages extends string>({
       getTypedObjectKeys(translationOverrides).forEach((language) => {
         const bundle = mergeBundleOverrides<SupportedLanguages>(
           language,
-          translationOverrides
+          translationOverrides,
         );
         i18n.addResourceBundle(language, defaultNS, bundle);
       });
