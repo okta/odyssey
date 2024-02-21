@@ -89,11 +89,11 @@ export const Default: StoryObj<typeof Switch> = {
       const canvas = within(canvasElement);
       const switchCheckbox = canvas.getByRole("checkbox") as HTMLInputElement;
       if (switchCheckbox) {
-        userEvent.click(switchCheckbox);
+        await userEvent.click(switchCheckbox);
       }
-      expect(switchCheckbox).toBeChecked();
-      axeRun("Switch Default");
-      userEvent.tab();
+      await expect(switchCheckbox).toBeChecked();
+      await axeRun("Switch Default");
+      await userEvent.tab();
     });
   },
 };

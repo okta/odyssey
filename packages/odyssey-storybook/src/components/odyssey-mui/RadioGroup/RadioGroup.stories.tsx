@@ -158,10 +158,10 @@ export const UncontrolledRadioGroup: StoryObj<typeof RadioGroup> = {
         "Ludicrous Speed",
       ) as HTMLInputElement;
       if (radiogroup && radio) {
-        userEvent.click(radio);
+        await userEvent.click(radio);
       }
-      expect(radio).toBeChecked();
-      axeRun("select controlled radio button");
+      await expect(radio).toBeChecked();
+      await axeRun("select controlled radio button");
     });
   },
 };
@@ -198,10 +198,10 @@ export const ControlledRadioGroup: StoryObj<typeof RadioGroup> = {
       const radiogroup = canvas.getByRole("radiogroup") as HTMLInputElement;
       const radio = canvas.getByLabelText("Warp Speed") as HTMLInputElement;
       if (radiogroup && radio) {
-        userEvent.click(radio);
+        await userEvent.click(radio);
       }
-      expect(radio).toBeChecked();
-      axeRun("select uncontrolled radio button");
+      await expect(radio).toBeChecked();
+      await axeRun("select uncontrolled radio button");
     });
   },
 };
