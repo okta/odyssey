@@ -275,7 +275,7 @@ const DefaultTemplate: StoryObj<DrawerProps> = {
         }}
       >
         <Box>
-          <h2>CSS Grid Layout</h2>
+          <h2>Layout</h2>
           {gridStubText}
         </Box>
         {isVisible ? (
