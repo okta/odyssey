@@ -24,12 +24,11 @@ import {
 
 import { CloseCircleFilledIcon, SearchIcon } from "./icons.generated";
 import { Field } from "./Field";
-import {
-  FieldComponentProps,
-  FieldComponentRenderProps,
-} from "./FieldComponentProps";
+import { FieldComponentProps } from "./FieldComponentProps";
 import type { HtmlProps } from "./HtmlProps";
 import { getControlState, useInputValues } from "./inputUtils";
+
+export const searchVariantValues = ["outline", "filled"] as const;
 
 export type SearchFieldProps = {
   /**
@@ -84,16 +83,15 @@ export type SearchFieldProps = {
    * The value of the `input` element, to use when controlled.
    */
   value?: string;
+  /**
+   * Whether the SearchField has a gray or white background
+   */
+  variant?: (typeof searchVariantValues)[number];
 } & Pick<
   FieldComponentProps,
   "ariaDescribedBy" | "id" | "isDisabled" | "name" | "isFullWidth"
 > &
   HtmlProps;
-
-type FieldRenderProps = Partial<
-  Pick<FieldComponentRenderProps, "ariaDescribedBy">
-> &
-  Pick<FieldComponentRenderProps, "id">;
 
 const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
   (
@@ -116,6 +114,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       testId,
       translate,
       value,
+      variant = "outline",
     },
     ref,
   ) => {
@@ -144,7 +143,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
     });
 
     const renderFieldComponent = useCallback(
-      ({ ariaDescribedBy, id }: FieldRenderProps) => (
+      ({ ariaDescribedBy, id }) => (
         <InputBase
           {...inputValues}
           inputProps={{
@@ -170,6 +169,8 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
             )
           }
           id={id}
+          data-ods-type="search"
+          data-ods-variant={variant}
           name={nameOverride ?? id}
           onBlur={onBlur}
           onChange={onChange}
@@ -201,6 +202,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         tabIndex,
         testId,
         translate,
+        variant,
       ],
     );
 

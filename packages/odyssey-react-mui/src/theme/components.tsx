@@ -665,6 +665,10 @@ export const components = ({
               margin: "0",
             },
 
+            ...(ownerState.size === "large" && {
+              padding: odysseyTokens.Spacing4,
+            }),
+
             ...(ownerState.size === "small" && {
               padding: odysseyTokens.Spacing2,
             }),
@@ -699,70 +703,6 @@ export const components = ({
     MuiButtonBase: {
       defaultProps: {
         disableRipple: true,
-      },
-    },
-    MuiCard: {
-      styleOverrides: {
-        root: () => ({
-          backgroundColor: odysseyTokens.HueNeutralWhite,
-          borderRadius: odysseyTokens.BorderRadiusOuter,
-          boxShadow: odysseyTokens.DepthMedium,
-          padding: odysseyTokens.Spacing5,
-          position: "relative",
-          transition: `all ${odysseyTokens.TransitionDurationMain} ${odysseyTokens.TransitionTimingMain}`,
-
-          "& img": {
-            height: "64px",
-          },
-
-          "&.isClickable:hover": {
-            backgroundColor: odysseyTokens.HueNeutral50,
-            boxShadow: odysseyTokens.DepthHigh,
-          },
-
-          [`& .${typographyClasses.h5}`]: {
-            lineHeight: odysseyTokens.TypographyLineHeightHeading5,
-            marginBottom: odysseyTokens.Spacing3,
-          },
-
-          [`& .${typographyClasses.subtitle2}`]: {
-            marginBottom: odysseyTokens.Spacing1,
-            textTransform: "uppercase",
-            fontWeight: odysseyTokens.TypographyWeightBodyBold,
-            fontSize: odysseyTokens.TypographySizeOverline,
-            lineHeight: odysseyTokens.TypographyLineHeightOverline,
-            color: odysseyTokens.TypographyColorSubordinate,
-            letterSpacing: 1.3,
-          },
-
-          [`& .${typographyClasses.body1}`]: {
-            fontSize: odysseyTokens.TypographySizeSubordinate,
-            lineHeight: odysseyTokens.TypographyLineHeightBody,
-          },
-        }),
-      },
-    },
-    MuiCardActionArea: {
-      styleOverrides: {
-        root: () => ({
-          margin: `-${odysseyTokens.Spacing5}`,
-          padding: odysseyTokens.Spacing5,
-          width: `calc(100% + (${odysseyTokens.Spacing5} * 2))`,
-
-          "&:hover": {
-            "& .MuiCardActionArea-focusHighlight": {
-              display: "none",
-            },
-          },
-        }),
-      },
-    },
-    MuiCardActions: {
-      styleOverrides: {
-        root: () => ({
-          marginBlockStart: odysseyTokens.Spacing5,
-          padding: 0,
-        }),
       },
     },
     MuiCheckbox: {
@@ -1685,7 +1625,7 @@ export const components = ({
           whiteSpace: "nowrap",
           color: odysseyTokens.TypographyColorSubordinate,
           ...(ownerState.position === "start" && {
-            marginInlineStart: odysseyTokens.Spacing2,
+            marginInlineStart: odysseyTokens.Spacing3,
           }),
           ...(ownerState.position === "end" && {
             marginInlineEnd: odysseyTokens.Spacing2,
@@ -1720,6 +1660,29 @@ export const components = ({
             },
           ),
 
+          ["&[data-ods-type='search']"]: {
+            borderColor: odysseyTokens.HueNeutral400,
+
+            [`& .${inputBaseClasses.input}::placeholder`]: {
+              color: odysseyTokens.TypographyColorSupport,
+              opacity: 1,
+            },
+          },
+
+          ["&[data-ods-variant='filled']"]: {
+            backgroundColor: odysseyTokens.HueNeutral50,
+            borderColor: odysseyTokens.HueNeutral50,
+
+            [`&:hover`]: {
+              borderColor: odysseyTokens.HueNeutral400,
+            },
+
+            [`&.${inputBaseClasses.focused}`]: {
+              borderColor: odysseyTokens.FocusOutlineColorPrimary,
+              boxShadow: `0 0 0 1px ${odysseyTokens.FocusOutlineColorPrimary}`,
+            },
+          },
+
           ...(ownerState.fullWidth && {
             width: "100%",
           }),
@@ -1745,12 +1708,12 @@ export const components = ({
           },
 
           [`&.${inputBaseClasses.error}:hover`]: {
-            borderColor: odysseyTokens.BorderColorDangerDark,
+            borderColor: odysseyTokens.HueNeutral900,
           },
 
           [`&.${inputBaseClasses.error}.${inputBaseClasses.focused}`]: {
-            borderColor: odysseyTokens.BorderColorDangerControl,
-            boxShadow: `0 0 0 1px ${odysseyTokens.PaletteDangerMain}`,
+            borderColor: odysseyTokens.FocusOutlineColorPrimary,
+            boxShadow: `0 0 0 1px ${odysseyTokens.FocusOutlineColorPrimary}`,
           },
 
           [`&.${inputBaseClasses.disabled}`]: {
@@ -1762,11 +1725,16 @@ export const components = ({
           },
         }),
         input: {
-          boxSizing: "border-box",
-          height: "auto",
+          // Set total height to 40px, factoring in borders on outer container
+          height: `calc(${odysseyTokens.Spacing4} - (${odysseyTokens.BorderWidthMain} * 2))`,
           paddingBlock: odysseyTokens.Spacing3,
           paddingInline: odysseyTokens.Spacing3,
           boxShadow: "none",
+
+          // TODO: Consider if we want manual resizing.
+          // [`.${inputBaseClasses.multiline} &`]: {
+          //   resize: "vertical",
+          // },
 
           [`.${inputBaseClasses.disabled} &`]: {
             pointerEvents: "auto",
@@ -1779,7 +1747,7 @@ export const components = ({
 
           [`label[data-shrink=false] + .${inputBaseClasses.formControl} &`]: {
             "&::placeholder": {
-              color: odysseyTokens.TypographyColorSubordinate,
+              color: odysseyTokens.TypographyColorSupport,
               opacity: "1 !important",
             },
           },
@@ -2195,6 +2163,7 @@ export const components = ({
         select: {
           paddingBlock: odysseyTokens.Spacing3,
           paddingInline: odysseyTokens.Spacing3,
+          minHeight: 0,
 
           "&:focus": {
             backgroundColor: "transparent",
@@ -2529,6 +2498,7 @@ export const components = ({
     },
     MuiTableContainer: {
       defaultProps: {
+        // @ts-expect-error valid prop and value; MUI TS bug
         component: "figure",
       },
       styleOverrides: {
