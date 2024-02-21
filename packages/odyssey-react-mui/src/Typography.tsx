@@ -171,7 +171,7 @@ const Heading1 = ({
     children={children}
     color={color}
     component={component}
-    data-se={testId}
+    testId={testId}
     translate={translate}
     variant="h1"
   />
@@ -197,7 +197,7 @@ const Heading2 = ({
     children={children}
     color={color}
     component={component}
-    data-se={testId}
+    testId={testId}
     translate={translate}
     variant="h2"
   />
@@ -223,7 +223,7 @@ const Heading3 = ({
     children={children}
     color={color}
     component={component}
-    data-se={testId}
+    testId={testId}
     translate={translate}
     variant="h3"
   />
@@ -249,7 +249,7 @@ const Heading4 = ({
     children={children}
     color={color}
     component={component}
-    data-se={testId}
+    testId={testId}
     translate={translate}
     variant="h4"
   />
@@ -275,7 +275,7 @@ const Heading5 = ({
     children={children}
     color={color}
     component={component}
-    data-se={testId}
+    testId={testId}
     translate={translate}
     variant="h5"
   />
@@ -301,7 +301,7 @@ const Heading6 = ({
     children={children}
     color={color}
     component={component}
-    data-se={testId}
+    testId={testId}
     translate={translate}
     variant="h6"
   />
@@ -327,7 +327,7 @@ const Paragraph = ({
     children={children}
     color={color}
     component={component}
-    data-se={testId}
+    testId={testId}
     translate={translate}
     variant="body"
   />
@@ -353,7 +353,7 @@ const Subordinate = ({
     children={children}
     color={color}
     component={component}
-    data-se={testId}
+    testId={testId}
     translate={translate}
     variant="subordinate"
   />
@@ -379,7 +379,7 @@ const Support = ({
     children={children}
     color={color}
     component={component}
-    data-se={testId}
+    testId={testId}
     translate={translate}
     variant="support"
   />
@@ -405,7 +405,7 @@ const Legend = ({
     children={children}
     color={color}
     component={component}
-    data-se={testId}
+    testId={testId}
     translate={translate}
     variant="legend"
   />
