@@ -90,7 +90,7 @@ const storybookMeta: Meta<TileProps> = {
     menuButtonChildren: {
       control: null,
       description:
-        "Menu items to be rendered in the tile's optional menu button. If this prop is undefined, the menu button will not be shown.Not valid if the tile itself is clickable.",
+        "Menu items to be rendered in the tile's optional menu button. If this prop is undefined, the menu button will not be shown. Not valid if the tile itself is clickable.",
       table: {
         type: {
           summary: "[MenuItem | Divider | ListSubheader]",

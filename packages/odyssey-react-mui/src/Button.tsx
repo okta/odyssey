@@ -228,6 +228,7 @@ const Button = ({
       id,
       isDisabled,
       isFullWidth,
+      buttonContext.isFullWidth,
       label,
       onClick,
       size,
