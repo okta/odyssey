@@ -202,7 +202,7 @@ const Button = ({
           data-se={testId}
           disabled={isDisabled}
           endIcon={endIcon}
-          fullWidth={isFullWidth}
+          fullWidth={buttonContext.isFullWidth ?? isFullWidth}
           id={id}
           onClick={onClick}
           ref={localButtonRef}
@@ -228,6 +228,7 @@ const Button = ({
       id,
       isDisabled,
       isFullWidth,
+      buttonContext.isFullWidth,
       label,
       onClick,
       size,

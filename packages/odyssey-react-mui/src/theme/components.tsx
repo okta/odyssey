@@ -36,6 +36,8 @@ import { tableRowClasses } from "@mui/material/TableRow";
 import { tooltipClasses } from "@mui/material/Tooltip";
 import { typographyClasses } from "@mui/material/Typography";
 
+import { TILE_IMAGE_HEIGHT } from "../Tile";
+
 import {
   CheckCircleFilledIcon,
   CheckIcon,
@@ -703,6 +705,70 @@ export const components = ({
     MuiButtonBase: {
       defaultProps: {
         disableRipple: true,
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: () => ({
+          backgroundColor: odysseyTokens.HueNeutralWhite,
+          borderRadius: odysseyTokens.BorderRadiusOuter,
+          boxShadow: odysseyTokens.DepthMedium,
+          padding: odysseyTokens.Spacing5,
+          position: "relative",
+          transition: `all ${odysseyTokens.TransitionDurationMain} ${odysseyTokens.TransitionTimingMain}`,
+
+          "& img": {
+            height: TILE_IMAGE_HEIGHT,
+          },
+
+          "&.isClickable:hover": {
+            backgroundColor: odysseyTokens.HueNeutral50,
+            boxShadow: odysseyTokens.DepthHigh,
+          },
+
+          [`& .${typographyClasses.h5}`]: {
+            lineHeight: odysseyTokens.TypographyLineHeightHeading5,
+            marginBottom: odysseyTokens.Spacing3,
+          },
+
+          [`& .${typographyClasses.subtitle2}`]: {
+            marginBottom: odysseyTokens.Spacing1,
+            textTransform: "uppercase",
+            fontWeight: odysseyTokens.TypographyWeightBodyBold,
+            fontSize: odysseyTokens.TypographySizeOverline,
+            lineHeight: odysseyTokens.TypographyLineHeightOverline,
+            color: odysseyTokens.TypographyColorSubordinate,
+            letterSpacing: 1.3,
+          },
+
+          [`& .${typographyClasses.body1}`]: {
+            fontSize: odysseyTokens.TypographySizeSubordinate,
+            lineHeight: odysseyTokens.TypographyLineHeightBody,
+          },
+        }),
+      },
+    },
+    MuiCardActionArea: {
+      styleOverrides: {
+        root: () => ({
+          margin: `-${odysseyTokens.Spacing5}`,
+          padding: odysseyTokens.Spacing5,
+          width: `calc(100% + (${odysseyTokens.Spacing5} * 2))`,
+
+          "&:hover": {
+            "& .MuiCardActionArea-focusHighlight": {
+              display: "none",
+            },
+          },
+        }),
+      },
+    },
+    MuiCardActions: {
+      styleOverrides: {
+        root: () => ({
+          marginBlockStart: odysseyTokens.Spacing5,
+          padding: 0,
+        }),
       },
     },
     MuiCheckbox: {
