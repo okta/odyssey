@@ -12,7 +12,11 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import { createElement } from "react";
-import { DataColumn, DataTable } from "@okta/odyssey-react-mui";
+import {
+  DataTableColumn,
+  DataTable,
+  DataTableRowData,
+} from "@okta/odyssey-react-mui";
 import * as iconDictionary from "@okta/odyssey-react-mui/icons";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
@@ -29,7 +33,7 @@ type IconData = {
   use: string;
 };
 
-const columns: DataColumn[] = [
+const columns: DataTableColumn<DataTableRowData>[] = [
   {
     accessorKey: "icon",
     Cell: ({ row }) =>
@@ -145,9 +149,8 @@ export const Default: StoryObj = {
     return (
       <DataTable
         columns={columns}
-        data={iconTableData}
         getRowId={({ id }) => id}
-        fetchDataFn={() => iconTableData}
+        getData={() => iconTableData}
         hasSorting={false}
       />
     );

@@ -10,7 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { DataTable } from "./DataTable";
-import { densityValues } from "./constants";
-
-export { DataTable, densityValues };
+export { DataTable, type DataTableProps } from "./DataTable";
+export { densityValues } from "./constants";
+export type {
+  MRT_ColumnFiltersState as DataTableFiltersState,
+  MRT_SortingState as DataTableSortingState,
+  MRT_ColumnDef as DataTableColumn,
+  MRT_RowData as DataTableRowData,
+} from "material-react-table";

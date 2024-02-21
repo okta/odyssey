@@ -68,7 +68,7 @@ export type {
 
 // The shape of the table columns,
 // with props named to match their MRT_ColumnDef counterparts
-export type DataColumn = {
+export type DataTableColumn = {
   /**
    * The unique ID of the column
    */
@@ -130,7 +130,7 @@ export type DataTableProps = {
   /**
    * The columns that make up the table
    */
-  columns: DataColumn[];
+  columns: DataTableColumn[];
   /**
    * The data that goes into the table, which will be displayed
    * as the table rows

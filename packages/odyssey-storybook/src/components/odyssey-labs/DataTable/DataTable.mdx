@@ -33,10 +33,10 @@ as robust as a real implementation would be.
 
 ## Passing data into the table
 
-Every table needs to have the `columns` prop set. `columns` should be an array of `DataColumn` objects, defined as such:
+Every table needs to have the `columns` prop set. `columns` should be an array of `DataTableColumn` objects, defined as such:
 
 ```tsx
-type DataColumn = {
+type DataTableColumn = {
   accessorKey: string;
   header: string;
   Cell?: MRT_ColumnDef<MRT_RowData>["Cell"];
@@ -57,7 +57,7 @@ type DataColumn = {
 While this includes many options, a typical column only needs an `accessorKey` and a `header`:
 
 ```tsx
-const column: DataColumn = {
+const column: DataTableColumn = {
   accessorKey: "city",
   header: "City",
 };
@@ -142,7 +142,7 @@ type Person = {
 And now we'll define the columns for the table:
 
 ```tsx
-const columns: DataColumn[] = [
+const columns: DataTableColumn[] = [
   {
     accessorKey: "order",
     header: "Original order",

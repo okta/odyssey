@@ -12,7 +12,6 @@
 
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
-  MRT_ColumnDef,
   MRT_DensityState,
   MRT_Row,
   MRT_RowData,
@@ -41,12 +40,13 @@ import {
 } from "./DataTableRowActions";
 import { useRowReordering } from "./useRowReordering";
 import { DataTableSettings } from "./DataTableSettings";
+import { Box } from "../Box";
 
 export type DataTableProps = {
   /**
    * The columns that make up the table
    */
-  columns: MRT_ColumnDef<MRT_RowData>[];
+  columns: MRT_TableOptions<MRT_RowData>["columns"];
   /**
    * The total number of rows in the table. Optional, because it's sometimes impossible
    * to calculate. Used in table pagination to know when to disable the "next"/"more" button.
@@ -345,8 +345,8 @@ const DataTable = ({
       displayColumnDefOptions as MRT_TableOptions<MRT_RowData>["displayColumnDefOptions"],
 
     // Reordering
-    enableRowOrdering: hasRowReordering,
-    enableRowDragging: hasRowReordering,
+    enableRowOrdering: hasRowReordering && Boolean(onReorderRows),
+    enableRowDragging: hasRowReordering && Boolean(onReorderRows),
     muiTableBodyRowProps: ({ table, row }) => ({
       className: draggableTableBodyRowClassName({
         currentRowId: row.id,
@@ -397,24 +397,26 @@ const DataTable = ({
 
     // Filters
     renderTopToolbar: () => (
-      <DataFilters
-        onChangeSearch={hasSearch ? setSearch : undefined}
-        onChangeFilters={setFilters}
-        hasSearchSubmitButton={hasSearchSubmitButton}
-        searchDelayTime={searchDelayTime}
-        filters={hasFilters ? dataTableFilters : undefined}
-        additionalActions={
-          <DataTableSettings
-            hasChangeableDensity={hasChangeableDensity}
-            rowDensity={rowDensity}
-            setRowDensity={setRowDensity}
-            hasColumnVisibility={hasColumnVisibility}
-            columns={columns}
-            columnVisibility={columnVisibility}
-            setColumnVisibility={setColumnVisibility}
-          />
-        }
-      />
+      <Box sx={{ marginBottom: 5 }}>
+        <DataFilters
+          onChangeSearch={hasSearch ? setSearch : undefined}
+          onChangeFilters={hasFilters ? setFilters : undefined}
+          hasSearchSubmitButton={hasSearchSubmitButton}
+          searchDelayTime={searchDelayTime}
+          filters={hasFilters ? dataTableFilters : undefined}
+          additionalActions={
+            <DataTableSettings
+              hasChangeableDensity={hasChangeableDensity}
+              rowDensity={rowDensity}
+              setRowDensity={setRowDensity}
+              hasColumnVisibility={hasColumnVisibility}
+              columns={columns}
+              columnVisibility={columnVisibility}
+              setColumnVisibility={setColumnVisibility}
+            />
+          }
+        />
+      </Box>
     ),
 
     // Pagination

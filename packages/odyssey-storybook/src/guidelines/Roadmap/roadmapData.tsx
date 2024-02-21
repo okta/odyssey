@@ -10,8 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Status } from "@okta/odyssey-react-mui";
-import { DataColumn } from "@okta/odyssey-react-mui";
+import { DataTableRowData, Status } from "@okta/odyssey-react-mui";
+import { DataTableColumn } from "@okta/odyssey-react-mui";
 
 export type OdysseyComponent = {
   name: string;
@@ -21,7 +21,7 @@ export type OdysseyComponent = {
   fullRelease: string;
 };
 
-export const columns: DataColumn[] = [
+export const columns: DataTableColumn<DataTableRowData>[] = [
   {
     accessorKey: "name",
     header: "Name",
