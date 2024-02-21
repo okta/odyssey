@@ -104,6 +104,7 @@ const storybookMeta: Meta<TileProps> = {
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor...",
     overline: "Overline",
+    onClick: undefined,
   },
   decorators: [MuiThemeDecorator],
   parameters: {
