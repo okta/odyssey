@@ -19,6 +19,7 @@ import {
   useState,
 } from "react";
 import styled from "@emotion/styled";
+import { useTranslation } from "react-i18next";
 
 import { Button } from "../Button";
 import { UploadIcon } from "../icons.generated";
@@ -155,6 +156,7 @@ const FileUpload = ({
   type,
 }: FileUploadProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const { t } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [filesToUpload, setFilesToUpload] = useState<File[]>([]);
@@ -168,7 +170,8 @@ const FileUpload = ({
       const { files } = event.target;
 
       if (files && files.length > 0) {
-        const mergedFiles = type ? [...filesToUpload, ...files] : [...files];
+        const mergedFiles =
+          type === "multiple" ? [...filesToUpload, ...files] : [...files];
 
         setFilesToUpload(mergedFiles);
       }
@@ -176,7 +179,7 @@ const FileUpload = ({
       // reset input value to allow re-upload of a file with the same name
       event.target.value = "";
     },
-    [type, filesToUpload]
+    [type, filesToUpload],
   );
 
   const triggerFileInputClick = useCallback(() => {
@@ -187,11 +190,11 @@ const FileUpload = ({
     useCallback<RemoveFileFromFilesToUploadList>(
       (name) => {
         const deletedFileFilteredOut = filesToUpload.filter(
-          (file) => file.name !== name
+          (file) => file.name !== name,
         );
         setFilesToUpload(deletedFileFilteredOut);
       },
-      [filesToUpload]
+      [filesToUpload],
     );
 
   const renderFileInput = useCallback(
@@ -227,7 +230,7 @@ const FileUpload = ({
               <Input />
               <Button
                 isDisabled={isDisabled}
-                label="Upload Files"
+                label={t("fileupload.button.text")}
                 onClick={triggerFileInputClick}
                 startIcon={<UploadIcon />}
                 variant="secondary"
@@ -249,11 +252,11 @@ const FileUpload = ({
             <ButtonAndInfoContainer>
               <FileUploadIllustration />
               <Support color="textSecondary">
-                Drag and drop files here or click to add files.
+                {t("fileupload.prompt.text")}
               </Support>
               <Button
                 isDisabled={isDisabled}
-                label="Add Files"
+                label={t("fileupload.button.text")}
                 onClick={triggerFileInputClick}
                 startIcon={<UploadIcon />}
                 variant="secondary"
@@ -279,7 +282,7 @@ const FileUpload = ({
       triggerFileInputClick,
       type,
       updateFilesToUpload,
-    ]
+    ],
   );
 
   return (

@@ -13,6 +13,7 @@
 import { memo, useCallback } from "react";
 import styled from "@emotion/styled";
 import { IconButton } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import { FileUploadProps } from "./FileUpload";
 import {
@@ -20,12 +21,10 @@ import {
   DesignTokens,
 } from "../OdysseyDesignTokensContext";
 import { DeleteIcon } from "../icons.generated";
-import { MuiPropsContext } from "../MuiPropsContext";
+import { MuiPropsContext, MuiPropsContextType } from "../MuiPropsContext";
 import { Tooltip } from "../Tooltip";
 
-const PreviewContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{
+const PreviewContainer = styled.div<{
   isDisabled: FileUploadProps["isDisabled"];
   odysseyDesignTokens: DesignTokens;
 }>`
@@ -36,9 +35,7 @@ const PreviewContainer = styled("div", {
     isDisabled ? odysseyDesignTokens.TypographyColorDisabled : "inherit"};
 `;
 
-const UploadedFileContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{
+const UploadedFileContainer = styled.div<{
   odysseyDesignTokens: DesignTokens;
 }>`
   display: flex;
@@ -85,6 +82,7 @@ type UploadedFileProps = {
 };
 
 const UploadedFile = ({ name, onFileRemove }: UploadedFileProps) => {
+  const { t } = useTranslation();
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const deleteHandler = useCallback(() => {
@@ -92,11 +90,11 @@ const UploadedFile = ({ name, onFileRemove }: UploadedFileProps) => {
   }, [onFileRemove, name]);
 
   const renderDeleteButton = useCallback(
-    (muiProps) => {
+    (muiProps: MuiPropsContextType) => {
       return (
         <IconButton
           {...muiProps}
-          aria-label="Clear"
+          aria-label={t("fileupload.removefile.text")}
           onClick={deleteHandler}
           size="small"
         >
@@ -104,7 +102,7 @@ const UploadedFile = ({ name, onFileRemove }: UploadedFileProps) => {
         </IconButton>
       );
     },
-    [deleteHandler]
+    [deleteHandler],
   );
 
   return (
@@ -114,7 +112,11 @@ const UploadedFile = ({ name, onFileRemove }: UploadedFileProps) => {
       odysseyDesignTokens={odysseyDesignTokens}
     >
       {name}
-      <Tooltip ariaType="description" placement="top" text="Delete">
+      <Tooltip
+        ariaType="description"
+        placement="top"
+        text={t("fileupload.removefile.text")}
+      >
         <MuiPropsContext.Consumer>
           {renderDeleteButton}
         </MuiPropsContext.Consumer>

@@ -41,8 +41,16 @@ const FileUploadIllustration = () => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   return (
-    <UploadIllustrationContainer odysseyDesignTokens={odysseyDesignTokens}>
-      <svg viewBox="0 0 44 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <UploadIllustrationContainer
+      aria-hidden="true"
+      odysseyDesignTokens={odysseyDesignTokens}
+    >
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 44 45"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <path
           d="M32.0763 11.001C29.3564 3.7855 21.6595 -0.565827 13.7765 0.726748C5.35441 2.10773 -0.676662 9.50714 0.0603005 17.8612C0.441865 22.1865 2.56458 25.9787 5.71703 28.614L8.28246 25.545C5.90122 23.5544 4.32811 20.7209 4.04483 17.5097C3.50262 11.3633 7.94433 5.73648 14.4238 4.67404C20.9164 3.60944 27.0806 7.52016 28.6895 13.5191C28.9239 14.3932 29.7162 15.001 30.6212 15.001H32.9114C36.8985 15.001 39.9997 18.0938 39.9997 21.7505C39.9997 24.3423 38.4576 26.6352 36.1259 27.7678L37.8736 31.3658C41.4737 29.6171 43.9997 25.9917 43.9997 21.7505C43.9997 15.7428 38.963 11.001 32.9114 11.001H32.0763Z"
           fill={odysseyDesignTokens.HueNeutral200}
