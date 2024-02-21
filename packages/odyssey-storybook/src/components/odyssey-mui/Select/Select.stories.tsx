@@ -227,15 +227,15 @@ export const Default: StoryObj<typeof Select> = {
         '[aria-haspopup="listbox"]',
       );
       if (comboBoxElement) {
-        userEvent.click(comboBoxElement);
+        await userEvent.click(comboBoxElement);
         const listboxElement = screen.getByRole("listbox");
-        expect(listboxElement).toBeInTheDocument();
+        await expect(listboxElement).toBeInTheDocument();
         const listItem = listboxElement.children[0];
-        userEvent.click(listItem);
-        userEvent.tab();
+        await userEvent.click(listItem);
+        await userEvent.tab();
         await waitFor(() => expect(listboxElement).not.toBeInTheDocument());
         const inputElement = canvasElement.querySelector("input");
-        expect(inputElement?.value).toBe("Earth");
+        await expect(inputElement?.value).toBe("Earth");
         await waitFor(() => axeRun("Select Default"));
       }
     });
@@ -303,17 +303,18 @@ export const MultiSelect: StoryObj<typeof Select> = {
         '[aria-haspopup="listbox"]',
       );
       if (comboBoxElement) {
-        userEvent.click(comboBoxElement);
+        await userEvent.click(comboBoxElement);
         const listboxElement = screen.getByRole("listbox");
-        expect(listboxElement).toBeInTheDocument();
+        await expect(listboxElement).toBeInTheDocument();
 
-        userEvent.click(listboxElement.children[0]);
-        userEvent.click(listboxElement.children[1]);
-        userEvent.tab();
+        await userEvent.click(listboxElement.children[0]);
+        await userEvent.click(listboxElement.children[1]);
+        await userEvent.tab();
         await waitFor(() => expect(listboxElement).not.toBeInTheDocument());
+
         const inputElement = canvasElement.querySelector("input");
-        expect(inputElement?.value).toBe("Earth,Mars");
-        userEvent.click(canvasElement);
+        await expect(inputElement?.value).toBe("Earth,Mars");
+        await userEvent.click(canvasElement);
         await waitFor(() => axeRun("Select Multiple"));
       }
     });
