@@ -464,7 +464,6 @@ const Select = <
       Chips,
       inputValues,
       hasMultipleChoices,
-      normalizedOptions,
       nameOverride,
       odysseyDesignTokens,
       onBlur,
