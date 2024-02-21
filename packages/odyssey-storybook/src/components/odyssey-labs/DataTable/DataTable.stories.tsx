@@ -22,7 +22,6 @@ import {
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { Person, columns, data } from "./tableAPI";
-import { useCallback } from "react";
 
 const storybookMeta: Meta<DataTableProps> = {
   title: "Labs Components/DataTable",
@@ -267,77 +266,85 @@ const storybookMeta: Meta<DataTableProps> = {
 
 export default storybookMeta;
 
+const getData = ({
+  page = 1,
+  resultsPerPage = 20,
+  search,
+  filters,
+  sort,
+}: {
+  page?: number;
+  resultsPerPage?: number;
+  search?: string;
+  filters?: DataFilter[];
+  sort?: DataTableSortingState;
+}) => {
+  console.log(page, resultsPerPage, search, filters, sort);
+
+  let filteredData = data;
+
+  // Implement text-based query filtering
+  if (search) {
+    filteredData = filteredData.filter((row) =>
+      Object.values(row).some((value) =>
+        value.toString().toLowerCase().includes(search.toLowerCase()),
+      ),
+    );
+  }
+
+  // Implement column-specific filtering
+  if (filters) {
+    filteredData = filteredData.filter((row) => {
+      return filters.every(({ id, value }) => {
+        // If filter value is null or undefined, skip this filter
+        if (value === null || value === undefined) {
+          return true;
+        }
+
+        // If filter value is array, search for each array value
+        if (Array.isArray(value)) {
+          return value.some((arrayValue) => {
+            return row[id as keyof Person]
+              ?.toString()
+              .toLowerCase()
+              .includes(arrayValue.toString().toLowerCase());
+          });
+        }
+
+        // General filtering for other columns
+        return row[id as keyof Person]
+          ?.toString()
+          .toLowerCase()
+          .includes(value.toString().toLowerCase());
+      });
+    });
+  }
+
+  // Implement sorting
+  if (sort && sort.length > 0) {
+    filteredData.sort((a, b) => {
+      for (const { id, desc } of sort) {
+        const aValue = a[id as keyof Person];
+        const bValue = b[id as keyof Person];
+
+        if (aValue < bValue) return desc ? 1 : -1;
+        if (aValue > bValue) return desc ? -1 : 1;
+      }
+
+      return 0;
+    });
+  }
+
+  // Implement pagination
+  const startRow = (page - 1) * resultsPerPage;
+  const endRow = startRow + resultsPerPage;
+  filteredData = filteredData.slice(startRow, endRow);
+
+  return filteredData;
+};
+
 export const Default: StoryObj<DataTableProps> = {
   render: function C(props) {
-    const getData = useCallback(
-      ({
-        page = 1,
-        resultsPerPage = 20,
-        search,
-        filters,
-        sort,
-      }: {
-        page?: number;
-        resultsPerPage?: number;
-        search?: string;
-        filters?: DataFilter[];
-        sort?: DataTableSortingState;
-      }) => {
-        console.log(page, resultsPerPage, search, filters, sort);
-
-        let filteredData = data;
-
-        // Implement text-based query filtering
-        if (search) {
-          filteredData = filteredData.filter((row) =>
-            Object.values(row).some((value) =>
-              value.toString().toLowerCase().includes(search.toLowerCase()),
-            ),
-          );
-        }
-
-        // Implement column-specific filtering
-        if (filters) {
-          filteredData = filteredData.filter((row) => {
-            return filters.every(({ id, value }) => {
-              // If filter value is null or undefined, skip this filter
-              if (value === null || value === undefined) {
-                return true;
-              }
-
-              // General filtering for other columns
-              return row[id as keyof Person]
-                ?.toString()
-                .includes(value.toString());
-            });
-          });
-        }
-
-        // Implement sorting
-        if (sort && sort.length > 0) {
-          filteredData.sort((a, b) => {
-            for (const { id, desc } of sort) {
-              const aValue = a[id as keyof Person];
-              const bValue = b[id as keyof Person];
-
-              if (aValue < bValue) return desc ? 1 : -1;
-              if (aValue > bValue) return desc ? -1 : 1;
-            }
-
-            return 0;
-          });
-        }
-
-        // Implement pagination
-        const startRow = (page - 1) * resultsPerPage;
-        const endRow = startRow + resultsPerPage;
-        filteredData = filteredData.slice(startRow, endRow);
-
-        return filteredData;
-      },
-      [],
-    );
-
     return (
       <DataTable
         getData={getData}
