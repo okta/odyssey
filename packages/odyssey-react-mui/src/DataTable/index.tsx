@@ -11,6 +11,6 @@
  */
 
 import { DataTable } from "./DataTable";
-import { densityValues } from "./utils/constants";
+import { densityValues } from "./constants";
 
 export { DataTable, densityValues };

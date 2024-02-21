@@ -11,9 +11,9 @@
  */
 
 import { Dispatch, SetStateAction, KeyboardEvent } from "react";
-import { DataTableProps } from "../DataTable";
-import { reorderDataRowsLocally } from "../utils/reorderDataRowsLocally";
-import { useOdysseyDesignTokens } from "../../OdysseyDesignTokensContext";
+import { DataTableProps } from "./DataTable";
+import { reorderDataRowsLocally } from "./reorderDataRowsLocally";
+import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext";
 import { MRT_Row, MRT_RowData, MRT_TableInstance } from "material-react-table";
 
 export const useRowReordering = ({

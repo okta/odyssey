@@ -12,18 +12,18 @@
 
 import { MRT_Row, MRT_RowData } from "material-react-table";
 import { Fragment, ReactElement, memo } from "react";
-import { Button } from "../../Button";
-import { MenuItem } from "../../MenuItem";
+import { Button } from "../Button";
+import { MenuItem } from "../MenuItem";
 import { Box as MuiBox } from "@mui/material";
-import { MenuButton, MenuButtonProps } from "../../MenuButton";
+import { MenuButton, MenuButtonProps } from "../MenuButton";
 import {
   ArrowBottomIcon,
   ArrowDownIcon,
   ArrowTopIcon,
   ArrowUpIcon,
   MoreIcon,
-} from "../../icons.generated";
-import { DataTableProps } from "../DataTable";
+} from "../icons.generated";
+import { DataTableProps } from "./DataTable";
 
 export type DataTableRowActionsProps = {
   row: MRT_Row<MRT_RowData>;

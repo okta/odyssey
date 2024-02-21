@@ -12,11 +12,11 @@
 
 import { Dispatch, SetStateAction, memo } from "react";
 import { Checkbox as MuiCheckbox } from "@mui/material";
-import { MenuButton } from "../../MenuButton";
-import { MenuItem } from "../../MenuItem";
-import { ListIcon, ShowIcon } from "../../icons.generated";
-import { densityValues } from "../utils/constants";
-import { DataTableProps } from "../DataTable";
+import { MenuButton } from "../MenuButton";
+import { MenuItem } from "../MenuItem";
+import { ListIcon, ShowIcon } from "../icons.generated";
+import { densityValues } from "./constants";
+import { DataTableProps } from "./DataTable";
 import { MRT_VisibilityState } from "material-react-table";
 
 export type DataTableSettingsProps = {

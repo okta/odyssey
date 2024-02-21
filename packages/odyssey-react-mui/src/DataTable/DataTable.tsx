@@ -29,7 +29,7 @@ import {
   ArrowUnsortedIcon,
   DragIndicatorIcon,
 } from "../icons.generated";
-import { densityValues } from "./utils/constants";
+import { densityValues } from "./constants";
 import {
   DataTablePagination,
   paginationTypeValues,
@@ -38,9 +38,9 @@ import { DataFilter, DataFilters } from "../labs/DataFilters";
 import {
   DataTableRowActions,
   DataTableRowActionsProps,
-} from "./components/DataTableRowActions";
-import { useRowReordering } from "./hooks/useRowReordering";
-import { DataTableSettings } from "./components/DataTableSettings";
+} from "./DataTableRowActions";
+import { useRowReordering } from "./useRowReordering";
+import { DataTableSettings } from "./DataTableSettings";
 
 export type DataTableProps = {
   /**
