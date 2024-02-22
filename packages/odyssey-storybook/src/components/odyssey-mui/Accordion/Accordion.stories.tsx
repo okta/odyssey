@@ -16,7 +16,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { Accordion, AccordionProps } from "@okta/odyssey-react-mui";
 
 const storybookMeta: Meta<AccordionProps> = {
-  title: "Labs Components/Accordion",
+  title: "MUI Components/Accordion",
   component: Accordion,
   argTypes: {
     children: {
