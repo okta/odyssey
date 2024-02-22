@@ -288,28 +288,6 @@ const Select = <
     [onChangeProp],
   );
 
-  const removeSelection = useCallback(
-    (itemToRemove: string) => {
-      if (Array.isArray(internalSelectedValues)) {
-        const newValue = internalSelectedValues.filter(
-          (item: string) => item !== itemToRemove,
-        );
-
-        const syntheticEvent = {
-          target: { value: newValue },
-        } as SelectChangeEvent<Value>;
-
-        onChange(syntheticEvent, null);
-      }
-    },
-    [internalSelectedValues, onChange],
-  );
-
-  const stopPropagation = useCallback(
-    (event: MouseEvent<SVGSVGElement>) => event.stopPropagation(),
-    [],
-  );
-
   // Normalize the options array to accommodate the various
   // data types that might be passed
   const normalizedOptions = useMemo(
@@ -334,54 +312,82 @@ const Select = <
     [options],
   );
 
-  const Chips = ({
-    selection,
-    isInteractive,
-  }: {
-    selection: string[];
-    isInteractive: boolean;
-  }) => (
-    <ChipsInnerContainer
-      isInteractive={isInteractive}
-      odysseyDesignTokens={odysseyDesignTokens}
-    >
-      <ChipsSpacer odysseyDesignTokens={odysseyDesignTokens} />
-      {selection.map(
-        (item: string) =>
-          item.length > 0 && (
-            <MuiChip
-              key={item}
-              label={
-                <>
-                  {item}
-                  {!isInteractive &&
-                    controlledStateRef.current === CONTROLLED &&
-                    hasMultipleChoices && (
-                      <NonInteractiveIcon
-                        odysseyDesignTokens={odysseyDesignTokens}
-                      />
-                    )}
-                </>
-              }
-              tabIndex={-1}
-              onDelete={
-                isInteractive && controlledStateRef.current === CONTROLLED
-                  ? () => removeSelection(item)
-                  : undefined
-              }
-              deleteIcon={
-                <CloseCircleFilledIcon
-                  sx={{ pointerEvents: "auto" }}
-                  // We need to stop event propagation on mouse down to prevent the deletion
-                  // from being blocked by the Select list opening, and also ensure that
-                  // the pointerEvent is registered even when the parent's are not
-                  onMouseDown={stopPropagation}
+  const Chips = useCallback(
+    ({
+      selection,
+      isInteractive,
+    }: {
+      selection: string[];
+      isInteractive: boolean;
+    }) => {
+      const removeSelection = (itemToRemove: string) => {
+        if (Array.isArray(internalSelectedValues)) {
+          const newValue = internalSelectedValues.filter(
+            (item: string) => item !== itemToRemove,
+          );
+
+          const syntheticEvent = {
+            target: { value: newValue },
+          } as SelectChangeEvent<Value>;
+
+          onChange(syntheticEvent, null);
+        }
+      };
+
+      const stopPropagation = (event: MouseEvent<SVGSVGElement>) =>
+        event.stopPropagation();
+
+      return (
+        <ChipsInnerContainer
+          isInteractive={isInteractive}
+          odysseyDesignTokens={odysseyDesignTokens}
+        >
+          <ChipsSpacer odysseyDesignTokens={odysseyDesignTokens} />
+          {selection.map(
+            (item: string) =>
+              item?.length > 0 && (
+                <MuiChip
+                  key={item}
+                  label={
+                    <>
+                      {item}
+                      {!isInteractive &&
+                        controlledStateRef.current === CONTROLLED &&
+                        hasMultipleChoices && (
+                          <NonInteractiveIcon
+                            odysseyDesignTokens={odysseyDesignTokens}
+                          />
+                        )}
+                    </>
+                  }
+                  tabIndex={-1}
+                  onDelete={
+                    isInteractive && controlledStateRef.current === CONTROLLED
+                      ? () => removeSelection(item)
+                      : undefined
+                  }
+                  deleteIcon={
+                    <CloseCircleFilledIcon
+                      sx={{ pointerEvents: "auto" }}
+                      // We need to stop event propagation on mouse down to prevent the deletion
+                      // from being blocked by the Select list opening, and also ensure that
+                      // the pointerEvent is registered even when the parent's are not
+                      onMouseDown={stopPropagation}
+                    />
+                  }
                 />
-              }
-            />
-          ),
-      )}
-    </ChipsInnerContainer>
+              ),
+          )}
+        </ChipsInnerContainer>
+      );
+    },
+    [
+      controlledStateRef,
+      hasMultipleChoices,
+      internalSelectedValues,
+      odysseyDesignTokens,
+      onChange,
+    ],
   );
 
   // Convert the options into the ReactNode children
