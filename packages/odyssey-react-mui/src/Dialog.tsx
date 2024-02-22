@@ -39,15 +39,15 @@ export type DialogProps = {
   /**
    * An optional Button object to be situated in the Dialog footer. Should almost always be of variant `primary`.
    */
-  callToActionFirstComponent?: ReactElement<typeof Button>;
+  primaryCallToActionComponent?: ReactElement<typeof Button>;
   /**
    * An optional Button object to be situated in the Dialog footer, alongside the `callToActionPrimaryComponent`.
    */
-  callToActionSecondComponent?: ReactElement<typeof Button>;
+  secondaryCallToActionComponent?: ReactElement<typeof Button>;
   /**
    * An optional Button object to be situated in the Dialog footer, alongside the other two `callToAction` components.
    */
-  callToActionLastComponent?: ReactElement<typeof Button>;
+  tertiaryCallToActionComponent?: ReactElement<typeof Button>;
   /**
    * The content of the Dialog. May be a `string` or any other `ReactNode` or array of `ReactNode`s.
    */
@@ -67,9 +67,9 @@ export type DialogProps = {
 } & HtmlProps;
 
 const Dialog = ({
-  callToActionFirstComponent,
-  callToActionSecondComponent,
-  callToActionLastComponent,
+  primaryCallToActionComponent,
+  secondaryCallToActionComponent,
+  tertiaryCallToActionComponent,
   children,
   isOpen,
   onClose,
@@ -87,6 +87,7 @@ const Dialog = ({
     const handleContentScroll = () => {
       const dialogContentElement = dialogContentRef.current;
       if (dialogContentElement) {
+        cancelAnimationFrame(frameId);
         setIsContentScrollable(
           dialogContentElement.scrollHeight > dialogContentElement.clientHeight,
         );
@@ -116,7 +117,6 @@ const Dialog = ({
         {title}
         <Button
           ariaLabel={t("close.text")}
-          label=""
           onClick={onClose}
           size="small"
           startIcon={<CloseIcon />}
@@ -124,22 +124,23 @@ const Dialog = ({
         />
       </DialogTitle>
       <DialogContent
-        dividers={isContentScrollable}
-        ref={dialogContentRef}
         {...(isContentScrollable && {
+          //Sets tabIndex on content element if scrollable so content is easier to navigate with the keyboard
           tabIndex: 0,
         })}
+        dividers={isContentScrollable}
+        ref={dialogContentRef}
       >
         {content}
       </DialogContent>
 
-      {(callToActionFirstComponent ||
-        callToActionSecondComponent ||
-        callToActionLastComponent) && (
+      {(primaryCallToActionComponent ||
+        secondaryCallToActionComponent ||
+        tertiaryCallToActionComponent) && (
         <DialogActions>
-          {callToActionLastComponent}
-          {callToActionSecondComponent}
-          {callToActionFirstComponent}
+          {tertiaryCallToActionComponent}
+          {secondaryCallToActionComponent}
+          {primaryCallToActionComponent}
         </DialogActions>
       )}
     </MuiDialog>
