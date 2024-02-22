@@ -24,7 +24,11 @@ import {
 import { useButton } from "./ButtonContext";
 import type { HtmlProps } from "./HtmlProps";
 import { FocusHandle } from "./inputUtils";
-import { MuiPropsContext, MuiPropsContextType, useMuiProps } from "./MuiPropsContext";
+import {
+  MuiPropsContext,
+  MuiPropsContextType,
+  useMuiProps,
+} from "./MuiPropsContext";
 import { Tooltip } from "./Tooltip";
 
 export const buttonSizeValues = ["small", "medium", "large"] as const;
