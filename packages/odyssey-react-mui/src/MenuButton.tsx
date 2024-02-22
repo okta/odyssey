@@ -88,12 +88,14 @@ export type MenuButtonProps = {
   Pick<FieldComponentProps, "isDisabled"> &
   (
     | { buttonLabel: string }
-    | (Required<Pick<HtmlProps, "ariaLabelledBy">> & {
-        buttonLabel?: undefined | "";
-      })
-    | (Required<Pick<HtmlProps, "ariaLabel">> & {
-        buttonLabel?: undefined | "";
-      })
+    | (Required<Pick<HtmlProps, "ariaLabelledBy">> &
+        Partial<Pick<HtmlProps, "ariaLabel">> & {
+          buttonLabel?: undefined | "";
+        })
+    | (Required<Pick<HtmlProps, "ariaLabel">> &
+        Partial<Pick<HtmlProps, "ariaLabelledBy">> & {
+          buttonLabel?: undefined | "";
+        })
   );
 
 const MenuButton = ({
