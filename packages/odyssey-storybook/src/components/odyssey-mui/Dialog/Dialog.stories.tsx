@@ -173,8 +173,8 @@ export const Default: StoryObj<DialogProps> = {
     await step("open Default Dialog", async () => {
       const buttonElement = canvas.getByText("Open dialog");
       await userEvent.click(buttonElement);
-      await waitFor(() => {
-        axeRun("Default Dialog");
+      await waitFor(async () => {
+        await axeRun("Default Dialog");
       });
     });
   },
