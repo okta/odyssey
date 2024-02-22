@@ -292,9 +292,6 @@ const DefaultTemplate: StoryObj<DrawerProps> = {
                   variant="secondary"
                 />
               }
-              tertiaryCallToActionComponent={
-                <Button label="Cancel" onClick={onClose} variant="floating" />
-              }
               onClose={onClose}
               isOpen={isVisible}
             />
