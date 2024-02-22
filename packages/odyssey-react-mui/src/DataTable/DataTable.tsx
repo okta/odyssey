@@ -284,7 +284,9 @@ const DataTable = ({
           rowActionButtons={rowActionButtons}
           rowActionMenuItems={rowActionMenuItems}
           totalRows={totalRows}
-          updateRowOrder={hasRowReordering ? updateRowOrder : undefined}
+          updateRowOrder={
+            hasRowReordering && onReorderRows ? updateRowOrder : undefined
+          }
         />
       );
     },
@@ -365,7 +367,9 @@ const DataTable = ({
 
     // Row actions
     enableRowActions:
-      hasRowReordering === true || rowActionButtons || rowActionMenuItems
+      (hasRowReordering === true && onReorderRows) ||
+      rowActionButtons ||
+      rowActionMenuItems
         ? true
         : false,
     positionActionsColumn:
