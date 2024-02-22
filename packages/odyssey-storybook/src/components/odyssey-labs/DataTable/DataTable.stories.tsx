@@ -343,12 +343,15 @@ const getData = ({
   return filteredData;
 };
 
+const onReorderRows = () => {};
+
 export const Default: StoryObj<DataTableProps> = {
   render: function C(props) {
     return (
       <DataTable
         getData={getData}
         columns={columns}
+        onReorderRows={onReorderRows}
         initialDensity={props.initialDensity}
         hasChangeableDensity={props.hasChangeableDensity}
         hasColumnResizing={props.hasColumnResizing}

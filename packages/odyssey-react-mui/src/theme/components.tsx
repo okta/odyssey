@@ -803,7 +803,7 @@ export const components = ({
             }),
           },
 
-          "&.Mui-checked": {
+          "&.Mui-checked, &.MuiCheckbox-indeterminate": {
             backgroundColor: odysseyTokens.PalettePrimaryMain,
             borderColor: odysseyTokens.PalettePrimaryMain,
 
@@ -1960,6 +1960,9 @@ export const components = ({
       },
     },
     MuiMenu: {
+      defaultProps: {
+        elevation: 2,
+      },
       styleOverrides: {
         list: {
           paddingBlock: odysseyTokens.Spacing2,
@@ -1982,7 +1985,7 @@ export const components = ({
           minHeight: "unset",
           paddingBlock: odysseyTokens.Spacing3,
           paddingInline: odysseyTokens.Spacing4,
-          borderRadius: odysseyTokens.BorderRadiusTight,
+          borderRadius: odysseyTokens.BorderRadiusMain,
 
           [`& .${formControlLabelClasses.root}`]: {
             gap: "unset",
@@ -2007,6 +2010,14 @@ export const components = ({
 
             [`.${typographyClasses.root}`]: {
               color: "inherit",
+            },
+          },
+
+          "&.isVisiblySelected": {
+            backgroundColor: `${odysseyTokens.PalettePrimaryLighter} !important`,
+
+            [`& .${typographyClasses.root}`]: {
+              color: odysseyTokens.HueBlue600,
             },
           },
 
@@ -2484,12 +2495,14 @@ export const components = ({
 
           [`.${tableHeadClasses.root} &`]: {
             color: odysseyTokens.TypographyColorHeading,
-            fontSize: odysseyTokens.TypographySizeSubordinate,
+            fontSize: `0.71428571rem`,
             lineHeight: odysseyTokens.TypographyLineHeightBody,
             fontWeight: odysseyTokens.TypographyWeightBodyBold,
             textTransform: "uppercase",
             backgroundColor: odysseyTokens.HueNeutral50,
             borderBottom: 0,
+            height: `${odysseyTokens.Spacing7} !important`,
+            paddingBlock: `${odysseyTokens.Spacing3} !important`,
           },
 
           [`.${tableHeadClasses.root} &:first-of-type`]: {
@@ -2501,11 +2514,6 @@ export const components = ({
             borderTopRightRadius: odysseyTokens.Spacing2,
             borderBottomRightRadius: odysseyTokens.Spacing2,
           },
-
-          ...(ownerState.variant === "head" && {
-            lineHeight: odysseyTokens.TypographyLineHeightBody,
-            fontWeight: odysseyTokens.TypographyWeightBodyBold,
-          }),
 
           ...(ownerState.variant === "number" && {
             textAlign: "end",
@@ -2538,14 +2546,17 @@ export const components = ({
             textAlign: "justify",
           }),
 
-          ["&.MuiTableCell-compact"]: {
-            fontSize: odysseyTokens.TypographySizeSubordinate,
-            padding: odysseyTokens.Spacing2,
-          },
+          ...(ownerState.variant !== "head" && {
+            ["&.MuiTableCell-compact"]: {
+              padding: 6,
+              height: 36,
+            },
 
-          ["&.MuiTableCell-spacious"]: {
-            padding: odysseyTokens.Spacing4,
-          },
+            ["&.MuiTableCell-spacious"]: {
+              padding: odysseyTokens.Spacing4,
+              height: odysseyTokens.Spacing9,
+            },
+          }),
 
           [`& .${checkboxClasses.root}`]: {
             width: `${odysseyTokens.TypographyLineHeightUi}rem`,
@@ -2554,10 +2565,16 @@ export const components = ({
           },
 
           [`& .${dividerClasses.vertical}`]: {
-            borderStyle: "none none none dotted",
-            borderWidth: 2,
+            borderStyle: "none none none solid",
+            borderWidth: 1,
             borderRadius: 0,
             marginRight: 2,
+            borderColor: odysseyTokens.HueNeutral400,
+            height: 18,
+          },
+
+          ["&.ods-drag-handle svg"]: {
+            color: odysseyTokens.HueNeutral500,
           },
         }),
       },

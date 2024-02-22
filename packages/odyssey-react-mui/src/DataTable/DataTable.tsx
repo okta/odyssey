@@ -12,6 +12,7 @@
 
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
+  MRT_Cell,
   MRT_DensityState,
   MRT_Row,
   MRT_RowData,
@@ -166,6 +167,7 @@ export type DataTableProps = {
 
 const displayColumnDefOptions = {
   "mrt-row-actions": {
+    header: "",
     muiTableBodyCellProps: {
       align: "right",
       sx: {
@@ -187,12 +189,28 @@ const displayColumnDefOptions = {
         minWidth: 0,
         width: "auto",
       },
+      className: "ods-drag-handle",
     },
     muiTableHeadCellProps: {
       sx: {
         minWidth: 0,
         width: "auto",
       },
+      children: (
+        // Add a spacer to simulate the width of the drag handle in the column.
+        // Without this, the head cells are offset from their body cell counterparts
+        <Box sx={{ marginInline: "-0.1rem" }}>
+          <DragIndicatorIcon sx={{ marginInline: 1, opacity: 0 }} />
+        </Box>
+      ),
+    },
+  },
+  "mrt-row-select": {
+    muiTableHeadCellProps: {
+      padding: "checkbox",
+    },
+    muiTableBodyCellProps: {
+      padding: "checkbox",
     },
   },
 };
@@ -273,6 +291,14 @@ const DataTable = ({
     page: pagination.pageIndex,
   });
 
+  const rowDensityCellClassName = useMemo(() => {
+    return rowDensity === "spacious"
+      ? "MuiTableCell-spacious"
+      : rowDensity === "compact"
+        ? "MuiTableCell-compact"
+        : "MuiTableCell-default";
+  }, [rowDensity]);
+
   const renderRowActions = useCallback(
     ({ row }: { row: MRT_Row<MRT_RowData> }) => {
       const currentIndex =
@@ -306,6 +332,24 @@ const DataTable = ({
           } as DataFilter;
         }),
     [columns],
+  );
+
+  const defaultCell = useCallback(
+    ({ cell }: { cell: MRT_Cell<MRT_RowData> }) => {
+      const value = cell.getValue<string>();
+      return (
+        <Box
+          sx={{
+            whiteSpace: "nowrap",
+            textOverflow: "ellipsis",
+            overflow: "hidden",
+          }}
+        >
+          {value}
+        </Box>
+      );
+    },
+    [],
   );
 
   const dataTable = useMaterialReactTable({
@@ -345,6 +389,12 @@ const DataTable = ({
     selectAllMode: "all",
     displayColumnDefOptions:
       displayColumnDefOptions as MRT_TableOptions<MRT_RowData>["displayColumnDefOptions"],
+    muiTableBodyCellProps: () => ({
+      className: rowDensityCellClassName,
+    }),
+    defaultColumn: {
+      Cell: defaultCell,
+    },
 
     // Reordering
     enableRowOrdering: hasRowReordering && Boolean(onReorderRows),

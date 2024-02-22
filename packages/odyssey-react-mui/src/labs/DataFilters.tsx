@@ -30,7 +30,9 @@ import { Button } from "../Button";
 import {
   IconButton as MuiIconButton,
   Menu as MuiMenu,
+  MenuItem as MuiMenuItem,
   Popover as MuiPopover,
+  Typography as MuiTypography,
 } from "@mui/material";
 import {
   CheckIcon,
@@ -38,8 +40,7 @@ import {
   CloseCircleFilledIcon,
   FilterIcon,
 } from "../icons.generated";
-import { MenuItem } from "../MenuItem";
-import { Paragraph, Subordinate } from "../Typography";
+import { Subordinate } from "../Typography";
 import { TextField } from "../TextField";
 import { CheckboxGroup } from "../CheckboxGroup";
 import { Checkbox } from "../Checkbox";
@@ -337,13 +338,23 @@ const DataFilters = ({
             )?.value;
 
             return (
-              <MenuItem
+              <MuiMenuItem
                 key={filter.id}
                 onClick={(event) => {
                   setIsFilterPopoverOpen(true);
                   setFilterPopoverAnchorElement(event.currentTarget);
                   setFilterPopoverCurrentFilter(filter);
                 }}
+                selected={
+                  filterPopoverCurrentFilter === filter &&
+                  isFilterPopoverOpen === true
+                }
+                className={
+                  filterPopoverCurrentFilter === filter &&
+                  isFilterPopoverOpen === true
+                    ? "isVisiblySelected"
+                    : undefined
+                }
               >
                 <Box
                   sx={{
@@ -352,10 +363,14 @@ const DataFilters = ({
                     justifyContent: "space-between",
                     width: "100%",
                     minWidth: 180,
+                    paddingBlock: 1,
+                    paddingInlineStart: 2,
                   }}
                 >
                   <Box sx={{ marginRight: 2 }}>
-                    <Paragraph component="div">{filter.label}</Paragraph>
+                    <MuiTypography fontWeight="500" sx={{ marginBlockEnd: 2 }}>
+                      {filter.label}
+                    </MuiTypography>
                     <Subordinate component="div">
                       {!latestFilterValue ||
                       (Array.isArray(latestFilterValue) &&
@@ -368,13 +383,20 @@ const DataFilters = ({
                   </Box>
                   <ChevronRightIcon />
                 </Box>
-              </MenuItem>
+              </MuiMenuItem>
             );
           })}
         </MuiMenu>
       </>
     ),
-    [isFiltersMenuOpen, filtersMenuAnchorElement, filtersProp, filters],
+    [
+      isFiltersMenuOpen,
+      filterPopoverCurrentFilter,
+      isFilterPopoverOpen,
+      filtersMenuAnchorElement,
+      filtersProp,
+      filters,
+    ],
   );
 
   return (
@@ -390,6 +412,8 @@ const DataFilters = ({
               {/* Filter popover */}
               <MuiPopover
                 anchorEl={filterPopoverAnchorElement}
+                elevation={2}
+                sx={{ marginLeft: 2, marginTop: -1 }}
                 open={isFilterPopoverOpen}
                 anchorOrigin={{ vertical: "top", horizontal: "right" }}
                 onClose={(ev: MouseEvent) => {
