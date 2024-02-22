@@ -22,6 +22,7 @@ import {
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { Person, columns, data } from "./tableAPI";
+import { Dispatch, SetStateAction, useCallback, useState } from "react";
 
 const storybookMeta: Meta<DataTableProps> = {
   title: "Labs Components/DataTable",
@@ -266,21 +267,21 @@ const storybookMeta: Meta<DataTableProps> = {
 
 export default storybookMeta;
 
-const getData = ({
+const handleGetData = ({
   page = 1,
   resultsPerPage = 20,
   search,
   filters,
   sort,
+  data,
 }: {
   page?: number;
   resultsPerPage?: number;
   search?: string;
   filters?: DataFilter[];
   sort?: DataTableSortingState;
+  data: Person[];
 }) => {
-  console.log(page, resultsPerPage, search, filters, sort);
-
   let filteredData = data;
 
   // Implement text-based query filtering
@@ -343,10 +344,60 @@ const getData = ({
   return filteredData;
 };
 
-const onReorderRows = () => {};
+const handleOnReorderRows = ({
+  rowId,
+  newRowIndex,
+  data,
+  setData,
+}: {
+  rowId: string;
+  newRowIndex: number;
+  data: Person[];
+  setData: Dispatch<SetStateAction<Person[]>>;
+}) => {
+  const updatedData = data;
+
+  const rowIndex = updatedData.findIndex((row) => row.id === rowId);
+
+  if (rowIndex !== -1) {
+    // Remove the row from its current position
+    const [removedRow] = updatedData.splice(rowIndex, 1);
+
+    // Insert the row at the new index
+    updatedData.splice(newRowIndex, 0, removedRow);
+  }
+
+  setData(updatedData);
+};
 
 export const Default: StoryObj<DataTableProps> = {
   render: function C(props) {
+    const [tableData, setTableData] = useState(data);
+
+    const getData = useCallback(
+      (props: {
+        page?: number;
+        resultsPerPage?: number;
+        search?: string;
+        filters?: DataFilter[];
+        sort?: DataTableSortingState;
+      }) => {
+        return handleGetData({ ...props, data: tableData });
+      },
+      [tableData],
+    );
+
+    const onReorderRows = useCallback(
+      (props: { rowId: string; newRowIndex: number }) => {
+        return handleOnReorderRows({
+          ...props,
+          data: tableData,
+          setData: setTableData,
+        });
+      },
+      [tableData, setTableData],
+    );
+
     return (
       <DataTable
         getData={getData}

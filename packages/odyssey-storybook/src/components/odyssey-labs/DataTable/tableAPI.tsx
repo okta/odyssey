@@ -26,7 +26,7 @@ export type Person = {
 export const columns: DataTableColumn<DataTableRowData>[] = [
   {
     accessorKey: "order",
-    header: "Original order",
+    header: "ID",
     enableColumnFilter: false,
     size: 120,
   },
