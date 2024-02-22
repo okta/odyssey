@@ -2515,6 +2515,12 @@ export const components = ({
             borderBottomRightRadius: odysseyTokens.Spacing2,
           },
 
+          [`.${tableHeadClasses.root} .ods-actions-cell + &:last-of-type, .${tableBodyClasses.root} .ods-actions-cell + &:last-of-type`]:
+            {
+              flexGrow: 0,
+              width: odysseyTokens.Spacing2,
+            },
+
           ...(ownerState.variant === "number" && {
             textAlign: "end",
             fontFeatureSettings: '"lnum", "tnum"',

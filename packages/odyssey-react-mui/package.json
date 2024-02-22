@@ -73,7 +73,7 @@
     "@okta/odyssey-design-tokens": "workspace:^",
     "date-fns": "^2.30.0",
     "i18next": "^23.8.2",
-    "material-react-table": "^2.11.3",
+    "material-react-table": "^2.8",
     "react-i18next": "^14.0.5",
     "tsx": "^4.7.1",
     "word-wrap": "^1.2.5"

@@ -168,18 +168,21 @@ export type DataTableProps = {
 const displayColumnDefOptions = {
   "mrt-row-actions": {
     header: "",
+    grow: true,
     muiTableBodyCellProps: {
       align: "right",
       sx: {
         overflow: "visible",
         width: "unset",
       },
+      className: "ods-actions-cell",
     },
     muiTableHeadCellProps: {
       align: "right",
       sx: {
         width: "unset",
       },
+      className: "ods-actions-cell",
     },
   },
   "mrt-row-drag": {
@@ -255,21 +258,6 @@ const DataTable = ({
     useState<MRT_DensityState>(initialDensity);
   const [search, setSearch] = useState<string>("");
   const [filters, setFilters] = useState<DataFilter[]>();
-
-  // TODO: Remove this!
-  console.log(
-    hasSearchSubmitButton,
-    searchDelayTime,
-    hasChangeableDensity,
-    hasColumnVisibility,
-    hasFilters,
-    hasPagination,
-    hasSearch,
-    setPagination,
-    setColumnVisibility,
-    setRowDensity,
-    setSearch,
-  );
 
   const {
     dragHandleStyles,
