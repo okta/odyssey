@@ -16,7 +16,6 @@ import {
   MRT_DensityState,
   MRT_Row,
   MRT_RowData,
-  MRT_RowSelectionState,
   MRT_SortingState,
   MRT_TableOptions,
   MRT_Virtualizer,
@@ -42,6 +41,7 @@ import {
 import { useRowReordering } from "./useRowReordering";
 import { DataTableSettings } from "./DataTableSettings";
 import { Box } from "../Box";
+import { DataTableRowSelectionState } from ".";
 
 export type DataTableProps = {
   /**
@@ -113,7 +113,12 @@ export type DataTableProps = {
   /**
    * Callback that fires when a row (or rows) is selected or unselected.
    */
-  onChangeRowSelection?: (rowSelection: MRT_RowSelectionState) => void;
+  onChangeRowSelection?: (rowSelection: DataTableRowSelectionState) => void;
+  /**
+   *
+   * Callback that fires when a row is clicked
+   */
+  onClickRow?: (row: MRT_Row<MRT_RowData>) => void;
   /**
    * Callback that fires whenever the table needs to fetch new data, due to changes in
    * page, results per page, search input, filters, or sorting
@@ -231,6 +236,7 @@ const DataTable = ({
   searchDelayTime,
   paginationType = "paged",
   onChangeRowSelection,
+  onClickRow,
   rowActionButtons,
   rowActionMenuItems,
   hasChangeableDensity,
@@ -393,6 +399,9 @@ const DataTable = ({
         draggingRowId: draggingRow?.id,
         hoveredRowId: table.getState().hoveredRow?.id,
       }),
+      onClick: () => {
+        return onClickRow?.(row);
+      },
     }),
     muiRowDragHandleProps: ({ table, row }) => ({
       onKeyDown: (event) => handleDragHandleKeyDown({ table, row, event }),

@@ -17,6 +17,9 @@ import { DataFilter, paginationTypeValues } from "@okta/odyssey-react-mui/labs";
 import {
   DataTable,
   DataTableProps,
+  DataTableRow,
+  DataTableRowData,
+  DataTableRowSelectionState,
   DataTableSortingState,
   densityValues,
 } from "@okta/odyssey-react-mui";
@@ -169,6 +172,15 @@ const storybookMeta: Meta<DataTableProps> = {
       table: {
         type: {
           summary: "number",
+        },
+      },
+    },
+    onClickRow: {
+      control: null,
+      description: "Optional callback that fires when a row is clicked.",
+      table: {
+        type: {
+          summary: "(row: MRT_Row<MRT_RowData>) => void",
         },
       },
     },
@@ -398,11 +410,24 @@ export const Default: StoryObj<DataTableProps> = {
       [tableData, setTableData],
     );
 
+    const onClickRow = useCallback((row: DataTableRow<DataTableRowData>) => {
+      console.log(`Clicked ${row.id}`);
+    }, []);
+
+    const onChangeRowSelection = useCallback(
+      (rowSelection: DataTableRowSelectionState) => {
+        console.log(`${Object.keys(rowSelection).length} selected`);
+      },
+      [],
+    );
+
     return (
       <DataTable
         getData={getData}
         columns={columns}
         onReorderRows={onReorderRows}
+        onChangeRowSelection={onChangeRowSelection}
+        onClickRow={onClickRow}
         initialDensity={props.initialDensity}
         hasChangeableDensity={props.hasChangeableDensity}
         hasColumnResizing={props.hasColumnResizing}

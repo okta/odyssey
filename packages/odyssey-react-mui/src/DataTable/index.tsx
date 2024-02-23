@@ -15,6 +15,8 @@ export { densityValues } from "./constants";
 export type {
   MRT_ColumnFiltersState as DataTableFiltersState,
   MRT_SortingState as DataTableSortingState,
+  MRT_RowSelectionState as DataTableRowSelectionState,
   MRT_ColumnDef as DataTableColumn,
   MRT_RowData as DataTableRowData,
+  MRT_Row as DataTableRow,
 } from "material-react-table";
