@@ -65,21 +65,13 @@ const column: DataTableColumn = {
 
 (The `accessorKey` is a unique id for the column, and `header` is the label shown in the column head.)
 
-The table must also include `data`, which will be an array of objects that include the attributes specified in the `columns`.
+The table must also include a `getData` function, which takes the data you provide and pipes it into the DataTable.
 
-A table should also have `getRowId`, which will almost always be as simple as:
-
-```tsx
-getRowId={({id}) => id}
-```
-
-For a full example of how `data` and `columns` work together, check out the "End-to-end example" section below.
-
-## Updating data based on user actions
+## Callbacks
 
 Any user action will fire a callback allowing you to provide your own logic. These callbacks are:
 
-`fetchDataFn`, which is fired whenever the following parameters change:
+`getData`, which is fired whenever the following parameters change:
 
 - page
 - resultsPerPage
@@ -87,11 +79,13 @@ Any user action will fire a callback allowing you to provide your own logic. The
 - filters
 - sort
 
-Use `fetchDataFn` to update the table data whenever the table is searched, paged, filtered, sorted, etc.
+Use `getData` to update the table data whenever the table is searched, paged, filtered, sorted, etc.
 
-`onRowSelectionChange` is fired whenever the user selects one or more rows.
+`onChangeRowSelection` is fired whenever the user selects one or more rows.
 
-`reorderDataFn` is fired whenever rows are reordered (such as via drag-and-drop or the row actions menu). It'll send through the `rowId` (retrieved via `getRowId`) and the `newIndex` as a number.
+`onReorderRows` is fired whenever rows are reordered (such as via drag-and-drop or the row actions menu). It'll send through the `rowId` (retrieved via `getRowId`) and the `newIndex` as a number.
+
+`getRowId` is an optional function that specifies how the table retrieves the unique ID from each row. By default, the table will generate unique identifiers for each row and use those, but if your data already has unique ids, you can use this function to specify how it can retrieve those.
 
 ## Customizing the table
 
@@ -119,7 +113,7 @@ Some additional parameters can be tweaked:
 - To add **action buttons** to each row, pass a `Button` or fragment to `rowActionButtons`.
 - To add **an action menu with custom items** to each row, pass `MenuItem`s to `rowActionMenuItems`. This can be used independently or in conjunction with `rowActionButtons`.
 
-# An end-to-end example
+## An end-to-end example
 
 `DataTable` is a large component with lots of parameters, so to reduce confusion, here's an example of what a full implementation looks like.
 
@@ -283,10 +277,10 @@ And, finally, a function to deal with row reordering. Without this, rows won't s
 ```tsx
 const reorderData = ({
   rowId,
-  newIndex,
+  newRowIndex,
 }: {
   rowId: string;
-  newIndex: number;
+  newRowIndex: number;
 }) => {
   const updatedData = incomingData;
 
@@ -297,43 +291,54 @@ const reorderData = ({
     const [removedRow] = updatedData.splice(rowIndex, 1);
 
     // Insert the row at the new index
-    updatedData.splice(newIndex, 0, removedRow);
+    updatedData.splice(newRowIndex, 0, removedRow);
   }
 
   setData(updatedData);
 };
 ```
 
-Now, finally, here's what it looks like all together:
+Now, finally, here's what the component itself looks like:
 
 ```tsx
-const WhateverYourParentIsCalled = () => {
-  const [data, setData] = useState<Person[]>();
-
-  const columns = ...            // the columns we defined above
-
-  const fetchData = ...          // the fetchData function we defined above
-  const reorderData = ...        // the reorderData function we defined above
-  const handleRowSelection = ... // the handleRowSelection function we defined above
-
-  return (
-    <DataTable
-      columns={columns}
-      data={ fetchData({}) } // Fetch the initial rows without any params passed
-      getRowId={({id}) => id}
-      fetchDataFn={fetchData}
-      reorderDataFn={reorderData}
-      onRowSelectionChange={handleRowSelection}
-      hasFilters
-      hasSearch
-      hasSorting
-      hasRowSelection
-      hasRowReordering
-      hasPagination
-    />
-  );
-};
-
+<DataTable
+  getData={getData}
+  columns={columns}
+  onReorderRows={onReorderRows}
+  onChangeRowSelection={onChangeRowSelection}
+  initialDensity={initialDensity}
+  hasChangeableDensity={hasChangeableDensity}
+  hasColumnResizing={hasColumnResizing}
+  hasColumnVisibility={hasColumnVisibility}
+  hasFilters={hasFilters}
+  hasPagination={hasPagination}
+  hasRowSelection={hasRowSelection}
+  hasSearch={hasSearch}
+  hasSorting={hasSorting}
+  hasRowReordering={hasRowReordering}
+  hasSearchSubmitButton={hasSearchSubmitButton}
+  searchDelayTime={searchDelayTime}
+  currentPage={currentPage}
+  resultsPerPage={resultsPerPage}
+  totalRows={totalRows}
+/>
 ```
 
 Voila — a working table with sorting, filtering, search, pagination, and reordering.
+
+## Gotchas
+
+It is very, very important that you memoize your callbacks! Performance slows to a crawl if you don't.
+For the best performance, keep your `getData` and `onChangeRowSelection` functions outside of the component
+and then call them from within, passing the table data in at the same time.
+
+## Upgrade guide
+
+We've made some API changes between the previous version (in Odyssey Labs) and this stable version.
+
+Be aware of the following:
+
+- `fetchDataFn` is now `getData`
+- `onRowSelectionChange` is now `onChangeRowSelection`
+- `reorderDataFn` is now `onReorderRows`
+- Within `reorderDataFn`, the param `newIndex` is now `newRowIndex`
