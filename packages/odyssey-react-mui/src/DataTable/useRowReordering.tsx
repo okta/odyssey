@@ -58,8 +58,6 @@ export const useRowReordering = ({
       newRowIndex,
     });
 
-    console.log(newData);
-
     setData(newData);
     onReorderRows?.({ rowId, newRowIndex });
   };

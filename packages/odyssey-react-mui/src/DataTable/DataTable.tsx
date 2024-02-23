@@ -220,7 +220,7 @@ const displayColumnDefOptions = {
 
 const DataTable = ({
   columns,
-  getRowId,
+  getRowId: getRowIdProp,
   currentPage = 1,
   initialDensity = densityValues[0],
   resultsPerPage = 20,
@@ -279,6 +279,10 @@ const DataTable = ({
     page: pagination.pageIndex,
   });
 
+  const getRowId = getRowIdProp
+    ? getRowIdProp
+    : (row: MRT_Row<MRT_RowData>) => row.id;
+
   const rowDensityCellClassName = useMemo(() => {
     return rowDensity === "spacious"
       ? "MuiTableCell-spacious"
@@ -290,7 +294,7 @@ const DataTable = ({
   const renderRowActions = useCallback(
     ({ row }: { row: MRT_Row<MRT_RowData> }) => {
       const currentIndex =
-        row.index + pagination.pageIndex * pagination.pageSize;
+        row.index + (pagination.pageIndex - 1) * pagination.pageSize;
       return (
         <DataTableRowActions
           row={row}
