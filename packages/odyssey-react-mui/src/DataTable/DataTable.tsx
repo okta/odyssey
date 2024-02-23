@@ -279,9 +279,7 @@ const DataTable = ({
     page: pagination.pageIndex,
   });
 
-  const getRowId = getRowIdProp
-    ? getRowIdProp
-    : (row: MRT_Row<MRT_RowData>) => row.id;
+  const getRowId = getRowIdProp ? getRowIdProp : (row: MRT_RowData) => row.id;
 
   const rowDensityCellClassName = useMemo(() => {
     return rowDensity === "spacious"
