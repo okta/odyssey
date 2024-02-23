@@ -11,8 +11,6 @@
  */
 
 import type { Meta, StoryObj } from "@storybook/react";
-// import { columns, data as incomingData, Person } from "./tableAPI";
-// import { Box, Button, Callout, MenuItem } from "@okta/odyssey-react-mui";
 import { DataFilter, paginationTypeValues } from "@okta/odyssey-react-mui/labs";
 import {
   DataTable,
@@ -26,7 +24,7 @@ import { Person, columns, data } from "./tableAPI";
 import { Dispatch, SetStateAction, useCallback, useState } from "react";
 
 const storybookMeta: Meta<DataTableProps> = {
-  title: "Labs Components/DataTable",
+  title: "MUI Components/DataTable",
   component: DataTable,
   argTypes: {
     columns: {
