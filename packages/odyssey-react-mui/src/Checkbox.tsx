@@ -20,7 +20,6 @@ import {
   FormHelperText,
 } from "@mui/material";
 
-import { FieldComponentProps } from "./FieldComponentProps";
 import { CheckedFieldProps } from "./FormCheckedProps";
 import type { HtmlProps } from "./HtmlProps";
 import {
@@ -28,31 +27,16 @@ import {
   FocusHandle,
   getControlState,
 } from "./inputUtils";
+import { FieldComponentProps } from "./FieldComponentProps";
 import { Typography } from "./Typography";
 
 export const checkboxValidityValues = ["valid", "invalid", "inherit"] as const;
 
 export type CheckboxProps = {
   /**
-   * The ARIA label for the Checkbox
-   */
-  ariaLabel?: string;
-  /**
-   * The ID of the element that labels the Checkbox
-   */
-  ariaLabelledBy?: string;
-  /**
-   * The id of the `input` element.
-   */
-  id?: string;
-  /**
    * The ref forwarded to the Checkbox
    */
   inputRef?: React.RefObject<FocusHandle>;
-  /**
-   * Determines whether the Checkbox is disabled
-   */
-  isDisabled?: boolean;
   /**
    * Determines whether the Checkbox is in an indeterminate state
    */
@@ -66,10 +50,6 @@ export type CheckboxProps = {
    */
   label?: string;
   /**
-   * The helper text content
-   */
-  hint?: string;
-  /**
    * The checkbox validity, if different from its enclosing group. Defaults to "inherit".
    */
   validity?: (typeof checkboxValidityValues)[number];
@@ -81,9 +61,9 @@ export type CheckboxProps = {
    * Callback fired when the blur event happens. Provides event value.
    */
   onBlur?: MuiFormControlLabelProps["onBlur"];
-} & Pick<FieldComponentProps, "id" | "isDisabled" | "name"> &
+} & Pick<FieldComponentProps, "hint" | "id" | "isDisabled" | "name"> &
   CheckedFieldProps<MuiCheckboxProps> &
-  HtmlProps;
+  Pick<HtmlProps, "ariaLabel" | "ariaLabelledBy" | "testId" | "translate">;
 
 const Checkbox = ({
   ariaLabel,

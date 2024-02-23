@@ -64,7 +64,7 @@ export type DialogProps = {
    * The title of the Dialog
    */
   title: string;
-} & HtmlProps;
+} & Pick<HtmlProps, "testId" | "translate">;
 
 const Dialog = ({
   primaryCallToActionComponent,

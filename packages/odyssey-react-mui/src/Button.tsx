@@ -13,8 +13,6 @@
 import { Button as MuiButton } from "@mui/material";
 import type { ButtonProps as MuiButtonProps } from "@mui/material";
 import {
-  ComponentProps,
-  HTMLAttributes,
   memo,
   ReactElement,
   useCallback,
@@ -23,15 +21,15 @@ import {
   useRef,
 } from "react";
 
+import { useButton } from "./ButtonContext";
+import type { HtmlProps } from "./HtmlProps";
+import { FocusHandle } from "./inputUtils";
 import {
   MuiPropsContext,
   MuiPropsContextType,
   useMuiProps,
 } from "./MuiPropsContext";
 import { Tooltip } from "./Tooltip";
-import type { HtmlProps } from "./HtmlProps";
-import { FocusHandle } from "./inputUtils";
-import { useButton } from "./ButtonContext";
 
 export const buttonSizeValues = ["small", "medium", "large"] as const;
 export const buttonTypeValues = ["button", "submit", "reset"] as const;
@@ -43,32 +41,6 @@ export const buttonVariantValues = [
 ] as const;
 
 export type ButtonProps = {
-  /**
-   * The global `aria-controls` property identifies the element (or elements) whose contents or presence are controlled by the element on which this attribute is set.
-   *
-   * value: A space-separated list of one or more ID values referencing the elements being controlled by the current element
-   */
-  ariaControls?: ComponentProps<"button">["aria-controls"];
-  /**
-   * The `aria-expanded` attribute is set on an element to indicate if a control is expanded or collapsed, and whether or not the controlled elements are displayed or hidden.
-   */
-  ariaExpanded?: ComponentProps<"button">["aria-expanded"];
-  /**
-   * The `aria-haspopup` attribute indicates the availability and type of interactive popup element that can be triggered by the element on which the attribute is set.
-   */
-  ariaHasPopup?: ComponentProps<"button">["aria-haspopup"];
-  /**
-   * The ARIA label for the Button
-   */
-  ariaLabel?: string;
-  /**
-   * The ID of the element that labels the Button
-   */
-  ariaLabelledBy?: string;
-  /**
-   * The ID of the element that describes the Button
-   */
-  ariaDescribedBy?: string;
   /**
    * The ref forwarded to the Button
    */
@@ -105,7 +77,6 @@ export type ButtonProps = {
    * The icon element to display at the start of the Button
    */
   startIcon?: ReactElement;
-  tabIndex?: HTMLAttributes<HTMLElement>["tabIndex"];
   /**
    * The tooltip text for the Button if it's icon-only
    */
@@ -135,7 +106,18 @@ export type ButtonProps = {
       startIcon?: ReactElement;
     }
 ) &
-  HtmlProps;
+  Pick<
+    HtmlProps,
+    | "ariaControls"
+    | "ariaDescribedBy"
+    | "ariaExpanded"
+    | "ariaHasPopup"
+    | "ariaLabel"
+    | "ariaLabelledBy"
+    | "tabIndex"
+    | "testId"
+    | "translate"
+  >;
 
 const Button = ({
   ariaControls,

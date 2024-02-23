@@ -48,7 +48,6 @@ export type RadioGroupProps = {
   value?: RadioProps["value"];
 } & Pick<
   FieldComponentProps,
-  | "ariaDescribedBy"
   | "errorMessage"
   | "errorMessageList"
   | "hint"
@@ -57,7 +56,7 @@ export type RadioGroupProps = {
   | "isDisabled"
   | "name"
 > &
-  HtmlProps;
+  Pick<HtmlProps, "ariaDescribedBy" | "testId" | "translate">;
 
 type FieldRenderProps = Partial<
   Pick<FieldComponentRenderProps, "ariaDescribedBy" | "errorMessageElementId">

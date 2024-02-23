@@ -64,7 +64,7 @@ export type SwitchProps = {
   "hint" | "id" | "isFullWidth" | "isDisabled" | "name"
 > &
   CheckedFieldProps<MuiSwitchProps> &
-  HtmlProps;
+  Pick<HtmlProps, "testId">;
 
 type SwitchLabelProps = {
   checked: boolean;
