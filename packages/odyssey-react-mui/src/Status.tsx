@@ -32,7 +32,7 @@ export type StatusProps = {
    * Determine the color and icon of the Status
    */
   severity: (typeof statusSeverityValues)[number];
-} & HtmlProps;
+} & Pick<HtmlProps, "testId" | "translate">;
 
 const Status = ({ label, severity, testId, translate }: StatusProps) => {
   const muiProps = useMuiProps();

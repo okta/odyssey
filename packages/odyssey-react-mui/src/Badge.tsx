@@ -27,7 +27,7 @@ export type BadgeProps = {
   badgeContent: number;
   badgeContentMax?: BadgeContentMax;
   type?: (typeof badgeTypeValues)[number];
-} & HtmlProps;
+} & Pick<HtmlProps, "testId" | "translate">;
 
 const badgeTypeColors = (odysseyTokens: DesignTokens) => ({
   default: {

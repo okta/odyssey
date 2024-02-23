@@ -80,7 +80,7 @@ export type PasswordFieldProps = {
    */
   value?: string;
 } & FieldComponentProps &
-  HtmlProps;
+  Pick<HtmlProps, "ariaDescribedBy" | "testId" | "translate">;
 
 type FieldRenderProps = Partial<
   Pick<FieldComponentRenderProps, "ariaDescribedBy" | "errorMessageElementId">

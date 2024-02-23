@@ -52,7 +52,7 @@ export type RadioProps = {
    */
   onBlur?: MuiFormControlLabelProps["onBlur"];
 } & Pick<FieldComponentProps, "isDisabled" | "name"> &
-  HtmlProps;
+  Pick<HtmlProps, "testId" | "translate">;
 
 const Radio = ({
   inputRef,

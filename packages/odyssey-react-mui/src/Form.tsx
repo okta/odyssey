@@ -91,7 +91,7 @@ export type FormProps = {
    */
   title?: string;
 } & Pick<FieldComponentProps, "isFullWidth"> &
-  HtmlProps;
+  Pick<HtmlProps, "testId" | "translate">;
 
 const Form = ({
   alert,

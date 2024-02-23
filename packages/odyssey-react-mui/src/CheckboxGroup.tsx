@@ -38,7 +38,6 @@ export type CheckboxGroupProps = {
   label: string;
 } & Pick<
   FieldComponentProps,
-  | "ariaDescribedBy"
   | "errorMessage"
   | "errorMessageList"
   | "hint"
@@ -46,7 +45,7 @@ export type CheckboxGroupProps = {
   | "id"
   | "isDisabled"
 > &
-  HtmlProps;
+  Pick<HtmlProps, "ariaDescribedBy" | "testId" | "translate">;
 
 type CheckboxGroupRenderProps = Pick<
   FieldComponentRenderProps,

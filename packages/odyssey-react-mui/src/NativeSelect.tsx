@@ -95,7 +95,6 @@ export type NativeSelectProps<
   value?: Value;
 } & Pick<
   FieldComponentProps,
-  | "ariaDescribedBy"
   | "errorMessage"
   | "errorMessageList"
   | "hint"
@@ -105,7 +104,7 @@ export type NativeSelectProps<
   | "isFullWidth"
   | "isOptional"
 > &
-  HtmlProps;
+  Pick<HtmlProps, "ariaDescribedBy" | "testId" | "translate">;
 
 type NativeSelectRenderProps = Partial<
   Pick<FieldComponentRenderProps, "ariaDescribedBy" | "errorMessageElementId">

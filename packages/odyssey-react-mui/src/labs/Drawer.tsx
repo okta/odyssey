@@ -71,8 +71,7 @@ export type DrawerProps = {
    * Type of Drawer
    */
   variant?: (typeof variantValues)[number];
-  ariaLabel: string;
-} & HtmlProps;
+} & Pick<HtmlProps, "ariaLabel" | "testId" | "translate">;
 
 interface DrawerStyleProps {
   odysseyDesignTokens: DesignTokens;
@@ -82,18 +81,16 @@ const DrawerHeader = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<DrawerStyleProps>`
   position: sticky;
+  top: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  top: 0;
-  background-color: ${({ odysseyDesignTokens }) =>
-    odysseyDesignTokens.HueNeutralWhite};
   margin: 0;
   padding: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing4}
     ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing5};
-  font-family: ${({ odysseyDesignTokens }) =>
-    odysseyDesignTokens.TypographyFamilyHeading};
   color: ${({ odysseyDesignTokens }) => odysseyDesignTokens.HueNeutral900};
+  background-color: ${({ odysseyDesignTokens }) =>
+    odysseyDesignTokens.HueNeutralWhite};
   border-bottom: ${({ showDividers, odysseyDesignTokens }) =>
     showDividers ? `1px solid ${odysseyDesignTokens.HueNeutral200}` : "none"};
 `;
@@ -119,16 +116,16 @@ const DrawerFooter = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<DrawerStyleProps>`
   position: sticky;
+  bottom: 0;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  bottom: 0;
-  background-color: ${({ odysseyDesignTokens }) =>
-    odysseyDesignTokens.HueNeutralWhite};
-  padding: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing4};
   align-content: center;
+  padding: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing4};
   border-top: ${({ showDividers, odysseyDesignTokens }) =>
     showDividers ? `1px solid ${odysseyDesignTokens.HueNeutral200}` : "none"};
+  background-color: ${({ odysseyDesignTokens }) =>
+    odysseyDesignTokens.HueNeutralWhite};
 `;
 
 const Drawer = ({

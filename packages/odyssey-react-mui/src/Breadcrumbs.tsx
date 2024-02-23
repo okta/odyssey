@@ -43,7 +43,7 @@ export type BreadcrumbsProps = {
   children: ReactElement<typeof Breadcrumb>[];
   homeHref?: string;
   maxVisibleItems?: number;
-} & HtmlProps;
+} & Pick<HtmlProps, "testId" | "translate">;
 
 export type BreadcrumbContextType = {
   breadcrumbType: BreadcrumbType;
