@@ -12,7 +12,7 @@
 
 import {
   MRT_Updater,
-  MRT_Virtualizer,
+  MRT_RowVirtualizer,
   MRT_RowData,
   MRT_TableOptions,
   useMaterialReactTable,
@@ -426,7 +426,7 @@ const DataTable = ({
   );
 
   const rowVirtualizerInstanceRef =
-    useRef<MRT_Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
+    useRef<MRT_RowVirtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
 
   const getRowFromTableAndSetHovered = (
     table: TableType,

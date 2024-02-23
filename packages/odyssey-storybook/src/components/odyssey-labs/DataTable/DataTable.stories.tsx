@@ -17,6 +17,7 @@ import {
   DataTableProps,
   DataTableRowSelectionState,
   DataTableSortingState,
+  MenuItem,
   densityValues,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -248,6 +249,16 @@ const storybookMeta: Meta<DataTableProps> = {
         },
       },
     },
+    bulkActionMenuItems: {
+      control: null,
+      description:
+        "Menu items to include in the bulk actions menu, which appears above the table if a row or rows are selected",
+      table: {
+        type: {
+          summary: `(selectedRows: MRT_RowSelectionState) => MenuButtonProps["children"]`,
+        },
+      },
+    },
   },
   args: {
     hasChangeableDensity: true,
@@ -404,12 +415,26 @@ export const Default: StoryObj<DataTableProps> = {
       [],
     );
 
+    const bulkActionMenuItems = (
+      selectedRows: DataTableProps["bulkActionMenuItems"],
+    ) => (
+      <>
+        <MenuItem onClick={() => console.log(selectedRows)}>
+          Bulk action 1
+        </MenuItem>
+        <MenuItem onClick={() => console.log(selectedRows)}>
+          Bulk action 2
+        </MenuItem>
+      </>
+    );
+
     return (
       <DataTable
         getData={getData}
         columns={columns}
         onReorderRows={onReorderRows}
         onChangeRowSelection={onChangeRowSelection}
+        bulkActionMenuItems={bulkActionMenuItems}
         initialDensity={props.initialDensity}
         hasChangeableDensity={props.hasChangeableDensity}
         hasColumnResizing={props.hasColumnResizing}

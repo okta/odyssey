@@ -18,7 +18,8 @@ import {
   MRT_RowData,
   MRT_SortingState,
   MRT_TableOptions,
-  MRT_Virtualizer,
+  MRT_RowSelectionState,
+  MRT_RowVirtualizer,
   MRT_VisibilityState,
   MaterialReactTable,
   useMaterialReactTable,
@@ -27,6 +28,7 @@ import {
   ArrowDownIcon,
   ArrowUnsortedIcon,
   DragIndicatorIcon,
+  MoreIcon,
 } from "../icons.generated";
 import { densityValues } from "./constants";
 import {
@@ -40,6 +42,7 @@ import {
 } from "./DataTableRowActions";
 import { useRowReordering } from "./useRowReordering";
 import { DataTableSettings } from "./DataTableSettings";
+import { MenuButton, MenuButtonProps } from "../MenuButton";
 import { Box } from "../Box";
 import { DataTableRowSelectionState } from ".";
 
@@ -165,6 +168,12 @@ export type DataTableProps = {
    * Menu items to include in the optional actions menu on each row.
    */
   rowActionMenuItems?: DataTableRowActionsProps["rowActionMenuItems"];
+  /**
+   * Menu items to include in the bulk actions menu, which appears above the table if a row or rows are selected
+   */
+  bulkActionMenuItems?: (
+    selectedRows: MRT_RowSelectionState,
+  ) => MenuButtonProps["children"];
 };
 
 const displayColumnDefOptions = {
@@ -244,6 +253,7 @@ const DataTable = ({
   hasRowSelection,
   hasSearch,
   hasSorting,
+  bulkActionMenuItems,
 }: DataTableProps) => {
   const [data, setData] = useState<MRT_RowData[]>([]);
   const [pagination, setPagination] = useState({
@@ -251,6 +261,7 @@ const DataTable = ({
     pageSize: resultsPerPage,
   });
   const [draggingRow, setDraggingRow] = useState<MRT_Row<MRT_RowData> | null>();
+  const [numberOfRowsSelected, setNumberOfRowsSelected] = useState<number>(0);
 
   // Table states
   const [columnSorting, setColumnSorting] = useState<MRT_SortingState>([]);
@@ -352,16 +363,21 @@ const DataTable = ({
     [],
   );
 
-  const dataTable = useMaterialReactTable({
-    columns: columns,
-    data: data,
-    getRowId: getRowId,
-    state: {
+  const tableState = useMemo(
+    () => ({
       density: rowDensity,
       sorting: columnSorting,
       globalFilter: search,
       columnVisibility,
-    },
+    }),
+    [rowDensity, columnSorting, search, columnVisibility],
+  );
+
+  const dataTable = useMaterialReactTable({
+    columns: columns,
+    data: data,
+    getRowId: getRowId,
+    state: tableState,
     icons: {
       ArrowDownwardIcon: ArrowDownIcon,
       DragHandleIcon: DragIndicatorIcon,
@@ -444,12 +460,12 @@ const DataTable = ({
     enableRowVirtualization:
       paginationType === "loadMore" || pagination.pageSize > 50,
     rowVirtualizerInstanceRef:
-      useRef<MRT_Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null),
+      useRef<MRT_RowVirtualizer<HTMLDivElement, HTMLTableRowElement>>(null),
     rowVirtualizerOptions: {
       overscan: 4,
     },
 
-    // Filters
+    // Filters & bulk actions
     renderTopToolbar: () => (
       <Box sx={{ marginBottom: 5 }}>
         <DataFilters
@@ -459,15 +475,29 @@ const DataTable = ({
           searchDelayTime={searchDelayTime}
           filters={hasFilters ? dataTableFilters : undefined}
           additionalActions={
-            <DataTableSettings
-              hasChangeableDensity={hasChangeableDensity}
-              rowDensity={rowDensity}
-              setRowDensity={setRowDensity}
-              hasColumnVisibility={hasColumnVisibility}
-              columns={columns}
-              columnVisibility={columnVisibility}
-              setColumnVisibility={setColumnVisibility}
-            />
+            <>
+              <DataTableSettings
+                hasChangeableDensity={hasChangeableDensity}
+                rowDensity={rowDensity}
+                setRowDensity={setRowDensity}
+                hasColumnVisibility={hasColumnVisibility}
+                columns={columns}
+                columnVisibility={columnVisibility}
+                setColumnVisibility={setColumnVisibility}
+              />
+              {bulkActionMenuItems && (
+                <>
+                  <MenuButton
+                    buttonVariant="secondary"
+                    endIcon={<MoreIcon />}
+                    isDisabled={numberOfRowsSelected === 0}
+                    ariaLabel="More actions"
+                  >
+                    {bulkActionMenuItems(dataTable.getState().rowSelection)}
+                  </MenuButton>
+                </>
+              )}
+            </>
           }
         />
       </Box>
@@ -509,6 +539,9 @@ const DataTable = ({
   // Effects
   useEffect(() => {
     onChangeRowSelection?.(dataTable.getState().rowSelection);
+    setNumberOfRowsSelected(
+      Object.keys(dataTable.getState().rowSelection).length,
+    );
   }, [dataTable.getState().rowSelection, dataTable, onChangeRowSelection]);
 
   useEffect(() => {
