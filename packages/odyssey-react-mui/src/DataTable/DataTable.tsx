@@ -401,9 +401,6 @@ const DataTable = ({
         draggingRowId: draggingRow?.id,
         hoveredRowId: table.getState().hoveredRow?.id,
       }),
-      onClick: () => {
-        return onClickRow?.(row);
-      },
     }),
     muiRowDragHandleProps: ({ table, row }) => ({
       onKeyDown: (event) => handleDragHandleKeyDown({ table, row, event }),
