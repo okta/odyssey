@@ -18,6 +18,7 @@ import { ListIcon, ShowIcon } from "../icons.generated";
 import { densityValues } from "./constants";
 import { DataTableProps } from "./DataTable";
 import { MRT_VisibilityState } from "material-react-table";
+import { useTranslation } from "react-i18next";
 
 export type DataTableSettingsProps = {
   hasChangeableDensity: DataTableProps["hasChangeableDensity"];
@@ -39,66 +40,70 @@ const DataTableSettings = ({
   columns,
   columnVisibility,
   setColumnVisibility,
-}: DataTableSettingsProps) => (
-  <>
-    {hasChangeableDensity && (
-      <MenuButton
-        endIcon={<ListIcon />}
-        ariaLabel="Table density"
-        menuAlignment="right"
-        shouldCloseOnSelect={false}
-      >
-        <>
-          {densityValues.map((value: (typeof densityValues)[number]) => (
-            <MenuItem
-              key={value}
-              isSelected={rowDensity === value}
-              onClick={() => setRowDensity(value)}
-            >
-              {`${value.charAt(0).toUpperCase()}${value.slice(1)}`}
-            </MenuItem>
-          ))}
-        </>
-      </MenuButton>
-    )}
-
-    {hasColumnVisibility && (
-      <MenuButton
-        endIcon={<ShowIcon />}
-        ariaLabel="Show/hide columns"
-        menuAlignment="right"
-        shouldCloseOnSelect={false}
-      >
-        <>
-          {columns
-            .filter((column) => column.enableHiding !== false)
-            .map((column) => (
+}: DataTableSettingsProps) => {
+  const { t } = useTranslation();
+  return (
+    <>
+      {hasChangeableDensity && (
+        <MenuButton
+          endIcon={<ListIcon />}
+          ariaLabel={t("table.density.arialabel")}
+          menuAlignment="right"
+          shouldCloseOnSelect={false}
+        >
+          <>
+            {densityValues.map((value: (typeof densityValues)[number]) => (
               <MenuItem
-                key={column.accessorKey}
-                onClick={() => {
-                  const columnId = column.id as string;
-                  setColumnVisibility((prevVisibility) => ({
-                    ...prevVisibility,
-                    [columnId]: prevVisibility
-                      ? prevVisibility[columnId] === false
-                      : false,
-                  }));
-                }}
+                key={value}
+                isSelected={rowDensity === value}
+                onClick={() => setRowDensity(value)}
               >
-                <MuiCheckbox
-                  checked={
-                    columnVisibility
-                      ? columnVisibility[column.accessorKey as string] !== false
-                      : true
-                  }
-                />
-                {column.header}
+                {`${value.charAt(0).toUpperCase()}${value.slice(1)}`}
               </MenuItem>
             ))}
-        </>
-      </MenuButton>
-    )}
-  </>
-);
+          </>
+        </MenuButton>
+      )}
+
+      {hasColumnVisibility && (
+        <MenuButton
+          endIcon={<ShowIcon />}
+          ariaLabel={t("table.columnvisibility.arialabel")}
+          menuAlignment="right"
+          shouldCloseOnSelect={false}
+        >
+          <>
+            {columns
+              .filter((column) => column.enableHiding !== false)
+              .map((column) => (
+                <MenuItem
+                  key={column.accessorKey}
+                  onClick={() => {
+                    const columnId = column.id as string;
+                    setColumnVisibility((prevVisibility) => ({
+                      ...prevVisibility,
+                      [columnId]: prevVisibility
+                        ? prevVisibility[columnId] === false
+                        : false,
+                    }));
+                  }}
+                >
+                  <MuiCheckbox
+                    checked={
+                      columnVisibility
+                        ? columnVisibility[column.accessorKey as string] !==
+                          false
+                        : true
+                    }
+                  />
+                  {column.header}
+                </MenuItem>
+              ))}
+          </>
+        </MenuButton>
+      )}
+    </>
+  );
+};
 const MemoizedDataTableSettings = memo(DataTableSettings);
 export { MemoizedDataTableSettings as DataTableSettings };

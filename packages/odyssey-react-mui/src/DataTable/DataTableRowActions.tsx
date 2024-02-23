@@ -24,6 +24,7 @@ import {
   MoreIcon,
 } from "../icons.generated";
 import { DataTableProps } from "./DataTable";
+import { Trans, useTranslation } from "react-i18next";
 
 export type DataTableRowActionsProps = {
   row: MRT_Row<MRT_RowData>;
@@ -49,70 +50,75 @@ const DataTableRowActions = ({
   rowActionMenuItems,
   totalRows,
   updateRowOrder,
-}: DataTableRowActionsProps) => (
-  <MuiBox display="flex">
-    {rowActionButtons?.(row)}
-    {(rowActionMenuItems || updateRowOrder) && (
-      <MenuButton
-        endIcon={<MoreIcon />}
-        size="small"
-        buttonVariant="floating"
-        ariaLabel="More actions"
-        menuAlignment="right"
-      >
-        {rowActionMenuItems && <>{rowActionMenuItems(row)}</>}
-        {rowActionMenuItems && updateRowOrder && <hr />}
-        {updateRowOrder && (
-          <>
-            <MenuItem
-              isDisabled={rowIndex <= 0}
-              onClick={() => updateRowOrder({ rowId: row.id, newRowIndex: 0 })}
-            >
-              <ArrowTopIcon /> Bring to front
-            </MenuItem>
-            <MenuItem
-              isDisabled={rowIndex <= 0}
-              onClick={() =>
-                updateRowOrder({
-                  rowId: row.id,
-                  newRowIndex: rowIndex <= 0 ? 0 : rowIndex - 1,
-                })
-              }
-            >
-              <ArrowUpIcon /> Bring forward
-            </MenuItem>
-            <MenuItem
-              isDisabled={totalRows ? rowIndex >= totalRows - 1 : false}
-              onClick={() =>
-                updateRowOrder({
-                  rowId: row.id,
-                  newRowIndex: rowIndex + 1,
-                })
-              }
-            >
-              <ArrowDownIcon /> Send backward
-            </MenuItem>
+}: DataTableRowActionsProps) => {
+  const { t } = useTranslation();
+  return (
+    <MuiBox display="flex">
+      {rowActionButtons?.(row)}
+      {(rowActionMenuItems || updateRowOrder) && (
+        <MenuButton
+          endIcon={<MoreIcon />}
+          size="small"
+          buttonVariant="floating"
+          ariaLabel={t("table.moreactions.arialabel")}
+          menuAlignment="right"
+        >
+          {rowActionMenuItems && <>{rowActionMenuItems(row)}</>}
+          {rowActionMenuItems && updateRowOrder && <hr />}
+          {updateRowOrder && (
             <>
-              {totalRows && (
-                <MenuItem
-                  isDisabled={rowIndex >= totalRows - 1}
-                  onClick={() =>
-                    updateRowOrder({
-                      rowId: row.id,
-                      newRowIndex: totalRows,
-                    })
-                  }
-                >
-                  <ArrowBottomIcon /> Send to back
-                </MenuItem>
-              )}
+              <MenuItem
+                isDisabled={rowIndex <= 0}
+                onClick={() =>
+                  updateRowOrder({ rowId: row.id, newRowIndex: 0 })
+                }
+              >
+                <ArrowTopIcon /> <Trans i18nKey="table.reorder.tofront" />
+              </MenuItem>
+              <MenuItem
+                isDisabled={rowIndex <= 0}
+                onClick={() =>
+                  updateRowOrder({
+                    rowId: row.id,
+                    newRowIndex: rowIndex <= 0 ? 0 : rowIndex - 1,
+                  })
+                }
+              >
+                <ArrowUpIcon /> <Trans i18nKey="table.reorder.forward" />
+              </MenuItem>
+              <MenuItem
+                isDisabled={totalRows ? rowIndex >= totalRows - 1 : false}
+                onClick={() =>
+                  updateRowOrder({
+                    rowId: row.id,
+                    newRowIndex: rowIndex + 1,
+                  })
+                }
+              >
+                <ArrowDownIcon /> <Trans i18nKey="table.reorder.backward" />
+              </MenuItem>
+              <>
+                {totalRows && (
+                  <MenuItem
+                    isDisabled={rowIndex >= totalRows - 1}
+                    onClick={() =>
+                      updateRowOrder({
+                        rowId: row.id,
+                        newRowIndex: totalRows,
+                      })
+                    }
+                  >
+                    <ArrowBottomIcon /> <Trans i18nKey="table.reorder.toback" />
+                  </MenuItem>
+                )}
+              </>
             </>
-          </>
-        )}
-      </MenuButton>
-    )}
-  </MuiBox>
-);
+          )}
+        </MenuButton>
+      )}
+    </MuiBox>
+  );
+};
 
 const MemoizedDataTableRowActions = memo(DataTableRowActions);
 export { MemoizedDataTableRowActions as DataTableRowActions };

@@ -57,6 +57,7 @@ import { Button } from "../Button";
 import { Box } from "../Box";
 import { MenuButton, MenuItem } from "..";
 import { ArrowUnsortedIcon } from "../icons.generated";
+import { useTranslation } from "react-i18next";
 
 export const densityValues = ["comfortable", "spacious", "compact"] as const;
 
@@ -310,6 +311,7 @@ const DataTable = ({
   hasSorting,
 }: DataTableProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const { t } = useTranslation();
   const [draggingRow, setDraggingRow] = useState<MRT_Row<MRT_RowData> | null>();
   const [showSkeletons, setShowSkeletons] = useState<boolean>(true);
   const [data, setData] =
@@ -648,9 +650,8 @@ const DataTable = ({
     }),
 
     muiRowDragHandleProps: ({ table, row }) => ({
-      title: "Drag row or press space/enter key to start and stop reordering",
-      "aria-label":
-        "Drag row to reorder. Or, press space or enter to start and stop reordering and esc to cancel.",
+      title: t("table.draghandle.tooltip"),
+      "aria-label": t("table.draghandle.arialabel"),
       onKeyDown: (event) => handleDragHandleKeyDown({ table, row, event }),
       onBlur: () => {
         resetDraggingAndHoveredRow(table);
@@ -680,7 +681,7 @@ const DataTable = ({
               endIcon={<MoreIcon />}
               size="small"
               buttonVariant="floating"
-              ariaLabel="More actions"
+              ariaLabel={t("table.moreactions.arialabel")}
               menuAlignment="right"
             >
               {rowActionMenuItems && (
