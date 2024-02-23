@@ -428,6 +428,9 @@ const DataFilters = ({
               {/* Filter popover */}
               <MuiPopover
                 anchorEl={filterPopoverAnchorElement}
+                // Positions the popover flush with the edge of the parent menu
+                // and at the right shadow elevation. These magic values are simply
+                // to match the default popover offset.
                 elevation={2}
                 sx={{ marginLeft: 2, marginTop: -1 }}
                 open={isFilterPopoverOpen}

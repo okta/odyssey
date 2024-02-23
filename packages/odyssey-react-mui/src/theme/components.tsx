@@ -2554,8 +2554,12 @@ export const components = ({
 
           ...(ownerState.variant !== "head" && {
             ["&.MuiTableCell-compact"]: {
-              padding: 6,
-              height: 36,
+              // TODO: Find a way to tokenize these values.
+              // We can't currently because these are between existing token
+              // values, but we need these precise values to match design.
+              // We use rems so this can scale with the text size.
+              padding: "0.4285714286rem",
+              height: "2.5714285714rem",
             },
 
             ["&.MuiTableCell-spacious"]: {
