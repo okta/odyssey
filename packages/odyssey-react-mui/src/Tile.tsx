@@ -17,17 +17,17 @@ import {
   CardActions as MuiCardActions,
   CardActionArea as MuiCardActionArea,
 } from "@mui/material";
+import styled from "@emotion/styled";
+
 import { Button } from "./Button";
 import { ButtonContext } from "./ButtonContext";
-import { Heading5, Paragraph, Support } from "./Typography";
 import { MoreIcon } from "./icons.generated";
-import { HtmlProps } from "./HtmlProps";
-import styled from "@emotion/styled";
+import { MenuButton, MenuButtonProps } from "./MenuButton";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext";
-import { MenuButton, MenuButtonProps } from "./MenuButton";
+import { Heading5, Paragraph, Support } from "./Typography";
 
 export const TILE_IMAGE_HEIGHT = "64px";
 
@@ -69,8 +69,7 @@ export type TileProps = {
        */
       menuButtonChildren?: MenuButtonProps["children"];
     }
-) &
-  HtmlProps;
+);
 
 const ImageContainer = styled("div", {
   shouldForwardProp: (prop) =>
