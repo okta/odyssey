@@ -115,11 +115,6 @@ export type DataTableProps = {
    */
   onChangeRowSelection?: (rowSelection: DataTableRowSelectionState) => void;
   /**
-   *
-   * Callback that fires when a row is clicked
-   */
-  onClickRow?: (row: MRT_Row<MRT_RowData>) => void;
-  /**
    * Callback that fires whenever the table needs to fetch new data, due to changes in
    * page, results per page, search input, filters, or sorting
    */
@@ -236,7 +231,6 @@ const DataTable = ({
   searchDelayTime,
   paginationType = "paged",
   onChangeRowSelection,
-  onClickRow,
   rowActionButtons,
   rowActionMenuItems,
   hasChangeableDensity,
@@ -310,7 +304,15 @@ const DataTable = ({
         />
       );
     },
-    [pagination, rowActionButtons, rowActionMenuItems, hasRowReordering],
+    [
+      pagination,
+      rowActionButtons,
+      rowActionMenuItems,
+      hasRowReordering,
+      onReorderRows,
+      totalRows,
+      updateRowOrder,
+    ],
   );
 
   const dataTableFilters = useMemo(
@@ -506,7 +508,7 @@ const DataTable = ({
   // Effects
   useEffect(() => {
     onChangeRowSelection?.(dataTable.getState().rowSelection);
-  }, [dataTable.getState().rowSelection]);
+  }, [dataTable.getState().rowSelection, dataTable, onChangeRowSelection]);
 
   useEffect(() => {
     (async () => {
