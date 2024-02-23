@@ -401,6 +401,7 @@ export const Default: StoryObj<DataTableProps> = {
 
     const onReorderRows = useCallback(
       (props: { rowId: string; newRowIndex: number }) => {
+        console.log(props.newRowIndex);
         return handleOnReorderRows({
           ...props,
           data: tableData,
