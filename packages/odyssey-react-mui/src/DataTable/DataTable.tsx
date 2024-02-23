@@ -130,7 +130,9 @@ export type DataTableProps = {
     search?: string;
     filters?: DataFilter[];
     sort?: MRT_SortingState;
-  }) => MRT_TableOptions<MRT_RowData>["data"];
+  }) =>
+    | MRT_TableOptions<MRT_RowData>["data"]
+    | Promise<MRT_TableOptions<MRT_RowData>["data"]>;
   /**
    * Callback that fires when the user reorders rows within the table. Can be used
    * to propogate order change to the backend.
