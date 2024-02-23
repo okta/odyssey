@@ -72,16 +72,17 @@ export type TileProps = {
 );
 
 const ImageContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens" && prop !== "hasMenuButtonChildren",
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "hasMenuButtonChildren",
 })<{
   odysseyDesignTokens: DesignTokens;
   hasMenuButtonChildren: boolean;
-}>((props) => ({
+}>(({ odysseyDesignTokens, hasMenuButtonChildren }) => ({
   display: "flex",
   alignItems: "flex-start",
   maxHeight: `${TILE_IMAGE_HEIGHT}`,
-  marginBlockEnd: props.odysseyDesignTokens.Spacing5,
-  paddingRight: props.hasMenuButtonChildren ? props.odysseyDesignTokens.Spacing5 : 0,
+  marginBlockEnd: odysseyDesignTokens.Spacing5,
+  paddingRight: hasMenuButtonChildren ? odysseyDesignTokens.Spacing5 : 0,
 }));
 
 const MenuButtonContainer = styled("div", {
@@ -91,6 +92,8 @@ const MenuButtonContainer = styled("div", {
   right: odysseyDesignTokens.Spacing3,
   top: odysseyDesignTokens.Spacing3,
 }));
+
+const buttonProviderValue = { isFullWidth: true };
 
 const Tile = ({
   button,

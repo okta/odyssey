@@ -59,7 +59,7 @@ const OdysseyThemeProvider = ({
   );
 
   return (
-    <MuiThemeProvider theme={theme}>
+    <MuiThemeProvider theme={customOdysseyTheme ?? odysseyTheme}>
       <OdysseyDesignTokensContext.Provider value={odysseyTokens}>
         {children}
       </OdysseyDesignTokensContext.Provider>
