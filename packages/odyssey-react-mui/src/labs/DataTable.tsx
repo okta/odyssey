@@ -552,17 +552,29 @@ const DataTable = ({
     [draggingRow],
   );
 
-  const table = useMaterialReactTable({
-    columns: columns,
-    data: data,
-    state: {
+  const tableState = useMemo(
+    () => ({
       density,
       sorting,
       globalFilter,
       columnVisibility,
       rowSelection,
       showSkeletons,
-    },
+    }),
+    [
+      density,
+      sorting,
+      globalFilter,
+      columnVisibility,
+      rowSelection,
+      showSkeletons,
+    ],
+  );
+
+  const table = useMaterialReactTable({
+    columns: columns,
+    data: data,
+    state: tableState,
     rowVirtualizerInstanceRef: rowVirtualizerInstanceRef,
     rowVirtualizerOptions: { overscan: 4 },
     enableRowVirtualization:
