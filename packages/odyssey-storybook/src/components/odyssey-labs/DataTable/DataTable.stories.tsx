@@ -415,9 +415,7 @@ export const Default: StoryObj<DataTableProps> = {
       [],
     );
 
-    const bulkActionMenuItems = (
-      selectedRows: DataTableProps["bulkActionMenuItems"],
-    ) => (
+    const bulkActionMenuItems = (selectedRows: DataTableRowSelectionState) => (
       <>
         <MenuItem onClick={() => console.log(selectedRows)}>
           Bulk action 1
