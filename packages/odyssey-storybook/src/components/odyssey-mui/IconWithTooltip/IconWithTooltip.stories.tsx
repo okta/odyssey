@@ -82,9 +82,9 @@ const showTooltip =
       const icon = canvas.getByTitle(
         "Use the `i` icon to give details that might not be critical but are 'good to know'",
       );
-      userEvent.hover(icon);
+      await userEvent.hover(icon);
       await axeRun(actionName);
-      userEvent.unhover(icon);
+      await userEvent.unhover(icon);
     });
   };
 
@@ -94,7 +94,7 @@ export const Default: StoryObj<typeof IconWithTooltip> = {
       "Use the `i` icon to give details that might not be critical but are 'good to know'",
   },
   play: async ({ canvasElement, step }) => {
-    showTooltip({ canvasElement, step })("IconWithTooltip");
+    await showTooltip({ canvasElement, step })("IconWithTooltip");
   },
 };
 
