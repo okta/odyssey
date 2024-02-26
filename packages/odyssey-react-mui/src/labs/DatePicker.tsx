@@ -20,9 +20,9 @@ import {
   PickerChangeHandlerContext,
 } from "@mui/x-date-pickers";
 import { DateTime } from "luxon";
-
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
 import { InputAdornment } from "@mui/material";
+
 import { Button } from "../Button";
 import {
   ArrowLeftIcon,
@@ -32,6 +32,7 @@ import {
 } from "../icons.generated";
 import { DateField, DateFieldProps } from "./DateField";
 import { datePickerTheme } from "./datePickerTheme";
+import { RenderFieldProps } from "../Field";
 import { OdysseyThemeProvider } from "../OdysseyThemeProvider";
 
 export type DatePickerProps<DateTime> = {
@@ -70,7 +71,7 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps<DateTime>>(
     );
 
     const renderFieldComponent = useCallback(
-      ({ label, onChange, value, ...rest }) => {
+      ({ label, onChange, value, ...rest }: RenderFieldProps) => {
         const containerRef = rest?.InputProps?.ref;
 
         return (
@@ -95,7 +96,7 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps<DateTime>>(
           />
         );
       },
-      [label, onChange, defaultValue]
+      [label, onChange, defaultValue],
     );
 
     if (isInvalidLocale) {

@@ -18,10 +18,10 @@ import {
 } from "@mui/x-date-pickers";
 import { forwardRef, memo, useCallback } from "react";
 
-import { Field } from "../Field";
+import { Field, RenderFieldProps } from "../Field";
 import { TextFieldProps } from "../TextField";
 import { FieldComponentProps } from "../FieldComponentProps";
-import { SeleniumProps } from "../SeleniumProps";
+// import { HtmlProps } from "../HtmlProps";
 
 export const textFieldTypeValues = [
   "email",
@@ -43,8 +43,7 @@ export type DateFieldProps = {
     | "onBlur"
     | "onFocus"
     | "placeholder"
-  > &
-  SeleniumProps;
+  >
 
 const DateField = forwardRef<HTMLInputElement, DateFieldProps>(
   (
@@ -77,7 +76,7 @@ const DateField = forwardRef<HTMLInputElement, DateFieldProps>(
     };
 
     const renderFieldComponent = useCallback(
-      ({ ariaDescribedBy, id }) => (
+      ({ ariaDescribedBy, id }: RenderFieldProps) => (
         <MuiDateField
           aria-describedby={ariaDescribedBy}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
@@ -110,7 +109,7 @@ const DateField = forwardRef<HTMLInputElement, DateFieldProps>(
         isReadOnly,
         ref,
         value,
-      ]
+      ],
     );
 
     return (
