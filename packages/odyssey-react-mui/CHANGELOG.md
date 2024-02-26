@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.14.0](https://github.com/okta/odyssey/compare/v1.13.12...v1.14.0) (2024-02-26)
+
+### Features
+
+- add drawer component ([563655c](https://github.com/okta/odyssey/commit/563655c793968734aa2bbde1f5bf359267526404))
+
+### Bug Fixes
+
+- updates based on PR feedback ([9496a99](https://github.com/okta/odyssey/commit/9496a990797a61c023e9ef0420f71c977ccf696c))
+- Upgrade every package ([#2136](https://github.com/okta/odyssey/issues/2136)) ([89b6534](https://github.com/okta/odyssey/commit/89b65342755a30d0e947f5ffb75e6bbe00268442))
+
 ## [1.13.12](https://github.com/okta/odyssey/compare/v1.13.11...v1.13.12) (2024-02-16)
 
 **Note:** Version bump only for package @okta/odyssey-react-mui

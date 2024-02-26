@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.14.0](https://github.com/okta/odyssey/compare/v1.13.12...v1.14.0) (2024-02-26)
+
+### Features
+
+- add drawer component ([563655c](https://github.com/okta/odyssey/commit/563655c793968734aa2bbde1f5bf359267526404))
+
+### Bug Fixes
+
+- add async for tests ([30144dd](https://github.com/okta/odyssey/commit/30144dddd1ffd17cf2315dade6f5ba473fca4afb))
+- add fix for tests ([8ec6f1a](https://github.com/okta/odyssey/commit/8ec6f1a8172dd2b7b5f8b6ef53dcdcb7559e9644))
+- remove tertiary button from example ([2598aa7](https://github.com/okta/odyssey/commit/2598aa7a04e78e9d547b3e149efdd122028a4c09))
+- revert test updates ([a32e9d7](https://github.com/okta/odyssey/commit/a32e9d7e1aebf81f21769df61039978dbd613c58))
+- undo unrelated test-runner change ([250fcd6](https://github.com/okta/odyssey/commit/250fcd620d1dfb53cd95b639395c90dd8307a372))
+- update test runner to preVisit ([f948a1f](https://github.com/okta/odyssey/commit/f948a1f600486e14491b4b86df889282ac2fbad3))
+- updates based on PR feedback ([9496a99](https://github.com/okta/odyssey/commit/9496a990797a61c023e9ef0420f71c977ccf696c))
+- Upgrade every package ([#2136](https://github.com/okta/odyssey/issues/2136)) ([89b6534](https://github.com/okta/odyssey/commit/89b65342755a30d0e947f5ffb75e6bbe00268442))
+
 ## [1.13.12](https://github.com/okta/odyssey/compare/v1.13.11...v1.13.12) (2024-02-16)
 
 **Note:** Version bump only for package @okta/odyssey-storybook
