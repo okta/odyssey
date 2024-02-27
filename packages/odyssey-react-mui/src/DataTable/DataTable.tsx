@@ -366,9 +366,9 @@ const DataTable = ({
   });
   const [draggingRow, setDraggingRow] = useState<MRT_Row<MRT_RowData> | null>();
   const [isTableContainerScrolledToStart, setIsTableContainerScrolledToStart] =
-    useState<boolean>(false);
+    useState<boolean>(true);
   const [isTableContainerScrolledToEnd, setIsTableContainerScrolledToEnd] =
-    useState<boolean>(false);
+    useState<boolean>(true);
   const [tableInnerContainerWidth, setTableInnerContainerWidth] = useState<
     number | string
   >("100%");
