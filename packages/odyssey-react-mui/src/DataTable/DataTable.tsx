@@ -10,7 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  ReactElement,
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import {
   MRT_Cell,
   MRT_DensityState,
@@ -30,11 +38,8 @@ import {
   DragIndicatorIcon,
   MoreIcon,
 } from "../icons.generated";
-import { densityValues } from "./constants";
-import {
-  DataTablePagination,
-  paginationTypeValues,
-} from "../labs/DataTablePagination";
+import { densityValues, paginationTypeValues } from "./constants";
+import { DataTablePagination } from "./DataTablePagination";
 import { DataFilter, DataFilters } from "../labs/DataFilters";
 import {
   DataTableRowActions,
@@ -51,6 +56,9 @@ import {
 } from "../OdysseyDesignTokensContext";
 import { useScrollIndication } from "./useScrollIndication";
 import styled from "@emotion/styled";
+import { DataTableEmptyState } from "./DataTableEmptyState";
+import { Callout } from "../Callout";
+import { t } from "i18next";
 
 export type DataTableProps = {
   /**
@@ -180,6 +188,18 @@ export type DataTableProps = {
   bulkActionMenuItems?: (
     selectedRows: MRT_RowSelectionState,
   ) => MenuButtonProps["children"];
+  /**
+   * If `error` is not undefined, the DataTable will indicate an error.
+   */
+  errorMessage?: string;
+  /**
+   * The component to display when the table is displaying the initial empty state
+   */
+  emptyPlaceholder?: ReactElement<typeof DataTableEmptyState>;
+  /**
+   * The component to display when the query returns no results
+   */
+  noResultsPlaceholder?: ReactElement<typeof DataTableEmptyState>;
 };
 
 const displayColumnDefOptions = {
@@ -335,6 +355,9 @@ const DataTable = ({
   hasSearch,
   hasSorting,
   bulkActionMenuItems,
+  errorMessage: errorMessageProp,
+  emptyPlaceholder,
+  noResultsPlaceholder,
 }: DataTableProps) => {
   const [data, setData] = useState<MRT_RowData[]>([]);
   const [pagination, setPagination] = useState({
@@ -347,6 +370,9 @@ const DataTable = ({
     useState<boolean>(false);
   const [isTableContainerScrolledToEnd, setIsTableContainerScrolledToEnd] =
     useState<boolean>(false);
+  const [tableInnerContainerWidth, setTableInnerContainerWidth] = useState<
+    number | string
+  >("100%");
   const tableOuterContainerRef = useRef<HTMLDivElement>(null);
   const tableInnerContainerRef = useRef<HTMLDivElement>(null);
   const tableContentRef = useRef<HTMLTableElement>(null);
@@ -359,9 +385,21 @@ const DataTable = ({
     useState<MRT_DensityState>(initialDensity);
   const [search, setSearch] = useState<string>("");
   const [filters, setFilters] = useState<DataFilter[]>();
+  const [initialFilters, setInitialFilters] = useState<DataFilter[]>();
+  const [isLoading, setIsLoading] = useState<boolean | undefined>(true);
+  const [isEmpty, setIsEmpty] = useState<boolean | undefined>();
+  const [errorMessage, setErrorMessage] = useState<string | undefined>(
+    errorMessageProp,
+  );
 
-  const { onTableContainerScroll, setupInitialScrollState } =
-    useScrollIndication();
+  useScrollIndication({
+    tableOuterContainer: tableOuterContainerRef.current,
+    tableInnerContainer: tableInnerContainerRef.current,
+    setIsTableContainerScrolledToStart: setIsTableContainerScrolledToStart,
+    setIsTableContainerScrolledToEnd: setIsTableContainerScrolledToEnd,
+    setTableInnerContainerWidth: setTableInnerContainerWidth,
+  });
+
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const {
@@ -455,14 +493,38 @@ const DataTable = ({
     [],
   );
 
+  const emptyState = useCallback(() => {
+    const noResultsInnerContent = noResultsPlaceholder || (
+      <DataTableEmptyState
+        heading={t("table.noresults.heading")}
+        text={t("table.noresults.text")}
+      />
+    );
+
+    const emptyStateInnerContent =
+      emptyPlaceholder && isEmpty ? emptyPlaceholder : noResultsInnerContent;
+
+    return (
+      <Box sx={{ width: tableInnerContainerWidth }}>
+        {emptyStateInnerContent}
+      </Box>
+    );
+  }, [
+    tableInnerContainerWidth,
+    emptyPlaceholder,
+    noResultsPlaceholder,
+    isEmpty,
+  ]);
+
   const tableState = useMemo(
     () => ({
       density: rowDensity,
       sorting: columnSorting,
       globalFilter: search,
       columnVisibility,
+      isLoading,
     }),
-    [rowDensity, columnSorting, search, columnVisibility],
+    [rowDensity, columnSorting, search, columnVisibility, isLoading],
   );
 
   const dataTable = useMaterialReactTable({
@@ -550,13 +612,17 @@ const DataTable = ({
 
     // Virtualization
     enableRowVirtualization:
-      paginationType === "loadMore" || pagination.pageSize > 50,
+      paginationType !== "loadMore" && pagination.pageSize > 50,
     rowVirtualizerInstanceRef:
       useRef<MRT_RowVirtualizer<HTMLDivElement, HTMLTableRowElement>>(null),
     rowVirtualizerOptions: {
       overscan: 4,
     },
 
+    // States
+    renderEmptyRowsFallback: emptyState,
+
+    // Refs
     muiTableProps: {
       ref: tableContentRef,
     },
@@ -567,17 +633,6 @@ const DataTable = ({
   });
 
   // Effects
-  const handleTableContainerScroll = useCallback(
-    () =>
-      onTableContainerScroll({
-        tableOuterContainer: tableOuterContainerRef.current,
-        tableInnerContainer: tableInnerContainerRef.current,
-        setIsTableContainerScrolledToStart,
-        setIsTableContainerScrolledToEnd,
-      }),
-    [tableOuterContainerRef, tableInnerContainerRef],
-  );
-
   useEffect(() => {
     onChangeRowSelection?.(dataTable.getState().rowSelection);
     setNumberOfRowsSelected(
@@ -586,11 +641,9 @@ const DataTable = ({
   }, [dataTable.getState().rowSelection, dataTable, onChangeRowSelection]);
 
   useEffect(() => {
-    setupInitialScrollState(tableInnerContainerRef.current);
-  }, []);
-
-  useEffect(() => {
     (async () => {
+      setIsLoading(true);
+      setErrorMessage(errorMessageProp);
       try {
         const incomingData = await getData?.({
           page: pagination.pageIndex,
@@ -601,10 +654,26 @@ const DataTable = ({
         });
         setData(incomingData);
       } catch (error) {
+        setErrorMessage(typeof error === "string" ? error : t("table.error"));
       } finally {
+        setIsLoading(false);
       }
     })();
   }, [pagination, columnSorting, search, filters, getData]);
+
+  useEffect(() => {
+    if (!initialFilters && filters) {
+      setInitialFilters(filters);
+    }
+
+    setIsEmpty(
+      pagination.pageIndex === currentPage &&
+        pagination.pageSize === resultsPerPage &&
+        search === "" &&
+        filters === initialFilters &&
+        data.length === 0,
+    );
+  }, [filters, pagination, search, data]);
 
   // Render the table
   return (
@@ -616,6 +685,7 @@ const DataTable = ({
           hasSearchSubmitButton={hasSearchSubmitButton}
           searchDelayTime={searchDelayTime}
           filters={hasFilters ? dataTableFilters : undefined}
+          isDisabled={isEmpty}
           additionalActions={
             <>
               <DataTableSettings
@@ -644,44 +714,28 @@ const DataTable = ({
         />
       </Box>
 
+      {errorMessage && (
+        <Box sx={{ marginBlockEnd: 2 }}>
+          <Callout severity="error" text={errorMessage} />
+        </Box>
+      )}
+
       <ScrollableTableContainer
         odysseyDesignTokens={odysseyDesignTokens}
         isScrollableStart={!isTableContainerScrolledToStart}
         isScrollableEnd={!isTableContainerScrolledToEnd}
         ref={tableOuterContainerRef}
       >
-        <MRT_TableContainer
-          table={dataTable}
-          onScroll={handleTableContainerScroll}
-        />
+        <MRT_TableContainer table={dataTable} />
       </ScrollableTableContainer>
 
       {hasPagination && (
         <DataTablePagination
-          paginationType={paginationType}
-          currentNumberOfResults={data.length}
-          currentPage={pagination.pageIndex}
-          isPreviousButtonDisabled={pagination.pageIndex <= 1}
-          isNextButtonDisabled={false} // TODO: Add logic for disabling next/load more button
-          onClickPrevious={() =>
-            setPagination({
-              pageIndex: pagination.pageIndex - 1,
-              pageSize: pagination.pageSize,
-            })
-          }
-          onClickNext={() => {
-            if (paginationType === "loadMore") {
-              setPagination({
-                pageSize: pagination.pageSize,
-                pageIndex: pagination.pageSize + resultsPerPage,
-              });
-            } else {
-              setPagination({
-                pageSize: pagination.pageSize,
-                pageIndex: pagination.pageIndex + 1,
-              });
-            }
-          }}
+          pagination={pagination}
+          setPagination={setPagination}
+          totalRows={totalRows}
+          isDisabled={isEmpty}
+          variant={paginationType}
         />
       )}
     </>

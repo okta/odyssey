@@ -11,6 +11,8 @@
  */
 
 export { DataTable, type DataTableProps } from "./DataTable";
+export { DataTableEmptyState } from "./DataTableEmptyState";
+export { DataTablePagination } from "./DataTablePagination";
 export { densityValues } from "./constants";
 export type {
   MRT_ColumnFiltersState as DataTableFiltersState,

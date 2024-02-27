@@ -118,6 +118,10 @@ export type DataFiltersProps = {
    * the filter menu won't be shown.
    */
   filters?: Array<DataFilter>;
+  /**
+   * If true, the filter and search will be disabled
+   */
+  isDisabled?: boolean;
 };
 
 const DataFilters = ({
@@ -128,6 +132,7 @@ const DataFilters = ({
   defaultSearchTerm = "",
   additionalActions,
   filters: filtersProp = [],
+  isDisabled,
 }: DataFiltersProps) => {
   const [filters, setFilters] = useState<DataFilter[]>(filtersProp);
   const { t } = useTranslation();
@@ -311,6 +316,7 @@ const DataFilters = ({
             aria-expanded={isFiltersMenuOpen ? "true" : undefined}
             aria-haspopup="true"
             ariaLabel={t("filters.filters.arialabel")}
+            isDisabled={isDisabled}
             endIcon={<FilterIcon />}
             onClick={(event) => {
               setFiltersMenuAnchorElement(event.currentTarget);
@@ -406,6 +412,7 @@ const DataFilters = ({
     ),
     [
       isFiltersMenuOpen,
+      isDisabled,
       filterPopoverCurrentFilter,
       isFilterPopoverOpen,
       filtersMenuAnchorElement,
@@ -659,6 +666,7 @@ const DataFilters = ({
                 <SearchField
                   value={searchValue}
                   label={t("filters.search.label")}
+                  isDisabled={isDisabled}
                   onClear={() => {
                     setSearchValue("");
                     onChangeSearch("");

@@ -10,50 +10,105 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Dispatch, SetStateAction } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useRef,
+} from "react";
 
-export const useScrollIndication = () => {
-  let animationFrameId: number | null = null; // Variable to hold the animation frame ID
+type UseScrollIndicationProps = {
+  tableOuterContainer: HTMLDivElement | null;
+  tableInnerContainer: HTMLDivElement | null;
+  setIsTableContainerScrolledToStart: Dispatch<SetStateAction<boolean>>;
+  setIsTableContainerScrolledToEnd: Dispatch<SetStateAction<boolean>>;
+  setTableInnerContainerWidth: Dispatch<SetStateAction<number | string>>;
+};
+export const useScrollIndication = ({
+  tableOuterContainer,
+  tableInnerContainer,
+  setIsTableContainerScrolledToStart,
+  setIsTableContainerScrolledToEnd,
+  setTableInnerContainerWidth,
+}: UseScrollIndicationProps) => {
+  const animationFrameIdRef = useRef<number | null>(null);
 
-  const onTableContainerScroll = ({
+  const resizeObserverRef = useRef<ResizeObserver | null>(null);
+
+  const checkScrollIndicators = useCallback(() => {
+    if (!tableOuterContainer || !tableInnerContainer) return;
+
+    const containerWidth = tableOuterContainer.clientWidth;
+    const contentWidth = tableInnerContainer.scrollWidth;
+    const containerStartScrollPosition = tableInnerContainer.scrollLeft;
+    const containerEndScrollPosition =
+      containerStartScrollPosition + containerWidth;
+
+    setIsTableContainerScrolledToStart(containerStartScrollPosition <= 16);
+    setIsTableContainerScrolledToEnd(
+      containerEndScrollPosition >= contentWidth - 16,
+    );
+  }, [
+    tableInnerContainer,
+    tableOuterContainer,
+    setIsTableContainerScrolledToEnd,
+    setIsTableContainerScrolledToStart,
+  ]);
+
+  useEffect(() => {
+    if (resizeObserverRef.current) return; // Avoid creating multiple observers
+
+    let debounceTimer: ReturnType<typeof setTimeout>;
+
+    resizeObserverRef.current = new ResizeObserver(() => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        if (!animationFrameIdRef.current) {
+          animationFrameIdRef.current = requestAnimationFrame(() => {
+            checkScrollIndicators();
+            animationFrameIdRef.current = null;
+          });
+        }
+
+        setTableInnerContainerWidth(tableInnerContainer?.clientWidth ?? "100%");
+      }, 100); // debounce delay
+    });
+
+    if (tableOuterContainer) {
+      resizeObserverRef.current.observe(tableOuterContainer);
+    }
+
+    return () => {
+      if (resizeObserverRef.current) {
+        resizeObserverRef.current.disconnect();
+        resizeObserverRef.current = null;
+      }
+      clearTimeout(debounceTimer); // Ensure timer is cleared on component unmount
+      if (animationFrameIdRef.current) {
+        cancelAnimationFrame(animationFrameIdRef.current);
+        animationFrameIdRef.current = null;
+      }
+    };
+  }, [
+    checkScrollIndicators,
+    setTableInnerContainerWidth,
     tableOuterContainer,
     tableInnerContainer,
     setIsTableContainerScrolledToStart,
     setIsTableContainerScrolledToEnd,
-  }: {
-    tableOuterContainer: HTMLDivElement | null;
-    tableInnerContainer: HTMLDivElement | null;
-    setIsTableContainerScrolledToStart: Dispatch<SetStateAction<boolean>>;
-    setIsTableContainerScrolledToEnd: Dispatch<SetStateAction<boolean>>;
-  }) => {
-    if (!tableOuterContainer || !tableInnerContainer) return;
-    if (!animationFrameId) {
-      const containerWidth = tableOuterContainer.clientWidth;
-      const contentWidth = tableInnerContainer.scrollWidth;
+  ]);
 
-      const containerStartScrollPosition = tableInnerContainer.scrollLeft;
-      const containerEndScrollPosition =
-        containerStartScrollPosition + containerWidth;
+  useEffect(() => {
+    const handleScroll = () => checkScrollIndicators();
 
-      setIsTableContainerScrolledToStart(containerStartScrollPosition <= 16);
-      setIsTableContainerScrolledToEnd(
-        containerEndScrollPosition >= contentWidth - 16,
-      );
+    tableInnerContainer?.addEventListener("scroll", handleScroll);
+    return () =>
+      tableInnerContainer?.removeEventListener("scroll", handleScroll);
+  }, [tableInnerContainer, checkScrollIndicators]); // Re-run when innerContainerRef changes
 
-      animationFrameId = requestAnimationFrame(() => {
-        animationFrameId = null; // Clear the animation frame ID after execution
-      });
-    }
-  };
-
-  const setupInitialScrollState = (
-    tableInnerContainer: HTMLDivElement | null,
-  ) => {
-    tableInnerContainer?.dispatchEvent(new CustomEvent("scroll"));
-  };
-
-  return {
-    onTableContainerScroll,
-    setupInitialScrollState,
-  };
+  // Initial check to set state correctly on mount
+  useEffect(() => {
+    checkScrollIndicators();
+  }, [checkScrollIndicators]);
 };
