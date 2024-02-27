@@ -666,6 +666,7 @@ const DataFilters = ({
                 <SearchField
                   value={searchValue}
                   label={t("filters.search.label")}
+                  placeholder={t("filters.search.label")}
                   isDisabled={isDisabled}
                   onClear={() => {
                     setSearchValue("");
