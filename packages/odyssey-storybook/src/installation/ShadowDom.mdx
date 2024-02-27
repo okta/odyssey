@@ -67,27 +67,22 @@ export const getCss = () => {
 };
 ```
 
-The in your code, you can do something like:
+Then in your code, you can do something like:
 
 ```tsx
 // MyComponent.tsx
 
-import { getCss } from "./utils"
+import { getCss } from "./utils";
 
 export const MyComponent = () => {
-
   const css = getCss();
 
   const componentStyle = css`
-    backgroundColor: white
+    backgroundcolor: white;
   `;
 
-  return (
-    <div className={componentStyle}>
-      { //... things }
-    </div>
-  )
-}
+  return <div className={componentStyle}>{/* ... */}</div>;
+};
 ```
 
 If you're using separate `OdysseyThemeProvider` and `OdysseyCacheProvider` components, both of those also take the `shadowDomElement` element.

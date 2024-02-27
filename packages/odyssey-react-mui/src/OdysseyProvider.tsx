@@ -54,10 +54,8 @@ const OdysseyProvider = <SupportedLanguages extends string>({
   >
     <OdysseyThemeProvider
       designTokensOverride={designTokensOverride}
-      emotionRoot={emotionRoot}
       shadowDomElement={shadowDomElement}
       themeOverride={themeOverride}
-      withCache={false}
     >
       <ScopedCssBaseline>
         <OdysseyTranslationProvider<SupportedLanguages>
