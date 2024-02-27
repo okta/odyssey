@@ -20,7 +20,6 @@ import { forwardRef, memo, useCallback } from "react";
 
 import { Field, RenderFieldProps } from "../Field";
 import { TextFieldProps } from "../TextField";
-import { FieldComponentProps } from "../FieldComponentProps";
 // import { HtmlProps } from "../HtmlProps";
 
 export const textFieldTypeValues = [
@@ -31,19 +30,21 @@ export const textFieldTypeValues = [
   "url",
 ] as const;
 
-export type DateFieldProps = {
-} & MuiDateFieldProps<Date> & FieldComponentProps &
+export type DateFieldProps = MuiDateFieldProps<Date> &
   Pick<
     TextFieldProps,
     | "endAdornment"
     | "label"
     | "hasInitialFocus"
-    | "isOptional"
-    | "isReadOnly"
     | "onBlur"
     | "onFocus"
     | "placeholder"
-  >
+    | "errorMessage"
+    | "hint"
+    | "isDisabled"
+    | "isOptional"
+    | "isReadOnly"
+  >;
 
 const DateField = forwardRef<HTMLInputElement, DateFieldProps>(
   (
@@ -89,8 +90,7 @@ const DateField = forwardRef<HTMLInputElement, DateFieldProps>(
           id={id}
           name={id}
           onBlur={onBlur}
-          // @ts-ignore
-          // Ignoring this for now. I can't type the args correctly due to the FieldChangeHandler type not being available
+          
           onChange={handleChange}
           onFocus={onFocus}
           readOnly={isReadOnly}

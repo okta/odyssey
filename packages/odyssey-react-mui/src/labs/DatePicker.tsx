@@ -71,9 +71,17 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps<DateTime>>(
     );
 
     const renderFieldComponent = useCallback(
-      ({ label, onChange, value, ...rest }: RenderFieldProps) => {
-        const containerRef = rest?.InputProps?.ref;
-
+      ({
+        label,
+        onChange,
+        value,
+        ...rest
+      }: RenderFieldProps &
+        Pick<DatePickerProps<DateTime>, "label" | "onChange"> &
+        MuiDatePickerProps<DateTime>) => {
+        // const containerRef = rest?.InputProps?.ref;
+        const containerRef = undefined;
+        console.log({rest})
         return (
           <DateField
             endAdornment={
