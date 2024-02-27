@@ -37,7 +37,7 @@ export const DenyIcon = forwardRef<SVGSVGElement, DenyIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 DenyIcon.displayName = "DenyIcon";

@@ -27,7 +27,7 @@ const storybookMeta: Meta<DialogProps> = {
   title: "MUI Components/Dialog",
   component: Dialog,
   argTypes: {
-    callToActionFirstComponent: {
+    primaryCallToActionComponent: {
       control: null,
       description:
         "An optional Button object to be situated in the Dialog footer. Should almost always be of variant `primary`.",
@@ -37,7 +37,7 @@ const storybookMeta: Meta<DialogProps> = {
         },
       },
     },
-    callToActionSecondComponent: {
+    secondaryCallToActionComponent: {
       control: null,
       description:
         "An optional Button object to be situated in the Dialog footer, alongside the `callToActionPrimaryComponent`.",
@@ -47,7 +47,7 @@ const storybookMeta: Meta<DialogProps> = {
         },
       },
     },
-    callToActionLastComponent: {
+    tertiaryCallToActionComponent: {
       control: null,
       description:
         "An optional Button object to be situated in the Dialog footer, alongside the other two `callToAction` components.",
@@ -107,19 +107,11 @@ const storybookMeta: Meta<DialogProps> = {
         name: "string",
       },
     },
-    ariaLabel: {
-      type: {
-        required: true,
-        name: "string",
-      },
-      control: "text",
-    },
   },
   args: {
     children:
       "You are initiating this ship's self-destruct protocol. This ship, and its occupants, will be destroyed.",
     title: "Initiate self-destruct protocol",
-    ariaLabel: "close",
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
@@ -144,21 +136,21 @@ const DefaultTemplate: StoryObj<DialogProps> = {
         <Button label="Open dialog" onClick={onOpen} variant="primary" />
         <Dialog
           {...props}
-          callToActionFirstComponent={
+          primaryCallToActionComponent={
             <Button
               label="Primary action"
               onClick={onClose}
               variant="primary"
             />
           }
-          callToActionSecondComponent={
+          secondaryCallToActionComponent={
             <Button
               label="Secondary action"
               onClick={onClose}
               variant="secondary"
             />
           }
-          callToActionLastComponent={
+          tertiaryCallToActionComponent={
             <Button label="Cancel" onClick={onClose} variant="floating" />
           }
           onClose={onClose}
@@ -180,9 +172,9 @@ export const Default: StoryObj<DialogProps> = {
     const canvas = within(canvasElement);
     await step("open Default Dialog", async () => {
       const buttonElement = canvas.getByText("Open dialog");
-      userEvent.click(buttonElement);
-      await waitFor(() => {
-        axeRun("Default Dialog");
+      await userEvent.click(buttonElement);
+      await waitFor(async () => {
+        await axeRun("Default Drawer");
       });
     });
   },

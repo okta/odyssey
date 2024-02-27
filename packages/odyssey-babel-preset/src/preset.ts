@@ -33,7 +33,7 @@ export const preset: Preset = (api, _opts = {}) => {
       odyssey: {},
       typescript: {},
     },
-    _opts
+    _opts,
   );
 
   return {

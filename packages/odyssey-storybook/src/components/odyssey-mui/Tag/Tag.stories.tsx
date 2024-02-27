@@ -141,9 +141,9 @@ export const Removable: StoryObj<TagProps> = {
       const tagElement = canvasElement.querySelector('[role="button"]');
       const removeIcon = tagElement?.querySelector("svg");
       if (removeIcon) {
-        userEvent.click(removeIcon);
-        userEvent.tab();
-        expect(args.onRemove).toHaveBeenCalled();
+        await userEvent.click(removeIcon);
+        await userEvent.tab();
+        await expect(args.onRemove).toHaveBeenCalled();
       }
       await axeRun("Removable Tag");
     });

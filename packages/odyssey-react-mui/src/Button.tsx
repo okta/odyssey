@@ -17,37 +17,30 @@ import {
   ReactElement,
   useCallback,
   useImperativeHandle,
+  useMemo,
   useRef,
 } from "react";
 
-import { MuiPropsContext, useMuiProps } from "./MuiPropsContext";
-import { Tooltip } from "./Tooltip";
-import type { AllowedProps } from "./AllowedProps";
+import { useButton } from "./ButtonContext";
+import type { HtmlProps } from "./HtmlProps";
 import { FocusHandle } from "./inputUtils";
+import {
+  MuiPropsContext,
+  MuiPropsContextType,
+  useMuiProps,
+} from "./MuiPropsContext";
+import { Tooltip } from "./Tooltip";
 
 export const buttonSizeValues = ["small", "medium", "large"] as const;
 export const buttonTypeValues = ["button", "submit", "reset"] as const;
 export const buttonVariantValues = [
   "primary",
   "secondary",
-  "tertiary",
   "danger",
   "floating",
 ] as const;
 
 export type ButtonProps = {
-  /**
-   * The ARIA label for the Button
-   */
-  ariaLabel?: string;
-  /**
-   * The ID of the element that labels the Button
-   */
-  ariaLabelledBy?: string;
-  /**
-   * The ID of the element that describes the Button
-   */
-  ariaDescribedBy?: string;
   /**
    * The ref forwarded to the Button
    */
@@ -95,7 +88,7 @@ export type ButtonProps = {
   /**
    * The variant of the Button
    */
-  variant: (typeof buttonVariantValues)[number];
+  variant: (typeof buttonVariantValues)[number] | "tertiary";
 } & (
   | {
       endIcon?: ReactElement;
@@ -113,30 +106,55 @@ export type ButtonProps = {
       startIcon?: ReactElement;
     }
 ) &
-  AllowedProps;
+  Pick<
+    HtmlProps,
+    | "ariaControls"
+    | "ariaDescribedBy"
+    | "ariaExpanded"
+    | "ariaHasPopup"
+    | "ariaLabel"
+    | "ariaLabelledBy"
+    | "tabIndex"
+    | "testId"
+    | "translate"
+  >;
 
 const Button = ({
+  ariaControls,
   ariaDescribedBy,
+  ariaExpanded,
+  ariaHasPopup,
   ariaLabel,
   ariaLabelledBy,
   buttonRef,
   endIcon,
   id,
   isDisabled,
-  isFullWidth,
+  isFullWidth: isFullWidthProp,
   label = "",
   onClick,
   size = "medium",
   startIcon,
+  tabIndex,
   testId,
   tooltipText,
   translate,
   type = "button",
-  variant,
+  variant: variantProp,
 }: ButtonProps) => {
   const muiProps = useMuiProps();
 
+  // We're deprecating the "tertiary" variant, so map it to
+  // "secondary" in lieu of making a breaking change
+  const variant = variantProp === "tertiary" ? "secondary" : variantProp;
   const localButtonRef = useRef<HTMLButtonElement>(null);
+  const buttonContext = useButton();
+  const isFullWidth = useMemo(
+    () =>
+      buttonContext.isFullWidth ? buttonContext.isFullWidth : isFullWidthProp,
+    [buttonContext, isFullWidthProp],
+  );
+
   useImperativeHandle(
     buttonRef,
     () => {
@@ -146,62 +164,74 @@ const Button = ({
         },
       };
     },
-    []
+    [],
   );
 
   const renderButton = useCallback(
-    (muiProps) => (
-      <MuiButton
-        {...muiProps}
-        aria-label={ariaLabel}
-        aria-labelledby={ariaLabelledBy}
-        aria-describedby={ariaDescribedBy}
-        data-se={testId}
-        disabled={isDisabled}
-        endIcon={endIcon}
-        fullWidth={isFullWidth}
-        id={id}
-        onClick={onClick}
-        ref={localButtonRef}
-        size={size}
-        startIcon={startIcon}
-        translate={translate}
-        type={type}
-        variant={variant}
-      >
-        {label}
-      </MuiButton>
-    ),
+    (muiProps: MuiPropsContextType) => {
+      //@ts-expect-error ref is not an optional prop on the props context type
+      muiProps?.ref?.(localButtonRef.current);
+
+      return (
+        <MuiButton
+          {...muiProps}
+          aria-controls={ariaControls}
+          aria-describedby={ariaDescribedBy}
+          aria-expanded={ariaExpanded}
+          aria-haspopup={ariaHasPopup}
+          aria-label={ariaLabel}
+          aria-labelledby={ariaLabelledBy}
+          data-se={testId}
+          disabled={isDisabled}
+          endIcon={endIcon}
+          fullWidth={buttonContext.isFullWidth ?? isFullWidth}
+          id={id}
+          onClick={onClick}
+          ref={localButtonRef}
+          size={size}
+          startIcon={startIcon}
+          tabIndex={tabIndex}
+          translate={translate}
+          type={type}
+          variant={variant}
+        >
+          {label}
+        </MuiButton>
+      );
+    },
     [
+      ariaControls,
       ariaDescribedBy,
+      ariaExpanded,
+      ariaHasPopup,
       ariaLabel,
       ariaLabelledBy,
       endIcon,
       id,
       isDisabled,
       isFullWidth,
+      buttonContext.isFullWidth,
       label,
       onClick,
       size,
       startIcon,
+      tabIndex,
       testId,
       translate,
       type,
       variant,
-    ]
+    ],
   );
 
-  return (
-    <>
-      {tooltipText && !isDisabled && (
-        <Tooltip ariaType="description" placement="top" text={tooltipText}>
-          <MuiPropsContext.Consumer>{renderButton}</MuiPropsContext.Consumer>
-        </Tooltip>
-      )}
+  if (tooltipText) {
+    return (
+      <Tooltip ariaType="description" placement="top" text={tooltipText}>
+        <MuiPropsContext.Consumer>{renderButton}</MuiPropsContext.Consumer>
+      </Tooltip>
+    );
+  }
 
-      {(isDisabled || !tooltipText) && renderButton(muiProps)}
-    </>
-  );
+  return renderButton(muiProps);
 };
 
 const MemoizedButton = memo(Button);

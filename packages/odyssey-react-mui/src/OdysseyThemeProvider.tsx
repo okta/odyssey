@@ -42,7 +42,7 @@ const OdysseyThemeProvider = ({
 }: OdysseyThemeProviderProps) => {
   const odysseyTokens = useMemo(
     () => ({ ...Tokens, ...designTokensOverride }),
-    [designTokensOverride]
+    [designTokensOverride],
   );
   const odysseyTheme = useMemo(
     () =>
@@ -50,12 +50,12 @@ const OdysseyThemeProvider = ({
         odysseyTokens,
         shadowDomElement,
       }),
-    [odysseyTokens, shadowDomElement]
+    [odysseyTokens, shadowDomElement],
   );
 
   const customOdysseyTheme = useMemo(
     () => themeOverride && createTheme(deepmerge(odysseyTheme, themeOverride)),
-    [odysseyTheme, themeOverride]
+    [odysseyTheme, themeOverride],
   );
 
   return (

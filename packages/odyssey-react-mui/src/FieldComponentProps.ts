@@ -16,10 +16,6 @@ import { HintLink } from "./HintLink";
 
 export type FieldComponentProps = {
   /**
-   * The ID of the element that describes the Field
-   */
-  ariaDescribedBy?: string;
-  /**
    * If `error` is not undefined, the `input` will indicate an error.
    */
   errorMessage?: string;
@@ -59,4 +55,12 @@ export type FieldComponentProps = {
    * The name of the `input` element. Defaults to the `id` if not set.
    */
   name?: string;
+};
+
+export type FieldComponentRenderProps = {
+  ariaDescribedBy: string;
+  dataSe: string;
+  errorMessageElementId: string;
+  id: string;
+  labelElementId: string;
 };

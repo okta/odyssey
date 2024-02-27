@@ -27,6 +27,8 @@ import {
   GlobeIcon,
   CalendarIcon,
 } from "@okta/odyssey-react-mui/icons";
+
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import icons from "../../../../.storybook/components/iconUtils";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
@@ -125,6 +127,7 @@ const storybookMeta: Meta<MenuButtonProps> = {
         },
       },
     },
+    isDisabled: fieldComponentPropsMetaData.isDisabled,
     isOverflow: {
       control: "boolean",
       description: "If the MenuButton is an overflow menu or standard menu.",
@@ -207,7 +210,7 @@ export const Simple: StoryObj<MenuButtonProps> = {
 export const ActionIcons: StoryObj<MenuButtonProps> = {
   args: {
     children: [
-      <MenuItem key="1">
+      <MenuItem key="1" isDisabled>
         <ListItemIcon>
           <GroupIcon />
         </ListItemIcon>
@@ -296,6 +299,19 @@ export const IconButton: StoryObj<MenuButtonProps> = {
   args: {
     ariaLabel: "More actions",
     buttonLabel: "",
+    children: [
+      <MenuItem key="1">View details</MenuItem>,
+      <MenuItem key="2">Edit configuration</MenuItem>,
+      <MenuItem key="3">Launch</MenuItem>,
+    ],
+    tooltipText: "More actions",
+  },
+};
+
+export const Disabled: StoryObj<MenuButtonProps> = {
+  args: {
+    buttonLabel: "Cargo options",
+    isDisabled: true,
     children: [
       <MenuItem key="1">View details</MenuItem>,
       <MenuItem key="2">Edit configuration</MenuItem>,

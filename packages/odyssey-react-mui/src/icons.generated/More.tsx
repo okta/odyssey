@@ -37,7 +37,7 @@ export const MoreIcon = forwardRef<SVGSVGElement, MoreIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 MoreIcon.displayName = "MoreIcon";

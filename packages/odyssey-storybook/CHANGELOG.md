@@ -3,6 +3,113 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.14.1](https://github.com/okta/odyssey/compare/v1.14.0...v1.14.1) (2024-02-26)
+
+**Note:** Version bump only for package @okta/odyssey-storybook
+
+## [1.14.0](https://github.com/okta/odyssey/compare/v1.13.12...v1.14.0) (2024-02-26)
+
+### Features
+
+- add drawer component ([563655c](https://github.com/okta/odyssey/commit/563655c793968734aa2bbde1f5bf359267526404))
+
+### Bug Fixes
+
+- add async for tests ([30144dd](https://github.com/okta/odyssey/commit/30144dddd1ffd17cf2315dade6f5ba473fca4afb))
+- add fix for tests ([8ec6f1a](https://github.com/okta/odyssey/commit/8ec6f1a8172dd2b7b5f8b6ef53dcdcb7559e9644))
+- remove tertiary button from example ([2598aa7](https://github.com/okta/odyssey/commit/2598aa7a04e78e9d547b3e149efdd122028a4c09))
+- revert test updates ([a32e9d7](https://github.com/okta/odyssey/commit/a32e9d7e1aebf81f21769df61039978dbd613c58))
+- undo unrelated test-runner change ([250fcd6](https://github.com/okta/odyssey/commit/250fcd620d1dfb53cd95b639395c90dd8307a372))
+- update test runner to preVisit ([f948a1f](https://github.com/okta/odyssey/commit/f948a1f600486e14491b4b86df889282ac2fbad3))
+- updates based on PR feedback ([9496a99](https://github.com/okta/odyssey/commit/9496a990797a61c023e9ef0420f71c977ccf696c))
+- Upgrade every package ([#2136](https://github.com/okta/odyssey/issues/2136)) ([89b6534](https://github.com/okta/odyssey/commit/89b65342755a30d0e947f5ffb75e6bbe00268442))
+
+## [1.13.12](https://github.com/okta/odyssey/compare/v1.13.11...v1.13.12) (2024-02-16)
+
+**Note:** Version bump only for package @okta/odyssey-storybook
+
+## [1.13.11](https://github.com/okta/odyssey/compare/v1.13.10...v1.13.11) (2024-02-15)
+
+**Note:** Version bump only for package @okta/odyssey-storybook
+
+## [1.13.10](https://github.com/okta/odyssey/compare/v1.13.9...v1.13.10) (2024-02-14)
+
+**Note:** Version bump only for package @okta/odyssey-storybook
+
+## [1.13.9](https://github.com/okta/odyssey/compare/v1.13.8...v1.13.9) (2024-02-14)
+
+**Note:** Version bump only for package @okta/odyssey-storybook
+
+## [1.13.8](https://github.com/okta/odyssey/compare/v1.13.7...v1.13.8) (2024-02-14)
+
+**Note:** Version bump only for package @okta/odyssey-storybook
+
+## [1.13.7](https://github.com/okta/odyssey/compare/v1.13.6...v1.13.7) (2024-02-13)
+
+**Note:** Version bump only for package @okta/odyssey-storybook
+
+## [1.13.6](https://github.com/okta/odyssey/compare/v1.13.5...v1.13.6) (2024-02-13)
+
+**Note:** Version bump only for package @okta/odyssey-storybook
+
+## [1.13.5](https://github.com/okta/odyssey/compare/v1.13.4...v1.13.5) (2024-02-13)
+
+**Note:** Version bump only for package @okta/odyssey-storybook
+
+## [1.13.4](https://github.com/okta/odyssey/compare/v1.13.3...v1.13.4) (2024-02-12)
+
+**Note:** Version bump only for package @okta/odyssey-storybook
+
+## [1.13.3](https://github.com/okta/odyssey/compare/v1.13.2...v1.13.3) (2024-02-09)
+
+**Note:** Version bump only for package @okta/odyssey-storybook
+
+## [1.13.2](https://github.com/okta/odyssey/compare/v1.13.1...v1.13.2) (2024-02-08)
+
+### Bug Fixes
+
+- remove unused type ([#2112](https://github.com/okta/odyssey/issues/2112)) ([9083d7c](https://github.com/okta/odyssey/commit/9083d7c7a6a2088fb5b40290d1a2c2e047f3d354))
+
+## [1.13.1](https://github.com/okta/odyssey/compare/v1.13.0...v1.13.1) (2024-02-08)
+
+**Note:** Version bump only for package @okta/odyssey-storybook
+
+## [1.13.0](https://github.com/okta/odyssey/compare/v1.12.11...v1.13.0) (2024-02-08)
+
+**Note:** Version bump only for package @okta/odyssey-storybook
+
+## [1.12.11](https://github.com/okta/odyssey/compare/v1.12.10...v1.12.11) (2024-02-06)
+
+**Note:** Version bump only for package @okta/odyssey-storybook
+
+## [1.12.10](https://github.com/okta/odyssey/compare/v1.12.9...v1.12.10) (2024-02-05)
+
+**Note:** Version bump only for package @okta/odyssey-storybook
+
+## [1.12.9](https://github.com/okta/odyssey/compare/v1.12.8...v1.12.9) (2024-02-02)
+
+**Note:** Version bump only for package @okta/odyssey-storybook
+
+## [1.12.8](https://github.com/okta/odyssey/compare/v1.12.7...v1.12.8) (2024-02-02)
+
+**Note:** Version bump only for package @okta/odyssey-storybook
+
+## [1.12.7](https://github.com/okta/odyssey/compare/v1.12.6...v1.12.7) (2024-02-02)
+
+**Note:** Version bump only for package @okta/odyssey-storybook
+
+## [1.12.6](https://github.com/okta/odyssey/compare/v1.12.5...v1.12.6) (2024-02-01)
+
+**Note:** Version bump only for package @okta/odyssey-storybook
+
+## [1.12.5](https://github.com/okta/odyssey/compare/v1.12.4...v1.12.5) (2024-02-01)
+
+**Note:** Version bump only for package @okta/odyssey-storybook
+
+## [1.12.4](https://github.com/okta/odyssey/compare/v1.12.3...v1.12.4) (2024-02-01)
+
+**Note:** Version bump only for package @okta/odyssey-storybook
+
 ## [1.12.3](https://github.com/okta/odyssey/compare/v1.12.2...v1.12.3) (2024-02-01)
 
 ### Bug Fixes

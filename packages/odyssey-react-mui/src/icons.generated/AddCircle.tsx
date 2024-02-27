@@ -37,7 +37,7 @@ export const AddCircleIcon = forwardRef<SVGSVGElement, AddCircleIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 AddCircleIcon.displayName = "AddCircleIcon";

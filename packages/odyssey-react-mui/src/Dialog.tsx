@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { useTranslation } from "react-i18next";
 import { Dialog as MuiDialog } from "@mui/material";
 import {
   DialogTitle,
@@ -28,21 +29,25 @@ import {
   ReactElement,
 } from "react";
 
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 
 export type DialogProps = {
   /**
+   * @deprecated `aria-label` for close button comes from translation file
+   */
+  ariaLabel?: string;
+  /**
    * An optional Button object to be situated in the Dialog footer. Should almost always be of variant `primary`.
    */
-  callToActionFirstComponent?: ReactElement<typeof Button>;
+  primaryCallToActionComponent?: ReactElement<typeof Button>;
   /**
    * An optional Button object to be situated in the Dialog footer, alongside the `callToActionPrimaryComponent`.
    */
-  callToActionSecondComponent?: ReactElement<typeof Button>;
+  secondaryCallToActionComponent?: ReactElement<typeof Button>;
   /**
    * An optional Button object to be situated in the Dialog footer, alongside the other two `callToAction` components.
    */
-  callToActionLastComponent?: ReactElement<typeof Button>;
+  tertiaryCallToActionComponent?: ReactElement<typeof Button>;
   /**
    * The content of the Dialog. May be a `string` or any other `ReactNode` or array of `ReactNode`s.
    */
@@ -59,21 +64,20 @@ export type DialogProps = {
    * The title of the Dialog
    */
   title: string;
-  ariaLabel: string;
-} & AllowedProps;
+} & Pick<HtmlProps, "testId" | "translate">;
 
 const Dialog = ({
-  callToActionFirstComponent,
-  callToActionSecondComponent,
-  callToActionLastComponent,
+  primaryCallToActionComponent,
+  secondaryCallToActionComponent,
+  tertiaryCallToActionComponent,
   children,
   isOpen,
   onClose,
   testId,
   title,
   translate,
-  ariaLabel,
 }: DialogProps) => {
+  const { t } = useTranslation();
   const [isContentScrollable, setIsContentScrollable] = useState(false);
   const dialogContentRef = useRef<HTMLDivElement>(null);
 
@@ -83,8 +87,9 @@ const Dialog = ({
     const handleContentScroll = () => {
       const dialogContentElement = dialogContentRef.current;
       if (dialogContentElement) {
+        cancelAnimationFrame(frameId);
         setIsContentScrollable(
-          dialogContentElement.scrollHeight > dialogContentElement.clientHeight
+          dialogContentElement.scrollHeight > dialogContentElement.clientHeight,
         );
       }
       frameId = requestAnimationFrame(handleContentScroll);
@@ -111,8 +116,7 @@ const Dialog = ({
       <DialogTitle translate={translate}>
         {title}
         <Button
-          ariaLabel={ariaLabel}
-          label=""
+          ariaLabel={t("close.text")}
           onClick={onClose}
           size="small"
           startIcon={<CloseIcon />}
@@ -120,22 +124,23 @@ const Dialog = ({
         />
       </DialogTitle>
       <DialogContent
-        dividers={isContentScrollable}
-        ref={dialogContentRef}
         {...(isContentScrollable && {
+          //Sets tabIndex on content element if scrollable so content is easier to navigate with the keyboard
           tabIndex: 0,
         })}
+        dividers={isContentScrollable}
+        ref={dialogContentRef}
       >
         {content}
       </DialogContent>
 
-      {(callToActionFirstComponent ||
-        callToActionSecondComponent ||
-        callToActionLastComponent) && (
+      {(primaryCallToActionComponent ||
+        secondaryCallToActionComponent ||
+        tertiaryCallToActionComponent) && (
         <DialogActions>
-          {callToActionLastComponent}
-          {callToActionSecondComponent}
-          {callToActionFirstComponent}
+          {tertiaryCallToActionComponent}
+          {secondaryCallToActionComponent}
+          {primaryCallToActionComponent}
         </DialogActions>
       )}
     </MuiDialog>

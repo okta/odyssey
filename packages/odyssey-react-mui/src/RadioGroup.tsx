@@ -18,8 +18,11 @@ import { memo, ReactElement, useCallback, useRef } from "react";
 
 import { Radio, RadioProps } from "./Radio";
 import { Field } from "./Field";
-import { FieldComponentProps } from "./FieldComponentProps";
-import type { AllowedProps } from "./AllowedProps";
+import {
+  FieldComponentProps,
+  FieldComponentRenderProps,
+} from "./FieldComponentProps";
+import type { HtmlProps } from "./HtmlProps";
 import { getControlState, useInputValues } from "./inputUtils";
 
 export type RadioGroupProps = {
@@ -45,7 +48,6 @@ export type RadioGroupProps = {
   value?: RadioProps["value"];
 } & Pick<
   FieldComponentProps,
-  | "ariaDescribedBy"
   | "errorMessage"
   | "errorMessageList"
   | "hint"
@@ -54,7 +56,12 @@ export type RadioGroupProps = {
   | "isDisabled"
   | "name"
 > &
-  AllowedProps;
+  Pick<HtmlProps, "ariaDescribedBy" | "testId" | "translate">;
+
+type FieldRenderProps = Partial<
+  Pick<FieldComponentRenderProps, "ariaDescribedBy" | "errorMessageElementId">
+> &
+  Pick<FieldComponentRenderProps, "id" | "labelElementId">;
 
 const RadioGroup = ({
   ariaDescribedBy,
@@ -74,7 +81,10 @@ const RadioGroup = ({
   value,
 }: RadioGroupProps) => {
   const controlledStateRef = useRef(
-    getControlState({ controlledValue: value, uncontrolledValue: defaultValue })
+    getControlState({
+      controlledValue: value,
+      uncontrolledValue: defaultValue,
+    }),
   );
   const inputValues = useInputValues({
     defaultValue,
@@ -86,10 +96,15 @@ const RadioGroup = ({
     (event, value) => {
       onChangeProp?.(event, value);
     },
-    [onChangeProp]
+    [onChangeProp],
   );
   const renderFieldComponent = useCallback(
-    ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
+    ({
+      ariaDescribedBy,
+      errorMessageElementId,
+      id,
+      labelElementId,
+    }: FieldRenderProps) => (
       <MuiRadioGroup
         {...inputValues}
         aria-describedby={ariaDescribedBy}
@@ -104,7 +119,7 @@ const RadioGroup = ({
         {children}
       </MuiRadioGroup>
     ),
-    [children, inputValues, nameOverride, onChange, testId, translate]
+    [children, inputValues, nameOverride, onChange, testId, translate],
   );
 
   return (

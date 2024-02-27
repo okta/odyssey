@@ -19,7 +19,7 @@ import {
 import { memo, useCallback, useRef, useImperativeHandle } from "react";
 
 import { FieldComponentProps } from "./FieldComponentProps";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 import { FocusHandle } from "./inputUtils";
 
 export type RadioProps = {
@@ -52,7 +52,7 @@ export type RadioProps = {
    */
   onBlur?: MuiFormControlLabelProps["onBlur"];
 } & Pick<FieldComponentProps, "isDisabled" | "name"> &
-  AllowedProps;
+  Pick<HtmlProps, "testId" | "translate">;
 
 const Radio = ({
   inputRef,
@@ -77,21 +77,21 @@ const Radio = ({
         },
       };
     },
-    []
+    [],
   );
 
   const onChange = useCallback<NonNullable<MuiRadioProps["onChange"]>>(
     (event, checked) => {
       onChangeProp?.(event, checked);
     },
-    [onChangeProp]
+    [onChangeProp],
   );
 
   const onBlur = useCallback<NonNullable<MuiFormControlLabelProps["onBlur"]>>(
     (event) => {
       onBlurProp?.(event);
     },
-    [onBlurProp]
+    [onBlurProp],
   );
 
   return (

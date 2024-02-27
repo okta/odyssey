@@ -15,5 +15,5 @@ import { MaterialReactTable } from "material-react-table";
 export type DefaultMaterialReactTableData = Record<string, unknown>;
 
 export type MaterialReactTableProps<
-  TData extends DefaultMaterialReactTableData
+  TData extends DefaultMaterialReactTableData,
 > = Parameters<typeof MaterialReactTable<TData>>[0];

@@ -17,14 +17,14 @@ import { ScreenReaderText } from "./ScreenReaderText";
 import { ErrorMessageList } from "./ErrorMessageList";
 import { useTranslation } from "react-i18next";
 
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 import { Box } from "./Box";
 
 export type FieldErrorProps = {
   id?: string;
   message?: string;
   messageList?: string[];
-} & AllowedProps;
+} & Pick<HtmlProps, "testId" | "translate">;
 
 const FieldError = ({
   id,
@@ -38,7 +38,7 @@ const FieldError = ({
   return (
     <FormHelperText data-se={testId} error id={id} translate={translate}>
       <ScreenReaderText translate={translate}>{`${t(
-        "fielderror.screenreader.text"
+        "fielderror.screenreader.text",
       )}:`}</ScreenReaderText>
       <Box>
         {message}

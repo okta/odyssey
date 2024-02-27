@@ -16,7 +16,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { Accordion, AccordionProps } from "@okta/odyssey-react-mui";
 
 const storybookMeta: Meta<AccordionProps> = {
-  title: "Labs Components/Accordion",
+  title: "MUI Components/Accordion",
   component: Accordion,
   argTypes: {
     children: {
@@ -34,15 +34,6 @@ const storybookMeta: Meta<AccordionProps> = {
       table: {
         type: {
           summary: "ReactNode",
-        },
-      },
-    },
-    hasShadow: {
-      control: "boolean",
-      description: "",
-      table: {
-        type: {
-          summary: "boolean",
         },
       },
     },
@@ -67,7 +58,6 @@ const storybookMeta: Meta<AccordionProps> = {
   },
   args: {
     children: "Lorem ipsum dolor sit amet.",
-    hasShadow: true,
     isDisabled: false,
     isExpanded: undefined,
     label: "Title",
@@ -77,7 +67,7 @@ const storybookMeta: Meta<AccordionProps> = {
     backgrounds: {
       default: "gray",
       values: [
-        { name: "gray", value: "#d7d7d7" },
+        { name: "gray", value: "#f4f4f4" },
         { name: "white", value: "#ffffff" },
       ],
     },
@@ -94,7 +84,6 @@ export const Single: StoryObj<AccordionProps> = {
     return (
       <Accordion
         label={props.label}
-        hasShadow={props.hasShadow}
         isDisabled={props.isDisabled}
         isExpanded={props.isExpanded}
       >
@@ -113,22 +102,21 @@ export const Multi: StoryObj<AccordionProps> = {
       <>
         <Accordion
           label={props.label}
-          hasShadow={props.hasShadow}
           isDisabled={props.isDisabled}
           isExpanded={props.isExpanded}
         >
           {props.children}
         </Accordion>
-        <Accordion label="Accordion 2" hasShadow={props.hasShadow}>
+        <Accordion label="Accordion 2">
           This is the second accordion item.
         </Accordion>
-        <Accordion label="Accordion 3" hasShadow={props.hasShadow}>
+        <Accordion label="Accordion 3">
           This is the third accordion item.
         </Accordion>
-        <Accordion label="Accordion 4" hasShadow={props.hasShadow}>
+        <Accordion label="Accordion 4">
           This is the fourth accordion item.
         </Accordion>
-        <Accordion label="Accordion 5" hasShadow={props.hasShadow}>
+        <Accordion label="Accordion 5">
           This is the fifth accordion item.
         </Accordion>
       </>

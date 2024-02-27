@@ -18,7 +18,7 @@ import { menuItemClasses } from "@mui/material/MenuItem";
 import { memo, useCallback, useContext, type ReactNode } from "react";
 
 import { MenuContext } from "./MenuContext";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 
 export type MenuItemProps = {
   /**
@@ -51,7 +51,7 @@ export type MenuItemProps = {
    * - "destructive": A variant indicating a destructive action.
    */
   variant?: "default" | "destructive";
-} & AllowedProps;
+} & Pick<HtmlProps, "testId">;
 
 const MenuItem = ({
   children,
@@ -72,7 +72,7 @@ const MenuItem = ({
         closeMenu();
       }
     },
-    [onClickProp, closeMenu, shouldCloseOnSelect]
+    [onClickProp, closeMenu, shouldCloseOnSelect],
   );
 
   return (

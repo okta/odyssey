@@ -16,12 +16,13 @@ import {
   InputBase,
   UseAutocompleteProps,
   AutocompleteValue,
+  AutocompleteRenderInputParams,
 } from "@mui/material";
 import { memo, useCallback, useMemo, useRef } from "react";
 
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 import {
   ComponentControlledState,
   useInputValues,
@@ -31,7 +32,7 @@ import {
 export type AutocompleteProps<
   OptionType,
   HasMultipleChoices extends boolean | undefined,
-  IsCustomValueAllowed extends boolean | undefined
+  IsCustomValueAllowed extends boolean | undefined,
 > = {
   /**
    * The default value. Use when the component is not controlled.
@@ -161,7 +162,6 @@ export type AutocompleteProps<
   getIsOptionEqualToValue?: (option: OptionType, value: OptionType) => boolean;
 } & Pick<
   FieldComponentProps,
-  | "ariaDescribedBy"
   | "errorMessage"
   | "errorMessageList"
   | "hint"
@@ -171,12 +171,12 @@ export type AutocompleteProps<
   | "isOptional"
   | "name"
 > &
-  AllowedProps;
+  Pick<HtmlProps, "ariaDescribedBy" | "testId" | "translate">;
 
 const Autocomplete = <
   OptionType,
   HasMultipleChoices extends boolean | undefined,
-  IsCustomValueAllowed extends boolean | undefined
+  IsCustomValueAllowed extends boolean | undefined,
 >({
   ariaDescribedBy,
   defaultValue,
@@ -206,7 +206,10 @@ const Autocomplete = <
   translate,
 }: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
   const controlledStateRef = useRef(
-    getControlState({ controlledValue: value, uncontrolledValue: defaultValue })
+    getControlState({
+      controlledValue: value,
+      uncontrolledValue: defaultValue,
+    }),
   );
   const defaultValueProp = useMemo<
     | AutocompleteValue<
@@ -245,13 +248,18 @@ const Autocomplete = <
   }, [inputValue]);
 
   const renderInput = useCallback(
-    ({ InputLabelProps, InputProps, ...params }) => (
+    ({
+      InputLabelProps,
+      InputProps,
+      ...params
+    }: AutocompleteRenderInputParams) => (
       <Field
         ariaDescribedBy={ariaDescribedBy}
         errorMessage={errorMessage}
         errorMessageList={errorMessageList}
         fieldType="single"
         hasVisibleLabel
+        //@ts-expect-error htmlFor does not exist ont he InputLabelProps for autocomplete
         id={InputLabelProps.htmlFor}
         hint={hint}
         HintLinkComponent={HintLinkComponent}
@@ -290,7 +298,7 @@ const Autocomplete = <
       label,
       nameOverride,
       testId,
-    ]
+    ],
   );
   const onChange = useCallback<
     NonNullable<
@@ -305,7 +313,7 @@ const Autocomplete = <
     (event, value, reason, details) => {
       onChangeProp?.(event, value, reason, details);
     },
-    [onChangeProp]
+    [onChangeProp],
   );
 
   const onInputChange = useCallback<
@@ -321,7 +329,7 @@ const Autocomplete = <
     (event, value, reason) => {
       onInputChangeProp?.(event, value, reason);
     },
-    [onInputChangeProp]
+    [onInputChangeProp],
   );
 
   return (

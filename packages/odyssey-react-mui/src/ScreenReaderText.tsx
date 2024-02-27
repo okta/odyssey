@@ -13,14 +13,14 @@
 import { memo, ReactNode } from "react";
 import { Box } from "@mui/material";
 import { visuallyHidden } from "@mui/utils";
-import { AllowedProps } from "./AllowedProps";
+import { HtmlProps } from "./HtmlProps";
 
 export type ScreenReaderTextProps = {
   /**
    * The visually-hidden text.
    */
   children: ReactNode;
-} & AllowedProps;
+} & Pick<HtmlProps, "translate">;
 
 /**
  * MUI sx expects you pass in a CSS object, not an object with CSS.

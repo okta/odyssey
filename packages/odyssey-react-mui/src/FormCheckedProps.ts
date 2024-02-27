@@ -15,7 +15,7 @@ import { SwitchBaseProps } from "@mui/material/internal/SwitchBase";
 type SwitchOnChangeProp = Pick<SwitchBaseProps, "onChange">;
 
 export type ControlledCheckedFieldProps<
-  TogglableInputElement extends SwitchOnChangeProp
+  TogglableInputElement extends SwitchOnChangeProp,
 > = {
   /**
    * Sets the checked state of the Checkbox
@@ -34,7 +34,7 @@ export type ControlledCheckedFieldProps<
 };
 
 export type UncontrolledCheckedFieldProps<
-  TogglableInputElement extends SwitchOnChangeProp
+  TogglableInputElement extends SwitchOnChangeProp,
 > = {
   /**
    * Sets the checked state of the Checkbox
@@ -53,7 +53,7 @@ export type UncontrolledCheckedFieldProps<
 };
 
 export type CheckedFieldProps<
-  TogglableInputElement extends SwitchOnChangeProp
+  TogglableInputElement extends SwitchOnChangeProp,
 > =
   | ControlledCheckedFieldProps<TogglableInputElement>
   | UncontrolledCheckedFieldProps<TogglableInputElement>;

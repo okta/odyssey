@@ -20,6 +20,7 @@ import {
   useRef,
   useState,
 } from "react";
+import styled from "@emotion/styled";
 import { Autocomplete } from "../Autocomplete";
 import { Box } from "../Box";
 import { TagList } from "../TagList";
@@ -129,10 +130,13 @@ const DataFilters = ({
   const [filters, setFilters] = useState<DataFilter[]>(filtersProp);
 
   const initialInputValues = useMemo(() => {
-    return filtersProp.reduce((accumulator, filter) => {
-      accumulator[filter.id] = filter.value;
-      return accumulator;
-    }, {} as Record<string, DataFilterValue>);
+    return filtersProp.reduce(
+      (accumulator, filter) => {
+        accumulator[filter.id] = filter.value;
+        return accumulator;
+      },
+      {} as Record<string, DataFilterValue>,
+    );
   }, [filtersProp]);
 
   const [inputValues, setInputValues] = useState(initialInputValues);
@@ -140,7 +144,7 @@ const DataFilters = ({
   const [searchValue, setSearchValue] = useState<string>(defaultSearchTerm);
   const activeFilters = useMemo(() => {
     return filters.filter(
-      (filter) => typeof filter.value === "string" && filter.value
+      (filter) => typeof filter.value === "string" && filter.value,
     );
   }, [filters]);
   const [isFiltersMenuOpen, setIsFiltersMenuOpen] = useState<boolean>(false);
@@ -175,21 +179,59 @@ const DataFilters = ({
     }
   }, [onChangeSearch, searchValue, searchDelayTime, hasSearchSubmitButton]);
 
-  const handleInputChange = useCallback(
-    (filterId: string, value: DataFilterValue, submit: boolean = false) => {
+  const autocompleteOptions = useMemo(() => {
+    // Check if filterPopoverCurrentFilter and filterPopoverCurrentFilter.options are defined
+    if (
+      filterPopoverCurrentFilter?.variant === "autocomplete" &&
+      filterPopoverCurrentFilter?.options
+    ) {
+      return filterPopoverCurrentFilter.options.map((option) => ({
+        label: option.label,
+      }));
+    }
+
+    // if filterPopoverCurrentFilter or filterPopoverCurrentFilter.options is undefined
+    return [];
+  }, [filterPopoverCurrentFilter]);
+
+  const updateInputValue = useCallback(
+    ({ filterId, value }: { filterId: string; value: DataFilterValue }) => {
       setInputValues({ ...inputValues, [filterId]: value });
-
-      if (submit) {
-        const updatedFilters = filtersProp.map((filter) => ({
-          ...filter,
-          value: filter.id === filterId ? value : inputValues[filter.id],
-        }));
-
-        setFilters(updatedFilters);
-      }
     },
-    [inputValues, filtersProp]
+    [inputValues],
   );
+
+  const updateFilters = useCallback(
+    ({ filterId, value }: { filterId: string; value: DataFilterValue }) => {
+      const updatedFilters = filtersProp.map((filter) => ({
+        ...filter,
+        value: filter.id === filterId ? value : inputValues[filter.id],
+      }));
+
+      setFilters(updatedFilters);
+    },
+    [inputValues, filtersProp],
+  );
+
+  const getAutoCompleteLabel = <
+    Value extends { label: string } | Array<{ label: string }>,
+  >(
+    value: Value,
+  ) => {
+    if (Array.isArray(value)) {
+      // Iterating to find the label
+      return value
+        .map((valueElement) => {
+          if (typeof valueElement === "string") {
+            return undefined;
+          }
+          return valueElement.label;
+        })
+        .filter((item): item is string => Boolean(item));
+    }
+
+    return value?.label;
+  };
 
   const handleMultiSelectChange = useCallback(
     (filterId: string, value: string, submit: boolean = false) => {
@@ -217,14 +259,17 @@ const DataFilters = ({
         setFilters(updatedFilters);
       }
     },
-    [inputValues, filtersProp]
+    [inputValues, filtersProp],
   );
 
   const clearAllFilters = useCallback(() => {
-    const updatedInputValues = filtersProp.reduce((accumulator, filter) => {
-      accumulator[filter.id] = undefined;
-      return accumulator;
-    }, {} as Record<string, DataFilterValue>);
+    const updatedInputValues = filtersProp.reduce(
+      (accumulator, filter) => {
+        accumulator[filter.id] = undefined;
+        return accumulator;
+      },
+      {} as Record<string, DataFilterValue>,
+    );
 
     setInputValues(updatedInputValues);
 
@@ -245,6 +290,15 @@ const DataFilters = ({
     setFilters(updatedFilters);
   }, [inputValues, filtersProp]);
 
+  const AutocompleteOuterContainer = styled.div`
+    display: flex;
+    gap: 2;
+    align-items: center;
+    alignitems: "flex-end";
+  `;
+  const AutocompleteInnerContainer = styled.div`
+    width: "100%";
+  `;
   const filterMenu = useMemo(
     () => (
       <>
@@ -279,7 +333,7 @@ const DataFilters = ({
             // `filter` is the initial set of filters provided to the comoponent, so its
             // value prop may not reflect the current value of the filter.
             const latestFilterValue = filters.find(
-              (f) => f.id === filter.id
+              (f) => f.id === filter.id,
             )?.value;
 
             return (
@@ -308,8 +362,8 @@ const DataFilters = ({
                         latestFilterValue.length === 0)
                         ? `Any ${filter.label.toLowerCase()}`
                         : Array.isArray(latestFilterValue)
-                        ? `${latestFilterValue.length} selected`
-                        : latestFilterValue}
+                          ? `${latestFilterValue.length} selected`
+                          : latestFilterValue}
                     </Subordinate>
                   </Box>
                   <ChevronRightIcon />
@@ -320,7 +374,7 @@ const DataFilters = ({
         </MuiMenu>
       </>
     ),
-    [isFiltersMenuOpen, filtersMenuAnchorElement, filtersProp, filters]
+    [isFiltersMenuOpen, filtersMenuAnchorElement, filtersProp, filters],
   );
 
   return (
@@ -367,23 +421,43 @@ const DataFilters = ({
                     {/* Autocomplete */}
                     {filterPopoverCurrentFilter?.variant === "autocomplete" &&
                       filterPopoverCurrentFilter?.options && (
-                        <Autocomplete
-                          label={filterPopoverCurrentFilter.label}
-                          value={
-                            (inputValues[
-                              filterPopoverCurrentFilter.id
-                            ] as string) ?? ""
-                          }
-                          onBlur={function ro() {}}
-                          onChange={function ro() {}}
-                          onFocus={function ro() {}}
-                          onInputChange={function ro() {}}
-                          options={filterPopoverCurrentFilter.options.map(
-                            (option: { label: string }) => ({
-                              label: option.label,
-                            })
-                          )}
-                        />
+                        <AutocompleteOuterContainer>
+                          <AutocompleteInnerContainer>
+                            <Autocomplete
+                              label={filterPopoverCurrentFilter.label}
+                              value={
+                                inputValues[filterPopoverCurrentFilter.id] ?? ""
+                              }
+                              onChange={(_, value) => {
+                                const label =
+                                  typeof value === "string"
+                                    ? getAutoCompleteLabel({ label: value })
+                                    : Array.isArray(value)
+                                      ? getAutoCompleteLabel(
+                                          value.map((item) =>
+                                            typeof item === "string"
+                                              ? { label: item }
+                                              : item,
+                                          ),
+                                        )
+                                      : value
+                                        ? getAutoCompleteLabel(value)
+                                        : "";
+
+                                updateInputValue({
+                                  filterId: filterPopoverCurrentFilter.id,
+                                  value: label,
+                                });
+                              }}
+                              options={autocompleteOptions}
+                            />
+                          </AutocompleteInnerContainer>
+                          <Button
+                            variant="primary"
+                            endIcon={<CheckIcon />}
+                            type="submit"
+                          />
+                        </AutocompleteOuterContainer>
                       )}
                     {/* Text or Number */}
                     {(filterPopoverCurrentFilter?.variant === "text" ||
@@ -410,10 +484,10 @@ const DataFilters = ({
                               ] as string) ?? ""
                             }
                             onChange={(ev) =>
-                              handleInputChange(
-                                filterPopoverCurrentFilter.id,
-                                ev.currentTarget.value
-                              )
+                              updateInputValue({
+                                filterId: filterPopoverCurrentFilter.id,
+                                value: ev.currentTarget.value,
+                              })
                             }
                             endAdornment={
                               inputValues[filterPopoverCurrentFilter.id] && (
@@ -421,11 +495,15 @@ const DataFilters = ({
                                   size="small"
                                   aria-label="Clear filter"
                                   onClick={() => {
-                                    handleInputChange(
-                                      filterPopoverCurrentFilter.id,
-                                      undefined,
-                                      true
-                                    );
+                                    updateInputValue({
+                                      filterId: filterPopoverCurrentFilter.id,
+                                      value: undefined,
+                                    });
+
+                                    updateFilters({
+                                      filterId: filterPopoverCurrentFilter.id,
+                                      value: undefined,
+                                    });
                                   }}
                                 >
                                   <CloseCircleFilledIcon />
@@ -466,11 +544,11 @@ const DataFilters = ({
                                   handleMultiSelectChange(
                                     filterPopoverCurrentFilter.id,
                                     option.value,
-                                    true
+                                    true,
                                   )
                                 }
                               />
-                            )
+                            ),
                           )}
                         </CheckboxGroup>
                       )}
@@ -480,13 +558,17 @@ const DataFilters = ({
                       filterPopoverCurrentFilter?.options && (
                         <RadioGroup
                           label={filterPopoverCurrentFilter.label}
-                          onChange={(_, value) =>
-                            handleInputChange(
-                              filterPopoverCurrentFilter.id,
+                          onChange={(_, value) => {
+                            updateInputValue({
+                              filterId: filterPopoverCurrentFilter.id,
                               value,
-                              true
-                            )
-                          }
+                            });
+
+                            updateFilters({
+                              filterId: filterPopoverCurrentFilter.id,
+                              value,
+                            });
+                          }}
                         >
                           <Radio
                             label="Any"
@@ -508,7 +590,7 @@ const DataFilters = ({
                                     ] === option.value
                                   }
                                 />
-                              )
+                              ),
                             )}
                           </>
                         </RadioGroup>
@@ -561,7 +643,7 @@ const DataFilters = ({
               <Button
                 variant="secondary"
                 label="Clear filters"
-                onClick={() => clearAllFilters()}
+                onClick={clearAllFilters}
               />
             </Box>
           )}
@@ -585,7 +667,17 @@ const DataFilters = ({
               <Tag
                 key={filter.label}
                 label={`${filter.label}: ${filter.value}`}
-                onRemove={() => handleInputChange(filter.id, undefined, true)}
+                onRemove={() => {
+                  updateInputValue({
+                    filterId: filter.id,
+                    value: undefined,
+                  });
+
+                  updateFilters({
+                    filterId: filter.id,
+                    value: undefined,
+                  });
+                }}
               />
             ))}
           </TagList>

@@ -10,6 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { memo, type ReactElement, useCallback, useMemo, useState } from "react";
+import {
+  Divider,
+  ListSubheader,
+  Menu as MuiMenu,
+  PopoverOrigin,
+} from "@mui/material";
+
 import {
   Button,
   buttonSizeValues,
@@ -17,34 +25,15 @@ import {
   MenuItem,
   useUniqueId,
 } from "./";
-import {
-  Divider,
-  ListSubheader,
-  Menu as MuiMenu,
-  PopoverOrigin,
-} from "@mui/material";
 import { ChevronDownIcon, MoreIcon } from "./icons.generated";
-import { memo, type ReactElement, useCallback, useMemo, useState } from "react";
-
+import { FieldComponentProps } from "./FieldComponentProps";
 import { MenuContext, MenuContextType } from "./MenuContext";
 import { NullElement } from "./NullElement";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 
 export const menuAlignmentValues = ["left", "right"] as const;
 
 export type MenuButtonProps = {
-  /**
-   * The ARIA label for the Button
-   */
-  ariaLabel?: string;
-  /**
-   * The ID of the element that labels the Button
-   */
-  ariaLabelledBy?: string;
-  /**
-   * The ID of the element that describes the Button
-   */
-  ariaDescribedBy?: string;
   /**
    * The label on the triggering Button
    */
@@ -92,24 +81,22 @@ export type MenuButtonProps = {
    * The tooltip text for the Button if it's icon-only
    */
   tooltipText?: string;
-} & (
-  | {
-      ariaLabel?: string;
-      ariaLabelledBy?: string;
-      buttonLabel: string;
-    }
-  | {
-      ariaLabel: string;
-      ariaLabelledBy?: string;
-      buttonLabel?: undefined | "";
-    }
-  | {
-      ariaLabel?: string;
-      ariaLabelledBy: string;
-      buttonLabel?: undefined | "";
-    }
-) &
-  AllowedProps;
+} & Pick<
+  HtmlProps,
+  "ariaDescribedBy" | "ariaLabel" | "ariaLabelledBy" | "testId" | "translate"
+> &
+  Pick<FieldComponentProps, "isDisabled"> &
+  (
+    | { buttonLabel: string }
+    | (Required<Pick<HtmlProps, "ariaLabelledBy">> &
+        Partial<Pick<HtmlProps, "ariaLabel">> & {
+          buttonLabel?: undefined | "";
+        })
+    | (Required<Pick<HtmlProps, "ariaLabel">> &
+        Partial<Pick<HtmlProps, "ariaLabelledBy">> & {
+          buttonLabel?: undefined | "";
+        })
+  );
 
 const MenuButton = ({
   ariaLabel,
@@ -121,6 +108,7 @@ const MenuButton = ({
   shouldCloseOnSelect = true,
   endIcon: endIconProp,
   id: idOverride,
+  isDisabled,
   isOverflow,
   menuAlignment = "left",
   size,
@@ -144,7 +132,7 @@ const MenuButton = ({
 
   const menuListProps = useMemo(
     () => ({ "aria-labelledby": `${uniqueId}-button` }),
-    [uniqueId]
+    [uniqueId],
   );
 
   const providerValue = useMemo<MenuContextType>(
@@ -153,7 +141,7 @@ const MenuButton = ({
       openMenu,
       shouldCloseOnSelect,
     }),
-    [closeMenu, openMenu, shouldCloseOnSelect]
+    [closeMenu, openMenu, shouldCloseOnSelect],
   );
 
   const endIcon = endIconProp ? (
@@ -169,8 +157,8 @@ const MenuButton = ({
       ({
         horizontal: menuAlignment,
         vertical: "bottom",
-      } as PopoverOrigin),
-    [menuAlignment]
+      }) as PopoverOrigin,
+    [menuAlignment],
   );
 
   const transformOrigin = useMemo(
@@ -178,22 +166,23 @@ const MenuButton = ({
       ({
         horizontal: menuAlignment,
         vertical: "top",
-      } as PopoverOrigin),
-    [menuAlignment]
+      }) as PopoverOrigin,
+    [menuAlignment],
   );
 
   return (
     <div>
       <Button
-        aria-controls={isOpen ? `${uniqueId}-menu` : undefined}
-        aria-expanded={isOpen ? "true" : undefined}
-        aria-haspopup="true"
+        ariaControls={isOpen ? `${uniqueId}-menu` : undefined}
+        ariaExpanded={isOpen ? "true" : undefined}
+        ariaHasPopup="true"
         ariaDescribedBy={ariaDescribedBy}
         ariaLabel={ariaLabel}
         ariaLabelledBy={ariaLabelledBy}
         data-se={testId}
         endIcon={endIcon}
         id={`${uniqueId}-button`}
+        isDisabled={isDisabled}
         label={buttonLabel}
         onClick={openMenu}
         size={size}

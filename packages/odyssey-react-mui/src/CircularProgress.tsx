@@ -13,19 +13,15 @@
 import { memo } from "react";
 import { CircularProgress as MuiCircularProgress } from "@mui/material";
 
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 
 export type CircularProgressProps = {
-  /**
-   * The ARIA label for the progress spinner
-   */
-  ariaLabel?: string;
   /**
    * The percentage filled the spinner should be, as an integer.
    * If undefined, the spinner will spin perpetually.
    */
   value?: number;
-} & AllowedProps;
+} & Pick<HtmlProps, "ariaLabel" | "testId">;
 
 const CircularProgress = ({
   ariaLabel,

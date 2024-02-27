@@ -10,10 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { memo } from "react";
 import { Chip } from "@mui/material";
 
 import { useMuiProps } from "./MuiPropsContext";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 
 export const statusSeverityValues = [
   "default",
@@ -31,9 +32,9 @@ export type StatusProps = {
    * Determine the color and icon of the Status
    */
   severity: (typeof statusSeverityValues)[number];
-} & AllowedProps;
+} & Pick<HtmlProps, "testId" | "translate">;
 
-export const Status = ({ label, severity, testId, translate }: StatusProps) => {
+const Status = ({ label, severity, testId, translate }: StatusProps) => {
   const muiProps = useMuiProps();
 
   return (
@@ -47,3 +48,8 @@ export const Status = ({ label, severity, testId, translate }: StatusProps) => {
     />
   );
 };
+
+const MemoizedStatus = memo(Status);
+MemoizedStatus.displayName = "Status";
+
+export { MemoizedStatus as Status };

@@ -17,7 +17,7 @@ import { Link } from "./Link";
 import { CloseIcon } from "./icons.generated";
 import { Button } from "./Button";
 import { useTranslation } from "react-i18next";
-import { AllowedProps } from "./AllowedProps";
+import { HtmlProps } from "./HtmlProps";
 
 export const toastRoleValues = ["status", "alert"] as const;
 export const toastSeverityValues = [
@@ -70,7 +70,7 @@ export type ToastProps = {
    * The text content of the Toast
    */
   text: string;
-} & AllowedProps;
+} & Pick<HtmlProps, "testId" | "translate">;
 
 const ClickAwayListenerProps = { onClickAway: () => false };
 
@@ -114,7 +114,7 @@ const Toast = ({
         action={
           isDismissable === true && (
             <Button
-              ariaLabel={t("toast.close.text")}
+              ariaLabel={t("close.text")}
               onClick={onHide}
               size="small"
               startIcon={<CloseIcon />}

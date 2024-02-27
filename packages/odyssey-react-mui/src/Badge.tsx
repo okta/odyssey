@@ -17,7 +17,7 @@ import {
   DesignTokens,
 } from "./OdysseyDesignTokensContext";
 import { Box } from "./Box";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 
 export type BadgeContentMax = 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | 100;
 
@@ -27,7 +27,7 @@ export type BadgeProps = {
   badgeContent: number;
   badgeContentMax?: BadgeContentMax;
   type?: (typeof badgeTypeValues)[number];
-} & AllowedProps;
+} & Pick<HtmlProps, "testId" | "translate">;
 
 const badgeTypeColors = (odysseyTokens: DesignTokens) => ({
   default: {

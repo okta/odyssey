@@ -29,7 +29,7 @@ import {
 import { GroupIcon, HomeIcon, UserIcon } from "./icons.generated";
 import { Subordinate } from "./Typography";
 import { useTranslation } from "react-i18next";
-import { AllowedProps } from "./AllowedProps";
+import { HtmlProps } from "./HtmlProps";
 
 export type BreadcrumbType = "listItem" | "menuItem" | "currentPage";
 
@@ -43,7 +43,7 @@ export type BreadcrumbsProps = {
   children: ReactElement<typeof Breadcrumb>[];
   homeHref?: string;
   maxVisibleItems?: number;
-} & AllowedProps;
+} & Pick<HtmlProps, "testId" | "translate">;
 
 export type BreadcrumbContextType = {
   breadcrumbType: BreadcrumbType;
@@ -130,7 +130,7 @@ const BreadcrumbList = ({
 
   const onMenuButtonClick = useCallback<MouseEventHandler<HTMLButtonElement>>(
     (event) => setAnchorEl(event.currentTarget),
-    []
+    [],
   );
   const onCloseMenu = useCallback(() => {
     setAnchorEl(null);

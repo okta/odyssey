@@ -37,7 +37,7 @@ export const HideIcon = forwardRef<SVGSVGElement, HideIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 HideIcon.displayName = "HideIcon";

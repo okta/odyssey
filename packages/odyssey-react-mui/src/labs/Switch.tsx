@@ -24,12 +24,13 @@ import {
   SwitchProps as MuiSwitchProps,
   FormControlLabel,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext";
 import { Box } from "../Box";
 import { FieldComponentProps } from "../FieldComponentProps";
 import { FieldHint } from "../FieldHint";
-import type { AllowedProps } from "../AllowedProps";
+import type { HtmlProps } from "../HtmlProps";
 import { useUniqueId } from "../useUniqueId";
 import { ComponentControlledState, getControlState } from "../inputUtils";
 import { CheckedFieldProps } from "../FormCheckedProps";
@@ -63,7 +64,7 @@ export type SwitchProps = {
   "hint" | "id" | "isFullWidth" | "isDisabled" | "name"
 > &
   CheckedFieldProps<MuiSwitchProps> &
-  AllowedProps;
+  Pick<HtmlProps, "testId">;
 
 type SwitchLabelProps = {
   checked: boolean;
@@ -81,6 +82,7 @@ const SwitchLabel = ({
   label,
 }: SwitchLabelProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -115,7 +117,7 @@ const SwitchLabel = ({
             transitionDuration: odysseyDesignTokens.TransitionDurationMain,
           }}
         >
-          {checked ? "Active" : "Inactive"}
+          {checked ? t("switch.active") : t("switch.inactive")}
         </Box>
       </Box>
       {hint && <FieldHint id={hintId} text={hint} />}
@@ -141,7 +143,7 @@ const Switch = ({
     getControlState({
       controlledValue: isChecked,
       uncontrolledValue: isDefaultChecked,
-    })
+    }),
   );
   const inputValues = useMemo(() => {
     if (controlledStateRef.current === CONTROLLED) {
@@ -153,7 +155,7 @@ const Switch = ({
   const [internalSwitchChecked, setInternalSwitchChecked] = useState(
     controlledStateRef.current === CONTROLLED
       ? Boolean(isChecked)
-      : Boolean(isDefaultChecked)
+      : Boolean(isDefaultChecked),
   );
 
   useEffect(() => {
@@ -172,7 +174,7 @@ const Switch = ({
       setInternalSwitchChecked(checked);
       onChange?.({ checked, value });
     },
-    [onChange, setInternalSwitchChecked, value]
+    [onChange, setInternalSwitchChecked, value],
   );
 
   const renderSwitchComponent = useMemo(
@@ -203,7 +205,7 @@ const Switch = ({
       labelElementId,
       _name,
       testId,
-    ]
+    ],
   );
 
   return (

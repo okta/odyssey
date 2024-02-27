@@ -15,6 +15,7 @@ import {
   ChangeEventHandler,
   FocusEventHandler,
   forwardRef,
+  HTMLAttributes,
   InputHTMLAttributes,
   memo,
   useCallback,
@@ -23,9 +24,14 @@ import {
 
 import { CloseCircleFilledIcon, SearchIcon } from "./icons.generated";
 import { Field } from "./Field";
-import { FieldComponentProps } from "./FieldComponentProps";
-import type { AllowedProps } from "./AllowedProps";
+import {
+  FieldComponentProps,
+  FieldComponentRenderProps,
+} from "./FieldComponentProps";
+import type { HtmlProps } from "./HtmlProps";
 import { getControlState, useInputValues } from "./inputUtils";
+
+export const searchVariantValues = ["outline", "filled"] as const;
 
 export type SearchFieldProps = {
   /**
@@ -74,15 +80,21 @@ export type SearchFieldProps = {
    * The short hint displayed in the `input` before the user enters a value.
    */
   placeholder?: string;
+
+  tabIndex?: HTMLAttributes<HTMLElement>["tabIndex"];
   /**
    * The value of the `input` element, to use when controlled.
    */
   value?: string;
-} & Pick<
-  FieldComponentProps,
-  "ariaDescribedBy" | "id" | "isDisabled" | "name" | "isFullWidth"
-> &
-  AllowedProps;
+  /**
+   * Whether the SearchField has a gray or white background
+   */
+  variant?: (typeof searchVariantValues)[number];
+} & Pick<FieldComponentProps, "id" | "isDisabled" | "name" | "isFullWidth"> &
+  Pick<HtmlProps, "ariaDescribedBy" | "testId" | "translate">;
+
+type FieldRenderProps = Partial<Pick<HtmlProps, "ariaDescribedBy">> &
+  Pick<FieldComponentRenderProps, "id">;
 
 const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
   (
@@ -101,18 +113,20 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       onBlur,
       onClear: onClearProp,
       placeholder,
+      tabIndex,
       testId,
       translate,
       value,
+      variant = "outline",
     },
-    ref
+    ref,
   ) => {
     const onChange: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> =
       useCallback(
         (event) => {
           onChangeProp?.(event);
         },
-        [onChangeProp]
+        [onChangeProp],
       );
 
     const onClear = useCallback(() => {
@@ -123,7 +137,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       getControlState({
         controlledValue: value,
         uncontrolledValue: defaultValue,
-      })
+      }),
     );
     const inputValues = useInputValues({
       defaultValue,
@@ -132,9 +146,12 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
     });
 
     const renderFieldComponent = useCallback(
-      ({ ariaDescribedBy, id }) => (
+      ({ ariaDescribedBy, id }: FieldRenderProps) => (
         <InputBase
           {...inputValues}
+          inputProps={{
+            tabIndex,
+          }}
           aria-describedby={ariaDescribedBy}
           autoComplete={autoCompleteType}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
@@ -155,6 +172,8 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
             )
           }
           id={id}
+          data-ods-type="search"
+          data-ods-variant={variant}
           name={nameOverride ?? id}
           onBlur={onBlur}
           onChange={onChange}
@@ -183,9 +202,11 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         onFocus,
         placeholder,
         ref,
+        tabIndex,
         testId,
         translate,
-      ]
+        variant,
+      ],
     );
 
     return (
@@ -201,7 +222,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         renderFieldComponent={renderFieldComponent}
       />
     );
-  }
+  },
 );
 
 const MemoizedSearchField = memo(SearchField);

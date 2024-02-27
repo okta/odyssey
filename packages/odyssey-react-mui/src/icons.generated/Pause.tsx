@@ -37,7 +37,7 @@ export const PauseIcon = forwardRef<SVGSVGElement, PauseIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 PauseIcon.displayName = "PauseIcon";

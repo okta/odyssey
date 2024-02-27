@@ -24,7 +24,7 @@ To create a Shadow DOM, simply use the `createshadowDomElement` function from Od
 import { createshadowDomElement } from "@okta/odyssey-react-mui";
 
 const [emotionRoot, shadowDomElementRoot] = createshadowDomElement(
-  document.querySelector("#root") as HTMLElement
+  document.querySelector("#root") as HTMLElement,
 );
 ```
 
@@ -37,7 +37,7 @@ ReactDOM.createRoot(shadowDomElementRoot).render(
     shadowDomElement={shadowDomElementRoot}
   >
     <App />
-  </OdysseyProvider>
+  </OdysseyProvider>,
 );
 ```
 

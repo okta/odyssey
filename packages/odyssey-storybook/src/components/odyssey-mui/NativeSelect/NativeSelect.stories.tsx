@@ -16,6 +16,7 @@ import { NativeSelect } from "@okta/odyssey-react-mui";
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { useCallback, useState } from "react";
+import { SelectChangeEvent } from "@mui/material";
 
 const storybookMeta: Meta<typeof NativeSelect> = {
   title: "MUI Components/Forms/NativeSelect",
@@ -48,7 +49,7 @@ const storybookMeta: Meta<typeof NativeSelect> = {
     id: fieldComponentPropsMetaData.id,
     isDisabled: fieldComponentPropsMetaData.isDisabled,
     isFullWidth: fieldComponentPropsMetaData.isFullWidth,
-    isMultiSelect: {
+    hasMultipleChoices: {
       control: "boolean",
       description:
         "If `true`, the native select component allows multiple selections",
@@ -134,6 +135,7 @@ const Template: StoryObj<typeof NativeSelect> = {
   render: function C(args) {
     return (
       <NativeSelect
+        {...args}
         id={args.id}
         label={args.label}
         hint={args.hint}
@@ -213,7 +215,7 @@ export const DefaultGrouped: StoryObj<typeof NativeSelect> = {
 export const Multi: StoryObj<typeof NativeSelect> = {
   ...Template,
   args: {
-    isMultiSelect: true,
+    hasMultipleChoices: true,
     defaultValue: [],
   },
 };
@@ -231,8 +233,9 @@ export const Controlled: StoryObj<typeof NativeSelect> = {
   render: function C(args) {
     const [localValue, setLocalValue] = useState("");
     const onChange = useCallback(
-      (event) => setLocalValue(event.target.value),
-      []
+      (event: SelectChangeEvent<string | string[]>) =>
+        setLocalValue(event.target.value as string),
+      [],
     );
     return (
       <NativeSelect
@@ -275,19 +278,24 @@ export const ControlledMultiselect: StoryObj<typeof NativeSelect> = {
   },
   render: function C(args) {
     const [localValue, setLocalValue] = useState([""]);
-    const onChange = useCallback((event) => {
-      const options = (event as React.ChangeEvent<HTMLSelectElement>).target
-        .options;
-      const selectedOptions: string[] = [...options]
-        .filter((option) => option.selected)
-        .map((selectedOption) => selectedOption.value);
-      setLocalValue(selectedOptions);
-    }, []);
+    const onChange = useCallback(
+      (event: SelectChangeEvent<string | string[]>) => {
+        // We need to fix the typing issue here to get the options from the event target
+        const options = (
+          event as unknown as React.ChangeEvent<HTMLSelectElement>
+        ).target.options;
+        const selectedOptions: string[] = [...options]
+          .filter((option) => option.selected)
+          .map((selectedOption) => selectedOption.value);
+        setLocalValue(selectedOptions);
+      },
+      [],
+    );
     return (
       <NativeSelect
         {...args}
         defaultValue={undefined}
-        isMultiSelect={true}
+        hasMultipleChoices={true}
         value={localValue}
         onChange={onChange}
         children={
@@ -328,8 +336,9 @@ export const ControlledPreselected: StoryObj<typeof NativeSelect> = {
   render: function C(args) {
     const [localValue, setLocalValue] = useState("Laconia");
     const onChange = useCallback(
-      (event) => setLocalValue(event.target.value),
-      []
+      (event: SelectChangeEvent<string | string[]>) =>
+        setLocalValue(event.target.value as string),
+      [],
     );
     return (
       <NativeSelect
@@ -372,18 +381,24 @@ export const ControlledPreselectedMultiselect: StoryObj<typeof NativeSelect> = {
   },
   render: function C(args) {
     const [localValue, setLocalValue] = useState(["laconia", "new-terra"]);
-    const onChange = useCallback((event) => {
-      const options = event.target.options;
-      const selectedOptions: string[] = [...options]
-        .filter((option) => option.selected)
-        .map((selectedOption) => selectedOption.value);
-      setLocalValue(selectedOptions);
-    }, []);
+    const onChange = useCallback(
+      (event: SelectChangeEvent<string | string[]>) => {
+        // We need to fix the typing issue here to get the options from the event target
+        const options = (
+          event as unknown as React.ChangeEvent<HTMLSelectElement>
+        ).target;
+        const selectedOptions: string[] = [...options]
+          .filter((option) => option.selected)
+          .map((selectedOption) => selectedOption.value);
+        setLocalValue(selectedOptions);
+      },
+      [],
+    );
     return (
       <NativeSelect
         {...args}
         defaultValue={undefined}
-        isMultiSelect={true}
+        hasMultipleChoices={true}
         value={localValue}
         onChange={onChange}
         children={

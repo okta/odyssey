@@ -37,7 +37,7 @@ export const GlobeIcon = forwardRef<SVGSVGElement, GlobeIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 GlobeIcon.displayName = "GlobeIcon";

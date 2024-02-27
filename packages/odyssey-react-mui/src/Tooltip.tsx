@@ -15,7 +15,7 @@ import type { TooltipProps as MuiTooltipProps } from "@mui/material";
 
 import { MuiPropsChild } from "./MuiPropsChild";
 import { ReactElement, memo } from "react";
-import { AllowedProps } from "./AllowedProps";
+import { HtmlProps } from "./HtmlProps";
 
 export type TooltipProps = {
   /**
@@ -34,7 +34,7 @@ export type TooltipProps = {
    * The text to display in the Tooltip
    */
   text: string;
-} & AllowedProps;
+} & Pick<HtmlProps, "testId" | "translate">;
 
 const Tooltip = ({
   ariaType,

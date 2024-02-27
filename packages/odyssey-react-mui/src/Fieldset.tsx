@@ -18,7 +18,7 @@ import { FieldsetContext } from "./FieldsetContext";
 import { Legend, Support } from "./Typography";
 import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
 import { useUniqueId } from "./useUniqueId";
-import type { AllowedProps } from "./AllowedProps";
+import type { HtmlProps } from "./HtmlProps";
 
 export type FieldsetProps = {
   /**
@@ -49,7 +49,7 @@ export type FieldsetProps = {
    * The name associated with the group.
    */
   name?: string;
-} & AllowedProps;
+} & Pick<HtmlProps, "testId" | "translate">;
 
 const Fieldset = ({
   alert,
@@ -69,7 +69,7 @@ const Fieldset = ({
     () => ({
       isDisabled,
     }),
-    [isDisabled]
+    [isDisabled],
   );
 
   return (

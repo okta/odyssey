@@ -21,8 +21,8 @@ describe("OdysseyCacheProvider", () => {
       render(
         <OdysseyCacheProvider>
           <div />
-        </OdysseyCacheProvider>
-      )
+        </OdysseyCacheProvider>,
+      ),
     ).not.toThrow();
   });
 
@@ -30,7 +30,7 @@ describe("OdysseyCacheProvider", () => {
     render(
       <OdysseyCacheProvider>
         <Button label="text" variant="primary" />
-      </OdysseyCacheProvider>
+      </OdysseyCacheProvider>,
     );
 
     expect(screen.queryByRole("button")).toHaveTextContent("text");

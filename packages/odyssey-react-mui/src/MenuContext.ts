@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createContext, MouseEventHandler } from "react";
+import { MouseEventHandler, createContext } from "react";
 
 export type MenuContextType = {
   closeMenu: () => void;
