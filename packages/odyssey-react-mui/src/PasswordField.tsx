@@ -17,6 +17,7 @@ import {
   forwardRef,
   memo,
   useCallback,
+  useEffect,
   useImperativeHandle,
   useRef,
   useState,
@@ -118,11 +119,52 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
   ) => {
     const { t } = useTranslation();
     const [inputType, setInputType] = useState("password");
+    const visibilityTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
+    const debounceRef = useRef<NodeJS.Timeout | undefined>(undefined);
+    const isPasswordVisible = useCallback(
+      () => inputType === "text",
+      [inputType],
+    );
+
+    const clearDebounceRef = useCallback(() => {
+      clearTimeout(debounceRef?.current);
+    }, [debounceRef]);
+
+    const clearVisibilityTimeoutRef = useCallback(() => {
+      clearTimeout(visibilityTimeoutRef?.current);
+    }, [visibilityTimeoutRef]);
+
+    const createVisibilityTimeout = () => {
+      clearVisibilityTimeoutRef();
+
+      visibilityTimeoutRef.current = setTimeout(() => {
+        setInputType("password");
+      }, 3000);
+    };
 
     const togglePasswordVisibility = useCallback(() => {
-      setInputType((inputType) =>
-        inputType === "password" ? "text" : "password",
-      );
+      if (isPasswordVisible()) {
+        clearVisibilityTimeoutRef();
+        setInputType("password");
+      } else {
+        createVisibilityTimeout();
+        setInputType("text");
+      }
+    }, [inputType]);
+
+    // useEffect(() => {
+    //   if (isPasswordVisible()) {
+    //     createVisibilityTimeout();
+    //   } else {
+    //     clearVisibilityTimeoutRef();
+    //   }
+    // }, [inputType]);
+
+    useEffect(() => {
+      return () => {
+        clearDebounceRef();
+        clearVisibilityTimeoutRef();
+      };
     }, []);
 
     const controlledStateRef = useRef(
@@ -155,8 +197,13 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
     >(
       (event) => {
         onChangeProp?.(event);
+        if (inputType === "text") {
+          debounceRef.current = setTimeout(() => {
+            createVisibilityTimeout();
+          }, 200);
+        }
       },
-      [onChangeProp],
+      [debounceRef, inputType, onChangeProp],
     );
 
     const renderFieldComponent = useCallback(
