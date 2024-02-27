@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.14.2](https://github.com/okta/odyssey/compare/v1.14.1...v1.14.2) (2024-02-27)
+
+### Bug Fixes
+
+- removed OdysseyCacheProvider from OdysseyThemeProvider ([#2110](https://github.com/okta/odyssey/issues/2110)) ([9106341](https://github.com/okta/odyssey/commit/9106341d37fc57d8c2edf57db9683acdb065c73e))
+
 ## [1.14.1](https://github.com/okta/odyssey/compare/v1.14.0...v1.14.1) (2024-02-26)
 
 **Note:** Version bump only for package @okta/odyssey-storybook
