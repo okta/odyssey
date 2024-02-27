@@ -414,7 +414,7 @@ export const ControlledMultipleAutocomplete: StoryObj<JupiterMoonsAutocomplete> 
     },
   };
 
-export const UnontrolledMultipleAutocomplete: StoryObj<JupiterMoonsAutocomplete> =
+export const UncontrolledMultipleAutocomplete: StoryObj<JupiterMoonsAutocomplete> =
   {
     args: {
       options: jupiterGalileanMoons,
