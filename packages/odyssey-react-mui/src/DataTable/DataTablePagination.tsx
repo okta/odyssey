@@ -127,24 +127,17 @@ const DataTablePagination = ({
     setRowsPerPage(pagination.pageSize);
   }, [pagination]);
 
-  useEffect(() => {
-    // If page is greater than the max, set it to the max
-    // If rows are greater than the max, set it to the max
-    if (!totalRows) return;
-
-    if (rowsPerPage > totalRows) {
-      setRowsPerPage(totalRows);
-    }
-
-    if (page * totalRows > lastRow) {
-      setPage(Math.ceil(totalRows / rowsPerPage));
-    }
-  }, [page, rowsPerPage]);
-
   const handlePaginationChange = useCallback(() => {
+    const updatedPage =
+      totalRows && page * totalRows > lastRow
+        ? Math.ceil(totalRows / rowsPerPage)
+        : page;
+    const updatedRowsPerPage =
+      totalRows && rowsPerPage > totalRows ? totalRows : rowsPerPage;
+
     setPagination({
-      pageIndex: page,
-      pageSize: rowsPerPage,
+      pageIndex: updatedPage,
+      pageSize: updatedRowsPerPage,
     });
   }, [page, rowsPerPage]);
 

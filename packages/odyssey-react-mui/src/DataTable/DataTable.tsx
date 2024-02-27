@@ -365,7 +365,6 @@ const DataTable = ({
     pageSize: resultsPerPage,
   });
   const [draggingRow, setDraggingRow] = useState<MRT_Row<MRT_RowData> | null>();
-  const [numberOfRowsSelected, setNumberOfRowsSelected] = useState<number>(0);
   const [isTableContainerScrolledToStart, setIsTableContainerScrolledToStart] =
     useState<boolean>(false);
   const [isTableContainerScrolledToEnd, setIsTableContainerScrolledToEnd] =
@@ -632,13 +631,18 @@ const DataTable = ({
     },
   });
 
+  const rowSelectionRef = useRef(dataTable.getState().rowSelection);
+  const [numberOfRowsSelected, setNumberOfRowsSelected] = useState<number>(
+    Object.keys(rowSelectionRef.current).length,
+  );
+
   // Effects
   useEffect(() => {
-    onChangeRowSelection?.(dataTable.getState().rowSelection);
-    setNumberOfRowsSelected(
-      Object.keys(dataTable.getState().rowSelection).length,
-    );
-  }, [dataTable.getState().rowSelection, dataTable, onChangeRowSelection]);
+    const currentRowSelection = dataTable.getState().rowSelection;
+    rowSelectionRef.current = currentRowSelection;
+    onChangeRowSelection?.(currentRowSelection);
+    setNumberOfRowsSelected(Object.keys(currentRowSelection).length);
+  }, [onChangeRowSelection]);
 
   useEffect(() => {
     (async () => {

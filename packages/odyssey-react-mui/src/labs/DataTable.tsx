@@ -605,7 +605,6 @@ const DataTable = ({
           align: "right",
           sx: {
             width: "unset",
-            // TODO: Make the right padding here 16px (and possibly adapt it to the density padding)
           },
         },
       },
