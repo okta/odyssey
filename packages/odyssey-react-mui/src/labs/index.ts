@@ -17,11 +17,14 @@ export type { LocalizationProviderProps } from "@mui/x-date-pickers";
 export * from "./DatePicker";
 export * from "./datePickerTheme";
 
+/** @deprecated Will be removed in a future Odyssey version in lieu of the one shipping with DataTable */
 export * from "./DataTablePagination";
 export * from "./DataFilters";
 
 export * from "./materialReactTableTypes";
+/** @deprecated Will be removed in a future Odyssey version in lieu of DataTable */
 export * from "./StaticTable";
+/** @deprecated Will be removed in a future Odyssey version in lieu of DataTable */
 export * from "./PaginatedTable";
 
 export * from "./GroupPicker";
