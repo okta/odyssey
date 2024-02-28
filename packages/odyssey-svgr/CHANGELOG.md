@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.14.2](https://github.com/okta/odyssey/compare/v1.14.1...v1.14.2) (2024-02-27)
+
+**Note:** Version bump only for package @okta/odyssey-svgr
+
+## [1.14.1](https://github.com/okta/odyssey/compare/v1.14.0...v1.14.1) (2024-02-26)
+
+**Note:** Version bump only for package @okta/odyssey-svgr
+
+## [1.14.0](https://github.com/okta/odyssey/compare/v1.13.12...v1.14.0) (2024-02-26)
+
+### Bug Fixes
+
+- Upgrade every package ([#2136](https://github.com/okta/odyssey/issues/2136)) ([89b6534](https://github.com/okta/odyssey/commit/89b65342755a30d0e947f5ffb75e6bbe00268442))
+
 ## [1.13.12](https://github.com/okta/odyssey/compare/v1.13.11...v1.13.12) (2024-02-16)
 
 **Note:** Version bump only for package @okta/odyssey-svgr

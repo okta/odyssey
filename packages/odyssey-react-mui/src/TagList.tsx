@@ -21,7 +21,7 @@ export type TagListProps = {
    * The Tag or array of Tags within the TagList
    */
   children: ReactElement<typeof Tag> | Array<ReactElement<typeof Tag>>;
-} & HtmlProps;
+} & Pick<HtmlProps, "testId">;
 
 const TagList = ({ children, testId }: TagListProps) => {
   const providerValue = useMemo<{
@@ -30,7 +30,7 @@ const TagList = ({ children, testId }: TagListProps) => {
     () => ({
       chipElementType: "li",
     }),
-    []
+    [],
   );
 
   return (

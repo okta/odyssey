@@ -16,6 +16,7 @@ import {
   InputBase,
   UseAutocompleteProps,
   AutocompleteValue,
+  AutocompleteRenderInputParams,
 } from "@mui/material";
 import { memo, useCallback, useMemo, useRef } from "react";
 
@@ -31,7 +32,7 @@ import {
 export type AutocompleteProps<
   OptionType,
   HasMultipleChoices extends boolean | undefined,
-  IsCustomValueAllowed extends boolean | undefined
+  IsCustomValueAllowed extends boolean | undefined,
 > = {
   /**
    * The default value. Use when the component is not controlled.
@@ -168,20 +169,14 @@ export type AutocompleteProps<
   getIsOptionEqualToValue?: (option: OptionType, value: OptionType) => boolean;
 } & Pick<
   FieldComponentProps,
-  | "ariaDescribedBy"
-  | "errorMessage"
-  | "errorMessageList"
-  | "hint"
-  | "id"
-  | "isOptional"
-  | "name"
+  "errorMessage" | "errorMessageList" | "hint" | "id" | "isOptional" | "name"
 > &
-  HtmlProps;
+  Pick<HtmlProps, "ariaDescribedBy" | "testId" | "translate">;
 
 const VirtualizedAutocomplete = <
   OptionType,
   HasMultipleChoices extends boolean | undefined,
-  IsCustomValueAllowed extends boolean | undefined
+  IsCustomValueAllowed extends boolean | undefined,
 >({
   ariaDescribedBy,
   defaultValue,
@@ -210,7 +205,10 @@ const VirtualizedAutocomplete = <
   translate,
 }: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
   const controlledStateRef = useRef(
-    getControlState({ controlledValue: value, uncontrolledValue: defaultValue })
+    getControlState({
+      controlledValue: value,
+      uncontrolledValue: defaultValue,
+    }),
   );
   const defaultValueProp = useMemo<
     | AutocompleteValue<
@@ -248,13 +246,18 @@ const VirtualizedAutocomplete = <
   }, [inputValue]);
 
   const renderInput = useCallback(
-    ({ InputLabelProps, InputProps, ...params }) => (
+    ({
+      InputLabelProps,
+      InputProps,
+      ...params
+    }: AutocompleteRenderInputParams) => (
       <Field
         ariaDescribedBy={ariaDescribedBy}
         errorMessage={errorMessage}
         errorMessageList={errorMessageList}
         fieldType="single"
         hasVisibleLabel
+        //@ts-expect-error htmlFor is not available on the typed params for this callback
         id={InputLabelProps.htmlFor}
         hint={hint}
         label={label}
@@ -291,7 +294,7 @@ const VirtualizedAutocomplete = <
       label,
       nameOverride,
       testId,
-    ]
+    ],
   );
   const onChange = useCallback<
     NonNullable<
@@ -306,7 +309,7 @@ const VirtualizedAutocomplete = <
     (event, value, reason, details) => {
       onChangeProp?.(event, value, reason, details);
     },
-    [onChangeProp]
+    [onChangeProp],
   );
 
   const onInputChange = useCallback<
@@ -322,7 +325,7 @@ const VirtualizedAutocomplete = <
     (event, value, reason) => {
       onInputChangeProp?.(event, value, reason);
     },
-    [onInputChangeProp]
+    [onInputChangeProp],
   );
 
   return (
@@ -354,7 +357,7 @@ const VirtualizedAutocomplete = <
 
 // Need the `typeof Autocomplete` because generics don't get passed through
 const MemoizedAutocomplete = memo(
-  VirtualizedAutocomplete
+  VirtualizedAutocomplete,
 ) as typeof VirtualizedAutocomplete;
 // @ts-expect-error displayName is expected to not be on `typeof Autocomplete`
 MemoizedAutocomplete.displayName = "Autocomplete";

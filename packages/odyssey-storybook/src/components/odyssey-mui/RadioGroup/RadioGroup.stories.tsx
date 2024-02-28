@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useCallback, useState } from "react";
+import { ChangeEvent, useCallback, useState } from "react";
 import { Radio, RadioGroup } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 import { expect } from "@storybook/jest";
@@ -155,13 +155,13 @@ export const UncontrolledRadioGroup: StoryObj<typeof RadioGroup> = {
       const canvas = within(canvasElement);
       const radiogroup = canvas.getByRole("radiogroup") as HTMLInputElement;
       const radio = canvas.getByLabelText(
-        "Ludicrous Speed"
+        "Ludicrous Speed",
       ) as HTMLInputElement;
       if (radiogroup && radio) {
-        userEvent.click(radio);
+        await userEvent.click(radio);
       }
-      expect(radio).toBeChecked();
-      axeRun("select controlled radio button");
+      await expect(radio).toBeChecked();
+      await axeRun("select controlled radio button");
     });
   },
 };
@@ -180,7 +180,10 @@ export const ControlledRadioGroup: StoryObj<typeof RadioGroup> = {
   },
   render: function C(props) {
     const [value, setValue] = useState("Ludicrous Speed");
-    const onChange = useCallback((_, value) => setValue(value), []);
+    const onChange = useCallback(
+      (_event: ChangeEvent<HTMLInputElement>, value: string) => setValue(value),
+      [],
+    );
     return (
       <RadioGroup {...{ ...props, value, onChange }}>
         <Radio label="Light Speed" value="Light Speed" />
@@ -195,10 +198,10 @@ export const ControlledRadioGroup: StoryObj<typeof RadioGroup> = {
       const radiogroup = canvas.getByRole("radiogroup") as HTMLInputElement;
       const radio = canvas.getByLabelText("Warp Speed") as HTMLInputElement;
       if (radiogroup && radio) {
-        userEvent.click(radio);
+        await userEvent.click(radio);
       }
-      expect(radio).toBeChecked();
-      axeRun("select uncontrolled radio button");
+      await expect(radio).toBeChecked();
+      await axeRun("select uncontrolled radio button");
     });
   },
 };

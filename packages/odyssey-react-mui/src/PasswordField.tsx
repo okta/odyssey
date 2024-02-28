@@ -24,7 +24,10 @@ import {
 
 import { ShowIcon, HideIcon } from "./icons.generated";
 import { Field } from "./Field";
-import { FieldComponentProps } from "./FieldComponentProps";
+import {
+  FieldComponentProps,
+  FieldComponentRenderProps,
+} from "./FieldComponentProps";
 import type { HtmlProps } from "./HtmlProps";
 import { useTranslation } from "react-i18next";
 import { FocusHandle, getControlState, useInputValues } from "./inputUtils";
@@ -77,7 +80,12 @@ export type PasswordFieldProps = {
    */
   value?: string;
 } & FieldComponentProps &
-  HtmlProps;
+  Pick<HtmlProps, "ariaDescribedBy" | "testId" | "translate">;
+
+type FieldRenderProps = Partial<
+  Pick<FieldComponentRenderProps, "ariaDescribedBy" | "errorMessageElementId">
+> &
+  Pick<FieldComponentRenderProps, "id" | "labelElementId">;
 
 const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
   (
@@ -106,14 +114,14 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       translate,
       value,
     },
-    ref
+    ref,
   ) => {
     const { t } = useTranslation();
     const [inputType, setInputType] = useState("password");
 
     const togglePasswordVisibility = useCallback(() => {
       setInputType((inputType) =>
-        inputType === "password" ? "text" : "password"
+        inputType === "password" ? "text" : "password",
       );
     }, []);
 
@@ -121,7 +129,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       getControlState({
         controlledValue: value,
         uncontrolledValue: defaultValue,
-      })
+      }),
     );
     const inputValues = useInputValues({
       defaultValue,
@@ -139,7 +147,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           },
         };
       },
-      []
+      [],
     );
 
     const onChange = useCallback<
@@ -148,11 +156,16 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       (event) => {
         onChangeProp?.(event);
       },
-      [onChangeProp]
+      [onChangeProp],
     );
 
     const renderFieldComponent = useCallback(
-      ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
+      ({
+        ariaDescribedBy,
+        errorMessageElementId,
+        id,
+        labelElementId,
+      }: FieldRenderProps) => (
         <InputBase
           {...inputValues}
           aria-describedby={ariaDescribedBy}
@@ -216,7 +229,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
         ref,
         testId,
         translate,
-      ]
+      ],
     );
 
     return (
@@ -235,7 +248,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
         renderFieldComponent={renderFieldComponent}
       />
     );
-  }
+  },
 );
 
 const MemoizedPasswordField = memo(PasswordField);

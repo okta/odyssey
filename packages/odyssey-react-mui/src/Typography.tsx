@@ -11,10 +11,6 @@
  */
 
 import {
-  Typography as MuiTypography,
-  TypographyProps as MuiTypographyProps,
-} from "@mui/material";
-import {
   ElementType,
   ReactNode,
   memo,
@@ -22,6 +18,11 @@ import {
   useRef,
   useImperativeHandle,
 } from "react";
+import {
+  Typography as MuiTypography,
+  TypographyProps as MuiTypographyProps,
+} from "@mui/material";
+
 import { HtmlProps } from "./HtmlProps";
 import { FocusHandle } from "./inputUtils";
 
@@ -63,18 +64,6 @@ export const typographyColorValues = [
 
 export type TypographyProps = {
   /**
-   * The ID of the element that describes the component.
-   */
-  ariaDescribedBy?: string;
-  /**
-   * The ARIA label for the component.
-   */
-  ariaLabel?: string;
-  /**
-   * The ID of the element that labels the component.
-   */
-  ariaLabelledBy?: string;
-  /**
    * The text content of the component.
    */
   children: ReactNode;
@@ -94,7 +83,10 @@ export type TypographyProps = {
    * The variant of Typography to render.
    */
   variant?: keyof typeof typographyVariantMapping;
-} & HtmlProps;
+} & Pick<
+  HtmlProps,
+  "ariaDescribedBy" | "ariaLabel" | "ariaLabelledBy" | "testId" | "translate"
+>;
 
 const Typography = ({
   ariaDescribedBy,
@@ -131,7 +123,7 @@ const Typography = ({
         },
       };
     },
-    []
+    [],
   );
 
   return (
@@ -171,7 +163,7 @@ const Heading1 = ({
     children={children}
     color={color}
     component={component}
-    data-se={testId}
+    testId={testId}
     translate={translate}
     variant="h1"
   />
@@ -197,7 +189,7 @@ const Heading2 = ({
     children={children}
     color={color}
     component={component}
-    data-se={testId}
+    testId={testId}
     translate={translate}
     variant="h2"
   />
@@ -223,7 +215,7 @@ const Heading3 = ({
     children={children}
     color={color}
     component={component}
-    data-se={testId}
+    testId={testId}
     translate={translate}
     variant="h3"
   />
@@ -249,7 +241,7 @@ const Heading4 = ({
     children={children}
     color={color}
     component={component}
-    data-se={testId}
+    testId={testId}
     translate={translate}
     variant="h4"
   />
@@ -275,7 +267,7 @@ const Heading5 = ({
     children={children}
     color={color}
     component={component}
-    data-se={testId}
+    testId={testId}
     translate={translate}
     variant="h5"
   />
@@ -301,7 +293,7 @@ const Heading6 = ({
     children={children}
     color={color}
     component={component}
-    data-se={testId}
+    testId={testId}
     translate={translate}
     variant="h6"
   />
@@ -327,7 +319,7 @@ const Paragraph = ({
     children={children}
     color={color}
     component={component}
-    data-se={testId}
+    testId={testId}
     translate={translate}
     variant="body"
   />
@@ -353,7 +345,7 @@ const Subordinate = ({
     children={children}
     color={color}
     component={component}
-    data-se={testId}
+    testId={testId}
     translate={translate}
     variant="subordinate"
   />
@@ -379,7 +371,7 @@ const Support = ({
     children={children}
     color={color}
     component={component}
-    data-se={testId}
+    testId={testId}
     translate={translate}
     variant="support"
   />
@@ -405,7 +397,7 @@ const Legend = ({
     children={children}
     color={color}
     component={component}
-    data-se={testId}
+    testId={testId}
     translate={translate}
     variant="legend"
   />

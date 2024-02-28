@@ -28,7 +28,7 @@ import {
 import { DefaultSupportedLanguages } from "./OdysseyTranslationProvider.types";
 
 export type OdysseyProviderProps<
-  SupportedLanguages extends string = DefaultSupportedLanguages
+  SupportedLanguages extends string = DefaultSupportedLanguages,
 > = OdysseyCacheProviderProps &
   OdysseyThemeProviderProps &
   OdysseyTranslationProviderProps<SupportedLanguages> & {
@@ -54,10 +54,8 @@ const OdysseyProvider = <SupportedLanguages extends string>({
   >
     <OdysseyThemeProvider
       designTokensOverride={designTokensOverride}
-      emotionRoot={emotionRoot}
       shadowDomElement={shadowDomElement}
       themeOverride={themeOverride}
-      withCache={false}
     >
       <ScopedCssBaseline>
         <OdysseyTranslationProvider<SupportedLanguages>

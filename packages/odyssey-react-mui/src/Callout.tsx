@@ -78,7 +78,7 @@ export type CalloutProps = {
         linkText?: never;
       }
   ) &
-  HtmlProps;
+  Pick<HtmlProps, "testId" | "translate">;
 
 const Callout = ({
   children,

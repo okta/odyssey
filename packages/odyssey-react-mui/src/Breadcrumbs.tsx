@@ -43,7 +43,7 @@ export type BreadcrumbsProps = {
   children: ReactElement<typeof Breadcrumb>[];
   homeHref?: string;
   maxVisibleItems?: number;
-} & HtmlProps;
+} & Pick<HtmlProps, "testId" | "translate">;
 
 export type BreadcrumbContextType = {
   breadcrumbType: BreadcrumbType;
@@ -130,7 +130,7 @@ const BreadcrumbList = ({
 
   const onMenuButtonClick = useCallback<MouseEventHandler<HTMLButtonElement>>(
     (event) => setAnchorEl(event.currentTarget),
-    []
+    [],
   );
   const onCloseMenu = useCallback(() => {
     setAnchorEl(null);

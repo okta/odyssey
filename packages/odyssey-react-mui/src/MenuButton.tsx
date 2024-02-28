@@ -35,18 +35,6 @@ export const menuAlignmentValues = ["left", "right"] as const;
 
 export type MenuButtonProps = {
   /**
-   * The ARIA label for the Button
-   */
-  ariaLabel?: string;
-  /**
-   * The ID of the element that labels the Button
-   */
-  ariaLabelledBy?: string;
-  /**
-   * The ID of the element that describes the Button
-   */
-  ariaDescribedBy?: string;
-  /**
    * The label on the triggering Button
    */
   buttonLabel?: string;
@@ -93,25 +81,22 @@ export type MenuButtonProps = {
    * The tooltip text for the Button if it's icon-only
    */
   tooltipText?: string;
-} & (
-  | {
-      ariaLabel?: string;
-      ariaLabelledBy?: string;
-      buttonLabel: string;
-    }
-  | {
-      ariaLabel: string;
-      ariaLabelledBy?: string;
-      buttonLabel?: undefined | "";
-    }
-  | {
-      ariaLabel?: string;
-      ariaLabelledBy: string;
-      buttonLabel?: undefined | "";
-    }
-) &
+} & Pick<
+  HtmlProps,
+  "ariaDescribedBy" | "ariaLabel" | "ariaLabelledBy" | "testId" | "translate"
+> &
   Pick<FieldComponentProps, "isDisabled"> &
-  HtmlProps;
+  (
+    | { buttonLabel: string }
+    | (Required<Pick<HtmlProps, "ariaLabelledBy">> &
+        Partial<Pick<HtmlProps, "ariaLabel">> & {
+          buttonLabel?: undefined | "";
+        })
+    | (Required<Pick<HtmlProps, "ariaLabel">> &
+        Partial<Pick<HtmlProps, "ariaLabelledBy">> & {
+          buttonLabel?: undefined | "";
+        })
+  );
 
 const MenuButton = ({
   ariaLabel,
@@ -147,7 +132,7 @@ const MenuButton = ({
 
   const menuListProps = useMemo(
     () => ({ "aria-labelledby": `${uniqueId}-button` }),
-    [uniqueId]
+    [uniqueId],
   );
 
   const providerValue = useMemo<MenuContextType>(
@@ -156,7 +141,7 @@ const MenuButton = ({
       openMenu,
       shouldCloseOnSelect,
     }),
-    [closeMenu, openMenu, shouldCloseOnSelect]
+    [closeMenu, openMenu, shouldCloseOnSelect],
   );
 
   const endIcon = endIconProp ? (
@@ -172,8 +157,8 @@ const MenuButton = ({
       ({
         horizontal: menuAlignment,
         vertical: "bottom",
-      } as PopoverOrigin),
-    [menuAlignment]
+      }) as PopoverOrigin,
+    [menuAlignment],
   );
 
   const transformOrigin = useMemo(
@@ -181,8 +166,8 @@ const MenuButton = ({
       ({
         horizontal: menuAlignment,
         vertical: "top",
-      } as PopoverOrigin),
-    [menuAlignment]
+      }) as PopoverOrigin,
+    [menuAlignment],
   );
 
   return (

@@ -143,7 +143,7 @@ export const TypographyStory: StoryObj<TypographyProps> = {
     const { variant, ...props } = args;
     return createElement(
       variantMapping[variant as TypographyVariantValue],
-      props as TypographyProps
+      props as TypographyProps,
     );
   },
 };

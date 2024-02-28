@@ -21,10 +21,6 @@ export const linkVariantValues = ["default", "monochrome"] as const;
 
 export type LinkProps = {
   /**
-   * The ARIA label for the Link
-   */
-  ariaLabel?: string;
-  /**
    * The content within the Link
    */
   children: React.ReactNode;
@@ -61,7 +57,7 @@ export type LinkProps = {
    * The visual presentation of the Link (default or monochrome)
    */
   variant?: (typeof linkVariantValues)[number];
-} & HtmlProps;
+} & Pick<HtmlProps, "ariaLabel" | "testId" | "translate">;
 
 const Link = ({
   ariaLabel,
@@ -86,7 +82,7 @@ const Link = ({
         },
       };
     },
-    []
+    [],
   );
 
   return (

@@ -21,6 +21,7 @@ import { FieldComponentProps } from "./FieldComponentProps";
 import { FieldError } from "./FieldError";
 import { FieldHint } from "./FieldHint";
 import { FieldLabel } from "./FieldLabel";
+import { HtmlProps } from "./HtmlProps";
 import { Typography } from "./Typography";
 import { useFieldset } from "./FieldsetContext";
 import { useTranslation } from "react-i18next";
@@ -29,10 +30,6 @@ import { useUniqueId } from "./useUniqueId";
 export const fieldTypeValues = ["single", "group"] as const;
 
 export type FieldProps = {
-  /**
-   * If `error` is not undefined, the `input` will indicate an error.
-   */
-  errorMessage?: string;
   /**
    * If `error` is not undefined, the `input` will indicate an error.
    */
@@ -97,7 +94,6 @@ const Field = ({
 }: FieldProps &
   Pick<
     FieldComponentProps,
-    | "ariaDescribedBy"
     | "errorMessage"
     | "errorMessageList"
     | "hint"
@@ -106,7 +102,8 @@ const Field = ({
     | "isDisabled"
     | "isFullWidth"
     | "isOptional"
-  >) => {
+  > &
+  Pick<HtmlProps, "ariaDescribedBy">) => {
   const { t } = useTranslation();
 
   const id = useUniqueId(idOverride);
@@ -119,14 +116,14 @@ const Field = ({
     () =>
       [hintId, errorMessageElementId, ariaDescribedBy].join(" ").trim() ||
       undefined,
-    [ariaDescribedBy, errorMessageElementId, hintId]
+    [ariaDescribedBy, errorMessageElementId, hintId],
   );
 
   const { isDisabled: isFieldsetDisabled } = useFieldset();
 
   const isDisabled = useMemo(
     () => isDisabledProp || isFieldsetDisabled,
-    [isDisabledProp, isFieldsetDisabled]
+    [isDisabledProp, isFieldsetDisabled],
   );
 
   return (
@@ -141,7 +138,7 @@ const Field = ({
       fullWidth={isFullWidth}
     >
       {fieldType === "group" ? (
-        <MuiFormLabel component="legend">
+        <MuiFormLabel component="legend" id={labelElementId}>
           {label}{" "}
           {isOptional && label && (
             <Typography component="span" color="textSecondary">

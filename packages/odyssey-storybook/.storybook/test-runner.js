@@ -66,7 +66,7 @@ module.exports = {
       {
         outputDir: "reports/a11y",
         reportFileName: `${context.id}.html`,
-      }
+      },
     );
   },
 };

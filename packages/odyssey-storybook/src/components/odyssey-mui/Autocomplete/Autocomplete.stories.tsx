@@ -18,7 +18,7 @@ import { userEvent, waitFor, within, screen } from "@storybook/testing-library";
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { axeRun } from "../../../axe-util";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { useCallback, useState } from "react";
+import { SyntheticEvent, useCallback, useState } from "react";
 
 const stations: ReadonlyArray<StationType> = [
   { label: "Anderson Station" },
@@ -185,35 +185,35 @@ export const Default: StoryObj<AutocompleteType> = {
     const canvas = within(canvasElement);
     const comboBoxElement = canvas.getByRole("combobox") as HTMLInputElement;
     await step("Filter and Select from listbox", async () => {
-      userEvent.click(comboBoxElement);
+      await userEvent.click(comboBoxElement);
       const listboxElement = screen.getByRole("listbox");
-      expect(listboxElement).toBeVisible();
+      await expect(listboxElement).toBeVisible();
     });
     await step("Check for 'No options' in the list", async () => {
       await axeRun("Autocomplete Default");
-      waitFor(() => {
-        userEvent.type(comboBoxElement, "q");
+      await waitFor(async () => {
+        await userEvent.type(comboBoxElement, "q");
         const noOptionsElement = screen.getByText("No options");
-        expect(noOptionsElement).toBeVisible();
+        await expect(noOptionsElement).toBeVisible();
       });
     });
     await step("Check for Filtered item from the list", async () => {
-      userEvent.clear(comboBoxElement);
-      userEvent.type(comboBoxElement, "z");
+      await userEvent.clear(comboBoxElement);
+      await userEvent.type(comboBoxElement, "z");
       const listItem = screen.getByRole("listbox").firstChild as HTMLLIElement;
-      expect(listItem?.textContent).toBe("Shirazi-Ma Complex");
-      userEvent.click(listItem);
-      expect(comboBoxElement.value).toBe("Shirazi-Ma Complex");
+      await expect(listItem?.textContent).toBe("Shirazi-Ma Complex");
+      await userEvent.click(listItem);
+      await expect(comboBoxElement.value).toBe("Shirazi-Ma Complex");
     });
     await step("Clear the selected item", async () => {
       const clearButton = canvas.getByTitle("Clear");
-      userEvent.click(clearButton);
-      expect(comboBoxElement.value).toBe("");
-      userEvent.tab();
+      await userEvent.click(clearButton);
+      await expect(comboBoxElement.value).toBe("");
+      await userEvent.tab();
     });
-    step("Check id and name", () => {
-      expect(comboBoxElement.getAttribute("id")).toBe("testId");
-      expect(comboBoxElement.getAttribute("name")).toBe("testId");
+    await step("Check id and name", async () => {
+      await expect(comboBoxElement.getAttribute("id")).toBe("testId");
+      await expect(comboBoxElement.getAttribute("name")).toBe("testId");
     });
   },
 };
@@ -232,7 +232,7 @@ export const Error: StoryObj<AutocompleteType> = {
   },
   play: async ({ step }) => {
     await step("Check for a11y errors on Select Error", async () => {
-      await waitFor(() => axeRun("Select Error"));
+      await waitFor(async () => await axeRun("Select Error"));
     });
   },
 };
@@ -254,10 +254,10 @@ export const IsCustomValueAllowed: StoryObj<AutocompleteType> = {
     await step("Enter custom value", async () => {
       const canvas = within(canvasElement);
       const comboBoxElement = canvas.getByRole("combobox") as HTMLInputElement;
-      userEvent.click(comboBoxElement);
-      userEvent.type(comboBoxElement, "qwerty");
-      userEvent.tab();
-      expect(comboBoxElement.value).toBe("qwerty");
+      await userEvent.click(comboBoxElement);
+      await userEvent.type(comboBoxElement, "qwerty");
+      await userEvent.tab();
+      await expect(comboBoxElement.value).toBe("qwerty");
     });
   },
 };
@@ -278,29 +278,33 @@ export const Multiple: StoryObj<AutocompleteType> = {
     const canvas = within(canvasElement);
     const comboBoxElement = canvas.getByRole("combobox") as HTMLInputElement;
     await step("Check for list box to be visible", async () => {
-      userEvent.click(comboBoxElement);
+      await userEvent.click(comboBoxElement);
       const listboxElement = screen.getByRole("listbox");
-      expect(listboxElement).toBeVisible();
+      await expect(listboxElement).toBeVisible();
     });
     await step("Select multiple items", async () => {
-      userEvent.type(comboBoxElement, "z");
-      userEvent.click(screen.getByRole("listbox").firstChild as HTMLLIElement);
-      userEvent.clear(comboBoxElement);
-      userEvent.type(comboBoxElement, "w");
-      userEvent.click(screen.getByRole("listbox").firstChild as HTMLLIElement);
+      await userEvent.type(comboBoxElement, "z");
+      await userEvent.click(
+        screen.getByRole("listbox").firstChild as HTMLLIElement,
+      );
+      await userEvent.clear(comboBoxElement);
+      await userEvent.type(comboBoxElement, "w");
+      await userEvent.click(
+        screen.getByRole("listbox").firstChild as HTMLLIElement,
+      );
       await axeRun("Autocomplete Multiple");
     });
     await step("Clear the selected items", async () => {
-      waitFor(() => {
+      await waitFor(async () => {
         const clearButton = canvas.getByTitle("Clear");
-        userEvent.click(clearButton);
-        expect(comboBoxElement.value).toBe("");
-        userEvent.tab();
+        await userEvent.click(clearButton);
+        await expect(comboBoxElement.value).toBe("");
+        await userEvent.tab();
       });
     });
-    step("Check id and name", () => {
-      expect(comboBoxElement.getAttribute("id")).toBe("testId");
-      expect(comboBoxElement.getAttribute("name")).toBe("testName");
+    await step("Check id and name", async () => {
+      await expect(comboBoxElement.getAttribute("id")).toBe("testId");
+      await expect(comboBoxElement.getAttribute("name")).toBe("testName");
     });
   },
 };
@@ -397,14 +401,20 @@ export const ControlledMultipleAutocomplete: StoryObj<JupiterMoonsAutocomplete> 
     },
     render: function C(props) {
       const [localValue, setLocalValue] = useState<MoonMeta[] | undefined>(
-        jupiterGalileanMoons.slice(0, 2)
+        jupiterGalileanMoons.slice(0, 2),
       );
-      const onChange = useCallback((_, v) => setLocalValue(v), []);
+      const onChange = useCallback(
+        (
+          _event: SyntheticEvent<Element, Event>,
+          value: string | MoonMeta | (string | MoonMeta)[] | null,
+        ) => setLocalValue(value as MoonMeta[]),
+        [],
+      );
       return <Autocomplete {...props} value={localValue} onChange={onChange} />;
     },
   };
 
-export const UnontrolledMultipleAutocomplete: StoryObj<JupiterMoonsAutocomplete> =
+export const UncontrolledMultipleAutocomplete: StoryObj<JupiterMoonsAutocomplete> =
   {
     args: {
       options: jupiterGalileanMoons,
@@ -434,9 +444,15 @@ export const ControlledAutocomplete: StoryObj<JupiterMoonsAutocomplete> = {
   },
   render: function C(props) {
     const [localValue, setLocalValue] = useState<MoonMeta | undefined>(
-      jupiterGalileanMoons[0]
+      jupiterGalileanMoons[0],
     );
-    const onChange = useCallback((_, v) => setLocalValue(v), []);
+    const onChange = useCallback(
+      (
+        _event: SyntheticEvent<Element, Event>,
+        value: string | MoonMeta | (string | MoonMeta)[] | null,
+      ) => setLocalValue(value ? (value as MoonMeta) : undefined),
+      [],
+    );
     return <Autocomplete {...props} value={localValue} onChange={onChange} />;
   },
 };

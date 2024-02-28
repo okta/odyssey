@@ -37,7 +37,7 @@ export const SettingsIcon = forwardRef<SVGSVGElement, SettingsIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 SettingsIcon.displayName = "SettingsIcon";

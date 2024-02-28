@@ -21,30 +21,28 @@ import { deepmerge } from "@mui/utils";
 import { createOdysseyMuiTheme, DesignTokensOverride } from "./theme";
 import * as Tokens from "@okta/odyssey-design-tokens";
 import { OdysseyDesignTokensContext } from "./OdysseyDesignTokensContext";
-import { CacheProvider } from "@emotion/react";
-import createCache from "@emotion/cache";
-import { useUniqueAlphabeticalId } from "./useUniqueAlphabeticalId";
 
 export type OdysseyThemeProviderProps = {
   children: ReactNode;
   designTokensOverride?: DesignTokensOverride;
-  emotionRoot?: HTMLStyleElement;
   shadowDomElement?: HTMLDivElement | HTMLElement | undefined;
   themeOverride?: ThemeOptions;
-  withCache?: boolean;
 };
 
+/**
+ * This function doesn't include the Emotion Cache or Translations. You should probably be using `OdysseyProvider`.
+ *
+ * Some teams have a need to wrap separately (SIW), but most teams will never need to use this explicitly.
+ */
 const OdysseyThemeProvider = ({
   children,
   designTokensOverride,
-  emotionRoot,
   shadowDomElement,
   themeOverride,
-  withCache = true,
 }: OdysseyThemeProviderProps) => {
   const odysseyTokens = useMemo(
     () => ({ ...Tokens, ...designTokensOverride }),
-    [designTokensOverride]
+    [designTokensOverride],
   );
   const odysseyTheme = useMemo(
     () =>
@@ -52,39 +50,14 @@ const OdysseyThemeProvider = ({
         odysseyTokens,
         shadowDomElement,
       }),
-    [odysseyTokens, shadowDomElement]
+    [odysseyTokens, shadowDomElement],
   );
 
   const customOdysseyTheme = useMemo(
     () => themeOverride && createTheme(deepmerge(odysseyTheme, themeOverride)),
-    [odysseyTheme, themeOverride]
+    [odysseyTheme, themeOverride],
   );
 
-  const uniqueAlphabeticalId = useUniqueAlphabeticalId();
-
-  const cache = useMemo(
-    () =>
-      createCache({
-        ...(emotionRoot && { container: emotionRoot }),
-        key: uniqueAlphabeticalId,
-        prepend: true,
-        nonce: window.cspNonce,
-        speedy: false, // <-- Needs to be set to false when shadow-dom is used!! https://github.com/emotion-js/emotion/issues/2053#issuecomment-713429122
-      }),
-    [emotionRoot, uniqueAlphabeticalId]
-  );
-
-  if (withCache) {
-    return (
-      <CacheProvider value={cache}>
-        <MuiThemeProvider theme={customOdysseyTheme ?? odysseyTheme}>
-          <OdysseyDesignTokensContext.Provider value={odysseyTokens}>
-            {children}
-          </OdysseyDesignTokensContext.Provider>
-        </MuiThemeProvider>
-      </CacheProvider>
-    );
-  }
   return (
     <MuiThemeProvider theme={customOdysseyTheme ?? odysseyTheme}>
       <OdysseyDesignTokensContext.Provider value={odysseyTokens}>

@@ -51,7 +51,7 @@ export type MenuItemProps = {
    * - "destructive": A variant indicating a destructive action.
    */
   variant?: "default" | "destructive";
-} & HtmlProps;
+} & Pick<HtmlProps, "testId">;
 
 const MenuItem = ({
   children,
@@ -72,7 +72,7 @@ const MenuItem = ({
         closeMenu();
       }
     },
-    [onClickProp, closeMenu, shouldCloseOnSelect]
+    [onClickProp, closeMenu, shouldCloseOnSelect],
   );
 
   return (

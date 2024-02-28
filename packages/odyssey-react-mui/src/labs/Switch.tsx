@@ -64,7 +64,7 @@ export type SwitchProps = {
   "hint" | "id" | "isFullWidth" | "isDisabled" | "name"
 > &
   CheckedFieldProps<MuiSwitchProps> &
-  HtmlProps;
+  Pick<HtmlProps, "testId">;
 
 type SwitchLabelProps = {
   checked: boolean;
@@ -143,7 +143,7 @@ const Switch = ({
     getControlState({
       controlledValue: isChecked,
       uncontrolledValue: isDefaultChecked,
-    })
+    }),
   );
   const inputValues = useMemo(() => {
     if (controlledStateRef.current === CONTROLLED) {
@@ -155,7 +155,7 @@ const Switch = ({
   const [internalSwitchChecked, setInternalSwitchChecked] = useState(
     controlledStateRef.current === CONTROLLED
       ? Boolean(isChecked)
-      : Boolean(isDefaultChecked)
+      : Boolean(isDefaultChecked),
   );
 
   useEffect(() => {
@@ -174,7 +174,7 @@ const Switch = ({
       setInternalSwitchChecked(checked);
       onChange?.({ checked, value });
     },
-    [onChange, setInternalSwitchChecked, value]
+    [onChange, setInternalSwitchChecked, value],
   );
 
   const renderSwitchComponent = useMemo(
@@ -205,7 +205,7 @@ const Switch = ({
       labelElementId,
       _name,
       testId,
-    ]
+    ],
   );
 
   return (

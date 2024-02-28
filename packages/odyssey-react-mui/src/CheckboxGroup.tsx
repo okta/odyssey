@@ -15,7 +15,10 @@ import { memo, ReactElement, useCallback } from "react";
 
 import { Checkbox } from "./Checkbox";
 import { Field } from "./Field";
-import { FieldComponentProps } from "./FieldComponentProps";
+import {
+  FieldComponentProps,
+  FieldComponentRenderProps,
+} from "./FieldComponentProps";
 import type { HtmlProps } from "./HtmlProps";
 
 export type CheckboxGroupProps = {
@@ -35,7 +38,6 @@ export type CheckboxGroupProps = {
   label: string;
 } & Pick<
   FieldComponentProps,
-  | "ariaDescribedBy"
   | "errorMessage"
   | "errorMessageList"
   | "hint"
@@ -43,7 +45,15 @@ export type CheckboxGroupProps = {
   | "id"
   | "isDisabled"
 > &
-  HtmlProps;
+  Pick<HtmlProps, "ariaDescribedBy" | "testId" | "translate">;
+
+type CheckboxGroupRenderProps = Pick<
+  FieldComponentRenderProps,
+  "id" | "labelElementId"
+> &
+  Partial<
+    Pick<FieldComponentRenderProps, "ariaDescribedBy" | "errorMessageElementId">
+  >;
 
 const CheckboxGroup = ({
   ariaDescribedBy,
@@ -60,7 +70,12 @@ const CheckboxGroup = ({
   translate,
 }: CheckboxGroupProps) => {
   const renderFieldComponent = useCallback(
-    ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
+    ({
+      ariaDescribedBy,
+      errorMessageElementId,
+      id,
+      labelElementId,
+    }: CheckboxGroupRenderProps) => (
       <MuiFormGroup
         aria-describedby={ariaDescribedBy}
         aria-errormessage={errorMessageElementId}
@@ -72,7 +87,7 @@ const CheckboxGroup = ({
         {children}
       </MuiFormGroup>
     ),
-    [children, testId, translate]
+    [children, testId, translate],
   );
 
   return (

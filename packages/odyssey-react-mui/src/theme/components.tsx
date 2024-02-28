@@ -36,6 +36,8 @@ import { tableRowClasses } from "@mui/material/TableRow";
 import { tooltipClasses } from "@mui/material/Tooltip";
 import { typographyClasses } from "@mui/material/Typography";
 
+import { TILE_IMAGE_HEIGHT } from "../Tile";
+
 import {
   CheckCircleFilledIcon,
   CheckIcon,
@@ -49,6 +51,12 @@ import {
 } from "../icons.generated";
 import { DesignTokens } from "./theme";
 import { CSSProperties } from "react";
+
+//Widths used in `Drawer` component
+const drawerSizes = {
+  persistent: "25.714rem", //~360px
+  temporary: "28.571rem", //~400px
+};
 
 export const components = ({
   odysseyTokens,
@@ -153,7 +161,7 @@ export const components = ({
 
             ...(ownerState.variant === "toast" && {
               backgroundColor: odysseyTokens.HueGreen100.concat(
-                odysseyTokens.PaletteAlphaSemi
+                odysseyTokens.PaletteAlphaSemi,
               ),
             }),
           }),
@@ -162,7 +170,7 @@ export const components = ({
 
             ...(ownerState.variant === "toast" && {
               backgroundColor: odysseyTokens.HueBlue100.concat(
-                odysseyTokens.PaletteAlphaSemi
+                odysseyTokens.PaletteAlphaSemi,
               ),
             }),
           }),
@@ -171,7 +179,7 @@ export const components = ({
 
             ...(ownerState.variant === "toast" && {
               backgroundColor: odysseyTokens.HueRed100.concat(
-                odysseyTokens.PaletteAlphaSemi
+                odysseyTokens.PaletteAlphaSemi,
               ),
             }),
           }),
@@ -180,7 +188,7 @@ export const components = ({
 
             ...(ownerState.variant === "toast" && {
               backgroundColor: odysseyTokens.HueYellow100.concat(
-                odysseyTokens.PaletteAlphaSemi
+                odysseyTokens.PaletteAlphaSemi,
               ),
             }),
           }),
@@ -665,6 +673,10 @@ export const components = ({
               margin: "0",
             },
 
+            ...(ownerState.size === "large" && {
+              padding: odysseyTokens.Spacing4,
+            }),
+
             ...(ownerState.size === "small" && {
               padding: odysseyTokens.Spacing2,
             }),
@@ -712,7 +724,7 @@ export const components = ({
           transition: `all ${odysseyTokens.TransitionDurationMain} ${odysseyTokens.TransitionTimingMain}`,
 
           "& img": {
-            height: "64px",
+            height: TILE_IMAGE_HEIGHT,
           },
 
           "&.isClickable:hover": {
@@ -787,7 +799,7 @@ export const components = ({
             ["border-color", "background-color", "box-shadow"],
             {
               duration: odysseyTokens.TransitionDurationMain,
-            }
+            },
           ),
 
           [`.${svgIconClasses.root}`]: {
@@ -1042,6 +1054,33 @@ export const components = ({
           }
         }
     `,
+    },
+    MuiDrawer: {
+      styleOverrides: {
+        root: {},
+        paper: ({ ownerState }) => ({
+          width:
+            ownerState.variant === "temporary"
+              ? drawerSizes.temporary
+              : drawerSizes.persistent, //Temporary = overlay drawer, Persistent = inline drawer
+          display: "flex",
+          overflowY: "auto",
+          flexDirection: "column",
+          flexWrap: "nowrap",
+          justifyContent: "space-between",
+          alignItems: "stretch",
+          alignContent: "flex-end",
+          color: odysseyTokens.HueNeutral700,
+          ...(ownerState.variant === "persistent" && {
+            position: "static",
+            borderRadius: odysseyTokens.BorderRadiusOuter,
+            border: "0",
+          }),
+          ...(ownerState.variant === "temporary" && {
+            boxShadow: odysseyTokens.ShadowScale1,
+          }),
+        }),
+      },
     },
     MuiScopedCssBaseline: {
       styleOverrides: {
@@ -1685,7 +1724,7 @@ export const components = ({
           whiteSpace: "nowrap",
           color: odysseyTokens.TypographyColorSubordinate,
           ...(ownerState.position === "start" && {
-            marginInlineStart: odysseyTokens.Spacing2,
+            marginInlineStart: odysseyTokens.Spacing3,
           }),
           ...(ownerState.position === "end" && {
             marginInlineEnd: odysseyTokens.Spacing2,
@@ -1717,8 +1756,31 @@ export const components = ({
             ["border-color", "background-color", "box-shadow"],
             {
               duration: odysseyTokens.TransitionDurationMain,
-            }
+            },
           ),
+
+          ["&[data-ods-type='search']"]: {
+            borderColor: odysseyTokens.HueNeutral400,
+
+            [`& .${inputBaseClasses.input}::placeholder`]: {
+              color: odysseyTokens.TypographyColorSupport,
+              opacity: 1,
+            },
+          },
+
+          ["&[data-ods-variant='filled']"]: {
+            backgroundColor: odysseyTokens.HueNeutral50,
+            borderColor: odysseyTokens.HueNeutral50,
+
+            [`&:hover`]: {
+              borderColor: odysseyTokens.HueNeutral400,
+            },
+
+            [`&.${inputBaseClasses.focused}`]: {
+              borderColor: odysseyTokens.FocusOutlineColorPrimary,
+              boxShadow: `0 0 0 1px ${odysseyTokens.FocusOutlineColorPrimary}`,
+            },
+          },
 
           ...(ownerState.fullWidth && {
             width: "100%",
@@ -1745,12 +1807,12 @@ export const components = ({
           },
 
           [`&.${inputBaseClasses.error}:hover`]: {
-            borderColor: odysseyTokens.BorderColorDangerDark,
+            borderColor: odysseyTokens.HueNeutral900,
           },
 
           [`&.${inputBaseClasses.error}.${inputBaseClasses.focused}`]: {
-            borderColor: odysseyTokens.BorderColorDangerControl,
-            boxShadow: `0 0 0 1px ${odysseyTokens.PaletteDangerMain}`,
+            borderColor: odysseyTokens.FocusOutlineColorPrimary,
+            boxShadow: `0 0 0 1px ${odysseyTokens.FocusOutlineColorPrimary}`,
           },
 
           [`&.${inputBaseClasses.disabled}`]: {
@@ -1762,11 +1824,16 @@ export const components = ({
           },
         }),
         input: {
-          boxSizing: "border-box",
-          height: "auto",
+          // Set total height to 40px, factoring in borders on outer container
+          height: `calc(${odysseyTokens.Spacing4} - (${odysseyTokens.BorderWidthMain} * 2))`,
           paddingBlock: odysseyTokens.Spacing3,
           paddingInline: odysseyTokens.Spacing3,
           boxShadow: "none",
+
+          // TODO: Consider if we want manual resizing.
+          // [`.${inputBaseClasses.multiline} &`]: {
+          //   resize: "vertical",
+          // },
 
           [`.${inputBaseClasses.disabled} &`]: {
             pointerEvents: "auto",
@@ -1779,7 +1846,7 @@ export const components = ({
 
           [`label[data-shrink=false] + .${inputBaseClasses.formControl} &`]: {
             "&::placeholder": {
-              color: odysseyTokens.TypographyColorSubordinate,
+              color: odysseyTokens.TypographyColorSupport,
               opacity: "1 !important",
             },
           },
@@ -2106,7 +2173,7 @@ export const components = ({
             ["border-color", "background-color", "box-shadow"],
             {
               duration: odysseyTokens.TransitionDurationMain,
-            }
+            },
           ),
 
           "&::before": {
@@ -2195,6 +2262,7 @@ export const components = ({
         select: {
           paddingBlock: odysseyTokens.Spacing3,
           paddingInline: odysseyTokens.Spacing3,
+          minHeight: 0,
 
           "&:focus": {
             backgroundColor: "transparent",
@@ -2529,7 +2597,6 @@ export const components = ({
     },
     MuiTableContainer: {
       defaultProps: {
-        // @ts-expect-error valid prop and value; MUI TS bug
         component: "figure",
       },
       styleOverrides: {

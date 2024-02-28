@@ -37,7 +37,7 @@ export const SubtractIcon = forwardRef<SVGSVGElement, SubtractIconProps>(
         </>
       </SvgIcon>
     );
-  }
+  },
 );
 
 SubtractIcon.displayName = "SubtractIcon";

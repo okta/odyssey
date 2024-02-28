@@ -19,7 +19,7 @@ const modern = literalTuple(
   "last 1 Safari version",
   "last 1 Edge version",
   "last 1 Firefox version",
-  "Firefox ESR"
+  "Firefox ESR",
 );
 
 const ie11 = literalTuple("IE 11");
