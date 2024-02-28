@@ -195,6 +195,9 @@ const DataTablePagination = ({
             onBlur={() => handlePaginationChange()}
             onKeyDown={(event) => handleRowsPerPageSubmit(event)}
             disabled={isDisabled}
+            inputProps={{
+              "aria-label": t("table.pagination.rowsperpage"),
+            }}
           />
         </Box>
         <Paragraph component="span" color="textSecondary">
@@ -226,6 +229,9 @@ const DataTablePagination = ({
               onBlur={() => handlePaginationChange()}
               onKeyDown={(event) => handlePageSubmit(event)}
               disabled={isDisabled}
+              inputProps={{
+                "aria-label": t("table.pagination.page"),
+              }}
             />
           </Box>
         )}
