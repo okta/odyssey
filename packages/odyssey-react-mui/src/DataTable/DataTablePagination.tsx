@@ -139,7 +139,7 @@ const DataTablePagination = ({
       pageIndex: updatedPage,
       pageSize: updatedRowsPerPage,
     });
-  }, [page, rowsPerPage]);
+  }, [page, rowsPerPage, lastRow, setPagination, totalRows]);
 
   // The following handlers use React.KeyboardEvent (rather than just KeyboardEvent) becuase React.KeyboardEvent
   // is generic, while plain KeyboardEvent is not. We need this generic so we can specify the HTMLInputElement,
@@ -153,7 +153,7 @@ const DataTablePagination = ({
         });
       }
     },
-    [],
+    [rowsPerPage, setPagination],
   );
 
   const handleRowsPerPageSubmit = useCallback(
@@ -165,16 +165,15 @@ const DataTablePagination = ({
         });
       }
     },
-    [],
+    [page, setPagination],
   );
 
   const handleLoadMore = useCallback(() => {
-    console.log(pagination.pageSize);
     setPagination({
       pageIndex: 1,
       pageSize: rowsPerPage + initialRowsPerPage.current,
     });
-  }, [rowsPerPage]);
+  }, [rowsPerPage, setPagination]);
 
   const loadMoreIsDisabled = useMemo(() => {
     return totalRows ? rowsPerPage >= totalRows : false;

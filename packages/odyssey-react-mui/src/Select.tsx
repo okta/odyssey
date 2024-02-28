@@ -335,54 +335,57 @@ const Select = <
     [options],
   );
 
-  const Chips = ({
-    selection,
-    isInteractive,
-  }: {
-    selection: string[];
-    isInteractive: boolean;
-  }) => (
-    <ChipsInnerContainer
-      isInteractive={isInteractive}
-      odysseyDesignTokens={odysseyDesignTokens}
-    >
-      <ChipsSpacer odysseyDesignTokens={odysseyDesignTokens} />
-      {selection.map(
-        (item: string) =>
-          item.length > 0 && (
-            <MuiChip
-              key={item}
-              label={
-                <>
-                  {item}
-                  {!isInteractive &&
-                    controlledStateRef.current === CONTROLLED &&
-                    hasMultipleChoices && (
-                      <NonInteractiveIcon
-                        odysseyDesignTokens={odysseyDesignTokens}
-                      />
-                    )}
-                </>
-              }
-              tabIndex={-1}
-              onDelete={
-                isInteractive && controlledStateRef.current === CONTROLLED
-                  ? () => removeSelection(item)
-                  : undefined
-              }
-              deleteIcon={
-                <CloseCircleFilledIcon
-                  sx={{ pointerEvents: "auto" }}
-                  // We need to stop event propagation on mouse down to prevent the deletion
-                  // from being blocked by the Select list opening, and also ensure that
-                  // the pointerEvent is registered even when the parent's are not
-                  onMouseDown={stopPropagation}
-                />
-              }
-            />
-          ),
-      )}
-    </ChipsInnerContainer>
+  const Chips = useCallback(
+    ({
+      selection,
+      isInteractive,
+    }: {
+      selection: string[];
+      isInteractive: boolean;
+    }) => (
+      <ChipsInnerContainer
+        isInteractive={isInteractive}
+        odysseyDesignTokens={odysseyDesignTokens}
+      >
+        <ChipsSpacer odysseyDesignTokens={odysseyDesignTokens} />
+        {selection.map(
+          (item: string) =>
+            item.length > 0 && (
+              <MuiChip
+                key={item}
+                label={
+                  <>
+                    {item}
+                    {!isInteractive &&
+                      controlledStateRef.current === CONTROLLED &&
+                      hasMultipleChoices && (
+                        <NonInteractiveIcon
+                          odysseyDesignTokens={odysseyDesignTokens}
+                        />
+                      )}
+                  </>
+                }
+                tabIndex={-1}
+                onDelete={
+                  isInteractive && controlledStateRef.current === CONTROLLED
+                    ? () => removeSelection(item)
+                    : undefined
+                }
+                deleteIcon={
+                  <CloseCircleFilledIcon
+                    sx={{ pointerEvents: "auto" }}
+                    // We need to stop event propagation on mouse down to prevent the deletion
+                    // from being blocked by the Select list opening, and also ensure that
+                    // the pointerEvent is registered even when the parent's are not
+                    onMouseDown={stopPropagation}
+                  />
+                }
+              />
+            ),
+        )}
+      </ChipsInnerContainer>
+    ),
+    [hasMultipleChoices, odysseyDesignTokens, removeSelection, stopPropagation],
   );
 
   // Convert the options into the ReactNode children

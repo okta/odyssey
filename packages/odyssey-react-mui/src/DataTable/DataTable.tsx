@@ -650,7 +650,7 @@ const DataTable = ({
         setIsLoading(false);
       }
     })();
-  }, [pagination, columnSorting, search, filters, getData]);
+  }, [pagination, columnSorting, search, filters, getData, errorMessageProp]);
 
   useEffect(() => {
     if (!initialFilters && filters) {
@@ -664,11 +664,19 @@ const DataTable = ({
         filters === initialFilters &&
         data.length === 0,
     );
-  }, [filters, pagination, search, data]);
+  }, [
+    filters,
+    pagination,
+    search,
+    data,
+    currentPage,
+    initialFilters,
+    resultsPerPage,
+  ]);
 
   useEffect(() => {
     onChangeRowSelection?.(rowSelection);
-  }, [rowSelection]);
+  }, [rowSelection, onChangeRowSelection]);
 
   // Render the table
   return (
