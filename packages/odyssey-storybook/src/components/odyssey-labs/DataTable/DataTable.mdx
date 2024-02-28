@@ -16,205 +16,214 @@ import * as DataTableStories from "./DataTable.stories";
 <Title of={DataTableStories} />
 <Subtitle of={DataTableStories} />
 <Description of={DataTableStories} />
-<Primary of={DataTableStories} />
-<Controls />
 
-## Architectural philosophy
+`<DataTable>` is intended to be simple to set up, but flexible and extensible enough that you can make it do
+whatever you need.
 
-`DataTable` is a "bring-your-own-logic" component — it provides all the UI you need
-to create the table, along with the callbacks that allow you to hook your own logic
-into that UI.
+It's built on top of [Material-React-Table v2](https://www.material-react-table.com/), so reading those docs might
+be helpful in understanding how `<DataTable>` works under-the-hood. DataTable offers additional functionality on top of MRT,
+and also restricts certain MRT behaviors to match the desired behavior and appearance of an Odyssey table.
 
-Typically, this will mean firing a call to an API whenever the table state changes —
-whenever a column is sorted, a row is reordered, more data is loaded, a filter is applied, etc.
+You can build anything from a simple list of local data to a sortable, filterable, searchable, reorderable view of data
+pulled live from an API.
 
-This demo provides some simple client-side dummy logic to demonstrate this, but isn't
-as robust as a real implementation would be.
+DataTable is "bring-your-own functionality." It offers the UI and local functionality you need, with hooks for you to provide
+your own data handling. This means that the table can render a robust filtering and searching UI out-of-the-box, and you can provide
+a function that retrieves the relevant data based on the user's query.
 
-## Passing data into the table
+## Getting started
 
-Every table needs to have the `columns` prop set. `columns` should be an array of `DataTableColumn` objects, defined as such:
+A simple `<DataTable>` only needs two props: `columns` and `getData`:
 
 ```tsx
-type DataTableColumn = {
-  accessorKey: string;
-  header: string;
-  Cell?: MRT_ColumnDef<MRT_RowData>["Cell"];
-  filterVariant?: MRT_ColumnDef<MRT_RowData>["filterVariant"];
-  filterControl?: (typeof dataFilterVariantValues)[number];
-  filterSelectOptions?: Array<{ label: string; value: string }>;
-  size?: number;
-  minSize?: number;
-  maxSize?: number;
-  enableColumnFilter?: boolean;
-  enableGlobalFilter?: boolean;
-  enableSorting?: boolean;
-  enableResizing?: boolean;
-  enableHiding?: boolean;
-};
+<DataTable columns={columns} getData={getData} />
 ```
 
-While this includes many options, a typical column only needs an `accessorKey` and a `header`:
+`columns` is an array of `DataTableColumn<DataTableRowData>` objects that define the structure of the table.
+
+`getData` is a function that accepts a set of query params and returns an array of objects that match the `columns` shape.
+
+### A simple example: Planet Explorer
+
+Let's create a simple table that displays information about the ~9 planets~ 8 planets plus Pluto.
+
+First, we'll define a `Planet` type, to hold ourselves accountable to the shape of data we want to be working with:
 
 ```tsx
-const column: DataTableColumn = {
-  accessorKey: "city",
-  header: "City",
-};
-```
-
-(The `accessorKey` is a unique id for the column, and `header` is the label shown in the column head.)
-
-The table must also include a `getData` function, which takes the data you provide and pipes it into the DataTable.
-
-## Callbacks
-
-Any user action will fire a callback allowing you to provide your own logic. These callbacks are:
-
-`getData`, which is fired whenever the following parameters change:
-
-- page
-- resultsPerPage
-- search
-- filters
-- sort
-
-Use `getData` to update the table data whenever the table is searched, paged, filtered, sorted, etc.
-
-`onChangeRowSelection` is fired whenever the user selects one or more rows.
-
-`onReorderRows` is fired whenever rows are reordered (such as via drag-and-drop or the row actions menu). It'll send through the `rowId` (retrieved via `getRowId`) and the `newIndex` as a number.
-
-`getRowId` is an optional function that specifies how the table retrieves the unique ID from each row. By default, the table will generate unique identifiers for each row and use those, but if your data already has unique ids, you can use this function to specify how it can retrieve those.
-
-## Customizing the table
-
-`DataTable` provides numerous props that enable or disable rich functionality. Not every
-table will need every feature; some tables won't need user-changeable row density, for instance.
-
-Here are the features you can toggle, and how:
-
-- Allow users to **change row density** — set `hasChangeableDensity` to `true`
-- Allow users to **resize columns** — set `hasColumnResizing` to `true`
-- Allow users to **show/hide individual columns** — set `hasColumnVisibility` to `true`
-- Provide **filtering** — set `hasFilters` to `true`
-- Provide **pagination** — set `hasPagination` to `true`
-- Allow users to **select rows** — set `hasRowSelection` to `true`
-- Provide **search** — set `hasSearch` to `true`
-- Allow users to **sort columns** — set `hasSorting` to `true`
-- Allow users to **reorder rows** via a drag-and-drop interface — set `hasRowReordering` to `true`
-
-Some additional parameters can be tweaked:
-
-- By default, the search callback fires whenever the user changes the search input. **To search on submit**, set `searchOnSubmit` to `true`.
-- Pagination includes a "next" and "previous" button by default. To change to **a "Load more" button**, set `paginationType` to `loadMore`.
-- The initial row density is `comfortable`. To **change the initial density** to either `spacious` or `compact`, change the value of `initialDensity`. This will be applied regardless of if `hasChangeableDensity` is true or false.
-- To **change the number of results** shown at a time from the default 20, set `resultsPerPage`.
-- To add **action buttons** to each row, pass a `Button` or fragment to `rowActionButtons`.
-- To add **an action menu with custom items** to each row, pass `MenuItem`s to `rowActionMenuItems`. This can be used independently or in conjunction with `rowActionButtons`.
-
-## An end-to-end example
-
-`DataTable` is a large component with lots of parameters, so to reduce confusion, here's an example of what a full implementation looks like.
-
-In this example, we're creating **a table that displays a list of people**.
-
-We'll start by defining a `Person` type:
-
-```tsx
-type Person = {
-  order: number;
-  id: string;
+export type Planet = {
+  id: number;
   name: string;
-  city: string;
-  state: string;
-  age: number;
-  risk: "high" | "medium" | "low";
+  distance: number;
+  visit: "flyby" | "orbit" | "landing";
 };
 ```
 
-And now we'll define the columns for the table:
+Next, we'll define the table columns:
 
 ```tsx
-const columns: DataTableColumn[] = [
+export const columns: DataTableColumn<DataTableRowData>[] = [
   {
-    accessorKey: "order",
-    header: "Original order",
-    enableColumnFilter: false,
-    size: 120,
+    accessorKey: "id",
+    header: "number",
   },
   {
     accessorKey: "name",
     header: "Name",
-    enableHiding: false,
   },
   {
-    accessorKey: "city",
-    header: "City",
+    accessorKey: "distance",
+    header: "Distance from Sun (AU)",
   },
-  {
-    accessorKey: "state",
-    header: "State",
-  },
-  {
-    accessorKey: "age",
-    header: "Age",
-    size: 80,
-    filterVariant: "range",
-  },
-  {
-    accessorKey: "risk",
-    header: "Risk level",
-    Cell: ({ cell }) => {
-      const value = cell.getValue<string>();
-      const severity =
-        value === "low" ? "success" : value === "medium" ? "warning" : "error";
-      return (
-        <Status
-          label={value.charAt(0).toUpperCase() + value.slice(1)}
-          severity={severity}
-          variant="pill"
-        />
-      );
-    },
-    filterVariant: "multi-select",
-    filterSelectOptions: [
-      {
-        label: "Low",
-        value: "low",
-      },
-      {
-        label: "Medium",
-        value: "medium",
-      },
-      {
-        label: "High",
-        value: "high",
-      },
-    ],
-  },
+  ...
 ];
 ```
 
-Now, let's define a function to retrieve data, assuming that the data is an array of `Person` objects.
+Those first three columns are pretty simple and only need an `accessorKey` (functionally, the unique id of the column)
+and a `header` (the title displayed to the end user). The other two columns include additional info, such as `filterVariant`
+(which defines what kind of control is shown when filtering the column; a text input, radio buttons, etc), `filterOptions`
+(the options available in a radio- or checkbox-type filter), and `Cell` (which allows you to define a custom table cell to
+display the column data).
+
+`DataTableColumn` matches `MRT_TableColumn`, so for full information, check the [Column Options](https://www.material-react-table.com/docs/api/column-options) docs from Material-React-Table.
+
+(Note that not every feature of Material-React-Table is available in `DataTable`, so things like custom edit states won't work.)
+
+Finally, we'll define the planet data itself:
 
 ```tsx
-const fetchData = ({
-  initialData,
-  page = 1,
-  resultsPerPage = 20,
-  search,
-  filters,
-  sort,
+export const data: Planet[] = [
+  {
+    id: 1,
+    name: "Mercury",
+    distance: 0.4,
+    visit: "landing",
+  },
+  {
+    id: 2,
+    name: "Venus",
+    distance: 0.7,
+    visit: "landing",
+  },
+  ...
+];
+```
+
+Now, in our component file, we'll put it all together:
+
+```tsx
+import {
+  columns as planetColumns,
+  data as planetData
+} from "./planetData";
+
+...
+
+const getData = () => {
+  return planetData;
+};
+
+<DataTable
+  columns={planetColumns}
+  getData={getData}
+/>
+```
+
+### Making it real
+
+The example is slightly simplified. Here's a live example of this same table:
+
+<Canvas>
+  <Story of={DataTableStories.Default} />
+</Canvas>
+
+And here's how we get there:
+
+```tsx
+const ParentComponent = () => {
+  // It's best-practice to save the incoming data in a state so we
+  // can manipulate it locally if needed. This isn't strictly necessary
+  // for this example, but if we started playing with the row order, we'd need this.
+  const [data, setData] = useState<Planet[]>(planetData);
+
+  // Typically, you'll take the query params sent via getData and use them to filter the
+  // data being sent from the API. For this example, I've created a `filterData` function
+  // that lives outside the component, and then I'm passing the data and the params into that
+  // and returning the response.
+  // The full filterData function is explained later in the docs.
+  const getData = useCallback(
+    ({
+      search,
+      filters,
+      sort,
+      page = 1,
+      resultsPerPage = 20,
+    }: DataTableGetDataType) => {
+      return filterData({ data, search, filters, sort, page, resultsPerPage });
+    },
+    [data],
+  );
+
+  // Callback that fires when the user selects or unselects a row.
+  // It passes through the full rowSelection state, so you can count
+  // the selected rows or perform actions on them.
+  const onChangeRowSelection = useCallback(
+    (rowSelection: DataTableRowSelectionState) => {
+      if (Object.keys(rowSelection).length > 0) {
+        console.log(`${Object.keys(rowSelection).length} selected`);
+      }
+    },
+    [],
+  );
+
+  return (
+    <DataTable
+      columns={planetColumns}
+      getData={getData}
+      onChangeRowSelection={onChangeRowSelection}
+      // These are true by default, but adding them
+      // here to be extra-clear
+      hasChangeableDensity
+      hasColumnResizing
+      hasFilters
+      hasRowSelection
+      hasSearch
+      hasSorting
+      // These are true by default, but
+      // disabled for this simple example
+      hasPagination={false}
+      hasColumnVisibility={false}
+      hasRowReordering={false}
+    />
+  );
+};
+```
+
+### Filtering data
+
+In the above example, the incoming data is stored via `useState`, and the `getData` callback passes that
+data and the query params to a separate `filterData` function that lives outside the component.
+
+This might feel obtuse, but it's necessary for building robust and scalable DataTables. Here's why:
+
+`getData` is purely a GET function. It retrieves data, but doesn't mutate it. _Whatever is returned by `getData`
+is treated as final data, which the table will not modify._
+
+If you need to mutate the data at all, you need to store it separately. The most common way to mutate table data is through
+the `onReorderRows` callback, which handles drag-and-drop and other row-reordering operations. So: if you need to reorder rows,
+you need to store data in state.
+
+This is what the `filterData` function looks like in this example. _Yours will probably look different; this is just here
+as a demonstration of the sort of functionality it encapsulates._
+
+```tsx
+const filterData = ({
+  data,
+  ...args
 }: {
-  initialData: Person[];
-  page?: number;
-  resultsPerPage?: number;
-  search?: string;
-  filters?: DataFilter[];
-  sort?: MRT_SortingState;
-}) => {
-  let filteredData = [...initialData];
+  data: Planet[];
+} & DataTableGetDataType) => {
+  let filteredData = data;
+  const { search, filters, sort, page = 1, resultsPerPage = 20 } = args;
 
   // Implement text-based query filtering
   if (search) {
@@ -234,8 +243,21 @@ const fetchData = ({
           return true;
         }
 
-        // General filtering for all columns
-        return row[id as keyof Person]?.toString().includes(value.toString());
+        // If filter value is array, search for each array value
+        if (Array.isArray(value)) {
+          return value.some((arrayValue) => {
+            return row[id as keyof Planet]
+              ?.toString()
+              .toLowerCase()
+              .includes(arrayValue.toString().toLowerCase());
+          });
+        }
+
+        // General filtering for other columns
+        return row[id as keyof Planet]
+          ?.toString()
+          .toLowerCase()
+          .includes(value.toString().toLowerCase());
       });
     });
   }
@@ -244,8 +266,8 @@ const fetchData = ({
   if (sort && sort.length > 0) {
     filteredData.sort((a, b) => {
       for (const { id, desc } of sort) {
-        const aValue = a[id as keyof Person];
-        const bValue = b[id as keyof Person];
+        const aValue = a[id as keyof Planet];
+        const bValue = b[id as keyof Planet];
 
         if (aValue < bValue) return desc ? 1 : -1;
         if (aValue > bValue) return desc ? -1 : 1;
@@ -256,34 +278,49 @@ const fetchData = ({
   }
 
   // Implement pagination
-  const startIdx = (page - 1) * resultsPerPage;
-  const endIdx = startIdx + resultsPerPage;
-  const paginatedData = filteredData.slice(startIdx, endIdx);
+  const startRow = (page - 1) * resultsPerPage;
+  const endRow = startRow + resultsPerPage;
+  filteredData = filteredData.slice(startRow, endRow);
 
-  return paginatedData;
+  return filteredData;
 };
 ```
 
-We'll also need a function to handle row selection:
+## A fully-featured example
+
+Here's a table that hits a (simulated) API and includes filtering, sorting, drag-and-drop reordering,
+pagination, and more:
+
+<Canvas>
+  <Story of={DataTableStories.API} />
+</Canvas>
+
+### Row reordering
+
+To enable row reordering, the `onReorderRows` callback must be defined. Similar to `getData`, in this example
+the component itself has an `onReorderRows` handler:
 
 ```tsx
-const handleRowSelection = (rowSelection) => {
-  console.log(rowSelection); // This should do something real
-};
+const onReorderRows = useCallback(
+  ({ ...props }: DataTableOnReorderRowsType) => {
+    const reorderedData = reorderData({ data, ...props });
+    setData(reorderedData as Planet[]);
+  },
+  [data],
+);
 ```
 
-And, finally, a function to deal with row reordering. Without this, rows won't stick when reordered!
+And the `reorderData` function it calls out to:
 
 ```tsx
 const reorderData = ({
-  rowId,
-  newRowIndex,
+  data,
+  ...args
 }: {
-  rowId: string;
-  newRowIndex: number;
-}) => {
-  const updatedData = incomingData;
-
+  data: (Planet | Person)[];
+} & DataTableOnReorderRowsType) => {
+  const updatedData = data;
+  const { rowId, newRowIndex } = args;
   const rowIndex = updatedData.findIndex((row) => row.id === rowId);
 
   if (rowIndex !== -1) {
@@ -294,45 +331,100 @@ const reorderData = ({
     updatedData.splice(newRowIndex, 0, removedRow);
   }
 
-  setData(updatedData);
+  return updatedData;
 };
 ```
 
-Now, finally, here's what the component itself looks like:
+In a real-world scenario, the table would handle the visual portion of the reordering locally and send
+the revised order to the API in the background to save.
+
+# A deep dive into specific features
+
+Some particular features warrant more explanation.
+
+## Pagination
+
+DataTable comes with standard pagination controls, allowing the user to set how many rows are visible per page, and
+allowing them to navigate forward and back through the pages.
+
+`paginationType` is set to `paged` by default. You can change it to `loadMore`, in which case the only pagination control
+will be a "Show more" button that loads more rows when pressed. This shouldn't be used in new tables, but is provided as a
+convenience to teams migrating from ARC who are already using that functionality.
+
+If `totalRows` is provided, the pagination will disable the "next" button when the last page has been reached. Otherwise,
+the Next button will always be active.
+
+Providing `totalRows` leads to a much better end-user experience, but due to API limitations, that data might not always be available.
+
+## Empty states & loading states
+
+The DataTable will handle its own loading state, toggling it on or off as it hits the `getData` callback.
+
+There's a default "no results" state, which shows when the end user passes a query that produces no response. (For example, if
+the user filters the table for the name "asdfadsfadsfasdfdsfd" and that name doesn't exist in the data, the "no response" state
+will be shown.)
+
+You can provide a custom "no response" state using the custom `<DataTableEmptyState>` component:
 
 ```tsx
-<DataTable
-  getData={getData}
-  columns={columns}
-  onReorderRows={onReorderRows}
-  onChangeRowSelection={onChangeRowSelection}
-  initialDensity={initialDensity}
-  hasChangeableDensity={hasChangeableDensity}
-  hasColumnResizing={hasColumnResizing}
-  hasColumnVisibility={hasColumnVisibility}
-  hasFilters={hasFilters}
-  hasPagination={hasPagination}
-  hasRowSelection={hasRowSelection}
-  hasSearch={hasSearch}
-  hasSorting={hasSorting}
-  hasRowReordering={hasRowReordering}
-  hasSearchSubmitButton={hasSearchSubmitButton}
-  searchDelayTime={searchDelayTime}
-  currentPage={currentPage}
-  resultsPerPage={resultsPerPage}
-  totalRows={totalRows}
-/>
+noResultsPlaceholder={<DataTableEmptyState
+  heading="Whoops, there's nothing here!"
+  text="You should try searching or filtering for something else."
+/>}
 ```
 
-Voila — a working table with sorting, filtering, search, pagination, and reordering.
+If the table data is completely empty — calculated based on whether there's no data present even when the search and filtering params
+are in their default state — the placeholder state will be shown. However, you can provide a custom empty state, which is useful
+for providing a first-run experience for the DataTable:
 
-## Gotchas
+```tsx
+emptyPlaceholder={
+  <DataTableEmptyState
+    heading="Start by adding data assets"
+    text="All relevant data will be displayed and can be searched and filtered"
+    primaryButton={<Button variant="primary" label="Primary" />}
+    secondaryButton={<Button variant="secondary" label="Secondary" />}
+  />
+}
+```
+
+## Row reordering
+
+Rows can be reordered via drag-and-drop. The table also includes keyboard support for reordering — if the user
+presses the spacebar while focused on a row, the table enters "reorder mode" and the row can be moved up and down
+via arrow keys. When the user is satisfied with its position, they can "lock it in" by hitting Space or Enter again.
+
+For accessibility reasons, if drag-and-drop reordering is enabled, each row will have an action menu on the right side that
+includes items for moving the row to the top, bottom, up one, or down one. This cannot be disabled if row reordering is active.
+
+"Move to bottom" is only provided if you provide the `totalRows` to the table, since otherwise the table doesn't know the index
+of the bottom row.
+
+## Table settings (density & column visibility)
+
+DataTable can provide controls that allow the end user to change which columns are visible, as well as the density of each row. Note
+that, even if the density settings are disabled, you can change the initial table density without exposing that control to the end user.
+(For example, if you wanted to make a table with extra breathing room, or a table that's particularly compact).
+
+## Scroll indication
+
+If the table content is wider than the available space, a subtle shadow will be displayed in whichever direction the
+table can be scrolled. This happens automatically, adjusts when the table container is resized, and adapts to the current
+scroll position of the content.
+
+## Row actions & bulk actions
+
+Action buttons and menu items can be added to each row. If rows are selectable, you can also add bulk actions to the top of the table,
+which will be applied to all selected rows. (For example, the bulk actions menu starts out disabled, but if the user selects 3 rows,
+the actions menu will be enabled and any actions performed would be applied to all 3 selected rows.)
+
+# Gotchas
 
 It is very, very important that you memoize your callbacks! Performance slows to a crawl if you don't.
 For the best performance, keep your `getData` and `onChangeRowSelection` functions outside of the component
 and then call them from within, passing the table data in at the same time.
 
-## Upgrade guide
+# Upgrading from Labs DataTable to DataTable
 
 We've made some API changes between the previous version (in Odyssey Labs) and this stable version.
 
