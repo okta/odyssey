@@ -60,6 +60,19 @@ import { DataTableEmptyState } from "./DataTableEmptyState";
 import { Callout } from "../Callout";
 import { t } from "i18next";
 
+export type DataTableGetDataType = {
+  page?: number;
+  resultsPerPage?: number;
+  search?: string;
+  filters?: DataFilter[];
+  sort?: MRT_SortingState;
+};
+
+export type DataTableOnReorderRowsType = {
+  rowId: string;
+  newRowIndex: number;
+};
+
 export type DataTableProps = {
   /**
    * The columns that make up the table
@@ -141,26 +154,14 @@ export type DataTableProps = {
     search,
     filters,
     sort,
-  }: {
-    page?: number;
-    resultsPerPage?: number;
-    search?: string;
-    filters?: DataFilter[];
-    sort?: MRT_SortingState;
-  }) =>
+  }: DataTableGetDataType) =>
     | MRT_TableOptions<MRT_RowData>["data"]
     | Promise<MRT_TableOptions<MRT_RowData>["data"]>;
   /**
    * Callback that fires when the user reorders rows within the table. Can be used
    * to propogate order change to the backend.
    */
-  onReorderRows?: ({
-    rowId,
-    newRowIndex,
-  }: {
-    rowId: string;
-    newRowIndex: number;
-  }) => void;
+  onReorderRows?: ({ rowId, newRowIndex }: DataTableOnReorderRowsType) => void;
   /**
    * The current page number.
    */
@@ -382,6 +383,7 @@ const DataTable = ({
     useState<MRT_VisibilityState>();
   const [rowDensity, setRowDensity] =
     useState<MRT_DensityState>(initialDensity);
+  const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
   const [search, setSearch] = useState<string>("");
   const [filters, setFilters] = useState<DataFilter[]>();
   const [initialFilters, setInitialFilters] = useState<DataFilter[]>();
@@ -515,22 +517,18 @@ const DataTable = ({
     isEmpty,
   ]);
 
-  const tableState = useMemo(
-    () => ({
+  const dataTable = useMaterialReactTable({
+    columns: columns,
+    data: data,
+    getRowId: getRowId,
+    state: {
       density: rowDensity,
       sorting: columnSorting,
       globalFilter: search,
       columnVisibility,
       isLoading,
-    }),
-    [rowDensity, columnSorting, search, columnVisibility, isLoading],
-  );
-
-  const dataTable = useMaterialReactTable({
-    columns: columns,
-    data: data,
-    getRowId: getRowId,
-    state: tableState,
+      rowSelection,
+    },
     icons: {
       ArrowDownwardIcon: ArrowDownIcon,
       DragHandleIcon: DragIndicatorIcon,
@@ -597,6 +595,7 @@ const DataTable = ({
 
     // Row selection
     enableRowSelection: hasRowSelection,
+    onRowSelectionChange: setRowSelection,
 
     // Sorting
     enableSorting: hasSorting,
@@ -631,19 +630,7 @@ const DataTable = ({
     },
   });
 
-  const rowSelectionRef = useRef(dataTable.getState().rowSelection);
-  const [numberOfRowsSelected, setNumberOfRowsSelected] = useState<number>(
-    Object.keys(rowSelectionRef.current).length,
-  );
-
   // Effects
-  useEffect(() => {
-    const currentRowSelection = dataTable.getState().rowSelection;
-    rowSelectionRef.current = currentRowSelection;
-    onChangeRowSelection?.(currentRowSelection);
-    setNumberOfRowsSelected(Object.keys(currentRowSelection).length);
-  }, [onChangeRowSelection]);
-
   useEffect(() => {
     (async () => {
       setIsLoading(true);
@@ -679,44 +666,54 @@ const DataTable = ({
     );
   }, [filters, pagination, search, data]);
 
+  useEffect(() => {
+    onChangeRowSelection?.(rowSelection);
+  }, [rowSelection]);
+
   // Render the table
   return (
     <>
-      <Box sx={{ marginBottom: 5 }}>
-        <DataFilters
-          onChangeSearch={hasSearch ? setSearch : undefined}
-          onChangeFilters={hasFilters ? setFilters : undefined}
-          hasSearchSubmitButton={hasSearchSubmitButton}
-          searchDelayTime={searchDelayTime}
-          filters={hasFilters ? dataTableFilters : undefined}
-          isDisabled={isEmpty}
-          additionalActions={
-            <>
-              <DataTableSettings
-                hasChangeableDensity={hasChangeableDensity}
-                rowDensity={rowDensity}
-                setRowDensity={setRowDensity}
-                hasColumnVisibility={hasColumnVisibility}
-                columns={columns}
-                columnVisibility={columnVisibility}
-                setColumnVisibility={setColumnVisibility}
-              />
-              {bulkActionMenuItems && (
-                <>
-                  <MenuButton
-                    buttonVariant="secondary"
-                    endIcon={<MoreIcon />}
-                    isDisabled={numberOfRowsSelected === 0}
-                    ariaLabel="More actions"
-                  >
-                    {bulkActionMenuItems(dataTable.getState().rowSelection)}
-                  </MenuButton>
-                </>
-              )}
-            </>
-          }
-        />
-      </Box>
+      {(hasSearch ||
+        hasFilters ||
+        hasChangeableDensity ||
+        hasColumnVisibility ||
+        bulkActionMenuItems) && (
+        <Box sx={{ marginBottom: 5 }}>
+          <DataFilters
+            onChangeSearch={hasSearch ? setSearch : undefined}
+            onChangeFilters={hasFilters ? setFilters : undefined}
+            hasSearchSubmitButton={hasSearchSubmitButton}
+            searchDelayTime={searchDelayTime}
+            filters={hasFilters ? dataTableFilters : undefined}
+            isDisabled={isEmpty}
+            additionalActions={
+              <>
+                <DataTableSettings
+                  hasChangeableDensity={hasChangeableDensity}
+                  rowDensity={rowDensity}
+                  setRowDensity={setRowDensity}
+                  hasColumnVisibility={hasColumnVisibility}
+                  columns={columns}
+                  columnVisibility={columnVisibility}
+                  setColumnVisibility={setColumnVisibility}
+                />
+                {bulkActionMenuItems && (
+                  <>
+                    <MenuButton
+                      buttonVariant="secondary"
+                      endIcon={<MoreIcon />}
+                      isDisabled={Object.keys(rowSelection).length === 0}
+                      ariaLabel="More actions"
+                    >
+                      {bulkActionMenuItems(rowSelection)}
+                    </MenuButton>
+                  </>
+                )}
+              </>
+            }
+          />
+        </Box>
+      )}
 
       {errorMessage && (
         <Box sx={{ marginBlockEnd: 2 }}>

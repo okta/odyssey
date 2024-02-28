@@ -11,20 +11,30 @@
  */
 
 import type { Meta, StoryObj } from "@storybook/react";
-import { DataFilter, paginationTypeValues } from "@okta/odyssey-react-mui/labs";
+import { paginationTypeValues } from "@okta/odyssey-react-mui/labs";
 import {
   Button,
   DataTable,
   DataTableEmptyState,
+  DataTableGetDataType,
+  DataTableOnReorderRowsType,
   DataTableProps,
   DataTableRowSelectionState,
-  DataTableSortingState,
   MenuItem,
   densityValues,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { Person, columns, data } from "./tableAPI";
-import { Dispatch, SetStateAction, useCallback, useState } from "react";
+import {
+  Planet,
+  columns as planetColumns,
+  data as planetData,
+} from "./planetData";
+import {
+  Person,
+  columns as personColumns,
+  data as personData,
+} from "./personData";
+import { useCallback, useMemo, useState } from "react";
 
 const storybookMeta: Meta<DataTableProps> = {
   title: "MUI Components/DataTable",
@@ -291,40 +301,19 @@ const storybookMeta: Meta<DataTableProps> = {
       },
     },
   },
-  args: {
-    hasChangeableDensity: true,
-    hasColumnResizing: true,
-    hasColumnVisibility: true,
-    hasFilters: true,
-    hasPagination: true,
-    hasRowSelection: true,
-    hasSearch: true,
-    hasSorting: true,
-    hasRowReordering: true,
-    paginationType: "paged",
-    errorMessage: undefined,
-  },
   decorators: [MuiThemeDecorator],
 };
 
 export default storybookMeta;
 
-const handleGetData = ({
-  page = 1,
-  resultsPerPage = 20,
-  search,
-  filters,
-  sort,
+const filterData = ({
   data,
+  ...args
 }: {
-  page?: number;
-  resultsPerPage?: number;
-  search?: string;
-  filters?: DataFilter[];
-  sort?: DataTableSortingState;
-  data: Person[];
-}) => {
+  data: (Planet | Person)[];
+} & DataTableGetDataType) => {
   let filteredData = data;
+  const { search, filters, sort, page = 1, resultsPerPage = 20 } = args;
 
   // Implement text-based query filtering
   if (search) {
@@ -347,7 +336,7 @@ const handleGetData = ({
         // If filter value is array, search for each array value
         if (Array.isArray(value)) {
           return value.some((arrayValue) => {
-            return row[id as keyof Person]
+            return row[id as keyof (Planet | Person)]
               ?.toString()
               .toLowerCase()
               .includes(arrayValue.toString().toLowerCase());
@@ -355,7 +344,7 @@ const handleGetData = ({
         }
 
         // General filtering for other columns
-        return row[id as keyof Person]
+        return row[id as keyof (Planet | Person)]
           ?.toString()
           .toLowerCase()
           .includes(value.toString().toLowerCase());
@@ -367,8 +356,8 @@ const handleGetData = ({
   if (sort && sort.length > 0) {
     filteredData.sort((a, b) => {
       for (const { id, desc } of sort) {
-        const aValue = a[id as keyof Person];
-        const bValue = b[id as keyof Person];
+        const aValue = a[id as keyof (Planet | Person)];
+        const bValue = b[id as keyof (Planet | Person)];
 
         if (aValue < bValue) return desc ? 1 : -1;
         if (aValue > bValue) return desc ? -1 : 1;
@@ -386,19 +375,14 @@ const handleGetData = ({
   return filteredData;
 };
 
-const handleOnReorderRows = ({
-  rowId,
-  newRowIndex,
+const reorderData = ({
   data,
-  setData,
+  ...args
 }: {
-  rowId: string;
-  newRowIndex: number;
-  data: Person[];
-  setData: Dispatch<SetStateAction<Person[]>>;
-}) => {
+  data: (Planet | Person)[];
+} & DataTableOnReorderRowsType) => {
   const updatedData = data;
-
+  const { rowId, newRowIndex } = args;
   const rowIndex = updatedData.findIndex((row) => row.id === rowId);
 
   if (rowIndex !== -1) {
@@ -409,266 +393,140 @@ const handleOnReorderRows = ({
     updatedData.splice(newRowIndex, 0, removedRow);
   }
 
-  setData(updatedData);
+  return updatedData;
 };
 
 export const Default: StoryObj<DataTableProps> = {
+  args: {
+    hasChangeableDensity: true,
+    hasColumnResizing: true,
+    hasColumnVisibility: false,
+    hasFilters: true,
+    hasPagination: false,
+    hasRowSelection: true,
+    hasSearch: true,
+    hasSorting: true,
+    hasRowReordering: false,
+  },
   render: function C(props) {
-    const [tableData, setTableData] = useState(data);
+    const [data, setData] = useState<Planet[]>(planetData);
 
     const getData = useCallback(
-      (props: {
-        page?: number;
-        resultsPerPage?: number;
-        search?: string;
-        filters?: DataFilter[];
-        sort?: DataTableSortingState;
-      }) => {
-        return handleGetData({ ...props, data: tableData });
+      ({ ...props }: DataTableGetDataType) => {
+        return filterData({ data, ...props });
       },
-      [tableData],
+      [data],
     );
 
     const onReorderRows = useCallback(
-      (props: { rowId: string; newRowIndex: number }) => {
-        return handleOnReorderRows({
-          ...props,
-          data: tableData,
-          setData: setTableData,
-        });
+      ({ ...props }: DataTableOnReorderRowsType) => {
+        const reorderedData = reorderData({ data, ...props });
+        setData(reorderedData as Planet[]);
       },
-      [tableData, setTableData],
+      [data],
     );
 
     const onChangeRowSelection = useCallback(
       (rowSelection: DataTableRowSelectionState) => {
-        console.log(`${Object.keys(rowSelection).length} selected`);
+        if (Object.keys(rowSelection).length > 0) {
+          console.log(`${Object.keys(rowSelection).length} selected`);
+        }
       },
       [],
     );
 
-    const bulkActionMenuItems = (selectedRows: DataTableRowSelectionState) => (
-      <>
-        <MenuItem onClick={() => console.log(selectedRows)}>
-          Bulk action 1
-        </MenuItem>
-        <MenuItem onClick={() => console.log(selectedRows)}>
-          Bulk action 2
-        </MenuItem>
-      </>
-    );
-
-    return (
-      <DataTable
-        getData={getData}
-        columns={columns}
-        onReorderRows={onReorderRows}
-        onChangeRowSelection={onChangeRowSelection}
-        bulkActionMenuItems={bulkActionMenuItems}
-        errorMessage={props.errorMessage}
-        emptyPlaceholder={
-          <DataTableEmptyState
-            heading="Start by adding data assets"
-            text="All relevant data will be displayed and can be searched and filtered"
-            primaryButton={<Button variant="primary" label="Primary" />}
-            secondaryButton={<Button variant="secondary" label="Secondary" />}
-          />
-        }
-        noResultsPlaceholder={
-          <DataTableEmptyState
-            heading="Whoops, there's nothing here!"
-            text="You should try searching or filtering for something else."
-          />
-        }
-        initialDensity={props.initialDensity}
-        hasChangeableDensity={props.hasChangeableDensity}
-        hasColumnResizing={props.hasColumnResizing}
-        hasColumnVisibility={props.hasColumnVisibility}
-        hasFilters={props.hasFilters}
-        hasPagination={props.hasPagination}
-        hasRowSelection={props.hasRowSelection}
-        hasSearch={props.hasSearch}
-        hasSorting={props.hasSorting}
-        hasRowReordering={props.hasRowReordering}
-        hasSearchSubmitButton={props.hasSearchSubmitButton}
-        searchDelayTime={props.searchDelayTime}
-        currentPage={props.currentPage}
-        resultsPerPage={props.resultsPerPage}
-        totalRows={props.totalRows}
-      />
-    );
-  },
-};
-
-export const Simple: StoryObj<DataTableProps> = {
-  args: {
-    hasChangeableDensity: false,
-    hasColumnResizing: false,
-    hasColumnVisibility: false,
-    hasFilters: false,
-    hasPagination: false,
-    hasRowSelection: false,
-    hasSearch: false,
-    hasRowReordering: false,
-    resultsPerPage: 200,
-    totalRows: 200,
-    hasSorting: false,
-  },
-  render: function C(props) {
-    const simpleColumns = [
-      {
-        accessorKey: "name",
-        header: "Name",
-      },
-      {
-        accessorKey: "distance",
-        header: "Avg Distance from Sun",
-      },
-    ];
-
-    const getData = () => [
-      {
-        name: "Mercury",
-        distance: "0.4 AU",
-      },
-      {
-        name: "Venus",
-        distance: "0.7 AU",
-      },
-      {
-        name: "Earth",
-        distance: "1.0 AU",
-      },
-      {
-        name: "Mars",
-        distance: "1.5 AU",
-      },
-      {
-        name: "Jupiter",
-        distance: "5.2 AU",
-      },
-      {
-        name: "Saturn",
-        distance: "9.6 AU",
-      },
-      {
-        name: "Uranus",
-        distance: "19.2 AU",
-      },
-      {
-        name: "Neptune",
-        distance: "30.0 AU",
-      },
-    ];
-
-    return <DataTable {...props} columns={simpleColumns} getData={getData} />;
-  },
-};
-
-export const Empty: StoryObj<DataTableProps> = {
-  render: function C(props) {
     return (
       <DataTable
         {...props}
-        getData={() => []}
-        columns={columns}
-        emptyPlaceholder={
-          <DataTableEmptyState
-            heading="Start by adding data assets"
-            text="All relevant data will be displayed and can be searched and filtered"
-            primaryButton={<Button variant="primary" label="Primary" />}
-            secondaryButton={<Button variant="secondary" label="Secondary" />}
-          />
-        }
+        columns={planetColumns}
+        getData={getData}
+        onReorderRows={onReorderRows}
+        onChangeRowSelection={onChangeRowSelection}
       />
     );
   },
 };
 
-export const LoadMore: StoryObj<DataTableProps> = {
+export const API: StoryObj<DataTableProps> = {
+  args: {
+    hasChangeableDensity: true,
+    hasColumnResizing: true,
+    hasColumnVisibility: true,
+    hasFilters: true,
+    hasPagination: true,
+    hasRowSelection: true,
+    hasSearch: true,
+    hasSorting: true,
+    hasRowReordering: true,
+    totalRows: 200,
+  },
   render: function C(props) {
-    const [tableData, setTableData] = useState(data);
+    const [data, setData] = useState<Person[]>(personData);
 
     const getData = useCallback(
-      (props: {
-        page?: number;
-        resultsPerPage?: number;
-        search?: string;
-        filters?: DataFilter[];
-        sort?: DataTableSortingState;
-      }) => {
-        return handleGetData({ ...props, data: tableData });
+      ({ ...props }: DataTableGetDataType) => {
+        return filterData({ data, ...props });
       },
-      [tableData],
+      [data],
     );
 
     const onReorderRows = useCallback(
-      (props: { rowId: string; newRowIndex: number }) => {
-        return handleOnReorderRows({
-          ...props,
-          data: tableData,
-          setData: setTableData,
-        });
+      ({ ...props }: DataTableOnReorderRowsType) => {
+        const reorderedData = reorderData({ data, ...props });
+        setData(reorderedData as Person[]);
       },
-      [tableData, setTableData],
+      [data],
     );
 
     const onChangeRowSelection = useCallback(
       (rowSelection: DataTableRowSelectionState) => {
-        console.log(`${Object.keys(rowSelection).length} selected`);
+        if (Object.keys(rowSelection).length > 0) {
+          console.log(`${Object.keys(rowSelection).length} selected`);
+        }
       },
       [],
     );
 
-    const bulkActionMenuItems = (selectedRows: DataTableRowSelectionState) => (
+    const emptyPlaceholder = useMemo(
+      () => (
+        <DataTableEmptyState
+          heading="Start by adding data assets"
+          text="All relevant data will be displayed and can be searched and filtered"
+          primaryButton={<Button variant="primary" label="Primary" />}
+          secondaryButton={<Button variant="secondary" label="Secondary" />}
+        />
+      ),
+      [],
+    );
+
+    const noResultsPlaceholder = useMemo(
+      () => (
+        <DataTableEmptyState
+          heading="Whoops, there's nothing here!"
+          text="You should try searching or filtering for something else."
+        />
+      ),
+      [],
+    );
+
+    const actionMenuItems = (selectedRows: DataTableRowSelectionState) => (
       <>
-        <MenuItem onClick={() => console.log(selectedRows)}>
-          Bulk action 1
-        </MenuItem>
-        <MenuItem onClick={() => console.log(selectedRows)}>
-          Bulk action 2
-        </MenuItem>
+        <MenuItem onClick={() => console.log(selectedRows)}>Action 1</MenuItem>
+        <MenuItem onClick={() => console.log(selectedRows)}>Action 2</MenuItem>
       </>
     );
 
     return (
       <DataTable
+        {...props}
+        columns={personColumns}
         getData={getData}
-        columns={columns}
         onReorderRows={onReorderRows}
         onChangeRowSelection={onChangeRowSelection}
-        bulkActionMenuItems={bulkActionMenuItems}
-        errorMessage={props.errorMessage}
-        paginationType="loadMore"
-        emptyPlaceholder={
-          <DataTableEmptyState
-            heading="Start by adding data assets"
-            text="All relevant data will be displayed and can be searched and filtered"
-            primaryButton={<Button variant="primary" label="Primary" />}
-            secondaryButton={<Button variant="secondary" label="Secondary" />}
-          />
-        }
-        noResultsPlaceholder={
-          <DataTableEmptyState
-            heading="Whoops, there's nothing here!"
-            text="You should try searching or filtering for something else."
-          />
-        }
-        initialDensity={props.initialDensity}
-        hasChangeableDensity={props.hasChangeableDensity}
-        hasColumnResizing={props.hasColumnResizing}
-        hasColumnVisibility={props.hasColumnVisibility}
-        hasFilters={props.hasFilters}
-        hasPagination={props.hasPagination}
-        hasRowSelection={props.hasRowSelection}
-        hasSearch={props.hasSearch}
-        hasSorting={props.hasSorting}
-        hasRowReordering={props.hasRowReordering}
-        hasSearchSubmitButton={props.hasSearchSubmitButton}
-        searchDelayTime={props.searchDelayTime}
-        currentPage={props.currentPage}
-        resultsPerPage={props.resultsPerPage}
-        totalRows={props.totalRows}
+        emptyPlaceholder={emptyPlaceholder}
+        noResultsPlaceholder={noResultsPlaceholder}
+        rowActionMenuItems={actionMenuItems}
+        bulkActionMenuItems={actionMenuItems}
       />
     );
   },
