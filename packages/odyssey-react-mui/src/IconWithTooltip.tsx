@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, ReactElement } from "react";
+import { memo, ReactNode } from "react";
 import styled from "@emotion/styled";
 import { Tooltip as MuiTooltip } from "@mui/material";
 import type { TooltipProps as MuiTooltipProps } from "@mui/material";
@@ -23,39 +23,31 @@ import {
   DesignTokens,
 } from "./OdysseyDesignTokensContext";
 
-const IconContainer = styled("span", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{
+const IconContainer = styled.span<{
   odysseyDesignTokens: DesignTokens;
-}>`
-  display: inline-flex;
-  border: 1px solid transparent;
-  transition-property: border-color, box-shadow, outline;
-  transition-duration: ${({ odysseyDesignTokens }) =>
-    odysseyDesignTokens.TransitionDurationMain};
+}>(({ odysseyDesignTokens }) => ({
+  display: "inline-flex",
+  transitionProperty: "border-color, box-shadow, outline",
+  transitionDuration: odysseyDesignTokens.TransitionDurationMain,
+  border: "1px solid transparent",
 
-  &:focus,
-  &:focus-visible {
-    border-color: ${({ odysseyDesignTokens }) =>
-      odysseyDesignTokens.FocusOutlineColorPrimary};
-    box-shadow: ${({ odysseyDesignTokens }) =>
-      `0 0 0 1px ${odysseyDesignTokens.FocusOutlineColorPrimary}`};
-    outline: ${({ odysseyDesignTokens }) =>
-      `${odysseyDesignTokens.FocusOutlineWidthMain} ${odysseyDesignTokens.FocusOutlineStyle} transparent`};
-    outline-offset: ${({ odysseyDesignTokens }) =>
-      odysseyDesignTokens.FocusOutlineOffsetTight};
-  }
+  "&:focus, &:focus-visible": {
+    borderColor: odysseyDesignTokens.FocusOutlineColorPrimary,
+    boxShadow: `0 0 0 1px ${odysseyDesignTokens.FocusOutlineColorPrimary}`,
+    outline: `${odysseyDesignTokens.FocusOutlineWidthMain} ${odysseyDesignTokens.FocusOutlineStyle} transparent`,
+    outlineOffset: odysseyDesignTokens.FocusOutlineOffsetTight,
+  },
 
-  svg {
-    display: flex;
-  }
-`;
+  svg: {
+    display: "flex",
+  },
+}));
 
 export type IconWithTooltipProps = {
   /**
    * The icon to render. Defaults to `InformationCircleIcon`
    */
-  IconComponent?: ReactElement;
+  IconComponent?: ReactNode;
   /**
    * The placement of the Tooltip
    */
