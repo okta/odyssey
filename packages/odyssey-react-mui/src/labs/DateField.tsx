@@ -16,6 +16,7 @@ import {
   DateField as MuiDateField,
   DateFieldProps as MuiDateFieldProps,
 } from "@mui/x-date-pickers";
+// import { FieldChangeHandler } from '@mui/material';
 import { forwardRef, memo, useCallback } from "react";
 
 import { Field, RenderFieldProps } from "../Field";
@@ -68,7 +69,7 @@ const DateField = forwardRef<HTMLInputElement, DateFieldProps>(
   ) => {
     const handleChange = (
       value: Date | null,
-      validationError: DateValidationError
+      validationError: DateValidationError,
     ) => {
       // const value = event.target.value;
       console.log({ value }, { validationError });
@@ -90,7 +91,7 @@ const DateField = forwardRef<HTMLInputElement, DateFieldProps>(
           id={id}
           name={id}
           onBlur={onBlur}
-          
+          // @ts-ignore
           onChange={handleChange}
           onFocus={onFocus}
           readOnly={isReadOnly}
