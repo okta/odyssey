@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-typescript",
-  "version": "1.14.2",
+  "version": "1.14.3",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "sideEffects": false,
