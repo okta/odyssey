@@ -72,7 +72,7 @@ const storybookMeta: Meta<DataTableProps> = {
       options: densityValues,
       control: { type: "radio" },
       description:
-        "The initial density of the table. This is available even if the table density isn't changeable.",
+        "The initial density (height & padding) of the table rows. This is available even if the table density isn't changeable by the end user via hasChangeableDensity.",
       table: {
         type: {
           summary: densityValues.join(" | "),

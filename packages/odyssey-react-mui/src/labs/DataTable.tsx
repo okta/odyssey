@@ -428,10 +428,7 @@ const DataTable = ({
   const rowVirtualizerInstanceRef =
     useRef<MRT_RowVirtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
 
-  const getRowFromTableAndSetHovered = (
-    table: TableType,
-    id: MRT_RowData["id"],
-  ) => {
+  const setHoveredRow = (table: TableType, id: MRT_RowData["id"]) => {
     if (id) {
       const nextRow: MRT_RowData = table.getRow(id);
 
@@ -501,12 +498,12 @@ const DataTable = ({
 
           if (isArrowDown || isArrowUp) {
             const nextIndex = isArrowDown ? index + 1 : index - 1;
-            getRowFromTableAndSetHovered(table, data[nextIndex]?.id);
+            setHoveredRow(table, data[nextIndex]?.id);
           }
         } else {
           if (isArrowDown || isArrowUp) {
             const nextIndex = isArrowDown ? row.index + 1 : row.index - 1;
-            getRowFromTableAndSetHovered(table, data[nextIndex]?.id);
+            setHoveredRow(table, data[nextIndex]?.id);
           }
         }
       } else {

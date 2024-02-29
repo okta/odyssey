@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Dispatch, SetStateAction, memo } from "react";
+import { Dispatch, SetStateAction, memo, useCallback } from "react";
 import { Checkbox as MuiCheckbox } from "@mui/material";
 import { MenuButton } from "../MenuButton";
 import { MenuItem } from "../MenuItem";
@@ -42,6 +42,31 @@ const DataTableSettings = ({
   setColumnVisibility,
 }: DataTableSettingsProps) => {
   const { t } = useTranslation();
+
+  const changeRowDensity = useCallback(
+    (value: (typeof densityValues)[number]) =>
+      (_event: React.MouseEvent<HTMLLIElement>) => {
+        // This is necessary to avoid linter errors, while the _event is necessary to satisfy the onClick type
+        if (process.env.NODE_ENV === "development") console.debug(_event);
+
+        setRowDensity(value);
+      },
+    [setRowDensity],
+  );
+
+  const changeColumnVisibility = useCallback(
+    (columnId: string) => (_event: React.MouseEvent<HTMLLIElement>) => {
+      // This is necessary to avoid linter errors, while the _event is necessary to satisfy the onClick type
+      if (process.env.NODE_ENV === "development") console.debug(_event);
+
+      setColumnVisibility((prevVisibility) => ({
+        ...prevVisibility,
+        [columnId]: prevVisibility ? prevVisibility[columnId] === false : false,
+      }));
+    },
+    [setColumnVisibility],
+  );
+
   return (
     <>
       {hasChangeableDensity && (
@@ -56,7 +81,7 @@ const DataTableSettings = ({
               <MenuItem
                 key={value}
                 isSelected={rowDensity === value}
-                onClick={() => setRowDensity(value)}
+                onClick={changeRowDensity(value)}
               >
                 {`${value.charAt(0).toUpperCase()}${value.slice(1)}`}
               </MenuItem>
@@ -78,15 +103,7 @@ const DataTableSettings = ({
               .map((column) => (
                 <MenuItem
                   key={column.accessorKey}
-                  onClick={() => {
-                    const columnId = column.id as string;
-                    setColumnVisibility((prevVisibility) => ({
-                      ...prevVisibility,
-                      [columnId]: prevVisibility
-                        ? prevVisibility[columnId] === false
-                        : false,
-                    }));
-                  }}
+                  onClick={changeColumnVisibility(column.id as string)}
                 >
                   <MuiCheckbox
                     checked={
@@ -105,5 +122,6 @@ const DataTableSettings = ({
     </>
   );
 };
+
 const MemoizedDataTableSettings = memo(DataTableSettings);
 export { MemoizedDataTableSettings as DataTableSettings };
