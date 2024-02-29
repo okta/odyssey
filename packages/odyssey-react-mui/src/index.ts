@@ -74,6 +74,7 @@ export * from "./Fieldset";
 export * from "./FieldComponentProps";
 export * from "./Form";
 export * from "./HintLink";
+export * from "./IconWithTooltip";
 export * from "./Link";
 export * from "./MenuButton";
 export * from "./MenuItem";
