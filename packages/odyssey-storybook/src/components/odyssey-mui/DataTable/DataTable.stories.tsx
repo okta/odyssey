@@ -531,3 +531,60 @@ export const API: StoryObj<DataTableProps> = {
     );
   },
 };
+
+export const Empty: StoryObj<DataTableProps> = {
+  args: {
+    hasChangeableDensity: true,
+    hasColumnResizing: true,
+    hasColumnVisibility: false,
+    hasFilters: true,
+    hasPagination: false,
+    hasRowSelection: true,
+    hasSearch: true,
+    hasSorting: true,
+    hasRowReordering: false,
+  },
+  render: function C(props) {
+    const [data, setData] = useState<Planet[]>(planetData);
+
+    const onReorderRows = useCallback(
+      ({ ...props }: DataTableOnReorderRowsType) => {
+        const reorderedData = reorderData({ data, ...props });
+        setData(reorderedData as Planet[]);
+      },
+      [data],
+    );
+
+    const onChangeRowSelection = useCallback(
+      (rowSelection: DataTableRowSelectionState) => {
+        if (Object.keys(rowSelection).length > 0) {
+          console.log(`${Object.keys(rowSelection).length} selected`);
+        }
+      },
+      [],
+    );
+
+    const emptyPlaceholder = useMemo(
+      () => (
+        <DataTableEmptyState
+          heading="Start by adding data assets"
+          text="All relevant data will be displayed and can be searched and filtered"
+          primaryButton={<Button variant="primary" label="Primary" />}
+          secondaryButton={<Button variant="secondary" label="Secondary" />}
+        />
+      ),
+      [],
+    );
+
+    return (
+      <DataTable
+        {...props}
+        columns={planetColumns}
+        getData={() => []}
+        onReorderRows={onReorderRows}
+        onChangeRowSelection={onChangeRowSelection}
+        emptyPlaceholder={emptyPlaceholder}
+      />
+    );
+  },
+};
