@@ -10,8 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Status } from "@okta/odyssey-react-mui";
-import { DataColumn } from "@okta/odyssey-react-mui/labs";
+import { DataTableRowData, Status } from "@okta/odyssey-react-mui";
+import { DataTableColumn } from "@okta/odyssey-react-mui";
 
 export type Person = {
   order: number;
@@ -23,10 +23,10 @@ export type Person = {
   risk: "high" | "medium" | "low";
 };
 
-export const columns: DataColumn[] = [
+export const columns: DataTableColumn<DataTableRowData>[] = [
   {
     accessorKey: "order",
-    header: "Original order",
+    header: "ID",
     enableColumnFilter: false,
     size: 120,
   },
@@ -85,11 +85,11 @@ export const data: Person[] = [
   {
     order: 0,
     id: "9d3cd264-0212-4827-b421-3d77bc22c0a9",
-    name: "Rebecca Bluth",
-    city: "New Paltz",
+    name: "Jordan Koschei",
+    city: "Poughkeepsie",
     state: "New York",
-    age: 54,
-    risk: "low",
+    age: 34,
+    risk: "high",
   },
   {
     order: 1,

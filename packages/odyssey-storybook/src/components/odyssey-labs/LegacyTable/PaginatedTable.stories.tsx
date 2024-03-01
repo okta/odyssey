@@ -14,10 +14,10 @@ import { useCallback, useMemo, useRef, useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { Button } from "@okta/odyssey-react-mui";
 import {
-  TableColumn,
   PaginatedTable,
   PaginatedTableProps,
 } from "@okta/odyssey-react-mui/labs";
+import { DataTableColumn } from "@okta/odyssey-react-mui";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
@@ -98,7 +98,7 @@ type Person = {
   state: string;
 };
 
-const columns: TableColumn<Person>[] = [
+const columns: DataTableColumn<Person>[] = [
   {
     accessorKey: "name.firstName",
     header: "First Name",
@@ -581,7 +581,7 @@ export const CustomToolbar: StoryObj<PaginatedTableProps<Person>> = {
   },
 };
 
-// const reportColumns: TableColumn<any>[] = [
+// const reportColumns: DataTableColumn<any>[] = [
 //   {
 //     accessorKey: "name",
 //     Cell: ({ cell }) => <Link href="#none">{cell.getValue<string>()}</Link>,

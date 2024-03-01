@@ -30,7 +30,9 @@ import { Button } from "../Button";
 import {
   IconButton as MuiIconButton,
   Menu as MuiMenu,
+  MenuItem as MuiMenuItem,
   Popover as MuiPopover,
+  Typography as MuiTypography,
 } from "@mui/material";
 import {
   CheckIcon,
@@ -38,14 +40,14 @@ import {
   CloseCircleFilledIcon,
   FilterIcon,
 } from "../icons.generated";
-import { MenuItem } from "../MenuItem";
-import { Paragraph, Subordinate } from "../Typography";
+import { Subordinate } from "../Typography";
 import { TextField } from "../TextField";
 import { CheckboxGroup } from "../CheckboxGroup";
 import { Checkbox } from "../Checkbox";
 import { RadioGroup } from "../RadioGroup";
 import { Radio } from "../Radio";
 import { MRT_ColumnDef, MRT_RowData } from "material-react-table";
+import { Trans, useTranslation } from "react-i18next";
 
 export type DataFilterValue = string | string[] | undefined;
 
@@ -128,6 +130,7 @@ const DataFilters = ({
   filters: filtersProp = [],
 }: DataFiltersProps) => {
   const [filters, setFilters] = useState<DataFilter[]>(filtersProp);
+  const { t } = useTranslation();
 
   const initialInputValues = useMemo(() => {
     return filtersProp.reduce(
@@ -307,7 +310,7 @@ const DataFilters = ({
             aria-controls={isFiltersMenuOpen ? "filters-menu" : undefined}
             aria-expanded={isFiltersMenuOpen ? "true" : undefined}
             aria-haspopup="true"
-            ariaLabel="Filters"
+            ariaLabel={t("filters.filters.arialabel")}
             endIcon={<FilterIcon />}
             onClick={(event) => {
               setFiltersMenuAnchorElement(event.currentTarget);
@@ -337,13 +340,23 @@ const DataFilters = ({
             )?.value;
 
             return (
-              <MenuItem
+              <MuiMenuItem
                 key={filter.id}
                 onClick={(event) => {
                   setIsFilterPopoverOpen(true);
                   setFilterPopoverAnchorElement(event.currentTarget);
                   setFilterPopoverCurrentFilter(filter);
                 }}
+                selected={
+                  filterPopoverCurrentFilter === filter &&
+                  isFilterPopoverOpen === true
+                }
+                className={
+                  filterPopoverCurrentFilter === filter &&
+                  isFilterPopoverOpen === true
+                    ? "isVisiblySelected"
+                    : undefined
+                }
               >
                 <Box
                   sx={{
@@ -352,29 +365,54 @@ const DataFilters = ({
                     justifyContent: "space-between",
                     width: "100%",
                     minWidth: 180,
+                    paddingBlock: 1,
+                    paddingInlineStart: 2,
                   }}
                 >
                   <Box sx={{ marginRight: 2 }}>
-                    <Paragraph component="div">{filter.label}</Paragraph>
+                    <MuiTypography fontWeight="500" sx={{ marginBlockEnd: 2 }}>
+                      {filter.label}
+                    </MuiTypography>
                     <Subordinate component="div">
                       {!latestFilterValue ||
                       (Array.isArray(latestFilterValue) &&
-                        latestFilterValue.length === 0)
-                        ? `Any ${filter.label.toLowerCase()}`
-                        : Array.isArray(latestFilterValue)
-                          ? `${latestFilterValue.length} selected`
-                          : latestFilterValue}
+                        latestFilterValue.length === 0) ? (
+                        <Trans
+                          i18nKey="filters.menuitem.any"
+                          values={{
+                            label: filter.label.toLowerCase(),
+                          }}
+                        />
+                      ) : Array.isArray(latestFilterValue) ? (
+                        <Trans
+                          count={latestFilterValue.length}
+                          i18nKey="filters.menuitem.selected"
+                          values={{
+                            selected: latestFilterValue.length,
+                          }}
+                        />
+                      ) : (
+                        latestFilterValue
+                      )}
                     </Subordinate>
                   </Box>
                   <ChevronRightIcon />
                 </Box>
-              </MenuItem>
+              </MuiMenuItem>
             );
           })}
         </MuiMenu>
       </>
     ),
-    [isFiltersMenuOpen, filtersMenuAnchorElement, filtersProp, filters],
+    [
+      isFiltersMenuOpen,
+      filterPopoverCurrentFilter,
+      isFilterPopoverOpen,
+      filtersMenuAnchorElement,
+      filtersProp,
+      filters,
+      t,
+    ],
   );
 
   return (
@@ -390,6 +428,11 @@ const DataFilters = ({
               {/* Filter popover */}
               <MuiPopover
                 anchorEl={filterPopoverAnchorElement}
+                // Positions the popover flush with the edge of the parent menu
+                // and at the right shadow elevation. These magic values are simply
+                // to match the default popover offset.
+                elevation={2}
+                sx={{ marginLeft: 2, marginTop: -1 }}
                 open={isFilterPopoverOpen}
                 anchorOrigin={{ vertical: "top", horizontal: "right" }}
                 onClose={(ev: MouseEvent) => {
@@ -493,7 +536,7 @@ const DataFilters = ({
                               inputValues[filterPopoverCurrentFilter.id] && (
                                 <MuiIconButton
                                   size="small"
-                                  aria-label="Clear filter"
+                                  aria-label={t("filters.filter.clear")}
                                   onClick={() => {
                                     updateInputValue({
                                       filterId: filterPopoverCurrentFilter.id,
@@ -571,7 +614,7 @@ const DataFilters = ({
                           }}
                         >
                           <Radio
-                            label="Any"
+                            label={t("filters.filter.any")}
                             value={""}
                             isChecked={
                               !inputValues[filterPopoverCurrentFilter.id]
@@ -615,7 +658,7 @@ const DataFilters = ({
               <Box sx={{ display: "flex", gap: 2, width: "100%" }}>
                 <SearchField
                   value={searchValue}
-                  label="Search"
+                  label={t("filters.search.label")}
                   onClear={() => {
                     setSearchValue("");
                     onChangeSearch("");
@@ -626,7 +669,7 @@ const DataFilters = ({
                   <Box>
                     <Button
                       variant="primary"
-                      label="Search"
+                      label={t("filters.search.label")}
                       onClick={() => onChangeSearch(searchValue)}
                     />
                   </Box>
@@ -642,7 +685,7 @@ const DataFilters = ({
             <Box>
               <Button
                 variant="secondary"
-                label="Clear filters"
+                label={t("filters.clear.label")}
                 onClick={clearAllFilters}
               />
             </Box>

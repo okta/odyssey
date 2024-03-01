@@ -10,11 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {
-  DataFilter,
-  DataTable,
-  MRT_SortingState,
-} from "@okta/odyssey-react-mui/labs";
+import { DataFilter } from "@okta/odyssey-react-mui/labs";
+import { DataTable, DataTableSortingState } from "@okta/odyssey-react-mui";
 import { columns, data as incomingData, OdysseyComponent } from "./roadmapData";
 import {
   Callout,
@@ -39,7 +36,7 @@ const processData = ({
   resultsPerPage?: number;
   search?: string;
   filters?: DataFilter[];
-  sort?: MRT_SortingState;
+  sort?: DataTableSortingState;
 }) => {
   let filteredData = [...initialData];
 
@@ -142,7 +139,7 @@ export const InnerRoadmapTable = () => {
     resultsPerPage?: number;
     search?: string;
     filters?: DataFilter[];
-    sort?: MRT_SortingState;
+    sort?: DataTableSortingState;
   }) => {
     return processData({
       initialData: data,
@@ -154,15 +151,12 @@ export const InnerRoadmapTable = () => {
     });
   };
 
-  const startingData = fetchData({});
-
   return (
     <DataTable
       columns={columns}
-      data={startingData}
       totalRows={data.length}
       getRowId={({ name }) => name}
-      fetchDataFn={fetchData}
+      getData={fetchData}
       hasChangeableDensity
       hasColumnResizing
       hasColumnVisibility
