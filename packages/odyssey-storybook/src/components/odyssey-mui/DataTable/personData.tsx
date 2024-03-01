@@ -85,8 +85,8 @@ export const data: Person[] = [
   {
     order: 0,
     id: "9d3cd264-0212-4827-b421-3d77bc22c0a9",
-    name: "Jordan Koschei",
-    city: "Poughkeepsie",
+    name: "John Doe",
+    city: "New Paltz",
     state: "New York",
     age: 34,
     risk: "high",

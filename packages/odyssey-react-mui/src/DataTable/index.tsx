@@ -10,7 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export { DataTable, type DataTableProps } from "./DataTable";
+export {
+  DataTable,
+  type DataTableProps,
+  type DataTableGetDataType,
+  type DataTableOnReorderRowsType,
+} from "./DataTable";
+export { DataTableEmptyState } from "./DataTableEmptyState";
 export { densityValues } from "./constants";
 export type {
   MRT_ColumnFiltersState as DataTableFiltersState,
