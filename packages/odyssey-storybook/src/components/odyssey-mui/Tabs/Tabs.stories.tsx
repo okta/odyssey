@@ -291,8 +291,8 @@ export const WithBadge: StoryObj<TabItemProps> = {
 export const Scrollable: StoryObj<TabItemProps> = {
   render: function C() {
     const [numTabs, setNumTabs] = useState(50);
-    const [hasScrollButtons, setHasScrollButtons] =
-      useState<TabsProps["hasScrollButtons"]>("auto");
+    const [scrollButtonsDisplay, setScrollButtonsDisplay] =
+      useState<TabsProps["scrollButtonsDisplay"]>("auto");
 
     const tabs: TabItemProps[] = Array.from({ length: numTabs }, (_v, i) => ({
       label: `Tab ${i + 1}`,
@@ -303,7 +303,9 @@ export const Scrollable: StoryObj<TabItemProps> = {
     const handleScrollButtonsChange = (
       e: SelectChangeEvent<string | string[]>,
     ) => {
-      setHasScrollButtons(e.target.value as TabsProps["hasScrollButtons"]);
+      setScrollButtonsDisplay(
+        e.target.value as TabsProps["scrollButtonsDisplay"],
+      );
     };
 
     return (
@@ -319,9 +321,9 @@ export const Scrollable: StoryObj<TabItemProps> = {
           </Grid>
           <Grid>
             <Select
-              label="hasScrollButtons"
+              label="scrollButtonsDisplay"
               options={["auto", "always", "never"]}
-              value={hasScrollButtons}
+              value={scrollButtonsDisplay}
               onChange={handleScrollButtonsChange}
             />
           </Grid>
@@ -329,7 +331,7 @@ export const Scrollable: StoryObj<TabItemProps> = {
         <Tabs
           ariaLabel="scrollable tabs example"
           tabs={tabs}
-          hasScrollButtons={hasScrollButtons}
+          scrollButtonsDisplay={scrollButtonsDisplay}
         />
       </>
     );
