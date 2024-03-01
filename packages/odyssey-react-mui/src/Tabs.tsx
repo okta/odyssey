@@ -68,6 +68,17 @@ export type TabsProps = {
    */
   tabs: TabItemProps[];
   /**
+   * Determine behavior of scroll buttons when tabs are set to scroll:
+   *
+   * - `auto` will only present them when not all the items are visible.
+   * - `true` will always present them.
+   * - `false` will never present them.
+   *
+   * By default the scroll buttons are hidden on mobile.
+   * @default 'auto'
+   */
+  scrollButtons?: MuiTabListProps["scrollButtons"];
+  /**
    * Identifier for the selected tab.
    */
   value?: string;
@@ -117,6 +128,7 @@ const Tabs = ({
   ariaLabel,
   initialValue,
   tabs,
+  scrollButtons,
   value,
   onChange: onChangeProp,
 }: TabsProps & Pick<HtmlProps, "ariaLabel">) => {
@@ -177,6 +189,7 @@ const Tabs = ({
         onChange={onChange}
         aria-label={ariaLabel}
         variant="scrollable"
+        scrollButtons={scrollButtons}
       >
         {tabs.map((tab, index) => renderTab(tab, index))}
       </MuiTabList>
