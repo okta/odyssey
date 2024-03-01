@@ -11,127 +11,36 @@
  */
 
 import type { Meta, StoryObj } from "@storybook/react";
-import { columns, data as incomingData, Person } from "./tableAPI";
-import { Box, Button, Callout, MenuItem } from "@okta/odyssey-react-mui";
+// import { columns, data as incomingData, Person } from "./tableAPI";
+// import { Box, Button, Callout, MenuItem } from "@okta/odyssey-react-mui";
+import { DataFilter, paginationTypeValues } from "@okta/odyssey-react-mui/labs";
 import {
-  DataFilter,
   DataTable,
   DataTableProps,
-  MRT_SortingState,
+  DataTableRowSelectionState,
+  DataTableSortingState,
   densityValues,
-  paginationTypeValues,
-} from "@okta/odyssey-react-mui/labs";
+} from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { useState } from "react";
-import { DeleteIcon } from "@okta/odyssey-react-mui/icons";
+import { Person, columns, data } from "./tableAPI";
+import { Dispatch, SetStateAction, useCallback, useState } from "react";
 
 const storybookMeta: Meta<DataTableProps> = {
   title: "Labs Components/DataTable",
   component: DataTable,
   argTypes: {
-    hasChangeableDensity: {
-      control: "boolean",
-      description: "",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
-    hasColumnResizing: {
-      control: "boolean",
-      description: "",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
-    hasColumnVisibility: {
-      control: "boolean",
-      description: "",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
-    hasFilters: {
-      control: "boolean",
-      description: "",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
-    hasPagination: {
-      control: "boolean",
-      description: "",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
-    hasRowSelection: {
-      control: "boolean",
-      description: "",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
-    hasRowReordering: {
-      control: "boolean",
-      description: "",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
-    hasSearch: {
-      control: "boolean",
-      description: "",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
-    hasSorting: {
-      control: "boolean",
-      description: "",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
-
     columns: {
       control: null,
-      description: "",
+      description: "The columns that make up the table.",
       table: {
         type: {
-          summary: "MRT_ColumnDef<MRT_RowData, null>",
-        },
-      },
-    },
-    data: {
-      control: null,
-      description: "",
-      table: {
-        type: {
-          summary: "MRT_RowData[]",
+          summary: "DataTableColumn<DataTableRowData>",
         },
       },
     },
     totalRows: {
       control: "number",
-      description: "",
+      description: `The total number of rows in the table. Optional, because it's sometimes impossible to calculate.Used in table pagination to know when to disable the "next"/"more" button.`,
       table: {
         type: {
           summary: "number",
@@ -140,67 +49,163 @@ const storybookMeta: Meta<DataTableProps> = {
     },
     getRowId: {
       control: null,
-      description: "",
+      description: "The function to get the ID of a row",
       table: {
         type: {
           summary:
-            "((originalRow: MRT_RowData, index: number, parentRow: MRT_Row<MRT_RowData>) => string) | undefined",
+            "((originalRow: MRT_RowData, index: number, parentRow: MRT_Row<MRT_RowData>) => string)",
         },
       },
     },
     initialDensity: {
       options: densityValues,
       control: { type: "radio" },
-      description: "",
+      description:
+        "The initial density of the table. This is available even if the table density isn't changeable.",
       table: {
         type: {
           summary: densityValues.join(" | "),
         },
-        defaultValue: {
-          summary: "medium",
-        },
       },
     },
-    hasSearchSubmitButton: {
+    hasChangeableDensity: {
       control: "boolean",
-      description: "",
+      description:
+        "If true, the end user will be able to change the table density.",
       table: {
         type: {
           summary: "boolean",
         },
       },
     },
-    onRowSelectionChange: {
+    hasColumnResizing: {
+      control: "boolean",
+      description: "If true, the end user can resize individual columns.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    hasColumnVisibility: {
+      control: "boolean",
+      description: "If true, the end user will be able to show/hide columns.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    hasFilters: {
+      control: "boolean",
+      description: "If true, the end user will be able to filter columns.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    hasPagination: {
+      control: "boolean",
+      description: "If true, the table will include pagination controls.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    hasRowSelection: {
+      control: "boolean",
+      description:
+        "If true, the table will include checkboxes on each row, enabling the user to select some or all rows.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    hasSearch: {
+      control: "boolean",
+      description: "If true, the global table search controls will be shown.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    hasSorting: {
+      control: "boolean",
+      description:
+        "If true, the end user can sort columns (ascending, descending, or neither)",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    hasRowReordering: {
+      control: "boolean",
+      description:
+        "If true, the end user can reorder rows via a drag-and-drop interface.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    hasSearchSubmitButton: {
+      control: "boolean",
+      description:
+        "If true, the search field will include a Search button, rather than firing on input change.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    searchDelayTime: {
+      control: "number",
+      description:
+        "The debounce time, in milliseconds, for the search input firing `onChangeSearch` when changed. If `hasSearchSubmitButton` is true, this doesn't do anything.",
+      table: {
+        type: {
+          summary: "number",
+        },
+      },
+    },
+    onChangeRowSelection: {
       control: null,
-      description: "",
+      description:
+        "Callback that fires when a row (or rows) is selected or unselected.",
       table: {
         type: {
           summary: "(rowSelection: MRT_RowSelectionState) => void",
         },
       },
     },
-    fetchDataFn: {
+    getData: {
       control: null,
-      description: "",
+      description:
+        "Callback that fires whenever the table needs to fetch new data, due to changes in page, results per page, search input, filters, or sorting",
       table: {
         type: {
-          summary:
-            "({ page, resultsPerPage, search, filters, sort }) => MRT_RowData[]",
+          summary: `({ page, resultsPerPage, search, filters, sort }: { page?: number; resultsPerPage?: number; search?: string; filters?: DataFilter[]; sort?: MRT_SortingState; }) => DataTableRowData`,
         },
       },
     },
-    reorderDataFn: {
+    onReorderRows: {
       control: null,
-      description: "",
+      description:
+        "Callback that fires when the user reorders rows within the table. Can be used to propogate order change to the backend.",
       table: {
         type: {
-          summary: "(rowId, newIndex) => void",
+          summary: `({ rowId, newRowIndex }: { rowId: string; newRowIndex: number; }) => void`,
         },
       },
     },
-    page: {
+    currentPage: {
       control: "number",
-      description: "",
+      description: "The current page number.",
       table: {
         type: {
           summary: "number",
@@ -209,7 +214,7 @@ const storybookMeta: Meta<DataTableProps> = {
     },
     resultsPerPage: {
       control: "number",
-      description: "",
+      description: "The number of results per page.",
       table: {
         type: {
           summary: "number",
@@ -219,58 +224,66 @@ const storybookMeta: Meta<DataTableProps> = {
     paginationType: {
       options: paginationTypeValues,
       control: { type: "radio" },
-      description: "",
+      description: `The type of pagination controls shown. Defaults to next/prev buttons, but can be set to a simple "Load more" button by setting to "loadMore".`,
       table: {
         type: {
           summary: paginationTypeValues.join(" | "),
-        },
-        defaultValue: {
-          summary: "medium",
         },
       },
     },
     rowActionButtons: {
       control: null,
-      description: "",
+      description: "Action buttons to display in each row.",
       table: {
         type: {
-          summary:
-            "(row: MRT_RowData) => ReactElement<typeof Button | typeof Fragment>",
+          summary: `(row: DataTableRowData) => ReactElement<typeof Button | typeof Fragment>`,
         },
       },
     },
     rowActionMenuItems: {
       control: null,
-      description: "",
+      description:
+        "Menu items to include in the optional actions menu on each row.",
       table: {
         type: {
-          summary:
-            "(row: MRT_RowData) => ReactElement<typeof MenuItem | typeof Fragment>",
+          summary: `(row: DataTableRowData) => MenuButtonProps["children"]`,
         },
       },
     },
+  },
+  args: {
+    hasChangeableDensity: true,
+    hasColumnResizing: true,
+    hasColumnVisibility: true,
+    hasFilters: true,
+    hasPagination: true,
+    hasRowSelection: true,
+    hasSearch: true,
+    hasSorting: true,
+    hasRowReordering: true,
+    paginationType: "paged",
   },
   decorators: [MuiThemeDecorator],
 };
 
 export default storybookMeta;
 
-const processData = ({
-  initialData,
+const handleGetData = ({
   page = 1,
   resultsPerPage = 20,
   search,
   filters,
   sort,
+  data,
 }: {
-  initialData: Person[];
   page?: number;
   resultsPerPage?: number;
   search?: string;
   filters?: DataFilter[];
-  sort?: MRT_SortingState;
+  sort?: DataTableSortingState;
+  data: Person[];
 }) => {
-  let filteredData = [...initialData];
+  let filteredData = data;
 
   // Implement text-based query filtering
   if (search) {
@@ -290,19 +303,21 @@ const processData = ({
           return true;
         }
 
-        // Specific filtering for 'age' column
-        // if (id === "age") {
-        //   const { min, max }: { min: number, max: number } = value;
-        //   return row[id] >= min && row[id] <= max;
-        // }
-
-        // Specific filtering for 'type' column
-        // if (id === "type") {
-        //   return row[id] === value;
-        // }
+        // If filter value is array, search for each array value
+        if (Array.isArray(value)) {
+          return value.some((arrayValue) => {
+            return row[id as keyof Person]
+              ?.toString()
+              .toLowerCase()
+              .includes(arrayValue.toString().toLowerCase());
+          });
+        }
 
         // General filtering for other columns
-        return row[id as keyof Person]?.toString().includes(value.toString());
+        return row[id as keyof Person]
+          ?.toString()
+          .toLowerCase()
+          .includes(value.toString().toLowerCase());
       });
     });
   }
@@ -323,212 +338,96 @@ const processData = ({
   }
 
   // Implement pagination
-  const startIdx = (page - 1) * resultsPerPage;
-  const endIdx = startIdx + resultsPerPage;
-  const paginatedData = filteredData.slice(startIdx, endIdx);
+  const startRow = (page - 1) * resultsPerPage;
+  const endRow = startRow + resultsPerPage;
+  filteredData = filteredData.slice(startRow, endRow);
 
-  return paginatedData;
+  return filteredData;
+};
+
+const handleOnReorderRows = ({
+  rowId,
+  newRowIndex,
+  data,
+  setData,
+}: {
+  rowId: string;
+  newRowIndex: number;
+  data: Person[];
+  setData: Dispatch<SetStateAction<Person[]>>;
+}) => {
+  const updatedData = data;
+
+  const rowIndex = updatedData.findIndex((row) => row.id === rowId);
+
+  if (rowIndex !== -1) {
+    // Remove the row from its current position
+    const [removedRow] = updatedData.splice(rowIndex, 1);
+
+    // Insert the row at the new index
+    updatedData.splice(newRowIndex, 0, removedRow);
+  }
+
+  setData(updatedData);
 };
 
 export const Default: StoryObj<DataTableProps> = {
-  args: {
-    hasChangeableDensity: true,
-    hasColumnResizing: true,
-    hasColumnVisibility: true,
-    hasFilters: true,
-    hasPagination: true,
-    hasRowSelection: true,
-    hasSearch: true,
-    hasSorting: true,
-    hasRowReordering: true,
-    paginationType: "paged",
-  },
   render: function C(props) {
-    const [data, setData] = useState<Person[]>(incomingData);
+    const [tableData, setTableData] = useState(data);
 
-    const fetchData = ({
-      page,
-      resultsPerPage,
-      search,
-      filters,
-      sort,
-    }: {
-      page?: number;
-      resultsPerPage?: number;
-      search?: string;
-      filters?: DataFilter[];
-      sort?: MRT_SortingState;
-    }) => {
-      return processData({
-        initialData: data,
-        page: page,
-        resultsPerPage: resultsPerPage,
-        search: search,
-        filters: filters,
-        sort: sort,
-      });
-    };
-
-    const reorderData = ({
-      rowId,
-      newIndex,
-    }: {
-      rowId: string;
-      newIndex: number;
-    }) => {
-      const updatedData = incomingData;
-
-      const rowIndex = updatedData.findIndex((row) => row.id === rowId);
-
-      if (rowIndex !== -1) {
-        // Remove the row from its current position
-        const [removedRow] = updatedData.splice(rowIndex, 1);
-
-        // Insert the row at the new index
-        updatedData.splice(newIndex, 0, removedRow);
-      }
-
-      setData(updatedData);
-    };
-
-    const startingData = fetchData({});
-
-    return (
-      <Box>
-        <Callout severity="info">
-          Data in this table is procedurally-generated and will change on each
-          page refresh. Any resemblance to real information is coincidental.
-        </Callout>
-        <DataTable
-          columns={columns}
-          data={startingData}
-          totalRows={data.length}
-          getRowId={({ id }) => id}
-          fetchDataFn={fetchData}
-          reorderDataFn={reorderData}
-          hasSearchSubmitButton={true}
-          hasChangeableDensity={props.hasChangeableDensity}
-          hasColumnResizing={props.hasColumnResizing}
-          hasColumnVisibility={props.hasColumnVisibility}
-          hasFilters={props.hasFilters}
-          hasPagination={props.hasPagination}
-          hasRowSelection={props.hasRowSelection}
-          hasRowReordering={props.hasRowReordering}
-          hasSearch={props.hasSearch}
-          hasSorting={props.hasSorting}
-          paginationType={props.paginationType}
-          onRowSelectionChange={(rowSelection) => console.log(rowSelection)}
-          rowActionButtons={(row) => (
-            <Button
-              endIcon={<DeleteIcon />}
-              ariaLabel="Delete"
-              variant="floating"
-              size="small"
-              onClick={() =>
-                console.log(
-                  `Clicking this would delete the item with the id ${row.id}`,
-                )
-              }
-            />
-          )}
-          rowActionMenuItems={(row) => (
-            <>
-              <MenuItem
-                onClick={() =>
-                  console.log(`Action applied to the row with the id ${row.id}`)
-                }
-              >
-                Item 1
-              </MenuItem>
-              <MenuItem
-                onClick={() =>
-                  console.log(`Action applied to the row with the id ${row.id}`)
-                }
-              >
-                Item 2
-              </MenuItem>
-              <MenuItem
-                onClick={() =>
-                  console.log(`Action applied to the row with the id ${row.id}`)
-                }
-              >
-                Item 3
-              </MenuItem>
-            </>
-          )}
-        />
-      </Box>
+    const getData = useCallback(
+      (props: {
+        page?: number;
+        resultsPerPage?: number;
+        search?: string;
+        filters?: DataFilter[];
+        sort?: DataTableSortingState;
+      }) => {
+        return handleGetData({ ...props, data: tableData });
+      },
+      [tableData],
     );
-  },
-};
 
-export const NoActions: StoryObj<DataTableProps> = {
-  args: {
-    hasChangeableDensity: true,
-    hasColumnResizing: true,
-    hasColumnVisibility: true,
-    hasFilters: true,
-    hasPagination: true,
-    hasRowSelection: true,
-    hasSearch: true,
-    hasSorting: true,
-    hasRowReordering: false,
-    paginationType: "paged",
-  },
-  render: function C(props) {
-    const data = incomingData;
+    const onReorderRows = useCallback(
+      (props: { rowId: string; newRowIndex: number }) => {
+        return handleOnReorderRows({
+          ...props,
+          data: tableData,
+          setData: setTableData,
+        });
+      },
+      [tableData, setTableData],
+    );
 
-    const fetchData = ({
-      page,
-      resultsPerPage,
-      search,
-      filters,
-      sort,
-    }: {
-      page?: number;
-      resultsPerPage?: number;
-      search?: string;
-      filters?: DataFilter[];
-      sort?: MRT_SortingState;
-    }) => {
-      return processData({
-        initialData: data,
-        page: page,
-        resultsPerPage: resultsPerPage,
-        search: search,
-        filters: filters,
-        sort: sort,
-      });
-    };
-
-    const startingData = fetchData({});
+    const onChangeRowSelection = useCallback(
+      (rowSelection: DataTableRowSelectionState) => {
+        console.log(`${Object.keys(rowSelection).length} selected`);
+      },
+      [],
+    );
 
     return (
-      <Box>
-        <Callout severity="info">
-          Data in this table is procedurally-generated and will change on each
-          page refresh. Any resemblance to real information is coincidental.
-        </Callout>
-        <DataTable
-          columns={columns}
-          data={startingData}
-          totalRows={data.length}
-          getRowId={({ id }) => id}
-          fetchDataFn={fetchData}
-          hasSearchSubmitButton={true}
-          hasChangeableDensity={props.hasChangeableDensity}
-          hasColumnResizing={props.hasColumnResizing}
-          hasColumnVisibility={props.hasColumnVisibility}
-          hasFilters={props.hasFilters}
-          hasPagination={props.hasPagination}
-          hasRowSelection={props.hasRowSelection}
-          hasRowReordering={props.hasRowReordering}
-          hasSearch={props.hasSearch}
-          hasSorting={props.hasSorting}
-          paginationType={props.paginationType}
-          onRowSelectionChange={(rowSelection) => console.log(rowSelection)}
-        />
-      </Box>
+      <DataTable
+        getData={getData}
+        columns={columns}
+        onReorderRows={onReorderRows}
+        onChangeRowSelection={onChangeRowSelection}
+        initialDensity={props.initialDensity}
+        hasChangeableDensity={props.hasChangeableDensity}
+        hasColumnResizing={props.hasColumnResizing}
+        hasColumnVisibility={props.hasColumnVisibility}
+        hasFilters={props.hasFilters}
+        hasPagination={props.hasPagination}
+        hasRowSelection={props.hasRowSelection}
+        hasSearch={props.hasSearch}
+        hasSorting={props.hasSorting}
+        hasRowReordering={props.hasRowReordering}
+        hasSearchSubmitButton={props.hasSearchSubmitButton}
+        searchDelayTime={props.searchDelayTime}
+        currentPage={props.currentPage}
+        resultsPerPage={props.resultsPerPage}
+        totalRows={props.totalRows}
+      />
     );
   },
 };

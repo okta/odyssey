@@ -12,11 +12,8 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import { Button } from "@okta/odyssey-react-mui";
-import {
-  TableColumn,
-  StaticTable,
-  StaticTableProps,
-} from "@okta/odyssey-react-mui/labs";
+import { StaticTable, StaticTableProps } from "@okta/odyssey-react-mui/labs";
+import { DataTableColumn } from "@okta/odyssey-react-mui";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
@@ -87,7 +84,7 @@ type Person = {
   state: string;
 };
 
-const columns: TableColumn<Person>[] = [
+const columns: DataTableColumn<Person>[] = [
   {
     accessorKey: "name.firstName",
     header: "First Name",
