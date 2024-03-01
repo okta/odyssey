@@ -13,12 +13,16 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 
+import type { SelectChangeEvent } from "@mui/material";
+import { Unstable_Grid2 as Grid } from "@mui/material";
 import {
   Box,
   Button,
+  Select,
   TabItemProps,
   Tabs,
   TabsProps,
+  TextField,
 } from "@okta/odyssey-react-mui";
 import { BugIcon } from "@okta/odyssey-react-mui/icons";
 import { expect } from "@storybook/jest";
@@ -282,5 +286,63 @@ export const WithBadge: StoryObj<TabItemProps> = {
   },
   play: async ({ canvasElement, step }) => {
     selectTab({ canvasElement, step })("Tab Icon", "Xenomorphs");
+  },
+};
+
+export const Scrollable: StoryObj<TabItemProps> = {
+  render: function C() {
+    const [numTabs, setNumTabs] = useState(50);
+    const [scrollButtons, setScrollButtons] =
+      useState<TabsProps["scrollButtons"]>("auto");
+
+    const tabs: TabItemProps[] = Array.from({ length: numTabs }, (_v, i) => ({
+      label: `Tab ${i + 1}`,
+      value: `tab-${i + 1}`,
+      children: `Content for Tab ${i + 1}`,
+    }));
+
+    const handleScrollButtonsChange = (
+      e: SelectChangeEvent<string | string[]>,
+    ) => {
+      switch (e.target.value) {
+        case "auto":
+          setScrollButtons("auto");
+          break;
+        case "true":
+          setScrollButtons(true);
+          break;
+        case "false":
+          setScrollButtons(false);
+          break;
+      }
+    };
+
+    return (
+      <>
+        <Grid sx={{ marginBottom: 5 }} container direction="column" spacing={5}>
+          <Grid>
+            <TextField
+              type="number"
+              label="Number of tabs"
+              value={numTabs.toString()}
+              onChange={(e) => setNumTabs(parseInt(e.target.value))}
+            />
+          </Grid>
+          <Grid>
+            <Select
+              label="scrollButtons"
+              options={["auto", "true", "false"]}
+              value={scrollButtons?.toString()}
+              onChange={handleScrollButtonsChange}
+            />
+          </Grid>
+        </Grid>
+        <Tabs
+          ariaLabel="scrollable tabs example"
+          tabs={tabs}
+          scrollButtons={scrollButtons}
+        />
+      </>
+    );
   },
 };
