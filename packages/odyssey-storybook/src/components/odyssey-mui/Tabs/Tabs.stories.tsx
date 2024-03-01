@@ -13,8 +13,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 
-import type { SelectChangeEvent } from "@mui/material";
-import { Unstable_Grid2 as Grid } from "@mui/material";
+import { Unstable_Grid2 as Grid, type SelectChangeEvent } from "@mui/material";
 import {
   Box,
   Button,
@@ -292,8 +291,8 @@ export const WithBadge: StoryObj<TabItemProps> = {
 export const Scrollable: StoryObj<TabItemProps> = {
   render: function C() {
     const [numTabs, setNumTabs] = useState(50);
-    const [scrollButtons, setScrollButtons] =
-      useState<TabsProps["scrollButtons"]>("auto");
+    const [hasScrollButtons, setHasScrollButtons] =
+      useState<TabsProps["hasScrollButtons"]>("auto");
 
     const tabs: TabItemProps[] = Array.from({ length: numTabs }, (_v, i) => ({
       label: `Tab ${i + 1}`,
@@ -304,17 +303,7 @@ export const Scrollable: StoryObj<TabItemProps> = {
     const handleScrollButtonsChange = (
       e: SelectChangeEvent<string | string[]>,
     ) => {
-      switch (e.target.value) {
-        case "auto":
-          setScrollButtons("auto");
-          break;
-        case "true":
-          setScrollButtons(true);
-          break;
-        case "false":
-          setScrollButtons(false);
-          break;
-      }
+      setHasScrollButtons(e.target.value as TabsProps["hasScrollButtons"]);
     };
 
     return (
@@ -330,9 +319,9 @@ export const Scrollable: StoryObj<TabItemProps> = {
           </Grid>
           <Grid>
             <Select
-              label="scrollButtons"
-              options={["auto", "true", "false"]}
-              value={scrollButtons?.toString()}
+              label="hasScrollButtons"
+              options={["auto", "always", "never"]}
+              value={hasScrollButtons}
               onChange={handleScrollButtonsChange}
             />
           </Grid>
@@ -340,7 +329,7 @@ export const Scrollable: StoryObj<TabItemProps> = {
         <Tabs
           ariaLabel="scrollable tabs example"
           tabs={tabs}
-          scrollButtons={scrollButtons}
+          hasScrollButtons={hasScrollButtons}
         />
       </>
     );
