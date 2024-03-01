@@ -11,10 +11,6 @@
  */
 
 import {
-  Typography as MuiTypography,
-  TypographyProps as MuiTypographyProps,
-} from "@mui/material";
-import {
   ElementType,
   ReactNode,
   memo,
@@ -22,6 +18,11 @@ import {
   useRef,
   useImperativeHandle,
 } from "react";
+import {
+  Typography as MuiTypography,
+  TypographyProps as MuiTypographyProps,
+} from "@mui/material";
+
 import { HtmlProps } from "./HtmlProps";
 import { FocusHandle } from "./inputUtils";
 
@@ -63,18 +64,6 @@ export const typographyColorValues = [
 
 export type TypographyProps = {
   /**
-   * The ID of the element that describes the component.
-   */
-  ariaDescribedBy?: string;
-  /**
-   * The ARIA label for the component.
-   */
-  ariaLabel?: string;
-  /**
-   * The ID of the element that labels the component.
-   */
-  ariaLabelledBy?: string;
-  /**
    * The text content of the component.
    */
   children: ReactNode;
@@ -94,7 +83,10 @@ export type TypographyProps = {
    * The variant of Typography to render.
    */
   variant?: keyof typeof typographyVariantMapping;
-} & HtmlProps;
+} & Pick<
+  HtmlProps,
+  "ariaDescribedBy" | "ariaLabel" | "ariaLabelledBy" | "testId" | "translate"
+>;
 
 const Typography = ({
   ariaDescribedBy,

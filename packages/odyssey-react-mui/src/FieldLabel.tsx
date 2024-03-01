@@ -24,7 +24,7 @@ export type FieldLabelProps = {
   inputId: string;
   isOptional: boolean;
   text: string;
-} & HtmlProps;
+} & Pick<HtmlProps, "testId" | "translate">;
 
 const FieldLabel = ({
   hasVisibleLabel,

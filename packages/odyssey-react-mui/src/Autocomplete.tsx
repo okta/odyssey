@@ -162,7 +162,6 @@ export type AutocompleteProps<
   getIsOptionEqualToValue?: (option: OptionType, value: OptionType) => boolean;
 } & Pick<
   FieldComponentProps,
-  | "ariaDescribedBy"
   | "errorMessage"
   | "errorMessageList"
   | "hint"
@@ -172,7 +171,7 @@ export type AutocompleteProps<
   | "isOptional"
   | "name"
 > &
-  HtmlProps;
+  Pick<HtmlProps, "ariaDescribedBy" | "testId" | "translate">;
 
 const Autocomplete = <
   OptionType,

@@ -61,7 +61,7 @@ export type AccordionProps = {
       isExpanded?: never;
     }
 ) &
-  HtmlProps;
+  Pick<HtmlProps, "testId" | "translate">;
 
 const Accordion = ({
   children,

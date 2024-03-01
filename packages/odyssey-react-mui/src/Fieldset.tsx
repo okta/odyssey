@@ -49,7 +49,7 @@ export type FieldsetProps = {
    * The name associated with the group.
    */
   name?: string;
-} & HtmlProps;
+} & Pick<HtmlProps, "testId" | "translate">;
 
 const Fieldset = ({
   alert,
