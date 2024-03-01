@@ -48,6 +48,8 @@ export const useRowReordering = ({
       return;
     }
 
+    // Needs to include the totalRows check because totalRows might not
+    // be set. If it isn't set, this whole check doesn't matter.
     if (totalRows && newRowIndex > totalRows) {
       return;
     }
@@ -104,7 +106,7 @@ export const useRowReordering = ({
     return undefined;
   };
 
-  const getRowFromTableAndSetHovered = (
+  const setHoveredRow = (
     table: MRT_TableInstance<MRT_RowData>,
     id: MRT_RowData["id"],
   ) => {
@@ -175,12 +177,12 @@ export const useRowReordering = ({
 
         if (isArrowDown || isArrowUp) {
           const nextIndex = isArrowDown ? index + 1 : index - 1;
-          getRowFromTableAndSetHovered(table, data[nextIndex]?.id);
+          setHoveredRow(table, data[nextIndex]?.id);
         }
       } else {
         if (isArrowDown || isArrowUp) {
           const nextIndex = isArrowDown ? row.index + 1 : row.index - 1;
-          getRowFromTableAndSetHovered(table, data[nextIndex]?.id);
+          setHoveredRow(table, data[nextIndex]?.id);
         }
       }
     } else {

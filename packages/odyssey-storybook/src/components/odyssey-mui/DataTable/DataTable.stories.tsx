@@ -11,22 +11,33 @@
  */
 
 import type { Meta, StoryObj } from "@storybook/react";
-// import { columns, data as incomingData, Person } from "./tableAPI";
-// import { Box, Button, Callout, MenuItem } from "@okta/odyssey-react-mui";
-import { DataFilter, paginationTypeValues } from "@okta/odyssey-react-mui/labs";
+import { paginationTypeValues } from "@okta/odyssey-react-mui/labs";
 import {
+  Button,
   DataTable,
+  DataTableEmptyState,
+  DataTableGetDataType,
+  DataTableOnReorderRowsType,
   DataTableProps,
   DataTableRowSelectionState,
-  DataTableSortingState,
+  MenuItem,
   densityValues,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { Person, columns, data } from "./tableAPI";
-import { Dispatch, SetStateAction, useCallback, useState } from "react";
+import {
+  Planet,
+  columns as planetColumns,
+  data as planetData,
+} from "./planetData";
+import {
+  Person,
+  columns as personColumns,
+  data as personData,
+} from "./personData";
+import { useCallback, useMemo, useState } from "react";
 
 const storybookMeta: Meta<DataTableProps> = {
-  title: "Labs Components/DataTable",
+  title: "MUI Components/DataTable",
   component: DataTable,
   argTypes: {
     columns: {
@@ -61,7 +72,7 @@ const storybookMeta: Meta<DataTableProps> = {
       options: densityValues,
       control: { type: "radio" },
       description:
-        "The initial density of the table. This is available even if the table density isn't changeable.",
+        "The initial density (height & padding) of the table rows. This is available even if the table density isn't changeable by the end user via hasChangeableDensity.",
       table: {
         type: {
           summary: densityValues.join(" | "),
@@ -163,6 +174,15 @@ const storybookMeta: Meta<DataTableProps> = {
         },
       },
     },
+    errorMessage: {
+      control: "text",
+      description: "If defined, the DataTable will indicate an error.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     searchDelayTime: {
       control: "number",
       description:
@@ -250,40 +270,50 @@ const storybookMeta: Meta<DataTableProps> = {
         },
       },
     },
-  },
-  args: {
-    hasChangeableDensity: true,
-    hasColumnResizing: true,
-    hasColumnVisibility: true,
-    hasFilters: true,
-    hasPagination: true,
-    hasRowSelection: true,
-    hasSearch: true,
-    hasSorting: true,
-    hasRowReordering: true,
-    paginationType: "paged",
+    bulkActionMenuItems: {
+      control: null,
+      description:
+        "Menu items to include in the bulk actions menu, which appears above the table if a row or rows are selected",
+      table: {
+        type: {
+          summary: `(selectedRows: MRT_RowSelectionState) => MenuButtonProps["children"]`,
+        },
+      },
+    },
+    emptyPlaceholder: {
+      control: null,
+      description:
+        "The component to display when the table is displaying the initial empty state.",
+      table: {
+        type: {
+          summary: `ReactElement<typeof DataTableEmptyState>`,
+        },
+      },
+    },
+    noResultsPlaceholder: {
+      control: null,
+      description:
+        "The component to display when the query returns no results.",
+      table: {
+        type: {
+          summary: `ReactElement<typeof DataTableEmptyState>`,
+        },
+      },
+    },
   },
   decorators: [MuiThemeDecorator],
 };
 
 export default storybookMeta;
 
-const handleGetData = ({
-  page = 1,
-  resultsPerPage = 20,
-  search,
-  filters,
-  sort,
+const filterData = ({
   data,
+  ...args
 }: {
-  page?: number;
-  resultsPerPage?: number;
-  search?: string;
-  filters?: DataFilter[];
-  sort?: DataTableSortingState;
-  data: Person[];
-}) => {
+  data: (Planet | Person)[];
+} & DataTableGetDataType) => {
   let filteredData = data;
+  const { search, filters, sort, page = 1, resultsPerPage = 20 } = args;
 
   // Implement text-based query filtering
   if (search) {
@@ -306,7 +336,7 @@ const handleGetData = ({
         // If filter value is array, search for each array value
         if (Array.isArray(value)) {
           return value.some((arrayValue) => {
-            return row[id as keyof Person]
+            return row[id as keyof (Planet | Person)]
               ?.toString()
               .toLowerCase()
               .includes(arrayValue.toString().toLowerCase());
@@ -314,7 +344,7 @@ const handleGetData = ({
         }
 
         // General filtering for other columns
-        return row[id as keyof Person]
+        return row[id as keyof (Planet | Person)]
           ?.toString()
           .toLowerCase()
           .includes(value.toString().toLowerCase());
@@ -326,8 +356,8 @@ const handleGetData = ({
   if (sort && sort.length > 0) {
     filteredData.sort((a, b) => {
       for (const { id, desc } of sort) {
-        const aValue = a[id as keyof Person];
-        const bValue = b[id as keyof Person];
+        const aValue = a[id as keyof (Planet | Person)];
+        const bValue = b[id as keyof (Planet | Person)];
 
         if (aValue < bValue) return desc ? 1 : -1;
         if (aValue > bValue) return desc ? -1 : 1;
@@ -345,19 +375,14 @@ const handleGetData = ({
   return filteredData;
 };
 
-const handleOnReorderRows = ({
-  rowId,
-  newRowIndex,
+const reorderData = ({
   data,
-  setData,
+  ...args
 }: {
-  rowId: string;
-  newRowIndex: number;
-  data: Person[];
-  setData: Dispatch<SetStateAction<Person[]>>;
-}) => {
+  data: (Planet | Person)[];
+} & DataTableOnReorderRowsType) => {
   const updatedData = data;
-
+  const { rowId, newRowIndex } = args;
   const rowIndex = updatedData.findIndex((row) => row.id === rowId);
 
   if (rowIndex !== -1) {
@@ -368,65 +393,197 @@ const handleOnReorderRows = ({
     updatedData.splice(newRowIndex, 0, removedRow);
   }
 
-  setData(updatedData);
+  return updatedData;
 };
 
 export const Default: StoryObj<DataTableProps> = {
+  args: {
+    hasChangeableDensity: true,
+    hasColumnResizing: true,
+    hasColumnVisibility: false,
+    hasFilters: true,
+    hasPagination: false,
+    hasRowSelection: true,
+    hasSearch: true,
+    hasSorting: true,
+    hasRowReordering: false,
+  },
   render: function C(props) {
-    const [tableData, setTableData] = useState(data);
+    const [data, setData] = useState<Planet[]>(planetData);
 
     const getData = useCallback(
-      (props: {
-        page?: number;
-        resultsPerPage?: number;
-        search?: string;
-        filters?: DataFilter[];
-        sort?: DataTableSortingState;
-      }) => {
-        return handleGetData({ ...props, data: tableData });
+      ({ ...props }: DataTableGetDataType) => {
+        return filterData({ data, ...props });
       },
-      [tableData],
+      [data],
     );
 
     const onReorderRows = useCallback(
-      (props: { rowId: string; newRowIndex: number }) => {
-        return handleOnReorderRows({
-          ...props,
-          data: tableData,
-          setData: setTableData,
-        });
+      ({ ...props }: DataTableOnReorderRowsType) => {
+        const reorderedData = reorderData({ data, ...props });
+        setData(reorderedData as Planet[]);
       },
-      [tableData, setTableData],
+      [data],
     );
 
     const onChangeRowSelection = useCallback(
       (rowSelection: DataTableRowSelectionState) => {
-        console.log(`${Object.keys(rowSelection).length} selected`);
+        if (Object.keys(rowSelection).length > 0) {
+          console.log(`${Object.keys(rowSelection).length} selected`);
+        }
       },
       [],
     );
 
     return (
       <DataTable
+        {...props}
+        columns={planetColumns}
         getData={getData}
-        columns={columns}
         onReorderRows={onReorderRows}
         onChangeRowSelection={onChangeRowSelection}
-        initialDensity={props.initialDensity}
-        hasChangeableDensity={props.hasChangeableDensity}
-        hasColumnResizing={props.hasColumnResizing}
-        hasColumnVisibility={props.hasColumnVisibility}
-        hasFilters={props.hasFilters}
-        hasPagination={props.hasPagination}
-        hasRowSelection={props.hasRowSelection}
-        hasSearch={props.hasSearch}
-        hasSorting={props.hasSorting}
-        hasRowReordering={props.hasRowReordering}
-        hasSearchSubmitButton={props.hasSearchSubmitButton}
-        searchDelayTime={props.searchDelayTime}
-        currentPage={props.currentPage}
-        resultsPerPage={props.resultsPerPage}
-        totalRows={props.totalRows}
+      />
+    );
+  },
+};
+
+export const API: StoryObj<DataTableProps> = {
+  args: {
+    hasChangeableDensity: true,
+    hasColumnResizing: true,
+    hasColumnVisibility: true,
+    hasFilters: true,
+    hasPagination: true,
+    hasRowSelection: true,
+    hasSearch: true,
+    hasSorting: true,
+    hasRowReordering: true,
+    totalRows: 200,
+  },
+  render: function C(props) {
+    const [data, setData] = useState<Person[]>(personData);
+
+    const getData = useCallback(
+      ({ ...props }: DataTableGetDataType) => {
+        return filterData({ data, ...props });
+      },
+      [data],
+    );
+
+    const onReorderRows = useCallback(
+      ({ ...props }: DataTableOnReorderRowsType) => {
+        const reorderedData = reorderData({ data, ...props });
+        setData(reorderedData as Person[]);
+      },
+      [data],
+    );
+
+    const onChangeRowSelection = useCallback(
+      (rowSelection: DataTableRowSelectionState) => {
+        if (Object.keys(rowSelection).length > 0) {
+          console.log(`${Object.keys(rowSelection).length} selected`);
+        }
+      },
+      [],
+    );
+
+    const emptyPlaceholder = useMemo(
+      () => (
+        <DataTableEmptyState
+          heading="Start by adding data assets"
+          text="All relevant data will be displayed and can be searched and filtered"
+          primaryButton={<Button variant="primary" label="Primary" />}
+          secondaryButton={<Button variant="secondary" label="Secondary" />}
+        />
+      ),
+      [],
+    );
+
+    const noResultsPlaceholder = useMemo(
+      () => (
+        <DataTableEmptyState
+          heading="Whoops, there's nothing here!"
+          text="You should try searching or filtering for something else."
+        />
+      ),
+      [],
+    );
+
+    const actionMenuItems = (selectedRows: DataTableRowSelectionState) => (
+      <>
+        <MenuItem onClick={() => console.log(selectedRows)}>Action 1</MenuItem>
+        <MenuItem onClick={() => console.log(selectedRows)}>Action 2</MenuItem>
+      </>
+    );
+
+    return (
+      <DataTable
+        {...props}
+        columns={personColumns}
+        getData={getData}
+        onReorderRows={onReorderRows}
+        onChangeRowSelection={onChangeRowSelection}
+        emptyPlaceholder={emptyPlaceholder}
+        noResultsPlaceholder={noResultsPlaceholder}
+        rowActionMenuItems={actionMenuItems}
+        bulkActionMenuItems={actionMenuItems}
+      />
+    );
+  },
+};
+
+export const Empty: StoryObj<DataTableProps> = {
+  args: {
+    hasChangeableDensity: true,
+    hasColumnResizing: true,
+    hasColumnVisibility: false,
+    hasFilters: true,
+    hasPagination: false,
+    hasRowSelection: true,
+    hasSearch: true,
+    hasSorting: true,
+    hasRowReordering: false,
+  },
+  render: function C(props) {
+    const [data, setData] = useState<Planet[]>(planetData);
+
+    const onReorderRows = useCallback(
+      ({ ...props }: DataTableOnReorderRowsType) => {
+        const reorderedData = reorderData({ data, ...props });
+        setData(reorderedData as Planet[]);
+      },
+      [data],
+    );
+
+    const onChangeRowSelection = useCallback(
+      (rowSelection: DataTableRowSelectionState) => {
+        if (Object.keys(rowSelection).length > 0) {
+          console.log(`${Object.keys(rowSelection).length} selected`);
+        }
+      },
+      [],
+    );
+
+    const emptyPlaceholder = useMemo(
+      () => (
+        <DataTableEmptyState
+          heading="Start by adding data assets"
+          text="All relevant data will be displayed and can be searched and filtered"
+          primaryButton={<Button variant="primary" label="Primary" />}
+          secondaryButton={<Button variant="secondary" label="Secondary" />}
+        />
+      ),
+      [],
+    );
+
+    return (
+      <DataTable
+        {...props}
+        columns={planetColumns}
+        getData={() => []}
+        onReorderRows={onReorderRows}
+        onChangeRowSelection={onChangeRowSelection}
+        emptyPlaceholder={emptyPlaceholder}
       />
     );
   },

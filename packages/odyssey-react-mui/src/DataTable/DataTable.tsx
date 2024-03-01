@@ -10,7 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  ReactNode,
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import {
   MRT_Cell,
   MRT_DensityState,
@@ -18,21 +26,20 @@ import {
   MRT_RowData,
   MRT_SortingState,
   MRT_TableOptions,
-  MRT_Virtualizer,
+  MRT_RowSelectionState,
+  MRT_RowVirtualizer,
   MRT_VisibilityState,
-  MaterialReactTable,
   useMaterialReactTable,
+  MRT_TableContainer,
 } from "material-react-table";
 import {
   ArrowDownIcon,
   ArrowUnsortedIcon,
   DragIndicatorIcon,
+  MoreIcon,
 } from "../icons.generated";
-import { densityValues } from "./constants";
-import {
-  DataTablePagination,
-  paginationTypeValues,
-} from "../labs/DataTablePagination";
+import { densityValues, paginationTypeValues } from "./constants";
+import { DataTablePagination } from "./DataTablePagination";
 import { DataFilter, DataFilters } from "../labs/DataFilters";
 import {
   DataTableRowActions,
@@ -40,8 +47,31 @@ import {
 } from "./DataTableRowActions";
 import { useRowReordering } from "./useRowReordering";
 import { DataTableSettings } from "./DataTableSettings";
+import { MenuButton, MenuButtonProps } from "../MenuButton";
 import { Box } from "../Box";
 import { DataTableRowSelectionState } from ".";
+import {
+  DesignTokens,
+  useOdysseyDesignTokens,
+} from "../OdysseyDesignTokensContext";
+import { useScrollIndication } from "./useScrollIndication";
+import styled from "@emotion/styled";
+import { DataTableEmptyState } from "./DataTableEmptyState";
+import { Callout } from "../Callout";
+import { t } from "i18next";
+
+export type DataTableGetDataType = {
+  page?: number;
+  resultsPerPage?: number;
+  search?: string;
+  filters?: DataFilter[];
+  sort?: MRT_SortingState;
+};
+
+export type DataTableOnReorderRowsType = {
+  rowId: string;
+  newRowIndex: number;
+};
 
 export type DataTableProps = {
   /**
@@ -58,8 +88,8 @@ export type DataTableProps = {
    */
   getRowId?: MRT_TableOptions<MRT_RowData>["getRowId"];
   /**
-   * The initial density of the table. This is available even if the table density
-   * isn't changeable.
+   * The initial density (height & padding) of the table rows. This is available even if the
+   * table density isn't changeable by the end user via hasChangeableDensity.
    */
   initialDensity?: (typeof densityValues)[number];
   /**
@@ -124,26 +154,14 @@ export type DataTableProps = {
     search,
     filters,
     sort,
-  }: {
-    page?: number;
-    resultsPerPage?: number;
-    search?: string;
-    filters?: DataFilter[];
-    sort?: MRT_SortingState;
-  }) =>
+  }: DataTableGetDataType) =>
     | MRT_TableOptions<MRT_RowData>["data"]
     | Promise<MRT_TableOptions<MRT_RowData>["data"]>;
   /**
    * Callback that fires when the user reorders rows within the table. Can be used
    * to propogate order change to the backend.
    */
-  onReorderRows?: ({
-    rowId,
-    newRowIndex,
-  }: {
-    rowId: string;
-    newRowIndex: number;
-  }) => void;
+  onReorderRows?: ({ rowId, newRowIndex }: DataTableOnReorderRowsType) => void;
   /**
    * The current page number.
    */
@@ -165,6 +183,24 @@ export type DataTableProps = {
    * Menu items to include in the optional actions menu on each row.
    */
   rowActionMenuItems?: DataTableRowActionsProps["rowActionMenuItems"];
+  /**
+   * Menu items to include in the bulk actions menu, which appears above the table if a row or rows are selected
+   */
+  bulkActionMenuItems?: (
+    selectedRows: MRT_RowSelectionState,
+  ) => MenuButtonProps["children"];
+  /**
+   * If `error` is not undefined, the DataTable will indicate an error.
+   */
+  errorMessage?: string;
+  /**
+   * The component to display when the table is displaying the initial empty state
+   */
+  emptyPlaceholder?: ReactNode;
+  /**
+   * The component to display when the query returns no results
+   */
+  noResultsPlaceholder?: ReactNode;
 };
 
 const displayColumnDefOptions = {
@@ -220,6 +256,66 @@ const displayColumnDefOptions = {
   },
 };
 
+const ScrollableTableContainer = styled("div", {
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" &&
+    prop !== "isScrollableStart" &&
+    prop !== "isScrollableEnd",
+})(
+  ({
+    odysseyDesignTokens,
+    isScrollableStart,
+    isScrollableEnd,
+  }: {
+    odysseyDesignTokens: DesignTokens;
+    isScrollableStart: boolean;
+    isScrollableEnd: boolean;
+  }) => ({
+    borderBlockEndColor: odysseyDesignTokens.HueNeutral100,
+    borderBlockEndStyle: "solid",
+    borderBlockEndWidth: odysseyDesignTokens.BorderWidthMain,
+    marginBlockEnd: odysseyDesignTokens.Spacing4,
+    position: "relative",
+    borderInlineStartColor: isScrollableStart
+      ? odysseyDesignTokens.HueNeutral200
+      : "transparent",
+    borderInlineStartStyle: "solid",
+    borderInlineStartWidth: odysseyDesignTokens.BorderWidthMain,
+    "::before": {
+      background:
+        "linear-gradient(-90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.33) 50%, rgba(0, 0, 0, 1) 100%)",
+      content: '""',
+      opacity: isScrollableStart ? "0.075" : "0",
+      pointerEvents: "none",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      bottom: 0,
+      width: odysseyDesignTokens.Spacing6,
+      zIndex: 100,
+      transition: `opacity ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
+    },
+    borderInlineEndColor: isScrollableEnd
+      ? odysseyDesignTokens.HueNeutral200
+      : "transparent",
+    borderInlineEndStyle: "solid",
+    borderInlineEndWidth: odysseyDesignTokens.BorderWidthMain,
+    "::after": {
+      background:
+        "linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.33) 50%, rgba(0, 0, 0, 1) 100%)",
+      content: '""',
+      opacity: isScrollableEnd ? "0.075" : "0",
+      pointerEvents: "none",
+      position: "absolute",
+      top: 0,
+      right: 0,
+      bottom: 0,
+      width: odysseyDesignTokens.Spacing6,
+      transition: `opacity ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
+    },
+  }),
+);
+
 const DataTable = ({
   columns,
   getRowId: getRowIdProp,
@@ -244,6 +340,10 @@ const DataTable = ({
   hasRowSelection,
   hasSearch,
   hasSorting,
+  bulkActionMenuItems,
+  errorMessage: errorMessageProp,
+  emptyPlaceholder,
+  noResultsPlaceholder,
 }: DataTableProps) => {
   const [data, setData] = useState<MRT_RowData[]>([]);
   const [pagination, setPagination] = useState({
@@ -251,6 +351,15 @@ const DataTable = ({
     pageSize: resultsPerPage,
   });
   const [draggingRow, setDraggingRow] = useState<MRT_Row<MRT_RowData> | null>();
+  const [isTableContainerScrolledToStart, setIsTableContainerScrolledToStart] =
+    useState(true);
+  const [isTableContainerScrolledToEnd, setIsTableContainerScrolledToEnd] =
+    useState(true);
+  const [tableInnerContainerWidth, setTableInnerContainerWidth] =
+    useState<string>("100%");
+  const tableOuterContainerRef = useRef<HTMLDivElement>(null);
+  const tableInnerContainerRef = useRef<HTMLDivElement>(null);
+  const tableContentRef = useRef<HTMLTableElement>(null);
 
   // Table states
   const [columnSorting, setColumnSorting] = useState<MRT_SortingState>([]);
@@ -258,8 +367,25 @@ const DataTable = ({
     useState<MRT_VisibilityState>();
   const [rowDensity, setRowDensity] =
     useState<MRT_DensityState>(initialDensity);
+  const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
   const [search, setSearch] = useState<string>("");
   const [filters, setFilters] = useState<DataFilter[]>();
+  const [initialFilters, setInitialFilters] = useState<DataFilter[]>();
+  const [isLoading, setIsLoading] = useState<boolean | undefined>(true);
+  const [isEmpty, setIsEmpty] = useState<boolean | undefined>();
+  const [errorMessage, setErrorMessage] = useState<string | undefined>(
+    errorMessageProp,
+  );
+
+  useScrollIndication({
+    tableOuterContainer: tableOuterContainerRef.current,
+    tableInnerContainer: tableInnerContainerRef.current,
+    setIsTableContainerScrolledToStart: setIsTableContainerScrolledToStart,
+    setIsTableContainerScrolledToEnd: setIsTableContainerScrolledToEnd,
+    setTableInnerContainerWidth: setTableInnerContainerWidth,
+  });
+
+  const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const {
     dragHandleStyles,
@@ -352,6 +478,29 @@ const DataTable = ({
     [],
   );
 
+  const emptyState = useCallback(() => {
+    const noResultsInnerContent = noResultsPlaceholder || (
+      <DataTableEmptyState
+        heading={t("table.noresults.heading")}
+        text={t("table.noresults.text")}
+      />
+    );
+
+    const emptyStateInnerContent =
+      emptyPlaceholder && isEmpty ? emptyPlaceholder : noResultsInnerContent;
+
+    return (
+      <Box sx={{ width: tableInnerContainerWidth }}>
+        {emptyStateInnerContent}
+      </Box>
+    );
+  }, [
+    tableInnerContainerWidth,
+    emptyPlaceholder,
+    noResultsPlaceholder,
+    isEmpty,
+  ]);
+
   const dataTable = useMaterialReactTable({
     columns: columns,
     data: data,
@@ -361,6 +510,8 @@ const DataTable = ({
       sorting: columnSorting,
       globalFilter: search,
       columnVisibility,
+      isLoading,
+      rowSelection,
     },
     icons: {
       ArrowDownwardIcon: ArrowDownIcon,
@@ -428,6 +579,7 @@ const DataTable = ({
 
     // Row selection
     enableRowSelection: hasRowSelection,
+    onRowSelectionChange: setRowSelection,
 
     // Sorting
     enableSorting: hasSorting,
@@ -442,77 +594,47 @@ const DataTable = ({
 
     // Virtualization
     enableRowVirtualization:
-      paginationType === "loadMore" || pagination.pageSize > 50,
+      paginationType !== "loadMore" && pagination.pageSize > 50,
     rowVirtualizerInstanceRef:
-      useRef<MRT_Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null),
+      useRef<MRT_RowVirtualizer<HTMLDivElement, HTMLTableRowElement>>(null),
     rowVirtualizerOptions: {
       overscan: 4,
     },
 
-    // Filters
-    renderTopToolbar: () => (
-      <Box sx={{ marginBottom: 5 }}>
-        <DataFilters
-          onChangeSearch={hasSearch ? setSearch : undefined}
-          onChangeFilters={hasFilters ? setFilters : undefined}
-          hasSearchSubmitButton={hasSearchSubmitButton}
-          searchDelayTime={searchDelayTime}
-          filters={hasFilters ? dataTableFilters : undefined}
-          additionalActions={
-            <DataTableSettings
-              hasChangeableDensity={hasChangeableDensity}
-              rowDensity={rowDensity}
-              setRowDensity={setRowDensity}
-              hasColumnVisibility={hasColumnVisibility}
-              columns={columns}
-              columnVisibility={columnVisibility}
-              setColumnVisibility={setColumnVisibility}
-            />
-          }
-        />
-      </Box>
-    ),
+    // States
+    renderEmptyRowsFallback: emptyState,
 
-    // Pagination
-    renderBottomToolbar: hasPagination
-      ? () => (
-          <DataTablePagination
-            paginationType={paginationType}
-            currentNumberOfResults={data.length}
-            currentPage={pagination.pageIndex}
-            isPreviousButtonDisabled={pagination.pageIndex <= 1}
-            isNextButtonDisabled={false} // TODO: Add logic for disabling next/load more button
-            onClickPrevious={() =>
-              setPagination({
-                pageIndex: pagination.pageIndex - 1,
-                pageSize: pagination.pageSize,
-              })
-            }
-            onClickNext={() => {
-              if (paginationType === "loadMore") {
-                setPagination({
-                  pageSize: pagination.pageSize,
-                  pageIndex: pagination.pageSize + resultsPerPage,
-                });
-              } else {
-                setPagination({
-                  pageSize: pagination.pageSize,
-                  pageIndex: pagination.pageIndex + 1,
-                });
-              }
-            }}
-          />
-        )
-      : undefined,
+    // Refs
+    muiTableProps: {
+      ref: tableContentRef,
+    },
+
+    muiTableContainerProps: {
+      ref: tableInnerContainerRef,
+    },
   });
 
   // Effects
-  useEffect(() => {
-    onChangeRowSelection?.(dataTable.getState().rowSelection);
-  }, [dataTable.getState().rowSelection, dataTable, onChangeRowSelection]);
+  const bulkActionMenuButton = useMemo(
+    () => (
+      <>
+        <MenuButton
+          buttonVariant="secondary"
+          endIcon={<MoreIcon />}
+          isDisabled={Object.keys(rowSelection).length === 0}
+          ariaLabel="More actions"
+        >
+          {bulkActionMenuItems?.(rowSelection)}
+        </MenuButton>
+      </>
+    ),
+    [bulkActionMenuItems, rowSelection],
+  );
 
   useEffect(() => {
     (async () => {
+      setIsLoading(true);
+      setErrorMessage(errorMessageProp);
       try {
         const incomingData = await getData?.({
           page: pagination.pageIndex,
@@ -523,13 +645,99 @@ const DataTable = ({
         });
         setData(incomingData);
       } catch (error) {
+        setErrorMessage(typeof error === "string" ? error : t("table.error"));
       } finally {
+        setIsLoading(false);
       }
     })();
-  }, [pagination, columnSorting, search, filters, getData]);
+  }, [pagination, columnSorting, search, filters, getData, errorMessageProp]);
+
+  useEffect(() => {
+    if (!initialFilters && filters) {
+      setInitialFilters(filters);
+    }
+
+    setIsEmpty(
+      pagination.pageIndex === currentPage &&
+        pagination.pageSize === resultsPerPage &&
+        search === "" &&
+        filters === initialFilters &&
+        data.length === 0,
+    );
+  }, [
+    filters,
+    pagination,
+    search,
+    data,
+    currentPage,
+    initialFilters,
+    resultsPerPage,
+  ]);
+
+  useEffect(() => {
+    onChangeRowSelection?.(rowSelection);
+  }, [rowSelection, onChangeRowSelection]);
 
   // Render the table
-  return <MaterialReactTable table={dataTable} />;
+  return (
+    <>
+      {(hasSearch ||
+        hasFilters ||
+        hasChangeableDensity ||
+        hasColumnVisibility ||
+        bulkActionMenuItems) && (
+        <Box sx={{ marginBottom: 5 }}>
+          <DataFilters
+            onChangeSearch={hasSearch ? setSearch : undefined}
+            onChangeFilters={hasFilters ? setFilters : undefined}
+            hasSearchSubmitButton={hasSearchSubmitButton}
+            searchDelayTime={searchDelayTime}
+            filters={hasFilters ? dataTableFilters : undefined}
+            isDisabled={isEmpty}
+            additionalActions={
+              <>
+                <DataTableSettings
+                  hasChangeableDensity={hasChangeableDensity}
+                  rowDensity={rowDensity}
+                  setRowDensity={setRowDensity}
+                  hasColumnVisibility={hasColumnVisibility}
+                  columns={columns}
+                  columnVisibility={columnVisibility}
+                  setColumnVisibility={setColumnVisibility}
+                />
+                {bulkActionMenuItems && bulkActionMenuButton}
+              </>
+            }
+          />
+        </Box>
+      )}
+
+      {errorMessage && (
+        <Box sx={{ marginBlockEnd: 2 }}>
+          <Callout severity="error" text={errorMessage} />
+        </Box>
+      )}
+
+      <ScrollableTableContainer
+        odysseyDesignTokens={odysseyDesignTokens}
+        isScrollableStart={!isTableContainerScrolledToStart}
+        isScrollableEnd={!isTableContainerScrolledToEnd}
+        ref={tableOuterContainerRef}
+      >
+        <MRT_TableContainer table={dataTable} />
+      </ScrollableTableContainer>
+
+      {hasPagination && (
+        <DataTablePagination
+          pagination={pagination}
+          setPagination={setPagination}
+          totalRows={totalRows}
+          isDisabled={isEmpty}
+          variant={paginationType}
+        />
+      )}
+    </>
+  );
 };
 
 const MemoizedDataTable = memo(DataTable);
