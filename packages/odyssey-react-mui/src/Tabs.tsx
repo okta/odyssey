@@ -123,7 +123,7 @@ const Tabs = ({
   const [tabState, setTabState] = useState(initialValue ?? value ?? "0");
   /*
     The scrollButtons prop is initially set to `false`.
-    It's then re-set to `auto` when the document is visible.
+    It's then reset to `auto` when the document is visible.
     This prevents a rare bug where scroll buttons appear
     when the component is rendered while hidden and the
     screen is wide enough to not need scroll buttons.
@@ -144,22 +144,35 @@ const Tabs = ({
     }
   }, [value]);
 
-  // reset the scroll buttons override when the document becomes visible
-  const refreshScrollButtons = () => {
-    requestAnimationFrame(() => {
-      if (document.visibilityState === "visible") {
-        setScrollButtons("auto");
-      }
-    });
-  };
-
   // listen for visibility change to reset scroll buttons override
   useEffect(() => {
-    document.addEventListener("visibilitychange", refreshScrollButtons);
-    return () => {
+    // don't override scroll buttons if it's already set to "auto"
+    if (scrollButtons === "auto" || document.visibilityState === "visible") {
+      return;
+    }
+
+    // keep track of animation frame to cancel when needed
+    let animationFrame: number;
+
+    // called when unmounted or scroll buttons is reset
+    const cleanup = () => {
+      cancelAnimationFrame(animationFrame);
       document.removeEventListener("visibilitychange", refreshScrollButtons);
     };
-  }, []);
+
+    // Reset the scroll buttons override when the document becomes visible.
+    // If called, then the document is hidden because the event listener
+    // is only registered if the document is hidden
+    function refreshScrollButtons() {
+      animationFrame = requestAnimationFrame(() => {
+        cleanup();
+        setScrollButtons("auto");
+      });
+    }
+
+    document.addEventListener("visibilitychange", refreshScrollButtons);
+    return cleanup;
+  }, [scrollButtons]);
 
   const renderTab = useCallback(
     (tab: TabItemProps, index: number) => {
