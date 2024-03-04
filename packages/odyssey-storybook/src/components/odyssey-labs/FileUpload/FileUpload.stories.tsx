@@ -64,7 +64,7 @@ const storybookMeta: Meta<typeof FileUpload> = {
     variant: {
       options: fileUploadVariants,
       control: { type: "radio" },
-      description: "The type of FileUpload",
+      description: "How the component appears visually",
       table: {
         type: {
           required: true,

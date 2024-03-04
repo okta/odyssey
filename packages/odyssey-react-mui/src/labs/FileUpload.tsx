@@ -112,7 +112,7 @@ export type FileUploadProps = {
    */
   type?: (typeof fileUploadTypes)[number];
   /**
-   * Either `button` or ``. If `multiple`, multiple files can be uploaded
+   * Either `button`, `dragAndDrop` or `dragAndDropWithIcon`. Will determine how component appears visually
    */
   variant: (typeof fileUploadVariants)[number];
 } & Pick<
