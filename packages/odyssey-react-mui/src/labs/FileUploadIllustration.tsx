@@ -18,24 +18,20 @@ import {
   DesignTokens,
 } from "../OdysseyDesignTokensContext";
 
-const UploadIllustrationContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{
+const UploadIllustrationContainer = styled.div<{
   odysseyDesignTokens: DesignTokens;
-}>`
-  margin-block-end: ${({ odysseyDesignTokens }) =>
-    odysseyDesignTokens.Spacing2};
-  padding: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing3};
-  background-color: ${({ odysseyDesignTokens }) =>
-    odysseyDesignTokens.HueNeutral50};
-  border-radius: 50%;
+}>(({ odysseyDesignTokens }) => ({
+  marginBlockEnd: odysseyDesignTokens.Spacing2,
+  padding: odysseyDesignTokens.Spacing3,
+  backgroundColor: odysseyDesignTokens.HueNeutral50,
+  borderRadius: "50%",
 
-  svg {
-    display: flex;
-    width: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing8};
-    height: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing8};
-  }
-`;
+  svg: {
+    display: "flex",
+    width: odysseyDesignTokens.Spacing8,
+    height: odysseyDesignTokens.Spacing8,
+  },
+}));
 
 const FileUploadIllustration = () => {
   const odysseyDesignTokens = useOdysseyDesignTokens();

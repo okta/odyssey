@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { FileUpload } from "@okta/odyssey-react-mui/labs";
+import { FileUpload, fileUploadVariants } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react";
 // import { userEvent, within } from "@storybook/testing-library";
 // import { expect } from "@storybook/jest";
@@ -34,19 +34,6 @@ const storybookMeta: Meta<typeof FileUpload> = {
     },
     hint: fieldComponentPropsMetaData.hint,
     id: fieldComponentPropsMetaData.id,
-    isButtonOnly: {
-      control: "boolean",
-      description:
-        "If `true` drag and drop area is not rendered. Only the button",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-      type: {
-        name: "boolean",
-      },
-    },
     isDisabled: fieldComponentPropsMetaData.isDisabled,
     label: {
       control: "text",
@@ -74,6 +61,17 @@ const storybookMeta: Meta<typeof FileUpload> = {
         required: true,
       },
     },
+    variant: {
+      options: fileUploadVariants,
+      control: { type: "radio" },
+      description: "The type of FileUpload",
+      table: {
+        type: {
+          required: true,
+          summary: fileUploadVariants.join(" | "),
+        },
+      },
+    },
   },
   args: {
     hint: "Some helpful text about what format to use",
@@ -85,8 +83,18 @@ const storybookMeta: Meta<typeof FileUpload> = {
 
 export default storybookMeta;
 
-export const Default: StoryObj<typeof FileUpload> = {
-  render: function C(args) {
-    return <FileUpload {...args} />;
+export const ButtonOnly: StoryObj<typeof FileUpload> = {
+  args: {
+    variant: "button",
+  },
+};
+export const DragAndDropWithIcon: StoryObj<typeof FileUpload> = {
+  args: {
+    variant: "dragAndDropWithIcon",
+  },
+};
+export const DragAndDropWithoutIcon: StoryObj<typeof FileUpload> = {
+  args: {
+    variant: "dragAndDrop",
   },
 };

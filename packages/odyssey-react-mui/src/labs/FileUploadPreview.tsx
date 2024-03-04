@@ -27,54 +27,52 @@ import { Tooltip } from "../Tooltip";
 const PreviewContainer = styled.div<{
   isDisabled: FileUploadProps["isDisabled"];
   odysseyDesignTokens: DesignTokens;
-}>`
-  margin-block-start: ${({ odysseyDesignTokens }) =>
-    odysseyDesignTokens.Spacing2};
-  pointer-events: ${({ isDisabled }) => (isDisabled ? "none" : "normal")};
-  color: ${({ isDisabled, odysseyDesignTokens }) =>
-    isDisabled ? odysseyDesignTokens.TypographyColorDisabled : "inherit"};
-`;
+}>(
+  ({ odysseyDesignTokens }) => ({
+    marginBlockStart: odysseyDesignTokens.Spacing2,
+  }),
 
-const UploadedFileContainer = styled.div<{
-  odysseyDesignTokens: DesignTokens;
-}>`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: ${({ odysseyDesignTokens }) =>
-    `${odysseyDesignTokens.Spacing1} ${odysseyDesignTokens.Spacing2}`};
-  border-radius: ${({ odysseyDesignTokens }) =>
-    odysseyDesignTokens.BorderRadiusMain};
-  transition: ${({ odysseyDesignTokens }) =>
-    `background-color ${odysseyDesignTokens.TransitionTimingMain}`};
+  ({ isDisabled, odysseyDesignTokens }) => ({
+    color: isDisabled ? odysseyDesignTokens.TypographyColorDisabled : "inherit",
+  }),
 
-  button {
-    transform: scale(0);
-  }
+  ({ isDisabled }) => ({
+    pointerEvents: isDisabled ? "none" : "auto",
+  }),
+);
 
-  &:hover,
-  &:focus-within,
-  &:focus {
-    button {
-      transform: scale(1);
-    }
-  }
+const UploadedFileContainer = styled.div<{ odysseyDesignTokens: DesignTokens }>(
+  {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
 
-  &:hover,
-  &:focus-within {
-    background-color: ${({ odysseyDesignTokens }) =>
-      odysseyDesignTokens.HueNeutral100};
-  }
+    button: {
+      transform: "scale(0)",
+    },
 
-  &:focus {
-    border-color: ${({ odysseyDesignTokens }) =>
-      odysseyDesignTokens.FocusOutlineColorPrimary};
-    box-shadow: ${({ odysseyDesignTokens }) =>
-      `0 0 0 2px ${odysseyDesignTokens.FocusOutlineColorPrimary}`};
-    outline: ${({ odysseyDesignTokens }) =>
-      `${odysseyDesignTokens.FocusOutlineWidthMain} ${odysseyDesignTokens.FocusOutlineStyle} transparent`};
-  }
-`;
+    "&:hover, &:focus-within, &:focus": {
+      button: {
+        transform: "scale(1)",
+      },
+    },
+  },
+  ({ odysseyDesignTokens }) => ({
+    padding: `${odysseyDesignTokens.Spacing1} ${odysseyDesignTokens.Spacing2}`,
+    borderRadius: odysseyDesignTokens.BorderRadiusMain,
+    transition: `background-color ${odysseyDesignTokens.TransitionTimingMain}`,
+
+    "&:hover, &:focus-within": {
+      backgroundColor: odysseyDesignTokens.HueNeutral100,
+    },
+
+    "&:focus": {
+      borderColor: odysseyDesignTokens.FocusOutlineColorPrimary,
+      boxShadow: `0 0 0 2px ${odysseyDesignTokens.FocusOutlineColorPrimary}`,
+      outline: `${odysseyDesignTokens.FocusOutlineWidthMain} ${odysseyDesignTokens.FocusOutlineStyle} transparent`,
+    },
+  }),
+);
 
 type UploadedFileProps = {
   name: string;

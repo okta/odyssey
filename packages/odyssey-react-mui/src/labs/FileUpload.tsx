@@ -35,89 +35,70 @@ import { Support } from "../Typography";
 
 export const fileUploadTypes = ["single", "multiple"] as const;
 export const fileUploadVariants = [
-  "buttonOnly",
+  "button",
   "dragAndDrop",
   "dragAndDropWithIcon",
 ] as const;
 
-const BaseInputWrapper = styled.div`
-  position: relative;
-  align-self: flex-start;
+const BaseInputWrapper = styled.div({
+  position: "relative",
+  alignSelf: "flex-start",
 
-  input {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-  }
-`;
+  input: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+    opacity: 0,
+  },
+});
 
-const InputContainer = styled(BaseInputWrapper, {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{
+const InputContainer = styled(BaseInputWrapper)<{
   odysseyDesignTokens: DesignTokens;
-}>`
-  display: flex;
-  align-self: unset;
-  align-items: center;
-  justify-content: center;
-  padding: ${({ odysseyDesignTokens }) =>
-    `${odysseyDesignTokens.Spacing6} ${odysseyDesignTokens.Spacing3}`};
-  border: ${({ odysseyDesignTokens }) =>
-    `1px dashed ${odysseyDesignTokens.HueNeutral300}`};
-  border-radius: ${({ odysseyDesignTokens }) =>
-    odysseyDesignTokens.BorderRadiusMain};
-  transition: ${({ odysseyDesignTokens }) =>
-    `border-color ${odysseyDesignTokens.TransitionTimingMain}, box-shadow ${odysseyDesignTokens.TransitionTimingMain}`};
+}>(({ odysseyDesignTokens }) => ({
+  display: "flex",
+  alignSelf: "unset",
+  alignItems: "center",
+  justifyContent: "center",
+  padding: `${odysseyDesignTokens.Spacing6} ${odysseyDesignTokens.Spacing3}`,
+  border: `1px dashed ${odysseyDesignTokens.HueNeutral300}`,
+  borderRadius: odysseyDesignTokens.BorderRadiusMain,
+  transition: `border-color ${odysseyDesignTokens.TransitionTimingMain}, box-shadow ${odysseyDesignTokens.TransitionTimingMain}`,
 
-  &:hover {
-    border-color: ${({ odysseyDesignTokens }) =>
-      odysseyDesignTokens.HueNeutral700};
-  }
+  "&:hover": {
+    borderColor: odysseyDesignTokens.HueNeutral700,
+  },
 
-  &:has(input:focus) {
-    border-style: solid;
-    border-color: ${({ odysseyDesignTokens }) =>
-      odysseyDesignTokens.FocusOutlineColorPrimary};
-    box-shadow: ${({ odysseyDesignTokens }) =>
-      `0 0 0 1px ${odysseyDesignTokens.FocusOutlineColorPrimary}`};
-    outline: ${({ odysseyDesignTokens }) =>
-      `${odysseyDesignTokens.FocusOutlineWidthMain} ${odysseyDesignTokens.FocusOutlineStyle} transparent`};
-    outline-offset: ${({ odysseyDesignTokens }) =>
-      odysseyDesignTokens.FocusOutlineOffsetTight};
-  }
+  "&:has(input:focus)": {
+    borderStyle: "solid",
+    borderColor: odysseyDesignTokens.FocusOutlineColorPrimary,
+    boxShadow: `0 0 0 1px ${odysseyDesignTokens.FocusOutlineColorPrimary}`,
+    outline: `${odysseyDesignTokens.FocusOutlineWidthMain} ${odysseyDesignTokens.FocusOutlineStyle} transparent`,
+    outlineOffset: odysseyDesignTokens.FocusOutlineOffsetTight,
+  },
 
-  &:has(input:disabled) {
-    background-color: ${({ odysseyDesignTokens }) =>
-      odysseyDesignTokens.HueNeutral50};
-    border: ${({ odysseyDesignTokens }) =>
-      `1px solid ${odysseyDesignTokens.BorderColorDisabled}`};
-    color: ${({ odysseyDesignTokens }) =>
-      odysseyDesignTokens.TypographyColorDisabled};
+  "&:has(input:disabled)": {
+    backgroundColor: odysseyDesignTokens.HueNeutral50,
+    border: `1px solid ${odysseyDesignTokens.BorderColorDisabled}`,
+    color: odysseyDesignTokens.TypographyColorDisabled,
 
-    &:hover {
-      border-color: ${({ odysseyDesignTokens }) =>
-        odysseyDesignTokens.BorderColorDisabled};
-    }
-  }
-`;
+    "&:hover": {
+      borderColor: odysseyDesignTokens.BorderColorDisabled,
+    },
+  },
+}));
 
-const ButtonAndInfoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
+const ButtonAndInfoContainer = styled.div({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+});
 
 export type FileUploadProps = {
   /**
    * an array of file types the user is able to upload. @see https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept#unique_file_type_specifiers for examples
    */
   acceptedFileTypes?: string[];
-  /**
-   * If `true` the drag and drop area will not be rendered
-   */
-  isButtonOnly?: boolean;
   /**
    * The label for the `input` element.
    */
@@ -130,6 +111,10 @@ export type FileUploadProps = {
    * Either `single` or `multiple`. If `multiple`, multiple files can be uploaded
    */
   type?: (typeof fileUploadTypes)[number];
+  /**
+   * Either `button` or ``. If `multiple`, multiple files can be uploaded
+   */
+  variant: (typeof fileUploadVariants)[number];
 } & Pick<
   FieldComponentProps,
   | "errorMessage"
@@ -146,7 +131,6 @@ const FileUpload = ({
   acceptedFileTypes,
   errorMessage,
   id,
-  isButtonOnly,
   isDisabled = false,
   isOptional,
   hint,
@@ -154,11 +138,11 @@ const FileUpload = ({
   label,
   onChange,
   type,
+  variant,
 }: FileUploadProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
-
   const [filesToUpload, setFilesToUpload] = useState<File[]>([]);
 
   useEffect(() => {
@@ -223,7 +207,7 @@ const FileUpload = ({
         />
       );
 
-      if (isButtonOnly) {
+      if (variant === "button") {
         return (
           <>
             <BaseInputWrapper>
@@ -250,7 +234,7 @@ const FileUpload = ({
           <InputContainer odysseyDesignTokens={odysseyDesignTokens}>
             <Input />
             <ButtonAndInfoContainer>
-              <FileUploadIllustration />
+              {variant === "dragAndDropWithIcon" && <FileUploadIllustration />}
               <Support color="textSecondary">
                 {t("fileupload.prompt.text")}
               </Support>
@@ -274,7 +258,6 @@ const FileUpload = ({
     [
       acceptedFileTypes,
       filesToUpload,
-      isButtonOnly,
       isDisabled,
       inputRef,
       odysseyDesignTokens,
@@ -282,6 +265,7 @@ const FileUpload = ({
       triggerFileInputClick,
       type,
       updateFilesToUpload,
+      variant,
     ],
   );
 
