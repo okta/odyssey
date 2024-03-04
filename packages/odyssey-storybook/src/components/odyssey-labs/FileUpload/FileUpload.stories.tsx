@@ -10,7 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { FileUpload, fileUploadVariants } from "@okta/odyssey-react-mui/labs";
+import {
+  FileUpload,
+  fileUploadVariants,
+  fileUploadTypes,
+} from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react";
 // import { userEvent, within } from "@storybook/testing-library";
 // import { expect } from "@storybook/jest";
@@ -24,11 +28,12 @@ const storybookMeta: Meta<typeof FileUpload> = {
   component: FileUpload,
   argTypes: {
     type: {
-      control: "boolean",
+      options: fileUploadTypes,
+      control: { type: "radio" },
       description: "If `multiple`, the user can upload multiple files",
       table: {
         type: {
-          summary: "boolean",
+          summary: fileUploadTypes.join(" | "),
         },
       },
     },

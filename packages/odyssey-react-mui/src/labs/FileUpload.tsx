@@ -54,38 +54,45 @@ const BaseInputWrapper = styled.div({
 
 const InputContainer = styled(BaseInputWrapper)<{
   odysseyDesignTokens: DesignTokens;
-}>(({ odysseyDesignTokens }) => ({
-  display: "flex",
-  alignSelf: "unset",
-  alignItems: "center",
-  justifyContent: "center",
-  padding: `${odysseyDesignTokens.Spacing6} ${odysseyDesignTokens.Spacing3}`,
-  border: `1px dashed ${odysseyDesignTokens.HueNeutral300}`,
-  borderRadius: odysseyDesignTokens.BorderRadiusMain,
-  transition: `border-color ${odysseyDesignTokens.TransitionTimingMain}, box-shadow ${odysseyDesignTokens.TransitionTimingMain}`,
+}>(
+  {
+    display: "flex",
+    alignSelf: "unset",
+    alignItems: "center",
+    justifyContent: "center",
 
-  "&:hover": {
-    borderColor: odysseyDesignTokens.HueNeutral700,
-  },
-
-  "&:has(input:focus)": {
-    borderStyle: "solid",
-    borderColor: odysseyDesignTokens.FocusOutlineColorPrimary,
-    boxShadow: `0 0 0 1px ${odysseyDesignTokens.FocusOutlineColorPrimary}`,
-    outline: `${odysseyDesignTokens.FocusOutlineWidthMain} ${odysseyDesignTokens.FocusOutlineStyle} transparent`,
-    outlineOffset: odysseyDesignTokens.FocusOutlineOffsetTight,
-  },
-
-  "&:has(input:disabled)": {
-    backgroundColor: odysseyDesignTokens.HueNeutral50,
-    border: `1px solid ${odysseyDesignTokens.BorderColorDisabled}`,
-    color: odysseyDesignTokens.TypographyColorDisabled,
-
-    "&:hover": {
-      borderColor: odysseyDesignTokens.BorderColorDisabled,
+    "&:has(input:focus)": {
+      borderStyle: "solid",
     },
   },
-}));
+  ({ odysseyDesignTokens }) => ({
+    padding: `${odysseyDesignTokens.Spacing6} ${odysseyDesignTokens.Spacing3}`,
+    border: `1px dashed ${odysseyDesignTokens.HueNeutral300}`,
+    borderRadius: odysseyDesignTokens.BorderRadiusMain,
+    transition: `border-color ${odysseyDesignTokens.TransitionTimingMain}, box-shadow ${odysseyDesignTokens.TransitionTimingMain}`,
+
+    "&:hover": {
+      borderColor: odysseyDesignTokens.HueNeutral700,
+    },
+
+    "&:has(input:focus)": {
+      borderColor: odysseyDesignTokens.FocusOutlineColorPrimary,
+      boxShadow: `0 0 0 1px ${odysseyDesignTokens.FocusOutlineColorPrimary}`,
+      outline: `${odysseyDesignTokens.FocusOutlineWidthMain} ${odysseyDesignTokens.FocusOutlineStyle} transparent`,
+      outlineOffset: odysseyDesignTokens.FocusOutlineOffsetTight,
+    },
+
+    "&:has(input:disabled)": {
+      backgroundColor: odysseyDesignTokens.HueNeutral50,
+      border: `1px solid ${odysseyDesignTokens.BorderColorDisabled}`,
+      color: odysseyDesignTokens.TypographyColorDisabled,
+
+      "&:hover": {
+        borderColor: odysseyDesignTokens.BorderColorDisabled,
+      },
+    },
+  }),
+);
 
 const ButtonAndInfoContainer = styled.div({
   display: "flex",

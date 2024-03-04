@@ -105,7 +105,7 @@ const UploadedFile = ({ name, onFileRemove }: UploadedFileProps) => {
 
   return (
     <UploadedFileContainer
-      // tabindex added to make div focusable
+      // tabindex added to make this element focusable
       tabIndex={0}
       odysseyDesignTokens={odysseyDesignTokens}
     >
@@ -141,7 +141,7 @@ const FileUploadPreview = ({
       isDisabled={isDisabled}
       odysseyDesignTokens={odysseyDesignTokens}
     >
-      {fileNames?.map((name: string, index: number) => (
+      {fileNames?.map((name, index) => (
         <UploadedFile
           key={`${index}-${name}`}
           onFileRemove={onFileRemove}
