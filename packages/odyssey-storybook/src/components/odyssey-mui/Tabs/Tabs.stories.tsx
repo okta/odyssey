@@ -13,15 +13,12 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 
-import { Unstable_Grid2 as Grid, type SelectChangeEvent } from "@mui/material";
 import {
   Box,
   Button,
-  Select,
   TabItemProps,
   Tabs,
   TabsProps,
-  TextField,
 } from "@okta/odyssey-react-mui";
 import { BugIcon } from "@okta/odyssey-react-mui/icons";
 import { expect } from "@storybook/jest";
@@ -285,55 +282,5 @@ export const WithBadge: StoryObj<TabItemProps> = {
   },
   play: async ({ canvasElement, step }) => {
     selectTab({ canvasElement, step })("Tab Icon", "Xenomorphs");
-  },
-};
-
-export const Scrollable: StoryObj<TabItemProps> = {
-  render: function C() {
-    const [numTabs, setNumTabs] = useState(50);
-    const [scrollButtonsDisplay, setScrollButtonsDisplay] =
-      useState<TabsProps["scrollButtonsDisplay"]>("auto");
-
-    const tabs: TabItemProps[] = Array.from({ length: numTabs }, (_v, i) => ({
-      label: `Tab ${i + 1}`,
-      value: `tab-${i + 1}`,
-      children: `Content for Tab ${i + 1}`,
-    }));
-
-    const handleScrollButtonsChange = (
-      e: SelectChangeEvent<string | string[]>,
-    ) => {
-      setScrollButtonsDisplay(
-        e.target.value as TabsProps["scrollButtonsDisplay"],
-      );
-    };
-
-    return (
-      <>
-        <Grid sx={{ marginBottom: 5 }} container direction="column" spacing={5}>
-          <Grid>
-            <TextField
-              type="number"
-              label="Number of tabs"
-              value={numTabs.toString()}
-              onChange={(e) => setNumTabs(parseInt(e.target.value))}
-            />
-          </Grid>
-          <Grid>
-            <Select
-              label="scrollButtonsDisplay"
-              options={["auto", "always", "never"]}
-              value={scrollButtonsDisplay}
-              onChange={handleScrollButtonsChange}
-            />
-          </Grid>
-        </Grid>
-        <Tabs
-          ariaLabel="scrollable tabs example"
-          tabs={tabs}
-          scrollButtonsDisplay={scrollButtonsDisplay}
-        />
-      </>
-    );
   },
 };

@@ -68,17 +68,6 @@ export type TabsProps = {
    */
   tabs: TabItemProps[];
   /**
-   * Determine behavior of scroll buttons when tabs are set to scroll:
-   *
-   * - `auto` will only present them when not all the items are visible.
-   * - `always` will always present them.
-   * - `never` will never present them.
-   *
-   * By default the scroll buttons are hidden on mobile.
-   * @default 'auto'
-   */
-  scrollButtonsDisplay?: "auto" | "always" | "never";
-  /**
    * Identifier for the selected tab.
    */
   value?: string;
@@ -128,12 +117,12 @@ const Tabs = ({
   ariaLabel,
   initialValue,
   tabs,
-  scrollButtonsDisplay,
   value,
   onChange: onChangeProp,
 }: TabsProps & Pick<HtmlProps, "ariaLabel">) => {
   const [tabState, setTabState] = useState(initialValue ?? value ?? "0");
-
+  const [scrollButtons, setScrollButtons] =
+    useState<MuiTabListProps["scrollButtons"]>(false);
   const onChange = useCallback<NonNullable<MuiTabListProps["onChange"]>>(
     (event, value: string) => {
       setTabState(value);
@@ -147,6 +136,21 @@ const Tabs = ({
       setTabState(value);
     }
   }, [value]);
+
+  const refreshScrollButtons = () => {
+    setTimeout(() => {
+      if (document.visibilityState === "visible") {
+        setScrollButtons("auto");
+      }
+    }, 100);
+  };
+
+  useEffect(() => {
+    document.addEventListener("visibilitychange", refreshScrollButtons);
+    return () => {
+      document.removeEventListener("visibilitychange", refreshScrollButtons);
+    };
+  }, []);
 
   const renderTab = useCallback(
     (tab: TabItemProps, index: number) => {
@@ -182,13 +186,6 @@ const Tabs = ({
     },
     [tabState],
   );
-
-  let scrollButtons: MuiTabListProps["scrollButtons"] = "auto";
-  if (scrollButtonsDisplay === "always") {
-    scrollButtons = true;
-  } else if (scrollButtonsDisplay === "never") {
-    scrollButtons = false;
-  }
 
   return (
     <MuiTabContext value={tabState}>
