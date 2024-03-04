@@ -125,8 +125,6 @@ export type FileUploadProps = {
   | "isOptional"
 >;
 
-type RemoveFileFromFilesToUploadList = (name: string) => void;
-
 const FileUpload = ({
   acceptedFileTypes,
   errorMessage,
@@ -170,16 +168,15 @@ const FileUpload = ({
     inputRef?.current?.click();
   }, [inputRef]);
 
-  const removeFileFromFilesToUploadList =
-    useCallback<RemoveFileFromFilesToUploadList>(
-      (name) => {
-        const deletedFileFilteredOut = filesToUpload.filter(
-          (file) => file.name !== name,
-        );
-        setFilesToUpload(deletedFileFilteredOut);
-      },
-      [filesToUpload],
-    );
+  const removeFileFromFilesToUploadList = useCallback<(name: string) => void>(
+    (name) => {
+      const deletedFileFilteredOut = filesToUpload.filter(
+        (file) => file.name !== name,
+      );
+      setFilesToUpload(deletedFileFilteredOut);
+    },
+    [filesToUpload],
+  );
 
   const renderFileInput = useCallback(
     ({
