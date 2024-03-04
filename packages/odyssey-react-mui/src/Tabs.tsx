@@ -146,11 +146,6 @@ const Tabs = ({
 
   // listen for visibility change to reset scroll buttons override
   useEffect(() => {
-    // don't override scroll buttons if it's already set to "auto"
-    if (scrollButtons === "auto" || document.visibilityState === "visible") {
-      return;
-    }
-
     // keep track of animation frame to cancel when needed
     let animationFrame: number;
 
@@ -170,8 +165,13 @@ const Tabs = ({
       });
     }
 
-    document.addEventListener("visibilitychange", refreshScrollButtons);
-    return cleanup;
+    // don't override scroll buttons if it's already set to "auto"
+    if (scrollButtons !== "auto" && document.visibilityState === "hidden") {
+      document.addEventListener("visibilitychange", refreshScrollButtons);
+    }
+    return () => {
+      cleanup();
+    };
   }, [scrollButtons]);
 
   const renderTab = useCallback(
