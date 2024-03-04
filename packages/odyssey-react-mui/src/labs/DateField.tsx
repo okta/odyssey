@@ -10,14 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { forwardRef, memo, useCallback } from "react";
 import { InputAdornment } from "@mui/material";
 import {
   DateValidationError,
   DateField as MuiDateField,
   DateFieldProps as MuiDateFieldProps,
+  PickerChangeHandlerContext,
 } from "@mui/x-date-pickers";
+import { DateTime } from "luxon";
 // import { FieldChangeHandler } from '@mui/material';
-import { forwardRef, memo, useCallback } from "react";
 
 import { Field, RenderFieldProps } from "../Field";
 import { TextFieldProps } from "../TextField";
@@ -31,21 +33,27 @@ export const textFieldTypeValues = [
   "url",
 ] as const;
 
-export type DateFieldProps = MuiDateFieldProps<Date> &
-  Pick<
-    TextFieldProps,
-    | "endAdornment"
-    | "label"
-    | "hasInitialFocus"
-    | "onBlur"
-    | "onFocus"
-    | "placeholder"
-    | "errorMessage"
-    | "hint"
-    | "isDisabled"
-    | "isOptional"
-    | "isReadOnly"
-  >;
+export type DateFieldProps = MuiDateFieldProps<DateTime> & {
+  onChange: (
+    value: DateTime | null,
+    validationError: PickerChangeHandlerContext<DateValidationError>,
+  ) => void;
+  value: MuiDateFieldProps<DateTime>["value"];
+} & Pick<
+  TextFieldProps,
+  | "endAdornment"
+  | "label"
+  | "hasInitialFocus"
+  | "id"
+  | "onBlur"
+  | "onFocus"
+  | "placeholder"
+  | "errorMessage"
+  | "hint"
+  | "isDisabled"
+  | "isOptional"
+  | "isReadOnly"
+>;
 
 const DateField = forwardRef<HTMLInputElement, DateFieldProps>(
   (
@@ -68,8 +76,8 @@ const DateField = forwardRef<HTMLInputElement, DateFieldProps>(
     ref
   ) => {
     const handleChange = (
-      value: Date | null,
-      validationError: DateValidationError,
+      value: DateTime,
+      validationError: PickerChangeHandlerContext<DateValidationError>,
     ) => {
       // const value = event.target.value;
       console.log({ value }, { validationError });
@@ -78,9 +86,10 @@ const DateField = forwardRef<HTMLInputElement, DateFieldProps>(
     };
 
     const renderFieldComponent = useCallback(
-      ({ ariaDescribedBy, id }: RenderFieldProps) => (
+      ({ ariaDescribedBy, id, labelElementId }: RenderFieldProps) => (
         <MuiDateField
           aria-describedby={ariaDescribedBy}
+          aria-labelledby={labelElementId}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus={hasInitialFocus}
           InputProps={{

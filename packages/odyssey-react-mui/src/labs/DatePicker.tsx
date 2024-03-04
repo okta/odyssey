@@ -32,7 +32,7 @@ import {
 } from "../icons.generated";
 import { DateField, DateFieldProps } from "./DateField";
 import { datePickerTheme } from "./datePickerTheme";
-import { RenderFieldProps } from "../Field";
+// import { RenderFieldProps } from "../Field";
 import { OdysseyThemeProvider } from "../OdysseyThemeProvider";
 
 export type DatePickerProps<DateTime> = {
@@ -71,17 +71,10 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps<DateTime>>(
     );
 
     const renderFieldComponent = useCallback(
-      ({
-        label,
-        onChange,
-        value,
-        ...rest
-      }: RenderFieldProps &
-        Pick<DatePickerProps<DateTime>, "label" | "onChange"> &
-        MuiDatePickerProps<DateTime>) => {
+      (props: any) => {
         // const containerRef = rest?.InputProps?.ref;
         const containerRef = undefined;
-        console.log({rest})
+        console.log({ ...props });
         return (
           <DateField
             endAdornment={
@@ -98,9 +91,9 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps<DateTime>>(
             }
             hint={hint}
             label={label}
-            onChange={onChange}
+            onChange={handleChange}
             ref={containerRef}
-            value={value || defaultValue}
+            value={defaultValue}
           />
         );
       },

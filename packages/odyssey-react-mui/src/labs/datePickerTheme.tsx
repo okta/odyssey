@@ -278,7 +278,7 @@ export const datePickerTheme: ThemeOptions = {
           marginInlineEnd: 0,
           maxHeight: `${(284 / 16) * (16 / 14)}rem`,
           paddingLeft: `calc(${theme.spacing(
-            popupSpacingValue
+            popupSpacingValue,
           )} + ${theme.spacing(3)})`,
           paddingRight: 0,
         }),
@@ -290,15 +290,12 @@ export const datePickerTheme: ThemeOptions = {
           width: "100%",
           justifyContent: "flex-start",
         }),
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error TEMP. Arrays are valid styles return values for Emotion.
         yearButton: ({ theme }) => [
           yearStyles.default({ theme }),
           {
             alignItems: "center",
             borderRadius: 0,
             display: "flex",
-            // @ts-expect-error TEMP. This broken when upgrading MUI.
             fontSize: theme.typography.body1.fontSize,
             justifyContent: "flex-start",
             marginBottom: 0,
