@@ -263,6 +263,7 @@ const FileUpload = ({
       odysseyDesignTokens,
       removeFileFromFilesToUploadList,
       triggerFileInputClick,
+      t,
       type,
       updateFilesToUpload,
       variant,

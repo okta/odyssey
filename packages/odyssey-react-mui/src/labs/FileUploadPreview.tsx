@@ -100,7 +100,7 @@ const UploadedFile = ({ name, onFileRemove }: UploadedFileProps) => {
         </IconButton>
       );
     },
-    [deleteHandler],
+    [deleteHandler, t],
   );
 
   return (
