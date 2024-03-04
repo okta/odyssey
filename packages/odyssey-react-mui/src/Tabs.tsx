@@ -138,11 +138,11 @@ const Tabs = ({
   }, [value]);
 
   const refreshScrollButtons = () => {
-    setTimeout(() => {
+    requestAnimationFrame(() => {
       if (document.visibilityState === "visible") {
         setScrollButtons("auto");
       }
-    }, 100);
+    });
   };
 
   useEffect(() => {
