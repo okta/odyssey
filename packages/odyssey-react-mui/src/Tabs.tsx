@@ -121,6 +121,13 @@ const Tabs = ({
   onChange: onChangeProp,
 }: TabsProps & Pick<HtmlProps, "ariaLabel">) => {
   const [tabState, setTabState] = useState(initialValue ?? value ?? "0");
+  /*
+    The scrollButtons prop is initially set to `false`.
+    It's then re-set to `auto` when the document is visible.
+    This prevents a rare bug where scroll buttons appear
+    when the component is rendered while hidden and the
+    screen is wide enough to not need scroll buttons.
+  */
   const [scrollButtons, setScrollButtons] =
     useState<MuiTabListProps["scrollButtons"]>(false);
   const onChange = useCallback<NonNullable<MuiTabListProps["onChange"]>>(
@@ -137,6 +144,7 @@ const Tabs = ({
     }
   }, [value]);
 
+  // reset the scroll buttons override when the document becomes visible
   const refreshScrollButtons = () => {
     requestAnimationFrame(() => {
       if (document.visibilityState === "visible") {
@@ -145,6 +153,7 @@ const Tabs = ({
     });
   };
 
+  // listen for visibility change to reset scroll buttons override
   useEffect(() => {
     document.addEventListener("visibilitychange", refreshScrollButtons);
     return () => {
