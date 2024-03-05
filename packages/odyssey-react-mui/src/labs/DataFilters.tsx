@@ -51,6 +51,14 @@ import { Trans, useTranslation } from "react-i18next";
 
 export type DataFilterValue = string | string[] | undefined;
 
+export type UpdateFiltersCallback = ({
+  filterId,
+  value,
+}: {
+  filterId: string;
+  value: DataFilterValue;
+}) => void;
+
 // This is the shape of each individual filter
 export type DataFilter = {
   /**
@@ -78,6 +86,10 @@ export type DataFilter = {
    * these are the options provided.
    */
   options?: Array<{ label: string; value: string }>;
+  /**
+   * A callback which renders a custom filter control
+   */
+  render?: (updateFilters: UpdateFiltersCallback) => ReactNode;
 };
 
 // This is the type of the DataFilters component itself
@@ -209,12 +221,14 @@ const DataFilters = ({
     [inputValues],
   );
 
-  const updateFilters = useCallback(
-    ({ filterId, value }: { filterId: string; value: DataFilterValue }) => {
+  const updateFilters = useCallback<UpdateFiltersCallback>(
+    ({ filterId, value }) => {
       const updatedFilters = filtersProp.map((filter) => ({
         ...filter,
         value: filter.id === filterId ? value : inputValues[filter.id],
       }));
+
+      console.log(filterId, value);
 
       setFilters(updatedFilters);
     },
@@ -468,6 +482,9 @@ const DataFilters = ({
                       setIsFiltersMenuOpen(false);
                     }}
                   >
+                    {filterPopoverCurrentFilter?.render &&
+                      filterPopoverCurrentFilter.render(updateFilters)}
+
                     {/* Autocomplete */}
                     {filterPopoverCurrentFilter?.variant === "autocomplete" &&
                       filterPopoverCurrentFilter?.options && (

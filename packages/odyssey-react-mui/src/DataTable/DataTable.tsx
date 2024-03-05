@@ -49,7 +49,11 @@ import { useRowReordering } from "./useRowReordering";
 import { DataTableSettings } from "./DataTableSettings";
 import { MenuButton, MenuButtonProps } from "../MenuButton";
 import { Box } from "../Box";
-import { DataTableRowSelectionState } from ".";
+import {
+  DataTableColumn,
+  DataTableRowData,
+  DataTableRowSelectionState,
+} from ".";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
@@ -201,6 +205,10 @@ export type DataTableProps = {
    * The component to display when the query returns no results
    */
   noResultsPlaceholder?: ReactNode;
+  /**
+   * An optional set of filters to render in the filters menu
+   */
+  filters?: Array<DataFilter | DataTableColumn<DataTableRowData> | string>;
 };
 
 const displayColumnDefOptions = {
@@ -344,6 +352,7 @@ const DataTable = ({
   errorMessage: errorMessageProp,
   emptyPlaceholder,
   noResultsPlaceholder,
+  filters: filtersProp,
 }: DataTableProps) => {
   const [data, setData] = useState<MRT_RowData[]>([]);
   const [pagination, setPagination] = useState({
@@ -445,20 +454,56 @@ const DataTable = ({
     ],
   );
 
-  const dataTableFilters = useMemo(
-    () =>
-      columns
-        .filter((column) => column.enableColumnFilter !== false)
-        .map((column) => {
-          return {
-            id: column.accessorKey as string,
-            label: column.header,
-            variant: column.filterVariant ?? "text",
-            options: column.filterSelectOptions,
-          } as DataFilter;
-        }),
-    [columns],
-  );
+  const convertColumnToFilter = (column: DataTableColumn<DataTableRowData>) => {
+    if (column.enableColumnFilter === false) {
+      return;
+    }
+
+    return {
+      id: column.accessorKey as string,
+      label: column.header,
+      variant: column.filterVariant ?? "text",
+      options: column.filterSelectOptions,
+    } as DataFilter;
+  };
+
+  const isDataTableColumn = (
+    item: unknown,
+  ): item is DataTableColumn<DataTableRowData> => {
+    return (
+      !!item &&
+      typeof (item as DataTableColumn<DataTableRowData>).accessorKey !==
+        "undefined"
+    );
+  };
+
+  const isDataFilter = (item: unknown): item is DataFilter => {
+    return !!item && typeof (item as DataFilter).id !== "undefined";
+  };
+
+  const dataTableFilters = useMemo(() => {
+    const providedFilters = filtersProp || columns;
+    return providedFilters
+      .map((item) => {
+        if (typeof item === "string") {
+          const foundColumn = columns.find(
+            (column) => column.accessorKey === item,
+          );
+          return foundColumn && convertColumnToFilter(foundColumn);
+        }
+
+        if (isDataTableColumn(item)) {
+          return convertColumnToFilter(item);
+        }
+
+        if (isDataFilter(item)) {
+          return item;
+        }
+
+        return;
+      })
+      .filter((filter): filter is DataFilter => filter !== undefined);
+  }, [columns, filters, filtersProp]);
 
   const defaultCell = useCallback(
     ({ cell }: { cell: MRT_Cell<MRT_RowData> }) => {

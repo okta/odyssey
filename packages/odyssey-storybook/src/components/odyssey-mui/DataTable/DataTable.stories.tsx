@@ -11,8 +11,12 @@
  */
 
 import type { Meta, StoryObj } from "@storybook/react";
-import { paginationTypeValues } from "@okta/odyssey-react-mui/labs";
 import {
+  UpdateFiltersCallback,
+  paginationTypeValues,
+} from "@okta/odyssey-react-mui/labs";
+import {
+  Box,
   Button,
   DataTable,
   DataTableEmptyState,
@@ -343,6 +347,13 @@ const filterData = ({
           });
         }
 
+        if (id === "startLetter" && typeof row.name === "string") {
+          const firstLetter = row.name[0]?.toLowerCase();
+          if (value === "vowel") return "aeiou".includes(firstLetter);
+          if (value === "consonant") return !"aeiou".includes(firstLetter);
+          return true;
+        }
+
         // General filtering for other columns
         return row[id as keyof (Planet | Person)]
           ?.toString()
@@ -584,6 +595,133 @@ export const Empty: StoryObj<DataTableProps> = {
         onReorderRows={onReorderRows}
         onChangeRowSelection={onChangeRowSelection}
         emptyPlaceholder={emptyPlaceholder}
+      />
+    );
+  },
+};
+
+export const CustomFilters: StoryObj<DataTableProps> = {
+  args: {
+    hasChangeableDensity: true,
+    hasColumnResizing: true,
+    hasColumnVisibility: false,
+    hasFilters: true,
+    hasPagination: false,
+    hasRowSelection: true,
+    hasSearch: true,
+    hasSorting: true,
+    hasRowReordering: false,
+  },
+  render: function C(props) {
+    const [data, setData] = useState<Planet[]>(planetData);
+
+    const getData = useCallback(
+      ({ ...props }: DataTableGetDataType) => {
+        return filterData({ data, ...props });
+      },
+      [data],
+    );
+
+    const onReorderRows = useCallback(
+      ({ ...props }: DataTableOnReorderRowsType) => {
+        const reorderedData = reorderData({ data, ...props });
+        setData(reorderedData as Planet[]);
+      },
+      [data],
+    );
+
+    const onChangeRowSelection = useCallback(
+      (rowSelection: DataTableRowSelectionState) => {
+        if (Object.keys(rowSelection).length > 0) {
+          console.log(`${Object.keys(rowSelection).length} selected`);
+        }
+      },
+      [],
+    );
+
+    const filters = useMemo(
+      () => [
+        ...planetColumns,
+        {
+          id: "startLetter",
+          label: "Name starting with...",
+          render: (updateFilters: UpdateFiltersCallback) => {
+            return (
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignContent: "stretch",
+                  gap: 2,
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "stretch",
+                    flexDirection: "column",
+                  }}
+                >
+                  <Button
+                    variant="secondary"
+                    label="Vowel"
+                    isFullWidth
+                    onClick={() =>
+                      updateFilters({ filterId: "startLetter", value: "vowel" })
+                    }
+                  />
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "stretch",
+                    flexDirection: "column",
+                  }}
+                >
+                  <Button
+                    variant="secondary"
+                    label="Consonant"
+                    isFullWidth
+                    onClick={() =>
+                      updateFilters({
+                        filterId: "startLetter",
+                        value: "consonant",
+                      })
+                    }
+                  />
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "stretch",
+                    flexDirection: "column",
+                  }}
+                >
+                  <Button
+                    variant="secondary"
+                    label="Any"
+                    isFullWidth
+                    onClick={() =>
+                      updateFilters({ filterId: "startLetter", value: "any" })
+                    }
+                  />
+                </Box>
+              </Box>
+            );
+          },
+        },
+      ],
+      [],
+    );
+
+    return (
+      <DataTable
+        {...props}
+        columns={planetColumns}
+        filters={filters}
+        getData={getData}
+        onReorderRows={onReorderRows}
+        onChangeRowSelection={onChangeRowSelection}
       />
     );
   },
