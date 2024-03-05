@@ -70,7 +70,7 @@ export type ToastProps = {
    * The text content of the Toast
    */
   text: string;
-} & HtmlProps;
+} & Pick<HtmlProps, "testId" | "translate">;
 
 const ClickAwayListenerProps = { onClickAway: () => false };
 

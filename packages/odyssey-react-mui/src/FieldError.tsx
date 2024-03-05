@@ -24,7 +24,7 @@ export type FieldErrorProps = {
   id?: string;
   message?: string;
   messageList?: string[];
-} & HtmlProps;
+} & Pick<HtmlProps, "testId" | "translate">;
 
 const FieldError = ({
   id,

@@ -56,7 +56,7 @@ export type BannerProps = {
    * The text content of the alert
    */
   text: string;
-} & HtmlProps;
+} & Pick<HtmlProps, "testId" | "translate">;
 
 const Banner = ({
   linkUrl,

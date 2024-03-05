@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Dispatch, SetStateAction, memo, useCallback } from "react";
+import { Dispatch, SetStateAction, memo, useCallback, useMemo } from "react";
 import { Checkbox as MuiCheckbox } from "@mui/material";
 import { MenuButton } from "../MenuButton";
 import { MenuItem } from "../MenuItem";
@@ -67,6 +67,19 @@ const DataTableSettings = ({
     [setColumnVisibility],
   );
 
+  const isColumnVisibilityChecked = useMemo(() => {
+    return columns.reduce(
+      (acc, column) => {
+        const isChecked = columnVisibility
+          ? columnVisibility[column.accessorKey!] !== false
+          : true;
+        acc[column.accessorKey!] = isChecked;
+        return acc;
+      },
+      {} as Record<string, boolean>,
+    );
+  }, [columns, columnVisibility]);
+
   return (
     <>
       {hasChangeableDensity && (
@@ -106,12 +119,7 @@ const DataTableSettings = ({
                   onClick={changeColumnVisibility(column.id as string)}
                 >
                   <MuiCheckbox
-                    checked={
-                      columnVisibility
-                        ? columnVisibility[column.accessorKey as string] !==
-                          false
-                        : true
-                    }
+                    checked={isColumnVisibilityChecked[column.accessorKey!]}
                   />
                   {column.header}
                 </MenuItem>
