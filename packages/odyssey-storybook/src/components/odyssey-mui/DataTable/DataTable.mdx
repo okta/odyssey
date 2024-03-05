@@ -388,6 +388,10 @@ emptyPlaceholder={
 }
 ```
 
+<Canvas>
+  <Story of={DataTableStories.Empty} />
+</Canvas>
+
 ## Row reordering
 
 Rows can be reordered via drag-and-drop. The table also includes keyboard support for reordering — if the user
@@ -417,6 +421,64 @@ scroll position of the content.
 Action buttons and menu items can be added to each row. If rows are selectable, you can also add bulk actions to the top of the table,
 which will be applied to all selected rows. (For example, the bulk actions menu starts out disabled, but if the user selects 3 rows,
 the actions menu will be enabled and any actions performed would be applied to all 3 selected rows.)
+
+## Custom filters
+
+<Canvas>
+  <Story of={DataTableStories.CustomFilters} />
+</Canvas>
+
+Within `<DataTable>`, you can now pass a custom `filters` prop. _This will override the default filters, which are based off the table columns_.
+
+The `filters` variable should be an array, which can contain any combination of:
+
+1. A table column (the full column def)
+2. A string that matches the `accessorKey` of a table column
+3. A custom filter.
+
+Using this schema, you can pass in the existing set of table columns plus your own filters. You can also use this mechanism to change the order that the filters are displayed.
+
+```tsx
+const filters = [
+  ...columns,
+  {
+    id: "",
+    label: "",
+    render: (updateFilters: UpdateFiltersCallback) => {},
+  },
+];
+```
+
+This is the shape of a custom filter:
+
+```tsx
+export type DataFilter = {
+  id: string;
+  label: string;
+  value?: DataFilterValue;
+  render?: (updateFilters: UpdateFiltersCallback) => ReactNode;
+};
+```
+
+The `id` is the string representing the filter (it'll be passed through to your filtering function, so if your filter id is `foo`, within your filtering function you'll be able to target `filter.id === "foo"` and then retrieve the value with `filter.value`.
+
+The `label` is the human-readable name of the filter.
+
+`value` is the current value
+
+`render` is a function that accepts the callback for changing the filters and returns a ReactNode with the custom filter control.
+
+You can add a custom control to a default filter:
+
+<Canvas>
+  <Story of={DataTableStories.FilterWithCustomRender} />
+</Canvas>
+
+You can use an out-of-the-box filter variant with a custom filter:
+
+<Canvas>
+  <Story of={DataTableStories.CustomFilterWithDefaultVariant} />
+</Canvas>
 
 # Gotchas
 
