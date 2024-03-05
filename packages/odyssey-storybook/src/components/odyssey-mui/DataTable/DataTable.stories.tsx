@@ -19,10 +19,12 @@ import {
   Box,
   Button,
   DataTable,
+  DataTableColumn,
   DataTableEmptyState,
   DataTableGetDataType,
   DataTableOnReorderRowsType,
   DataTableProps,
+  DataTableRowData,
   DataTableRowSelectionState,
   MenuItem,
   densityValues,
@@ -645,74 +647,243 @@ export const CustomFilters: StoryObj<DataTableProps> = {
         {
           id: "startLetter",
           label: "Name starting with...",
-          render: (updateFilters: UpdateFiltersCallback) => {
-            return (
+          render: (updateFilters: UpdateFiltersCallback) => (
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignContent: "stretch",
+                gap: 2,
+              }}
+            >
               <Box
                 sx={{
                   display: "flex",
+                  alignItems: "stretch",
                   flexDirection: "column",
-                  alignContent: "stretch",
-                  gap: 2,
                 }}
               >
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "stretch",
-                    flexDirection: "column",
-                  }}
-                >
-                  <Button
-                    variant="secondary"
-                    label="Vowel"
-                    isFullWidth
-                    onClick={() =>
-                      updateFilters({ filterId: "startLetter", value: "vowel" })
-                    }
-                  />
-                </Box>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "stretch",
-                    flexDirection: "column",
-                  }}
-                >
-                  <Button
-                    variant="secondary"
-                    label="Consonant"
-                    isFullWidth
-                    onClick={() =>
-                      updateFilters({
-                        filterId: "startLetter",
-                        value: "consonant",
-                      })
-                    }
-                  />
-                </Box>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "stretch",
-                    flexDirection: "column",
-                  }}
-                >
-                  <Button
-                    variant="secondary"
-                    label="Any"
-                    isFullWidth
-                    onClick={() =>
-                      updateFilters({ filterId: "startLetter", value: "any" })
-                    }
-                  />
-                </Box>
+                <Button
+                  variant="secondary"
+                  label="Vowel"
+                  isFullWidth
+                  onClick={() =>
+                    updateFilters({ filterId: "startLetter", value: "vowel" })
+                  }
+                />
               </Box>
-            );
-          },
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "stretch",
+                  flexDirection: "column",
+                }}
+              >
+                <Button
+                  variant="secondary"
+                  label="Consonant"
+                  isFullWidth
+                  onClick={() =>
+                    updateFilters({
+                      filterId: "startLetter",
+                      value: "consonant",
+                    })
+                  }
+                />
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "stretch",
+                  flexDirection: "column",
+                }}
+              >
+                <Button
+                  variant="secondary"
+                  label="Any"
+                  isFullWidth
+                  onClick={() =>
+                    updateFilters({ filterId: "startLetter", value: "any" })
+                  }
+                />
+              </Box>
+            </Box>
+          ),
         },
       ],
       [],
     );
+
+    return (
+      <DataTable
+        {...props}
+        columns={planetColumns}
+        filters={filters}
+        getData={getData}
+        onReorderRows={onReorderRows}
+        onChangeRowSelection={onChangeRowSelection}
+      />
+    );
+  },
+};
+
+export const FilterWithCustomRender: StoryObj<DataTableProps> = {
+  args: {
+    hasChangeableDensity: true,
+    hasColumnResizing: true,
+    hasColumnVisibility: false,
+    hasFilters: true,
+    hasPagination: false,
+    hasRowSelection: true,
+    hasSearch: true,
+    hasSorting: true,
+    hasRowReordering: false,
+  },
+  render: function C(props) {
+    const [data, setData] = useState<Planet[]>(planetData);
+
+    const getData = useCallback(
+      ({ ...props }: DataTableGetDataType) => {
+        return filterData({ data, ...props });
+      },
+      [data],
+    );
+
+    const onReorderRows = useCallback(
+      ({ ...props }: DataTableOnReorderRowsType) => {
+        const reorderedData = reorderData({ data, ...props });
+        setData(reorderedData as Planet[]);
+      },
+      [data],
+    );
+
+    const onChangeRowSelection = useCallback(
+      (rowSelection: DataTableRowSelectionState) => {
+        if (Object.keys(rowSelection).length > 0) {
+          console.log(`${Object.keys(rowSelection).length} selected`);
+        }
+      },
+      [],
+    );
+
+    const filters = useMemo(() => {
+      // Filter out the column with the id of "type"
+      const filteredPlanetColumns = planetColumns.filter(
+        (column) => column.id !== "visit",
+      );
+
+      return [
+        ...filteredPlanetColumns,
+        {
+          id: "visit",
+          label: "Type of visit 🚀",
+          render: (updateFilters: UpdateFiltersCallback) => (
+            <Box>
+              <Button
+                variant="secondary"
+                label="🛬 Landing"
+                onClick={() =>
+                  updateFilters({ filterId: "visit", value: "landing" })
+                }
+              />
+              <Button
+                variant="secondary"
+                label="🛰️ Orbit"
+                onClick={() =>
+                  updateFilters({ filterId: "visit", value: "orbit" })
+                }
+              />
+              <Button
+                variant="secondary"
+                label="🛸 Flyby"
+                onClick={() =>
+                  updateFilters({ filterId: "visit", value: "flyby" })
+                }
+              />
+              <Button
+                variant="secondary"
+                label="🤷‍♂️ Any"
+                onClick={() => updateFilters({ filterId: "visit", value: "" })}
+              />
+            </Box>
+          ),
+        },
+      ];
+    }, [planetColumns]);
+
+    return (
+      <DataTable
+        {...props}
+        columns={planetColumns}
+        filters={filters}
+        getData={getData}
+        onReorderRows={onReorderRows}
+        onChangeRowSelection={onChangeRowSelection}
+      />
+    );
+  },
+};
+
+export const CustomFilterWithDefaultVariant: StoryObj<DataTableProps> = {
+  args: {
+    hasChangeableDensity: true,
+    hasColumnResizing: true,
+    hasColumnVisibility: false,
+    hasFilters: true,
+    hasPagination: false,
+    hasRowSelection: true,
+    hasSearch: true,
+    hasSorting: true,
+    hasRowReordering: false,
+  },
+  render: function C(props) {
+    const [data, setData] = useState<Planet[]>(planetData);
+
+    const getData = useCallback(
+      ({ ...props }: DataTableGetDataType) => {
+        return filterData({ data, ...props });
+      },
+      [data],
+    );
+
+    const onReorderRows = useCallback(
+      ({ ...props }: DataTableOnReorderRowsType) => {
+        const reorderedData = reorderData({ data, ...props });
+        setData(reorderedData as Planet[]);
+      },
+      [data],
+    );
+
+    const onChangeRowSelection = useCallback(
+      (rowSelection: DataTableRowSelectionState) => {
+        if (Object.keys(rowSelection).length > 0) {
+          console.log(`${Object.keys(rowSelection).length} selected`);
+        }
+      },
+      [],
+    );
+
+    const filters = useMemo(() => {
+      return [
+        ...planetColumns,
+        {
+          id: "startLetter",
+          label: "Starting letter",
+          variant:
+            "select" as DataTableColumn<DataTableRowData>["filterVariant"],
+          options: [
+            {
+              label: "Vowel",
+              value: "vowel",
+            },
+            {
+              label: "Consonant",
+              value: "consonant",
+            },
+          ],
+        },
+      ];
+    }, [planetColumns]);
 
     return (
       <DataTable
