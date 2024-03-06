@@ -160,7 +160,9 @@ const FileUpload = ({
 
       if (files && files.length > 0) {
         const mergedFiles =
-          type === "multiple" ? [...filesToUpload, ...files] : [...files];
+          type === "multiple"
+            ? [...filesToUpload, ...files]
+            : ([...files] satisfies File[] as File[]);
 
         setFilesToUpload(mergedFiles);
       }
@@ -172,7 +174,7 @@ const FileUpload = ({
   );
 
   const triggerFileInputClick = useCallback(() => {
-    inputRef?.current?.click();
+    inputRef.current?.focus();
   }, [inputRef]);
 
   const removeFileFromFilesToUploadList = useCallback<(name: string) => void>(
