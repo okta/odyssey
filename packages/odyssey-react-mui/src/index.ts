@@ -70,6 +70,7 @@ export * from "./CssBaseline";
 export * from "./createShadowRootElement";
 export * from "./createUniqueId";
 export * from "./DataTable";
+export * from "./DataStack";
 export * from "./Dialog";
 export * from "./Fieldset";
 export * from "./FieldComponentProps";
