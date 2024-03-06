@@ -10,11 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { forwardRef, memo, useCallback, useState } from "react";
+import { forwardRef, memo, useCallback, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   DatePicker as MuiDatePicker,
   DatePickerProps as MuiDatePickerProps,
+  DateFieldProps as MuiDateFieldProps,
   LocalizationProvider,
   DateValidationError,
   PickerChangeHandlerContext,
@@ -34,19 +35,27 @@ import { DateField, DateFieldProps } from "./DateField";
 import { datePickerTheme } from "./datePickerTheme";
 // import { RenderFieldProps } from "../Field";
 import { OdysseyThemeProvider } from "../OdysseyThemeProvider";
+import {
+  ComponentControlledState,
+  getControlState,
+  useInputValues,
+} from "../inputUtils";
 
-export type DatePickerProps<DateTime> = {
+export type DatePickerProps<Date> = {
+  defaultValue?: MuiDatePickerProps<Date>["value"];
+  hint?: DateFieldProps["hint"];
   label: string;
   onChange: (
     date: Date,
-    validationError: PickerChangeHandlerContext<DateValidationError>
+    validationError: PickerChangeHandlerContext<DateValidationError>,
   ) => void;
-  defaultValue: MuiDatePickerProps<DateTime>["value"];
-  hint?: DateFieldProps["hint"];
+  value?: MuiDatePickerProps<Date>["value"];
 };
 
-const DatePicker = forwardRef<HTMLInputElement, DatePickerProps<DateTime>>(
-  ({ label, onChange, defaultValue = null, hint }, ref) => {
+const DateFieldComponent = (props: any) => <DateField {...props} />
+
+const DatePicker = forwardRef<HTMLInputElement, DatePickerProps<Date>>(
+  ({ defaultValue, hint, label, onChange, value }, ref) => {
     const [isOpen, setIsOpen] = useState(false);
     const { i18n } = useTranslation();
     const { language } = i18n;
@@ -54,29 +63,71 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps<DateTime>>(
     const invalidLocales = ["ok_PL", "ok_SK"];
     const isInvalidLocale = invalidLocales.includes(language);
 
+    const containerRef = useRef<HTMLInputElement>(null);
+
+    const controlledStateRef = useRef(
+      getControlState({
+        controlledValue: value,
+        uncontrolledValue: defaultValue,
+      }),
+    );
+    const inputValues = useInputValues({
+      defaultValue: defaultValue || undefined,
+      value: value || undefined,
+      controlState: controlledStateRef.current,
+    });
+
+    const getInputValueAsDateTime = useCallback(() => {
+      const { value, defaultValue } = inputValues;
+
+      if (value) {
+        return {
+          value: DateTime.fromJSDate(value),
+        };
+      }
+
+      if (defaultValue) {
+        return {
+          defaultValue: DateTime.fromJSDate(defaultValue)
+        };
+      }
+
+      return null
+    }, [controlledStateRef, inputValues]);
+
+    const inputValueAsDateTime = getInputValueAsDateTime();
+
     const handleChange = useCallback(
       // value will be luxon DateTime
       (
         value: DateTime | null,
-        validationError: PickerChangeHandlerContext<DateValidationError>
+        validationError: PickerChangeHandlerContext<DateValidationError>,
       ) => {
-        // console.log({ value }, { context });
+        console.log('DP onChange', value)
         if (value) {
-          const jsDateFromDateTime: Date = value?.toJSDate();
-          console.log({ jsDateFromDateTime });
+          const jsDateFromDateTime: Date = new Date(value?.toJSDate());
           onChange?.(jsDateFromDateTime, validationError);
         }
       },
-      [onChange]
+      [onChange],
     );
 
     const renderFieldComponent = useCallback(
-      (props: any) => {
-        // const containerRef = rest?.InputProps?.ref;
-        const containerRef = undefined;
-        console.log({ ...props });
+      (
+        muiProps: MuiDateFieldProps<DateTime>
+      ) => {
+        const { inputRef } = muiProps;
+        console.log({inputRef})
+        // if (
+        //   typeof muiProps?.inputRef === "function"
+        // ) {
+        //   // console.log("ref assignment");
+        //   console.log(containerRef.current);
+        //   muiProps?.inputRef?.(containerRef.current);
+        // }
         return (
           <DateField
+            {...muiProps}
             endAdornment={
               <InputAdornment position="end">
                 <Button
@@ -93,17 +144,19 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps<DateTime>>(
             label={label}
             onChange={handleChange}
             ref={containerRef}
-            value={defaultValue}
+            // ref={(element: HTMLInputElement) => {
+            //   containerRef.current = element;
+            // }}
           />
         );
       },
-      [label, onChange, defaultValue],
+      [inputValueAsDateTime, label, onChange],
     );
 
     if (isInvalidLocale) {
       return null;
     }
-    console.log({ language });
+
     return (
       <OdysseyThemeProvider themeOverride={datePickerTheme}>
         <LocalizationProvider
@@ -111,6 +164,7 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps<DateTime>>(
           adapterLocale={language}
         >
           <MuiDatePicker
+            {...inputValueAsDateTime}
             dayOfWeekFormatter={(_, date: DateTime) => {
               return date.toFormat("EEE");
             }}
@@ -118,7 +172,6 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps<DateTime>>(
             onChange={handleChange}
             onClose={() => setIsOpen(false)}
             open={isOpen}
-            value={defaultValue}
             ref={ref}
             slots={{
               field: renderFieldComponent,
@@ -130,7 +183,7 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps<DateTime>>(
         </LocalizationProvider>
       </OdysseyThemeProvider>
     );
-  }
+  },
 );
 
 const MemoizedDatePicker = memo(DatePicker);

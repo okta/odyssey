@@ -34,35 +34,38 @@ export const textFieldTypeValues = [
 ] as const;
 
 export type DateFieldProps = MuiDateFieldProps<DateTime> & {
+  defaultValue?: MuiDateFieldProps<DateTime>["value"];
   onChange: (
     value: DateTime | null,
     validationError: PickerChangeHandlerContext<DateValidationError>,
   ) => void;
-  value: MuiDateFieldProps<DateTime>["value"];
+  value?: MuiDateFieldProps<DateTime>["value"];
 } & Pick<
-  TextFieldProps,
-  | "endAdornment"
-  | "label"
-  | "hasInitialFocus"
-  | "id"
-  | "onBlur"
-  | "onFocus"
-  | "placeholder"
-  | "errorMessage"
-  | "hint"
-  | "isDisabled"
-  | "isOptional"
-  | "isReadOnly"
->;
+    TextFieldProps,
+    | "endAdornment"
+    | "label"
+    | "hasInitialFocus"
+    | "id"
+    | "onBlur"
+    | "onFocus"
+    | "placeholder"
+    | "errorMessage"
+    | "hint"
+    | "isDisabled"
+    | "isOptional"
+    | "isReadOnly"
+  >;
 
 const DateField = forwardRef<HTMLInputElement, DateFieldProps>(
   (
     {
-      hasInitialFocus,
+      defaultValue,
       endAdornment,
       errorMessage,
+      hasInitialFocus,
       hint,
       id: idOverride,
+      inputRef,
       isDisabled = false,
       isOptional = false,
       isReadOnly,
@@ -71,7 +74,8 @@ const DateField = forwardRef<HTMLInputElement, DateFieldProps>(
       onChange,
       onFocus,
       placeholder,
-      value = null,
+      value,
+      ...rest
     },
     ref
   ) => {
@@ -80,38 +84,44 @@ const DateField = forwardRef<HTMLInputElement, DateFieldProps>(
       validationError: PickerChangeHandlerContext<DateValidationError>,
     ) => {
       // const value = event.target.value;
-      console.log({ value }, { validationError });
+      // console.log({ value }, { validationError });
       // return value;
-      onChange?.(value, { validationError: null });
+      onChange?.(value, validationError);
     };
 
     const renderFieldComponent = useCallback(
-      ({ ariaDescribedBy, id, labelElementId }: RenderFieldProps) => (
-        <MuiDateField
-          aria-describedby={ariaDescribedBy}
-          aria-labelledby={labelElementId}
-          /* eslint-disable-next-line jsx-a11y/no-autofocus */
-          autoFocus={hasInitialFocus}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">{endAdornment}</InputAdornment>
-            ),
-          }}
-          id={id}
-          name={id}
-          onBlur={onBlur}
-          // @ts-ignore
-          onChange={handleChange}
-          onFocus={onFocus}
-          readOnly={isReadOnly}
-          ref={ref}
-          value={value}
-          variant="standard"
-        />
-      ),
+      ({ ariaDescribedBy, id, labelElementId }: RenderFieldProps) => {
+        return (
+          <MuiDateField
+            {...rest}
+            /* eslint-disable-next-line jsx-a11y/no-autofocus */
+            autoFocus={hasInitialFocus}
+            defaultValue={defaultValue}
+            id={id}
+            InputProps={{
+              ref: inputRef,
+              "aria-describedby": ariaDescribedBy,
+              "aria-labelledby": labelElementId,
+              endAdornment: (
+                <InputAdornment position="end">{endAdornment}</InputAdornment>
+              ),
+            }}
+            name={id}
+            onBlur={onBlur}
+            // @ts-ignore
+            onChange={handleChange}
+            onFocus={onFocus}
+            readOnly={isReadOnly}
+            // ref={ref}
+            value={value}
+            variant="standard"
+          />
+        );
+      },
       [
-        hasInitialFocus,
+        defaultValue,
         endAdornment,
+        hasInitialFocus,
         onChange,
         onFocus,
         onBlur,

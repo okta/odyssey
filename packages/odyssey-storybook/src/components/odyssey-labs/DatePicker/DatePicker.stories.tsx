@@ -13,6 +13,8 @@
 import { useMemo, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { OdysseyProvider } from "@okta/odyssey-react-mui";
+import { DateTime } from "luxon";
+
 import {
   AdapterDateFns,
   DatePicker,
@@ -23,31 +25,30 @@ import {
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-const StorybookDatePicker = (props: DatePickerProps<Date>) => {
-  const [value, setValue] = useState<Date | null | undefined>();
+const StorybookDatePicker = (props: DatePickerProps<DateTime>) => {
+  const [value, setValue] = useState<Date | null>();
 
   const datePickerProps = useMemo(
     () => ({
       ...props,
-      onChange: (newValue: Date | null) => {
+      onChange: (date: Date | null, validationError: {}) => {
         // console.log({ newValue });
-        // setValue(newValue);
+        console.log(typeof date === Date)
+        setValue(date);
       },
       value,
     }),
-    [props, value]
+    [props, value],
   );
 
   return (
-    <OdysseyThemeProvider themeOverride={datePickerTheme}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DatePicker {...datePickerProps} />
       </LocalizationProvider>
-    </OdysseyThemeProvider>
   );
 };
 
-const storybookMeta: Meta<DatePickerProps<Date>> = {
+const storybookMeta: Meta<DatePickerProps<DateTime>> = {
   title: "Labs Components/DatePicker",
   component: StorybookDatePicker,
   argTypes: {
@@ -58,7 +59,7 @@ const storybookMeta: Meta<DatePickerProps<Date>> = {
     onChange: {
       control: "function",
     },
-    value: {
+    defaultValue: {
       description:
         "A date object passed into the component to pre-fill the input",
       table: {
