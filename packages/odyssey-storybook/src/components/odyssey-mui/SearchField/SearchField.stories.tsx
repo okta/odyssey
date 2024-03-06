@@ -169,8 +169,18 @@ export const ControlledSearch: StoryObj<typeof SearchField> = {
         setControlledValue(event.target.value),
       [],
     );
+
+    const onClear = useCallback(() => {
+      setControlledValue("");
+    }, []);
+
     return (
-      <SearchField {...props} value={constrolledValue} onChange={onChange} />
+      <SearchField
+        {...props}
+        value={constrolledValue}
+        onChange={onChange}
+        onClear={onClear}
+      />
     );
   },
 };
