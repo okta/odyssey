@@ -158,7 +158,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
           autoFocus={hasInitialFocus}
           data-se={testId}
           endAdornment={
-            defaultValue && (
+            (inputValues?.defaultValue || inputValues?.value) && (
               <InputAdornment position="end">
                 <IconButton
                   aria-label="Clear"
