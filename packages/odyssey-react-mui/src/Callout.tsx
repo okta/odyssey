@@ -11,13 +11,18 @@
  */
 
 import { memo, ReactNode } from "react";
-import { Alert, AlertTitle, Box } from "@mui/material";
+import { Alert, AlertTitle, Box, Link as MuiLink } from "@mui/material";
 import { ScreenReaderText } from "./ScreenReaderText";
 import { useTranslation } from "react-i18next";
 
 import type { HtmlProps } from "./HtmlProps";
-import { Link } from "./Link";
 import { Paragraph } from "./Typography";
+
+import {
+  DesignTokens,
+  useOdysseyDesignTokens,
+} from "./OdysseyDesignTokensContext";
+import styled from "@emotion/styled";
 
 export const calloutRoleValues = ["status", "alert"] as const;
 export const calloutSeverityValues = [
@@ -80,6 +85,13 @@ export type CalloutProps = {
   ) &
   Pick<HtmlProps, "testId" | "translate">;
 
+const CallToAction = styled(MuiLink, {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  display: "inline-block",
+  marginBlockStart: odysseyDesignTokens.Spacing4,
+}));
+
 const Callout = ({
   children,
   linkText,
@@ -92,6 +104,7 @@ const Callout = ({
   translate,
 }: CalloutProps) => {
   const { t } = useTranslation();
+  const odysseyDesignTokens = useOdysseyDesignTokens();
 
   return (
     <Alert data-se={testId} role={role} severity={severity} variant="callout">
@@ -102,9 +115,13 @@ const Callout = ({
       {children && <Box component="div">{children}</Box>}
       {text && <Paragraph>{text}</Paragraph>}
       {linkUrl && (
-        <Link href={linkUrl} variant="monochrome">
+        <CallToAction
+          odysseyDesignTokens={odysseyDesignTokens}
+          href={linkUrl}
+          variant="monochrome"
+        >
           {linkText}
-        </Link>
+        </CallToAction>
       )}
     </Alert>
   );

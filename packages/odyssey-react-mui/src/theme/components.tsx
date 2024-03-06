@@ -23,7 +23,6 @@ import { formLabelClasses } from "@mui/material/FormLabel";
 import { formGroupClasses } from "@mui/material/FormGroup";
 import { inputAdornmentClasses } from "@mui/material/InputAdornment";
 import { inputBaseClasses } from "@mui/material/InputBase";
-import { linkClasses } from "@mui/material/Link";
 import { listItemIconClasses } from "@mui/material/ListItemIcon";
 import { listItemTextClasses } from "@mui/material/ListItemText";
 import { menuItemClasses } from "@mui/material/MenuItem";
@@ -313,10 +312,6 @@ export const components = ({
             flexGrow: 1,
             marginBlock: odysseyTokens.Spacing2,
           }),
-          [`& .${linkClasses.root}`]: {
-            display: "inline-block",
-            marginTop: odysseyTokens.Spacing5,
-          },
         }),
       },
     },
