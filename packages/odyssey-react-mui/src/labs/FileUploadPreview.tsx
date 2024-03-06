@@ -27,19 +27,11 @@ import { Tooltip } from "../Tooltip";
 const PreviewContainer = styled.div<{
   isDisabled: FileUploadProps["isDisabled"];
   odysseyDesignTokens: DesignTokens;
-}>(
-  ({ odysseyDesignTokens }) => ({
-    marginBlockStart: odysseyDesignTokens.Spacing2,
-  }),
-
-  ({ isDisabled, odysseyDesignTokens }) => ({
-    color: isDisabled ? odysseyDesignTokens.TypographyColorDisabled : "inherit",
-  }),
-
-  ({ isDisabled }) => ({
-    pointerEvents: isDisabled ? "none" : "auto",
-  }),
-);
+}>(({ isDisabled, odysseyDesignTokens }) => ({
+  color: isDisabled ? odysseyDesignTokens.TypographyColorDisabled : "inherit",
+  marginBlockStart: odysseyDesignTokens.Spacing2,
+  pointerEvents: isDisabled ? "none" : "auto",
+}));
 
 const UploadedFileContainer = styled.div<{ odysseyDesignTokens: DesignTokens }>(
   {
