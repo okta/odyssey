@@ -1698,6 +1698,15 @@ export const components = ({
       styleOverrides: {
         root: {
           padding: odysseyTokens.Spacing1,
+          borderRadius: odysseyTokens.BorderRadiusMain,
+          "&:hover": {
+            backgroundColor: odysseyTokens.HueNeutral100,
+          },
+          "&:focus-visible": {
+            boxShadow: `0 0 0 2px ${odysseyTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyTokens.PalettePrimaryMain}`,
+            outline: "2px solid transparent",
+            outlineOffset: "1px",
+          },
         },
       },
     },
