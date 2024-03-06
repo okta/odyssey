@@ -29,6 +29,14 @@ import { useUniqueId } from "./useUniqueId";
 
 export const fieldTypeValues = ["single", "group"] as const;
 
+export type RenderFieldComponentProps = {
+  ariaDescribedBy?: string;
+  dataSe?: string;
+  errorMessageElementId?: string;
+  id: string;
+  labelElementId: string;
+};
+
 export type FieldProps = {
   /**
    * If `error` is not undefined, the `input` will indicate an error.
@@ -67,13 +75,7 @@ export type FieldProps = {
     errorMessageElementId,
     id,
     labelElementId,
-  }: {
-    ariaDescribedBy?: string;
-    dataSe?: string;
-    errorMessageElementId?: string;
-    id: string;
-    labelElementId: string;
-  }) => ReactElement;
+  }: RenderFieldComponentProps) => ReactElement;
 };
 
 const Field = ({
