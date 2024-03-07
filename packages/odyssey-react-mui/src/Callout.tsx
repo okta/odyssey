@@ -34,7 +34,7 @@ export const calloutSeverityValues = [
 
 export type CalloutProps = {
   /**
-   * The contents of the Callout
+   * @deprecated Callout content shuold be set via title, text, linkText, and linkUrl
    */
   children?: ReactNode;
   /**
