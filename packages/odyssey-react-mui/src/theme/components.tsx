@@ -2586,6 +2586,20 @@ export const components = ({
           ["&.ods-drag-handle svg"]: {
             color: odysseyTokens.HueNeutral500,
           },
+
+          ["& .ods-expand-button"]: {
+            borderRadius: odysseyTokens.BorderRadiusMain,
+            backgroundColor: "transparent",
+            color: odysseyTokens.TypographyColorBody,
+
+            "&:hover": {
+              backgroundColor: odysseyTokens.HueNeutral100,
+            },
+
+            "&:active": {
+              backgroundColor: odysseyTokens.HueNeutral200,
+            },
+          },
         }),
       },
     },

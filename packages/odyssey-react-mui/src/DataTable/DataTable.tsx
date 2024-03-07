@@ -664,6 +664,9 @@ const DataTable = ({
 
     // Row expansion
     enableExpandAll: false,
+    muiExpandButtonProps: {
+      className: "ods-expand-button",
+    },
     renderDetailPanel: renderDetailPanel,
   });
 
