@@ -11,7 +11,7 @@
  */
 
 import { FormEventHandler, memo, ReactElement } from "react";
-import { Box } from "@mui/material";
+import styled from "@emotion/styled";
 
 import { Button } from "./Button";
 import { Callout } from "./Callout";
@@ -19,6 +19,10 @@ import { FieldComponentProps } from "./FieldComponentProps";
 import type { HtmlProps } from "./HtmlProps";
 import { Heading4, Support } from "./Typography";
 import { useUniqueId } from "./useUniqueId";
+import {
+  useOdysseyDesignTokens,
+  DesignTokens,
+} from "./OdysseyDesignTokensContext";
 
 export const formEncodingTypeValues = [
   "application/x-www-form-urlencoded",
@@ -28,6 +32,34 @@ export const formEncodingTypeValues = [
 ] as const;
 export const formAutoCompleteTypeValues = ["on", "off"] as const;
 export const formMethodValues = ["post", "get", "dialog"] as const;
+
+const StyledForm = styled.form<{
+  isFullWidth?: boolean;
+  odysseyDesignTokens: DesignTokens;
+}>(({ isFullWidth, odysseyDesignTokens }) => ({
+  maxWidth: isFullWidth ? "100%" : odysseyDesignTokens.TypographyLineLengthMax,
+  margin: 0,
+  padding: 0,
+}));
+
+const TitleContainer = styled.div<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  marginBlockEnd: odysseyDesignTokens.Spacing4,
+}));
+
+const FormActionContainer = styled.div<{
+  odysseyDesignTokens: DesignTokens;
+}>(
+  {
+    display: "flex",
+    justifyContent: "flex-end",
+  },
+  ({ odysseyDesignTokens }) => ({
+    gap: odysseyDesignTokens.Spacing1,
+    marginBlockStart: odysseyDesignTokens.Spacing7,
+  }),
+);
 
 export type FormProps = {
   /**
@@ -112,31 +144,23 @@ const Form = ({
   translate,
 }: FormProps) => {
   const id = useUniqueId(idOverride);
+  const odysseyDesignTokens = useOdysseyDesignTokens();
 
   return (
-    <Box
+    <StyledForm
       autoComplete={autoCompleteType}
-      component="form"
       data-se={testId}
       encType={encodingType}
       id={id}
+      isFullWidth={isFullWidth}
       method={method}
       name={name}
       noValidate={noValidate}
+      odysseyDesignTokens={odysseyDesignTokens}
       onSubmit={onSubmit}
       target={target}
-      sx={{
-        maxWidth: (theme) => (isFullWidth ? "100%" : theme.mixins.maxWidth),
-        margin: (theme) => theme.spacing(0),
-        padding: (theme) => theme.spacing(0),
-      }}
     >
-      <Box
-        component="div"
-        sx={{
-          marginBlockEnd: (theme) => theme.spacing(4),
-        }}
-      >
+      <TitleContainer odysseyDesignTokens={odysseyDesignTokens}>
         {title && (
           <Heading4 component="h1" translate={translate}>
             {title}
@@ -144,22 +168,14 @@ const Form = ({
         )}
         {description && <Support translate={translate}>{description}</Support>}
         {alert}
-      </Box>
-      <Box component="div">{children}</Box>
+      </TitleContainer>
+      <div>{children}</div>
       {formActions && (
-        <Box
-          component="div"
-          sx={{
-            display: "flex",
-            justifyContent: "flex-end",
-            gap: (theme) => theme.spacing(1),
-            marginBlockStart: (theme) => theme.spacing(7),
-          }}
-        >
+        <FormActionContainer odysseyDesignTokens={odysseyDesignTokens}>
           {formActions}
-        </Box>
+        </FormActionContainer>
       )}
-    </Box>
+    </StyledForm>
   );
 };
 
