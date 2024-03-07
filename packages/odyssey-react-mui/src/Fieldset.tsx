@@ -10,15 +10,32 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Box } from "@mui/material";
 import { memo, ReactElement, useMemo } from "react";
+import styled from "@emotion/styled";
 
 import { Callout } from "./Callout";
 import { FieldsetContext } from "./FieldsetContext";
-import { Legend, Support } from "./Typography";
-import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
-import { useUniqueId } from "./useUniqueId";
 import type { HtmlProps } from "./HtmlProps";
+import { Legend, Support } from "./Typography";
+import {
+  useOdysseyDesignTokens,
+  DesignTokens,
+} from "./OdysseyDesignTokensContext";
+import { useUniqueId } from "./useUniqueId";
+
+const StyledFieldset = styled.fieldset<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  border: "0",
+  margin: odysseyDesignTokens.Spacing0,
+  marginBlockEnd: odysseyDesignTokens.Spacing6,
+  maxWidth: odysseyDesignTokens.TypographyLineLengthMax,
+  padding: odysseyDesignTokens.Spacing0,
+
+  "&:last-child": {
+    marginBlockEnd: odysseyDesignTokens.Spacing0,
+  },
+}));
 
 export type FieldsetProps = {
   /**
@@ -73,23 +90,12 @@ const Fieldset = ({
   );
 
   return (
-    <Box
-      component="fieldset"
+    <StyledFieldset
       data-se={testId}
       disabled={isDisabled}
-      name={name}
       id={id}
-      sx={{
-        border: "0",
-        margin: odysseyDesignTokens.Spacing0,
-        marginBlockEnd: odysseyDesignTokens.Spacing6,
-        maxWidth: odysseyDesignTokens.TypographyLineLengthMax,
-        padding: odysseyDesignTokens.Spacing0,
-
-        "&:last-child": {
-          marginBlockEnd: odysseyDesignTokens.Spacing0,
-        },
-      }}
+      name={name}
+      odysseyDesignTokens={odysseyDesignTokens}
     >
       <Legend translate={translate}>{legend}</Legend>
 
@@ -100,7 +106,7 @@ const Fieldset = ({
       <FieldsetContext.Provider value={fieldsetContextValue}>
         {children}
       </FieldsetContext.Provider>
-    </Box>
+    </StyledFieldset>
   );
 };
 
