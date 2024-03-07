@@ -132,4 +132,6 @@ const DataTableSettings = ({
 };
 
 const MemoizedDataTableSettings = memo(DataTableSettings);
+MemoizedDataTableSettings.displayName = "DataTableSettings";
+
 export { MemoizedDataTableSettings as DataTableSettings };
