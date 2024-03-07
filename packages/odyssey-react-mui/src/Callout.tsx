@@ -85,10 +85,12 @@ export type CalloutProps = {
   ) &
   Pick<HtmlProps, "testId" | "translate">;
 
-const CtaContainer = styled("div", {
+const ContentContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
-  marginBlockStart: odysseyDesignTokens.Spacing4,
+  "& * + *": {
+    marginBlockStart: odysseyDesignTokens.Spacing4,
+  },
 }));
 
 const Callout = ({
@@ -111,15 +113,17 @@ const Callout = ({
         {t(`severity.${severity}`)}
       </ScreenReaderText>
       {title && <AlertTitle translate={translate}>{title}</AlertTitle>}
-      {children && <Box component="div">{children}</Box>}
-      {text && <Paragraph>{text}</Paragraph>}
-      {linkUrl && (
-        <CtaContainer odysseyDesignTokens={odysseyDesignTokens}>
-          <MuiLink href={linkUrl} variant="monochrome">
-            {linkText}
-          </MuiLink>
-        </CtaContainer>
-      )}
+      <ContentContainer odysseyDesignTokens={odysseyDesignTokens}>
+        {children && <Box component="div">{children}</Box>}
+        {text && <Paragraph>{text}</Paragraph>}
+        {linkUrl && (
+          <Box>
+            <MuiLink href={linkUrl} variant="monochrome">
+              {linkText}
+            </MuiLink>
+          </Box>
+        )}
+      </ContentContainer>
     </Alert>
   );
 };
