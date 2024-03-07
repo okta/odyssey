@@ -89,7 +89,7 @@ const Badge = ({
     const hasNotificationCount = badgeContent && badgeContent > 0;
 
     return hasNotificationCount ? (
-      <Box sx={badgeStyles} data-se={testId} translate={translate}>
+      <Box sx={badgeStyles} testId={testId} translate={translate}>
         {formattedContent}
       </Box>
     ) : null;
