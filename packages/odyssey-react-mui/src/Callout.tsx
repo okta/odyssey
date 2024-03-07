@@ -85,14 +85,10 @@ export type CalloutProps = {
   ) &
   Pick<HtmlProps, "testId" | "translate">;
 
-const CallToAction = styled(MuiLink, {
+const CtaContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
-  display: "inline-block",
-
-  "p + &": {
-    marginBlockStart: odysseyDesignTokens.Spacing4,
-  },
+  marginBlockStart: odysseyDesignTokens.Spacing4,
 }));
 
 const Callout = ({
@@ -118,13 +114,11 @@ const Callout = ({
       {children && <Box component="div">{children}</Box>}
       {text && <Paragraph>{text}</Paragraph>}
       {linkUrl && (
-        <CallToAction
-          odysseyDesignTokens={odysseyDesignTokens}
-          href={linkUrl}
-          variant="monochrome"
-        >
-          {linkText}
-        </CallToAction>
+        <CtaContainer odysseyDesignTokens={odysseyDesignTokens}>
+          <MuiLink href={linkUrl} variant="monochrome">
+            {linkText}
+          </MuiLink>
+        </CtaContainer>
       )}
     </Alert>
   );
