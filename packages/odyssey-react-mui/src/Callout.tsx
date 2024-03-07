@@ -89,7 +89,10 @@ const CallToAction = styled(MuiLink, {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
   display: "inline-block",
-  marginBlockStart: odysseyDesignTokens.Spacing4,
+
+  "p + &": {
+    marginBlockStart: odysseyDesignTokens.Spacing4,
+  },
 }));
 
 const Callout = ({
