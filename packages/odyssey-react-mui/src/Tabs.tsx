@@ -166,7 +166,7 @@ const Tabs = ({
     }
 
     // don't override scroll buttons if it's already set to "auto"
-    if (scrollButtons !== "auto" && document.visibilityState === "hidden") {
+    if (scrollButtons !== "auto") {
       document.addEventListener("visibilitychange", refreshScrollButtons);
     }
     return () => {
