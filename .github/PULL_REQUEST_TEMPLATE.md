@@ -8,6 +8,12 @@ Thank you for contributing! Please follow the steps below to help us process you
 - 🙏 Please review your own PR to check for anything you may have missed.
 -->
 
+<!--
+Adding a new Odyssey component? Please use the New Component PR template instead.
+Uncomment the link below, go to "Preview", and click the link to swap the template.
+[🔄 Use new component PR template](?expand=1&template=NEW_COMPONENT_PULL_REQUEST_TEMPLATE.md)
+-->
+
 [REPLACE_WITH_JIRA_TICKET_NUMBER](https://oktainc.atlassian.net/browse/REPLACE_WITH_JIRA_TICKET_NUMBER)
 
 ## Summary
