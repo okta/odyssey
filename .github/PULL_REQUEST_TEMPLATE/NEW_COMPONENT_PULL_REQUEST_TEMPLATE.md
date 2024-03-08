@@ -31,29 +31,19 @@ Thank you for contributing! Please follow the steps below to help us process you
 
 - [ ] Apply ARIA attributes to indicate roles and relationships.
 - [ ] Test focus management and ensure interactive elements are keyboard accessible.
-- [ ] Include skip-to-content links for screen reader users.
 - [ ] Provide visual alternatives for auditory elements.
 
 ### Internationalization (i18n) implementation
 
-- [ ] Separate text content from the component's code for translation.
-- [ ] Ensure the component renders correctly when language changes.
-
-### Responsive implementation (if applicable)
-
-- [ ] Use CSS media queries to define breakpoints and apply styles.
-- [ ] Test fluid layouts and resizing behavior at each breakpoint as needed.
-- [ ] Optimize images for different screen resolutions as needed.
+- [ ] Separate any text content from the component's code for translation.
+- [ ] Test RTL support in Storybook
 
 ### Cross-browser compatibility
 
-- [ ] Test the component on major browsers (Chrome, Firefox, Safari, Edge, etc.).
-- [ ] Use browser prefixes or CSS libraries to handle compatibility issues.
 - [ ] Ensure consistent behavior and appearance across browsers.
 
 ### Documentation
 
-- [ ] Create clear and concise usage documentation with step-by-step instructions.
 - [ ] Include code snippets, demos, and examples for various use cases.
 - [ ] Provide guidance on customization and handling special cases.
 
@@ -66,8 +56,7 @@ Thank you for contributing! Please follow the steps below to help us process you
 
 ### QA
 
-- [ ] Conduct unit testing to continuously verify individual component functionality.
-- [ ] Include unit tests to continuously verify component functionality
+- [ ] Include necessary unit tests to continuously verify component functionality
 - [ ] Screen reader test error/success states or message
 - [ ] Test edge cases and error scenarios to validate robustness
 
