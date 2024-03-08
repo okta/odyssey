@@ -286,4 +286,6 @@ const DataTablePagination = ({
 };
 
 const MemoizedDataTablePagination = memo(DataTablePagination);
+MemoizedDataTablePagination.displayName = "DataTablePagination";
+
 export { MemoizedDataTablePagination as DataTablePagination };

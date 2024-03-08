@@ -119,4 +119,6 @@ const DataTableRowActions = ({
 };
 
 const MemoizedDataTableRowActions = memo(DataTableRowActions);
+MemoizedDataTableRowActions.displayName = "DataTableRowActions";
+
 export { MemoizedDataTableRowActions as DataTableRowActions };
