@@ -124,6 +124,10 @@ const StaticTable = <TData extends DefaultMaterialReactTableData>({
   return <MaterialReactTable table={table} />;
 };
 
+// Need the `typeof StaticTable` because generics don't get passed through `memo`.
 const MemoizedStaticTable = memo(StaticTable) as typeof StaticTable;
+
+// @ts-expect-error displayName is expected to not be on `typeof StaticTable`
+MemoizedStaticTable.displayName = "StaticTable";
 
 export { MemoizedStaticTable as StaticTable };
