@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.14.9](https://github.com/okta/odyssey/compare/v1.14.8...v1.14.9) (2024-03-08)
+
+### Bug Fixes
+
+- move new PR template to sub-folder, add link ([1450481](https://github.com/okta/odyssey/commit/145048109f5a53456429e8eeafaf52c2ac635e55))
+- update checklist ([bd9af91](https://github.com/okta/odyssey/commit/bd9af91d810dd55e7a55ce980e1bf979c59e0282))
+
 ## [1.14.8](https://github.com/okta/odyssey/compare/v1.14.7...v1.14.8) (2024-03-08)
 
 **Note:** Version bump only for package odyssey
