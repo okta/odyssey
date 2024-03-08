@@ -1,6 +1,6 @@
 {
   "name": "@okta/babel-plugin-fully-specified",
-  "version": "1.14.7",
+  "version": "1.14.8",
   "private": true,
   "description": "Babel plugin to generate fully specified ESM module syntax",
   "author": "Okta, Inc.",
