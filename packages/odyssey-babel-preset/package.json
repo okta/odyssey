@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-babel-preset",
-  "version": "1.14.9",
+  "version": "1.14.10",
   "description": "Babel preset for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
