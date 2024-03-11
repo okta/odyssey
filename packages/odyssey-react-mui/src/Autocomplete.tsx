@@ -376,7 +376,7 @@ const Autocomplete = <
     const { children, ...other } = props;
     const itemData: ReactElement[] = (children as ReactElement[]).flatMap(
       (item: ReactElement & { children?: ReactElement[] }) =>
-        [item].concat(item.children || [])
+        [item].concat(item.children || []),
     );
 
     // the height of an Odyssey autocomplete option item that is used to calculate height of window
@@ -406,7 +406,7 @@ const Autocomplete = <
           {renderVirtualizedRow}
         </VariableSizeList>
       ),
-      [itemData, gridRef, itemSize]
+      [itemData, gridRef, itemSize],
     );
 
     return (

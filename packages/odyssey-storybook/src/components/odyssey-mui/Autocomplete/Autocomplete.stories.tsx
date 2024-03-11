@@ -468,7 +468,6 @@ export const ControlledAutocomplete: StoryObj<JupiterMoonsAutocomplete> = {
   },
 };
 
-
 export const UncontrolledAutocomplete: StoryObj<JupiterMoonsAutocomplete> = {
   args: {
     options: jupiterGalileanMoons,
@@ -499,7 +498,7 @@ export const ControlledVirtualizedAutocomplete: StoryObj<
   },
   render: function C(props) {
     const [localValue, setLocalValue] = useState<LargeDataSet | undefined>(
-      largeDataSet[0]
+      largeDataSet[0],
     );
     const onChange = useCallback((_, value) => setLocalValue(value), []);
     return <Autocomplete {...props} value={localValue} onChange={onChange} />;
@@ -527,7 +526,7 @@ export const ControlledMultipleVirtualizedAutocomplete: StoryObj<
   },
   render: function C(props) {
     const [localValue, setLocalValue] = useState<LargeDataSet[] | undefined>(
-      largeDataSet.slice(0, 2)
+      largeDataSet.slice(0, 2),
     );
     const onChange = useCallback((_, value) => setLocalValue(value), []);
     return <Autocomplete {...props} value={localValue} onChange={onChange} />;
