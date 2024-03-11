@@ -22,7 +22,7 @@ import {
 } from "@mui/x-date-pickers";
 import { DateTime } from "luxon";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
-import { InputAdornment } from "@mui/material";
+import { InputAdornment, Popper, TextField } from "@mui/material";
 
 import { Button } from "../Button";
 import {
@@ -36,7 +36,7 @@ import { datePickerTheme } from "./datePickerTheme";
 // import { RenderFieldProps } from "../Field";
 import { OdysseyThemeProvider } from "../OdysseyThemeProvider";
 import {
-  ComponentControlledState,
+  // ComponentControlledState,
   getControlState,
   useInputValues,
 } from "../inputUtils";
@@ -52,8 +52,30 @@ export type DatePickerProps<Date> = {
   value?: MuiDatePickerProps<Date>["value"];
 };
 
-const DateFieldComponent = (props: any) => <DateField {...props} />
+// const DateFieldComponent = (props: any) => <DateField {...props} />
 
+const Field = ({hint, label, onChange, onAdornmentClick, ...muiProps}: DateFieldProps & { onAdornmentClick?: () => void }) => {
+  return (
+    <DateField
+      {...muiProps}
+      endAdornment={
+        <InputAdornment position="end">
+          <Button
+            ariaLabel="Calendar"
+            label=""
+            size="small"
+            startIcon={<CalendarIcon />}
+            variant="floating"
+            onClick={onAdornmentClick}
+          />
+        </InputAdornment>
+      }
+      hint={hint}
+      label={label}
+      onChange={onChange}
+    />
+  )
+}
 const DatePicker = forwardRef<HTMLInputElement, DatePickerProps<Date>>(
   ({ defaultValue, hint, label, onChange, value }, ref) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -103,10 +125,14 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps<Date>>(
         value: DateTime | null,
         validationError: PickerChangeHandlerContext<DateValidationError>,
       ) => {
-        console.log('DP onChange', value)
         if (value) {
+          console.log({validationError})
           const jsDateFromDateTime: Date = new Date(value?.toJSDate());
-          onChange?.(jsDateFromDateTime, validationError);
+
+          if (jsDateFromDateTime) {
+            onChange?.(jsDateFromDateTime, validationError);
+
+          }
         }
       },
       [onChange],
@@ -116,8 +142,8 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps<Date>>(
       (
         muiProps: MuiDateFieldProps<DateTime>
       ) => {
-        const { inputRef } = muiProps;
-        console.log({inputRef})
+        // const { inputRef } = muiProps;
+        // console.log({inputRef})
         // if (
         //   typeof muiProps?.inputRef === "function"
         // ) {
@@ -143,7 +169,7 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps<Date>>(
             hint={hint}
             label={label}
             onChange={handleChange}
-            ref={containerRef}
+            // ref={muiProps.InputProps.ref}
             // ref={(element: HTMLInputElement) => {
             //   containerRef.current = element;
             // }}
@@ -163,23 +189,30 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps<Date>>(
           dateAdapter={AdapterLuxon}
           adapterLocale={language}
         >
-          <MuiDatePicker
-            {...inputValueAsDateTime}
-            dayOfWeekFormatter={(_, date: DateTime) => {
-              return date.toFormat("EEE");
-            }}
-            label={label}
-            onChange={handleChange}
-            onClose={() => setIsOpen(false)}
-            open={isOpen}
-            ref={ref}
-            slots={{
-              field: renderFieldComponent,
-              leftArrowIcon: () => <ArrowLeftIcon />,
-              rightArrowIcon: () => <ArrowRightIcon />,
-              switchViewIcon: () => <ChevronDownIcon />,
-            }}
-          />
+          <div ref={containerRef}>
+            <MuiDatePicker
+              {...inputValueAsDateTime}
+              dayOfWeekFormatter={(_, date: DateTime) => {
+                return date.toFormat("EEE");
+              }}
+              label={label}
+              onChange={handleChange}
+              onClose={() => setIsOpen(false)}
+              open={isOpen}
+              ref={ref}
+              slots={{
+                field: (muiProps) => <Field hint={hint} label={label} onChange={handleChange} onAdornmentClick={() => setIsOpen(true)}{...muiProps} />,
+                leftArrowIcon: () => <ArrowLeftIcon />,
+                rightArrowIcon: () => <ArrowRightIcon />,
+                switchViewIcon: () => <ChevronDownIcon />,
+              }}
+              slotProps={{
+                popper: {
+                  anchorEl: containerRef.current
+                }
+              }}
+            />
+          </div>
         </LocalizationProvider>
       </OdysseyThemeProvider>
     );

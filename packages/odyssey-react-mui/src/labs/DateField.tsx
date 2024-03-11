@@ -56,7 +56,7 @@ export type DateFieldProps = MuiDateFieldProps<DateTime> & {
     | "isReadOnly"
   >;
 
-const DateField = forwardRef<HTMLInputElement, DateFieldProps>(
+const DateField =
   (
     {
       defaultValue,
@@ -65,7 +65,6 @@ const DateField = forwardRef<HTMLInputElement, DateFieldProps>(
       hasInitialFocus,
       hint,
       id: idOverride,
-      inputRef,
       isDisabled = false,
       isOptional = false,
       isReadOnly,
@@ -75,9 +74,8 @@ const DateField = forwardRef<HTMLInputElement, DateFieldProps>(
       onFocus,
       placeholder,
       value,
-      ...rest
-    },
-    ref
+      ...muiProps
+    }: DateFieldProps
   ) => {
     const handleChange = (
       value: DateTime,
@@ -91,15 +89,16 @@ const DateField = forwardRef<HTMLInputElement, DateFieldProps>(
 
     const renderFieldComponent = useCallback(
       ({ ariaDescribedBy, id, labelElementId }: RenderFieldProps) => {
+
         return (
           <MuiDateField
-            {...rest}
+            // {...muiProps}
             /* eslint-disable-next-line jsx-a11y/no-autofocus */
             autoFocus={hasInitialFocus}
             defaultValue={defaultValue}
             id={id}
             InputProps={{
-              ref: inputRef,
+              // ...InputProps,
               "aria-describedby": ariaDescribedBy,
               "aria-labelledby": labelElementId,
               endAdornment: (
@@ -112,7 +111,6 @@ const DateField = forwardRef<HTMLInputElement, DateFieldProps>(
             onChange={handleChange}
             onFocus={onFocus}
             readOnly={isReadOnly}
-            // ref={ref}
             value={value}
             variant="standard"
           />
@@ -127,7 +125,6 @@ const DateField = forwardRef<HTMLInputElement, DateFieldProps>(
         onBlur,
         placeholder,
         isReadOnly,
-        ref,
         value,
       ],
     );
@@ -145,8 +142,7 @@ const DateField = forwardRef<HTMLInputElement, DateFieldProps>(
         renderFieldComponent={renderFieldComponent}
       />
     );
-  }
-);
+  };
 
 const MemoizedDateField = memo(DateField);
 MemoizedDateField.displayName = "DateField";

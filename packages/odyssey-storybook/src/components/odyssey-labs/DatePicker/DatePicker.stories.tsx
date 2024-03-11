@@ -12,20 +12,17 @@
 
 import { useMemo, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { OdysseyProvider } from "@okta/odyssey-react-mui";
-import { DateTime } from "luxon";
 
 import {
   AdapterDateFns,
   DatePicker,
   DatePickerProps,
-  datePickerTheme,
   LocalizationProvider,
 } from "@okta/odyssey-react-mui/labs";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-const StorybookDatePicker = (props: DatePickerProps<DateTime>) => {
+const StorybookDatePicker = (props: DatePickerProps<Date>) => {
   const [value, setValue] = useState<Date | null>();
 
   const datePickerProps = useMemo(
@@ -33,8 +30,8 @@ const StorybookDatePicker = (props: DatePickerProps<DateTime>) => {
       ...props,
       onChange: (date: Date | null, validationError: {}) => {
         // console.log({ newValue });
-        console.log(typeof date === Date)
-        setValue(date);
+        console.log({date})
+        // setValue(date);
       },
       value,
     }),
@@ -48,7 +45,7 @@ const StorybookDatePicker = (props: DatePickerProps<DateTime>) => {
   );
 };
 
-const storybookMeta: Meta<DatePickerProps<DateTime>> = {
+const storybookMeta: Meta<DatePickerProps<Date>> = {
   title: "Labs Components/DatePicker",
   component: StorybookDatePicker,
   argTypes: {
