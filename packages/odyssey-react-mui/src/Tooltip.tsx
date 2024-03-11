@@ -34,7 +34,7 @@ export type TooltipProps = {
    * The text to display in the Tooltip
    */
   text: string;
-} & HtmlProps;
+} & Pick<HtmlProps, "testId" | "translate">;
 
 const Tooltip = ({
   ariaType,

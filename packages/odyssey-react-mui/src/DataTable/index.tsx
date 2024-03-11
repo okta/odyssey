@@ -15,7 +15,6 @@ export {
   type DataTableProps,
   type DataTableGetDataType,
   type DataTableOnReorderRowsType,
-  type DataTableRenderDetailPanelType,
 } from "./DataTable";
 export { DataTableEmptyState } from "./DataTableEmptyState";
 export { densityValues } from "./constants";

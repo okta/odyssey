@@ -33,56 +33,45 @@ import { Box } from "../Box";
 import { Trans, useTranslation } from "react-i18next";
 import { paginationTypeValues } from "./constants";
 
-const PaginationContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
+const PaginationContainer = styled("div")({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+});
 
 const PaginationSegment = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{
-  odysseyDesignTokens: DesignTokens;
-}>`
-  display: flex;
-  align-items: center;
-  gap: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing4};
-
-  & > div {
-    display: flex;
-    align-items: center;
-    gap: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing2};
-  }
-`;
+})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  display: "flex",
+  alignItems: "center",
+  gap: odysseyDesignTokens.Spacing4,
+  "& > div": {
+    display: "flex",
+    alignItems: "center",
+    gap: odysseyDesignTokens.Spacing2,
+  },
+}));
 
 const PaginationInput = styled(InputBase, {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{
-  odysseyDesignTokens: DesignTokens;
-}>`
-  border-color: ${({ odysseyDesignTokens }) =>
-    odysseyDesignTokens.HueNeutral200};
-  border-radius: ${({ odysseyDesignTokens }) =>
-    odysseyDesignTokens.BorderRadiusTight};
-  height: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing6};
-  width: 4.5714285714rem;
+})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  borderColor: odysseyDesignTokens.HueNeutral200,
+  borderRadius: odysseyDesignTokens.BorderRadiusTight,
+  height: odysseyDesignTokens.Spacing6,
+  width: "4.5714285714rem", // This is a hardcoded value, keep as string
+  "&:hover": {
+    borderColor: odysseyDesignTokens.HueNeutral400,
+  },
+  "&.Mui-focused:hover": {
+    borderColor: odysseyDesignTokens.PalettePrimaryMain,
+  },
+}));
 
-  &:hover {
-    border-color: ${({ odysseyDesignTokens }) =>
-      odysseyDesignTokens.HueNeutral400};
-  }
-
-  &.Mui-focused:hover {
-    border-color: ${({ odysseyDesignTokens }) =>
-      odysseyDesignTokens.PalettePrimaryMain};
-  }
-`;
-
-const PaginationButtonContainer = styled.div`
-  & > * {
-    margin-inline-start: 0 !important;
-  }
-`;
+const PaginationButtonContainer = styled("div")({
+  "& > *": {
+    marginInlineStart: `0 !important`,
+  },
+});
 
 export type DataTablePaginationProps = {
   pagination: {
@@ -168,6 +157,20 @@ const DataTablePagination = ({
     [page, setPagination],
   );
 
+  const setPageFromEvent = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setPage(parseInt(event.target.value));
+    },
+    [setPage],
+  );
+
+  const setRowsPerPageFromEvent = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setRowsPerPage(parseInt(event.target.value));
+    },
+    [setRowsPerPage],
+  );
+
   const handleLoadMore = useCallback(() => {
     setPagination({
       pageIndex: 1,
@@ -175,9 +178,27 @@ const DataTablePagination = ({
     });
   }, [rowsPerPage, setPagination]);
 
+  const handleNextButton = useCallback(() => {
+    setPagination({ pageIndex: page + 1, pageSize: rowsPerPage });
+  }, [setPagination, page, rowsPerPage]);
+
+  const handlePreviousButton = useCallback(() => {
+    setPagination({ pageIndex: page - 1, pageSize: rowsPerPage });
+  }, [setPagination, page, rowsPerPage]);
+
   const loadMoreIsDisabled = useMemo(() => {
     return totalRows ? rowsPerPage >= totalRows : false;
   }, [rowsPerPage, totalRows]);
+
+  const nextButtonDisabled = useMemo(
+    () => (totalRows ? lastRow >= totalRows : false) || isDisabled,
+    [totalRows, lastRow, isDisabled],
+  );
+
+  const previousButtonDisabled = useMemo(
+    () => pagination.pageIndex <= 1 || isDisabled,
+    [pagination, isDisabled],
+  );
 
   return variant === "paged" ? (
     <PaginationContainer>
@@ -190,9 +211,9 @@ const DataTablePagination = ({
             odysseyDesignTokens={odysseyDesignTokens}
             type="number"
             value={rowsPerPage}
-            onChange={(event) => setRowsPerPage(parseInt(event.target.value))}
-            onBlur={() => handlePaginationChange()}
-            onKeyDown={(event) => handleRowsPerPageSubmit(event)}
+            onChange={setRowsPerPageFromEvent}
+            onBlur={handlePaginationChange}
+            onKeyDown={handleRowsPerPageSubmit}
             disabled={isDisabled}
             inputProps={{
               "aria-label": t("table.pagination.rowsperpage"),
@@ -224,9 +245,9 @@ const DataTablePagination = ({
               odysseyDesignTokens={odysseyDesignTokens}
               type="number"
               value={page}
-              onChange={(event) => setPage(parseInt(event.target.value))}
-              onBlur={() => handlePaginationChange()}
-              onKeyDown={(event) => handlePageSubmit(event)}
+              onChange={setPageFromEvent}
+              onBlur={handlePaginationChange}
+              onKeyDown={handlePageSubmit}
               disabled={isDisabled}
               inputProps={{
                 "aria-label": t("table.pagination.page"),
@@ -240,22 +261,16 @@ const DataTablePagination = ({
             variant="floating"
             size="small"
             ariaLabel={t("table.pagination.previous")}
-            onClick={() =>
-              setPagination({ pageIndex: page - 1, pageSize: rowsPerPage })
-            }
-            isDisabled={pagination.pageIndex <= 1 || isDisabled}
+            onClick={handlePreviousButton}
+            isDisabled={previousButtonDisabled}
           />
           <Button
             endIcon={<ArrowRightIcon />}
             variant="floating"
             size="small"
             ariaLabel={t("table.pagination.next")}
-            onClick={() =>
-              setPagination({ pageIndex: page + 1, pageSize: rowsPerPage })
-            }
-            isDisabled={
-              (totalRows ? lastRow >= totalRows : false) || isDisabled
-            }
+            onClick={handleNextButton}
+            isDisabled={nextButtonDisabled}
           />
         </PaginationButtonContainer>
       </PaginationSegment>
@@ -271,4 +286,6 @@ const DataTablePagination = ({
 };
 
 const MemoizedDataTablePagination = memo(DataTablePagination);
+MemoizedDataTablePagination.displayName = "DataTablePagination";
+
 export { MemoizedDataTablePagination as DataTablePagination };

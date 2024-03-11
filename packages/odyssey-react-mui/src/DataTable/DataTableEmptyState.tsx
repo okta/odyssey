@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ReactElement, memo } from "react";
+import { ReactNode, memo } from "react";
 import { Heading4, Paragraph } from "../Typography";
 import { Box } from "../Box";
 import styled from "@emotion/styled";
@@ -18,25 +18,23 @@ import {
   useOdysseyDesignTokens,
   DesignTokens,
 } from "../OdysseyDesignTokensContext";
-import { Button } from "../Button";
 
 const EmptyContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{
-  odysseyDesignTokens: DesignTokens;
-}>`
-  display: flex;
-  flex-direction: column;
-  margin-block: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing9};
-  padding: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing5};
-  text-align: center;
-  width: 100%;
-`;
+})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  display: "flex",
+  flexDirection: "column",
+  marginBlock: odysseyDesignTokens.Spacing9,
+  padding: odysseyDesignTokens.Spacing5,
+  textAlign: "center",
+  width: "100%",
+}));
+
 export type DataTableEmptyStateProps = {
   heading: string;
   text: string;
-  primaryButton?: ReactElement<typeof Button>;
-  secondaryButton?: ReactElement<typeof Button>;
+  primaryButton?: ReactNode;
+  secondaryButton?: ReactNode;
 };
 
 const DataTableEmptyState = ({
@@ -61,4 +59,6 @@ const DataTableEmptyState = ({
 };
 
 const MemoizedDataTableEmptyState = memo(DataTableEmptyState);
+MemoizedDataTableEmptyState.displayName = "DataTableEmptyState";
+
 export { MemoizedDataTableEmptyState as DataTableEmptyState };

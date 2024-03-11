@@ -90,15 +90,10 @@ export type SearchFieldProps = {
    * Whether the SearchField has a gray or white background
    */
   variant?: (typeof searchVariantValues)[number];
-} & Pick<
-  FieldComponentProps,
-  "ariaDescribedBy" | "id" | "isDisabled" | "name" | "isFullWidth"
-> &
-  HtmlProps;
+} & Pick<FieldComponentProps, "id" | "isDisabled" | "name" | "isFullWidth"> &
+  Pick<HtmlProps, "ariaDescribedBy" | "testId" | "translate">;
 
-type FieldRenderProps = Partial<
-  Pick<FieldComponentRenderProps, "ariaDescribedBy">
-> &
+type FieldRenderProps = Partial<Pick<HtmlProps, "ariaDescribedBy">> &
   Pick<FieldComponentRenderProps, "id">;
 
 const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
@@ -163,7 +158,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
           autoFocus={hasInitialFocus}
           data-se={testId}
           endAdornment={
-            defaultValue && (
+            (inputValues?.defaultValue || inputValues?.value) && (
               <InputAdornment position="end">
                 <IconButton
                   aria-label="Clear"
@@ -196,7 +191,6 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       ),
       [
         autoCompleteType,
-        defaultValue,
         hasInitialFocus,
         inputValues,
         isDisabled,

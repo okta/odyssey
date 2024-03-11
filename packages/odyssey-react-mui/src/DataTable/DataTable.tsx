@@ -11,7 +11,7 @@
  */
 
 import {
-  ReactElement,
+  ReactNode,
   memo,
   useCallback,
   useEffect,
@@ -31,12 +31,10 @@ import {
   MRT_VisibilityState,
   useMaterialReactTable,
   MRT_TableContainer,
-  MRT_TableInstance,
 } from "material-react-table";
 import {
   ArrowDownIcon,
   ArrowUnsortedIcon,
-  ChevronDownIcon,
   DragIndicatorIcon,
   MoreIcon,
 } from "../icons.generated";
@@ -75,11 +73,6 @@ export type DataTableOnReorderRowsType = {
   newRowIndex: number;
 };
 
-export type DataTableRenderDetailPanelType = {
-  row: MRT_Row<MRT_RowData>;
-  table: MRT_TableInstance<MRT_RowData>;
-};
-
 export type DataTableProps = {
   /**
    * The columns that make up the table
@@ -95,8 +88,8 @@ export type DataTableProps = {
    */
   getRowId?: MRT_TableOptions<MRT_RowData>["getRowId"];
   /**
-   * The initial density of the table. This is available even if the table density
-   * isn't changeable.
+   * The initial density (height & padding) of the table rows. This is available even if the
+   * table density isn't changeable by the end user via hasChangeableDensity.
    */
   initialDensity?: (typeof densityValues)[number];
   /**
@@ -203,22 +196,17 @@ export type DataTableProps = {
   /**
    * The component to display when the table is displaying the initial empty state
    */
-  emptyPlaceholder?: ReactElement<typeof DataTableEmptyState>;
+  emptyPlaceholder?: ReactNode;
   /**
    * The component to display when the query returns no results
    */
-  noResultsPlaceholder?: ReactElement<typeof DataTableEmptyState>;
-  /**
-   * The optional component to display when expanding a row.
-   */
-  renderDetailPanel?: MRT_TableOptions<MRT_RowData>["renderDetailPanel"];
+  noResultsPlaceholder?: ReactNode;
 };
 
 const displayColumnDefOptions = {
   "mrt-row-actions": {
     header: "",
     grow: true,
-
     muiTableBodyCellProps: {
       align: "right",
       sx: {
@@ -266,9 +254,6 @@ const displayColumnDefOptions = {
       padding: "checkbox",
     },
   },
-  "mrt-row-expand": {
-    header: "",
-  },
 };
 
 const ScrollableTableContainer = styled("div", {
@@ -276,75 +261,60 @@ const ScrollableTableContainer = styled("div", {
     prop !== "odysseyDesignTokens" &&
     prop !== "isScrollableStart" &&
     prop !== "isScrollableEnd",
-})<{
-  odysseyDesignTokens: DesignTokens;
-  isScrollableStart: boolean;
-  isScrollableEnd: boolean;
-}>`
-  border-block-end-color: ${({ odysseyDesignTokens }) =>
-    odysseyDesignTokens.HueNeutral100};
-  border-block-end-style: solid;
-  border-block-end-width: ${({ odysseyDesignTokens }) =>
-    odysseyDesignTokens.BorderWidthMain};
-  margin-block-end: ${({ odysseyDesignTokens }) =>
-    odysseyDesignTokens.Spacing4};
-  position: relative;
-
-  border-inline-start-color: ${({ odysseyDesignTokens, isScrollableStart }) =>
-    isScrollableStart ? odysseyDesignTokens.HueNeutral200 : "transparent"};
-  border-inline-start-style: ${({ odysseyDesignTokens }) =>
-    odysseyDesignTokens.BorderStyleMain};
-  border-inline-start-width: ${({ odysseyDesignTokens }) =>
-    odysseyDesignTokens.BorderWidthMain};
-
-  &::before {
-    background: linear-gradient(
-      -90deg,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0.33) 50%,
-      rgba(0, 0, 0, 1) 100%
-    );
-    content: "";
-    opacity: ${({ isScrollableStart }) => (isScrollableStart ? "0.075" : "0")};
-    pointer-events: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing6};
-    z-index: 100;
-    transition: opacity
-      ${({ odysseyDesignTokens }) => odysseyDesignTokens.TransitionDurationMain}
-      ${({ odysseyDesignTokens }) => odysseyDesignTokens.TransitionTimingMain};
-  }
-
-  border-inline-end-color: ${({ odysseyDesignTokens, isScrollableEnd }) =>
-    isScrollableEnd ? odysseyDesignTokens.HueNeutral200 : "transparent"};
-  border-inline-end-style: ${({ odysseyDesignTokens }) =>
-    odysseyDesignTokens.BorderStyleMain};
-  border-inline-end-width: ${({ odysseyDesignTokens }) =>
-    odysseyDesignTokens.BorderWidthMain};
-
-  &::after {
-    background: linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0.33) 50%,
-      rgba(0, 0, 0, 1) 100%
-    );
-    content: "";
-    opacity: ${({ isScrollableEnd }) => (isScrollableEnd ? "0.075" : "0")};
-    pointer-events: none;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing6};
-    transition: opacity
-      ${({ odysseyDesignTokens }) => odysseyDesignTokens.TransitionDurationMain}
-      ${({ odysseyDesignTokens }) => odysseyDesignTokens.TransitionTimingMain};
-  }
-`;
+})(
+  ({
+    odysseyDesignTokens,
+    isScrollableStart,
+    isScrollableEnd,
+  }: {
+    odysseyDesignTokens: DesignTokens;
+    isScrollableStart: boolean;
+    isScrollableEnd: boolean;
+  }) => ({
+    borderBlockEndColor: odysseyDesignTokens.HueNeutral100,
+    borderBlockEndStyle: "solid",
+    borderBlockEndWidth: odysseyDesignTokens.BorderWidthMain,
+    marginBlockEnd: odysseyDesignTokens.Spacing4,
+    position: "relative",
+    borderInlineStartColor: isScrollableStart
+      ? odysseyDesignTokens.HueNeutral200
+      : "transparent",
+    borderInlineStartStyle: "solid",
+    borderInlineStartWidth: odysseyDesignTokens.BorderWidthMain,
+    "::before": {
+      background:
+        "linear-gradient(-90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.33) 50%, rgba(0, 0, 0, 1) 100%)",
+      content: '""',
+      opacity: isScrollableStart ? "0.075" : "0",
+      pointerEvents: "none",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      bottom: 0,
+      width: odysseyDesignTokens.Spacing6,
+      zIndex: 100,
+      transition: `opacity ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
+    },
+    borderInlineEndColor: isScrollableEnd
+      ? odysseyDesignTokens.HueNeutral200
+      : "transparent",
+    borderInlineEndStyle: "solid",
+    borderInlineEndWidth: odysseyDesignTokens.BorderWidthMain,
+    "::after": {
+      background:
+        "linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.33) 50%, rgba(0, 0, 0, 1) 100%)",
+      content: '""',
+      opacity: isScrollableEnd ? "0.075" : "0",
+      pointerEvents: "none",
+      position: "absolute",
+      top: 0,
+      right: 0,
+      bottom: 0,
+      width: odysseyDesignTokens.Spacing6,
+      transition: `opacity ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
+    },
+  }),
+);
 
 const DataTable = ({
   columns,
@@ -374,7 +344,6 @@ const DataTable = ({
   errorMessage: errorMessageProp,
   emptyPlaceholder,
   noResultsPlaceholder,
-  renderDetailPanel,
 }: DataTableProps) => {
   const [data, setData] = useState<MRT_RowData[]>([]);
   const [pagination, setPagination] = useState({
@@ -383,12 +352,11 @@ const DataTable = ({
   });
   const [draggingRow, setDraggingRow] = useState<MRT_Row<MRT_RowData> | null>();
   const [isTableContainerScrolledToStart, setIsTableContainerScrolledToStart] =
-    useState<boolean>(true);
+    useState(true);
   const [isTableContainerScrolledToEnd, setIsTableContainerScrolledToEnd] =
-    useState<boolean>(true);
-  const [tableInnerContainerWidth, setTableInnerContainerWidth] = useState<
-    number | string
-  >("100%");
+    useState(true);
+  const [tableInnerContainerWidth, setTableInnerContainerWidth] =
+    useState<string>("100%");
   const tableOuterContainerRef = useRef<HTMLDivElement>(null);
   const tableInnerContainerRef = useRef<HTMLDivElement>(null);
   const tableContentRef = useRef<HTMLTableElement>(null);
@@ -533,21 +501,6 @@ const DataTable = ({
     isEmpty,
   ]);
 
-  const columnIds = useMemo(() => {
-    return columns.map((column) => column.accessorKey);
-  }, [columns]);
-
-  const columnOrder = useMemo(
-    () => [
-      "mrt-row-drag",
-      "mrt-row-select",
-      "mrt-row-expand",
-      ...columnIds,
-      "mrt-row-actions",
-    ],
-    [columnIds],
-  ) as string[];
-
   const dataTable = useMaterialReactTable({
     columns: columns,
     data: data,
@@ -559,13 +512,11 @@ const DataTable = ({
       columnVisibility,
       isLoading,
       rowSelection,
-      columnOrder,
     },
     icons: {
       ArrowDownwardIcon: ArrowDownIcon,
       DragHandleIcon: DragIndicatorIcon,
       SyncAltIcon: ArrowUnsortedIcon,
-      ExpandMoreIcon: ChevronDownIcon,
     },
 
     // Base table settings
@@ -661,16 +612,25 @@ const DataTable = ({
     muiTableContainerProps: {
       ref: tableInnerContainerRef,
     },
-
-    // Row expansion
-    enableExpandAll: false,
-    muiExpandButtonProps: {
-      className: "ods-expand-button",
-    },
-    renderDetailPanel: renderDetailPanel,
   });
 
   // Effects
+  const bulkActionMenuButton = useMemo(
+    () => (
+      <>
+        <MenuButton
+          buttonVariant="secondary"
+          endIcon={<MoreIcon />}
+          isDisabled={Object.keys(rowSelection).length === 0}
+          ariaLabel="More actions"
+        >
+          {bulkActionMenuItems?.(rowSelection)}
+        </MenuButton>
+      </>
+    ),
+    [bulkActionMenuItems, rowSelection],
+  );
+
   useEffect(() => {
     (async () => {
       setIsLoading(true);
@@ -745,18 +705,7 @@ const DataTable = ({
                   columnVisibility={columnVisibility}
                   setColumnVisibility={setColumnVisibility}
                 />
-                {bulkActionMenuItems && (
-                  <>
-                    <MenuButton
-                      buttonVariant="secondary"
-                      endIcon={<MoreIcon />}
-                      isDisabled={Object.keys(rowSelection).length === 0}
-                      ariaLabel="More actions"
-                    >
-                      {bulkActionMenuItems(rowSelection)}
-                    </MenuButton>
-                  </>
-                )}
+                {bulkActionMenuItems && bulkActionMenuButton}
               </>
             }
           />

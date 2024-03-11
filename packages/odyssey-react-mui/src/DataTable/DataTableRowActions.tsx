@@ -11,7 +11,7 @@
  */
 
 import { MRT_Row, MRT_RowData } from "material-react-table";
-import { Fragment, ReactElement, memo } from "react";
+import { Fragment, ReactElement, memo, useCallback } from "react";
 import { Button } from "../Button";
 import { MenuItem } from "../MenuItem";
 import { Box as MuiBox } from "@mui/material";
@@ -52,6 +52,29 @@ const DataTableRowActions = ({
   updateRowOrder,
 }: DataTableRowActionsProps) => {
   const { t } = useTranslation();
+
+  const handleToFrontClick = useCallback(() => {
+    updateRowOrder && updateRowOrder({ rowId: row.id, newRowIndex: 0 });
+  }, [row.id, updateRowOrder]);
+
+  const handleForwardClick = useCallback(() => {
+    updateRowOrder &&
+      updateRowOrder({ rowId: row.id, newRowIndex: Math.max(0, rowIndex - 1) });
+  }, [row.id, rowIndex, updateRowOrder]);
+
+  const handleBackwardClick = useCallback(() => {
+    updateRowOrder &&
+      updateRowOrder({ rowId: row.id, newRowIndex: rowIndex + 1 });
+  }, [row.id, rowIndex, updateRowOrder]);
+
+  const handleToBackClick = useCallback(() => {
+    updateRowOrder &&
+      updateRowOrder({
+        rowId: row.id,
+        newRowIndex: totalRows ? totalRows - 1 : rowIndex,
+      });
+  }, [row.id, rowIndex, totalRows, updateRowOrder]);
+
   return (
     <MuiBox display="flex">
       {rowActionButtons?.(row)}
@@ -67,51 +90,26 @@ const DataTableRowActions = ({
           {rowActionMenuItems && updateRowOrder && <hr />}
           {updateRowOrder && (
             <>
-              <MenuItem
-                isDisabled={rowIndex <= 0}
-                onClick={() =>
-                  updateRowOrder({ rowId: row.id, newRowIndex: 0 })
-                }
-              >
+              <MenuItem isDisabled={rowIndex <= 0} onClick={handleToFrontClick}>
                 <ArrowTopIcon /> <Trans i18nKey="table.reorder.tofront" />
               </MenuItem>
-              <MenuItem
-                isDisabled={rowIndex <= 0}
-                onClick={() =>
-                  updateRowOrder({
-                    rowId: row.id,
-                    newRowIndex: rowIndex <= 0 ? 0 : rowIndex - 1,
-                  })
-                }
-              >
+              <MenuItem isDisabled={rowIndex <= 0} onClick={handleForwardClick}>
                 <ArrowUpIcon /> <Trans i18nKey="table.reorder.forward" />
               </MenuItem>
               <MenuItem
                 isDisabled={totalRows ? rowIndex >= totalRows - 1 : false}
-                onClick={() =>
-                  updateRowOrder({
-                    rowId: row.id,
-                    newRowIndex: rowIndex + 1,
-                  })
-                }
+                onClick={handleBackwardClick}
               >
                 <ArrowDownIcon /> <Trans i18nKey="table.reorder.backward" />
               </MenuItem>
-              <>
-                {totalRows && (
-                  <MenuItem
-                    isDisabled={rowIndex >= totalRows - 1}
-                    onClick={() =>
-                      updateRowOrder({
-                        rowId: row.id,
-                        newRowIndex: totalRows,
-                      })
-                    }
-                  >
-                    <ArrowBottomIcon /> <Trans i18nKey="table.reorder.toback" />
-                  </MenuItem>
-                )}
-              </>
+              {totalRows && (
+                <MenuItem
+                  isDisabled={rowIndex >= totalRows - 1}
+                  onClick={handleToBackClick}
+                >
+                  <ArrowBottomIcon /> <Trans i18nKey="table.reorder.toback" />
+                </MenuItem>
+              )}
             </>
           )}
         </MenuButton>
@@ -121,4 +119,6 @@ const DataTableRowActions = ({
 };
 
 const MemoizedDataTableRowActions = memo(DataTableRowActions);
+MemoizedDataTableRowActions.displayName = "DataTableRowActions";
+
 export { MemoizedDataTableRowActions as DataTableRowActions };

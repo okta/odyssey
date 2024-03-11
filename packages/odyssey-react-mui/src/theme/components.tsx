@@ -23,7 +23,6 @@ import { formLabelClasses } from "@mui/material/FormLabel";
 import { formGroupClasses } from "@mui/material/FormGroup";
 import { inputAdornmentClasses } from "@mui/material/InputAdornment";
 import { inputBaseClasses } from "@mui/material/InputBase";
-import { linkClasses } from "@mui/material/Link";
 import { listItemIconClasses } from "@mui/material/ListItemIcon";
 import { listItemTextClasses } from "@mui/material/ListItemText";
 import { menuItemClasses } from "@mui/material/MenuItem";
@@ -51,6 +50,12 @@ import {
 } from "../icons.generated";
 import { DesignTokens } from "./theme";
 import { CSSProperties } from "react";
+
+//Widths used in `Drawer` component
+const drawerSizes = {
+  persistent: "25.714rem", //~360px
+  temporary: "28.571rem", //~400px
+};
 
 export const components = ({
   odysseyTokens,
@@ -307,10 +312,6 @@ export const components = ({
             flexGrow: 1,
             marginBlock: odysseyTokens.Spacing2,
           }),
-          [`& .${linkClasses.root}`]: {
-            display: "inline-block",
-            marginTop: odysseyTokens.Spacing5,
-          },
         }),
       },
     },
@@ -1049,6 +1050,33 @@ export const components = ({
         }
     `,
     },
+    MuiDrawer: {
+      styleOverrides: {
+        root: {},
+        paper: ({ ownerState }) => ({
+          width:
+            ownerState.variant === "temporary"
+              ? drawerSizes.temporary
+              : drawerSizes.persistent, //Temporary = overlay drawer, Persistent = inline drawer
+          display: "flex",
+          overflowY: "auto",
+          flexDirection: "column",
+          flexWrap: "nowrap",
+          justifyContent: "space-between",
+          alignItems: "stretch",
+          alignContent: "flex-end",
+          color: odysseyTokens.HueNeutral700,
+          ...(ownerState.variant === "persistent" && {
+            position: "static",
+            borderRadius: odysseyTokens.BorderRadiusOuter,
+            border: "0",
+          }),
+          ...(ownerState.variant === "temporary" && {
+            boxShadow: odysseyTokens.ShadowScale1,
+          }),
+        }),
+      },
+    },
     MuiScopedCssBaseline: {
       styleOverrides: {
         root: {
@@ -1665,6 +1693,15 @@ export const components = ({
       styleOverrides: {
         root: {
           padding: odysseyTokens.Spacing1,
+          borderRadius: odysseyTokens.BorderRadiusMain,
+          "&:hover": {
+            backgroundColor: odysseyTokens.HueNeutral100,
+          },
+          "&:focus-visible": {
+            boxShadow: `0 0 0 2px ${odysseyTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyTokens.PalettePrimaryMain}`,
+            outline: "2px solid transparent",
+            outlineOffset: "1px",
+          },
         },
       },
     },
@@ -2585,20 +2622,6 @@ export const components = ({
 
           ["&.ods-drag-handle svg"]: {
             color: odysseyTokens.HueNeutral500,
-          },
-
-          ["& .ods-expand-button"]: {
-            borderRadius: odysseyTokens.BorderRadiusMain,
-            backgroundColor: "transparent",
-            color: odysseyTokens.TypographyColorBody,
-
-            "&:hover": {
-              backgroundColor: odysseyTokens.HueNeutral100,
-            },
-
-            "&:active": {
-              backgroundColor: odysseyTokens.HueNeutral200,
-            },
           },
         }),
       },

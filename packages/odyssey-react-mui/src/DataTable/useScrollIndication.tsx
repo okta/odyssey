@@ -23,7 +23,7 @@ type UseScrollIndicationProps = {
   tableInnerContainer: HTMLDivElement | null;
   setIsTableContainerScrolledToStart: Dispatch<SetStateAction<boolean>>;
   setIsTableContainerScrolledToEnd: Dispatch<SetStateAction<boolean>>;
-  setTableInnerContainerWidth: Dispatch<SetStateAction<number | string>>;
+  setTableInnerContainerWidth: Dispatch<SetStateAction<string>>;
 };
 export const useScrollIndication = ({
   tableOuterContainer,
@@ -71,7 +71,11 @@ export const useScrollIndication = ({
           });
         }
 
-        setTableInnerContainerWidth(tableInnerContainer?.clientWidth ?? "100%");
+        setTableInnerContainerWidth(
+          tableInnerContainer?.clientWidth
+            ? `${tableInnerContainer.clientWidth}px`
+            : "100%",
+        );
       }, 100); // debounce delay
     });
 
@@ -100,15 +104,15 @@ export const useScrollIndication = ({
   ]);
 
   useEffect(() => {
-    const handleScroll = () => checkScrollIndicators();
-
-    tableInnerContainer?.addEventListener("scroll", handleScroll);
+    tableInnerContainer?.addEventListener("scroll", checkScrollIndicators);
     return () =>
-      tableInnerContainer?.removeEventListener("scroll", handleScroll);
+      tableInnerContainer?.removeEventListener("scroll", checkScrollIndicators);
   }, [tableInnerContainer, checkScrollIndicators]); // Re-run when innerContainerRef changes
 
   // Initial check to set state correctly on mount
   useEffect(() => {
     checkScrollIndicators();
-  }, [checkScrollIndicators]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 };

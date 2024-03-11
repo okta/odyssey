@@ -11,13 +11,18 @@
  */
 
 import { memo, ReactNode } from "react";
-import { Alert, AlertTitle, Box } from "@mui/material";
+import { Alert, AlertTitle, Box, Link as MuiLink } from "@mui/material";
 import { ScreenReaderText } from "./ScreenReaderText";
 import { useTranslation } from "react-i18next";
 
 import type { HtmlProps } from "./HtmlProps";
-import { Link } from "./Link";
 import { Paragraph } from "./Typography";
+
+import {
+  DesignTokens,
+  useOdysseyDesignTokens,
+} from "./OdysseyDesignTokensContext";
+import styled from "@emotion/styled";
 
 export const calloutRoleValues = ["status", "alert"] as const;
 export const calloutSeverityValues = [
@@ -29,7 +34,7 @@ export const calloutSeverityValues = [
 
 export type CalloutProps = {
   /**
-   * The contents of the Callout
+   * @deprecated Callout content shuold be set via title, text, linkText, and linkUrl
    */
   children?: ReactNode;
   /**
@@ -78,7 +83,15 @@ export type CalloutProps = {
         linkText?: never;
       }
   ) &
-  HtmlProps;
+  Pick<HtmlProps, "testId" | "translate">;
+
+const ContentContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  "& > * + *": {
+    marginBlockStart: odysseyDesignTokens.Spacing4,
+  },
+}));
 
 const Callout = ({
   children,
@@ -92,6 +105,7 @@ const Callout = ({
   translate,
 }: CalloutProps) => {
   const { t } = useTranslation();
+  const odysseyDesignTokens = useOdysseyDesignTokens();
 
   return (
     <Alert data-se={testId} role={role} severity={severity} variant="callout">
@@ -99,13 +113,17 @@ const Callout = ({
         {t(`severity.${severity}`)}
       </ScreenReaderText>
       {title && <AlertTitle translate={translate}>{title}</AlertTitle>}
-      {children && <Box component="div">{children}</Box>}
-      {text && <Paragraph>{text}</Paragraph>}
-      {linkUrl && (
-        <Link href={linkUrl} variant="monochrome">
-          {linkText}
-        </Link>
-      )}
+      <ContentContainer odysseyDesignTokens={odysseyDesignTokens}>
+        {children && <Box component="div">{children}</Box>}
+        {text && <Paragraph>{text}</Paragraph>}
+        {linkUrl && (
+          <Box>
+            <MuiLink href={linkUrl} variant="monochrome">
+              {linkText}
+            </MuiLink>
+          </Box>
+        )}
+      </ContentContainer>
     </Alert>
   );
 };

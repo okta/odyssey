@@ -21,7 +21,7 @@ export type FieldHintProps = {
   LinkComponent?: FieldComponentProps["HintLinkComponent"];
   id?: string;
   text: string;
-} & HtmlProps;
+} & Pick<HtmlProps, "testId" | "translate">;
 
 const FieldHint = ({
   id,

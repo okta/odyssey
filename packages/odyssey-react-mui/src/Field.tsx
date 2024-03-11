@@ -21,6 +21,7 @@ import { FieldComponentProps } from "./FieldComponentProps";
 import { FieldError } from "./FieldError";
 import { FieldHint } from "./FieldHint";
 import { FieldLabel } from "./FieldLabel";
+import { HtmlProps } from "./HtmlProps";
 import { Typography } from "./Typography";
 import { useFieldset } from "./FieldsetContext";
 import { useTranslation } from "react-i18next";
@@ -28,11 +29,15 @@ import { useUniqueId } from "./useUniqueId";
 
 export const fieldTypeValues = ["single", "group"] as const;
 
+export type RenderFieldComponentProps = {
+  ariaDescribedBy?: string;
+  dataSe?: string;
+  errorMessageElementId?: string;
+  id: string;
+  labelElementId: string;
+};
+
 export type FieldProps = {
-  /**
-   * If `error` is not undefined, the `input` will indicate an error.
-   */
-  errorMessage?: string;
   /**
    * If `error` is not undefined, the `input` will indicate an error.
    */
@@ -70,13 +75,7 @@ export type FieldProps = {
     errorMessageElementId,
     id,
     labelElementId,
-  }: {
-    ariaDescribedBy?: string;
-    dataSe?: string;
-    errorMessageElementId?: string;
-    id: string;
-    labelElementId: string;
-  }) => ReactElement;
+  }: RenderFieldComponentProps) => ReactElement;
 };
 
 const Field = ({
@@ -97,7 +96,6 @@ const Field = ({
 }: FieldProps &
   Pick<
     FieldComponentProps,
-    | "ariaDescribedBy"
     | "errorMessage"
     | "errorMessageList"
     | "hint"
@@ -106,7 +104,8 @@ const Field = ({
     | "isDisabled"
     | "isFullWidth"
     | "isOptional"
-  >) => {
+  > &
+  Pick<HtmlProps, "ariaDescribedBy">) => {
   const { t } = useTranslation();
 
   const id = useUniqueId(idOverride);
