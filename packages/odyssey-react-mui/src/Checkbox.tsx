@@ -164,6 +164,7 @@ const Checkbox = ({
           inputProps={{
             "data-se": testId,
           }}
+          disabled={isDisabled}
           inputRef={localInputRef}
           sx={() => ({
             marginBlockStart: "2px",
