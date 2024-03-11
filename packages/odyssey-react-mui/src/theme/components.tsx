@@ -388,6 +388,7 @@ export const components = ({
           alignItems: "center",
           whiteSpace: "nowrap",
           color: odysseyTokens.TypographyColorSubordinate,
+          transform: "none",
 
           ...(ownerState.disabled === true && {
             display: "none",
