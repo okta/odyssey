@@ -88,13 +88,11 @@ export function plugin({
         switch (path.node.type) {
           case "ImportDeclaration":
             path.replaceWith(
-              // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
               t.importDeclaration(path.node.specifiers, fullySpecifiedLiteral),
             );
             return;
           case "ExportNamedDeclaration":
             path.replaceWith(
-              // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
               t.exportNamedDeclaration(
                 path.node.declaration,
                 path.node.specifiers,
@@ -103,7 +101,6 @@ export function plugin({
             );
             return;
           case "ExportAllDeclaration":
-            // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
             path.replaceWith(t.exportAllDeclaration(fullySpecifiedLiteral));
             return;
           default:

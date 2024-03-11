@@ -98,6 +98,7 @@
     "@types/jest-axe": "^3.5.9",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
+    "@types/react-virtualized-auto-sizer": "^1.0.4",
     "@types/react-window": "^1.8.8",
     "babel-plugin-import": "^1.13.5",
     "eslint": "^8.56.0",

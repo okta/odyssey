@@ -35,6 +35,7 @@ import styled from "@emotion/styled";
 import { VariableSizeList, ListChildComponentProps } from "react-window";
 import _AutoSizer, {
   Props as AutoSizerProps,
+  Size as AutoSizerSize,
 } from "react-virtualized-auto-sizer";
 
 // This is required to get around a react-types issue for "AutoSizer is not a valid JSX element."
@@ -390,7 +391,7 @@ const Autocomplete = <
     const gridRef = useResetCache(itemData.length);
 
     const renderWindow = useCallback(
-      ({ height, width }) => (
+      ({ height, width }: AutoSizerSize) => (
         <VariableSizeList
           innerElementType="ul"
           itemData={itemData}

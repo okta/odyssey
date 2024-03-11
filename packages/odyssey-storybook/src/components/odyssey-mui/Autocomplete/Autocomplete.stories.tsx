@@ -500,7 +500,16 @@ export const ControlledVirtualizedAutocomplete: StoryObj<
     const [localValue, setLocalValue] = useState<LargeDataSet | undefined>(
       largeDataSet[0],
     );
-    const onChange = useCallback((_, value) => setLocalValue(value), []);
+    const onChange = useCallback(
+      (
+        _event: SyntheticEvent<Element, Event>,
+        value: string | LargeDataSet | (string | LargeDataSet)[] | null,
+      ) =>
+        setLocalValue(
+          value === undefined ? undefined : (value as LargeDataSet),
+        ),
+      [],
+    );
     return <Autocomplete {...props} value={localValue} onChange={onChange} />;
   },
 };
@@ -528,7 +537,16 @@ export const ControlledMultipleVirtualizedAutocomplete: StoryObj<
     const [localValue, setLocalValue] = useState<LargeDataSet[] | undefined>(
       largeDataSet.slice(0, 2),
     );
-    const onChange = useCallback((_, value) => setLocalValue(value), []);
+    const onChange = useCallback(
+      (
+        _event: SyntheticEvent<Element, Event>,
+        value: string | LargeDataSet | (string | LargeDataSet)[] | null,
+      ) =>
+        setLocalValue(
+          value === undefined ? undefined : (value as LargeDataSet[]),
+        ),
+      [],
+    );
     return <Autocomplete {...props} value={localValue} onChange={onChange} />;
   },
 };
