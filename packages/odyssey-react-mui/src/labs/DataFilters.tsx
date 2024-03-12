@@ -298,15 +298,16 @@ const DataFilters = ({
     setFilters(updatedFilters);
   }, [inputValues, filtersProp]);
 
-  const AutocompleteOuterContainer = styled.div`
-    display: flex;
-    gap: 2;
-    align-items: center;
-    alignitems: "flex-end";
-  `;
-  const AutocompleteInnerContainer = styled.div`
-    width: "100%";
-  `;
+  const AutocompleteOuterContainer = styled("div")({
+    display: "flex",
+    gap: "2",
+    alignItems: "flex-end",
+  });
+
+  const AutocompleteInnerContainer = styled("div")({
+    width: "100%",
+  });
+
   const filterMenu = useMemo(
     () => (
       <>

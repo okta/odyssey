@@ -11,9 +11,8 @@
  */
 
 import { FormGroup as MuiFormGroup } from "@mui/material";
-import { memo, ReactElement, useCallback } from "react";
+import { memo, ReactNode, useCallback } from "react";
 
-import { Checkbox } from "./Checkbox";
 import { Field } from "./Field";
 import {
   FieldComponentProps,
@@ -25,9 +24,7 @@ export type CheckboxGroupProps = {
   /**
    * A single Checkbox element or an array of Checkbox elements
    */
-  children:
-    | ReactElement<typeof Checkbox>
-    | Array<ReactElement<typeof Checkbox>>;
+  children: ReactNode;
   /**
    * If `true`, the CheckboxGroup is required
    */

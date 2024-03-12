@@ -77,23 +77,21 @@ const ImageContainer = styled("div", {
 })<{
   odysseyDesignTokens: DesignTokens;
   hasMenuButtonChildren: boolean;
-}>`
-  display: flex;
-  align-items: flex-start;
-  max-height: ${TILE_IMAGE_HEIGHT};
-  margin-block-end: ${({ odysseyDesignTokens }) =>
-    odysseyDesignTokens.Spacing5};
-  padding-right: ${({ odysseyDesignTokens, hasMenuButtonChildren }) =>
-    hasMenuButtonChildren ? odysseyDesignTokens.Spacing5 : 0};
-`;
+}>(({ odysseyDesignTokens, hasMenuButtonChildren }) => ({
+  display: "flex",
+  alignItems: "flex-start",
+  maxHeight: `${TILE_IMAGE_HEIGHT}`,
+  marginBlockEnd: odysseyDesignTokens.Spacing5,
+  paddingRight: hasMenuButtonChildren ? odysseyDesignTokens.Spacing5 : 0,
+}));
 
 const MenuButtonContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{ odysseyDesignTokens: DesignTokens }>`
-  position: absolute;
-  right: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing3};
-  top: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing3};
-`;
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
+  position: "absolute",
+  right: odysseyDesignTokens.Spacing3,
+  top: odysseyDesignTokens.Spacing3,
+}));
 
 const buttonProviderValue = { isFullWidth: true };
 
