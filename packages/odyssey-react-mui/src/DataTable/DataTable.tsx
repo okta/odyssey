@@ -454,56 +454,51 @@ const DataTable = ({
     ],
   );
 
-  const convertColumnToFilter = (column: DataTableColumn<DataTableRowData>) => {
-    if (column.enableColumnFilter === false) {
-      return;
+  const convertColumnToFilter = (
+    column: DataTableColumn<DataTableRowData>,
+  ): DataFilter | null => {
+    if (!column.enableColumnFilter) {
+      return null;
     }
 
     return {
-      id: column.accessorKey as string,
+      id: column.accessorKey,
       label: column.header,
-      variant: column.filterVariant ?? "text",
+      variant: column.filterVariant,
       options: column.filterSelectOptions,
     } as DataFilter;
   };
 
-  const isDataTableColumn = (
-    item: unknown,
-  ): item is DataTableColumn<DataTableRowData> => {
-    return (
-      !!item &&
-      typeof (item as DataTableColumn<DataTableRowData>).accessorKey !==
-        "undefined"
-    );
-  };
-
-  const isDataFilter = (item: unknown): item is DataFilter => {
-    return !!item && typeof (item as DataFilter).id !== "undefined";
-  };
-
+  // Filters default to the columns, but can be overridden
+  // with the `filters` prop. `filters` should be an array
+  // of column accessorKeys, column defs, or DataFilters.
   const dataTableFilters = useMemo(() => {
     const providedFilters = filtersProp || columns;
-    return providedFilters
-      .map((item) => {
-        if (typeof item === "string") {
-          const foundColumn = columns.find(
-            (column) => column.accessorKey === item,
-          );
-          return foundColumn && convertColumnToFilter(foundColumn);
+    return providedFilters.reduce<DataFilter[]>((accumulator, item) => {
+      if (typeof item === "string") {
+        const foundColumn = columns.find(
+          (column) => column.accessorKey === item,
+        );
+        if (foundColumn) {
+          const filter = convertColumnToFilter(foundColumn);
+          if (filter) {
+            accumulator.push(filter);
+          }
         }
-
-        if (isDataTableColumn(item)) {
-          return convertColumnToFilter(item);
+      } else if ("accessorKey" in item) {
+        // Checks if it's a column
+        const filter = convertColumnToFilter(item);
+        if (filter) {
+          accumulator.push();
         }
-
-        if (isDataFilter(item)) {
-          return item;
-        }
-
-        return;
-      })
-      .filter((filter): filter is DataFilter => filter !== undefined);
-  }, [columns, filters, filtersProp]);
+      } else if ("label" in item) {
+        // Checks if it's a DataFilter
+        accumulator.push(item);
+      }
+      // If none of the conditions match, item is ignored (not mapping to undefined)
+      return accumulator;
+    }, []);
+  }, [columns, filtersProp]);
 
   const defaultCell = useCallback(
     ({ cell }: { cell: MRT_Cell<MRT_RowData> }) => {

@@ -12,19 +12,17 @@
 
 import type { Meta, StoryObj } from "@storybook/react";
 import {
-  UpdateFiltersCallback,
+  UpdateFilters,
   paginationTypeValues,
 } from "@okta/odyssey-react-mui/labs";
 import {
   Box,
   Button,
   DataTable,
-  DataTableColumn,
   DataTableEmptyState,
   DataTableGetDataType,
   DataTableOnReorderRowsType,
   DataTableProps,
-  DataTableRowData,
   DataTableRowSelectionState,
   MenuItem,
   densityValues,
@@ -349,6 +347,9 @@ const filterData = ({
           });
         }
 
+        // In the custom filter examples, we provide a "starting letter"
+        // control that allows the user to filter by whether the
+        // first letter is a vowel or consonant
         if (id === "startLetter" && typeof row.name === "string") {
           const firstLetter = row.name[0]?.toLowerCase();
           if (value === "vowel") return "aeiou".includes(firstLetter);
@@ -388,11 +389,11 @@ const filterData = ({
   return filteredData;
 };
 
-const reorderData = ({
+const reorderData = <T extends { id: string | number }>({
   data,
   ...args
 }: {
-  data: (Planet | Person)[];
+  data: T[];
 } & DataTableOnReorderRowsType) => {
   const updatedData = data;
   const { rowId, newRowIndex } = args;
@@ -434,7 +435,7 @@ export const Default: StoryObj<DataTableProps> = {
     const onReorderRows = useCallback(
       ({ ...props }: DataTableOnReorderRowsType) => {
         const reorderedData = reorderData({ data, ...props });
-        setData(reorderedData as Planet[]);
+        setData(reorderedData);
       },
       [data],
     );
@@ -486,7 +487,7 @@ export const API: StoryObj<DataTableProps> = {
     const onReorderRows = useCallback(
       ({ ...props }: DataTableOnReorderRowsType) => {
         const reorderedData = reorderData({ data, ...props });
-        setData(reorderedData as Person[]);
+        setData(reorderedData);
       },
       [data],
     );
@@ -563,7 +564,7 @@ export const Empty: StoryObj<DataTableProps> = {
     const onReorderRows = useCallback(
       ({ ...props }: DataTableOnReorderRowsType) => {
         const reorderedData = reorderData({ data, ...props });
-        setData(reorderedData as Planet[]);
+        setData(reorderedData);
       },
       [data],
     );
@@ -609,7 +610,7 @@ export const CustomFilters: StoryObj<DataTableProps> = {
     hasColumnVisibility: false,
     hasFilters: true,
     hasPagination: false,
-    hasRowSelection: true,
+    hasRowSelection: false,
     hasSearch: true,
     hasSorting: true,
     hasRowReordering: false,
@@ -627,18 +628,9 @@ export const CustomFilters: StoryObj<DataTableProps> = {
     const onReorderRows = useCallback(
       ({ ...props }: DataTableOnReorderRowsType) => {
         const reorderedData = reorderData({ data, ...props });
-        setData(reorderedData as Planet[]);
+        setData(reorderedData);
       },
       [data],
-    );
-
-    const onChangeRowSelection = useCallback(
-      (rowSelection: DataTableRowSelectionState) => {
-        if (Object.keys(rowSelection).length > 0) {
-          console.log(`${Object.keys(rowSelection).length} selected`);
-        }
-      },
-      [],
     );
 
     const filters = useMemo(
@@ -647,7 +639,7 @@ export const CustomFilters: StoryObj<DataTableProps> = {
         {
           id: "startLetter",
           label: "Name starting with...",
-          render: (updateFilters: UpdateFiltersCallback) => (
+          render: (updateFilters: UpdateFilters) => (
             <Box
               sx={{
                 display: "flex",
@@ -721,7 +713,6 @@ export const CustomFilters: StoryObj<DataTableProps> = {
         filters={filters}
         getData={getData}
         onReorderRows={onReorderRows}
-        onChangeRowSelection={onChangeRowSelection}
       />
     );
   },
@@ -752,7 +743,7 @@ export const FilterWithCustomRender: StoryObj<DataTableProps> = {
     const onReorderRows = useCallback(
       ({ ...props }: DataTableOnReorderRowsType) => {
         const reorderedData = reorderData({ data, ...props });
-        setData(reorderedData as Planet[]);
+        setData(reorderedData);
       },
       [data],
     );
@@ -777,7 +768,7 @@ export const FilterWithCustomRender: StoryObj<DataTableProps> = {
         {
           id: "visit",
           label: "Type of visit 🚀",
-          render: (updateFilters: UpdateFiltersCallback) => (
+          render: (updateFilters: UpdateFilters) => (
             <Box>
               <Button
                 variant="secondary"
@@ -809,7 +800,7 @@ export const FilterWithCustomRender: StoryObj<DataTableProps> = {
           ),
         },
       ];
-    }, [planetColumns]);
+    }, []);
 
     return (
       <DataTable
@@ -831,13 +822,13 @@ export const CustomFilterWithDefaultVariant: StoryObj<DataTableProps> = {
     hasColumnVisibility: false,
     hasFilters: true,
     hasPagination: false,
-    hasRowSelection: true,
+    hasRowSelection: false,
     hasSearch: true,
     hasSorting: true,
     hasRowReordering: false,
   },
   render: function C(props) {
-    const [data, setData] = useState<Planet[]>(planetData);
+    const [data] = useState<Planet[]>(planetData);
 
     const getData = useCallback(
       ({ ...props }: DataTableGetDataType) => {
@@ -846,31 +837,13 @@ export const CustomFilterWithDefaultVariant: StoryObj<DataTableProps> = {
       [data],
     );
 
-    const onReorderRows = useCallback(
-      ({ ...props }: DataTableOnReorderRowsType) => {
-        const reorderedData = reorderData({ data, ...props });
-        setData(reorderedData as Planet[]);
-      },
-      [data],
-    );
-
-    const onChangeRowSelection = useCallback(
-      (rowSelection: DataTableRowSelectionState) => {
-        if (Object.keys(rowSelection).length > 0) {
-          console.log(`${Object.keys(rowSelection).length} selected`);
-        }
-      },
-      [],
-    );
-
-    const filters = useMemo(() => {
+    const filters = useMemo<DataTableProps["filters"]>(() => {
       return [
         ...planetColumns,
         {
           id: "startLetter",
           label: "Starting letter",
-          variant:
-            "select" as DataTableColumn<DataTableRowData>["filterVariant"],
+          variant: "select",
           options: [
             {
               label: "Vowel",
@@ -891,8 +864,6 @@ export const CustomFilterWithDefaultVariant: StoryObj<DataTableProps> = {
         columns={planetColumns}
         filters={filters}
         getData={getData}
-        onReorderRows={onReorderRows}
-        onChangeRowSelection={onChangeRowSelection}
       />
     );
   },

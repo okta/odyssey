@@ -453,10 +453,35 @@ This is the shape of a custom filter:
 
 ```tsx
 export type DataFilter = {
+  /**
+   * A unique ID for the filter, typically the same id
+   * as the column it'll be applied to.
+   */
   id: string;
+  /**
+   * The human-friendly name of the filter.
+   */
   label: string;
+  /**
+   * The type of filter, which determines which filtering control
+   * is shown.
+   */
+  variant?: MRT_ColumnDef<MRT_RowData>["filterVariant"];
+  /**
+   * The current value of the filter. Typically a string, but
+   * filters that allow for multiple selections (such as multi-select)
+   * can accept an array.
+   */
   value?: DataFilterValue;
-  render?: (updateFilters: UpdateFiltersCallback) => ReactNode;
+  /**
+   * If the filter control has preset options (such as a select or multi-select),
+   * these are the options provided.
+   */
+  options?: Array<{ label: string; value: string }>;
+  /**
+   * A callback which renders a custom filter control
+   */
+  render?: (updateFilters: UpdateFilters) => ReactNode;
 };
 ```
 
