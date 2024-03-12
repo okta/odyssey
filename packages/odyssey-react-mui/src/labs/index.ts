@@ -29,6 +29,5 @@ export * from "./StaticTable";
 export * from "./PaginatedTable";
 
 export * from "./GroupPicker";
-export * from "./VirtualizedAutocomplete";
 
 export * from "./Switch";

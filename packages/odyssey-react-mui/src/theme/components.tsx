@@ -433,6 +433,11 @@ export const components = ({
               },
             },
           },
+          "& > ul": {
+            paddingInlineStart: 0,
+            marginBlockStart: 0,
+            marginBlockEnd: 0,
+          },
         },
         loading: {
           paddingBlock: odysseyTokens.Spacing3,
@@ -445,6 +450,10 @@ export const components = ({
         popper: {
           background: "transparent",
           paddingBlockStart: odysseyTokens.Spacing1,
+          height: "100%",
+        },
+        paper: {
+          height: "100%",
         },
         inputRoot: ({ ownerState }) => ({
           ...(ownerState.readOnly === true && {
