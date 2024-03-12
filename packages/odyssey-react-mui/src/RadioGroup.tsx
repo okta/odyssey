@@ -14,9 +14,9 @@ import {
   RadioGroup as MuiRadioGroup,
   type RadioGroupProps as MuiRadioGroupProps,
 } from "@mui/material";
-import { memo, ReactElement, useCallback, useRef } from "react";
+import { memo, ReactNode, useCallback, useRef } from "react";
 
-import { Radio, RadioProps } from "./Radio";
+import { RadioProps } from "./Radio";
 import { Field } from "./Field";
 import {
   FieldComponentProps,
@@ -29,7 +29,7 @@ export type RadioGroupProps = {
   /**
    * The Radio components within the group. Must include two or more.
    */
-  children: Array<ReactElement<typeof Radio>>;
+  children: ReactNode;
   /**
    * The text value of the Radio that should be selected by default
    */

@@ -13,6 +13,7 @@
 import { Button as MuiButton } from "@mui/material";
 import type { ButtonProps as MuiButtonProps } from "@mui/material";
 import {
+  HTMLAttributes,
   memo,
   ReactElement,
   useCallback,
@@ -46,10 +47,6 @@ export type ButtonProps = {
    */
   buttonRef?: React.RefObject<FocusHandle>;
   /**
-   * The icon element to display at the end of the Button
-   */
-  endIcon?: ReactElement;
-  /**
    * The ID of the Button
    */
   id?: string;
@@ -62,10 +59,6 @@ export type ButtonProps = {
    */
   isFullWidth?: boolean;
   /**
-   * The text content of the Button
-   */
-  label?: string;
-  /**
    * The click event handler for the Button
    */
   onClick?: MuiButtonProps["onClick"];
@@ -73,10 +66,7 @@ export type ButtonProps = {
    * The size of the button
    */
   size?: (typeof buttonSizeValues)[number];
-  /**
-   * The icon element to display at the start of the Button
-   */
-  startIcon?: ReactElement;
+  tabIndex?: HTMLAttributes<HTMLElement>["tabIndex"];
   /**
    * The tooltip text for the Button if it's icon-only
    */
@@ -91,18 +81,45 @@ export type ButtonProps = {
   variant: (typeof buttonVariantValues)[number] | "tertiary";
 } & (
   | {
+      /**
+       * The icon element to display at the end of the Button
+       */
       endIcon?: ReactElement;
+      /**
+       * The text content of the Button
+       */
       label: string;
+      /**
+       * The icon element to display at the start of the Button
+       */
       startIcon?: ReactElement;
     }
   | {
+      /**
+       * The icon element to display at the end of the Button
+       */
       endIcon?: ReactElement;
-      label?: "" | undefined;
+      /**
+       * The text content of the Button
+       */
+      label?: string | "" | undefined;
+      /**
+       * The icon element to display at the start of the Button
+       */
       startIcon: ReactElement;
     }
   | {
+      /**
+       * The icon element to display at the end of the Button
+       */
       endIcon: ReactElement;
-      label?: "" | undefined;
+      /**
+       * The text content of the Button
+       */
+      label?: never;
+      /**
+       * The icon element to display at the start of the Button
+       */
       startIcon?: ReactElement;
     }
 ) &
