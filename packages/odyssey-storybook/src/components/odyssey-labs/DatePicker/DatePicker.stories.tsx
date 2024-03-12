@@ -22,7 +22,7 @@ import {
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-const StorybookDatePicker = (props: DatePickerProps<Date>) => {
+const StorybookDatePicker = (props: DatePickerProps) => {
   const [value, setValue] = useState<Date | null>();
 
   const datePickerProps = useMemo(
@@ -30,7 +30,7 @@ const StorybookDatePicker = (props: DatePickerProps<Date>) => {
       ...props,
       onChange: (date: Date | null, validationError: {}) => {
         // console.log({ newValue });
-        console.log({date})
+        // console.log('date in consumer onChange', date)
         // setValue(date);
       },
       value,
@@ -45,7 +45,7 @@ const StorybookDatePicker = (props: DatePickerProps<Date>) => {
   );
 };
 
-const storybookMeta: Meta<DatePickerProps<Date>> = {
+const storybookMeta: Meta<DatePickerProps> = {
   title: "Labs Components/DatePicker",
   component: StorybookDatePicker,
   argTypes: {
@@ -81,7 +81,7 @@ const storybookMeta: Meta<DatePickerProps<Date>> = {
 
 export default storybookMeta;
 
-export const DatePickerStandard: StoryObj<DatePickerProps<Date>> = {
+export const DatePickerStandard: StoryObj<DatePickerProps> = {
   args: {
     label: "Choose a date",
     hint: "Use MM/DD/YYYY format",

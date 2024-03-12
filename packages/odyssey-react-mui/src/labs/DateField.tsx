@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { forwardRef, memo, useCallback } from "react";
+import { memo, useCallback } from "react";
 import { InputAdornment } from "@mui/material";
 import {
   DateValidationError,
@@ -36,8 +36,8 @@ export const textFieldTypeValues = [
 export type DateFieldProps = MuiDateFieldProps<DateTime> & {
   defaultValue?: MuiDateFieldProps<DateTime>["value"];
   onChange: (
-    value: DateTime | null,
-    validationError: PickerChangeHandlerContext<DateValidationError>,
+    value: DateTime,
+    errorContext: PickerChangeHandlerContext<DateValidationError>,
   ) => void;
   value?: MuiDateFieldProps<DateTime>["value"];
 } & Pick<
@@ -74,17 +74,27 @@ const DateField =
       onFocus,
       placeholder,
       value,
-      ...muiProps
+      // ...muiProps
     }: DateFieldProps
   ) => {
     const handleChange = (
+      // value will be luxon DateTime
       value: DateTime,
-      validationError: PickerChangeHandlerContext<DateValidationError>,
+      errorContext: PickerChangeHandlerContext<DateValidationError>,
     ) => {
+       // const isValid = value.isValid;
+      // const { validationError } = errorContext;
+      // // console.log({isValid})
+      // // console.log({validationError})
+      // const jsDateFromDateTime: Date = new Date(value?.toJSDate());
+      // // console.log({jsDateFromDateTime})
+      // if (jsDateFromDateTime) {
+      //   console.log({ value }, { validationError });
+      //   onChange?.(jsDateFromDateTime, errorContext);
+      // }
       // const value = event.target.value;
-      // console.log({ value }, { validationError });
       // return value;
-      onChange?.(value, validationError);
+      onChange?.(value, errorContext);
     };
 
     const renderFieldComponent = useCallback(

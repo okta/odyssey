@@ -15,14 +15,13 @@ import { useTranslation } from "react-i18next";
 import {
   DatePicker as MuiDatePicker,
   DatePickerProps as MuiDatePickerProps,
-  DateFieldProps as MuiDateFieldProps,
   LocalizationProvider,
   DateValidationError,
   PickerChangeHandlerContext,
 } from "@mui/x-date-pickers";
 import { DateTime } from "luxon";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
-import { InputAdornment, Popper, TextField } from "@mui/material";
+import { InputAdornment } from "@mui/material";
 
 import { Button } from "../Button";
 import {
@@ -41,10 +40,11 @@ import {
   useInputValues,
 } from "../inputUtils";
 
-export type DatePickerProps<Date> = {
+export type DatePickerProps = MuiDatePickerProps<DateTime> & {
   defaultValue?: MuiDatePickerProps<Date>["value"];
   hint?: DateFieldProps["hint"];
   label: string;
+  minDate: MuiDatePickerProps<Date>["minDate"];
   onChange: (
     date: Date,
     validationError: PickerChangeHandlerContext<DateValidationError>,
@@ -76,8 +76,8 @@ const Field = ({hint, label, onChange, onAdornmentClick, ...muiProps}: DateField
     />
   )
 }
-const DatePicker = forwardRef<HTMLInputElement, DatePickerProps<Date>>(
-  ({ defaultValue, hint, label, onChange, value }, ref) => {
+const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
+  ({ defaultValue, hint, label, minDate, onChange, value }, ref) => {
     const [isOpen, setIsOpen] = useState(false);
     const { i18n } = useTranslation();
     const { language } = i18n;
@@ -119,65 +119,76 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps<Date>>(
 
     const inputValueAsDateTime = getInputValueAsDateTime();
 
-    const handleChange = useCallback(
-      // value will be luxon DateTime
-      (
-        value: DateTime | null,
-        validationError: PickerChangeHandlerContext<DateValidationError>,
-      ) => {
+    const formatDateTimeToJsDate = useCallback<NonNullable<MuiDatePickerProps<DateTime>["onChange"]>>(
+      (value, errorContext) => {
+        const { validationError } = errorContext;
+        // console.log({isValid})
+        // console.log({validationError})
         if (value) {
-          console.log({validationError})
           const jsDateFromDateTime: Date = new Date(value?.toJSDate());
 
           if (jsDateFromDateTime) {
-            onChange?.(jsDateFromDateTime, validationError);
-
+            console.log({ value }, { validationError });
+            onChange?.(jsDateFromDateTime, errorContext);
           }
         }
       },
       [onChange],
     );
 
-    const renderFieldComponent = useCallback(
-      (
-        muiProps: MuiDateFieldProps<DateTime>
-      ) => {
-        // const { inputRef } = muiProps;
-        // console.log({inputRef})
-        // if (
-        //   typeof muiProps?.inputRef === "function"
-        // ) {
-        //   // console.log("ref assignment");
-        //   console.log(containerRef.current);
-        //   muiProps?.inputRef?.(containerRef.current);
-        // }
-        return (
-          <DateField
-            {...muiProps}
-            endAdornment={
-              <InputAdornment position="end">
-                <Button
-                  ariaLabel="Calendar"
-                  label=""
-                  size="small"
-                  startIcon={<CalendarIcon />}
-                  variant="floating"
-                  onClick={() => setIsOpen(true)}
-                />
-              </InputAdornment>
-            }
-            hint={hint}
-            label={label}
-            onChange={handleChange}
-            // ref={muiProps.InputProps.ref}
-            // ref={(element: HTMLInputElement) => {
-            //   containerRef.current = element;
-            // }}
-          />
-        );
-      },
-      [inputValueAsDateTime, label, onChange],
-    );
+    // const renderFieldComponent = useCallback(
+    //   (
+    //     muiProps: MuiDateFieldProps<DateTime>
+    //   ) => {
+    //     // const { inputRef } = muiProps;
+    //     // console.log({inputRef})
+    //     // if (
+    //     //   typeof muiProps?.inputRef === "function"
+    //     // ) {
+    //     //   // console.log("ref assignment");
+    //     //   console.log(containerRef.current);
+    //     //   muiProps?.inputRef?.(containerRef.current);
+    //     // }
+    //     return (
+    //       <DateField
+    //         {...muiProps}
+    //         endAdornment={
+    //           <InputAdornment position="end">
+    //             <Button
+    //               ariaLabel="Calendar"
+    //               label=""
+    //               size="small"
+    //               startIcon={<CalendarIcon />}
+    //               variant="floating"
+    //               onClick={() => setIsOpen(true)}
+    //             />
+    //           </InputAdornment>
+    //         }
+    //         hint={hint}
+    //         label={label}
+    //         onChange={handleChange}
+    //         // ref={muiProps.InputProps.ref}
+    //         // ref={(element: HTMLInputElement) => {
+    //         //   containerRef.current = element;
+    //         // }}
+    //       />
+    //     );
+    //   },
+    //   [inputValueAsDateTime, label, onChange],
+    // );
+
+    const formattedMinDate = useCallback<(minDate: Date | undefined) => DateTime | undefined>((minDate) => (
+      minDate ? DateTime.fromJSDate(minDate) : undefined
+    ), [minDate])
+
+    const formatDayOfWeek = (date: DateTime) => {
+      // console.log('date in format',{date})
+      return date.toFormat("EEE")
+    }
+
+    const toggleCalendarVisibility = useCallback(() => {
+      setIsOpen(!isOpen)
+    }, [isOpen])
 
     if (isInvalidLocale) {
       return null;
@@ -190,18 +201,17 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps<Date>>(
           adapterLocale={language}
         >
           <div ref={containerRef}>
-            <MuiDatePicker
+            <MuiDatePicker<DateTime>
               {...inputValueAsDateTime}
-              dayOfWeekFormatter={(_, date: DateTime) => {
-                return date.toFormat("EEE");
-              }}
+              dayOfWeekFormatter={(_, date) => formatDayOfWeek(date)}
               label={label}
-              onChange={handleChange}
-              onClose={() => setIsOpen(false)}
+              minDate={formattedMinDate(minDate)}
+              onChange={formatDateTimeToJsDate}
+              onClose={toggleCalendarVisibility}
               open={isOpen}
               ref={ref}
               slots={{
-                field: (muiProps) => <Field hint={hint} label={label} onChange={handleChange} onAdornmentClick={() => setIsOpen(true)}{...muiProps} />,
+                field: (muiProps) => <Field {...muiProps} hint={hint} label={label} onChange={formatDateTimeToJsDate} onAdornmentClick={toggleCalendarVisibility} />,
                 leftArrowIcon: () => <ArrowLeftIcon />,
                 rightArrowIcon: () => <ArrowRightIcon />,
                 switchViewIcon: () => <ChevronDownIcon />,
