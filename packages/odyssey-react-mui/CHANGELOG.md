@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.1](https://github.com/okta/odyssey/compare/v1.15.0...v1.15.1) (2024-03-12)
+
+### Bug Fixes
+
+- upgrade react types to fix component type from memo wrapper ([#2144](https://github.com/okta/odyssey/issues/2144)) ([ead53ee](https://github.com/okta/odyssey/commit/ead53ee7b2485569b711474a936cf7204cef7ee8))
+
 ## [1.15.0](https://github.com/okta/odyssey/compare/v1.14.10...v1.15.0) (2024-03-12)
 
 ### Features
