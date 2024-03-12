@@ -19,6 +19,7 @@ import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaDat
 import { axeRun } from "../../../axe-util";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { SyntheticEvent, useCallback, useState } from "react";
+import { LargeDataSet, largeDataSet } from "./large-data-collection";
 
 const stations: ReadonlyArray<StationType> = [
   { label: "Anderson Station" },
@@ -87,6 +88,16 @@ const storybookMeta: Meta<typeof Autocomplete> = {
     },
     isOptional: fieldComponentPropsMetaData.isOptional,
     isReadOnly: fieldComponentPropsMetaData.isReadOnly,
+    isVirtualized: {
+      control: "boolean",
+      description: "Let's the component know it should virtualize the list",
+      table: {
+        type: {
+          required: false,
+          summary: "boolean",
+        },
+      },
+    },
     label: {
       control: "text",
       description: "The label text for the autocomplete input",
@@ -464,5 +475,78 @@ export const UncontrolledAutocomplete: StoryObj<JupiterMoonsAutocomplete> = {
     isReadOnly: false,
     label: "label",
     getIsOptionEqualToValue: (option, value) => option.id === value.id,
+  },
+};
+
+export const ControlledVirtualizedAutocomplete: StoryObj<
+  typeof Autocomplete<LargeDataSet, boolean, boolean>
+> = {
+  parameters: {
+    docs: {
+      description: {
+        story: "Rendering a list of 10,000 options in the autocomplete",
+      },
+    },
+  },
+  args: {
+    isVirtualized: true,
+    options: largeDataSet,
+    value: largeDataSet[0],
+    isReadOnly: false,
+    label: "label",
+    getIsOptionEqualToValue: (option, value) => option.id === value.id,
+  },
+  render: function C(props) {
+    const [localValue, setLocalValue] = useState<LargeDataSet | undefined>(
+      largeDataSet[0],
+    );
+    const onChange = useCallback(
+      (
+        _event: SyntheticEvent<Element, Event>,
+        value: string | LargeDataSet | (string | LargeDataSet)[] | null,
+      ) =>
+        setLocalValue(
+          value === undefined ? undefined : (value as LargeDataSet),
+        ),
+      [],
+    );
+    return <Autocomplete {...props} value={localValue} onChange={onChange} />;
+  },
+};
+
+export const ControlledMultipleVirtualizedAutocomplete: StoryObj<
+  typeof Autocomplete<LargeDataSet, boolean, boolean>
+> = {
+  parameters: {
+    docs: {
+      description: {
+        story: "Rendering a list of 10,000 options in the autocomplete",
+      },
+    },
+  },
+  args: {
+    hasMultipleChoices: true,
+    isVirtualized: true,
+    options: largeDataSet,
+    value: largeDataSet.slice(0, 2),
+    isReadOnly: false,
+    label: "label",
+    getIsOptionEqualToValue: (option, value) => option.id === value.id,
+  },
+  render: function C(props) {
+    const [localValue, setLocalValue] = useState<LargeDataSet[] | undefined>(
+      largeDataSet.slice(0, 2),
+    );
+    const onChange = useCallback(
+      (
+        _event: SyntheticEvent<Element, Event>,
+        value: string | LargeDataSet | (string | LargeDataSet)[] | null,
+      ) =>
+        setLocalValue(
+          value === undefined ? undefined : (value as LargeDataSet[]),
+        ),
+      [],
+    );
+    return <Autocomplete {...props} value={localValue} onChange={onChange} />;
   },
 };
