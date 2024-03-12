@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.0](https://github.com/okta/odyssey/compare/v1.14.10...v1.15.0) (2024-03-12)
+
+### Features
+
+- allow virtualization of autocomplete ([#2122](https://github.com/okta/odyssey/issues/2122)) ([a8d8c3c](https://github.com/okta/odyssey/commit/a8d8c3c895f539c61be15224e12d9fb0762fdf10))
+
 ## [1.14.10](https://github.com/okta/odyssey/compare/v1.14.9...v1.14.10) (2024-03-11)
 
 **Note:** Version bump only for package odyssey
