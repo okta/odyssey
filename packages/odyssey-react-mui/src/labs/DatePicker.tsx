@@ -17,7 +17,6 @@ import {
   DatePickerProps as MuiDatePickerProps,
   LocalizationProvider,
   DateValidationError,
-  PickerChangeHandlerContext,
 } from "@mui/x-date-pickers";
 import { DateTime } from "luxon";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
@@ -47,7 +46,7 @@ export type DatePickerProps = MuiDatePickerProps<DateTime> & {
   minDate: MuiDatePickerProps<Date>["minDate"];
   onChange: (
     date: Date,
-    validationError: PickerChangeHandlerContext<DateValidationError>,
+    validationError: DateValidationError,
   ) => void;
   value?: MuiDatePickerProps<Date>["value"];
 };
@@ -122,14 +121,13 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
     const formatDateTimeToJsDate = useCallback<NonNullable<MuiDatePickerProps<DateTime>["onChange"]>>(
       (value, errorContext) => {
         const { validationError } = errorContext;
-        // console.log({isValid})
-        // console.log({validationError})
+
         if (value) {
           const jsDateFromDateTime: Date = new Date(value?.toJSDate());
-
+          console.log({ jsDateFromDateTime });
           if (jsDateFromDateTime) {
-            console.log({ value }, { validationError });
-            onChange?.(jsDateFromDateTime, errorContext);
+            // console.log({ value }, { validationError });
+            onChange?.(jsDateFromDateTime, validationError);
           }
         }
       },

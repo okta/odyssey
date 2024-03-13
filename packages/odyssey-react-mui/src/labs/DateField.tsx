@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, useCallback } from "react";
+import { memo, useCallback,  } from "react";
 import { InputAdornment } from "@mui/material";
 import {
   DateValidationError,
@@ -77,25 +77,17 @@ const DateField =
       // ...muiProps
     }: DateFieldProps
   ) => {
-    const handleChange = (
-      // value will be luxon DateTime
-      value: DateTime,
-      errorContext: PickerChangeHandlerContext<DateValidationError>,
-    ) => {
-       // const isValid = value.isValid;
-      // const { validationError } = errorContext;
-      // // console.log({isValid})
-      // // console.log({validationError})
-      // const jsDateFromDateTime: Date = new Date(value?.toJSDate());
-      // // console.log({jsDateFromDateTime})
-      // if (jsDateFromDateTime) {
-      //   console.log({ value }, { validationError });
-      //   onChange?.(jsDateFromDateTime, errorContext);
-      // }
-      // const value = event.target.value;
-      // return value;
-      onChange?.(value, errorContext);
-    };
+    const handleChange =
+      useCallback<NonNullable<MuiDateFieldProps<DateTime>["onChange"]>>(
+        (
+          // value will be luxon DateTime
+          value,
+          errorContext,
+        ) => {
+          onChange?.(value, errorContext);
+        },
+        [onChange],
+      );
 
     const renderFieldComponent = useCallback(
       ({ ariaDescribedBy, id, labelElementId }: RenderFieldProps) => {
@@ -117,7 +109,6 @@ const DateField =
             }}
             name={id}
             onBlur={onBlur}
-            // @ts-ignore
             onChange={handleChange}
             onFocus={onFocus}
             readOnly={isReadOnly}
