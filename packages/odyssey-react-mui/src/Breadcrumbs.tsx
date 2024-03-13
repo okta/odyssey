@@ -101,13 +101,18 @@ const defaultTruncationValue = 5;
 const BreadcrumbList = ({
   children,
   homeHref,
-  maxVisibleItems = defaultTruncationValue,
+  maxVisibleItems: maxVisibleItemsProp = defaultTruncationValue,
   testId,
   translate,
 }: BreadcrumbsProps) => {
   const { t } = useTranslation();
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+
+  const maxVisibleItems = useMemo(
+    () => Math.min(Math.max(maxVisibleItemsProp, 0), children.length),
+    [maxVisibleItemsProp, children],
+  );
 
   const breadcrumbSections = useMemo(() => {
     if (children.length <= maxVisibleItems) {
@@ -155,7 +160,7 @@ const BreadcrumbList = ({
         </BreadcrumbContext.Provider>
       ))}
 
-      {breadcrumbSections.insideMenu && (
+      {breadcrumbSections.insideMenu.length > 0 && (
         <>
           <ButtonBase onClick={onMenuButtonClick}>...</ButtonBase>
           <Menu

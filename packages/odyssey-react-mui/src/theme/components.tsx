@@ -23,7 +23,6 @@ import { formLabelClasses } from "@mui/material/FormLabel";
 import { formGroupClasses } from "@mui/material/FormGroup";
 import { inputAdornmentClasses } from "@mui/material/InputAdornment";
 import { inputBaseClasses } from "@mui/material/InputBase";
-import { linkClasses } from "@mui/material/Link";
 import { listItemIconClasses } from "@mui/material/ListItemIcon";
 import { listItemTextClasses } from "@mui/material/ListItemText";
 import { menuItemClasses } from "@mui/material/MenuItem";
@@ -313,10 +312,6 @@ export const components = ({
             flexGrow: 1,
             marginBlock: odysseyTokens.Spacing2,
           }),
-          [`& .${linkClasses.root}`]: {
-            display: "inline-block",
-            marginTop: odysseyTokens.Spacing5,
-          },
         }),
       },
     },
@@ -393,6 +388,7 @@ export const components = ({
           alignItems: "center",
           whiteSpace: "nowrap",
           color: odysseyTokens.TypographyColorSubordinate,
+          transform: "none",
 
           ...(ownerState.disabled === true && {
             display: "none",
@@ -437,6 +433,11 @@ export const components = ({
               },
             },
           },
+          "& > ul": {
+            paddingInlineStart: 0,
+            marginBlockStart: 0,
+            marginBlockEnd: 0,
+          },
         },
         loading: {
           paddingBlock: odysseyTokens.Spacing3,
@@ -449,6 +450,10 @@ export const components = ({
         popper: {
           background: "transparent",
           paddingBlockStart: odysseyTokens.Spacing1,
+          height: "100%",
+        },
+        paper: {
+          height: "100%",
         },
         inputRoot: ({ ownerState }) => ({
           ...(ownerState.readOnly === true && {
@@ -1698,6 +1703,15 @@ export const components = ({
       styleOverrides: {
         root: {
           padding: odysseyTokens.Spacing1,
+          borderRadius: odysseyTokens.BorderRadiusMain,
+          "&:hover": {
+            backgroundColor: odysseyTokens.HueNeutral100,
+          },
+          "&:focus-visible": {
+            boxShadow: `0 0 0 2px ${odysseyTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyTokens.PalettePrimaryMain}`,
+            outline: "2px solid transparent",
+            outlineOffset: "1px",
+          },
         },
       },
     },
@@ -1824,8 +1838,7 @@ export const components = ({
           },
         }),
         input: {
-          // Set total height to 40px, factoring in borders on outer container
-          height: `calc(${odysseyTokens.Spacing4} - (${odysseyTokens.BorderWidthMain} * 2))`,
+          height: "auto",
           paddingBlock: odysseyTokens.Spacing3,
           paddingInline: odysseyTokens.Spacing3,
           boxShadow: "none",

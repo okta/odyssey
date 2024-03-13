@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.2](https://github.com/okta/odyssey/compare/v1.15.1...v1.15.2) (2024-03-13)
+
+**Note:** Version bump only for package @okta/babel-plugin-fully-specified
+
+## [1.15.1](https://github.com/okta/odyssey/compare/v1.15.0...v1.15.1) (2024-03-12)
+
+**Note:** Version bump only for package @okta/babel-plugin-fully-specified
+
+## [1.15.0](https://github.com/okta/odyssey/compare/v1.14.10...v1.15.0) (2024-03-12)
+
+### Features
+
+- allow virtualization of autocomplete ([#2122](https://github.com/okta/odyssey/issues/2122)) ([a8d8c3c](https://github.com/okta/odyssey/commit/a8d8c3c895f539c61be15224e12d9fb0762fdf10))
+
+## [1.14.10](https://github.com/okta/odyssey/compare/v1.14.9...v1.14.10) (2024-03-11)
+
+**Note:** Version bump only for package @okta/babel-plugin-fully-specified
+
+## [1.14.9](https://github.com/okta/odyssey/compare/v1.14.8...v1.14.9) (2024-03-08)
+
+**Note:** Version bump only for package @okta/babel-plugin-fully-specified
+
+## [1.14.8](https://github.com/okta/odyssey/compare/v1.14.7...v1.14.8) (2024-03-08)
+
+**Note:** Version bump only for package @okta/babel-plugin-fully-specified
+
+## [1.14.7](https://github.com/okta/odyssey/compare/v1.14.6...v1.14.7) (2024-03-08)
+
+**Note:** Version bump only for package @okta/babel-plugin-fully-specified
+
+## [1.14.6](https://github.com/okta/odyssey/compare/v1.14.5...v1.14.6) (2024-03-07)
+
+**Note:** Version bump only for package @okta/babel-plugin-fully-specified
+
 ## [1.14.5](https://github.com/okta/odyssey/compare/v1.14.4...v1.14.5) (2024-03-01)
 
 **Note:** Version bump only for package @okta/babel-plugin-fully-specified

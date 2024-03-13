@@ -121,7 +121,15 @@ const Tabs = ({
   onChange: onChangeProp,
 }: TabsProps & Pick<HtmlProps, "ariaLabel">) => {
   const [tabState, setTabState] = useState(initialValue ?? value ?? "0");
-
+  /*
+    The scrollButtons prop is initially set to `false`.
+    It's then reset to `auto` when the document is visible.
+    This prevents a rare bug where scroll buttons appear
+    when the component is rendered while hidden and the
+    screen is wide enough to not need scroll buttons.
+  */
+  const [scrollButtons, setScrollButtons] =
+    useState<MuiTabListProps["scrollButtons"]>(false);
   const onChange = useCallback<NonNullable<MuiTabListProps["onChange"]>>(
     (event, value: string) => {
       setTabState(value);
@@ -135,6 +143,36 @@ const Tabs = ({
       setTabState(value);
     }
   }, [value]);
+
+  // listen for visibility change to reset scroll buttons override
+  useEffect(() => {
+    // keep track of animation frame to cancel when needed
+    let animationFrame: number;
+
+    // called when unmounted or scroll buttons is reset
+    const cleanup = () => {
+      cancelAnimationFrame(animationFrame);
+      document.removeEventListener("visibilitychange", refreshScrollButtons);
+    };
+
+    // Reset the scroll buttons override when the document becomes visible.
+    // If called, then the document is hidden because the event listener
+    // is only registered if the document is hidden
+    function refreshScrollButtons() {
+      animationFrame = requestAnimationFrame(() => {
+        cleanup();
+        setScrollButtons("auto");
+      });
+    }
+
+    // don't override scroll buttons if it's already set to "auto"
+    if (scrollButtons !== "auto") {
+      document.addEventListener("visibilitychange", refreshScrollButtons);
+    }
+    return () => {
+      cleanup();
+    };
+  }, [scrollButtons]);
 
   const renderTab = useCallback(
     (tab: TabItemProps, index: number) => {
@@ -177,6 +215,7 @@ const Tabs = ({
         onChange={onChange}
         aria-label={ariaLabel}
         variant="scrollable"
+        scrollButtons={scrollButtons}
       >
         {tabs.map((tab, index) => renderTab(tab, index))}
       </MuiTabList>

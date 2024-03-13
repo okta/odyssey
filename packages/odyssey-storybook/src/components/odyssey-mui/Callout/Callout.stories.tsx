@@ -144,3 +144,27 @@ export const WithLink: StoryObj<CalloutProps> = {
     linkUrl: "#",
   },
 };
+
+export const ChildrenWithLink: StoryObj<CalloutProps> = {
+  args: {
+    role: "alert",
+    severity: "error",
+    title: "Safety checks failed",
+    text: undefined,
+    children:
+      "There is an issue with the fuel mixture ratios. Reconfigure the fuel mixture and perform the safety checks again.",
+    linkText: "Visit fueling console",
+    linkUrl: "#",
+  },
+};
+
+export const TitleWithLink: StoryObj<CalloutProps> = {
+  args: {
+    role: "alert",
+    severity: "error",
+    title: "Safety checks failed",
+    text: undefined,
+    linkText: "Visit fueling console",
+    linkUrl: "#",
+  },
+};
