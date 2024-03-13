@@ -39,7 +39,7 @@ import {
   MoreIcon,
 } from "../icons.generated";
 import { densityValues, paginationTypeValues } from "./constants";
-import { DataTablePagination } from "./DataTablePagination";
+import { Pagination } from "../Pagination";
 import { DataFilter, DataFilters } from "../labs/DataFilters";
 import {
   DataTableRowActions,
@@ -678,6 +678,13 @@ const DataTable = ({
     onChangeRowSelection?.(rowSelection);
   }, [rowSelection, onChangeRowSelection]);
 
+  const firstRow = pagination.pageSize * (pagination.pageIndex - 1) + 1;
+  let lastRow = firstRow + (pagination.pageSize - 1);
+  // If the last eligible row is greater than the number of total rows,
+  // show the number of total rows instead (ie, if we're showing rows
+  // 180-200 but there are only 190 rows, show 180-190 instead)
+  lastRow = totalRows && lastRow > totalRows ? totalRows : lastRow;
+
   // Render the table
   return (
     <>
@@ -728,12 +735,23 @@ const DataTable = ({
       </ScrollableTableContainer>
 
       {hasPagination && (
-        <DataTablePagination
+        <Pagination
           pagination={pagination}
           setPagination={setPagination}
+          lastRow={lastRow}
           totalRows={totalRows}
           isDisabled={isEmpty}
           variant={paginationType}
+          labels={{
+            rowsPerPage: t("pagination.rowsperpage"),
+            pageLabel: t("pagination.page"),
+            previous: t("pagination.previous"),
+            next: t("pagination.next"),
+            loadMore: t("pagination.loadmore"),
+            total: totalRows
+              ? t("pagination.rowswithtotal", { firstRow, lastRow, totalRows })
+              : t("pagination.rowswithouttotal", { firstRow, lastRow }),
+          }}
         />
       )}
     </>
