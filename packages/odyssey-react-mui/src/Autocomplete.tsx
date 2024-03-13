@@ -332,6 +332,7 @@ const Autocomplete = <
       errorMessageList,
       hint,
       HintLinkComponent,
+      isFullWidth,
       isOptional,
       label,
       nameOverride,
