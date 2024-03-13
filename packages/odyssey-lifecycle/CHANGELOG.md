@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.2](https://github.com/okta/odyssey/compare/v1.15.1...v1.15.2) (2024-03-13)
+
+**Note:** Version bump only for package @okta/odyssey-lifecycle
+
 ## [1.15.1](https://github.com/okta/odyssey/compare/v1.15.0...v1.15.1) (2024-03-12)
 
 **Note:** Version bump only for package @okta/odyssey-lifecycle
