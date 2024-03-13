@@ -106,3 +106,4 @@ export * from "./labs/Switch";
 export * from "./Tooltip";
 export * from "./Typography";
 export * from "./useUniqueId";
+export * from "./Pagination";

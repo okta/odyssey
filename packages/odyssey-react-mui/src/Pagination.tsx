@@ -21,17 +21,16 @@ import {
   useRef,
   useState,
 } from "react";
-import { Paragraph } from "../Typography";
-import { Button } from "../Button";
-import { ArrowLeftIcon, ArrowRightIcon } from "../icons.generated";
+import { Paragraph } from "./Typography";
+import { Button } from "./Button";
+import { ArrowLeftIcon, ArrowRightIcon } from "./icons.generated";
 import styled from "@emotion/styled";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "../OdysseyDesignTokensContext";
-import { Box } from "../Box";
-import { Trans, useTranslation } from "react-i18next";
-import { paginationTypeValues } from "./constants";
+} from "./OdysseyDesignTokensContext";
+import { Box } from "./Box";
+import { paginationTypeValues } from "./DataTable/constants";
 
 const PaginationContainer = styled("div")({
   display: "flex",
@@ -73,7 +72,7 @@ const PaginationButtonContainer = styled("div")({
   },
 });
 
-export type DataTablePaginationProps = {
+export type PaginationProps = {
   pagination: {
     pageIndex: number;
     pageSize: number;
@@ -81,6 +80,7 @@ export type DataTablePaginationProps = {
   setPagination: Dispatch<
     SetStateAction<{ pageIndex: number; pageSize: number }>
   >;
+  lastRow: number;
   totalRows?: number;
   isDisabled?: boolean;
   /**
@@ -88,28 +88,30 @@ export type DataTablePaginationProps = {
    * set to a simple "Load more" button by setting to "loadMore".
    */
   variant?: (typeof paginationTypeValues)[number];
+  labels: {
+    rowsPerPage: string;
+    pageLabel: string;
+    previous: string;
+    next: string;
+    loadMore: string;
+    total: string;
+  };
 };
 
-const DataTablePagination = ({
+const Pagination = ({
   pagination,
   setPagination,
+  lastRow,
   totalRows,
   isDisabled,
   variant,
-}: DataTablePaginationProps) => {
+  labels,
+}: PaginationProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
-  const { t } = useTranslation();
 
   const [page, setPage] = useState<number>(pagination.pageIndex);
   const [rowsPerPage, setRowsPerPage] = useState<number>(pagination.pageSize);
   const initialRowsPerPage = useRef<number>(pagination.pageSize);
-
-  const firstRow = pagination.pageSize * (pagination.pageIndex - 1) + 1;
-  let lastRow = firstRow + (pagination.pageSize - 1);
-  // If the last eligible row is greater than the number of total rows,
-  // show the number of total rows instead (ie, if we're showing rows
-  // 180-200 but there are only 190 rows, show 180-190 instead)
-  lastRow = totalRows && lastRow > totalRows ? totalRows : lastRow;
 
   useEffect(() => {
     setPage(pagination.pageIndex);
@@ -205,7 +207,7 @@ const DataTablePagination = ({
       <PaginationSegment odysseyDesignTokens={odysseyDesignTokens}>
         <Box>
           <Paragraph component="span" color="textSecondary">
-            {t("table.pagination.rowsperpage")}
+            {labels.rowsPerPage}
           </Paragraph>
           <PaginationInput
             odysseyDesignTokens={odysseyDesignTokens}
@@ -216,22 +218,12 @@ const DataTablePagination = ({
             onKeyDown={handleRowsPerPageSubmit}
             disabled={isDisabled}
             inputProps={{
-              "aria-label": t("table.pagination.rowsperpage"),
+              "aria-label": labels.rowsPerPage,
             }}
           />
         </Box>
         <Paragraph component="span" color="textSecondary">
-          {totalRows ? (
-            <Trans
-              i18nKey="table.pagination.rowswithtotal"
-              values={{ firstRow, lastRow, totalRows }}
-            />
-          ) : (
-            <Trans
-              i18nKey="table.pagination.rowswithouttotal"
-              values={{ firstRow, lastRow }}
-            />
-          )}
+          {labels.total}
         </Paragraph>
       </PaginationSegment>
 
@@ -239,7 +231,7 @@ const DataTablePagination = ({
         {totalRows && (
           <Box>
             <Paragraph component="span" color="textSecondary">
-              {t("table.pagination.page")}
+              {labels.pageLabel}
             </Paragraph>
             <PaginationInput
               odysseyDesignTokens={odysseyDesignTokens}
@@ -250,7 +242,7 @@ const DataTablePagination = ({
               onKeyDown={handlePageSubmit}
               disabled={isDisabled}
               inputProps={{
-                "aria-label": t("table.pagination.page"),
+                "aria-label": labels.pageLabel,
               }}
             />
           </Box>
@@ -260,7 +252,7 @@ const DataTablePagination = ({
             startIcon={<ArrowLeftIcon />}
             variant="floating"
             size="small"
-            ariaLabel={t("table.pagination.previous")}
+            ariaLabel={labels.previous}
             onClick={handlePreviousButton}
             isDisabled={previousButtonDisabled}
           />
@@ -268,7 +260,7 @@ const DataTablePagination = ({
             endIcon={<ArrowRightIcon />}
             variant="floating"
             size="small"
-            ariaLabel={t("table.pagination.next")}
+            ariaLabel={labels.next}
             onClick={handleNextButton}
             isDisabled={nextButtonDisabled}
           />
@@ -278,14 +270,14 @@ const DataTablePagination = ({
   ) : (
     <Button
       variant="secondary"
-      label={t("table.pagination.loadmore")}
+      label={labels.loadMore}
       onClick={handleLoadMore}
       isDisabled={loadMoreIsDisabled}
     />
   );
 };
 
-const MemoizedDataTablePagination = memo(DataTablePagination);
-MemoizedDataTablePagination.displayName = "DataTablePagination";
+const MemoizedPagination = memo(Pagination);
+MemoizedPagination.displayName = "Pagination";
 
-export { MemoizedDataTablePagination as DataTablePagination };
+export { MemoizedPagination as Pagination };
