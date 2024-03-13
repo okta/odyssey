@@ -1838,7 +1838,7 @@ export const components = ({
           },
         }),
         input: {
-          height: "auto",
+          height: `calc(${odysseyTokens.Spacing7} - (${odysseyTokens.BorderWidthMain} * 2))`,
           paddingBlock: odysseyTokens.Spacing3,
           paddingInline: odysseyTokens.Spacing3,
           boxShadow: "none",
