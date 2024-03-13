@@ -298,6 +298,7 @@ const Autocomplete = <
         hasVisibleLabel
         //@ts-expect-error htmlFor does not exist ont he InputLabelProps for autocomplete
         id={InputLabelProps.htmlFor}
+        isFullWidth={isFullWidth}
         hint={hint}
         HintLinkComponent={HintLinkComponent}
         label={label}
@@ -331,6 +332,7 @@ const Autocomplete = <
       errorMessageList,
       hint,
       HintLinkComponent,
+      isFullWidth,
       isOptional,
       label,
       nameOverride,
