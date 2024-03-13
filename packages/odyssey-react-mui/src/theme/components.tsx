@@ -1838,8 +1838,7 @@ export const components = ({
           },
         }),
         input: {
-          // Set total height to 40px, factoring in borders on outer container
-          height: `calc(${odysseyTokens.Spacing4} - (${odysseyTokens.BorderWidthMain} * 2))`,
+          height: "auto",
           paddingBlock: odysseyTokens.Spacing3,
           paddingInline: odysseyTokens.Spacing3,
           boxShadow: "none",
