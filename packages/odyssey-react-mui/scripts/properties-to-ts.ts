@@ -35,7 +35,7 @@ const convert = (baseFiles: string[], propertiesTargetDir: string) => {
 
     properties.parse(source, (error, propertiesJson) => {
       if (error) {
-        return console.error(error);
+        return console.error("here is an error", error);
       }
 
       const targetFile = join(propertiesTargetDir, filename.concat(".ts"));
