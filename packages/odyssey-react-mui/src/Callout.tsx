@@ -48,7 +48,7 @@ export type CalloutProps = {
    */
   severity: (typeof calloutSeverityValues)[number];
   /**
-   * The text content of the Callout
+   * The content of the Callout
    */
   text?: string;
   /**

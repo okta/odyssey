@@ -69,10 +69,10 @@ const storybookMeta: Meta<CalloutProps> = {
     },
     text: {
       control: "text",
-      description: "The text content of the Callout",
+      description: "The content of the Callout",
       table: {
         type: {
-          summary: "string",
+          summary: "string | React.ReactNode",
         },
       },
       type: {
@@ -133,7 +133,6 @@ export const Success: StoryObj<CalloutProps> = {
     text: "Safety checks are complete. Your mission is ready for liftoff.",
   },
 };
-
 export const WithLink: StoryObj<CalloutProps> = {
   args: {
     role: "alert",
@@ -142,6 +141,24 @@ export const WithLink: StoryObj<CalloutProps> = {
     text: "There is an issue with the fuel mixture ratios. Reconfigure the fuel mixture and perform the safety checks again.",
     linkText: "Visit fueling console",
     linkUrl: "#",
+  },
+};
+
+export const ChildrenWithList: StoryObj<CalloutProps> = {
+  args: {
+    role: "status",
+    severity: "info",
+    title: "Delivery details needed to complete your user profile",
+    text: undefined,
+    children: (
+      <>
+        <ul>
+          <li>Secondary email</li>
+          <li>Street address</li>
+          <li>City</li>
+        </ul>
+      </>
+    ),
   },
 };
 
