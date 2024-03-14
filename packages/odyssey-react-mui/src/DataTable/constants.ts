@@ -11,4 +11,3 @@
  */
 
 export const densityValues = ["comfortable", "spacious", "compact"] as const;
-export const paginationTypeValues = ["paged", "loadMore"] as const;

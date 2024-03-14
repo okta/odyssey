@@ -30,7 +30,8 @@ import {
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext";
 import { Box } from "./Box";
-import { paginationTypeValues } from "./DataTable/constants";
+
+export const paginationTypeValues = ["paged", "loadMore"] as const;
 
 const PaginationContainer = styled("div")({
   display: "flex",
@@ -90,7 +91,7 @@ export type PaginationProps = {
   variant?: (typeof paginationTypeValues)[number];
   labels: {
     rowsPerPage: string;
-    pageLabel: string;
+    page: string;
     previous: string;
     next: string;
     loadMore: string;
@@ -231,7 +232,7 @@ const Pagination = ({
         {totalRows && (
           <Box>
             <Paragraph component="span" color="textSecondary">
-              {labels.pageLabel}
+              {labels.page}
             </Paragraph>
             <PaginationInput
               odysseyDesignTokens={odysseyDesignTokens}
@@ -242,7 +243,7 @@ const Pagination = ({
               onKeyDown={handlePageSubmit}
               disabled={isDisabled}
               inputProps={{
-                "aria-label": labels.pageLabel,
+                "aria-label": labels.page,
               }}
             />
           </Box>
