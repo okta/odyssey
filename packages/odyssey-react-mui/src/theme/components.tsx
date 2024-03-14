@@ -183,7 +183,7 @@ export const components = ({
             }),
           }),
           ...(ownerState.severity === "warning" && {
-            backgroundColor: odysseyTokens.HueYellow100,
+            backgroundColor: odysseyTokens.HueYellow900,
 
             ...(ownerState.variant === "toast" && {
               backgroundColor: odysseyTokens.HueYellow100.concat(
