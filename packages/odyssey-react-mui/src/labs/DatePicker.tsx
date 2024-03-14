@@ -39,16 +39,16 @@ import {
   useInputValues,
 } from "../inputUtils";
 
-export type DatePickerProps = MuiDatePickerProps<DateTime> & {
-  defaultValue?: MuiDatePickerProps<Date>["value"];
+export type DatePickerProps = {
+  defaultValue?: string;
   hint?: DateFieldProps["hint"];
   label: string;
   minDate: MuiDatePickerProps<Date>["minDate"];
   onChange: (
-    date: Date,
-    validationError: DateValidationError,
+    date: Date | null,
+    validationError: string | null,
   ) => void;
-  value?: MuiDatePickerProps<Date>["value"];
+  value?: string;
 };
 
 // const DateFieldComponent = (props: any) => <DateField {...props} />
@@ -92,6 +92,7 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
         uncontrolledValue: defaultValue,
       }),
     );
+
     const inputValues = useInputValues({
       defaultValue: defaultValue || undefined,
       value: value || undefined,
@@ -101,15 +102,23 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
     const getInputValueAsDateTime = useCallback(() => {
       const { value, defaultValue } = inputValues;
 
+      const isValidDate = (date: Date) => !isNaN(date);
+
       if (value) {
+        const valueAsDate = new Date(value);
+
         return {
-          value: DateTime.fromJSDate(value),
+          value: isValidDate(valueAsDate) ? DateTime.fromJSDate(valueAsDate) : null,
         };
       }
-
+      
       if (defaultValue) {
+        const defaultValueAsDate = new Date(defaultValue);
+
         return {
-          defaultValue: DateTime.fromJSDate(defaultValue)
+          defaultValue: isValidDate(defaultValueAsDate)
+            ? DateTime.fromJSDate(defaultValueAsDate)
+            : null,
         };
       }
 
@@ -122,17 +131,27 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       (value, errorContext) => {
         const { validationError } = errorContext;
 
+        
+        
         if (value) {
-          const jsDateFromDateTime: Date = new Date(value?.toJSDate());
-          console.log({ jsDateFromDateTime });
-          if (jsDateFromDateTime) {
-            // console.log({ value }, { validationError });
-            onChange?.(jsDateFromDateTime, validationError);
-          }
+          const jsDateFromDateTime = new Date(value?.toJSDate());
+          console.log({ jsDateFromDateTime }, { errorContext });
+          // if (isValidDate(jsDateFromDateTime)) {
+
+          // }
+          onChange?.(jsDateFromDateTime, validationError);
         }
       },
       [onChange],
     );
+
+    const onChangeToPicker = () => {
+      console.log('picker change')
+    }
+
+    const onChangeToField = () => {
+      console.log("field change");
+    };
 
     // const renderFieldComponent = useCallback(
     //   (
@@ -192,6 +211,10 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       return null;
     }
 
+    const blur = () => {
+      console.log('blurred')
+    }
+
     return (
       <OdysseyThemeProvider themeOverride={datePickerTheme}>
         <LocalizationProvider
@@ -204,20 +227,28 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
               dayOfWeekFormatter={(_, date) => formatDayOfWeek(date)}
               label={label}
               minDate={formattedMinDate(minDate)}
-              onChange={formatDateTimeToJsDate}
+              onChange={onChangeToPicker}
               onClose={toggleCalendarVisibility}
               open={isOpen}
               ref={ref}
               slots={{
-                field: (muiProps) => <Field {...muiProps} hint={hint} label={label} onChange={formatDateTimeToJsDate} onAdornmentClick={toggleCalendarVisibility} />,
+                field: (muiProps) => (
+                  <Field
+                    {...muiProps}
+                    hint={hint}
+                    label={label}
+                    onChange={onChangeToField}
+                    onAdornmentClick={toggleCalendarVisibility}
+                  />
+                ),
                 leftArrowIcon: () => <ArrowLeftIcon />,
                 rightArrowIcon: () => <ArrowRightIcon />,
                 switchViewIcon: () => <ChevronDownIcon />,
               }}
               slotProps={{
                 popper: {
-                  anchorEl: containerRef.current
-                }
+                  anchorEl: containerRef.current,
+                },
               }}
             />
           </div>

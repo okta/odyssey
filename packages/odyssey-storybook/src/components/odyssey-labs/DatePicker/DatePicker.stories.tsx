@@ -23,15 +23,17 @@ import {
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const StorybookDatePicker = (props: DatePickerProps) => {
-  const [value, setValue] = useState<Date | null>();
+  const [value, setValue] = useState<Date>();
 
-  const datePickerProps = useMemo(
+  const datePickerProps: DatePickerProps = useMemo(
     () => ({
       ...props,
-      onChange: (date: Date | null, validationError: {}) => {
+      onChange: (date, validationError) => {
         // console.log({ newValue });
         // console.log('date in consumer onChange', date)
-        // setValue(date);
+        if (date) {
+          // setValue(date);
+        }
       },
       value,
     }),

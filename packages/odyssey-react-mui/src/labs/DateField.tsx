@@ -36,8 +36,8 @@ export const textFieldTypeValues = [
 export type DateFieldProps = MuiDateFieldProps<DateTime> & {
   defaultValue?: MuiDateFieldProps<DateTime>["value"];
   onChange: (
-    value: DateTime,
-    errorContext: PickerChangeHandlerContext<DateValidationError>,
+    dateTime: DateTime,
+    validationContext: PickerChangeHandlerContext<DateValidationError>,
   ) => void;
   value?: MuiDateFieldProps<DateTime>["value"];
 } & Pick<
@@ -77,17 +77,20 @@ const DateField =
       // ...muiProps
     }: DateFieldProps
   ) => {
-    const handleChange =
-      useCallback<NonNullable<MuiDateFieldProps<DateTime>["onChange"]>>(
-        (
-          // value will be luxon DateTime
-          value,
-          errorContext,
-        ) => {
-          onChange?.(value, errorContext);
-        },
-        [onChange],
-      );
+    const handleChange = useCallback<
+      NonNullable<MuiDateFieldProps<DateTime>["onChange"]>
+    >(
+      (
+        // value will be luxon DateTime
+        value,
+        validationContext,
+      ) => {
+        if (value) {
+          onChange?.(value, validationContext);
+        }
+      },
+      [onChange],
+    );
 
     const renderFieldComponent = useCallback(
       ({ ariaDescribedBy, id, labelElementId }: RenderFieldProps) => {
