@@ -41,8 +41,8 @@ import {
   DragIndicatorIcon,
   MoreIcon,
 } from "../icons.generated";
-import { densityValues, paginationTypeValues } from "./constants";
-import { Pagination } from "../Pagination";
+import { densityValues } from "./constants";
+import { Pagination, paginationTypeValues } from "../Pagination";
 import { DataFilter, DataFilters } from "../labs/DataFilters";
 import {
   DataTableRowActions,
@@ -857,7 +857,7 @@ const DataTable = ({
           variant={paginationType}
           labels={{
             rowsPerPage: t("pagination.rowsperpage"),
-            pageLabel: t("pagination.page"),
+            page: t("pagination.page"),
             previous: t("pagination.previous"),
             next: t("pagination.next"),
             loadMore: t("pagination.loadmore"),
