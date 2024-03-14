@@ -42,7 +42,7 @@ import {
   MoreIcon,
 } from "../icons.generated";
 import { densityValues } from "./constants";
-import { Pagination, paginationTypeValues } from "../Pagination";
+import { Pagination, paginationTypeValues, usePagination } from "../Pagination";
 import { DataFilter, DataFilters } from "../labs/DataFilters";
 import {
   DataTableRowActions,
@@ -791,12 +791,7 @@ const DataTable = ({
     onChangeRowSelection?.(rowSelection);
   }, [rowSelection, onChangeRowSelection]);
 
-  const firstRow = pagination.pageSize * (pagination.pageIndex - 1) + 1;
-  let lastRow = firstRow + (pagination.pageSize - 1);
-  // If the last eligible row is greater than the number of total rows,
-  // show the number of total rows instead (ie, if we're showing rows
-  // 180-200 but there are only 190 rows, show 180-190 instead)
-  lastRow = totalRows && lastRow > totalRows ? totalRows : lastRow;
+  const { firstRow, lastRow } = usePagination({ pagination, totalRows });
 
   // Render the table
   return (
@@ -849,22 +844,23 @@ const DataTable = ({
 
       {hasPagination && (
         <Pagination
-          pagination={pagination}
-          setPagination={setPagination}
+          pageIndex={pagination.pageIndex}
+          pageSize={pagination.pageSize}
+          onPaginationChange={setPagination}
           lastRow={lastRow}
           totalRows={totalRows}
           isDisabled={isEmpty}
           variant={paginationType}
-          labels={{
-            rowsPerPage: t("pagination.rowsperpage"),
-            page: t("pagination.page"),
-            previous: t("pagination.previous"),
-            next: t("pagination.next"),
-            loadMore: t("pagination.loadmore"),
-            total: totalRows
+          rowsPerPageLabel={t("pagination.rowsperpage")}
+          currentPageLabel={t("pagination.page")}
+          previousLabel={t("pagination.previous")}
+          nextLabel={t("pagination.next")}
+          loadMoreLabel={t("pagination.loadmore")}
+          totalLabel={
+            totalRows
               ? t("pagination.rowswithtotal", { firstRow, lastRow, totalRows })
-              : t("pagination.rowswithouttotal", { firstRow, lastRow }),
-          }}
+              : t("pagination.rowswithouttotal", { firstRow, lastRow })
+          }
         />
       )}
     </>

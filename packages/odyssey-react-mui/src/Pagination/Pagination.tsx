@@ -11,27 +11,17 @@
  */
 
 import { InputBase } from "@mui/material";
-import {
-  Dispatch,
-  SetStateAction,
-  memo,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import { Paragraph } from "./Typography";
-import { Button } from "./Button";
-import { ArrowLeftIcon, ArrowRightIcon } from "./icons.generated";
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Paragraph } from "../Typography";
+import { Button } from "../Button";
+import { ArrowLeftIcon, ArrowRightIcon } from "../icons.generated";
 import styled from "@emotion/styled";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "./OdysseyDesignTokensContext";
-import { Box } from "./Box";
-
-export const paginationTypeValues = ["paged", "loadMore"] as const;
+} from "../OdysseyDesignTokensContext";
+import { Box } from "../Box";
+import { paginationTypeValues, type Pagination } from "./constants";
 
 const PaginationContainer = styled("div")({
   display: "flex",
@@ -73,51 +63,87 @@ const PaginationButtonContainer = styled("div")({
   },
 });
 
-export type PaginationProps = {
-  pagination: {
-    pageIndex: number;
-    pageSize: number;
-  };
-  setPagination: Dispatch<
-    SetStateAction<{ pageIndex: number; pageSize: number }>
-  >;
+type PaginationProps = {
+  /**
+   * The current page index
+   */
+  pageIndex: Pagination["pageIndex"];
+  /**
+   * The current page size
+   */
+  pageSize: Pagination["pageSize"];
+  /**
+   * Page index and page size setter
+   */
+  onPaginationChange: (newPagination: Pagination) => void;
+  /**
+   * The current page last row index
+   */
   lastRow: number;
+  /**
+   * Total rows count
+   */
   totalRows?: number;
+  /**
+   * If true, te pagination controls will be disabled
+   */
   isDisabled?: boolean;
   /**
    * The type of pagination controls shown. Defaults to next/prev buttons, but can be
    * set to a simple "Load more" button by setting to "loadMore".
    */
   variant?: (typeof paginationTypeValues)[number];
-  labels: {
-    rowsPerPage: string;
-    page: string;
-    previous: string;
-    next: string;
-    loadMore: string;
-    total: string;
-  };
+  /**
+   * The label that shows how many results are rendered per page
+   */
+  rowsPerPageLabel: string;
+  /**
+   * The labeled rendered for the current page index
+   */
+  currentPageLabel: string;
+  /**
+   * The label for the previous control
+   */
+  previousLabel: string;
+  /**
+   * The label for the next control
+   */
+  nextLabel: string;
+  /**
+   * If the pagination is of "loadMore" variant, then this is the the load more label
+   */
+  loadMoreLabel: string;
+  /**
+   * The label rendered for the total results count
+   */
+  totalLabel: string;
 };
 
 const Pagination = ({
-  pagination,
-  setPagination,
+  pageIndex,
+  pageSize,
+  onPaginationChange,
   lastRow,
   totalRows,
   isDisabled,
   variant,
-  labels,
+  rowsPerPageLabel,
+  currentPageLabel,
+  previousLabel,
+  nextLabel,
+  loadMoreLabel,
+  totalLabel,
 }: PaginationProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
-  const [page, setPage] = useState<number>(pagination.pageIndex);
-  const [rowsPerPage, setRowsPerPage] = useState<number>(pagination.pageSize);
-  const initialRowsPerPage = useRef<number>(pagination.pageSize);
+  const [page, setPage] = useState<number>(pageIndex);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(pageSize);
+  const initialRowsPerPage = useRef<number>(pageSize);
 
   useEffect(() => {
-    setPage(pagination.pageIndex);
-    setRowsPerPage(pagination.pageSize);
-  }, [pagination]);
+    setPage(pageIndex);
+    setRowsPerPage(pageSize);
+  }, [pageIndex, pageSize]);
 
   const handlePaginationChange = useCallback(() => {
     const updatedPage =
@@ -127,11 +153,11 @@ const Pagination = ({
     const updatedRowsPerPage =
       totalRows && rowsPerPage > totalRows ? totalRows : rowsPerPage;
 
-    setPagination({
+    onPaginationChange({
       pageIndex: updatedPage,
       pageSize: updatedRowsPerPage,
     });
-  }, [page, rowsPerPage, lastRow, setPagination, totalRows]);
+  }, [page, rowsPerPage, lastRow, onPaginationChange, totalRows]);
 
   // The following handlers use React.KeyboardEvent (rather than just KeyboardEvent) becuase React.KeyboardEvent
   // is generic, while plain KeyboardEvent is not. We need this generic so we can specify the HTMLInputElement,
@@ -139,25 +165,25 @@ const Pagination = ({
   const handlePageSubmit = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       if (event.key === "Enter") {
-        setPagination({
+        onPaginationChange({
           pageIndex: parseInt(event.currentTarget.value),
           pageSize: rowsPerPage,
         });
       }
     },
-    [rowsPerPage, setPagination],
+    [rowsPerPage, onPaginationChange],
   );
 
   const handleRowsPerPageSubmit = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       if (event.key === "Enter") {
-        setPagination({
+        onPaginationChange({
           pageIndex: page,
           pageSize: parseInt(event.currentTarget.value),
         });
       }
     },
-    [page, setPagination],
+    [page, onPaginationChange],
   );
 
   const setPageFromEvent = useCallback(
@@ -175,19 +201,19 @@ const Pagination = ({
   );
 
   const handleLoadMore = useCallback(() => {
-    setPagination({
+    onPaginationChange({
       pageIndex: 1,
       pageSize: rowsPerPage + initialRowsPerPage.current,
     });
-  }, [rowsPerPage, setPagination]);
+  }, [rowsPerPage, onPaginationChange]);
 
   const handleNextButton = useCallback(() => {
-    setPagination({ pageIndex: page + 1, pageSize: rowsPerPage });
-  }, [setPagination, page, rowsPerPage]);
+    onPaginationChange({ pageIndex: page + 1, pageSize: rowsPerPage });
+  }, [onPaginationChange, page, rowsPerPage]);
 
   const handlePreviousButton = useCallback(() => {
-    setPagination({ pageIndex: page - 1, pageSize: rowsPerPage });
-  }, [setPagination, page, rowsPerPage]);
+    onPaginationChange({ pageIndex: page - 1, pageSize: rowsPerPage });
+  }, [onPaginationChange, page, rowsPerPage]);
 
   const loadMoreIsDisabled = useMemo(() => {
     return totalRows ? rowsPerPage >= totalRows : false;
@@ -199,8 +225,8 @@ const Pagination = ({
   );
 
   const previousButtonDisabled = useMemo(
-    () => pagination.pageIndex <= 1 || isDisabled,
-    [pagination, isDisabled],
+    () => pageIndex <= 1 || isDisabled,
+    [pageIndex, isDisabled],
   );
 
   return variant === "paged" ? (
@@ -208,7 +234,7 @@ const Pagination = ({
       <PaginationSegment odysseyDesignTokens={odysseyDesignTokens}>
         <Box>
           <Paragraph component="span" color="textSecondary">
-            {labels.rowsPerPage}
+            {rowsPerPageLabel}
           </Paragraph>
           <PaginationInput
             odysseyDesignTokens={odysseyDesignTokens}
@@ -219,12 +245,12 @@ const Pagination = ({
             onKeyDown={handleRowsPerPageSubmit}
             disabled={isDisabled}
             inputProps={{
-              "aria-label": labels.rowsPerPage,
+              "aria-label": rowsPerPageLabel,
             }}
           />
         </Box>
         <Paragraph component="span" color="textSecondary">
-          {labels.total}
+          {totalLabel}
         </Paragraph>
       </PaginationSegment>
 
@@ -232,7 +258,7 @@ const Pagination = ({
         {totalRows && (
           <Box>
             <Paragraph component="span" color="textSecondary">
-              {labels.page}
+              {currentPageLabel}
             </Paragraph>
             <PaginationInput
               odysseyDesignTokens={odysseyDesignTokens}
@@ -243,7 +269,7 @@ const Pagination = ({
               onKeyDown={handlePageSubmit}
               disabled={isDisabled}
               inputProps={{
-                "aria-label": labels.page,
+                "aria-label": currentPageLabel,
               }}
             />
           </Box>
@@ -253,7 +279,7 @@ const Pagination = ({
             startIcon={<ArrowLeftIcon />}
             variant="floating"
             size="small"
-            ariaLabel={labels.previous}
+            ariaLabel={previousLabel}
             onClick={handlePreviousButton}
             isDisabled={previousButtonDisabled}
           />
@@ -261,7 +287,7 @@ const Pagination = ({
             endIcon={<ArrowRightIcon />}
             variant="floating"
             size="small"
-            ariaLabel={labels.next}
+            ariaLabel={nextLabel}
             onClick={handleNextButton}
             isDisabled={nextButtonDisabled}
           />
@@ -271,7 +297,7 @@ const Pagination = ({
   ) : (
     <Button
       variant="secondary"
-      label={labels.loadMore}
+      label={loadMoreLabel}
       onClick={handleLoadMore}
       isDisabled={loadMoreIsDisabled}
     />
