@@ -454,20 +454,18 @@ const DataTable = ({
     ],
   );
 
-  const convertColumnToFilter = (
-    column: DataTableColumn<DataTableRowData>,
-  ): DataFilter | null => {
-    if (!column.enableColumnFilter) {
-      return null;
-    }
-
-    return {
-      id: column.accessorKey,
-      label: column.header,
-      variant: column.filterVariant,
-      options: column.filterSelectOptions,
-    } as DataFilter;
-  };
+  const convertColumnToFilter = useCallback(
+    (column: DataTableColumn<DataTableRowData>): DataFilter | null =>
+      column.enableColumnFilter
+        ? {
+            id: column.accessorKey,
+            label: column.header,
+            variant: column.filterVariant,
+            options: column.filterSelectOptions,
+          }
+        : null,
+    [],
+  );
 
   // Filters default to the columns, but can be overridden
   // with the `filters` prop. `filters` should be an array
