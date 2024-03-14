@@ -65,7 +65,7 @@ export type DataFilter = {
    * A unique ID for the filter, typically the same id
    * as the column it'll be applied to.
    */
-  id: MRT_ColumnDef<MRT_RowData>["accessorKey"];
+  id: Exclude<MRT_ColumnDef<MRT_RowData>["accessorKey"], undefined>;
   /**
    * The human-friendly name of the filter.
    */
@@ -85,7 +85,7 @@ export type DataFilter = {
    * If the filter control has preset options (such as a select or multi-select),
    * these are the options provided.
    */
-  options?: MRT_ColumnDef<MRT_RowData>["filterSelectOptions"];
+  options?: Array<{ label: string; value: string }>;
   /**
    * A callback which renders a custom filter control
    */

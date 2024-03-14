@@ -454,14 +454,32 @@ const DataTable = ({
     ],
   );
 
+  const convertFilterSelectOptions = useCallback(
+    (options: DataTableColumn<DataTableRowData>["filterSelectOptions"]) =>
+      options?.map((option) =>
+        typeof option === "string"
+          ? {
+              label: option,
+              value: option,
+            }
+          : {
+              // If the option isn't a string, it must have value and/or option defined
+              // If either is undefined, use the other
+              label: option.label ?? option.value,
+              value: option.value ?? option.label,
+            },
+      ),
+    [],
+  );
+
   const convertColumnToFilter = useCallback(
     (column: DataTableColumn<DataTableRowData>): DataFilter | null =>
-      column.enableColumnFilter
+      column.enableColumnFilter && column.accessorKey
         ? {
             id: column.accessorKey,
             label: column.header,
             variant: column.filterVariant,
-            options: column.filterSelectOptions,
+            options: convertFilterSelectOptions(column.filterSelectOptions),
           }
         : null,
     [],
