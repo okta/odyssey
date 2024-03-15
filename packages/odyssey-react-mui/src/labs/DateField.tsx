@@ -36,7 +36,7 @@ export const textFieldTypeValues = [
 export type DateFieldProps = MuiDateFieldProps<DateTime> & {
   defaultValue?: MuiDateFieldProps<DateTime>["value"];
   onChange: (
-    dateTime: DateTime,
+    value: DateTime,
     validationContext: PickerChangeHandlerContext<DateValidationError>,
   ) => void;
   value?: MuiDateFieldProps<DateTime>["value"];
@@ -85,7 +85,7 @@ const DateField =
         value,
         validationContext,
       ) => {
-        if (value) {
+        if (value?.isValid) {
           onChange?.(value, validationContext);
         }
       },

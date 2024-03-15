@@ -32,7 +32,7 @@ const StorybookDatePicker = (props: DatePickerProps) => {
         // console.log({ newValue });
         // console.log('date in consumer onChange', date)
         if (date) {
-          // setValue(date);
+          setValue(date);
         }
       },
       value,

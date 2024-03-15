@@ -16,7 +16,7 @@ import {
   DatePicker as MuiDatePicker,
   DatePickerProps as MuiDatePickerProps,
   LocalizationProvider,
-  DateValidationError,
+  // DateValidationError,
 } from "@mui/x-date-pickers";
 import { DateTime } from "luxon";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
@@ -44,10 +44,15 @@ export type DatePickerProps = {
   hint?: DateFieldProps["hint"];
   label: string;
   minDate: MuiDatePickerProps<Date>["minDate"];
-  onChange: (
-    date: Date | null,
-    validationError: string | null,
-  ) => void;
+  /**
+   * Callback fired when the a date is selected with the calendar.
+   */
+  onCalendarSelectionChange?: (date: Date | null) => void;
+  /**
+   * Callback fired when the textbox receives typed characters.
+   */
+  onInputChange?: (value: string) => void;
+  onChange: (date: Date | null, validationError: string | null) => void;
   value?: string;
 };
 
@@ -76,7 +81,18 @@ const Field = ({hint, label, onChange, onAdornmentClick, ...muiProps}: DateField
   )
 }
 const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
-  ({ defaultValue, hint, label, minDate, onChange, value }, ref) => {
+  (
+    {
+      defaultValue,
+      hint,
+      label,
+      minDate = new Date(),
+      onCalendarSelectionChange,
+      // onInputChange,
+      value,
+    },
+    ref,
+  ) => {
     const [isOpen, setIsOpen] = useState(false);
     const { i18n } = useTranslation();
     const { language } = i18n;
@@ -102,16 +118,18 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
     const getInputValueAsDateTime = useCallback(() => {
       const { value, defaultValue } = inputValues;
 
-      const isValidDate = (date: Date) => !isNaN(date);
+      const isValidDate = (date: Date) => !isNaN(date.getTime());
 
       if (value) {
         const valueAsDate = new Date(value);
 
         return {
-          value: isValidDate(valueAsDate) ? DateTime.fromJSDate(valueAsDate) : null,
+          value: isValidDate(valueAsDate)
+            ? DateTime.fromJSDate(valueAsDate)
+            : null,
         };
       }
-      
+
       if (defaultValue) {
         const defaultValueAsDate = new Date(defaultValue);
 
@@ -122,35 +140,35 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
         };
       }
 
-      return null
+      return null;
     }, [controlledStateRef, inputValues]);
 
     const inputValueAsDateTime = getInputValueAsDateTime();
 
-    const formatDateTimeToJsDate = useCallback<NonNullable<MuiDatePickerProps<DateTime>["onChange"]>>(
-      (value, errorContext) => {
-        const { validationError } = errorContext;
-
-        
-        
+    const formatDateTimeToJsDateOnCalendarSelection = useCallback<
+      NonNullable<MuiDatePickerProps<DateTime>["onChange"]>
+    >(
+      (value, _) => {
+        // const { validationError } = errorContext;
+        console.log({ value });
         if (value) {
           const jsDateFromDateTime = new Date(value?.toJSDate());
-          console.log({ jsDateFromDateTime }, { errorContext });
+          console.log({ jsDateFromDateTime });
           // if (isValidDate(jsDateFromDateTime)) {
 
           // }
-          onChange?.(jsDateFromDateTime, validationError);
+          onCalendarSelectionChange?.(jsDateFromDateTime);
         }
       },
-      [onChange],
+      [onCalendarSelectionChange],
     );
 
-    const onChangeToPicker = () => {
-      console.log('picker change')
-    }
+    // const onChangeToPicker = () => {
+    //   console.log("picker change");
+    // };
 
-    const onChangeToField = () => {
-      console.log("field change");
+    const onChangeToField = (value: string) => {
+      console.log("field change", { value });
     };
 
     // const renderFieldComponent = useCallback(
@@ -194,25 +212,24 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
     //   [inputValueAsDateTime, label, onChange],
     // );
 
-    const formattedMinDate = useCallback<(minDate: Date | undefined) => DateTime | undefined>((minDate) => (
-      minDate ? DateTime.fromJSDate(minDate) : undefined
-    ), [minDate])
+    const formattedMinDate = useCallback<
+      (minDate: Date | undefined) => DateTime | undefined
+    >(
+      (minDate) => (minDate ? DateTime.fromJSDate(minDate) : undefined),
+      [minDate],
+    );
 
     const formatDayOfWeek = (date: DateTime) => {
       // console.log('date in format',{date})
-      return date.toFormat("EEE")
-    }
+      return date.toFormat("EEE");
+    };
 
     const toggleCalendarVisibility = useCallback(() => {
-      setIsOpen(!isOpen)
-    }, [isOpen])
+      setIsOpen(!isOpen);
+    }, [isOpen]);
 
     if (isInvalidLocale) {
       return null;
-    }
-
-    const blur = () => {
-      console.log('blurred')
     }
 
     return (
@@ -227,7 +244,7 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
               dayOfWeekFormatter={(_, date) => formatDayOfWeek(date)}
               label={label}
               minDate={formattedMinDate(minDate)}
-              onChange={onChangeToPicker}
+              onChange={formatDateTimeToJsDateOnCalendarSelection}
               onClose={toggleCalendarVisibility}
               open={isOpen}
               ref={ref}
