@@ -28,7 +28,8 @@ const StorybookDatePicker = (props: DatePickerProps) => {
   const datePickerProps: DatePickerProps = useMemo(
     () => ({
       ...props,
-      onChange: (date, validationError) => {
+      onDateChange: (date) => {
+        console.log({date})
         // console.log({ newValue });
         // console.log('date in consumer onChange', date)
         if (date) {
@@ -55,7 +56,7 @@ const storybookMeta: Meta<DatePickerProps> = {
       control: "text",
       defaultValue: "DatePicker label",
     },
-    onChange: {
+    onDateChange: {
       control: "function",
     },
     defaultValue: {
