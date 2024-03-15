@@ -124,6 +124,7 @@ const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
       },
     },
     errorMessage: fieldComponentPropsMetaData.errorMessage,
+    errorMessageList: fieldComponentPropsMetaData.errorMessageList,
     hasMultipleChoices: {
       control: "boolean",
       description: "If `true`, the select component allows multiple selections",
@@ -260,6 +261,23 @@ export const Error: StoryObj<typeof Select> = {
   args: {
     errorMessage: "Select your destination.",
     defaultValue: "",
+  },
+  play: async ({ step }) => {
+    await step("Check for a11y errors on Select Error", async () => {
+      await waitFor(() => axeRun("Select Error"));
+    });
+  },
+};
+
+export const Errors: StoryObj<typeof Select> = {
+  args: {
+    isMultiSelect: true,
+    errorMessage: "Select your destination.",
+    errorMessageList: [
+      "Select at least one item",
+      "Select no more than 3 items",
+    ],
+    defaultValue: [],
   },
   play: async ({ step }) => {
     await step("Check for a11y errors on Select Error", async () => {

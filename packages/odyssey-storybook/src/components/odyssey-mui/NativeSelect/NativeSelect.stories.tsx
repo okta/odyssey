@@ -44,6 +44,7 @@ const storybookMeta: Meta<typeof NativeSelect> = {
       },
     },
     errorMessage: fieldComponentPropsMetaData.errorMessage,
+    errorMessageList: fieldComponentPropsMetaData.errorMessageList,
     hint: fieldComponentPropsMetaData.hint,
     HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
     id: fieldComponentPropsMetaData.id,
@@ -141,6 +142,7 @@ const Template: StoryObj<typeof NativeSelect> = {
         hint={args.hint}
         defaultValue={args.defaultValue}
         errorMessage={args.errorMessage}
+        errorMessageList={args.errorMessageList}
         isDisabled={args.isDisabled}
         isMultiSelect={args.isMultiSelect}
         isOptional={args.isOptional}
@@ -205,6 +207,14 @@ export const DefaultError: StoryObj<typeof NativeSelect> = {
   ...Template,
   args: {
     errorMessage: "Select your destination.",
+  },
+};
+
+export const Errors: StoryObj<typeof NativeSelect> = {
+  ...Template,
+  args: {
+    errorMessage: "Select your destination.",
+    errorMessageList: ["Select 1 planet", "Select 1 moon"],
   },
 };
 
