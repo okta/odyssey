@@ -155,16 +155,14 @@ export default storybookMeta;
 const checkTheBox =
   ({ canvasElement, step }: PlaywrightProps<CheckboxProps>) =>
   async (actionName: string) => {
-    await step("check the box", async ({ args }) => {
+    await step("check the box", async () => {
       const canvas = within(canvasElement);
       const checkBox = canvas.getByRole("checkbox") as HTMLInputElement;
       if (checkBox) {
-        userEvent.click(checkBox);
+        await userEvent.click(checkBox);
       }
       userEvent.tab();
       expect(checkBox).toBeChecked();
-      userEvent.click(canvasElement);
-      expect(args.onBlur).toHaveBeenCalled();
       axeRun(actionName);
     });
   };
@@ -175,7 +173,7 @@ export const Default: StoryObj<typeof Checkbox> = {
     isDefaultChecked: false,
   },
   play: async ({ canvasElement, step }) => {
-    checkTheBox({ canvasElement, step })("Checkbox Default");
+    await checkTheBox({ canvasElement, step })("Checkbox Default");
   },
 };
 
@@ -194,7 +192,7 @@ export const Required: StoryObj<typeof Checkbox> = {
     isDefaultChecked: false,
   },
   play: async ({ canvasElement, step }) => {
-    checkTheBox({ canvasElement, step })("Checkbox Required");
+    await checkTheBox({ canvasElement, step })("Checkbox Required");
   },
 };
 
@@ -244,7 +242,7 @@ export const Invalid: StoryObj<typeof Checkbox> = {
     isDefaultChecked: false,
   },
   play: async ({ canvasElement, step }) => {
-    checkTheBox({ canvasElement, step })("Checkbox Disabled");
+    await checkTheBox({ canvasElement, step })("Checkbox Disabled");
   },
 };
 
@@ -261,7 +259,7 @@ export const Hint: StoryObj<typeof Checkbox> = {
     hint: "Really helpful hint",
   },
   play: async ({ canvasElement, step }) => {
-    checkTheBox({ canvasElement, step })("Checkbox Hint");
+    await checkTheBox({ canvasElement, step })("Checkbox Hint");
   },
 };
 

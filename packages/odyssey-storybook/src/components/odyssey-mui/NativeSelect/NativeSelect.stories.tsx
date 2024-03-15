@@ -11,7 +11,7 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
-import { NativeSelect } from "@okta/odyssey-react-mui";
+import { NativeSelect, Link } from "@okta/odyssey-react-mui";
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -217,6 +217,20 @@ export const Multi: StoryObj<typeof NativeSelect> = {
   args: {
     hasMultipleChoices: true,
     defaultValue: [],
+  },
+};
+
+export const Optional: StoryObj<typeof NativeSelect> = {
+  ...Template,
+  args: {
+    isOptional: true,
+  },
+};
+
+export const HintLink: StoryObj<typeof NativeSelect> = {
+  ...Template,
+  args: {
+    HintLinkComponent: <Link href="/learn-more">Learn more</Link>,
   },
 };
 

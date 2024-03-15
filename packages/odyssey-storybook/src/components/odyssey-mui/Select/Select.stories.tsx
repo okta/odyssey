@@ -11,7 +11,7 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
-import { Select, SelectProps } from "@okta/odyssey-react-mui";
+import { Select, SelectProps, Link } from "@okta/odyssey-react-mui";
 import { userEvent, waitFor, screen } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import { useCallback, useState } from "react";
@@ -243,6 +243,12 @@ export const Default: StoryObj<typeof Select> = {
 };
 Default.args = { defaultValue: "" };
 
+export const DefaultValue: StoryObj<typeof Select> = {
+  args: {
+    defaultValue: "Mars",
+  },
+};
+
 export const Disabled: StoryObj<typeof Select> = {
   args: {
     isDisabled: true,
@@ -259,6 +265,18 @@ export const Error: StoryObj<typeof Select> = {
     await step("Check for a11y errors on Select Error", async () => {
       await waitFor(() => axeRun("Select Error"));
     });
+  },
+};
+
+export const FullWidth: StoryObj<typeof Select> = {
+  args: {
+    isFullWidth: true,
+  },
+};
+
+export const HintLink: StoryObj<typeof Select> = {
+  args: {
+    HintLinkComponent: <Link href="/learn-more">Learn more</Link>,
   },
 };
 
