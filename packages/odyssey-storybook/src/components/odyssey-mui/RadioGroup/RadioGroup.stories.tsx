@@ -49,6 +49,7 @@ const storybookMeta: Meta<typeof RadioGroup> = {
       },
     },
     errorMessage: fieldComponentPropsMetaData.errorMessage,
+    errorMessageList: fieldComponentPropsMetaData.errorMessageList,
     hint: fieldComponentPropsMetaData.hint,
     HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
     id: fieldComponentPropsMetaData.id,
@@ -149,6 +150,15 @@ export const Error: StoryObj<typeof RadioGroup> = {
   },
   args: {
     errorMessage: "This field is required.",
+    defaultValue: "",
+  },
+};
+
+export const Errors: StoryObj<typeof RadioGroup> = {
+  ...Template,
+  args: {
+    errorMessage: "This field is required.",
+    errorMessageList: ["Message 1", "Message 2"],
     defaultValue: "",
   },
 };

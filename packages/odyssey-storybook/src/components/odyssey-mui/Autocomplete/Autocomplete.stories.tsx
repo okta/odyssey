@@ -54,6 +54,7 @@ const storybookMeta: Meta<typeof Autocomplete> = {
   component: Autocomplete,
   argTypes: {
     errorMessage: fieldComponentPropsMetaData.errorMessage,
+    errorMessageList: fieldComponentPropsMetaData.errorMessageList,
     hasMultipleChoices: {
       control: "boolean",
       description: "Enables multiple choice selection",
@@ -240,6 +241,22 @@ export const Disabled: StoryObj<AutocompleteType> = {
 export const Error: StoryObj<AutocompleteType> = {
   args: {
     errorMessage: "Select your destination.",
+  },
+  play: async ({ step }) => {
+    await step("Check for a11y errors on Select Error", async () => {
+      await waitFor(async () => await axeRun("Select Error"));
+    });
+  },
+};
+
+export const Errors: StoryObj<AutocompleteType> = {
+  args: {
+    hasMultipleChoices: true,
+    errorMessage: "Select your destination.",
+    errorMessageList: [
+      "Select at least 1 destination",
+      "Select no more than 3 destinations",
+    ],
   },
   play: async ({ step }) => {
     await step("Check for a11y errors on Select Error", async () => {

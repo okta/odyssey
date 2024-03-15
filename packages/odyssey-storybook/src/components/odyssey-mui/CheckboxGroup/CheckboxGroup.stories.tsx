@@ -47,6 +47,7 @@ const storybookMeta: Meta<CheckboxGroupStoryProps> = {
       },
     },
     errorMessage: fieldComponentPropsMetaData.errorMessage,
+    errorMessageList: fieldComponentPropsMetaData.errorMessageList,
     hint: fieldComponentPropsMetaData.hint,
     HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
     isDisabled: fieldComponentPropsMetaData.isDisabled,
@@ -86,6 +87,7 @@ const GroupTemplate: StoryObj<CheckboxGroupProps> = {
   render: (args) => (
     <CheckboxGroup
       errorMessage={args.errorMessage}
+      errorMessageList={args.errorMessageList}
       hint={args.hint}
       HintLinkComponent={args.HintLinkComponent}
       isDisabled={args.isDisabled}
@@ -139,6 +141,18 @@ export const Error: StoryObj<CheckboxGroupStoryProps> = {
   },
   args: {
     errorMessage: "Select 1 or more systems to check before initiating warp.",
+  },
+};
+
+export const Errors: StoryObj<CheckboxGroupStoryProps> = {
+  ...GroupTemplate,
+  args: {
+    isRequired: true,
+    errorMessage: "System check is required",
+    errorMessageList: [
+      "Select at least one item",
+      "Select no more than 3 items",
+    ],
   },
 };
 
