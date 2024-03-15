@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Autocomplete } from "@okta/odyssey-react-mui";
+import { Autocomplete, Link } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 import { expect } from "@storybook/jest";
 import { userEvent, waitFor, within, screen } from "@storybook/testing-library";
@@ -248,6 +248,18 @@ export const Error: StoryObj<AutocompleteType> = {
   },
 };
 
+export const FullWidth: StoryObj<AutocompleteType> = {
+  args: {
+    isFullWidth: true,
+  },
+};
+
+export const HintLink: StoryObj<AutocompleteType> = {
+  args: {
+    HintLinkComponent: <Link href="/learn-more">Learn more</Link>,
+  },
+};
+
 export const IsCustomValueAllowed: StoryObj<AutocompleteType> = {
   parameters: {
     docs: {
@@ -277,6 +289,18 @@ export const Loading: StoryObj<AutocompleteType> = {
   args: {
     isLoading: true,
     options: [],
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const comboBoxElement = canvas.getByRole("combobox") as HTMLInputElement;
+    await step("Click for loading to be visible", async () => {
+      await userEvent.click(comboBoxElement);
+      const presentationElement = screen.getByRole("presentation");
+      await expect(presentationElement).toBeVisible();
+      await expect(presentationElement.firstChild?.textContent).toBe(
+        "Loading…",
+      );
+    });
   },
 };
 

@@ -50,6 +50,7 @@ const storybookMeta: Meta<typeof PasswordField> = {
       },
     },
     errorMessage: fieldComponentPropsMetaData.errorMessage,
+    errorMessageList: fieldComponentPropsMetaData.errorMessageList,
     hasInitialFocus: {
       control: "boolean",
       description: "If `true`, the component will receive focus automatically",

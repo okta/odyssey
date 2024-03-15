@@ -11,7 +11,7 @@
  */
 
 import { ChangeEvent, useCallback, useState } from "react";
-import { Radio, RadioGroup } from "@okta/odyssey-react-mui";
+import { Radio, RadioGroup, Link } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 import { expect } from "@storybook/jest";
 
@@ -118,6 +118,14 @@ export const Hint: StoryObj<typeof RadioGroup> = {
   args: {
     hint: "Select the speed at which you wish to travel.",
     defaultValue: "",
+  },
+};
+
+export const HintLink: StoryObj<typeof RadioGroup> = {
+  ...Template,
+  args: {
+    hint: "Select the speed at which you wish to travel.",
+    HintLinkComponent: <Link href="/learn-more">Learn more</Link>,
   },
 };
 

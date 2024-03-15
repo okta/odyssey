@@ -150,6 +150,18 @@ export const Default: StoryObj<typeof SearchField> = {
   },
 };
 
+export const Disabled: StoryObj<typeof SearchField> = {
+  args: {
+    isDisabled: true,
+  },
+};
+
+export const FullWidth: StoryObj<typeof SearchField> = {
+  args: {
+    isFullWidth: true,
+  },
+};
+
 export const ControlledSearch: StoryObj<typeof SearchField> = {
   parameters: {
     docs: {

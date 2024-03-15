@@ -13,6 +13,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import {
   InputAdornment,
+  Link,
   TextField,
   textFieldTypeValues,
 } from "@okta/odyssey-react-mui";
@@ -58,6 +59,7 @@ const storybookMeta: Meta<typeof TextField> = {
       },
     },
     errorMessage: fieldComponentPropsMetaData.errorMessage,
+    errorMessageList: fieldComponentPropsMetaData.errorMessageList,
     hasInitialFocus: {
       control: "boolean",
       description: "If `true`, the component will receive focus automatically",
@@ -231,9 +233,31 @@ export const Error: StoryObj<typeof TextField> = {
   },
 };
 
+export const Errors: StoryObj<typeof TextField> = {
+  args: {
+    errorMessage: "This field is required:",
+    errorMessageList: ["At least 2 chars", "No more than 20 chars"],
+    defaultValue: "",
+  },
+};
+
+export const FullWidth: StoryObj<typeof TextField> = {
+  args: {
+    isFullWidth: true,
+  },
+};
+
 export const Hint: StoryObj<typeof TextField> = {
   args: {
     hint: "Specify your destination within the Sol system.",
+    defaultValue: "",
+  },
+};
+
+export const HintLink: StoryObj<typeof TextField> = {
+  args: {
+    hint: "Specify your destination within the Sol system.",
+    HintLinkComponent: <Link href="/learn-more">Learn more</Link>,
     defaultValue: "",
   },
 };
@@ -277,6 +301,12 @@ export const Multiline: StoryObj<typeof TextField> = {
     label: "Permanent residence",
     isMultiline: true,
     defaultValue: "",
+  },
+};
+
+export const Placeholder: StoryObj<typeof TextField> = {
+  args: {
+    placeholder: "Destination within the Sol system",
   },
 };
 

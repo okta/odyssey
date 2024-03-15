@@ -113,3 +113,16 @@ export const Default: StoryObj<typeof Radio> = {
     });
   },
 };
+
+export const Disabled: StoryObj<typeof Radio> = {
+  args: {
+    isDisabled: true,
+  },
+};
+
+export const Invalid: StoryObj<typeof Radio> = {
+  args: {
+    isChecked: true,
+    isInvalid: true,
+  },
+};

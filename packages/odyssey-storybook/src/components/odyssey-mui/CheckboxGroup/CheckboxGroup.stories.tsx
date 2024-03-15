@@ -14,6 +14,7 @@ import {
   Checkbox,
   CheckboxGroup,
   CheckboxGroupProps,
+  Link,
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 
@@ -86,6 +87,7 @@ const GroupTemplate: StoryObj<CheckboxGroupProps> = {
     <CheckboxGroup
       errorMessage={args.errorMessage}
       hint={args.hint}
+      HintLinkComponent={args.HintLinkComponent}
       isDisabled={args.isDisabled}
       label="Systems check"
       isRequired={args.isRequired}
@@ -137,6 +139,28 @@ export const Error: StoryObj<CheckboxGroupStoryProps> = {
   },
   args: {
     errorMessage: "Select 1 or more systems to check before initiating warp.",
+  },
+};
+
+export const Hint: StoryObj<CheckboxGroupStoryProps> = {
+  ...GroupTemplate,
+  args: {
+    hint: "Select 1 or more systems to check before initiating warp.",
+  },
+};
+
+export const HintLink: StoryObj<CheckboxGroupStoryProps> = {
+  ...GroupTemplate,
+  args: {
+    hint: "Select 1 or more systems to check before initiating warp.",
+    HintLinkComponent: <Link href="/learn-more">Learn more</Link>,
+  },
+};
+
+export const Required: StoryObj<CheckboxGroupStoryProps> = {
+  ...GroupTemplate,
+  args: {
+    isRequired: true,
   },
 };
 
