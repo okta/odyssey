@@ -10,24 +10,32 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Pagination } from "./constants";
+import { t } from "i18next";
 
 interface UsePaginationParams {
-  pagination: Pagination;
+  pageIndex: number;
+  pageSize: number;
   totalRows?: number;
 }
 
 export const usePagination = ({
-  pagination,
+  pageIndex,
+  pageSize,
   totalRows,
 }: UsePaginationParams) => {
-  const firstRow = pagination.pageSize * (pagination.pageIndex - 1) + 1;
-  const lastRow = firstRow + (pagination.pageSize - 1);
-  return {
-    firstRow,
+  const firstRow = pageSize * (pageIndex - 1) + 1;
+  let lastRow = firstRow + (pageSize - 1);
+  if (totalRows && lastRow > totalRows) {
     // If the last eligible row is greater than the number of total rows,
     // show the number of total rows instead (ie, if we're showing rows
     // 180-200 but there are only 190 rows, show 180-190 instead)
-    lastRow: totalRows && lastRow > totalRows ? totalRows : lastRow,
+    lastRow = totalRows;
+  }
+  return {
+    firstRow,
+    lastRow,
+    totalLabel: totalRows
+      ? t("pagination.rowswithtotal", { firstRow, lastRow, totalRows })
+      : t("pagination.rowswithouttotal", { firstRow, lastRow }),
   };
 };

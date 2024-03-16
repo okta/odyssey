@@ -11,8 +11,3 @@
  */
 
 export const paginationTypeValues = ["paged", "loadMore"] as const;
-
-export interface Pagination {
-  pageIndex: number;
-  pageSize: number;
-}

@@ -21,7 +21,8 @@ import {
   useOdysseyDesignTokens,
 } from "../OdysseyDesignTokensContext";
 import { Box } from "../Box";
-import { paginationTypeValues, type Pagination } from "./constants";
+import { paginationTypeValues } from "./constants";
+import { usePagination } from "./usePagination";
 
 const PaginationContainer = styled("div")({
   display: "flex",
@@ -63,19 +64,25 @@ const PaginationButtonContainer = styled("div")({
   },
 });
 
-type PaginationProps = {
+export type PaginationProps = {
   /**
    * The current page index
    */
-  pageIndex: Pagination["pageIndex"];
+  pageIndex: number;
   /**
    * The current page size
    */
-  pageSize: Pagination["pageSize"];
+  pageSize: number;
   /**
    * Page index and page size setter
    */
-  onPaginationChange: (newPagination: Pagination) => void;
+  onPaginationChange: ({
+    pageIndex,
+    pageSize,
+  }: {
+    pageIndex: number;
+    pageSize: number;
+  }) => void;
   /**
    * The current page last row index
    */
@@ -85,7 +92,7 @@ type PaginationProps = {
    */
   totalRows?: number;
   /**
-   * If true, te pagination controls will be disabled
+   * If true, the pagination controls will be disabled
    */
   isDisabled?: boolean;
   /**
@@ -113,10 +120,6 @@ type PaginationProps = {
    * If the pagination is of "loadMore" variant, then this is the the load more label
    */
   loadMoreLabel: string;
-  /**
-   * The label rendered for the total results count
-   */
-  totalLabel: string;
 };
 
 const Pagination = ({
@@ -132,7 +135,6 @@ const Pagination = ({
   previousLabel,
   nextLabel,
   loadMoreLabel,
-  totalLabel,
 }: PaginationProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
@@ -144,6 +146,8 @@ const Pagination = ({
     setPage(pageIndex);
     setRowsPerPage(pageSize);
   }, [pageIndex, pageSize]);
+
+  const { totalLabel } = usePagination({ pageIndex, pageSize, totalRows });
 
   const handlePaginationChange = useCallback(() => {
     const updatedPage =

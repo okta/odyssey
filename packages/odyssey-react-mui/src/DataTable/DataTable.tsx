@@ -791,7 +791,11 @@ const DataTable = ({
     onChangeRowSelection?.(rowSelection);
   }, [rowSelection, onChangeRowSelection]);
 
-  const { firstRow, lastRow } = usePagination({ pagination, totalRows });
+  const { lastRow } = usePagination({
+    pageIndex: pagination.pageIndex,
+    pageSize: pagination.pageSize,
+    totalRows,
+  });
 
   // Render the table
   return (
@@ -856,11 +860,6 @@ const DataTable = ({
           previousLabel={t("pagination.previous")}
           nextLabel={t("pagination.next")}
           loadMoreLabel={t("pagination.loadmore")}
-          totalLabel={
-            totalRows
-              ? t("pagination.rowswithtotal", { firstRow, lastRow, totalRows })
-              : t("pagination.rowswithouttotal", { firstRow, lastRow })
-          }
         />
       )}
     </>
