@@ -10,6 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export { Pagination } from "./Pagination";
+export { Pagination, type PaginationProps } from "./Pagination";
 export { paginationTypeValues } from "./constants";
 export { usePagination } from "./usePagination";
