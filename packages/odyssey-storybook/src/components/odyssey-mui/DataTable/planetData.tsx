@@ -26,7 +26,7 @@ export type Planet = {
 export const columns: DataTableColumn<DataTableRowData>[] = [
   {
     accessorKey: "id",
-    header: "number",
+    header: "Number",
   },
   {
     accessorKey: "name",
