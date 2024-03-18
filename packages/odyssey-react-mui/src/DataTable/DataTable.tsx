@@ -454,6 +454,10 @@ const DataTable = ({
     ],
   );
 
+  /**
+   * This hack is to provide compatibility with Material-React-Table's
+   * filterOptions format, which allows for strings and { label: string, value: string }
+   */
   const convertFilterSelectOptions = useCallback(
     (options: DataTableColumn<DataTableRowData>["filterSelectOptions"]) =>
       options?.map((option) =>
@@ -473,21 +477,23 @@ const DataTable = ({
   );
 
   const convertColumnToFilter = useCallback(
-    (column: DataTableColumn<DataTableRowData>): DataFilter | null =>
+    (column: DataTableColumn<DataTableRowData>) =>
       column.enableColumnFilter && column.accessorKey
-        ? {
+        ? ({
             id: column.accessorKey,
             label: column.header,
             variant: column.filterVariant,
             options: convertFilterSelectOptions(column.filterSelectOptions),
-          }
+          } satisfies DataFilter as DataFilter)
         : null,
     [],
   );
 
-  // Filters default to the columns, but can be overridden
-  // with the `filters` prop. `filters` should be an array
-  // of column accessorKeys, column defs, or DataFilters.
+  /**
+   * Filters default to the columns, but can be overridden
+   * with the `filters` prop. `filters` should be an array
+   * of column accessorKeys, column defs, or DataFilters.
+   */
   const dataTableFilters = useMemo(() => {
     const providedFilters = filtersProp || columns;
     return providedFilters.reduce<DataFilter[]>((accumulator, item) => {
