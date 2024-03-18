@@ -12,6 +12,7 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import {
+  Box,
   Button,
   Status,
   Tag,
@@ -127,7 +128,7 @@ export const Default: StoryObj<TooltipProps> = {
     text: "This will begin a 10-second countdown",
   },
   play: async ({ canvasElement, step }) => {
-    showTooltip({ canvasElement, step })("Tooltip Default");
+    await showTooltip({ canvasElement, step })("Tooltip Default");
   },
 };
 
@@ -145,6 +146,14 @@ export const IconButton: StoryObj<TooltipProps> = {
     placement: "top",
     text: "Download logs",
   },
+  play: async ({ canvasElement, step }: PlaywrightProps<TooltipProps>) => {
+    await step("tooltip text", async () => {
+      const canvas = within(canvasElement);
+      const button = canvas.getByRole("button");
+      userEvent.hover(button);
+      await axeRun("Tooltip Icon Button");
+    });
+  },
 };
 
 export const StatusWrapper: StoryObj<TooltipProps> = {
@@ -154,6 +163,16 @@ export const StatusWrapper: StoryObj<TooltipProps> = {
     ariaType: "label",
     placement: "top",
     text: "The warp drive is currently online.",
+  },
+  play: async ({ canvasElement, step }: PlaywrightProps<TooltipProps>) => {
+    await step("tooltip text", async () => {
+      const canvas = within(canvasElement);
+      const button = canvas.getByLabelText(
+        "The warp drive is currently online.",
+      );
+      userEvent.hover(button);
+      await axeRun("Tooltip Icon Button");
+    });
   },
 };
 
@@ -172,23 +191,33 @@ export const Disabled: StoryObj<TooltipProps> = {
 export const Placement: StoryObj<TooltipProps> = {
   render: function C() {
     return (
-      <>
+      <Box sx={{ mt: "50px" }}>
         <Tooltip text="Top" placement="top" ariaType="label">
           <Tag label="Bow" />
         </Tooltip>
-
         <Tooltip text="Left" placement="left" ariaType="label">
           <Tag label="Stern" />
         </Tooltip>
-
         <Tooltip text="Bottom" placement="bottom" ariaType="label">
           <Tag label="Port" />
         </Tooltip>
-
         <Tooltip text="Right" placement="right" ariaType="label">
           <Tag label="Starboard" />
         </Tooltip>
-      </>
+      </Box>
     );
+  },
+  play: async ({ canvasElement, step }: PlaywrightProps<TooltipProps>) => {
+    await step("tooltip text", async () => {
+      const canvas = within(canvasElement);
+      const bowTag = canvas.getByText("Bow");
+      userEvent.hover(bowTag);
+      const sternTag = canvas.getByText("Stern");
+      userEvent.hover(sternTag);
+      const portTag = canvas.getByText("Port");
+      userEvent.hover(portTag);
+      const starboardTag = canvas.getByText("Starboard");
+      userEvent.hover(starboardTag);
+    });
   },
 };
