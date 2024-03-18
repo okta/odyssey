@@ -51,13 +51,21 @@ import { Trans, useTranslation } from "react-i18next";
 
 export type DataFilterValue = string | string[] | undefined;
 
+export type UpdateFilters = ({
+  filterId,
+  value,
+}: {
+  filterId: string;
+  value: DataFilterValue;
+}) => void;
+
 // This is the shape of each individual filter
 export type DataFilter = {
   /**
    * A unique ID for the filter, typically the same id
    * as the column it'll be applied to.
    */
-  id: string;
+  id: Exclude<MRT_ColumnDef<MRT_RowData>["accessorKey"], undefined>;
   /**
    * The human-friendly name of the filter.
    */
@@ -78,6 +86,10 @@ export type DataFilter = {
    * these are the options provided.
    */
   options?: Array<{ label: string; value: string }>;
+  /**
+   * A callback which renders a custom filter control
+   */
+  render?: (updateFilters: UpdateFilters) => ReactNode;
 };
 
 // This is the type of the DataFilters component itself
@@ -209,8 +221,8 @@ const DataFilters = ({
     [inputValues],
   );
 
-  const updateFilters = useCallback(
-    ({ filterId, value }: { filterId: string; value: DataFilterValue }) => {
+  const updateFilters = useCallback<UpdateFilters>(
+    ({ filterId, value }) => {
       const updatedFilters = filtersProp.map((filter) => ({
         ...filter,
         value: filter.id === filterId ? value : inputValues[filter.id],
@@ -469,183 +481,204 @@ const DataFilters = ({
                       setIsFiltersMenuOpen(false);
                     }}
                   >
-                    {/* Autocomplete */}
-                    {filterPopoverCurrentFilter?.variant === "autocomplete" &&
-                      filterPopoverCurrentFilter?.options && (
-                        <AutocompleteOuterContainer>
-                          <AutocompleteInnerContainer>
-                            <Autocomplete
-                              label={filterPopoverCurrentFilter.label}
-                              value={
-                                inputValues[filterPopoverCurrentFilter.id] ?? ""
-                              }
-                              onChange={(_, value) => {
-                                const label =
-                                  typeof value === "string"
-                                    ? getAutoCompleteLabel({ label: value })
-                                    : Array.isArray(value)
-                                      ? getAutoCompleteLabel(
-                                          value.map((item) =>
-                                            typeof item === "string"
-                                              ? { label: item }
-                                              : item,
-                                          ),
-                                        )
-                                      : value
-                                        ? getAutoCompleteLabel(value)
-                                        : "";
+                    {filterPopoverCurrentFilter?.render ? (
+                      filterPopoverCurrentFilter.render(updateFilters)
+                    ) : (
+                      <>
+                        {/* Autocomplete */}
+                        {filterPopoverCurrentFilter?.variant ===
+                          "autocomplete" &&
+                          filterPopoverCurrentFilter?.options && (
+                            <AutocompleteOuterContainer>
+                              <AutocompleteInnerContainer>
+                                <Autocomplete
+                                  label={filterPopoverCurrentFilter.label}
+                                  value={
+                                    inputValues[
+                                      filterPopoverCurrentFilter.id
+                                    ] ?? ""
+                                  }
+                                  onChange={(_, value) => {
+                                    const label =
+                                      typeof value === "string"
+                                        ? getAutoCompleteLabel({ label: value })
+                                        : Array.isArray(value)
+                                          ? getAutoCompleteLabel(
+                                              value.map((item) =>
+                                                typeof item === "string"
+                                                  ? { label: item }
+                                                  : item,
+                                              ),
+                                            )
+                                          : value
+                                            ? getAutoCompleteLabel(value)
+                                            : "";
 
-                                updateInputValue({
-                                  filterId: filterPopoverCurrentFilter.id,
-                                  value: label,
-                                });
-                              }}
-                              options={autocompleteOptions}
-                            />
-                          </AutocompleteInnerContainer>
-                          <Button
-                            variant="primary"
-                            endIcon={<CheckIcon />}
-                            type="submit"
-                          />
-                        </AutocompleteOuterContainer>
-                      )}
-                    {/* Text or Number */}
-                    {(filterPopoverCurrentFilter?.variant === "text" ||
-                      filterPopoverCurrentFilter?.variant === "range") && (
-                      <Box
-                        sx={{
-                          display: "flex",
-                          gap: 2,
-                          alignItems: "flex-end",
-                        }}
-                      >
-                        <Box sx={{ width: "100%" }}>
-                          <TextField
-                            hasInitialFocus
-                            label={filterPopoverCurrentFilter.label}
-                            type={
-                              filterPopoverCurrentFilter.variant === "range"
-                                ? "number"
-                                : "text"
-                            }
-                            value={
-                              (inputValues[
-                                filterPopoverCurrentFilter.id
-                              ] as string) ?? ""
-                            }
-                            onChange={(ev) =>
-                              updateInputValue({
-                                filterId: filterPopoverCurrentFilter.id,
-                                value: ev.currentTarget.value,
-                              })
-                            }
-                            endAdornment={
-                              inputValues[filterPopoverCurrentFilter.id] && (
-                                <MuiIconButton
-                                  size="small"
-                                  aria-label={t("filters.filter.clear")}
-                                  onClick={() => {
                                     updateInputValue({
                                       filterId: filterPopoverCurrentFilter.id,
-                                      value: undefined,
-                                    });
-
-                                    updateFilters({
-                                      filterId: filterPopoverCurrentFilter.id,
-                                      value: undefined,
+                                      value: label,
                                     });
                                   }}
-                                >
-                                  <CloseCircleFilledIcon />
-                                </MuiIconButton>
-                              )
-                            }
-                          />
-                        </Box>
-                        <Button
-                          variant="primary"
-                          endIcon={<CheckIcon />}
-                          type="submit"
-                        />
-                      </Box>
-                    )}
-
-                    {/* Checkbox */}
-                    {filterPopoverCurrentFilter?.variant === "multi-select" &&
-                      filterPopoverCurrentFilter?.options && (
-                        <CheckboxGroup
-                          label={filterPopoverCurrentFilter.label}
-                          isRequired
-                        >
-                          {filterPopoverCurrentFilter.options.map(
-                            (option: { label: string; value: string }) => (
-                              <Checkbox
-                                key={option.value}
-                                label={option.label}
-                                value={option.value}
-                                isDefaultChecked={
+                                  options={autocompleteOptions}
+                                />
+                              </AutocompleteInnerContainer>
+                              <Button
+                                variant="primary"
+                                endIcon={<CheckIcon />}
+                                type="submit"
+                              />
+                            </AutocompleteOuterContainer>
+                          )}
+                        {/* Text, Number, or undefined */}
+                        {(filterPopoverCurrentFilter?.variant === "text" ||
+                          filterPopoverCurrentFilter?.variant === "range" ||
+                          (filterPopoverCurrentFilter &&
+                            filterPopoverCurrentFilter?.variant ==
+                              undefined)) && (
+                          <Box
+                            sx={{
+                              display: "flex",
+                              gap: 2,
+                              alignItems: "flex-end",
+                            }}
+                          >
+                            <Box sx={{ width: "100%" }}>
+                              <TextField
+                                hasInitialFocus
+                                label={filterPopoverCurrentFilter.label}
+                                type={
+                                  filterPopoverCurrentFilter.variant === "range"
+                                    ? "number"
+                                    : "text"
+                                }
+                                value={
+                                  (inputValues[
+                                    filterPopoverCurrentFilter.id
+                                  ] as string) ?? ""
+                                }
+                                onChange={(ev) =>
+                                  updateInputValue({
+                                    filterId: filterPopoverCurrentFilter.id,
+                                    value: ev.currentTarget.value,
+                                  })
+                                }
+                                endAdornment={
                                   inputValues[
                                     filterPopoverCurrentFilter.id
-                                  ]?.includes(option.value) ||
-                                  inputValues[filterPopoverCurrentFilter.id] ===
-                                    undefined
-                                }
-                                onChange={() =>
-                                  handleMultiSelectChange(
-                                    filterPopoverCurrentFilter.id,
-                                    option.value,
-                                    true,
+                                  ] && (
+                                    <MuiIconButton
+                                      size="small"
+                                      aria-label={t("filters.filter.clear")}
+                                      onClick={() => {
+                                        updateInputValue({
+                                          filterId:
+                                            filterPopoverCurrentFilter.id,
+                                          value: undefined,
+                                        });
+
+                                        updateFilters({
+                                          filterId:
+                                            filterPopoverCurrentFilter.id,
+                                          value: undefined,
+                                        });
+                                      }}
+                                    >
+                                      <CloseCircleFilledIcon />
+                                    </MuiIconButton>
                                   )
                                 }
                               />
-                            ),
+                            </Box>
+                            <Button
+                              variant="primary"
+                              endIcon={<CheckIcon />}
+                              type="submit"
+                            />
+                          </Box>
+                        )}
+
+                        {/* Checkbox */}
+                        {filterPopoverCurrentFilter?.variant ===
+                          "multi-select" &&
+                          filterPopoverCurrentFilter?.options && (
+                            <CheckboxGroup
+                              label={filterPopoverCurrentFilter.label}
+                              isRequired
+                            >
+                              {filterPopoverCurrentFilter.options.map(
+                                (option: { label: string; value: string }) => (
+                                  <Checkbox
+                                    key={option.value}
+                                    label={option.label}
+                                    value={option.value}
+                                    isDefaultChecked={
+                                      inputValues[
+                                        filterPopoverCurrentFilter.id
+                                      ]?.includes(option.value) ||
+                                      inputValues[
+                                        filterPopoverCurrentFilter.id
+                                      ] === undefined
+                                    }
+                                    onChange={() =>
+                                      handleMultiSelectChange(
+                                        filterPopoverCurrentFilter.id,
+                                        option.value,
+                                        true,
+                                      )
+                                    }
+                                  />
+                                ),
+                              )}
+                            </CheckboxGroup>
                           )}
-                        </CheckboxGroup>
-                      )}
 
-                    {/* Radio */}
-                    {filterPopoverCurrentFilter?.variant === "select" &&
-                      filterPopoverCurrentFilter?.options && (
-                        <RadioGroup
-                          label={filterPopoverCurrentFilter.label}
-                          onChange={(_, value) => {
-                            updateInputValue({
-                              filterId: filterPopoverCurrentFilter.id,
-                              value,
-                            });
+                        {/* Radio */}
+                        {filterPopoverCurrentFilter?.variant === "select" &&
+                          filterPopoverCurrentFilter?.options && (
+                            <RadioGroup
+                              label={filterPopoverCurrentFilter.label}
+                              onChange={(_, value) => {
+                                updateInputValue({
+                                  filterId: filterPopoverCurrentFilter.id,
+                                  value,
+                                });
 
-                            updateFilters({
-                              filterId: filterPopoverCurrentFilter.id,
-                              value,
-                            });
-                          }}
-                        >
-                          <Radio
-                            label={t("filters.filter.any")}
-                            value={""}
-                            isChecked={
-                              !inputValues[filterPopoverCurrentFilter.id]
-                            }
-                          />
-                          <>
-                            {filterPopoverCurrentFilter.options.map(
-                              (option: { label: string; value: string }) => (
-                                <Radio
-                                  key={option.value}
-                                  label={option.label}
-                                  value={option.value}
-                                  isChecked={
-                                    inputValues[
-                                      filterPopoverCurrentFilter.id
-                                    ] === option.value
-                                  }
-                                />
-                              ),
-                            )}
-                          </>
-                        </RadioGroup>
-                      )}
+                                updateFilters({
+                                  filterId: filterPopoverCurrentFilter.id,
+                                  value,
+                                });
+                              }}
+                            >
+                              <Radio
+                                label={t("filters.filter.any")}
+                                value={""}
+                                isChecked={
+                                  !inputValues[filterPopoverCurrentFilter.id]
+                                }
+                              />
+                              <>
+                                {filterPopoverCurrentFilter.options.map(
+                                  (option: {
+                                    label: string;
+                                    value: string;
+                                  }) => (
+                                    <Radio
+                                      key={option.value}
+                                      label={option.label}
+                                      value={option.value}
+                                      isChecked={
+                                        inputValues[
+                                          filterPopoverCurrentFilter.id
+                                        ] === option.value
+                                      }
+                                    />
+                                  ),
+                                )}
+                              </>
+                            </RadioGroup>
+                          )}
+                      </>
+                    )}
                   </form>
                 </Box>
               </MuiPopover>
