@@ -159,20 +159,35 @@ const openToast =
       });
       axeRun(actionName);
     });
+    if (args.linkText && args.linkUrl) {
+      await step("link in toast", async () => {
+        await waitFor(() => {
+          const toastLink = canvas.getByText(args.linkText || "");
+          expect(toastLink).toHaveAttribute("href", args.linkUrl);
+        });
+      });
+    }
     if (args.isDismissable) {
       await step("dismiss toast", async () => {
-        const toastElement = canvas.getAllByRole(args.role || "status")[0];
-        if (toastElement) {
-          const dismissToastButton = toastElement.querySelector(
-            '[aria-label="close"]',
-          );
-          if (dismissToastButton) {
-            userEvent.click(dismissToastButton);
-            waitFor(() => {
-              expect(toastElement).not.toBeInTheDocument();
-            });
+        await waitFor(() => {
+          const toastElement = canvas.getByRole("status");
+          if (toastElement) {
+            const dismissToastButton = toastElement.querySelector(
+              '[aria-label="close"]',
+            );
+            if (dismissToastButton) {
+              userEvent.click(dismissToastButton);
+              waitFor(() => {
+                expect(toastElement).not.toBeInTheDocument();
+                // Reopen for Visual test
+                const buttonElement = canvas.getByText(
+                  `Open ${args.severity} toast`,
+                );
+                userEvent.click(buttonElement);
+              });
+            }
           }
-        }
+        });
       });
     }
   };
@@ -218,7 +233,7 @@ export const Info: StoryObj<ToastProps> = {
     severity: "info",
   },
   play: async ({ args, canvasElement, step }) => {
-    openToast({ canvasElement, step })(args, "Info Toast");
+    await openToast({ canvasElement, step })(args, "Info Toast");
   },
 };
 
@@ -231,7 +246,7 @@ export const ErrorToast: StoryObj<ToastProps> = {
     severity: "error",
   },
   play: async ({ args, canvasElement, step }) => {
-    openToast({ canvasElement, step })(args, "Error Toast");
+    await openToast({ canvasElement, step })(args, "Error Toast");
   },
 };
 
@@ -243,7 +258,7 @@ export const Warning: StoryObj<ToastProps> = {
     severity: "warning",
   },
   play: async ({ args, canvasElement, step }) => {
-    openToast({ canvasElement, step })(args, "Warning Toast");
+    await openToast({ canvasElement, step })(args, "Warning Toast");
   },
 };
 
@@ -255,7 +270,7 @@ export const Success: StoryObj<ToastProps> = {
     severity: "success",
   },
   play: async ({ args, canvasElement, step }) => {
-    openToast({ canvasElement, step })(args, "Success Toast");
+    await openToast({ canvasElement, step })(args, "Success Toast");
   },
 };
 
@@ -267,7 +282,7 @@ export const Dismissible: StoryObj<ToastProps> = {
     linkUrl: "#",
   },
   play: async ({ args, canvasElement, step }) => {
-    openToast({ canvasElement, step })(args, "Dismissible Toast");
+    await openToast({ canvasElement, step })(args, "Dismissible Toast");
   },
 };
 
