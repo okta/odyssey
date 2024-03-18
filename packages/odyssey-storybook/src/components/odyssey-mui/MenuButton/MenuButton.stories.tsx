@@ -203,7 +203,7 @@ export const Simple: StoryObj<MenuButtonProps> = {
     canvasElement: HTMLElement;
     step: PlaywrightProps<MenuButtonProps>["step"];
   }) => {
-    clickMenuButton({ canvasElement, step })(args, "Menu Button Simple");
+    await clickMenuButton({ canvasElement, step })(args, "Menu Button Simple");
   },
 };
 
@@ -239,7 +239,10 @@ export const ActionIcons: StoryObj<MenuButtonProps> = {
     canvasElement: HTMLElement;
     step: PlaywrightProps<MenuButtonProps>["step"];
   }) => {
-    clickMenuButton({ canvasElement, step })(args, "Menu Button Action Icons");
+    await clickMenuButton({ canvasElement, step })(
+      args,
+      "Menu Button Action Icons",
+    );
   },
 };
 
@@ -269,6 +272,20 @@ export const Groupings: StoryObj<MenuButtonProps> = {
       <MenuItem key="5">Log out</MenuItem>,
     ],
   },
+  play: async ({
+    args,
+    canvasElement,
+    step,
+  }: {
+    args: MenuButtonProps;
+    canvasElement: HTMLElement;
+    step: PlaywrightProps<MenuButtonProps>["step"];
+  }) => {
+    await clickMenuButton({ canvasElement, step })(
+      args,
+      "Menu Button Groupings",
+    );
+  },
 };
 
 export const WithDestructive: StoryObj<MenuButtonProps> = {
@@ -291,7 +308,10 @@ export const WithDestructive: StoryObj<MenuButtonProps> = {
     canvasElement: HTMLElement;
     step: PlaywrightProps<MenuButtonProps>["step"];
   }) => {
-    clickMenuButton({ canvasElement, step })(args, "Menu Button Destructive");
+    await clickMenuButton({ canvasElement, step })(
+      args,
+      "Menu Button Destructive",
+    );
   },
 };
 
@@ -305,6 +325,38 @@ export const IconButton: StoryObj<MenuButtonProps> = {
       <MenuItem key="3">Launch</MenuItem>,
     ],
     tooltipText: "More actions",
+  },
+};
+
+export const EndIcon: StoryObj<MenuButtonProps> = {
+  args: {
+    ariaLabel: "More actions",
+    endIcon: <GroupIcon />,
+    children: [
+      <MenuItem key="1">View details</MenuItem>,
+      <MenuItem key="2">Edit configuration</MenuItem>,
+      <MenuItem key="3">Launch</MenuItem>,
+    ],
+    tooltipText: "Learn more",
+  },
+};
+
+export const Tooltip: StoryObj<MenuButtonProps> = {
+  args: {
+    buttonLabel: "Cargo options",
+    children: [
+      <MenuItem key="1">View details</MenuItem>,
+      <MenuItem key="2">Edit configuration</MenuItem>,
+      <MenuItem key="3">Launch</MenuItem>,
+    ],
+    tooltipText: "Learn more",
+  },
+  play: async ({ canvasElement, step }: PlaywrightProps<MenuButtonProps>) => {
+    const canvas = within(canvasElement);
+    await step("tooltip text", async () => {
+      const button = canvas.getByText("Cargo options");
+      await userEvent.hover(button);
+    });
   },
 };
 
