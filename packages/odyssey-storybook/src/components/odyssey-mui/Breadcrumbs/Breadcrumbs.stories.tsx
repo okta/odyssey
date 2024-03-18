@@ -107,6 +107,18 @@ export const Truncation: StoryObj<BreadcrumbsProps> = {
       <Breadcrumb href="#eight">Eight</Breadcrumb>
       <Breadcrumb href="#nine">Nine</Breadcrumb>
       <Breadcrumb href="#ten">Ten</Breadcrumb>
+      </BreadcrumbList>
+  ),
+};
+
+export const Minimum: StoryObj<BreadcrumbsProps> = {
+  args: {
+    homeHref: "#home",
+  },
+  render: () => (
+    <BreadcrumbList>
+      <Breadcrumb href="#one">One</Breadcrumb>
+      <Breadcrumb href="#two">Two</Breadcrumb>
     </BreadcrumbList>
   ),
 };

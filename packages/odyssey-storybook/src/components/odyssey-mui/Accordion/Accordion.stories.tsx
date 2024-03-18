@@ -123,3 +123,29 @@ export const Multi: StoryObj<AccordionProps> = {
     );
   },
 };
+
+export const Disabled: StoryObj<AccordionProps> = {
+  args: {
+    children: "This is the content of the box.",
+  },
+  render: function C() {
+    return (
+      <Accordion label="Title" isDisabled={true}>
+        This is the content of the box.
+      </Accordion>
+    );
+  },
+};
+
+export const Expanded: StoryObj<AccordionProps> = {
+  args: {
+    children: "This is the content of the box.",
+  },
+  render: function C() {
+    return (
+      <Accordion label="Title" isExpanded={true}>
+        This is the content of the box.
+      </Accordion>
+    );
+  },
+};
