@@ -11,13 +11,13 @@
  */
 
 import { ReactNode, memo } from "react";
-import { Heading4, Paragraph } from "../Typography";
-import { Box } from "../Box";
+import { Heading4, Paragraph } from "./Typography";
+import { Box } from "./Box";
 import styled from "@emotion/styled";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
-} from "../OdysseyDesignTokensContext";
+} from "./OdysseyDesignTokensContext";
 
 const EmptyContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
@@ -28,24 +28,61 @@ const EmptyContainer = styled("div", {
   padding: odysseyDesignTokens.Spacing5,
   textAlign: "center",
   width: "100%",
+  alignItems: "center",
 }));
 
-export type DataTableEmptyStateProps = {
+export type EmptyStateProps = {
+  /**
+   * An image to render at the top, it could be a URL or a React element that renders SVGs exclusively
+   */
+  image?: string | React.FC<React.SVGProps<SVGSVGElement>>;
+  /**
+   * The main heading of the empty state
+   */
   heading: string;
+  /**
+   * A descriptive text explaining more context
+   */
   text: string;
+  /**
+   * Primary call to action
+   */
   primaryButton?: ReactNode;
+  /**
+   * Secondary call to action
+   */
   secondaryButton?: ReactNode;
 };
 
-const DataTableEmptyState = ({
+const EmptyState = ({
+  image: Image, // Why an alias with a capital letter? to be able to render it as a React element below
   heading,
   text,
   primaryButton,
   secondaryButton,
-}: DataTableEmptyStateProps) => {
+}: EmptyStateProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+
+  const renderImage = () => {
+    if (!Image) return;
+    return (
+      <Box
+        sx={{
+          marginBottom: (t) => t.spacing(3),
+        }}
+      >
+        {typeof Image === "string" ? (
+          <img src={Image} alt={heading} />
+        ) : (
+          <Image />
+        )}
+      </Box>
+    );
+  };
+
   return (
     <EmptyContainer odysseyDesignTokens={odysseyDesignTokens}>
+      {renderImage()}
       <Heading4>{heading}</Heading4>
       <Paragraph>{text}</Paragraph>
       {(primaryButton || secondaryButton) && (
@@ -58,7 +95,7 @@ const DataTableEmptyState = ({
   );
 };
 
-const MemoizedDataTableEmptyState = memo(DataTableEmptyState);
-MemoizedDataTableEmptyState.displayName = "DataTableEmptyState";
+const MemoizedEmptyState = memo(EmptyState);
+MemoizedEmptyState.displayName = "EmptyState";
 
-export { MemoizedDataTableEmptyState as DataTableEmptyState };
+export { MemoizedEmptyState as EmptyState };
