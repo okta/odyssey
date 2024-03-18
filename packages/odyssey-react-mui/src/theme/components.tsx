@@ -1623,9 +1623,6 @@ export const components = ({
           [`:has(> .${radioClasses.root})`]: {
             alignItems: "flex-start",
           },
-          [`& .${checkboxClasses.root}`]: {
-            marginBlockStart: 0,
-          },
           [`&:hover .${radioClasses.root}, &:hover .${checkboxClasses.root}`]: {
             color: odysseyTokens.TypographyColorBody,
           },
