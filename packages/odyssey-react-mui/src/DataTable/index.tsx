@@ -16,7 +16,6 @@ export {
   type DataTableGetDataType,
   type DataTableOnReorderRowsType,
 } from "./DataTable";
-export { DataTableEmptyState } from "./DataTableEmptyState";
 export { densityValues } from "./constants";
 export type {
   MRT_ColumnFiltersState as DataTableFiltersState,

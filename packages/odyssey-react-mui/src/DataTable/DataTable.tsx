@@ -56,7 +56,7 @@ import {
 } from "../OdysseyDesignTokensContext";
 import { useScrollIndication } from "./useScrollIndication";
 import styled from "@emotion/styled";
-import { DataTableEmptyState } from "./DataTableEmptyState";
+import { EmptyState } from "../EmptyState";
 import { Callout } from "../Callout";
 import { t } from "i18next";
 
@@ -480,7 +480,7 @@ const DataTable = ({
 
   const emptyState = useCallback(() => {
     const noResultsInnerContent = noResultsPlaceholder || (
-      <DataTableEmptyState
+      <EmptyState
         heading={t("table.noresults.heading")}
         text={t("table.noresults.text")}
       />
