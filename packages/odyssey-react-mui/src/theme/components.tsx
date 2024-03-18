@@ -1838,8 +1838,9 @@ export const components = ({
           },
         }),
         input: {
-          height: `calc(${odysseyTokens.Spacing7} - (${odysseyTokens.BorderWidthMain} * 2))`,
-          paddingBlock: odysseyTokens.Spacing3,
+          height: "auto",
+          // We're subtracting a pixel so the total height, including borders, is 40px
+          paddingBlock: `calc(${odysseyTokens.Spacing3} - ${odysseyTokens.BorderWidthMain})`,
           paddingInline: odysseyTokens.Spacing3,
           boxShadow: "none",
 
@@ -2284,7 +2285,9 @@ export const components = ({
       },
       styleOverrides: {
         select: {
-          paddingBlock: odysseyTokens.Spacing3,
+          height: "auto",
+          // We're subtracting a pixel so the total height, including borders, is 40px
+          paddingBlock: `calc(${odysseyTokens.Spacing3} - ${odysseyTokens.BorderWidthMain})`,
           paddingInline: odysseyTokens.Spacing3,
           minHeight: 0,
 
