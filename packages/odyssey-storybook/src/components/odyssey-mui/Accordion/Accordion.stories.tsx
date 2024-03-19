@@ -127,11 +127,12 @@ export const Multi: StoryObj<AccordionProps> = {
 export const Disabled: StoryObj<AccordionProps> = {
   args: {
     children: "This is the content of the box.",
+    isDisabled: true,
   },
-  render: function C() {
+  render: function C(props: AccordionProps) {
     return (
-      <Accordion label="Title" isDisabled={true}>
-        This is the content of the box.
+      <Accordion label="Title" isDisabled={props.isDisabled}>
+        {props.children}
       </Accordion>
     );
   },
@@ -140,11 +141,12 @@ export const Disabled: StoryObj<AccordionProps> = {
 export const Expanded: StoryObj<AccordionProps> = {
   args: {
     children: "This is the content of the box.",
+    isExpanded: true,
   },
-  render: function C() {
+  render: function C(props: AccordionProps) {
     return (
-      <Accordion label="Title" isExpanded={true}>
-        This is the content of the box.
+      <Accordion label="Title" isExpanded={props.isExpanded}>
+        {props.children}
       </Accordion>
     );
   },

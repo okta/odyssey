@@ -269,3 +269,20 @@ export const LegendStory: StoryObj<TypographyProps> = {
     await axeRun("Typopgraphy legend");
   },
 };
+
+export const ColorStory: StoryObj<TypographyProps> = {
+  name: "Color",
+  render: ({}) => {
+    return (
+      <>
+        <Paragraph color="primary">This is a primary color.</Paragraph>
+        <Paragraph color="textPrimary">This is a textPrimary color.</Paragraph>
+        <Paragraph color="secondary">This is a secondary color.</Paragraph>
+        <Paragraph color="textSecondary">
+          This is a textSecondary color.
+        </Paragraph>
+        <Paragraph color="error">This is a error color.</Paragraph>
+      </>
+    );
+  },
+};

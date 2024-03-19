@@ -10,8 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Box } from "@mui/material";
 import {
+  Box,
   Button,
   buttonSizeValues,
   buttonTypeValues,
@@ -399,7 +399,7 @@ export const IconOnly: StoryObj<ButtonProps> = {
 
 export const KitchenSink: StoryObj<ButtonProps> = {
   name: "Kitchen sink",
-  render: () => (
+  render: ({}) => (
     <Box sx={{ display: "flex", flexWrap: "wrap", rowGap: 2 }}>
       <Button label="Primary" variant="primary" />
       <Button label="Secondary" variant="secondary" />

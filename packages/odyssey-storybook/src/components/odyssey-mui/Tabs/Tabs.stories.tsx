@@ -119,7 +119,7 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
           summary: "number",
         },
         defaultValue: {
-          summary: "100",
+          summary: 100,
         },
       },
       type: {
@@ -195,7 +195,7 @@ const ExampleTabContent = ({ label }: { label: string }) => {
 export const Default: StoryObj<TabItemProps> = {
   ...DefaultTemplate,
   play: async ({ canvasElement, step }) => {
-    selectTab({ canvasElement, step })("Tab Default", "Moons");
+    await selectTab({ canvasElement, step })("Tab Default", "Moons");
   },
 };
 
@@ -207,7 +207,7 @@ export const Disabled: StoryObj<TabItemProps> = {
     children: "Tab is disabled",
   },
   play: async ({ canvasElement, step }) => {
-    selectTab({ canvasElement, step })("Tab Disabled", "Moons");
+    await selectTab({ canvasElement, step })("Tab Disabled", "Moons");
   },
 };
 
@@ -219,12 +219,12 @@ export const Icons: StoryObj<TabItemProps> = {
     children: <ExampleTabContent label="Xenomorphs" />,
   },
   play: async ({ canvasElement, step }) => {
-    selectTab({ canvasElement, step })("Tab Icon", "Xenomorphs");
+    await selectTab({ canvasElement, step })("Tab Icon", "Xenomorphs");
   },
 };
 
 export const Controlled: StoryObj<TabItemProps> = {
-  render: function C() {
+  render: function C({}) {
     const [value, setValue] = useState("planets");
 
     const onChange: TabsProps["onChange"] = (_e: unknown, value: string) => {
@@ -281,6 +281,17 @@ export const WithBadge: StoryObj<TabItemProps> = {
     children: <ExampleTabContent label="Xenomorphs" />,
   },
   play: async ({ canvasElement, step }) => {
-    selectTab({ canvasElement, step })("Tab Icon", "Xenomorphs");
+    await selectTab({ canvasElement, step })("Tab Icon", "Xenomorphs");
+  },
+};
+
+export const CountMax: StoryObj<TabItemProps> = {
+  ...DefaultTemplate,
+  args: {
+    notificationCount: 101,
+    notificationCountMax: 100,
+    label: "Xenomorphs",
+    value: "xenomorphs",
+    children: <ExampleTabContent label="Xenomorphs" />,
   },
 };
