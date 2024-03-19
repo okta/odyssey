@@ -856,7 +856,7 @@ export const CustomFilterWithDefaultVariant: StoryObj<DataTableProps> = {
           ],
         },
       ];
-    }, [planetColumns]);
+    }, []);
 
     return (
       <DataTable
@@ -866,5 +866,39 @@ export const CustomFilterWithDefaultVariant: StoryObj<DataTableProps> = {
         getData={getData}
       />
     );
+  },
+};
+
+export const Truncation: StoryObj<DataTableProps> = {
+  render: function C() {
+    const columns = useMemo(
+      () => [
+        {
+          accessorKey: "truncated",
+          header: "Truncated",
+        },
+        {
+          accessorKey: "wrapped",
+          header: "Wrapped",
+          enableWrapping: true,
+        },
+      ],
+      [],
+    );
+
+    const getData = useCallback(() => {
+      const data = [];
+      for (let i = 0; i < 10; i++) {
+        data.push({
+          truncated:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla a quam et vulputate. Phasellus elementum turpis a lacus feugiat bibendum.",
+          wrapped:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla a quam et vulputate. Phasellus elementum turpis a lacus feugiat bibendum.",
+        });
+      }
+      return data;
+    }, []);
+
+    return <DataTable columns={columns} getData={getData} hasColumnResizing />;
   },
 };

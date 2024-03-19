@@ -31,6 +31,8 @@ import {
   MRT_VisibilityState,
   useMaterialReactTable,
   MRT_TableContainer,
+  MRT_Column,
+  MRT_ColumnDef,
 } from "material-react-table";
 import {
   ArrowDownIcon,
@@ -49,11 +51,7 @@ import { useRowReordering } from "./useRowReordering";
 import { DataTableSettings } from "./DataTableSettings";
 import { MenuButton, MenuButtonProps } from "../MenuButton";
 import { Box } from "../Box";
-import {
-  DataTableColumn,
-  DataTableRowData,
-  DataTableRowSelectionState,
-} from ".";
+import { DataTableRowSelectionState } from ".";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
@@ -63,6 +61,18 @@ import styled from "@emotion/styled";
 import { DataTableEmptyState } from "./DataTableEmptyState";
 import { Callout } from "../Callout";
 import { t } from "i18next";
+
+export type DataTableColumn = MRT_ColumnDef<MRT_RowData> & {
+  enableWrapping?: boolean;
+};
+
+type DataTableColumnInstance = Omit<MRT_Column<MRT_RowData>, "columnDef"> & {
+  columnDef: DataTableColumn;
+};
+
+type DataTableCell = Omit<MRT_Cell<MRT_RowData>, "column"> & {
+  column: DataTableColumnInstance;
+};
 
 export type DataTableGetDataType = {
   page?: number;
@@ -81,7 +91,7 @@ export type DataTableProps = {
   /**
    * The columns that make up the table
    */
-  columns: MRT_TableOptions<MRT_RowData>["columns"];
+  columns: DataTableColumn[];
   /**
    * The total number of rows in the table. Optional, because it's sometimes impossible
    * to calculate. Used in table pagination to know when to disable the "next"/"more" button.
@@ -208,7 +218,7 @@ export type DataTableProps = {
   /**
    * An optional set of filters to render in the filters menu
    */
-  filters?: Array<DataFilter | DataTableColumn<DataTableRowData> | string>;
+  filters?: Array<DataFilter | DataTableColumn | string>;
 };
 
 const displayColumnDefOptions = {
@@ -459,7 +469,7 @@ const DataTable = ({
    * filterOptions format, which allows for strings and { label: string, value: string }
    */
   const convertFilterSelectOptions = useCallback(
-    (options: DataTableColumn<DataTableRowData>["filterSelectOptions"]) =>
+    (options: DataTableColumn["filterSelectOptions"]) =>
       options?.map((option) =>
         typeof option === "string"
           ? {
@@ -477,7 +487,7 @@ const DataTable = ({
   );
 
   const convertColumnToFilter = useCallback(
-    (column: DataTableColumn<DataTableRowData>) =>
+    (column: DataTableColumn) =>
       column.enableColumnFilter && column.accessorKey
         ? ({
             id: column.accessorKey,
@@ -486,7 +496,7 @@ const DataTable = ({
             options: convertFilterSelectOptions(column.filterSelectOptions),
           } satisfies DataFilter as DataFilter)
         : null,
-    [],
+    [convertFilterSelectOptions],
   );
 
   /**
@@ -496,49 +506,52 @@ const DataTable = ({
    */
   const dataTableFilters = useMemo(() => {
     const providedFilters = filtersProp || columns;
-    return providedFilters.reduce<DataFilter[]>((accumulator, item) => {
-      if (typeof item === "string") {
-        const foundColumn = columns.find(
-          (column) => column.accessorKey === item,
-        );
-        if (foundColumn) {
-          const filter = convertColumnToFilter(foundColumn);
-          if (filter) {
-            accumulator.push(filter);
+    return providedFilters.reduce<DataFilter[]>(
+      (accumulator, item) => {
+        if (typeof item === "string") {
+          const foundColumn = columns.find(
+            (column) => column.accessorKey === item,
+          );
+          if (foundColumn) {
+            const filter = convertColumnToFilter(foundColumn);
+            if (filter) {
+              accumulator.push(filter);
+            }
           }
+        } else if ("accessorKey" in item) {
+          // Checks if it's a column
+          const filter = convertColumnToFilter(item);
+          if (filter) {
+            accumulator.push();
+          }
+        } else if ("label" in item) {
+          // Checks if it's a DataFilter
+          accumulator.push(item);
         }
-      } else if ("accessorKey" in item) {
-        // Checks if it's a column
-        const filter = convertColumnToFilter(item);
-        if (filter) {
-          accumulator.push();
-        }
-      } else if ("label" in item) {
-        // Checks if it's a DataFilter
-        accumulator.push(item);
-      }
-      // If none of the conditions match, item is ignored (not mapping to undefined)
-      return accumulator;
-    }, []);
+        // If none of the conditions match, item is ignored (not mapping to undefined)
+        return accumulator;
+      },
+      [convertColumnToFilter],
+    );
   }, [columns, filtersProp]);
 
-  const defaultCell = useCallback(
-    ({ cell }: { cell: MRT_Cell<MRT_RowData> }) => {
-      const value = cell.getValue<string>();
-      return (
-        <Box
-          sx={{
-            whiteSpace: "nowrap",
-            textOverflow: "ellipsis",
-            overflow: "hidden",
-          }}
-        >
-          {value}
-        </Box>
-      );
-    },
-    [],
-  );
+  const defaultCell = useCallback(({ cell }: { cell: DataTableCell }) => {
+    const value = cell.getValue<string>();
+    const enableWrapping = cell.column.columnDef.enableWrapping;
+    return enableWrapping ? (
+      value
+    ) : (
+      <Box
+        sx={{
+          whiteSpace: "nowrap",
+          textOverflow: "ellipsis",
+          overflow: "hidden",
+        }}
+      >
+        {value}
+      </Box>
+    );
+  }, []);
 
   const emptyState = useCallback(() => {
     const noResultsInnerContent = noResultsPlaceholder || (
