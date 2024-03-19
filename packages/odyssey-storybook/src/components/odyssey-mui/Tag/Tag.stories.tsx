@@ -133,6 +133,7 @@ export const Clickable: StoryObj<TagProps> = {
       const tag = canvas.getByText(args.label);
       await userEvent.click(tag);
       expect(args.onClick).toHaveBeenCalledTimes(1);
+      await axeRun("Clickable Tag");
     });
   },
 };

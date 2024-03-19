@@ -157,39 +157,8 @@ const openToast =
         userEvent.click(buttonElement);
         userEvent.tab();
       });
-      axeRun(actionName);
+      await axeRun(actionName);
     });
-    if (args.linkText && args.linkUrl) {
-      await step("link in toast", async () => {
-        await waitFor(() => {
-          const toastLink = canvas.getByText(args.linkText || "");
-          expect(toastLink).toHaveAttribute("href", args.linkUrl);
-        });
-      });
-    }
-    if (args.isDismissable) {
-      await step("dismiss toast", async () => {
-        await waitFor(() => {
-          const toastElement = canvas.getByRole("status");
-          if (toastElement) {
-            const dismissToastButton = toastElement.querySelector(
-              '[aria-label="close"]',
-            );
-            if (dismissToastButton) {
-              userEvent.click(dismissToastButton);
-              waitFor(() => {
-                expect(toastElement).not.toBeInTheDocument();
-                // Reopen for Visual test
-                const buttonElement = canvas.getByText(
-                  `Open ${args.severity} toast`,
-                );
-                userEvent.click(buttonElement);
-              });
-            }
-          }
-        });
-      });
-    }
   };
 
 const Single: StoryObj<ToastProps> = {
@@ -282,7 +251,45 @@ export const Dismissible: StoryObj<ToastProps> = {
     linkUrl: "#",
   },
   play: async ({ args, canvasElement, step }) => {
-    await openToast({ canvasElement, step })(args, "Dismissible Toast");
+    const canvas = within(canvasElement);
+    await step(`open Dismissible Toast}`, async () => {
+      await waitFor(() => {
+        const buttonElement = canvas.getByText(`Open ${args.severity} toast`);
+        userEvent.hover(buttonElement);
+        userEvent.click(buttonElement);
+        userEvent.tab();
+      });
+    });
+
+    await step("link in toast", async () => {
+      await waitFor(() => {
+        const toastLink = canvas.getByText(args.linkText || "");
+        expect(toastLink).toHaveAttribute("href", args.linkUrl);
+      });
+    });
+
+    await step("dismiss toast", async () => {
+      await waitFor(() => {
+        const toastElement = canvas.getByRole("status");
+        if (toastElement) {
+          const dismissToastButton = toastElement.querySelector(
+            '[aria-label="close"]',
+          );
+          if (dismissToastButton) {
+            userEvent.click(dismissToastButton);
+            waitFor(() => {
+              expect(toastElement).not.toBeInTheDocument();
+
+              const buttonElement = canvas.getByText(
+                `Open ${args.severity} toast`,
+              );
+              userEvent.click(buttonElement);
+            });
+          }
+        }
+      });
+      await axeRun("Dismissible Toast");
+    });
   },
 };
 

@@ -191,19 +191,25 @@ export const Disabled: StoryObj<TooltipProps> = {
 export const Placement: StoryObj<TooltipProps> = {
   render: function C({}) {
     return (
-      <Box sx={{ mt: "50px" }}>
-        <Tooltip text="Top" placement="top" ariaType="label">
-          <Tag label="Bow" />
-        </Tooltip>
-        <Tooltip text="Left" placement="left" ariaType="label">
-          <Tag label="Stern" />
-        </Tooltip>
-        <Tooltip text="Bottom" placement="bottom" ariaType="label">
-          <Tag label="Port" />
-        </Tooltip>
-        <Tooltip text="Right" placement="right" ariaType="label">
-          <Tag label="Starboard" />
-        </Tooltip>
+      <Box sx={{ display: "flex", alignItems: "center", margin: "40px 50px" }}>
+        <Box>
+          <Tooltip text="Left" placement="left" ariaType="label">
+            <Tag label="Stern" />
+          </Tooltip>
+        </Box>
+        <Box sx={{ display: "flex", flexDirection: "column" }}>
+          <Tooltip text="Top" placement="top" ariaType="label">
+            <Tag label="Bow" />
+          </Tooltip>
+          <Tooltip text="Bottom" placement="bottom" ariaType="label">
+            <Tag label="Port" />
+          </Tooltip>
+        </Box>
+        <Box>
+          <Tooltip text="Right" placement="right" ariaType="label">
+            <Tag label="Starboard" />
+          </Tooltip>
+        </Box>
       </Box>
     );
   },
@@ -218,6 +224,7 @@ export const Placement: StoryObj<TooltipProps> = {
       userEvent.hover(portTag);
       const starboardTag = canvas.getByText("Starboard");
       userEvent.hover(starboardTag);
+      await axeRun("Tooltip Placement");
     });
   },
 };
