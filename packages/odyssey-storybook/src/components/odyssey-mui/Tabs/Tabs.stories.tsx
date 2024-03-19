@@ -111,15 +111,18 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
       },
     },
     notificationCountMax: {
-      control: { type: "number" },
+      control: {
+        type: "select",
+      },
+      options: ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100"],
       description:
-        "The limit at which the badge will show '`{notificationCountMax}`+'. A number between 0-999",
+        "The limit at which the badge will show `{notificationCountMax} +`. Can be increments of 10, up to 100",
       table: {
         type: {
-          summary: "number",
+          summary: "10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | 100",
         },
         defaultValue: {
-          summary: 100,
+          summary: "10",
         },
       },
       type: {
@@ -129,9 +132,10 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
     },
   },
   args: {
-    value: "stars",
-    label: "Stars",
     children: "This is the tab content. This tab happens to be about stars.",
+    notificationCountMax: 10,
+    label: "Stars",
+    value: "stars",
   },
   decorators: [MuiThemeDecorator],
 };
