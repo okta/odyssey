@@ -49,7 +49,11 @@ import { useRowReordering } from "./useRowReordering";
 import { DataTableSettings } from "./DataTableSettings";
 import { MenuButton, MenuButtonProps } from "../MenuButton";
 import { Box } from "../Box";
-import { DataTableRowSelectionState } from ".";
+import {
+  DataTableColumn,
+  DataTableRowData,
+  DataTableRowSelectionState,
+} from ".";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
@@ -201,6 +205,10 @@ export type DataTableProps = {
    * The component to display when the query returns no results
    */
   noResultsPlaceholder?: ReactNode;
+  /**
+   * An optional set of filters to render in the filters menu
+   */
+  filters?: Array<DataFilter | DataTableColumn<DataTableRowData> | string>;
 };
 
 const displayColumnDefOptions = {
@@ -344,6 +352,7 @@ const DataTable = ({
   errorMessage: errorMessageProp,
   emptyPlaceholder,
   noResultsPlaceholder,
+  filters: filtersProp,
 }: DataTableProps) => {
   const [data, setData] = useState<MRT_RowData[]>([]);
   const [pagination, setPagination] = useState({
@@ -445,20 +454,73 @@ const DataTable = ({
     ],
   );
 
-  const dataTableFilters = useMemo(
-    () =>
-      columns
-        .filter((column) => column.enableColumnFilter !== false)
-        .map((column) => {
-          return {
-            id: column.accessorKey as string,
-            label: column.header,
-            variant: column.filterVariant ?? "text",
-            options: column.filterSelectOptions,
-          } as DataFilter;
-        }),
-    [columns],
+  /**
+   * This hack is to provide compatibility with Material-React-Table's
+   * filterOptions format, which allows for strings and { label: string, value: string }
+   */
+  const convertFilterSelectOptions = useCallback(
+    (options: DataTableColumn<DataTableRowData>["filterSelectOptions"]) =>
+      options?.map((option) =>
+        typeof option === "string"
+          ? {
+              label: option,
+              value: option,
+            }
+          : {
+              // If the option isn't a string, it must have value and/or option defined
+              // If either is undefined, use the other
+              label: option.label ?? option.value,
+              value: option.value ?? option.label,
+            },
+      ),
+    [],
   );
+
+  const convertColumnToFilter = useCallback(
+    (column: DataTableColumn<DataTableRowData>) =>
+      column.enableColumnFilter && column.accessorKey
+        ? ({
+            id: column.accessorKey,
+            label: column.header,
+            variant: column.filterVariant,
+            options: convertFilterSelectOptions(column.filterSelectOptions),
+          } satisfies DataFilter as DataFilter)
+        : null,
+    [],
+  );
+
+  /**
+   * Filters default to the columns, but can be overridden
+   * with the `filters` prop. `filters` should be an array
+   * of column accessorKeys, column defs, or DataFilters.
+   */
+  const dataTableFilters = useMemo(() => {
+    const providedFilters = filtersProp || columns;
+    return providedFilters.reduce<DataFilter[]>((accumulator, item) => {
+      if (typeof item === "string") {
+        const foundColumn = columns.find(
+          (column) => column.accessorKey === item,
+        );
+        if (foundColumn) {
+          const filter = convertColumnToFilter(foundColumn);
+          if (filter) {
+            accumulator.push(filter);
+          }
+        }
+      } else if ("accessorKey" in item) {
+        // Checks if it's a column
+        const filter = convertColumnToFilter(item);
+        if (filter) {
+          accumulator.push();
+        }
+      } else if ("label" in item) {
+        // Checks if it's a DataFilter
+        accumulator.push(item);
+      }
+      // If none of the conditions match, item is ignored (not mapping to undefined)
+      return accumulator;
+    }, []);
+  }, [columns, filtersProp]);
 
   const defaultCell = useCallback(
     ({ cell }: { cell: MRT_Cell<MRT_RowData> }) => {

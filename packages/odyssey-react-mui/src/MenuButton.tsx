@@ -10,21 +10,17 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, type ReactElement, useCallback, useMemo, useState } from "react";
 import {
-  Divider,
-  ListSubheader,
-  Menu as MuiMenu,
-  PopoverOrigin,
-} from "@mui/material";
+  memo,
+  type ReactElement,
+  useCallback,
+  useMemo,
+  useState,
+  ReactNode,
+} from "react";
+import { Menu as MuiMenu, PopoverOrigin } from "@mui/material";
 
-import {
-  Button,
-  buttonSizeValues,
-  buttonVariantValues,
-  MenuItem,
-  useUniqueId,
-} from "./";
+import { Button, buttonSizeValues, buttonVariantValues, useUniqueId } from "./";
 import { ChevronDownIcon, MoreIcon } from "./icons.generated";
 import { FieldComponentProps } from "./FieldComponentProps";
 import { MenuContext, MenuContextType } from "./MenuContext";
@@ -45,13 +41,7 @@ export type MenuButtonProps = {
   /**
    * The <MenuItem> components within the Menu.
    */
-  children:
-    | ReactElement<typeof MenuItem | typeof Divider | typeof ListSubheader>
-    | Array<
-        | ReactElement<typeof MenuItem | typeof Divider | typeof ListSubheader>
-        | NullElement
-      >
-    | NullElement;
+  children: ReactNode | NullElement;
   /**
    * The end Icon on the trigggering Button
    */

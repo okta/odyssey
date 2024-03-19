@@ -388,6 +388,7 @@ export const components = ({
           alignItems: "center",
           whiteSpace: "nowrap",
           color: odysseyTokens.TypographyColorSubordinate,
+          transform: "none",
 
           ...(ownerState.disabled === true && {
             display: "none",
@@ -432,6 +433,11 @@ export const components = ({
               },
             },
           },
+          "& > ul": {
+            paddingInlineStart: 0,
+            marginBlockStart: 0,
+            marginBlockEnd: 0,
+          },
         },
         loading: {
           paddingBlock: odysseyTokens.Spacing3,
@@ -444,6 +450,10 @@ export const components = ({
         popper: {
           background: "transparent",
           paddingBlockStart: odysseyTokens.Spacing1,
+          height: "100%",
+        },
+        paper: {
+          height: "100%",
         },
         inputRoot: ({ ownerState }) => ({
           ...(ownerState.readOnly === true && {
@@ -1613,9 +1623,6 @@ export const components = ({
           [`:has(> .${radioClasses.root})`]: {
             alignItems: "flex-start",
           },
-          [`& .${checkboxClasses.root}`]: {
-            marginBlockStart: 0,
-          },
           [`&:hover .${radioClasses.root}, &:hover .${checkboxClasses.root}`]: {
             color: odysseyTokens.TypographyColorBody,
           },
@@ -1828,9 +1835,9 @@ export const components = ({
           },
         }),
         input: {
-          // Set total height to 40px, factoring in borders on outer container
-          height: `calc(${odysseyTokens.Spacing4} - (${odysseyTokens.BorderWidthMain} * 2))`,
-          paddingBlock: odysseyTokens.Spacing3,
+          height: "auto",
+          // We're subtracting a pixel so the total height, including borders, is 40px
+          paddingBlock: `calc(${odysseyTokens.Spacing3} - ${odysseyTokens.BorderWidthMain})`,
           paddingInline: odysseyTokens.Spacing3,
           boxShadow: "none",
 
@@ -2275,7 +2282,9 @@ export const components = ({
       },
       styleOverrides: {
         select: {
-          paddingBlock: odysseyTokens.Spacing3,
+          height: "auto",
+          // We're subtracting a pixel so the total height, including borders, is 40px
+          paddingBlock: `calc(${odysseyTokens.Spacing3} - ${odysseyTokens.BorderWidthMain})`,
           paddingInline: odysseyTokens.Spacing3,
           minHeight: 0,
 

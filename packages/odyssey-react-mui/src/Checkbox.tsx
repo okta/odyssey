@@ -115,7 +115,7 @@ const Checkbox = ({
   const label = useMemo(() => {
     return (
       <>
-        {labelProp}
+        <Typography component="span">{labelProp}</Typography>
         {isRequired && (
           <>
             {" "}
@@ -164,10 +164,11 @@ const Checkbox = ({
           inputProps={{
             "data-se": testId,
           }}
+          disabled={isDisabled}
           inputRef={localInputRef}
-          sx={() => ({
+          sx={{
             marginBlockStart: "2px",
-          })}
+          }}
         />
       }
       disabled={isDisabled}

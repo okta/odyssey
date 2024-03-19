@@ -11,8 +11,12 @@
  */
 
 import type { Meta, StoryObj } from "@storybook/react";
-import { paginationTypeValues } from "@okta/odyssey-react-mui/labs";
 import {
+  UpdateFilters,
+  paginationTypeValues,
+} from "@okta/odyssey-react-mui/labs";
+import {
+  Box,
   Button,
   DataTable,
   DataTableEmptyState,
@@ -343,6 +347,16 @@ const filterData = ({
           });
         }
 
+        // In the custom filter examples, we provide a "starting letter"
+        // control that allows the user to filter by whether the
+        // first letter is a vowel or consonant
+        if (id === "startLetter" && typeof row.name === "string") {
+          const firstLetter = row.name[0]?.toLowerCase();
+          if (value === "vowel") return "aeiou".includes(firstLetter);
+          if (value === "consonant") return !"aeiou".includes(firstLetter);
+          return true;
+        }
+
         // General filtering for other columns
         return row[id as keyof (Planet | Person)]
           ?.toString()
@@ -375,11 +389,11 @@ const filterData = ({
   return filteredData;
 };
 
-const reorderData = ({
+const reorderData = <T extends { id: string | number }>({
   data,
   ...args
 }: {
-  data: (Planet | Person)[];
+  data: T[];
 } & DataTableOnReorderRowsType) => {
   const updatedData = data;
   const { rowId, newRowIndex } = args;
@@ -421,7 +435,7 @@ export const Default: StoryObj<DataTableProps> = {
     const onReorderRows = useCallback(
       ({ ...props }: DataTableOnReorderRowsType) => {
         const reorderedData = reorderData({ data, ...props });
-        setData(reorderedData as Planet[]);
+        setData(reorderedData);
       },
       [data],
     );
@@ -473,7 +487,7 @@ export const API: StoryObj<DataTableProps> = {
     const onReorderRows = useCallback(
       ({ ...props }: DataTableOnReorderRowsType) => {
         const reorderedData = reorderData({ data, ...props });
-        setData(reorderedData as Person[]);
+        setData(reorderedData);
       },
       [data],
     );
@@ -550,7 +564,7 @@ export const Empty: StoryObj<DataTableProps> = {
     const onReorderRows = useCallback(
       ({ ...props }: DataTableOnReorderRowsType) => {
         const reorderedData = reorderData({ data, ...props });
-        setData(reorderedData as Planet[]);
+        setData(reorderedData);
       },
       [data],
     );
@@ -584,6 +598,272 @@ export const Empty: StoryObj<DataTableProps> = {
         onReorderRows={onReorderRows}
         onChangeRowSelection={onChangeRowSelection}
         emptyPlaceholder={emptyPlaceholder}
+      />
+    );
+  },
+};
+
+export const CustomFilters: StoryObj<DataTableProps> = {
+  args: {
+    hasChangeableDensity: true,
+    hasColumnResizing: true,
+    hasColumnVisibility: false,
+    hasFilters: true,
+    hasPagination: false,
+    hasRowSelection: false,
+    hasSearch: true,
+    hasSorting: true,
+    hasRowReordering: false,
+  },
+  render: function C(props) {
+    const [data, setData] = useState<Planet[]>(planetData);
+
+    const getData = useCallback(
+      ({ ...props }: DataTableGetDataType) => {
+        return filterData({ data, ...props });
+      },
+      [data],
+    );
+
+    const onReorderRows = useCallback(
+      ({ ...props }: DataTableOnReorderRowsType) => {
+        const reorderedData = reorderData({ data, ...props });
+        setData(reorderedData);
+      },
+      [data],
+    );
+
+    const filters = useMemo(
+      () => [
+        ...planetColumns,
+        {
+          id: "startLetter",
+          label: "Name starting with...",
+          render: (updateFilters: UpdateFilters) => (
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignContent: "stretch",
+                gap: 2,
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "stretch",
+                  flexDirection: "column",
+                }}
+              >
+                <Button
+                  variant="secondary"
+                  label="Vowel"
+                  isFullWidth
+                  onClick={() =>
+                    updateFilters({ filterId: "startLetter", value: "vowel" })
+                  }
+                />
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "stretch",
+                  flexDirection: "column",
+                }}
+              >
+                <Button
+                  variant="secondary"
+                  label="Consonant"
+                  isFullWidth
+                  onClick={() =>
+                    updateFilters({
+                      filterId: "startLetter",
+                      value: "consonant",
+                    })
+                  }
+                />
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "stretch",
+                  flexDirection: "column",
+                }}
+              >
+                <Button
+                  variant="secondary"
+                  label="Any"
+                  isFullWidth
+                  onClick={() =>
+                    updateFilters({ filterId: "startLetter", value: "any" })
+                  }
+                />
+              </Box>
+            </Box>
+          ),
+        },
+      ],
+      [],
+    );
+
+    return (
+      <DataTable
+        {...props}
+        columns={planetColumns}
+        filters={filters}
+        getData={getData}
+        onReorderRows={onReorderRows}
+      />
+    );
+  },
+};
+
+export const FilterWithCustomRender: StoryObj<DataTableProps> = {
+  args: {
+    hasChangeableDensity: true,
+    hasColumnResizing: true,
+    hasColumnVisibility: false,
+    hasFilters: true,
+    hasPagination: false,
+    hasRowSelection: true,
+    hasSearch: true,
+    hasSorting: true,
+    hasRowReordering: false,
+  },
+  render: function C(props) {
+    const [data, setData] = useState<Planet[]>(planetData);
+
+    const getData = useCallback(
+      ({ ...props }: DataTableGetDataType) => {
+        return filterData({ data, ...props });
+      },
+      [data],
+    );
+
+    const onReorderRows = useCallback(
+      ({ ...props }: DataTableOnReorderRowsType) => {
+        const reorderedData = reorderData({ data, ...props });
+        setData(reorderedData);
+      },
+      [data],
+    );
+
+    const onChangeRowSelection = useCallback(
+      (rowSelection: DataTableRowSelectionState) => {
+        if (Object.keys(rowSelection).length > 0) {
+          console.log(`${Object.keys(rowSelection).length} selected`);
+        }
+      },
+      [],
+    );
+
+    const filters = useMemo(() => {
+      // Filter out the column with the id of "type"
+      const filteredPlanetColumns = planetColumns.filter(
+        (column) => column.id !== "visit",
+      );
+
+      return [
+        ...filteredPlanetColumns,
+        {
+          id: "visit",
+          label: "Type of visit 🚀",
+          render: (updateFilters: UpdateFilters) => (
+            <Box>
+              <Button
+                variant="secondary"
+                label="🛬 Landing"
+                onClick={() =>
+                  updateFilters({ filterId: "visit", value: "landing" })
+                }
+              />
+              <Button
+                variant="secondary"
+                label="🛰️ Orbit"
+                onClick={() =>
+                  updateFilters({ filterId: "visit", value: "orbit" })
+                }
+              />
+              <Button
+                variant="secondary"
+                label="🛸 Flyby"
+                onClick={() =>
+                  updateFilters({ filterId: "visit", value: "flyby" })
+                }
+              />
+              <Button
+                variant="secondary"
+                label="🤷‍♂️ Any"
+                onClick={() => updateFilters({ filterId: "visit", value: "" })}
+              />
+            </Box>
+          ),
+        },
+      ];
+    }, []);
+
+    return (
+      <DataTable
+        {...props}
+        columns={planetColumns}
+        filters={filters}
+        getData={getData}
+        onReorderRows={onReorderRows}
+        onChangeRowSelection={onChangeRowSelection}
+      />
+    );
+  },
+};
+
+export const CustomFilterWithDefaultVariant: StoryObj<DataTableProps> = {
+  args: {
+    hasChangeableDensity: true,
+    hasColumnResizing: true,
+    hasColumnVisibility: false,
+    hasFilters: true,
+    hasPagination: false,
+    hasRowSelection: false,
+    hasSearch: true,
+    hasSorting: true,
+    hasRowReordering: false,
+  },
+  render: function C(props) {
+    const [data] = useState<Planet[]>(planetData);
+
+    const getData = useCallback(
+      ({ ...props }: DataTableGetDataType) => {
+        return filterData({ data, ...props });
+      },
+      [data],
+    );
+
+    const filters = useMemo<DataTableProps["filters"]>(() => {
+      return [
+        ...planetColumns,
+        {
+          id: "startLetter",
+          label: "Starting letter",
+          variant: "select",
+          options: [
+            {
+              label: "Vowel",
+              value: "vowel",
+            },
+            {
+              label: "Consonant",
+              value: "consonant",
+            },
+          ],
+        },
+      ];
+    }, [planetColumns]);
+
+    return (
+      <DataTable
+        {...props}
+        columns={planetColumns}
+        filters={filters}
+        getData={getData}
       />
     );
   },
