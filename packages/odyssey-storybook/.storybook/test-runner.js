@@ -13,7 +13,7 @@ module.exports = {
    * The page argument is the Playwright's page object for the story.
    * The context argument is a Storybook object containing the story's id, title, and name.
    */
-  async preRender(page, context) {
+  async preVisit(page, context) {
     await injectAxe(page);
   },
 
@@ -21,7 +21,7 @@ module.exports = {
    * The page argument is the Playwright's page object for the story
    * The context argument is a Storybook object containing the story's id, title, and name.
    */
-  async postRender(page, context) {
+  async postVisit(page, context) {
     await new Promise((r) => setTimeout(r, 500));
 
     // https://github.com/abhinaba-ghosh/axe-playwright#parameters-on-checka11y-axerun
