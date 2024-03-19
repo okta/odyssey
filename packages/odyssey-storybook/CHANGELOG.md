@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.6](https://github.com/okta/odyssey/compare/v1.15.5...v1.15.6) (2024-03-19)
+
+### Bug Fixes
+
+- add initator to the config ([032490d](https://github.com/okta/odyssey/commit/032490d91153384e7680a5ed351782896f806ac5))
+- add initator to the config ([5da0247](https://github.com/okta/odyssey/commit/5da024770bae95796f1b43edd8d7e39f962df8e9))
+- add initator to the config ([f5a2dd0](https://github.com/okta/odyssey/commit/f5a2dd055610ddd53220e7d8f5da97d3f98b2258))
+- applitools config ([1f9a591](https://github.com/okta/odyssey/commit/1f9a591205c9d8fd1f605519728e1114ab7ff3b3))
+
 ## [1.15.5](https://github.com/okta/odyssey/compare/v1.15.4...v1.15.5) (2024-03-19)
 
 ### Bug Fixes
