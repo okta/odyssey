@@ -303,13 +303,7 @@ const Select = <
   );
 
   const Chips = useCallback(
-    ({
-      selection,
-      isInteractive,
-    }: {
-      selection: string[];
-      isInteractive: boolean;
-    }) => {
+    ({ isInteractive }: { isInteractive: boolean }) => {
       const removeSelection = (itemToRemove: string) => {
         if (Array.isArray(internalSelectedValues)) {
           const newValue = internalSelectedValues.filter(
@@ -328,46 +322,48 @@ const Select = <
         event.stopPropagation();
 
       return (
-        <ChipsInnerContainer
-          isInteractive={isInteractive}
-          odysseyDesignTokens={odysseyDesignTokens}
-        >
-          {selection.map(
-            (item: string) =>
-              item?.length > 0 && (
-                <MuiChip
-                  key={item}
-                  label={
-                    <>
-                      {item}
-                      {!isInteractive &&
-                        controlledStateRef.current === CONTROLLED &&
-                        hasMultipleChoices && (
-                          <NonInteractiveIcon
-                            odysseyDesignTokens={odysseyDesignTokens}
-                          />
-                        )}
-                    </>
-                  }
-                  tabIndex={-1}
-                  onDelete={
-                    isInteractive && controlledStateRef.current === CONTROLLED
-                      ? () => removeSelection(item)
-                      : undefined
-                  }
-                  deleteIcon={
-                    <CloseCircleFilledIcon
-                      sx={{ pointerEvents: "auto" }}
-                      // We need to stop event propagation on mouse down to prevent the deletion
-                      // from being blocked by the Select list opening, and also ensure that
-                      // the pointerEvent is registered even when the parent's are not
-                      onMouseDown={stopPropagation}
-                    />
-                  }
-                />
-              ),
-          )}
-        </ChipsInnerContainer>
+        Array.isArray(internalSelectedValues) && (
+          <ChipsInnerContainer
+            isInteractive={isInteractive}
+            odysseyDesignTokens={odysseyDesignTokens}
+          >
+            {internalSelectedValues.map(
+              (item: string) =>
+                item?.length > 0 && (
+                  <MuiChip
+                    key={item}
+                    label={
+                      <>
+                        {item}
+                        {!isInteractive &&
+                          controlledStateRef.current === CONTROLLED &&
+                          hasMultipleChoices && (
+                            <NonInteractiveIcon
+                              odysseyDesignTokens={odysseyDesignTokens}
+                            />
+                          )}
+                      </>
+                    }
+                    tabIndex={-1}
+                    onDelete={
+                      isInteractive && controlledStateRef.current === CONTROLLED
+                        ? () => removeSelection(item)
+                        : undefined
+                    }
+                    deleteIcon={
+                      <CloseCircleFilledIcon
+                        sx={{ pointerEvents: "auto" }}
+                        // We need to stop event propagation on mouse down to prevent the deletion
+                        // from being blocked by the Select list opening, and also ensure that
+                        // the pointerEvent is registered even when the parent's are not
+                        onMouseDown={stopPropagation}
+                      />
+                    }
+                  />
+                ),
+            )}
+          </ChipsInnerContainer>
+        )
       );
     },
     [
@@ -416,8 +412,7 @@ const Select = <
   );
 
   const renderValue = useCallback(
-    (value: Value) =>
-      Array.isArray(value) && <Chips selection={value} isInteractive={false} />,
+    (value: Value) => Array.isArray(value) && <Chips isInteractive={false} />,
     [Chips],
   );
 
@@ -427,32 +422,38 @@ const Select = <
       errorMessageElementId,
       id,
       labelElementId,
-    }: SelectRenderProps) => (
-      <SelectContainer>
-        <MuiSelect
-          {...inputValues}
-          aria-describedby={ariaDescribedBy}
-          aria-errormessage={errorMessageElementId}
-          children={children}
-          id={id}
-          inputProps={{ "data-se": testId }}
-          inputRef={localInputRef}
-          labelId={labelElementId}
-          multiple={hasMultipleChoices}
-          name={nameOverride ?? id}
-          onBlur={onBlur}
-          onChange={onChange}
-          onFocus={onFocus}
-          renderValue={hasMultipleChoices ? renderValue : undefined}
-          translate={translate}
-        />
-        {hasMultipleChoices && Array.isArray(value) && (
-          <ChipsPositioningContainer odysseyDesignTokens={odysseyDesignTokens}>
-            <Chips selection={value} isInteractive={true} />
-          </ChipsPositioningContainer>
-        )}
-      </SelectContainer>
-    ),
+    }: SelectRenderProps) => {
+      return (
+        <SelectContainer>
+          <MuiSelect
+            {...inputValues}
+            aria-describedby={ariaDescribedBy}
+            aria-errormessage={errorMessageElementId}
+            children={children}
+            id={id}
+            inputProps={{ "data-se": testId }}
+            inputRef={localInputRef}
+            labelId={labelElementId}
+            multiple={hasMultipleChoices}
+            name={nameOverride ?? id}
+            onBlur={onBlur}
+            onChange={onChange}
+            onFocus={onFocus}
+            renderValue={hasMultipleChoices ? renderValue : undefined}
+            translate={translate}
+          />
+          {hasMultipleChoices && (
+            <>
+              <ChipsPositioningContainer
+                odysseyDesignTokens={odysseyDesignTokens}
+              >
+                <Chips isInteractive={true} />
+              </ChipsPositioningContainer>
+            </>
+          )}
+        </SelectContainer>
+      );
+    },
     [
       children,
       Chips,
