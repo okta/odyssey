@@ -34,7 +34,7 @@ const storyBookMeta: Meta<EmptyStateProps> = {
 
     text: {
       control: "text",
-      description: "The main heading of the empty state",
+      description: "A descriptive text explaining more context",
       type: {
         required: true,
         name: "string",
