@@ -163,7 +163,7 @@ const checkTheBox =
       }
       userEvent.tab();
       expect(checkBox).toBeChecked();
-      axeRun(actionName);
+      await axeRun(actionName);
     });
   };
 
