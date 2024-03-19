@@ -14,10 +14,6 @@ const branchName = process.env.GITHUB_HEAD_REF;
 const parentBranchName = process.env.GITHUB_BASE_REF;
 const shortCommitHash = process.env.GITHUB_SHA.slice(0, 7);
 
-console.log(branchName)
-console.log(parentBranchName)
-console.log(shortCommitHash)
-
 module.exports = {
   accessibilityValidation: {
     level: "AA",
