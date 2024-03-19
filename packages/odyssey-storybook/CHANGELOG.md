@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.5](https://github.com/okta/odyssey/compare/v1.15.4...v1.15.5) (2024-03-19)
+
+### Bug Fixes
+
+- added the config ([5d114e0](https://github.com/okta/odyssey/commit/5d114e02af9b86a4f5da2763e0f22da1d9dafda1))
+- new upgrade ([27a84ea](https://github.com/okta/odyssey/commit/27a84eadae827c5ea29381a11f010aee197cd5fd))
+- some adjustments ([01e244a](https://github.com/okta/odyssey/commit/01e244ab114776e5772d7c25a8cb204ca831cb00))
+
 ## [1.15.4](https://github.com/okta/odyssey/compare/v1.15.3...v1.15.4) (2024-03-18)
 
 **Note:** Version bump only for package @okta/odyssey-storybook

@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.5](https://github.com/okta/odyssey/compare/v1.15.4...v1.15.5) (2024-03-19)
+
+**Note:** Version bump only for package @okta/odyssey-icons
+
 ## [1.15.4](https://github.com/okta/odyssey/compare/v1.15.3...v1.15.4) (2024-03-18)
 
 **Note:** Version bump only for package @okta/odyssey-icons
