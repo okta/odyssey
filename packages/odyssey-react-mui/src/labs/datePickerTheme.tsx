@@ -44,7 +44,7 @@ const dateStyles: StateStyles = {
   }),
   outsideOfMonth: ({ theme }) => ({
     backgroundColor: "transparent",
-    color: theme.palette.text.disabled,
+    color: theme.palette.grey[400],
   }),
   selected: ({ theme }) => ({
     backgroundColor: theme.palette.primary.main,
@@ -80,8 +80,9 @@ const yearStyles: StateStyles = {
     backgroundColor: "transparent",
     color: theme.palette.text.primary,
     paddingBlock: theme.spacing(3),
-    paddingInline: theme.spacing(3),
+    paddingInline: theme.spacing(4),
     width: "auto",
+    height: "auto",
   }),
   disabled: ({ theme }) => ({
     backgroundColor: "transparent",
@@ -101,7 +102,6 @@ const yearStyles: StateStyles = {
   selected: ({ theme }) => ({
     backgroundColor: "transparent",
     color: theme.palette.primary.main,
-    fontWeight: theme.typography.fontWeightBold,
   }),
 };
 
@@ -116,7 +116,7 @@ const yearCheckStyles: StateStyles = {
     maskRepeat: "no-repeat",
     position: "absolute",
     right: theme.spacing(4),
-    width: theme.typography.h6.fontSize,
+    width: theme.spacing(4),
   }),
 };
 
@@ -129,40 +129,37 @@ export const datePickerTheme: ThemeOptions = {
           borderStyle: theme.mixins.borderStyle,
           borderWidth: theme.mixins.borderWidth,
           borderRadius: theme.mixins.borderRadius,
-          paddingBottom: theme.spacing(popupSpacingValue),
-          paddingTop: theme.spacing(4),
+          padding: `${theme.spacing(4)} ${theme.spacing(5)}`,
           width: "100%",
         }),
       },
     },
     MuiPickersLayout: {
       styleOverrides: {
-        contentWrapper: () => ({
+        contentWrapper:{
           "& > div": {
             width: `${(296 / 16) * (16 / 14)}rem`,
           },
-        }),
+        },
       },
     },
     MuiDayCalendar: {
       styleOverrides: {
-        header: ({ theme }) => ({
-          gap: theme.spacing(1),
+        header: {
+          // gap: theme.spacing(1),
           justifyContent: "space-between",
-          paddingLeft: theme.spacing(popupSpacingValue),
-          paddingRight: theme.spacing(popupSpacingValue),
-        }),
+          // padding: `0 ${theme.spacing(1)}`,
+          // paddingRight: theme.spacing(popupSpacingValue),
+        },
         slideTransition: () => ({
           minHeight: `${(214 / 16) * (16 / 14)}rem`,
         }),
         weekContainer: ({ theme }) => ({
-          gap: theme.spacing(1),
           justifyContent: "space-between",
           marginBottom: theme.spacing(1),
           marginLeft: 0,
           marginRight: 0,
-          paddingLeft: theme.spacing(popupSpacingValue),
-          paddingRight: theme.spacing(popupSpacingValue),
+          padding: 0,
 
           "&:last-child": {
             marginBottom: 0,
@@ -170,15 +167,20 @@ export const datePickerTheme: ThemeOptions = {
         }),
         weekDayLabel: ({ theme }) => ({
           color: theme.palette.grey[900],
-          flexBasis: theme.spacing(6),
+          // flexBasis: theme.spacing(6),
           flexShrink: 0,
-          fontSize: theme.typography.subtitle1.fontSize,
-          fontWeight: theme.typography.fontWeightBold,
-          height: theme.spacing(6),
+          // fontWeight: theme.typography.fontWeightBold,
+          // height: theme.spacing(6),
           marginBottom: theme.spacing(2),
           marginLeft: 0,
           marginRight: 0,
           width: theme.spacing(6),
+          height: "auto",
+          fontSize: theme.typography.overline.fontSize,
+          fontWeight: theme.typography.overline.fontWeight,
+          lineHeight: theme.typography.overline.lineHeight,
+          letterSpacing: theme.typography.overline.letterSpacing,
+          textTransform: theme.typography.overline.textTransform,
         }),
       },
     },
@@ -202,11 +204,16 @@ export const datePickerTheme: ThemeOptions = {
           fontWeight: theme.typography.fontWeightBold,
         }),
         root: ({ theme }) => ({
-          marginBottom: theme.spacing(1),
+          justifyContent: "space-between",
+          marginBottom: theme.spacing(3),
           marginTop: 0,
-          padding: `0 ${theme.spacing(popupSpacingValue)}`,
+          padding: `0  0 ${theme.spacing(3)}`,
           width: "auto",
+          borderBottom: `1px solid ${theme.palette.grey[100]}`,
         }),
+        labelContainer: {
+          marginRight: 0,
+        },
       },
     },
     MuiPickersDay: {
@@ -271,15 +278,12 @@ export const datePickerTheme: ThemeOptions = {
     MuiYearCalendar: {
       styleOverrides: {
         root: ({ theme }) => ({
-          alignItems: "flex-start",
-          flexDirection: "column",
-          flexWrap: "nowrap",
+          display: "block",
+          width: "auto",
+          maxHeight: `${(284 / 16) * (16 / 14)}rem`,
           marginBottom: `-${theme.spacing(popupSpacingValue)}`,
           marginInlineEnd: 0,
-          maxHeight: `${(284 / 16) * (16 / 14)}rem`,
-          paddingLeft: `calc(${theme.spacing(
-            popupSpacingValue,
-          )} + ${theme.spacing(3)})`,
+          paddingLeft: 0,
           paddingRight: 0,
         }),
       },
@@ -293,15 +297,17 @@ export const datePickerTheme: ThemeOptions = {
         yearButton: ({ theme }) => [
           yearStyles.default({ theme }),
           {
-            alignItems: "center",
-            borderRadius: 0,
+            position: "relative",
             display: "flex",
-            fontSize: theme.typography.body1.fontSize,
+            alignItems: "center",
             justifyContent: "flex-start",
+            width: "100%",
             marginBottom: 0,
             marginTop: 0,
-            // paddingLeft: theme.spacing(7),
-            position: "relative",
+            paddingBlock: theme.spacing(3),
+            paddingInline: theme.spacing(4),
+            borderRadius: theme.shape.borderRadius,
+            fontSize: theme.typography.body1.fontSize,
 
             "&:hover": yearStyles.hover({ theme }),
 
@@ -321,9 +327,17 @@ export const datePickerTheme: ThemeOptions = {
     },
     MuiPickersArrowSwitcher: {
       styleOverrides: {
+        root: {
+          ":dir(rtl)": {
+            flexDirection: "row-reverse",
+          },
+        },
         spacer: ({ theme }) => ({
-          width: theme.spacing(6),
+          width: theme.spacing(3),
         }),
+        button: {
+          margin: 0,
+        },
       },
     },
   },

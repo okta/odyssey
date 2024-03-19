@@ -28,8 +28,8 @@ const StorybookDatePicker = (props: DatePickerProps) => {
   const datePickerProps: DatePickerProps = useMemo(
     () => ({
       ...props,
-      onDateChange: (date) => {
-        console.log({date})
+      onCalendarDateChange: (date) => {
+        console.log({ date });
         // console.log({ newValue });
         // console.log('date in consumer onChange', date)
         if (date) {

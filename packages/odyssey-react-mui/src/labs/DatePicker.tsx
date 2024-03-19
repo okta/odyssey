@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { forwardRef, memo, useCallback,useEffect,  useRef, useState } from "react";
+import { forwardRef, memo, useCallback, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   DatePicker as MuiDatePicker,
@@ -33,35 +33,35 @@ import { DateField, DateFieldProps } from "./DateField";
 import { datePickerTheme } from "./datePickerTheme";
 // import { RenderFieldProps } from "../Field";
 import { OdysseyThemeProvider } from "../OdysseyThemeProvider";
-import {
-  // ComponentControlledState,
-  getControlState,
-  useInputValues,
-} from "../inputUtils";
+import { formatLanguageCodeToHyphenated } from "../OdysseyTranslationProvider";
+// import {
+//   ComponentControlledState,
+//   getControlState,
+//   // useInputValues,
+// } from "../inputUtils";
 
 export type DatePickerProps = {
-  defaultValue?: string;
+  defaultValue?: Date;
   hint?: DateFieldProps["hint"];
   label: string;
   minDate: MuiDatePickerProps<Date>["minDate"];
   /**
    * Callback fired when the a date is selected with the calendar.
    */
-  onDateChange?: (date: Date | null) => void;
+  onCalendarDateChange?: (date: Date | null) => void;
   /**
    * Callback fired when the textbox receives typed characters.
    */
   onInputChange?: (value: string) => void;
   onChange: (date: Date | null, validationError: string | null) => void;
-  value?: string;
+  value?: Date;
 };
 
-// const DateFieldComponent = (props: any) => <DateField {...props} />
-
-const Field = ({hint, label, onChange, onAdornmentClick, ...muiProps}: DateFieldProps & { onAdornmentClick?: () => void }) => {
+const Field = ({ defaultValue, hint, label, onChange, onAdornmentClick, value}: DateFieldProps & { onAdornmentClick?: () => void }) => {
   return (
     <DateField
-      {...muiProps}
+      // {...muiProps}
+      defaultValue={defaultValue}
       endAdornment={
         <InputAdornment position="end">
           <Button
@@ -77,13 +77,9 @@ const Field = ({hint, label, onChange, onAdornmentClick, ...muiProps}: DateField
       hint={hint}
       label={label}
       onChange={onChange}
+      value={value}
     />
-  )
-}
-
-type FormattedInputValues = {
-  value?: DateTime;
-  defaultValue?: DateTime;
+  );
 }
 
 const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
@@ -92,20 +88,15 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       defaultValue: defaultValueProp,
       hint,
       label,
-      minDate = new Date(),
-      onDateChange,
-      // onInputChange,
+      minDate,
+      onCalendarDateChange,
+      onInputChange: onInputChangeProp,
       value: valueProp,
     },
     ref,
   ) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [formattedInputValues, setFormattedInputValues] =
-      useState<FormattedInputValues>({
-        defaultValue: undefined,
-        value: undefined,
-      });
-
+    
     const { i18n } = useTranslation();
     const { language } = i18n;
 
@@ -114,81 +105,40 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
 
     const containerRef = useRef<HTMLInputElement>(null);
 
-    const controlledStateRef = useRef(
-      getControlState({
-        controlledValue: valueProp,
-        uncontrolledValue: defaultValueProp,
-      }),
-    );
-
-    // const getInputValues = useCallback(() => {
-    //   return useInputValues({
-    //     defaultValue: defaultValueProp || undefined,
-    //     value: valueProp || undefined,
-    //     controlState: controlledStateRef.current,
-    //   });
-    // }, [controlledStateRef, defaultValueProp, valueProp]);
-
-    useEffect(() => {
-      // const { value, defaultValue } = getInputValues();
-
-      const isValidDate = (date: Date) => !isNaN(date.getTime());
-
-      if (value) {
-        console.log({ value });
-        const valueAsDate = new Date(value);
-
-        setFormattedInputValues({
-          value: isValidDate(valueAsDate)
-            ? DateTime.fromJSDate(valueAsDate)
-            : undefined,
-        });
-      }
-
-      if (defaultValue) {
-        const defaultValueAsDate = new Date(defaultValue);
-
-        setFormattedInputValues({
-          defaultValue: isValidDate(defaultValueAsDate)
-            ? DateTime.fromJSDate(defaultValueAsDate)
-            : undefined,
-        });
-      }
-    }, [controlledStateRef, defaultValueProp, valueProp]);
-
-    // const getInputValueAsDateTime = useCallback(() => {
-    //   const { value, defaultValue } = inputValues;
-
-    //   const isValidDate = (date: Date) => !isNaN(date.getTime());
-
-    //   if (value) {
-    //     const valueAsDate = new Date(value);
-
-    //     return {
-    //       value: isValidDate(valueAsDate)
-    //         ? DateTime.fromJSDate(valueAsDate)
-    //         : null,
-    //     };
-    //   }
-
-    //   if (defaultValue) {
-    //     const defaultValueAsDate = new Date(defaultValue);
-
-    //     return {
-    //       defaultValue: isValidDate(defaultValueAsDate)
-    //         ? DateTime.fromJSDate(defaultValueAsDate)
-    //         : null,
-    //     };
-    //   }
-
-    //   return null;
-    // }, [controlledStateRef, inputValues]);
+    // const controlledStateRef = useRef(
+    //   getControlState({
+    //     controlledValue: valueProp,
+    //     uncontrolledValue: defaultValueProp,
+    //   }),
+    // );
 
     // useEffect(() => {
-    //   console.log({value}, 'in useEffect')
-    // }, [value])
+    //   const isValidDate = (date: Date) => !isNaN(date.getTime());
+    //   console.log(controlledStateRef);
+    //   if (
+    //     valueProp &&
+    //     controlledStateRef.current === ComponentControlledState.CONTROLLED) {
+    //     console.log("hey", valueProp);
 
-    // const inputValueAsDateTime = getInputValueAsDateTime();
+    //     const valueAsDate = new Date(valueProp);
+
+    //     setFormattedInputValues({
+    //       value: isValidDate(valueAsDate)
+    //         ? DateTime.fromJSDate(valueAsDate)
+    //         : undefined,
+    //     });
+    //   } else {
+    //     if (defaultValueProp) {
+    //       const defaultValueAsDate = new Date(defaultValueProp);
+
+    //       setFormattedInputValues({
+    //         defaultValue: isValidDate(defaultValueAsDate)
+    //           ? DateTime.fromJSDate(defaultValueAsDate)
+    //           : undefined,
+    //       });
+    //     }
+    //   }
+    // }, [controlledStateRef, defaultValueProp, valueProp]);
 
     const formatDateTimeToJsDateOnCalendarSelection = useCallback<
       NonNullable<MuiDatePickerProps<DateTime>["onChange"]>
@@ -202,11 +152,15 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
           // if (isValidDate(jsDateFromDateTime)) {
 
           // }
-          onDateChange?.(jsDateFromDateTime);
+          onCalendarDateChange?.(jsDateFromDateTime);
         }
       },
-      [onDateChange],
+      [onCalendarDateChange],
     );
+
+    const onInputChange = useCallback((args) => {
+      console.log({args})
+    }, [onInputChangeProp]);
 
     const formattedMinDate = useCallback<
       (minDate: Date | undefined) => DateTime | undefined
@@ -215,43 +169,45 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       [minDate],
     );
 
-    const formatDayOfWeek = (date: DateTime) => {
-      // console.log('date in format',{date})
-      return date.toFormat("EEE");
-    };
+    const formatDayOfWeek = (date: DateTime) =>  date.toFormat("EEE")
 
-    const toggleCalendarVisibility = useCallback(() => {
-      setIsOpen(!isOpen);
-    }, [isOpen]);
+    const toggleCalendarVisibility = useCallback(() => setIsOpen(!isOpen), [isOpen]);
 
     if (isInvalidLocale) {
       return null;
     }
-    console.log({ formattedInputValues });
+
     return (
       <OdysseyThemeProvider themeOverride={datePickerTheme}>
         <LocalizationProvider
           dateAdapter={AdapterLuxon}
-          adapterLocale={language}
+          adapterLocale={formatLanguageCodeToHyphenated(language)}
         >
           <div ref={containerRef}>
             <MuiDatePicker<DateTime>
-              {...formattedInputValues}
+              defaultValue={
+                defaultValueProp
+                  ? DateTime.fromJSDate(defaultValueProp)
+                  : undefined
+              }
+              value={valueProp ? DateTime.fromJSDate(valueProp) : undefined}
               dayOfWeekFormatter={(_, date) => formatDayOfWeek(date)}
+              key={language}
               label={label}
               minDate={formattedMinDate(minDate)}
               onChange={formatDateTimeToJsDateOnCalendarSelection}
-              onClose={toggleCalendarVisibility}
+              onClose={() => setIsOpen(false)}
               open={isOpen}
               ref={ref}
               slots={{
-                field: (muiProps) => (
+                field: ({ defaultValue, value }) => (
                   <Field
-                    {...muiProps}
+                    defaultValue={defaultValue}
                     hint={hint}
                     label={label}
-                    onChange={formatDateTimeToJsDateOnCalendarSelection}
+                    onChange={onInputChange}
                     onAdornmentClick={toggleCalendarVisibility}
+                    value={value}
                   />
                 ),
                 leftArrowIcon: () => <ArrowLeftIcon />,

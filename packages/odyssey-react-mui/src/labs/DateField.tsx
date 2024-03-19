@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, useCallback,  } from "react";
+import { KeyboardEventHandler, memo, useCallback, useState } from "react";
 import { InputAdornment } from "@mui/material";
 import {
   DateValidationError,
@@ -19,11 +19,9 @@ import {
   PickerChangeHandlerContext,
 } from "@mui/x-date-pickers";
 import { DateTime } from "luxon";
-// import { FieldChangeHandler } from '@mui/material';
 
 import { Field, RenderFieldProps } from "../Field";
 import { TextFieldProps } from "../TextField";
-// import { HtmlProps } from "../HtmlProps";
 
 export const textFieldTypeValues = [
   "email",
@@ -36,8 +34,8 @@ export const textFieldTypeValues = [
 export type DateFieldProps = MuiDateFieldProps<DateTime> & {
   defaultValue?: MuiDateFieldProps<DateTime>["value"];
   onChange: (
-    value: DateTime,
-    validationContext: PickerChangeHandlerContext<DateValidationError>,
+    value: DateTime | string,
+    validationContext?: PickerChangeHandlerContext<DateValidationError>,
   ) => void;
   value?: MuiDateFieldProps<DateTime>["value"];
 } & Pick<
@@ -74,9 +72,10 @@ const DateField =
       onFocus,
       placeholder,
       value,
-      // ...muiProps
     }: DateFieldProps
   ) => {
+    const [inputValueString, setInputValueString] = useState("");
+
     const handleChange = useCallback<
       NonNullable<MuiDateFieldProps<DateTime>["onChange"]>
     >(
@@ -85,25 +84,41 @@ const DateField =
         value,
         validationContext,
       ) => {
-        if (value?.isValid) {
-          onChange?.(value, validationContext);
+        console.log("changing", value);
+        // console.log("change called");
+        // console.log({value})
+        if (value?.isValid && !validationContext.validationError) {
+          // onChange?.(value, validationContext);
+        } else {
+          // console.log("change without DT", { inputValueString });
+          // onChange?.(inputValueString, validationContext);
         }
       },
-      [onChange],
+      [inputValueString, onChange],
     );
+
+    const onKeyUp: KeyboardEventHandler<HTMLInputElement> = (
+      event,
+    ) => {
+      const { key } = event;
+      console.log({key})
+      if (key !== "TAB") {
+        const value = (event.target as HTMLInputElement).value;
+        onChange?.(value);
+      }
+    };
 
     const renderFieldComponent = useCallback(
       ({ ariaDescribedBy, id, labelElementId }: RenderFieldProps) => {
 
         return (
           <MuiDateField
-            // {...muiProps}
+            onKeyUp={onKeyUp}
             /* eslint-disable-next-line jsx-a11y/no-autofocus */
             autoFocus={hasInitialFocus}
             defaultValue={defaultValue}
             id={id}
             InputProps={{
-              // ...InputProps,
               "aria-describedby": ariaDescribedBy,
               "aria-labelledby": labelElementId,
               endAdornment: (
