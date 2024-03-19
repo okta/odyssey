@@ -35,6 +35,6 @@ module.exports = {
   showStorybookOutput: true,
   testConcurrency: 10,
   properties: {
-    Initiator: actor
-  }
+    Initiator: actor,
+  },
 };
