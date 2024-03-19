@@ -18,11 +18,6 @@ const storyBookMeta: Meta<EmptyStateProps> = {
   title: "MUI Components/EmptyState",
   component: EmptyState,
   argTypes: {
-    image: {
-      control: "text",
-      description: "An image to render at the top",
-    },
-
     heading: {
       control: "text",
       description: "The main heading of the empty state",
@@ -59,7 +54,6 @@ export default storyBookMeta;
 
 export const Default: StoryObj<EmptyStateProps> = {
   args: {
-    image: "https://placehold.co/400x200?text=Example",
     heading: "Start by adding data assets",
     text: "All relevant data will be displayed and can be searched and filtered",
     primaryButton: <Button label="Button label" variant="primary" />,

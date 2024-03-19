@@ -33,10 +33,6 @@ const EmptyContainer = styled("div", {
 
 export type EmptyStateProps = {
   /**
-   * An image to render at the top, it could be a URL or a React element that renders SVGs exclusively
-   */
-  image?: string | React.FC<React.SVGProps<SVGSVGElement>>;
-  /**
    * The main heading of the empty state
    */
   heading: string;
@@ -55,7 +51,6 @@ export type EmptyStateProps = {
 };
 
 const EmptyState = ({
-  image: Image, // Why an alias with a capital letter? to be able to render it as a React element below
   heading,
   text,
   primaryButton,
@@ -63,26 +58,8 @@ const EmptyState = ({
 }: EmptyStateProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
-  const renderImage = () => {
-    if (!Image) return;
-    return (
-      <Box
-        sx={{
-          marginBottom: (t) => t.spacing(3),
-        }}
-      >
-        {typeof Image === "string" ? (
-          <img src={Image} alt={heading} />
-        ) : (
-          <Image />
-        )}
-      </Box>
-    );
-  };
-
   return (
     <EmptyContainer odysseyDesignTokens={odysseyDesignTokens}>
-      {renderImage()}
       <Heading4>{heading}</Heading4>
       <Paragraph>{text}</Paragraph>
       {(primaryButton || secondaryButton) && (
