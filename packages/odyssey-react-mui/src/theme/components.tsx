@@ -2604,7 +2604,7 @@ export const components = ({
           },
 
           [`& .Mui-TableHeadCell-ResizeHandle-Wrapper`]: {
-            marginInlineEnd: 0,
+            marginInlineEnd: `-${odysseyTokens.Spacing3}`,
           },
 
           [`& .${dividerClasses.vertical}`]: {
@@ -2645,6 +2645,7 @@ export const components = ({
     MuiTableRow: {
       styleOverrides: {
         root: () => ({
+          transition: "none !important",
           verticalAlign: "unset",
           [`&.${tableRowClasses.selected}`]: {
             backgroundColor: odysseyTokens.PalettePrimaryLighter,

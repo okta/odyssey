@@ -568,7 +568,6 @@ const DataTable = ({
     data: data,
     getRowId: getRowId,
     state: {
-      density: rowDensity,
       sorting: columnSorting,
       globalFilter: search,
       columnVisibility,
