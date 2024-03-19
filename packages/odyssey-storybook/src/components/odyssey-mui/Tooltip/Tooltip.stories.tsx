@@ -189,7 +189,7 @@ export const Disabled: StoryObj<TooltipProps> = {
 };
 
 export const Placement: StoryObj<TooltipProps> = {
-  render: function C() {
+  render: function C({}) {
     return (
       <Box sx={{ mt: "50px" }}>
         <Tooltip text="Top" placement="top" ariaType="label">
