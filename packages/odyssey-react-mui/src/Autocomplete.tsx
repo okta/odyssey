@@ -474,7 +474,6 @@ const Autocomplete = <
       onInputChange={onInputChange}
       onFocus={onFocus}
       options={options}
-      open={true}
       readOnly={isReadOnly}
       renderInput={renderInput}
       isOptionEqualToValue={getIsOptionEqualToValue}
