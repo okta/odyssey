@@ -13,7 +13,6 @@
 const branchName = process.env.GITHUB_HEAD_REF;
 const parentBranchName = process.env.GITHUB_BASE_REF;
 const shortCommitHash = process.env.GITHUB_SHA.slice(0, 7);
-const actor = process.env.GITHUB_ACTOR;
 
 module.exports = {
   accessibilityValidation: {
@@ -34,7 +33,4 @@ module.exports = {
   serverUrl: "https://oktaeyes.applitools.com",
   showStorybookOutput: true,
   testConcurrency: 10,
-  properties: {
-    Initiator: actor,
-  },
 };
