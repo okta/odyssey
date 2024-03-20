@@ -10,49 +10,128 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { InputBase } from "@mui/material";
+import { forwardRef, memo, useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   DatePicker as MuiDatePicker,
   DatePickerProps as MuiDatePickerProps,
+  LocalizationProvider,
+  DateValidationError,
+  PickerChangeHandlerContext,
 } from "@mui/x-date-pickers";
-import { useCallback } from "react";
+import { DateTime } from "luxon";
 
-export type DatePickerProps<TInputDate, TDate> = {
-  label: MuiDatePickerProps<TInputDate, TDate>["label"];
-  /**
-   * If `true`, the `input` element is not required.
-   */
-  isOptional?: boolean;
-  onChange: MuiDatePickerProps<TInputDate, TDate>["onChange"];
-  value: MuiDatePickerProps<TInputDate, TDate>["value"];
+import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
+import { InputAdornment } from "@mui/material";
+import { Button } from "../Button";
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  CalendarIcon,
+  ChevronDownIcon,
+} from "../icons.generated";
+import { DateField, DateFieldProps } from "./DateField";
+import { datePickerTheme } from "./datePickerTheme";
+import { OdysseyThemeProvider } from "../OdysseyThemeProvider";
+
+export type DatePickerProps<DateTime> = {
+  label: string;
+  onChange: (
+    date: Date,
+    validationError: PickerChangeHandlerContext<DateValidationError>
+  ) => void;
+  defaultValue: MuiDatePickerProps<DateTime>["value"];
+  hint?: DateFieldProps["hint"];
 };
 
-export const DatePicker = <TInputDate, TDate>({
-  label,
-  isOptional = false,
-  onChange,
-  value = null,
-}: DatePickerProps<TInputDate, TDate>) => {
-  const renderInput = useCallback(
-    // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
-    ({ InputProps, ...props }) => {
-      const combinedProps = {
-        ...InputProps,
-        ...props,
-      };
+const DatePicker = forwardRef<HTMLInputElement, DatePickerProps<DateTime>>(
+  ({ label, onChange, defaultValue = null, hint }, ref) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const { i18n } = useTranslation();
+    const { language } = i18n;
 
-      return <InputBase {...combinedProps} required={!isOptional} />;
-    },
-    [isOptional],
-  );
+    const invalidLocales = ["ok_PL", "ok_SK"];
+    const isInvalidLocale = invalidLocales.includes(language);
 
-  return (
-    <MuiDatePicker
-      label={label}
-      onChange={onChange}
-      // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
-      renderInput={renderInput}
-      value={value}
-    />
-  );
-};
+    const handleChange = useCallback(
+      // value will be luxon DateTime
+      (
+        value: DateTime | null,
+        validationError: PickerChangeHandlerContext<DateValidationError>
+      ) => {
+        // console.log({ value }, { context });
+        if (value) {
+          const jsDateFromDateTime: Date = value?.toJSDate();
+          console.log({ jsDateFromDateTime });
+          onChange?.(jsDateFromDateTime, validationError);
+        }
+      },
+      [onChange]
+    );
+
+    const renderFieldComponent = useCallback(
+      ({ label, onChange, value, ...rest }) => {
+        const containerRef = rest?.InputProps?.ref;
+
+        return (
+          <DateField
+            endAdornment={
+              <InputAdornment position="end">
+                <Button
+                  ariaLabel="Calendar"
+                  label=""
+                  size="small"
+                  startIcon={<CalendarIcon />}
+                  variant="floating"
+                  onClick={() => setIsOpen(true)}
+                />
+              </InputAdornment>
+            }
+            hint={hint}
+            label={label}
+            onChange={onChange}
+            ref={containerRef}
+            value={value || defaultValue}
+          />
+        );
+      },
+      [label, onChange, defaultValue]
+    );
+
+    if (isInvalidLocale) {
+      return null;
+    }
+    console.log({ language });
+    return (
+      <OdysseyThemeProvider themeOverride={datePickerTheme}>
+        <LocalizationProvider
+          dateAdapter={AdapterLuxon}
+          adapterLocale={language}
+        >
+          <MuiDatePicker
+            dayOfWeekFormatter={(_, date: DateTime) => {
+              return date.toFormat("EEE");
+            }}
+            label={label}
+            onChange={handleChange}
+            onClose={() => setIsOpen(false)}
+            open={isOpen}
+            value={defaultValue}
+            ref={ref}
+            slots={{
+              field: renderFieldComponent,
+              leftArrowIcon: () => <ArrowLeftIcon />,
+              rightArrowIcon: () => <ArrowRightIcon />,
+              switchViewIcon: () => <ChevronDownIcon />,
+            }}
+          />
+        </LocalizationProvider>
+      </OdysseyThemeProvider>
+    );
+  }
+);
+
+const MemoizedDatePicker = memo(DatePicker);
+MemoizedDatePicker.displayName = "DatePicker";
+
+export { MemoizedDatePicker as DatePicker };

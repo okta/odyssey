@@ -18,7 +18,7 @@ import { PickersComponentNameToClassKey } from "@mui/x-date-pickers/themeAugment
 declare module "@mui/material/styles" {
   interface ComponentNameToClassKey extends PickersComponentNameToClassKey {
     PrivatePickersYear:
-      | PickersComponentNameToClassKey["PrivatePickersYear"]
+      | PickersComponentNameToClassKey["MuiPickersYear"]
       | "button";
   }
 }
