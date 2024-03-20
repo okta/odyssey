@@ -15,6 +15,8 @@ import {
   CircularProgress,
   CircularProgressProps,
 } from "@okta/odyssey-react-mui";
+import { within } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<CircularProgressProps> = {
@@ -45,6 +47,13 @@ export const Indeterminate: StoryObj<CircularProgressProps> = {
   },
   args: {
     ariaLabel: "progress",
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("Circular Aria-Label", async () => {
+      const canvas = within(canvasElement);
+      const circular = canvas.getByLabelText("progress");
+      expect(circular).toHaveAttribute("role", "progressbar");
+    });
   },
 };
 

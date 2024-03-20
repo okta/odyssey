@@ -336,6 +336,13 @@ export const IconButton: StoryObj<MenuButtonProps> = {
     ],
     tooltipText: "More actions",
   },
+  play: async ({ canvasElement, step }: PlaywrightProps<MenuButtonProps>) => {
+    await step("MenuButton Aria-Label", async () => {
+      const canvas = within(canvasElement);
+      const menuButton = canvas.getByLabelText("More actions");
+      expect(menuButton).toHaveAttribute("type", "button");
+    });
+  },
 };
 
 export const EndIcon: StoryObj<MenuButtonProps> = {
