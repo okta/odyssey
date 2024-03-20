@@ -12,7 +12,6 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import {
-  Box,
   Button,
   Status,
   Tag,
@@ -191,20 +190,23 @@ export const Disabled: StoryObj<TooltipProps> = {
 export const Placement: StoryObj<TooltipProps> = {
   render: function C({}) {
     return (
-      <Box sx={{ margin: "40px 0" }}>
+      <>
         <Tooltip text="Top" placement="top" ariaType="label">
           <Tag label="Bow" />
         </Tooltip>
+
         <Tooltip text="Left" placement="left" ariaType="label">
           <Tag label="Stern" />
         </Tooltip>
+
         <Tooltip text="Bottom" placement="bottom" ariaType="label">
           <Tag label="Port" />
         </Tooltip>
+
         <Tooltip text="Right" placement="right" ariaType="label">
           <Tag label="Starboard" />
         </Tooltip>
-      </Box>
+      </>
     );
   },
 };
