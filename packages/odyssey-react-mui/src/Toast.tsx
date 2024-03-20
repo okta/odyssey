@@ -19,6 +19,7 @@ import { HtmlProps } from "./HtmlProps";
 import { CloseIcon } from "./icons.generated";
 import { Link } from "./Link";
 import { ScreenReaderText } from "./ScreenReaderText";
+import { useUniqueId } from "./useUniqueId";
 
 export const toastRoleValues = ["status", "alert"] as const;
 export const toastSeverityValues = [
@@ -89,7 +90,7 @@ const Toast = ({
   translate,
 }: ToastProps) => {
   const { t } = useTranslation();
-
+  const severityDescriptionId = useUniqueId();
   const [isVisible, setIsVisible] = useState(isVisibleProp);
 
   useEffect(() => {
@@ -103,7 +104,7 @@ const Toast = ({
 
   return (
     <>
-      <ScreenReaderText id="toast-severity" translate={translate}>
+      <ScreenReaderText id={severityDescriptionId} translate={translate}>
         {t(`severity.${severity}`)}
       </ScreenReaderText>
       <Snackbar
@@ -127,7 +128,7 @@ const Toast = ({
               />
             )
           }
-          aria-describedby="toast-severity"
+          aria-describedby={severityDescriptionId}
           data-se={testId}
           role={role}
           severity={severity}
