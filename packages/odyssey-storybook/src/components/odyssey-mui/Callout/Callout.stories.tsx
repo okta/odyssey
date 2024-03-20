@@ -72,7 +72,7 @@ const storybookMeta: Meta<CalloutProps> = {
       description: "The content of the Callout",
       table: {
         type: {
-          summary: "string | ReactNode",
+          summary: "string",
         },
       },
       type: {
