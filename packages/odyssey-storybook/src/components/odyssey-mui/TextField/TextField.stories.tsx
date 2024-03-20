@@ -18,6 +18,8 @@ import {
   textFieldTypeValues,
 } from "@okta/odyssey-react-mui";
 
+import { userEvent, within } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { ChangeEvent, useCallback, useState } from "react";
@@ -188,6 +190,19 @@ export default storybookMeta;
 export const Default: StoryObj<typeof TextField> = {
   args: {
     defaultValue: "",
+  },
+  play: async ({ args, canvasElement, step }) => {
+    await step("Textfield callback", async () => {
+      const canvas = within(canvasElement);
+      const textbox = canvas.getByRole("textbox");
+      await userEvent.click(textbox);
+      await expect(args.onFocus).toHaveBeenCalledTimes(1);
+      await userEvent.type(textbox, "Earth");
+      await expect(args.onChange).toHaveBeenCalledTimes(5);
+      await userEvent.clear(textbox);
+      await userEvent.tab();
+      await expect(args.onBlur).toHaveBeenCalledTimes(1);
+    });
   },
 };
 

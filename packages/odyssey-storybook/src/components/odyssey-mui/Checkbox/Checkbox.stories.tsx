@@ -155,14 +155,15 @@ export default storybookMeta;
 const checkTheBox =
   ({ canvasElement, step }: PlaywrightProps<CheckboxProps>) =>
   async (actionName: string) => {
-    await step("check the box", async () => {
+    await step("check the box", async ({ args }) => {
       const canvas = within(canvasElement);
       const checkBox = canvas.getByRole("checkbox") as HTMLInputElement;
       if (checkBox) {
         await userEvent.click(checkBox);
       }
-      userEvent.tab();
-      expect(checkBox).toBeChecked();
+      await userEvent.tab();
+      await expect(checkBox).toBeChecked();
+      await expect(args.onBlur).toHaveBeenCalledTimes(1);
       await axeRun(actionName);
     });
   };

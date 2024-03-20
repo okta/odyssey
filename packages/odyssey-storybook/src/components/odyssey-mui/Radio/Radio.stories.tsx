@@ -107,6 +107,7 @@ export const Default: StoryObj<typeof Radio> = {
         await userEvent.click(radio);
       }
       await expect(radio).toBeChecked();
+      await expect(args.onChange).toHaveBeenCalledTimes(1);
       await userEvent.click(canvasElement);
       await expect(args.onBlur).toHaveBeenCalled();
       await axeRun("Radio Default");
