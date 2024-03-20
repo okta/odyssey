@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { KeyboardEventHandler, memo, useCallback, useState } from "react";
+import { KeyboardEventHandler, memo, useCallback } from "react";
 import { InputAdornment } from "@mui/material";
 import {
   DateValidationError,
@@ -74,7 +74,7 @@ const DateField =
       value,
     }: DateFieldProps
   ) => {
-    const [inputValueString, setInputValueString] = useState("");
+    // const [inputValueString, setInputValueString] = useState("");
 
     const handleChange = useCallback<
       NonNullable<MuiDateFieldProps<DateTime>["onChange"]>
@@ -84,7 +84,7 @@ const DateField =
         value,
         validationContext,
       ) => {
-        console.log("changing", value);
+        console.log("changing", { value }, validationContext.validationError);
         // console.log("change called");
         // console.log({value})
         if (value?.isValid && !validationContext.validationError) {
@@ -94,7 +94,7 @@ const DateField =
           // onChange?.(inputValueString, validationContext);
         }
       },
-      [inputValueString, onChange],
+      [onChange],
     );
 
     const onKeyUp: KeyboardEventHandler<HTMLInputElement> = (

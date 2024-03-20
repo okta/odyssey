@@ -158,7 +158,7 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       [onCalendarDateChange],
     );
 
-    const onInputChange = useCallback((args) => {
+    const onInputChange = useCallback((args: any) => {
       console.log({args})
     }, [onInputChangeProp]);
 
