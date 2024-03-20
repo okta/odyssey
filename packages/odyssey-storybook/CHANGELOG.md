@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.7](https://github.com/okta/odyssey/compare/v1.15.6...v1.15.7) (2024-03-20)
+
+### Bug Fixes
+
+- add official support for lists in Callout ([63d3175](https://github.com/okta/odyssey/commit/63d317580e2a118ea3b3d37d3991de95f0a65120))
+
 ## [1.15.6](https://github.com/okta/odyssey/compare/v1.15.5...v1.15.6) (2024-03-19)
 
 ### Bug Fixes
