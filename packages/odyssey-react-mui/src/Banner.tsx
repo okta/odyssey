@@ -17,6 +17,7 @@ import { Alert, AlertColor, AlertTitle, AlertProps } from "@mui/material";
 import type { HtmlProps } from "./HtmlProps";
 import { Link } from "./Link";
 import { ScreenReaderText } from "./ScreenReaderText";
+import { useUniqueId } from "./useUniqueId";
 
 export const bannerRoleValues = ["status", "alert"] as const;
 export const bannerSeverityValues: AlertColor[] = [
@@ -69,14 +70,15 @@ const Banner = ({
   translate,
 }: BannerProps) => {
   const { t } = useTranslation();
+  const severityDescriptionId = useUniqueId();
 
   return (
     <>
-      <ScreenReaderText id="banner-severity" translate={translate}>
+      <ScreenReaderText id={severityDescriptionId} translate={translate}>
         {t(`severity.${severity}`)}
       </ScreenReaderText>
       <Alert
-        aria-describedby="banner-severity"
+        aria-describedby={severityDescriptionId}
         data-se={testId}
         onClose={onClose}
         role={role}
