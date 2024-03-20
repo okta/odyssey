@@ -478,7 +478,7 @@ const DataTable = ({
 
   const convertColumnToFilter = useCallback(
     (column: DataTableColumn<DataTableRowData>) =>
-      column.enableColumnFilter && column.accessorKey
+      column.enableColumnFilter !== false && column.accessorKey
         ? ({
             id: column.accessorKey,
             label: column.header,
@@ -511,7 +511,7 @@ const DataTable = ({
         // Checks if it's a column
         const filter = convertColumnToFilter(item);
         if (filter) {
-          return accumulator.concat();
+          return accumulator.concat(filter);
         }
       } else if ("label" in item) {
         // Checks if it's a DataFilter
