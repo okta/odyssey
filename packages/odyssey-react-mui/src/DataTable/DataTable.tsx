@@ -501,7 +501,7 @@ const DataTable = ({
             options: convertFilterSelectOptions(column.filterSelectOptions),
           } satisfies DataFilter as DataFilter)
         : null,
-    [],
+    [convertFilterSelectOptions],
   );
 
   /**
@@ -535,7 +535,7 @@ const DataTable = ({
       // If none of the conditions match, item is ignored (not mapping to undefined)
       return accumulator;
     }, []);
-  }, [columns, filtersProp]);
+  }, [columns, filtersProp, convertColumnToFilter]);
 
   const defaultCell = useCallback(
     ({ cell }: { cell: MRT_Cell<MRT_RowData> }) => {
