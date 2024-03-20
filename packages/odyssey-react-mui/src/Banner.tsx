@@ -10,13 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Alert, AlertColor, AlertTitle, AlertProps } from "@mui/material";
-import { Link } from "./Link";
-import { ScreenReaderText } from "./ScreenReaderText";
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
+import { Alert, AlertColor, AlertTitle, AlertProps } from "@mui/material";
 
 import type { HtmlProps } from "./HtmlProps";
+import { Link } from "./Link";
+import { ScreenReaderText } from "./ScreenReaderText";
 
 export const bannerRoleValues = ["status", "alert"] as const;
 export const bannerSeverityValues: AlertColor[] = [
@@ -71,23 +71,26 @@ const Banner = ({
   const { t } = useTranslation();
 
   return (
-    <Alert
-      data-se={testId}
-      onClose={onClose}
-      role={role}
-      severity={severity}
-      variant="banner"
-    >
-      <ScreenReaderText translate={translate}>
-        {t(`severity.${severity}`)}:
+    <>
+      <ScreenReaderText id="banner-severity" translate={translate}>
+        {t(`severity.${severity}`)}
       </ScreenReaderText>
-      <AlertTitle translate={translate}>{text}</AlertTitle>
-      {linkUrl && (
-        <Link href={linkUrl} variant="monochrome" translate={translate}>
-          {linkText}
-        </Link>
-      )}
-    </Alert>
+      <Alert
+        aria-describedby="banner-severity"
+        data-se={testId}
+        onClose={onClose}
+        role={role}
+        severity={severity}
+        variant="banner"
+      >
+        <AlertTitle translate={translate}>{text}</AlertTitle>
+        {linkUrl && (
+          <Link href={linkUrl} variant="monochrome" translate={translate}>
+            {linkText}
+          </Link>
+        )}
+      </Alert>
+    </>
   );
 };
 
