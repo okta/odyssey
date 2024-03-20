@@ -34,9 +34,9 @@ export const calloutSeverityValues = [
 
 export type CalloutProps = {
   /**
-   * @deprecated Callout content shuold be set via title, text, linkText, and linkUrl
+   * Used to optionally pass a text list to the component
    */
-  children?: ReactNode;
+  children: ReactNode;
   /**
    * Sets the ARIA role of the Callout
    * ("status" for something that dynamically updates, "alert" for errors, null for something
@@ -48,7 +48,7 @@ export type CalloutProps = {
    */
   severity: (typeof calloutSeverityValues)[number];
   /**
-   * The content of the Callout
+   * The text content of the Callout
    */
   text?: string;
   /**
