@@ -504,18 +504,18 @@ const DataTable = ({
         if (foundColumn) {
           const filter = convertColumnToFilter(foundColumn);
           if (filter) {
-            accumulator.push(filter);
+            return accumulator.concat(filter);
           }
         }
       } else if ("accessorKey" in item) {
         // Checks if it's a column
         const filter = convertColumnToFilter(item);
         if (filter) {
-          accumulator.push();
+          return accumulator.concat();
         }
       } else if ("label" in item) {
         // Checks if it's a DataFilter
-        accumulator.push(item);
+        return accumulator.concat(item);
       }
       // If none of the conditions match, item is ignored (not mapping to undefined)
       return accumulator;
