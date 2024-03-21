@@ -887,15 +887,15 @@ export const Truncation: StoryObj<DataTableProps> = {
     );
 
     const getData = useCallback(() => {
-      const data = [];
-      for (let i = 0; i < 10; i++) {
+      const data: Array<{ truncated: string; wrapped: string }> = [];
+      [...Array(10)].forEach(() => {
         data.push({
           truncated:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla a quam et vulputate. Phasellus elementum turpis a lacus feugiat bibendum.",
           wrapped:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla a quam et vulputate. Phasellus elementum turpis a lacus feugiat bibendum.",
         });
-      }
+      }); // Corrected the missing parenthesis here
       return data;
     }, []);
 

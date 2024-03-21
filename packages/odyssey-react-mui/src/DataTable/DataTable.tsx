@@ -533,7 +533,7 @@ const DataTable = ({
       // If none of the conditions match, item is ignored (not mapping to undefined)
       return accumulator;
     }, []);
-  }, [columns, filtersProp]);
+  }, [columns, filtersProp, convertColumnToFilter]);
 
   const defaultCell = useCallback(
     ({ cell }: { cell: DataTableCell<MRT_RowData> }) => {
