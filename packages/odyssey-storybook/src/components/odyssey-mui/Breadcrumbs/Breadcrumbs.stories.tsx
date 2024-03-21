@@ -120,7 +120,7 @@ export const Truncation: StoryObj<BreadcrumbsProps> = {
   ),
 };
 
-export const Minimum: StoryObj<BreadcrumbsProps> = {
+export const Simple: StoryObj<BreadcrumbsProps> = {
   args: {
     children: [
       <Breadcrumb href="#one">One</Breadcrumb>,
