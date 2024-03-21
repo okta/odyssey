@@ -23,6 +23,7 @@ import {
   DataTableGetDataType,
   DataTableOnReorderRowsType,
   DataTableProps,
+  DataTableRenderDetailPanelType,
   DataTableRowSelectionState,
   MenuItem,
   densityValues,
@@ -301,6 +302,15 @@ const storybookMeta: Meta<DataTableProps> = {
       table: {
         type: {
           summary: `ReactElement<typeof DataTableEmptyState>`,
+        },
+      },
+    },
+    renderDetailPanel: {
+      control: null,
+      description: "The optional component to display when expanding a row.",
+      table: {
+        type: {
+          summary: `(props: { row: MRT_Row<MRT_RowData>; table: MRT_TableInstance<MRT_RowData>; }) => ReactNode`,
         },
       },
     },
@@ -864,6 +874,201 @@ export const CustomFilterWithDefaultVariant: StoryObj<DataTableProps> = {
         columns={planetColumns}
         filters={filters}
         getData={getData}
+      />
+    );
+  },
+};
+
+export const Details: StoryObj<DataTableProps> = {
+  args: {
+    hasChangeableDensity: true,
+    hasColumnResizing: true,
+    hasColumnVisibility: true,
+    hasFilters: true,
+    hasPagination: true,
+    hasRowSelection: true,
+    hasSearch: true,
+    hasSorting: true,
+    hasRowReordering: true,
+    totalRows: 200,
+  },
+  render: function C(props) {
+    const [data, setData] = useState<Person[]>(personData);
+
+    const getData = useCallback(
+      ({ ...props }: DataTableGetDataType) => {
+        return filterData({ data, ...props });
+      },
+      [data],
+    );
+
+    const onReorderRows = useCallback(
+      ({ ...props }: DataTableOnReorderRowsType) => {
+        const reorderedData = reorderData({ data, ...props });
+        setData(reorderedData as Person[]);
+      },
+      [data],
+    );
+
+    const onChangeRowSelection = useCallback(
+      (rowSelection: DataTableRowSelectionState) => {
+        if (Object.keys(rowSelection).length > 0) {
+          console.log(`${Object.keys(rowSelection).length} selected`);
+        }
+      },
+      [],
+    );
+
+    const emptyPlaceholder = useMemo(
+      () => (
+        <DataTableEmptyState
+          heading="Start by adding data assets"
+          text="All relevant data will be displayed and can be searched and filtered"
+          primaryButton={<Button variant="primary" label="Primary" />}
+          secondaryButton={<Button variant="secondary" label="Secondary" />}
+        />
+      ),
+      [],
+    );
+
+    const noResultsPlaceholder = useMemo(
+      () => (
+        <DataTableEmptyState
+          heading="Whoops, there's nothing here!"
+          text="You should try searching or filtering for something else."
+        />
+      ),
+      [],
+    );
+
+    const actionMenuItems = (selectedRows: DataTableRowSelectionState) => (
+      <>
+        <MenuItem onClick={() => console.log(selectedRows)}>Action 1</MenuItem>
+        <MenuItem onClick={() => console.log(selectedRows)}>Action 2</MenuItem>
+      </>
+    );
+
+    const renderDetailPanel = useCallback(
+      ({ row, table }: DataTableRenderDetailPanelType) => {
+        if (1 < 0) {
+          console.debug(table);
+        }
+
+        return <Box>{`This is ${row.original.name}.`}</Box>;
+      },
+      [],
+    );
+
+    return (
+      <DataTable
+        {...props}
+        columns={personColumns}
+        getData={getData}
+        onReorderRows={onReorderRows}
+        onChangeRowSelection={onChangeRowSelection}
+        emptyPlaceholder={emptyPlaceholder}
+        noResultsPlaceholder={noResultsPlaceholder}
+        rowActionMenuItems={actionMenuItems}
+        bulkActionMenuItems={actionMenuItems}
+        renderDetailPanel={renderDetailPanel}
+      />
+    );
+  },
+};
+
+export const ConditionalDetails: StoryObj<DataTableProps> = {
+  args: {
+    hasChangeableDensity: true,
+    hasColumnResizing: true,
+    hasColumnVisibility: true,
+    hasFilters: true,
+    hasPagination: true,
+    hasRowSelection: true,
+    hasSearch: true,
+    hasSorting: true,
+    hasRowReordering: true,
+    totalRows: 200,
+  },
+  render: function C(props) {
+    const [data, setData] = useState<Person[]>(personData);
+
+    const getData = useCallback(
+      ({ ...props }: DataTableGetDataType) => {
+        return filterData({ data, ...props });
+      },
+      [data],
+    );
+
+    const onReorderRows = useCallback(
+      ({ ...props }: DataTableOnReorderRowsType) => {
+        const reorderedData = reorderData({ data, ...props });
+        setData(reorderedData as Person[]);
+      },
+      [data],
+    );
+
+    const onChangeRowSelection = useCallback(
+      (rowSelection: DataTableRowSelectionState) => {
+        if (Object.keys(rowSelection).length > 0) {
+          console.log(`${Object.keys(rowSelection).length} selected`);
+        }
+      },
+      [],
+    );
+
+    const emptyPlaceholder = useMemo(
+      () => (
+        <DataTableEmptyState
+          heading="Start by adding data assets"
+          text="All relevant data will be displayed and can be searched and filtered"
+          primaryButton={<Button variant="primary" label="Primary" />}
+          secondaryButton={<Button variant="secondary" label="Secondary" />}
+        />
+      ),
+      [],
+    );
+
+    const noResultsPlaceholder = useMemo(
+      () => (
+        <DataTableEmptyState
+          heading="Whoops, there's nothing here!"
+          text="You should try searching or filtering for something else."
+        />
+      ),
+      [],
+    );
+
+    const actionMenuItems = (selectedRows: DataTableRowSelectionState) => (
+      <>
+        <MenuItem onClick={() => console.log(selectedRows)}>Action 1</MenuItem>
+        <MenuItem onClick={() => console.log(selectedRows)}>Action 2</MenuItem>
+      </>
+    );
+
+    const renderDetailPanel = useCallback(
+      ({ row, table }: DataTableRenderDetailPanelType) => {
+        if (1 < 0) {
+          console.debug(table);
+        }
+        if (row.original.risk !== "high") return;
+
+        return <Box>{`The risk level for ${row.original.name} is HIGH.`}</Box>;
+      },
+      [],
+    );
+
+    return (
+      <DataTable
+        {...props}
+        columns={personColumns}
+        getData={getData}
+        onReorderRows={onReorderRows}
+        onChangeRowSelection={onChangeRowSelection}
+        emptyPlaceholder={emptyPlaceholder}
+        noResultsPlaceholder={noResultsPlaceholder}
+        rowActionMenuItems={actionMenuItems}
+        bulkActionMenuItems={actionMenuItems}
+        renderDetailPanel={renderDetailPanel}
       />
     );
   },

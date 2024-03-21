@@ -31,10 +31,12 @@ import {
   MRT_VisibilityState,
   useMaterialReactTable,
   MRT_TableContainer,
+  MRT_TableInstance,
 } from "material-react-table";
 import {
   ArrowDownIcon,
   ArrowUnsortedIcon,
+  ChevronDownIcon,
   DragIndicatorIcon,
   MoreIcon,
 } from "../icons.generated";
@@ -75,6 +77,11 @@ export type DataTableGetDataType = {
 export type DataTableOnReorderRowsType = {
   rowId: string;
   newRowIndex: number;
+};
+
+export type DataTableRenderDetailPanelType = {
+  row: MRT_Row<MRT_RowData>;
+  table: MRT_TableInstance<MRT_RowData>;
 };
 
 export type DataTableProps = {
@@ -209,6 +216,10 @@ export type DataTableProps = {
    * An optional set of filters to render in the filters menu
    */
   filters?: Array<DataFilter | DataTableColumn<DataTableRowData> | string>;
+  /**
+   * The optional component to display when expanding a row.
+   */
+  renderDetailPanel?: MRT_TableOptions<MRT_RowData>["renderDetailPanel"];
 };
 
 const displayColumnDefOptions = {
@@ -261,6 +272,9 @@ const displayColumnDefOptions = {
     muiTableBodyCellProps: {
       padding: "checkbox",
     },
+  },
+  "mrt-row-expand": {
+    header: "",
   },
 };
 
@@ -353,6 +367,7 @@ const DataTable = ({
   emptyPlaceholder,
   noResultsPlaceholder,
   filters: filtersProp,
+  renderDetailPanel,
 }: DataTableProps) => {
   const [data, setData] = useState<MRT_RowData[]>([]);
   const [pagination, setPagination] = useState({
@@ -563,6 +578,21 @@ const DataTable = ({
     isEmpty,
   ]);
 
+  const columnIds = useMemo(() => {
+    return columns.map((column) => column.accessorKey);
+  }, [columns]);
+
+  const columnOrder = useMemo(
+    () => [
+      "mrt-row-drag",
+      "mrt-row-select",
+      "mrt-row-expand",
+      ...columnIds,
+      "mrt-row-actions",
+    ],
+    [columnIds],
+  ) as string[];
+
   const dataTable = useMaterialReactTable({
     columns: columns,
     data: data,
@@ -574,11 +604,13 @@ const DataTable = ({
       columnVisibility,
       isLoading,
       rowSelection,
+      columnOrder,
     },
     icons: {
       ArrowDownwardIcon: ArrowDownIcon,
       DragHandleIcon: DragIndicatorIcon,
       SyncAltIcon: ArrowUnsortedIcon,
+      ExpandMoreIcon: ChevronDownIcon,
     },
 
     // Base table settings
@@ -674,6 +706,10 @@ const DataTable = ({
     muiTableContainerProps: {
       ref: tableInnerContainerRef,
     },
+
+    // Row expansion
+    enableExpandAll: false,
+    renderDetailPanel: renderDetailPanel,
   });
 
   // Effects
