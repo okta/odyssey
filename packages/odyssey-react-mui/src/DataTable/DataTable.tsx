@@ -478,7 +478,7 @@ const DataTable = ({
 
   const convertColumnToFilter = useCallback(
     (column: DataTableColumn<DataTableRowData>) =>
-      column.enableColumnFilter && column.accessorKey
+      column.enableColumnFilter !== false && column.accessorKey
         ? ({
             id: column.accessorKey,
             label: column.header,
@@ -486,7 +486,7 @@ const DataTable = ({
             options: convertFilterSelectOptions(column.filterSelectOptions),
           } satisfies DataFilter as DataFilter)
         : null,
-    [],
+    [convertFilterSelectOptions],
   );
 
   /**
@@ -504,23 +504,23 @@ const DataTable = ({
         if (foundColumn) {
           const filter = convertColumnToFilter(foundColumn);
           if (filter) {
-            accumulator.push(filter);
+            return accumulator.concat(filter);
           }
         }
       } else if ("accessorKey" in item) {
         // Checks if it's a column
         const filter = convertColumnToFilter(item);
         if (filter) {
-          accumulator.push();
+          return accumulator.concat(filter);
         }
       } else if ("label" in item) {
         // Checks if it's a DataFilter
-        accumulator.push(item);
+        return accumulator.concat(item);
       }
       // If none of the conditions match, item is ignored (not mapping to undefined)
       return accumulator;
     }, []);
-  }, [columns, filtersProp]);
+  }, [columns, filtersProp, convertColumnToFilter]);
 
   const defaultCell = useCallback(
     ({ cell }: { cell: MRT_Cell<MRT_RowData> }) => {
