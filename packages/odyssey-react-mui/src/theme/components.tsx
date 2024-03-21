@@ -2490,7 +2490,7 @@ export const components = ({
           borderBottom: `${odysseyTokens.BorderWidthMain} ${odysseyTokens.BorderStyleMain} ${odysseyTokens.HueNeutral100}`,
           textAlign: "start",
           verticalAlign: "baseline",
-          padding: odysseyTokens.Spacing3,
+          padding: `0 ${odysseyTokens.Spacing3} !important`,
           overflowWrap: "break-word",
 
           [`.MuiTable-root.narrow &:last-child`]: {
@@ -2574,7 +2574,6 @@ export const components = ({
 
           ...(ownerState.padding === "checkbox" && {
             width: 48, // prevent the checkbox column from growing
-            padding: "0 0 0 4px",
           }),
 
           ...(ownerState.padding === "none" && {
@@ -2598,26 +2597,14 @@ export const components = ({
             textAlign: "justify",
           }),
 
-          ...(ownerState.variant !== "head" && {
-            ["&.MuiTableCell-compact"]: {
-              // TODO: Find a way to tokenize these values.
-              // We can't currently because these are between existing token
-              // values, but we need these precise values to match design.
-              // We use rems so this can scale with the text size.
-              padding: "0.4285714286rem",
-              height: "2.5714285714rem",
-            },
-
-            ["&.MuiTableCell-spacious"]: {
-              padding: odysseyTokens.Spacing4,
-              height: odysseyTokens.Spacing9,
-            },
-          }),
-
           [`& .${checkboxClasses.root}`]: {
             width: `${odysseyTokens.TypographyLineHeightUi}rem`,
             height: `${odysseyTokens.TypographyLineHeightUi}rem`,
             margin: 0,
+          },
+
+          [`& .Mui-TableHeadCell-ResizeHandle-Wrapper`]: {
+            marginInlineEnd: `-${odysseyTokens.Spacing3}`,
           },
 
           [`& .${dividerClasses.vertical}`]: {
@@ -2658,6 +2645,7 @@ export const components = ({
     MuiTableRow: {
       styleOverrides: {
         root: () => ({
+          transition: "none !important",
           verticalAlign: "unset",
           [`&.${tableRowClasses.selected}`]: {
             backgroundColor: odysseyTokens.PalettePrimaryLighter,
@@ -2671,6 +2659,18 @@ export const components = ({
             "&:hover, &:focus-within": {
               backgroundColor: "transparent !important",
             },
+          },
+
+          [`.${tableBodyClasses.root} &`]: {
+            minHeight: odysseyTokens.Spacing8,
+          },
+
+          [`.${tableBodyClasses.root}.MuiTableBody-compact &`]: {
+            minHeight: `calc(${odysseyTokens.Spacing6} + ${odysseyTokens.Spacing1})`,
+          },
+
+          [`.${tableBodyClasses.root}.MuiTableBody-spacious &`]: {
+            minHeight: odysseyTokens.Spacing9,
           },
 
           "&.isDragTarget": {
@@ -2740,6 +2740,7 @@ export const components = ({
           justifyContent: "flex-start",
           flexDirection: "inherit",
           alignItems: "center",
+          marginInlineEnd: odysseyTokens.Spacing3,
           "&:focus-visible": {
             color: odysseyTokens.TypographyColorBody,
             outlineOffset: odysseyTokens.Spacing4,
