@@ -2662,15 +2662,15 @@ export const components = ({
           },
 
           [`.${tableBodyClasses.root} &`]: {
-            height: odysseyTokens.Spacing8,
+            minHeight: odysseyTokens.Spacing8,
           },
 
           [`.${tableBodyClasses.root}.MuiTableBody-compact &`]: {
-            height: `calc(${odysseyTokens.Spacing6} + ${odysseyTokens.Spacing1})`,
+            minHeight: `calc(${odysseyTokens.Spacing6} + ${odysseyTokens.Spacing1})`,
           },
 
           [`.${tableBodyClasses.root}.MuiTableBody-spacious &`]: {
-            height: odysseyTokens.Spacing9,
+            minHeight: odysseyTokens.Spacing9,
           },
 
           "&.isDragTarget": {
