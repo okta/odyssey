@@ -6,12 +6,3 @@ test_suites:
     script_name: semgrep
     criteria: MERGE
     queue_name: small
-
-  - name: release-odyssey
-    task_name: RELEASE_ODYSSEY
-    sort_order: 2
-    queue_name: ci-queue-productionJenga-AL2023
-    criteria: MAINLINE
-    trigger: AUTO
-    params:
-      DIST_TAG: "latest"

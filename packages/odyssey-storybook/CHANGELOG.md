@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.7](https://github.com/okta/odyssey/compare/v1.15.6...v1.15.7) (2024-03-20)
+
+### Bug Fixes
+
+- add official support for lists in Callout ([63d3175](https://github.com/okta/odyssey/commit/63d317580e2a118ea3b3d37d3991de95f0a65120))
+
+## [1.15.6](https://github.com/okta/odyssey/compare/v1.15.5...v1.15.6) (2024-03-19)
+
+### Bug Fixes
+
+- add initator to the config ([032490d](https://github.com/okta/odyssey/commit/032490d91153384e7680a5ed351782896f806ac5))
+- add initator to the config ([5da0247](https://github.com/okta/odyssey/commit/5da024770bae95796f1b43edd8d7e39f962df8e9))
+- add initator to the config ([f5a2dd0](https://github.com/okta/odyssey/commit/f5a2dd055610ddd53220e7d8f5da97d3f98b2258))
+- applitools config ([1f9a591](https://github.com/okta/odyssey/commit/1f9a591205c9d8fd1f605519728e1114ab7ff3b3))
+
+## [1.15.5](https://github.com/okta/odyssey/compare/v1.15.4...v1.15.5) (2024-03-19)
+
+### Bug Fixes
+
+- added the config ([5d114e0](https://github.com/okta/odyssey/commit/5d114e02af9b86a4f5da2763e0f22da1d9dafda1))
+- new upgrade ([27a84ea](https://github.com/okta/odyssey/commit/27a84eadae827c5ea29381a11f010aee197cd5fd))
+- some adjustments ([01e244a](https://github.com/okta/odyssey/commit/01e244ab114776e5772d7c25a8cb204ca831cb00))
+
 ## [1.15.4](https://github.com/okta/odyssey/compare/v1.15.3...v1.15.4) (2024-03-18)
 
 **Note:** Version bump only for package @okta/odyssey-storybook
