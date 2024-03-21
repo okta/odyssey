@@ -321,6 +321,11 @@ const Select = <
       const stopPropagation = (event: MouseEvent<SVGSVGElement>) =>
         event.stopPropagation();
 
+      const shouldRenderNonInteractiveIcon =
+        !isInteractive &&
+        controlledStateRef.current === CONTROLLED &&
+        hasMultipleChoices;
+
       return (
         Array.isArray(internalSelectedValues) && (
           <ChipsInnerContainer
@@ -335,13 +340,11 @@ const Select = <
                     label={
                       <>
                         {item}
-                        {!isInteractive &&
-                          controlledStateRef.current === CONTROLLED &&
-                          hasMultipleChoices && (
-                            <NonInteractiveIcon
-                              odysseyDesignTokens={odysseyDesignTokens}
-                            />
-                          )}
+                        {shouldRenderNonInteractiveIcon && (
+                          <NonInteractiveIcon
+                            odysseyDesignTokens={odysseyDesignTokens}
+                          />
+                        )}
                       </>
                     }
                     tabIndex={-1}
