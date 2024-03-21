@@ -32,26 +32,24 @@ export const textFieldTypeValues = [
 ] as const;
 
 export type DateFieldProps = MuiDateFieldProps<DateTime> & {
-  defaultValue?: MuiDateFieldProps<DateTime>["value"];
   onChange: (
     value: DateTime | string,
     validationContext?: PickerChangeHandlerContext<DateValidationError>,
   ) => void;
-  value?: MuiDateFieldProps<DateTime>["value"];
 } & Pick<
     TextFieldProps,
     | "endAdornment"
-    | "label"
-    | "hasInitialFocus"
-    | "id"
-    | "onBlur"
-    | "onFocus"
-    | "placeholder"
     | "errorMessage"
+    | "hasInitialFocus"
     | "hint"
+    | "id"
     | "isDisabled"
     | "isOptional"
     | "isReadOnly"
+    | "label"
+    | "onBlur"
+    | "onFocus"
+    | "placeholder"
   >;
 
 const DateField =
@@ -67,6 +65,7 @@ const DateField =
       isOptional = false,
       isReadOnly,
       label,
+      minDate,
       onBlur,
       onChange,
       onFocus,
@@ -118,13 +117,16 @@ const DateField =
             autoFocus={hasInitialFocus}
             defaultValue={defaultValue}
             id={id}
-            InputProps={{
+            inputProps={{
               "aria-describedby": ariaDescribedBy,
               "aria-labelledby": labelElementId,
+            }}
+            InputProps={{
               endAdornment: (
                 <InputAdornment position="end">{endAdornment}</InputAdornment>
               ),
             }}
+            minDate={minDate}
             name={id}
             onBlur={onBlur}
             onChange={handleChange}

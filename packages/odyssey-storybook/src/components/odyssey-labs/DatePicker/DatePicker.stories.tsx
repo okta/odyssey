@@ -20,6 +20,7 @@ import {
   LocalizationProvider,
 } from "@okta/odyssey-react-mui/labs";
 
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const StorybookDatePicker = (props: DatePickerProps) => {
@@ -56,7 +57,7 @@ const storybookMeta: Meta<DatePickerProps> = {
       control: "text",
       defaultValue: "DatePicker label",
     },
-    onDateChange: {
+    onCalendarDateChange: {
       control: "function",
     },
     defaultValue: {
@@ -68,6 +69,7 @@ const storybookMeta: Meta<DatePickerProps> = {
         },
       },
     },
+    errorMessage: fieldComponentPropsMetaData.errorMessage,
     hint: {
       control: "text",
       description: "The hint text for the autocomplete input",
@@ -84,9 +86,17 @@ const storybookMeta: Meta<DatePickerProps> = {
 
 export default storybookMeta;
 
-export const DatePickerStandard: StoryObj<DatePickerProps> = {
+export const Default: StoryObj<DatePickerProps> = {
   args: {
     label: "Choose a date",
     hint: "Use MM/DD/YYYY format",
+  },
+};
+
+export const Error: StoryObj<DatePickerProps> = {
+  args: {
+    label: "Choose a date",
+    hint: "Use MM/DD/YYYY format",
+    errorMessage: "Some error message here"
   },
 };

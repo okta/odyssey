@@ -16,11 +16,11 @@ import {
   DatePicker as MuiDatePicker,
   DatePickerProps as MuiDatePickerProps,
   LocalizationProvider,
-  // DateValidationError,
 } from "@mui/x-date-pickers";
 import { DateTime } from "luxon";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
 import { InputAdornment } from "@mui/material";
+import styled from "@emotion/styled";
 
 import { Button } from "../Button";
 import {
@@ -31,72 +31,79 @@ import {
 } from "../icons.generated";
 import { DateField, DateFieldProps } from "./DateField";
 import { datePickerTheme } from "./datePickerTheme";
-// import { RenderFieldProps } from "../Field";
+import { FieldComponentProps } from "../FieldComponentProps";
+import {
+  useOdysseyDesignTokens,
+  DesignTokens,
+} from "../OdysseyDesignTokensContext";
 import { OdysseyThemeProvider } from "../OdysseyThemeProvider";
 import { formatLanguageCodeToHyphenated } from "../OdysseyTranslationProvider";
-// import {
-//   ComponentControlledState,
-//   getControlState,
-//   // useInputValues,
-// } from "../inputUtils";
+
+const DatePickerContainer = styled.div({
+  display: "flex",
+
+  ".MuiFormControl-root": {
+    marginBlockEnd: 0
+  }
+});
+
+const DatePickerWidthContainer = styled.div<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  width: "100%",
+  maxWidth: odysseyDesignTokens.TypographyLineLengthMax,
+
+  ".MuiInput-root": {
+    maxWidth: `calc(${odysseyDesignTokens.Spacing9} * 3)`,
+  },
+}));
 
 export type DatePickerProps = {
-  defaultValue?: Date;
-  hint?: DateFieldProps["hint"];
+  /**
+   * The label for the `input` element.
+   */
   label: string;
-  minDate: MuiDatePickerProps<Date>["minDate"];
   /**
    * Callback fired when the a date is selected with the calendar.
    */
-  onCalendarDateChange?: (date: Date | null) => void;
+  onCalendarDateChange?: ({
+    value,
+    error,
+  }: {
+    value: Date;
+    error?: string;
+  }) => void;
   /**
-   * Callback fired when the textbox receives typed characters.
+   * Callback fired when the text input receives typed characters.
    */
   onInputChange?: (value: string) => void;
-  onChange: (date: Date | null, validationError: string | null) => void;
   value?: Date;
-};
-
-const Field = ({ defaultValue, hint, label, onChange, onAdornmentClick, value}: DateFieldProps & { onAdornmentClick?: () => void }) => {
-  return (
-    <DateField
-      // {...muiProps}
-      defaultValue={defaultValue}
-      endAdornment={
-        <InputAdornment position="end">
-          <Button
-            ariaLabel="Calendar"
-            label=""
-            size="small"
-            startIcon={<CalendarIcon />}
-            variant="floating"
-            onClick={onAdornmentClick}
-          />
-        </InputAdornment>
-      }
-      hint={hint}
-      label={label}
-      onChange={onChange}
-      value={value}
-    />
-  );
-}
+} & Pick<FieldComponentProps, "errorMessage" | "hint"> &
+  Pick<
+    MuiDatePickerProps<Date>,
+    "defaultValue" | "disableFuture" | "disablePast" | "minDate" | "maxDate"
+  >;
 
 const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
   (
     {
       defaultValue: defaultValueProp,
+      disableFuture,
+      disablePast,
+      errorMessage,
       hint,
       label,
       minDate,
+      maxDate,
       onCalendarDateChange,
       onInputChange: onInputChangeProp,
       value: valueProp,
     },
     ref,
   ) => {
+    const odysseyDesignTokens = useOdysseyDesignTokens();
     const [isOpen, setIsOpen] = useState(false);
-    
+
     const { i18n } = useTranslation();
     const { language } = i18n;
 
@@ -105,46 +112,11 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
 
     const containerRef = useRef<HTMLInputElement>(null);
 
-    // const controlledStateRef = useRef(
-    //   getControlState({
-    //     controlledValue: valueProp,
-    //     uncontrolledValue: defaultValueProp,
-    //   }),
-    // );
-
-    // useEffect(() => {
-    //   const isValidDate = (date: Date) => !isNaN(date.getTime());
-    //   console.log(controlledStateRef);
-    //   if (
-    //     valueProp &&
-    //     controlledStateRef.current === ComponentControlledState.CONTROLLED) {
-    //     console.log("hey", valueProp);
-
-    //     const valueAsDate = new Date(valueProp);
-
-    //     setFormattedInputValues({
-    //       value: isValidDate(valueAsDate)
-    //         ? DateTime.fromJSDate(valueAsDate)
-    //         : undefined,
-    //     });
-    //   } else {
-    //     if (defaultValueProp) {
-    //       const defaultValueAsDate = new Date(defaultValueProp);
-
-    //       setFormattedInputValues({
-    //         defaultValue: isValidDate(defaultValueAsDate)
-    //           ? DateTime.fromJSDate(defaultValueAsDate)
-    //           : undefined,
-    //       });
-    //     }
-    //   }
-    // }, [controlledStateRef, defaultValueProp, valueProp]);
-
     const formatDateTimeToJsDateOnCalendarSelection = useCallback<
       NonNullable<MuiDatePickerProps<DateTime>["onChange"]>
     >(
-      (value, _) => {
-        // const { validationError } = errorContext;
+      (value, errorContext) => {
+        const { validationError } = errorContext;
         // console.log({ value });
         if (value) {
           const jsDateFromDateTime = new Date(value?.toJSDate());
@@ -152,26 +124,68 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
           // if (isValidDate(jsDateFromDateTime)) {
 
           // }
-          onCalendarDateChange?.(jsDateFromDateTime);
+          onCalendarDateChange?.({ value: jsDateFromDateTime, error: validationError });
         }
       },
       [onCalendarDateChange],
     );
 
-    const onInputChange = useCallback((args: any) => {
-      console.log({args})
-    }, [onInputChangeProp]);
-
-    const formattedMinDate = useCallback<
-      (minDate: Date | undefined) => DateTime | undefined
-    >(
-      (minDate) => (minDate ? DateTime.fromJSDate(minDate) : undefined),
-      [minDate],
+    const onInputChange = useCallback(
+      (args: any) => {
+        console.log({ args });
+      },
+      [onInputChangeProp],
     );
 
-    const formatDayOfWeek = (date: DateTime) =>  date.toFormat("EEE")
+    const formatDateToDateTime = (date: Date) => DateTime.fromJSDate(date);
 
-    const toggleCalendarVisibility = useCallback(() => setIsOpen(!isOpen), [isOpen]);
+    const formatDayOfWeek = (date: DateTime) => date.toFormat("EEE");
+
+    const toggleCalendarVisibility = useCallback(
+      () => setIsOpen(!isOpen),
+      [isOpen],
+    );
+
+    const renderDateField = useCallback(
+      (
+        defaultValue: DateFieldProps["defaultValue"],
+        value: DateFieldProps["value"],
+      ) => (
+        <DateField
+          defaultValue={defaultValue}
+          disableFuture={disableFuture}
+          disablePast={disablePast}
+          endAdornment={
+            <InputAdornment position="end">
+              <Button
+                ariaLabel="Calendar"
+                label=""
+                size="small"
+                startIcon={<CalendarIcon />}
+                variant="floating"
+                onClick={toggleCalendarVisibility}
+              />
+            </InputAdornment>
+          }
+          errorMessage={errorMessage}
+          hint={hint}
+          label={label}
+          minDate={minDate ? formatDateToDateTime(minDate) : undefined}
+          maxDate={maxDate ? formatDateToDateTime(maxDate) : undefined}
+          onChange={onInputChange}
+          value={value}
+        />
+      ),
+      [
+        errorMessage,
+        hint,
+        label,
+        minDate,
+        maxDate,
+        onInputChange,
+        toggleCalendarVisibility,
+      ],
+    );
 
     if (isInvalidLocale) {
       return null;
@@ -183,44 +197,45 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
           dateAdapter={AdapterLuxon}
           adapterLocale={formatLanguageCodeToHyphenated(language)}
         >
-          <div ref={containerRef}>
-            <MuiDatePicker<DateTime>
-              defaultValue={
-                defaultValueProp
-                  ? DateTime.fromJSDate(defaultValueProp)
-                  : undefined
-              }
-              value={valueProp ? DateTime.fromJSDate(valueProp) : undefined}
-              dayOfWeekFormatter={(_, date) => formatDayOfWeek(date)}
-              key={language}
-              label={label}
-              minDate={formattedMinDate(minDate)}
-              onChange={formatDateTimeToJsDateOnCalendarSelection}
-              onClose={() => setIsOpen(false)}
-              open={isOpen}
-              ref={ref}
-              slots={{
-                field: ({ defaultValue, value }) => (
-                  <Field
-                    defaultValue={defaultValue}
-                    hint={hint}
-                    label={label}
-                    onChange={onInputChange}
-                    onAdornmentClick={toggleCalendarVisibility}
-                    value={value}
-                  />
-                ),
-                leftArrowIcon: () => <ArrowLeftIcon />,
-                rightArrowIcon: () => <ArrowRightIcon />,
-                switchViewIcon: () => <ChevronDownIcon />,
-              }}
-              slotProps={{
-                popper: {
-                  anchorEl: containerRef.current,
-                },
-              }}
-            />
-          </div>
+          <DatePickerContainer>
+            <DatePickerWidthContainer
+              odysseyDesignTokens={odysseyDesignTokens}
+              ref={containerRef}
+            >
+              <MuiDatePicker<DateTime>
+                defaultValue={
+                  defaultValueProp
+                    ? formatDateToDateTime(defaultValueProp)
+                    : undefined
+                }
+                value={valueProp ? formatDateToDateTime(valueProp) : undefined}
+                dayOfWeekFormatter={(_, date) => formatDayOfWeek(date)}
+                key={language}
+                label={label}
+                minDate={minDate ? formatDateToDateTime(minDate) : undefined}
+                maxDate={maxDate ? formatDateToDateTime(maxDate) : undefined}
+                onAccept={(arg) => {
+                  console.log("accept picker", arg);
+                }}
+                onChange={formatDateTimeToJsDateOnCalendarSelection}
+                onClose={() => setIsOpen(false)}
+                open={isOpen}
+                ref={ref}
+                slots={{
+                  field: ({ defaultValue, value }) =>
+                    renderDateField(defaultValue, value),
+                  leftArrowIcon: () => <ArrowLeftIcon />,
+                  rightArrowIcon: () => <ArrowRightIcon />,
+                  switchViewIcon: () => <ChevronDownIcon />,
+                }}
+                slotProps={{
+                  popper: {
+                    anchorEl: containerRef.current,
+                  },
+                }}
+              />
+            </DatePickerWidthContainer>
+          </DatePickerContainer>
         </LocalizationProvider>
       </OdysseyThemeProvider>
     );

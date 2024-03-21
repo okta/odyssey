@@ -129,27 +129,30 @@ export const datePickerTheme: ThemeOptions = {
           borderStyle: theme.mixins.borderStyle,
           borderWidth: theme.mixins.borderWidth,
           borderRadius: theme.mixins.borderRadius,
-          padding: `${theme.spacing(4)} ${theme.spacing(5)}`,
+          paddingBlock: theme.spacing(4),
+          paddingInline: theme.spacing(2),
           width: "100%",
         }),
       },
     },
     MuiPickersLayout: {
       styleOverrides: {
-        contentWrapper:{
+        contentWrapper: ({ theme }) => ({
+          // fontFamily: theme.typography.fontFamily,
+          // fontSize: "14px",
+          // width: "55ch",
+          // letterSpacing: "0.00938em",
+
           "& > div": {
-            width: `${(296 / 16) * (16 / 14)}rem`,
+            // width: `${(296 / 16) * (16 / 14)}rem`,
           },
-        },
+        }),
       },
     },
     MuiDayCalendar: {
       styleOverrides: {
         header: {
-          // gap: theme.spacing(1),
           justifyContent: "space-between",
-          // padding: `0 ${theme.spacing(1)}`,
-          // paddingRight: theme.spacing(popupSpacingValue),
         },
         slideTransition: () => ({
           minHeight: `${(214 / 16) * (16 / 14)}rem`,
