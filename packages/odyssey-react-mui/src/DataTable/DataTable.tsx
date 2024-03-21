@@ -23,7 +23,6 @@ import {
   MRT_Cell,
   MRT_DensityState,
   MRT_Row,
-  MRT_RowData,
   MRT_SortingState,
   MRT_TableOptions,
   MRT_RowSelectionState,
@@ -51,7 +50,7 @@ import { useRowReordering } from "./useRowReordering";
 import { DataTableSettings } from "./DataTableSettings";
 import { MenuButton, MenuButtonProps } from "../MenuButton";
 import { Box } from "../Box";
-import { DataTableRowSelectionState } from ".";
+import { DataTableRowSelectionState, DataTableRowData } from ".";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
@@ -62,18 +61,18 @@ import { DataTableEmptyState } from "./DataTableEmptyState";
 import { Callout } from "../Callout";
 import { t } from "i18next";
 
-export type DataTableColumn<T extends MRT_RowData> = MRT_ColumnDef<T> & {
+export type DataTableColumn<T extends DataTableRowData> = MRT_ColumnDef<T> & {
   enableWrapping?: boolean;
 };
 
-type DataTableColumnInstance<T extends MRT_RowData> = Omit<
+type DataTableColumnInstance<T extends DataTableRowData> = Omit<
   MRT_Column<T, unknown>,
   "columnDef"
 > & {
   columnDef: DataTableColumn<T>;
 };
 
-type DataTableCell<T extends MRT_RowData> = Omit<MRT_Cell<T>, "column"> & {
+type DataTableCell<T extends DataTableRowData> = Omit<MRT_Cell<T>, "column"> & {
   column: DataTableColumnInstance<T>;
 };
 
@@ -94,7 +93,7 @@ export type DataTableProps = {
   /**
    * The columns that make up the table
    */
-  columns: DataTableColumn<MRT_RowData>[];
+  columns: DataTableColumn<DataTableRowData>[];
   /**
    * The total number of rows in the table. Optional, because it's sometimes impossible
    * to calculate. Used in table pagination to know when to disable the "next"/"more" button.
@@ -103,7 +102,7 @@ export type DataTableProps = {
   /**
    * The function to get the ID of a row
    */
-  getRowId?: MRT_TableOptions<MRT_RowData>["getRowId"];
+  getRowId?: MRT_TableOptions<DataTableRowData>["getRowId"];
   /**
    * The initial density (height & padding) of the table rows. This is available even if the
    * table density isn't changeable by the end user via hasChangeableDensity.
@@ -172,8 +171,8 @@ export type DataTableProps = {
     filters,
     sort,
   }: DataTableGetDataType) =>
-    | MRT_TableOptions<MRT_RowData>["data"]
-    | Promise<MRT_TableOptions<MRT_RowData>["data"]>;
+    | MRT_TableOptions<DataTableRowData>["data"]
+    | Promise<MRT_TableOptions<DataTableRowData>["data"]>;
   /**
    * Callback that fires when the user reorders rows within the table. Can be used
    * to propogate order change to the backend.
@@ -221,7 +220,7 @@ export type DataTableProps = {
   /**
    * An optional set of filters to render in the filters menu
    */
-  filters?: Array<DataFilter | DataTableColumn<MRT_RowData> | string>;
+  filters?: Array<DataFilter | DataTableColumn<DataTableRowData> | string>;
 };
 
 const displayColumnDefOptions = {
@@ -367,12 +366,13 @@ const DataTable = ({
   noResultsPlaceholder,
   filters: filtersProp,
 }: DataTableProps) => {
-  const [data, setData] = useState<MRT_RowData[]>([]);
+  const [data, setData] = useState<DataTableRowData[]>([]);
   const [pagination, setPagination] = useState({
     pageIndex: currentPage,
     pageSize: resultsPerPage,
   });
-  const [draggingRow, setDraggingRow] = useState<MRT_Row<MRT_RowData> | null>();
+  const [draggingRow, setDraggingRow] =
+    useState<MRT_Row<DataTableRowData> | null>();
   const [isTableContainerScrolledToStart, setIsTableContainerScrolledToStart] =
     useState(true);
   const [isTableContainerScrolledToEnd, setIsTableContainerScrolledToEnd] =
@@ -429,7 +429,9 @@ const DataTable = ({
     page: pagination.pageIndex,
   });
 
-  const getRowId = getRowIdProp ? getRowIdProp : (row: MRT_RowData) => row.id;
+  const getRowId = getRowIdProp
+    ? getRowIdProp
+    : (row: DataTableRowData) => row.id;
 
   const rowDensityCellClassName = useMemo(() => {
     return rowDensity === "spacious"
@@ -440,7 +442,7 @@ const DataTable = ({
   }, [rowDensity]);
 
   const renderRowActions = useCallback(
-    ({ row }: { row: MRT_Row<MRT_RowData> }) => {
+    ({ row }: { row: MRT_Row<DataTableRowData> }) => {
       const currentIndex =
         row.index + (pagination.pageIndex - 1) * pagination.pageSize;
       return (
@@ -472,7 +474,7 @@ const DataTable = ({
    * filterOptions format, which allows for strings and { label: string, value: string }
    */
   const convertFilterSelectOptions = useCallback(
-    (options: DataTableColumn<MRT_RowData>["filterSelectOptions"]) =>
+    (options: DataTableColumn<DataTableRowData>["filterSelectOptions"]) =>
       options?.map((option) =>
         typeof option === "string"
           ? {
@@ -536,7 +538,7 @@ const DataTable = ({
   }, [columns, filtersProp, convertColumnToFilter]);
 
   const defaultCell = useCallback(
-    ({ cell }: { cell: DataTableCell<MRT_RowData> }) => {
+    ({ cell }: { cell: DataTableCell<DataTableRowData> }) => {
       const value = cell.getValue<string>();
       const enableWrapping = cell.column.columnDef.enableWrapping;
       return enableWrapping ? (
@@ -617,7 +619,7 @@ const DataTable = ({
     },
     selectAllMode: "all",
     displayColumnDefOptions:
-      displayColumnDefOptions as MRT_TableOptions<MRT_RowData>["displayColumnDefOptions"],
+      displayColumnDefOptions as MRT_TableOptions<DataTableRowData>["displayColumnDefOptions"],
     muiTableBodyCellProps: () => ({
       className: rowDensityCellClassName,
     }),
@@ -652,7 +654,7 @@ const DataTable = ({
         ? true
         : false,
     positionActionsColumn:
-      "last" as MRT_TableOptions<MRT_RowData>["positionActionsColumn"],
+      "last" as MRT_TableOptions<DataTableRowData>["positionActionsColumn"],
     renderRowActions: ({ row }) => renderRowActions({ row }),
 
     // Row selection
