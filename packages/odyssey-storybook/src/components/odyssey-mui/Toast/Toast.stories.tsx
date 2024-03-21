@@ -268,7 +268,7 @@ export const Dismissible: StoryObj<ToastProps> = {
       });
     });
 
-    await step("dismiss toast", async () => {
+    await step("dismiss toast and reopen", async () => {
       await waitFor(() => {
         const toastElement = canvas.getByRole("status");
         if (toastElement) {
