@@ -10,10 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { SyntheticEvent, useCallback, useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { Accordion, AccordionProps } from "@okta/odyssey-react-mui";
+import { expect } from "@storybook/jest";
+import { userEvent, within, waitFor } from "@storybook/testing-library";
+import { PlaywrightProps } from "../storybookTypes";
 
 const storybookMeta: Meta<AccordionProps> = {
   title: "MUI Components/Accordion",
@@ -141,13 +145,39 @@ export const Disabled: StoryObj<AccordionProps> = {
 export const Expanded: StoryObj<AccordionProps> = {
   args: {
     children: "This is the content of the box.",
-    isExpanded: true,
   },
   render: function C(props: AccordionProps) {
+    const [expanded, setExpanded] = useState(true);
+    const onChange = useCallback(
+      (_event: SyntheticEvent<Element>, expanded: boolean) =>
+        setExpanded(expanded),
+      [],
+    );
     return (
-      <Accordion label="Title" isExpanded={props.isExpanded}>
+      <Accordion label="Title" isExpanded={expanded} onChange={onChange}>
         {props.children}
       </Accordion>
     );
+  },
+  play: async ({ canvasElement, step }: PlaywrightProps<AccordionProps>) => {
+    await step("Accordion Expanded", async ({}) => {
+      const canvas = within(canvasElement);
+      const accordion = canvas.getByRole("button");
+      const accordionRegion = canvas.getByRole("region");
+
+      await waitFor(async () => {
+        await expect(accordionRegion).toBeVisible();
+      });
+
+      await userEvent.click(accordion);
+      await waitFor(async () => {
+        await expect(accordionRegion).not.toBeVisible();
+      });
+
+      await userEvent.click(accordion);
+      await waitFor(async () => {
+        await expect(accordionRegion).toBeVisible();
+      });
+    });
   },
 };
