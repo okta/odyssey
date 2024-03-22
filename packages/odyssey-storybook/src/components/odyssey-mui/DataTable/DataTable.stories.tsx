@@ -856,7 +856,7 @@ export const CustomFilterWithDefaultVariant: StoryObj<DataTableProps> = {
           ],
         },
       ];
-    }, [planetColumns]);
+    }, []);
 
     return (
       <DataTable
