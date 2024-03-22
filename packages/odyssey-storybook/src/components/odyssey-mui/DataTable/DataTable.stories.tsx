@@ -868,3 +868,37 @@ export const CustomFilterWithDefaultVariant: StoryObj<DataTableProps> = {
     );
   },
 };
+
+export const Truncation: StoryObj<DataTableProps> = {
+  render: function C() {
+    const columns = useMemo(
+      () => [
+        {
+          accessorKey: "truncated",
+          header: "Truncated",
+        },
+        {
+          accessorKey: "wrapped",
+          header: "Wrapped",
+          enableWrapping: true,
+        },
+      ],
+      [],
+    );
+
+    const getData = useCallback(() => {
+      const data: Array<{ truncated: string; wrapped: string }> = [];
+      [...Array(10)].forEach(() => {
+        data.push({
+          truncated:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla a quam et vulputate. Phasellus elementum turpis a lacus feugiat bibendum.",
+          wrapped:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla a quam et vulputate. Phasellus elementum turpis a lacus feugiat bibendum.",
+        });
+      }); // Corrected the missing parenthesis here
+      return data;
+    }, []);
+
+    return <DataTable columns={columns} getData={getData} hasColumnResizing />;
+  },
+};
