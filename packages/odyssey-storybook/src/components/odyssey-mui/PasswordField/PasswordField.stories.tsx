@@ -211,7 +211,7 @@ export const Error: StoryObj<typeof PasswordField> = {
   },
 };
 
-export const Errors: StoryObj<typeof PasswordField> = {
+export const ErrorsList: StoryObj<typeof PasswordField> = {
   args: {
     errorMessage: "Password requires: ",
     errorMessageList: [

@@ -119,7 +119,7 @@ const storybookMeta: Meta<DialogProps> = {
 
 export default storybookMeta;
 
-const checkDialog = async ({
+const findDialogElement = async ({
   canvasElement,
   step,
 }: PlaywrightProps<DialogProps>) => {
@@ -181,7 +181,7 @@ export const Default: StoryObj<DialogProps> = {
     title: "Initiate self-destruct protocol",
   },
   play: async ({ canvasElement, step }) => {
-    await checkDialog({ canvasElement, step });
+    await findDialogElement({ canvasElement, step });
   },
 };
 
@@ -338,7 +338,7 @@ export const Long: StoryObj<DialogProps> = {
     title: "Cryosleep liability waiver",
   },
   play: async ({ canvasElement, step }) => {
-    await checkDialog({ canvasElement, step });
+    await findDialogElement({ canvasElement, step });
   },
 };
 
@@ -367,6 +367,6 @@ export const NoButtons: StoryObj<DialogProps> = {
     title: "Ceres Station docking terms",
   },
   play: async ({ canvasElement, step }) => {
-    await checkDialog({ canvasElement, step });
+    await findDialogElement({ canvasElement, step });
   },
 };

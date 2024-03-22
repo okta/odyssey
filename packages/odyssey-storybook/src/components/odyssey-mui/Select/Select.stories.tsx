@@ -269,7 +269,7 @@ export const Error: StoryObj<typeof Select> = {
   },
 };
 
-export const Errors: StoryObj<typeof Select> = {
+export const ErrorsList: StoryObj<typeof Select> = {
   args: {
     isMultiSelect: true,
     errorMessage: "Select your destination.",
@@ -281,7 +281,7 @@ export const Errors: StoryObj<typeof Select> = {
   },
   play: async ({ step }) => {
     await step("Check for a11y errors on Select Error", async () => {
-      await waitFor(() => axeRun("Select Error"));
+      await waitFor(() => axeRun("Select Errors List"));
     });
   },
 };

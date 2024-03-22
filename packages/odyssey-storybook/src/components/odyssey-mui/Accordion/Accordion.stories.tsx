@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { SyntheticEvent, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -147,14 +147,12 @@ export const Expanded: StoryObj<AccordionProps> = {
     children: "This is the content of the box.",
   },
   render: function C(props: AccordionProps) {
-    const [expanded, setExpanded] = useState(true);
-    const onChange = useCallback(
-      (_event: SyntheticEvent<Element>, expanded: boolean) =>
-        setExpanded(expanded),
-      [],
-    );
+    const [isExpanded, setIsExpanded] = useState(true);
+    const onChange = useCallback<
+      Exclude<AccordionProps["onChange"], undefined>
+    >((_event, expanded) => setIsExpanded(expanded), []);
     return (
-      <Accordion label="Title" isExpanded={expanded} onChange={onChange}>
+      <Accordion label="Title" isExpanded={isExpanded} onChange={onChange}>
         {props.children}
       </Accordion>
     );
@@ -163,20 +161,20 @@ export const Expanded: StoryObj<AccordionProps> = {
     await step("Accordion Expanded", async ({}) => {
       const canvas = within(canvasElement);
       const accordion = canvas.getByRole("button");
-      const accordionRegion = canvas.getByRole("region");
+      const accordionContent = canvas.getByRole("region");
 
-      await waitFor(async () => {
-        await expect(accordionRegion).toBeVisible();
+      await waitFor(() => {
+        expect(accordionContent).toBeVisible();
       });
 
       await userEvent.click(accordion);
-      await waitFor(async () => {
-        await expect(accordionRegion).not.toBeVisible();
+      await waitFor(() => {
+        expect(accordionContent).not.toBeVisible();
       });
 
       await userEvent.click(accordion);
-      await waitFor(async () => {
-        await expect(accordionRegion).toBeVisible();
+      await waitFor(() => {
+        expect(accordionContent).toBeVisible();
       });
     });
   },

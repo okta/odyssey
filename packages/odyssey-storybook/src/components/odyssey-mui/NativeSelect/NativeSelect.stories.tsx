@@ -210,7 +210,7 @@ export const DefaultError: StoryObj<typeof NativeSelect> = {
   },
 };
 
-export const Errors: StoryObj<typeof NativeSelect> = {
+export const ErrorsList: StoryObj<typeof NativeSelect> = {
   ...Template,
   args: {
     errorMessage: "Select your destination.",

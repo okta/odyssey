@@ -179,7 +179,9 @@ const clickMenuButton =
   async (args: MenuButtonProps, actionName: string) => {
     const canvas = within(canvasElement);
     await step("open menu button", async () => {
-      const buttonElement = canvas.getByText(args.buttonLabel || "");
+      const buttonElement = canvas.getByRole("button", {
+        name: args.buttonLabel,
+      });
       userEvent.click(buttonElement);
       await waitFor(() => {
         axeRun(actionName);
@@ -262,7 +264,7 @@ export const ButtonVariant: StoryObj<MenuButtonProps> = {
   play: async ({ canvasElement, step }: PlaywrightProps<MenuButtonProps>) => {
     await step("Filter and Select from listbox", async () => {
       const canvas = within(canvasElement);
-      const button = canvas.getByRole("button");
+      const button = canvas.getByRole("button", { name: "More actions" });
       expect(button).toHaveAttribute("id", "floating-button");
     });
   },
@@ -339,8 +341,8 @@ export const IconButton: StoryObj<MenuButtonProps> = {
   play: async ({ canvasElement, step }: PlaywrightProps<MenuButtonProps>) => {
     await step("MenuButton Aria-Label", async () => {
       const canvas = within(canvasElement);
-      const menuButton = canvas.getByLabelText("More actions");
-      expect(menuButton).toHaveAttribute("type", "button");
+      const menuButton = canvas.queryByRole("button", { name: "More actions" });
+      expect(menuButton).not.toBeNull();
     });
   },
 };

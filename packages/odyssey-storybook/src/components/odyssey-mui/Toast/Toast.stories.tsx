@@ -272,9 +272,9 @@ export const Dismissible: StoryObj<ToastProps> = {
       await waitFor(() => {
         const toastElement = canvas.getByRole("status");
         if (toastElement) {
-          const dismissToastButton = toastElement.querySelector(
-            '[aria-label="close"]',
-          );
+          const dismissToastButton = canvas.getByRole("button", {
+            name: "close",
+          });
           if (dismissToastButton) {
             userEvent.click(dismissToastButton);
             waitFor(() => {

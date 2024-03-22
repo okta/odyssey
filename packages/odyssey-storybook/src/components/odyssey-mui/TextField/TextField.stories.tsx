@@ -248,7 +248,7 @@ export const Error: StoryObj<typeof TextField> = {
   },
 };
 
-export const Errors: StoryObj<typeof TextField> = {
+export const ErrorsList: StoryObj<typeof TextField> = {
   args: {
     errorMessage: "This field is required:",
     errorMessageList: ["At least 2 chars", "No more than 20 chars"],
