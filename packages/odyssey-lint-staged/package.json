@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-lint-staged",
-  "version": "1.15.7",
+  "version": "1.15.8",
   "main": "src/index.js",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
