@@ -144,7 +144,7 @@ export const Error: StoryObj<CheckboxGroupStoryProps> = {
   },
 };
 
-export const Errors: StoryObj<CheckboxGroupStoryProps> = {
+export const ErrorsList: StoryObj<CheckboxGroupStoryProps> = {
   ...GroupTemplate,
   args: {
     isRequired: true,

@@ -249,7 +249,7 @@ export const Error: StoryObj<AutocompleteType> = {
   },
 };
 
-export const Errors: StoryObj<AutocompleteType> = {
+export const ErrorsList: StoryObj<AutocompleteType> = {
   args: {
     hasMultipleChoices: true,
     errorMessage: "Select your destination.",
@@ -312,11 +312,8 @@ export const Loading: StoryObj<AutocompleteType> = {
     const comboBoxElement = canvas.getByRole("combobox") as HTMLInputElement;
     await step("Click for loading to be visible", async () => {
       await userEvent.click(comboBoxElement);
-      const presentationElement = screen.getByRole("presentation");
-      await expect(presentationElement).toBeVisible();
-      await expect(presentationElement.firstChild?.textContent).toBe(
-        "Loading…",
-      );
+      const loadingElement = screen.getByText("Loading…");
+      await expect(loadingElement).toBeVisible();
     });
   },
 };

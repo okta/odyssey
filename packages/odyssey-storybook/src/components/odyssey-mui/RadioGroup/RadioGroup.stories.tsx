@@ -154,7 +154,7 @@ export const Error: StoryObj<typeof RadioGroup> = {
   },
 };
 
-export const Errors: StoryObj<typeof RadioGroup> = {
+export const ErrorsList: StoryObj<typeof RadioGroup> = {
   ...Template,
   args: {
     errorMessage: "This field is required.",
