@@ -116,7 +116,7 @@ export const Truncation: StoryObj<BreadcrumbsProps> = {
       <Breadcrumb href="#eight">Eight</Breadcrumb>
       <Breadcrumb href="#nine">Nine</Breadcrumb>
       <Breadcrumb href="#ten">Ten</Breadcrumb>
-      </BreadcrumbList>
+    </BreadcrumbList>
   ),
 };
 
