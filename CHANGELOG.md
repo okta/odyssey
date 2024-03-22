@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.8](https://github.com/okta/odyssey/compare/v1.15.7...v1.15.8) (2024-03-22)
+
+### Bug Fixes
+
+- adds other architectures to yarnrc ([#2191](https://github.com/okta/odyssey/issues/2191)) ([5605ec4](https://github.com/okta/odyssey/commit/5605ec432744110172393bd01809a0866e10e21b))
+
 ## [1.15.7](https://github.com/okta/odyssey/compare/v1.15.6...v1.15.7) (2024-03-20)
 
 ### Bug Fixes
