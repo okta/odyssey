@@ -20,7 +20,7 @@ const storyBookMeta: Meta<EmptyStateProps> = {
   argTypes: {
     heading: {
       control: "text",
-      description: "The main heading of the empty state",
+      description: "Main heading of the empty state",
       type: {
         required: true,
         name: "string",
@@ -29,19 +29,20 @@ const storyBookMeta: Meta<EmptyStateProps> = {
 
     text: {
       control: "text",
-      description: "A descriptive text explaining more context",
+      description:
+        "A descriptive text explaining more context as to why we don't have data",
       type: {
         required: true,
         name: "string",
       },
     },
 
-    primaryButton: {
+    primaryCallToActionComponent: {
       description: "Primary call to action",
       control: "custom",
     },
 
-    secondaryButton: {
+    secondaryCallToActionComponent: {
       description: "Secondary call to action",
       control: "custom",
     },
@@ -56,8 +57,12 @@ export const Default: StoryObj<EmptyStateProps> = {
   args: {
     heading: "Start by adding data assets",
     text: "All relevant data will be displayed and can be searched and filtered",
-    primaryButton: <Button label="Button label" variant="primary" />,
-    secondaryButton: <Button label="Button label" variant="secondary" />,
+    primaryCallToActionComponent: (
+      <Button label="Button label" variant="primary" />
+    ),
+    secondaryCallToActionComponent: (
+      <Button label="Button label" variant="secondary" />
+    ),
   },
 
   render: (props) => {
