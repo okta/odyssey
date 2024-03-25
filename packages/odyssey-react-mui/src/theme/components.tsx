@@ -434,6 +434,7 @@ export const components = ({
             },
           },
           "& > ul": {
+            position: "relative",
             paddingInlineStart: 0,
             marginBlockStart: 0,
             marginBlockEnd: 0,
@@ -442,6 +443,10 @@ export const components = ({
         loading: {
           paddingBlock: odysseyTokens.Spacing3,
           paddingInline: odysseyTokens.Spacing4,
+          borderWidth: odysseyTokens.BorderWidthMain,
+          borderStyle: odysseyTokens.BorderStyleMain,
+          borderColor: odysseyTokens.HueNeutral200,
+          borderRadius: odysseyTokens.BorderRadiusMain,
         },
         popupIndicator: {
           padding: odysseyTokens.Spacing1,
@@ -452,9 +457,16 @@ export const components = ({
           paddingBlockStart: odysseyTokens.Spacing1,
           height: "100%",
         },
-        paper: {
-          height: "100%",
-        },
+        paper: ({ ownerState }) => ({
+          /**
+           * ListboxComponent is used when `isVirtualized` prop is true.
+           * This style is needed to render the virtualized window. It renders out a parent div
+           * that needs a height to be set, otherwise the height is 0 and nothing appears.
+           */
+          ...(ownerState.ListboxComponent !== undefined && {
+            height: "100%",
+          }),
+        }),
         inputRoot: ({ ownerState }) => ({
           ...(ownerState.readOnly === true && {
             backgroundColor: odysseyTokens.HueNeutral50,
@@ -1623,9 +1635,6 @@ export const components = ({
           [`:has(> .${radioClasses.root})`]: {
             alignItems: "flex-start",
           },
-          [`& .${checkboxClasses.root}`]: {
-            marginBlockStart: 0,
-          },
           [`&:hover .${radioClasses.root}, &:hover .${checkboxClasses.root}`]: {
             color: odysseyTokens.TypographyColorBody,
           },
@@ -1839,7 +1848,8 @@ export const components = ({
         }),
         input: {
           height: "auto",
-          paddingBlock: odysseyTokens.Spacing3,
+          // We're subtracting a pixel so the total height, including borders, is 40px
+          paddingBlock: `calc(${odysseyTokens.Spacing3} - ${odysseyTokens.BorderWidthMain})`,
           paddingInline: odysseyTokens.Spacing3,
           boxShadow: "none",
 
@@ -2284,7 +2294,9 @@ export const components = ({
       },
       styleOverrides: {
         select: {
-          paddingBlock: odysseyTokens.Spacing3,
+          height: "auto",
+          // We're subtracting a pixel so the total height, including borders, is 40px
+          paddingBlock: `calc(${odysseyTokens.Spacing3} - ${odysseyTokens.BorderWidthMain})`,
           paddingInline: odysseyTokens.Spacing3,
           minHeight: 0,
 

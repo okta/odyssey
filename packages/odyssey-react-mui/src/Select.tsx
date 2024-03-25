@@ -92,6 +92,7 @@ const NonInteractiveIcon = styled(CloseCircleFilledIcon, {
   margin-inline-start: ${({ odysseyDesignTokens }) =>
     odysseyDesignTokens.Spacing2};
   margin-inline-end: -${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing1};
+  margin-block-end: -1px;
 `;
 
 const ChipsInnerContainer = styled(MuiBox, {
@@ -104,7 +105,7 @@ const ChipsInnerContainer = styled(MuiBox, {
   display: flex;
   flex-wrap: wrap;
   gap: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing1};
-  pointer-events: ${({ isInteractive }) => (isInteractive ? "auto" : "none")};
+  pointer-events: none;
   opacity: ${({ isInteractive }) => (isInteractive ? 1 : 0)};
 `;
 
@@ -342,7 +343,9 @@ const Select = <
           isInteractive={isInteractive}
           odysseyDesignTokens={odysseyDesignTokens}
         >
-          <ChipsSpacer odysseyDesignTokens={odysseyDesignTokens} />
+          {selection.length <= 0 && (
+            <ChipsSpacer odysseyDesignTokens={odysseyDesignTokens} />
+          )}
           {selection.map(
             (item: string) =>
               item?.length > 0 && (
