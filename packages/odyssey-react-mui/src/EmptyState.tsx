@@ -33,28 +33,28 @@ const EmptyContainer = styled("div", {
 
 export type EmptyStateProps = {
   /**
-   * The main heading of the empty state
+   * Main heading of the empty state
    */
   heading: string;
   /**
-   * A descriptive text explaining more context
+   * A descriptive text explaining more context as to why we don't have data.
    */
   text: string;
   /**
    * Primary call to action
    */
-  primaryButton?: ReactNode;
+  primaryCallToActionComponent?: ReactNode;
   /**
    * Secondary call to action
    */
-  secondaryButton?: ReactNode;
+  secondaryCallToActionComponent?: ReactNode;
 };
 
 const EmptyState = ({
   heading,
   text,
-  primaryButton,
-  secondaryButton,
+  primaryCallToActionComponent,
+  secondaryCallToActionComponent,
 }: EmptyStateProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
@@ -62,10 +62,10 @@ const EmptyState = ({
     <EmptyContainer odysseyDesignTokens={odysseyDesignTokens}>
       <Heading4>{heading}</Heading4>
       <Paragraph>{text}</Paragraph>
-      {(primaryButton || secondaryButton) && (
+      {(primaryCallToActionComponent || secondaryCallToActionComponent) && (
         <Box sx={{ marginBlockStart: 5 }}>
-          {secondaryButton}
-          {primaryButton}
+          {secondaryCallToActionComponent}
+          {primaryCallToActionComponent}
         </Box>
       )}
     </EmptyContainer>
