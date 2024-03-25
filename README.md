@@ -44,6 +44,10 @@ Note:
 
 Please follow our [Getting Started guide](https://odyssey-storybook.okta.design/?path=/docs/contributing-getting-started--docs).
 
+## Running Odyssey locally
+
+Follow these steps for local [Odyssey development](https://odyssey-storybook.okta.design/?path=/docs/contributing-odyssey-development--docs)
+
 ## License
 
 [Apache Version 2.0](https://github.com/okta/odyssey/blob/main/LICENSE)
