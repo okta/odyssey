@@ -12,29 +12,35 @@
 
 import { t } from "i18next";
 
-interface UsePaginationParams {
+type UsePaginationType = {
   pageIndex: number;
   pageSize: number;
   totalRows?: number;
-}
+};
 
 export const usePagination = ({
   pageIndex,
   pageSize,
   totalRows,
-}: UsePaginationParams) => {
+}: UsePaginationType) => {
   const firstRow = pageSize * (pageIndex - 1) + 1;
-  let lastRow = firstRow + (pageSize - 1);
+  const lastRow = firstRow + (pageSize - 1);
   if (totalRows && lastRow > totalRows) {
     // If the last eligible row is greater than the number of total rows,
     // show the number of total rows instead (ie, if we're showing rows
     // 180-200 but there are only 190 rows, show 180-190 instead)
-    lastRow = totalRows;
+    return {
+      firstRow,
+      lastRow: totalRows,
+      totalRowsLabel: totalRows
+        ? t("pagination.rowswithtotal", { firstRow, lastRow, totalRows })
+        : t("pagination.rowswithouttotal", { firstRow, lastRow }),
+    };
   }
   return {
     firstRow,
     lastRow,
-    totalLabel: totalRows
+    totalRowsLabel: totalRows
       ? t("pagination.rowswithtotal", { firstRow, lastRow, totalRows })
       : t("pagination.rowswithouttotal", { firstRow, lastRow }),
   };

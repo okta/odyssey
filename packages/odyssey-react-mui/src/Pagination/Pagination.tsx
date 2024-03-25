@@ -147,7 +147,7 @@ const Pagination = ({
     setRowsPerPage(pageSize);
   }, [pageIndex, pageSize]);
 
-  const { totalLabel } = usePagination({ pageIndex, pageSize, totalRows });
+  const { totalRowsLabel } = usePagination({ pageIndex, pageSize, totalRows });
 
   const handlePaginationChange = useCallback(() => {
     const updatedPage =
@@ -254,7 +254,7 @@ const Pagination = ({
           />
         </Box>
         <Paragraph component="span" color="textSecondary">
-          {totalLabel}
+          {totalRowsLabel}
         </Paragraph>
       </PaginationSegment>
 
