@@ -71,7 +71,7 @@ export * from "./createShadowRootElement";
 export * from "./createUniqueId";
 export * from "./DataTable";
 export * from "./Dialog";
-export * from "./EmptyState";
+export * from "./EmptyDataState";
 export * from "./Fieldset";
 export * from "./FieldComponentProps";
 export * from "./Form";
