@@ -130,7 +130,7 @@ export const datePickerTheme: ThemeOptions = {
           borderWidth: theme.mixins.borderWidth,
           borderRadius: theme.mixins.borderRadius,
           paddingBlock: theme.spacing(4),
-          paddingInline: theme.spacing(2),
+          paddingInline: theme.spacing(4),
           width: "100%",
         }),
       },
@@ -138,14 +138,14 @@ export const datePickerTheme: ThemeOptions = {
     MuiPickersLayout: {
       styleOverrides: {
         contentWrapper: ({ theme }) => ({
-          // fontFamily: theme.typography.fontFamily,
-          // fontSize: "14px",
-          // width: "55ch",
-          // letterSpacing: "0.00938em",
+          //   // fontFamily: theme.typography.fontFamily,
+          //   // fontSize: "14px",
+          width: `${(296 / 16) * (16 / 14)}rem`,
+          //   // letterSpacing: "0.00938em",
 
-          "& > div": {
-            // width: `${(296 / 16) * (16 / 14)}rem`,
-          },
+          //   "& > div": {
+          //     // width: `${(296 / 16) * (16 / 14)}rem`,
+          //   },
         }),
       },
     },
@@ -203,14 +203,17 @@ export const datePickerTheme: ThemeOptions = {
     MuiPickersCalendarHeader: {
       styleOverrides: {
         label: ({ theme }) => ({
-          fontSize: theme.typography.h6.fontSize,
-          fontWeight: theme.typography.fontWeightBold,
+          fontSize: theme.typography.h5.fontSize,
+          fontFamily: theme.typography.h5.fontFamily,
+          // fontWeight: theme.typography.fontWeightBold,
         }),
         root: ({ theme }) => ({
           justifyContent: "space-between",
-          marginBottom: theme.spacing(3),
-          marginTop: 0,
-          padding: `0  0 ${theme.spacing(3)}`,
+          marginBlockEnd: theme.spacing(5),
+          marginBlockStart: 0,
+          maxHeight: "unset",
+          minHeight: "unset",
+          padding: `0  0 ${theme.spacing(4)}`,
           width: "auto",
           borderBottom: `1px solid ${theme.palette.grey[100]}`,
         }),
@@ -283,7 +286,7 @@ export const datePickerTheme: ThemeOptions = {
         root: ({ theme }) => ({
           display: "block",
           width: "auto",
-          maxHeight: `${(284 / 16) * (16 / 14)}rem`,
+          // maxHeight: `${(284 / 16) * (16 / 14)}rem`,
           marginBottom: `-${theme.spacing(popupSpacingValue)}`,
           marginInlineEnd: 0,
           paddingLeft: 0,

@@ -15,12 +15,14 @@ import { useTranslation } from "react-i18next";
 import {
   DatePicker as MuiDatePicker,
   DatePickerProps as MuiDatePickerProps,
+  DateValidationError,
   LocalizationProvider,
 } from "@mui/x-date-pickers";
 import { DateTime } from "luxon";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
 import { InputAdornment } from "@mui/material";
 import styled from "@emotion/styled";
+import * as locales from "@mui/x-date-pickers/locales";
 
 import { Button } from "../Button";
 import {
@@ -54,7 +56,7 @@ const DatePickerWidthContainer = styled.div<{
   maxWidth: odysseyDesignTokens.TypographyLineLengthMax,
 
   ".MuiInput-root": {
-    maxWidth: `calc(${odysseyDesignTokens.Spacing9} * 3)`,
+    width: "170px",
   },
 }));
 
@@ -71,7 +73,7 @@ export type DatePickerProps = {
     error,
   }: {
     value: Date;
-    error?: string;
+    error?: DateValidationError;
   }) => void;
   /**
    * Callback fired when the text input receives typed characters.
@@ -101,11 +103,13 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
     },
     ref,
   ) => {
+    console.log({locales})
     const odysseyDesignTokens = useOdysseyDesignTokens();
     const [isOpen, setIsOpen] = useState(false);
 
     const { i18n } = useTranslation();
     const { language } = i18n;
+    console.log({language})
 
     const invalidLocales = ["ok_PL", "ok_SK"];
     const isInvalidLocale = invalidLocales.includes(language);
