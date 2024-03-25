@@ -34,7 +34,7 @@ export const calloutSeverityValues = [
 
 export type CalloutProps = {
   /**
-   * @deprecated Callout content shuold be set via title, text, linkText, and linkUrl
+   * Used to optionally pass a text list to the component
    */
   children?: ReactNode;
   /**

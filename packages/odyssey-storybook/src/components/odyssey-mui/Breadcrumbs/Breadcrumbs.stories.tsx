@@ -84,3 +84,29 @@ export const Default: StoryObj<BreadcrumbsProps> = {
     </BreadcrumbList>
   ),
 };
+
+export const Truncation: StoryObj<BreadcrumbsProps> = {
+  args: {
+    homeHref: "#home",
+  },
+  render: (args) => (
+    <BreadcrumbList {...args}>
+      <Breadcrumb href="#one">
+        This is a very long title that should be truncated
+      </Breadcrumb>
+      <Breadcrumb href="#two">Two</Breadcrumb>
+      <Breadcrumb href="#three" iconName="user">
+        This is a very long title with an icon
+      </Breadcrumb>
+      <Breadcrumb href="#four">Four</Breadcrumb>
+      <Breadcrumb href="#five" iconName="group">
+        Five
+      </Breadcrumb>
+      <Breadcrumb href="#six">Six</Breadcrumb>
+      <Breadcrumb href="#seven">Seven</Breadcrumb>
+      <Breadcrumb href="#eight">Eight</Breadcrumb>
+      <Breadcrumb href="#nine">Nine</Breadcrumb>
+      <Breadcrumb href="#ten">Ten</Breadcrumb>
+    </BreadcrumbList>
+  ),
+};

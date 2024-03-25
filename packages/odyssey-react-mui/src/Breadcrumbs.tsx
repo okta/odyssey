@@ -30,6 +30,7 @@ import { GroupIcon, HomeIcon, UserIcon } from "./icons.generated";
 import { Subordinate } from "./Typography";
 import { useTranslation } from "react-i18next";
 import { HtmlProps } from "./HtmlProps";
+import styled from "@emotion/styled";
 
 export type BreadcrumbType = "listItem" | "menuItem" | "currentPage";
 
@@ -53,6 +54,13 @@ export const BreadcrumbContext = createContext<BreadcrumbContextType>({
   breadcrumbType: "listItem",
 });
 
+const BreadcrumbContent = styled.span`
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 10rem;
+  text-overflow: ellipsis;
+`;
+
 export const Breadcrumb = ({ children, href, iconName }: BreadcrumbProps) => {
   const { breadcrumbType } = useContext(BreadcrumbContext);
 
@@ -63,7 +71,7 @@ export const Breadcrumb = ({ children, href, iconName }: BreadcrumbProps) => {
       ) : iconName === "user" ? (
         <UserIcon />
       ) : null}
-      {children}
+      <BreadcrumbContent>{children}</BreadcrumbContent>
     </>
   );
 
