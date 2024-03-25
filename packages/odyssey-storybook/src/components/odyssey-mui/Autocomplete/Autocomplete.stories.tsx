@@ -199,14 +199,14 @@ export const Default: StoryObj<AutocompleteType> = {
     await step("Filter and Select from listbox", async () => {
       await userEvent.click(comboBoxElement);
       const listboxElement = screen.getByRole("listbox");
-      await expect(listboxElement).toBeVisible();
+      expect(listboxElement).toBeVisible();
     });
     await step("Check for 'No options' in the list", async () => {
       await axeRun("Autocomplete Default");
       await waitFor(async () => {
         await userEvent.type(comboBoxElement, "q");
         const noOptionsElement = screen.getByText("No options");
-        await expect(noOptionsElement).toBeVisible();
+        expect(noOptionsElement).toBeVisible();
       });
     });
     await step("Check for Filtered item from the list", async () => {
@@ -313,7 +313,7 @@ export const Loading: StoryObj<AutocompleteType> = {
     await step("Click for loading to be visible", async () => {
       await userEvent.click(comboBoxElement);
       const loadingElement = screen.getByText("Loading…");
-      await expect(loadingElement).toBeVisible();
+      expect(loadingElement).toBeVisible();
     });
   },
 };
@@ -329,7 +329,7 @@ export const Multiple: StoryObj<AutocompleteType> = {
     await step("Check for list box to be visible", async () => {
       await userEvent.click(comboBoxElement);
       const listboxElement = screen.getByRole("listbox");
-      await expect(listboxElement).toBeVisible();
+      expect(listboxElement).toBeVisible();
     });
     await step("Select multiple items", async () => {
       await userEvent.type(comboBoxElement, "z");
