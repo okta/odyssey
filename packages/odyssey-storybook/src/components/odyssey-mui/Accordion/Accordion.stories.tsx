@@ -148,9 +148,10 @@ export const Expanded: StoryObj<AccordionProps> = {
   },
   render: function C(props: AccordionProps) {
     const [isExpanded, setIsExpanded] = useState(true);
-    const onChange = useCallback<
-      Exclude<AccordionProps["onChange"], undefined>
-    >((_event, expanded) => setIsExpanded(expanded), []);
+    const onChange = useCallback<NonNullable<AccordionProps["onChange"]>>(
+      (_event, expanded) => setIsExpanded(expanded),
+      [],
+    );
     return (
       <Accordion label="Title" isExpanded={isExpanded} onChange={onChange}>
         {props.children}
