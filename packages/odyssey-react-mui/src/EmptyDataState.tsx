@@ -73,6 +73,6 @@ const EmptyDataState = ({
 };
 
 const MemoizedEmptyDataState = memo(EmptyDataState);
-MemoizedEmptyDataState.displayName = "EmptyState";
+MemoizedEmptyDataState.displayName = "EmptyDataState";
 
 export { MemoizedEmptyDataState as EmptyDataState };
