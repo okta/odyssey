@@ -85,6 +85,9 @@ const storybookMeta: Meta<typeof Autocomplete> = {
         type: {
           summary: "boolean",
         },
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     isOptional: fieldComponentPropsMetaData.isOptional,
