@@ -24,28 +24,10 @@ import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaDat
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const StorybookDatePicker = (props: DatePickerProps) => {
-  const [value, setValue] = useState<Date>();
-
-  const datePickerProps: DatePickerProps = useMemo(
-    () => ({
-      ...props,
-      onCalendarDateChange: (date) => {
-        console.log({ date });
-        // console.log({ newValue });
-        // console.log('date in consumer onChange', date)
-        if (date) {
-          setValue(date);
-        }
-      },
-      value,
-    }),
-    [props, value],
-  );
-
   return (
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <DatePicker {...datePickerProps} />
-      </LocalizationProvider>
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <DatePicker {...props} />
+    </LocalizationProvider>
   );
 };
 
@@ -99,4 +81,32 @@ export const Error: StoryObj<DatePickerProps> = {
     hint: "Use MM/DD/YYYY format",
     errorMessage: "Some error message here"
   },
+};
+
+export const Controlled: StoryObj<DatePickerProps> = {
+  args: {
+    label: "Choose a date",
+    hint: "Use MM/DD/YYYY format",
+  },
+  render: (props) => {
+    const [value, setValue] = useState<Date>(new Date());
+    const datePickerProps: DatePickerProps = useMemo(
+      () => ({
+        ...props,
+        onCalendarDateChange: ({ value }) => {
+          if (value) {
+            setValue(value);
+          }
+        },
+        value,
+      }),
+      [props, value],
+    );
+
+    return (
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <DatePicker {...datePickerProps} />
+      </LocalizationProvider>
+    );
+  }
 };

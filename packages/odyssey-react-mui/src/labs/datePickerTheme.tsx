@@ -131,29 +131,34 @@ export const datePickerTheme: ThemeOptions = {
           borderRadius: theme.mixins.borderRadius,
           paddingBlock: theme.spacing(4),
           paddingInline: theme.spacing(4),
-          width: "100%",
+          // 1.5x the size of the input
+          width: `calc(${theme.spacing(4)} * 16.5)`,
         }),
       },
     },
-    MuiPickersLayout: {
-      styleOverrides: {
-        contentWrapper: ({ theme }) => ({
-          //   // fontFamily: theme.typography.fontFamily,
-          //   // fontSize: "14px",
-          width: `${(296 / 16) * (16 / 14)}rem`,
-          //   // letterSpacing: "0.00938em",
+    // MuiPickersLayout: {
+    //   styleOverrides: {
+    //     contentWrapper: ({ theme }) => ({
+    //       // fontFamily: theme.typography.fontFamily,
+    //       // fontSize: "14px",
+    //       width: `calc(${theme.spacing(4)} * 11)rem`,
+    //       // letterSpacing: "0.00938em",
 
-          //   "& > div": {
-          //     // width: `${(296 / 16) * (16 / 14)}rem`,
-          //   },
-        }),
-      },
-    },
+    //       "& > div": {
+    //         // width: `${(296 / 16) * (16 / 14)}rem`,
+    //       },
+    //     }),
+    //   },
+    // },
     MuiDayCalendar: {
       styleOverrides: {
-        header: {
+        // root: ({ theme }) => ({
+        //   // paddingInline: theme.spacing(3),
+        // }),
+        header: ({ theme }) => ({
           justifyContent: "space-between",
-        },
+          marginBlockStart: theme.spacing(5),
+        }),
         slideTransition: () => ({
           minHeight: `${(214 / 16) * (16 / 14)}rem`,
         }),
@@ -170,10 +175,7 @@ export const datePickerTheme: ThemeOptions = {
         }),
         weekDayLabel: ({ theme }) => ({
           color: theme.palette.grey[900],
-          // flexBasis: theme.spacing(6),
           flexShrink: 0,
-          // fontWeight: theme.typography.fontWeightBold,
-          // height: theme.spacing(6),
           marginBottom: theme.spacing(2),
           marginLeft: 0,
           marginRight: 0,
@@ -203,23 +205,27 @@ export const datePickerTheme: ThemeOptions = {
     MuiPickersCalendarHeader: {
       styleOverrides: {
         label: ({ theme }) => ({
-          fontSize: theme.typography.h5.fontSize,
-          fontFamily: theme.typography.h5.fontFamily,
-          // fontWeight: theme.typography.fontWeightBold,
+          ...theme.typography.h5,
+          margin: 0,
         }),
         root: ({ theme }) => ({
           justifyContent: "space-between",
-          marginBlockEnd: theme.spacing(5),
+          marginBlockEnd: 0,
           marginBlockStart: 0,
           maxHeight: "unset",
           minHeight: "unset",
-          padding: `0  0 ${theme.spacing(4)}`,
+          paddingInline: 0,
+          paddingBlockEnd: theme.spacing(4),
           width: "auto",
           borderBottom: `1px solid ${theme.palette.grey[100]}`,
         }),
         labelContainer: {
           marginRight: 0,
+          overflow: "visible",
         },
+        switchViewButton: ({ theme }) => ({
+          marginInlineStart: theme.spacing(1)
+        })
       },
     },
     MuiPickersDay: {
@@ -289,8 +295,7 @@ export const datePickerTheme: ThemeOptions = {
           // maxHeight: `${(284 / 16) * (16 / 14)}rem`,
           marginBottom: `-${theme.spacing(popupSpacingValue)}`,
           marginInlineEnd: 0,
-          paddingLeft: 0,
-          paddingRight: 0,
+          paddingInline: 0
         }),
       },
     },

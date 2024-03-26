@@ -10,13 +10,21 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { forwardRef, memo, useCallback, useRef, useState } from "react";
+import {
+  forwardRef,
+  memo,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useTranslation } from "react-i18next";
 import {
   DatePicker as MuiDatePicker,
   DatePickerProps as MuiDatePickerProps,
   DateValidationError,
   LocalizationProvider,
+  PickersLocaleText,
 } from "@mui/x-date-pickers";
 import { DateTime } from "luxon";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
@@ -41,6 +49,35 @@ import {
 import { OdysseyThemeProvider } from "../OdysseyThemeProvider";
 import { formatLanguageCodeToHyphenated } from "../OdysseyTranslationProvider";
 
+const localeKeyMap = new Map<string, string>([
+  ["cs", "csCZ"],
+  ["da", "daDK"],
+  ["de", "deDE"],
+  ["el", "elGR"],
+  ["es", "esES"],
+  ["fi", "fiFI"],
+  ["fr", "frFR"],
+  ["hu", "huHU"],
+  // Indonesian not supported
+  ["it", "itIT"],
+  ["ja", "jaJP"],
+  ["ko", "koKR"],
+  // Malay not supported
+  ["nb", "nbNO"],
+  ["nl_NL", "nlNL"],
+  ["pl", "plPL"],
+  ["pt_BR", "ptBR"],
+  ["ro", "roRO"],
+  ["ru", "ruRU"],
+  ["sv", "svSE"],
+  // Thai not supported
+  ["tr", "trTR"],
+  ["uk", "ukUA"],
+  ["vi", "viVN"],
+  ["zh_CN", "zhCN"],
+  // Chinese (traditional) not supported
+]);
+
 const DatePickerContainer = styled.div({
   display: "flex",
 
@@ -56,7 +93,8 @@ const DatePickerWidthContainer = styled.div<{
   maxWidth: odysseyDesignTokens.TypographyLineLengthMax,
 
   ".MuiInput-root": {
-    width: "170px",
+    // 176px
+    width: `calc(${odysseyDesignTokens.Spacing4} * 11)`,
   },
 }));
 
@@ -103,31 +141,45 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
     },
     ref,
   ) => {
-    console.log({locales})
     const odysseyDesignTokens = useOdysseyDesignTokens();
     const [isOpen, setIsOpen] = useState(false);
+    const [localeText, setLocaleText] = useState(locales.DEFAULT_LOCALE);
 
     const { i18n } = useTranslation();
     const { language } = i18n;
-    console.log({language})
 
     const invalidLocales = ["ok_PL", "ok_SK"];
     const isInvalidLocale = invalidLocales.includes(language);
 
     const containerRef = useRef<HTMLInputElement>(null);
 
+    useEffect(() => {
+      const localeKey = language
+        ? localeKeyMap.get(language)
+        : undefined;
+
+      Object.entries(locales).forEach((locale) => {
+        const [key, value] = locale;
+
+        if (key === localeKey) {          
+          setLocaleText(
+            // @ts-ignore
+            value.components.MuiLocalizationProvider.defaultProps.localeText
+          );
+          return 
+        }
+      });
+    }, [language, locales]);
+
     const formatDateTimeToJsDateOnCalendarSelection = useCallback<
       NonNullable<MuiDatePickerProps<DateTime>["onChange"]>
     >(
       (value, errorContext) => {
-        const { validationError } = errorContext;
-        // console.log({ value });
-        if (value) {
-          const jsDateFromDateTime = new Date(value?.toJSDate());
-          // console.log({ jsDateFromDateTime });
-          // if (isValidDate(jsDateFromDateTime)) {
 
-          // }
+        if (value) {
+          const { validationError } = errorContext;
+          const jsDateFromDateTime = new Date(value?.toJSDate());
+          
           onCalendarDateChange?.({ value: jsDateFromDateTime, error: validationError });
         }
       },
@@ -195,11 +247,13 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       return null;
     }
 
+    
     return (
       <OdysseyThemeProvider themeOverride={datePickerTheme}>
         <LocalizationProvider
           dateAdapter={AdapterLuxon}
           adapterLocale={formatLanguageCodeToHyphenated(language)}
+          localeText={localeText}
         >
           <DatePickerContainer>
             <DatePickerWidthContainer
