@@ -468,6 +468,7 @@ const Select = <
       onBlur,
       onChange,
       onFocus,
+      renderedOptions,
       renderValue,
       testId,
       translate,
