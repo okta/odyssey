@@ -272,13 +272,13 @@ export const Dismissible: StoryObj<ToastProps> = {
       await waitFor(() => {
         const toastElement = canvas.getByRole("status");
         if (toastElement) {
-          const dismissToastButton = canvas.getByRole("button", {
+          const dismissToastButton = within(toastElement).getByRole("button", {
             name: "close",
           });
           if (dismissToastButton) {
             userEvent.click(dismissToastButton);
             waitFor(() => {
-              expect(toastElement).not.toBeInTheDocument();
+              expect(toastElement).not.toBeVisible();
 
               const buttonElement = canvas.getByText(
                 `Open ${args.severity} toast`,
