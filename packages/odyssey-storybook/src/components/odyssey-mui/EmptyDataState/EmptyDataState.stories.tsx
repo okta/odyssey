@@ -69,7 +69,7 @@ export const Default: StoryObj<EmptyDataStateProps> = {
     ),
   },
 
-  render: (props) => {
+  render: function C(props) {
     return <EmptyDataState {...props} />;
   },
 };
