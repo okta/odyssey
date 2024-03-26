@@ -270,12 +270,14 @@ const Select = <
       } = event;
       if (controlledStateRef.current !== CONTROLLED) {
         setInternalSelectedValues(
-          (typeof value === "string" ? value.split(",") : value) as Value,
+          (typeof value === "string" && hasMultipleChoices
+            ? value.split(",")
+            : value) as Value,
         );
       }
       onChangeProp?.(event, child);
     },
-    [onChangeProp],
+    [hasMultipleChoices, onChangeProp],
   );
 
   // Normalize the options array to accommodate the various
@@ -378,6 +380,7 @@ const Select = <
       internalSelectedValues,
       odysseyDesignTokens,
       onChange,
+      removeSelectedValue,
     ],
   );
 
@@ -391,7 +394,6 @@ const Select = <
             <ListSubheader key={option.text}> {option.text} </ListSubheader>
           );
         }
-        console.log({ internalSelectedValues }, { option });
 
         const isSelected = hasMultipleChoices
           ? internalSelectedValues?.includes(option.value)
@@ -405,13 +407,11 @@ const Select = <
           >
             {hasMultipleChoices && <MuiCheckbox checked={isSelected} />}
             {option.text}
-            {!hasMultipleChoices &&
-              (internalSelectedValues?.includes(option.value) ||
-                internalSelectedValues === option.value) && (
-                <ListItemSecondaryAction>
-                  <CheckIcon />
-                </ListItemSecondaryAction>
-              )}
+            {!hasMultipleChoices && internalSelectedValues === option.value && (
+              <ListItemSecondaryAction>
+                <CheckIcon />
+              </ListItemSecondaryAction>
+            )}
           </MuiMenuItem>
         );
       }),
