@@ -472,7 +472,6 @@ const Select = <
       renderValue,
       testId,
       translate,
-      value,
     ],
   );
 
