@@ -321,6 +321,21 @@ export const Loading: StoryObj<AutocompleteType> = {
   },
 };
 
+export const NoOptions: StoryObj<AutocompleteType> = {
+  args: {
+    options: [],
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const comboBoxElement = canvas.getByRole("combobox") as HTMLInputElement;
+    await step("Click for loading to be visible", async () => {
+      await userEvent.click(comboBoxElement);
+      const loadingElement = screen.getByText("No options");
+      expect(loadingElement).toBeVisible();
+    });
+  },
+};
+
 export const Multiple: StoryObj<AutocompleteType> = {
   args: {
     hasMultipleChoices: true,
