@@ -379,7 +379,6 @@ const Select = <
       hasMultipleChoices,
       internalSelectedValues,
       odysseyDesignTokens,
-      onChange,
       removeSelectedValue,
     ],
   );
