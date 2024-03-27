@@ -12,6 +12,8 @@
 
 import type { StoryObj } from "@storybook/react";
 
+import { within } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { Link, LinkProps, linkVariantValues } from "@okta/odyssey-react-mui";
 import { InformationCircleFilledIcon } from "@okta/odyssey-react-mui/icons";
@@ -135,5 +137,15 @@ export const External: StoryObj<LinkProps> = {
     children: "Visit okta.com",
     rel: "noopener",
     target: "_blank",
+    ariaLabel: "External Link",
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("Link Aria-Label", async ({ args }) => {
+      const canvas = within(canvasElement);
+      const link = canvas.getByRole("link", { name: "External Link" });
+      expect(link).toHaveAttribute("href", args.href);
+      expect(link).toHaveAttribute("rel", args.rel);
+      expect(link).toHaveAttribute("target", args.target);
+    });
   },
 };

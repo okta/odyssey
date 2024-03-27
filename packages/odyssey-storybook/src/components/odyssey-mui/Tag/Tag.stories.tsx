@@ -15,7 +15,7 @@ import { Tag, TagList, TagProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { GroupIcon } from "@okta/odyssey-react-mui/icons";
 import icons from "../../../../.storybook/components/iconUtils";
-import { userEvent } from "@storybook/testing-library";
+import { userEvent, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import { axeRun } from "../../../axe-util";
 
@@ -126,9 +126,15 @@ export const Icon: StoryObj<TagProps> = {
 export const Clickable: StoryObj<TagProps> = {
   args: {
     label: "Starship",
-    onClick: function noRefCheck(event) {
-      event;
-    },
+  },
+  play: async ({ args, canvasElement, step }) => {
+    await step("remove the tag on click", async () => {
+      const canvas = within(canvasElement);
+      const tag = canvas.getByText(args.label);
+      await userEvent.click(tag);
+      expect(args.onClick).toHaveBeenCalledTimes(1);
+      await axeRun("Clickable Tag");
+    });
   },
 };
 

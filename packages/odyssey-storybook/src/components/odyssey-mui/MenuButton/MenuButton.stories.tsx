@@ -12,6 +12,7 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import {
+  Box,
   Divider,
   ListItemIcon,
   ListItemText,
@@ -32,6 +33,7 @@ import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaDat
 import icons from "../../../../.storybook/components/iconUtils";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
 import { axeRun } from "../../../axe-util";
 import type { PlaywrightProps } from "../storybookTypes";
 
@@ -177,7 +179,9 @@ const clickMenuButton =
   async (args: MenuButtonProps, actionName: string) => {
     const canvas = within(canvasElement);
     await step("open menu button", async () => {
-      const buttonElement = canvas.getByText(args.buttonLabel || "");
+      const buttonElement = canvas.getByRole("button", {
+        name: args.buttonLabel,
+      });
       userEvent.click(buttonElement);
       await waitFor(() => {
         axeRun(actionName);
@@ -203,7 +207,7 @@ export const Simple: StoryObj<MenuButtonProps> = {
     canvasElement: HTMLElement;
     step: PlaywrightProps<MenuButtonProps>["step"];
   }) => {
-    clickMenuButton({ canvasElement, step })(args, "Menu Button Simple");
+    await clickMenuButton({ canvasElement, step })(args, "Menu Button Simple");
   },
 };
 
@@ -239,7 +243,10 @@ export const ActionIcons: StoryObj<MenuButtonProps> = {
     canvasElement: HTMLElement;
     step: PlaywrightProps<MenuButtonProps>["step"];
   }) => {
-    clickMenuButton({ canvasElement, step })(args, "Menu Button Action Icons");
+    await clickMenuButton({ canvasElement, step })(
+      args,
+      "Menu Button Action Icons",
+    );
   },
 };
 
@@ -252,6 +259,14 @@ export const ButtonVariant: StoryObj<MenuButtonProps> = {
       <MenuItem key="2">Edit configuration</MenuItem>,
       <MenuItem key="3">Launch</MenuItem>,
     ],
+    id: "floating",
+  },
+  play: async ({ canvasElement, step }: PlaywrightProps<MenuButtonProps>) => {
+    await step("Filter and Select from listbox", async () => {
+      const canvas = within(canvasElement);
+      const button = canvas.getByRole("button", { name: "More actions" });
+      expect(button).toHaveAttribute("id", "floating-button");
+    });
   },
 };
 
@@ -268,6 +283,20 @@ export const Groupings: StoryObj<MenuButtonProps> = {
       <Divider key="div2" />,
       <MenuItem key="5">Log out</MenuItem>,
     ],
+  },
+  play: async ({
+    args,
+    canvasElement,
+    step,
+  }: {
+    args: MenuButtonProps;
+    canvasElement: HTMLElement;
+    step: PlaywrightProps<MenuButtonProps>["step"];
+  }) => {
+    await clickMenuButton({ canvasElement, step })(
+      args,
+      "Menu Button Groupings",
+    );
   },
 };
 
@@ -291,7 +320,10 @@ export const WithDestructive: StoryObj<MenuButtonProps> = {
     canvasElement: HTMLElement;
     step: PlaywrightProps<MenuButtonProps>["step"];
   }) => {
-    clickMenuButton({ canvasElement, step })(args, "Menu Button Destructive");
+    await clickMenuButton({ canvasElement, step })(
+      args,
+      "Menu Button Destructive",
+    );
   },
 };
 
@@ -306,6 +338,38 @@ export const IconButton: StoryObj<MenuButtonProps> = {
     ],
     tooltipText: "More actions",
   },
+  play: async ({ canvasElement, step }: PlaywrightProps<MenuButtonProps>) => {
+    await step("MenuButton Aria-Label", async () => {
+      const canvas = within(canvasElement);
+      const menuButton = canvas.queryByRole("button", { name: "More actions" });
+      expect(menuButton).not.toBeNull();
+    });
+  },
+};
+
+export const EndIcon: StoryObj<MenuButtonProps> = {
+  args: {
+    ariaLabel: "More actions",
+    endIcon: <GroupIcon />,
+    children: [
+      <MenuItem key="1">View details</MenuItem>,
+      <MenuItem key="2">Edit configuration</MenuItem>,
+      <MenuItem key="3">Launch</MenuItem>,
+    ],
+    tooltipText: "Learn more",
+  },
+};
+
+export const Overflow: StoryObj<MenuButtonProps> = {
+  args: {
+    buttonLabel: "Cargo options",
+    children: [
+      <MenuItem key="1">View details</MenuItem>,
+      <MenuItem key="2">Edit configuration</MenuItem>,
+      <MenuItem key="3">Launch</MenuItem>,
+    ],
+    isOverflow: true,
+  },
 };
 
 export const Disabled: StoryObj<MenuButtonProps> = {
@@ -318,5 +382,44 @@ export const Disabled: StoryObj<MenuButtonProps> = {
       <MenuItem key="3">Launch</MenuItem>,
     ],
     tooltipText: "More actions",
+  },
+};
+
+export const Alignment: StoryObj<MenuButtonProps> = {
+  args: {
+    buttonVariant: "secondary",
+    children: [
+      <MenuItem key="1">View details</MenuItem>,
+      <MenuItem key="2">Edit configuration</MenuItem>,
+      <MenuItem key="3">Launch</MenuItem>,
+    ],
+    menuAlignment: "right",
+  },
+  render: function C(props: MenuButtonProps) {
+    return (
+      <Box sx={{ ml: "50px" }}>
+        <MenuButton
+          buttonLabel="More actions"
+          buttonVariant={props.buttonVariant}
+          menuAlignment={props.menuAlignment}
+        >
+          {props.children}
+        </MenuButton>
+      </Box>
+    );
+  },
+  play: async ({
+    args,
+    canvasElement,
+    step,
+  }: {
+    args: MenuButtonProps;
+    canvasElement: HTMLElement;
+    step: PlaywrightProps<MenuButtonProps>["step"];
+  }) => {
+    await clickMenuButton({ canvasElement, step })(
+      args,
+      "Menu Button Alignment",
+    );
   },
 };

@@ -11,7 +11,7 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
-import { NativeSelect } from "@okta/odyssey-react-mui";
+import { NativeSelect, Link } from "@okta/odyssey-react-mui";
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -44,6 +44,7 @@ const storybookMeta: Meta<typeof NativeSelect> = {
       },
     },
     errorMessage: fieldComponentPropsMetaData.errorMessage,
+    errorMessageList: fieldComponentPropsMetaData.errorMessageList,
     hint: fieldComponentPropsMetaData.hint,
     HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
     id: fieldComponentPropsMetaData.id,
@@ -141,6 +142,7 @@ const Template: StoryObj<typeof NativeSelect> = {
         hint={args.hint}
         defaultValue={args.defaultValue}
         errorMessage={args.errorMessage}
+        errorMessageList={args.errorMessageList}
         isDisabled={args.isDisabled}
         isMultiSelect={args.isMultiSelect}
         isOptional={args.isOptional}
@@ -208,6 +210,14 @@ export const DefaultError: StoryObj<typeof NativeSelect> = {
   },
 };
 
+export const ErrorsList: StoryObj<typeof NativeSelect> = {
+  ...Template,
+  args: {
+    errorMessage: "Select your destination.",
+    errorMessageList: ["Select 1 planet", "Select 1 moon"],
+  },
+};
+
 export const DefaultGrouped: StoryObj<typeof NativeSelect> = {
   ...GroupTemplate,
 };
@@ -217,6 +227,20 @@ export const Multi: StoryObj<typeof NativeSelect> = {
   args: {
     hasMultipleChoices: true,
     defaultValue: [],
+  },
+};
+
+export const Optional: StoryObj<typeof NativeSelect> = {
+  ...Template,
+  args: {
+    isOptional: true,
+  },
+};
+
+export const HintLink: StoryObj<typeof NativeSelect> = {
+  ...Template,
+  args: {
+    HintLinkComponent: <Link href="/learn-more">Learn more</Link>,
   },
 };
 

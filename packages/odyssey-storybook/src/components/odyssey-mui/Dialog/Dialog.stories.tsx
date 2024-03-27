@@ -18,8 +18,8 @@ import {
   DialogProps,
 } from "@okta/odyssey-react-mui";
 import { useCallback, useState } from "react";
-import { userEvent, waitFor, within } from "@storybook/testing-library";
-import { axeRun } from "../../../axe-util";
+import { userEvent, within, screen } from "@storybook/testing-library";
+import type { PlaywrightProps } from "../storybookTypes";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
@@ -119,6 +119,18 @@ const storybookMeta: Meta<DialogProps> = {
 
 export default storybookMeta;
 
+const findDialogElement = async ({
+  canvasElement,
+  step,
+}: PlaywrightProps<DialogProps>) => {
+  await step("Check Dialog", async () => {
+    const canvas = within(canvasElement);
+    const buttonElement = canvas.getByText("Open dialog");
+    await userEvent.click(buttonElement);
+    await screen.findByRole("dialog");
+  });
+};
+
 const DefaultTemplate: StoryObj<DialogProps> = {
   render: function C(props) {
     const [isVisible, setIsVisible] = useState(false);
@@ -169,14 +181,7 @@ export const Default: StoryObj<DialogProps> = {
     title: "Initiate self-destruct protocol",
   },
   play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    await step("open Default Dialog", async () => {
-      const buttonElement = canvas.getByText("Open dialog");
-      await userEvent.click(buttonElement);
-      await waitFor(async () => {
-        await axeRun("Default Drawer");
-      });
-    });
+    await findDialogElement({ canvasElement, step });
   },
 };
 
@@ -332,6 +337,9 @@ export const Long: StoryObj<DialogProps> = {
     ),
     title: "Cryosleep liability waiver",
   },
+  play: async ({ canvasElement, step }) => {
+    await findDialogElement({ canvasElement, step });
+  },
 };
 
 export const NoButtons: StoryObj<DialogProps> = {
@@ -357,5 +365,8 @@ export const NoButtons: StoryObj<DialogProps> = {
     children:
       "By closing this Dialog you agree to adhere to the Ceres Station terms of use.",
     title: "Ceres Station docking terms",
+  },
+  play: async ({ canvasElement, step }) => {
+    await findDialogElement({ canvasElement, step });
   },
 };

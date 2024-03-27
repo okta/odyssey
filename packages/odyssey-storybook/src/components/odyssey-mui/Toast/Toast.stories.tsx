@@ -157,24 +157,8 @@ const openToast =
         userEvent.click(buttonElement);
         userEvent.tab();
       });
-      axeRun(actionName);
+      await axeRun(actionName);
     });
-    if (args.isDismissable) {
-      await step("dismiss toast", async () => {
-        const toastElement = canvas.getAllByRole(args.role || "status")[0];
-        if (toastElement) {
-          const dismissToastButton = toastElement.querySelector(
-            '[aria-label="close"]',
-          );
-          if (dismissToastButton) {
-            userEvent.click(dismissToastButton);
-            waitFor(() => {
-              expect(toastElement).not.toBeInTheDocument();
-            });
-          }
-        }
-      });
-    }
   };
 
 const Single: StoryObj<ToastProps> = {
@@ -218,7 +202,7 @@ export const Info: StoryObj<ToastProps> = {
     severity: "info",
   },
   play: async ({ args, canvasElement, step }) => {
-    openToast({ canvasElement, step })(args, "Info Toast");
+    await openToast({ canvasElement, step })(args, "Info Toast");
   },
 };
 
@@ -231,7 +215,7 @@ export const ErrorToast: StoryObj<ToastProps> = {
     severity: "error",
   },
   play: async ({ args, canvasElement, step }) => {
-    openToast({ canvasElement, step })(args, "Error Toast");
+    await openToast({ canvasElement, step })(args, "Error Toast");
   },
 };
 
@@ -243,7 +227,7 @@ export const Warning: StoryObj<ToastProps> = {
     severity: "warning",
   },
   play: async ({ args, canvasElement, step }) => {
-    openToast({ canvasElement, step })(args, "Warning Toast");
+    await openToast({ canvasElement, step })(args, "Warning Toast");
   },
 };
 
@@ -255,7 +239,7 @@ export const Success: StoryObj<ToastProps> = {
     severity: "success",
   },
   play: async ({ args, canvasElement, step }) => {
-    openToast({ canvasElement, step })(args, "Success Toast");
+    await openToast({ canvasElement, step })(args, "Success Toast");
   },
 };
 
@@ -267,7 +251,45 @@ export const Dismissible: StoryObj<ToastProps> = {
     linkUrl: "#",
   },
   play: async ({ args, canvasElement, step }) => {
-    openToast({ canvasElement, step })(args, "Dismissible Toast");
+    const canvas = within(canvasElement);
+    await step(`open Dismissible Toast}`, async () => {
+      await waitFor(() => {
+        const buttonElement = canvas.getByText(`Open ${args.severity} toast`);
+        userEvent.hover(buttonElement);
+        userEvent.click(buttonElement);
+        userEvent.tab();
+      });
+    });
+
+    await step("link in toast", async () => {
+      await waitFor(() => {
+        const toastLink = canvas.getByText(args.linkText || "");
+        expect(toastLink).toHaveAttribute("href", args.linkUrl);
+      });
+    });
+
+    await step("dismiss toast and reopen", async () => {
+      await waitFor(() => {
+        const toastElement = canvas.getByRole("status");
+        if (toastElement) {
+          const dismissToastButton = within(toastElement).getByRole("button", {
+            name: "close",
+          });
+          if (dismissToastButton) {
+            userEvent.click(dismissToastButton);
+            waitFor(() => {
+              expect(toastElement).not.toBeVisible();
+
+              const buttonElement = canvas.getByText(
+                `Open ${args.severity} toast`,
+              );
+              userEvent.click(buttonElement);
+            });
+          }
+        }
+      });
+      await axeRun("Dismissible Toast");
+    });
   },
 };
 
@@ -280,7 +302,7 @@ export const MultipleToasts: StoryObj<ToastProps> = {
       },
     },
   },
-  render: function C() {
+  render: function C({}) {
     const [toasts, setToasts] = useState([
       <Toast
         isDismissable
