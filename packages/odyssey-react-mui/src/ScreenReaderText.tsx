@@ -20,6 +20,7 @@ export type ScreenReaderTextProps = {
    * The visually-hidden text.
    */
   children: ReactNode;
+  id?: string;
 } & Pick<HtmlProps, "translate">;
 
 /**
@@ -29,8 +30,12 @@ export type ScreenReaderTextProps = {
  */
 const style = { ...visuallyHidden };
 
-const ScreenReaderText = ({ children, translate }: ScreenReaderTextProps) => (
-  <Box sx={style} component="span" translate={translate}>
+const ScreenReaderText = ({
+  children,
+  id,
+  translate,
+}: ScreenReaderTextProps) => (
+  <Box sx={style} component="span" id={id} translate={translate}>
     {children}
   </Box>
 );
