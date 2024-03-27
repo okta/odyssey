@@ -39,8 +39,8 @@ import {
   DragIndicatorIcon,
   MoreIcon,
 } from "../icons.generated";
-import { densityValues, paginationTypeValues } from "./constants";
-import { DataTablePagination } from "./DataTablePagination";
+import { densityValues } from "./constants";
+import { Pagination, paginationTypeValues, usePagination } from "../Pagination";
 import { DataFilter, DataFilters } from "../labs/DataFilters";
 import {
   DataTableRowActions,
@@ -758,6 +758,12 @@ const DataTable = ({
     onChangeRowSelection?.(rowSelection);
   }, [rowSelection, onChangeRowSelection]);
 
+  const { lastRow } = usePagination({
+    pageIndex: pagination.pageIndex,
+    pageSize: pagination.pageSize,
+    totalRows,
+  });
+
   // Render the table
   return (
     <>
@@ -808,12 +814,19 @@ const DataTable = ({
       </ScrollableTableContainer>
 
       {hasPagination && (
-        <DataTablePagination
-          pagination={pagination}
-          setPagination={setPagination}
+        <Pagination
+          pageIndex={pagination.pageIndex}
+          pageSize={pagination.pageSize}
+          onPaginationChange={setPagination}
+          lastRow={lastRow}
           totalRows={totalRows}
           isDisabled={isEmpty}
           variant={paginationType}
+          rowsPerPageLabel={t("pagination.rowsperpage")}
+          currentPageLabel={t("pagination.page")}
+          previousLabel={t("pagination.previous")}
+          nextLabel={t("pagination.next")}
+          loadMoreLabel={t("pagination.loadmore")}
         />
       )}
     </>
