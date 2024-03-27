@@ -24,7 +24,7 @@ import {
   DatePickerProps as MuiDatePickerProps,
   DateValidationError,
   LocalizationProvider,
-  PickersLocaleText,
+  // PickersLocaleText,
 } from "@mui/x-date-pickers";
 import { DateTime } from "luxon";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
@@ -48,6 +48,8 @@ import {
 } from "../OdysseyDesignTokensContext";
 import { OdysseyThemeProvider } from "../OdysseyThemeProvider";
 import { formatLanguageCodeToHyphenated } from "../OdysseyTranslationProvider";
+import { useDatePickerTranslations } from "./useDatePickerTranslations";
+import { DefaultSupportedLanguages } from "../OdysseyTranslationProvider.types";
 
 const localeKeyMap = new Map<string, string>([
   ["cs", "csCZ"],
@@ -145,30 +147,18 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
     const [isOpen, setIsOpen] = useState(false);
     const [localeText, setLocaleText] = useState(locales.DEFAULT_LOCALE);
 
-    const { i18n } = useTranslation();
+    const { i18n, t } = useTranslation();
     const { language } = i18n;
 
     const invalidLocales = ["ok_PL", "ok_SK"];
+    const muiUnsupportedLocales = []
     const isInvalidLocale = invalidLocales.includes(language);
 
     const containerRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-      const localeKey = language
-        ? localeKeyMap.get(language)
-        : undefined;
-
-      Object.entries(locales).forEach((locale) => {
-        const [key, value] = locale;
-
-        if (key === localeKey) {          
-          setLocaleText(
-            // @ts-ignore
-            value.components.MuiLocalizationProvider.defaultProps.localeText
-          );
-          return 
-        }
-      });
+      const hey = useDatePickerTranslations(language as DefaultSupportedLanguages);
+      console.log({hey})
     }, [language, locales]);
 
     const formatDateTimeToJsDateOnCalendarSelection = useCallback<
