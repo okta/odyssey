@@ -127,7 +127,7 @@ export const Default: StoryObj<TooltipProps> = {
     text: "This will begin a 10-second countdown",
   },
   play: async ({ canvasElement, step }) => {
-    showTooltip({ canvasElement, step })("Tooltip Default");
+    await showTooltip({ canvasElement, step })("Tooltip Default");
   },
 };
 
@@ -145,6 +145,14 @@ export const IconButton: StoryObj<TooltipProps> = {
     placement: "top",
     text: "Download logs",
   },
+  play: async ({ canvasElement, step }: PlaywrightProps<TooltipProps>) => {
+    await step("tooltip text", async () => {
+      const canvas = within(canvasElement);
+      const button = canvas.getByRole("button");
+      userEvent.hover(button);
+      await axeRun("Tooltip Icon Button");
+    });
+  },
 };
 
 export const StatusWrapper: StoryObj<TooltipProps> = {
@@ -154,6 +162,16 @@ export const StatusWrapper: StoryObj<TooltipProps> = {
     ariaType: "label",
     placement: "top",
     text: "The warp drive is currently online.",
+  },
+  play: async ({ canvasElement, step }: PlaywrightProps<TooltipProps>) => {
+    await step("tooltip text", async () => {
+      const canvas = within(canvasElement);
+      const button = canvas.getByLabelText(
+        "The warp drive is currently online.",
+      );
+      userEvent.hover(button);
+      await axeRun("Tooltip Icon Button");
+    });
   },
 };
 
@@ -170,7 +188,7 @@ export const Disabled: StoryObj<TooltipProps> = {
 };
 
 export const Placement: StoryObj<TooltipProps> = {
-  render: function C() {
+  render: function C({}) {
     return (
       <>
         <Tooltip text="Top" placement="top" ariaType="label">
