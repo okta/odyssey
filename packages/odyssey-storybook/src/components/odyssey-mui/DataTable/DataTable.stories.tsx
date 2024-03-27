@@ -19,7 +19,7 @@ import {
   Box,
   Button,
   DataTable,
-  DataTableEmptyState,
+  EmptyDataState,
   DataTableGetDataType,
   DataTableOnReorderRowsType,
   DataTableProps,
@@ -290,7 +290,7 @@ const storybookMeta: Meta<DataTableProps> = {
         "The component to display when the table is displaying the initial empty state.",
       table: {
         type: {
-          summary: `ReactElement<typeof DataTableEmptyState>`,
+          summary: `ReactElement<typeof EmptyDataState>`,
         },
       },
     },
@@ -300,7 +300,7 @@ const storybookMeta: Meta<DataTableProps> = {
         "The component to display when the query returns no results.",
       table: {
         type: {
-          summary: `ReactElement<typeof DataTableEmptyState>`,
+          summary: `ReactElement<typeof EmptyDataState>`,
         },
       },
     },
@@ -503,11 +503,15 @@ export const API: StoryObj<DataTableProps> = {
 
     const emptyPlaceholder = useMemo(
       () => (
-        <DataTableEmptyState
+        <EmptyDataState
           heading="Start by adding data assets"
           text="All relevant data will be displayed and can be searched and filtered"
-          primaryButton={<Button variant="primary" label="Primary" />}
-          secondaryButton={<Button variant="secondary" label="Secondary" />}
+          primaryCallToActionComponent={
+            <Button variant="primary" label="Primary" />
+          }
+          secondaryCallToActionComponent={
+            <Button variant="secondary" label="Secondary" />
+          }
         />
       ),
       [],
@@ -515,7 +519,7 @@ export const API: StoryObj<DataTableProps> = {
 
     const noResultsPlaceholder = useMemo(
       () => (
-        <DataTableEmptyState
+        <EmptyDataState
           heading="Whoops, there's nothing here!"
           text="You should try searching or filtering for something else."
         />
@@ -580,11 +584,15 @@ export const Empty: StoryObj<DataTableProps> = {
 
     const emptyPlaceholder = useMemo(
       () => (
-        <DataTableEmptyState
+        <EmptyDataState
           heading="Start by adding data assets"
           text="All relevant data will be displayed and can be searched and filtered"
-          primaryButton={<Button variant="primary" label="Primary" />}
-          secondaryButton={<Button variant="secondary" label="Secondary" />}
+          primaryCallToActionComponent={
+            <Button variant="primary" label="Primary" />
+          }
+          secondaryCallToActionComponent={
+            <Button variant="secondary" label="Secondary" />
+          }
         />
       ),
       [],

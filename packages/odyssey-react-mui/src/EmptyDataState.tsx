@@ -11,13 +11,13 @@
  */
 
 import { ReactNode, memo } from "react";
-import { Heading4, Paragraph } from "../Typography";
-import { Box } from "../Box";
+import { Heading4, Paragraph } from "./Typography";
+import { Box } from "./Box";
 import styled from "@emotion/styled";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
-} from "../OdysseyDesignTokensContext";
+} from "./OdysseyDesignTokensContext";
 
 const EmptyContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
@@ -28,37 +28,51 @@ const EmptyContainer = styled("div", {
   padding: odysseyDesignTokens.Spacing5,
   textAlign: "center",
   width: "100%",
+  alignItems: "center",
 }));
 
-export type DataTableEmptyStateProps = {
+export type EmptyDataStateProps = {
+  /**
+   * Main heading of the empty state
+   */
   heading: string;
+  /**
+   * A descriptive text explaining more context as to why we don't have data.
+   */
   text: string;
-  primaryButton?: ReactNode;
-  secondaryButton?: ReactNode;
+  /**
+   * Primary call to action
+   */
+  primaryCallToActionComponent?: ReactNode;
+  /**
+   * Secondary call to action
+   */
+  secondaryCallToActionComponent?: ReactNode;
 };
 
-const DataTableEmptyState = ({
+const EmptyDataState = ({
   heading,
   text,
-  primaryButton,
-  secondaryButton,
-}: DataTableEmptyStateProps) => {
+  primaryCallToActionComponent,
+  secondaryCallToActionComponent,
+}: EmptyDataStateProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+
   return (
     <EmptyContainer odysseyDesignTokens={odysseyDesignTokens}>
       <Heading4>{heading}</Heading4>
       <Paragraph>{text}</Paragraph>
-      {(primaryButton || secondaryButton) && (
+      {(primaryCallToActionComponent || secondaryCallToActionComponent) && (
         <Box sx={{ marginBlockStart: 5 }}>
-          {secondaryButton}
-          {primaryButton}
+          {secondaryCallToActionComponent}
+          {primaryCallToActionComponent}
         </Box>
       )}
     </EmptyContainer>
   );
 };
 
-const MemoizedDataTableEmptyState = memo(DataTableEmptyState);
-MemoizedDataTableEmptyState.displayName = "DataTableEmptyState";
+const MemoizedEmptyDataState = memo(EmptyDataState);
+MemoizedEmptyDataState.displayName = "EmptyDataState";
 
-export { MemoizedDataTableEmptyState as DataTableEmptyState };
+export { MemoizedEmptyDataState as EmptyDataState };
