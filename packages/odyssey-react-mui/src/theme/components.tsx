@@ -1046,30 +1046,30 @@ export const components = ({
       }
 
       :not(code) &, :not(pre) & {
-          :lang(el) {
-            font-family: 'Noto Sans', sans-serif;
-          }
-
-          :lang(ja) {
-            font-family: 'Noto Sans JP', sans-serif;
-          }
-
-          :lang(ko) {
-            font-family: 'Noto Sans KR', sans-serif;
-          }
-
-          :lang(th) {
-            font-family: 'Noto Sans Thai', sans-serif;
-          }
-
-          :lang(zh-CN) {
-            font-family: 'Noto Sans SC', sans-serif;
-          }
-
-          :lang(zh-TW) {
-            font-family: 'Noto Sans TC', sans-serif;
-          }
+        :lang(el) {
+          font-family: 'Noto Sans', sans-serif;
         }
+
+        :lang(ja) {
+          font-family: 'Noto Sans JP', sans-serif;
+        }
+
+        :lang(ko) {
+          font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        :lang(th) {
+          font-family: 'Noto Sans Thai', sans-serif;
+        }
+
+        :lang(zh-CN) {
+          font-family: 'Noto Sans SC', sans-serif;
+        }
+
+        :lang(zh-TW) {
+          font-family: 'Noto Sans TC', sans-serif;
+        }
+      }
     `,
     },
     MuiDrawer: {
