@@ -14,7 +14,7 @@ import {
   forwardRef,
   memo,
   useCallback,
-  useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -24,13 +24,11 @@ import {
   DatePickerProps as MuiDatePickerProps,
   DateValidationError,
   LocalizationProvider,
-  // PickersLocaleText,
 } from "@mui/x-date-pickers";
 import { DateTime } from "luxon";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
 import { InputAdornment } from "@mui/material";
 import styled from "@emotion/styled";
-import * as locales from "@mui/x-date-pickers/locales";
 
 import { Button } from "../Button";
 import {
@@ -47,38 +45,8 @@ import {
   DesignTokens,
 } from "../OdysseyDesignTokensContext";
 import { OdysseyThemeProvider } from "../OdysseyThemeProvider";
-import { formatLanguageCodeToHyphenated } from "../OdysseyTranslationProvider";
-import { useDatePickerTranslations } from "./useDatePickerTranslations";
 import { DefaultSupportedLanguages } from "../OdysseyTranslationProvider.types";
-
-const localeKeyMap = new Map<string, string>([
-  ["cs", "csCZ"],
-  ["da", "daDK"],
-  ["de", "deDE"],
-  ["el", "elGR"],
-  ["es", "esES"],
-  ["fi", "fiFI"],
-  ["fr", "frFR"],
-  ["hu", "huHU"],
-  // Indonesian not supported
-  ["it", "itIT"],
-  ["ja", "jaJP"],
-  ["ko", "koKR"],
-  // Malay not supported
-  ["nb", "nbNO"],
-  ["nl_NL", "nlNL"],
-  ["pl", "plPL"],
-  ["pt_BR", "ptBR"],
-  ["ro", "roRO"],
-  ["ru", "ruRU"],
-  ["sv", "svSE"],
-  // Thai not supported
-  ["tr", "trTR"],
-  ["uk", "ukUA"],
-  ["vi", "viVN"],
-  ["zh_CN", "zhCN"],
-  // Chinese (traditional) not supported
-]);
+import { useDatePickerTranslations } from "./useDatePickerTranslations";
 
 const DatePickerContainer = styled.div({
   display: "flex",
@@ -145,32 +113,28 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
   ) => {
     const odysseyDesignTokens = useOdysseyDesignTokens();
     const [isOpen, setIsOpen] = useState(false);
-    const [localeText, setLocaleText] = useState(locales.DEFAULT_LOCALE);
+    // const [localeText, setLocaleText] = useState(undefined);
 
     const { i18n, t } = useTranslation();
     const { language } = i18n;
 
     const invalidLocales = ["ok_PL", "ok_SK"];
-    const muiUnsupportedLocales = []
     const isInvalidLocale = invalidLocales.includes(language);
 
     const containerRef = useRef<HTMLInputElement>(null);
-
-    useEffect(() => {
-      const hey = useDatePickerTranslations(language as DefaultSupportedLanguages);
-      console.log({hey})
-    }, [language, locales]);
 
     const formatDateTimeToJsDateOnCalendarSelection = useCallback<
       NonNullable<MuiDatePickerProps<DateTime>["onChange"]>
     >(
       (value, errorContext) => {
-
         if (value) {
           const { validationError } = errorContext;
           const jsDateFromDateTime = new Date(value?.toJSDate());
-          
-          onCalendarDateChange?.({ value: jsDateFromDateTime, error: validationError });
+
+          onCalendarDateChange?.({
+            value: jsDateFromDateTime,
+            error: validationError,
+          });
         }
       },
       [onCalendarDateChange],
@@ -204,7 +168,7 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
           endAdornment={
             <InputAdornment position="end">
               <Button
-                ariaLabel="Calendar"
+                ariaLabel={t("datepicker.calendar.icon.label")}
                 label=""
                 size="small"
                 startIcon={<CalendarIcon />}
@@ -237,12 +201,22 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       return null;
     }
 
-    
+    const localeText = useMemo(
+      () =>
+        useDatePickerTranslations(language as DefaultSupportedLanguages) || {
+          ...useDatePickerTranslations("default"),
+          previousMonth: `${t("datepicker.previousmonth")}`,
+          nextMonth: `${t("datepicker.nextmonth")}`,
+          calendarViewSwitchingButtonAriaLabel: (view: any) => view === "year" ? "year view is open, switch to calendar view" : "calendar view is open, switch to year view",
+        },
+      [language],
+    );
+
     return (
       <OdysseyThemeProvider themeOverride={datePickerTheme}>
         <LocalizationProvider
           dateAdapter={AdapterLuxon}
-          adapterLocale={formatLanguageCodeToHyphenated(language)}
+          adapterLocale={language.replaceAll("_", "-")}
           localeText={localeText}
         >
           <DatePickerContainer>
