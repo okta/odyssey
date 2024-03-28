@@ -62,7 +62,7 @@ import { Callout } from "../Callout";
 import { t } from "i18next";
 
 export type DataTableColumn<T extends DataTableRowData> = MRT_ColumnDef<T> & {
-  enableWrapping?: boolean;
+  hasTextWrapping?: boolean;
 };
 
 type DataTableColumnInstance<T extends DataTableRowData> = Omit<
@@ -540,8 +540,9 @@ const DataTable = ({
   const defaultCell = useCallback(
     ({ cell }: { cell: DataTableCell<DataTableRowData> }) => {
       const value = cell.getValue<string>();
-      const enableWrapping = cell.column.columnDef.enableWrapping;
-      return enableWrapping ? (
+      const hasTextWrapping = cell.column.columnDef.hasTextWrapping;
+
+      return hasTextWrapping ? (
         value
       ) : (
         <Box
