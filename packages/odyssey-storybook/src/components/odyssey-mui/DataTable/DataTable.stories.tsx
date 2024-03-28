@@ -880,7 +880,7 @@ export const Truncation: StoryObj<DataTableProps> = {
         {
           accessorKey: "wrapped",
           header: "Wrapped",
-          enableWrapping: true,
+          hasTextWrapping: true,
         },
       ],
       [],
