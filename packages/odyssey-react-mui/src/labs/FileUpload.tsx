@@ -129,6 +129,7 @@ export type FileUploadProps = {
   | "HintLinkComponent"
   | "id"
   | "isDisabled"
+  | "isFullWidth"
   | "isOptional"
 >;
 
@@ -137,6 +138,7 @@ const FileUpload = ({
   errorMessage,
   id,
   isDisabled = false,
+  isFullWidth,
   isOptional,
   hint,
   HintLinkComponent,
@@ -174,7 +176,7 @@ const FileUpload = ({
   );
 
   const triggerFileInputClick = useCallback(() => {
-    inputRef.current?.focus();
+    inputRef.current?.click();
   }, [inputRef]);
 
   const removeFileFromFilesToUploadList = useCallback<(name: string) => void>(
@@ -286,7 +288,7 @@ const FileUpload = ({
         HintLinkComponent={HintLinkComponent}
         id={id}
         isDisabled={isDisabled}
-        isFullWidth
+        isFullWidth={isFullWidth}
         isOptional={isOptional}
         label={label}
         renderFieldComponent={renderFileInput}
