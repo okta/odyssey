@@ -10,11 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-// import {
-//   PickersLocaleText,
-// } from "@mui/x-date-pickers";
 import {
-  DEFAULT_LOCALE,
   csCZ,
   daDK,
   deDE,
@@ -43,7 +39,6 @@ import {
 import { DefaultSupportedLanguages } from "../OdysseyTranslationProvider.types";
 
 const localeKeyMap = new Map<string, any>([
-  ["default", DEFAULT_LOCALE],
   ["cs", csCZ],
   ["da", daDK],
   ["de", deDE],
@@ -53,11 +48,9 @@ const localeKeyMap = new Map<string, any>([
   ["fi", fiFI],
   ["fr", frFR],
   ["hu", huHU],
-  // Indonesian not supported
   ["it", itIT],
   ["ja", jaJP],
   ["ko", koKR],
-  // Malay not supported
   ["nb", nbNO],
   ["nl_NL", nlNL],
   ["pl", plPL],
@@ -65,27 +58,20 @@ const localeKeyMap = new Map<string, any>([
   ["ro", roRO],
   ["ru", ruRU],
   ["sv", svSE],
-  // Thai not supported
   ["tr", trTR],
   ["uk", ukUA],
   ["vi", viVN],
   ["zh_CN", zhCN],
-  // Chinese (traditional) not supported
 ]);
 
-export const unsupportedLanguages = ["id", "ms", "th", "zh_TW"];
+export const unsupportedLanguages = ["id", "ms", "th", "zh_TW"]; // Indonesian, Malay, Thai, Chinese (traditional)
 
-export const useDatePickerTranslations = (languageCode: DefaultSupportedLanguages |  "default") => {
-    if (unsupportedLanguages.includes(languageCode)) {
-      return undefined
-    }
+export const useDatePickerTranslations = (
+  languageCode: DefaultSupportedLanguages,
+) => {
+  const langFromMap = localeKeyMap.get(languageCode);
 
-    if (languageCode === "default") {
-      return DEFAULT_LOCALE;
-    } else {
-      const langFromMap = localeKeyMap.get(languageCode);
-      return langFromMap
-        ? langFromMap.components.MuiLocalizationProvider.defaultProps.localeText
-        : undefined;
-    }
+  return langFromMap
+    ? langFromMap.components.MuiLocalizationProvider.defaultProps.localeText
+    : undefined;
 };

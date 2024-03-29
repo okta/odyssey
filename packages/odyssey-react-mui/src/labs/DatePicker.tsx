@@ -24,6 +24,7 @@ import {
   DatePickerProps as MuiDatePickerProps,
   DateValidationError,
   LocalizationProvider,
+  // PickersLocaleText
 } from "@mui/x-date-pickers";
 import { DateTime } from "luxon";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
@@ -59,9 +60,6 @@ const DatePickerContainer = styled.div({
 const DatePickerWidthContainer = styled.div<{
   odysseyDesignTokens: DesignTokens;
 }>(({ odysseyDesignTokens }) => ({
-  width: "100%",
-  maxWidth: odysseyDesignTokens.TypographyLineLengthMax,
-
   ".MuiInput-root": {
     // 176px
     width: `calc(${odysseyDesignTokens.Spacing4} * 11)`,
@@ -113,7 +111,6 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
   ) => {
     const odysseyDesignTokens = useOdysseyDesignTokens();
     const [isOpen, setIsOpen] = useState(false);
-    // const [localeText, setLocaleText] = useState(undefined);
 
     const { i18n, t } = useTranslation();
     const { language } = i18n;
@@ -123,6 +120,24 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
 
     const containerRef = useRef<HTMLInputElement>(null);
 
+    const localeText = useMemo(() => {
+      return (
+        useDatePickerTranslations(language as DefaultSupportedLanguages) || {
+          ...useDatePickerTranslations("en"),
+          previousMonth: `${t("datepicker.previousmonth")}`,
+          nextMonth: `${t("datepicker.nextmonth")}`,
+          calendarViewSwitchingButtonAriaLabel: (view: any) =>
+            view === "year"
+              ? `${t("datepicker.view.switch.year")}`
+              : `${t("datepicker.view.switch.calendar")}`,
+          fieldYearPlaceholder: (params: any) => {
+            console.log({ params });
+            return "Y"
+          },
+        }
+      );
+    }, [language]);
+
     const formatDateTimeToJsDateOnCalendarSelection = useCallback<
       NonNullable<MuiDatePickerProps<DateTime>["onChange"]>
     >(
@@ -130,7 +145,7 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
         if (value) {
           const { validationError } = errorContext;
           const jsDateFromDateTime = new Date(value?.toJSDate());
-
+          console.log("change", jsDateFromDateTime);
           onCalendarDateChange?.({
             value: jsDateFromDateTime,
             error: validationError,
@@ -201,17 +216,6 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       return null;
     }
 
-    const localeText = useMemo(
-      () =>
-        useDatePickerTranslations(language as DefaultSupportedLanguages) || {
-          ...useDatePickerTranslations("default"),
-          previousMonth: `${t("datepicker.previousmonth")}`,
-          nextMonth: `${t("datepicker.nextmonth")}`,
-          calendarViewSwitchingButtonAriaLabel: (view: any) => view === "year" ? "year view is open, switch to calendar view" : "calendar view is open, switch to year view",
-        },
-      [language],
-    );
-
     return (
       <OdysseyThemeProvider themeOverride={datePickerTheme}>
         <LocalizationProvider
@@ -236,9 +240,6 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
                 label={label}
                 minDate={minDate ? formatDateToDateTime(minDate) : undefined}
                 maxDate={maxDate ? formatDateToDateTime(maxDate) : undefined}
-                onAccept={(arg) => {
-                  console.log("accept picker", arg);
-                }}
                 onChange={formatDateTimeToJsDateOnCalendarSelection}
                 onClose={() => setIsOpen(false)}
                 open={isOpen}
