@@ -23,14 +23,14 @@ import styled from "@emotion/styled";
 import { useTranslation } from "react-i18next";
 import { Drawer as MuiDrawer } from "@mui/material";
 
-import type { HtmlProps } from "../HtmlProps";
-import { Button } from "../Button";
-import { CloseIcon } from "../icons.generated";
-import { Heading5 } from "../Typography";
+import type { HtmlProps } from "./HtmlProps";
+import { Button } from "./Button";
+import { CloseIcon } from "./icons.generated";
+import { Heading5 } from "./Typography";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
-} from "../OdysseyDesignTokensContext";
+} from "./OdysseyDesignTokensContext";
 
 export const variantValues = ["temporary", "persistent"] as const;
 

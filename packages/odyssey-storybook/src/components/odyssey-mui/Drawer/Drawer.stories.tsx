@@ -12,11 +12,7 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 
-import {
-  Drawer,
-  DrawerProps,
-  variantValues,
-} from "@okta/odyssey-react-mui/labs";
+import { Drawer, DrawerProps, variantValues } from "@okta/odyssey-react-mui";
 
 import { Accordion, Box, Button } from "@okta/odyssey-react-mui";
 import { useCallback, useState } from "react";
