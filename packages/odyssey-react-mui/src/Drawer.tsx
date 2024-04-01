@@ -12,25 +12,26 @@
 
 import {
   memo,
+  ReactElement,
   ReactNode,
-  useState,
   useEffect,
   useMemo,
   useRef,
-  ReactElement,
+  useState,
 } from "react";
+
+import { Drawer as MuiDrawer } from "@mui/material";
 import styled from "@emotion/styled";
 import { useTranslation } from "react-i18next";
-import { Drawer as MuiDrawer } from "@mui/material";
 
-import type { HtmlProps } from "../HtmlProps";
-import { Button } from "../Button";
-import { CloseIcon } from "../icons.generated";
-import { Heading5 } from "../Typography";
+import { Button } from "./Button";
+import { CloseIcon } from "./icons.generated";
 import {
-  useOdysseyDesignTokens,
   DesignTokens,
-} from "../OdysseyDesignTokensContext";
+  useOdysseyDesignTokens,
+} from "./OdysseyDesignTokensContext";
+import { Heading5 } from "./Typography";
+import type { HtmlProps } from "./HtmlProps";
 
 export const variantValues = ["temporary", "persistent"] as const;
 
