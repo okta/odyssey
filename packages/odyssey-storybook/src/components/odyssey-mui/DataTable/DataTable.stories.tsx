@@ -982,12 +982,12 @@ export const ConditionalDetails: StoryObj<DataTableProps> = {
     hasColumnResizing: true,
     hasColumnVisibility: true,
     hasFilters: true,
-    hasPagination: true,
+    hasPagination: false,
     hasRowSelection: true,
     hasSearch: true,
     hasSorting: true,
     hasRowReordering: true,
-    totalRows: 200,
+    totalRows: 20,
   },
   render: function C(props) {
     const [data, setData] = useState<Person[]>(personData);
