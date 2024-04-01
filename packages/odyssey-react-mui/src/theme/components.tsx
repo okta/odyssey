@@ -434,6 +434,7 @@ export const components = ({
             },
           },
           "& > ul": {
+            position: "relative",
             paddingInlineStart: 0,
             marginBlockStart: 0,
             marginBlockEnd: 0,
@@ -442,6 +443,10 @@ export const components = ({
         loading: {
           paddingBlock: odysseyTokens.Spacing3,
           paddingInline: odysseyTokens.Spacing4,
+          borderWidth: odysseyTokens.BorderWidthMain,
+          borderStyle: odysseyTokens.BorderStyleMain,
+          borderColor: odysseyTokens.HueNeutral200,
+          borderRadius: odysseyTokens.BorderRadiusMain,
         },
         popupIndicator: {
           padding: odysseyTokens.Spacing1,
@@ -452,9 +457,16 @@ export const components = ({
           paddingBlockStart: odysseyTokens.Spacing1,
           height: "100%",
         },
-        paper: {
-          height: "100%",
-        },
+        paper: ({ ownerState }) => ({
+          /**
+           * ListboxComponent is used when `isVirtualized` prop is true.
+           * This style is needed to render the virtualized window. It renders out a parent div
+           * that needs a height to be set, otherwise the height is 0 and nothing appears.
+           */
+          ...(ownerState.ListboxComponent !== undefined && {
+            height: "100%",
+          }),
+        }),
         inputRoot: ({ ownerState }) => ({
           ...(ownerState.readOnly === true && {
             backgroundColor: odysseyTokens.HueNeutral50,
@@ -1034,30 +1046,30 @@ export const components = ({
       }
 
       :not(code) &, :not(pre) & {
-          :lang(el) {
-            font-family: 'Noto Sans', sans-serif;
-          }
-
-          :lang(ja) {
-            font-family: 'Noto Sans JP', sans-serif;
-          }
-
-          :lang(ko) {
-            font-family: 'Noto Sans KR', sans-serif;
-          }
-
-          :lang(th) {
-            font-family: 'Noto Sans Thai', sans-serif;
-          }
-
-          :lang(zh-CN) {
-            font-family: 'Noto Sans SC', sans-serif;
-          }
-
-          :lang(zh-TW) {
-            font-family: 'Noto Sans TC', sans-serif;
-          }
+        :lang(el) {
+          font-family: 'Noto Sans', sans-serif;
         }
+
+        :lang(ja) {
+          font-family: 'Noto Sans JP', sans-serif;
+        }
+
+        :lang(ko) {
+          font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        :lang(th) {
+          font-family: 'Noto Sans Thai', sans-serif;
+        }
+
+        :lang(zh-CN) {
+          font-family: 'Noto Sans SC', sans-serif;
+        }
+
+        :lang(zh-TW) {
+          font-family: 'Noto Sans TC', sans-serif;
+        }
+      }
     `,
     },
     MuiDrawer: {

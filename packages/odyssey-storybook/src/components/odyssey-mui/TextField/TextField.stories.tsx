@@ -13,10 +13,13 @@
 import { Meta, StoryObj } from "@storybook/react";
 import {
   InputAdornment,
+  Link,
   TextField,
   textFieldTypeValues,
 } from "@okta/odyssey-react-mui";
 
+import { userEvent, within } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { ChangeEvent, useCallback, useState } from "react";
@@ -58,6 +61,7 @@ const storybookMeta: Meta<typeof TextField> = {
       },
     },
     errorMessage: fieldComponentPropsMetaData.errorMessage,
+    errorMessageList: fieldComponentPropsMetaData.errorMessageList,
     hasInitialFocus: {
       control: "boolean",
       description: "If `true`, the component will receive focus automatically",
@@ -187,6 +191,19 @@ export const Default: StoryObj<typeof TextField> = {
   args: {
     defaultValue: "",
   },
+  play: async ({ args, canvasElement, step }) => {
+    await step("Textfield callback", async () => {
+      const canvas = within(canvasElement);
+      const textbox = canvas.getByRole("textbox");
+      await userEvent.click(textbox);
+      await expect(args.onFocus).toHaveBeenCalledTimes(1);
+      await userEvent.type(textbox, "Earth");
+      await expect(args.onChange).toHaveBeenCalledTimes(5);
+      await userEvent.clear(textbox);
+      await userEvent.tab();
+      await expect(args.onBlur).toHaveBeenCalledTimes(1);
+    });
+  },
 };
 
 export const Disabled: StoryObj<typeof TextField> = {
@@ -231,9 +248,31 @@ export const Error: StoryObj<typeof TextField> = {
   },
 };
 
+export const ErrorsList: StoryObj<typeof TextField> = {
+  args: {
+    errorMessage: "This field is required:",
+    errorMessageList: ["At least 2 chars", "No more than 20 chars"],
+    defaultValue: "",
+  },
+};
+
+export const FullWidth: StoryObj<typeof TextField> = {
+  args: {
+    isFullWidth: true,
+  },
+};
+
 export const Hint: StoryObj<typeof TextField> = {
   args: {
     hint: "Specify your destination within the Sol system.",
+    defaultValue: "",
+  },
+};
+
+export const HintLink: StoryObj<typeof TextField> = {
+  args: {
+    hint: "Specify your destination within the Sol system.",
+    HintLinkComponent: <Link href="/learn-more">Learn more</Link>,
     defaultValue: "",
   },
 };
@@ -277,6 +316,12 @@ export const Multiline: StoryObj<typeof TextField> = {
     label: "Permanent residence",
     isMultiline: true,
     defaultValue: "",
+  },
+};
+
+export const Placeholder: StoryObj<typeof TextField> = {
+  args: {
+    placeholder: "Destination within the Sol system",
   },
 };
 

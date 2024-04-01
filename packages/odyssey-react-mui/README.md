@@ -132,6 +132,10 @@ bundled, and polyfilled for advanced use cases and browser support targets.
 
 [1]: https://help.okta.com/en/prod/Content/Topics/Miscellaneous/Platforms_Browser_OS_Support.htm
 
+## Running odyssey-react-mui for local development
+
+Follow these steps for local [Odyssey development](https://odyssey-storybook.okta.design/?path=/docs/contributing-odyssey-development--docs)
+
 ## License
 
 [Apache Version 2.0](https://github.com/okta/odyssey/blob/main/LICENSE)

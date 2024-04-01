@@ -10,8 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Box } from "@mui/material";
 import {
+  Box,
   Button,
   buttonSizeValues,
   buttonTypeValues,
@@ -192,7 +192,7 @@ const interactWithButton =
         const canvas = within(canvasElement);
         const button = canvas.getByText(args.label ?? "");
         userEvent.tab();
-        userEvent.click(button);
+        await userEvent.click(button);
         expect(args.onClick).toHaveBeenCalledTimes(1);
         axeRun(actionName);
         if (!hoverState) {
@@ -205,7 +205,7 @@ const interactWithButton =
 export const ButtonPrimary: StoryObj<ButtonProps> = {
   name: "Primary",
   play: async ({ args, canvasElement, step }: playType) => {
-    interactWithButton({ canvasElement, step })({
+    await interactWithButton({ canvasElement, step })({
       args,
       actionName: "Button Primary",
       hoverState: false,
@@ -237,7 +237,7 @@ export const ButtonSecondary: StoryObj<ButtonProps> = {
     variant: "secondary",
   },
   play: async ({ args, canvasElement, step }: playType) => {
-    interactWithButton({ canvasElement, step })({
+    await interactWithButton({ canvasElement, step })({
       args,
       actionName: "Button Secondary",
       hoverState: false,
@@ -261,7 +261,7 @@ export const ButtonDanger: StoryObj<ButtonProps> = {
     variant: "danger",
   },
   play: async ({ args, canvasElement, step }: playType) => {
-    interactWithButton({ canvasElement, step })({
+    await interactWithButton({ canvasElement, step })({
       args,
       actionName: "Button Danger",
       hoverState: false,
@@ -285,7 +285,7 @@ export const ButtonFloating: StoryObj<ButtonProps> = {
     variant: "floating",
   },
   play: async ({ args, canvasElement, step }: playType) => {
-    interactWithButton({ canvasElement, step })({
+    await interactWithButton({ canvasElement, step })({
       args,
       actionName: "Button Floating",
       hoverState: false,
@@ -309,7 +309,7 @@ export const ButtonSmall: StoryObj<ButtonProps> = {
     size: "small",
   },
   play: async ({ args, canvasElement, step }: playType) => {
-    interactWithButton({ canvasElement, step })({
+    await interactWithButton({ canvasElement, step })({
       args,
       actionName: "Button Small",
       hoverState: true,
@@ -325,7 +325,7 @@ export const ButtonMedium: StoryObj<ButtonProps> = {
     variant: "secondary",
   },
   play: async ({ args, canvasElement, step }: playType) => {
-    interactWithButton({ canvasElement, step })({
+    await interactWithButton({ canvasElement, step })({
       args,
       actionName: "Button Medium",
       hoverState: true,
@@ -341,7 +341,7 @@ export const ButtonLarge: StoryObj<ButtonProps> = {
     variant: "danger",
   },
   play: async ({ args, canvasElement, step }: playType) => {
-    interactWithButton({ canvasElement, step })({
+    await interactWithButton({ canvasElement, step })({
       args,
       actionName: "Button Large",
       hoverState: true,
@@ -356,7 +356,7 @@ export const ButtonFullWidth: StoryObj<ButtonProps> = {
     isFullWidth: true,
   },
   play: async ({ args, canvasElement, step }: playType) => {
-    interactWithButton({ canvasElement, step })({
+    await interactWithButton({ canvasElement, step })({
       args,
       actionName: "Button Fullwidth",
       hoverState: true,
@@ -371,7 +371,7 @@ export const ButtonWithIcon: StoryObj<ButtonProps> = {
     startIcon: <AddIcon />,
   },
   play: async ({ args, canvasElement, step }: playType) => {
-    interactWithButton({ canvasElement, step })({
+    await interactWithButton({ canvasElement, step })({
       args,
       actionName: "Button with Icon",
       hoverState: false,
@@ -399,7 +399,7 @@ export const IconOnly: StoryObj<ButtonProps> = {
 
 export const KitchenSink: StoryObj<ButtonProps> = {
   name: "Kitchen sink",
-  render: () => (
+  render: ({}) => (
     <Box sx={{ display: "flex", flexWrap: "wrap", rowGap: 2 }}>
       <Button label="Primary" variant="primary" />
       <Button label="Secondary" variant="secondary" />

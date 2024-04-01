@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Autocomplete } from "@okta/odyssey-react-mui";
+import { Autocomplete, Link } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 import { expect } from "@storybook/jest";
 import { userEvent, waitFor, within, screen } from "@storybook/testing-library";
@@ -54,6 +54,7 @@ const storybookMeta: Meta<typeof Autocomplete> = {
   component: Autocomplete,
   argTypes: {
     errorMessage: fieldComponentPropsMetaData.errorMessage,
+    errorMessageList: fieldComponentPropsMetaData.errorMessageList,
     hasMultipleChoices: {
       control: "boolean",
       description: "Enables multiple choice selection",
@@ -83,6 +84,9 @@ const storybookMeta: Meta<typeof Autocomplete> = {
       table: {
         type: {
           summary: "boolean",
+        },
+        defaultValue: {
+          summary: false,
         },
       },
     },
@@ -198,14 +202,14 @@ export const Default: StoryObj<AutocompleteType> = {
     await step("Filter and Select from listbox", async () => {
       await userEvent.click(comboBoxElement);
       const listboxElement = screen.getByRole("listbox");
-      await expect(listboxElement).toBeVisible();
+      expect(listboxElement).toBeVisible();
     });
     await step("Check for 'No options' in the list", async () => {
       await axeRun("Autocomplete Default");
       await waitFor(async () => {
         await userEvent.type(comboBoxElement, "q");
         const noOptionsElement = screen.getByText("No options");
-        await expect(noOptionsElement).toBeVisible();
+        expect(noOptionsElement).toBeVisible();
       });
     });
     await step("Check for Filtered item from the list", async () => {
@@ -248,6 +252,34 @@ export const Error: StoryObj<AutocompleteType> = {
   },
 };
 
+export const ErrorsList: StoryObj<AutocompleteType> = {
+  args: {
+    hasMultipleChoices: true,
+    errorMessage: "Select your destination.",
+    errorMessageList: [
+      "Select at least 1 destination",
+      "Select no more than 3 destinations",
+    ],
+  },
+  play: async ({ step }) => {
+    await step("Check for a11y errors on Select Error", async () => {
+      await waitFor(async () => await axeRun("Select Error"));
+    });
+  },
+};
+
+export const FullWidth: StoryObj<AutocompleteType> = {
+  args: {
+    isFullWidth: true,
+  },
+};
+
+export const HintLink: StoryObj<AutocompleteType> = {
+  args: {
+    HintLinkComponent: <Link href="/learn-more">Learn more</Link>,
+  },
+};
+
 export const IsCustomValueAllowed: StoryObj<AutocompleteType> = {
   parameters: {
     docs: {
@@ -278,6 +310,30 @@ export const Loading: StoryObj<AutocompleteType> = {
     isLoading: true,
     options: [],
   },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const comboBoxElement = canvas.getByRole("combobox") as HTMLInputElement;
+    await step("Click for loading to be visible", async () => {
+      await userEvent.click(comboBoxElement);
+      const loadingElement = screen.getByText("Loading…");
+      expect(loadingElement).toBeVisible();
+    });
+  },
+};
+
+export const NoOptions: StoryObj<AutocompleteType> = {
+  args: {
+    options: [],
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const comboBoxElement = canvas.getByRole("combobox") as HTMLInputElement;
+    await step("Click for loading to be visible", async () => {
+      await userEvent.click(comboBoxElement);
+      const loadingElement = screen.getByText("No options");
+      expect(loadingElement).toBeVisible();
+    });
+  },
 };
 
 export const Multiple: StoryObj<AutocompleteType> = {
@@ -291,7 +347,7 @@ export const Multiple: StoryObj<AutocompleteType> = {
     await step("Check for list box to be visible", async () => {
       await userEvent.click(comboBoxElement);
       const listboxElement = screen.getByRole("listbox");
-      await expect(listboxElement).toBeVisible();
+      expect(listboxElement).toBeVisible();
     });
     await step("Select multiple items", async () => {
       await userEvent.type(comboBoxElement, "z");

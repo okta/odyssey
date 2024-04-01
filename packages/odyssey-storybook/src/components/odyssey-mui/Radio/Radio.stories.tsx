@@ -107,9 +107,23 @@ export const Default: StoryObj<typeof Radio> = {
         await userEvent.click(radio);
       }
       await expect(radio).toBeChecked();
+      await expect(args.onChange).toHaveBeenCalledTimes(1);
       await userEvent.click(canvasElement);
       await expect(args.onBlur).toHaveBeenCalled();
       await axeRun("Radio Default");
     });
+  },
+};
+
+export const Disabled: StoryObj<typeof Radio> = {
+  args: {
+    isDisabled: true,
+  },
+};
+
+export const Invalid: StoryObj<typeof Radio> = {
+  args: {
+    isChecked: true,
+    isInvalid: true,
   },
 };

@@ -23,7 +23,6 @@ import {
   MRT_Cell,
   MRT_DensityState,
   MRT_Row,
-  MRT_RowData,
   MRT_SortingState,
   MRT_TableOptions,
   MRT_RowSelectionState,
@@ -31,6 +30,8 @@ import {
   MRT_VisibilityState,
   useMaterialReactTable,
   MRT_TableContainer,
+  MRT_Column,
+  MRT_ColumnDef,
   MRT_TableInstance,
 } from "material-react-table";
 import {
@@ -51,11 +52,7 @@ import { useRowReordering } from "./useRowReordering";
 import { DataTableSettings } from "./DataTableSettings";
 import { MenuButton, MenuButtonProps } from "../MenuButton";
 import { Box } from "../Box";
-import {
-  DataTableColumn,
-  DataTableRowData,
-  DataTableRowSelectionState,
-} from ".";
+import { DataTableRowSelectionState, DataTableRowData } from ".";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
@@ -65,6 +62,21 @@ import styled from "@emotion/styled";
 import { DataTableEmptyState } from "./DataTableEmptyState";
 import { Callout } from "../Callout";
 import { t } from "i18next";
+
+export type DataTableColumn<T extends DataTableRowData> = MRT_ColumnDef<T> & {
+  hasTextWrapping?: boolean;
+};
+
+type DataTableColumnInstance<T extends DataTableRowData> = Omit<
+  MRT_Column<T, unknown>,
+  "columnDef"
+> & {
+  columnDef: DataTableColumn<T>;
+};
+
+type DataTableCell<T extends DataTableRowData> = Omit<MRT_Cell<T>, "column"> & {
+  column: DataTableColumnInstance<T>;
+};
 
 export type DataTableGetDataType = {
   page?: number;
@@ -80,15 +92,15 @@ export type DataTableOnReorderRowsType = {
 };
 
 export type DataTableRenderDetailPanelType = {
-  row: MRT_Row<MRT_RowData>;
-  table: MRT_TableInstance<MRT_RowData>;
+  row: MRT_Row<DataTableRowData>;
+  table: MRT_TableInstance<DataTableRowData>;
 };
 
 export type DataTableProps = {
   /**
    * The columns that make up the table
    */
-  columns: MRT_TableOptions<MRT_RowData>["columns"];
+  columns: DataTableColumn<DataTableRowData>[];
   /**
    * The total number of rows in the table. Optional, because it's sometimes impossible
    * to calculate. Used in table pagination to know when to disable the "next"/"more" button.
@@ -97,7 +109,7 @@ export type DataTableProps = {
   /**
    * The function to get the ID of a row
    */
-  getRowId?: MRT_TableOptions<MRT_RowData>["getRowId"];
+  getRowId?: MRT_TableOptions<DataTableRowData>["getRowId"];
   /**
    * The initial density (height & padding) of the table rows. This is available even if the
    * table density isn't changeable by the end user via hasChangeableDensity.
@@ -166,8 +178,8 @@ export type DataTableProps = {
     filters,
     sort,
   }: DataTableGetDataType) =>
-    | MRT_TableOptions<MRT_RowData>["data"]
-    | Promise<MRT_TableOptions<MRT_RowData>["data"]>;
+    | MRT_TableOptions<DataTableRowData>["data"]
+    | Promise<MRT_TableOptions<DataTableRowData>["data"]>;
   /**
    * Callback that fires when the user reorders rows within the table. Can be used
    * to propogate order change to the backend.
@@ -219,7 +231,7 @@ export type DataTableProps = {
   /**
    * The optional component to display when expanding a row.
    */
-  renderDetailPanel?: MRT_TableOptions<MRT_RowData>["renderDetailPanel"];
+  renderDetailPanel?: MRT_TableOptions<DataTableRowData>["renderDetailPanel"];
 };
 
 const displayColumnDefOptions = {
@@ -369,12 +381,13 @@ const DataTable = ({
   filters: filtersProp,
   renderDetailPanel,
 }: DataTableProps) => {
-  const [data, setData] = useState<MRT_RowData[]>([]);
+  const [data, setData] = useState<DataTableRowData[]>([]);
   const [pagination, setPagination] = useState({
     pageIndex: currentPage,
     pageSize: resultsPerPage,
   });
-  const [draggingRow, setDraggingRow] = useState<MRT_Row<MRT_RowData> | null>();
+  const [draggingRow, setDraggingRow] =
+    useState<MRT_Row<DataTableRowData> | null>();
   const [isTableContainerScrolledToStart, setIsTableContainerScrolledToStart] =
     useState(true);
   const [isTableContainerScrolledToEnd, setIsTableContainerScrolledToEnd] =
@@ -431,7 +444,9 @@ const DataTable = ({
     page: pagination.pageIndex,
   });
 
-  const getRowId = getRowIdProp ? getRowIdProp : (row: MRT_RowData) => row.id;
+  const getRowId = getRowIdProp
+    ? getRowIdProp
+    : (row: DataTableRowData) => row.id;
 
   const rowDensityCellClassName = useMemo(() => {
     return rowDensity === "spacious"
@@ -442,7 +457,7 @@ const DataTable = ({
   }, [rowDensity]);
 
   const renderRowActions = useCallback(
-    ({ row }: { row: MRT_Row<MRT_RowData> }) => {
+    ({ row }: { row: MRT_Row<DataTableRowData> }) => {
       const currentIndex =
         row.index + (pagination.pageIndex - 1) * pagination.pageSize;
       return (
@@ -493,7 +508,7 @@ const DataTable = ({
 
   const convertColumnToFilter = useCallback(
     (column: DataTableColumn<DataTableRowData>) =>
-      column.enableColumnFilter && column.accessorKey
+      column.enableColumnFilter !== false && column.accessorKey
         ? ({
             id: column.accessorKey,
             label: column.header,
@@ -519,18 +534,18 @@ const DataTable = ({
         if (foundColumn) {
           const filter = convertColumnToFilter(foundColumn);
           if (filter) {
-            accumulator.push(filter);
+            return accumulator.concat(filter);
           }
         }
       } else if ("accessorKey" in item) {
         // Checks if it's a column
         const filter = convertColumnToFilter(item);
         if (filter) {
-          accumulator.push();
+          return accumulator.concat(filter);
         }
       } else if ("label" in item) {
         // Checks if it's a DataFilter
-        accumulator.push(item);
+        return accumulator.concat(item);
       }
       // If none of the conditions match, item is ignored (not mapping to undefined)
       return accumulator;
@@ -538,9 +553,13 @@ const DataTable = ({
   }, [columns, filtersProp, convertColumnToFilter]);
 
   const defaultCell = useCallback(
-    ({ cell }: { cell: MRT_Cell<MRT_RowData> }) => {
+    ({ cell }: { cell: DataTableCell<DataTableRowData> }) => {
       const value = cell.getValue<string>();
-      return (
+      const hasTextWrapping = cell.column.columnDef.hasTextWrapping;
+
+      return hasTextWrapping ? (
+        value
+      ) : (
         <Box
           sx={{
             whiteSpace: "nowrap",
@@ -633,7 +652,7 @@ const DataTable = ({
     },
     selectAllMode: "all",
     displayColumnDefOptions:
-      displayColumnDefOptions as MRT_TableOptions<MRT_RowData>["displayColumnDefOptions"],
+      displayColumnDefOptions as MRT_TableOptions<DataTableRowData>["displayColumnDefOptions"],
     muiTableBodyCellProps: () => ({
       className: rowDensityCellClassName,
     }),
@@ -668,7 +687,7 @@ const DataTable = ({
         ? true
         : false,
     positionActionsColumn:
-      "last" as MRT_TableOptions<MRT_RowData>["positionActionsColumn"],
+      "last" as MRT_TableOptions<DataTableRowData>["positionActionsColumn"],
     renderRowActions: ({ row }) => renderRowActions({ row }),
 
     // Row selection

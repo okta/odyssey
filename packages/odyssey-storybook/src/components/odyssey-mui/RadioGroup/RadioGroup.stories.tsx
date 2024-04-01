@@ -11,7 +11,7 @@
  */
 
 import { ChangeEvent, useCallback, useState } from "react";
-import { Radio, RadioGroup } from "@okta/odyssey-react-mui";
+import { Radio, RadioGroup, Link } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 import { expect } from "@storybook/jest";
 
@@ -49,6 +49,7 @@ const storybookMeta: Meta<typeof RadioGroup> = {
       },
     },
     errorMessage: fieldComponentPropsMetaData.errorMessage,
+    errorMessageList: fieldComponentPropsMetaData.errorMessageList,
     hint: fieldComponentPropsMetaData.hint,
     HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
     id: fieldComponentPropsMetaData.id,
@@ -121,6 +122,14 @@ export const Hint: StoryObj<typeof RadioGroup> = {
   },
 };
 
+export const HintLink: StoryObj<typeof RadioGroup> = {
+  ...Template,
+  args: {
+    hint: "Select the speed at which you wish to travel.",
+    HintLinkComponent: <Link href="/learn-more">Learn more</Link>,
+  },
+};
+
 export const Disabled: StoryObj<typeof RadioGroup> = {
   ...Template,
   args: {
@@ -141,6 +150,15 @@ export const Error: StoryObj<typeof RadioGroup> = {
   },
   args: {
     errorMessage: "This field is required.",
+    defaultValue: "",
+  },
+};
+
+export const ErrorsList: StoryObj<typeof RadioGroup> = {
+  ...Template,
+  args: {
+    errorMessage: "This field is required.",
+    errorMessageList: ["Message 1", "Message 2"],
     defaultValue: "",
   },
 };
