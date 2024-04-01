@@ -112,16 +112,17 @@ const DateField =
 
         return (
           <MuiDateField
-            onKeyUp={onKeyUp}
             /* eslint-disable-next-line jsx-a11y/no-autofocus */
             autoFocus={hasInitialFocus}
             defaultValue={defaultValue}
+            disabled={isDisabled}
             id={id}
             inputProps={{
               "aria-describedby": ariaDescribedBy,
               "aria-labelledby": labelElementId,
             }}
             InputProps={{
+              error: Boolean(errorMessage),
               endAdornment: (
                 <InputAdornment position="end">{endAdornment}</InputAdornment>
               ),
@@ -131,6 +132,7 @@ const DateField =
             onBlur={onBlur}
             onChange={handleChange}
             onFocus={onFocus}
+            onKeyUp={onKeyUp}
             readOnly={isReadOnly}
             value={value}
             variant="standard"
@@ -140,6 +142,7 @@ const DateField =
       [
         defaultValue,
         endAdornment,
+        errorMessage,
         hasInitialFocus,
         onChange,
         onFocus,

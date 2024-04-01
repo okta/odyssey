@@ -61,6 +61,7 @@ const storybookMeta: Meta<DatePickerProps> = {
         },
       },
     },
+    isDisabled: fieldComponentPropsMetaData.isDisabled,
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],

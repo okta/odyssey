@@ -46,7 +46,7 @@ import {
   DesignTokens,
 } from "../OdysseyDesignTokensContext";
 import { OdysseyThemeProvider } from "../OdysseyThemeProvider";
-import { DefaultSupportedLanguages } from "../OdysseyTranslationProvider.types";
+// import { DefaultSupportedLanguages } from "../OdysseyTranslationProvider.types";
 import { useDatePickerTranslations } from "./useDatePickerTranslations";
 
 const DatePickerContainer = styled.div({
@@ -86,7 +86,7 @@ export type DatePickerProps = {
    */
   onInputChange?: (value: string) => void;
   value?: Date;
-} & Pick<FieldComponentProps, "errorMessage" | "hint"> &
+} & Pick<FieldComponentProps, "errorMessage" | "hint" | "isDisabled"> &
   Pick<
     MuiDatePickerProps<Date>,
     "defaultValue" | "disableFuture" | "disablePast" | "minDate" | "maxDate"
@@ -100,6 +100,7 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       disablePast,
       errorMessage,
       hint,
+      isDisabled,
       label,
       minDate,
       maxDate,
@@ -120,23 +121,7 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
 
     const containerRef = useRef<HTMLInputElement>(null);
 
-    const localeText = useMemo(() => {
-      return (
-        useDatePickerTranslations(language as DefaultSupportedLanguages) || {
-          ...useDatePickerTranslations("en"),
-          previousMonth: `${t("datepicker.previousmonth")}`,
-          nextMonth: `${t("datepicker.nextmonth")}`,
-          calendarViewSwitchingButtonAriaLabel: (view: any) =>
-            view === "year"
-              ? `${t("datepicker.view.switch.year")}`
-              : `${t("datepicker.view.switch.calendar")}`,
-          fieldYearPlaceholder: (params: any) => {
-            console.log({ params });
-            return "Y"
-          },
-        }
-      );
-    }, [language]);
+    const localeText = useMemo(() => useDatePickerTranslations(t), [language]);
 
     const formatDateTimeToJsDateOnCalendarSelection = useCallback<
       NonNullable<MuiDatePickerProps<DateTime>["onChange"]>
@@ -189,11 +174,12 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
                 startIcon={<CalendarIcon />}
                 variant="floating"
                 onClick={toggleCalendarVisibility}
-              />
+                />
             </InputAdornment>
           }
           errorMessage={errorMessage}
           hint={hint}
+          isDisabled={isDisabled}
           label={label}
           minDate={minDate ? formatDateToDateTime(minDate) : undefined}
           maxDate={maxDate ? formatDateToDateTime(maxDate) : undefined}
@@ -204,6 +190,7 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       [
         errorMessage,
         hint,
+        isDisabled,
         label,
         minDate,
         maxDate,
@@ -229,13 +216,14 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
               ref={containerRef}
             >
               <MuiDatePicker<DateTime>
+                dayOfWeekFormatter={(_, date) => formatDayOfWeek(date)}
                 defaultValue={
                   defaultValueProp
                     ? formatDateToDateTime(defaultValueProp)
                     : undefined
                 }
+                disabled={isDisabled}
                 value={valueProp ? formatDateToDateTime(valueProp) : undefined}
-                dayOfWeekFormatter={(_, date) => formatDayOfWeek(date)}
                 key={language}
                 label={label}
                 minDate={minDate ? formatDateToDateTime(minDate) : undefined}
