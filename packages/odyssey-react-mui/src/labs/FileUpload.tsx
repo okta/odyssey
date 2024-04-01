@@ -54,6 +54,7 @@ const BaseInputWrapper = styled.div({
 
 const InputContainer = styled(BaseInputWrapper)<{
   odysseyDesignTokens: DesignTokens;
+  hasError: boolean;
 }>(
   {
     display: "flex",
@@ -65,9 +66,11 @@ const InputContainer = styled(BaseInputWrapper)<{
       borderStyle: "solid",
     },
   },
-  ({ odysseyDesignTokens }) => ({
+  ({ hasError, odysseyDesignTokens }) => ({
     padding: `${odysseyDesignTokens.Spacing6} ${odysseyDesignTokens.Spacing3}`,
-    border: `1px dashed ${odysseyDesignTokens.HueNeutral300}`,
+    border: hasError
+      ? `1px solid ${odysseyDesignTokens.PaletteDangerMain}`
+      : `1px dashed ${odysseyDesignTokens.HueNeutral300}`,
     borderRadius: odysseyDesignTokens.BorderRadiusMain,
     transition: `border-color ${odysseyDesignTokens.TransitionTimingMain}, box-shadow ${odysseyDesignTokens.TransitionTimingMain}`,
 
@@ -99,6 +102,10 @@ const ButtonAndInfoContainer = styled.div({
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
+});
+
+const CenterAlignedSupportText = styled.div({
+  textAlign: "center",
 });
 
 export type FileUploadProps = {
@@ -196,7 +203,7 @@ const FileUpload = ({
       id,
       labelElementId,
     }: RenderFieldComponentProps) => {
-      const fileNames = filesToUpload.map((file) => file.name);
+      // const fileNames = filesToUpload.map((file) => file.name);
       const acceptedFileTypesAsString = acceptedFileTypes?.join(",");
 
       const Input = () => (
@@ -228,24 +235,24 @@ const FileUpload = ({
                 variant="secondary"
               />
             </BaseInputWrapper>
-            <FileUploadPreview
-              fileNames={fileNames}
-              onFileRemove={removeFileFromFilesToUploadList}
-              isDisabled={isDisabled}
-            />
           </>
         );
       }
 
       return (
         <>
-          <InputContainer odysseyDesignTokens={odysseyDesignTokens}>
+          <InputContainer
+            hasError={Boolean(errorMessage)}
+            odysseyDesignTokens={odysseyDesignTokens}
+          >
             <Input />
             <ButtonAndInfoContainer>
               {variant === "dragAndDropWithIcon" && <FileUploadIllustration />}
-              <Support color="textSecondary">
-                {t("fileupload.prompt.text")}
-              </Support>
+              <CenterAlignedSupportText>
+                <Support color="textSecondary">
+                  {t("fileupload.prompt.text")}
+                </Support>
+              </CenterAlignedSupportText>
               <Button
                 isDisabled={isDisabled}
                 label={t("fileupload.button.text")}
@@ -255,11 +262,6 @@ const FileUpload = ({
               />
             </ButtonAndInfoContainer>
           </InputContainer>
-          <FileUploadPreview
-            fileNames={fileNames}
-            onFileRemove={removeFileFromFilesToUploadList}
-            isDisabled={isDisabled}
-          />
         </>
       );
     },
@@ -288,10 +290,15 @@ const FileUpload = ({
         HintLinkComponent={HintLinkComponent}
         id={id}
         isDisabled={isDisabled}
-        isFullWidth={isFullWidth}
+        isFullWidth={isFullWidth && variant !== "button"}
         isOptional={isOptional}
         label={label}
         renderFieldComponent={renderFileInput}
+      />
+      <FileUploadPreview
+        fileNames={filesToUpload.map((file) => file.name)}
+        onFileRemove={removeFileFromFilesToUploadList}
+        isDisabled={isDisabled}
       />
     </>
   );

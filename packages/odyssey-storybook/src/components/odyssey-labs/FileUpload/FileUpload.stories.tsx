@@ -52,6 +52,7 @@ const storybookMeta: Meta<typeof FileUpload> = {
         },
       },
     },
+    errorMessage: fieldComponentPropsMetaData.errorMessage,
     hint: fieldComponentPropsMetaData.hint,
     id: fieldComponentPropsMetaData.id,
     isDisabled: fieldComponentPropsMetaData.isDisabled,
@@ -95,7 +96,7 @@ const storybookMeta: Meta<typeof FileUpload> = {
     },
   },
   args: {
-    hint: "Some helpful text about what format to use",
+    hint: "Maybe some helpful text about what format to use",
     label: "Upload your files here",
   },
   decorators: [MuiThemeDecorator],

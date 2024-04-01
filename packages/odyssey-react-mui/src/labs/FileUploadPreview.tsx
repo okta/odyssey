@@ -92,7 +92,7 @@ const UploadedFile = ({ name, onFileRemove }: UploadedFileProps) => {
         </IconButton>
       );
     },
-    [deleteHandler, t],
+    [deleteHandler],
   );
 
   return (
@@ -128,8 +128,13 @@ const FileUploadPreview = ({
 }: FileUploadPreviewProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
+  if (!fileNames.length) {
+    return null;
+  }
+
   return (
     <PreviewContainer
+      data-file-preview-container="true"
       isDisabled={isDisabled}
       odysseyDesignTokens={odysseyDesignTokens}
     >

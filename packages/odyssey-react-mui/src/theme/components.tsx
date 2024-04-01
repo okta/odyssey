@@ -1590,17 +1590,17 @@ export const components = ({
           width: "100%",
           maxWidth: odysseyTokens.TypographyLineLengthMax,
           ...(ownerState.margin === "normal" && {
-            marginTop: 0,
-            marginBottom: odysseyTokens.Spacing4,
+            marginBlockStart: 0,
+            marginBlockEnd: odysseyTokens.Spacing4,
             "&:last-child": {
-              marginBottom: 0,
+              marginBlockEnd: 0,
             },
           }),
           ...(ownerState.margin === "dense" && {
-            marginTop: 0,
-            marginBottom: odysseyTokens.Spacing5,
+            marginBlockStart: 0,
+            marginBlockEnd: odysseyTokens.Spacing5,
             "&:last-child": {
-              marginBottom: 0,
+              marginBlockEnd: 0,
             },
           }),
           ...(ownerState.fullWidth && {
@@ -1608,6 +1608,9 @@ export const components = ({
           }),
           [`& .${formGroupClasses.root}`]: {
             marginBlockStart: odysseyTokens.Spacing1,
+          },
+          [`&:has(+ [data-file-preview-container])`]: {
+            marginBlockEnd: 0,
           },
         }),
       },

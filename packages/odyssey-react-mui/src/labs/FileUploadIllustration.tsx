@@ -21,7 +21,7 @@ import {
 const UploadIllustrationContainer = styled.div<{
   odysseyDesignTokens: DesignTokens;
 }>(({ odysseyDesignTokens }) => ({
-  marginBlockEnd: odysseyDesignTokens.Spacing2,
+  marginBlockEnd: odysseyDesignTokens.Spacing3,
   padding: odysseyDesignTokens.Spacing3,
   backgroundColor: odysseyDesignTokens.HueNeutral50,
   borderRadius: "50%",
