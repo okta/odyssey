@@ -2607,6 +2607,10 @@ export const components = ({
             marginInlineEnd: `-${odysseyTokens.Spacing3}`,
           },
 
+          [`& .Mui-TableHeadCell-Content-Wrapper`]: {
+            flexShrink: 0,
+          },
+
           [`& .${dividerClasses.vertical}`]: {
             borderStyle: "none none none solid",
             borderWidth: 1,
