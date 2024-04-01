@@ -26,6 +26,16 @@ export const fieldComponentPropsMetaData: Partial<
       },
     },
   },
+  errorMessageList: {
+    control: null,
+    description:
+      "The list of error messages rendered at the buttom of the `error` message",
+    table: {
+      type: {
+        summary: "array",
+      },
+    },
+  },
   hint: {
     control: "text",
     description: "The helper text content",

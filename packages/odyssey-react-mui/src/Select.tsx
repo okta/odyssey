@@ -107,18 +107,7 @@ const ChipsInnerContainer = styled(MuiBox, {
   gap: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing1};
   pointer-events: none;
   opacity: ${({ isInteractive }) => (isInteractive ? 1 : 0)};
-`;
-
-const ChipsSpacer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{
-  odysseyDesignTokens: DesignTokens;
-}>`
-  display: inline-block;
-  border-color: transparent;
-  border-style: solid none;
-  border-width: 1px;
-  height: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing6};
+  min-height: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing6};
 `;
 
 export type SelectValueType<HasMultipleChoices> =
@@ -281,12 +270,14 @@ const Select = <
       } = event;
       if (controlledStateRef.current !== CONTROLLED) {
         setInternalSelectedValues(
-          (typeof value === "string" ? value.split(",") : value) as Value,
+          (typeof value === "string" && hasMultipleChoices
+            ? value.split(",")
+            : value) as Value,
         );
       }
       onChangeProp?.(event, child);
     },
-    [onChangeProp],
+    [hasMultipleChoices, onChangeProp],
   );
 
   // Normalize the options array to accommodate the various
@@ -313,75 +304,74 @@ const Select = <
     [options],
   );
 
+  const removeSelectedValue = useCallback(
+    (selectedValue: string) => {
+      if (Array.isArray(internalSelectedValues)) {
+        const newValue = internalSelectedValues.filter(
+          (internalSelectedValue) => internalSelectedValue !== selectedValue,
+        );
+
+        const syntheticEvent = {
+          target: { value: newValue },
+        } as SelectChangeEvent<Value>;
+
+        onChange(syntheticEvent, null);
+      }
+    },
+    [internalSelectedValues, onChange],
+  );
+
   const Chips = useCallback(
-    ({
-      selection,
-      isInteractive,
-    }: {
-      selection: string[];
-      isInteractive: boolean;
-    }) => {
-      const removeSelection = (itemToRemove: string) => {
-        if (Array.isArray(internalSelectedValues)) {
-          const newValue = internalSelectedValues.filter(
-            (item: string) => item !== itemToRemove,
-          );
-
-          const syntheticEvent = {
-            target: { value: newValue },
-          } as SelectChangeEvent<Value>;
-
-          onChange(syntheticEvent, null);
-        }
-      };
-
+    ({ isInteractive }: { isInteractive: boolean }) => {
       const stopPropagation = (event: MouseEvent<SVGSVGElement>) =>
         event.stopPropagation();
 
+      const hasNonInteractiveIcon =
+        !isInteractive &&
+        controlledStateRef.current === CONTROLLED &&
+        hasMultipleChoices;
+
       return (
-        <ChipsInnerContainer
-          isInteractive={isInteractive}
-          odysseyDesignTokens={odysseyDesignTokens}
-        >
-          {selection.length <= 0 && (
-            <ChipsSpacer odysseyDesignTokens={odysseyDesignTokens} />
-          )}
-          {selection.map(
-            (item: string) =>
-              item?.length > 0 && (
-                <MuiChip
-                  key={item}
-                  label={
-                    <>
-                      {item}
-                      {!isInteractive &&
-                        controlledStateRef.current === CONTROLLED &&
-                        hasMultipleChoices && (
+        Array.isArray(internalSelectedValues) && (
+          <ChipsInnerContainer
+            isInteractive={isInteractive}
+            odysseyDesignTokens={odysseyDesignTokens}
+          >
+            {internalSelectedValues.map(
+              (item) =>
+                item?.length > 0 && (
+                  <MuiChip
+                    key={item}
+                    label={
+                      <>
+                        {item}
+                        {hasNonInteractiveIcon && (
                           <NonInteractiveIcon
                             odysseyDesignTokens={odysseyDesignTokens}
                           />
                         )}
-                    </>
-                  }
-                  tabIndex={-1}
-                  onDelete={
-                    isInteractive && controlledStateRef.current === CONTROLLED
-                      ? () => removeSelection(item)
-                      : undefined
-                  }
-                  deleteIcon={
-                    <CloseCircleFilledIcon
-                      sx={{ pointerEvents: "auto" }}
-                      // We need to stop event propagation on mouse down to prevent the deletion
-                      // from being blocked by the Select list opening, and also ensure that
-                      // the pointerEvent is registered even when the parent's are not
-                      onMouseDown={stopPropagation}
-                    />
-                  }
-                />
-              ),
-          )}
-        </ChipsInnerContainer>
+                      </>
+                    }
+                    tabIndex={-1}
+                    onDelete={
+                      isInteractive && controlledStateRef.current === CONTROLLED
+                        ? () => removeSelectedValue(item)
+                        : undefined
+                    }
+                    deleteIcon={
+                      <CloseCircleFilledIcon
+                        sx={{ pointerEvents: "auto" }}
+                        // We need to stop event propagation on mouse down to prevent the deletion
+                        // from being blocked by the Select list opening, and also ensure that
+                        // the pointerEvent is registered even when the parent's are not
+                        onMouseDown={stopPropagation}
+                      />
+                    }
+                  />
+                ),
+            )}
+          </ChipsInnerContainer>
+        )
       );
     },
     [
@@ -389,13 +379,13 @@ const Select = <
       hasMultipleChoices,
       internalSelectedValues,
       odysseyDesignTokens,
-      onChange,
+      removeSelectedValue,
     ],
   );
 
   // Convert the options into the ReactNode children
   // that will populate the <Select>
-  const children = useMemo(
+  const renderedOptions = useMemo(
     () =>
       normalizedOptions.map((option, index) => {
         if (option.type === "heading") {
@@ -416,22 +406,18 @@ const Select = <
           >
             {hasMultipleChoices && <MuiCheckbox checked={isSelected} />}
             {option.text}
-            {!hasMultipleChoices &&
-              (internalSelectedValues?.includes(option.value) ||
-                internalSelectedValues === option.value) && (
-                <ListItemSecondaryAction>
-                  <CheckIcon />
-                </ListItemSecondaryAction>
-              )}
+            {!hasMultipleChoices && internalSelectedValues === option.value && (
+              <ListItemSecondaryAction>
+                <CheckIcon />
+              </ListItemSecondaryAction>
+            )}
           </MuiMenuItem>
         );
       }),
     [hasMultipleChoices, normalizedOptions, internalSelectedValues],
   );
-
   const renderValue = useCallback(
-    (value: Value) =>
-      Array.isArray(value) && <Chips selection={value} isInteractive={false} />,
+    (value: Value) => Array.isArray(value) && <Chips isInteractive={false} />,
     [Chips],
   );
 
@@ -447,7 +433,6 @@ const Select = <
           {...inputValues}
           aria-describedby={ariaDescribedBy}
           aria-errormessage={errorMessageElementId}
-          children={children}
           id={id}
           inputProps={{ "data-se": testId }}
           inputRef={localInputRef}
@@ -459,16 +444,21 @@ const Select = <
           onFocus={onFocus}
           renderValue={hasMultipleChoices ? renderValue : undefined}
           translate={translate}
-        />
-        {hasMultipleChoices && Array.isArray(value) && (
-          <ChipsPositioningContainer odysseyDesignTokens={odysseyDesignTokens}>
-            <Chips selection={value} isInteractive={true} />
-          </ChipsPositioningContainer>
+        >
+          {renderedOptions}
+        </MuiSelect>
+        {hasMultipleChoices && (
+          <>
+            <ChipsPositioningContainer
+              odysseyDesignTokens={odysseyDesignTokens}
+            >
+              <Chips isInteractive={true} />
+            </ChipsPositioningContainer>
+          </>
         )}
       </SelectContainer>
     ),
     [
-      children,
       Chips,
       inputValues,
       hasMultipleChoices,
@@ -477,10 +467,10 @@ const Select = <
       onBlur,
       onChange,
       onFocus,
+      renderedOptions,
       renderValue,
       testId,
       translate,
-      value,
     ],
   );
 

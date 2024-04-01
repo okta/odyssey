@@ -10,10 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { useCallback, useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { Accordion, AccordionProps } from "@okta/odyssey-react-mui";
+import { expect } from "@storybook/jest";
+import { userEvent, within, waitFor } from "@storybook/testing-library";
+import { PlaywrightProps } from "../storybookTypes";
 
 const storybookMeta: Meta<AccordionProps> = {
   title: "MUI Components/Accordion",
@@ -121,5 +125,58 @@ export const Multi: StoryObj<AccordionProps> = {
         </Accordion>
       </>
     );
+  },
+};
+
+export const Disabled: StoryObj<AccordionProps> = {
+  args: {
+    children: "This is the content of the box.",
+    isDisabled: true,
+  },
+  render: function C(props: AccordionProps) {
+    return (
+      <Accordion label="Title" isDisabled={props.isDisabled}>
+        {props.children}
+      </Accordion>
+    );
+  },
+};
+
+export const Expanded: StoryObj<AccordionProps> = {
+  args: {
+    children: "This is the content of the box.",
+  },
+  render: function C(props: AccordionProps) {
+    const [isExpanded, setIsExpanded] = useState(true);
+    const onChange = useCallback<NonNullable<AccordionProps["onChange"]>>(
+      (_event, expanded) => setIsExpanded(expanded),
+      [],
+    );
+    return (
+      <Accordion label="Title" isExpanded={isExpanded} onChange={onChange}>
+        {props.children}
+      </Accordion>
+    );
+  },
+  play: async ({ canvasElement, step }: PlaywrightProps<AccordionProps>) => {
+    await step("Accordion Expanded", async ({}) => {
+      const canvas = within(canvasElement);
+      const accordion = canvas.getByRole("button");
+      const accordionContent = canvas.getByRole("region");
+
+      await waitFor(() => {
+        expect(accordionContent).toBeVisible();
+      });
+
+      await userEvent.click(accordion);
+      await waitFor(() => {
+        expect(accordionContent).not.toBeVisible();
+      });
+
+      await userEvent.click(accordion);
+      await waitFor(() => {
+        expect(accordionContent).toBeVisible();
+      });
+    });
   },
 };

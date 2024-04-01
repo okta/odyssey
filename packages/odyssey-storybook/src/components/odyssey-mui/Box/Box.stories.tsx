@@ -13,6 +13,8 @@
 import { Meta, StoryObj } from "@storybook/react";
 
 import { Box, TextField, BoxProps } from "@okta/odyssey-react-mui";
+import { within } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<BoxProps> = {
@@ -77,6 +79,14 @@ export const Simple: StoryObj<BoxProps> = {
       borderWidth: 2,
       p: 3,
     },
+    id: "container-id",
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("Box Id", async ({ args }) => {
+      const canvas = within(canvasElement);
+      const box = canvas.getByText("This is the content of the box.");
+      expect(box).toHaveAttribute("id", args.id);
+    });
   },
 };
 

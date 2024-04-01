@@ -24,7 +24,7 @@ export const MuiThemeDecorator: Decorator = (Story, context) => {
       {/* @ts-expect-error type mismatch on "typography" */}
       <StorybookThemeProvider theme={odysseyTheme}>
         <CssBaseline />
-        <div style={styles}>
+        <div style={styles} lang={locale}>
           <ScopedCssBaseline>
             <Story />
           </ScopedCssBaseline>

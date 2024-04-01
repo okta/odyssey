@@ -129,3 +129,9 @@ export const Alert: StoryObj<FieldsetProps> = {
     ),
   },
 };
+
+export const Disabled: StoryObj<FieldsetProps> = {
+  args: {
+    isDisabled: true,
+  },
+};

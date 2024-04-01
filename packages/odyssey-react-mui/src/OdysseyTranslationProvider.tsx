@@ -45,30 +45,14 @@ export type OdysseyTranslationProviderProps<
   translationOverrides?: TranslationOverrides<SupportedLanguages>;
 };
 
-const formatLanguageCodeToHyphenated = <SupportedLanguages extends string>(
-  languageCode: OdysseyTranslationProviderProps<SupportedLanguages>["languageCode"],
-) => languageCode?.replaceAll("_", "-");
-
 export const OdysseyTranslationProvider = <SupportedLanguages extends string>({
   children,
   languageCode,
   translationOverrides,
 }: OdysseyTranslationProviderProps<SupportedLanguages>) => {
   useEffect(() => {
-    const normalizedLanguageCode =
-      formatLanguageCodeToHyphenated<SupportedLanguages>(languageCode);
-
-    const changeHtmlElementLanguageAttribute = () => {
-      window.document.documentElement.setAttribute(
-        "lang",
-        normalizedLanguageCode || "en",
-      );
-    };
     // Defaults to the browser's language if available otherwise `en` will be used
-    i18n.changeLanguage(
-      languageCode || window.navigator.language,
-      changeHtmlElementLanguageAttribute,
-    );
+    i18n.changeLanguage(languageCode || window.navigator.language);
   }, [languageCode]);
 
   useEffect(() => {
