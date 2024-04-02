@@ -880,20 +880,8 @@ export const CustomFilterWithDefaultVariant: StoryObj<DataTableProps> = {
 };
 
 export const Details: StoryObj<DataTableProps> = {
-  args: {
-    hasChangeableDensity: true,
-    hasColumnResizing: true,
-    hasColumnVisibility: true,
-    hasFilters: true,
-    hasPagination: true,
-    hasRowSelection: true,
-    hasSearch: true,
-    hasSorting: true,
-    hasRowReordering: true,
-    totalRows: 200,
-  },
-  render: function C(props) {
-    const [data, setData] = useState<Person[]>(personData);
+  render: function C() {
+    const data = planetData;
 
     const getData = useCallback(
       ({ ...props }: DataTableGetDataType) => {
@@ -902,74 +890,21 @@ export const Details: StoryObj<DataTableProps> = {
       [data],
     );
 
-    const onReorderRows = useCallback(
-      ({ ...props }: DataTableOnReorderRowsType) => {
-        const reorderedData = reorderData({ data, ...props });
-        setData(reorderedData as Person[]);
-      },
-      [data],
-    );
-
-    const onChangeRowSelection = useCallback(
-      (rowSelection: DataTableRowSelectionState) => {
-        if (Object.keys(rowSelection).length > 0) {
-          console.log(`${Object.keys(rowSelection).length} selected`);
-        }
-      },
-      [],
-    );
-
-    const emptyPlaceholder = useMemo(
-      () => (
-        <DataTableEmptyState
-          heading="Start by adding data assets"
-          text="All relevant data will be displayed and can be searched and filtered"
-          primaryButton={<Button variant="primary" label="Primary" />}
-          secondaryButton={<Button variant="secondary" label="Secondary" />}
-        />
-      ),
-      [],
-    );
-
-    const noResultsPlaceholder = useMemo(
-      () => (
-        <DataTableEmptyState
-          heading="Whoops, there's nothing here!"
-          text="You should try searching or filtering for something else."
-        />
-      ),
-      [],
-    );
-
-    const actionMenuItems = (selectedRows: DataTableRowSelectionState) => (
-      <>
-        <MenuItem onClick={() => console.log(selectedRows)}>Action 1</MenuItem>
-        <MenuItem onClick={() => console.log(selectedRows)}>Action 2</MenuItem>
-      </>
-    );
-
     const renderDetailPanel = useCallback(
       ({ row, table }: DataTableRenderDetailPanelType) => {
         if (1 < 0) {
           console.debug(table);
         }
 
-        return <Box>{`This is ${row.original.name}.`}</Box>;
+        return <Box>{`This planet is ${row.original.name}.`}</Box>;
       },
       [],
     );
 
     return (
       <DataTable
-        {...props}
-        columns={personColumns}
+        columns={planetColumns}
         getData={getData}
-        onReorderRows={onReorderRows}
-        onChangeRowSelection={onChangeRowSelection}
-        emptyPlaceholder={emptyPlaceholder}
-        noResultsPlaceholder={noResultsPlaceholder}
-        rowActionMenuItems={actionMenuItems}
-        bulkActionMenuItems={actionMenuItems}
         renderDetailPanel={renderDetailPanel}
       />
     );
@@ -977,20 +912,8 @@ export const Details: StoryObj<DataTableProps> = {
 };
 
 export const ConditionalDetails: StoryObj<DataTableProps> = {
-  args: {
-    hasChangeableDensity: true,
-    hasColumnResizing: true,
-    hasColumnVisibility: true,
-    hasFilters: true,
-    hasPagination: false,
-    hasRowSelection: true,
-    hasSearch: true,
-    hasSorting: true,
-    hasRowReordering: true,
-    totalRows: 20,
-  },
-  render: function C(props) {
-    const [data, setData] = useState<Person[]>(personData);
+  render: function C() {
+    const data = planetData;
 
     const getData = useCallback(
       ({ ...props }: DataTableGetDataType) => {
@@ -999,75 +922,24 @@ export const ConditionalDetails: StoryObj<DataTableProps> = {
       [data],
     );
 
-    const onReorderRows = useCallback(
-      ({ ...props }: DataTableOnReorderRowsType) => {
-        const reorderedData = reorderData({ data, ...props });
-        setData(reorderedData as Person[]);
-      },
-      [data],
-    );
-
-    const onChangeRowSelection = useCallback(
-      (rowSelection: DataTableRowSelectionState) => {
-        if (Object.keys(rowSelection).length > 0) {
-          console.log(`${Object.keys(rowSelection).length} selected`);
-        }
-      },
-      [],
-    );
-
-    const emptyPlaceholder = useMemo(
-      () => (
-        <DataTableEmptyState
-          heading="Start by adding data assets"
-          text="All relevant data will be displayed and can be searched and filtered"
-          primaryButton={<Button variant="primary" label="Primary" />}
-          secondaryButton={<Button variant="secondary" label="Secondary" />}
-        />
-      ),
-      [],
-    );
-
-    const noResultsPlaceholder = useMemo(
-      () => (
-        <DataTableEmptyState
-          heading="Whoops, there's nothing here!"
-          text="You should try searching or filtering for something else."
-        />
-      ),
-      [],
-    );
-
-    const actionMenuItems = (selectedRows: DataTableRowSelectionState) => (
-      <>
-        <MenuItem onClick={() => console.log(selectedRows)}>Action 1</MenuItem>
-        <MenuItem onClick={() => console.log(selectedRows)}>Action 2</MenuItem>
-      </>
-    );
-
     const renderDetailPanel = useCallback(
       ({ row, table }: DataTableRenderDetailPanelType) => {
         if (1 < 0) {
           console.debug(table);
         }
-        if (row.original.risk !== "high") return;
+        if (row.original.visit === "landing") return;
 
-        return <Box>{`The risk level for ${row.original.name} is HIGH.`}</Box>;
+        return (
+          <Box>{`Humanity has not landed on ${row.original.name} (yet).`}</Box>
+        );
       },
       [],
     );
 
     return (
       <DataTable
-        {...props}
-        columns={personColumns}
+        columns={planetColumns}
         getData={getData}
-        onReorderRows={onReorderRows}
-        onChangeRowSelection={onChangeRowSelection}
-        emptyPlaceholder={emptyPlaceholder}
-        noResultsPlaceholder={noResultsPlaceholder}
-        rowActionMenuItems={actionMenuItems}
-        bulkActionMenuItems={actionMenuItems}
         renderDetailPanel={renderDetailPanel}
       />
     );
