@@ -37,6 +37,9 @@
 // } from "@mui/x-date-pickers/locales";
 
 // import { DefaultSupportedLanguages } from "../OdysseyTranslationProvider.types";
+import {
+  PickersLocaleText
+} from "@mui/x-date-pickers";
 import { TFunction } from "i18next";
 
 // const localeKeyMap = new Map<string, any>([
@@ -78,19 +81,17 @@ import { TFunction } from "i18next";
 // };
 
 
-export const useDatePickerTranslations = (t: TFunction) => ({
+export const useDatePickerTranslations = (t: TFunction): Partial<PickersLocaleText<Date>> => ({
   previousMonth: `${t("datepicker.navigation.previousmonth")}`,
   nextMonth: `${t("datepicker.navigation.nextmonth")}`,
-  calendarViewSwitchingButtonAriaLabel: (view: any) =>
+  calendarViewSwitchingButtonAriaLabel: (view) =>
     view === "year"
       ? `${t("datepicker.navigation.year")}`
       : `${t("datepicker.navigation.calendar")}`,
-  fieldDayPlaceholder: (params: any) => `${t("datepicker.placeholder.day")}`,
+  fieldDayPlaceholder: () => `${t("datepicker.placeholder.day")}`,
   fieldMonthPlaceholder: () => `${t("datepicker.placeholder.month")}`,
-  fieldYearPlaceholder: (params: any) =>
+  fieldYearPlaceholder: (params) =>
     `${t("datepicker.placeholder.year")}`.repeat(params.digitAmount),
-  // previousMonth: "Previous month",
-  // nextMonth: "Next month",
 });
   // const langFromMap = localeKeyMap.get(languageCode);
 
