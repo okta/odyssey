@@ -15,6 +15,7 @@ import type {} from "@mui/lab/themeAugmentation";
 import { alertTitleClasses } from "@mui/material/AlertTitle";
 import { autocompleteClasses } from "@mui/material/Autocomplete";
 import { buttonClasses } from "@mui/material/Button";
+import { buttonBaseClasses } from "@mui/material/ButtonBase";
 import { checkboxClasses } from "@mui/material/Checkbox";
 import { chipClasses } from "@mui/material/Chip";
 import { dividerClasses } from "@mui/material/Divider";
@@ -32,6 +33,7 @@ import { svgIconClasses } from "@mui/material/SvgIcon";
 import { tableBodyClasses } from "@mui/material/TableBody";
 import { tableHeadClasses } from "@mui/material/TableHead";
 import { tableRowClasses } from "@mui/material/TableRow";
+import { tableCellClasses } from "@mui/material/TableCell";
 import { tooltipClasses } from "@mui/material/Tooltip";
 import { typographyClasses } from "@mui/material/Typography";
 
@@ -2499,38 +2501,20 @@ export const components = ({
       styleOverrides: {
         root: ({ theme, ownerState }) => ({
           ...theme.typography.body1,
-          borderBottom: `${odysseyTokens.BorderWidthMain} ${odysseyTokens.BorderStyleMain} ${odysseyTokens.HueNeutral100}`,
           textAlign: "start",
           verticalAlign: "baseline",
-          padding: odysseyTokens.Spacing3,
+          padding: `0 ${odysseyTokens.Spacing3} !important`,
           overflowWrap: "break-word",
+
+          [`&.${tableCellClasses.root}`]: {
+            borderTop: `none !important`,
+            borderRight: `none !important`,
+            borderBottom: `none !important`,
+            borderLeft: `none !important`,
+          },
 
           [`.MuiTable-root.narrow &:last-child`]: {
             width: "auto",
-          },
-
-          [`.${tableRowClasses.root}:hover &[rowspan]`]: {
-            backgroundColor: odysseyTokens.HueNeutralWhite,
-          },
-
-          [`.${tableBodyClasses.root} .${tableRowClasses.root}:last-of-type &`]:
-            {
-              borderBottom: 0,
-            },
-
-          [`.${tableBodyClasses.root} .${tableRowClasses.root}:first-of-type &`]:
-            {
-              borderTopColor: odysseyTokens.HueNeutralWhite,
-              borderTopStyle: "solid",
-              borderTopWidth: odysseyTokens.BorderWidthMain,
-            },
-
-          [`.${tableRowClasses.selected} &`]: {
-            borderBottomColor: odysseyTokens.PalettePrimaryLight,
-          },
-
-          [`.${tableRowClasses.selected}:hover &`]: {
-            borderBottomColor: odysseyTokens.PalettePrimaryMain,
           },
 
           ...(ownerState.variant === "action" && {
@@ -2579,6 +2563,10 @@ export const components = ({
               width: odysseyTokens.Spacing2,
             },
 
+          [`&::after`]: {
+            display: "none",
+          },
+
           ...(ownerState.variant === "number" && {
             textAlign: "end",
             fontFeatureSettings: '"lnum", "tnum"',
@@ -2586,7 +2574,6 @@ export const components = ({
 
           ...(ownerState.padding === "checkbox" && {
             width: 48, // prevent the checkbox column from growing
-            padding: "0 0 0 4px",
           }),
 
           ...(ownerState.padding === "none" && {
@@ -2610,26 +2597,18 @@ export const components = ({
             textAlign: "justify",
           }),
 
-          ...(ownerState.variant !== "head" && {
-            ["&.MuiTableCell-compact"]: {
-              // TODO: Find a way to tokenize these values.
-              // We can't currently because these are between existing token
-              // values, but we need these precise values to match design.
-              // We use rems so this can scale with the text size.
-              padding: "0.4285714286rem",
-              height: "2.5714285714rem",
-            },
-
-            ["&.MuiTableCell-spacious"]: {
-              padding: odysseyTokens.Spacing4,
-              height: odysseyTokens.Spacing9,
-            },
-          }),
-
           [`& .${checkboxClasses.root}`]: {
             width: `${odysseyTokens.TypographyLineHeightUi}rem`,
             height: `${odysseyTokens.TypographyLineHeightUi}rem`,
             margin: 0,
+          },
+
+          [`& .Mui-TableHeadCell-ResizeHandle-Wrapper`]: {
+            marginInlineEnd: `-${odysseyTokens.Spacing3}`,
+          },
+
+          [`& .Mui-TableHeadCell-Content-Wrapper`]: {
+            flexShrink: 0,
           },
 
           [`& .${dividerClasses.vertical}`]: {
@@ -2643,6 +2622,10 @@ export const components = ({
 
           ["&.ods-drag-handle svg"]: {
             color: odysseyTokens.HueNeutral500,
+          },
+
+          [`& .${buttonBaseClasses.root}`]: {
+            marginBlock: `-${odysseyTokens.Spacing2}`,
           },
         }),
       },
@@ -2670,49 +2653,68 @@ export const components = ({
     MuiTableRow: {
       styleOverrides: {
         root: () => ({
+          borderTop: `${odysseyTokens.BorderWidthMain} ${odysseyTokens.BorderStyleMain} ${odysseyTokens.HueNeutral100}`,
+          transition: "none !important",
           verticalAlign: "unset",
+
+          [`&:hover`]: {
+            backgroundColor: `${odysseyTokens.HueNeutral50} !important`,
+          },
+
+          [`&:first-of-type`]: {
+            borderTopColor: odysseyTokens.HueNeutralWhite,
+          },
+
           [`&.${tableRowClasses.selected}`]: {
-            backgroundColor: odysseyTokens.PalettePrimaryLighter,
+            backgroundColor: `${odysseyTokens.PalettePrimaryLighter} !important`,
+
             "&:hover": {
-              backgroundColor: odysseyTokens.PalettePrimaryLighter,
+              backgroundColor: `${odysseyTokens.PalettePrimaryLighter} !important`,
             },
+
+            [`&:hover + .${tableRowClasses.root}`]: {
+              borderTopColor: odysseyTokens.PalettePrimaryMain,
+            },
+          },
+          [`.${tableRowClasses.selected} + &`]: {
+            borderTopColor: odysseyTokens.PalettePrimaryLight,
           },
           [`&.${tableRowClasses.head}`]: {
             boxShadow: "none !important",
+            borderBottom: 0,
 
             "&:hover, &:focus-within": {
               backgroundColor: "transparent !important",
             },
           },
 
+          [`.${tableBodyClasses.root} &`]: {
+            // Target is 48px height
+            paddingBlock: odysseyTokens.Spacing3,
+          },
+
+          [`.${tableBodyClasses.root}.MuiTableBody-compact &`]: {
+            // Target is 36px height
+            paddingBlock: odysseyTokens.Spacing2,
+          },
+
+          [`.${tableBodyClasses.root}.MuiTableBody-spacious &`]: {
+            // Target is 56px height
+            paddingBlock: odysseyTokens.Spacing4,
+          },
+
           "&.isDragTarget": {
             opacity: 1,
             position: "relative",
-
-            "&::after": {
-              content: '""',
-              width: "100%",
-              position: "absolute",
-              left: 0,
-              right: 0,
-              bottom: 0,
-              height: odysseyTokens.Spacing1,
-              backgroundColor: odysseyTokens.PalettePrimaryMain,
-            },
-
-            "& td": {
-              borderTop: "0 !important",
-              borderLeft: "0 !important",
-              borderRight: "0 !important",
-              borderBottom: `${odysseyTokens.BorderWidthMain} ${odysseyTokens.BorderStyleMain} ${odysseyTokens.HueNeutral100} !important`,
-            },
-          },
-
-          "&.isDragging, &.isDragging.isDragTarget": {
-            border: "0 !important",
-            position: "relative",
-            opacity: 1,
+            backgroundColor: odysseyTokens.PalettePrimaryMain,
             borderRadius: odysseyTokens.BorderRadiusOuter,
+
+            [`& td.${tableCellClasses.root}`]: {
+              borderTop: "0 !important",
+              borderRight: "0 !important",
+              borderBottom: "0 !important",
+              borderLeft: "0 !important",
+            },
 
             "&::after": {
               content: '""',
@@ -2721,26 +2723,46 @@ export const components = ({
               right: 0,
               top: 0,
               bottom: 0,
-              height: "auto",
-              borderRadius: odysseyTokens.BorderRadiusOuter,
               borderColor: odysseyTokens.PalettePrimaryLight,
-              borderStyle: "solid",
-              borderWidth: odysseyTokens.Spacing1,
-              backgroundColor: "transparent",
+              borderStyle: "dashed",
+              borderWidth: 2,
+              borderRadius: odysseyTokens.BorderRadiusOuter,
             },
+          },
 
-            "& td": {
-              borderTop: "0 !important",
-              borderLeft: "0 !important",
-              borderRight: "0 !important",
-              borderBottom: `${odysseyTokens.BorderWidthMain} ${odysseyTokens.BorderStyleMain} ${odysseyTokens.HueNeutral100} !important`,
-              opacity: 0.5,
-            },
+          "&.isDragging": {
+            borderRadius: odysseyTokens.BorderRadiusOuter,
+          },
+
+          "&.isDragging::after": {
+            content: '""',
+            position: "absolute",
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0,
+            borderColor: odysseyTokens.HueNeutral200,
+            borderStyle: "dashed",
+            borderWidth: 2,
+            borderRadius: odysseyTokens.BorderRadiusOuter,
+          },
+
+          "&.isDragging, &.isDragging.isDragTarget": {
+            position: "relative",
+            opacity: 1,
+            backgroundColor: "transparent",
           },
 
           "&.isDragging.isDragTarget::after": {
-            borderColor: odysseyTokens.PalettePrimaryMain,
+            borderColor: odysseyTokens.PalettePrimaryLight,
+            left: 0,
+            right: 0,
           },
+
+          [`&.isDragging + .${tableRowClasses.root}, &.isDragTarget + .${tableRowClasses.root}`]:
+            {
+              borderTopColor: "transparent",
+            },
         }),
       },
     },
@@ -2752,6 +2774,7 @@ export const components = ({
           justifyContent: "flex-start",
           flexDirection: "inherit",
           alignItems: "center",
+          marginInlineEnd: odysseyTokens.Spacing3,
           "&:focus-visible": {
             color: odysseyTokens.TypographyColorBody,
             outlineOffset: odysseyTokens.Spacing4,

@@ -445,12 +445,12 @@ const DataTable = ({
     ? getRowIdProp
     : (row: DataTableRowData) => row.id;
 
-  const rowDensityCellClassName = useMemo(() => {
+  const rowDensityClassName = useMemo(() => {
     return rowDensity === "spacious"
-      ? "MuiTableCell-spacious"
+      ? "MuiTableBody-spacious"
       : rowDensity === "compact"
-        ? "MuiTableCell-compact"
-        : "MuiTableCell-default";
+        ? "MuiTableBody-compact"
+        : "MuiTableBody-default";
   }, [rowDensity]);
 
   const renderRowActions = useCallback(
@@ -614,7 +614,6 @@ const DataTable = ({
     data: data,
     getRowId: getRowId,
     state: {
-      density: rowDensity,
       sorting: columnSorting,
       globalFilter: search,
       columnVisibility,
@@ -650,8 +649,8 @@ const DataTable = ({
     selectAllMode: "all",
     displayColumnDefOptions:
       displayColumnDefOptions as MRT_TableOptions<DataTableRowData>["displayColumnDefOptions"],
-    muiTableBodyCellProps: () => ({
-      className: rowDensityCellClassName,
+    muiTableBodyProps: () => ({
+      className: rowDensityClassName,
     }),
     defaultColumn: {
       Cell: defaultCell,
