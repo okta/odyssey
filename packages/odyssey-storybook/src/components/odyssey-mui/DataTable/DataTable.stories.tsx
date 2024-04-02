@@ -891,11 +891,7 @@ export const Details: StoryObj<DataTableProps> = {
     );
 
     const renderDetailPanel = useCallback(
-      ({ row, table }: DataTableRenderDetailPanelType) => {
-        if (1 < 0) {
-          console.debug(table);
-        }
-
+      ({ row }: DataTableRenderDetailPanelType) => {
         return <Box>{`This planet is ${row.original.name}.`}</Box>;
       },
       [],
@@ -923,10 +919,7 @@ export const ConditionalDetails: StoryObj<DataTableProps> = {
     );
 
     const renderDetailPanel = useCallback(
-      ({ row, table }: DataTableRenderDetailPanelType) => {
-        if (1 < 0) {
-          console.debug(table);
-        }
+      ({ row }: DataTableRenderDetailPanelType) => {
         if (row.original.visit === "landing") return;
 
         return (
