@@ -305,9 +305,6 @@ const ScrollableTableContainer = styled("div", {
     isScrollableStart: boolean;
     isScrollableEnd: boolean;
   }) => ({
-    borderBlockEndColor: odysseyDesignTokens.HueNeutral100,
-    borderBlockEndStyle: "solid",
-    borderBlockEndWidth: odysseyDesignTokens.BorderWidthMain,
     marginBlockEnd: odysseyDesignTokens.Spacing4,
     position: "relative",
     borderInlineStartColor: isScrollableStart
