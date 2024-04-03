@@ -29,17 +29,12 @@ const storybookMeta: Meta<typeof FileUpload> = {
   component: FileUpload,
   argTypes: {
     acceptedFileTypes: {
-      control: "text",
       description:
         "An array of file types the user is able to upload. See https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept#unique_file_type_specifiers for examples",
       table: {
         type: {
           summary: "string[]",
         },
-      },
-      type: {
-        required: true,
-        name: "string",
       },
     },
     type: {
@@ -139,7 +134,7 @@ export const MultipleFileAllowed: StoryObj<typeof FileUpload> = {
 
 export const SpecificFileTypes: StoryObj<typeof FileUpload> = {
   args: {
-    acceptedFileTypes: [".jpg, .png"],
+    acceptedFileTypes: [".jpg", ".png"],
     variant: "dragAndDropWithIcon",
   },
 };
