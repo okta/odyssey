@@ -19,13 +19,14 @@ import {
 import { Box } from "./Box";
 import type { HtmlProps } from "./HtmlProps";
 
-export type BadgeContentMax = 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | 100;
-
+export const badgeContentMaxValues = [
+  10, 20, 30, 40, 50, 60, 70, 80, 90, 100,
+] as const;
 export const badgeTypeValues = ["default", "attention", "danger"] as const;
 
 export type BadgeProps = {
   badgeContent: number;
-  badgeContentMax?: BadgeContentMax;
+  badgeContentMax?: (typeof badgeContentMaxValues)[number];
   type?: (typeof badgeTypeValues)[number];
 } & Pick<HtmlProps, "testId" | "translate">;
 

@@ -14,6 +14,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 
 import {
+  badgeContentMaxValues,
   Box,
   Button,
   TabItemProps,
@@ -114,12 +115,12 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
       control: {
         type: "select",
       },
-      options: ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100"],
+      options: badgeContentMaxValues,
       description:
         "The limit at which the badge will show `{notificationCountMax} +`. Can be increments of 10, up to 100",
       table: {
         type: {
-          summary: "10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | 100",
+          summary: badgeContentMaxValues.join("|"),
         },
         defaultValue: {
           summary: "10",
