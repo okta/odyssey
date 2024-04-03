@@ -23,6 +23,7 @@ import {
   DataTableGetDataType,
   DataTableOnReorderRowsType,
   DataTableProps,
+  DataTableRenderDetailPanelType,
   DataTableRowSelectionState,
   MenuItem,
   densityValues,
@@ -301,6 +302,15 @@ const storybookMeta: Meta<DataTableProps> = {
       table: {
         type: {
           summary: `ReactElement<typeof DataTableEmptyState>`,
+        },
+      },
+    },
+    renderDetailPanel: {
+      control: null,
+      description: "The optional component to display when expanding a row.",
+      table: {
+        type: {
+          summary: `(props: { row: MRT_Row<MRT_RowData>; table: MRT_TableInstance<MRT_RowData>; }) => ReactNode`,
         },
       },
     },
@@ -864,6 +874,66 @@ export const CustomFilterWithDefaultVariant: StoryObj<DataTableProps> = {
         columns={planetColumns}
         filters={filters}
         getData={getData}
+      />
+    );
+  },
+};
+
+export const Details: StoryObj<DataTableProps> = {
+  render: function C() {
+    const data = planetData;
+
+    const getData = useCallback(
+      ({ ...props }: DataTableGetDataType) => {
+        return filterData({ data, ...props });
+      },
+      [data],
+    );
+
+    const renderDetailPanel = useCallback(
+      ({ row }: DataTableRenderDetailPanelType) => {
+        return <Box>{`This planet is ${row.original.name}.`}</Box>;
+      },
+      [],
+    );
+
+    return (
+      <DataTable
+        columns={planetColumns}
+        getData={getData}
+        renderDetailPanel={renderDetailPanel}
+      />
+    );
+  },
+};
+
+export const ConditionalDetails: StoryObj<DataTableProps> = {
+  render: function C() {
+    const data = planetData;
+
+    const getData = useCallback(
+      ({ ...props }: DataTableGetDataType) => {
+        return filterData({ data, ...props });
+      },
+      [data],
+    );
+
+    const renderDetailPanel = useCallback(
+      ({ row }: DataTableRenderDetailPanelType) => {
+        if (row.original.visit === "landing") return;
+
+        return (
+          <Box>{`Humanity has not landed on ${row.original.name} (yet).`}</Box>
+        );
+      },
+      [],
+    );
+
+    return (
+      <DataTable
+        columns={planetColumns}
+        getData={getData}
+        renderDetailPanel={renderDetailPanel}
       />
     );
   },
