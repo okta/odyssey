@@ -267,6 +267,7 @@ const FileUpload = ({
     },
     [
       acceptedFileTypes,
+      errorMessage,
       filesToUpload,
       isDisabled,
       inputRef,
