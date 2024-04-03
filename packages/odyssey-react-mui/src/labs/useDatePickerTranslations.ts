@@ -41,6 +41,7 @@ import {
   PickersLocaleText
 } from "@mui/x-date-pickers";
 import { TFunction } from "i18next";
+import { DateTime } from "luxon";
 
 // const localeKeyMap = new Map<string, any>([
 //   ["cs", csCZ],
@@ -81,17 +82,20 @@ import { TFunction } from "i18next";
 // };
 
 
-export const useDatePickerTranslations = (t: TFunction): Partial<PickersLocaleText<Date>> => ({
-  previousMonth: `${t("datepicker.navigation.previousmonth")}`,
-  nextMonth: `${t("datepicker.navigation.nextmonth")}`,
+export const useDatePickerTranslations = (
+  t: TFunction,
+  ): Partial<PickersLocaleText<DateTime>> => ({
   calendarViewSwitchingButtonAriaLabel: (view) =>
     view === "year"
       ? `${t("datepicker.navigation.year")}`
       : `${t("datepicker.navigation.calendar")}`,
+  datePickerToolbarTitle: `${t("datepicker.toolbar.title")}`,
   fieldDayPlaceholder: () => `${t("datepicker.placeholder.day")}`,
   fieldMonthPlaceholder: () => `${t("datepicker.placeholder.month")}`,
   fieldYearPlaceholder: (params) =>
     `${t("datepicker.placeholder.year")}`.repeat(params.digitAmount),
+  nextMonth: `${t("datepicker.navigation.nextmonth")}`,
+  previousMonth: `${t("datepicker.navigation.previousmonth")}`,
 });
   // const langFromMap = localeKeyMap.get(languageCode);
 

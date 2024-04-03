@@ -14,7 +14,6 @@ import {
   forwardRef,
   memo,
   useCallback,
-  useMemo,
   useRef,
   useState,
 } from "react";
@@ -22,9 +21,9 @@ import { useTranslation } from "react-i18next";
 import {
   DatePicker as MuiDatePicker,
   DatePickerProps as MuiDatePickerProps,
+  PickersActionBarProps,
   DateValidationError,
   LocalizationProvider,
-  // PickersLocaleText
 } from "@mui/x-date-pickers";
 import { DateTime } from "luxon";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
@@ -46,7 +45,6 @@ import {
   DesignTokens,
 } from "../OdysseyDesignTokensContext";
 import { OdysseyThemeProvider } from "../OdysseyThemeProvider";
-// import { DefaultSupportedLanguages } from "../OdysseyTranslationProvider.types";
 import { useDatePickerTranslations } from "./useDatePickerTranslations";
 
 const DatePickerContainer = styled.div({
@@ -65,6 +63,35 @@ const DatePickerWidthContainer = styled.div<{
     width: `calc(${odysseyDesignTokens.Spacing4} * 11)`,
   },
 }));
+
+const ActionContainer = styled.div<{ odysseyDesignTokens: DesignTokens }>(
+  ({ odysseyDesignTokens }) => ({
+    display: "flex",
+    justifyContent: "flex-end",
+    paddingInline: odysseyDesignTokens.Spacing4,
+    paddingBlockEnd: odysseyDesignTokens.Spacing4,
+  }),
+);
+
+const ActionBar = ({ actions, onAccept, onCancel }: PickersActionBarProps) => {
+  // actions will be [] or ["accept", "cancel"]
+  if (actions && actions.length > 0) {
+    const odysseyDesignTokens = useOdysseyDesignTokens();
+
+    return (
+      <ActionContainer odysseyDesignTokens={odysseyDesignTokens}>
+        <Button
+          label="Cancel"
+          onClick={onCancel}
+          variant="floating"
+        />
+        <Button label="Accept" onClick={onAccept} variant="primary" />
+      </ActionContainer>
+    );
+  }
+
+  return null
+};
 
 export type DatePickerProps = {
   /**
@@ -121,7 +148,7 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
 
     const containerRef = useRef<HTMLInputElement>(null);
 
-    const localeText = useMemo(() => useDatePickerTranslations(t), [language]);
+    const localeText = useDatePickerTranslations(t);
 
     const formatDateTimeToJsDateOnCalendarSelection = useCallback<
       NonNullable<MuiDatePickerProps<DateTime>["onChange"]>
@@ -215,7 +242,7 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
               odysseyDesignTokens={odysseyDesignTokens}
               ref={containerRef}
             >
-              <MuiDatePicker<DateTime>
+              <MuiDatePicker
                 dayOfWeekFormatter={(_, date) => formatDayOfWeek(date)}
                 defaultValue={
                   defaultValueProp
@@ -233,6 +260,7 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
                 open={isOpen}
                 ref={ref}
                 slots={{
+                  actionBar: ActionBar,
                   field: ({ defaultValue, value }) =>
                     renderDateField(defaultValue, value),
                   leftArrowIcon: () => <ArrowLeftIcon />,
@@ -240,6 +268,11 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
                   switchViewIcon: () => <ChevronDownIcon />,
                 }}
                 slotProps={{
+                  actionBar: ({ wrapperVariant }) => ({
+                    actions:
+                      // This is the default behavior but felt more clear to pass them in explicitly 
+                      wrapperVariant === "desktop" ? [] : ["accept", "cancel"],
+                  }),
                   popper: {
                     anchorEl: containerRef.current,
                   },
