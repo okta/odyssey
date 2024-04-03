@@ -11,16 +11,12 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
-import {
-  Button,
-  EmptyDataState,
-  EmptyDataStateProps,
-} from "@okta/odyssey-react-mui";
+import { Button, EmptyState, EmptyStateProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-const storyBookMeta: Meta<EmptyDataStateProps> = {
-  title: "MUI Components/EmptyDataState",
-  component: EmptyDataState,
+const storyBookMeta: Meta<EmptyStateProps> = {
+  title: "MUI Components/EmptyState",
+  component: EmptyState,
   argTypes: {
     heading: {
       control: "text",
@@ -57,7 +53,7 @@ const storyBookMeta: Meta<EmptyDataStateProps> = {
 
 export default storyBookMeta;
 
-export const Default: StoryObj<EmptyDataStateProps> = {
+export const Default: StoryObj<EmptyStateProps> = {
   args: {
     heading: "Start by adding data assets",
     text: "All relevant data will be displayed and can be searched and filtered",
@@ -70,6 +66,6 @@ export const Default: StoryObj<EmptyDataStateProps> = {
   },
 
   render: function C(props) {
-    return <EmptyDataState {...props} />;
+    return <EmptyState {...props} />;
   },
 };

@@ -364,10 +364,10 @@ There's a default "no results" state, which shows when the end user passes a que
 the user filters the table for the name "asdfadsfadsfasdfdsfd" and that name doesn't exist in the data, the "no response" state
 will be shown.)
 
-You can provide a custom "no response" state using the custom `<EmptyDataState>` component:
+You can provide a custom "no response" state using the custom `<EmptyState>` component:
 
 ```tsx
-noResultsPlaceholder={<EmptyDataState
+noResultsPlaceholder={<EmptyState
   heading="Whoops, there's nothing here!"
   text="You should try searching or filtering for something else."
 />}
@@ -379,7 +379,7 @@ for providing a first-run experience for the DataTable:
 
 ```tsx
 emptyPlaceholder={
-  <EmptyDataState
+  <EmptyState
     heading="Start by adding data assets"
     text="All relevant data will be displayed and can be searched and filtered"
     primaryButton={<Button variant="primary" label="Primary" />}

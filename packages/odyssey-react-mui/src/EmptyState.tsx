@@ -31,7 +31,7 @@ const EmptyContainer = styled("div", {
   alignItems: "center",
 }));
 
-export type EmptyDataStateProps = {
+export type EmptyStateProps = {
   /**
    * Main heading of the empty state
    */
@@ -50,12 +50,12 @@ export type EmptyDataStateProps = {
   secondaryCallToActionComponent?: ReactNode;
 };
 
-const EmptyDataState = ({
+const EmptyState = ({
   heading,
   text,
   primaryCallToActionComponent,
   secondaryCallToActionComponent,
-}: EmptyDataStateProps) => {
+}: EmptyStateProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   return (
@@ -72,7 +72,7 @@ const EmptyDataState = ({
   );
 };
 
-const MemoizedEmptyDataState = memo(EmptyDataState);
-MemoizedEmptyDataState.displayName = "EmptyDataState";
+const MemoizedEmptyState = memo(EmptyState);
+MemoizedEmptyState.displayName = "EmptyState";
 
-export { MemoizedEmptyDataState as EmptyDataState };
+export { MemoizedEmptyState as EmptyState };
