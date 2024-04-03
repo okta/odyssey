@@ -19,7 +19,6 @@ import { HtmlProps } from "./HtmlProps";
 import { CloseIcon } from "./icons.generated";
 import { Link } from "./Link";
 import { ScreenReaderText } from "./ScreenReaderText";
-import { useUniqueId } from "./useUniqueId";
 
 export const toastRoleValues = ["status", "alert"] as const;
 export const toastSeverityValues = [
@@ -90,7 +89,6 @@ const Toast = ({
   translate,
 }: ToastProps) => {
   const { t } = useTranslation();
-  const severityDescriptionId = useUniqueId();
   const [isVisible, setIsVisible] = useState(isVisibleProp);
 
   useEffect(() => {
@@ -104,9 +102,6 @@ const Toast = ({
 
   return (
     <>
-      <ScreenReaderText id={severityDescriptionId} translate={translate}>
-        {t(`severity.${severity}`)}
-      </ScreenReaderText>
       <Snackbar
         open={isVisible}
         autoHideDuration={
@@ -128,13 +123,17 @@ const Toast = ({
               />
             )
           }
-          aria-describedby={severityDescriptionId}
           data-se={testId}
           role={role}
           severity={severity}
           variant="toast"
         >
-          <AlertTitle translate={translate}>{text}</AlertTitle>
+          <AlertTitle translate={translate}>
+            <ScreenReaderText translate={translate}>
+              {t(`severity.${severity}:`)}
+            </ScreenReaderText>
+            {text}
+          </AlertTitle>
           {linkUrl && (
             <Link href={linkUrl} variant="monochrome" translate={translate}>
               {linkText}

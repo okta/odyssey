@@ -22,7 +22,6 @@ import {
 } from "./OdysseyDesignTokensContext";
 import { ScreenReaderText } from "./ScreenReaderText";
 import { Paragraph } from "./Typography";
-import { useUniqueId } from "./useUniqueId";
 
 export const calloutRoleValues = ["status", "alert"] as const;
 export const calloutSeverityValues = [
@@ -105,35 +104,26 @@ const Callout = ({
   translate,
 }: CalloutProps) => {
   const { t } = useTranslation();
-  const severityDescriptionId = useUniqueId();
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   return (
-    <>
-      <ScreenReaderText id={severityDescriptionId} translate={translate}>
+    <Alert data-se={testId} role={role} severity={severity} variant="callout">
+      <ScreenReaderText translate={translate}>
         {t(`severity.${severity}`)}
       </ScreenReaderText>
-      <Alert
-        aria-describedby={severityDescriptionId}
-        data-se={testId}
-        role={role}
-        severity={severity}
-        variant="callout"
-      >
-        {title && <AlertTitle translate={translate}>{title}</AlertTitle>}
-        <ContentContainer odysseyDesignTokens={odysseyDesignTokens}>
-          {children && <Box component="div">{children}</Box>}
-          {text && <Paragraph>{text}</Paragraph>}
-          {linkUrl && (
-            <Box>
-              <MuiLink href={linkUrl} variant="monochrome">
-                {linkText}
-              </MuiLink>
-            </Box>
-          )}
-        </ContentContainer>
-      </Alert>
-    </>
+      {title && <AlertTitle translate={translate}>{title}</AlertTitle>}
+      <ContentContainer odysseyDesignTokens={odysseyDesignTokens}>
+        {children && <Box component="div">{children}</Box>}
+        {text && <Paragraph>{text}</Paragraph>}
+        {linkUrl && (
+          <Box>
+            <MuiLink href={linkUrl} variant="monochrome">
+              {linkText}
+            </MuiLink>
+          </Box>
+        )}
+      </ContentContainer>
+    </Alert>
   );
 };
 
