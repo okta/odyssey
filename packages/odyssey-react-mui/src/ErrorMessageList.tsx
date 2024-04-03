@@ -37,7 +37,12 @@ const ErrorMessageList = ({ errorMessages }: ErrorMessageListProps) => {
   return (
     <MuiList disablePadding dense sx={listStyles}>
       {errorMessages.map((errorMessage) => (
-        <MuiListItem disablePadding dense sx={listItemStyles}>
+        <MuiListItem
+          key={errorMessage}
+          disablePadding
+          dense
+          sx={listItemStyles}
+        >
           {errorMessage}
         </MuiListItem>
       ))}
