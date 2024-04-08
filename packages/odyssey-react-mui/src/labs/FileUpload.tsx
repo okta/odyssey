@@ -296,11 +296,13 @@ const FileUpload = ({
         label={label}
         renderFieldComponent={renderFileInput}
       />
-      <FileUploadPreview
-        fileNames={filesToUpload.map((file) => file.name)}
-        onFileRemove={removeFileFromFilesToUploadList}
-        isDisabled={isDisabled}
-      />
+      {filesToUpload.length > 0 && (
+        <FileUploadPreview
+          fileNames={filesToUpload.map((file) => file.name)}
+          onFileRemove={removeFileFromFilesToUploadList}
+          isDisabled={isDisabled}
+        />
+      )}
     </>
   );
 };

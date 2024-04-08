@@ -128,10 +128,6 @@ const FileUploadPreview = ({
 }: FileUploadPreviewProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
-  if (!fileNames.length) {
-    return null;
-  }
-
   return (
     <PreviewContainer
       data-file-preview-container="true"
