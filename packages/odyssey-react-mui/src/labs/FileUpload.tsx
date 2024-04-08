@@ -203,7 +203,6 @@ const FileUpload = ({
       id,
       labelElementId,
     }: RenderFieldComponentProps) => {
-      // const fileNames = filesToUpload.map((file) => file.name);
       const acceptedFileTypesAsString = acceptedFileTypes?.join(",");
 
       const Input = () => (
