@@ -94,11 +94,18 @@ export const Controlled: StoryObj<DatePickerProps> = {
     const datePickerProps: DatePickerProps = useMemo(
       () => ({
         ...props,
-        onCalendarDateChange: ({ value }) => {
+        onChange: ({ value }) => {
+          console.warn("story on change called")
           if (value) {
             setValue(value);
           }
         },
+        // onInputChange: ({ value }) => {
+        //   console.log('wtf')
+        //   if (value) {
+        //     setValue(value);
+        //   }
+        // },
         value,
       }),
       [props, value],

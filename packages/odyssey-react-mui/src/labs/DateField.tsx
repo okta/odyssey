@@ -10,13 +10,21 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { KeyboardEventHandler, memo, useCallback } from "react";
+import {
+  // FocusEvent,
+  // KeyboardEventHandler,
+  memo,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { InputAdornment } from "@mui/material";
 import {
   DateValidationError,
   DateField as MuiDateField,
   DateFieldProps as MuiDateFieldProps,
-  PickerChangeHandlerContext,
+  // PickerChangeHandlerContext,
 } from "@mui/x-date-pickers";
 import { DateTime } from "luxon";
 
@@ -31,10 +39,9 @@ export const textFieldTypeValues = [
   "url",
 ] as const;
 
-export type DateFieldProps = MuiDateFieldProps<DateTime> & {
+export type DateFieldProps = Omit<MuiDateFieldProps<DateTime>, "onChange"> & {
   onChange: (
-    value: DateTime | string,
-    validationContext?: PickerChangeHandlerContext<DateValidationError>,
+    value: DateTime,
   ) => void;
 } & Pick<
     TextFieldProps,
@@ -52,10 +59,24 @@ export type DateFieldProps = MuiDateFieldProps<DateTime> & {
     | "placeholder"
   >;
 
+type ErrorMap = {
+  [key: string]: string;
+};
+
+const errorMap: ErrorMap = {
+  disablePast: "Please pick a date in the future",
+  disableFuture: "Please pick a date in the past",
+  invalidDate: "Yo, that ain't right!",
+  minDate: "Date does not meet minimum date requirements",
+  maxDate: "Date does not meet maximum date requirements",
+};
+
 const DateField =
   (
     {
       defaultValue,
+      disableFuture,
+      disablePast,
       endAdornment,
       errorMessage,
       hasInitialFocus,
@@ -73,7 +94,32 @@ const DateField =
       value,
     }: DateFieldProps
   ) => {
-    // const [inputValueString, setInputValueString] = useState("");
+    const [internalErrorMessage, setInternalErrorMessage] = useState<DateValidationError | null>(null);
+    const [internalDisplayedError, setInternalDisplayedError] = useState<
+      string | null
+    >(null);
+
+    const debounceTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
+
+    useEffect(() => {
+      return () => {
+        if (!debounceTimeoutRef.current) return;
+        clearTimeout(debounceTimeoutRef.current);
+      };
+    }, []);
+
+    useEffect(() => {
+      console.log(internalErrorMessage);
+      // setInternalDisplayedError(internalErrorMessage ? errorMap[internalErrorMessage] : "");
+    }, [internalErrorMessage]);
+
+    // const debounceErrorHandling: (validationError: DateValidationError, delay: number) => void = (validationError, delay) => {
+    //   const newTimer = setTimeout(() => {
+    //     setInternalErrorMessage(validationError);
+    //   }, delay);
+    //   clearTimeout(debounceTimeoutRef.current);
+    //   debounceTimeoutRef.current = newTimer;
+    // };
 
     const handleChange = useCallback<
       NonNullable<MuiDateFieldProps<DateTime>["onChange"]>
@@ -83,56 +129,104 @@ const DateField =
         value,
         validationContext,
       ) => {
-        console.log("changing", { value }, validationContext.validationError);
+        const { validationError } = validationContext;
+        // setInternalErrorMessage(null);
+        // Delay showing the error message for UX purposes
+        // console.log("error in change", { validationError });
+
+        // Reset displayed error message
+        setInternalDisplayedError(null);
+        // Set error state so we can show it on blur, if an error is present
+        setInternalErrorMessage(validationError);
+
+        // debounceErrorHandling(validationError, validationError === "invalidDate" ? 4000 : 500);
+        // console.log("field onChange")
+        // const hasFullYear = value?.year.toString().length === 4;
+        if (value?.isValid && !validationError) {
+          // setInternalErrorMessage(validationError);
+          onChange?.(value);
+          // console.log({ value }, { hasFullYear }, {validationError});
+          // if (hasFullYear && validationError) {
+          //   setInternalErrorMessage(validationError);
+          // };
+        }
+
+        // if (validationError === "minDate" || validationError === "maxDate") {
+        //   setInternalErrorMessage(validationError);
+        // }
+        // console.log("changing", { value }, validationContext.validationError);
         // console.log("change called");
         // console.log({value})
-        if (value?.isValid && !validationContext.validationError) {
-          // onChange?.(value, validationContext);
-        } else {
-          // console.log("change without DT", { inputValueString });
-          // onChange?.(inputValueString, validationContext);
-        }
+        // console.log("datefield handleChange", { value }, { validationError });
+        // onChange?.(value, validationContext);
+        // if (value?.isValid && !validationContext.validationError) {
+        // } else {
+        //   // console.log("change without DT", { inputValueString });
+        //   // onChange?.(inputValueString, validationContext);
+        // }
       },
       [onChange],
     );
 
-    const onKeyUp: KeyboardEventHandler<HTMLInputElement> = (
-      event,
-    ) => {
-      const { key } = event;
-      console.log({key})
-      if (key !== "TAB") {
-        const value = (event.target as HTMLInputElement).value;
-        onChange?.(value);
+    // const onKeyUp: KeyboardEventHandler<HTMLInputElement> = (
+    //   event,
+    // ) => {
+    //   const { key } = event;
+    //   // console.log({key})
+    //   if (key !== "TAB") {
+    //     const value = (event.target as HTMLInputElement).value;
+    //     // onChange?.(value);
+    //   }
+    // };
+
+    const internalOnBlur = useCallback(() => {
+      console.log('blur', { internalErrorMessage });
+      if (internalErrorMessage) {
+        setInternalDisplayedError(errorMap[internalErrorMessage]);
       }
-    };
+      // if (internalErrorMessage === "invalidDate") {
+      // } 
+    }, [internalErrorMessage]);
+
+    // const onError: MuiDateFieldProps<DateTime>["onError"] = (validationError) => {
+    //   console.warn("onError called");
+    //   // const debounceOnError = () => {
+    //   //   const newTimer = setTimeout(() => {
+    //   //     setInternalErrorMessage(validationError);
+    //   //   }, 2000);
+    //   //   clearTimeout(debounceTimeoutRef.current);
+    //   //   debounceTimeoutRef.current = newTimer;
+    //   // };
+    //   // debounceOnError();
+    // };
 
     const renderFieldComponent = useCallback(
       ({ ariaDescribedBy, id, labelElementId }: RenderFieldProps) => {
-
         return (
           <MuiDateField
             /* eslint-disable-next-line jsx-a11y/no-autofocus */
             autoFocus={hasInitialFocus}
             defaultValue={defaultValue}
             disabled={isDisabled}
+            disableFuture={disableFuture}
+            disablePast={disablePast}
             id={id}
             inputProps={{
               "aria-describedby": ariaDescribedBy,
               "aria-labelledby": labelElementId,
             }}
             InputProps={{
-              error: Boolean(errorMessage),
+              error: Boolean(internalDisplayedError || errorMessage),
               endAdornment: (
                 <InputAdornment position="end">{endAdornment}</InputAdornment>
               ),
             }}
             minDate={minDate}
             name={id}
-            onBlur={onBlur}
+            onBlur={internalOnBlur}
             onChange={handleChange}
+            // onError={onError}
             onFocus={onFocus}
-            onKeyUp={onKeyUp}
             readOnly={isReadOnly}
             value={value}
             variant="standard"
@@ -144,6 +238,8 @@ const DateField =
         endAdornment,
         errorMessage,
         hasInitialFocus,
+        internalDisplayedError,
+        internalErrorMessage,
         onChange,
         onFocus,
         onBlur,
@@ -155,8 +251,9 @@ const DateField =
 
     return (
       <Field
-        errorMessage={errorMessage}
+        errorMessage={internalDisplayedError || errorMessage}
         fieldType="single"
+        hasErrorAsAlert
         hasVisibleLabel
         hint={hint}
         id={idOverride}

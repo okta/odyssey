@@ -38,6 +38,13 @@ const dateStyles: StateStyles = {
   hover: ({ theme }) => ({
     backgroundColor: theme.palette.grey[100],
   }),
+  focus: ({ theme }) => ({
+    backgroundColor: "transparent",
+    // border: `2px solid ${theme.palette.primary.main}}`,
+    boxShadow: `0 0 0 2px ${theme.palette.common.white}, 0 0 0 4px ${theme.palette.primary.main}`,
+    outline: "2px solid transparent",
+    outlineOffset: "1px"
+  }),
   hoverSelected: ({ theme }) => ({
     backgroundColor: theme.palette.primary.dark,
     color: theme.palette.primary.contrastText,
@@ -49,10 +56,12 @@ const dateStyles: StateStyles = {
   selected: ({ theme }) => ({
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.primary.contrastText,
+    border: "none",
   }),
   today: ({ theme }) => ({
     backgroundColor: "transparent",
     color: theme.palette.primary.main,
+    border: "none",
   }),
 };
 
@@ -149,11 +158,10 @@ export const datePickerTheme: ThemeOptions = {
         root: {
           display: "block",
         },
-        contentWrapper: ({ ownerState, theme }) => ({
-          // console.log({ownerState})
+        contentWrapper: ({ theme }) => ({
           width: "100%",
           // paddingBlock: theme.spacing(2),
-          paddingInline: theme.spacing(4),
+          paddingInline: theme.spacing(3),
           // borderColor: theme.palette.divider,
           // borderStyle: theme.mixins.borderStyle,
           // borderWidth: theme.mixins.borderWidth,
@@ -167,9 +175,10 @@ export const datePickerTheme: ThemeOptions = {
             borderStyle: theme.mixins.borderStyle,
             borderWidth: theme.mixins.borderWidth,
             borderRadius: theme.mixins.borderRadius,
-            paddingBlock: theme.spacing(4),
-            paddingInline: theme.spacing(4),
-            width: `calc(${theme.spacing(4)} * 16.5)`,
+            paddingBlock: theme.spacing(3),
+            paddingInline: theme.spacing(3),
+            // 2x the width of the input
+            width: `calc(${theme.spacing(4)} * 22)`,
           },
           // fontFamily: theme.typography.fontFamily,
           // fontSize: "14px",
@@ -196,12 +205,18 @@ export const datePickerTheme: ThemeOptions = {
     },
     MuiDayCalendar: {
       styleOverrides: {
-        // root: ({ theme }) => ({
-        //   // paddingInline: theme.spacing(3),
-        // }),
+        root: ({ theme }) => ({
+          // paddingInline: theme.spacing(1),
+        }),
         header: ({ theme }) => ({
           justifyContent: "space-between",
           marginBlockStart: theme.spacing(5),
+          paddingInline: theme.spacing(1),
+        }),
+        monthContainer: ({ theme }) => ({
+          // padding needed to be able to show focus state for calendar days
+          paddingBlock: theme.spacing(1),
+          paddingInline: theme.spacing(1),
         }),
         slideTransition: () => ({
           minHeight: `${(214 / 16) * (16 / 14)}rem`,
@@ -212,6 +227,7 @@ export const datePickerTheme: ThemeOptions = {
           marginLeft: 0,
           marginRight: 0,
           padding: 0,
+          gap: theme.spacing(1),
 
           "&:last-child": {
             marginBottom: 0,
@@ -258,7 +274,8 @@ export const datePickerTheme: ThemeOptions = {
           marginBlockStart: 0,
           maxHeight: "unset",
           minHeight: "unset",
-          paddingInline: 0,
+          paddingInline: theme.spacing(1),
+          paddingBlockStart: theme.spacing(1),
           paddingBlockEnd: theme.spacing(4),
           width: "auto",
           borderBottom: `1px solid ${theme.palette.grey[100]}`,
@@ -303,14 +320,15 @@ export const datePickerTheme: ThemeOptions = {
               theme,
             }),
             "&:hover": dateStyles.hover({ theme }),
+            "&:focus": dateStyles.focus({ theme }),
 
-            "&:not(.Mui-selected)": {
-              border: "none",
-            },
+            // "&:not(.Mui-selected)": {
+            //   border: "none",
+            // },
 
-            "&.Mui-selected, &.Mui-selected:focus": dateStyles.selected({
-              theme,
-            }),
+            // "&.Mui-selected, &.Mui-selected:focus": dateStyles.selected({
+            //   theme,
+            // }),
             "&.Mui-selected:hover": dateStyles.hoverSelected({ theme }),
             "&.Mui-disabled": dateStyles.disabled({ theme }),
           },

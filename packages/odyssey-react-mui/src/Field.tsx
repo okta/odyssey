@@ -80,6 +80,7 @@ export type FieldProps = {
 
 const Field = ({
   ariaDescribedBy,
+  hasErrorAsAlert,
   errorMessage,
   errorMessageList,
   fieldType,
@@ -98,6 +99,7 @@ const Field = ({
     FieldComponentProps,
     | "errorMessage"
     | "errorMessageList"
+    | "hasErrorAsAlert"
     | "hint"
     | "HintLinkComponent"
     | "id"
@@ -171,6 +173,7 @@ const Field = ({
 
       {(errorMessage || errorMessageList) && (
         <FieldError
+          hasErrorAsAlert={hasErrorAsAlert}
           id={errorMessageElementId}
           message={errorMessage}
           messageList={errorMessageList}

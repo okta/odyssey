@@ -17,16 +17,19 @@ import { ScreenReaderText } from "./ScreenReaderText";
 import { ErrorMessageList } from "./ErrorMessageList";
 import { useTranslation } from "react-i18next";
 
-import type { HtmlProps } from "./HtmlProps";
 import { Box } from "./Box";
+import type { HtmlProps } from "./HtmlProps";
+import { FieldComponentProps } from "./FieldComponentProps";
 
 export type FieldErrorProps = {
   id?: string;
   message?: string;
   messageList?: string[];
-} & Pick<HtmlProps, "testId" | "translate">;
+} & Pick<HtmlProps, "testId" | "translate"> &
+  Pick<FieldComponentProps, "hasErrorAsAlert">;
 
 const FieldError = ({
+  hasErrorAsAlert,
   id,
   message,
   messageList,
@@ -34,9 +37,15 @@ const FieldError = ({
   translate,
 }: FieldErrorProps) => {
   const { t } = useTranslation();
-
+  console.log({ hasErrorAsAlert });
   return (
-    <FormHelperText data-se={testId} error id={id} translate={translate}>
+    <FormHelperText
+      {...(hasErrorAsAlert ? { role: "alert"} : null)}
+      data-se={testId}
+      error
+      id={id}
+      translate={translate}
+    >
       <ScreenReaderText translate={translate}>{`${t(
         "fielderror.screenreader.text",
       )}:`}</ScreenReaderText>

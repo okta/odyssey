@@ -22,7 +22,7 @@ import {
   DatePicker as MuiDatePicker,
   DatePickerProps as MuiDatePickerProps,
   PickersActionBarProps,
-  DateValidationError,
+  // DateValidationError,
   LocalizationProvider,
 } from "@mui/x-date-pickers";
 import { DateTime } from "luxon";
@@ -101,17 +101,11 @@ export type DatePickerProps = {
   /**
    * Callback fired when the a date is selected with the calendar.
    */
-  onCalendarDateChange?: ({
-    value,
-    error,
-  }: {
-    value: Date;
-    error?: DateValidationError;
-  }) => void;
+  onCalendarDateChange?: (value: Date) => void;
   /**
-   * Callback fired when the text input receives typed characters.
+   * Callback fired when the date/text input changes.
    */
-  onInputChange?: (value: string) => void;
+  onInputChange?: (value: Date) => void;
   value?: Date;
 } & Pick<FieldComponentProps, "errorMessage" | "hint" | "isDisabled"> &
   Pick<
@@ -132,7 +126,7 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       minDate,
       maxDate,
       onCalendarDateChange,
-      onInputChange: onInputChangeProp,
+      // onInputChange: onInputChangeProp,
       value: valueProp,
     },
     ref,
@@ -153,26 +147,38 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
     const formatDateTimeToJsDateOnCalendarSelection = useCallback<
       NonNullable<MuiDatePickerProps<DateTime>["onChange"]>
     >(
-      (value, errorContext) => {
+      (value) => {
         if (value) {
-          const { validationError } = errorContext;
+          // const { validationError } = errorContext;
           const jsDateFromDateTime = new Date(value?.toJSDate());
           console.log("change", jsDateFromDateTime);
-          onCalendarDateChange?.({
-            value: jsDateFromDateTime,
-            error: validationError,
-          });
+          onCalendarDateChange?.(jsDateFromDateTime);
         }
       },
       [onCalendarDateChange],
     );
 
-    const onInputChange = useCallback(
-      (args: any) => {
-        console.log({ args });
+    const onInputChange = useCallback<(value: DateTime) => void>(
+      (value) => {
+        if (value) {
+          console.log("onInputChange", { value });
+          // setInternalSelectedValue(errorContext.validationError);
+          // validationErrorRef.current = errorContext.validationError;
+          // const { validationError } = errorContext;
+          const jsDateFromDateTime = new Date(value?.toJSDate());
+          // console.log("onInputChange", {value}, {errorContext});
+          onCalendarDateChange?.(jsDateFromDateTime);
+        }
       },
-      [onInputChangeProp],
+      [onCalendarDateChange],
     );
+
+    // const onInputChange = useCallback(
+    //   (args: any) => {
+    //     console.log({ args });
+    //   },
+    //   [onInputChangeProp],
+    // );
 
     const formatDateToDateTime = (date: Date) => DateTime.fromJSDate(date);
 
@@ -250,7 +256,8 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
                     : undefined
                 }
                 disabled={isDisabled}
-                value={valueProp ? formatDateToDateTime(valueProp) : undefined}
+                disableFuture={disableFuture}
+                disablePast={disablePast}
                 key={language}
                 label={label}
                 minDate={minDate ? formatDateToDateTime(minDate) : undefined}
@@ -270,13 +277,14 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
                 slotProps={{
                   actionBar: ({ wrapperVariant }) => ({
                     actions:
-                      // This is the default behavior but felt more clear to pass them in explicitly 
+                      // This is the default behavior but felt more clear to pass them in explicitly
                       wrapperVariant === "desktop" ? [] : ["accept", "cancel"],
                   }),
                   popper: {
                     anchorEl: containerRef.current,
                   },
                 }}
+                value={valueProp ? formatDateToDateTime(valueProp) : undefined}
               />
             </DatePickerWidthContainer>
           </DatePickerContainer>
