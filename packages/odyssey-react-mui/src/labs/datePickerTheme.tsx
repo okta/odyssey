@@ -205,9 +205,9 @@ export const datePickerTheme: ThemeOptions = {
     },
     MuiDayCalendar: {
       styleOverrides: {
-        root: ({ theme }) => ({
+        // root: ({ theme }) => ({
           // paddingInline: theme.spacing(1),
-        }),
+        // }),
         header: ({ theme }) => ({
           justifyContent: "space-between",
           marginBlockStart: theme.spacing(5),

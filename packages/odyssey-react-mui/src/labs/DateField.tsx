@@ -11,12 +11,12 @@
  */
 
 import {
-  // FocusEvent,
+  FocusEventHandler,
   // KeyboardEventHandler,
   memo,
   useCallback,
-  useEffect,
-  useRef,
+  // useEffect,
+  // useRef,
   useState,
 } from "react";
 import { InputAdornment } from "@mui/material";
@@ -99,19 +99,19 @@ const DateField =
       string | null
     >(null);
 
-    const debounceTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
+    // const debounceTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
-    useEffect(() => {
-      return () => {
-        if (!debounceTimeoutRef.current) return;
-        clearTimeout(debounceTimeoutRef.current);
-      };
-    }, []);
+    // useEffect(() => {
+    //   return () => {
+    //     if (!debounceTimeoutRef.current) return;
+    //     clearTimeout(debounceTimeoutRef.current);
+    //   };
+    // }, []);
 
-    useEffect(() => {
-      console.log(internalErrorMessage);
-      // setInternalDisplayedError(internalErrorMessage ? errorMap[internalErrorMessage] : "");
-    }, [internalErrorMessage]);
+    // useEffect(() => {
+    //   console.log(internalErrorMessage);
+    //   // setInternalDisplayedError(internalErrorMessage ? errorMap[internalErrorMessage] : "");
+    // }, [internalErrorMessage]);
 
     // const debounceErrorHandling: (validationError: DateValidationError, delay: number) => void = (validationError, delay) => {
     //   const newTimer = setTimeout(() => {
@@ -138,7 +138,7 @@ const DateField =
         setInternalDisplayedError(null);
         // Set error state so we can show it on blur, if an error is present
         setInternalErrorMessage(validationError);
-
+        console.log({validationError})
         // debounceErrorHandling(validationError, validationError === "invalidDate" ? 4000 : 500);
         // console.log("field onChange")
         // const hasFullYear = value?.year.toString().length === 4;
@@ -179,26 +179,17 @@ const DateField =
     //   }
     // };
 
-    const internalOnBlur = useCallback(() => {
-      console.log('blur', { internalErrorMessage });
-      if (internalErrorMessage) {
-        setInternalDisplayedError(errorMap[internalErrorMessage]);
-      }
-      // if (internalErrorMessage === "invalidDate") {
-      // } 
-    }, [internalErrorMessage]);
-
-    // const onError: MuiDateFieldProps<DateTime>["onError"] = (validationError) => {
-    //   console.warn("onError called");
-    //   // const debounceOnError = () => {
-    //   //   const newTimer = setTimeout(() => {
-    //   //     setInternalErrorMessage(validationError);
-    //   //   }, 2000);
-    //   //   clearTimeout(debounceTimeoutRef.current);
-    //   //   debounceTimeoutRef.current = newTimer;
-    //   // };
-    //   // debounceOnError();
-    // };
+    const checkForValidationError = useCallback<
+      FocusEventHandler<HTMLInputElement>
+    >(
+      (event) => {
+        if (internalErrorMessage) {
+          setInternalDisplayedError(errorMap[internalErrorMessage]);
+        }
+        onBlur?.(event);
+      },
+      [internalErrorMessage],
+    );
 
     const renderFieldComponent = useCallback(
       ({ ariaDescribedBy, id, labelElementId }: RenderFieldProps) => {
@@ -223,7 +214,7 @@ const DateField =
             }}
             minDate={minDate}
             name={id}
-            onBlur={internalOnBlur}
+            onBlur={checkForValidationError}
             onChange={handleChange}
             // onError={onError}
             onFocus={onFocus}
