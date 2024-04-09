@@ -11,17 +11,19 @@
  */
 
 import {
-  FocusEventHandler,
+  ChangeEventHandler,
+  ChangeEvent,
+  // FocusEventHandler,
   // KeyboardEventHandler,
   memo,
   useCallback,
   // useEffect,
   // useRef,
-  useState,
+  // useState,
 } from "react";
 import { InputAdornment } from "@mui/material";
 import {
-  DateValidationError,
+  // DateValidationError,
   DateField as MuiDateField,
   DateFieldProps as MuiDateFieldProps,
   // PickerChangeHandlerContext,
@@ -40,9 +42,7 @@ export const textFieldTypeValues = [
 ] as const;
 
 export type DateFieldProps = Omit<MuiDateFieldProps<DateTime>, "onChange"> & {
-  onChange: (
-    value: DateTime,
-  ) => void;
+  onChange: ChangeEventHandler<HTMLInputElement>;
 } & Pick<
     TextFieldProps,
     | "endAdornment"
@@ -59,17 +59,17 @@ export type DateFieldProps = Omit<MuiDateFieldProps<DateTime>, "onChange"> & {
     | "placeholder"
   >;
 
-type ErrorMap = {
-  [key: string]: string;
-};
+// type ErrorMap = {
+//   [key: string]: string;
+// };
 
-const errorMap: ErrorMap = {
-  disablePast: "Please pick a date in the future",
-  disableFuture: "Please pick a date in the past",
-  invalidDate: "Yo, that ain't right!",
-  minDate: "Date does not meet minimum date requirements",
-  maxDate: "Date does not meet maximum date requirements",
-};
+// const errorMap: ErrorMap = {
+//   disablePast: "Please pick a date in the future",
+//   disableFuture: "Please pick a date in the past",
+//   invalidDate: "Yo, that ain't right!",
+//   minDate: "Date does not meet minimum date requirements",
+//   maxDate: "Date does not meet maximum date requirements",
+// };
 
 const DateField =
   (
@@ -94,10 +94,10 @@ const DateField =
       value,
     }: DateFieldProps
   ) => {
-    const [internalErrorMessage, setInternalErrorMessage] = useState<DateValidationError | null>(null);
-    const [internalDisplayedError, setInternalDisplayedError] = useState<
-      string | null
-    >(null);
+    // const [internalErrorMessage, setInternalErrorMessage] = useState<DateValidationError | null>(null);
+    // const [internalDisplayedError, setInternalDisplayedError] = useState<
+    //   string | null
+    // >(null);
 
     // const debounceTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
@@ -121,52 +121,30 @@ const DateField =
     //   debounceTimeoutRef.current = newTimer;
     // };
 
-    const handleChange = useCallback<
-      NonNullable<MuiDateFieldProps<DateTime>["onChange"]>
-    >(
-      (
-        // value will be luxon DateTime
-        value,
-        validationContext,
-      ) => {
-        const { validationError } = validationContext;
-        // setInternalErrorMessage(null);
-        // Delay showing the error message for UX purposes
-        // console.log("error in change", { validationError });
+    // const onInputChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
+    //   (event) => {
+    //     onChange?.(event)
+    //     // const { validationError } = validationContext;
+    //     // setInternalErrorMessage(null);
+    //     // Delay showing the error message for UX purposes
+    //     // console.log("error in change", { validationError });
 
-        // Reset displayed error message
-        setInternalDisplayedError(null);
-        // Set error state so we can show it on blur, if an error is present
-        setInternalErrorMessage(validationError);
-        console.log({validationError})
-        // debounceErrorHandling(validationError, validationError === "invalidDate" ? 4000 : 500);
-        // console.log("field onChange")
-        // const hasFullYear = value?.year.toString().length === 4;
-        if (value?.isValid && !validationError) {
-          // setInternalErrorMessage(validationError);
-          onChange?.(value);
-          // console.log({ value }, { hasFullYear }, {validationError});
-          // if (hasFullYear && validationError) {
-          //   setInternalErrorMessage(validationError);
-          // };
-        }
+    //     // Reset displayed error message
+    //     // setInternalDisplayedError(null);
+    //     // Set error state so we can show it on blur, if an error is present
+    //     // setInternalErrorMessage(validationError);
 
-        // if (validationError === "minDate" || validationError === "maxDate") {
-        //   setInternalErrorMessage(validationError);
-        // }
-        // console.log("changing", { value }, validationContext.validationError);
-        // console.log("change called");
-        // console.log({value})
-        // console.log("datefield handleChange", { value }, { validationError });
-        // onChange?.(value, validationContext);
-        // if (value?.isValid && !validationContext.validationError) {
-        // } else {
-        //   // console.log("change without DT", { inputValueString });
-        //   // onChange?.(inputValueString, validationContext);
-        // }
-      },
-      [onChange],
-    );
+    //     // if (value?.isValid) {
+    //       // setInternalErrorMessage(validationError);
+    //       // onChange?.(value);
+    //       // console.log({ value }, { hasFullYear }, {validationError});
+    //       // if (hasFullYear && validationError) {
+    //       //   setInternalErrorMessage(validationError);
+    //       // };
+    //     // }
+    //   },
+    //   [onChange],
+    // );
 
     // const onKeyUp: KeyboardEventHandler<HTMLInputElement> = (
     //   event,
@@ -179,17 +157,21 @@ const DateField =
     //   }
     // };
 
-    const checkForValidationError = useCallback<
-      FocusEventHandler<HTMLInputElement>
-    >(
-      (event) => {
-        if (internalErrorMessage) {
-          setInternalDisplayedError(errorMap[internalErrorMessage]);
-        }
-        onBlur?.(event);
-      },
-      [internalErrorMessage],
-    );
+    // const onError = (args) => {
+    //   console.log(...args)
+    // }
+
+    // const checkForValidationError = useCallback<
+    //   FocusEventHandler<HTMLInputElement>
+    // >(
+    //   (event) => {
+    //     if (internalErrorMessage) {
+    //       setInternalDisplayedError(errorMap[internalErrorMessage]);
+    //     }
+    //     onBlur?.(event);
+    //   },
+    //   [internalErrorMessage],
+    // );
 
     const renderFieldComponent = useCallback(
       ({ ariaDescribedBy, id, labelElementId }: RenderFieldProps) => {
@@ -205,17 +187,19 @@ const DateField =
             inputProps={{
               "aria-describedby": ariaDescribedBy,
               "aria-labelledby": labelElementId,
+              onChange: (event) =>
+                onChange?.(event as ChangeEvent<HTMLInputElement>),
             }}
             InputProps={{
-              error: Boolean(internalDisplayedError || errorMessage),
+              error: Boolean(errorMessage),
               endAdornment: (
                 <InputAdornment position="end">{endAdornment}</InputAdornment>
               ),
             }}
             minDate={minDate}
             name={id}
-            onBlur={checkForValidationError}
-            onChange={handleChange}
+            onBlur={onBlur}
+            // onChange={onInputChange}
             // onError={onError}
             onFocus={onFocus}
             readOnly={isReadOnly}
@@ -229,8 +213,6 @@ const DateField =
         endAdornment,
         errorMessage,
         hasInitialFocus,
-        internalDisplayedError,
-        internalErrorMessage,
         onChange,
         onFocus,
         onBlur,
@@ -242,7 +224,7 @@ const DateField =
 
     return (
       <Field
-        errorMessage={internalDisplayedError || errorMessage}
+        errorMessage={errorMessage}
         fieldType="single"
         hasErrorAsAlert
         hasVisibleLabel

@@ -40,14 +40,17 @@ const dateStyles: StateStyles = {
   }),
   focus: ({ theme }) => ({
     backgroundColor: "transparent",
-    // border: `2px solid ${theme.palette.primary.main}}`,
     boxShadow: `0 0 0 2px ${theme.palette.common.white}, 0 0 0 4px ${theme.palette.primary.main}`,
     outline: "2px solid transparent",
-    outlineOffset: "1px"
+    outlineOffset: "1px",
   }),
   hoverSelected: ({ theme }) => ({
     backgroundColor: theme.palette.primary.dark,
     color: theme.palette.primary.contrastText,
+
+    "@media (pointer: fine)": {
+      backgroundColor: theme.palette.primary.main,
+    },
   }),
   outsideOfMonth: ({ theme }) => ({
     backgroundColor: "transparent",
@@ -159,7 +162,8 @@ export const datePickerTheme: ThemeOptions = {
           display: "block",
         },
         contentWrapper: ({ theme }) => ({
-          width: "100%",
+          // width: "100%",
+          width: `calc(${theme.spacing(4)} * 22)`,
           // paddingBlock: theme.spacing(2),
           paddingInline: theme.spacing(3),
           // borderColor: theme.palette.divider,
@@ -206,7 +210,7 @@ export const datePickerTheme: ThemeOptions = {
     MuiDayCalendar: {
       styleOverrides: {
         // root: ({ theme }) => ({
-          // paddingInline: theme.spacing(1),
+        // paddingInline: theme.spacing(1),
         // }),
         header: ({ theme }) => ({
           justifyContent: "space-between",
@@ -218,9 +222,9 @@ export const datePickerTheme: ThemeOptions = {
           paddingBlock: theme.spacing(1),
           paddingInline: theme.spacing(1),
         }),
-        slideTransition: () => ({
-          minHeight: `${(214 / 16) * (16 / 14)}rem`,
-        }),
+        // slideTransition: () => ({
+        //   minHeight: `${(214 / 16) * (16 / 14)}rem`,
+        // }),
         weekContainer: ({ theme }) => ({
           justifyContent: "space-between",
           marginBottom: theme.spacing(1),
@@ -272,8 +276,8 @@ export const datePickerTheme: ThemeOptions = {
           justifyContent: "space-between",
           marginBlockEnd: 0,
           marginBlockStart: 0,
-          maxHeight: "unset",
-          minHeight: "unset",
+          maxHeight: theme.spacing(8),
+          minHeight: theme.spacing(8),
           paddingInline: theme.spacing(1),
           paddingBlockStart: theme.spacing(1),
           paddingBlockEnd: theme.spacing(4),
@@ -326,10 +330,14 @@ export const datePickerTheme: ThemeOptions = {
             //   border: "none",
             // },
 
-            // "&.Mui-selected, &.Mui-selected:focus": dateStyles.selected({
-            //   theme,
-            // }),
+            "&.Mui-selected, &.Mui-selected:focus": dateStyles.selected({
+              theme,
+            }),
             "&.Mui-selected:hover": dateStyles.hoverSelected({ theme }),
+
+            "@media (pointer: fine)": {
+
+            },
             "&.Mui-disabled": dateStyles.disabled({ theme }),
           },
         ],
@@ -354,7 +362,7 @@ export const datePickerTheme: ThemeOptions = {
         root: ({ theme }) => ({
           display: "block",
           width: "auto",
-          // maxHeight: `${(284 / 16) * (16 / 14)}rem`,
+          maxHeight: `${(284 / 16) * (16 / 14)}rem`,
           marginBottom: `-${theme.spacing(popupSpacingValue)}`,
           marginInlineEnd: 0,
           paddingInline: 0,

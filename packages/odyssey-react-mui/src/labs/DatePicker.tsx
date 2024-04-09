@@ -11,6 +11,8 @@
  */
 
 import {
+  ChangeEvent,
+  ChangeEventHandler,
   forwardRef,
   memo,
   useCallback,
@@ -105,32 +107,38 @@ export type DatePickerProps = {
   /**
    * Callback fired when the date/text input changes.
    */
-  onInputChange?: (value: Date) => void;
+  onInputChange?: ChangeEventHandler<HTMLInputElement>;
   value?: Date;
 } & Pick<FieldComponentProps, "errorMessage" | "hint" | "isDisabled"> &
   Pick<
     MuiDatePickerProps<Date>,
-    "defaultValue" | "disableFuture" | "disablePast" | "minDate" | "maxDate"
+    | "defaultValue"
+    | "disableFuture"
+    | "disablePast"
+    | "minDate"
+    | "maxDate"
+    | "shouldDisableDate"
+    | "shouldDisableMonth"
+    | "shouldDisableYear"
   >;
 
-const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
-  (
-    {
-      defaultValue: defaultValueProp,
-      disableFuture,
-      disablePast,
-      errorMessage,
-      hint,
-      isDisabled,
-      label,
-      minDate,
-      maxDate,
-      onCalendarDateChange,
-      // onInputChange: onInputChangeProp,
-      value: valueProp,
-    },
-    ref,
-  ) => {
+const DatePicker =({
+    defaultValue: defaultValueProp,
+    disableFuture,
+    disablePast,
+    errorMessage,
+    hint,
+    isDisabled,
+    label,
+    minDate,
+    maxDate,
+    onCalendarDateChange,
+    shouldDisableDate,
+    shouldDisableMonth,
+    shouldDisableYear,
+    onInputChange: onInputChangeProp,
+    value: valueProp,
+  }: DatePickerProps) => {
     const odysseyDesignTokens = useOdysseyDesignTokens();
     const [isOpen, setIsOpen] = useState(false);
 
@@ -149,7 +157,6 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
     >(
       (value) => {
         if (value) {
-          // const { validationError } = errorContext;
           const jsDateFromDateTime = new Date(value?.toJSDate());
           console.log("change", jsDateFromDateTime);
           onCalendarDateChange?.(jsDateFromDateTime);
@@ -158,27 +165,9 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       [onCalendarDateChange],
     );
 
-    const onInputChange = useCallback<(value: DateTime) => void>(
-      (value) => {
-        if (value) {
-          console.log("onInputChange", { value });
-          // setInternalSelectedValue(errorContext.validationError);
-          // validationErrorRef.current = errorContext.validationError;
-          // const { validationError } = errorContext;
-          const jsDateFromDateTime = new Date(value?.toJSDate());
-          // console.log("onInputChange", {value}, {errorContext});
-          onCalendarDateChange?.(jsDateFromDateTime);
-        }
-      },
-      [onCalendarDateChange],
-    );
-
-    // const onInputChange = useCallback(
-    //   (args: any) => {
-    //     console.log({ args });
-    //   },
-    //   [onInputChangeProp],
-    // );
+    const onInputChange = useCallback<
+      (event: ChangeEvent<HTMLInputElement>) => void
+    >((event) => onInputChangeProp?.(event), [onInputChangeProp]);
 
     const formatDateToDateTime = (date: Date) => DateTime.fromJSDate(date);
 
@@ -187,6 +176,23 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
     const toggleCalendarVisibility = useCallback(
       () => setIsOpen(!isOpen),
       [isOpen],
+    );
+
+    const shouldDisableDateAsDateTime = useCallback(
+      (date: DateTime) =>
+        shouldDisableDate?.(new Date(date?.toJSDate())) || false,
+      [shouldDisableDate],
+    );
+
+    const shouldDisableMonthAsDateTime = useCallback(
+      (date: DateTime) =>
+        shouldDisableMonth?.(new Date(date?.toJSDate())) || false,
+      [shouldDisableMonth],
+    );
+
+    const shouldDisableYearAsDateTime = useCallback(
+      (date: DateTime) => shouldDisableYear?.(new Date(date?.toJSDate())) || false,
+      [shouldDisableYear],
     );
 
     const renderDateField = useCallback(
@@ -207,7 +213,7 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
                 startIcon={<CalendarIcon />}
                 variant="floating"
                 onClick={toggleCalendarVisibility}
-                />
+              />
             </InputAdornment>
           }
           errorMessage={errorMessage}
@@ -258,6 +264,7 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
                 disabled={isDisabled}
                 disableFuture={disableFuture}
                 disablePast={disablePast}
+                fixedWeekNumber={6}
                 key={language}
                 label={label}
                 minDate={minDate ? formatDateToDateTime(minDate) : undefined}
@@ -265,7 +272,10 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
                 onChange={formatDateTimeToJsDateOnCalendarSelection}
                 onClose={() => setIsOpen(false)}
                 open={isOpen}
-                ref={ref}
+                // ref={ref}
+                shouldDisableDate={shouldDisableDateAsDateTime}
+                shouldDisableMonth={shouldDisableMonthAsDateTime}
+                shouldDisableYear={shouldDisableYearAsDateTime}
                 slots={{
                   actionBar: ActionBar,
                   field: ({ defaultValue, value }) =>
@@ -291,8 +301,7 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
         </LocalizationProvider>
       </OdysseyThemeProvider>
     );
-  },
-);
+  }
 
 const MemoizedDatePicker = memo(DatePicker);
 MemoizedDatePicker.displayName = "DatePicker";

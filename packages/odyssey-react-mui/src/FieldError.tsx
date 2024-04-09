@@ -19,17 +19,14 @@ import { useTranslation } from "react-i18next";
 
 import { Box } from "./Box";
 import type { HtmlProps } from "./HtmlProps";
-import { FieldComponentProps } from "./FieldComponentProps";
 
 export type FieldErrorProps = {
   id?: string;
   message?: string;
   messageList?: string[];
-} & Pick<HtmlProps, "testId" | "translate"> &
-  Pick<FieldComponentProps, "hasErrorAsAlert">;
+} & Pick<HtmlProps, "testId" | "translate">;
 
 const FieldError = ({
-  hasErrorAsAlert,
   id,
   message,
   messageList,
@@ -37,10 +34,9 @@ const FieldError = ({
   translate,
 }: FieldErrorProps) => {
   const { t } = useTranslation();
-  console.log({ hasErrorAsAlert });
+
   return (
     <FormHelperText
-      {...(hasErrorAsAlert ? { role: "alert"} : null)}
       data-se={testId}
       error
       id={id}

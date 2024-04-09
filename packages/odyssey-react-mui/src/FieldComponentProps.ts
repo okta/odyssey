@@ -24,13 +24,6 @@ export type FieldComponentProps = {
    */
   errorMessageList?: string[];
   /**
-   * If `true`, the error will be set as `role="aert"` and be announced to screen readers immediately.
-   * Only to be used when the user is NOT focused on the element with the error.
-   *
-   * WARNING: Because of its intrusive nature, the alert role must be used sparingly and only in situations where the user's immediate attention is required.
-   */
-  hasErrorAsAlert?: boolean;
-  /**
    * The helper text content.
    */
   hint?: string;
