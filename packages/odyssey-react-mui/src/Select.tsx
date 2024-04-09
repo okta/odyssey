@@ -291,6 +291,7 @@ const Select = <
            * set an empty string to `value` in the normalized option so that the select component
            * can potentially set it as the selected one in the text input
            */
+          console.log(option);
           const value =
             option?.value === "" ? option.value : option.value || option.text;
           return {
@@ -433,6 +434,7 @@ const Select = <
           {...inputValues}
           aria-describedby={ariaDescribedBy}
           aria-errormessage={errorMessageElementId}
+          displayEmpty
           id={id}
           inputProps={{ "data-se": testId }}
           inputRef={localInputRef}
