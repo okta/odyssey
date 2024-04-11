@@ -23,6 +23,19 @@ const storybookMeta: Meta<CalloutProps> = {
   title: "MUI Components/Callout",
   component: Callout,
   argTypes: {
+    children: {
+      control: "text",
+      description: "Used to optionally pass a text list to the component",
+      table: {
+        type: {
+          summary: "ReactNode | Array<ReactNode>",
+        },
+      },
+      type: {
+        name: "other",
+        value: "ReactNode | Array<ReactNode>",
+      },
+    },
     linkText: {
       control: "text",
       description:
