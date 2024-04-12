@@ -130,6 +130,7 @@ const FileUploadPreview = ({
 
   return (
     <PreviewContainer
+      data-file-preview-container="true"
       isDisabled={isDisabled}
       odysseyDesignTokens={odysseyDesignTokens}
     >
