@@ -11,13 +11,14 @@
  */
 
 import { useEffect, memo, useState, useCallback } from "react";
-import { Alert, AlertTitle, Snackbar } from "@mui/material";
-import { visuallyHidden } from "@mui/utils";
-import { Link } from "./Link";
-import { CloseIcon } from "./icons.generated";
-import { Button } from "./Button";
 import { useTranslation } from "react-i18next";
+import { Alert, AlertTitle, Snackbar } from "@mui/material";
+
+import { Button } from "./Button";
 import { HtmlProps } from "./HtmlProps";
+import { CloseIcon } from "./icons.generated";
+import { Link } from "./Link";
+import { ScreenReaderText } from "./ScreenReaderText";
 
 export const toastRoleValues = ["status", "alert"] as const;
 export const toastSeverityValues = [
@@ -88,7 +89,6 @@ const Toast = ({
   translate,
 }: ToastProps) => {
   const { t } = useTranslation();
-
   const [isVisible, setIsVisible] = useState(isVisibleProp);
 
   useEffect(() => {
@@ -101,43 +101,47 @@ const Toast = ({
   }, [onHideProp]);
 
   return (
-    <Snackbar
-      open={isVisible}
-      autoHideDuration={
-        isDismissable || autoHideDuration <= 0 ? undefined : autoHideDuration
-      }
-      onClose={onHide}
-      className="Toast"
-      ClickAwayListenerProps={ClickAwayListenerProps}
-    >
-      <Alert
-        action={
-          isDismissable === true && (
-            <Button
-              ariaLabel={t("close.text")}
-              onClick={onHide}
-              size="small"
-              startIcon={<CloseIcon />}
-              variant="floating"
-            />
-          )
+    <>
+      <Snackbar
+        open={isVisible}
+        autoHideDuration={
+          isDismissable || autoHideDuration <= 0 ? undefined : autoHideDuration
         }
-        data-se={testId}
-        role={role}
-        severity={severity}
-        variant="toast"
+        onClose={onHide}
+        className="Toast"
+        ClickAwayListenerProps={ClickAwayListenerProps}
       >
-        <AlertTitle translate={translate}>
-          <span style={visuallyHidden}>{severity}:</span>
-          {text}
-        </AlertTitle>
-        {linkUrl && (
-          <Link href={linkUrl} variant="monochrome" translate={translate}>
-            {linkText}
-          </Link>
-        )}
-      </Alert>
-    </Snackbar>
+        <Alert
+          action={
+            isDismissable === true && (
+              <Button
+                ariaLabel={t("close.text")}
+                onClick={onHide}
+                size="small"
+                startIcon={<CloseIcon />}
+                variant="floating"
+              />
+            )
+          }
+          data-se={testId}
+          role={role}
+          severity={severity}
+          variant="toast"
+        >
+          <AlertTitle translate={translate}>
+            <ScreenReaderText translate={translate}>
+              {t(`severity.${severity}:`)}
+            </ScreenReaderText>
+            {text}
+          </AlertTitle>
+          {linkUrl && (
+            <Link href={linkUrl} variant="monochrome" translate={translate}>
+              {linkText}
+            </Link>
+          )}
+        </Alert>
+      </Snackbar>
+    </>
   );
 };
 
