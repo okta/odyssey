@@ -433,6 +433,7 @@ const Select = <
           {...inputValues}
           aria-describedby={ariaDescribedBy}
           aria-errormessage={errorMessageElementId}
+          displayEmpty
           id={id}
           inputProps={{ "data-se": testId }}
           inputRef={localInputRef}
