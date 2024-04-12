@@ -37,12 +37,12 @@ const storyBookMeta: Meta<EmptyStateProps> = {
       },
     },
 
-    primaryCallToActionComponent: {
+    PrimaryCallToActionComponent: {
       description: "Primary call to action",
       control: "custom",
     },
 
-    secondaryCallToActionComponent: {
+    SecondaryCallToActionComponent: {
       description: "Secondary call to action",
       control: "custom",
     },
@@ -57,10 +57,10 @@ export const Default: StoryObj<EmptyStateProps> = {
   args: {
     heading: "Start by adding data assets",
     text: "All relevant data will be displayed and can be searched and filtered",
-    primaryCallToActionComponent: (
+    PrimaryCallToActionComponent: (
       <Button label="Button label" variant="primary" />
     ),
-    secondaryCallToActionComponent: (
+    SecondaryCallToActionComponent: (
       <Button label="Button label" variant="secondary" />
     ),
   },

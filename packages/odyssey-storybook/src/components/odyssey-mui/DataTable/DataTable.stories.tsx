@@ -516,10 +516,10 @@ export const API: StoryObj<DataTableProps> = {
         <EmptyState
           heading="Start by adding data assets"
           text="All relevant data will be displayed and can be searched and filtered"
-          primaryCallToActionComponent={
+          PrimaryCallToActionComponent={
             <Button variant="primary" label="Primary" />
           }
-          secondaryCallToActionComponent={
+          SecondaryCallToActionComponent={
             <Button variant="secondary" label="Secondary" />
           }
         />
@@ -597,10 +597,10 @@ export const Empty: StoryObj<DataTableProps> = {
         <EmptyState
           heading="Start by adding data assets"
           text="All relevant data will be displayed and can be searched and filtered"
-          primaryCallToActionComponent={
+          PrimaryCallToActionComponent={
             <Button variant="primary" label="Primary" />
           }
-          secondaryCallToActionComponent={
+          SecondaryCallToActionComponent={
             <Button variant="secondary" label="Secondary" />
           }
         />

@@ -43,18 +43,18 @@ export type EmptyStateProps = {
   /**
    * Primary call to action
    */
-  primaryCallToActionComponent?: ReactNode;
+  PrimaryCallToActionComponent?: ReactNode;
   /**
    * Secondary call to action
    */
-  secondaryCallToActionComponent?: ReactNode;
+  SecondaryCallToActionComponent?: ReactNode;
 };
 
 const EmptyState = ({
   heading,
   text,
-  primaryCallToActionComponent,
-  secondaryCallToActionComponent,
+  PrimaryCallToActionComponent,
+  SecondaryCallToActionComponent,
 }: EmptyStateProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
@@ -62,10 +62,10 @@ const EmptyState = ({
     <EmptyContainer odysseyDesignTokens={odysseyDesignTokens}>
       <Heading4>{heading}</Heading4>
       <Paragraph>{text}</Paragraph>
-      {(primaryCallToActionComponent || secondaryCallToActionComponent) && (
+      {(PrimaryCallToActionComponent || SecondaryCallToActionComponent) && (
         <Box sx={{ marginBlockStart: 5 }}>
-          {secondaryCallToActionComponent}
-          {primaryCallToActionComponent}
+          {SecondaryCallToActionComponent}
+          {PrimaryCallToActionComponent}
         </Box>
       )}
     </EmptyContainer>
