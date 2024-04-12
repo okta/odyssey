@@ -164,7 +164,7 @@ const Button = ({
   // We're deprecating the "tertiary" variant, so map it to
   // "secondary" in lieu of making a breaking change
   const variant = variantProp === "tertiary" ? "secondary" : variantProp;
-  const localButtonRef = useRef<HTMLButtonElement>(null);
+  const localButtonRef = useRef<HTMLButtonElement>();
   const buttonContext = useButton();
   const isFullWidth = useMemo(
     () =>
@@ -186,9 +186,6 @@ const Button = ({
 
   const renderButton = useCallback(
     (muiProps: MuiPropsContextType) => {
-      //@ts-expect-error ref is not an optional prop on the props context type
-      muiProps?.ref?.(localButtonRef.current);
-
       return (
         <MuiButton
           {...muiProps}
@@ -204,7 +201,13 @@ const Button = ({
           fullWidth={isFullWidth}
           id={id}
           onClick={onClick}
-          ref={localButtonRef}
+          ref={(element) => {
+            if (element) {
+              localButtonRef.current = element;
+              //@ts-expect-error ref is not an optional prop on the props context type
+              muiProps?.ref?.(element);
+            }
+          }}
           size={size}
           startIcon={startIcon}
           tabIndex={tabIndex}
