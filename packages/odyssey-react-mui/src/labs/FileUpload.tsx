@@ -54,6 +54,7 @@ const BaseInputWrapper = styled.div({
 
 const InputContainer = styled(BaseInputWrapper)<{
   odysseyDesignTokens: DesignTokens;
+  hasError: boolean;
 }>(
   {
     display: "flex",
@@ -65,9 +66,11 @@ const InputContainer = styled(BaseInputWrapper)<{
       borderStyle: "solid",
     },
   },
-  ({ odysseyDesignTokens }) => ({
+  ({ hasError, odysseyDesignTokens }) => ({
     padding: `${odysseyDesignTokens.Spacing6} ${odysseyDesignTokens.Spacing3}`,
-    border: `1px dashed ${odysseyDesignTokens.HueNeutral300}`,
+    border: hasError
+      ? `1px solid ${odysseyDesignTokens.PaletteDangerMain}`
+      : `1px dashed ${odysseyDesignTokens.HueNeutral300}`,
     borderRadius: odysseyDesignTokens.BorderRadiusMain,
     transition: `border-color ${odysseyDesignTokens.TransitionTimingMain}, box-shadow ${odysseyDesignTokens.TransitionTimingMain}`,
 
@@ -101,6 +104,10 @@ const ButtonAndInfoContainer = styled.div({
   justifyContent: "center",
 });
 
+const CenterAlignedSupportText = styled.div({
+  textAlign: "center",
+});
+
 export type FileUploadProps = {
   /**
    * an array of file types the user is able to upload. @see https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept#unique_file_type_specifiers for examples
@@ -129,6 +136,7 @@ export type FileUploadProps = {
   | "HintLinkComponent"
   | "id"
   | "isDisabled"
+  | "isFullWidth"
   | "isOptional"
 >;
 
@@ -137,6 +145,7 @@ const FileUpload = ({
   errorMessage,
   id,
   isDisabled = false,
+  isFullWidth,
   isOptional,
   hint,
   HintLinkComponent,
@@ -174,7 +183,7 @@ const FileUpload = ({
   );
 
   const triggerFileInputClick = useCallback(() => {
-    inputRef.current?.focus();
+    inputRef.current?.click();
   }, [inputRef]);
 
   const removeFileFromFilesToUploadList = useCallback<(name: string) => void>(
@@ -194,7 +203,6 @@ const FileUpload = ({
       id,
       labelElementId,
     }: RenderFieldComponentProps) => {
-      const fileNames = filesToUpload.map((file) => file.name);
       const acceptedFileTypesAsString = acceptedFileTypes?.join(",");
 
       const Input = () => (
@@ -226,24 +234,24 @@ const FileUpload = ({
                 variant="secondary"
               />
             </BaseInputWrapper>
-            <FileUploadPreview
-              fileNames={fileNames}
-              onFileRemove={removeFileFromFilesToUploadList}
-              isDisabled={isDisabled}
-            />
           </>
         );
       }
 
       return (
         <>
-          <InputContainer odysseyDesignTokens={odysseyDesignTokens}>
+          <InputContainer
+            hasError={Boolean(errorMessage)}
+            odysseyDesignTokens={odysseyDesignTokens}
+          >
             <Input />
             <ButtonAndInfoContainer>
               {variant === "dragAndDropWithIcon" && <FileUploadIllustration />}
-              <Support color="textSecondary">
-                {t("fileupload.prompt.text")}
-              </Support>
+              <CenterAlignedSupportText>
+                <Support color="textSecondary">
+                  {t("fileupload.prompt.text")}
+                </Support>
+              </CenterAlignedSupportText>
               <Button
                 isDisabled={isDisabled}
                 label={t("fileupload.button.text")}
@@ -253,16 +261,12 @@ const FileUpload = ({
               />
             </ButtonAndInfoContainer>
           </InputContainer>
-          <FileUploadPreview
-            fileNames={fileNames}
-            onFileRemove={removeFileFromFilesToUploadList}
-            isDisabled={isDisabled}
-          />
         </>
       );
     },
     [
       acceptedFileTypes,
+      errorMessage,
       filesToUpload,
       isDisabled,
       inputRef,
@@ -286,11 +290,18 @@ const FileUpload = ({
         HintLinkComponent={HintLinkComponent}
         id={id}
         isDisabled={isDisabled}
-        isFullWidth
+        isFullWidth={isFullWidth && variant !== "button"}
         isOptional={isOptional}
         label={label}
         renderFieldComponent={renderFileInput}
       />
+      {filesToUpload.length > 0 && (
+        <FileUploadPreview
+          fileNames={filesToUpload.map((file) => file.name)}
+          onFileRemove={removeFileFromFilesToUploadList}
+          isDisabled={isDisabled}
+        />
+      )}
     </>
   );
 };

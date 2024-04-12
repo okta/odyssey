@@ -28,6 +28,15 @@ const storybookMeta: Meta<typeof FileUpload> = {
   title: "Labs Components/FileUpload",
   component: FileUpload,
   argTypes: {
+    acceptedFileTypes: {
+      description:
+        "An array of file types the user is able to upload. See https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept#unique_file_type_specifiers for examples",
+      table: {
+        type: {
+          summary: "string[]",
+        },
+      },
+    },
     type: {
       options: fileUploadTypes,
       control: { type: "radio" },
@@ -38,9 +47,11 @@ const storybookMeta: Meta<typeof FileUpload> = {
         },
       },
     },
+    errorMessage: fieldComponentPropsMetaData.errorMessage,
     hint: fieldComponentPropsMetaData.hint,
     id: fieldComponentPropsMetaData.id,
     isDisabled: fieldComponentPropsMetaData.isDisabled,
+    isFullWidth: fieldComponentPropsMetaData.isFullWidth,
     label: {
       control: "text",
       description: "The label text for the FileUpload",
@@ -80,7 +91,7 @@ const storybookMeta: Meta<typeof FileUpload> = {
     },
   },
   args: {
-    hint: "Some helpful text about what format to use",
+    hint: "Maybe some helpful text about what format to use",
     label: "Upload your files here",
   },
   decorators: [MuiThemeDecorator],
@@ -94,13 +105,36 @@ export const ButtonOnly: StoryObj<typeof FileUpload> = {
     variant: "button",
   },
 };
+
 export const DragAndDropWithIcon: StoryObj<typeof FileUpload> = {
+  args: {
+    type: "multiple",
+    variant: "dragAndDropWithIcon",
+  },
+};
+
+export const DragAndDropWithoutIcon: StoryObj<typeof FileUpload> = {
+  args: {
+    variant: "dragAndDrop",
+  },
+};
+
+export const SingleFileAllowed: StoryObj<typeof FileUpload> = {
   args: {
     variant: "dragAndDropWithIcon",
   },
 };
-export const DragAndDropWithoutIcon: StoryObj<typeof FileUpload> = {
+
+export const MultipleFileAllowed: StoryObj<typeof FileUpload> = {
   args: {
-    variant: "dragAndDrop",
+    type: "multiple",
+    variant: "dragAndDropWithIcon",
+  },
+};
+
+export const SpecificFileTypes: StoryObj<typeof FileUpload> = {
+  args: {
+    acceptedFileTypes: [".jpg", ".png"],
+    variant: "dragAndDropWithIcon",
   },
 };
