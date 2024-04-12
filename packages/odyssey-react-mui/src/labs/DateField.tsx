@@ -18,31 +18,31 @@ import {
 } from "@mui/x-date-pickers";
 import { DateTime } from "luxon";
 
-import { Field, RenderFieldProps } from "../Field";
+import { Field, RenderFieldComponentProps } from "../Field";
 import { TextFieldProps } from "../TextField";
 
-export type DateFieldProps = Omit<MuiDateFieldProps<DateTime>, "onChange"> & {
+export type DateFieldProps = {
+  defaultValue?: MuiDateFieldProps<DateTime>["defaultValue"];
   onChange: ChangeEventHandler<HTMLInputElement>;
+  value?: MuiDateFieldProps<DateTime>["value"];
 } & Pick<
-    TextFieldProps,
-    | "endAdornment"
-    | "errorMessage"
-    | "hasInitialFocus"
-    | "hint"
-    | "id"
-    | "isDisabled"
-    | "isOptional"
-    | "isReadOnly"
-    | "label"
-    | "onBlur"
-    | "onFocus"
-    | "placeholder"
-  >;
+  TextFieldProps,
+  | "endAdornment"
+  | "errorMessage"
+  | "hasInitialFocus"
+  | "hint"
+  | "id"
+  | "isDisabled"
+  | "isOptional"
+  | "isReadOnly"
+  | "label"
+  | "onBlur"
+  | "onFocus"
+  | "placeholder"
+>;
 
 const DateField = ({
   defaultValue,
-  disableFuture,
-  disablePast,
   endAdornment,
   errorMessage,
   hasInitialFocus,
@@ -52,7 +52,6 @@ const DateField = ({
   isOptional = false,
   isReadOnly,
   label,
-  minDate,
   onBlur,
   onChange,
   onFocus,
@@ -60,15 +59,13 @@ const DateField = ({
   value,
 }: DateFieldProps) => {
   const renderFieldComponent = useCallback(
-    ({ ariaDescribedBy, id, labelElementId }: RenderFieldProps) => {
+    ({ ariaDescribedBy, id, labelElementId }: RenderFieldComponentProps) => {
       return (
         <MuiDateField
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus={hasInitialFocus}
           defaultValue={defaultValue}
           disabled={isDisabled}
-          disableFuture={disableFuture}
-          disablePast={disablePast}
           id={id}
           inputProps={{
             "aria-describedby": ariaDescribedBy,
@@ -82,7 +79,6 @@ const DateField = ({
               <InputAdornment position="end">{endAdornment}</InputAdornment>
             ),
           }}
-          minDate={minDate}
           name={id}
           onBlur={onBlur}
           onFocus={onFocus}

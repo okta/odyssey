@@ -23,7 +23,7 @@ import { useTranslation } from "react-i18next";
 
 import { Button } from "../Button";
 import { UploadIcon } from "../icons.generated";
-import { Field, RenderFieldProps } from "../Field";
+import { Field, RenderFieldComponentProps } from "../Field";
 import { FieldComponentProps } from "../FieldComponentProps";
 import { FileUploadPreview } from "./FileUploadPreview";
 import { FileUploadIllustration } from "./FileUploadIllustration";
@@ -202,7 +202,7 @@ const FileUpload = ({
       errorMessageElementId,
       id,
       labelElementId,
-    }: RenderFieldProps) => {
+    }: RenderFieldComponentProps) => {
       const acceptedFileTypesAsString = acceptedFileTypes?.join(",");
 
       const Input = () => (

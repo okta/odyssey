@@ -29,7 +29,7 @@ import { useUniqueId } from "./useUniqueId";
 
 export const fieldTypeValues = ["single", "group"] as const;
 
-export type RenderFieldProps = {
+export type RenderFieldComponentProps = {
   ariaDescribedBy?: string;
   dataSe?: string;
   errorMessageElementId?: string;
@@ -75,7 +75,7 @@ export type FieldProps = {
     errorMessageElementId,
     id,
     labelElementId,
-  }: RenderFieldProps) => ReactElement;
+  }: RenderFieldComponentProps) => ReactElement;
 };
 
 const Field = ({
