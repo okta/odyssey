@@ -5172,6 +5172,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@okta/odyssey-newsletter@workspace:packages/odyssey-newsletter":
+  version: 0.0.0-use.local
+  resolution: "@okta/odyssey-newsletter@workspace:packages/odyssey-newsletter"
+  languageName: unknown
+  linkType: soft
+
 "@okta/odyssey-react-mui@workspace:*, @okta/odyssey-react-mui@workspace:packages/odyssey-react-mui":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-react-mui@workspace:packages/odyssey-react-mui"
