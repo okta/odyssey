@@ -11,34 +11,22 @@
  */
 
 import {
-  ButtonBase,
-  Menu,
-  MenuItem,
-  Breadcrumbs as MuiBreadcrumbs,
-} from "@mui/material";
-import {
-  MouseEventHandler,
-  ReactElement,
   createContext,
   memo,
+  MouseEventHandler,
+  ReactElement,
   useCallback,
-  useContext,
   useMemo,
   useState,
 } from "react";
-import { GroupIcon, HomeIcon, UserIcon } from "./icons.generated";
-import { Subordinate } from "./Typography";
+import { Breadcrumbs as MuiBreadcrumbs, ButtonBase, Menu } from "@mui/material";
 import { useTranslation } from "react-i18next";
+
+import { Breadcrumb } from "./BreadCrumb";
+import { HomeIcon } from "./icons.generated";
 import { HtmlProps } from "./HtmlProps";
-import styled from "@emotion/styled";
 
 export type BreadcrumbType = "listItem" | "menuItem" | "currentPage";
-
-export type BreadcrumbProps = {
-  children?: string;
-  href: string;
-  iconName?: "user" | "group";
-};
 
 export type BreadcrumbsProps = {
   children: ReactElement<typeof Breadcrumb>[];
@@ -53,41 +41,6 @@ export type BreadcrumbContextType = {
 export const BreadcrumbContext = createContext<BreadcrumbContextType>({
   breadcrumbType: "listItem",
 });
-
-const BreadcrumbContent = styled.span`
-  white-space: nowrap;
-  overflow: hidden;
-  max-width: 10rem;
-  text-overflow: ellipsis;
-`;
-
-export const Breadcrumb = ({ children, href, iconName }: BreadcrumbProps) => {
-  const { breadcrumbType } = useContext(BreadcrumbContext);
-
-  const breadcrumbContent = (
-    <>
-      {iconName === "group" ? (
-        <GroupIcon />
-      ) : iconName === "user" ? (
-        <UserIcon />
-      ) : null}
-      <BreadcrumbContent>{children}</BreadcrumbContent>
-    </>
-  );
-
-  if (breadcrumbType === "menuItem") {
-    return <MenuItem href={href}>{breadcrumbContent}</MenuItem>;
-  }
-
-  if (breadcrumbType === "currentPage") {
-    return <Subordinate color="textPrimary">{breadcrumbContent}</Subordinate>;
-  }
-
-  // breadcrumbType === "listItem" is the default
-  // Provided here without a conditional to get TS to be quiet
-  // about potential undefined returns
-  return <ButtonBase href={href}>{breadcrumbContent}</ButtonBase>;
-};
 
 const breadcrumbProviderValue: Record<
   BreadcrumbType,
@@ -162,14 +115,16 @@ const BreadcrumbList = ({
         </ButtonBase>
       )}
 
-      {breadcrumbSections.beforeMenu.map((breadcrumb) => (
-        <BreadcrumbContext.Provider value={breadcrumbProviderValue.listItem}>
-          {breadcrumb}
-        </BreadcrumbContext.Provider>
+      {breadcrumbSections.beforeMenu.map((breadcrumb, index) => (
+        <span key={`beforeMenu-${index}`}>
+          <BreadcrumbContext.Provider value={breadcrumbProviderValue.listItem}>
+            {breadcrumb}
+          </BreadcrumbContext.Provider>
+        </span>
       ))}
 
       {breadcrumbSections.insideMenu.length > 0 && (
-        <>
+        <span>
           <ButtonBase onClick={onMenuButtonClick}>...</ButtonBase>
           <Menu
             open={Boolean(anchorEl)}
@@ -188,23 +143,21 @@ const BreadcrumbList = ({
               {breadcrumbSections.insideMenu}
             </BreadcrumbContext.Provider>
           </Menu>
-        </>
+        </span>
       )}
 
-      {breadcrumbSections.remainingBreadcrumbs.map((breadcrumb, i) => {
-        if (i === breadcrumbSections.remainingBreadcrumbs.length - 1) {
-          return (
-            <BreadcrumbContext.Provider
-              value={breadcrumbProviderValue.currentPage}
-            >
+      {breadcrumbSections.remainingBreadcrumbs.map((breadcrumb, index) => {
+        const contextValue =
+          index === breadcrumbSections.remainingBreadcrumbs.length - 1
+            ? breadcrumbProviderValue.currentPage
+            : breadcrumbProviderValue.listItem;
+
+        return (
+          <span key={`remainingBreadcrumbs-${index}`}>
+            <BreadcrumbContext.Provider value={contextValue}>
               {breadcrumb}
             </BreadcrumbContext.Provider>
-          );
-        }
-        return (
-          <BreadcrumbContext.Provider value={breadcrumbProviderValue.listItem}>
-            {breadcrumb}
-          </BreadcrumbContext.Provider>
+          </span>
         );
       })}
     </MuiBreadcrumbs>

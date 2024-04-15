@@ -60,6 +60,7 @@ export * from "./Autocomplete";
 export { badgeContentMaxValues } from "./Badge";
 export * from "./Banner";
 export * from "./Box";
+export * from "./BreadCrumb";
 export * from "./Breadcrumbs";
 export * from "./Button";
 export * from "./Tile";
