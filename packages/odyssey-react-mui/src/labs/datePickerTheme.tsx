@@ -158,7 +158,7 @@ export const datePickerTheme: ThemeOptions = {
             paddingBlock: theme.spacing(3),
             paddingInline: theme.spacing(3),
             // 2x the width of the input
-            width: `calc(${theme.spacing(4)} * 22)`,
+            width: "25.16rem",
           },
         }),
       },

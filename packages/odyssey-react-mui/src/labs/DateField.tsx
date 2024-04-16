@@ -93,6 +93,7 @@ const DateField = ({
       endAdornment,
       errorMessage,
       hasInitialFocus,
+      isDisabled,
       onChange,
       onFocus,
       onBlur,

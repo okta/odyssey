@@ -55,14 +55,12 @@ const DatePickerContainer = styled.div({
   },
 });
 
-const DatePickerWidthContainer = styled.div<{
-  odysseyDesignTokens: DesignTokens;
-}>(({ odysseyDesignTokens }) => ({
+const DatePickerWidthContainer = styled.div({
   ".MuiInput-root": {
     // 176px
-    width: `calc(${odysseyDesignTokens.Spacing4} * 11)`,
+    width: "12.58rem",
   },
-}));
+});
 
 const ActionContainer = styled.div<{ odysseyDesignTokens: DesignTokens }>(
   ({ odysseyDesignTokens }) => ({
@@ -87,7 +85,7 @@ const ActionBar = ({ actions, onAccept, onCancel }: PickersActionBarProps) => {
           variant="floating"
         />
         <Button
-          label={t("picker.labels.action.accept")}
+          label={t("picker.labels.action.apply")}
           onClick={onAccept}
           variant="primary"
         />
@@ -105,6 +103,20 @@ type RenderDateFieldProps = {
 
 export type DatePickerProps = {
   /**
+   * Disable specific date(s).
+   *
+   * Warning: This function can be called multiple times (for example when rendering date calendar, checking if focus can be moved to a certain date, etc.). Expensive computations can impact performance.
+   */
+  isDateEnabled?: (date: Date) => boolean;
+  /**
+   * Disable specific month(s).
+   */
+  isMonthEnabled?: (date: Date) => boolean;
+  /**
+   * Disable specific year(s).
+   */
+  isYearEnabled?: (date: Date) => boolean;
+  /**
    * The label for the `input` element.
    */
   label: string;
@@ -118,36 +130,23 @@ export type DatePickerProps = {
   onInputChange?: ChangeEventHandler<HTMLInputElement>;
   value?: Date;
 } & Pick<FieldComponentProps, "errorMessage" | "hint" | "isDisabled"> &
-  Pick<
-    MuiDatePickerProps<Date>,
-    | "defaultValue"
-    | "disableFuture"
-    | "disablePast"
-    | "minDate"
-    | "maxDate"
-    | "shouldDisableDate"
-    | "shouldDisableMonth"
-    | "shouldDisableYear"
-  >;
+  Pick<MuiDatePickerProps<Date>, "defaultValue" | "minDate" | "maxDate">;
 
 const DatePicker = ({
   defaultValue: defaultValueProp,
-  disableFuture,
-  disablePast,
   errorMessage,
   hint,
+  isDateEnabled: isDateEnabledProp,
   isDisabled,
+  isMonthEnabled: isMonthEnabledProp,
+  isYearEnabled: isYearEnabledProp,
   label,
   minDate,
   maxDate,
   onCalendarDateChange,
-  shouldDisableDate,
-  shouldDisableMonth,
-  shouldDisableYear,
   onInputChange: onInputChangeProp,
   value: valueProp,
 }: DatePickerProps) => {
-  const odysseyDesignTokens = useOdysseyDesignTokens();
   const [isOpen, setIsOpen] = useState(false);
 
   const { i18n, t } = useTranslation();
@@ -158,7 +157,7 @@ const DatePicker = ({
 
   const containerRef = useRef<HTMLInputElement>(null);
 
-  const localeText = useDatePickerTranslations(t);
+  const localeText = useDatePickerTranslations();
 
   const formatDateTimeToJsDateOnCalendarSelection = useCallback<
     NonNullable<MuiDatePickerProps<DateTime>["onChange"]>
@@ -185,62 +184,48 @@ const DatePicker = ({
     [isOpen],
   );
 
-  const shouldDisableDateAsDateTime = useCallback(
+  const shouldDisableDate = useCallback(
     (date: DateTime) =>
-      shouldDisableDate?.(new Date(date?.toJSDate())) || false,
-    [shouldDisableDate],
+      !isDateEnabledProp?.(new Date(date?.toJSDate())) || false,
+    [isDateEnabledProp],
   );
 
-  const shouldDisableMonthAsDateTime = useCallback(
+  const shouldDisableMonth = useCallback(
     (date: DateTime) =>
-      shouldDisableMonth?.(new Date(date?.toJSDate())) || false,
-    [shouldDisableMonth],
+      !isMonthEnabledProp?.(new Date(date?.toJSDate())) || false,
+    [isMonthEnabledProp],
   );
 
-  const shouldDisableYearAsDateTime = useCallback(
+  const shouldDisableYear = useCallback(
     (date: DateTime) =>
-      shouldDisableYear?.(new Date(date?.toJSDate())) || false,
-    [shouldDisableYear],
+      !isYearEnabledProp?.(new Date(date?.toJSDate())) || false,
+    [isYearEnabledProp],
   );
 
   const renderDateField = useCallback(
-    ({ defaultValue, value }: RenderDateFieldProps) => {
-      // const { disableFuture, disablePast, minDate, maxDate, shouldDisableDate, shouldDisableMonth, shouldDisableYear } = muiProps
-      // these props do nothing here currently.
-      // MUI's DateFiled onChange provides a value and a validationContext object. But, we are not using that at the moment.
-      // If we decide to provide MUI's validation context to the consumer, these will provide constraints for that
-      // disableFuture={disableFuture}
-      // disablePast={disablePast}
-      // minDate={minDate}
-      // maxDate={maxDate}
-      // shouldDisableDate={shouldDisableDate}
-      // shouldDisableMonth={shouldDisableMonth}
-      // shouldDisableYear={shouldDisableYear}
-
-      return (
-        <DateField
-          defaultValue={defaultValue}
-          endAdornment={
-            <InputAdornment position="end">
-              <Button
-                ariaLabel={t("datepicker.calendar.icon.label")}
-                label=""
-                size="small"
-                startIcon={<CalendarIcon />}
-                variant="floating"
-                onClick={toggleCalendarVisibility}
-              />
-            </InputAdornment>
-          }
-          errorMessage={errorMessage}
-          hint={hint}
-          isDisabled={isDisabled}
-          label={label}
-          onChange={onInputChange}
-          value={value}
-        />
-      );
-    },
+    ({ defaultValue, value }: RenderDateFieldProps) => (
+      <DateField
+        defaultValue={defaultValue}
+        endAdornment={
+          <InputAdornment position="end">
+            <Button
+              ariaLabel={t("picker.labels.date.choose")}
+              label=""
+              size="small"
+              startIcon={<CalendarIcon />}
+              variant="floating"
+              onClick={toggleCalendarVisibility}
+            />
+          </InputAdornment>
+        }
+        errorMessage={errorMessage}
+        hint={hint}
+        isDisabled={isDisabled}
+        label={label}
+        onChange={onInputChange}
+        value={value}
+      />
+    ),
     [
       errorMessage,
       hint,
@@ -251,22 +236,15 @@ const DatePicker = ({
     ],
   );
 
-  if (isInvalidLocale) {
-    return null;
-  }
-
   return (
     <OdysseyThemeProvider themeOverride={datePickerTheme}>
       <LocalizationProvider
         dateAdapter={AdapterLuxon}
-        adapterLocale={language.replaceAll("_", "-")}
+        adapterLocale={isInvalidLocale ? "en" : language.replaceAll("_", "-")}
         localeText={localeText}
       >
         <DatePickerContainer>
-          <DatePickerWidthContainer
-            odysseyDesignTokens={odysseyDesignTokens}
-            ref={containerRef}
-          >
+          <DatePickerWidthContainer ref={containerRef}>
             <MuiDatePicker
               dayOfWeekFormatter={(date) => formatDayOfWeek(date)}
               defaultValue={
@@ -275,8 +253,6 @@ const DatePicker = ({
                   : undefined
               }
               disabled={isDisabled}
-              disableFuture={disableFuture}
-              disablePast={disablePast}
               fixedWeekNumber={6}
               key={language}
               label={label}
@@ -285,9 +261,9 @@ const DatePicker = ({
               onChange={formatDateTimeToJsDateOnCalendarSelection}
               onClose={() => setIsOpen(false)}
               open={isOpen}
-              shouldDisableDate={shouldDisableDateAsDateTime}
-              shouldDisableMonth={shouldDisableMonthAsDateTime}
-              shouldDisableYear={shouldDisableYearAsDateTime}
+              shouldDisableDate={shouldDisableDate}
+              shouldDisableMonth={shouldDisableMonth}
+              shouldDisableYear={shouldDisableYear}
               slots={{
                 actionBar: ActionBar,
                 field: (muiProps) =>
