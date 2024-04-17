@@ -38,7 +38,6 @@ export type DateFieldProps = {
   | "label"
   | "onBlur"
   | "onFocus"
-  | "placeholder"
 >;
 
 const DateField = ({
@@ -55,39 +54,36 @@ const DateField = ({
   onBlur,
   onChange,
   onFocus,
-  placeholder,
   value,
 }: DateFieldProps) => {
   const renderFieldComponent = useCallback(
-    ({ ariaDescribedBy, id, labelElementId }: RenderFieldComponentProps) => {
-      return (
-        <MuiDateField
-          /* eslint-disable-next-line jsx-a11y/no-autofocus */
-          autoFocus={hasInitialFocus}
-          defaultValue={defaultValue}
-          disabled={isDisabled}
-          id={id}
-          inputProps={{
-            "aria-describedby": ariaDescribedBy,
-            "aria-labelledby": labelElementId,
-            onChange: (event) =>
-              onChange?.(event as ChangeEvent<HTMLInputElement>),
-          }}
-          InputProps={{
-            error: Boolean(errorMessage),
-            endAdornment: (
-              <InputAdornment position="end">{endAdornment}</InputAdornment>
-            ),
-          }}
-          name={id}
-          onBlur={onBlur}
-          onFocus={onFocus}
-          readOnly={isReadOnly}
-          value={value}
-          variant="standard"
-        />
-      );
-    },
+    ({ ariaDescribedBy, id, labelElementId }: RenderFieldComponentProps) => (
+      <MuiDateField
+        /* eslint-disable-next-line jsx-a11y/no-autofocus */
+        autoFocus={hasInitialFocus}
+        defaultValue={defaultValue}
+        disabled={isDisabled}
+        id={id}
+        inputProps={{
+          "aria-describedby": ariaDescribedBy,
+          "aria-labelledby": labelElementId,
+          onChange: (event) =>
+            onChange?.(event as ChangeEvent<HTMLInputElement>),
+        }}
+        InputProps={{
+          error: Boolean(errorMessage),
+          endAdornment: (
+            <InputAdornment position="end">{endAdornment}</InputAdornment>
+          ),
+        }}
+        name={id}
+        onBlur={onBlur}
+        onFocus={onFocus}
+        readOnly={isReadOnly}
+        value={value}
+        variant="standard"
+      />
+    ),
     [
       defaultValue,
       endAdornment,
@@ -97,7 +93,6 @@ const DateField = ({
       onChange,
       onFocus,
       onBlur,
-      placeholder,
       isReadOnly,
       value,
     ],

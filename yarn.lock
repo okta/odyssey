@@ -4629,9 +4629,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/x-date-pickers@npm:^7.1.1":
-  version: 7.1.1
-  resolution: "@mui/x-date-pickers@npm:7.1.1"
+"@mui/x-date-pickers@npm:^7.2.0":
+  version: 7.2.0
+  resolution: "@mui/x-date-pickers@npm:7.2.0"
   dependencies:
     "@babel/runtime": "npm:^7.24.0"
     "@mui/base": "npm:^5.0.0-beta.40"
@@ -4673,7 +4673,7 @@ __metadata:
       optional: true
     moment-jalaali:
       optional: true
-  checksum: 10/a84dfcadcd3166a811dbf50ed1345c189a1fb64afd9394bb149dad8d1dad21ff5d8825680a6cea5d90d5854ea75fe14458a8976cdfa18778ce2704717b7bda7d
+  checksum: 10/65c261d5ab3173dc531040b33a2665d2abaeda78086e550169038b11625d20e2c786cf96891e602c59acff35c9a0d19dd42422f55d61d45438cf15a023c0bf8f
   languageName: node
   linkType: hard
 
@@ -5257,7 +5257,7 @@ __metadata:
     "@mui/material": "npm:^5.15.12"
     "@mui/system": "npm:^5.15.9"
     "@mui/utils": "npm:^5.15.9"
-    "@mui/x-date-pickers": "npm:^7.1.1"
+    "@mui/x-date-pickers": "npm:^7.2.0"
     "@okta/browserslist-config-odyssey": "workspace:*"
     "@okta/odyssey-babel-preset": "workspace:*"
     "@okta/odyssey-design-tokens": "workspace:^"

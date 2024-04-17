@@ -13,11 +13,11 @@
 import { CSSInterpolation } from "@mui/material/styles";
 import { createOdysseyMuiTheme } from "../theme";
 import { ThemeOptions } from "@mui/material";
-import * as Tokens from "@okta/odyssey-design-tokens";
+import * as odysseyTokens from "@okta/odyssey-design-tokens";
 
 const popupSpacingValue = 5;
 
-const odysseyTheme = createOdysseyMuiTheme({ odysseyTokens: Tokens });
+const odysseyTheme = createOdysseyMuiTheme({ odysseyTokens });
 
 type ThemeStyles = ({
   theme,
@@ -147,7 +147,8 @@ export const datePickerTheme: ThemeOptions = {
           display: "block",
         },
         contentWrapper: ({ theme }) => ({
-          width: `calc(${theme.spacing(4)} * 22)`,
+          // 2x the width of the input
+          width: "25.16rem",
           paddingInline: theme.spacing(3),
 
           "@media (pointer: fine)": {
@@ -157,8 +158,6 @@ export const datePickerTheme: ThemeOptions = {
             borderRadius: theme.mixins.borderRadius,
             paddingBlock: theme.spacing(3),
             paddingInline: theme.spacing(3),
-            // 2x the width of the input
-            width: "25.16rem",
           },
         }),
       },

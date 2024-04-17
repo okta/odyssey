@@ -15,15 +15,19 @@ import {
   ChangeEventHandler,
   memo,
   useCallback,
+  useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
 import { useTranslation } from "react-i18next";
 import {
+  type DatePickerSlots,
   DatePicker as MuiDatePicker,
   DatePickerProps as MuiDatePickerProps,
   LocalizationProvider,
   PickersActionBarProps,
+  DatePickerSlotProps,
 } from "@mui/x-date-pickers";
 import { DateTime } from "luxon";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
@@ -96,6 +100,9 @@ const ActionBar = ({ actions, onAccept, onCancel }: PickersActionBarProps) => {
   return null;
 };
 
+const MemoizedActionBar = memo(ActionBar);
+MemoizedActionBar.displayName = "ActionBar";
+
 type RenderDateFieldProps = {
   defaultValue: DateFieldProps["defaultValue"];
   value: DateFieldProps["value"];
@@ -136,10 +143,10 @@ const DatePicker = ({
   defaultValue: defaultValueProp,
   errorMessage,
   hint,
-  isDateEnabled: isDateEnabledProp,
+  isDateEnabled = () => true,
   isDisabled,
-  isMonthEnabled: isMonthEnabledProp,
-  isYearEnabled: isYearEnabledProp,
+  isMonthEnabled = () => true,
+  isYearEnabled = () => true,
   label,
   minDate,
   maxDate,
@@ -148,6 +155,7 @@ const DatePicker = ({
   value: valueProp,
 }: DatePickerProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [popperElement, setPopperElement] = useState<HTMLInputElement | null>();
 
   const { i18n, t } = useTranslation();
   const { language } = i18n;
@@ -158,6 +166,10 @@ const DatePicker = ({
   const containerRef = useRef<HTMLInputElement>(null);
 
   const localeText = useDatePickerTranslations();
+
+  useEffect(() => {
+    setPopperElement(containerRef.current);
+  }, []);
 
   const formatDateTimeToJsDateOnCalendarSelection = useCallback<
     NonNullable<MuiDatePickerProps<DateTime>["onChange"]>
@@ -185,21 +197,18 @@ const DatePicker = ({
   );
 
   const shouldDisableDate = useCallback(
-    (date: DateTime) =>
-      !isDateEnabledProp?.(new Date(date?.toJSDate())) || false,
-    [isDateEnabledProp],
+    (date: DateTime) => !isDateEnabled(new Date(date?.toJSDate())) || false,
+    [isDateEnabled],
   );
 
   const shouldDisableMonth = useCallback(
-    (date: DateTime) =>
-      !isMonthEnabledProp?.(new Date(date?.toJSDate())) || false,
-    [isMonthEnabledProp],
+    (date: DateTime) => !isMonthEnabled(new Date(date?.toJSDate())) || false,
+    [isMonthEnabled],
   );
 
   const shouldDisableYear = useCallback(
-    (date: DateTime) =>
-      !isYearEnabledProp?.(new Date(date?.toJSDate())) || false,
-    [isYearEnabledProp],
+    (date: DateTime) => !isYearEnabled(new Date(date?.toJSDate())) || false,
+    [isYearEnabled],
   );
 
   const renderDateField = useCallback(
@@ -232,8 +241,44 @@ const DatePicker = ({
       isDisabled,
       label,
       onInputChange,
+      t,
       toggleCalendarVisibility,
     ],
+  );
+
+  const resetIsOpen = useCallback(() => {
+    setIsOpen(false);
+  }, []);
+
+  const slots = useMemo<DatePickerSlots<DateTime>>(
+    () => ({
+      actionBar: MemoizedActionBar,
+      field: (muiProps) => renderDateField(muiProps),
+      leftArrowIcon: () => <ArrowLeftIcon />,
+      rightArrowIcon: () => <ArrowRightIcon />,
+      switchViewIcon: () => <ChevronDownIcon />,
+    }),
+    [renderDateField],
+  );
+
+  const slotProps = useMemo<DatePickerSlotProps<DateTime, false>>(
+    () => ({
+      actionBar: ({ wrapperVariant, onAccept, onCancel }) => ({
+        actions:
+          // This is the default behavior but felt more clear to pass them in explicitly
+          wrapperVariant === "desktop" ? [] : ["accept", "cancel"],
+        onAccept,
+        onCancel,
+      }),
+      popper: {
+        anchorEl: popperElement,
+      },
+
+      toolbar: {
+        toolbarPlaceholder: "",
+      },
+    }),
+    [popperElement],
   );
 
   return (
@@ -259,35 +304,13 @@ const DatePicker = ({
               minDate={minDate ? formatDateToDateTime(minDate) : undefined}
               maxDate={maxDate ? formatDateToDateTime(maxDate) : undefined}
               onChange={formatDateTimeToJsDateOnCalendarSelection}
-              onClose={() => setIsOpen(false)}
+              onClose={resetIsOpen}
               open={isOpen}
               shouldDisableDate={shouldDisableDate}
               shouldDisableMonth={shouldDisableMonth}
               shouldDisableYear={shouldDisableYear}
-              slots={{
-                actionBar: ActionBar,
-                field: (muiProps) =>
-                  renderDateField(muiProps as RenderDateFieldProps),
-                leftArrowIcon: () => <ArrowLeftIcon />,
-                rightArrowIcon: () => <ArrowRightIcon />,
-                switchViewIcon: () => <ChevronDownIcon />,
-              }}
-              slotProps={{
-                actionBar: ({ wrapperVariant, onAccept, onCancel }) => ({
-                  actions:
-                    // This is the default behavior but felt more clear to pass them in explicitly
-                    wrapperVariant === "desktop" ? [] : ["accept", "cancel"],
-                  onAccept,
-                  onCancel,
-                }),
-                popper: {
-                  anchorEl: containerRef.current,
-                },
-
-                toolbar: {
-                  toolbarPlaceholder: "",
-                },
-              }}
+              slots={slots}
+              slotProps={slotProps}
               value={valueProp ? formatDateToDateTime(valueProp) : undefined}
             />
           </DatePickerWidthContainer>

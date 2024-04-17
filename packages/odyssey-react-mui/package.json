@@ -69,7 +69,7 @@
     "@mui/material": "^5.15.12",
     "@mui/system": "^5.15.9",
     "@mui/utils": "^5.15.9",
-    "@mui/x-date-pickers": "^7.1.1",
+    "@mui/x-date-pickers": "^7.2.0",
     "@okta/odyssey-design-tokens": "workspace:^",
     "@types/luxon": "^3.4.2",
     "date-fns": "^2.30.0",
