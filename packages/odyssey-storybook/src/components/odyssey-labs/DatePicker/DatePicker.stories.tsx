@@ -23,17 +23,9 @@ import {
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-const StorybookDatePicker = (props: DatePickerProps) => {
-  return (
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <DatePicker {...props} />
-    </LocalizationProvider>
-  );
-};
-
 const storybookMeta: Meta<DatePickerProps> = {
   title: "Labs Components/DatePicker",
-  component: StorybookDatePicker,
+  component: DatePicker,
   argTypes: {
     label: {
       control: "text",
