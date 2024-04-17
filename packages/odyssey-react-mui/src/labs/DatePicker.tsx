@@ -61,8 +61,7 @@ const DatePickerContainer = styled.div({
 
 const DatePickerWidthContainer = styled.div({
   ".MuiInput-root": {
-    // 176px
-    width: "12.58rem",
+    width: `${176 / 14}rem`,
   },
 });
 

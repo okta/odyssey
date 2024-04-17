@@ -147,11 +147,11 @@ export const datePickerTheme: ThemeOptions = {
           display: "block",
         },
         contentWrapper: ({ theme }) => ({
-          // 2x the width of the input
-          width: "25.16rem",
+          width: `${352 / 14}rem`,
           paddingInline: theme.spacing(3),
 
           "@media (pointer: fine)": {
+            width: `${352 / 14}rem`,
             borderColor: theme.palette.divider,
             borderStyle: theme.mixins.borderStyle,
             borderWidth: theme.mixins.borderWidth,
@@ -292,7 +292,6 @@ export const datePickerTheme: ThemeOptions = {
             }),
             "&.Mui-selected:hover": dateStyles.hoverSelected({ theme }),
 
-            "@media (pointer: fine)": {},
             "&.Mui-disabled": dateStyles.disabled({ theme }),
           },
         ],
