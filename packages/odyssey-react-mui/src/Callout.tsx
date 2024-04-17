@@ -20,8 +20,8 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext";
-import { ScreenReaderText } from "./ScreenReaderText";
 import { Paragraph } from "./Typography";
+import { useUniqueId } from "./useUniqueId";
 
 export const calloutRoleValues = ["status", "alert"] as const;
 export const calloutSeverityValues = [
@@ -105,13 +105,22 @@ const Callout = ({
 }: CalloutProps) => {
   const { t } = useTranslation();
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const titleId = useUniqueId();
+  // const contentId = useUniqueId();
 
   return (
-    <Alert data-se={testId} role={role} severity={severity} variant="callout">
-      <ScreenReaderText translate={translate}>
-        {t(`severity.${severity}`)}
-      </ScreenReaderText>
-      {title && <AlertTitle translate={translate}>{title}</AlertTitle>}
+    <Alert
+      aria-label={`${t(`severity.${severity}`)} ${title}`}
+      data-se={testId}
+      role={role}
+      severity={severity}
+      variant="callout"
+    >
+      {title && (
+        <AlertTitle aria-hidden id={titleId} translate={translate}>
+          {title}
+        </AlertTitle>
+      )}
       <ContentContainer odysseyDesignTokens={odysseyDesignTokens}>
         {children && <Box component="div">{children}</Box>}
         {text && <Paragraph>{text}</Paragraph>}
@@ -130,4 +139,37 @@ const Callout = ({
 const MemoizedCallout = memo(Callout);
 MemoizedCallout.displayName = "Callout";
 
-export { MemoizedCallout as Callout };
+export { MemoizedCallout as Callout, CalloutTestSelectors };
+
+const CalloutTestSelectors = {
+  selector: {
+    method: "ByRole",
+    role: "${role}",
+    options: {
+      name: "${severity} ${title}",
+    },
+  },
+  features: {
+    title: {
+      selector: {
+        method: "ByText",
+        text: "${title}",
+      },
+    },
+    text: {
+      selector: {
+        method: "ByText",
+        text: "${text}",
+      },
+    },
+    link: {
+      selector: {
+        method: "ByRole",
+        role: "link",
+        options: {
+          name: "${linkText}",
+        },
+      },
+    },
+  },
+};

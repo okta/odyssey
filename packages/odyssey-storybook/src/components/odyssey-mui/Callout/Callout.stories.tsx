@@ -114,9 +114,12 @@ export default storybookMeta;
 
 export const Info: StoryObj<CalloutProps> = {
   args: {
+    role: "status",
     severity: "info",
     title: "Authentication status",
     text: "You're signed in from Moonbase Alpha-6, located on Luna.",
+    linkText: "hey",
+    linkUrl: "/whatever",
   },
 };
 

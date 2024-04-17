@@ -234,4 +234,25 @@ const Tabs = ({
 const MemoizedTabs = memo(Tabs);
 MemoizedTabs.displayName = "Tabs";
 
-export { MemoizedTabs as Tabs };
+export { MemoizedTabs as Tabs, TabsTestSelectors };
+
+const TabsTestSelectors = {
+  selector: {
+    method: "ByRole",
+    role: "tablist",
+    options: {
+      name: "${ariaLabel}",
+    },
+  },
+  features: {
+    tabItem: {
+      selector: {
+        method: "ByRole",
+        role: "tab",
+        options: {
+          name: "${label}",
+        },
+      },
+    },
+  },
+};
