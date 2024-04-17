@@ -13,12 +13,7 @@
 import { useMemo, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import {
-  AdapterDateFns,
-  DatePicker,
-  DatePickerProps,
-  LocalizationProvider,
-} from "@okta/odyssey-react-mui/labs";
+import { DatePicker, DatePickerProps } from "@okta/odyssey-react-mui/labs";
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -96,10 +91,6 @@ export const Controlled: StoryObj<DatePickerProps> = {
       [props, value],
     );
 
-    return (
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <DatePicker {...datePickerProps} />
-      </LocalizationProvider>
-    );
+    return <DatePicker {...datePickerProps} />;
   },
 };
