@@ -316,7 +316,7 @@ export const datePickerTheme: ThemeOptions = {
         root: ({ theme }) => ({
           display: "block",
           width: "auto",
-          maxHeight: `${(284 / 16) * (16 / 14)}rem`,
+          maxHeight: `${284 / 14}rem`,
           marginBottom: `-${theme.spacing(popupSpacingValue)}`,
           marginInlineEnd: 0,
           paddingInline: 0,
