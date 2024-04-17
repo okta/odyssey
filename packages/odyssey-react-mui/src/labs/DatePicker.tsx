@@ -102,6 +102,10 @@ const ActionBar = ({ actions, onAccept, onCancel }: PickersActionBarProps) => {
 const MemoizedActionBar = memo(ActionBar);
 MemoizedActionBar.displayName = "ActionBar";
 
+const formatDateToDateTime = (date: Date) => DateTime.fromJSDate(date);
+
+const formatDayOfWeek = (date: DateTime) => date.toFormat("EEE");
+
 type RenderDateFieldProps = {
   defaultValue: DateFieldProps["defaultValue"];
   value: DateFieldProps["value"];
@@ -185,10 +189,6 @@ const DatePicker = ({
   const onInputChange = useCallback<
     (event: ChangeEvent<HTMLInputElement>) => void
   >((event) => onInputChangeProp?.(event), [onInputChangeProp]);
-
-  const formatDateToDateTime = (date: Date) => DateTime.fromJSDate(date);
-
-  const formatDayOfWeek = (date: DateTime) => date.toFormat("EEE");
 
   const toggleCalendarVisibility = useCallback(
     () => setIsOpen(!isOpen),
@@ -290,7 +290,7 @@ const DatePicker = ({
         <DatePickerContainer>
           <DatePickerWidthContainer ref={containerRef}>
             <MuiDatePicker
-              dayOfWeekFormatter={(date) => formatDayOfWeek(date)}
+              dayOfWeekFormatter={formatDayOfWeek}
               defaultValue={
                 defaultValueProp
                   ? formatDateToDateTime(defaultValueProp)
