@@ -90,7 +90,7 @@
     "@okta/odyssey-svgr": "workspace:*",
     "@okta/odyssey-typescript": "workspace:*",
     "@svgr/cli": "^7.0.0",
-    "@testing-library/dom": "^7.28.1",
+    "@testing-library/dom": "^10.0.0",
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/react-hooks": "^7.0.2",

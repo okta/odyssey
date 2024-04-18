@@ -52,6 +52,7 @@ export type {
   ThemeOptions,
 } from "@mui/material";
 
+export { odysseyTranslate } from "./i18n";
 export type { FocusHandle } from "./inputUtils";
 export { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
 
@@ -84,7 +85,6 @@ export * from "./MenuItem";
 export * from "./NativeSelect";
 export * from "./NullElement";
 export * from "./OdysseyCacheProvider";
-export { odysseyTranslate } from "./i18n";
 export * from "./OdysseyProvider";
 export * from "./OdysseyThemeProvider";
 export * from "./OdysseyTranslationProvider";
@@ -94,6 +94,7 @@ export * from "./RadioGroup";
 export * from "./ScreenReaderText";
 export * from "./SearchField";
 export * from "./Select";
+export * from "./selectComponent";
 export * from "./Status";
 export * from "./Tabs";
 export * from "./Tag";

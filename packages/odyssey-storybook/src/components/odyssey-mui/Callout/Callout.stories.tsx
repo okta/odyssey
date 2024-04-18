@@ -10,14 +10,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, StoryObj } from "@storybook/react";
 import {
   Callout,
   CalloutProps,
   calloutRoleValues,
   calloutSeverityValues,
+  selectComponent,
 } from "@okta/odyssey-react-mui";
+import { expect } from "@storybook/jest";
+import { Meta, StoryObj } from "@storybook/react";
+import { within } from "@storybook/testing-library";
+
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { PlaywrightProps } from "../storybookTypes";
 
 const storybookMeta: Meta<CalloutProps> = {
   title: "MUI Components/Callout",
@@ -197,5 +202,26 @@ export const TitleWithLink: StoryObj<CalloutProps> = {
     text: undefined,
     linkText: "Visit fueling console",
     linkUrl: "#",
+  },
+  play: async ({
+    args,
+    canvasElement,
+    step,
+  }: {
+    args: CalloutProps;
+    canvasElement: HTMLElement;
+    step: PlaywrightProps<CalloutProps>["step"];
+  }) => {
+    args; // TEMP. REMOVE THIS
+
+    await step("has visible link", async () => {
+      const element = selectComponent({
+        name: "Callout",
+        featureName: "link",
+        // label: "Visit fueling console",
+      })(within(canvasElement));
+
+      expect(element).toBeVisible();
+    });
   },
 };
