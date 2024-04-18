@@ -164,7 +164,9 @@ const DatePicker = ({
   const { language } = i18n;
 
   const invalidLocales = ["ok_PL", "ok_SK"];
-  const isInvalidLocale = invalidLocales.includes(language);
+  // In the Applitools env the language code is `en-us@posix`. Need to check for that
+  const isInvalidLocale =
+    invalidLocales.includes(language) || language.includes("@");
 
   const containerRef = useRef<HTMLInputElement>(null);
 
@@ -280,11 +282,15 @@ const DatePicker = ({
     [popperElement],
   );
 
+  const defaultedLanguageCode = isInvalidLocale
+    ? "en-US"
+    : language.replaceAll("_", "-");
+
   return (
     <OdysseyThemeProvider themeOverride={datePickerTheme}>
       <LocalizationProvider
         dateAdapter={AdapterLuxon}
-        adapterLocale={isInvalidLocale ? "en" : language.replaceAll("_", "-")}
+        adapterLocale={defaultedLanguageCode}
         localeText={localeText}
       >
         <DatePickerContainer>
