@@ -11,84 +11,97 @@
  */
 
 // import { queries, type BoundFunctions, type ByRoleOptions, type GetByRole, type GetByText, type Screen, within } from "@testing-library/dom" // TEMP: REMOVE THIS IF NOT NEEDED!
-import { AriaRole } from "react";
+// import { AriaRole } from "react";
 
-// import { testSelectors as calloutTestSelectors } from "./Callout"
-// import { testSelectors as toastTestSelectors } from "./Toast"
+// // import { testSelectors as calloutTestSelectors } from "./Callout"
+// // import { testSelectors as toastTestSelectors } from "./Toast"
 
-export type FeatureTestSelector = {
-  feature?: Record<string, FeatureTestSelector>;
-  selector?:
-    | {
-        // element: keyof HTMLElementTagNameMap
-        queryName: "ByRole";
-        role: AriaRole;
-      }
-    | {
-        // element: keyof HTMLElementTagNameMap
-        queryName: "ByLabelText" | "ByPlaceholderText" | "ByText";
-      };
-};
+// export type FeatureTestSelector = {
+//   feature?: Record<string, FeatureTestSelector>;
+//   selector?:
+//     | {
+//         // element: keyof HTMLElementTagNameMap
+//         method: "ByRole";
+//         role: AriaRole;
+//         options?: (
+//           Record<
+//             string,
+//             string
+//           >
+//         )
+//       }
+//     | {
+//         // element: keyof HTMLElementTagNameMap
+//         method: "ByLabelText" | "ByPlaceholderText" | "ByText";
+//         options: (
+//           Record<
+//             string,
+//             string
+//           >
+//         )
+//         text: string
+//       };
+// };
 
-const calloutTestSelector = {
-  feature: {
-    content: {
-      selector: {
-        // element: "div",
-        queryName: "ByText",
-      },
-    },
-    link: {
-      selector: {
-        // element: "a",
-        queryName: "ByRole",
-        role: "link",
-      },
-    },
-    title: {
-      selector: {
-        // element: "div",
-        queryName: "ByLabelText",
-      },
-    },
-  },
-  selector: {
-    // element: "div",
-    queryName: "ByRole",
-    role: "alert",
-  },
-} as const satisfies FeatureTestSelector;
+// const calloutTestSelector = {
+//   feature: {
+//     content: {
+//       selector: {
+//         // element: "div",
+//         method: "ByText",
+//       },
+//     },
+//     link: {
+//       selector: {
+//         // element: "a",
+//         method: "ByRole",
+//         role: "link",
+//       },
+//     },
+//     title: {
+//       selector: {
+//         // element: "div",
+//         method: "ByLabelText",
+//       },
+//     },
+//   },
+//   selector: {
+//     // element: "div",
+//     method: "ByRole",
+//     role: "alert",
+//   },
+// } as const satisfies FeatureTestSelector;
 
-const toastTestSelectors = {
-  feature: {
-    content: {
-      selector: {
-        // element: "div",
-        queryName: "ByText",
-      },
-    },
-    link: {
-      selector: {
-        // element: "a",
-        queryName: "ByRole",
-        role: "link",
-      },
-    },
-    title: {
-      selector: {
-        // element: "div",
-        queryName: "ByLabelText",
-      },
-    },
-  },
-  selector: {
-    // element: "div",
-    queryName: "ByRole",
-    role: "alert",
-  },
-} as const satisfies FeatureTestSelector;
+// const toastTestSelectors = {
+//   feature: {
+//     content: {
+//       selector: {
+//         // element: "div",
+//         method: "ByText",
+//       },
+//     },
+//     link: {
+//       selector: {
+//         // element: "a",
+//         method: "ByRole",
+//         role: "link",
+//       },
+//     },
+//     title: {
+//       selector: {
+//         // element: "div",
+//         method: "ByLabelText",
+//       },
+//     },
+//   },
+//   selector: {
+//     // element: "div",
+//     method: "ByRole",
+//     role: "alert",
+//   },
+// } as const satisfies FeatureTestSelector;
 
-export const testSelector = {
-  Callout: calloutTestSelector,
-  Toast: toastTestSelectors,
-} as const satisfies Record<string, FeatureTestSelector>;
+// export const testSelector = {
+//   Callout: calloutTestSelector,
+//   Toast: toastTestSelectors,
+// } as const satisfies Record<string, FeatureTestSelector>;

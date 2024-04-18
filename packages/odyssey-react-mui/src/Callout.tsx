@@ -22,6 +22,40 @@ import {
 } from "./OdysseyDesignTokensContext";
 import { Paragraph } from "./Typography";
 import { useUniqueId } from "./useUniqueId";
+// import { FeatureTestSelector } from "./testingSelectors";
+
+// export const CalloutTestSelectors = {
+//   selector: {
+//     method: "ByRole",
+//     role: "${role}",
+//     options: {
+//       name: "${severity} ${title}",
+//     },
+//   },
+//   feature: {
+//     title: {
+//       selector: {
+//         method: "ByText",
+//         text: "${title}",
+//       },
+//     },
+//     text: {
+//       selector: {
+//         method: "ByText",
+//         text: "${text}",
+//       },
+//     },
+//     link: {
+//       selector: {
+//         method: "ByRole",
+//         role: "link",
+//         options: {
+//           name: "${linkText}",
+//         },
+//       },
+//     },
+//   },
+// } as const satisfies FeatureTestSelector;
 
 export const calloutRoleValues = ["status", "alert"] as const;
 export const calloutSeverityValues = [
@@ -109,7 +143,8 @@ const Callout = ({
 
   return (
     <Alert
-      aria-label={`${t(`severity.${severity}`)} ${title}`}
+      aria-label={t(`severity.${severity}`)}
+      aria-labelledby={titleId}
       data-se={testId}
       role={role}
       severity={severity}
@@ -120,6 +155,7 @@ const Callout = ({
           {title}
         </AlertTitle>
       )}
+
       <ContentContainer odysseyDesignTokens={odysseyDesignTokens}>
         {children && <Box component="div">{children}</Box>}
         {text && <Paragraph>{text}</Paragraph>}
@@ -138,37 +174,4 @@ const Callout = ({
 const MemoizedCallout = memo(Callout);
 MemoizedCallout.displayName = "Callout";
 
-export { MemoizedCallout as Callout, CalloutTestSelectors };
-
-const CalloutTestSelectors = {
-  selector: {
-    method: "ByRole",
-    role: "${role}",
-    options: {
-      name: "${severity} ${title}",
-    },
-  },
-  features: {
-    title: {
-      selector: {
-        method: "ByText",
-        text: "${title}",
-      },
-    },
-    text: {
-      selector: {
-        method: "ByText",
-        text: "${text}",
-      },
-    },
-    link: {
-      selector: {
-        method: "ByRole",
-        role: "link",
-        options: {
-          name: "${linkText}",
-        },
-      },
-    },
-  },
-};
+export { MemoizedCallout as Callout };

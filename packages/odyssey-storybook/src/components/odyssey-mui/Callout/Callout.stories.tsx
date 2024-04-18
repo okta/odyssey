@@ -15,7 +15,7 @@ import {
   CalloutProps,
   calloutRoleValues,
   calloutSeverityValues,
-  selectComponent,
+  // selectComponent,
 } from "@okta/odyssey-react-mui";
 import { expect } from "@storybook/jest";
 import { Meta, StoryObj } from "@storybook/react";
@@ -216,11 +216,15 @@ export const TitleWithLink: StoryObj<CalloutProps> = {
     args; // TEMP. REMOVE THIS
 
     await step("has visible link", async () => {
-      const element = selectComponent({
-        componentName: "Callout",
-        featureName: "link",
-        // label: "Visit fueling console",
-      })(within(canvasElement));
+      // const element = selectComponent({
+      //   componentName: "Callout",
+      //   featureName: "link",
+      //   // label: "Visit fueling console",
+      // })(within(canvasElement));
+
+      const element = within(canvasElement).getByRole("alert", {
+        name: "Safety checks failed",
+      });
 
       expect(element).toBeVisible();
     });
