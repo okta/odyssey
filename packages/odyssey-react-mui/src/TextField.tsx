@@ -30,6 +30,48 @@ import {
 import { Field } from "./Field";
 import { HtmlProps } from "./HtmlProps";
 import { FocusHandle, useInputValues, getControlState } from "./inputUtils";
+import { FeatureTestSelector } from "./testingSelectors";
+
+export const TextFieldTestSelectors = {
+  feature: {
+    description: {
+      selector: {
+        method: "ByText",
+        text: "${hint}",
+      },
+    },
+    errorMessage: {
+      selector: {
+        method: "ByText",
+        text: "${errorMessage}",
+      },
+    },
+    input: {
+      selector: {
+        method: "ByRole",
+        role: "textbox",
+        options: {
+          name: "${label}",
+        },
+      },
+    },
+    label: {
+      selector: {
+        method: "ByRole",
+        role: "LabelText",
+        options: {
+          name: "${label}",
+        },
+      },
+    },
+    link: {
+      selector: {
+        method: "ByRole",
+        role: "link",
+      },
+    },
+  },
+} as const satisfies FeatureTestSelector;
 
 export const textFieldTypeValues = [
   "email",
@@ -272,43 +314,4 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 const MemoizedTextField = memo(TextField);
 MemoizedTextField.displayName = "TextField";
 
-export { MemoizedTextField as TextField, TextFieldTestSelectors };
-
-const TextFieldTestSelectors = {
-  input: {
-    selector: {
-      method: "ByRole",
-      role: "textbox",
-      options: {
-        name: "${label}",
-      },
-    },
-  },
-  label: {
-    selector: {
-      method: "ByRole",
-      role: "LabelText",
-      options: {
-        name: "${label}",
-      },
-    },
-  },
-  description: {
-    selector: {
-      method: "ByText",
-      arg: "${hint}",
-    },
-  },
-  link: {
-    selector: {
-      method: "ByRole",
-      arg: "link",
-    },
-  },
-  errorMessage: {
-    selector: {
-      method: "ByText",
-      arg: "${errorMessage}",
-    },
-  },
-};
+export { MemoizedTextField as TextField };

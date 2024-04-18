@@ -10,9 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, ReactNode } from "react";
 import styled from "@emotion/styled";
 import { Alert, AlertTitle, Box, Link as MuiLink } from "@mui/material";
+import { memo, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
 import type { HtmlProps } from "./HtmlProps";
@@ -20,42 +20,42 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext";
+import { FeatureTestSelector } from "./testingSelectors";
 import { Paragraph } from "./Typography";
 import { useUniqueId } from "./useUniqueId";
-// import { FeatureTestSelector } from "./testingSelectors";
 
-// export const CalloutTestSelectors = {
-//   selector: {
-//     method: "ByRole",
-//     role: "${role}",
-//     options: {
-//       name: "${severity} ${title}",
-//     },
-//   },
-//   feature: {
-//     title: {
-//       selector: {
-//         method: "ByText",
-//         text: "${title}",
-//       },
-//     },
-//     text: {
-//       selector: {
-//         method: "ByText",
-//         text: "${text}",
-//       },
-//     },
-//     link: {
-//       selector: {
-//         method: "ByRole",
-//         role: "link",
-//         options: {
-//           name: "${linkText}",
-//         },
-//       },
-//     },
-//   },
-// } as const satisfies FeatureTestSelector;
+export const CalloutTestSelectors = {
+  feature: {
+    link: {
+      selector: {
+        method: "ByRole",
+        role: "link",
+        options: {
+          name: "${linkText}",
+        },
+      },
+    },
+    text: {
+      selector: {
+        method: "ByText",
+        text: "${text}",
+      },
+    },
+    title: {
+      selector: {
+        method: "ByText",
+        text: "${title}",
+      },
+    },
+  },
+  selector: {
+    method: "ByRole",
+    role: "${role}",
+    options: {
+      name: "${title}",
+    },
+  },
+} as const satisfies FeatureTestSelector;
 
 export const calloutRoleValues = ["status", "alert"] as const;
 export const calloutSeverityValues = [
@@ -90,12 +90,12 @@ export type CalloutProps = {
   title?: string;
 } & (
   | {
-      text: string;
       children?: never;
+      text: string;
     }
   | {
-      text?: never;
       children: ReactNode;
+      text?: never;
     }
 ) &
   (
