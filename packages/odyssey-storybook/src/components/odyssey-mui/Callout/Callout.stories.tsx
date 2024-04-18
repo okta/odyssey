@@ -217,7 +217,7 @@ export const TitleWithLink: StoryObj<CalloutProps> = {
 
     await step("has visible link", async () => {
       const element = selectComponent({
-        name: "Callout",
+        componentName: "Callout",
         featureName: "link",
         // label: "Visit fueling console",
       })(within(canvasElement));

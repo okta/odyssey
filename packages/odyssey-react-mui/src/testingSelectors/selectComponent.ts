@@ -10,94 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-// import { queries, type BoundFunctions, type ByRoleOptions, type GetByRole, type GetByText, type Screen, within } from "@testing-library/dom" // TEMP: REMOVE THIS IF NOT NEEDED!
 import {
   queries,
   within,
   type BoundFunctions,
   type ByRoleOptions,
+  type GetByText,
 } from "@testing-library/dom";
-import { AriaRole } from "react";
-
-// import { testSelectors as calloutTestSelectors } from "./Callout"
-// import { testSelectors as toastTestSelectors } from "./Toast"
-
-export type FeatureTestSelector = {
-  feature?: Record<string, FeatureTestSelector>;
-  selector?:
-    | {
-        // element: keyof HTMLElementTagNameMap
-        queryName: "ByRole";
-        role: AriaRole;
-      }
-    | {
-        // element: keyof HTMLElementTagNameMap
-        queryName: "ByLabelText" | "ByPlaceholderText" | "ByText";
-      };
-};
-
-const calloutTestSelector = {
-  feature: {
-    content: {
-      selector: {
-        // element: "div",
-        queryName: "ByText",
-      },
-    },
-    link: {
-      selector: {
-        // element: "a",
-        queryName: "ByRole",
-        role: "link",
-      },
-    },
-    title: {
-      selector: {
-        // element: "div",
-        queryName: "ByLabelText",
-      },
-    },
-  },
-  selector: {
-    // element: "div",
-    queryName: "ByRole",
-    role: "alert",
-  },
-} as const satisfies FeatureTestSelector;
-
-const toastTestSelectors = {
-  feature: {
-    content: {
-      selector: {
-        // element: "div",
-        queryName: "ByText",
-      },
-    },
-    link: {
-      selector: {
-        // element: "a",
-        queryName: "ByRole",
-        role: "link",
-      },
-    },
-    title: {
-      selector: {
-        // element: "div",
-        queryName: "ByLabelText",
-      },
-    },
-  },
-  selector: {
-    // element: "div",
-    queryName: "ByRole",
-    role: "alert",
-  },
-} as const satisfies FeatureTestSelector;
-
-export const testSelector = {
-  Callout: calloutTestSelector,
-  Toast: toastTestSelectors,
-} as const satisfies Record<string, FeatureTestSelector>;
+import { testSelector, type FeatureTestSelector } from "./testSelector";
 
 const querySelector = ({
   canvas,
@@ -105,12 +25,14 @@ const querySelector = ({
   label,
   selector,
   roleOverride,
+  text,
 }: {
   canvas: BoundFunctions<typeof queries>;
   description?: ByRoleOptions["description"];
   label?: ByRoleOptions["name"];
   selector: NonNullable<FeatureTestSelector["selector"]>;
   roleOverride?: string;
+  text?: Parameters<GetByText>[1];
 }) => {
   if (selector.queryName === "ByRole") {
     return canvas.getByRole(
@@ -124,17 +46,17 @@ const querySelector = ({
   } else if (selector.queryName === "ByLabelText") {
     return canvas.getByLabelText(
       // These should eventually reference `query` as the function identifier.
-      label!, // Use TypeScript `Infer` to ensure `label` is required when it's `ByLabelText`.
+      text, // Use TypeScript `Infer` to ensure `label` is required when it's `ByLabelText`.
     );
   } else if (selector.queryName === "ByPlaceholderText") {
-    return canvas.getByText(
+    return canvas.getByPlaceholderText(
       // These should eventually reference `query` as the function identifier.
-      label!, // Use TypeScript `Infer` to ensure `label` is required when it's `ByLabelText`.
+      text, // Use TypeScript `Infer` to ensure `label` is required when it's `ByLabelText`.
     );
   } else if (selector.queryName === "ByText") {
     return canvas.getByText(
       // These should eventually reference `query` as the function identifier.
-      description!, // Use TypeScript `Infer` to ensure `description` is required when it's `ByLabelText`.
+      text, // Use TypeScript `Infer` to ensure `description` is required when it's `ByLabelText`.
     );
   }
 
@@ -142,29 +64,40 @@ const querySelector = ({
 };
 
 export const selectComponent =
-  <Name extends keyof typeof testSelector>({
+  <ComponentName extends keyof typeof testSelector>({
     description,
     featureName,
     label,
-    // method,
-    name,
     roleOverride,
+    text,
   }: {
+    /**
+     * ARIA accessible description for the element. Not everything has a description.
+     */
     description?: ByRoleOptions["description"];
-    featureName?: keyof (typeof testSelector)[Name]["feature"];
+    featureName?: keyof (typeof testSelector)[ComponentName]["feature"];
+    /**
+     * ARIA accessible label for the element.
+     */
     label?: ByRoleOptions["name"];
-    // method: keyof BoundFunctions<typeof queries>,
-    name: Name;
+    /**
+     * Name of the component you want to select within.
+     */
+    componentName: ComponentName;
     /**
      * For when you pass a custom `role` to a component and need to override the Odyssey built-in role.
      */
     roleOverride?: string;
+    /**
+     * Useful when passing text to `getByText`, `getByLabelText`, and similar.
+     */
+    text: Parameters<GetByText>[1];
   }) =>
   (
     canvas: BoundFunctions<typeof queries>,
     // Screen<typeof queries>
   ) => {
-    const rootTestSelector = testSelector[name];
+    const rootTestSelector = testSelector[componentName];
 
     const secondaryTestSelector = featureName
       ? rootTestSelector?.feature[
@@ -195,11 +128,12 @@ export const selectComponent =
 
     if (rootTestSelector.selector) {
       const rootElement = querySelector({
-        canvas: canvas,
+        canvas,
         description,
         label,
         selector: rootTestSelector.selector,
         roleOverride,
+        text,
       });
 
       if (rootElement && secondaryTestSelector) {
@@ -209,6 +143,7 @@ export const selectComponent =
           label,
           selector: secondaryTestSelector.selector,
           roleOverride,
+          text,
         });
       }
 
@@ -217,11 +152,12 @@ export const selectComponent =
 
     if (secondaryTestSelector) {
       return querySelector({
-        canvas: canvas,
+        canvas,
         description,
         label,
         selector: secondaryTestSelector.selector,
         roleOverride,
+        text,
       });
     }
 

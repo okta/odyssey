@@ -94,7 +94,6 @@ export * from "./RadioGroup";
 export * from "./ScreenReaderText";
 export * from "./SearchField";
 export * from "./Select";
-export * from "./selectComponent";
 export * from "./Status";
 export * from "./Tabs";
 export * from "./Tag";
