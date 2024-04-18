@@ -106,7 +106,6 @@ const Callout = ({
   const { t } = useTranslation();
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const titleId = useUniqueId();
-  // const contentId = useUniqueId();
 
   return (
     <Alert

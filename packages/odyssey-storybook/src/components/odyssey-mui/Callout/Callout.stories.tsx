@@ -123,8 +123,6 @@ export const Info: StoryObj<CalloutProps> = {
     severity: "info",
     title: "Authentication status",
     text: "You're signed in from Moonbase Alpha-6, located on Luna.",
-    linkText: "hey",
-    linkUrl: "/whatever",
   },
 };
 

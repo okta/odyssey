@@ -195,7 +195,6 @@ export const Default: StoryObj<typeof TextField> = {
     await step("Textfield callback", async () => {
       const canvas = within(canvasElement);
       const textbox = canvas.getByRole("textbox");
-      console.log({ textbox });
       await userEvent.click(textbox);
       await expect(args.onFocus).toHaveBeenCalledTimes(1);
       await userEvent.type(textbox, "Earth");
@@ -247,19 +246,6 @@ export const Error: StoryObj<typeof TextField> = {
     errorMessage: "This field is required.",
     defaultValue: "",
   },
-  play: async ({ args, canvasElement, step }) => {
-    await step("Textfield callback", async () => {
-      const canvas = within(canvasElement);
-      const textbox = canvas.getByRole("textbox");
-      await userEvent.click(textbox);
-      await expect(args.onFocus).toHaveBeenCalledTimes(1);
-      await userEvent.type(textbox, "Earth");
-      await expect(args.onChange).toHaveBeenCalledTimes(5);
-      await userEvent.clear(textbox);
-      await userEvent.tab();
-      await expect(args.onBlur).toHaveBeenCalledTimes(1);
-    });
-  },
 };
 
 export const ErrorsList: StoryObj<typeof TextField> = {
@@ -280,19 +266,6 @@ export const Hint: StoryObj<typeof TextField> = {
   args: {
     hint: "Specify your destination within the Sol system.",
     defaultValue: "",
-  },
-  play: async ({ args, canvasElement, step }) => {
-    await step("Textfield callback", async () => {
-      const canvas = within(canvasElement);
-      const textbox = canvas.getByRole("textbox");
-      await userEvent.click(textbox);
-      await expect(args.onFocus).toHaveBeenCalledTimes(1);
-      await userEvent.type(textbox, "Earth");
-      await expect(args.onChange).toHaveBeenCalledTimes(5);
-      await userEvent.clear(textbox);
-      await userEvent.tab();
-      await expect(args.onBlur).toHaveBeenCalledTimes(1);
-    });
   },
 };
 
