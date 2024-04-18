@@ -272,4 +272,43 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 const MemoizedTextField = memo(TextField);
 MemoizedTextField.displayName = "TextField";
 
-export { MemoizedTextField as TextField };
+export { MemoizedTextField as TextField, TextFieldTestSelectors };
+
+const TextFieldTestSelectors = {
+  input: {
+    selector: {
+      method: "ByRole",
+      role: "textbox",
+      options: {
+        name: "${label}",
+      },
+    },
+  },
+  label: {
+    selector: {
+      method: "ByRole",
+      role: "LabelText",
+      options: {
+        name: "${label}",
+      },
+    },
+  },
+  description: {
+    selector: {
+      method: "ByText",
+      arg: "${hint}",
+    },
+  },
+  link: {
+    selector: {
+      method: "ByRole",
+      arg: "link",
+    },
+  },
+  errorMessage: {
+    selector: {
+      method: "ByText",
+      arg: "${errorMessage}",
+    },
+  },
+};
