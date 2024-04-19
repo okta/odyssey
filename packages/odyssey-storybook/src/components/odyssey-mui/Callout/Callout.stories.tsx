@@ -205,16 +205,12 @@ export const TitleWithLink: StoryObj<CalloutProps> = {
     linkUrl: "#",
   },
   play: async ({
-    args,
     canvasElement,
     step,
   }: {
-    args: CalloutProps;
     canvasElement: HTMLElement;
     step: PlaywrightProps<CalloutProps>["step"];
   }) => {
-    args; // TEMP. REMOVE THIS
-
     await step("has visible link", async () => {
       const element = queryOdysseySelector({
         canvas: within(canvasElement),

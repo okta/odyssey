@@ -29,10 +29,10 @@ export const CalloutTestSelectors = {
     link: {
       selector: {
         method: "ByRole",
-        role: "link",
         options: {
           name: "${linkText}",
         },
+        role: "link",
       },
     },
     text: {
@@ -50,10 +50,10 @@ export const CalloutTestSelectors = {
   },
   selector: {
     method: "ByRole",
-    role: "${role}",
     options: {
       name: "${title}",
     },
+    role: "${role}",
   },
 } as const satisfies FeatureTestSelector;
 
