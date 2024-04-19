@@ -267,11 +267,9 @@ const FileUpload = ({
     [
       acceptedFileTypes,
       errorMessage,
-      filesToUpload,
       isDisabled,
       inputRef,
       odysseyDesignTokens,
-      removeFileFromFilesToUploadList,
       triggerFileInputClick,
       t,
       type,
