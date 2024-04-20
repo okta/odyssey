@@ -219,7 +219,8 @@ export const TitleWithLink: StoryObj<CalloutProps> = {
           role: "alert",
           title: /Safety checks failed/,
         },
-      }).feature?.link({
+      }).select?.("link", {
+        // ^?
         linkText: "Visit fueling console",
       }).element;
 

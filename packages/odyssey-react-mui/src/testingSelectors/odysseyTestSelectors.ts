@@ -10,18 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { mkdir, rmdir, writeFile } from "node:fs/promises";
-import { join } from "node:path";
+import { CalloutTestSelectors } from "../Callout";
+import { type FeatureTestSelector } from "./featureTestSelector";
+import { TextFieldTestSelectors } from "../TextField";
 
-import("../src/testingSelectors/index").then(
-  ({ odysseyTestSelectors: testSelector }) =>
-    rmdir(join(__dirname, "../dist/testingSelectors"), { recursive: true })
-      .catch(() => null)
-      .then(() => mkdir(join(__dirname, "../dist/testingSelectors")))
-      .then(() =>
-        writeFile(
-          join(__dirname, "../dist/testingSelectors/testingSelectors.json"),
-          JSON.stringify(testSelector),
-        ),
-      ),
-);
+export const odysseyTestSelectors = {
+  Callout: CalloutTestSelectors,
+  TextField: TextFieldTestSelectors,
+} as const satisfies Record<string, FeatureTestSelector>;

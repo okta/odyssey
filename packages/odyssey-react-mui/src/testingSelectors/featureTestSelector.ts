@@ -14,30 +14,31 @@
 import { ByRoleOptions } from "@testing-library/dom";
 import { AriaRole } from "react";
 
-import { CalloutTestSelectors } from "../Callout";
-import { TextFieldTestSelectors } from "../TextField";
+export type Selector = {
+  options?: ByRoleOptions;
+  templateVariableNames: string[];
+} & (
+  | {
+      // element: keyof HTMLElementTagNameMap
+      method: "ByRole";
+      role: AriaRole;
+    }
+  | {
+      // element: keyof HTMLElementTagNameMap
+      method: "ByLabelText" | "ByPlaceholderText" | "ByText";
+      text: string;
+    }
+);
 
-// import { testSelectors as calloutTestSelectors } from "./Callout"
-// import { testSelectors as toastTestSelectors } from "./Toast"
-
-export type FeatureTestSelector = {
-  feature?: Record<string, FeatureTestSelector>;
-  selector?:
-    | {
-        // element: keyof HTMLElementTagNameMap
-        method: "ByRole";
-        role: AriaRole;
-        options?: ByRoleOptions;
-      }
-    | {
-        // element: keyof HTMLElementTagNameMap
-        method: "ByLabelText" | "ByPlaceholderText" | "ByText";
-        options?: Record<string, string>;
-        text: string;
-      };
+export type TestSelector = {
+  selector: Selector;
 };
 
-export const testSelectors = {
-  Callout: CalloutTestSelectors,
-  TextField: TextFieldTestSelectors,
-} as const satisfies Record<string, FeatureTestSelector>;
+export type FeatureSelector = {
+  feature: Record<string, FeatureTestSelector>;
+};
+
+export type FeatureTestSelector =
+  | TestSelector
+  | FeatureSelector
+  | (FeatureSelector & TestSelector);

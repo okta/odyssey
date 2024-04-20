@@ -37,36 +37,44 @@ export const TextFieldTestSelectors = {
     description: {
       selector: {
         method: "ByText",
+        templateVariableNames: ["hint"],
         text: "${hint}",
       },
     },
     errorMessage: {
       selector: {
         method: "ByText",
+        templateVariableNames: ["errorMessage"],
         text: "${errorMessage}",
       },
     },
     input: {
       selector: {
         method: "ByRole",
-        role: "textbox",
         options: {
           name: "${label}",
         },
+        role: "textbox",
+        templateVariableNames: ["label"],
       },
     },
     label: {
       selector: {
         method: "ByRole",
-        role: "LabelText",
         options: {
           name: "${label}",
         },
+        role: "LabelText",
+        templateVariableNames: ["label"],
       },
     },
     link: {
       selector: {
         method: "ByRole",
+        options: {
+          name: "${label}",
+        },
+        templateVariableNames: ["label"],
         role: "link",
       },
     },

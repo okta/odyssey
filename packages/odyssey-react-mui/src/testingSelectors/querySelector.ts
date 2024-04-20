@@ -18,7 +18,13 @@ import {
   type GetByText,
   GetByRole,
 } from "@testing-library/dom";
-import { testSelectors, type FeatureTestSelector } from "./testSelectors";
+
+import {
+  // type FeatureSelector,
+  type FeatureTestSelector,
+  type TestSelector,
+} from "./featureTestSelector";
+import { odysseyTestSelectors } from "./odysseyTestSelectors";
 
 export const interpolateString = (
   string: string,
@@ -86,189 +92,121 @@ const getByQuerySelector = ({
   return null;
 };
 
-export const querySelector = <TestSelector extends FeatureTestSelector>({
+export const querySelector = <TestSelectors extends FeatureTestSelector>({
   canvas,
   templateArgs,
-  testSelector,
+  testSelectors,
 }: {
   /**
    * Testing Library canvas. This is usually `screen`, but Storybook uses `within(canvas)`.
    */
   canvas: BoundFunctions<typeof queries>;
-  templateArgs: Record<string, string | RegExp>;
-  testSelector: TestSelector;
+  templateArgs?: TestSelectors extends TestSelector
+    ? Record<
+        TestSelectors["selector"]["templateVariableNames"][number],
+        string | RegExp
+      >
+    : never;
+  testSelectors: TestSelectors;
 }) => {
-  const element = testSelector.selector
-    ? getByQuerySelector({
-        canvas,
-        method: testSelector.selector.method,
-        options: Object.fromEntries(
-          Object.entries(testSelector.selector.options || {}).map(
-            ([key, value]) => [key, interpolateString(value, templateArgs)],
-          ),
-        ),
-        ...(testSelector.selector.method === "ByRole"
-          ? {
-              role: interpolateString(
-                testSelector.selector?.role,
-                templateArgs,
-              ) as string,
-            }
-          : {
-              text: interpolateString(
-                testSelector.selector?.text,
-                templateArgs,
-              ),
-            }),
-      })
-    : null;
-
-  // canvas
-  // [`get${
-  //   testSelector
-  //   .selector
-  //   .method as (
-  //     | "ByRole"
-  //     | "ByLabelText"
-  //     | "ByText"
-  //     | "ByPlaceholderText"
-  //   )
-  // }`](
-  //   interpolateString<
-  //     string
-  //   >(
-  //     (
-  //       testSelector
-  //       .selector
-  //       ?.role
-  //     )
-  //     ?? (
-  //       testSelector
-  //       .selector
-  //       ?.text
-  //     ),
-  //     templateArgs,
-  //   ),
-  //   (
-  //     testSelector
-  //     .options
-  //   ),
-  //   // satisfies ByRoleOptions
-  // )
-
-  if (testSelector.feature) {
-    return {
-      element,
-      feature: Object.fromEntries(
-        Object.keys(testSelector.feature).flatMap((featureName) =>
-          testSelector.feature?.[featureName]
-            ? [
-                [
-                  featureName,
-                  (templateArgs: Record<string, string | RegExp>) =>
-                    querySelector({
-                      canvas: element ? within(element) : canvas,
+// & (
+//   TestSelectors extends TestSelector ? {
+//     templateArgs: (
+//       Record<
+//         TestSelectors["selector"]["templateVariableNames"][number],
+//         string | RegExp
+//       >
+//     )
+//   } : {
+//     templateArgs?: never
+//   }
+// )
+  const element =
+    "selector" in testSelectors
+      ? getByQuerySelector({
+          canvas,
+          method: testSelectors.selector.method,
+          options:
+            templateArgs && testSelectors.selector.options
+              ? Object.fromEntries(
+                  Object.entries(testSelectors.selector.options).map(
+                    ([key, value]) => [
+                      key,
+                      interpolateString(value, templateArgs),
+                    ],
+                  ),
+                )
+              : testSelectors.selector.options,
+          ...(testSelectors.selector.method === "ByRole"
+            ? {
+                role: templateArgs
+                  ? (interpolateString(
+                      testSelectors.selector?.role,
                       templateArgs,
-                      testSelector: testSelector.feature?.[featureName] || {}, // This shouldn't need an `||`, but TS complains for no reason.
-                    }),
-                ],
-              ]
-            : [],
-        ),
-      ),
-    };
-  }
+                    ) as string)
+                  : testSelectors.selector?.role,
+              }
+            : {
+                text: templateArgs
+                  ? interpolateString(
+                      testSelectors.selector?.text,
+                      templateArgs,
+                    )
+                  : testSelectors.selector?.text,
+              }),
+        })
+      : null;
+
+  const select =
+    "feature" in testSelectors
+      ? <FeatureName extends keyof typeof testSelectors.feature>(
+          featureName: FeatureName,
+          templateArgs?: (typeof testSelectors.feature)[FeatureName] extends TestSelector
+            ? Record<
+                (typeof testSelectors.feature)[FeatureName]["selector"]["templateVariableNames"][number],
+                string | RegExp
+              >
+            : never,
+        ) => {
+          const feature = testSelectors.feature[featureName];
+
+          return querySelector({
+            canvas: element ? within(element) : canvas,
+            templateArgs,
+            testSelectors: feature,
+          });
+        }
+      : null;
 
   return {
     element,
+    select,
   };
 };
 
-//   const secondaryTestSelector = featureName
-//     ? testSelector?.feature[
-//         featureName as keyof typeof testSelector.feature
-//       ] // TypeScript doesn't understand what to do with `[featureName]`, so I went head and typed it separately.
-//     : null;
-
-//   if (testSelector.selector) {
-//     const rootElement = querySelector({
-//       canvas,
-//       description,
-//       label,
-//       selector: testSelector.selector,
-//       roleOverride,
-//       text,
-//     });
-
-//     if (rootElement && secondaryTestSelector) {
-//       return querySelector({
-//         canvas: within(rootElement),
-//         description,
-//         label,
-//         selector: secondaryTestSelector.selector,
-//         roleOverride,
-//         text,
-//       });
-//     }
-
-//     return rootElement;
-//   }
-
-//   if (secondaryTestSelector) {
-//     return querySelector({
-//       canvas,
-//       description,
-//       label,
-//       selector: secondaryTestSelector.selector,
-//       roleOverride,
-//       text,
-//     });
-//   }
-
-//   return null;
-// };
-
-// const element = (
-//   selectComponent({
-//     componentName: "Callout",
-//     // featureName: "link",
-//     label: "You've done something wrong",
-//   })
-// )
-
 export const queryOdysseySelector = <
-  ComponentName extends keyof typeof testSelectors,
+  ComponentName extends keyof typeof odysseyTestSelectors,
 >({
   canvas,
   componentName,
   templateArgs,
 }: {
-  canvas: Parameters<typeof querySelector>[0]["canvas"];
+  canvas: Parameters<
+    typeof querySelector<(typeof odysseyTestSelectors)[ComponentName]>
+  >[0]["canvas"];
   /**
    * Name of the component you want to select within.
    */
   componentName: ComponentName;
-  templateArgs: Parameters<typeof querySelector>[0]["templateArgs"];
+  /**
+   * String or RegExp values required for this selector.
+   */
+  templateArgs: Parameters<
+    typeof querySelector<(typeof odysseyTestSelectors)[ComponentName]>
+  >[0]["templateArgs"];
 }) =>
   querySelector({
     canvas,
     templateArgs,
-    testSelector: testSelectors[componentName],
+    testSelectors: odysseyTestSelectors[componentName],
   });
-
-// const element = (
-//   queryOdysseySelector({
-//     canvas: within(document.body),
-//     componentName: "Callout",
-//     templateArgs: {
-//       role: "alert",
-//       title: "You've done something wrong",
-//     }
-//   })
-//   .feature
-//   ?.link({
-//     linkText: "",
-//   })
-// )
-
-// element

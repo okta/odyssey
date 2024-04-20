@@ -30,6 +30,30 @@ import { Badge, BadgeProps } from "./Badge";
 import { Box } from "./Box";
 import { HtmlProps } from "./HtmlProps";
 import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
+import { FeatureTestSelector } from "./testingSelectors";
+
+const TabsTestSelectors = {
+  feature: {
+    tabItem: {
+      selector: {
+        method: "ByRole",
+        options: {
+          name: "${label}",
+        },
+        templateVariableNames: ["label"],
+        role: "tab",
+      },
+    },
+  },
+  selector: {
+    method: "ByRole",
+    options: {
+      name: "${ariaLabel}",
+    },
+    role: "tablist",
+    templateVariableNames: ["ariaLabel"],
+  },
+} as const satisfies FeatureTestSelector;
 
 export type TabItemProps = {
   /**
@@ -235,24 +259,3 @@ const MemoizedTabs = memo(Tabs);
 MemoizedTabs.displayName = "Tabs";
 
 export { MemoizedTabs as Tabs, TabsTestSelectors };
-
-const TabsTestSelectors = {
-  selector: {
-    method: "ByRole",
-    role: "tablist",
-    options: {
-      name: "${ariaLabel}",
-    },
-  },
-  features: {
-    tabItem: {
-      selector: {
-        method: "ByRole",
-        role: "tab",
-        options: {
-          name: "${label}",
-        },
-      },
-    },
-  },
-};
