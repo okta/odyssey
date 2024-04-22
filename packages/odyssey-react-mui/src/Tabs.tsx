@@ -32,7 +32,7 @@ import { HtmlProps } from "./HtmlProps";
 import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
 import { type FeatureTestSelector } from "./testingSelectors";
 
-const TabsTestSelectors = {
+export const TabsTestSelectors = {
   feature: {
     tabItem: {
       selector: {
@@ -258,4 +258,4 @@ const Tabs = ({
 const MemoizedTabs = memo(Tabs);
 MemoizedTabs.displayName = "Tabs";
 
-export { MemoizedTabs as Tabs, TabsTestSelectors };
+export { MemoizedTabs as Tabs };
