@@ -30,7 +30,7 @@ import {
 import { Field } from "./Field";
 import { HtmlProps } from "./HtmlProps";
 import { FocusHandle, useInputValues, getControlState } from "./inputUtils";
-import { FeatureTestSelector } from "./testingSelectors";
+import { type FeatureTestSelector } from "./testingSelectors";
 
 export const TextFieldTestSelectors = {
   feature: {
