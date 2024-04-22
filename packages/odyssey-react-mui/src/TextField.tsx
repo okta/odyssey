@@ -40,6 +40,15 @@ export const TextFieldTestSelectors = {
         templateVariableNames: ["hint"],
         text: "${hint}",
       },
+      feature: {
+        yo: {
+          selector: {
+            method: "ByText",
+            text: "${linkText}",
+            templateVariableNames: ["linkText"],
+          },
+        },
+      },
     },
     errorMessage: {
       selector: {

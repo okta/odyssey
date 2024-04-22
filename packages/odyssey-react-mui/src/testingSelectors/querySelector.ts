@@ -94,7 +94,7 @@ const getByQuerySelector = ({
 
 export const querySelector = <TestSelectors extends FeatureTestSelector>({
   canvas,
-  templateArgs,
+  templateArgs: templateArgsProp,
   testSelectors,
 }: {
   /**
@@ -109,48 +109,36 @@ export const querySelector = <TestSelectors extends FeatureTestSelector>({
     : never;
   testSelectors: TestSelectors;
 }) => {
-// & (
-//   TestSelectors extends TestSelector ? {
-//     templateArgs: (
-//       Record<
-//         TestSelectors["selector"]["templateVariableNames"][number],
-//         string | RegExp
-//       >
-//     )
-//   } : {
-//     templateArgs?: never
-//   }
-// )
   const element =
     "selector" in testSelectors
       ? getByQuerySelector({
           canvas,
           method: testSelectors.selector.method,
           options:
-            templateArgs && testSelectors.selector.options
+            templateArgsProp && testSelectors.selector.options
               ? Object.fromEntries(
                   Object.entries(testSelectors.selector.options).map(
                     ([key, value]) => [
                       key,
-                      interpolateString(value, templateArgs),
+                      interpolateString(value, templateArgsProp),
                     ],
                   ),
                 )
               : testSelectors.selector.options,
           ...(testSelectors.selector.method === "ByRole"
             ? {
-                role: templateArgs
+                role: templateArgsProp
                   ? (interpolateString(
                       testSelectors.selector?.role,
-                      templateArgs,
+                      templateArgsProp,
                     ) as string)
                   : testSelectors.selector?.role,
               }
             : {
-                text: templateArgs
+                text: templateArgsProp
                   ? interpolateString(
                       testSelectors.selector?.text,
-                      templateArgs,
+                      templateArgsProp,
                     )
                   : testSelectors.selector?.text,
               }),
@@ -159,23 +147,22 @@ export const querySelector = <TestSelectors extends FeatureTestSelector>({
 
   const select =
     "feature" in testSelectors
-      ? <FeatureName extends keyof typeof testSelectors.feature>(
+      ? <FeatureName extends keyof (typeof testSelectors)["feature"]>(
           featureName: FeatureName,
-          templateArgs?: (typeof testSelectors.feature)[FeatureName] extends TestSelector
+          templateArgs?: (typeof testSelectors)["feature"][FeatureName] extends TestSelector
             ? Record<
-                (typeof testSelectors.feature)[FeatureName]["selector"]["templateVariableNames"][number],
+                (typeof testSelectors)["feature"][FeatureName]["selector"]["templateVariableNames"][number],
                 string | RegExp
               >
             : never,
-        ) => {
-          const feature = testSelectors.feature[featureName];
-
-          return querySelector({
+        ) =>
+          querySelector({
             canvas: element ? within(element) : canvas,
             templateArgs,
-            testSelectors: feature,
-          });
-        }
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-expect-error: Type 'FeatureName' cannot be used to index type 'Record<string, FeatureTestSelector>'.ts(2536)
+            testSelectors: testSelectors.feature[featureName],
+          })
       : null;
 
   return {
@@ -201,7 +188,7 @@ export const queryOdysseySelector = <
   /**
    * String or RegExp values required for this selector.
    */
-  templateArgs: Parameters<
+  templateArgs?: Parameters<
     typeof querySelector<(typeof odysseyTestSelectors)[ComponentName]>
   >[0]["templateArgs"];
 }) =>
