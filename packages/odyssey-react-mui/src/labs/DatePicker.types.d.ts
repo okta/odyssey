@@ -12,13 +12,3 @@
 
 // This has to be imported separately for theme types, so it's been separated out to make that clear.
 import "@mui/x-date-pickers/themeAugmentation";
-
-import { PickersComponentNameToClassKey } from "@mui/x-date-pickers/themeAugmentation";
-
-declare module "@mui/material/styles" {
-  interface ComponentNameToClassKey extends PickersComponentNameToClassKey {
-    PrivatePickersYear:
-      | PickersComponentNameToClassKey["PrivatePickersYear"]
-      | "button";
-  }
-}
