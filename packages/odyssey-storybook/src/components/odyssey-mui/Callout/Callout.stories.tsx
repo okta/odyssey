@@ -223,19 +223,7 @@ export const TitleWithLink: StoryObj<CalloutProps> = {
         linkText: "Visit fueling console",
       }).element;
 
-      const element2 = queryOdysseySelector({
-        canvas: within(canvasElement),
-        componentName: "TextField",
-      })
-        .select?.("description", {
-          hint: "yo",
-        })
-        .select?.("yo", {
-          linkText: "",
-        }).element;
-
       expect(element).toBeVisible();
-      expect(element2).toBeVisible();
     });
   },
 };
