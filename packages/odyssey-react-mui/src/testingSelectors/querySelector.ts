@@ -65,26 +65,26 @@ const getByQuerySelector = ({
 }) => {
   if (method === "ByRole") {
     return canvas.getByRole(
-      // These should eventually reference `query` as the function identifier.
+      // TODO: These should eventually reference `query` as the function identifier.
       role!,
       options,
     );
   } else if (method === "ByLabelText") {
     return canvas.getByLabelText(
       // These should eventually reference `query` as the function identifier.
-      text!, // Use TypeScript `Infer` to ensure `label` is required when it's `ByLabelText`.
+      text!, // TODO: Use TypeScript `Infer` to ensure `label` is required when it's `ByLabelText`.
       options,
     );
   } else if (method === "ByPlaceholderText") {
     return canvas.getByPlaceholderText(
       // These should eventually reference `query` as the function identifier.
-      text!, // Use TypeScript `Infer` to ensure `label` is required when it's `ByLabelText`.
+      text!, // TODO: Use TypeScript `Infer` to ensure `label` is required when it's `ByLabelText`.
       options,
     );
   } else if (method === "ByText") {
     return canvas.getByText(
       // These should eventually reference `query` as the function identifier.
-      text!, // Use TypeScript `Infer` to ensure `description` is required when it's `ByLabelText`.
+      text!, // TODO: Use TypeScript `Infer` to ensure `description` is required when it's `ByLabelText`.
       options,
     );
   }
