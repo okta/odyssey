@@ -89,12 +89,6 @@ const Radio = ({
     return (
       <>
         <Typography component="span">{labelProp}</Typography>
-        <>
-          {" "}
-          <Typography component="span" color="textSecondary">
-            ({t("fieldlabel.required.text")})
-          </Typography>
-        </>
         {hint && <FormHelperText translate={translate}>{hint}</FormHelperText>}
       </>
     );
