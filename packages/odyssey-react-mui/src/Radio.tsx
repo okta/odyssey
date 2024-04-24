@@ -13,14 +13,17 @@
 import {
   FormControlLabel,
   FormControlLabelProps as MuiFormControlLabelProps,
+  FormHelperText,
   Radio as MuiRadio,
   RadioProps as MuiRadioProps,
 } from "@mui/material";
-import { memo, useCallback, useRef, useImperativeHandle } from "react";
+import { useTranslation } from "react-i18next";
+import { memo, useCallback, useMemo, useRef, useImperativeHandle } from "react";
 
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { HtmlProps } from "./HtmlProps";
 import { FocusHandle } from "./inputUtils";
+import { Typography } from "./Typography";
 
 export type RadioProps = {
   /**
@@ -51,15 +54,16 @@ export type RadioProps = {
    * Callback fired when the blur event happens. Provides event value.
    */
   onBlur?: MuiFormControlLabelProps["onBlur"];
-} & Pick<FieldComponentProps, "isDisabled" | "name"> &
+} & Pick<FieldComponentProps, "hint" | "id" | "isDisabled" | "name"> &
   Pick<HtmlProps, "testId" | "translate">;
 
 const Radio = ({
+  hint,
   inputRef,
   isChecked,
   isDisabled,
   isInvalid,
-  label,
+  label: labelProp,
   name,
   testId,
   translate,
@@ -67,6 +71,7 @@ const Radio = ({
   onChange: onChangeProp,
   onBlur: onBlurProp,
 }: RadioProps) => {
+  const { t } = useTranslation();
   const localInputRef = useRef<HTMLInputElement>(null);
   useImperativeHandle(
     inputRef,
@@ -80,6 +85,20 @@ const Radio = ({
     [],
   );
 
+  const label = useMemo(() => {
+    return (
+      <>
+        <Typography component="span">{labelProp}</Typography>
+        <>
+          {" "}
+          <Typography component="span" color="textSecondary">
+            ({t("fieldlabel.required.text")})
+          </Typography>
+        </>
+        {hint && <FormHelperText translate={translate}>{hint}</FormHelperText>}
+      </>
+    );
+  }, [labelProp, hint, t, translate]);
   const onChange = useCallback<NonNullable<MuiRadioProps["onChange"]>>(
     (event, checked) => {
       onChangeProp?.(event, checked);
