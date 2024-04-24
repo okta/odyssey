@@ -223,30 +223,3 @@ export const ControlledRadioGroup: StoryObj<typeof RadioGroup> = {
     });
   },
 };
-
-export const ControlledRadioGroupWithRadioHints: StoryObj<typeof RadioGroup> = {
-  parameters: {
-    docs: {
-      description: {
-        story: "A controlled Radio Group with Radio-level hints.",
-      },
-    },
-  },
-  args: {
-    value: "Ludicrous Speed",
-  },
-  render: function C(props) {
-    const [value, setValue] = useState("Ludicrous Speed");
-    const onChange = useCallback(
-      (_event: ChangeEvent<HTMLInputElement>, value: string) => setValue(value),
-      [],
-    );
-    return (
-      <RadioGroup {...{ ...props, value, onChange }}>
-        <Radio label="Snail Speed" value="Snail Speed" hint="Hint text" />
-        <Radio label="Turtle Speed" value="Turtle Speed" hint="Hint text" />
-        <Radio label="Rabbit Speed" value="Rabbit Speed" hint="Hint text" />
-      </RadioGroup>
-    );
-  },
-};
