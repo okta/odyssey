@@ -223,3 +223,46 @@ export const ControlledRadioGroup: StoryObj<typeof RadioGroup> = {
     });
   },
 };
+
+export const ControlledRadioGroupWithRadioHints: StoryObj<typeof RadioGroup> = {
+  parameters: {
+    docs: {
+      description: {
+        story: "A controlled Radio Group with Radio-level hints.",
+      },
+    },
+  },
+  args: {
+    value: "Ludicrous Speed",
+  },
+  render: function C(props) {
+    const [value, setValue] = useState("Ludicrous Speed");
+    const onChange = useCallback(
+      (_event: ChangeEvent<HTMLInputElement>, value: string) => setValue(value),
+      [],
+    );
+    return (
+      <RadioGroup {...{ ...props, value, onChange }}>
+        <Radio label="Light Speed" value="Light Speed" hint="Hint text" />
+        <Radio label="Warp Speed" value="Warp Speed" hint="Hint text" />
+        <Radio
+          label="Ludicrous Speed"
+          value="Ludicrous Speed"
+          hint="Hint text"
+        />
+      </RadioGroup>
+    );
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("select uncontrolled radio button", async () => {
+      const canvas = within(canvasElement);
+      const radiogroup = canvas.getByRole("radiogroup") as HTMLInputElement;
+      const radio = canvas.getByLabelText("Warp Speed") as HTMLInputElement;
+      if (radiogroup && radio) {
+        await userEvent.click(radio);
+      }
+      await expect(radio).toBeChecked();
+      await axeRun("select uncontrolled radio button");
+    });
+  },
+};
