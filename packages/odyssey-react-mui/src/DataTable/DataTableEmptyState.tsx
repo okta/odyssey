@@ -14,21 +14,28 @@ import { ReactNode, memo } from "react";
 import { Heading4, Paragraph } from "../Typography";
 import { Box } from "../Box";
 import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
 } from "../OdysseyDesignTokensContext";
 
+type EmptyContainerProps = {
+  odysseyDesignTokens: DesignTokens;
+};
+
 const EmptyContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
-  display: "flex",
-  flexDirection: "column",
-  marginBlock: odysseyDesignTokens.Spacing9,
-  padding: odysseyDesignTokens.Spacing5,
-  textAlign: "center",
-  width: "100%",
-}));
+})<EmptyContainerProps>(({ odysseyDesignTokens }) =>
+  css({
+    display: "flex",
+    flexDirection: "column",
+    marginBlock: odysseyDesignTokens.Spacing9,
+    padding: odysseyDesignTokens.Spacing5,
+    textAlign: "center",
+    width: "100%",
+  }),
+);
 
 export type DataTableEmptyStateProps = {
   heading: string;

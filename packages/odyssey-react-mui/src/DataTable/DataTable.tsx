@@ -59,6 +59,7 @@ import {
 } from "../OdysseyDesignTokensContext";
 import { useScrollIndication } from "./useScrollIndication";
 import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 import { DataTableEmptyState } from "./DataTableEmptyState";
 import { Callout } from "../Callout";
 import { t } from "i18next";
@@ -290,61 +291,60 @@ const displayColumnDefOptions = {
   },
 };
 
+type ScrollableTableContainerProps = {
+  odysseyDesignTokens: DesignTokens;
+  isScrollableStart: boolean;
+  isScrollableEnd: boolean;
+};
+
 const ScrollableTableContainer = styled("div", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" &&
-    prop !== "isScrollableStart" &&
-    prop !== "isScrollableEnd",
-})(
-  ({
-    odysseyDesignTokens,
-    isScrollableStart,
-    isScrollableEnd,
-  }: {
-    odysseyDesignTokens: DesignTokens;
-    isScrollableStart: boolean;
-    isScrollableEnd: boolean;
-  }) => ({
-    marginBlockEnd: odysseyDesignTokens.Spacing4,
-    position: "relative",
-    borderInlineStartColor: isScrollableStart
-      ? odysseyDesignTokens.HueNeutral200
-      : "transparent",
-    borderInlineStartStyle: "solid",
-    borderInlineStartWidth: odysseyDesignTokens.BorderWidthMain,
-    "::before": {
-      background:
-        "linear-gradient(-90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.33) 50%, rgba(0, 0, 0, 1) 100%)",
-      content: '""',
-      opacity: isScrollableStart ? "0.075" : "0",
-      pointerEvents: "none",
-      position: "absolute",
-      top: 0,
-      left: 0,
-      bottom: 0,
-      width: odysseyDesignTokens.Spacing6,
-      zIndex: 100,
-      transition: `opacity ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
-    },
-    borderInlineEndColor: isScrollableEnd
-      ? odysseyDesignTokens.HueNeutral200
-      : "transparent",
-    borderInlineEndStyle: "solid",
-    borderInlineEndWidth: odysseyDesignTokens.BorderWidthMain,
-    "::after": {
-      background:
-        "linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.33) 50%, rgba(0, 0, 0, 1) 100%)",
-      content: '""',
-      opacity: isScrollableEnd ? "0.075" : "0",
-      pointerEvents: "none",
-      position: "absolute",
-      top: 0,
-      right: 0,
-      bottom: 0,
-      width: odysseyDesignTokens.Spacing6,
-      transition: `opacity ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
-    },
-  }),
+    !["odysseyDesignTokens", "isScrollableStart", "isScrollableEnd"].includes(
+      prop,
+    ),
+})<ScrollableTableContainerProps>(
+  ({ odysseyDesignTokens, isScrollableStart, isScrollableEnd }) =>
+    css({
+      marginBlockEnd: odysseyDesignTokens.Spacing4,
+      position: "relative",
+      borderInlineStartColor: isScrollableStart
+        ? odysseyDesignTokens.HueNeutral200
+        : "transparent",
+      borderInlineStartStyle: "solid",
+      borderInlineStartWidth: odysseyDesignTokens.BorderWidthMain,
+      "::before": {
+        background:
+          "linear-gradient(-90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.33) 50%, rgba(0, 0, 0, 1) 100%)",
+        content: '""',
+        opacity: isScrollableStart ? "0.075" : "0",
+        pointerEvents: "none",
+        position: "absolute",
+        top: 0,
+        left: 0,
+        bottom: 0,
+        width: odysseyDesignTokens.Spacing6,
+        zIndex: 100,
+        transition: `opacity ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
+      },
+      borderInlineEndColor: isScrollableEnd
+        ? odysseyDesignTokens.HueNeutral200
+        : "transparent",
+      borderInlineEndStyle: "solid",
+      borderInlineEndWidth: odysseyDesignTokens.BorderWidthMain,
+      "::after": {
+        background:
+          "linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.33) 50%, rgba(0, 0, 0, 1) 100%)",
+        content: '""',
+        opacity: isScrollableEnd ? "0.075" : "0",
+        pointerEvents: "none",
+        position: "absolute",
+        top: 0,
+        right: 0,
+        bottom: 0,
+        width: odysseyDesignTokens.Spacing6,
+        transition: `opacity ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
+      },
+    }),
 );
 
 const DataTable = ({
