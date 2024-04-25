@@ -84,18 +84,18 @@ const Radio = ({
     [],
   );
 
-  const label = useMemo(() => {
-    return (
+  const label = useMemo(
+    () => (
       <>
         <Typography component="span">{labelProp}</Typography>
         {hint && <FormHelperText translate={translate}>{hint}</FormHelperText>}
       </>
-    );
-  }, [labelProp, hint, translate]);
+    ),
+    [labelProp, hint, translate],
+  );
+
   const onChange = useCallback<NonNullable<MuiRadioProps["onChange"]>>(
-    (event, checked) => {
-      onChangeProp?.(event, checked);
-    },
+    (event, checked) => onChangeProp?.(event, checked),
     [onChangeProp],
   );
 
