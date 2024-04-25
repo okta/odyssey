@@ -17,7 +17,7 @@ import {
   Radio as MuiRadio,
   RadioProps as MuiRadioProps,
 } from "@mui/material";
-import { useTranslation } from "react-i18next";
+
 import { memo, useCallback, useMemo, useRef, useImperativeHandle } from "react";
 
 import { FieldComponentProps } from "./FieldComponentProps";
@@ -71,7 +71,6 @@ const Radio = ({
   onChange: onChangeProp,
   onBlur: onBlurProp,
 }: RadioProps) => {
-  const { t } = useTranslation();
   const localInputRef = useRef<HTMLInputElement>(null);
   useImperativeHandle(
     inputRef,
@@ -92,7 +91,7 @@ const Radio = ({
         {hint && <FormHelperText translate={translate}>{hint}</FormHelperText>}
       </>
     );
-  }, [labelProp, hint, t, translate]);
+  }, [labelProp, hint, translate]);
   const onChange = useCallback<NonNullable<MuiRadioProps["onChange"]>>(
     (event, checked) => {
       onChangeProp?.(event, checked);
