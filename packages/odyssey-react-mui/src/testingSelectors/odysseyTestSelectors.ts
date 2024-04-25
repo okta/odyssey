@@ -10,11 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { CalloutTestSelectors } from "../Callout";
 import { type FeatureTestSelector } from "./featureTestSelector";
+import { CalloutTestSelectors } from "../Callout";
+import { TabsTestSelectors } from "../Tabs";
 import { TextFieldTestSelectors } from "../TextField";
 
 export const odysseyTestSelectors = {
   Callout: CalloutTestSelectors,
+  Tabs: TabsTestSelectors,
   TextField: TextFieldTestSelectors,
 } as const satisfies Record<string, FeatureTestSelector>;
