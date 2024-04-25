@@ -220,7 +220,6 @@ export const TitleWithLink: StoryObj<CalloutProps> = {
           title: /Safety checks failed/,
         },
       }).select?.("link", {
-        // ^?
         linkText: "Visit fueling console",
       }).element;
 
