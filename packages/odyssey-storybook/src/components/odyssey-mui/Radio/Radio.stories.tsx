@@ -133,7 +133,7 @@ export const Hint: StoryObj<typeof Radio> = {
   parameters: {
     docs: {
       description: {
-        story: "hint provides helper text to the Radio",
+        story: "A `hint` provides helper text to the Radio",
       },
     },
   },
