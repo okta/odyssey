@@ -242,7 +242,7 @@ export const ControlledRadioGroupWithRadioHints: StoryObj<typeof RadioGroup> = {
       [],
     );
     return (
-      <RadioGroup {...{ ...props, value, onChange }}>
+      <RadioGroup {...props} onChange={onChange} value={value}>
         <Radio label="Snail Speed" value="Snail Speed" hint="Hint text" />
         <Radio label="Turtle Speed" value="Turtle Speed" hint="Hint text" />
         <Radio label="Rabbit Speed" value="Rabbit Speed" hint="Hint text" />
