@@ -11,20 +11,19 @@
  */
 
 import styled from "@emotion/styled";
-import { ReactNode, memo } from "react";
+import { Children, ReactNode, memo } from "react";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../OdysseyDesignTokensContext";
-import { Box } from "../Box";
 
 type SupportedColumnRatios =
   | [1]
   | [1, 1]
-  | [2, 1]
   | [1, 2]
-  | [3, 1]
+  | [2, 1]
   | [1, 3]
+  | [3, 1]
   | [1, 1, 1]
   | [1, 2, 1]
   | [2, 1, 1]
@@ -32,9 +31,14 @@ type SupportedColumnRatios =
   | [1, 1, 1, 1];
 
 export type GridProps = {
+  /**
+   * The supported column ratios for the Grid. Each number is a fractional unit that is mapped to the 'fr' CSS unit.
+   * e.g. [2, 1] defines a 2/3, 1/3 layout and [1, 2, 1] defines a 1/4, 1/2, 1/4 layout
+   * @see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Basic_concepts_of_grid_layout#the_fr_unit
+   */
   columns: SupportedColumnRatios;
   /**
-   * The content of the layout. May be a `string` or any other `ReactNode` or array of `ReactNode`s.
+   * The content of the Grid. May be a `string` or any other `ReactNode` or array of `ReactNode`s.
    */
   children?: ReactNode;
 };
@@ -47,12 +51,22 @@ interface GridContentProps {
 const GridContent = styled("div", {
   shouldForwardProp: (prop) =>
     !["odysseyDesignTokens", "columns"].includes(prop),
-})<GridContentProps>(({ columns }) => ({
+})<GridContentProps>(({ odysseyDesignTokens, columns }) => ({
   maxWidth: "1440px",
   display: "grid",
   gridTemplateColumns: columns,
-  gridColumnGap: "16px",
-  columnGap: "16px",
+  gridColumnGap: odysseyDesignTokens.Spacing4,
+  columnGap: odysseyDesignTokens.Spacing4,
+}));
+
+const GridPane = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  backgroundColor: odysseyDesignTokens.HueNeutralWhite,
+  borderRadius: odysseyDesignTokens.Spacing4,
+  padding: odysseyDesignTokens.Spacing4,
 }));
 
 const Grid = ({ columns, children }: GridProps) => {
@@ -64,32 +78,13 @@ const Grid = ({ columns, children }: GridProps) => {
       odysseyDesignTokens={odysseyDesignTokens}
       columns={mappedColumns}
     >
-      {Array.isArray(children) ? (
-        children.map((child, idx) => {
-          return (
-            <Box
-              key={idx}
-              sx={{
-                backgroundColor: "white",
-                borderRadius: "16px",
-                padding: "16px",
-              }}
-            >
-              {child}
-            </Box>
-          );
-        })
-      ) : (
-        <Box
-          sx={{
-            backgroundColor: "white",
-            borderRadius: "16px",
-            padding: "16px",
-          }}
-        >
-          {children}
-        </Box>
-      )}
+      {Children.toArray(children).map((child, index) => {
+        return (
+          <GridPane key={index} odysseyDesignTokens={odysseyDesignTokens}>
+            {child}
+          </GridPane>
+        );
+      })}
     </GridContent>
   );
 };

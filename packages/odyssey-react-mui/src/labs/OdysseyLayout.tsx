@@ -22,12 +22,25 @@ import { Link } from "../Link";
 import { DocumentationIcon } from "../icons.generated";
 
 export type OdysseyLayoutProps = {
+  /**
+   * The title of the layout to be situated in the layout header
+   */
   title?: string;
+  /**
+   * A supplementary description to be situated in the layout header
+   */
   description?: string;
-  documentation?: {
-    link: string;
-    text: string;
-  };
+  /**
+   * The destination for a documentation Link to be situated in the layout header
+   */
+  documentationLink?: string;
+  /**
+   * The text for a documentation Link to be situated in the layout header
+   */
+  documentationText?: string;
+  /**
+   * An optional Drawer object. Can be of variant 'temporary' or 'persistent'.
+   */
   drawer?: ReactElement;
   /**
    * An optional Button object to be situated in the layout header. Should almost always be of variant `primary`.
@@ -48,8 +61,9 @@ export type OdysseyLayoutProps = {
 };
 
 interface LayoutContentProps {
-  odysseyDesignTokens?: DesignTokens;
-  isDrawerVisible?: boolean;
+  odysseyDesignTokens: DesignTokens;
+  isDrawerOpen?: boolean;
+  drawerVariant?: string;
 }
 
 const LayoutHeader = styled("div", {
@@ -67,40 +81,45 @@ const LayoutHeader = styled("div", {
 
 const LayoutContent = styled("div", {
   shouldForwardProp: (prop) =>
-    !["odysseyDesignTokens", "isDrawerVisible"].includes(prop),
-})<LayoutContentProps>(({ isDrawerVisible }) => ({
-  "@keyframes animate-drawer-open": {
-    "0%": {
-      gridTemplateColumns: "minmax(0, 1fr) 0",
+    !["odysseyDesignTokens", "isDrawerOpen", "drawerVariant"].includes(prop),
+})<LayoutContentProps>(
+  ({ odysseyDesignTokens, isDrawerOpen, drawerVariant }) => ({
+    "@keyframes animate-drawer-open": {
+      "0%": {
+        gridTemplateColumns: "minmax(0, 1fr) 0",
+      },
+      "100%": {
+        gridTemplateColumns: "minmax(0, 1fr) 360px",
+      },
     },
-    "100%": {
-      gridTemplateColumns: "minmax(0, 1fr) 360px",
+    "@keyframes animate-drawer-close": {
+      "0%": {
+        gridTemplateColumns: "minmax(0, 1fr) 360px",
+      },
+      "100%": {
+        gridTemplateColumns: "minmax(0, 1fr) 0",
+      },
     },
-  },
-  "@keyframes animate-drawer-close": {
-    "0%": {
-      gridTemplateColumns: "minmax(0, 1fr) 360px",
-    },
-    "100%": {
-      gridTemplateColumns: "minmax(0, 1fr) 0",
-    },
-  },
-  display: "grid",
-  gridColumnGap: "16px",
-  columnGap: "16px",
-  gridTemplateColumns: isDrawerVisible
-    ? "minmax(0, 1fr) 360px"
-    : "minmax(0, 1fr)",
-  animation: isDrawerVisible
-    ? "animate-drawer-open 225ms cubic-bezier(0, 0, 0.2, 1)"
-    : "animate-drawer-close 225ms cubic-bezier(0, 0, 0.2, 1)",
-  marginBlock: "32px",
-}));
+    display: "grid",
+    gridGap: odysseyDesignTokens.Spacing4,
+    gap: odysseyDesignTokens.Spacing4,
+    gridTemplateColumns:
+      drawerVariant === "persistent" && isDrawerOpen
+        ? "minmax(0, 1fr) 360px"
+        : "minmax(0, 1fr)",
+    animation:
+      drawerVariant === "persistent" && isDrawerOpen
+        ? "animate-drawer-open 225ms cubic-bezier(0, 0, 0.2, 1)"
+        : "animate-drawer-close 225ms cubic-bezier(0, 0, 0.2, 1)",
+    marginBlock: odysseyDesignTokens.Spacing6,
+  }),
+);
 
 const OdysseyLayout = ({
   title,
   description,
-  documentation,
+  documentationLink,
+  documentationText,
   primaryCallToActionComponent,
   secondaryCallToActionComponent,
   tertiaryCallToActionComponent,
@@ -108,6 +127,7 @@ const OdysseyLayout = ({
   drawer,
 }: OdysseyLayoutProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const { isOpen: isDrawerOpen, variant: drawerVariant } = drawer?.props ?? {};
 
   return (
     <Box>
@@ -124,9 +144,9 @@ const OdysseyLayout = ({
             gap: "16px",
           }}
         >
-          {documentation && (
-            <Link href={documentation.link} icon={<DocumentationIcon />}>
-              {documentation.text}
+          {documentationLink && (
+            <Link href={documentationLink} icon={<DocumentationIcon />}>
+              {documentationText}
             </Link>
           )}
           <Box>
@@ -138,9 +158,12 @@ const OdysseyLayout = ({
       </LayoutHeader>
       <LayoutContent
         odysseyDesignTokens={odysseyDesignTokens}
-        isDrawerVisible={drawer?.props.isOpen}
+        isDrawerOpen={isDrawerOpen}
+        drawerVariant={drawerVariant}
       >
-        {children}
+        <Box sx={{ display: "flex", flexDirection: "column", rowGap: "16px" }}>
+          {children}
+        </Box>
         {drawer}
       </LayoutContent>
     </Box>
