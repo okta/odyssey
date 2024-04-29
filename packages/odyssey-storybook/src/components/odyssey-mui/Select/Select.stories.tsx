@@ -476,3 +476,17 @@ export const ControlledPreselectedMultipleSelect: StoryObj<typeof Select> = {
     return <Select {...props} value={localValue} onChange={onChange} />;
   },
 };
+
+export const NoVisibleLabel: StoryObj<typeof Select> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Selects with `hasVisibleLabel` set to false will not render a visible label. Although, the `label` prop is still required for accessibility purposes",
+      },
+    },
+  },
+  args: {
+    hasVisibleLabel: false,
+  },
+};

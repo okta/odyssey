@@ -48,7 +48,7 @@ export type FieldProps = {
   /**
    * If `true`, the Field label will be shown
    */
-  hasVisibleLabel: boolean;
+  hasVisibleLabel?: boolean;
   /**
    * Important for narrowing down the `fieldset` role to "radiogroup".
    */
@@ -83,7 +83,7 @@ const Field = ({
   errorMessage,
   errorMessageList,
   fieldType,
-  hasVisibleLabel,
+  hasVisibleLabel = true,
   hint,
   HintLinkComponent,
   id: idOverride,

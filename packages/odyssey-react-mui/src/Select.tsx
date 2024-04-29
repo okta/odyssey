@@ -163,6 +163,7 @@ export type SelectProps<
   FieldComponentProps,
   | "errorMessage"
   | "errorMessageList"
+  | "hasVisibleLabel"
   | "hint"
   | "HintLinkComponent"
   | "id"
@@ -204,6 +205,7 @@ const Select = <
   errorMessage,
   errorMessageList,
   hasMultipleChoices: hasMultipleChoicesProp,
+  hasVisibleLabel,
   hint,
   HintLinkComponent,
   id: idOverride,
@@ -515,7 +517,7 @@ const Select = <
       errorMessage={errorMessage}
       errorMessageList={errorMessageList}
       fieldType="single"
-      hasVisibleLabel
+      hasVisibleLabel={hasVisibleLabel}
       hint={hint}
       HintLinkComponent={HintLinkComponent}
       id={idOverride}
