@@ -233,6 +233,20 @@ const Pagination = ({
     [pageIndex, isDisabled],
   );
 
+  const rowsPerPageInputProps = useMemo(
+    () => ({
+      "aria-label": rowsPerPageLabel,
+    }),
+    [rowsPerPageLabel],
+  );
+
+  const currentPageInputProps = useMemo(
+    () => ({
+      "aria-label": currentPageLabel,
+    }),
+    [currentPageLabel],
+  );
+
   return variant === "paged" ? (
     <PaginationContainer>
       <PaginationSegment odysseyDesignTokens={odysseyDesignTokens}>
@@ -248,9 +262,7 @@ const Pagination = ({
             onBlur={handlePaginationChange}
             onKeyDown={handleRowsPerPageSubmit}
             disabled={isDisabled}
-            inputProps={{
-              "aria-label": rowsPerPageLabel,
-            }}
+            inputProps={rowsPerPageInputProps}
           />
         </Box>
         <Paragraph component="span" color="textSecondary">
@@ -272,9 +284,7 @@ const Pagination = ({
               onBlur={handlePaginationChange}
               onKeyDown={handlePageSubmit}
               disabled={isDisabled}
-              inputProps={{
-                "aria-label": currentPageLabel,
-              }}
+              inputProps={currentPageInputProps}
             />
           </Box>
         )}
