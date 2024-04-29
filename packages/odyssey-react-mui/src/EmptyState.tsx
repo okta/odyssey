@@ -39,7 +39,7 @@ export type EmptyStateProps = {
   /**
    * A descriptive text explaining more context as to why we don't have data.
    */
-  text: string;
+  description: string;
   /**
    * Primary call to action
    */
@@ -52,7 +52,7 @@ export type EmptyStateProps = {
 
 const EmptyState = ({
   heading,
-  text,
+  description,
   PrimaryCallToActionComponent,
   SecondaryCallToActionComponent,
 }: EmptyStateProps) => {
@@ -61,7 +61,7 @@ const EmptyState = ({
   return (
     <EmptyContainer odysseyDesignTokens={odysseyDesignTokens}>
       <Heading4>{heading}</Heading4>
-      <Paragraph>{text}</Paragraph>
+      <Paragraph>{description}</Paragraph>
       {(PrimaryCallToActionComponent || SecondaryCallToActionComponent) && (
         <Box sx={{ marginBlockStart: 5 }}>
           {SecondaryCallToActionComponent}

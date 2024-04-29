@@ -575,7 +575,7 @@ const DataTable = ({
     const noResultsInnerContent = noResultsPlaceholder || (
       <EmptyState
         heading={t("table.noresults.heading")}
-        text={t("table.noresults.text")}
+        description={t("table.noresults.text")}
       />
     );
 

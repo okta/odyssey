@@ -27,7 +27,7 @@ const storyBookMeta: Meta<EmptyStateProps> = {
       },
     },
 
-    text: {
+    description: {
       control: "text",
       description:
         "A descriptive text explaining more context as to why we don't have data",
@@ -56,7 +56,8 @@ export default storyBookMeta;
 export const Default: StoryObj<EmptyStateProps> = {
   args: {
     heading: "Start by adding data assets",
-    text: "All relevant data will be displayed and can be searched and filtered",
+    description:
+      "All relevant data will be displayed and can be searched and filtered",
     PrimaryCallToActionComponent: (
       <Button label="Button label" variant="primary" />
     ),
