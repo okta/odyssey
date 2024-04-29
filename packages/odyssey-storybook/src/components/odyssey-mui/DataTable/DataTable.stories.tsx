@@ -515,7 +515,7 @@ export const API: StoryObj<DataTableProps> = {
       () => (
         <EmptyState
           heading="Start by adding data assets"
-          text="All relevant data will be displayed and can be searched and filtered"
+          description="All relevant data will be displayed and can be searched and filtered"
           PrimaryCallToActionComponent={
             <Button variant="primary" label="Primary" />
           }
@@ -531,7 +531,7 @@ export const API: StoryObj<DataTableProps> = {
       () => (
         <EmptyState
           heading="Whoops, there's nothing here!"
-          text="You should try searching or filtering for something else."
+          description="You should try searching or filtering for something else."
         />
       ),
       [],
@@ -596,7 +596,7 @@ export const Empty: StoryObj<DataTableProps> = {
       () => (
         <EmptyState
           heading="Start by adding data assets"
-          text="All relevant data will be displayed and can be searched and filtered"
+          description="All relevant data will be displayed and can be searched and filtered"
           PrimaryCallToActionComponent={
             <Button variant="primary" label="Primary" />
           }
