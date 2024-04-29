@@ -171,6 +171,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       endAdornment,
       errorMessage,
       errorMessageList,
+      hasVisibleLabel = true,
       hint,
       HintLinkComponent,
       id: idOverride,
@@ -305,7 +306,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         errorMessage={errorMessage}
         errorMessageList={errorMessageList}
         fieldType="single"
-        hasVisibleLabel
+        hasVisibleLabel={hasVisibleLabel}
         hint={hint}
         HintLinkComponent={HintLinkComponent}
         id={idOverride}

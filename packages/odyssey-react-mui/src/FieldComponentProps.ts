@@ -24,6 +24,12 @@ export type FieldComponentProps = {
    */
   errorMessageList?: string[];
   /**
+   * If `false` no visible label is shown.
+   *
+   * NOTE: the `label` prop is still required for accessibility purposes
+   */
+  hasVisibleLabel?: boolean;
+  /**
    * The helper text content.
    */
   hint?: string;

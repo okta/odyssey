@@ -36,6 +36,18 @@ export const fieldComponentPropsMetaData: Partial<
       },
     },
   },
+  hasVisibleLabel: {
+    control: "boolean",
+    description: "If `false` no visible label is shown.",
+    table: {
+      type: {
+        summary: "boolean",
+      },
+      defaultValue: {
+        summary: true,
+      },
+    },
+  },
   hint: {
     control: "text",
     description: "The helper text content",

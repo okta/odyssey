@@ -71,6 +71,7 @@ const storybookMeta: Meta<typeof TextField> = {
         },
       },
     },
+    hasVisibleLabel: fieldComponentPropsMetaData.hasVisibleLabel,
     hint: fieldComponentPropsMetaData.hint,
     HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
     id: fieldComponentPropsMetaData.id,
@@ -323,6 +324,20 @@ export const Multiline: StoryObj<typeof TextField> = {
 export const Placeholder: StoryObj<typeof TextField> = {
   args: {
     placeholder: "Destination within the Sol system",
+  },
+};
+
+export const NoVisibleLabel: StoryObj<typeof TextField> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "TextFields with `hasVisibleLabel` set to false will not render a visible label. Although, the `label` prop is still required for accessibility purposes",
+      },
+    },
+  },
+  args: {
+    hasVisibleLabel: false,
   },
 };
 
