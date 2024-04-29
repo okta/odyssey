@@ -5296,7 +5296,7 @@ __metadata:
     regenerator-runtime: "npm:^0.14.1"
     rimraf: "npm:^5.0.1"
     stylelint: "npm:^14.13.0"
-    tsx: "npm:^4.7.1"
+    tsx: "npm:^4.7.3"
     typescript: "npm:^5.3.3"
     word-wrap: "npm:^1.2.5"
     yargs: "npm:^17.7.2"
@@ -15149,11 +15149,11 @@ __metadata:
   linkType: hard
 
 "get-tsconfig@npm:^4.7.2":
-  version: 4.7.2
-  resolution: "get-tsconfig@npm:4.7.2"
+  version: 4.7.3
+  resolution: "get-tsconfig@npm:4.7.3"
   dependencies:
     resolve-pkg-maps: "npm:^1.0.0"
-  checksum: 10/f21135848fb5d16012269b7b34b186af7a41824830f8616aba17a15eb4d9e54fdc876833f1e21768395215a826c8145582f5acd594ae2b4de3284d10b38d20f8
+  checksum: 10/7397bb4f8aef936df4d9016555b662dcf5279f3c46428b7c7c1ff5e94ab2b87d018b3dda0f4bc1a28b154d5affd0eac5d014511172c085fd8a9cdff9ea7fe043
   languageName: node
   linkType: hard
 
@@ -25482,9 +25482,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsx@npm:^4.7.1":
-  version: 4.7.1
-  resolution: "tsx@npm:4.7.1"
+"tsx@npm:^4.7.3":
+  version: 4.7.3
+  resolution: "tsx@npm:4.7.3"
   dependencies:
     esbuild: "npm:~0.19.10"
     fsevents: "npm:~2.3.3"
@@ -25494,7 +25494,7 @@ __metadata:
       optional: true
   bin:
     tsx: dist/cli.mjs
-  checksum: 10/3a462b595f31ae58b31f9c6e8c450577dc87660b1225012bd972b6b58d7d2f6c4034728763ebc53bb731acff68de8b0fa50586e4c1ec4c086226f1788ccf9b7d
+  checksum: 10/f1b10e852b9e57eb0253306a11ed2ba24697791770dbf225b8cf82ecfc550ff5cbedcb39e9c1d39de4533af8ece4b4d573405f0e1a4836f350a71f1d0d4648a4
   languageName: node
   linkType: hard
 
