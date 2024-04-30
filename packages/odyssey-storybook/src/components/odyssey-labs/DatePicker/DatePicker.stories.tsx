@@ -49,6 +49,26 @@ const storybookMeta: Meta<DatePickerProps> = {
       },
     },
     isDisabled: fieldComponentPropsMetaData.isDisabled,
+    minDate: {
+      description: "the minimum selectable date enabled in the calendar",
+      table: {
+        type: {
+          summary: "Date",
+        },
+      },
+    },
+    maxDate: {
+      description: "the maximum selectable date enabled in the calendar",
+      table: {
+        type: {
+          summary: "Date",
+        },
+      },
+    },
+  },
+  args: {
+    label: "Choose a date",
+    hint: "Use MM/DD/YYYY format",
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
@@ -56,18 +76,25 @@ const storybookMeta: Meta<DatePickerProps> = {
 
 export default storybookMeta;
 
-export const Default: StoryObj<DatePickerProps> = {
-  args: {
-    label: "Choose a date",
-    hint: "Use MM/DD/YYYY format",
-  },
-};
+export const Default: StoryObj<DatePickerProps> = {};
 
 export const Error: StoryObj<DatePickerProps> = {
   args: {
-    label: "Choose a date",
-    hint: "Use MM/DD/YYYY format",
     errorMessage: "Some error message here",
+  },
+};
+
+export const MinDate: StoryObj<DatePickerProps> = {
+  args: {
+    hint: "Date must be in the future",
+    minDate: new Date(),
+  },
+};
+
+export const MaxDate: StoryObj<DatePickerProps> = {
+  args: {
+    hint: "Date must be in the past",
+    maxDate: new Date(),
   },
 };
 
