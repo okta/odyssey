@@ -219,7 +219,7 @@ export const ButtonPrimaryDisabled: StoryObj<ButtonProps> = {
     docs: {
       description: {
         story:
-          "Disabled buttons should be paired with a Tooltip to provide additional context. A tooltip can be added by setting the `tooltipText` prop on the button to a string.",
+          "Disabled buttons that require explanation should be accompanied by a callout explaining why the button is inactive and what action the user needs to take.",
       },
     },
   },
