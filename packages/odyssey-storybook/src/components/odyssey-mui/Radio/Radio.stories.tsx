@@ -42,6 +42,15 @@ const storybookMeta: Meta<RadioProps> = {
         },
       },
     },
+    hint: {
+      control: "text",
+      description: "The helper text content",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     label: {
       control: "text",
       description: "The label text for the radio button",
@@ -120,7 +129,19 @@ export const Disabled: StoryObj<typeof Radio> = {
     isDisabled: true,
   },
 };
-
+export const Hint: StoryObj<typeof Radio> = {
+  parameters: {
+    docs: {
+      description: {
+        story: "A `hint` provides helper text to the Radio",
+      },
+    },
+  },
+  args: {
+    label: "Automatically assign Okta Admin Console",
+    hint: "All admin roles get access when the role is assigned.",
+  },
+};
 export const Invalid: StoryObj<typeof Radio> = {
   args: {
     isChecked: true,

@@ -41,8 +41,8 @@ import {
   DragIndicatorIcon,
   MoreIcon,
 } from "../icons.generated";
-import { densityValues, paginationTypeValues } from "./constants";
-import { DataTablePagination } from "./DataTablePagination";
+import { densityValues } from "./constants";
+import { Pagination, paginationTypeValues, usePagination } from "../Pagination";
 import { DataFilter, DataFilters } from "../labs/DataFilters";
 import {
   DataTableRowActions,
@@ -59,7 +59,7 @@ import {
 } from "../OdysseyDesignTokensContext";
 import { useScrollIndication } from "./useScrollIndication";
 import styled from "@emotion/styled";
-import { DataTableEmptyState } from "./DataTableEmptyState";
+import { EmptyState } from "../EmptyState";
 import { Callout } from "../Callout";
 import { t } from "i18next";
 
@@ -573,9 +573,9 @@ const DataTable = ({
 
   const emptyState = useCallback(() => {
     const noResultsInnerContent = noResultsPlaceholder || (
-      <DataTableEmptyState
+      <EmptyState
         heading={t("table.noresults.heading")}
-        text={t("table.noresults.text")}
+        description={t("table.noresults.text")}
       />
     );
 
@@ -791,6 +791,12 @@ const DataTable = ({
     onChangeRowSelection?.(rowSelection);
   }, [rowSelection, onChangeRowSelection]);
 
+  const { lastRow } = usePagination({
+    pageIndex: pagination.pageIndex,
+    pageSize: pagination.pageSize,
+    totalRows,
+  });
+
   // Render the table
   return (
     <>
@@ -841,12 +847,19 @@ const DataTable = ({
       </ScrollableTableContainer>
 
       {hasPagination && (
-        <DataTablePagination
-          pagination={pagination}
-          setPagination={setPagination}
+        <Pagination
+          pageIndex={pagination.pageIndex}
+          pageSize={pagination.pageSize}
+          onPaginationChange={setPagination}
+          lastRow={lastRow}
           totalRows={totalRows}
           isDisabled={isEmpty}
           variant={paginationType}
+          rowsPerPageLabel={t("pagination.rowsperpage")}
+          currentPageLabel={t("pagination.page")}
+          previousLabel={t("pagination.previous")}
+          nextLabel={t("pagination.next")}
+          loadMoreLabel={t("pagination.loadmore")}
         />
       )}
     </>
