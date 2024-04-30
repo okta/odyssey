@@ -207,6 +207,7 @@ const DataFilters = ({
     ) {
       return filterPopoverCurrentFilter.options.map((option) => ({
         label: option.label,
+        value: option.value,
       }));
     }
 
@@ -233,25 +234,27 @@ const DataFilters = ({
     [inputValues, filtersProp],
   );
 
-  const getAutoCompleteLabel = <
-    Value extends { label: string } | Array<{ label: string }>,
-  >(
-    value: Value,
-  ) => {
-    if (Array.isArray(value)) {
-      // Iterating to find the label
-      return value
-        .map((valueElement) => {
-          if (typeof valueElement === "string") {
-            return undefined;
-          }
-          return valueElement.label;
-        })
-        .filter((item): item is string => Boolean(item));
-    }
+  // const getAutoCompleteValue = <
+  //   Value extends
+  //     | { label?: string; value: string }
+  //     | Array<{ label?: string; value: string }>,
+  // >(
+  //   value: Value,
+  // ) => {
+  //   if (Array.isArray(value)) {
+  //     // Iterating to find the label
+  //     return value
+  //       .map((valueElement) => {
+  //         if (typeof valueElement === "string") {
+  //           return undefined;
+  //         }
+  //         return valueElement.value;
+  //       })
+  //       .filter((item): item is string => Boolean(item));
+  //   }
 
-    return value?.label;
-  };
+  //   return value?.value;
+  // };
 
   const handleMultiSelectChange = useCallback(
     (filterId: string, value: string, submit: boolean = false) => {
@@ -491,7 +494,7 @@ const DataFilters = ({
                           filterPopoverCurrentFilter?.options && (
                             <AutocompleteOuterContainer>
                               <AutocompleteInnerContainer>
-                                <Autocomplete
+                                {/* <Autocomplete
                                   label={filterPopoverCurrentFilter.label}
                                   value={
                                     inputValues[
@@ -499,24 +502,87 @@ const DataFilters = ({
                                     ] ?? ""
                                   }
                                   onChange={(_, value) => {
-                                    const label =
+                                    const inputValue =
                                       typeof value === "string"
-                                        ? getAutoCompleteLabel({ label: value })
+                                        ? value
                                         : Array.isArray(value)
-                                          ? getAutoCompleteLabel(
-                                              value.map((item) =>
-                                                typeof item === "string"
-                                                  ? { label: item }
-                                                  : item,
-                                              ),
-                                            )
+                                          ? value
+                                              .map((valueElement) => {
+                                                if (
+                                                  typeof valueElement ===
+                                                  "string"
+                                                ) {
+                                                  return undefined;
+                                                }
+                                                return valueElement.value;
+                                              })
+                                              .filter((item): item is string =>
+                                                Boolean(item),
+                                              )
                                           : value
-                                            ? getAutoCompleteLabel(value)
+                                            ? value?.value
                                             : "";
 
                                     updateInputValue({
                                       filterId: filterPopoverCurrentFilter.id,
-                                      value: label,
+                                      value: inputValue,
+                                    });
+                                  }}
+                                  options={autocompleteOptions}
+                                /> */}
+                                {/* Status of this code 4/29/24: The commented out code sets the value of the option as the Autocomplete value (rather than the label). 
+                                The code below correctly passes the label value to the UI of Autocomplete, but the Tag list on DataList shows the value, not the label. 
+                                This is a problem if the value is not human-readable. What needs to happen next: optimize the code below, or fix the commented out code above
+                                Then re-factor `activeFilters` to show the value (as it does now) OR the label (which needs to be stored in the object) selectively based
+                                on the type of filter being applied. OR refactor the code so all filter types behave with the assumption that the value could be an object or a string  */}
+                                <Autocomplete
+                                  label={
+                                    filterPopoverCurrentFilter?.label || ""
+                                  }
+                                  value={
+                                    autocompleteOptions.find(
+                                      (option) =>
+                                        option.value ===
+                                        inputValues[
+                                          filterPopoverCurrentFilter?.id || ""
+                                        ],
+                                    ) || null
+                                  }
+                                  onChange={(_, newValue) => {
+                                    const inputValue =
+                                      typeof newValue === "string"
+                                        ? newValue
+                                        : Array.isArray(newValue)
+                                          ? newValue
+                                              .map((valueElement) => {
+                                                if (
+                                                  typeof valueElement ===
+                                                  "string"
+                                                ) {
+                                                  return undefined;
+                                                } else if (
+                                                  valueElement &&
+                                                  typeof valueElement ===
+                                                    "object" &&
+                                                  "value" in valueElement
+                                                ) {
+                                                  return valueElement.value;
+                                                }
+                                                return undefined;
+                                              })
+                                              .filter((item): item is string =>
+                                                Boolean(item),
+                                              )
+                                          : newValue &&
+                                              typeof newValue === "object" &&
+                                              "value" in newValue
+                                            ? newValue.value
+                                            : "";
+
+                                    updateInputValue({
+                                      filterId:
+                                        filterPopoverCurrentFilter?.id || "",
+                                      value: inputValue,
                                     });
                                   }}
                                   options={autocompleteOptions}
