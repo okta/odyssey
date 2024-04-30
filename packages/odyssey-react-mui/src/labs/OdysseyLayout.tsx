@@ -31,33 +31,37 @@ export type OdysseyLayoutProps = {
    */
   description?: string;
   /**
-   * The destination for a documentation Link to be situated in the layout header
+   * The destination for a documentation `Link` to be situated in the layout header
    */
   documentationLink?: string;
   /**
-   * The text for a documentation Link to be situated in the layout header
+   * The text for a documentation `Link` to be situated in the layout header
    */
   documentationText?: string;
   /**
-   * An optional Drawer object. Can be of variant 'temporary' or 'persistent'.
+   * An optional `Drawer` object. Can be of variant 'temporary' or 'persistent'.
    */
   drawer?: ReactElement;
   /**
-   * An optional Button object to be situated in the layout header. Should almost always be of variant `primary`.
+   * An optional `Button` object to be situated in the layout header. Should almost always be of variant `primary`.
    */
   primaryCallToActionComponent?: ReactElement;
   /**
-   * An optional Button object to be situated in the layout header, alongside the `callToActionPrimaryComponent`.
+   * An optional `Button` object to be situated in the layout header, alongside the `callToActionPrimaryComponent`.
    */
   secondaryCallToActionComponent?: ReactElement;
   /**
-   * An optional Button object to be situated in the layout header, alongside the other two `callToAction` components.
+   * An optional `Button` object to be situated in the layout header, alongside the other two `callToAction` components.
    */
   tertiaryCallToActionComponent?: ReactElement;
   /**
    * The content of the layout. May be a `string` or any other `ReactNode` or array of `ReactNode`s.
    */
   children?: ReactNode;
+  /**
+   * When set to `true`, the layout expands past its max width of 1440px and spans the entire available screen width.
+   */
+  isFullWidth?: boolean;
 };
 
 interface LayoutContentProps {
@@ -71,7 +75,6 @@ const LayoutHeader = styled("div", {
 })<{
   odysseyDesignTokens: DesignTokens;
 }>(({}) => ({
-  position: "sticky",
   top: 0,
   display: "flex",
   justifyContent: "space-between",
@@ -103,6 +106,7 @@ const LayoutContent = styled("div", {
     display: "grid",
     gridGap: odysseyDesignTokens.Spacing4,
     gap: odysseyDesignTokens.Spacing4,
+    marginBlock: odysseyDesignTokens.Spacing4,
     gridTemplateColumns:
       drawerVariant === "persistent" && isDrawerOpen
         ? "minmax(0, 1fr) 360px"
@@ -111,7 +115,6 @@ const LayoutContent = styled("div", {
       drawerVariant === "persistent" && isDrawerOpen
         ? "animate-drawer-open 225ms cubic-bezier(0, 0, 0.2, 1)"
         : "animate-drawer-close 225ms cubic-bezier(0, 0, 0.2, 1)",
-    marginBlock: odysseyDesignTokens.Spacing6,
   }),
 );
 
@@ -125,12 +128,18 @@ const OdysseyLayout = ({
   tertiaryCallToActionComponent,
   children,
   drawer,
+  isFullWidth = false,
 }: OdysseyLayoutProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { isOpen: isDrawerOpen, variant: drawerVariant } = drawer?.props ?? {};
 
   return (
-    <Box>
+    <Box
+      sx={{
+        maxWidth: isFullWidth ? "100%" : "1440px",
+        marginInline: odysseyDesignTokens.Spacing6,
+      }}
+    >
       <LayoutHeader odysseyDesignTokens={odysseyDesignTokens}>
         <Box>
           <Heading4>{title}</Heading4>
@@ -141,7 +150,7 @@ const OdysseyLayout = ({
             display: "flex",
             flexDirection: "column",
             alignItems: "end",
-            gap: "16px",
+            rowGap: odysseyDesignTokens.Spacing4,
           }}
         >
           {documentationLink && (
@@ -161,7 +170,13 @@ const OdysseyLayout = ({
         isDrawerOpen={isDrawerOpen}
         drawerVariant={drawerVariant}
       >
-        <Box sx={{ display: "flex", flexDirection: "column", rowGap: "16px" }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            rowGap: odysseyDesignTokens.Spacing4,
+          }}
+        >
           {children}
         </Box>
         {drawer}

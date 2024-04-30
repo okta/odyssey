@@ -52,7 +52,6 @@ const GridContent = styled("div", {
   shouldForwardProp: (prop) =>
     !["odysseyDesignTokens", "columns"].includes(prop),
 })<GridContentProps>(({ odysseyDesignTokens, columns }) => ({
-  maxWidth: "1440px",
   display: "grid",
   gridTemplateColumns: columns,
   gridColumnGap: odysseyDesignTokens.Spacing4,
