@@ -19,8 +19,8 @@
       "labs": [
         "./dist/src/labs/index.d.ts"
       ],
-      "testingSelectors": [
-        "./dist/src/testingSelectors/index.d.ts"
+      "testing-selectors": [
+        "./dist/src/testing-selectors/index.d.ts"
       ]
     }
   },
@@ -33,9 +33,9 @@
       "types": "./dist/src/labs/index.d.ts",
       "default": "./dist/labs/index.js"
     },
-    "./testingSelectors": {
-      "types": "./dist/src/testingSelectors/index.d.ts",
-      "default": "./dist/testingSelectors/index.js"
+    "./testing-selectors": {
+      "types": "./dist/src/testing-selectors/index.d.ts",
+      "default": "./dist/testing-selectors/index.js"
     },
     ".": {
       "types": "./dist/src/index.d.ts",
