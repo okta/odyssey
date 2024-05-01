@@ -2199,6 +2199,9 @@ export const components = ({
       },
       styleOverrides: {
         root: ({ theme }) => ({
+          position: "relative",
+          // to visually align input with label
+          insetBlockStart: 2,
           width: `${odysseyTokens.TypographyLineHeightUi}em`,
           minWidth: `${odysseyTokens.TypographyLineHeightUi}em`,
           height: `${odysseyTokens.TypographyLineHeightUi}em`,
