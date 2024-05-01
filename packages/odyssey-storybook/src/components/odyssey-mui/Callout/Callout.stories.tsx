@@ -16,7 +16,7 @@ import {
   calloutRoleValues,
   calloutSeverityValues,
 } from "@okta/odyssey-react-mui";
-import { queryOdysseySelector } from "@okta/odyssey-react-mui/testing-selectors";
+import { queryOdysseySelector } from "@okta/odyssey-react-mui/test-selectors";
 import { expect } from "@storybook/jest";
 import { Meta, StoryObj } from "@storybook/react";
 import { within } from "@storybook/testing-library";

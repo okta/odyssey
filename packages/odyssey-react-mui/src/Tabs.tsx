@@ -30,7 +30,7 @@ import { Badge, BadgeProps } from "./Badge";
 import { Box } from "./Box";
 import { HtmlProps } from "./HtmlProps";
 import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
-import { type FeatureTestSelector } from "./testingSelectors";
+import { type FeatureTestSelector } from "./test-selectors";
 
 export const TabsTestSelectors = {
   feature: {

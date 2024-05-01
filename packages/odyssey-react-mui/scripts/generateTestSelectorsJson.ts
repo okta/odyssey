@@ -10,17 +10,18 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { mkdir, rmdir, writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 
-import("../src/testingSelectors/index").then(
+const distDirectory = join(__dirname, "../dist/test-selectors");
+
+import("../src/test-selectors/index").then(
   ({ odysseyTestSelectors: testSelector }) =>
-    rmdir(join(__dirname, "../dist/testingSelectors"), { recursive: true })
+    mkdir(distDirectory)
       .catch(() => null)
-      .then(() => mkdir(join(__dirname, "../dist/testingSelectors")))
       .then(() =>
         writeFile(
-          join(__dirname, "../dist/testingSelectors/testingSelectors.json"),
+          join(distDirectory, "testSelectors.json"),
           JSON.stringify(testSelector),
         ),
       ),

@@ -20,7 +20,7 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext";
-import { type FeatureTestSelector } from "./testingSelectors";
+import { type FeatureTestSelector } from "./test-selectors";
 import { Paragraph } from "./Typography";
 import { useUniqueId } from "./useUniqueId";
 
