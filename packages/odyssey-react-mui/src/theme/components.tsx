@@ -2201,8 +2201,8 @@ export const components = ({
         root: ({ theme }) => ({
           position: "relative",
           // to visually align input with label
-          // 1.2 is the line-height on the label
-          insetBlockStart: `${1.2 / theme.typography.fontSize}rem`,
+          // 1.2 is the line-height of the label.
+          insetBlockStart: `${(1.2 - 1) / 2}rem`,
           width: `${odysseyTokens.TypographyLineHeightUi}em`,
           minWidth: `${odysseyTokens.TypographyLineHeightUi}em`,
           height: `${odysseyTokens.TypographyLineHeightUi}em`,

@@ -215,14 +215,6 @@ export const ButtonPrimary: StoryObj<ButtonProps> = {
 
 export const ButtonPrimaryDisabled: StoryObj<ButtonProps> = {
   name: "Primary, Disabled",
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "Disabled buttons that require explanation should be accompanied by a callout explaining why the button is inactive and what action the user needs to take.",
-      },
-    },
-  },
   args: {
     isDisabled: true,
     label: "Add crew",
