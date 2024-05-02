@@ -27,7 +27,7 @@ else
   exit ${FAILED_SETUP}
 fi
 
-if ! yarn install --immutable --mutex network; then
+if ! yarn install --immutable; then
   echo "Installing dependencies failed! Exiting..."
   exit ${FAILED_SETUP}
 fi
