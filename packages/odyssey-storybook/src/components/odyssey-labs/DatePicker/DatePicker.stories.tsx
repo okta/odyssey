@@ -86,15 +86,15 @@ export const Error: StoryObj<DatePickerProps> = {
 
 export const MinDate: StoryObj<DatePickerProps> = {
   args: {
-    hint: "Date must be in the future",
-    minDate: new Date(),
+    hint: "minDate is 7/17/2024",
+    minDate: new Date("7-17-2024"),
   },
 };
 
 export const MaxDate: StoryObj<DatePickerProps> = {
   args: {
-    hint: "Date must be in the past",
-    maxDate: new Date(),
+    hint: "maxDate is 7/17/2024",
+    maxDate: new Date("7-17-2024"),
   },
 };
 
@@ -104,7 +104,7 @@ export const Controlled: StoryObj<DatePickerProps> = {
     hint: "Use MM/DD/YYYY format",
   },
   render: function C({ ...props }) {
-    const [value, setValue] = useState<Date>(new Date());
+    const [value, setValue] = useState<Date>(new Date("7-17-2024"));
     const datePickerProps: DatePickerProps = useMemo(
       () => ({
         ...props,
