@@ -20,7 +20,6 @@ import {
 } from "@testing-library/dom";
 
 import {
-  // type FeatureSelector,
   type FeatureTestSelector,
   type TestSelector,
 } from "./featureTestSelector";
