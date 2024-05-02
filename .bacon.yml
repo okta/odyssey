@@ -7,8 +7,8 @@ test_suites:
     queue_name: ci-queue-productionJenga-AL2023
     script_name: build
     script_path: /root/okta/odyssey/scripts
-    sort_order: "0"
-    timeout: "60"
+    sort_order: "4"
+    timeout: "20"
 
   - name: "lint"
     abort_commit_on_failure: true
@@ -17,8 +17,8 @@ test_suites:
     queue_name: ci-queue-productionJenga-AL2023
     script_name: lint
     script_path: /root/okta/odyssey/scripts
-    sort_order: "0"
-    timeout: "60"
+    sort_order: "1"
+    timeout: "20"
 
   - name: "test"
     abort_commit_on_failure: true
@@ -27,8 +27,8 @@ test_suites:
     queue_name: ci-queue-productionJenga-AL2023
     script_name: test
     script_path: /root/okta/odyssey/scripts
-    sort_order: "1"
-    timeout: "60"
+    sort_order: "3"
+    timeout: "20"
 
   - name: "typecheck"
     abort_commit_on_failure: true
@@ -37,8 +37,8 @@ test_suites:
     queue_name: ci-queue-productionJenga-AL2023
     script_name: typecheck
     script_path: /root/okta/odyssey/scripts
-    sort_order: "0"
-    timeout: "60"
+    sort_order: "2"
+    timeout: "20"
 
   - name: semgrep
     criteria: MERGE
