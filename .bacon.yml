@@ -6,9 +6,13 @@ test_suites:
     #   - "test"
     # queue_name: ci-queue-productionJenga-AL2023
     queue_name: small
-    script_name: build
+    # script_name: build
     script_path: /root/okta/odyssey/scripts
     sort_order: "4"
+    steps:
+      - event: COMMAND
+        name: Lint Code
+        action: yarn build
     timeout: "20"
 
   - name: "lint"
