@@ -77,7 +77,7 @@ export const Controlled: StoryObj<DatePickerProps> = {
     hint: "Use MM/DD/YYYY format",
   },
   render: function C({ ...props }) {
-    const [value, setValue] = useState<Date>(new Date());
+    const [value, setValue] = useState<Date>(new Date("7-17-2024"));
     const datePickerProps: DatePickerProps = useMemo(
       () => ({
         ...props,
