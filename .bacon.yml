@@ -15,7 +15,7 @@ test_suites:
         name: Setup Environment
       - event: COMMAND
         action: yarn build
-        name: Lint Code
+        name: Build Packages
     timeout: "20"
 
   - name: "lint"
@@ -25,6 +25,13 @@ test_suites:
     script_name: lint
     script_path: /root/okta/odyssey/scripts
     sort_order: "1"
+    steps:
+      - event: SOURCE
+        action: setup.sh
+        name: Setup Environment
+      - event: COMMAND
+        action: yarn lint
+        name: Lint Code
     timeout: "20"
 
   - name: "test"
@@ -34,6 +41,13 @@ test_suites:
     script_name: test
     script_path: /root/okta/odyssey/scripts
     sort_order: "3"
+    steps:
+      - event: SOURCE
+        action: setup.sh
+        name: Setup Environment
+      - event: COMMAND
+        action: yarn test
+        name: Test Code
     timeout: "20"
 
   - name: "typecheck"
@@ -43,6 +57,13 @@ test_suites:
     script_name: typecheck
     script_path: /root/okta/odyssey/scripts
     sort_order: "2"
+    steps:
+      - event: SOURCE
+        action: setup.sh
+        name: Setup Environment
+      - event: COMMAND
+        action: yarn typecheck
+        name: Typecheck Code
     timeout: "20"
 
   - name: semgrep
@@ -50,5 +71,5 @@ test_suites:
     queue_name: small
     script_name: semgrep
     script_path: /root/okta/odyssey/scripts
-    sort_order: "1"
+    sort_order: "5"
     timeout: "10"
