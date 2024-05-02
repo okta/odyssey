@@ -4,8 +4,8 @@ test_suites:
     criteria: MERGE
     # prereq_test_suite_name:
     #   - "test"
-    # queue_name: ci-queue-productionJenga-AL2023
-    queue_name: small
+    queue_name: al2023
+    # queue_name: small
     # script_name: build
     script_path: /root/okta/odyssey/scripts
     sort_order: "4"
@@ -21,8 +21,7 @@ test_suites:
   - name: "lint"
     abort_commit_on_failure: true
     criteria: MERGE
-    queue_name: small
-    script_name: lint
+    queue_name: al2023
     script_path: /root/okta/odyssey/scripts
     sort_order: "1"
     steps:
@@ -37,8 +36,7 @@ test_suites:
   - name: "test"
     abort_commit_on_failure: true
     criteria: MERGE
-    queue_name: small
-    script_name: test
+    queue_name: al2023
     script_path: /root/okta/odyssey/scripts
     sort_order: "3"
     steps:
@@ -53,8 +51,7 @@ test_suites:
   - name: "typecheck"
     abort_commit_on_failure: true
     criteria: MERGE
-    queue_name: small
-    script_name: typecheck
+    queue_name: al2023
     script_path: /root/okta/odyssey/scripts
     sort_order: "2"
     steps:
