@@ -13,7 +13,6 @@ test_suites:
 
   - name: "lint"
     abort_commit_on_failure: true
-    action: yarn lint
     criteria: MERGE
     queue_name: small
     script_name: lint
@@ -23,7 +22,6 @@ test_suites:
 
   - name: "test"
     abort_commit_on_failure: true
-    action: yarn test
     criteria: MERGE
     queue_name: small
     script_name: test
@@ -33,7 +31,6 @@ test_suites:
 
   - name: "typecheck"
     abort_commit_on_failure: true
-    action: yarn typecheck
     criteria: MERGE
     queue_name: small
     script_name: typecheck
