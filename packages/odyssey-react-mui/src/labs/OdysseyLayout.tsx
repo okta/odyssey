@@ -55,7 +55,7 @@ export type OdysseyLayoutProps = {
    */
   tertiaryCallToActionComponent?: ReactElement;
   /**
-   * The content of the layout. May be a `string` or any other `ReactNode` or array of `ReactNode`s.
+   * The content of the layout. May be a `string` or any other `ReactNode` or array of `ReactNode`s. Will often be `Grid` objects.
    */
   children?: ReactNode;
   /**
@@ -104,12 +104,20 @@ const LayoutContent = styled("div", {
       },
     },
     display: "grid",
-    gridGap: odysseyDesignTokens.Spacing4,
-    gap: odysseyDesignTokens.Spacing4,
+    gridGap:
+      drawerVariant === "persistent" && !isDrawerOpen
+        ? 0
+        : odysseyDesignTokens.Spacing4,
+    gap:
+      drawerVariant === "persistent" && !isDrawerOpen
+        ? 0
+        : odysseyDesignTokens.Spacing4,
     marginBlock: odysseyDesignTokens.Spacing4,
     gridTemplateColumns:
-      drawerVariant === "persistent" && isDrawerOpen
-        ? "minmax(0, 1fr) 360px"
+      drawerVariant === "persistent"
+        ? isDrawerOpen
+          ? "minmax(0, 1fr) 360px"
+          : "minmax(0, 1fr) 0"
         : "minmax(0, 1fr)",
     animation:
       drawerVariant === "persistent" && isDrawerOpen
@@ -137,7 +145,7 @@ const OdysseyLayout = ({
     <Box
       sx={{
         maxWidth: isFullWidth ? "100%" : "1440px",
-        marginInline: odysseyDesignTokens.Spacing6,
+        marginInline: isFullWidth ? odysseyDesignTokens.Spacing6 : "auto",
       }}
     >
       <LayoutHeader odysseyDesignTokens={odysseyDesignTokens}>
@@ -158,7 +166,12 @@ const OdysseyLayout = ({
               {documentationText}
             </Link>
           )}
-          <Box>
+          <Box
+            sx={{
+              display: "flex",
+              columnGap: odysseyDesignTokens.Spacing2,
+            }}
+          >
             {tertiaryCallToActionComponent}
             {secondaryCallToActionComponent}
             {primaryCallToActionComponent}

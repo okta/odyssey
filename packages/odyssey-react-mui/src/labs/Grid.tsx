@@ -17,7 +17,7 @@ import {
   useOdysseyDesignTokens,
 } from "../OdysseyDesignTokensContext";
 
-type SupportedColumnRatios =
+type SupportedPaneRatios =
   | [1]
   | [1, 1]
   | [1, 2]
@@ -32,11 +32,11 @@ type SupportedColumnRatios =
 
 export type GridProps = {
   /**
-   * The supported column ratios for the Grid. Each number is a fractional unit that is mapped to the 'fr' CSS unit.
+   * The supported pane ratios for the Grid. Each number is a fractional unit that is mapped to the 'fr' CSS unit.
    * e.g. [2, 1] defines a 2/3, 1/3 layout and [1, 2, 1] defines a 1/4, 1/2, 1/4 layout
    * @see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Basic_concepts_of_grid_layout#the_fr_unit
    */
-  columns: SupportedColumnRatios;
+  panes: SupportedPaneRatios;
   /**
    * The content of the Grid. May be a `string` or any other `ReactNode` or array of `ReactNode`s.
    */
@@ -45,15 +45,14 @@ export type GridProps = {
 
 interface GridContentProps {
   odysseyDesignTokens: DesignTokens;
-  columns: string;
+  panes: string;
 }
 
 const GridContent = styled("div", {
-  shouldForwardProp: (prop) =>
-    !["odysseyDesignTokens", "columns"].includes(prop),
-})<GridContentProps>(({ odysseyDesignTokens, columns }) => ({
+  shouldForwardProp: (prop) => !["odysseyDesignTokens", "panes"].includes(prop),
+})<GridContentProps>(({ odysseyDesignTokens, panes }) => ({
   display: "grid",
-  gridTemplateColumns: columns,
+  gridTemplateColumns: panes,
   gridColumnGap: odysseyDesignTokens.Spacing4,
   columnGap: odysseyDesignTokens.Spacing4,
 }));
@@ -68,15 +67,12 @@ const GridPane = styled("div", {
   padding: odysseyDesignTokens.Spacing4,
 }));
 
-const Grid = ({ columns, children }: GridProps) => {
+const Grid = ({ panes, children }: GridProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
-  const mappedColumns = columns.map((col) => `minmax(0, ${col}fr)`).join(" ");
+  const mappedPanes = panes.map((pane) => `minmax(0, ${pane}fr)`).join(" ");
 
   return (
-    <GridContent
-      odysseyDesignTokens={odysseyDesignTokens}
-      columns={mappedColumns}
-    >
+    <GridContent odysseyDesignTokens={odysseyDesignTokens} panes={mappedPanes}>
       {Children.toArray(children).map((child, index) => {
         return (
           <GridPane key={index} odysseyDesignTokens={odysseyDesignTokens}>

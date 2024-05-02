@@ -14,10 +14,10 @@ import { Meta, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import {
-  Planet,
-  columns as planetColumns,
-  data as planetData,
-} from "../../odyssey-mui/DataTable/planetData";
+  Person,
+  columns as personColumns,
+  data as personData,
+} from "../../odyssey-mui/DataTable/personData";
 import {
   Grid,
   OdysseyLayout,
@@ -27,9 +27,17 @@ import {
   Box,
   Button,
   DataTable,
+  Dialog,
   Drawer,
-  TabItemProps,
-  Tabs,
+  Form as OdysseyForm,
+  MenuButton,
+  MenuItem,
+  TextField,
+  Heading5,
+  Paragraph,
+  Support,
+  useOdysseyDesignTokens,
+  Checkbox,
 } from "@okta/odyssey-react-mui";
 import { useCallback, useState } from "react";
 
@@ -98,90 +106,99 @@ const storybookMeta: Meta<OdysseyLayoutProps> = {
         },
       },
     },
-    // description: {
-    //   control: "text",
-    //   description: "A supplementary description to be situated in the layout header",
-    //   table: {
-    //     type: {
-    //       summary: "string",
-    //     },
-    //   },
-    // },
-    // documentationLink: {
-    //   control: "text",
-    //   description: "The destination for a documentation `Link` to be situated in the layout header",
-    //   table: {
-    //     type: {
-    //       summary: "string",
-    //     },
-    //   },
-    // },
-    // documentationText: {
-    //   control: "text",
-    //   description: "The text for a documentation `Link` to be situated in the layout header",
-    //   table: {
-    //     type: {
-    //       summary: "string",
-    //     },
-    //   },
-    // },
-    // drawer: {
-    //   control: null,
-    //   description: "An optional `Drawer` object. Can be of variant 'temporary' or 'persistent'.",
-    //   table: {
-    //     type: {
-    //       summary: "ReactElement",
-    //     },
-    //   },
-    // },
-    // primaryCallToActionComponent: {
-    //   control: null,
-    //   description: "An optional `Button` object to be situated in the layout header. Should almost always be of variant `primary`.",
-    //   table: {
-    //     type: {
-    //       summary: "ReactElement",
-    //     },
-    //   },
-    // },
-    // secondaryCallToActionComponent: {
-    //   control: null,
-    //   description: "An optional `Button` object to be situated in the layout header, alongside the `callToActionPrimaryComponent`.",
-    //   table: {
-    //     type: {
-    //       summary: "ReactElement",
-    //     },
-    //   },
-    // },
-    // tertiaryCallToActionComponent: {
-    //   control: null,
-    //   description: "An optional `Button` object to be situated in the layout header, alongside the other two `callToAction` components.",
-    //   table: {
-    //     type: {
-    //       summary: "ReactElement",
-    //     },
-    //   },
-    // },
-    // children: {
-    //   control: null,
-    //   description: "The content of the layout. May be a `string` or any other `ReactNode` or array of `ReactNode`s.",
-    //   table: {
-    //     type: {
-    //       summary: "ReactNode",
-    //     },
-    //   },
-    // },
-    // isFullWidth: {
-    //   control: "boolean",
-    //   description: "When set to `true`, the layout expands past its max width of 1440px and spans the entire available screen width.",
-    //   table: {
-    //     type: {
-    //       summary: "boolean",
-    //     },
-    //     defaultValue: {
-    //       summary: false,
-    //     },
-    //   },
-    // },
+    description: {
+      control: "text",
+      description:
+        "A supplementary description to be situated in the layout header",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    documentationLink: {
+      control: "text",
+      description:
+        "The destination for a documentation `Link` to be situated in the layout header",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    documentationText: {
+      control: "text",
+      description:
+        "The text for a documentation `Link` to be situated in the layout header",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    drawer: {
+      control: null,
+      description:
+        "An optional `Drawer` object. Can be of variant 'temporary' or 'persistent'.",
+      table: {
+        type: {
+          summary: "ReactElement<typeof Drawer>",
+        },
+      },
+    },
+    primaryCallToActionComponent: {
+      control: null,
+      description:
+        "An optional `Button` object to be situated in the layout header. Should almost always be of variant `primary`.",
+      table: {
+        type: {
+          summary: "ReactElement<typeof Button>",
+        },
+      },
+    },
+    secondaryCallToActionComponent: {
+      control: null,
+      description:
+        "An optional `Button` object to be situated in the layout header, alongside the `callToActionPrimaryComponent`.",
+      table: {
+        type: {
+          summary: "ReactElement<typeof Button>",
+        },
+      },
+    },
+    tertiaryCallToActionComponent: {
+      control: null,
+      description:
+        "An optional `Button` object to be situated in the layout header, alongside the other two `callToAction` components.",
+      table: {
+        type: {
+          summary: "ReactElement<typeof Button>",
+        },
+      },
+    },
+    children: {
+      control: null,
+      description:
+        "The content of the layout. May be a `string` or any other `ReactNode` or array of `ReactNode`s. Will often be `Grid` objects.",
+      table: {
+        type: {
+          summary: "ReactNode",
+        },
+      },
+    },
+    isFullWidth: {
+      control: "boolean",
+      description:
+        "When set to `true`, the layout expands past its max width of 1440px and spans the entire available screen width.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+        defaultValue: {
+          summary: false,
+        },
+      },
+    },
   },
   decorators: [MuiThemeDecorator],
   parameters: {
@@ -197,43 +214,22 @@ const storybookMeta: Meta<OdysseyLayoutProps> = {
 
 export default storybookMeta;
 
-export const Default: StoryObj<OdysseyLayoutProps> = {
+export const KitchenSink: StoryObj<OdysseyLayoutProps> = {
   args: {
     title: "Table title",
     description: "Optional brief description about the page",
     documentationLink: "https://www.okta.com",
     documentationText: "Documentation",
+    isFullWidth: false,
   },
   render: function C(args) {
-    const [data] = useState<Planet[]>(planetData);
+    const [data] = useState<Person[]>(personData.slice(0, 10));
     const [isOverlayDrawerVisible, setIsOverlayVisible] = useState(false);
-    const [isEmbeddedDrawerVisible, setIsEmbeddedVisible] = useState(false);
+    const [isDialogVisible, setIsDialogVisible] = useState(false);
 
     const getData = useCallback(() => {
       return data;
     }, [data]);
-
-    const tabs: TabItemProps[] = [
-      {
-        label: "Planets",
-        value: "planets",
-        children: "Information about Planets",
-      },
-      {
-        label: "Moons",
-        value: "moons",
-        children: (
-          <Grid columns={[1]}>
-            <DataTable
-              columns={planetColumns}
-              getData={getData}
-              hasSearch
-              hasFilters
-            />
-          </Grid>
-        ),
-      },
-    ];
 
     const onOpenOverlayDrawer = useCallback(() => {
       setIsOverlayVisible(true);
@@ -243,12 +239,12 @@ export const Default: StoryObj<OdysseyLayoutProps> = {
       setIsOverlayVisible(false);
     }, []);
 
-    const onOpenEmbeddedDrawer = useCallback(() => {
-      setIsEmbeddedVisible(true);
+    const onOpenDialog = useCallback(() => {
+      setIsDialogVisible(true);
     }, []);
 
-    const onCloseEmbeddedDrawer = useCallback(() => {
-      setIsEmbeddedVisible(false);
+    const onCloseDialog = useCallback(() => {
+      setIsDialogVisible(false);
     }, []);
 
     return (
@@ -274,12 +270,113 @@ export const Default: StoryObj<OdysseyLayoutProps> = {
         }
         secondaryCallToActionComponent={
           <Button
+            label={isDialogVisible ? "Close dialog" : "Open dialog"}
+            onClick={isDialogVisible ? onCloseDialog : onOpenDialog}
+            variant="secondary"
+          />
+        }
+        tertiaryCallToActionComponent={
+          <MenuButton
+            buttonLabel="More actions"
+            children={[
+              <MenuItem key="1">View details</MenuItem>,
+              <MenuItem key="2">Edit configuration</MenuItem>,
+              <MenuItem key="3">Launch</MenuItem>,
+            ]}
+          />
+        }
+        drawer={
+          <Drawer
+            variant="temporary"
+            title="Drawer title"
+            primaryCallToActionComponent={
+              <Button
+                label="Primary"
+                onClick={onCloseOverlayDrawer}
+                variant="primary"
+              />
+            }
+            onClose={onCloseOverlayDrawer}
+            isOpen={isOverlayDrawerVisible}
+            showDividers
+          >
+            {drawerLongText}
+          </Drawer>
+        }
+        isFullWidth={args.isFullWidth}
+      >
+        <Dialog
+          title="Dialog title"
+          children="Consistently named a Leader by major analyst firms. Trusted by 15,000+ customers to secure digital interactions and accelerate innovation."
+          primaryCallToActionComponent={
+            <Button
+              label="Button label"
+              onClick={onCloseDialog}
+              variant="primary"
+            />
+          }
+          secondaryCallToActionComponent={
+            <Button
+              label="Cancel"
+              onClick={onCloseDialog}
+              variant="secondary"
+            />
+          }
+          onClose={onCloseDialog}
+          isOpen={isDialogVisible}
+        />
+        <Grid panes={[1]}>
+          <DataTable
+            columns={personColumns}
+            getData={getData}
+            hasSearch
+            hasFilters
+            totalRows={10}
+          />
+        </Grid>
+      </OdysseyLayout>
+    );
+  },
+};
+
+export const EmbeddedDrawer: StoryObj<OdysseyLayoutProps> = {
+  args: {
+    title: "Table title",
+    description: "Optional brief description about the page",
+    documentationLink: "https://www.okta.com",
+    documentationText: "Documentation",
+    isFullWidth: false,
+  },
+  render: function C(args) {
+    const [data] = useState<Person[]>(personData.slice(0, 10));
+    const [isEmbeddedDrawerVisible, setIsEmbeddedVisible] = useState(false);
+
+    const getData = useCallback(() => {
+      return data;
+    }, [data]);
+
+    const onOpenEmbeddedDrawer = useCallback(() => {
+      setIsEmbeddedVisible(true);
+    }, []);
+
+    const onCloseEmbeddedDrawer = useCallback(() => {
+      setIsEmbeddedVisible(false);
+    }, []);
+
+    return (
+      <OdysseyLayout
+        title={args.title}
+        description={args.description}
+        documentationLink={args.documentationLink}
+        documentationText={args.documentationText}
+        primaryCallToActionComponent={
+          <Button
             label={
               isEmbeddedDrawerVisible
                 ? "Close embedded drawer"
                 : "Open embedded drawer"
             }
-            variant="secondary"
+            variant="primary"
             onClick={
               isEmbeddedDrawerVisible
                 ? onCloseEmbeddedDrawer
@@ -287,56 +384,288 @@ export const Default: StoryObj<OdysseyLayoutProps> = {
             }
           />
         }
-        tertiaryCallToActionComponent={
-          <Button label="Action 3" variant="secondary" />
-        }
         drawer={
-          <>
-            <Drawer
-              variant="persistent"
-              title="Drawer title"
-              primaryCallToActionComponent={
-                <Button
-                  label="Primary"
-                  onClick={onCloseEmbeddedDrawer}
-                  variant="primary"
-                />
-              }
-              onClose={onCloseEmbeddedDrawer}
-              isOpen={isEmbeddedDrawerVisible}
-              showDividers
-            >
-              {drawerShortText}
-            </Drawer>
-            <Drawer
-              variant="temporary"
-              title="Drawer title"
-              primaryCallToActionComponent={
-                <Button
-                  label="Primary"
-                  onClick={onCloseOverlayDrawer}
-                  variant="primary"
-                />
-              }
-              onClose={onCloseOverlayDrawer}
-              isOpen={isOverlayDrawerVisible}
-              showDividers
-            >
-              {drawerLongText}
-            </Drawer>
-          </>
+          <Drawer
+            variant="persistent"
+            title="Drawer title"
+            primaryCallToActionComponent={
+              <Button
+                label="Primary"
+                onClick={onCloseEmbeddedDrawer}
+                variant="primary"
+              />
+            }
+            onClose={onCloseEmbeddedDrawer}
+            isOpen={isEmbeddedDrawerVisible}
+            showDividers
+          >
+            {drawerShortText}
+          </Drawer>
         }
-        isFullWidth
+        isFullWidth={args.isFullWidth}
       >
-        <Tabs value="planets" tabs={tabs} />
-        <Grid columns={[1, 2]}>
-          <Box>{drawerShortText}</Box>
+        <Grid panes={[1]}>
           <DataTable
-            columns={planetColumns}
+            columns={personColumns}
             getData={getData}
             hasSearch
             hasFilters
+            totalRows={10}
           />
+        </Grid>
+      </OdysseyLayout>
+    );
+  },
+};
+
+export const Form: StoryObj<OdysseyLayoutProps> = {
+  args: {
+    title: "People",
+    description: "Optional brief description about the page",
+    documentationLink: "https://www.okta.com",
+    documentationText: "Help",
+    isFullWidth: false,
+  },
+  render: function C(args) {
+    return (
+      <OdysseyLayout
+        title={args.title}
+        description={args.description}
+        documentationLink={args.documentationLink}
+        documentationText={args.documentationText}
+        isFullWidth={args.isFullWidth}
+        primaryCallToActionComponent={
+          <Button label="Reset passwords" variant="primary" />
+        }
+      >
+        <Grid panes={[1]}>
+          <OdysseyForm
+            title="Add Person"
+            name="Add Person"
+            formActions={
+              <>
+                <Button label="Reset" variant="secondary" />
+                <Button type="submit" label="Submit" variant="primary" />
+              </>
+            }
+          >
+            <TextField label="First name" />
+            <TextField label="Last name" />
+            <TextField label="Email" />
+          </OdysseyForm>
+        </Grid>
+      </OdysseyLayout>
+    );
+  },
+};
+
+export const Dashboard: StoryObj<OdysseyLayoutProps> = {
+  args: {
+    title: "Account",
+    documentationLink: "https://www.okta.com",
+    documentationText: "Help",
+    isFullWidth: false,
+  },
+  render: function C(args) {
+    const organizationData = [
+      { field: "Company name", value: "ACME Corporation" },
+      { field: "Telephone number", value: "012-345-6789" },
+      { field: "Address 1", value: undefined },
+      { field: "Address 2", value: undefined },
+    ];
+    const endUserData = [
+      {
+        field: "Technical contact",
+        value: "Add-Min O'Cloudy (admin@okta.com)",
+      },
+      { field: "Support phone", value: "012-345-6789" },
+      { field: "Help link", value: undefined },
+      { field: "End User Help Form", value: undefined },
+    ];
+    const odysseyDesignTokens = useOdysseyDesignTokens();
+
+    return (
+      <OdysseyLayout
+        title={args.title}
+        description={args.description}
+        documentationLink={args.documentationLink}
+        documentationText={args.documentationText}
+        isFullWidth={args.isFullWidth}
+      >
+        <Grid panes={[1, 1]}>
+          <Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-end",
+              }}
+            >
+              <Heading5>Organization Contact</Heading5>
+              <Button label="Edit" variant="floating" />
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                rowGap: odysseyDesignTokens.Spacing4,
+                marginTop: odysseyDesignTokens.Spacing4,
+              }}
+            >
+              {organizationData.map((data) => {
+                return (
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Paragraph>{data.field}</Paragraph>
+                    <Paragraph>{data.value}</Paragraph>
+                  </Box>
+                );
+              })}
+            </Box>
+          </Box>
+          <Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-end",
+              }}
+            >
+              <Heading5>Billing information</Heading5>
+              <Button label="Edit" variant="floating" />
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                rowGap: odysseyDesignTokens.Spacing2,
+                marginTop: odysseyDesignTokens.Spacing4,
+              }}
+            >
+              <Support>
+                The billing contact can be contacted by Okta for the purposes of
+                billing inquiries.
+              </Support>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Paragraph>Billing contact</Paragraph>
+                <Paragraph>Add-Min O'Cloudy (admin@okta.com)</Paragraph>
+              </Box>
+            </Box>
+          </Box>
+        </Grid>
+        <Grid panes={[1, 1, 1]}>
+          <Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-end",
+              }}
+            >
+              <Heading5>Give Access to Okta Support</Heading5>
+              <Button label="Edit" variant="floating" />
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                rowGap: odysseyDesignTokens.Spacing2,
+                marginTop: odysseyDesignTokens.Spacing4,
+              }}
+            >
+              <Support>
+                For troubleshooting purposes, you can let Okta Support login to
+                your account as an administrator.
+              </Support>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Paragraph>Okta Support access</Paragraph>
+                <Paragraph>Disabled</Paragraph>
+              </Box>
+            </Box>
+          </Box>
+          <Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-end",
+              }}
+            >
+              <Heading5>End User Support</Heading5>
+              <Button label="Edit" variant="floating" />
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                rowGap: odysseyDesignTokens.Spacing2,
+                marginTop: odysseyDesignTokens.Spacing4,
+              }}
+            >
+              <Support>
+                For troubleshooting purposes, you can let Okta Support login to
+                your account as an administrator.
+              </Support>
+              {endUserData.map((data) => {
+                return (
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Paragraph>{data.field}</Paragraph>
+                    <Paragraph>{data.value}</Paragraph>
+                  </Box>
+                );
+              })}
+            </Box>
+          </Box>
+          <Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-end",
+              }}
+            >
+              <Heading5>Third-Party Admins</Heading5>
+              <Button label="Edit" variant="floating" />
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                rowGap: odysseyDesignTokens.Spacing2,
+                marginTop: odysseyDesignTokens.Spacing4,
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  columnGap: odysseyDesignTokens.Spacing8,
+                }}
+              >
+                <Paragraph>Manage Third-Party Admins</Paragraph>
+                <Checkbox label="This org contains third-party admins that need to be fully excluded from all Okta communications, including admin-related system notifications. Once enabled, you can exclude individual admins from communications by editing their admin record." />
+              </Box>
+            </Box>
+          </Box>
         </Grid>
       </OdysseyLayout>
     );
