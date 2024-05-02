@@ -10,9 +10,12 @@ test_suites:
     script_path: /root/okta/odyssey/scripts
     sort_order: "4"
     steps:
+      - event: SOURCE
+        action: setup.sh
+        name: Setup Environment
       - event: COMMAND
-        name: Lint Code
         action: yarn build
+        name: Lint Code
     timeout: "20"
 
   - name: "lint"
