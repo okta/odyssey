@@ -65,7 +65,7 @@ test_suites:
 
   - name: semgrep
     criteria: MERGE
-    queue_name: small
+    queue_name: al2023
     script_name: semgrep
     script_path: /root/okta/odyssey/scripts
     sort_order: "5"
