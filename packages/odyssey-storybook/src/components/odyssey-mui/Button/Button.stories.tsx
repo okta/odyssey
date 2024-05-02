@@ -215,14 +215,6 @@ export const ButtonPrimary: StoryObj<ButtonProps> = {
 
 export const ButtonPrimaryDisabled: StoryObj<ButtonProps> = {
   name: "Primary, Disabled",
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "Disabled buttons should be paired with a Tooltip to provide additional context. A tooltip can be added by setting the `tooltipText` prop on the button to a string.",
-      },
-    },
-  },
   args: {
     isDisabled: true,
     label: "Add crew",
