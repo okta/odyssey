@@ -671,3 +671,38 @@ export const Dashboard: StoryObj<OdysseyLayoutProps> = {
     );
   },
 };
+
+export const FullWidth: StoryObj<OdysseyLayoutProps> = {
+  args: {
+    title: "Full-width Table",
+    documentationLink: "https://www.okta.com",
+    documentationText: "Help",
+    isFullWidth: true,
+  },
+  render: function C(args) {
+    const [data] = useState<Person[]>(personData.slice(0, 10));
+
+    const getData = useCallback(() => {
+      return data;
+    }, [data]);
+
+    return (
+      <OdysseyLayout
+        title={args.title}
+        documentationLink={args.documentationLink}
+        documentationText={args.documentationText}
+        isFullWidth={args.isFullWidth}
+      >
+        <Grid panes={[1]}>
+          <DataTable
+            columns={personColumns}
+            getData={getData}
+            hasSearch
+            hasFilters
+            totalRows={10}
+          />
+        </Grid>
+      </OdysseyLayout>
+    );
+  },
+};
