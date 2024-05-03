@@ -2,11 +2,11 @@ test_suites:
   - name: "build"
     abort_commit_on_failure: true
     criteria: MERGE
-    # prereq_test_suite_name:
-    #   - "test"
+    prereq_test_suite_names:
+      - "lint"
+      - "test"
+      - "typecheck"
     queue_name: al2023
-    # queue_name: small
-    # script_name: build
     script_path: /root/okta/odyssey/scripts
     sort_order: "4"
     steps:
