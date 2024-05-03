@@ -1,13 +1,11 @@
-const { injectAxe, checkA11y } = require("axe-playwright");
+import {
+  waitForPageReady,
+  type TestRunnerConfig,
+} from "@storybook/test-runner";
+import { injectAxe, checkA11y } from "axe-playwright";
 
-/** @type import('@storybook/test-runner').TestRunnerConfig */
-module.exports = {
-  /**
-   * Hook that is executed before the test runner starts running tests
-   */
-  setup() {
-    // Add your configuration here.
-  },
+const testRunnerConfig: TestRunnerConfig = {
+  setup() {},
 
   /* Hook to execute before a story is rendered.
    * The page argument is the Playwright's page object for the story.
@@ -22,11 +20,11 @@ module.exports = {
    * The context argument is a Storybook object containing the story's id, title, and name.
    */
   async postVisit(page, context) {
-    await new Promise((r) => setTimeout(r, 500));
+    await waitForPageReady(page);
 
     // https://github.com/abhinaba-ghosh/axe-playwright#parameters-on-checka11y-axerun
     await checkA11y(
-      // the page instance of playwright
+      // Playwright page instance.
       page,
 
       // context
@@ -34,12 +32,6 @@ module.exports = {
 
       // axeOptions, see https://www.deque.com/axe/core-documentation/api-documentation/#parameters-axerun
       {
-        verbose: false,
-        detailedReport: true,
-        detailedReportOptions: {
-          // whether or not to include the full html for the offending nodes
-          html: true,
-        },
         axeOptions: {
           runOnly: {
             type: "tag",
@@ -53,6 +45,12 @@ module.exports = {
             ],
           },
         },
+        detailedReport: true,
+        detailedReportOptions: {
+          // Includes the full html for invalid nodes
+          html: true,
+        },
+        verbose: false,
       },
 
       // skipFailures
@@ -70,3 +68,5 @@ module.exports = {
     );
   },
 };
+
+export default testRunnerConfig;
