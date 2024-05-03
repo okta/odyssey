@@ -70,3 +70,15 @@ export type FieldComponentRenderProps = {
   id: string;
   labelElementId: string;
 };
+
+export type ConditionalLabelProps =
+  | {
+      hasVisibleLabel: false;
+      hint?: never;
+      placeholder: string;
+    }
+  | {
+      hasVisibleLabel?: true;
+      hint?: string;
+      placeholder?: string;
+    };

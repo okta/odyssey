@@ -64,6 +64,7 @@ const storybookMeta: Meta<typeof Autocomplete> = {
         },
       },
     },
+    hasVisibleLabel: fieldComponentPropsMetaData.hasVisibleLabel,
     hint: fieldComponentPropsMetaData.hint,
     HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
     id: fieldComponentPropsMetaData.id,
@@ -447,6 +448,20 @@ const jupiterGalileanMoons: MoonMeta[] = [
       "The third-largest moon after Ganymede and Saturn's largest moon Titan, and as large as the smallest planet Mercury",
   },
 ];
+
+export const NoVisibleLabel: StoryObj<JupiterMoonsAutocomplete> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "TextFields with `hasVisibleLabel` set to false will not render a visible label. Although, the `label` prop is still required for accessibility purposes",
+      },
+    },
+  },
+  args: {
+    hasVisibleLabel: false,
+  },
+};
 
 export const ControlledMultipleAutocomplete: StoryObj<JupiterMoonsAutocomplete> =
   {

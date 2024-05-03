@@ -24,6 +24,7 @@ import {
 import { InputAdornment, InputBase } from "@mui/material";
 
 import {
+  ConditionalLabelProps,
   FieldComponentProps,
   FieldComponentRenderProps,
 } from "./FieldComponentProps";
@@ -154,7 +155,8 @@ export type TextFieldProps = {
    */
   value?: string;
 } & FieldComponentProps &
-  Pick<HtmlProps, "ariaDescribedBy" | "testId" | "translate">;
+  Pick<HtmlProps, "ariaDescribedBy" | "testId" | "translate"> &
+  ConditionalLabelProps;
 
 type FieldRenderProps = Partial<
   Pick<FieldComponentRenderProps, "ariaDescribedBy" | "errorMessageElementId">

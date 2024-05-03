@@ -194,6 +194,7 @@ export type AutocompleteProps<
   FieldComponentProps,
   | "errorMessage"
   | "errorMessageList"
+  | "hasVisibleLabel"
   | "hint"
   | "HintLinkComponent"
   | "id"
@@ -218,6 +219,7 @@ const Autocomplete = <
   errorMessage,
   errorMessageList,
   hasMultipleChoices,
+  hasVisibleLabel,
   id: idOverride,
   inputValue,
   isCustomValueAllowed,
@@ -299,7 +301,7 @@ const Autocomplete = <
         errorMessage={errorMessage}
         errorMessageList={errorMessageList}
         fieldType="single"
-        hasVisibleLabel
+        hasVisibleLabel={hasVisibleLabel}
         //@ts-expect-error htmlFor does not exist ont he InputLabelProps for autocomplete
         id={InputLabelProps.htmlFor}
         isFullWidth={isFullWidth}
@@ -334,6 +336,7 @@ const Autocomplete = <
       ariaDescribedBy,
       errorMessage,
       errorMessageList,
+      hasVisibleLabel,
       hint,
       HintLinkComponent,
       isFullWidth,

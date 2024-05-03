@@ -337,7 +337,11 @@ export const NoVisibleLabel: StoryObj<typeof TextField> = {
     },
   },
   args: {
+    hint: "Specify your destination within the Sol system.",
     hasVisibleLabel: false,
+  },
+  render: function C({ ...props }) {
+    return <TextField {...props} />;
   },
 };
 
