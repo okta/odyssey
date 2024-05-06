@@ -148,7 +148,7 @@ export default meta;
 
 const waitForToastOpenTransition = () =>
   new Promise((resolve) => {
-    setTimeout(resolve, 500);
+    setTimeout(resolve, 1000);
   });
 
 const openToast =
