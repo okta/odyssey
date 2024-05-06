@@ -48,6 +48,16 @@ interface GridContentProps {
   panes: string;
 }
 
+const GridContainer = styled("div", {
+  shouldForwardProp: (prop) => prop != "odysseyDesignTokens",
+})<Pick<GridContentProps, "odysseyDesignTokens">>(
+  ({ odysseyDesignTokens }) => ({
+    "& + &": {
+      marginBlockStart: odysseyDesignTokens.Spacing4,
+    },
+  }),
+);
+
 const GridContent = styled("div", {
   shouldForwardProp: (prop) => !["odysseyDesignTokens", "panes"].includes(prop),
 })<GridContentProps>(({ odysseyDesignTokens, panes }) => ({
@@ -55,16 +65,10 @@ const GridContent = styled("div", {
   gridTemplateColumns: panes,
   gridColumnGap: odysseyDesignTokens.Spacing4,
   columnGap: odysseyDesignTokens.Spacing4,
-}));
 
-const GridPane = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{
-  odysseyDesignTokens: DesignTokens;
-}>(({ odysseyDesignTokens }) => ({
-  backgroundColor: odysseyDesignTokens.HueNeutralWhite,
-  borderRadius: odysseyDesignTokens.Spacing4,
-  padding: odysseyDesignTokens.Spacing4,
+  "& + &": {
+    marginBlockStart: odysseyDesignTokens.Spacing4,
+  },
 }));
 
 const Grid = ({ panes, children }: GridProps) => {
@@ -72,15 +76,16 @@ const Grid = ({ panes, children }: GridProps) => {
   const mappedPanes = panes.map((pane) => `minmax(0, ${pane}fr)`).join(" ");
 
   return (
-    <GridContent odysseyDesignTokens={odysseyDesignTokens} panes={mappedPanes}>
-      {Children.toArray(children).map((child, index) => {
-        return (
-          <GridPane key={index} odysseyDesignTokens={odysseyDesignTokens}>
-            {child}
-          </GridPane>
-        );
-      })}
-    </GridContent>
+    <GridContainer odysseyDesignTokens={odysseyDesignTokens}>
+      <GridContent
+        odysseyDesignTokens={odysseyDesignTokens}
+        panes={mappedPanes}
+      >
+        {Children.toArray(children).map((child, index) => (
+          <div key={index}>{child}</div>
+        ))}
+      </GridContent>
+    </GridContainer>
   );
 };
 
