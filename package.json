@@ -23,7 +23,7 @@
     "prettier-write": "prettier --ignore-unknown --loglevel warn --write .",
     "start:mui": "yarn workspace @okta/odyssey-react-mui dev",
     "start:storybook": "yarn workspace @okta/odyssey-storybook start",
-    "start": "yarn install && yarn build && concurrently npm:dev:source npm:start:storybook",
+    "start": "yarn install && yarn build && yarn concurrently npm:dev:source npm:start:storybook",
     "stylelint": "stylelint **/*.scss",
     "test": "lerna run test",
     "typecheck": "lerna run typecheck"

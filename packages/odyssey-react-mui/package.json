@@ -53,7 +53,7 @@
     "build": "yarn build:clean && yarn generate:i18n && yarn build:types && yarn build:source",
     "dev:source": "yarn build:source --watch",
     "dev:types": "yarn build:types --watch",
-    "dev": "concurrently npm:dev:source npm:dev:types",
+    "dev": "yarn concurrently npm:dev:source npm:dev:types",
     "generate:i18n": "tsx scripts/properties-to-ts.ts bundle",
     "generate:iconComponents": "svgr ../odyssey-icons/dist/icons --out-dir ./src/icons.generated",
     "generate:icons": "yarn build:cleanIconComponents && yarn generate:iconComponents && yarn build:cleanIconsIndex && yarn generate:iconsIndex",
