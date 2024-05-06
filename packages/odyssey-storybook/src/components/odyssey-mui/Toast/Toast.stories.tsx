@@ -146,6 +146,11 @@ const meta: Meta<ToastProps> = {
 
 export default meta;
 
+const waitForToastOpenTransition = () =>
+  new Promise((resolve) => {
+    setTimeout(resolve, 500);
+  });
+
 const openToast =
   ({ canvasElement, step }: PlaywrightProps<ToastProps>) =>
   async (args: ToastProps, actionName: string) => {
@@ -157,6 +162,9 @@ const openToast =
         userEvent.click(buttonElement);
         userEvent.tab();
       });
+
+      await waitForToastOpenTransition();
+
       await axeRun(actionName);
     });
   };
@@ -288,6 +296,9 @@ export const Dismissible: StoryObj<ToastProps> = {
           }
         }
       });
+
+      await waitForToastOpenTransition();
+
       await axeRun("Dismissible Toast");
     });
   },
