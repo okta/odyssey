@@ -26,18 +26,19 @@ import {
 import {
   Box,
   Button,
+  Checkbox,
   DataTable,
   Dialog,
   Drawer,
   Form as OdysseyForm,
+  Heading5,
   MenuButton,
   MenuItem,
-  TextField,
-  Heading5,
   Paragraph,
   Support,
+  Surface,
+  TextField,
   useOdysseyDesignTokens,
-  Checkbox,
 } from "@okta/odyssey-react-mui";
 import { useCallback, useState } from "react";
 
@@ -325,14 +326,19 @@ export const KitchenSink: StoryObj<OdysseyLayoutProps> = {
           onClose={onCloseDialog}
           isOpen={isDialogVisible}
         />
-        <Grid panes={[1]}>
-          <DataTable
-            columns={personColumns}
-            getData={getData}
-            hasSearch
-            hasFilters
-            totalRows={10}
-          />
+        <Grid panes={[3, 1]}>
+          <Surface>
+            <DataTable
+              columns={personColumns}
+              getData={getData}
+              hasSearch
+              hasFilters
+              totalRows={10}
+            />
+          </Surface>
+          <Surface>
+            <h1>Another thing</h1>
+          </Surface>
         </Grid>
       </OdysseyLayout>
     );
@@ -405,13 +411,15 @@ export const EmbeddedDrawer: StoryObj<OdysseyLayoutProps> = {
         isFullWidth={args.isFullWidth}
       >
         <Grid panes={[1]}>
-          <DataTable
-            columns={personColumns}
-            getData={getData}
-            hasSearch
-            hasFilters
-            totalRows={10}
-          />
+          <Surface>
+            <DataTable
+              columns={personColumns}
+              getData={getData}
+              hasSearch
+              hasFilters
+              totalRows={10}
+            />
+          </Surface>
         </Grid>
       </OdysseyLayout>
     );
@@ -439,20 +447,22 @@ export const Form: StoryObj<OdysseyLayoutProps> = {
         }
       >
         <Grid panes={[1]}>
-          <OdysseyForm
-            title="Add Person"
-            name="Add Person"
-            formActions={
-              <>
-                <Button label="Reset" variant="secondary" />
-                <Button type="submit" label="Submit" variant="primary" />
-              </>
-            }
-          >
-            <TextField label="First name" />
-            <TextField label="Last name" />
-            <TextField label="Email" />
-          </OdysseyForm>
+          <Surface>
+            <OdysseyForm
+              title="Add Person"
+              name="Add Person"
+              formActions={
+                <>
+                  <Button label="Reset" variant="secondary" />
+                  <Button type="submit" label="Submit" variant="primary" />
+                </>
+              }
+            >
+              <TextField label="First name" />
+              <TextField label="Last name" />
+              <TextField label="Email" />
+            </OdysseyForm>
+          </Surface>
         </Grid>
       </OdysseyLayout>
     );
@@ -492,8 +502,8 @@ export const Dashboard: StoryObj<OdysseyLayoutProps> = {
         documentationText={args.documentationText}
         isFullWidth={args.isFullWidth}
       >
-        <Grid panes={[1, 1]}>
-          <Box>
+        <Grid panes={[2, 1]}>
+          <Surface>
             <Box
               sx={{
                 display: "flex",
@@ -526,8 +536,8 @@ export const Dashboard: StoryObj<OdysseyLayoutProps> = {
                 );
               })}
             </Box>
-          </Box>
-          <Box>
+          </Surface>
+          <Surface>
             <Box
               sx={{
                 display: "flex",
@@ -560,10 +570,10 @@ export const Dashboard: StoryObj<OdysseyLayoutProps> = {
                 <Paragraph>Add-Min O'Cloudy (admin@okta.com)</Paragraph>
               </Box>
             </Box>
-          </Box>
+          </Surface>
         </Grid>
         <Grid panes={[1, 1, 1]}>
-          <Box>
+          <Surface>
             <Box
               sx={{
                 display: "flex",
@@ -596,8 +606,8 @@ export const Dashboard: StoryObj<OdysseyLayoutProps> = {
                 <Paragraph>Disabled</Paragraph>
               </Box>
             </Box>
-          </Box>
-          <Box>
+          </Surface>
+          <Surface>
             <Box
               sx={{
                 display: "flex",
@@ -634,8 +644,8 @@ export const Dashboard: StoryObj<OdysseyLayoutProps> = {
                 );
               })}
             </Box>
-          </Box>
-          <Box>
+          </Surface>
+          <Surface>
             <Box
               sx={{
                 display: "flex",
@@ -665,7 +675,7 @@ export const Dashboard: StoryObj<OdysseyLayoutProps> = {
                 <Checkbox label="This org contains third-party admins that need to be fully excluded from all Okta communications, including admin-related system notifications. Once enabled, you can exclude individual admins from communications by editing their admin record." />
               </Box>
             </Box>
-          </Box>
+          </Surface>
         </Grid>
       </OdysseyLayout>
     );
