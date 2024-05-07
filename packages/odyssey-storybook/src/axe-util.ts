@@ -14,24 +14,20 @@
 import axe from "axe-core";
 
 export const axeRun = async (interaction = "") => {
-  await new Promise((resolve) => {
-    setTimeout(resolve, 500);
-  })
-    .then(() =>
-      axe.run({
-        runOnly: {
-          type: "tag",
-          values: [
-            "section508",
-            "wcag2a",
-            "wcag2aa",
-            "wcag21a",
-            "wcag21aa",
-            "wcag22aa",
-          ],
-        },
-      }),
-    )
+  await axe
+    .run({
+      runOnly: {
+        type: "tag",
+        values: [
+          "section508",
+          "wcag2a",
+          "wcag2aa",
+          "wcag21a",
+          "wcag21aa",
+          "wcag22aa",
+        ],
+      },
+    })
     .then((results) => {
       if (results.violations.length) {
         throw new Error(

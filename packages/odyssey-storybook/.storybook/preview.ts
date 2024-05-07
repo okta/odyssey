@@ -113,9 +113,6 @@ const preview: Preview = {
       source: {
         excludeDecorators: true,
       },
-      story: {
-        autoplay: false,
-      },
     },
   },
 };
