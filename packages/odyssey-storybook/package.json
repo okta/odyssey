@@ -75,6 +75,7 @@
     "start:storybook": "storybook dev -p 6006",
     "start:types": "tsc --build --watch",
     "start": "yarn concurrently npm:start:types npm:start:storybook",
+    "test:storybook": "test-storybook",
     "typecheck": "tsc"
   }
 }
