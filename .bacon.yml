@@ -3,9 +3,40 @@ test_suites:
     abort_commit_on_failure: true
     criteria: MERGE
     prereq_test_suite_names:
+      - "interaction test"
       - "lint"
       - "test"
       - "typecheck"
+    queue_name: al2023
+    script_path: /root/okta/odyssey/scripts
+    sort_order: "6"
+    steps:
+      - event: SOURCE
+        action: setup.sh
+        name: Setup Environment
+      - event: COMMAND
+        action: yarn build
+        name: Build Packages
+    timeout: "20"
+
+  - name: "code coverage"
+    abort_commit_on_failure: true
+    criteria: MERGE
+    queue_name: al2023
+    script_path: /root/okta/odyssey/scripts
+    sort_order: "5"
+    steps:
+      - event: SOURCE
+        action: setup.sh
+        name: Setup Environment
+      - event: COMMAND
+        action: yarn workspace @okta/odyssey-storybook coverage
+        name: Report Code Coverage
+    timeout: "20"
+
+  - name: "interaction test"
+    abort_commit_on_failure: true
+    criteria: MERGE
     queue_name: al2023
     script_path: /root/okta/odyssey/scripts
     sort_order: "4"
@@ -14,8 +45,8 @@ test_suites:
         action: setup.sh
         name: Setup Environment
       - event: COMMAND
-        action: yarn build
-        name: Build Packages
+        action: yarn workspace @okta/odyssey-storybook dev:interactionTest
+        name: Test Interactions and Accessibility
     timeout: "20"
 
   - name: "lint"
