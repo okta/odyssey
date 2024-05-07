@@ -126,6 +126,7 @@ const findDialogElement = async ({
   await step("Check Dialog", async () => {
     const canvas = within(canvasElement);
     const buttonElement = canvas.getByText("Open dialog");
+    console.log({ buttonElement });
     await userEvent.click(buttonElement);
     await screen.findByRole("dialog");
   });
