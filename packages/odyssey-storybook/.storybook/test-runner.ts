@@ -20,7 +20,11 @@ const testRunnerConfig: TestRunnerConfig = {
    * The context argument is a Storybook object containing the story's id, title, and name.
    */
   async postVisit(page, context) {
-    await waitForPageReady(page);
+    await waitForPageReady(page).then(
+      () =>
+        // Waits for `Toast`'s transition to end, so `axe` doesn't incorrectly throw errors.
+        new Promise((resolve) => setTimeout(resolve, 500)),
+    );
 
     // https://github.com/abhinaba-ghosh/axe-playwright#parameters-on-checka11y-axerun
     await checkA11y(
