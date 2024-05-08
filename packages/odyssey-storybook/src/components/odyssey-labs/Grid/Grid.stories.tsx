@@ -23,10 +23,10 @@ const storybookMeta: Meta<GridProps> = {
     panes: {
       control: "text",
       description:
-        "The title of the layout to be situated in the layout header",
+        "The supported pane ratios for the Grid. Each number is a fractional unit that is mapped to the 'fr' CSS unit. For example: [2, 1] defines a 2/3, 1/3 layout and [1, 1, 1] defines a 1/3, 1/3, 1/3 layout",
       table: {
         type: {
-          summary: "string",
+          summary: "SupportedPaneRatios",
         },
       },
     },
@@ -63,7 +63,7 @@ export const Single: StoryObj<GridProps> = {
     return (
       <Grid {...args}>
         <Surface>
-          <h1>Column</h1>
+          <h1>Pane</h1>
         </Surface>
       </Grid>
     );
@@ -78,10 +78,10 @@ export const Split: StoryObj<GridProps> = {
     return (
       <Grid {...args}>
         <Surface>
-          <h1>Column</h1>
+          <h1>Pane</h1>
         </Surface>
         <Surface>
-          <h1>Column</h1>
+          <h1>Pane</h1>
         </Surface>
       </Grid>
     );
@@ -96,10 +96,10 @@ export const TwoThirdsStart: StoryObj<GridProps> = {
     return (
       <Grid {...args}>
         <Surface>
-          <h1>Column</h1>
+          <h1>Pane</h1>
         </Surface>
         <Surface>
-          <h1>Column</h1>
+          <h1>Pane</h1>
         </Surface>
       </Grid>
     );
@@ -114,10 +114,10 @@ export const TwoThirdsEnd: StoryObj<GridProps> = {
     return (
       <Grid {...args}>
         <Surface>
-          <h1>Column</h1>
+          <h1>Pane</h1>
         </Surface>
         <Surface>
-          <h1>Column</h1>
+          <h1>Pane</h1>
         </Surface>
       </Grid>
     );
@@ -132,10 +132,10 @@ export const ThreeFourthsStart: StoryObj<GridProps> = {
     return (
       <Grid {...args}>
         <Surface>
-          <h1>Column</h1>
+          <h1>Pane</h1>
         </Surface>
         <Surface>
-          <h1>Column</h1>
+          <h1>Pane</h1>
         </Surface>
       </Grid>
     );
@@ -150,17 +150,17 @@ export const ThreeFourthsEnd: StoryObj<GridProps> = {
     return (
       <Grid {...args}>
         <Surface>
-          <h1>Column</h1>
+          <h1>Pane</h1>
         </Surface>
         <Surface>
-          <h1>Column</h1>
+          <h1>Pane</h1>
         </Surface>
       </Grid>
     );
   },
 };
 
-export const ThreeColumnSplit: StoryObj<GridProps> = {
+export const ThreePaneSplit: StoryObj<GridProps> = {
   args: {
     panes: [1, 1, 1],
   },
@@ -168,20 +168,20 @@ export const ThreeColumnSplit: StoryObj<GridProps> = {
     return (
       <Grid {...args}>
         <Surface>
-          <h1>Column</h1>
+          <h1>Pane</h1>
         </Surface>
         <Surface>
-          <h1>Column</h1>
+          <h1>Pane</h1>
         </Surface>
         <Surface>
-          <h1>Column</h1>
+          <h1>Pane</h1>
         </Surface>
       </Grid>
     );
   },
 };
 
-export const FourColumnSplit: StoryObj<GridProps> = {
+export const FourPaneSplit: StoryObj<GridProps> = {
   args: {
     panes: [1, 1, 1, 1],
   },
@@ -189,16 +189,16 @@ export const FourColumnSplit: StoryObj<GridProps> = {
     return (
       <Grid {...args}>
         <Surface>
-          <h1>Column</h1>
+          <h1>Pane</h1>
         </Surface>
         <Surface>
-          <h1>Column</h1>
+          <h1>Pane</h1>
         </Surface>
         <Surface>
-          <h1>Column</h1>
+          <h1>Pane</h1>
         </Surface>
         <Surface>
-          <h1>Column</h1>
+          <h1>Pane</h1>
         </Surface>
       </Grid>
     );
@@ -211,72 +211,72 @@ export const KitchenSink: StoryObj<GridProps> = {
       <>
         <Grid panes={[1]}>
           <Surface>
-            <h1>Column</h1>
+            <h1>Pane</h1>
           </Surface>
         </Grid>
         <Grid panes={[1, 1]}>
           <Surface>
-            <h1>Column</h1>
+            <h1>Pane</h1>
           </Surface>
           <Surface>
-            <h1>Column</h1>
+            <h1>Pane</h1>
           </Surface>
         </Grid>
         <Grid panes={[2, 1]}>
           <Surface>
-            <h1>Column</h1>
+            <h1>Pane</h1>
           </Surface>
           <Surface>
-            <h1>Column</h1>
+            <h1>Pane</h1>
           </Surface>
         </Grid>
         <Grid panes={[1, 2]}>
           <Surface>
-            <h1>Column</h1>
+            <h1>Pane</h1>
           </Surface>
           <Surface>
-            <h1>Column</h1>
+            <h1>Pane</h1>
           </Surface>
         </Grid>
         <Grid panes={[3, 1]}>
           <Surface>
-            <h1>Column</h1>
+            <h1>Pane</h1>
           </Surface>
           <Surface>
-            <h1>Column</h1>
+            <h1>Pane</h1>
           </Surface>
         </Grid>
         <Grid panes={[1, 3]}>
           <Surface>
-            <h1>Column</h1>
+            <h1>Pane</h1>
           </Surface>
           <Surface>
-            <h1>Column</h1>
+            <h1>Pane</h1>
           </Surface>
         </Grid>
         <Grid panes={[1, 1, 1]}>
           <Surface>
-            <h1>Column</h1>
+            <h1>Pane</h1>
           </Surface>
           <Surface>
-            <h1>Column</h1>
+            <h1>Pane</h1>
           </Surface>
           <Surface>
-            <h1>Column</h1>
+            <h1>Pane</h1>
           </Surface>
         </Grid>
         <Grid panes={[1, 1, 1, 1]}>
           <Surface>
-            <h1>Column</h1>
+            <h1>Pane</h1>
           </Surface>
           <Surface>
-            <h1>Column</h1>
+            <h1>Pane</h1>
           </Surface>
           <Surface>
-            <h1>Column</h1>
+            <h1>Pane</h1>
           </Surface>
           <Surface>
-            <h1>Column</h1>
+            <h1>Pane</h1>
           </Surface>
         </Grid>
       </>

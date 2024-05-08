@@ -522,9 +522,10 @@ export const Dashboard: StoryObj<OdysseyLayoutProps> = {
                 marginTop: odysseyDesignTokens.Spacing4,
               }}
             >
-              {organizationData.map((data) => {
+              {organizationData.map((data, index) => {
                 return (
                   <Box
+                    key={index}
                     sx={{
                       display: "flex",
                       justifyContent: "space-between",
@@ -630,9 +631,10 @@ export const Dashboard: StoryObj<OdysseyLayoutProps> = {
                 For troubleshooting purposes, you can let Okta Support login to
                 your account as an administrator.
               </Support>
-              {endUserData.map((data) => {
+              {endUserData.map((data, index) => {
                 return (
                   <Box
+                    key={index}
                     sx={{
                       display: "flex",
                       justifyContent: "space-between",
@@ -704,13 +706,15 @@ export const FullWidth: StoryObj<OdysseyLayoutProps> = {
         isFullWidth={args.isFullWidth}
       >
         <Grid panes={[1]}>
-          <DataTable
-            columns={personColumns}
-            getData={getData}
-            hasSearch
-            hasFilters
-            totalRows={10}
-          />
+          <Surface>
+            <DataTable
+              columns={personColumns}
+              getData={getData}
+              hasSearch
+              hasFilters
+              totalRows={10}
+            />
+          </Surface>
         </Grid>
       </OdysseyLayout>
     );

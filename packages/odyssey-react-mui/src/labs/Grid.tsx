@@ -25,15 +25,12 @@ type SupportedPaneRatios =
   | [1, 3]
   | [3, 1]
   | [1, 1, 1]
-  | [1, 2, 1]
-  | [2, 1, 1]
-  | [1, 1, 2]
   | [1, 1, 1, 1];
 
 export type GridProps = {
   /**
    * The supported pane ratios for the Grid. Each number is a fractional unit that is mapped to the 'fr' CSS unit.
-   * e.g. [2, 1] defines a 2/3, 1/3 layout and [1, 2, 1] defines a 1/4, 1/2, 1/4 layout
+   * e.g. [2, 1] defines a 2/3, 1/3 layout and [1, 1, 1] defines a 1/3, 1/3, 1/3 layout
    * @see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Basic_concepts_of_grid_layout#the_fr_unit
    */
   panes: SupportedPaneRatios;
@@ -81,9 +78,7 @@ const Grid = ({ panes, children }: GridProps) => {
         odysseyDesignTokens={odysseyDesignTokens}
         panes={mappedPanes}
       >
-        {Children.toArray(children).map((child, index) => (
-          <div key={index}>{child}</div>
-        ))}
+        {Children.toArray(children).map((child) => child)}
       </GridContent>
     </GridContainer>
   );
