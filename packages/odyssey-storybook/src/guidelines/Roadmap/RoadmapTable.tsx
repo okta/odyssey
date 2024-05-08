@@ -26,7 +26,7 @@ import * as odysseyTokens from "@okta/odyssey-design-tokens";
 const processData = ({
   initialData,
   page = 1,
-  resultsPerPage = 20,
+  resultsPerPage = 100,
   search,
   filters,
   sort,
@@ -116,7 +116,6 @@ const processData = ({
       return 0;
     });
   }
-
   // Implement pagination
   const startIdx = (page - 1) * resultsPerPage;
   const endIdx = startIdx + resultsPerPage;
@@ -127,7 +126,6 @@ const processData = ({
 
 export const InnerRoadmapTable = () => {
   const data = incomingData;
-
   const fetchData = ({
     page,
     resultsPerPage,
@@ -157,10 +155,11 @@ export const InnerRoadmapTable = () => {
       totalRows={data.length}
       getRowId={({ name }) => name}
       getData={fetchData}
-      hasChangeableDensity
-      hasColumnResizing
-      hasColumnVisibility
+      hasChangeableDensity={false}
+      hasColumnResizing={false}
+      hasColumnVisibility={false}
       hasFilters={false}
+      resultsPerPage={100}
       hasPagination={false}
       hasRowSelection={false}
       hasRowReordering={false}

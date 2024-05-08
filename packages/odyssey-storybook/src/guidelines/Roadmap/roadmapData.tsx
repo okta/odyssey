@@ -10,15 +10,17 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { DataTableRowData, Status } from "@okta/odyssey-react-mui";
+import { DataTableRowData, Status, Tooltip } from "@okta/odyssey-react-mui";
 import { DataTableColumn } from "@okta/odyssey-react-mui";
 
 export type OdysseyComponent = {
   name: string;
-  status: "Fully released" | "In Labs" | "In progress" | "Not started";
-  startDate: string;
-  labsRelease: string;
-  fullRelease: string;
+  type: string;
+  status: "" | "Released" | "In Labs" | "In progress" | "Not started";
+  define: string;
+  design: string;
+  develop: string;
+  deliverableTiming: string;
 };
 
 export const columns: DataTableColumn<DataTableRowData>[] = [
@@ -26,198 +28,450 @@ export const columns: DataTableColumn<DataTableRowData>[] = [
     accessorKey: "name",
     header: "Name",
     enableHiding: false,
+    size: 325,
+  },
+  {
+    accessorKey: "type",
+    header: "Type",
+    enableHiding: true,
+    size: 200,
   },
   {
     accessorKey: "status",
     header: "Status",
-    Cell: ({ cell }) => {
-      const value = cell.getValue<string>();
+    size: 200,
+    Cell: ({ cell, row }) => {
+      const statusValue = cell.getValue<string>();
+      const defineValue = row.original.define;
+      const designValue = row.original.design;
+      const developValue = row.original.develop;
       const severity =
-        value === "Fully released"
+        statusValue === "Released"
           ? "success"
-          : value === "In Labs"
+          : statusValue === "In Labs"
             ? "warning"
-            : value === "In progress"
+            : statusValue === "In progress"
               ? "default"
-              : value === "Not started"
+              : statusValue === "Not started"
                 ? "error"
                 : "default";
-      return <Status label={value} severity={severity} />;
+
+      // First priority: Check if the define stage is "In Progress"
+      if (defineValue === "In Progress") {
+        // Return a Tooltip specifically for this condition and do nothing else
+        return (
+          <Tooltip
+            ariaType="label"
+            placement="top"
+            text="Planning and research in progress"
+          >
+            <Status
+              label="Planning and research in progress"
+              severity={severity}
+            />
+          </Tooltip>
+        );
+      }
+
+      // If defineValue is not "In Progress", then proceed with this logic:
+      let tooltipText = "";
+      if (["Complete", "In progress"].includes(designValue)) {
+        tooltipText += "Design: " + designValue + " ";
+      }
+      if (["Complete", "In progress"].includes(developValue)) {
+        tooltipText += "Develop: " + developValue;
+      }
+
+      // Only show the tooltip if there's relevant information to display
+      if (tooltipText && statusValue !== "Released") {
+        return (
+          <Tooltip ariaType="label" placement="top" text={tooltipText.trim()}>
+            <Status label={statusValue} severity={severity} />
+          </Tooltip>
+        );
+      }
+
+      // If there is no relevant tooltip text, just show the status without any tooltip
+      return <Status label={statusValue} severity={severity} />;
     },
   },
+
   {
-    accessorKey: "startDate",
-    header: "Start date",
-    //@ts-expect-error need to address typing here
-    Cell: ({ cell }) => {
-      return cell.getValue() ? cell.getValue() : "—";
-    },
-  },
-  {
-    accessorKey: "labsRelease",
-    header: "Available in Odyssey Labs",
-    //@ts-expect-error need to address typing here
-    Cell: ({ cell }) => {
-      return cell.getValue() ? cell.getValue() : "—";
-    },
-  },
-  {
-    accessorKey: "fullRelease",
-    header: "Available in full release",
-    //@ts-expect-error need to address typing here
-    Cell: ({ cell }) => {
-      return cell.getValue() ? cell.getValue() : "—";
-    },
+    accessorKey: "deliverableTiming",
+    header: "Expected",
+    enableHiding: false,
+    size: 200,
   },
 ];
 
 export const data: OdysseyComponent[] = [
   {
-    name: "Date picker",
-    status: "In Labs",
-    startDate: "Oct '22",
-    labsRelease: "Oct '22",
-    fullRelease: "",
+    name: "Accordion",
+    type: "Component",
+    status: "Released",
+    define: "Complete",
+    design: "Complete",
+    develop: "In progress",
+    deliverableTiming: "Q2 FY25",
   },
   {
-    name: "Data filters",
+    name: "Autocomplete",
+    type: "Component",
+    status: "Released",
+    define: "Complete",
+    design: "Complete",
+    develop: "Complete",
+    deliverableTiming: "Q1 FY25",
+  },
+  {
+    name: "Badge",
+    type: "Component",
+    status: "Released",
+    define: "Complete",
+    design: "Complete",
+    develop: "Complete",
+    deliverableTiming: "Q2 FY25",
+  },
+  {
+    name: "Banner",
+    type: "Component",
+    status: "Released",
+    define: "Complete",
+    design: "Complete",
+    develop: "Complete",
+    deliverableTiming: "Q2 FY25",
+  },
+  {
+    name: "Breadcrumbs",
+    type: "Component",
+    status: "Released",
+    define: "Complete",
+    design: "Complete",
+    develop: "Complete",
+    deliverableTiming: "FY24",
+  },
+  {
+    name: "Button",
+    type: "Component",
+    status: "Released",
+    define: "Complete",
+    design: "Complete",
+    develop: "Complete",
+    deliverableTiming: "FY24",
+  },
+  {
+    name: "Callout",
+    type: "Component",
+    status: "Released",
+    define: "Complete",
+    design: "Complete",
+    develop: "Complete",
+    deliverableTiming: "Q1 FY25",
+  },
+  {
+    name: "Card (tile?)",
+    type: "Component",
     status: "In Labs",
-    startDate: "Sep '23",
-    labsRelease: "Nov '23",
-    fullRelease: "Jan '24",
+    define: "In Labs",
+    design: "In Labs",
+    develop: "In Labs",
+    deliverableTiming: "TBD",
+  },
+  {
+    name: "Checkbox and checkbox group",
+    type: "Component",
+    status: "Released",
+    define: "Complete",
+    design: "Complete",
+    develop: "Complete",
+    deliverableTiming: "FY24",
+  },
+  {
+    name: "Circular progress",
+    type: "Component",
+    status: "Released",
+    define: "Complete",
+    design: "Complete",
+    develop: "Complete",
+    deliverableTiming: "FY24",
+  },
+  {
+    name: "Dashboard",
+    type: "Component",
+    status: "Not started",
+    define: "Not started",
+    design: "Not started",
+    develop: "Not started",
+    deliverableTiming: "Q2 FY25",
+  },
+  {
+    name: "Data stack (data list, resource list?)",
+    type: "Component",
+    status: "Not started",
+    define: "In progress",
+    design: "Not started",
+    develop: "Not started",
+    deliverableTiming: "Q2 FY25",
   },
   {
     name: "Data table",
+    type: "Component",
+    status: "Released",
+    define: "Complete",
+    design: "Complete",
+    develop: "Complete",
+    deliverableTiming: "Q1 FY25",
+  },
+  {
+    name: "Date picker",
+    type: "Component",
     status: "In Labs",
-    startDate: "Sep '23",
-    labsRelease: "Nov '23",
-    fullRelease: "Jan '24",
+    define: "In progress",
+    design: "In progress",
+    develop: "In progress",
+    deliverableTiming: "Q2 FY25",
   },
   {
-    name: "Accordion",
-    status: "In Labs",
-    startDate: "Oct '23",
-    labsRelease: "Oct '23",
-    fullRelease: "Dec '23",
-  },
-
-  {
-    name: "Badge",
-    status: "In progress",
-    startDate: "Oct '23",
-    labsRelease: "Dec '23",
-    fullRelease: "",
-  },
-  {
-    name: "Tile",
-    status: "In progress",
-    startDate: "Oct '23",
-    labsRelease: "Dec '23",
-    fullRelease: "",
-  },
-  {
-    name: "Hint text for checkbox/radio",
-    status: "In progress",
-    startDate: "Nov '23",
-    labsRelease: "",
-    fullRelease: "Dec '23",
-  },
-  {
-    name: "Links in hint text",
-    status: "In progress",
-    startDate: "Nov '23",
-    labsRelease: "",
-    fullRelease: "Dec '23",
+    name: "Dialog",
+    type: "Component",
+    status: "Released",
+    define: "Complete",
+    design: "Complete",
+    develop: "Complete",
+    deliverableTiming: "FY24",
   },
   {
     name: "Drawer",
-    status: "In progress",
-    startDate: "Dec '23",
-    labsRelease: "Jan '24",
-    fullRelease: "",
+    type: "Component",
+    status: "Released",
+    define: "Complete",
+    design: "Complete",
+    develop: "Complete",
+    deliverableTiming: "Q1 FY25",
   },
   {
-    name: "Inline inputs",
-    status: "In progress",
-    startDate: "Dec '23",
-    labsRelease: "",
-    fullRelease: "",
+    name: "Duration picker\n(or fieldset)",
+    type: "Component",
+    status: "Not started",
+    define: "Not started",
+    design: "Not started",
+    develop: "Not started",
+    deliverableTiming: "Q2 FY25",
   },
   {
-    name: "Gray background",
+    name: "Empty states v1 (no illustration)",
+    type: "Component",
     status: "In progress",
-    startDate: "Dec '23",
-    labsRelease: "",
-    fullRelease: "",
+    define: "Complete",
+    design: "Complete",
+    develop: "Complete",
+    deliverableTiming: "Q2 FY25",
+  },
+  {
+    name: "Empty states v2 (illustration)",
+    type: "Component",
+    status: "Not started",
+    define: "Not started",
+    design: "Not started",
+    develop: "Not started",
+    deliverableTiming: "Q3 FY25",
+  },
+  {
+    name: "Fieldset",
+    type: "Component",
+    status: "Released",
+    define: "Complete",
+    design: "Complete",
+    develop: "Complete",
+    deliverableTiming: "FY24",
+  },
+  {
+    name: "File uploader",
+    type: "Component",
+    status: "In Labs",
+    define: "In Labs",
+    design: "In Labs",
+    develop: "In Labs",
+    deliverableTiming: "Q2 FY25",
+  },
+  {
+    name: "Form",
+    type: "Component",
+    status: "Released",
+    define: "Complete",
+    design: "Complete",
+    develop: "Complete",
+    deliverableTiming: "FY24",
+  },
+  {
+    name: "Form Layout (Advanced)",
+    type: "Component",
+    status: "In progress",
+    define: "In progress",
+    design: "-",
+    develop: "-",
+    deliverableTiming: "Q2 FY25",
+  },
+  {
+    name: "Link",
+    type: "Component",
+    status: "Released",
+    define: "Complete",
+    design: "Complete",
+    develop: "Complete",
+    deliverableTiming: "FY24",
+  },
+  {
+    name: "Log Investigator \n(AI Pattern)",
+    type: "Pattern",
+    status: "Not started",
+    define: "Not started",
+    design: "Not started",
+    develop: "Not started",
+    deliverableTiming: "Q3 FY25",
+  },
+  {
+    name: "Menu button",
+    type: "Component",
+    status: "Released",
+    define: "Complete",
+    design: "Complete",
+    develop: "Complete",
+    deliverableTiming: "FY24",
+  },
+  {
+    name: "Multi-select dropdown",
+    type: "Component",
+    status: "Complete",
+    define: "Complete",
+    design: "Complete",
+    develop: "Complete",
+    deliverableTiming: "TBD",
   },
   {
     name: "Navigation",
-    status: "Not started",
-    startDate: "Dec '23",
-    labsRelease: "",
-    fullRelease: "",
+    type: "Pattern",
+    status: "In progress",
+    define: "Complete",
+    design: "Complete",
+    develop: "In progress",
+    deliverableTiming: "Q2 FY25",
   },
   {
-    name: "Toggle",
+    name: "Policy Recommender\n(AI Pattern)",
+    type: "Pattern",
     status: "Not started",
-    startDate: "Dec '23",
-    labsRelease: "Dec '23",
-    fullRelease: "Jan '23",
+    define: "Not started",
+    design: "Not started",
+    develop: "Not started",
+    deliverableTiming: "Q3 FY25",
   },
   {
-    name: "Data list",
+    name: "Progress Bar",
+    type: "Component",
     status: "Not started",
-    startDate: "Jan '24",
-    labsRelease: "Feb '24",
-    fullRelease: "",
+    define: "Not started",
+    design: "Not started",
+    develop: "Not started",
+    deliverableTiming: "Q3 FY25",
   },
   {
-    name: "Horizontal stepper/wizard pattern",
-    status: "Not started",
-    startDate: "Jan '24",
-    labsRelease: "",
-    fullRelease: "",
+    name: "Radio group",
+    type: "Component",
+    status: "Released",
+    define: "Complete",
+    design: "Complete",
+    develop: "Complete",
+    deliverableTiming: "FY24",
   },
   {
-    name: "Vertical stepper pattern",
+    name: "Search",
+    type: "Pattern",
     status: "Not started",
-    startDate: "Jan '24",
-    labsRelease: "",
-    fullRelease: "",
+    define: "Not started",
+    design: "Not started",
+    develop: "Not started",
+    deliverableTiming: "TBD",
   },
   {
-    name: "Configuration screen pattern",
-    status: "Not started",
-    startDate: "",
-    labsRelease: "",
-    fullRelease: "",
+    name: "Select",
+    type: "Component",
+    status: "Released",
+    define: "Complete",
+    design: "Complete",
+    develop: "Complete",
+    deliverableTiming: "FY24",
   },
   {
-    name: "Help/support pattern",
+    name: "Show all",
+    type: "Component",
     status: "Not started",
-    startDate: "",
-    labsRelease: "",
-    fullRelease: "",
+    define: "Not started",
+    design: "Not started",
+    develop: "Not started",
+    deliverableTiming: "Q3 FY25",
   },
   {
-    name: "Page templates",
-    status: "Not started",
-    startDate: "",
-    labsRelease: "",
-    fullRelease: "",
+    name: "Status",
+    type: "Component",
+    status: "Released",
+    define: "Complete",
+    design: "Complete",
+    develop: "Complete",
+    deliverableTiming: "FY24",
   },
   {
-    name: "Panel",
-    status: "Not started",
-    startDate: "",
-    labsRelease: "",
-    fullRelease: "",
+    name: "Switch",
+    type: "Component",
+    status: "In Labs",
+    define: "In Labs",
+    design: "In Labs",
+    develop: "In Labs",
+    deliverableTiming: "Q1 FY25",
   },
   {
-    name: "Primary actions area",
+    name: "Tabs",
+    type: "Component",
+    status: "Released",
+    define: "Complete",
+    design: "Complete",
+    develop: "Complete",
+    deliverableTiming: "FY24",
+  },
+  {
+    name: "Tag",
+    type: "Component",
+    status: "Released",
+    define: "Complete",
+    design: "Complete",
+    develop: "Complete",
+    deliverableTiming: "FY24",
+  },
+  {
+    name: "Text field",
+    type: "Component",
+    status: "Released",
+    define: "Complete",
+    design: "Complete",
+    develop: "Complete",
+    deliverableTiming: "FY24",
+  },
+  {
+    name: "Time Picker\n(or field set)",
+    type: "Component",
     status: "Not started",
-    startDate: "",
-    labsRelease: "",
-    fullRelease: "",
+    define: "Not started",
+    design: "Not started",
+    develop: "Not started",
+    deliverableTiming: "Q2 FY25",
+  },
+  {
+    name: "Toast",
+    type: "Component",
+    status: "Released",
+    define: "Complete",
+    design: "Complete",
+    develop: "Complete",
+    deliverableTiming: "FY24",
   },
 ];
