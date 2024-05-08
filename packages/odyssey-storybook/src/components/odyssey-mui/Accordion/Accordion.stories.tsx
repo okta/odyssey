@@ -64,7 +64,7 @@ const storybookMeta: Meta<AccordionProps> = {
     children: "Lorem ipsum dolor sit amet.",
     isDisabled: false,
     isExpanded: undefined,
-    label: "Title",
+    label: "Label",
   },
   decorators: [MuiThemeDecorator],
   parameters: {
@@ -135,7 +135,7 @@ export const Disabled: StoryObj<AccordionProps> = {
   },
   render: function C(props: AccordionProps) {
     return (
-      <Accordion label="Title" isDisabled={props.isDisabled}>
+      <Accordion label="Label" isDisabled={props.isDisabled}>
         {props.children}
       </Accordion>
     );
@@ -153,7 +153,7 @@ export const Expanded: StoryObj<AccordionProps> = {
       [],
     );
     return (
-      <Accordion label="Title" isExpanded={isExpanded} onChange={onChange}>
+      <Accordion label="Label" isExpanded={isExpanded} onChange={onChange}>
         {props.children}
       </Accordion>
     );
