@@ -17,6 +17,7 @@ import {
   forwardRef,
   memo,
   useCallback,
+  useEffect,
   useImperativeHandle,
   useRef,
   useState,
@@ -116,8 +117,25 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
     },
     ref,
   ) => {
+    const TEXT_TYPE_TIMEOUT = 30000;
     const { t } = useTranslation();
     const [inputType, setInputType] = useState("password");
+
+    useEffect(() => {
+      let timeout: NodeJS.Timeout;
+
+      // If current inputType is text (cleartext password),
+      // for security set a 30-second timeout to toggle back to password
+      if (inputType === "text") {
+        timeout = setTimeout(() => {
+          setInputType("password");
+        }, TEXT_TYPE_TIMEOUT);
+      }
+
+      return () => {
+        clearTimeout(timeout);
+      };
+    }, [inputType]);
 
     const togglePasswordVisibility = useCallback(() => {
       setInputType((inputType) =>
