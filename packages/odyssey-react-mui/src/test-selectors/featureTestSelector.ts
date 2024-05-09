@@ -10,7 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-// import { queries, type BoundFunctions, type ByRoleOptions, type GetByRole, type GetByText, type Screen, within } from "@testing-library/dom" // TEMP: REMOVE THIS IF NOT NEEDED!
 import { ByRoleOptions } from "@testing-library/dom";
 import { AriaRole } from "react";
 
@@ -19,12 +18,10 @@ export type Selector = {
   templateVariableNames: string[];
 } & (
   | {
-      // element: keyof HTMLElementTagNameMap
       method: "ByRole";
       role: AriaRole;
     }
   | {
-      // element: keyof HTMLElementTagNameMap
       method: "ByLabelText" | "ByPlaceholderText" | "ByText";
       text: string;
     }
