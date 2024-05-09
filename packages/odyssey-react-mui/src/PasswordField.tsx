@@ -88,7 +88,7 @@ type FieldRenderProps = Partial<
 > &
   Pick<FieldComponentRenderProps, "id" | "labelElementId">;
 
-export const PASSWORD_VISIBILITY_TIMEOUT = 30000;
+export const PASSWORD_VISIBILITY_TIMEOUT = 30_000;
 
 const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
   (
