@@ -37,6 +37,7 @@ export const buttonTypeValues = ["button", "submit", "reset"] as const;
 export const buttonVariantValues = [
   "primary",
   "secondary",
+  "secondary-danger",
   "danger",
   "floating",
 ] as const;
