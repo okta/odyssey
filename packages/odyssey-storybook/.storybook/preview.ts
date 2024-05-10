@@ -104,14 +104,14 @@ const preview: Preview = {
       ],
     },
     docs: {
-      source: {
-        excludeDecorators: true,
-      },
       argTypes: {
         sort: "alpha",
       },
       controls: {
         sort: "alpha",
+      },
+      source: {
+        excludeDecorators: true,
       },
     },
   },
