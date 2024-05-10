@@ -948,8 +948,8 @@ export const components = ({
 
             "&::before": {
               content: "''",
-              width: ".64em",
-              height: ".64em",
+              width: odysseyTokens.Spacing2,
+              height: odysseyTokens.Spacing2,
               marginInlineEnd: odysseyTokens.Spacing2,
               borderRadius: "100%",
               backgroundColor: odysseyTokens.HueNeutral600,
