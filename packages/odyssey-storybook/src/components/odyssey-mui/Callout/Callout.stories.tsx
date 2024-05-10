@@ -10,14 +10,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, StoryObj } from "@storybook/react";
 import {
   Callout,
   CalloutProps,
   calloutRoleValues,
   calloutSeverityValues,
 } from "@okta/odyssey-react-mui";
+import { queryOdysseySelector } from "@okta/odyssey-react-mui/test-selectors";
+import { expect } from "@storybook/jest";
+import { Meta, StoryObj } from "@storybook/react";
+import { within } from "@storybook/testing-library";
+
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { PlaywrightProps } from "../storybookTypes";
 
 const storybookMeta: Meta<CalloutProps> = {
   title: "MUI Components/Callout",
@@ -114,6 +119,7 @@ export default storybookMeta;
 
 export const Info: StoryObj<CalloutProps> = {
   args: {
+    role: "status",
     severity: "info",
     title: "Authentication status",
     text: "You're signed in from Moonbase Alpha-6, located on Luna.",
@@ -197,5 +203,27 @@ export const TitleWithLink: StoryObj<CalloutProps> = {
     text: undefined,
     linkText: "Visit fueling console",
     linkUrl: "#",
+  },
+  play: async ({
+    canvasElement,
+    step,
+  }: {
+    canvasElement: HTMLElement;
+    step: PlaywrightProps<CalloutProps>["step"];
+  }) => {
+    await step("has visible link", async () => {
+      const element = queryOdysseySelector({
+        canvas: within(canvasElement),
+        componentName: "Callout",
+        templateArgs: {
+          role: "alert",
+          title: /Safety checks failed/,
+        },
+      }).select?.("link", {
+        linkText: "Visit fueling console",
+      }).element;
+
+      expect(element).toBeVisible();
+    });
   },
 };

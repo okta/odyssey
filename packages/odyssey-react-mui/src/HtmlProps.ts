@@ -51,6 +51,7 @@ export type HtmlProps = {
    * The `aria-haspopup` attribute indicates the availability and type of interactive popup element that can be triggered by the element on which the attribute is set.
    */
   ariaHasPopup?: HTMLAttributes<HTMLElement>["aria-haspopup"];
+  ariaHidden?: HTMLAttributes<HTMLElement>["aria-hidden"];
   /**
    * The `aria-label` attribute defines a string value that labels an interactive element.
    */
