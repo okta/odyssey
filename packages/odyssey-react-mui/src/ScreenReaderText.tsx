@@ -21,7 +21,7 @@ export type ScreenReaderTextProps = {
    */
   children: ReactNode;
   id?: string;
-} & Pick<HtmlProps, "translate">;
+} & Pick<HtmlProps, "ariaHidden" | "translate">;
 
 /**
  * MUI sx expects you pass in a CSS object, not an object with CSS.
@@ -31,11 +31,18 @@ export type ScreenReaderTextProps = {
 const style = { ...visuallyHidden };
 
 const ScreenReaderText = ({
+  ariaHidden,
   children,
   id,
   translate,
 }: ScreenReaderTextProps) => (
-  <Box sx={style} component="span" id={id} translate={translate}>
+  <Box
+    aria-hidden={ariaHidden}
+    sx={style}
+    component="span"
+    id={id}
+    translate={translate}
+  >
     {children}
   </Box>
 );
