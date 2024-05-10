@@ -261,14 +261,6 @@ export const ButtonDanger: StoryObj<ButtonProps> = {
   },
 };
 
-export const ButtonSecondaryDanger: StoryObj<ButtonProps> = {
-  name: "Secondary Danger",
-  args: {
-    label: "Add crew",
-    variant: "secondary-danger",
-  },
-};
-
 export const ButtonDangerDisabled: StoryObj<ButtonProps> = {
   name: "Danger, Disabled",
   args: {
@@ -403,7 +395,6 @@ export const KitchenSink: StoryObj<ButtonProps> = {
     <Box sx={{ display: "flex", flexWrap: "wrap", rowGap: 2 }}>
       <Button label="Primary" variant="primary" />
       <Button label="Secondary" variant="secondary" />
-      <Button label="Secondary Danger" variant="secondary-danger" />
       <Button label="Danger" variant="danger" />
       <Button label="Floating" variant="floating" />
       <Button ariaLabel="Add" startIcon={<AddIcon />} variant="primary" />
