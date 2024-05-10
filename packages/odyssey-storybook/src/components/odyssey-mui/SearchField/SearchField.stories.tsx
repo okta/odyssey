@@ -11,7 +11,7 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
-import { SearchField } from "@okta/odyssey-react-mui";
+import { SearchField, searchVariantValues } from "@okta/odyssey-react-mui";
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -133,6 +133,24 @@ const storybookMeta: Meta<typeof SearchField> = {
         },
       },
     },
+    variant: {
+      options: searchVariantValues,
+      control: { type: "radio" },
+      description: "The color and style of the button",
+      table: {
+        type: {
+          summary: searchVariantValues.join(" | "),
+        },
+        defaultValue: {
+          summary: "outline",
+        },
+      },
+      type: {
+        required: true,
+        name: "other",
+        value: "radio",
+      },
+    },
   },
   args: {
     label: "Search",
@@ -149,7 +167,12 @@ export const Default: StoryObj<typeof SearchField> = {
     defaultValue: "",
   },
 };
-
+export const FilledVariant: StoryObj<typeof SearchField> = {
+  args: {
+    defaultValue: "",
+    variant: "filled",
+  },
+};
 export const Disabled: StoryObj<typeof SearchField> = {
   args: {
     isDisabled: true,
