@@ -1,11 +1,8 @@
 test_suites:
-  - name: "build"
+  - name: "Build Components"
     abort_commit_on_failure: true
     criteria: MERGE
     prereq_test_suite_names:
-      - "interaction test"
-      - "lint"
-      - "test"
       - "typecheck"
     queue_name: al2023
     script_path: /root/okta/odyssey/scripts
@@ -19,9 +16,28 @@ test_suites:
         name: Build Packages
     timeout: "20"
 
-  - name: "code coverage"
+  - name: "Build Storybook"
     abort_commit_on_failure: true
     criteria: MERGE
+    prereq_test_suite_names:
+      - "Build Components"
+    queue_name: al2023
+    script_path: /root/okta/odyssey/scripts
+    sort_order: "6"
+    steps:
+      - event: SOURCE
+        action: setup.sh
+        name: Setup Environment
+      - event: COMMAND
+        action: yarn build
+        name: Build Packages
+    timeout: "20"
+
+  - name: "Code Coverage"
+    abort_commit_on_failure: true
+    criteria: MERGE
+    prereq_test_suite_names:
+      - "Build Components"
     queue_name: al2023
     script_path: /root/okta/odyssey/scripts
     sort_order: "5"
@@ -34,9 +50,11 @@ test_suites:
         name: Report Code Coverage
     timeout: "20"
 
-  - name: "interaction test"
+  - name: "Interaction Test"
     abort_commit_on_failure: true
     criteria: MERGE
+    prereq_test_suite_names:
+      - "Build Components"
     queue_name: al2023
     script_path: /root/okta/odyssey/scripts
     sort_order: "4"
@@ -49,7 +67,24 @@ test_suites:
         name: Test Interactions and Accessibility
     timeout: "20"
 
-  - name: "lint"
+  - name: "Visual Regression Test"
+    abort_commit_on_failure: true
+    criteria: MERGE
+    prereq_test_suite_names:
+      - "build-components"
+    queue_name: al2023
+    script_path: /root/okta/odyssey/scripts
+    sort_order: "4"
+    steps:
+      - event: SOURCE
+        action: setup.sh
+        name: Setup Environment
+      - event: COMMAND
+        action: yarn workspace @okta/odyssey-storybook dev:interactionTest
+        name: Test Interactions and Accessibility
+    timeout: "20"
+
+  - name: "Lint"
     abort_commit_on_failure: true
     criteria: MERGE
     queue_name: al2023
@@ -64,7 +99,7 @@ test_suites:
         name: Lint Code
     timeout: "20"
 
-  - name: "test"
+  - name: "Test"
     abort_commit_on_failure: true
     criteria: MERGE
     queue_name: al2023
@@ -79,7 +114,7 @@ test_suites:
         name: Test Code
     timeout: "20"
 
-  - name: "typecheck"
+  - name: "Typecheck"
     abort_commit_on_failure: true
     criteria: MERGE
     queue_name: al2023
@@ -94,7 +129,7 @@ test_suites:
         name: Typecheck Code
     timeout: "20"
 
-  - name: semgrep
+  - name: "Semgrep"
     criteria: MERGE
     queue_name: al2023
     script_name: semgrep
