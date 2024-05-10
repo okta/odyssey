@@ -317,6 +317,7 @@ export const Multiline: StoryObj<typeof TextField> = {
     isMultiline: true,
     defaultValue: "",
   },
+  storyName: "Multiline (Textarea)",
 };
 
 export const Placeholder: StoryObj<typeof TextField> = {
