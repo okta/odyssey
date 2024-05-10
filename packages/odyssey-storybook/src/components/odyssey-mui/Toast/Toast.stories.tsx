@@ -157,6 +157,7 @@ const openToast =
         userEvent.click(buttonElement);
         userEvent.tab();
       });
+
       await axeRun(actionName);
     });
   };
@@ -288,6 +289,7 @@ export const Dismissible: StoryObj<ToastProps> = {
           }
         }
       });
+
       await axeRun("Dismissible Toast");
     });
   },
