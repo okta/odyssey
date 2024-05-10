@@ -22,6 +22,9 @@ import { useMemo } from "react";
 import rawData from "./roadmap.json";
 export const data: OdysseyComponent[] = rawData as OdysseyComponent[];
 
+import rawData from "./roadmap.json";
+export const data: OdysseyComponent[] = rawData as OdysseyComponent[];
+
 export type OdysseyComponent = {
   name: string;
   type: string;
