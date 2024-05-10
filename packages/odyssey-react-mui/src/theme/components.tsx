@@ -647,28 +647,6 @@ export const components = ({
               backgroundColor: odysseyTokens.HueRed100,
             },
           }),
-          ...(ownerState.variant === "secondary-danger" && {
-            backgroundColor: "transparent",
-            borderColor: odysseyTokens.HueNeutral300,
-            color: odysseyTokens.PaletteDangerMain,
-
-            "&:hover": {
-              backgroundColor: odysseyTokens.HueNeutral100,
-              color: odysseyTokens.PaletteDangerMain,
-            },
-
-            "&:active": {
-              backgroundColor: "transparent",
-              borderColor: odysseyTokens.PaletteDangerMain,
-              color: odysseyTokens.PaletteDangerMain,
-            },
-
-            "&:disabled": {
-              backgroundColor: "transparent",
-              borderColor: odysseyTokens.PaletteDangerLight,
-              color: odysseyTokens.PaletteDangerLight,
-            },
-          }),
           ...(ownerState.variant === "floating" && {
             backgroundColor: "transparent",
             color: odysseyTokens.TypographyColorBody,
