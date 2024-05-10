@@ -73,7 +73,7 @@ jobs:
 
       - name: build storybook
         if: steps.changes.outputs.deploy == 'true'
-        run: cd ./packages/odyssey-storybook && rm -rf ./node_modules/.cache && yarn build
+        run: yarn build && cd ./packages/odyssey-storybook && rm -rf ./node_modules/.cache && yarn build
 
       - name: create deployment
         if: steps.changes.outputs.deploy == 'true'

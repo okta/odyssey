@@ -10,9 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, ReactNode } from "react";
 import styled from "@emotion/styled";
 import { Alert, AlertTitle, Box, Link as MuiLink } from "@mui/material";
+import { memo, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
 import type { HtmlProps } from "./HtmlProps";
@@ -20,8 +20,46 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext";
-import { ScreenReaderText } from "./ScreenReaderText";
+import { type FeatureTestSelector } from "./test-selectors";
 import { Paragraph } from "./Typography";
+import { useUniqueId } from "./useUniqueId";
+
+export const CalloutTestSelectors = {
+  feature: {
+    link: {
+      selector: {
+        method: "ByRole",
+        options: {
+          name: "${linkText}",
+        },
+        role: "link",
+        templateVariableNames: ["linkText"],
+      },
+    },
+    text: {
+      selector: {
+        method: "ByText",
+        templateVariableNames: ["text"],
+        text: "${text}",
+      },
+    },
+    title: {
+      selector: {
+        method: "ByText",
+        templateVariableNames: ["title"],
+        text: "${title}",
+      },
+    },
+  },
+  selector: {
+    method: "ByRole",
+    options: {
+      name: "${title}",
+    },
+    role: "${role}",
+    templateVariableNames: ["role", "title"],
+  },
+} as const satisfies FeatureTestSelector;
 
 export const calloutRoleValues = ["status", "alert"] as const;
 export const calloutSeverityValues = [
@@ -56,12 +94,12 @@ export type CalloutProps = {
   title?: string;
 } & (
   | {
-      text: string;
       children?: never;
+      text: string;
     }
   | {
-      text?: never;
       children: ReactNode;
+      text?: never;
     }
 ) &
   (
@@ -105,13 +143,23 @@ const Callout = ({
 }: CalloutProps) => {
   const { t } = useTranslation();
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const titleId = useUniqueId();
 
   return (
-    <Alert data-se={testId} role={role} severity={severity} variant="callout">
-      <ScreenReaderText translate={translate}>
-        {t(`severity.${severity}`)}
-      </ScreenReaderText>
-      {title && <AlertTitle translate={translate}>{title}</AlertTitle>}
+    <Alert
+      aria-label={t(`severity.${severity}`)}
+      aria-labelledby={titleId}
+      data-se={testId}
+      role={role}
+      severity={severity}
+      variant="callout"
+    >
+      {title && (
+        <AlertTitle aria-hidden id={titleId} translate={translate}>
+          {title}
+        </AlertTitle>
+      )}
+
       <ContentContainer odysseyDesignTokens={odysseyDesignTokens}>
         {children && <Box component="div">{children}</Box>}
         {text && <Paragraph>{text}</Paragraph>}
