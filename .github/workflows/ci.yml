@@ -113,7 +113,7 @@ jobs:
 
       - name: a11y test
         if: steps.changes.outputs.deploy == 'true'
-        run: yarn workspace @okta/odyssey-storybook test:storybook --url ${{ env.URL_STORYBOOK }}
+        run: yarn workspace @okta/odyssey-storybook test-storybook --url ${{ env.URL_STORYBOOK }}
 
       - name: visual regression test
         if: steps.changes.outputs.vrt == 'true'
