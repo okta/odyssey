@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "SHA: $SHA\n"
+
 source $OKTA_HOME/$REPO/scripts/setup.sh
 
 echo "current directory:\n"
