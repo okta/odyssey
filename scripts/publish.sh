@@ -1,40 +1,33 @@
 #!/bin/bash
 
 source $OKTA_HOME/$REPO/scripts/setup.sh
-# setup_service node v18.12.0
-# setup_service yarn 1.22.19
-
-# Install required dependencies
-# yarn global add @okta/ci-append-sha
-# yarn global add @okta/ci-pkginfo
 
 echo "current directory:\n"
 pwd
 
-cd $OKTA_HOME/$REPO/packages/odyssey-design-tokens
+export PATH="${PATH}:$(yarn global bin)"
+export TEST_SUITE_TYPE="build"
+export PUBLISH_REGISTRY="${ARTIFACTORY_URL}/api/npm/npm-topic"
 
-echo "odyssey-design-tokens directory contents:\n"
-ls
+function lerna_publish() {
+  MY_CMD="yarn lerna-publish --loglevel silly --dist-tag \"latest\" --registry \"${PUBLISH_REGISTRY}\" --yes"
+  echo "Running ${MY_CMD}"
+  ${MY_CMD}
+}
 
-yarn dlx add @okta/ci-append-sha
-yarn dlx add @okta/ci-pkginfo
+yarn run lerna-version --yes
+npm config set @okta:registry ${PUBLISH_REGISTRY}
+PACKAGES=$(echo odyssey-{design-tokens,babel-preset,babel-loader,react-mui} browserslist-config-odyssey)
+CURRENT_VERSION=$(< lerna.json jq -r '.version')
 
-# cd $OKTA_HOME/$REPO
+echo "Publishing to artifactory, yarn run lerna-publish"
 
-# pwd
-
-# export PATH="${PATH}:$(yarn global bin)"
-# export TEST_SUITE_TYPE="build"
-# export PUBLISH_REGISTRY="${ARTIFACTORY_URL}/api/npm/npm-topic"
-
-# # Append a SHA to the version in package.json 
-# # if ! ci-append-sha; then
-# #   echo "ci-append-sha failed! Exiting..."
-# #   exit $FAILED_SETUP
-# # fi
-
-# npm config set @okta:registry ${PUBLISH_REGISTRY}
-# PACKAGES=$(echo odyssey-{design-tokens,babel-preset,babel-loader,react-mui} browserslist-config-odyssey)
+git update-index --assume-unchanged .yarnrc.yml
+if ! lerna_publish; then
+  echo "WARNING: Lerna Publish has failed."
+else
+  echo "Publish successful. Sending promotion message"
+fi
 
 # for PACKAGE_NAME in $PACKAGES; do
 #   echo "Starting to process ${PACKAGE_NAME}"
