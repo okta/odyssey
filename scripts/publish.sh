@@ -63,4 +63,4 @@ yarn dlx add @okta/ci-pkginfo
 #   echo "Finished processing ${PACKAGE_NAME}"
 # done
 
-# # exit $SUCCESS
+exit $SUCCESS
