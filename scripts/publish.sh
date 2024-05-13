@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# source $OKTA_HOME/$REPO/scripts/setup.sh
+source $OKTA_HOME/$REPO/scripts/setup.sh
 # setup_service node v18.12.0
 # setup_service yarn 1.22.19
 
@@ -8,50 +8,56 @@
 yarn global add @okta/ci-append-sha
 yarn global add @okta/ci-pkginfo
 
+echo "current directory:\n"
 pwd
 
-cd $OKTA_HOME/$REPO
+cd $OKTA_HOME/$REPO/packages/odyssey-design-tokens
 
-pwd
+echo "odyssey-design-tokens directory contents:\n"
+ls 
 
-export PATH="${PATH}:$(yarn global bin)"
-export TEST_SUITE_TYPE="build"
-export PUBLISH_REGISTRY="${ARTIFACTORY_URL}/api/npm/npm-topic"
+# cd $OKTA_HOME/$REPO
 
-# Append a SHA to the version in package.json 
-# if ! ci-append-sha; then
-#   echo "ci-append-sha failed! Exiting..."
-#   exit $FAILED_SETUP
-# fi
+# pwd
 
-npm config set @okta:registry ${PUBLISH_REGISTRY}
-PACKAGES=$(echo odyssey-{design-tokens,babel-preset,babel-loader,react-mui} browserslist-config-odyssey)
+# export PATH="${PATH}:$(yarn global bin)"
+# export TEST_SUITE_TYPE="build"
+# export PUBLISH_REGISTRY="${ARTIFACTORY_URL}/api/npm/npm-topic"
 
-for PACKAGE_NAME in $PACKAGES; do
-  echo "Starting to process ${PACKAGE_NAME}"
-  pwd
-  cd packages
-  pwd
-  cd $PACKAGE_NAME
-  pwd
-  ls
-  echo "^ should print directory contents"
-#   cd $OKTA_HOME/$REPO/packages/$PACKAGE_NAME/dist
-  if ! npm publish --unsafe-perm; then
-    echo "npm publish failed! Exiting..."
-    exit $PUBLISH_ARTIFACTORY_FAILURE
-  fi
+# # Append a SHA to the version in package.json 
+# # if ! ci-append-sha; then
+# #   echo "ci-append-sha failed! Exiting..."
+# #   exit $FAILED_SETUP
+# # fi
 
-  # upload artifact version to eng prod s3 to be used by downstream jobs
-  artifact_version="$(ci-pkginfo -t pkgname)@$(ci-pkginfo -t pkgsemver)"
-  if upload_job_data global artifact_version ${artifact_version}; then
-    echo "Upload $PACKAGE_NAME job data artifact_version=${artifact_version} to s3!"
-  else
-    # only echo the info since the upload is not crucial
-    echo "Fail to upload $PACKAGE_NAME job data artifact_version=${artifact_version} to s3!" >&2
-  fi
+# npm config set @okta:registry ${PUBLISH_REGISTRY}
+# PACKAGES=$(echo odyssey-{design-tokens,babel-preset,babel-loader,react-mui} browserslist-config-odyssey)
 
-  echo "Finished processing ${PACKAGE_NAME}"
-done
+# for PACKAGE_NAME in $PACKAGES; do
+#   echo "Starting to process ${PACKAGE_NAME}"
+#   pwd
+#   cd packages
+#   pwd
+#   cd $PACKAGE_NAME
+#   pwd
+#   ls
+#   echo "^ should print directory contents"
+# #   cd $OKTA_HOME/$REPO/packages/$PACKAGE_NAME/dist
+#   if ! npm publish --unsafe-perm; then
+#     echo "npm publish failed! Exiting..."
+#     exit $PUBLISH_ARTIFACTORY_FAILURE
+#   fi
 
-# exit $SUCCESS
+#   # upload artifact version to eng prod s3 to be used by downstream jobs
+#   artifact_version="$(ci-pkginfo -t pkgname)@$(ci-pkginfo -t pkgsemver)"
+#   if upload_job_data global artifact_version ${artifact_version}; then
+#     echo "Upload $PACKAGE_NAME job data artifact_version=${artifact_version} to s3!"
+#   else
+#     # only echo the info since the upload is not crucial
+#     echo "Fail to upload $PACKAGE_NAME job data artifact_version=${artifact_version} to s3!" >&2
+#   fi
+
+#   echo "Finished processing ${PACKAGE_NAME}"
+# done
+
+# # exit $SUCCESS
