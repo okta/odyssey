@@ -10,6 +10,8 @@ export PATH="${PATH}:$(yarn global bin)"
 export TEST_SUITE_TYPE="build"
 export PUBLISH_REGISTRY="${ARTIFACTORY_URL}/api/npm/npm-topic"
 
+setup_service node v18.12.0
+
 # Append a SHA to the version in package.json 
 if ! ci-append-sha; then
   echo "ci-append-sha failed! Exiting..."
