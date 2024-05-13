@@ -7,7 +7,7 @@ test_suites:
       - "test"
       - "typecheck"
     queue_name: al2023
-    script_path: /root/okta/odyssey/scripts
+    # script_path: /root/okta/odyssey/scripts
     sort_order: "1"
     steps:
       - event: SOURCE
