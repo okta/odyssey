@@ -38,6 +38,7 @@ export const buttonVariantValues = [
   "primary",
   "secondary",
   "danger",
+  "dangerSecondary",
   "floating",
 ] as const;
 
