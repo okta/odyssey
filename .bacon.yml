@@ -21,7 +21,7 @@ test_suites:
   - name: "publish"
     abort_commit_on_failure: true
     script_path: /root/okta/odyssey/scripts
-    sort_order: 2'
+    sort_order: "2"
     timeout: "15"
     script_name: "publish.sh"
     criteria: MERGE
