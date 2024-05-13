@@ -20,14 +20,19 @@ npm config set @okta:registry ${PUBLISH_REGISTRY}
 PACKAGES=$(echo odyssey-{design-tokens,babel-preset,babel-loader,react-mui} browserslist-config-odyssey)
 CURRENT_VERSION=$(< lerna.json jq -r '.version')
 
-echo "Publishing to artifactory, yarn run lerna-publish"
-
-git update-index --assume-unchanged .yarnrc.yml
-if ! lerna_publish; then
-  echo "WARNING: Lerna Publish has failed."
-else
-  echo "Publish successful. Sending promotion message"
+if ! npm publish --unsafe-perm; then
+  echo "npm publish failed! Exiting..."
+  exit $PUBLISH_ARTIFACTORY_FAILURE
 fi
+
+# echo "Publishing to artifactory, yarn run lerna-publish"
+
+# git update-index --assume-unchanged .yarnrc.yml
+# if ! lerna_publish; then
+#   echo "WARNING: Lerna Publish has failed."
+# else
+#   echo "Publish successful. Sending promotion message"
+# fi
 
 # for PACKAGE_NAME in $PACKAGES; do
 #   echo "Starting to process ${PACKAGE_NAME}"
