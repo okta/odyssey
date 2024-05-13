@@ -40,14 +40,21 @@ export type DialogProps = {
    * An optional Button object to be situated in the Dialog footer. Should almost always be of variant `primary`.
    */
   primaryCallToActionComponent?: ReactElement<typeof Button>;
+  /** @deprecated Will be removed in a future Odyssey version. Use `primaryCallToActionComponent` instead. */
+  callToActionFirstComponent?: ReactElement<typeof Button>;
   /**
    * An optional Button object to be situated in the Dialog footer, alongside the `callToActionPrimaryComponent`.
    */
   secondaryCallToActionComponent?: ReactElement<typeof Button>;
+  /** @deprecated Will be removed in a future Odyssey version. Use `secondaryCallToActionComponent` instead. */
+  callToActionSecondComponent?: ReactElement<typeof Button>;
+
   /**
    * An optional Button object to be situated in the Dialog footer, alongside the other two `callToAction` components.
    */
   tertiaryCallToActionComponent?: ReactElement<typeof Button>;
+  /** @deprecated Will be removed in a future Odyssey version. Use `tertiaryCallToActionComponent` instead. */
+  callToActionLastComponent?: ReactElement<typeof Button>;
   /**
    * The content of the Dialog. May be a `string` or any other `ReactNode` or array of `ReactNode`s.
    */
@@ -70,6 +77,9 @@ const Dialog = ({
   primaryCallToActionComponent,
   secondaryCallToActionComponent,
   tertiaryCallToActionComponent,
+  callToActionFirstComponent,
+  callToActionSecondComponent,
+  callToActionLastComponent,
   children,
   isOpen,
   onClose,
@@ -111,6 +121,12 @@ const Dialog = ({
       children
     );
 
+  const actionButtons = [
+    tertiaryCallToActionComponent || callToActionLastComponent,
+    secondaryCallToActionComponent || callToActionSecondComponent,
+    primaryCallToActionComponent || callToActionFirstComponent,
+  ].filter(Boolean);
+
   return (
     <MuiDialog data-se={testId} open={isOpen} onClose={onClose}>
       <DialogTitle translate={translate}>
@@ -134,14 +150,8 @@ const Dialog = ({
         {content}
       </DialogContent>
 
-      {(primaryCallToActionComponent ||
-        secondaryCallToActionComponent ||
-        tertiaryCallToActionComponent) && (
-        <DialogActions>
-          {tertiaryCallToActionComponent}
-          {secondaryCallToActionComponent}
-          {primaryCallToActionComponent}
-        </DialogActions>
+      {actionButtons.length > 0 && (
+        <DialogActions>{actionButtons}</DialogActions>
       )}
     </MuiDialog>
   );
