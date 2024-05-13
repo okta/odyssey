@@ -647,7 +647,7 @@ export const components = ({
               backgroundColor: odysseyTokens.HueRed100,
             },
           }),
-          ...(ownerState.variant === "secondary-danger" && {
+          ...(ownerState.variant === "dangerSecondary" && {
             backgroundColor: "transparent",
             borderColor: odysseyTokens.HueNeutral300,
             color: odysseyTokens.PaletteDangerMain,
