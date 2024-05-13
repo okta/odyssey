@@ -5,8 +5,8 @@
 # setup_service yarn 1.22.19
 
 # Install required dependencies
-yarn global add @okta/ci-append-sha
-yarn global add @okta/ci-pkginfo
+# yarn global add @okta/ci-append-sha
+# yarn global add @okta/ci-pkginfo
 
 echo "current directory:\n"
 pwd
@@ -14,7 +14,10 @@ pwd
 cd $OKTA_HOME/$REPO/packages/odyssey-design-tokens
 
 echo "odyssey-design-tokens directory contents:\n"
-ls 
+ls
+
+yarn dlx add @okta/ci-append-sha
+yarn dlx add @okta/ci-pkginfo
 
 # cd $OKTA_HOME/$REPO
 
