@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # source $OKTA_HOME/$REPO/scripts/setup.sh
-setup_service node v18.12.0
-setup_service yarn 1.22.19
+# setup_service node v18.12.0
+# setup_service yarn 1.22.19
 
 # Install required dependencies
 yarn global add @okta/ci-append-sha
@@ -13,10 +13,10 @@ export TEST_SUITE_TYPE="build"
 export PUBLISH_REGISTRY="${ARTIFACTORY_URL}/api/npm/npm-topic"
 
 # Append a SHA to the version in package.json 
-if ! ci-append-sha; then
-  echo "ci-append-sha failed! Exiting..."
-  exit $FAILED_SETUP
-fi
+# if ! ci-append-sha; then
+#   echo "ci-append-sha failed! Exiting..."
+#   exit $FAILED_SETUP
+# fi
 
 npm config set @okta:registry ${PUBLISH_REGISTRY}
 PACKAGES=$(echo odyssey-{design-tokens,babel-preset,babel-loader,react-mui} browserslist-config-odyssey)
