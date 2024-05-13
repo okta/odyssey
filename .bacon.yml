@@ -19,6 +19,7 @@ test_suites:
     timeout: "20"
 
   - name: "publish"
+    abort_commit_on_failure: true
     script_path: /root/okta/odyssey/scripts
     sort_order: 2'
     timeout: "15"
