@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source $OKTA_HOME/$REPO/scripts/setup.sh
+# source $OKTA_HOME/$REPO/scripts/setup.sh
 
 # Install required dependencies
 yarn global add @okta/ci-append-sha
