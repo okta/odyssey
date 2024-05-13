@@ -8,6 +8,12 @@
 yarn global add @okta/ci-append-sha
 yarn global add @okta/ci-pkginfo
 
+pwd
+
+cd $OKTA_HOME/$REPO
+
+pwd
+
 export PATH="${PATH}:$(yarn global bin)"
 export TEST_SUITE_TYPE="build"
 export PUBLISH_REGISTRY="${ARTIFACTORY_URL}/api/npm/npm-topic"
