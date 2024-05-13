@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # source $OKTA_HOME/$REPO/scripts/setup.sh
+setup_service node v18.12.0
 
 # Install required dependencies
 yarn global add @okta/ci-append-sha
@@ -9,8 +10,6 @@ yarn global add @okta/ci-pkginfo
 export PATH="${PATH}:$(yarn global bin)"
 export TEST_SUITE_TYPE="build"
 export PUBLISH_REGISTRY="${ARTIFACTORY_URL}/api/npm/npm-topic"
-
-setup_service node v18.12.0
 
 # Append a SHA to the version in package.json 
 if ! ci-append-sha; then
