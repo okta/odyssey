@@ -132,7 +132,7 @@ const findDialogElement = async ({
 };
 
 const DefaultTemplate: StoryObj<DialogProps> = {
-  render: function C(props) {
+  render: function C(props: DialogProps) {
     const [isVisible, setIsVisible] = useState(false);
 
     const onOpen = useCallback(() => {
@@ -180,7 +180,7 @@ export const Default: StoryObj<DialogProps> = {
       "You are initiating this ship's self-destruct protocol. This ship, and its occupants, will be destroyed.",
     title: "Initiate self-destruct protocol",
   },
-  play: async ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }: PlaywrightProps<DialogProps>) => {
     await findDialogElement({ canvasElement, step });
   },
 };
@@ -337,13 +337,13 @@ export const Long: StoryObj<DialogProps> = {
     ),
     title: "Cryosleep liability waiver",
   },
-  play: async ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }: PlaywrightProps<DialogProps>) => {
     await findDialogElement({ canvasElement, step });
   },
 };
 
 export const NoButtons: StoryObj<DialogProps> = {
-  render: function C(props) {
+  render: function C(props: DialogProps) {
     const [isVisible, setIsVisible] = useState(false);
 
     const onOpen = useCallback(() => {
@@ -366,7 +366,7 @@ export const NoButtons: StoryObj<DialogProps> = {
       "By closing this Dialog you agree to adhere to the Ceres Station terms of use.",
     title: "Ceres Station docking terms",
   },
-  play: async ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }: PlaywrightProps<DialogProps>) => {
     await findDialogElement({ canvasElement, step });
   },
 };
