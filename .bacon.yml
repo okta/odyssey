@@ -2,10 +2,10 @@ test_suites:
   - name: "build"
     abort_commit_on_failure: true
     criteria: MERGE
-    # prereq_test_suite_names:
-    #   - "lint"
-    #   - "test"
-    #   - "typecheck"
+    prereq_test_suite_names:
+      - "lint"
+      - "test"
+      - "typecheck"
     queue_name: al2023
     script_path: /root/okta/odyssey/scripts
     sort_order: "1"
@@ -18,96 +18,96 @@ test_suites:
         name: Build Packages
     timeout: "20"
 
-  - name: "publish"
+  - name: publish
     abort_commit_on_failure: true
     script_path: /root/okta/odyssey/scripts
     sort_order: "2"
     timeout: "15"
-    script_name: "publish.sh"
+    script_name: publish
     criteria: MERGE
     prereq_test_suite_names:
       - "build"
     queue_name: al2023
 
-  # - name: "code coverage"
-  #   abort_commit_on_failure: true
-  #   criteria: MERGE
-  #   queue_name: al2023
-  #   script_path: /root/okta/odyssey/scripts
-  #   sort_order: "5"
-  #   steps:
-  #     - event: SOURCE
-  #       action: setup.sh
-  #       name: Setup Environment
-  #     - event: COMMAND
-  #       action: yarn workspace @okta/odyssey-storybook coverage
-  #       name: Report Code Coverage
-  #   timeout: "20"
+  - name: "code coverage"
+    abort_commit_on_failure: true
+    criteria: MERGE
+    queue_name: al2023
+    script_path: /root/okta/odyssey/scripts
+    sort_order: "5"
+    steps:
+      - event: SOURCE
+        action: setup.sh
+        name: Setup Environment
+      - event: COMMAND
+        action: yarn workspace @okta/odyssey-storybook coverage
+        name: Report Code Coverage
+    timeout: "20"
 
-  # - name: "interaction test"
-  #   abort_commit_on_failure: true
-  #   criteria: MERGE
-  #   queue_name: al2023
-  #   script_path: /root/okta/odyssey/scripts
-  #   sort_order: "4"
-  #   steps:
-  #     - event: SOURCE
-  #       action: setup.sh
-  #       name: Setup Environment
-  #     - event: COMMAND
-  #       action: yarn workspace @okta/odyssey-storybook dev:interactionTest
-  #       name: Test Interactions and Accessibility
-  #   timeout: "20"
+  - name: "interaction test"
+    abort_commit_on_failure: true
+    criteria: MERGE
+    queue_name: al2023
+    script_path: /root/okta/odyssey/scripts
+    sort_order: "4"
+    steps:
+      - event: SOURCE
+        action: setup.sh
+        name: Setup Environment
+      - event: COMMAND
+        action: yarn workspace @okta/odyssey-storybook dev:interactionTest
+        name: Test Interactions and Accessibility
+    timeout: "20"
 
-  # - name: "lint"
-  #   abort_commit_on_failure: true
-  #   criteria: MERGE
-  #   queue_name: al2023
-  #   script_path: /root/okta/odyssey/scripts
-  #   sort_order: "1"
-  #   steps:
-  #     - event: SOURCE
-  #       action: setup.sh
-  #       name: Setup Environment
-  #     - event: COMMAND
-  #       action: yarn lint
-  #       name: Lint Code
-  #   timeout: "20"
+  - name: "lint"
+    abort_commit_on_failure: true
+    criteria: MERGE
+    queue_name: al2023
+    script_path: /root/okta/odyssey/scripts
+    sort_order: "1"
+    steps:
+      - event: SOURCE
+        action: setup.sh
+        name: Setup Environment
+      - event: COMMAND
+        action: yarn lint
+        name: Lint Code
+    timeout: "20"
 
-  # - name: "test"
-  #   abort_commit_on_failure: true
-  #   criteria: MERGE
-  #   queue_name: al2023
-  #   script_path: /root/okta/odyssey/scripts
-  #   sort_order: "3"
-  #   steps:
-  #     - event: SOURCE
-  #       action: setup.sh
-  #       name: Setup Environment
-  #     - event: COMMAND
-  #       action: yarn test
-  #       name: Test Code
-  #   timeout: "20"
+  - name: "test"
+    abort_commit_on_failure: true
+    criteria: MERGE
+    queue_name: al2023
+    script_path: /root/okta/odyssey/scripts
+    sort_order: "3"
+    steps:
+      - event: SOURCE
+        action: setup.sh
+        name: Setup Environment
+      - event: COMMAND
+        action: yarn test
+        name: Test Code
+    timeout: "20"
 
-  # - name: "typecheck"
-  #   abort_commit_on_failure: true
-  #   criteria: MERGE
-  #   queue_name: al2023
-  #   script_path: /root/okta/odyssey/scripts
-  #   sort_order: "2"
-  #   steps:
-  #     - event: SOURCE
-  #       action: setup.sh
-  #       name: Setup Environment
-  #     - event: COMMAND
-  #       action: yarn typecheck
-  #       name: Typecheck Code
-  #   timeout: "20"
+  - name: "typecheck"
+    abort_commit_on_failure: true
+    criteria: MERGE
+    queue_name: al2023
+    script_path: /root/okta/odyssey/scripts
+    sort_order: "2"
+    steps:
+      - event: SOURCE
+        action: setup.sh
+        name: Setup Environment
+      - event: COMMAND
+        action: yarn typecheck
+        name: Typecheck Code
+    timeout: "20"
 
-  # - name: semgrep
-  #   criteria: MERGE
-  #   queue_name: al2023
-  #   script_name: semgrep
-  #   script_path: /root/okta/odyssey/scripts
-  #   sort_order: "5"
-  #   timeout: "10"
+  - name: semgrep
+    criteria: MERGE
+    queue_name: al2023
+    script_name: semgrep
+    script_path: /root/okta/odyssey/scripts
+    sort_order: "5"
+    timeout: "10"
