@@ -23,7 +23,7 @@ PACKAGES=$(echo odyssey-{design-tokens,babel-preset,babel-loader,react-mui} brow
 
 for PACKAGE_NAME in $PACKAGES; do
   echo "Starting to process ${PACKAGE_NAME}"
-  cd $OKTA_HOME/$REPO/$PACKAGE_NAME/dist
+  cd $OKTA_HOME/$REPO/packages/$PACKAGE_NAME/dist
   if ! npm publish --unsafe-perm; then
     echo "npm publish failed! Exiting..."
     exit $PUBLISH_ARTIFACTORY_FAILURE
