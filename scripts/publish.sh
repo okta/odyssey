@@ -2,6 +2,7 @@
 
 # source $OKTA_HOME/$REPO/scripts/setup.sh
 setup_service node v18.12.0
+setup_service yarn 1.22.19
 
 # Install required dependencies
 yarn global add @okta/ci-append-sha
