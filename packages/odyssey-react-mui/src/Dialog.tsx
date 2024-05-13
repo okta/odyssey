@@ -124,7 +124,7 @@ const Dialog = ({
     ) : (
       children
     );
-
+  //Ensure new action button format is prioritized (uses || as a fallback)
   const actionButtons = [
     tertiaryCallToActionComponent || callToActionLastComponent,
     secondaryCallToActionComponent || callToActionSecondComponent,
