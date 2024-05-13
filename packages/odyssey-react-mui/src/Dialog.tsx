@@ -31,30 +31,33 @@ import {
 
 import type { HtmlProps } from "./HtmlProps";
 
+// Mutually exclusive types for the action buttons
+type NewActionProps = {
+  primaryCallToActionComponent?: ReactElement<typeof Button>;
+  secondaryCallToActionComponent?: ReactElement<typeof Button>;
+  tertiaryCallToActionComponent?: ReactElement<typeof Button>;
+  callToActionFirstComponent?: never;
+  callToActionSecondComponent?: never;
+  callToActionLastComponent?: never;
+};
+
+type DeprecatedActionProps = {
+  primaryCallToActionComponent?: never;
+  secondaryCallToActionComponent?: never;
+  tertiaryCallToActionComponent?: never;
+  /** @deprecated Will be removed in a future Odyssey version. Use `PrimaryCallToActionComponent` instead. */
+  callToActionFirstComponent?: ReactElement<typeof Button>;
+  /** @deprecated Will be removed in a future Odyssey version. Use `SecondryCallToActionComponent` instead. */
+  callToActionSecondComponent?: ReactElement<typeof Button>;
+  /** @deprecated Will be removed in a future Odyssey version. Use `TertiaryCallToActionComponent` instead. */
+  callToActionLastComponent?: ReactElement<typeof Button>;
+};
+
 export type DialogProps = {
   /**
    * @deprecated `aria-label` for close button comes from translation file
    */
   ariaLabel?: string;
-  /**
-   * An optional Button object to be situated in the Dialog footer. Should almost always be of variant `primary`.
-   */
-  primaryCallToActionComponent?: ReactElement<typeof Button>;
-  /** @deprecated Will be removed in a future Odyssey version. Use `primaryCallToActionComponent` instead. */
-  callToActionFirstComponent?: ReactElement<typeof Button>;
-  /**
-   * An optional Button object to be situated in the Dialog footer, alongside the `callToActionPrimaryComponent`.
-   */
-  secondaryCallToActionComponent?: ReactElement<typeof Button>;
-  /** @deprecated Will be removed in a future Odyssey version. Use `secondaryCallToActionComponent` instead. */
-  callToActionSecondComponent?: ReactElement<typeof Button>;
-
-  /**
-   * An optional Button object to be situated in the Dialog footer, alongside the other two `callToAction` components.
-   */
-  tertiaryCallToActionComponent?: ReactElement<typeof Button>;
-  /** @deprecated Will be removed in a future Odyssey version. Use `tertiaryCallToActionComponent` instead. */
-  callToActionLastComponent?: ReactElement<typeof Button>;
   /**
    * The content of the Dialog. May be a `string` or any other `ReactNode` or array of `ReactNode`s.
    */
@@ -71,7 +74,8 @@ export type DialogProps = {
    * The title of the Dialog
    */
   title: string;
-} & Pick<HtmlProps, "testId" | "translate">;
+} & Pick<HtmlProps, "testId" | "translate"> &
+  (NewActionProps | DeprecatedActionProps);
 
 const Dialog = ({
   primaryCallToActionComponent,
