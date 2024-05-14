@@ -15,7 +15,7 @@ export PUBLISH_REGISTRY="${ARTIFACTORY_URL}/api/npm/npm-topic"
 
 function lerna_publish() {
 #   MY_CMD="yarn lerna-publish --loglevel silly --dist-tag \"${PUBLISH_SHA}\" --registry \"${PUBLISH_REGISTRY}\" --yes --no-push --no-git-tag-version"
-  MY_CMD="yarn run lerna publish from-package --no-push --no-git-tag-version --registry \"${PUBLISH_REGISTRY}\" --yes"
+  MY_CMD="yarn run lerna publish from-git --no-push --no-git-tag-version --registry \"${PUBLISH_REGISTRY}\" --yes"
   echo "Running ${MY_CMD}"
   ${MY_CMD}
 }
