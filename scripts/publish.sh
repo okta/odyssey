@@ -14,12 +14,13 @@ export TEST_SUITE_TYPE="build"
 export PUBLISH_REGISTRY="${ARTIFACTORY_URL}/api/npm/npm-topic"
 
 function lerna_publish() {
-  MY_CMD="yarn lerna-publish --loglevel silly --dist-tag \"${PUBLISH_SHA}\" --registry \"${PUBLISH_REGISTRY}\" --yes --no-push --no-git-tag-version"
+#   MY_CMD="yarn lerna-publish --loglevel silly --dist-tag \"${PUBLISH_SHA}\" --registry \"${PUBLISH_REGISTRY}\" --yes --no-push --no-git-tag-version"
+  MY_CMD="lerna publish --no-push --no-git-tag-version --registry \"${PUBLISH_REGISTRY}\" --yes"
   echo "Running ${MY_CMD}"
   ${MY_CMD}
 }
 
-yarn run lerna-version --yes
+# yarn run lerna-version --yes
 npm config set @okta:registry ${PUBLISH_REGISTRY}
 PACKAGES=$(echo odyssey-{design-tokens,babel-preset,babel-loader,react-mui} browserslist-config-odyssey)
 CURRENT_VERSION=$(< lerna.json jq -r '.version')
@@ -33,7 +34,8 @@ CURRENT_VERSION=$(< lerna.json jq -r '.version')
 
 # git update-index --assume-unchanged .yarnrc.yml
 if ! lerna_publish; then
-  echo "WARNING: Lerna Publish has failed."
+  echo "ERROR: Lerna Publish has failed."
+  exit $PUBLISH_ARTIFACTORY_FAILURE
 else
   echo "Publish successful. Sending promotion message"
 fi
