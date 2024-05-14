@@ -20,25 +20,25 @@ function lerna_publish() {
   ${MY_CMD}
 }
 
+cd $OKTA_HOME/$REPO
 # yarn run lerna-version --yes
 npm config set @okta:registry ${PUBLISH_REGISTRY}
 PACKAGES=$(echo odyssey-{design-tokens,babel-preset,babel-loader,react-mui} browserslist-config-odyssey)
 CURRENT_VERSION=$(< lerna.json jq -r '.version')
 
-# if ! npm publish --access=public --unsafe-perm; then
-#   echo "npm publish failed! Exiting..."
-#   exit $PUBLISH_ARTIFACTORY_FAILURE
-# fi
+if ! npm publish --access=public --unsafe-perm; then
+  echo "npm publish failed! Exiting..."
+  exit $PUBLISH_ARTIFACTORY_FAILURE
+fi
 
 # echo "Publishing to artifactory, yarn run lerna-publish"
-cd $OKTA_HOME/$REPO
 # git update-index --assume-unchanged .yarnrc.yml
-if ! lerna_publish; then
-  echo "ERROR: Lerna Publish has failed."
-  exit $PUBLISH_ARTIFACTORY_FAILURE
-else
-  echo "Publish successful. Sending promotion message"
-fi
+# if ! lerna_publish; then
+#   echo "ERROR: Lerna Publish has failed."
+#   exit $PUBLISH_ARTIFACTORY_FAILURE
+# else
+#   echo "Publish successful. Sending promotion message"
+# fi
 
 # for PACKAGE_NAME in $PACKAGES; do
 #   echo "Starting to process ${PACKAGE_NAME}"
