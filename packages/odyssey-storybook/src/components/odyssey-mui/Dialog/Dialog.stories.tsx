@@ -113,7 +113,9 @@ const DefaultTemplate: StoryObj<DialogProps> = {
       <>
         <Button label="Open dialog" onClick={onOpen} variant="primary" />
         <Dialog
-          {...props}
+          isOpen={isVisible}
+          onClose={onClose}
+          title={props.title}
           primaryCallToActionComponent={
             <Button
               label="Primary action"
@@ -131,9 +133,9 @@ const DefaultTemplate: StoryObj<DialogProps> = {
           tertiaryCallToActionComponent={
             <Button label="Cancel" onClick={onClose} variant="floating" />
           }
-          onClose={onClose}
-          isOpen={isVisible}
-        />
+        >
+          {props.children}
+        </Dialog>
       </>
     );
   },
