@@ -15,7 +15,7 @@ export PUBLISH_REGISTRY="${ARTIFACTORY_URL}/api/npm/npm-topic"
 
 function lerna_publish() {
 #   MY_CMD="yarn lerna-publish --loglevel silly --dist-tag \"${PUBLISH_SHA}\" --registry \"${PUBLISH_REGISTRY}\" --yes --no-push --no-git-tag-version"
-  MY_CMD="yarn run lerna publish from-git --no-push --no-git-tag-version --registry \"${PUBLISH_REGISTRY}\" --yes"
+  MY_CMD="yarn run lerna publish from-package --no-push --no-git-tag-version --no-verify-access --registry \"${PUBLISH_REGISTRY}\" --yes"
   echo "Running ${MY_CMD}"
   ${MY_CMD}
 }
@@ -25,7 +25,7 @@ npm config set @okta:registry ${PUBLISH_REGISTRY}
 PACKAGES=$(echo odyssey-{design-tokens,babel-preset,babel-loader,react-mui} browserslist-config-odyssey)
 CURRENT_VERSION=$(< lerna.json jq -r '.version')
 
-# if ! npm publish --unsafe-perm; then
+# if ! npm publish --access=public --unsafe-perm; then
 #   echo "npm publish failed! Exiting..."
 #   exit $PUBLISH_ARTIFACTORY_FAILURE
 # fi
