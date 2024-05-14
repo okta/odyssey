@@ -1,18 +1,20 @@
 #!/bin/bash
 
-echo "SHA: $SHA\n"
+# echo "SHA: $SHA\n"
 
 source $OKTA_HOME/$REPO/scripts/setup.sh
 
 echo "current directory:\n"
 pwd
 
+PUBLISH_SHA="-$(git rev-parse --short $SHA)"
+
 export PATH="${PATH}:$(yarn global bin)"
 export TEST_SUITE_TYPE="build"
 export PUBLISH_REGISTRY="${ARTIFACTORY_URL}/api/npm/npm-topic"
 
 function lerna_publish() {
-  MY_CMD="yarn lerna-publish --loglevel silly --dist-tag \"latest\" --registry \"${PUBLISH_REGISTRY}\" --yes"
+  MY_CMD="yarn lerna-publish --loglevel silly --dist-tag \"${PUBLISH_SHA}\" --registry \"${PUBLISH_REGISTRY}\" --yes --no-push --no-git-tag-version"
   echo "Running ${MY_CMD}"
   ${MY_CMD}
 }
@@ -22,19 +24,19 @@ npm config set @okta:registry ${PUBLISH_REGISTRY}
 PACKAGES=$(echo odyssey-{design-tokens,babel-preset,babel-loader,react-mui} browserslist-config-odyssey)
 CURRENT_VERSION=$(< lerna.json jq -r '.version')
 
-if ! npm publish --unsafe-perm; then
-  echo "npm publish failed! Exiting..."
-  exit $PUBLISH_ARTIFACTORY_FAILURE
-fi
+# if ! npm publish --unsafe-perm; then
+#   echo "npm publish failed! Exiting..."
+#   exit $PUBLISH_ARTIFACTORY_FAILURE
+# fi
 
 # echo "Publishing to artifactory, yarn run lerna-publish"
 
 # git update-index --assume-unchanged .yarnrc.yml
-# if ! lerna_publish; then
-#   echo "WARNING: Lerna Publish has failed."
-# else
-#   echo "Publish successful. Sending promotion message"
-# fi
+if ! lerna_publish; then
+  echo "WARNING: Lerna Publish has failed."
+else
+  echo "Publish successful. Sending promotion message"
+fi
 
 # for PACKAGE_NAME in $PACKAGES; do
 #   echo "Starting to process ${PACKAGE_NAME}"
