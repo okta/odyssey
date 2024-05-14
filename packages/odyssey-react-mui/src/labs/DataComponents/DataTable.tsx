@@ -11,13 +11,13 @@
  */
 
 import { memo } from "react";
+import { DataView } from "./DataView";
+import { TableProps, UniversalProps } from "./types";
 
-export type DataTableProps = {
-  name: string;
-};
+export type DataTableProps = UniversalProps & TableProps;
 
-const DataTable = ({ name = "DataTable" }: DataTableProps) => {
-  return <>{name}</>;
+const DataTable = (props: DataTableProps) => {
+  return <DataView {...props} availableLayouts="table" />;
 };
 
 const MemoizedDataTable = memo(DataTable);

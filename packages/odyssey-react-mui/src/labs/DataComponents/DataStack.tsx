@@ -11,13 +11,13 @@
  */
 
 import { memo } from "react";
+import { DataView } from "./DataView";
+import { StackProps, UniversalProps } from "./types";
 
-export type DataStackProps = {
-  name: string;
-};
+export type DataStackProps = UniversalProps & StackProps;
 
-const DataStack = ({ name = "DataStack" }: DataStackProps) => {
-  return <>{name}</>;
+const DataStack = (props: DataStackProps) => {
+  return <DataView {...props} availableLayouts="table" />;
 };
 
 const MemoizedDataStack = memo(DataStack);

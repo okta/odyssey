@@ -11,13 +11,17 @@
  */
 
 import { memo } from "react";
+import { UniversalProps, ViewProps } from "./types";
 
-export type DataViewProps = {
-  name: string;
-};
+export type DataViewProps = UniversalProps & ViewProps;
 
-const DataView = ({ name = "DataView" }: DataViewProps) => {
-  return <>{name}</>;
+const DataView = (
+  {
+    // availableLayouts,
+    // initialLayout
+  }: DataViewProps,
+) => {
+  return <></>;
 };
 
 const MemoizedDataView = memo(DataView);

@@ -10,4 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+export const availableStackLayouts = ["stack", "grid"] as const;
+export const availableTableLayouts = ["table"] as const;
+export const availableLayouts = [
+  ...availableStackLayouts,
+  ...availableTableLayouts,
+] as const;
+
 export const densityValues = ["comfortable", "spacious", "compact"] as const;
