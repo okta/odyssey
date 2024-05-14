@@ -15,7 +15,7 @@ export PUBLISH_REGISTRY="${ARTIFACTORY_URL}/api/npm/npm-topic"
 
 function lerna_publish() {
 #   MY_CMD="yarn lerna-publish --loglevel silly --dist-tag \"${PUBLISH_SHA}\" --registry \"${PUBLISH_REGISTRY}\" --yes --no-push --no-git-tag-version"
-  MY_CMD="lerna publish --no-push --no-git-tag-version --registry \"${PUBLISH_REGISTRY}\" --yes"
+  MY_CMD="yarn run lerna publish --no-push --no-git-tag-version --registry \"${PUBLISH_REGISTRY}\" --yes"
   echo "Running ${MY_CMD}"
   ${MY_CMD}
 }
@@ -31,7 +31,7 @@ CURRENT_VERSION=$(< lerna.json jq -r '.version')
 # fi
 
 # echo "Publishing to artifactory, yarn run lerna-publish"
-
+cd $OKTA_HOME/$REPO
 # git update-index --assume-unchanged .yarnrc.yml
 if ! lerna_publish; then
   echo "ERROR: Lerna Publish has failed."
