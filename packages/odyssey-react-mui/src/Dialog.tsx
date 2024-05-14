@@ -31,51 +31,56 @@ import {
 
 import type { HtmlProps } from "./HtmlProps";
 
-// Mutually exclusive types for the action buttons
-type NewActionProps = {
-  primaryCallToActionComponent?: ReactElement<typeof Button>;
-  secondaryCallToActionComponent?: ReactElement<typeof Button>;
-  tertiaryCallToActionComponent?: ReactElement<typeof Button>;
-  callToActionFirstComponent?: never;
-  callToActionSecondComponent?: never;
-  callToActionLastComponent?: never;
-};
-
-type DeprecatedActionProps = {
-  primaryCallToActionComponent?: never;
-  secondaryCallToActionComponent?: never;
-  tertiaryCallToActionComponent?: never;
-  /** @deprecated Will be removed in a future Odyssey version. Use `PrimaryCallToActionComponent` instead. */
-  callToActionFirstComponent?: ReactElement<typeof Button>;
-  /** @deprecated Will be removed in a future Odyssey version. Use `SecondryCallToActionComponent` instead. */
-  callToActionSecondComponent?: ReactElement<typeof Button>;
-  /** @deprecated Will be removed in a future Odyssey version. Use `TertiaryCallToActionComponent` instead. */
-  callToActionLastComponent?: ReactElement<typeof Button>;
-};
-
 export type DialogProps = {
   /**
    * @deprecated `aria-label` for close button comes from translation file
    */
   ariaLabel?: string;
+
+  /**
+   * An optional Button object to be situated in the Dialog footer as the primary call to action.
+   */
+  primaryCallToActionComponent?: ReactElement<typeof Button>;
+  /**
+   * @deprecated Will be removed in a future Odyssey version. Use `primaryCallToActionComponent` instead.
+   */
+  callToActionFirstComponent?: ReactElement<typeof Button>;
+  /**
+   * An optional Button object to be situated in the Dialog footer as the secondary call to action, alongside the `primaryCallToActionComponent`.
+   */
+  secondaryCallToActionComponent?: ReactElement<typeof Button>;
+  /**
+   * @deprecated Will be removed in a future Odyssey version. Use `secondaryCallToActionComponent` instead.
+   */
+  callToActionSecondComponent?: ReactElement<typeof Button>;
+  /**
+   * An optional Button object to be situated in the Dialog footer as the tertiary call to action, alongside the other `callToAction` components.
+   */
+  tertiaryCallToActionComponent?: ReactElement<typeof Button>;
+  /**
+   * @deprecated Will be removed in a future Odyssey version. Use `tertiaryCallToActionComponent` instead.
+   */
+  callToActionLastComponent?: ReactElement<typeof Button>;
   /**
    * The content of the Dialog. May be a `string` or any other `ReactNode` or array of `ReactNode`s.
    */
   children: ReactNode;
+
   /**
    * When set to `true`, the Dialog will be visible.
    */
   isOpen: boolean;
+
   /**
-   * Callback that controls what happens when the Dialog is dismissed
+   * Callback that controls what happens when the Dialog is dismissed.
    */
   onClose: () => void;
+
   /**
-   * The title of the Dialog
+   * The title of the Dialog.
    */
   title: string;
-} & Pick<HtmlProps, "testId" | "translate"> &
-  (NewActionProps | DeprecatedActionProps);
+} & Pick<HtmlProps, "testId" | "translate">;
 
 const Dialog = ({
   primaryCallToActionComponent,
@@ -124,7 +129,7 @@ const Dialog = ({
     ) : (
       children
     );
-  //Ensure new action button format is prioritized (uses || as a fallback)
+  //Prioritize new action button format (|| used as a fallback)
   const actionButtons = [
     tertiaryCallToActionComponent || callToActionLastComponent,
     secondaryCallToActionComponent || callToActionSecondComponent,
@@ -145,7 +150,7 @@ const Dialog = ({
       </DialogTitle>
       <DialogContent
         {...(isContentScrollable && {
-          //Sets tabIndex on content element if scrollable so content is easier to navigate with the keyboard
+          // Sets tabIndex on content element if scrollable so content is easier to navigate with the keyboard
           tabIndex: 0,
         })}
         dividers={isContentScrollable}
