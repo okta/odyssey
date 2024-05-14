@@ -7,7 +7,7 @@ source $OKTA_HOME/$REPO/scripts/setup.sh
 echo "current directory:\n"
 pwd
 
-PUBLISH_SHA="-$(git rev-parse --short $SHA)"
+PUBLISH_SHA="$(git rev-parse --short $SHA)"
 
 export PATH="${PATH}:$(yarn global bin)"
 export TEST_SUITE_TYPE="build"
@@ -25,8 +25,9 @@ cd $OKTA_HOME/$REPO
 npm config set @okta:registry ${PUBLISH_REGISTRY}
 PACKAGES=$(echo odyssey-{design-tokens,babel-preset,babel-loader,react-mui} browserslist-config-odyssey)
 CURRENT_VERSION=$(< lerna.json jq -r '.version')
+TAGGED_VERSION=$CURRENT_VERSION-$PUBLISH_SHA
 
-if ! npm publish --access=public --unsafe-perm; then
+if ! npm publish --access=public --unsafe-perm --tag=$TAGGED_VERSION; then
   echo "npm publish failed! Exiting..."
   exit $PUBLISH_ARTIFACTORY_FAILURE
 fi
