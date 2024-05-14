@@ -63,7 +63,7 @@
     "deliverableTiming": "Q1 FY25"
   },
   {
-    "name": "Card (tile?)",
+    "name": "Card",
     "type": "Component",
     "status": "In Labs",
     "define": "In Labs",
@@ -236,10 +236,10 @@
   {
     "name": "Multi-select dropdown",
     "type": "Component",
-    "status": "-",
-    "define": "-",
-    "design": "-",
-    "develop": "-",
+    "status": "Not started",
+    "define": "Not started",
+    "design": "Not started",
+    "develop": "Not started",
     "deliverableTiming": "TBD"
   },
   {
@@ -367,5 +367,23 @@
     "design": "Complete",
     "develop": "Complete",
     "deliverableTiming": "FY24"
+  },
+  {
+    "name": "Tooltip",
+    "type": "Component",
+    "status": "Released",
+    "define": "Complete",
+    "design": "Complete",
+    "develop": "Complete",
+    "deliverableTiming": "FY24"
+  },
+  {
+    "name": "Wizard",
+    "type": "Pattern",
+    "status": "Not started",
+    "define": "Not started",
+    "design": "Not started",
+    "develop": "Not started",
+    "deliverableTiming": "Q3 FY25"
   }
 ]
