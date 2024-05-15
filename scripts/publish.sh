@@ -13,62 +13,31 @@ export PATH="${PATH}:$(yarn global bin)"
 export TEST_SUITE_TYPE="build"
 export PUBLISH_REGISTRY="${ARTIFACTORY_URL}/api/npm/npm-topic"
 
+echo "Artifactory URL: $PUBLISH_REGISTRY \n"
+
 cd $OKTA_HOME/$REPO
 # yarn run lerna-version --yes
-npm config set @okta:registry ${PUBLISH_REGISTRY}
-PACKAGES=$(echo odyssey-{design-tokens,babel-preset,babel-loader,react-mui} browserslist-config-odyssey)
-CURRENT_VERSION=$(< lerna.json jq -r '.version')
-TAGGED_VERSION=$CURRENT_VERSION-$PUBLISH_SHA
+# npm config set @okta:registry ${PUBLISH_REGISTRY}
+# PACKAGES=$(echo odyssey-{design-tokens,babel-preset,babel-loader,react-mui} browserslist-config-odyssey)
+# CURRENT_VERSION=$(< lerna.json jq -r '.version')
+# TAGGED_VERSION=$CURRENT_VERSION-$PUBLISH_SHA
 
-function lerna_publish() {
-#   MY_CMD="yarn lerna-publish --loglevel silly --dist-tag \"${PUBLISH_SHA}\" --registry \"${PUBLISH_REGISTRY}\" --yes --no-push --no-git-tag-version"
-  MY_CMD="yarn run lerna publish from-package --ignore-changes --no-push --no-git-tag-version --no-verify-access --registry \"${PUBLISH_REGISTRY}\" --yes"
-  echo "Running ${MY_CMD}"
-  ${MY_CMD}
-}
+# function lerna_publish() {
+# #   MY_CMD="yarn lerna-publish --loglevel silly --dist-tag \"${PUBLISH_SHA}\" --registry \"${PUBLISH_REGISTRY}\" --yes --no-push --no-git-tag-version"
+#   MY_CMD="yarn run lerna publish from-package --ignore-changes --no-push --no-git-tag-version --no-verify-access --registry \"${PUBLISH_REGISTRY}\" --yes"
+#   echo "Running ${MY_CMD}"
+#   ${MY_CMD}
+# }
 
-# if ! npm publish --access=public --unsafe-perm --tag=$TAGGED_VERSION; then
-#   echo "npm publish failed! Exiting..."
+# echo "Publishing to artifactory"
+# git status
+# git update-index --assume-unchanged scripts/publish.sh
+# git update-index --assume-unchanged yarn.lock
+# if ! lerna_publish; then
+#   echo "ERROR: Lerna Publish has failed."
 #   exit $PUBLISH_ARTIFACTORY_FAILURE
+# else
+#   echo "Publish successful. Sending promotion message"
 # fi
-
-# echo "Publishing to artifactory, yarn run lerna-publish"
-# git update-index --assume-unchanged .yarnrc.yml
-git status
-git update-index --assume-unchanged scripts/publish.sh
-git update-index --assume-unchanged yarn.lock
-if ! lerna_publish; then
-  echo "ERROR: Lerna Publish has failed."
-  exit $PUBLISH_ARTIFACTORY_FAILURE
-else
-  echo "Publish successful. Sending promotion message"
-fi
-
-# for PACKAGE_NAME in $PACKAGES; do
-#   echo "Starting to process ${PACKAGE_NAME}"
-#   pwd
-#   cd packages
-#   pwd
-#   cd $PACKAGE_NAME
-#   pwd
-#   ls
-#   echo "^ should print directory contents"
-# #   cd $OKTA_HOME/$REPO/packages/$PACKAGE_NAME/dist
-#   if ! npm publish --unsafe-perm; then
-#     echo "npm publish failed! Exiting..."
-#     exit $PUBLISH_ARTIFACTORY_FAILURE
-#   fi
-
-#   # upload artifact version to eng prod s3 to be used by downstream jobs
-#   artifact_version="$(ci-pkginfo -t pkgname)@$(ci-pkginfo -t pkgsemver)"
-#   if upload_job_data global artifact_version ${artifact_version}; then
-#     echo "Upload $PACKAGE_NAME job data artifact_version=${artifact_version} to s3!"
-#   else
-#     # only echo the info since the upload is not crucial
-#     echo "Fail to upload $PACKAGE_NAME job data artifact_version=${artifact_version} to s3!" >&2
-#   fi
-
-#   echo "Finished processing ${PACKAGE_NAME}"
-# done
 
 exit $SUCCESS
