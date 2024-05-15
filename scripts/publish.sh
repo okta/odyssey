@@ -35,7 +35,8 @@ function lerna_publish() {
 # echo "Publishing to artifactory, yarn run lerna-publish"
 # git update-index --assume-unchanged .yarnrc.yml
 git status
-git update-index --assume-unchanged .
+git update-index --assume-unchanged scripts/publish.sh
+git update-index --assume-unchanged yarn.lock
 if ! lerna_publish; then
   echo "ERROR: Lerna Publish has failed."
   exit $PUBLISH_ARTIFACTORY_FAILURE
