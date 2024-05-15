@@ -36,7 +36,8 @@ echo "Publishing to artifactory"
 git status
 # git update-index --assume-unchanged scripts/publish.sh
 # git update-index --assume-unchanged yarn.lock
-git update-index --assume-unchanged \\.
+# assume all files unchanged for lerna publish
+git update-index --assume-unchanged $(git ls-files | tr '\n' ' ')
 if ! lerna_publish; then
   echo "ERROR: Lerna Publish has failed."
   exit $PUBLISH_ARTIFACTORY_FAILURE
