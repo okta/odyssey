@@ -34,14 +34,8 @@ test_suites:
     criteria: MERGE
     queue_name: al2023
     script_path: /root/okta/odyssey/scripts
+    script_name: code-coverage
     sort_order: "5"
-    steps:
-      - event: SOURCE
-        action: setup.sh
-        name: Setup Environment
-      - event: COMMAND
-        action: yarn workspace @okta/odyssey-storybook coverage
-        name: Report Code Coverage
     timeout: "20"
 
   - name: "interaction test"
@@ -49,14 +43,8 @@ test_suites:
     criteria: MERGE
     queue_name: al2023
     script_path: /root/okta/odyssey/scripts
-    sort_order: "4"
-    steps:
-      - event: SOURCE
-        action: setup.sh
-        name: Setup Environment
-      - event: COMMAND
-        action: yarn workspace @okta/odyssey-storybook dev:interactionTest
-        name: Test Interactions and Accessibility
+    script_name: interaction-test
+    sort_order: "6"
     timeout: "20"
 
   - name: "lint"
@@ -64,7 +52,7 @@ test_suites:
     criteria: MERGE
     queue_name: al2023
     script_path: /root/okta/odyssey/scripts
-    sort_order: "1"
+    sort_order: "3"
     steps:
       - event: SOURCE
         action: setup.sh
@@ -76,17 +64,11 @@ test_suites:
 
   - name: "test"
     abort_commit_on_failure: true
+    script_path: /root/okta/odyssey/scripts
+    sort_order: "4"
+    script_name: unit-test
     criteria: MERGE
     queue_name: al2023
-    script_path: /root/okta/odyssey/scripts
-    sort_order: "3"
-    steps:
-      - event: SOURCE
-        action: setup.sh
-        name: Setup Environment
-      - event: COMMAND
-        action: yarn test
-        name: Test Code
     timeout: "20"
 
   - name: "typecheck"
@@ -94,7 +76,7 @@ test_suites:
     criteria: MERGE
     queue_name: al2023
     script_path: /root/okta/odyssey/scripts
-    sort_order: "2"
+    sort_order: "3"
     steps:
       - event: SOURCE
         action: setup.sh
@@ -109,5 +91,5 @@ test_suites:
     queue_name: al2023
     script_name: semgrep
     script_path: /root/okta/odyssey/scripts
-    sort_order: "5"
+    sort_order: "7"
     timeout: "10"
