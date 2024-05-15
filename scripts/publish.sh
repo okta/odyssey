@@ -34,10 +34,10 @@ echo -E "${lerna_json_contents}" > $OKTA_HOME/$REPO/lerna.json
 
 echo "Publishing to artifactory"
 git status
-# git update-index --assume-unchanged scripts/publish.sh
-# git update-index --assume-unchanged yarn.lock
 # assume all files unchanged for lerna publish
-git update-index --assume-unchanged $(git ls-files | tr '\n' ' ')
+git update-index --assume-unchanged scripts/publish.sh
+git update-index --assume-unchanged yarn.lock
+git update-index --assume-unchanged lerna.json
 if ! lerna_publish; then
   echo "ERROR: Lerna Publish has failed."
   exit $PUBLISH_ARTIFACTORY_FAILURE
