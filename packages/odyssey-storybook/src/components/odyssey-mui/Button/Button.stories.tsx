@@ -51,6 +51,15 @@ const storybookMeta: Meta<ButtonProps> = {
         },
       },
     },
+    href: {
+      control: "text",
+      description: "Optional href to render the button as a link",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     id: {
       control: null,
       description: "An optional ID for the button",
@@ -314,7 +323,22 @@ export const ButtonFloatingDisabled: StoryObj<ButtonProps> = {
     variant: "floating",
   },
 };
-
+export const ButtonSecondaryAsLink: StoryObj<ButtonProps> = {
+  name: "Button as a link",
+  args: {
+    label: "Visit okta.com",
+    variant: "floatingAction",
+    href: "http://okta.com",
+    onClick: undefined,
+  },
+  play: async ({ args, canvasElement, step }: playType) => {
+    await interactWithButton({ canvasElement, step })({
+      args,
+      actionName: "Button Secondary with Link",
+      hoverState: false,
+    });
+  },
+};
 export const ButtonSmall: StoryObj<ButtonProps> = {
   name: "Small",
   args: {
