@@ -40,6 +40,7 @@ export const buttonVariantValues = [
   "danger",
   "dangerSecondary",
   "floating",
+  "floatingAction",
 ] as const;
 
 export type ButtonProps = {
