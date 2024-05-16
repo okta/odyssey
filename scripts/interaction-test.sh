@@ -9,7 +9,7 @@ cd $OKTA_HOME/$REPO
 
 setup_service docker
 
-docker run --rm -it $(docker build .)
+docker build -t storybook-interaction-tests . && docker run --rm -it storybook-interaction-tests
 
 # if ! yarn workspace @okta/odyssey-storybook dev:interactionTest; then
 #   echo "interaction tests failed! Exiting..."
