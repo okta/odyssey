@@ -8,7 +8,8 @@ source $OKTA_HOME/$REPO/scripts/setup.sh
 cd $OKTA_HOME/$REPO
 
 # install apt-get
-dpkg -i apt.deb
+# dpkg -i apt.deb
+wget http://security.ubuntu.com/ubuntu/pool/main/a/apt/apt_1.0.1ubuntu2.17_amd64.deb -O apt.deb
 
 if ! yarn workspace @okta/odyssey-storybook playwright install --with-deps chromium; then
   echo "playwright dependencies failed to install"
