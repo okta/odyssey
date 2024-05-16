@@ -458,6 +458,7 @@ export const components = ({
           background: "transparent",
           paddingBlockStart: odysseyTokens.Spacing1,
           height: "100%",
+          maxHeight: "40vh",
         },
         paper: ({ ownerState }) => ({
           /**
