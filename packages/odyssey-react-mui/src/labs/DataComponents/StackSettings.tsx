@@ -10,11 +10,18 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export const availableStackLayouts = ["stack", "grid"];
-export const availableTableLayouts = ["table"];
-export const availableLayouts = [
-  ...availableTableLayouts,
-  ...availableStackLayouts,
-];
+import { memo } from "react";
 
-export const densityValues = ["comfortable", "spacious", "compact"] as const;
+export type StackSettingsProps = {
+  name?: string;
+};
+
+const StackSettings = ({ name }: StackSettingsProps) => {
+  console.log(name);
+  return <>StackSettings</>;
+};
+
+const MemoizedStackSettings = memo(StackSettings);
+MemoizedStackSettings.displayName = "StackSettings";
+
+export { MemoizedStackSettings as StackSettings };

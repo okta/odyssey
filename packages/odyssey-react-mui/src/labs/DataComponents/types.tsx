@@ -10,31 +10,44 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { MRT_RowSelectionState } from "material-react-table";
+import { DataTableColumn, DataTableRowData } from "../../DataTable";
+import { DataFilter } from "../DataFilters";
+import { paginationTypeValues } from "../DataTablePagination";
+import {
+  availableLayouts,
+  availableStackLayouts,
+  densityValues,
+} from "./constants";
+import { MenuButtonProps } from "../..";
+
 export type UniversalProps = {
   // Data handling
   getData?: string;
   getRowId?: string;
-  hasRowReordering?: string;
+  hasRowReordering?: boolean;
   onReorderRows?: string;
 
   // Row selection
-  hasRowSelection?: string;
+  hasRowSelection?: boolean;
   onChangeRowSelection?: string;
-  bulkActionMenuItems?: string;
+  bulkActionMenuItems?: (
+    selectedRows: MRT_RowSelectionState,
+  ) => MenuButtonProps["children"];
 
   // Pagination
-  hasPagination?: string;
-  currentPage?: string;
-  resultsPerPage?: string;
-  totalRows?: string;
+  hasPagination?: boolean;
+  currentPage?: number;
+  paginationType?: (typeof paginationTypeValues)[number];
+  resultsPerPage?: number;
+  totalRows?: number;
 
   // Search & filtering
-  hasFilters?: string;
-  hasSearch?: string;
-  hasSearchSubmitButton?: string;
-  filters?: string;
-  paginationType?: string;
-  searchDelayTime?: string;
+  hasFilters?: boolean;
+  hasSearch?: boolean;
+  hasSearchSubmitButton?: boolean;
+  filters?: Array<DataFilter | DataTableColumn<DataTableRowData> | string>;
+  searchDelayTime?: number;
 
   // States
   errorMessage?: string;
@@ -43,26 +56,29 @@ export type UniversalProps = {
 };
 
 export type TableProps = {
-  columns?: string;
-  initialDensity?: string;
-  hasChangeableDensity?: string;
-  hasColumnResizing?: string;
-  hasColumnVisibility?: string;
+  columns: DataTableColumn<DataTableRowData>[];
+  initialDensity?: (typeof densityValues)[number];
+  hasChangeableDensity?: boolean;
+  hasColumnResizing?: boolean;
+  hasColumnVisibility?: boolean;
   renderDetailPanel?: string;
   rowActionButtons?: string;
   rowActionMenuItems?: string;
-  hasSorting?: string;
+  hasSorting?: boolean;
 };
 
 export type StackProps = {
-  availableLayouts?: string;
-  stackLayout?: string;
-  initialLayout?: string;
+  initialLayout?: (typeof availableStackLayouts)[number];
+  availableLayouts?:
+    | (typeof availableStackLayouts)[number]
+    | (typeof availableStackLayouts)[number][];
 };
 
 export type ViewProps = {
-  availableLayouts?: string;
-  initialLayout?: string;
+  initialLayout?: (typeof availableLayouts)[number];
+  availableLayouts?:
+    | (typeof availableLayouts)[number]
+    | (typeof availableLayouts)[number][];
   tableProps?: TableProps;
   stackProps?: StackProps;
 };

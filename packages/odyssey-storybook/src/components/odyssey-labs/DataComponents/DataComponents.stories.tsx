@@ -26,6 +26,6 @@ export default storybookMeta;
 export const Default: StoryObj<DataViewProps> = {
   args: {},
   render: function C() {
-    return <DataView />;
+    return <DataView hasPagination hasFilters hasSearch initialLayout />;
   },
 };
