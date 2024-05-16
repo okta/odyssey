@@ -1,14 +1,15 @@
 FROM mcr.microsoft.com/playwright:v1.44.0-jammy
 
 # copy project (including tests)
-COPY . /odyssey
+COPY /root/okta/odyssey /odyssey
 
 WORKDIR /odyssey
 
 RUN ls -a
 
 # Install dependencies
-RUN yarn install
+# RUN yarn install
+RUN npm install
 
 # Navigate to storybook package
 RUN cd packages/odyssey-storybook
