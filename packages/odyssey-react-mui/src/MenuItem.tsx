@@ -89,6 +89,7 @@ const MenuItem = ({
       onClick={onClick}
       selected={isSelected}
       value={value}
+      tabIndex={0}
     >
       {children}
     </MuiMenuItem>
