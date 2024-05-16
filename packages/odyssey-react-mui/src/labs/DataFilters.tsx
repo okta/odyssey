@@ -254,23 +254,25 @@ const DataFilters = ({
   const [inputValues, setInputValues] = useState(initialInputValues);
 
   const [searchValue, setSearchValue] = useState<string>(defaultSearchTerm);
-  const activeFilters = useMemo(() => {
-    return filters.filter((filter) => {
-      if (filter.value) {
-        console.log(filter.value);
-      }
-      return filter.value;
-    });
-  }, [filters]);
+
+  const activeFilters = useMemo(
+    () => filters.filter((filter) => filter.value),
+    [filters],
+  );
+
   const [isFiltersMenuOpen, setIsFiltersMenuOpen] = useState<boolean>(false);
+
   const [filtersMenuAnchorElement, setFiltersMenuAnchorElement] = useState<
     HTMLElement | undefined
   >();
+
   const [isFilterPopoverOpen, setIsFilterPopoverOpen] =
     useState<boolean>(false);
+
   const [filterPopoverAnchorElement, setFilterPopoverAnchorElement] = useState<
     HTMLElement | undefined
   >();
+
   const [filterPopoverCurrentFilter, setFilterPopoverCurrentFilter] = useState<
     DataFilter | undefined
   >();
@@ -282,6 +284,7 @@ const DataFilters = ({
   }, [filters, onChangeFilters]);
 
   const debouncer = useRef<NodeJS.Timeout | undefined>(undefined);
+
   useEffect(() => {
     if (!hasSearchSubmitButton) {
       if (debouncer.current) {
@@ -824,54 +827,6 @@ const DataFilters = ({
             activeFilters={activeFilters}
             updateFilterAndInputValues={updateFilterAndInputValues}
           />
-          {/* <TagList>
-            {activeFilters.map((filter) => {
-              if (Array.isArray(filter.value)) {
-                filter.value.map((filterValue) => {
-                  const value =
-                    typeof filterValue === "string"
-                      ? filterValue
-                      : filterValue.value;
-                  return (
-                    <Tag
-                      key={filter.label}
-                      label={`${filter.label}: ${value}`}
-                      onRemove={() => {
-                        updateInputValue({
-                          filterId: filter.id,
-                          value: undefined,
-                        });
-
-                        updateFilters({
-                          filterId: filter.id,
-                          value: undefined,
-                        });
-                      }}
-                    />
-                  );
-                });
-              }
-
-              return null;
-              // return (
-              //   <Tag
-              //     key={filter.label}
-              //     label={`${filter.label}: ${filter.value}`}
-              //     onRemove={() => {
-              //       updateInputValue({
-              //         filterId: filter.id,
-              //         value: undefined,
-              //       });
-
-              //       updateFilters({
-              //         filterId: filter.id,
-              //         value: undefined,
-              //       });
-              //     }}
-              //   />
-              // );
-            })}
-          </TagList> */}
         </Box>
       )}
     </Box>
