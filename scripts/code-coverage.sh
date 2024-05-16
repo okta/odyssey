@@ -11,6 +11,8 @@ setup_service docker
 
 docker pull mcr.microsoft.com/playwright:v1.44.0-jammy
 
+docker run -it --rm --ipc=host mcr.microsoft.com/playwright:v1.44.0-jammy /bin/bash
+
 # install apt-get
 # dpkg -i apt.deb
 # wget http://security.ubuntu.com/ubuntu/pool/main/a/apt/apt_1.0.1ubuntu2.17_amd64.deb -O apt.deb
