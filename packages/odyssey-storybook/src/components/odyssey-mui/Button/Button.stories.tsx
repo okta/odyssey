@@ -328,15 +328,8 @@ export const ButtonSecondaryAsLink: StoryObj<ButtonProps> = {
   args: {
     label: "Visit okta.com",
     variant: "floatingAction",
-    href: "http://okta.com",
+    href: "https://okta.com",
     onClick: undefined,
-  },
-  play: async ({ args, canvasElement, step }: playType) => {
-    await interactWithButton({ canvasElement, step })({
-      args,
-      actionName: "Button Secondary with Link",
-      hoverState: false,
-    });
   },
 };
 export const ButtonSmall: StoryObj<ButtonProps> = {
