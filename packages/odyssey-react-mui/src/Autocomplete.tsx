@@ -92,6 +92,12 @@ export type AutocompleteProps<
     undefined,
     IsCustomValueAllowed
   >["defaultValue"];
+  getOptionLabel?: MuiAutocompleteProps<
+    OptionType,
+    HasMultipleChoices,
+    undefined,
+    IsCustomValueAllowed
+  >["getOptionLabel"];
   /**
    * Used to determine the string value for a given option. It's used to fill the input (and the list box options if renderOption is not provided). If used in free solo mode, it must accept both the type of the options and a string.
    *
@@ -207,6 +213,25 @@ export type AutocompleteProps<
    * The options for the Autocomplete input
    */
   options: ReadonlyArray<OptionType>;
+
+  /**
+   * Used to determine virtualizd list option heights
+   */
+  optionHeight?: number;
+
+  renderOption?: MuiAutocompleteProps<
+    OptionType,
+    HasMultipleChoices,
+    undefined,
+    IsCustomValueAllowed
+  >["renderOption"];
+
+  renderTags?: MuiAutocompleteProps<
+    OptionType,
+    HasMultipleChoices,
+    undefined,
+    IsCustomValueAllowed
+  >["renderTags"];
   /**
    * The value of the Autocomplete input
    */
@@ -260,6 +285,7 @@ const Autocomplete = <
   defaultValue,
   errorMessage,
   errorMessageList,
+  getIsOptionEqualToValue,
   getOptionLabel,
   hasMultipleChoices,
   id: idOverride,
@@ -281,8 +307,10 @@ const Autocomplete = <
   onInputChange: onInputChangeProp,
   onFocus,
   options,
+  optionHeight,
+  renderOption,
+  renderTags,
   value,
-  getIsOptionEqualToValue,
   testId,
   translate,
 }: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
@@ -583,9 +611,10 @@ const Autocomplete = <
       disabled={isDisabled}
       freeSolo={isCustomValueAllowed}
       filterSelectedOptions={true}
+      fullWidth={isFullWidth}
       getOptionLabel={getOptionLabel}
       id={idOverride}
-      fullWidth={isFullWidth}
+      isOptionEqualToValue={getIsOptionEqualToValue}
       loading={isLoading}
       multiple={hasMultipleChoices}
       noOptionsText={noOptionsText}
@@ -597,8 +626,10 @@ const Autocomplete = <
       options={options}
       readOnly={isReadOnly}
       renderInput={renderInput}
-      isOptionEqualToValue={getIsOptionEqualToValue}
+      renderOption={renderOption}
+      renderTags={renderTags}
       translate={translate}
+      open={true}
     />
   );
 };
