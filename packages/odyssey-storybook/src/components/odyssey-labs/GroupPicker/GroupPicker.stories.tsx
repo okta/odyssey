@@ -16,33 +16,45 @@ import {
   GroupPickerOptionType,
 } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react";
+import {
+  GlobeIcon,
+  SettingsIcon,
+  SyncIcon,
+  VideoIcon,
+} from "@okta/odyssey-react-mui/icons";
 
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import demoImage from "./demo.png";
 
 const stations: ReadonlyArray<GroupPickerOptionType> = [
-  { id: "en", name: "English", description: "", logo: demoImage },
+  { id: "en", title: "English", description: "", logo: <VideoIcon /> },
   {
     id: "fr",
-    name: "French",
+    title: "French",
     description: "Français",
-    logo: "",
+    logo: <SettingsIcon />,
     usersCount: 100,
     appsCount: 200,
+    customDetails: [
+      {
+        icon: <GlobeIcon />,
+        detailText: 1000,
+      },
+    ],
   },
   {
     id: "jp",
-    name: "Japanese",
+    title: "Japanese",
     description: "日本語",
-    logo: demoImage,
+    logo: <GlobeIcon />,
     usersCount: 0,
     appsCount: 0,
   },
   {
     id: "es",
-    name: "Spanish",
+    title: "Spanish",
     description: "Español",
-    logo: demoImage,
+    logo: <SyncIcon />,
     usersCount: 101,
     appsCount: 202,
     groupPushMappingsCount: 303,
@@ -62,15 +74,8 @@ const storybookMeta: Meta<typeof GroupPicker> = {
         },
       },
     },
-    hint: {
-      control: "text",
-      description: "The hint text for the autocomplete input",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
+    hint: fieldComponentPropsMetaData.hint,
+    HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
     isCustomValueAllowed: {
       control: "boolean",
       description: "Allows the input of custom values",
@@ -197,12 +202,12 @@ export const Disabled: StoryObj<GroupPickerPropsType> = {
     isDisabled: true,
     hasMultipleChoices: true,
     value: [
-      { id: "en", name: "English", description: "", logo: demoImage },
+      { id: "en", title: "English", description: "", logo: <GlobeIcon /> },
       {
         id: "jp",
-        name: "Japanese",
+        title: "Japanese",
         description: "日本語",
-        logo: demoImage,
+        logo: <SyncIcon />,
         usersCount: 0,
         appsCount: 0,
       },
