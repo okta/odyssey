@@ -10,8 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { DataTableRowData, Status, Tooltip } from "@okta/odyssey-react-mui";
+import {
+  DataTableRowData,
+  Status,
+  statusSeverityValues,
+  Tooltip,
+} from "@okta/odyssey-react-mui";
 import { DataTableColumn } from "@okta/odyssey-react-mui";
+import { useMemo } from "react";
 
 import rawData from "./roadmap.json";
 export const data: OdysseyComponent[] = rawData as OdysseyComponent[];
@@ -48,16 +54,17 @@ export const columns: DataTableColumn<DataTableRowData>[] = [
       const defineValue = row.original.define;
       const designValue = row.original.design;
       const developValue = row.original.develop;
-      const severity =
-        statusValue === "Released"
-          ? "success"
-          : statusValue === "In Labs"
-            ? "warning"
-            : statusValue === "In progress"
-              ? "default"
-              : statusValue === "Not started"
-                ? "error"
-                : "default";
+      const severityMap = useMemo(
+        () =>
+          new Map<string, (typeof statusSeverityValues)[number]>([
+            ["Released", "success"],
+            ["In Labs", "warning"],
+            ["In progress", "default"],
+            ["Not started", "error"],
+          ]),
+        [],
+      );
+      const severity = severityMap.get(statusValue) || "default";
 
       // First priority: Check if the define stage is "In Progress"
       if (defineValue === "In Progress") {
