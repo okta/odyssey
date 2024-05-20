@@ -14,4 +14,5 @@ if ! yarn test; then
   exit ${PUBLISH_TYPE_AND_RESULT_DIR_BUT_ALWAYS_FAIL}
 fi
 
-exit $PUBLISH_TYPE_AND_RESULT_DIR;
+echo "Lerna tests passed!"
+report_results SUCCESS publish_type_and_result_dir_but_succeed_if_no_results
