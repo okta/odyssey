@@ -1,31 +1,26 @@
 #!/bin/bash
 
-# export CHROME_HEADLESS=true
-# setup_service google-chrome-stable 83.0.4103.61-1
-
 source $OKTA_HOME/$REPO/scripts/setup.sh
 
 cd $OKTA_HOME/$REPO
 
-setup_service docker
+# Bacon required config
+export TEST_SUITE_TYPE="junit"
+export TEST_RESULT_FILE_DIR="${OKTA_HOME}/${REPO}/build2/reports/playwright"
+echo ${TEST_SUITE_TYPE} > "${TEST_SUITE_TYPE_FILE}"
+echo "${TEST_RESULT_FILE_DIR}" > "${TEST_RESULT_FILE_DIR_FILE}"
 
-# docker pull mcr.microsoft.com/playwright:v1.44.0-jammy
+if ! yarn workspace @okta/odyssey-storybook playwright install --with-deps chromium; then
+  echo "Failed to install Playwright and its dependencies!"
+  report_results FAILURE publish_type_and_result_dir_but_always_fail
+  exit "$BUILD_FAILURE"
+fi
 
-# docker run -it --rm --ipc=host mcr.microsoft.com/playwright:v1.44.0-jammy /bin/bash
+if ! yarn workspace @okta/odyssey-storybook ci:coverage; then
+  echo "Playwright test failure!"
+  report_results FAILURE publish_type_and_result_dir_but_always_fail
+  exit "$BUILD_FAILURE"
+fi
 
-docker run --rm -it $(docker build -q $OKTA_HOME/$REPO/packages/odyssey-storybook)
-
-# install apt-get
-# dpkg -i apt.deb
-# wget http://security.ubuntu.com/ubuntu/pool/main/a/apt/apt_1.0.1ubuntu2.17_amd64.deb -O apt.deb
-# if ! yarn workspace @okta/odyssey-storybook playwright install --with-deps chromium; then
-#   echo "playwright dependencies failed to install"
-#   exit ${PUBLISH_TYPE_AND_RESULT_DIR_BUT_ALWAYS_FAIL}
-# fi
-
-# if ! yarn workspace @okta/odyssey-storybook ci:coverage; then
-#   echo "code coverage failed! Exiting..."
-#   exit ${PUBLISH_TYPE_AND_RESULT_DIR_BUT_ALWAYS_FAIL}
-# fi
-
-exit $PUBLISH_TYPE_AND_RESULT_DIR;
+echo "Playwright code coverage tests passed!"
+report_results SUCCESS publish_type_and_result_dir_but_succeed_if_no_results

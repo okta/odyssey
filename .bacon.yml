@@ -32,7 +32,8 @@ test_suites:
   - name: "code coverage"
     abort_commit_on_failure: true
     criteria: MERGE
-    queue_name: al2023
+    # Playwright only works with certain distros of Linux
+    queue_name: ci-queue-prodJenga-Ubuntu20
     script_path: /root/okta/odyssey/scripts
     script_name: code-coverage
     sort_order: "5"

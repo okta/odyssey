@@ -4,12 +4,6 @@ source $OKTA_HOME/$REPO/scripts/setup.sh
 
 cd $OKTA_HOME/$REPO
 
-# setup_service docker
-
-# docker build -t storybook-interaction-tests . && docker run --rm storybook-interaction-tests
-
-# exit $PUBLISH_TYPE_AND_RESULT_DIR;
-
 # Bacon required config
 export TEST_SUITE_TYPE="junit"
 export TEST_RESULT_FILE_DIR="${OKTA_HOME}/${REPO}/build2/reports/playwright"
