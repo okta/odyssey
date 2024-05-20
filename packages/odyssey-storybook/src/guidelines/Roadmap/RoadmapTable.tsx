@@ -12,7 +12,7 @@
 
 import { DataFilter } from "@okta/odyssey-react-mui/labs";
 import { DataTable, DataTableSortingState } from "@okta/odyssey-react-mui";
-import { columns, data as incomingData, OdysseyComponent } from "./roadmapData";
+import { columns, data, OdysseyComponent } from "./roadmapData";
 import {
   Callout,
   CssBaseline,
@@ -152,7 +152,6 @@ export const InnerRoadmapTable = () => {
     { label: "Q4 FY26", value: "Q4 FY26" },
   ];
 
-  const data = incomingData;
   const fetchData = ({
     page,
     resultsPerPage,
