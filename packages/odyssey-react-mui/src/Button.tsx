@@ -49,6 +49,10 @@ export type ButtonProps = {
    */
   buttonRef?: React.RefObject<FocusHandle>;
   /**
+   * Optional href to render the button as a link
+   */
+  href?: string;
+  /**
    * The ID of the Button
    */
   id?: string;
@@ -77,10 +81,6 @@ export type ButtonProps = {
    * The variant of the Button
    */
   variant: (typeof buttonVariantValues)[number] | "tertiary";
-  /**
-   * Optional href to render the button as a link
-   */
-  href?: string;
   /**
    * The click event handler for the Button
    */
