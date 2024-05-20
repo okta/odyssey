@@ -36,32 +36,48 @@ export type DialogProps = {
    * @deprecated `aria-label` for close button comes from translation file
    */
   ariaLabel?: string;
+
   /**
-   * An optional Button object to be situated in the Dialog footer. Should almost always be of variant `primary`.
+   * An optional Button object to be situated in the Dialog footer as the primary call to action.
    */
   primaryCallToActionComponent?: ReactElement<typeof Button>;
   /**
-   * An optional Button object to be situated in the Dialog footer, alongside the `callToActionPrimaryComponent`.
+   * @deprecated Will be removed in a future Odyssey version. Use `primaryCallToActionComponent` instead.
+   */
+  callToActionFirstComponent?: ReactElement<typeof Button>;
+  /**
+   * An optional Button object to be situated in the Dialog footer as the secondary call to action, alongside the `primaryCallToActionComponent`.
    */
   secondaryCallToActionComponent?: ReactElement<typeof Button>;
   /**
-   * An optional Button object to be situated in the Dialog footer, alongside the other two `callToAction` components.
+   * @deprecated Will be removed in a future Odyssey version. Use `secondaryCallToActionComponent` instead.
+   */
+  callToActionSecondComponent?: ReactElement<typeof Button>;
+  /**
+   * An optional Button object to be situated in the Dialog footer as the tertiary call to action, alongside the other `callToAction` components.
    */
   tertiaryCallToActionComponent?: ReactElement<typeof Button>;
+  /**
+   * @deprecated Will be removed in a future Odyssey version. Use `tertiaryCallToActionComponent` instead.
+   */
+  callToActionLastComponent?: ReactElement<typeof Button>;
   /**
    * The content of the Dialog. May be a `string` or any other `ReactNode` or array of `ReactNode`s.
    */
   children: ReactNode;
+
   /**
    * When set to `true`, the Dialog will be visible.
    */
   isOpen: boolean;
+
   /**
-   * Callback that controls what happens when the Dialog is dismissed
+   * Callback that controls what happens when the Dialog is dismissed.
    */
   onClose: () => void;
+
   /**
-   * The title of the Dialog
+   * The title of the Dialog.
    */
   title: string;
 } & Pick<HtmlProps, "testId" | "translate">;
@@ -70,6 +86,9 @@ const Dialog = ({
   primaryCallToActionComponent,
   secondaryCallToActionComponent,
   tertiaryCallToActionComponent,
+  callToActionFirstComponent,
+  callToActionSecondComponent,
+  callToActionLastComponent,
   children,
   isOpen,
   onClose,
@@ -110,6 +129,12 @@ const Dialog = ({
     ) : (
       children
     );
+  //Prioritize new action button format (|| used as a fallback)
+  const actionButtons = [
+    tertiaryCallToActionComponent || callToActionLastComponent,
+    secondaryCallToActionComponent || callToActionSecondComponent,
+    primaryCallToActionComponent || callToActionFirstComponent,
+  ].filter(Boolean);
 
   return (
     <MuiDialog data-se={testId} open={isOpen} onClose={onClose}>
@@ -125,7 +150,7 @@ const Dialog = ({
       </DialogTitle>
       <DialogContent
         {...(isContentScrollable && {
-          //Sets tabIndex on content element if scrollable so content is easier to navigate with the keyboard
+          // Sets tabIndex on content element if scrollable so content is easier to navigate with the keyboard
           tabIndex: 0,
         })}
         dividers={isContentScrollable}
@@ -134,14 +159,8 @@ const Dialog = ({
         {content}
       </DialogContent>
 
-      {(primaryCallToActionComponent ||
-        secondaryCallToActionComponent ||
-        tertiaryCallToActionComponent) && (
-        <DialogActions>
-          {tertiaryCallToActionComponent}
-          {secondaryCallToActionComponent}
-          {primaryCallToActionComponent}
-        </DialogActions>
+      {actionButtons.length > 0 && (
+        <DialogActions>{actionButtons}</DialogActions>
       )}
     </MuiDialog>
   );

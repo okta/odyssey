@@ -20,10 +20,10 @@ import {
 import { useCallback, useState } from "react";
 import { userEvent, within, screen } from "@storybook/testing-library";
 import type { PlaywrightProps } from "../storybookTypes";
-
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-const storybookMeta: Meta<DialogProps> = {
+// Explicitly type the Meta object
+const storybookMeta: Meta<typeof Dialog> = {
   title: "MUI Components/Dialog",
   component: Dialog,
   argTypes: {
@@ -31,41 +31,25 @@ const storybookMeta: Meta<DialogProps> = {
       control: null,
       description:
         "An optional Button object to be situated in the Dialog footer. Should almost always be of variant `primary`.",
-      table: {
-        type: {
-          summary: "<Button />",
-        },
-      },
+      table: { type: { summary: "<Button />" } },
     },
     secondaryCallToActionComponent: {
       control: null,
       description:
         "An optional Button object to be situated in the Dialog footer, alongside the `callToActionPrimaryComponent`.",
-      table: {
-        type: {
-          summary: "<Button />",
-        },
-      },
+      table: { type: { summary: "<Button />" } },
     },
     tertiaryCallToActionComponent: {
       control: null,
       description:
         "An optional Button object to be situated in the Dialog footer, alongside the other two `callToAction` components.",
-      table: {
-        type: {
-          summary: "<Button />",
-        },
-      },
+      table: { type: { summary: "<Button />" } },
     },
     children: {
       control: "text",
       description:
         "The content of the Dialog. May be a `string` or any other `ReactNode` or array of `ReactNode`s.",
-      table: {
-        type: {
-          summary: "ReactNode | Array<ReactNode>",
-        },
-      },
+      table: { type: { summary: "ReactNode | Array<ReactNode>" } },
       type: {
         required: true,
         name: "other",
@@ -75,37 +59,19 @@ const storybookMeta: Meta<DialogProps> = {
     isOpen: {
       control: "boolean",
       description: "When set to `true`, the Dialog will be visible.",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-      type: {
-        required: true,
-        name: "boolean",
-      },
+      table: { type: { summary: "boolean" } },
+      type: { required: true, name: "boolean" },
     },
     onClose: {
       control: "function",
       description:
         "Callback that controls what happens when the dialog is dismissed",
-      table: {
-        type: {
-          summary: "func",
-        },
-      },
+      table: { type: { summary: "func" } },
     },
     title: {
       control: "text",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-      type: {
-        required: true,
-        name: "string",
-      },
+      table: { type: { summary: "string" } },
+      type: { required: true, name: "string" },
     },
   },
   args: {
@@ -132,7 +98,7 @@ const findDialogElement = async ({
 };
 
 const DefaultTemplate: StoryObj<DialogProps> = {
-  render: function C(props) {
+  render: function C(props: DialogProps) {
     const [isVisible, setIsVisible] = useState(false);
 
     const onOpen = useCallback(() => {
@@ -180,7 +146,7 @@ export const Default: StoryObj<DialogProps> = {
       "You are initiating this ship's self-destruct protocol. This ship, and its occupants, will be destroyed.",
     title: "Initiate self-destruct protocol",
   },
-  play: async ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }: PlaywrightProps<DialogProps>) => {
     await findDialogElement({ canvasElement, step });
   },
 };
@@ -337,13 +303,13 @@ export const Long: StoryObj<DialogProps> = {
     ),
     title: "Cryosleep liability waiver",
   },
-  play: async ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }: PlaywrightProps<DialogProps>) => {
     await findDialogElement({ canvasElement, step });
   },
 };
 
 export const NoButtons: StoryObj<DialogProps> = {
-  render: function C(props) {
+  render: function C(props: DialogProps) {
     const [isVisible, setIsVisible] = useState(false);
 
     const onOpen = useCallback(() => {
@@ -366,7 +332,7 @@ export const NoButtons: StoryObj<DialogProps> = {
       "By closing this Dialog you agree to adhere to the Ceres Station terms of use.",
     title: "Ceres Station docking terms",
   },
-  play: async ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }: PlaywrightProps<DialogProps>) => {
     await findDialogElement({ canvasElement, step });
   },
 };
