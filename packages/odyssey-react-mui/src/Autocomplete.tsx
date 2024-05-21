@@ -214,11 +214,6 @@ export type AutocompleteProps<
    */
   options: ReadonlyArray<OptionType>;
 
-  /**
-   * Used to determine virtualizd list option heights
-   */
-  optionHeight?: number;
-
   renderOption?: MuiAutocompleteProps<
     OptionType,
     HasMultipleChoices,
@@ -307,7 +302,6 @@ const Autocomplete = <
   onInputChange: onInputChangeProp,
   onFocus,
   options,
-  optionHeight,
   renderOption,
   renderTags,
   value,
