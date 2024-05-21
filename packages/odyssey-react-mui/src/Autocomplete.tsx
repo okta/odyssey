@@ -51,6 +51,42 @@ import {
   getControlState,
 } from "./inputUtils";
 
+type SetItemSize = (index: number, size: number) => void;
+
+const Row = ({
+  data,
+  index,
+  setItemSize,
+  style,
+}: ListChildComponentProps & { setItemSize: SetItemSize }) => {
+  const rowRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (rowRef.current) {
+      /**
+       * Checking for child height to workaround a bug where the clientHeight of the row isn't updated correctly
+       * @see here if you need to know more: https://github.com/bvaughn/react-window/issues/582#issuecomment-1883074908
+       */
+      const firstChild = rowRef.current.firstElementChild;
+      if (firstChild) {
+        const height = firstChild.clientHeight;
+        setItemSize(index, height);
+      }
+    }
+  }, [index, rowRef, setItemSize]);
+
+  /**
+   * react-window calculates the absolute positions of the list items, via an inline style, so
+   * we need to add it to each list item that is being rendered in the viewable list window.
+   * @see here if you need to know more: https://github.com/bvaughn/react-window?tab=readme-ov-file#why-is-my-list-blank-when-i-scroll
+   */
+  return (
+    <div key={`${index}-${style}}`} style={style} ref={rowRef}>
+      {data[index]}
+    </div>
+  );
+};
+
 export type AutocompleteProps<
   OptionType,
   HasMultipleChoices extends boolean | undefined,
@@ -170,11 +206,6 @@ export type AutocompleteProps<
    */
   options: ReadonlyArray<OptionType>;
 
-  /**
-   * Used to determine virtualizd list option heights
-   */
-  optionHeight?: number;
-
   renderOption?: MuiAutocompleteProps<
     OptionType,
     HasMultipleChoices,
@@ -262,7 +293,6 @@ const Autocomplete = <
   onInputChange: onInputChangeProp,
   onFocus,
   options,
-  optionHeight,
   renderOption,
   renderTags,
   value,
@@ -369,37 +399,12 @@ const Autocomplete = <
     ],
   );
 
-  const renderVirtualizedRow = ({
-    data,
-    index,
-    style,
-  }: ListChildComponentProps) => {
-    const baseOption = data[index];
-    /**
-     * react-window calculates the absolute positions of the list items, via an inline style, so
-     * we need to add it to each list item that is being rendered in the viewable list window.
-     * See here if you need to know more: https://github.com/bvaughn/react-window?tab=readme-ov-file#why-is-my-list-blank-when-i-scroll
-     */
-    const optionItem = { ...baseOption, props: { ...baseOption.props, style } };
-    return optionItem;
-  };
-
   const OuterListboxContext = createContext({});
 
   const OuterListboxElementType = forwardRef<HTMLDivElement>((props, ref) => {
     const outerProps = useContext(OuterListboxContext);
     return <div ref={ref} {...props} {...outerProps} />;
   });
-
-  function useResetCache(length: number) {
-    const ref = useRef<VariableSizeList>(null);
-    useEffect(() => {
-      if (ref.current) {
-        ref.current.resetAfterIndex(0, true);
-      }
-    }, [length]);
-    return ref;
-  }
 
   const ListboxComponent = forwardRef<
     HTMLDivElement,
@@ -410,16 +415,24 @@ const Autocomplete = <
       (item: ReactElement & { children?: ReactElement[] }) =>
         [item].concat(item.children || []),
     );
-    console.log("rendered box");
-    // the height of an Odyssey autocomplete option item that is used to calculate height of window
-    const listOptionHeight = optionHeight || 45; //px
+    const sizeMap = useMemo(() => new Map<number, number>(), []);
+    const gridRef = useRef<VariableSizeList>(null);
+
+    const setItemSize = useCallback<SetItemSize>(
+      (index, size) => {
+        gridRef?.current?.resetAfterIndex(0, true);
+        sizeMap.set(index, size);
+      },
+      [gridRef, sizeMap],
+    );
 
     // The number of items (rows or columns) to render outside of the visible area for performance and scrolling reasons
     const overscanRowCount = 8;
 
-    const itemSize = useCallback(() => listOptionHeight, [listOptionHeight]);
-
-    const gridRef = useResetCache(itemData.length);
+    const getItemSize = useCallback(
+      (index: number) => sizeMap.get(index) || 45,
+      [sizeMap],
+    );
 
     const renderWindow = useCallback(
       ({ height, width }: AutoSizerSize) => (
@@ -428,17 +441,24 @@ const Autocomplete = <
           itemData={itemData}
           itemCount={itemData.length}
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          itemSize={itemSize}
+          itemSize={getItemSize}
           height={height}
           width={width}
           ref={gridRef}
           outerElementType={OuterListboxElementType}
           overscanCount={overscanRowCount}
         >
-          {renderVirtualizedRow}
+          {({ data, index, style }) => (
+            <Row
+              data={data}
+              index={index}
+              style={style}
+              setItemSize={setItemSize}
+            />
+          )}
         </VariableSizeList>
       ),
-      [itemData, gridRef, itemSize],
+      [itemData, getItemSize, gridRef, setItemSize],
     );
 
     return (
