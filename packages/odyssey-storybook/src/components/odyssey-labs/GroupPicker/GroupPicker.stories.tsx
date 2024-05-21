@@ -17,6 +17,7 @@ import {
 } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react";
 import {
+  FolderIcon,
   GlobeIcon,
   SettingsIcon,
   SyncIcon,
@@ -35,12 +36,6 @@ const stations: ReadonlyArray<GroupPickerOptionType> = [
     logo: <SettingsIcon />,
     usersCount: 100,
     appsCount: 200,
-    customDetails: [
-      {
-        icon: <GlobeIcon />,
-        detailText: 1000,
-      },
-    ],
   },
   {
     id: "jp",
@@ -200,7 +195,6 @@ export const Multiple: StoryObj<GroupPickerPropsType> = {
 export const Disabled: StoryObj<GroupPickerPropsType> = {
   args: {
     isDisabled: true,
-    hasMultipleChoices: true,
     value: [
       { id: "en", title: "English", description: "", logo: <GlobeIcon /> },
       {
@@ -210,6 +204,89 @@ export const Disabled: StoryObj<GroupPickerPropsType> = {
         logo: <SyncIcon />,
         usersCount: 0,
         appsCount: 0,
+      },
+    ],
+  },
+};
+
+export const WithUsersCount: StoryObj<GroupPickerPropsType> = {
+  args: {
+    options: [
+      {
+        id: "en",
+        title: "English",
+        description: "",
+        logo: <GlobeIcon />,
+        usersCount: 10,
+      },
+    ],
+  },
+};
+
+export const WithAppsCount: StoryObj<GroupPickerPropsType> = {
+  args: {
+    options: [
+      {
+        id: "en",
+        title: "English",
+        description: "",
+        logo: <GlobeIcon />,
+        appsCount: 10,
+      },
+    ],
+  },
+};
+
+export const WithGroupMappingsCount: StoryObj<GroupPickerPropsType> = {
+  args: {
+    options: [
+      {
+        id: "en",
+        title: "English",
+        description: "",
+        logo: <GlobeIcon />,
+        groupPushMappingsCount: 10,
+      },
+    ],
+  },
+};
+
+export const WithCustomDetails: StoryObj<GroupPickerPropsType> = {
+  args: {
+    options: [
+      {
+        id: "en",
+        title: "English",
+        description: "",
+        logo: <GlobeIcon />,
+        customDetails: [
+          {
+            icon: <FolderIcon />,
+            detailText: 40,
+          },
+        ],
+      },
+    ],
+  },
+};
+
+export const WithKitchenSink: StoryObj<GroupPickerPropsType> = {
+  args: {
+    options: [
+      {
+        id: "en",
+        title: "English",
+        description: "",
+        logo: <GlobeIcon />,
+        usersCount: 10,
+        appsCount: 20,
+        groupPushMappingsCount: 30,
+        customDetails: [
+          {
+            icon: <FolderIcon />,
+            detailText: 40,
+          },
+        ],
       },
     ],
   },
