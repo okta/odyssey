@@ -530,7 +530,6 @@ const Autocomplete = <
       renderOption={renderOption}
       renderTags={renderTags}
       translate={translate}
-      open={true}
     />
   );
 };
