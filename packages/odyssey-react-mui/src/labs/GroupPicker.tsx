@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, ReactNode, useCallback } from "react";
+import { memo, ReactElement, useCallback } from "react";
 import styled from "@emotion/styled";
 import type {
   AutocompleteFreeSoloValueMapping,
@@ -38,6 +38,8 @@ const GroupOption = styled("li", {
 const GroupOptionLogoContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
+  position: "relative",
+  bottom: "2px", // to visually align icon with title
   width: odysseyDesignTokens.Spacing5,
   height: odysseyDesignTokens.Spacing5,
 
@@ -50,10 +52,16 @@ const GroupOptionLogoContainer = styled("div", {
 const GroupOptionContent = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
-  marginBlockEnd: odysseyDesignTokens.Spacing2,
+  "[data-option-title='true']": {
+    margin: 0,
+  },
 
   p: {
-    marginBlockEnd: odysseyDesignTokens.Spacing1,
+    margin: 0,
+  },
+
+  "p + p": {
+    marginBlockStart: odysseyDesignTokens.Spacing1,
   },
 }));
 
@@ -68,6 +76,7 @@ const GroupOptionDetails = styled("div", {
 })<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   display: "flex",
   gap: odysseyDesignTokens.Spacing2,
+  marginBlockStart: odysseyDesignTokens.Spacing2,
 }));
 
 const GroupOptionDetail = styled("div", {
@@ -84,7 +93,7 @@ const GroupOptionDetail = styled("div", {
 }));
 
 export type CustomDetail = {
-  icon: ReactNode;
+  icon: ReactElement;
   detailText: string | number;
 };
 
@@ -94,7 +103,7 @@ export type GroupPickerOptionType = {
   customDetails?: CustomDetail[];
   groupPushMappingsCount?: number;
   id: string;
-  logo?: ReactNode;
+  logo?: ReactElement;
   title: string;
   usersCount?: number;
 };
@@ -109,9 +118,6 @@ export type GroupPickerProps<
   IsCustomValueAllowed
 >;
 
-// const avatarImageSizeSmall = 16;
-// const avatarImageSizeMedium = 24;
-
 const GroupPicker = <
   OptionType extends GroupPickerOptionType,
   HasMultipleChoices extends boolean | undefined,
@@ -124,6 +130,7 @@ const GroupPicker = <
   isLoading,
   isOptional = false,
   isReadOnly,
+  isVirtualized,
   hint,
   label,
   onChange,
@@ -170,6 +177,12 @@ const GroupPicker = <
         usersCount,
       } = option;
 
+      const hasOptionDetails =
+        typeof usersCount === "number" ||
+        typeof appsCount === "number" ||
+        typeof groupPushMappingsCount === "number" ||
+        (customDetails && customDetails.length > 0);
+
       return (
         <GroupOption
           {...props}
@@ -182,36 +195,45 @@ const GroupPicker = <
           <div>
             <GroupOptionContent odysseyDesignTokens={odysseyDesignTokens}>
               <Heading6 component="p">{title}</Heading6>
-              <GroupOptionDescription odysseyDesignTokens={odysseyDesignTokens}>
-                {description}
-              </GroupOptionDescription>
+              {description && (
+                <GroupOptionDescription
+                  odysseyDesignTokens={odysseyDesignTokens}
+                >
+                  {description}
+                </GroupOptionDescription>
+              )}
             </GroupOptionContent>
-            <GroupOptionDetails odysseyDesignTokens={odysseyDesignTokens}>
-              {typeof usersCount === "number" && (
-                <GroupOptionDetail odysseyDesignTokens={odysseyDesignTokens}>
-                  <UserIcon />
-                  {usersCount}
-                </GroupOptionDetail>
-              )}
-              {typeof appsCount === "number" && (
-                <GroupOptionDetail odysseyDesignTokens={odysseyDesignTokens}>
-                  <GridIcon />
-                  {appsCount}
-                </GroupOptionDetail>
-              )}
-              {typeof groupPushMappingsCount === "number" && (
-                <GroupOptionDetail odysseyDesignTokens={odysseyDesignTokens}>
-                  <GroupIcon />
-                  {groupPushMappingsCount}
-                </GroupOptionDetail>
-              )}
-              {customDetails?.map(({ icon, detailText }) => (
-                <GroupOptionDetail odysseyDesignTokens={odysseyDesignTokens}>
-                  {icon}
-                  {detailText}
-                </GroupOptionDetail>
-              ))}
-            </GroupOptionDetails>
+            {hasOptionDetails && (
+              <GroupOptionDetails odysseyDesignTokens={odysseyDesignTokens}>
+                {typeof usersCount === "number" && (
+                  <GroupOptionDetail odysseyDesignTokens={odysseyDesignTokens}>
+                    <UserIcon />
+                    {usersCount}
+                  </GroupOptionDetail>
+                )}
+                {typeof appsCount === "number" && (
+                  <GroupOptionDetail odysseyDesignTokens={odysseyDesignTokens}>
+                    <GridIcon />
+                    {appsCount}
+                  </GroupOptionDetail>
+                )}
+                {typeof groupPushMappingsCount === "number" && (
+                  <GroupOptionDetail odysseyDesignTokens={odysseyDesignTokens}>
+                    <GroupIcon />
+                    {groupPushMappingsCount}
+                  </GroupOptionDetail>
+                )}
+                {customDetails?.map(({ icon, detailText }, index) => (
+                  <GroupOptionDetail
+                    key={`${index}-${detailText}`}
+                    odysseyDesignTokens={odysseyDesignTokens}
+                  >
+                    {icon}
+                    {detailText}
+                  </GroupOptionDetail>
+                ))}
+              </GroupOptionDetails>
+            )}
           </div>
         </GroupOption>
       );
@@ -242,34 +264,6 @@ const GroupPicker = <
       }),
     [odysseyDesignTokens],
   );
-  // console.log("in group picker", { hasMultipleChoices });
-  // const renderInput = useCallback(
-  //   ({
-  //     InputLabelProps,
-  //     InputProps,
-  //     ...params
-  //   }: AutocompleteRenderInputParams) => (
-  //     <Field
-  //       fieldType="single"
-  //       hasVisibleLabel
-  //       //@ts-expect-error htmlFor is not available on the currently typed params
-  //       id={InputLabelProps.htmlFor}
-  //       hint={hint}
-  //       label={label}
-  //       isOptional={isOptional}
-  //       renderFieldComponent={({ ariaDescribedBy, id }) => (
-  //         <InputBase
-  //           {...params}
-  //           {...InputProps}
-  //           aria-describedby={ariaDescribedBy}
-  //           id={id}
-  //           required={!isOptional}
-  //         />
-  //       )}
-  //     />
-  //   ),
-  //   [hint, isOptional, label],
-  // );
 
   return (
     <Autocomplete
@@ -286,13 +280,12 @@ const GroupPicker = <
       onChange={onChange}
       onInputChange={onInputChange}
       options={options}
-      optionHeight={98}
       isReadOnly={isReadOnly}
+      isVirtualized={isVirtualized}
       renderOption={renderOption}
       renderTags={renderTags}
       testId={testId}
       value={value}
-      isVirtualized
     />
   );
 };
