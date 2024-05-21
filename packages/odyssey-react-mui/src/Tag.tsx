@@ -10,7 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Chip as MuiChip, ChipProps as MuiChipProps } from "@mui/material";
 import { memo, ReactElement, useCallback, useContext } from "react";
 import styled from "@emotion/styled";
 import { TagListContext } from "./TagListContext";
