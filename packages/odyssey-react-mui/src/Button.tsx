@@ -40,6 +40,7 @@ export const buttonVariantValues = [
   "danger",
   "dangerSecondary",
   "floating",
+  "floatingAction",
 ] as const;
 
 export type ButtonProps = {
@@ -47,6 +48,10 @@ export type ButtonProps = {
    * The ref forwarded to the Button
    */
   buttonRef?: React.RefObject<FocusHandle>;
+  /**
+   * Optional href to render the button as a link
+   */
+  href?: string;
   /**
    * The ID of the Button
    */
@@ -59,10 +64,6 @@ export type ButtonProps = {
    * Determines whether the Button should take up the full available width
    */
   isFullWidth?: boolean;
-  /**
-   * The click event handler for the Button
-   */
-  onClick?: MuiButtonProps["onClick"];
   /**
    * The size of the button
    */
@@ -80,6 +81,10 @@ export type ButtonProps = {
    * The variant of the Button
    */
   variant: (typeof buttonVariantValues)[number] | "tertiary";
+  /**
+   * The click event handler for the Button
+   */
+  onClick?: MuiButtonProps["onClick"];
 } & (
   | {
       /**
@@ -146,6 +151,7 @@ const Button = ({
   ariaLabelledBy,
   buttonRef,
   endIcon,
+  href,
   id,
   isDisabled,
   isFullWidth: isFullWidthProp,
@@ -165,7 +171,7 @@ const Button = ({
   // We're deprecating the "tertiary" variant, so map it to
   // "secondary" in lieu of making a breaking change
   const variant = variantProp === "tertiary" ? "secondary" : variantProp;
-  const localButtonRef = useRef<HTMLButtonElement>();
+  const localButtonRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
   const buttonContext = useButton();
   const isFullWidth = useMemo(
     () =>
@@ -175,13 +181,11 @@ const Button = ({
 
   useImperativeHandle(
     buttonRef,
-    () => {
-      return {
-        focus: () => {
-          localButtonRef.current?.focus();
-        },
-      };
-    },
+    () => ({
+      focus: () => {
+        localButtonRef.current?.focus();
+      },
+    }),
     [],
   );
 
@@ -200,11 +204,16 @@ const Button = ({
           disabled={isDisabled}
           endIcon={endIcon}
           fullWidth={isFullWidth}
+          href={href}
           id={id}
           onClick={onClick}
           ref={(element) => {
             if (element) {
-              localButtonRef.current = element;
+              (
+                localButtonRef as React.MutableRefObject<
+                  HTMLButtonElement | HTMLAnchorElement
+                >
+              ).current = element;
               //@ts-expect-error ref is not an optional prop on the props context type
               muiProps?.ref?.(element);
             }
@@ -228,6 +237,7 @@ const Button = ({
       ariaLabel,
       ariaLabelledBy,
       endIcon,
+      href,
       id,
       isDisabled,
       isFullWidth,
