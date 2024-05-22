@@ -20,13 +20,13 @@ const storybookMeta: Meta<GridProps> = {
   title: "Labs Components/Grid",
   component: Grid,
   argTypes: {
-    panes: {
+    regions: {
       control: "text",
       description:
-        "The supported pane ratios for the Grid. Each number is a fractional unit that is mapped to the 'fr' CSS unit. For example: [2, 1] defines a 2/3, 1/3 layout and [1, 1, 1] defines a 1/3, 1/3, 1/3 layout",
+        "The supported region ratios for the Grid. Each number is a fractional unit that is mapped to the 'fr' CSS unit. For example: [2, 1] defines a 2/3, 1/3 layout and [1, 1, 1] defines a 1/3, 1/3, 1/3 layout",
       table: {
         type: {
-          summary: "SupportedPaneRatios",
+          summary: "SupportedRegionRatios",
         },
       },
     },
@@ -57,13 +57,13 @@ export default storybookMeta;
 
 export const Single: StoryObj<GridProps> = {
   args: {
-    panes: [1],
+    regions: [1],
   },
   render: function C(args) {
     return (
       <Grid {...args}>
         <Surface>
-          <h1>Pane</h1>
+          <h1>Region</h1>
         </Surface>
       </Grid>
     );
@@ -72,16 +72,16 @@ export const Single: StoryObj<GridProps> = {
 
 export const Split: StoryObj<GridProps> = {
   args: {
-    panes: [1, 1],
+    regions: [1, 1],
   },
   render: function C(args) {
     return (
       <Grid {...args}>
         <Surface>
-          <h1>Pane</h1>
+          <h1>Region</h1>
         </Surface>
         <Surface>
-          <h1>Pane</h1>
+          <h1>Region</h1>
         </Surface>
       </Grid>
     );
@@ -90,16 +90,16 @@ export const Split: StoryObj<GridProps> = {
 
 export const TwoThirdsStart: StoryObj<GridProps> = {
   args: {
-    panes: [2, 1],
+    regions: [2, 1],
   },
   render: function C(args) {
     return (
       <Grid {...args}>
         <Surface>
-          <h1>Pane</h1>
+          <h1>Region</h1>
         </Surface>
         <Surface>
-          <h1>Pane</h1>
+          <h1>Region</h1>
         </Surface>
       </Grid>
     );
@@ -108,16 +108,16 @@ export const TwoThirdsStart: StoryObj<GridProps> = {
 
 export const TwoThirdsEnd: StoryObj<GridProps> = {
   args: {
-    panes: [1, 2],
+    regions: [1, 2],
   },
   render: function C(args) {
     return (
       <Grid {...args}>
         <Surface>
-          <h1>Pane</h1>
+          <h1>Region</h1>
         </Surface>
         <Surface>
-          <h1>Pane</h1>
+          <h1>Region</h1>
         </Surface>
       </Grid>
     );
@@ -126,16 +126,16 @@ export const TwoThirdsEnd: StoryObj<GridProps> = {
 
 export const ThreeFourthsStart: StoryObj<GridProps> = {
   args: {
-    panes: [3, 1],
+    regions: [3, 1],
   },
   render: function C(args) {
     return (
       <Grid {...args}>
         <Surface>
-          <h1>Pane</h1>
+          <h1>Region</h1>
         </Surface>
         <Surface>
-          <h1>Pane</h1>
+          <h1>Region</h1>
         </Surface>
       </Grid>
     );
@@ -144,61 +144,61 @@ export const ThreeFourthsStart: StoryObj<GridProps> = {
 
 export const ThreeFourthsEnd: StoryObj<GridProps> = {
   args: {
-    panes: [1, 3],
+    regions: [1, 3],
   },
   render: function C(args) {
     return (
       <Grid {...args}>
         <Surface>
-          <h1>Pane</h1>
+          <h1>Region</h1>
         </Surface>
         <Surface>
-          <h1>Pane</h1>
+          <h1>Region</h1>
         </Surface>
       </Grid>
     );
   },
 };
 
-export const ThreePaneSplit: StoryObj<GridProps> = {
+export const ThreeRegionSplit: StoryObj<GridProps> = {
   args: {
-    panes: [1, 1, 1],
+    regions: [1, 1, 1],
   },
   render: function C(args) {
     return (
       <Grid {...args}>
         <Surface>
-          <h1>Pane</h1>
+          <h1>Region</h1>
         </Surface>
         <Surface>
-          <h1>Pane</h1>
+          <h1>Region</h1>
         </Surface>
         <Surface>
-          <h1>Pane</h1>
+          <h1>Region</h1>
         </Surface>
       </Grid>
     );
   },
 };
 
-export const FourPaneSplit: StoryObj<GridProps> = {
+export const FourRegionSplit: StoryObj<GridProps> = {
   args: {
-    panes: [1, 1, 1, 1],
+    regions: [1, 1, 1, 1],
   },
   render: function C(args) {
     return (
       <Grid {...args}>
         <Surface>
-          <h1>Pane</h1>
+          <h1>Region</h1>
         </Surface>
         <Surface>
-          <h1>Pane</h1>
+          <h1>Region</h1>
         </Surface>
         <Surface>
-          <h1>Pane</h1>
+          <h1>Region</h1>
         </Surface>
         <Surface>
-          <h1>Pane</h1>
+          <h1>Region</h1>
         </Surface>
       </Grid>
     );
@@ -209,74 +209,74 @@ export const KitchenSink: StoryObj<GridProps> = {
   render: function () {
     return (
       <>
-        <Grid panes={[1]}>
+        <Grid regions={[1]}>
           <Surface>
-            <h1>Pane</h1>
+            <h1>Region</h1>
           </Surface>
         </Grid>
-        <Grid panes={[1, 1]}>
+        <Grid regions={[1, 1]}>
           <Surface>
-            <h1>Pane</h1>
+            <h1>Region</h1>
           </Surface>
           <Surface>
-            <h1>Pane</h1>
-          </Surface>
-        </Grid>
-        <Grid panes={[2, 1]}>
-          <Surface>
-            <h1>Pane</h1>
-          </Surface>
-          <Surface>
-            <h1>Pane</h1>
+            <h1>Region</h1>
           </Surface>
         </Grid>
-        <Grid panes={[1, 2]}>
+        <Grid regions={[2, 1]}>
           <Surface>
-            <h1>Pane</h1>
+            <h1>Region</h1>
           </Surface>
           <Surface>
-            <h1>Pane</h1>
-          </Surface>
-        </Grid>
-        <Grid panes={[3, 1]}>
-          <Surface>
-            <h1>Pane</h1>
-          </Surface>
-          <Surface>
-            <h1>Pane</h1>
+            <h1>Region</h1>
           </Surface>
         </Grid>
-        <Grid panes={[1, 3]}>
+        <Grid regions={[1, 2]}>
           <Surface>
-            <h1>Pane</h1>
+            <h1>Region</h1>
           </Surface>
           <Surface>
-            <h1>Pane</h1>
-          </Surface>
-        </Grid>
-        <Grid panes={[1, 1, 1]}>
-          <Surface>
-            <h1>Pane</h1>
-          </Surface>
-          <Surface>
-            <h1>Pane</h1>
-          </Surface>
-          <Surface>
-            <h1>Pane</h1>
+            <h1>Region</h1>
           </Surface>
         </Grid>
-        <Grid panes={[1, 1, 1, 1]}>
+        <Grid regions={[3, 1]}>
           <Surface>
-            <h1>Pane</h1>
+            <h1>Region</h1>
           </Surface>
           <Surface>
-            <h1>Pane</h1>
+            <h1>Region</h1>
+          </Surface>
+        </Grid>
+        <Grid regions={[1, 3]}>
+          <Surface>
+            <h1>Region</h1>
           </Surface>
           <Surface>
-            <h1>Pane</h1>
+            <h1>Region</h1>
+          </Surface>
+        </Grid>
+        <Grid regions={[1, 1, 1]}>
+          <Surface>
+            <h1>Region</h1>
           </Surface>
           <Surface>
-            <h1>Pane</h1>
+            <h1>Region</h1>
+          </Surface>
+          <Surface>
+            <h1>Region</h1>
+          </Surface>
+        </Grid>
+        <Grid regions={[1, 1, 1, 1]}>
+          <Surface>
+            <h1>Region</h1>
+          </Surface>
+          <Surface>
+            <h1>Region</h1>
+          </Surface>
+          <Surface>
+            <h1>Region</h1>
+          </Surface>
+          <Surface>
+            <h1>Region</h1>
           </Surface>
         </Grid>
       </>

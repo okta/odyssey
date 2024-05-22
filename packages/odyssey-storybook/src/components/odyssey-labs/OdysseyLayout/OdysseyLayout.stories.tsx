@@ -326,7 +326,7 @@ export const KitchenSink: StoryObj<OdysseyLayoutProps> = {
           onClose={onCloseDialog}
           isOpen={isDialogVisible}
         />
-        <Grid panes={[3, 1]}>
+        <Grid regions={[3, 1]}>
           <Surface>
             <DataTable
               columns={personColumns}
@@ -410,7 +410,7 @@ export const EmbeddedDrawer: StoryObj<OdysseyLayoutProps> = {
         }
         isFullWidth={args.isFullWidth}
       >
-        <Grid panes={[1]}>
+        <Grid regions={[1]}>
           <Surface>
             <DataTable
               columns={personColumns}
@@ -446,7 +446,7 @@ export const Form: StoryObj<OdysseyLayoutProps> = {
           <Button label="Reset passwords" variant="primary" />
         }
       >
-        <Grid panes={[1]}>
+        <Grid regions={[1]}>
           <Surface>
             <OdysseyForm
               title="Add Person"
@@ -502,7 +502,7 @@ export const Dashboard: StoryObj<OdysseyLayoutProps> = {
         documentationText={args.documentationText}
         isFullWidth={args.isFullWidth}
       >
-        <Grid panes={[2, 1]}>
+        <Grid regions={[2, 1]}>
           <Surface>
             <Box
               sx={{
@@ -573,7 +573,7 @@ export const Dashboard: StoryObj<OdysseyLayoutProps> = {
             </Box>
           </Surface>
         </Grid>
-        <Grid panes={[1, 1, 1]}>
+        <Grid regions={[1, 1, 1]}>
           <Surface>
             <Box
               sx={{
@@ -705,7 +705,7 @@ export const FullWidth: StoryObj<OdysseyLayoutProps> = {
         documentationText={args.documentationText}
         isFullWidth={args.isFullWidth}
       >
-        <Grid panes={[1]}>
+        <Grid regions={[1]}>
           <Surface>
             <DataTable
               columns={personColumns}
