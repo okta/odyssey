@@ -29,8 +29,7 @@ done
 
 echo "Publishing to artifactory"
 # mark files as unchanged so lerna can publish commit
-# git update-index --assume-unchanged scripts/publish.sh
-cat scripts/publish.sh
+git update-index --assume-unchanged scripts/publish.sh
 if ! lerna_publish; then
   echo "ERROR: Lerna Publish has failed."
   exit $PUBLISH_ARTIFACTORY_FAILURE
