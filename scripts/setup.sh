@@ -29,9 +29,7 @@ fi
 
 cd ${OKTA_HOME}/${REPO}
 
-# TODO: typescript wants to update to 5.4.3 and fails if immutable flag is set
-# if ! yarn install --immutable; then
-if ! yarn install; then
+if ! yarn install --immutable; then
   echo "Installing dependencies failed! Exiting..."
   exit ${FAILED_SETUP}
 fi

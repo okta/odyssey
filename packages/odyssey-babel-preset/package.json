@@ -26,6 +26,6 @@
     "@okta/odyssey-lifecycle": "workspace:*",
     "@okta/odyssey-typescript": "workspace:*",
     "@types/babel__core": "^7.20.5",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.5"
   }
 }
