@@ -31,8 +31,6 @@ for PATH_AND_FILE in $FILES_TO_UPDATE_VERSION; do
 done
 
 echo "Publishing to artifactory"
-# mark files as unchanged so lerna can publish commit
-# git update-index --assume-unchanged scripts/publish.sh
 if ! lerna_publish; then
   echo "ERROR: Lerna Publish has failed."
   exit $PUBLISH_ARTIFACTORY_FAILURE
