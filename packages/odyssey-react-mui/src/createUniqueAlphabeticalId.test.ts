@@ -18,6 +18,5 @@ describe("createUniqueAlphabeticalId", () => {
 
     expect(uniqueAlphabeticalId.match(/[a-z]/)).not.toBeNull();
     expect(uniqueAlphabeticalId.toLowerCase()).toBe(uniqueAlphabeticalId);
-    expect(false).toBe(true);
   });
 });
