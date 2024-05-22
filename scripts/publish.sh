@@ -12,6 +12,7 @@ TAGGED_VERSION=$CURRENT_VERSION-$PUBLISH_SHA
 npm config set @okta:registry ${PUBLISH_REGISTRY}
 
 function lerna_publish() {
+  # use lerna to publish without making a commit to the repo
   MY_CMD="yarn run lerna publish from-package --force-publish=* --ignore-changes --no-push --no-git-tag-version --no-verify-access --registry \"${PUBLISH_REGISTRY}\" --yes"
   echo "Running ${MY_CMD}"
   ${MY_CMD}
@@ -29,8 +30,7 @@ done
 echo "Publishing to artifactory"
 # mark files as unchanged so lerna can publish commit
 # git update-index --assume-unchanged scripts/publish.sh
-git checkout $SHA
-git status
+cat scripts/publish.sh
 if ! lerna_publish; then
   echo "ERROR: Lerna Publish has failed."
   exit $PUBLISH_ARTIFACTORY_FAILURE
