@@ -65,6 +65,7 @@
     "node-gyp@npm:^9.0.0": "^10.0.0",
     "node-gyp@npm:latest": "^10.0.0",
     "nyc@^15.1.0": "patch:nyc@npm:15.1.0#.yarn/patches/nyc-npm-15.1.0-f134b19668.patch",
+    "nyc/glob": "^9.0.0",
     "playwright-core@npm:1.34.2": "^1.43.1",
     "rimraf@2.7.1": "^4.2.0",
     "rimraf@npm:^2.5.4": "^4.2.0",
@@ -80,8 +81,7 @@
     "rimraf@npm:3": "^4.2.0",
     "test-exclude/glob@^7.1.4": "^9.0.0",
     "webdriver@npm:7.3.0": "webdriver@~8.24.10",
-    "webdriver@npm:7": "webdriver@~8.24.10",
-    "nyc/glob": "^9.0.0"
+    "webdriver@npm:7": "webdriver@~8.24.10"
   },
   "version": "0.5.0",
   "packageManager": "yarn@4.1.0"
