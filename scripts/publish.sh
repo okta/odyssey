@@ -18,6 +18,9 @@ function lerna_publish() {
   ${MY_CMD}
 }
 
+# prevent local changes from being reported so lerna can publish
+git checkout .
+
 # update version with commit SHA to allow lerna to publish
 FILES_TO_UPDATE_VERSION="lerna.json packages/odyssey-design-tokens/package.json packages/odyssey-babel-preset/package.json packages/odyssey-babel-loader/package.json packages/odyssey-react-mui/package.json packages/browserslist-config-odyssey/package.json"
 for PATH_AND_FILE in $FILES_TO_UPDATE_VERSION; do
@@ -30,8 +33,6 @@ done
 echo "Publishing to artifactory"
 # mark files as unchanged so lerna can publish commit
 # git update-index --assume-unchanged scripts/publish.sh
-# prevent local changes from being reported so lerna can publish
-git checkout .
 if ! lerna_publish; then
   echo "ERROR: Lerna Publish has failed."
   exit $PUBLISH_ARTIFACTORY_FAILURE
