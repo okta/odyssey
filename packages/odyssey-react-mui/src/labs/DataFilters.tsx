@@ -20,13 +20,7 @@ import {
   useRef,
   useState,
 } from "react";
-import styled from "@emotion/styled";
-import { Autocomplete } from "../Autocomplete";
-import { Box } from "../Box";
-import { TagList } from "../TagList";
-import { Tag } from "../Tag";
-import { SearchField } from "../SearchField";
-import { Button } from "../Button";
+import { Trans, useTranslation } from "react-i18next";
 import {
   IconButton as MuiIconButton,
   Menu as MuiMenu,
@@ -34,30 +28,43 @@ import {
   Popover as MuiPopover,
   Typography as MuiTypography,
 } from "@mui/material";
+import { MRT_ColumnDef, MRT_RowData } from "material-react-table";
+import styled from "@emotion/styled";
+
+import { Autocomplete } from "../Autocomplete";
+import { Box } from "../Box";
+import { Button } from "../Button";
+import { CheckboxGroup } from "../CheckboxGroup";
+import { Checkbox } from "../Checkbox";
 import {
   CheckIcon,
   ChevronRightIcon,
   CloseCircleFilledIcon,
   FilterIcon,
 } from "../icons.generated";
-import { Subordinate } from "../Typography";
-import { TextField } from "../TextField";
-import { CheckboxGroup } from "../CheckboxGroup";
-import { Checkbox } from "../Checkbox";
+import {
+  DesignTokens,
+  useOdysseyDesignTokens,
+} from "../OdysseyDesignTokensContext";
 import { RadioGroup } from "../RadioGroup";
 import { Radio } from "../Radio";
-import { MRT_ColumnDef, MRT_RowData } from "material-react-table";
-import { Trans, useTranslation } from "react-i18next";
+import { SearchField } from "../SearchField";
+import { Tag } from "../Tag";
+import { TagList } from "../TagList";
+import { TextField } from "../TextField";
+import { Subordinate } from "../Typography";
 
-  const AutocompleteOuterContainer = styled("div")({
-    display: "flex",
-    gap: "2",
-    alignItems: "flex-end",
-  });
+const AutocompleteOuterContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  display: "flex",
+  alignItems: "flex-end",
+  gap: odysseyDesignTokens.Spacing2,
+}));
 
-  const AutocompleteInnerContainer = styled("div")({
-    width: "100%",
-  });
+const AutocompleteInnerContainer = styled("div")({
+  width: "100%",
+});
 
 type Option = {
   label: string;
@@ -161,6 +168,7 @@ type FiltersToRender = {
   label: string;
   value: string;
 };
+
 const FilterTags = ({
   activeFilters,
   updateFilterAndInputValues,
@@ -238,6 +246,9 @@ const FilterTags = ({
   );
 };
 
+const MemoizedFilterTags = memo(FilterTags);
+MemoizedFilterTags.displayName = "FilterTags";
+
 const DataFilters = ({
   onChangeSearch,
   onChangeFilters,
@@ -250,6 +261,7 @@ const DataFilters = ({
 }: DataFiltersProps) => {
   const [filters, setFilters] = useState<DataFilter[]>(filtersProp);
   const { t } = useTranslation();
+  const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const initialInputValues = useMemo(() => {
     return filtersProp.reduce(
@@ -338,7 +350,9 @@ const DataFilters = ({
     [updateFilters, updateInputValue],
   );
 
-  const handleCheckboxFilterAndInputValueChange = useCallback<(filterId: string, option: Option, checked: boolean) => void>(
+  const handleCheckboxFilterAndInputValueChange = useCallback<
+    (filterId: string, option: Option, checked: boolean) => void
+  >(
     (filterId, option, checked) => {
       const currentValues = (inputValues[filterId] as Option[]) || [];
 
@@ -369,7 +383,9 @@ const DataFilters = ({
     [filters, inputValues],
   );
 
-  const handleAutocompleteFilterChange = useCallback<(filterId: string, option: Option[]) => void>(
+  const handleAutocompleteFilterChange = useCallback<
+    (filterId: string, option: Option[]) => void
+  >(
     (filterId, option) => {
       setInputValues({ ...inputValues, [filterId]: option });
     },
@@ -403,11 +419,6 @@ const DataFilters = ({
 
     setFilters(updatedFilters);
   }, [inputValues, filtersProp]);
-
-  const getInputValueByFilterId = useCallback<(filterId: string) => void>(
-    (filterId) => inputValues[filterId],
-    [inputValues],
-  );
 
   const filterMenu = useMemo(
     () => (
@@ -524,6 +535,14 @@ const DataFilters = ({
     ],
   );
 
+  const autoCompleteValue = useMemo(() => {
+    if (filterPopoverCurrentFilter?.id) {
+      return [...(inputValues[filterPopoverCurrentFilter.id] as Option[])];
+    }
+
+    return undefined;
+  }, [filterPopoverCurrentFilter]);
+
   return (
     <Box>
       {/* Upper section */}
@@ -579,14 +598,14 @@ const DataFilters = ({
                         {filterPopoverCurrentFilter?.variant ===
                           "autocomplete" &&
                           filterPopoverCurrentFilter?.options && (
-                            <AutocompleteOuterContainer>
+                            <AutocompleteOuterContainer
+                              odysseyDesignTokens={odysseyDesignTokens}
+                            >
                               <AutocompleteInnerContainer>
                                 <Autocomplete
                                   hasMultipleChoices
                                   label={filterPopoverCurrentFilter.label}
-                                  value={
-                                    getInputValueByFilterId(filterPopoverCurrentFilter.id),
-                                  }
+                                  value={autoCompleteValue}
                                   onChange={(_, value) => {
                                     handleAutocompleteFilterChange(
                                       filterPopoverCurrentFilter.id,
@@ -696,9 +715,7 @@ const DataFilters = ({
                                       label={option.label}
                                       value={option.value}
                                       isChecked={isOptionValueInInputValues}
-                                      onChange={(event) => {
-                                        const checked = event.target.checked;
-
+                                      onChange={(_, checked) => {
                                         handleCheckboxFilterAndInputValueChange(
                                           filterPopoverCurrentFilter.id,
                                           option,
@@ -718,12 +735,7 @@ const DataFilters = ({
                             <RadioGroup
                               label={filterPopoverCurrentFilter.label}
                               onChange={(_, value) => {
-                                updateInputValue({
-                                  filterId: filterPopoverCurrentFilter.id,
-                                  value,
-                                });
-
-                                updateFilters({
+                                updateFilterAndInputValues({
                                   filterId: filterPopoverCurrentFilter.id,
                                   value,
                                 });
@@ -828,7 +840,7 @@ const DataFilters = ({
             marginTop: 4,
           }}
         >
-          <FilterTags
+          <MemoizedFilterTags
             activeFilters={activeFilters}
             updateFilterAndInputValues={updateFilterAndInputValues}
           />
