@@ -16,32 +16,24 @@ import { MenuButton } from "../../MenuButton";
 import { MenuItem } from "../../MenuItem";
 import { ListIcon, ShowIcon } from "../../icons.generated";
 import { densityValues } from "./constants";
-import { DataTableProps } from "./DataTable";
-import { MRT_VisibilityState } from "material-react-table";
 import { useTranslation } from "react-i18next";
+import { TableProps, TableState } from "./types";
 
 export type TableSettingsProps = {
-  hasChangeableDensity: DataTableProps["hasChangeableDensity"];
-  rowDensity: (typeof densityValues)[number];
-  setRowDensity: Dispatch<SetStateAction<(typeof densityValues)[number]>>;
-  hasColumnVisibility: DataTableProps["hasColumnVisibility"];
-  columns: DataTableProps["columns"];
-  columnVisibility?: MRT_VisibilityState;
-  setColumnVisibility: Dispatch<
-    SetStateAction<MRT_VisibilityState | undefined>
-  >;
+  tableOptions: TableProps;
+  tableState: TableState;
+  setTableState: Dispatch<SetStateAction<TableState>>;
 };
 
 const TableSettings = ({
-  hasChangeableDensity,
-  rowDensity,
-  setRowDensity,
-  hasColumnVisibility,
-  columns,
-  columnVisibility,
-  setColumnVisibility,
+  tableOptions,
+  tableState,
+  setTableState,
 }: TableSettingsProps) => {
   const { t } = useTranslation();
+
+  const { hasChangeableDensity, hasColumnVisibility, columns } = tableOptions;
+  const { rowDensity, columnVisibility } = tableState;
 
   const changeRowDensity = useCallback(
     (value: (typeof densityValues)[number]) =>
@@ -49,9 +41,12 @@ const TableSettings = ({
         // This is necessary to avoid linter errors, while the _event is necessary to satisfy the onClick type
         if (process.env.NODE_ENV === "development") console.debug(_event);
 
-        setRowDensity(value);
+        setTableState((prevState) => ({
+          ...prevState,
+          rowDensity: value,
+        }));
       },
-    [setRowDensity],
+    [],
   );
 
   const changeColumnVisibility = useCallback(
@@ -59,12 +54,17 @@ const TableSettings = ({
       // This is necessary to avoid linter errors, while the _event is necessary to satisfy the onClick type
       if (process.env.NODE_ENV === "development") console.debug(_event);
 
-      setColumnVisibility((prevVisibility) => ({
-        ...prevVisibility,
-        [columnId]: prevVisibility ? prevVisibility[columnId] === false : false,
+      setTableState((prevState) => ({
+        ...prevState,
+        columnVisibility: {
+          ...prevState.columnVisibility,
+          [columnId]: prevState.columnVisibility
+            ? prevState.columnVisibility[columnId] === false
+            : false,
+        },
       }));
     },
-    [setColumnVisibility],
+    [],
   );
 
   const isColumnVisibilityChecked = useMemo(() => {
