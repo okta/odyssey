@@ -1010,10 +1010,10 @@ export const components = ({
 
             [`&.${chipClasses.colorInfo}`]: {
               backgroundColor: odysseyTokens.PalettePrimaryLighter,
-              color: odysseyTokens.HueBlue600,
+              color: odysseyTokens.PalettePrimaryText,
 
               "&::before": {
-                backgroundColor: odysseyTokens.HueBlue600,
+                backgroundColor: odysseyTokens.HueBlue400,
               },
             },
 
