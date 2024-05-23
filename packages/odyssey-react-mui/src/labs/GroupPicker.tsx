@@ -12,20 +12,21 @@
 
 import { memo, ReactElement, useCallback } from "react";
 import styled from "@emotion/styled";
-import type {
-  AutocompleteFreeSoloValueMapping,
-  AutocompleteGetTagProps,
-} from "@mui/material/useAutocomplete";
-import { Box } from "@mui/material";
+import type { AutocompleteFreeSoloValueMapping } from "@mui/material/useAutocomplete";
 
-import { Autocomplete, AutocompleteProps } from "../Autocomplete";
-import { Heading6 } from "../Typography";
+import { AutocompleteProps } from "../Autocomplete";
+import { Box } from "../Box";
+import {
+  CustomizableAutocomplete,
+  CustomizableAutocompleteProps,
+} from "../CustomizableAutocomplete";
 import { Tag } from "../Tag";
+import { Heading6 } from "../Typography";
+import { UserIcon, GridIcon, GroupIcon } from "../icons.generated";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
 } from "../OdysseyDesignTokensContext";
-import { UserIcon, GridIcon, GroupIcon } from "../icons.generated";
 
 const GroupOption = styled("li", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
@@ -158,7 +159,7 @@ const GroupPicker = <
 
   const renderOption = useCallback<
     NonNullable<
-      AutocompleteProps<
+      CustomizableAutocompleteProps<
         OptionType,
         HasMultipleChoices,
         IsCustomValueAllowed
@@ -241,8 +242,16 @@ const GroupPicker = <
     [odysseyDesignTokens],
   );
 
-  const renderTags = useCallback(
-    (values: OptionType[], getTagProps: AutocompleteGetTagProps) =>
+  const renderTags = useCallback<
+    NonNullable<
+      CustomizableAutocompleteProps<
+        OptionType,
+        HasMultipleChoices,
+        IsCustomValueAllowed
+      >["renderTags"]
+    >
+  >(
+    (values, getTagProps) =>
       values.map((option, index) => {
         const { key, onDelete } = getTagProps({ index });
         const { logo, title } = option;
@@ -266,7 +275,7 @@ const GroupPicker = <
   );
 
   return (
-    <Autocomplete
+    <CustomizableAutocomplete
       defaultValue={defaultValue}
       isCustomValueAllowed={isCustomValueAllowed}
       isDisabled={isDisabled}
