@@ -92,6 +92,13 @@ export type CustomizableAutocompleteProps<
   HasMultipleChoices extends boolean | undefined,
   IsCustomValueAllowed extends boolean | undefined,
 > = AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed> & {
+  getOptionLabel?: MuiAutocompleteProps<
+    OptionType,
+    HasMultipleChoices,
+    undefined,
+    IsCustomValueAllowed
+  >["getOptionLabel"];
+
   renderOption?: MuiAutocompleteProps<
     OptionType,
     HasMultipleChoices,
