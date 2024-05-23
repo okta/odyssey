@@ -11,14 +11,6 @@
  */
 
 import {
-  Autocomplete as MuiAutocomplete,
-  AutocompleteProps as MuiAutocompleteProps,
-  InputBase,
-  UseAutocompleteProps,
-  AutocompleteValue,
-  AutocompleteRenderInputParams,
-} from "@mui/material";
-import {
   createContext,
   FC,
   forwardRef,
@@ -31,12 +23,21 @@ import {
   useMemo,
   useRef,
 } from "react";
-import styled from "@emotion/styled";
+import { useTranslation } from "react-i18next";
 import { VariableSizeList, ListChildComponentProps } from "react-window";
+import styled from "@emotion/styled";
 import _AutoSizer, {
   Props as AutoSizerProps,
   Size as AutoSizerSize,
 } from "react-virtualized-auto-sizer";
+import {
+  Autocomplete as MuiAutocomplete,
+  AutocompleteProps as MuiAutocompleteProps,
+  InputBase,
+  UseAutocompleteProps,
+  AutocompleteValue,
+  AutocompleteRenderInputParams,
+} from "@mui/material";
 
 // This is required to get around a react-types issue for "AutoSizer is not a valid JSX element."
 // @see https://github.com/bvaughn/react-virtualized/issues/1739#issuecomment-1291444246
@@ -240,6 +241,7 @@ const Autocomplete = <
   testId,
   translate,
 }: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
+  const { t } = useTranslation();
   const controlledStateRef = useRef(
     getControlState({
       controlledValue: value,
@@ -461,6 +463,7 @@ const Autocomplete = <
       {...(isVirtualized.current && { ListboxComponent })}
       // AutoComplete is wrapped in a div within MUI which does not get the disabled attr. So this aria-disabled gets set in the div
       aria-disabled={isDisabled}
+      clearText={t("clear.text")}
       disableCloseOnSelect={hasMultipleChoices}
       disabled={isDisabled}
       freeSolo={isCustomValueAllowed}
