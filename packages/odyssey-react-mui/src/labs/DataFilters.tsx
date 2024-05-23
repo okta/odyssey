@@ -49,6 +49,16 @@ import { Radio } from "../Radio";
 import { MRT_ColumnDef, MRT_RowData } from "material-react-table";
 import { Trans, useTranslation } from "react-i18next";
 
+  const AutocompleteOuterContainer = styled("div")({
+    display: "flex",
+    gap: "2",
+    alignItems: "flex-end",
+  });
+
+  const AutocompleteInnerContainer = styled("div")({
+    width: "100%",
+  });
+
 type Option = {
   label: string;
   value: string;
@@ -320,16 +330,16 @@ const DataFilters = ({
     [inputValues, filtersProp],
   );
 
-  const updateFilterAndInputValues: UpdateFiltersOrValues = ({
-    filterId,
-    value,
-  }) => {
-    updateInputValue({ filterId, value });
-    updateFilters({ filterId, value });
-  };
+  const updateFilterAndInputValues = useCallback<UpdateFiltersOrValues>(
+    ({ filterId, value }) => {
+      updateInputValue({ filterId, value });
+      updateFilters({ filterId, value });
+    },
+    [updateFilters, updateInputValue],
+  );
 
-  const handleCheckboxFilterAndInputValueChange = useCallback(
-    (filterId: string, option: Option, checked: boolean) => {
+  const handleCheckboxFilterAndInputValueChange = useCallback<(filterId: string, option: Option, checked: boolean) => void>(
+    (filterId, option, checked) => {
       const currentValues = (inputValues[filterId] as Option[]) || [];
 
       const updatedValues = checked
@@ -337,6 +347,7 @@ const DataFilters = ({
         : currentValues.filter(
             (inputValue) => inputValue.value !== option.value,
           );
+
       const normalizedUpdatedValues =
         updatedValues.length > 0 ? updatedValues : undefined;
 
@@ -344,6 +355,7 @@ const DataFilters = ({
         ...inputValues,
         [filterId]: normalizedUpdatedValues,
       });
+
       const updatedFilters = filters.map((filter) => ({
         ...filter,
         value:
@@ -357,8 +369,8 @@ const DataFilters = ({
     [filters, inputValues],
   );
 
-  const handleAutocompleteFilterChange = useCallback(
-    (filterId: string, option: Option[]) => {
+  const handleAutocompleteFilterChange = useCallback<(filterId: string, option: Option[]) => void>(
+    (filterId, option) => {
       setInputValues({ ...inputValues, [filterId]: option });
     },
     [inputValues],
@@ -392,15 +404,10 @@ const DataFilters = ({
     setFilters(updatedFilters);
   }, [inputValues, filtersProp]);
 
-  const AutocompleteOuterContainer = styled("div")({
-    display: "flex",
-    gap: "2",
-    alignItems: "flex-end",
-  });
-
-  const AutocompleteInnerContainer = styled("div")({
-    width: "100%",
-  });
+  const getInputValueByFilterId = useCallback<(filterId: string) => void>(
+    (filterId) => inputValues[filterId],
+    [inputValues],
+  );
 
   const filterMenu = useMemo(
     () => (
@@ -577,11 +584,9 @@ const DataFilters = ({
                                 <Autocomplete
                                   hasMultipleChoices
                                   label={filterPopoverCurrentFilter.label}
-                                  value={[
-                                    ...(inputValues[
-                                      filterPopoverCurrentFilter.id
-                                    ] ?? ""),
-                                  ]}
+                                  value={
+                                    getInputValueByFilterId(filterPopoverCurrentFilter.id),
+                                  }
                                   onChange={(_, value) => {
                                     handleAutocompleteFilterChange(
                                       filterPopoverCurrentFilter.id,
