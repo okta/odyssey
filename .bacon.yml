@@ -1,5 +1,5 @@
 test_suites:
-  - name: "build"
+  - name: "Build"
     abort_commit_on_failure: true
     criteria: MERGE
     prereq_test_suite_names:
@@ -18,18 +18,7 @@ test_suites:
         name: Build Packages
     timeout: "20"
 
-  - name: publish
-    abort_commit_on_failure: true
-    script_path: /root/okta/odyssey/scripts
-    sort_order: "2"
-    timeout: "15"
-    script_name: publish
-    criteria: MERGE
-    prereq_test_suite_names:
-      - "build"
-    queue_name: ci-queue-productionJenga-AL2023
-
-  - name: "code coverage"
+  - name: "Code Coverage"
     abort_commit_on_failure: true
     criteria: OPTIONAL
     # Playwright only works with certain distros of Linux
@@ -39,7 +28,7 @@ test_suites:
     sort_order: "5"
     timeout: "20"
 
-  - name: "interaction test"
+  - name: "Interaction Test"
     abort_commit_on_failure: true
     criteria: MERGE
     # Playwright only works with certain distros of Linux
@@ -49,7 +38,7 @@ test_suites:
     sort_order: "6"
     timeout: "20"
 
-  - name: "lint"
+  - name: "Lint"
     abort_commit_on_failure: true
     criteria: MERGE
     queue_name: ci-queue-productionJenga-AL2023
@@ -64,7 +53,26 @@ test_suites:
         name: Lint Code
     timeout: "20"
 
-  - name: "test"
+  - name: "Publish"
+    abort_commit_on_failure: true
+    script_path: /root/okta/odyssey/scripts
+    sort_order: "2"
+    timeout: "15"
+    script_name: publish
+    criteria: MERGE
+    prereq_test_suite_names:
+      - "build"
+    queue_name: al2023
+
+  - name: Semgrep
+    criteria: MERGE
+    queue_name: al2023
+    script_name: semgrep
+    script_path: /root/okta/odyssey/scripts
+    sort_order: "7"
+    timeout: "10"
+
+  - name: "Test"
     abort_commit_on_failure: true
     script_path: /root/okta/odyssey/scripts
     sort_order: "4"
@@ -73,7 +81,7 @@ test_suites:
     queue_name: ci-queue-productionJenga-AL2023
     timeout: "20"
 
-  - name: "typecheck"
+  - name: "Typecheck"
     abort_commit_on_failure: true
     criteria: MERGE
     queue_name: ci-queue-productionJenga-AL2023
@@ -88,10 +96,11 @@ test_suites:
         name: Typecheck Code
     timeout: "20"
 
-  - name: semgrep
-    criteria: MERGE
-    queue_name: ci-queue-productionJenga-AL2023
-    script_name: semgrep
+  - name: "Visual Regression Test"
+    abort_commit_on_failure: true
     script_path: /root/okta/odyssey/scripts
-    sort_order: "7"
-    timeout: "10"
+    sort_order: "4"
+    script_name: visual-regression-test
+    criteria: MERGE
+    queue_name: al2023
+    timeout: "20"
