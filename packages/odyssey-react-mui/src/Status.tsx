@@ -19,6 +19,7 @@ import type { HtmlProps } from "./HtmlProps";
 export const statusSeverityValues = [
   "default",
   "error",
+  "info",
   "success",
   "warning",
 ] as const;
