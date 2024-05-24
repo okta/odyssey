@@ -32,5 +32,5 @@ module.exports = {
   parentBranchName,
   serverUrl: "https://oktaeyes.applitools.com",
   showStorybookOutput: true,
-  testConcurrency: 10,
+  testConcurrency: 5,
 };
