@@ -72,6 +72,13 @@ export const Error: StoryObj<StatusProps> = {
   },
 };
 
+export const Info: StoryObj<StatusProps> = {
+  args: {
+    label: "Warp drive unstable",
+    severity: "info",
+  },
+};
+
 export const Success: StoryObj<StatusProps> = {
   args: {
     label: "Warp drive online",
