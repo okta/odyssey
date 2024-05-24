@@ -53,12 +53,23 @@ test_suites:
         name: Lint Code
     timeout: "20"
 
-  - name: "Publish"
+  - name: "Publish Package"
     abort_commit_on_failure: true
     script_path: /root/okta/odyssey/scripts
     sort_order: "2"
     timeout: "15"
-    script_name: publish
+    script_name: publish-package
+    criteria: MERGE
+    prereq_test_suite_names:
+      - "build"
+    queue_name: al2023
+
+  - name: "Publish Storybook"
+    abort_commit_on_failure: true
+    script_path: /root/okta/odyssey/scripts
+    sort_order: "2"
+    timeout: "15"
+    script_name: publish-storybook
     criteria: MERGE
     prereq_test_suite_names:
       - "build"
