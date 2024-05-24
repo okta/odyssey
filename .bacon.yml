@@ -75,7 +75,7 @@ test_suites:
       - "build"
     queue_name: al2023
 
-  - name: Semgrep
+  - name: "Semgrep"
     criteria: MERGE
     queue_name: al2023
     script_name: semgrep
