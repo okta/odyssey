@@ -25,4 +25,3 @@ fi
 
 echo "Lerna tests passed!"
 report_results SUCCESS publish_type_and_result_dir_but_succeed_if_no_results
-
