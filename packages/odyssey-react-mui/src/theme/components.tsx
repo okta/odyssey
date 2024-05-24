@@ -1046,6 +1046,15 @@ export const components = ({
               },
             },
 
+            [`&.${chipClasses.colorInfo}`]: {
+              backgroundColor: odysseyTokens.PalettePrimaryLighter,
+              color: odysseyTokens.PalettePrimaryText,
+
+              "&::before": {
+                backgroundColor: odysseyTokens.HueBlue400,
+              },
+            },
+
             [`&.${chipClasses.colorSuccess}`]: {
               backgroundColor: odysseyTokens.PaletteSuccessLighter,
               color: odysseyTokens.TypographyColorSuccess,

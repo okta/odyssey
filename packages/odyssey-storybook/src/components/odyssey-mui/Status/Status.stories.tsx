@@ -87,7 +87,14 @@ export const ErrorPill: StoryObj<StatusProps> = {
   },
 };
 
-export const SuccessPill: StoryObj<StatusProps> = {
+export const Info: StoryObj<StatusProps> = {
+  args: {
+    label: "Warp drive unstable",
+    severity: "info",
+  },
+};
+
+export const Success: StoryObj<StatusProps> = {
   args: {
     label: "Warp drive online",
     severity: "success",
