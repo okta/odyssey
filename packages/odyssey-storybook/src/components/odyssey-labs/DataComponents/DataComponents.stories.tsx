@@ -21,9 +21,16 @@ import {
 import { filterData, reorderData } from "./dataFunctions";
 import { useCallback, useState } from "react";
 import {
+  Box,
   DataTableGetDataType,
   DataTableOnReorderRowsType,
+  DataTableRowData,
   DataTableRowSelectionState,
+  Heading5,
+  MenuItem,
+  Paragraph,
+  Status,
+  Support,
 } from "@okta/odyssey-react-mui";
 
 const storybookMeta: Meta<DataViewProps> = {
@@ -64,6 +71,13 @@ export const Default: StoryObj<DataViewProps> = {
       [],
     );
 
+    const actionMenuItems = (selectedRows: DataTableRowSelectionState) => (
+      <>
+        <MenuItem onClick={() => console.log(selectedRows)}>Action 1</MenuItem>
+        <MenuItem onClick={() => console.log(selectedRows)}>Action 2</MenuItem>
+      </>
+    );
+
     return (
       <DataView
         getData={getData}
@@ -73,12 +87,49 @@ export const Default: StoryObj<DataViewProps> = {
         hasFilters
         hasSearch
         hasRowReordering
+        hasRowSelection
+        initialLayout="grid"
+        bulkActionMenuItems={actionMenuItems}
         tableOptions={{
           columns: personColumns,
           hasChangeableDensity: true,
           hasColumnResizing: true,
           hasColumnVisibility: true,
           hasSorting: true,
+        }}
+        stackOptions={{
+          // TODO: Add generics
+          renderRow: (row: DataTableRowData) => {
+            return (
+              <>
+                <Support component="div">
+                  {row.city}, {row.state}
+                </Support>
+                <Heading5>{row.name}</Heading5>
+                <Box
+                  sx={{
+                    marginBlockStart: -1,
+                    marginBlockEnd: 3,
+                  }}
+                >
+                  <Paragraph color="textSecondary">
+                    {row.name} is {row.age} years old.
+                  </Paragraph>
+                </Box>
+                <Status
+                  label={row.risk.charAt(0).toUpperCase() + row.risk.slice(1)}
+                  severity={
+                    row.risk === "low"
+                      ? "success"
+                      : row.risk === "medium"
+                        ? "warning"
+                        : "error"
+                  }
+                />
+              </>
+            );
+          },
+          maxGridColumns: 4,
         }}
       />
     );

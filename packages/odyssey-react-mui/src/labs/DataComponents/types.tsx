@@ -98,8 +98,8 @@ export type TableProps = {
 };
 
 export type StackProps = {
-  initialLayout?: (typeof availableStackLayouts)[number];
-  availableLayouts?: AvailableStackLayouts;
+  renderRow: (row: DataTableRowData) => ReactNode;
+  maxGridColumns?: number;
 };
 
 export type ViewProps = {

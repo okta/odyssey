@@ -10,27 +10,75 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { MRT_RowSelectionState } from "material-react-table";
-import { memo } from "react";
+import { MRT_RowSelectionState, MRT_TableOptions } from "material-react-table";
+import { memo, useCallback, Dispatch, SetStateAction } from "react";
 import { UniversalProps } from "./types";
 import { MenuButton } from "../../MenuButton";
-import { MoreIcon } from "../../icons.generated";
+import { Button } from "../../Button";
+import { Box } from "../../Box";
+import { ChevronDownIcon } from "../../icons.generated";
+import { DataTableRowData } from "../../DataTable";
 
 export type BulkActionMenuProps = {
+  data: MRT_TableOptions<DataTableRowData>["data"];
   menuItems: UniversalProps["bulkActionMenuItems"];
   rowSelection: MRT_RowSelectionState;
+  setRowSelection: Dispatch<SetStateAction<MRT_RowSelectionState>>;
 };
 
-const BulkActionMenu = ({ menuItems, rowSelection }: BulkActionMenuProps) => (
-  <MenuButton
-    buttonVariant="secondary"
-    endIcon={<MoreIcon />}
-    isDisabled={Object.keys(rowSelection).length === 0}
-    ariaLabel="More actions"
-  >
-    {menuItems?.(rowSelection)}
-  </MenuButton>
-);
+const BulkActionMenu = ({
+  data,
+  menuItems,
+  rowSelection,
+  setRowSelection,
+}: BulkActionMenuProps) => {
+  const selectedRowCount = Object.values(rowSelection).filter(
+    (value) => value === true,
+  ).length;
+
+  const handleSelectAll = useCallback(() => {
+    const rows = Object.fromEntries(data.map((row) => [row.id, true]));
+    setRowSelection(rows);
+  }, [data, setRowSelection]);
+
+  const handleSelectNone = useCallback(() => {
+    setRowSelection({});
+  }, [setRowSelection]);
+
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        gap: 2,
+      }}
+    >
+      {selectedRowCount > 0 && (
+        <MenuButton
+          buttonVariant="primary"
+          endIcon={<ChevronDownIcon />}
+          buttonLabel={`${selectedRowCount} selected`}
+          ariaLabel="More actions"
+        >
+          {menuItems?.(rowSelection)}
+        </MenuButton>
+      )}
+      <Box>
+        <Button
+          variant="secondary"
+          label="Select all"
+          isDisabled={selectedRowCount === 20}
+          onClick={handleSelectAll}
+        />
+        <Button
+          variant="secondary"
+          label="Select none"
+          isDisabled={selectedRowCount === 0}
+          onClick={handleSelectNone}
+        />
+      </Box>
+    </Box>
+  );
+};
 
 const MemoizedBulkActionMenu = memo(BulkActionMenu);
 MemoizedBulkActionMenu.displayName = "BulkActionMenu";

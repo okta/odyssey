@@ -35,6 +35,7 @@ import { t } from "i18next";
 import { fetchData } from "./fetchData";
 import { DataTableRowData } from "../../DataTable";
 import { TableContent } from "./TableContent";
+import { StackContent } from "./StackContent";
 import { useRowReordering } from "../../DataTable/useRowReordering";
 import { EmptyState } from "../../EmptyState";
 import { MRT_Row, MRT_RowSelectionState } from "material-react-table";
@@ -119,7 +120,7 @@ const DataView = ({
   });
 
   // TODO: Remove
-  if (process.env.NODE_ENV === "development") {
+  if (process.env.NODE_ENV !== "development") {
     console.log(
       stackOptions,
       setCurrentLayout,
@@ -241,7 +242,13 @@ const DataView = ({
   });
 
   return (
-    <Box>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 4,
+      }}
+    >
       {shouldShowFilters && (
         <DataFilters
           onChangeSearch={hasSearch ? setSearch : undefined}
@@ -252,14 +259,6 @@ const DataView = ({
           isDisabled={isEmpty}
           additionalActions={
             <>
-              {/* TODO: Add rowSelection */}
-              {bulkActionMenuItems && (
-                <BulkActionMenu
-                  menuItems={bulkActionMenuItems}
-                  rowSelection={{}}
-                />
-              )}
-
               {currentLayout === "table" && tableOptions ? (
                 <TableSettings
                   tableOptions={tableOptions}
@@ -288,7 +287,16 @@ const DataView = ({
         </Box>
       )}
 
-      {currentLayout === "table" && tableOptions ? (
+      {bulkActionMenuItems && (
+        <BulkActionMenu
+          data={data}
+          menuItems={bulkActionMenuItems}
+          rowSelection={rowSelection}
+          setRowSelection={setRowSelection}
+        />
+      )}
+
+      {currentLayout === "table" && tableOptions && (
         <TableContent
           data={data}
           columns={tableOptions.columns}
@@ -308,8 +316,25 @@ const DataView = ({
           totalRows={totalRows}
           draggingRow={draggingRow}
         />
-      ) : (
-        <>Stack.</>
+      )}
+      {currentLayout !== "table" && stackOptions && (
+        <StackContent
+          currentLayout={currentLayout}
+          data={data}
+          getRowId={getRowId}
+          stackOptions={stackOptions}
+          isLoading={isLoading}
+          hasRowReordering={hasRowReordering}
+          onReorderRows={onReorderRows}
+          rowReorderingUtilities={rowReorderingUtilities}
+          hasRowSelection={hasRowSelection}
+          rowSelection={rowSelection}
+          setRowSelection={setRowSelection}
+          emptyState={emptyState}
+          pagination={pagination}
+          totalRows={totalRows}
+          draggingRow={draggingRow}
+        />
       )}
 
       {hasPagination && (
