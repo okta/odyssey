@@ -226,7 +226,12 @@ const WrappedRoadmapTable = () => {
         <CssBaseline />
         <ScopedCssBaseline>
           <Callout severity="info">
-            Dates in the future are projected and may change.
+            Any products, features or functionality referenced in this
+            presentation that are not currently generally available may not be
+            delivered on time or at all. Product roadmaps do not represent a
+            commitment, obligation or promise to deliver any product, feature or
+            functionality, and you should not rely on them to make your purchase
+            decisions.
           </Callout>
           <InnerRoadmapTable />
         </ScopedCssBaseline>
