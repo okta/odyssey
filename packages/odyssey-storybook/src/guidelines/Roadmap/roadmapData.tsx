@@ -17,10 +17,6 @@ import {
   Tooltip,
 } from "@okta/odyssey-react-mui";
 import { DataTableColumn } from "@okta/odyssey-react-mui";
-import { useMemo } from "react";
-
-import rawData from "./roadmap.json";
-export const data: OdysseyComponent[] = rawData as OdysseyComponent[];
 
 import rawData from "./roadmap.json";
 export const data: OdysseyComponent[] = rawData as OdysseyComponent[];
@@ -57,16 +53,15 @@ export const columns: DataTableColumn<DataTableRowData>[] = [
       const defineValue = row.original.define;
       const designValue = row.original.design;
       const developValue = row.original.develop;
-      const severityMap = useMemo(
-        () =>
-          new Map<string, (typeof statusSeverityValues)[number]>([
-            ["Released", "success"],
-            ["In Labs", "warning"],
-            ["In progress", "default"],
-            ["Not started", "error"],
-          ]),
-        [],
-      );
+      const severityMap = new Map<
+        string,
+        (typeof statusSeverityValues)[number]
+      >([
+        ["Released", "success"],
+        ["In Labs", "warning"],
+        ["In progress", "default"],
+        ["Not started", "error"],
+      ]);
       const severity = severityMap.get(statusValue) || "default";
 
       // First priority: Check if the define stage is "In Progress"

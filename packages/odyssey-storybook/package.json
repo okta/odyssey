@@ -20,9 +20,7 @@
     "@mui/material": "^5.15.10",
     "@okta/odyssey-design-tokens": "workspace:*",
     "@okta/odyssey-react-mui": "workspace:*",
-    "@storybook/theming": "^7.2.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@storybook/theming": "^7.2.0"
   },
   "devDependencies": {
     "@applitools/eyes-storybook": "^3.47.0",
@@ -61,6 +59,8 @@
     "markdown-to-jsx": "^7.4.1",
     "playwright": "^1.43.1",
     "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "storybook": "^7.6.16",
     "storybook-addon-rtl-direction": "^0.0.19",
     "typescript": "^5.4.5",

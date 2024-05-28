@@ -101,7 +101,7 @@
   {
     "name": "Data stack (data list, resource list?)",
     "type": "Component",
-    "status": "Not started",
+    "status": "In progress",
     "define": "In progress",
     "design": "Not started",
     "develop": "Not started",
@@ -120,7 +120,7 @@
     "name": "Date picker",
     "type": "Component",
     "status": "In Labs",
-    "define": "In progress",
+    "define": "Complete",
     "design": "In progress",
     "develop": "In progress",
     "deliverableTiming": "Q2 FY25"
@@ -236,10 +236,10 @@
   {
     "name": "Multi-select dropdown",
     "type": "Component",
-    "status": "Not started",
-    "define": "Not started",
-    "design": "Not started",
-    "develop": "Not started",
+    "status": "-",
+    "define": "-",
+    "design": "-",
+    "develop": "-",
     "deliverableTiming": "TBD"
   },
   {
@@ -279,7 +279,7 @@
     "deliverableTiming": "FY24"
   },
   {
-    "name": "Search",
+    "name": "Search field",
     "type": "Pattern",
     "status": "Not started",
     "define": "Not started",
