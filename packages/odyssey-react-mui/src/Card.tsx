@@ -10,8 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { MouseEventHandler, ReactElement, memo, useMemo } from "react";
-
+import {
+  MouseEventHandler,
+  ReactElement,
+  memo,
+  useMemo,
+  useEffect,
+} from "react";
 import {
   Card as MuiCard,
   CardActions as MuiCardActions,
@@ -29,44 +34,22 @@ import {
 } from "./OdysseyDesignTokensContext";
 import { Heading5, Paragraph, Support } from "./Typography";
 
-export const TILE_IMAGE_HEIGHT = "64px";
+export const CARD_IMAGE_HEIGHT = "64px";
 
-export type TileProps = {
-  /**
-   * The body text of the tile. The consumer is responsible for truncating this string.
-   */
+export type CardProps = {
   description?: string;
-  /**
-   * An optional image or icon at the top of the tile, preferably as an <img> or <svg> element.
-   */
-  image?: ReactElement; // Icon or image
-  /**
-   * The "eyebrow" text above the tile title.
-   */
+  image?: ReactElement;
   overline?: string;
-  /**
-   * The heading of the tile.
-   */
   title?: string;
-} & ( // You can't have actions and onClick at the same time
+} & (
   | {
-      /**
-       * The event handler for when the user clicks the tile.
-       */
       onClick: MouseEventHandler;
       button?: never;
       menuButtonChildren?: never;
     }
   | {
       onClick?: never;
-      /**
-       * The main action button for the tile. Not valid if the tile itself is clickable.
-       */
       button?: ReactElement<typeof Button>;
-      /**
-       * Menu items to be rendered in the tile's optional menu button. If this prop is undefined, the
-       * menu button will not be shown. Not valid if the tile itself is clickable.
-       */
       menuButtonChildren?: MenuButtonProps["children"];
     }
 );
@@ -80,7 +63,7 @@ const ImageContainer = styled("div", {
 }>(({ odysseyDesignTokens, hasMenuButtonChildren }) => ({
   display: "flex",
   alignItems: "flex-start",
-  maxHeight: `${TILE_IMAGE_HEIGHT}`,
+  maxHeight: `${CARD_IMAGE_HEIGHT}`,
   marginBlockEnd: odysseyDesignTokens.Spacing5,
   paddingRight: hasMenuButtonChildren ? odysseyDesignTokens.Spacing5 : 0,
 }));
@@ -95,7 +78,7 @@ const MenuButtonContainer = styled("div", {
 
 const buttonProviderValue = { isFullWidth: true };
 
-const Tile = ({
+const Card = ({
   button,
   description,
   image,
@@ -103,7 +86,7 @@ const Tile = ({
   onClick,
   overline,
   title,
-}: TileProps) => {
+}: CardProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const cardContent = useMemo(
@@ -156,7 +139,7 @@ const Tile = ({
         <MenuButtonContainer odysseyDesignTokens={odysseyDesignTokens}>
           <MenuButton
             endIcon={<MoreIcon />}
-            ariaLabel="Tile menu"
+            ariaLabel="Card menu"
             buttonVariant="floating"
             menuAlignment="right"
             size="small"
@@ -170,7 +153,19 @@ const Tile = ({
   );
 };
 
-const MemoizedTile = memo(Tile);
-MemoizedTile.displayName = "Tile";
+const MemoizedCard = memo(Card);
+MemoizedCard.displayName = "Card";
 
-export { MemoizedTile as Tile };
+const Tile = (props: CardProps) => {
+  useEffect(() => {
+    console.warn(
+      "Warning: The 'Tile' component is now called 'Card'. Please update your references as 'Tile' will be deprecated soon.",
+    );
+  }, []);
+
+  return <MemoizedCard {...props} />;
+};
+
+Tile.displayName = "Tile";
+
+export { MemoizedCard as Card, Tile };
