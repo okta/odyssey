@@ -156,6 +156,9 @@ const Card = ({
 const MemoizedCard = memo(Card);
 MemoizedCard.displayName = "Card";
 
+/**
+ * @deprecated The 'Tile' component is now called 'Card'. Please update your references as 'Tile' will be deprecated soon.
+ */
 const Tile = (props: CardProps) => {
   useEffect(() => {
     console.warn(
