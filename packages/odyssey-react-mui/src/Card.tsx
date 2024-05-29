@@ -169,6 +169,7 @@ const Tile = (props: CardProps) => {
   return <MemoizedCard {...props} />;
 };
 
-Tile.displayName = "Tile";
+const MemoizedTile = memo(Tile);
+MemoizedTile.displayName = "Tile";
 
-export { MemoizedCard as Card, Tile };
+export { MemoizedCard as Card, MemoizedTile as Tile };
