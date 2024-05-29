@@ -184,7 +184,7 @@ export const InnerRoadmapTable = () => {
       hasChangeableDensity={false}
       hasColumnResizing={false}
       hasColumnVisibility={false}
-      hasFilters={true}
+      hasFilters
       filters={[
         {
           id: "type",
