@@ -15,7 +15,6 @@ import {
   FC,
   forwardRef,
   HTMLAttributes,
-  // memo,
   ReactElement,
   useCallback,
   useContext,
@@ -30,8 +29,6 @@ import _AutoSizer, {
 import { VariableSizeList, ListChildComponentProps } from "react-window";
 import styled from "@emotion/styled";
 import {
-  // Autocomplete as MuiAutocomplete,
-  // AutocompleteProps as MuiAutocompleteProps,
   InputBase,
   UseAutocompleteProps as MuiUseAutocompleteProps,
   AutocompleteValue,
@@ -40,8 +37,6 @@ import {
 
 import { AutocompleteProps } from "./Autocomplete";
 import { Field } from "./Field";
-// import { FieldComponentProps } from "./FieldComponentProps";
-// import type { HtmlProps } from "./HtmlProps";
 import {
   ComponentControlledState,
   useInputValues,
@@ -356,101 +351,3 @@ export const useAutocomplete = <
     VirtualizedListboxComponent,
   };
 };
-
-// {
-//   /**
-//    * The default value. Use when the component is not controlled.
-//    */
-//   defaultValue?: MuiUseAutocompleteProps<
-//     OptionType,
-//     HasMultipleChoices,
-//     undefined,
-//     IsCustomValueAllowed
-//   >["defaultValue"];
-//   /**
-//    * Enables multiple choice selection
-//    */
-//   hasMultipleChoices?: MuiAutocompleteProps<
-//     OptionType,
-//     HasMultipleChoices,
-//     undefined,
-//     IsCustomValueAllowed
-//   >["multiple"];
-//   /**
-//    * The value for the input
-//    */
-//   inputValue?: MuiUseAutocompleteProps<
-//     OptionType,
-//     HasMultipleChoices,
-//     undefined,
-//     IsCustomValueAllowed
-//   >["inputValue"];
-//   /**
-//    * Callback fired when a selection is made.
-//    */
-//   onChange?: MuiUseAutocompleteProps<
-//     OptionType,
-//     HasMultipleChoices,
-//     undefined,
-//     IsCustomValueAllowed
-//   >["onChange"];
-//   // /**
-//   //  * Callback fired when the textbox receives typed characters.
-//   //  */
-//   onInputChange?: MuiAutocompleteProps<
-//     OptionType,
-//     HasMultipleChoices,
-//     undefined,
-//     IsCustomValueAllowed
-//   >["onInputChange"];
-//   // /**
-//   //  * Callback fired when the autocomplete gains focus.
-//   //  */
-//   // onFocus?: MuiAutocompleteProps<
-//   //   OptionType,
-//   //   HasMultipleChoices,
-//   //   undefined,
-//   //   IsCustomValueAllowed
-//   // >["onFocus"];
-//   // /**
-//   //  * The options for the Autocomplete input
-//   //  */
-//   // options: ReadonlyArray<OptionType>;
-//   /**
-//    * The value of the Autocomplete input
-//    */
-//   value?: MuiUseAutocompleteProps<
-//     OptionType,
-//     HasMultipleChoices,
-//     undefined,
-//     IsCustomValueAllowed
-//   >["value"];
-
-//   /**
-//    * Used to determine if the option represents the given value. Uses strict equality by default if none provided.
-//    * Both arguments need to be handled, an option can only match with one value.
-//    * option: the option to test
-//    * value: the value to test against
-//    *
-//    * You will need to implement this function if your `option` items are objects.
-//    */
-//   getIsOptionEqualToValue?: (option: OptionType, value: OptionType) => boolean;
-
-//   /**
-//    * If this component is required to display a virtualized list of options,
-//    * then this value needs to be set to true.
-//    * It is recommended if you're options are on the order of 10's of hundreds or more.
-//    */
-//   isVirtualized?: boolean;
-// } & Pick<
-//   FieldComponentProps,
-//   | "errorMessage"
-//   | "errorMessageList"
-//   | "hint"
-//   | "HintLinkComponent"
-//   | "id"
-//   | "isFullWidth"
-//   | "isOptional"
-//   | "name"
-// > &
-//   Pick<HtmlProps, "ariaDescribedBy" | "testId" | "translate">;
