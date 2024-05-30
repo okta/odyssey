@@ -10,11 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Chip as MuiChip, ChipProps as MuiChipProps } from "@mui/material";
 import { memo, ReactElement, useCallback, useContext } from "react";
-import { TagListContext } from "./TagListContext";
-import { MuiPropsContext, MuiPropsContextType } from "./MuiPropsContext";
+import { Chip as MuiChip, ChipProps as MuiChipProps } from "@mui/material";
+
 import { HtmlProps } from "./HtmlProps";
+import { MuiPropsContext, MuiPropsContextType } from "./MuiPropsContext";
+import { TagListContext } from "./TagListContext";
 
 export type TagProps = {
   icon?: ReactElement;
