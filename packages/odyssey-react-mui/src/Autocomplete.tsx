@@ -13,10 +13,7 @@
 import {
   Autocomplete as MuiAutocomplete,
   AutocompleteProps as MuiAutocompleteProps,
-  InputBase,
-  UseAutocompleteProps,
-  AutocompleteValue,
-  AutocompleteRenderInputParams,
+  UseAutocompleteProps as MuiUseAutocompleteProps,
 } from "@mui/material";
 import {
   createContext,
@@ -31,7 +28,7 @@ import {
   useRef,
   useState,
 } from "react";
-import styled from "@emotion/styled";
+// import styled from "@emotion/styled";
 import { VariableSizeList, ListChildComponentProps } from "react-window";
 import { useTranslation } from "react-i18next";
 
@@ -75,6 +72,7 @@ export const AutocompleteTestSelector = {
     role: "combobox",
   },
 } as const satisfies TestSelector;
+// import { useAutocomplete } from "./useAutocomplete";
 
 type SetItemSize = (size: number) => void;
 
@@ -86,7 +84,7 @@ export type AutocompleteProps<
   /**
    * The default value. Use when the component is not controlled.
    */
-  defaultValue?: UseAutocompleteProps<
+  defaultValue?: MuiUseAutocompleteProps<
     OptionType,
     HasMultipleChoices,
     undefined,
@@ -97,12 +95,21 @@ export type AutocompleteProps<
    *
    * `function(option: Value) => string`
    */
-  getOptionLabel?: UseAutocompleteProps<
+  getOptionLabel?: MuiUseAutocompleteProps<
     OptionType,
     HasMultipleChoices,
     undefined,
     IsCustomValueAllowed
   >["getOptionLabel"];
+
+  /** Used to determine if the option represents the given value. Uses strict equality by default if none provided.
+   * Both arguments need to be handled, an option can only match with one value.
+   * option: the option to test
+   * value: the value to test against
+   *
+   * You will need to implement this function if your `option` items are objects.
+   */
+  getIsOptionEqualToValue?: (option: OptionType, value: OptionType) => boolean;
   /**
    * Enables multiple choice selection
    */
@@ -115,7 +122,7 @@ export type AutocompleteProps<
   /**
    * The value for the input
    */
-  inputValue?: UseAutocompleteProps<
+  inputValue?: MuiUseAutocompleteProps<
     OptionType,
     HasMultipleChoices,
     undefined,
@@ -158,6 +165,12 @@ export type AutocompleteProps<
     IsCustomValueAllowed
   >["readOnly"];
   /**
+   * If this component is required to display a virtualized list of options,
+   * then this value needs to be set to true.
+   * It is recommended if you're options are on the order of 10's of hundreds or more.
+   */
+  isVirtualized?: boolean;
+  /**
    * The label text for the autocomplete input
    */
   label: string;
@@ -179,7 +192,7 @@ export type AutocompleteProps<
   /**
    * Callback fired when a selection is made.
    */
-  onChange?: UseAutocompleteProps<
+  onChange?: MuiUseAutocompleteProps<
     OptionType,
     HasMultipleChoices,
     undefined,
@@ -210,29 +223,12 @@ export type AutocompleteProps<
   /**
    * The value of the Autocomplete input
    */
-  value?: UseAutocompleteProps<
+  value?: MuiUseAutocompleteProps<
     OptionType,
     HasMultipleChoices,
     undefined,
     IsCustomValueAllowed
   >["value"];
-
-  /**
-   * Used to determine if the option represents the given value. Uses strict equality by default if none provided.
-   * Both arguments need to be handled, an option can only match with one value.
-   * option: the option to test
-   * value: the value to test against
-   *
-   * You will need to implement this function if your `option` items are objects.
-   */
-  getIsOptionEqualToValue?: (option: OptionType, value: OptionType) => boolean;
-
-  /**
-   * If this component is required to display a virtualized list of options,
-   * then this value needs to be set to true.
-   * It is recommended if you're options are on the order of 10's of hundreds or more.
-   */
-  isVirtualized?: boolean;
 } & Pick<
   FieldComponentProps,
   | "errorMessage"
@@ -245,11 +241,6 @@ export type AutocompleteProps<
   | "name"
 > &
   Pick<HtmlProps, "ariaDescribedBy" | "testId" | "translate">;
-
-const ListboxContainer = styled.div`
-  width: 100%;
-  height: 100%;
-`;
 
 const Autocomplete = <
   OptionType,
@@ -565,6 +556,35 @@ const Autocomplete = <
     },
     [onInputChangeProp],
   );
+
+// const {
+//     inputValueProp,
+//     isVirtualized,
+//     onChange,
+//     onInputChange,
+//     renderInput,
+//     t,
+//     valueProps,
+//     VirtualizedListboxComponent,
+//   } = useAutocomplete<OptionType, HasMultipleChoices, IsCustomValueAllowed>({
+//     ariaDescribedBy,
+//     defaultValue,
+//     errorMessage,
+//     errorMessageList,
+//     hasMultipleChoices,
+//     hint,
+//     HintLinkComponent,
+//     inputValue,
+//     isFullWidth,
+//     isOptional,
+//     isVirtualized: isVirtualizedProp,
+//     label,
+//     name: nameOverride,
+//     onChange: onChangeProp,
+//     onInputChange: onInputChangeProp,
+//     testId,
+//     value,
+//   });
 
   return (
     <MuiAutocomplete
