@@ -461,11 +461,11 @@ export const components = ({
         },
         paper: ({ ownerState }) => ({
           /**
-           * ListboxComponent is used when `isVirtualized` prop is true.
+           * VirtualizedListboxComponent is used when `isVirtualized` prop is true.
            * This style is needed to render the virtualized window. It renders out a parent div
            * that needs a height to be set, otherwise the height is 0 and nothing appears.
            */
-          ...(ownerState.ListboxComponent !== undefined && {
+          ...(ownerState.VirtualizedListboxComponent !== undefined && {
             height: "100%",
           }),
         }),

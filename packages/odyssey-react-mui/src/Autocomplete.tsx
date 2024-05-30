@@ -13,43 +13,13 @@
 import {
   Autocomplete as MuiAutocomplete,
   AutocompleteProps as MuiAutocompleteProps,
-  InputBase,
-  UseAutocompleteProps,
-  AutocompleteValue,
-  AutocompleteRenderInputParams,
+  UseAutocompleteProps as MuiUseAutocompleteProps,
 } from "@mui/material";
-import {
-  createContext,
-  FC,
-  forwardRef,
-  HTMLAttributes,
-  memo,
-  ReactElement,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-} from "react";
-import styled from "@emotion/styled";
-import { VariableSizeList, ListChildComponentProps } from "react-window";
-import _AutoSizer, {
-  Props as AutoSizerProps,
-  Size as AutoSizerSize,
-} from "react-virtualized-auto-sizer";
+import { memo } from "react";
 
-// This is required to get around a react-types issue for "AutoSizer is not a valid JSX element."
-// @see https://github.com/bvaughn/react-virtualized/issues/1739#issuecomment-1291444246
-const AutoSizer = _AutoSizer as unknown as FC<AutoSizerProps>;
-
-import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { HtmlProps } from "./HtmlProps";
-import {
-  ComponentControlledState,
-  useInputValues,
-  getControlState,
-} from "./inputUtils";
+import { useAutocomplete } from "./useAutocomplete";
 
 export type AutocompleteProps<
   OptionType,
@@ -59,12 +29,21 @@ export type AutocompleteProps<
   /**
    * The default value. Use when the component is not controlled.
    */
-  defaultValue?: UseAutocompleteProps<
+  defaultValue?: MuiUseAutocompleteProps<
     OptionType,
     HasMultipleChoices,
     undefined,
     IsCustomValueAllowed
   >["defaultValue"];
+  /**
+   * Used to determine if the option represents the given value. Uses strict equality by default if none provided.
+   * Both arguments need to be handled, an option can only match with one value.
+   * option: the option to test
+   * value: the value to test against
+   *
+   * You will need to implement this function if your `option` items are objects.
+   */
+  getIsOptionEqualToValue?: (option: OptionType, value: OptionType) => boolean;
   /**
    * Enables multiple choice selection
    */
@@ -77,7 +56,7 @@ export type AutocompleteProps<
   /**
    * The value for the input
    */
-  inputValue?: UseAutocompleteProps<
+  inputValue?: MuiUseAutocompleteProps<
     OptionType,
     HasMultipleChoices,
     undefined,
@@ -120,6 +99,12 @@ export type AutocompleteProps<
     IsCustomValueAllowed
   >["readOnly"];
   /**
+   * If this component is required to display a virtualized list of options,
+   * then this value needs to be set to true.
+   * It is recommended if you're options are on the order of 10's of hundreds or more.
+   */
+  isVirtualized?: boolean;
+  /**
    * The label text for the autocomplete input
    */
   label: string;
@@ -135,7 +120,7 @@ export type AutocompleteProps<
   /**
    * Callback fired when a selection is made.
    */
-  onChange?: UseAutocompleteProps<
+  onChange?: MuiUseAutocompleteProps<
     OptionType,
     HasMultipleChoices,
     undefined,
@@ -166,29 +151,12 @@ export type AutocompleteProps<
   /**
    * The value of the Autocomplete input
    */
-  value?: UseAutocompleteProps<
+  value?: MuiUseAutocompleteProps<
     OptionType,
     HasMultipleChoices,
     undefined,
     IsCustomValueAllowed
   >["value"];
-
-  /**
-   * Used to determine if the option represents the given value. Uses strict equality by default if none provided.
-   * Both arguments need to be handled, an option can only match with one value.
-   * option: the option to test
-   * value: the value to test against
-   *
-   * You will need to implement this function if your `option` items are objects.
-   */
-  getIsOptionEqualToValue?: (option: OptionType, value: OptionType) => boolean;
-
-  /**
-   * If this component is required to display a virtualized list of options,
-   * then this value needs to be set to true.
-   * It is recommended if you're options are on the order of 10's of hundreds or more.
-   */
-  isVirtualized?: boolean;
 } & Pick<
   FieldComponentProps,
   | "errorMessage"
@@ -201,11 +169,6 @@ export type AutocompleteProps<
   | "name"
 > &
   Pick<HtmlProps, "ariaDescribedBy" | "testId" | "translate">;
-
-const ListboxContainer = styled.div`
-  width: 100%;
-  height: 100%;
-`;
 
 const Autocomplete = <
   OptionType,
@@ -240,225 +203,40 @@ const Autocomplete = <
   testId,
   translate,
 }: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
-  const controlledStateRef = useRef(
-    getControlState({
-      controlledValue: value,
-      uncontrolledValue: defaultValue,
-    }),
-  );
-
-  const isVirtualized = useRef(Boolean(isVirtualizedProp));
-  const defaultValueProp = useMemo<
-    | AutocompleteValue<
-        OptionType,
-        HasMultipleChoices,
-        undefined,
-        IsCustomValueAllowed
-      >
-    | undefined
-  >(() => {
-    if (hasMultipleChoices) {
-      if (value === undefined) {
-        return defaultValue;
-      }
-      return [] as AutocompleteValue<
-        OptionType,
-        HasMultipleChoices,
-        undefined,
-        IsCustomValueAllowed
-      >;
-    }
-    return value === undefined ? defaultValue : undefined;
-  }, [defaultValue, hasMultipleChoices, value]);
-
-  const valueProps = useInputValues({
-    defaultValue: defaultValueProp,
-    value: value,
-    controlState: controlledStateRef.current,
+  const {
+    inputValueProp,
+    isVirtualized,
+    onChange,
+    onInputChange,
+    renderInput,
+    valueProps,
+    VirtualizedListboxComponent,
+  } = useAutocomplete<OptionType, HasMultipleChoices, IsCustomValueAllowed>({
+    ariaDescribedBy,
+    defaultValue,
+    errorMessage,
+    errorMessageList,
+    hasMultipleChoices,
+    hint,
+    HintLinkComponent,
+    inputValue,
+    isFullWidth,
+    isOptional,
+    isVirtualized: isVirtualizedProp,
+    label,
+    name: nameOverride,
+    onChange: onChangeProp,
+    onInputChange: onInputChangeProp,
+    testId,
+    value,
   });
-
-  const inputValueProp = useMemo(() => {
-    if (controlledStateRef.current === ComponentControlledState.CONTROLLED) {
-      return { inputValue };
-    }
-    return undefined;
-  }, [inputValue]);
-
-  const renderInput = useCallback(
-    ({
-      InputLabelProps,
-      InputProps,
-      ...params
-    }: AutocompleteRenderInputParams) => (
-      <Field
-        ariaDescribedBy={ariaDescribedBy}
-        errorMessage={errorMessage}
-        errorMessageList={errorMessageList}
-        fieldType="single"
-        hasVisibleLabel
-        //@ts-expect-error htmlFor does not exist ont he InputLabelProps for autocomplete
-        id={InputLabelProps.htmlFor}
-        isFullWidth={isFullWidth}
-        hint={hint}
-        HintLinkComponent={HintLinkComponent}
-        label={label}
-        isOptional={isOptional}
-        renderFieldComponent={({
-          ariaDescribedBy,
-          id,
-          errorMessageElementId,
-          labelElementId,
-        }) => (
-          <InputBase
-            {...params}
-            {...InputProps}
-            inputProps={{
-              ...params.inputProps,
-              "aria-errormessage": errorMessageElementId,
-              "aria-labelledby": labelElementId,
-              "data-se": testId,
-            }}
-            aria-describedby={ariaDescribedBy}
-            id={id}
-            name={nameOverride ?? id}
-            required={!isOptional}
-          />
-        )}
-      />
-    ),
-    [
-      ariaDescribedBy,
-      errorMessage,
-      errorMessageList,
-      hint,
-      HintLinkComponent,
-      isFullWidth,
-      isOptional,
-      label,
-      nameOverride,
-      testId,
-    ],
-  );
-
-  const renderVirtualizedRow = ({
-    data,
-    index,
-    style,
-  }: ListChildComponentProps) => {
-    const baseOption = data[index];
-    /**
-     * react-window calculates the absolute positions of the list items, via an inline style, so
-     * we need to add it to each list item that is being rendered in the viewable list window.
-     * See here if you need to know more: https://github.com/bvaughn/react-window?tab=readme-ov-file#why-is-my-list-blank-when-i-scroll
-     */
-    const optionItem = { ...baseOption, props: { ...baseOption.props, style } };
-    return optionItem;
-  };
-
-  const OuterListboxContext = createContext({});
-
-  const OuterListboxElementType = forwardRef<HTMLDivElement>((props, ref) => {
-    const outerProps = useContext(OuterListboxContext);
-    return <div ref={ref} {...props} {...outerProps} />;
-  });
-
-  function useResetCache(length: number) {
-    const ref = useRef<VariableSizeList>(null);
-    useEffect(() => {
-      if (ref.current) {
-        ref.current.resetAfterIndex(0, true);
-      }
-    }, [length]);
-    return ref;
-  }
-
-  const ListboxComponent = forwardRef<
-    HTMLDivElement,
-    HTMLAttributes<HTMLElement>
-  >(function (props, ref) {
-    const { children, ...other } = props;
-    const itemData: ReactElement[] = (children as ReactElement[]).flatMap(
-      (item: ReactElement & { children?: ReactElement[] }) =>
-        [item].concat(item.children || []),
-    );
-
-    // the height of an Odyssey autocomplete option item that is used to calculate height of window
-    const optionHeight = 45; //px
-
-    // The number of items (rows or columns) to render outside of the visible area for performance and scrolling reasons
-    const overscanRowCount = 8;
-
-    const itemSize = useCallback(() => optionHeight, []);
-
-    const gridRef = useResetCache(itemData.length);
-
-    const renderWindow = useCallback(
-      ({ height, width }: AutoSizerSize) => (
-        <VariableSizeList
-          innerElementType="ul"
-          itemData={itemData}
-          itemCount={itemData.length}
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          itemSize={itemSize}
-          height={height}
-          width={width}
-          ref={gridRef}
-          outerElementType={OuterListboxElementType}
-          overscanCount={overscanRowCount}
-        >
-          {renderVirtualizedRow}
-        </VariableSizeList>
-      ),
-      [itemData, gridRef, itemSize],
-    );
-
-    return (
-      <ListboxContainer ref={ref}>
-        <OuterListboxContext.Provider value={other}>
-          <AutoSizer>{renderWindow}</AutoSizer>
-        </OuterListboxContext.Provider>
-      </ListboxContainer>
-    );
-  });
-
-  const onChange = useCallback<
-    NonNullable<
-      UseAutocompleteProps<
-        OptionType,
-        HasMultipleChoices,
-        undefined,
-        IsCustomValueAllowed
-      >["onChange"]
-    >
-  >(
-    (event, value, reason, details) => {
-      onChangeProp?.(event, value, reason, details);
-    },
-    [onChangeProp],
-  );
-
-  const onInputChange = useCallback<
-    NonNullable<
-      UseAutocompleteProps<
-        OptionType,
-        HasMultipleChoices,
-        undefined,
-        IsCustomValueAllowed
-      >["onInputChange"]
-    >
-  >(
-    (event, value, reason) => {
-      onInputChangeProp?.(event, value, reason);
-    },
-    [onInputChangeProp],
-  );
 
   return (
     <MuiAutocomplete
       {...valueProps}
       {...inputValueProp}
       // conditionally provide the ListboxComponent if this needs to be virtualized
-      {...(isVirtualized.current && { ListboxComponent })}
+      {...(isVirtualized.current && { VirtualizedListboxComponent })}
       // AutoComplete is wrapped in a div within MUI which does not get the disabled attr. So this aria-disabled gets set in the div
       aria-disabled={isDisabled}
       disableCloseOnSelect={hasMultipleChoices}
