@@ -535,13 +535,13 @@ const DataFilters = ({
     ],
   );
 
-  const autoCompleteValue = useMemo(() => {
-    if (filterPopoverCurrentFilter?.id) {
-      return [...(inputValues[filterPopoverCurrentFilter.id] as Option[])];
-    }
-
-    return undefined;
-  }, [filterPopoverCurrentFilter]);
+  const autoCompleteValue = useMemo(
+    () =>
+      filterPopoverCurrentFilter?.id
+        ? (inputValues[filterPopoverCurrentFilter.id] as Option[])
+        : undefined,
+    [filterPopoverCurrentFilter, inputValues],
+  );
 
   return (
     <Box>
@@ -604,6 +604,7 @@ const DataFilters = ({
                               <AutocompleteInnerContainer>
                                 <Autocomplete
                                   hasMultipleChoices
+                                  isCustomValueAllowed
                                   label={filterPopoverCurrentFilter.label}
                                   value={autoCompleteValue}
                                   onChange={(_, value) => {
