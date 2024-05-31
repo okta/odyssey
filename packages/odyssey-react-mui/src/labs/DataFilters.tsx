@@ -89,6 +89,12 @@ export type DataFilter = {
    */
   id: Exclude<MRT_ColumnDef<MRT_RowData>["accessorKey"], undefined>;
   /**
+   * `Autocomplete` normally only allows values that exist in the list box. This feature allows you to enter in any value in the text field and have that be the stored value in `Autocomplete`
+   *
+   * NOTE: This only applies when `variant` is `autocomplete`
+   */
+  isCustomValueAllowed?: boolean;
+  /**
    * The human-friendly name of the filter.
    */
   label: string;
@@ -604,7 +610,9 @@ const DataFilters = ({
                               <AutocompleteInnerContainer>
                                 <Autocomplete
                                   hasMultipleChoices
-                                  isCustomValueAllowed
+                                  isCustomValueAllowed={
+                                    filterPopoverCurrentFilter?.isCustomValueAllowed
+                                  }
                                   label={filterPopoverCurrentFilter.label}
                                   value={autoCompleteValue}
                                   onChange={(_, value) => {
