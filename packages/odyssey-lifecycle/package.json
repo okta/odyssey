@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-lifecycle",
-  "version": "1.15.9",
+  "version": "1.16.1",
   "description": "Lifecycle scripts for lerna and npm",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
