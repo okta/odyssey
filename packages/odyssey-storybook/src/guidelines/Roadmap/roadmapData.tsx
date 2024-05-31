@@ -10,15 +10,25 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { DataTableRowData, Status } from "@okta/odyssey-react-mui";
+import {
+  DataTableRowData,
+  Status,
+  statusSeverityValues,
+  Tooltip,
+} from "@okta/odyssey-react-mui";
 import { DataTableColumn } from "@okta/odyssey-react-mui";
+
+import rawData from "./roadmap.json";
+export const data: OdysseyComponent[] = rawData as OdysseyComponent[];
 
 export type OdysseyComponent = {
   name: string;
-  status: "Fully released" | "In Labs" | "In progress" | "Not started";
-  startDate: string;
-  labsRelease: string;
-  fullRelease: string;
+  type: string;
+  status: "" | "Released" | "In Labs" | "In progress" | "Not started";
+  define: string;
+  design: string;
+  develop: string;
+  deliverableTiming: string;
 };
 
 export const columns: DataTableColumn<DataTableRowData>[] = [
@@ -26,198 +36,81 @@ export const columns: DataTableColumn<DataTableRowData>[] = [
     accessorKey: "name",
     header: "Name",
     enableHiding: false,
+    size: 325,
+  },
+  {
+    accessorKey: "type",
+    header: "Type",
+    enableHiding: true,
+    size: 200,
   },
   {
     accessorKey: "status",
     header: "Status",
-    Cell: ({ cell }) => {
-      const value = cell.getValue<string>();
-      const severity =
-        value === "Fully released"
-          ? "success"
-          : value === "In Labs"
-            ? "warning"
-            : value === "In progress"
-              ? "default"
-              : value === "Not started"
-                ? "error"
-                : "default";
-      return <Status label={value} severity={severity} />;
-    },
-  },
-  {
-    accessorKey: "startDate",
-    header: "Start date",
-    //@ts-expect-error need to address typing here
-    Cell: ({ cell }) => {
-      return cell.getValue() ? cell.getValue() : "—";
-    },
-  },
-  {
-    accessorKey: "labsRelease",
-    header: "Available in Odyssey Labs",
-    //@ts-expect-error need to address typing here
-    Cell: ({ cell }) => {
-      return cell.getValue() ? cell.getValue() : "—";
-    },
-  },
-  {
-    accessorKey: "fullRelease",
-    header: "Available in full release",
-    //@ts-expect-error need to address typing here
-    Cell: ({ cell }) => {
-      return cell.getValue() ? cell.getValue() : "—";
-    },
-  },
-];
+    size: 200,
+    Cell: ({ cell, row }) => {
+      const statusValue = cell.getValue<string>();
+      const defineValue = row.original.define;
+      const designValue = row.original.design;
+      const developValue = row.original.develop;
+      const severityMap = new Map<
+        string,
+        (typeof statusSeverityValues)[number]
+      >([
+        ["Released", "success"],
+        ["In Labs", "warning"],
+        ["In progress", "default"],
+        ["Not started", "error"],
+      ]);
+      const severity = severityMap.get(statusValue) || "default";
 
-export const data: OdysseyComponent[] = [
-  {
-    name: "Date picker",
-    status: "In Labs",
-    startDate: "Oct '22",
-    labsRelease: "Oct '22",
-    fullRelease: "",
-  },
-  {
-    name: "Data filters",
-    status: "In Labs",
-    startDate: "Sep '23",
-    labsRelease: "Nov '23",
-    fullRelease: "Jan '24",
-  },
-  {
-    name: "Data table",
-    status: "In Labs",
-    startDate: "Sep '23",
-    labsRelease: "Nov '23",
-    fullRelease: "Jan '24",
-  },
-  {
-    name: "Accordion",
-    status: "In Labs",
-    startDate: "Oct '23",
-    labsRelease: "Oct '23",
-    fullRelease: "Dec '23",
+      // First priority: Check if the define stage is "In Progress"
+      if (defineValue === "In Progress") {
+        // Return a Tooltip specifically for this condition and do nothing else
+        return (
+          <Tooltip
+            ariaType="label"
+            placement="top"
+            text="Planning and research in progress"
+          >
+            <Status
+              label="Planning and research in progress"
+              severity={severity}
+            />
+          </Tooltip>
+        );
+      }
+
+      // If defineValue is not "In Progress", then proceed with this logic:
+      let tooltipText = "";
+      if (defineValue === "In progress") {
+        tooltipText += "Project definition in progress";
+      }
+      if (["Complete", "In progress"].includes(designValue)) {
+        tooltipText += "Design: " + designValue + " ";
+      }
+      if (["Complete", "In progress"].includes(developValue)) {
+        tooltipText += "Develop: " + developValue;
+      }
+
+      // Only show the tooltip if there's relevant information to display
+      if (tooltipText && statusValue !== "Released") {
+        return (
+          <Tooltip ariaType="label" placement="top" text={tooltipText.trim()}>
+            <Status label={statusValue} severity={severity} />
+          </Tooltip>
+        );
+      }
+
+      // If there is no relevant tooltip text, just show the status without any tooltip
+      return <Status label={statusValue} severity={severity} />;
+    },
   },
 
   {
-    name: "Badge",
-    status: "In progress",
-    startDate: "Oct '23",
-    labsRelease: "Dec '23",
-    fullRelease: "",
-  },
-  {
-    name: "Tile",
-    status: "In progress",
-    startDate: "Oct '23",
-    labsRelease: "Dec '23",
-    fullRelease: "",
-  },
-  {
-    name: "Hint text for checkbox/radio",
-    status: "In progress",
-    startDate: "Nov '23",
-    labsRelease: "",
-    fullRelease: "Dec '23",
-  },
-  {
-    name: "Links in hint text",
-    status: "In progress",
-    startDate: "Nov '23",
-    labsRelease: "",
-    fullRelease: "Dec '23",
-  },
-  {
-    name: "Drawer",
-    status: "In progress",
-    startDate: "Dec '23",
-    labsRelease: "Jan '24",
-    fullRelease: "",
-  },
-  {
-    name: "Inline inputs",
-    status: "In progress",
-    startDate: "Dec '23",
-    labsRelease: "",
-    fullRelease: "",
-  },
-  {
-    name: "Gray background",
-    status: "In progress",
-    startDate: "Dec '23",
-    labsRelease: "",
-    fullRelease: "",
-  },
-  {
-    name: "Navigation",
-    status: "Not started",
-    startDate: "Dec '23",
-    labsRelease: "",
-    fullRelease: "",
-  },
-  {
-    name: "Toggle",
-    status: "Not started",
-    startDate: "Dec '23",
-    labsRelease: "Dec '23",
-    fullRelease: "Jan '23",
-  },
-  {
-    name: "Data list",
-    status: "Not started",
-    startDate: "Jan '24",
-    labsRelease: "Feb '24",
-    fullRelease: "",
-  },
-  {
-    name: "Horizontal stepper/wizard pattern",
-    status: "Not started",
-    startDate: "Jan '24",
-    labsRelease: "",
-    fullRelease: "",
-  },
-  {
-    name: "Vertical stepper pattern",
-    status: "Not started",
-    startDate: "Jan '24",
-    labsRelease: "",
-    fullRelease: "",
-  },
-  {
-    name: "Configuration screen pattern",
-    status: "Not started",
-    startDate: "",
-    labsRelease: "",
-    fullRelease: "",
-  },
-  {
-    name: "Help/support pattern",
-    status: "Not started",
-    startDate: "",
-    labsRelease: "",
-    fullRelease: "",
-  },
-  {
-    name: "Page templates",
-    status: "Not started",
-    startDate: "",
-    labsRelease: "",
-    fullRelease: "",
-  },
-  {
-    name: "Panel",
-    status: "Not started",
-    startDate: "",
-    labsRelease: "",
-    fullRelease: "",
-  },
-  {
-    name: "Primary actions area",
-    status: "Not started",
-    startDate: "",
-    labsRelease: "",
-    fullRelease: "",
+    accessorKey: "deliverableTiming",
+    header: "Deliverable timing",
+    enableHiding: false,
+    size: 200,
   },
 ];
