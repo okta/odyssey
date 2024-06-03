@@ -23,6 +23,7 @@ import { DataTableRowData } from "../../DataTable";
 import { Box } from "../../Box";
 import { CSSObject } from "@emotion/styled";
 import { StackItem } from "./StackItem";
+import { DataTableRowActions } from "../../DataTable/DataTableRowActions";
 
 export type StackContentProps = {
   currentLayout: StackLayout;
@@ -126,6 +127,36 @@ const StackContent = ({
     [setRowSelection],
   );
 
+  const { updateRowOrder } = rowReorderingUtilities;
+
+  const renderRowActions = useCallback(
+    (row: DataTableRowData) => {
+      // TODO: is there a better way to get the row index?
+      // Maybe inject the true index into each row when retrieved
+      const currentIndex =
+        row.index + (pagination.pageIndex - 1) * pagination.pageSize;
+      return (
+        <DataTableRowActions
+          row={row}
+          rowIndex={currentIndex}
+          rowActionMenuItems={stackOptions.rowActionMenuItems}
+          totalRows={totalRows}
+          updateRowOrder={
+            hasRowReordering && onReorderRows ? updateRowOrder : undefined
+          }
+        />
+      );
+    },
+    [
+      pagination,
+      stackOptions,
+      hasRowReordering,
+      onReorderRows,
+      totalRows,
+      updateRowOrder,
+    ],
+  );
+
   return (
     <Box
       sx={{
@@ -149,6 +180,7 @@ const StackContent = ({
           onToggleRowSelection={() => handleRowSelectionChange(row)}
           isSelected={rowSelection[row.id] ?? false}
           key={row.id}
+          menuActions={renderRowActions(row)}
         />
       ))}
     </Box>

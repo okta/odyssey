@@ -27,7 +27,6 @@ import { DataFilter, DataFilters } from "../DataFilters";
 import { useFilterConversion } from "./useFilterConversion";
 import { BulkActionMenu } from "./BulkActionsMenu";
 import { LayoutSwitcher } from "./LayoutSwitcher";
-import { StackSettings } from "./StackSettings";
 import { TableSettings } from "./TableSettings";
 import { Callout } from "../../Callout";
 import { Pagination, usePagination } from "../../Pagination";
@@ -259,14 +258,12 @@ const DataView = ({
           isDisabled={isEmpty}
           additionalActions={
             <>
-              {currentLayout === "table" && tableOptions ? (
+              {currentLayout === "table" && tableOptions && (
                 <TableSettings
                   tableOptions={tableOptions}
                   tableState={tableState}
                   setTableState={setTableState}
                 />
-              ) : (
-                <StackSettings />
               )}
 
               {hasMultipleAvailableLayouts && (

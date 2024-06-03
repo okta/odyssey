@@ -100,6 +100,7 @@ export type TableProps = {
 export type StackProps = {
   renderRow: (row: DataTableRowData) => ReactNode;
   maxGridColumns?: number;
+  rowActionMenuItems?: DataTableRowActionsProps["rowActionMenuItems"];
 };
 
 export type ViewProps = {

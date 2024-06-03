@@ -14,20 +14,37 @@ import { ReactNode, memo } from "react";
 import { Card as MuiCard, Checkbox as MuiCheckbox } from "@mui/material";
 import { Box } from "../../Box";
 import { DataTableRowData } from "../../DataTable";
+import {
+  DesignTokens,
+  useOdysseyDesignTokens,
+} from "../../OdysseyDesignTokensContext";
+import styled from "@emotion/styled";
 
 export type StackItemProps = {
   children: ReactNode;
   isSelectable?: boolean;
   isSelected?: boolean;
   onToggleRowSelection?: (row: DataTableRowData) => void;
+  menuActions?: ReactNode;
 };
+
+const MenuButtonContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
+  position: "absolute",
+  right: odysseyDesignTokens.Spacing3,
+  top: odysseyDesignTokens.Spacing3,
+}));
 
 const StackItem = ({
   children,
   isSelectable,
   onToggleRowSelection,
   isSelected,
+  menuActions,
 }: StackItemProps) => {
+  const odysseyDesignTokens = useOdysseyDesignTokens();
+
   return (
     <MuiCard>
       {isSelectable && (
@@ -40,21 +57,10 @@ const StackItem = ({
         </Box>
       )}
       {children}
-      {/* 
-      {menuButtonChildren && (
-        <MenuButtonContainer odysseyDesignTokens={odysseyDesignTokens}>
-          <MenuButton
-            endIcon={<MoreIcon />}
-            ariaLabel="Tile menu"
-            buttonVariant="floating"
-            menuAlignment="right"
-            size="small"
-            tooltipText="Actions"
-          >
-            {menuButtonChildren}
-          </MenuButton>
-        </MenuButtonContainer> */}
-      {/* )} */}
+
+      <MenuButtonContainer odysseyDesignTokens={odysseyDesignTokens}>
+        {menuActions}
+      </MenuButtonContainer>
     </MuiCard>
   );
 };

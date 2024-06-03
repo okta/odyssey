@@ -129,6 +129,7 @@ export const Default: StoryObj<DataViewProps> = {
               </>
             );
           },
+          rowActionMenuItems: actionMenuItems,
           maxGridColumns: 4,
         }}
       />
