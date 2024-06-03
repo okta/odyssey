@@ -20,7 +20,7 @@ import {
 } from "@mui/material";
 import { Button } from "./Button";
 import { CloseIcon } from "./icons.generated";
-import React, {
+import {
   cloneElement,
   memo,
   useState,
