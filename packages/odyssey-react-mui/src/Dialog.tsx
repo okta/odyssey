@@ -21,6 +21,7 @@ import {
 import { Button } from "./Button";
 import { CloseIcon } from "./icons.generated";
 import React, {
+  cloneElement,
   memo,
   useState,
   useEffect,
@@ -162,11 +163,9 @@ const Dialog = ({
 
       {actionButtons.length > 0 && (
         <DialogActions>
-          {actionButtons.map((actionButton, index) => {
-            return actionButton
-              ? React.cloneElement(actionButton, { key: index })
-              : null;
-          })}
+          {actionButtons.map((actionButton, index) =>
+            actionButton ? cloneElement(actionButton, { key: index }) : null,
+          )}
         </DialogActions>
       )}
     </MuiDialog>
