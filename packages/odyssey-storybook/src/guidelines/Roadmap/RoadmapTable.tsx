@@ -12,7 +12,7 @@
 
 import { DataFilter } from "@okta/odyssey-react-mui/labs";
 import { DataTable, DataTableSortingState } from "@okta/odyssey-react-mui";
-import { columns, data as incomingData, OdysseyComponent } from "./roadmapData";
+import { columns, data, OdysseyComponent } from "./roadmapData";
 import {
   Callout,
   CssBaseline,
@@ -26,7 +26,7 @@ import * as odysseyTokens from "@okta/odyssey-design-tokens";
 const processData = ({
   initialData,
   page = 1,
-  resultsPerPage = 20,
+  resultsPerPage = 100,
   search,
   filters,
   sort,
@@ -116,7 +116,6 @@ const processData = ({
       return 0;
     });
   }
-
   // Implement pagination
   const startIdx = (page - 1) * resultsPerPage;
   const endIdx = startIdx + resultsPerPage;
@@ -126,7 +125,32 @@ const processData = ({
 };
 
 export const InnerRoadmapTable = () => {
-  const data = incomingData;
+  // Constants for filter options
+
+  const typeOptions = [
+    { label: "Component", value: "Component" },
+    { label: "Pattern", value: "Pattern" },
+  ];
+
+  const statusOptions = [
+    { label: "In Progress", value: "In progress" },
+    { label: "In Labs", value: "In labs" },
+    { label: "Released", value: "Released" },
+    { label: "Not Started", value: "Not started" },
+  ];
+
+  const expectedOptions = [
+    { label: "FY24", value: "FY24" },
+    { label: "TBD", value: "TBD" },
+    { label: "Q1 FY25", value: "Q1 FY25" },
+    { label: "Q2 FY25", value: "Q2 FY25" },
+    { label: "Q3 FY25", value: "Q3 FY25" },
+    { label: "Q4 FY25", value: "Q4 FY25" },
+    { label: "Q1 FY26", value: "Q1 FY26" },
+    { label: "Q2 FY26", value: "Q2 FY26" },
+    { label: "Q3 FY26", value: "Q3 FY26" },
+    { label: "Q4 FY26", value: "Q4 FY26" },
+  ];
 
   const fetchData = ({
     page,
@@ -157,10 +181,31 @@ export const InnerRoadmapTable = () => {
       totalRows={data.length}
       getRowId={({ name }) => name}
       getData={fetchData}
-      hasChangeableDensity
-      hasColumnResizing
-      hasColumnVisibility
-      hasFilters={false}
+      hasChangeableDensity={false}
+      hasColumnResizing={false}
+      hasColumnVisibility={false}
+      hasFilters
+      filters={[
+        {
+          id: "type",
+          label: "Type",
+          variant: "select",
+          options: typeOptions,
+        },
+        {
+          id: "status",
+          label: "Status",
+          variant: "select",
+          options: statusOptions,
+        },
+        {
+          id: "deliverableTiming",
+          label: "Deliverable timing",
+          variant: "autocomplete",
+          options: expectedOptions,
+        },
+      ]}
+      resultsPerPage={100}
       hasPagination={false}
       hasRowSelection={false}
       hasRowReordering={false}
@@ -181,7 +226,12 @@ const WrappedRoadmapTable = () => {
         <CssBaseline />
         <ScopedCssBaseline>
           <Callout severity="info">
-            Dates in the future are projected and may change.
+            Any products, features or functionality referenced in this
+            presentation that are not currently generally available may not be
+            delivered on time or at all. Product roadmaps do not represent a
+            commitment, obligation or promise to deliver any product, feature or
+            functionality, and you should not rely on them to make your purchase
+            decisions.
           </Callout>
           <InnerRoadmapTable />
         </ScopedCssBaseline>
