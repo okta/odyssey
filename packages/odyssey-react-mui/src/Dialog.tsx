@@ -21,12 +21,13 @@ import {
 import { Button } from "./Button";
 import { CloseIcon } from "./icons.generated";
 import {
+  cloneElement,
   memo,
-  ReactNode,
   useState,
   useEffect,
   useRef,
   ReactElement,
+  ReactNode,
 } from "react";
 
 import type { HtmlProps } from "./HtmlProps";
@@ -129,7 +130,8 @@ const Dialog = ({
     ) : (
       children
     );
-  //Prioritize new action button format (|| used as a fallback)
+
+  // Prioritize new action button format (|| used as a fallback)
   const actionButtons = [
     tertiaryCallToActionComponent || callToActionLastComponent,
     secondaryCallToActionComponent || callToActionSecondComponent,
@@ -160,7 +162,11 @@ const Dialog = ({
       </DialogContent>
 
       {actionButtons.length > 0 && (
-        <DialogActions>{actionButtons}</DialogActions>
+        <DialogActions>
+          {actionButtons.map((actionButton, index) =>
+            actionButton ? cloneElement(actionButton, { key: index }) : null,
+          )}
+        </DialogActions>
       )}
     </MuiDialog>
   );
