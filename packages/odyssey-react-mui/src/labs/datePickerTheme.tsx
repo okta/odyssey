@@ -145,13 +145,15 @@ export const datePickerTheme: ThemeOptions = {
       styleOverrides: {
         root: {
           display: "block",
+          // Matches Popper width
+          width: "calc(100vw - 64px)",
+          maxWidth: "55ch",
         },
         contentWrapper: ({ theme }) => ({
-          width: `${352 / 14}rem`,
+          width: "100%",
           paddingInline: theme.spacing(3),
 
           "@media (pointer: fine)": {
-            width: `${352 / 14}rem`,
             borderColor: theme.palette.divider,
             borderStyle: theme.mixins.borderStyle,
             borderWidth: theme.mixins.borderWidth,
