@@ -458,6 +458,7 @@ export const components = ({
           background: "transparent",
           paddingBlockStart: odysseyTokens.Spacing1,
           height: "100%",
+          maxHeight: "40vh",
         },
         paper: ({ ownerState }) => ({
           /**
@@ -1005,6 +1006,15 @@ export const components = ({
 
               "&::before": {
                 backgroundColor: odysseyTokens.PaletteDangerMain,
+              },
+            },
+
+            [`&.${chipClasses.colorInfo}`]: {
+              backgroundColor: odysseyTokens.PalettePrimaryLighter,
+              color: odysseyTokens.PalettePrimaryText,
+
+              "&::before": {
+                backgroundColor: odysseyTokens.HueBlue400,
               },
             },
 
