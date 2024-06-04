@@ -26,7 +26,7 @@ const storybookMeta: Meta<CardProps> = {
   argTypes: {
     title: {
       control: "text",
-      description: "The heading of the Card.",
+      description: "The heading of the card.",
       table: {
         type: {
           summary: "string",
@@ -37,7 +37,7 @@ const storybookMeta: Meta<CardProps> = {
     description: {
       control: "text",
       description:
-        "The body text of the Card. The consumer is responsible for truncating this string.",
+        "The body text of the card. The consumer is responsible for truncating this string.",
       table: {
         type: {
           summary: "string",
@@ -47,7 +47,7 @@ const storybookMeta: Meta<CardProps> = {
     },
     overline: {
       control: "text",
-      description: 'The "eyebrow" text above the Card title.',
+      description: 'The "eyebrow" text above the card title.',
       table: {
         type: {
           summary: "string",
@@ -58,7 +58,7 @@ const storybookMeta: Meta<CardProps> = {
     image: {
       control: null,
       description:
-        "An optional image or icon at the top of the Card, preferably as an img or svg element.",
+        "An optional image or icon at the top of the card, preferably as an img or svg element.",
       table: {
         type: {
           summary: "ReactElement",
@@ -68,7 +68,7 @@ const storybookMeta: Meta<CardProps> = {
     },
     onClick: {
       control: null,
-      description: "The event handler for when the user clicks the Card.",
+      description: "The event handler for when the user clicks the card.",
       table: {
         type: {
           summary: "MouseEventHandler",
@@ -79,7 +79,7 @@ const storybookMeta: Meta<CardProps> = {
     button: {
       control: null,
       description:
-        "The main action button for the Card. Not valid if the Card itself is clickable.",
+        "The main action button for the card. Not valid if the card itself is clickable.",
       table: {
         type: {
           summary: "ReactElement<typeof Button>",
@@ -90,7 +90,7 @@ const storybookMeta: Meta<CardProps> = {
     menuButtonChildren: {
       control: null,
       description:
-        "Menu items to be rendered in the Card's optional menu button. If this prop is undefined, the menu button will not be shown. Not valid if the Card itself is clickable.",
+        "Menu items to be rendered in the card's optional menu button. If this prop is undefined, the menu button will not be shown. Not valid if the card itself is clickable.",
       table: {
         type: {
           summary: "[MenuItem | Divider | ListSubheader]",
@@ -102,7 +102,7 @@ const storybookMeta: Meta<CardProps> = {
   args: {
     title: "Title",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor...",
+      "Identity can create great user experiences, increase customer sign-ups, and...",
     overline: "Overline",
     onClick: undefined,
   },
