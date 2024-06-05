@@ -15,6 +15,7 @@ import {
   Status,
   StatusProps,
   statusSeverityValues,
+  statusVariantValues,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
@@ -48,6 +49,20 @@ const storybookMeta: Meta<StatusProps> = {
         value: "radio",
       },
     },
+    variant: {
+      control: "radio",
+      options: statusVariantValues,
+      description:
+        "Whether the Status is displayed uncontained (`lamp`) or contained (`pill`)",
+      table: {
+        type: {
+          summary: statusVariantValues.join(" | "),
+        },
+        defaultValue: {
+          summary: "pill",
+        },
+      },
+    },
   },
   args: {
     label: "Warp drive in standby",
@@ -59,13 +74,13 @@ const storybookMeta: Meta<StatusProps> = {
 
 export default storybookMeta;
 
-export const Default: StoryObj<StatusProps> = {
+export const DefaultPill: StoryObj<StatusProps> = {
   args: {
     label: "Warp drive in standby",
   },
 };
 
-export const Error: StoryObj<StatusProps> = {
+export const ErrorPill: StoryObj<StatusProps> = {
   args: {
     label: "Warp drive unstable",
     severity: "error",
@@ -86,9 +101,40 @@ export const Success: StoryObj<StatusProps> = {
   },
 };
 
-export const Warning: StoryObj<StatusProps> = {
+export const WarningPill: StoryObj<StatusProps> = {
   args: {
     label: "Warp fuel low",
     severity: "warning",
+  },
+};
+
+export const DefaultLamp: StoryObj<StatusProps> = {
+  args: {
+    label: "Warp drive in standby",
+    variant: "lamp",
+  },
+};
+
+export const ErrorLamp: StoryObj<StatusProps> = {
+  args: {
+    label: "Warp drive unstable",
+    severity: "error",
+    variant: "lamp",
+  },
+};
+
+export const SuccessLamp: StoryObj<StatusProps> = {
+  args: {
+    label: "Warp drive online",
+    severity: "success",
+    variant: "lamp",
+  },
+};
+
+export const WarningLamp: StoryObj<StatusProps> = {
+  args: {
+    label: "Warp fuel low",
+    severity: "warning",
+    variant: "lamp",
   },
 };
