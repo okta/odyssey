@@ -91,14 +91,14 @@ const SwitchLabel = ({
   const statusTextColor = isDisabled
     ? odysseyDesignTokens.TypographyColorDisabled
     : checked
-    ? odysseyDesignTokens.PaletteSuccessText
-    : odysseyDesignTokens.HueNeutral700;
+      ? odysseyDesignTokens.PaletteSuccessText
+      : odysseyDesignTokens.HueNeutral700;
 
   const statusBackgroundColor = isDisabled
     ? odysseyDesignTokens.HueNeutral100
     : checked
-    ? odysseyDesignTokens.PaletteSuccessLighter
-    : odysseyDesignTokens.HueNeutral100;
+      ? odysseyDesignTokens.PaletteSuccessLighter
+      : odysseyDesignTokens.HueNeutral100;
 
   return (
     <>
