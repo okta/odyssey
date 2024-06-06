@@ -98,6 +98,16 @@ const storybookMeta: Meta<CardProps> = {
         defaultValue: "",
       },
     },
+    children: {
+      control: null,
+      description: "Arbitrary content to be added at the bottom of the card.",
+      table: {
+        type: {
+          summary: "ReactNode",
+        },
+        defaultValue: "",
+      },
+    },
   },
   args: {
     title: "Title",
@@ -174,7 +184,23 @@ export const ClickableWithoutImage: StoryObj<CardProps> = {
 export const ButtonWithoutImage: StoryObj<typeof Card> = {
   render: ({ ...props }) => (
     <Box sx={{ maxWidth: 262 }}>
-      <Card {...props} />
+      <Card button={<Button label="Click me" />} {...props} />
+    </Box>
+  ),
+};
+
+export const CustomContent: StoryObj<typeof Card> = {
+  render: ({ ...props }) => (
+    <Box sx={{ maxWidth: 262 }}>
+      <Card {...props} children={<Box>This is arbitrary content.</Box>} />
+    </Box>
+  ),
+};
+
+export const JustCustomContent: StoryObj<typeof Card> = {
+  render: () => (
+    <Box sx={{ maxWidth: 262 }}>
+      <Card children={<Box>This is arbitrary content.</Box>} />
     </Box>
   ),
 };

@@ -16,6 +16,7 @@ import {
   memo,
   useMemo,
   useEffect,
+  ReactNode,
 } from "react";
 import {
   Card as MuiCard,
@@ -33,6 +34,7 @@ import {
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext";
 import { Heading5, Paragraph, Support } from "./Typography";
+import { Box } from "./Box";
 
 export const CARD_IMAGE_HEIGHT = "64px";
 
@@ -41,6 +43,7 @@ export type CardProps = {
   image?: ReactElement;
   overline?: string;
   title?: string;
+  children?: ReactNode;
 } & (
   | {
       onClick: MouseEventHandler;
@@ -86,6 +89,7 @@ const Card = ({
   onClick,
   overline,
   title,
+  children,
 }: CardProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
@@ -114,6 +118,18 @@ const Card = ({
             </ButtonContext.Provider>
           </MuiCardActions>
         )}
+
+        {children && (
+          <Box
+            sx={{
+              ["&:not(:first-child)"]: {
+                marginBlockStart: 3,
+              },
+            }}
+          >
+            {children}
+          </Box>
+        )}
       </>
     ),
     [
@@ -124,6 +140,7 @@ const Card = ({
       overline,
       title,
       odysseyDesignTokens,
+      children,
     ],
   );
 
