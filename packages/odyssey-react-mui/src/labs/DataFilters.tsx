@@ -20,13 +20,7 @@ import {
   useRef,
   useState,
 } from "react";
-import styled from "@emotion/styled";
-import { Autocomplete } from "../Autocomplete";
-import { Box } from "../Box";
-import { TagList } from "../TagList";
-import { Tag } from "../Tag";
-import { SearchField } from "../SearchField";
-import { Button } from "../Button";
+import { Trans, useTranslation } from "react-i18next";
 import {
   IconButton as MuiIconButton,
   Menu as MuiMenu,
@@ -34,24 +28,52 @@ import {
   Popover as MuiPopover,
   Typography as MuiTypography,
 } from "@mui/material";
+import { MRT_ColumnDef, MRT_RowData } from "material-react-table";
+import styled from "@emotion/styled";
+
+import { Autocomplete } from "../Autocomplete";
+import { Box } from "../Box";
+import { Button } from "../Button";
+import { CheckboxGroup } from "../CheckboxGroup";
+import { Checkbox } from "../Checkbox";
 import {
   CheckIcon,
   ChevronRightIcon,
   CloseCircleFilledIcon,
   FilterIcon,
 } from "../icons.generated";
-import { Subordinate } from "../Typography";
-import { TextField } from "../TextField";
-import { CheckboxGroup } from "../CheckboxGroup";
-import { Checkbox } from "../Checkbox";
+import {
+  DesignTokens,
+  useOdysseyDesignTokens,
+} from "../OdysseyDesignTokensContext";
 import { RadioGroup } from "../RadioGroup";
 import { Radio } from "../Radio";
-import { MRT_ColumnDef, MRT_RowData } from "material-react-table";
-import { Trans, useTranslation } from "react-i18next";
+import { SearchField } from "../SearchField";
+import { Tag } from "../Tag";
+import { TagList } from "../TagList";
+import { TextField } from "../TextField";
+import { Subordinate } from "../Typography";
 
-export type DataFilterValue = string | string[] | undefined;
+const AutocompleteOuterContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  display: "flex",
+  alignItems: "flex-end",
+  gap: odysseyDesignTokens.Spacing2,
+}));
 
-export type UpdateFilters = ({
+const AutocompleteInnerContainer = styled("div")({
+  width: "100%",
+});
+
+type Option = {
+  label: string;
+  value: string;
+};
+
+export type DataFilterValue = string | string[] | Option[] | undefined;
+
+export type UpdateFiltersOrValues = ({
   filterId,
   value,
 }: {
@@ -66,6 +88,12 @@ export type DataFilter = {
    * as the column it'll be applied to.
    */
   id: Exclude<MRT_ColumnDef<MRT_RowData>["accessorKey"], undefined>;
+  /**
+   * `Autocomplete` normally only allows values that exist in the list box. This feature allows you to enter in any value in the text field and have that be the stored value in `Autocomplete`
+   *
+   * NOTE: This only applies when `variant` is `autocomplete`
+   */
+  isCustomValueAllowed?: boolean;
   /**
    * The human-friendly name of the filter.
    */
@@ -85,11 +113,11 @@ export type DataFilter = {
    * If the filter control has preset options (such as a select or multi-select),
    * these are the options provided.
    */
-  options?: Array<{ label: string; value: string }>;
+  options?: Option[];
   /**
    * A callback which renders a custom filter control
    */
-  render?: (updateFilters: UpdateFilters) => ReactNode;
+  render?: (updateFilters: UpdateFiltersOrValues) => ReactNode;
 };
 
 // This is the type of the DataFilters component itself
@@ -136,6 +164,97 @@ export type DataFiltersProps = {
   isDisabled?: boolean;
 };
 
+type FilterTagsProps = {
+  activeFilters: DataFilter[];
+  updateFilterAndInputValues: UpdateFiltersOrValues;
+};
+
+type FiltersToRender = {
+  id: string;
+  label: string;
+  value: string;
+};
+
+const FilterTags = ({
+  activeFilters,
+  updateFilterAndInputValues,
+}: FilterTagsProps) => {
+  const filtersWithValues = activeFilters.filter(
+    (activeFilter: DataFilter) => activeFilter.value,
+  );
+  const filtersToRender: FiltersToRender[] = [];
+
+  filtersWithValues.forEach((filter) => {
+    if (Array.isArray(filter.value)) {
+      filter.value.forEach((filterValue) => {
+        const formattedValue =
+          typeof filterValue === "string" ? filterValue : filterValue.value;
+        filtersToRender.push({
+          id: filter.id,
+          label: filter.label,
+          value: formattedValue,
+        });
+      });
+    }
+    if (typeof filter.value === "string") {
+      filtersToRender.push({
+        id: filter.id,
+        label: filter.label,
+        value: filter.value,
+      });
+    }
+  });
+
+  const getFilter = (id: string) =>
+    filtersWithValues.find((filter) => filter.id === id);
+
+  const removeValueFromFilterAndInput = (
+    id: string,
+    removedFilterValue: string,
+  ) => {
+    const currentFilter = getFilter(id);
+
+    if (currentFilter) {
+      const { value } = currentFilter;
+
+      if (Array.isArray(value)) {
+        const updatedValues = value.filter((currentValue) => {
+          return (currentValue as Option).value !== removedFilterValue;
+        });
+        updateFilterAndInputValues({
+          filterId: id,
+          value:
+            updatedValues.length > 0 ? (updatedValues as Option[]) : undefined,
+        });
+      }
+
+      if (typeof value === "string") {
+        updateFilterAndInputValues({
+          filterId: id,
+          value: undefined,
+        });
+      }
+    }
+  };
+
+  return (
+    <TagList>
+      {filtersToRender.map((filter) => (
+        <Tag
+          key={`${filter.label}: ${filter.value}`}
+          label={`${filter.label}: ${filter.value}`}
+          onRemove={() =>
+            removeValueFromFilterAndInput(filter.id, filter.value)
+          }
+        />
+      ))}
+    </TagList>
+  );
+};
+
+const MemoizedFilterTags = memo(FilterTags);
+MemoizedFilterTags.displayName = "FilterTags";
+
 const DataFilters = ({
   onChangeSearch,
   onChangeFilters,
@@ -148,6 +267,7 @@ const DataFilters = ({
 }: DataFiltersProps) => {
   const [filters, setFilters] = useState<DataFilter[]>(filtersProp);
   const { t } = useTranslation();
+  const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const initialInputValues = useMemo(() => {
     return filtersProp.reduce(
@@ -162,20 +282,25 @@ const DataFilters = ({
   const [inputValues, setInputValues] = useState(initialInputValues);
 
   const [searchValue, setSearchValue] = useState<string>(defaultSearchTerm);
-  const activeFilters = useMemo(() => {
-    return filters.filter(
-      (filter) => typeof filter.value === "string" && filter.value,
-    );
-  }, [filters]);
+
+  const activeFilters = useMemo(
+    () => filters.filter((filter) => filter.value),
+    [filters],
+  );
+
   const [isFiltersMenuOpen, setIsFiltersMenuOpen] = useState<boolean>(false);
+
   const [filtersMenuAnchorElement, setFiltersMenuAnchorElement] = useState<
     HTMLElement | undefined
   >();
+
   const [isFilterPopoverOpen, setIsFilterPopoverOpen] =
     useState<boolean>(false);
+
   const [filterPopoverAnchorElement, setFilterPopoverAnchorElement] = useState<
     HTMLElement | undefined
   >();
+
   const [filterPopoverCurrentFilter, setFilterPopoverCurrentFilter] = useState<
     DataFilter | undefined
   >();
@@ -187,6 +312,7 @@ const DataFilters = ({
   }, [filters, onChangeFilters]);
 
   const debouncer = useRef<NodeJS.Timeout | undefined>(undefined);
+
   useEffect(() => {
     if (!hasSearchSubmitButton) {
       if (debouncer.current) {
@@ -200,28 +326,17 @@ const DataFilters = ({
   }, [onChangeSearch, searchValue, searchDelayTime, hasSearchSubmitButton]);
 
   const autocompleteOptions = useMemo(() => {
-    // Check if filterPopoverCurrentFilter and filterPopoverCurrentFilter.options are defined
-    if (
-      filterPopoverCurrentFilter?.variant === "autocomplete" &&
-      filterPopoverCurrentFilter?.options
-    ) {
-      return filterPopoverCurrentFilter.options.map((option) => ({
-        label: option.label,
-      }));
-    }
-
-    // if filterPopoverCurrentFilter or filterPopoverCurrentFilter.options is undefined
-    return [];
+    return filterPopoverCurrentFilter?.options || [];
   }, [filterPopoverCurrentFilter]);
 
-  const updateInputValue = useCallback(
-    ({ filterId, value }: { filterId: string; value: DataFilterValue }) => {
+  const updateInputValue = useCallback<UpdateFiltersOrValues>(
+    ({ filterId, value }) => {
       setInputValues({ ...inputValues, [filterId]: value });
     },
     [inputValues],
   );
 
-  const updateFilters = useCallback<UpdateFilters>(
+  const updateFilters = useCallback<UpdateFiltersOrValues>(
     ({ filterId, value }) => {
       const updatedFilters = filtersProp.map((filter) => ({
         ...filter,
@@ -233,53 +348,54 @@ const DataFilters = ({
     [inputValues, filtersProp],
   );
 
-  const getAutoCompleteLabel = <
-    Value extends { label: string } | Array<{ label: string }>,
-  >(
-    value: Value,
-  ) => {
-    if (Array.isArray(value)) {
-      // Iterating to find the label
-      return value
-        .map((valueElement) => {
-          if (typeof valueElement === "string") {
-            return undefined;
-          }
-          return valueElement.label;
-        })
-        .filter((item): item is string => Boolean(item));
-    }
-
-    return value?.label;
-  };
-
-  const handleMultiSelectChange = useCallback(
-    (filterId: string, value: string, submit: boolean = false) => {
-      const startingValues = filtersProp
-        .find((filter) => filter.id === filterId)
-        ?.options?.map((option) => option.value);
-      const currentValues = (inputValues[filterId] ??
-        startingValues) as string[];
-      const updatedValues = currentValues.includes(value)
-        ? currentValues.filter((item: string) => item !== value)
-        : [...currentValues, value];
-      const valuesToSave =
-        updatedValues.sort().join() === startingValues?.sort().join()
-          ? undefined
-          : updatedValues;
-
-      setInputValues({ ...inputValues, [filterId]: valuesToSave });
-
-      if (submit) {
-        const updatedFilters = filtersProp.map((filter) => ({
-          ...filter,
-          value: filter.id === filterId ? valuesToSave : inputValues[filter.id],
-        }));
-
-        setFilters(updatedFilters);
-      }
+  const updateFilterAndInputValues = useCallback<UpdateFiltersOrValues>(
+    ({ filterId, value }) => {
+      updateInputValue({ filterId, value });
+      updateFilters({ filterId, value });
     },
-    [inputValues, filtersProp],
+    [updateFilters, updateInputValue],
+  );
+
+  const handleCheckboxFilterAndInputValueChange = useCallback<
+    (filterId: string, option: Option, checked: boolean) => void
+  >(
+    (filterId, option, checked) => {
+      const currentValues = (inputValues[filterId] as Option[]) || [];
+
+      const updatedValues = checked
+        ? [...currentValues, option]
+        : currentValues.filter(
+            (inputValue) => inputValue.value !== option.value,
+          );
+
+      const normalizedUpdatedValues =
+        updatedValues.length > 0 ? updatedValues : undefined;
+
+      setInputValues({
+        ...inputValues,
+        [filterId]: normalizedUpdatedValues,
+      });
+
+      const updatedFilters = filters.map((filter) => ({
+        ...filter,
+        value:
+          filter.id === filterId
+            ? normalizedUpdatedValues
+            : inputValues[filter.id],
+      }));
+
+      setFilters(updatedFilters);
+    },
+    [filters, inputValues],
+  );
+
+  const handleAutocompleteFilterChange = useCallback<
+    (filterId: string, option: Option[]) => void
+  >(
+    (filterId, option) => {
+      setInputValues({ ...inputValues, [filterId]: option });
+    },
+    [inputValues],
   );
 
   const clearAllFilters = useCallback(() => {
@@ -309,16 +425,6 @@ const DataFilters = ({
 
     setFilters(updatedFilters);
   }, [inputValues, filtersProp]);
-
-  const AutocompleteOuterContainer = styled("div")({
-    display: "flex",
-    gap: "2",
-    alignItems: "flex-end",
-  });
-
-  const AutocompleteInnerContainer = styled("div")({
-    width: "100%",
-  });
 
   const filterMenu = useMemo(
     () => (
@@ -435,6 +541,14 @@ const DataFilters = ({
     ],
   );
 
+  const autoCompleteValue = useMemo(
+    () =>
+      filterPopoverCurrentFilter?.id
+        ? (inputValues[filterPopoverCurrentFilter.id] as Option[])
+        : undefined,
+    [filterPopoverCurrentFilter, inputValues],
+  );
+
   return (
     <Box>
       {/* Upper section */}
@@ -468,7 +582,7 @@ const DataFilters = ({
                       setIsFiltersMenuOpen(false);
                     }
                   }
-
+                  handleFilterSubmit();
                   setIsFilterPopoverOpen(false);
                 }}
               >
@@ -480,6 +594,7 @@ const DataFilters = ({
                       setIsFilterPopoverOpen(false);
                       setIsFiltersMenuOpen(false);
                     }}
+                    noValidate
                   >
                     {filterPopoverCurrentFilter?.render ? (
                       filterPopoverCurrentFilter.render(updateFilters)
@@ -489,35 +604,22 @@ const DataFilters = ({
                         {filterPopoverCurrentFilter?.variant ===
                           "autocomplete" &&
                           filterPopoverCurrentFilter?.options && (
-                            <AutocompleteOuterContainer>
+                            <AutocompleteOuterContainer
+                              odysseyDesignTokens={odysseyDesignTokens}
+                            >
                               <AutocompleteInnerContainer>
                                 <Autocomplete
-                                  label={filterPopoverCurrentFilter.label}
-                                  value={
-                                    inputValues[
-                                      filterPopoverCurrentFilter.id
-                                    ] ?? ""
+                                  hasMultipleChoices
+                                  isCustomValueAllowed={
+                                    filterPopoverCurrentFilter?.isCustomValueAllowed
                                   }
+                                  label={filterPopoverCurrentFilter.label}
+                                  value={autoCompleteValue}
                                   onChange={(_, value) => {
-                                    const label =
-                                      typeof value === "string"
-                                        ? getAutoCompleteLabel({ label: value })
-                                        : Array.isArray(value)
-                                          ? getAutoCompleteLabel(
-                                              value.map((item) =>
-                                                typeof item === "string"
-                                                  ? { label: item }
-                                                  : item,
-                                              ),
-                                            )
-                                          : value
-                                            ? getAutoCompleteLabel(value)
-                                            : "";
-
-                                    updateInputValue({
-                                      filterId: filterPopoverCurrentFilter.id,
-                                      value: label,
-                                    });
+                                    handleAutocompleteFilterChange(
+                                      filterPopoverCurrentFilter.id,
+                                      value as Option[],
+                                    );
                                   }}
                                   options={autocompleteOptions}
                                 />
@@ -606,28 +708,32 @@ const DataFilters = ({
                               isRequired
                             >
                               {filterPopoverCurrentFilter.options.map(
-                                (option: { label: string; value: string }) => (
-                                  <Checkbox
-                                    key={option.value}
-                                    label={option.label}
-                                    value={option.value}
-                                    isDefaultChecked={
-                                      inputValues[
-                                        filterPopoverCurrentFilter.id
-                                      ]?.includes(option.value) ||
-                                      inputValues[
-                                        filterPopoverCurrentFilter.id
-                                      ] === undefined
-                                    }
-                                    onChange={() =>
-                                      handleMultiSelectChange(
-                                        filterPopoverCurrentFilter.id,
-                                        option.value,
-                                        true,
-                                      )
-                                    }
-                                  />
-                                ),
+                                (option: { label: string; value: string }) => {
+                                  const checkFilterInputValuesAsArray =
+                                    (inputValues[
+                                      filterPopoverCurrentFilter.id
+                                    ] as Option[]) || [];
+                                  const isOptionValueInInputValues =
+                                    checkFilterInputValuesAsArray.some(
+                                      (inputValue) =>
+                                        inputValue.value === option.value,
+                                    );
+                                  return (
+                                    <Checkbox
+                                      key={option.value}
+                                      label={option.label}
+                                      value={option.value}
+                                      isChecked={isOptionValueInInputValues}
+                                      onChange={(_, checked) => {
+                                        handleCheckboxFilterAndInputValueChange(
+                                          filterPopoverCurrentFilter.id,
+                                          option,
+                                          checked,
+                                        );
+                                      }}
+                                    />
+                                  );
+                                },
                               )}
                             </CheckboxGroup>
                           )}
@@ -638,12 +744,7 @@ const DataFilters = ({
                             <RadioGroup
                               label={filterPopoverCurrentFilter.label}
                               onChange={(_, value) => {
-                                updateInputValue({
-                                  filterId: filterPopoverCurrentFilter.id,
-                                  value,
-                                });
-
-                                updateFilters({
+                                updateFilterAndInputValues({
                                   filterId: filterPopoverCurrentFilter.id,
                                   value,
                                 });
@@ -748,25 +849,10 @@ const DataFilters = ({
             marginTop: 4,
           }}
         >
-          <TagList>
-            {activeFilters.map((filter) => (
-              <Tag
-                key={filter.label}
-                label={`${filter.label}: ${filter.value}`}
-                onRemove={() => {
-                  updateInputValue({
-                    filterId: filter.id,
-                    value: undefined,
-                  });
-
-                  updateFilters({
-                    filterId: filter.id,
-                    value: undefined,
-                  });
-                }}
-              />
-            ))}
-          </TagList>
+          <MemoizedFilterTags
+            activeFilters={activeFilters}
+            updateFilterAndInputValues={updateFilterAndInputValues}
+          />
         </Box>
       )}
     </Box>

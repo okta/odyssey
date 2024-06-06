@@ -25,14 +25,16 @@ declare module "@mui/material/Alert" {
 
 declare module "@mui/material/Button" {
   interface ButtonPropsVariantOverrides {
+    contained: false;
+    danger: true;
+    dangerSecondary: true;
     floating: true;
+    floatingAction: true;
+    outlined: false;
     primary: true;
     secondary: true;
-    danger: true;
     tertiary: true;
     text: false;
-    contained: false;
-    outlined: false;
   }
   interface ButtonPropsColorOverrides {
     inherit: false;

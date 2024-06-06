@@ -51,6 +51,15 @@ const storybookMeta: Meta<ButtonProps> = {
         },
       },
     },
+    href: {
+      control: "text",
+      description: "Optional href to render the button as a link",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     id: {
       control: null,
       description: "An optional ID for the button",
@@ -261,6 +270,14 @@ export const ButtonDanger: StoryObj<ButtonProps> = {
   },
 };
 
+export const ButtonDangerSecondary: StoryObj<ButtonProps> = {
+  name: "Danger Secondary",
+  args: {
+    label: "Add crew",
+    variant: "dangerSecondary",
+  },
+};
+
 export const ButtonDangerDisabled: StoryObj<ButtonProps> = {
   name: "Danger, Disabled",
   args: {
@@ -284,7 +301,20 @@ export const ButtonFloating: StoryObj<ButtonProps> = {
     });
   },
 };
-
+export const ButtonFloatingAction: StoryObj<ButtonProps> = {
+  name: "Floating Action",
+  args: {
+    label: "Add crew",
+    variant: "floatingAction",
+  },
+  play: async ({ args, canvasElement, step }: playType) => {
+    await interactWithButton({ canvasElement, step })({
+      args,
+      actionName: "Button Floating Action",
+      hoverState: false,
+    });
+  },
+};
 export const ButtonFloatingDisabled: StoryObj<ButtonProps> = {
   name: "Floating, Disabled",
   args: {
@@ -293,7 +323,15 @@ export const ButtonFloatingDisabled: StoryObj<ButtonProps> = {
     variant: "floating",
   },
 };
-
+export const ButtonSecondaryAsLink: StoryObj<ButtonProps> = {
+  name: "Button as a link",
+  args: {
+    label: "Visit okta.com",
+    variant: "floatingAction",
+    href: "https://okta.com",
+    onClick: undefined,
+  },
+};
 export const ButtonSmall: StoryObj<ButtonProps> = {
   name: "Small",
   args: {
@@ -395,8 +433,10 @@ export const KitchenSink: StoryObj<ButtonProps> = {
     <Box sx={{ display: "flex", flexWrap: "wrap", rowGap: 2 }}>
       <Button label="Primary" variant="primary" />
       <Button label="Secondary" variant="secondary" />
+      <Button label="Danger Secondary" variant="dangerSecondary" />
       <Button label="Danger" variant="danger" />
       <Button label="Floating" variant="floating" />
+      <Button label="Floating Action" variant="floatingAction" />
       <Button ariaLabel="Add" startIcon={<AddIcon />} variant="primary" />
     </Box>
   ),

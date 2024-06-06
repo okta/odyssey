@@ -1,31 +1,38 @@
 #!/bin/bash
 
-NODE_VERSION=20.7.0
+echo "Setting up CI environment for Bacon"
 
-# Note: Yarn will automatically switch over to yarn 3 after installing yarn 1.x
-YARN_VERSION=1.22.19
-
-export ORIGINAL_REPO=$REPO
-export CURRENT_DIR=$(pwd)
 REPO=odyssey
 
-cd ${OKTA_HOME}/${REPO}
+REPO_DIR="${OKTA_HOME}/${REPO}"
+
+NODE_VERSION=$(cat "${REPO_DIR}/.nvmrc")
+YARN_VERSION=1.22.19
+
+yum install gnupg2 --allowerasing -y
 
 echo "installing node ${NODE_VERSION}"
-
-if setup_service node-and-yarn $NODE_VERSION $YARN_VERSION; then
-  echo "Installed node ${NODE_VERSION} and yarn $YARN_VERSION successfully"
+if setup_service node ${NODE_VERSION}; then
+  echo "Installed node ${NODE_VERSION} successfully"
 else
-  echo "node ${NODE_VERSION} and yarn $YARN_VERSION installation failed."
-fi
-
-# Override .yarnrc.yml npmRegistryServer with Okta's
-export YARN_NPM_REGISTRY_SERVER=${ARTIFACTORY_URL}/api/npm/npm-okta-master
-
-if ! yarn install --immutable; then
-  echo "yarn install command failed! Exiting..."
+  echo "Node ${NODE_VERSION} installation failed."
   exit ${FAILED_SETUP}
 fi
 
-REPO=$ORIGINAL_REPO
-cd $CURRENT_DIR
+echo "installing yarn v${YARN_VERSION}"
+if setup_service yarn ${YARN_VERSION}; then
+  echo "Installed yarn ${YARN_VERSION} successfully"
+else
+  echo "Yarn ${YARN_VERSION} installation failed."
+  exit ${FAILED_SETUP}
+fi
+
+cd ${OKTA_HOME}/${REPO}
+
+if ! yarn install --immutable; then
+  echo "Installing dependencies failed! Exiting..."
+  exit ${FAILED_SETUP}
+fi
+
+export ORIGINAL_REPO=$REPO
+export CURRENT_DIR=$(pwd)
