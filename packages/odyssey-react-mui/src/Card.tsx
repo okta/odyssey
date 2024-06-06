@@ -49,11 +49,13 @@ export type CardProps = {
       onClick: MouseEventHandler;
       button?: never;
       menuButtonChildren?: never;
+      AuxRail?: never;
     }
   | {
       onClick?: never;
       button?: ReactElement<typeof Button>;
       menuButtonChildren?: MenuButtonProps["children"];
+      AuxRail?: ReactNode;
     }
 );
 
@@ -90,47 +92,64 @@ const Card = ({
   overline,
   title,
   children,
+  AuxRail,
 }: CardProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const cardContent = useMemo(
     () => (
-      <>
-        {image && (
-          <ImageContainer
-            odysseyDesignTokens={odysseyDesignTokens}
-            hasMenuButtonChildren={Boolean(menuButtonChildren)}
-          >
-            {image}
-          </ImageContainer>
-        )}
-
-        {overline && <Support component="div">{overline}</Support>}
-        {title && <Heading5 component="div">{title}</Heading5>}
-        {description && (
-          <Paragraph color="textSecondary">{description}</Paragraph>
-        )}
-
-        {button && (
-          <MuiCardActions>
-            <ButtonContext.Provider value={buttonProviderValue}>
-              {button}
-            </ButtonContext.Provider>
-          </MuiCardActions>
-        )}
-
-        {children && (
+      <Box
+        sx={{
+          display: "flex",
+        }}
+      >
+        {AuxRail && (
           <Box
             sx={{
-              ["&:not(:first-child)"]: {
-                marginBlockStart: 3,
-              },
+              marginInlineEnd: 3,
+              marginInlineStart: -2,
             }}
           >
-            {children}
+            {AuxRail}
           </Box>
         )}
-      </>
+        <Box>
+          {image && (
+            <ImageContainer
+              odysseyDesignTokens={odysseyDesignTokens}
+              hasMenuButtonChildren={Boolean(menuButtonChildren)}
+            >
+              {image}
+            </ImageContainer>
+          )}
+
+          {overline && <Support component="div">{overline}</Support>}
+          {title && <Heading5 component="div">{title}</Heading5>}
+          {description && (
+            <Paragraph color="textSecondary">{description}</Paragraph>
+          )}
+
+          {button && (
+            <MuiCardActions>
+              <ButtonContext.Provider value={buttonProviderValue}>
+                {button}
+              </ButtonContext.Provider>
+            </MuiCardActions>
+          )}
+
+          {children && (
+            <Box
+              sx={{
+                ["&:not(:first-child)"]: {
+                  marginBlockStart: 3,
+                },
+              }}
+            >
+              {children}
+            </Box>
+          )}
+        </Box>
+      </Box>
     ),
     [
       button,

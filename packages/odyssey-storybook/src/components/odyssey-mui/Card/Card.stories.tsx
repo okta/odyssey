@@ -19,6 +19,7 @@ import {
   MenuItem,
   CardProps,
 } from "@okta/odyssey-react-mui";
+import { Checkbox } from "@mui/material";
 
 const storybookMeta: Meta<CardProps> = {
   title: "MUI Components/Card",
@@ -101,6 +102,17 @@ const storybookMeta: Meta<CardProps> = {
     children: {
       control: null,
       description: "Arbitrary content to be added at the bottom of the card.",
+      table: {
+        type: {
+          summary: "ReactNode",
+        },
+        defaultValue: "",
+      },
+    },
+    AuxRail: {
+      control: null,
+      description:
+        "Arbitrary content to be added at the start of the card (in LTR languages, the left side).",
       table: {
         type: {
           summary: "ReactNode",
@@ -201,6 +213,21 @@ export const JustCustomContent: StoryObj<typeof Card> = {
   render: () => (
     <Box sx={{ maxWidth: 262 }}>
       <Card children={<Box>This is arbitrary content.</Box>} />
+    </Box>
+  ),
+};
+
+export const AuxRail: StoryObj<typeof Card> = {
+  render: ({ ...props }) => (
+    <Box sx={{ maxWidth: 262 }}>
+      <Card
+        {...props}
+        AuxRail={
+          <Box sx={{ marginBlockStart: -1 }}>
+            <Checkbox />
+          </Box>
+        }
+      />
     </Box>
   ),
 };
