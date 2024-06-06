@@ -11,13 +11,13 @@
  */
 
 import {
-  MRT_TableContainer,
-  MRT_TableOptions,
-  useMaterialReactTable,
   MRT_Row,
   MRT_RowData,
-  MRT_TableInstance,
   MRT_RowSelectionState,
+  MRT_TableContainer,
+  MRT_TableInstance,
+  MRT_TableOptions,
+  useMaterialReactTable,
 } from "material-react-table";
 import {
   SetStateAction,
@@ -29,8 +29,8 @@ import {
   ReactNode,
   Dispatch,
 } from "react";
-import { TableProps, TableState, UniversalProps, DataTableCell } from "./types";
-import { DataTableRowData } from "../../DataTable";
+import { TableProps, TableState, UniversalProps } from "./types";
+import { DataTableCell } from "./dataTypes";
 import { DataTableRowActions } from "../../DataTable/DataTableRowActions";
 import {
   ArrowDownIcon,
@@ -49,13 +49,15 @@ import { Box } from "../../Box";
 import { CSSObject } from "@emotion/styled";
 
 export type TableContentProps = {
-  data: MRT_TableOptions<DataTableRowData>["data"];
+  data: MRT_RowData[];
   columns: TableProps["columns"];
   getRowId: UniversalProps["getRowId"];
   tableState: TableState;
   setTableState: Dispatch<SetStateAction<TableState>>;
   tableOptions: TableProps;
   isLoading: boolean;
+  isEmpty?: boolean;
+  isNoResults?: boolean;
   hasRowReordering: UniversalProps["hasRowReordering"];
   onReorderRows: UniversalProps["onReorderRows"];
   totalRows: UniversalProps["totalRows"];
@@ -104,7 +106,7 @@ export type TableContentProps = {
     pageIndex: number;
     pageSize: number;
   };
-  draggingRow?: MRT_Row<DataTableRowData> | null;
+  draggingRow?: MRT_Row<MRT_RowData> | null;
 };
 
 const TableContent = ({
@@ -115,6 +117,8 @@ const TableContent = ({
   tableState,
   setTableState,
   isLoading,
+  isEmpty,
+  isNoResults,
   hasRowReordering,
   onReorderRows,
   rowReorderingUtilities,
@@ -170,7 +174,7 @@ const TableContent = ({
   }, [tableState]);
 
   const defaultCell = useCallback(
-    ({ cell }: { cell: DataTableCell<DataTableRowData> }) => {
+    ({ cell }: { cell: DataTableCell<MRT_RowData> }) => {
       const value = cell.getValue<string>();
       const hasTextWrapping = cell.column.columnDef.hasTextWrapping;
 
@@ -203,7 +207,7 @@ const TableContent = ({
   } = rowReorderingUtilities;
 
   const renderRowActions = useCallback(
-    ({ row }: { row: MRT_Row<DataTableRowData> }) => {
+    ({ row }: { row: MRT_Row<MRT_RowData> }) => {
       // TODO: is there a better way to get the row index?
       // Maybe inject the true index into each row when retrieved
       const currentIndex =
@@ -237,7 +241,7 @@ const TableContent = ({
   );
 
   const dataTable = useMaterialReactTable({
-    data,
+    data: !isEmpty && !isNoResults ? data : [],
     columns,
     getRowId,
     state: {
@@ -255,7 +259,7 @@ const TableContent = ({
     },
     ...dataTableImmutableSettings,
     displayColumnDefOptions:
-      displayColumnDefOptions as MRT_TableOptions<DataTableRowData>["displayColumnDefOptions"],
+      displayColumnDefOptions as MRT_TableOptions<MRT_RowData>["displayColumnDefOptions"],
     muiTableProps: {
       ref: tableContentRef,
     },

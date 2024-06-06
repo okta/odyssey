@@ -13,18 +13,18 @@
 import { ReactNode, memo } from "react";
 import { Card as MuiCard, Checkbox as MuiCheckbox } from "@mui/material";
 import { Box } from "../../Box";
-import { DataTableRowData } from "../../DataTable";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
 import styled from "@emotion/styled";
+import { MRT_RowData } from "material-react-table";
 
 export type StackItemProps = {
   children: ReactNode;
   isSelectable?: boolean;
   isSelected?: boolean;
-  onToggleRowSelection?: (row: DataTableRowData) => void;
+  onToggleRowSelection?: (row: MRT_RowData) => void;
   menuActions?: ReactNode;
 };
 

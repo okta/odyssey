@@ -12,25 +12,26 @@
 
 import { Dispatch, ReactNode, SetStateAction, memo, useCallback } from "react";
 import { StackLayout, StackProps, UniversalProps } from "./types";
+import { Box } from "../../Box";
+import { CSSObject } from "@emotion/styled";
+import { StackItem } from "./StackItem";
+import { DataTableRowActions } from "../../DataTable/DataTableRowActions";
 import {
   MRT_Row,
   MRT_RowData,
   MRT_RowSelectionState,
   MRT_TableInstance,
-  MRT_TableOptions,
 } from "material-react-table";
-import { DataTableRowData } from "../../DataTable";
-import { Box } from "../../Box";
-import { CSSObject } from "@emotion/styled";
-import { StackItem } from "./StackItem";
-import { DataTableRowActions } from "../../DataTable/DataTableRowActions";
+import { CircularProgress } from "../../CircularProgress";
 
 export type StackContentProps = {
   currentLayout: StackLayout;
-  data: MRT_TableOptions<DataTableRowData>["data"];
+  data: MRT_RowData[];
   getRowId: UniversalProps["getRowId"];
   stackOptions: StackProps;
   isLoading: boolean;
+  isEmpty?: boolean;
+  isNoResults?: boolean;
   hasRowReordering: UniversalProps["hasRowReordering"];
   onReorderRows: UniversalProps["onReorderRows"];
   totalRows: UniversalProps["totalRows"];
@@ -79,7 +80,7 @@ export type StackContentProps = {
     pageIndex: number;
     pageSize: number;
   };
-  draggingRow?: MRT_Row<DataTableRowData> | null;
+  draggingRow?: MRT_Row<MRT_RowData> | null;
 };
 
 const StackContent = ({
@@ -88,6 +89,8 @@ const StackContent = ({
   getRowId,
   stackOptions,
   isLoading,
+  isEmpty,
+  isNoResults,
   hasRowReordering,
   onReorderRows,
   rowReorderingUtilities,
@@ -118,11 +121,16 @@ const StackContent = ({
   });
 
   const handleRowSelectionChange = useCallback(
-    (row: DataTableRowData) => {
-      setRowSelection((prev) => ({
-        ...prev,
-        [row.id]: !prev[row.id],
-      }));
+    (row: MRT_RowData) => {
+      setRowSelection((prev) => {
+        const newSelection = { ...prev };
+        if (newSelection[row.id]) {
+          delete newSelection[row.id];
+        } else {
+          newSelection[row.id] = true;
+        }
+        return newSelection;
+      });
     },
     [setRowSelection],
   );
@@ -130,7 +138,7 @@ const StackContent = ({
   const { updateRowOrder } = rowReorderingUtilities;
 
   const renderRowActions = useCallback(
-    (row: DataTableRowData) => {
+    (row: MRT_RowData) => {
       // TODO: is there a better way to get the row index?
       // Maybe inject the true index into each row when retrieved
       const currentIndex =
@@ -173,16 +181,38 @@ const StackContent = ({
             : undefined,
       }}
     >
-      {data.map((row: DataTableRowData) => (
-        <StackItem
-          children={stackOptions.renderRow(row)}
-          isSelectable={hasRowSelection}
-          onToggleRowSelection={() => handleRowSelectionChange(row)}
-          isSelected={rowSelection[row.id] ?? false}
-          key={row.id}
-          menuActions={renderRowActions(row)}
-        />
-      ))}
+      {isLoading ? (
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
+            paddingBlock: 5,
+          }}
+        >
+          <CircularProgress />
+        </Box>
+      ) : (
+        <>
+          {!data || data.length === 0 || isEmpty || isNoResults ? (
+            <Box>{emptyState}</Box>
+          ) : (
+            <>
+              {data.map((row: MRT_RowData) => (
+                <StackItem
+                  children={stackOptions.renderRow(row)}
+                  isSelectable={hasRowSelection}
+                  onToggleRowSelection={() => handleRowSelectionChange(row)}
+                  isSelected={rowSelection[row.id] ?? false}
+                  key={row.id}
+                  menuActions={renderRowActions(row)}
+                />
+              ))}
+            </>
+          )}
+        </>
+      )}
     </Box>
   );
 };

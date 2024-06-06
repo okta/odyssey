@@ -13,7 +13,8 @@
 import { useCallback, useMemo } from "react";
 import { DataFilter } from "../DataFilters";
 import { UniversalProps, TableProps } from "./types";
-import { DataTableColumn, DataTableRowData } from "../../DataTable";
+import { DataTableColumn } from "../../DataTable";
+import { MRT_RowData } from "material-react-table";
 
 type FilterConversionType = {
   filters?: UniversalProps["filters"];
@@ -25,7 +26,7 @@ export const useFilterConversion = ({
   columns,
 }: FilterConversionType) => {
   const convertFilterSelectOptions = useCallback(
-    (options: DataTableColumn<DataTableRowData>["filterSelectOptions"]) =>
+    (options: DataTableColumn<MRT_RowData>["filterSelectOptions"]) =>
       options?.map((option) =>
         typeof option === "string"
           ? {
@@ -43,7 +44,7 @@ export const useFilterConversion = ({
   );
 
   const convertColumnToFilter = useCallback(
-    (column: DataTableColumn<DataTableRowData>) =>
+    (column: DataTableColumn<MRT_RowData>) =>
       column.enableColumnFilter !== false && column.accessorKey
         ? ({
             id: column.accessorKey,

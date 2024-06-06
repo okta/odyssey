@@ -32,12 +32,15 @@ import { Callout } from "../../Callout";
 import { Pagination, usePagination } from "../../Pagination";
 import { t } from "i18next";
 import { fetchData } from "./fetchData";
-import { DataTableRowData } from "../../DataTable";
 import { TableContent } from "./TableContent";
 import { StackContent } from "./StackContent";
 import { useRowReordering } from "../../DataTable/useRowReordering";
 import { EmptyState } from "../../EmptyState";
-import { MRT_Row, MRT_RowSelectionState } from "material-react-table";
+import {
+  MRT_Row,
+  MRT_RowData,
+  MRT_RowSelectionState,
+} from "material-react-table";
 
 export type DataViewProps = UniversalProps & ViewProps;
 
@@ -83,13 +86,19 @@ const DataView = ({
   stackOptions,
   hasRowSelection,
   onChangeRowSelection,
+  isEmpty: isEmptyProp,
+  isLoading: isLoadingProp,
+  isNoResults: isNoResultsProp,
 }: DataViewProps) => {
   const initialLayout = getInitialLayout(availableLayouts, initialLayoutProp);
   const [currentLayout, setCurrentLayout] = useState<Layout>(initialLayout);
 
-  const [data, setData] = useState<DataTableRowData[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isEmpty, setIsEmpty] = useState<boolean>(true);
+  const [data, setData] = useState<MRT_RowData[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(isLoadingProp ?? true);
+  const [isEmpty, setIsEmpty] = useState<boolean>(isEmptyProp ?? true);
+  const [isNoResults, setIsNoResults] = useState<boolean>(
+    isNoResultsProp ?? false,
+  );
   const [errorMessage, setErrorMessage] =
     useState<UniversalProps["errorMessage"]>(errorMessageProp);
 
@@ -98,8 +107,7 @@ const DataView = ({
   const [filters, setFilters] = useState<DataFilter[]>();
 
   // TODO: Create a Row type that can be used for table or stack items
-  const [draggingRow, setDraggingRow] =
-    useState<MRT_Row<DataTableRowData> | null>();
+  const [draggingRow, setDraggingRow] = useState<MRT_Row<MRT_RowData> | null>();
 
   const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
 
@@ -136,20 +144,8 @@ const DataView = ({
   );
 
   const shouldShowFilters = useMemo(
-    () =>
-      hasSearch ||
-      hasFilters ||
-      bulkActionMenuItems ||
-      tableOptions?.hasChangeableDensity ||
-      tableOptions?.hasColumnVisibility ||
-      hasMultipleAvailableLayouts,
-    [
-      hasSearch,
-      hasFilters,
-      bulkActionMenuItems,
-      tableOptions,
-      hasMultipleAvailableLayouts,
-    ],
+    () => hasSearch || hasFilters,
+    [hasSearch, hasFilters],
   );
 
   const availableFilters = useFilterConversion({
@@ -168,9 +164,7 @@ const DataView = ({
     [pagination, search, filters, tableState?.columnSorting],
   );
 
-  const getRowId = getRowIdProp
-    ? getRowIdProp
-    : (row: DataTableRowData) => row.id;
+  const getRowId = getRowIdProp ? getRowIdProp : (row: MRT_RowData) => row.id;
 
   // Set initial filters
   useEffect(() => {
@@ -178,6 +172,14 @@ const DataView = ({
       setInitialFilters(filters);
     }
   }, [filters, initialFilters]);
+
+  // Update pagination state if props change
+  useEffect(() => {
+    setPagination({
+      pageIndex: currentPage,
+      pageSize: resultsPerPage,
+    });
+  }, [currentPage, resultsPerPage]);
 
   // Retrieve the data
   useEffect(() => {
@@ -210,6 +212,19 @@ const DataView = ({
     search,
   ]);
 
+  // Change loading, empty and noResults state on prop change
+  useEffect(() => {
+    setIsLoading((prevValue) => isLoadingProp ?? prevValue);
+  }, [isLoadingProp]);
+
+  useEffect(() => {
+    setIsEmpty((prevValue) => isEmptyProp ?? prevValue);
+  }, [isEmptyProp]);
+
+  useEffect(() => {
+    setIsNoResults((prevValue) => isNoResultsProp ?? prevValue);
+  }, [isNoResultsProp]);
+
   const emptyState = useMemo(() => {
     const noResultsInnerContent = noResultsPlaceholder || (
       <EmptyState
@@ -218,10 +233,45 @@ const DataView = ({
       />
     );
 
-    return emptyPlaceholder && isEmpty
-      ? emptyPlaceholder
-      : noResultsInnerContent;
-  }, [emptyPlaceholder, noResultsPlaceholder, isEmpty]);
+    if (isEmpty) {
+      return emptyPlaceholder || noResultsInnerContent;
+    }
+
+    if (isNoResults) {
+      return noResultsInnerContent;
+    }
+
+    return;
+  }, [emptyPlaceholder, noResultsPlaceholder, isEmpty, isNoResults]);
+
+  const additionalActions = useMemo(
+    () => (
+      <>
+        {currentLayout === "table" && tableOptions && (
+          <TableSettings
+            tableOptions={tableOptions}
+            tableState={tableState}
+            setTableState={setTableState}
+          />
+        )}
+
+        {hasMultipleAvailableLayouts && (
+          <LayoutSwitcher
+            currentLayout={currentLayout}
+            availableLayouts={availableLayouts}
+            setCurrentLayout={setCurrentLayout}
+          />
+        )}
+      </>
+    ),
+    [
+      currentLayout,
+      tableOptions,
+      tableState,
+      hasMultipleAvailableLayouts,
+      availableLayouts,
+    ],
+  );
 
   const { lastRow: lastRowOnPage } = usePagination({
     pageIndex: pagination.pageIndex,
@@ -248,6 +298,12 @@ const DataView = ({
         gap: 4,
       }}
     >
+      {errorMessage && (
+        <Box>
+          <Callout severity="error" text={errorMessage} />
+        </Box>
+      )}
+
       {shouldShowFilters && (
         <DataFilters
           onChangeSearch={hasSearch ? setSearch : undefined}
@@ -256,41 +312,36 @@ const DataView = ({
           searchDelayTime={searchDelayTime}
           filters={hasFilters ? availableFilters : undefined}
           isDisabled={isEmpty}
-          additionalActions={
-            <>
-              {currentLayout === "table" && tableOptions && (
-                <TableSettings
-                  tableOptions={tableOptions}
-                  tableState={tableState}
-                  setTableState={setTableState}
-                />
-              )}
-
-              {hasMultipleAvailableLayouts && (
-                <LayoutSwitcher
-                  currentLayout={currentLayout}
-                  availableLayouts={availableLayouts}
-                  setCurrentLayout={setCurrentLayout}
-                />
-              )}
-            </>
-          }
+          additionalActions={additionalActions}
         />
       )}
 
-      {errorMessage && (
-        <Box>
-          <Callout severity="error" text={errorMessage} />
+      {(bulkActionMenuItems || hasRowSelection) && (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <BulkActionMenu
+            data={data}
+            menuItems={bulkActionMenuItems}
+            rowSelection={rowSelection}
+            setRowSelection={setRowSelection}
+          />
+          {!shouldShowFilters && additionalActions}
         </Box>
       )}
 
-      {bulkActionMenuItems && (
-        <BulkActionMenu
-          data={data}
-          menuItems={bulkActionMenuItems}
-          rowSelection={rowSelection}
-          setRowSelection={setRowSelection}
-        />
+      {!shouldShowFilters && !bulkActionMenuItems && !hasRowSelection && (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+          }}
+        >
+          {additionalActions}
+        </Box>
       )}
 
       {currentLayout === "table" && tableOptions && (
@@ -302,6 +353,8 @@ const DataView = ({
           setTableState={setTableState}
           tableOptions={tableOptions}
           isLoading={isLoading}
+          isEmpty={isEmpty}
+          isNoResults={isNoResults}
           hasRowReordering={hasRowReordering}
           onReorderRows={onReorderRows}
           rowReorderingUtilities={rowReorderingUtilities}
@@ -321,6 +374,8 @@ const DataView = ({
           getRowId={getRowId}
           stackOptions={stackOptions}
           isLoading={isLoading}
+          isEmpty={isEmpty}
+          isNoResults={isNoResults}
           hasRowReordering={hasRowReordering}
           onReorderRows={onReorderRows}
           rowReorderingUtilities={rowReorderingUtilities}
@@ -358,66 +413,3 @@ const MemoizedDataView = memo(DataView);
 MemoizedDataView.displayName = "DataView";
 
 export { MemoizedDataView as DataView };
-
-// const DataView = ({
-// }: DataViewProps) => {
-//
-
-//   return (
-//     <Box
-//       sx={{
-//         display: "flex",
-//         flexDirection: "column",
-//         gap: 5,
-//       }}
-//     >
-
-//       {layout === "table" && (
-//         <DataContentTable
-//           // Essentials
-//           data={data}
-//           columns={tableOptions?.columns ?? []}
-//           getRowId={getRowId}
-
-//           // Settings
-//           hasColumnResizing={tableOptions?.hasColumnResizing}
-//           hasRowReordering={hasRowReordering}
-//           hasRowSelection={hasRowSelection}
-//           setRowSelection={setRowSelection}
-//           hasSorting={tableOptions?.hasSorting}
-//           noResultsPlaceholder={noResultsPlaceholder}
-//           emptyPlaceholder={emptyPlaceholder}
-
-//           // Table state
-//           columnSorting={columnSorting}
-//           columnVisibility={columnVisibility}
-//           draggingRow={draggingRow}
-//           isLoading={isLoading}
-//           isEmpty={isEmpty}
-//           rowDensity={rowDensity}
-//           rowSelection={rowSelection}
-
-//           // Row options
-//           renderDetailPanel={tableOptions?.renderDetailPanel}
-//           rowActionButtons={tableOptions?.rowActionButtons}
-//           rowActionMenuItems={tableOptions?.rowActionMenuItems}
-
-//           // This is the useRowReordering hook
-//           rowReordering={rowReordering}
-//           onReorderRows={onReorderRows}
-
-//           setColumnSorting={setColumnSorting}
-
-//           pagination={pagination}
-//           totalRows={totalRows}
-
-//         />
-//       )}
-//     </Box>
-//   );
-// };
-
-// const MemoizedDataView = memo(DataView);
-// MemoizedDataView.displayName = "DataView";
-
-// export { MemoizedDataView as DataView };

@@ -10,8 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { DataTableRowData, Status } from "@okta/odyssey-react-mui";
-import { DataTableColumn } from "@okta/odyssey-react-mui";
+import { Status } from "@okta/odyssey-react-mui";
+import { DataColumns } from "@okta/odyssey-react-mui/labs";
 
 export type Person = {
   order: number;
@@ -23,7 +23,7 @@ export type Person = {
   risk: "high" | "medium" | "low";
 };
 
-export const columns: DataTableColumn<DataTableRowData>[] = [
+export const columns: DataColumns = [
   {
     accessorKey: "order",
     header: "ID",

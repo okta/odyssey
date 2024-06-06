@@ -10,8 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { MRT_TableOptions } from "material-react-table";
-import { DataTableRowData } from "../../DataTable";
+import { MRT_RowData, MRT_TableOptions } from "material-react-table";
 import { DragIndicatorIcon } from "../../icons.generated";
 import { Box } from "../../Box";
 import { DesignTokens } from "../../OdysseyDesignTokensContext";
@@ -25,8 +24,7 @@ export const dataTableImmutableSettings = {
   enableGlobalFilter: false,
   enableHiding: false,
   enablePagination: false,
-  layoutMode:
-    "grid-no-grow" as MRT_TableOptions<DataTableRowData>["layoutMode"],
+  layoutMode: "grid-no-grow" as MRT_TableOptions<MRT_RowData>["layoutMode"],
   manualFiltering: true,
   manualSorting: true,
   muiTablePaperProps: {
@@ -35,9 +33,9 @@ export const dataTableImmutableSettings = {
       overflow: "visible",
     },
   },
-  selectAllMode: "all" as MRT_TableOptions<DataTableRowData>["selectAllMode"],
+  selectAllMode: "all" as MRT_TableOptions<MRT_RowData>["selectAllMode"],
   positionActionsColumn:
-    "last" as MRT_TableOptions<DataTableRowData>["positionActionsColumn"],
+    "last" as MRT_TableOptions<MRT_RowData>["positionActionsColumn"],
   rowVirtualizerOptions: {
     overscan: 4,
   },

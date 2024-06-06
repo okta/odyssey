@@ -10,17 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { MRT_RowSelectionState, MRT_TableOptions } from "material-react-table";
 import { memo, useCallback, Dispatch, SetStateAction } from "react";
 import { UniversalProps } from "./types";
 import { MenuButton } from "../../MenuButton";
 import { Button } from "../../Button";
 import { Box } from "../../Box";
 import { ChevronDownIcon } from "../../icons.generated";
-import { DataTableRowData } from "../../DataTable";
+import { MRT_RowData, MRT_RowSelectionState } from "material-react-table";
 
 export type BulkActionMenuProps = {
-  data: MRT_TableOptions<DataTableRowData>["data"];
+  data: MRT_RowData[];
   menuItems: UniversalProps["bulkActionMenuItems"];
   rowSelection: MRT_RowSelectionState;
   setRowSelection: Dispatch<SetStateAction<MRT_RowSelectionState>>;

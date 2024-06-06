@@ -11,16 +11,17 @@
  */
 
 import { Dispatch, SetStateAction } from "react";
-import { UniversalProps, DataQueryParamsType } from "./types";
+import { UniversalProps } from "./types";
+import { DataQueryParamsType } from "./dataTypes";
 import { t } from "i18next";
-import { DataTableRowData } from "../../DataTable";
+import { MRT_RowData } from "material-react-table";
 
 type DataRequestType = {
   getDataFn: UniversalProps["getData"];
   setIsLoading: Dispatch<SetStateAction<boolean>>;
   setErrorMessage: Dispatch<SetStateAction<UniversalProps["errorMessage"]>>;
   errorMessageProp: UniversalProps["errorMessage"];
-  setData: Dispatch<SetStateAction<DataTableRowData[]>>;
+  setData: Dispatch<SetStateAction<MRT_RowData[]>>;
   dataQueryParams: DataQueryParamsType;
 };
 

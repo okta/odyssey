@@ -11,7 +11,19 @@
  */
 
 import type { Meta, StoryObj } from "@storybook/react";
-import { DataView, type DataViewProps } from "@okta/odyssey-react-mui/labs";
+import {
+  DataRow,
+  DataView,
+  DataViewProps,
+  DataGetDataType,
+  DataOnReorderRowsType,
+  DataRowSelectionState,
+  densityValues,
+  availableLayouts,
+  TableProps,
+  StackProps,
+} from "@okta/odyssey-react-mui/labs";
+import { PauseIcon, RefreshIcon } from "@okta/odyssey-react-mui/icons";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import {
   Person,
@@ -19,63 +31,334 @@ import {
   data as personData,
 } from "./personData";
 import { filterData, reorderData } from "./dataFunctions";
-import { useCallback, useState } from "react";
+import { Dispatch, SetStateAction, useCallback, useState } from "react";
 import {
   Box,
-  DataTableGetDataType,
-  DataTableOnReorderRowsType,
-  DataTableRowData,
-  DataTableRowSelectionState,
   Heading5,
   MenuItem,
   Paragraph,
   Status,
   Support,
+  Button,
+  EmptyState,
+  paginationTypeValues,
 } from "@okta/odyssey-react-mui";
 
-const storybookMeta: Meta<DataViewProps> = {
+type DataViewMetaProps = DataViewProps &
+  TableProps &
+  StackProps & {
+    tableRowActionMenuItems: TableProps["rowActionMenuItems"];
+    stackRowActionMenuItems: StackProps["rowActionMenuItems"];
+    hasCustomEmptyPlaceholder: boolean;
+    hasCustomNoResultsPlaceholder: boolean;
+    hasActionMenuItems: boolean;
+    hasActionButtons: boolean;
+  };
+
+const storybookMeta: Meta<DataViewMetaProps> = {
   title: "Labs Components/Data components",
   component: DataView,
-  argTypes: {},
+  argTypes: {
+    getData: {
+      control: null,
+      table: {
+        type: {
+          summary: "",
+        },
+      },
+    },
+    getRowId: {
+      control: null,
+      table: {
+        type: {
+          summary: "",
+        },
+      },
+    },
+    hasRowReordering: {
+      control: "boolean",
+      table: {
+        type: {
+          summary: "",
+        },
+      },
+    },
+    onReorderRows: {
+      control: null,
+      table: {
+        type: {
+          summary: "",
+        },
+      },
+    },
+    hasRowSelection: {
+      control: "boolean",
+    },
+    onChangeRowSelection: {
+      control: null,
+    },
+    bulkActionMenuItems: {
+      control: null,
+    },
+    hasPagination: {
+      control: "boolean",
+    },
+    currentPage: {
+      control: "number",
+    },
+    paginationType: {
+      control: "select",
+      options: paginationTypeValues,
+    },
+    resultsPerPage: {
+      control: "number",
+    },
+    totalRows: {
+      control: "number",
+    },
+    hasFilters: {
+      control: "boolean",
+    },
+    hasSearch: {
+      control: "boolean",
+    },
+    hasSearchSubmitButton: {
+      control: "boolean",
+    },
+    filters: {
+      control: null,
+    },
+    searchDelayTime: {
+      control: "number",
+    },
+    errorMessage: {
+      control: "text",
+    },
+    emptyPlaceholder: {
+      control: null,
+    },
+    noResultsPlaceholder: {
+      control: null,
+    },
+    initialLayout: {
+      control: "select",
+      options: availableLayouts,
+    },
+    availableLayouts: {
+      control: "check",
+      options: availableLayouts,
+    },
+    columns: {
+      control: null,
+      name: "tableOptions.columns",
+    },
+    initialDensity: {
+      control: "select",
+      options: densityValues,
+      name: "tableOptions.columns",
+    },
+    hasChangeableDensity: {
+      control: "boolean",
+      name: "tableOptions.hasChangeableDensity",
+    },
+    hasColumnResizing: {
+      control: "boolean",
+      name: "tableOptions.hasColumnResizing",
+    },
+    hasColumnVisibility: {
+      control: "boolean",
+      name: "tableOptions.hasColumnVisibility",
+    },
+    renderDetailPanel: {
+      control: null,
+      name: "tableOptions.renderDetailPanel",
+    },
+    rowActionButtons: {
+      control: null,
+      name: "tableOptions.rowActionButtons",
+    },
+    tableRowActionMenuItems: {
+      control: null,
+      name: "tableOptions.rowActionMenuItems",
+    },
+    hasSorting: {
+      control: "boolean",
+      name: "tableOptions.hasSorting",
+    },
+    renderRow: {
+      control: null,
+      name: "stackOptions.renderRow",
+    },
+    maxGridColumns: {
+      control: "number",
+      name: "stackOptions.maxGridColumns",
+    },
+    stackRowActionMenuItems: {
+      control: null,
+      name: "stackOptions.rowActionMenuItems",
+    },
+    isLoading: {
+      control: "boolean",
+    },
+    isEmpty: {
+      control: "boolean",
+    },
+    isNoResults: {
+      control: "boolean",
+    },
+    hasCustomEmptyPlaceholder: {
+      control: "boolean",
+      name: "[STORY ONLY] Has custom empty placeholder?",
+    },
+    hasCustomNoResultsPlaceholder: {
+      control: "boolean",
+      name: "[STORY ONLY] Has custom 'no results' placeholder?",
+    },
+    hasActionMenuItems: {
+      control: "boolean",
+      name: "[STORY ONLY] Has action menu items?",
+    },
+    hasActionButtons: {
+      control: "boolean",
+      name: "[STORY ONLY] Has action buttons in table view?",
+    },
+  },
+  args: {
+    currentPage: 1,
+    resultsPerPage: 20,
+    paginationType: "paged",
+    maxGridColumns: 3,
+    hasActionButtons: false,
+    hasActionMenuItems: false,
+    hasCustomEmptyPlaceholder: false,
+    hasCustomNoResultsPlaceholder: false,
+    availableLayouts: ["table", "stack", "grid"],
+    initialLayout: "table",
+  },
   decorators: [MuiThemeDecorator],
 };
 
 export default storybookMeta;
 
-export const Default: StoryObj<DataViewProps> = {
-  args: {},
-  render: function C() {
-    const [data, setData] = useState<Person[]>(personData);
+const useDataCallbacks = (
+  data: Person[],
+  setData: Dispatch<SetStateAction<Person[]>>,
+) => {
+  const getData = useCallback(
+    ({ ...props }: DataGetDataType) => {
+      return filterData({ data, ...props });
+    },
+    [data],
+  );
 
-    const getData = useCallback(
-      ({ ...props }: DataTableGetDataType) => {
-        return filterData({ data, ...props });
-      },
-      [data],
-    );
+  const onReorderRows = useCallback(
+    ({ ...props }: DataOnReorderRowsType) => {
+      const reorderedData = reorderData({ data, ...props });
+      setData(reorderedData);
+    },
+    [data, setData],
+  );
 
-    const onReorderRows = useCallback(
-      ({ ...props }: DataTableOnReorderRowsType) => {
-        const reorderedData = reorderData({ data, ...props });
-        setData(reorderedData);
-      },
-      [data],
-    );
+  const onChangeRowSelection = useCallback(
+    (rowSelection: DataRowSelectionState) => {
+      if (Object.keys(rowSelection).length > 0) {
+        console.log(`${Object.keys(rowSelection).length} selected`);
+      }
+    },
+    [],
+  );
 
-    const onChangeRowSelection = useCallback(
-      (rowSelection: DataTableRowSelectionState) => {
-        if (Object.keys(rowSelection).length > 0) {
-          console.log(`${Object.keys(rowSelection).length} selected`);
+  return { getData, onReorderRows, onChangeRowSelection };
+};
+
+// Common row rendering function
+const renderRow = (row: DataRow) => {
+  return (
+    <>
+      <Support component="div">
+        {row.city}, {row.state}
+      </Support>
+      <Heading5>{row.name}</Heading5>
+      <Box
+        sx={{
+          marginBlockStart: -1,
+          marginBlockEnd: 3,
+        }}
+      >
+        <Paragraph color="textSecondary">
+          {row.name} is {row.age} years old.
+        </Paragraph>
+      </Box>
+      <Status
+        label={row.risk.charAt(0).toUpperCase() + row.risk.slice(1)}
+        severity={
+          row.risk === "low"
+            ? "success"
+            : row.risk === "medium"
+              ? "warning"
+              : "error"
         }
-      },
-      [],
-    );
+      />
+    </>
+  );
+};
 
-    const actionMenuItems = (selectedRows: DataTableRowSelectionState) => (
-      <>
-        <MenuItem onClick={() => console.log(selectedRows)}>Action 1</MenuItem>
-        <MenuItem onClick={() => console.log(selectedRows)}>Action 2</MenuItem>
-      </>
+// Common action menu items
+const actionMenuItems = (selectedRows: DataRowSelectionState) => (
+  <>
+    <MenuItem onClick={() => console.log(selectedRows)}>Action 1</MenuItem>
+    <MenuItem onClick={() => console.log(selectedRows)}>Action 2</MenuItem>
+  </>
+);
+
+const actionButtons = () => (
+  <Box
+    sx={{
+      display: "flex",
+      alignItems: "center",
+      marginInlineEnd: 2,
+    }}
+  >
+    <Button
+      endIcon={<PauseIcon />}
+      ariaLabel="Pause"
+      size="small"
+      variant="floating"
+    />
+    <Button
+      endIcon={<RefreshIcon />}
+      ariaLabel="Refresh"
+      size="small"
+      variant="floating"
+    />
+  </Box>
+);
+
+const customEmptyPlaceholder = (
+  <EmptyState
+    heading="Start by adding data assets"
+    description="All relevant data will be displayed and can be searched and filtered"
+    PrimaryCallToActionComponent={<Button variant="primary" label="Primary" />}
+    SecondaryCallToActionComponent={
+      <Button variant="secondary" label="Secondary" />
+    }
+  />
+);
+
+const customNoResultsPlaceholder = (
+  <EmptyState
+    heading="Whoops, there's nothing here!"
+    description="You should try searching or filtering for something else."
+  />
+);
+
+// Base story configuration
+const BaseStory: StoryObj<DataViewMetaProps> = {
+  render: function Base(args) {
+    const [data, setData] = useState<Person[]>(personData);
+    const { getData, onReorderRows, onChangeRowSelection } = useDataCallbacks(
+      data,
+      setData,
     );
 
     return (
@@ -83,56 +366,60 @@ export const Default: StoryObj<DataViewProps> = {
         getData={getData}
         onReorderRows={onReorderRows}
         onChangeRowSelection={onChangeRowSelection}
-        hasPagination
-        hasFilters
-        hasSearch
-        hasRowReordering
-        hasRowSelection
-        initialLayout="grid"
-        bulkActionMenuItems={actionMenuItems}
+        bulkActionMenuItems={
+          args.hasActionMenuItems ? actionMenuItems : undefined
+        }
+        hasRowReordering={args.hasRowReordering}
+        hasRowSelection={args.hasRowSelection}
+        hasPagination={args.hasPagination}
+        currentPage={args.currentPage}
+        paginationType={args.paginationType}
+        resultsPerPage={args.resultsPerPage}
+        totalRows={args.totalRows}
+        hasFilters={args.hasFilters}
+        hasSearch={args.hasSearch}
+        hasSearchSubmitButton={args.hasSearchSubmitButton}
+        searchDelayTime={args.searchDelayTime}
+        errorMessage={args.errorMessage}
+        initialLayout={args.initialLayout}
+        availableLayouts={args.availableLayouts}
+        isLoading={args.isLoading}
+        isEmpty={args.isEmpty}
+        isNoResults={args.isNoResults}
+        emptyPlaceholder={
+          args.hasCustomEmptyPlaceholder ? customEmptyPlaceholder : undefined
+        }
+        noResultsPlaceholder={
+          args.hasCustomNoResultsPlaceholder
+            ? customNoResultsPlaceholder
+            : undefined
+        }
         tableOptions={{
           columns: personColumns,
-          hasChangeableDensity: true,
-          hasColumnResizing: true,
-          hasColumnVisibility: true,
-          hasSorting: true,
+          hasSorting: args.hasSorting,
+          rowActionMenuItems: args.hasActionMenuItems
+            ? actionMenuItems
+            : undefined,
+          rowActionButtons: args.hasActionButtons ? actionButtons : undefined,
+          renderDetailPanel: undefined,
+          hasColumnVisibility: args.hasColumnVisibility,
+          hasColumnResizing: args.hasColumnResizing,
+          hasChangeableDensity: args.hasChangeableDensity,
+          initialDensity: args.initialDensity,
         }}
         stackOptions={{
-          // TODO: Add generics
-          renderRow: (row: DataTableRowData) => {
-            return (
-              <>
-                <Support component="div">
-                  {row.city}, {row.state}
-                </Support>
-                <Heading5>{row.name}</Heading5>
-                <Box
-                  sx={{
-                    marginBlockStart: -1,
-                    marginBlockEnd: 3,
-                  }}
-                >
-                  <Paragraph color="textSecondary">
-                    {row.name} is {row.age} years old.
-                  </Paragraph>
-                </Box>
-                <Status
-                  label={row.risk.charAt(0).toUpperCase() + row.risk.slice(1)}
-                  severity={
-                    row.risk === "low"
-                      ? "success"
-                      : row.risk === "medium"
-                        ? "warning"
-                        : "error"
-                  }
-                />
-              </>
-            );
-          },
-          rowActionMenuItems: actionMenuItems,
-          maxGridColumns: 4,
+          renderRow: renderRow,
+          rowActionMenuItems: args.hasActionMenuItems
+            ? actionMenuItems
+            : undefined,
+          maxGridColumns: args.maxGridColumns,
         }}
       />
     );
   },
+};
+
+export const Default: StoryObj<DataViewMetaProps> = {
+  ...BaseStory,
+  args: {},
 };

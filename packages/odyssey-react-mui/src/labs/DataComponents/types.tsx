@@ -11,21 +11,13 @@
  */
 
 import {
-  MRT_Cell,
-  MRT_Column,
   MRT_DensityState,
+  MRT_RowData,
   MRT_RowSelectionState,
   MRT_SortingState,
   MRT_TableOptions,
   MRT_VisibilityState,
 } from "material-react-table";
-import {
-  DataTableColumn,
-  DataTableGetDataType,
-  DataTableOnReorderRowsType,
-  DataTableRowData,
-  DataTableRowSelectionState,
-} from "../../DataTable";
 import { DataFilter } from "../DataFilters";
 import { paginationTypeValues } from "../DataTablePagination";
 import {
@@ -36,6 +28,12 @@ import {
 import { MenuButtonProps } from "../..";
 import { ReactNode } from "react";
 import { DataTableRowActionsProps } from "../../DataTable/DataTableRowActions";
+import {
+  DataGetDataType,
+  DataOnReorderRowsType,
+  DataRowSelectionState,
+  DataTableColumn,
+} from "./dataTypes";
 
 export type Layout = (typeof availableLayouts)[number];
 export type StackLayout = (typeof availableStackLayouts)[number];
@@ -51,16 +49,14 @@ export type UniversalProps = {
     search,
     filters,
     sort,
-  }: DataTableGetDataType) =>
-    | MRT_TableOptions<DataTableRowData>["data"]
-    | Promise<MRT_TableOptions<DataTableRowData>["data"]>;
-  getRowId?: MRT_TableOptions<DataTableRowData>["getRowId"];
+  }: DataGetDataType) => MRT_RowData[] | Promise<MRT_RowData[]>;
+  getRowId?: MRT_TableOptions<MRT_RowData>["getRowId"];
   hasRowReordering?: boolean;
-  onReorderRows?: ({ rowId, newRowIndex }: DataTableOnReorderRowsType) => void;
+  onReorderRows?: ({ rowId, newRowIndex }: DataOnReorderRowsType) => void;
 
   // Row selection
   hasRowSelection?: boolean;
-  onChangeRowSelection?: (rowSelection: DataTableRowSelectionState) => void;
+  onChangeRowSelection?: (rowSelection: DataRowSelectionState) => void;
   bulkActionMenuItems?: (
     selectedRows: MRT_RowSelectionState,
   ) => MenuButtonProps["children"];
@@ -76,29 +72,32 @@ export type UniversalProps = {
   hasFilters?: boolean;
   hasSearch?: boolean;
   hasSearchSubmitButton?: boolean;
-  filters?: Array<DataFilter | DataTableColumn<DataTableRowData> | string>;
+  filters?: Array<DataFilter | DataTableColumn<MRT_RowData> | string>;
   searchDelayTime?: number;
 
   // States
   errorMessage?: string;
   emptyPlaceholder?: ReactNode;
   noResultsPlaceholder?: ReactNode;
+  isLoading?: boolean;
+  isEmpty?: boolean;
+  isNoResults?: boolean;
 };
 
 export type TableProps = {
-  columns: DataTableColumn<DataTableRowData>[];
+  columns: DataTableColumn<MRT_RowData>[];
   initialDensity?: (typeof densityValues)[number];
   hasChangeableDensity?: boolean;
   hasColumnResizing?: boolean;
   hasColumnVisibility?: boolean;
-  renderDetailPanel?: MRT_TableOptions<DataTableRowData>["renderDetailPanel"];
+  renderDetailPanel?: MRT_TableOptions<MRT_RowData>["renderDetailPanel"];
   rowActionButtons?: DataTableRowActionsProps["rowActionButtons"];
   rowActionMenuItems?: DataTableRowActionsProps["rowActionMenuItems"];
   hasSorting?: boolean;
 };
 
 export type StackProps = {
-  renderRow: (row: DataTableRowData) => ReactNode;
+  renderRow: (row: MRT_RowData) => ReactNode;
   maxGridColumns?: number;
   rowActionMenuItems?: DataTableRowActionsProps["rowActionMenuItems"];
 };
@@ -114,26 +113,4 @@ export type TableState = {
   columnSorting: MRT_SortingState;
   columnVisibility: MRT_VisibilityState;
   rowDensity?: MRT_DensityState;
-};
-
-export type DataQueryParamsType = {
-  page?: number;
-  resultsPerPage?: number;
-  search?: string;
-  filters?: DataFilter[];
-  sort?: MRT_SortingState;
-};
-
-export type DataTableColumnInstance<T extends DataTableRowData> = Omit<
-  MRT_Column<T, unknown>,
-  "columnDef"
-> & {
-  columnDef: DataTableColumn<T>;
-};
-
-export type DataTableCell<T extends DataTableRowData> = Omit<
-  MRT_Cell<T>,
-  "column"
-> & {
-  column: DataTableColumnInstance<T>;
 };
