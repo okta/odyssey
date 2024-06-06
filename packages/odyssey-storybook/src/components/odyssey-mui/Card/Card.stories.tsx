@@ -109,7 +109,7 @@ const storybookMeta: Meta<CardProps> = {
         defaultValue: "",
       },
     },
-    AuxRail: {
+    Accessory: {
       control: null,
       description:
         "Arbitrary content to be added at the start of the card (in LTR languages, the left side).",
@@ -217,12 +217,12 @@ export const JustCustomContent: StoryObj<typeof Card> = {
   ),
 };
 
-export const AuxRail: StoryObj<typeof Card> = {
+export const Accessory: StoryObj<typeof Card> = {
   render: ({ ...props }) => (
     <Box sx={{ maxWidth: 262 }}>
       <Card
         {...props}
-        AuxRail={
+        Accessory={
           <Box sx={{ marginBlockStart: -1 }}>
             <Checkbox />
           </Box>

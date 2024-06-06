@@ -49,13 +49,13 @@ export type CardProps = {
       onClick: MouseEventHandler;
       button?: never;
       menuButtonChildren?: never;
-      AuxRail?: never;
+      Accessory?: never;
     }
   | {
       onClick?: never;
       button?: ReactElement<typeof Button>;
       menuButtonChildren?: MenuButtonProps["children"];
-      AuxRail?: ReactNode;
+      Accessory?: ReactNode;
     }
 );
 
@@ -92,7 +92,7 @@ const Card = ({
   overline,
   title,
   children,
-  AuxRail,
+  Accessory,
 }: CardProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
@@ -103,14 +103,14 @@ const Card = ({
           display: "flex",
         }}
       >
-        {AuxRail && (
+        {Accessory && (
           <Box
             sx={{
               marginInlineEnd: 3,
               marginInlineStart: -2,
             }}
           >
-            {AuxRail}
+            {Accessory}
           </Box>
         )}
         <Box>
