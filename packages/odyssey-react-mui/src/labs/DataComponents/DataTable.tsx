@@ -17,7 +17,42 @@ import { TableProps, UniversalProps } from "./types";
 export type DataTableProps = UniversalProps & TableProps;
 
 const DataTable = (props: DataTableProps) => {
-  return <DataView {...props} availableLayouts="table" />;
+  return (
+    <DataView
+      availableLayouts="table"
+      getData={props.getData}
+      hasRowSelection={props.hasRowSelection}
+      onChangeRowSelection={props.onChangeRowSelection}
+      bulkActionMenuItems={props.bulkActionMenuItems}
+      hasPagination={props.hasPagination}
+      currentPage={props.currentPage}
+      paginationType={props.paginationType}
+      resultsPerPage={props.resultsPerPage}
+      totalRows={props.totalRows}
+      hasFilters={props.hasFilters}
+      hasSearch={props.hasSearch}
+      hasSearchSubmitButton={props.hasSearchSubmitButton}
+      filters={props.filters}
+      searchDelayTime={props.searchDelayTime}
+      errorMessage={props.errorMessage}
+      emptyPlaceholder={props.emptyPlaceholder}
+      noResultsPlaceholder={props.noResultsPlaceholder}
+      isLoading={props.isLoading}
+      isEmpty={props.isEmpty}
+      isNoResults={props.isNoResults}
+      tableOptions={{
+        columns: props.columns,
+        initialDensity: props.initialDensity,
+        hasChangeableDensity: props.hasChangeableDensity,
+        hasColumnResizing: props.hasColumnResizing,
+        hasColumnVisibility: props.hasColumnVisibility,
+        renderDetailPanel: props.renderDetailPanel,
+        rowActionButtons: props.rowActionButtons,
+        rowActionMenuItems: props.rowActionMenuItems,
+        hasSorting: props.hasSorting,
+      }}
+    />
+  );
 };
 
 const MemoizedDataTable = memo(DataTable);

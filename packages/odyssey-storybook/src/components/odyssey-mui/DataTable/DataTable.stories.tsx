@@ -18,7 +18,7 @@ import {
 import {
   Box,
   Button,
-  DataTable,
+  // DataTable,
   EmptyState,
   DataTableGetDataType,
   DataTableOnReorderRowsType,
@@ -26,8 +26,9 @@ import {
   DataTableRenderDetailPanelType,
   DataTableRowSelectionState,
   MenuItem,
-  densityValues,
+  // densityValues,
 } from "@okta/odyssey-react-mui";
+import { DataTable, densityValues } from "@okta/odyssey-react-mui/labs";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import {
   Planet,

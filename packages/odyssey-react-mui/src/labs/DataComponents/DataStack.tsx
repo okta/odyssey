@@ -12,12 +12,46 @@
 
 import { memo } from "react";
 import { DataView } from "./DataView";
-import { StackProps, UniversalProps } from "./types";
+import { AvailableStackLayouts, StackProps, UniversalProps } from "./types";
+import { availableStackLayouts } from "./constants";
 
-export type DataStackProps = UniversalProps & StackProps;
+export type DataStackProps = UniversalProps &
+  StackProps & {
+    initialLayout?: (typeof availableStackLayouts)[number];
+    availableLayouts?: AvailableStackLayouts;
+  };
 
 const DataStack = (props: DataStackProps) => {
-  return <DataView {...props} availableLayouts="table" />;
+  return (
+    <DataView
+      availableLayouts={props.availableLayouts}
+      getData={props.getData}
+      hasRowSelection={props.hasRowSelection}
+      onChangeRowSelection={props.onChangeRowSelection}
+      bulkActionMenuItems={props.bulkActionMenuItems}
+      hasPagination={props.hasPagination}
+      currentPage={props.currentPage}
+      paginationType={props.paginationType}
+      resultsPerPage={props.resultsPerPage}
+      totalRows={props.totalRows}
+      hasFilters={props.hasFilters}
+      hasSearch={props.hasSearch}
+      hasSearchSubmitButton={props.hasSearchSubmitButton}
+      filters={props.filters}
+      searchDelayTime={props.searchDelayTime}
+      errorMessage={props.errorMessage}
+      emptyPlaceholder={props.emptyPlaceholder}
+      noResultsPlaceholder={props.noResultsPlaceholder}
+      isLoading={props.isLoading}
+      isEmpty={props.isEmpty}
+      isNoResults={props.isNoResults}
+      stackOptions={{
+        cardProps: props.cardProps,
+        maxGridColumns: props.maxGridColumns,
+        rowActionMenuItems: props.rowActionMenuItems,
+      }}
+    />
+  );
 };
 
 const MemoizedDataStack = memo(DataStack);

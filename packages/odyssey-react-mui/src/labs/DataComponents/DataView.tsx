@@ -106,7 +106,6 @@ const DataView = ({
   const [initialFilters, setInitialFilters] = useState<DataFilter[]>();
   const [filters, setFilters] = useState<DataFilter[]>();
 
-  // TODO: Create a Row type that can be used for table or stack items
   const [draggingRow, setDraggingRow] = useState<MRT_Row<MRT_RowData> | null>();
 
   const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
@@ -125,18 +124,6 @@ const DataView = ({
     columnSorting: [],
     columnVisibility: {},
   });
-
-  // TODO: Remove
-  if (process.env.NODE_ENV !== "development") {
-    console.log(
-      stackOptions,
-      setCurrentLayout,
-      search,
-      setErrorMessage,
-      isLoading,
-      setIsEmpty,
-    );
-  }
 
   const hasMultipleAvailableLayouts = useMemo(
     () => typeof availableLayouts !== "string" && availableLayouts.length > 1,

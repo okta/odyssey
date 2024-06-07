@@ -10,10 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+// import {
+//   DataTableGetDataType,
+//   DataTableOnReorderRowsType,
+// } from "@okta/odyssey-react-mui";
 import {
-  DataTableGetDataType,
-  DataTableOnReorderRowsType,
-} from "@okta/odyssey-react-mui";
+  DataGetDataType,
+  DataOnReorderRowsType,
+} from "@okta/odyssey-react-mui/labs";
 import { Person } from "./personData";
 
 export const filterData = ({
@@ -21,7 +25,7 @@ export const filterData = ({
   ...args
 }: {
   data: Person[];
-} & DataTableGetDataType) => {
+} & DataGetDataType) => {
   let filteredData = data;
   const { search, filters, sort, page = 1, resultsPerPage = 20 } = args;
 
@@ -100,7 +104,7 @@ export const reorderData = <T extends { id: string | number }>({
   ...args
 }: {
   data: T[];
-} & DataTableOnReorderRowsType) => {
+} & DataOnReorderRowsType) => {
   const updatedData = data;
   const { rowId, newRowIndex } = args;
   const rowIndex = updatedData.findIndex((row) => row.id === rowId);

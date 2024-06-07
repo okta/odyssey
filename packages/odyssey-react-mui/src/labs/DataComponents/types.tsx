@@ -25,7 +25,7 @@ import {
   availableStackLayouts,
   densityValues,
 } from "./constants";
-import { MenuButtonProps } from "../..";
+import { CardProps, MenuButtonProps } from "../..";
 import { ReactNode } from "react";
 import { DataTableRowActionsProps } from "../../DataTable/DataTableRowActions";
 import {
@@ -96,8 +96,16 @@ export type TableProps = {
   hasSorting?: boolean;
 };
 
+export type StackCardProps = {
+  description?: CardProps["description"];
+  image?: CardProps["image"];
+  overline?: CardProps["overline"];
+  title?: CardProps["title"];
+  children?: CardProps["children"];
+};
+
 export type StackProps = {
-  renderRow: (row: MRT_RowData) => ReactNode;
+  cardProps: (row: MRT_RowData) => StackCardProps;
   maxGridColumns?: number;
   rowActionMenuItems?: DataTableRowActionsProps["rowActionMenuItems"];
 };

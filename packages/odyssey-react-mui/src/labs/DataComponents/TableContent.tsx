@@ -31,7 +31,6 @@ import {
 } from "react";
 import { TableProps, TableState, UniversalProps } from "./types";
 import { DataTableCell } from "./dataTypes";
-import { DataTableRowActions } from "../../DataTable/DataTableRowActions";
 import {
   ArrowDownIcon,
   ArrowUnsortedIcon,
@@ -47,6 +46,10 @@ import { useScrollIndication } from "../../DataTable/useScrollIndication";
 import { useOdysseyDesignTokens } from "../../OdysseyDesignTokensContext";
 import { Box } from "../../Box";
 import { CSSObject } from "@emotion/styled";
+import { RowActions } from "./RowActions";
+import { MenuButton } from "../../MenuButton";
+import { MoreIcon } from "../../icons.generated";
+import { useTranslation } from "react-i18next";
 
 export type TableContentProps = {
   data: MRT_RowData[];
@@ -149,6 +152,7 @@ const TableContent = ({
   });
 
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const { t } = useTranslation();
 
   const columnIds = useMemo(() => {
     return columns.map((column) => column.accessorKey) ?? [];
@@ -208,21 +212,31 @@ const TableContent = ({
 
   const renderRowActions = useCallback(
     ({ row }: { row: MRT_Row<MRT_RowData> }) => {
-      // TODO: is there a better way to get the row index?
-      // Maybe inject the true index into each row when retrieved
       const currentIndex =
         row.index + (pagination.pageIndex - 1) * pagination.pageSize;
       return (
-        <DataTableRowActions
-          row={row}
-          rowIndex={currentIndex}
-          rowActionButtons={tableOptions.rowActionButtons}
-          rowActionMenuItems={tableOptions.rowActionMenuItems}
-          totalRows={totalRows}
-          updateRowOrder={
-            hasRowReordering && onReorderRows ? updateRowOrder : undefined
-          }
-        />
+        <Box sx={{ display: "flex" }}>
+          {tableOptions.rowActionButtons?.(row)}
+          {(tableOptions.rowActionMenuItems || hasRowReordering) && (
+            <MenuButton
+              endIcon={<MoreIcon />}
+              size="small"
+              buttonVariant="floating"
+              ariaLabel={t("table.moreactions.arialabel")}
+              menuAlignment="right"
+            >
+              <RowActions
+                row={row}
+                rowIndex={currentIndex}
+                rowActionMenuItems={tableOptions.rowActionMenuItems}
+                totalRows={totalRows}
+                updateRowOrder={
+                  hasRowReordering && onReorderRows ? updateRowOrder : undefined
+                }
+              />
+            </MenuButton>
+          )}
+        </Box>
       );
     },
     [
@@ -232,6 +246,7 @@ const TableContent = ({
       onReorderRows,
       totalRows,
       updateRowOrder,
+      t,
     ],
   );
 

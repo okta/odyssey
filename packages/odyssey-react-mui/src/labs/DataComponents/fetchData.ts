@@ -37,6 +37,9 @@ export const fetchData = async ({
   setErrorMessage(errorMessageProp);
   try {
     const incomingData = await getDataFn?.(dataQueryParams);
+    // incomingData.forEach((item: MRT_RowData, index: number) => {
+    //   item._ods_index = index;
+    // });
     setData(incomingData);
   } catch (error) {
     setErrorMessage(typeof error === "string" ? error : t("table.error"));

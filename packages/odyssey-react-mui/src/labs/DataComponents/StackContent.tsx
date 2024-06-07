@@ -14,8 +14,7 @@ import { Dispatch, ReactNode, SetStateAction, memo, useCallback } from "react";
 import { StackLayout, StackProps, UniversalProps } from "./types";
 import { Box } from "../../Box";
 import { CSSObject } from "@emotion/styled";
-import { StackItem } from "./StackItem";
-import { DataTableRowActions } from "../../DataTable/DataTableRowActions";
+// import { DataTableRowActions } from "../../DataTable/DataTableRowActions";
 import {
   MRT_Row,
   MRT_RowData,
@@ -23,6 +22,9 @@ import {
   MRT_TableInstance,
 } from "material-react-table";
 import { CircularProgress } from "../../CircularProgress";
+import { Card } from "../..";
+import { Checkbox as MuiCheckbox } from "@mui/material";
+import { RowActions } from "./RowActions";
 
 export type StackContentProps = {
   currentLayout: StackLayout;
@@ -86,7 +88,6 @@ export type StackContentProps = {
 const StackContent = ({
   currentLayout,
   data,
-  getRowId,
   stackOptions,
   isLoading,
   isEmpty,
@@ -100,26 +101,7 @@ const StackContent = ({
   emptyState,
   pagination,
   totalRows,
-  draggingRow,
 }: StackContentProps) => {
-  console.log({
-    currentLayout,
-    data,
-    getRowId,
-    stackOptions,
-    isLoading,
-    hasRowReordering,
-    onReorderRows,
-    rowReorderingUtilities,
-    hasRowSelection,
-    rowSelection,
-    setRowSelection,
-    emptyState,
-    pagination,
-    totalRows,
-    draggingRow,
-  });
-
   const handleRowSelectionChange = useCallback(
     (row: MRT_RowData) => {
       setRowSelection((prev) => {
@@ -136,34 +118,6 @@ const StackContent = ({
   );
 
   const { updateRowOrder } = rowReorderingUtilities;
-
-  const renderRowActions = useCallback(
-    (row: MRT_RowData) => {
-      // TODO: is there a better way to get the row index?
-      // Maybe inject the true index into each row when retrieved
-      const currentIndex =
-        row.index + (pagination.pageIndex - 1) * pagination.pageSize;
-      return (
-        <DataTableRowActions
-          row={row}
-          rowIndex={currentIndex}
-          rowActionMenuItems={stackOptions.rowActionMenuItems}
-          totalRows={totalRows}
-          updateRowOrder={
-            hasRowReordering && onReorderRows ? updateRowOrder : undefined
-          }
-        />
-      );
-    },
-    [
-      pagination,
-      stackOptions,
-      hasRowReordering,
-      onReorderRows,
-      totalRows,
-      updateRowOrder,
-    ],
-  );
 
   return (
     <Box
@@ -199,16 +153,48 @@ const StackContent = ({
             <Box>{emptyState}</Box>
           ) : (
             <>
-              {data.map((row: MRT_RowData) => (
-                <StackItem
-                  children={stackOptions.renderRow(row)}
-                  isSelectable={hasRowSelection}
-                  onToggleRowSelection={() => handleRowSelectionChange(row)}
-                  isSelected={rowSelection[row.id] ?? false}
-                  key={row.id}
-                  menuActions={renderRowActions(row)}
-                />
-              ))}
+              {data.map((row: MRT_RowData, index: number) => {
+                const { overline, title, description, image, children } =
+                  stackOptions.cardProps(row);
+                const currentIndex =
+                  index + (pagination.pageIndex - 1) * pagination.pageSize;
+
+                return (
+                  <Card
+                    overline={overline}
+                    title={title}
+                    description={description}
+                    image={image}
+                    children={children}
+                    Accessory={
+                      hasRowSelection && (
+                        <Box sx={{ marginBlockStart: -1 }}>
+                          <MuiCheckbox
+                            checked={rowSelection[row.id] ?? false}
+                            onChange={() => handleRowSelectionChange(row)}
+                          />
+                        </Box>
+                      )
+                    }
+                    key={row.id}
+                    menuButtonChildren={
+                      (stackOptions.rowActionMenuItems || hasRowReordering) && (
+                        <RowActions
+                          row={row}
+                          rowIndex={currentIndex}
+                          rowActionMenuItems={stackOptions.rowActionMenuItems}
+                          totalRows={totalRows}
+                          updateRowOrder={
+                            hasRowReordering && onReorderRows
+                              ? updateRowOrder
+                              : undefined
+                          }
+                        />
+                      )
+                    }
+                  />
+                );
+              })}
             </>
           )}
         </>

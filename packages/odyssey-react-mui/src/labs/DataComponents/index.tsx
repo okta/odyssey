@@ -11,11 +11,8 @@
  */
 
 export { DataView, type DataViewProps } from "./DataView";
+export { DataTable, type DataTableProps } from "./DataTable";
 export { DataStack, type DataStackProps } from "./DataStack";
-export {
-  DataTable as NewDataTable,
-  type DataTableProps as NewDataTableProps,
-} from "./DataTable";
 
 export * from "./constants";
 export * from "./types";

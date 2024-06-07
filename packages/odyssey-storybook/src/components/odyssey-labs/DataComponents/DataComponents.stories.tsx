@@ -22,6 +22,8 @@ import {
   availableLayouts,
   TableProps,
   StackProps,
+  DataTable,
+  DataStack,
 } from "@okta/odyssey-react-mui/labs";
 import { PauseIcon, RefreshIcon } from "@okta/odyssey-react-mui/icons";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -34,11 +36,8 @@ import { filterData, reorderData } from "./dataFunctions";
 import { Dispatch, SetStateAction, useCallback, useState } from "react";
 import {
   Box,
-  Heading5,
   MenuItem,
-  Paragraph,
   Status,
-  Support,
   Button,
   EmptyState,
   paginationTypeValues,
@@ -185,9 +184,9 @@ const storybookMeta: Meta<DataViewMetaProps> = {
       control: "boolean",
       name: "tableOptions.hasSorting",
     },
-    renderRow: {
+    cardProps: {
       control: null,
-      name: "stackOptions.renderRow",
+      name: "stackOptions.cardProps",
     },
     maxGridColumns: {
       control: "number",
@@ -271,38 +270,6 @@ const useDataCallbacks = (
   return { getData, onReorderRows, onChangeRowSelection };
 };
 
-// Common row rendering function
-const renderRow = (row: DataRow) => {
-  return (
-    <>
-      <Support component="div">
-        {row.city}, {row.state}
-      </Support>
-      <Heading5>{row.name}</Heading5>
-      <Box
-        sx={{
-          marginBlockStart: -1,
-          marginBlockEnd: 3,
-        }}
-      >
-        <Paragraph color="textSecondary">
-          {row.name} is {row.age} years old.
-        </Paragraph>
-      </Box>
-      <Status
-        label={row.risk.charAt(0).toUpperCase() + row.risk.slice(1)}
-        severity={
-          row.risk === "low"
-            ? "success"
-            : row.risk === "medium"
-              ? "warning"
-              : "error"
-        }
-      />
-    </>
-  );
-};
-
 // Common action menu items
 const actionMenuItems = (selectedRows: DataRowSelectionState) => (
   <>
@@ -351,6 +318,24 @@ const customNoResultsPlaceholder = (
     description="You should try searching or filtering for something else."
   />
 );
+
+const cardProps = (row: DataRow) => ({
+  overline: `${row.city}, ${row.state}`,
+  title: row.name,
+  description: `${row.name} is ${row.age} years old.`,
+  children: (
+    <Status
+      label={row.risk.charAt(0).toUpperCase() + row.risk.slice(1)}
+      severity={
+        row.risk === "low"
+          ? "success"
+          : row.risk === "medium"
+            ? "warning"
+            : "error"
+      }
+    />
+  ),
+});
 
 // Base story configuration
 const BaseStory: StoryObj<DataViewMetaProps> = {
@@ -408,7 +393,7 @@ const BaseStory: StoryObj<DataViewMetaProps> = {
           initialDensity: args.initialDensity,
         }}
         stackOptions={{
-          renderRow: renderRow,
+          cardProps: cardProps,
           rowActionMenuItems: args.hasActionMenuItems
             ? actionMenuItems
             : undefined,
@@ -422,4 +407,153 @@ const BaseStory: StoryObj<DataViewMetaProps> = {
 export const Default: StoryObj<DataViewMetaProps> = {
   ...BaseStory,
   args: {},
+};
+
+export const TableOnly: StoryObj<DataViewMetaProps> = {
+  ...BaseStory,
+  args: {
+    availableLayouts: "table",
+  },
+};
+
+export const StackWithMultipleLayouts: StoryObj<DataViewMetaProps> = {
+  ...BaseStory,
+  args: {
+    availableLayouts: ["list", "grid"],
+  },
+};
+
+export const StackListOnly: StoryObj<DataViewMetaProps> = {
+  ...BaseStory,
+  args: {
+    availableLayouts: ["list"],
+  },
+};
+
+export const StackGridOnly: StoryObj<DataViewMetaProps> = {
+  ...BaseStory,
+  args: {
+    availableLayouts: ["grid"],
+  },
+};
+
+export const Everything: StoryObj<DataViewMetaProps> = {
+  ...BaseStory,
+  args: {
+    hasRowReordering: true,
+    hasPagination: true,
+    hasFilters: true,
+    hasSearch: true,
+    hasChangeableDensity: true,
+    hasColumnResizing: true,
+    hasColumnVisibility: true,
+    hasSorting: true,
+    hasActionButtons: true,
+    hasActionMenuItems: true,
+    hasRowSelection: true,
+  },
+};
+
+export const DataTableComponent: StoryObj<DataViewMetaProps> = {
+  render: function Base(args) {
+    const [data, setData] = useState<Person[]>(personData);
+    const { getData, onReorderRows, onChangeRowSelection } = useDataCallbacks(
+      data,
+      setData,
+    );
+
+    return (
+      <DataTable
+        getData={getData}
+        onReorderRows={onReorderRows}
+        onChangeRowSelection={onChangeRowSelection}
+        bulkActionMenuItems={
+          args.hasActionMenuItems ? actionMenuItems : undefined
+        }
+        hasRowReordering={args.hasRowReordering}
+        hasRowSelection={args.hasRowSelection}
+        hasPagination={args.hasPagination}
+        currentPage={args.currentPage}
+        paginationType={args.paginationType}
+        resultsPerPage={args.resultsPerPage}
+        totalRows={args.totalRows}
+        hasFilters={args.hasFilters}
+        hasSearch={args.hasSearch}
+        hasSearchSubmitButton={args.hasSearchSubmitButton}
+        searchDelayTime={args.searchDelayTime}
+        errorMessage={args.errorMessage}
+        isLoading={args.isLoading}
+        isEmpty={args.isEmpty}
+        isNoResults={args.isNoResults}
+        emptyPlaceholder={
+          args.hasCustomEmptyPlaceholder ? customEmptyPlaceholder : undefined
+        }
+        noResultsPlaceholder={
+          args.hasCustomNoResultsPlaceholder
+            ? customNoResultsPlaceholder
+            : undefined
+        }
+        columns={personColumns}
+        hasSorting={args.hasSorting}
+        rowActionMenuItems={
+          args.hasActionMenuItems ? actionMenuItems : undefined
+        }
+        rowActionButtons={args.hasActionButtons ? actionButtons : undefined}
+        hasColumnVisibility={args.hasColumnVisibility}
+        hasColumnResizing={args.hasColumnResizing}
+        hasChangeableDensity={args.hasChangeableDensity}
+        initialDensity={args.initialDensity}
+      />
+    );
+  },
+};
+
+export const DataStackComponent: StoryObj<DataViewMetaProps> = {
+  render: function Base(args) {
+    const [data, setData] = useState<Person[]>(personData);
+    const { getData, onReorderRows, onChangeRowSelection } = useDataCallbacks(
+      data,
+      setData,
+    );
+
+    return (
+      <DataStack
+        availableLayouts={["list", "grid"]}
+        getData={getData}
+        onReorderRows={onReorderRows}
+        onChangeRowSelection={onChangeRowSelection}
+        bulkActionMenuItems={
+          args.hasActionMenuItems ? actionMenuItems : undefined
+        }
+        hasRowReordering={args.hasRowReordering}
+        hasRowSelection={args.hasRowSelection}
+        hasPagination={args.hasPagination}
+        currentPage={args.currentPage}
+        paginationType={args.paginationType}
+        resultsPerPage={args.resultsPerPage}
+        totalRows={args.totalRows}
+        hasFilters={args.hasFilters}
+        hasSearch={args.hasSearch}
+        hasSearchSubmitButton={args.hasSearchSubmitButton}
+        searchDelayTime={args.searchDelayTime}
+        errorMessage={args.errorMessage}
+        isLoading={args.isLoading}
+        isEmpty={args.isEmpty}
+        isNoResults={args.isNoResults}
+        emptyPlaceholder={
+          args.hasCustomEmptyPlaceholder ? customEmptyPlaceholder : undefined
+        }
+        noResultsPlaceholder={
+          args.hasCustomNoResultsPlaceholder
+            ? customNoResultsPlaceholder
+            : undefined
+        }
+        cardProps={cardProps}
+        rowActionMenuItems={
+          args.hasActionMenuItems ? actionMenuItems : undefined
+        }
+        maxGridColumns={args.maxGridColumns}
+      />
+    );
+  },
 };
