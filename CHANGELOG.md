@@ -3,6 +3,56 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.16.0](https://github.com/okta/odyssey/compare/v1.15.8...odyssey-1.16.0) (2024-06-07)
+
+### Features
+
+- [Admin page template](https://www.figma.com/file/VCboDINbWviK0pOvWlFbbo/Blank-admin-template?type=design&t=hPcrk4QupmBQS9dW-6) - [Figma] A blank canvas for designers containing the basic framework with which to create any type of UI.
+- [Data Table](https://odyssey.okta.design/latest/components/data-table/design-j0LLQfAR) [[2042]](https://github.com/okta/odyssey/pull/2042) - Data table organizes and displays information so it’s easy for users to scan, sort, analyze, compare, and take action.
+- [Date Picker (Labs)](https://odyssey.okta.design/latest/components/date-picker/design-I91EF1Cm) [[2200]](https://github.com/okta/odyssey/pull/2200) - A date picker allows people to select a single date or time.
+- [Drawer](https://odyssey.okta.design/latest/components/drawer/design-wu4zfglp) [2198](https://github.com/okta/odyssey/pull/2198) - A new modal content container that’s perfect for supplemental filtering workflows and editing short lists of item.
+- EmptyState component [[2175]](https://github.com/okta/odyssey/pull/2175)
+- [File uploader (Labs)](https://odyssey.okta.design/latest/components/file-uploader/design-7RVlRb8E) [2088](https://github.com/okta/odyssey/pull/2088) - File uploader lets users upload files from a computer or device to a specific location.
+- Odyssey's [Roadmap page](https://odyssey.okta.design/latest/about-odyssey/roadmap-tEKvs7fF) now includes a customizable table view of FY2025 timing estimates and current phases for each planned component and pattern.
+- Pagination component [[2166]](https://github.com/okta/odyssey/pull/2166)
+
+### Enhancements
+
+- Add clarification for textarea usage in `TextField` [[2227]](https://github.com/okta/odyssey/pull/2227)
+- Add href prop and "Floating Action" variant to `Button` [[2232]](https://github.com/okta/odyssey/pull/2232)
+- Add option to truncate or wrap `DataTable` cells [[2178]](https://github.com/okta/odyssey/pull/2178)
+- Add row expansion to `DataTable` [[2162]](https://github.com/okta/odyssey/pull/2162)
+- Add `info` variant to `Status` [[2235]](https://github.com/okta/odyssey/pull/2235)
+- Add Secondary Danger `Button` variant [[2228]](https://github.com/okta/odyssey/pull/2228)
+- Add stories for min/max date prop in `DatePicker` [[2213]](https://github.com/okta/odyssey/pull/2213)
+- Display empty values in `Select` [[2205]](https://github.com/okta/odyssey/pull/2205)
+- Generate new odyssey icons [[2233]](https://github.com/okta/odyssey/pull/2233)
+- Improve `DataTable` density handling [[2177]](https://github.com/okta/odyssey/pull/2177)
+- Navigation icons in Figma. We’ve also updated the glyph grid, and made file organization updates, and visual optimizations.
+- Move `tsx` dependency to `dev` and upgrade [[2212]](https://github.com/okta/odyssey/pull/2212)
+- Test selector library for Odyssey components [2209](https://github.com/okta/odyssey/pull/2209)
+- [Universal Okta icons](https://okta.slack.com/archives/C7T2H3KNJ/p1709857064692349) in Figma
+- Updated disabled `Button` guidance [[2214]](https://github.com/okta/odyssey/pull/2214)
+
+### Fixes
+
+- Add Applitools Yarn dependencies to cache [[2187]](https://github.com/okta/odyssey/pull/2187)
+- Add support for lists in `Callout` [[2189]](https://github.com/okta/odyssey/pull/2189)
+- Add `tabindex` to enable `Menu` KB navigation [[2225]](https://github.com/okta/odyssey/pull/2225)
+- Allow multi `Select` to pass value to filter [[2231]](https://github.com/okta/odyssey/pull/2231)
+- Change how mui tooltip ref is assigned in `Button` [[2206]](https://github.com/okta/odyssey/pull/2206)
+- Checkbox item size issue in hidden instances [Figma] [[DES-5855]](https://oktainc.atlassian.net/browse/DES-5855)
+- Expose "filled" variant of `SearchField` [[2226]](https://github.com/okta/odyssey/pull/2226)
+- Fix `Autocomplete` style issues [[2192]](https://github.com/okta/odyssey/pull/2192)
+- Fix `Autocomplete` dropdown height [[2234]](https://github.com/okta/odyssey/pull/2234)
+- Fix broken height on multi `Select` [[2183]](https://github.com/okta/odyssey/pull/2183)
+- Fix missing callback dependencies in `DataTable` [[2188]](https://github.com/okta/odyssey/pull/2188)
+- Remove HTML lang attr [[2197]](https://github.com/okta/odyssey/pull/2197)
+- Re-add support for "callToAction" `Button` usage [[2229]](https://github.com/okta/odyssey/pull/2229)
+- Rename text wrapping prop in `DataTable` [[2195]](https://github.com/okta/odyssey/pull/2195)
+- Truncate long `Breadcrumbs` [[2182]](https://github.com/okta/odyssey/pull/2182)
+- Update `Callout` storybook docs [[2204]](https://github.com/okta/odyssey/pull/2204)
+
 ## [1.15.9](https://github.com/okta/odyssey/compare/v1.15.8...v1.15.9) (2024-03-26)
 
 ### Bug Fixes
