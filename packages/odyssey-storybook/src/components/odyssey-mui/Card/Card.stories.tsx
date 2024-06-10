@@ -19,7 +19,7 @@ import {
   MenuItem,
   CardProps,
 } from "@okta/odyssey-react-mui";
-import { Checkbox } from "@mui/material";
+import { Checkbox as MuiCheckbox } from "@mui/material";
 
 const storybookMeta: Meta<CardProps> = {
   title: "MUI Components/Card",
@@ -254,7 +254,7 @@ export const Accessory: StoryObj<typeof Card> = {
         image={props.image}
         Accessory={
           <Box sx={{ marginBlockStart: -1 }}>
-            <Checkbox />
+            <MuiCheckbox inputProps={{ "aria-label": "Accessory checkbox" }} />
           </Box>
         }
       />
