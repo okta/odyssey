@@ -4,38 +4,26 @@ source $OKTA_HOME/$REPO/scripts/setup.sh
 
 cd $OKTA_HOME/$REPO
 
-PUBLISH_SHA="$(git rev-parse --short $SHA)"
-PUBLISH_REGISTRY="${ARTIFACTORY_URL}/api/npm/npm-topic"
-CURRENT_VERSION=$(< lerna.json jq -r '.version')
-TAGGED_VERSION=$CURRENT_VERSION-$PUBLISH_SHA
+get_terminus_secret "/" aws_access_key_id AWS_ACCESS_KEY_ID
+get_terminus_secret "/" aws_secret_access_key AWS_SECRET_ACCESS_KEY
 
-npm config set @okta:registry ${PUBLISH_REGISTRY}
+echo "SHA7=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})" >> $GITHUB_ENV
+echo "URL_STORYBOOK="https://${SHA7}.ods.dev"" >> $GITHUB_ENV
+echo "COMMIT_MSG=${{ github.event.head_commit.message || github.event.pull_request.title }}" >> $GITHUB_ENV
 
-function lerna_publish() {
-  # use lerna to publish without making a commit to the repo
-  MY_CMD="yarn run lerna publish from-package --force-publish=* --ignore-changes --no-push --no-git-tag-version --no-verify-access --registry \"${PUBLISH_REGISTRY}\" --yes"
-  echo "Running ${MY_CMD}"
-  ${MY_CMD}
-}
+yarn build && cd ./packages/odyssey-storybook && rm -rf ./node_modules/.cache && yarn build
 
-# prevent local changes from being reported so lerna can publish
-git checkout .
+aws s3 sync ./packages/odyssey-storybook/dist/ s3://ods.dev/$SHA7 --delete
 
-# update version with commit SHA to allow lerna to publish
-FILES_TO_UPDATE_VERSION="lerna.json packages/odyssey-design-tokens/package.json packages/odyssey-babel-preset/package.json packages/odyssey-babel-loader/package.json packages/odyssey-react-mui/package.json packages/browserslist-config-odyssey/package.json"
-for PATH_AND_FILE in $FILES_TO_UPDATE_VERSION; do
-  FULL_PATH="$OKTA_HOME/$REPO/$PATH_AND_FILE"
-  json_contents="$(jq '.version = "'$TAGGED_VERSION'"' $FULL_PATH)" && \
-  echo -E "${json_contents}" > $FULL_PATH
-  git update-index --assume-unchanged $FULL_PATH
-done
+bash ./notify-slack.sh
 
-echo "Publishing to artifactory"
+echo "Publishing to Storybook"
 if ! lerna_publish; then
-  echo "ERROR: Lerna Publish has failed."
+  echo "ERROR: Storybook Publish has failed."
   exit $PUBLISH_ARTIFACTORY_FAILURE
 else
-  echo "Publish successful. Sending promotion message"
+  echo "Publish successful."
+  echo $URL_STORYBOOK
 fi
 
 exit $SUCCESS
