@@ -82,6 +82,9 @@ const storybookMeta: Meta<DataViewMetaProps> = {
         },
       },
     },
+    isRowReorderingDisabled: {
+      control: "boolean",
+    },
     onReorderRows: {
       control: null,
       table: {
@@ -355,6 +358,7 @@ const BaseStory: StoryObj<DataViewMetaProps> = {
           args.hasActionMenuItems ? actionMenuItems : undefined
         }
         hasRowReordering={args.hasRowReordering}
+        isRowReorderingDisabled={args.isRowReorderingDisabled}
         hasRowSelection={args.hasRowSelection}
         hasPagination={args.hasPagination}
         currentPage={args.currentPage}
@@ -412,7 +416,7 @@ export const Default: StoryObj<DataViewMetaProps> = {
 export const TableOnly: StoryObj<DataViewMetaProps> = {
   ...BaseStory,
   args: {
-    availableLayouts: "table",
+    availableLayouts: ["table"],
   },
 };
 
@@ -471,6 +475,7 @@ export const DataTableComponent: StoryObj<DataViewMetaProps> = {
           args.hasActionMenuItems ? actionMenuItems : undefined
         }
         hasRowReordering={args.hasRowReordering}
+        isRowReorderingDisabled={args.isRowReorderingDisabled}
         hasRowSelection={args.hasRowSelection}
         hasPagination={args.hasPagination}
         currentPage={args.currentPage}
@@ -526,6 +531,7 @@ export const DataStackComponent: StoryObj<DataViewMetaProps> = {
           args.hasActionMenuItems ? actionMenuItems : undefined
         }
         hasRowReordering={args.hasRowReordering}
+        isRowReorderingDisabled={args.isRowReorderingDisabled}
         hasRowSelection={args.hasRowSelection}
         hasPagination={args.hasPagination}
         currentPage={args.currentPage}

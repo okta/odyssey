@@ -15,5 +15,5 @@ export { DataTable, type DataTableProps } from "./DataTable";
 export { DataStack, type DataStackProps } from "./DataStack";
 
 export * from "./constants";
-export * from "./types";
+export * from "./componentTypes";
 export * from "./dataTypes";

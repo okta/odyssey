@@ -17,7 +17,7 @@ import { MenuItem } from "../../MenuItem";
 import { ListIcon, ShowIcon } from "../../icons.generated";
 import { densityValues } from "./constants";
 import { useTranslation } from "react-i18next";
-import { TableProps, TableState } from "./types";
+import { TableProps, TableState } from "./componentTypes";
 
 export type TableSettingsProps = {
   tableOptions: TableProps;

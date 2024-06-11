@@ -29,7 +29,7 @@ import {
   ReactNode,
   Dispatch,
 } from "react";
-import { TableProps, TableState, UniversalProps } from "./types";
+import { TableProps, TableState, UniversalProps } from "./componentTypes";
 import { DataTableCell } from "./dataTypes";
 import {
   ArrowDownIcon,
@@ -62,6 +62,7 @@ export type TableContentProps = {
   isEmpty?: boolean;
   isNoResults?: boolean;
   hasRowReordering: UniversalProps["hasRowReordering"];
+  isRowReorderingDisabled?: boolean;
   onReorderRows: UniversalProps["onReorderRows"];
   totalRows: UniversalProps["totalRows"];
   rowReorderingUtilities: {
@@ -123,6 +124,7 @@ const TableContent = ({
   isEmpty,
   isNoResults,
   hasRowReordering,
+  isRowReorderingDisabled,
   onReorderRows,
   rowReorderingUtilities,
   hasRowSelection,
@@ -229,6 +231,7 @@ const TableContent = ({
                 row={row}
                 rowIndex={currentIndex}
                 rowActionMenuItems={tableOptions.rowActionMenuItems}
+                isRowReorderingDisabled={isRowReorderingDisabled}
                 totalRows={totalRows}
                 updateRowOrder={
                   hasRowReordering && onReorderRows ? updateRowOrder : undefined
@@ -240,13 +243,15 @@ const TableContent = ({
       );
     },
     [
-      pagination,
+      pagination.pageIndex,
+      pagination.pageSize,
       tableOptions,
       hasRowReordering,
-      onReorderRows,
-      totalRows,
-      updateRowOrder,
       t,
+      isRowReorderingDisabled,
+      totalRows,
+      onReorderRows,
+      updateRowOrder,
     ],
   );
 
@@ -309,6 +314,7 @@ const TableContent = ({
       onBlur: () => resetDraggingAndHoveredRow(table),
       onDragEnd: () => handleDragHandleOnDragEnd(table),
       onDragCapture: () => handleDragHandleOnDragCapture(table),
+      disabled: isRowReorderingDisabled,
       sx: dragHandleStyles,
       ...dragHandleText,
     }),

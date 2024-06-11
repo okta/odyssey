@@ -11,10 +11,9 @@
  */
 
 import { Dispatch, ReactNode, SetStateAction, memo, useCallback } from "react";
-import { StackLayout, StackProps, UniversalProps } from "./types";
+import { StackLayout, StackProps, UniversalProps } from "./componentTypes";
 import { Box } from "../../Box";
-import { CSSObject } from "@emotion/styled";
-// import { DataTableRowActions } from "../../DataTable/DataTableRowActions";
+import styled, { CSSObject } from "@emotion/styled";
 import {
   MRT_Row,
   MRT_RowData,
@@ -22,9 +21,13 @@ import {
   MRT_TableInstance,
 } from "material-react-table";
 import { CircularProgress } from "../../CircularProgress";
-import { Card } from "../..";
 import { Checkbox as MuiCheckbox } from "@mui/material";
 import { RowActions } from "./RowActions";
+import { StackCard } from "./StackCard";
+import {
+  DesignTokens,
+  useOdysseyDesignTokens,
+} from "../../OdysseyDesignTokensContext";
 
 export type StackContentProps = {
   currentLayout: StackLayout;
@@ -35,6 +38,7 @@ export type StackContentProps = {
   isEmpty?: boolean;
   isNoResults?: boolean;
   hasRowReordering: UniversalProps["hasRowReordering"];
+  isRowReorderingDisabled?: boolean;
   onReorderRows: UniversalProps["onReorderRows"];
   totalRows: UniversalProps["totalRows"];
   rowReorderingUtilities: {
@@ -93,6 +97,7 @@ const StackContent = ({
   isEmpty,
   isNoResults,
   hasRowReordering,
+  isRowReorderingDisabled,
   onReorderRows,
   rowReorderingUtilities,
   hasRowSelection,
@@ -119,34 +124,57 @@ const StackContent = ({
 
   const { updateRowOrder } = rowReorderingUtilities;
 
+  const odysseyDesignTokens = useOdysseyDesignTokens();
+
+  const StackContainer = styled("div", {
+    shouldForwardProp: (prop) =>
+      prop !== "odysseyDesignTokens" &&
+      prop !== "currentLayout" &&
+      prop !== "maxGridColumns",
+  })<{
+    odysseyDesignTokens: DesignTokens;
+    currentLayout: StackLayout;
+    maxGridColumns: number;
+  }>(({ odysseyDesignTokens, currentLayout, maxGridColumns }) => ({
+    display: currentLayout === "stack" ? "flex" : "grid",
+    flexDirection: currentLayout === "stack" ? "column" : undefined,
+    gap: odysseyDesignTokens.Spacing5,
+    [`@media (max-width: 720px)`]: {
+      gridTemplateColumns:
+        currentLayout === "grid" ? "repeat(1, 1fr)" : undefined,
+    },
+    [`@media (min-width: 720px) and (max-width: 960px)`]: {
+      gridTemplateColumns:
+        currentLayout === "grid" ? "repeat(2, 1fr)" : undefined,
+    },
+    [`@media (min-width: 960px)`]: {
+      gridTemplateColumns:
+        currentLayout === "grid" ? `repeat(${maxGridColumns}, 1fr)` : undefined,
+    },
+  }));
+
+  const LoadingContainer = styled("div", {
+    shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+  })<{
+    odysseyDesignTokens: DesignTokens;
+  }>(({ odysseyDesignTokens }) => ({
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    paddingBlock: odysseyDesignTokens.Spacing5,
+  }));
+
   return (
-    <Box
-      sx={{
-        display: currentLayout === "stack" ? "flex" : "grid",
-        flexDirection: currentLayout === "stack" ? "column" : undefined,
-        gap: 5,
-        gridTemplateColumns:
-          currentLayout === "grid"
-            ? {
-                xs: "repeat(1, 1fr)",
-                sm: "repeat(2, 1fr)",
-                md: `repeat(${stackOptions.maxGridColumns ?? 3}, 1fr)`,
-              }
-            : undefined,
-      }}
+    <StackContainer
+      odysseyDesignTokens={odysseyDesignTokens}
+      currentLayout={currentLayout}
+      maxGridColumns={stackOptions.maxGridColumns ?? 3}
     >
       {isLoading ? (
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "100%",
-            paddingBlock: 5,
-          }}
-        >
+        <LoadingContainer odysseyDesignTokens={odysseyDesignTokens}>
           <CircularProgress />
-        </Box>
+        </LoadingContainer>
       ) : (
         <>
           {!data || data.length === 0 || isEmpty || isNoResults ? (
@@ -160,7 +188,7 @@ const StackContent = ({
                   index + (pagination.pageIndex - 1) * pagination.pageSize;
 
                 return (
-                  <Card
+                  <StackCard
                     overline={overline}
                     title={title}
                     description={description}
@@ -183,6 +211,7 @@ const StackContent = ({
                           row={row}
                           rowIndex={currentIndex}
                           rowActionMenuItems={stackOptions.rowActionMenuItems}
+                          isRowReorderingDisabled={isRowReorderingDisabled}
                           totalRows={totalRows}
                           updateRowOrder={
                             hasRowReordering && onReorderRows
@@ -199,7 +228,7 @@ const StackContent = ({
           )}
         </>
       )}
-    </Box>
+    </StackContainer>
   );
 };
 

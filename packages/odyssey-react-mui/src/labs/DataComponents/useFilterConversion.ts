@@ -12,7 +12,7 @@
 
 import { useCallback, useMemo } from "react";
 import { DataFilter } from "../DataFilters";
-import { UniversalProps, TableProps } from "./types";
+import { UniversalProps, TableProps } from "./componentTypes";
 import { DataTableColumn } from "../../DataTable";
 import { MRT_RowData } from "material-react-table";
 

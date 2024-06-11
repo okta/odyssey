@@ -25,7 +25,7 @@ import {
   availableStackLayouts,
   densityValues,
 } from "./constants";
-import { CardProps, MenuButtonProps } from "../..";
+import { MenuButtonProps } from "../..";
 import { ReactNode } from "react";
 import { DataTableRowActionsProps } from "../../DataTable/DataTableRowActions";
 import {
@@ -34,12 +34,13 @@ import {
   DataRowSelectionState,
   DataTableColumn,
 } from "./dataTypes";
+import { StackCardProps } from "./StackCard";
 
 export type Layout = (typeof availableLayouts)[number];
 export type StackLayout = (typeof availableStackLayouts)[number];
 
-export type AvailableLayouts = Layout | Layout[];
-export type AvailableStackLayouts = StackLayout | StackLayout[];
+export type AvailableLayouts = Layout[];
+export type AvailableStackLayouts = StackLayout[];
 
 export type UniversalProps = {
   // Data handling
@@ -52,6 +53,7 @@ export type UniversalProps = {
   }: DataGetDataType) => MRT_RowData[] | Promise<MRT_RowData[]>;
   getRowId?: MRT_TableOptions<MRT_RowData>["getRowId"];
   hasRowReordering?: boolean;
+  isRowReorderingDisabled?: boolean;
   onReorderRows?: ({ rowId, newRowIndex }: DataOnReorderRowsType) => void;
 
   // Row selection
@@ -96,23 +98,15 @@ export type TableProps = {
   hasSorting?: boolean;
 };
 
-export type StackCardProps = {
-  description?: CardProps["description"];
-  image?: CardProps["image"];
-  overline?: CardProps["overline"];
-  title?: CardProps["title"];
-  children?: CardProps["children"];
-};
-
 export type StackProps = {
   cardProps: (row: MRT_RowData) => StackCardProps;
   maxGridColumns?: number;
   rowActionMenuItems?: DataTableRowActionsProps["rowActionMenuItems"];
 };
 
-export type ViewProps = {
-  initialLayout?: (typeof availableLayouts)[number];
-  availableLayouts?: AvailableLayouts;
+export type ViewProps<L extends Layout> = {
+  initialLayout?: L;
+  availableLayouts?: L[];
   tableOptions?: TableProps;
   stackOptions?: StackProps;
 };

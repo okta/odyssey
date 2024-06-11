@@ -19,7 +19,6 @@ import {
   MenuItem,
   CardProps,
 } from "@okta/odyssey-react-mui";
-import { Checkbox as MuiCheckbox } from "@mui/material";
 
 const storybookMeta: Meta<CardProps> = {
   title: "MUI Components/Card",
@@ -95,27 +94,6 @@ const storybookMeta: Meta<CardProps> = {
       table: {
         type: {
           summary: "[MenuItem | Divider | ListSubheader]",
-        },
-        defaultValue: "",
-      },
-    },
-    children: {
-      control: null,
-      description: "Arbitrary content to be added at the bottom of the card.",
-      table: {
-        type: {
-          summary: "ReactNode",
-        },
-        defaultValue: "",
-      },
-    },
-    Accessory: {
-      control: null,
-      description:
-        "Arbitrary content to be added at the start of the card (in LTR languages, the left side).",
-      table: {
-        type: {
-          summary: "ReactNode",
         },
         defaultValue: "",
       },
@@ -217,46 +195,6 @@ export const ButtonWithoutImage: StoryObj<typeof Card> = {
           </>
         }
         button={<Button variant="primary" label="Button" />}
-      />
-    </Box>
-  ),
-};
-
-export const CustomContent: StoryObj<typeof Card> = {
-  render: ({ ...props }) => (
-    <Box sx={{ maxWidth: 262 }}>
-      <Card
-        overline={props.overline}
-        title={props.title}
-        description={props.description}
-        image={props.image}
-        children={<Box>This is arbitrary content.</Box>}
-      />
-    </Box>
-  ),
-};
-
-export const JustCustomContent: StoryObj<typeof Card> = {
-  render: () => (
-    <Box sx={{ maxWidth: 262 }}>
-      <Card children={<Box>This is arbitrary content.</Box>} />
-    </Box>
-  ),
-};
-
-export const Accessory: StoryObj<typeof Card> = {
-  render: ({ ...props }) => (
-    <Box sx={{ maxWidth: 262 }}>
-      <Card
-        overline={props.overline}
-        title={props.title}
-        description={props.description}
-        image={props.image}
-        Accessory={
-          <Box sx={{ marginBlockStart: -1 }}>
-            <MuiCheckbox inputProps={{ "aria-label": "Accessory checkbox" }} />
-          </Box>
-        }
       />
     </Box>
   ),

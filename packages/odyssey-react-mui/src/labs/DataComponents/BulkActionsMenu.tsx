@@ -11,7 +11,7 @@
  */
 
 import { memo, useCallback, Dispatch, SetStateAction } from "react";
-import { UniversalProps } from "./types";
+import { UniversalProps } from "./componentTypes";
 import { MenuButton } from "../../MenuButton";
 import { Button } from "../../Button";
 import { Box } from "../../Box";

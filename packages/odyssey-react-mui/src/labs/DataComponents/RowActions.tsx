@@ -31,6 +31,7 @@ export type RowActionsProps = {
     row: MRT_RowData,
   ) => ReactElement<typeof Button | typeof Fragment>;
   rowActionMenuItems?: (row: MRT_RowData) => MenuButtonProps["children"];
+  isRowReorderingDisabled?: boolean;
   totalRows?: DataTableProps["totalRows"];
   updateRowOrder?: ({
     rowId,
@@ -45,6 +46,7 @@ const RowActions = ({
   row,
   rowIndex,
   rowActionMenuItems,
+  isRowReorderingDisabled,
   totalRows,
   updateRowOrder,
 }: RowActionsProps) => {
@@ -76,21 +78,30 @@ const RowActions = ({
       {rowActionMenuItems && updateRowOrder && <hr />}
       {updateRowOrder && (
         <>
-          <MenuItem isDisabled={rowIndex <= 0} onClick={handleToFrontClick}>
+          <MenuItem
+            isDisabled={rowIndex <= 0 || isRowReorderingDisabled}
+            onClick={handleToFrontClick}
+          >
             <ArrowTopIcon /> <Trans i18nKey="table.reorder.tofront" />
           </MenuItem>
-          <MenuItem isDisabled={rowIndex <= 0} onClick={handleForwardClick}>
+          <MenuItem
+            isDisabled={rowIndex <= 0 || isRowReorderingDisabled}
+            onClick={handleForwardClick}
+          >
             <ArrowUpIcon /> <Trans i18nKey="table.reorder.forward" />
           </MenuItem>
           <MenuItem
-            isDisabled={totalRows ? rowIndex >= totalRows - 1 : false}
+            isDisabled={
+              (totalRows ? rowIndex >= totalRows - 1 : false) ||
+              isRowReorderingDisabled
+            }
             onClick={handleBackwardClick}
           >
             <ArrowDownIcon /> <Trans i18nKey="table.reorder.backward" />
           </MenuItem>
           {totalRows && (
             <MenuItem
-              isDisabled={rowIndex >= totalRows - 1}
+              isDisabled={rowIndex >= totalRows - 1 || isRowReorderingDisabled}
               onClick={handleToBackClick}
             >
               <ArrowBottomIcon /> <Trans i18nKey="table.reorder.toback" />

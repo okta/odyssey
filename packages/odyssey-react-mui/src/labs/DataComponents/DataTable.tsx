@@ -12,44 +12,78 @@
 
 import { memo } from "react";
 import { DataView } from "./DataView";
-import { TableProps, UniversalProps } from "./types";
+import { TableProps, UniversalProps } from "./componentTypes";
 
 export type DataTableProps = UniversalProps & TableProps;
 
-const DataTable = (props: DataTableProps) => {
+const DataTable = ({
+  getData,
+  hasRowSelection,
+  onChangeRowSelection,
+  bulkActionMenuItems,
+  hasPagination,
+  currentPage,
+  paginationType,
+  resultsPerPage,
+  totalRows,
+  hasFilters,
+  hasSearch,
+  hasSearchSubmitButton,
+  hasRowReordering,
+  isRowReorderingDisabled,
+  filters,
+  searchDelayTime,
+  errorMessage,
+  emptyPlaceholder,
+  noResultsPlaceholder,
+  isLoading,
+  isEmpty,
+  isNoResults,
+  columns,
+  initialDensity,
+  hasChangeableDensity,
+  hasColumnResizing,
+  hasColumnVisibility,
+  renderDetailPanel,
+  rowActionButtons,
+  rowActionMenuItems,
+  hasSorting,
+}: DataTableProps) => {
   return (
     <DataView
-      availableLayouts="table"
-      getData={props.getData}
-      hasRowSelection={props.hasRowSelection}
-      onChangeRowSelection={props.onChangeRowSelection}
-      bulkActionMenuItems={props.bulkActionMenuItems}
-      hasPagination={props.hasPagination}
-      currentPage={props.currentPage}
-      paginationType={props.paginationType}
-      resultsPerPage={props.resultsPerPage}
-      totalRows={props.totalRows}
-      hasFilters={props.hasFilters}
-      hasSearch={props.hasSearch}
-      hasSearchSubmitButton={props.hasSearchSubmitButton}
-      filters={props.filters}
-      searchDelayTime={props.searchDelayTime}
-      errorMessage={props.errorMessage}
-      emptyPlaceholder={props.emptyPlaceholder}
-      noResultsPlaceholder={props.noResultsPlaceholder}
-      isLoading={props.isLoading}
-      isEmpty={props.isEmpty}
-      isNoResults={props.isNoResults}
+      availableLayouts={["table"]}
+      getData={getData}
+      hasRowSelection={hasRowSelection}
+      onChangeRowSelection={onChangeRowSelection}
+      bulkActionMenuItems={bulkActionMenuItems}
+      hasPagination={hasPagination}
+      currentPage={currentPage}
+      paginationType={paginationType}
+      resultsPerPage={resultsPerPage}
+      totalRows={totalRows}
+      hasFilters={hasFilters}
+      hasSearch={hasSearch}
+      hasSearchSubmitButton={hasSearchSubmitButton}
+      hasRowReordering={hasRowReordering}
+      isRowReorderingDisabled={isRowReorderingDisabled}
+      filters={filters}
+      searchDelayTime={searchDelayTime}
+      errorMessage={errorMessage}
+      emptyPlaceholder={emptyPlaceholder}
+      noResultsPlaceholder={noResultsPlaceholder}
+      isLoading={isLoading}
+      isEmpty={isEmpty}
+      isNoResults={isNoResults}
       tableOptions={{
-        columns: props.columns,
-        initialDensity: props.initialDensity,
-        hasChangeableDensity: props.hasChangeableDensity,
-        hasColumnResizing: props.hasColumnResizing,
-        hasColumnVisibility: props.hasColumnVisibility,
-        renderDetailPanel: props.renderDetailPanel,
-        rowActionButtons: props.rowActionButtons,
-        rowActionMenuItems: props.rowActionMenuItems,
-        hasSorting: props.hasSorting,
+        columns,
+        initialDensity,
+        hasChangeableDensity,
+        hasColumnResizing,
+        hasColumnVisibility,
+        renderDetailPanel,
+        rowActionButtons,
+        rowActionMenuItems,
+        hasSorting,
       }}
     />
   );

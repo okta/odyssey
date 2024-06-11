@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2022-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -15,7 +15,7 @@ import {
   ReactElement,
   memo,
   useMemo,
-  useEffect,
+  ReactNode,
 } from "react";
 import {
   Card as MuiCard,
@@ -24,34 +24,37 @@ import {
 } from "@mui/material";
 import styled from "@emotion/styled";
 
-import { Button } from "./Button";
-import { ButtonContext } from "./ButtonContext";
-import { MoreIcon } from "./icons.generated";
-import { MenuButton, MenuButtonProps } from "./MenuButton";
+import { Button } from "../../Button";
+import { ButtonContext } from "../../ButtonContext";
+import { MoreIcon } from "../../icons.generated";
+import { MenuButton, MenuButtonProps } from "../../MenuButton";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "./OdysseyDesignTokensContext";
-import { Heading5, Paragraph, Support } from "./Typography";
-import { Box } from "./Box";
+} from "../../OdysseyDesignTokensContext";
+import { Heading5, Paragraph, Support } from "../../Typography";
+import { Box } from "../../Box";
 
 export const CARD_IMAGE_HEIGHT = "64px";
 
-export type CardProps = {
+export type StackCardProps = {
   description?: string;
   image?: ReactElement;
   overline?: string;
   title?: string;
+  children?: ReactNode;
 } & (
   | {
       onClick: MouseEventHandler;
       button?: never;
       menuButtonChildren?: never;
+      Accessory?: never;
     }
   | {
       onClick?: never;
       button?: ReactElement<typeof Button>;
       menuButtonChildren?: MenuButtonProps["children"];
+      Accessory?: ReactNode;
     }
 );
 
@@ -79,7 +82,7 @@ const MenuButtonContainer = styled("div", {
 
 const buttonProviderValue = { isFullWidth: true };
 
-const Card = ({
+const StackCard = ({
   button,
   description,
   image,
@@ -87,7 +90,9 @@ const Card = ({
   onClick,
   overline,
   title,
-}: CardProps) => {
+  children,
+  Accessory,
+}: StackCardProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const cardContent = useMemo(
@@ -97,6 +102,16 @@ const Card = ({
           display: "flex",
         }}
       >
+        {Accessory && (
+          <Box
+            sx={{
+              marginInlineEnd: 3,
+              marginInlineStart: -2,
+            }}
+          >
+            {Accessory}
+          </Box>
+        )}
         <Box>
           {image && (
             <ImageContainer
@@ -120,6 +135,18 @@ const Card = ({
               </ButtonContext.Provider>
             </MuiCardActions>
           )}
+
+          {children && (
+            <Box
+              sx={{
+                ["&:not(:first-child)"]: {
+                  marginBlockStart: 3,
+                },
+              }}
+            >
+              {children}
+            </Box>
+          )}
         </Box>
       </Box>
     ),
@@ -131,6 +158,7 @@ const Card = ({
       overline,
       title,
       odysseyDesignTokens,
+      children,
     ],
   );
 
@@ -160,23 +188,7 @@ const Card = ({
   );
 };
 
-const MemoizedCard = memo(Card);
-MemoizedCard.displayName = "Card";
+const MemoizedStackCard = memo(StackCard);
+MemoizedStackCard.displayName = "StackCard";
 
-/**
- * @deprecated The 'Tile' component is now called 'Card'. Please update your references as 'Tile' will be deprecated soon.
- */
-const Tile = (props: CardProps) => {
-  useEffect(() => {
-    console.warn(
-      "Warning: The 'Tile' component is now called 'Card'. Please update your references as 'Tile' will be deprecated soon.",
-    );
-  }, []);
-
-  return <MemoizedCard {...props} />;
-};
-
-const MemoizedTile = memo(Tile);
-MemoizedTile.displayName = "Tile";
-
-export { MemoizedCard as Card, MemoizedTile as Tile };
+export { MemoizedStackCard as StackCard };

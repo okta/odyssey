@@ -12,12 +12,11 @@
 
 import { memo, useEffect, useMemo, useState } from "react";
 import {
-  AvailableLayouts,
   Layout,
   UniversalProps,
   ViewProps,
   TableState,
-} from "./types";
+} from "./componentTypes";
 import {
   availableLayouts as allAvailableLayouts,
   densityValues,
@@ -42,31 +41,13 @@ import {
   MRT_RowSelectionState,
 } from "material-react-table";
 
-export type DataViewProps = UniversalProps & ViewProps;
-
-// Helper to get the starting layout:
-// - If availableLayouts is a string, return that
-// - If initialLayout is one of an array of availableLayouts, return initialLayout
-// - If initialLayout is not in the availableLayouts array, return the first item in availableLayouts
-const getInitialLayout = (
-  availableLayouts: AvailableLayouts,
-  initialLayout: Layout,
-): Layout => {
-  if (typeof availableLayouts === "string") {
-    return availableLayouts === initialLayout
-      ? initialLayout
-      : availableLayouts;
-  }
-  return availableLayouts.includes(initialLayout)
-    ? initialLayout
-    : availableLayouts[0];
-};
+export type DataViewProps = UniversalProps & ViewProps<Layout>;
 
 const DataView = ({
   getData: getDataFn,
   getRowId: getRowIdProp,
   availableLayouts = allAvailableLayouts,
-  initialLayout: initialLayoutProp = allAvailableLayouts[0],
+  initialLayout,
   hasSearch,
   hasFilters,
   hasSearchSubmitButton,
@@ -79,6 +60,7 @@ const DataView = ({
   totalRows,
   errorMessage: errorMessageProp,
   hasRowReordering,
+  isRowReorderingDisabled,
   onReorderRows,
   emptyPlaceholder,
   noResultsPlaceholder,
@@ -90,8 +72,9 @@ const DataView = ({
   isLoading: isLoadingProp,
   isNoResults: isNoResultsProp,
 }: DataViewProps) => {
-  const initialLayout = getInitialLayout(availableLayouts, initialLayoutProp);
-  const [currentLayout, setCurrentLayout] = useState<Layout>(initialLayout);
+  const [currentLayout, setCurrentLayout] = useState<Layout>(
+    initialLayout ?? availableLayouts[0],
+  );
 
   const [data, setData] = useState<MRT_RowData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(isLoadingProp ?? true);
@@ -343,6 +326,7 @@ const DataView = ({
           isEmpty={isEmpty}
           isNoResults={isNoResults}
           hasRowReordering={hasRowReordering}
+          isRowReorderingDisabled={isRowReorderingDisabled}
           onReorderRows={onReorderRows}
           rowReorderingUtilities={rowReorderingUtilities}
           hasRowSelection={hasRowSelection}
@@ -354,27 +338,29 @@ const DataView = ({
           draggingRow={draggingRow}
         />
       )}
-      {currentLayout !== "table" && stackOptions && (
-        <StackContent
-          currentLayout={currentLayout}
-          data={data}
-          getRowId={getRowId}
-          stackOptions={stackOptions}
-          isLoading={isLoading}
-          isEmpty={isEmpty}
-          isNoResults={isNoResults}
-          hasRowReordering={hasRowReordering}
-          onReorderRows={onReorderRows}
-          rowReorderingUtilities={rowReorderingUtilities}
-          hasRowSelection={hasRowSelection}
-          rowSelection={rowSelection}
-          setRowSelection={setRowSelection}
-          emptyState={emptyState}
-          pagination={pagination}
-          totalRows={totalRows}
-          draggingRow={draggingRow}
-        />
-      )}
+      {(currentLayout === "list" || currentLayout === "grid") &&
+        stackOptions && (
+          <StackContent
+            currentLayout={currentLayout}
+            data={data}
+            getRowId={getRowId}
+            stackOptions={stackOptions}
+            isLoading={isLoading}
+            isEmpty={isEmpty}
+            isNoResults={isNoResults}
+            hasRowReordering={hasRowReordering}
+            isRowReorderingDisabled={isRowReorderingDisabled}
+            onReorderRows={onReorderRows}
+            rowReorderingUtilities={rowReorderingUtilities}
+            hasRowSelection={hasRowSelection}
+            rowSelection={rowSelection}
+            setRowSelection={setRowSelection}
+            emptyState={emptyState}
+            pagination={pagination}
+            totalRows={totalRows}
+            draggingRow={draggingRow}
+          />
+        )}
 
       {hasPagination && (
         <Pagination

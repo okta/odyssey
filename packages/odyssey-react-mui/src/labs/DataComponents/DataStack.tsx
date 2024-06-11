@@ -12,7 +12,11 @@
 
 import { memo } from "react";
 import { DataView } from "./DataView";
-import { AvailableStackLayouts, StackProps, UniversalProps } from "./types";
+import {
+  AvailableStackLayouts,
+  StackProps,
+  UniversalProps,
+} from "./componentTypes";
 import { availableStackLayouts } from "./constants";
 
 export type DataStackProps = UniversalProps &
@@ -21,34 +25,63 @@ export type DataStackProps = UniversalProps &
     availableLayouts?: AvailableStackLayouts;
   };
 
-const DataStack = (props: DataStackProps) => {
+const DataStack = ({
+  availableLayouts,
+  getData,
+  hasRowSelection,
+  onChangeRowSelection,
+  bulkActionMenuItems,
+  hasPagination,
+  currentPage,
+  paginationType,
+  resultsPerPage,
+  totalRows,
+  hasFilters,
+  hasSearch,
+  hasSearchSubmitButton,
+  hasRowReordering,
+  isRowReorderingDisabled,
+  filters,
+  searchDelayTime,
+  errorMessage,
+  emptyPlaceholder,
+  noResultsPlaceholder,
+  isLoading,
+  isEmpty,
+  isNoResults,
+  cardProps,
+  maxGridColumns,
+  rowActionMenuItems,
+}: DataStackProps) => {
   return (
     <DataView
-      availableLayouts={props.availableLayouts}
-      getData={props.getData}
-      hasRowSelection={props.hasRowSelection}
-      onChangeRowSelection={props.onChangeRowSelection}
-      bulkActionMenuItems={props.bulkActionMenuItems}
-      hasPagination={props.hasPagination}
-      currentPage={props.currentPage}
-      paginationType={props.paginationType}
-      resultsPerPage={props.resultsPerPage}
-      totalRows={props.totalRows}
-      hasFilters={props.hasFilters}
-      hasSearch={props.hasSearch}
-      hasSearchSubmitButton={props.hasSearchSubmitButton}
-      filters={props.filters}
-      searchDelayTime={props.searchDelayTime}
-      errorMessage={props.errorMessage}
-      emptyPlaceholder={props.emptyPlaceholder}
-      noResultsPlaceholder={props.noResultsPlaceholder}
-      isLoading={props.isLoading}
-      isEmpty={props.isEmpty}
-      isNoResults={props.isNoResults}
+      availableLayouts={availableLayouts}
+      getData={getData}
+      hasRowSelection={hasRowSelection}
+      onChangeRowSelection={onChangeRowSelection}
+      bulkActionMenuItems={bulkActionMenuItems}
+      hasPagination={hasPagination}
+      currentPage={currentPage}
+      paginationType={paginationType}
+      resultsPerPage={resultsPerPage}
+      totalRows={totalRows}
+      hasFilters={hasFilters}
+      hasSearch={hasSearch}
+      hasSearchSubmitButton={hasSearchSubmitButton}
+      hasRowReordering={hasRowReordering}
+      isRowReorderingDisabled={isRowReorderingDisabled}
+      filters={filters}
+      searchDelayTime={searchDelayTime}
+      errorMessage={errorMessage}
+      emptyPlaceholder={emptyPlaceholder}
+      noResultsPlaceholder={noResultsPlaceholder}
+      isLoading={isLoading}
+      isEmpty={isEmpty}
+      isNoResults={isNoResults}
       stackOptions={{
-        cardProps: props.cardProps,
-        maxGridColumns: props.maxGridColumns,
-        rowActionMenuItems: props.rowActionMenuItems,
+        cardProps,
+        maxGridColumns,
+        rowActionMenuItems,
       }}
     />
   );
