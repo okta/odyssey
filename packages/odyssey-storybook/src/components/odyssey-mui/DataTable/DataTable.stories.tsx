@@ -12,8 +12,8 @@
 
 import type { Meta, StoryObj } from "@storybook/react";
 import {
-  UpdateFilters,
   paginationTypeValues,
+  UpdateFiltersOrValues,
 } from "@okta/odyssey-react-mui/labs";
 import {
   Box,
@@ -657,7 +657,7 @@ export const CustomFilters: StoryObj<DataTableProps> = {
         {
           id: "startLetter",
           label: "Name starting with...",
-          render: (updateFilters: UpdateFilters) => (
+          render: (updateFilters: UpdateFiltersOrValues) => (
             <Box
               sx={{
                 display: "flex",
@@ -786,7 +786,7 @@ export const FilterWithCustomRender: StoryObj<DataTableProps> = {
         {
           id: "visit",
           label: "Type of visit 🚀",
-          render: (updateFilters: UpdateFilters) => (
+          render: (updateFilters: UpdateFiltersOrValues) => (
             <Box>
               <Button
                 variant="secondary"
