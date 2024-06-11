@@ -10,9 +10,10 @@ echo $TEST_SUITE_TYPE > $TEST_SUITE_TYPE_FILE
 echo $TEST_RESULT_FILE_DIR > $TEST_RESULT_FILE_DIR_FILE
 
 get_terminus_secret "/" APPLITOOLS_API_KEY APPLITOOLS_API_KEY
+get_terminus_secret "/" APPLITOOLS_SERVER_URL APPLITOOLS_SERVER_URL
 
 if [[ -z "$APPLITOOLS_API_KEY" ]]; then
-  echo "Error in getting APPLITOOLS_API_KEY from Vault. APPLITOOLS_API_SECRET_IN_VAULT"
+  echo "Error in getting APPLITOOLS_API_KEY from Terminous."
   report_results FAILURE PUBLISH_TYPE_AND_RESULT_DIR_BUT_SUCCEED_IF_NO_RESULTS
   exit 1
 fi
@@ -22,5 +23,5 @@ if ! yarn workspace @okta/odyssey-storybook ci:visualRegressionTest; then
   exit ${PUBLISH_TYPE_AND_RESULT_DIR_BUT_ALWAYS_FAIL}
 fi
 
-echo "Lerna tests passed!"
+echo "Visual Regression Tests passed!"
 report_results SUCCESS publish_type_and_result_dir_but_succeed_if_no_results
