@@ -2,7 +2,7 @@ test_suites:
   - name: "Build"
     abort_commit_on_failure: true
     criteria: MERGE
-    queue_name: al2023
+    queue_name: ci-queue-productionJenga-AL2023
     script_path: /root/okta/odyssey/scripts
     sort_order: "4"
     steps:
@@ -58,7 +58,7 @@ test_suites:
     criteria: MERGE
     prereq_test_suite_names:
       - "Build"
-    queue_name: al2023
+    queue_name: ci-queue-productionJenga-AL2023
 
   - name: "Publish Storybook"
     abort_commit_on_failure: true
@@ -69,11 +69,11 @@ test_suites:
     criteria: MERGE
     prereq_test_suite_names:
       - "Build"
-    queue_name: al2023
+    queue_name: ci-queue-productionJenga-AL2023
 
   - name: "Semgrep"
     criteria: MERGE
-    queue_name: al2023
+    queue_name: ci-queue-productionJenga-AL2023
     script_name: semgrep
     script_path: /root/okta/odyssey/scripts
     sort_order: "7"
@@ -109,5 +109,5 @@ test_suites:
     sort_order: "7"
     script_name: visual-regression-test
     criteria: MERGE
-    queue_name: ci-queue-prodJenga-Ubuntu20
+    queue_name: ci-queue-productionJenga-AL2023
     timeout: "20"
