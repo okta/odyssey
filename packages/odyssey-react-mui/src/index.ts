@@ -63,7 +63,7 @@ export * from "./Banner";
 export * from "./Box";
 export * from "./Breadcrumbs";
 export * from "./Button";
-export * from "./Tile";
+export * from "./Card";
 export * from "./Callout";
 export * from "./Checkbox";
 export * from "./CheckboxGroup";

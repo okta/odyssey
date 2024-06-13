@@ -37,6 +37,7 @@ import _AutoSizer, {
   Props as AutoSizerProps,
   Size as AutoSizerSize,
 } from "react-virtualized-auto-sizer";
+import { useTranslation } from "react-i18next";
 
 // This is required to get around a react-types issue for "AutoSizer is not a valid JSX element."
 // @see https://github.com/bvaughn/react-virtualized/issues/1739#issuecomment-1291444246
@@ -123,6 +124,12 @@ export type AutocompleteProps<
    * The label text for the autocomplete input
    */
   label: string;
+  /**
+   * The text to display when no options are available
+   *
+   * default: "No Options"
+   */
+  noOptionsText?: string;
   /**
    * Callback fired when the autocomplete loses focus.
    */
@@ -230,6 +237,7 @@ const Autocomplete = <
   HintLinkComponent,
   label,
   name: nameOverride,
+  noOptionsText,
   onBlur,
   onChange: onChangeProp,
   onInputChange: onInputChangeProp,
@@ -240,6 +248,7 @@ const Autocomplete = <
   testId,
   translate,
 }: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
+  const { t } = useTranslation();
   const controlledStateRef = useRef(
     getControlState({
       controlledValue: value,
@@ -461,6 +470,7 @@ const Autocomplete = <
       {...(isVirtualized.current && { ListboxComponent })}
       // AutoComplete is wrapped in a div within MUI which does not get the disabled attr. So this aria-disabled gets set in the div
       aria-disabled={isDisabled}
+      clearText={t("clear.text")}
       disableCloseOnSelect={hasMultipleChoices}
       disabled={isDisabled}
       freeSolo={isCustomValueAllowed}
@@ -469,6 +479,7 @@ const Autocomplete = <
       fullWidth={isFullWidth}
       loading={isLoading}
       multiple={hasMultipleChoices}
+      noOptionsText={noOptionsText}
       onBlur={onBlur}
       onChange={onChange}
       onInputChange={onInputChange}
