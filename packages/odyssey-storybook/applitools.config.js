@@ -31,6 +31,7 @@ module.exports = {
   matchLevel: "Strict",
   parentBranchName,
   serverUrl: "https://oktaeyes.applitools.com",
+  showLogs: true,
   showStorybookOutput: true,
   testConcurrency: 5,
 };
