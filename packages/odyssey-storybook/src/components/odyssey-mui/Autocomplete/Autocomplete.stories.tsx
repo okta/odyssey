@@ -221,7 +221,7 @@ export const Default: StoryObj<AutocompleteType> = {
       await expect(comboBoxElement.value).toBe("Shirazi-Ma Complex");
     });
     await step("Clear the selected item", async () => {
-      const clearButton = canvas.getByTitle("Clear");
+      const clearButton = canvas.getByTitle("Clear value");
       await userEvent.click(clearButton);
       await expect(comboBoxElement.value).toBe("");
       await userEvent.tab();
