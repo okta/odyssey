@@ -363,7 +363,7 @@ export const Multiple: StoryObj<AutocompleteType> = {
     });
     await step("Clear the selected items", async () => {
       await waitFor(async () => {
-        const clearButton = canvas.getByTitle("Clear");
+        const clearButton = canvas.getByTitle("Clear value");
         await userEvent.click(clearButton);
         await expect(comboBoxElement.value).toBe("");
         await userEvent.tab();
