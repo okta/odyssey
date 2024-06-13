@@ -18,6 +18,16 @@ if [[ -z "$APPLITOOLS_API_KEY" ]]; then
   exit 1
 fi
 
+# Chromium is required for VRTs to run.
+sudo apt update
+sudo apt install -y chromium
+
+if ! chromium-browser --version; then
+  echo "Failed to install Chromium and its dependencies!"
+  report_results FAILURE publish_type_and_result_dir_but_always_fail
+  exit "$BUILD_FAILURE"
+fi
+
 if ! yarn workspace @okta/odyssey-storybook ci:visualRegressionTest; then
   echo "lerna tests failed! Exiting..."
   exit ${PUBLISH_TYPE_AND_RESULT_DIR_BUT_ALWAYS_FAIL}
