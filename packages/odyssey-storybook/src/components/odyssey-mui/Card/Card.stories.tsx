@@ -15,18 +15,18 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import {
   Box,
   Button,
-  Tile,
+  Card,
   MenuItem,
-  TileProps,
+  CardProps,
 } from "@okta/odyssey-react-mui";
 
-const storybookMeta: Meta<TileProps> = {
-  title: "Labs Components/Tile",
-  component: Tile,
+const storybookMeta: Meta<CardProps> = {
+  title: "MUI Components/Card",
+  component: Card,
   argTypes: {
     title: {
       control: "text",
-      description: "The heading of the tile.",
+      description: "The heading of the card.",
       table: {
         type: {
           summary: "string",
@@ -37,7 +37,7 @@ const storybookMeta: Meta<TileProps> = {
     description: {
       control: "text",
       description:
-        "The body text of the tile. The consumer is responsible for truncating this string.",
+        "The body text of the card. The consumer is responsible for truncating this string.",
       table: {
         type: {
           summary: "string",
@@ -47,7 +47,7 @@ const storybookMeta: Meta<TileProps> = {
     },
     overline: {
       control: "text",
-      description: 'The "eyebrow" text above the tile title.',
+      description: 'The "eyebrow" text above the card title.',
       table: {
         type: {
           summary: "string",
@@ -58,7 +58,7 @@ const storybookMeta: Meta<TileProps> = {
     image: {
       control: null,
       description:
-        "An optional image or icon at the top of the tile, preferably as an img or svg element.",
+        "An optional image or icon at the top of the card, preferably as an img or svg element.",
       table: {
         type: {
           summary: "ReactElement",
@@ -68,7 +68,7 @@ const storybookMeta: Meta<TileProps> = {
     },
     onClick: {
       control: null,
-      description: "The event handler for when the user clicks the tile.",
+      description: "The event handler for when the user clicks the card.",
       table: {
         type: {
           summary: "MouseEventHandler",
@@ -79,7 +79,7 @@ const storybookMeta: Meta<TileProps> = {
     button: {
       control: null,
       description:
-        "The main action button for the tile. Not valid if the tile itself is clickable.",
+        "The main action button for the card. Not valid if the card itself is clickable.",
       table: {
         type: {
           summary: "ReactElement<typeof Button>",
@@ -90,7 +90,7 @@ const storybookMeta: Meta<TileProps> = {
     menuButtonChildren: {
       control: null,
       description:
-        "Menu items to be rendered in the tile's optional menu button. If this prop is undefined, the menu button will not be shown. Not valid if the tile itself is clickable.",
+        "Menu items to be rendered in the card's optional menu button. If this prop is undefined, the menu button will not be shown. Not valid if the card itself is clickable.",
       table: {
         type: {
           summary: "[MenuItem | Divider | ListSubheader]",
@@ -102,7 +102,7 @@ const storybookMeta: Meta<TileProps> = {
   args: {
     title: "Title",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor...",
+      "Identity can create great user experiences, increase customer sign-ups, and...",
     overline: "Overline",
     onClick: undefined,
   },
@@ -120,10 +120,10 @@ const storybookMeta: Meta<TileProps> = {
 
 export default storybookMeta;
 
-export const Default: StoryObj<TileProps> = {
+export const Default: StoryObj<CardProps> = {
   render: ({ ...props }) => (
     <Box sx={{ maxWidth: 262 }}>
-      <Tile
+      <Card
         {...props}
         image={<img src="https://placehold.co/128" alt="Example logo" />}
         menuButtonChildren={
@@ -139,7 +139,7 @@ export const Default: StoryObj<TileProps> = {
   ),
 };
 
-export const Clickable: StoryObj<TileProps> = {
+export const Clickable: StoryObj<CardProps> = {
   render: ({ ...props }) => {
     const onClick = () => {
       alert("Clicked!");
@@ -147,7 +147,7 @@ export const Clickable: StoryObj<TileProps> = {
 
     return (
       <Box sx={{ maxWidth: 262 }}>
-        <Tile
+        <Card
           {...props}
           image={<img src="https://placehold.co/128" alt="Example logo" />}
           onClick={onClick}
@@ -157,7 +157,7 @@ export const Clickable: StoryObj<TileProps> = {
   },
 };
 
-export const ClickableWithoutImage: StoryObj<TileProps> = {
+export const ClickableWithoutImage: StoryObj<CardProps> = {
   render: ({ ...props }) => {
     const onClick = () => {
       alert("Clicked!");
@@ -165,16 +165,16 @@ export const ClickableWithoutImage: StoryObj<TileProps> = {
 
     return (
       <Box sx={{ maxWidth: 262 }}>
-        <Tile {...props} onClick={onClick} />
+        <Card {...props} onClick={onClick} />
       </Box>
     );
   },
 };
 
-export const ButtonWithoutImage: StoryObj<typeof Tile> = {
+export const ButtonWithoutImage: StoryObj<typeof Card> = {
   render: ({ ...props }) => (
     <Box sx={{ maxWidth: 262 }}>
-      <Tile {...props} />
+      <Card {...props} />
     </Box>
   ),
 };

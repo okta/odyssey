@@ -29,7 +29,7 @@ export const useDatePickerTranslations = (): PickersLocaleText<DateTime> => {
     calendarWeekNumberText: () => "",
 
     cancelButtonLabel: `${t("picker.labels.action.cancel")}`,
-    clearButtonLabel: `${t("picker.labels.action.clear")}`,
+    clearButtonLabel: `${t("clear.text")}`,
     clockLabelText: (view, time, adapter) =>
       `${t("picker.labels.select")} ${view}. ${
         time === null
