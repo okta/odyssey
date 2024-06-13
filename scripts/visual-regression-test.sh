@@ -18,8 +18,7 @@ if [[ -z "$APPLITOOLS_API_KEY" ]]; then
   exit 1
 fi
 
-# Chromium is required for VRTs to run.
-sudo snap install chromium
+setup_service google-chrome-stable 126.0.6478.55
 
 if ! chromium-browser --version; then
   echo "Failed to install Chromium and its dependencies!"
