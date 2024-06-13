@@ -20,7 +20,9 @@ fi
 
 # Chromium is required for VRTs to run.
 sudo apt update
-sudo apt install -y chromium
+sudo apt install -y chromium-browser
+
+sudo snap install chromium
 
 if ! chromium-browser --version; then
   echo "Failed to install Chromium and its dependencies!"
