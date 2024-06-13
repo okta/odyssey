@@ -470,7 +470,7 @@ const Autocomplete = <
       {...(isVirtualized.current && { ListboxComponent })}
       // AutoComplete is wrapped in a div within MUI which does not get the disabled attr. So this aria-disabled gets set in the div
       aria-disabled={isDisabled}
-      clearText={t("clear.text")}
+      clearText={t("picker.labels.field.clear")}
       disableCloseOnSelect={hasMultipleChoices}
       disabled={isDisabled}
       freeSolo={isCustomValueAllowed}
