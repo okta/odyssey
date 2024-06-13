@@ -19,9 +19,6 @@ if [[ -z "$APPLITOOLS_API_KEY" ]]; then
 fi
 
 # Chromium is required for VRTs to run.
-sudo apt update
-sudo apt install -y chromium-browser
-
 sudo snap install chromium
 
 if ! chromium-browser --version; then
