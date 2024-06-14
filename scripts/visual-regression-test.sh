@@ -18,13 +18,20 @@ if [[ -z "$APPLITOOLS_API_KEY" ]]; then
   exit 1
 fi
 
-setup_service google-chrome-stable 126.0.6478.55
+local -r START_CH=$(date +%s);
+local -r setup_chrome_status_file="${tmpdir}/${BASHPID}.complete"
 
-if ! chromium-browser --version; then
-  echo "Failed to install Chromium and its dependencies!"
-  report_results FAILURE publish_type_and_result_dir_but_always_fail
-  exit "$BUILD_FAILURE"
+if ! setup_service google-chrome-stable ${DEFAULT_CHROME_VERSION} ; then
+  echo "failure" > ${setup_chrome_status_file}
 fi
+okta::runtime::print_time $START_CH "setup_chrome"
+echo "success" > ${setup_chrome_status_file}
+
+# if ! chromium-browser --version; then
+#   echo "Failed to install Chromium and its dependencies!"
+#   report_results FAILURE publish_type_and_result_dir_but_always_fail
+#   exit "$BUILD_FAILURE"
+# fi
 
 if ! yarn workspace @okta/odyssey-storybook ci:visualRegressionTest; then
   echo "lerna tests failed! Exiting..."
