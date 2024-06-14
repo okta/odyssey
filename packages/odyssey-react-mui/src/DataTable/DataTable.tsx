@@ -232,6 +232,10 @@ export type DataTableProps = {
    * The optional component to display when expanding a row.
    */
   renderDetailPanel?: MRT_TableOptions<DataTableRowData>["renderDetailPanel"];
+  /**
+   * The initial search value
+   */
+  initialSearchValue?: string;
 };
 
 const displayColumnDefOptions = {
@@ -377,6 +381,7 @@ const DataTable = ({
   noResultsPlaceholder,
   filters: filtersProp,
   renderDetailPanel,
+  initialSearchValue = "",
 }: DataTableProps) => {
   const [data, setData] = useState<DataTableRowData[]>([]);
   const [pagination, setPagination] = useState({
@@ -402,7 +407,7 @@ const DataTable = ({
   const [rowDensity, setRowDensity] =
     useState<MRT_DensityState>(initialDensity);
   const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
-  const [search, setSearch] = useState<string>("");
+  const [search, setSearch] = useState<string>(initialSearchValue);
   const [filters, setFilters] = useState<DataFilter[]>();
   const [initialFilters, setInitialFilters] = useState<DataFilter[]>();
   const [isLoading, setIsLoading] = useState<boolean | undefined>(true);
@@ -812,6 +817,7 @@ const DataTable = ({
             hasSearchSubmitButton={hasSearchSubmitButton}
             searchDelayTime={searchDelayTime}
             filters={hasFilters ? dataTableFilters : undefined}
+            defaultSearchTerm={initialSearchValue}
             isDisabled={isEmpty}
             additionalActions={
               <>
