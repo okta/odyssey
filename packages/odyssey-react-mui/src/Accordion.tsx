@@ -77,7 +77,7 @@ const Accordion = ({
   const id = useUniqueId(idOverride);
   const headerId = `${id}-header`;
   const contentId = `${id}-content`;
-  console.log({ testId });
+
   return (
     <MuiAccordion
       data-se={testId}
