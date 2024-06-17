@@ -71,13 +71,16 @@ const Accordion = ({
   isDisabled,
   isExpanded,
   onChange,
+  testId,
   translate,
 }: AccordionProps) => {
   const id = useUniqueId(idOverride);
   const headerId = `${id}-header`;
   const contentId = `${id}-content`;
+  console.log({ testId });
   return (
     <MuiAccordion
+      data-se={testId}
       defaultExpanded={isDefaultExpanded}
       disabled={isDisabled}
       disableGutters
