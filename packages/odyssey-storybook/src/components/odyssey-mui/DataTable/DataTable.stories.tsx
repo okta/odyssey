@@ -314,6 +314,15 @@ const storybookMeta: Meta<DataTableProps> = {
         },
       },
     },
+    initialSearchValue: {
+      control: "text",
+      description: "The initial search value",
+      table: {
+        type: {
+          summary: `string`,
+        },
+      },
+    },
   },
   decorators: [MuiThemeDecorator],
 };
