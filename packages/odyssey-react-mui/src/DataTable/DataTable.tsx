@@ -98,27 +98,48 @@ export type DataTableRenderDetailPanelType = {
 
 export type DataTableProps = {
   /**
+   * Menu items to include in the bulk actions menu, which appears above the table if a row or rows are selected
+   */
+  bulkActionMenuItems?: (
+    selectedRows: MRT_RowSelectionState,
+  ) => MenuButtonProps["children"];
+  /**
    * The columns that make up the table
    */
   columns: DataTableColumn<DataTableRowData>[];
   /**
-   * The total number of rows in the table. Optional, because it's sometimes impossible
-   * to calculate. Used in table pagination to know when to disable the "next"/"more" button.
+   * The current page number.
    */
-  totalRows?: number;
+  currentPage?: number;
+  /**
+   * If `error` is not undefined, the DataTable will indicate an error.
+   */
+  errorMessage?: string;
+  /**
+   * The component to display when the table is displaying the initial empty state
+   */
+  emptyPlaceholder?: ReactNode;
+  /**
+   * An optional set of filters to render in the filters menu
+   */
+  filters?: Array<DataFilter | DataTableColumn<DataTableRowData> | string>;
   /**
    * The function to get the ID of a row
    */
   getRowId?: MRT_TableOptions<DataTableRowData>["getRowId"];
   /**
-   * The initial density (height & padding) of the table rows. This is available even if the
-   * table density isn't changeable by the end user via hasChangeableDensity.
+   * Callback that fires whenever the table needs to fetch new data, due to changes in
+   * page, results per page, search input, filters, or sorting
    */
-  initialDensity?: (typeof densityValues)[number];
-  /**
-   * If true, the end user will be able to change the table density.
-   */
-  hasChangeableDensity?: boolean;
+  getData: ({
+    page,
+    resultsPerPage,
+    search,
+    filters,
+    sort,
+  }: DataTableGetDataType) =>
+    | MRT_TableOptions<DataTableRowData>["data"]
+    | Promise<MRT_TableOptions<DataTableRowData>["data"]>;
   /**
    * If true, the end user can resize individual columns.
    */
@@ -136,6 +157,10 @@ export type DataTableProps = {
    */
   hasPagination?: boolean;
   /**
+   * If true, the end user can reorder rows via a drag-and-drop interface
+   */
+  hasRowReordering?: boolean;
+  /**
    * If true, the table will include checkboxes on each row, enabling
    * the user to select some or all rows.
    */
@@ -145,18 +170,47 @@ export type DataTableProps = {
    */
   hasSearch?: boolean;
   /**
-   * If true, the end user can sort columns (ascending, descending, or neither)
-   */
-  hasSorting?: boolean;
-  /**
-   * If true, the end user can reorder rows via a drag-and-drop interface
-   */
-  hasRowReordering?: boolean;
-  /**
    * If true, the search field will include a Search button, rather than
    * firing on input change.
    */
   hasSearchSubmitButton?: boolean;
+  /**
+   * If true, the end user can sort columns (ascending, descending, or neither)
+   */
+  hasSorting?: boolean;
+  /**
+   * If true, the end user will be able to change the table density.
+   */
+  hasChangeableDensity?: boolean;
+  /**
+   * The initial density (height & padding) of the table rows. This is available even if the
+   * table density isn't changeable by the end user via hasChangeableDensity.
+   */
+  initialDensity?: (typeof densityValues)[number];
+  /**
+   * The initial search value
+   */
+  initialSearchValue?: string;
+  /**
+   * The component to display when the query returns no results
+   */
+  noResultsPlaceholder?: ReactNode;
+  /**
+   * The number of results per page.
+   */
+  resultsPerPage?: number;
+  /**
+   * The optional component to display when expanding a row.
+   */
+  renderDetailPanel?: MRT_TableOptions<DataTableRowData>["renderDetailPanel"];
+  /**
+   * Action buttons to display in each row
+   */
+  rowActionButtons?: DataTableRowActionsProps["rowActionButtons"];
+  /**
+   * Menu items to include in the optional actions menu on each row.
+   */
+  rowActionMenuItems?: DataTableRowActionsProps["rowActionMenuItems"];
   /**
    * The debounce time, in milliseconds, for the search input firing
    * `onChangeSearch` when changed. If `hasSearchSubmitButton` is true,
@@ -168,70 +222,20 @@ export type DataTableProps = {
    */
   onChangeRowSelection?: (rowSelection: DataTableRowSelectionState) => void;
   /**
-   * Callback that fires whenever the table needs to fetch new data, due to changes in
-   * page, results per page, search input, filters, or sorting
-   */
-  getData: ({
-    page,
-    resultsPerPage,
-    search,
-    filters,
-    sort,
-  }: DataTableGetDataType) =>
-    | MRT_TableOptions<DataTableRowData>["data"]
-    | Promise<MRT_TableOptions<DataTableRowData>["data"]>;
-  /**
    * Callback that fires when the user reorders rows within the table. Can be used
    * to propogate order change to the backend.
    */
   onReorderRows?: ({ rowId, newRowIndex }: DataTableOnReorderRowsType) => void;
-  /**
-   * The current page number.
-   */
-  currentPage?: number;
-  /**
-   * The number of results per page.
-   */
-  resultsPerPage?: number;
   /**
    * The type of pagination controls shown. Defaults to next/prev buttons, but can be
    * set to a simple "Load more" button by setting to "loadMore".
    */
   paginationType?: (typeof paginationTypeValues)[number];
   /**
-   * Action buttons to display in each row
+   * The total number of rows in the table. Optional, because it's sometimes impossible
+   * to calculate. Used in table pagination to know when to disable the "next"/"more" button.
    */
-  rowActionButtons?: DataTableRowActionsProps["rowActionButtons"];
-  /**
-   * Menu items to include in the optional actions menu on each row.
-   */
-  rowActionMenuItems?: DataTableRowActionsProps["rowActionMenuItems"];
-  /**
-   * Menu items to include in the bulk actions menu, which appears above the table if a row or rows are selected
-   */
-  bulkActionMenuItems?: (
-    selectedRows: MRT_RowSelectionState,
-  ) => MenuButtonProps["children"];
-  /**
-   * If `error` is not undefined, the DataTable will indicate an error.
-   */
-  errorMessage?: string;
-  /**
-   * The component to display when the table is displaying the initial empty state
-   */
-  emptyPlaceholder?: ReactNode;
-  /**
-   * The component to display when the query returns no results
-   */
-  noResultsPlaceholder?: ReactNode;
-  /**
-   * An optional set of filters to render in the filters menu
-   */
-  filters?: Array<DataFilter | DataTableColumn<DataTableRowData> | string>;
-  /**
-   * The optional component to display when expanding a row.
-   */
-  renderDetailPanel?: MRT_TableOptions<DataTableRowData>["renderDetailPanel"];
+  totalRows?: number;
 };
 
 const displayColumnDefOptions = {
@@ -348,20 +352,14 @@ const ScrollableTableContainer = styled("div", {
 );
 
 const DataTable = ({
+  bulkActionMenuItems,
   columns,
-  getRowId: getRowIdProp,
   currentPage = 1,
-  initialDensity = densityValues[0],
-  resultsPerPage = 20,
+  emptyPlaceholder,
+  errorMessage: errorMessageProp,
+  filters: filtersProp,
   getData,
-  onReorderRows,
-  totalRows,
-  hasSearchSubmitButton,
-  searchDelayTime,
-  paginationType = "paged",
-  onChangeRowSelection,
-  rowActionButtons,
-  rowActionMenuItems,
+  getRowId: getRowIdProp,
   hasChangeableDensity,
   hasColumnResizing,
   hasColumnVisibility,
@@ -370,13 +368,20 @@ const DataTable = ({
   hasRowReordering,
   hasRowSelection,
   hasSearch,
+  hasSearchSubmitButton,
   hasSorting,
-  bulkActionMenuItems,
-  errorMessage: errorMessageProp,
-  emptyPlaceholder,
+  initialDensity = densityValues[0],
+  initialSearchValue = "",
   noResultsPlaceholder,
-  filters: filtersProp,
+  onChangeRowSelection,
+  onReorderRows,
+  paginationType = "paged",
   renderDetailPanel,
+  resultsPerPage = 20,
+  rowActionButtons,
+  rowActionMenuItems,
+  searchDelayTime,
+  totalRows,
 }: DataTableProps) => {
   const [data, setData] = useState<DataTableRowData[]>([]);
   const [pagination, setPagination] = useState({
@@ -402,7 +407,7 @@ const DataTable = ({
   const [rowDensity, setRowDensity] =
     useState<MRT_DensityState>(initialDensity);
   const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
-  const [search, setSearch] = useState<string>("");
+  const [search, setSearch] = useState<string>(initialSearchValue);
   const [filters, setFilters] = useState<DataFilter[]>();
   const [initialFilters, setInitialFilters] = useState<DataFilter[]>();
   const [isLoading, setIsLoading] = useState<boolean | undefined>(true);
@@ -812,6 +817,7 @@ const DataTable = ({
             hasSearchSubmitButton={hasSearchSubmitButton}
             searchDelayTime={searchDelayTime}
             filters={hasFilters ? dataTableFilters : undefined}
+            defaultSearchTerm={initialSearchValue}
             isDisabled={isEmpty}
             additionalActions={
               <>
