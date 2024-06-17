@@ -732,7 +732,7 @@ const DataTable = ({
     renderDetailPanel: renderDetailPanel,
   });
 
-  // Effects
+  // Effects and memo
   const bulkActionMenuButton = useMemo(
     () => (
       <>
