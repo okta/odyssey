@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 source $OKTA_HOME/$REPO/scripts/setup.sh
 
@@ -18,14 +18,11 @@ if [[ -z "$APPLITOOLS_API_KEY" ]]; then
   exit 1
 fi
 
-local -r START_CH=$(date +%s);
-local -r setup_chrome_status_file="${tmpdir}/${BASHPID}.complete"
+export DEFAULT_CHROME_VERSION="125.0.6422.60-1"
 
 if ! setup_service google-chrome-stable ${DEFAULT_CHROME_VERSION} ; then
   echo "failure" > ${setup_chrome_status_file}
 fi
-okta::runtime::print_time $START_CH "setup_chrome"
-echo "success" > ${setup_chrome_status_file}
 
 # if ! chromium-browser --version; then
 #   echo "Failed to install Chromium and its dependencies!"
