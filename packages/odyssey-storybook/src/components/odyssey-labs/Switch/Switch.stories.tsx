@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { useCallback, useState } from "react";
 import { Switch, SwitchProps, HintLink } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 import { userEvent, within } from "@storybook/testing-library";
@@ -97,5 +98,27 @@ export const Default: StoryObj<typeof Switch> = {
       await axeRun("Switch Default");
       await userEvent.tab();
     });
+  },
+};
+
+export const Disabled: StoryObj<typeof Switch> = {
+  args: {
+    isDisabled: true,
+  },
+};
+
+export const CheckedDisabled: StoryObj<typeof Switch> = {
+  args: {
+    isDisabled: true,
+    isDefaultChecked: true,
+  },
+};
+
+export const Controlled: StoryObj<typeof Switch> = {
+  render: function C({ ...props }) {
+    const [checked, setChecked] = useState(true);
+
+    const onChange = useCallback(({ checked }) => setChecked(checked), []);
+    return <Switch {...props} isChecked={checked} onChange={onChange} />;
   },
 };

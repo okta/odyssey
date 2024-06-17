@@ -36,11 +36,25 @@ import {
 } from "../OdysseyDesignTokensContext";
 import { useUniqueId } from "../useUniqueId";
 
+
+
 const { CONTROLLED } = ComponentControlledState;
 
-const stripRemFromUnits = (remValue: string) => Number(remValue.split("r")[0]);
+const stripRemFromUnits = (remValue: string) =>
+  Number(remValue.replace(/rem$/, ""));
 
-const SwitchAndLabelContainer = styled.div<
+const pixelValueToOdysseyRemValue = (pixelValue: string) => pixelValue / 14;
+
+const nonForwardedProps = [
+  "isChecked",
+  "isDisabled",
+  "isFullWidth",
+  "odysseyDesignTokens",
+];
+
+const SwitchAndLabelContainer = styled("div", {
+  shouldForwardProp: (prop) => !nonForwardedProps.includes(prop),
+})<
   Pick<SwitchProps, "isFullWidth" | "isDisabled"> & {
     odysseyDesignTokens: DesignTokens;
   }
@@ -56,7 +70,7 @@ const SwitchContainer = styled.div({
 });
 
 const StyledSwitchLabel = styled(FormLabel, {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+  shouldForwardProp: (prop) => !nonForwardedProps.includes(prop),
 })<
   Pick<SwitchLabelComponentProps, "isDisabled"> & {
     odysseyDesignTokens: DesignTokens;
@@ -78,7 +92,9 @@ const StyledSwitchLabel = styled(FormLabel, {
   }),
 }));
 
-const SwitchTrack = styled.div<
+const SwitchTrack = styled("div", {
+  shouldForwardProp: (prop) => !nonForwardedProps.includes(prop),
+})<
   Pick<SwitchProps, "isChecked" | "isDisabled"> & {
     odysseyDesignTokens: DesignTokens;
   }
@@ -95,24 +111,26 @@ const SwitchTrack = styled.div<
   transition: `background-color ${odysseyDesignTokens.TransitionDurationMain}`,
 }));
 
-const SwitchThumb = styled.span<
+const SwitchThumb = styled("span", {
+  shouldForwardProp: (prop) => !nonForwardedProps.includes(prop),
+})<
   Pick<SwitchProps, "isChecked" | "isDisabled"> & {
     odysseyDesignTokens: DesignTokens;
   }
 >(({ isChecked, isDisabled, odysseyDesignTokens }) => {
-  const thumbOffset = (3 / 16) * (16 / 14);
+  const thumbOffset = pixelValueToOdysseyRemValue(3);
   const trackWidth = stripRemFromUnits(odysseyDesignTokens.Spacing7);
   const thumbWidth =
-    stripRemFromUnits(odysseyDesignTokens.Spacing4) - (2 / 16) * (16 / 14);
+    stripRemFromUnits(odysseyDesignTokens.Spacing4) - pixelValueToOdysseyRemValue(2);
 
-  const transformDistance = trackWidth - thumbWidth - thumbOffset * 2;
+  const transformDistance = trackWidth - thumbWidth - (thumbOffset * 2);
 
   return {
     position: "absolute",
     top: "50%",
     left: `${thumbOffset}rem`,
-    width: `calc(${odysseyDesignTokens.Spacing4} - 2px)`,
-    height: `calc(${odysseyDesignTokens.Spacing4} - 2px)`,
+    width: `calc(${odysseyDesignTokens.Spacing4} - ${pixelValueToOdysseyRemValue(2)}rem)`,
+    height: `calc(${odysseyDesignTokens.Spacing4} - ${pixelValueToOdysseyRemValue(2)}rem)`,
     borderRadius: odysseyDesignTokens.BorderRadiusRound,
     backgroundColor: isDisabled
       ? odysseyDesignTokens.HueNeutral50
@@ -124,7 +142,9 @@ const SwitchThumb = styled.span<
   };
 });
 
-const SwitchCheckMark = styled(CheckIcon)<
+const SwitchCheckMark = styled(CheckIcon, {
+  shouldForwardProp: (prop) => !nonForwardedProps.includes(prop),
+})<
   Pick<SwitchProps, "isChecked" | "isDisabled"> & {
     odysseyDesignTokens: DesignTokens;
   }
@@ -234,13 +254,13 @@ SwitchLabel.displayName = "SwitchLabel";
 const Switch = ({
   hint,
   HintLinkComponent,
-  id: _id,
+  id: idProp,
   isChecked,
   isDefaultChecked,
   isDisabled,
   isFullWidth = false,
   label,
-  name: _name,
+  name,
   onChange,
   testId,
   value,
@@ -272,19 +292,19 @@ const Switch = ({
     }
   }, [isChecked]);
 
-  const inputId = useUniqueId(_id);
+  const inputId = useUniqueId(idProp);
 
   const hintId = hint ? `${inputId}-hint` : undefined;
   const labelElementId = `${inputId}-label`;
 
   const handleOnChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
     (event) => {
-      const target = event?.target;
+      const target = event.target;
       const { checked, value } = target;
-      setInternalSwitchChecked(!internalSwitchChecked);
+      setInternalSwitchChecked(checked);
       onChange?.({ checked, value });
     },
-    [onChange, internalSwitchChecked, setInternalSwitchChecked],
+    [onChange, setInternalSwitchChecked],
   );
 
   return (
@@ -323,7 +343,7 @@ const Switch = ({
             data-se={testId}
             disabled={isDisabled}
             id={inputId}
-            name={_name ?? inputId}
+            name={name ?? inputId}
             onChange={handleOnChange}
             odysseyDesignTokens={odysseyDesignTokens}
             type="checkbox"
