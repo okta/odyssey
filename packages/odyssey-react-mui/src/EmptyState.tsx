@@ -76,3 +76,4 @@ const MemoizedEmptyState = memo(EmptyState);
 MemoizedEmptyState.displayName = "EmptyState";
 
 export { MemoizedEmptyState as EmptyState };
+export { MemoizedEmptyState as DataTableEmptyState };
