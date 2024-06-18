@@ -51,7 +51,9 @@ const OdysseyCacheProvider = ({
       key: uniqueAlphabeticalId,
       nonce: nonce ?? window.cspNonce,
       prepend: true,
-      speedy: false, // <-- Needs to be set to false when shadow-dom is used!! https://github.com/emotion-js/emotion/issues/2053#issuecomment-713429122
+      // TODO: Change this back!!
+      speedy: true,
+      // speedy: false, // <-- Needs to be set to false when shadow-dom is used!! https://github.com/emotion-js/emotion/issues/2053#issuecomment-713429122
       ...(stylisPlugins && { stylisPlugins }),
     });
   }, [emotionRoot, nonce, stylisPlugins, uniqueAlphabeticalId]);

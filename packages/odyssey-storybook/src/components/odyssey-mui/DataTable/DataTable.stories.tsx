@@ -18,7 +18,7 @@ import {
 import {
   Box,
   Button,
-  DataTable,
+  // DataTable,
   EmptyState,
   DataTableGetDataType,
   DataTableOnReorderRowsType,
@@ -26,8 +26,9 @@ import {
   DataTableRenderDetailPanelType,
   DataTableRowSelectionState,
   MenuItem,
-  densityValues,
+  // densityValues,
 } from "@okta/odyssey-react-mui";
+import { DataTable, densityValues } from "@okta/odyssey-react-mui/labs";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import {
   Planet,
@@ -311,15 +312,6 @@ const storybookMeta: Meta<DataTableProps> = {
       table: {
         type: {
           summary: `(props: { row: MRT_Row<MRT_RowData>; table: MRT_TableInstance<MRT_RowData>; }) => ReactNode`,
-        },
-      },
-    },
-    initialSearchValue: {
-      control: "text",
-      description: "The initial search value",
-      table: {
-        type: {
-          summary: `string`,
         },
       },
     },

@@ -2630,14 +2630,15 @@ export const components = ({
 
           [`.${tableHeadClasses.root} &`]: {
             color: odysseyTokens.TypographyColorHeading,
-            fontSize: `0.71428571rem`,
-            lineHeight: odysseyTokens.TypographyLineHeightBody,
             fontWeight: odysseyTokens.TypographyWeightBodyBold,
             textTransform: "uppercase",
             backgroundColor: odysseyTokens.HueNeutral50,
             borderBottom: 0,
             height: `${odysseyTokens.Spacing7} !important`,
             paddingBlock: `${odysseyTokens.Spacing3} !important`,
+            fontSize: odysseyTokens.TypographySizeOverline,
+            lineHeight: odysseyTokens.TypographyLineHeightBody,
+            letterSpacing: 1.3,
           },
 
           [`.${tableHeadClasses.root} &:first-of-type`]: {
