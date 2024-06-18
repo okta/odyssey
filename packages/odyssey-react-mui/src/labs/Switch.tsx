@@ -34,16 +34,10 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../OdysseyDesignTokensContext";
+import { stripRem, toRem } from "../remUtils";
 import { useUniqueId } from "../useUniqueId";
 
-
-
 const { CONTROLLED } = ComponentControlledState;
-
-const stripRemFromUnits = (remValue: string) =>
-  Number(remValue.replace(/rem$/, ""));
-
-const pixelValueToOdysseyRemValue = (pixelValue: string) => pixelValue / 14;
 
 const nonForwardedProps = [
   "isChecked",
@@ -118,19 +112,18 @@ const SwitchThumb = styled("span", {
     odysseyDesignTokens: DesignTokens;
   }
 >(({ isChecked, isDisabled, odysseyDesignTokens }) => {
-  const thumbOffset = pixelValueToOdysseyRemValue(3);
-  const trackWidth = stripRemFromUnits(odysseyDesignTokens.Spacing7);
-  const thumbWidth =
-    stripRemFromUnits(odysseyDesignTokens.Spacing4) - pixelValueToOdysseyRemValue(2);
+  const thumbOffset = toRem(3);
+  const trackWidth = stripRem(odysseyDesignTokens.Spacing7);
+  const thumbWidth = stripRem(odysseyDesignTokens.Spacing4) - toRem(2);
 
-  const transformDistance = trackWidth - thumbWidth - (thumbOffset * 2);
+  const transformDistance = trackWidth - thumbWidth - thumbOffset * 2;
 
   return {
     position: "absolute",
     top: "50%",
     left: `${thumbOffset}rem`,
-    width: `calc(${odysseyDesignTokens.Spacing4} - ${pixelValueToOdysseyRemValue(2)}rem)`,
-    height: `calc(${odysseyDesignTokens.Spacing4} - ${pixelValueToOdysseyRemValue(2)}rem)`,
+    width: `calc(${odysseyDesignTokens.Spacing4} - ${toRem(2)}rem)`,
+    height: `calc(${odysseyDesignTokens.Spacing4} - ${toRem(2)}rem)`,
     borderRadius: odysseyDesignTokens.BorderRadiusRound,
     backgroundColor: isDisabled
       ? odysseyDesignTokens.HueNeutral50
