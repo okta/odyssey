@@ -182,7 +182,9 @@ const TableContent = ({
   const defaultCell = useCallback(
     ({ cell }: { cell: DataTableCell<MRT_RowData> }) => {
       const value = cell.getValue<string>();
-      const hasTextWrapping = cell.column.columnDef.hasTextWrapping;
+      const hasTextWrapping =
+        cell.column.columnDef.hasTextWrapping ||
+        cell.column.columnDef.enableWrapping;
 
       return hasTextWrapping ? (
         value

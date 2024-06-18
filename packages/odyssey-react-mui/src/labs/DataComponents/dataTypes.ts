@@ -29,6 +29,10 @@ export type DataQueryParamsType = {
 };
 
 export type DataTableColumn<T extends MRT_RowData> = MRT_ColumnDef<T> & {
+  /**
+   * @deprecated use hasTextWrapping instead of enableWrapping
+   */
+  enableWrapping?: boolean;
   hasTextWrapping?: boolean;
 };
 
