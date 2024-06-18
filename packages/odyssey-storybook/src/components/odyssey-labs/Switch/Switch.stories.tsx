@@ -118,7 +118,10 @@ export const Controlled: StoryObj<typeof Switch> = {
   render: function C({ ...props }) {
     const [checked, setChecked] = useState(true);
 
-    const onChange = useCallback(({ checked }) => setChecked(checked), []);
+    const onChange = useCallback<NonNullable<SwitchProps["onChange"]>>(
+      ({ checked }) => setChecked(checked),
+      [],
+    );
     return <Switch {...props} isChecked={checked} onChange={onChange} />;
   },
 };
