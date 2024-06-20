@@ -10,11 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import styled from "@emotion/styled";
 import { MRT_RowData, MRT_TableOptions } from "material-react-table";
-import { DragIndicatorIcon } from "../../icons.generated";
+
 import { Box } from "../../Box";
 import { DesignTokens } from "../../OdysseyDesignTokensContext";
-import styled from "@emotion/styled";
+import { DragIndicatorIcon } from "../../icons.generated";
 
 export const dataTableImmutableSettings = {
   enableColumnActions: false,

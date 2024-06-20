@@ -11,6 +11,7 @@
  */
 
 import { memo } from "react";
+
 import { DataView } from "./DataView";
 import { TableProps, UniversalProps } from "./componentTypes";
 

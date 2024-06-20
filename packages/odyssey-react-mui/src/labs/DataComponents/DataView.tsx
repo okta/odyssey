@@ -12,34 +12,35 @@
 
 import { memo, useEffect, useMemo, useState } from "react";
 import {
+  MRT_Row,
+  MRT_RowData,
+  MRT_RowSelectionState,
+} from "material-react-table";
+import { t } from "i18next";
+
+import {
+  availableLayouts as allAvailableLayouts,
+  densityValues,
+} from "./constants";
+import {
   Layout,
   UniversalProps,
   ViewProps,
   TableState,
 } from "./componentTypes";
-import {
-  availableLayouts as allAvailableLayouts,
-  densityValues,
-} from "./constants";
 import { Box } from "../../Box";
-import { DataFilter, DataFilters } from "../DataFilters";
-import { useFilterConversion } from "./useFilterConversion";
 import { BulkActionMenu } from "./BulkActionsMenu";
+import { Callout } from "../../Callout";
+import { DataFilter, DataFilters } from "../DataFilters";
+import { EmptyState } from "../../EmptyState";
+import { fetchData } from "./fetchData";
 import { LayoutSwitcher } from "./LayoutSwitcher";
 import { TableSettings } from "./TableSettings";
-import { Callout } from "../../Callout";
 import { Pagination, usePagination } from "../../Pagination";
-import { t } from "i18next";
-import { fetchData } from "./fetchData";
 import { TableContent } from "./TableContent";
 import { StackContent } from "./StackContent";
+import { useFilterConversion } from "./useFilterConversion";
 import { useRowReordering } from "../../DataTable/useRowReordering";
-import { EmptyState } from "../../EmptyState";
-import {
-  MRT_Row,
-  MRT_RowData,
-  MRT_RowSelectionState,
-} from "material-react-table";
 
 export type DataViewProps = UniversalProps & ViewProps<Layout>;
 

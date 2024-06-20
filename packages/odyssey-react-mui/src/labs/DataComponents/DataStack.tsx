@@ -11,13 +11,14 @@
  */
 
 import { memo } from "react";
-import { DataView } from "./DataView";
+
+import { availableStackLayouts } from "./constants";
 import {
   AvailableStackLayouts,
   StackProps,
   UniversalProps,
 } from "./componentTypes";
-import { availableStackLayouts } from "./constants";
+import { DataView } from "./DataView";
 
 export type DataStackProps = UniversalProps &
   StackProps & {

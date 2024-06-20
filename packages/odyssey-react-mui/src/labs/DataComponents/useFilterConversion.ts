@@ -11,10 +11,11 @@
  */
 
 import { useCallback, useMemo } from "react";
-import { DataFilter } from "../DataFilters";
-import { UniversalProps, TableProps } from "./componentTypes";
-import { DataTableColumn } from "../../DataTable";
 import { MRT_RowData } from "material-react-table";
+
+import { DataFilter } from "../DataFilters";
+import { DataTableColumn } from "../../DataTable";
+import { UniversalProps, TableProps } from "./componentTypes";
 
 type FilterConversionType = {
   columns?: TableProps["columns"];

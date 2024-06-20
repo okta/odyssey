@@ -18,22 +18,23 @@ import {
   MRT_TableOptions,
   MRT_VisibilityState,
 } from "material-react-table";
-import { DataFilter } from "../DataFilters";
-import { paginationTypeValues } from "../DataTablePagination";
+
 import {
   availableLayouts,
   availableStackLayouts,
   densityValues,
 } from "./constants";
-import { MenuButtonProps } from "../..";
-import { ReactNode } from "react";
-import { DataTableRowActionsProps } from "../../DataTable/DataTableRowActions";
+import { DataFilter } from "../DataFilters";
 import {
   DataGetDataType,
   DataOnReorderRowsType,
   DataRowSelectionState,
   DataTableColumn,
 } from "./dataTypes";
+import { DataTableRowActionsProps } from "../../DataTable/DataTableRowActions";
+import { MenuButtonProps } from "../..";
+import { paginationTypeValues } from "../DataTablePagination";
+import { ReactNode } from "react";
 import { StackCardProps } from "./StackCard";
 
 export type Layout = (typeof availableLayouts)[number];

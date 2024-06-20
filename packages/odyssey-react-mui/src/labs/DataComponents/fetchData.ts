@@ -11,10 +11,11 @@
  */
 
 import { Dispatch, SetStateAction } from "react";
-import { UniversalProps } from "./componentTypes";
-import { DataQueryParamsType } from "./dataTypes";
-import { t } from "i18next";
 import { MRT_RowData } from "material-react-table";
+import { t } from "i18next";
+
+import { DataQueryParamsType } from "./dataTypes";
+import { UniversalProps } from "./componentTypes";
 
 type DataRequestType = {
   dataQueryParams: DataQueryParamsType;

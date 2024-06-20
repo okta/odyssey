@@ -11,12 +11,13 @@
  */
 
 import { memo, useCallback, Dispatch, SetStateAction } from "react";
-import { UniversalProps } from "./componentTypes";
-import { MenuButton } from "../../MenuButton";
-import { Button } from "../../Button";
-import { Box } from "../../Box";
-import { ChevronDownIcon } from "../../icons.generated";
 import { MRT_RowData, MRT_RowSelectionState } from "material-react-table";
+
+import { Box } from "../../Box";
+import { Button } from "../../Button";
+import { ChevronDownIcon } from "../../icons.generated";
+import { MenuButton } from "../../MenuButton";
+import { UniversalProps } from "./componentTypes";
 
 export type BulkActionMenuProps = {
   data: MRT_RowData[];

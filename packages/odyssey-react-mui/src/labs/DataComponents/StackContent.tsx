@@ -11,8 +11,6 @@
  */
 
 import { Dispatch, ReactNode, SetStateAction, memo, useCallback } from "react";
-import { StackLayout, StackProps, UniversalProps } from "./componentTypes";
-import { Box } from "../../Box";
 import styled, { CSSObject } from "@emotion/styled";
 import {
   MRT_Row,
@@ -20,14 +18,17 @@ import {
   MRT_RowSelectionState,
   MRT_TableInstance,
 } from "material-react-table";
-import { CircularProgress } from "../../CircularProgress";
+
+import { Box } from "../../Box";
 import { Checkbox as MuiCheckbox } from "@mui/material";
-import { RowActions } from "./RowActions";
-import { StackCard } from "./StackCard";
+import { CircularProgress } from "../../CircularProgress";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
+import { RowActions } from "./RowActions";
+import { StackCard } from "./StackCard";
+import { StackLayout, StackProps, UniversalProps } from "./componentTypes";
 
 export type StackContentProps = {
   currentLayout: StackLayout;

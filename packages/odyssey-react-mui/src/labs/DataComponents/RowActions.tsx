@@ -10,19 +10,20 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { MRT_Row, MRT_RowData } from "material-react-table";
 import { Fragment, ReactElement, memo, useCallback } from "react";
-import { Button } from "../../Button";
-import { MenuItem } from "../../MenuItem";
-import { MenuButtonProps } from "../../MenuButton";
+import { MRT_Row, MRT_RowData } from "material-react-table";
+import { Trans } from "react-i18next";
+
 import {
   ArrowBottomIcon,
   ArrowDownIcon,
   ArrowTopIcon,
   ArrowUpIcon,
 } from "../../icons.generated";
+import { Button } from "../../Button";
+import { MenuItem } from "../../MenuItem";
 import { DataTableProps } from "./DataTable";
-import { Trans } from "react-i18next";
+import { MenuButtonProps } from "../../MenuButton";
 
 export type RowActionsProps = {
   isRowReorderingDisabled?: boolean;

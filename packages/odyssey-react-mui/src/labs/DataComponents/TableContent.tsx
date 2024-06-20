@@ -11,15 +11,6 @@
  */
 
 import {
-  MRT_Row,
-  MRT_RowData,
-  MRT_RowSelectionState,
-  MRT_TableContainer,
-  MRT_TableInstance,
-  MRT_TableOptions,
-  useMaterialReactTable,
-} from "material-react-table";
-import {
   SetStateAction,
   memo,
   useCallback,
@@ -29,26 +20,36 @@ import {
   ReactNode,
   Dispatch,
 } from "react";
-import { TableProps, TableState, UniversalProps } from "./componentTypes";
-import { DataTableCell } from "./dataTypes";
+import { CSSObject } from "@emotion/styled";
+import {
+  MRT_Row,
+  MRT_RowData,
+  MRT_RowSelectionState,
+  MRT_TableContainer,
+  MRT_TableInstance,
+  MRT_TableOptions,
+  useMaterialReactTable,
+} from "material-react-table";
+
 import {
   ArrowDownIcon,
   ArrowUnsortedIcon,
   ChevronDownIcon,
   DragIndicatorIcon,
 } from "../../icons.generated";
+import { Box } from "../../Box";
+import { TableProps, TableState, UniversalProps } from "./componentTypes";
+import { DataTableCell } from "./dataTypes";
 import {
   dataTableImmutableSettings,
   displayColumnDefOptions,
   ScrollableTableContainer,
 } from "./tableConstants";
-import { useScrollIndication } from "../../DataTable/useScrollIndication";
-import { useOdysseyDesignTokens } from "../../OdysseyDesignTokensContext";
-import { Box } from "../../Box";
-import { CSSObject } from "@emotion/styled";
-import { RowActions } from "./RowActions";
 import { MenuButton } from "../../MenuButton";
 import { MoreIcon } from "../../icons.generated";
+import { RowActions } from "./RowActions";
+import { useOdysseyDesignTokens } from "../../OdysseyDesignTokensContext";
+import { useScrollIndication } from "../../DataTable/useScrollIndication";
 import { useTranslation } from "react-i18next";
 
 export type TableContentProps = {
