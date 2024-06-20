@@ -19,6 +19,7 @@ import styled from "@emotion/styled";
 export const dataTableImmutableSettings = {
   enableColumnActions: false,
   enableDensityToggle: false,
+  enableExpandAll: false,
   enableFilters: false,
   enableFullScreenToggle: false,
   enableGlobalFilter: false,
@@ -33,13 +34,12 @@ export const dataTableImmutableSettings = {
       overflow: "visible",
     },
   },
-  selectAllMode: "all" as MRT_TableOptions<MRT_RowData>["selectAllMode"],
   positionActionsColumn:
     "last" as MRT_TableOptions<MRT_RowData>["positionActionsColumn"],
   rowVirtualizerOptions: {
     overscan: 4,
   },
-  enableExpandAll: false,
+  selectAllMode: "all" as MRT_TableOptions<MRT_RowData>["selectAllMode"],
 };
 
 export const displayColumnDefOptions = {

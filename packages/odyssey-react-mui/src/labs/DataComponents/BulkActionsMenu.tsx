@@ -53,26 +53,26 @@ const BulkActionMenu = ({
     >
       {selectedRowCount > 0 && (
         <MenuButton
+          ariaLabel="More actions"
+          buttonLabel={`${selectedRowCount} selected`}
           buttonVariant="primary"
           endIcon={<ChevronDownIcon />}
-          buttonLabel={`${selectedRowCount} selected`}
-          ariaLabel="More actions"
         >
           {menuItems?.(rowSelection)}
         </MenuButton>
       )}
       <Box>
         <Button
-          variant="secondary"
-          label="Select all"
           isDisabled={selectedRowCount === 20}
+          label="Select all"
           onClick={handleSelectAll}
+          variant="secondary"
         />
         <Button
-          variant="secondary"
-          label="Select none"
           isDisabled={selectedRowCount === 0}
+          label="Select none"
           onClick={handleSelectNone}
+          variant="secondary"
         />
       </Box>
     </Box>

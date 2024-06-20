@@ -21,10 +21,10 @@ import {
 import { DataFilter } from "../DataFilters";
 
 export type DataQueryParamsType = {
+  filters?: DataFilter[];
   page?: number;
   resultsPerPage?: number;
   search?: string;
-  filters?: DataFilter[];
   sort?: MRT_SortingState;
 };
 
@@ -55,16 +55,16 @@ export type DataColumns = DataTableColumn<MRT_RowData>[];
 export type DataRow = MRT_RowData;
 
 export type DataGetDataType = {
+  filters?: DataFilter[];
   page?: number;
   resultsPerPage?: number;
   search?: string;
-  filters?: DataFilter[];
   sort?: MRT_SortingState;
 };
 
 export type DataOnReorderRowsType = {
-  rowId: string;
   newRowIndex: number;
+  rowId: string;
 };
 
 export type DataRowSelectionState = MRT_RowSelectionState;

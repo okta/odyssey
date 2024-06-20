@@ -17,29 +17,26 @@ import { t } from "i18next";
 import { MRT_RowData } from "material-react-table";
 
 type DataRequestType = {
-  getDataFn: UniversalProps["getData"];
-  setIsLoading: Dispatch<SetStateAction<boolean>>;
-  setErrorMessage: Dispatch<SetStateAction<UniversalProps["errorMessage"]>>;
-  errorMessageProp: UniversalProps["errorMessage"];
-  setData: Dispatch<SetStateAction<MRT_RowData[]>>;
   dataQueryParams: DataQueryParamsType;
+  errorMessageProp: UniversalProps["errorMessage"];
+  getDataFn: UniversalProps["getData"];
+  setData: Dispatch<SetStateAction<MRT_RowData[]>>;
+  setErrorMessage: Dispatch<SetStateAction<UniversalProps["errorMessage"]>>;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
 };
 
 export const fetchData = async ({
-  getDataFn,
-  setIsLoading,
-  setErrorMessage,
-  errorMessageProp,
-  setData,
   dataQueryParams,
+  errorMessageProp,
+  getDataFn,
+  setData,
+  setErrorMessage,
+  setIsLoading,
 }: DataRequestType) => {
   setIsLoading(true);
   setErrorMessage(errorMessageProp);
   try {
     const incomingData = await getDataFn?.(dataQueryParams);
-    // incomingData.forEach((item: MRT_RowData, index: number) => {
-    //   item._ods_index = index;
-    // });
     setData(incomingData);
   } catch (error) {
     setErrorMessage(typeof error === "string" ? error : t("table.error"));

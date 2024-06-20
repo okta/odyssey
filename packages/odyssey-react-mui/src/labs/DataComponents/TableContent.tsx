@@ -52,19 +52,22 @@ import { MoreIcon } from "../../icons.generated";
 import { useTranslation } from "react-i18next";
 
 export type TableContentProps = {
-  data: MRT_RowData[];
   columns: TableProps["columns"];
+  data: MRT_RowData[];
+  draggingRow?: MRT_Row<MRT_RowData> | null;
+  emptyState: ReactNode;
   getRowId: UniversalProps["getRowId"];
-  tableState: TableState;
-  setTableState: Dispatch<SetStateAction<TableState>>;
-  tableOptions: TableProps;
-  isLoading: boolean;
-  isEmpty?: boolean;
-  isNoResults?: boolean;
   hasRowReordering: UniversalProps["hasRowReordering"];
+  hasRowSelection: UniversalProps["hasRowSelection"];
+  isEmpty?: boolean;
+  isLoading: boolean;
+  isNoResults?: boolean;
   isRowReorderingDisabled?: boolean;
   onReorderRows: UniversalProps["onReorderRows"];
-  totalRows: UniversalProps["totalRows"];
+  pagination: {
+    pageIndex: number;
+    pageSize: number;
+  };
   rowReorderingUtilities: {
     dragHandleStyles: CSSObject;
     dragHandleText: {
@@ -102,38 +105,35 @@ export type TableContentProps = {
       newRowIndex: number;
     }) => void;
   };
-  hasRowSelection: UniversalProps["hasRowSelection"];
   rowSelection: MRT_RowSelectionState;
   setRowSelection: Dispatch<SetStateAction<MRT_RowSelectionState>>;
-  emptyState: ReactNode;
-  pagination: {
-    pageIndex: number;
-    pageSize: number;
-  };
-  draggingRow?: MRT_Row<MRT_RowData> | null;
+  setTableState: Dispatch<SetStateAction<TableState>>;
+  tableOptions: TableProps;
+  tableState: TableState;
+  totalRows: UniversalProps["totalRows"];
 };
 
 const TableContent = ({
-  data,
   columns,
+  data,
+  draggingRow,
+  emptyState,
   getRowId,
-  tableOptions,
-  tableState,
-  setTableState,
-  isLoading,
-  isEmpty,
-  isNoResults,
   hasRowReordering,
+  hasRowSelection,
+  isEmpty,
+  isLoading,
+  isNoResults,
   isRowReorderingDisabled,
   onReorderRows,
+  pagination,
   rowReorderingUtilities,
-  hasRowSelection,
   rowSelection,
   setRowSelection,
-  emptyState,
-  pagination,
+  setTableState,
+  tableOptions,
+  tableState,
   totalRows,
-  draggingRow,
 }: TableContentProps) => {
   const [isTableContainerScrolledToStart, setIsTableContainerScrolledToStart] =
     useState(true);
@@ -146,11 +146,11 @@ const TableContent = ({
   const tableContentRef = useRef<HTMLTableElement>(null);
 
   useScrollIndication({
-    tableOuterContainer: tableOuterContainerRef.current,
-    tableInnerContainer: tableInnerContainerRef.current,
-    setIsTableContainerScrolledToStart: setIsTableContainerScrolledToStart,
     setIsTableContainerScrolledToEnd: setIsTableContainerScrolledToEnd,
+    setIsTableContainerScrolledToStart: setIsTableContainerScrolledToStart,
     setTableInnerContainerWidth: setTableInnerContainerWidth,
+    tableInnerContainer: tableInnerContainerRef.current,
+    tableOuterContainer: tableOuterContainerRef.current,
   });
 
   const odysseyDesignTokens = useOdysseyDesignTokens();
@@ -204,9 +204,9 @@ const TableContent = ({
   );
 
   const {
+    draggableTableBodyRowClassName,
     dragHandleStyles,
     dragHandleText,
-    draggableTableBodyRowClassName,
     handleDragHandleKeyDown,
     handleDragHandleOnDragCapture,
     handleDragHandleOnDragEnd,
@@ -223,17 +223,17 @@ const TableContent = ({
           {tableOptions.rowActionButtons?.(row)}
           {(tableOptions.rowActionMenuItems || hasRowReordering) && (
             <MenuButton
-              endIcon={<MoreIcon />}
-              size="small"
-              buttonVariant="floating"
               ariaLabel={t("table.moreactions.arialabel")}
+              buttonVariant="floating"
+              endIcon={<MoreIcon />}
               menuAlignment="right"
+              size="small"
             >
               <RowActions
-                row={row}
-                rowIndex={currentIndex}
-                rowActionMenuItems={tableOptions.rowActionMenuItems}
                 isRowReorderingDisabled={isRowReorderingDisabled}
+                row={row}
+                rowActionMenuItems={tableOptions.rowActionMenuItems}
+                rowIndex={currentIndex}
                 totalRows={totalRows}
                 updateRowOrder={
                   hasRowReordering && onReorderRows ? updateRowOrder : undefined
@@ -245,14 +245,14 @@ const TableContent = ({
       );
     },
     [
+      hasRowReordering,
+      isRowReorderingDisabled,
+      onReorderRows,
       pagination.pageIndex,
       pagination.pageSize,
-      tableOptions,
-      hasRowReordering,
       t,
-      isRowReorderingDisabled,
+      tableOptions,
       totalRows,
-      onReorderRows,
       updateRowOrder,
     ],
   );
@@ -347,9 +347,9 @@ const TableContent = ({
 
   return (
     <ScrollableTableContainer
-      odysseyDesignTokens={odysseyDesignTokens}
-      isScrollableStart={!isTableContainerScrolledToStart}
       isScrollableEnd={!isTableContainerScrolledToEnd}
+      isScrollableStart={!isTableContainerScrolledToStart}
+      odysseyDesignTokens={odysseyDesignTokens}
       ref={tableOuterContainerRef}
     >
       <MRT_TableContainer table={dataTable} />

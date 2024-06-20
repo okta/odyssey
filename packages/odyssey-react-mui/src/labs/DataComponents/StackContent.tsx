@@ -32,15 +32,17 @@ import {
 export type StackContentProps = {
   currentLayout: StackLayout;
   data: MRT_RowData[];
+  draggingRow?: MRT_Row<MRT_RowData> | null;
+  emptyState: ReactNode;
   getRowId: UniversalProps["getRowId"];
-  stackOptions: StackProps;
-  isLoading: boolean;
-  isEmpty?: boolean;
-  isNoResults?: boolean;
   hasRowReordering: UniversalProps["hasRowReordering"];
+  hasRowSelection: UniversalProps["hasRowSelection"];
+  isEmpty?: boolean;
+  isLoading: boolean;
+  isNoResults?: boolean;
   isRowReorderingDisabled?: boolean;
   onReorderRows: UniversalProps["onReorderRows"];
-  totalRows: UniversalProps["totalRows"];
+  pagination: { pageIndex: number; pageSize: number };
   rowReorderingUtilities: {
     dragHandleStyles: CSSObject;
     dragHandleText: {
@@ -78,33 +80,28 @@ export type StackContentProps = {
       newRowIndex: number;
     }) => void;
   };
-  hasRowSelection: UniversalProps["hasRowSelection"];
   rowSelection: MRT_RowSelectionState;
   setRowSelection: Dispatch<SetStateAction<MRT_RowSelectionState>>;
-  emptyState: ReactNode;
-  pagination: {
-    pageIndex: number;
-    pageSize: number;
-  };
-  draggingRow?: MRT_Row<MRT_RowData> | null;
+  stackOptions: StackProps;
+  totalRows: UniversalProps["totalRows"];
 };
 
 const StackContent = ({
   currentLayout,
   data,
-  stackOptions,
-  isLoading,
-  isEmpty,
-  isNoResults,
+  emptyState,
   hasRowReordering,
+  hasRowSelection,
+  isEmpty,
+  isLoading,
+  isNoResults,
   isRowReorderingDisabled,
   onReorderRows,
+  pagination,
   rowReorderingUtilities,
-  hasRowSelection,
   rowSelection,
   setRowSelection,
-  emptyState,
-  pagination,
+  stackOptions,
   totalRows,
 }: StackContentProps) => {
   const handleRowSelectionChange = useCallback(
@@ -189,11 +186,6 @@ const StackContent = ({
 
                 return (
                   <StackCard
-                    overline={overline}
-                    title={title}
-                    description={description}
-                    image={image}
-                    children={children}
                     Accessory={
                       hasRowSelection && (
                         <Box sx={{ marginBlockStart: -1 }}>
@@ -204,6 +196,9 @@ const StackContent = ({
                         </Box>
                       )
                     }
+                    children={children}
+                    description={description}
+                    image={image}
                     key={row.id}
                     menuButtonChildren={
                       (stackOptions.rowActionMenuItems || hasRowReordering) && (
@@ -221,6 +216,8 @@ const StackContent = ({
                         />
                       )
                     }
+                    overline={overline}
+                    title={title}
                   />
                 );
               })}

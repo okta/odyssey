@@ -17,13 +17,13 @@ import { DataTableColumn } from "../../DataTable";
 import { MRT_RowData } from "material-react-table";
 
 type FilterConversionType = {
-  filters?: UniversalProps["filters"];
   columns?: TableProps["columns"];
+  filters?: UniversalProps["filters"];
 };
 
 export const useFilterConversion = ({
-  filters,
   columns,
+  filters,
 }: FilterConversionType) => {
   const convertFilterSelectOptions = useCallback(
     (options: DataTableColumn<MRT_RowData>["filterSelectOptions"]) =>

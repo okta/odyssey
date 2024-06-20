@@ -16,14 +16,14 @@ import { MenuButton } from "../../MenuButton";
 import { MenuItem } from "../../MenuItem";
 
 export type LayoutSwitcherProps = {
-  currentLayout: Layout;
   availableLayouts: AvailableLayouts;
+  currentLayout: Layout;
   setCurrentLayout: Dispatch<SetStateAction<Layout>>;
 };
 
 const LayoutSwitcher = ({
-  currentLayout,
   availableLayouts,
+  currentLayout,
   setCurrentLayout,
 }: LayoutSwitcherProps) => {
   const changeLayout = useCallback(
@@ -38,8 +38,8 @@ const LayoutSwitcher = ({
 
   return (
     <MenuButton
-      buttonLabel={`${currentLayout.charAt(0).toUpperCase()}${currentLayout.slice(1)}`}
       ariaLabel="Layout"
+      buttonLabel={`${currentLayout.charAt(0).toUpperCase()}${currentLayout.slice(1)}`}
       menuAlignment="right"
       shouldCloseOnSelect={false}
     >

@@ -38,23 +38,23 @@ import { Box } from "../../Box";
 export const CARD_IMAGE_HEIGHT = "64px";
 
 export type StackCardProps = {
+  children?: ReactNode;
   description?: string;
   image?: ReactElement;
   overline?: string;
   title?: string;
-  children?: ReactNode;
 } & (
   | {
-      onClick: MouseEventHandler;
+      Accessory?: never;
       button?: never;
       menuButtonChildren?: never;
-      Accessory?: never;
+      onClick: MouseEventHandler;
     }
   | {
-      onClick?: never;
+      Accessory?: ReactNode;
       button?: ReactElement<typeof Button>;
       menuButtonChildren?: MenuButtonProps["children"];
-      Accessory?: ReactNode;
+      onClick?: never;
     }
 );
 
@@ -83,15 +83,15 @@ const MenuButtonContainer = styled("div", {
 const buttonProviderValue = { isFullWidth: true };
 
 const StackCard = ({
+  Accessory,
   button,
+  children,
   description,
   image,
   menuButtonChildren,
   onClick,
   overline,
   title,
-  children,
-  Accessory,
 }: StackCardProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
@@ -151,13 +151,14 @@ const StackCard = ({
       </Box>
     ),
     [
-      button,
-      description,
+      Accessory,
       image,
+      odysseyDesignTokens,
       menuButtonChildren,
       overline,
       title,
-      odysseyDesignTokens,
+      description,
+      button,
       children,
     ],
   );

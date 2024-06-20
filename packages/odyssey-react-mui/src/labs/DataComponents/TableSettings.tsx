@@ -20,15 +20,15 @@ import { useTranslation } from "react-i18next";
 import { TableProps, TableState } from "./componentTypes";
 
 export type TableSettingsProps = {
+  setTableState: Dispatch<SetStateAction<TableState>>;
   tableOptions: TableProps;
   tableState: TableState;
-  setTableState: Dispatch<SetStateAction<TableState>>;
 };
 
 const TableSettings = ({
+  setTableState,
   tableOptions,
   tableState,
-  setTableState,
 }: TableSettingsProps) => {
   const { t } = useTranslation();
 
@@ -84,8 +84,8 @@ const TableSettings = ({
     <>
       {hasChangeableDensity && (
         <MenuButton
-          endIcon={<ListIcon />}
           ariaLabel={t("table.density.arialabel")}
+          endIcon={<ListIcon />}
           menuAlignment="right"
           shouldCloseOnSelect={false}
         >
@@ -105,8 +105,8 @@ const TableSettings = ({
 
       {hasColumnVisibility && (
         <MenuButton
-          endIcon={<ShowIcon />}
           ariaLabel={t("table.columnvisibility.arialabel")}
+          endIcon={<ShowIcon />}
           menuAlignment="right"
           shouldCloseOnSelect={false}
         >

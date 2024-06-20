@@ -25,28 +25,28 @@ import { DataTableProps } from "./DataTable";
 import { Trans } from "react-i18next";
 
 export type RowActionsProps = {
+  isRowReorderingDisabled?: boolean;
   row: MRT_Row<MRT_RowData> | MRT_RowData;
-  rowIndex: number;
   rowActionButtons?: (
     row: MRT_RowData,
   ) => ReactElement<typeof Button | typeof Fragment>;
   rowActionMenuItems?: (row: MRT_RowData) => MenuButtonProps["children"];
-  isRowReorderingDisabled?: boolean;
+  rowIndex: number;
   totalRows?: DataTableProps["totalRows"];
   updateRowOrder?: ({
-    rowId,
     newRowIndex,
+    rowId,
   }: {
-    rowId: string;
     newRowIndex: number;
+    rowId: string;
   }) => void;
 };
 
 const RowActions = ({
-  row,
-  rowIndex,
-  rowActionMenuItems,
   isRowReorderingDisabled,
+  row,
+  rowActionMenuItems,
+  rowIndex,
   totalRows,
   updateRowOrder,
 }: RowActionsProps) => {

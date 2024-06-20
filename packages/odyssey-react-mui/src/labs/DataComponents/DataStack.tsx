@@ -27,62 +27,62 @@ export type DataStackProps = UniversalProps &
 
 const DataStack = ({
   availableLayouts,
-  getData,
-  hasRowSelection,
-  onChangeRowSelection,
   bulkActionMenuItems,
-  hasPagination,
+  cardProps,
   currentPage,
-  paginationType,
-  resultsPerPage,
-  totalRows,
+  emptyPlaceholder,
+  errorMessage,
+  filters,
+  getData,
   hasFilters,
+  hasPagination,
+  hasRowReordering,
+  hasRowSelection,
   hasSearch,
   hasSearchSubmitButton,
-  hasRowReordering,
-  isRowReorderingDisabled,
-  filters,
-  searchDelayTime,
-  errorMessage,
-  emptyPlaceholder,
-  noResultsPlaceholder,
-  isLoading,
   isEmpty,
+  isLoading,
   isNoResults,
-  cardProps,
+  isRowReorderingDisabled,
   maxGridColumns,
+  noResultsPlaceholder,
+  onChangeRowSelection,
+  paginationType,
+  resultsPerPage,
   rowActionMenuItems,
+  searchDelayTime,
+  totalRows,
 }: DataStackProps) => {
   return (
     <DataView
       availableLayouts={availableLayouts}
-      getData={getData}
-      hasRowSelection={hasRowSelection}
-      onChangeRowSelection={onChangeRowSelection}
       bulkActionMenuItems={bulkActionMenuItems}
-      hasPagination={hasPagination}
       currentPage={currentPage}
-      paginationType={paginationType}
-      resultsPerPage={resultsPerPage}
-      totalRows={totalRows}
+      emptyPlaceholder={emptyPlaceholder}
+      errorMessage={errorMessage}
+      filters={filters}
+      getData={getData}
       hasFilters={hasFilters}
+      hasPagination={hasPagination}
+      hasRowReordering={hasRowReordering}
       hasSearch={hasSearch}
       hasSearchSubmitButton={hasSearchSubmitButton}
-      hasRowReordering={hasRowReordering}
-      isRowReorderingDisabled={isRowReorderingDisabled}
-      filters={filters}
-      searchDelayTime={searchDelayTime}
-      errorMessage={errorMessage}
-      emptyPlaceholder={emptyPlaceholder}
-      noResultsPlaceholder={noResultsPlaceholder}
-      isLoading={isLoading}
+      hasRowSelection={hasRowSelection}
       isEmpty={isEmpty}
+      isLoading={isLoading}
       isNoResults={isNoResults}
+      isRowReorderingDisabled={isRowReorderingDisabled}
+      noResultsPlaceholder={noResultsPlaceholder}
+      onChangeRowSelection={onChangeRowSelection}
+      paginationType={paginationType}
+      resultsPerPage={resultsPerPage}
+      searchDelayTime={searchDelayTime}
       stackOptions={{
         cardProps,
         maxGridColumns,
         rowActionMenuItems,
       }}
+      totalRows={totalRows}
     />
   );
 };

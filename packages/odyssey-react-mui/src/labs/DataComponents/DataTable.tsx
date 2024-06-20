@@ -17,74 +17,74 @@ import { TableProps, UniversalProps } from "./componentTypes";
 export type DataTableProps = UniversalProps & TableProps;
 
 const DataTable = ({
-  getData,
-  hasRowSelection,
-  onChangeRowSelection,
   bulkActionMenuItems,
-  hasPagination,
-  currentPage,
-  paginationType,
-  resultsPerPage,
-  totalRows,
-  hasFilters,
-  hasSearch,
-  hasSearchSubmitButton,
-  hasRowReordering,
-  isRowReorderingDisabled,
-  filters,
-  searchDelayTime,
-  errorMessage,
-  emptyPlaceholder,
-  noResultsPlaceholder,
-  isLoading,
-  isEmpty,
-  isNoResults,
   columns,
-  initialDensity,
+  currentPage,
+  emptyPlaceholder,
+  errorMessage,
+  filters,
+  getData,
   hasChangeableDensity,
   hasColumnResizing,
   hasColumnVisibility,
+  initialDensity,
+  hasFilters,
+  hasPagination,
+  hasRowReordering,
+  hasRowSelection,
+  hasSearch,
+  hasSearchSubmitButton,
+  hasSorting,
+  isLoading,
+  isEmpty,
+  isNoResults,
+  isRowReorderingDisabled,
+  noResultsPlaceholder,
+  onChangeRowSelection,
+  paginationType,
   renderDetailPanel,
+  resultsPerPage,
   rowActionButtons,
   rowActionMenuItems,
-  hasSorting,
+  searchDelayTime,
+  totalRows,
 }: DataTableProps) => {
   return (
     <DataView
       availableLayouts={["table"]}
-      getData={getData}
-      hasRowSelection={hasRowSelection}
-      onChangeRowSelection={onChangeRowSelection}
       bulkActionMenuItems={bulkActionMenuItems}
-      hasPagination={hasPagination}
       currentPage={currentPage}
-      paginationType={paginationType}
-      resultsPerPage={resultsPerPage}
-      totalRows={totalRows}
+      emptyPlaceholder={emptyPlaceholder}
+      errorMessage={errorMessage}
+      filters={filters}
+      getData={getData}
       hasFilters={hasFilters}
+      hasPagination={hasPagination}
+      hasRowReordering={hasRowReordering}
+      hasRowSelection={hasRowSelection}
       hasSearch={hasSearch}
       hasSearchSubmitButton={hasSearchSubmitButton}
-      hasRowReordering={hasRowReordering}
-      isRowReorderingDisabled={isRowReorderingDisabled}
-      filters={filters}
-      searchDelayTime={searchDelayTime}
-      errorMessage={errorMessage}
-      emptyPlaceholder={emptyPlaceholder}
-      noResultsPlaceholder={noResultsPlaceholder}
-      isLoading={isLoading}
       isEmpty={isEmpty}
+      isLoading={isLoading}
       isNoResults={isNoResults}
+      isRowReorderingDisabled={isRowReorderingDisabled}
+      noResultsPlaceholder={noResultsPlaceholder}
+      onChangeRowSelection={onChangeRowSelection}
+      paginationType={paginationType}
+      resultsPerPage={resultsPerPage}
+      searchDelayTime={searchDelayTime}
       tableOptions={{
         columns,
-        initialDensity,
         hasChangeableDensity,
         hasColumnResizing,
         hasColumnVisibility,
+        hasSorting,
+        initialDensity,
         renderDetailPanel,
         rowActionButtons,
         rowActionMenuItems,
-        hasSorting,
       }}
+      totalRows={totalRows}
     />
   );
 };

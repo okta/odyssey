@@ -44,33 +44,33 @@ import {
 export type DataViewProps = UniversalProps & ViewProps<Layout>;
 
 const DataView = ({
+  availableLayouts = allAvailableLayouts,
+  bulkActionMenuItems,
+  currentPage = 1,
+  emptyPlaceholder,
+  errorMessage: errorMessageProp,
   getData: getDataFn,
   getRowId: getRowIdProp,
-  availableLayouts = allAvailableLayouts,
-  initialLayout,
-  hasSearch,
   hasFilters,
-  hasSearchSubmitButton,
-  searchDelayTime,
-  bulkActionMenuItems,
   hasPagination,
-  paginationType = "paged",
-  resultsPerPage = 20,
-  currentPage = 1,
-  totalRows,
-  errorMessage: errorMessageProp,
+  hasSearch,
+  hasSearchSubmitButton,
   hasRowReordering,
-  isRowReorderingDisabled,
-  onReorderRows,
-  emptyPlaceholder,
-  noResultsPlaceholder,
-  tableOptions,
-  stackOptions,
   hasRowSelection,
-  onChangeRowSelection,
+  initialLayout,
   isEmpty: isEmptyProp,
   isLoading: isLoadingProp,
   isNoResults: isNoResultsProp,
+  isRowReorderingDisabled,
+  noResultsPlaceholder,
+  onChangeRowSelection,
+  onReorderRows,
+  paginationType = "paged",
+  resultsPerPage = 20,
+  searchDelayTime,
+  stackOptions,
+  tableOptions,
+  totalRows,
 }: DataViewProps) => {
   const [currentLayout, setCurrentLayout] = useState<Layout>(
     initialLayout ?? availableLayouts[0],
@@ -103,9 +103,9 @@ const DataView = ({
   });
 
   const [tableState, setTableState] = useState<TableState>({
-    rowDensity: tableOptions?.initialDensity ?? densityValues[0],
     columnSorting: [],
     columnVisibility: {},
+    rowDensity: tableOptions?.initialDensity ?? densityValues[0],
   });
 
   const hasMultipleAvailableLayouts = useMemo(
@@ -198,8 +198,8 @@ const DataView = ({
   const emptyState = useMemo(() => {
     const noResultsInnerContent = noResultsPlaceholder || (
       <EmptyState
-        heading={t("table.noresults.heading")}
         description={t("table.noresults.text")}
+        heading={t("table.noresults.heading")}
       />
     );
 
@@ -219,16 +219,16 @@ const DataView = ({
       <>
         {currentLayout === "table" && tableOptions && (
           <TableSettings
+            setTableState={setTableState}
             tableOptions={tableOptions}
             tableState={tableState}
-            setTableState={setTableState}
           />
         )}
 
         {hasMultipleAvailableLayouts && (
           <LayoutSwitcher
-            currentLayout={currentLayout}
             availableLayouts={availableLayouts}
+            currentLayout={currentLayout}
             setCurrentLayout={setCurrentLayout}
           />
         )}
@@ -276,13 +276,13 @@ const DataView = ({
 
       {shouldShowFilters && (
         <DataFilters
-          onChangeSearch={hasSearch ? setSearch : undefined}
-          onChangeFilters={hasFilters ? setFilters : undefined}
-          hasSearchSubmitButton={hasSearchSubmitButton}
-          searchDelayTime={searchDelayTime}
-          filters={hasFilters ? availableFilters : undefined}
-          isDisabled={isEmpty}
           additionalActions={additionalActions}
+          filters={hasFilters ? availableFilters : undefined}
+          hasSearchSubmitButton={hasSearchSubmitButton}
+          isDisabled={isEmpty}
+          onChangeFilters={hasFilters ? setFilters : undefined}
+          onChangeSearch={hasSearch ? setSearch : undefined}
+          searchDelayTime={searchDelayTime}
         />
       )}
 
@@ -316,26 +316,26 @@ const DataView = ({
 
       {currentLayout === "table" && tableOptions && (
         <TableContent
-          data={data}
           columns={tableOptions.columns}
+          data={data}
+          draggingRow={draggingRow}
+          emptyState={emptyState}
           getRowId={getRowId}
-          tableState={tableState}
-          setTableState={setTableState}
-          tableOptions={tableOptions}
-          isLoading={isLoading}
-          isEmpty={isEmpty}
-          isNoResults={isNoResults}
           hasRowReordering={hasRowReordering}
+          hasRowSelection={hasRowSelection}
+          isEmpty={isEmpty}
+          isLoading={isLoading}
+          isNoResults={isNoResults}
           isRowReorderingDisabled={isRowReorderingDisabled}
           onReorderRows={onReorderRows}
+          pagination={pagination}
           rowReorderingUtilities={rowReorderingUtilities}
-          hasRowSelection={hasRowSelection}
           rowSelection={rowSelection}
           setRowSelection={setRowSelection}
-          emptyState={emptyState}
-          pagination={pagination}
+          setTableState={setTableState}
+          tableOptions={tableOptions}
+          tableState={tableState}
           totalRows={totalRows}
-          draggingRow={draggingRow}
         />
       )}
       {(currentLayout === "list" || currentLayout === "grid") &&
@@ -343,39 +343,39 @@ const DataView = ({
           <StackContent
             currentLayout={currentLayout}
             data={data}
+            draggingRow={draggingRow}
+            emptyState={emptyState}
             getRowId={getRowId}
-            stackOptions={stackOptions}
-            isLoading={isLoading}
-            isEmpty={isEmpty}
-            isNoResults={isNoResults}
             hasRowReordering={hasRowReordering}
+            hasRowSelection={hasRowSelection}
+            isEmpty={isEmpty}
+            isLoading={isLoading}
+            isNoResults={isNoResults}
             isRowReorderingDisabled={isRowReorderingDisabled}
             onReorderRows={onReorderRows}
+            pagination={pagination}
             rowReorderingUtilities={rowReorderingUtilities}
-            hasRowSelection={hasRowSelection}
             rowSelection={rowSelection}
             setRowSelection={setRowSelection}
-            emptyState={emptyState}
-            pagination={pagination}
+            stackOptions={stackOptions}
             totalRows={totalRows}
-            draggingRow={draggingRow}
           />
         )}
 
       {hasPagination && (
         <Pagination
+          currentPageLabel={t("pagination.page")}
+          isDisabled={isEmpty}
+          lastRow={lastRowOnPage}
+          loadMoreLabel={t("pagination.loadmore")}
+          nextLabel={t("pagination.next")}
+          onPaginationChange={setPagination}
           pageIndex={pagination.pageIndex}
           pageSize={pagination.pageSize}
-          onPaginationChange={setPagination}
-          lastRow={lastRowOnPage}
-          totalRows={totalRows}
-          isDisabled={isEmpty}
-          variant={paginationType}
-          rowsPerPageLabel={t("pagination.rowsperpage")}
-          currentPageLabel={t("pagination.page")}
           previousLabel={t("pagination.previous")}
-          nextLabel={t("pagination.next")}
-          loadMoreLabel={t("pagination.loadmore")}
+          rowsPerPageLabel={t("pagination.rowsperpage")}
+          totalRows={totalRows}
+          variant={paginationType}
         />
       )}
     </Box>

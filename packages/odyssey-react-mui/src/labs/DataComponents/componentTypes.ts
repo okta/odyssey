@@ -43,7 +43,13 @@ export type AvailableLayouts = Layout[];
 export type AvailableStackLayouts = StackLayout[];
 
 export type UniversalProps = {
-  // Data handling
+  bulkActionMenuItems?: (
+    selectedRows: MRT_RowSelectionState,
+  ) => MenuButtonProps["children"];
+  currentPage?: number;
+  emptyPlaceholder?: ReactNode;
+  errorMessage?: string;
+  filters?: Array<DataFilter | DataTableColumn<MRT_RowData> | string>;
   getData: ({
     page,
     resultsPerPage,
@@ -52,50 +58,35 @@ export type UniversalProps = {
     sort,
   }: DataGetDataType) => MRT_RowData[] | Promise<MRT_RowData[]>;
   getRowId?: MRT_TableOptions<MRT_RowData>["getRowId"];
-  hasRowReordering?: boolean;
-  isRowReorderingDisabled?: boolean;
-  onReorderRows?: ({ rowId, newRowIndex }: DataOnReorderRowsType) => void;
-
-  // Row selection
-  hasRowSelection?: boolean;
-  onChangeRowSelection?: (rowSelection: DataRowSelectionState) => void;
-  bulkActionMenuItems?: (
-    selectedRows: MRT_RowSelectionState,
-  ) => MenuButtonProps["children"];
-
-  // Pagination
-  hasPagination?: boolean;
-  currentPage?: number;
-  paginationType?: (typeof paginationTypeValues)[number];
-  resultsPerPage?: number;
-  totalRows?: number;
-
-  // Search & filtering
   hasFilters?: boolean;
+  hasPagination?: boolean;
+  hasRowReordering?: boolean;
+  hasRowSelection?: boolean;
   hasSearch?: boolean;
   hasSearchSubmitButton?: boolean;
-  filters?: Array<DataFilter | DataTableColumn<MRT_RowData> | string>;
-  searchDelayTime?: number;
-
-  // States
-  errorMessage?: string;
-  emptyPlaceholder?: ReactNode;
-  noResultsPlaceholder?: ReactNode;
-  isLoading?: boolean;
   isEmpty?: boolean;
+  isLoading?: boolean;
   isNoResults?: boolean;
+  isRowReorderingDisabled?: boolean;
+  noResultsPlaceholder?: ReactNode;
+  onChangeRowSelection?: (rowSelection: DataRowSelectionState) => void;
+  onReorderRows?: ({ rowId, newRowIndex }: DataOnReorderRowsType) => void;
+  paginationType?: (typeof paginationTypeValues)[number];
+  resultsPerPage?: number;
+  searchDelayTime?: number;
+  totalRows?: number;
 };
 
 export type TableProps = {
   columns: DataTableColumn<MRT_RowData>[];
-  initialDensity?: (typeof densityValues)[number];
   hasChangeableDensity?: boolean;
   hasColumnResizing?: boolean;
   hasColumnVisibility?: boolean;
+  hasSorting?: boolean;
+  initialDensity?: (typeof densityValues)[number];
   renderDetailPanel?: MRT_TableOptions<MRT_RowData>["renderDetailPanel"];
   rowActionButtons?: DataTableRowActionsProps["rowActionButtons"];
   rowActionMenuItems?: DataTableRowActionsProps["rowActionMenuItems"];
-  hasSorting?: boolean;
 };
 
 export type StackProps = {
@@ -105,10 +96,10 @@ export type StackProps = {
 };
 
 export type ViewProps<L extends Layout> = {
-  initialLayout?: L;
   availableLayouts?: L[];
-  tableOptions?: TableProps;
+  initialLayout?: L;
   stackOptions?: StackProps;
+  tableOptions?: TableProps;
 };
 
 export type TableState = {
