@@ -11,31 +11,170 @@
  */
 
 import {
+  ChangeEventHandler,
   memo,
-  SyntheticEvent,
   useCallback,
   useEffect,
   useMemo,
   useRef,
   useState,
 } from "react";
-import {
-  Switch as MuiSwitch,
-  SwitchProps as MuiSwitchProps,
-  FormControlLabel,
-} from "@mui/material";
+import { SwitchProps as MuiSwitchProps, FormLabel } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import styled from "@emotion/styled";
 
-import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext";
 import { Box } from "../Box";
 import { FieldComponentProps } from "../FieldComponentProps";
 import { FieldHint } from "../FieldHint";
-import type { HtmlProps } from "../HtmlProps";
-import { useUniqueId } from "../useUniqueId";
-import { ComponentControlledState, getControlState } from "../inputUtils";
 import { CheckedFieldProps } from "../FormCheckedProps";
+import type { HtmlProps } from "../HtmlProps";
+import { CheckIcon } from "../icons.generated";
+import { ComponentControlledState, getControlState } from "../inputUtils";
+import {
+  DesignTokens,
+  useOdysseyDesignTokens,
+} from "../OdysseyDesignTokensContext";
+import { stripRem, toRem } from "../remUtils";
+import { useUniqueId } from "../useUniqueId";
 
 const { CONTROLLED } = ComponentControlledState;
+
+const nonForwardedProps = [
+  "isChecked",
+  "isDisabled",
+  "isFullWidth",
+  "odysseyDesignTokens",
+];
+
+const SwitchAndLabelContainer = styled("div", {
+  shouldForwardProp: (prop) => !nonForwardedProps.includes(prop),
+})<
+  Pick<SwitchProps, "isFullWidth" | "isDisabled"> & {
+    odysseyDesignTokens: DesignTokens;
+  }
+>(({ isFullWidth, odysseyDesignTokens }) => ({
+  display: "flex",
+  alignItems: "flex-start",
+  justifyContent: "space-between",
+  maxWidth: isFullWidth ? "100%" : odysseyDesignTokens.TypographyLineLengthMax,
+}));
+
+const SwitchContainer = styled.div({
+  position: "relative",
+});
+
+const StyledSwitchLabel = styled(FormLabel, {
+  shouldForwardProp: (prop) => !nonForwardedProps.includes(prop),
+})<
+  Pick<SwitchLabelComponentProps, "isDisabled"> & {
+    odysseyDesignTokens: DesignTokens;
+  }
+>(({ isDisabled, odysseyDesignTokens }) => ({
+  display: "block",
+  margin: 0,
+  color: isDisabled
+    ? odysseyDesignTokens.TypographyColorDisabled
+    : odysseyDesignTokens.PaletteNeutralDark,
+
+  ...(isDisabled && {
+    p: {
+      color: odysseyDesignTokens.TypographyColorDisabled,
+    },
+    a: {
+      color: `${odysseyDesignTokens.TypographyColorDisabled} !important`,
+    },
+  }),
+}));
+
+const SwitchTrack = styled("div", {
+  shouldForwardProp: (prop) => !nonForwardedProps.includes(prop),
+})<
+  Pick<SwitchProps, "isChecked" | "isDisabled"> & {
+    odysseyDesignTokens: DesignTokens;
+  }
+>(({ isChecked, isDisabled, odysseyDesignTokens }) => ({
+  position: "relative",
+  width: odysseyDesignTokens.Spacing7,
+  height: `calc(${odysseyDesignTokens.Spacing4} + ${odysseyDesignTokens.Spacing1})`,
+  borderRadius: odysseyDesignTokens.BorderRadiusOuter,
+  backgroundColor: isDisabled
+    ? odysseyDesignTokens.HueNeutral200
+    : isChecked
+      ? odysseyDesignTokens.PaletteSuccessLight
+      : odysseyDesignTokens.HueNeutral300,
+  transition: `background-color ${odysseyDesignTokens.TransitionDurationMain}`,
+}));
+
+const SwitchThumb = styled("span", {
+  shouldForwardProp: (prop) => !nonForwardedProps.includes(prop),
+})<
+  Pick<SwitchProps, "isChecked" | "isDisabled"> & {
+    odysseyDesignTokens: DesignTokens;
+  }
+>(({ isChecked, isDisabled, odysseyDesignTokens }) => {
+  const thumbOffset = toRem(3);
+  const trackWidth = stripRem(odysseyDesignTokens.Spacing7);
+  const thumbWidth = stripRem(odysseyDesignTokens.Spacing4) - toRem(2);
+
+  const transformDistance = trackWidth - thumbWidth - thumbOffset * 2;
+
+  return {
+    position: "absolute",
+    top: "50%",
+    left: `${thumbOffset}rem`,
+    width: `calc(${odysseyDesignTokens.Spacing4} - ${toRem(2)}rem)`,
+    height: `calc(${odysseyDesignTokens.Spacing4} - ${toRem(2)}rem)`,
+    borderRadius: odysseyDesignTokens.BorderRadiusRound,
+    backgroundColor: isDisabled
+      ? odysseyDesignTokens.HueNeutral50
+      : odysseyDesignTokens.HueNeutralWhite,
+    transform: isChecked
+      ? `translate3d(${transformDistance}rem, -50%, 0)`
+      : "translate3d(0, -50%, 0)",
+    transition: `transform ${odysseyDesignTokens.TransitionDurationMain}`,
+  };
+});
+
+const SwitchCheckMark = styled(CheckIcon, {
+  shouldForwardProp: (prop) => !nonForwardedProps.includes(prop),
+})<
+  Pick<SwitchProps, "isChecked" | "isDisabled"> & {
+    odysseyDesignTokens: DesignTokens;
+  }
+>(({ isChecked, isDisabled, odysseyDesignTokens }) => ({
+  position: "absolute",
+  top: "50%",
+  left: 3,
+  width: odysseyDesignTokens.Spacing4,
+  transform: "translateY(-50%)",
+  transition: `opacity ${odysseyDesignTokens.TransitionDurationMain}`,
+  opacity: isChecked ? 1 : 0,
+  path: {
+    fill: isDisabled
+      ? odysseyDesignTokens.HueNeutral50
+      : odysseyDesignTokens.HueNeutralWhite,
+  },
+}));
+
+const HiddenCheckbox = styled.input<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  position: "absolute",
+  top: 0,
+  left: 0,
+  width: "100%",
+  height: "100%",
+  margin: 0,
+  opacity: 0,
+  cursor: "pointer",
+  zIndex: 2,
+
+  "&:focus-visible": {
+    "~ [data-switch-track='true']": {
+      boxShadow: `0 0 0 2px ${odysseyDesignTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyDesignTokens.PalettePrimaryMain}`,
+    },
+  },
+}));
 
 type OnChangeCallbackArguments = {
   checked: boolean;
@@ -43,10 +182,6 @@ type OnChangeCallbackArguments = {
 };
 
 export type SwitchProps = {
-  /**
-   * if `true`, the label and switch span entire containing element's width
-   */
-  isFullWidth?: boolean;
   /**
    * The label text for the Switch
    */
@@ -61,83 +196,69 @@ export type SwitchProps = {
   value: string;
 } & Pick<
   FieldComponentProps,
-  "hint" | "id" | "isFullWidth" | "isDisabled" | "name"
+  "hint" | "HintLinkComponent" | "id" | "isFullWidth" | "isDisabled" | "name"
 > &
-  CheckedFieldProps<MuiSwitchProps> &
+  Pick<CheckedFieldProps<MuiSwitchProps>, "isChecked" | "isDefaultChecked"> &
   Pick<HtmlProps, "testId">;
 
-type SwitchLabelProps = {
-  checked: boolean;
+type SwitchLabelComponentProps = {
   hint: SwitchProps["hint"];
   hintId?: string;
+  HintLinkComponent: SwitchProps["HintLinkComponent"];
+  inputId: string;
+  isDisabled: SwitchProps["isDisabled"];
   isFullWidth: SwitchProps["isFullWidth"];
   label: SwitchProps["label"];
 };
 
 const SwitchLabel = ({
-  checked,
   hint,
   hintId,
-  isFullWidth,
+  HintLinkComponent,
+  inputId,
+  isDisabled,
   label,
-}: SwitchLabelProps) => {
+}: SwitchLabelComponentProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
-  const { t } = useTranslation();
 
   return (
     <>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          flexWrap: "wrap",
-          gap: odysseyDesignTokens.Spacing1,
-          margin: 0,
-          maxWidth: isFullWidth
-            ? "100%"
-            : odysseyDesignTokens.TypographyLineLengthMax,
-          fontWeight: odysseyDesignTokens.TypographyWeightBodyBold,
-        }}
+      <StyledSwitchLabel
+        htmlFor={inputId}
+        isDisabled={isDisabled}
+        odysseyDesignTokens={odysseyDesignTokens}
       >
         {label}
-        <Box
-          sx={{
-            padding: "2px 4px",
-            backgroundColor: checked
-              ? odysseyDesignTokens.PaletteSuccessLighter
-              : odysseyDesignTokens.HueNeutral100,
-            borderRadius: odysseyDesignTokens.BorderRadiusMain,
-            color: checked
-              ? odysseyDesignTokens.PaletteSuccessText
-              : odysseyDesignTokens.HueNeutral700,
-            fontWeight: odysseyDesignTokens.TypographyWeightBodyBold,
-            fontSize: odysseyDesignTokens.TypographyScale0,
-            lineHeight: odysseyDesignTokens.TypographyLineHeightOverline,
-            transitionProperty: "background-color, color",
-            transitionDuration: odysseyDesignTokens.TransitionDurationMain,
-          }}
-        >
-          {checked ? t("switch.active") : t("switch.inactive")}
-        </Box>
-      </Box>
-      {hint && <FieldHint id={hintId} text={hint} />}
+        {hint && (
+          <FieldHint
+            id={hintId}
+            text={hint}
+            LinkComponent={HintLinkComponent}
+          />
+        )}
+      </StyledSwitchLabel>
     </>
   );
 };
 
+const MemoizedSwitchLabel = memo(SwitchLabel);
+SwitchLabel.displayName = "SwitchLabel";
+
 const Switch = ({
   hint,
-  id: _id,
+  HintLinkComponent,
+  id: idProp,
   isChecked,
   isDefaultChecked,
   isDisabled,
   isFullWidth = false,
   label,
-  name: _name,
+  name,
   onChange,
   testId,
-  value = "Something",
+  value,
 }: SwitchProps) => {
+  const { t } = useTranslation();
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const controlledStateRef = useRef(
     getControlState({
@@ -164,82 +285,82 @@ const Switch = ({
     }
   }, [isChecked]);
 
-  const id = useUniqueId(_id);
+  const inputId = useUniqueId(idProp);
 
-  const hintId = hint ? `${id}-hint` : undefined;
-  const labelElementId = `${id}-label`;
+  const hintId = hint ? `${inputId}-hint` : undefined;
+  const labelElementId = `${inputId}-label`;
 
-  const handleOnChange = useCallback(
-    (_: SyntheticEvent<Element, Event>, checked: boolean) => {
+  const handleOnChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
+    (event) => {
+      const target = event.target;
+      const { checked, value } = target;
       setInternalSwitchChecked(checked);
       onChange?.({ checked, value });
     },
-    [onChange, setInternalSwitchChecked, value],
-  );
-
-  const renderSwitchComponent = useMemo(
-    () => (
-      <MuiSwitch
-        {...inputValues}
-        disabled={isDisabled}
-        disableRipple
-        inputProps={{
-          "aria-checked": internalSwitchChecked,
-          "aria-describedby": hintId,
-          "aria-label": label,
-          "aria-labelledby": labelElementId,
-          "data-se": testId,
-        }}
-        name={_name ?? id}
-        onChange={handleOnChange}
-      />
-    ),
-    [
-      handleOnChange,
-      hintId,
-      inputValues,
-      internalSwitchChecked,
-      id,
-      isDisabled,
-      label,
-      labelElementId,
-      _name,
-      testId,
-    ],
+    [onChange, setInternalSwitchChecked],
   );
 
   return (
     <Box
       sx={{
         marginBlockEnd: odysseyDesignTokens.Spacing2,
+        "&:last-child": {
+          marginBlockEnd: 0,
+        },
       }}
     >
-      <FormControlLabel
-        checked={internalSwitchChecked}
-        control={renderSwitchComponent}
-        disabled={isDisabled}
-        id={labelElementId}
-        label={
-          <SwitchLabel
-            checked={internalSwitchChecked}
-            hint={hint}
-            hintId={hintId}
-            isFullWidth={isFullWidth}
-            label={label}
+      <SwitchAndLabelContainer
+        isFullWidth={isFullWidth}
+        odysseyDesignTokens={odysseyDesignTokens}
+      >
+        <MemoizedSwitchLabel
+          hint={hint}
+          hintId={hintId}
+          HintLinkComponent={HintLinkComponent}
+          inputId={inputId}
+          isDisabled={isDisabled}
+          isFullWidth={isFullWidth}
+          label={label}
+        />
+        <SwitchContainer>
+          <HiddenCheckbox
+            {...inputValues}
+            aria-checked={internalSwitchChecked}
+            aria-describedby={hintId}
+            aria-label={
+              internalSwitchChecked
+                ? `${label}: ${t("switch.active")}`
+                : `${label}: ${t("switch.inactive")}`
+            }
+            aria-labelledby={labelElementId}
+            data-se={testId}
+            disabled={isDisabled}
+            id={inputId}
+            name={name ?? inputId}
+            onChange={handleOnChange}
+            odysseyDesignTokens={odysseyDesignTokens}
+            type="checkbox"
+            value={value}
           />
-        }
-        labelPlacement="start"
-        sx={{
-          justifyContent: "space-between",
-          alignItems: "flex-start",
-          gap: odysseyDesignTokens.Spacing4,
-          width: "100%",
-          maxWidth: isFullWidth
-            ? "100%"
-            : odysseyDesignTokens.TypographyLineLengthMax,
-        }}
-        value={value}
-      />
+          <SwitchTrack
+            data-switch-track
+            isChecked={internalSwitchChecked}
+            isDisabled={isDisabled}
+            odysseyDesignTokens={odysseyDesignTokens}
+          >
+            <SwitchThumb
+              isChecked={internalSwitchChecked}
+              isDisabled={isDisabled}
+              odysseyDesignTokens={odysseyDesignTokens}
+            />
+            <SwitchCheckMark
+              isChecked={internalSwitchChecked}
+              isDisabled={isDisabled}
+              odysseyDesignTokens={odysseyDesignTokens}
+            />
+          </SwitchTrack>
+        </SwitchContainer>
+      </SwitchAndLabelContainer>
     </Box>
   );
 };

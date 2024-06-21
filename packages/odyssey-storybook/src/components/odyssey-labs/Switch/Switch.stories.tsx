@@ -10,7 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Switch, SwitchProps } from "@okta/odyssey-react-mui";
+import { useCallback, useState } from "react";
+import { Switch, SwitchProps, HintLink } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 import { userEvent, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
@@ -42,6 +43,7 @@ const storybookMeta: Meta<SwitchProps> = {
       },
     },
     hint: fieldComponentPropsMetaData.hint,
+    HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
     id: fieldComponentPropsMetaData.id,
     isDisabled: fieldComponentPropsMetaData.isDisabled,
     label: {
@@ -76,6 +78,7 @@ const storybookMeta: Meta<SwitchProps> = {
     hint: "Optional hint text",
     label: "Switch label",
     value: "Switch value",
+    HintLinkComponent: <HintLink href="">Some hint link</HintLink>,
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
@@ -95,5 +98,30 @@ export const Default: StoryObj<typeof Switch> = {
       await axeRun("Switch Default");
       await userEvent.tab();
     });
+  },
+};
+
+export const Disabled: StoryObj<typeof Switch> = {
+  args: {
+    isDisabled: true,
+  },
+};
+
+export const CheckedDisabled: StoryObj<typeof Switch> = {
+  args: {
+    isDisabled: true,
+    isDefaultChecked: true,
+  },
+};
+
+export const Controlled: StoryObj<typeof Switch> = {
+  render: function C({ ...props }) {
+    const [checked, setChecked] = useState(true);
+
+    const onChange = useCallback<NonNullable<SwitchProps["onChange"]>>(
+      ({ checked }) => setChecked(checked),
+      [],
+    );
+    return <Switch {...props} isChecked={checked} onChange={onChange} />;
   },
 };
