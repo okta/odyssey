@@ -134,8 +134,8 @@ const StackContent = ({
     currentLayout: StackLayout;
     maxGridColumns: number;
   }>(({ odysseyDesignTokens, currentLayout, maxGridColumns }) => ({
-    display: currentLayout === "stack" ? "flex" : "grid",
-    flexDirection: currentLayout === "stack" ? "column" : undefined,
+    display: currentLayout === "list" ? "flex" : "grid",
+    flexDirection: "column",
     gap: odysseyDesignTokens.Spacing5,
 
     ...(currentLayout === "grid" && {
@@ -189,6 +189,7 @@ const StackContent = ({
                   <StackCard
                     Accessory={
                       hasRowSelection && (
+                        // Negative margin to counteract the checkbox's inbuilt spacing
                         <Box sx={{ marginBlockStart: -1 }}>
                           <MuiCheckbox
                             checked={rowSelection[row.id] ?? false}

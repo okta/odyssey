@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export const availableStackLayouts = ["stack", "grid"];
+export const availableStackLayouts = ["list", "grid"];
 export const availableTableLayouts = ["table"];
 export const availableLayouts = [
   ...availableTableLayouts,

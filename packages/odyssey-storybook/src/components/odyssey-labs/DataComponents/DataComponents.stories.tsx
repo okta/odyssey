@@ -234,8 +234,7 @@ const storybookMeta: Meta<DataViewMetaProps> = {
     hasActionMenuItems: false,
     hasCustomEmptyPlaceholder: false,
     hasCustomNoResultsPlaceholder: false,
-    availableLayouts: ["table", "stack", "grid"],
-    initialLayout: "table",
+    availableLayouts: ["table", "list", "grid"],
   },
   decorators: [MuiThemeDecorator],
 };

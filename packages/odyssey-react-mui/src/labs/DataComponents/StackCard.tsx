@@ -81,6 +81,19 @@ const MenuButtonContainer = styled("div", {
   top: odysseyDesignTokens.Spacing3,
 }));
 
+const CardContentContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
+  display: "flex",
+  gap: odysseyDesignTokens.Spacing3,
+}));
+
+const CardChildrenContainer = styled("div")(() => ({
+  ["* + &"]: {
+    marginBlockStart: 3,
+  },
+}));
+
 const buttonProviderValue = { isFullWidth: true };
 
 const StackCard = ({
@@ -99,12 +112,7 @@ const StackCard = ({
 
   const cardContent = useMemo(
     () => (
-      <Box
-        sx={{
-          display: "flex",
-          gap: 3,
-        }}
-      >
+      <CardContentContainer odysseyDesignTokens={odysseyDesignTokens}>
         {Accessory && <Box>{Accessory}</Box>}
         <Box>
           {image && (
@@ -131,18 +139,10 @@ const StackCard = ({
           )}
 
           {children && (
-            <Box
-              sx={{
-                ["&:not(:first-child)"]: {
-                  marginBlockStart: 3,
-                },
-              }}
-            >
-              {children}
-            </Box>
+            <CardChildrenContainer>{children}</CardChildrenContainer>
           )}
         </Box>
-      </Box>
+      </CardContentContainer>
     ),
     [
       Accessory,

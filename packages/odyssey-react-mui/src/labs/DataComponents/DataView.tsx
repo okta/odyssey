@@ -41,8 +41,31 @@ import { TableContent } from "./TableContent";
 import { StackContent } from "./StackContent";
 import { useFilterConversion } from "./useFilterConversion";
 import { useRowReordering } from "../../DataTable/useRowReordering";
+import {
+  DesignTokens,
+  useOdysseyDesignTokens,
+} from "../../OdysseyDesignTokensContext";
+import styled from "@emotion/styled";
 
 export type DataViewProps = UniversalProps & ViewProps<Layout>;
+
+const DataViewContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
+  display: "flex",
+  flexDirection: "column",
+  gap: odysseyDesignTokens.Spacing4,
+}));
+
+const BulkActionsContainer = styled("div")(() => ({
+  display: "flex",
+  justifyContent: "space-between",
+}));
+
+const AdditionalActionsContainer = styled("div")(() => ({
+  display: "flex",
+  justifyContent: "flex-end",
+}));
 
 const DataView = ({
   availableLayouts = allAvailableLayouts,
@@ -73,6 +96,8 @@ const DataView = ({
   tableOptions,
   totalRows,
 }: DataViewProps) => {
+  const odysseyDesignTokens = useOdysseyDesignTokens();
+
   const [currentLayout, setCurrentLayout] = useState<Layout>(
     initialLayout ?? availableLayouts[0],
   );
@@ -251,13 +276,7 @@ const DataView = ({
   });
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 4,
-      }}
-    >
+    <DataViewContainer odysseyDesignTokens={odysseyDesignTokens}>
       {errorMessage && (
         <Box>
           <Callout severity="error" text={errorMessage} />
@@ -277,12 +296,7 @@ const DataView = ({
       )}
 
       {(bulkActionMenuItems || hasRowSelection) && (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
+        <BulkActionsContainer>
           <BulkActionMenu
             data={data}
             menuItems={bulkActionMenuItems}
@@ -290,18 +304,13 @@ const DataView = ({
             setRowSelection={setRowSelection}
           />
           {!shouldShowFilters && additionalActions}
-        </Box>
+        </BulkActionsContainer>
       )}
 
       {!shouldShowFilters && !bulkActionMenuItems && !hasRowSelection && (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "flex-end",
-          }}
-        >
+        <AdditionalActionsContainer>
           {additionalActions}
-        </Box>
+        </AdditionalActionsContainer>
       )}
 
       {currentLayout === "table" && tableOptions && (
@@ -368,7 +377,7 @@ const DataView = ({
           variant={paginationType}
         />
       )}
-    </Box>
+    </DataViewContainer>
   );
 };
 

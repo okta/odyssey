@@ -28,10 +28,7 @@ const LayoutSwitcher = ({
   setCurrentLayout,
 }: LayoutSwitcherProps) => {
   const changeLayout = useCallback(
-    (value: Layout) => (_event: React.MouseEvent<HTMLLIElement>) => {
-      // This is necessary to avoid linter errors, while the _event is necessary to satisfy the onClick type
-      if (process.env.NODE_ENV === "development") console.debug(_event);
-
+    (value: Layout) => {
       setCurrentLayout(value);
     },
     [setCurrentLayout],

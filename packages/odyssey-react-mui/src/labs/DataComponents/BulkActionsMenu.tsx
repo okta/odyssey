@@ -12,26 +12,44 @@
 
 import { memo, useCallback, Dispatch, SetStateAction } from "react";
 import { MRT_RowData, MRT_RowSelectionState } from "material-react-table";
+import styled from "@emotion/styled";
+import { useTranslation } from "react-i18next";
 
 import { Box } from "../../Box";
 import { Button } from "../../Button";
 import { ChevronDownIcon } from "../../icons.generated";
 import { MenuButton } from "../../MenuButton";
 import { UniversalProps } from "./componentTypes";
+import {
+  DesignTokens,
+  useOdysseyDesignTokens,
+} from "../../OdysseyDesignTokensContext";
 
-export type BulkActionMenuProps = {
+export type BulkActionsMenuProps = {
   data: MRT_RowData[];
   menuItems: UniversalProps["bulkActionMenuItems"];
   rowSelection: MRT_RowSelectionState;
   setRowSelection: Dispatch<SetStateAction<MRT_RowSelectionState>>;
 };
 
+const BulkActionsContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  display: "flex",
+  gap: odysseyDesignTokens.Spacing2,
+}));
+
 const BulkActionMenu = ({
   data,
   menuItems,
   rowSelection,
   setRowSelection,
-}: BulkActionMenuProps) => {
+}: BulkActionsMenuProps) => {
+  const odysseyDesignTokens = useOdysseyDesignTokens();
+  const { t } = useTranslation();
+
   const selectedRowCount = Object.values(rowSelection).filter(
     (value) => value === true,
   ).length;
@@ -46,16 +64,11 @@ const BulkActionMenu = ({
   }, [setRowSelection]);
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        gap: 2,
-      }}
-    >
+    <BulkActionsContainer odysseyDesignTokens={odysseyDesignTokens}>
       {selectedRowCount > 0 && (
         <MenuButton
           ariaLabel="More actions"
-          buttonLabel={`${selectedRowCount} selected`}
+          buttonLabel={t("table.actions.selectsome", { selectedRowCount })}
           buttonVariant="primary"
           endIcon={<ChevronDownIcon />}
         >
@@ -65,18 +78,18 @@ const BulkActionMenu = ({
       <Box>
         <Button
           isDisabled={selectedRowCount === 20}
-          label="Select all"
+          label={t("table.actions.selectall")}
           onClick={handleSelectAll}
           variant="secondary"
         />
         <Button
           isDisabled={selectedRowCount === 0}
-          label="Select none"
+          label={t("table.actions.selectnone")}
           onClick={handleSelectNone}
           variant="secondary"
         />
       </Box>
-    </Box>
+    </BulkActionsContainer>
   );
 };
 

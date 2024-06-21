@@ -20,7 +20,7 @@ import {
   ReactNode,
   Dispatch,
 } from "react";
-import { CSSObject } from "@emotion/styled";
+import styled, { CSSObject } from "@emotion/styled";
 import {
   MRT_Row,
   MRT_RowData,
@@ -30,6 +30,7 @@ import {
   MRT_TableOptions,
   useMaterialReactTable,
 } from "material-react-table";
+import { useTranslation } from "react-i18next";
 
 import {
   ArrowDownIcon,
@@ -50,7 +51,16 @@ import { MoreIcon } from "../../icons.generated";
 import { RowActions } from "./RowActions";
 import { useOdysseyDesignTokens } from "../../OdysseyDesignTokensContext";
 import { useScrollIndication } from "../../DataTable/useScrollIndication";
-import { useTranslation } from "react-i18next";
+
+const TextWrapper = styled("div")(() => ({
+  whiteSpace: "nowrap",
+  textOverflow: "ellipsis",
+  overflow: "hidden",
+}));
+
+const RowActionsContainer = styled("div")(() => ({
+  display: "flex",
+}));
 
 export type TableContentProps = {
   columns: TableProps["columns"];
@@ -187,19 +197,7 @@ const TableContent = ({
         cell.column.columnDef.hasTextWrapping ||
         cell.column.columnDef.enableWrapping;
 
-      return hasTextWrapping ? (
-        value
-      ) : (
-        <Box
-          sx={{
-            whiteSpace: "nowrap",
-            textOverflow: "ellipsis",
-            overflow: "hidden",
-          }}
-        >
-          {value}
-        </Box>
-      );
+      return hasTextWrapping ? value : <TextWrapper>{value}</TextWrapper>;
     },
     [],
   );
@@ -220,7 +218,7 @@ const TableContent = ({
       const currentIndex =
         row.index + (pagination.pageIndex - 1) * pagination.pageSize;
       return (
-        <Box sx={{ display: "flex" }}>
+        <RowActionsContainer>
           {tableOptions.rowActionButtons?.(row)}
           {(tableOptions.rowActionMenuItems || hasRowReordering) && (
             <MenuButton
@@ -242,7 +240,7 @@ const TableContent = ({
               />
             </MenuButton>
           )}
-        </Box>
+        </RowActionsContainer>
       );
     },
     [
