@@ -47,7 +47,7 @@ const TableSettings = ({
           rowDensity: value,
         }));
       },
-    [],
+    [setTableState],
   );
 
   const changeColumnVisibility = useCallback(
@@ -65,7 +65,7 @@ const TableSettings = ({
         },
       }));
     },
-    [],
+    [setTableState],
   );
 
   const isColumnVisibilityChecked = useMemo(() => {
