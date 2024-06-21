@@ -12,7 +12,7 @@
 
 import { Fragment, ReactElement, memo, useCallback } from "react";
 import { MRT_Row, MRT_RowData } from "material-react-table";
-import { Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import {
   ArrowBottomIcon,
@@ -51,6 +51,8 @@ const RowActions = ({
   totalRows,
   updateRowOrder,
 }: RowActionsProps) => {
+  const { t } = useTranslation();
+
   const handleToFrontClick = useCallback(() => {
     updateRowOrder && updateRowOrder({ rowId: row.id, newRowIndex: 0 });
   }, [row.id, updateRowOrder]);
@@ -83,13 +85,13 @@ const RowActions = ({
             isDisabled={rowIndex <= 0 || isRowReorderingDisabled}
             onClick={handleToFrontClick}
           >
-            <ArrowTopIcon /> <Trans i18nKey="table.reorder.tofront" />
+            <ArrowTopIcon /> {t("table.reorder.tofront")}
           </MenuItem>
           <MenuItem
             isDisabled={rowIndex <= 0 || isRowReorderingDisabled}
             onClick={handleForwardClick}
           >
-            <ArrowUpIcon /> <Trans i18nKey="table.reorder.forward" />
+            <ArrowUpIcon /> {t("table.reorder.forward")}
           </MenuItem>
           <MenuItem
             isDisabled={
@@ -98,14 +100,14 @@ const RowActions = ({
             }
             onClick={handleBackwardClick}
           >
-            <ArrowDownIcon /> <Trans i18nKey="table.reorder.backward" />
+            <ArrowDownIcon /> {t("table.reorder.backward")}
           </MenuItem>
           {totalRows && (
             <MenuItem
               isDisabled={rowIndex >= totalRows - 1 || isRowReorderingDisabled}
               onClick={handleToBackClick}
             >
-              <ArrowBottomIcon /> <Trans i18nKey="table.reorder.toback" />
+              <ArrowBottomIcon /> {t("table.reorder.toback")}
             </MenuItem>
           )}
         </>

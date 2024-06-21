@@ -34,7 +34,7 @@ const LayoutSwitcher = ({
 
       setCurrentLayout(value);
     },
-    [],
+    [setCurrentLayout],
   );
 
   return (
@@ -50,7 +50,7 @@ const LayoutSwitcher = ({
             <MenuItem
               key={value}
               isSelected={currentLayout === value}
-              onClick={changeLayout(value)}
+              onClick={() => changeLayout(value)}
             >
               {`${value.charAt(0).toUpperCase()}${value.slice(1)}`}
             </MenuItem>

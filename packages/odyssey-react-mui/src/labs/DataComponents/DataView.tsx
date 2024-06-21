@@ -109,11 +109,6 @@ const DataView = ({
     rowDensity: tableOptions?.initialDensity ?? densityValues[0],
   });
 
-  const hasMultipleAvailableLayouts = useMemo(
-    () => typeof availableLayouts !== "string" && availableLayouts.length > 1,
-    [availableLayouts],
-  );
-
   const shouldShowFilters = useMemo(
     () => hasSearch || hasFilters,
     [hasSearch, hasFilters],
@@ -226,7 +221,7 @@ const DataView = ({
           />
         )}
 
-        {hasMultipleAvailableLayouts && (
+        {availableLayouts.length > 1 && (
           <LayoutSwitcher
             availableLayouts={availableLayouts}
             currentLayout={currentLayout}
@@ -235,13 +230,7 @@ const DataView = ({
         )}
       </>
     ),
-    [
-      currentLayout,
-      tableOptions,
-      tableState,
-      hasMultipleAvailableLayouts,
-      availableLayouts,
-    ],
+    [currentLayout, tableOptions, tableState, availableLayouts],
   );
 
   const { lastRow: lastRowOnPage } = usePagination({

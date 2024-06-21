@@ -23,6 +23,7 @@ import {
   CardActionArea as MuiCardActionArea,
 } from "@mui/material";
 import styled from "@emotion/styled";
+import { useTranslation } from "react-i18next";
 
 import { Box } from "../../Box";
 import { Button } from "../../Button";
@@ -94,6 +95,7 @@ const StackCard = ({
   title,
 }: StackCardProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const { t } = useTranslation();
 
   const cardContent = useMemo(
     () => (
@@ -175,11 +177,11 @@ const StackCard = ({
         <MenuButtonContainer odysseyDesignTokens={odysseyDesignTokens}>
           <MenuButton
             endIcon={<MoreIcon />}
-            ariaLabel="Card menu"
+            ariaLabel={t("table.moreactions.arialabel")}
             buttonVariant="floating"
             menuAlignment="right"
             size="small"
-            tooltipText="Actions"
+            tooltipText={t("table.actions")}
           >
             {menuButtonChildren}
           </MenuButton>
