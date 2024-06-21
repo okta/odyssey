@@ -1530,62 +1530,6 @@ export const components = ({
         },
       },
     },
-    MuiSwitch: {
-      styleOverrides: {
-        root: {
-          position: "relative",
-          padding: `${odysseyTokens.Spacing0} 0`,
-          width: odysseyTokens.Spacing7,
-          height: odysseyTokens.Spacing5,
-          overflow: "visible",
-        },
-        switchBase: ({ ownerState }) => ({
-          top: odysseyTokens.Spacing1,
-          left: odysseyTokens.Spacing1,
-          padding: `${odysseyTokens.Spacing0} 0`,
-
-          ...(ownerState.checked === true && {
-            color: `${odysseyTokens.HueNeutralWhite} !important`,
-            transform: `translateX(${odysseyTokens.Spacing4}) !important`,
-          }),
-
-          "&:hover": {
-            backgroundColor: "transparent",
-
-            ...(ownerState.checked === true && {
-              backgroundColor: "transparent !important",
-            }),
-          },
-          // Had to use `Mui-focusVisible` class here. `:focus-visible` was not being triggered correctly.
-          "&.Mui-focusVisible": {
-            // Focus styles applied this way due to MUI not applying `Mui-focusVisible` class to the correct element see: https://github.com/mui/material-ui/issues/34986
-            " + .MuiSwitch-track": {
-              boxShadow: `0 0 0 2px ${odysseyTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyTokens.PalettePrimaryMain}`,
-            },
-          },
-        }),
-        thumb: {
-          width: odysseyTokens.Spacing4,
-          height: odysseyTokens.Spacing4,
-          boxShadow: "none",
-        },
-        track: ({ ownerState }) => ({
-          borderRadius: odysseyTokens.BorderRadiusRound,
-          backgroundColor: `${odysseyTokens.HueNeutral300}`,
-          opacity: 1,
-
-          ...(ownerState.checked === true && {
-            // !important used to override more specific .Mui-checked class
-            opacity: "1 !important",
-            backgroundColor: `${odysseyTokens.PaletteSuccessLight} !important`,
-          }),
-        }),
-        input: {
-          height: "44px",
-          top: "-14px",
-        },
-      },
-    },
     MuiDialog: {
       defaultProps: {
         scroll: "paper",
@@ -1723,6 +1667,7 @@ export const components = ({
           },
           "&.Mui-disabled": {
             pointerEvents: "none",
+            color: odysseyTokens.TypographyColorDisabled,
           },
           [`:has(> .${radioClasses.root})`]: {
             alignItems: "flex-start",
@@ -1743,10 +1688,14 @@ export const components = ({
               color: odysseyTokens.PaletteDangerDark,
             },
         }),
-        label: {
+        label: ({ ownerState }) => ({
           gap: odysseyTokens.Spacing1,
           lineHeight: odysseyTokens.TypographyLineHeightUi,
-        },
+          // !important used to override more specific .Mui-disabled class
+          ...(ownerState.disabled && {
+            color: `${odysseyTokens.TypographyColorDisabled} !important`,
+          }),
+        }),
         asterisk: () => ({
           display: "none",
         }),
@@ -1776,6 +1725,14 @@ export const components = ({
 
           ".field-hint-link-component": {
             marginInlineStart: odysseyTokens.Spacing1,
+          },
+
+          ".Mui-disabled &": {
+            color: odysseyTokens.TypographyColorDisabled,
+
+            a: {
+              color: odysseyTokens.TypographyColorDisabled,
+            },
           },
         },
       },
