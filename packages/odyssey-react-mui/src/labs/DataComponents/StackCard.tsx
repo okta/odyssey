@@ -102,18 +102,10 @@ const StackCard = ({
       <Box
         sx={{
           display: "flex",
+          gap: 3,
         }}
       >
-        {Accessory && (
-          <Box
-            sx={{
-              marginInlineEnd: 3,
-              marginInlineStart: -2,
-            }}
-          >
-            {Accessory}
-          </Box>
-        )}
+        {Accessory && <Box>{Accessory}</Box>}
         <Box>
           {image && (
             <ImageContainer
@@ -166,7 +158,9 @@ const StackCard = ({
   );
 
   return (
-    <MuiCard className={onClick ? "isClickable" : ""}>
+    <MuiCard
+      className={`${onClick ? "isClickable" : ""} ${Accessory ? "hasAccessory" : ""}`}
+    >
       {onClick ? (
         <MuiCardActionArea onClick={onClick}>{cardContent}</MuiCardActionArea>
       ) : (

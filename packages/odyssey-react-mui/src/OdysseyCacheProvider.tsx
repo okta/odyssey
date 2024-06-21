@@ -23,12 +23,12 @@ import { CacheProvider } from "@emotion/react";
 
 export type OdysseyCacheProviderProps = {
   children: ReactNode;
-  nonce?: string;
   /**
    * Emotion caches styles into the style element.
    * When enabling this prop, Emotion caches the styles at this element, rather than in <head>.
    */
   emotionRoot?: HTMLStyleElement;
+  nonce?: string;
   /**
    * Emotion renders into this HTML element.
    * When enabling this prop, Emotion renders at the top of this component rather than the bottom like it does in the HTML `<head>`.
@@ -41,6 +41,7 @@ const OdysseyCacheProvider = ({
   children,
   emotionRoot,
   nonce,
+  shadowDomElement,
   stylisPlugins,
 }: OdysseyCacheProviderProps) => {
   const uniqueAlphabeticalId = useUniqueAlphabeticalId();
@@ -51,12 +52,16 @@ const OdysseyCacheProvider = ({
       key: uniqueAlphabeticalId,
       nonce: nonce ?? window.cspNonce,
       prepend: true,
-      // TODO: Change this back!!
-      speedy: true,
-      // speedy: false, // <-- Needs to be set to false when shadow-dom is used!! https://github.com/emotion-js/emotion/issues/2053#issuecomment-713429122
+      speedy: shadowDomElement ? false : true, // <-- Needs to be set to false when shadow-dom is used!! https://github.com/emotion-js/emotion/issues/2053#issuecomment-713429122
       ...(stylisPlugins && { stylisPlugins }),
     });
-  }, [emotionRoot, nonce, stylisPlugins, uniqueAlphabeticalId]);
+  }, [
+    emotionRoot,
+    nonce,
+    shadowDomElement,
+    stylisPlugins,
+    uniqueAlphabeticalId,
+  ]);
 
   return <CacheProvider value={emotionCache}>{children}</CacheProvider>;
 };

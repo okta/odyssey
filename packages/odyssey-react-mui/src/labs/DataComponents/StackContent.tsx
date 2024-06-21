@@ -137,18 +137,18 @@ const StackContent = ({
     display: currentLayout === "stack" ? "flex" : "grid",
     flexDirection: currentLayout === "stack" ? "column" : undefined,
     gap: odysseyDesignTokens.Spacing5,
-    [`@media (max-width: 720px)`]: {
-      gridTemplateColumns:
-        currentLayout === "grid" ? "repeat(1, 1fr)" : undefined,
-    },
-    [`@media (min-width: 720px) and (max-width: 960px)`]: {
-      gridTemplateColumns:
-        currentLayout === "grid" ? "repeat(2, 1fr)" : undefined,
-    },
-    [`@media (min-width: 960px)`]: {
-      gridTemplateColumns:
-        currentLayout === "grid" ? `repeat(${maxGridColumns}, 1fr)` : undefined,
-    },
+
+    ...(currentLayout === "grid" && {
+      [`@media (max-width: 720px)`]: {
+        gridTemplateColumns: "repeat(1, 1fr)",
+      },
+      [`@media (min-width: 720px) and (max-width: 960px)`]: {
+        gridTemplateColumns: "repeat(2, 1fr)",
+      },
+      [`@media (min-width: 960px)`]: {
+        gridTemplateColumns: `repeat(${maxGridColumns}, 1fr)`,
+      },
+    }),
   }));
 
   const LoadingContainer = styled("div", {

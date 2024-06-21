@@ -786,6 +786,10 @@ export const components = ({
             height: CARD_IMAGE_HEIGHT,
           },
 
+          "&.hasAccessory": {
+            paddingLeft: odysseyTokens.Spacing4,
+          },
+
           "&.isClickable:hover": {
             backgroundColor: odysseyTokens.HueNeutral50,
             boxShadow: odysseyTokens.DepthHigh,
