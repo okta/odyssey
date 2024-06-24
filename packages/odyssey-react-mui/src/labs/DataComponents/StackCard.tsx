@@ -16,11 +16,14 @@ import {
   memo,
   useMemo,
   ReactNode,
+  useState,
 } from "react";
 import {
+  IconButton as MuiIconButton,
   Card as MuiCard,
   CardActions as MuiCardActions,
   CardActionArea as MuiCardActionArea,
+  Tooltip as MuiTooltip,
 } from "@mui/material";
 import styled from "@emotion/styled";
 import { useTranslation } from "react-i18next";
@@ -34,13 +37,18 @@ import {
 } from "../../OdysseyDesignTokensContext";
 import { Heading5, Paragraph, Support } from "../../Typography";
 import { MenuButton, MenuButtonProps } from "../../MenuButton";
-import { MoreIcon } from "../../icons.generated";
+import {
+  ChevronDownIcon,
+  ChevronUpIcon,
+  MoreIcon,
+} from "../../icons.generated";
 
 export const CARD_IMAGE_HEIGHT = "64px";
 
 export type StackCardProps = {
   children?: ReactNode;
   description?: string;
+  detailPanel?: ReactNode;
   image?: ReactElement;
   overline?: string;
   title?: string;
@@ -88,19 +96,22 @@ const CardContentContainer = styled("div", {
   gap: odysseyDesignTokens.Spacing3,
 }));
 
-const CardChildrenContainer = styled("div")(() => ({
+const CardChildrenContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   ["* + &"]: {
-    marginBlockStart: 3,
+    marginBlockStart: odysseyDesignTokens.Spacing3,
   },
 }));
 
 const buttonProviderValue = { isFullWidth: true };
 
 const StackCard = ({
-  Accessory,
+  Accessory: AccessoryProp,
   button,
   children,
   description,
+  detailPanel,
   image,
   menuButtonChildren,
   onClick,
@@ -109,6 +120,43 @@ const StackCard = ({
 }: StackCardProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
+
+  const [isDetailPanelOpen, setIsDetailPanelOpen] = useState<boolean>(false);
+
+  const Accessory = useMemo(
+    () => (
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 2,
+        }}
+      >
+        {AccessoryProp}
+        <MuiTooltip
+          title={
+            isDetailPanelOpen
+              ? t("table.rowexpansion.close")
+              : t("table.rowexpansion.open")
+          }
+        >
+          <MuiIconButton
+            children={
+              isDetailPanelOpen ? <ChevronUpIcon /> : <ChevronDownIcon />
+            }
+            onClick={() => setIsDetailPanelOpen(!isDetailPanelOpen)}
+            aria-label={
+              isDetailPanelOpen
+                ? t("table.rowexpansion.close")
+                : t("table.rowexpansion.open")
+            }
+          />
+        </MuiTooltip>
+      </Box>
+    ),
+    [AccessoryProp, isDetailPanelOpen, t],
+  );
 
   const cardContent = useMemo(
     () => (
@@ -139,21 +187,31 @@ const StackCard = ({
           )}
 
           {children && (
-            <CardChildrenContainer>{children}</CardChildrenContainer>
+            <CardChildrenContainer odysseyDesignTokens={odysseyDesignTokens}>
+              {children}
+            </CardChildrenContainer>
+          )}
+
+          {detailPanel && isDetailPanelOpen && (
+            <CardChildrenContainer odysseyDesignTokens={odysseyDesignTokens}>
+              {detailPanel}
+            </CardChildrenContainer>
           )}
         </Box>
       </CardContentContainer>
     ),
     [
-      Accessory,
-      image,
       odysseyDesignTokens,
+      Accessory,
+      detailPanel,
+      image,
       menuButtonChildren,
       overline,
       title,
       description,
       button,
       children,
+      isDetailPanelOpen,
     ],
   );
 

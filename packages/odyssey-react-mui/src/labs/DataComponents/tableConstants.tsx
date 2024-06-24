@@ -96,6 +96,11 @@ export const displayColumnDefOptions = {
   },
   "mrt-row-expand": {
     header: "",
+    muiTableBodyCellProps: {
+      sx: {
+        overflow: "visible",
+      },
+    },
   },
 };
 

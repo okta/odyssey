@@ -120,6 +120,15 @@ const StackContent = ({
     [setRowSelection],
   );
 
+  const renderDetailPanelProp = stackOptions.renderDetailPanel;
+
+  const renderDetailPanel = useCallback(
+    (row: MRT_RowData) => {
+      return renderDetailPanelProp?.({ row });
+    },
+    [renderDetailPanelProp],
+  );
+
   const { updateRowOrder } = rowReorderingUtilities;
 
   const odysseyDesignTokens = useOdysseyDesignTokens();
@@ -200,6 +209,7 @@ const StackContent = ({
                     }
                     children={children}
                     description={description}
+                    detailPanel={renderDetailPanel(row)}
                     image={image}
                     key={row.id}
                     menuButtonChildren={

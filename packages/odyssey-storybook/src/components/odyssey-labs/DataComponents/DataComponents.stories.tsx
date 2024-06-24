@@ -41,6 +41,7 @@ import {
   Button,
   EmptyState,
   paginationTypeValues,
+  DataTableRenderDetailPanelType,
 } from "@okta/odyssey-react-mui";
 
 type DataViewMetaProps = DataViewProps &
@@ -558,6 +559,44 @@ export const DataStackComponent: StoryObj<DataViewMetaProps> = {
           args.hasActionMenuItems ? actionMenuItems : undefined
         }
         maxGridColumns={args.maxGridColumns}
+      />
+    );
+  },
+};
+
+export const ExpandableRowsAndCards: StoryObj<DataViewMetaProps> = {
+  render: function Base(args) {
+    console.log(args);
+
+    const [data, setData] = useState<Person[]>(personData);
+    const { getData, onReorderRows, onChangeRowSelection } = useDataCallbacks(
+      data,
+      setData,
+    );
+
+    const renderAdditionalContent = useCallback(
+      ({ row }: DataTableRenderDetailPanelType) => {
+        return <Box>This is additional content for row {row.id}</Box>;
+      },
+      [],
+    );
+
+    return (
+      <DataView
+        availableLayouts={["table", "grid"]}
+        initialLayout={"grid"}
+        getData={getData}
+        hasRowSelection={args.hasRowSelection}
+        onReorderRows={onReorderRows}
+        onChangeRowSelection={onChangeRowSelection}
+        tableOptions={{
+          columns: personColumns,
+          renderDetailPanel: renderAdditionalContent,
+        }}
+        stackOptions={{
+          cardProps: cardProps,
+          renderDetailPanel: renderAdditionalContent,
+        }}
       />
     );
   },

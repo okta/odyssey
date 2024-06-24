@@ -303,12 +303,28 @@ const TableContent = ({
     renderRowActions: ({ row }) => renderRowActions({ row }),
     enableRowOrdering: hasRowReordering && Boolean(onReorderRows),
     enableRowDragging: hasRowReordering && Boolean(onReorderRows),
-    muiTableBodyRowProps: ({ table, row }) => ({
+    muiDetailPanelProps: ({ row }) => ({
+      sx: {
+        paddingBlock: row.getIsExpanded()
+          ? `${odysseyDesignTokens.Spacing3} !important`
+          : undefined,
+      },
+    }),
+    muiTableBodyRowProps: ({ table, row, isDetailPanel }) => ({
       className: draggableTableBodyRowClassName({
         currentRowId: row.id,
         draggingRowId: draggingRow?.id,
         hoveredRowId: table.getState().hoveredRow?.id,
       }),
+      sx: isDetailPanel
+        ? {
+            paddingBlock: "0 !important",
+            border: 0,
+            ["&:hover"]: {
+              backgroundColor: `${odysseyDesignTokens.HueNeutralWhite} !important`,
+            },
+          }
+        : {},
     }),
     muiRowDragHandleProps: ({ table, row }) => ({
       onKeyDown: (event) => handleDragHandleKeyDown({ table, row, event }),

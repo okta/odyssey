@@ -93,6 +93,7 @@ export type TableProps = {
 export type StackProps = {
   cardProps: (row: MRT_RowData) => StackCardProps;
   maxGridColumns?: number;
+  renderDetailPanel?: (props: { row: MRT_RowData }) => ReactNode;
   rowActionMenuItems?: DataTableRowActionsProps["rowActionMenuItems"];
 };
 
