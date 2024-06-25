@@ -1,6 +1,5 @@
 {
   "name": "@okta/odyssey-icons",
-  "version": "1.15.9",
   "private": true,
   "description": "The home for Odyssey's supported icons.",
   "homepage": "https://github.com/okta/odyssey",
