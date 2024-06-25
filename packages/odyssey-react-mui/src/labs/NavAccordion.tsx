@@ -22,7 +22,11 @@ import {
 import { ChevronRightIcon } from "../icons.generated";
 import { Support } from "../Typography";
 import { useUniqueId } from "../useUniqueId";
-import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext";
+import {
+  DesignTokens,
+  useOdysseyDesignTokens,
+} from "../OdysseyDesignTokensContext";
+import styled from "@emotion/styled";
 
 export type NavAccordionProps = {
   /**
@@ -69,6 +73,21 @@ export type NavAccordionProps = {
 ) &
   Pick<HtmlProps, "testId" | "translate">;
 
+const AccordionLabelContainer = styled("span", {
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "isIconVisible",
+})<{
+  odysseyDesignTokens: DesignTokens;
+  isIconVisible: boolean;
+}>(({ odysseyDesignTokens, isIconVisible }) => ({
+  width: "100%",
+  marginLeft: `${isIconVisible ? odysseyDesignTokens.Spacing3 : 0}`,
+  fontSize: `${odysseyDesignTokens.TypographyScale0}`,
+  fontWeight: `${odysseyDesignTokens.TypographyWeightHeading}`,
+  color: `${odysseyDesignTokens.TypographyColorHeading}`,
+  alignSelf: "center",
+}));
+
 const NavAccordion = ({
   children,
   label,
@@ -97,7 +116,10 @@ const NavAccordion = ({
     >
       <MuiAccordionSummary
         sx={{
-          padding: 0,
+          padding: `${odysseyDesignTokens.Spacing2} ${odysseyDesignTokens.Spacing4}`,
+          ".MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
+            transform: "rotate(-90deg) !important",
+          },
         }}
         aria-controls={contentId}
         expandIcon={<ChevronRightIcon />}
@@ -110,28 +132,23 @@ const NavAccordion = ({
               alignItems: "center",
             }}
           >
-            <Box
-              component="span"
-              sx={{
-                width: "24px",
-                marginTop: `${odysseyDesignTokens.Spacing1}`,
-              }}
-            >
-              {startIcon && startIcon}
-            </Box>
-            <Box
-              component="span"
-              sx={{
-                width: "100%",
-                fontSize: `0.9rem`,
-                fontWeight: "500",
-                alignSelf: "center",
-                color: `${odysseyDesignTokens.TypographyColorHeading}`,
-                marginLeft: `${odysseyDesignTokens.Spacing3}`,
-              }}
+            {startIcon && (
+              <Box
+                component="span"
+                sx={{
+                  width: "24px",
+                  marginTop: `${odysseyDesignTokens.Spacing1}`,
+                }}
+              >
+                {startIcon}
+              </Box>
+            )}
+            <AccordionLabelContainer
+              odysseyDesignTokens={odysseyDesignTokens}
+              isIconVisible={!!startIcon}
             >
               {label}
-            </Box>
+            </AccordionLabelContainer>
           </Box>
         </Support>
       </MuiAccordionSummary>
