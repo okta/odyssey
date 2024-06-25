@@ -67,6 +67,17 @@ export type StackCardProps = {
     }
 );
 
+const AccessoryContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: odysseyDesignTokens.Spacing2,
+}));
+
 const ImageContainer = styled("div", {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" && prop !== "hasMenuButtonChildren",
@@ -125,14 +136,7 @@ const StackCard = ({
 
   const Accessory = useMemo(
     () => (
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: 2,
-        }}
-      >
+      <AccessoryContainer odysseyDesignTokens={odysseyDesignTokens}>
         {AccessoryProp}
         <MuiTooltip
           title={
@@ -153,9 +157,9 @@ const StackCard = ({
             }
           />
         </MuiTooltip>
-      </Box>
+      </AccessoryContainer>
     ),
-    [AccessoryProp, isDetailPanelOpen, t],
+    [AccessoryProp, isDetailPanelOpen, odysseyDesignTokens, t],
   );
 
   const cardContent = useMemo(
