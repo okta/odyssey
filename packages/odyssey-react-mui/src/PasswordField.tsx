@@ -17,6 +17,7 @@ import {
   forwardRef,
   memo,
   useCallback,
+  useEffect,
   useImperativeHandle,
   useRef,
   useState,
@@ -87,6 +88,9 @@ type FieldRenderProps = Partial<
 > &
   Pick<FieldComponentRenderProps, "id" | "labelElementId">;
 
+// 5 minute timeout
+export const PASSWORD_VISIBILITY_TIMEOUT = 5 * 60 * 1_000;
+
 const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
   (
     {
@@ -118,6 +122,20 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
   ) => {
     const { t } = useTranslation();
     const [inputType, setInputType] = useState("password");
+
+    useEffect(() => {
+      let timeoutId: NodeJS.Timeout;
+
+      // If current inputType is text (cleartext password),
+      // for security set a 5 minute timeout to toggle back to password
+      if (inputType === "text") {
+        timeoutId = setTimeout(() => {
+          setInputType("password");
+        }, PASSWORD_VISIBILITY_TIMEOUT);
+      }
+
+      return () => clearTimeout(timeoutId);
+    }, [inputType]);
 
     const togglePasswordVisibility = useCallback(() => {
       setInputType((inputType) =>
