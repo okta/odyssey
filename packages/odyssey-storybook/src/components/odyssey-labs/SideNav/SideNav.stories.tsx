@@ -16,11 +16,11 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import {
   AppsIcon,
   ClockIcon,
-  LockIcon,
   SettingsIcon,
   CopyIcon,
-  BugIcon,
   HomeIcon,
+  LockIcon,
+  BugIcon,
   CloseIcon,
   CalendarIcon,
   CallIcon,
@@ -36,6 +36,7 @@ import {
   InformationCircleIcon,
   InformationCircleFilledIcon,
   ServerIcon,
+  ExpandLeftIcon,
 } from "@okta/odyssey-react-mui/icons";
 
 const storybookMeta: Meta<SideNavProps> = {
@@ -63,10 +64,8 @@ const storybookMeta: Meta<SideNavProps> = {
   },
   args: {
     navHeaderText: "Admin",
-    isCollapsible: false,
-    onClick: () => {
-      console.log("collapse clicked!");
-    },
+    isCollapsible: true,
+    onCollapse: () => {},
     sideNavItems: [
       {
         id: "AddNewFolder",
@@ -84,13 +83,12 @@ const storybookMeta: Meta<SideNavProps> = {
         id: "item1",
         href: "/",
         label: "Dashboard",
-        startIcon: <HomeIcon />,
         children: [
           {
             id: "item1-1",
             href: "/",
-            label: "Dashboard",
-            startIcon: <BugIcon />,
+            label: "Home",
+            startIcon: <HomeIcon />,
           },
           {
             id: "item1-2",
@@ -110,6 +108,7 @@ const storybookMeta: Meta<SideNavProps> = {
             href: "/",
             label: "Tasks",
             startIcon: <CallIcon />,
+            endIcon: <ExpandLeftIcon />,
           },
           {
             id: "item1-5",
@@ -182,7 +181,7 @@ const storybookMeta: Meta<SideNavProps> = {
         id: "item3",
         href: "/",
         label: "Security",
-        startIcon: <LockIcon />,
+        endIcon: <LockIcon />,
       },
       {
         id: "item4",
@@ -225,6 +224,23 @@ const storybookMeta: Meta<SideNavProps> = {
         ],
       },
     ],
+    footerItems: [
+      {
+        id: "footer-item-1",
+        label: "Docs",
+        href: "/",
+      },
+      {
+        id: "footer-item-2",
+        label: "Privacy",
+        href: "/",
+      },
+      {
+        id: "footer-item-3",
+        label: "Security",
+        href: "/",
+      },
+    ],
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
@@ -232,14 +248,15 @@ const storybookMeta: Meta<SideNavProps> = {
 
 export default storybookMeta;
 
-export const Default: StoryObj<typeof SideNav> = {
+export const Default: StoryObj<SideNavProps> = {
   render: (props: SideNavProps) => {
     return (
       <SideNav
         navHeaderText={props.navHeaderText}
         isCollapsible={props.isCollapsible}
+        onCollapse={props.onCollapse}
         sideNavItems={props.sideNavItems}
-        onClick={props.onClick}
+        footerItems={props.footerItems}
       />
     );
   },
