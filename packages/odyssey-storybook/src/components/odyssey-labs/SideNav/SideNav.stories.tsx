@@ -80,15 +80,22 @@ const storybookMeta: Meta<SideNavProps> = {
         isSectionHeader: true,
       },
       {
+        id: "item0-1",
+        href: "/",
+        label: "Users",
+        startIcon: <UserIcon />,
+      },
+      {
         id: "item1",
         href: "/",
         label: "Dashboard",
+        startIcon: <HomeIcon />,
         children: [
           {
             id: "item1-1",
             href: "/",
             label: "Home",
-            startIcon: <HomeIcon />,
+            startIcon: <CheckIcon />,
           },
           {
             id: "item1-2",
@@ -101,7 +108,7 @@ const storybookMeta: Meta<SideNavProps> = {
             id: "item1-3",
             href: "/",
             label: "Onboarding",
-            startIcon: <CheckIcon />,
+            startIcon: <HomeIcon />,
           },
           {
             id: "item1-4",
@@ -118,12 +125,6 @@ const storybookMeta: Meta<SideNavProps> = {
             endIcon: <CalendarIcon />,
           },
         ],
-      },
-      {
-        id: "item0-1",
-        href: "/",
-        label: "Users",
-        startIcon: <UserIcon />,
       },
       {
         id: "item0-2",
