@@ -21,10 +21,12 @@ export * from "./datePickerTheme";
 export * from "./DataTablePagination";
 export * from "./DataFilters";
 export * from "./FileUpload";
+export * from "./Layout";
 export * from "./materialReactTableTypes";
 /** @deprecated Will be removed in a future Odyssey version in lieu of DataTable */
 export * from "./StaticTable";
 /** @deprecated Will be removed in a future Odyssey version in lieu of DataTable */
+export * from "./PageTemplate";
 export * from "./PaginatedTable";
 
 export * from "./GroupPicker";

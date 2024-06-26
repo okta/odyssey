@@ -96,6 +96,7 @@ export * from "./ScreenReaderText";
 export * from "./SearchField";
 export * from "./Select";
 export * from "./Status";
+export * from "./Surface";
 export * from "./Tabs";
 export * from "./Tag";
 export * from "./TagList";
