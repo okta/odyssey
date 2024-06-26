@@ -27,7 +27,7 @@ type SupportedRegionRatios =
   | [1, 1, 1]
   | [1, 1, 1, 1];
 
-export type GridProps = {
+export type LayoutProps = {
   /**
    * The supported region ratios for the Grid. Each number is a fractional unit that is mapped to the 'fr' CSS unit.
    * e.g. [2, 1] defines a 2/3, 1/3 layout and [1, 1, 1] defines a 1/3, 1/3, 1/3 layout
@@ -40,14 +40,14 @@ export type GridProps = {
   children?: ReactNode;
 };
 
-interface GridContentProps {
+interface LayoutContentProps {
   odysseyDesignTokens: DesignTokens;
   regions: string;
 }
 
-const GridContainer = styled("div", {
+const LayoutContainer = styled("div", {
   shouldForwardProp: (prop) => prop != "odysseyDesignTokens",
-})<Pick<GridContentProps, "odysseyDesignTokens">>(
+})<Pick<LayoutContentProps, "odysseyDesignTokens">>(
   ({ odysseyDesignTokens }) => ({
     "& + &": {
       marginBlockStart: odysseyDesignTokens.Spacing4,
@@ -55,10 +55,10 @@ const GridContainer = styled("div", {
   }),
 );
 
-const GridContent = styled("div", {
+const LayoutContent = styled("div", {
   shouldForwardProp: (prop) =>
     !["odysseyDesignTokens", "regions"].includes(prop),
-})<GridContentProps>(({ odysseyDesignTokens, regions }) => ({
+})<LayoutContentProps>(({ odysseyDesignTokens, regions }) => ({
   display: "grid",
   gridTemplateColumns: regions,
   gridColumnGap: odysseyDesignTokens.Spacing4,
@@ -69,25 +69,25 @@ const GridContent = styled("div", {
   },
 }));
 
-const Grid = ({ regions, children }: GridProps) => {
+const Layout = ({ regions, children }: LayoutProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const mappedRegions = regions
     .map((region) => `minmax(0, ${region}fr)`)
     .join(" ");
 
   return (
-    <GridContainer odysseyDesignTokens={odysseyDesignTokens}>
-      <GridContent
+    <LayoutContainer odysseyDesignTokens={odysseyDesignTokens}>
+      <LayoutContent
         odysseyDesignTokens={odysseyDesignTokens}
         regions={mappedRegions}
       >
         {Children.toArray(children).map((child) => child)}
-      </GridContent>
-    </GridContainer>
+      </LayoutContent>
+    </LayoutContainer>
   );
 };
 
-const MemoizedGrid = memo(Grid);
-MemoizedGrid.displayName = "Grid";
+const MemoizedLayout = memo(Layout);
+MemoizedLayout.displayName = "Layout";
 
-export { MemoizedGrid as Grid };
+export { MemoizedLayout as Layout };

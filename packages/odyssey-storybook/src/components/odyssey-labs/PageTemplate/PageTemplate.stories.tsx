@@ -19,9 +19,9 @@ import {
   data as personData,
 } from "../../odyssey-mui/DataTable/personData";
 import {
-  Grid,
-  OdysseyLayout,
-  OdysseyLayoutProps,
+  Layout,
+  PageTemplate,
+  PageTemplateProps,
 } from "@okta/odyssey-react-mui/labs";
 import {
   Box,
@@ -93,14 +93,13 @@ const drawerShortText = (
   </div>
 );
 
-const storybookMeta: Meta<OdysseyLayoutProps> = {
-  title: "Labs Components/OdysseyLayout",
-  component: OdysseyLayout,
+const storybookMeta: Meta<PageTemplateProps> = {
+  title: "Labs Components/PageTemplate",
+  component: PageTemplate,
   argTypes: {
     title: {
       control: "text",
-      description:
-        "The title of the layout to be situated in the layout header",
+      description: "The title to be situated in the `PageTemplate` header",
       table: {
         type: {
           summary: "string",
@@ -110,7 +109,7 @@ const storybookMeta: Meta<OdysseyLayoutProps> = {
     description: {
       control: "text",
       description:
-        "A supplementary description to be situated in the layout header",
+        "A supplementary description to be situated in the `PageTemplate` header",
       table: {
         type: {
           summary: "string",
@@ -120,7 +119,7 @@ const storybookMeta: Meta<OdysseyLayoutProps> = {
     documentationLink: {
       control: "text",
       description:
-        "The destination for a documentation `Link` to be situated in the layout header",
+        "The destination for a documentation `Link` to be situated in the `PageTemplate` header",
       table: {
         type: {
           summary: "string",
@@ -130,7 +129,7 @@ const storybookMeta: Meta<OdysseyLayoutProps> = {
     documentationText: {
       control: "text",
       description:
-        "The text for a documentation `Link` to be situated in the layout header",
+        "The text for a documentation `Link` to be situated in the `PageTemplate` header",
       table: {
         type: {
           summary: "string",
@@ -150,7 +149,7 @@ const storybookMeta: Meta<OdysseyLayoutProps> = {
     primaryCallToActionComponent: {
       control: null,
       description:
-        "An optional `Button` object to be situated in the layout header. Should almost always be of variant `primary`.",
+        "An optional `Button` object to be situated in the `PageTemplate` header. Should almost always be of variant `primary`.",
       table: {
         type: {
           summary: "ReactElement<typeof Button>",
@@ -160,7 +159,7 @@ const storybookMeta: Meta<OdysseyLayoutProps> = {
     secondaryCallToActionComponent: {
       control: null,
       description:
-        "An optional `Button` object to be situated in the layout header, alongside the `callToActionPrimaryComponent`.",
+        "An optional `Button` object to be situated in the `PageTemplate` header, alongside the `callToActionPrimaryComponent`.",
       table: {
         type: {
           summary: "ReactElement<typeof Button>",
@@ -170,7 +169,7 @@ const storybookMeta: Meta<OdysseyLayoutProps> = {
     tertiaryCallToActionComponent: {
       control: null,
       description:
-        "An optional `Button` object to be situated in the layout header, alongside the other two `callToAction` components.",
+        "An optional `Button` object to be situated in the `PageTemplate` header, alongside the other two `callToAction` components.",
       table: {
         type: {
           summary: "ReactElement<typeof Button>",
@@ -180,7 +179,7 @@ const storybookMeta: Meta<OdysseyLayoutProps> = {
     children: {
       control: null,
       description:
-        "The content of the layout. May be a `string` or any other `ReactNode` or array of `ReactNode`s. Will often be `Grid` objects.",
+        "The content of the `PageTemplate`. May be a `string` or any other `ReactNode` or array of `ReactNode`s. Will often be `Grid` objects.",
       table: {
         type: {
           summary: "ReactNode",
@@ -190,7 +189,7 @@ const storybookMeta: Meta<OdysseyLayoutProps> = {
     isFullWidth: {
       control: "boolean",
       description:
-        "When set to `true`, the layout expands past its max width of 1440px and spans the entire available screen width.",
+        "When set to `true`, the `PageTemplate` expands past its max width of 1440px and spans the entire available screen width.",
       table: {
         type: {
           summary: "boolean",
@@ -215,7 +214,7 @@ const storybookMeta: Meta<OdysseyLayoutProps> = {
 
 export default storybookMeta;
 
-export const KitchenSink: StoryObj<OdysseyLayoutProps> = {
+export const KitchenSink: StoryObj<PageTemplateProps> = {
   args: {
     title: "Table title",
     description: "Optional brief description about the page",
@@ -249,7 +248,7 @@ export const KitchenSink: StoryObj<OdysseyLayoutProps> = {
     }, []);
 
     return (
-      <OdysseyLayout
+      <PageTemplate
         title={args.title}
         description={args.description}
         documentationLink={args.documentationLink}
@@ -326,7 +325,7 @@ export const KitchenSink: StoryObj<OdysseyLayoutProps> = {
           onClose={onCloseDialog}
           isOpen={isDialogVisible}
         />
-        <Grid regions={[3, 1]}>
+        <Layout regions={[3, 1]}>
           <Surface>
             <DataTable
               columns={personColumns}
@@ -339,13 +338,13 @@ export const KitchenSink: StoryObj<OdysseyLayoutProps> = {
           <Surface>
             <h1>Another thing</h1>
           </Surface>
-        </Grid>
-      </OdysseyLayout>
+        </Layout>
+      </PageTemplate>
     );
   },
 };
 
-export const EmbeddedDrawer: StoryObj<OdysseyLayoutProps> = {
+export const EmbeddedDrawer: StoryObj<PageTemplateProps> = {
   args: {
     title: "Table title",
     description: "Optional brief description about the page",
@@ -370,7 +369,7 @@ export const EmbeddedDrawer: StoryObj<OdysseyLayoutProps> = {
     }, []);
 
     return (
-      <OdysseyLayout
+      <PageTemplate
         title={args.title}
         description={args.description}
         documentationLink={args.documentationLink}
@@ -410,7 +409,7 @@ export const EmbeddedDrawer: StoryObj<OdysseyLayoutProps> = {
         }
         isFullWidth={args.isFullWidth}
       >
-        <Grid regions={[1]}>
+        <Layout regions={[1]}>
           <Surface>
             <DataTable
               columns={personColumns}
@@ -420,13 +419,13 @@ export const EmbeddedDrawer: StoryObj<OdysseyLayoutProps> = {
               totalRows={10}
             />
           </Surface>
-        </Grid>
-      </OdysseyLayout>
+        </Layout>
+      </PageTemplate>
     );
   },
 };
 
-export const Form: StoryObj<OdysseyLayoutProps> = {
+export const Form: StoryObj<PageTemplateProps> = {
   args: {
     title: "People",
     description: "Optional brief description about the page",
@@ -436,7 +435,7 @@ export const Form: StoryObj<OdysseyLayoutProps> = {
   },
   render: function C(args) {
     return (
-      <OdysseyLayout
+      <PageTemplate
         title={args.title}
         description={args.description}
         documentationLink={args.documentationLink}
@@ -446,7 +445,7 @@ export const Form: StoryObj<OdysseyLayoutProps> = {
           <Button label="Reset passwords" variant="primary" />
         }
       >
-        <Grid regions={[1]}>
+        <Layout regions={[1]}>
           <Surface>
             <OdysseyForm
               title="Add Person"
@@ -463,13 +462,13 @@ export const Form: StoryObj<OdysseyLayoutProps> = {
               <TextField label="Email" />
             </OdysseyForm>
           </Surface>
-        </Grid>
-      </OdysseyLayout>
+        </Layout>
+      </PageTemplate>
     );
   },
 };
 
-export const Dashboard: StoryObj<OdysseyLayoutProps> = {
+export const Dashboard: StoryObj<PageTemplateProps> = {
   args: {
     title: "Account",
     documentationLink: "https://www.okta.com",
@@ -495,14 +494,14 @@ export const Dashboard: StoryObj<OdysseyLayoutProps> = {
     const odysseyDesignTokens = useOdysseyDesignTokens();
 
     return (
-      <OdysseyLayout
+      <PageTemplate
         title={args.title}
         description={args.description}
         documentationLink={args.documentationLink}
         documentationText={args.documentationText}
         isFullWidth={args.isFullWidth}
       >
-        <Grid regions={[2, 1]}>
+        <Layout regions={[2, 1]}>
           <Surface>
             <Box
               sx={{
@@ -572,8 +571,8 @@ export const Dashboard: StoryObj<OdysseyLayoutProps> = {
               </Box>
             </Box>
           </Surface>
-        </Grid>
-        <Grid regions={[1, 1, 1]}>
+        </Layout>
+        <Layout regions={[1, 1, 1]}>
           <Surface>
             <Box
               sx={{
@@ -678,13 +677,13 @@ export const Dashboard: StoryObj<OdysseyLayoutProps> = {
               </Box>
             </Box>
           </Surface>
-        </Grid>
-      </OdysseyLayout>
+        </Layout>
+      </PageTemplate>
     );
   },
 };
 
-export const FullWidth: StoryObj<OdysseyLayoutProps> = {
+export const FullWidth: StoryObj<PageTemplateProps> = {
   args: {
     title: "Full-width Table",
     documentationLink: "https://www.okta.com",
@@ -699,13 +698,13 @@ export const FullWidth: StoryObj<OdysseyLayoutProps> = {
     }, [data]);
 
     return (
-      <OdysseyLayout
+      <PageTemplate
         title={args.title}
         documentationLink={args.documentationLink}
         documentationText={args.documentationText}
         isFullWidth={args.isFullWidth}
       >
-        <Grid regions={[1]}>
+        <Layout regions={[1]}>
           <Surface>
             <DataTable
               columns={personColumns}
@@ -715,8 +714,8 @@ export const FullWidth: StoryObj<OdysseyLayoutProps> = {
               totalRows={10}
             />
           </Surface>
-        </Grid>
-      </OdysseyLayout>
+        </Layout>
+      </PageTemplate>
     );
   },
 };

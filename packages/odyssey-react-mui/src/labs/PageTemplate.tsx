@@ -21,7 +21,7 @@ import { Heading4, Subordinate } from "../Typography";
 import { Link } from "../Link";
 import { DocumentationIcon } from "../icons.generated";
 
-export type OdysseyLayoutProps = {
+export type PageTemplateProps = {
   /**
    * The title of the layout to be situated in the layout header
    */
@@ -64,13 +64,13 @@ export type OdysseyLayoutProps = {
   isFullWidth?: boolean;
 };
 
-interface LayoutContentProps {
+interface TemplateContentProps {
   odysseyDesignTokens: DesignTokens;
   isDrawerOpen?: boolean;
   drawerVariant?: string;
 }
 
-const LayoutHeader = styled("div", {
+const TemplateHeader = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{
   odysseyDesignTokens: DesignTokens;
@@ -82,10 +82,10 @@ const LayoutHeader = styled("div", {
   alignContent: "center",
 }));
 
-const LayoutContent = styled("div", {
+const TemplateContent = styled("div", {
   shouldForwardProp: (prop) =>
     !["odysseyDesignTokens", "isDrawerOpen", "drawerVariant"].includes(prop),
-})<LayoutContentProps>(
+})<TemplateContentProps>(
   ({ odysseyDesignTokens, isDrawerOpen, drawerVariant }) => ({
     "@keyframes animate-drawer-open": {
       "0%": {
@@ -126,7 +126,7 @@ const LayoutContent = styled("div", {
   }),
 );
 
-const OdysseyLayout = ({
+const PageTemplate = ({
   title,
   description,
   documentationLink,
@@ -137,7 +137,7 @@ const OdysseyLayout = ({
   children,
   drawer,
   isFullWidth = false,
-}: OdysseyLayoutProps) => {
+}: PageTemplateProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { isOpen: isDrawerOpen, variant: drawerVariant } = drawer?.props ?? {};
 
@@ -148,7 +148,7 @@ const OdysseyLayout = ({
         marginInline: isFullWidth ? odysseyDesignTokens.Spacing6 : "auto",
       }}
     >
-      <LayoutHeader odysseyDesignTokens={odysseyDesignTokens}>
+      <TemplateHeader odysseyDesignTokens={odysseyDesignTokens}>
         <Box>
           <Heading4>{title}</Heading4>
           <Subordinate>{description}</Subordinate>
@@ -177,8 +177,8 @@ const OdysseyLayout = ({
             {primaryCallToActionComponent}
           </Box>
         </Box>
-      </LayoutHeader>
-      <LayoutContent
+      </TemplateHeader>
+      <TemplateContent
         odysseyDesignTokens={odysseyDesignTokens}
         isDrawerOpen={isDrawerOpen}
         drawerVariant={drawerVariant}
@@ -193,12 +193,12 @@ const OdysseyLayout = ({
           {children}
         </Box>
         {drawer}
-      </LayoutContent>
+      </TemplateContent>
     </Box>
   );
 };
 
-const MemoizedOdysseyLayout = memo(OdysseyLayout);
-MemoizedOdysseyLayout.displayName = "OdysseyLayout";
+const MemoizedPageTemplate = memo(PageTemplate);
+MemoizedPageTemplate.displayName = "PageTemplate";
 
-export { MemoizedOdysseyLayout as OdysseyLayout };
+export { MemoizedPageTemplate as PageTemplate };
