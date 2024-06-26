@@ -85,7 +85,7 @@ export type SideNavItem = {
 const SideNavContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
-  backgroundColor: `${odysseyDesignTokens.HueNeutralWhite}`,
+  backgroundColor: odysseyDesignTokens.HueNeutralWhite,
   minWidth: "12rem",
   display: "flex",
   flexDirection: "column",
@@ -98,57 +98,37 @@ const SideNavHeaderContainer = styled("div", {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  padding: `${odysseyDesignTokens.Spacing4}`,
-  height: "8vh",
+  paddingLeft: odysseyDesignTokens.Spacing4,
+  paddingRight: odysseyDesignTokens.Spacing4,
+  paddingTop: odysseyDesignTokens.Spacing3,
 }));
 
-const SideNavListContainer = styled.ul({
-  padding: 0,
-  listStyle: "none",
-  listStyleType: "none",
-});
-
-const SideNavListItemContainer = styled("li", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
-  display: "flex",
-  alignItems: "center",
-  minHeight: "48px",
-  "&:hover": {
-    backgroundColor: `${odysseyDesignTokens.HueNeutral50}`,
-    cursor: "pointer",
-  },
-  "&:last-child": {
-    marginBottom: `${odysseyDesignTokens.Spacing2}`,
-  },
-}));
-
-type CollapseIconProps = {
-  onClick?(event: MouseEvent<SVGSVGElement>): void;
-};
-
-const CollapseIcon = ({ onClick }: CollapseIconProps): ReactElement => {
+const CollapseIcon = ({ onClick }: { onClick?(): void }): ReactElement => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   return (
     <Box
       component="a"
       sx={{
-        width: "24px",
-        height: "24px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "32px",
+        height: "32px",
         border: `${odysseyDesignTokens.BorderWidthMain} ${odysseyDesignTokens.BorderStyleMain} ${odysseyDesignTokens.HueNeutral300}`,
-        borderRadius: `${odysseyDesignTokens.BorderRadiusTight}`,
+        borderRadius: odysseyDesignTokens.BorderRadiusTight,
         cursor: "pointer",
-        padding: `${odysseyDesignTokens.Spacing1}`,
+        padding: odysseyDesignTokens.Spacing1,
       }}
     >
       <CollapseLeftIcon
         onClick={onClick}
+        onKeyDown={onClick}
+        tabIndex={0}
         sx={{
-          height: "13px",
-          width: "13px",
+          height: "16px",
+          width: "16px",
           alignSelf: "center",
-          color: `${odysseyDesignTokens.HueNeutral400}`,
-          marginBottom: `${odysseyDesignTokens.Spacing2}`,
+          color: odysseyDesignTokens.HueNeutral400,
         }}
       />
     </Box>
@@ -168,7 +148,7 @@ const SideNavHeader = ({
     <SideNavHeaderContainer odysseyDesignTokens={odysseyDesignTokens}>
       <Box
         sx={{
-          marginTop: `${odysseyDesignTokens.Spacing2}`,
+          marginTop: odysseyDesignTokens.Spacing2,
         }}
       >
         <Heading6>{navHeaderText}</Heading6>
@@ -178,17 +158,34 @@ const SideNavHeader = ({
   );
 };
 
-const SideNavFooterContainer = styled("div", {
+const SectionHeader = styled("li", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
-  paddingTop: `${odysseyDesignTokens.Spacing2}`,
-  paddingBottom: `${odysseyDesignTokens.Spacing2}`,
-  height: "4vh",
-  display: "flex",
-  justifyContent: "center",
+  fontSize: odysseyDesignTokens.TypographySizeOverline,
+  fontWeight: odysseyDesignTokens.TypographyWeightHeadingBold,
+  color: odysseyDesignTokens.HueNeutral600,
+  paddingTop: odysseyDesignTokens.Spacing3,
+  paddingBottom: odysseyDesignTokens.Spacing3,
+  paddingLeft: odysseyDesignTokens.Spacing4,
+  textTransform: "uppercase",
+}));
+
+const SideNavItemLabelContainer = styled("div", {
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "isIconVisible",
+})<{
+  odysseyDesignTokens: DesignTokens;
+  isIconVisible: boolean;
+}>(({ odysseyDesignTokens, isIconVisible }) => ({
+  width: "100%",
+  display: "inline-flex",
   flexWrap: "wrap",
   alignItems: "center",
-  fontSize: `${odysseyDesignTokens.TypographySizeOverline}`,
+  fontSize: odysseyDesignTokens.TypographyScale0,
+  fontWeight: odysseyDesignTokens.TypographyWeightHeading,
+  paddingTop: odysseyDesignTokens.Spacing3,
+  paddingBottom: odysseyDesignTokens.Spacing3,
+  marginLeft: `${isIconVisible ? odysseyDesignTokens.Spacing3 : 0}`,
   "& > a": {
     color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
   },
@@ -196,12 +193,56 @@ const SideNavFooterContainer = styled("div", {
     textDecoration: "none",
   },
   "& > a:visited": {
-    color: `${odysseyDesignTokens.TypographyColorHeading}`,
+    color: odysseyDesignTokens.TypographyColorHeading,
+    fontSize: odysseyDesignTokens.TypographyScale0,
+  },
+}));
+
+const SideNavListContainer = styled.ul({
+  padding: 0,
+  listStyle: "none",
+  listStyleType: "none",
+});
+
+const SideNavListItemContainer = styled("li", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  display: "flex",
+  alignItems: "center",
+  minHeight: "48px",
+  "&:hover": {
+    backgroundColor: odysseyDesignTokens.HueNeutral50,
+    cursor: "pointer",
+  },
+  "&:last-child": {
+    marginBottom: odysseyDesignTokens.Spacing2,
+  },
+}));
+
+const SideNavFooterContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  paddingTop: odysseyDesignTokens.Spacing2,
+  paddingBottom: odysseyDesignTokens.Spacing2,
+  height: "auto",
+  display: "flex",
+  justifyContent: "center",
+  flexWrap: "wrap",
+  alignItems: "center",
+  fontSize: odysseyDesignTokens.TypographySizeOverline,
+  "& > a": {
+    color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
+  },
+  "& > a:hover": {
+    textDecoration: "none",
+  },
+  "& > a:visited": {
+    color: odysseyDesignTokens.TypographyColorHeading,
   },
   "& > a:not(:last-child)::after": {
     marginLeft: odysseyDesignTokens.Spacing4,
     marginRight: odysseyDesignTokens.Spacing4,
-    color: `${odysseyDesignTokens.HueNeutral300}`,
+    color: odysseyDesignTokens.HueNeutral300,
     content: '" | "',
   },
 }));
@@ -251,8 +292,8 @@ const SideNavItemContent = ({
     >
       <Box
         sx={{
-          paddingRight: `${odysseyDesignTokens.Spacing4}`,
-          paddingLeft: `${odysseyDesignTokens.Spacing4}`,
+          paddingRight: odysseyDesignTokens.Spacing4,
+          paddingLeft: odysseyDesignTokens.Spacing4,
           display: "flex",
           alignItems: "center",
           width: "100%",
@@ -267,27 +308,9 @@ const SideNavItemContent = ({
             {startIcon}
           </Box>
         )}
-        <Box
-          sx={{
-            width: "100%",
-            display: "inline-flex",
-            alignItems: "center",
-            fontSize: `${odysseyDesignTokens.TypographyScale0}`,
-            fontWeight: `${odysseyDesignTokens.TypographyWeightHeading}`,
-            paddingTop: `${odysseyDesignTokens.Spacing3}`,
-            paddingBottom: `${odysseyDesignTokens.Spacing3}`,
-            marginLeft: `${startIcon ? odysseyDesignTokens.Spacing3 : 0}`,
-            "& > a": {
-              color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
-            },
-            "& > a:hover": {
-              textDecoration: "none",
-            },
-            "& > a:visited": {
-              color: `${odysseyDesignTokens.TypographyColorHeading}`,
-              fontSize: `${odysseyDesignTokens.TypographyScale0}`,
-            },
-          }}
+        <SideNavItemLabelContainer
+          odysseyDesignTokens={odysseyDesignTokens}
+          isIconVisible={!!startIcon}
         >
           <Link href={href} target={target} onClick={onClick}>
             {label}
@@ -295,16 +318,15 @@ const SideNavItemContent = ({
           {severity && (
             <Box
               sx={{
-                marginLeft: `${odysseyDesignTokens.Spacing2}`,
+                marginLeft: odysseyDesignTokens.Spacing2,
               }}
             >
               <Status severity={severity} label={statusLabel || ""} />
             </Box>
           )}
-        </Box>
+        </SideNavItemLabelContainer>
         <Box
           sx={{
-            width: "24px",
             display: "flex",
             justifyContent: "flex-end",
           }}
@@ -316,18 +338,6 @@ const SideNavItemContent = ({
   );
 };
 
-const SectionHeader = styled("li", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
-  fontSize: `0.7rem`,
-  fontWeight: "700",
-  color: `${odysseyDesignTokens.HueNeutral600}`,
-  paddingTop: `${odysseyDesignTokens.Spacing3}`,
-  paddingBottom: `${odysseyDesignTokens.Spacing3}`,
-  paddingLeft: `${odysseyDesignTokens.Spacing4}`,
-  textTransform: "uppercase",
-}));
-
 export type SideNavProps = {
   /**
    * Side Nav header text that is usually reserved to show the App name
@@ -338,9 +348,9 @@ export type SideNavProps = {
    */
   isCollapsible: boolean;
   /**
-   *  Determines whether the side nav is collapsible
+   *  Triggers whether the side nav is collapsed
    */
-  onCollapse?(event: MouseEvent<SVGSVGElement>): void;
+  onCollapse?(): void;
   /**
    * Nav items in the side nav
    */
@@ -393,6 +403,7 @@ const SideNav = ({
               children,
               isDefaultExpanded,
             } = item;
+
             if (isSectionHeader) {
               return (
                 <SectionHeader
@@ -415,7 +426,7 @@ const SideNav = ({
                     isDefaultExpanded={isDefaultExpanded}
                     startIcon={startIcon}
                   >
-                    <SideNavListContainer id={id + `-ul`}>
+                    <SideNavListContainer id={id + "-list"}>
                       {children}
                     </SideNavListContainer>
                   </NavAccordion>

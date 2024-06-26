@@ -82,9 +82,9 @@ const AccordionLabelContainer = styled("span", {
 }>(({ odysseyDesignTokens, isIconVisible }) => ({
   width: "100%",
   marginLeft: `${isIconVisible ? odysseyDesignTokens.Spacing3 : 0}`,
-  fontSize: `${odysseyDesignTokens.TypographyScale0}`,
-  fontWeight: `${odysseyDesignTokens.TypographyWeightHeading}`,
-  color: `${odysseyDesignTokens.TypographyColorHeading}`,
+  fontSize: odysseyDesignTokens.TypographyScale0,
+  fontWeight: odysseyDesignTokens.TypographyWeightHeading,
+  color: odysseyDesignTokens.TypographyColorHeading,
   alignSelf: "center",
 }));
 
@@ -136,8 +136,7 @@ const NavAccordion = ({
               <Box
                 component="span"
                 sx={{
-                  width: "24px",
-                  marginTop: `${odysseyDesignTokens.Spacing1}`,
+                  marginTop: odysseyDesignTokens.Spacing1,
                 }}
               >
                 {startIcon}
@@ -157,7 +156,7 @@ const NavAccordion = ({
         sx={{
           paddingTop: "0",
           paddingBottom: "0",
-          paddingLeft: `${odysseyDesignTokens.Spacing2}`,
+          paddingLeft: odysseyDesignTokens.Spacing2,
         }}
       >
         {children}
