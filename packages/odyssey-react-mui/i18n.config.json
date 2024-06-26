@@ -5,5 +5,5 @@
   "commitPrefix": "chore(odyssey-react-mui): ",
   "reviewers": ["okta/eng-globalizationcore", "okta/design-system"],
   "slackChannel": "odyssey",
-  "notificationPrefix": "@nomy guardian-odyssey"
+  "guardian": "guardian-odyssey"
 }
