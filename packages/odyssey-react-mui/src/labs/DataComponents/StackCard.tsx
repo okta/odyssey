@@ -141,8 +141,8 @@ const StackCard = ({
         <MuiTooltip
           title={
             isDetailPanelOpen
-              ? t("table.rowexpansion.close")
-              : t("table.rowexpansion.open")
+              ? t("table.rowexpansion.collapse")
+              : t("table.rowexpansion.expand")
           }
         >
           <MuiIconButton
@@ -152,8 +152,8 @@ const StackCard = ({
             onClick={() => setIsDetailPanelOpen(!isDetailPanelOpen)}
             aria-label={
               isDetailPanelOpen
-                ? t("table.rowexpansion.close")
-                : t("table.rowexpansion.open")
+                ? t("table.rowexpansion.collapse")
+                : t("table.rowexpansion.expand")
             }
           />
         </MuiTooltip>

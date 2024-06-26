@@ -358,6 +358,12 @@ const TableContent = ({
     enableRowSelection: hasRowSelection,
     onRowSelectionChange: setRowSelection,
     renderEmptyRowsFallback: emptyStateContainer,
+    localization: {
+      collapse: t("table.rowexpansion.collapse"),
+      collapseAll: t("table.rowexpansion.collapseall"),
+      expand: t("table.rowexpansion.expand"),
+      expandAll: t("table.rowexpansion.expandall"),
+    },
   });
 
   return (
