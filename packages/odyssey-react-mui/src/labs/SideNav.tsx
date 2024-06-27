@@ -31,7 +31,6 @@ import { Link } from "../Link";
 export type SideNavItem = {
   id: string;
   label: string;
-  href: string;
   target?: string;
   /**
    * The icon element to display at the start of the Nav Item
@@ -58,9 +57,13 @@ export type SideNavItem = {
    */
   isExpanded?: boolean;
   /**
+   * Whether the item is disabled
+   */
+  isDisabled?: boolean;
+  /**
    * Whether the item is active/selected
    */
-  selected?: boolean;
+  isSelected?: boolean;
   /**
    * Event fired when the nav item is clicked
    */
@@ -71,10 +74,12 @@ export type SideNavItem = {
        * Determines if the side nav item is a section header
        */
       isSectionHeader: true;
+      href?: never;
       children?: never;
     }
   | {
       isSectionHeader?: false;
+      href: string;
       /**
        * An array of side nav items
        */
@@ -158,6 +163,12 @@ const SideNavHeader = ({
   );
 };
 
+const SideNavListContainer = styled.ul({
+  padding: 0,
+  listStyle: "none",
+  listStyleType: "none",
+});
+
 const SectionHeader = styled("li", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
@@ -172,25 +183,28 @@ const SectionHeader = styled("li", {
 
 const SideNavItemLabelContainer = styled("div", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "isIconVisible",
+    prop !== "odysseyDesignTokens" &&
+    prop !== "isIconVisible" &&
+    prop !== "isDisabled",
 })<{
   odysseyDesignTokens: DesignTokens;
   isIconVisible: boolean;
-}>(({ odysseyDesignTokens, isIconVisible }) => ({
+  isDisabled?: boolean;
+}>(({ odysseyDesignTokens, isIconVisible, isDisabled }) => ({
   width: "100%",
-  display: "inline-flex",
+  display: "flex",
   flexWrap: "wrap",
   alignItems: "center",
   fontSize: odysseyDesignTokens.TypographyScale0,
   fontWeight: odysseyDesignTokens.TypographyWeightHeading,
-  paddingTop: odysseyDesignTokens.Spacing3,
-  paddingBottom: odysseyDesignTokens.Spacing3,
-  marginLeft: `${isIconVisible ? odysseyDesignTokens.Spacing3 : 0}`,
+  marginLeft: isIconVisible ? odysseyDesignTokens.Spacing3 : 0,
   "& > a": {
     color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
+    pointerEvents: isDisabled ? "none" : "auto",
   },
   "& > a:hover": {
     textDecoration: "none",
+    cursor: isDisabled ? "default" : "pointer",
   },
   "& > a:visited": {
     color: odysseyDesignTokens.TypographyColorHeading,
@@ -198,24 +212,46 @@ const SideNavItemLabelContainer = styled("div", {
   },
 }));
 
-const SideNavListContainer = styled.ul({
-  padding: 0,
-  listStyle: "none",
-  listStyleType: "none",
-});
-
 const SideNavListItemContainer = styled("li", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" &&
+    prop !== "isSelected" &&
+    prop !== "isDisabled",
+})<{
+  odysseyDesignTokens: DesignTokens;
+  isSelected?: boolean;
+  disabled?: boolean;
+  isDisabled?: boolean;
+}>(({ odysseyDesignTokens, isSelected, isDisabled }) => ({
   display: "flex",
   alignItems: "center",
   minHeight: "48px",
+  opacity: isDisabled ? "0.38" : "1",
+  cursor: isDisabled ? "default" : "pointer",
+  pointerEvents: isDisabled ? "none" : "auto",
+  backgroundColor: isSelected ? odysseyDesignTokens.HueNeutral50 : "auto",
   "&:hover": {
-    backgroundColor: odysseyDesignTokens.HueNeutral50,
-    cursor: "pointer",
+    backgroundColor: !isDisabled ? odysseyDesignTokens.HueNeutral50 : "auto",
   },
   "&:last-child": {
     marginBottom: odysseyDesignTokens.Spacing2,
+  },
+  "& > a": {
+    display: "flex",
+    alignItems: "center",
+    width: "100%",
+    paddingRight: odysseyDesignTokens.Spacing4,
+    paddingLeft: odysseyDesignTokens.Spacing4,
+    color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
+    pointerEvents: isDisabled ? "none" : "auto",
+  },
+  "& > a:hover": {
+    textDecoration: "none",
+    cursor: isDisabled ? "default" : "pointer",
+  },
+  "& > a:visited": {
+    color: odysseyDesignTokens.TypographyColorHeading,
+    fontSize: odysseyDesignTokens.TypographyScale0,
   },
 }));
 
@@ -271,6 +307,8 @@ const SideNavItemContent = ({
   statusLabel,
   endIcon,
   onClick,
+  isSelected,
+  isDisabled,
 }: Pick<
   SideNavItem,
   | "id"
@@ -282,39 +320,27 @@ const SideNavItemContent = ({
   | "statusLabel"
   | "endIcon"
   | "onClick"
+  | "isSelected"
+  | "isDisabled"
 >) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   return (
     <SideNavListItemContainer
       id={id}
       key={id}
+      disabled={isDisabled}
+      isDisabled={isDisabled}
+      isSelected={isSelected}
       odysseyDesignTokens={odysseyDesignTokens}
     >
-      <Box
-        sx={{
-          paddingRight: odysseyDesignTokens.Spacing4,
-          paddingLeft: odysseyDesignTokens.Spacing4,
-          display: "flex",
-          alignItems: "center",
-          width: "100%",
-        }}
-      >
-        {startIcon && (
-          <Box
-            sx={{
-              paddingTop: odysseyDesignTokens.Spacing1,
-            }}
-          >
-            {startIcon}
-          </Box>
-        )}
+      <Link href={href || ""} target={target} onClick={onClick}>
+        {startIcon && startIcon}
         <SideNavItemLabelContainer
           odysseyDesignTokens={odysseyDesignTokens}
           isIconVisible={!!startIcon}
+          isDisabled={isDisabled}
         >
-          <Link href={href} target={target} onClick={onClick}>
-            {label}
-          </Link>
+          {label}
           {severity && (
             <Box
               sx={{
@@ -325,15 +351,8 @@ const SideNavItemContent = ({
             </Box>
           )}
         </SideNavItemLabelContainer>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "flex-end",
-          }}
-        >
-          {endIcon && endIcon}
-        </Box>
-      </Box>
+        {endIcon && endIcon}
+      </Link>
     </SideNavListItemContainer>
   );
 };
@@ -375,7 +394,7 @@ const SideNav = ({
       sideNavItems.map((item) => ({
         ...item,
         children: item.children?.map((childProps) => (
-          <SideNavItemContent {...childProps} key={childProps.id} />
+          <SideNavItemContent key={childProps.id} {...childProps} />
         )),
       })),
     [sideNavItems],
@@ -402,6 +421,7 @@ const SideNav = ({
               startIcon,
               children,
               isDefaultExpanded,
+              isDisabled,
             } = item;
 
             if (isSectionHeader) {
@@ -425,6 +445,7 @@ const SideNav = ({
                     label={label}
                     isDefaultExpanded={isDefaultExpanded}
                     startIcon={startIcon}
+                    isDisabled={isDisabled}
                   >
                     <SideNavListContainer id={id + "-list"}>
                       {children}
@@ -433,20 +454,7 @@ const SideNav = ({
                 </SideNavListItemContainer>
               );
             } else {
-              return (
-                <SideNavItemContent
-                  id={item.id}
-                  label={item.label}
-                  href={item.href}
-                  target={item.target}
-                  startIcon={item.startIcon}
-                  severity={item.severity}
-                  statusLabel={item.statusLabel}
-                  endIcon={item.endIcon}
-                  onClick={item.onClick}
-                  key={item.id}
-                />
-              );
+              return <SideNavItemContent key={item.id} {...item} />;
             }
           })}
         </SideNavListContainer>

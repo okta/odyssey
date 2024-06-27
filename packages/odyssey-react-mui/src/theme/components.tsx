@@ -121,6 +121,14 @@ export const components = ({
             outlineStyle: "solid",
             zIndex: 1,
           },
+          svg: {
+            fontSize: "1em",
+            height: "1em",
+            position: "relative",
+            insetBlockStart: "-0.0625em",
+            verticalAlign: "middle",
+            width: "1em",
+          },
         }),
         content: () => ({
           marginBlock: 0,
