@@ -19,6 +19,7 @@ import {
   SettingsIcon,
   CopyIcon,
   HomeIcon,
+  Fido2Icon,
   LockIcon,
   BugIcon,
   CloseIcon,
@@ -45,7 +46,7 @@ const storybookMeta: Meta<SideNavProps> = {
   argTypes: {
     navHeaderText: {
       control: "text",
-      description: "The label text for the Nav link",
+      description: "Header text for the side nav",
       table: {
         type: {
           summary: "string",
@@ -58,6 +59,25 @@ const storybookMeta: Meta<SideNavProps> = {
       table: {
         type: {
           summary: "boolean",
+        },
+      },
+    },
+    onCollapse: {
+      description: "Callback to be triggered when the side nav is collapsed",
+    },
+    sideNavItems: {
+      description: "",
+      table: {
+        type: {
+          summary: "Array<SideNaItem>",
+        },
+      },
+    },
+    footerItems: {
+      description: "",
+      table: {
+        type: {
+          summary: "Array<SideNavFooterItem>",
         },
       },
     },
@@ -76,7 +96,6 @@ const storybookMeta: Meta<SideNavProps> = {
       {
         id: "item0-0",
         label: "Admin",
-        href: "",
         isSectionHeader: true,
       },
       {
@@ -90,6 +109,7 @@ const storybookMeta: Meta<SideNavProps> = {
         href: "/",
         label: "Dashboard",
         startIcon: <HomeIcon />,
+        isDisabled: true,
         children: [
           {
             id: "item1-1",
@@ -131,11 +151,12 @@ const storybookMeta: Meta<SideNavProps> = {
         href: "/",
         label: "Profiles",
         startIcon: <GlobeIcon />,
+        endIcon: <GlobeIcon />,
+        isDisabled: true,
       },
       {
         id: "item0-3",
         label: "Resource Management",
-        href: "",
         isSectionHeader: true,
       },
       {
@@ -149,6 +170,7 @@ const storybookMeta: Meta<SideNavProps> = {
         href: "/",
         label: "Applications",
         startIcon: <AppsIcon />,
+        isSelected: true,
       },
       {
         id: "item3-2-1",
@@ -157,16 +179,30 @@ const storybookMeta: Meta<SideNavProps> = {
         startIcon: <ServerIcon />,
         severity: "success",
         statusLabel: "success",
+        endIcon: <ServerIcon />,
       },
       {
         id: "item5",
         href: "/",
         label: "Reports",
-        startIcon: <CopyIcon />,
         endIcon: <DownloadIcon />,
       },
       {
+        id: "item3-1-0",
+        href: "/",
+        label: "Identify Governance",
+        target: "_blank",
+        isDisabled: true,
+        startIcon: <Fido2Icon />,
+      },
+      {
         id: "item3-1-2",
+        href: "/",
+        label: "Gateways",
+        startIcon: <IdpIcon />,
+      },
+      {
+        id: "item3-1-3",
         href: "/",
         label: "Workflows",
         target: "_blank",
@@ -175,13 +211,13 @@ const storybookMeta: Meta<SideNavProps> = {
       {
         id: "item3-0",
         label: "Security Administration",
-        href: "",
         isSectionHeader: true,
       },
       {
         id: "item3",
         href: "/",
         label: "Security",
+        startIcon: <LockIcon />,
         endIcon: <LockIcon />,
       },
       {

@@ -81,7 +81,7 @@ const AccordionLabelContainer = styled("span", {
   isIconVisible: boolean;
 }>(({ odysseyDesignTokens, isIconVisible }) => ({
   width: "100%",
-  marginLeft: `${isIconVisible ? odysseyDesignTokens.Spacing3 : 0}`,
+  marginLeft: isIconVisible ? odysseyDesignTokens.Spacing3 : 0,
   fontSize: odysseyDesignTokens.TypographyScale0,
   fontWeight: odysseyDesignTokens.TypographyWeightHeading,
   color: odysseyDesignTokens.TypographyColorHeading,
@@ -132,16 +132,7 @@ const NavAccordion = ({
               alignItems: "center",
             }}
           >
-            {startIcon && (
-              <Box
-                component="span"
-                sx={{
-                  marginTop: odysseyDesignTokens.Spacing1,
-                }}
-              >
-                {startIcon}
-              </Box>
-            )}
+            {startIcon && startIcon}
             <AccordionLabelContainer
               odysseyDesignTokens={odysseyDesignTokens}
               isIconVisible={!!startIcon}
@@ -154,8 +145,8 @@ const NavAccordion = ({
       <MuiAccordionDetails
         aria-labelledby={headerId}
         sx={{
-          paddingTop: "0",
-          paddingBottom: "0",
+          paddingTop: 0,
+          paddingBottom: 0,
           paddingLeft: odysseyDesignTokens.Spacing2,
         }}
       >
