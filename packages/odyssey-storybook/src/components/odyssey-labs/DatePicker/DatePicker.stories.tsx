@@ -12,11 +12,79 @@
 
 import { useMemo, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
+import { screen, userEvent, waitFor, within } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
 
 import { DatePicker, DatePickerProps } from "@okta/odyssey-react-mui/labs";
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { axeRun } from "../../../axe-util";
+import type { PlaywrightProps } from "../../odyssey-mui/storybookTypes";
+
+const findInputElement = async ({
+  canvasElement,
+  step,
+}: PlaywrightProps<DatePickerProps>) => {
+  await step("Find Input", async () => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByPlaceholderText("MM/DD/YYYY") as HTMLInputElement;
+    await userEvent.click(input);
+  });
+};
+
+const clickCalendarButton = async ({
+  canvasElement,
+  step,
+}: PlaywrightProps<DatePickerProps>) => {
+  await step("Click Calendar Button", async () => {
+    const canvas = within(canvasElement);
+    const buttonElement = canvas.getByLabelText("Choose date");
+    await userEvent.click(buttonElement);
+  });
+};
+
+const openCalendarAndSelectDate =
+  ({ canvasElement, step }: PlaywrightProps<DatePickerProps>) =>
+  async (actionName: string) => {
+    await step("select date", async ({ args }) => {
+      // I don't know why this doesn't work without this step
+      await findInputElement({ canvasElement, step });
+      await clickCalendarButton({ canvasElement, step });
+      await waitFor(() => {
+        axeRun(actionName);
+      });
+      const calendar = await screen.findByRole("dialog");
+      const calendarCanvas = within(calendar);
+      const date = calendarCanvas.getByText("14");
+      await userEvent.click(date);
+      await expect(args.onCalendarDateChange).toHaveBeenCalledTimes(1);
+    });
+  };
+
+const openCalendarAndCheckForDisabledDate =
+  ({
+    canvasElement,
+    step,
+    buttonText,
+  }: PlaywrightProps<DatePickerProps> & { buttonText: string }) =>
+  async (actionName: string) => {
+    await step("attempt to select disabled date", async ({ args }) => {
+      // I don't know why this doesn't work without this step
+      await findInputElement({ canvasElement, step });
+      await clickCalendarButton({ canvasElement, step });
+      await waitFor(() => {
+        axeRun(actionName);
+      });
+      const calendar = await screen.findByRole("dialog");
+      const calendarCanvas = within(calendar);
+      const date = calendarCanvas.getByText(buttonText);
+      await expect(date).toBeDisabled();
+      await expect(args.onCalendarDateChange).toHaveBeenCalledTimes(0);
+      // close the calendar
+      await userEvent.click(canvasElement);
+    });
+  };
 
 const storybookMeta: Meta<DatePickerProps> = {
   title: "Labs Components/DatePicker",
@@ -67,8 +135,8 @@ const storybookMeta: Meta<DatePickerProps> = {
     },
   },
   args: {
-    label: "Choose a date",
-    hint: "Use MM/DD/YYYY format",
+    label: "Date picker label",
+    hint: "Select a date.",
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
@@ -76,32 +144,52 @@ const storybookMeta: Meta<DatePickerProps> = {
 
 export default storybookMeta;
 
-export const Default: StoryObj<DatePickerProps> = {};
+export const Default: StoryObj<DatePickerProps> = {
+  play: async ({ canvasElement, step }) => {
+    await openCalendarAndSelectDate({ canvasElement, step })(
+      "Default calendar select date",
+    );
+  },
+};
 
 export const Error: StoryObj<DatePickerProps> = {
   args: {
-    errorMessage: "Some error message here",
+    errorMessage: "Select a date.",
   },
 };
 
 export const MinDate: StoryObj<DatePickerProps> = {
   args: {
-    hint: "minDate is 7/17/2024",
+    hint: "Select a date after July 16, 2024",
     minDate: new Date("7-17-2024"),
+  },
+  play: async ({ canvasElement, step }) => {
+    await openCalendarAndCheckForDisabledDate({
+      canvasElement,
+      step,
+      buttonText: "16",
+    })("Attempt to select disabled date before min date");
   },
 };
 
 export const MaxDate: StoryObj<DatePickerProps> = {
   args: {
-    hint: "maxDate is 7/17/2024",
+    hint: "Select a date before July 18, 2024.",
     maxDate: new Date("7-17-2024"),
+    value: new Date("7-17-2024"),
+  },
+  play: async ({ canvasElement, step }) => {
+    await openCalendarAndCheckForDisabledDate({
+      canvasElement,
+      step,
+      buttonText: "18",
+    })("Attempt to select disabled date after max date");
   },
 };
 
 export const Controlled: StoryObj<DatePickerProps> = {
   args: {
-    label: "Choose a date",
-    hint: "Use MM/DD/YYYY format",
+    hint: "The date was provided by {the user/a field}.",
   },
   render: function C({ ...props }) {
     const [value, setValue] = useState<Date>(new Date("7-17-2024"));
