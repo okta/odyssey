@@ -566,8 +566,6 @@ export const DataStackComponent: StoryObj<DataViewMetaProps> = {
 
 export const ExpandableRowsAndCards: StoryObj<DataViewMetaProps> = {
   render: function Base(args) {
-    console.log(args);
-
     const [data, setData] = useState<Person[]>(personData);
     const { getData, onReorderRows, onChangeRowSelection } = useDataCallbacks(
       data,
@@ -584,7 +582,6 @@ export const ExpandableRowsAndCards: StoryObj<DataViewMetaProps> = {
     return (
       <DataView
         availableLayouts={["table", "grid"]}
-        initialLayout={"grid"}
         getData={getData}
         hasRowSelection={args.hasRowSelection}
         onReorderRows={onReorderRows}

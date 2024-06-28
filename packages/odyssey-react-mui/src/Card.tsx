@@ -18,6 +18,7 @@ import {
   useEffect,
 } from "react";
 import {
+  Box as MuiBox,
   Card as MuiCard,
   CardActions as MuiCardActions,
   CardActionArea as MuiCardActionArea,
@@ -33,7 +34,6 @@ import {
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext";
 import { Heading5, Paragraph, Support } from "./Typography";
-import { Box } from "./Box";
 
 export const CARD_IMAGE_HEIGHT = "64px";
 
@@ -92,12 +92,8 @@ const Card = ({
 
   const cardContent = useMemo(
     () => (
-      <Box
-        sx={{
-          display: "flex",
-        }}
-      >
-        <Box>
+      <MuiBox display="flex">
+        <MuiBox>
           {image && (
             <ImageContainer
               odysseyDesignTokens={odysseyDesignTokens}
@@ -120,8 +116,8 @@ const Card = ({
               </ButtonContext.Provider>
             </MuiCardActions>
           )}
-        </Box>
-      </Box>
+        </MuiBox>
+      </MuiBox>
     ),
     [
       button,
