@@ -38,6 +38,7 @@ import {
   InformationCircleFilledIcon,
   ServerIcon,
   ExpandLeftIcon,
+  FolderIcon,
 } from "@okta/odyssey-react-mui/icons";
 
 const storybookMeta: Meta<SideNavProps> = {
@@ -196,12 +197,6 @@ const storybookMeta: Meta<SideNavProps> = {
         startIcon: <Fido2Icon />,
       },
       {
-        id: "item3-1-2",
-        href: "/",
-        label: "Gateways",
-        startIcon: <IdpIcon />,
-      },
-      {
         id: "item3-1-3",
         href: "/",
         label: "Workflows",
@@ -259,6 +254,12 @@ const storybookMeta: Meta<SideNavProps> = {
             startIcon: <IdpIcon />,
           },
         ],
+      },
+      {
+        id: "item5-0",
+        href: "/",
+        label: "System Configuration",
+        startIcon: <FolderIcon />,
       },
     ],
     footerItems: [
