@@ -10,7 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Dispatch, memo, useCallback, SetStateAction } from "react";
+import { Dispatch, memo, useCallback, SetStateAction, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
 import { AvailableLayouts, Layout } from "./componentTypes";
 import { MenuButton } from "../../MenuButton";
@@ -27,11 +28,23 @@ const LayoutSwitcher = ({
   currentLayout,
   setCurrentLayout,
 }: LayoutSwitcherProps) => {
+  const { t } = useTranslation();
+
   const changeLayout = useCallback(
     (value: Layout) => {
       setCurrentLayout(value);
     },
     [setCurrentLayout],
+  );
+
+  const memoizedMenuItems = useMemo(
+    () =>
+      availableLayouts.map((value: Layout) => ({
+        value,
+        onClick: () => changeLayout(value),
+        label: t(`dataview.layout.${value}`),
+      })),
+    [availableLayouts, changeLayout, t],
   );
 
   return (
@@ -41,18 +54,15 @@ const LayoutSwitcher = ({
       menuAlignment="right"
       shouldCloseOnSelect={false}
     >
-      <>
-        {typeof availableLayouts !== "string" &&
-          availableLayouts.map((value: Layout) => (
-            <MenuItem
-              key={value}
-              isSelected={currentLayout === value}
-              onClick={() => changeLayout(value)}
-            >
-              {`${value.charAt(0).toUpperCase()}${value.slice(1)}`}
-            </MenuItem>
-          ))}
-      </>
+      {memoizedMenuItems.map(({ value, onClick, label }) => (
+        <MenuItem
+          key={value}
+          isSelected={currentLayout === value}
+          onClick={onClick}
+        >
+          {label}
+        </MenuItem>
+      ))}
     </MenuButton>
   );
 };

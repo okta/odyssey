@@ -30,7 +30,7 @@ export type RowActionsProps = {
   row: MRT_Row<MRT_RowData> | MRT_RowData;
   rowActionButtons?: (
     row: MRT_RowData,
-  ) => ReactElement<typeof Button | typeof Fragment>;
+  ) => ReactElement<typeof Button> | ReactElement<typeof Fragment>;
   rowActionMenuItems?: (row: MRT_RowData) => MenuButtonProps["children"];
   rowIndex: number;
   totalRows?: DataTableProps["totalRows"];
@@ -77,7 +77,7 @@ const RowActions = ({
 
   return (
     <>
-      {rowActionMenuItems && <>{rowActionMenuItems(row)}</>}
+      {rowActionMenuItems && rowActionMenuItems(row)}
       {rowActionMenuItems && updateRowOrder && <hr />}
       {updateRowOrder && (
         <>

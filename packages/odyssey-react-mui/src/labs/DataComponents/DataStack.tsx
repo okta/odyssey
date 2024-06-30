@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo } from "react";
+import { memo, useMemo } from "react";
 
 import { availableStackLayouts } from "./constants";
 import {
@@ -54,6 +54,15 @@ const DataStack = ({
   searchDelayTime,
   totalRows,
 }: DataStackProps) => {
+  const stackOptions = useMemo(
+    () => ({
+      cardProps,
+      maxGridColumns,
+      rowActionMenuItems,
+    }),
+    [cardProps, maxGridColumns, rowActionMenuItems],
+  );
+
   return (
     <DataView
       availableLayouts={availableLayouts}
@@ -78,11 +87,7 @@ const DataStack = ({
       paginationType={paginationType}
       resultsPerPage={resultsPerPage}
       searchDelayTime={searchDelayTime}
-      stackOptions={{
-        cardProps,
-        maxGridColumns,
-        rowActionMenuItems,
-      }}
+      stackOptions={stackOptions}
       totalRows={totalRows}
     />
   );

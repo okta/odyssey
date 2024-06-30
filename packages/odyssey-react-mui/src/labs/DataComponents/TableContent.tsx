@@ -19,6 +19,7 @@ import {
   useState,
   ReactNode,
   Dispatch,
+  ReactElement,
 } from "react";
 import styled, { CSSObject } from "@emotion/styled";
 import {
@@ -176,11 +177,12 @@ const TableContent = ({
       "mrt-row-drag",
       "mrt-row-select",
       "mrt-row-expand",
-      ...columnIds,
+      ...(columnIds?.filter((id): id is string => typeof id === "string") ||
+        []),
       "mrt-row-actions",
     ],
     [columnIds],
-  ) as string[];
+  );
 
   const rowDensityClassName = useMemo(() => {
     return tableState.rowDensity === "spacious"
@@ -190,17 +192,15 @@ const TableContent = ({
         : "MuiTableBody-default";
   }, [tableState]);
 
-  const defaultCell = useCallback(
-    ({ cell }: { cell: DataTableCell<MRT_RowData> }) => {
-      const value = cell.getValue<string>();
-      const hasTextWrapping =
-        cell.column.columnDef.hasTextWrapping ||
-        cell.column.columnDef.enableWrapping;
-
-      return hasTextWrapping ? value : <TextWrapper>{value}</TextWrapper>;
-    },
-    [],
-  );
+  const defaultCell = useCallback<
+    ({ cell }: { cell: DataTableCell<MRT_RowData> }) => ReactElement | string
+  >(({ cell }) => {
+    const value = cell.getValue<string>();
+    const hasTextWrapping =
+      cell.column.columnDef.hasTextWrapping ||
+      cell.column.columnDef.enableWrapping;
+    return hasTextWrapping ? value : <TextWrapper>{value}</TextWrapper>;
+  }, []);
 
   const {
     draggableTableBodyRowClassName,
@@ -256,9 +256,14 @@ const TableContent = ({
     ],
   );
 
+  const innerWidthStyle = useMemo(
+    () => ({ width: tableInnerContainerWidth }),
+    [tableInnerContainerWidth],
+  );
+
   const emptyStateContainer = useCallback(
-    () => <Box sx={{ width: tableInnerContainerWidth }}>{emptyState}</Box>,
-    [tableInnerContainerWidth, emptyState],
+    () => <Box sx={innerWidthStyle}>{emptyState}</Box>,
+    [innerWidthStyle, emptyState],
   );
 
   const dataTable = useMaterialReactTable({
@@ -279,8 +284,9 @@ const TableContent = ({
       ExpandMoreIcon: ChevronDownIcon,
     },
     ...dataTableImmutableSettings,
-    displayColumnDefOptions:
-      displayColumnDefOptions as MRT_TableOptions<MRT_RowData>["displayColumnDefOptions"],
+    displayColumnDefOptions: displayColumnDefOptions satisfies Partial<
+      MRT_TableOptions<MRT_RowData>["displayColumnDefOptions"]
+    >,
     muiTableProps: {
       ref: tableContentRef,
     },

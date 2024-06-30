@@ -28,7 +28,7 @@ export type OdysseyCacheProviderProps = {
    * When enabling this prop, Emotion caches the styles at this element, rather than in <head>.
    */
   emotionRoot?: HTMLStyleElement;
-  hasShadowDomElement?: boolean;
+  hasShadowDom?: boolean;
   nonce?: string;
   /**
    * Emotion renders into this HTML element.
@@ -44,14 +44,14 @@ export type OdysseyCacheProviderProps = {
 const OdysseyCacheProvider = ({
   children,
   emotionRoot,
-  hasShadowDomElement: hasShadowDomElementProp,
+  hasShadowDom: hasShadowDomProp,
   nonce,
   shadowDomElement,
   stylisPlugins,
 }: OdysseyCacheProviderProps) => {
   const uniqueAlphabeticalId = useUniqueAlphabeticalId();
 
-  const hasShadowDomElement = hasShadowDomElementProp || shadowDomElement;
+  const hasShadowDom = hasShadowDomProp || shadowDomElement;
 
   const emotionCache = useMemo(() => {
     return createCache({
@@ -59,16 +59,10 @@ const OdysseyCacheProvider = ({
       key: uniqueAlphabeticalId,
       nonce: nonce ?? window.cspNonce,
       prepend: true,
-      speedy: hasShadowDomElement ? false : true, // <-- Needs to be set to false when shadow-dom is used!! https://github.com/emotion-js/emotion/issues/2053#issuecomment-713429122
+      speedy: hasShadowDom ? false : true, // <-- Needs to be set to false when shadow-dom is used!! https://github.com/emotion-js/emotion/issues/2053#issuecomment-713429122
       ...(stylisPlugins && { stylisPlugins }),
     });
-  }, [
-    emotionRoot,
-    hasShadowDomElement,
-    nonce,
-    stylisPlugins,
-    uniqueAlphabeticalId,
-  ]);
+  }, [emotionRoot, hasShadowDom, nonce, stylisPlugins, uniqueAlphabeticalId]);
 
   return <CacheProvider value={emotionCache}>{children}</CacheProvider>;
 };

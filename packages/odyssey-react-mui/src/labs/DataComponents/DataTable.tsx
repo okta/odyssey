@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo } from "react";
+import { memo, useMemo } from "react";
 
 import { DataView } from "./DataView";
 import { TableProps, UniversalProps } from "./componentTypes";
@@ -50,6 +50,31 @@ const DataTable = ({
   searchDelayTime,
   totalRows,
 }: DataTableProps) => {
+  const tableOptions = useMemo(
+    () => ({
+      columns,
+      hasChangeableDensity,
+      hasColumnResizing,
+      hasColumnVisibility,
+      hasSorting,
+      initialDensity,
+      renderDetailPanel,
+      rowActionButtons,
+      rowActionMenuItems,
+    }),
+    [
+      columns,
+      hasChangeableDensity,
+      hasColumnResizing,
+      hasColumnVisibility,
+      hasSorting,
+      initialDensity,
+      renderDetailPanel,
+      rowActionButtons,
+      rowActionMenuItems,
+    ],
+  );
+
   return (
     <DataView
       availableLayouts={["table"]}
@@ -74,17 +99,7 @@ const DataTable = ({
       paginationType={paginationType}
       resultsPerPage={resultsPerPage}
       searchDelayTime={searchDelayTime}
-      tableOptions={{
-        columns,
-        hasChangeableDensity,
-        hasColumnResizing,
-        hasColumnVisibility,
-        hasSorting,
-        initialDensity,
-        renderDetailPanel,
-        rowActionButtons,
-        rowActionMenuItems,
-      }}
+      tableOptions={tableOptions}
       totalRows={totalRows}
     />
   );

@@ -29,6 +29,7 @@ import {
 import { RowActions } from "./RowActions";
 import { StackCard } from "./StackCard";
 import { StackLayout, StackProps, UniversalProps } from "./componentTypes";
+import { DetailPanel } from "./DetailPanel";
 
 export type StackContentProps = {
   currentLayout: StackLayout;
@@ -87,6 +88,53 @@ export type StackContentProps = {
   totalRows: UniversalProps["totalRows"];
 };
 
+const StackContainer = styled("div", {
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" &&
+    prop !== "currentLayout" &&
+    prop !== "maxGridColumns",
+})<{
+  odysseyDesignTokens: DesignTokens;
+  currentLayout: StackLayout;
+  maxGridColumns: number;
+}>(({ odysseyDesignTokens, currentLayout, maxGridColumns }) => ({
+  display: currentLayout === "list" ? "flex" : "grid",
+  flexDirection: "column",
+  gap: odysseyDesignTokens.Spacing5,
+
+  ...(currentLayout === "grid" && {
+    [`@media (max-width: 720px)`]: {
+      gridTemplateColumns: "repeat(1, 1fr)",
+    },
+    [`@media (min-width: 720px) and (max-width: 960px)`]: {
+      gridTemplateColumns: "repeat(2, 1fr)",
+    },
+    [`@media (min-width: 960px)`]: {
+      gridTemplateColumns: `repeat(${maxGridColumns}, 1fr)`,
+    },
+  }),
+}));
+
+const LoadingContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "100%",
+  paddingBlock: odysseyDesignTokens.Spacing5,
+}));
+
+const CheckboxContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  marginBlockStart: `-${odysseyDesignTokens.Spacing1}`,
+}));
+
 const StackContent = ({
   currentLayout,
   data,
@@ -105,72 +153,22 @@ const StackContent = ({
   stackOptions,
   totalRows,
 }: StackContentProps) => {
+  const odysseyDesignTokens = useOdysseyDesignTokens();
+
   const handleRowSelectionChange = useCallback(
     (row: MRT_RowData) => {
-      setRowSelection((prev) => {
-        const newSelection = { ...prev };
-        if (newSelection[row.id]) {
-          delete newSelection[row.id];
-        } else {
-          newSelection[row.id] = true;
-        }
-        return newSelection;
-      });
+      setRowSelection((rowSelection) =>
+        Object.fromEntries(
+          row.id in rowSelection
+            ? Object.entries(rowSelection).filter(([key]) => key !== row.id)
+            : Object.entries(rowSelection).concat([[row.id, true]]),
+        ),
+      );
     },
     [setRowSelection],
   );
 
-  const renderDetailPanelProp = stackOptions.renderDetailPanel;
-
-  const renderDetailPanel = useCallback(
-    (row: MRT_RowData) => {
-      return renderDetailPanelProp?.({ row });
-    },
-    [renderDetailPanelProp],
-  );
-
   const { updateRowOrder } = rowReorderingUtilities;
-
-  const odysseyDesignTokens = useOdysseyDesignTokens();
-
-  const StackContainer = styled("div", {
-    shouldForwardProp: (prop) =>
-      prop !== "odysseyDesignTokens" &&
-      prop !== "currentLayout" &&
-      prop !== "maxGridColumns",
-  })<{
-    odysseyDesignTokens: DesignTokens;
-    currentLayout: StackLayout;
-    maxGridColumns: number;
-  }>(({ odysseyDesignTokens, currentLayout, maxGridColumns }) => ({
-    display: currentLayout === "list" ? "flex" : "grid",
-    flexDirection: "column",
-    gap: odysseyDesignTokens.Spacing5,
-
-    ...(currentLayout === "grid" && {
-      [`@media (max-width: 720px)`]: {
-        gridTemplateColumns: "repeat(1, 1fr)",
-      },
-      [`@media (min-width: 720px) and (max-width: 960px)`]: {
-        gridTemplateColumns: "repeat(2, 1fr)",
-      },
-      [`@media (min-width: 960px)`]: {
-        gridTemplateColumns: `repeat(${maxGridColumns}, 1fr)`,
-      },
-    }),
-  }));
-
-  const LoadingContainer = styled("div", {
-    shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-  })<{
-    odysseyDesignTokens: DesignTokens;
-  }>(({ odysseyDesignTokens }) => ({
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-    paddingBlock: odysseyDesignTokens.Spacing5,
-  }));
 
   return (
     <StackContainer
@@ -199,17 +197,24 @@ const StackContent = ({
                     Accessory={
                       hasRowSelection && (
                         // Negative margin to counteract the checkbox's inbuilt spacing
-                        <Box sx={{ marginBlockStart: -1 }}>
+                        <CheckboxContainer
+                          odysseyDesignTokens={odysseyDesignTokens}
+                        >
                           <MuiCheckbox
                             checked={rowSelection[row.id] ?? false}
                             onChange={() => handleRowSelectionChange(row)}
                           />
-                        </Box>
+                        </CheckboxContainer>
                       )
                     }
                     children={children}
                     description={description}
-                    detailPanel={renderDetailPanel(row)}
+                    detailPanel={
+                      <DetailPanel
+                        row={row}
+                        renderDetailPanel={stackOptions.renderDetailPanel}
+                      />
+                    }
                     image={image}
                     key={row.id}
                     menuButtonChildren={

@@ -50,10 +50,12 @@ export const filterData = ({
         // If filter value is array, search for each array value
         if (Array.isArray(value)) {
           return value.some((arrayValue) => {
+            const filterValue =
+              typeof arrayValue === "object" ? arrayValue.value : arrayValue;
             return row[id as keyof Person]
               ?.toString()
               .toLowerCase()
-              .includes(arrayValue.toString().toLowerCase());
+              .includes(filterValue.toString().toLowerCase());
           });
         }
 

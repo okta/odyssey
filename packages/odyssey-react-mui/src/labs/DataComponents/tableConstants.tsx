@@ -48,7 +48,7 @@ export const displayColumnDefOptions = {
     header: "",
     grow: true,
     muiTableBodyCellProps: {
-      align: "right",
+      align: "right" as const,
       sx: {
         overflow: "visible",
         width: "unset",
@@ -56,7 +56,7 @@ export const displayColumnDefOptions = {
       className: "ods-actions-cell",
     },
     muiTableHeadCellProps: {
-      align: "right",
+      align: "right" as const,
       sx: {
         width: "unset",
       },
@@ -88,10 +88,10 @@ export const displayColumnDefOptions = {
   },
   "mrt-row-select": {
     muiTableHeadCellProps: {
-      padding: "checkbox",
+      padding: "checkbox" as const,
     },
     muiTableBodyCellProps: {
-      padding: "checkbox",
+      padding: "checkbox" as const,
     },
   },
   "mrt-row-expand": {

@@ -110,7 +110,7 @@ const CardContentContainer = styled("div", {
 const CardChildrenContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
-  ["* + &"]: {
+  ["div + &"]: {
     marginBlockStart: odysseyDesignTokens.Spacing3,
   },
 }));

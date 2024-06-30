@@ -41,7 +41,7 @@ const BulkActionsContainer = styled("div", {
   gap: odysseyDesignTokens.Spacing2,
 }));
 
-const BulkActionMenu = ({
+const BulkActionsMenu = ({
   data,
   menuItems,
   rowSelection,
@@ -50,9 +50,7 @@ const BulkActionMenu = ({
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
 
-  const selectedRowCount = Object.values(rowSelection).filter(
-    (value) => value === true,
-  ).length;
+  const selectedRowCount = Object.values(rowSelection).filter(Boolean).length;
 
   const handleSelectAll = useCallback(() => {
     const rows = Object.fromEntries(data.map((row) => [row.id, true]));
@@ -77,13 +75,13 @@ const BulkActionMenu = ({
       )}
       <Box>
         <Button
-          isDisabled={selectedRowCount === 20}
+          isDisabled={selectedRowCount === data.length} // Disabled if all are selected
           label={t("table.actions.selectall")}
           onClick={handleSelectAll}
           variant="secondary"
         />
         <Button
-          isDisabled={selectedRowCount === 0}
+          isDisabled={selectedRowCount === 0} // Disabled if none are selected
           label={t("table.actions.selectnone")}
           onClick={handleSelectNone}
           variant="secondary"
@@ -93,7 +91,7 @@ const BulkActionMenu = ({
   );
 };
 
-const MemoizedBulkActionMenu = memo(BulkActionMenu);
-MemoizedBulkActionMenu.displayName = "BulkActionMenu";
+const MemoizedBulkActionsMenu = memo(BulkActionsMenu);
+MemoizedBulkActionsMenu.displayName = "BulkActionsMenu";
 
-export { MemoizedBulkActionMenu as BulkActionMenu };
+export { MemoizedBulkActionsMenu as BulkActionsMenu };

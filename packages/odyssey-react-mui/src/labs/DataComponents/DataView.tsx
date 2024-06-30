@@ -16,7 +16,7 @@ import {
   MRT_RowData,
   MRT_RowSelectionState,
 } from "material-react-table";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 import {
   availableLayouts as allAvailableLayouts,
@@ -29,9 +29,9 @@ import {
   TableState,
 } from "./componentTypes";
 import { Box } from "../../Box";
-import { BulkActionMenu } from "./BulkActionsMenu";
+import { BulkActionsMenu } from "./BulkActionsMenu";
 import { Callout } from "../../Callout";
-import { DataFilter, DataFilters } from "../DataFilters";
+import { DataFilters } from "../DataFilters";
 import { EmptyState } from "../../EmptyState";
 import { fetchData } from "./fetchData";
 import { LayoutSwitcher } from "./LayoutSwitcher";
@@ -73,7 +73,8 @@ const DataView = ({
   currentPage = 1,
   emptyPlaceholder,
   errorMessage: errorMessageProp,
-  getData: getDataFn,
+  filters: filtersProp,
+  getData,
   getRowId: getRowIdProp,
   hasFilters,
   hasPagination,
@@ -97,6 +98,7 @@ const DataView = ({
   totalRows,
 }: DataViewProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const { t } = useTranslation();
 
   const [currentLayout, setCurrentLayout] = useState<Layout>(
     initialLayout ?? availableLayouts[0],
@@ -112,8 +114,11 @@ const DataView = ({
     useState<UniversalProps["errorMessage"]>(errorMessageProp);
 
   const [search, setSearch] = useState<string>("");
-  const [initialFilters, setInitialFilters] = useState<DataFilter[]>();
-  const [filters, setFilters] = useState<DataFilter[]>();
+
+  const [initialFilters, setInitialFilters] =
+    useState<UniversalProps["filters"]>(filtersProp);
+  const [filters, setFilters] =
+    useState<UniversalProps["filters"]>(filtersProp);
 
   const [draggingRow, setDraggingRow] = useState<MRT_Row<MRT_RowData> | null>();
 
@@ -134,35 +139,37 @@ const DataView = ({
     rowDensity: tableOptions?.initialDensity ?? densityValues[0],
   });
 
-  const shouldShowFilters = useMemo(
-    () => hasSearch || hasFilters,
-    [hasSearch, hasFilters],
-  );
+  const shouldShowFilters = hasSearch || hasFilters;
 
   const availableFilters = useFilterConversion({
     filters: filters,
     columns: tableOptions?.columns,
   });
 
+  useEffect(() => {
+    if (!initialFilters && availableFilters) {
+      setInitialFilters(availableFilters);
+    }
+  }, [availableFilters, initialFilters]);
+
   const dataQueryParams = useMemo(
     () => ({
       page: pagination.pageIndex,
       resultsPerPage: pagination.pageSize,
       search,
-      filters,
+      filters: availableFilters,
       sort: tableState?.columnSorting,
     }),
-    [pagination, search, filters, tableState?.columnSorting],
+    [
+      pagination.pageIndex,
+      pagination.pageSize,
+      search,
+      availableFilters,
+      tableState?.columnSorting,
+    ],
   );
 
   const getRowId = getRowIdProp ? getRowIdProp : (row: MRT_RowData) => row.id;
-
-  // Set initial filters
-  useEffect(() => {
-    if (!initialFilters && filters) {
-      setInitialFilters(filters);
-    }
-  }, [filters, initialFilters]);
 
   // Update pagination state if props change
   useEffect(() => {
@@ -175,14 +182,14 @@ const DataView = ({
   // Retrieve the data
   useEffect(() => {
     fetchData({
-      getDataFn,
-      setIsLoading,
-      setErrorMessage,
-      errorMessageProp,
-      setData,
       dataQueryParams,
+      errorMessageProp,
+      getData,
+      setData,
+      setErrorMessage,
+      setIsLoading,
     });
-  }, [dataQueryParams, errorMessageProp, getDataFn]);
+  }, [dataQueryParams, errorMessageProp, getData]);
 
   // When data is updated
   useEffect(() => {
@@ -233,7 +240,7 @@ const DataView = ({
     }
 
     return;
-  }, [emptyPlaceholder, noResultsPlaceholder, isEmpty, isNoResults]);
+  }, [noResultsPlaceholder, t, isEmpty, isNoResults, emptyPlaceholder]);
 
   const additionalActions = useMemo(
     () => (
@@ -297,7 +304,7 @@ const DataView = ({
 
       {(bulkActionMenuItems || hasRowSelection) && (
         <BulkActionsContainer>
-          <BulkActionMenu
+          <BulkActionsMenu
             data={data}
             menuItems={bulkActionMenuItems}
             rowSelection={rowSelection}

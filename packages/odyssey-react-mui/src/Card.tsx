@@ -18,7 +18,6 @@ import {
   useEffect,
 } from "react";
 import {
-  Box as MuiBox,
   Card as MuiCard,
   CardActions as MuiCardActions,
   CardActionArea as MuiCardActionArea,
@@ -34,6 +33,7 @@ import {
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext";
 import { Heading5, Paragraph, Support } from "./Typography";
+import { Box } from "./Box";
 
 export const CARD_IMAGE_HEIGHT = "64px";
 
@@ -64,7 +64,7 @@ const ImageContainer = styled("div", {
 }>(({ odysseyDesignTokens, hasMenuButtonChildren }) => ({
   display: "flex",
   alignItems: "flex-start",
-  maxHeight: `${CARD_IMAGE_HEIGHT}`,
+  maxHeight: CARD_IMAGE_HEIGHT,
   marginBlockEnd: odysseyDesignTokens.Spacing5,
   paddingRight: hasMenuButtonChildren ? odysseyDesignTokens.Spacing5 : 0,
 }));
@@ -75,6 +75,10 @@ const MenuButtonContainer = styled("div", {
   position: "absolute",
   right: odysseyDesignTokens.Spacing3,
   top: odysseyDesignTokens.Spacing3,
+}));
+
+const CardContentContainer = styled("div")(() => ({
+  display: "flex",
 }));
 
 const buttonProviderValue = { isFullWidth: true };
@@ -92,8 +96,8 @@ const Card = ({
 
   const cardContent = useMemo(
     () => (
-      <MuiBox display="flex">
-        <MuiBox>
+      <CardContentContainer>
+        <Box>
           {image && (
             <ImageContainer
               odysseyDesignTokens={odysseyDesignTokens}
@@ -116,8 +120,8 @@ const Card = ({
               </ButtonContext.Provider>
             </MuiCardActions>
           )}
-        </MuiBox>
-      </MuiBox>
+        </Box>
+      </CardContentContainer>
     ),
     [
       button,
