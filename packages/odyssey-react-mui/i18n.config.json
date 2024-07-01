@@ -3,5 +3,7 @@
   "resourceFilePath": "packages/odyssey-react-mui/src/properties",
   "translationsFilePath": "packages/odyssey-react-mui/src/properties/translations",
   "commitPrefix": "chore(odyssey-react-mui): ",
-  "reviewers": ["okta/eng-globalizationcore", "okta/design-system"]
+  "reviewers": ["okta/eng-globalizationcore", "okta/design-system"],
+  "slackChannel": "odyssey",
+  "guardian": "guardian-odyssey"
 }
