@@ -10,23 +10,23 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ReactNode, memo } from "react";
-import type { HtmlProps } from "../HtmlProps";
+import styled from "@emotion/styled";
 import {
-  Box,
   Accordion as MuiAccordion,
   AccordionDetails as MuiAccordionDetails,
   AccordionSummary as MuiAccordionSummary,
   AccordionProps as MuiAccordionProps,
 } from "@mui/material";
+import { ReactNode, memo } from "react";
+
+import type { HtmlProps } from "../HtmlProps";
 import { ChevronRightIcon } from "../icons.generated";
-import { Support } from "../Typography";
-import { useUniqueId } from "../useUniqueId";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../OdysseyDesignTokensContext";
-import styled from "@emotion/styled";
+import { Support } from "../Typography";
+import { useUniqueId } from "../useUniqueId";
 
 export type NavAccordionProps = {
   /**
@@ -34,13 +34,13 @@ export type NavAccordionProps = {
    */
   children: ReactNode;
   /**
-   * Defines IDs for the header and the content of the Accordion
-   */
-  id?: string;
-  /**
    * The label text for the AccordionSummary
    */
   label: string;
+  /**
+   * Defines IDs for the header and the content of the Accordion
+   */
+  id?: string;
   /**
    * Whether the item is expanded by default
    */
@@ -81,11 +81,10 @@ const AccordionLabelContainer = styled("span", {
   isIconVisible: boolean;
 }>(({ odysseyDesignTokens, isIconVisible }) => ({
   width: "100%",
-  marginLeft: isIconVisible ? odysseyDesignTokens.Spacing3 : 0,
+  marginLeft: isIconVisible ? odysseyDesignTokens.Spacing2 : 0,
   fontSize: odysseyDesignTokens.TypographyScale0,
   fontWeight: odysseyDesignTokens.TypographyWeightHeading,
   color: odysseyDesignTokens.TypographyColorHeading,
-  alignSelf: "center",
 }));
 
 const NavAccordion = ({
@@ -109,46 +108,27 @@ const NavAccordion = ({
       disabled={isDisabled}
       disableGutters
       expanded={isExpanded}
-      sx={{
-        border: "0 !important",
-        width: "100%",
-      }}
+      className="nav-accordion"
     >
       <MuiAccordionSummary
-        sx={{
-          padding: `${odysseyDesignTokens.Spacing2} ${odysseyDesignTokens.Spacing4}`,
-          ".MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
-            transform: "rotate(-90deg) !important",
-          },
-        }}
+        className="nav-accordion-summary"
         aria-controls={contentId}
         expandIcon={<ChevronRightIcon />}
         id={headerId}
       >
         <Support component="div" translate={translate}>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-            }}
+          {startIcon && startIcon}
+          <AccordionLabelContainer
+            odysseyDesignTokens={odysseyDesignTokens}
+            isIconVisible={!!startIcon}
           >
-            {startIcon && startIcon}
-            <AccordionLabelContainer
-              odysseyDesignTokens={odysseyDesignTokens}
-              isIconVisible={!!startIcon}
-            >
-              {label}
-            </AccordionLabelContainer>
-          </Box>
+            {label}
+          </AccordionLabelContainer>
         </Support>
       </MuiAccordionSummary>
       <MuiAccordionDetails
+        className="nav-accordion-details"
         aria-labelledby={headerId}
-        sx={{
-          paddingTop: 0,
-          paddingBottom: 0,
-          paddingLeft: odysseyDesignTokens.Spacing2,
-        }}
       >
         {children}
       </MuiAccordionDetails>
