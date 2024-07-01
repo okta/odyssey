@@ -1029,49 +1029,24 @@ export const components = ({
             fontSize: "0.71428571rem",
             textTransform: "uppercase",
 
-            "&::before": {
-              content: "''",
-              width: "0.42857143rem",
-              height: "0.42857143rem",
-              marginInlineEnd: odysseyTokens.Spacing2,
-              borderRadius: "100%",
-              backgroundColor: odysseyTokens.HueNeutral400,
-            },
-
             [`&.${chipClasses.colorError}`]: {
               backgroundColor: odysseyTokens.PaletteDangerLighter,
               color: odysseyTokens.TypographyColorDanger,
-
-              "&::before": {
-                backgroundColor: odysseyTokens.PaletteDangerMain,
-              },
             },
 
             [`&.${chipClasses.colorInfo}`]: {
               backgroundColor: odysseyTokens.PalettePrimaryLighter,
               color: odysseyTokens.PalettePrimaryText,
-
-              "&::before": {
-                backgroundColor: odysseyTokens.HueBlue400,
-              },
             },
 
             [`&.${chipClasses.colorSuccess}`]: {
               backgroundColor: odysseyTokens.PaletteSuccessLighter,
               color: odysseyTokens.TypographyColorSuccess,
-
-              "&::before": {
-                backgroundColor: odysseyTokens.PaletteSuccessMain,
-              },
             },
 
             [`&.${chipClasses.colorWarning}`]: {
               backgroundColor: odysseyTokens.PaletteWarningLighter,
               color: odysseyTokens.TypographyColorWarning,
-
-              "&::before": {
-                backgroundColor: odysseyTokens.HueYellow200,
-              },
             },
           }),
 
