@@ -138,34 +138,36 @@ const StackCard = ({
     () => (
       <AccessoryContainer odysseyDesignTokens={odysseyDesignTokens}>
         {AccessoryProp}
-        <MuiTooltip
-          title={
-            isDetailPanelOpen
-              ? t("table.rowexpansion.collapse")
-              : t("table.rowexpansion.expand")
-          }
-        >
-          <MuiIconButton
-            children={
-              isDetailPanelOpen ? <ChevronUpIcon /> : <ChevronDownIcon />
-            }
-            onClick={() => setIsDetailPanelOpen(!isDetailPanelOpen)}
-            aria-label={
+        {detailPanel && (
+          <MuiTooltip
+            title={
               isDetailPanelOpen
                 ? t("table.rowexpansion.collapse")
                 : t("table.rowexpansion.expand")
             }
-          />
-        </MuiTooltip>
+          >
+            <MuiIconButton
+              children={
+                isDetailPanelOpen ? <ChevronUpIcon /> : <ChevronDownIcon />
+              }
+              onClick={() => setIsDetailPanelOpen(!isDetailPanelOpen)}
+              aria-label={
+                isDetailPanelOpen
+                  ? t("table.rowexpansion.collapse")
+                  : t("table.rowexpansion.expand")
+              }
+            />
+          </MuiTooltip>
+        )}
       </AccessoryContainer>
     ),
-    [AccessoryProp, isDetailPanelOpen, odysseyDesignTokens, t],
+    [AccessoryProp, detailPanel, isDetailPanelOpen, odysseyDesignTokens, t],
   );
 
   const cardContent = useMemo(
     () => (
       <CardContentContainer odysseyDesignTokens={odysseyDesignTokens}>
-        {Accessory && <Box>{Accessory}</Box>}
+        {(AccessoryProp || detailPanel) && <Box>{Accessory}</Box>}
         <Box>
           {image && (
             <ImageContainer
@@ -206,8 +208,9 @@ const StackCard = ({
     ),
     [
       odysseyDesignTokens,
-      Accessory,
+      AccessoryProp,
       detailPanel,
+      Accessory,
       image,
       menuButtonChildren,
       overline,

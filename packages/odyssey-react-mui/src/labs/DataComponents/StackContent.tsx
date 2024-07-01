@@ -210,10 +210,12 @@ const StackContent = ({
                     children={children}
                     description={description}
                     detailPanel={
-                      <DetailPanel
-                        row={row}
-                        renderDetailPanel={stackOptions.renderDetailPanel}
-                      />
+                      stackOptions.renderDetailPanel ? (
+                        <DetailPanel
+                          row={row}
+                          renderDetailPanel={stackOptions.renderDetailPanel}
+                        />
+                      ) : undefined
                     }
                     image={image}
                     key={row.id}
