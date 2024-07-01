@@ -156,9 +156,11 @@ const storybookMeta: Meta<SideNavProps> = {
         isDisabled: true,
       },
       {
-        id: "item0-3",
-        label: "Resource Management",
-        isSectionHeader: true,
+        id: "item2",
+        href: "/",
+        label: "Applications",
+        startIcon: <AppsIcon />,
+        isSelected: true,
       },
       {
         id: "item0-1-2",
@@ -167,11 +169,9 @@ const storybookMeta: Meta<SideNavProps> = {
         startIcon: <DirectoryIcon />,
       },
       {
-        id: "item2",
-        href: "/",
-        label: "Applications",
-        startIcon: <AppsIcon />,
-        isSelected: true,
+        id: "item0-3",
+        label: "Resource Management",
+        isSectionHeader: true,
       },
       {
         id: "item3-2-1",
@@ -186,7 +186,7 @@ const storybookMeta: Meta<SideNavProps> = {
         id: "item5",
         href: "/",
         label: "Reports",
-        endIcon: <DownloadIcon />,
+        startIcon: <DownloadIcon />,
       },
       {
         id: "item3-1-0",
@@ -220,6 +220,7 @@ const storybookMeta: Meta<SideNavProps> = {
         href: "/",
         label: "Settings",
         startIcon: <SettingsIcon />,
+        isDefaultExpanded: true,
         children: [
           {
             id: "item4-1",

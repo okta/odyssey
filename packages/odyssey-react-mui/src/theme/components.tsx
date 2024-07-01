@@ -101,6 +101,10 @@ export const components = ({
             borderBottomStyle: "solid",
             borderBottomWidth: odysseyTokens.BorderWidthMain,
           },
+          "&.nav-accordion": {
+            border: "0 !important",
+            width: "100%",
+          },
         }),
       },
     },
@@ -122,12 +126,18 @@ export const components = ({
             zIndex: 1,
           },
           svg: {
-            fontSize: "1em",
+            fontSize: "1.2em",
             height: "1em",
             position: "relative",
             insetBlockStart: "-0.0625em",
             verticalAlign: "middle",
             width: "1em",
+          },
+          "&.nav-accordion-summary": {
+            padding: `${odysseyTokens.Spacing2} ${odysseyTokens.Spacing4}`,
+            ".MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
+              transform: "rotate(-90deg) !important",
+            },
           },
         }),
         content: () => ({
@@ -145,6 +155,11 @@ export const components = ({
         root: () => ({
           paddingInline: odysseyTokens.Spacing3,
           paddingBlock: odysseyTokens.Spacing4,
+          "&.nav-accordion-details": {
+            paddingTop: 0,
+            paddingBottom: 0,
+            paddingLeft: odysseyTokens.Spacing2,
+          },
         }),
       },
     },
@@ -1986,6 +2001,9 @@ export const components = ({
             display: "inline-block",
             height: "1em",
             lineHeight: 1,
+            "& svg": {
+              fontSize: "1em",
+            },
           },
 
           ".Link-indicator": {
@@ -1996,7 +2014,7 @@ export const components = ({
             marginInlineEnd: odysseyTokens.Spacing1,
           },
           svg: {
-            fontSize: "1em",
+            fontSize: "1.2em",
             height: "1em",
             position: "relative",
             insetBlockStart: "-0.0625em",

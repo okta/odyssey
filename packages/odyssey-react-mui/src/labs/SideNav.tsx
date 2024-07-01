@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import styled from "@emotion/styled";
 import {
   memo,
   useMemo,
@@ -17,40 +18,25 @@ import {
   MouseEvent,
   ReactElement,
   ReactNode,
+  useCallback,
 } from "react";
 
+import { Box } from "../Box";
+import { Button } from "../Button";
+import type { HtmlProps } from "../HtmlProps";
+import { CollapseLeftIcon, ExpandLeftIcon } from "../icons.generated";
+import { Link } from "../Link";
+import { NavAccordion } from "./NavAccordion";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../OdysseyDesignTokensContext";
-
-import { NavAccordion } from "./NavAccordion";
-
 import { Status, statusSeverityValues } from "../Status";
-
-import { Box } from "../Box";
-import type { HtmlProps } from "../HtmlProps";
-import styled from "@emotion/styled";
 import { Heading6 } from "../Typography";
-import { CollapseLeftIcon, ExpandLeftIcon } from "../icons.generated";
-import { Link } from "../Link";
 
 export type SideNavItem = {
   id: string;
   label: string;
-  target?: string;
-  /**
-   * The icon element to display at the start of the Nav Item
-   */
-  startIcon?: ReactElement;
-  /**
-   * The status element to display after the label
-   */
-  severity?: (typeof statusSeverityValues)[number];
-  /**
-   * The label to display inside the status
-   */
-  statusLabel?: string;
   /**
    * The icon element to display at the end of the Nav Item
    */
@@ -75,6 +61,19 @@ export type SideNavItem = {
    * Event fired when the nav item is clicked
    */
   onClick?(event: MouseEvent<HTMLAnchorElement>): void;
+  /**
+   * The status element to display after the label
+   */
+  severity?: (typeof statusSeverityValues)[number];
+  /**
+   * The icon element to display at the start of the Nav Item
+   */
+  startIcon?: ReactElement;
+  /**
+   * The label to display inside the status
+   */
+  statusLabel?: string;
+  target?: string;
 } & (
   | {
       /**
@@ -95,47 +94,52 @@ export type SideNavItem = {
 );
 
 export type SideNavFooterItem = {
+  href: string;
   id: string;
   label: string;
-  href: string;
 };
 
 const SideNavCollapsedContainer = styled("div", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "sideNavCollapsed",
+    prop !== "odysseyDesignTokens" && prop !== "isSideNavCollapsed",
 })(
   ({
     odysseyDesignTokens,
-    sideNavCollapsed,
+    isSideNavCollapsed,
   }: {
     odysseyDesignTokens: DesignTokens;
-    sideNavCollapsed: boolean;
+    isSideNavCollapsed: boolean;
   }) => ({
     backgroundColor: odysseyDesignTokens.HueNeutral300,
     paddingTop: odysseyDesignTokens.Spacing5,
     cursor: "pointer",
-    width: sideNavCollapsed ? "auto" : 0,
-    visibility: sideNavCollapsed ? "visible" : "hidden",
+    width: isSideNavCollapsed ? "auto" : 0,
+    opacity: isSideNavCollapsed ? 1 : 0,
+    visibility: isSideNavCollapsed ? "visible" : "hidden",
+    transitionProperty: "opacity, visibility, width",
+    transitionDuration: odysseyDesignTokens.TransitionDurationMain,
+    transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
   }),
 );
 
 const SideNavContainer = styled("div", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "sideNavCollapsed",
+    prop !== "odysseyDesignTokens" && prop !== "isSideNavCollapsed",
 })(
   ({
     odysseyDesignTokens,
-    sideNavCollapsed,
+    isSideNavCollapsed,
   }: {
     odysseyDesignTokens: DesignTokens;
-    sideNavCollapsed: boolean;
+    isSideNavCollapsed: boolean;
   }) => ({
     backgroundColor: odysseyDesignTokens.HueNeutralWhite,
     flexDirection: "column",
     display: "flex",
-    visibility: sideNavCollapsed ? "hidden" : "visible",
-    width: sideNavCollapsed ? "0" : "100%",
-    transitionProperty: "width, visibility",
+    opacity: isSideNavCollapsed ? 0 : 1,
+    visibility: isSideNavCollapsed ? "hidden" : "visible",
+    width: isSideNavCollapsed ? "0" : "100%",
+    transitionProperty: "opacity, visibility, width",
     transitionDuration: odysseyDesignTokens.TransitionDurationMain,
     transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
   }),
@@ -156,43 +160,23 @@ const SideNavHeaderContainer = styled("div", {
 const CollapseIcon = ({ onClick }: { onClick?(): void }): ReactElement => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   return (
-    <div
-      tabIndex={0}
-      role="button"
-      onClick={onClick}
-      onKeyDown={(event) => {
-        event.key === "Enter" && onClick && onClick();
+    <Box
+      sx={{
+        "& > button": {
+          height: "32px",
+          width: "32px",
+          color: odysseyDesignTokens.HueNeutral400,
+        },
       }}
     >
-      <Box
-        component="a"
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "32px",
-          height: "32px",
-          border: `${odysseyDesignTokens.BorderWidthMain} ${odysseyDesignTokens.BorderStyleMain} ${odysseyDesignTokens.HueNeutral300}`,
-          borderRadius: odysseyDesignTokens.BorderRadiusTight,
-          cursor: "pointer",
-          padding: odysseyDesignTokens.Spacing1,
-          "&:hover": {
-            backgroundColor: odysseyDesignTokens.HueNeutral50,
-          },
-        }}
-      >
-        <CollapseLeftIcon
-          onClick={onClick}
-          onKeyDown={onClick}
-          sx={{
-            height: "16px",
-            width: "16px",
-            alignSelf: "center",
-            color: odysseyDesignTokens.HueNeutral400,
-          }}
-        />
-      </Box>
-    </div>
+      <Button
+        tabIndex={0}
+        variant="secondary"
+        onClick={onClick}
+        startIcon={<CollapseLeftIcon />}
+        ariaLabel="collapse side navigation"
+      />
+    </Box>
   );
 };
 
@@ -239,32 +223,25 @@ const SectionHeader = styled("li", {
 
 const SideNavItemLabelContainer = styled("div", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" &&
-    prop !== "isIconVisible" &&
-    prop !== "isDisabled",
+    prop !== "odysseyDesignTokens" && prop !== "isIconVisible",
 })<{
   odysseyDesignTokens: DesignTokens;
   isIconVisible: boolean;
-  isDisabled?: boolean;
-}>(({ odysseyDesignTokens, isIconVisible, isDisabled }) => ({
+}>(({ odysseyDesignTokens, isIconVisible }) => ({
   width: "100%",
   display: "flex",
   flexWrap: "wrap",
   alignItems: "center",
   fontSize: odysseyDesignTokens.TypographyScale0,
   fontWeight: odysseyDesignTokens.TypographyWeightHeading,
-  marginLeft: isIconVisible ? odysseyDesignTokens.Spacing3 : 0,
-  "& > a": {
+  marginLeft: isIconVisible ? odysseyDesignTokens.Spacing2 : 0,
+  "& a": {
     color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
-    pointerEvents: isDisabled ? "none" : "auto",
-  },
-  "& > a:hover": {
-    textDecoration: "none",
-    cursor: isDisabled ? "default" : "pointer",
-  },
-  "& > a:visited": {
-    color: odysseyDesignTokens.TypographyColorHeading,
     fontSize: odysseyDesignTokens.TypographyScale0,
+  },
+  "& a:hover": {
+    textDecoration: "none",
+    cursor: "pointer",
   },
 }));
 
@@ -281,33 +258,32 @@ const SideNavListItemContainer = styled("li", {
 }>(({ odysseyDesignTokens, isSelected, isDisabled }) => ({
   display: "flex",
   alignItems: "center",
-  minHeight: "48px",
-  opacity: isDisabled ? "0.38" : "1",
   cursor: isDisabled ? "default" : "pointer",
   pointerEvents: isDisabled ? "none" : "auto",
-  backgroundColor: isSelected ? odysseyDesignTokens.HueNeutral50 : "auto",
-  "&:hover": {
-    backgroundColor: !isDisabled ? odysseyDesignTokens.HueNeutral50 : "auto",
-  },
+  backgroundColor: isSelected ? odysseyDesignTokens.HueNeutral50 : "unset",
+  margin: "4px 0",
   "&:last-child": {
     marginBottom: odysseyDesignTokens.Spacing2,
   },
-  "& > a": {
+  "& a": {
     display: "flex",
     alignItems: "center",
     width: "100%",
-    paddingRight: odysseyDesignTokens.Spacing4,
-    paddingLeft: odysseyDesignTokens.Spacing4,
+    minHeight: "45px",
+    padding: `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
     color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
     pointerEvents: isDisabled ? "none" : "auto",
   },
-  "& > a:hover": {
+  "& a:hover": {
     textDecoration: "none",
     cursor: isDisabled ? "default" : "pointer",
+    backgroundColor: !isDisabled ? odysseyDesignTokens.HueNeutral50 : "inherit",
   },
-  "& > a:visited": {
-    color: odysseyDesignTokens.TypographyColorHeading,
-    fontSize: odysseyDesignTokens.TypographyScale0,
+  "& a:focus-visible": {
+    outlineOffset: 0,
+    borderRadius: 0,
+    outlineWidth: "2px",
+    backgroundColor: !isDisabled ? odysseyDesignTokens.HueNeutral50 : "inherit",
   },
 }));
 
@@ -346,6 +322,40 @@ const SideNavFooter = ({ id, label, href }: SideNavFooterItem) => {
   );
 };
 
+const SideNavItemLinkContent = ({
+  label,
+  startIcon,
+  endIcon,
+  severity,
+  statusLabel,
+}: Pick<
+  SideNavItem,
+  "label" | "startIcon" | "endIcon" | "severity" | "statusLabel"
+>): ReactNode => {
+  const odysseyDesignTokens = useOdysseyDesignTokens();
+  return (
+    <>
+      {startIcon && startIcon}
+      <SideNavItemLabelContainer
+        odysseyDesignTokens={odysseyDesignTokens}
+        isIconVisible={!!startIcon}
+      >
+        {label}
+        {severity && (
+          <Box
+            sx={{
+              marginLeft: odysseyDesignTokens.Spacing2,
+            }}
+          >
+            <Status severity={severity} label={statusLabel || ""} />
+          </Box>
+        )}
+      </SideNavItemLabelContainer>
+      {endIcon && endIcon}
+    </>
+  );
+};
+
 const SideNavItemContent = ({
   id,
   label,
@@ -378,30 +388,44 @@ const SideNavItemContent = ({
       id={id}
       key={id}
       disabled={isDisabled}
+      aria-disabled={isDisabled}
       isDisabled={isDisabled}
       isSelected={isSelected}
       odysseyDesignTokens={odysseyDesignTokens}
     >
-      <Link href={href || ""} target={target} onClick={onClick}>
-        {startIcon && startIcon}
-        <SideNavItemLabelContainer
-          odysseyDesignTokens={odysseyDesignTokens}
-          isIconVisible={!!startIcon}
-          isDisabled={isDisabled}
-        >
-          {label}
-          {severity && (
-            <Box
-              sx={{
-                marginLeft: odysseyDesignTokens.Spacing2,
-              }}
-            >
-              <Status severity={severity} label={statusLabel || ""} />
-            </Box>
-          )}
-        </SideNavItemLabelContainer>
-        {endIcon && endIcon}
-      </Link>
+      {
+        // Use Link for accessible nav items and div for disabled items
+        isDisabled ? (
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              width: "100%",
+              minHeight: "45px",
+              padding: `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
+              color: `${odysseyDesignTokens.TypographyColorDisabled} !important`,
+            }}
+          >
+            <SideNavItemLinkContent
+              label={label}
+              startIcon={startIcon}
+              endIcon={endIcon}
+              statusLabel={statusLabel}
+              severity={severity}
+            />
+          </Box>
+        ) : (
+          <Link href={href || ""} target={target} onClick={onClick}>
+            <SideNavItemLinkContent
+              label={label}
+              startIcon={startIcon}
+              endIcon={endIcon}
+              statusLabel={statusLabel}
+              severity={severity}
+            />
+          </Link>
+        )
+      }
     </SideNavListItemContainer>
   );
 };
@@ -416,6 +440,10 @@ export type SideNavProps = {
    */
   isCollapsible?: boolean;
   /**
+   * Footer items in the side nav
+   */
+  footerItems?: SideNavFooterItem[];
+  /**
    *  Triggers when the side nav is collapsed
    */
   onCollapse?(): void;
@@ -423,10 +451,6 @@ export type SideNavProps = {
    * Nav items in the side nav
    */
   sideNavItems: SideNavItem[];
-  /**
-   * Footer items in the side nav
-   */
-  footerItems?: SideNavFooterItem[];
 } & Pick<HtmlProps, "testId">;
 
 const SideNav = ({
@@ -436,7 +460,7 @@ const SideNav = ({
   sideNavItems,
   footerItems,
 }: SideNavProps) => {
-  const [sideNavCollapsed, setSideNavCollapsed] = useState(false);
+  const [isSideNavCollapsed, setSideNavCollapsed] = useState(false);
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const processedSideNavItems = useMemo(
@@ -449,6 +473,12 @@ const SideNav = ({
       })),
     [sideNavItems],
   );
+
+  const sideNavCollapseHandler = useCallback(() => {
+    setSideNavCollapsed(!isSideNavCollapsed);
+    onCollapse && onCollapse();
+  }, [isSideNavCollapsed, setSideNavCollapsed, onCollapse]);
+
   return (
     <Box
       sx={{
@@ -459,21 +489,23 @@ const SideNav = ({
       <SideNavCollapsedContainer
         tabIndex={0}
         odysseyDesignTokens={odysseyDesignTokens}
-        sideNavCollapsed={sideNavCollapsed}
-        onClick={() => setSideNavCollapsed(!sideNavCollapsed)}
+        isSideNavCollapsed={isSideNavCollapsed}
+        onClick={() => setSideNavCollapsed(!isSideNavCollapsed)}
         onKeyDown={(event) => {
-          event.key === "Enter" && setSideNavCollapsed(!sideNavCollapsed);
+          (event.key === "Enter" || event.code === "Space") &&
+            setSideNavCollapsed(!isSideNavCollapsed);
         }}
       >
         <ExpandLeftIcon
           sx={{
             margin: `0 ${odysseyDesignTokens.Spacing1}`,
+            fontSize: "1em",
           }}
-        ></ExpandLeftIcon>
+        />
       </SideNavCollapsedContainer>
       <SideNavContainer
         odysseyDesignTokens={odysseyDesignTokens}
-        sideNavCollapsed={sideNavCollapsed}
+        isSideNavCollapsed={isSideNavCollapsed}
       >
         <Box
           sx={{
@@ -484,10 +516,7 @@ const SideNav = ({
           <SideNavHeader
             navHeaderText={navHeaderText}
             isCollapsible={isCollapsible}
-            onCollapse={() => {
-              setSideNavCollapsed(!sideNavCollapsed);
-              onCollapse && onCollapse();
-            }}
+            onCollapse={sideNavCollapseHandler}
           />
         </Box>
         <Box
