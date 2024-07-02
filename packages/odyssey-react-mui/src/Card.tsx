@@ -33,6 +33,7 @@ import {
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext";
 import { Heading5, Paragraph, Support } from "./Typography";
+import { Box } from "./Box";
 
 export const CARD_IMAGE_HEIGHT = "64px";
 
@@ -63,7 +64,7 @@ const ImageContainer = styled("div", {
 }>(({ odysseyDesignTokens, hasMenuButtonChildren }) => ({
   display: "flex",
   alignItems: "flex-start",
-  maxHeight: `${CARD_IMAGE_HEIGHT}`,
+  maxHeight: CARD_IMAGE_HEIGHT,
   marginBlockEnd: odysseyDesignTokens.Spacing5,
   paddingRight: hasMenuButtonChildren ? odysseyDesignTokens.Spacing5 : 0,
 }));
@@ -74,6 +75,10 @@ const MenuButtonContainer = styled("div", {
   position: "absolute",
   right: odysseyDesignTokens.Spacing3,
   top: odysseyDesignTokens.Spacing3,
+}));
+
+const CardContentContainer = styled("div")(() => ({
+  display: "flex",
 }));
 
 const buttonProviderValue = { isFullWidth: true };
@@ -91,30 +96,32 @@ const Card = ({
 
   const cardContent = useMemo(
     () => (
-      <>
-        {image && (
-          <ImageContainer
-            odysseyDesignTokens={odysseyDesignTokens}
-            hasMenuButtonChildren={Boolean(menuButtonChildren)}
-          >
-            {image}
-          </ImageContainer>
-        )}
+      <CardContentContainer>
+        <Box>
+          {image && (
+            <ImageContainer
+              odysseyDesignTokens={odysseyDesignTokens}
+              hasMenuButtonChildren={Boolean(menuButtonChildren)}
+            >
+              {image}
+            </ImageContainer>
+          )}
 
-        {overline && <Support component="div">{overline}</Support>}
-        {title && <Heading5 component="div">{title}</Heading5>}
-        {description && (
-          <Paragraph color="textSecondary">{description}</Paragraph>
-        )}
+          {overline && <Support component="div">{overline}</Support>}
+          {title && <Heading5 component="div">{title}</Heading5>}
+          {description && (
+            <Paragraph color="textSecondary">{description}</Paragraph>
+          )}
 
-        {button && (
-          <MuiCardActions>
-            <ButtonContext.Provider value={buttonProviderValue}>
-              {button}
-            </ButtonContext.Provider>
-          </MuiCardActions>
-        )}
-      </>
+          {button && (
+            <MuiCardActions>
+              <ButtonContext.Provider value={buttonProviderValue}>
+                {button}
+              </ButtonContext.Provider>
+            </MuiCardActions>
+          )}
+        </Box>
+      </CardContentContainer>
     ),
     [
       button,

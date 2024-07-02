@@ -148,7 +148,9 @@ export const Clickable: StoryObj<CardProps> = {
     return (
       <Box sx={{ maxWidth: 262 }}>
         <Card
-          {...props}
+          overline={props.overline}
+          title={props.title}
+          description={props.description}
           image={<img src="https://placehold.co/128" alt="Example logo" />}
           onClick={onClick}
         />
@@ -165,7 +167,13 @@ export const ClickableWithoutImage: StoryObj<CardProps> = {
 
     return (
       <Box sx={{ maxWidth: 262 }}>
-        <Card {...props} onClick={onClick} />
+        <Card
+          overline={props.overline}
+          title={props.title}
+          description={props.description}
+          image={props.image}
+          onClick={onClick}
+        />
       </Box>
     );
   },
@@ -174,7 +182,20 @@ export const ClickableWithoutImage: StoryObj<CardProps> = {
 export const ButtonWithoutImage: StoryObj<typeof Card> = {
   render: ({ ...props }) => (
     <Box sx={{ maxWidth: 262 }}>
-      <Card {...props} />
+      <Card
+        overline={props.overline}
+        title={props.title}
+        description={props.description}
+        image={props.image}
+        menuButtonChildren={
+          <>
+            <MenuItem>Menu option</MenuItem>
+            <MenuItem>Menu option</MenuItem>
+            <MenuItem>Menu option</MenuItem>
+          </>
+        }
+        button={<Button variant="primary" label="Button" />}
+      />
     </Box>
   ),
 };

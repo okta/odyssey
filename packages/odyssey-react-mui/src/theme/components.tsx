@@ -786,6 +786,10 @@ export const components = ({
             height: CARD_IMAGE_HEIGHT,
           },
 
+          "&.hasAccessory": {
+            paddingLeft: odysseyTokens.Spacing4,
+          },
+
           "&.isClickable:hover": {
             backgroundColor: odysseyTokens.HueNeutral50,
             boxShadow: odysseyTokens.DepthHigh,
@@ -2562,14 +2566,15 @@ export const components = ({
 
           [`.${tableHeadClasses.root} &`]: {
             color: odysseyTokens.TypographyColorHeading,
-            fontSize: `0.71428571rem`,
-            lineHeight: odysseyTokens.TypographyLineHeightBody,
             fontWeight: odysseyTokens.TypographyWeightBodyBold,
             textTransform: "uppercase",
             backgroundColor: odysseyTokens.HueNeutral50,
             borderBottom: 0,
             height: `${odysseyTokens.Spacing7} !important`,
             paddingBlock: `${odysseyTokens.Spacing3} !important`,
+            fontSize: odysseyTokens.TypographySizeOverline,
+            lineHeight: odysseyTokens.TypographyLineHeightBody,
+            letterSpacing: 1.3,
           },
 
           [`.${tableHeadClasses.root} &:first-of-type`]: {

@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 type UsePaginationType = {
   pageIndex: number;
@@ -23,6 +23,8 @@ export const usePagination = ({
   pageSize,
   totalRows,
 }: UsePaginationType) => {
+  const { t } = useTranslation();
+
   const firstRow = pageSize * (pageIndex - 1) + 1;
   const lastRow = firstRow + (pageSize - 1);
   if (totalRows && lastRow > totalRows) {
