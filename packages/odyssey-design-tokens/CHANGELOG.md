@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.0](https://github.com/okta/odyssey/compare/v1.15.9...v1.18.0) (2024-06-26)
+
+### Bug Fixes
+
+- bump version to 1.17 ([0e32aba](https://github.com/okta/odyssey/commit/0e32aba973ef00d5a872dbd408a84fb54c8a7408))
+
 ## [1.15.9](https://github.com/okta/odyssey/compare/v1.15.8...v1.15.9) (2024-03-26)
 
 **Note:** Version bump only for package @okta/odyssey-design-tokens
