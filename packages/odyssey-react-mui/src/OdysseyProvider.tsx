@@ -49,7 +49,7 @@ const OdysseyProvider = <SupportedLanguages extends string>({
   <OdysseyCacheProvider
     nonce={nonce}
     emotionRoot={emotionRoot}
-    shadowDomElement={shadowDomElement}
+    hasShadowDom={Boolean(shadowDomElement)}
     stylisPlugins={stylisPlugins}
   >
     <OdysseyThemeProvider
