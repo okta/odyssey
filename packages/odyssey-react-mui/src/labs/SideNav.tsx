@@ -193,8 +193,8 @@ const CollapseIcon = ({ onClick }: { onClick?(): void }): ReactElement => {
   const collapseButtonStyles = useMemo(
     () => ({
       "& > button": {
-        height: "32px",
-        width: "32px",
+        height: odysseyDesignTokens.Spacing6,
+        width: odysseyDesignTokens.Spacing6,
         color: odysseyDesignTokens.HueNeutral400,
       },
     }),
