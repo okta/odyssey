@@ -86,7 +86,6 @@ const storybookMeta: Meta<SideNavProps> = {
   args: {
     navHeaderText: "Admin",
     isCollapsible: true,
-    onCollapse: () => {},
     sideNavItems: [
       {
         id: "AddNewFolder",

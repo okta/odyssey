@@ -120,7 +120,7 @@ const NavAccordion = ({
           {startIcon && startIcon}
           <AccordionLabelContainer
             odysseyDesignTokens={odysseyDesignTokens}
-            isIconVisible={!!startIcon}
+            isIconVisible={Boolean(startIcon)}
           >
             {label}
           </AccordionLabelContainer>

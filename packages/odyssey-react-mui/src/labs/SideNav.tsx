@@ -19,6 +19,7 @@ import {
   ReactElement,
   ReactNode,
   useCallback,
+  KeyboardEvent,
 } from "react";
 
 import { Box } from "../Box";
@@ -73,6 +74,9 @@ export type SideNavItem = {
    * The label to display inside the status
    */
   statusLabel?: string;
+  /**
+   * The link target prop. e.g., "_blank"
+   */
   target?: string;
 } & (
   | {
@@ -85,9 +89,12 @@ export type SideNavItem = {
     }
   | {
       isSectionHeader?: false;
+      /**
+       * href link of the nav item
+       */
       href: string;
       /**
-       * An array of side nav items
+       * An array of side nav items to be displayed as children of an Accordion
        */
       children?: SideNavItem[];
     }
@@ -98,6 +105,29 @@ export type SideNavFooterItem = {
   id: string;
   label: string;
 };
+
+export type SideNavProps = {
+  /**
+   * Side Nav header text that is usually reserved to show the App name
+   */
+  navHeaderText: string;
+  /**
+   *  Determines whether the side nav is collapsible
+   */
+  isCollapsible?: boolean;
+  /**
+   * Footer items in the side nav
+   */
+  footerItems?: SideNavFooterItem[];
+  /**
+   *  Triggers when the side nav is collapsed
+   */
+  onCollapse?(): void;
+  /**
+   * Nav items in the side nav
+   */
+  sideNavItems: SideNavItem[];
+} & Pick<HtmlProps, "testId">;
 
 const SideNavCollapsedContainer = styled("div", {
   shouldForwardProp: (prop) =>
@@ -122,7 +152,7 @@ const SideNavCollapsedContainer = styled("div", {
   }),
 );
 
-const SideNavContainer = styled("div", {
+const SideNavExpandContainer = styled("div", {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" && prop !== "isSideNavCollapsed",
 })(
@@ -159,16 +189,20 @@ const SideNavHeaderContainer = styled("div", {
 
 const CollapseIcon = ({ onClick }: { onClick?(): void }): ReactElement => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+
+  const collapseButtonStyles = useMemo(
+    () => ({
+      "& > button": {
+        height: "32px",
+        width: "32px",
+        color: odysseyDesignTokens.HueNeutral400,
+      },
+    }),
+    [odysseyDesignTokens],
+  );
+
   return (
-    <Box
-      sx={{
-        "& > button": {
-          height: "32px",
-          width: "32px",
-          color: odysseyDesignTokens.HueNeutral400,
-        },
-      }}
-    >
+    <Box sx={collapseButtonStyles}>
       <Button
         tabIndex={0}
         variant="secondary"
@@ -189,13 +223,17 @@ const SideNavHeader = ({
   "navHeaderText" | "isCollapsible" | "onCollapse"
 >): ReactNode => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+
+  const sideNavHeaderStyles = useMemo(
+    () => ({
+      marginTop: odysseyDesignTokens.Spacing2,
+    }),
+    [odysseyDesignTokens],
+  );
+
   return (
     <SideNavHeaderContainer odysseyDesignTokens={odysseyDesignTokens}>
-      <Box
-        sx={{
-          marginTop: odysseyDesignTokens.Spacing2,
-        }}
-      >
+      <Box sx={sideNavHeaderStyles}>
         <Heading6>{navHeaderText}</Heading6>
       </Box>
       {isCollapsible && <CollapseIcon onClick={onCollapse} />}
@@ -297,30 +335,16 @@ const SideNavFooterContainer = styled("div", {
   flexWrap: "wrap",
   alignItems: "center",
   fontSize: odysseyDesignTokens.TypographySizeOverline,
-  "& > a": {
+  "& a": {
     color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
   },
-  "& > a:hover": {
+  "& a:hover": {
     textDecoration: "none",
   },
-  "& > a:visited": {
+  "& a:visited": {
     color: odysseyDesignTokens.TypographyColorHeading,
   },
-  "& > a:not(:last-child)::after": {
-    marginLeft: odysseyDesignTokens.Spacing4,
-    marginRight: odysseyDesignTokens.Spacing4,
-    color: odysseyDesignTokens.HueNeutral300,
-    content: '" | "',
-  },
 }));
-
-const SideNavFooter = ({ id, label, href }: SideNavFooterItem) => {
-  return (
-    <Link key={id} href={href}>
-      {label}
-    </Link>
-  );
-};
 
 const SideNavItemLinkContent = ({
   label,
@@ -333,20 +357,24 @@ const SideNavItemLinkContent = ({
   "label" | "startIcon" | "endIcon" | "severity" | "statusLabel"
 >): ReactNode => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+
+  const sideNavItemContentStyles = useMemo(
+    () => ({
+      marginLeft: odysseyDesignTokens.Spacing2,
+    }),
+    [odysseyDesignTokens],
+  );
+
   return (
     <>
       {startIcon && startIcon}
       <SideNavItemLabelContainer
         odysseyDesignTokens={odysseyDesignTokens}
-        isIconVisible={!!startIcon}
+        isIconVisible={Boolean(startIcon)}
       >
         {label}
         {severity && (
-          <Box
-            sx={{
-              marginLeft: odysseyDesignTokens.Spacing2,
-            }}
-          >
+          <Box sx={sideNavItemContentStyles}>
             <Status severity={severity} label={statusLabel || ""} />
           </Box>
         )}
@@ -383,75 +411,103 @@ const SideNavItemContent = ({
   | "isDisabled"
 >) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
-  return (
-    <SideNavListItemContainer
-      id={id}
-      key={id}
-      disabled={isDisabled}
-      aria-disabled={isDisabled}
-      isDisabled={isDisabled}
-      isSelected={isSelected}
-      odysseyDesignTokens={odysseyDesignTokens}
-    >
-      {
-        // Use Link for accessible nav items and div for disabled items
-        isDisabled ? (
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              width: "100%",
-              minHeight: "45px",
-              padding: `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
-              color: `${odysseyDesignTokens.TypographyColorDisabled} !important`,
-            }}
-          >
-            <SideNavItemLinkContent
-              label={label}
-              startIcon={startIcon}
-              endIcon={endIcon}
-              statusLabel={statusLabel}
-              severity={severity}
-            />
-          </Box>
-        ) : (
-          <Link href={href || ""} target={target} onClick={onClick}>
-            <SideNavItemLinkContent
-              label={label}
-              startIcon={startIcon}
-              endIcon={endIcon}
-              statusLabel={statusLabel}
-              severity={severity}
-            />
-          </Link>
-        )
-      }
-    </SideNavListItemContainer>
-  );
+
+  const sideNavItemContent = useMemo(() => {
+    return (
+      <SideNavListItemContainer
+        id={id}
+        key={id}
+        disabled={isDisabled}
+        aria-disabled={isDisabled}
+        isDisabled={isDisabled}
+        isSelected={isSelected}
+        odysseyDesignTokens={odysseyDesignTokens}
+      >
+        {
+          // Use Link for accessible nav items and div for disabled items
+          isDisabled ? (
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                width: "100%",
+                minHeight: "45px",
+                padding: `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
+                color: `${odysseyDesignTokens.TypographyColorDisabled} !important`,
+              }}
+            >
+              <SideNavItemLinkContent
+                label={label}
+                startIcon={startIcon}
+                endIcon={endIcon}
+                statusLabel={statusLabel}
+                severity={severity}
+              />
+            </Box>
+          ) : (
+            <Link href={href || ""} target={target} onClick={onClick}>
+              <SideNavItemLinkContent
+                label={label}
+                startIcon={startIcon}
+                endIcon={endIcon}
+                statusLabel={statusLabel}
+                severity={severity}
+              />
+            </Link>
+          )
+        }
+      </SideNavListItemContainer>
+    );
+  }, [
+    id,
+    label,
+    href,
+    target,
+    startIcon,
+    severity,
+    statusLabel,
+    endIcon,
+    onClick,
+    isSelected,
+    isDisabled,
+    odysseyDesignTokens,
+  ]);
+
+  return sideNavItemContent;
 };
 
-export type SideNavProps = {
-  /**
-   * Side Nav header text that is usually reserved to show the App name
-   */
-  navHeaderText: string;
-  /**
-   *  Determines whether the side nav is collapsible
-   */
-  isCollapsible?: boolean;
-  /**
-   * Footer items in the side nav
-   */
-  footerItems?: SideNavFooterItem[];
-  /**
-   *  Triggers when the side nav is collapsed
-   */
-  onCollapse?(): void;
-  /**
-   * Nav items in the side nav
-   */
-  sideNavItems: SideNavItem[];
-} & Pick<HtmlProps, "testId">;
+const SideNavFooterContent = (footerItems: SideNavFooterItem[]): ReactNode => {
+  const odysseyDesignTokens = useOdysseyDesignTokens();
+
+  const footerContent = useMemo(() => {
+    return footerItems?.map((item, index) => (
+      <Box
+        key={`${item.id}-wrapper`}
+        sx={{
+          display: "flex",
+        }}
+      >
+        <Link key={item.id} href={item.href}>
+          {item.label}
+        </Link>
+        {index < footerItems.length - 1 && (
+          <Box
+            key={`${item.id}-separator`}
+            sx={{
+              marginLeft: odysseyDesignTokens.Spacing4,
+              marginRight: odysseyDesignTokens.Spacing4,
+              color: odysseyDesignTokens.HueNeutral300,
+            }}
+          >
+            |
+          </Box>
+        )}
+      </Box>
+    ));
+  }, [footerItems, odysseyDesignTokens]);
+
+  return footerContent;
+};
 
 const SideNav = ({
   navHeaderText,
@@ -476,55 +532,87 @@ const SideNav = ({
 
   const sideNavCollapseHandler = useCallback(() => {
     setSideNavCollapsed(!isSideNavCollapsed);
-    onCollapse && onCollapse();
+    onCollapse?.();
   }, [isSideNavCollapsed, setSideNavCollapsed, onCollapse]);
 
+  const sideNavExpandeClickHandler = useCallback(() => {
+    setSideNavCollapsed(!isSideNavCollapsed);
+  }, [isSideNavCollapsed, setSideNavCollapsed]);
+
+  const sideNavExpandeKeyHandler = useCallback(
+    (event: KeyboardEvent<HTMLDivElement>) => {
+      if (event?.key === "Enter" || event?.code === "Space") {
+        setSideNavCollapsed(!isSideNavCollapsed);
+      }
+    },
+    [isSideNavCollapsed, setSideNavCollapsed],
+  );
+
+  const sideNavStyles = useMemo(
+    () => ({
+      display: "flex",
+      height: "100vh",
+    }),
+    [],
+  );
+
+  const sideNavHeaderContainerStyles = useMemo(
+    () => ({
+      position: "sticky",
+      top: 0,
+    }),
+    [],
+  );
+
+  const sideNavListContainerStyles = useMemo(
+    () => ({
+      flex: 1,
+      overflowY: "auto",
+    }),
+    [],
+  );
+
+  const sideNavFooterContainerStyles = useMemo(
+    () => ({
+      position: "sticky",
+      bottom: 0,
+      paddingTop: odysseyDesignTokens.Spacing2,
+    }),
+    [odysseyDesignTokens],
+  );
+
+  const expandLeftIconStyles = useMemo(
+    () => ({
+      fontSize: "1em",
+      margin: `0 ${odysseyDesignTokens.Spacing1}`,
+    }),
+    [odysseyDesignTokens],
+  );
+
   return (
-    <Box
-      sx={{
-        display: "flex",
-        height: "100vh",
-      }}
-    >
+    <Box sx={sideNavStyles}>
       <SideNavCollapsedContainer
         tabIndex={0}
+        role="button"
         odysseyDesignTokens={odysseyDesignTokens}
         isSideNavCollapsed={isSideNavCollapsed}
-        onClick={() => setSideNavCollapsed(!isSideNavCollapsed)}
-        onKeyDown={(event) => {
-          (event.key === "Enter" || event.code === "Space") &&
-            setSideNavCollapsed(!isSideNavCollapsed);
-        }}
+        onClick={sideNavExpandeClickHandler}
+        onKeyDown={sideNavExpandeKeyHandler}
       >
-        <ExpandLeftIcon
-          sx={{
-            margin: `0 ${odysseyDesignTokens.Spacing1}`,
-            fontSize: "1em",
-          }}
-        />
+        <ExpandLeftIcon sx={expandLeftIconStyles} />
       </SideNavCollapsedContainer>
-      <SideNavContainer
+      <SideNavExpandContainer
         odysseyDesignTokens={odysseyDesignTokens}
         isSideNavCollapsed={isSideNavCollapsed}
       >
-        <Box
-          sx={{
-            position: "sticky",
-            top: 0,
-          }}
-        >
+        <Box sx={sideNavHeaderContainerStyles}>
           <SideNavHeader
             navHeaderText={navHeaderText}
             isCollapsible={isCollapsible}
             onCollapse={sideNavCollapseHandler}
           />
         </Box>
-        <Box
-          sx={{
-            flex: 1,
-            overflowY: "auto",
-          }}
-        >
+        <Box sx={sideNavListContainerStyles}>
           <SideNavListContainer>
             {processedSideNavItems?.map((item) => {
               const {
@@ -560,7 +648,7 @@ const SideNav = ({
                       startIcon={startIcon}
                       isDisabled={isDisabled}
                     >
-                      <SideNavListContainer id={id + "-list"}>
+                      <SideNavListContainer id={`${id}-list`}>
                         {children}
                       </SideNavListContainer>
                     </NavAccordion>
@@ -572,25 +660,14 @@ const SideNav = ({
             })}
           </SideNavListContainer>
         </Box>
-        <Box
-          sx={{
-            position: "sticky",
-            bottom: 0,
-            paddingTop: odysseyDesignTokens.Spacing2,
-          }}
-        >
-          <SideNavFooterContainer odysseyDesignTokens={odysseyDesignTokens}>
-            {footerItems?.map((item) => (
-              <SideNavFooter
-                id={item.id}
-                label={item.label}
-                href={item.href}
-                key={item.id}
-              />
-            ))}
-          </SideNavFooterContainer>
-        </Box>
-      </SideNavContainer>
+        {footerItems && (
+          <Box sx={sideNavFooterContainerStyles}>
+            <SideNavFooterContainer odysseyDesignTokens={odysseyDesignTokens}>
+              {SideNavFooterContent(footerItems)}
+            </SideNavFooterContainer>
+          </Box>
+        )}
+      </SideNavExpandContainer>
     </Box>
   );
 };
