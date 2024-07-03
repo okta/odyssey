@@ -12,6 +12,7 @@
 
 import { Dispatch, SetStateAction, memo, useCallback, useMemo } from "react";
 import { Checkbox as MuiCheckbox } from "@mui/material";
+import { MRT_DensityState } from "material-react-table";
 import { useTranslation } from "react-i18next";
 
 import { densityValues } from "./constants";
@@ -19,7 +20,6 @@ import { ListIcon, ShowIcon } from "../../icons.generated";
 import { MenuButton } from "../../MenuButton";
 import { MenuItem } from "../../MenuItem";
 import { TableProps, TableState } from "./componentTypes";
-import { MRT_DensityState } from "material-react-table";
 
 export type TableSettingsProps = {
   setTableState: Dispatch<SetStateAction<TableState>>;
@@ -37,8 +37,8 @@ const TableSettings = ({
   const { hasChangeableDensity, hasColumnVisibility, columns } = tableOptions;
   const { rowDensity, columnVisibility } = tableState;
 
-  const changeRowDensity = useCallback(
-    (value: MRT_DensityState) => {
+  const changeRowDensity = useCallback<(value: MRT_DensityState) => void>(
+    (value) => {
       setTableState((prevState) => ({
         ...prevState,
         rowDensity: value,
@@ -47,8 +47,8 @@ const TableSettings = ({
     [setTableState],
   );
 
-  const changeColumnVisibility = useCallback(
-    (columnId: string) => {
+  const changeColumnVisibility = useCallback<(columnId: string) => void>(
+    (columnId) => {
       setTableState((prevState) => ({
         ...prevState,
         columnVisibility: {
