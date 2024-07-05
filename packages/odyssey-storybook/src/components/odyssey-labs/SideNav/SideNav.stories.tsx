@@ -40,6 +40,9 @@ import {
   ExpandLeftIcon,
   FolderIcon,
 } from "@okta/odyssey-react-mui/icons";
+import { expect } from "@storybook/jest";
+import { userEvent, waitFor, within } from "@storybook/testing-library";
+import { PlaywrightProps } from "../../odyssey-mui/storybookTypes";
 
 const storybookMeta: Meta<SideNavProps> = {
   title: "Labs Components/SideNav",
@@ -297,5 +300,27 @@ export const Default: StoryObj<SideNavProps> = {
         footerItems={props.footerItems}
       />
     );
+  },
+  play: async ({ canvasElement, step }: PlaywrightProps<SideNavProps>) => {
+    const canvas = within(canvasElement);
+    const expandedRegion = canvas.getByTestId("expanded-region");
+    const collapsedRegion = canvas.getByTestId("collapsed-region");
+    await step("Side Nav Collapse", async ({}) => {
+      const collapseButton = within(expandedRegion).getByLabelText(
+        "collapse side navigation",
+      );
+      await userEvent.click(collapseButton);
+      await waitFor(() => {
+        expect(expandedRegion).not.toBeVisible();
+        expect(collapsedRegion).toBeVisible();
+      });
+    });
+    await step("Side Nav Expand", async ({}) => {
+      await userEvent.click(collapsedRegion);
+      await waitFor(() => {
+        expect(collapsedRegion).not.toBeVisible();
+        expect(expandedRegion).toBeVisible();
+      });
+    });
   },
 };

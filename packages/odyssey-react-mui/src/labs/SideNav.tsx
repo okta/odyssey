@@ -146,7 +146,7 @@ const SideNavCollapsedContainer = styled("div", {
     width: isSideNavCollapsed ? "auto" : 0,
     opacity: isSideNavCollapsed ? 1 : 0,
     visibility: isSideNavCollapsed ? "visible" : "hidden",
-    transitionProperty: "opacity, visibility, width",
+    transitionProperty: "opacity",
     transitionDuration: odysseyDesignTokens.TransitionDurationMain,
     transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
   }),
@@ -169,7 +169,7 @@ const SideNavExpandContainer = styled("div", {
     opacity: isSideNavCollapsed ? 0 : 1,
     visibility: isSideNavCollapsed ? "hidden" : "visible",
     width: isSideNavCollapsed ? "0" : "100%",
-    transitionProperty: "opacity, visibility, width",
+    transitionProperty: "opacity, width",
     transitionDuration: odysseyDesignTokens.TransitionDurationMain,
     transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
   }),
@@ -598,12 +598,15 @@ const SideNav = ({
         isSideNavCollapsed={isSideNavCollapsed}
         onClick={sideNavExpandeClickHandler}
         onKeyDown={sideNavExpandeKeyHandler}
+        data-testid="collapsed-region"
+        data-aria-label="expand side navigation"
       >
         <ExpandLeftIcon sx={expandLeftIconStyles} />
       </SideNavCollapsedContainer>
       <SideNavExpandContainer
         odysseyDesignTokens={odysseyDesignTokens}
         isSideNavCollapsed={isSideNavCollapsed}
+        data-testid="expanded-region"
       >
         <Box sx={sideNavHeaderContainerStyles}>
           <SideNavHeader
