@@ -63,7 +63,7 @@ export type NavAccordionProps = {
   startIcon?: ReactNode;
 } & (
   | {
-      isExpanded: boolean;
+      isExpanded?: boolean;
       isDefaultExpanded?: never;
     }
   | {

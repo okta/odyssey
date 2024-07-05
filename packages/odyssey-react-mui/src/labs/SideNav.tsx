@@ -101,7 +101,7 @@ export type SideNavItem = {
 );
 
 export type SideNavFooterItem = {
-  href: string;
+  href?: string;
   id: string;
   label: string;
 };
@@ -123,6 +123,10 @@ export type SideNavProps = {
    *  Triggers when the side nav is collapsed
    */
   onCollapse?(): void;
+  /**
+   *  Triggers when the side nav is expanded
+   */
+  onExpand?(): void;
   /**
    * Nav items in the side nav
    */
@@ -487,9 +491,15 @@ const SideNavFooterContent = (footerItems: SideNavFooterItem[]): ReactNode => {
           display: "flex",
         }}
       >
-        <Link key={item.id} href={item.href}>
-          {item.label}
-        </Link>
+        {item.href ? (
+          <Link key={item.id} href={item.href}>
+            {item.label}
+          </Link>
+        ) : (
+          <Box component="span" key={item.id}>
+            {item.label}
+          </Box>
+        )}
         {index < footerItems.length - 1 && (
           <Box
             key={`${item.id}-separator`}
@@ -513,6 +523,7 @@ const SideNav = ({
   navHeaderText,
   isCollapsible,
   onCollapse,
+  onExpand,
   sideNavItems,
   footerItems,
 }: SideNavProps) => {
@@ -537,15 +548,17 @@ const SideNav = ({
 
   const sideNavExpandeClickHandler = useCallback(() => {
     setSideNavCollapsed(!isSideNavCollapsed);
-  }, [isSideNavCollapsed, setSideNavCollapsed]);
+    onExpand?.();
+  }, [isSideNavCollapsed, setSideNavCollapsed, onExpand]);
 
   const sideNavExpandeKeyHandler = useCallback(
     (event: KeyboardEvent<HTMLDivElement>) => {
       if (event?.key === "Enter" || event?.code === "Space") {
         setSideNavCollapsed(!isSideNavCollapsed);
+        onExpand?.();
       }
     },
-    [isSideNavCollapsed, setSideNavCollapsed],
+    [isSideNavCollapsed, setSideNavCollapsed, onExpand],
   );
 
   const sideNavStyles = useMemo(

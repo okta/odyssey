@@ -69,11 +69,14 @@ const storybookMeta: Meta<SideNavProps> = {
     onCollapse: {
       description: "Callback to be triggered when the side nav is collapsed",
     },
+    onExpand: {
+      description: "Callback to be triggered when the side nav is expanded",
+    },
     sideNavItems: {
       description: "",
       table: {
         type: {
-          summary: "Array<SideNaItem>",
+          summary: "Array<SideNavItem>",
         },
       },
     },
@@ -274,7 +277,6 @@ const storybookMeta: Meta<SideNavProps> = {
       {
         id: "footer-item-2",
         label: "Privacy",
-        href: "/",
       },
       {
         id: "footer-item-3",
@@ -296,6 +298,7 @@ export const Default: StoryObj<SideNavProps> = {
         navHeaderText={props.navHeaderText}
         isCollapsible={props.isCollapsible}
         onCollapse={props.onCollapse}
+        onExpand={props.onExpand}
         sideNavItems={props.sideNavItems}
         footerItems={props.footerItems}
       />
