@@ -23,7 +23,7 @@
     "@storybook/theming": "^7.2.0"
   },
   "devDependencies": {
-    "@applitools/eyes-storybook": "^3.50.3",
+    "@applitools/eyes-storybook": "^3.50.6",
     "@babel/core": "^7.23.9",
     "@okta/odyssey-babel-loader": "workspace:*",
     "@okta/odyssey-lifecycle": "workspace:*",

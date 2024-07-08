@@ -36,123 +36,123 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@applitools/core-base@npm:1.14.0":
-  version: 1.14.0
-  resolution: "@applitools/core-base@npm:1.14.0"
+"@applitools/core-base@npm:1.16.0":
+  version: 1.16.0
+  resolution: "@applitools/core-base@npm:1.16.0"
   dependencies:
-    "@applitools/image": "npm:1.1.11"
-    "@applitools/logger": "npm:2.0.16"
-    "@applitools/req": "npm:1.6.7"
-    "@applitools/utils": "npm:1.7.2"
+    "@applitools/image": "npm:1.1.13"
+    "@applitools/logger": "npm:2.0.18"
+    "@applitools/req": "npm:1.7.2"
+    "@applitools/utils": "npm:1.7.4"
     abort-controller: "npm:3.0.0"
     throat: "npm:6.0.2"
-  checksum: 10/5ce8d27b0159fd731d4ea7e4521e8ca49f70ebc0013a9c8e2fd105afcfe0a4f1c729819f891be414256eec9545e92122561252fdf08484826380f80ba2b63f49
+  checksum: 10/a3376a085fb118a35bdbe11472c6f9ca84a10eac91354978bd7b3854679363aa2c58a48b1e3d5023df3af0aed94ea783a3f885b5afacd21d3afb220495acd4fe
   languageName: node
   linkType: hard
 
-"@applitools/core@npm:4.15.0":
-  version: 4.15.0
-  resolution: "@applitools/core@npm:4.15.0"
+"@applitools/core@npm:4.17.0":
+  version: 4.17.0
+  resolution: "@applitools/core@npm:4.17.0"
   dependencies:
-    "@applitools/core-base": "npm:1.14.0"
-    "@applitools/dom-capture": "npm:11.2.7"
-    "@applitools/dom-snapshot": "npm:4.11.1"
-    "@applitools/driver": "npm:1.17.2"
-    "@applitools/ec-client": "npm:1.8.5"
-    "@applitools/logger": "npm:2.0.16"
-    "@applitools/nml-client": "npm:1.8.4"
-    "@applitools/req": "npm:1.6.7"
-    "@applitools/screenshoter": "npm:3.8.31"
-    "@applitools/snippets": "npm:2.4.25"
-    "@applitools/socket": "npm:1.1.16"
-    "@applitools/spec-driver-webdriver": "npm:1.1.7"
-    "@applitools/ufg-client": "npm:1.11.2"
-    "@applitools/utils": "npm:1.7.2"
+    "@applitools/core-base": "npm:1.16.0"
+    "@applitools/dom-capture": "npm:11.3.0"
+    "@applitools/dom-snapshot": "npm:4.11.3"
+    "@applitools/driver": "npm:1.17.5"
+    "@applitools/ec-client": "npm:1.9.2"
+    "@applitools/logger": "npm:2.0.18"
+    "@applitools/nml-client": "npm:1.8.8"
+    "@applitools/req": "npm:1.7.2"
+    "@applitools/screenshoter": "npm:3.8.34"
+    "@applitools/snippets": "npm:2.4.27"
+    "@applitools/socket": "npm:1.1.18"
+    "@applitools/spec-driver-webdriver": "npm:1.1.10"
+    "@applitools/ufg-client": "npm:1.12.2"
+    "@applitools/utils": "npm:1.7.4"
     "@types/ws": "npm:8.5.5"
     abort-controller: "npm:3.0.0"
     chalk: "npm:4.1.2"
     node-fetch: "npm:2.6.7"
-    semver: "npm:7.5.4"
+    semver: "npm:7.6.2"
     webdriver: "npm:7.31.1"
     ws: "npm:8.13.0"
     yargs: "npm:17.7.2"
   bin:
     eyes: ./dist/cli/cli.js
     eyes-check-network: ./dist/troubleshoot/check-network.js
-  checksum: 10/66c79511de26b83be58018bfdd82759ca0a902fb730afc943c1740dd488a8ef1832cc2a51de6c41b2ab587d41017c9a0ace833ea75d5e5945b140044e5740e6d
+  checksum: 10/3f9357d640f51803445a2141ab1ad349a59cc370470c7ca64bc85ef64a44519c18ffeaa7ebf6fa620fd6f54b16f6a8cb15d5ca0fbd8f009b343dd9607abea029
   languageName: node
   linkType: hard
 
-"@applitools/css-tree@npm:1.1.2":
-  version: 1.1.2
-  resolution: "@applitools/css-tree@npm:1.1.2"
+"@applitools/css-tree@npm:1.1.4":
+  version: 1.1.4
+  resolution: "@applitools/css-tree@npm:1.1.4"
   dependencies:
     mdn-data: "npm:2.1.0"
     source-map-js: "npm:1.0.1"
-  checksum: 10/969967455efb72ca82d66cd75ee502da3c22da80417e74436237773adb512f281a4aab5e8c52e596f0cc7dd3cf351d02c45bab51a5060195082cd6908c654e7e
+  checksum: 10/c47ac208c3bf3104120801f25d524b9e616e2a40d5833ed97396b53cd940c678aee1d0f51a9b494def495d6ce1444c2548b19a10e2243b53e612081b0e54f448
   languageName: node
   linkType: hard
 
-"@applitools/dom-capture@npm:11.2.7":
-  version: 11.2.7
-  resolution: "@applitools/dom-capture@npm:11.2.7"
+"@applitools/dom-capture@npm:11.3.0":
+  version: 11.3.0
+  resolution: "@applitools/dom-capture@npm:11.3.0"
   dependencies:
-    "@applitools/dom-shared": "npm:1.0.13"
+    "@applitools/dom-shared": "npm:1.0.15"
     "@applitools/functional-commons": "npm:1.6.0"
-  checksum: 10/243748c992b79e7d3732750db46e8c34a1525941eddfa872c378aac478c0f80c784faeda5f2681364630cf0c90b2f2ebcbdf525fcc46f4db09af0401074fb5f9
+  checksum: 10/3abc086279061502ec2287a349df6200a89cc28ef681f0e419284cc27cc7aeded596374e38469018102cccaab02c67f4571537ed9f7b3f4ee4000d1fcd1091d4
   languageName: node
   linkType: hard
 
-"@applitools/dom-shared@npm:1.0.13":
-  version: 1.0.13
-  resolution: "@applitools/dom-shared@npm:1.0.13"
-  checksum: 10/b6dffd39c68e7aa35feabe4db8ed720395d45c1506a0cd04e0c305b01006748ac076919ed6b9ac9db89e7c2bc15ef2b73372735c6e034d72c237e4cc3fc968c9
+"@applitools/dom-shared@npm:1.0.15":
+  version: 1.0.15
+  resolution: "@applitools/dom-shared@npm:1.0.15"
+  checksum: 10/6111c2cce163262a12e443cd4818774ea29ef68fc9fbe65c47fd5c1029517c58a8c94c6e4efc65dca76bd6bd9df384f7e10b33c790ac666f60dcce9d9f794a94
   languageName: node
   linkType: hard
 
-"@applitools/dom-snapshot@npm:4.11.1":
-  version: 4.11.1
-  resolution: "@applitools/dom-snapshot@npm:4.11.1"
+"@applitools/dom-snapshot@npm:4.11.3":
+  version: 4.11.3
+  resolution: "@applitools/dom-snapshot@npm:4.11.3"
   dependencies:
-    "@applitools/css-tree": "npm:1.1.2"
-    "@applitools/dom-shared": "npm:1.0.13"
+    "@applitools/css-tree": "npm:1.1.4"
+    "@applitools/dom-shared": "npm:1.0.15"
     "@applitools/functional-commons": "npm:1.6.0"
     pako: "npm:1.0.11"
-  checksum: 10/6e4d457a36fda3990b0878bc00531ac2aa41c8c52936ee47c6269c9f1745f05ac60c89707678b23844ff6d4dc57df602ed7f17e700d54c6fccea1d80ec35bb06
+  checksum: 10/1befbcc1cd93254c3ee43d6c522946d3a95966c60d8b33fb01d547aaa3153308ed3a913287b50755aebefe685f8854c5e54f1aeb33dd0b6956e9795a7537d428
   languageName: node
   linkType: hard
 
-"@applitools/driver@npm:1.17.2":
-  version: 1.17.2
-  resolution: "@applitools/driver@npm:1.17.2"
+"@applitools/driver@npm:1.17.5":
+  version: 1.17.5
+  resolution: "@applitools/driver@npm:1.17.5"
   dependencies:
-    "@applitools/logger": "npm:2.0.16"
-    "@applitools/snippets": "npm:2.4.25"
-    "@applitools/utils": "npm:1.7.2"
-    semver: "npm:7.5.4"
-  checksum: 10/b6d93e7accb2fdbd58236f4d0c9d05db1ca14450e1d6c8a9730f8f16db959579d45d9070eb1e06276504728fe8eb41664b3cc3a86b1c0d6cc8b9c3beae6f50d6
+    "@applitools/logger": "npm:2.0.18"
+    "@applitools/snippets": "npm:2.4.27"
+    "@applitools/utils": "npm:1.7.4"
+    semver: "npm:7.6.2"
+  checksum: 10/8ddfe33c025a5dad762ec28c0d43c1f6c9ad853b007c2d4697002b31ad3149282fb1b896d6eadea0bdba6e64a861868c389fb5d57fb8bdc3e65e34b51f8c5664
   languageName: node
   linkType: hard
 
-"@applitools/ec-client@npm:1.8.5":
-  version: 1.8.5
-  resolution: "@applitools/ec-client@npm:1.8.5"
+"@applitools/ec-client@npm:1.9.2":
+  version: 1.9.2
+  resolution: "@applitools/ec-client@npm:1.9.2"
   dependencies:
-    "@applitools/core-base": "npm:1.14.0"
-    "@applitools/driver": "npm:1.17.2"
-    "@applitools/logger": "npm:2.0.16"
-    "@applitools/req": "npm:1.6.7"
-    "@applitools/socket": "npm:1.1.16"
-    "@applitools/spec-driver-webdriver": "npm:1.1.7"
-    "@applitools/tunnel-client": "npm:1.5.2"
-    "@applitools/utils": "npm:1.7.2"
+    "@applitools/core-base": "npm:1.16.0"
+    "@applitools/driver": "npm:1.17.5"
+    "@applitools/logger": "npm:2.0.18"
+    "@applitools/req": "npm:1.7.2"
+    "@applitools/socket": "npm:1.1.18"
+    "@applitools/spec-driver-webdriver": "npm:1.1.10"
+    "@applitools/tunnel-client": "npm:1.5.7"
+    "@applitools/utils": "npm:1.7.4"
     abort-controller: "npm:3.0.0"
     webdriver: "npm:7.31.1"
     yargs: "npm:^17.7.2"
   bin:
     ec-client: ./dist/cli/cli.js
     eg-client: ./dist/cli/cli.js
-  checksum: 10/3e5187023a6213e3622b72a1a225da3f0a804e0723be2486987116f70dd2046f385a7d73c9e6fb905256f131fc45394c7a10410ba7d07102a4e2aad730c7d12d
+  checksum: 10/190d110e96cac2c7d98809b87483b437bfe396fec2535c66a7cefa649b35b61ef7b72544fb730221ef27d7fb4539c5b21c7cee9c9772cd0573b135fe746dd2e8
   languageName: node
   linkType: hard
 
@@ -173,9 +173,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@applitools/execution-grid-tunnel@npm:3.0.3":
-  version: 3.0.3
-  resolution: "@applitools/execution-grid-tunnel@npm:3.0.3"
+"@applitools/execution-grid-tunnel@npm:3.0.5":
+  version: 3.0.5
+  resolution: "@applitools/execution-grid-tunnel@npm:3.0.5"
   dependencies:
     "@applitools/eg-frpc": "npm:1.0.5"
     "@applitools/eg-socks5-proxy-server": "npm:^0.5.5"
@@ -193,35 +193,35 @@ __metadata:
     uuid: "npm:^9.0.1"
   bin:
     run-execution-grid-tunnel: scripts/run-execution-grid-tunnel.js
-  checksum: 10/fd409e41cd34f81bf735fd4ec0cf4e50a371e786609ec57c4d9088d675e464def36743bf5f90a9edd14a620b9ab8ec8fa075e680f7b0ef5938878397d6e666c0
+  checksum: 10/ff26460ad957075b754fbdc335b2fcaca87de5e76af659fd629f033dbf85cdad8a29acb4a24f7c75b5a06bda6148c30101e0256333d319fdd553e4152a488cea
   languageName: node
   linkType: hard
 
-"@applitools/eyes-storybook@npm:^3.50.3":
-  version: 3.50.3
-  resolution: "@applitools/eyes-storybook@npm:3.50.3"
+"@applitools/eyes-storybook@npm:^3.50.6":
+  version: 3.50.6
+  resolution: "@applitools/eyes-storybook@npm:3.50.6"
   dependencies:
-    "@applitools/core": "npm:4.15.0"
-    "@applitools/driver": "npm:1.17.2"
+    "@applitools/core": "npm:4.17.0"
+    "@applitools/driver": "npm:1.17.5"
     "@applitools/functional-commons": "npm:1.6.0"
-    "@applitools/logger": "npm:2.0.16"
+    "@applitools/logger": "npm:2.0.18"
     "@applitools/monitoring-commons": "npm:1.0.19"
-    "@applitools/spec-driver-puppeteer": "npm:1.4.7"
-    "@applitools/ufg-client": "npm:1.11.2"
-    "@applitools/utils": "npm:1.7.2"
+    "@applitools/spec-driver-puppeteer": "npm:1.4.10"
+    "@applitools/ufg-client": "npm:1.12.2"
+    "@applitools/utils": "npm:1.7.4"
     boxen: "npm:4.2.0"
     chalk: "npm:3.0.0"
     detect-port: "npm:1.3.0"
     lodash: "npm:4.17.21"
     ora: "npm:3.4.0"
     puppeteer: "npm:21.11.0"
-    semver: "npm:7.5.4"
+    semver: "npm:7.6.2"
     strip-ansi: "npm:6.0.0"
     throat: "npm:6.0.2"
     yargs: "npm:17.7.2"
   bin:
     eyes-storybook: ./bin/eyes-storybook.js
-  checksum: 10/70213732e45ba49f63f5f3da471d9304a1e68e559e0c26e8e7b1ea5b2b573acd132f5af93b671c6d5d290e2b37cdab08a51808cbd1c231fe85302da9c8743df8
+  checksum: 10/8c9c95440e20556d60af390f895d8f5fe29634718e3ceadf48da4527479295bda39a83057cd65beadcb351661e1fbde7272e3fe7f71e53d83612ab476c32f523
   languageName: node
   linkType: hard
 
@@ -232,27 +232,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@applitools/image@npm:1.1.11":
-  version: 1.1.11
-  resolution: "@applitools/image@npm:1.1.11"
+"@applitools/image@npm:1.1.13":
+  version: 1.1.13
+  resolution: "@applitools/image@npm:1.1.13"
   dependencies:
-    "@applitools/utils": "npm:1.7.2"
+    "@applitools/utils": "npm:1.7.4"
     bmpimagejs: "npm:1.0.4"
     jpeg-js: "npm:0.4.4"
     omggif: "npm:1.0.10"
     png-async: "npm:0.9.4"
-  checksum: 10/8d5bb2fe75c1b97c5cd87917c5b4716666799f3de330c41ae334f83abd57ee541dbf38e279e6b0a87377584abf4346404cfdc27f554f09ce1a74b80268383e6a
+  checksum: 10/b11b82c332dced079f163a9debc31f5c3675c891b324561e72226c422d637c8b2c4a55e913a42a43d92f47a4819c812af3271918557bf796c6e9c72953844187
   languageName: node
   linkType: hard
 
-"@applitools/logger@npm:2.0.16":
-  version: 2.0.16
-  resolution: "@applitools/logger@npm:2.0.16"
+"@applitools/logger@npm:2.0.18":
+  version: 2.0.18
+  resolution: "@applitools/logger@npm:2.0.18"
   dependencies:
-    "@applitools/utils": "npm:1.7.2"
+    "@applitools/utils": "npm:1.7.4"
     chalk: "npm:4.1.2"
     debug: "npm:4.3.4"
-  checksum: 10/b51a40c7c949922841da7763b87a0449c98191e1075541568b58bd88bef0f732f5a898183253a7a81eeec3bb1ed3da76c0ba65a4fb084a63668a742289dbed41
+  checksum: 10/179dc26b4592ef0e65a4b259a22329ab4f18c46e4a6acb212b28e1591e33bfb7901a401eb092583500eefcc3ac3577dcc24fa12eb4ebe073aa19f81f8dbad4b5
   languageName: node
   linkType: hard
 
@@ -276,115 +276,115 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@applitools/nml-client@npm:1.8.4":
-  version: 1.8.4
-  resolution: "@applitools/nml-client@npm:1.8.4"
+"@applitools/nml-client@npm:1.8.8":
+  version: 1.8.8
+  resolution: "@applitools/nml-client@npm:1.8.8"
   dependencies:
-    "@applitools/logger": "npm:2.0.16"
-    "@applitools/req": "npm:1.6.7"
-    "@applitools/utils": "npm:1.7.2"
-  checksum: 10/d26c8c548e8f8689eb6cbc2bc24e554bc5983ebe266bfea6881e846f8998030bdd1fe13d493ad87a5917f12decc29854b00e6fdee6b7ea34f690f5d716482cc0
+    "@applitools/logger": "npm:2.0.18"
+    "@applitools/req": "npm:1.7.2"
+    "@applitools/utils": "npm:1.7.4"
+  checksum: 10/95025d7d95fd1342a15a85bbb3f30442ffb9ac039843a76fb9d6c27d2cf55e786a5451461bcc6dd300e18610ffcef95d9a9f2812a0d24c8bb3d26272dfa5335b
   languageName: node
   linkType: hard
 
-"@applitools/req@npm:1.6.7":
-  version: 1.6.7
-  resolution: "@applitools/req@npm:1.6.7"
+"@applitools/req@npm:1.7.2":
+  version: 1.7.2
+  resolution: "@applitools/req@npm:1.7.2"
   dependencies:
-    "@applitools/utils": "npm:1.7.2"
+    "@applitools/utils": "npm:1.7.4"
     abort-controller: "npm:3.0.0"
     http-proxy-agent: "npm:5.0.0"
     https-proxy-agent: "npm:5.0.1"
     node-fetch: "npm:3.3.1"
-  checksum: 10/f66e6a6bab273928e92d507868379458f03ce51e0c8b5b36f7c2fabc6335c1c196cafc45869487302fb8c2978126abdf1a016d3aef986dd99b895fa00cd044bc
+  checksum: 10/afb0dbb0442335a5aca11286cd4e045ea9d3029132e1a0d220dbdfd8534e24727a531bbf597e95b8729812df22587b4b04a9347cfeddcb0b1d3e96eddd10c29e
   languageName: node
   linkType: hard
 
-"@applitools/screenshoter@npm:3.8.31":
-  version: 3.8.31
-  resolution: "@applitools/screenshoter@npm:3.8.31"
+"@applitools/screenshoter@npm:3.8.34":
+  version: 3.8.34
+  resolution: "@applitools/screenshoter@npm:3.8.34"
   dependencies:
-    "@applitools/image": "npm:1.1.11"
-    "@applitools/logger": "npm:2.0.16"
-    "@applitools/snippets": "npm:2.4.25"
-    "@applitools/utils": "npm:1.7.2"
-  checksum: 10/c52c6322c0ebbd5d223dc27163376a6611a1caffe199fafe0c9eb881f988f23b2ff7b22c0c8b9a9fdf8a0ec293ce0b6a3eace6530d588ed21baa6fa7bf3cd4ca
+    "@applitools/image": "npm:1.1.13"
+    "@applitools/logger": "npm:2.0.18"
+    "@applitools/snippets": "npm:2.4.27"
+    "@applitools/utils": "npm:1.7.4"
+  checksum: 10/b897244a04d349be3056db6cec20e26fdac934e894e2d6643d3365c932a372277cb723257a8a29f36703e756e117867cacd27bdc8e61bbfe594e5fba0c1d0187
   languageName: node
   linkType: hard
 
-"@applitools/snippets@npm:2.4.25":
-  version: 2.4.25
-  resolution: "@applitools/snippets@npm:2.4.25"
-  checksum: 10/c6a7f6bcc64ed02088e560b60034974b7e13b7d7d80e1b68d74899baa39e7ebe4991a9278a3dfcbdd4814d4223feab8d6991209d562d6d7c42fc98cff88ad02a
+"@applitools/snippets@npm:2.4.27":
+  version: 2.4.27
+  resolution: "@applitools/snippets@npm:2.4.27"
+  checksum: 10/d042b8a3cf267bc5fb6b8359e065fc491fbfff95c0a257a366cca118ebb913e9b553fc840f5d3f16a58e124d44bdd5b697ef4606caaa393fca14e368b64df9c6
   languageName: node
   linkType: hard
 
-"@applitools/socket@npm:1.1.16":
-  version: 1.1.16
-  resolution: "@applitools/socket@npm:1.1.16"
+"@applitools/socket@npm:1.1.18":
+  version: 1.1.18
+  resolution: "@applitools/socket@npm:1.1.18"
   dependencies:
-    "@applitools/logger": "npm:2.0.16"
-    "@applitools/utils": "npm:1.7.2"
-  checksum: 10/507ee0a3421c0e09eba90961a51c5dc37228f42aa62f4d517905c3a4faa7b2458742f436d8259d28bfe403896fea40fa1d165c10892a8ca468517bdf2e1b96ba
+    "@applitools/logger": "npm:2.0.18"
+    "@applitools/utils": "npm:1.7.4"
+  checksum: 10/25847fca32a0279f2f180e2e7f43a5a899cbf5694828696fbf62121942437f1461e0c62fc7b7ea0d95524b54572c5555bf5c29b9a71644931ab6305b5314d932
   languageName: node
   linkType: hard
 
-"@applitools/spec-driver-puppeteer@npm:1.4.7":
-  version: 1.4.7
-  resolution: "@applitools/spec-driver-puppeteer@npm:1.4.7"
+"@applitools/spec-driver-puppeteer@npm:1.4.10":
+  version: 1.4.10
+  resolution: "@applitools/spec-driver-puppeteer@npm:1.4.10"
   dependencies:
-    "@applitools/driver": "npm:1.17.2"
-    "@applitools/utils": "npm:1.7.2"
+    "@applitools/driver": "npm:1.17.5"
+    "@applitools/utils": "npm:1.7.4"
   peerDependencies:
     puppeteer: ">=5.3.0"
-  checksum: 10/f7b1f4c4e5f33875f3e9dc7a5c1cafa905cf36974df3e330d076e61a18185fe11f5a604922e4864fe9172e1615c027c25868a7d3432b6cdecdbfa8db45662573
+  checksum: 10/4e3bb2d5883d6f1060ebf1acd560d4c76458a13f39fcaa6bffa44f15e0850d1f03a3fd620f5c23c38a552ec68e0c3f31c493fffa00733f2f16d8dd9ea29bfa15
   languageName: node
   linkType: hard
 
-"@applitools/spec-driver-webdriver@npm:1.1.7":
-  version: 1.1.7
-  resolution: "@applitools/spec-driver-webdriver@npm:1.1.7"
+"@applitools/spec-driver-webdriver@npm:1.1.10":
+  version: 1.1.10
+  resolution: "@applitools/spec-driver-webdriver@npm:1.1.10"
   dependencies:
-    "@applitools/driver": "npm:1.17.2"
-    "@applitools/utils": "npm:1.7.2"
+    "@applitools/driver": "npm:1.17.5"
+    "@applitools/utils": "npm:1.7.4"
     http-proxy-agent: "npm:5.0.0"
     https-proxy-agent: "npm:5.0.1"
   peerDependencies:
     webdriver: ">=6.0.0"
-  checksum: 10/aefc47b19f468647c92f18ed3eee0d0e71a87bb320d39f9d084e6d3ea7b0fc1c78fbd6d8f9a7897d5caf989bfa725f9065ad5a7ce49da7769440bee9871a0ef8
+  checksum: 10/5d4d70bf22a3ee150b696a4609613a09e06b93980be6580300bcd76a3b0b5be1b0aba3a70e474cfedefa4dddd6b55ea77064543af364204c97d1b5d3a7a19c0e
   languageName: node
   linkType: hard
 
-"@applitools/tunnel-client@npm:1.5.2":
-  version: 1.5.2
-  resolution: "@applitools/tunnel-client@npm:1.5.2"
+"@applitools/tunnel-client@npm:1.5.7":
+  version: 1.5.7
+  resolution: "@applitools/tunnel-client@npm:1.5.7"
   dependencies:
-    "@applitools/execution-grid-tunnel": "npm:3.0.3"
-    "@applitools/logger": "npm:2.0.16"
-    "@applitools/req": "npm:1.6.7"
-    "@applitools/socket": "npm:1.1.16"
-    "@applitools/utils": "npm:1.7.2"
+    "@applitools/execution-grid-tunnel": "npm:3.0.5"
+    "@applitools/logger": "npm:2.0.18"
+    "@applitools/req": "npm:1.7.2"
+    "@applitools/socket": "npm:1.1.18"
+    "@applitools/utils": "npm:1.7.4"
     abort-controller: "npm:3.0.0"
     yargs: "npm:17.7.2"
   bin:
     tunnel-client: ./dist/cli/cli.js
-  checksum: 10/e844041aa5a04108c17cc677526d2e492cb4e9c51b4db77543acdb500cc886ba017fc9985e101b1a8b4804d2f93be5cf2cc6eadf4965c7be3dd2ae359b71541c
+  checksum: 10/5061db49de474b107a7fa26697e6405d0421ef8650c3376717500173c2e6d68a0cde876bc11182b0882d2f122dc5dcbeb1fb6a4434fcc4990a21f7120689a958
   languageName: node
   linkType: hard
 
-"@applitools/ufg-client@npm:1.11.2":
-  version: 1.11.2
-  resolution: "@applitools/ufg-client@npm:1.11.2"
+"@applitools/ufg-client@npm:1.12.2":
+  version: 1.12.2
+  resolution: "@applitools/ufg-client@npm:1.12.2"
   dependencies:
-    "@applitools/css-tree": "npm:1.1.2"
-    "@applitools/image": "npm:1.1.11"
-    "@applitools/logger": "npm:2.0.16"
-    "@applitools/req": "npm:1.6.7"
-    "@applitools/utils": "npm:1.7.2"
+    "@applitools/css-tree": "npm:1.1.4"
+    "@applitools/image": "npm:1.1.13"
+    "@applitools/logger": "npm:2.0.18"
+    "@applitools/req": "npm:1.7.2"
+    "@applitools/utils": "npm:1.7.4"
     "@xmldom/xmldom": "npm:0.8.10"
     abort-controller: "npm:3.0.0"
     throat: "npm:6.0.2"
-  checksum: 10/3aba213df0523142045f6d502b4a49f658425a4223f954aa782dea57b762fde2c3ff647009681808e5b9ffa3ef46b9617e53b765544b0888a63646c803bde69d
+  checksum: 10/fbcfd2af986679ab9e09395ae978e84beda42f93161870969a765917e28fd3f0966645d6302c77316b9259aca13654425e8198e875c04c957910ded9bab74e27
   languageName: node
   linkType: hard
 
@@ -395,10 +395,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@applitools/utils@npm:1.7.2":
-  version: 1.7.2
-  resolution: "@applitools/utils@npm:1.7.2"
-  checksum: 10/b64dcb722a57d758d2b3b55a2190223d0a8e7d02288aa0fd7ef04a4957287a3cd3f080b4083cfe2dc24020fd112278f784370e6c7cba3f99e5e72d98e81c60e5
+"@applitools/utils@npm:1.7.4":
+  version: 1.7.4
+  resolution: "@applitools/utils@npm:1.7.4"
+  checksum: 10/f4162e9234e4e772c5b16d6cb49720a5936ffbebe02821c24339e7661b1ce11d162627d5d5dc8848113c811508b2805303d67a5f2b1c79fe895a311ca6772598
   languageName: node
   linkType: hard
 
@@ -5312,7 +5312,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-storybook@workspace:packages/odyssey-storybook"
   dependencies:
-    "@applitools/eyes-storybook": "npm:^3.50.3"
+    "@applitools/eyes-storybook": "npm:^3.50.6"
     "@babel/core": "npm:^7.23.9"
     "@emotion/react": "npm:^11.11.0"
     "@emotion/styled": "npm:^11.11.0"
@@ -23181,6 +23181,15 @@ __metadata:
   bin:
     semver: bin/semver.js
   checksum: 10/1b41018df2d8aca5a1db4729985e8e20428c650daea60fcd16e926e9383217d00f574fab92d79612771884a98d2ee2a1973f49d630829a8d54d6570defe62535
+  languageName: node
+  linkType: hard
+
+"semver@npm:7.6.2":
+  version: 7.6.2
+  resolution: "semver@npm:7.6.2"
+  bin:
+    semver: bin/semver.js
+  checksum: 10/296b17d027f57a87ef645e9c725bff4865a38dfc9caf29b26aa084b85820972fbe7372caea1ba6857162fa990702c6d9c1d82297cecb72d56c78ab29070d2ca2
   languageName: node
   linkType: hard
 
