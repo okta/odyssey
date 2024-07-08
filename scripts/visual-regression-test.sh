@@ -24,6 +24,15 @@ if ! setup_service google-chrome-stable ${DEFAULT_CHROME_VERSION} ; then
   echo "failure" > ${setup_chrome_status_file}
 fi
 
+if ! wget https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip ; then
+  echo "failure" > ${setup_chrome_status_file}
+fi
+
+unzip chromedriver_linux64.zip
+sudo mv chromedriver /usr/local/bin/
+sudo chmod +x /usr/local/bin/chromedriver
+rm chromedriver_linux64.zip
+
 if ! yarn workspace @okta/odyssey-storybook ci:visualRegressionTest; then
   echo "lerna tests failed! Exiting..."
   exit ${PUBLISH_TYPE_AND_RESULT_DIR_BUT_ALWAYS_FAIL}
