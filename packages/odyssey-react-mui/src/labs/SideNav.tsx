@@ -42,11 +42,8 @@ export type SideNavItem = {
    */
   endIcon?: ReactElement;
   /**
-   * Whether the item is expanded by default
-   */
-  isDefaultExpanded?: boolean;
-  /**
-   * Whether the item is disabled
+   * Whether the item is disabled. When set to true the nav item is set to Disabled color,
+   * the link/item is not clickable, and item with children is not expandable.
    */
   isDisabled?: boolean;
   /**
@@ -81,20 +78,34 @@ export type SideNavItem = {
       isSectionHeader: true;
       href?: never;
       children?: never;
+      isDefaultExpanded?: never;
+      isExpanded?: never;
     }
   | {
       /**
-       * href link of the nav item
+       * link added to the nav item. if it is undefined, static text will be displayed.
+       * fires onClick event when it is passed
        */
       href: string;
-      isSectionHeader?: never;
       children?: never;
+      isSectionHeader?: never;
+      isDefaultExpanded?: never;
+      isExpanded?: never;
     }
   | {
       /**
-       * An array of side nav items to be displayed as children of an Accordion
+       * An array of side nav items to be displayed as children within Accordion
        */
       children?: SideNavItem[];
+      /**
+       * Whether the accordion (nav item with children) is expanded by default
+       */
+      isDefaultExpanded?: boolean;
+      /**
+       * If true, expands the accordion, otherwise collapse it.
+       * Setting this prop enables control over the accordion.
+       */
+      isExpanded?: boolean;
       isSectionHeader?: never;
       href?: never;
     }
@@ -303,7 +314,7 @@ const SideNavListItemContainer = styled("li", {
   cursor: isDisabled ? "default" : "pointer",
   pointerEvents: isDisabled ? "none" : "auto",
   backgroundColor: isSelected ? odysseyDesignTokens.HueNeutral50 : "unset",
-  margin: "4px 0",
+  margin: `${odysseyDesignTokens.Spacing1} 0`,
   "&:last-child": {
     marginBottom: odysseyDesignTokens.Spacing2,
   },
@@ -324,7 +335,7 @@ const SideNavListItemContainer = styled("li", {
   "& a:focus-visible": {
     outlineOffset: 0,
     borderRadius: 0,
-    outlineWidth: "2px",
+    outlineWidth: odysseyDesignTokens.FocusOutlineWidthMain,
     backgroundColor: !isDisabled ? odysseyDesignTokens.HueNeutral50 : "inherit",
   },
 }));
@@ -583,14 +594,14 @@ const SideNav = ({
     onCollapse?.();
   }, [isSideNavCollapsed, setSideNavCollapsed, onCollapse]);
 
-  const sideNavExpandeClickHandler = useCallback(() => {
+  const sideNavExpandClickHandler = useCallback(() => {
     setSideNavCollapsed(!isSideNavCollapsed);
     onExpand?.();
   }, [isSideNavCollapsed, setSideNavCollapsed, onExpand]);
 
   const sideNavExpandKeyHandler = useCallback(
     (event: KeyboardEvent<HTMLDivElement>) => {
-      if (event?.key === "Enter") {
+      if (event?.key === "Enter" || event?.code === "Space") {
         event.preventDefault();
         setSideNavCollapsed(!isSideNavCollapsed);
         onExpand?.();
@@ -647,7 +658,7 @@ const SideNav = ({
         role="button"
         odysseyDesignTokens={odysseyDesignTokens}
         isSideNavCollapsed={isSideNavCollapsed}
-        onClick={sideNavExpandeClickHandler}
+        onClick={sideNavExpandClickHandler}
         onKeyDown={sideNavExpandKeyHandler}
         data-testid="collapsed-region"
         data-aria-label="expand side navigation"
@@ -677,6 +688,7 @@ const SideNav = ({
                 children,
                 isDefaultExpanded,
                 isDisabled,
+                isExpanded,
               } = item;
 
               if (isSectionHeader) {
@@ -699,6 +711,7 @@ const SideNav = ({
                     <NavAccordion
                       label={label}
                       isDefaultExpanded={isDefaultExpanded}
+                      isExpanded={isExpanded}
                       startIcon={startIcon}
                       isDisabled={isDisabled}
                     >

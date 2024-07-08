@@ -97,9 +97,7 @@ const storybookMeta: Meta<SideNavProps> = {
         id: "AddNewFolder",
         label: "Add new folder",
         endIcon: <AddCircleIcon />,
-        onClick: () => {
-          console.log("adding new folder");
-        },
+        onClick: () => {},
       },
       {
         id: "item0-0",
@@ -173,7 +171,6 @@ const storybookMeta: Meta<SideNavProps> = {
         href: "/",
         label: "Applications",
         startIcon: <AppsIcon />,
-        isSelected: true,
       },
       {
         id: "item0-1-2",
@@ -250,6 +247,7 @@ const storybookMeta: Meta<SideNavProps> = {
           {
             id: "item4-2",
             href: "/",
+            isSelected: true,
             label: "Custom Domain",
             startIcon: <CloseIcon />,
             endIcon: <CopyIcon />,

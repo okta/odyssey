@@ -50,7 +50,8 @@ export type NavAccordionProps = {
    */
   isDisabled?: boolean;
   /**
-   * Whether the item is expanded
+   * If true, expands the accordion, otherwise collapse it.
+   * Setting this prop enables control over the accordion.
    */
   isExpanded?: boolean;
   /**
@@ -61,17 +62,7 @@ export type NavAccordionProps = {
    * The icon element to display at the start of the Nav Item
    */
   startIcon?: ReactNode;
-} & (
-  | {
-      isExpanded?: boolean;
-      isDefaultExpanded?: never;
-    }
-  | {
-      isDefaultExpanded?: boolean;
-      isExpanded?: never;
-    }
-) &
-  Pick<HtmlProps, "testId" | "translate">;
+} & Pick<HtmlProps, "testId" | "translate">;
 
 const AccordionLabelContainer = styled("span", {
   shouldForwardProp: (prop) =>
