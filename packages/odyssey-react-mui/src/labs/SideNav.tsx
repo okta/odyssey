@@ -15,7 +15,6 @@ import {
   memo,
   useMemo,
   useState,
-  MouseEvent,
   ReactElement,
   ReactNode,
   useCallback,
@@ -47,10 +46,6 @@ export type SideNavItem = {
    */
   isDefaultExpanded?: boolean;
   /**
-   * Whether the item is expanded
-   */
-  isExpanded?: boolean;
-  /**
    * Whether the item is disabled
    */
   isDisabled?: boolean;
@@ -61,7 +56,7 @@ export type SideNavItem = {
   /**
    * Event fired when the nav item is clicked
    */
-  onClick?(event: MouseEvent<HTMLAnchorElement>): void;
+  onClick?(): void;
   /**
    * The status element to display after the label
    */
@@ -88,15 +83,20 @@ export type SideNavItem = {
       children?: never;
     }
   | {
-      isSectionHeader?: false;
       /**
        * href link of the nav item
        */
       href: string;
+      isSectionHeader?: never;
+      children?: never;
+    }
+  | {
       /**
        * An array of side nav items to be displayed as children of an Accordion
        */
       children?: SideNavItem[];
+      isSectionHeader?: never;
+      href?: never;
     }
 );
 
@@ -311,7 +311,7 @@ const SideNavListItemContainer = styled("li", {
     display: "flex",
     alignItems: "center",
     width: "100%",
-    minHeight: "45px",
+    minHeight: "48px",
     padding: `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
     color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
     pointerEvents: isDisabled ? "none" : "auto",
@@ -416,6 +416,35 @@ const SideNavItemContent = ({
 >) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
+  const NavItemContentClickContainer = styled("div", {
+    shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+  })(() => ({
+    display: "flex",
+    alignItems: "center",
+    width: "100%",
+    minHeight: "48px",
+    padding: `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
+    color: `${isDisabled ? odysseyDesignTokens.TypographyColorDisabled : odysseyDesignTokens.TypographyColorHeading} !important`,
+    "&:focus-visible": {
+      borderRadius: 0,
+      outlineColor: odysseyDesignTokens.FocusOutlineColorPrimary,
+      outlineStyle: odysseyDesignTokens.FocusOutlineStyle,
+      outlineWidth: odysseyDesignTokens.FocusOutlineWidthMain,
+      backgroundColor: odysseyDesignTokens.HueNeutral50,
+      textDecoration: "none",
+    },
+  }));
+
+  const sideNavItemContentKeyHandler = useCallback(
+    (event: KeyboardEvent<HTMLDivElement>) => {
+      if (event?.key === "Enter") {
+        event.preventDefault();
+        onClick?.();
+      }
+    },
+    [onClick],
+  );
+
   const sideNavItemContent = useMemo(() => {
     return (
       <SideNavListItemContainer
@@ -428,17 +457,23 @@ const SideNavItemContent = ({
         odysseyDesignTokens={odysseyDesignTokens}
       >
         {
-          // Use Link for accessible nav items and div for disabled items
+          // Use Link for nav items with links and div for disabled or non-link items
           isDisabled ? (
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                width: "100%",
-                minHeight: "45px",
-                padding: `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
-                color: `${odysseyDesignTokens.TypographyColorDisabled} !important`,
-              }}
+            <NavItemContentClickContainer>
+              <SideNavItemLinkContent
+                label={label}
+                startIcon={startIcon}
+                endIcon={endIcon}
+                statusLabel={statusLabel}
+                severity={severity}
+              />
+            </NavItemContentClickContainer>
+          ) : !href ? (
+            <NavItemContentClickContainer
+              role="button"
+              tabIndex={0}
+              onClick={onClick}
+              onKeyDown={sideNavItemContentKeyHandler}
             >
               <SideNavItemLinkContent
                 label={label}
@@ -447,9 +482,9 @@ const SideNavItemContent = ({
                 statusLabel={statusLabel}
                 severity={severity}
               />
-            </Box>
+            </NavItemContentClickContainer>
           ) : (
-            <Link href={href || ""} target={target} onClick={onClick}>
+            <Link href={href} target={target} onClick={onClick}>
               <SideNavItemLinkContent
                 label={label}
                 startIcon={startIcon}
@@ -474,6 +509,7 @@ const SideNavItemContent = ({
     onClick,
     isSelected,
     isDisabled,
+    NavItemContentClickContainer,
     odysseyDesignTokens,
   ]);
 
@@ -551,9 +587,10 @@ const SideNav = ({
     onExpand?.();
   }, [isSideNavCollapsed, setSideNavCollapsed, onExpand]);
 
-  const sideNavExpandeKeyHandler = useCallback(
+  const sideNavExpandKeyHandler = useCallback(
     (event: KeyboardEvent<HTMLDivElement>) => {
-      if (event?.key === "Enter" || event?.code === "Space") {
+      if (event?.key === "Enter") {
+        event.preventDefault();
         setSideNavCollapsed(!isSideNavCollapsed);
         onExpand?.();
       }
@@ -610,7 +647,7 @@ const SideNav = ({
         odysseyDesignTokens={odysseyDesignTokens}
         isSideNavCollapsed={isSideNavCollapsed}
         onClick={sideNavExpandeClickHandler}
-        onKeyDown={sideNavExpandeKeyHandler}
+        onKeyDown={sideNavExpandKeyHandler}
         data-testid="collapsed-region"
         data-aria-label="expand side navigation"
       >

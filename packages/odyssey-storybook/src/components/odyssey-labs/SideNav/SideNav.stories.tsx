@@ -95,9 +95,11 @@ const storybookMeta: Meta<SideNavProps> = {
     sideNavItems: [
       {
         id: "AddNewFolder",
-        href: "/?path=/story/labs-components-switch--default",
         label: "Add new folder",
         endIcon: <AddCircleIcon />,
+        onClick: () => {
+          console.log("adding new folder");
+        },
       },
       {
         id: "item0-0",
@@ -106,13 +108,12 @@ const storybookMeta: Meta<SideNavProps> = {
       },
       {
         id: "item0-1",
-        href: "/",
+        href: "/?path=/story/labs-components-switch--default",
         label: "Users",
         startIcon: <UserIcon />,
       },
       {
         id: "item1",
-        href: "/",
         label: "Dashboard",
         startIcon: <HomeIcon />,
         isDisabled: true,
@@ -123,6 +124,13 @@ const storybookMeta: Meta<SideNavProps> = {
             label: "Home",
             startIcon: <CheckIcon />,
           },
+        ],
+      },
+      {
+        id: "item001",
+        label: "Onboarding",
+        startIcon: <CalendarIcon />,
+        children: [
           {
             id: "item1-2",
             href: "/",
@@ -222,7 +230,6 @@ const storybookMeta: Meta<SideNavProps> = {
       },
       {
         id: "item4",
-        href: "/",
         label: "Settings",
         startIcon: <SettingsIcon />,
         isDefaultExpanded: true,
