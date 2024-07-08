@@ -454,12 +454,14 @@ export const components = ({
           padding: odysseyTokens.Spacing1,
           marginRight: "unset",
         },
-        popper: {
+        popper: ({ ownerState }) => ({
           background: "transparent",
           paddingBlockStart: odysseyTokens.Spacing1,
-          height: "100%",
-          maxHeight: "40vh",
-        },
+          ...(ownerState.ListboxComponent !== undefined && {
+            height: "100%",
+            maxHeight: "40vh",
+          }),
+        }),
         paper: ({ ownerState }) => ({
           /**
            * ListboxComponent is used when `isVirtualized` prop is true.
