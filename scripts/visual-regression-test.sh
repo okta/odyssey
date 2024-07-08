@@ -18,7 +18,7 @@ if [[ -z "$APPLITOOLS_API_KEY" ]]; then
   exit 1
 fi
 
-export DEFAULT_CHROME_VERSION="125.0.6422.60-1"
+export DEFAULT_CHROME_VERSION="126.0.6478.55-1"
 
 if ! setup_service google-chrome-stable ${DEFAULT_CHROME_VERSION} ; then
   echo "failure" > ${setup_chrome_status_file}
