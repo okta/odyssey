@@ -13,6 +13,7 @@ echo "COMMIT_MSG=${{ github.event.head_commit.message || github.event.pull_reque
 
 yarn build && cd ./packages/odyssey-storybook && rm -rf ./node_modules/.cache && yarn build
 
+## TODO Check this against what's in that RELEASE_ODYSSEY script. That'll be how to do it in Bacon, no the GitHub Actions code copied into this file.
 aws s3 sync ./packages/odyssey-storybook/dist/ s3://ods.dev/$SHA7 --delete
 
 bash ./notify-slack.sh
