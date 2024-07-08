@@ -510,6 +510,7 @@ const SideNavItemContent = ({
     isSelected,
     isDisabled,
     NavItemContentClickContainer,
+    sideNavItemContentKeyHandler,
     odysseyDesignTokens,
   ]);
 
