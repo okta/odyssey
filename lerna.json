@@ -4,5 +4,5 @@
   "npmClient": "yarn",
   "packages": ["packages/*"],
   "useNx": false,
-  "version": "1.17.1"
+  "version": "1.19.0"
 }

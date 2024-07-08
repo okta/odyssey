@@ -89,6 +89,12 @@ export type DataFilter = {
    */
   id: Exclude<MRT_ColumnDef<MRT_RowData>["accessorKey"], undefined>;
   /**
+   * `Autocomplete` normally only allows values that exist in the list box. This feature allows you to enter in any value in the text field and have that be the stored value in `Autocomplete`
+   *
+   * NOTE: This only applies when `variant` is `autocomplete`
+   */
+  isCustomValueAllowed?: boolean;
+  /**
    * The human-friendly name of the filter.
    */
   label: string;
@@ -277,10 +283,9 @@ const DataFilters = ({
 
   const [searchValue, setSearchValue] = useState<string>(defaultSearchTerm);
 
-  const activeFilters = useMemo(
-    () => filters.filter((filter) => filter.value),
-    [filters],
-  );
+  const activeFilters = useMemo(() => {
+    return filters.filter((filter) => filter.value);
+  }, [filters]);
 
   const [isFiltersMenuOpen, setIsFiltersMenuOpen] = useState<boolean>(false);
 
@@ -332,11 +337,14 @@ const DataFilters = ({
 
   const updateFilters = useCallback<UpdateFiltersOrValues>(
     ({ filterId, value }) => {
+      setInputValues((prevInputValues) => ({
+        ...prevInputValues,
+        [filterId]: value,
+      }));
       const updatedFilters = filtersProp.map((filter) => ({
         ...filter,
         value: filter.id === filterId ? value : inputValues[filter.id],
       }));
-
       setFilters(updatedFilters);
     },
     [inputValues, filtersProp],
@@ -535,13 +543,13 @@ const DataFilters = ({
     ],
   );
 
-  const autoCompleteValue = useMemo(() => {
-    if (filterPopoverCurrentFilter?.id) {
-      return [...(inputValues[filterPopoverCurrentFilter.id] as Option[])];
-    }
-
-    return undefined;
-  }, [filterPopoverCurrentFilter]);
+  const autoCompleteValue = useMemo(
+    () =>
+      filterPopoverCurrentFilter?.id
+        ? (inputValues[filterPopoverCurrentFilter.id] as Option[])
+        : undefined,
+    [filterPopoverCurrentFilter, inputValues],
+  );
 
   return (
     <Box>
@@ -604,6 +612,9 @@ const DataFilters = ({
                               <AutocompleteInnerContainer>
                                 <Autocomplete
                                   hasMultipleChoices
+                                  isCustomValueAllowed={
+                                    filterPopoverCurrentFilter?.isCustomValueAllowed
+                                  }
                                   label={filterPopoverCurrentFilter.label}
                                   value={autoCompleteValue}
                                   onChange={(_, value) => {
