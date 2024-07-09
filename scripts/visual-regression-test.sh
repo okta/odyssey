@@ -25,7 +25,6 @@ if ! setup_service google-chrome-stable ${CHROME_VERSION}-1 ; then
   echo "failure" > ${setup_chrome_status_file}
 fi
 
-#if ! wget https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip ; then
 if ! wget https://artifacts.aue1e.internal/artifactory/thirdparty-yum/x86_64/chrome-sel3/${CHROME_VERSION}-1/webdriver/${CHROME_VERSION}/chromedriver-linux64.zip ; then
   echo "failure" > ${setup_chrome_status_file}
 fi
