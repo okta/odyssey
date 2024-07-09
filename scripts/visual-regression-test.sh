@@ -18,6 +18,7 @@ if [[ -z "$APPLITOOLS_API_KEY" ]]; then
   exit 1
 fi
 
+export APPLITOOLS_SHOW_LOGS=true
 export CHROME_VERSION="126.0.6478.55"
 
 if ! setup_service google-chrome-stable ${CHROME_VERSION}-1 ; then
