@@ -36,9 +36,10 @@ rm chromedriver_linux64.zip
 
 useradd -m -s /bin/bash regressionuser
 su - regressionuser
+echo "$(whoami)"
 
-if ! yarn workspace @okta/odyssey-storybook ci:visualRegressionTest; then
-  echo "lerna tests failed! Exiting..."
+if ! su - regressionuser -c "yarn workspace @okta/odyssey-storybook ci:visualRegressionTest"; then
+  echo "Applitools Visual Regression Tests failed! Exiting..."
   exit ${PUBLISH_TYPE_AND_RESULT_DIR_BUT_ALWAYS_FAIL}
 fi
 
