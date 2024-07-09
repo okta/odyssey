@@ -30,6 +30,7 @@ module.exports = {
   exitcode: true,
   matchLevel: "Strict",
   parentBranchName,
+  puppeteerOptions: { args: ["--no-sandbox"] },
   serverUrl: "https://oktaeyes.applitools.com",
   showLogs: true,
   showStorybookOutput: true,
