@@ -35,6 +35,9 @@ sudo mv chromedriver /usr/local/bin/
 sudo chmod +x /usr/local/bin/chromedriver
 rm chromedriver_linux64.zip
 
+useradd -m -s /bin/bash regressionuser
+su - regressionuser
+
 if ! yarn workspace @okta/odyssey-storybook ci:visualRegressionTest; then
   echo "lerna tests failed! Exiting..."
   exit ${PUBLISH_TYPE_AND_RESULT_DIR_BUT_ALWAYS_FAIL}
