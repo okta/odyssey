@@ -30,7 +30,7 @@ module.exports = {
   exitcode: true,
   matchLevel: "Strict",
   parentBranchName,
-  puppeteerOptions: { args: ["--no-sandbox"] },
+  puppeteerOptions: { args: ["--no-sandbox", "--disable-setuid-sandbox"] },
   serverUrl: "https://oktaeyes.applitools.com",
   showLogs: true,
   showStorybookOutput: true,
