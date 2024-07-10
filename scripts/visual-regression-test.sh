@@ -30,15 +30,11 @@ if ! wget https://artifacts.aue1e.internal/artifactory/thirdparty-yum/x86_64/chr
 fi
 
 unzip chromedriver_linux64.zip
-mv chromedriver /usr/local/bin/
-chmod +x /usr/local/bin/chromedriver
+mv chromedriver_linux64 /usr/local/bin/
+chmod +x /usr/local/bin/chromedriver_linux64
 rm chromedriver_linux64.zip
 
-useradd -m -s /bin/bash regressionuser
-su - regressionuser
-echo "$(whoami)"
-
-if ! su - regressionuser -c "yarn workspace @okta/odyssey-storybook ci:visualRegressionTest"; then
+if ! yarn workspace @okta/odyssey-storybook ci:visualRegressionTest; then
   echo "Applitools Visual Regression Tests failed! Exiting..."
   exit ${PUBLISH_TYPE_AND_RESULT_DIR_BUT_ALWAYS_FAIL}
 fi
