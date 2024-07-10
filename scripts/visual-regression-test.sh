@@ -30,8 +30,8 @@ if ! wget https://artifacts.aue1e.internal/artifactory/thirdparty-yum/x86_64/chr
 fi
 
 unzip chromedriver_linux64.zip
-sudo mv chromedriver /usr/local/bin/
-sudo chmod +x /usr/local/bin/chromedriver
+mv chromedriver /usr/local/bin/
+chmod +x /usr/local/bin/chromedriver
 rm chromedriver_linux64.zip
 
 useradd -m -s /bin/bash regressionuser
