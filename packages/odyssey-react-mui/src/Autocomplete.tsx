@@ -471,6 +471,7 @@ const Autocomplete = <
       // AutoComplete is wrapped in a div within MUI which does not get the disabled attr. So this aria-disabled gets set in the div
       aria-disabled={isDisabled}
       clearText={t("clear.text")}
+      closeText={t("close.text")}
       disableCloseOnSelect={hasMultipleChoices}
       disabled={isDisabled}
       freeSolo={isCustomValueAllowed}
@@ -484,6 +485,7 @@ const Autocomplete = <
       onChange={onChange}
       onInputChange={onInputChange}
       onFocus={onFocus}
+      // openText={t("open.text")} // OKTA-747967 Uncomment this line after translation is received
       options={options}
       readOnly={isReadOnly}
       renderInput={renderInput}
