@@ -601,10 +601,11 @@ const DataTable = ({
       </Box>
     );
   }, [
-    tableInnerContainerWidth,
     emptyPlaceholder,
-    noResultsPlaceholder,
     isEmpty,
+    noResultsPlaceholder,
+    t,
+    tableInnerContainerWidth,
   ]);
 
   const columnIds = useMemo(() => {
@@ -776,7 +777,15 @@ const DataTable = ({
         setIsLoading(false);
       }
     })();
-  }, [pagination, columnSorting, search, filters, getData, errorMessageProp]);
+  }, [
+    columnSorting,
+    errorMessageProp,
+    filters,
+    getData,
+    pagination,
+    search,
+    t,
+  ]);
 
   useEffect(() => {
     if (!initialFilters && filters) {
