@@ -37,7 +37,7 @@ import { tableCellClasses } from "@mui/material/TableCell";
 import { tooltipClasses } from "@mui/material/Tooltip";
 import { typographyClasses } from "@mui/material/Typography";
 
-import { TILE_IMAGE_HEIGHT } from "../Tile";
+import { CARD_IMAGE_HEIGHT } from "../Card";
 
 import {
   CheckCircleFilledIcon,
@@ -101,6 +101,10 @@ export const components = ({
             borderBottomStyle: "solid",
             borderBottomWidth: odysseyTokens.BorderWidthMain,
           },
+          "&.nav-accordion": {
+            border: "0 !important",
+            width: "100%",
+          },
         }),
       },
     },
@@ -121,6 +125,20 @@ export const components = ({
             outlineStyle: "solid",
             zIndex: 1,
           },
+          svg: {
+            fontSize: "1.2em",
+            height: "1em",
+            position: "relative",
+            insetBlockStart: "-0.0625em",
+            verticalAlign: "middle",
+            width: "1em",
+          },
+          "&.nav-accordion-summary": {
+            padding: `${odysseyTokens.Spacing2} ${odysseyTokens.Spacing4}`,
+            ".MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
+              transform: "rotate(-90deg) !important",
+            },
+          },
         }),
         content: () => ({
           marginBlock: 0,
@@ -137,6 +155,11 @@ export const components = ({
         root: () => ({
           paddingInline: odysseyTokens.Spacing3,
           paddingBlock: odysseyTokens.Spacing4,
+          "&.nav-accordion-details": {
+            paddingTop: 0,
+            paddingBottom: 0,
+            paddingLeft: odysseyTokens.Spacing2,
+          },
         }),
       },
     },
@@ -454,12 +477,14 @@ export const components = ({
           padding: odysseyTokens.Spacing1,
           marginRight: "unset",
         },
-        popper: {
+        popper: ({ ownerState }) => ({
           background: "transparent",
           paddingBlockStart: odysseyTokens.Spacing1,
-          height: "100%",
-          maxHeight: "40vh",
-        },
+          ...(ownerState.ListboxComponent !== undefined && {
+            height: "100%",
+            maxHeight: "40vh",
+          }),
+        }),
         paper: ({ ownerState }) => ({
           /**
            * ListboxComponent is used when `isVirtualized` prop is true.
@@ -783,7 +808,11 @@ export const components = ({
           transition: `all ${odysseyTokens.TransitionDurationMain} ${odysseyTokens.TransitionTimingMain}`,
 
           "& img": {
-            height: TILE_IMAGE_HEIGHT,
+            height: CARD_IMAGE_HEIGHT,
+          },
+
+          "&.hasAccessory": {
+            paddingLeft: odysseyTokens.Spacing4,
           },
 
           "&.isClickable:hover": {
@@ -979,6 +1008,44 @@ export const components = ({
             marginInlineEnd: odysseyTokens.Spacing1,
           },
 
+          ...(ownerState.variant === "lamp" && {
+            paddingBlock: 0,
+            paddingInline: 0,
+            borderRadius: 0,
+            border: 0,
+            backgroundColor: "transparent",
+            color: odysseyTokens.TypographyColorBody,
+
+            "&::before": {
+              content: "''",
+              width: odysseyTokens.Spacing2,
+              height: odysseyTokens.Spacing2,
+              marginInlineEnd: odysseyTokens.Spacing2,
+              borderRadius: "100%",
+              backgroundColor: odysseyTokens.HueNeutral600,
+            },
+
+            [`&.${chipClasses.colorError}`]: {
+              "&::before": {
+                border: 0,
+                backgroundColor: odysseyTokens.PaletteDangerMain,
+              },
+            },
+
+            [`&.${chipClasses.colorSuccess}`]: {
+              "&::before": {
+                border: 0,
+                backgroundColor: odysseyTokens.PaletteSuccessMain,
+              },
+            },
+
+            [`&.${chipClasses.colorWarning}`]: {
+              "&::before": {
+                border: 0,
+                backgroundColor: odysseyTokens.HueYellow200,
+              },
+            },
+          }),
           ...(ownerState.variant === "pill" && {
             paddingBlock: odysseyTokens.Spacing1,
             paddingInline: odysseyTokens.Spacing2,
@@ -991,49 +1058,24 @@ export const components = ({
             fontSize: "0.71428571rem",
             textTransform: "uppercase",
 
-            "&::before": {
-              content: "''",
-              width: "0.42857143rem",
-              height: "0.42857143rem",
-              marginInlineEnd: odysseyTokens.Spacing2,
-              borderRadius: "100%",
-              backgroundColor: odysseyTokens.HueNeutral400,
-            },
-
             [`&.${chipClasses.colorError}`]: {
               backgroundColor: odysseyTokens.PaletteDangerLighter,
               color: odysseyTokens.TypographyColorDanger,
-
-              "&::before": {
-                backgroundColor: odysseyTokens.PaletteDangerMain,
-              },
             },
 
             [`&.${chipClasses.colorInfo}`]: {
               backgroundColor: odysseyTokens.PalettePrimaryLighter,
               color: odysseyTokens.PalettePrimaryText,
-
-              "&::before": {
-                backgroundColor: odysseyTokens.HueBlue400,
-              },
             },
 
             [`&.${chipClasses.colorSuccess}`]: {
               backgroundColor: odysseyTokens.PaletteSuccessLighter,
               color: odysseyTokens.TypographyColorSuccess,
-
-              "&::before": {
-                backgroundColor: odysseyTokens.PaletteSuccessMain,
-              },
             },
 
             [`&.${chipClasses.colorWarning}`]: {
               backgroundColor: odysseyTokens.PaletteWarningLighter,
               color: odysseyTokens.TypographyColorWarning,
-
-              "&::before": {
-                backgroundColor: odysseyTokens.HueYellow200,
-              },
             },
           }),
 
@@ -1492,62 +1534,6 @@ export const components = ({
         },
       },
     },
-    MuiSwitch: {
-      styleOverrides: {
-        root: {
-          position: "relative",
-          padding: `${odysseyTokens.Spacing0} 0`,
-          width: odysseyTokens.Spacing7,
-          height: odysseyTokens.Spacing5,
-          overflow: "visible",
-        },
-        switchBase: ({ ownerState }) => ({
-          top: odysseyTokens.Spacing1,
-          left: odysseyTokens.Spacing1,
-          padding: `${odysseyTokens.Spacing0} 0`,
-
-          ...(ownerState.checked === true && {
-            color: `${odysseyTokens.HueNeutralWhite} !important`,
-            transform: `translateX(${odysseyTokens.Spacing4}) !important`,
-          }),
-
-          "&:hover": {
-            backgroundColor: "transparent",
-
-            ...(ownerState.checked === true && {
-              backgroundColor: "transparent !important",
-            }),
-          },
-          // Had to use `Mui-focusVisible` class here. `:focus-visible` was not being triggered correctly.
-          "&.Mui-focusVisible": {
-            // Focus styles applied this way due to MUI not applying `Mui-focusVisible` class to the correct element see: https://github.com/mui/material-ui/issues/34986
-            " + .MuiSwitch-track": {
-              boxShadow: `0 0 0 2px ${odysseyTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyTokens.PalettePrimaryMain}`,
-            },
-          },
-        }),
-        thumb: {
-          width: odysseyTokens.Spacing4,
-          height: odysseyTokens.Spacing4,
-          boxShadow: "none",
-        },
-        track: ({ ownerState }) => ({
-          borderRadius: odysseyTokens.BorderRadiusRound,
-          backgroundColor: `${odysseyTokens.HueNeutral300}`,
-          opacity: 1,
-
-          ...(ownerState.checked === true && {
-            // !important used to override more specific .Mui-checked class
-            opacity: "1 !important",
-            backgroundColor: `${odysseyTokens.PaletteSuccessLight} !important`,
-          }),
-        }),
-        input: {
-          height: "44px",
-          top: "-14px",
-        },
-      },
-    },
     MuiDialog: {
       defaultProps: {
         scroll: "paper",
@@ -1685,6 +1671,7 @@ export const components = ({
           },
           "&.Mui-disabled": {
             pointerEvents: "none",
+            color: odysseyTokens.TypographyColorDisabled,
           },
           [`:has(> .${radioClasses.root})`]: {
             alignItems: "flex-start",
@@ -1705,10 +1692,14 @@ export const components = ({
               color: odysseyTokens.PaletteDangerDark,
             },
         }),
-        label: {
+        label: ({ ownerState }) => ({
           gap: odysseyTokens.Spacing1,
           lineHeight: odysseyTokens.TypographyLineHeightUi,
-        },
+          // !important used to override more specific .Mui-disabled class
+          ...(ownerState.disabled && {
+            color: `${odysseyTokens.TypographyColorDisabled} !important`,
+          }),
+        }),
         asterisk: () => ({
           display: "none",
         }),
@@ -1738,6 +1729,14 @@ export const components = ({
 
           ".field-hint-link-component": {
             marginInlineStart: odysseyTokens.Spacing1,
+          },
+
+          ".Mui-disabled &": {
+            color: odysseyTokens.TypographyColorDisabled,
+
+            a: {
+              color: odysseyTokens.TypographyColorDisabled,
+            },
           },
         },
       },
@@ -2004,6 +2003,9 @@ export const components = ({
             display: "inline-block",
             height: "1em",
             lineHeight: 1,
+            "& svg": {
+              fontSize: "1em",
+            },
           },
 
           ".Link-indicator": {
@@ -2014,7 +2016,7 @@ export const components = ({
             marginInlineEnd: odysseyTokens.Spacing1,
           },
           svg: {
-            fontSize: "1em",
+            fontSize: "1.2em",
             height: "1em",
             position: "relative",
             insetBlockStart: "-0.0625em",
@@ -2592,14 +2594,15 @@ export const components = ({
 
           [`.${tableHeadClasses.root} &`]: {
             color: odysseyTokens.TypographyColorHeading,
-            fontSize: `0.71428571rem`,
-            lineHeight: odysseyTokens.TypographyLineHeightBody,
             fontWeight: odysseyTokens.TypographyWeightBodyBold,
             textTransform: "uppercase",
             backgroundColor: odysseyTokens.HueNeutral50,
             borderBottom: 0,
             height: `${odysseyTokens.Spacing7} !important`,
             paddingBlock: `${odysseyTokens.Spacing3} !important`,
+            fontSize: odysseyTokens.TypographySizeOverline,
+            lineHeight: odysseyTokens.TypographyLineHeightBody,
+            letterSpacing: 1.3,
           },
 
           [`.${tableHeadClasses.root} &:first-of-type`]: {

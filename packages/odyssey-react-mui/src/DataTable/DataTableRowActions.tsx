@@ -27,7 +27,7 @@ import { DataTableProps } from "./DataTable";
 import { Trans, useTranslation } from "react-i18next";
 
 export type DataTableRowActionsProps = {
-  row: MRT_Row<MRT_RowData>;
+  row: MRT_Row<MRT_RowData> | MRT_RowData;
   rowIndex: number;
   rowActionButtons?: (
     row: MRT_RowData,
