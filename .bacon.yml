@@ -56,8 +56,6 @@ test_suites:
     timeout: "15"
     script_name: publish-package
     criteria: MERGE
-    prereq_test_suite_names:
-      - "Build"
     queue_name: ci-queue-productionJenga-AL2023
 
   - name: "Publish Storybook"
@@ -67,8 +65,6 @@ test_suites:
     timeout: "15"
     script_name: publish-storybook
     criteria: MERGE
-    prereq_test_suite_names:
-      - "Build"
     queue_name: ci-queue-productionJenga-AL2023
 
   - name: "Semgrep"
