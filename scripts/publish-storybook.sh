@@ -21,8 +21,7 @@ function lerna_publish() {
 # prevent local changes from being reported so lerna can publish
 git checkout .
 
-# build all packages
-yarn build
+# All packages are built by `prepack`.
 
 # update version with commit SHA to allow lerna to publish
 FILES_TO_UPDATE_VERSION="packages/odyssey-storybook/package.json"
@@ -53,11 +52,9 @@ echo "Publish successful. Sending promotion message"
 function send_promotion_message() {
   curl -H "x-aurm-token: ${AURM_TOKEN}" \
     -H "Content-Type: application/json" \
-    -X POST -d "[{\"artifactId\":\"$1\",\"repository\":\"npm-release\",\"artifact\":\"$2\",\"version\":\"$3\",\"promotionType\":\"ARTIFACT\"}]" \
+    -X POST -d "[{\"artifactId\":\"$1\",\"repository\":\"npm-topic\",\"artifact\":\"$2\",\"version\":\"$3\",\"promotionType\":\"ARTIFACT\"}]" \
     -k "${APERTURE_BASE_URL}/v1/artifact-promotion/createPromotionEvent"
 }
-
-CURRENT_VERSION=$(< lerna.json jq -r '.version')
 
 ARTIFACT="@okta/odyssey-storybook/-/@okta/odyssey-storybook-${CURRENT_VERSION}.tgz"
 echo "Artifact is ${ARTIFACT}"
