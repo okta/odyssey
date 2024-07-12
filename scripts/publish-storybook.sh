@@ -4,27 +4,62 @@ source $OKTA_HOME/$REPO/scripts/setup.sh
 
 cd $OKTA_HOME/$REPO
 
-get_terminus_secret "/" aws_access_key_id AWS_ACCESS_KEY_ID
-get_terminus_secret "/" aws_secret_access_key AWS_SECRET_ACCESS_KEY
+PUBLISH_SHA="$(git rev-parse --short $SHA)"
+PUBLISH_REGISTRY="${ARTIFACTORY_URL}/api/npm/npm-topic"
+CURRENT_VERSION=$(< lerna.json jq -r '.version')
+TAGGED_VERSION=$CURRENT_VERSION-$PUBLISH_SHA
 
-echo "SHA7=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})" >> $GITHUB_ENV
-echo "URL_STORYBOOK="https://${SHA7}.ods.dev"" >> $GITHUB_ENV
-echo "COMMIT_MSG=${{ github.event.head_commit.message || github.event.pull_request.title }}" >> $GITHUB_ENV
+npm config set @okta:registry ${PUBLISH_REGISTRY}
 
-yarn build && cd ./packages/odyssey-storybook && rm -rf ./node_modules/.cache && yarn build
+function lerna_publish() {
+  # use lerna to publish without making a commit to the repo
+  MY_CMD="yarn run lerna publish from-package --force-publish=* --ignore-changes --no-push --no-git-tag-version --no-verify-access --registry \"${PUBLISH_REGISTRY}\" --yes"
+  echo "Running ${MY_CMD}"
+  ${MY_CMD}
+}
 
-## TODO Check this against what's in that RELEASE_ODYSSEY script. That'll be how to do it in Bacon, no the GitHub Actions code copied into this file.
-aws s3 sync ./packages/odyssey-storybook/dist/ s3://ods.dev/$SHA7 --delete
+# prevent local changes from being reported so lerna can publish
+git checkout .
 
-bash ./notify-slack.sh
+# update version with commit SHA to allow lerna to publish
+FILES_TO_UPDATE_VERSION="packages/odyssey-storybook/package.json"
+for PATH_AND_FILE in $FILES_TO_UPDATE_VERSION; do
+  FULL_PATH="$OKTA_HOME/$REPO/$PATH_AND_FILE"
+  json_contents="$(jq '.version = "'$TAGGED_VERSION'"' $FULL_PATH)" && \
+  echo -E "${json_contents}" > $FULL_PATH
+  git update-index --assume-unchanged $FULL_PATH
+done
 
-echo "Publishing to Storybook"
+echo "Publishing to artifactory"
 if ! lerna_publish; then
-  echo "ERROR: Storybook Publish has failed."
+  echo "ERROR: Lerna Publish has failed."
   exit $PUBLISH_ARTIFACTORY_FAILURE
 else
-  echo "Publish successful."
-  echo $URL_STORYBOOK
+  echo "Publish successful. Sending promotion message"
+fi
+
+##
+## Publish docs
+##
+## While the package artifact is already in npm-release, we use this
+## promotion event workaround to trigger the conductor workflow to deploy
+##
+
+echo "Publish successful. Sending promotion message"
+
+function send_promotion_message() {
+  curl -H "x-aurm-token: ${AURM_TOKEN}" \
+    -H "Content-Type: application/json" \
+    -X POST -d "[{\"artifactId\":\"$1\",\"repository\":\"npm-release\",\"artifact\":\"$2\",\"version\":\"$3\",\"promotionType\":\"ARTIFACT\"}]" \
+    -k "${APERTURE_BASE_URL}/v1/artifact-promotion/createPromotionEvent"
+}
+
+CURRENT_VERSION=$(< lerna.json jq -r '.version')
+
+ARTIFACT="@okta/odyssey-storybook/-/@okta/odyssey-storybook-${CURRENT_VERSION}.tgz"
+echo "Artifact is ${ARTIFACT}"
+if ! send_promotion_message "odyssey-storybook" "${ARTIFACT}" "${CURRENT_VERSION}"; then
+  echo "Error sending docs promotion event to Aperture"
 fi
 
 exit $SUCCESS
