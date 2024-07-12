@@ -21,6 +21,9 @@ function lerna_publish() {
 # prevent local changes from being reported so lerna can publish
 git checkout .
 
+# build all packages
+yarn build
+
 # update version with commit SHA to allow lerna to publish
 FILES_TO_UPDATE_VERSION="packages/odyssey-storybook/package.json"
 for PATH_AND_FILE in $FILES_TO_UPDATE_VERSION; do
