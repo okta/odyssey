@@ -16,6 +16,7 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../OdysseyDesignTokensContext";
+import { Box } from "../Box";
 
 type SupportedRegionRatios =
   | [1]
@@ -45,16 +46,6 @@ interface LayoutContentProps {
   regions: string;
 }
 
-const LayoutContainer = styled("div", {
-  shouldForwardProp: (prop) => prop != "odysseyDesignTokens",
-})<Pick<LayoutContentProps, "odysseyDesignTokens">>(
-  ({ odysseyDesignTokens }) => ({
-    "& + &": {
-      marginBlockStart: odysseyDesignTokens.Spacing4,
-    },
-  }),
-);
-
 const LayoutContent = styled("div", {
   shouldForwardProp: (prop) =>
     !["odysseyDesignTokens", "regions"].includes(prop),
@@ -76,14 +67,14 @@ const Layout = ({ regions, children }: LayoutProps) => {
     .join(" ");
 
   return (
-    <LayoutContainer odysseyDesignTokens={odysseyDesignTokens}>
+    <Box>
       <LayoutContent
         odysseyDesignTokens={odysseyDesignTokens}
         regions={mappedRegions}
       >
         {Children.toArray(children).map((child) => child)}
       </LayoutContent>
-    </LayoutContainer>
+    </Box>
   );
 };
 
