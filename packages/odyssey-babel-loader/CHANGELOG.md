@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.19.0](https://github.com/okta/odyssey/compare/v1.18.0...v1.19.0) (2024-07-15)
+
+**Note:** Version bump only for package @okta/odyssey-babel-loader
+
 ## [1.18.0](https://github.com/okta/odyssey/compare/v1.15.9...v1.18.0) (2024-06-26)
 
 ### Bug Fixes
