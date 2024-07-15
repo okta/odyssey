@@ -63,7 +63,7 @@ test_suites:
     script_path: /root/okta/odyssey/scripts
     sort_order: "9"
     timeout: "15"
-    script_name: publish-storybook
+    script_name: publish-storybook-topic
     criteria: MERGE
     queue_name: ci-queue-productionJenga-AL2023
 
