@@ -101,6 +101,10 @@ export const components = ({
             borderBottomStyle: "solid",
             borderBottomWidth: odysseyTokens.BorderWidthMain,
           },
+          "&.nav-accordion": {
+            border: "0 !important",
+            width: "100%",
+          },
         }),
       },
     },
@@ -121,6 +125,20 @@ export const components = ({
             outlineStyle: "solid",
             zIndex: 1,
           },
+          svg: {
+            fontSize: "1.2em",
+            height: "1em",
+            position: "relative",
+            insetBlockStart: "-0.0625em",
+            verticalAlign: "middle",
+            width: "1em",
+          },
+          "&.nav-accordion-summary": {
+            padding: `${odysseyTokens.Spacing2} ${odysseyTokens.Spacing4}`,
+            ".MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
+              transform: "rotate(-90deg) !important",
+            },
+          },
         }),
         content: () => ({
           marginBlock: 0,
@@ -137,6 +155,11 @@ export const components = ({
         root: () => ({
           paddingInline: odysseyTokens.Spacing3,
           paddingBlock: odysseyTokens.Spacing4,
+          "&.nav-accordion-details": {
+            paddingTop: 0,
+            paddingBottom: 0,
+            paddingLeft: odysseyTokens.Spacing2,
+          },
         }),
       },
     },
@@ -454,12 +477,14 @@ export const components = ({
           padding: odysseyTokens.Spacing1,
           marginRight: "unset",
         },
-        popper: {
+        popper: ({ ownerState }) => ({
           background: "transparent",
           paddingBlockStart: odysseyTokens.Spacing1,
-          height: "100%",
-          maxHeight: "40vh",
-        },
+          ...(ownerState.ListboxComponent !== undefined && {
+            height: "100%",
+            maxHeight: "40vh",
+          }),
+        }),
         paper: ({ ownerState }) => ({
           /**
            * ListboxComponent is used when `isVirtualized` prop is true.
@@ -1978,6 +2003,9 @@ export const components = ({
             display: "inline-block",
             height: "1em",
             lineHeight: 1,
+            "& svg": {
+              fontSize: "1em",
+            },
           },
 
           ".Link-indicator": {
@@ -1988,7 +2016,7 @@ export const components = ({
             marginInlineEnd: odysseyTokens.Spacing1,
           },
           svg: {
-            fontSize: "1em",
+            fontSize: "1.2em",
             height: "1em",
             position: "relative",
             insetBlockStart: "-0.0625em",
