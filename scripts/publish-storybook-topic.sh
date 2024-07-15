@@ -23,4 +23,5 @@ if ! lerna_publish; then
 else
   echo "Publish successful."
   echo $URL_STORYBOOK
+  log_custom_message "Storybook URL" $URL_STORYBOOK
 fi
