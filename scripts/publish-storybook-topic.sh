@@ -14,7 +14,7 @@ yarn build && cd ./packages/odyssey-storybook && rm -rf ./node_modules/.cache &&
 
 aws s3 sync ./packages/odyssey-storybook/dist/ s3://ods.dev/$SHA --delete
 
-bash ./notify-slack.sh
+# bash ./scripts/notify-slack.sh
 
 echo "Publishing to Storybook"
 if ! lerna_publish; then
