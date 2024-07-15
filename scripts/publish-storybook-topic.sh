@@ -20,12 +20,6 @@ aws s3 sync ./dist/ s3://ods.dev/$SHA --delete
 
 # bash ./scripts/notify-slack.sh
 
-echo "Publishing to Storybook"
-if ! lerna_publish; then
-  echo "ERROR: Storybook Publish has failed."
-  exit $PUBLISH_ARTIFACTORY_FAILURE
-else
-  echo "Publish successful."
-  echo $URL_STORYBOOK
-  log_custom_message "Storybook URL" $URL_STORYBOOK
-fi
+echo "Publish successful."
+echo $URL_STORYBOOK
+log_custom_message "Storybook URL" $URL_STORYBOOK
