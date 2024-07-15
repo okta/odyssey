@@ -10,9 +10,13 @@ get_terminus_secret "/" AWS_REGION AWS_REGION
 
 echo "URL_STORYBOOK=\"https://${SHA}.ods.dev\""
 
-yarn build && cd ./packages/odyssey-storybook && rm -rf ./node_modules/.cache && yarn build
+# Build all packages except Storybook because it's excluded.
+yarn build
 
-aws s3 sync ./packages/odyssey-storybook/dist/ s3://ods.dev/$SHA --delete
+# Build Storybook package.
+cd ./packages/odyssey-storybook && rm -rf ./node_modules/.cache && yarn build
+
+aws s3 sync ./dist/ s3://ods.dev/$SHA --delete
 
 # bash ./scripts/notify-slack.sh
 
