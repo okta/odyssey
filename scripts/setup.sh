@@ -20,7 +20,7 @@ else
 fi
 
 echo "installing yarn v${YARN_VERSION}"
-if setup_service yarn ${YARN_VERSION}; then
+if setup_service yarn-berry ${YARN_VERSION}; then
   echo "Installed yarn ${YARN_VERSION} successfully"
 else
   echo "Yarn ${YARN_VERSION} installation failed."
