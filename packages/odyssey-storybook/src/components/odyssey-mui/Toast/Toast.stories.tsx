@@ -274,7 +274,7 @@ export const Dismissible: StoryObj<ToastProps> = {
         const toastElement = canvas.getByRole("status");
         if (toastElement) {
           const dismissToastButton = within(toastElement).getByRole("button", {
-            name: "close",
+            name: "Close",
           });
           if (dismissToastButton) {
             userEvent.click(dismissToastButton);
