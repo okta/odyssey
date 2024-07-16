@@ -11,7 +11,6 @@
  */
 
 import { memo, ReactElement, ReactNode } from "react";
-import { Box } from "../Box";
 import styled from "@emotion/styled";
 import {
   DesignTokens,
@@ -70,16 +69,76 @@ interface TemplateContentProps {
   drawerVariant?: string;
 }
 
+const TemplateContainer = styled("div", {
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "isFullWidth",
+})<{
+  odysseyDesignTokens: DesignTokens;
+  isFullWidth: boolean;
+}>(({ odysseyDesignTokens, isFullWidth }) => ({
+  maxWidth: isFullWidth
+    ? "100%"
+    : `calc(1440px + ${odysseyDesignTokens.Spacing6} + ${odysseyDesignTokens.Spacing6})`,
+  marginInline: isFullWidth ? odysseyDesignTokens.Spacing6 : "auto",
+  padding: odysseyDesignTokens.Spacing6,
+}));
+
 const TemplateHeader = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{
   odysseyDesignTokens: DesignTokens;
-}>(({}) => ({
-  top: 0,
+}>(({ odysseyDesignTokens }) => ({
   display: "flex",
+  alignItems: "flex-end",
   justifyContent: "space-between",
-  alignItems: "center",
-  alignContent: "center",
+
+  ["@media (max-width: 800px)"]: {
+    alignItems: "flex-start",
+    flexDirection: "column",
+    gap: odysseyDesignTokens.Spacing2,
+  },
+}));
+
+const TemplateHeaderPrimaryContent = styled("div")(() => ({
+  [".MuiTypography-root:last-child"]: {
+    marginBlockEnd: "0",
+  },
+}));
+
+const TemplateHeaderSecondaryContent = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  alignItems: "flex-end",
+  display: "flex",
+  flexDirection: "column",
+  gap: odysseyDesignTokens.Spacing2,
+  minHeight: odysseyDesignTokens.Spacing7,
+  justifyContent: "center",
+
+  ["@media (max-width: 800px)"]: {
+    alignItems: "flex-start",
+  },
+}));
+
+const TemplateHeaderButtons = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  display: "flex",
+
+  ["& > div, & > button"]: {
+    marginInlineStart: odysseyDesignTokens.Spacing2,
+  },
+
+  ["@media (max-width: 800px)"]: {
+    ["& > div, & > button"]: {
+      marginInlineEnd: odysseyDesignTokens.Spacing2,
+      marginInlineStart: odysseyDesignTokens.Spacing0,
+    },
+  },
 }));
 
 const TemplateContent = styled("div", {
@@ -142,59 +201,44 @@ const PageTemplate = ({
   const { isOpen: isDrawerOpen, variant: drawerVariant } = drawer?.props ?? {};
 
   return (
-    <Box
-      sx={{
-        maxWidth: isFullWidth ? "100%" : "1440px",
-        marginInline: isFullWidth ? odysseyDesignTokens.Spacing6 : "auto",
-      }}
+    <TemplateContainer
+      odysseyDesignTokens={odysseyDesignTokens}
+      isFullWidth={isFullWidth}
     >
       <TemplateHeader odysseyDesignTokens={odysseyDesignTokens}>
-        <Box>
-          <Heading4>{title}</Heading4>
-          <Subordinate>{description}</Subordinate>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "end",
-            rowGap: odysseyDesignTokens.Spacing4,
-          }}
+        <TemplateHeaderPrimaryContent>
+          {title && <Heading4>{title}</Heading4>}
+          {description && <Subordinate>{description}</Subordinate>}
+        </TemplateHeaderPrimaryContent>
+
+        <TemplateHeaderSecondaryContent
+          odysseyDesignTokens={odysseyDesignTokens}
         >
           {documentationLink && (
             <Link href={documentationLink} icon={<DocumentationIcon />}>
               {documentationText}
             </Link>
           )}
-          <Box
-            sx={{
-              display: "flex",
-              columnGap: odysseyDesignTokens.Spacing2,
-            }}
-          >
-            {tertiaryCallToActionComponent}
-            {secondaryCallToActionComponent}
-            {primaryCallToActionComponent}
-          </Box>
-        </Box>
+          {(primaryCallToActionComponent ||
+            secondaryCallToActionComponent ||
+            tertiaryCallToActionComponent) && (
+            <TemplateHeaderButtons odysseyDesignTokens={odysseyDesignTokens}>
+              {tertiaryCallToActionComponent}
+              {secondaryCallToActionComponent}
+              {primaryCallToActionComponent}
+            </TemplateHeaderButtons>
+          )}
+        </TemplateHeaderSecondaryContent>
       </TemplateHeader>
       <TemplateContent
         odysseyDesignTokens={odysseyDesignTokens}
         isDrawerOpen={isDrawerOpen}
         drawerVariant={drawerVariant}
       >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            rowGap: odysseyDesignTokens.Spacing4,
-          }}
-        >
-          {children}
-        </Box>
+        {children}
         {drawer}
       </TemplateContent>
-    </Box>
+    </TemplateContainer>
   );
 };
 
