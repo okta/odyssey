@@ -35,6 +35,7 @@ module.exports = {
     dumpio: true,
     headless: true,
   },
+  runInDocker: true,
   serverUrl: "https://oktaeyes.applitools.com",
   showLogs: true,
   showStorybookOutput: true,
