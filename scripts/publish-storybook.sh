@@ -4,62 +4,24 @@ source $OKTA_HOME/$REPO/scripts/setup.sh
 
 cd $OKTA_HOME/$REPO
 
-PUBLISH_SHA="$(git rev-parse --short $SHA)"
-PUBLISH_REGISTRY="${ARTIFACTORY_URL}/api/npm/npm-topic"
-CURRENT_VERSION=$(< lerna.json jq -r '.version')
-TAGGED_VERSION=$CURRENT_VERSION-$PUBLISH_SHA
+get_terminus_secret "/" AWS_ACCESS_KEY_ID AWS_ACCESS_KEY_ID
+get_terminus_secret "/" AWS_SECRET_ACCESS_KEY AWS_SECRET_ACCESS_KEY
+get_terminus_secret "/" AWS_REGION AWS_REGION
 
-npm config set @okta:registry ${PUBLISH_REGISTRY}
+export URL_STORYBOOK="https://${SHA}.ods.dev"
+echo $URL_STORYBOOK
 
-function lerna_publish() {
-  # use lerna to publish without making a commit to the repo
-  MY_CMD="yarn run lerna publish from-package --force-publish=* --ignore-changes --no-push --no-git-tag-version --no-verify-access --registry \"${PUBLISH_REGISTRY}\" --yes"
-  echo "Running ${MY_CMD}"
-  ${MY_CMD}
-}
+# Build all packages except Storybook because it's excluded.
+yarn build
 
-# prevent local changes from being reported so lerna can publish
-git checkout .
+# Build Storybook package.
+cd ./packages/odyssey-storybook && rm -rf ./node_modules/.cache && yarn build
 
-# All packages are built by `prepack`.
+aws s3 sync ./dist/ s3://ods.dev/$SHA --delete
 
-# update version with commit SHA to allow lerna to publish
-FILES_TO_UPDATE_VERSION="packages/odyssey-storybook/package.json"
-for PATH_AND_FILE in $FILES_TO_UPDATE_VERSION; do
-  FULL_PATH="$OKTA_HOME/$REPO/$PATH_AND_FILE"
-  json_contents="$(jq '.version = "'$TAGGED_VERSION'"' $FULL_PATH)" && \
-  echo -E "${json_contents}" > $FULL_PATH
-  git update-index --assume-unchanged $FULL_PATH
-done
+# bash ./scripts/notify-slack.sh
 
-echo "Publishing to artifactory"
-if ! lerna_publish; then
-  echo "ERROR: Lerna Publish has failed."
-  exit $PUBLISH_ARTIFACTORY_FAILURE
-else
-  echo "Publish successful. Sending promotion message"
-fi
-
-##
-## Publish docs
-##
-## While the package artifact is already in npm-release, we use this
-## promotion event workaround to trigger the conductor workflow to deploy
-##
-
-echo "Publish successful. Sending promotion message"
-
-function send_promotion_message() {
-  curl -H "x-aurm-token: ${AURM_TOKEN}" \
-    -H "Content-Type: application/json" \
-    -X POST -d "[{\"artifactId\":\"$1\",\"repository\":\"npm-topic\",\"artifact\":\"$2\",\"version\":\"$3\",\"promotionType\":\"ARTIFACT\"}]" \
-    -k "${APERTURE_BASE_URL}/v1/artifact-promotion/createPromotionEvent"
-}
-
-ARTIFACT="@okta/odyssey-storybook/-/@okta/odyssey-storybook-${CURRENT_VERSION}.tgz"
-echo "Artifact is ${ARTIFACT}"
-if ! send_promotion_message "odyssey-storybook" "${ARTIFACT}" "${CURRENT_VERSION}"; then
-  echo "Error sending docs promotion event to Aperture"
-fi
+echo "Publish successful."
+log_custom_message "Storybook URL" $URL_STORYBOOK
 
 exit $SUCCESS
