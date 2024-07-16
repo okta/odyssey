@@ -76,6 +76,15 @@ const storybookMeta: Meta<typeof Checkbox> = {
         },
       },
     },
+    isReadOnly: {
+      control: "boolean",
+      description: "If `true`, the checkbox is read-only",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
     isRequired: {
       control: "boolean",
       description: "If `true`, the checkbox is required",
@@ -241,6 +250,17 @@ export const Invalid: StoryObj<typeof Checkbox> = {
     label: "Pre-flight systems check complete",
     validity: "invalid",
     isDefaultChecked: false,
+  },
+  play: async ({ canvasElement, step }) => {
+    await checkTheBox({ canvasElement, step })("Checkbox Disabled");
+  },
+};
+
+export const ReadOnly: StoryObj<typeof Checkbox> = {
+  args: {
+    label: "Pre-flight systems check complete",
+    isReadOnly: true,
+    isDefaultChecked: true,
   },
   play: async ({ canvasElement, step }) => {
     await checkTheBox({ canvasElement, step })("Checkbox Disabled");

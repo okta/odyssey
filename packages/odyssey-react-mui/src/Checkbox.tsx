@@ -42,6 +42,10 @@ export type CheckboxProps = {
    */
   isIndeterminate?: boolean;
   /**
+   * Determines whether the Checkbox is read-only
+   */
+  isReadOnly: boolean;
+  /**
    * Determines whether the Checkbox is required
    */
   isRequired?: boolean;
@@ -74,6 +78,7 @@ const Checkbox = ({
   isDefaultChecked,
   isDisabled,
   isIndeterminate,
+  isReadOnly,
   isRequired,
   label: labelProp,
   hint,
@@ -131,9 +136,13 @@ const Checkbox = ({
 
   const onChange = useCallback<NonNullable<MuiCheckboxProps["onChange"]>>(
     (event, checked) => {
+      if (isReadOnly) {
+        event.preventDefault();
+        return;
+      }
       onChangeProp?.(event, checked);
     },
-    [onChangeProp],
+    [onChangeProp, isReadOnly],
   );
 
   const onBlur = useCallback<NonNullable<MuiFormControlLabelProps["onBlur"]>>(
@@ -163,6 +172,8 @@ const Checkbox = ({
           required={isRequired}
           inputProps={{
             "data-se": testId,
+            "aria-readonly": isReadOnly,
+            readOnly: isReadOnly,
           }}
           disabled={isDisabled}
           inputRef={localInputRef}
