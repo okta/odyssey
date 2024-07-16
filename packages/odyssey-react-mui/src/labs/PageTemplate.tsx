@@ -12,13 +12,14 @@
 
 import { memo, ReactElement, ReactNode } from "react";
 import styled from "@emotion/styled";
+
 import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../OdysseyDesignTokensContext";
+import { DocumentationIcon } from "../icons.generated";
 import { Heading4, Subordinate } from "../Typography";
 import { Link } from "../Link";
-import { DocumentationIcon } from "../icons.generated";
 
 export type PageTemplateProps = {
   /**
@@ -63,11 +64,11 @@ export type PageTemplateProps = {
   isFullWidth?: boolean;
 };
 
-interface TemplateContentProps {
+type TemplateContentProps = {
   odysseyDesignTokens: DesignTokens;
   isDrawerOpen?: boolean;
   drawerVariant?: string;
-}
+};
 
 const TemplateContainer = styled("div", {
   shouldForwardProp: (prop) =>

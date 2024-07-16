@@ -10,13 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import styled from "@emotion/styled";
 import { Children, ReactNode, memo } from "react";
+import styled from "@emotion/styled";
+
+import { Box } from "../Box";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../OdysseyDesignTokensContext";
-import { Box } from "../Box";
 
 type SupportedRegionRatios =
   | [1]
