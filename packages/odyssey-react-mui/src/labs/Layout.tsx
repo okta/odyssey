@@ -61,11 +61,8 @@ const LayoutContent = styled("div", {
   },
 
   ["@media (max-width: 800px)"]: {
-    display: "block",
-
-    "& > div + div": {
-      marginBlockStart: odysseyDesignTokens.Spacing4,
-    },
+    gridTemplateColumns: "1fr !important",
+    gap: odysseyDesignTokens.Spacing4,
   },
 }));
 
