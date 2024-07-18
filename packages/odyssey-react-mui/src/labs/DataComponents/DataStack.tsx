@@ -47,6 +47,8 @@ const DataStack = ({
   isPaginationMoreDisabled,
   isRowReorderingDisabled,
   maxGridColumns,
+  maxPages,
+  maxResultsPerPage,
   noResultsPlaceholder,
   onChangeRowSelection,
   paginationType,
@@ -54,8 +56,6 @@ const DataStack = ({
   rowActionMenuItems,
   searchDelayTime,
   totalRows,
-  maxPages,
-  maxResultsPerPage,
 }: DataStackProps) => {
   const stackOptions = useMemo(
     () => ({

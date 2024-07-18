@@ -41,6 +41,8 @@ const DataTable = ({
   isNoResults,
   isPaginationMoreDisabled,
   isRowReorderingDisabled,
+  maxResultsPerPage,
+  maxPages,
   noResultsPlaceholder,
   onChangeRowSelection,
   paginationType,
@@ -50,8 +52,6 @@ const DataTable = ({
   rowActionMenuItems,
   searchDelayTime,
   totalRows,
-  maxResultsPerPage,
-  maxPages,
 }: DataTableProps) => {
   const tableOptions = useMemo(
     () => ({

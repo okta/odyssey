@@ -386,6 +386,8 @@ const DataView = ({
           isMoreDisabled={isPaginationMoreDisabled}
           lastRow={lastRowOnPage}
           loadMoreLabel={t("pagination.loadmore")}
+          maxPageIndex={maxPages}
+          maxPageSize={maxResultsPerPage}
           nextLabel={t("pagination.next")}
           onPaginationChange={setPagination}
           pageIndex={pagination.pageIndex}
@@ -394,8 +396,6 @@ const DataView = ({
           rowsPerPageLabel={t("pagination.rowsperpage")}
           totalRows={totalRows}
           variant={paginationType}
-          maxPageIndex={maxPages}
-          maxPageSize={maxResultsPerPage}
         />
       )}
     </DataViewContainer>

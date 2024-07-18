@@ -66,21 +66,37 @@ const PaginationButtonContainer = styled("div")({
 
 export type PaginationProps = {
   /**
-   * The current page index
+   * The labeled rendered for the current page index
    */
-  pageIndex: number;
+  currentPageLabel: string;
   /**
-   * The current page size
+   * If true, the pagination controls will be disabled
    */
-  pageSize: number;
+  isDisabled?: boolean;
+  /**
+   * If true, the next or Show More button will be disabled
+   */
+  isMoreDisabled?: boolean;
+  /**
+   * The current page last row index
+   */
+  lastRow: number;
+  /**
+   * If the pagination is of "loadMore" variant, then this is the the load more label
+   */
+  loadMoreLabel: string;
+  /**
+   * The max page
+   */
+  maxPageIndex?: number;
   /**
    * The max rows per page
    */
   maxPageSize?: number;
   /**
-   * The max page
+   * The label for the next control
    */
-  maxPageIndex?: number;
+  nextLabel: string;
   /**
    * Page index and page size setter
    */
@@ -92,64 +108,48 @@ export type PaginationProps = {
     pageSize: number;
   }) => void;
   /**
-   * The current page last row index
+   * The current page index
    */
-  lastRow: number;
+  pageIndex: number;
   /**
-   * Total rows count
+   * The current page size
    */
-  totalRows?: number;
-  /**
-   * If true, the pagination controls will be disabled
-   */
-  isDisabled?: boolean;
-  /**
-   * If true, the next or Show More button will be disabled
-   */
-  isMoreDisabled?: boolean;
-  /**
-   * The type of pagination controls shown. Defaults to next/prev buttons, but can be
-   * set to a simple "Load more" button by setting to "loadMore".
-   */
-  variant?: (typeof paginationTypeValues)[number];
-  /**
-   * The label that shows how many results are rendered per page
-   */
-  rowsPerPageLabel: string;
-  /**
-   * The labeled rendered for the current page index
-   */
-  currentPageLabel: string;
+  pageSize: number;
   /**
    * The label for the previous control
    */
   previousLabel: string;
   /**
-   * The label for the next control
+   * The label that shows how many results are rendered per page
    */
-  nextLabel: string;
+  rowsPerPageLabel: string;
   /**
-   * If the pagination is of "loadMore" variant, then this is the the load more label
+   * Total rows count
    */
-  loadMoreLabel: string;
+  totalRows?: number;
+  /**
+   * The type of pagination controls shown. Defaults to next/prev buttons, but can be
+   * set to a simple "Load more" button by setting to "loadMore".
+   */
+  variant?: (typeof paginationTypeValues)[number];
 };
 
 const Pagination = ({
-  pageIndex,
-  pageSize,
-  maxPageSize,
-  maxPageIndex,
-  onPaginationChange,
-  lastRow,
-  totalRows,
+  currentPageLabel,
   isDisabled,
   isMoreDisabled,
-  variant,
-  rowsPerPageLabel,
-  currentPageLabel,
-  previousLabel,
-  nextLabel,
+  lastRow,
   loadMoreLabel,
+  maxPageIndex,
+  maxPageSize,
+  nextLabel,
+  onPaginationChange,
+  pageIndex,
+  pageSize,
+  previousLabel,
+  rowsPerPageLabel,
+  totalRows,
+  variant,
 }: PaginationProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
