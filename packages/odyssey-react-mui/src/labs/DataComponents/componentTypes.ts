@@ -68,6 +68,7 @@ export type UniversalProps = {
   isEmpty?: boolean;
   isLoading?: boolean;
   isNoResults?: boolean;
+  isPaginationMoreDisabled?: boolean;
   isRowReorderingDisabled?: boolean;
   maxPages?: number;
   maxResultsPerPage?: number;

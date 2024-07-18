@@ -86,6 +86,7 @@ const DataView = ({
   isEmpty: isEmptyProp,
   isLoading: isLoadingProp,
   isNoResults: isNoResultsProp,
+  isPaginationMoreDisabled,
   isRowReorderingDisabled,
   noResultsPlaceholder,
   onChangeRowSelection,
@@ -374,6 +375,7 @@ const DataView = ({
         <Pagination
           currentPageLabel={t("pagination.page")}
           isDisabled={isEmpty}
+          isMoreDisabled={isPaginationMoreDisabled}
           lastRow={lastRowOnPage}
           loadMoreLabel={t("pagination.loadmore")}
           nextLabel={t("pagination.next")}

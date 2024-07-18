@@ -196,6 +196,10 @@ export type DataTableProps = {
    */
   initialSearchValue?: string;
   /**
+   * Is the next or show-more button disabled
+   */
+  isPaginationMoreDisabled?: boolean;
+  /**
    * The component to display when the query returns no results
    */
   noResultsPlaceholder?: ReactNode;
@@ -385,6 +389,7 @@ const DataTable = ({
   hasSorting,
   initialDensity = densityValues[0],
   initialSearchValue = "",
+  isPaginationMoreDisabled,
   noResultsPlaceholder,
   onChangeRowSelection,
   onReorderRows,
@@ -897,6 +902,7 @@ const DataTable = ({
           lastRow={lastRow}
           totalRows={totalRows}
           isDisabled={isEmpty}
+          isMoreDisabled={isPaginationMoreDisabled}
           variant={paginationType}
           rowsPerPageLabel={t("pagination.rowsperpage")}
           currentPageLabel={t("pagination.page")}

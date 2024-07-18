@@ -104,6 +104,10 @@ export type PaginationProps = {
    */
   isDisabled?: boolean;
   /**
+   * If true, the next or Show More button will be disabled
+   */
+  isMoreDisabled?: boolean;
+  /**
    * The type of pagination controls shown. Defaults to next/prev buttons, but can be
    * set to a simple "Load more" button by setting to "loadMore".
    */
@@ -139,6 +143,7 @@ const Pagination = ({
   lastRow,
   totalRows,
   isDisabled,
+  isMoreDisabled,
   variant,
   rowsPerPageLabel,
   currentPageLabel,
@@ -236,12 +241,15 @@ const Pagination = ({
   }, [onPaginationChange, page, rowsPerPage]);
 
   const loadMoreIsDisabled = useMemo(() => {
-    return totalRows ? rowsPerPage >= totalRows : false;
-  }, [rowsPerPage, totalRows]);
+    return isMoreDisabled || (totalRows ? rowsPerPage >= totalRows : false);
+  }, [isMoreDisabled, rowsPerPage, totalRows]);
 
   const nextButtonDisabled = useMemo(
-    () => (totalRows ? lastRow >= totalRows : false) || isDisabled,
-    [totalRows, lastRow, isDisabled],
+    () =>
+      isMoreDisabled ||
+      (totalRows ? lastRow >= totalRows : false) ||
+      isDisabled,
+    [isMoreDisabled, totalRows, lastRow, isDisabled],
   );
 
   const previousButtonDisabled = useMemo(

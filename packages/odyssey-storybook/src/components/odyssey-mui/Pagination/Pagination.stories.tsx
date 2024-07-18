@@ -87,6 +87,16 @@ const storyBookMeta: Meta<PaginationProps> = {
       },
     },
 
+    isMoreDisabled: {
+      control: "boolean",
+      description:
+        "If true, the pagination next/show more button will be disabled",
+      type: {
+        required: true,
+        name: "boolean",
+      },
+    },
+
     variant: {
       control: { type: "radio" },
       options: paginationTypeValues,

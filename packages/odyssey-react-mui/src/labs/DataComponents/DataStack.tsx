@@ -44,6 +44,7 @@ const DataStack = ({
   isEmpty,
   isLoading,
   isNoResults,
+  isPaginationMoreDisabled,
   isRowReorderingDisabled,
   maxGridColumns,
   noResultsPlaceholder,
@@ -83,6 +84,7 @@ const DataStack = ({
       isEmpty={isEmpty}
       isLoading={isLoading}
       isNoResults={isNoResults}
+      isPaginationMoreDisabled={isPaginationMoreDisabled}
       isRowReorderingDisabled={isRowReorderingDisabled}
       maxPages={maxPages}
       maxResultsPerPage={maxResultsPerPage}
