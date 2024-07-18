@@ -69,6 +69,8 @@ export type UniversalProps = {
   isLoading?: boolean;
   isNoResults?: boolean;
   isRowReorderingDisabled?: boolean;
+  maxPages?: number;
+  maxResultsPerPage?: number;
   noResultsPlaceholder?: ReactNode;
   onChangeRowSelection?: (rowSelection: DataRowSelectionState) => void;
   onReorderRows?: ({ rowId, newRowIndex }: DataOnReorderRowsType) => void;

@@ -96,6 +96,8 @@ const DataView = ({
   stackOptions,
   tableOptions,
   totalRows,
+  maxPages,
+  maxResultsPerPage,
 }: DataViewProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
@@ -382,6 +384,8 @@ const DataView = ({
           rowsPerPageLabel={t("pagination.rowsperpage")}
           totalRows={totalRows}
           variant={paginationType}
+          maxPageIndex={maxPages}
+          maxPageSize={maxResultsPerPage}
         />
       )}
     </DataViewContainer>

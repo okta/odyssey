@@ -53,6 +53,8 @@ const DataStack = ({
   rowActionMenuItems,
   searchDelayTime,
   totalRows,
+  maxPages,
+  maxResultsPerPage,
 }: DataStackProps) => {
   const stackOptions = useMemo(
     () => ({
@@ -82,6 +84,8 @@ const DataStack = ({
       isLoading={isLoading}
       isNoResults={isNoResults}
       isRowReorderingDisabled={isRowReorderingDisabled}
+      maxPages={maxPages}
+      maxResultsPerPage={maxResultsPerPage}
       noResultsPlaceholder={noResultsPlaceholder}
       onChangeRowSelection={onChangeRowSelection}
       paginationType={paginationType}

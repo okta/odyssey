@@ -247,6 +247,26 @@ const storybookMeta: Meta<DataTableProps> = {
         },
       },
     },
+    maxPages: {
+      control: "number",
+      description:
+        "The highest page number allowed to be manually input in pagination.",
+      table: {
+        type: {
+          summary: "number",
+        },
+      },
+    },
+    maxResultsPerPage: {
+      control: "number",
+      description:
+        "The largest number of rows allowed to be shown per page. This only affects the row input in pagination.",
+      table: {
+        type: {
+          summary: "number",
+        },
+      },
+    },
     paginationType: {
       options: paginationTypeValues,
       control: { type: "radio" },

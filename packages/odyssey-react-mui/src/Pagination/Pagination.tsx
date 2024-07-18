@@ -74,6 +74,14 @@ export type PaginationProps = {
    */
   pageSize: number;
   /**
+   * The max rows per page
+   */
+  maxPageSize?: number;
+  /**
+   * The max page
+   */
+  maxPageIndex?: number;
+  /**
    * Page index and page size setter
    */
   onPaginationChange: ({
@@ -125,6 +133,8 @@ export type PaginationProps = {
 const Pagination = ({
   pageIndex,
   pageSize,
+  maxPageSize,
+  maxPageIndex,
   onPaginationChange,
   lastRow,
   totalRows,
@@ -192,16 +202,22 @@ const Pagination = ({
 
   const setPageFromEvent = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      setPage(parseInt(event.target.value));
+      const value = maxPageIndex
+        ? Math.min(parseInt(event.target.value), maxPageIndex)
+        : parseInt(event.target.value);
+      setPage(value);
     },
-    [setPage],
+    [setPage, maxPageIndex],
   );
 
   const setRowsPerPageFromEvent = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      setRowsPerPage(parseInt(event.target.value));
+      const value = maxPageSize
+        ? Math.min(parseInt(event.target.value), maxPageSize)
+        : parseInt(event.target.value);
+      setRowsPerPage(value);
     },
-    [setRowsPerPage],
+    [setRowsPerPage, maxPageSize],
   );
 
   const handleLoadMore = useCallback(() => {
@@ -236,15 +252,17 @@ const Pagination = ({
   const rowsPerPageInputProps = useMemo(
     () => ({
       "aria-label": rowsPerPageLabel,
+      max: maxPageSize || totalRows,
     }),
-    [rowsPerPageLabel],
+    [maxPageSize, rowsPerPageLabel, totalRows],
   );
 
   const currentPageInputProps = useMemo(
     () => ({
       "aria-label": currentPageLabel,
+      max: maxPageIndex,
     }),
-    [currentPageLabel],
+    [currentPageLabel, maxPageIndex],
   );
 
   return variant === "paged" ? (
