@@ -99,7 +99,7 @@ test_suites:
 
   - name: "Visual Regression Test"
     abort_commit_on_failure: true
-    criteria: OPTIONAL
+    criteria: MERGE
     queue_name: ci-queue-productionJenga-AL2023
     script_name: visual-regression-test
     script_path: /root/okta/odyssey/scripts
