@@ -32,11 +32,9 @@ module.exports = {
   parentBranchName,
   puppeteerOptions: {
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
-    dumpio: true,
     headless: true,
   },
   serverUrl: "https://oktaeyes.applitools.com",
-  showLogs: true,
   showStorybookOutput: true,
   testConcurrency: 5,
 };
