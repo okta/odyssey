@@ -23,8 +23,10 @@ import { InputAdornment } from "@mui/material";
 import {
   DateField as MuiDateField,
   DateFieldProps as MuiDateFieldProps,
+  DateValidationError,
 } from "@mui/x-date-pickers";
 import { DateTime } from "luxon";
+import { useTranslation } from "react-i18next";
 
 import { Field, RenderFieldComponentProps } from "../Field";
 import { TextFieldProps } from "../TextField";
@@ -50,17 +52,15 @@ export type DateFieldProps = {
     | "onFocus"
   >;
 
-const errorMap = new Map([
-  ["invalidDate", "Date entered is invalid. Please provide a valid date"],
-  [
-    "maxDate",
-    "Date entered is later than the allowed dates. Select a date from the range available in the calendar.",
-  ],
-  [
-    "minDate",
-    "Date entered is earlier than allowed dates. Select a date from the range available in the calendar.",
-  ],
-]);
+const useOdysseyDateError = () => {
+  const { t } = useTranslation();
+
+  return new Map<DateValidationError, string>([
+    ["invalidDate", t("picker.error.invalid")],
+    ["maxDate", t("picker.error.maxdate")],
+    ["minDate", t("picker.error.mindate")],
+  ]);
+};
 
 const formatDateTimeToUtcIsoDateString = (value: DateTime) =>
   value.toUTC().toISO() || undefined;
@@ -85,6 +85,7 @@ const DateField = ({
   timezone,
   value,
 }: DateFieldProps) => {
+  const errorMap = useOdysseyDateError();
   const [displayedErrorMessage, setDisplayedErrorMessage] = useState<
     string | undefined
   >(errorMessage);
@@ -114,8 +115,8 @@ const DateField = ({
 
   const checkMinMaxValidity = useCallback(
     (value: DateTime) => {
-      const hasMinError = minDate && value < minDate;
-      const hasMaxError = maxDate && value > maxDate;
+      const hasMinError = minDate && value.toUTC() < minDate.toUTC();
+      const hasMaxError = maxDate && value.toUTC() > maxDate.toUTC();
 
       const errorValue = hasMinError
         ? errorMap.get("minDate")
@@ -127,7 +128,7 @@ const DateField = ({
 
       return hasMinError || hasMaxError;
     },
-    [minDate, maxDate],
+    [errorMap, minDate, maxDate],
   );
 
   useEffect(() => {
@@ -181,7 +182,7 @@ const DateField = ({
         }
       }
     },
-    [checkMinMaxValidity, debounceErrorHandling, onChange],
+    [checkMinMaxValidity, debounceErrorHandling, errorMap, onChange],
   );
 
   const checkFieldValidityAndSetError = useCallback<
@@ -203,7 +204,12 @@ const DateField = ({
   );
 
   const renderFieldComponent = useCallback(
-    ({ ariaDescribedBy, id, labelElementId }: RenderFieldComponentProps) => (
+    ({
+      ariaDescribedBy,
+      errorMessageElementId,
+      id,
+      labelElementId,
+    }: RenderFieldComponentProps) => (
       <MuiDateField
         /* eslint-disable-next-line jsx-a11y/no-autofocus */
         autoFocus={hasInitialFocus}
@@ -212,6 +218,7 @@ const DateField = ({
         id={id}
         inputProps={{
           "aria-describedby": ariaDescribedBy,
+          "aria-errormessage": errorMessageElementId,
           "aria-labelledby": labelElementId,
         }}
         InputProps={{

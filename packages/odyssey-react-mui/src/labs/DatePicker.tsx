@@ -238,14 +238,7 @@ const DatePicker = ({
     (value) => {
       onInputChangeProp?.(value);
     },
-    [
-      // checkMinMaxValidity,
-      // debounceErrorHandling,
-      // errorMap,
-      // formatDateTimeToUtcIsoDateString,
-      // internalValueRef,
-      onInputChangeProp,
-    ],
+    [onInputChangeProp],
   );
 
   const toggleCalendarVisibility = useCallback(

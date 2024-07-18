@@ -99,12 +99,8 @@ export const useOdysseyDateFields = ({
     });
 
   useEffect(() => {
-    const minDate = minDateProp
-      ? utcDateTimeFromIsoString(minDateProp)
-      : undefined;
-    const maxDate = maxDateProp
-      ? utcDateTimeFromIsoString(maxDateProp)
-      : undefined;
+    const minDate = minDateProp ? DateTime.fromISO(minDateProp) : undefined;
+    const maxDate = maxDateProp ? DateTime.fromISO(maxDateProp) : undefined;
 
     setValidationDateRanges({
       minDate:
