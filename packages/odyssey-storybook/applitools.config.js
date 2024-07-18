@@ -13,7 +13,7 @@
 const branchName =
   process.env?.GITHUB_HEAD_REF ?? process.env.CURRENT_BRANCH_NAME;
 const parentBranchName = process.env?.GITHUB_BASE_REF ?? "main";
-const shortCommitHash = process.env?.GITHUB_SHA?.slice(0, 7) ?? process.env.SHA;
+const commitHash = process.env?.GITHUB_SHA?.slice(0, 7) ?? process.env.SHA;
 
 module.exports = {
   accessibilityValidation: {
@@ -22,7 +22,7 @@ module.exports = {
   },
   branchName,
   batch: {
-    name: branchName?.concat(" ", shortCommitHash || ""),
+    name: branchName?.concat(" ", commitHash || ""),
     notifyOnCompletion: true,
     sequenceName: "Regression",
   },
