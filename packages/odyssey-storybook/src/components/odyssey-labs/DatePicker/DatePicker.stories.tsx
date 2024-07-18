@@ -15,6 +15,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { expect } from "@storybook/jest";
 import { userEvent, within, screen, waitFor } from "@storybook/testing-library";
 
+import { odysseyTranslate } from "@okta/odyssey-react-mui";
 import { DatePicker, DatePickerProps } from "@okta/odyssey-react-mui/labs";
 import { axeRun } from "../../../axe-util";
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
@@ -111,11 +112,25 @@ export const MinDateWithError: StoryObj<DatePickerProps> = {
     minDate: "2024-07-16T03:00:00.000Z",
     value: "2024-07-11T03:00:00.000Z",
   },
+  play: async ({ canvasElement, step }) => {
+    await step(
+      "expect min date error when value is less than minDate",
+      async () => {
+        const canvas = within(canvasElement);
+
+        await waitFor(() => {
+          expect(
+            canvas.getByText(odysseyTranslate("picker.error.mindate")),
+          ).toBeInTheDocument();
+        });
+      },
+    );
+  },
 };
 
 export const MaxDate: StoryObj<DatePickerProps> = {
   args: {
-    hint: "Select a date before July 18, 2024",
+    hint: "Select a date before July 19, 2024",
     maxDate: "2024-07-18",
   },
 };
@@ -125,6 +140,20 @@ export const MaxDateWithError: StoryObj<DatePickerProps> = {
     hint: "Select a date before July 18, 2024",
     maxDate: "2024-07-18T03:00:00.000Z",
     value: "2024-07-21T03:00:00.000Z",
+  },
+  play: async ({ canvasElement, step }) => {
+    await step(
+      "expect max date error when value is less than minDate",
+      async () => {
+        const canvas = within(canvasElement);
+
+        await waitFor(() => {
+          expect(
+            canvas.getByText(odysseyTranslate("picker.error.maxdate")),
+          ).toBeInTheDocument();
+        });
+      },
+    );
   },
 };
 
@@ -176,23 +205,24 @@ export const Controlled: StoryObj<DatePickerProps> = {
   play: async ({ canvasElement, step }) => {
     await step("select date", async () => {
       const canvas = within(canvasElement);
-      // I can't get the test to work without this timeout.
-      // The datepickerCalendarOpenButton click is successful but the dialog does not open
-      setTimeout(async () => {
-        const datepickerCalendarOpenButton =
-          canvas.getByLabelText("Choose date");
+      await waitFor(async () => {
+        const datepickerCalendarOpenButton = canvas.getByLabelText(
+          odysseyTranslate("picker.labels.date.choose"),
+        );
         await userEvent.click(datepickerCalendarOpenButton);
+
         const dialog = screen.getByRole("dialog");
         const dialogCanvas = within(dialog);
         const dateButton = dialogCanvas.getByText("26");
         await userEvent.click(dateButton);
-        const input = canvas.getByRole("textbox") as HTMLInputElement;
-        await expect(input.value).toBe("07/26/2024");
+      });
 
-        await step("Check for a11y errors", async () => {
-          await waitFor(() => axeRun("Selecting a date"));
-        });
-      }, 1);
+      const input = canvas.getByRole("textbox") as HTMLInputElement;
+      expect(input.value).toBe("07/26/2024");
+
+      await step("Check for a11y errors", async () => {
+        await waitFor(() => axeRun("Selecting a date"));
+      });
     });
   },
 };
