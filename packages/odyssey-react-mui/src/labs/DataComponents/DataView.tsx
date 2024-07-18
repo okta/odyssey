@@ -182,6 +182,14 @@ const DataView = ({
     });
   }, [currentPage, resultsPerPage]);
 
+  // Reset pagination if search or filters change
+  useEffect(() => {
+    setPagination((prev) => ({
+      pageIndex: 1,
+      pageSize: prev.pageSize,
+    }));
+  }, [filters, search]);
+
   // Retrieve the data
   useEffect(() => {
     fetchData({
