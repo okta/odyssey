@@ -873,86 +873,110 @@ export const components = ({
         indeterminateIcon: <SubtractIcon />,
       },
       styleOverrides: {
-        root: ({ theme }) => ({
-          width: `${odysseyTokens.TypographyLineHeightUi}em`,
-          minWidth: `${odysseyTokens.TypographyLineHeightUi}em`,
-          height: `${odysseyTokens.TypographyLineHeightUi}em`,
-          borderRadius: odysseyTokens.BorderRadiusTight,
-          borderWidth: odysseyTokens.BorderWidthMain,
-          borderStyle: odysseyTokens.BorderStyleMain,
-          borderColor: odysseyTokens.HueNeutral500,
-          padding: 0,
-          boxShadow: `0 0 0 0 transparent`,
-          transition: theme.transitions.create(
-            ["border-color", "background-color", "box-shadow"],
-            {
-              duration: odysseyTokens.TransitionDurationMain,
-            },
-          ),
+        root: ({ ownerState, theme }) => {
+          const isReadOnly = ownerState?.inputProps?.readOnly;
 
-          [`.${svgIconClasses.root}`]: {
-            color: odysseyTokens.HueNeutralWhite,
-            transition: theme.transitions.create(["color"], {
-              duration: odysseyTokens.TransitionDurationMain,
-            }),
-          },
-
-          "&.Mui-checked, &.MuiCheckbox-indeterminate": {
-            backgroundColor: odysseyTokens.PalettePrimaryMain,
-            borderColor: odysseyTokens.PalettePrimaryMain,
-
-            [`.${formControlLabelClasses.root}:hover > &`]: {
-              backgroundColor: odysseyTokens.PalettePrimaryDark,
-              borderColor: odysseyTokens.PalettePrimaryDark,
-            },
-          },
-
-          [`.${formControlLabelClasses.root}:hover > &`]: {
-            backgroundColor: "transparent",
-            borderColor: odysseyTokens.HueNeutral900,
-          },
-          ".Mui-error:not(.Mui-valid):hover > &": {
-            borderColor: odysseyTokens.BorderColorDangerDark,
-
-            "&.Mui-checked": {
-              backgroundColor: odysseyTokens.PaletteDangerDark,
-              borderColor: odysseyTokens.BorderColorDangerDark,
-            },
-          },
-          ".Mui-error:not(.Mui-valid) > &": {
-            borderColor: odysseyTokens.BorderColorDangerControl,
-
-            "&.Mui-checked": {
-              backgroundColor: odysseyTokens.PaletteDangerMain,
-              borderColor: odysseyTokens.BorderColorDangerControl,
-            },
-
-            "&.Mui-focusVisible": {
-              boxShadow: `0 0 0 2px ${odysseyTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyTokens.PaletteDangerMain}`,
-            },
-          },
-          "&.Mui-focusVisible": {
-            borderColor: odysseyTokens.HueNeutral900,
-            boxShadow: `0 0 0 2px ${odysseyTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyTokens.PalettePrimaryMain}`,
-            outline: "2px solid transparent",
-            outlineOffset: "1px",
-          },
-          "&.Mui-disabled": {
-            backgroundColor: odysseyTokens.HueNeutral50,
-            borderColor: odysseyTokens.HueNeutral300,
-
-            ".Mui-error:not(.Mui-valid) > &": {
-              backgroundColor: odysseyTokens.HueNeutral50,
-              borderColor: odysseyTokens.HueNeutral300,
-            },
+          return {
+            width: `${odysseyTokens.TypographyLineHeightUi}em`,
+            minWidth: `${odysseyTokens.TypographyLineHeightUi}em`,
+            height: `${odysseyTokens.TypographyLineHeightUi}em`,
+            borderRadius: odysseyTokens.BorderRadiusTight,
+            border: `1px solid ${odysseyTokens.HueNeutral500}`,
+            padding: 0,
+            boxShadow: `0 0 0 0 transparent`,
+            transition: theme.transitions.create(
+              ["border-color", "background-color", "box-shadow"],
+              {
+                duration: odysseyTokens.TransitionDurationMain,
+              },
+            ),
 
             [`.${svgIconClasses.root}`]: {
-              color: odysseyTokens.HueNeutral300,
+              color: odysseyTokens.HueNeutralWhite,
+              transition: theme.transitions.create(["color"], {
+                duration: odysseyTokens.TransitionDurationMain,
+              }),
             },
-          },
-        }),
+
+            "&.Mui-checked, &.MuiCheckbox-indeterminate": {
+              backgroundColor: odysseyTokens.PalettePrimaryMain,
+              borderColor: odysseyTokens.PalettePrimaryMain,
+
+              [`.${formControlLabelClasses.root}:hover > &`]: {
+                backgroundColor: odysseyTokens.PalettePrimaryDark,
+                borderColor: odysseyTokens.PalettePrimaryDark,
+              },
+            },
+
+            [`.${formControlLabelClasses.root}:hover > &`]: {
+              backgroundColor: "transparent",
+              borderColor: odysseyTokens.HueNeutral900,
+            },
+
+            ".Mui-error:not(.Mui-valid):hover > &": {
+              borderColor: odysseyTokens.BorderColorDangerDark,
+
+              "&.Mui-checked": {
+                backgroundColor: odysseyTokens.PaletteDangerDark,
+                borderColor: odysseyTokens.BorderColorDangerDark,
+              },
+            },
+            ".Mui-error:not(.Mui-valid) > &": {
+              borderColor: odysseyTokens.BorderColorDangerControl,
+
+              "&.Mui-checked": {
+                backgroundColor: odysseyTokens.PaletteDangerMain,
+                borderColor: odysseyTokens.BorderColorDangerControl,
+              },
+
+              "&.Mui-focusVisible": {
+                boxShadow: `0 0 0 2px ${odysseyTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyTokens.PaletteDangerMain}`,
+              },
+            },
+            "&.Mui-focusVisible": {
+              borderColor: odysseyTokens.HueNeutral900,
+              boxShadow: `0 0 0 2px ${odysseyTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyTokens.PalettePrimaryMain}`,
+              outline: "2px solid transparent",
+              outlineOffset: "1px",
+            },
+            "&.Mui-disabled": {
+              backgroundColor: odysseyTokens.HueNeutral50,
+              border: `1px solid ${odysseyTokens.HueNeutral300}`,
+
+              ".Mui-error:not(.Mui-valid) > &": {
+                backgroundColor: odysseyTokens.HueNeutral50,
+                border: `1px solid ${odysseyTokens.HueNeutral300}`,
+              },
+            },
+
+            ...(isReadOnly && {
+              // Override default styles
+              backgroundColor: odysseyTokens.HueNeutral100,
+              border: `1px solid ${odysseyTokens.HueNeutral300}`,
+              cursor: "default",
+
+              // Override checked/indeterminate styles
+              "&.Mui-checked, &.MuiCheckbox-indeterminate": {
+                backgroundColor: odysseyTokens.HueNeutral100,
+                borderColor: odysseyTokens.HueNeutral300,
+
+                //Override hoever styles
+                [`.${formControlLabelClasses.root}:hover > &`]: {
+                  backgroundColor: odysseyTokens.HueNeutral100,
+                  borderColor: odysseyTokens.HueNeutral300,
+                },
+              },
+
+              // ReadOnly Styles for SVG check icon
+              [`.${svgIconClasses.root}`]: {
+                color: odysseyTokens.HueNeutral700,
+              },
+            }),
+          };
+        },
       },
     },
+
     MuiChip: {
       defaultProps: {
         deleteIcon: <CloseCircleFilledIcon />,

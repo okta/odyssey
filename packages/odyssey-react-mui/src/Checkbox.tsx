@@ -44,7 +44,7 @@ export type CheckboxProps = {
   /**
    * Determines whether the Checkbox is read-only
    */
-  isReadOnly: boolean;
+  isReadOnly?: boolean;
   /**
    * Determines whether the Checkbox is required
    */
@@ -78,7 +78,7 @@ const Checkbox = ({
   isDefaultChecked,
   isDisabled,
   isIndeterminate,
-  isReadOnly,
+  isReadOnly = false, // Provide a default value
   isRequired,
   label: labelProp,
   hint,
@@ -145,6 +145,17 @@ const Checkbox = ({
     [onChangeProp, isReadOnly],
   );
 
+  const onClick = useCallback<
+    NonNullable<React.MouseEventHandler<HTMLInputElement>>
+  >(
+    (event) => {
+      if (isReadOnly) {
+        event.preventDefault();
+      }
+    },
+    [isReadOnly],
+  );
+
   const onBlur = useCallback<NonNullable<MuiFormControlLabelProps["onBlur"]>>(
     (event) => {
       onBlurProp?.(event);
@@ -154,7 +165,15 @@ const Checkbox = ({
 
   return (
     <FormControlLabel
-      sx={{ alignItems: "flex-start" }}
+      sx={{
+        alignItems: "flex-start",
+        ...(isReadOnly && {
+          //ReadOnly cursor for label
+          "& .MuiTypography-root": {
+            cursor: "default",
+          },
+        }),
+      }}
       aria-label={ariaLabel}
       aria-labelledby={ariaLabelledBy}
       className={
@@ -169,6 +188,9 @@ const Checkbox = ({
           {...inputValues}
           indeterminate={isIndeterminate}
           onChange={onChange}
+          onClick={
+            onClick as unknown as React.MouseEventHandler<HTMLButtonElement>
+          }
           required={isRequired}
           inputProps={{
             "data-se": testId,

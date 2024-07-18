@@ -83,6 +83,9 @@ const storybookMeta: Meta<typeof Checkbox> = {
         type: {
           summary: "boolean",
         },
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     isRequired: {
