@@ -21,8 +21,10 @@ function lerna_publish() {
 # prevent local changes from being reported so lerna can publish
 git checkout .
 
+# All packages are built by `prepack`.
+
 # update version with commit SHA to allow lerna to publish
-FILES_TO_UPDATE_VERSION="lerna.json packages/odyssey-design-tokens/package.json packages/odyssey-babel-preset/package.json packages/odyssey-babel-loader/package.json packages/odyssey-react-mui/package.json packages/browserslist-config-odyssey/package.json"
+FILES_TO_UPDATE_VERSION="packages/odyssey-storybook/package.json"
 for PATH_AND_FILE in $FILES_TO_UPDATE_VERSION; do
   FULL_PATH="$OKTA_HOME/$REPO/$PATH_AND_FILE"
   json_contents="$(jq '.version = "'$TAGGED_VERSION'"' $FULL_PATH)" && \
@@ -36,6 +38,28 @@ if ! lerna_publish; then
   exit $PUBLISH_ARTIFACTORY_FAILURE
 else
   echo "Publish successful. Sending promotion message"
+fi
+
+##
+## Publish docs
+##
+## While the package artifact is already in npm-release, we use this
+## promotion event workaround to trigger the conductor workflow to deploy
+##
+
+echo "Publish successful. Sending promotion message"
+
+function send_promotion_message() {
+  curl -H "x-aurm-token: ${AURM_TOKEN}" \
+    -H "Content-Type: application/json" \
+    -X POST -d "[{\"artifactId\":\"$1\",\"repository\":\"npm-topic\",\"artifact\":\"$2\",\"version\":\"$3\",\"promotionType\":\"ARTIFACT\"}]" \
+    -k "${APERTURE_BASE_URL}/v1/artifact-promotion/createPromotionEvent"
+}
+
+ARTIFACT="@okta/odyssey-storybook/-/@okta/odyssey-storybook-${CURRENT_VERSION}.tgz"
+echo "Artifact is ${ARTIFACT}"
+if ! send_promotion_message "odyssey-storybook" "${ARTIFACT}" "${CURRENT_VERSION}"; then
+  echo "Error sending docs promotion event to Aperture"
 fi
 
 exit $SUCCESS
