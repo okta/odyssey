@@ -12,7 +12,6 @@
 
 import {
   createContext,
-  FC,
   forwardRef,
   HTMLAttributes,
   ReactElement,
@@ -21,11 +20,12 @@ import {
   useEffect,
   useMemo,
   useRef,
+  useState,
 } from "react";
-import _AutoSizer, {
-  Props as AutoSizerProps,
-  Size as AutoSizerSize,
-} from "react-virtualized-auto-sizer";
+// import _AutoSizer, {
+//   Props as AutoSizerProps,
+//   Size as AutoSizerSize,
+// } from "react-virtualized-auto-sizer";
 import { VariableSizeList, ListChildComponentProps } from "react-window";
 import { useTranslation } from "react-i18next";
 import styled from "@emotion/styled";
@@ -49,8 +49,8 @@ const ListboxContainer = styled.div({
   height: "100%",
 });
 
-const AutoSizer = _AutoSizer as unknown as FC<AutoSizerProps>;
-type SetItemSize = (index: number, size: number) => void;
+// const AutoSizer = _AutoSizer as unknown as FC<AutoSizerProps>;
+type SetItemSize = (size: number) => void;
 
 export type UseAutocompleteProps<
   OptionType,
@@ -197,21 +197,33 @@ export const useAutocomplete = <
          * @see here if you need to know more: https://github.com/bvaughn/react-window/issues/582#issuecomment-1883074908
          */
         const firstChild = rowRef.current.firstElementChild;
-        if (firstChild) {
-          const height = firstChild.clientHeight;
-          setItemSize(index, height);
-        }
+        const height = firstChild
+          ? firstChild.clientHeight
+          : rowRef.current.clientHeight;
+
+        setItemSize(height);
       }
     }, [index, rowRef, setItemSize]);
+
+    const baseOption = data[index];
+    const { key, props } = baseOption;
 
     /**
      * react-window calculates the absolute positions of the list items, via an inline style, so
      * we need to add it to each list item that is being rendered in the viewable list window.
      * @see here if you need to know more: https://github.com/bvaughn/react-window?tab=readme-ov-file#why-is-my-list-blank-when-i-scroll
      */
+    const styles = useMemo(
+      () => ({
+        ...style,
+        height: "auto",
+      }),
+      [style],
+    );
+
     return (
-      <div key={`${index}-${style}}`} style={style} ref={rowRef}>
-        {data[index]}
+      <div ref={rowRef}>
+        <li {...props} key={key} style={styles} />
       </div>
     );
   };
@@ -223,65 +235,95 @@ export const useAutocomplete = <
     return <div ref={ref} {...props} {...outerProps} />;
   });
 
-  const VirtualizedListboxComponent = forwardRef<
+  const useResetCache = (length: number) => {
+    const resetCacheRef = useRef<VariableSizeList>(null);
+    useEffect(() => {
+      if (resetCacheRef.current) {
+        resetCacheRef.current.resetAfterIndex(0, true);
+      }
+    }, [length]);
+    return resetCacheRef;
+  };
+
+  const ListboxComponent = forwardRef<
     HTMLDivElement,
     HTMLAttributes<HTMLElement>
-  >((props, ref) => {
+  >(function (props, ref) {
+    const [listHeight, setListHeight] = useState(0);
+
     const { children, ...other } = props;
     const itemData: ReactElement[] = (children as ReactElement[]).flatMap(
       (item: ReactElement & { children?: ReactElement[] }) =>
         [item].concat(item.children || []),
     );
-    const sizeMap = useMemo(() => new Map<number, number>(), []);
-    const virtualizedListRef = useRef<VariableSizeList>(null);
 
-    const setItemSize = useCallback<SetItemSize>(
-      (index, size) => {
-        virtualizedListRef?.current?.resetAfterIndex(0, true);
-        sizeMap.set(index, size);
-      },
-      [virtualizedListRef, sizeMap],
-    );
+    const sizeMap = useRef<number[]>([]);
+
+    const getListBoxHeight = useCallback(() => {
+      // 8px of padding top/bottom applied by MUI
+      const COMBINED_LISTBOX_PADDING = 16;
+
+      if (itemData.length > OVERSCAN_ROW_COUNT) {
+        // has a max-height of 40vh set in CSS. This is only set because height needs to be a number
+        return 99999;
+      } else {
+        const itemsHeightCalculated = itemData
+          .map((_, index) => sizeMap.current[index] || 0)
+          .reduce(
+            (prevItemHeight, nextItemHeight) => prevItemHeight + nextItemHeight,
+            0,
+          );
+        return COMBINED_LISTBOX_PADDING + itemsHeightCalculated;
+      }
+    }, [itemData, sizeMap]);
+
+    useEffect(() => {
+      if (sizeMap.current.length && itemData.length) {
+        setListHeight(getListBoxHeight());
+      }
+    }, [getListBoxHeight, itemData, sizeMap]);
 
     // The number of items (rows or columns) to render outside of the visible area for performance and scrolling reasons
-    const overscanRowCount = 8;
+    const OVERSCAN_ROW_COUNT = 8;
 
-    const getItemSize = useCallback(
-      (index: number) => sizeMap.get(index) || 45,
-      [sizeMap],
+    const gridRef = useResetCache(itemData.length);
+
+    const setItemSize = useCallback<SetItemSize>(
+      (size) => {
+        gridRef?.current?.resetAfterIndex(0, true);
+        sizeMap.current = sizeMap.current.concat(size);
+      },
+      [gridRef, sizeMap],
     );
-
-    const renderWindow = useCallback(
-      ({ height, width }: AutoSizerSize) => (
-        <VariableSizeList
-          innerElementType="ul"
-          itemData={itemData}
-          itemCount={itemData.length}
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          itemSize={getItemSize}
-          height={height}
-          width={width}
-          ref={virtualizedListRef}
-          outerElementType={OuterListboxElementType}
-          overscanCount={overscanRowCount}
-        >
-          {({ data, index, style }) => (
-            <Row
-              data={data}
-              index={index}
-              style={style}
-              setItemSize={setItemSize}
-            />
-          )}
-        </VariableSizeList>
-      ),
-      [itemData, getItemSize, setItemSize, virtualizedListRef],
+    const getItemSize = useCallback(
+      // using 45px as a sane default here to avoid a lot of content shift on repaint
+      (index: number) => sizeMap.current[index] || 45,
+      [sizeMap],
     );
 
     return (
       <ListboxContainer ref={ref}>
         <OuterListboxContext.Provider value={other}>
-          <AutoSizer>{renderWindow}</AutoSizer>
+          <VariableSizeList
+            innerElementType="ul"
+            itemData={itemData}
+            itemCount={itemData.length}
+            itemSize={getItemSize}
+            height={listHeight}
+            width="100%"
+            ref={gridRef}
+            outerElementType={OuterListboxElementType}
+            overscanCount={OVERSCAN_ROW_COUNT}
+          >
+            {({ data, index, style }) => (
+              <Row
+                data={data}
+                index={index}
+                style={style}
+                setItemSize={setItemSize}
+              />
+            )}
+          </VariableSizeList>
         </OuterListboxContext.Provider>
       </ListboxContainer>
     );
@@ -346,11 +388,11 @@ export const useAutocomplete = <
   return {
     inputValueProp,
     isVirtualized,
+    ListboxComponent,
     onChange,
     onInputChange,
     renderInput,
     t,
     valueProps,
-    VirtualizedListboxComponent,
   };
 };

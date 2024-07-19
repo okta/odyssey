@@ -93,7 +93,7 @@ const CustomizableAutocomplete = <
     onInputChange,
     renderInput,
     valueProps,
-    VirtualizedListboxComponent,
+    ListboxComponent,
   } = useAutocomplete<OptionType, HasMultipleChoices, IsCustomValueAllowed>({
     ariaDescribedBy,
     defaultValue,
@@ -119,7 +119,7 @@ const CustomizableAutocomplete = <
       {...valueProps}
       {...inputValueProp}
       // conditionally provide the ListboxComponent if this needs to be virtualized
-      {...(isVirtualized.current && { VirtualizedListboxComponent })}
+      {...(isVirtualized.current && { ListboxComponent })}
       // AutoComplete is wrapped in a div within MUI which does not get the disabled attr. So this aria-disabled gets set in the div
       aria-disabled={isDisabled}
       disableCloseOnSelect={hasMultipleChoices}
@@ -142,6 +142,7 @@ const CustomizableAutocomplete = <
       renderOption={renderOption}
       renderTags={renderTags}
       translate={translate}
+      open={true}
     />
   );
 };

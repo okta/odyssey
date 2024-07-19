@@ -11,63 +11,73 @@
  */
 
 import {
-  GroupPicker,
-  GroupPickerProps,
-  GroupPickerOptionType,
+  LabelDescription,
+  LabelDescriptionMetaData,
+  Picker,
+  PickerProps,
 } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react";
 import {
   FolderIcon,
   GlobeIcon,
   SettingsIcon,
-  SyncIcon,
   VideoIcon,
 } from "@okta/odyssey-react-mui/icons";
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-const stations: ReadonlyArray<GroupPickerOptionType> = [
-  { id: "en", title: "English", description: "", logo: <VideoIcon /> },
+const languages = [
+  { value: "en", label: "English", description: "", icon: <VideoIcon /> },
   {
-    id: "fr",
-    title: "French",
+    value: "fr",
+    label: "French",
     description: "Français",
-    logo: <SettingsIcon />,
-    usersCount: 100,
-    appsCount: 200,
+    metaData: [
+      {
+        icon: <SettingsIcon />,
+        detailText: "10",
+      },
+    ],
   },
   {
-    id: "jp",
-    title: "Japanese",
+    value: "jp",
+    label: "Japanese",
     description: "日本語",
-    logo: <GlobeIcon />,
-    usersCount: 0,
-    appsCount: 0,
+    metaData: [
+      {
+        icon: <SettingsIcon />,
+        detailText: "10",
+      },
+    ],
   },
   {
-    id: "es",
-    title: "Spanish",
+    value: "es",
+    label: "Spanish",
     description: "Español",
-    logo: <SyncIcon />,
-    usersCount: 101,
-    appsCount: 202,
-    groupPushMappingsCount: 303,
+    metaData: [
+      {
+        icon: <SettingsIcon />,
+        detailText: "10",
+      },
+    ],
   },
   {
-    id: "image-as-logo",
-    title: "Image logo",
+    value: "image-as-logo",
+    label: "Image logo",
     description: "This option has an image for a logo",
-    logo: "https://placehold.co/600x400",
-    usersCount: 101,
-    appsCount: 202,
-    groupPushMappingsCount: 303,
   },
 ];
 
-const storybookMeta: Meta<typeof GroupPicker> = {
-  title: "Labs Components/GroupPicker",
-  component: GroupPicker,
+type PickerType = typeof Picker<
+  LabelDescription | LabelDescriptionMetaData,
+  boolean,
+  boolean
+>;
+
+const storybookMeta: Meta<PickerType> = {
+  title: "Labs Components/Pickers/Picker",
+  component: Picker,
   argTypes: {
     hasMultipleChoices: {
       control: "boolean",
@@ -91,7 +101,7 @@ const storybookMeta: Meta<typeof GroupPicker> = {
     },
     isDisabled: {
       control: "boolean",
-      description: "Disables the autocomplete input",
+      description: "Disables the Picker input",
       table: {
         type: {
           summary: "boolean",
@@ -109,7 +119,7 @@ const storybookMeta: Meta<typeof GroupPicker> = {
     },
     isReadOnly: {
       control: "boolean",
-      description: "Makes the autocomplete input read-only",
+      description: "Makes the Picker input read-only",
       table: {
         type: {
           summary: "boolean",
@@ -118,7 +128,7 @@ const storybookMeta: Meta<typeof GroupPicker> = {
     },
     label: {
       control: "text",
-      description: "The label text for the autocomplete input",
+      description: "The label text for the Picker input",
       table: {
         type: {
           summary: "string",
@@ -127,8 +137,7 @@ const storybookMeta: Meta<typeof GroupPicker> = {
     },
     onChange: {
       control: null,
-      description:
-        "Callback fired when the value of the autocomplete input changes",
+      description: "Callback fired when the value of the Picker input changes",
       table: {
         type: {
           summary: "func",
@@ -138,7 +147,7 @@ const storybookMeta: Meta<typeof GroupPicker> = {
     onInputChange: {
       control: null,
       description:
-        "Callback fired when the input value of the autocomplete input changes",
+        "Callback fired when the input value of the Picker input changes",
       table: {
         type: {
           summary: "func",
@@ -147,7 +156,7 @@ const storybookMeta: Meta<typeof GroupPicker> = {
     },
     options: {
       control: null,
-      description: "The options for the autocomplete input",
+      description: "The options for the Picker input",
       table: {
         type: {
           summary:
@@ -157,7 +166,7 @@ const storybookMeta: Meta<typeof GroupPicker> = {
     },
     value: {
       control: null,
-      description: "The value of the autocomplete input",
+      description: "The value of the Picker input",
       table: {
         type: {
           summary: "OptionType | OptionType[]",
@@ -179,7 +188,7 @@ const storybookMeta: Meta<typeof GroupPicker> = {
   args: {
     label: "Languages",
     hint: "Languages supported by the system",
-    options: stations,
+    options: languages,
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
@@ -187,113 +196,72 @@ const storybookMeta: Meta<typeof GroupPicker> = {
 
 export default storybookMeta;
 
-type GroupPickerPropsType = GroupPickerProps<
-  GroupPickerOptionType | undefined,
+type PickerPropsType = PickerProps<
+  LabelDescription | LabelDescriptionMetaData,
   boolean | undefined,
   boolean | undefined
 >;
 
-export const GroupPickerDefault: StoryObj<GroupPickerPropsType> = {};
+export const PickerDefault: StoryObj<PickerPropsType> = {};
 
-export const Multiple: StoryObj<GroupPickerPropsType> = {
+export const Multiple: StoryObj<PickerPropsType> = {
   args: {
     hasMultipleChoices: true,
   },
 };
 
-export const Disabled: StoryObj<GroupPickerPropsType> = {
+export const Disabled: StoryObj<PickerPropsType> = {
   args: {
     isDisabled: true,
     value: {
-      id: "en",
-      title: "English",
+      value: "en",
+      label: "English",
       description: "",
     },
   },
 };
 
-export const WithUsersCount: StoryObj<GroupPickerPropsType> = {
+export const WithMetaData: StoryObj<PickerPropsType> = {
   args: {
     options: [
       {
-        id: "en",
-        title: "English",
+        value: "en",
+        label: "English",
         description: "",
-        logo: <GlobeIcon />,
-        usersCount: 10,
-      },
-      {
-        id: "es",
-        title: "Spanish",
-        description: "",
-        usersCount: 10,
-      },
-    ],
-  },
-};
-
-export const WithAppsCount: StoryObj<GroupPickerPropsType> = {
-  args: {
-    options: [
-      {
-        id: "en",
-        title: "English",
-        description: "",
-        logo: <GlobeIcon />,
-        appsCount: 10,
-      },
-    ],
-  },
-};
-
-export const WithGroupMappingsCount: StoryObj<GroupPickerPropsType> = {
-  args: {
-    options: [
-      {
-        id: "en",
-        title: "English",
-        description: "",
-        logo: <GlobeIcon />,
-        groupPushMappingsCount: 10,
-      },
-    ],
-  },
-};
-
-export const WithCustomDetails: StoryObj<GroupPickerPropsType> = {
-  args: {
-    options: [
-      {
-        id: "en",
-        title: "English",
-        description: "",
-        logo: <GlobeIcon />,
-        customDetails: [
+        metaData: [
+          {
+            icon: <SettingsIcon />,
+            detailText: "10",
+          },
+          {
+            icon: <GlobeIcon />,
+            detailText: "1",
+          },
           {
             icon: <FolderIcon />,
             detailText: 40,
           },
         ],
       },
-    ],
-  },
-};
-
-export const WithKitchenSink: StoryObj<GroupPickerPropsType> = {
-  args: {
-    options: [
       {
-        id: "en",
-        title: "English",
+        value: "es",
+        label: "Spanish",
         description: "",
-        logo: <GlobeIcon />,
-        usersCount: 10,
-        appsCount: 20,
-        groupPushMappingsCount: 30,
-        customDetails: [
+        metaData: [
           {
-            icon: <FolderIcon />,
-            detailText: 40,
+            icon: <SettingsIcon />,
+            detailText: "10",
+          },
+        ],
+      },
+      {
+        value: "image-as-logo",
+        label: "Image logo",
+        description: "This option has an image for a logo",
+        metaData: [
+          {
+            icon: <SettingsIcon />,
+            detailText: "10",
           },
         ],
       },
