@@ -18,6 +18,21 @@ if [[ -z "$APPLITOOLS_API_KEY" ]]; then
   exit 1
 fi
 
+# Fetch open pull requests
+local GITHUB_RESPONSE=$(curl -s -L \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer $GITHUB_TOKEN" \
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  https://api.github.com/repos/$GITHUB_ORG/$REPO/pulls?state=open&head=$GITHUB_ORG:$BRANCH)
+
+echo $GITHUB_RESPONSE
+
+export BASE_BRANCH_NAME=$(echo $response | jq -r '.[0].base.ref')
+export COMMIT_MESSAGE=$(echo $response | jq -r '.[0].body')
+export PR_NUMBER=$(echo $response | jq -r '.[0].number')
+export PR_TITLE=$(echo $response | jq -r '.[0].title')
+export PR_URL=$(echo $response | jq -r '.[0].html_url')
+
 export APPLITOOLS_BATCH_ID=$SHA
 export APPLITOOLS_SHOW_LOGS=true
 export CURRENT_BRANCH_NAME=$BRANCH

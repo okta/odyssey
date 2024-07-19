@@ -11,9 +11,10 @@
  */
 
 const branchName =
-  process.env?.GITHUB_HEAD_REF ?? process.env.CURRENT_BRANCH_NAME;
-const parentBranchName = process.env?.GITHUB_BASE_REF ?? "main";
-const commitHash = process.env?.GITHUB_SHA?.slice(0, 7) ?? process.env.SHA;
+  process.env.GITHUB_HEAD_REF ?? process.env.CURRENT_BRANCH_NAME;
+const parentBranchName =
+  process.env.GITHUB_BASE_REF ?? process.env.BASE_BRANCH_NAME;
+const commitHash = process.env.GITHUB_SHA ?? process.env.SHA;
 
 module.exports = {
   accessibilityValidation: {
