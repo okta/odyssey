@@ -13,7 +13,7 @@
 const branchName =
   process.env.GITHUB_HEAD_REF ?? process.env.CURRENT_BRANCH_NAME;
 const parentBranchName =
-  process.env.GITHUB_BASE_REF ?? process.env.BASE_BRANCH_NAME;
+  process.env.GITHUB_BASE_REF ?? process.env.BASE_BRANCH_NAME ?? "main";
 const commitHash = process.env.GITHUB_SHA ?? process.env.SHA;
 
 const applitoolsConfig = {
@@ -38,7 +38,7 @@ const applitoolsConfig = {
   },
   runInDocker: true,
   serverUrl: "https://oktaeyes.applitools.com",
-  testConcurrency: 5,
+  testConcurrency: 20,
 };
 
 module.exports = applitoolsConfig;
