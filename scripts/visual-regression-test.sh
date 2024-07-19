@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 source $OKTA_HOME/$REPO/scripts/setup.sh
 
@@ -34,7 +34,6 @@ export PR_TITLE=$(echo $response | jq -r '.[0].title')
 export PR_URL=$(echo $response | jq -r '.[0].html_url')
 
 export APPLITOOLS_BATCH_ID=$SHA
-export APPLITOOLS_SHOW_LOGS=true
 export CURRENT_BRANCH_NAME=$BRANCH
 export CHROME_VERSION="126.0.6478.55"
 
