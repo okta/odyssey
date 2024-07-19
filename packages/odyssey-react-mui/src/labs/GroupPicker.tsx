@@ -22,25 +22,22 @@ import {
 } from "../CustomizableAutocomplete";
 import { Tag } from "../Tag";
 import { Heading6 } from "../Typography";
-import { UserIcon, GridIcon, GroupIcon } from "../icons.generated";
+import { AppsIcon, GroupIcon, UserIcon } from "../icons.generated";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
 } from "../OdysseyDesignTokensContext";
 
-const GroupOption = styled("li", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
-  display: "flex",
-  alignItems: "flex-start !important",
-  gap: odysseyDesignTokens.Spacing3,
-}));
+const GroupOption = styled.li({
+  // Needed to override MUI's display: flex in this use case
+  display: "block !important",
+});
 
 const GroupOptionLogoContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   position: "relative",
-  bottom: "2px", // to visually align icon with title
+  overflow: "hidden",
   width: odysseyDesignTokens.Spacing5,
   height: odysseyDesignTokens.Spacing5,
 
@@ -48,28 +45,39 @@ const GroupOptionLogoContainer = styled("div", {
     width: "100%",
     height: "100%",
   },
+
+  img: {
+    position: "absolute",
+    top: "50%",
+    width: "100%",
+    transform: "translateY(-50%)",
+  },
 }));
 
 const GroupOptionContent = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
-  "[data-option-title='true']": {
-    margin: 0,
-  },
+  paddingInlineStart: `calc(
+    ${odysseyDesignTokens.Spacing3} + ${odysseyDesignTokens.Spacing5}
+  )`,
+}));
+
+const GroupOptionTitleContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
+  display: "flex",
+  alignItems: "center",
+  gap: odysseyDesignTokens.Spacing3,
 
   p: {
     margin: 0,
-  },
-
-  "p + p": {
-    marginBlockStart: odysseyDesignTokens.Spacing1,
   },
 }));
 
 const GroupOptionDescription = styled("p", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
-  marginBlockStart: odysseyDesignTokens.Spacing1,
+  margin: `${odysseyDesignTokens.Spacing1} 0 0`,
 }));
 
 const GroupOptionDetails = styled("div", {
@@ -93,6 +101,30 @@ const GroupOptionDetail = styled("div", {
   },
 }));
 
+type OptionLogoProps = {
+  logo: GroupPickerOptionType["logo"];
+  odysseyDesignTokens: DesignTokens;
+};
+
+const OptionLogo = ({ logo, odysseyDesignTokens }: OptionLogoProps) => {
+  const isImageLogo = typeof logo === "string";
+
+  if (isImageLogo) {
+    return (
+      <GroupOptionLogoContainer odysseyDesignTokens={odysseyDesignTokens}>
+        {/* NOTE: Intentionally leaving alt as an empty string here so screen readers will ignore this image */}
+        {/* Image should be suffciently described by the adjacent title and/or description of the option */}
+        <img src={logo} alt="" role="presentation" />
+      </GroupOptionLogoContainer>
+    );
+  } else {
+    return (
+      <GroupOptionLogoContainer odysseyDesignTokens={odysseyDesignTokens}>
+        {logo}
+      </GroupOptionLogoContainer>
+    );
+  }
+};
 export type CustomDetail = {
   icon: ReactElement;
   detailText: string | number;
@@ -104,7 +136,7 @@ export type GroupPickerOptionType = {
   customDetails?: CustomDetail[];
   groupPushMappingsCount?: number;
   id: string;
-  logo?: ReactElement;
+  logo?: ReactElement | string;
   title: string;
   usersCount?: number;
 };
@@ -142,6 +174,8 @@ const GroupPicker = <
 }: GroupPickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
+  const hasLogoOptions = options.some((option) => Boolean(option.logo));
+
   const isOptionEqualToValue = useCallback(
     (sourceValue: OptionType, targetValue: OptionType) =>
       sourceValue.id === targetValue.id,
@@ -166,7 +200,7 @@ const GroupPicker = <
       >["renderOption"]
     >
   >(
-    (props, option) => {
+    (muiProps, option) => {
       const {
         appsCount,
         customDetails,
@@ -185,25 +219,22 @@ const GroupPicker = <
         (customDetails && customDetails.length > 0);
 
       return (
-        <GroupOption
-          {...props}
-          key={id}
-          odysseyDesignTokens={odysseyDesignTokens}
-        >
-          <GroupOptionLogoContainer odysseyDesignTokens={odysseyDesignTokens}>
-            {logo}
-          </GroupOptionLogoContainer>
-          <div>
-            <GroupOptionContent odysseyDesignTokens={odysseyDesignTokens}>
-              <Heading6 component="p">{title}</Heading6>
-              {description && (
-                <GroupOptionDescription
-                  odysseyDesignTokens={odysseyDesignTokens}
-                >
-                  {description}
-                </GroupOptionDescription>
-              )}
-            </GroupOptionContent>
+        <GroupOption {...muiProps} key={id}>
+          <GroupOptionTitleContainer odysseyDesignTokens={odysseyDesignTokens}>
+            {hasLogoOptions && (
+              <OptionLogo
+                logo={logo}
+                odysseyDesignTokens={odysseyDesignTokens}
+              />
+            )}
+            <Heading6 component="p">{title}</Heading6>
+          </GroupOptionTitleContainer>
+          <GroupOptionContent odysseyDesignTokens={odysseyDesignTokens}>
+            {description && (
+              <GroupOptionDescription odysseyDesignTokens={odysseyDesignTokens}>
+                {description}
+              </GroupOptionDescription>
+            )}
             {hasOptionDetails && (
               <GroupOptionDetails odysseyDesignTokens={odysseyDesignTokens}>
                 {typeof usersCount === "number" && (
@@ -214,7 +245,7 @@ const GroupPicker = <
                 )}
                 {typeof appsCount === "number" && (
                   <GroupOptionDetail odysseyDesignTokens={odysseyDesignTokens}>
-                    <GridIcon />
+                    <AppsIcon />
                     {appsCount}
                   </GroupOptionDetail>
                 )}
@@ -235,11 +266,11 @@ const GroupPicker = <
                 ))}
               </GroupOptionDetails>
             )}
-          </div>
+          </GroupOptionContent>
         </GroupOption>
       );
     },
-    [odysseyDesignTokens],
+    [hasLogoOptions, odysseyDesignTokens],
   );
 
   const renderTags = useCallback<
@@ -267,7 +298,11 @@ const GroupPicker = <
               },
             }}
           >
-            <Tag icon={logo} label={title} onRemove={onDelete} />
+            {typeof logo !== "string" ? (
+              <Tag icon={logo} label={title} onRemove={onDelete} />
+            ) : (
+              <Tag label={title} onRemove={onDelete} />
+            )}
           </Box>
         );
       }),
