@@ -19,7 +19,7 @@ if [[ -z "$APPLITOOLS_API_KEY" ]]; then
 fi
 
 # Fetch open pull requests
-local GITHUB_RESPONSE=$(curl -s -L \
+export GITHUB_RESPONSE=$(curl -s -L \
   -H "Accept: application/vnd.github+json" \
   -H "Authorization: Bearer $GITHUB_TOKEN" \
   -H "X-GitHub-Api-Version: 2022-11-28" \
