@@ -25,7 +25,13 @@ local GITHUB_RESPONSE=$(curl -s -L \
   -H "X-GitHub-Api-Version: 2022-11-28" \
   https://api.github.com/repos/$GITHUB_ORG/$REPO/pulls?state=open&head=$GITHUB_ORG:$BRANCH)
 
+echo "LOOK FOR THIS!"
 echo $GITHUB_RESPONSE
+echo $BASE_BRANCH_NAME
+echo $COMMIT_MESSAGE
+echo $PR_NUMBER
+echo $PR_TITLE
+echo $PR_URL
 
 export BASE_BRANCH_NAME=$(echo $response | jq -r '.[0].base.ref')
 export COMMIT_MESSAGE=$(echo $response | jq -r '.[0].body')
