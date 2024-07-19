@@ -16,7 +16,7 @@ const parentBranchName =
   process.env.GITHUB_BASE_REF ?? process.env.BASE_BRANCH_NAME;
 const commitHash = process.env.GITHUB_SHA ?? process.env.SHA;
 
-module.exports = {
+const applitoolsConfig = {
   accessibilityValidation: {
     level: "AA",
     guidelinesVersion: "WCAG_2_1",
@@ -40,3 +40,5 @@ module.exports = {
   serverUrl: "https://oktaeyes.applitools.com",
   testConcurrency: 5,
 };
+
+module.exports = applitoolsConfig;
