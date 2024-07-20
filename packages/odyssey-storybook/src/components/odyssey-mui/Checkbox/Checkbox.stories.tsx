@@ -211,7 +211,7 @@ export const Required: StoryObj<typeof Checkbox> = {
 
 export const Checked: StoryObj<typeof Checkbox> = {
   args: {
-    label: "Pre-flight systems check complete",
+    label: "Automatically assign Okta Admin Console",
     isDefaultChecked: true,
   },
 };
@@ -226,7 +226,7 @@ export const Disabled: StoryObj<typeof Checkbox> = {
     },
   },
   args: {
-    label: "Pre-flight systems check complete",
+    label: "Automatically assign Okta Admin Console",
     isDisabled: true,
     isDefaultChecked: false,
   },
@@ -242,7 +242,7 @@ export const Indeterminate: StoryObj<typeof Checkbox> = {
     },
   },
   args: {
-    label: "Pre-flight systems check complete",
+    label: "Automatically assign Okta Admin Console",
     isIndeterminate: true,
     isDefaultChecked: true,
   },
@@ -250,7 +250,7 @@ export const Indeterminate: StoryObj<typeof Checkbox> = {
 
 export const Invalid: StoryObj<typeof Checkbox> = {
   args: {
-    label: "Pre-flight systems check complete",
+    label: "Automatically assign Okta Admin Console",
     validity: "invalid",
     isDefaultChecked: false,
   },
@@ -261,12 +261,12 @@ export const Invalid: StoryObj<typeof Checkbox> = {
 
 export const ReadOnly: StoryObj<typeof Checkbox> = {
   args: {
-    label: "Pre-flight systems check complete",
+    label: "Automatically assign Okta Admin Console",
     isReadOnly: true,
     isDefaultChecked: true,
   },
   play: async ({ canvasElement, step }) => {
-    await checkTheBox({ canvasElement, step })("Checkbox Disabled");
+    await checkTheBox({ canvasElement, step })("ReadOnly Checkbox");
   },
 };
 
@@ -297,7 +297,7 @@ export const Controlled: StoryObj<typeof Checkbox> = {
     },
   },
   args: {
-    label: "Pre-flight systems check complete",
+    label: "Automatically assign Okta Admin Console",
     isChecked: true,
     onChange: () => {},
   },

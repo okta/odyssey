@@ -17,43 +17,22 @@ import {
   Radio as MuiRadio,
   RadioProps as MuiRadioProps,
 } from "@mui/material";
-
 import { memo, useCallback, useMemo, useRef, useImperativeHandle } from "react";
-
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { HtmlProps } from "./HtmlProps";
 import { FocusHandle } from "./inputUtils";
 import { Typography } from "./Typography";
 
 export type RadioProps = {
-  /**
-   * The ref forwarded to the Radio
-   */
   inputRef?: React.RefObject<FocusHandle>;
-  /**
-   * If `true`, the Radio is selected
-   */
   isChecked?: boolean;
-  /**
-   * If `true`, the Radio has an invalid value
-   */
   isInvalid?: boolean;
-  /**
-   * The label text for the Radio
-   */
   label: string;
-  /**
-   * The value attribute of the Radio
-   */
   value: string;
-  /**
-   * Callback fired when the state is changed. Provides event and checked value.
-   */
   onChange?: MuiRadioProps["onChange"];
-  /**
-   * Callback fired when the blur event happens. Provides event value.
-   */
   onBlur?: MuiFormControlLabelProps["onBlur"];
+  isReadOnly?: boolean;
+  onMouseDown?: React.MouseEventHandler<HTMLSpanElement>; // Add this line
 } & Pick<FieldComponentProps, "hint" | "id" | "isDisabled" | "name"> &
   Pick<HtmlProps, "testId" | "translate">;
 
@@ -61,15 +40,17 @@ const Radio = ({
   hint,
   inputRef,
   isChecked,
-  isDisabled,
+  isDisabled = false,
   isInvalid,
   label: labelProp,
   name,
   testId,
   translate,
   value,
+  isReadOnly = false,
   onChange: onChangeProp,
   onBlur: onBlurProp,
+  onMouseDown, // Add this line
 }: RadioProps) => {
   const localInputRef = useRef<HTMLInputElement>(null);
   useImperativeHandle(
@@ -95,8 +76,23 @@ const Radio = ({
   );
 
   const onChange = useCallback<NonNullable<MuiRadioProps["onChange"]>>(
-    (event, checked) => onChangeProp?.(event, checked),
-    [onChangeProp],
+    (event, checked) => {
+      if (isReadOnly) {
+        event.preventDefault();
+        return;
+      }
+      onChangeProp?.(event, checked);
+    },
+    [onChangeProp, isReadOnly],
+  );
+
+  const handleMouseDown = useCallback<React.MouseEventHandler<HTMLSpanElement>>(
+    (event) => {
+      if (isReadOnly) {
+        event.preventDefault();
+      }
+    },
+    [isReadOnly],
   );
 
   const onBlur = useCallback<NonNullable<MuiFormControlLabelProps["onBlur"]>>(
@@ -114,17 +110,30 @@ const Radio = ({
         <MuiRadio
           inputProps={{
             "data-se": testId,
+            "aria-readonly": isReadOnly,
+            readOnly: isReadOnly,
+            tabIndex: isReadOnly ? 0 : 0,
           }}
           inputRef={localInputRef}
           onChange={onChange}
+          onMouseDown={onMouseDown || handleMouseDown} // Add this line
+          disabled={isDisabled}
         />
       }
-      disabled={isDisabled}
       label={label}
       name={name}
       translate={translate}
       value={value}
       onBlur={onBlur}
+      disabled={isDisabled}
+      sx={{
+        ...(isReadOnly && {
+          cursor: "default",
+          "& .MuiTypography-root": {
+            cursor: "default",
+          },
+        }),
+      }}
     />
   );
 };

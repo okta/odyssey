@@ -19,7 +19,6 @@ import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaDat
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, within } from "@storybook/testing-library";
 import { axeRun } from "../../../axe-util";
-
 const storybookMeta: Meta<typeof RadioGroup> = {
   title: "MUI Components/Forms/RadioGroup",
   component: RadioGroup,
@@ -54,6 +53,7 @@ const storybookMeta: Meta<typeof RadioGroup> = {
     HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
     id: fieldComponentPropsMetaData.id,
     isDisabled: fieldComponentPropsMetaData.isDisabled,
+    isReadOnly: fieldComponentPropsMetaData.isReadOnly,
     label: {
       control: "text",
       description: "The text label for the radio group",
@@ -137,7 +137,13 @@ export const Disabled: StoryObj<typeof RadioGroup> = {
     defaultValue: "",
   },
 };
-
+export const ReadOnly: StoryObj<typeof RadioGroup> = {
+  ...Template,
+  args: {
+    isReadOnly: true,
+    defaultValue: "",
+  },
+};
 export const Error: StoryObj<typeof RadioGroup> = {
   ...Template,
   parameters: {

@@ -11,12 +11,10 @@
  */
 
 import { memo, ReactElement, useMemo } from "react";
-
 import {
   FormControl as MuiFormControl,
   FormLabel as MuiFormLabel,
 } from "@mui/material";
-
 import { FieldComponentProps } from "./FieldComponentProps";
 import { FieldError } from "./FieldError";
 import { FieldHint } from "./FieldHint";
@@ -35,6 +33,7 @@ export type RenderFieldComponentProps = {
   errorMessageElementId?: string;
   id: string;
   labelElementId: string;
+  isReadOnly?: boolean; // Add this line
 };
 
 export type FieldProps = {
@@ -75,6 +74,7 @@ export type FieldProps = {
     errorMessageElementId,
     id,
     labelElementId,
+    isReadOnly, // Add this line
   }: RenderFieldComponentProps) => ReactElement;
 };
 
@@ -91,6 +91,7 @@ const Field = ({
   isFullWidth = false,
   isRadioGroup = false,
   isOptional = false,
+  isReadOnly = false, // Add this line
   label,
   renderFieldComponent,
 }: FieldProps &
@@ -104,6 +105,7 @@ const Field = ({
     | "isDisabled"
     | "isFullWidth"
     | "isOptional"
+    | "isReadOnly" // Add this line
   > &
   Pick<HtmlProps, "ariaDescribedBy">) => {
   const { t } = useTranslation();
@@ -167,6 +169,7 @@ const Field = ({
         errorMessageElementId,
         id,
         labelElementId,
+        isReadOnly, // Pass this prop
       })}
 
       {(errorMessage || errorMessageList) && (

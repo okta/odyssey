@@ -78,7 +78,7 @@ const Checkbox = ({
   isDefaultChecked,
   isDisabled,
   isIndeterminate,
-  isReadOnly = false, // Provide a default value
+  isReadOnly = false,
   isRequired,
   label: labelProp,
   hint,
@@ -107,20 +107,20 @@ const Checkbox = ({
   const localInputRef = useRef<HTMLInputElement>(null);
   useImperativeHandle(
     inputRef,
-    () => {
-      return {
-        focus: () => {
-          localInputRef.current?.focus();
-        },
-      };
-    },
+    () => ({
+      focus: () => {
+        localInputRef.current?.focus();
+      },
+    }),
     [],
   );
 
   const label = useMemo(() => {
     return (
       <>
-        <Typography component="span">{labelProp}</Typography>
+        <Typography component="span">
+          {labelProp} {isReadOnly && "(Read-only)"}
+        </Typography>
         {isRequired && (
           <>
             {" "}
@@ -129,10 +129,14 @@ const Checkbox = ({
             </Typography>
           </>
         )}
-        {hint && <FormHelperText translate={translate}>{hint}</FormHelperText>}
+        {hint && (
+          <FormHelperText translate={translate}>
+            {hint} {isReadOnly && "(This field is read-only)"}
+          </FormHelperText>
+        )}
       </>
     );
-  }, [isRequired, labelProp, hint, t, translate]);
+  }, [isRequired, labelProp, hint, t, translate, isReadOnly]);
 
   const onChange = useCallback<NonNullable<MuiCheckboxProps["onChange"]>>(
     (event, checked) => {
@@ -168,7 +172,6 @@ const Checkbox = ({
       sx={{
         alignItems: "flex-start",
         ...(isReadOnly && {
-          //ReadOnly cursor for label
           "& .MuiTypography-root": {
             cursor: "default",
           },
