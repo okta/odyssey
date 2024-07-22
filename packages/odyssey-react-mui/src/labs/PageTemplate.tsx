@@ -84,20 +84,10 @@ const TemplateContainer = styled("div", {
   padding: odysseyDesignTokens.Spacing6,
 }));
 
-const TemplateHeader = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{
-  odysseyDesignTokens: DesignTokens;
-}>(({ odysseyDesignTokens }) => ({
+const TemplateHeader = styled("div")(() => ({
   display: "flex",
   alignItems: "flex-end",
   justifyContent: "space-between",
-
-  ["@media (max-width: 800px)"]: {
-    alignItems: "flex-start",
-    flexDirection: "column",
-    gap: odysseyDesignTokens.Spacing2,
-  },
 }));
 
 const TemplateHeaderPrimaryContent = styled("div")(() => ({
@@ -117,10 +107,6 @@ const TemplateHeaderSecondaryContent = styled("div", {
   gap: odysseyDesignTokens.Spacing2,
   minHeight: odysseyDesignTokens.Spacing7,
   justifyContent: "center",
-
-  ["@media (max-width: 800px)"]: {
-    alignItems: "flex-start",
-  },
 }));
 
 const TemplateHeaderButtons = styled("div", {
@@ -129,17 +115,7 @@ const TemplateHeaderButtons = styled("div", {
   odysseyDesignTokens: DesignTokens;
 }>(({ odysseyDesignTokens }) => ({
   display: "flex",
-
-  ["& > div, & > button"]: {
-    marginInlineStart: odysseyDesignTokens.Spacing2,
-  },
-
-  ["@media (max-width: 800px)"]: {
-    ["& > div, & > button"]: {
-      marginInlineEnd: odysseyDesignTokens.Spacing2,
-      marginInlineStart: odysseyDesignTokens.Spacing0,
-    },
-  },
+  gap: odysseyDesignTokens.Spacing2,
 }));
 
 const TemplateContent = styled("div", {
@@ -206,7 +182,7 @@ const PageTemplate = ({
       odysseyDesignTokens={odysseyDesignTokens}
       isFullWidth={isFullWidth}
     >
-      <TemplateHeader odysseyDesignTokens={odysseyDesignTokens}>
+      <TemplateHeader>
         <TemplateHeaderPrimaryContent>
           {title && <Heading4>{title}</Heading4>}
           {description && <Subordinate>{description}</Subordinate>}

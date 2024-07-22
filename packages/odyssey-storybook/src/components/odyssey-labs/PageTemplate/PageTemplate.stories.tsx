@@ -12,10 +12,7 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 
-import {
-  MuiThemeDecorator,
-  RemovePaddingDecorator,
-} from "../../../../.storybook/components";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
 import {
   Person,
   columns as personColumns,
@@ -203,7 +200,7 @@ const storybookMeta: Meta<PageTemplateProps> = {
       },
     },
   },
-  decorators: [RemovePaddingDecorator, MuiThemeDecorator],
+  decorators: [MuiThemeDecorator],
   parameters: {
     backgrounds: {
       default: "gray",

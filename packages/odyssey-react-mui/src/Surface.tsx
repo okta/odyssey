@@ -24,7 +24,6 @@ const StyledContainer = styled(MuiPaper, {
 })<{
   odysseyDesignTokens: DesignTokens;
 }>(({ odysseyDesignTokens }) => ({
-  // backgroundColor: odysseyDesignTokens.HueNeutralWhite,
   borderRadius: odysseyDesignTokens.Spacing4,
   padding: odysseyDesignTokens.Spacing4,
 }));
