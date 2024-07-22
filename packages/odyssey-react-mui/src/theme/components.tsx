@@ -101,6 +101,10 @@ export const components = ({
             borderBottomStyle: "solid",
             borderBottomWidth: odysseyTokens.BorderWidthMain,
           },
+          "&.nav-accordion": {
+            border: "0 !important",
+            width: "100%",
+          },
         }),
       },
     },
@@ -121,6 +125,20 @@ export const components = ({
             outlineStyle: "solid",
             zIndex: 1,
           },
+          svg: {
+            fontSize: "1.2em",
+            height: "1em",
+            position: "relative",
+            insetBlockStart: "-0.0625em",
+            verticalAlign: "middle",
+            width: "1em",
+          },
+          "&.nav-accordion-summary": {
+            padding: `${odysseyTokens.Spacing2} ${odysseyTokens.Spacing4}`,
+            ".MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
+              transform: "rotate(-90deg) !important",
+            },
+          },
         }),
         content: () => ({
           marginBlock: 0,
@@ -137,6 +155,11 @@ export const components = ({
         root: () => ({
           paddingInline: odysseyTokens.Spacing3,
           paddingBlock: odysseyTokens.Spacing4,
+          "&.nav-accordion-details": {
+            paddingTop: 0,
+            paddingBottom: 0,
+            paddingLeft: odysseyTokens.Spacing2,
+          },
         }),
       },
     },
@@ -454,12 +477,14 @@ export const components = ({
           padding: odysseyTokens.Spacing1,
           marginRight: "unset",
         },
-        popper: {
+        popper: ({ ownerState }) => ({
           background: "transparent",
           paddingBlockStart: odysseyTokens.Spacing1,
-          height: "100%",
-          maxHeight: "40vh",
-        },
+          ...(ownerState.ListboxComponent !== undefined && {
+            height: "100%",
+            maxHeight: "40vh",
+          }),
+        }),
         paper: ({ ownerState }) => ({
           /**
            * ListboxComponent is used when `isVirtualized` prop is true.
@@ -786,6 +811,10 @@ export const components = ({
             height: CARD_IMAGE_HEIGHT,
           },
 
+          "&.hasAccessory": {
+            paddingLeft: odysseyTokens.Spacing4,
+          },
+
           "&.isClickable:hover": {
             backgroundColor: odysseyTokens.HueNeutral50,
             boxShadow: odysseyTokens.DepthHigh,
@@ -1029,49 +1058,24 @@ export const components = ({
             fontSize: "0.71428571rem",
             textTransform: "uppercase",
 
-            "&::before": {
-              content: "''",
-              width: "0.42857143rem",
-              height: "0.42857143rem",
-              marginInlineEnd: odysseyTokens.Spacing2,
-              borderRadius: "100%",
-              backgroundColor: odysseyTokens.HueNeutral400,
-            },
-
             [`&.${chipClasses.colorError}`]: {
               backgroundColor: odysseyTokens.PaletteDangerLighter,
               color: odysseyTokens.TypographyColorDanger,
-
-              "&::before": {
-                backgroundColor: odysseyTokens.PaletteDangerMain,
-              },
             },
 
             [`&.${chipClasses.colorInfo}`]: {
               backgroundColor: odysseyTokens.PalettePrimaryLighter,
               color: odysseyTokens.PalettePrimaryText,
-
-              "&::before": {
-                backgroundColor: odysseyTokens.HueBlue400,
-              },
             },
 
             [`&.${chipClasses.colorSuccess}`]: {
               backgroundColor: odysseyTokens.PaletteSuccessLighter,
               color: odysseyTokens.TypographyColorSuccess,
-
-              "&::before": {
-                backgroundColor: odysseyTokens.PaletteSuccessMain,
-              },
             },
 
             [`&.${chipClasses.colorWarning}`]: {
               backgroundColor: odysseyTokens.PaletteWarningLighter,
               color: odysseyTokens.TypographyColorWarning,
-
-              "&::before": {
-                backgroundColor: odysseyTokens.HueYellow200,
-              },
             },
           }),
 
@@ -1999,6 +2003,9 @@ export const components = ({
             display: "inline-block",
             height: "1em",
             lineHeight: 1,
+            "& svg": {
+              fontSize: "1em",
+            },
           },
 
           ".Link-indicator": {
@@ -2009,7 +2016,7 @@ export const components = ({
             marginInlineEnd: odysseyTokens.Spacing1,
           },
           svg: {
-            fontSize: "1em",
+            fontSize: "1.2em",
             height: "1em",
             position: "relative",
             insetBlockStart: "-0.0625em",
@@ -2587,14 +2594,15 @@ export const components = ({
 
           [`.${tableHeadClasses.root} &`]: {
             color: odysseyTokens.TypographyColorHeading,
-            fontSize: `0.71428571rem`,
-            lineHeight: odysseyTokens.TypographyLineHeightBody,
             fontWeight: odysseyTokens.TypographyWeightBodyBold,
             textTransform: "uppercase",
             backgroundColor: odysseyTokens.HueNeutral50,
             borderBottom: 0,
             height: `${odysseyTokens.Spacing7} !important`,
             paddingBlock: `${odysseyTokens.Spacing3} !important`,
+            fontSize: odysseyTokens.TypographySizeOverline,
+            lineHeight: odysseyTokens.TypographyLineHeightBody,
+            letterSpacing: 1.3,
           },
 
           [`.${tableHeadClasses.root} &:first-of-type`]: {

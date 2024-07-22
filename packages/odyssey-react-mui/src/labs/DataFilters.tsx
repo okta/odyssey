@@ -283,10 +283,9 @@ const DataFilters = ({
 
   const [searchValue, setSearchValue] = useState<string>(defaultSearchTerm);
 
-  const activeFilters = useMemo(
-    () => filters.filter((filter) => filter.value),
-    [filters],
-  );
+  const activeFilters = useMemo(() => {
+    return filters.filter((filter) => filter.value);
+  }, [filters]);
 
   const [isFiltersMenuOpen, setIsFiltersMenuOpen] = useState<boolean>(false);
 
@@ -338,11 +337,14 @@ const DataFilters = ({
 
   const updateFilters = useCallback<UpdateFiltersOrValues>(
     ({ filterId, value }) => {
+      setInputValues((prevInputValues) => ({
+        ...prevInputValues,
+        [filterId]: value,
+      }));
       const updatedFilters = filtersProp.map((filter) => ({
         ...filter,
         value: filter.id === filterId ? value : inputValues[filter.id],
       }));
-
       setFilters(updatedFilters);
     },
     [inputValues, filtersProp],

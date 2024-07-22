@@ -34,6 +34,7 @@ import {
   MRT_ColumnDef,
   MRT_TableInstance,
 } from "material-react-table";
+import { useTranslation } from "react-i18next";
 import {
   ArrowDownIcon,
   ArrowUnsortedIcon,
@@ -61,7 +62,6 @@ import { useScrollIndication } from "./useScrollIndication";
 import styled from "@emotion/styled";
 import { EmptyState } from "../EmptyState";
 import { Callout } from "../Callout";
-import { t } from "i18next";
 
 export type DataTableColumn<T extends DataTableRowData> = MRT_ColumnDef<T> & {
   /**
@@ -387,6 +387,8 @@ const DataTable = ({
   searchDelayTime,
   totalRows,
 }: DataTableProps) => {
+  const { t } = useTranslation();
+
   const [data, setData] = useState<DataTableRowData[]>([]);
   const [pagination, setPagination] = useState({
     pageIndex: currentPage,
@@ -599,10 +601,11 @@ const DataTable = ({
       </Box>
     );
   }, [
-    tableInnerContainerWidth,
     emptyPlaceholder,
-    noResultsPlaceholder,
     isEmpty,
+    noResultsPlaceholder,
+    t,
+    tableInnerContainerWidth,
   ]);
 
   const columnIds = useMemo(() => {
@@ -774,7 +777,15 @@ const DataTable = ({
         setIsLoading(false);
       }
     })();
-  }, [pagination, columnSorting, search, filters, getData, errorMessageProp]);
+  }, [
+    columnSorting,
+    errorMessageProp,
+    filters,
+    getData,
+    pagination,
+    search,
+    t,
+  ]);
 
   useEffect(() => {
     if (!initialFilters && filters) {
