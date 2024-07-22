@@ -13,14 +13,14 @@
 import { Dispatch, memo, useCallback, SetStateAction, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import { AvailableLayouts, Layout } from "./componentTypes";
+import { AvailableLayouts, DataLayout } from "./componentTypes";
 import { MenuButton } from "../../MenuButton";
 import { MenuItem } from "../../MenuItem";
 
 export type LayoutSwitcherProps = {
   availableLayouts: AvailableLayouts;
-  currentLayout: Layout;
-  setCurrentLayout: Dispatch<SetStateAction<Layout>>;
+  currentLayout: DataLayout;
+  setCurrentLayout: Dispatch<SetStateAction<DataLayout>>;
 };
 
 const LayoutSwitcher = ({
@@ -31,7 +31,7 @@ const LayoutSwitcher = ({
   const { t } = useTranslation();
 
   const changeLayout = useCallback(
-    (value: Layout) => {
+    (value: DataLayout) => {
       setCurrentLayout(value);
     },
     [setCurrentLayout],
@@ -39,7 +39,7 @@ const LayoutSwitcher = ({
 
   const memoizedMenuItems = useMemo(
     () =>
-      availableLayouts.map((value: Layout) => ({
+      availableLayouts.map((value: DataLayout) => ({
         value,
         onClick: () => changeLayout(value),
         label: t(`dataview.layout.${value}`),
