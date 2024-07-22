@@ -23,9 +23,11 @@ export * from "./DataComponents";
 export * from "./DataTablePagination";
 export * from "./DataFilters";
 export * from "./FileUpload";
+export * from "./Layout";
 export * from "./materialReactTableTypes";
 /** @deprecated Will be removed in a future Odyssey version in lieu of DataTable */
 export * from "./StaticTable";
+export * from "./PageTemplate";
 /** @deprecated Will be removed in a future Odyssey version in lieu of DataTable */
 export * from "./PaginatedTable";
 
