@@ -37,10 +37,10 @@ import { paginationTypeValues } from "../DataTablePagination";
 import { ReactNode } from "react";
 import { StackCardProps } from "./StackCard";
 
-export type Layout = (typeof availableLayouts)[number];
+export type DataLayout = (typeof availableLayouts)[number];
 export type StackLayout = (typeof availableStackLayouts)[number];
 
-export type AvailableLayouts = Layout[];
+export type AvailableLayouts = DataLayout[];
 export type AvailableStackLayouts = StackLayout[];
 
 export type UniversalProps = {
@@ -97,7 +97,7 @@ export type StackProps = {
   rowActionMenuItems?: DataTableRowActionsProps["rowActionMenuItems"];
 };
 
-export type ViewProps<L extends Layout> = {
+export type ViewProps<L extends DataLayout> = {
   availableLayouts?: L[];
   initialLayout?: L;
   stackOptions?: StackProps;
