@@ -26,6 +26,8 @@ export * from "./ArrowUnsorted";
 export * from "./ArrowUp";
 export * from "./ArrowUpperLeft";
 export * from "./ArrowUpperRight";
+export * from "./Aura";
+export * from "./AuraWordmark";
 export * from "./Bug";
 export * from "./Calendar";
 export * from "./Call";
