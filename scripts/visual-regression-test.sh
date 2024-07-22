@@ -26,6 +26,7 @@ export GITHUB_RESPONSE=$(curl -s -L \
   https://api.github.com/repos/$GITHUB_ORG/$REPO/pulls?state=open&head=$GITHUB_ORG:$BRANCH)
 
 echo "LOOK FOR THIS!"
+echo "https://api.github.com/repos/$GITHUB_ORG/$REPO/pulls?state=open&head=$GITHUB_ORG:$BRANCH"
 echo $GITHUB_RESPONSE
 echo $BASE_BRANCH_NAME
 echo $COMMIT_MESSAGE
