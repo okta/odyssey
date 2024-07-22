@@ -66,16 +66,16 @@ export const useFilterConversion = ({
           (column) => column.accessorKey === item,
         );
         const filter = foundColumn && convertColumnToFilter(foundColumn);
-        return filter ? [...accumulator, filter] : accumulator;
+        return filter ? accumulator.concat(filter) : accumulator;
       }
 
       if ("accessorKey" in item) {
         const filter = convertColumnToFilter(item);
-        return filter ? [...accumulator, filter] : accumulator;
+        return filter ? accumulator.concat(filter) : accumulator;
       }
 
       if ("label" in item) {
-        return [...accumulator, item as DataFilter];
+        return accumulator.concat(item);
       }
 
       return accumulator;

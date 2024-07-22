@@ -62,17 +62,19 @@ const TableSettings = ({
     [setTableState],
   );
 
-  const visibleColumns = useMemo(() => {
-    return new Set(
-      columns
-        .filter((column) =>
-          columnVisibility
-            ? columnVisibility[column.accessorKey!] !== false
-            : true,
-        )
-        .map((column) => column.accessorKey!),
-    );
-  }, [columns, columnVisibility]);
+  const visibleColumns = useMemo(
+    () =>
+      new Set(
+        columns
+          .filter((column) =>
+            columnVisibility
+              ? columnVisibility[column.accessorKey!] !== false
+              : true,
+          )
+          .map((column) => column.accessorKey!),
+      ),
+    [columns, columnVisibility],
+  );
 
   return (
     <>
