@@ -23,7 +23,7 @@ import {
   densityValues,
 } from "./constants";
 import {
-  Layout,
+  DataLayout,
   UniversalProps,
   ViewProps,
   TableState,
@@ -47,7 +47,7 @@ import {
 } from "../../OdysseyDesignTokensContext";
 import styled from "@emotion/styled";
 
-export type DataViewProps = UniversalProps & ViewProps<Layout>;
+export type DataViewProps = UniversalProps & ViewProps<DataLayout>;
 
 const DataViewContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
@@ -100,7 +100,7 @@ const DataView = ({
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
 
-  const [currentLayout, setCurrentLayout] = useState<Layout>(
+  const [currentLayout, setCurrentLayout] = useState<DataLayout>(
     initialLayout ?? availableLayouts[0],
   );
 
