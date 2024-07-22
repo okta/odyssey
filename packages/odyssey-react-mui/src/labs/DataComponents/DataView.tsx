@@ -253,6 +253,11 @@ const DataView = ({
     return;
   }, [noResultsPlaceholder, t, isEmpty, isNoResults, emptyPlaceholder]);
 
+  const paginationTotalRows = useMemo(
+    () => (data.length < resultsPerPage ? data.length : totalRows),
+    [data, resultsPerPage, totalRows],
+  );
+
   const additionalActions = useMemo(
     () => (
       <>
@@ -394,7 +399,7 @@ const DataView = ({
           pageSize={pagination.pageSize}
           previousLabel={t("pagination.previous")}
           rowsPerPageLabel={t("pagination.rowsperpage")}
-          totalRows={totalRows}
+          totalRows={paginationTotalRows}
           variant={paginationType}
         />
       )}
