@@ -46,6 +46,18 @@ const storybookMeta: Meta<SwitchProps> = {
     HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
     id: fieldComponentPropsMetaData.id,
     isDisabled: fieldComponentPropsMetaData.isDisabled,
+    isReadOnly: {
+      control: "boolean",
+      description: "If `true`, the switch is read-only",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+        defaultValue: {
+          summary: false,
+        },
+      },
+    },
     label: {
       control: "text",
       description: "The label text for the Switch button",
@@ -113,7 +125,12 @@ export const CheckedDisabled: StoryObj<typeof Switch> = {
     isDefaultChecked: true,
   },
 };
-
+export const CheckedReadOnly: StoryObj<typeof Switch> = {
+  args: {
+    isReadOnly: true,
+    isDefaultChecked: true,
+  },
+};
 export const Controlled: StoryObj<typeof Switch> = {
   render: function C({ ...props }) {
     const [checked, setChecked] = useState(true);
