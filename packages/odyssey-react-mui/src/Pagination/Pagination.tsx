@@ -72,7 +72,7 @@ export type PaginationProps = {
   /**
    * The number of items currently visible on the page
    */
-  currentRowsCount: number;
+  currentRowsCount?: number;
   /**
    * If true, the pagination controls will be disabled
    */
@@ -170,7 +170,7 @@ const Pagination = ({
   const { totalRowsLabel } = usePagination({
     pageIndex,
     pageSize,
-    currentRowsCount,
+    currentRowsCount: currentRowsCount || pageSize,
     totalRows,
   });
 
