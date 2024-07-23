@@ -11,7 +11,7 @@
  */
 
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { useMemo, useCallback } from "react";
+import { useMemo, useCallback } from "react";
 import { DataFilter } from "@okta/odyssey-react-mui/labs";
 import { DataTable, DataTableSortingState } from "@okta/odyssey-react-mui";
 import { columns, data, OdysseyComponent } from "./roadmapData";
@@ -127,8 +127,7 @@ const processData = ({
 };
 
 export const InnerRoadmapTable = () => {
-  // Constants for filter options
-
+  // Memoize filter options
   const typeOptions = useMemo(
     () => [
       { label: "Component", value: "Component" },
@@ -187,9 +186,13 @@ export const InnerRoadmapTable = () => {
         sort,
       });
     },
-    [],
+    [
+      /* Add data as a dependency if it can change */
+    ],
   );
-  const tableFilters = useMemo(
+
+  // Memoize the filters array
+  const tableFilters = useMemo<DataFilter[]>(
     () => [
       {
         id: "type",
