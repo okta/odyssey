@@ -86,9 +86,8 @@ const DateField = ({
   value,
 }: DateFieldProps) => {
   const errorMap = useOdysseyDateError();
-  const [displayedErrorMessage, setDisplayedErrorMessage] = useState<
-    string | undefined
-  >(errorMessage);
+  const [displayedErrorMessage, setDisplayedErrorMessage] =
+    useState(errorMessage);
 
   const debounceTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
   const internalValidationError = useRef<string | undefined>(undefined);
