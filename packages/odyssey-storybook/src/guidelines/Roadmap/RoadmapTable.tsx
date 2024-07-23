@@ -175,20 +175,7 @@ export const InnerRoadmapTable = () => {
     });
   };
 
-  return (
-    <DataTable
-      columns={columns}
-      totalRows={data.length}
-      getRowId={({ name }) => name}
-      getData={fetchData}
-      hasChangeableDensity={false}
-      hasColumnResizing={false}
-      hasColumnVisibility={false}
-      hasPagination={false}
-      hasRowSelection={false}
-      hasRowReordering={false}
-    />
-  );
+  return <DataTable columns={columns} getData={fetchData} />;
 };
 
 const WrappedRoadmapTable = () => {
