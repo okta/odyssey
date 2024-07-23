@@ -70,6 +70,10 @@ export type PaginationProps = {
    */
   currentPageLabel: string;
   /**
+   * The number of items currently visible on the page
+   */
+  currentRowsCount: number;
+  /**
    * If true, the pagination controls will be disabled
    */
   isDisabled?: boolean;
@@ -149,6 +153,7 @@ const Pagination = ({
   previousLabel,
   rowsPerPageLabel,
   totalRows,
+  currentRowsCount,
   variant,
 }: PaginationProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
@@ -162,7 +167,12 @@ const Pagination = ({
     setRowsPerPage(pageSize);
   }, [pageIndex, pageSize]);
 
-  const { totalRowsLabel } = usePagination({ pageIndex, pageSize, totalRows });
+  const { totalRowsLabel } = usePagination({
+    pageIndex,
+    pageSize,
+    currentRowsCount,
+    totalRows,
+  });
 
   const handlePaginationChange = useCallback(() => {
     const updatedPage =

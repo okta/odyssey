@@ -837,6 +837,7 @@ const DataTable = ({
   }, [rowSelection, onChangeRowSelection]);
 
   const { lastRow } = usePagination({
+    currentRowsCount: data.length,
     pageIndex: pagination.pageIndex,
     pageSize: pagination.pageSize,
     totalRows,
@@ -901,6 +902,7 @@ const DataTable = ({
           onPaginationChange={setPagination}
           lastRow={lastRow}
           totalRows={totalRows}
+          currentRowsCount={data.length}
           isDisabled={isEmpty}
           isMoreDisabled={isPaginationMoreDisabled}
           variant={paginationType}

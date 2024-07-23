@@ -14,12 +14,14 @@ import { useTranslation } from "react-i18next";
 import { useMemo } from "react";
 
 type UsePaginationType = {
+  currentRowsCount: number;
   pageIndex: number;
   pageSize: number;
   totalRows?: number;
 };
 
 export const usePagination = ({
+  currentRowsCount,
   pageIndex,
   pageSize,
   totalRows,
@@ -28,11 +30,7 @@ export const usePagination = ({
 
   return useMemo(() => {
     const firstRow = pageSize * (pageIndex - 1) + 1;
-    let lastRow = firstRow + (pageSize - 1);
-
-    if (totalRows && lastRow > totalRows) {
-      lastRow = totalRows;
-    }
+    const lastRow = firstRow + (currentRowsCount - 1);
 
     const totalRowsLabel = totalRows
       ? t("pagination.rowswithtotal", { firstRow, lastRow, totalRows })
@@ -43,5 +41,5 @@ export const usePagination = ({
       lastRow,
       totalRowsLabel,
     };
-  }, [pageIndex, pageSize, totalRows, t]);
+  }, [currentRowsCount, pageIndex, pageSize, totalRows, t]);
 };

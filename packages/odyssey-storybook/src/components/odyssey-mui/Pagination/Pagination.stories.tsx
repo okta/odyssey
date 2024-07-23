@@ -178,6 +178,15 @@ const storyBookMeta: Meta<PaginationProps> = {
         },
       },
     },
+    currentRowsCount: {
+      control: "number",
+      description: "The number of items currently visible on the page",
+      table: {
+        type: {
+          summary: "number",
+        },
+      },
+    },
   },
 
   decorators: [MuiThemeDecorator],
@@ -191,6 +200,7 @@ export const Default: StoryObj<PaginationProps> = {
     pageIndex: 1,
     pageSize: 20,
     lastRow: 20,
+    currentRowsCount: 20,
     isDisabled: false,
     variant: "paged",
     rowsPerPageLabel: "Rows per page",
