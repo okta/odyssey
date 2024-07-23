@@ -63,12 +63,14 @@ const DatePickerContainer = styled.div({
   },
 });
 
-const DatePickerWidthContainer = styled.div({
+const DatePickerWidthContainer = styled.div<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
   ".MuiInput-root": {
     width: "100%",
-    maxWidth: "55ch",
+    maxWidth: odysseyDesignTokens.TypographyLineLengthMax,
   },
-});
+}));
 
 const TimeZonePickerContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
@@ -252,14 +254,14 @@ const DatePicker = ({
 
   const renderDateField = useCallback(
     ({ defaultValue, inputRef, value }: RenderDateFieldProps) => {
-      const shouldShowAdornment = !isReadOnly && !isDisabled;
+      const hasVisibleAdornment = !isReadOnly && !isDisabled;
 
       return (
         <DateField
           defaultValue={defaultValue}
           endAdornment={
             <>
-              {shouldShowAdornment && (
+              {hasVisibleAdornment && (
                 <InputAdornment position="end">
                   <Button
                     ariaLabel={t("picker.labels.date.choose")}
@@ -353,7 +355,10 @@ const DatePicker = ({
         localeText={localeText}
       >
         <DatePickerContainer>
-          <DatePickerWidthContainer ref={containerRef}>
+          <DatePickerWidthContainer
+            odysseyDesignTokens={odysseyDesignTokens}
+            ref={containerRef}
+          >
             <MuiDatePicker
               dayOfWeekFormatter={formatDayOfWeek}
               defaultValue={inputValues?.defaultValue}

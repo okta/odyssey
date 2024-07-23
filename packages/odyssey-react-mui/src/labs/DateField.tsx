@@ -116,15 +116,19 @@ const DateField = ({
       const hasMinError = minDate && value.toUTC() < minDate.toUTC();
       const hasMaxError = maxDate && value.toUTC() > maxDate.toUTC();
 
-      const errorValue = hasMinError
-        ? errorMap.get("minDate")
-        : hasMaxError
-          ? errorMap.get("maxDate")
-          : undefined;
+      if (hasMinError || hasMaxError) {
+        if (hasMinError) {
+          setDisplayedErrorMessage(errorMap.get("minDate"));
+        }
 
-      setDisplayedErrorMessage(errorValue);
+        if (hasMaxError) {
+          setDisplayedErrorMessage(errorMap.get("maxDate"));
+        }
 
-      return hasMinError || hasMaxError;
+        return false;
+      }
+
+      return true;
     },
     [errorMap, minDate, maxDate],
   );
@@ -139,19 +143,19 @@ const DateField = ({
     }
   }, [checkMinMaxValidity, defaultValue, minDate, maxDate, value]);
 
-  const clearErrorMessages = () => {
+  const clearErrorMessages = useCallback(() => {
     setDisplayedErrorMessage(undefined);
     internalValidationError.current = undefined;
     clearTimeout(debounceTimeoutRef.current);
-  };
+  }, [debounceTimeoutRef, internalValidationError, setDisplayedErrorMessage]);
 
   const debounceErrorHandling = useCallback<(validationError: string) => void>(
     (validationError) => {
-      const newTimer = setTimeout(() => {
+      const timeoutId = setTimeout(() => {
         setDisplayedErrorMessage(validationError);
       }, 5000);
       clearTimeout(debounceTimeoutRef.current);
-      debounceTimeoutRef.current = newTimer;
+      debounceTimeoutRef.current = timeoutId;
     },
     [],
   );
