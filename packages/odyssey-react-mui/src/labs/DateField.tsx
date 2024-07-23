@@ -63,7 +63,7 @@ const useOdysseyDateError = () => {
 };
 
 const formatDateTimeToUtcIsoDateString = (value: DateTime) =>
-  value.toUTC().toISO() || undefined;
+  value.toUTC().toISO();
 
 const DateField = ({
   defaultValue,
