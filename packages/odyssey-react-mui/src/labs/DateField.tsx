@@ -90,7 +90,7 @@ const DateField = ({
     useState(errorMessage);
 
   const debounceTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
-  const internalValidationError = useRef<string | undefined>(undefined);
+  const internalValidationError = useRef<string | undefined>();
   const localInputRef = useRef<HTMLInputElement>(null);
 
   useImperativeHandle(
@@ -107,8 +107,7 @@ const DateField = ({
 
   useEffect(() => {
     return () => {
-      if (!debounceTimeoutRef.current) return;
-      clearTimeout(debounceTimeoutRef.current);
+      clearTimeout(debounceTimeoutRef?.current);
     };
   }, []);
 
