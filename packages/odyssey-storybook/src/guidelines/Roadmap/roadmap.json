@@ -5,7 +5,7 @@
     "status": "Released",
     "define": "Complete",
     "design": "Complete",
-    "develop": "In progress",
+    "develop": "Complete",
     "deliverableTiming": "Q2 FY25"
   },
   {
@@ -65,11 +65,11 @@
   {
     "name": "Card",
     "type": "Component",
-    "status": "In Labs",
-    "define": "In Labs",
-    "design": "In Labs",
-    "develop": "In Labs",
-    "deliverableTiming": "TBD"
+    "status": "In progress",
+    "define": "Complete",
+    "design": "Complete",
+    "develop": "Complete",
+    "deliverableTiming": "Q2 FY25"
   },
   {
     "name": "Checkbox and checkbox group",
@@ -96,34 +96,34 @@
     "define": "Not started",
     "design": "Not started",
     "develop": "Not started",
-    "deliverableTiming": "Q2 FY25"
-  },
-  {
-    "name": "Data stack (data list, resource list?)",
-    "type": "Component",
-    "status": "In progress",
-    "define": "In progress",
-    "design": "Not started",
-    "develop": "Not started",
-    "deliverableTiming": "Q2 FY25"
-  },
-  {
-    "name": "Data table",
-    "type": "Component",
-    "status": "Released",
-    "define": "Complete",
-    "design": "Complete",
-    "develop": "Complete",
-    "deliverableTiming": "Q1 FY25"
+    "deliverableTiming": "Q3 FY25"
   },
   {
     "name": "Date picker",
     "type": "Component",
     "status": "In Labs",
     "define": "Complete",
-    "design": "In progress",
+    "design": "Complete",
     "develop": "In progress",
     "deliverableTiming": "Q2 FY25"
+  },
+  {
+    "name": "Data View: Data stack \n(data list, resource list?)",
+    "type": "Component",
+    "status": "In Labs",
+    "define": "Complete",
+    "design": "Complete",
+    "develop": "In progress",
+    "deliverableTiming": "Q2 FY25"
+  },
+  {
+    "name": "Data View: Data table",
+    "type": "Component",
+    "status": "Released",
+    "define": "Complete",
+    "design": "Complete",
+    "develop": "Complete",
+    "deliverableTiming": "Q1 FY25"
   },
   {
     "name": "Dialog",
@@ -146,16 +146,16 @@
   {
     "name": "Duration picker\n(or fieldset)",
     "type": "Component",
-    "status": "Not started",
-    "define": "Not started",
-    "design": "Not started",
+    "status": "In progress",
+    "define": "In progress",
+    "design": "In progress",
     "develop": "Not started",
     "deliverableTiming": "Q2 FY25"
   },
   {
     "name": "Empty states v1 (no illustration)",
     "type": "Component",
-    "status": "In progress",
+    "status": "Released",
     "define": "Complete",
     "design": "Complete",
     "develop": "Complete",
@@ -164,8 +164,8 @@
   {
     "name": "Empty states v2 (illustration)",
     "type": "Component",
-    "status": "Not started",
-    "define": "Not started",
+    "status": "In progress",
+    "define": "In progress",
     "design": "Not started",
     "develop": "Not started",
     "deliverableTiming": "Q3 FY25"
@@ -202,9 +202,27 @@
     "type": "Component",
     "status": "In progress",
     "define": "In progress",
-    "design": "-",
+    "design": "In progress",
     "develop": "-",
     "deliverableTiming": "Q2 FY25"
+  },
+  {
+    "name": "Group picker",
+    "type": "Component",
+    "status": "In Labs",
+    "define": "Complete",
+    "design": "Complete",
+    "develop": "In progress",
+    "deliverableTiming": "Q2 FY25"
+  },
+  {
+    "name": "Line text field",
+    "type": "Component",
+    "status": "Not started",
+    "define": "Not started",
+    "design": "Not started",
+    "develop": "Not started",
+    "deliverableTiming": "-"
   },
   {
     "name": "Link",
@@ -236,10 +254,10 @@
   {
     "name": "Multi-select dropdown",
     "type": "Component",
-    "status": "-",
-    "define": "-",
-    "design": "-",
-    "develop": "-",
+    "status": "Not started",
+    "define": "Not started",
+    "design": "Not started",
+    "develop": "Not started",
     "deliverableTiming": "TBD"
   },
   {
@@ -254,8 +272,8 @@
   {
     "name": "Policy Recommender\n(AI Pattern)",
     "type": "Pattern",
-    "status": "Not started",
-    "define": "Not started",
+    "status": "In progress",
+    "define": "In progress",
     "design": "Not started",
     "develop": "Not started",
     "deliverableTiming": "Q3 FY25"
@@ -277,6 +295,15 @@
     "design": "Complete",
     "develop": "Complete",
     "deliverableTiming": "FY24"
+  },
+  {
+    "name": "Search Input",
+    "type": "Component",
+    "status": "In progress",
+    "define": "Complete",
+    "design": "Complete",
+    "develop": "Complete",
+    "deliverableTiming": "Q2 FY25"
   },
   {
     "name": "Search field",
@@ -318,10 +345,10 @@
     "name": "Switch",
     "type": "Component",
     "status": "In Labs",
-    "define": "In Labs",
+    "define": "Complete",
     "design": "In Labs",
     "develop": "In Labs",
-    "deliverableTiming": "Q1 FY25"
+    "deliverableTiming": "Q2 FY25"
   },
   {
     "name": "Tabs",
@@ -351,7 +378,7 @@
     "deliverableTiming": "FY24"
   },
   {
-    "name": "Time Picker\n(or field set)",
+    "name": "Date Time Picker (name tbd)\n(or field set)",
     "type": "Component",
     "status": "Not started",
     "define": "Not started",
