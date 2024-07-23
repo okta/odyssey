@@ -10,6 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+/* eslint-disable import/no-extraneous-dependencies */
+import React, { useMemo, useCallback } from "react";
 import { DataFilter } from "@okta/odyssey-react-mui/labs";
 import { DataTable, DataTableSortingState } from "@okta/odyssey-react-mui";
 import { columns, data, OdysseyComponent } from "./roadmapData";
@@ -127,55 +129,110 @@ const processData = ({
 export const InnerRoadmapTable = () => {
   // Constants for filter options
 
-  // const typeOptions = [
-  //   { label: "Component", value: "Component" },
-  //   { label: "Pattern", value: "Pattern" },
-  // ];
+  const typeOptions = useMemo(
+    () => [
+      { label: "Component", value: "Component" },
+      { label: "Pattern", value: "Pattern" },
+    ],
+    [],
+  );
 
-  // const statusOptions = [
-  //   { label: "In Progress", value: "In progress" },
-  //   { label: "In Labs", value: "In labs" },
-  //   { label: "Released", value: "Released" },
-  //   { label: "Not Started", value: "Not started" },
-  // ];
+  const statusOptions = useMemo(
+    () => [
+      { label: "In Progress", value: "In progress" },
+      { label: "In Labs", value: "In labs" },
+      { label: "Released", value: "Released" },
+      { label: "Not Started", value: "Not started" },
+    ],
+    [],
+  );
 
-  // const expectedOptions = [
-  //   { label: "FY24", value: "FY24" },
-  //   { label: "TBD", value: "TBD" },
-  //   { label: "Q1 FY25", value: "Q1 FY25" },
-  //   { label: "Q2 FY25", value: "Q2 FY25" },
-  //   { label: "Q3 FY25", value: "Q3 FY25" },
-  //   { label: "Q4 FY25", value: "Q4 FY25" },
-  //   { label: "Q1 FY26", value: "Q1 FY26" },
-  //   { label: "Q2 FY26", value: "Q2 FY26" },
-  //   { label: "Q3 FY26", value: "Q3 FY26" },
-  //   { label: "Q4 FY26", value: "Q4 FY26" },
-  // ];
+  const expectedOptions = useMemo(
+    () => [
+      { label: "FY24", value: "FY24" },
+      { label: "TBD", value: "TBD" },
+      { label: "Q1 FY25", value: "Q1 FY25" },
+      { label: "Q2 FY25", value: "Q2 FY25" },
+      { label: "Q3 FY25", value: "Q3 FY25" },
+      { label: "Q4 FY25", value: "Q4 FY25" },
+      { label: "Q1 FY26", value: "Q1 FY26" },
+      { label: "Q2 FY26", value: "Q2 FY26" },
+      { label: "Q3 FY26", value: "Q3 FY26" },
+      { label: "Q4 FY26", value: "Q4 FY26" },
+    ],
+    [],
+  );
 
-  const fetchData = ({
-    page,
-    resultsPerPage,
-    search,
-    filters,
-    sort,
-  }: {
-    page?: number;
-    resultsPerPage?: number;
-    search?: string;
-    filters?: DataFilter[];
-    sort?: DataTableSortingState;
-  }) => {
-    return processData({
-      initialData: data,
-      page: page,
-      resultsPerPage: resultsPerPage,
-      search: search,
-      filters: filters,
-      sort: sort,
-    });
-  };
+  // Memoize the fetchData function
+  const fetchData = useCallback(
+    ({
+      page,
+      resultsPerPage,
+      search,
+      filters,
+      sort,
+    }: {
+      page?: number;
+      resultsPerPage?: number;
+      search?: string;
+      filters?: DataFilter[];
+      sort?: DataTableSortingState;
+    }) => {
+      return processData({
+        initialData: data,
+        page,
+        resultsPerPage,
+        search,
+        filters,
+        sort,
+      });
+    },
+    [],
+  );
+  const tableFilters = useMemo(
+    () => [
+      {
+        id: "type",
+        label: "Type",
+        variant: "select",
+        options: typeOptions,
+      },
+      {
+        id: "status",
+        label: "Status",
+        variant: "select",
+        options: statusOptions,
+      },
+      {
+        id: "deliverableTiming",
+        label: "Deliverable timing",
+        variant: "autocomplete",
+        options: expectedOptions,
+      },
+    ],
+    [typeOptions, statusOptions, expectedOptions],
+  );
 
-  return <DataTable columns={columns} getData={fetchData} />;
+  return (
+    <DataTable
+      columns={columns}
+      totalRows={data.length}
+      getRowId={({ name }) => name}
+      getData={fetchData}
+      hasChangeableDensity={false}
+      hasColumnResizing={false}
+      hasColumnVisibility={false}
+      hasFilters
+      filters={tableFilters}
+      resultsPerPage={100}
+      hasPagination={false}
+      hasRowSelection={false}
+      hasRowReordering={false}
+      searchDelayTime={0}
+      hasSearch
+      hasSorting
+    />
+  );
 };
 
 const WrappedRoadmapTable = () => {
