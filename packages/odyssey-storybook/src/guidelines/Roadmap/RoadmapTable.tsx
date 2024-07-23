@@ -127,30 +127,30 @@ const processData = ({
 export const InnerRoadmapTable = () => {
   // Constants for filter options
 
-  const typeOptions = [
-    { label: "Component", value: "Component" },
-    { label: "Pattern", value: "Pattern" },
-  ];
+  // const typeOptions = [
+  //   { label: "Component", value: "Component" },
+  //   { label: "Pattern", value: "Pattern" },
+  // ];
 
-  const statusOptions = [
-    { label: "In Progress", value: "In progress" },
-    { label: "In Labs", value: "In labs" },
-    { label: "Released", value: "Released" },
-    { label: "Not Started", value: "Not started" },
-  ];
+  // const statusOptions = [
+  //   { label: "In Progress", value: "In progress" },
+  //   { label: "In Labs", value: "In labs" },
+  //   { label: "Released", value: "Released" },
+  //   { label: "Not Started", value: "Not started" },
+  // ];
 
-  const expectedOptions = [
-    { label: "FY24", value: "FY24" },
-    { label: "TBD", value: "TBD" },
-    { label: "Q1 FY25", value: "Q1 FY25" },
-    { label: "Q2 FY25", value: "Q2 FY25" },
-    { label: "Q3 FY25", value: "Q3 FY25" },
-    { label: "Q4 FY25", value: "Q4 FY25" },
-    { label: "Q1 FY26", value: "Q1 FY26" },
-    { label: "Q2 FY26", value: "Q2 FY26" },
-    { label: "Q3 FY26", value: "Q3 FY26" },
-    { label: "Q4 FY26", value: "Q4 FY26" },
-  ];
+  // const expectedOptions = [
+  //   { label: "FY24", value: "FY24" },
+  //   { label: "TBD", value: "TBD" },
+  //   { label: "Q1 FY25", value: "Q1 FY25" },
+  //   { label: "Q2 FY25", value: "Q2 FY25" },
+  //   { label: "Q3 FY25", value: "Q3 FY25" },
+  //   { label: "Q4 FY25", value: "Q4 FY25" },
+  //   { label: "Q1 FY26", value: "Q1 FY26" },
+  //   { label: "Q2 FY26", value: "Q2 FY26" },
+  //   { label: "Q3 FY26", value: "Q3 FY26" },
+  //   { label: "Q4 FY26", value: "Q4 FY26" },
+  // ];
 
   const fetchData = ({
     page,
@@ -184,34 +184,9 @@ export const InnerRoadmapTable = () => {
       hasChangeableDensity={false}
       hasColumnResizing={false}
       hasColumnVisibility={false}
-      hasFilters
-      filters={[
-        {
-          id: "type",
-          label: "Type",
-          variant: "select",
-          options: typeOptions,
-        },
-        {
-          id: "status",
-          label: "Status",
-          variant: "select",
-          options: statusOptions,
-        },
-        {
-          id: "deliverableTiming",
-          label: "Deliverable timing",
-          variant: "autocomplete",
-          options: expectedOptions,
-        },
-      ]}
-      resultsPerPage={100}
       hasPagination={false}
       hasRowSelection={false}
       hasRowReordering={false}
-      searchDelayTime={0}
-      hasSearch
-      hasSorting
     />
   );
 };
