@@ -23,7 +23,6 @@ import {
 } from "@okta/odyssey-react-mui";
 import { ThemeProvider as StorybookThemeProvider } from "@storybook/theming";
 import * as odysseyTokens from "@okta/odyssey-design-tokens";
-import { Theme } from "@mui/material/styles";
 
 // Assuming this is how your data and columns are imported
 import {
@@ -245,40 +244,10 @@ const WrappedRoadmapTable: React.FC = () => {
     [],
   );
 
-  // Create a Storybook-compatible theme object
-  const storybookTheme = useMemo(() => {
-    const theme: Partial<Theme> = {
-      ...odysseyTheme,
-      typography: {
-        fonts: {
-          base: odysseyTheme.typography.fontFamily,
-          mono: odysseyTheme.typography.fontFamilyMonospace,
-        },
-        weight: {
-          regular: odysseyTheme.typography.fontWeightRegular,
-          bold: odysseyTheme.typography.fontWeightBold,
-        },
-        size: {
-          s1: 12,
-          s2: 14,
-          s3: 16,
-          m1: 20,
-          m2: 24,
-          m3: 28,
-          l1: 32,
-          l2: 40,
-          l3: 48,
-          code: 90,
-        },
-      },
-    };
-    return theme;
-  }, [odysseyTheme]);
-
   return (
-    <OdysseyThemeProvider theme={odysseyTheme}>
+    <OdysseyThemeProvider>
       {/* @ts-expect-error type mismatch on "typography" */}
-      <StorybookThemeProvider theme={storybookTheme}>
+      <StorybookThemeProvider theme={odysseyTheme}>
         <CssBaseline />
         <ScopedCssBaseline>
           <Callout severity="info">
