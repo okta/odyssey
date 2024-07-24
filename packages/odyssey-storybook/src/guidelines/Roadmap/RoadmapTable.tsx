@@ -15,7 +15,6 @@ import React, { useMemo, useCallback } from "react";
 import { DataFilter } from "@okta/odyssey-react-mui/labs";
 import { DataTable, DataTableSortingState } from "@okta/odyssey-react-mui";
 import {
-  Callout,
   //CssBaseline,
   OdysseyThemeProvider,
   // ScopedCssBaseline,
@@ -229,14 +228,6 @@ const WrappedRoadmapTable: React.FC = () => {
 
   return (
     <OdysseyThemeProvider>
-      {/* @ts-expect-error type mismatch on "typography" */}
-      <Callout severity="info">
-        Any products, features or functionality referenced in this presentation
-        that are not currently generally available may not be delivered on time
-        or at all. Product roadmaps do not represent a commitment, obligation or
-        promise to deliver any product, feature or functionality, and you should
-        not rely on them to make your purchase decisions.
-      </Callout>
       <InnerRoadmapTable />
     </OdysseyThemeProvider>
   );
