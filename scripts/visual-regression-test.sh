@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 source $OKTA_HOME/$REPO/scripts/setup.sh
 
@@ -23,14 +23,14 @@ export GITHUB_RESPONSE=$(curl -s -L \
   -H "Accept: application/vnd.github+json" \
   -H "Authorization: Bearer $GITHUB_TOKEN" \
   -H "X-GitHub-Api-Version: 2022-11-28" \
-  https://api.github.com/repos/$GITHUB_ORG/$REPO/pulls?state=open&head=$GITHUB_ORG:$BRANCH | jq ".[] | select(.head.ref == $BRANCH)")
+  https://api.github.com/repos/$GITHUB_ORG/$REPO/pulls?state=open&head=$BRANCH | jq ".[] | select(.head.ref == $BRANCH)")
 
 export BASE_BRANCH_NAME=$(echo $response | jq -r '.[0].base.ref')
 export COMMIT_MESSAGE=$(echo $response | jq -r '.[0].body')
 export PR_NUMBER=$(echo $response | jq -r '.[0].number')
 export PR_TITLE=$(echo $response | jq -r '.[0].title')
 export PR_URL=$(echo $response | jq -r '.[0].html_url')
- | jq '.base.ref'
+
 echo "LOOK FOR THIS!"
 echo "BRANCH $BRANCH"
 # echo "https://api.github.com/repos/okta/odyssey/pulls?state=open&head=okta:kg_vrt_the_second"
