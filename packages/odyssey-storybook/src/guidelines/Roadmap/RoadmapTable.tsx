@@ -11,36 +11,34 @@
  */
 
 /* eslint-disable import/no-extraneous-dependencies */
-import { memo } from "react";
-import { DataFilter } from "@okta/odyssey-react-mui/labs";
-import { DataTable, DataTableSortingState } from "@okta/odyssey-react-mui";
-import { columns, data, OdysseyComponent } from "./roadmapData";
+import { useCallback, memo, useState } from "react";
+//import { columns, data } from "./roadmapData";
 import {
   Callout,
+  DataTable,
   CssBaseline,
   OdysseyThemeProvider,
+  DataTableGetDataType,
+  DataTableRowSelectionState,
   ScopedCssBaseline,
   createOdysseyMuiTheme,
 } from "@okta/odyssey-react-mui";
 import { ThemeProvider as StorybookThemeProvider } from "@storybook/theming";
 import * as odysseyTokens from "@okta/odyssey-design-tokens";
+import {
+  Planet,
+  columns as planetColumns,
+  data as planetData,
+} from "./planetData";
 
-const processData = ({
-  initialData,
-  page = 1,
-  resultsPerPage = 100,
-  search,
-  filters,
-  sort,
+const filterData = ({
+  data,
+  ...args
 }: {
-  initialData: OdysseyComponent[];
-  page?: number;
-  resultsPerPage?: number;
-  search?: string;
-  filters?: DataFilter[];
-  sort?: DataTableSortingState;
-}) => {
-  let filteredData = [...initialData];
+  data: Planet[];
+} & DataTableGetDataType) => {
+  let filteredData = data;
+  const { search, filters, sort, page = 1, resultsPerPage = 20 } = args;
 
   // Implement text-based query filtering
   if (search) {
@@ -60,56 +58,41 @@ const processData = ({
           return true;
         }
 
+        // If filter value is array, search for each array value
+        if (Array.isArray(value)) {
+          return value.some((arrayValue) => {
+            return row[id as keyof Planet]
+              ?.toString()
+              .toLowerCase()
+              .includes(arrayValue.toString().toLowerCase());
+          });
+        }
+
+        // In the custom filter examples, we provide a "starting letter"
+        // control that allows the user to filter by whether the
+        // first letter is a vowel or consonant
+        if (id === "startLetter" && typeof row.name === "string") {
+          const firstLetter = row.name[0]?.toLowerCase();
+          if (value === "vowel") return "aeiou".includes(firstLetter);
+          if (value === "consonant") return !"aeiou".includes(firstLetter);
+          return true;
+        }
+
         // General filtering for other columns
-        return row[id as keyof OdysseyComponent]
+        return row[id as keyof Planet]
           ?.toString()
-          .includes(value.toString());
+          .toLowerCase()
+          .includes(value.toString().toLowerCase());
       });
     });
-  }
-
-  function parseCustomDate(dateStr: string): Date {
-    if (dateStr.length <= 0) {
-      return new Date(2999, 0);
-    }
-
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    const [monthStr, yearStr] = dateStr.split(" ");
-
-    const month = months.indexOf(monthStr);
-    const year = parseInt(yearStr.replace("'", ""), 10) + 2000; // Adjust for century
-
-    return new Date(year, month);
   }
 
   // Implement sorting
   if (sort && sort.length > 0) {
     filteredData.sort((a, b) => {
       for (const { id, desc } of sort) {
-        let aValue: string | Date = a[id as keyof OdysseyComponent];
-        let bValue: string | Date = b[id as keyof OdysseyComponent];
-
-        if (
-          id === "startDate" ||
-          id === "labsRelease" ||
-          id === "fullRelease"
-        ) {
-          aValue = parseCustomDate(aValue);
-          bValue = parseCustomDate(bValue);
-        }
+        const aValue = a[id as keyof Planet];
+        const bValue = b[id as keyof Planet];
 
         if (aValue < bValue) return desc ? 1 : -1;
         if (aValue > bValue) return desc ? -1 : 1;
@@ -118,103 +101,39 @@ const processData = ({
       return 0;
     });
   }
+
   // Implement pagination
-  const startIdx = (page - 1) * resultsPerPage;
-  const endIdx = startIdx + resultsPerPage;
-  const paginatedData = filteredData.slice(startIdx, endIdx);
+  const startRow = (page - 1) * resultsPerPage;
+  const endRow = startRow + resultsPerPage;
+  filteredData = filteredData.slice(startRow, endRow);
 
-  return paginatedData;
-};
-
-const fetchData = ({
-  page,
-  resultsPerPage,
-  search,
-  filters,
-  sort,
-}: {
-  page?: number;
-  resultsPerPage?: number;
-  search?: string;
-  filters?: DataFilter[];
-  sort?: DataTableSortingState;
-}) => {
-  console.log("s");
-  return processData({
-    initialData: data,
-    page: page,
-    resultsPerPage: resultsPerPage,
-    search: search,
-    filters: filters,
-    sort: sort,
-  });
+  return filteredData;
 };
 
 export const InnerRoadmapTable = () => {
-  // Constants for filter options
+  const [data] = useState<Planet[]>(planetData);
 
-  const typeOptions = [
-    { label: "Component", value: "Component" },
-    { label: "Pattern", value: "Pattern" },
-  ];
+  const getData = useCallback(
+    ({ ...props }: DataTableGetDataType) => {
+      return filterData({ data, ...props });
+    },
+    [data],
+  );
 
-  const statusOptions = [
-    { label: "In Progress", value: "In progress" },
-    { label: "In Labs", value: "In labs" },
-    { label: "Released", value: "Released" },
-    { label: "Not Started", value: "Not started" },
-  ];
-
-  const expectedOptions = [
-    { label: "FY24", value: "FY24" },
-    { label: "TBD", value: "TBD" },
-    { label: "Q1 FY25", value: "Q1 FY25" },
-    { label: "Q2 FY25", value: "Q2 FY25" },
-    { label: "Q3 FY25", value: "Q3 FY25" },
-    { label: "Q4 FY25", value: "Q4 FY25" },
-    { label: "Q1 FY26", value: "Q1 FY26" },
-    { label: "Q2 FY26", value: "Q2 FY26" },
-    { label: "Q3 FY26", value: "Q3 FY26" },
-    { label: "Q4 FY26", value: "Q4 FY26" },
-  ];
+  const onChangeRowSelection = useCallback(
+    (rowSelection: DataTableRowSelectionState) => {
+      if (Object.keys(rowSelection).length > 0) {
+        console.log(`${Object.keys(rowSelection).length} selected`);
+      }
+    },
+    [],
+  );
 
   return (
     <DataTable
-      columns={columns}
-      totalRows={data.length}
-      getRowId={({ name }) => name}
-      getData={fetchData}
-      hasChangeableDensity={false}
-      hasColumnResizing={false}
-      hasColumnVisibility={false}
-      hasFilters
-      filters={[
-        {
-          id: "type",
-          label: "Type",
-          variant: "select",
-          options: typeOptions,
-        },
-        {
-          id: "status",
-          label: "Status",
-          variant: "select",
-          options: statusOptions,
-        },
-        {
-          id: "deliverableTiming",
-          label: "Deliverable timing",
-          variant: "autocomplete",
-          options: expectedOptions,
-        },
-      ]}
-      resultsPerPage={100}
-      hasPagination={false}
-      hasRowSelection={false}
-      hasRowReordering={false}
-      searchDelayTime={0}
-      hasSearch
-      hasSorting
+      columns={planetColumns}
+      getData={getData}
+      onChangeRowSelection={onChangeRowSelection}
     />
   );
 };
