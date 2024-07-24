@@ -66,13 +66,41 @@ const PaginationButtonContainer = styled("div")({
 
 export type PaginationProps = {
   /**
-   * The current page index
+   * The labeled rendered for the current page index
    */
-  pageIndex: number;
+  currentPageLabel: string;
   /**
-   * The current page size
+   * The number of items currently visible on the page
    */
-  pageSize: number;
+  currentRowsCount?: number;
+  /**
+   * If true, the pagination controls will be disabled
+   */
+  isDisabled?: boolean;
+  /**
+   * If true, the next or Show More button will be disabled
+   */
+  isMoreDisabled?: boolean;
+  /**
+   * The current page last row index
+   */
+  lastRow: number;
+  /**
+   * If the pagination is of "loadMore" variant, then this is the the load more label
+   */
+  loadMoreLabel: string;
+  /**
+   * The max page
+   */
+  maxPageIndex?: number;
+  /**
+   * The max rows per page
+   */
+  maxPageSize?: number;
+  /**
+   * The label for the next control
+   */
+  nextLabel: string;
   /**
    * Page index and page size setter
    */
@@ -84,57 +112,49 @@ export type PaginationProps = {
     pageSize: number;
   }) => void;
   /**
-   * The current page last row index
+   * The current page index
    */
-  lastRow: number;
+  pageIndex: number;
   /**
-   * Total rows count
+   * The current page size
    */
-  totalRows?: number;
-  /**
-   * If true, the pagination controls will be disabled
-   */
-  isDisabled?: boolean;
-  /**
-   * The type of pagination controls shown. Defaults to next/prev buttons, but can be
-   * set to a simple "Load more" button by setting to "loadMore".
-   */
-  variant?: (typeof paginationTypeValues)[number];
-  /**
-   * The label that shows how many results are rendered per page
-   */
-  rowsPerPageLabel: string;
-  /**
-   * The labeled rendered for the current page index
-   */
-  currentPageLabel: string;
+  pageSize: number;
   /**
    * The label for the previous control
    */
   previousLabel: string;
   /**
-   * The label for the next control
+   * The label that shows how many results are rendered per page
    */
-  nextLabel: string;
+  rowsPerPageLabel: string;
   /**
-   * If the pagination is of "loadMore" variant, then this is the the load more label
+   * Total rows count
    */
-  loadMoreLabel: string;
+  totalRows?: number;
+  /**
+   * The type of pagination controls shown. Defaults to next/prev buttons, but can be
+   * set to a simple "Load more" button by setting to "loadMore".
+   */
+  variant?: (typeof paginationTypeValues)[number];
 };
 
 const Pagination = ({
+  currentPageLabel,
+  isDisabled,
+  isMoreDisabled,
+  lastRow,
+  loadMoreLabel,
+  maxPageIndex,
+  maxPageSize,
+  nextLabel,
+  onPaginationChange,
   pageIndex,
   pageSize,
-  onPaginationChange,
-  lastRow,
-  totalRows,
-  isDisabled,
-  variant,
-  rowsPerPageLabel,
-  currentPageLabel,
   previousLabel,
-  nextLabel,
-  loadMoreLabel,
+  rowsPerPageLabel,
+  totalRows,
+  currentRowsCount,
+  variant,
 }: PaginationProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
@@ -147,7 +167,12 @@ const Pagination = ({
     setRowsPerPage(pageSize);
   }, [pageIndex, pageSize]);
 
-  const { totalRowsLabel } = usePagination({ pageIndex, pageSize, totalRows });
+  const { totalRowsLabel } = usePagination({
+    pageIndex,
+    pageSize,
+    currentRowsCount: currentRowsCount || pageSize,
+    totalRows,
+  });
 
   const handlePaginationChange = useCallback(() => {
     const updatedPage =
@@ -192,16 +217,22 @@ const Pagination = ({
 
   const setPageFromEvent = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      setPage(parseInt(event.target.value));
+      const value = maxPageIndex
+        ? Math.min(parseInt(event.target.value), maxPageIndex)
+        : parseInt(event.target.value);
+      setPage(value);
     },
-    [setPage],
+    [setPage, maxPageIndex],
   );
 
   const setRowsPerPageFromEvent = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      setRowsPerPage(parseInt(event.target.value));
+      const value = maxPageSize
+        ? Math.min(parseInt(event.target.value), maxPageSize)
+        : parseInt(event.target.value);
+      setRowsPerPage(value);
     },
-    [setRowsPerPage],
+    [setRowsPerPage, maxPageSize],
   );
 
   const handleLoadMore = useCallback(() => {
@@ -220,12 +251,15 @@ const Pagination = ({
   }, [onPaginationChange, page, rowsPerPage]);
 
   const loadMoreIsDisabled = useMemo(() => {
-    return totalRows ? rowsPerPage >= totalRows : false;
-  }, [rowsPerPage, totalRows]);
+    return isMoreDisabled || (totalRows ? rowsPerPage >= totalRows : false);
+  }, [isMoreDisabled, rowsPerPage, totalRows]);
 
   const nextButtonDisabled = useMemo(
-    () => (totalRows ? lastRow >= totalRows : false) || isDisabled,
-    [totalRows, lastRow, isDisabled],
+    () =>
+      isMoreDisabled ||
+      (totalRows ? lastRow >= totalRows : false) ||
+      isDisabled,
+    [isMoreDisabled, totalRows, lastRow, isDisabled],
   );
 
   const previousButtonDisabled = useMemo(
@@ -236,15 +270,17 @@ const Pagination = ({
   const rowsPerPageInputProps = useMemo(
     () => ({
       "aria-label": rowsPerPageLabel,
+      max: maxPageSize || totalRows,
     }),
-    [rowsPerPageLabel],
+    [maxPageSize, rowsPerPageLabel, totalRows],
   );
 
   const currentPageInputProps = useMemo(
     () => ({
       "aria-label": currentPageLabel,
+      max: maxPageIndex,
     }),
-    [currentPageLabel],
+    [currentPageLabel, maxPageIndex],
   );
 
   return variant === "paged" ? (

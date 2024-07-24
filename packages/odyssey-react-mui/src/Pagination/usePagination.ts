@@ -11,39 +11,35 @@
  */
 
 import { useTranslation } from "react-i18next";
+import { useMemo } from "react";
 
 type UsePaginationType = {
+  currentRowsCount: number;
   pageIndex: number;
   pageSize: number;
   totalRows?: number;
 };
 
 export const usePagination = ({
+  currentRowsCount,
   pageIndex,
   pageSize,
   totalRows,
 }: UsePaginationType) => {
   const { t } = useTranslation();
 
-  const firstRow = pageSize * (pageIndex - 1) + 1;
-  const lastRow = firstRow + (pageSize - 1);
-  if (totalRows && lastRow > totalRows) {
-    // If the last eligible row is greater than the number of total rows,
-    // show the number of total rows instead (ie, if we're showing rows
-    // 180-200 but there are only 190 rows, show 180-190 instead)
+  return useMemo(() => {
+    const firstRow = pageSize * (pageIndex - 1) + 1;
+    const lastRow = firstRow + (currentRowsCount - 1);
+
+    const totalRowsLabel = totalRows
+      ? t("pagination.rowswithtotal", { firstRow, lastRow, totalRows })
+      : t("pagination.rowswithouttotal", { firstRow, lastRow });
+
     return {
       firstRow,
-      lastRow: totalRows,
-      totalRowsLabel: totalRows
-        ? t("pagination.rowswithtotal", { firstRow, lastRow, totalRows })
-        : t("pagination.rowswithouttotal", { firstRow, lastRow }),
+      lastRow,
+      totalRowsLabel,
     };
-  }
-  return {
-    firstRow,
-    lastRow,
-    totalRowsLabel: totalRows
-      ? t("pagination.rowswithtotal", { firstRow, lastRow, totalRows })
-      : t("pagination.rowswithouttotal", { firstRow, lastRow }),
-  };
+  }, [currentRowsCount, pageIndex, pageSize, totalRows, t]);
 };
