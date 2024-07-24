@@ -13,15 +13,16 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useMemo, useCallback } from "react";
 import { DataFilter } from "@okta/odyssey-react-mui/labs";
-import { DataTable } from "@okta/odyssey-react-mui";
+import { DataTable, DataTableSortingState } from "@okta/odyssey-react-mui";
 import {
-  //CssBaseline,
+  CssBaseline,
   OdysseyThemeProvider,
-  // ScopedCssBaseline,
-  // createOdysseyMuiTheme,
+  ScopedCssBaseline,
+  createOdysseyMuiTheme,
+  Callout,
 } from "@okta/odyssey-react-mui";
-//import { ThemeProvider as StorybookThemeProvider } from "@storybook/theming";
-//import * as odysseyTokens from "@okta/odyssey-design-tokens";
+import { ThemeProvider as StorybookThemeProvider } from "@storybook/theming";
+import * as odysseyTokens from "@okta/odyssey-design-tokens";
 
 // Assuming this is how your data and columns are imported
 import { useColumns, data as initialData } from "./roadmapData";
@@ -94,12 +95,18 @@ const useData = () => useMemo(() => initialData, []);
 //   return filteredData.slice(startIdx, endIdx);
 // };
 
+interface FetchDataParams {
+  search?: string;
+  filters?: DataFilter[];
+  sort?: DataTableSortingState;
+}
+
 const InnerRoadmapTable: React.FC = React.memo(() => {
   const columns = useColumns();
   const data = useData(); // Ensure this is memoized correctly
 
   const fetchData = useCallback(
-    ({ search, filters, sort }) => {
+    ({ search, filters, sort }: FetchDataParams) => {
       console.log("fetchData called", { search, filters, sort });
       return data; // Simplified for testing
     },
@@ -131,15 +138,28 @@ const InnerRoadmapTable: React.FC = React.memo(() => {
 });
 
 const WrappedRoadmapTable: React.FC = () => {
-  // const odysseyTheme = useMemo(
-  //   () => createOdysseyMuiTheme({ odysseyTokens }),
-  //   [],
-  // );
+  const odysseyTheme = useMemo(
+    () => createOdysseyMuiTheme({ odysseyTokens }),
+    [],
+  );
 
   return (
     <OdysseyThemeProvider>
-      hello
-      <InnerRoadmapTable />
+      {/* @ts-expect-error type mismatch on "typography" */}
+      <StorybookThemeProvider theme={odysseyTheme}>
+        <CssBaseline />
+        <ScopedCssBaseline>
+          <Callout severity="info">
+            Any products, features or functionality referenced in this
+            presentation that are not currently generally available may not be
+            delivered on time or at all. Product roadmaps do not represent a
+            commitment, obligation or promise to deliver any product, feature or
+            functionality, and you should not rely on them to make your purchase
+            decisions.
+          </Callout>
+          <InnerRoadmapTable />
+        </ScopedCssBaseline>
+      </StorybookThemeProvider>
     </OdysseyThemeProvider>
   );
 };
