@@ -86,6 +86,7 @@ const DataView = ({
   isEmpty: isEmptyProp,
   isLoading: isLoadingProp,
   isNoResults: isNoResultsProp,
+  isPaginationMoreDisabled,
   isRowReorderingDisabled,
   noResultsPlaceholder,
   onChangeRowSelection,
@@ -96,6 +97,8 @@ const DataView = ({
   stackOptions,
   tableOptions,
   totalRows,
+  maxPages,
+  maxResultsPerPage,
 }: DataViewProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
@@ -178,6 +181,14 @@ const DataView = ({
       pageSize: resultsPerPage,
     });
   }, [currentPage, resultsPerPage]);
+
+  // Reset pagination if search or filters change
+  useEffect(() => {
+    setPagination((prev) => ({
+      pageIndex: 1,
+      pageSize: prev.pageSize,
+    }));
+  }, [filters, search]);
 
   // Retrieve the data
   useEffect(() => {
@@ -266,6 +277,7 @@ const DataView = ({
   );
 
   const { lastRow: lastRowOnPage } = usePagination({
+    currentRowsCount: data.length,
     pageIndex: pagination.pageIndex,
     pageSize: pagination.pageSize,
     totalRows,
@@ -372,8 +384,11 @@ const DataView = ({
         <Pagination
           currentPageLabel={t("pagination.page")}
           isDisabled={isEmpty}
+          isMoreDisabled={isPaginationMoreDisabled}
           lastRow={lastRowOnPage}
           loadMoreLabel={t("pagination.loadmore")}
+          maxPageIndex={maxPages}
+          maxPageSize={maxResultsPerPage}
           nextLabel={t("pagination.next")}
           onPaginationChange={setPagination}
           pageIndex={pagination.pageIndex}
@@ -381,6 +396,7 @@ const DataView = ({
           previousLabel={t("pagination.previous")}
           rowsPerPageLabel={t("pagination.rowsperpage")}
           totalRows={totalRows}
+          currentRowsCount={data.length}
           variant={paginationType}
         />
       )}

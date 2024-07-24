@@ -39,7 +39,10 @@ const DataTable = ({
   isLoading,
   isEmpty,
   isNoResults,
+  isPaginationMoreDisabled,
   isRowReorderingDisabled,
+  maxResultsPerPage,
+  maxPages,
   noResultsPlaceholder,
   onChangeRowSelection,
   paginationType,
@@ -93,7 +96,10 @@ const DataTable = ({
       isEmpty={isEmpty}
       isLoading={isLoading}
       isNoResults={isNoResults}
+      isPaginationMoreDisabled={isPaginationMoreDisabled}
       isRowReorderingDisabled={isRowReorderingDisabled}
+      maxPages={maxPages}
+      maxResultsPerPage={maxResultsPerPage}
       noResultsPlaceholder={noResultsPlaceholder}
       onChangeRowSelection={onChangeRowSelection}
       paginationType={paginationType}
