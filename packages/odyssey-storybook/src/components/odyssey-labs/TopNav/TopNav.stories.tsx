@@ -29,7 +29,7 @@ const storybookMeta: Meta<TopNavProps> = {
         },
       },
     },
-    search: {
+    SearchFieldComponent: {
       control: "ReactElement",
       description: "Display global search field",
       table: {
@@ -46,7 +46,7 @@ const storybookMeta: Meta<TopNavProps> = {
         },
       },
     },
-    additionalNavItem: {
+    AdditionalNavItemComponent: {
       description:
         "Additional element to be displayed at the end of the top nav",
       table: {
@@ -71,15 +71,6 @@ const storybookMeta: Meta<TopNavProps> = {
         },
       },
     },
-    hasDivider: {
-      description:
-        "Shows the divider after the nav items and before the user account info",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
     userProfile: {
       description: "Shows the logged in user account info",
       table: {
@@ -91,7 +82,9 @@ const storybookMeta: Meta<TopNavProps> = {
   },
   args: {
     hasLogo: true,
-    search: <SearchField label="Search" placeholder="Search..." />,
+    SearchFieldComponent: (
+      <SearchField label="Search" placeholder="Search..." />
+    ),
     topNavLinkItems: [
       {
         id: "link-01",
@@ -115,10 +108,11 @@ const storybookMeta: Meta<TopNavProps> = {
         onClick: () => {},
       },
     ],
-    additionalNavItem: <Button variant="secondary" label="Connect Builder" />,
+    AdditionalNavItemComponent: (
+      <Button variant="secondary" label="Connect Builder" />
+    ),
     settingsLink: "/",
     helpLink: "/",
-    hasDivider: true,
     userProfile: {
       profileIcon: <UserIcon />,
       userName: "test.user@test.com",
@@ -133,17 +127,6 @@ export default storybookMeta;
 
 export const Default: StoryObj<TopNavProps> = {
   render: (props: TopNavProps) => {
-    return (
-      <TopNav
-        hasLogo={props.hasLogo}
-        search={props.search}
-        topNavLinkItems={props.topNavLinkItems}
-        additionalNavItem={props.additionalNavItem}
-        settingsLink={props.settingsLink}
-        helpLink={props.helpLink}
-        hasDivider={props.hasDivider}
-        userProfile={props.userProfile}
-      />
-    );
+    return <TopNav {...props} />;
   },
 };

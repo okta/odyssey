@@ -13,7 +13,6 @@
 import styled from "@emotion/styled";
 import { memo, useMemo, ReactElement, useCallback, KeyboardEvent } from "react";
 
-import { Box } from "../Box";
 import type { HtmlProps } from "../HtmlProps";
 import {
   AuraIcon,
@@ -70,17 +69,17 @@ export type TopNavProps = {
    */
   hasLogo?: boolean;
   /**
-   *  Determines whether the search box is displayed
+   *  Pass in a SearchField component with the variant="filled" prop set
    */
-  search?: ReactElement;
+  SearchFieldComponent?: ReactElement;
   /**
    * Nav links in the top nav
    */
   topNavLinkItems: TopNavLinkItem[];
   /**
-   * Displays an additional button after the link items if it is passed
+   * Pass in an additional componnet like Button that will displayed after the nav link items
    */
-  additionalNavItem?: ReactElement;
+  AdditionalNavItemComponent?: ReactElement;
   /**
    * link to settings page
    */
@@ -90,12 +89,7 @@ export type TopNavProps = {
    */
   helpLink?: string;
   /**
-   * determines whether the divider is displayed before the user profile / account info
-   */
-  hasDivider?: boolean;
-
-  /**
-   * help link
+   * Displays user account info
    */
   userProfile?: UserProfileProps;
 } & Pick<HtmlProps, "testId">;
@@ -108,47 +102,52 @@ const UserProfileContainer = styled("div", {
   paddingRight: odysseyDesignTokens.Spacing4,
 }));
 
+const UserProfileIcon = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  display: "flex",
+  paddingRight: odysseyDesignTokens.Spacing2,
+}));
+
+const UserProfileInfoContainer = styled.div({
+  display: "flex",
+  flexDirection: "column",
+});
+
+const UserProfileEmailInfoContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  color: odysseyDesignTokens.TypographyColorHeading,
+  fontSize: odysseyDesignTokens.TypographySizeSubordinate,
+}));
+
+const UserProfileOrgInfoContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  color: odysseyDesignTokens.TypographyColorSubordinate,
+  fontSize: odysseyDesignTokens.TypographySizeSubordinate,
+}));
+
 const UserProfile = ({ profileIcon, userName, orgName }: UserProfileProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
-  const userProfileIconStyles = useMemo(
-    () => ({
-      paddingRight: odysseyDesignTokens.Spacing2,
-    }),
-    [odysseyDesignTokens],
-  );
-
-  const userProfileInfoContainerStyles = useMemo(
-    () => ({
-      display: "flex",
-      flexDirection: "column",
-    }),
-    [],
-  );
-
-  const userProfileEmailInfoStyles = useMemo(
-    () => ({
-      color: odysseyDesignTokens.TypographyColorHeading,
-      fontSize: odysseyDesignTokens.TypographySizeSubordinate,
-    }),
-    [odysseyDesignTokens],
-  );
-
-  const userProfileOrgInfoStyles = useMemo(
-    () => ({
-      color: odysseyDesignTokens.TypographyColorSubordinate,
-      fontSize: odysseyDesignTokens.TypographySizeSubordinate,
-    }),
-    [odysseyDesignTokens],
-  );
-
   return (
     <UserProfileContainer odysseyDesignTokens={odysseyDesignTokens}>
-      {profileIcon && <Box sx={userProfileIconStyles}>{profileIcon}</Box>}
-      <Box sx={userProfileInfoContainerStyles}>
-        <Box sx={userProfileEmailInfoStyles}>{userName}</Box>
-        <Box sx={userProfileOrgInfoStyles}>{orgName}</Box>
-      </Box>
+      {profileIcon && (
+        <UserProfileIcon odysseyDesignTokens={odysseyDesignTokens}>
+          {profileIcon}
+        </UserProfileIcon>
+      )}
+      <UserProfileInfoContainer>
+        <UserProfileEmailInfoContainer
+          odysseyDesignTokens={odysseyDesignTokens}
+        >
+          {userName}
+        </UserProfileEmailInfoContainer>
+        <UserProfileOrgInfoContainer odysseyDesignTokens={odysseyDesignTokens}>
+          {orgName}
+        </UserProfileOrgInfoContainer>
+      </UserProfileInfoContainer>
     </UserProfileContainer>
   );
 };
@@ -178,7 +177,6 @@ const TopNavListItemContainer = styled("li", {
     prop !== "odysseyDesignTokens" && prop !== "isDisabled",
 })<{
   odysseyDesignTokens: DesignTokens;
-  disabled?: boolean;
   isDisabled?: boolean;
 }>(({ odysseyDesignTokens, isDisabled }) => ({
   display: "flex",
@@ -250,7 +248,6 @@ const TopNavItemContent = ({
       <TopNavListItemContainer
         id={id}
         key={id}
-        disabled={isDisabled}
         aria-disabled={isDisabled}
         isDisabled={isDisabled}
         odysseyDesignTokens={odysseyDesignTokens}
@@ -305,36 +302,82 @@ const TopNavItemContent = ({
   return TopNavItemContent;
 };
 
+const LinkAndProfileWrapper = styled.div({
+  display: "flex",
+  alignItems: "center",
+  marginLeft: "auto",
+});
+
+const AdditionalLinkContainerWithBorder = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  display: "flex",
+  alignItems: "center",
+  marginRight: odysseyDesignTokens.Spacing3,
+  borderRight: `${odysseyDesignTokens.BorderWidthMain} solid ${odysseyDesignTokens.HueNeutral200}`,
+}));
+
+const LinkContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  paddingRight: odysseyDesignTokens.Spacing3,
+  "& a": {
+    color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
+  },
+}));
+
+const TopNavContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  display: "flex",
+  alignItems: "center",
+  backgroundColor: odysseyDesignTokens.HueNeutralWhite,
+  height: odysseyDesignTokens.Spacing9,
+}));
+
+const LogoContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  display: "flex",
+  alignItems: "center",
+  padding: `0 ${odysseyDesignTokens.Spacing9} 0 ${odysseyDesignTokens.Spacing5}`,
+}));
+
+const SearchFieldContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  width: "350px",
+  padding: `${odysseyDesignTokens.Spacing2} ${odysseyDesignTokens.Spacing3}`,
+}));
+
+const AdditionalNavItemContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  padding: `0 ${odysseyDesignTokens.Spacing3}`,
+}));
+
 const TopNav = ({
   hasLogo,
-  search,
+  SearchFieldComponent,
   topNavLinkItems,
-  additionalNavItem,
+  AdditionalNavItemComponent,
   settingsLink,
   helpLink,
-  hasDivider,
   userProfile,
 }: TopNavProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
-
-  const TopNavStyles = useMemo(
-    () => ({
-      display: "flex",
-      alignItems: "center",
-      backgroundColor: odysseyDesignTokens.HueNeutralWhite,
-      height: odysseyDesignTokens.Spacing9,
-    }),
-    [odysseyDesignTokens],
-  );
-
-  const LogoContainerStyles = useMemo(
-    () => ({
-      display: "flex",
-      alignItems: "center",
-      padding: `0 ${odysseyDesignTokens.Spacing9} 0 ${odysseyDesignTokens.Spacing5}`,
-    }),
-    [odysseyDesignTokens],
-  );
 
   const LogoStyles = useMemo(
     () => ({
@@ -352,75 +395,55 @@ const TopNav = ({
     [odysseyDesignTokens],
   );
 
-  const searchContainerStyles = useMemo(
-    () => ({
-      width: "350px",
-      padding: `${odysseyDesignTokens.Spacing2} ${odysseyDesignTokens.Spacing3}`,
-    }),
-    [odysseyDesignTokens],
-  );
-
-  const additionalNavItemContainerStyles = useMemo(
-    () => ({
-      marginLeft: "auto",
-      padding: `0 ${odysseyDesignTokens.Spacing3}`,
-    }),
-    [odysseyDesignTokens],
-  );
-
-  const linkContainerStyles = useMemo(
-    () => ({
-      paddingRight: odysseyDesignTokens.Spacing3,
-      "& a": {
-        color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
-      },
-    }),
-    [odysseyDesignTokens],
-  );
-
-  const dividerContainerStyles = useMemo(
-    () => ({
-      margin: `0 ${odysseyDesignTokens.Spacing3} 0 0`,
-      padding: `${odysseyDesignTokens.Spacing4} 0`,
-      borderLeft: `${odysseyDesignTokens.BorderWidthMain} solid ${odysseyDesignTokens.HueNeutral200}`,
-    }),
-    [odysseyDesignTokens],
-  );
-
   return (
-    <Box sx={TopNavStyles}>
+    <TopNavContainer odysseyDesignTokens={odysseyDesignTokens}>
       {hasLogo && (
-        <Box sx={LogoContainerStyles}>
+        <LogoContainer odysseyDesignTokens={odysseyDesignTokens}>
           <AuraIcon sx={LogoStyles} />
           <AuraWordmarkIcon sx={LogoWordmarkStyles} />
-        </Box>
+        </LogoContainer>
       )}
-      {search && <Box sx={searchContainerStyles}>{search}</Box>}
+      {SearchFieldComponent && (
+        <SearchFieldContainer odysseyDesignTokens={odysseyDesignTokens}>
+          {SearchFieldComponent}
+        </SearchFieldContainer>
+      )}
       <TopNavListContainer>
         {topNavLinkItems?.map((item) => {
           return <TopNavItemContent key={item.id} {...item} />;
         })}
       </TopNavListContainer>
-      {additionalNavItem && (
-        <Box sx={additionalNavItemContainerStyles}>{additionalNavItem}</Box>
-      )}
-      {settingsLink && (
-        <Box sx={linkContainerStyles}>
-          <Link href={settingsLink}>
-            <SettingsIcon />
-          </Link>
-        </Box>
-      )}
-      {helpLink && (
-        <Box sx={linkContainerStyles}>
-          <Link href={helpLink}>
-            <QuestionCircleIcon />
-          </Link>
-        </Box>
-      )}
-      {hasDivider && <Box sx={dividerContainerStyles}></Box>}
-      {userProfile && UserProfile(userProfile)}
-    </Box>
+      <LinkAndProfileWrapper>
+        {(AdditionalNavItemComponent || settingsLink || helpLink) && (
+          <AdditionalLinkContainerWithBorder
+            odysseyDesignTokens={odysseyDesignTokens}
+          >
+            {AdditionalNavItemComponent && (
+              <AdditionalNavItemContainer
+                odysseyDesignTokens={odysseyDesignTokens}
+              >
+                {AdditionalNavItemComponent}
+              </AdditionalNavItemContainer>
+            )}
+            {settingsLink && (
+              <LinkContainer odysseyDesignTokens={odysseyDesignTokens}>
+                <Link href={settingsLink}>
+                  <SettingsIcon />
+                </Link>
+              </LinkContainer>
+            )}
+            {helpLink && (
+              <LinkContainer odysseyDesignTokens={odysseyDesignTokens}>
+                <Link href={helpLink}>
+                  <QuestionCircleIcon />
+                </Link>
+              </LinkContainer>
+            )}
+          </AdditionalLinkContainerWithBorder>
+        )}
+        {userProfile && UserProfile(userProfile)}
+      </LinkAndProfileWrapper>
+    </TopNavContainer>
   );
 };
 
