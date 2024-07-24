@@ -14,17 +14,17 @@
 import { useCallback, memo, useState } from "react";
 //import { columns, data } from "./roadmapData";
 import {
-  Callout,
+  // Callout,
   DataTable,
   CssBaseline,
   OdysseyThemeProvider,
   DataTableGetDataType,
   DataTableRowSelectionState,
-  ScopedCssBaseline,
-  createOdysseyMuiTheme,
+  // ScopedCssBaseline,
+  // createOdysseyMuiTheme,
 } from "@okta/odyssey-react-mui";
-import { ThemeProvider as StorybookThemeProvider } from "@storybook/theming";
-import * as odysseyTokens from "@okta/odyssey-design-tokens";
+//import { ThemeProvider as StorybookThemeProvider } from "@storybook/theming";
+//import * as odysseyTokens from "@okta/odyssey-design-tokens";
 import {
   Planet,
   columns as planetColumns,
@@ -140,25 +140,12 @@ export const InnerRoadmapTable = () => {
 
 const MemoizedInnerRoadmapTable = memo(InnerRoadmapTable);
 const WrappedRoadmapTable = () => {
-  const odysseyTheme = createOdysseyMuiTheme({ odysseyTokens });
+  // const odysseyTheme = createOdysseyMuiTheme({ odysseyTokens });
 
   return (
     <OdysseyThemeProvider>
-      {/* @ts-expect-error type mismatch on "typography" */}
-      <StorybookThemeProvider theme={odysseyTheme}>
-        <CssBaseline />
-        <ScopedCssBaseline>
-          <Callout severity="info">
-            Any products, features or functionality referenced in this
-            presentation that are not currently generally available may not be
-            delivered on time or at all. Product roadmaps do not represent a
-            commitment, obligation or promise to deliver any product, feature or
-            functionality, and you should not rely on them to make your purchase
-            decisions.
-          </Callout>
-          <MemoizedInnerRoadmapTable />
-        </ScopedCssBaseline>
-      </StorybookThemeProvider>
+      <CssBaseline />
+      <MemoizedInnerRoadmapTable />
     </OdysseyThemeProvider>
   );
 };
