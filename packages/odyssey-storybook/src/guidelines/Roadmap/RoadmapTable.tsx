@@ -13,7 +13,11 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { useMemo, useCallback } from "react";
 import { DataFilter } from "@okta/odyssey-react-mui/labs";
-import { DataTable, DataTableGetDataType } from "@okta/odyssey-react-mui";
+import {
+  DataTable,
+  DataTableGetDataType,
+  DataTableSortingState,
+} from "@okta/odyssey-react-mui";
 import { useColumns, data, OdysseyComponent } from "./roadmapData";
 import {
   Callout,
@@ -24,96 +28,6 @@ import {
 } from "@okta/odyssey-react-mui";
 import { ThemeProvider as StorybookThemeProvider } from "@storybook/theming";
 import * as odysseyTokens from "@okta/odyssey-design-tokens";
-
-// const processData = ({
-//   initialData,
-//   search,
-//   filters,
-//   sort,
-// }: {
-//   initialData: OdysseyComponent[];
-//   search?: string;
-//   filters?: DataFilter[];
-// }) => {
-//   let filteredData = [...initialData];
-
-//   // Implement text-based query filtering
-//   if (search) {
-//     filteredData = filteredData.filter((row) =>
-//       Object.values(row).some((value) =>
-//         value.toString().toLowerCase().includes(search.toLowerCase()),
-//       ),
-//     );
-//   }
-
-//   // Implement column-specific filtering
-//   if (filters) {
-//     filteredData = filteredData.filter((row) => {
-//       return filters.every(({ id, value }) => {
-//         // If filter value is null or undefined, skip this filter
-//         if (value === null || value === undefined) {
-//           return true;
-//         }
-
-//         // General filtering for other columns
-//         return row[id as keyof OdysseyComponent]
-//           ?.toString()
-//           .includes(value.toString());
-//       });
-//     });
-//   }
-
-//   function parseCustomDate(dateStr: string): Date {
-//     if (dateStr.length <= 0) {
-//       return new Date(2999, 0);
-//     }
-
-//     const months = [
-//       "Jan",
-//       "Feb",
-//       "Mar",
-//       "Apr",
-//       "May",
-//       "Jun",
-//       "Jul",
-//       "Aug",
-//       "Sep",
-//       "Oct",
-//       "Nov",
-//       "Dec",
-//     ];
-//     const [monthStr, yearStr] = dateStr.split(" ");
-
-//     const month = months.indexOf(monthStr);
-//     const year = parseInt(yearStr.replace("'", ""), 10) + 2000; // Adjust for century
-
-//     return new Date(year, month);
-//   }
-
-//   // Implement sorting
-//   if (sort && sort.length > 0) {
-//     filteredData.sort((a, b) => {
-//       for (const { id, desc } of sort) {
-//         let aValue: string | Date = a[id as keyof OdysseyComponent];
-//         let bValue: string | Date = b[id as keyof OdysseyComponent];
-
-//         if (
-//           id === "startDate" ||
-//           id === "labsRelease" ||
-//           id === "fullRelease"
-//         ) {
-//           aValue = parseCustomDate(aValue);
-//           bValue = parseCustomDate(bValue);
-//         }
-
-//         if (aValue < bValue) return desc ? 1 : -1;
-//         if (aValue > bValue) return desc ? -1 : 1;
-//       }
-
-//       return 0;
-//     });
-//   }
-// };
 
 export const InnerRoadmapTable = () => {
   const columns = useColumns(); // Use the hook to get columns
@@ -152,14 +66,54 @@ export const InnerRoadmapTable = () => {
     ],
     [],
   );
+  // const filterData = ({
+  //   data,
+  //   ...args
+  // }: {
+  //   data: OdysseyComponent[];
+  // } & DataTableGetDataType) => {
+  //   let filteredData = data;
+  //   const { search, sort } = args;
+
+  //   // Implement text-based query filtering
+  //   if (search) {
+  //     filteredData = filteredData.filter((row) =>
+  //       Object.values(row).some((value) =>
+  //         value.toString().toLowerCase().includes(search.toLowerCase()),
+  //       ),
+  //     );
+  //   }
+
+  //   // Implement sorting
+  //   if (sort && sort.length > 0) {
+  //     filteredData.sort((a, b) => {
+  //       for (const { id, desc } of sort) {
+  //         const aValue: string | Date = a[id as keyof OdysseyComponent];
+  //         const bValue: string | Date = b[id as keyof OdysseyComponent];
+
+  //         if (aValue < bValue) return desc ? 1 : -1;
+  //         if (aValue > bValue) return desc ? -1 : 1;
+  //       }
+
+  //       return 0;
+  //     });
+  //   }
+
+  //   return filteredData;
+  // };
+
   const filterData = ({
     data,
-    ...args
+    search,
+    sort,
+    filters,
   }: {
     data: OdysseyComponent[];
-  } & DataTableGetDataType) => {
-    let filteredData = data;
-    const { search, sort } = args;
+    search?: string;
+    sort?: DataTableSortingState;
+    filters?: DataFilter[];
+  }) => {
+    let filteredData = [...data];
 
     // Implement text-based query filtering
     if (search) {
@@ -170,12 +124,35 @@ export const InnerRoadmapTable = () => {
       );
     }
 
+    // Implement column-specific filtering
+    if (filters) {
+      filteredData = filteredData.filter((row) => {
+        return filters.every(({ id, value }) => {
+          if (value === null || value === undefined) {
+            return true;
+          }
+          return row[id as keyof OdysseyComponent]
+            ?.toString()
+            .includes(value.toString());
+        });
+      });
+    }
+
     // Implement sorting
     if (sort && sort.length > 0) {
       filteredData.sort((a, b) => {
         for (const { id, desc } of sort) {
-          const aValue: string | Date = a[id as keyof OdysseyComponent];
-          const bValue: string | Date = b[id as keyof OdysseyComponent];
+          let aValue: string | Date = a[id as keyof OdysseyComponent];
+          let bValue: string | Date = b[id as keyof OdysseyComponent];
+
+          if (
+            id === "startDate" ||
+            id === "labsRelease" ||
+            id === "fullRelease"
+          ) {
+            aValue = parseCustomDate(aValue as string);
+            bValue = parseCustomDate(bValue as string);
+          }
 
           if (aValue < bValue) return desc ? 1 : -1;
           if (aValue > bValue) return desc ? -1 : 1;
@@ -188,19 +165,40 @@ export const InnerRoadmapTable = () => {
     return filteredData;
   };
 
+  // Helper function for parsing custom date formats
+  function parseCustomDate(dateStr: string): Date {
+    if (dateStr.length <= 0) {
+      return new Date(2999, 0);
+    }
+
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const [monthStr, yearStr] = dateStr.split(" ");
+
+    const month = months.indexOf(monthStr);
+    const year = parseInt(yearStr.replace("'", ""), 10) + 2000; // Adjust for century
+
+    return new Date(year, month);
+  }
   const fetchData = useCallback(
     ({ ...props }: DataTableGetDataType) => {
       return filterData({ data, ...props });
     },
     [data],
   );
-  // const fetchData = useCallback(
-  //   ({ ...props }: DataTableGetDataType) => {
-  //     return filterData({ data, ...props });
-  //   },
-  //   [data],
-  // );
-  // Memoize the filters array
+
   const tableFilters = useMemo<DataFilter[]>(
     () => [
       {
