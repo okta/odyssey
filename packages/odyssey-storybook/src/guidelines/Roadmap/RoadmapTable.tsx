@@ -26,7 +26,7 @@ const filterData = ({
   data: Planet[];
 } & DataTableGetDataType) => {
   let filteredData = data;
-  const { search, sort } = args;
+  const { search, sort, page = 1, resultsPerPage = 20 } = args;
 
   // Implement text-based query filtering
   if (search) {
@@ -51,6 +51,12 @@ const filterData = ({
       return 0;
     });
   }
+
+  // Implement pagination
+  const startRow = (page - 1) * resultsPerPage;
+  const endRow = startRow + resultsPerPage;
+  filteredData = filteredData.slice(startRow, endRow);
+
   return filteredData;
 };
 
