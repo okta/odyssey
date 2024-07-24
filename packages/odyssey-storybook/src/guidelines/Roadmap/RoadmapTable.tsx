@@ -216,26 +216,7 @@ const InnerRoadmapTable: React.FC = React.memo(() => {
   //   [typeOptions, statusOptions, expectedOptions],
   // );
 
-  return (
-    <DataTable
-      columns={columns}
-      totalRows={data.length}
-      getRowId={({ name }) => name}
-      getData={fetchData}
-      hasChangeableDensity={false}
-      hasColumnResizing={false}
-      hasColumnVisibility={false}
-      // hasFilters
-      // filters={tableFilters}
-      resultsPerPage={100}
-      hasPagination={false}
-      hasRowSelection={false}
-      hasRowReordering={false}
-      searchDelayTime={300}
-      // hasSearch
-      hasSorting
-    />
-  );
+  return <DataTable columns={columns} getData={fetchData} />;
 });
 
 const WrappedRoadmapTable: React.FC = () => {
