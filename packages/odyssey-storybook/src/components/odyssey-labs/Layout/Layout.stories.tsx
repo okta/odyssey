@@ -47,6 +47,12 @@ const RegionDisclaimer = () => {
   );
 };
 
+const MarginContainer = styled.div({
+  "& + &": {
+    marginBlockStart: "16px",
+  },
+});
+
 const storybookMeta: Meta<LayoutProps> = {
   title: "Labs Components/Layout",
   component: Layout,
@@ -250,76 +256,99 @@ export const KitchenSink: StoryObj<LayoutProps> = {
   render: function () {
     return (
       <>
-        <Layout regions={[1]}>
-          <VisibleRegion>
-            <RegionLabel>Region</RegionLabel>
-          </VisibleRegion>
-        </Layout>
-        <Layout regions={[1, 1]}>
-          <VisibleRegion>
-            <RegionLabel>Region</RegionLabel>
-          </VisibleRegion>
-          <VisibleRegion>
-            <RegionLabel>Region</RegionLabel>
-          </VisibleRegion>
-        </Layout>
-        <Layout regions={[2, 1]}>
-          <VisibleRegion>
-            <RegionLabel>Region</RegionLabel>
-          </VisibleRegion>
-          <VisibleRegion>
-            <RegionLabel>Region</RegionLabel>
-          </VisibleRegion>
-        </Layout>
-        <Layout regions={[1, 2]}>
-          <VisibleRegion>
-            <RegionLabel>Region</RegionLabel>
-          </VisibleRegion>
-          <VisibleRegion>
-            <RegionLabel>Region</RegionLabel>
-          </VisibleRegion>
-        </Layout>
-        <Layout regions={[3, 1]}>
-          <VisibleRegion>
-            <RegionLabel>Region</RegionLabel>
-          </VisibleRegion>
-          <VisibleRegion>
-            <RegionLabel>Region</RegionLabel>
-          </VisibleRegion>
-        </Layout>
-        <Layout regions={[1, 3]}>
-          <VisibleRegion>
-            <RegionLabel>Region</RegionLabel>
-          </VisibleRegion>
-          <VisibleRegion>
-            <RegionLabel>Region</RegionLabel>
-          </VisibleRegion>
-        </Layout>
-        <Layout regions={[1, 1, 1]}>
-          <VisibleRegion>
-            <RegionLabel>Region</RegionLabel>
-          </VisibleRegion>
-          <VisibleRegion>
-            <RegionLabel>Region</RegionLabel>
-          </VisibleRegion>
-          <VisibleRegion>
-            <RegionLabel>Region</RegionLabel>
-          </VisibleRegion>
-        </Layout>
-        <Layout regions={[1, 1, 1, 1]}>
-          <VisibleRegion>
-            <RegionLabel>Region</RegionLabel>
-          </VisibleRegion>
-          <VisibleRegion>
-            <RegionLabel>Region</RegionLabel>
-          </VisibleRegion>
-          <VisibleRegion>
-            <RegionLabel>Region</RegionLabel>
-          </VisibleRegion>
-          <VisibleRegion>
-            <RegionLabel>Region</RegionLabel>
-          </VisibleRegion>
-        </Layout>
+        <MarginContainer>
+          <Layout regions={[1]}>
+            <VisibleRegion>
+              <RegionLabel>Region</RegionLabel>
+            </VisibleRegion>
+          </Layout>
+        </MarginContainer>
+
+        <MarginContainer>
+          <Layout regions={[1, 1]}>
+            <VisibleRegion>
+              <RegionLabel>Region</RegionLabel>
+            </VisibleRegion>
+            <VisibleRegion>
+              <RegionLabel>Region</RegionLabel>
+            </VisibleRegion>
+          </Layout>
+        </MarginContainer>
+
+        <MarginContainer>
+          <Layout regions={[2, 1]}>
+            <VisibleRegion>
+              <RegionLabel>Region</RegionLabel>
+            </VisibleRegion>
+            <VisibleRegion>
+              <RegionLabel>Region</RegionLabel>
+            </VisibleRegion>
+          </Layout>
+        </MarginContainer>
+
+        <MarginContainer>
+          <Layout regions={[1, 2]}>
+            <VisibleRegion>
+              <RegionLabel>Region</RegionLabel>
+            </VisibleRegion>
+            <VisibleRegion>
+              <RegionLabel>Region</RegionLabel>
+            </VisibleRegion>
+          </Layout>
+        </MarginContainer>
+
+        <MarginContainer>
+          <Layout regions={[3, 1]}>
+            <VisibleRegion>
+              <RegionLabel>Region</RegionLabel>
+            </VisibleRegion>
+            <VisibleRegion>
+              <RegionLabel>Region</RegionLabel>
+            </VisibleRegion>
+          </Layout>
+        </MarginContainer>
+
+        <MarginContainer>
+          <Layout regions={[1, 3]}>
+            <VisibleRegion>
+              <RegionLabel>Region</RegionLabel>
+            </VisibleRegion>
+            <VisibleRegion>
+              <RegionLabel>Region</RegionLabel>
+            </VisibleRegion>
+          </Layout>
+        </MarginContainer>
+
+        <MarginContainer>
+          <Layout regions={[1, 1, 1]}>
+            <VisibleRegion>
+              <RegionLabel>Region</RegionLabel>
+            </VisibleRegion>
+            <VisibleRegion>
+              <RegionLabel>Region</RegionLabel>
+            </VisibleRegion>
+            <VisibleRegion>
+              <RegionLabel>Region</RegionLabel>
+            </VisibleRegion>
+          </Layout>
+        </MarginContainer>
+
+        <MarginContainer>
+          <Layout regions={[1, 1, 1, 1]}>
+            <VisibleRegion>
+              <RegionLabel>Region</RegionLabel>
+            </VisibleRegion>
+            <VisibleRegion>
+              <RegionLabel>Region</RegionLabel>
+            </VisibleRegion>
+            <VisibleRegion>
+              <RegionLabel>Region</RegionLabel>
+            </VisibleRegion>
+            <VisibleRegion>
+              <RegionLabel>Region</RegionLabel>
+            </VisibleRegion>
+          </Layout>
+        </MarginContainer>
       </>
     );
   },
