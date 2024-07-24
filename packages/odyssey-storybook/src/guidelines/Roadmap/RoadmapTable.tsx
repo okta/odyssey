@@ -174,8 +174,8 @@ export const InnerRoadmapTable = () => {
     if (sort && sort.length > 0) {
       filteredData.sort((a, b) => {
         for (const { id, desc } of sort) {
-          const aValue = a[id as keyof Planet];
-          const bValue = b[id as keyof Planet];
+          const aValue: string | Date = a[id as keyof OdysseyComponent];
+          const bValue: string | Date = b[id as keyof OdysseyComponent];
 
           if (aValue < bValue) return desc ? 1 : -1;
           if (aValue > bValue) return desc ? -1 : 1;
