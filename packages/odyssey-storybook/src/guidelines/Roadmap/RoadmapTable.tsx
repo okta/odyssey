@@ -16,13 +16,13 @@ import { DataFilter } from "@okta/odyssey-react-mui/labs";
 import { DataTable, DataTableSortingState } from "@okta/odyssey-react-mui";
 import {
   Callout,
-  CssBaseline,
+  //CssBaseline,
   OdysseyThemeProvider,
-  ScopedCssBaseline,
-  createOdysseyMuiTheme,
+  // ScopedCssBaseline,
+  // createOdysseyMuiTheme,
 } from "@okta/odyssey-react-mui";
-import { ThemeProvider as StorybookThemeProvider } from "@storybook/theming";
-import * as odysseyTokens from "@okta/odyssey-design-tokens";
+//import { ThemeProvider as StorybookThemeProvider } from "@storybook/theming";
+//import * as odysseyTokens from "@okta/odyssey-design-tokens";
 
 // Assuming this is how your data and columns are imported
 import {
@@ -222,28 +222,22 @@ const InnerRoadmapTable: React.FC = React.memo(() => {
 });
 
 const WrappedRoadmapTable: React.FC = () => {
-  const odysseyTheme = useMemo(
-    () => createOdysseyMuiTheme({ odysseyTokens }),
-    [],
-  );
+  // const odysseyTheme = useMemo(
+  //   () => createOdysseyMuiTheme({ odysseyTokens }),
+  //   [],
+  // );
 
   return (
     <OdysseyThemeProvider>
       {/* @ts-expect-error type mismatch on "typography" */}
-      <StorybookThemeProvider theme={odysseyTheme}>
-        <CssBaseline />
-        <ScopedCssBaseline>
-          <Callout severity="info">
-            Any products, features or functionality referenced in this
-            presentation that are not currently generally available may not be
-            delivered on time or at all. Product roadmaps do not represent a
-            commitment, obligation or promise to deliver any product, feature or
-            functionality, and you should not rely on them to make your purchase
-            decisions.
-          </Callout>
-          <InnerRoadmapTable />
-        </ScopedCssBaseline>
-      </StorybookThemeProvider>
+      <Callout severity="info">
+        Any products, features or functionality referenced in this presentation
+        that are not currently generally available may not be delivered on time
+        or at all. Product roadmaps do not represent a commitment, obligation or
+        promise to deliver any product, feature or functionality, and you should
+        not rely on them to make your purchase decisions.
+      </Callout>
+      <InnerRoadmapTable />
     </OdysseyThemeProvider>
   );
 };
