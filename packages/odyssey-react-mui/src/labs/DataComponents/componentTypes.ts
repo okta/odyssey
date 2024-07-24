@@ -33,10 +33,10 @@ import { paginationTypeValues } from "../DataTablePagination";
 import { ReactNode } from "react";
 import { StackCardProps } from "./StackCard";
 
-export type Layout = (typeof availableLayouts)[number];
+export type DataLayout = (typeof availableLayouts)[number];
 export type StackLayout = (typeof availableStackLayouts)[number];
 
-export type AvailableLayouts = Layout[];
+export type AvailableLayouts = DataLayout[];
 export type AvailableStackLayouts = StackLayout[];
 
 export type UniversalProps = {
@@ -64,7 +64,10 @@ export type UniversalProps = {
   isEmpty?: boolean;
   isLoading?: boolean;
   isNoResults?: boolean;
+  isPaginationMoreDisabled?: boolean;
   isRowReorderingDisabled?: boolean;
+  maxPages?: number;
+  maxResultsPerPage?: number;
   noResultsPlaceholder?: ReactNode;
   onChangeRowSelection?: (rowSelection: DataRowSelectionState) => void;
   onReorderRows?: ({ rowId, newRowIndex }: DataOnReorderRowsType) => void;
@@ -93,7 +96,7 @@ export type StackProps = {
   rowActionMenuItems?: DataTableRowActionsProps["rowActionMenuItems"];
 };
 
-export type ViewProps<L extends Layout> = {
+export type ViewProps<L extends DataLayout> = {
   availableLayouts?: L[];
   initialLayout?: L;
   stackOptions?: StackProps;

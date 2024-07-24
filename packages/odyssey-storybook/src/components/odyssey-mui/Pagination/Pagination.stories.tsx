@@ -87,6 +87,16 @@ const storyBookMeta: Meta<PaginationProps> = {
       },
     },
 
+    isMoreDisabled: {
+      control: "boolean",
+      description:
+        "If true, the pagination next/show more button will be disabled",
+      type: {
+        required: true,
+        name: "boolean",
+      },
+    },
+
     variant: {
       control: { type: "radio" },
       options: paginationTypeValues,
@@ -147,6 +157,36 @@ const storyBookMeta: Meta<PaginationProps> = {
         name: "string",
       },
     },
+
+    maxPageIndex: {
+      control: "number",
+      description:
+        "The highest page number allowed to be manually input in pagination.",
+      table: {
+        type: {
+          summary: "number",
+        },
+      },
+    },
+    maxPageSize: {
+      control: "number",
+      description:
+        "The largest number of rows allowed to be shown per page. This only affects the row input in pagination.",
+      table: {
+        type: {
+          summary: "number",
+        },
+      },
+    },
+    currentRowsCount: {
+      control: "number",
+      description: "The number of items currently visible on the page",
+      table: {
+        type: {
+          summary: "number",
+        },
+      },
+    },
   },
 
   decorators: [MuiThemeDecorator],
@@ -160,6 +200,7 @@ export const Default: StoryObj<PaginationProps> = {
     pageIndex: 1,
     pageSize: 20,
     lastRow: 20,
+    currentRowsCount: 20,
     isDisabled: false,
     variant: "paged",
     rowsPerPageLabel: "Rows per page",

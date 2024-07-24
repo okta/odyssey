@@ -196,6 +196,10 @@ export type DataTableProps = {
    */
   initialSearchValue?: string;
   /**
+   * Is the next or show-more button disabled
+   */
+  isPaginationMoreDisabled?: boolean;
+  /**
    * The component to display when the query returns no results
    */
   noResultsPlaceholder?: ReactNode;
@@ -240,6 +244,15 @@ export type DataTableProps = {
    * to calculate. Used in table pagination to know when to disable the "next"/"more" button.
    */
   totalRows?: number;
+  /**
+   * The largest number of rows allowed to be shown per page. This only affects the row input
+   * in pagination.
+   */
+  maxResultsPerPage?: number;
+  /**
+   * The highest page number allowed to be manually input in pagination
+   */
+  maxPages?: number;
 };
 
 const displayColumnDefOptions = {
@@ -376,12 +389,15 @@ const DataTable = ({
   hasSorting,
   initialDensity = densityValues[0],
   initialSearchValue = "",
+  isPaginationMoreDisabled,
   noResultsPlaceholder,
   onChangeRowSelection,
   onReorderRows,
   paginationType = "paged",
   renderDetailPanel,
   resultsPerPage = 20,
+  maxResultsPerPage,
+  maxPages,
   rowActionButtons,
   rowActionMenuItems,
   searchDelayTime,
@@ -810,10 +826,18 @@ const DataTable = ({
   ]);
 
   useEffect(() => {
+    setPagination((prev) => ({
+      pageIndex: 1,
+      pageSize: prev.pageSize,
+    }));
+  }, [filters, search]);
+
+  useEffect(() => {
     onChangeRowSelection?.(rowSelection);
   }, [rowSelection, onChangeRowSelection]);
 
   const { lastRow } = usePagination({
+    currentRowsCount: data.length,
     pageIndex: pagination.pageIndex,
     pageSize: pagination.pageSize,
     totalRows,
@@ -873,10 +897,14 @@ const DataTable = ({
         <Pagination
           pageIndex={pagination.pageIndex}
           pageSize={pagination.pageSize}
+          maxPageIndex={maxPages}
+          maxPageSize={maxResultsPerPage}
           onPaginationChange={setPagination}
           lastRow={lastRow}
           totalRows={totalRows}
+          currentRowsCount={data.length}
           isDisabled={isEmpty}
+          isMoreDisabled={isPaginationMoreDisabled}
           variant={paginationType}
           rowsPerPageLabel={t("pagination.rowsperpage")}
           currentPageLabel={t("pagination.page")}

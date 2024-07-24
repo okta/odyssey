@@ -18,6 +18,7 @@ import {
 import {
   Box,
   Button,
+  DataTable,
   EmptyState,
   DataTableGetDataType,
   DataTableOnReorderRowsType,
@@ -25,8 +26,8 @@ import {
   DataTableRenderDetailPanelType,
   DataTableRowSelectionState,
   MenuItem,
+  densityValues,
 } from "@okta/odyssey-react-mui";
-import { DataTable, densityValues } from "@okta/odyssey-react-mui/labs";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import {
   Planet,
@@ -239,6 +240,36 @@ const storybookMeta: Meta<DataTableProps> = {
     resultsPerPage: {
       control: "number",
       description: "The number of results per page.",
+      table: {
+        type: {
+          summary: "number",
+        },
+      },
+    },
+    isPaginationMoreDisabled: {
+      control: "boolean",
+      description:
+        "If true, the pagination next or show more button will be disabled.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    maxPages: {
+      control: "number",
+      description:
+        "The highest page number allowed to be manually input in pagination.",
+      table: {
+        type: {
+          summary: "number",
+        },
+      },
+    },
+    maxResultsPerPage: {
+      control: "number",
+      description:
+        "The largest number of rows allowed to be shown per page. This only affects the row input in pagination.",
       table: {
         type: {
           summary: "number",
