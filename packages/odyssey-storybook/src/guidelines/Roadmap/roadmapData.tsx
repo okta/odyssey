@@ -20,66 +20,7 @@ import {
 } from "@okta/odyssey-react-mui";
 import { DataTableColumn } from "@okta/odyssey-react-mui";
 
-//import rawData from "./roadmap.json";
-const rawData = [
-  {
-    name: "Accordion",
-    type: "Component",
-    status: "Released",
-    define: "Complete",
-    design: "Complete",
-    develop: "Complete",
-    deliverableTiming: "Q2 FY25",
-  },
-  {
-    name: "Autocomplete",
-    type: "Component",
-    status: "Released",
-    define: "Complete",
-    design: "Complete",
-    develop: "Complete",
-    deliverableTiming: "Q1 FY25",
-  },
-  {
-    name: "Badge",
-    type: "Component",
-    status: "Released",
-    define: "Complete",
-    design: "Complete",
-    develop: "Complete",
-    deliverableTiming: "Q2 FY25",
-  },
-];
-//Use this, not roadmap.json
-// [
-//   {
-//     "name": "Accordion",
-//     "type": "Component",
-//     "status": "Released",
-//     "define": "Complete",
-//     "design": "Complete",
-//     "develop": "Complete",
-//     "deliverableTiming": "Q2 FY25"
-//   },
-//   {
-//     "name": "Autocomplete",
-//     "type": "Component",
-//     "status": "Released",
-//     "define": "Complete",
-//     "design": "Complete",
-//     "develop": "Complete",
-//     "deliverableTiming": "Q1 FY25"
-//   },
-//   {
-//     "name": "Badge",
-//     "type": "Component",
-//     "status": "Released",
-//     "define": "Complete",
-//     "design": "Complete",
-//     "develop": "Complete",
-//     "deliverableTiming": "Q2 FY25"
-//   }
-// ]
+import rawData from "./roadmap.json";
 
 export type OdysseyComponent = {
   name: string;

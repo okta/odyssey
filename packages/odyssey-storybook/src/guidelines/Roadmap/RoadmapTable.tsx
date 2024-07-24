@@ -11,10 +11,9 @@
  */
 
 /* eslint-disable import/no-extraneous-dependencies */
-import { useMemo, useCallback } from "react";
+import React, { useMemo, useCallback } from "react";
 import { DataFilter } from "@okta/odyssey-react-mui/labs";
 import { DataTable, DataTableSortingState } from "@okta/odyssey-react-mui";
-import { useColumns, data, OdysseyComponent } from "./roadmapData";
 import {
   Callout,
   CssBaseline,
@@ -24,6 +23,44 @@ import {
 } from "@okta/odyssey-react-mui";
 import { ThemeProvider as StorybookThemeProvider } from "@storybook/theming";
 import * as odysseyTokens from "@okta/odyssey-design-tokens";
+import { Theme } from "@mui/material/styles";
+
+// Assuming this is how your data and columns are imported
+import {
+  useColumns,
+  data as initialData,
+  OdysseyComponent,
+} from "./roadmapData";
+
+// Memoize the initial data
+const useData = () => useMemo(() => initialData, []);
+
+const parseCustomDate = (dateStr: string): Date => {
+  if (dateStr.length <= 0) {
+    return new Date(2999, 0);
+  }
+
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const [monthStr, yearStr] = dateStr.split(" ");
+
+  const month = months.indexOf(monthStr);
+  const year = parseInt(yearStr.replace("'", ""), 10) + 2000;
+
+  return new Date(year, month);
+};
 
 const processData = ({
   initialData,
@@ -42,7 +79,6 @@ const processData = ({
 }) => {
   let filteredData = [...initialData];
 
-  // Implement text-based query filtering
   if (search) {
     filteredData = filteredData.filter((row) =>
       Object.values(row).some((value) =>
@@ -51,51 +87,19 @@ const processData = ({
     );
   }
 
-  // Implement column-specific filtering
   if (filters) {
-    filteredData = filteredData.filter((row) => {
-      return filters.every(({ id, value }) => {
-        // If filter value is null or undefined, skip this filter
+    filteredData = filteredData.filter((row) =>
+      filters.every(({ id, value }) => {
         if (value === null || value === undefined) {
           return true;
         }
-
-        // General filtering for other columns
         return row[id as keyof OdysseyComponent]
           ?.toString()
           .includes(value.toString());
-      });
-    });
+      }),
+    );
   }
 
-  function parseCustomDate(dateStr: string): Date {
-    if (dateStr.length <= 0) {
-      return new Date(2999, 0);
-    }
-
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    const [monthStr, yearStr] = dateStr.split(" ");
-
-    const month = months.indexOf(monthStr);
-    const year = parseInt(yearStr.replace("'", ""), 10) + 2000; // Adjust for century
-
-    return new Date(year, month);
-  }
-
-  // Implement sorting
   if (sort && sort.length > 0) {
     filteredData.sort((a, b) => {
       for (const { id, desc } of sort) {
@@ -107,29 +111,26 @@ const processData = ({
           id === "labsRelease" ||
           id === "fullRelease"
         ) {
-          aValue = parseCustomDate(aValue);
-          bValue = parseCustomDate(bValue);
+          aValue = parseCustomDate(aValue as string);
+          bValue = parseCustomDate(bValue as string);
         }
 
         if (aValue < bValue) return desc ? 1 : -1;
         if (aValue > bValue) return desc ? -1 : 1;
       }
-
       return 0;
     });
   }
-  // Implement pagination
+
   const startIdx = (page - 1) * resultsPerPage;
   const endIdx = startIdx + resultsPerPage;
-  const paginatedData = filteredData.slice(startIdx, endIdx);
-
-  return paginatedData;
+  return filteredData.slice(startIdx, endIdx);
 };
 
-export const InnerRoadmapTable = () => {
-  const columns = useColumns(); // Use the hook to get columns
+const InnerRoadmapTable: React.FC = React.memo(() => {
+  const columns = useColumns();
+  const data = useData();
 
-  // Memoize filter options
   const typeOptions = useMemo(
     () => [
       { label: "Component", value: "Component" },
@@ -164,7 +165,8 @@ export const InnerRoadmapTable = () => {
     [],
   );
 
-  // Memoize the fetchData function
+  const memoizedProcessData = useCallback(processData, []);
+
   const fetchData = useCallback(
     ({
       page,
@@ -179,7 +181,7 @@ export const InnerRoadmapTable = () => {
       filters?: DataFilter[];
       sort?: DataTableSortingState;
     }) => {
-      return processData({
+      return memoizedProcessData({
         initialData: data,
         page,
         resultsPerPage,
@@ -188,10 +190,9 @@ export const InnerRoadmapTable = () => {
         sort,
       });
     },
-    [data], // Add data as a dependency if it can change
+    [data, memoizedProcessData],
   );
 
-  // Memoize the filters array
   const tableFilters = useMemo<DataFilter[]>(
     () => [
       {
@@ -218,7 +219,7 @@ export const InnerRoadmapTable = () => {
 
   return (
     <DataTable
-      columns={columns} // Use the columns from the hook
+      columns={columns}
       totalRows={data.length}
       getRowId={({ name }) => name}
       getData={fetchData}
@@ -231,20 +232,53 @@ export const InnerRoadmapTable = () => {
       hasPagination={false}
       hasRowSelection={false}
       hasRowReordering={false}
-      searchDelayTime={0}
+      searchDelayTime={300}
       hasSearch
       hasSorting
     />
   );
-};
+});
 
-const WrappedRoadmapTable = () => {
-  const odysseyTheme = createOdysseyMuiTheme({ odysseyTokens });
+const WrappedRoadmapTable: React.FC = () => {
+  const odysseyTheme = useMemo(
+    () => createOdysseyMuiTheme({ odysseyTokens }),
+    [],
+  );
+
+  // Create a Storybook-compatible theme object
+  const storybookTheme = useMemo(() => {
+    const theme: Partial<Theme> = {
+      ...odysseyTheme,
+      typography: {
+        fonts: {
+          base: odysseyTheme.typography.fontFamily,
+          mono: odysseyTheme.typography.fontFamilyMonospace,
+        },
+        weight: {
+          regular: odysseyTheme.typography.fontWeightRegular,
+          bold: odysseyTheme.typography.fontWeightBold,
+        },
+        size: {
+          s1: 12,
+          s2: 14,
+          s3: 16,
+          m1: 20,
+          m2: 24,
+          m3: 28,
+          l1: 32,
+          l2: 40,
+          l3: 48,
+          code: 90,
+        },
+      },
+    };
+    return theme;
+  }, [odysseyTheme]);
 
   return (
-    <OdysseyThemeProvider>
+    <OdysseyThemeProvider theme={odysseyTheme}>
       {/* @ts-expect-error type mismatch on "typography" */}
-      <StorybookThemeProvider theme={odysseyTheme}>
+      <StorybookThemeProvider theme={storybookTheme}>
         <CssBaseline />
         <ScopedCssBaseline>
           <Callout severity="info">
