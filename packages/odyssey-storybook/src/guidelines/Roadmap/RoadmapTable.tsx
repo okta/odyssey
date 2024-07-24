@@ -14,7 +14,7 @@
 import { useMemo, useCallback } from "react";
 import { DataFilter } from "@okta/odyssey-react-mui/labs";
 import { DataTable, DataTableSortingState } from "@okta/odyssey-react-mui";
-import { columns, data, OdysseyComponent } from "./roadmapData";
+import { useColumns, data, OdysseyComponent } from "./roadmapData";
 import {
   Callout,
   CssBaseline,
@@ -127,6 +127,8 @@ const processData = ({
 };
 
 export const InnerRoadmapTable = () => {
+  const columns = useColumns(); // Use the hook to get columns
+
   // Memoize filter options
   const typeOptions = useMemo(
     () => [
@@ -186,9 +188,7 @@ export const InnerRoadmapTable = () => {
         sort,
       });
     },
-    [
-      /* Add data as a dependency if it can change */
-    ],
+    [data], // Add data as a dependency if it can change
   );
 
   // Memoize the filters array
@@ -218,7 +218,7 @@ export const InnerRoadmapTable = () => {
 
   return (
     <DataTable
-      columns={columns}
+      columns={columns} // Use the columns from the hook
       totalRows={data.length}
       getRowId={({ name }) => name}
       getData={fetchData}
