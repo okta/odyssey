@@ -16,8 +16,6 @@ import { useCallback, memo, useState } from "react";
 import {
   // Callout,
   DataTable,
-  CssBaseline,
-  OdysseyThemeProvider,
   DataTableGetDataType,
   DataTableRowSelectionState,
   // ScopedCssBaseline,
@@ -142,12 +140,7 @@ const MemoizedInnerRoadmapTable = memo(InnerRoadmapTable);
 const WrappedRoadmapTable = () => {
   // const odysseyTheme = createOdysseyMuiTheme({ odysseyTokens });
 
-  return (
-    <OdysseyThemeProvider>
-      <CssBaseline />
-      <MemoizedInnerRoadmapTable />
-    </OdysseyThemeProvider>
-  );
+  return <MemoizedInnerRoadmapTable />;
 };
 
 export { WrappedRoadmapTable as RoadmapTable };
