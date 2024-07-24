@@ -12,17 +12,7 @@
 
 /* eslint-disable import/no-extraneous-dependencies */
 import { useCallback, memo, useState } from "react";
-//import { columns, data } from "./roadmapData";
-import {
-  // Callout,
-  DataTable,
-  DataTableGetDataType,
-  DataTableRowSelectionState,
-  // ScopedCssBaseline,
-  // createOdysseyMuiTheme,
-} from "@okta/odyssey-react-mui";
-//import { ThemeProvider as StorybookThemeProvider } from "@storybook/theming";
-//import * as odysseyTokens from "@okta/odyssey-design-tokens";
+import { DataTable, DataTableGetDataType } from "@okta/odyssey-react-mui";
 import {
   Planet,
   columns as planetColumns,
@@ -36,7 +26,7 @@ const filterData = ({
   data: Planet[];
 } & DataTableGetDataType) => {
   let filteredData = data;
-  const { search, filters, sort, page = 1, resultsPerPage = 20 } = args;
+  const { search, sort } = args;
 
   // Implement text-based query filtering
   if (search) {
@@ -45,44 +35,6 @@ const filterData = ({
         value.toString().toLowerCase().includes(search.toLowerCase()),
       ),
     );
-  }
-
-  // Implement column-specific filtering
-  if (filters) {
-    filteredData = filteredData.filter((row) => {
-      return filters.every(({ id, value }) => {
-        // If filter value is null or undefined, skip this filter
-        if (value === null || value === undefined) {
-          return true;
-        }
-
-        // If filter value is array, search for each array value
-        if (Array.isArray(value)) {
-          return value.some((arrayValue) => {
-            return row[id as keyof Planet]
-              ?.toString()
-              .toLowerCase()
-              .includes(arrayValue.toString().toLowerCase());
-          });
-        }
-
-        // In the custom filter examples, we provide a "starting letter"
-        // control that allows the user to filter by whether the
-        // first letter is a vowel or consonant
-        if (id === "startLetter" && typeof row.name === "string") {
-          const firstLetter = row.name[0]?.toLowerCase();
-          if (value === "vowel") return "aeiou".includes(firstLetter);
-          if (value === "consonant") return !"aeiou".includes(firstLetter);
-          return true;
-        }
-
-        // General filtering for other columns
-        return row[id as keyof Planet]
-          ?.toString()
-          .toLowerCase()
-          .includes(value.toString().toLowerCase());
-      });
-    });
   }
 
   // Implement sorting
@@ -99,12 +51,6 @@ const filterData = ({
       return 0;
     });
   }
-
-  // Implement pagination
-  const startRow = (page - 1) * resultsPerPage;
-  const endRow = startRow + resultsPerPage;
-  filteredData = filteredData.slice(startRow, endRow);
-
   return filteredData;
 };
 
@@ -118,28 +64,11 @@ export const InnerRoadmapTable = () => {
     [data],
   );
 
-  const onChangeRowSelection = useCallback(
-    (rowSelection: DataTableRowSelectionState) => {
-      if (Object.keys(rowSelection).length > 0) {
-        console.log(`${Object.keys(rowSelection).length} selected`);
-      }
-    },
-    [],
-  );
-
-  return (
-    <DataTable
-      columns={planetColumns}
-      getData={getData}
-      onChangeRowSelection={onChangeRowSelection}
-    />
-  );
+  return <DataTable columns={planetColumns} getData={getData} />;
 };
 
 const MemoizedInnerRoadmapTable = memo(InnerRoadmapTable);
 const WrappedRoadmapTable = () => {
-  // const odysseyTheme = createOdysseyMuiTheme({ odysseyTokens });
-
   return <MemoizedInnerRoadmapTable />;
 };
 
