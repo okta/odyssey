@@ -10,6 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+/* eslint-disable import/no-extraneous-dependencies */
+import { memo } from "react";
 import { DataFilter } from "@okta/odyssey-react-mui/labs";
 import { DataTable, DataTableSortingState } from "@okta/odyssey-react-mui";
 import { columns, data, OdysseyComponent } from "./roadmapData";
@@ -123,29 +125,7 @@ const processData = ({
 
   return paginatedData;
 };
-const fetchData = ({
-  page,
-  resultsPerPage,
-  search,
-  filters,
-  sort,
-}: {
-  page?: number;
-  resultsPerPage?: number;
-  search?: string;
-  filters?: DataFilter[];
-  sort?: DataTableSortingState;
-}) => {
-  console.log("s");
-  return processData({
-    initialData: data,
-    page: page,
-    resultsPerPage: resultsPerPage,
-    search: search,
-    filters: filters,
-    sort: sort,
-  });
-};
+
 export const InnerRoadmapTable = () => {
   // Constants for filter options
 
@@ -173,6 +153,30 @@ export const InnerRoadmapTable = () => {
     { label: "Q3 FY26", value: "Q3 FY26" },
     { label: "Q4 FY26", value: "Q4 FY26" },
   ];
+
+  const fetchData = ({
+    page,
+    resultsPerPage,
+    search,
+    filters,
+    sort,
+  }: {
+    page?: number;
+    resultsPerPage?: number;
+    search?: string;
+    filters?: DataFilter[];
+    sort?: DataTableSortingState;
+  }) => {
+    console.log("s");
+    return processData({
+      initialData: data,
+      page: page,
+      resultsPerPage: resultsPerPage,
+      search: search,
+      filters: filters,
+      sort: sort,
+    });
+  };
 
   return (
     <DataTable
@@ -215,6 +219,7 @@ export const InnerRoadmapTable = () => {
   );
 };
 
+const MemoizedInnerRoadmapTable = memo(InnerRoadmapTable);
 const WrappedRoadmapTable = () => {
   const odysseyTheme = createOdysseyMuiTheme({ odysseyTokens });
 
@@ -232,7 +237,7 @@ const WrappedRoadmapTable = () => {
             functionality, and you should not rely on them to make your purchase
             decisions.
           </Callout>
-          <InnerRoadmapTable />
+          <MemoizedInnerRoadmapTable />
         </ScopedCssBaseline>
       </StorybookThemeProvider>
     </OdysseyThemeProvider>
