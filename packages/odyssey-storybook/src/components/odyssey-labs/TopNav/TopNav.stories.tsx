@@ -55,7 +55,7 @@ const storybookMeta: Meta<TopNavProps> = {
         },
       },
     },
-    settingsLink: {
+    settingsPageHref: {
       description: "Display the settings icon/link",
       table: {
         type: {
@@ -63,7 +63,7 @@ const storybookMeta: Meta<TopNavProps> = {
         },
       },
     },
-    helpLink: {
+    helpPageHref: {
       description: "Display the help icon/link",
       table: {
         type: {
@@ -111,8 +111,8 @@ const storybookMeta: Meta<TopNavProps> = {
     AdditionalNavItemComponent: (
       <Button variant="secondary" label="Connect Builder" />
     ),
-    settingsLink: "/",
-    helpLink: "/",
+    settingsPageHref: "/",
+    helpPageHref: "/",
     userProfile: {
       profileIcon: <UserIcon />,
       userName: "test.user@test.com",

@@ -11,7 +11,14 @@
  */
 
 import styled from "@emotion/styled";
-import { memo, useMemo, ReactElement, useCallback, KeyboardEvent } from "react";
+import {
+  memo,
+  useMemo,
+  ReactElement,
+  useCallback,
+  MouseEventHandler,
+  KeyboardEventHandler,
+} from "react";
 
 import type { HtmlProps } from "../HtmlProps";
 import {
@@ -25,6 +32,7 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../OdysseyDesignTokensContext";
+import { Subordinate } from "../Typography";
 
 export type TopNavLinkItem = {
   id: string;
@@ -41,7 +49,9 @@ export type TopNavLinkItem = {
   /**
    * Event fired when the nav item is clicked
    */
-  onClick?(): void;
+  onClick?: MouseEventHandler<HTMLAnchorElement> &
+    MouseEventHandler<HTMLDivElement> &
+    KeyboardEventHandler<HTMLDivElement>;
   /**
    * The link target prop. e.g., "_blank"
    */
@@ -77,17 +87,17 @@ export type TopNavProps = {
    */
   topNavLinkItems: TopNavLinkItem[];
   /**
-   * Pass in an additional componnet like Button that will displayed after the nav link items
+   * Pass in an additional component like `Button` that will be displayed after the nav link items
    */
   AdditionalNavItemComponent?: ReactElement;
   /**
-   * link to settings page
+   * URL to settings page.
    */
-  settingsLink?: string;
+  settingsPageHref?: string;
   /**
-   * help link
+   * URL to the help page.
    */
-  helpLink?: string;
+  helpPageHref?: string;
   /**
    * Displays user account info
    */
@@ -102,30 +112,16 @@ const UserProfileContainer = styled("div", {
   paddingRight: odysseyDesignTokens.Spacing4,
 }));
 
-const UserProfileIcon = styled("div", {
+const UserProfileIconContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
   display: "flex",
   paddingRight: odysseyDesignTokens.Spacing2,
 }));
 
-const UserProfileInfoContainer = styled.div({
+const UserProfileInfoContainer = styled("div")(() => ({
   display: "flex",
   flexDirection: "column",
-});
-
-const UserProfileEmailInfoContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
-  color: odysseyDesignTokens.TypographyColorHeading,
-  fontSize: odysseyDesignTokens.TypographySizeSubordinate,
-}));
-
-const UserProfileOrgInfoContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
-  color: odysseyDesignTokens.TypographyColorSubordinate,
-  fontSize: odysseyDesignTokens.TypographySizeSubordinate,
 }));
 
 const UserProfile = ({ profileIcon, userName, orgName }: UserProfileProps) => {
@@ -134,31 +130,25 @@ const UserProfile = ({ profileIcon, userName, orgName }: UserProfileProps) => {
   return (
     <UserProfileContainer odysseyDesignTokens={odysseyDesignTokens}>
       {profileIcon && (
-        <UserProfileIcon odysseyDesignTokens={odysseyDesignTokens}>
+        <UserProfileIconContainer odysseyDesignTokens={odysseyDesignTokens}>
           {profileIcon}
-        </UserProfileIcon>
+        </UserProfileIconContainer>
       )}
       <UserProfileInfoContainer>
-        <UserProfileEmailInfoContainer
-          odysseyDesignTokens={odysseyDesignTokens}
-        >
-          {userName}
-        </UserProfileEmailInfoContainer>
-        <UserProfileOrgInfoContainer odysseyDesignTokens={odysseyDesignTokens}>
-          {orgName}
-        </UserProfileOrgInfoContainer>
+        <Subordinate color="textPrimary">{userName}</Subordinate>
+        <Subordinate color="textSecondary">{orgName}</Subordinate>
       </UserProfileInfoContainer>
     </UserProfileContainer>
   );
 };
 
-const TopNavListContainer = styled.ul({
+const TopNavListContainer = styled("ul")(() => ({
   padding: 0,
   listStyle: "none",
   listStyleType: "none",
   display: "flex",
   alignItems: "center",
-});
+}));
 
 const TopNavItemLabelContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
@@ -183,6 +173,7 @@ const TopNavListItemContainer = styled("li", {
   alignItems: "center",
   cursor: isDisabled ? "default" : "pointer",
   pointerEvents: isDisabled ? "none" : "auto",
+  color: `${isDisabled ? odysseyDesignTokens.TypographyColorDisabled : odysseyDesignTokens.TypographyColorHeading} !important`,
   "& a": {
     display: "flex",
     alignItems: "center",
@@ -205,17 +196,14 @@ const TopNavListItemContainer = styled("li", {
 }));
 
 const NavItemContentClickContainer = styled("div", {
-  shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "isDisabled",
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{
   odysseyDesignTokens: DesignTokens;
-  isDisabled?: boolean;
-}>(({ odysseyDesignTokens, isDisabled }) => ({
+}>(({ odysseyDesignTokens }) => ({
   display: "flex",
   alignItems: "center",
   width: "100%",
   padding: `${odysseyDesignTokens.Spacing2} ${odysseyDesignTokens.Spacing4}`,
-  color: `${isDisabled ? odysseyDesignTokens.TypographyColorDisabled : odysseyDesignTokens.TypographyColorHeading} !important`,
   "&:focus-visible": {
     borderRadius: 0,
     outlineColor: odysseyDesignTokens.FocusOutlineColorPrimary,
@@ -236,83 +224,66 @@ const TopNavItemContent = ({
 }: TopNavLinkItem) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
-  const topNavItemContentKeyHandler = useCallback(
-    (event: KeyboardEvent<HTMLDivElement>) => {
+  const topNavItemContentKeyHandler = useCallback<
+    KeyboardEventHandler<HTMLDivElement>
+  >(
+    (event) => {
       if (event?.key === "Enter") {
         event.preventDefault();
         event.stopPropagation();
-        onClick?.();
+        onClick?.(event);
       }
     },
     [onClick],
   );
 
-  const TopNavItemContent = useMemo(() => {
-    return (
-      <TopNavListItemContainer
-        id={id}
-        key={id}
-        aria-disabled={isDisabled}
-        isDisabled={isDisabled}
-        odysseyDesignTokens={odysseyDesignTokens}
-      >
-        {
-          // Use Link for nav items with links and div for disabled or non-link items
-          isDisabled ? (
-            <NavItemContentClickContainer
-              odysseyDesignTokens={odysseyDesignTokens}
-            >
-              <TopNavItemLabelContainer
-                odysseyDesignTokens={odysseyDesignTokens}
-              >
-                {label}
-              </TopNavItemLabelContainer>
-            </NavItemContentClickContainer>
-          ) : !href ? (
-            <NavItemContentClickContainer
-              odysseyDesignTokens={odysseyDesignTokens}
-              role="button"
-              tabIndex={0}
-              onClick={onClick}
-              onKeyDown={topNavItemContentKeyHandler}
-            >
-              <TopNavItemLabelContainer
-                odysseyDesignTokens={odysseyDesignTokens}
-              >
-                {label}
-              </TopNavItemLabelContainer>
-            </NavItemContentClickContainer>
-          ) : (
-            <Link href={href} target={target} onClick={onClick}>
-              <TopNavItemLabelContainer
-                odysseyDesignTokens={odysseyDesignTokens}
-              >
-                {label}
-              </TopNavItemLabelContainer>
-            </Link>
-          )
-        }
-      </TopNavListItemContainer>
-    );
-  }, [
-    id,
-    label,
-    href,
-    target,
-    onClick,
-    isDisabled,
-    topNavItemContentKeyHandler,
-    odysseyDesignTokens,
-  ]);
-
-  return TopNavItemContent;
+  return (
+    <TopNavListItemContainer
+      id={id}
+      key={id}
+      aria-disabled={isDisabled}
+      isDisabled={isDisabled}
+      odysseyDesignTokens={odysseyDesignTokens}
+    >
+      {
+        // Use Link for nav items with links and div for disabled or non-link items
+        isDisabled ? (
+          <NavItemContentClickContainer
+            odysseyDesignTokens={odysseyDesignTokens}
+          >
+            <TopNavItemLabelContainer odysseyDesignTokens={odysseyDesignTokens}>
+              {label}
+            </TopNavItemLabelContainer>
+          </NavItemContentClickContainer>
+        ) : !href ? (
+          <NavItemContentClickContainer
+            odysseyDesignTokens={odysseyDesignTokens}
+            role="button"
+            tabIndex={0}
+            onClick={onClick}
+            onKeyDown={topNavItemContentKeyHandler}
+          >
+            <TopNavItemLabelContainer odysseyDesignTokens={odysseyDesignTokens}>
+              {label}
+            </TopNavItemLabelContainer>
+          </NavItemContentClickContainer>
+        ) : (
+          <Link href={href} target={target} onClick={onClick}>
+            <TopNavItemLabelContainer odysseyDesignTokens={odysseyDesignTokens}>
+              {label}
+            </TopNavItemLabelContainer>
+          </Link>
+        )
+      }
+    </TopNavListItemContainer>
+  );
 };
 
-const LinkAndProfileWrapper = styled.div({
+const LinkAndProfileWrapper = styled("div")(() => ({
   display: "flex",
   alignItems: "center",
   marginLeft: "auto",
-});
+}));
 
 const AdditionalLinkContainerWithBorder = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
@@ -379,11 +350,19 @@ const TopNav = ({
   SearchFieldComponent,
   topNavLinkItems,
   AdditionalNavItemComponent,
-  settingsLink,
-  helpLink,
+  settingsPageHref,
+  helpPageHref,
   userProfile,
 }: TopNavProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+
+  const processedNavItems = useMemo(
+    () =>
+      topNavLinkItems.map((item) => (
+        <TopNavItemContent {...item} key={item.id} />
+      )),
+    [topNavLinkItems],
+  );
 
   const LogoStyles = useMemo(
     () => ({
@@ -415,12 +394,10 @@ const TopNav = ({
         </SearchFieldContainer>
       )}
       <TopNavListContainer>
-        {topNavLinkItems?.map((item) => {
-          return <TopNavItemContent key={item.id} {...item} />;
-        })}
+        {processedNavItems?.map((item) => item)}
       </TopNavListContainer>
       <LinkAndProfileWrapper>
-        {(AdditionalNavItemComponent || settingsLink || helpLink) && (
+        {(AdditionalNavItemComponent || settingsPageHref || helpPageHref) && (
           <AdditionalLinkContainerWithBorder
             odysseyDesignTokens={odysseyDesignTokens}
           >
@@ -431,23 +408,23 @@ const TopNav = ({
                 {AdditionalNavItemComponent}
               </AdditionalNavItemContainer>
             )}
-            {settingsLink && (
+            {settingsPageHref && (
               <LinkContainer odysseyDesignTokens={odysseyDesignTokens}>
-                <Link href={settingsLink}>
+                <Link href={settingsPageHref}>
                   <SettingsIcon />
                 </Link>
               </LinkContainer>
             )}
-            {helpLink && (
+            {helpPageHref && (
               <LinkContainer odysseyDesignTokens={odysseyDesignTokens}>
-                <Link href={helpLink}>
+                <Link href={helpPageHref}>
                   <QuestionCircleIcon />
                 </Link>
               </LinkContainer>
             )}
           </AdditionalLinkContainerWithBorder>
         )}
-        {userProfile && UserProfile(userProfile)}
+        {userProfile && <UserProfile {...userProfile} />}
       </LinkAndProfileWrapper>
     </TopNavContainer>
   );
