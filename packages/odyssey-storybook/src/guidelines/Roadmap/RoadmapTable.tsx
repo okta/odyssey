@@ -126,6 +126,30 @@ const processData = ({
   return paginatedData;
 };
 
+const fetchData = ({
+  page,
+  resultsPerPage,
+  search,
+  filters,
+  sort,
+}: {
+  page?: number;
+  resultsPerPage?: number;
+  search?: string;
+  filters?: DataFilter[];
+  sort?: DataTableSortingState;
+}) => {
+  console.log("s");
+  return processData({
+    initialData: data,
+    page: page,
+    resultsPerPage: resultsPerPage,
+    search: search,
+    filters: filters,
+    sort: sort,
+  });
+};
+
 export const InnerRoadmapTable = () => {
   // Constants for filter options
 
@@ -153,30 +177,6 @@ export const InnerRoadmapTable = () => {
     { label: "Q3 FY26", value: "Q3 FY26" },
     { label: "Q4 FY26", value: "Q4 FY26" },
   ];
-
-  const fetchData = ({
-    page,
-    resultsPerPage,
-    search,
-    filters,
-    sort,
-  }: {
-    page?: number;
-    resultsPerPage?: number;
-    search?: string;
-    filters?: DataFilter[];
-    sort?: DataTableSortingState;
-  }) => {
-    console.log("s");
-    return processData({
-      initialData: data,
-      page: page,
-      resultsPerPage: resultsPerPage,
-      search: search,
-      filters: filters,
-      sort: sort,
-    });
-  };
 
   return (
     <DataTable
