@@ -204,6 +204,28 @@ const TopNavListItemContainer = styled("li", {
   },
 }));
 
+const NavItemContentClickContainer = styled("div", {
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "isDisabled",
+})<{
+  odysseyDesignTokens: DesignTokens;
+  isDisabled?: boolean;
+}>(({ odysseyDesignTokens, isDisabled }) => ({
+  display: "flex",
+  alignItems: "center",
+  width: "100%",
+  padding: `${odysseyDesignTokens.Spacing2} ${odysseyDesignTokens.Spacing4}`,
+  color: `${isDisabled ? odysseyDesignTokens.TypographyColorDisabled : odysseyDesignTokens.TypographyColorHeading} !important`,
+  "&:focus-visible": {
+    borderRadius: 0,
+    outlineColor: odysseyDesignTokens.FocusOutlineColorPrimary,
+    outlineStyle: odysseyDesignTokens.FocusOutlineStyle,
+    outlineWidth: odysseyDesignTokens.FocusOutlineWidthMain,
+    backgroundColor: odysseyDesignTokens.HueNeutral50,
+    textDecoration: "none",
+  },
+}));
+
 const TopNavItemContent = ({
   id,
   label,
@@ -214,25 +236,7 @@ const TopNavItemContent = ({
 }: TopNavLinkItem) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
-  const NavItemContentClickContainer = styled("div", {
-    shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-  })(() => ({
-    display: "flex",
-    alignItems: "center",
-    width: "100%",
-    padding: `${odysseyDesignTokens.Spacing2} ${odysseyDesignTokens.Spacing4}`,
-    color: `${isDisabled ? odysseyDesignTokens.TypographyColorDisabled : odysseyDesignTokens.TypographyColorHeading} !important`,
-    "&:focus-visible": {
-      borderRadius: 0,
-      outlineColor: odysseyDesignTokens.FocusOutlineColorPrimary,
-      outlineStyle: odysseyDesignTokens.FocusOutlineStyle,
-      outlineWidth: odysseyDesignTokens.FocusOutlineWidthMain,
-      backgroundColor: odysseyDesignTokens.HueNeutral50,
-      textDecoration: "none",
-    },
-  }));
-
-  const TopNavItemContentKeyHandler = useCallback(
+  const topNavItemContentKeyHandler = useCallback(
     (event: KeyboardEvent<HTMLDivElement>) => {
       if (event?.key === "Enter") {
         event.preventDefault();
@@ -255,7 +259,9 @@ const TopNavItemContent = ({
         {
           // Use Link for nav items with links and div for disabled or non-link items
           isDisabled ? (
-            <NavItemContentClickContainer>
+            <NavItemContentClickContainer
+              odysseyDesignTokens={odysseyDesignTokens}
+            >
               <TopNavItemLabelContainer
                 odysseyDesignTokens={odysseyDesignTokens}
               >
@@ -264,10 +270,11 @@ const TopNavItemContent = ({
             </NavItemContentClickContainer>
           ) : !href ? (
             <NavItemContentClickContainer
+              odysseyDesignTokens={odysseyDesignTokens}
               role="button"
               tabIndex={0}
               onClick={onClick}
-              onKeyDown={TopNavItemContentKeyHandler}
+              onKeyDown={topNavItemContentKeyHandler}
             >
               <TopNavItemLabelContainer
                 odysseyDesignTokens={odysseyDesignTokens}
@@ -294,8 +301,7 @@ const TopNavItemContent = ({
     target,
     onClick,
     isDisabled,
-    NavItemContentClickContainer,
-    TopNavItemContentKeyHandler,
+    topNavItemContentKeyHandler,
     odysseyDesignTokens,
   ]);
 
