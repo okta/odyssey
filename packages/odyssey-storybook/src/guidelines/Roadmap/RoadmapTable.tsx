@@ -129,61 +129,54 @@ const processData = ({
 const InnerRoadmapTable: React.FC = React.memo(() => {
   const columns = useColumns();
   const data = useData();
+  const typeOptions = useMemo(
+    () => [
+      { label: "Component", value: "Component" },
+      { label: "Pattern", value: "Pattern" },
+    ],
+    [],
+  );
 
-  // const typeOptions = useMemo(
-  //   () => [
-  //     { label: "Component", value: "Component" },
-  //     { label: "Pattern", value: "Pattern" },
-  //   ],
-  //   [],
-  // );
+  const statusOptions = useMemo(
+    () => [
+      { label: "In Progress", value: "In progress" },
+      { label: "In Labs", value: "In labs" },
+      { label: "Released", value: "Released" },
+      { label: "Not Started", value: "Not started" },
+    ],
+    [],
+  );
 
-  // const statusOptions = useMemo(
-  //   () => [
-  //     { label: "In Progress", value: "In progress" },
-  //     { label: "In Labs", value: "In labs" },
-  //     { label: "Released", value: "Released" },
-  //     { label: "Not Started", value: "Not started" },
-  //   ],
-  //   [],
-  // );
-
-  // const expectedOptions = useMemo(
-  //   () => [
-  //     { label: "FY24", value: "FY24" },
-  //     { label: "TBD", value: "TBD" },
-  //     { label: "Q1 FY25", value: "Q1 FY25" },
-  //     { label: "Q2 FY25", value: "Q2 FY25" },
-  //     { label: "Q3 FY25", value: "Q3 FY25" },
-  //     { label: "Q4 FY25", value: "Q4 FY25" },
-  //     { label: "Q1 FY26", value: "Q1 FY26" },
-  //     { label: "Q2 FY26", value: "Q2 FY26" },
-  //     { label: "Q3 FY26", value: "Q3 FY26" },
-  //     { label: "Q4 FY26", value: "Q4 FY26" },
-  //   ],
-  //   [],
-  // );
+  const expectedOptions = useMemo(
+    () => [
+      { label: "FY24", value: "FY24" },
+      { label: "TBD", value: "TBD" },
+      { label: "Q1 FY25", value: "Q1 FY25" },
+      { label: "Q2 FY25", value: "Q2 FY25" },
+      { label: "Q3 FY25", value: "Q3 FY25" },
+      { label: "Q4 FY25", value: "Q4 FY25" },
+      { label: "Q1 FY26", value: "Q1 FY26" },
+      { label: "Q2 FY26", value: "Q2 FY26" },
+      { label: "Q3 FY26", value: "Q3 FY26" },
+      { label: "Q4 FY26", value: "Q4 FY26" },
+    ],
+    [],
+  );
 
   const memoizedProcessData = useCallback(processData, []);
 
   const fetchData = useCallback(
     ({
-      page,
-      resultsPerPage,
       search,
       filters,
       sort,
     }: {
-      page?: number;
-      resultsPerPage?: number;
       search?: string;
       filters?: DataFilter[];
       sort?: DataTableSortingState;
     }) => {
       return memoizedProcessData({
         initialData: data,
-        page,
-        resultsPerPage,
         search,
         filters,
         sort,
@@ -192,31 +185,40 @@ const InnerRoadmapTable: React.FC = React.memo(() => {
     [data, memoizedProcessData],
   );
 
-  // const tableFilters = useMemo<DataFilter[]>(
-  //   () => [
-  //     {
-  //       id: "type",
-  //       label: "Type",
-  //       variant: "select",
-  //       options: typeOptions,
-  //     },
-  //     {
-  //       id: "status",
-  //       label: "Status",
-  //       variant: "select",
-  //       options: statusOptions,
-  //     },
-  //     {
-  //       id: "deliverableTiming",
-  //       label: "Deliverable timing",
-  //       variant: "autocomplete",
-  //       options: expectedOptions,
-  //     },
-  //   ],
-  //   [typeOptions, statusOptions, expectedOptions],
-  // );
+  const tableFilters = useMemo<DataFilter[]>(
+    () => [
+      {
+        id: "type",
+        label: "Type",
+        variant: "select",
+        options: typeOptions,
+      },
+      {
+        id: "status",
+        label: "Status",
+        variant: "select",
+        options: statusOptions,
+      },
+      {
+        id: "deliverableTiming",
+        label: "Deliverable timing",
+        variant: "autocomplete",
+        options: expectedOptions,
+      },
+    ],
+    [typeOptions, statusOptions, expectedOptions],
+  );
 
-  return <DataTable columns={columns} getData={fetchData} />;
+  return (
+    <DataTable
+      columns={columns}
+      getData={fetchData}
+      filters={tableFilters}
+      hasFilters
+      hasSearch
+      hasSorting
+    />
+  );
 });
 
 const WrappedRoadmapTable: React.FC = () => {
