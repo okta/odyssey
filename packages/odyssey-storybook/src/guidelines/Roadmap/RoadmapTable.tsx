@@ -104,54 +104,52 @@ export const InnerRoadmapTable = () => {
 
   const filterData = ({
     data,
-    search,
+    // search,
     sort,
-    filters,
+    // filters,
   }: {
     data: OdysseyComponent[];
-    search?: string;
+    // search?: string;
     sort?: DataTableSortingState;
-    filters?: DataFilter[];
+    //filters?: DataFilter[];
   }) => {
-    let filteredData = [...data];
+    const filteredData = [...data];
 
     // Implement text-based query filtering
-    if (search) {
-      filteredData = filteredData.filter((row) =>
-        Object.values(row).some((value) =>
-          value.toString().toLowerCase().includes(search.toLowerCase()),
-        ),
-      );
-    }
+    // if (search) {
+    //   filteredData = filteredData.filter((row) =>
+    //     Object.values(row).some((value) =>
+    //       value.toString().toLowerCase().includes(search.toLowerCase()),
+    //     ),
+    //   );
+    // }
 
     // Implement column-specific filtering
-    if (filters) {
-      filteredData = filteredData.filter((row) => {
-        return filters.every(({ id, value }) => {
-          if (value === null || value === undefined) {
-            return true;
-          }
-          return row[id as keyof OdysseyComponent]
-            ?.toString()
-            .includes(value.toString());
-        });
-      });
-    }
+    // if (filters) {
+    //   filteredData = filteredData.filter((row) => {
+    //     return filters.every(({ id, value }) => {
+    //       if (value === null || value === undefined) {
+    //         return true;
+    //       }
+    //       return row[id as keyof OdysseyComponent]
+    //         ?.toString()
+    //         .includes(value.toString());
+    //     });
+    //   });
+    // }
 
     // Implement sorting
     if (sort && sort.length > 0) {
       filteredData.sort((a, b) => {
         for (const { id, desc } of sort) {
-          let aValue: string | Date = a[id as keyof OdysseyComponent];
-          let bValue: string | Date = b[id as keyof OdysseyComponent];
+          const aValue: string | Date = a[id as keyof OdysseyComponent];
+          const bValue: string | Date = b[id as keyof OdysseyComponent];
 
           if (
             id === "startDate" ||
             id === "labsRelease" ||
             id === "fullRelease"
           ) {
-            aValue = parseCustomDate(aValue as string);
-            bValue = parseCustomDate(bValue as string);
           }
 
           if (aValue < bValue) return desc ? 1 : -1;
@@ -165,33 +163,6 @@ export const InnerRoadmapTable = () => {
     return filteredData;
   };
 
-  // Helper function for parsing custom date formats
-  function parseCustomDate(dateStr: string): Date {
-    if (dateStr.length <= 0) {
-      return new Date(2999, 0);
-    }
-
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    const [monthStr, yearStr] = dateStr.split(" ");
-
-    const month = months.indexOf(monthStr);
-    const year = parseInt(yearStr.replace("'", ""), 10) + 2000; // Adjust for century
-
-    return new Date(year, month);
-  }
   const fetchData = useCallback(
     ({ ...props }: DataTableGetDataType) => {
       return filterData({ data, ...props });
@@ -227,9 +198,9 @@ export const InnerRoadmapTable = () => {
     <DataTable
       columns={columns} // Use the columns from the hook
       getData={fetchData}
-      hasFilters
+      //hasFilters
       filters={tableFilters}
-      hasSearch
+      // hasSearch
       hasSorting
     />
   );
