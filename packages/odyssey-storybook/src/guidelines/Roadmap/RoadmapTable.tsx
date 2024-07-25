@@ -11,138 +11,50 @@
  */
 
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { useMemo, useCallback } from "react";
-import { DataFilter } from "@okta/odyssey-react-mui/labs";
-import { DataTable, DataTableSortingState } from "@okta/odyssey-react-mui";
+import { memo, useCallback } from "react";
+import { Box, DataTable, DataTableGetDataType } from "@okta/odyssey-react-mui";
+import { useColumns, data, OdysseyComponent } from "./roadmapData";
 import {
+  Callout,
   CssBaseline,
   OdysseyThemeProvider,
   ScopedCssBaseline,
   createOdysseyMuiTheme,
-  Callout,
 } from "@okta/odyssey-react-mui";
 import { ThemeProvider as StorybookThemeProvider } from "@storybook/theming";
 import * as odysseyTokens from "@okta/odyssey-design-tokens";
 
-// Assuming this is how your data and columns are imported
-import { useColumns, data as initialData } from "./roadmapData";
+export const InnerRoadmapTable = () => {
+  const columns = useColumns(); // Use the hook to get columns
+  const filterData = ({
+    data,
+  }: {
+    data: OdysseyComponent[];
+  } & DataTableGetDataType) => {
+    const filteredData = data;
 
-// Memoize the initial data
-const useData = () => useMemo(() => initialData, []);
+    return filteredData;
+  };
 
-// const processData = ({
-//   initialData,
-//   page = 1,
-//   resultsPerPage = 100,
-//   search,
-//   filters,
-//   sort,
-// }: {
-//   initialData: OdysseyComponent[];
-//   page?: number;
-//   resultsPerPage?: number;
-//   search?: string;
-//   filters?: DataFilter[];
-//   sort?: DataTableSortingState;
-// }) => {
-//   let filteredData = [...initialData];
-
-//   if (search) {
-//     filteredData = filteredData.filter((row) =>
-//       Object.values(row).some((value) =>
-//         value.toString().toLowerCase().includes(search.toLowerCase()),
-//       ),
-//     );
-//   }
-
-//   if (filters) {
-//     filteredData = filteredData.filter((row) =>
-//       filters.every(({ id, value }) => {
-//         if (value === null || value === undefined) {
-//           return true;
-//         }
-//         return row[id as keyof OdysseyComponent]
-//           ?.toString()
-//           .includes(value.toString());
-//       }),
-//     );
-//   }
-
-//   if (sort && sort.length > 0) {
-//     filteredData.sort((a, b) => {
-//       for (const { id, desc } of sort) {
-//         let aValue: string | Date = a[id as keyof OdysseyComponent];
-//         let bValue: string | Date = b[id as keyof OdysseyComponent];
-
-//         if (
-//           id === "startDate" ||
-//           id === "labsRelease" ||
-//           id === "fullRelease"
-//         ) {
-//           aValue = parseCustomDate(aValue as string);
-//           bValue = parseCustomDate(bValue as string);
-//         }
-
-//         if (aValue < bValue) return desc ? 1 : -1;
-//         if (aValue > bValue) return desc ? -1 : 1;
-//       }
-//       return 0;
-//     });
-//   }
-
-//   const startIdx = (page - 1) * resultsPerPage;
-//   const endIdx = startIdx + resultsPerPage;
-//   return filteredData.slice(startIdx, endIdx);
-// };
-
-interface FetchDataParams {
-  search?: string;
-  filters?: DataFilter[];
-  sort?: DataTableSortingState;
-}
-
-const InnerRoadmapTable: React.FC = React.memo(() => {
-  const columns = useColumns();
-  const data = useData(); // Ensure this is memoized correctly
-
-  const fetchData = useCallback(
-    ({ search, filters, sort }: FetchDataParams) => {
-      console.log("fetchData called", { search, filters, sort });
-      return data; // Simplified for testing
-    },
-    [data],
-  );
-
-  const tableFilters = useMemo<DataFilter[]>(
-    () => [
-      {
-        id: "type",
-        label: "Type",
-        variant: "select",
-        options: [{ label: "Component", value: "Component" }],
-      },
-    ],
-    [],
-  );
+  const fetchData = useCallback(({ ...props }: DataTableGetDataType) => {
+    return filterData({ data, ...props });
+  }, []);
 
   return (
     <DataTable
       columns={columns}
       getData={fetchData}
-      filters={tableFilters}
-      hasFilters
-      hasSearch
-      hasSorting
+      hasSorting={false}
+      muiTableContainerProps={{
+        sx: { maxWidth: "100%" },
+      }}
     />
   );
-});
+};
 
-const WrappedRoadmapTable: React.FC = () => {
-  const odysseyTheme = useMemo(
-    () => createOdysseyMuiTheme({ odysseyTokens }),
-    [],
-  );
-
+const WrappedRoadmapTable = () => {
+  const odysseyTheme = createOdysseyMuiTheme({ odysseyTokens });
+  const MemoizedInnerRoadmapTable = memo(InnerRoadmapTable);
   return (
     <OdysseyThemeProvider>
       {/* @ts-expect-error type mismatch on "typography" */}
@@ -157,7 +69,15 @@ const WrappedRoadmapTable: React.FC = () => {
             functionality, and you should not rely on them to make your purchase
             decisions.
           </Callout>
-          <InnerRoadmapTable />
+          <Box
+            sx={{
+              width: "700px",
+              maxWidth: "100%",
+              margin: "0 auto",
+            }}
+          >
+            <MemoizedInnerRoadmapTable />
+          </Box>
         </ScopedCssBaseline>
       </StorybookThemeProvider>
     </OdysseyThemeProvider>
