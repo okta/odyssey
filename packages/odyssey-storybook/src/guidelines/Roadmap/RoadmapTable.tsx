@@ -40,16 +40,7 @@ export const InnerRoadmapTable = () => {
     return filterData({ data, ...props });
   }, []);
 
-  return (
-    <DataTable
-      columns={columns}
-      getData={fetchData}
-      hasSorting={false}
-      muiTableContainerProps={{
-        sx: { maxWidth: "100%" },
-      }}
-    />
-  );
+  return <DataTable columns={columns} getData={fetchData} hasSorting={false} />;
 };
 
 const WrappedRoadmapTable = () => {
