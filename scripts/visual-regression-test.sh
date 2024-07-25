@@ -23,18 +23,19 @@ export GITHUB_RESPONSE=$(curl -s -L \
   -H "Accept: application/vnd.github+json" \
   -H "Authorization: Bearer $GITHUB_TOKEN" \
   -H "X-GitHub-Api-Version: 2022-11-28" \
-  "https://api.github.com/repos/$GITHUB_ORG/$REPO/pulls?state=open&head=$BRANCH" | jq ".[] | select(.head.ref == $BRANCH)")
+  "https://api.github.com/repos/$GITHUB_ORG/$REPO/commits/$SHA/pulls")
 
-export BASE_BRANCH_NAME=$(echo $response | jq -r '.base.ref')
-export COMMIT_MESSAGE=$(echo $response | jq -r '.body')
-export PR_NUMBER=$(echo $response | jq -r '.number')
-export PR_TITLE=$(echo $response | jq -r '.title')
-export PR_URL=$(echo $response | jq -r '.html_url')
+export BASE_BRANCH_NAME=$(echo $GITHUB_RESPONSE | jq -r '.[0].base.ref')
+export COMMIT_MESSAGE=$(echo $GITHUB_RESPONSE | jq -r '.[0].body')
+export PR_NUMBER=$(echo $GITHUB_RESPONSE | jq -r '.[0].number')
+export PR_TITLE=$(echo $GITHUB_RESPONSE | jq -r '.[0].title')
+export PR_URL=$(echo $GITHUB_RESPONSE | jq -r '.[0].html_url')
 
 echo "LOOK FOR THIS!"
 echo "BRANCH $BRANCH"
 # echo "https://api.github.com/repos/okta/odyssey/pulls?state=open&head=okta:kg_vrt_the_second"
-echo "https://api.github.com/repos/$GITHUB_ORG/$REPO/pulls?state=open&head=$GITHUB_ORG:$BRANCH"
+echo "https://api.github.com/repos/$GITHUB_ORG/$REPO/commits/$SHA/pulls"
+repos/okta/odyssey/commits
 echo $GITHUB_RESPONSE
 echo $BASE_BRANCH_NAME
 echo $COMMIT_MESSAGE
