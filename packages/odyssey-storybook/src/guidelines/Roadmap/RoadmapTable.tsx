@@ -11,13 +11,8 @@
  */
 
 /* eslint-disable import/no-extraneous-dependencies */
-import { useMemo, useCallback } from "react";
-import { DataFilter } from "@okta/odyssey-react-mui/labs";
-import {
-  DataTable,
-  DataTableGetDataType,
-  DataTableSortingState,
-} from "@okta/odyssey-react-mui";
+import { memo, useCallback } from "react";
+import { DataTable, DataTableGetDataType } from "@okta/odyssey-react-mui";
 import { useColumns, data, OdysseyComponent } from "./roadmapData";
 import {
   Callout,
@@ -31,133 +26,22 @@ import * as odysseyTokens from "@okta/odyssey-design-tokens";
 
 export const InnerRoadmapTable = () => {
   const columns = useColumns(); // Use the hook to get columns
-
-  // Memoize filter options
-  const typeOptions = useMemo(
-    () => [
-      { label: "Component", value: "Component" },
-      { label: "Pattern", value: "Pattern" },
-    ],
-    [],
-  );
-
-  const statusOptions = useMemo(
-    () => [
-      { label: "In Progress", value: "In progress" },
-      { label: "In Labs", value: "In labs" },
-      { label: "Released", value: "Released" },
-      { label: "Not Started", value: "Not started" },
-    ],
-    [],
-  );
-
-  const expectedOptions = useMemo(
-    () => [
-      { label: "FY24", value: "FY24" },
-      { label: "TBD", value: "TBD" },
-      { label: "Q1 FY25", value: "Q1 FY25" },
-      { label: "Q2 FY25", value: "Q2 FY25" },
-      { label: "Q3 FY25", value: "Q3 FY25" },
-      { label: "Q4 FY25", value: "Q4 FY25" },
-      { label: "Q1 FY26", value: "Q1 FY26" },
-      { label: "Q2 FY26", value: "Q2 FY26" },
-      { label: "Q3 FY26", value: "Q3 FY26" },
-      { label: "Q4 FY26", value: "Q4 FY26" },
-    ],
-    [],
-  );
-  // const filterData = ({
-  //   data,
-  //   ...args
-  // }: {
-  //   data: OdysseyComponent[];
-  // } & DataTableGetDataType) => {
-  //   let filteredData = data;
-  //   const { search, sort } = args;
-
-  //   // Implement text-based query filtering
-  //   if (search) {
-  //     filteredData = filteredData.filter((row) =>
-  //       Object.values(row).some((value) =>
-  //         value.toString().toLowerCase().includes(search.toLowerCase()),
-  //       ),
-  //     );
-  //   }
-
-  //   // Implement sorting
-  //   if (sort && sort.length > 0) {
-  //     filteredData.sort((a, b) => {
-  //       for (const { id, desc } of sort) {
-  //         const aValue: string | Date = a[id as keyof OdysseyComponent];
-  //         const bValue: string | Date = b[id as keyof OdysseyComponent];
-
-  //         if (aValue < bValue) return desc ? 1 : -1;
-  //         if (aValue > bValue) return desc ? -1 : 1;
-  //       }
-
-  //       return 0;
-  //     });
-  //   }
-
-  //   return filteredData;
-  // };
-
   const filterData = ({
     data,
-    // search,
-    sort,
-    // filters,
+    ...args
   }: {
     data: OdysseyComponent[];
-    // search?: string;
-    sort?: DataTableSortingState;
-    //filters?: DataFilter[];
-  }) => {
-    const filteredData = [...data];
+  } & DataTableGetDataType) => {
+    let filteredData = data;
+    const { search } = args;
 
     // Implement text-based query filtering
-    // if (search) {
-    //   filteredData = filteredData.filter((row) =>
-    //     Object.values(row).some((value) =>
-    //       value.toString().toLowerCase().includes(search.toLowerCase()),
-    //     ),
-    //   );
-    // }
-
-    // Implement column-specific filtering
-    // if (filters) {
-    //   filteredData = filteredData.filter((row) => {
-    //     return filters.every(({ id, value }) => {
-    //       if (value === null || value === undefined) {
-    //         return true;
-    //       }
-    //       return row[id as keyof OdysseyComponent]
-    //         ?.toString()
-    //         .includes(value.toString());
-    //     });
-    //   });
-    // }
-
-    // Implement sorting
-    if (sort && sort.length > 0) {
-      filteredData.sort((a, b) => {
-        for (const { id, desc } of sort) {
-          const aValue: string | Date = a[id as keyof OdysseyComponent];
-          const bValue: string | Date = b[id as keyof OdysseyComponent];
-
-          if (
-            id === "startDate" ||
-            id === "labsRelease" ||
-            id === "fullRelease"
-          ) {
-          }
-
-          if (aValue < bValue) return desc ? 1 : -1;
-          if (aValue > bValue) return desc ? -1 : 1;
-        }
-
-        return 0;
-      });
+    if (search) {
+      filteredData = filteredData.filter((row) =>
+        Object.values(row).some((value) =>
+          value.toString().toLowerCase().includes(search.toLowerCase()),
+        ),
+      );
     }
 
     return filteredData;
@@ -170,45 +54,18 @@ export const InnerRoadmapTable = () => {
     [data],
   );
 
-  const tableFilters = useMemo<DataFilter[]>(
-    () => [
-      {
-        id: "type",
-        label: "Type",
-        variant: "select",
-        options: typeOptions,
-      },
-      {
-        id: "status",
-        label: "Status",
-        variant: "select",
-        options: statusOptions,
-      },
-      {
-        id: "deliverableTiming",
-        label: "Deliverable timing",
-        variant: "autocomplete",
-        options: expectedOptions,
-      },
-    ],
-    [typeOptions, statusOptions, expectedOptions],
-  );
-
   return (
     <DataTable
       columns={columns} // Use the columns from the hook
       getData={fetchData}
-      //hasFilters
-      filters={tableFilters}
-      // hasSearch
-      hasSorting
+      hasSorting={false}
     />
   );
 };
 
 const WrappedRoadmapTable = () => {
   const odysseyTheme = createOdysseyMuiTheme({ odysseyTokens });
-
+  const MemoizedInnerRoadmapTable = memo(InnerRoadmapTable);
   return (
     <OdysseyThemeProvider>
       {/* @ts-expect-error type mismatch on "typography" */}
@@ -223,7 +80,7 @@ const WrappedRoadmapTable = () => {
             functionality, and you should not rely on them to make your purchase
             decisions.
           </Callout>
-          <InnerRoadmapTable />
+          <MemoizedInnerRoadmapTable />
         </ScopedCssBaseline>
       </StorybookThemeProvider>
     </OdysseyThemeProvider>
