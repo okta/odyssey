@@ -112,18 +112,18 @@ export const useColumns = (): DataTableColumn<DataTableRowData>[] => {
           accessorKey: "name",
           header: "Name",
           enableHiding: false,
-          size: 325,
+          size: 290,
         },
         {
           accessorKey: "type",
           header: "Type",
           enableHiding: true,
-          size: 200,
+          size: 110,
         },
         {
           accessorKey: "status",
           header: "Status",
-          size: 200,
+          size: 115,
           Cell: ({ cell, row }: CellProps) => (
             <StatusCell cell={cell} row={row} />
           ),
@@ -132,7 +132,7 @@ export const useColumns = (): DataTableColumn<DataTableRowData>[] => {
           accessorKey: "deliverableTiming",
           header: "Deliverable timing",
           enableHiding: false,
-          size: 200,
+          size: 155,
         },
       ] as DataTableColumn<DataTableRowData>[],
     [],

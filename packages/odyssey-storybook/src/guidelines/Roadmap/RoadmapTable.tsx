@@ -12,7 +12,7 @@
 
 /* eslint-disable import/no-extraneous-dependencies */
 import { memo, useCallback } from "react";
-import { DataTable, DataTableGetDataType } from "@okta/odyssey-react-mui";
+import { Box, DataTable, DataTableGetDataType } from "@okta/odyssey-react-mui";
 import { useColumns, data, OdysseyComponent } from "./roadmapData";
 import {
   Callout,
@@ -28,37 +28,26 @@ export const InnerRoadmapTable = () => {
   const columns = useColumns(); // Use the hook to get columns
   const filterData = ({
     data,
-    ...args
   }: {
     data: OdysseyComponent[];
   } & DataTableGetDataType) => {
-    let filteredData = data;
-    const { search } = args;
-
-    // Implement text-based query filtering
-    if (search) {
-      filteredData = filteredData.filter((row) =>
-        Object.values(row).some((value) =>
-          value.toString().toLowerCase().includes(search.toLowerCase()),
-        ),
-      );
-    }
+    const filteredData = data;
 
     return filteredData;
   };
 
-  const fetchData = useCallback(
-    ({ ...props }: DataTableGetDataType) => {
-      return filterData({ data, ...props });
-    },
-    [data],
-  );
+  const fetchData = useCallback(({ ...props }: DataTableGetDataType) => {
+    return filterData({ data, ...props });
+  }, []);
 
   return (
     <DataTable
-      columns={columns} // Use the columns from the hook
+      columns={columns}
       getData={fetchData}
       hasSorting={false}
+      muiTableContainerProps={{
+        sx: { maxWidth: "100%" },
+      }}
     />
   );
 };
@@ -80,7 +69,15 @@ const WrappedRoadmapTable = () => {
             functionality, and you should not rely on them to make your purchase
             decisions.
           </Callout>
-          <MemoizedInnerRoadmapTable />
+          <Box
+            sx={{
+              width: "700px",
+              maxWidth: "100%",
+              margin: "0 auto",
+            }}
+          >
+            <MemoizedInnerRoadmapTable />
+          </Box>
         </ScopedCssBaseline>
       </StorybookThemeProvider>
     </OdysseyThemeProvider>
