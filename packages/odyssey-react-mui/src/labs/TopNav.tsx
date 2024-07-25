@@ -23,9 +23,9 @@ import {
 import type { HtmlProps } from "../HtmlProps";
 import {
   AuraIcon,
-  AuraWordmarkIcon,
   QuestionCircleIcon,
   SettingsIcon,
+  WordmarkIcon,
 } from "../icons.generated";
 import { Link } from "../Link";
 import {
@@ -385,7 +385,7 @@ const TopNav = ({
       {hasLogo && (
         <LogoContainer odysseyDesignTokens={odysseyDesignTokens}>
           <AuraIcon sx={LogoStyles} />
-          <AuraWordmarkIcon sx={LogoWordmarkStyles} />
+          <WordmarkIcon sx={LogoWordmarkStyles} />
         </LogoContainer>
       )}
       {SearchFieldComponent && (
@@ -410,14 +410,14 @@ const TopNav = ({
             )}
             {settingsPageHref && (
               <LinkContainer odysseyDesignTokens={odysseyDesignTokens}>
-                <Link href={settingsPageHref}>
+                <Link href={settingsPageHref} ariaLabel="settings page">
                   <SettingsIcon />
                 </Link>
               </LinkContainer>
             )}
             {helpPageHref && (
               <LinkContainer odysseyDesignTokens={odysseyDesignTokens}>
-                <Link href={helpPageHref}>
+                <Link href={helpPageHref} ariaLabel="help page">
                   <QuestionCircleIcon />
                 </Link>
               </LinkContainer>
