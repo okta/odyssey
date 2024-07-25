@@ -18,6 +18,7 @@ import {
 import { Meta, StoryObj } from "@storybook/react";
 import { userEvent, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
+// import { queryOdysseySelector } from "@okta/odyssey-react-mui/test-selectors";
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -261,6 +262,17 @@ export const Hint: StoryObj<typeof Checkbox> = {
   },
   play: async ({ canvasElement, step }) => {
     await checkTheBox({ canvasElement, step })("Checkbox Hint");
+    // await step("has visible hint", async () => {
+    //   const element = queryOdysseySelector({
+    //     canvas: within(canvasElement),
+    //     componentName: "Checkbox",
+    //     templateArgs: {
+    //       label:"I agree to the terms and conditions",
+    //     }
+    //   }).element;
+
+    //   expect(element).toHaveAccessibleDescription(/Really helpful hint/);
+    // });
   },
 };
 
