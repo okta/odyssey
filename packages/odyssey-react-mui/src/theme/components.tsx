@@ -2621,6 +2621,23 @@ export const components = ({
               width: odysseyTokens.Spacing2,
             },
 
+          // TEST OF RESIZING
+          [`.remove-last-row .${tableHeadClasses.root} &:last-of-type, .remove-last-row .${tableBodyClasses.root} &:last-of-type`]:
+            {
+              display: "none",
+            },
+
+          [`.remove-last-row .${tableHeadClasses.root} &:nth-last-of-type(2), .remove-last-row .${tableBodyClasses.root} &:nth-last-of-type(2)`]:
+            {
+              borderTopRightRadius: odysseyTokens.Spacing2,
+              borderBottomRightRadius: odysseyTokens.Spacing2,
+              flexGrow: 1,
+
+              [`& .Mui-TableHeadCell-ResizeHandle-Wrapper`]: {
+                display: "none",
+              },
+            },
+
           [`&::after`]: {
             display: "none",
           },
