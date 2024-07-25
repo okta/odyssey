@@ -44,27 +44,14 @@ export const TextFieldTestSelectors = {
     errorMessage: {
       selector: {
         method: "ByText",
-        templateVariableNames: ["errorMessage"],
-        text: "${errorMessage}",
-      },
-    },
-    input: {
-      selector: {
-        method: "ByRole",
-        options: {
-          name: "${label}",
-        },
-        role: "textbox",
-        templateVariableNames: ["label"],
+        templateVariableNames: ["text"],
+        text: "${text}",
       },
     },
     label: {
       selector: {
-        method: "ByRole",
-        options: {
-          name: "${label}",
-        },
-        role: "LabelText",
+        method: "ByLabelText",
+        text: "${label}",
         templateVariableNames: ["label"],
       },
     },
@@ -78,6 +65,14 @@ export const TextFieldTestSelectors = {
         role: "link",
       },
     },
+  },
+  selector: {
+    method: "ByRole",
+    options: {
+      name: "${label}",
+    },
+    role: "textbox",
+    templateVariableNames: ["label"],
   },
 } as const satisfies FeatureTestSelector;
 
