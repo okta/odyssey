@@ -306,7 +306,7 @@ const TableContent = ({
       ref: tableContentRef,
       className:
         !shouldDisplayRowActions && tableOptions.hasColumnResizing
-          ? "remove-last-row"
+          ? "ods-hide-spacer-column"
           : "",
     },
     muiTableContainerProps: {

@@ -2622,12 +2622,12 @@ export const components = ({
             },
 
           // TEST OF RESIZING
-          [`.remove-last-row .${tableHeadClasses.root} &:last-of-type, .remove-last-row .${tableBodyClasses.root} &:last-of-type`]:
+          [`.ods-hide-spacer-column .${tableHeadClasses.root} &:last-of-type, .ods-hide-spacer-column .${tableBodyClasses.root} &:last-of-type`]:
             {
               display: "none",
             },
 
-          [`.remove-last-row .${tableHeadClasses.root} &:nth-last-of-type(2), .remove-last-row .${tableBodyClasses.root} &:nth-last-of-type(2)`]:
+          [`.ods-hide-spacer-column .${tableHeadClasses.root} &:nth-last-of-type(2), .ods-hide-spacer-column .${tableBodyClasses.root} &:nth-last-of-type(2)`]:
             {
               borderTopRightRadius: odysseyTokens.Spacing2,
               borderBottomRightRadius: odysseyTokens.Spacing2,
@@ -2680,6 +2680,11 @@ export const components = ({
 
           [`& .Mui-TableHeadCell-ResizeHandle-Wrapper`]: {
             marginInlineEnd: `-${odysseyTokens.Spacing3}`,
+
+            [`&:active .${dividerClasses.vertical}`]: {
+              borderColor: odysseyTokens.HueNeutral400,
+              opacity: 1,
+            },
           },
 
           [`& .Mui-TableHeadCell-Content-Wrapper`]: {

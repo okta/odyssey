@@ -752,7 +752,9 @@ const DataTable = ({
     muiTableProps: {
       ref: tableContentRef,
       className:
-        !shouldDisplayRowActions && hasColumnResizing ? "remove-last-row" : "",
+        !shouldDisplayRowActions && hasColumnResizing
+          ? "ods-hide-spacer-column"
+          : "",
     },
 
     muiTableContainerProps: {
