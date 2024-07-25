@@ -36,21 +36,22 @@ export const CalloutTestSelectors = {
         templateVariableNames: ["linkText"],
       },
     },
-    text: {
-      selector: {
-        method: "ByText",
-        templateVariableNames: ["text"],
-        text: "${text}",
-      },
-    },
-    title: {
-      selector: {
-        method: "ByText",
-        templateVariableNames: ["title"],
-        text: "${title}",
-      },
-    },
   },
+  //labels ? something that is a child of the selector rather than a separate feature
+  // text: {
+  //   selector: {
+  //     method: "ByText",
+  //     templateVariableNames: ["text"],
+  //     text: "${text}",
+  //   },
+  // },
+  // title: {
+  //   selector: {
+  //     method: "ByText",
+  //     templateVariableNames: ["title"],
+  //     text: "${title}",
+  //   },
+  // },
   selector: {
     method: "ByRole",
     options: {
