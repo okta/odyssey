@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-babel-loader",
-  "version": "1.20.0",
+  "version": "1.19.0",
   "description": "Babel webpack loader for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
