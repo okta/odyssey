@@ -339,8 +339,8 @@ const DatePicker = ({
   );
 
   const onTimeZoneChange = useCallback(
-    (timeZone: string) => {
-      if (isValidTimeZone(timeZone)) {
+    (timeZone: string | undefined) => {
+      if (timeZone && isValidTimeZone(timeZone)) {
         setInternalTimeZone(timeZone);
       }
     },

@@ -17,7 +17,7 @@ import { TimeZoneOption } from "./useOdysseyDateFields";
 
 export type TimeZonePickerProps = {
   label: string;
-  onTimeZoneChange?: (timeZone: string) => void;
+  onTimeZoneChange?: (timeZone: string | undefined) => void;
   timeZoneOptions: TimeZoneOption[];
   value?: string;
 } & Pick<AutocompleteProps<TimeZoneOption, false, false>, "isReadOnly">;
@@ -33,10 +33,7 @@ const TimeZonePicker = ({
     NonNullable<AutocompleteProps<TimeZoneOption, false, false>["onChange"]>
   >(
     (_, option) => {
-      if (option) {
-        const { value } = option;
-        onTimeZoneChange?.(value);
-      }
+      onTimeZoneChange?.(option?.value);
     },
     [onTimeZoneChange],
   );
