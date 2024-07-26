@@ -184,7 +184,13 @@ const DateField = ({
         }
       }
     },
-    [checkMinMaxValidity, debounceErrorHandling, errorMap, onChange],
+    [
+      checkMinMaxValidity,
+      clearErrorMessages,
+      debounceErrorHandling,
+      errorMap,
+      onChange,
+    ],
   );
 
   const checkFieldValidityAndSetError = useCallback<
