@@ -108,22 +108,31 @@
     "deliverableTiming": "Q2 FY25"
   },
   {
-    "name": "Data View: Data stack \n(data list, resource list?)",
+    "name": "Data Stack",
     "type": "Component",
     "status": "In Labs",
-    "define": "Complete",
-    "design": "Complete",
-    "develop": "In progress",
-    "deliverableTiming": "Q2 FY25"
+    "define": "In Labs",
+    "design": "In Labs",
+    "develop": "In Labs",
+    "deliverableTiming": "Q3 FY25"
   },
   {
-    "name": "Data View: Data table",
+    "name": "Data table",
     "type": "Component",
     "status": "Released",
     "define": "Complete",
     "design": "Complete",
     "develop": "Complete",
     "deliverableTiming": "Q1 FY25"
+  },
+  {
+    "name": "Data View",
+    "type": "Component",
+    "status": "In Labs",
+    "define": "Complete",
+    "design": "Complete",
+    "develop": "In progress",
+    "deliverableTiming": "Q2 FY25"
   },
   {
     "name": "Dialog",
@@ -144,13 +153,13 @@
     "deliverableTiming": "Q1 FY25"
   },
   {
-    "name": "Duration picker\n(or fieldset)",
+    "name": "Duration' picker\n(or fieldset)",
     "type": "Component",
     "status": "In progress",
     "define": "In progress",
     "design": "In progress",
     "develop": "Not started",
-    "deliverableTiming": "Q2 FY25"
+    "deliverableTiming": "Q4 FY25"
   },
   {
     "name": "Empty states v1 (no illustration)",
@@ -165,8 +174,8 @@
     "name": "Empty states v2 (illustration)",
     "type": "Component",
     "status": "In progress",
-    "define": "In progress",
-    "design": "Not started",
+    "define": "Complete",
+    "design": "In progress",
     "develop": "Not started",
     "deliverableTiming": "Q3 FY25"
   },
@@ -201,28 +210,28 @@
     "name": "Form Layout (Advanced)",
     "type": "Component",
     "status": "In progress",
-    "define": "In progress",
+    "define": "Complete",
     "design": "In progress",
-    "develop": "-",
-    "deliverableTiming": "Q2 FY25"
+    "develop": "In progress",
+    "deliverableTiming": "Q3 FY25"
   },
   {
     "name": "Group picker",
     "type": "Component",
     "status": "In Labs",
-    "define": "Complete",
-    "design": "Complete",
+    "define": "In progress",
+    "design": "In progress",
     "develop": "In progress",
     "deliverableTiming": "Q2 FY25"
   },
   {
-    "name": "Line text field",
+    "name": "Inline text field",
     "type": "Component",
-    "status": "Not started",
-    "define": "Not started",
-    "design": "Not started",
-    "develop": "Not started",
-    "deliverableTiming": "-"
+    "status": "In progress",
+    "define": "Complete",
+    "design": "Complete",
+    "develop": "In progress",
+    "deliverableTiming": "Q3 FY25"
   },
   {
     "name": "Link",
@@ -240,7 +249,7 @@
     "define": "Not started",
     "design": "Not started",
     "develop": "Not started",
-    "deliverableTiming": "Q3 FY25"
+    "deliverableTiming": "Q4 FY25"
   },
   {
     "name": "Menu button",
@@ -276,14 +285,14 @@
     "define": "In progress",
     "design": "Not started",
     "develop": "Not started",
-    "deliverableTiming": "Q3 FY25"
+    "deliverableTiming": "Q4 FY25"
   },
   {
     "name": "Progress Bar",
     "type": "Component",
-    "status": "Not started",
-    "define": "Not started",
-    "design": "Not started",
+    "status": "In progress",
+    "define": "In progress",
+    "design": "In progress",
     "develop": "Not started",
     "deliverableTiming": "Q3 FY25"
   },
@@ -312,7 +321,7 @@
     "define": "Not started",
     "design": "Not started",
     "develop": "Not started",
-    "deliverableTiming": "TBD"
+    "deliverableTiming": "Q3 FY25"
   },
   {
     "name": "Select",
@@ -384,7 +393,7 @@
     "define": "Not started",
     "design": "Not started",
     "develop": "Not started",
-    "deliverableTiming": "Q2 FY25"
+    "deliverableTiming": "Q3 FY25"
   },
   {
     "name": "Toast",
