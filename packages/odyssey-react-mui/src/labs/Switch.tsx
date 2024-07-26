@@ -213,7 +213,7 @@ export type SwitchProps = {
    */
   value: string;
   /**
-   * If true, the switch will be read-only
+   * Determines whether the Switch is read-only
    */
   isReadOnly?: boolean;
 } & Pick<

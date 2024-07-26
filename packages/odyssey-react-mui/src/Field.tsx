@@ -33,7 +33,7 @@ export type RenderFieldComponentProps = {
   errorMessageElementId?: string;
   id: string;
   labelElementId: string;
-  isReadOnly?: boolean; // Add this line
+  isReadOnly?: boolean;
 };
 
 export type FieldProps = {
@@ -74,7 +74,7 @@ export type FieldProps = {
     errorMessageElementId,
     id,
     labelElementId,
-    isReadOnly, // Add this line
+    isReadOnly,
   }: RenderFieldComponentProps) => ReactElement;
 };
 
@@ -91,7 +91,7 @@ const Field = ({
   isFullWidth = false,
   isRadioGroup = false,
   isOptional = false,
-  isReadOnly = false, // Add this line
+  isReadOnly = false,
   label,
   renderFieldComponent,
 }: FieldProps &
@@ -105,7 +105,7 @@ const Field = ({
     | "isDisabled"
     | "isFullWidth"
     | "isOptional"
-    | "isReadOnly" // Add this line
+    | "isReadOnly"
   > &
   Pick<HtmlProps, "ariaDescribedBy">) => {
   const { t } = useTranslation();
@@ -169,7 +169,7 @@ const Field = ({
         errorMessageElementId,
         id,
         labelElementId,
-        isReadOnly, // Pass this prop
+        isReadOnly,
       })}
 
       {(errorMessage || errorMessageList) && (

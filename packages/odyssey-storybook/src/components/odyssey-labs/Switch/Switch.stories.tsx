@@ -48,7 +48,7 @@ const storybookMeta: Meta<SwitchProps> = {
     isDisabled: fieldComponentPropsMetaData.isDisabled,
     isReadOnly: {
       control: "boolean",
-      description: "If `true`, the switch is read-only",
+      description: "The value attribute of the Switch",
       table: {
         type: {
           summary: "boolean",

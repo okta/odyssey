@@ -50,7 +50,7 @@ const Radio = ({
   isReadOnly = false,
   onChange: onChangeProp,
   onBlur: onBlurProp,
-  onMouseDown, // Add this line
+  onMouseDown,
 }: RadioProps) => {
   const localInputRef = useRef<HTMLInputElement>(null);
   useImperativeHandle(
@@ -112,7 +112,7 @@ const Radio = ({
             "data-se": testId,
             "aria-readonly": isReadOnly,
             readOnly: isReadOnly,
-            tabIndex: isReadOnly ? 0 : 0,
+            tabIndex: isReadOnly ? 0 : undefined,
           }}
           inputRef={localInputRef}
           onChange={onChange}

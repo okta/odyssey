@@ -974,7 +974,7 @@ export const components = ({
                 backgroundColor: odysseyTokens.HueNeutral100,
                 borderColor: odysseyTokens.HueNeutral300,
               },
-              // ReadOnly Styles for SVG check icon
+              // ReadOnly styles for SVG check icon
               [`.${svgIconClasses.root}`]: {
                 color: odysseyTokens.HueNeutral700,
               },
