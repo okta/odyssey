@@ -51,7 +51,18 @@ const storybookMeta: Meta<CheckboxGroupStoryProps> = {
     hint: fieldComponentPropsMetaData.hint,
     HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
     isDisabled: fieldComponentPropsMetaData.isDisabled,
-    isReadOnly: fieldComponentPropsMetaData.isReadOnly,
+    isReadOnly: {
+      control: "boolean",
+      description: "If `true`, the checkbox group is read-only",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+        defaultValue: {
+          summary: false,
+        },
+      },
+    },
     isRequired: {
       control: "boolean",
       description: "If `true`, the checkbox group is required",

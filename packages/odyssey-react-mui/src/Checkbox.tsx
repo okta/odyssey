@@ -118,9 +118,7 @@ const Checkbox = ({
   const label = useMemo(() => {
     return (
       <>
-        <Typography component="span">
-          {labelProp} {isReadOnly && "(Read-only)"}
-        </Typography>
+        <Typography component="span">{labelProp}</Typography>
         {isRequired && (
           <>
             {" "}
@@ -129,14 +127,10 @@ const Checkbox = ({
             </Typography>
           </>
         )}
-        {hint && (
-          <FormHelperText translate={translate}>
-            {hint} {isReadOnly && "(This field is read-only)"}
-          </FormHelperText>
-        )}
+        {hint && <FormHelperText translate={translate}>{hint}</FormHelperText>}
       </>
     );
-  }, [isRequired, labelProp, hint, t, translate, isReadOnly]);
+  }, [isRequired, labelProp, hint, t, translate]);
 
   const onChange = useCallback<NonNullable<MuiCheckboxProps["onChange"]>>(
     (event, checked) => {
@@ -172,8 +166,9 @@ const Checkbox = ({
       sx={{
         alignItems: "flex-start",
         ...(isReadOnly && {
+          cursor: "default", //area between the label and checkbox
           "& .MuiTypography-root": {
-            cursor: "default",
+            cursor: "default", //for the label
           },
         }),
       }}
