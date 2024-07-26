@@ -30,7 +30,7 @@ import {
 } from "./FieldComponentProps";
 import type { HtmlProps } from "./HtmlProps";
 import { getControlState, useInputValues } from "./inputUtils";
-import { RadioProps } from "./Radio"; // Import RadioProps from the Radio component
+import { RadioProps } from "./Radio";
 
 export type RadioGroupProps = {
   /**
@@ -156,7 +156,7 @@ const RadioGroup = ({
         name={nameOverride ?? id}
         onChange={onChange}
         translate={translate}
-        value={selectedValue} // Ensure the value is controlled
+        value={selectedValue}
       >
         {memoizedChildren}
       </MuiRadioGroup>

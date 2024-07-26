@@ -12,7 +12,7 @@
 
 import React, { memo, ReactNode, useCallback, useMemo } from "react";
 import { FormGroup as MuiFormGroup } from "@mui/material";
-import { CheckboxProps } from "./Checkbox"; // Assuming CheckboxProps is exported from the Checkbox component
+import { CheckboxProps } from "./Checkbox";
 import { Field } from "./Field";
 import {
   FieldComponentProps,

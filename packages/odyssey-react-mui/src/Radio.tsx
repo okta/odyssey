@@ -32,7 +32,7 @@ export type RadioProps = {
   onChange?: MuiRadioProps["onChange"];
   onBlur?: MuiFormControlLabelProps["onBlur"];
   isReadOnly?: boolean;
-  onMouseDown?: React.MouseEventHandler<HTMLSpanElement>; // Add this line
+  onMouseDown?: React.MouseEventHandler<HTMLSpanElement>;
 } & Pick<FieldComponentProps, "hint" | "id" | "isDisabled" | "name"> &
   Pick<HtmlProps, "testId" | "translate">;
 
@@ -116,7 +116,7 @@ const Radio = ({
           }}
           inputRef={localInputRef}
           onChange={onChange}
-          onMouseDown={onMouseDown || handleMouseDown} // Add this line
+          onMouseDown={onMouseDown || handleMouseDown}
           disabled={isDisabled}
         />
       }
