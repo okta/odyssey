@@ -31,6 +31,8 @@ import { useTranslation } from "react-i18next";
 import { Field, RenderFieldComponentProps } from "../Field";
 import { TextFieldProps } from "../TextField";
 
+const VALIDATION_DELAY = 5000;
+
 export type DateFieldProps = {
   onChange?: (value: string) => void;
 } & Pick<
@@ -153,7 +155,7 @@ const DateField = ({
     (validationError) => {
       const timeoutId = setTimeout(() => {
         setDisplayedErrorMessage(validationError);
-      }, 5000);
+      }, VALIDATION_DELAY);
       clearTimeout(debounceTimeoutRef.current);
       debounceTimeoutRef.current = timeoutId;
     },
