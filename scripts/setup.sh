@@ -29,8 +29,8 @@ fi
 
 cd ${OKTA_HOME}/${REPO}
 
-if ! yarn install --network-timeout 120000 --immutable; then
-  if ! yarn install --network-timeout 120000 --immutable; then
+if ! timeout 1 yarn install --immutable; then
+  if ! yarn install --immutable; then
     echo "Installing dependencies failed! Exiting..."
     exit ${FAILED_SETUP}
   fi
