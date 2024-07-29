@@ -28,12 +28,10 @@ else
 fi
 
 cd ${OKTA_HOME}/${REPO}
-
-if ! timeout 1 yarn install --immutable; then
-  if ! yarn install --immutable; then
-    echo "Installing dependencies failed! Exiting..."
-    exit ${FAILED_SETUP}
-  fi
+echo "THIS IS ME TESTING"
+if ! yarn install --immutable; then
+  echo "Installing dependencies failed! Exiting..."
+  exit ${FAILED_SETUP}
 fi
 
 export ORIGINAL_REPO=$REPO
