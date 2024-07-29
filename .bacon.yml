@@ -6,7 +6,7 @@ test_suites:
       - "lint"
       - "test"
       - "typecheck"
-    queue_name: al2023
+    queue_name: ci-queue-productionJenga-AL2023
     script_path: /root/okta/odyssey/scripts
     sort_order: "1"
     steps:
@@ -27,7 +27,7 @@ test_suites:
     criteria: MERGE
     prereq_test_suite_names:
       - "build"
-    queue_name: al2023
+    queue_name: ci-queue-productionJenga-AL2023
 
   - name: "code coverage"
     abort_commit_on_failure: true
@@ -52,7 +52,7 @@ test_suites:
   - name: "lint"
     abort_commit_on_failure: true
     criteria: MERGE
-    queue_name: al2023
+    queue_name: ci-queue-productionJenga-AL2023
     script_path: /root/okta/odyssey/scripts
     sort_order: "3"
     steps:
@@ -70,13 +70,13 @@ test_suites:
     sort_order: "4"
     script_name: unit-test
     criteria: MERGE
-    queue_name: al2023
+    queue_name: ci-queue-productionJenga-AL2023
     timeout: "20"
 
   - name: "typecheck"
     abort_commit_on_failure: true
     criteria: MERGE
-    queue_name: al2023
+    queue_name: ci-queue-productionJenga-AL2023
     script_path: /root/okta/odyssey/scripts
     sort_order: "3"
     steps:
@@ -90,7 +90,7 @@ test_suites:
 
   - name: semgrep
     criteria: MERGE
-    queue_name: al2023
+    queue_name: ci-queue-productionJenga-AL2023
     script_name: semgrep
     script_path: /root/okta/odyssey/scripts
     sort_order: "7"
