@@ -42,10 +42,6 @@ export type CheckboxProps = {
    */
   isIndeterminate?: boolean;
   /**
-   * Determines whether the Checkbox is read-only
-   */
-  isReadOnly?: boolean;
-  /**
    * Determines whether the Checkbox is required
    */
   isRequired?: boolean;
@@ -65,7 +61,10 @@ export type CheckboxProps = {
    * Callback fired when the blur event happens. Provides event value.
    */
   onBlur?: MuiFormControlLabelProps["onBlur"];
-} & Pick<FieldComponentProps, "hint" | "id" | "isDisabled" | "name"> &
+} & Pick<
+  FieldComponentProps,
+  "hint" | "id" | "isDisabled" | "isReadOnly" | "name"
+> &
   CheckedFieldProps<MuiCheckboxProps> &
   Pick<HtmlProps, "ariaLabel" | "ariaLabelledBy" | "testId" | "translate">;
 

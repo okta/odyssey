@@ -29,7 +29,11 @@ import {
   FieldComponentRenderProps,
 } from "./FieldComponentProps";
 import type { HtmlProps } from "./HtmlProps";
-import { getControlState, useInputValues } from "./inputUtils";
+import {
+  ComponentControlledState,
+  getControlState,
+  useInputValues,
+} from "./inputUtils";
 import { RadioProps } from "./Radio";
 
 export type RadioGroupProps = {
@@ -53,7 +57,6 @@ export type RadioGroupProps = {
    * The `value` on the selected Radio
    */
   value?: RadioProps["value"];
-  isReadOnly?: boolean;
 } & Pick<
   FieldComponentProps,
   | "errorMessage"
@@ -62,6 +65,7 @@ export type RadioGroupProps = {
   | "HintLinkComponent"
   | "id"
   | "isDisabled"
+  | "isReadOnly"
   | "name"
 > &
   Pick<HtmlProps, "ariaDescribedBy" | "testId" | "translate">;
@@ -89,7 +93,7 @@ const RadioGroup = ({
   translate,
   value,
 }: RadioGroupProps) => {
-  const [selectedValue, setSelectedValue] = useState(value ?? defaultValue);
+  const [internalValue, setInternalValue] = useState(value ?? defaultValue);
 
   const controlledStateRef = useRef(
     getControlState({
@@ -104,14 +108,19 @@ const RadioGroup = ({
     controlState: controlledStateRef.current,
   });
 
+  const isControlled =
+    controlledStateRef.current === ComponentControlledState.CONTROLLED;
+
   const onChange = useCallback<NonNullable<MuiRadioGroupProps["onChange"]>>(
     (event, newValue) => {
-      if (!isReadOnly && !isDisabled) {
-        setSelectedValue(newValue); // Update internal state
-        onChangeProp?.(event, newValue); // Notify parent
+      if (!isReadOnly) {
+        if (!isControlled) {
+          setInternalValue(newValue);
+        }
+        onChangeProp?.(event, newValue);
       }
     },
-    [onChangeProp, isReadOnly, isDisabled],
+    [onChangeProp, isReadOnly, isControlled],
   );
 
   const handleMouseDown = useCallback(
@@ -130,13 +139,23 @@ const RadioGroup = ({
           return React.cloneElement(child, {
             isReadOnly,
             isDisabled,
-            isChecked: selectedValue === child.props.value, // Reflect the selected state
+            isChecked:
+              (isControlled ? inputValues.value : internalValue) ===
+              child.props.value,
             onMouseDown: handleMouseDown,
           });
         }
         return child;
       }),
-    [children, isReadOnly, isDisabled, selectedValue, handleMouseDown],
+    [
+      children,
+      isReadOnly,
+      isDisabled,
+      isControlled,
+      inputValues.value,
+      internalValue,
+      handleMouseDown,
+    ],
   );
 
   const renderFieldComponent = useCallback(
@@ -156,7 +175,7 @@ const RadioGroup = ({
         name={nameOverride ?? id}
         onChange={onChange}
         translate={translate}
-        value={selectedValue}
+        value={isControlled ? inputValues.value : internalValue}
       >
         {memoizedChildren}
       </MuiRadioGroup>
@@ -166,9 +185,10 @@ const RadioGroup = ({
       nameOverride,
       onChange,
       translate,
-      selectedValue,
       memoizedChildren,
       testId,
+      isControlled,
+      internalValue,
     ],
   );
 

@@ -30,10 +30,6 @@ export type CheckboxGroupProps = {
    */
   isRequired?: boolean;
   /**
-   * If `true`, the CheckboxGroup is read-only
-   */
-  isReadOnly?: boolean;
-  /**
    * The label text for the CheckboxGroup
    */
   label: string;
@@ -45,6 +41,7 @@ export type CheckboxGroupProps = {
   | "HintLinkComponent"
   | "id"
   | "isDisabled"
+  | "isReadOnly"
 > &
   Pick<HtmlProps, "ariaDescribedBy" | "testId" | "translate">;
 
