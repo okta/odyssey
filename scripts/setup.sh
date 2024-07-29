@@ -29,7 +29,7 @@ fi
 
 cd ${OKTA_HOME}/${REPO}
 
-if ! yarn install --immutable; then
+if ! yarn install; then
   echo "Installing dependencies failed! Exiting..."
   exit ${FAILED_SETUP}
 fi
