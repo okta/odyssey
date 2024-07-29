@@ -373,8 +373,7 @@ const TopNav = ({
 
   const LogoWordmarkStyles = useMemo(
     () => ({
-      width: "55px",
-      height: "20px",
+      width: odysseyDesignTokens.Spacing9,
       paddingLeft: odysseyDesignTokens.Spacing2,
     }),
     [odysseyDesignTokens],
