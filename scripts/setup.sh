@@ -11,6 +11,8 @@ YARN_VERSION=1.22.19
 
 yum install gnupg2 --allowerasing -y
 
+nvm install ${NODE_VERSION}
+
 echo "installing node ${NODE_VERSION}"
 if setup_service node ${NODE_VERSION}; then
   echo "Installed node ${NODE_VERSION} successfully"
