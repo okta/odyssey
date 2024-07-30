@@ -318,7 +318,10 @@ const Switch = ({
 
   const handleOnChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
     (event) => {
-      if (isReadOnly) return;
+      if (isReadOnly) {
+        event.preventDefault();
+        return;
+      }
       const target = event.target;
       const { checked, value } = target;
       setInternalSwitchChecked(checked);
