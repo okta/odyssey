@@ -108,13 +108,13 @@
     "deliverableTiming": "Q2 FY25"
   },
   {
-    "name": "Data Stack",
+    "name": "Data stack",
     "type": "Component",
     "status": "In Labs",
-    "define": "In Labs",
-    "design": "In Labs",
-    "develop": "In Labs",
-    "deliverableTiming": "Q3 FY25"
+    "define": "Complete",
+    "design": "Complete",
+    "develop": "Complete",
+    "deliverableTiming": "Q2 FY25"
   },
   {
     "name": "Data table",
@@ -126,7 +126,7 @@
     "deliverableTiming": "Q1 FY25"
   },
   {
-    "name": "Data View",
+    "name": "Data view",
     "type": "Component",
     "status": "In Labs",
     "define": "Complete",
@@ -207,7 +207,7 @@
     "deliverableTiming": "FY24"
   },
   {
-    "name": "Form Layout (Advanced)",
+    "name": "Form layout (Advanced)",
     "type": "Component",
     "status": "In progress",
     "define": "Complete",
@@ -264,9 +264,9 @@
     "name": "Multi-select dropdown",
     "type": "Component",
     "status": "Not started",
-    "define": "Not started",
-    "design": "Not started",
-    "develop": "Not started",
+    "define": "-",
+    "design": "-",
+    "develop": "-",
     "deliverableTiming": "TBD"
   },
   {
@@ -288,7 +288,7 @@
     "deliverableTiming": "Q4 FY25"
   },
   {
-    "name": "Progress Bar",
+    "name": "Progress bar",
     "type": "Component",
     "status": "In progress",
     "define": "In progress",
@@ -306,7 +306,7 @@
     "deliverableTiming": "FY24"
   },
   {
-    "name": "Search Input",
+    "name": "Search input",
     "type": "Component",
     "status": "In progress",
     "define": "Complete",
