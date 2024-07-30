@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 echo "Setting up CI environment for Bacon"
 
@@ -14,7 +14,7 @@ fi
 
 cd ${OKTA_HOME}/${REPO}
 
-if ! yarn install --immutable --inline-builds; then
+if ! yarn install --immutable; then
   echo "yarn install command failed! Exiting..."
   exit ${FAILED_SETUP}
 fi
