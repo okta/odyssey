@@ -104,20 +104,23 @@ const SwitchTrack = styled("div", {
   Pick<SwitchProps, "isChecked" | "isDisabled" | "isReadOnly"> & {
     odysseyDesignTokens: DesignTokens;
   }
->(({ isChecked, isDisabled, isReadOnly, odysseyDesignTokens }) => ({
-  position: "relative",
-  width: odysseyDesignTokens.Spacing7,
-  height: `calc(${odysseyDesignTokens.Spacing4} + ${odysseyDesignTokens.Spacing1})`,
-  borderRadius: odysseyDesignTokens.BorderRadiusOuter,
-  backgroundColor: isDisabled
-    ? odysseyDesignTokens.HueNeutral200
-    : isReadOnly
-      ? odysseyDesignTokens.HueNeutral600
-      : isChecked
-        ? odysseyDesignTokens.PaletteSuccessLight
-        : odysseyDesignTokens.HueNeutral300,
-  transition: `background-color ${odysseyDesignTokens.TransitionDurationMain}`,
-}));
+>(({ isChecked, isDisabled, isReadOnly, odysseyDesignTokens }) => {
+  const getBackgroundColor = () => {
+    if (isDisabled) return odysseyDesignTokens.HueNeutral200;
+    if (isReadOnly) return odysseyDesignTokens.HueNeutral600;
+    if (isChecked) return odysseyDesignTokens.PaletteSuccessLight;
+    return odysseyDesignTokens.HueNeutral300;
+  };
+
+  return {
+    position: "relative",
+    width: odysseyDesignTokens.Spacing7,
+    height: `calc(${odysseyDesignTokens.Spacing4} + ${odysseyDesignTokens.Spacing1})`,
+    borderRadius: odysseyDesignTokens.BorderRadiusOuter,
+    backgroundColor: getBackgroundColor(),
+    transition: `background-color ${odysseyDesignTokens.TransitionDurationMain}`,
+  };
+});
 
 const SwitchThumb = styled("span", {
   shouldForwardProp: (prop) => !nonForwardedProps.includes(prop),
@@ -129,8 +132,18 @@ const SwitchThumb = styled("span", {
   const thumbOffset = toRem(3);
   const trackWidth = stripRem(odysseyDesignTokens.Spacing7);
   const thumbWidth = stripRem(odysseyDesignTokens.Spacing4) - toRem(2);
-
   const transformDistance = trackWidth - thumbWidth - thumbOffset * 2;
+
+  const getBackgroundColor = () => {
+    if (isDisabled) return odysseyDesignTokens.HueNeutral50;
+    if (isReadOnly) return odysseyDesignTokens.HueNeutral400;
+    return odysseyDesignTokens.HueNeutralWhite;
+  };
+
+  const getTransform = () => {
+    if (isChecked) return `translate3d(${transformDistance}rem, -50%, 0)`;
+    return "translate3d(0, -50%, 0)";
+  };
 
   return {
     position: "absolute",
@@ -139,14 +152,8 @@ const SwitchThumb = styled("span", {
     width: `calc(${odysseyDesignTokens.Spacing4} - ${toRem(2)}rem)`,
     height: `calc(${odysseyDesignTokens.Spacing4} - ${toRem(2)}rem)`,
     borderRadius: odysseyDesignTokens.BorderRadiusRound,
-    backgroundColor: isDisabled
-      ? odysseyDesignTokens.HueNeutral50
-      : isReadOnly
-        ? odysseyDesignTokens.HueNeutral400
-        : odysseyDesignTokens.HueNeutralWhite,
-    transform: isChecked
-      ? `translate3d(${transformDistance}rem, -50%, 0)`
-      : "translate3d(0, -50%, 0)",
+    backgroundColor: getBackgroundColor(),
+    transform: getTransform(),
     transition: `transform ${odysseyDesignTokens.TransitionDurationMain}`,
   };
 });
@@ -157,22 +164,31 @@ const SwitchCheckMark = styled(CheckIcon, {
   Pick<SwitchProps, "isChecked" | "isDisabled" | "isReadOnly"> & {
     odysseyDesignTokens: DesignTokens;
   }
->(({ isChecked, isDisabled, isReadOnly, odysseyDesignTokens }) => ({
-  position: "absolute",
-  top: "50%",
-  left: 3,
-  width: odysseyDesignTokens.Spacing4,
-  transform: "translateY(-50%)",
-  transition: `opacity ${odysseyDesignTokens.TransitionDurationMain}`,
-  opacity: isChecked ? 1 : 0,
-  path: {
-    fill:
-      isDisabled || isReadOnly
-        ? odysseyDesignTokens.HueNeutral50
-        : odysseyDesignTokens.HueNeutralWhite,
-  },
-}));
+>(({ isChecked, isDisabled, isReadOnly, odysseyDesignTokens }) => {
+  const getOpacity = () => {
+    return isChecked ? 1 : 0;
+  };
 
+  const getPathFill = () => {
+    if (isDisabled || isReadOnly) {
+      return odysseyDesignTokens.HueNeutral50;
+    }
+    return odysseyDesignTokens.HueNeutralWhite;
+  };
+
+  return {
+    position: "absolute",
+    top: "50%",
+    left: 3,
+    width: odysseyDesignTokens.Spacing4,
+    transform: "translateY(-50%)",
+    transition: `opacity ${odysseyDesignTokens.TransitionDurationMain}`,
+    opacity: getOpacity(),
+    path: {
+      fill: getPathFill(),
+    },
+  };
+});
 const HiddenCheckbox = styled.input<{
   odysseyDesignTokens: DesignTokens;
   isReadOnly?: boolean;
@@ -372,7 +388,6 @@ const Switch = ({
             odysseyDesignTokens={odysseyDesignTokens}
             type="checkbox"
             value={value}
-            tabIndex={isReadOnly ? 0 : undefined}
             readOnly={isReadOnly}
             isReadOnly={isReadOnly}
           />

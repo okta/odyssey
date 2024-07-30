@@ -964,7 +964,7 @@ export const components = ({
                 backgroundColor: odysseyTokens.HueNeutral100,
                 borderColor: odysseyTokens.HueNeutral300,
 
-                //Override hoever styles
+                //Override hover styles
                 [`.${formControlLabelClasses.root}:hover > &`]: {
                   backgroundColor: odysseyTokens.HueNeutral100,
                   borderColor: odysseyTokens.HueNeutral300,
