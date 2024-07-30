@@ -147,12 +147,17 @@ const DateField = ({
     (value, validationContext) => {
       clearErrorMessages();
       const { validationError } = validationContext;
+      const hasEnteredFullYear = value?.year.toString().length === 4;
 
       if (validationError) {
         const odysseyValidationError = errorMap.get(validationError);
 
         if (odysseyValidationError) {
           internalValidationError.current = odysseyValidationError;
+
+          if (value?.isValid && hasEnteredFullYear) {
+            setDisplayedErrorMessage(odysseyValidationError);
+          }
         }
       }
 
