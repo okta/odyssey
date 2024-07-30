@@ -36,6 +36,10 @@ import {
 } from "./inputUtils";
 import { RadioProps } from "./Radio";
 
+interface ExtendedRadioProps extends RadioProps {
+  onReadOnlyClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
 export type RadioGroupProps = {
   /**
    * The Radio components within the group. Must include two or more.
@@ -123,7 +127,7 @@ const RadioGroup = ({
     [onChangeProp, isReadOnly, isControlled],
   );
 
-  const handleMouseDown = useCallback(
+  const handleReadOnlyClick = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
       if (isReadOnly) {
         event.preventDefault();
@@ -135,14 +139,14 @@ const RadioGroup = ({
   const memoizedChildren = useMemo(
     () =>
       React.Children.map(children, (child) => {
-        if (React.isValidElement<RadioProps>(child)) {
+        if (React.isValidElement<ExtendedRadioProps>(child)) {
           return React.cloneElement(child, {
             isReadOnly,
             isDisabled,
             isChecked:
               (isControlled ? inputValues.value : internalValue) ===
               child.props.value,
-            onMouseDown: handleMouseDown,
+            onReadOnlyClick: handleReadOnlyClick,
           });
         }
         return child;
@@ -154,7 +158,7 @@ const RadioGroup = ({
       isControlled,
       inputValues.value,
       internalValue,
-      handleMouseDown,
+      handleReadOnlyClick,
     ],
   );
 
