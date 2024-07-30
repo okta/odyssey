@@ -16,7 +16,7 @@ cd ${OKTA_HOME}/${REPO}
 
 sleep 10m
 
-if ! yarn install --immutable; then
+if ! yarn install --immutable --inline-builds; then
   echo "yarn install command failed! Exiting..."
   exit ${FAILED_SETUP}
 fi
