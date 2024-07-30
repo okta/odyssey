@@ -14,7 +14,7 @@ fi
 
 cd ${OKTA_HOME}/${REPO}
 
-if ! ulimit -n 1024 && yarn install --immutable; then
+if ! yarn install --immutable; then
   echo "yarn install command failed! Exiting..."
   exit ${FAILED_SETUP}
 fi
