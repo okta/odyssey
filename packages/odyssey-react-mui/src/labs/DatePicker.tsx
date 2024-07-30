@@ -31,7 +31,6 @@ import {
 } from "@mui/x-date-pickers";
 import { DateTime } from "luxon";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
-import { InputAdornment } from "@mui/material";
 import styled from "@emotion/styled";
 
 import { Button } from "../Button";
@@ -185,7 +184,6 @@ const DatePicker = ({
 
   const {
     defaultedLanguageCode,
-    // displayedErrorMessage,
     formatDateTimeToUtcIsoDateString,
     inputValues,
     internalTimeZone,
@@ -254,26 +252,18 @@ const DatePicker = ({
 
   const renderDateField = useCallback(
     ({ defaultValue, inputRef, value }: RenderDateFieldProps) => {
-      const hasVisibleAdornment = !isReadOnly && !isDisabled;
-
       return (
         <DateField
           defaultValue={defaultValue}
           endAdornment={
-            <>
-              {hasVisibleAdornment && (
-                <InputAdornment position="end">
-                  <Button
-                    ariaLabel={t("picker.labels.date.choose")}
-                    label=""
-                    size="small"
-                    startIcon={<CalendarIcon />}
-                    variant="floating"
-                    onClick={toggleCalendarVisibility}
-                  />
-                </InputAdornment>
-              )}
-            </>
+            <Button
+              ariaLabel={t("picker.labels.date.choose")}
+              label=""
+              onClick={toggleCalendarVisibility}
+              size="small"
+              startIcon={<CalendarIcon />}
+              variant="floating"
+            />
           }
           errorMessage={errorMessage}
           hint={hint}
@@ -291,7 +281,6 @@ const DatePicker = ({
       );
     },
     [
-      // displayedErrorMessage,
       errorMessage,
       hint,
       internalTimeZone,

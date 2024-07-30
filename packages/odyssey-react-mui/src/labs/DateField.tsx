@@ -31,8 +31,6 @@ import { useTranslation } from "react-i18next";
 import { Field, RenderFieldComponentProps } from "../Field";
 import { TextFieldProps } from "../TextField";
 
-const VALIDATION_DELAY = 5000;
-
 export type DateFieldProps = {
   onChange?: (value: string) => void;
 } & Pick<
@@ -91,7 +89,6 @@ const DateField = ({
   const [displayedErrorMessage, setDisplayedErrorMessage] =
     useState(errorMessage);
 
-  const debounceTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
   const internalValidationError = useRef<string | undefined>();
   const localInputRef = useRef<HTMLInputElement>(null);
 
@@ -106,12 +103,6 @@ const DateField = ({
     },
     [],
   );
-
-  useEffect(() => {
-    return () => {
-      clearTimeout(debounceTimeoutRef?.current);
-    };
-  }, []);
 
   const checkMinMaxValidity = useCallback(
     (value: DateTime) => {
@@ -148,19 +139,7 @@ const DateField = ({
   const clearErrorMessages = useCallback(() => {
     setDisplayedErrorMessage(undefined);
     internalValidationError.current = undefined;
-    clearTimeout(debounceTimeoutRef.current);
-  }, [debounceTimeoutRef, internalValidationError, setDisplayedErrorMessage]);
-
-  const debounceErrorHandling = useCallback<(validationError: string) => void>(
-    (validationError) => {
-      const timeoutId = setTimeout(() => {
-        setDisplayedErrorMessage(validationError);
-      }, VALIDATION_DELAY);
-      clearTimeout(debounceTimeoutRef.current);
-      debounceTimeoutRef.current = timeoutId;
-    },
-    [],
-  );
+  }, [internalValidationError, setDisplayedErrorMessage]);
 
   const validateAndCallOnChange = useCallback<
     NonNullable<MuiDateFieldProps<DateTime>["onChange"]>
@@ -174,7 +153,6 @@ const DateField = ({
 
         if (odysseyValidationError) {
           internalValidationError.current = odysseyValidationError;
-          debounceErrorHandling(odysseyValidationError);
         }
       }
 
@@ -186,13 +164,7 @@ const DateField = ({
         }
       }
     },
-    [
-      checkMinMaxValidity,
-      clearErrorMessages,
-      debounceErrorHandling,
-      errorMap,
-      onChange,
-    ],
+    [checkMinMaxValidity, clearErrorMessages, errorMap, onChange],
   );
 
   const checkFieldValidityAndSetError = useCallback<
@@ -202,16 +174,12 @@ const DateField = ({
       if (internalValidationError?.current && !displayedErrorMessage) {
         setDisplayedErrorMessage(internalValidationError.current);
       }
-      clearTimeout(debounceTimeoutRef.current);
       onBlur?.(event);
     },
-    [
-      debounceTimeoutRef,
-      displayedErrorMessage,
-      internalValidationError,
-      onBlur,
-    ],
+    [displayedErrorMessage, internalValidationError, onBlur],
   );
+
+  const hasVisibleAdornment = !isReadOnly && !isDisabled;
 
   const renderFieldComponent = useCallback(
     ({
@@ -234,7 +202,11 @@ const DateField = ({
         InputProps={{
           error: Boolean(displayedErrorMessage || errorMessage),
           endAdornment: (
-            <InputAdornment position="end">{endAdornment}</InputAdornment>
+            <>
+              {hasVisibleAdornment && (
+                <InputAdornment position="end">{endAdornment}</InputAdornment>
+              )}
+            </>
           ),
         }}
         inputRef={localInputRef}
@@ -257,6 +229,7 @@ const DateField = ({
       endAdornment,
       errorMessage,
       hasInitialFocus,
+      hasVisibleAdornment,
       isDisabled,
       localInputRef,
       minDate,
