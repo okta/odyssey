@@ -31,18 +31,6 @@ export PR_NUMBER=$(echo $GITHUB_RESPONSE | jq -r '.[0].number')
 export PR_TITLE=$(echo $GITHUB_RESPONSE | jq -r '.[0].title')
 export PR_URL=$(echo $GITHUB_RESPONSE | jq -r '.[0].html_url')
 
-echo "LOOK FOR THIS!"
-echo "BRANCH $BRANCH"
-# echo "https://api.github.com/repos/okta/odyssey/pulls?state=open&head=okta:kg_vrt_the_second"
-echo "https://api.github.com/repos/$GITHUB_ORG/$REPO/commits/$SHA/pulls"
-repos/okta/odyssey/commits
-echo $GITHUB_RESPONSE
-echo $BASE_BRANCH_NAME
-echo $COMMIT_MESSAGE
-echo $PR_NUMBER
-echo $PR_TITLE
-echo $PR_URL
-
 export APPLITOOLS_BATCH_ID=$SHA
 export CURRENT_BRANCH_NAME=$BRANCH
 export CHROME_VERSION="126.0.6478.55"
