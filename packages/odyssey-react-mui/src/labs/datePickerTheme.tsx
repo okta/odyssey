@@ -143,15 +143,17 @@ export const datePickerTheme: ThemeOptions = {
     },
     MuiPickersLayout: {
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           display: "block",
-        },
+          // Matches Popper width
+          width: "calc(100vw - 64px)",
+          maxWidth: theme.mixins.maxWidth,
+        }),
         contentWrapper: ({ theme }) => ({
-          width: `${352 / 14}rem`,
+          width: "100%",
           paddingInline: theme.spacing(3),
 
           "@media (pointer: fine)": {
-            width: `${352 / 14}rem`,
             borderColor: theme.palette.divider,
             borderStyle: theme.mixins.borderStyle,
             borderWidth: theme.mixins.borderWidth,

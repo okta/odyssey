@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.20.0](https://github.com/okta/odyssey/compare/v1.19.0...v1.20.0) (2024-07-25)
+
+### Features
+
+- pageTemplate and Layout component ([#2219](https://github.com/okta/odyssey/issues/2219)) ([a04eb1d](https://github.com/okta/odyssey/commit/a04eb1df24702ef23b436d0df58e0571974b0454))
+
+### Bug Fixes
+
+- data Table legacy improvements ([#2294](https://github.com/okta/odyssey/issues/2294)) ([3146cd1](https://github.com/okta/odyssey/commit/3146cd1edeb145aa727682659eaba422533ba0f1))
+- english leak for "Close" in Autocomplete ([#2291](https://github.com/okta/odyssey/issues/2291)) ([0959c71](https://github.com/okta/odyssey/commit/0959c71f7c2dc6ddc1cde3281534f19222f4df6d))
+
 ## [1.19.0](https://github.com/okta/odyssey/compare/v1.18.0...v1.19.0) (2024-07-15)
 
 ### Features

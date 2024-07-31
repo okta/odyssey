@@ -10,35 +10,60 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ChangeEventHandler, ChangeEvent, memo, useCallback } from "react";
+import {
+  FocusEventHandler,
+  memo,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 import { InputAdornment } from "@mui/material";
 import {
   DateField as MuiDateField,
   DateFieldProps as MuiDateFieldProps,
+  DateValidationError,
 } from "@mui/x-date-pickers";
 import { DateTime } from "luxon";
+import { useTranslation } from "react-i18next";
 
 import { Field, RenderFieldComponentProps } from "../Field";
 import { TextFieldProps } from "../TextField";
 
 export type DateFieldProps = {
-  defaultValue?: MuiDateFieldProps<DateTime>["defaultValue"];
-  onChange: ChangeEventHandler<HTMLInputElement>;
-  value?: MuiDateFieldProps<DateTime>["value"];
+  onChange?: (value: string) => void;
 } & Pick<
-  TextFieldProps,
-  | "endAdornment"
-  | "errorMessage"
-  | "hasInitialFocus"
-  | "hint"
-  | "id"
-  | "isDisabled"
-  | "isOptional"
-  | "isReadOnly"
-  | "label"
-  | "onBlur"
-  | "onFocus"
->;
+  MuiDateFieldProps<DateTime>,
+  "defaultValue" | "inputRef" | "minDate" | "maxDate" | "timezone" | "value"
+> &
+  Pick<
+    TextFieldProps,
+    | "endAdornment"
+    | "errorMessage"
+    | "hasInitialFocus"
+    | "hint"
+    | "id"
+    | "isDisabled"
+    | "isOptional"
+    | "isReadOnly"
+    | "label"
+    | "onBlur"
+    | "onFocus"
+  >;
+
+const useOdysseyDateError = () => {
+  const { t } = useTranslation();
+
+  return new Map<DateValidationError, string>([
+    ["invalidDate", t("picker.error.invalid")],
+    ["maxDate", t("picker.error.maxdate")],
+    ["minDate", t("picker.error.mindate")],
+  ]);
+};
+
+const formatDateTimeToUtcIsoDateString = (value: DateTime) =>
+  value.toUTC().toISO();
 
 const DateField = ({
   defaultValue,
@@ -47,17 +72,127 @@ const DateField = ({
   hasInitialFocus,
   hint,
   id: idOverride,
+  inputRef,
   isDisabled = false,
   isOptional = false,
   isReadOnly,
   label,
+  minDate,
+  maxDate,
   onBlur,
   onChange,
   onFocus,
+  timezone,
   value,
 }: DateFieldProps) => {
+  const errorMap = useOdysseyDateError();
+  const [displayedErrorMessage, setDisplayedErrorMessage] =
+    useState(errorMessage);
+
+  const internalValidationError = useRef<string | undefined>();
+  const localInputRef = useRef<HTMLInputElement>(null);
+
+  useImperativeHandle(
+    inputRef,
+    () => {
+      return {
+        focus: () => {
+          localInputRef.current?.focus();
+        },
+      };
+    },
+    [],
+  );
+
+  const checkMinMaxValidity = useCallback(
+    (value: DateTime) => {
+      const hasMinError = minDate && value.toUTC() < minDate.toUTC();
+      const hasMaxError = maxDate && value.toUTC() > maxDate.toUTC();
+
+      if (hasMinError || hasMaxError) {
+        if (hasMinError) {
+          setDisplayedErrorMessage(errorMap.get("minDate"));
+        }
+
+        if (hasMaxError) {
+          setDisplayedErrorMessage(errorMap.get("maxDate"));
+        }
+
+        return false;
+      }
+
+      return true;
+    },
+    [errorMap, minDate, maxDate],
+  );
+
+  useEffect(() => {
+    if (value) {
+      checkMinMaxValidity(value);
+    }
+
+    if (defaultValue) {
+      checkMinMaxValidity(defaultValue);
+    }
+  }, [checkMinMaxValidity, defaultValue, minDate, maxDate, value]);
+
+  const clearErrorMessages = useCallback(() => {
+    setDisplayedErrorMessage(undefined);
+    internalValidationError.current = undefined;
+  }, [internalValidationError, setDisplayedErrorMessage]);
+
+  const validateAndCallOnChange = useCallback<
+    NonNullable<MuiDateFieldProps<DateTime>["onChange"]>
+  >(
+    (value, validationContext) => {
+      clearErrorMessages();
+      const { validationError } = validationContext;
+      const hasEnteredFullYear = value?.year.toString().length === 4;
+
+      if (validationError) {
+        const odysseyValidationError = errorMap.get(validationError);
+
+        if (odysseyValidationError) {
+          internalValidationError.current = odysseyValidationError;
+
+          if (value?.isValid && hasEnteredFullYear) {
+            setDisplayedErrorMessage(odysseyValidationError);
+          }
+        }
+      }
+
+      if (value?.isValid && !validationError) {
+        const dateStringFromDateTime = formatDateTimeToUtcIsoDateString(value);
+
+        if (dateStringFromDateTime && checkMinMaxValidity(value)) {
+          onChange?.(dateStringFromDateTime);
+        }
+      }
+    },
+    [checkMinMaxValidity, clearErrorMessages, errorMap, onChange],
+  );
+
+  const checkFieldValidityAndSetError = useCallback<
+    FocusEventHandler<HTMLInputElement>
+  >(
+    (event) => {
+      if (internalValidationError?.current && !displayedErrorMessage) {
+        setDisplayedErrorMessage(internalValidationError.current);
+      }
+      onBlur?.(event);
+    },
+    [displayedErrorMessage, internalValidationError, onBlur],
+  );
+
+  const hasVisibleAdornment = !isReadOnly && !isDisabled;
+
   const renderFieldComponent = useCallback(
-    ({ ariaDescribedBy, id, labelElementId }: RenderFieldComponentProps) => (
+    ({
+      ariaDescribedBy,
+      errorMessageElementId,
+      id,
+      labelElementId,
+    }: RenderFieldComponentProps) => (
       <MuiDateField
         /* eslint-disable-next-line jsx-a11y/no-autofocus */
         autoFocus={hasInitialFocus}
@@ -66,41 +201,55 @@ const DateField = ({
         id={id}
         inputProps={{
           "aria-describedby": ariaDescribedBy,
+          "aria-errormessage": errorMessageElementId,
           "aria-labelledby": labelElementId,
-          onChange: (event) =>
-            onChange?.(event as ChangeEvent<HTMLInputElement>),
         }}
         InputProps={{
-          error: Boolean(errorMessage),
+          error: Boolean(displayedErrorMessage || errorMessage),
           endAdornment: (
-            <InputAdornment position="end">{endAdornment}</InputAdornment>
+            <>
+              {hasVisibleAdornment && (
+                <InputAdornment position="end">{endAdornment}</InputAdornment>
+              )}
+            </>
           ),
         }}
+        inputRef={localInputRef}
+        minDate={minDate}
+        maxDate={maxDate}
         name={id}
-        onBlur={onBlur}
+        onBlur={checkFieldValidityAndSetError}
+        onChange={validateAndCallOnChange}
         onFocus={onFocus}
         readOnly={isReadOnly}
+        timezone={timezone}
         value={value}
         variant="standard"
       />
     ),
     [
+      checkFieldValidityAndSetError,
       defaultValue,
+      displayedErrorMessage,
       endAdornment,
       errorMessage,
       hasInitialFocus,
+      hasVisibleAdornment,
       isDisabled,
-      onChange,
+      localInputRef,
+      minDate,
+      maxDate,
       onFocus,
-      onBlur,
       isReadOnly,
+      timezone,
+      validateAndCallOnChange,
       value,
     ],
   );
 
   return (
     <Field
-      errorMessage={errorMessage}
+      errorMessage={displayedErrorMessage || errorMessage}
       fieldType="single"
       hasVisibleLabel
       hint={hint}
