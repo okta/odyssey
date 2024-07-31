@@ -112,7 +112,7 @@ const Radio = ({
         <MuiRadio
           inputProps={{
             "data-se": testId,
-            "aria-readonly": isReadOnly,
+            "aria-disabled": isReadOnly,
             readOnly: isReadOnly,
             tabIndex: isReadOnly ? 0 : undefined,
           }}
