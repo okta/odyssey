@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { DataGetDataType } from "@okta/odyssey-react-mui/labs";
+import { DataFilter, DataGetDataType } from "@okta/odyssey-react-mui/labs";
 import { Person } from "./personData";
 
 export const filterData = ({
@@ -29,48 +29,92 @@ export const filterData = ({
       )
     : data;
 
+  const personKeys: (keyof Person)[] = [
+    "order",
+    "id",
+    "name",
+    "city",
+    "state",
+    "age",
+    "risk",
+  ];
+
+  const isKeyOfPerson = (key: string): key is keyof Person => {
+    return personKeys.includes(key as keyof Person);
+  };
+
+  const handleStartLetterFilter = (
+    row: Person,
+    value: DataFilter["value"],
+  ): boolean => {
+    if (typeof row.name !== "string") return true;
+    const firstLetter = row.name[0]?.toLowerCase();
+    if (value === "vowel") return "aeiou".includes(firstLetter);
+    if (value === "consonant") return !"aeiou".includes(firstLetter);
+    return true;
+  };
+
+  const handleStandardFilter = (
+    row: Person,
+    id: keyof Person,
+    value: DataFilter["value"],
+  ): boolean => {
+    const rowValue = String(row[id]).toLowerCase();
+
+    if (value === null || value === undefined) {
+      return true;
+    }
+
+    if (typeof value === "string" || typeof value === "number") {
+      return rowValue.includes(String(value).toLowerCase());
+    }
+
+    if (Array.isArray(value)) {
+      return value.some((arrayValue) => {
+        const filterValue =
+          typeof arrayValue === "object" ? arrayValue.value : arrayValue;
+        return row[id as keyof Person]
+          ?.toString()
+          .toLowerCase()
+          .includes(filterValue.toString().toLowerCase());
+      });
+    }
+
+    return false;
+  };
+
+  const compareValues = (
+    a: string | number,
+    b: string | number,
+    desc: boolean,
+  ): number => {
+    if (a < b) return desc ? 1 : -1;
+    if (a > b) return desc ? -1 : 1;
+    return 0;
+  };
+
   // In a real-world scenario, the consumer would provide their own backend
   // filtering/searching logic. This is a demo of what that could look like
   // for the provided sample data and demo filters.
   const columnFiltered = filters
     ? searchFiltered.filter((row) =>
-        filters.every(({ id, value }) => {
+        filters.every(({ id, value }: DataFilter) => {
           // If the filter value is null, return all the data
-          // rather than none of the data. (This is better UX.)
           if (value === null || value === undefined) {
             return true;
           }
 
-          // If the filter is of a sort that provides multiple values,
-          // such as a checkbox group, check against the whole
-          // array of provided values
-          if (Array.isArray(value)) {
-            return value.some((arrayValue) => {
-              const filterValue =
-                typeof arrayValue === "object" ? arrayValue.value : arrayValue;
-              return row[id as keyof Person]
-                ?.toString()
-                .toLowerCase()
-                .includes(filterValue.toString().toLowerCase());
-            });
+          // Handle custom filters
+          if (id === "startLetter") {
+            return handleStartLetterFilter(row, value);
           }
 
-          // This is the backend for the demo of custom (not-built-in) filters;
-          // the user can specifiy if the the first letter of the name is a
-          // vowel or a consonant
-          if (id === "startLetter" && typeof row.name === "string") {
-            const firstLetter = row.name[0]?.toLowerCase();
-            if (value === "vowel") return "aeiou".includes(firstLetter);
-            if (value === "consonant") return !"aeiou".includes(firstLetter);
-            return true;
+          // Handle standard Person properties
+          if (isKeyOfPerson(id)) {
+            return handleStandardFilter(row, id, value);
           }
 
-          // If none of the other filters apply, check the data against
-          // the incoming string from the filter
-          return row[id as keyof Person]
-            ?.toString()
-            .toLowerCase()
-            .includes(value.toString().toLowerCase());
+          return true;
         }),
       )
     : searchFiltered;
@@ -79,24 +123,16 @@ export const filterData = ({
     sort && sort.length > 0
       ? [...columnFiltered].sort((a, b) =>
           sort.reduce((result, { id, desc }) => {
-            if (result !== 0) {
-              return result;
+            if (result !== 0) return result;
+
+            if (isKeyOfPerson(id)) {
+              const aValue = a[id];
+              const bValue = b[id];
+              return compareValues(aValue, bValue, desc);
             }
 
-            const aValue = a[id as keyof Person];
-            const bValue = b[id as keyof Person];
-
-            return desc
-              ? bValue < aValue
-                ? -1
-                : bValue > aValue
-                  ? 1
-                  : 0
-              : aValue < bValue
-                ? -1
-                : aValue > bValue
-                  ? 1
-                  : 0;
+            // Handle custom sort fields if needed
+            return 0;
           }, 0),
         )
       : columnFiltered;
