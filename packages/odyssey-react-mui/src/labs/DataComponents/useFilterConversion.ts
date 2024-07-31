@@ -58,6 +58,8 @@ export const useFilterConversion = ({
   );
 
   const dataTableFilters = useMemo(() => {
+    // Filters may be manually set via the `filters` variable;
+    // If not, they may be inferred from `columns`
     const providedFilters = filters || columns || [];
 
     return providedFilters.reduce<DataFilter[]>((accumulator, item) => {

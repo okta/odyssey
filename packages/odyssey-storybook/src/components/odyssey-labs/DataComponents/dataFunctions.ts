@@ -29,13 +29,21 @@ export const filterData = ({
       )
     : data;
 
+  // In a real-world scenario, the consumer would provide their own backend
+  // filtering/searching logic. This is a demo of what that could look like
+  // for the provided sample data and demo filters.
   const columnFiltered = filters
     ? searchFiltered.filter((row) =>
         filters.every(({ id, value }) => {
+          // If the filter value is null, return all the data
+          // rather than none of the data. (This is better UX.)
           if (value === null || value === undefined) {
             return true;
           }
 
+          // If the filter is of a sort that provides multiple values,
+          // such as a checkbox group, check against the whole
+          // array of provided values
           if (Array.isArray(value)) {
             return value.some((arrayValue) => {
               const filterValue =
@@ -47,6 +55,9 @@ export const filterData = ({
             });
           }
 
+          // This is the backend for the demo of custom (not-built-in) filters;
+          // the user can specifiy if the the first letter of the name is a
+          // vowel or a consonant
           if (id === "startLetter" && typeof row.name === "string") {
             const firstLetter = row.name[0]?.toLowerCase();
             if (value === "vowel") return "aeiou".includes(firstLetter);
@@ -54,6 +65,8 @@ export const filterData = ({
             return true;
           }
 
+          // If none of the other filters apply, check the data against
+          // the incoming string from the filter
           return row[id as keyof Person]
             ?.toString()
             .toLowerCase()
@@ -66,7 +79,9 @@ export const filterData = ({
     sort && sort.length > 0
       ? [...columnFiltered].sort((a, b) =>
           sort.reduce((result, { id, desc }) => {
-            if (result !== 0) return result;
+            if (result !== 0) {
+              return result;
+            }
 
             const aValue = a[id as keyof Person];
             const bValue = b[id as keyof Person];
@@ -92,7 +107,7 @@ export const filterData = ({
   return sorted.slice(startRow, endRow);
 };
 
-export const reorderData = <Data extends { id: string | number }>({
+export const reorderData = <Data extends Person>({
   data,
   rowId,
   newRowIndex,

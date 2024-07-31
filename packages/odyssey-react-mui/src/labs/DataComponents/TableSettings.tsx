@@ -112,9 +112,17 @@ const TableSettings = ({
               .map((column) => (
                 <MenuItem
                   key={column.accessorKey}
-                  onClick={() => changeColumnVisibility(column.id!)}
+                  // The column is guaranteed to have either an id or an accessorKey, as defined
+                  // by the Material-React-Table MRT_ColumnDef type
+                  onClick={() =>
+                    changeColumnVisibility((column.id || column.accessorKey)!)
+                  }
                 >
-                  <MuiCheckbox checked={visibleColumns.has(column.id!)} />
+                  <MuiCheckbox
+                    checked={visibleColumns.has(
+                      (column.id || column.accessorKey)!,
+                    )}
+                  />
                   {column.header}
                 </MenuItem>
               ))}
