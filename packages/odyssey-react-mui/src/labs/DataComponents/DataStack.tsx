@@ -44,8 +44,11 @@ const DataStack = ({
   isEmpty,
   isLoading,
   isNoResults,
+  isPaginationMoreDisabled,
   isRowReorderingDisabled,
   maxGridColumns,
+  maxPages,
+  maxResultsPerPage,
   noResultsPlaceholder,
   onChangeRowSelection,
   paginationType,
@@ -81,7 +84,10 @@ const DataStack = ({
       isEmpty={isEmpty}
       isLoading={isLoading}
       isNoResults={isNoResults}
+      isPaginationMoreDisabled={isPaginationMoreDisabled}
       isRowReorderingDisabled={isRowReorderingDisabled}
+      maxPages={maxPages}
+      maxResultsPerPage={maxResultsPerPage}
       noResultsPlaceholder={noResultsPlaceholder}
       onChangeRowSelection={onChangeRowSelection}
       paginationType={paginationType}

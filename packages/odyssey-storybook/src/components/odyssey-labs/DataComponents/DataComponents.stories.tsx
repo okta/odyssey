@@ -216,6 +216,16 @@ const storybookMeta: Meta<DataViewMetaProps> = {
     isNoResults: {
       control: "boolean",
     },
+    isPaginationMoreDisabled: {
+      control: "boolean",
+      description:
+        "If true, the pagination next or show more button will be disabled.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
     hasCustomEmptyPlaceholder: {
       control: "boolean",
       name: "[STORY ONLY] Has custom empty placeholder?",
@@ -375,6 +385,7 @@ const BaseStory: StoryObj<DataViewMetaProps> = {
         hasFilters={args.hasFilters}
         hasSearch={args.hasSearch}
         hasSearchSubmitButton={args.hasSearchSubmitButton}
+        isPaginationMoreDisabled={args.isPaginationMoreDisabled}
         searchDelayTime={args.searchDelayTime}
         errorMessage={args.errorMessage}
         initialLayout={args.initialLayout}
