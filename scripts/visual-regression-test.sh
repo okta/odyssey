@@ -43,10 +43,10 @@ if ! wget https://artifacts.aue1e.internal/artifactory/thirdparty-yum/x86_64/chr
   echo "failure" > ${setup_chrome_status_file}
 fi
 
-unzip chromedriver_linux64.zip
-mv chromedriver_linux64 /usr/local/bin/
-chmod +x /usr/local/bin/chromedriver_linux64
-rm chromedriver_linux64.zip
+unzip chromedriver-linux64.zip
+mv chromedriver-linux64 /usr/local/bin/
+chmod +x /usr/local/bin/chromedriver-linux64
+rm chromedriver-linux64.zip
 
 if ! yarn workspace @okta/odyssey-storybook ci:visualRegressionTest; then
   echo "Applitools Visual Regression Tests failed! Exiting..."
