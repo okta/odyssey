@@ -23,7 +23,7 @@
     "@storybook/theming": "^7.2.0"
   },
   "devDependencies": {
-    "@applitools/eyes-storybook": "^3.50.6",
+    "@applitools/eyes-storybook": "^3.50.7",
     "@babel/core": "^7.23.9",
     "@okta/odyssey-babel-loader": "workspace:*",
     "@okta/odyssey-lifecycle": "workspace:*",
@@ -63,7 +63,7 @@
     "react-dom": "^18.2.0",
     "storybook": "^7.6.16",
     "storybook-addon-rtl-direction": "^0.0.19",
-    "typescript": "^5.4.5",
+    "typescript": "^5.5.4",
     "vite": "^5.1.3",
     "wait-on": "^7.2.0"
   },

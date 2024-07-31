@@ -2,35 +2,20 @@
 
 echo "Setting up CI environment for Bacon"
 
-REPO=odyssey
-
-REPO_DIR="${OKTA_HOME}/${REPO}"
-
-NODE_VERSION=$(cat "${REPO_DIR}/.nvmrc")
-YARN_VERSION=1.22.19
 
 yum install gnupg2 --allowerasing -y
 
-echo "installing node ${NODE_VERSION}"
-if setup_service node ${NODE_VERSION}; then
-  echo "Installed node ${NODE_VERSION} successfully"
-else
-  echo "Node ${NODE_VERSION} installation failed."
-  exit ${FAILED_SETUP}
+if ! setup_service node-and-yarn $(cat "${OKTA_HOME}"/"${REPO}"/.nvmrc) "1.22.19"; then
+  echo "Failed to install node! Exiting..."
+  report_results FAILURE failed_setup
+  exit 1
 fi
 
-echo "installing yarn v${YARN_VERSION}"
-if setup_service yarn-berry ${YARN_VERSION}; then
-  echo "Installed yarn ${YARN_VERSION} successfully"
-else
-  echo "Yarn ${YARN_VERSION} installation failed."
-  exit ${FAILED_SETUP}
-fi
 
 cd ${OKTA_HOME}/${REPO}
 
 if ! yarn install --immutable; then
-  echo "Installing dependencies failed! Exiting..."
+  echo "yarn install command failed! Exiting..."
   exit ${FAILED_SETUP}
 fi
 
