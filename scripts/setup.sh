@@ -11,7 +11,6 @@ if ! setup_service node-and-yarn $(cat "${OKTA_HOME}"/"${REPO}"/.nvmrc) "1.22.19
   exit 1
 fi
 
-
 cd ${OKTA_HOME}/${REPO}
 
 if ! yarn install --immutable; then
