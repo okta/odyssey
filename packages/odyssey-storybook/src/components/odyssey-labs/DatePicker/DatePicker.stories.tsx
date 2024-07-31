@@ -12,9 +12,12 @@
 
 import { useMemo, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
+import { expect } from "@storybook/jest";
+import { userEvent, within, screen, waitFor } from "@storybook/testing-library";
 
+import { odysseyTranslate } from "@okta/odyssey-react-mui";
 import { DatePicker, DatePickerProps } from "@okta/odyssey-react-mui/labs";
-
+import { axeRun } from "../../../axe-util";
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
@@ -49,6 +52,7 @@ const storybookMeta: Meta<DatePickerProps> = {
       },
     },
     isDisabled: fieldComponentPropsMetaData.isDisabled,
+    isReadOnly: fieldComponentPropsMetaData.isReadOnly,
     minDate: {
       description: "the minimum selectable date enabled in the calendar",
       table: {
@@ -67,8 +71,8 @@ const storybookMeta: Meta<DatePickerProps> = {
     },
   },
   args: {
-    label: "Choose a date",
-    hint: "Use MM/DD/YYYY format",
+    label: "Date picker label",
+    hint: "Select a date.",
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
@@ -78,37 +82,116 @@ export default storybookMeta;
 
 export const Default: StoryObj<DatePickerProps> = {};
 
+export const Disabled: StoryObj<DatePickerProps> = {
+  args: {
+    isDisabled: true,
+  },
+};
+
+export const ReadOnly: StoryObj<DatePickerProps> = {
+  args: {
+    isReadOnly: true,
+  },
+};
+
 export const Error: StoryObj<DatePickerProps> = {
   args: {
-    errorMessage: "Some error message here",
+    errorMessage: "Select a date",
   },
 };
 
 export const MinDate: StoryObj<DatePickerProps> = {
   args: {
-    hint: "minDate is 7/17/2024",
-    minDate: new Date("7-17-2024"),
+    hint: "Select a date after July 16, 2024",
+    minDate: "2024-07-16",
+  },
+};
+
+export const MinDateWithError: StoryObj<DatePickerProps> = {
+  args: {
+    hint: "Select a date after July 16, 2024",
+    minDate: "2024-07-16T03:00:00.000Z",
+    value: "2024-07-11T03:00:00.000Z",
+  },
+  play: async ({ canvasElement, step }) => {
+    await step(
+      "expect min date error when value is less than minDate",
+      async () => {
+        const canvas = within(canvasElement);
+
+        await waitFor(() => {
+          expect(
+            canvas.getByText(odysseyTranslate("picker.error.mindate")),
+          ).toBeInTheDocument();
+        });
+      },
+    );
   },
 };
 
 export const MaxDate: StoryObj<DatePickerProps> = {
   args: {
-    hint: "maxDate is 7/17/2024",
-    maxDate: new Date("7-17-2024"),
+    hint: "Select a date before July 19, 2024",
+    maxDate: "2024-07-18",
+  },
+};
+
+export const MaxDateWithError: StoryObj<DatePickerProps> = {
+  args: {
+    hint: "Select a date before July 18, 2024",
+    maxDate: "2024-07-18T03:00:00.000Z",
+    value: "2024-07-21T03:00:00.000Z",
+  },
+  play: async ({ canvasElement, step }) => {
+    await step(
+      "expect max date error when value is less than minDate",
+      async () => {
+        const canvas = within(canvasElement);
+
+        await waitFor(() => {
+          expect(
+            canvas.getByText(odysseyTranslate("picker.error.maxdate")),
+          ).toBeInTheDocument();
+        });
+      },
+    );
+  },
+};
+
+export const WithTimeZonePicker: StoryObj<DatePickerProps> = {
+  args: {
+    timeZonePickerLabel: "Timezone picker label",
+    timeZoneOptions: [
+      { label: "New York", value: "America/New_York" },
+      { label: "Johannesburg", value: "Africa/Johannesburg" },
+      { label: "Hong Kong", value: "Asia/Hong_Kong" },
+    ],
   },
 };
 
 export const Controlled: StoryObj<DatePickerProps> = {
   args: {
-    label: "Choose a date",
-    hint: "Use MM/DD/YYYY format",
+    timeZonePickerLabel: "Timezone picker label",
+    timeZone: "America/New_York",
+    timeZoneOptions: [
+      { label: "LA", value: "America/Los_Angeles" },
+      { label: "New York", value: "America/New_York" },
+      { label: "Johannesburg", value: "Africa/Johannesburg" },
+      { label: "Hong Kong", value: "Asia/Hong_Kong" },
+    ],
   },
   render: function C({ ...props }) {
-    const [value, setValue] = useState<Date>(new Date("7-17-2024"));
+    const [value, setValue] = useState<string>("2024-07-11T03:00:00.000Z");
+
     const datePickerProps: DatePickerProps = useMemo(
       () => ({
         ...props,
-        onCalendarDateChange: (value) => {
+        onCalendarDateChange: ({ value }) => {
+          if (value) {
+            setValue(value);
+          }
+        },
+        onInputChange: (value) => {
           if (value) {
             setValue(value);
           }
@@ -119,5 +202,28 @@ export const Controlled: StoryObj<DatePickerProps> = {
     );
 
     return <DatePicker {...datePickerProps} />;
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("select date", async () => {
+      const canvas = within(canvasElement);
+      await waitFor(async () => {
+        const datepickerCalendarOpenButton = canvas.getByLabelText(
+          odysseyTranslate("picker.labels.date.choose"),
+        );
+        await userEvent.click(datepickerCalendarOpenButton);
+
+        const dialog = screen.getByRole("dialog");
+        const dialogCanvas = within(dialog);
+        const dateButton = dialogCanvas.getByText("26");
+        await userEvent.click(dateButton);
+      });
+
+      const input = canvas.getByRole("textbox") as HTMLInputElement;
+      expect(input.value).toBe("07/26/2024");
+
+      await step("Check for a11y errors", async () => {
+        await waitFor(() => axeRun("Selecting a date"));
+      });
+    });
   },
 };
