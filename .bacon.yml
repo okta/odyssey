@@ -1,14 +1,10 @@
 test_suites:
-  - name: "build"
+  - name: "Build"
     abort_commit_on_failure: true
     criteria: MERGE
-    prereq_test_suite_names:
-      - "lint"
-      - "test"
-      - "typecheck"
     queue_name: ci-queue-productionJenga-AL2023
     script_path: /root/okta/odyssey/scripts
-    sort_order: "1"
+    sort_order: "4"
     steps:
       - event: SOURCE
         action: setup.sh
@@ -18,43 +14,30 @@ test_suites:
         name: Build Packages
     timeout: "20"
 
-  - name: publish
-    abort_commit_on_failure: true
-    script_path: /root/okta/odyssey/scripts
-    sort_order: "2"
-    timeout: "15"
-    script_name: publish
-    criteria: MERGE
-    prereq_test_suite_names:
-      - "build"
-    queue_name: ci-queue-productionJenga-AL2023
-
-  - name: "code coverage"
+  - name: "Code Coverage"
     abort_commit_on_failure: true
     criteria: OPTIONAL
-    # Playwright only works with certain distros of Linux
-    queue_name: ci-queue-prodJenga-Ubuntu20
-    script_path: /root/okta/odyssey/scripts
+    queue_name: ci-queue-prodJenga-Ubuntu20 # Playwright only works with certain distros of Linux
     script_name: code-coverage
-    sort_order: "5"
-    timeout: "20"
-
-  - name: "interaction test"
-    abort_commit_on_failure: true
-    criteria: MERGE
-    # Playwright only works with certain distros of Linux
-    queue_name: ci-queue-prodJenga-Ubuntu20
     script_path: /root/okta/odyssey/scripts
-    script_name: interaction-test
     sort_order: "6"
     timeout: "20"
 
-  - name: "lint"
+  - name: "Interaction Test"
+    abort_commit_on_failure: true
+    criteria: MERGE
+    queue_name: ci-queue-prodJenga-Ubuntu20 # Playwright only works with certain distros of Linux
+    script_path: /root/okta/odyssey/scripts
+    script_name: interaction-test
+    sort_order: "5"
+    timeout: "20"
+
+  - name: "Lint"
     abort_commit_on_failure: true
     criteria: MERGE
     queue_name: ci-queue-productionJenga-AL2023
     script_path: /root/okta/odyssey/scripts
-    sort_order: "3"
+    sort_order: "1"
     steps:
       - event: SOURCE
         action: setup.sh
@@ -64,21 +47,47 @@ test_suites:
         name: Lint Code
     timeout: "20"
 
-  - name: "test"
+  - name: "Publish Package"
     abort_commit_on_failure: true
+    criteria: MERGE
+    queue_name: ci-queue-productionJenga-AL2023
+    script_name: publish-packages
     script_path: /root/okta/odyssey/scripts
-    sort_order: "4"
-    script_name: unit-test
-    criteria: MERGE
-    queue_name: ci-queue-productionJenga-AL2023
-    timeout: "20"
+    sort_order: "8"
+    timeout: "15"
 
-  - name: "typecheck"
+  - name: "Publish Storybook"
     abort_commit_on_failure: true
     criteria: MERGE
     queue_name: ci-queue-productionJenga-AL2023
+    script_name: publish-storybook
+    script_path: /root/okta/odyssey/scripts
+    sort_order: "9"
+    timeout: "15"
+
+  - name: "Semgrep"
+    criteria: MERGE
+    queue_name: ci-queue-productionJenga-AL2023
+    script_name: semgrep
+    script_path: /root/okta/odyssey/scripts
+    sort_order: "7"
+    timeout: "10"
+
+  - name: "Test"
+    abort_commit_on_failure: true
+    criteria: MERGE
+    queue_name: ci-queue-productionJenga-AL2023
+    script_name: unit-test
     script_path: /root/okta/odyssey/scripts
     sort_order: "3"
+    timeout: "20"
+
+  - name: "Typecheck"
+    abort_commit_on_failure: true
+    criteria: MERGE
+    queue_name: ci-queue-productionJenga-AL2023
+    script_path: /root/okta/odyssey/scripts
+    sort_order: "2"
     steps:
       - event: SOURCE
         action: setup.sh
@@ -88,10 +97,11 @@ test_suites:
         name: Typecheck Code
     timeout: "20"
 
-  - name: semgrep
+  - name: "Visual Regression Test"
+    abort_commit_on_failure: true
     criteria: MERGE
     queue_name: ci-queue-productionJenga-AL2023
-    script_name: semgrep
+    script_name: visual-regression-test
     script_path: /root/okta/odyssey/scripts
     sort_order: "7"
-    timeout: "10"
+    timeout: "20"
