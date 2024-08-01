@@ -20,15 +20,6 @@ const storybookMeta: Meta<TopNavProps> = {
   title: "Labs Components/TopNav",
   component: TopNav,
   argTypes: {
-    hasLogo: {
-      control: "boolean",
-      description: "Show Okta Logo",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
     SearchFieldComponent: {
       control: "ReactElement",
       description: "Display global search field",
@@ -81,7 +72,6 @@ const storybookMeta: Meta<TopNavProps> = {
     },
   },
   args: {
-    hasLogo: true,
     SearchFieldComponent: (
       <SearchField label="Search" placeholder="Search..." />
     ),

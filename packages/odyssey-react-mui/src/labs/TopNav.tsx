@@ -21,12 +21,7 @@ import {
 } from "react";
 
 import type { HtmlProps } from "../HtmlProps";
-import {
-  AuraIcon,
-  QuestionCircleIcon,
-  SettingsIcon,
-  WordmarkIcon,
-} from "../icons.generated";
+import { QuestionCircleIcon, SettingsIcon } from "../icons.generated";
 import { Link } from "../Link";
 import {
   DesignTokens,
@@ -74,10 +69,6 @@ export type UserProfileProps = {
 };
 
 export type TopNavProps = {
-  /**
-   * Determines whether to display the logo (aura & wordmark)
-   */
-  hasLogo?: boolean;
   /**
    *  Pass in a SearchField component with the variant="filled" prop set
    */
@@ -318,16 +309,6 @@ const TopNavContainer = styled("div", {
   height: odysseyDesignTokens.Spacing9,
 }));
 
-const LogoContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{
-  odysseyDesignTokens: DesignTokens;
-}>(({ odysseyDesignTokens }) => ({
-  display: "flex",
-  alignItems: "center",
-  padding: `0 ${odysseyDesignTokens.Spacing9} 0 ${odysseyDesignTokens.Spacing5}`,
-}));
-
 const SearchFieldContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{
@@ -346,7 +327,6 @@ const AdditionalNavItemContainer = styled("div", {
 }));
 
 const TopNav = ({
-  hasLogo,
   SearchFieldComponent,
   topNavLinkItems,
   AdditionalNavItemComponent,
@@ -364,29 +344,8 @@ const TopNav = ({
     [topNavLinkItems],
   );
 
-  const LogoStyles = useMemo(
-    () => ({
-      fontSize: odysseyDesignTokens.TypographyScale6,
-    }),
-    [odysseyDesignTokens],
-  );
-
-  const LogoWordmarkStyles = useMemo(
-    () => ({
-      width: odysseyDesignTokens.Spacing9,
-      paddingLeft: odysseyDesignTokens.Spacing2,
-    }),
-    [odysseyDesignTokens],
-  );
-
   return (
     <TopNavContainer odysseyDesignTokens={odysseyDesignTokens}>
-      {hasLogo && (
-        <LogoContainer odysseyDesignTokens={odysseyDesignTokens}>
-          <AuraIcon sx={LogoStyles} />
-          <WordmarkIcon sx={LogoWordmarkStyles} />
-        </LogoContainer>
-      )}
       {SearchFieldComponent && (
         <SearchFieldContainer odysseyDesignTokens={odysseyDesignTokens}>
           {SearchFieldComponent}
