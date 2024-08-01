@@ -10,18 +10,20 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const branchName = process.env.GITHUB_HEAD_REF;
-const parentBranchName = process.env.GITHUB_BASE_REF;
-const shortCommitHash = process.env.GITHUB_SHA.slice(0, 7);
+const branchName =
+  process.env.GITHUB_HEAD_REF ?? process.env.CURRENT_BRANCH_NAME;
+const parentBranchName =
+  process.env.GITHUB_BASE_REF ?? process.env.BASE_BRANCH_NAME ?? "main";
+const commitHash = process.env.GITHUB_SHA ?? process.env.SHA;
 
-module.exports = {
+const applitoolsConfig = {
   accessibilityValidation: {
     level: "AA",
     guidelinesVersion: "WCAG_2_1",
   },
   branchName,
   batch: {
-    name: branchName?.concat(" ", shortCommitHash),
+    name: branchName?.concat(" ", commitHash || ""),
     notifyOnCompletion: true,
     sequenceName: "Regression",
   },
@@ -30,7 +32,13 @@ module.exports = {
   exitcode: true,
   matchLevel: "Strict",
   parentBranchName,
+  puppeteerOptions: {
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    headless: true,
+  },
+  runInDocker: true,
   serverUrl: "https://oktaeyes.applitools.com",
-  showStorybookOutput: true,
-  testConcurrency: 10,
+  testConcurrency: 20,
 };
+
+module.exports = applitoolsConfig;
