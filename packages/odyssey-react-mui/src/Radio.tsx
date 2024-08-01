@@ -24,11 +24,29 @@ import { FocusHandle } from "./inputUtils";
 import { Typography } from "./Typography";
 
 export type RadioProps = {
+  /**
+   * The ref forwarded to the Radio
+   */
   inputRef?: React.RefObject<FocusHandle>;
+  /**
+   * Determines whether the Radio button is checked
+   */
   isChecked?: boolean;
+  /**
+   * If `true`, the radio button has an invalid value
+   */
   isInvalid?: boolean;
+  /**
+   * The label text for the Radio
+   */
   label: string;
+  /**
+   * The value attribute of the Radio
+   */
   value: string;
+  /**
+   * Callback fired when the blur event happens. Provides event value.
+   */
   onChange?: MuiRadioProps["onChange"];
   onBlur?: MuiFormControlLabelProps["onBlur"];
   onMouseDown?: React.MouseEventHandler<HTMLSpanElement>;
