@@ -37,3 +37,4 @@ export * from "./Switch";
 
 export * from "./NavAccordion";
 export * from "./SideNav";
+export * from "./TopNav";
