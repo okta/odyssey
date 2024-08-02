@@ -161,7 +161,7 @@ export const MaxDateWithError: StoryObj<DatePickerProps> = {
 
 export const WithTimeZonePicker: StoryObj<DatePickerProps> = {
   args: {
-    timeZonePickerLabel: "Timezone picker label",
+    timeZonePickerLabel: "Time zone picker label",
     timeZoneOptions: [
       { label: "New York", value: "America/New_York" },
       { label: "Johannesburg", value: "Africa/Johannesburg" },
@@ -172,7 +172,7 @@ export const WithTimeZonePicker: StoryObj<DatePickerProps> = {
 
 export const Controlled: StoryObj<DatePickerProps> = {
   args: {
-    timeZonePickerLabel: "Timezone picker label",
+    timeZonePickerLabel: "Time zone picker label",
     timeZone: "America/New_York",
     timeZoneOptions: [
       { label: "LA", value: "America/Los_Angeles" },
