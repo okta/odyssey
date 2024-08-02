@@ -1933,11 +1933,6 @@ export const components = ({
             WebkitAppearance: "none",
           } satisfies CSSProperties,
 
-          [`&::-moz-search-cancel-button`]: {
-            display: "none",
-            MozAppearance: "none",
-          } satisfies CSSProperties,
-
           [`&::-ms-clear`]: {
             display: "none",
           },
