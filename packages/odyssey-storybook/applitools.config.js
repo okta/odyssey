@@ -11,7 +11,10 @@
  */
 
 const branchName = process.env.CURRENT_BRANCH_NAME;
-const parentBranchName = process.env.BASE_BRANCH_NAME ?? "main";
+const parentBranchName =
+  process.env.BASE_BRANCH_NAME === "null" || !process.env.BASE_BRANCH_NAME
+    ? "main"
+    : process.env.BASE_BRANCH_NAME;
 const commitHash = process.env.SHA;
 
 const applitoolsConfig = {
