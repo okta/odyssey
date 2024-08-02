@@ -42,15 +42,8 @@ const storybookMeta: Meta<DatePickerProps> = {
       },
     },
     errorMessage: fieldComponentPropsMetaData.errorMessage,
-    hint: {
-      control: "text",
-      description: "The hint text for the autocomplete input",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
+    hint: fieldComponentPropsMetaData.hint,
+    HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
     isDisabled: fieldComponentPropsMetaData.isDisabled,
     isOptional: fieldComponentPropsMetaData.isOptional,
     isReadOnly: fieldComponentPropsMetaData.isReadOnly,
@@ -67,6 +60,32 @@ const storybookMeta: Meta<DatePickerProps> = {
       table: {
         type: {
           summary: "Date",
+        },
+      },
+    },
+    timeZone: {
+      description: "an IANA time zone applied to the DatePicker",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    timeZonePickerLabel: {
+      description:
+        "label applied to the `TimeZonePicker` field if `TimeZonePicker` field is rendered",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    timeZoneOptions: {
+      control: "none",
+      description: "an array of options for the TimeZonePicker",
+      table: {
+        type: {
+          summary: "[{label: string, value: string(valid IANA time zone)}]",
         },
       },
     },
