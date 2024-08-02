@@ -52,6 +52,7 @@ const storybookMeta: Meta<DatePickerProps> = {
       },
     },
     isDisabled: fieldComponentPropsMetaData.isDisabled,
+    isOptional: fieldComponentPropsMetaData.isOptional,
     isReadOnly: fieldComponentPropsMetaData.isReadOnly,
     minDate: {
       description: "the minimum selectable date enabled in the calendar",
