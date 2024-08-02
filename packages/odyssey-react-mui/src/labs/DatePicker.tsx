@@ -154,13 +154,19 @@ export type DatePickerProps = {
 } & OdysseyDateFieldProps &
   Pick<
     FieldComponentProps,
-    "errorMessage" | "hint" | "isDisabled" | "isReadOnly" | "isOptional"
+    | "errorMessage"
+    | "hint"
+    | "HintLinkComponent"
+    | "isDisabled"
+    | "isReadOnly"
+    | "isOptional"
   >;
 
 const DatePicker = ({
   defaultValue: defaultValueProp,
   errorMessage,
   hint,
+  HintLinkComponent,
   isDateEnabled = () => true,
   isDisabled,
   isOptional,
@@ -267,6 +273,7 @@ const DatePicker = ({
           }
           errorMessage={errorMessage}
           hint={hint}
+          HintLinkComponent={HintLinkComponent}
           inputRef={inputRef}
           isDisabled={isDisabled}
           isOptional={isOptional}
@@ -284,6 +291,7 @@ const DatePicker = ({
     [
       errorMessage,
       hint,
+      HintLinkComponent,
       internalTimeZone,
       isDisabled,
       isOptional,
