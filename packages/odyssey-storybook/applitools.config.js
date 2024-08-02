@@ -10,11 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const branchName =
-  process.env.GITHUB_HEAD_REF ?? process.env.CURRENT_BRANCH_NAME;
-const parentBranchName =
-  process.env.GITHUB_BASE_REF ?? process.env.BASE_BRANCH_NAME ?? "main";
-const commitHash = process.env.GITHUB_SHA ?? process.env.SHA;
+const branchName = process.env.CURRENT_BRANCH_NAME;
+const parentBranchName = process.env.BASE_BRANCH_NAME ?? "main";
+const commitHash = process.env.SHA;
 
 const applitoolsConfig = {
   accessibilityValidation: {
@@ -37,8 +35,10 @@ const applitoolsConfig = {
     headless: true,
   },
   runInDocker: true,
+  saveNewTests: true,
   serverUrl: "https://oktaeyes.applitools.com",
   testConcurrency: 20,
+  waitBeforeCapture: 1000,
 };
 
 module.exports = applitoolsConfig;
