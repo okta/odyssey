@@ -99,9 +99,9 @@ const Radio = ({
     (event, checked) => {
       if (isReadOnly) {
         event.preventDefault();
-        return;
+      } else {
+        onChangeProp?.(event, checked);
       }
-      onChangeProp?.(event, checked);
     },
     [onChangeProp, isReadOnly],
   );
@@ -129,7 +129,7 @@ const Radio = ({
         <MuiRadio
           inputProps={{
             "data-se": testId,
-            "aria-disabled": isReadOnly,
+            "aria-disabled": isDisabled || isReadOnly,
             readOnly: isReadOnly,
             tabIndex: isReadOnly ? 0 : undefined,
           }}

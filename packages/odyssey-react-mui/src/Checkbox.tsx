@@ -138,9 +138,7 @@ const Checkbox = ({
     [onChangeProp],
   );
 
-  const onClick = useCallback<
-    NonNullable<React.MouseEventHandler<HTMLInputElement>>
-  >(
+  const onClick = useCallback<NonNullable<MuiCheckboxProps["onClick"]>>(
     (event) => {
       if (isReadOnly) {
         event.preventDefault();
@@ -156,17 +154,22 @@ const Checkbox = ({
     [onBlurProp],
   );
 
+  const checkboxStyles = useMemo(
+    () => ({
+      alignItems: "flex-start",
+      ...(isReadOnly && {
+        cursor: "default",
+        "& .MuiTypography-root": {
+          cursor: "default",
+        },
+      }),
+    }),
+    [isReadOnly],
+  );
+
   return (
     <FormControlLabel
-      sx={{
-        alignItems: "flex-start",
-        ...(isReadOnly && {
-          cursor: "default", //area between the label and checkbox
-          "& .MuiTypography-root": {
-            cursor: "default", //for the label
-          },
-        }),
-      }}
+      sx={checkboxStyles}
       aria-label={ariaLabel}
       aria-labelledby={ariaLabelledBy}
       className={
