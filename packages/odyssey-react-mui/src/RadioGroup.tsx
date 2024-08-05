@@ -118,13 +118,11 @@ const RadioGroup = ({
   const onChange = useCallback<NonNullable<MuiRadioGroupProps["onChange"]>>(
     (event, newValue) => {
       if (!isReadOnly) {
-        if (!isControlled) {
-          setInternalValue(newValue);
-        }
+        setInternalValue(newValue);
         onChangeProp?.(event, newValue);
       }
     },
-    [onChangeProp, isReadOnly, isControlled],
+    [onChangeProp, isReadOnly],
   );
 
   const handleReadOnlyClick = useCallback(

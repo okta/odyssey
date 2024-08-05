@@ -49,7 +49,7 @@ export type RadioProps = {
    */
   onChange?: MuiRadioProps["onChange"];
   onBlur?: MuiFormControlLabelProps["onBlur"];
-  onMouseDown?: React.MouseEventHandler<HTMLSpanElement>;
+  onClick?: React.MouseEventHandler<HTMLSpanElement>;
 } & Pick<
   FieldComponentProps,
   "hint" | "id" | "isDisabled" | "isReadOnly" | "name"
@@ -70,7 +70,7 @@ const Radio = ({
   isReadOnly = false,
   onChange: onChangeProp,
   onBlur: onBlurProp,
-  onMouseDown,
+  onClick,
 }: RadioProps) => {
   const localInputRef = useRef<HTMLInputElement>(null);
   useImperativeHandle(
@@ -106,7 +106,7 @@ const Radio = ({
     [onChangeProp, isReadOnly],
   );
 
-  const handleMouseDown = useCallback<React.MouseEventHandler<HTMLSpanElement>>(
+  const handleClick = useCallback<React.MouseEventHandler<HTMLSpanElement>>(
     (event) => {
       if (isReadOnly) {
         event.preventDefault();
@@ -114,7 +114,6 @@ const Radio = ({
     },
     [isReadOnly],
   );
-
   const onBlur = useCallback<NonNullable<MuiFormControlLabelProps["onBlur"]>>(
     (event) => {
       onBlurProp?.(event);
@@ -136,7 +135,7 @@ const Radio = ({
           }}
           inputRef={localInputRef}
           onChange={onChange}
-          onMouseDown={onMouseDown || handleMouseDown}
+          onClick={onClick || handleClick}
           disabled={isDisabled}
         />
       }

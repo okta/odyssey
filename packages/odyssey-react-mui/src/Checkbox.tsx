@@ -133,13 +133,9 @@ const Checkbox = ({
 
   const onChange = useCallback<NonNullable<MuiCheckboxProps["onChange"]>>(
     (event, checked) => {
-      if (isReadOnly) {
-        event.preventDefault();
-        return;
-      }
       onChangeProp?.(event, checked);
     },
-    [onChangeProp, isReadOnly],
+    [onChangeProp],
   );
 
   const onClick = useCallback<
