@@ -41,7 +41,7 @@ const applitoolsConfig = {
   saveNewTests: true,
   serverUrl: "https://oktaeyes.applitools.com",
   testConcurrency: 20,
-  waitBeforeCapture: 1000,
+  waitBeforeCapture: 2000,
 };
 
 module.exports = applitoolsConfig;
