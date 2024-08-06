@@ -2616,7 +2616,6 @@ export const components = ({
               width: odysseyTokens.Spacing2,
             },
 
-          // TEST OF RESIZING
           [`.ods-hide-spacer-column .${tableHeadClasses.root} &:last-of-type, .ods-hide-spacer-column .${tableBodyClasses.root} &:last-of-type`]:
             {
               display: "none",
