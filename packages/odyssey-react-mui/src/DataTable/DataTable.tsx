@@ -643,7 +643,7 @@ const DataTable = ({
           children: (
             <Box sx={{ display: "flex", visibility: "hidden" }}>
               {rowActionButtons && rowActionButtons({ id: null })}
-              {((hasRowReordering === true && onReorderRows) ||
+              {((hasRowReordering && onReorderRows) ||
                 rowActionMenuItems) && (
                 <Box>
                   <Button
