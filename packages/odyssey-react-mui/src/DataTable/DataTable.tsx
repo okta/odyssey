@@ -639,7 +639,7 @@ const DataTable = ({
     [columnIds],
   ) as string[];
 
-  const hasVisibleActionRows = useMemo(
+  const shouldDisplayRowActions = useMemo(
     () =>
       (hasRowReordering === true && onReorderRows) ||
       rowActionButtons ||
