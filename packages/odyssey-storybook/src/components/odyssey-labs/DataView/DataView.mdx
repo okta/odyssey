@@ -9,19 +9,19 @@ import {
   Stories,
 } from "@storybook/addon-docs";
 import { Story } from "@storybook/blocks";
-import * as DataComponentsStories from "./DataComponents.stories";
+import * as DataViewStories from "./DataView.stories";
 
-<Meta of={DataComponentsStories} />
+<Meta of={DataViewStories} />
 
-<Title of={DataComponentsStories} />
-<Subtitle of={DataComponentsStories} />
-<Description of={DataComponentsStories} />
+<Title of={DataViewStories} />
+<Subtitle of={DataViewStories} />
+<Description of={DataViewStories} />
 
-The `DataComponents` suite is a powerful and flexible set of tools for displaying and interacting with data in various formats. It includes `DataView`, `DataTable`, and `DataStack`, which can be used to create complex data representations with features like filtering, sorting, pagination, and more.
+The `DataView` suite is a powerful and flexible set of tools for displaying and interacting with data in various formats. It includes `DataView`, `DataTable`, and `DataStack`, which can be used to create complex data representations with features like filtering, sorting, pagination, and more.
 
 ## Overview
 
-The `DataComponents` suite is built on top of Material-React-Table v2 (MRT) and offers additional functionality and styling to match the Okta Odyssey design system. It's designed to be easy to set up while remaining highly customizable to meet diverse data display needs.
+The `DataView` suite is built on top of Material-React-Table v2 (MRT) and offers additional functionality and styling to match the Okta Odyssey design system. It's designed to be easy to set up while remaining highly customizable to meet diverse data display needs.
 
 Key components:
 
@@ -31,7 +31,7 @@ Key components:
 
 ## Getting Started
 
-To use the `DataComponents`, you'll need to provide at minimum a `getData` function. Here's a basic example:
+To use the `DataView`, you'll need to provide at minimum a `getData` function. Here's a basic example:
 
 ```tsx
 import { DataView, DataViewProps } from "@okta/odyssey-react-mui/labs";
@@ -322,7 +322,7 @@ This flexibility allows you to create complex, multi-layout data views while sti
 
 ### getData
 
-The `getData` function is a crucial part of the DataComponents. It's responsible for fetching and filtering data based on the current state of the component. Here's the type definition:
+The `getData` function is a crucial part of the DataView. It's responsible for fetching and filtering data based on the current state of the component. Here's the type definition:
 
 ```typescript
 type DataGetDataType = {
@@ -467,10 +467,10 @@ This will display a "Load More" button instead of page numbers, allowing users t
 
 ## Customization
 
-While the `DataComponents` come with pre-styled elements matching the Okta Odyssey design system, you can further customize the appearance using the theming capabilities of Material-UI and Emotion styled components.
+While the `DataView` come with pre-styled elements matching the Okta Odyssey design system, you can further customize the appearance using the theming capabilities of Material-UI and Emotion styled components.
 
 <Canvas>
-  <Story of={DataComponentsStories.Default} />
+  <Story of={DataViewStories.Default} />
 </Canvas>
 
-Explore the stories in this Storybook to see more examples and configurations of the `DataComponents` suite.
+Explore the stories in this Storybook to see more examples and configurations of the `DataView` suite.

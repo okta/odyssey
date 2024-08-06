@@ -63,7 +63,7 @@ type DataViewMetaProps = DataViewProps &
   };
 
 const storybookMeta: Meta<DataViewMetaProps> = {
-  title: "Labs Components/Data components",
+  title: "Labs Components/DataView",
   component: DataView,
   argTypes: {
     getData: {
