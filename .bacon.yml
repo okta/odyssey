@@ -1,6 +1,5 @@
 test_suites:
   - name: "Build"
-    abort_commit_on_failure: true
     criteria: MERGE
     queue_name: ci-queue-productionJenga-AL2023
     script_path: /root/okta/odyssey/scripts
@@ -15,7 +14,6 @@ test_suites:
     timeout: "20"
 
   - name: "Code Coverage"
-    abort_commit_on_failure: true
     criteria: OPTIONAL
     queue_name: ci-queue-prodJenga-Ubuntu20 # Playwright only works with certain distros of Linux
     script_name: code-coverage
@@ -24,7 +22,6 @@ test_suites:
     timeout: "20"
 
   - name: "Interaction Test"
-    abort_commit_on_failure: true
     criteria: MERGE
     queue_name: ci-queue-prodJenga-Ubuntu20 # Playwright only works with certain distros of Linux
     script_path: /root/okta/odyssey/scripts
@@ -33,7 +30,6 @@ test_suites:
     timeout: "20"
 
   - name: "Lint"
-    abort_commit_on_failure: true
     criteria: MERGE
     queue_name: ci-queue-productionJenga-AL2023
     script_path: /root/okta/odyssey/scripts
@@ -48,7 +44,6 @@ test_suites:
     timeout: "20"
 
   - name: "Publish Package"
-    abort_commit_on_failure: true
     criteria: MERGE
     queue_name: ci-queue-productionJenga-AL2023
     script_name: publish-packages
@@ -57,7 +52,6 @@ test_suites:
     timeout: "15"
 
   - name: "Publish Storybook"
-    abort_commit_on_failure: true
     criteria: MERGE
     queue_name: ci-queue-productionJenga-AL2023
     script_name: publish-storybook
@@ -70,11 +64,10 @@ test_suites:
     queue_name: ci-queue-productionJenga-AL2023
     script_name: semgrep
     script_path: /root/okta/odyssey/scripts
-    sort_order: "7"
+    sort_order: "10"
     timeout: "10"
 
   - name: "Test"
-    abort_commit_on_failure: true
     criteria: MERGE
     queue_name: ci-queue-productionJenga-AL2023
     script_name: unit-test
@@ -83,7 +76,6 @@ test_suites:
     timeout: "20"
 
   - name: "Typecheck"
-    abort_commit_on_failure: true
     criteria: MERGE
     queue_name: ci-queue-productionJenga-AL2023
     script_path: /root/okta/odyssey/scripts
@@ -98,7 +90,6 @@ test_suites:
     timeout: "20"
 
   - name: "Visual Regression Test"
-    abort_commit_on_failure: true
     criteria: MERGE
     queue_name: ci-queue-productionJenga-AL2023
     script_name: visual-regression-test
