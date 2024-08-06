@@ -39,6 +39,7 @@ const applitoolsConfig = {
   runInDocker: true,
   serverUrl: "https://oktaeyes.applitools.com",
   testConcurrency: 20,
+  waitBeforeCapture: 1000,
 };
 
 module.exports = applitoolsConfig;
