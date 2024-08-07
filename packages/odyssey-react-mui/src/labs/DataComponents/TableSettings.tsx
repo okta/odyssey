@@ -12,6 +12,7 @@
 
 import { Dispatch, SetStateAction, memo, useCallback, useMemo } from "react";
 import { Checkbox as MuiCheckbox } from "@mui/material";
+import { MRT_DensityState } from "material-react-table";
 import { useTranslation } from "react-i18next";
 
 import { densityValues } from "./constants";
@@ -36,25 +37,18 @@ const TableSettings = ({
   const { hasChangeableDensity, hasColumnVisibility, columns } = tableOptions;
   const { rowDensity, columnVisibility } = tableState;
 
-  const changeRowDensity = useCallback(
-    (value: (typeof densityValues)[number]) =>
-      (_event: React.MouseEvent<HTMLLIElement>) => {
-        // This is necessary to avoid linter errors, while the _event is necessary to satisfy the onClick type
-        if (process.env.NODE_ENV === "development") console.debug(_event);
-
-        setTableState((prevState) => ({
-          ...prevState,
-          rowDensity: value,
-        }));
-      },
+  const changeRowDensity = useCallback<(value: MRT_DensityState) => void>(
+    (value) => {
+      setTableState((prevState) => ({
+        ...prevState,
+        rowDensity: value,
+      }));
+    },
     [setTableState],
   );
 
-  const changeColumnVisibility = useCallback(
-    (columnId: string) => (_event: React.MouseEvent<HTMLLIElement>) => {
-      // This is necessary to avoid linter errors, while the _event is necessary to satisfy the onClick type
-      if (process.env.NODE_ENV === "development") console.debug(_event);
-
+  const changeColumnVisibility = useCallback<(columnId: string) => void>(
+    (columnId) => {
       setTableState((prevState) => ({
         ...prevState,
         columnVisibility: {
@@ -68,66 +62,72 @@ const TableSettings = ({
     [setTableState],
   );
 
-  const isColumnVisibilityChecked = useMemo(() => {
-    return columns.reduce(
-      (acc, column) => {
-        const isChecked = columnVisibility
-          ? columnVisibility[column.accessorKey!] !== false
-          : true;
-        acc[column.accessorKey!] = isChecked;
-        return acc;
-      },
-      {} as Record<string, boolean>,
-    );
-  }, [columns, columnVisibility]);
+  const visibleColumns = useMemo(
+    () =>
+      new Set(
+        columns
+          .filter((column) =>
+            columnVisibility
+              ? columnVisibility[column.accessorKey!] !== false
+              : true,
+          )
+          .map((column) => column.accessorKey!),
+      ),
+    [columns, columnVisibility],
+  );
 
-  return (
-    <>
-      {hasChangeableDensity && (
+  const memoizedDensityMenu = useMemo(
+    () =>
+      hasChangeableDensity && (
         <MenuButton
           ariaLabel={t("table.density.arialabel")}
           endIcon={<ListIcon />}
           menuAlignment="right"
           shouldCloseOnSelect={false}
         >
-          <>
-            {densityValues.map((value: (typeof densityValues)[number]) => (
-              <MenuItem
-                key={value}
-                isSelected={rowDensity === value}
-                onClick={changeRowDensity(value)}
-              >
-                {`${value.charAt(0).toUpperCase()}${value.slice(1)}`}
-              </MenuItem>
-            ))}
-          </>
+          {densityValues.map((value) => (
+            <MenuItem
+              key={value}
+              isSelected={rowDensity === value}
+              onClick={() => changeRowDensity(value)}
+            >
+              {`${value.charAt(0).toUpperCase()}${value.slice(1)}`}
+            </MenuItem>
+          ))}
         </MenuButton>
-      )}
+      ),
+    [hasChangeableDensity, t, rowDensity, changeRowDensity],
+  );
 
-      {hasColumnVisibility && (
+  const memoizedColumnVisibilityMenu = useMemo(
+    () =>
+      hasColumnVisibility && (
         <MenuButton
           ariaLabel={t("table.columnvisibility.arialabel")}
           endIcon={<ShowIcon />}
           menuAlignment="right"
           shouldCloseOnSelect={false}
         >
-          <>
-            {columns
-              .filter((column) => column.enableHiding !== false)
-              .map((column) => (
-                <MenuItem
-                  key={column.accessorKey}
-                  onClick={changeColumnVisibility(column.id as string)}
-                >
-                  <MuiCheckbox
-                    checked={isColumnVisibilityChecked[column.accessorKey!]}
-                  />
-                  {column.header}
-                </MenuItem>
-              ))}
-          </>
+          {columns
+            .filter((column) => Boolean(column.enableHiding !== false))
+            .map((column) => (
+              <MenuItem
+                key={column.accessorKey}
+                onClick={() => changeColumnVisibility(column.id!)}
+              >
+                <MuiCheckbox checked={visibleColumns.has(column.id!)} />
+                {column.header}
+              </MenuItem>
+            ))}
         </MenuButton>
-      )}
+      ),
+    [hasColumnVisibility, t, columns, changeColumnVisibility, visibleColumns],
+  );
+
+  return (
+    <>
+      {memoizedDensityMenu}
+      {memoizedColumnVisibilityMenu}
     </>
   );
 };
