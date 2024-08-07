@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.21.0](https://github.com/okta/odyssey/compare/v1.15.9...v1.21.0) (2024-08-07)
+
+### Features
+
+- add backwards compatible empty state export ([#2266](https://github.com/okta/odyssey/issues/2266)) ([0fe3203](https://github.com/okta/odyssey/commit/0fe3203629dc85f7c91c58e3ff078c9a89360407))
+- add initial search prop to DataTable ([#2265](https://github.com/okta/odyssey/issues/2265)) ([5829534](https://github.com/okta/odyssey/commit/582953472b9a4e9946a57c852b78cd890a6ab674))
+- adds a generic top nav component ([#2296](https://github.com/okta/odyssey/issues/2296)) ([6f3165f](https://github.com/okta/odyssey/commit/6f3165f9fd4a1d1743c975b72132d4ec186d09bb))
+- adds new side navigation component for unified nav design ([#2269](https://github.com/okta/odyssey/issues/2269)) ([e54a470](https://github.com/okta/odyssey/commit/e54a470aaa71eec4fd85f19ac8519425f1d64e8f))
+- EmptyState component ([#2175](https://github.com/okta/odyssey/issues/2175)) ([8c86845](https://github.com/okta/odyssey/commit/8c868450b6e1b8c63775afe1f38219507e9bacc7))
+- move Pagination to its own component ([#2166](https://github.com/okta/odyssey/issues/2166)) ([61eda40](https://github.com/okta/odyssey/commit/61eda40aaf1a5dc5477799694594ea5625715fe0))
+- Test Selectors ([#2209](https://github.com/okta/odyssey/issues/2209)) ([dfa8451](https://github.com/okta/odyssey/commit/dfa8451d0cb6ed63cbd3ac1ce740203b638348f7))
+
+### Bug Fixes
+
+- add changes back, remove required label ([cccce45](https://github.com/okta/odyssey/commit/cccce454c33588369786b2dc8cc6e39bbace4678))
+- add comment ([9af7d11](https://github.com/okta/odyssey/commit/9af7d11f2964fa1b17be673c4e84a0bbb1a47ab9))
+- add floating action button variant ([a32110d](https://github.com/okta/odyssey/commit/a32110d5aa71efd7fcbf3f1606eae613a639c721))
+- add hint text to Radio and RadioGroup ([6518de5](https://github.com/okta/odyssey/commit/6518de5b38e54ec6aa3146a310c7c02a3b7d8a4e))
+- add optional href prop to button ([f46123b](https://github.com/okta/odyssey/commit/f46123b538947aa0040b29832dafaf6df9da332e))
+- add secondary danger button variant ([170e6e0](https://github.com/okta/odyssey/commit/170e6e03476d3a7fdef9bdca9f94a8d7e0d6f00a))
+- alphabetize props ([988bd74](https://github.com/okta/odyssey/commit/988bd74e98794f2f48589e6be3e37f608f87a07a))
+- alphabetize props in imports ([ca56f0a](https://github.com/okta/odyssey/commit/ca56f0a3ad5b3a4902bf38111bc6c229ad1533f6))
+- bump version to 1.17 ([0e32aba](https://github.com/okta/odyssey/commit/0e32aba973ef00d5a872dbd408a84fb54c8a7408))
+- make return implicit in label ([e2a26df](https://github.com/okta/odyssey/commit/e2a26df5082bfb5e7573c83a9ab53b364941713b))
+- move Drawer from labs to Odyssey OKTA-700393 ([247b30a](https://github.com/okta/odyssey/commit/247b30af6e598119b78d97c971f490c48cd1dfca))
+- prevent mixing old and new button props ([7aed65b](https://github.com/okta/odyssey/commit/7aed65be175c12525c9aee5fca18af0251dd2fec))
+- re-add support for "callToAction" button usage ([0eb6ec7](https://github.com/okta/odyssey/commit/0eb6ec704ba6a0a9da12dcd6d864a6d1d1421915))
+- remove invalid pseudo element from theme overrides ([#2310](https://github.com/okta/odyssey/issues/2310)) ([fea0793](https://github.com/okta/odyssey/commit/fea0793acf0800494270a87e4e5d65129942b99e))
+- rename new variant ([28466a4](https://github.com/okta/odyssey/commit/28466a46c8a254f543f595d2abf26115eff7b66b))
+- resolve eslint error ([6be8bd0](https://github.com/okta/odyssey/commit/6be8bd0ca6f333949d80cbe59e28fac48528388b))
+- revert type change ([9d9e16b](https://github.com/okta/odyssey/commit/9d9e16b83cc3047b7dd6c5eb7e8027b2dd0898cb))
+
 ## [1.20.0](https://github.com/okta/odyssey/compare/v1.19.0...v1.20.0) (2024-07-25)
 
 ### Features
