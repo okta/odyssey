@@ -19,11 +19,7 @@ import {
   MRT_VisibilityState,
 } from "material-react-table";
 
-import {
-  availableLayouts,
-  availableStackLayouts,
-  densityValues,
-} from "./constants";
+import { availableLayouts, availableStackLayouts } from "./constants";
 import { DataFilter } from "../DataFilters";
 import {
   DataGetDataType,
@@ -87,7 +83,7 @@ export type TableProps = {
   hasColumnResizing?: boolean;
   hasColumnVisibility?: boolean;
   hasSorting?: boolean;
-  initialDensity?: (typeof densityValues)[number];
+  initialDensity?: MRT_DensityState;
   renderDetailPanel?: MRT_TableOptions<MRT_RowData>["renderDetailPanel"];
   rowActionButtons?: DataTableRowActionsProps["rowActionButtons"];
   rowActionMenuItems?: DataTableRowActionsProps["rowActionMenuItems"];
