@@ -2566,10 +2566,6 @@ export const components = ({
             borderLeft: `none !important`,
           },
 
-          ["&::after"]: {
-            background: "transparent !important",
-          },
-
           [`.${tableBodyClasses.root} &.${tableCellClasses.root}`]: {
             borderRight: `none !important`,
           },
@@ -2633,7 +2629,25 @@ export const components = ({
               flexGrow: 0,
               width: odysseyTokens.Spacing2,
             },
+          [`.ods-hide-spacer-column .${tableHeadClasses.root} &:last-of-type, .ods-hide-spacer-column .${tableBodyClasses.root} &:last-of-type`]:
+            {
+              display: "none",
+            },
 
+          [`.ods-hide-spacer-column .${tableHeadClasses.root} &:nth-last-of-type(2), .ods-hide-spacer-column .${tableBodyClasses.root} &:nth-last-of-type(2)`]:
+            {
+              borderTopRightRadius: odysseyTokens.Spacing2,
+              borderBottomRightRadius: odysseyTokens.Spacing2,
+              flexGrow: 1,
+
+              [`& .Mui-TableHeadCell-ResizeHandle-Wrapper`]: {
+                display: "none",
+              },
+            },
+
+          [`&::after`]: {
+            display: "none",
+          },
           ...(ownerState.variant === "number" && {
             textAlign: "end",
             fontFeatureSettings: '"lnum", "tnum"',
@@ -2672,6 +2686,11 @@ export const components = ({
 
           [`& .Mui-TableHeadCell-ResizeHandle-Wrapper`]: {
             marginInlineEnd: `-${odysseyTokens.Spacing3}`,
+
+            [`&:active .${dividerClasses.vertical}`]: {
+              borderColor: odysseyTokens.HueNeutral400,
+              opacity: 1,
+            },
           },
 
           [`& .Mui-TableHeadCell-Content-Wrapper`]: {
