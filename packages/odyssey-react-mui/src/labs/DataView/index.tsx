@@ -10,7 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export { DataStack, type DataStackProps } from "./DataStack";
 export { DataTable, type DataTableProps } from "./DataTable";
 export { DataView, type DataViewProps } from "./DataView";
 

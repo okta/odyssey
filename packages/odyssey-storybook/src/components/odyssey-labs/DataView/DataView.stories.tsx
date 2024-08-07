@@ -22,8 +22,6 @@ import {
   availableLayouts,
   TableProps,
   StackProps,
-  DataTable,
-  DataStack,
   UpdateFiltersOrValues,
 } from "@okta/odyssey-react-mui/labs";
 import { PauseIcon, RefreshIcon } from "@okta/odyssey-react-mui/icons";
@@ -473,112 +471,6 @@ export const Everything: StoryObj<DataViewMetaProps> = {
     hasActionButtons: true,
     hasActionMenuItems: true,
     hasRowSelection: true,
-  },
-};
-
-export const DataTableComponent: StoryObj<DataViewMetaProps> = {
-  render: function Base(args) {
-    const [data, setData] = useState<Person[]>(personData);
-    const { getData, onReorderRows, onChangeRowSelection } = useDataCallbacks(
-      data,
-      setData,
-    );
-
-    return (
-      <DataTable
-        getData={getData}
-        onReorderRows={onReorderRows}
-        onChangeRowSelection={onChangeRowSelection}
-        bulkActionMenuItems={
-          args.hasActionMenuItems ? actionMenuItems : undefined
-        }
-        hasRowReordering={args.hasRowReordering}
-        isRowReorderingDisabled={args.isRowReorderingDisabled}
-        hasRowSelection={args.hasRowSelection}
-        hasPagination={args.hasPagination}
-        currentPage={args.currentPage}
-        paginationType={args.paginationType}
-        resultsPerPage={args.resultsPerPage}
-        totalRows={args.totalRows}
-        hasFilters={args.hasFilters}
-        hasSearch={args.hasSearch}
-        hasSearchSubmitButton={args.hasSearchSubmitButton}
-        searchDelayTime={args.searchDelayTime}
-        errorMessage={args.errorMessage}
-        isLoading={args.isLoading}
-        isEmpty={args.isEmpty}
-        isNoResults={args.isNoResults}
-        emptyPlaceholder={
-          args.hasCustomEmptyPlaceholder ? customEmptyPlaceholder : undefined
-        }
-        noResultsPlaceholder={
-          args.hasCustomNoResultsPlaceholder
-            ? customNoResultsPlaceholder
-            : undefined
-        }
-        columns={personColumns}
-        hasSorting={args.hasSorting}
-        rowActionMenuItems={
-          args.hasActionMenuItems ? actionMenuItems : undefined
-        }
-        rowActionButtons={args.hasActionButtons ? actionButtons : undefined}
-        hasColumnVisibility={args.hasColumnVisibility}
-        hasColumnResizing={args.hasColumnResizing}
-        hasChangeableDensity={args.hasChangeableDensity}
-        initialDensity={args.initialDensity}
-      />
-    );
-  },
-};
-
-export const DataStackComponent: StoryObj<DataViewMetaProps> = {
-  render: function Base(args) {
-    const [data, setData] = useState<Person[]>(personData);
-    const { getData, onReorderRows, onChangeRowSelection } = useDataCallbacks(
-      data,
-      setData,
-    );
-
-    return (
-      <DataStack
-        availableLayouts={["list", "grid"]}
-        getData={getData}
-        onReorderRows={onReorderRows}
-        onChangeRowSelection={onChangeRowSelection}
-        bulkActionMenuItems={
-          args.hasActionMenuItems ? actionMenuItems : undefined
-        }
-        hasRowReordering={args.hasRowReordering}
-        isRowReorderingDisabled={args.isRowReorderingDisabled}
-        hasRowSelection={args.hasRowSelection}
-        hasPagination={args.hasPagination}
-        currentPage={args.currentPage}
-        paginationType={args.paginationType}
-        resultsPerPage={args.resultsPerPage}
-        totalRows={args.totalRows}
-        hasFilters={args.hasFilters}
-        hasSearch={args.hasSearch}
-        hasSearchSubmitButton={args.hasSearchSubmitButton}
-        searchDelayTime={args.searchDelayTime}
-        errorMessage={args.errorMessage}
-        isLoading={args.isLoading}
-        isEmpty={args.isEmpty}
-        isNoResults={args.isNoResults}
-        emptyPlaceholder={
-          args.hasCustomEmptyPlaceholder ? customEmptyPlaceholder : undefined
-        }
-        noResultsPlaceholder={
-          args.hasCustomNoResultsPlaceholder
-            ? customNoResultsPlaceholder
-            : undefined
-        }
-        cardProps={cardProps}
-        rowActionMenuItems={
-          args.hasActionMenuItems ? actionMenuItems : undefined
-        }
-        maxGridColumns={args.maxGridColumns}
-      />
-    );
   },
 };
 
