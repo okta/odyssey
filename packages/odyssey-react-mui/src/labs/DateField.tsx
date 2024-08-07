@@ -43,6 +43,7 @@ export type DateFieldProps = {
     | "errorMessage"
     | "hasInitialFocus"
     | "hint"
+    | "HintLinkComponent"
     | "id"
     | "isDisabled"
     | "isOptional"
@@ -71,6 +72,7 @@ const DateField = ({
   errorMessage,
   hasInitialFocus,
   hint,
+  HintLinkComponent,
   id: idOverride,
   inputRef,
   isDisabled = false,
@@ -253,6 +255,7 @@ const DateField = ({
       fieldType="single"
       hasVisibleLabel
       hint={hint}
+      HintLinkComponent={HintLinkComponent}
       id={idOverride}
       isDisabled={isDisabled}
       isOptional={isOptional}
