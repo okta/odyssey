@@ -28,7 +28,28 @@ import {
   getControlState,
 } from "./inputUtils";
 import { FieldComponentProps } from "./FieldComponentProps";
+import { type FeatureTestSelector } from "./test-selectors";
 import { Typography } from "./Typography";
+
+export const CheckboxTestSelectors = {
+  // feature: {
+  //   hint: {
+  //     selector: {
+  //       method: "ByText",
+  //       templateVariableNames: ["hint"],
+  //       text: "${hint}",
+  //     },
+  //   }
+  // },
+  selector: {
+    method: "ByRole",
+    options: {
+      name: "${label}",
+    },
+    role: "checkbox",
+    templateVariableNames: ["label"],
+  },
+} as const satisfies FeatureTestSelector;
 
 export const checkboxValidityValues = ["valid", "invalid", "inherit"] as const;
 
