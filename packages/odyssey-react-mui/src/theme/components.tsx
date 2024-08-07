@@ -2566,10 +2566,6 @@ export const components = ({
             borderLeft: `none !important`,
           },
 
-          ["&::after"]: {
-            background: "transparent !important",
-          },
-
           [`.${tableBodyClasses.root} &.${tableCellClasses.root}`]: {
             borderRight: `none !important`,
           },
