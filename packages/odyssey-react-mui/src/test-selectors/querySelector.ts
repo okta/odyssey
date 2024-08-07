@@ -144,7 +144,7 @@ export const querySelector = <TestSelectors extends FeatureTestSelector>({
         })
       : null;
 
-  const select =
+  const selectChild =
     "feature" in testSelectors
       ? <FeatureName extends keyof (typeof testSelectors)["feature"]>(
           featureName: FeatureName,
@@ -166,7 +166,7 @@ export const querySelector = <TestSelectors extends FeatureTestSelector>({
 
   return {
     element,
-    select,
+    selectChild,
   };
 };
 
