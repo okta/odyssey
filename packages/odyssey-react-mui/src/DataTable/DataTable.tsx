@@ -584,6 +584,16 @@ const DataTable = ({
     [columnIds],
   ) as string[];
 
+  const shouldDisplayRowActions = useMemo(
+    () =>
+      (hasRowReordering === true && onReorderRows) ||
+      rowActionButtons ||
+      rowActionMenuItems
+        ? true
+        : false,
+    [hasRowReordering, onReorderRows, rowActionButtons, rowActionMenuItems],
+  );
+
   const dataTable = useMaterialReactTable({
     columns: columns,
     data: data,
@@ -723,12 +733,7 @@ const DataTable = ({
     }),
 
     // Row actions
-    enableRowActions:
-      (hasRowReordering === true && onReorderRows) ||
-      rowActionButtons ||
-      rowActionMenuItems
-        ? true
-        : false,
+    enableRowActions: shouldDisplayRowActions,
     positionActionsColumn:
       "last" as MRT_TableOptions<DataTableRowData>["positionActionsColumn"],
     renderRowActions: ({ row }) => renderRowActions({ row }),
@@ -763,6 +768,10 @@ const DataTable = ({
     // Refs
     muiTableProps: {
       ref: tableContentRef,
+      className:
+        !shouldDisplayRowActions && hasColumnResizing
+          ? "ods-hide-spacer-column"
+          : "",
     },
 
     muiTableContainerProps: {

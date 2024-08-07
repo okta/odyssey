@@ -267,6 +267,21 @@ const TableContent = ({
     [innerWidthStyle, emptyState],
   );
 
+  const shouldDisplayRowActions = useMemo(
+    () =>
+      (hasRowReordering === true && onReorderRows) ||
+      tableOptions.rowActionButtons ||
+      tableOptions.rowActionMenuItems
+        ? true
+        : false,
+    [
+      hasRowReordering,
+      onReorderRows,
+      tableOptions.rowActionButtons,
+      tableOptions.rowActionMenuItems,
+    ],
+  );
+
   const dataTable = useMaterialReactTable({
     data: !isEmpty && !isNoResults ? data : [],
     columns,
@@ -329,6 +344,10 @@ const TableContent = ({
     },
     muiTableProps: {
       ref: tableContentRef,
+      className:
+        !shouldDisplayRowActions && tableOptions.hasColumnResizing
+          ? "ods-hide-spacer-column"
+          : "",
     },
     muiTableContainerProps: {
       ref: tableInnerContainerRef,
@@ -340,12 +359,7 @@ const TableContent = ({
     defaultColumn: {
       Cell: defaultCell,
     },
-    enableRowActions:
-      (hasRowReordering === true && onReorderRows) ||
-      tableOptions.rowActionButtons ||
-      tableOptions.rowActionMenuItems
-        ? true
-        : false,
+    enableRowActions: shouldDisplayRowActions,
     renderRowActions: ({ row }) => renderRowActions({ row }),
     enableRowOrdering: hasRowReordering && Boolean(onReorderRows),
     enableRowDragging: hasRowReordering && Boolean(onReorderRows),
