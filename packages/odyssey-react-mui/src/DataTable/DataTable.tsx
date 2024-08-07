@@ -61,6 +61,7 @@ import {
 import { useScrollIndication } from "./useScrollIndication";
 import styled from "@emotion/styled";
 import { EmptyState } from "../EmptyState";
+import { Button } from "../Button";
 import { Callout } from "../Callout";
 
 export type DataTableColumn<T extends DataTableRowData> = MRT_ColumnDef<T> & {
@@ -253,62 +254,6 @@ export type DataTableProps = {
    * The highest page number allowed to be manually input in pagination
    */
   maxPages?: number;
-};
-
-const displayColumnDefOptions = {
-  "mrt-row-actions": {
-    header: "",
-    grow: true,
-    muiTableBodyCellProps: {
-      align: "right",
-      sx: {
-        overflow: "visible",
-        width: "unset",
-      },
-      className: "ods-actions-cell",
-    },
-    muiTableHeadCellProps: {
-      align: "right",
-      sx: {
-        width: "unset",
-      },
-      className: "ods-actions-cell",
-    },
-  },
-  "mrt-row-drag": {
-    header: "",
-    muiTableBodyCellProps: {
-      sx: {
-        minWidth: 0,
-        width: "auto",
-      },
-      className: "ods-drag-handle",
-    },
-    muiTableHeadCellProps: {
-      sx: {
-        minWidth: 0,
-        width: "auto",
-      },
-      children: (
-        // Add a spacer to simulate the width of the drag handle in the column.
-        // Without this, the head cells are offset from their body cell counterparts
-        <Box sx={{ marginInline: "-0.1rem" }}>
-          <DragIndicatorIcon sx={{ marginInline: 1, opacity: 0 }} />
-        </Box>
-      ),
-    },
-  },
-  "mrt-row-select": {
-    muiTableHeadCellProps: {
-      padding: "checkbox",
-    },
-    muiTableBodyCellProps: {
-      padding: "checkbox",
-    },
-  },
-  "mrt-row-expand": {
-    header: "",
-  },
 };
 
 const ScrollableTableContainer = styled("div", {
@@ -677,14 +622,86 @@ const DataTable = ({
       },
     },
     selectAllMode: "all",
-    displayColumnDefOptions:
-      displayColumnDefOptions as MRT_TableOptions<DataTableRowData>["displayColumnDefOptions"],
+    displayColumnDefOptions: {
+      "mrt-row-actions": {
+        header: "",
+        grow: true,
+        muiTableBodyCellProps: {
+          align: "right",
+          sx: {
+            overflow: "visible",
+            width: "unset",
+          },
+          className: "ods-actions-cell",
+        },
+        muiTableHeadCellProps: {
+          align: "right",
+          sx: {
+            width: "unset",
+          },
+          className: "ods-actions-cell",
+          children: (
+            <Box sx={{ display: "flex", visibility: "hidden" }}>
+              {rowActionButtons && rowActionButtons({ id: null })}
+              {((hasRowReordering && onReorderRows) || rowActionMenuItems) && (
+                <Box>
+                  <Button
+                    endIcon={<MoreIcon />}
+                    size="small"
+                    variant="floating"
+                    ariaLabel={t("table.moreactions.arialabel")}
+                    isDisabled
+                  />
+                </Box>
+              )}
+            </Box>
+          ),
+        },
+      },
+      "mrt-row-drag": {
+        header: "",
+        muiTableBodyCellProps: {
+          sx: {
+            minWidth: 0,
+            width: "auto",
+          },
+          className: "ods-drag-handle",
+        },
+        muiTableHeadCellProps: {
+          sx: {
+            minWidth: 0,
+            width: "auto",
+          },
+          children: (
+            // Add a spacer to simulate the width of the drag handle in the column.
+            // Without this, the head cells are offset from their body cell counterparts
+            <Box sx={{ marginInline: "-0.1rem" }}>
+              <DragIndicatorIcon sx={{ marginInline: 1, opacity: 0 }} />
+            </Box>
+          ),
+        },
+      },
+      "mrt-row-select": {
+        muiTableHeadCellProps: {
+          padding: "checkbox",
+        },
+        muiTableBodyCellProps: {
+          padding: "checkbox",
+        },
+      },
+      "mrt-row-expand": {
+        header: "",
+      },
+    },
     muiTableBodyProps: () => ({
       className: rowDensityClassName,
     }),
     defaultColumn: {
       Cell: defaultCell,
     },
+    muiTableBodyCellProps: ({ column }) => ({
+      className: column.getIsResizing() ? "isResizing" : "",
+    }),
 
     // Reordering
     enableRowOrdering: hasRowReordering && Boolean(onReorderRows),

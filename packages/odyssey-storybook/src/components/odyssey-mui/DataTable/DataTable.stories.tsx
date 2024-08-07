@@ -27,6 +27,8 @@ import {
   DataTableRowSelectionState,
   MenuItem,
   densityValues,
+  DataTableColumn,
+  DataTableRowData,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import {
@@ -1008,5 +1010,67 @@ export const Truncation: StoryObj<DataTableProps> = {
     }, []);
 
     return <DataTable columns={columns} getData={getData} hasColumnResizing />;
+  },
+};
+
+export const ColumnGrowDemo: StoryObj<DataTableProps> = {
+  render: function C() {
+    const columns = useMemo(
+      (): DataTableColumn<DataTableRowData>[] => [
+        {
+          accessorKey: "name",
+          header: "Name",
+          grow: true,
+        },
+        {
+          accessorKey: "apps",
+          header: "Apps",
+        },
+        {
+          accessorKey: "users",
+          header: "Users assigned",
+        },
+      ],
+      [],
+    );
+
+    const getData = useCallback(
+      () => [
+        {
+          name: "Core engineering access",
+          apps: 5,
+          users: 10,
+        },
+        {
+          name: "Core sales access",
+          apps: 8,
+          users: 28,
+        },
+        {
+          name: "Super user access",
+          apps: 3,
+          users: 1,
+        },
+      ],
+      [],
+    );
+
+    const actionMenuItems = (selectedRows: DataTableRowSelectionState) => (
+      <>
+        <MenuItem onClick={() => console.log(selectedRows)}>Action 1</MenuItem>
+        <MenuItem onClick={() => console.log(selectedRows)}>Action 2</MenuItem>
+      </>
+    );
+
+    return (
+      <DataTable
+        hasSearch
+        hasColumnResizing
+        hasSorting
+        columns={columns}
+        getData={getData}
+        rowActionMenuItems={actionMenuItems}
+      />
+    );
   },
 };
