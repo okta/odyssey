@@ -94,7 +94,7 @@ const DataView = ({
   paginationType = "paged",
   resultsPerPage = 20,
   searchDelayTime,
-  stackOptions,
+  cardOptions,
   tableOptions,
   totalRows,
   maxPages,
@@ -357,7 +357,7 @@ const DataView = ({
         />
       )}
       {(currentLayout === "list" || currentLayout === "grid") &&
-        stackOptions && (
+        cardOptions && (
           <StackContent
             currentLayout={currentLayout}
             data={data}
@@ -375,7 +375,7 @@ const DataView = ({
             rowReorderingUtilities={rowReorderingUtilities}
             rowSelection={rowSelection}
             setRowSelection={setRowSelection}
-            stackOptions={stackOptions}
+            cardOptions={cardOptions}
             totalRows={totalRows}
           />
         )}

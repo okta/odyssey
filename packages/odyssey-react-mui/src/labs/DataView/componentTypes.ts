@@ -21,7 +21,7 @@ import {
 
 import {
   availableLayouts,
-  availableStackLayouts,
+  availableCardLayouts,
   densityValues,
 } from "./constants";
 import { DataFilter } from "../DataFilters";
@@ -38,10 +38,10 @@ import { ReactNode } from "react";
 import { StackCardProps } from "./StackCard";
 
 export type DataLayout = (typeof availableLayouts)[number];
-export type StackLayout = (typeof availableStackLayouts)[number];
+export type CardLayout = (typeof availableCardLayouts)[number];
 
 export type AvailableLayouts = DataLayout[];
-export type AvailableStackLayouts = StackLayout[];
+export type AvailableCardLayouts = CardLayout[];
 
 export type UniversalProps = {
   bulkActionMenuItems?: (
@@ -93,8 +93,8 @@ export type TableProps = {
   rowActionMenuItems?: DataTableRowActionsProps["rowActionMenuItems"];
 };
 
-export type StackProps = {
-  cardProps: (row: MRT_RowData) => StackCardProps;
+export type CardProps = {
+  itemProps: (row: MRT_RowData) => StackCardProps;
   maxGridColumns?: number;
   renderDetailPanel?: (props: { row: MRT_RowData }) => ReactNode;
   rowActionMenuItems?: DataTableRowActionsProps["rowActionMenuItems"];
@@ -103,7 +103,7 @@ export type StackProps = {
 export type ViewProps<L extends DataLayout> = {
   availableLayouts?: L[];
   initialLayout?: L;
-  stackOptions?: StackProps;
+  cardOptions?: CardProps;
   tableOptions?: TableProps;
 };
 

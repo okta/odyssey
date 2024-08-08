@@ -20,7 +20,7 @@ import {
   DataRowSelectionState,
   densityValues,
   TableProps,
-  StackProps,
+  ListProps,
 } from "@okta/odyssey-react-mui/labs";
 import { PauseIcon, RefreshIcon } from "@okta/odyssey-react-mui/icons";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -42,7 +42,7 @@ import {
 type DataTableMetaProps = DataViewProps &
   TableProps & {
     tableRowActionMenuItems: TableProps["rowActionMenuItems"];
-    stackRowActionMenuItems: StackProps["rowActionMenuItems"];
+    listRowActionMenuItems: ListProps["rowActionMenuItems"];
     hasCustomEmptyPlaceholder: boolean;
     hasCustomNoResultsPlaceholder: boolean;
     hasActionMenuItems: boolean;

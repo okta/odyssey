@@ -21,7 +21,7 @@ import {
   densityValues,
   availableLayouts,
   TableProps,
-  StackProps,
+  CardProps,
   UpdateFiltersOrValues,
 } from "@okta/odyssey-react-mui/labs";
 import { PauseIcon, RefreshIcon } from "@okta/odyssey-react-mui/icons";
@@ -51,9 +51,9 @@ import {
 
 type DataViewMetaProps = DataViewProps &
   TableProps &
-  StackProps & {
+  CardProps & {
     tableRowActionMenuItems: TableProps["rowActionMenuItems"];
-    stackRowActionMenuItems: StackProps["rowActionMenuItems"];
+    cardRowActionMenuItems: CardProps["rowActionMenuItems"];
     hasCustomEmptyPlaceholder: boolean;
     hasCustomNoResultsPlaceholder: boolean;
     hasActionMenuItems: boolean;
@@ -193,17 +193,17 @@ const storybookMeta: Meta<DataViewMetaProps> = {
       control: "boolean",
       name: "tableOptions.hasSorting",
     },
-    cardProps: {
+    itemProps: {
       control: null,
-      name: "stackOptions.cardProps",
+      name: "cardOptions.itemProps",
     },
     maxGridColumns: {
       control: "number",
-      name: "stackOptions.maxGridColumns",
+      name: "cardOptions.maxGridColumns",
     },
-    stackRowActionMenuItems: {
+    cardRowActionMenuItems: {
       control: null,
-      name: "stackOptions.rowActionMenuItems",
+      name: "cardOptions.rowActionMenuItems",
     },
     isLoading: {
       control: "boolean",
@@ -337,7 +337,7 @@ const customNoResultsPlaceholder = (
   />
 );
 
-const cardProps = (row: DataRow) => ({
+const itemProps = (row: DataRow) => ({
   overline: `${row.city}, ${row.state}`,
   title: row.name,
   description: `${row.name} is ${row.age} years old.`,
@@ -412,8 +412,8 @@ const BaseStory: StoryObj<DataViewMetaProps> = {
           hasChangeableDensity: args.hasChangeableDensity,
           initialDensity: args.initialDensity,
         }}
-        stackOptions={{
-          cardProps: cardProps,
+        cardOptions={{
+          itemProps: itemProps,
           rowActionMenuItems: args.hasActionMenuItems
             ? actionMenuItems
             : undefined,
@@ -436,21 +436,21 @@ export const TableOnly: StoryObj<DataViewMetaProps> = {
   },
 };
 
-export const StackWithMultipleLayouts: StoryObj<DataViewMetaProps> = {
+export const ListAndGrid: StoryObj<DataViewMetaProps> = {
   ...BaseStory,
   args: {
     availableLayouts: ["list", "grid"],
   },
 };
 
-export const StackListOnly: StoryObj<DataViewMetaProps> = {
+export const ListOnly: StoryObj<DataViewMetaProps> = {
   ...BaseStory,
   args: {
     availableLayouts: ["list"],
   },
 };
 
-export const StackGridOnly: StoryObj<DataViewMetaProps> = {
+export const GridOnly: StoryObj<DataViewMetaProps> = {
   ...BaseStory,
   args: {
     availableLayouts: ["grid"],
@@ -500,8 +500,8 @@ export const ExpandableRowsAndCards: StoryObj<DataViewMetaProps> = {
           columns: personColumns,
           renderDetailPanel: renderAdditionalContent,
         }}
-        stackOptions={{
-          cardProps: cardProps,
+        cardOptions={{
+          itemProps: itemProps,
           renderDetailPanel: renderAdditionalContent,
         }}
       />
@@ -539,7 +539,15 @@ export const Truncation: StoryObj<DataViewMetaProps> = {
       return data;
     }, []);
 
-    return <DataTable columns={columns} getData={getData} hasColumnResizing />;
+    return (
+      <DataView
+        tableOptions={{
+          columns: columns,
+          hasColumnResizing: true,
+        }}
+        getData={getData}
+      />
+    );
   },
 };
 
@@ -555,7 +563,13 @@ export const Empty: StoryObj<DataViewMetaProps> = {
     hasSorting: true,
     hasRowReordering: false,
   },
-  render: function C(props) {
+  render: function C({
+    hasChangeableDensity,
+    hasColumnResizing,
+    hasColumnVisibility,
+    hasSorting,
+    ...props
+  }) {
     const [data, setData] = useState<Person[]>(personData);
     const { onReorderRows, onChangeRowSelection } = useDataCallbacks(
       data,
@@ -579,9 +593,15 @@ export const Empty: StoryObj<DataViewMetaProps> = {
     );
 
     return (
-      <DataTable
+      <DataView
         {...props}
-        columns={personColumns}
+        tableOptions={{
+          columns: personColumns,
+          hasChangeableDensity: hasChangeableDensity,
+          hasColumnResizing: hasColumnResizing,
+          hasColumnVisibility: hasColumnVisibility,
+          hasSorting: hasSorting,
+        }}
         getData={() => []}
         onReorderRows={onReorderRows}
         onChangeRowSelection={onChangeRowSelection}
@@ -603,7 +623,13 @@ export const CustomFilters: StoryObj<DataViewMetaProps> = {
     hasSorting: true,
     hasRowReordering: false,
   },
-  render: function C(props) {
+  render: function C({
+    hasChangeableDensity,
+    hasColumnResizing,
+    hasColumnVisibility,
+    hasSorting,
+    ...props
+  }) {
     const [data, setData] = useState<Person[]>(personData);
     const { getData, onReorderRows } = useDataCallbacks(data, setData);
 
@@ -681,9 +707,15 @@ export const CustomFilters: StoryObj<DataViewMetaProps> = {
     );
 
     return (
-      <DataTable
+      <DataView
         {...props}
-        columns={personColumns}
+        tableOptions={{
+          columns: personColumns,
+          hasChangeableDensity: hasChangeableDensity,
+          hasColumnResizing: hasColumnResizing,
+          hasColumnVisibility: hasColumnVisibility,
+          hasSorting: hasSorting,
+        }}
         filters={filters}
         getData={getData}
         onReorderRows={onReorderRows}
@@ -704,7 +736,13 @@ export const FilterWithCustomRender: StoryObj<DataViewMetaProps> = {
     hasSorting: true,
     hasRowReordering: false,
   },
-  render: function C(props) {
+  render: function C({
+    hasChangeableDensity,
+    hasColumnResizing,
+    hasColumnVisibility,
+    hasSorting,
+    ...props
+  }) {
     const [data, setData] = useState<Person[]>(personData);
     const { getData, onReorderRows, onChangeRowSelection } = useDataCallbacks(
       data,
@@ -752,9 +790,15 @@ export const FilterWithCustomRender: StoryObj<DataViewMetaProps> = {
     }, []);
 
     return (
-      <DataTable
+      <DataView
         {...props}
-        columns={personColumns}
+        tableOptions={{
+          columns: personColumns,
+          hasChangeableDensity: hasChangeableDensity,
+          hasColumnResizing: hasColumnResizing,
+          hasColumnVisibility: hasColumnVisibility,
+          hasSorting: hasSorting,
+        }}
         filters={filters}
         getData={getData}
         onReorderRows={onReorderRows}
@@ -776,7 +820,13 @@ export const CustomFilterWithDefaultVariant: StoryObj<DataViewMetaProps> = {
     hasSorting: true,
     hasRowReordering: false,
   },
-  render: function C(props) {
+  render: function C({
+    hasChangeableDensity,
+    hasColumnResizing,
+    hasColumnVisibility,
+    hasSorting,
+    ...props
+  }) {
     const [data, setData] = useState<Person[]>(personData);
     const { getData } = useDataCallbacks(data, setData);
 
@@ -802,9 +852,15 @@ export const CustomFilterWithDefaultVariant: StoryObj<DataViewMetaProps> = {
     }, []);
 
     return (
-      <DataTable
+      <DataView
         {...props}
-        columns={personColumns}
+        tableOptions={{
+          columns: personColumns,
+          hasChangeableDensity: hasChangeableDensity,
+          hasColumnResizing: hasColumnResizing,
+          hasColumnVisibility: hasColumnVisibility,
+          hasSorting: hasSorting,
+        }}
         filters={filters}
         getData={getData}
       />
