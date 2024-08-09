@@ -58,32 +58,28 @@ export const useFilterConversion = ({
   );
 
   const dataTableFilters = useMemo(() => {
-    const providedFilters = filters || columns;
-    if (!providedFilters) {
-      return [];
-    }
+    // Filters may be manually set via the `filters` variable;
+    // If not, they may be inferred from `columns`
+    const providedFilters = filters || columns || [];
+
     return providedFilters.reduce<DataFilter[]>((accumulator, item) => {
       if (typeof item === "string") {
         const foundColumn = columns?.find(
           (column) => column.accessorKey === item,
         );
-        if (foundColumn) {
-          const filter = convertColumnToFilter(foundColumn);
-          if (filter) {
-            return accumulator.concat(filter);
-          }
-        }
-      } else if ("accessorKey" in item) {
-        // Checks if it's a column
+        const filter = foundColumn && convertColumnToFilter(foundColumn);
+        return filter ? accumulator.concat(filter) : accumulator;
+      }
+
+      if ("accessorKey" in item) {
         const filter = convertColumnToFilter(item);
-        if (filter) {
-          return accumulator.concat(filter);
-        }
-      } else if ("label" in item) {
-        // Checks if it's a DataFilter
+        return filter ? accumulator.concat(filter) : accumulator;
+      }
+
+      if ("label" in item) {
         return accumulator.concat(item);
       }
-      // If none of the conditions match, item is ignored (not mapping to undefined)
+
       return accumulator;
     }, []);
   }, [columns, filters]);
