@@ -230,7 +230,9 @@ const Pagination = ({
       const value = maxPageSize
         ? Math.min(parseInt(event.target.value), maxPageSize)
         : parseInt(event.target.value);
-      setRowsPerPage(value);
+
+      // Ensure the value can't be less than 1
+      setRowsPerPage(Math.max(1, value));
     },
     [setRowsPerPage, maxPageSize],
   );

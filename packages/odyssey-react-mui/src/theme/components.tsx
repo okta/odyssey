@@ -2566,6 +2566,10 @@ export const components = ({
             borderLeft: `none !important`,
           },
 
+          ["&::after"]: {
+            background: "transparent !important",
+          },
+
           [`.${tableBodyClasses.root} &.${tableCellClasses.root}`]: {
             borderRight: `none !important`,
           },
@@ -2645,9 +2649,6 @@ export const components = ({
               },
             },
 
-          [`&::after`]: {
-            display: "none",
-          },
           ...(ownerState.variant === "number" && {
             textAlign: "end",
             fontFeatureSettings: '"lnum", "tnum"',
@@ -2688,8 +2689,7 @@ export const components = ({
             marginInlineEnd: `-${odysseyTokens.Spacing3}`,
 
             [`&:active .${dividerClasses.vertical}`]: {
-              borderColor: odysseyTokens.HueNeutral400,
-              opacity: 1,
+              display: "none",
             },
           },
 
