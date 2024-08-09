@@ -10,9 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import React, { memo, ReactNode, useCallback, useMemo } from "react";
 import { FormGroup as MuiFormGroup } from "@mui/material";
-import { memo, ReactNode, useCallback } from "react";
-
+import { CheckboxProps } from "./Checkbox";
 import { Field } from "./Field";
 import {
   FieldComponentProps,
@@ -41,6 +41,7 @@ export type CheckboxGroupProps = {
   | "HintLinkComponent"
   | "id"
   | "isDisabled"
+  | "isReadOnly"
 > &
   Pick<HtmlProps, "ariaDescribedBy" | "testId" | "translate">;
 
@@ -61,11 +62,26 @@ const CheckboxGroup = ({
   HintLinkComponent,
   id: idOverride,
   isDisabled,
+  isReadOnly = false,
   isRequired = false,
   label,
   testId,
   translate,
 }: CheckboxGroupProps) => {
+  const memoizedChildren = useMemo(
+    () =>
+      React.Children.map(children, (child) => {
+        if (React.isValidElement<CheckboxProps>(child)) {
+          return React.cloneElement(child, {
+            isReadOnly,
+            isDisabled: isDisabled || child.props.isDisabled,
+          });
+        }
+        return child;
+      }),
+    [children, isReadOnly, isDisabled],
+  );
+
   const renderFieldComponent = useCallback(
     ({
       ariaDescribedBy,
@@ -81,10 +97,10 @@ const CheckboxGroup = ({
         id={id}
         translate={translate}
       >
-        {children}
+        {memoizedChildren}
       </MuiFormGroup>
     ),
-    [children, testId, translate],
+    [memoizedChildren, testId, translate],
   );
 
   return (

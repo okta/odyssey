@@ -51,6 +51,18 @@ const storybookMeta: Meta<CheckboxGroupStoryProps> = {
     hint: fieldComponentPropsMetaData.hint,
     HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
     isDisabled: fieldComponentPropsMetaData.isDisabled,
+    isReadOnly: {
+      control: "boolean",
+      description: "If `true`, the checkbox group is read-only",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+        defaultValue: {
+          summary: false,
+        },
+      },
+    },
     isRequired: {
       control: "boolean",
       description: "If `true`, the checkbox group is required",
@@ -91,6 +103,7 @@ const GroupTemplate: StoryObj<CheckboxGroupProps> = {
       hint={args.hint}
       HintLinkComponent={args.HintLinkComponent}
       isDisabled={args.isDisabled}
+      isReadOnly={args.isReadOnly}
       label="Systems check"
       isRequired={args.isRequired}
     >
@@ -123,6 +136,18 @@ export const Disabled: StoryObj<CheckboxGroupStoryProps> = {
   },
   args: {
     isDisabled: true,
+  },
+};
+
+export const ReadOnly: StoryObj<CheckboxGroupStoryProps> = {
+  ...GroupTemplate,
+  parameters: {
+    controls: {
+      exclude: ["isDefaultChecked", "isIndeterminate"],
+    },
+  },
+  args: {
+    isReadOnly: true,
   },
 };
 
