@@ -198,9 +198,10 @@ const DataView = ({
       getData,
       setData,
       setErrorMessage,
-      setIsLoading,
+      // Only include setIsLoading if that's not being controlled manually
+      setIsLoading: isLoadingProp ? undefined : setIsLoading,
     });
-  }, [dataQueryParams, errorMessageProp, getData]);
+  }, [dataQueryParams, errorMessageProp, getData, isLoadingProp]);
 
   // When data is updated
   useEffect(() => {
