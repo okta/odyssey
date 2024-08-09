@@ -23,7 +23,7 @@ type DataRequestType = {
   getData: UniversalProps["getData"];
   setData: Dispatch<SetStateAction<MRT_RowData[]>>;
   setErrorMessage: Dispatch<SetStateAction<UniversalProps["errorMessage"]>>;
-  setIsLoading: Dispatch<SetStateAction<boolean>>;
+  setIsLoading?: Dispatch<SetStateAction<boolean>>;
 };
 
 export const fetchData = async ({
@@ -34,7 +34,7 @@ export const fetchData = async ({
   setErrorMessage,
   setIsLoading,
 }: DataRequestType) => {
-  setIsLoading(true);
+  setIsLoading?.(true);
   setErrorMessage(errorMessageProp);
   try {
     const incomingData = await getData?.(dataQueryParams);
@@ -42,6 +42,6 @@ export const fetchData = async ({
   } catch (error) {
     setErrorMessage(typeof error === "string" ? error : t("table.error"));
   } finally {
-    setIsLoading(false);
+    setIsLoading?.(false);
   }
 };
