@@ -2400,33 +2400,58 @@ export const components = ({
         },
       },
       styleOverrides: {
-        select: {
-          height: "auto",
-          // We're subtracting a pixel so the total height, including borders, is 40px
-          paddingBlock: `calc(${odysseyTokens.Spacing3} - ${odysseyTokens.BorderWidthMain})`,
-          paddingInline: odysseyTokens.Spacing3,
-          minHeight: 0,
+        root: ({ ownerState }) => {
+          const isReadOnly = ownerState?.inputProps?.readOnly;
+          return {
+            ...(isReadOnly && {
+              "&.MuiInputBase-root": {
+                backgroundColor: odysseyTokens.HueNeutral50,
+                borderColor: odysseyTokens.HueNeutral200,
+                "&:hover": {
+                  backgroundColor: odysseyTokens.HueNeutral50,
+                },
+                "&.Mui-focused": {
+                  borderColor: odysseyTokens.PalettePrimaryMain,
+                },
+              },
+            }),
+            "& .MuiSelect-select": {
+              height: "auto",
+              paddingBlock: `calc(${odysseyTokens.Spacing3} - ${odysseyTokens.BorderWidthMain})`,
+              paddingInline: odysseyTokens.Spacing3,
+              minHeight: 0,
 
-          "&:focus": {
-            backgroundColor: "transparent",
-          },
+              "&:focus": {
+                backgroundColor: "transparent",
+              },
 
-          "& .MuiBox-root": {
-            display: "flex",
-            flexWrap: "wrap",
-            gap: odysseyTokens.Spacing1,
-            marginBlock: `-${odysseyTokens.Spacing2}`,
-            marginInline: `-${odysseyTokens.Spacing2}`,
-          },
+              "& .MuiBox-root": {
+                display: "flex",
+                flexWrap: "wrap",
+                gap: odysseyTokens.Spacing1,
+                marginBlock: `-${odysseyTokens.Spacing2}`,
+                marginInline: `-${odysseyTokens.Spacing2}`,
+              },
 
-          ["& .MuiListItemSecondaryAction-root"]: {
-            display: "none",
-          },
-        },
-        icon: {
-          right: "unset",
-          insetInlineEnd: odysseyTokens.Spacing3,
-          color: odysseyTokens.TypographyColorSubordinate,
+              ["& .MuiListItemSecondaryAction-root"]: {
+                display: "none",
+              },
+
+              ...(isReadOnly && {
+                color: odysseyTokens.HueNeutral700,
+                cursor: "default",
+                "&:focus": {
+                  backgroundColor: "transparent",
+                  borderColor: odysseyTokens.PalettePrimaryMain,
+                },
+              }),
+            },
+            "& .MuiSelect-icon": {
+              right: "unset",
+              insetInlineEnd: odysseyTokens.Spacing3,
+              color: odysseyTokens.TypographyColorSubordinate,
+            },
+          };
         },
       },
     },
