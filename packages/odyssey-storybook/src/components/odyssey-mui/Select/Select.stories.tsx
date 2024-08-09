@@ -257,13 +257,6 @@ export const Disabled: StoryObj<typeof Select> = {
     defaultValue: "",
   },
 };
-export const ReadOnly: StoryObj<typeof Select> = {
-  args: {
-    isReadOnly: true,
-    defaultValue: "Security administration",
-  },
-};
-
 export const Error: StoryObj<typeof Select> = {
   args: {
     errorMessage: "Select a topic.",
@@ -304,7 +297,6 @@ export const HintLink: StoryObj<typeof Select> = {
     HintLinkComponent: <Link href="/learn-more">Learn more</Link>,
   },
 };
-
 export const OptionsObject: StoryObj<typeof Select> = {
   args: {
     options: optionsObject,
@@ -365,7 +357,23 @@ export const MultiSelect: StoryObj<typeof Select> = {
     });
   },
 };
-
+export const ReadOnly: StoryObj<typeof Select> = {
+  args: {
+    isReadOnly: true,
+    defaultValue: "Security administration",
+  },
+};
+export const ReadOnlyMultiSelect: StoryObj<typeof Select> = {
+  args: {
+    isMultiSelect: true,
+    isReadOnly: true,
+    defaultValue: [
+      "Roles and permissions",
+      "Security administration",
+      "Deploy and manage servers",
+    ],
+  },
+};
 export const ControlledSelect: StoryObj<typeof Select> = {
   parameters: {
     docs: {

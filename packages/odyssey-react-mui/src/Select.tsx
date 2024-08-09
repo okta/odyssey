@@ -94,16 +94,20 @@ const NonInteractiveIcon = styled(CloseCircleFilledIcon, {
 
 const ChipsInnerContainer = styled(MuiBox, {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "isInteractive",
+    prop !== "odysseyDesignTokens" &&
+    prop !== "isInteractive" &&
+    prop !== "isReadOnly",
 })<{
   isInteractive?: boolean;
+  isReadOnly?: boolean;
   odysseyDesignTokens: DesignTokens;
 }>`
   display: flex;
   flex-wrap: wrap;
   gap: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing1};
   pointer-events: none;
-  opacity: ${({ isInteractive }) => (isInteractive ? 1 : 0)};
+  opacity: ${({ isInteractive, isReadOnly }) =>
+    isInteractive || isReadOnly ? 1 : 0};
   min-height: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing6};
 `;
 
@@ -328,7 +332,13 @@ const Select = <
   );
 
   const Chips = useCallback(
-    ({ isInteractive }: { isInteractive: boolean }) => {
+    ({
+      isInteractive,
+      isReadOnly,
+    }: {
+      isInteractive: boolean;
+      isReadOnly?: boolean;
+    }) => {
       const stopPropagation = (event: React.MouseEvent<SVGSVGElement>) =>
         event.stopPropagation();
 
@@ -341,6 +351,7 @@ const Select = <
         Array.isArray(internalSelectedValues) && (
           <ChipsInnerContainer
             isInteractive={isInteractive}
+            isReadOnly={isReadOnly}
             odysseyDesignTokens={odysseyDesignTokens}
           >
             {internalSelectedValues.map(
@@ -469,7 +480,7 @@ const Select = <
             <ChipsPositioningContainer
               odysseyDesignTokens={odysseyDesignTokens}
             >
-              <Chips isInteractive={!isReadOnly} />
+              <Chips isInteractive={!isReadOnly} isReadOnly={isReadOnly} />
             </ChipsPositioningContainer>
           </>
         )}
@@ -479,6 +490,7 @@ const Select = <
       Chips,
       inputValues,
       hasMultipleChoices,
+      isDisabled,
       isReadOnly,
       nameOverride,
       odysseyDesignTokens,
