@@ -194,6 +194,14 @@ export type SwitchProps = {
    * The value attribute of the Switch
    */
   value: string;
+  /**
+   * If true, renders the label within the component. If false, consumer must provide the label
+   */
+  hasInternalLabel?: boolean;
+  /**
+   * The ID of an external label element. Required if hasInternalLabel is false.
+   */
+  externalLabelId?: string;
 } & Pick<
   FieldComponentProps,
   "hint" | "HintLinkComponent" | "id" | "isFullWidth" | "isDisabled" | "name"
@@ -257,6 +265,8 @@ const Switch = ({
   onChange,
   testId,
   value,
+  hasInternalLabel = true,
+  externalLabelId,
 }: SwitchProps) => {
   const { t } = useTranslation();
   const odysseyDesignTokens = useOdysseyDesignTokens();
@@ -285,10 +295,20 @@ const Switch = ({
     }
   }, [isChecked]);
 
+  useEffect(() => {
+    if (!hasInternalLabel && !externalLabelId) {
+      console.warn(
+        "Switch: When hasInternalLabel is false, externalLabelId must be provided for accessibility.",
+      );
+    }
+  }, [hasInternalLabel, externalLabelId]);
+
   const inputId = useUniqueId(idProp);
 
   const hintId = hint ? `${inputId}-hint` : undefined;
-  const labelElementId = `${inputId}-label`;
+  const labelElementId = hasInternalLabel
+    ? `${inputId}-label`
+    : externalLabelId;
 
   const handleOnChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
     (event) => {
@@ -313,15 +333,17 @@ const Switch = ({
         isFullWidth={isFullWidth}
         odysseyDesignTokens={odysseyDesignTokens}
       >
-        <MemoizedSwitchLabel
-          hint={hint}
-          hintId={hintId}
-          HintLinkComponent={HintLinkComponent}
-          inputId={inputId}
-          isDisabled={isDisabled}
-          isFullWidth={isFullWidth}
-          label={label}
-        />
+        {hasInternalLabel && (
+          <MemoizedSwitchLabel
+            hint={hint}
+            hintId={hintId}
+            HintLinkComponent={HintLinkComponent}
+            inputId={inputId}
+            isDisabled={isDisabled}
+            isFullWidth={isFullWidth}
+            label={label}
+          />
+        )}
         <SwitchContainer>
           <HiddenCheckbox
             {...inputValues}

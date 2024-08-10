@@ -12,9 +12,11 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import {
+  Box,
   InputAdornment,
   Link,
   TextField,
+  FieldLabel,
   textFieldTypeValues,
 } from "@okta/odyssey-react-mui";
 
@@ -62,12 +64,35 @@ const storybookMeta: Meta<typeof TextField> = {
     },
     errorMessage: fieldComponentPropsMetaData.errorMessage,
     errorMessageList: fieldComponentPropsMetaData.errorMessageList,
+    externalLabelId: {
+      control: "text",
+      description:
+        "The ID of the consumer-provided FieldLabel component. Required only if hasInternalLabel is false",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     hasInitialFocus: {
       control: "boolean",
       description: "If `true`, the component will receive focus automatically",
       table: {
         type: {
           summary: "boolean",
+        },
+      },
+    },
+    hasInternalLabel: {
+      control: "boolean",
+      description:
+        "If true, renders the label within the component. If false, externalLabelId is required and consumer must provide their own `FieldLabel`",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+        defaultValue: {
+          summary: true,
         },
       },
     },
@@ -178,6 +203,7 @@ const storybookMeta: Meta<typeof TextField> = {
   args: {
     label: "Destination",
     defaultValue: undefined,
+    hasInternalLabel: true,
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
@@ -317,7 +343,7 @@ export const Multiline: StoryObj<typeof TextField> = {
     isMultiline: true,
     defaultValue: "",
   },
-  storyName: "Multiline (Textarea)",
+  name: "Multiline (Textarea)",
 };
 
 export const Placeholder: StoryObj<typeof TextField> = {
@@ -343,7 +369,41 @@ export const Tel: StoryObj<typeof TextField> = {
     defaultValue: "",
   },
 };
-
+export const ExternalLabel: StoryObj<typeof TextField> = {
+  parameters: {
+    docs: {
+      description: {
+        story: "Demonstrates using an independent label with the TextField.",
+      },
+    },
+  },
+  render: function ExternalLabelStory(args) {
+    const labelId = "external-label-id";
+    return (
+      <Box sx={{ display: "flex", alignItems: "center" }}>
+        <Box sx={{ marginRight: "8px" }}>
+          <FieldLabel
+            id={labelId}
+            inputId={args.id || "textfield-with-external-label"}
+            hasVisibleLabel={true}
+            isOptional={args.isOptional ?? false}
+            text={args.label}
+          />
+        </Box>
+        <TextField
+          {...args}
+          id={args.id || "textfield-with-external-label"}
+          hasInternalLabel={false}
+          externalLabelId={labelId}
+        />
+      </Box>
+    );
+  },
+  args: {
+    defaultValue: "",
+    placeholder: "Enter destination",
+  },
+};
 export const ControlledTextField: StoryObj<typeof TextField> = {
   parameters: {
     docs: {

@@ -77,6 +77,8 @@ export * from "./Drawer";
 export * from "./EmptyState";
 export * from "./Fieldset";
 export * from "./FieldComponentProps";
+export * from "./FieldHint";
+export * from "./FieldLabel";
 export * from "./Form";
 export * from "./HintLink";
 export * from "./IconWithTooltip";

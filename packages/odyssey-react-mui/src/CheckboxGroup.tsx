@@ -11,7 +11,7 @@
  */
 
 import { FormGroup as MuiFormGroup } from "@mui/material";
-import { memo, ReactNode, useCallback } from "react";
+import { memo, ReactNode, useCallback, useEffect, useMemo } from "react";
 
 import { Field } from "./Field";
 import {
@@ -25,6 +25,14 @@ export type CheckboxGroupProps = {
    * A single Checkbox element or an array of Checkbox elements
    */
   children: ReactNode;
+  /**
+   * The ID of an external label element. Required if hasInternalLabel is false.
+   */
+  externalLabelId?: string;
+  /**
+   * If true, renders the label within the component. If false, consumer must provide the label
+   */
+  hasInternalLabel?: boolean;
   /**
    * If `true`, the CheckboxGroup is required
    */
@@ -57,6 +65,8 @@ const CheckboxGroup = ({
   children,
   errorMessage,
   errorMessageList,
+  externalLabelId,
+  hasInternalLabel = true,
   hint,
   HintLinkComponent,
   id: idOverride,
@@ -66,6 +76,25 @@ const CheckboxGroup = ({
   testId,
   translate,
 }: CheckboxGroupProps) => {
+  useEffect(() => {
+    if (!hasInternalLabel && !externalLabelId) {
+      console.warn(
+        "CheckboxGroup: When hasInternalLabel is false, externalLabelId must be provided for accessibility.",
+      );
+    }
+    if (hasInternalLabel && !label) {
+      console.warn(
+        "CheckboxGroup: When hasInternalLabel is true, label must be provided.",
+      );
+    }
+  }, [hasInternalLabel, externalLabelId, label]);
+
+  // Create a dummy label for when using an external label
+  const dummyLabel = useMemo(
+    () => (hasInternalLabel ? label : ""),
+    [hasInternalLabel, label],
+  );
+
   const renderFieldComponent = useCallback(
     ({
       ariaDescribedBy,
@@ -76,7 +105,7 @@ const CheckboxGroup = ({
       <MuiFormGroup
         aria-describedby={ariaDescribedBy}
         aria-errormessage={errorMessageElementId}
-        aria-labelledby={labelElementId}
+        aria-labelledby={hasInternalLabel ? labelElementId : externalLabelId}
         data-se={testId}
         id={id}
         translate={translate}
@@ -84,7 +113,7 @@ const CheckboxGroup = ({
         {children}
       </MuiFormGroup>
     ),
-    [children, testId, translate],
+    [children, testId, translate, hasInternalLabel, externalLabelId],
   );
 
   return (
@@ -93,13 +122,13 @@ const CheckboxGroup = ({
       errorMessage={errorMessage}
       errorMessageList={errorMessageList}
       fieldType="group"
-      hasVisibleLabel={true}
+      hasVisibleLabel={hasInternalLabel}
       hint={hint}
       HintLinkComponent={HintLinkComponent}
       id={idOverride}
       isDisabled={isDisabled}
       isOptional={!isRequired}
-      label={label}
+      label={dummyLabel}
       renderFieldComponent={renderFieldComponent}
     />
   );

@@ -20,6 +20,7 @@ import {
   useCallback,
   useImperativeHandle,
   useRef,
+  useEffect,
 } from "react";
 import { InputAdornment, InputBase } from "@mui/material";
 
@@ -105,9 +106,17 @@ export type TextFieldProps = {
    */
   endAdornment?: string | ReactElement;
   /**
+   * The ID of an external FieldLabel element. Required if hasInternalLabel is false.
+   */
+  externalLabelId?: string;
+  /**
    * If `true`, the component will receive focus automatically.
    */
   hasInitialFocus?: boolean;
+  /**
+   * If true, renders the label within the component. If false, externalLabelId is required and consumer must provide their own `FieldLabel`
+   */
+  hasInternalLabel?: boolean;
   /**
    * The ref forwarded to the TextField
    */
@@ -192,9 +201,24 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       translate,
       type = "text",
       value: value,
+      hasInternalLabel = true,
+      externalLabelId,
     },
     ref,
   ) => {
+    useEffect(() => {
+      if (!hasInternalLabel && !externalLabelId) {
+        console.warn(
+          "TextField: When hasInternalLabel is false, externalLabelId must be provided for accessibility.",
+        );
+      }
+      if (hasInternalLabel && !label) {
+        console.warn(
+          "TextField: When hasInternalLabel is true, label must be provided.",
+        );
+      }
+    }, [hasInternalLabel, externalLabelId, label]);
+
     const controlledStateRef = useRef(
       getControlState({
         controlledValue: value,
@@ -252,7 +276,9 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           id={id}
           inputProps={{
             "aria-errormessage": errorMessageElementId,
-            "aria-labelledby": labelElementId,
+            "aria-labelledby": hasInternalLabel
+              ? labelElementId
+              : externalLabelId,
             "data-se": testId,
             inputMode,
           }}
@@ -296,6 +322,8 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         testId,
         translate,
         type,
+        hasInternalLabel,
+        externalLabelId,
       ],
     );
 
@@ -305,14 +333,14 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         errorMessage={errorMessage}
         errorMessageList={errorMessageList}
         fieldType="single"
-        hasVisibleLabel
+        hasVisibleLabel={hasInternalLabel}
         hint={hint}
         HintLinkComponent={HintLinkComponent}
         id={idOverride}
         isDisabled={isDisabled}
         isFullWidth={isFullWidth}
         isOptional={isOptional}
-        label={label}
+        label={label} // Always pass the label
         renderFieldComponent={renderFieldComponent}
       />
     );

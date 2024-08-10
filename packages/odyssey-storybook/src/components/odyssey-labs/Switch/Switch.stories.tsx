@@ -11,7 +11,14 @@
  */
 
 import { useCallback, useState } from "react";
-import { Switch, SwitchProps, HintLink } from "@okta/odyssey-react-mui";
+import {
+  Box,
+  Switch,
+  SwitchProps,
+  HintLink,
+  FieldLabel,
+  FieldHint,
+} from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 import { userEvent, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
@@ -24,6 +31,16 @@ const storybookMeta: Meta<SwitchProps> = {
   title: "Labs Components/Switch",
   component: Switch,
   argTypes: {
+    externalLabelId: {
+      control: "text",
+      description:
+        "The ID of the consumer-provided FieldLabel component. Required only if hasInternalLabel is false",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     isChecked: {
       control: "boolean",
       description: "If `true`, the Switch button is checked",
@@ -39,6 +56,19 @@ const storybookMeta: Meta<SwitchProps> = {
       table: {
         type: {
           summary: "boolean",
+        },
+      },
+    },
+    hasInternalLabel: {
+      control: "boolean",
+      description:
+        "If true, renders the label within the component. If false, externalLabelId is required and consumer must provide their own `FieldLabel`",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+        defaultValue: {
+          summary: true,
         },
       },
     },
@@ -79,6 +109,7 @@ const storybookMeta: Meta<SwitchProps> = {
     label: "Switch label",
     value: "Switch value",
     HintLinkComponent: <HintLink href="">Some hint link</HintLink>,
+    hasInternalLabel: true,
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
@@ -111,6 +142,56 @@ export const CheckedDisabled: StoryObj<typeof Switch> = {
   args: {
     isDisabled: true,
     isDefaultChecked: true,
+  },
+};
+
+export const ExternalLabel: StoryObj<SwitchProps> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Demonstrates using an independent label and hint with the Switch component.",
+      },
+    },
+  },
+  render: function ExternalLabelStory() {
+    const labelId = "external-label-id";
+    const hintId = "external-hint-id";
+    return (
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "flex-start",
+            marginBottom: "8px",
+          }}
+        >
+          <Box sx={{ marginRight: "16px", maxWidth: "400px" }}>
+            <FieldLabel
+              id={labelId}
+              inputId="switch-with-external-label"
+              hasVisibleLabel={true}
+              isOptional={false}
+              text="Bulk assign new users"
+            />
+            <FieldHint
+              id={hintId}
+              text="You can bulk assign a maximum of 10000 users to a group at a time."
+            />
+          </Box>
+          <Box sx={{ marginTop: "8px" }}>
+            <Switch
+              id="switch-with-external-label"
+              hasInternalLabel={false}
+              externalLabelId={labelId}
+              label="Enable Feature"
+              value="enable-feature"
+              hint={undefined}
+            />
+          </Box>
+        </Box>
+      </Box>
+    );
   },
 };
 

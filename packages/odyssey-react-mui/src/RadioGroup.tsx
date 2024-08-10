@@ -14,7 +14,14 @@ import {
   RadioGroup as MuiRadioGroup,
   type RadioGroupProps as MuiRadioGroupProps,
 } from "@mui/material";
-import { memo, ReactNode, useCallback, useRef } from "react";
+import {
+  memo,
+  ReactNode,
+  useCallback,
+  useRef,
+  useEffect,
+  useMemo,
+} from "react";
 
 import { RadioProps } from "./Radio";
 import { Field } from "./Field";
@@ -34,6 +41,14 @@ export type RadioGroupProps = {
    * The text value of the Radio that should be selected by default
    */
   defaultValue?: string;
+  /**
+   * The ID of an external label element. Required if hasInternalLabel is false.
+   */
+  externalLabelId?: string;
+  /**
+   * If true, renders the label within the component. If false, consumer must provide the label
+   */
+  hasInternalLabel?: boolean;
   /**
    * The text label for the RadioGroup
    */
@@ -69,6 +84,8 @@ const RadioGroup = ({
   defaultValue,
   errorMessage,
   errorMessageList,
+  externalLabelId,
+  hasInternalLabel = true,
   hint,
   HintLinkComponent,
   id: idOverride,
@@ -92,12 +109,32 @@ const RadioGroup = ({
     controlState: controlledStateRef.current,
   });
 
+  useEffect(() => {
+    if (!hasInternalLabel && !externalLabelId) {
+      console.warn(
+        "RadioGroup: When hasInternalLabel is false, externalLabelId must be provided for accessibility.",
+      );
+    }
+    if (hasInternalLabel && !label) {
+      console.warn(
+        "RadioGroup: When hasInternalLabel is true, label must be provided.",
+      );
+    }
+  }, [hasInternalLabel, externalLabelId, label]);
+
+  // Create a dummy label for when using an external label
+  const dummyLabel = useMemo(
+    () => (hasInternalLabel ? label : ""),
+    [hasInternalLabel, label],
+  );
+
   const onChange = useCallback<NonNullable<MuiRadioGroupProps["onChange"]>>(
     (event, value) => {
       onChangeProp?.(event, value);
     },
     [onChangeProp],
   );
+
   const renderFieldComponent = useCallback(
     ({
       ariaDescribedBy,
@@ -109,7 +146,7 @@ const RadioGroup = ({
         {...inputValues}
         aria-describedby={ariaDescribedBy}
         aria-errormessage={errorMessageElementId}
-        aria-labelledby={labelElementId}
+        aria-labelledby={hasInternalLabel ? labelElementId : externalLabelId}
         data-se={testId}
         id={id}
         name={nameOverride ?? id}
@@ -119,7 +156,16 @@ const RadioGroup = ({
         {children}
       </MuiRadioGroup>
     ),
-    [children, inputValues, nameOverride, onChange, testId, translate],
+    [
+      children,
+      inputValues,
+      nameOverride,
+      onChange,
+      testId,
+      translate,
+      hasInternalLabel,
+      externalLabelId,
+    ],
   );
 
   return (
@@ -128,12 +174,12 @@ const RadioGroup = ({
       errorMessage={errorMessage}
       errorMessageList={errorMessageList}
       fieldType="group"
-      hasVisibleLabel={false}
+      hasVisibleLabel={hasInternalLabel}
       hint={hint}
       HintLinkComponent={HintLinkComponent}
       id={idOverride}
       isDisabled={isDisabled}
-      label={label}
+      label={dummyLabel}
       renderFieldComponent={renderFieldComponent}
     />
   );

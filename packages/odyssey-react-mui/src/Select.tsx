@@ -118,6 +118,10 @@ export type SelectProps<
   HasMultipleChoices extends boolean,
 > = {
   /**
+   * The ID of an external FieldLabel element. Required if hasInternalLabel is false.
+   */
+  externalLabelId?: string;
+  /**
    * The default value. Use when the component is not controlled.
    */
   defaultValue?: MuiSelectProps<Value>["defaultValue"];
@@ -125,6 +129,10 @@ export type SelectProps<
    * If `true`, the Select allows multiple selections
    */
   hasMultipleChoices?: HasMultipleChoices;
+  /**
+   * If true, renders the label within the component. If false, externalLabelId is required and consumer must provide their own `FieldLabel`
+   */
+  hasInternalLabel?: boolean;
   /**
    * The ref forwarded to the Select
    */
@@ -202,6 +210,8 @@ const Select = <
   errorMessage,
   errorMessageList,
   hasMultipleChoices: hasMultipleChoicesProp,
+  hasInternalLabel = true,
+  externalLabelId,
   hint,
   HintLinkComponent,
   id: idOverride,
@@ -251,6 +261,18 @@ const Select = <
     },
     [],
   );
+  useEffect(() => {
+    if (!hasInternalLabel && !externalLabelId) {
+      console.warn(
+        "Select: When hasInternalLabel is false, externalLabelId must be provided for accessibility.",
+      );
+    }
+    if (hasInternalLabel && !label) {
+      console.warn(
+        "Select: When hasInternalLabel is true, label must be provided.",
+      );
+    }
+  }, [hasInternalLabel, externalLabelId, label]);
 
   useEffect(() => {
     if (controlledStateRef.current === CONTROLLED) {
@@ -438,7 +460,7 @@ const Select = <
           id={id}
           inputProps={{ "data-se": testId }}
           inputRef={localInputRef}
-          labelId={labelElementId}
+          labelId={hasInternalLabel ? labelElementId : externalLabelId}
           multiple={hasMultipleChoices}
           name={nameOverride ?? id}
           onBlur={onBlur}
@@ -473,7 +495,13 @@ const Select = <
       renderValue,
       testId,
       translate,
+      hasInternalLabel,
+      externalLabelId,
     ],
+  );
+  const placeholderLabel = useMemo(
+    () => (hasInternalLabel ? label : ""),
+    [hasInternalLabel, label],
   );
 
   return (
@@ -482,14 +510,14 @@ const Select = <
       errorMessage={errorMessage}
       errorMessageList={errorMessageList}
       fieldType="single"
-      hasVisibleLabel
+      hasVisibleLabel={hasInternalLabel}
       hint={hint}
       HintLinkComponent={HintLinkComponent}
       id={idOverride}
       isDisabled={isDisabled}
       isFullWidth={isFullWidth}
       isOptional={isOptional}
-      label={label}
+      label={placeholderLabel}
       renderFieldComponent={renderFieldComponent}
     />
   );

@@ -11,7 +11,14 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
-import { Select, SelectProps, Link } from "@okta/odyssey-react-mui";
+import {
+  Box,
+  Select,
+  SelectProps,
+  Link,
+  FieldHint,
+  FieldLabel,
+} from "@okta/odyssey-react-mui";
 import { userEvent, waitFor, screen } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import { useCallback, useState } from "react";
@@ -125,6 +132,29 @@ const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
     },
     errorMessage: fieldComponentPropsMetaData.errorMessage,
     errorMessageList: fieldComponentPropsMetaData.errorMessageList,
+    externalLabelId: {
+      control: "text",
+      description:
+        "The ID of the consumer-provided FieldLabel component. Required only if hasInternalLabel is false",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    hasInternalLabel: {
+      control: "boolean",
+      description:
+        "If true, renders the label within the component. If false, externalLabelId is required and consumer must provide their own `FieldLabel`",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+        defaultValue: {
+          summary: true,
+        },
+      },
+    },
     hasMultipleChoices: {
       control: "boolean",
       description: "If `true`, the select component allows multiple selections",
@@ -214,6 +244,7 @@ const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
     hint: "Select your destination in the Sol system.",
     label: "Destination",
     options: optionsArray,
+    hasInternalLabel: true,
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
@@ -356,7 +387,54 @@ export const MultiSelect: StoryObj<typeof Select> = {
     });
   },
 };
-
+export const ExternalLabel: StoryObj<typeof Select> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Demonstrates using an independent label and hint with the Select component.",
+      },
+    },
+  },
+  render: function ExternalLabelStory(args) {
+    const labelId = "external-label-id";
+    const hintId = "external-hint-id";
+    return (
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <Box
+          sx={{ display: "flex", alignItems: "center", marginBottom: "8px" }}
+        >
+          <Box sx={{ marginRight: "24px" }}>
+            <FieldLabel
+              id={labelId}
+              inputId={args.id || "select-with-external-label"}
+              hasVisibleLabel={true}
+              isOptional={args.isOptional ?? false}
+              text={args.label}
+            />
+            <FieldHint
+              id={hintId}
+              text={args.hint || "Select your destination in the Sol system."}
+            />
+          </Box>
+          <Select
+            {...args}
+            id={args.id || "select-with-external-label"}
+            hasInternalLabel={false}
+            externalLabelId={labelId}
+            hint={undefined}
+            ariaDescribedBy={hintId}
+          />
+        </Box>
+      </Box>
+    );
+  },
+  args: {
+    options: optionsArray,
+    defaultValue: "",
+    hint: "Select your destination in the Sol system.",
+  },
+};
 export const ControlledSelect: StoryObj<typeof Select> = {
   parameters: {
     docs: {

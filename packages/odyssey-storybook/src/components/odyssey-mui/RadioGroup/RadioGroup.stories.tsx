@@ -11,7 +11,14 @@
  */
 
 import { ChangeEvent, useCallback, useState } from "react";
-import { Radio, RadioGroup, Link } from "@okta/odyssey-react-mui";
+import {
+  Box,
+  Radio,
+  RadioGroup,
+  Link,
+  FieldLabel,
+  FieldHint,
+} from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 import { expect } from "@storybook/jest";
 
@@ -50,6 +57,29 @@ const storybookMeta: Meta<typeof RadioGroup> = {
     },
     errorMessage: fieldComponentPropsMetaData.errorMessage,
     errorMessageList: fieldComponentPropsMetaData.errorMessageList,
+    externalLabelId: {
+      control: "text",
+      description:
+        "The ID of the consumer-provided FieldLabel component. Required only if hasInternalLabel is false",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    hasInternalLabel: {
+      control: "boolean",
+      description:
+        "If true, renders the label within the component. If false, externalLabelId is required and consumer must provide their own `FieldLabel`",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+        defaultValue: {
+          summary: true,
+        },
+      },
+    },
     hint: fieldComponentPropsMetaData.hint,
     HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
     id: fieldComponentPropsMetaData.id,
@@ -89,6 +119,7 @@ const storybookMeta: Meta<typeof RadioGroup> = {
   args: {
     id: "storybook-radio",
     label: "Speed",
+    hasInternalLabel: true,
   },
   decorators: [MuiThemeDecorator],
 };
@@ -181,6 +212,64 @@ export const UncontrolledRadioGroup: StoryObj<typeof RadioGroup> = {
       await expect(radio).toBeChecked();
       await axeRun("select controlled radio button");
     });
+  },
+};
+export const ExternalLabel: StoryObj<typeof RadioGroup> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Demonstrates using an independent label and hint with the RadioGroup component.",
+      },
+    },
+  },
+  render: function ExternalLabelStory(args) {
+    const labelId = "external-label-id";
+    const hintId = "external-hint-id";
+    return (
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "flex-start",
+            marginBottom: "8px",
+          }}
+        >
+          <Box sx={{ marginRight: "16px", maxWidth: "400px" }}>
+            <FieldLabel
+              id={labelId}
+              inputId={args.id || "radio-group-with-external-label"}
+              hasVisibleLabel={true}
+              isOptional={false}
+              text={"Travel Speed"}
+            />
+            <FieldHint
+              id={hintId}
+              text={
+                "Select the speed at which you wish to travel through space. Each option has different implications for time dilation and energy consumption."
+              }
+            />
+          </Box>
+          <Box sx={{ marginTop: "8px" }}>
+            <RadioGroup
+              {...args}
+              id={args.id || "radio-group-with-external-label"}
+              hasInternalLabel={false}
+              externalLabelId={labelId}
+              hint={undefined}
+              ariaDescribedBy={hintId}
+            >
+              <Radio label="Light Speed" value="Light Speed" />
+              <Radio label="Warp Speed" value="Warp Speed" />
+              <Radio label="Ludicrous Speed" value="Ludicrous Speed" />
+            </RadioGroup>
+          </Box>
+        </Box>
+      </Box>
+    );
+  },
+  args: {
+    defaultValue: "",
   },
 };
 

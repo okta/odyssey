@@ -11,10 +11,13 @@
  */
 
 import {
+  Box,
   Checkbox,
   CheckboxGroup,
   CheckboxGroupProps,
   Link,
+  FieldLabel,
+  FieldHint,
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 
@@ -48,6 +51,29 @@ const storybookMeta: Meta<CheckboxGroupStoryProps> = {
     },
     errorMessage: fieldComponentPropsMetaData.errorMessage,
     errorMessageList: fieldComponentPropsMetaData.errorMessageList,
+    externalLabelId: {
+      control: "text",
+      description:
+        "The ID of the consumer-provided FieldLabel component. Required only if hasInternalLabel is false",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    hasInternalLabel: {
+      control: "boolean",
+      description:
+        "If true, renders the label within the component. If false, externalLabelId is required and consumer must provide their own `FieldLabel`",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+        defaultValue: {
+          summary: true,
+        },
+      },
+    },
     hint: fieldComponentPropsMetaData.hint,
     HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
     isDisabled: fieldComponentPropsMetaData.isDisabled,
@@ -170,7 +196,76 @@ export const HintLink: StoryObj<CheckboxGroupStoryProps> = {
     HintLinkComponent: <Link href="/learn-more">Learn more</Link>,
   },
 };
-
+export const ExternalLabel: StoryObj<CheckboxGroupStoryProps> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Demonstrates using an independent label and hint with the CheckboxGroup component.",
+      },
+    },
+  },
+  render: function ExternalLabelStory(args) {
+    const labelId = "external-label-id";
+    const hintId = "external-hint-id";
+    return (
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "flex-start",
+            marginBottom: "8px",
+          }}
+        >
+          <Box sx={{ marginRight: "16px", maxWidth: "400px" }}>
+            <FieldLabel
+              id={labelId}
+              inputId={args.id || "checkbox-group-with-external-label"}
+              hasVisibleLabel={true}
+              isOptional={false}
+              text={"End-user experience"}
+            />
+            <FieldHint
+              id={hintId}
+              text={
+                "When IdP routing rules are configured to select a provider based on the end user's domain or attributes, the end user sees a modified sign-in screen that accepts the email and short names."
+              }
+            />
+          </Box>
+          <Box sx={{ marginTop: "8px" }}>
+            <CheckboxGroup
+              {...args}
+              id={args.id || "checkbox-group-with-external-label"}
+              hasInternalLabel={false}
+              externalLabelId={labelId}
+              hint={undefined}
+              ariaDescribedBy={hintId}
+            >
+              <Checkbox
+                label="On-network vs. off-network"
+                name="on-network"
+                value="on-network"
+              />
+              <Checkbox
+                label="Hub-and-spoke organizations"
+                name="hub-spoke"
+                value="hub-spoke"
+              />
+              <Checkbox
+                label="Desktop SSO"
+                name="desktop-sso"
+                value="desktop-sso"
+              />
+            </CheckboxGroup>
+          </Box>
+        </Box>
+      </Box>
+    );
+  },
+  args: {
+    hint: "Select 1 or more systems to check before initiating warp.",
+  },
+};
 export const Required: StoryObj<CheckboxGroupStoryProps> = {
   ...GroupTemplate,
   args: {
