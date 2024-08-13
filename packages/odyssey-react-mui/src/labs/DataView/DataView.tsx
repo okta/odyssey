@@ -38,7 +38,7 @@ import { LayoutSwitcher } from "./LayoutSwitcher";
 import { TableSettings } from "./TableSettings";
 import { Pagination, usePagination } from "../../Pagination";
 import { TableContent } from "./TableContent";
-import { StackContent } from "./StackContent";
+import { CardListContent } from "./CardListContent";
 import { useFilterConversion } from "./useFilterConversion";
 import { useRowReordering } from "../../DataTable/useRowReordering";
 import {
@@ -358,7 +358,7 @@ const DataView = ({
       )}
       {(currentLayout === "list" || currentLayout === "grid") &&
         cardOptions && (
-          <StackContent
+          <CardListContent
             currentLayout={currentLayout}
             data={data}
             draggingRow={draggingRow}

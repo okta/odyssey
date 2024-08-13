@@ -27,12 +27,12 @@ import {
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
 import { RowActions } from "./RowActions";
-import { StackCard } from "./StackCard";
-import { StackLayout, CardProps, UniversalProps } from "./componentTypes";
+import { DataCard } from "./DataCard";
+import { CardLayout, CardProps, UniversalProps } from "./componentTypes";
 import { DetailPanel } from "./DetailPanel";
 
-export type StackContentProps = {
-  currentLayout: StackLayout;
+export type CardListContentProps = {
+  currentLayout: CardLayout;
   data: MRT_RowData[];
   draggingRow?: MRT_Row<MRT_RowData> | null;
   emptyState: ReactNode;
@@ -95,7 +95,7 @@ const StackContainer = styled("div", {
     prop !== "maxGridColumns",
 })<{
   odysseyDesignTokens: DesignTokens;
-  currentLayout: StackLayout;
+  currentLayout: CardLayout;
   maxGridColumns: number;
 }>(({ odysseyDesignTokens, currentLayout, maxGridColumns }) => ({
   display: currentLayout === "list" ? "flex" : "grid",
@@ -135,7 +135,7 @@ const CheckboxContainer = styled("div", {
   marginBlockStart: `-${odysseyDesignTokens.Spacing1}`,
 }));
 
-const StackContent = ({
+const CardListContent = ({
   currentLayout,
   data,
   emptyState,
@@ -152,7 +152,7 @@ const StackContent = ({
   setRowSelection,
   cardOptions,
   totalRows,
-}: StackContentProps) => {
+}: CardListContentProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const handleRowSelectionChange = useCallback(
@@ -193,7 +193,7 @@ const StackContent = ({
                   index + (pagination.pageIndex - 1) * pagination.pageSize;
 
                 return (
-                  <StackCard
+                  <DataCard
                     Accessory={
                       hasRowSelection && (
                         // Negative margin to counteract the checkbox's inbuilt spacing
@@ -248,7 +248,7 @@ const StackContent = ({
   );
 };
 
-const MemoizedStackContent = memo(StackContent);
-MemoizedStackContent.displayName = "StackContent";
+const MemoizedCardListContent = memo(CardListContent);
+MemoizedCardListContent.displayName = "CardListContent";
 
-export { MemoizedStackContent as StackContent };
+export { MemoizedCardListContent as CardListContent };

@@ -35,7 +35,7 @@ import { DataTableRowActionsProps } from "../../DataTable/DataTableRowActions";
 import { MenuButtonProps } from "../..";
 import { paginationTypeValues } from "../DataTablePagination";
 import { ReactNode } from "react";
-import { StackCardProps } from "./StackCard";
+import { DataCardProps } from "./DataCard";
 
 export type DataLayout = (typeof availableLayouts)[number];
 export type CardLayout = (typeof availableCardLayouts)[number];
@@ -94,7 +94,7 @@ export type TableProps = {
 };
 
 export type CardProps = {
-  itemProps: (row: MRT_RowData) => StackCardProps;
+  itemProps: (row: MRT_RowData) => DataCardProps;
   maxGridColumns?: number;
   renderDetailPanel?: (props: { row: MRT_RowData }) => ReactNode;
   rowActionMenuItems?: DataTableRowActionsProps["rowActionMenuItems"];
