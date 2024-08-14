@@ -28,7 +28,7 @@ import {
 } from "../../OdysseyDesignTokensContext";
 import { RowActions } from "./RowActions";
 import { DataCard } from "./DataCard";
-import { CardLayout, CardProps, UniversalProps } from "./componentTypes";
+import { CardLayout, CardLayoutProps, UniversalProps } from "./componentTypes";
 import { DetailPanel } from "./DetailPanel";
 
 export type CardLayoutContentProps = {
@@ -84,7 +84,7 @@ export type CardLayoutContentProps = {
   };
   rowSelection: MRT_RowSelectionState;
   setRowSelection: Dispatch<SetStateAction<MRT_RowSelectionState>>;
-  cardOptions: CardProps;
+  cardLayoutOptions: CardLayoutProps;
   totalRows: UniversalProps["totalRows"];
 };
 
@@ -150,7 +150,7 @@ const CardLayoutContent = ({
   rowReorderingUtilities,
   rowSelection,
   setRowSelection,
-  cardOptions,
+  cardLayoutOptions,
   totalRows,
 }: CardLayoutContentProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
@@ -174,7 +174,7 @@ const CardLayoutContent = ({
     <StackContainer
       odysseyDesignTokens={odysseyDesignTokens}
       currentLayout={currentLayout}
-      maxGridColumns={cardOptions.maxGridColumns ?? 3}
+      maxGridColumns={cardLayoutOptions.maxGridColumns ?? 3}
     >
       {isLoading ? (
         <LoadingContainer odysseyDesignTokens={odysseyDesignTokens}>
@@ -188,7 +188,7 @@ const CardLayoutContent = ({
             <>
               {data.map((row: MRT_RowData, index: number) => {
                 const { overline, title, description, image, children } =
-                  cardOptions.itemProps(row);
+                  cardLayoutOptions.itemProps(row);
                 const currentIndex =
                   index + (pagination.pageIndex - 1) * pagination.pageSize;
 
@@ -210,21 +210,26 @@ const CardLayoutContent = ({
                     children={children}
                     description={description}
                     detailPanel={
-                      cardOptions.renderDetailPanel ? (
+                      cardLayoutOptions.renderDetailPanel ? (
                         <DetailPanel
                           row={row}
-                          renderDetailPanel={cardOptions.renderDetailPanel}
+                          renderDetailPanel={
+                            cardLayoutOptions.renderDetailPanel
+                          }
                         />
                       ) : undefined
                     }
                     image={image}
                     key={row.id}
                     menuButtonChildren={
-                      (cardOptions.rowActionMenuItems || hasRowReordering) && (
+                      (cardLayoutOptions.rowActionMenuItems ||
+                        hasRowReordering) && (
                         <RowActions
                           row={row}
                           rowIndex={currentIndex}
-                          rowActionMenuItems={cardOptions.rowActionMenuItems}
+                          rowActionMenuItems={
+                            cardLayoutOptions.rowActionMenuItems
+                          }
                           isRowReorderingDisabled={isRowReorderingDisabled}
                           totalRows={totalRows}
                           updateRowOrder={

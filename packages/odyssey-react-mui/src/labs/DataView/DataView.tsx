@@ -94,8 +94,8 @@ const DataView = ({
   paginationType = "paged",
   resultsPerPage = 20,
   searchDelayTime,
-  cardOptions,
-  tableOptions,
+  cardLayoutOptions,
+  tableLayoutOptions,
   totalRows,
   maxPages,
   maxResultsPerPage,
@@ -139,14 +139,14 @@ const DataView = ({
   const [tableState, setTableState] = useState<TableState>({
     columnSorting: [],
     columnVisibility: {},
-    rowDensity: tableOptions?.initialDensity ?? densityValues[0],
+    rowDensity: tableLayoutOptions?.initialDensity ?? densityValues[0],
   });
 
   const shouldShowFilters = hasSearch || hasFilters;
 
   const availableFilters = useFilterConversion({
     filters: filters,
-    columns: tableOptions?.columns,
+    columns: tableLayoutOptions?.columns,
   });
 
   useEffect(() => {
@@ -256,10 +256,10 @@ const DataView = ({
   const additionalActions = useMemo(
     () => (
       <>
-        {currentLayout === "table" && tableOptions && (
+        {currentLayout === "table" && tableLayoutOptions && (
           <TableSettings
             setTableState={setTableState}
-            tableOptions={tableOptions}
+            tableLayoutOptions={tableLayoutOptions}
             tableState={tableState}
           />
         )}
@@ -273,7 +273,7 @@ const DataView = ({
         )}
       </>
     ),
-    [currentLayout, tableOptions, tableState, availableLayouts],
+    [currentLayout, tableLayoutOptions, tableState, availableLayouts],
   );
 
   const { lastRow: lastRowOnPage } = usePagination({
@@ -332,9 +332,9 @@ const DataView = ({
         </AdditionalActionsContainer>
       )}
 
-      {currentLayout === "table" && tableOptions && (
+      {currentLayout === "table" && tableLayoutOptions && (
         <TableLayoutContent
-          columns={tableOptions.columns}
+          columns={tableLayoutOptions.columns}
           data={data}
           draggingRow={draggingRow}
           emptyState={emptyState}
@@ -351,13 +351,13 @@ const DataView = ({
           rowSelection={rowSelection}
           setRowSelection={setRowSelection}
           setTableState={setTableState}
-          tableOptions={tableOptions}
+          tableLayoutOptions={tableLayoutOptions}
           tableState={tableState}
           totalRows={totalRows}
         />
       )}
       {(currentLayout === "list" || currentLayout === "grid") &&
-        cardOptions && (
+        cardLayoutOptions && (
           <CardLayoutContent
             currentLayout={currentLayout}
             data={data}
@@ -375,7 +375,7 @@ const DataView = ({
             rowReorderingUtilities={rowReorderingUtilities}
             rowSelection={rowSelection}
             setRowSelection={setRowSelection}
-            cardOptions={cardOptions}
+            cardLayoutOptions={cardLayoutOptions}
             totalRows={totalRows}
           />
         )}

@@ -11,7 +11,7 @@
  */
 
 import { memo } from "react";
-import { CardProps } from "./componentTypes";
+import { CardLayoutProps } from "./componentTypes";
 import { DataRow } from "./dataTypes";
 
 const DetailPanel = ({
@@ -19,7 +19,7 @@ const DetailPanel = ({
   renderDetailPanel,
 }: {
   row: DataRow;
-  renderDetailPanel: CardProps["renderDetailPanel"];
+  renderDetailPanel: CardLayoutProps["renderDetailPanel"];
 }) => {
   if (!renderDetailPanel) return null;
   return renderDetailPanel({ row });

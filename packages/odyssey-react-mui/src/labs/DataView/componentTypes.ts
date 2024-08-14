@@ -81,7 +81,7 @@ export type UniversalProps = {
   totalRows?: number;
 };
 
-export type TableProps = {
+export type TableLayoutProps = {
   columns: DataTableColumn<MRT_RowData>[];
   hasChangeableDensity?: boolean;
   hasColumnResizing?: boolean;
@@ -93,7 +93,7 @@ export type TableProps = {
   rowActionMenuItems?: DataTableRowActionsProps["rowActionMenuItems"];
 };
 
-export type CardProps = {
+export type CardLayoutProps = {
   itemProps: (row: MRT_RowData) => DataCardProps;
   maxGridColumns?: number;
   renderDetailPanel?: (props: { row: MRT_RowData }) => ReactNode;
@@ -103,8 +103,8 @@ export type CardProps = {
 export type ViewProps<L extends DataLayout> = {
   availableLayouts?: L[];
   initialLayout?: L;
-  cardOptions?: CardProps;
-  tableOptions?: TableProps;
+  cardLayoutOptions?: CardLayoutProps;
+  tableLayoutOptions?: TableLayoutProps;
 };
 
 export type TableState = {

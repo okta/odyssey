@@ -15,10 +15,10 @@ import { MRT_RowData } from "material-react-table";
 
 import { DataFilter } from "../DataFilters";
 import { DataTableColumn } from "../../DataTable";
-import { UniversalProps, TableProps } from "./componentTypes";
+import { UniversalProps, TableLayoutProps } from "./componentTypes";
 
 type FilterConversionType = {
-  columns?: TableProps["columns"];
+  columns?: TableLayoutProps["columns"];
   filters?: UniversalProps["filters"];
 };
 

@@ -40,7 +40,7 @@ import {
   DragIndicatorIcon,
 } from "../../icons.generated";
 import { Box } from "../../Box";
-import { TableProps, TableState, UniversalProps } from "./componentTypes";
+import { TableLayoutProps, TableState, UniversalProps } from "./componentTypes";
 import { DataTableCell } from "./dataTypes";
 import {
   dataTableImmutableSettings,
@@ -64,7 +64,7 @@ const RowActionsContainer = styled("div")(() => ({
 }));
 
 export type TableLayoutContentProps = {
-  columns: TableProps["columns"];
+  columns: TableLayoutProps["columns"];
   data: MRT_RowData[];
   draggingRow?: MRT_Row<MRT_RowData> | null;
   emptyState: ReactNode;
@@ -120,7 +120,7 @@ export type TableLayoutContentProps = {
   rowSelection: MRT_RowSelectionState;
   setRowSelection: Dispatch<SetStateAction<MRT_RowSelectionState>>;
   setTableState: Dispatch<SetStateAction<TableState>>;
-  tableOptions: TableProps;
+  tableLayoutOptions: TableLayoutProps;
   tableState: TableState;
   totalRows: UniversalProps["totalRows"];
 };
@@ -143,7 +143,7 @@ const TableLayoutContent = ({
   rowSelection,
   setRowSelection,
   setTableState,
-  tableOptions,
+  tableLayoutOptions,
   tableState,
   totalRows,
 }: TableLayoutContentProps) => {
@@ -219,8 +219,8 @@ const TableLayoutContent = ({
         row.index + (pagination.pageIndex - 1) * pagination.pageSize;
       return (
         <RowActionsContainer>
-          {tableOptions.rowActionButtons?.(row)}
-          {(tableOptions.rowActionMenuItems || hasRowReordering) && (
+          {tableLayoutOptions.rowActionButtons?.(row)}
+          {(tableLayoutOptions.rowActionMenuItems || hasRowReordering) && (
             <MenuButton
               ariaLabel={t("table.moreactions.arialabel")}
               buttonVariant="floating"
@@ -231,7 +231,7 @@ const TableLayoutContent = ({
               <RowActions
                 isRowReorderingDisabled={isRowReorderingDisabled}
                 row={row}
-                rowActionMenuItems={tableOptions.rowActionMenuItems}
+                rowActionMenuItems={tableLayoutOptions.rowActionMenuItems}
                 rowIndex={currentIndex}
                 totalRows={totalRows}
                 updateRowOrder={
@@ -250,7 +250,7 @@ const TableLayoutContent = ({
       pagination.pageIndex,
       pagination.pageSize,
       t,
-      tableOptions,
+      tableLayoutOptions,
       totalRows,
       updateRowOrder,
     ],
@@ -296,14 +296,14 @@ const TableLayoutContent = ({
     muiTableBodyProps: () => ({
       className: rowDensityClassName,
     }),
-    enableColumnResizing: tableOptions.hasColumnResizing,
+    enableColumnResizing: tableLayoutOptions.hasColumnResizing,
     defaultColumn: {
       Cell: defaultCell,
     },
     enableRowActions:
       (hasRowReordering === true && onReorderRows) ||
-      tableOptions.rowActionButtons ||
-      tableOptions.rowActionMenuItems
+      tableLayoutOptions.rowActionButtons ||
+      tableLayoutOptions.rowActionMenuItems
         ? true
         : false,
     renderRowActions: ({ row }) => renderRowActions({ row }),
@@ -341,7 +341,7 @@ const TableLayoutContent = ({
       sx: dragHandleStyles,
       ...dragHandleText,
     }),
-    renderDetailPanel: tableOptions.renderDetailPanel,
+    renderDetailPanel: tableLayoutOptions.renderDetailPanel,
     enableRowVirtualization: data.length >= 50,
     muiTableHeadCellProps: ({ column: currentColumn }) => ({
       className: tableState.columnSorting.find(
@@ -350,7 +350,7 @@ const TableLayoutContent = ({
         ? "isSorted"
         : "isUnsorted",
     }),
-    enableSorting: tableOptions.hasSorting === true, // I don't know why this needs to be true, but it still works if undefined otherwise
+    enableSorting: tableLayoutOptions.hasSorting === true, // I don't know why this needs to be true, but it still works if undefined otherwise
     onSortingChange: (sortingUpdater) => {
       const newSortVal =
         typeof sortingUpdater === "function"

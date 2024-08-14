@@ -20,8 +20,8 @@ import {
   DataRowSelectionState,
   densityValues,
   availableLayouts,
-  TableProps,
-  CardProps,
+  TableLayoutProps,
+  CardLayoutProps,
   UpdateFiltersOrValues,
 } from "@okta/odyssey-react-mui/labs";
 import { PauseIcon, RefreshIcon } from "@okta/odyssey-react-mui/icons";
@@ -50,10 +50,10 @@ import {
 } from "@okta/odyssey-react-mui";
 
 type DataViewMetaProps = DataViewProps &
-  TableProps &
-  CardProps & {
-    tableRowActionMenuItems: TableProps["rowActionMenuItems"];
-    cardRowActionMenuItems: CardProps["rowActionMenuItems"];
+  TableLayoutProps &
+  CardLayoutProps & {
+    tableRowActionMenuItems: TableLayoutProps["rowActionMenuItems"];
+    cardRowActionMenuItems: CardLayoutProps["rowActionMenuItems"];
     hasCustomEmptyPlaceholder: boolean;
     hasCustomNoResultsPlaceholder: boolean;
     hasActionMenuItems: boolean;
@@ -158,52 +158,52 @@ const storybookMeta: Meta<DataViewMetaProps> = {
     },
     columns: {
       control: null,
-      name: "tableOptions.columns",
+      name: "tableLayoutOptions.columns",
     },
     initialDensity: {
       control: "select",
       options: densityValues,
-      name: "tableOptions.columns",
+      name: "tableLayoutOptions.columns",
     },
     hasChangeableDensity: {
       control: "boolean",
-      name: "tableOptions.hasChangeableDensity",
+      name: "tableLayoutOptions.hasChangeableDensity",
     },
     hasColumnResizing: {
       control: "boolean",
-      name: "tableOptions.hasColumnResizing",
+      name: "tableLayoutOptions.hasColumnResizing",
     },
     hasColumnVisibility: {
       control: "boolean",
-      name: "tableOptions.hasColumnVisibility",
+      name: "tableLayoutOptions.hasColumnVisibility",
     },
     renderDetailPanel: {
       control: null,
-      name: "tableOptions.renderDetailPanel",
+      name: "tableLayoutOptions.renderDetailPanel",
     },
     rowActionButtons: {
       control: null,
-      name: "tableOptions.rowActionButtons",
+      name: "tableLayoutOptions.rowActionButtons",
     },
     tableRowActionMenuItems: {
       control: null,
-      name: "tableOptions.rowActionMenuItems",
+      name: "tableLayoutOptions.rowActionMenuItems",
     },
     hasSorting: {
       control: "boolean",
-      name: "tableOptions.hasSorting",
+      name: "tableLayoutOptions.hasSorting",
     },
     itemProps: {
       control: null,
-      name: "cardOptions.itemProps",
+      name: "cardLayoutOptions.itemProps",
     },
     maxGridColumns: {
       control: "number",
-      name: "cardOptions.maxGridColumns",
+      name: "cardLayoutOptions.maxGridColumns",
     },
     cardRowActionMenuItems: {
       control: null,
-      name: "cardOptions.rowActionMenuItems",
+      name: "cardLayoutOptions.rowActionMenuItems",
     },
     isLoading: {
       control: "boolean",
@@ -399,7 +399,7 @@ const BaseStory: StoryObj<DataViewMetaProps> = {
             ? customNoResultsPlaceholder
             : undefined
         }
-        tableOptions={{
+        tableLayoutOptions={{
           columns: personColumns,
           hasSorting: args.hasSorting,
           rowActionMenuItems: args.hasActionMenuItems
@@ -412,7 +412,7 @@ const BaseStory: StoryObj<DataViewMetaProps> = {
           hasChangeableDensity: args.hasChangeableDensity,
           initialDensity: args.initialDensity,
         }}
-        cardOptions={{
+        cardLayoutOptions={{
           itemProps: itemProps,
           rowActionMenuItems: args.hasActionMenuItems
             ? actionMenuItems
@@ -496,11 +496,11 @@ export const ExpandableRowsAndCards: StoryObj<DataViewMetaProps> = {
         hasRowSelection={args.hasRowSelection}
         onReorderRows={onReorderRows}
         onChangeRowSelection={onChangeRowSelection}
-        tableOptions={{
+        tableLayoutOptions={{
           columns: personColumns,
           renderDetailPanel: renderAdditionalContent,
         }}
-        cardOptions={{
+        cardLayoutOptions={{
           itemProps: itemProps,
           renderDetailPanel: renderAdditionalContent,
         }}
@@ -541,7 +541,7 @@ export const Truncation: StoryObj<DataViewMetaProps> = {
 
     return (
       <DataView
-        tableOptions={{
+        tableLayoutOptions={{
           columns: columns,
           hasColumnResizing: true,
         }}
@@ -595,7 +595,7 @@ export const Empty: StoryObj<DataViewMetaProps> = {
     return (
       <DataView
         {...props}
-        tableOptions={{
+        tableLayoutOptions={{
           columns: personColumns,
           hasChangeableDensity: hasChangeableDensity,
           hasColumnResizing: hasColumnResizing,
@@ -709,7 +709,7 @@ export const CustomFilters: StoryObj<DataViewMetaProps> = {
     return (
       <DataView
         {...props}
-        tableOptions={{
+        tableLayoutOptions={{
           columns: personColumns,
           hasChangeableDensity: hasChangeableDensity,
           hasColumnResizing: hasColumnResizing,
@@ -792,7 +792,7 @@ export const FilterWithCustomRender: StoryObj<DataViewMetaProps> = {
     return (
       <DataView
         {...props}
-        tableOptions={{
+        tableLayoutOptions={{
           columns: personColumns,
           hasChangeableDensity: hasChangeableDensity,
           hasColumnResizing: hasColumnResizing,
@@ -854,7 +854,7 @@ export const CustomFilterWithDefaultVariant: StoryObj<DataViewMetaProps> = {
     return (
       <DataView
         {...props}
-        tableOptions={{
+        tableLayoutOptions={{
           columns: personColumns,
           hasChangeableDensity: hasChangeableDensity,
           hasColumnResizing: hasColumnResizing,
