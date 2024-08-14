@@ -19,7 +19,7 @@ import {
   DataOnReorderRowsType,
   DataRowSelectionState,
   densityValues,
-  TableProps,
+  TableLayoutProps,
   CardLayoutProps,
 } from "@okta/odyssey-react-mui/labs";
 import { PauseIcon, RefreshIcon } from "@okta/odyssey-react-mui/icons";
@@ -40,8 +40,8 @@ import {
 } from "@okta/odyssey-react-mui";
 
 type DataTableMetaProps = DataViewProps &
-  TableProps & {
-    tableRowActionMenuItems: TableProps["rowActionMenuItems"];
+  TableLayoutProps & {
+    tableRowActionMenuItems: TableLayoutProps["rowActionMenuItems"];
     listRowActionMenuItems: CardLayoutProps["rowActionMenuItems"];
     hasCustomEmptyPlaceholder: boolean;
     hasCustomNoResultsPlaceholder: boolean;
