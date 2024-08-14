@@ -31,7 +31,7 @@ import { DataCard } from "./DataCard";
 import { CardLayout, CardProps, UniversalProps } from "./componentTypes";
 import { DetailPanel } from "./DetailPanel";
 
-export type CardListContentProps = {
+export type CardLayoutContentProps = {
   currentLayout: CardLayout;
   data: MRT_RowData[];
   draggingRow?: MRT_Row<MRT_RowData> | null;
@@ -135,7 +135,7 @@ const CheckboxContainer = styled("div", {
   marginBlockStart: `-${odysseyDesignTokens.Spacing1}`,
 }));
 
-const CardListContent = ({
+const CardLayoutContent = ({
   currentLayout,
   data,
   emptyState,
@@ -152,7 +152,7 @@ const CardListContent = ({
   setRowSelection,
   cardOptions,
   totalRows,
-}: CardListContentProps) => {
+}: CardLayoutContentProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const handleRowSelectionChange = useCallback(
@@ -248,7 +248,7 @@ const CardListContent = ({
   );
 };
 
-const MemoizedCardListContent = memo(CardListContent);
-MemoizedCardListContent.displayName = "CardListContent";
+const MemoizedCardLayoutContent = memo(CardLayoutContent);
+MemoizedCardLayoutContent.displayName = "CardLayoutContent";
 
-export { MemoizedCardListContent as CardListContent };
+export { MemoizedCardLayoutContent as CardLayoutContent };

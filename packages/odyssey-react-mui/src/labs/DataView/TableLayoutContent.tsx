@@ -63,7 +63,7 @@ const RowActionsContainer = styled("div")(() => ({
   display: "flex",
 }));
 
-export type TableContentProps = {
+export type TableLayoutContentProps = {
   columns: TableProps["columns"];
   data: MRT_RowData[];
   draggingRow?: MRT_Row<MRT_RowData> | null;
@@ -125,7 +125,7 @@ export type TableContentProps = {
   totalRows: UniversalProps["totalRows"];
 };
 
-const TableContent = ({
+const TableLayoutContent = ({
   columns,
   data,
   draggingRow,
@@ -146,7 +146,7 @@ const TableContent = ({
   tableOptions,
   tableState,
   totalRows,
-}: TableContentProps) => {
+}: TableLayoutContentProps) => {
   const [isTableContainerScrolledToStart, setIsTableContainerScrolledToStart] =
     useState(true);
   const [isTableContainerScrolledToEnd, setIsTableContainerScrolledToEnd] =
@@ -384,7 +384,7 @@ const TableContent = ({
   );
 };
 
-const MemoizedTableContent = memo(TableContent);
-MemoizedTableContent.displayName = "TableContent";
+const MemoizedTableLayoutContent = memo(TableLayoutContent);
+MemoizedTableLayoutContent.displayName = "TableLayoutContent";
 
-export { MemoizedTableContent as TableContent };
+export { MemoizedTableLayoutContent as TableLayoutContent };

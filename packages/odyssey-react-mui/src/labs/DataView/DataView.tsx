@@ -37,8 +37,8 @@ import { fetchData } from "./fetchData";
 import { LayoutSwitcher } from "./LayoutSwitcher";
 import { TableSettings } from "./TableSettings";
 import { Pagination, usePagination } from "../../Pagination";
-import { TableContent } from "./TableContent";
-import { CardListContent } from "./CardListContent";
+import { TableLayoutContent } from "./TableLayoutContent";
+import { CardLayoutContent } from "./CardLayoutContent";
 import { useFilterConversion } from "./useFilterConversion";
 import { useRowReordering } from "../../DataTable/useRowReordering";
 import {
@@ -333,7 +333,7 @@ const DataView = ({
       )}
 
       {currentLayout === "table" && tableOptions && (
-        <TableContent
+        <TableLayoutContent
           columns={tableOptions.columns}
           data={data}
           draggingRow={draggingRow}
@@ -358,7 +358,7 @@ const DataView = ({
       )}
       {(currentLayout === "list" || currentLayout === "grid") &&
         cardOptions && (
-          <CardListContent
+          <CardLayoutContent
             currentLayout={currentLayout}
             data={data}
             draggingRow={draggingRow}
