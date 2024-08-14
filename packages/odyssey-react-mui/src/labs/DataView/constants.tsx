@@ -10,11 +10,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export const availableCardLayouts = ["list", "grid"];
-export const availableTableLayouts = ["table"];
-export const availableLayouts = [
+import { MRT_DensityState } from "material-react-table";
+
+export type DataViewLayout = "list" | "grid" | "table";
+
+export const availableCardLayouts: DataViewLayout[] = ["list", "grid"];
+export const availableTableLayouts: DataViewLayout[] = ["table"];
+export const availableLayouts: DataViewLayout[] = [
   ...availableTableLayouts,
   ...availableCardLayouts,
 ];
 
-export const densityValues = ["comfortable", "spacious", "compact"] as const;
+export const densityValues: MRT_DensityState[] = [
+  "comfortable",
+  "spacious",
+  "compact",
+];

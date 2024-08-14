@@ -22,7 +22,6 @@ const getAbsolutePath = (value: string): any => {
 };
 
 const config: StorybookConfig = {
-  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
     {
       name: "@storybook/addon-docs",
@@ -37,10 +36,17 @@ const config: StorybookConfig = {
     getAbsolutePath("@storybook/addon-mdx-gfm"),
     getAbsolutePath("storybook-addon-rtl-direction"),
   ],
+  core: {
+    disableTelemetry: true,
+  },
+  docs: {
+    autodocs: true,
+  },
   framework: {
     name: getAbsolutePath("@storybook/react-vite"),
     options: {},
   },
+  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   typescript: {
     check: false,
     reactDocgen: "react-docgen-typescript",
@@ -54,9 +60,6 @@ const config: StorybookConfig = {
         );
       },
     },
-  },
-  docs: {
-    autodocs: true,
   },
 };
 

@@ -2556,13 +2556,31 @@ export const components = ({
           textAlign: "start",
           verticalAlign: "baseline",
           padding: `0 ${odysseyTokens.Spacing3} !important`,
+          overflow: "visible !important",
+          position: "relative",
           overflowWrap: "break-word",
 
           [`&.${tableCellClasses.root}`]: {
             borderTop: `none !important`,
-            borderRight: `none !important`,
             borderBottom: `none !important`,
             borderLeft: `none !important`,
+          },
+
+          ["&::after"]: {
+            background: "transparent !important",
+          },
+
+          [`.${tableBodyClasses.root} &.${tableCellClasses.root}`]: {
+            borderRight: `none !important`,
+          },
+
+          [`&.${tableCellClasses.root}.isResizing::after`]: {
+            borderRightColor: odysseyTokens.BorderColorPrimaryControl,
+            borderRightStyle: odysseyTokens.BorderStyleMain,
+            borderRightWidth: 2,
+            content: '""',
+            position: "absolute",
+            right: 0,
           },
 
           [`.MuiTable-root.narrow &:last-child`]: {
@@ -2615,10 +2633,21 @@ export const components = ({
               flexGrow: 0,
               width: odysseyTokens.Spacing2,
             },
+          [`.ods-hide-spacer-column .${tableHeadClasses.root} &:last-of-type, .ods-hide-spacer-column .${tableBodyClasses.root} &:last-of-type`]:
+            {
+              display: "none",
+            },
 
-          [`&::after`]: {
-            display: "none",
-          },
+          [`.ods-hide-spacer-column .${tableHeadClasses.root} &:nth-last-of-type(2), .ods-hide-spacer-column .${tableBodyClasses.root} &:nth-last-of-type(2)`]:
+            {
+              borderTopRightRadius: odysseyTokens.Spacing2,
+              borderBottomRightRadius: odysseyTokens.Spacing2,
+              flexGrow: 1,
+
+              [`& .Mui-TableHeadCell-ResizeHandle-Wrapper`]: {
+                display: "none",
+              },
+            },
 
           ...(ownerState.variant === "number" && {
             textAlign: "end",
@@ -2658,6 +2687,10 @@ export const components = ({
 
           [`& .Mui-TableHeadCell-ResizeHandle-Wrapper`]: {
             marginInlineEnd: `-${odysseyTokens.Spacing3}`,
+
+            [`&:active .${dividerClasses.vertical}`]: {
+              display: "none",
+            },
           },
 
           [`& .Mui-TableHeadCell-Content-Wrapper`]: {
@@ -2744,16 +2777,31 @@ export const components = ({
           [`.${tableBodyClasses.root} &`]: {
             // Target is 48px height
             paddingBlock: odysseyTokens.Spacing3,
+
+            [`& .${tableCellClasses.root}::after`]: {
+              top: `-${odysseyTokens.Spacing3} !important`,
+              bottom: `-${odysseyTokens.Spacing3} !important`,
+            },
           },
 
           [`.${tableBodyClasses.root}.MuiTableBody-compact &`]: {
             // Target is 36px height
             paddingBlock: odysseyTokens.Spacing2,
+
+            [`& .${tableCellClasses.root}::after`]: {
+              top: `-${odysseyTokens.Spacing2} !important`,
+              bottom: `-${odysseyTokens.Spacing2} !important`,
+            },
           },
 
           [`.${tableBodyClasses.root}.MuiTableBody-spacious &`]: {
             // Target is 56px height
             paddingBlock: odysseyTokens.Spacing4,
+
+            [`& .${tableCellClasses.root}::after`]: {
+              top: `-${odysseyTokens.Spacing4} !important`,
+              bottom: `-${odysseyTokens.Spacing4} !important`,
+            },
           },
 
           "&.isDragTarget": {

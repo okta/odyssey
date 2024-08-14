@@ -10,10 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {
-  DataGetDataType,
-  DataOnReorderRowsType,
-} from "@okta/odyssey-react-mui/labs";
+import { DataFilter, DataGetDataType } from "@okta/odyssey-react-mui/labs";
 import { Person } from "./personData";
 
 export const filterData = ({
@@ -22,98 +19,151 @@ export const filterData = ({
 }: {
   data: Person[];
 } & DataGetDataType) => {
-  let filteredData = data;
   const { search, filters, sort, page = 1, resultsPerPage = 20 } = args;
 
-  // Implement text-based query filtering
-  if (search) {
-    filteredData = filteredData.filter((row) =>
-      Object.values(row).some((value) =>
-        value.toString().toLowerCase().includes(search.toLowerCase()),
-      ),
-    );
-  }
+  const searchFiltered = search
+    ? data.filter((row) =>
+        Object.values(row).some((value) =>
+          value.toString().toLowerCase().includes(search.toLowerCase()),
+        ),
+      )
+    : data;
 
-  // Implement column-specific filtering
-  if (filters) {
-    filteredData = filteredData.filter((row) => {
-      return filters.every(({ id, value }) => {
-        // If filter value is null or undefined, skip this filter
-        if (value === null || value === undefined) {
-          return true;
-        }
+  const personKeys: (keyof Person)[] = [
+    "order",
+    "id",
+    "name",
+    "city",
+    "state",
+    "age",
+    "risk",
+  ];
 
-        // If filter value is array, search for each array value
-        if (Array.isArray(value)) {
-          return value.some((arrayValue) => {
-            const filterValue =
-              typeof arrayValue === "object" ? arrayValue.value : arrayValue;
-            return row[id as keyof Person]
-              ?.toString()
-              .toLowerCase()
-              .includes(filterValue.toString().toLowerCase());
-          });
-        }
+  const isKeyOfPerson = (key: string): key is keyof Person => {
+    return personKeys.includes(key as keyof Person);
+  };
 
-        // In the custom filter examples, we provide a "starting letter"
-        // control that allows the user to filter by whether the
-        // first letter is a vowel or consonant
-        if (id === "startLetter" && typeof row.name === "string") {
-          const firstLetter = row.name[0]?.toLowerCase();
-          if (value === "vowel") return "aeiou".includes(firstLetter);
-          if (value === "consonant") return !"aeiou".includes(firstLetter);
-          return true;
-        }
+  const handleStartLetterFilter = (
+    row: Person,
+    value: DataFilter["value"],
+  ): boolean => {
+    if (typeof row.name !== "string") return true;
+    const firstLetter = row.name[0]?.toLowerCase();
+    if (value === "vowel") return "aeiou".includes(firstLetter);
+    if (value === "consonant") return !"aeiou".includes(firstLetter);
+    return true;
+  };
 
-        // General filtering for other columns
+  const handleStandardFilter = (
+    row: Person,
+    id: keyof Person,
+    value: DataFilter["value"],
+  ): boolean => {
+    const rowValue = String(row[id]).toLowerCase();
+
+    if (value === null || value === undefined) {
+      return true;
+    }
+
+    if (typeof value === "string" || typeof value === "number") {
+      return rowValue.includes(String(value).toLowerCase());
+    }
+
+    if (Array.isArray(value)) {
+      return value.some((arrayValue) => {
+        const filterValue =
+          typeof arrayValue === "object" ? arrayValue.value : arrayValue;
         return row[id as keyof Person]
           ?.toString()
           .toLowerCase()
-          .includes(value.toString().toLowerCase());
+          .includes(filterValue.toString().toLowerCase());
       });
-    });
-  }
+    }
 
-  // Implement sorting
-  if (sort && sort.length > 0) {
-    filteredData.sort((a, b) => {
-      for (const { id, desc } of sort) {
-        const aValue = a[id as keyof Person];
-        const bValue = b[id as keyof Person];
+    return false;
+  };
 
-        if (aValue < bValue) return desc ? 1 : -1;
-        if (aValue > bValue) return desc ? -1 : 1;
-      }
+  const compareValues = (
+    a: string | number,
+    b: string | number,
+    desc: boolean,
+  ): number => {
+    if (a < b) return desc ? 1 : -1;
+    if (a > b) return desc ? -1 : 1;
+    return 0;
+  };
 
-      return 0;
-    });
-  }
+  // In a real-world scenario, the consumer would provide their own backend
+  // filtering/searching logic. This is a demo of what that could look like
+  // for the provided sample data and demo filters.
+  const columnFiltered = filters
+    ? searchFiltered.filter((row) =>
+        filters.every(({ id, value }: DataFilter) => {
+          // If the filter value is null, return all the data
+          if (value === null || value === undefined) {
+            return true;
+          }
 
-  // Implement pagination
+          // Handle custom filters
+          if (id === "startLetter") {
+            return handleStartLetterFilter(row, value);
+          }
+
+          // Handle standard Person properties
+          if (isKeyOfPerson(id)) {
+            return handleStandardFilter(row, id, value);
+          }
+
+          return true;
+        }),
+      )
+    : searchFiltered;
+
+  const sorted =
+    sort && sort.length > 0
+      ? [...columnFiltered].sort((a, b) =>
+          sort.reduce((result, { id, desc }) => {
+            if (result !== 0) return result;
+
+            if (isKeyOfPerson(id)) {
+              const aValue = a[id];
+              const bValue = b[id];
+              return compareValues(aValue, bValue, desc);
+            }
+
+            // Handle custom sort fields if needed
+            return 0;
+          }, 0),
+        )
+      : columnFiltered;
+
   const startRow = (page - 1) * resultsPerPage;
   const endRow = startRow + resultsPerPage;
-  filteredData = filteredData.slice(startRow, endRow);
 
-  return filteredData;
+  return sorted.slice(startRow, endRow);
 };
 
-export const reorderData = <T extends { id: string | number }>({
+export const reorderData = <Data extends Person>({
   data,
-  ...args
+  rowId,
+  newRowIndex,
 }: {
-  data: T[];
-} & DataOnReorderRowsType) => {
-  const updatedData = data;
-  const { rowId, newRowIndex } = args;
-  const rowIndex = updatedData.findIndex((row) => row.id === rowId);
+  data: Data[];
+  rowId: string | number;
+  newRowIndex: number;
+}): Data[] => {
+  const rowIndex = data.findIndex((row) => row.id === rowId);
 
-  if (rowIndex !== -1) {
-    // Remove the row from its current position
-    const [removedRow] = updatedData.splice(rowIndex, 1);
-
-    // Insert the row at the new index
-    updatedData.splice(newRowIndex, 0, removedRow);
+  if (rowIndex === -1) {
+    return data;
   }
 
-  return updatedData;
+  const reorderedData = [
+    ...data.slice(0, rowIndex),
+    ...data.slice(rowIndex + 1, newRowIndex),
+    data[rowIndex],
+    ...data.slice(newRowIndex),
+  ];
+
+  return reorderedData;
 };

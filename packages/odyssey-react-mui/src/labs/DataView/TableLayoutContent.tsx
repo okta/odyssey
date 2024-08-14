@@ -40,6 +40,7 @@ import {
   DragIndicatorIcon,
 } from "../../icons.generated";
 import { Box } from "../../Box";
+import { Button } from "../../Button";
 import { TableLayoutProps, TableState, UniversalProps } from "./componentTypes";
 import { DataTableCell } from "./dataTypes";
 import {
@@ -266,6 +267,21 @@ const TableLayoutContent = ({
     [innerWidthStyle, emptyState],
   );
 
+  const shouldDisplayRowActions = useMemo(
+    () =>
+      (hasRowReordering === true && onReorderRows) ||
+      tableLayoutOptions.rowActionButtons ||
+      tableLayoutOptions.rowActionMenuItems
+        ? true
+        : false,
+    [
+      hasRowReordering,
+      onReorderRows,
+      tableLayoutOptions.rowActionButtons,
+      tableLayoutOptions.rowActionMenuItems,
+    ],
+  );
+
   const dataTable = useMaterialReactTable({
     data: !isEmpty && !isNoResults ? data : [],
     columns,
@@ -284,11 +300,54 @@ const TableLayoutContent = ({
       ExpandMoreIcon: ChevronDownIcon,
     },
     ...dataTableImmutableSettings,
-    displayColumnDefOptions: displayColumnDefOptions satisfies Partial<
-      MRT_TableOptions<MRT_RowData>["displayColumnDefOptions"]
-    >,
+    displayColumnDefOptions: {
+      ...(displayColumnDefOptions satisfies Partial<
+        MRT_TableOptions<MRT_RowData>["displayColumnDefOptions"]
+      >),
+      "mrt-row-actions": {
+        header: "",
+        grow: true,
+        muiTableBodyCellProps: {
+          align: "right" as const,
+          sx: {
+            overflow: "visible",
+            width: "unset",
+          },
+          className: "ods-actions-cell",
+        },
+        muiTableHeadCellProps: {
+          align: "right" as const,
+          sx: {
+            width: "unset",
+          },
+          className: "ods-actions-cell",
+          children: (
+            <Box sx={{ display: "flex", visibility: "hidden" }}>
+              {tableLayoutOptions.rowActionButtons &&
+                tableLayoutOptions.rowActionButtons({ id: null })}
+              {((hasRowReordering === true && onReorderRows) ||
+                tableLayoutOptions.rowActionMenuItems) && (
+                <Box>
+                  <Button
+                    endIcon={<MoreIcon />}
+                    size="small"
+                    variant="floating"
+                    ariaLabel={t("table.moreactions.arialabel")}
+                    isDisabled
+                  />
+                </Box>
+              )}
+            </Box>
+          ),
+        },
+      },
+    },
     muiTableProps: {
       ref: tableContentRef,
+      className:
+        !shouldDisplayRowActions && tableLayoutOptions.hasColumnResizing
+          ? "ods-hide-spacer-column"
+          : "",
     },
     muiTableContainerProps: {
       ref: tableInnerContainerRef,
@@ -349,6 +408,9 @@ const TableLayoutContent = ({
       )
         ? "isSorted"
         : "isUnsorted",
+    }),
+    muiTableBodyCellProps: ({ column }) => ({
+      className: column.getIsResizing() ? "isResizing" : "",
     }),
     enableSorting: tableLayoutOptions.hasSorting === true, // I don't know why this needs to be true, but it still works if undefined otherwise
     onSortingChange: (sortingUpdater) => {

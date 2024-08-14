@@ -44,25 +44,6 @@ export const dataTableImmutableSettings = {
 };
 
 export const displayColumnDefOptions = {
-  "mrt-row-actions": {
-    header: "",
-    grow: true,
-    muiTableBodyCellProps: {
-      align: "right" as const,
-      sx: {
-        overflow: "visible",
-        width: "unset",
-      },
-      className: "ods-actions-cell",
-    },
-    muiTableHeadCellProps: {
-      align: "right" as const,
-      sx: {
-        width: "unset",
-      },
-      className: "ods-actions-cell",
-    },
-  },
   "mrt-row-drag": {
     header: "",
     muiTableBodyCellProps: {

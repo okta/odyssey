@@ -23,6 +23,8 @@ import {
   TableLayoutProps,
   CardLayoutProps,
   UpdateFiltersOrValues,
+  DataColumns,
+  DataTableRowSelectionState,
 } from "@okta/odyssey-react-mui/labs";
 import { PauseIcon, RefreshIcon } from "@okta/odyssey-react-mui/icons";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -863,6 +865,68 @@ export const CustomFilterWithDefaultVariant: StoryObj<DataViewMetaProps> = {
         }}
         filters={filters}
         getData={getData}
+      />
+    );
+  },
+};
+
+export const ColumnGrowDemo: StoryObj<DataViewMetaProps> = {
+  render: function C() {
+    const columns = useMemo(
+      (): DataColumns => [
+        {
+          accessorKey: "name",
+          header: "Name",
+          grow: true,
+        },
+        {
+          accessorKey: "apps",
+          header: "Apps",
+        },
+        {
+          accessorKey: "users",
+          header: "Users assigned",
+        },
+      ],
+      [],
+    );
+
+    const getData = useCallback(
+      () => [
+        {
+          name: "Core engineering access",
+          apps: 5,
+          users: 10,
+        },
+        {
+          name: "Core sales access",
+          apps: 8,
+          users: 28,
+        },
+        {
+          name: "Super user access",
+          apps: 3,
+          users: 1,
+        },
+      ],
+      [],
+    );
+
+    const actionMenuItems = (selectedRows: DataTableRowSelectionState) => (
+      <>
+        <MenuItem onClick={() => console.log(selectedRows)}>Action 1</MenuItem>
+        <MenuItem onClick={() => console.log(selectedRows)}>Action 2</MenuItem>
+      </>
+    );
+
+    return (
+      <DataTable
+        hasSearch
+        hasColumnResizing
+        hasSorting
+        columns={columns}
+        getData={getData}
+        rowActionMenuItems={actionMenuItems}
       />
     );
   },
