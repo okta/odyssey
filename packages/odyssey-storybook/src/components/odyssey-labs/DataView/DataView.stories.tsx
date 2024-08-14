@@ -920,13 +920,15 @@ export const ColumnGrowDemo: StoryObj<DataViewMetaProps> = {
     );
 
     return (
-      <DataTable
+      <DataView
         hasSearch
-        hasColumnResizing
-        hasSorting
-        columns={columns}
+        tableLayoutOptions={{
+          hasColumnResizing: true,
+          hasSorting: true,
+          columns: columns,
+          rowActionMenuItems: actionMenuItems,
+        }}
         getData={getData}
-        rowActionMenuItems={actionMenuItems}
       />
     );
   },
