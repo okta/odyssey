@@ -108,7 +108,7 @@ const CenterAlignedSupportText = styled.div({
   textAlign: "center",
 });
 
-export type FileUploadProps = {
+export type FileUploaderProps = {
   /**
    * an array of file types the user is able to upload. @see https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept#unique_file_type_specifiers for examples
    */
@@ -140,7 +140,7 @@ export type FileUploadProps = {
   | "isOptional"
 >;
 
-const FileUpload = ({
+const FileUploader = ({
   acceptedFileTypes,
   errorMessage,
   id,
@@ -153,7 +153,7 @@ const FileUpload = ({
   onChange,
   type,
   variant,
-}: FileUploadProps) => {
+}: FileUploaderProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -304,7 +304,8 @@ const FileUpload = ({
   );
 };
 
-const MemoizedFileUpload = memo(FileUpload);
-MemoizedFileUpload.displayName = "FileUpload";
+const MemoizedFileUploader = memo(FileUploader);
+MemoizedFileUploader.displayName = "FileUploader";
 
-export { MemoizedFileUpload as FileUpload };
+export { MemoizedFileUploader as FileUpload };
+export { MemoizedFileUploader as FileUploader };
