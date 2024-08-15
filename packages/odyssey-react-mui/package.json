@@ -85,7 +85,6 @@
     "luxon": "^3.4.4",
     "material-react-table": "^2.11.3",
     "react-i18next": "^14.0.5",
-    "react-virtualized-auto-sizer": "^1.0.22",
     "react-window": "^1.8.10",
     "word-wrap": "^1.2.5"
   },

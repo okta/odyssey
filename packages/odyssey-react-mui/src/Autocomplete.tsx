@@ -20,7 +20,6 @@ import {
 } from "@mui/material";
 import {
   createContext,
-  FC,
   forwardRef,
   HTMLAttributes,
   memo,
@@ -30,18 +29,11 @@ import {
   useEffect,
   useMemo,
   useRef,
+  useState,
 } from "react";
 import styled from "@emotion/styled";
 import { VariableSizeList, ListChildComponentProps } from "react-window";
-import _AutoSizer, {
-  Props as AutoSizerProps,
-  Size as AutoSizerSize,
-} from "react-virtualized-auto-sizer";
 import { useTranslation } from "react-i18next";
-
-// This is required to get around a react-types issue for "AutoSizer is not a valid JSX element."
-// @see https://github.com/bvaughn/react-virtualized/issues/1739#issuecomment-1291444246
-const AutoSizer = _AutoSizer as unknown as FC<AutoSizerProps>;
 
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
@@ -51,6 +43,8 @@ import {
   useInputValues,
   getControlState,
 } from "./inputUtils";
+
+type SetItemSize = (size: number) => void;
 
 export type AutocompleteProps<
   OptionType,
@@ -257,6 +251,7 @@ const Autocomplete = <
   );
 
   const isVirtualized = useRef(Boolean(isVirtualizedProp));
+
   const defaultValueProp = useMemo<
     | AutocompleteValue<
         OptionType,
@@ -349,19 +344,49 @@ const Autocomplete = <
     ],
   );
 
-  const renderVirtualizedRow = ({
+  const Row = ({
     data,
     index,
+    setItemSize,
     style,
-  }: ListChildComponentProps) => {
+  }: ListChildComponentProps & { setItemSize: SetItemSize }) => {
+    const rowRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+      if (rowRef.current) {
+        /**
+         * Checking for child height to workaround a bug where the clientHeight of the row isn't updated correctly
+         * @see here if you need to know more: https://github.com/bvaughn/react-window/issues/582#issuecomment-1883074908
+         */
+        const firstChild = rowRef.current.firstElementChild;
+        const height = firstChild
+          ? firstChild.clientHeight
+          : rowRef.current.clientHeight;
+
+        setItemSize(height);
+      }
+    }, [index, rowRef, setItemSize]);
+
     const baseOption = data[index];
+    const { key, props } = baseOption;
+
     /**
      * react-window calculates the absolute positions of the list items, via an inline style, so
      * we need to add it to each list item that is being rendered in the viewable list window.
-     * See here if you need to know more: https://github.com/bvaughn/react-window?tab=readme-ov-file#why-is-my-list-blank-when-i-scroll
+     * @see here if you need to know more: https://github.com/bvaughn/react-window?tab=readme-ov-file#why-is-my-list-blank-when-i-scroll
      */
-    const optionItem = { ...baseOption, props: { ...baseOption.props, style } };
-    return optionItem;
+    return (
+      <div ref={rowRef}>
+        <li
+          style={{
+            ...style,
+            height: "auto",
+          }}
+          key={key}
+          {...props}
+        />
+      </div>
+    );
   };
 
   const OuterListboxContext = createContext({});
@@ -371,7 +396,7 @@ const Autocomplete = <
     return <div ref={ref} {...props} {...outerProps} />;
   });
 
-  function useResetCache(length: number) {
+  const useResetCache = (length: number) => {
     const ref = useRef<VariableSizeList>(null);
     useEffect(() => {
       if (ref.current) {
@@ -379,52 +404,84 @@ const Autocomplete = <
       }
     }, [length]);
     return ref;
-  }
+  };
 
   const ListboxComponent = forwardRef<
     HTMLDivElement,
     HTMLAttributes<HTMLElement>
   >(function (props, ref) {
+    const [listHeight, setListHeight] = useState(0);
+
     const { children, ...other } = props;
     const itemData: ReactElement[] = (children as ReactElement[]).flatMap(
       (item: ReactElement & { children?: ReactElement[] }) =>
         [item].concat(item.children || []),
     );
 
-    // the height of an Odyssey autocomplete option item that is used to calculate height of window
-    const optionHeight = 45; //px
+    const sizeMap = useRef<number[]>([]);
+
+    const getListBoxHeight = useCallback(() => {
+      // 8px of padding top/bottom applied by MUI
+      const LISTBOX_PADDING = 8;
+
+      if (itemData.length > OVERSCAN_ROW_COUNT) {
+        // has a max-height of 40vh set in CSS. This is only set because height needs to be a number
+        return 1000;
+      } else {
+        const itemsHeightCalculated = itemData
+          .map((_, index) => sizeMap.current[index] || 0)
+          .reduce((a, b) => a + b, 0);
+        return LISTBOX_PADDING * 2 + itemsHeightCalculated;
+      }
+    }, [itemData, sizeMap]);
+
+    useEffect(() => {
+      if (sizeMap.current.length && itemData.length) {
+        setListHeight(getListBoxHeight());
+      }
+    }, [getListBoxHeight, itemData, sizeMap]);
 
     // The number of items (rows or columns) to render outside of the visible area for performance and scrolling reasons
-    const overscanRowCount = 8;
-
-    const itemSize = useCallback(() => optionHeight, []);
+    const OVERSCAN_ROW_COUNT = 8;
 
     const gridRef = useResetCache(itemData.length);
 
-    const renderWindow = useCallback(
-      ({ height, width }: AutoSizerSize) => (
-        <VariableSizeList
-          innerElementType="ul"
-          itemData={itemData}
-          itemCount={itemData.length}
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          itemSize={itemSize}
-          height={height}
-          width={width}
-          ref={gridRef}
-          outerElementType={OuterListboxElementType}
-          overscanCount={overscanRowCount}
-        >
-          {renderVirtualizedRow}
-        </VariableSizeList>
-      ),
-      [itemData, gridRef, itemSize],
+    const setItemSize = useCallback<SetItemSize>(
+      (size) => {
+        gridRef?.current?.resetAfterIndex(0, true);
+        sizeMap.current = sizeMap.current.concat(size);
+      },
+      [gridRef, sizeMap],
+    );
+    const getItemSize = useCallback(
+      // using 45px as a sane default here to avoid a lot of content shift on repaint
+      (index: number) => sizeMap.current[index] || 45,
+      [sizeMap],
     );
 
     return (
       <ListboxContainer ref={ref}>
         <OuterListboxContext.Provider value={other}>
-          <AutoSizer>{renderWindow}</AutoSizer>
+          <VariableSizeList
+            innerElementType="ul"
+            itemData={itemData}
+            itemCount={itemData.length}
+            itemSize={getItemSize}
+            height={listHeight}
+            width="100%"
+            ref={gridRef}
+            outerElementType={OuterListboxElementType}
+            overscanCount={OVERSCAN_ROW_COUNT}
+          >
+            {({ data, index, style }) => (
+              <Row
+                data={data}
+                index={index}
+                style={style}
+                setItemSize={setItemSize}
+              />
+            )}
+          </VariableSizeList>
         </OuterListboxContext.Provider>
       </ListboxContainer>
     );
@@ -467,7 +524,9 @@ const Autocomplete = <
       {...valueProps}
       {...inputValueProp}
       // conditionally provide the ListboxComponent if this needs to be virtualized
-      {...(isVirtualized.current && { ListboxComponent })}
+      {...(isVirtualized.current && {
+        ListboxComponent,
+      })}
       // AutoComplete is wrapped in a div within MUI which does not get the disabled attr. So this aria-disabled gets set in the div
       aria-disabled={isDisabled}
       clearText={t("clear.text")}
