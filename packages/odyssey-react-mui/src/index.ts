@@ -77,7 +77,11 @@ export * from "./Drawer";
 export * from "./EmptyState";
 export * from "./Fieldset";
 export * from "./FieldComponentProps";
-export { FileUploader } from "./FileUploader";
+export {
+  FileUploader,
+  fileUploadTypes,
+  fileUploadVariants,
+} from "./FileUploader";
 export * from "./Form";
 export * from "./HintLink";
 export * from "./IconWithTooltip";
