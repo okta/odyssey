@@ -62,6 +62,8 @@ type DataViewMetaProps = DataViewProps &
     hasCustomNoResultsPlaceholder: boolean;
     hasActionMenuItems: boolean;
     hasActionButtons: boolean;
+    hasAdditionalActionButton: boolean;
+    hasAdditionalActionMenuItems: boolean;
   };
 
 const storybookMeta: Meta<DataViewMetaProps> = {
@@ -244,6 +246,14 @@ const storybookMeta: Meta<DataViewMetaProps> = {
       control: "boolean",
       name: "[STORY ONLY] Has action buttons in table view?",
     },
+    hasAdditionalActionButton: {
+      control: "boolean",
+      name: "[STORY ONLY] Has additional action button?",
+    },
+    hasAdditionalActionMenuItems: {
+      control: "boolean",
+      name: "[STORY ONLY] Has additional action menu items?",
+    },
   },
   args: {
     currentPage: 1,
@@ -297,6 +307,15 @@ const actionMenuItems = (selectedRows: DataRowSelectionState) => (
   <>
     <MenuItem onClick={() => console.log(selectedRows)}>Action 1</MenuItem>
     <MenuItem onClick={() => console.log(selectedRows)}>Action 2</MenuItem>
+  </>
+);
+
+const additionalActionButton = <Button variant="primary" label="Add widget" />;
+
+const additionalActionMenuItems = (
+  <>
+    <MenuItem onClick={() => console.log("Action 1")}>Action 1</MenuItem>
+    <MenuItem onClick={() => console.log("Action 2")}>Action 2</MenuItem>
   </>
 );
 
@@ -384,6 +403,14 @@ const BaseStory: StoryObj<DataViewMetaProps> = {
         paginationType={args.paginationType}
         resultsPerPage={args.resultsPerPage}
         totalRows={args.totalRows}
+        additionalActionButton={
+          args.hasAdditionalActionButton ? additionalActionButton : undefined
+        }
+        additionalActionMenuItems={
+          args.hasAdditionalActionMenuItems
+            ? additionalActionMenuItems
+            : undefined
+        }
         hasFilters={args.hasFilters}
         hasSearch={args.hasSearch}
         hasSearchSubmitButton={args.hasSearchSubmitButton}
@@ -475,6 +502,8 @@ export const Everything: StoryObj<DataViewMetaProps> = {
     hasActionButtons: true,
     hasActionMenuItems: true,
     hasRowSelection: true,
+    hasAdditionalActionButton: true,
+    hasAdditionalActionMenuItems: true,
   },
 };
 
@@ -491,6 +520,14 @@ export const DataTableComponent: StoryObj<DataViewMetaProps> = {
         getData={getData}
         onReorderRows={onReorderRows}
         onChangeRowSelection={onChangeRowSelection}
+        additionalActionButton={
+          args.hasAdditionalActionButton ? additionalActionButton : undefined
+        }
+        additionalActionMenuItems={
+          args.hasAdditionalActionMenuItems
+            ? additionalActionMenuItems
+            : undefined
+        }
         bulkActionMenuItems={
           args.hasActionMenuItems ? actionMenuItems : undefined
         }

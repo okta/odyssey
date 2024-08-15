@@ -46,6 +46,8 @@ import {
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
 import styled from "@emotion/styled";
+import { MenuButton } from "../..";
+import { MoreIcon } from "../../icons.generated";
 
 export type DataViewProps = UniversalProps & ViewProps<DataLayout>;
 
@@ -68,6 +70,8 @@ const AdditionalActionsContainer = styled("div")(() => ({
 }));
 
 const DataView = ({
+  additionalActionButton,
+  additionalActionMenuItems,
   availableLayouts = allAvailableLayouts,
   bulkActionMenuItems,
   currentPage = 1,
@@ -142,7 +146,11 @@ const DataView = ({
     rowDensity: tableOptions?.initialDensity ?? densityValues[0],
   });
 
-  const shouldShowFilters = hasSearch || hasFilters;
+  const shouldShowFilters =
+    hasSearch ||
+    hasFilters ||
+    additionalActionButton ||
+    additionalActionMenuItems;
 
   const availableFilters = useFilterConversion({
     filters: filters,
@@ -272,9 +280,30 @@ const DataView = ({
             setCurrentLayout={setCurrentLayout}
           />
         )}
+
+        {additionalActionButton}
+
+        {additionalActionMenuItems && (
+          <MenuButton
+            endIcon={<MoreIcon />}
+            ariaLabel={t("table.moreactions.arialabel")}
+            buttonVariant="secondary"
+            menuAlignment="right"
+          >
+            {additionalActionMenuItems}
+          </MenuButton>
+        )}
       </>
     ),
-    [currentLayout, tableOptions, tableState, availableLayouts],
+    [
+      currentLayout,
+      tableOptions,
+      tableState,
+      availableLayouts,
+      additionalActionButton,
+      additionalActionMenuItems,
+      t,
+    ],
   );
 
   const { lastRow: lastRowOnPage } = usePagination({

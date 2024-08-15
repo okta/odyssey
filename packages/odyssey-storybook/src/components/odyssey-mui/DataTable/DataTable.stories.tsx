@@ -47,6 +47,25 @@ const storybookMeta: Meta<DataTableProps> = {
   title: "MUI Components/DataTable",
   component: DataTable,
   argTypes: {
+    additionalActionButton: {
+      control: null,
+      description: "An optional action button above the table.",
+      table: {
+        type: {
+          summary: "ReactNode",
+        },
+      },
+    },
+    additionalActionMenuItems: {
+      control: null,
+      description:
+        "MenuItems that go in an optional action menu above the table.",
+      table: {
+        type: {
+          summary: "ReactNode",
+        },
+      },
+    },
     columns: {
       control: null,
       description: "The columns that make up the table.",
@@ -451,6 +470,15 @@ const reorderData = <T extends { id: string | number }>({
 
   return updatedData;
 };
+
+const additionalActionButton = <Button variant="primary" label="Add widget" />;
+
+const additionalActionMenuItems = (
+  <>
+    <MenuItem onClick={() => console.log("Action 1")}>Action 1</MenuItem>
+    <MenuItem onClick={() => console.log("Action 2")}>Action 2</MenuItem>
+  </>
+);
 
 export const Default: StoryObj<DataTableProps> = {
   args: {
@@ -1070,6 +1098,59 @@ export const ColumnGrowDemo: StoryObj<DataTableProps> = {
         columns={columns}
         getData={getData}
         rowActionMenuItems={actionMenuItems}
+      />
+    );
+  },
+};
+
+export const AdditionalActions: StoryObj<DataTableProps> = {
+  args: {
+    hasChangeableDensity: true,
+    hasColumnResizing: true,
+    hasColumnVisibility: false,
+    hasFilters: true,
+    hasPagination: false,
+    hasRowSelection: true,
+    hasSearch: true,
+    hasSorting: true,
+    hasRowReordering: false,
+  },
+  render: function C(props) {
+    const [data, setData] = useState<Planet[]>(planetData);
+
+    const getData = useCallback(
+      ({ ...props }: DataTableGetDataType) => {
+        return filterData({ data, ...props });
+      },
+      [data],
+    );
+
+    const onReorderRows = useCallback(
+      ({ ...props }: DataTableOnReorderRowsType) => {
+        const reorderedData = reorderData({ data, ...props });
+        setData(reorderedData);
+      },
+      [data],
+    );
+
+    const onChangeRowSelection = useCallback(
+      (rowSelection: DataTableRowSelectionState) => {
+        if (Object.keys(rowSelection).length > 0) {
+          console.log(`${Object.keys(rowSelection).length} selected`);
+        }
+      },
+      [],
+    );
+
+    return (
+      <DataTable
+        {...props}
+        additionalActionButton={additionalActionButton}
+        additionalActionMenuItems={additionalActionMenuItems}
+        columns={planetColumns}
+        getData={getData}
+        onReorderRows={onReorderRows}
+        onChangeRowSelection={onChangeRowSelection}
       />
     );
   },
