@@ -242,7 +242,7 @@ export const ControlledRadioGroupWithRadioHints: StoryObj<typeof RadioGroup> = {
     value: "Ludicrous Speed",
   },
   render: function C(props) {
-    const [value, setValue] = useState("Ludicrous Speed");
+    const [value, setValue] = useState("Turtle Speed");
     const onChange = useCallback(
       (_event: ChangeEvent<HTMLInputElement>, value: string) => setValue(value),
       [],

@@ -29,16 +29,8 @@ import {
   FieldComponentRenderProps,
 } from "./FieldComponentProps";
 import type { HtmlProps } from "./HtmlProps";
-import {
-  ComponentControlledState,
-  getControlState,
-  useInputValues,
-} from "./inputUtils";
-import { RadioProps } from "./Radio";
-
-interface ExtendedRadioProps extends RadioProps {
-  onReadOnlyClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-}
+import { ComponentControlledState, getControlState } from "./inputUtils";
+import { Radio, RadioProps } from "./Radio";
 
 export type RadioGroupProps = {
   /**
@@ -60,7 +52,7 @@ export type RadioGroupProps = {
   /**
    * The `value` on the selected Radio
    */
-  value?: RadioProps["value"];
+  value?: string;
 } & Pick<
   FieldComponentProps,
   | "errorMessage"
@@ -95,69 +87,45 @@ const RadioGroup = ({
   onChange: onChangeProp,
   testId,
   translate,
-  value,
+  value: valueProp,
 }: RadioGroupProps) => {
-  const [internalValue, setInternalValue] = useState(value ?? defaultValue);
-
   const controlledStateRef = useRef(
     getControlState({
-      controlledValue: value,
+      controlledValue: valueProp,
       uncontrolledValue: defaultValue,
     }),
   );
 
-  const inputValues = useInputValues({
-    defaultValue,
-    value,
-    controlState: controlledStateRef.current,
-  });
+  const [internalValue, setInternalValue] = useState(defaultValue);
 
   const isControlled =
     controlledStateRef.current === ComponentControlledState.CONTROLLED;
 
+  const value = isControlled ? valueProp : internalValue;
+
   const onChange = useCallback<NonNullable<MuiRadioGroupProps["onChange"]>>(
     (event, newValue) => {
-      if (!isReadOnly) {
+      if (!isControlled) {
         setInternalValue(newValue);
-        onChangeProp?.(event, newValue);
       }
+      onChangeProp?.(event, newValue);
     },
-    [onChangeProp, isReadOnly],
-  );
-
-  const handleReadOnlyClick = useCallback(
-    (event: React.MouseEvent<HTMLButtonElement>) => {
-      if (isReadOnly) {
-        event.preventDefault();
-      }
-    },
-    [isReadOnly],
+    [isControlled, onChangeProp],
   );
 
   const memoizedChildren = useMemo(
     () =>
       React.Children.map(children, (child) => {
-        if (React.isValidElement<ExtendedRadioProps>(child)) {
+        if (React.isValidElement<RadioProps>(child) && child.type === Radio) {
           return React.cloneElement(child, {
-            isReadOnly,
-            isDisabled,
-            isChecked:
-              (isControlled ? inputValues.value : internalValue) ===
-              child.props.value,
-            onReadOnlyClick: handleReadOnlyClick,
+            isDisabled: isDisabled,
+            isReadOnly: isReadOnly,
+            isChecked: value === child.props.value,
           });
         }
         return child;
       }),
-    [
-      children,
-      isReadOnly,
-      isDisabled,
-      isControlled,
-      inputValues.value,
-      internalValue,
-      handleReadOnlyClick,
-    ],
+    [children, isDisabled, isReadOnly, value],
   );
 
   const renderFieldComponent = useCallback(
@@ -168,7 +136,7 @@ const RadioGroup = ({
       labelElementId,
     }: FieldRenderProps) => (
       <MuiRadioGroup
-        {...inputValues}
+        value={value}
         aria-describedby={ariaDescribedBy}
         aria-errormessage={errorMessageElementId}
         aria-labelledby={labelElementId}
@@ -177,21 +145,11 @@ const RadioGroup = ({
         name={nameOverride ?? id}
         onChange={onChange}
         translate={translate}
-        value={isControlled ? inputValues.value : internalValue}
       >
         {memoizedChildren}
       </MuiRadioGroup>
     ),
-    [
-      inputValues,
-      nameOverride,
-      onChange,
-      translate,
-      memoizedChildren,
-      testId,
-      isControlled,
-      internalValue,
-    ],
+    [value, nameOverride, onChange, translate, memoizedChildren, testId],
   );
 
   return (

@@ -141,6 +141,7 @@ const Checkbox = ({
   const onClick = useCallback<NonNullable<MuiCheckboxProps["onClick"]>>(
     (event) => {
       if (isReadOnly) {
+        event.stopPropagation();
         event.preventDefault();
       }
     },

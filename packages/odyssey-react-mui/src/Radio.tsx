@@ -109,6 +109,7 @@ const Radio = ({
   const handleClick = useCallback<React.MouseEventHandler<HTMLSpanElement>>(
     (event) => {
       if (isReadOnly) {
+        event.stopPropagation();
         event.preventDefault();
       }
     },
