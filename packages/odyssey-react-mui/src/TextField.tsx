@@ -34,40 +34,6 @@ import { type FeatureTestSelector } from "./test-selectors";
 
 export const TextFieldTestSelectors = {
   feature: {
-    description: {
-      selector: {
-        method: "ByText",
-        templateVariableNames: ["hint"],
-        text: "${hint}",
-      },
-    },
-    errorMessage: {
-      selector: {
-        method: "ByText",
-        templateVariableNames: ["errorMessage"],
-        text: "${errorMessage}",
-      },
-    },
-    input: {
-      selector: {
-        method: "ByRole",
-        options: {
-          name: "${label}",
-        },
-        role: "textbox",
-        templateVariableNames: ["label"],
-      },
-    },
-    label: {
-      selector: {
-        method: "ByRole",
-        options: {
-          name: "${label}",
-        },
-        role: "LabelText",
-        templateVariableNames: ["label"],
-      },
-    },
     link: {
       selector: {
         method: "ByRole",
@@ -78,6 +44,19 @@ export const TextFieldTestSelectors = {
         role: "link",
       },
     },
+  },
+  label: {
+    errorMessage: "errorMessage",
+    hint: "description",
+    label: "label",
+  },
+  selector: {
+    method: "ByRole",
+    options: {
+      name: "${label}",
+    },
+    role: "textbox",
+    templateVariableNames: ["label"],
   },
 } as const satisfies FeatureTestSelector;
 

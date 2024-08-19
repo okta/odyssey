@@ -12,11 +12,13 @@
 
 import { type FeatureTestSelector } from "./featureTestSelector";
 import { CalloutTestSelectors } from "../Callout";
+import { SelectTestSelectors } from "../Select";
 import { TabsTestSelectors } from "../Tabs";
 import { TextFieldTestSelectors } from "../TextField";
 
 export const odysseyTestSelectors = {
   Callout: CalloutTestSelectors,
+  Select: SelectTestSelectors,
   Tabs: TabsTestSelectors,
   TextField: TextFieldTestSelectors,
 } as const satisfies Record<string, FeatureTestSelector>;

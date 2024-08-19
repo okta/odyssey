@@ -10,145 +10,81 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {
-  queries,
-  within,
-  type BoundFunctions,
-  type ByRoleOptions,
-  type GetByText,
-  GetByRole,
-} from "@testing-library/dom";
+import { within } from "@testing-library/dom";
 
+import { getByQuerySelector, interpolateString } from "./elementSelector";
 import {
   type FeatureTestSelector,
   type TestSelector,
 } from "./featureTestSelector";
-import { odysseyTestSelectors } from "./odysseyTestSelectors";
-
-export const interpolateString = (
-  string: string,
-  values: Record<string, string | RegExp>,
-) => {
-  const interpolatedString = eval(`
-    ${Object.entries(values)
-      .map(
-        ([key, value]) =>
-          `const ${key} = ${
-            typeof value === "string" ? JSON.stringify(value) : value
-          };`,
-      )
-      .join("")}
-
-    \`${string}\`
-  `) as string;
-
-  if (/^\/*(.+)\/$/.test(interpolatedString)) {
-    return eval(interpolatedString) as RegExp;
-  }
-
-  return interpolatedString;
-};
-
-const getByQuerySelector = ({
-  canvas,
-  method,
-  options,
-  role,
-  text,
-}: {
-  canvas: BoundFunctions<typeof queries>;
-  method: "ByRole" | "ByLabelText" | "ByPlaceholderText" | "ByText";
-  options?: ByRoleOptions;
-  role?: Parameters<GetByRole>[1];
-  text?: Parameters<GetByText>[1];
-}) => {
-  if (method === "ByRole") {
-    return canvas.getByRole(
-      // TODO: These should eventually reference `query` as the function identifier.
-      role!,
-      options,
-    );
-  } else if (method === "ByLabelText") {
-    return canvas.getByLabelText(
-      // These should eventually reference `query` as the function identifier.
-      text!, // TODO: Use TypeScript `Infer` to ensure `label` is required when it's `ByLabelText`.
-      options,
-    );
-  } else if (method === "ByPlaceholderText") {
-    return canvas.getByPlaceholderText(
-      // These should eventually reference `query` as the function identifier.
-      text!, // TODO: Use TypeScript `Infer` to ensure `label` is required when it's `ByLabelText`.
-      options,
-    );
-  } else if (method === "ByText") {
-    return canvas.getByText(
-      // These should eventually reference `query` as the function identifier.
-      text!, // TODO: Use TypeScript `Infer` to ensure `description` is required when it's `ByLabelText`.
-      options,
-    );
-  }
-
-  return null;
-};
+import { getComputedAccessibleText } from "./getAccessibleText";
+import { getControlledElement } from "./linkedHtmlSelectors";
 
 export const querySelector = <TestSelectors extends FeatureTestSelector>({
-  canvas,
-  templateArgs: templateArgsProp,
+  element: parentElement,
+  options: querySelectorOptions,
   testSelectors,
 }: {
   /**
-   * Testing Library canvas. This is usually `screen`, but Storybook uses `within(canvas)`.
+   * Refers to Testing Library's canvas. This is usually `screen`, but Storybook uses `within(canvas)`.
    */
-  canvas: BoundFunctions<typeof queries>;
-  templateArgs?: TestSelectors extends TestSelector
+  element: HTMLElement;
+  /**
+   * Required values help narrow down selection.
+   */
+  options?: TestSelectors extends TestSelector
     ? Record<
         TestSelectors["selector"]["templateVariableNames"][number],
         string | RegExp
       >
     : never;
+  /**
+   * Selectors object.
+   */
   testSelectors: TestSelectors;
 }) => {
-  const element =
-    "selector" in testSelectors
+  const capturedElement =
+    "selector" in testSelectors && testSelectors.selector
       ? getByQuerySelector({
-          canvas,
+          canvas: within(parentElement),
           method: testSelectors.selector.method,
           options:
-            templateArgsProp && testSelectors.selector.options
+            querySelectorOptions && testSelectors.selector.options
               ? Object.fromEntries(
                   Object.entries(testSelectors.selector.options).map(
                     ([key, value]) => [
                       key,
-                      interpolateString(value, templateArgsProp),
+                      interpolateString(value, querySelectorOptions),
                     ],
                   ),
                 )
               : testSelectors.selector.options,
           ...(testSelectors.selector.method === "ByRole"
             ? {
-                role: templateArgsProp
-                  ? (interpolateString(
+                role: querySelectorOptions
+                  ? // Even though the interpolation function could return a RegExp, our `role` type ensures they can only pass a string. TypeScript has no way of knowing which template will return a RegExp or string, so that's why we have to force it ourselves with `as`.
+                    (interpolateString(
                       testSelectors.selector?.role,
-                      templateArgsProp,
+                      querySelectorOptions,
                     ) as string)
                   : testSelectors.selector?.role,
               }
             : {
-                text: templateArgsProp
+                text: querySelectorOptions
                   ? interpolateString(
                       testSelectors.selector?.text,
-                      templateArgsProp,
+                      querySelectorOptions,
                     )
                   : testSelectors.selector?.text,
               }),
         })
-      : null;
+      : parentElement;
 
-  const select =
-    "feature" in testSelectors
+  const selectChild =
+    "feature" in testSelectors && testSelectors.feature
       ? <FeatureName extends keyof (typeof testSelectors)["feature"]>(
           featureName: FeatureName,
-          templateArgs?: (typeof testSelectors)["feature"][FeatureName] extends TestSelector
+          options?: (typeof testSelectors)["feature"][FeatureName] extends TestSelector
             ? Record<
                 (typeof testSelectors)["feature"][FeatureName]["selector"]["templateVariableNames"][number],
                 string | RegExp
@@ -156,43 +92,32 @@ export const querySelector = <TestSelectors extends FeatureTestSelector>({
             : never,
         ) =>
           querySelector({
-            canvas: element ? within(element) : canvas,
-            templateArgs,
+            element: capturedElement
+              ? testSelectors.feature[featureName].isControlledElement
+                ? getControlledElement({ element: capturedElement })
+                : capturedElement
+              : parentElement,
+            options,
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-expect-error: Type 'FeatureName' cannot be used to index type 'Record<string, FeatureTestSelector>'.ts(2536)
             testSelectors: testSelectors.feature[featureName],
           })
       : null;
 
+  const selectLabel =
+    "label" in testSelectors && testSelectors.label && capturedElement
+      ? <LabelName extends keyof (typeof testSelectors)["label"]>(
+          labelName: LabelName,
+        ) =>
+          getComputedAccessibleText({
+            element: capturedElement,
+            type: testSelectors.label[labelName],
+          })
+      : null;
+
   return {
-    element,
-    select,
+    element: capturedElement,
+    selectChild,
+    selectLabel,
   };
 };
-
-export const queryOdysseySelector = <
-  ComponentName extends keyof typeof odysseyTestSelectors,
->({
-  canvas,
-  componentName,
-  templateArgs,
-}: {
-  canvas: Parameters<
-    typeof querySelector<(typeof odysseyTestSelectors)[ComponentName]>
-  >[0]["canvas"];
-  /**
-   * Name of the component you want to select within.
-   */
-  componentName: ComponentName;
-  /**
-   * String or RegExp values required for this selector.
-   */
-  templateArgs?: Parameters<
-    typeof querySelector<(typeof odysseyTestSelectors)[ComponentName]>
-  >[0]["templateArgs"];
-}) =>
-  querySelector({
-    canvas,
-    templateArgs,
-    testSelectors: odysseyTestSelectors[componentName],
-  });

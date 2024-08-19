@@ -52,6 +52,40 @@ import {
   useOdysseyDesignTokens,
   DesignTokens,
 } from "./OdysseyDesignTokensContext";
+import { FeatureTestSelector } from "./test-selectors";
+
+export const SelectTestSelectors = {
+  feature: {
+    list: {
+      feature: {
+        listItem: {
+          selector: {
+            method: "ByRole",
+            options: {
+              name: "${label}",
+            },
+            role: "option",
+            templateVariableNames: ["label"],
+          },
+        },
+      },
+      isControlledElement: true,
+    },
+  },
+  label: {
+    errorMessage: "errorMessage",
+    hint: "description",
+    label: "label",
+  },
+  selector: {
+    method: "ByRole",
+    options: {
+      name: "${label}",
+    },
+    role: "combobox",
+    templateVariableNames: ["label"],
+  },
+} as const satisfies FeatureTestSelector;
 
 export type SelectOption = {
   text: string;

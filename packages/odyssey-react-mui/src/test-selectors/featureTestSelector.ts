@@ -32,10 +32,19 @@ export type TestSelector = {
 };
 
 export type FeatureSelector = {
-  feature: Record<string, FeatureTestSelector>;
+  feature: Record<string, FeatureTestSelector & { isControlledElement?: true }>;
+};
+
+export type LabelSelectorType = "description" | "errorMessage" | "label";
+
+export type LabelSelector = {
+  /** An "accessible -> semantic" name mapping such as "`description` -> `hint`". */
+  label: Record<string, LabelSelectorType>;
 };
 
 export type FeatureTestSelector =
-  | TestSelector
   | FeatureSelector
-  | (FeatureSelector & TestSelector);
+  | TestSelector
+  | (FeatureSelector & TestSelector)
+  | (LabelSelector & TestSelector)
+  | (FeatureSelector & LabelSelector & TestSelector);

@@ -19,7 +19,6 @@ import {
 import { queryOdysseySelector } from "@okta/odyssey-react-mui/test-selectors";
 import { expect } from "@storybook/jest";
 import { Meta, StoryObj } from "@storybook/react";
-import { within } from "@storybook/testing-library";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { PlaywrightProps } from "../storybookTypes";
@@ -213,13 +212,13 @@ export const TitleWithLink: StoryObj<CalloutProps> = {
   }) => {
     await step("has visible link", async () => {
       const element = queryOdysseySelector({
-        canvas: within(canvasElement),
+        element: canvasElement,
         componentName: "Callout",
-        templateArgs: {
+        options: {
           role: "alert",
           title: /Safety checks failed/,
         },
-      }).select?.("link", {
+      }).selectChild?.("link", {
         linkText: "Visit fueling console",
       }).element;
 
