@@ -212,7 +212,7 @@ export const components = ({
           }),
           ...(ownerState.severity === "warning" && {
             backgroundColor: odysseyTokens.HueYellow50,
-            borderColor: odysseyTokens.HueYellow200,
+            borderColor: odysseyTokens.HueYellow500,
 
             ...(ownerState.variant === "toast" && {
               backgroundColor: odysseyTokens.HueYellow50.concat(
@@ -250,6 +250,7 @@ export const components = ({
             justifyContent: "center",
             alignItems: "center",
             borderRadius: 0,
+            border: 0,
 
             ...(ownerState.onClose !== undefined && {
               paddingInline: odysseyTokens.Spacing6,
