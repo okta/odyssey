@@ -10,19 +10,103 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ByRoleOptions } from "@testing-library/dom";
-import { AriaRole } from "react";
+import {
+  type ByRoleOptions,
+  type SelectorMatcherOptions,
+} from "@testing-library/dom";
+
+import {
+  type RoleSelectorMethod,
+  type TextSelectorMethod,
+} from "./getByQuerySelector";
+
+/**
+ * We can't use React's `AriaRole` because it allows any string value. We want to be very specific. This is otherwise copied straight from React's code.
+ * @see https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts#L2815
+ */
+export type AriaRole =
+  | "alert"
+  | "alertdialog"
+  | "application"
+  | "article"
+  | "banner"
+  | "button"
+  | "cell"
+  | "checkbox"
+  | "columnheader"
+  | "combobox"
+  | "complementary"
+  | "contentinfo"
+  | "definition"
+  | "dialog"
+  | "directory"
+  | "document"
+  | "feed"
+  | "figure"
+  | "form"
+  | "grid"
+  | "gridcell"
+  | "group"
+  | "heading"
+  | "img"
+  | "link"
+  | "list"
+  | "listbox"
+  | "listitem"
+  | "log"
+  | "main"
+  | "marquee"
+  | "math"
+  | "menu"
+  | "menubar"
+  | "menuitem"
+  | "menuitemcheckbox"
+  | "menuitemradio"
+  | "navigation"
+  | "none"
+  | "note"
+  | "option"
+  | "presentation"
+  | "progressbar"
+  | "radio"
+  | "radiogroup"
+  | "region"
+  | "row"
+  | "rowgroup"
+  | "rowheader"
+  | "scrollbar"
+  | "search"
+  | "searchbox"
+  | "separator"
+  | "slider"
+  | "spinbutton"
+  | "status"
+  | "switch"
+  | "tab"
+  | "table"
+  | "tablist"
+  | "tabpanel"
+  | "term"
+  | "textbox"
+  | "timer"
+  | "toolbar"
+  | "tooltip"
+  | "tree"
+  | "treegrid"
+  | "treeitem";
 
 export type Selector = {
-  options?: ByRoleOptions;
   templateVariableNames: string[];
 } & (
   | {
-      method: "ByRole";
-      role: AriaRole;
+      method: RoleSelectorMethod;
+      options?: ByRoleOptions;
+      role: AriaRole | AriaRole[];
+      // | "UNKNOWN" // This should be a `Symbol`, but it can't because this is ultimately going to be JSON stringified.
     }
   | {
-      method: "ByLabelText" | "ByPlaceholderText" | "ByText";
+      method: TextSelectorMethod;
+      options?: SelectorMatcherOptions;
       text: string;
     }
 );

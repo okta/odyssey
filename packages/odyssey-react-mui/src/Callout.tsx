@@ -56,8 +56,8 @@ export const CalloutTestSelectors = {
     options: {
       name: "${title}",
     },
-    role: "${role}",
-    templateVariableNames: ["role", "title"],
+    role: ["alert", "status"],
+    templateVariableNames: ["title"],
   },
 } as const satisfies FeatureTestSelector;
 
