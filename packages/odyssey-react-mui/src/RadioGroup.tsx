@@ -14,14 +14,7 @@ import {
   RadioGroup as MuiRadioGroup,
   type RadioGroupProps as MuiRadioGroupProps,
 } from "@mui/material";
-import React, {
-  memo,
-  ReactNode,
-  useCallback,
-  useRef,
-  useState,
-  useMemo,
-} from "react";
+import React, { memo, ReactNode, useCallback, useRef, useMemo } from "react";
 
 import { Field } from "./Field";
 import {
@@ -29,7 +22,7 @@ import {
   FieldComponentRenderProps,
 } from "./FieldComponentProps";
 import type { HtmlProps } from "./HtmlProps";
-import { ComponentControlledState, getControlState } from "./inputUtils";
+import { getControlState, useInputValues } from "./inputUtils";
 import { Radio, RadioProps } from "./Radio";
 
 export type RadioGroupProps = {
@@ -87,30 +80,26 @@ const RadioGroup = ({
   onChange: onChangeProp,
   testId,
   translate,
-  value: valueProp,
+  value,
 }: RadioGroupProps) => {
   const controlledStateRef = useRef(
     getControlState({
-      controlledValue: valueProp,
+      controlledValue: value,
       uncontrolledValue: defaultValue,
     }),
   );
 
-  const [internalValue, setInternalValue] = useState(defaultValue);
-
-  const isControlled =
-    controlledStateRef.current === ComponentControlledState.CONTROLLED;
-
-  const value = isControlled ? valueProp : internalValue;
+  const inputValues = useInputValues({
+    defaultValue,
+    value,
+    controlState: controlledStateRef.current,
+  });
 
   const onChange = useCallback<NonNullable<MuiRadioGroupProps["onChange"]>>(
     (event, newValue) => {
-      if (!isControlled) {
-        setInternalValue(newValue);
-      }
       onChangeProp?.(event, newValue);
     },
-    [isControlled, onChangeProp],
+    [onChangeProp],
   );
 
   const memoizedChildren = useMemo(
@@ -120,12 +109,11 @@ const RadioGroup = ({
           return React.cloneElement(child, {
             isDisabled: isDisabled,
             isReadOnly: isReadOnly,
-            isChecked: value === child.props.value,
           });
         }
         return child;
       }),
-    [children, isDisabled, isReadOnly, value],
+    [children, isDisabled, isReadOnly],
   );
 
   const renderFieldComponent = useCallback(
@@ -136,7 +124,7 @@ const RadioGroup = ({
       labelElementId,
     }: FieldRenderProps) => (
       <MuiRadioGroup
-        value={value}
+        {...inputValues}
         aria-describedby={ariaDescribedBy}
         aria-errormessage={errorMessageElementId}
         aria-labelledby={labelElementId}
@@ -149,7 +137,7 @@ const RadioGroup = ({
         {memoizedChildren}
       </MuiRadioGroup>
     ),
-    [value, nameOverride, onChange, translate, memoizedChildren, testId],
+    [inputValues, nameOverride, onChange, memoizedChildren, testId, translate],
   );
 
   return (

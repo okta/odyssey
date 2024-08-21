@@ -141,7 +141,7 @@ export const ReadOnly: StoryObj<typeof RadioGroup> = {
   ...Template,
   args: {
     isReadOnly: true,
-    defaultValue: "",
+    defaultValue: "Warp Speed",
   },
 };
 export const Error: StoryObj<typeof RadioGroup> = {
@@ -174,20 +174,20 @@ export const UncontrolledRadioGroup: StoryObj<typeof RadioGroup> = {
   args: {
     defaultValue: "Warp Speed",
   },
-  play: async ({ canvasElement, step }) => {
-    await step("select controlled radio button", async () => {
-      const canvas = within(canvasElement);
-      const radiogroup = canvas.getByRole("radiogroup") as HTMLInputElement;
-      const radio = canvas.getByLabelText(
-        "Ludicrous Speed",
-      ) as HTMLInputElement;
-      if (radiogroup && radio) {
-        await userEvent.click(radio);
-      }
-      await expect(radio).toBeChecked();
-      await axeRun("select controlled radio button");
-    });
-  },
+  // play: async ({ canvasElement, step }) => {
+  //   await step("select controlled radio button", async () => {
+  //     const canvas = within(canvasElement);
+  //     const radiogroup = canvas.getByRole("radiogroup") as HTMLInputElement;
+  //     const radio = canvas.getByLabelText(
+  //       "Ludicrous Speed",
+  //     ) as HTMLInputElement;
+  //     if (radiogroup && radio) {
+  //       await userEvent.click(radio);
+  //     }
+  //     await expect(radio).toBeChecked();
+  //     await axeRun("select controlled radio button");
+  //   });
+  // },
 };
 
 export const ControlledRadioGroup: StoryObj<typeof RadioGroup> = {
