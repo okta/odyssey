@@ -20,6 +20,37 @@ import { getByQuerySelector } from "./getByQuerySelector";
 import { interpolateString } from "./interpolateString";
 import { getControlledElement } from "./linkedHtmlSelectors";
 
+export type TestSelectorOptions<TestSelectors> = (
+  TestSelectors extends TestSelector
+  ? Record<
+      keyof TestSelectors["selector"]["options"],
+      string | RegExp
+    >
+  : {}
+)
+
+export type TestSelectorRole<TestSelectors> = (
+  TestSelectors extends TestSelector
+  & {
+    method: "ByRole";
+    role: infer Role;
+  }
+  ? Role extends AriaRole[]
+    ? {
+      role: Role[number];
+    }
+    : {}
+  : {}
+)
+
+export type QuerySelectorOptions<TestSelectors> = (
+  TestSelectorOptions<TestSelectors>
+  & TestSelectorRole<TestSelectors>
+  & {
+    queryMethod?: Parameters<typeof getByQuerySelector>[0]["queryMethod"];
+  }
+)
+
 export const querySelector = <TestSelectors extends FeatureTestSelector>({
   element: parentElement,
   options: querySelectorOptions,
@@ -32,34 +63,7 @@ export const querySelector = <TestSelectors extends FeatureTestSelector>({
   /**
    * Required values help narrow down selection.
    */
-  options?: (TestSelectors extends TestSelector
-    ? Record<
-        TestSelectors["selector"]["templateVariableNames"][number],
-        string | RegExp
-      > &
-        (TestSelectors extends TestSelector & {
-          method: "ByRole";
-          role: infer Role;
-        }
-          ? Role extends AriaRole[]
-            ? {
-                role: Role[number];
-              }
-            : object
-          : object)
-    : object) &
-    (TestSelectors extends {
-      selector: {
-        method: "ByRole";
-        role: AriaRole[];
-      };
-    }
-      ? {
-          role: TestSelectors["selector"]["role"][number];
-        }
-      : object) & {
-      queryMethod?: Parameters<typeof getByQuerySelector>[0]["queryMethod"];
-    };
+  options?: QuerySelectorOptions<TestSelectors>;
   /**
    * Selectors object.
    */
@@ -74,9 +78,9 @@ export const querySelector = <TestSelectors extends FeatureTestSelector>({
             querySelectorOptions && testSelectors.selector.options
               ? Object.fromEntries(
                   Object.entries(testSelectors.selector.options).map(
-                    ([key, value]) => [
-                      key,
-                      interpolateString(value, querySelectorOptions),
+                    ([testSelectorsKey, testingLibraryKey]) => [
+                      testingLibraryKey,
+                      querySelectorOptions[testSelectorsKey],
                     ],
                   ),
                 )
@@ -113,7 +117,7 @@ export const querySelector = <TestSelectors extends FeatureTestSelector>({
           featureName: FeatureName,
           options?: (FeatureTestSelectors extends TestSelector
             ? Record<
-                FeatureTestSelectors["selector"]["templateVariableNames"][number],
+                keyof FeatureTestSelectors["selector"]["options"],
                 string | RegExp
               > &
                 (FeatureTestSelectors extends TestSelector & {

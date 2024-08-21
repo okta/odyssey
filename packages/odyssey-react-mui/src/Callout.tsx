@@ -30,10 +30,9 @@ export const CalloutTestSelectors = {
       selector: {
         method: "ByRole",
         options: {
-          name: "${linkText}",
+          linkText: "name",
         },
         role: "link",
-        templateVariableNames: ["linkText"],
       },
     },
   },
@@ -44,10 +43,9 @@ export const CalloutTestSelectors = {
   selector: {
     method: "ByRole",
     options: {
-      name: "${title}",
+      title: "name",
     },
     role: ["alert", "status"],
-    templateVariableNames: ["title"],
   },
 } as const satisfies FeatureTestSelector;
 

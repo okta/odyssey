@@ -95,20 +95,32 @@ export type AriaRole =
   | "treegrid"
   | "treeitem";
 
-export type Selector = {
-  templateVariableNames: string[];
-} & (
-  | {
-      method: RoleSelectorMethod;
-      options?: ByRoleOptions;
-      role: AriaRole | AriaRole[];
-      // | "UNKNOWN" // This should be a `Symbol`, but it can't because this is ultimately going to be JSON stringified.
-    }
-  | {
-      method: TextSelectorMethod;
-      options?: SelectorMatcherOptions;
-      text: string;
-    }
+export type RoleSelector = {
+  method: RoleSelectorMethod;
+  options: (
+    Record<
+      string,
+      keyof ByRoleOptions
+    >
+  );
+  role: AriaRole | AriaRole[];
+  // | "UNKNOWN" // This should be a `Symbol`, but it can't because this is ultimately going to be JSON stringified.
+}
+
+export type TextSelector = {
+  method: TextSelectorMethod;
+  options: (
+    Record<
+      string,
+      keyof SelectorMatcherOptions
+    >
+  );
+  text: string;
+}
+
+export type Selector = (
+  | RoleSelector
+  | TextSelector
 );
 
 export type TestSelector = {
