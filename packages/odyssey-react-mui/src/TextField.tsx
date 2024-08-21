@@ -38,9 +38,8 @@ export const TextFieldTestSelectors = {
       selector: {
         method: "ByRole",
         options: {
-          name: "${label}",
+          label: "name",
         },
-        templateVariableNames: ["label"],
         role: "link",
       },
     },
@@ -53,10 +52,9 @@ export const TextFieldTestSelectors = {
   selector: {
     method: "ByRole",
     options: {
-      name: "${label}",
+      label: "name",
     },
     role: "textbox",
-    templateVariableNames: ["label"],
   },
 } as const satisfies FeatureTestSelector;
 

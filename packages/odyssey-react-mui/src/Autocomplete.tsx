@@ -61,10 +61,9 @@ export const AutocompleteTestSelectors = {
           selector: {
             method: "ByRole",
             options: {
-              name: "${label}",
+              label: "name",
             },
             role: "option",
-            templateVariableNames: ["label"],
           },
         },
       },
@@ -79,10 +78,9 @@ export const AutocompleteTestSelectors = {
   selector: {
     method: "ByRole",
     options: {
-      name: "${label}",
+      label: "name",
     },
     role: "combobox",
-    templateVariableNames: ["label"],
   },
 } as const satisfies FeatureTestSelector;
 

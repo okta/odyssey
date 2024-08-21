@@ -38,9 +38,8 @@ export const TabsTestSelectors = {
       selector: {
         method: "ByRole",
         options: {
-          name: "${label}",
+          label: "name",
         },
-        templateVariableNames: ["label"],
         role: "tab",
       },
     },
@@ -48,10 +47,9 @@ export const TabsTestSelectors = {
   selector: {
     method: "ByRole",
     options: {
-      name: "${ariaLabel}",
+      label: "name",
     },
     role: "tablist",
-    templateVariableNames: ["ariaLabel"],
   },
 } as const satisfies FeatureTestSelector;
 

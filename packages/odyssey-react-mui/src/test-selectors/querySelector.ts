@@ -20,20 +20,26 @@ import { getByQuerySelector } from "./getByQuerySelector";
 import { interpolateString } from "./interpolateString";
 import { getControlledElement } from "./linkedHtmlSelectors";
 
-export type TestSelectorOptions<TestSelectors> = (
+// export type TestSelectorOptions<TestSelectors extends FeatureTestSelector> = (
+//   TestSelectors extends {
+//     selector: {
+//       options: Record<infer TestSelectorKey, unknown>;
+//     };
+//   } ? Record<TestSelectorKey, string | RegExp> : {}
+// )
+
+export type TestSelectorOptions<TestSelectors extends FeatureTestSelector> = (
   TestSelectors extends TestSelector
-  ? Record<
-      keyof TestSelectors["selector"]["options"],
-      string | RegExp
-    >
+  ? Record<keyof TestSelectors["selector"]["options"], string | RegExp>
   : {}
 )
 
-export type TestSelectorRole<TestSelectors> = (
-  TestSelectors extends TestSelector
-  & {
-    method: "ByRole";
-    role: infer Role;
+export type TestSelectorRole<TestSelectors extends FeatureTestSelector> = (
+  TestSelectors extends {
+    selector: {
+      method: "ByRole";
+      role: infer Role;
+    }
   }
   ? Role extends AriaRole[]
     ? {
@@ -43,7 +49,7 @@ export type TestSelectorRole<TestSelectors> = (
   : {}
 )
 
-export type QuerySelectorOptions<TestSelectors> = (
+export type QuerySelectorOptions<TestSelectors extends FeatureTestSelector> = (
   TestSelectorOptions<TestSelectors>
   & TestSelectorRole<TestSelectors>
   & {
@@ -63,19 +69,19 @@ export const querySelector = <TestSelectors extends FeatureTestSelector>({
   /**
    * Required values help narrow down selection.
    */
-  options?: QuerySelectorOptions<TestSelectors>;
+  options: QuerySelectorOptions<TestSelectors>;
   /**
    * Selectors object.
    */
   testSelectors: TestSelectors;
 }) => {
   const capturedElement =
-    "selector" in testSelectors && testSelectors.selector
+    "selector" in testSelectors
       ? getByQuerySelector({
           element: parentElement,
           queryMethod: querySelectorOptions?.queryMethod || "get",
           queryOptions:
-            querySelectorOptions && testSelectors.selector.options
+            querySelectorOptions
               ? Object.fromEntries(
                   Object.entries(testSelectors.selector.options).map(
                     ([testSelectorsKey, testingLibraryKey]) => [
@@ -108,7 +114,7 @@ export const querySelector = <TestSelectors extends FeatureTestSelector>({
       : parentElement;
 
   const selectChild =
-    "feature" in testSelectors && testSelectors.feature && capturedElement
+    "feature" in testSelectors && capturedElement
       ? <
           FeatureName extends keyof (typeof testSelectors)["feature"],
           FeatureTestSelectors extends
@@ -161,7 +167,7 @@ export const querySelector = <TestSelectors extends FeatureTestSelector>({
       : null;
 
   const selectLabel =
-    "label" in testSelectors && testSelectors.label && capturedElement
+    "label" in testSelectors && capturedElement
       ? <LabelName extends keyof (typeof testSelectors)["label"]>(
           labelName: LabelName,
         ) =>

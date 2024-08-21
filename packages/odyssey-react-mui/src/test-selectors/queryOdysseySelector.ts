@@ -10,8 +10,21 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { odysseyTestSelectors } from "./odysseyTestSelectors";
 import { querySelector } from "./querySelector";
+import { type FeatureTestSelector } from "./featureTestSelector";
+import { AutocompleteTestSelectors } from "../Autocomplete";
+import { CalloutTestSelectors } from "../Callout";
+import { SelectTestSelectors } from "../Select";
+import { TabsTestSelectors } from "../Tabs";
+import { TextFieldTestSelectors } from "../TextField";
+
+export const odysseyTestSelectors = {
+  Autocomplete: AutocompleteTestSelectors,
+  Callout: CalloutTestSelectors,
+  Select: SelectTestSelectors,
+  Tabs: TabsTestSelectors,
+  TextField: TextFieldTestSelectors,
+} as const satisfies Record<string, FeatureTestSelector>;
 
 export const queryOdysseySelector = <
   ComponentName extends keyof typeof odysseyTestSelectors,
@@ -30,7 +43,7 @@ export const queryOdysseySelector = <
   /**
    * String or RegExp values required for this selector.
    */
-  options?: Parameters<
+  options: Parameters<
     typeof querySelector<(typeof odysseyTestSelectors)[ComponentName]>
   >[0]["options"];
 }) =>
