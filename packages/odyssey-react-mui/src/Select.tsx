@@ -55,6 +55,11 @@ import {
 import { FeatureTestSelector } from "./test-selectors";
 
 export const SelectTestSelectors = {
+  accessibleText: {
+    errorMessage: "errorMessage",
+    hint: "description",
+    label: "label",
+  },
   feature: {
     list: {
       feature: {
@@ -70,11 +75,6 @@ export const SelectTestSelectors = {
       },
       isControlledElement: true,
     },
-  },
-  label: {
-    errorMessage: "errorMessage",
-    hint: "description",
-    label: "label",
   },
   selector: {
     method: "ByRole",

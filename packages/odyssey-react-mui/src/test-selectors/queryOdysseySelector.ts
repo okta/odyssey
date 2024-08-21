@@ -18,7 +18,7 @@ import { SelectTestSelectors } from "../Select";
 import { TabsTestSelectors } from "../Tabs";
 import { TextFieldTestSelectors } from "../TextField";
 
-export const odysseyTestSelectors = {
+export const odysseyTestSelector = {
   Autocomplete: AutocompleteTestSelectors,
   Callout: CalloutTestSelectors,
   Select: SelectTestSelectors,
@@ -27,28 +27,13 @@ export const odysseyTestSelectors = {
 } as const satisfies Record<string, FeatureTestSelector>;
 
 export const queryOdysseySelector = <
-  ComponentName extends keyof typeof odysseyTestSelectors,
->({
-  element,
-  componentName,
-  options,
-}: {
-  element: Parameters<
-    typeof querySelector<(typeof odysseyTestSelectors)[ComponentName]>
-  >[0]["element"];
+  ComponentName extends keyof typeof odysseyTestSelector,
+>(
   /**
    * Name of the component you want to select within.
    */
-  componentName: ComponentName;
-  /**
-   * String or RegExp values required for this selector.
-   */
-  options: Parameters<
-    typeof querySelector<(typeof odysseyTestSelectors)[ComponentName]>
-  >[0]["options"];
-}) =>
-  querySelector({
-    element,
-    options,
-    testSelectors: odysseyTestSelectors[componentName],
-  });
+  componentName: ComponentName
+) =>
+  querySelector(
+    odysseyTestSelector[componentName],
+  );

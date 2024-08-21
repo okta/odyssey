@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { normalizeText, validateHtmlElement } from "./sanity-checks";
+import { normalizeText, validateHtmlElement } from "./sanityChecks";
 
 // Code modified from: https://github.com/testing-library/jest-dom/blob/main/src/to-have-accessible-errormessage.js
 

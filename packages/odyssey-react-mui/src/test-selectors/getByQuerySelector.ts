@@ -121,20 +121,56 @@ export const getByQuerySelector = ({
       queryMethod,
       selectionMethod,
     })(role, queryOptions);
-  } else if (
-    selectionMethod === "ByLabelText" ||
-    selectionMethod === "ByPlaceholderText" ||
-    selectionMethod === "ByText"
-  ) {
-    return executeTestingLibraryMethod<ByTextMethods>({
-      canvas,
-      queryMethod,
-      selectionMethod,
-    })(text, queryOptions);
   }
 
-  return null;
+  return executeTestingLibraryMethod<ByTextMethods>({
+    canvas,
+    queryMethod,
+    selectionMethod,
+  })(text, queryOptions);
 };
+
+export const getByRoleQuerySelector = ({
+  element,
+  queryMethod,
+  queryOptions,
+  role,
+}: {
+  element: HTMLElement;
+  queryMethod: QueryMethod;
+  queryOptions?: ByRoleOptions;
+  role: ByRoleMatcher;
+}) => (
+  getByQuerySelector({
+    element,
+    queryMethod,
+    queryOptions,
+    role,
+    selectionMethod: "ByRole",
+  })
+)
+
+export const getByTextQuerySelector = ({
+  element,
+  queryMethod,
+  queryOptions,
+  selectionMethod,
+  text,
+}: {
+  element: HTMLElement;
+  queryMethod: QueryMethod;
+  queryOptions?: SelectorMatcherOptions;
+  selectionMethod: TextSelectorMethod;
+  text: Matcher;
+}) => (
+  getByQuerySelector({
+    element,
+    queryMethod,
+    queryOptions,
+    selectionMethod,
+    text,
+  })
+)
 
 // getByQuerySelector({
 //   element: document.createElement('div'),

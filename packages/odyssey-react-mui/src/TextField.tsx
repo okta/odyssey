@@ -33,6 +33,11 @@ import { FocusHandle, useInputValues, getControlState } from "./inputUtils";
 import { type FeatureTestSelector } from "./test-selectors";
 
 export const TextFieldTestSelectors = {
+  accessibleText: {
+    errorMessage: "errorMessage",
+    hint: "description",
+    label: "label",
+  },
   feature: {
     link: {
       selector: {
@@ -43,11 +48,6 @@ export const TextFieldTestSelectors = {
         role: "link",
       },
     },
-  },
-  label: {
-    errorMessage: "errorMessage",
-    hint: "description",
-    label: "label",
   },
   selector: {
     method: "ByRole",

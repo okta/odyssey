@@ -211,16 +211,22 @@ export const TitleWithLink: StoryObj<CalloutProps> = {
     step: PlaywrightProps<CalloutProps>["step"];
   }) => {
     await step("has visible link", async () => {
-      const element = queryOdysseySelector({
+      const querySelector = queryOdysseySelector("Callout")
+
+      const element = querySelector({
         element: canvasElement,
-        componentName: "Callout",
+        role: "alert",
         options: {
-          role: "alert",
           title: /Safety checks failed/,
         },
-      }).selectChild?.("link", {
-        linkText: "Visit fueling console",
-      }).element;
+      })
+      .selectChild?.({
+        featureName: "link",
+        options: {
+          linkText: "Visit fueling console",
+        },
+      })
+      .element;
 
       expect(element).toBeVisible();
     });

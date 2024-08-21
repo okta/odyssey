@@ -25,6 +25,10 @@ import { Paragraph } from "./Typography";
 import { useUniqueId } from "./useUniqueId";
 
 export const CalloutTestSelectors = {
+  accessibleText: {
+    text: "description",
+    title: "label",
+  },
   feature: {
     link: {
       selector: {
@@ -35,10 +39,6 @@ export const CalloutTestSelectors = {
         role: "link",
       },
     },
-  },
-  label: {
-    text: "description",
-    title: "label",
   },
   selector: {
     method: "ByRole",

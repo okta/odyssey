@@ -135,7 +135,7 @@ export type LabelSelectorType = "description" | "errorMessage" | "label";
 
 export type LabelSelector = {
   /** An "accessible -> semantic" name mapping such as "`description` -> `hint`". */
-  label: Record<string, LabelSelectorType>;
+  accessibleText: Record<string, LabelSelectorType>;
 };
 
 export type FeatureTestSelector =

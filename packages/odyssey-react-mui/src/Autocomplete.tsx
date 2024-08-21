@@ -54,6 +54,11 @@ import { FeatureTestSelector } from "./test-selectors";
 const AutoSizer = _AutoSizer as unknown as FC<AutoSizerProps>;
 
 export const AutocompleteTestSelectors = {
+  accessibleText: {
+    errorMessage: "errorMessage",
+    hint: "description",
+    label: "label",
+  },
   feature: {
     list: {
       feature: {
@@ -69,11 +74,6 @@ export const AutocompleteTestSelectors = {
       },
       isControlledElement: true,
     },
-  },
-  label: {
-    errorMessage: "errorMessage",
-    hint: "description",
-    label: "label",
   },
   selector: {
     method: "ByRole",

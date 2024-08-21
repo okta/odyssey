@@ -16,9 +16,9 @@ import {
   type TestSelector,
 } from "./featureTestSelector";
 import { getComputedAccessibleText } from "./getComputedAccessibleText";
-import { getByQuerySelector } from "./getByQuerySelector";
-import { interpolateString } from "./interpolateString";
+import { getByRoleQuerySelector, getByTextQuerySelector, type QueryMethod } from "./getByQuerySelector";
 import { getControlledElement } from "./linkedHtmlSelectors";
+import { ElementError } from "./sanityChecks";
 
 // export type TestSelectorOptions<TestSelectors extends FeatureTestSelector> = (
 //   TestSelectors extends {
@@ -28,158 +28,160 @@ import { getControlledElement } from "./linkedHtmlSelectors";
 //   } ? Record<TestSelectorKey, string | RegExp> : {}
 // )
 
-export type TestSelectorOptions<TestSelectors extends FeatureTestSelector> = (
-  TestSelectors extends TestSelector
-  ? Record<keyof TestSelectors["selector"]["options"], string | RegExp>
-  : {}
-)
-
-export type TestSelectorRole<TestSelectors extends FeatureTestSelector> = (
-  TestSelectors extends {
+export type TestSelectorRole<LocalFeatureTestSelector extends FeatureTestSelector> = (
+  LocalFeatureTestSelector extends {
     selector: {
-      method: "ByRole";
       role: infer Role;
     }
   }
   ? Role extends AriaRole[]
-    ? {
-      role: Role[number];
-    }
-    : {}
+    ? Role[number]
+    : never
+  : never
+)
+
+export type QuerySelectorOptions<LocalFeatureTestSelector extends FeatureTestSelector> = (
+  LocalFeatureTestSelector extends TestSelector
+  ? Record<keyof LocalFeatureTestSelector["selector"]["options"], string | RegExp>
   : {}
 )
 
-export type QuerySelectorOptions<TestSelectors extends FeatureTestSelector> = (
-  TestSelectorOptions<TestSelectors>
-  & TestSelectorRole<TestSelectors>
-  & {
-    queryMethod?: Parameters<typeof getByQuerySelector>[0]["queryMethod"];
-  }
-)
-
-export const querySelector = <TestSelectors extends FeatureTestSelector>({
+export const querySelector = <LocalFeatureTestSelector extends FeatureTestSelector>(
+  /**
+   * Selectors object including features and accessible text selections.
+   */
+  testSelector: LocalFeatureTestSelector,
+) => ({
   element: parentElement,
   options: querySelectorOptions,
-  testSelectors,
+  queryMethod,
+  role,
 }: {
   /**
    * Refers to Testing Library's canvas. This is usually `screen`, but Storybook uses `within(canvas)`.
    */
   element: HTMLElement;
   /**
-   * Required values help narrow down selection.
+   * Helps narrow down HTML selection to the correct element.
    */
-  options: QuerySelectorOptions<TestSelectors>;
+  options?: QuerySelectorOptions<LocalFeatureTestSelector>
   /**
-   * Selectors object.
+   * Testing Library method used to query elements.
    */
-  testSelectors: TestSelectors;
+  queryMethod?: QueryMethod
+  /**
+   * Role is used when you have an optional `role`; otherwise, it'd baked into the metadata.
+   */
+  role?: TestSelectorRole<LocalFeatureTestSelector>
 }) => {
-  const capturedElement =
-    "selector" in testSelectors
-      ? getByQuerySelector({
-          element: parentElement,
-          queryMethod: querySelectorOptions?.queryMethod || "get",
-          queryOptions:
-            querySelectorOptions
-              ? Object.fromEntries(
-                  Object.entries(testSelectors.selector.options).map(
-                    ([testSelectorsKey, testingLibraryKey]) => [
-                      testingLibraryKey,
-                      querySelectorOptions[testSelectorsKey],
-                    ],
-                  ),
-                )
-              : testSelectors.selector.options,
-          ...(testSelectors.selector.method === "ByRole"
-            ? {
-                selectionMethod: testSelectors.selector.method,
-                role: Array.isArray(testSelectors.selector.role)
-                  ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                    // @ts-expect-error: Property 'role' does not exist on type 'TestSelectors extends { selector: { method: "ByRole"; role: AriaRole[]; }; } ? { role: TestSelectors["selector"]["role"][number]; } : {}'.ts(2339)
-                    // This is erroring, but the type and code work. They does narrow the type properly. It's just here where TypeScript doesn't understand that both `querySelectorOptions` exists as does the `role` property on it. It _has_ to passed in based on the way the types were written, so it's safe to ignore this error for now. -Kevin Ghadyani
-                    querySelectorOptions.role
-                  : testSelectors.selector.role,
-              }
-            : {
-                selectionMethod: testSelectors.selector.method,
-                text: querySelectorOptions
-                  ? interpolateString(
-                      testSelectors.selector.text,
-                      querySelectorOptions,
-                    )
-                  : testSelectors.selector.text,
-              }),
+  if ("selector" in testSelector && querySelectorOptions) {
+    const sharedProps = {
+      element: parentElement,
+      queryMethod: queryMethod || "get",
+      queryOptions:
+        Object.fromEntries(
+          (Object.entries(testSelector.selector.options) as (
+            Array<[keyof QuerySelectorOptions<LocalFeatureTestSelector>, QuerySelectorOptions<LocalFeatureTestSelector>[keyof QuerySelectorOptions<LocalFeatureTestSelector>]]>
+          ))
+          .map(
+            ([testSelectorsKey, testingLibraryKey]) => [
+              testingLibraryKey,
+              querySelectorOptions[testSelectorsKey],
+            ],
+          ),
+        ),
+    }
+
+    const capturedElement = (
+      testSelector.selector.method === "ByRole"
+      ? (
+        getByRoleQuerySelector({
+          ...sharedProps,
+          role: Array.isArray(testSelector.selector.role) || role
+            ? role || ""
+            : testSelector.selector.role,
         })
-      : parentElement;
+      )
+      : (
+        getByTextQuerySelector({
+          ...sharedProps,
+          selectionMethod: testSelector.selector.method,
+          text: testSelector.selector.text,
+        })
+      )
+    )
 
-  const selectChild =
-    "feature" in testSelectors && capturedElement
-      ? <
-          FeatureName extends keyof (typeof testSelectors)["feature"],
-          FeatureTestSelectors extends
-            (typeof testSelectors)["feature"][FeatureName],
-        >(
-          featureName: FeatureName,
-          options?: (FeatureTestSelectors extends TestSelector
-            ? Record<
-                keyof FeatureTestSelectors["selector"]["options"],
-                string | RegExp
-              > &
-                (FeatureTestSelectors extends TestSelector & {
-                  method: "ByRole";
-                  role: infer Role;
-                }
-                  ? Role extends AriaRole[]
-                    ? {
-                        role: Role[number];
-                      }
-                    : object
-                  : object)
-            : object) &
-            (FeatureTestSelectors extends {
-              selector: {
-                method: "ByRole";
-                role: AriaRole[];
-              };
-            }
-              ? {
-                  role: FeatureTestSelectors["selector"]["role"][number];
-                }
-              : object) & {
-              queryMethod?: Parameters<
-                typeof getByQuerySelector
-              >[0]["queryMethod"];
-            },
-        ) =>
-          querySelector({
-            element: capturedElement
-              ? testSelectors.feature[featureName].isControlledElement
-                ? getControlledElement({ element: capturedElement })
-                : capturedElement
-              : parentElement,
+    // TODO: This forces all functions to `get` rather than allowing `query` to return `null`. We should probably figure out a better way to tell TypeScript `null` is fine sometimes, but then error if there's no element when calling `selectChild` rather than having to use `?.`.
+    if (!capturedElement) {
+      throw new ElementError("No element exists for thsi query.", parentElement)
+    }
+
+    const selectChild =
+      "feature" in testSelector
+        ? (
+          <
+            FeatureName extends keyof (typeof testSelector)["feature"]
+          >({
+            featureName,
             options,
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-expect-error: Type 'FeatureName' cannot be used to index type 'Record<string, FeatureTestSelector>'.ts(2536)
-            // It's my opinion this is a TypeScript bug because the type works even if it says it doesn't. -Kevin Ghadyani
-            testSelectors: testSelectors.feature[featureName],
-          })
-      : null;
+            // queryMethod,
+            // role,
+          }: (
+            {
+              featureName: FeatureName,
+              options?: (typeof testSelector)["feature"][FeatureName] extends TestSelector
+              ? Record<
+                  keyof (typeof testSelector)["feature"][FeatureName]["selector"]["options"],
+                  string | RegExp
+                >
+              : never,
+            }
+            // & (
+            //   Pick<Parameters<ReturnType<typeof querySelector<(
+            //       (typeof testSelector)["feature"][FeatureName] extends TestSelector
+            //       ? (typeof testSelector)["feature"][FeatureName]
+            //       : never
+            //     )>>>[0], "queryMethod" | "role">
+            // )
+          )) => {
+            return querySelector(
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-expect-error: Type 'FeatureName' cannot be used to index type 'Record<string, FeatureTestSelector>'.ts(2536)
+              // It's my opinion this is a TypeScript bug because the type works even if it says it doesn't. -Kevin Ghadyani
+              testSelector.feature[featureName],
+            )({
+              element: (
+                testSelector.feature[featureName].isControlledElement
+                  ? getControlledElement({ element: capturedElement })
+                  : capturedElement
+              ),
+              options,
+              // queryMethod,
+              // role,
+            })
+          }
+        )
+        : null;
 
-  const selectLabel =
-    "label" in testSelectors && capturedElement
-      ? <LabelName extends keyof (typeof testSelectors)["label"]>(
-          labelName: LabelName,
-        ) =>
-          getComputedAccessibleText({
-            element: capturedElement,
-            type: testSelectors.label[labelName],
-          })
-      : null;
+    const selectAccessibleLabel =
+      "accessibleLabel" in testSelector
+        ? <LabelName extends keyof (typeof testSelector)["accessibleLabel"]>(
+            labelName: LabelName,
+          ) =>
+            getComputedAccessibleText({
+              element: capturedElement,
+              type: testSelector.accessibleLabel[labelName],
+            })
+        : null;
+
+    return {
+      element: capturedElement,
+      selectChild,
+      selectAccessibleLabel,
+    };
+  }
 
   return {
-    element: capturedElement,
-    selectChild,
-    selectLabel,
+    element: null,
   };
 };
