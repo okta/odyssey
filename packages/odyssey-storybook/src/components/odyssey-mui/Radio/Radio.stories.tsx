@@ -32,6 +32,15 @@ const storybookMeta: Meta<RadioProps> = {
         },
       },
     },
+    hint: {
+      control: "text",
+      description: "The helper text content",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     isDisabled: fieldComponentPropsMetaData.isDisabled,
     isInvalid: {
       control: "boolean",
@@ -42,12 +51,15 @@ const storybookMeta: Meta<RadioProps> = {
         },
       },
     },
-    hint: {
-      control: "text",
-      description: "The helper text content",
+    isReadOnly: {
+      control: "boolean",
+      description: "If `true`, the radio button is read-only",
       table: {
         type: {
-          summary: "string",
+          summary: "boolean",
+        },
+        defaultValue: {
+          summary: false,
         },
       },
     },
@@ -123,7 +135,12 @@ export const Default: StoryObj<typeof Radio> = {
     });
   },
 };
-
+export const Checked: StoryObj<typeof Radio> = {
+  args: {
+    label: "Automatically assign Okta Admin Console",
+    isChecked: true,
+  },
+};
 export const Disabled: StoryObj<typeof Radio> = {
   args: {
     isDisabled: true,
@@ -142,6 +159,14 @@ export const Hint: StoryObj<typeof Radio> = {
     hint: "All admin roles get access when the role is assigned.",
   },
 };
+export const ReadOnly: StoryObj<typeof Radio> = {
+  args: {
+    label: "Automatically assign Okta Admin Console",
+    isReadOnly: true,
+    isChecked: true,
+  },
+};
+
 export const Invalid: StoryObj<typeof Radio> = {
   args: {
     isChecked: true,
