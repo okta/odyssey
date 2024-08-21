@@ -224,7 +224,7 @@ export default storybookMeta;
 
 export const Default: StoryObj<typeof Select> = {
   play: async ({ canvasElement, step }) => {
-    await step("Select Earth from the listbox", async () => {
+    await step("Select Roles and permissions from the listbox", async () => {
       const comboBoxElement = canvasElement.querySelector(
         '[aria-haspopup="listbox"]',
       );
@@ -237,7 +237,7 @@ export const Default: StoryObj<typeof Select> = {
         await userEvent.tab();
         await waitFor(() => expect(listboxElement).not.toBeInTheDocument());
         const inputElement = canvasElement.querySelector("input");
-        await expect(inputElement?.value).toBe("Earth");
+        await expect(inputElement?.value).toBe("Roles and permissions");
         await waitFor(() => axeRun("Select Default"));
       }
     });
@@ -349,7 +349,7 @@ export const MultiSelect: StoryObj<typeof Select> = {
 
         const inputElement = canvasElement.querySelector("input");
         await expect(inputElement?.value).toBe(
-          "Roles and permissions, Resource administration",
+          "Roles and permissions,Okta Privileged Access components",
         );
         await userEvent.click(canvasElement);
         await waitFor(() => axeRun("Select Multiple"));
