@@ -36,20 +36,10 @@ export const CalloutTestSelectors = {
         templateVariableNames: ["linkText"],
       },
     },
-    text: {
-      selector: {
-        method: "ByText",
-        templateVariableNames: ["text"],
-        text: "${text}",
-      },
-    },
-    title: {
-      selector: {
-        method: "ByText",
-        templateVariableNames: ["title"],
-        text: "${title}",
-      },
-    },
+  },
+  label: {
+    text: "description",
+    title: "label",
   },
   selector: {
     method: "ByRole",

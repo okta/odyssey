@@ -11,12 +11,14 @@
  */
 
 import { type FeatureTestSelector } from "./featureTestSelector";
+import { AutocompleteTestSelectors } from "../Autocomplete";
 import { CalloutTestSelectors } from "../Callout";
 import { SelectTestSelectors } from "../Select";
 import { TabsTestSelectors } from "../Tabs";
 import { TextFieldTestSelectors } from "../TextField";
 
 export const odysseyTestSelectors = {
+  Autocomplete: AutocompleteTestSelectors,
   Callout: CalloutTestSelectors,
   Select: SelectTestSelectors,
   Tabs: TabsTestSelectors,

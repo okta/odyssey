@@ -81,15 +81,6 @@ export const querySelector = <TestSelectors extends FeatureTestSelector>({
                   ),
                 )
               : testSelectors.selector.options,
-          // ...( // TEMP
-          //   testSelectors.selector.method === "ByRole"
-          //   && Array.isArray(testSelectors.selector.role)
-          //   && querySelectorOptions
-          //   ? {
-          //     role: (querySelectorOptions.role) as TestSelectors["selector"]["role"][number]
-          //   }
-          //   : {}
-          // ),
           ...(testSelectors.selector.method === "ByRole"
             ? {
                 selectionMethod: testSelectors.selector.method,

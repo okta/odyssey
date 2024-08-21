@@ -39,10 +39,6 @@ import _AutoSizer, {
 } from "react-virtualized-auto-sizer";
 import { useTranslation } from "react-i18next";
 
-// This is required to get around a react-types issue for "AutoSizer is not a valid JSX element."
-// @see https://github.com/bvaughn/react-virtualized/issues/1739#issuecomment-1291444246
-const AutoSizer = _AutoSizer as unknown as FC<AutoSizerProps>;
-
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { HtmlProps } from "./HtmlProps";
@@ -51,6 +47,44 @@ import {
   useInputValues,
   getControlState,
 } from "./inputUtils";
+import { FeatureTestSelector } from "./test-selectors";
+
+// This is required to get around a react-types issue for "AutoSizer is not a valid JSX element."
+// @see https://github.com/bvaughn/react-virtualized/issues/1739#issuecomment-1291444246
+const AutoSizer = _AutoSizer as unknown as FC<AutoSizerProps>;
+
+export const AutocompleteTestSelectors = {
+  feature: {
+    list: {
+      feature: {
+        listItem: {
+          selector: {
+            method: "ByRole",
+            options: {
+              name: "${label}",
+            },
+            role: "option",
+            templateVariableNames: ["label"],
+          },
+        },
+      },
+      isControlledElement: true,
+    },
+  },
+  label: {
+    errorMessage: "errorMessage",
+    hint: "description",
+    label: "label",
+  },
+  selector: {
+    method: "ByRole",
+    options: {
+      name: "${label}",
+    },
+    role: "combobox",
+    templateVariableNames: ["label"],
+  },
+} as const satisfies FeatureTestSelector;
 
 export type AutocompleteProps<
   OptionType,
