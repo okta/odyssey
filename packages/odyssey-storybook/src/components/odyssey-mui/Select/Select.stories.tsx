@@ -22,88 +22,88 @@ import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaDat
 import { SelectChangeEvent } from "@mui/material";
 
 const optionsArray: SelectProps<string | string[], boolean>["options"] = [
-  "Earth",
-  "Mars",
-  "Ceres",
-  "Eros",
-  "Tycho Station",
-  "Phoebe",
-  "Ganymede",
+  "Roles and permissions",
+  "Okta Privileged Access components",
+  "Users and Groups administration",
+  "Resource administration",
+  "Security administration",
+  "Deploy and manage servers",
+  "Okta Privileged Access clients",
 ];
 
 const optionsObject: SelectProps<string | string[], boolean>["options"] = [
   {
-    text: "Earth",
-    value: "earth",
+    text: "Roles and permissions",
+    value: "roles-and-permissions",
   },
   {
-    text: "Mars",
-    value: "mars",
+    text: "Okta Privileged Access gateways",
+    value: "okta-privileged-access-gateways",
   },
   {
-    text: "Ceres",
-    value: "ceres",
+    text: "Users and Groups administration",
+    value: "users-and-groups-administration",
   },
   {
-    text: "Eros",
-    value: "eros",
+    text: "Resource administration",
+    value: "resource-administration",
   },
   {
-    text: "Tycho Station",
-    value: "tycho-station",
+    text: "Security administration",
+    value: "security-administrator",
   },
   {
-    text: "Phoebe",
-    value: "phoebe",
+    text: "Deploy and manage servers",
+    value: "deploy-and-manage-servers",
   },
   {
-    text: "Ganymede",
-    value: "ganymede",
+    text: "Okta Privileged Access clients",
+    value: "okta-privileged-access-clients",
   },
 ];
 
 const optionsGrouped: SelectProps<string | string[], boolean>["options"] = [
   {
-    text: "Sol System",
+    text: "Okta Privileged Access",
     type: "heading",
   },
   {
-    text: "Earth",
-    value: "earth",
+    text: "Roles and permissions",
+    value: "roles-and-permissions",
   },
   {
-    text: "Mars",
-    value: "mars",
+    text: "Okta Privileged Access gateways",
+    value: "okta-privileged-access-gateways",
   },
   {
-    text: "Ceres",
-    value: "ceres",
+    text: "Users and Groups administration",
+    value: "users-and-groups-administration",
   },
   {
-    text: "Eros",
-    value: "eros",
+    text: "Resource administration",
+    value: "resource-administration",
   },
   {
-    text: "Tycho Station",
-    value: "tycho-station",
+    text: "Security administration",
+    value: "security-administrator",
   },
   {
-    text: "Phoebe",
-    value: "phoebe",
+    text: "Deploy and manage servers",
+    value: "deploy-and-manage-servers",
   },
   {
-    text: "Ganymede",
-    value: "ganymede",
+    text: "Okta Privileged Access clients",
+    value: "okta-privileged-access-clients",
   },
   {
-    text: "Extrasolar",
+    text: "Audit events",
     type: "heading",
   },
-  "Auberon",
-  "Al-Halub",
-  "Freehold",
-  "Laconia",
-  "New Terra",
+  "Resource",
+  "Action",
+  "Related Info",
+  "Actor",
+  "Date",
 ];
 
 const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
@@ -143,6 +143,7 @@ const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
     isDisabled: fieldComponentPropsMetaData.isFullWidth,
     isFullWidth: fieldComponentPropsMetaData.isFullWidth,
     isOptional: fieldComponentPropsMetaData.isOptional,
+    isReadOnly: fieldComponentPropsMetaData.isReadOnly,
     label: {
       control: "text",
       description: "The label text for the select component",
@@ -211,8 +212,8 @@ const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
     },
   },
   args: {
-    hint: "Select your destination in the Sol system.",
-    label: "Destination",
+    hint: "Select a topic to learn more",
+    label: "Okta documentation",
     options: optionsArray,
   },
   decorators: [MuiThemeDecorator],
@@ -223,7 +224,7 @@ export default storybookMeta;
 
 export const Default: StoryObj<typeof Select> = {
   play: async ({ canvasElement, step }) => {
-    await step("Select Earth from the listbox", async () => {
+    await step("Select Roles and permissions from the listbox", async () => {
       const comboBoxElement = canvasElement.querySelector(
         '[aria-haspopup="listbox"]',
       );
@@ -236,7 +237,7 @@ export const Default: StoryObj<typeof Select> = {
         await userEvent.tab();
         await waitFor(() => expect(listboxElement).not.toBeInTheDocument());
         const inputElement = canvasElement.querySelector("input");
-        await expect(inputElement?.value).toBe("Earth");
+        await expect(inputElement?.value).toBe("Roles and permissions");
         await waitFor(() => axeRun("Select Default"));
       }
     });
@@ -246,7 +247,7 @@ Default.args = { defaultValue: "" };
 
 export const DefaultValue: StoryObj<typeof Select> = {
   args: {
-    defaultValue: "Mars",
+    defaultValue: "Roles and permissions",
   },
 };
 
@@ -256,10 +257,9 @@ export const Disabled: StoryObj<typeof Select> = {
     defaultValue: "",
   },
 };
-
 export const Error: StoryObj<typeof Select> = {
   args: {
-    errorMessage: "Select your destination.",
+    errorMessage: "Select a topic.",
     defaultValue: "",
   },
   play: async ({ step }) => {
@@ -272,7 +272,7 @@ export const Error: StoryObj<typeof Select> = {
 export const ErrorsList: StoryObj<typeof Select> = {
   args: {
     isMultiSelect: true,
-    errorMessage: "Select your destination.",
+    errorMessage: "Select a topic.",
     errorMessageList: [
       "Select at least one item",
       "Select no more than 3 items",
@@ -297,7 +297,6 @@ export const HintLink: StoryObj<typeof Select> = {
     HintLinkComponent: <Link href="/learn-more">Learn more</Link>,
   },
 };
-
 export const OptionsObject: StoryObj<typeof Select> = {
   args: {
     options: optionsObject,
@@ -349,14 +348,32 @@ export const MultiSelect: StoryObj<typeof Select> = {
         await waitFor(() => expect(listboxElement).not.toBeInTheDocument());
 
         const inputElement = canvasElement.querySelector("input");
-        await expect(inputElement?.value).toBe("Earth,Mars");
+        await expect(inputElement?.value).toBe(
+          "Roles and permissions,Okta Privileged Access components",
+        );
         await userEvent.click(canvasElement);
         await waitFor(() => axeRun("Select Multiple"));
       }
     });
   },
 };
-
+export const ReadOnly: StoryObj<typeof Select> = {
+  args: {
+    isReadOnly: true,
+    defaultValue: "Security administration",
+  },
+};
+export const ReadOnlyMultiSelect: StoryObj<typeof Select> = {
+  args: {
+    isMultiSelect: true,
+    isReadOnly: true,
+    defaultValue: [
+      "Roles and permissions",
+      "Security administration",
+      "Deploy and manage servers",
+    ],
+  },
+};
 export const ControlledSelect: StoryObj<typeof Select> = {
   parameters: {
     docs: {
@@ -418,7 +435,10 @@ export const ControlledPreselectedMultipleSelect: StoryObj<typeof Select> = {
     hasMultipleChoices: true,
   },
   render: function C(props) {
-    const [localValue, setLocalValue] = useState(["Earth", "Mars"]);
+    const [localValue, setLocalValue] = useState([
+      "Roles and permissions",
+      "Resource administration",
+    ]);
     const onChange = useCallback(
       (event: SelectChangeEvent<string | string[]>) =>
         setLocalValue(event.target.value as string[]),

@@ -43,13 +43,14 @@ const nonForwardedProps = [
   "isChecked",
   "isDisabled",
   "isFullWidth",
+  "isReadOnly",
   "odysseyDesignTokens",
 ];
 
 const SwitchAndLabelContainer = styled("div", {
   shouldForwardProp: (prop) => !nonForwardedProps.includes(prop),
 })<
-  Pick<SwitchProps, "isFullWidth" | "isDisabled"> & {
+  Pick<SwitchProps, "isFullWidth" | "isDisabled" | "isReadOnly"> & {
     odysseyDesignTokens: DesignTokens;
   }
 >(({ isFullWidth, odysseyDesignTokens }) => ({
@@ -66,17 +67,16 @@ const SwitchContainer = styled.div({
 const StyledSwitchLabel = styled(FormLabel, {
   shouldForwardProp: (prop) => !nonForwardedProps.includes(prop),
 })<
-  Pick<SwitchLabelComponentProps, "isDisabled"> & {
+  Pick<SwitchLabelComponentProps, "isDisabled" | "isReadOnly"> & {
     odysseyDesignTokens: DesignTokens;
   }
->(({ isDisabled, odysseyDesignTokens }) => ({
+>(({ isDisabled, isReadOnly, odysseyDesignTokens }) => ({
   display: "block",
   margin: 0,
-  color: isDisabled
-    ? odysseyDesignTokens.TypographyColorDisabled
-    : odysseyDesignTokens.PaletteNeutralDark,
+  color: odysseyDesignTokens.PaletteNeutralDark,
 
   ...(isDisabled && {
+    color: odysseyDesignTokens.TypographyColorDisabled,
     p: {
       color: odysseyDesignTokens.TypographyColorDisabled,
     },
@@ -84,38 +84,57 @@ const StyledSwitchLabel = styled(FormLabel, {
       color: `${odysseyDesignTokens.TypographyColorDisabled} !important`,
     },
   }),
+
+  ...(isReadOnly && {
+    color: odysseyDesignTokens.HueNeutral700,
+    p: {
+      color: odysseyDesignTokens.HueNeutral700,
+    },
+    a: {
+      color: `${odysseyDesignTokens.HueNeutral700} !important`,
+    },
+  }),
 }));
 
 const SwitchTrack = styled("div", {
   shouldForwardProp: (prop) => !nonForwardedProps.includes(prop),
 })<
-  Pick<SwitchProps, "isChecked" | "isDisabled"> & {
+  Pick<SwitchProps, "isChecked" | "isDisabled" | "isReadOnly"> & {
     odysseyDesignTokens: DesignTokens;
   }
->(({ isChecked, isDisabled, odysseyDesignTokens }) => ({
+>(({ isChecked, isDisabled, isReadOnly, odysseyDesignTokens }) => ({
   position: "relative",
   width: odysseyDesignTokens.Spacing7,
   height: `calc(${odysseyDesignTokens.Spacing4} + ${odysseyDesignTokens.Spacing1})`,
   borderRadius: odysseyDesignTokens.BorderRadiusOuter,
-  backgroundColor: isDisabled
-    ? odysseyDesignTokens.HueNeutral200
-    : isChecked
-      ? odysseyDesignTokens.PaletteSuccessLight
-      : odysseyDesignTokens.HueNeutral300,
+  backgroundColor: odysseyDesignTokens.HueNeutral300,
   transition: `background-color ${odysseyDesignTokens.TransitionDurationMain}`,
+
+  ...(isDisabled && {
+    backgroundColor: odysseyDesignTokens.HueNeutral200,
+  }),
+
+  ...(isReadOnly && {
+    backgroundColor: odysseyDesignTokens.HueNeutral600,
+  }),
+
+  ...(isChecked &&
+    !isDisabled &&
+    !isReadOnly && {
+      backgroundColor: odysseyDesignTokens.PaletteSuccessLight,
+    }),
 }));
 
 const SwitchThumb = styled("span", {
   shouldForwardProp: (prop) => !nonForwardedProps.includes(prop),
 })<
-  Pick<SwitchProps, "isChecked" | "isDisabled"> & {
+  Pick<SwitchProps, "isChecked" | "isDisabled" | "isReadOnly"> & {
     odysseyDesignTokens: DesignTokens;
   }
->(({ isChecked, isDisabled, odysseyDesignTokens }) => {
+>(({ isChecked, isDisabled, isReadOnly, odysseyDesignTokens }) => {
   const thumbOffset = toRem(3);
   const trackWidth = stripRem(odysseyDesignTokens.Spacing7);
   const thumbWidth = stripRem(odysseyDesignTokens.Spacing4) - toRem(2);
-
   const transformDistance = trackWidth - thumbWidth - thumbOffset * 2;
 
   return {
@@ -125,40 +144,57 @@ const SwitchThumb = styled("span", {
     width: `calc(${odysseyDesignTokens.Spacing4} - ${toRem(2)}rem)`,
     height: `calc(${odysseyDesignTokens.Spacing4} - ${toRem(2)}rem)`,
     borderRadius: odysseyDesignTokens.BorderRadiusRound,
-    backgroundColor: isDisabled
-      ? odysseyDesignTokens.HueNeutral50
-      : odysseyDesignTokens.HueNeutralWhite,
-    transform: isChecked
-      ? `translate3d(${transformDistance}rem, -50%, 0)`
-      : "translate3d(0, -50%, 0)",
+    backgroundColor: odysseyDesignTokens.HueNeutralWhite,
+    transform: "translate3d(0, -50%, 0)",
     transition: `transform ${odysseyDesignTokens.TransitionDurationMain}`,
+
+    ...(isDisabled && {
+      backgroundColor: odysseyDesignTokens.HueNeutral50,
+    }),
+
+    ...(isReadOnly && {
+      backgroundColor: odysseyDesignTokens.HueNeutral400,
+    }),
+
+    ...(isChecked && {
+      transform: `translate3d(${transformDistance}rem, -50%, 0)`,
+    }),
   };
 });
 
 const SwitchCheckMark = styled(CheckIcon, {
   shouldForwardProp: (prop) => !nonForwardedProps.includes(prop),
 })<
-  Pick<SwitchProps, "isChecked" | "isDisabled"> & {
+  Pick<SwitchProps, "isChecked" | "isDisabled" | "isReadOnly"> & {
     odysseyDesignTokens: DesignTokens;
   }
->(({ isChecked, isDisabled, odysseyDesignTokens }) => ({
+>(({ isChecked, isDisabled, isReadOnly, odysseyDesignTokens }) => ({
   position: "absolute",
   top: "50%",
   left: 3,
   width: odysseyDesignTokens.Spacing4,
   transform: "translateY(-50%)",
   transition: `opacity ${odysseyDesignTokens.TransitionDurationMain}`,
-  opacity: isChecked ? 1 : 0,
+  opacity: 0,
   path: {
-    fill: isDisabled
-      ? odysseyDesignTokens.HueNeutral50
-      : odysseyDesignTokens.HueNeutralWhite,
+    fill: odysseyDesignTokens.HueNeutralWhite,
   },
+
+  ...(isChecked && {
+    opacity: 1,
+  }),
+
+  ...((isDisabled || isReadOnly) && {
+    path: {
+      fill: odysseyDesignTokens.HueNeutral50,
+    },
+  }),
 }));
 
 const HiddenCheckbox = styled.input<{
   odysseyDesignTokens: DesignTokens;
-}>(({ odysseyDesignTokens }) => ({
+  isReadOnly?: boolean;
+}>(({ odysseyDesignTokens, isReadOnly }) => ({
   position: "absolute",
   top: 0,
   left: 0,
@@ -166,7 +202,7 @@ const HiddenCheckbox = styled.input<{
   height: "100%",
   margin: 0,
   opacity: 0,
-  cursor: "pointer",
+  cursor: isReadOnly ? "default" : "pointer",
   zIndex: 2,
 
   "&:focus-visible": {
@@ -194,6 +230,10 @@ export type SwitchProps = {
    * The value attribute of the Switch
    */
   value: string;
+  /**
+   * Determines whether the Switch is read-only
+   */
+  isReadOnly?: boolean;
 } & Pick<
   FieldComponentProps,
   "hint" | "HintLinkComponent" | "id" | "isFullWidth" | "isDisabled" | "name"
@@ -209,6 +249,7 @@ type SwitchLabelComponentProps = {
   isDisabled: SwitchProps["isDisabled"];
   isFullWidth: SwitchProps["isFullWidth"];
   label: SwitchProps["label"];
+  isReadOnly: SwitchProps["isReadOnly"];
 };
 
 const SwitchLabel = ({
@@ -218,6 +259,7 @@ const SwitchLabel = ({
   inputId,
   isDisabled,
   label,
+  isReadOnly,
 }: SwitchLabelComponentProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
@@ -226,6 +268,7 @@ const SwitchLabel = ({
       <StyledSwitchLabel
         htmlFor={inputId}
         isDisabled={isDisabled}
+        isReadOnly={isReadOnly}
         odysseyDesignTokens={odysseyDesignTokens}
       >
         {label}
@@ -252,6 +295,7 @@ const Switch = ({
   isDefaultChecked,
   isDisabled,
   isFullWidth = false,
+  isReadOnly = false,
   label,
   name,
   onChange,
@@ -292,12 +336,16 @@ const Switch = ({
 
   const handleOnChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
     (event) => {
+      if (isReadOnly) {
+        event.preventDefault();
+        return;
+      }
       const target = event.target;
       const { checked, value } = target;
       setInternalSwitchChecked(checked);
       onChange?.({ checked, value });
     },
-    [onChange, setInternalSwitchChecked],
+    [onChange, setInternalSwitchChecked, isReadOnly],
   );
 
   return (
@@ -321,6 +369,7 @@ const Switch = ({
           isDisabled={isDisabled}
           isFullWidth={isFullWidth}
           label={label}
+          isReadOnly={isReadOnly}
         />
         <SwitchContainer>
           <HiddenCheckbox
@@ -341,21 +390,26 @@ const Switch = ({
             odysseyDesignTokens={odysseyDesignTokens}
             type="checkbox"
             value={value}
+            readOnly={isReadOnly}
+            isReadOnly={isReadOnly}
           />
           <SwitchTrack
             data-switch-track
             isChecked={internalSwitchChecked}
             isDisabled={isDisabled}
+            isReadOnly={isReadOnly}
             odysseyDesignTokens={odysseyDesignTokens}
           >
             <SwitchThumb
               isChecked={internalSwitchChecked}
               isDisabled={isDisabled}
+              isReadOnly={isReadOnly}
               odysseyDesignTokens={odysseyDesignTokens}
             />
             <SwitchCheckMark
               isChecked={internalSwitchChecked}
               isDisabled={isDisabled}
+              isReadOnly={isReadOnly}
               odysseyDesignTokens={odysseyDesignTokens}
             />
           </SwitchTrack>
