@@ -2172,6 +2172,13 @@ export const components = ({
             },
           },
 
+          "&[data-empty='true']": {
+            "&:after": {
+              content: "'&nbsp;'",
+              visibility: "hidden",
+            },
+          },
+
           ...(!ownerState.disableGutters && {
             paddingInline: odysseyTokens.Spacing4,
           }),
@@ -2417,9 +2424,11 @@ export const components = ({
             }),
             "& .MuiSelect-select": {
               height: "auto",
+              // We're subtracting a pixel so the total height, including borders, is 40px
               paddingBlock: `calc(${odysseyTokens.Spacing3} - ${odysseyTokens.BorderWidthMain})`,
               paddingInline: odysseyTokens.Spacing3,
-              minHeight: 0,
+              // Setting min-height to the line-height here to avoid the select shrinking in size when the value is an empty string
+              minHeight: `${odysseyTokens.TypographyLineHeightUi}em`,
 
               "&:focus": {
                 backgroundColor: "transparent",
