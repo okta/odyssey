@@ -115,19 +115,29 @@ export const getByQuerySelector = ({
 )) => {
   const canvas = within(element);
 
-  if (selectionMethod === "ByRole") {
-    return executeTestingLibraryMethod<ByRoleMethods>({
-      canvas,
-      queryMethod,
-      selectionMethod,
-    })(role, queryOptions);
+  const capturedElement = (
+    selectionMethod === "ByRole"
+    ? (
+      executeTestingLibraryMethod<ByRoleMethods>({
+        canvas,
+        queryMethod,
+        selectionMethod,
+      })(role, queryOptions)
+    )
+    : (
+      executeTestingLibraryMethod<ByTextMethods>({
+        canvas,
+        queryMethod,
+        selectionMethod,
+      })(text, queryOptions)
+    )
+  )
+
+  if (queryMethod === "get") {
+    return capturedElement as HTMLElement
   }
 
-  return executeTestingLibraryMethod<ByTextMethods>({
-    canvas,
-    queryMethod,
-    selectionMethod,
-  })(text, queryOptions);
+  return capturedElement
 };
 
 export const getByRoleQuerySelector = ({

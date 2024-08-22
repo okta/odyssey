@@ -15,7 +15,7 @@ import {
   computeAccessibleDescription,
 } from "dom-accessibility-api";
 
-import { type LabelSelectorType } from "./featureTestSelector";
+import { type AccessibleLabelSelectorType } from "./featureTestSelector";
 import { getComputedAccessibleErrorMessageText } from "./getComputedAccessibleErrorMessageText";
 
 export const accessibleTextSelector = {
@@ -23,7 +23,7 @@ export const accessibleTextSelector = {
   errorMessage: getComputedAccessibleErrorMessageText,
   label: computeAccessibleName,
 } as const satisfies Record<
-  LabelSelectorType,
+  AccessibleLabelSelectorType,
   (element: HTMLElement) => string
 >;
 
@@ -32,5 +32,5 @@ export const getComputedAccessibleText = ({
   type,
 }: {
   element: HTMLElement;
-  type: LabelSelectorType;
+  type: AccessibleLabelSelectorType;
 }) => accessibleTextSelector[type](element);
