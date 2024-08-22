@@ -61,7 +61,10 @@ export type CheckboxProps = {
    * Callback fired when the blur event happens. Provides event value.
    */
   onBlur?: MuiFormControlLabelProps["onBlur"];
-} & Pick<FieldComponentProps, "hint" | "id" | "isDisabled" | "name"> &
+} & Pick<
+  FieldComponentProps,
+  "hint" | "id" | "isDisabled" | "isReadOnly" | "name"
+> &
   CheckedFieldProps<MuiCheckboxProps> &
   Pick<HtmlProps, "ariaLabel" | "ariaLabelledBy" | "testId" | "translate">;
 
@@ -74,6 +77,7 @@ const Checkbox = ({
   isDefaultChecked,
   isDisabled,
   isIndeterminate,
+  isReadOnly = false,
   isRequired,
   label: labelProp,
   hint,
@@ -102,13 +106,11 @@ const Checkbox = ({
   const localInputRef = useRef<HTMLInputElement>(null);
   useImperativeHandle(
     inputRef,
-    () => {
-      return {
-        focus: () => {
-          localInputRef.current?.focus();
-        },
-      };
-    },
+    () => ({
+      focus: () => {
+        localInputRef.current?.focus();
+      },
+    }),
     [],
   );
 
@@ -136,6 +138,16 @@ const Checkbox = ({
     [onChangeProp],
   );
 
+  const onClick = useCallback<NonNullable<MuiCheckboxProps["onClick"]>>(
+    (event) => {
+      if (isReadOnly) {
+        event.stopPropagation();
+        event.preventDefault();
+      }
+    },
+    [isReadOnly],
+  );
+
   const onBlur = useCallback<NonNullable<MuiFormControlLabelProps["onBlur"]>>(
     (event) => {
       onBlurProp?.(event);
@@ -143,9 +155,22 @@ const Checkbox = ({
     [onBlurProp],
   );
 
+  const checkboxStyles = useMemo(
+    () => ({
+      alignItems: "flex-start",
+      ...(isReadOnly && {
+        cursor: "default",
+        "& .MuiTypography-root": {
+          cursor: "default",
+        },
+      }),
+    }),
+    [isReadOnly],
+  );
+
   return (
     <FormControlLabel
-      sx={{ alignItems: "flex-start" }}
+      sx={checkboxStyles}
       aria-label={ariaLabel}
       aria-labelledby={ariaLabelledBy}
       className={
@@ -160,9 +185,14 @@ const Checkbox = ({
           {...inputValues}
           indeterminate={isIndeterminate}
           onChange={onChange}
+          onClick={
+            onClick as unknown as React.MouseEventHandler<HTMLButtonElement>
+          }
           required={isRequired}
           inputProps={{
             "data-se": testId,
+            "aria-readonly": isReadOnly,
+            readOnly: isReadOnly,
           }}
           disabled={isDisabled}
           inputRef={localInputRef}

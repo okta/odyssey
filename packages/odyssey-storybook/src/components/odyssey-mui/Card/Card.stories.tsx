@@ -189,9 +189,9 @@ export const ButtonWithoutImage: StoryObj<typeof Card> = {
         image={props.image}
         menuButtonChildren={
           <>
-            <MenuItem>Menu option</MenuItem>
-            <MenuItem>Menu option</MenuItem>
-            <MenuItem>Menu option</MenuItem>
+            <MenuItem>Menu option 1</MenuItem>
+            <MenuItem>Menu option 2</MenuItem>
+            <MenuItem>Menu option 3</MenuItem>
           </>
         }
         button={<Button variant="primary" label="Button" />}
