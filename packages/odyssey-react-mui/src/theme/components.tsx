@@ -177,41 +177,45 @@ export const components = ({
           padding: odysseyTokens.Spacing4,
           gap: odysseyTokens.Spacing4,
           color: odysseyTokens.TypographyColorBody,
-          border: 0,
+          border: "1px solid",
 
           // Severity color variation
           ...(ownerState.severity === "success" && {
-            backgroundColor: odysseyTokens.HueGreen100,
+            backgroundColor: odysseyTokens.HueGreen50,
+            borderColor: odysseyTokens.HueGreen200,
 
             ...(ownerState.variant === "toast" && {
-              backgroundColor: odysseyTokens.HueGreen100.concat(
+              backgroundColor: odysseyTokens.HueGreen50.concat(
                 odysseyTokens.PaletteAlphaSemi,
               ),
             }),
           }),
           ...(ownerState.severity === "info" && {
-            backgroundColor: odysseyTokens.HueBlue100,
+            backgroundColor: odysseyTokens.HueBlue50,
+            borderColor: odysseyTokens.HueBlue200,
 
             ...(ownerState.variant === "toast" && {
-              backgroundColor: odysseyTokens.HueBlue100.concat(
+              backgroundColor: odysseyTokens.HueBlue50.concat(
                 odysseyTokens.PaletteAlphaSemi,
               ),
             }),
           }),
           ...(ownerState.severity === "error" && {
-            backgroundColor: odysseyTokens.HueRed100,
+            backgroundColor: odysseyTokens.HueRed50,
+            borderColor: odysseyTokens.HueRed200,
 
             ...(ownerState.variant === "toast" && {
-              backgroundColor: odysseyTokens.HueRed100.concat(
+              backgroundColor: odysseyTokens.HueRed50.concat(
                 odysseyTokens.PaletteAlphaSemi,
               ),
             }),
           }),
           ...(ownerState.severity === "warning" && {
-            backgroundColor: odysseyTokens.HueYellow100,
+            backgroundColor: odysseyTokens.HueYellow50,
+            borderColor: odysseyTokens.HueYellow500,
 
             ...(ownerState.variant === "toast" && {
-              backgroundColor: odysseyTokens.HueYellow100.concat(
+              backgroundColor: odysseyTokens.HueYellow50.concat(
                 odysseyTokens.PaletteAlphaSemi,
               ),
             }),
@@ -246,6 +250,7 @@ export const components = ({
             justifyContent: "center",
             alignItems: "center",
             borderRadius: 0,
+            border: 0,
 
             ...(ownerState.onClose !== undefined && {
               paddingInline: odysseyTokens.Spacing6,
@@ -964,7 +969,6 @@ export const components = ({
                 backgroundColor: odysseyTokens.HueNeutral100,
                 borderColor: odysseyTokens.HueNeutral300,
 
-                //Override hover styles
                 [`.${formControlLabelClasses.root}:hover > &`]: {
                   backgroundColor: odysseyTokens.HueNeutral100,
                   borderColor: odysseyTokens.HueNeutral300,
