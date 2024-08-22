@@ -2407,61 +2407,58 @@ export const components = ({
         },
       },
       styleOverrides: {
-        root: ({ ownerState }) => {
-          const isReadOnly = ownerState?.inputProps?.readOnly;
-          return {
-            ...(isReadOnly && {
-              "&.MuiInputBase-root": {
+        root: ({ ownerState }) => ({
+          ...(ownerState?.inputProps?.readOnly && {
+            "&.MuiInputBase-root": {
+              backgroundColor: odysseyTokens.HueNeutral50,
+              borderColor: odysseyTokens.HueNeutral200,
+              "&:hover": {
                 backgroundColor: odysseyTokens.HueNeutral50,
-                borderColor: odysseyTokens.HueNeutral200,
-                "&:hover": {
-                  backgroundColor: odysseyTokens.HueNeutral50,
-                },
-                "&.Mui-focused": {
-                  borderColor: odysseyTokens.PalettePrimaryMain,
-                },
               },
-            }),
-            "& .MuiSelect-select": {
-              height: "auto",
-              // We're subtracting a pixel so the total height, including borders, is 40px
-              paddingBlock: `calc(${odysseyTokens.Spacing3} - ${odysseyTokens.BorderWidthMain})`,
-              paddingInline: odysseyTokens.Spacing3,
-              // Setting min-height to the line-height here to avoid the select shrinking in size when the value is an empty string
-              minHeight: `${odysseyTokens.TypographyLineHeightUi}em`,
-
-              "&:focus": {
-                backgroundColor: "transparent",
+              "&.Mui-focused": {
+                borderColor: odysseyTokens.PalettePrimaryMain,
               },
-
-              "& .MuiBox-root": {
-                display: "flex",
-                flexWrap: "wrap",
-                gap: odysseyTokens.Spacing1,
-                marginBlock: `-${odysseyTokens.Spacing2}`,
-                marginInline: `-${odysseyTokens.Spacing2}`,
-              },
-
-              ["& .MuiListItemSecondaryAction-root"]: {
-                display: "none",
-              },
-
-              ...(isReadOnly && {
-                color: odysseyTokens.HueNeutral700,
-                cursor: "default",
-                "&:focus": {
-                  backgroundColor: "transparent",
-                  borderColor: odysseyTokens.PalettePrimaryMain,
-                },
-              }),
             },
-            "& .MuiSelect-icon": {
-              right: "unset",
-              insetInlineEnd: odysseyTokens.Spacing3,
-              color: odysseyTokens.TypographyColorSubordinate,
+          }),
+          "& .MuiSelect-icon": {
+            right: "unset",
+            insetInlineEnd: odysseyTokens.Spacing3,
+            color: odysseyTokens.TypographyColorSubordinate,
+          },
+        }),
+        select: ({ ownerState }) => ({
+          height: "auto",
+          // We're subtracting a pixel so the total height, including borders, is 40px
+          paddingBlock: `calc(${odysseyTokens.Spacing3} - ${odysseyTokens.BorderWidthMain})`,
+          paddingInline: odysseyTokens.Spacing3,
+          // Setting min-height to the line-height here to avoid the select shrinking in size when the value is an empty string
+          minHeight: `${odysseyTokens.TypographyLineHeightUi}em`,
+
+          "&:focus": {
+            backgroundColor: "transparent",
+          },
+
+          "& .MuiBox-root": {
+            display: "flex",
+            flexWrap: "wrap",
+            gap: odysseyTokens.Spacing1,
+            marginBlock: `-${odysseyTokens.Spacing2}`,
+            marginInline: `-${odysseyTokens.Spacing2}`,
+          },
+
+          ["& .MuiListItemSecondaryAction-root"]: {
+            display: "none",
+          },
+
+          ...(ownerState?.inputProps?.readOnly && {
+            color: odysseyTokens.HueNeutral700,
+            cursor: "default",
+            "&:focus": {
+              backgroundColor: "transparent",
+              borderColor: odysseyTokens.PalettePrimaryMain,
             },
-          };
-        },
+          }),
+        }),
       },
     },
     MuiSvgIcon: {
