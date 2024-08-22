@@ -928,12 +928,12 @@ export const components = ({
             },
             ".Mui-error:not(.Mui-valid) > &": {
               borderColor: odysseyTokens.BorderColorDangerControl,
-              
+
               "&.Mui-checked": {
                 backgroundColor: odysseyTokens.PaletteDangerMain,
                 borderColor: odysseyTokens.BorderColorDangerControl,
               },
-              
+
               "&.Mui-focusVisible": {
                 boxShadow: `0 0 0 2px ${odysseyTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyTokens.PaletteDangerMain}`,
               },
