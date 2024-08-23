@@ -42,6 +42,40 @@ export type QuerySelectorOptions<
     >
   : Record<string, string>;
 
+export type InnerQuerySelectorProps<
+  LocalFeatureTestSelector extends FeatureTestSelector,
+  LocalQueryMethod extends QueryMethod,
+> = {
+  /**
+   * Testing Library method used to query elements.
+   */
+  queryMethod?: LocalQueryMethod;
+} & (LocalFeatureTestSelector extends {
+  selector: {
+    role: infer Role;
+  };
+}
+  ? Role extends AriaRole[]
+    ? {
+        /**
+         * Role is used when you have an optional `role`; otherwise, it'd baked into the metadata.
+         */
+        role: Role[number];
+      }
+    : object
+  : object) &
+  (LocalFeatureTestSelector extends TestSelector
+    ? {
+        /**
+         * Helps narrow down HTML selection to the correct element.
+         */
+        options: Record<
+          keyof LocalFeatureTestSelector["selector"]["options"],
+          string | RegExp
+        >;
+      }
+    : object);
+
 export const querySelector =
   <LocalFeatureTestSelector extends FeatureTestSelector>(
     /**
@@ -49,54 +83,19 @@ export const querySelector =
      */
     featureTestSelector: LocalFeatureTestSelector,
   ) =>
-  (
+  <LocalQueryMethod extends QueryMethod = "get">(
     /**
      * Refers to Testing Library's canvas. This is usually `screen`, but Storybook uses `within(canvas)`.
      */
     containerElement: HTMLElement,
-  ) =>
-  <LocalQueryMethod extends QueryMethod = "get">(
-    props?: {
-      /**
-       * Testing Library method used to query elements.
-       */
-      queryMethod?: LocalQueryMethod;
-    } & (LocalFeatureTestSelector extends {
-      selector: {
-        role: infer Role;
-      };
-    }
-      ? Role extends AriaRole[]
-        ? {
-            /**
-             * Role is used when you have an optional `role`; otherwise, it'd baked into the metadata.
-             */
-            role: Role[number];
-          }
-        : {
-            role?: never;
-          }
-      : {
-          role?: never;
-        }) &
-      (LocalFeatureTestSelector extends TestSelector
-        ? {
-            /**
-             * Helps narrow down HTML selection to the correct element.
-             */
-            options: Record<
-              keyof LocalFeatureTestSelector["selector"]["options"],
-              string | RegExp
-            >;
-          }
-        : {
-            options?: never;
-          }),
+    props: InnerQuerySelectorProps<LocalFeatureTestSelector, LocalQueryMethod>,
   ) => {
-    const { options: querySelectorOptions, queryMethod, role } = props || {};
-
+    const { queryMethod } = props || {};
     const localQueryMethod = queryMethod || ("get" as const);
+    const querySelectorOptions = "options" in props ? props.options : undefined;
+    const role = "role" in props ? (props.role as AriaRole) : undefined;
 
+    // This `let` is difficult to make into a `const`. It makes the code unreadable.
     let capturedElement: HTMLElement | null = null;
 
     if ("selector" in featureTestSelector && querySelectorOptions) {
@@ -173,9 +172,19 @@ export const querySelector =
       FeatureName extends LocalFeatureTestSelector extends FeatureSelector
         ? keyof LocalFeatureTestSelector["feature"]
         : keyof FeatureSelector,
-    >(
-      featureName: FeatureName,
-    ) => {
+      ChildQueryMethod extends QueryMethod,
+    >({
+      featureName,
+      queryMethod,
+      ...otherProps
+    }: {
+      featureName: FeatureName;
+    } & InnerQuerySelectorProps<
+      LocalFeatureTestSelector extends FeatureSelector
+        ? LocalFeatureTestSelector["feature"][FeatureName]
+        : FeatureTestSelector,
+      ChildQueryMethod
+    >) => {
       if (!capturedElement) {
         throw new ElementError(
           "No child HTML element available",
@@ -187,13 +196,39 @@ export const querySelector =
         throw new Error("Missing feature in featureTestSelector");
       }
 
+      type Options = Record<
+        LocalFeatureTestSelector extends FeatureSelector
+          ? LocalFeatureTestSelector["feature"][FeatureName] extends TestSelector
+            ? keyof LocalFeatureTestSelector["feature"][FeatureName]["selector"]["options"]
+            : string
+          : string,
+        string | RegExp
+      >;
+
       return querySelector(
         featureTestSelector.feature[
           featureName
         ] as LocalFeatureTestSelector extends FeatureSelector
           ? LocalFeatureTestSelector["feature"][FeatureName]
           : FeatureTestSelector,
-      )(capturedElement);
+      )(
+        capturedElement,
+        // @ts-expect-error: Type '{ role?: AriaRole | undefined; options?: Record<string, string | RegExp> | undefined; queryMethod: ChildQueryMethod | undefined; }' is not assignable to type '(LocalFeatureTestSelector extends FeatureSelector ? LocalFeatureTestSelector["feature"][FeatureName] : FeatureTestSelector) extends { ...; } ? Role extends AriaRole[] ? { ...; } : object : object'.ts(2345)
+        // No matter what crazy antics I've done here, TS won't play nice, so I've put a `ts-expect-error` in case it gets fixed in the future. -Kevin Ghadyani
+        {
+          queryMethod,
+          ...("options" in otherProps
+            ? {
+                options: otherProps.options as Options,
+              }
+            : {}),
+          ...("role" in otherProps
+            ? {
+                role: otherProps.role as AriaRole,
+              }
+            : {}),
+        },
+      );
     };
 
     return {

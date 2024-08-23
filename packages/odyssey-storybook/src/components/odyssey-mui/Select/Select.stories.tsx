@@ -251,30 +251,28 @@ export const DefaultValue: StoryObj<typeof Select> = {
   },
   play: async ({ canvasElement, step }) => {
     await step("can click dropdown option", async () => {
-      const querySelect = queryOdysseySelector("Select")(
-        canvasElement
-      )
-
-      const selector = querySelect({
+      const selector = queryOdysseySelector("Select")(canvasElement, {
         options: {
           label: /Destination/,
         },
-      })
+      });
 
       await userEvent.click(selector.element);
 
-      const list = selector.selectChild("list")();
+      const list = selector.selectChild({
+        featureName: "list",
+      });
 
       await waitFor(() => {
         expect(list.element).toBeVisible();
       });
 
-      const listItemElement = list.selectChild("listItem")({
+      const listItemElement = list.selectChild({
+        featureName: "listItem",
         options: {
           label: "Mars",
         },
-      })
-      .element;
+      }).element;
 
       await waitFor(() => {
         expect(listItemElement).toBeVisible();
