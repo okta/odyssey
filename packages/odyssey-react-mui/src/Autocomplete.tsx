@@ -422,7 +422,7 @@ const Autocomplete = <
 
     const getListBoxHeight = useCallback(() => {
       // 8px of padding top/bottom applied by MUI
-      const LISTBOX_PADDING = 8;
+      const COMBINED_LISTBOX_PADDING = 16;
 
       if (itemData.length > OVERSCAN_ROW_COUNT) {
         // has a max-height of 40vh set in CSS. This is only set because height needs to be a number
@@ -430,8 +430,11 @@ const Autocomplete = <
       } else {
         const itemsHeightCalculated = itemData
           .map((_, index) => sizeMap.current[index] || 0)
-          .reduce((a, b) => a + b, 0);
-        return LISTBOX_PADDING * 2 + itemsHeightCalculated;
+          .reduce(
+            (prevItemHeight, nextItemHeight) => prevItemHeight + nextItemHeight,
+            0,
+          );
+        return COMBINED_LISTBOX_PADDING + itemsHeightCalculated;
       }
     }, [itemData, sizeMap]);
 
