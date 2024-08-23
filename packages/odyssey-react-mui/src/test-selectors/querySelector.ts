@@ -11,6 +11,7 @@
  */
 
 import {
+  type AccessibleLabelSelector,
   type AriaRole,
   type FeatureSelector,
   type FeatureTestSelector,
@@ -146,27 +147,36 @@ export const querySelector =
       }
     }
 
-    const getAccessibleText =
-      "accessibleText" in featureTestSelector
-        ? <
-            LabelName extends
-              keyof (typeof featureTestSelector)["accessibleText"],
-          >(
-            labelName: LabelName,
-          ) => {
-            if (!capturedElement) {
-              throw new ElementError(
-                "No child HTML element available",
-                containerElement,
-              );
-            }
+    if (!capturedElement) {
+      throw new ElementError(
+        "No child HTML element available",
+        containerElement,
+      );
+    }
 
-            return getComputedAccessibleText({
-              element: capturedElement,
-              type: featureTestSelector.accessibleText[labelName],
-            });
-          }
-        : null;
+    if (!("accessibleText" in featureTestSelector)) {
+      throw new Error("Missing `accessibleText` in `FeatureTestSelector`");
+    }
+
+    const getAccessibleText = <
+      LabelName extends LocalFeatureTestSelector extends AccessibleLabelSelector
+        ? keyof LocalFeatureTestSelector["accessibleText"]
+        : keyof AccessibleLabelSelector,
+    >(
+      labelName: LabelName,
+    ) => {
+      if (!capturedElement) {
+        throw new ElementError(
+          "No child HTML element available",
+          containerElement,
+        );
+      }
+
+      return getComputedAccessibleText({
+        element: capturedElement,
+        type: featureTestSelector.accessibleText[labelName],
+      });
+    };
 
     const selectChild = <
       FeatureName extends LocalFeatureTestSelector extends FeatureSelector
@@ -193,7 +203,7 @@ export const querySelector =
       }
 
       if (!("feature" in featureTestSelector)) {
-        throw new Error("Missing feature in featureTestSelector");
+        throw new Error("Missing `feature` in `FeatureTestSelector`");
       }
 
       type Options = Record<
@@ -214,7 +224,7 @@ export const querySelector =
       )(
         capturedElement,
         // @ts-expect-error: Type '{ role?: AriaRole | undefined; options?: Record<string, string | RegExp> | undefined; queryMethod: ChildQueryMethod | undefined; }' is not assignable to type '(LocalFeatureTestSelector extends FeatureSelector ? LocalFeatureTestSelector["feature"][FeatureName] : FeatureTestSelector) extends { ...; } ? Role extends AriaRole[] ? { ...; } : object : object'.ts(2345)
-        // No matter what crazy antics I've done here, TS won't play nice, so I've put a `ts-expect-error` in case it gets fixed in the future. -Kevin Ghadyani
+        // The `as` on `featureTestSelector.feature[featureName]` is the cause, but we can't remove that or other things break. The type `FeatureTestSelector` is probably the important one. -Kevin Ghadyani
         {
           queryMethod,
           ...("options" in otherProps
@@ -235,7 +245,10 @@ export const querySelector =
       element: capturedElement as LocalQueryMethod extends "get"
         ? HTMLElement
         : HTMLElement | null,
-      getAccessibleText,
+      getAccessibleText:
+        getAccessibleText as LocalFeatureTestSelector extends AccessibleLabelSelector
+          ? typeof getAccessibleText
+          : never,
       selectChild:
         selectChild as LocalFeatureTestSelector extends FeatureSelector
           ? typeof selectChild
