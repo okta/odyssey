@@ -297,6 +297,18 @@ export const HintLink: StoryObj<typeof Select> = {
     HintLinkComponent: <Link href="/learn-more">Learn more</Link>,
   },
 };
+
+export const EmptyValue: StoryObj<typeof Select> = {
+  args: {
+    value: "",
+    options: [
+      { value: "", text: "" },
+      { value: "value1", text: "Value 1" },
+      { value: "value2", text: "Value 2" },
+    ],
+  },
+};
+
 export const OptionsObject: StoryObj<typeof Select> = {
   args: {
     options: optionsObject,
@@ -442,26 +454,6 @@ export const ControlledPreselectedMultipleSelect: StoryObj<typeof Select> = {
     const onChange = useCallback(
       (event: SelectChangeEvent<string | string[]>) =>
         setLocalValue(event.target.value as string[]),
-      [],
-    );
-    return <Select {...props} value={localValue} onChange={onChange} />;
-  },
-};
-
-export const ControlledEmptyValue: StoryObj<typeof Select> = {
-  args: {
-    value: "",
-    options: [
-      { value: "", text: "Default option" },
-      { value: "value1", text: "Value 1" },
-      { value: "value2", text: "Value 2" },
-    ],
-  },
-  render: function C(props) {
-    const [localValue, setLocalValue] = useState("");
-    const onChange = useCallback(
-      (event: SelectChangeEvent<string | string[]>) =>
-        setLocalValue(event.target.value as string),
       [],
     );
     return <Select {...props} value={localValue} onChange={onChange} />;

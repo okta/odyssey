@@ -417,6 +417,7 @@ const Select = <
 
         return (
           <MuiMenuItem
+            data-empty={!option.text}
             key={normalizedKey(option.text, index.toString())}
             value={option.value}
             selected={isSelected}
