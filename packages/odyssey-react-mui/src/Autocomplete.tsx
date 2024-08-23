@@ -93,6 +93,15 @@ export type AutocompleteProps<
     IsCustomValueAllowed
   >["defaultValue"];
   /**
+   * The default value. Use when the component is not controlled.
+   */
+  getOptionLabel?: UseAutocompleteProps<
+    OptionType,
+    HasMultipleChoices,
+    undefined,
+    IsCustomValueAllowed
+  >["getOptionLabel"];
+  /**
    * Enables multiple choice selection
    */
   hasMultipleChoices?: MuiAutocompleteProps<
@@ -249,6 +258,7 @@ const Autocomplete = <
   defaultValue,
   errorMessage,
   errorMessageList,
+  getOptionLabel,
   hasMultipleChoices,
   id: idOverride,
   inputValue,
@@ -571,6 +581,7 @@ const Autocomplete = <
       disabled={isDisabled}
       freeSolo={isCustomValueAllowed}
       filterSelectedOptions={true}
+      getOptionLabel={getOptionLabel}
       id={idOverride}
       fullWidth={isFullWidth}
       loading={isLoading}
