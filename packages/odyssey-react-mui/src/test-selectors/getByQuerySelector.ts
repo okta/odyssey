@@ -89,7 +89,7 @@ export const executeTestingLibraryMethod = <
     >
   ];
 
-export const getByQuerySelector = ({
+export const getByQuerySelector = <LocalQueryMethod extends QueryMethod = "get">({
   element,
   queryMethod,
   queryOptions,
@@ -98,7 +98,7 @@ export const getByQuerySelector = ({
   text,
 }: {
   element: HTMLElement;
-  queryMethod: QueryMethod;
+  queryMethod: LocalQueryMethod;
 } & (
   | {
       queryOptions?: ByRoleOptions;
@@ -133,21 +133,21 @@ export const getByQuerySelector = ({
     )
   )
 
-  if (queryMethod === "get") {
-    return capturedElement as HTMLElement
-  }
-
-  return capturedElement
+  return capturedElement as (
+    LocalQueryMethod extends "get"
+    ? HTMLElement
+    : HTMLElement | null
+  )
 };
 
-export const getByRoleQuerySelector = ({
+export const getByRoleQuerySelector = <LocalQueryMethod extends QueryMethod>({
   element,
   queryMethod,
   queryOptions,
   role,
 }: {
   element: HTMLElement;
-  queryMethod: QueryMethod;
+  queryMethod: LocalQueryMethod;
   queryOptions?: ByRoleOptions;
   role: ByRoleMatcher;
 }) => (
@@ -160,7 +160,7 @@ export const getByRoleQuerySelector = ({
   })
 )
 
-export const getByTextQuerySelector = ({
+export const getByTextQuerySelector = <LocalQueryMethod extends QueryMethod>({
   element,
   queryMethod,
   queryOptions,
@@ -168,7 +168,7 @@ export const getByTextQuerySelector = ({
   text,
 }: {
   element: HTMLElement;
-  queryMethod: QueryMethod;
+  queryMethod: LocalQueryMethod;
   queryOptions?: SelectorMatcherOptions;
   selectionMethod: TextSelectorMethod;
   text: Matcher;
@@ -181,23 +181,3 @@ export const getByTextQuerySelector = ({
     text,
   })
 )
-
-// getByQuerySelector({
-//   element: document.createElement('div'),
-//   selectionMethod: "ByRole",
-//   queryOptions: {
-//     name: "fun"
-//   },
-//   queryMethod: "get",
-//   role: "yo"
-// })
-
-// getByQuerySelector({
-//   element: document.createElement('div'),
-//   selectionMethod: "ByLabelText",
-//   queryOptions: {
-//     exact: true,
-//   },
-//   queryMethod: "get",
-//   text: "yo",
-// })

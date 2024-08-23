@@ -127,6 +127,8 @@ export type TestSelector = {
   selector: Selector;
 };
 
+expect type Feature = Record<string, FeatureTestSelector & { isControlledElement?: true }>
+
 export type FeatureSelector = {
   feature: Record<string, FeatureTestSelector & { isControlledElement?: true }>;
 };
