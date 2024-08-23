@@ -19,6 +19,8 @@ export {
   /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
   Divider,
   /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
+  Grid,
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
   InputAdornment,
   /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
   InputBase,
@@ -34,6 +36,8 @@ export {
   Paper,
   /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
   ScopedCssBaseline,
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
+  Stack,
   ThemeProvider,
 } from "@mui/material";
 
@@ -41,6 +45,7 @@ export type {
   CssBaselineProps,
   DialogContentTextProps,
   DividerProps,
+  GridProps,
   InputAdornmentProps,
   InputBaseProps,
   ListItemIconProps,
@@ -49,6 +54,7 @@ export type {
   MenuListProps,
   PaperProps,
   ScopedCssBaselineProps,
+  StackProps,
   ThemeOptions,
 } from "@mui/material";
 
