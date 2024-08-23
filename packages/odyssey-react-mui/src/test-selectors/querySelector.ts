@@ -26,14 +26,6 @@ import {
 import { getControlledElement } from "./linkedHtmlSelectors";
 import { ElementError } from "./sanityChecks";
 
-// export type QuerySelectorOptions<LocalFeatureTestSelector extends FeatureTestSelector> = (
-//   LocalFeatureTestSelector extends {
-//     selector: {
-//       options: Record<infer TestSelectorKey, unknown>;
-//     };
-//   } ? Record<TestSelectorKey, string | RegExp> : {}
-// )
-
 export type QuerySelectorOptions<
   LocalFeatureTestSelector extends FeatureTestSelector,
 > = LocalFeatureTestSelector extends TestSelector
@@ -85,13 +77,14 @@ export const querySelector =
     featureTestSelector: LocalFeatureTestSelector,
   ) =>
   <LocalQueryMethod extends QueryMethod = "get">(
-    /**
-     * Refers to Testing Library's canvas. This is usually `screen`, but Storybook uses `within(canvas)`.
-     */
-    containerElement: HTMLElement,
-    props: InnerQuerySelectorProps<LocalFeatureTestSelector, LocalQueryMethod>,
+    props: {
+      /**
+       * Refers to Testing Library's canvas. This is usually `screen`, but Storybook uses `within(canvas)`.
+       */
+      element: HTMLElement;
+    } & InnerQuerySelectorProps<LocalFeatureTestSelector, LocalQueryMethod>,
   ) => {
-    const { queryMethod } = props || {};
+    const { element: containerElement, queryMethod } = props;
     const localQueryMethod = queryMethod || ("get" as const);
     const querySelectorOptions = "options" in props ? props.options : undefined;
     const role = "role" in props ? (props.role as AriaRole) : undefined;
@@ -183,18 +176,16 @@ export const querySelector =
         ? keyof LocalFeatureTestSelector["feature"]
         : keyof FeatureSelector,
       ChildQueryMethod extends QueryMethod,
-    >({
-      featureName,
-      queryMethod,
-      ...otherProps
-    }: {
-      featureName: FeatureName;
-    } & InnerQuerySelectorProps<
-      LocalFeatureTestSelector extends FeatureSelector
-        ? LocalFeatureTestSelector["feature"][FeatureName]
-        : FeatureTestSelector,
-      ChildQueryMethod
-    >) => {
+    >(
+      childProps: {
+        featureName: FeatureName;
+      } & InnerQuerySelectorProps<
+        LocalFeatureTestSelector extends FeatureSelector
+          ? LocalFeatureTestSelector["feature"][FeatureName]
+          : FeatureTestSelector,
+        ChildQueryMethod
+      >,
+    ) => {
       if (!capturedElement) {
         throw new ElementError(
           "No child HTML element available",
@@ -217,24 +208,24 @@ export const querySelector =
 
       return querySelector(
         featureTestSelector.feature[
-          featureName
+          childProps.featureName
         ] as LocalFeatureTestSelector extends FeatureSelector
           ? LocalFeatureTestSelector["feature"][FeatureName]
           : FeatureTestSelector,
       )(
-        capturedElement,
-        // @ts-expect-error: Type '{ role?: AriaRole | undefined; options?: Record<string, string | RegExp> | undefined; queryMethod: ChildQueryMethod | undefined; }' is not assignable to type '(LocalFeatureTestSelector extends FeatureSelector ? LocalFeatureTestSelector["feature"][FeatureName] : FeatureTestSelector) extends { ...; } ? Role extends AriaRole[] ? { ...; } : object : object'.ts(2345)
-        // The `as` on `featureTestSelector.feature[featureName]` is the cause, but we can't remove that or other things break. The type `FeatureTestSelector` is probably the important one. -Kevin Ghadyani
+        // @ts-expect-error: Type '{ role?: AriaRole | undefined; options?: Record<LocalFeatureTestSelector extends FeatureSelector ? LocalFeatureTestSelector["feature"][FeatureName] extends TestSelector ? keyof LocalFeatureTestSelector["feature"][FeatureName]["selector"]["options"] : string : string, string | RegExp> | undefined; element: HTMLElement...' is not assignable to type '(LocalFeatureTestSelector extends FeatureSelector ? LocalFeatureTestSelector["feature"][FeatureName] : FeatureTestSelector) extends { ...; } ? Role extends AriaRole[] ? { ...; } : object : object'.ts(2345)
+        // `as featureTestSelector.feature[featureName]` narrows the props down enough that TypeScript errors here. We're passing the correct information, but it doesn't know that, and it's difficult to fix this. -Kevin Ghadyani
         {
-          queryMethod,
-          ...("options" in otherProps
+          element: capturedElement,
+          queryMethod: childProps.queryMethod,
+          ...("options" in childProps && childProps.options
             ? {
-                options: otherProps.options as Options,
+                options: childProps.options as Options,
               }
             : {}),
-          ...("role" in otherProps
+          ...("role" in childProps && childProps.role
             ? {
-                role: otherProps.role as AriaRole,
+                role: childProps.role as AriaRole,
               }
             : {}),
         },

@@ -251,7 +251,10 @@ export const DefaultValue: StoryObj<typeof Select> = {
   },
   play: async ({ canvasElement, step }) => {
     await step("can click dropdown option", async () => {
-      const selector = queryOdysseySelector("Select")(canvasElement, {
+      const querySelect = queryOdysseySelector("Select");
+
+      const selector = querySelect({
+        element: canvasElement,
         options: {
           label: /Destination/,
         },
