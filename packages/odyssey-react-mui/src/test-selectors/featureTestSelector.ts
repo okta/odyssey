@@ -97,43 +97,36 @@ export type AriaRole =
 
 export type RoleSelector = {
   method: RoleSelectorMethod;
-  options: (
-    Record<
-      string,
-      keyof ByRoleOptions
-    >
-  );
+  options: Record<string, keyof ByRoleOptions>;
   role: AriaRole | AriaRole[];
   // | "UNKNOWN" // This should be a `Symbol`, but it can't because this is ultimately going to be JSON stringified.
-}
+};
 
 export type TextSelector = {
   method: TextSelectorMethod;
-  options: (
-    Record<
-      string,
-      keyof SelectorMatcherOptions
-    >
-  );
+  options: Record<string, keyof SelectorMatcherOptions>;
   text: string;
-}
+};
 
-export type Selector = (
-  | RoleSelector
-  | TextSelector
-);
+export type Selector = RoleSelector | TextSelector;
 
 export type TestSelector = {
   selector: Selector;
 };
 
-expect type Feature = Record<string, FeatureTestSelector & { isControlledElement?: true }>
+export type Feature = Record<
+  string,
+  FeatureTestSelector & { isControlledElement?: true }
+>;
 
 export type FeatureSelector = {
-  feature: Record<string, FeatureTestSelector & { isControlledElement?: true }>;
+  feature: Feature;
 };
 
-export type AccessibleLabelSelectorType = "description" | "errorMessage" | "label";
+export type AccessibleLabelSelectorType =
+  | "description"
+  | "errorMessage"
+  | "label";
 
 export type AccessibleLabelSelector = {
   /** An "accessible -> semantic" name mapping such as "`description` -> `hint`". */

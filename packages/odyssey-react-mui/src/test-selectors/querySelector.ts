@@ -11,18 +11,21 @@
  */
 
 import {
-  Feature,
-  FeatureSelector,
   type AriaRole,
+  type FeatureSelector,
   type FeatureTestSelector,
   type TestSelector,
 } from "./featureTestSelector";
 import { getComputedAccessibleText } from "./getComputedAccessibleText";
-import { getByRoleQuerySelector, getByTextQuerySelector, type QueryMethod } from "./getByQuerySelector";
+import {
+  getByRoleQuerySelector,
+  getByTextQuerySelector,
+  type QueryMethod,
+} from "./getByQuerySelector";
 import { getControlledElement } from "./linkedHtmlSelectors";
 import { ElementError } from "./sanityChecks";
 
-// export type TestSelectorOptions<LocalFeatureTestSelector extends FeatureTestSelector> = (
+// export type QuerySelectorOptions<LocalFeatureTestSelector extends FeatureTestSelector> = (
 //   LocalFeatureTestSelector extends {
 //     selector: {
 //       options: Record<infer TestSelectorKey, unknown>;
@@ -30,183 +33,177 @@ import { ElementError } from "./sanityChecks";
 //   } ? Record<TestSelectorKey, string | RegExp> : {}
 // )
 
-export type QuerySelectorOptions<LocalFeatureTestSelector extends FeatureTestSelector> = (
-  LocalFeatureTestSelector extends TestSelector
-  ? Record<keyof LocalFeatureTestSelector["selector"]["options"], string | RegExp>
-  : {}
-)
+export type QuerySelectorOptions<
+  LocalFeatureTestSelector extends FeatureTestSelector,
+> = LocalFeatureTestSelector extends TestSelector
+  ? Record<
+      keyof LocalFeatureTestSelector["selector"]["options"],
+      string | RegExp
+    >
+  : Record<string, string>;
 
-export const querySelector = <LocalFeatureTestSelector extends FeatureTestSelector>(
-  /**
-   * Selectors object including features and accessible text selections.
-   */
-  featureTestSelector: LocalFeatureTestSelector,
-) => (
-  /**
-   * Refers to Testing Library's canvas. This is usually `screen`, but Storybook uses `within(canvas)`.
-   */
-  containerElement: HTMLElement
-) => (
+export const querySelector =
+  <LocalFeatureTestSelector extends FeatureTestSelector>(
+    /**
+     * Selectors object including features and accessible text selections.
+     */
+    featureTestSelector: LocalFeatureTestSelector,
+  ) =>
+  (
+    /**
+     * Refers to Testing Library's canvas. This is usually `screen`, but Storybook uses `within(canvas)`.
+     */
+    containerElement: HTMLElement,
+  ) =>
   <LocalQueryMethod extends QueryMethod = "get">(
-    props?: (
-      {
+    props?: {
       /**
        * Testing Library method used to query elements.
        */
-      queryMethod?: LocalQueryMethod
+      queryMethod?: LocalQueryMethod;
+    } & (LocalFeatureTestSelector extends {
+      selector: {
+        role: infer Role;
+      };
     }
-    & (
-      LocalFeatureTestSelector extends {
-        selector: {
-          role: infer Role;
-        }
-      }
       ? Role extends AriaRole[]
         ? {
-          /**
-           * Role is used when you have an optional `role`; otherwise, it'd baked into the metadata.
-           */
-          role: Role[number]
-        }
+            /**
+             * Role is used when you have an optional `role`; otherwise, it'd baked into the metadata.
+             */
+            role: Role[number];
+          }
         : {
-          role?: never
-        }
+            role?: never;
+          }
       : {
-        role?: never
-      }
-    )
-    & (
-      LocalFeatureTestSelector extends TestSelector
-      ? {
-        /**
-         * Helps narrow down HTML selection to the correct element.
-         */
-        options: QuerySelectorOptions<LocalFeatureTestSelector>
-      }
-      : {
-        options?: never
-      }
-    )
-  )
-) => {
-    const {
-      options: querySelectorOptions,
-      queryMethod,
-      role,
-    } = props || {}
+          role?: never;
+        }) &
+      (LocalFeatureTestSelector extends TestSelector
+        ? {
+            /**
+             * Helps narrow down HTML selection to the correct element.
+             */
+            options: Record<
+              keyof LocalFeatureTestSelector["selector"]["options"],
+              string | RegExp
+            >;
+          }
+        : {
+            options?: never;
+          }),
+  ) => {
+    const { options: querySelectorOptions, queryMethod, role } = props || {};
 
-    const localQueryMethod = queryMethod || ("get" as const)
+    const localQueryMethod = queryMethod || ("get" as const);
 
-    let capturedElement: HTMLElement | null = null
+    let capturedElement: HTMLElement | null = null;
 
     if ("selector" in featureTestSelector && querySelectorOptions) {
       const sharedProps = {
         element: containerElement,
         queryMethod: localQueryMethod,
-        queryOptions:
-          Object.fromEntries(
-            (Object.entries(featureTestSelector.selector.options) as (
-              Array<[keyof QuerySelectorOptions<LocalFeatureTestSelector>, QuerySelectorOptions<LocalFeatureTestSelector>[keyof QuerySelectorOptions<LocalFeatureTestSelector>]]>
-            ))
-            .map(
-              ([testSelectorsKey, testingLibraryKey]) => [
-                testingLibraryKey,
-                querySelectorOptions[testSelectorsKey],
-              ],
-            ),
+        queryOptions: Object.fromEntries(
+          Object.entries(featureTestSelector.selector.options).map(
+            ([testSelectorsKey, testingLibraryKey]) => [
+              testingLibraryKey,
+              querySelectorOptions[testSelectorsKey],
+            ],
           ),
-      }
+        ) as Record<
+          LocalFeatureTestSelector extends TestSelector
+            ? LocalFeatureTestSelector["selector"]["options"][keyof LocalFeatureTestSelector["selector"]["options"]]
+            : string,
+          string | RegExp
+        >,
+      };
 
-      capturedElement = (
+      capturedElement =
         featureTestSelector.selector.method === "ByRole"
-        ? (
-          getByRoleQuerySelector({
-            ...sharedProps,
-            role: Array.isArray(featureTestSelector.selector.role) || role
-              ? role || ""
-              : featureTestSelector.selector.role,
-          })
-        )
-        : (
-          getByTextQuerySelector({
-            ...sharedProps,
-            selectionMethod: featureTestSelector.selector.method,
-            text: featureTestSelector.selector.text,
-          })
-        )
-      )
-    }
-    else if ("isControlledElement" in featureTestSelector && featureTestSelector.isControlledElement) {
+          ? getByRoleQuerySelector({
+              ...sharedProps,
+              role:
+                Array.isArray(featureTestSelector.selector.role) || role
+                  ? role || ""
+                  : featureTestSelector.selector.role,
+            })
+          : getByTextQuerySelector({
+              ...sharedProps,
+              selectionMethod: featureTestSelector.selector.method,
+              text: featureTestSelector.selector.text,
+            });
+    } else if (
+      "isControlledElement" in featureTestSelector &&
+      featureTestSelector.isControlledElement
+    ) {
       try {
-        capturedElement = getControlledElement({ element: containerElement })
+        capturedElement = getControlledElement({ element: containerElement });
       } catch (error) {
         if (queryMethod === "query") {
-          capturedElement = null
+          capturedElement = null;
         }
 
-        throw error
+        throw error;
       }
     }
 
     const getAccessibleText =
       "accessibleText" in featureTestSelector
-        ? (
-          <LabelName extends keyof (typeof featureTestSelector)["accessibleText"]>(
+        ? <
+            LabelName extends
+              keyof (typeof featureTestSelector)["accessibleText"],
+          >(
             labelName: LabelName,
           ) => {
             if (!capturedElement) {
-              throw new ElementError("No child HTML element available", containerElement)
+              throw new ElementError(
+                "No child HTML element available",
+                containerElement,
+              );
             }
 
-            return (
-              getComputedAccessibleText({
-                element: capturedElement,
-                type: featureTestSelector.accessibleText[labelName],
-              })
-            )
+            return getComputedAccessibleText({
+              element: capturedElement,
+              type: featureTestSelector.accessibleText[labelName],
+            });
           }
-        )
         : null;
 
-    const selectChild =
-      <
-        FeatureName extends LocalFeatureTestSelector extends FeatureSelector
+    const selectChild = <
+      FeatureName extends LocalFeatureTestSelector extends FeatureSelector
         ? keyof LocalFeatureTestSelector["feature"]
-        : keyof FeatureSelector
-      >(
-        featureName: FeatureName,
-      ) => {
-        if (!capturedElement) {
-          throw new ElementError("No child HTML element available", containerElement)
-        }
-
-        if (!("feature" in featureTestSelector)) {
-          throw new Error("Missing feature in featureTestSelector")
-        }
-
-        return querySelector(
-          featureTestSelector.feature[featureName] as (
-            LocalFeatureTestSelector extends FeatureSelector
-            ? LocalFeatureTestSelector["feature"][FeatureName]
-            : FeatureTestSelector
-          ),
-        )(
-          capturedElement
-        )
+        : keyof FeatureSelector,
+    >(
+      featureName: FeatureName,
+    ) => {
+      if (!capturedElement) {
+        throw new ElementError(
+          "No child HTML element available",
+          containerElement,
+        );
       }
 
-    return {
-      element: capturedElement as (
-        LocalQueryMethod extends "get"
-        ? HTMLElement
-        : HTMLElement | null
-      ),
-      getAccessibleText,
-      selectChild: selectChild as (
-        LocalFeatureTestSelector extends FeatureSelector
-        ? typeof selectChild
-        : never
-      ),
+      if (!("feature" in featureTestSelector)) {
+        throw new Error("Missing feature in featureTestSelector");
+      }
+
+      return querySelector(
+        featureTestSelector.feature[
+          featureName
+        ] as LocalFeatureTestSelector extends FeatureSelector
+          ? LocalFeatureTestSelector["feature"][FeatureName]
+          : FeatureTestSelector,
+      )(capturedElement);
     };
-  }
-);
+
+    return {
+      element: capturedElement as LocalQueryMethod extends "get"
+        ? HTMLElement
+        : HTMLElement | null,
+      getAccessibleText,
+      selectChild:
+        selectChild as LocalFeatureTestSelector extends FeatureSelector
+          ? typeof selectChild
+          : never,
+    };
+  };
