@@ -486,7 +486,6 @@ export const components = ({
           background: "transparent",
           paddingBlockStart: odysseyTokens.Spacing1,
           ...(ownerState.ListboxComponent !== undefined && {
-            height: "100%",
             maxHeight: "40vh",
           }),
         }),
