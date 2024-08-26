@@ -231,6 +231,7 @@ const CollapseIcon = memo(({ onClick }: { onClick?(): void }): ReactElement => {
     </Box>
   );
 });
+CollapseIcon.displayName = "CollapseIcon";
 
 const SideNavHeader = memo(
   ({
@@ -260,6 +261,7 @@ const SideNavHeader = memo(
     );
   },
 );
+SideNavHeader.displayName = "SideNavHeader";
 
 const SideNavListContainer = styled.ul({
   padding: 0,
@@ -405,6 +407,7 @@ const SideNavItemLinkContent = memo(
     );
   },
 );
+SideNavItemLinkContent.displayName = "SideNavItemLinkContent";
 
 const scrollToNode = (node: HTMLElement | null) => {
   if (node) {
@@ -550,6 +553,7 @@ const SideNavItemContent = memo(
     );
   },
 );
+SideNavItemContent.displayName = "SideNavItemContent";
 
 const SideNavFooterContent = memo(
   (footerItems: SideNavFooterItem[]): ReactNode => {
@@ -591,6 +595,7 @@ const SideNavFooterContent = memo(
     return footerContent;
   },
 );
+SideNavFooterContent.displayName = "SideNavFooterContent";
 
 const SideNav = ({
   navHeaderText,
