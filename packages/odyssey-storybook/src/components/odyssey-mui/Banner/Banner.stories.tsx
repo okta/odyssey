@@ -18,6 +18,7 @@ import {
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 
+import { queryOdysseySelector } from "@okta/odyssey-react-mui/test-selectors";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, within } from "@storybook/testing-library";
 import { expect, jest } from "@storybook/jest";
@@ -145,6 +146,20 @@ export const Linked: StoryObj<BannerProps> = {
       await expect(link?.tagName).toBe("A");
       await expect(link?.href).toBe(`${link?.baseURI}#anchor`);
     });
+
+    await step("has visible link", async () => {
+      const element = queryOdysseySelector({
+        canvas: within(canvasElement),
+        componentName: "Banner",
+        templateArgs: {
+          role: "status",
+        },
+      }).select?.("link", {
+        linkText: "View report",
+      }).element;
+
+      expect(element).toBeVisible();
+    });
   },
 };
 
@@ -160,6 +175,20 @@ export const Dismissible: StoryObj<BannerProps> = {
       await userEvent.tab();
       await expect(args.onClose).toHaveBeenCalled();
       await axeRun("Dismissible Banner");
+    });
+
+    await step("has visible close button", async () => {
+      const element = queryOdysseySelector({
+        canvas: within(canvasElement),
+        componentName: "Banner",
+        templateArgs: {
+          role: "alert",
+        },
+      }).select?.("closeButton", {
+        labelText: "Close",
+      }).element;
+
+      expect(element).toBeVisible();
     });
   },
 };
