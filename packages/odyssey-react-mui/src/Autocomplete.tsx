@@ -375,16 +375,17 @@ const Autocomplete = <
      * we need to add it to each list item that is being rendered in the viewable list window.
      * @see here if you need to know more: https://github.com/bvaughn/react-window?tab=readme-ov-file#why-is-my-list-blank-when-i-scroll
      */
+    const styles = useMemo(
+      () => ({
+        ...style,
+        height: "auto",
+      }),
+      [style],
+    );
+
     return (
       <div ref={rowRef}>
-        <li
-          style={{
-            ...style,
-            height: "auto",
-          }}
-          key={key}
-          {...props}
-        />
+        <li {...props} key={key} style={styles} />
       </div>
     );
   };
@@ -397,13 +398,13 @@ const Autocomplete = <
   });
 
   const useResetCache = (length: number) => {
-    const ref = useRef<VariableSizeList>(null);
+    const resetCacheRef = useRef<VariableSizeList>(null);
     useEffect(() => {
-      if (ref.current) {
-        ref.current.resetAfterIndex(0, true);
+      if (resetCacheRef.current) {
+        resetCacheRef.current.resetAfterIndex(0, true);
       }
     }, [length]);
-    return ref;
+    return resetCacheRef;
   };
 
   const ListboxComponent = forwardRef<
@@ -426,7 +427,7 @@ const Autocomplete = <
 
       if (itemData.length > OVERSCAN_ROW_COUNT) {
         // has a max-height of 40vh set in CSS. This is only set because height needs to be a number
-        return 1000;
+        return 99999;
       } else {
         const itemsHeightCalculated = itemData
           .map((_, index) => sizeMap.current[index] || 0)
