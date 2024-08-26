@@ -18,6 +18,7 @@ import {
 import { Meta, StoryObj } from "@storybook/react";
 import { userEvent, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
+import { queryOdysseySelector } from "@okta/odyssey-react-mui/test-selectors";
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -267,6 +268,17 @@ export const ReadOnly: StoryObj<typeof Checkbox> = {
   },
   play: async ({ canvasElement, step }) => {
     await checkTheBox({ canvasElement, step })("ReadOnly Checkbox");
+    await step("has aria read only set", async () => {
+      const element = queryOdysseySelector({
+        canvas: within(canvasElement),
+        componentName: "Checkbox",
+        templateArgs: {
+          label: "Automatically assign Okta Admin Console",
+        },
+      }).element;
+
+      expect(element?.ariaReadOnly).toBeTruthy();
+    });
   },
 };
 
@@ -284,6 +296,18 @@ export const Hint: StoryObj<typeof Checkbox> = {
   },
   play: async ({ canvasElement, step }) => {
     await checkTheBox({ canvasElement, step })("Checkbox Hint");
+    // This is commented because there's a separate ticket to cover this work: OKTA-793465
+    // await step("has visible hint", async () => {
+    //   const element = queryOdysseySelector({
+    //     canvas: within(canvasElement),
+    //     componentName: "Checkbox",
+    //     templateArgs: {
+    //       label:"I agree to the terms and conditions",
+    //     }
+    //   }).element;
+
+    //   expect(element).toHaveAccessibleDescription(/Really helpful hint/);
+    // });
   },
 };
 
