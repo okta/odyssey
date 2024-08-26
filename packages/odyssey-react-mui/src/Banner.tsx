@@ -14,6 +14,7 @@ import { memo } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert, AlertColor, AlertTitle, AlertProps } from "@mui/material";
 
+import { type FeatureTestSelector } from "./test-selectors";
 import type { HtmlProps } from "./HtmlProps";
 import { Link } from "./Link";
 import { ScreenReaderText } from "./ScreenReaderText";
@@ -25,6 +26,36 @@ export const bannerSeverityValues: AlertColor[] = [
   "warning",
   "error",
 ];
+
+export const BannerTestSelectors = {
+  feature: {
+    link: {
+      selector: {
+        method: "ByRole",
+        options: {
+          name: "${linkText}",
+        },
+        role: "link",
+        templateVariableNames: ["linkText"],
+      },
+    },
+    closeButton: {
+      selector: {
+        method: "ByRole",
+        options: {
+          name: "${labelText}",
+        },
+        role: "button",
+        templateVariableNames: ["labelText"],
+      },
+    },
+  },
+  selector: {
+    method: "ByRole",
+    role: "${role}",
+    templateVariableNames: ["role"],
+  },
+} as const satisfies FeatureTestSelector;
 
 export type BannerProps = {
   /**

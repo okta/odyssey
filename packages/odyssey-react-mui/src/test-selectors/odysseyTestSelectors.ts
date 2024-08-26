@@ -11,11 +11,13 @@
  */
 
 import { type FeatureTestSelector } from "./featureTestSelector";
+import { BannerTestSelectors } from "../Banner";
 import { CalloutTestSelectors } from "../Callout";
 import { TabsTestSelectors } from "../Tabs";
 import { TextFieldTestSelectors } from "../TextField";
 
 export const odysseyTestSelectors = {
+  Banner: BannerTestSelectors,
   Callout: CalloutTestSelectors,
   Tabs: TabsTestSelectors,
   TextField: TextFieldTestSelectors,
