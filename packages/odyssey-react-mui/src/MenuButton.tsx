@@ -71,6 +71,10 @@ export type MenuButtonProps = {
    * The tooltip text for the Button if it's icon-only
    */
   tooltipText?: string;
+  /**
+   * The event handler if the menu button is clickable.
+   */
+  onClickMenuButton?: React.MouseEventHandler<HTMLButtonElement>;
 } & Pick<
   HtmlProps,
   "ariaDescribedBy" | "ariaLabel" | "ariaLabelledBy" | "testId" | "translate"
@@ -105,6 +109,7 @@ const MenuButton = ({
   testId,
   tooltipText,
   translate,
+  onClickMenuButton,
 }: MenuButtonProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -115,6 +120,10 @@ const MenuButton = ({
   }, []);
 
   const openMenu = useCallback<MenuContextType["openMenu"]>((event) => {
+    if (onClickMenuButton) {
+      onClickMenuButton(event as React.MouseEvent<HTMLButtonElement>);
+      return;
+    }
     setAnchorEl(event.currentTarget);
   }, []);
 

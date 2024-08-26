@@ -199,3 +199,18 @@ export const ButtonWithoutImage: StoryObj<typeof Card> = {
     </Box>
   ),
 };
+
+export const ClickableMenu: StoryObj<CardProps> = {
+  render: ({ ...props }) => (
+    <Box sx={{ maxWidth: 262 }}>
+      <Card
+        {...props}
+        overline={props.overline}
+        title={props.title}
+        description={props.description}
+        onClickMenuButton={() => alert("Clicked on menu")}
+        onClick={() => alert("Clicked on Card")}
+      />
+    </Box>
+  ),
+};

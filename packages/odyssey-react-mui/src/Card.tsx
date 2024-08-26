@@ -47,11 +47,19 @@ export type CardProps = {
       onClick: MouseEventHandler;
       button?: never;
       menuButtonChildren?: never;
+      onClickMenuButton?: never;
     }
   | {
       onClick?: never;
       button?: ReactElement<typeof Button>;
       menuButtonChildren?: MenuButtonProps["children"];
+      onClickMenuButton?: never;
+    }
+  | {
+      onClick?: MouseEventHandler;
+      button?: never;
+      menuButtonChildren?: never;
+      onClickMenuButton: MouseEventHandler;
     }
 );
 
@@ -89,6 +97,7 @@ const Card = ({
   image,
   menuButtonChildren,
   onClick,
+  onClickMenuButton,
   overline,
   title,
 }: CardProps) => {
@@ -142,7 +151,7 @@ const Card = ({
         cardContent
       )}
 
-      {menuButtonChildren && (
+      {(menuButtonChildren || onClickMenuButton) && (
         <MenuButtonContainer odysseyDesignTokens={odysseyDesignTokens}>
           <MenuButton
             endIcon={<MoreIcon />}
@@ -151,6 +160,7 @@ const Card = ({
             menuAlignment="right"
             size="small"
             tooltipText="Actions"
+            onClickMenuButton={onClickMenuButton}
           >
             {menuButtonChildren}
           </MenuButton>
