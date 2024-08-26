@@ -19,6 +19,9 @@ import {
   ReactNode,
   useCallback,
   KeyboardEvent,
+  useImperativeHandle,
+  useRef,
+  useEffect,
 } from "react";
 
 import { Box } from "../Box";
@@ -202,7 +205,7 @@ const SideNavHeaderContainer = styled("div", {
   paddingBottom: odysseyDesignTokens.Spacing3,
 }));
 
-const CollapseIcon = ({ onClick }: { onClick?(): void }): ReactElement => {
+const CollapseIcon = memo(({ onClick }: { onClick?(): void }): ReactElement => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const collapseButtonStyles = useMemo(
@@ -227,34 +230,36 @@ const CollapseIcon = ({ onClick }: { onClick?(): void }): ReactElement => {
       />
     </Box>
   );
-};
+});
 
-const SideNavHeader = ({
-  navHeaderText,
-  isCollapsible,
-  onCollapse,
-}: Pick<
-  SideNavProps,
-  "navHeaderText" | "isCollapsible" | "onCollapse"
->): ReactNode => {
-  const odysseyDesignTokens = useOdysseyDesignTokens();
+const SideNavHeader = memo(
+  ({
+    navHeaderText,
+    isCollapsible,
+    onCollapse,
+  }: Pick<
+    SideNavProps,
+    "navHeaderText" | "isCollapsible" | "onCollapse"
+  >): ReactNode => {
+    const odysseyDesignTokens = useOdysseyDesignTokens();
 
-  const sideNavHeaderStyles = useMemo(
-    () => ({
-      marginTop: odysseyDesignTokens.Spacing2,
-    }),
-    [odysseyDesignTokens],
-  );
+    const sideNavHeaderStyles = useMemo(
+      () => ({
+        marginTop: odysseyDesignTokens.Spacing2,
+      }),
+      [odysseyDesignTokens],
+    );
 
-  return (
-    <SideNavHeaderContainer odysseyDesignTokens={odysseyDesignTokens}>
-      <Box sx={sideNavHeaderStyles}>
-        <Heading6>{navHeaderText}</Heading6>
-      </Box>
-      {isCollapsible && <CollapseIcon onClick={onCollapse} />}
-    </SideNavHeaderContainer>
-  );
-};
+    return (
+      <SideNavHeaderContainer odysseyDesignTokens={odysseyDesignTokens}>
+        <Box sx={sideNavHeaderStyles}>
+          <Heading6>{navHeaderText}</Heading6>
+        </Box>
+        {isCollapsible && <CollapseIcon onClick={onCollapse} />}
+      </SideNavHeaderContainer>
+    );
+  },
+);
 
 const SideNavListContainer = styled.ul({
   padding: 0,
@@ -361,104 +366,139 @@ const SideNavFooterContainer = styled("div", {
   },
 }));
 
-const SideNavItemLinkContent = ({
-  label,
-  startIcon,
-  endIcon,
-  severity,
-  statusLabel,
-}: Pick<
-  SideNavItem,
-  "label" | "startIcon" | "endIcon" | "severity" | "statusLabel"
->): ReactNode => {
-  const odysseyDesignTokens = useOdysseyDesignTokens();
+const SideNavItemLinkContent = memo(
+  ({
+    label,
+    startIcon,
+    endIcon,
+    severity,
+    statusLabel,
+  }: Pick<
+    SideNavItem,
+    "label" | "startIcon" | "endIcon" | "severity" | "statusLabel"
+  >): ReactNode => {
+    const odysseyDesignTokens = useOdysseyDesignTokens();
 
-  const sideNavItemContentStyles = useMemo(
-    () => ({
-      marginLeft: odysseyDesignTokens.Spacing2,
-    }),
-    [odysseyDesignTokens],
-  );
+    const sideNavItemContentStyles = useMemo(
+      () => ({
+        marginLeft: odysseyDesignTokens.Spacing2,
+      }),
+      [odysseyDesignTokens],
+    );
 
-  return (
-    <>
-      {startIcon && startIcon}
-      <SideNavItemLabelContainer
-        odysseyDesignTokens={odysseyDesignTokens}
-        isIconVisible={Boolean(startIcon)}
-      >
-        {label}
-        {severity && (
-          <Box sx={sideNavItemContentStyles}>
-            <Status severity={severity} label={statusLabel || ""} />
-          </Box>
-        )}
-      </SideNavItemLabelContainer>
-      {endIcon && endIcon}
-    </>
-  );
+    return (
+      <>
+        {startIcon && startIcon}
+        <SideNavItemLabelContainer
+          odysseyDesignTokens={odysseyDesignTokens}
+          isIconVisible={Boolean(startIcon)}
+        >
+          {label}
+          {severity && (
+            <Box sx={sideNavItemContentStyles}>
+              <Status severity={severity} label={statusLabel || ""} />
+            </Box>
+          )}
+        </SideNavItemLabelContainer>
+        {endIcon && endIcon}
+      </>
+    );
+  },
+);
+
+const scrollToNode = (node: HTMLElement | null) => {
+  if (node) {
+    node?.scrollIntoView({
+      behavior: "instant",
+      block: "end",
+      inline: "nearest",
+    });
+  }
 };
 
-const SideNavItemContent = ({
-  id,
-  label,
-  href,
-  target,
-  startIcon,
-  severity,
-  statusLabel,
-  endIcon,
-  onClick,
-  isSelected,
-  isDisabled,
-}: Pick<
-  SideNavItem,
-  | "id"
-  | "label"
-  | "href"
-  | "target"
-  | "startIcon"
-  | "severity"
-  | "statusLabel"
-  | "endIcon"
-  | "onClick"
-  | "isSelected"
-  | "isDisabled"
->) => {
-  const odysseyDesignTokens = useOdysseyDesignTokens();
+type ScrollIntoViewHandle = {
+  scrollIntoView: () => void;
+};
 
-  const NavItemContentClickContainer = styled("div", {
-    shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-  })(() => ({
-    display: "flex",
-    alignItems: "center",
-    width: "100%",
-    minHeight: "48px",
-    padding: `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
-    color: `${isDisabled ? odysseyDesignTokens.TypographyColorDisabled : odysseyDesignTokens.TypographyColorHeading} !important`,
-    "&:focus-visible": {
-      borderRadius: 0,
-      outlineColor: odysseyDesignTokens.FocusOutlineColorPrimary,
-      outlineStyle: odysseyDesignTokens.FocusOutlineStyle,
-      outlineWidth: odysseyDesignTokens.FocusOutlineWidthMain,
-      backgroundColor: odysseyDesignTokens.HueNeutral50,
-      textDecoration: "none",
-    },
-  }));
+const SideNavItemContent = memo(
+  ({
+    id,
+    label,
+    href,
+    target,
+    startIcon,
+    severity,
+    statusLabel,
+    endIcon,
+    onClick,
+    isSelected,
+    isDisabled,
+    scrollRef,
+  }: Pick<
+    SideNavItem,
+    | "id"
+    | "label"
+    | "href"
+    | "target"
+    | "startIcon"
+    | "severity"
+    | "statusLabel"
+    | "endIcon"
+    | "onClick"
+    | "isSelected"
+    | "isDisabled"
+  > & {
+    /**
+     * The ref used to scroll to this item
+     */
+    scrollRef?: React.RefObject<ScrollIntoViewHandle>;
+  }) => {
+    const localScrollRef = useRef<HTMLLIElement>(null);
+    useImperativeHandle(
+      scrollRef,
+      () => {
+        return {
+          scrollIntoView: () => {
+            scrollToNode(localScrollRef.current);
+          },
+        };
+      },
+      [],
+    );
+    const odysseyDesignTokens = useOdysseyDesignTokens();
 
-  const sideNavItemContentKeyHandler = useCallback(
-    (event: KeyboardEvent<HTMLDivElement>) => {
-      if (event?.key === "Enter") {
-        event.preventDefault();
-        onClick?.();
-      }
-    },
-    [onClick],
-  );
+    const NavItemContentClickContainer = styled("div", {
+      shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+    })(() => ({
+      display: "flex",
+      alignItems: "center",
+      width: "100%",
+      minHeight: "48px",
+      padding: `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
+      color: `${isDisabled ? odysseyDesignTokens.TypographyColorDisabled : odysseyDesignTokens.TypographyColorHeading} !important`,
+      "&:focus-visible": {
+        borderRadius: 0,
+        outlineColor: odysseyDesignTokens.FocusOutlineColorPrimary,
+        outlineStyle: odysseyDesignTokens.FocusOutlineStyle,
+        outlineWidth: odysseyDesignTokens.FocusOutlineWidthMain,
+        backgroundColor: odysseyDesignTokens.HueNeutral50,
+        textDecoration: "none",
+      },
+    }));
 
-  const sideNavItemContent = useMemo(() => {
+    const sideNavItemContentKeyHandler = useCallback(
+      (event: KeyboardEvent<HTMLDivElement>) => {
+        if (event?.key === "Enter") {
+          event.preventDefault();
+          onClick?.();
+        }
+      },
+      [onClick],
+    );
+
     return (
       <SideNavListItemContainer
+        ref={localScrollRef}
         id={id}
         key={id}
         disabled={isDisabled}
@@ -508,64 +548,49 @@ const SideNavItemContent = ({
         }
       </SideNavListItemContainer>
     );
-  }, [
-    id,
-    label,
-    href,
-    target,
-    startIcon,
-    severity,
-    statusLabel,
-    endIcon,
-    onClick,
-    isSelected,
-    isDisabled,
-    NavItemContentClickContainer,
-    sideNavItemContentKeyHandler,
-    odysseyDesignTokens,
-  ]);
+  },
+);
 
-  return sideNavItemContent;
-};
+const SideNavFooterContent = memo(
+  (footerItems: SideNavFooterItem[]): ReactNode => {
+    const odysseyDesignTokens = useOdysseyDesignTokens();
 
-const SideNavFooterContent = (footerItems: SideNavFooterItem[]): ReactNode => {
-  const odysseyDesignTokens = useOdysseyDesignTokens();
+    const footerContent = useMemo(() => {
+      return footerItems?.map((item, index) => (
+        <Box
+          key={`${item.id}-wrapper`}
+          sx={{
+            display: "flex",
+          }}
+        >
+          {item.href ? (
+            <Link key={item.id} href={item.href}>
+              {item.label}
+            </Link>
+          ) : (
+            <Box component="span" key={item.id}>
+              {item.label}
+            </Box>
+          )}
+          {index < footerItems.length - 1 && (
+            <Box
+              key={`${item.id}-separator`}
+              sx={{
+                marginLeft: odysseyDesignTokens.Spacing4,
+                marginRight: odysseyDesignTokens.Spacing4,
+                color: odysseyDesignTokens.HueNeutral300,
+              }}
+            >
+              |
+            </Box>
+          )}
+        </Box>
+      ));
+    }, [footerItems, odysseyDesignTokens]);
 
-  const footerContent = useMemo(() => {
-    return footerItems?.map((item, index) => (
-      <Box
-        key={`${item.id}-wrapper`}
-        sx={{
-          display: "flex",
-        }}
-      >
-        {item.href ? (
-          <Link key={item.id} href={item.href}>
-            {item.label}
-          </Link>
-        ) : (
-          <Box component="span" key={item.id}>
-            {item.label}
-          </Box>
-        )}
-        {index < footerItems.length - 1 && (
-          <Box
-            key={`${item.id}-separator`}
-            sx={{
-              marginLeft: odysseyDesignTokens.Spacing4,
-              marginRight: odysseyDesignTokens.Spacing4,
-              color: odysseyDesignTokens.HueNeutral300,
-            }}
-          >
-            |
-          </Box>
-        )}
-      </Box>
-    ));
-  }, [footerItems, odysseyDesignTokens]);
-
-  return footerContent;
-};
+    return footerContent;
+  },
+);
 
 const SideNav = ({
   navHeaderText,
@@ -578,15 +603,60 @@ const SideNav = ({
   const [isSideNavCollapsed, setSideNavCollapsed] = useState(false);
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
+  const scrollIntoViewRef = useRef<HTMLLIElement>(null);
+  /**
+   * Look through the sideNavItems and determine which is the first node
+   * with isSelected. This should be the node we set a ref on in order to
+   * call scrollIntoView in the effect
+   */
+  const firstSideNavItemIdWithIsSelected = useMemo(() => {
+    const flattenedItems = sideNavItems.flatMap((sideNavItem) =>
+      sideNavItem.children
+        ? [sideNavItem, ...sideNavItem.children]
+        : sideNavItem,
+    );
+    const firstItemWithIsSelected = flattenedItems.find(
+      (sideNavItem) => sideNavItem.isSelected,
+    );
+    return firstItemWithIsSelected?.id;
+  }, [sideNavItems]);
+  /**
+   * Once we've rendered and if we have an item to scroll to, do the scroll action.
+   * This must rely on checking firstSideNavItemIdWithIsSelected or it will not run
+   * once the actual ref is populated.
+   */
+  useEffect(() => {
+    if (firstSideNavItemIdWithIsSelected && scrollIntoViewRef.current) {
+      scrollIntoViewRef.current.scrollIntoView();
+    }
+  }, [firstSideNavItemIdWithIsSelected, scrollIntoViewRef]);
+
+  /**
+   * We only want to put a ref on a node iff it is the first selected node.
+   * This function returns the ref only if the ID provided matches the first
+   * selected node, otherwise returns undefined (so that the node has no ref)
+   */
+  const getRefIfThisIsFirstNodeWithIsSelected = useCallback(
+    (itemId: string) =>
+      itemId === firstSideNavItemIdWithIsSelected
+        ? scrollIntoViewRef
+        : undefined,
+    [firstSideNavItemIdWithIsSelected],
+  );
+
   const processedSideNavItems = useMemo(
     () =>
       sideNavItems.map((item) => ({
         ...item,
         children: item.children?.map((childProps) => (
-          <SideNavItemContent key={childProps.id} {...childProps} />
+          <SideNavItemContent
+            key={childProps.id}
+            scrollRef={getRefIfThisIsFirstNodeWithIsSelected(childProps.id)}
+            {...childProps}
+          />
         )),
       })),
-    [sideNavItems],
+    [getRefIfThisIsFirstNodeWithIsSelected, sideNavItems],
   );
 
   const sideNavCollapseHandler = useCallback(() => {
@@ -722,7 +792,13 @@ const SideNav = ({
                   </SideNavListItemContainer>
                 );
               } else {
-                return <SideNavItemContent key={item.id} {...item} />;
+                return (
+                  <SideNavItemContent
+                    key={item.id}
+                    scrollRef={getRefIfThisIsFirstNodeWithIsSelected(item.id)}
+                    {...item}
+                  />
+                );
               }
             })}
           </SideNavListContainer>
