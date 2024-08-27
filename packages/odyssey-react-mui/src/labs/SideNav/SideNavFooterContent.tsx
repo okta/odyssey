@@ -10,13 +10,17 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, ReactNode, useMemo } from "react";
+import { memo, useMemo } from "react";
 import { useOdysseyDesignTokens } from "../../OdysseyDesignTokensContext";
 import type { SideNavFooterItem } from "./types";
 import { Box } from "../../Box";
 import { Link } from "../../Link";
 
-const SideNavFooterContent = (footerItems: SideNavFooterItem[]): ReactNode => {
+const SideNavFooterContent = ({
+  footerItems,
+}: {
+  footerItems: SideNavFooterItem[];
+}) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const footerContent = useMemo(() => {

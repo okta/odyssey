@@ -259,7 +259,7 @@ const SideNav = ({
         isSideNavCollapsed={isSideNavCollapsed}
         onClick={sideNavExpandClickHandler}
         onKeyDown={sideNavExpandKeyHandler}
-        data-testid="collapsed-region"
+        data-se="collapsed-region"
         data-aria-label="expand side navigation"
       >
         <ExpandLeftIcon sx={expandLeftIconStyles} />
@@ -267,7 +267,7 @@ const SideNav = ({
       <SideNavExpandContainer
         odysseyDesignTokens={odysseyDesignTokens}
         isSideNavCollapsed={isSideNavCollapsed}
-        data-testid="expanded-region"
+        data-se="expanded-region"
       >
         <Box sx={sideNavHeaderContainerStyles}>
           <SideNavHeader
@@ -276,7 +276,7 @@ const SideNav = ({
             onCollapse={sideNavCollapseHandler}
           />
         </Box>
-        <Box sx={sideNavListContainerStyles}>
+        <Box sx={sideNavListContainerStyles} testId="scrollable-region">
           <SideNavListContainer>
             {processedSideNavItems?.map((item) => {
               const {
@@ -335,7 +335,7 @@ const SideNav = ({
         {footerItems && (
           <Box sx={sideNavFooterContainerStyles}>
             <SideNavFooterContainer odysseyDesignTokens={odysseyDesignTokens}>
-              {SideNavFooterContent(footerItems)}
+              <SideNavFooterContent footerItems={footerItems} />
             </SideNavFooterContainer>
           </Box>
         )}
