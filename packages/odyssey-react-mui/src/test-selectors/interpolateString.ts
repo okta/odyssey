@@ -12,7 +12,7 @@
 
 export const isRegExpString = (string: string) => /^\/*(.+)\/$/.test(string);
 
-/** This function is only to be used to interpolate strings in unit tests. It uses `eval` internally which could be unsafe if it wasn't done explicitly in our testing environment. */
+/** @deprecated This function is only to be used to interpolate strings in unit tests. It uses `eval` internally which could be unsafe if it wasn't done explicitly in our testing environment. */
 export const interpolateString = (
   string: string,
   replacements: Record<string, string | RegExp>,
