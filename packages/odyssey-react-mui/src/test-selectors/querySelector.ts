@@ -175,7 +175,7 @@ export const querySelector =
       FeatureName extends LocalFeatureTestSelector extends FeatureSelector
         ? keyof LocalFeatureTestSelector["feature"]
         : keyof FeatureSelector,
-      ChildQueryMethod extends QueryMethod,
+      ChildQueryMethod extends QueryMethod = "get",
     >(
       childProps: {
         featureName: FeatureName;
