@@ -18,7 +18,7 @@ export class ElementError extends Error {
 
     this.name = "ElementError";
 
-    console.error(element);
+    console.error("ElementError", element);
   }
 }
 
