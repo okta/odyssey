@@ -201,8 +201,8 @@ export const querySelector =
         LocalFeatureTestSelector extends FeatureSelector
           ? LocalFeatureTestSelector["feature"][FeatureName] extends TestSelector
             ? keyof LocalFeatureTestSelector["feature"][FeatureName]["selector"]["options"]
-            : string
-          : string,
+            : never
+          : never,
         string | RegExp
       >;
 
