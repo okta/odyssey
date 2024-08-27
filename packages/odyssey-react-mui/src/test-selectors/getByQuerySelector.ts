@@ -89,7 +89,9 @@ export const executeTestingLibraryMethod = <
     >
   ];
 
-export const getByQuerySelector = <LocalQueryMethod extends QueryMethod = "get">({
+export const getByQuerySelector = <
+  LocalQueryMethod extends QueryMethod = "get",
+>({
   element,
   queryMethod,
   queryOptions,
@@ -115,29 +117,22 @@ export const getByQuerySelector = <LocalQueryMethod extends QueryMethod = "get">
 )) => {
   const canvas = within(element);
 
-  const capturedElement = (
+  const capturedElement =
     selectionMethod === "ByRole"
-    ? (
-      executeTestingLibraryMethod<ByRoleMethods>({
-        canvas,
-        queryMethod,
-        selectionMethod,
-      })(role, queryOptions)
-    )
-    : (
-      executeTestingLibraryMethod<ByTextMethods>({
-        canvas,
-        queryMethod,
-        selectionMethod,
-      })(text, queryOptions)
-    )
-  )
+      ? executeTestingLibraryMethod<ByRoleMethods>({
+          canvas,
+          queryMethod,
+          selectionMethod,
+        })(role, queryOptions)
+      : executeTestingLibraryMethod<ByTextMethods>({
+          canvas,
+          queryMethod,
+          selectionMethod,
+        })(text, queryOptions);
 
-  return capturedElement as (
-    LocalQueryMethod extends "get"
+  return capturedElement as LocalQueryMethod extends "get"
     ? HTMLElement
-    : HTMLElement | null
-  )
+    : HTMLElement | null;
 };
 
 export const getByRoleQuerySelector = <LocalQueryMethod extends QueryMethod>({
@@ -150,15 +145,14 @@ export const getByRoleQuerySelector = <LocalQueryMethod extends QueryMethod>({
   queryMethod: LocalQueryMethod;
   queryOptions?: ByRoleOptions;
   role: ByRoleMatcher;
-}) => (
+}) =>
   getByQuerySelector({
     element,
     queryMethod,
     queryOptions,
     role,
     selectionMethod: "ByRole",
-  })
-)
+  });
 
 export const getByTextQuerySelector = <LocalQueryMethod extends QueryMethod>({
   element,
@@ -172,12 +166,11 @@ export const getByTextQuerySelector = <LocalQueryMethod extends QueryMethod>({
   queryOptions?: SelectorMatcherOptions;
   selectionMethod: TextSelectorMethod;
   text: Matcher;
-}) => (
+}) =>
   getByQuerySelector({
     element,
     queryMethod,
     queryOptions,
     selectionMethod,
     text,
-  })
-)
+  });

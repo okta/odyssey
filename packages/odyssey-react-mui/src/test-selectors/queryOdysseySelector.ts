@@ -32,8 +32,5 @@ export const queryOdysseySelector = <
   /**
    * Name of the component you want to select within.
    */
-  componentName: ComponentName
-) =>
-  querySelector(
-    odysseyTestSelector[componentName],
-  );
+  componentName: ComponentName,
+) => querySelector(odysseyTestSelector[componentName]);
