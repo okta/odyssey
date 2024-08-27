@@ -10,6 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export * from "./featureTestSelector";
 export * from "./queryOdysseySelector";
 export * from "./querySelector";
+export * from "./testSelector";

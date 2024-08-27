@@ -220,7 +220,7 @@ export const TitleWithLink: StoryObj<CalloutProps> = {
           title: /Safety checks failed/,
         },
       }).selectChild?.({
-        featureName: "link",
+        name: "link",
         options: {
           linkText: "Visit fueling console",
         },

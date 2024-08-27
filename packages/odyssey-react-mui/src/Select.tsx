@@ -52,7 +52,7 @@ import {
   useOdysseyDesignTokens,
   DesignTokens,
 } from "./OdysseyDesignTokensContext";
-import { FeatureTestSelector } from "./test-selectors";
+import { TestSelector } from "./test-selectors";
 
 export const SelectTestSelectors = {
   accessibleText: {
@@ -60,11 +60,11 @@ export const SelectTestSelectors = {
     hint: "description",
     label: "label",
   },
-  feature: {
+  children: {
     list: {
-      feature: {
+      children: {
         listItem: {
-          selector: {
+          elementSelector: {
             method: "ByRole",
             options: {
               label: "name",
@@ -76,14 +76,14 @@ export const SelectTestSelectors = {
       isControlledElement: true,
     },
   },
-  selector: {
+  elementSelector: {
     method: "ByRole",
     options: {
       label: "name",
     },
     role: "combobox",
   },
-} as const satisfies FeatureTestSelector;
+} as const satisfies TestSelector;
 
 export type SelectOption = {
   text: string;

@@ -263,7 +263,7 @@ export const DefaultValue: StoryObj<typeof Select> = {
       await userEvent.click(selector.element);
 
       const list = selector.selectChild({
-        featureName: "list",
+        name: "list",
       });
 
       await waitFor(() => {
@@ -271,7 +271,7 @@ export const DefaultValue: StoryObj<typeof Select> = {
       });
 
       const listItemElement = list.selectChild({
-        featureName: "listItem",
+        name: "listItem",
         options: {
           label: "Mars",
         },

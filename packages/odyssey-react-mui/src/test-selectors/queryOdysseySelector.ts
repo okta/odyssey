@@ -11,7 +11,7 @@
  */
 
 import { querySelector } from "./querySelector";
-import { type FeatureTestSelector } from "./featureTestSelector";
+import { type TestSelector } from "./testSelector";
 import { AutocompleteTestSelectors } from "../Autocomplete";
 import { CalloutTestSelectors } from "../Callout";
 import { SelectTestSelectors } from "../Select";
@@ -24,7 +24,7 @@ export const odysseyTestSelector = {
   Select: SelectTestSelectors,
   Tabs: TabsTestSelectors,
   TextField: TextFieldTestSelectors,
-} as const satisfies Record<string, FeatureTestSelector>;
+} as const satisfies Record<string, TestSelector>;
 
 export const queryOdysseySelector = <
   ComponentName extends keyof typeof odysseyTestSelector,

@@ -47,7 +47,7 @@ import {
   useInputValues,
   getControlState,
 } from "./inputUtils";
-import { FeatureTestSelector } from "./test-selectors";
+import { TestSelector } from "./test-selectors";
 
 // This is required to get around a react-types issue for "AutoSizer is not a valid JSX element."
 // @see https://github.com/bvaughn/react-virtualized/issues/1739#issuecomment-1291444246
@@ -59,11 +59,11 @@ export const AutocompleteTestSelectors = {
     hint: "description",
     label: "label",
   },
-  feature: {
+  children: {
     list: {
-      feature: {
+      children: {
         listItem: {
-          selector: {
+          elementSelector: {
             method: "ByRole",
             options: {
               label: "name",
@@ -75,14 +75,14 @@ export const AutocompleteTestSelectors = {
       isControlledElement: true,
     },
   },
-  selector: {
+  elementSelector: {
     method: "ByRole",
     options: {
       label: "name",
     },
     role: "combobox",
   },
-} as const satisfies FeatureTestSelector;
+} as const satisfies TestSelector;
 
 export type AutocompleteProps<
   OptionType,

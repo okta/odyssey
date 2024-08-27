@@ -20,7 +20,7 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext";
-import { type FeatureTestSelector } from "./test-selectors";
+import { type TestSelector } from "./test-selectors";
 import { Paragraph } from "./Typography";
 import { useUniqueId } from "./useUniqueId";
 
@@ -29,9 +29,9 @@ export const CalloutTestSelectors = {
     text: "description",
     title: "label",
   },
-  feature: {
+  children: {
     link: {
-      selector: {
+      elementSelector: {
         method: "ByRole",
         options: {
           linkText: "name",
@@ -40,14 +40,14 @@ export const CalloutTestSelectors = {
       },
     },
   },
-  selector: {
+  elementSelector: {
     method: "ByRole",
     options: {
       title: "name",
     },
     role: ["alert", "status"],
   },
-} as const satisfies FeatureTestSelector;
+} as const satisfies TestSelector;
 
 export const calloutRoleValues = ["status", "alert"] as const;
 export const calloutSeverityValues = [

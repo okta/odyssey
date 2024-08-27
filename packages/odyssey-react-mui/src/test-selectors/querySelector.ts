@@ -11,12 +11,12 @@
  */
 
 import {
-  type AccessibleLabelSelector,
+  type AccessibleTextSelector,
   type AriaRole,
-  type FeatureSelector,
-  type FeatureTestSelector,
+  type ElementChildSelector,
   type TestSelector,
-} from "./featureTestSelector";
+  type ElementSelector,
+} from "./testSelector";
 import { getComputedAccessibleText } from "./getComputedAccessibleText";
 import {
   getByRoleQuerySelector,
@@ -27,14 +27,14 @@ import { getControlledElement } from "./linkedHtmlSelectors";
 import { ElementError } from "./sanityChecks";
 
 export type InnerQuerySelectorProps<
-  LocalFeatureTestSelector extends FeatureTestSelector,
+  LocalTestSelector extends TestSelector,
   LocalQueryMethod extends QueryMethod,
 > = {
   /**
    * Testing Library method used to query elements.
    */
   queryMethod?: LocalQueryMethod;
-} & (LocalFeatureTestSelector extends {
+} & (LocalTestSelector extends {
   selector: {
     role: infer Role;
   };
@@ -48,24 +48,24 @@ export type InnerQuerySelectorProps<
       }
     : object
   : object) &
-  (LocalFeatureTestSelector extends TestSelector
+  (LocalTestSelector extends ElementSelector
     ? {
         /**
          * Helps narrow down HTML selection to the correct element.
          */
         options: Record<
-          keyof LocalFeatureTestSelector["selector"]["options"],
+          keyof LocalTestSelector["elementSelector"]["options"],
           string | RegExp
         >;
       }
     : object);
 
 export const querySelector =
-  <LocalFeatureTestSelector extends FeatureTestSelector>(
+  <LocalTestSelector extends TestSelector>(
     /**
-     * Selectors object including features and accessible text selections.
+     * Selectors object including children and accessible text selections.
      */
-    featureTestSelector: LocalFeatureTestSelector,
+    testSelector: LocalTestSelector,
   ) =>
   <LocalQueryMethod extends QueryMethod = "get">(
     props: {
@@ -73,7 +73,7 @@ export const querySelector =
        * Refers to Testing Library's canvas. This is usually `screen`, but Storybook uses `within(canvas)`.
        */
       element: HTMLElement;
-    } & InnerQuerySelectorProps<LocalFeatureTestSelector, LocalQueryMethod>,
+    } & InnerQuerySelectorProps<LocalTestSelector, LocalQueryMethod>,
   ) => {
     const { element: containerElement, queryMethod } = props;
     const localQueryMethod = queryMethod || ("get" as const);
@@ -83,42 +83,42 @@ export const querySelector =
     // This `let` is difficult to make into a `const`. It makes the code unreadable.
     let capturedElement: HTMLElement | null = null;
 
-    if ("selector" in featureTestSelector && querySelectorOptions) {
+    if ("elementSelector" in testSelector && querySelectorOptions) {
       const sharedProps = {
         element: containerElement,
         queryMethod: localQueryMethod,
         queryOptions: Object.fromEntries(
-          Object.entries(featureTestSelector.selector.options).map(
+          Object.entries(testSelector.elementSelector.options).map(
             ([testSelectorsKey, testingLibraryKey]) => [
               testingLibraryKey,
               querySelectorOptions[testSelectorsKey],
             ],
           ),
         ) as Record<
-          LocalFeatureTestSelector extends TestSelector
-            ? LocalFeatureTestSelector["selector"]["options"][keyof LocalFeatureTestSelector["selector"]["options"]]
+          LocalTestSelector extends ElementSelector
+            ? LocalTestSelector["elementSelector"]["options"][keyof LocalTestSelector["elementSelector"]["options"]]
             : string,
           string | RegExp
         >,
       };
 
       capturedElement =
-        featureTestSelector.selector.method === "ByRole"
+        testSelector.elementSelector.method === "ByRole"
           ? getByRoleQuerySelector({
               ...sharedProps,
               role:
-                Array.isArray(featureTestSelector.selector.role) || role
+                Array.isArray(testSelector.elementSelector.role) || role
                   ? role || ""
-                  : featureTestSelector.selector.role,
+                  : testSelector.elementSelector.role,
             })
           : getByTextQuerySelector({
               ...sharedProps,
-              selectionMethod: featureTestSelector.selector.method,
-              text: featureTestSelector.selector.text,
+              selectionMethod: testSelector.elementSelector.method,
+              text: testSelector.elementSelector.text,
             });
     } else if (
-      "isControlledElement" in featureTestSelector &&
-      featureTestSelector.isControlledElement
+      "isControlledElement" in testSelector &&
+      testSelector.isControlledElement
     ) {
       try {
         capturedElement = getControlledElement({ element: containerElement });
@@ -131,21 +131,14 @@ export const querySelector =
       }
     }
 
-    if (!capturedElement) {
-      throw new ElementError(
-        "No child HTML element available",
-        containerElement,
-      );
-    }
-
-    if (!("accessibleText" in featureTestSelector)) {
-      throw new Error("Missing `accessibleText` in `FeatureTestSelector`");
+    if (!("accessibleText" in testSelector)) {
+      throw new Error("Missing `accessibleText` in `TestSelector`");
     }
 
     const getAccessibleText = <
-      LabelName extends LocalFeatureTestSelector extends AccessibleLabelSelector
-        ? keyof LocalFeatureTestSelector["accessibleText"]
-        : keyof AccessibleLabelSelector,
+      LabelName extends LocalTestSelector extends AccessibleTextSelector
+        ? keyof LocalTestSelector["accessibleText"]
+        : never,
     >(
       labelName: LabelName,
     ) => {
@@ -158,22 +151,22 @@ export const querySelector =
 
       return getComputedAccessibleText({
         element: capturedElement,
-        type: featureTestSelector.accessibleText[labelName],
+        type: testSelector.accessibleText[labelName],
       });
     };
 
     const selectChild = <
-      FeatureName extends LocalFeatureTestSelector extends FeatureSelector
-        ? keyof LocalFeatureTestSelector["feature"]
-        : keyof FeatureSelector,
+      ChildName extends LocalTestSelector extends ElementChildSelector
+        ? keyof LocalTestSelector["children"]
+        : keyof ElementChildSelector,
       ChildQueryMethod extends QueryMethod = "get",
     >(
       childProps: {
-        featureName: FeatureName;
+        name: ChildName;
       } & InnerQuerySelectorProps<
-        LocalFeatureTestSelector extends FeatureSelector
-          ? LocalFeatureTestSelector["feature"][FeatureName]
-          : FeatureTestSelector,
+        LocalTestSelector extends ElementChildSelector
+          ? LocalTestSelector["children"][ChildName]
+          : TestSelector,
         ChildQueryMethod
       >,
     ) => {
@@ -184,28 +177,28 @@ export const querySelector =
         );
       }
 
-      if (!("feature" in featureTestSelector)) {
-        throw new Error("Missing `feature` in `FeatureTestSelector`");
+      if (!("children" in testSelector)) {
+        throw new Error("Missing `children` in `TestSelector`");
       }
 
       type Options = Record<
-        LocalFeatureTestSelector extends FeatureSelector
-          ? LocalFeatureTestSelector["feature"][FeatureName] extends TestSelector
-            ? keyof LocalFeatureTestSelector["feature"][FeatureName]["selector"]["options"]
+        LocalTestSelector extends ElementChildSelector
+          ? LocalTestSelector["children"][ChildName] extends ElementSelector
+            ? keyof LocalTestSelector["children"][ChildName]["elementSelector"]["options"]
             : never
           : never,
         string | RegExp
       >;
 
       return querySelector(
-        featureTestSelector.feature[
-          childProps.featureName
-        ] as LocalFeatureTestSelector extends FeatureSelector
-          ? LocalFeatureTestSelector["feature"][FeatureName]
-          : FeatureTestSelector,
+        testSelector.children[
+          childProps.name
+        ] as LocalTestSelector extends ElementChildSelector
+          ? LocalTestSelector["children"][ChildName]
+          : TestSelector,
       )(
-        // @ts-expect-error: Type '{ role?: AriaRole | undefined; options?: Record<LocalFeatureTestSelector extends FeatureSelector ? LocalFeatureTestSelector["feature"][FeatureName] extends TestSelector ? keyof LocalFeatureTestSelector["feature"][FeatureName]["selector"]["options"] : string : string, string | RegExp> | undefined; element: HTMLElement...' is not assignable to type '(LocalFeatureTestSelector extends FeatureSelector ? LocalFeatureTestSelector["feature"][FeatureName] : FeatureTestSelector) extends { ...; } ? Role extends AriaRole[] ? { ...; } : object : object'.ts(2345)
-        // `as featureTestSelector.feature[featureName]` narrows the props down enough that TypeScript errors here. We're passing the correct information, but it doesn't know that, and it's difficult to fix this. -Kevin Ghadyani
+        // @ts-expect-error: Type '{ role?: AriaRole | undefined; options?: Record<LocalTestSelector extends ElementChildSelector ? LocalTestSelector["children"][ChildName] extends TestSelector ? keyof LocalTestSelector["children"][ChildName]["selector"]["options"] : string : string, string | RegExp> | undefined; element: HTMLElement...' is not assignable to type '(LocalTestSelector extends ElementChildSelector ? LocalTestSelector["children"][ChildName] : TestSelector) extends { ...; } ? Role extends AriaRole[] ? { ...; } : object : object'.ts(2345)
+        // `as testSelector.children[ChildName]` narrows the props down enough that TypeScript errors here. We're passing the correct information, but it doesn't know that, and it's difficult to fix this. -Kevin Ghadyani
         {
           element: capturedElement,
           queryMethod: childProps.queryMethod,
@@ -228,12 +221,11 @@ export const querySelector =
         ? HTMLElement
         : HTMLElement | null,
       getAccessibleText:
-        getAccessibleText as LocalFeatureTestSelector extends AccessibleLabelSelector
+        getAccessibleText as LocalTestSelector extends AccessibleTextSelector
           ? typeof getAccessibleText
           : never,
-      selectChild:
-        selectChild as LocalFeatureTestSelector extends FeatureSelector
-          ? typeof selectChild
-          : never,
+      selectChild: selectChild as LocalTestSelector extends ElementChildSelector
+        ? typeof selectChild
+        : never,
     };
   };

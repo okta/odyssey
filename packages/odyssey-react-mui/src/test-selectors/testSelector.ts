@@ -95,47 +95,49 @@ export type AriaRole =
   | "treegrid"
   | "treeitem";
 
-export type RoleSelector = {
+export type ControlledElementSelector = { isControlledElement?: true };
+
+export type RoleSelectorOptions = {
   method: RoleSelectorMethod;
   options: Record<string, keyof ByRoleOptions>;
   role: AriaRole | AriaRole[];
-  // | "UNKNOWN" // This should be a `Symbol`, but it can't because this is ultimately going to be JSON stringified.
+  // | "UNKNOWN" // This should be a `Symbol`, but it can't because this is ultimately going to be JSON stringified. This type will allow passing a custom role if the component allows it: `Box`.
 };
 
-export type TextSelector = {
+export type TextSelectorOptions = {
   method: TextSelectorMethod;
   options: Record<string, keyof SelectorMatcherOptions>;
   text: string;
 };
 
-export type Selector = RoleSelector | TextSelector;
+export type ElementSelectorValue = RoleSelectorOptions | TextSelectorOptions;
 
-export type TestSelector = {
-  selector: Selector;
+export type ElementSelector = {
+  elementSelector: ElementSelectorValue;
 };
 
-export type Feature = Record<
+export type ElementChildSelectorValue = Record<
   string,
-  FeatureTestSelector & { isControlledElement?: true }
+  TestSelector & ControlledElementSelector
 >;
 
-export type FeatureSelector = {
-  feature: Feature;
+export type ElementChildSelector = {
+  children: ElementChildSelectorValue;
 };
 
-export type AccessibleLabelSelectorType =
+export type AccessibleTextSelectorValue =
   | "description"
   | "errorMessage"
   | "label";
 
-export type AccessibleLabelSelector = {
-  /** An "accessible -> semantic" name mapping such as "`description` -> `hint`". */
-  accessibleText: Record<string, AccessibleLabelSelectorType>;
+export type AccessibleTextSelector = {
+  /** An "accessible -> semantic" name mapping such as "`description` -> `hint`" where "description" equates to `"aria-description"`. */
+  accessibleText: Record<string, AccessibleTextSelectorValue>;
 };
 
-export type FeatureTestSelector =
-  | FeatureSelector
-  | TestSelector
-  | (FeatureSelector & TestSelector)
-  | (AccessibleLabelSelector & TestSelector)
-  | (FeatureSelector & AccessibleLabelSelector & TestSelector);
+export type TestSelector =
+  | ElementChildSelector
+  | ElementSelector
+  | (ElementChildSelector & ElementSelector)
+  | (AccessibleTextSelector & ElementSelector)
+  | (ElementChildSelector & AccessibleTextSelector & ElementSelector);

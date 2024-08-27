@@ -30,7 +30,7 @@ import {
 import { Field } from "./Field";
 import { HtmlProps } from "./HtmlProps";
 import { FocusHandle, useInputValues, getControlState } from "./inputUtils";
-import { type FeatureTestSelector } from "./test-selectors";
+import { type TestSelector } from "./test-selectors";
 
 export const TextFieldTestSelectors = {
   accessibleText: {
@@ -38,9 +38,9 @@ export const TextFieldTestSelectors = {
     hint: "description",
     label: "label",
   },
-  feature: {
+  children: {
     link: {
-      selector: {
+      elementSelector: {
         method: "ByRole",
         options: {
           label: "name",
@@ -49,14 +49,14 @@ export const TextFieldTestSelectors = {
       },
     },
   },
-  selector: {
+  elementSelector: {
     method: "ByRole",
     options: {
       label: "name",
     },
     role: "textbox",
   },
-} as const satisfies FeatureTestSelector;
+} as const satisfies TestSelector;
 
 export const textFieldTypeValues = [
   "email",

@@ -30,12 +30,12 @@ import { Badge, BadgeProps } from "./Badge";
 import { Box } from "./Box";
 import { HtmlProps } from "./HtmlProps";
 import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
-import { type FeatureTestSelector } from "./test-selectors";
+import { type TestSelector } from "./test-selectors";
 
 export const TabsTestSelectors = {
-  feature: {
+  children: {
     tabItem: {
-      selector: {
+      elementSelector: {
         method: "ByRole",
         options: {
           label: "name",
@@ -44,14 +44,14 @@ export const TabsTestSelectors = {
       },
     },
   },
-  selector: {
+  elementSelector: {
     method: "ByRole",
     options: {
       label: "name",
     },
     role: "tablist",
   },
-} as const satisfies FeatureTestSelector;
+} as const satisfies TestSelector;
 
 export type TabItemProps = {
   /**
