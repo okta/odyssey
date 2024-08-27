@@ -213,7 +213,8 @@ export const TitleWithLink: StoryObj<CalloutProps> = {
     await step("has visible link", async () => {
       const querySelect = queryOdysseySelector("Callout");
 
-      const element = querySelect(canvasElement, {
+      const element = querySelect({
+        element: canvasElement,
         role: "alert",
         options: {
           title: /Safety checks failed/,
