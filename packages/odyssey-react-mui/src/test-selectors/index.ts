@@ -11,6 +11,5 @@
  */
 
 export * from "./featureTestSelector";
-export * from "./odysseyTestSelectors";
 export * from "./queryOdysseySelector";
 export * from "./querySelector";
