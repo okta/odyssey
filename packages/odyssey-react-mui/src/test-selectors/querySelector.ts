@@ -26,15 +26,6 @@ import {
 import { getControlledElement } from "./linkedHtmlSelectors";
 import { ElementError } from "./sanityChecks";
 
-export type QuerySelectorOptions<
-  LocalFeatureTestSelector extends FeatureTestSelector,
-> = LocalFeatureTestSelector extends TestSelector
-  ? Record<
-      keyof LocalFeatureTestSelector["selector"]["options"],
-      string | RegExp
-    >
-  : Record<string, string>;
-
 export type InnerQuerySelectorProps<
   LocalFeatureTestSelector extends FeatureTestSelector,
   LocalQueryMethod extends QueryMethod,
