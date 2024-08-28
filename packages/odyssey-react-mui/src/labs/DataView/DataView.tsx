@@ -37,8 +37,8 @@ import { fetchData } from "./fetchData";
 import { LayoutSwitcher } from "./LayoutSwitcher";
 import { TableSettings } from "./TableSettings";
 import { Pagination, usePagination } from "../../Pagination";
-import { TableContent } from "./TableContent";
-import { StackContent } from "./StackContent";
+import { TableLayoutContent } from "./TableLayoutContent";
+import { CardLayoutContent } from "./CardLayoutContent";
 import { useFilterConversion } from "./useFilterConversion";
 import { useRowReordering } from "../../DataTable/useRowReordering";
 import {
@@ -94,8 +94,8 @@ const DataView = ({
   paginationType = "paged",
   resultsPerPage = 20,
   searchDelayTime,
-  stackOptions,
-  tableOptions,
+  cardLayoutOptions,
+  tableLayoutOptions,
   totalRows,
   maxPages,
   maxResultsPerPage,
@@ -139,14 +139,14 @@ const DataView = ({
   const [tableState, setTableState] = useState<TableState>({
     columnSorting: [],
     columnVisibility: {},
-    rowDensity: tableOptions?.initialDensity ?? densityValues[0],
+    rowDensity: tableLayoutOptions?.initialDensity ?? densityValues[0],
   });
 
   const shouldShowFilters = hasSearch || hasFilters;
 
   const availableFilters = useFilterConversion({
     filters: filters,
-    columns: tableOptions?.columns,
+    columns: tableLayoutOptions?.columns,
   });
 
   useEffect(() => {
@@ -257,10 +257,10 @@ const DataView = ({
   const additionalActions = useMemo(
     () => (
       <>
-        {currentLayout === "table" && tableOptions && (
+        {currentLayout === "table" && tableLayoutOptions && (
           <TableSettings
             setTableState={setTableState}
-            tableOptions={tableOptions}
+            tableLayoutOptions={tableLayoutOptions}
             tableState={tableState}
           />
         )}
@@ -274,7 +274,7 @@ const DataView = ({
         )}
       </>
     ),
-    [currentLayout, tableOptions, tableState, availableLayouts],
+    [currentLayout, tableLayoutOptions, tableState, availableLayouts],
   );
 
   const { lastRow: lastRowOnPage } = usePagination({
@@ -333,9 +333,9 @@ const DataView = ({
         </AdditionalActionsContainer>
       )}
 
-      {currentLayout === "table" && tableOptions && (
-        <TableContent
-          columns={tableOptions.columns}
+      {currentLayout === "table" && tableLayoutOptions && (
+        <TableLayoutContent
+          columns={tableLayoutOptions.columns}
           data={data}
           draggingRow={draggingRow}
           emptyState={emptyState}
@@ -352,14 +352,14 @@ const DataView = ({
           rowSelection={rowSelection}
           setRowSelection={setRowSelection}
           setTableState={setTableState}
-          tableOptions={tableOptions}
+          tableLayoutOptions={tableLayoutOptions}
           tableState={tableState}
           totalRows={totalRows}
         />
       )}
       {(currentLayout === "list" || currentLayout === "grid") &&
-        stackOptions && (
-          <StackContent
+        cardLayoutOptions && (
+          <CardLayoutContent
             currentLayout={currentLayout}
             data={data}
             draggingRow={draggingRow}
@@ -376,7 +376,7 @@ const DataView = ({
             rowReorderingUtilities={rowReorderingUtilities}
             rowSelection={rowSelection}
             setRowSelection={setRowSelection}
-            stackOptions={stackOptions}
+            cardLayoutOptions={cardLayoutOptions}
             totalRows={totalRows}
           />
         )}

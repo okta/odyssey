@@ -10,19 +10,22 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { MRT_DensityState } from "material-react-table";
+import { memo } from "react";
+import { CardLayoutProps } from "./componentTypes";
+import { DataRow } from "./dataTypes";
 
-export type DataViewLayout = "list" | "grid" | "table";
+const DetailPanel = ({
+  row,
+  renderDetailPanel,
+}: {
+  row: DataRow;
+  renderDetailPanel: CardLayoutProps["renderDetailPanel"];
+}) => {
+  if (!renderDetailPanel) return null;
+  return renderDetailPanel({ row });
+};
 
-export const availableStackLayouts: DataViewLayout[] = ["list", "grid"];
-export const availableTableLayouts: DataViewLayout[] = ["table"];
-export const availableLayouts: DataViewLayout[] = [
-  ...availableTableLayouts,
-  ...availableStackLayouts,
-];
+const MemoizedDetailPanel = memo(DetailPanel);
+MemoizedDetailPanel.displayName = "DetailPanel";
 
-export const densityValues: MRT_DensityState[] = [
-  "comfortable",
-  "spacious",
-  "compact",
-];
+export { MemoizedDetailPanel as DetailPanel };
