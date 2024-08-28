@@ -79,8 +79,8 @@ export const useScrollIndication = ({
       }, 100); // debounce delay
     });
 
-    if (tableOuterContainer) {
-      resizeObserverRef.current.observe(tableOuterContainer);
+    if (tableOuterContainer && tableOuterContainer.parentElement) {
+      resizeObserverRef.current.observe(tableOuterContainer.parentElement);
     }
 
     return () => {
