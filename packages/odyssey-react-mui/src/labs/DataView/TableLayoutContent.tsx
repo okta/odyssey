@@ -41,7 +41,7 @@ import {
 } from "../../icons.generated";
 import { Box } from "../../Box";
 import { Button } from "../../Button";
-import { TableProps, TableState, UniversalProps } from "./componentTypes";
+import { TableLayoutProps, TableState, UniversalProps } from "./componentTypes";
 import { DataTableCell } from "./dataTypes";
 import {
   dataTableImmutableSettings,
@@ -64,8 +64,8 @@ const RowActionsContainer = styled("div")(() => ({
   display: "flex",
 }));
 
-export type TableContentProps = {
-  columns: TableProps["columns"];
+export type TableLayoutContentProps = {
+  columns: TableLayoutProps["columns"];
   data: MRT_RowData[];
   draggingRow?: MRT_Row<MRT_RowData> | null;
   emptyState: ReactNode;
@@ -121,12 +121,12 @@ export type TableContentProps = {
   rowSelection: MRT_RowSelectionState;
   setRowSelection: Dispatch<SetStateAction<MRT_RowSelectionState>>;
   setTableState: Dispatch<SetStateAction<TableState>>;
-  tableOptions: TableProps;
+  tableLayoutOptions: TableLayoutProps;
   tableState: TableState;
   totalRows: UniversalProps["totalRows"];
 };
 
-const TableContent = ({
+const TableLayoutContent = ({
   columns,
   data,
   draggingRow,
@@ -144,10 +144,10 @@ const TableContent = ({
   rowSelection,
   setRowSelection,
   setTableState,
-  tableOptions,
+  tableLayoutOptions,
   tableState,
   totalRows,
-}: TableContentProps) => {
+}: TableLayoutContentProps) => {
   const [isTableContainerScrolledToStart, setIsTableContainerScrolledToStart] =
     useState(true);
   const [isTableContainerScrolledToEnd, setIsTableContainerScrolledToEnd] =
@@ -220,8 +220,8 @@ const TableContent = ({
         row.index + (pagination.pageIndex - 1) * pagination.pageSize;
       return (
         <RowActionsContainer>
-          {tableOptions.rowActionButtons?.(row)}
-          {(tableOptions.rowActionMenuItems || hasRowReordering) && (
+          {tableLayoutOptions.rowActionButtons?.(row)}
+          {(tableLayoutOptions.rowActionMenuItems || hasRowReordering) && (
             <MenuButton
               ariaLabel={t("table.moreactions.arialabel")}
               buttonVariant="floating"
@@ -232,7 +232,7 @@ const TableContent = ({
               <RowActions
                 isRowReorderingDisabled={isRowReorderingDisabled}
                 row={row}
-                rowActionMenuItems={tableOptions.rowActionMenuItems}
+                rowActionMenuItems={tableLayoutOptions.rowActionMenuItems}
                 rowIndex={currentIndex}
                 totalRows={totalRows}
                 updateRowOrder={
@@ -251,7 +251,7 @@ const TableContent = ({
       pagination.pageIndex,
       pagination.pageSize,
       t,
-      tableOptions,
+      tableLayoutOptions,
       totalRows,
       updateRowOrder,
     ],
@@ -270,15 +270,15 @@ const TableContent = ({
   const shouldDisplayRowActions = useMemo(
     () =>
       (hasRowReordering === true && onReorderRows) ||
-      tableOptions.rowActionButtons ||
-      tableOptions.rowActionMenuItems
+      tableLayoutOptions.rowActionButtons ||
+      tableLayoutOptions.rowActionMenuItems
         ? true
         : false,
     [
       hasRowReordering,
       onReorderRows,
-      tableOptions.rowActionButtons,
-      tableOptions.rowActionMenuItems,
+      tableLayoutOptions.rowActionButtons,
+      tableLayoutOptions.rowActionMenuItems,
     ],
   );
 
@@ -323,10 +323,10 @@ const TableContent = ({
           className: "ods-actions-cell",
           children: (
             <Box sx={{ display: "flex", visibility: "hidden" }}>
-              {tableOptions.rowActionButtons &&
-                tableOptions.rowActionButtons({ id: null })}
+              {tableLayoutOptions.rowActionButtons &&
+                tableLayoutOptions.rowActionButtons({ id: null })}
               {((hasRowReordering === true && onReorderRows) ||
-                tableOptions.rowActionMenuItems) && (
+                tableLayoutOptions.rowActionMenuItems) && (
                 <Box>
                   <Button
                     endIcon={<MoreIcon />}
@@ -345,7 +345,7 @@ const TableContent = ({
     muiTableProps: {
       ref: tableContentRef,
       className:
-        !shouldDisplayRowActions && tableOptions.hasColumnResizing
+        !shouldDisplayRowActions && tableLayoutOptions.hasColumnResizing
           ? "ods-hide-spacer-column"
           : "",
     },
@@ -355,11 +355,16 @@ const TableContent = ({
     muiTableBodyProps: () => ({
       className: rowDensityClassName,
     }),
-    enableColumnResizing: tableOptions.hasColumnResizing,
+    enableColumnResizing: tableLayoutOptions.hasColumnResizing,
     defaultColumn: {
       Cell: defaultCell,
     },
-    enableRowActions: shouldDisplayRowActions,
+    enableRowActions:
+      (hasRowReordering === true && onReorderRows) ||
+      tableLayoutOptions.rowActionButtons ||
+      tableLayoutOptions.rowActionMenuItems
+        ? true
+        : false,
     renderRowActions: ({ row }) => renderRowActions({ row }),
     enableRowOrdering: hasRowReordering && Boolean(onReorderRows),
     enableRowDragging: hasRowReordering && Boolean(onReorderRows),
@@ -395,7 +400,7 @@ const TableContent = ({
       sx: dragHandleStyles,
       ...dragHandleText,
     }),
-    renderDetailPanel: tableOptions.renderDetailPanel,
+    renderDetailPanel: tableLayoutOptions.renderDetailPanel,
     enableRowVirtualization: data.length >= 50,
     muiTableHeadCellProps: ({ column: currentColumn }) => ({
       className: tableState.columnSorting.find(
@@ -407,7 +412,7 @@ const TableContent = ({
     muiTableBodyCellProps: ({ column }) => ({
       className: column.getIsResizing() ? "isResizing" : "",
     }),
-    enableSorting: tableOptions.hasSorting === true, // I don't know why this needs to be true, but it still works if undefined otherwise
+    enableSorting: tableLayoutOptions.hasSorting === true, // I don't know why this needs to be true, but it still works if undefined otherwise
     onSortingChange: (sortingUpdater) => {
       const newSortVal =
         typeof sortingUpdater === "function"
@@ -441,7 +446,7 @@ const TableContent = ({
   );
 };
 
-const MemoizedTableContent = memo(TableContent);
-MemoizedTableContent.displayName = "TableContent";
+const MemoizedTableLayoutContent = memo(TableLayoutContent);
+MemoizedTableLayoutContent.displayName = "TableLayoutContent";
 
-export { MemoizedTableContent as TableContent };
+export { MemoizedTableLayoutContent as TableLayoutContent };

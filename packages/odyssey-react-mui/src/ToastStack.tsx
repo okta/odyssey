@@ -14,14 +14,14 @@ import { memo, ReactElement } from "react";
 import { Box, Snackbar } from "@mui/material";
 import { Toast } from "./Toast";
 
-export type ToastStackProps = {
+export type ToastListProps = {
   /**
    * The Toast or array of Toasts within the ToastStack
    */
   children: ReactElement<typeof Toast> | Array<ReactElement<typeof Toast>>;
 };
 
-const ToastStack = ({ children }: ToastStackProps) => {
+const ToastStack = ({ children }: ToastListProps) => {
   return (
     <Snackbar open={true}>
       <Box

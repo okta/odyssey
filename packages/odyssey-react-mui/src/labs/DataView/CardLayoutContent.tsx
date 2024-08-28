@@ -27,12 +27,12 @@ import {
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
 import { RowActions } from "./RowActions";
-import { StackCard } from "./StackCard";
-import { StackLayout, StackProps, UniversalProps } from "./componentTypes";
+import { DataCard } from "./DataCard";
+import { CardLayout, CardLayoutProps, UniversalProps } from "./componentTypes";
 import { DetailPanel } from "./DetailPanel";
 
-export type StackContentProps = {
-  currentLayout: StackLayout;
+export type CardLayoutContentProps = {
+  currentLayout: CardLayout;
   data: MRT_RowData[];
   draggingRow?: MRT_Row<MRT_RowData> | null;
   emptyState: ReactNode;
@@ -84,7 +84,7 @@ export type StackContentProps = {
   };
   rowSelection: MRT_RowSelectionState;
   setRowSelection: Dispatch<SetStateAction<MRT_RowSelectionState>>;
-  stackOptions: StackProps;
+  cardLayoutOptions: CardLayoutProps;
   totalRows: UniversalProps["totalRows"];
 };
 
@@ -95,7 +95,7 @@ const StackContainer = styled("div", {
     prop !== "maxGridColumns",
 })<{
   odysseyDesignTokens: DesignTokens;
-  currentLayout: StackLayout;
+  currentLayout: CardLayout;
   maxGridColumns: number;
 }>(({ odysseyDesignTokens, currentLayout, maxGridColumns }) => ({
   display: currentLayout === "list" ? "flex" : "grid",
@@ -135,7 +135,7 @@ const CheckboxContainer = styled("div", {
   marginBlockStart: `-${odysseyDesignTokens.Spacing1}`,
 }));
 
-const StackContent = ({
+const CardLayoutContent = ({
   currentLayout,
   data,
   emptyState,
@@ -150,9 +150,9 @@ const StackContent = ({
   rowReorderingUtilities,
   rowSelection,
   setRowSelection,
-  stackOptions,
+  cardLayoutOptions,
   totalRows,
-}: StackContentProps) => {
+}: CardLayoutContentProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const handleRowSelectionChange = useCallback(
@@ -174,7 +174,7 @@ const StackContent = ({
     <StackContainer
       odysseyDesignTokens={odysseyDesignTokens}
       currentLayout={currentLayout}
-      maxGridColumns={stackOptions.maxGridColumns ?? 3}
+      maxGridColumns={cardLayoutOptions.maxGridColumns ?? 3}
     >
       {isLoading ? (
         <LoadingContainer odysseyDesignTokens={odysseyDesignTokens}>
@@ -188,12 +188,12 @@ const StackContent = ({
             <>
               {data.map((row: MRT_RowData, index: number) => {
                 const { overline, title, description, image, children } =
-                  stackOptions.cardProps(row);
+                  cardLayoutOptions.itemProps(row);
                 const currentIndex =
                   index + (pagination.pageIndex - 1) * pagination.pageSize;
 
                 return (
-                  <StackCard
+                  <DataCard
                     Accessory={
                       hasRowSelection && (
                         // Negative margin to counteract the checkbox's inbuilt spacing
@@ -210,21 +210,26 @@ const StackContent = ({
                     children={children}
                     description={description}
                     detailPanel={
-                      stackOptions.renderDetailPanel ? (
+                      cardLayoutOptions.renderDetailPanel ? (
                         <DetailPanel
                           row={row}
-                          renderDetailPanel={stackOptions.renderDetailPanel}
+                          renderDetailPanel={
+                            cardLayoutOptions.renderDetailPanel
+                          }
                         />
                       ) : undefined
                     }
                     image={image}
                     key={row.id}
                     menuButtonChildren={
-                      (stackOptions.rowActionMenuItems || hasRowReordering) && (
+                      (cardLayoutOptions.rowActionMenuItems ||
+                        hasRowReordering) && (
                         <RowActions
                           row={row}
                           rowIndex={currentIndex}
-                          rowActionMenuItems={stackOptions.rowActionMenuItems}
+                          rowActionMenuItems={
+                            cardLayoutOptions.rowActionMenuItems
+                          }
                           isRowReorderingDisabled={isRowReorderingDisabled}
                           totalRows={totalRows}
                           updateRowOrder={
@@ -248,7 +253,7 @@ const StackContent = ({
   );
 };
 
-const MemoizedStackContent = memo(StackContent);
-MemoizedStackContent.displayName = "StackContent";
+const MemoizedCardLayoutContent = memo(CardLayoutContent);
+MemoizedCardLayoutContent.displayName = "CardLayoutContent";
 
-export { MemoizedStackContent as StackContent };
+export { MemoizedCardLayoutContent as CardLayoutContent };

@@ -45,7 +45,7 @@ import {
 
 export const CARD_IMAGE_HEIGHT = "64px";
 
-export type StackCardProps = {
+export type DataCardProps = {
   children?: ReactNode;
   description?: string;
   detailPanel?: ReactNode;
@@ -117,7 +117,7 @@ const CardChildrenContainer = styled("div", {
 
 const buttonProviderValue = { isFullWidth: true };
 
-const StackCard = ({
+const DataCard = ({
   Accessory: AccessoryProp,
   button,
   children,
@@ -128,7 +128,7 @@ const StackCard = ({
   onClick,
   overline,
   title,
-}: StackCardProps) => {
+}: DataCardProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
 
@@ -250,7 +250,7 @@ const StackCard = ({
   );
 };
 
-const MemoizedStackCard = memo(StackCard);
-MemoizedStackCard.displayName = "StackCard";
+const MemoizedDataCard = memo(DataCard);
+MemoizedDataCard.displayName = "DataCard";
 
-export { MemoizedStackCard as StackCard };
+export { MemoizedDataCard as DataCard };

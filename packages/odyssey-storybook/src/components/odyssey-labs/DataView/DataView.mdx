@@ -9,29 +9,23 @@ import {
   Stories,
 } from "@storybook/addon-docs";
 import { Story } from "@storybook/blocks";
-import * as DataComponentsStories from "./DataComponents.stories";
+import * as DataViewStories from "./DataView.stories";
 
-<Meta of={DataComponentsStories} />
+<Meta of={DataViewStories} />
 
-<Title of={DataComponentsStories} />
-<Subtitle of={DataComponentsStories} />
-<Description of={DataComponentsStories} />
+<Title of={DataViewStories} />
+<Subtitle of={DataViewStories} />
+<Description of={DataViewStories} />
 
-The `DataComponents` suite is a powerful and flexible set of tools for displaying and interacting with data in various formats. It includes `DataView`, `DataTable`, and `DataStack`, which can be used to create complex data representations with features like filtering, sorting, pagination, and more.
+The `DataView` is a powerful and flexible way to display and interact with data in various formats. It includes the ability to display data as a table, card list, or card grid, and can be used to create complex data representations with features like filtering, sorting, pagination, and more.
 
 ## Overview
 
-The `DataComponents` suite is built on top of Material-React-Table v2 (MRT) and offers additional functionality and styling to match the Okta Odyssey design system. It's designed to be easy to set up while remaining highly customizable to meet diverse data display needs.
-
-Key components:
-
-- `DataView`: The most flexible component, allowing you to switch between table and stack layouts.
-- `DataTable`: Focused on tabular data display with advanced features.
-- `DataStack`: For displaying data in a card-based layout, either as a list or grid.
+`DataView` was originally just a table, built on top of Material-React-Table v2 (MRT) and modified to provide additional functionality and styling to match the Okta Odyssey design system. Now it provides two additional view modes, and is designed to be easy to set up while remaining highly customizable to meet diverse data display needs.
 
 ## Getting Started
 
-To use the `DataComponents`, you'll need to provide at minimum a `getData` function. Here's a basic example:
+To use the `DataView`, you'll need to provide at minimum a `getData` function. Here's a basic example:
 
 ```tsx
 import { DataView, DataViewProps } from "@okta/odyssey-react-mui/labs";
@@ -77,6 +71,8 @@ You can control available layouts using the `availableLayouts` prop:
   // ... other props
 />
 ```
+
+If you only include one layout in the array, the `DataView` will be locked to that layout and won't present the UI for changing it.
 
 ### Filtering and Searching
 
@@ -144,22 +140,13 @@ Provide custom empty states for when there's no data or no search results:
 />
 ```
 
-## DataView, DataTable, and DataStack
-
-It's important to understand the relationship between these components:
-
-- `DataView` is the core component with the most flexibility.
-- `DataTable` and `DataStack` are convenience wrappers around `DataView`.
-
-`DataTable` and `DataStack` are provided as a convenience for common use cases, but they ultimately use `DataView` under the hood. If you need more control or a mix of table and stack layouts, you should use `DataView` directly.
-
 ### TableOptions
 
-When using `DataView`, you can pass a `tableOptions` prop to customize the table behavior and appearance. Here's a detailed look at the available options:
+You can pass a `tableLayoutOptions` prop to customize the table-specific behavior and appearance. Here's a detailed look at the available options:
 
 ```tsx
 <DataView
-  tableOptions={{
+  tableLayoutOptions={{
     columns: columnDefinitions,
     hasChangeableDensity: true,
     hasColumnResizing: true,
@@ -214,12 +201,12 @@ Let's break down these options:
 
 ### StackOptions
 
-When using `DataView` with stack layouts, you can pass a `stackOptions` prop to customize the card-based layout:
+When using `DataView` with stack layouts, you can pass a `cardLayoutOptions` prop to customize the card-based layout:
 
 ```tsx
 <DataView
-  stackOptions={{
-    cardProps: (row) => ({
+  cardLayoutOptions={{
+    itemProps: (row) => ({
       overline: `${row.category}`,
       title: row.name,
       description: row.description,
@@ -251,78 +238,16 @@ When using `DataView` with stack layouts, you can pass a `stackOptions` prop to 
 
 Here's what these options do:
 
-- `cardProps`: Function that returns props for the `StackCard` component for each data item.
+- `itemProps`: Function that returns props for the `DataCard` component for each data item.
 - `maxGridColumns`: Maximum number of columns to display in grid layout.
 - `renderDetailPanel`: Function to render an expandable detail panel for each card.
 - `rowActionMenuItems`: Function to render menu items for card actions.
-
-### DataTable and DataStack as Convenience Wrappers
-
-While `DataTable` and `DataStack` appear to be distinct components, they are actually convenient wrappers around `DataView`. They pre-configure certain props and options to create a more targeted API for specific use cases.
-
-For example, `DataTable` might be implemented like this:
-
-```tsx
-const DataTable = (props: DataTableProps) => {
-  return (
-    <DataView
-      availableLayouts={["table"]}
-      tableOptions={{
-        columns: props.columns,
-        hasChangeableDensity: props.hasChangeableDensity,
-        hasColumnResizing: props.hasColumnResizing,
-        hasColumnVisibility: props.hasColumnVisibility,
-        hasSorting: props.hasSorting,
-        initialDensity: props.initialDensity,
-        renderDetailPanel: props.renderDetailPanel,
-        rowActionButtons: props.rowActionButtons,
-        rowActionMenuItems: props.rowActionMenuItems,
-      }}
-      {...props}
-    />
-  );
-};
-```
-
-Similarly, `DataStack` might be implemented like this:
-
-```tsx
-const DataStack = (props: DataStackProps) => {
-  return (
-    <DataView
-      availableLayouts={["list", "grid"]}
-      stackOptions={{
-        cardProps: props.cardProps,
-        maxGridColumns: props.maxGridColumns,
-        renderDetailPanel: props.renderDetailPanel,
-        rowActionMenuItems: props.rowActionMenuItems,
-      }}
-      {...props}
-    />
-  );
-};
-```
-
-This approach allows for a more intuitive API when you know you want specifically a table or a card-based layout, while still leveraging the full power of `DataView` under the hood.
-
-If you need more control or want to mix table and stack layouts, you should use `DataView` directly and provide both `tableOptions` and `stackOptions` as needed.
-
-```tsx
-<DataView
-  availableLayouts={["table", "list", "grid"]}
-  tableOptions={{...}}
-  stackOptions={{...}}
-  // ... other props
-/>
-```
-
-This flexibility allows you to create complex, multi-layout data views while still benefiting from the convenience of pre-configured components for simpler use cases.
 
 ## Data Handling Functions
 
 ### getData
 
-The `getData` function is a crucial part of the DataComponents. It's responsible for fetching and filtering data based on the current state of the component. Here's the type definition:
+The `getData` function is a crucial part of the DataView. It's responsible for fetching and filtering data based on the current state of the component. Here's the type definition:
 
 ```typescript
 type DataGetDataType = {
@@ -467,10 +392,10 @@ This will display a "Load More" button instead of page numbers, allowing users t
 
 ## Customization
 
-While the `DataComponents` come with pre-styled elements matching the Okta Odyssey design system, you can further customize the appearance using the theming capabilities of Material-UI and Emotion styled components.
+While the `DataView` come with pre-styled elements matching the Okta Odyssey design system, you can further customize the appearance using the theming capabilities of Material-UI and Emotion styled components.
 
 <Canvas>
-  <Story of={DataComponentsStories.Default} />
+  <Story of={DataViewStories.Default} />
 </Canvas>
 
-Explore the stories in this Storybook to see more examples and configurations of the `DataComponents` suite.
+Explore the stories in this Storybook to see more examples and configurations of the `DataView` suite.
