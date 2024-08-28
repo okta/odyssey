@@ -41,7 +41,12 @@ import {
   FolderIcon,
 } from "@okta/odyssey-react-mui/icons";
 import { expect } from "@storybook/jest";
-import { userEvent, waitFor, within } from "@storybook/testing-library";
+import {
+  configure,
+  userEvent,
+  waitFor,
+  within,
+} from "@storybook/testing-library";
 import { PlaywrightProps } from "../../odyssey-mui/storybookTypes";
 
 const storybookMeta: Meta<SideNavProps> = {
@@ -310,9 +315,26 @@ export const Default: StoryObj<SideNavProps> = {
     );
   },
   play: async ({ canvasElement, step }: PlaywrightProps<SideNavProps>) => {
+    configure({ testIdAttribute: "data-se" });
     const canvas = within(canvasElement);
     const expandedRegion = canvas.getByTestId("expanded-region");
     const collapsedRegion = canvas.getByTestId("collapsed-region");
+    const scrollableRegion = canvas.getByTestId("scrollable-region");
+
+    /**
+     * The scroll behavior in SideNav is such that if an item has isSelected and the item
+     * is not on screen initially, it will scroll to make that item be visible on the screen.
+     * So, we should expect that the scrollable container (found by data-se="scrollable-region")
+     * should have a non-zero scrollTop once this operation has completed.
+     */
+    await step("Side Nav Should be scrolled as expected", async ({}) => {
+      // On initial load, scrollTop will be zero. Then, once the scroll operation completes,
+      // it should be non-zero.
+      expect(scrollableRegion.scrollTop).toBe(0);
+      await waitFor(() => {
+        expect(scrollableRegion.scrollTop).not.toBe(0);
+      });
+    });
     await step("Side Nav Collapse", async ({}) => {
       const collapseButton = within(expandedRegion).getByLabelText(
         "collapse side navigation",
