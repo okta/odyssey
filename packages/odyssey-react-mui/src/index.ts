@@ -57,6 +57,7 @@ export type { FocusHandle } from "./inputUtils";
 export { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
 
 export * from "./Accordion";
+export * from "./AppTile";
 export * from "./Autocomplete";
 export { badgeContentMaxValues } from "./Badge";
 export * from "./Banner";
