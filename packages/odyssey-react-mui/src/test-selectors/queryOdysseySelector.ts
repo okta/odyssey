@@ -12,18 +12,18 @@
 
 import { querySelector } from "./querySelector";
 import { type TestSelector } from "./testSelector";
-import { AutocompleteTestSelectors } from "../Autocomplete";
-import { CalloutTestSelectors } from "../Callout";
-import { SelectTestSelectors } from "../Select";
-import { TabsTestSelectors } from "../Tabs";
-import { TextFieldTestSelectors } from "../TextField";
+import { AutocompleteTestSelector } from "../Autocomplete";
+import { CalloutTestSelector } from "../Callout";
+import { SelectTestSelector } from "../Select";
+import { TabsTestSelector } from "../Tabs";
+import { TextFieldTestSelector } from "../TextField";
 
 export const odysseyTestSelector = {
-  Autocomplete: AutocompleteTestSelectors,
-  Callout: CalloutTestSelectors,
-  Select: SelectTestSelectors,
-  Tabs: TabsTestSelectors,
-  TextField: TextFieldTestSelectors,
+  Autocomplete: AutocompleteTestSelector,
+  Callout: CalloutTestSelector,
+  Select: SelectTestSelector,
+  Tabs: TabsTestSelector,
+  TextField: TextFieldTestSelector,
 } as const satisfies Record<string, TestSelector>;
 
 export const queryOdysseySelector = <

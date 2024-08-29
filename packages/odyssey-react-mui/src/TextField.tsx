@@ -32,7 +32,7 @@ import { HtmlProps } from "./HtmlProps";
 import { FocusHandle, useInputValues, getControlState } from "./inputUtils";
 import { type TestSelector } from "./test-selectors";
 
-export const TextFieldTestSelectors = {
+export const TextFieldTestSelector = {
   accessibleText: {
     errorMessage: "errorMessage",
     hint: "description",

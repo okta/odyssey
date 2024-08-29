@@ -54,7 +54,7 @@ import {
 } from "./OdysseyDesignTokensContext";
 import { TestSelector } from "./test-selectors";
 
-export const SelectTestSelectors = {
+export const SelectTestSelector = {
   accessibleText: {
     errorMessage: "errorMessage",
     hint: "description",

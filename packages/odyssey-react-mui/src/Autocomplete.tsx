@@ -53,7 +53,7 @@ import { TestSelector } from "./test-selectors";
 // @see https://github.com/bvaughn/react-virtualized/issues/1739#issuecomment-1291444246
 const AutoSizer = _AutoSizer as unknown as FC<AutoSizerProps>;
 
-export const AutocompleteTestSelectors = {
+export const AutocompleteTestSelector = {
   accessibleText: {
     errorMessage: "errorMessage",
     hint: "description",

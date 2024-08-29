@@ -32,7 +32,7 @@ import { HtmlProps } from "./HtmlProps";
 import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
 import { type TestSelector } from "./test-selectors";
 
-export const TabsTestSelectors = {
+export const TabsTestSelector = {
   children: {
     tabItem: {
       elementSelector: {

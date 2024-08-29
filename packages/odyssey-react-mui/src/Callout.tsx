@@ -24,7 +24,7 @@ import { type TestSelector } from "./test-selectors";
 import { Paragraph } from "./Typography";
 import { useUniqueId } from "./useUniqueId";
 
-export const CalloutTestSelectors = {
+export const CalloutTestSelector = {
   accessibleText: {
     text: "description",
     title: "label",
