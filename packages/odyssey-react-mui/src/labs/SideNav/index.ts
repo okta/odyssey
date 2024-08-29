@@ -10,19 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { MRT_DensityState } from "material-react-table";
+export { SideNav } from "./SideNav";
 
-export type DataViewLayout = "list" | "grid" | "table";
-
-export const availableStackLayouts: DataViewLayout[] = ["list", "grid"];
-export const availableTableLayouts: DataViewLayout[] = ["table"];
-export const availableLayouts: DataViewLayout[] = [
-  ...availableTableLayouts,
-  ...availableStackLayouts,
-];
-
-export const densityValues: MRT_DensityState[] = [
-  "comfortable",
-  "spacious",
-  "compact",
-];
+export * from "./types";

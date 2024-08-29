@@ -324,6 +324,23 @@ export const OptionsObject: StoryObj<typeof Select> = {
   },
 };
 
+export const OptionsObjectAndMultiSelect: StoryObj<typeof Select> = {
+  args: {
+    options: optionsObject,
+    value: [],
+    hasMultipleChoices: true,
+  },
+  render: function C(props) {
+    const [localValue, setLocalValue] = useState<string[]>([]);
+    const onChange = useCallback(
+      (event: SelectChangeEvent<string | string[]>) =>
+        setLocalValue(event.target.value as string[]),
+      [],
+    );
+    return <Select {...props} value={localValue} onChange={onChange} />;
+  },
+};
+
 export const OptionsGrouped: StoryObj<typeof Select> = {
   args: {
     options: optionsGrouped,

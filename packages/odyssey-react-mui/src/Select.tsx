@@ -292,27 +292,31 @@ const Select = <
   );
   // Normalize the options array to accommodate the various
   // data types that might be passed
-  const normalizedOptions = useMemo(
-    () =>
-      options.map((option) => {
-        if (typeof option === "object") {
-          /**
-           * If the value of `option?.value is an empty string, we need to make sure that we
-           * set an empty string to `value` in the normalized option so that the select component
-           * can potentially set it as the selected one in the text input
-           */
-          const value =
-            option?.value === "" ? option.value : option.value || option.text;
-          return {
-            text: option.text,
-            value,
-            type: option.type === "heading" ? "heading" : "option",
-          };
-        }
-        return { text: option, value: option, type: "option" };
-      }),
-    [options],
-  );
+  const [normalizedOptions, normalizedOptionsMap] = useMemo(() => {
+    const normalizedOptions = options.map((option) => {
+      if (typeof option === "object") {
+        /**
+         * If the value of `option?.value is an empty string, we need to make sure that we
+         * set an empty string to `value` in the normalized option so that the select component
+         * can potentially set it as the selected one in the text input
+         */
+        const value =
+          option?.value === "" ? option.value : option.value || option.text;
+        return {
+          text: option.text,
+          value,
+          type: option.type === "heading" ? "heading" : "option",
+        };
+      }
+
+      return { text: option, value: option, type: "option" };
+    });
+
+    const normalizedOptionsMap = new Map(
+      normalizedOptions.map((option) => [option.value, option]),
+    );
+    return [normalizedOptions, normalizedOptionsMap];
+  }, [options]);
 
   const removeSelectedValue = useCallback(
     (selectedValue: string) => {
@@ -346,7 +350,6 @@ const Select = <
         !isInteractive &&
         controlledStateRef.current === CONTROLLED &&
         hasMultipleChoices;
-
       return (
         Array.isArray(internalSelectedValues) && (
           <ChipsInnerContainer
@@ -361,7 +364,7 @@ const Select = <
                     key={item}
                     label={
                       <>
-                        {item}
+                        {normalizedOptionsMap.get(item)?.text}
                         {hasNonInteractiveIcon && (
                           <NonInteractiveIcon
                             odysseyDesignTokens={odysseyDesignTokens}
@@ -397,6 +400,7 @@ const Select = <
       internalSelectedValues,
       odysseyDesignTokens,
       removeSelectedValue,
+      normalizedOptionsMap,
     ],
   );
 

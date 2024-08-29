@@ -19,7 +19,7 @@ import {
   MRT_VisibilityState,
 } from "material-react-table";
 
-import { availableLayouts, availableStackLayouts } from "./constants";
+import { availableLayouts, availableCardLayouts } from "./constants";
 import { DataFilter } from "../DataFilters";
 import {
   DataGetDataType,
@@ -31,13 +31,13 @@ import { DataTableRowActionsProps } from "../../DataTable/DataTableRowActions";
 import { MenuButtonProps } from "../..";
 import { paginationTypeValues } from "../DataTablePagination";
 import { ReactNode } from "react";
-import { StackCardProps } from "./StackCard";
+import { DataCardProps } from "./DataCard";
 
 export type DataLayout = (typeof availableLayouts)[number];
-export type StackLayout = (typeof availableStackLayouts)[number];
+export type CardLayout = (typeof availableCardLayouts)[number];
 
 export type AvailableLayouts = DataLayout[];
-export type AvailableStackLayouts = StackLayout[];
+export type AvailableCardLayouts = CardLayout[];
 
 export type UniversalProps = {
   bulkActionMenuItems?: (
@@ -77,7 +77,7 @@ export type UniversalProps = {
   totalRows?: number;
 };
 
-export type TableProps = {
+export type TableLayoutProps = {
   columns: DataTableColumn<MRT_RowData>[];
   hasChangeableDensity?: boolean;
   hasColumnResizing?: boolean;
@@ -89,8 +89,8 @@ export type TableProps = {
   rowActionMenuItems?: DataTableRowActionsProps["rowActionMenuItems"];
 };
 
-export type StackProps = {
-  cardProps: (row: MRT_RowData) => StackCardProps;
+export type CardLayoutProps = {
+  itemProps: (row: MRT_RowData) => DataCardProps;
   maxGridColumns?: number;
   renderDetailPanel?: (props: { row: MRT_RowData }) => ReactNode;
   rowActionMenuItems?: DataTableRowActionsProps["rowActionMenuItems"];
@@ -99,8 +99,8 @@ export type StackProps = {
 export type ViewProps<L extends DataLayout> = {
   availableLayouts?: L[];
   initialLayout?: L;
-  stackOptions?: StackProps;
-  tableOptions?: TableProps;
+  cardLayoutOptions?: CardLayoutProps;
+  tableLayoutOptions?: TableLayoutProps;
 };
 
 export type TableState = {
