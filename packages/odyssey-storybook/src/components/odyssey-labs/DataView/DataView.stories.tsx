@@ -60,6 +60,8 @@ type DataViewMetaProps = DataViewProps &
     hasCustomNoResultsPlaceholder: boolean;
     hasActionMenuItems: boolean;
     hasActionButtons: boolean;
+    hasAdditionalActionButton: boolean;
+    hasAdditionalActionMenuItems: boolean;
   };
 
 const storybookMeta: Meta<DataViewMetaProps> = {
@@ -242,6 +244,14 @@ const storybookMeta: Meta<DataViewMetaProps> = {
       control: "boolean",
       name: "[STORY ONLY] Has action buttons in table view?",
     },
+    hasAdditionalActionButton: {
+      control: "boolean",
+      name: "[STORY ONLY] Has additional action button?",
+    },
+    hasAdditionalActionMenuItems: {
+      control: "boolean",
+      name: "[STORY ONLY] Has additional action menu items?",
+    },
   },
   args: {
     currentPage: 1,
@@ -289,6 +299,15 @@ const useDataCallbacks = (
 
   return { getData, onReorderRows, onChangeRowSelection };
 };
+
+const additionalActionButton = <Button variant="primary" label="Add widget" />;
+
+const additionalActionMenuItems = (
+  <>
+    <MenuItem onClick={() => console.log("Action 1")}>Action 1</MenuItem>
+    <MenuItem onClick={() => console.log("Action 2")}>Action 2</MenuItem>
+  </>
+);
 
 // Common action menu items
 const actionMenuItems = (selectedRows: DataRowSelectionState) => (
@@ -368,6 +387,14 @@ const BaseStory: StoryObj<DataViewMetaProps> = {
 
     return (
       <DataView
+        additionalActionButton={
+          args.hasAdditionalActionButton ? additionalActionButton : undefined
+        }
+        additionalActionMenuItems={
+          args.hasAdditionalActionMenuItems
+            ? additionalActionMenuItems
+            : undefined
+        }
         getData={getData}
         onReorderRows={onReorderRows}
         onChangeRowSelection={onChangeRowSelection}
@@ -473,6 +500,8 @@ export const Everything: StoryObj<DataViewMetaProps> = {
     hasActionButtons: true,
     hasActionMenuItems: true,
     hasRowSelection: true,
+    hasAdditionalActionButton: true,
+    hasAdditionalActionMenuItems: true,
   },
 };
 
@@ -867,6 +896,14 @@ export const CustomFilterWithDefaultVariant: StoryObj<DataViewMetaProps> = {
         getData={getData}
       />
     );
+  },
+};
+
+export const AdditionalActions: StoryObj<DataViewMetaProps> = {
+  ...BaseStory,
+  args: {
+    hasAdditionalActionButton: true,
+    hasAdditionalActionMenuItems: true,
   },
 };
 
