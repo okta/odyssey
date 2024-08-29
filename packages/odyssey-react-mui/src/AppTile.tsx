@@ -29,12 +29,14 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext";
-import { Heading5, Paragraph, Support } from "./Typography";
+import { Heading5, Paragraph, Subordinate, Support } from "./Typography";
 import { Box } from "./Box";
 
 export const APP_TILE_IMAGE_HEIGHT = "64px";
 
 export type AppTileProps = {
+  // Text that appears in the upper right corner of the tile
+  auxiliaryText?: string;
   // Arbitrary content to render underneath any other tile content
   children?: ReactNode;
   // A string description
@@ -91,6 +93,10 @@ const ImageContainer = styled("div", {
 const ActionContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
+  alignItems: "center",
+  display: "flex",
+  minHeight: odysseyDesignTokens.Spacing6,
+  gap: odysseyDesignTokens.Spacing1,
   position: "absolute",
   right: odysseyDesignTokens.Spacing3,
   top: odysseyDesignTokens.Spacing3,
@@ -114,6 +120,7 @@ const AppTile = ({
   actionAriaExpanded,
   actionLabel,
   actionIcon,
+  auxiliaryText,
   children,
   description,
   image,
@@ -165,19 +172,22 @@ const AppTile = ({
     <MuiCard className="isClickable">
       <MuiCardActionArea onClick={onClick}>{tileContent}</MuiCardActionArea>
 
-      {onActionClick && (
+      {(onActionClick || auxiliaryText) && (
         <ActionContainer odysseyDesignTokens={odysseyDesignTokens}>
-          <Button
-            endIcon={actionIcon}
-            ariaLabel={actionLabel}
-            variant="floating"
-            size="small"
-            tooltipText={actionLabel}
-            ariaControls={actionAriaControls}
-            ariaExpanded={actionAriaExpanded}
-            ariaHasPopup={actionAriaHasPopup}
-            onClick={onActionClick}
-          />
+          {auxiliaryText && <Subordinate>{auxiliaryText}</Subordinate>}
+          {onActionClick && (
+            <Button
+              endIcon={actionIcon}
+              ariaLabel={actionLabel}
+              variant="floating"
+              size="small"
+              tooltipText={actionLabel}
+              ariaControls={actionAriaControls}
+              ariaExpanded={actionAriaExpanded}
+              ariaHasPopup={actionAriaHasPopup}
+              onClick={onActionClick}
+            />
+          )}
         </ActionContainer>
       )}
     </MuiCard>

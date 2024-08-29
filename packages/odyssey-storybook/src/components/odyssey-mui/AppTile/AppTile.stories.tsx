@@ -16,7 +16,10 @@ import {
   AppTile,
   AppTileProps,
   Box,
+  Button,
   Drawer,
+  Heading5,
+  Status,
   Tag,
   TagList,
 } from "@okta/odyssey-react-mui";
@@ -27,86 +30,166 @@ const storybookMeta: Meta<AppTileProps> = {
   title: "MUI Components/AppTile",
   component: AppTile,
   argTypes: {
-    title: {
-      control: "text",
-      description: "",
-      table: {
-        type: {
-          summary: "string",
-        },
-        defaultValue: "",
-      },
-    },
-    description: {
-      control: "text",
-      description: "",
-      table: {
-        type: {
-          summary: "string",
-        },
-        defaultValue: "",
-      },
-    },
-    overline: {
-      control: "text",
-      description: "",
-      table: {
-        type: {
-          summary: "string",
-        },
-        defaultValue: "",
-      },
-    },
-    image: {
+    actionAriaControls: {
       control: null,
-      description: "",
+      description:
+        "The ID of the element which the button controls (for instance, a drawer or dialog), if any.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    actionAriaExpanded: {
+      control: null,
+      description:
+        "Should be true if the button controls a popup element that is currently expanded. Should be synced to the state of the popup element",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    actionAriaHasPopup: {
+      control: null,
+      description:
+        "Should be true if the button controls a popup element such as a Drawer or Dialog.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    actionIcon: {
+      control: null,
+      description: "An icon for the action button.",
       table: {
         type: {
           summary: "ReactElement",
         },
-        defaultValue: "",
       },
     },
-    onClick: {
+    actionLabel: {
       control: null,
-      description: "",
+      description:
+        "The label for the button, used as the aria-label and tooltip.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    auxiliaryText: {
+      control: null,
+      description: "Text that appears in the upper right corner of the tile.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    children: {
+      control: null,
+      description:
+        "Arbitrary content to render underneath any other tile content.",
+      table: {
+        type: {
+          summary: "ReactNode",
+        },
+      },
+    },
+    description: {
+      control: null,
+      description: "A string description.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    image: {
+      control: null,
+      description: "An image or icon at the top of the tile.",
+      table: {
+        type: {
+          summary: "ReactElement",
+        },
+      },
+    },
+    onActionClick: {
+      control: null,
+      description:
+        "Event that fires when the user clicks the action button in the upper-right corner. If this isn't set, the other action props can't be set either",
       table: {
         type: {
           summary: "MouseEventHandler",
         },
-        defaultValue: "",
       },
     },
-
-    // onActionClick: MouseEventHandler;
-    // actionAriaControls?: HTMLAttributes < HTMLElement > ["aria-controls"];
-    // actionAriaHasPopup?: HTMLAttributes < HTMLElement > ["aria-haspopup"];
-    // actionAriaExpanded?: HTMLAttributes < HTMLElement > ["aria-expanded"];
-    // actionLabel: string;
-    // actionIcon: ReactElement;
-  },
-  args: {
-    title: "Title",
-    description:
-      "Identity can create great user experiences, increase customer sign-ups, and...",
-    overline: "Overline",
-    onClick: () => alert("Clicked"),
-  },
-  decorators: [MuiThemeDecorator],
-  parameters: {
-    backgrounds: {
-      default: "gray",
-      values: [
-        { name: "gray", value: "#f4f4f4" },
-        { name: "white", value: "#ffffff" },
-      ],
+    onClick: {
+      control: null,
+      description: "Event handler for when the user clicks the tile.",
+      table: {
+        type: {
+          summary: "MouseEventHandler",
+        },
+      },
+    },
+    overline: {
+      control: null,
+      description: "An 'eyebrow' of text above the title.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    title: {
+      control: null,
+      description: "A string for the tile title.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
   },
+  decorators: [MuiThemeDecorator],
 };
 
 export default storybookMeta;
 
 export const Default: StoryObj<AppTileProps> = {
+  render: function C() {
+    const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
+
+    return (
+      <>
+        <Drawer
+          isOpen={isDrawerOpen}
+          onClose={() => setIsDrawerOpen(false)}
+          showDividers={false}
+        />
+        <Box sx={{ maxWidth: 262 }}>
+          <AppTile
+            onClick={() => alert("Open the app")}
+            title="App name"
+            description="This is a description of the app."
+            image={<img src="https://placehold.co/128" alt="Example logo" />}
+            children={
+              <TagList>
+                <Tag label="Tag 1" />
+                <Tag label="Tag 2" />
+              </TagList>
+            }
+          />
+        </Box>
+      </>
+    );
+  },
+};
+
+export const ActionButton: StoryObj<AppTileProps> = {
   render: function C() {
     const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
 
@@ -138,6 +221,98 @@ export const Default: StoryObj<AppTileProps> = {
           />
         </Box>
       </>
+    );
+  },
+};
+
+export const AuxiliaryText: StoryObj<AppTileProps> = {
+  render: function C() {
+    const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
+
+    return (
+      <>
+        <Drawer
+          isOpen={isDrawerOpen}
+          onClose={() => setIsDrawerOpen(false)}
+          showDividers={false}
+        />
+        <Box sx={{ maxWidth: 262 }}>
+          <AppTile
+            auxiliaryText="Single sign-on"
+            onClick={() => alert("Open the app")}
+            title="App name"
+            description="This is a description of the app."
+            image={<img src="https://placehold.co/128" alt="Example logo" />}
+            children={
+              <TagList>
+                <Tag label="Tag 1" />
+                <Tag label="Tag 2" />
+              </TagList>
+            }
+          />
+        </Box>
+      </>
+    );
+  },
+};
+
+export const ActionButtonAndAuxiliaryText: StoryObj<AppTileProps> = {
+  render: function C() {
+    const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
+
+    return (
+      <>
+        <Drawer
+          isOpen={isDrawerOpen}
+          onClose={() => setIsDrawerOpen(false)}
+          showDividers={false}
+        />
+        <Box sx={{ maxWidth: 262 }}>
+          <AppTile
+            actionAriaControls=""
+            actionAriaExpanded={isDrawerOpen}
+            actionAriaHasPopup="menu"
+            actionIcon={<SettingsIcon />}
+            actionLabel="Open app settings"
+            auxiliaryText="Single sign-on"
+            onActionClick={() => setIsDrawerOpen(true)}
+            onClick={() => alert("Open the app")}
+            title="App name"
+            description="This is a description of the app."
+            image={<img src="https://placehold.co/128" alt="Example logo" />}
+            children={
+              <TagList>
+                <Tag label="Tag 1" />
+                <Tag label="Tag 2" />
+              </TagList>
+            }
+          />
+        </Box>
+      </>
+    );
+  },
+};
+
+export const CustomContent: StoryObj<AppTileProps> = {
+  render: function C() {
+    return (
+      <Box sx={{ maxWidth: 262 }}>
+        <AppTile
+          onClick={() => alert("Open the app")}
+          children={
+            <>
+              <Box sx={{ marginBottom: 2 }}>
+                <Status label="Active" severity="success" />
+              </Box>
+              <Heading5>This is arbitrary content.</Heading5>
+              <Box>
+                <Button variant="primary" label="Button 1" />
+                <Button variant="secondary" label="Button 2" />
+              </Box>
+            </>
+          }
+        />
+      </Box>
     );
   },
 };
