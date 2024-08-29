@@ -62,6 +62,9 @@ export const SelectTestSelectors = {
   },
   children: {
     list: {
+      accessibleText: {
+        label: "label",
+      },
       children: {
         listItem: {
           accessibleText: {
