@@ -64,6 +64,9 @@ export const SelectTestSelectors = {
     list: {
       children: {
         listItem: {
+          accessibleText: {
+            label: "label",
+          },
           elementSelector: {
             method: "ByRole",
             options: {

@@ -60,6 +60,70 @@ export type InnerQuerySelectorProps<
       }
     : object);
 
+export const captureElement = <
+  LocalTestSelector extends TestSelector,
+  QuerySelectorOptions extends Record<string, string | RegExp>,
+  LocalQueryMethod extends QueryMethod = "get",
+>({
+  containerElement,
+  queryMethod,
+  querySelectorOptions,
+  role,
+  testSelector,
+}: {
+  containerElement: HTMLElement;
+  queryMethod: LocalQueryMethod;
+  querySelectorOptions?: QuerySelectorOptions;
+  role?: AriaRole;
+  testSelector: LocalTestSelector;
+}) => {
+  if ("elementSelector" in testSelector && querySelectorOptions) {
+    const sharedProps = {
+      element: containerElement,
+      queryMethod,
+      queryOptions: Object.fromEntries(
+        Object.entries(testSelector.elementSelector.options).map(
+          ([testSelectorOptionKey, testingLibraryOptionKey]) => [
+            testingLibraryOptionKey,
+            querySelectorOptions[testSelectorOptionKey],
+          ],
+        ),
+      ),
+    };
+
+    if (testSelector.elementSelector.method === "ByRole") {
+      return getByRoleQuerySelector({
+        ...sharedProps,
+        role:
+          Array.isArray(testSelector.elementSelector.role) || role
+            ? role || ""
+            : testSelector.elementSelector.role,
+      });
+    }
+
+    return getByTextQuerySelector({
+      ...sharedProps,
+      selectionMethod: testSelector.elementSelector.method,
+      text: testSelector.elementSelector.text,
+    });
+  } else if (
+    "isControlledElement" in testSelector &&
+    testSelector.isControlledElement
+  ) {
+    try {
+      return getControlledElement({ element: containerElement });
+    } catch (error) {
+      if (queryMethod === "query") {
+        return null;
+      }
+
+      throw error;
+    }
+  }
+
+  return null;
+};
+
 export const querySelector =
   <LocalTestSelector extends TestSelector>(
     /**
@@ -76,64 +140,14 @@ export const querySelector =
     } & InnerQuerySelectorProps<LocalTestSelector, LocalQueryMethod>,
   ) => {
     const { element: containerElement, queryMethod } = props;
-    const localQueryMethod = queryMethod || ("get" as const);
-    const querySelectorOptions = "options" in props ? props.options : undefined;
-    const role = "role" in props ? (props.role as AriaRole) : undefined;
 
-    // This `let` is difficult to make into a `const`. It makes the code unreadable.
-    let capturedElement: HTMLElement | null = null;
-
-    if ("elementSelector" in testSelector && querySelectorOptions) {
-      const sharedProps = {
-        element: containerElement,
-        queryMethod: localQueryMethod,
-        queryOptions: Object.fromEntries(
-          Object.entries(testSelector.elementSelector.options).map(
-            ([testSelectorsKey, testingLibraryKey]) => [
-              testingLibraryKey,
-              querySelectorOptions[testSelectorsKey],
-            ],
-          ),
-        ) as Record<
-          LocalTestSelector extends ElementSelector
-            ? LocalTestSelector["elementSelector"]["options"][keyof LocalTestSelector["elementSelector"]["options"]]
-            : string,
-          string | RegExp
-        >,
-      };
-
-      capturedElement =
-        testSelector.elementSelector.method === "ByRole"
-          ? getByRoleQuerySelector({
-              ...sharedProps,
-              role:
-                Array.isArray(testSelector.elementSelector.role) || role
-                  ? role || ""
-                  : testSelector.elementSelector.role,
-            })
-          : getByTextQuerySelector({
-              ...sharedProps,
-              selectionMethod: testSelector.elementSelector.method,
-              text: testSelector.elementSelector.text,
-            });
-    } else if (
-      "isControlledElement" in testSelector &&
-      testSelector.isControlledElement
-    ) {
-      try {
-        capturedElement = getControlledElement({ element: containerElement });
-      } catch (error) {
-        if (queryMethod === "query") {
-          capturedElement = null;
-        }
-
-        throw error;
-      }
-    }
-
-    if (!("accessibleText" in testSelector)) {
-      throw new Error("Missing `accessibleText` in `TestSelector`");
-    }
+    const capturedElement = captureElement({
+      containerElement,
+      queryMethod: queryMethod || ("get" as const),
+      querySelectorOptions: "options" in props ? props.options : undefined,
+      role: "role" in props ? (props.role as AriaRole) : undefined,
+      testSelector,
+    });
 
     const getAccessibleText = <
       LabelName extends LocalTestSelector extends AccessibleTextSelector
@@ -147,6 +161,10 @@ export const querySelector =
           "No child HTML element available",
           containerElement,
         );
+      }
+
+      if (!("accessibleText" in testSelector)) {
+        throw new Error("Missing `accessibleText` in `TestSelector`");
       }
 
       return getComputedAccessibleText({
