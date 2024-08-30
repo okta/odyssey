@@ -23,6 +23,7 @@ import {
 import { type FeatureTestSelector } from "./test-selectors";
 import { Paragraph } from "./Typography";
 import { useUniqueId } from "./useUniqueId";
+import { type NonEmptyString } from "./utilityTypes";
 
 export const CalloutTestSelectors = {
   feature: {
@@ -69,11 +70,7 @@ export const calloutSeverityValues = [
   "error",
 ] as const;
 
-export type CalloutProps = {
-  /**
-   * Used to optionally pass a text list to the component
-   */
-  children?: ReactNode;
+export type CalloutProps<Text extends string> = {
   /**
    * Sets the ARIA role of the Callout
    * ("status" for something that dynamically updates, "alert" for errors, null for something
@@ -85,19 +82,21 @@ export type CalloutProps = {
    */
   severity: (typeof calloutSeverityValues)[number];
   /**
-   * The text content of the Callout
-   */
-  text?: string;
-  /**
    * The title of the Callout
    */
   title?: string;
 } & (
   | {
       children?: never;
-      text: string;
+      /**
+       * The text content of the Callout
+       */
+      text: NonEmptyString<Text>;
     }
   | {
+      /**
+       * Used to optionally pass a text list to the component
+       */
       children: ReactNode;
       text?: never;
     }
@@ -130,7 +129,7 @@ const ContentContainer = styled("div", {
   },
 }));
 
-const Callout = ({
+const Callout = <Text extends string>({
   children,
   linkText,
   linkUrl,
@@ -140,7 +139,7 @@ const Callout = ({
   text,
   title,
   translate,
-}: CalloutProps) => {
+}: CalloutProps<Text>) => {
   const { t } = useTranslation();
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const titleId = useUniqueId();

@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -11,26 +11,34 @@
  */
 
 import { render, screen } from "@testing-library/react";
-import { Button } from "./";
-import { OdysseyCacheProvider } from "./OdysseyCacheProvider";
 
-// This component needs to be tested, even if it doesn't make much sense. It can't be loaded by Storybook; therefore, any issues will only be seen by consumers of Odyssey.
-describe("OdysseyCacheProvider", () => {
+import { Callout } from "./Callout";
+
+describe("Callout", () => {
   test("renders without crashing the app", () => {
     expect(() =>
       render(
-        <OdysseyCacheProvider>
-          <div />
-        </OdysseyCacheProvider>,
+        <Callout
+          role="alert"
+          severity="error"
+          title="Safety checks failed"
+          linkText="Visit fueling console"
+          linkUrl="#"
+          text=""
+        />,
       ),
     ).not.toThrow();
   });
 
   test("themes a Button", () => {
     render(
-      <OdysseyCacheProvider>
-        <Button label="text" variant="primary" />
-      </OdysseyCacheProvider>,
+      <Callout
+        role="alert"
+        severity="error"
+        title="Safety checks failed"
+        linkText="Visit fueling console"
+        linkUrl="#"
+      />,
     );
 
     expect(screen.queryByRole("button")).toHaveTextContent("text");
