@@ -26,15 +26,19 @@ export type OdysseyCacheProviderProps = {
   /**
    * Emotion caches styles into the style element.
    * When enabling this prop, Emotion caches the styles at this element, rather than in <head>.
+   * @deprecated Use `EmotionRootElement` instead. This was incorrectly configured as an `HTMLStyleElement`, but then we're rendering `<style>` inside `<style>`. We need this to be a `<div>` instead.
    */
   emotionRoot?: HTMLStyleElement;
+  /**
+   * Emotion adds `<style>` elements into this DOM node. Normally, Emotion puts these in `document.head`.
+   * This is useful if you want to render into a Shadow DOM or iframe.
+   */
+  emotionRootElement?: HTMLElement;
   hasShadowDom?: boolean;
   nonce?: string;
   /**
    * Emotion renders into this HTML element.
    * When enabling this prop, Emotion renders at the top of this component rather than the bottom like it does in the HTML `<head>`.
-   */
-  /**
    * @deprecated Will be removed in a future Odyssey version. Use `hasShadowDomElement` instead.
    */
   shadowDomElement?: HTMLDivElement | HTMLElement;
@@ -44,6 +48,7 @@ export type OdysseyCacheProviderProps = {
 const OdysseyCacheProvider = ({
   children,
   emotionRoot,
+  emotionRootElement,
   hasShadowDom: hasShadowDomProp,
   nonce,
   shadowDomElement,
@@ -55,14 +60,23 @@ const OdysseyCacheProvider = ({
 
   const emotionCache = useMemo(() => {
     return createCache({
-      ...(emotionRoot && { container: emotionRoot }),
+      ...((emotionRootElement || emotionRoot) && {
+        container: emotionRootElement || emotionRoot,
+      }),
       key: uniqueAlphabeticalId,
       nonce: nonce ?? window.cspNonce,
       prepend: true,
       speedy: hasShadowDom ? false : true, // <-- Needs to be set to false when shadow-dom is used!! https://github.com/emotion-js/emotion/issues/2053#issuecomment-713429122
       ...(stylisPlugins && { stylisPlugins }),
     });
-  }, [emotionRoot, hasShadowDom, nonce, stylisPlugins, uniqueAlphabeticalId]);
+  }, [
+    emotionRoot,
+    emotionRootElement,
+    hasShadowDom,
+    nonce,
+    stylisPlugins,
+    uniqueAlphabeticalId,
+  ]);
 
   return <CacheProvider value={emotionCache}>{children}</CacheProvider>;
 };
