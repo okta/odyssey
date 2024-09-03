@@ -14,6 +14,8 @@ export { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 export { LocalizationProvider } from "@mui/x-date-pickers";
 export type { LocalizationProviderProps } from "@mui/x-date-pickers";
 
+export * from "./AppTile";
+
 export * from "./DatePicker";
 export * from "./datePickerTheme";
 

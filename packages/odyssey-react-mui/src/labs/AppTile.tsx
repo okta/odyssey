@@ -24,13 +24,13 @@ import {
 } from "@mui/material";
 import styled from "@emotion/styled";
 
-import { Button } from "./Button";
+import { Button } from ".././Button";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "./OdysseyDesignTokensContext";
-import { Heading5, Paragraph, Subordinate, Support } from "./Typography";
-import { Box } from "./Box";
+} from ".././OdysseyDesignTokensContext";
+import { Heading5, Paragraph, Subordinate, Support } from ".././Typography";
+import { Box } from ".././Box";
 
 export const APP_TILE_IMAGE_HEIGHT = "64px";
 

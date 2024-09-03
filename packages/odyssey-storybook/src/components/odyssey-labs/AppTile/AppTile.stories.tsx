@@ -12,11 +12,9 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { AppTile, AppTileProps } from "@okta/odyssey-react-mui/labs";
 import {
-  AppTile,
-  AppTileProps,
   Box,
-  Button,
   Drawer,
   Heading5,
   Status,
@@ -27,7 +25,7 @@ import { useState } from "react";
 import { SettingsIcon } from "@okta/odyssey-react-mui/icons";
 
 const storybookMeta: Meta<AppTileProps> = {
-  title: "MUI Components/AppTile",
+  title: "Labs Components/AppTile",
   component: AppTile,
   argTypes: {
     actionAriaControls: {
@@ -306,8 +304,10 @@ export const CustomContent: StoryObj<AppTileProps> = {
               </Box>
               <Heading5>This is arbitrary content.</Heading5>
               <Box>
-                <Button variant="primary" label="Button 1" />
-                <Button variant="secondary" label="Button 2" />
+                <TagList>
+                  <Tag label="Tag 1" />
+                  <Tag label="Tag 2" />
+                </TagList>
               </Box>
             </>
           }
