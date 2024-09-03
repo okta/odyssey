@@ -51,10 +51,11 @@ const storybookMeta: Meta<AppTileProps> = {
     actionAriaHasPopup: {
       control: null,
       description:
-        "Should be true if the button controls a popup element such as a Drawer or Dialog.",
+        "Should be filled if the button controls a popup element such as a Drawer or Dialog.",
       table: {
         type: {
-          summary: "boolean",
+          summary:
+            'boolean | "false" | "true" | "menu" | "listbox" | "tree" | "grid" | "dialog" | undefined',
         },
       },
     },
