@@ -18,6 +18,8 @@ import { TableLayoutProps, UniversalProps } from "./componentTypes";
 export type DataTableProps = UniversalProps & TableLayoutProps;
 
 const DataTable = ({
+  additionalActionButton,
+  additionalActionMenuItems,
   bulkActionMenuItems,
   columns,
   currentPage,
@@ -80,6 +82,8 @@ const DataTable = ({
 
   return (
     <DataView
+      additionalActionButton={additionalActionButton}
+      additionalActionMenuItems={additionalActionMenuItems}
       availableLayouts={["table"]}
       bulkActionMenuItems={bulkActionMenuItems}
       currentPage={currentPage}

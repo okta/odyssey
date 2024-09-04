@@ -40,6 +40,8 @@ export type AvailableLayouts = DataLayout[];
 export type AvailableCardLayouts = CardLayout[];
 
 export type UniversalProps = {
+  additionalActionButton?: ReactNode;
+  additionalActionMenuItems?: ReactNode;
   bulkActionMenuItems?: (
     selectedRows: MRT_RowSelectionState,
   ) => MenuButtonProps["children"];

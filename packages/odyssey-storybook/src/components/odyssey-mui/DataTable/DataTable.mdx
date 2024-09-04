@@ -422,6 +422,11 @@ Action buttons and menu items can be added to each row. If rows are selectable, 
 which will be applied to all selected rows. (For example, the bulk actions menu starts out disabled, but if the user selects 3 rows,
 the actions menu will be enabled and any actions performed would be applied to all 3 selected rows.)
 
+## Additional action buttons and menu items
+
+Using `additionalActionButton` and `additionalActionMenuItems`, you can provide additional actions that sit at the top of the `DataView`. This is
+perfect for things like an "Add row" button or a menu of actions that affect the entire table or list.
+
 ## Row details
 
 Rows can optionally expand down to reveal additional content, defined via the `renderDetailPanel` prop, which expects a function with two

@@ -35,6 +35,8 @@ import { DataFilters } from "../DataFilters";
 import { EmptyState } from "../../EmptyState";
 import { fetchData } from "./fetchData";
 import { LayoutSwitcher } from "./LayoutSwitcher";
+import { MenuButton } from "../..";
+import { MoreIcon } from "../../icons.generated";
 import { TableSettings } from "./TableSettings";
 import { Pagination, usePagination } from "../../Pagination";
 import { TableLayoutContent } from "./TableLayoutContent";
@@ -68,6 +70,8 @@ const AdditionalActionsContainer = styled("div")(() => ({
 }));
 
 const DataView = ({
+  additionalActionButton,
+  additionalActionMenuItems,
   availableLayouts = allAvailableLayouts,
   bulkActionMenuItems,
   currentPage = 1,
@@ -142,7 +146,11 @@ const DataView = ({
     rowDensity: tableLayoutOptions?.initialDensity ?? densityValues[0],
   });
 
-  const shouldShowFilters = hasSearch || hasFilters;
+  const shouldShowFilters =
+    hasSearch ||
+    hasFilters ||
+    additionalActionButton ||
+    additionalActionMenuItems;
 
   const availableFilters = useFilterConversion({
     filters: filters,
@@ -272,9 +280,30 @@ const DataView = ({
             setCurrentLayout={setCurrentLayout}
           />
         )}
+
+        {additionalActionButton}
+
+        {additionalActionMenuItems && (
+          <MenuButton
+            endIcon={<MoreIcon />}
+            ariaLabel={t("table.moreactions.arialabel")}
+            buttonVariant="secondary"
+            menuAlignment="right"
+          >
+            {additionalActionMenuItems}
+          </MenuButton>
+        )}
       </>
     ),
-    [currentLayout, tableLayoutOptions, tableState, availableLayouts],
+    [
+      currentLayout,
+      tableLayoutOptions,
+      tableState,
+      availableLayouts,
+      additionalActionButton,
+      additionalActionMenuItems,
+      t,
+    ],
   );
 
   const { lastRow: lastRowOnPage } = usePagination({
