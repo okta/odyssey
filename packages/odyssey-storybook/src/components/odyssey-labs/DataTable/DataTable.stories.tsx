@@ -47,6 +47,8 @@ type DataTableMetaProps = DataViewProps &
     hasCustomNoResultsPlaceholder: boolean;
     hasActionMenuItems: boolean;
     hasActionButtons: boolean;
+    hasAdditionalActionButton: boolean;
+    hasAdditionalActionMenuItems: boolean;
   };
 
 const storybookMeta: Meta<DataTableMetaProps> = {
@@ -200,6 +202,14 @@ const storybookMeta: Meta<DataTableMetaProps> = {
       control: "boolean",
       name: "[STORY ONLY] Has action buttons in table view?",
     },
+    hasAdditionalActionButton: {
+      control: "boolean",
+      name: "[STORY ONLY] Has additional action button?",
+    },
+    hasAdditionalActionMenuItems: {
+      control: "boolean",
+      name: "[STORY ONLY] Has additional action menu items?",
+    },
   },
   args: {},
   decorators: [MuiThemeDecorator],
@@ -269,6 +279,15 @@ const actionButtons = () => (
   </Box>
 );
 
+const additionalActionButton = <Button variant="primary" label="Add widget" />;
+
+const additionalActionMenuItems = (
+  <>
+    <MenuItem onClick={() => console.log("Action 1")}>Action 1</MenuItem>
+    <MenuItem onClick={() => console.log("Action 2")}>Action 2</MenuItem>
+  </>
+);
+
 const customEmptyPlaceholder = (
   <EmptyState
     heading="Start by adding data assets"
@@ -297,6 +316,14 @@ export const Default: StoryObj<DataTableMetaProps> = {
 
     return (
       <DataTable
+        additionalActionButton={
+          args.hasAdditionalActionButton ? additionalActionButton : undefined
+        }
+        additionalActionMenuItems={
+          args.hasAdditionalActionMenuItems
+            ? additionalActionMenuItems
+            : undefined
+        }
         getData={getData}
         onReorderRows={onReorderRows}
         onChangeRowSelection={onChangeRowSelection}
