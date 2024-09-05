@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.22.0](https://github.com/okta/odyssey/compare/v1.19.0...v1.22.0) (2024-09-05)
+
+### Features
+
+- add additional action button and menu slot to table ([#2334](https://github.com/okta/odyssey/issues/2334)) ([52b3f38](https://github.com/okta/odyssey/commit/52b3f3832adc442e0219be16fe8a4d96cf100a4e))
+- adds a generic top nav component ([#2296](https://github.com/okta/odyssey/issues/2296)) ([6f3165f](https://github.com/okta/odyssey/commit/6f3165f9fd4a1d1743c975b72132d4ec186d09bb))
+- adds new Shadow DOM export with better naming ([#2338](https://github.com/okta/odyssey/issues/2338)) ([0997e36](https://github.com/okta/odyssey/commit/0997e36afd4d241f5b3960528aff2865fb6d6ac3))
+- automatically scroll to the first isSelected SideNavItem ([#2325](https://github.com/okta/odyssey/issues/2325)) ([52ce441](https://github.com/okta/odyssey/commit/52ce44137ffe5601cfa6044782a21afb5449167e))
+
+### Bug Fixes
+
+- Applitools isn't consistently running VRTs ([#2314](https://github.com/okta/odyssey/issues/2314)) ([0c9a10c](https://github.com/okta/odyssey/commit/0c9a10ca9036e34f74dd383f26dda8dc77211c90))
+- **odyssey-react-mui:** Add min-heights to keep correct heights ([#2324](https://github.com/okta/odyssey/issues/2324)) ([40d5a50](https://github.com/okta/odyssey/commit/40d5a5070ebfab1b650066e91b451c0ef4b3f2d8))
+- select multioption not rendering text when you use an options object ([#2323](https://github.com/okta/odyssey/issues/2323)) ([4bafbb9](https://github.com/okta/odyssey/commit/4bafbb99e03e52ad572fba9049013c058c75da38))
+
 ## [1.21.2](https://github.com/okta/odyssey/compare/v1.21.1...v1.21.2) (2024-08-09)
 
 **Note:** Version bump only for package @okta/odyssey-storybook
