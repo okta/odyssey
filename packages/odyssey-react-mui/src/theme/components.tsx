@@ -994,190 +994,157 @@ export const components = ({
         deleteIcon: <CloseCircleFilledIcon />,
       },
       styleOverrides: {
-        root: ({ ownerState }) => {
-          const colorVariant = ownerState["data-color-variant"] || "default";
+        root: ({ ownerState }) => ({
+          height: "auto",
+          // paddingBlock: `calc(${odysseyTokens.Spacing2} - ${odysseyTokens.BorderWidthMain})`,
+          // paddingInline: odysseyTokens.Spacing3,
+          fontSize: odysseyTokens.TypographySizeBody,
+          lineHeight: odysseyTokens.TypographyLineHeightUi,
+          // borderRadius: odysseyTokens.BorderRadiusRound,
+          // backgroundColor: odysseyTokens.HueNeutral100,
+          // borderWidth: odysseyTokens.BorderWidthMain,
+          // borderColor: odysseyTokens.HueNeutral200,
+          // borderStyle: odysseyTokens.BorderStyleMain,
+          // color: odysseyTokens.HueNeutral700,
 
-          return {
-            height: "auto",
-            paddingBlock: `calc(${odysseyTokens.Spacing2} - ${odysseyTokens.BorderWidthMain})`,
-            paddingInline: odysseyTokens.Spacing3,
-            fontSize: odysseyTokens.TypographySizeBody,
-            lineHeight: odysseyTokens.TypographyLineHeightUi,
-            borderRadius: odysseyTokens.BorderRadiusRound,
-            borderWidth: odysseyTokens.BorderWidthMain,
-            borderStyle: odysseyTokens.BorderStyleMain,
+          // ...(ownerState.onDelete && {
+          //   paddingInlineEnd: odysseyTokens.Spacing2,
+          // }),
 
-            ...(colorVariant === "default" && {
-              backgroundColor: odysseyTokens.HueNeutral100,
-              color: odysseyTokens.HueNeutral700,
-              borderColor: odysseyTokens.HueNeutral200,
-            }),
+          // [`&.${chipClasses.disabled}`]: {
+          //   opacity: 1,
+          //   pointerEvents: "none",
+          //   borderColor: odysseyTokens.BorderColorDisabled,
+          //   color: odysseyTokens.TypographyColorDisabled,
 
-            ...(colorVariant === "blue" && {
-              backgroundColor: odysseyTokens.HueBlue100,
-              color: odysseyTokens.HueBlue700,
-              borderColor: odysseyTokens.HueBlue200,
-            }),
+          //   [`& .${chipClasses.deleteIcon}`]: {
+          //     color: odysseyTokens.HueNeutral300,
+          //   },
+          // },
 
-            ...(colorVariant === "accent1" && {
-              backgroundColor: odysseyTokens.HueAccent1100,
-              color: odysseyTokens.HueAccent1700,
-              borderColor: odysseyTokens.HueAccent1200,
-            }),
+          // ...(ownerState.clickable && {
+          //   "&:hover": {
+          //     backgroundColor: odysseyTokens.HueNeutral200,
+          //   },
+          //   [`&.${chipClasses.focusVisible}`]: {
+          //     backgroundColor: odysseyTokens.HueNeutral200,
+          //     outlineColor: odysseyTokens.FocusOutlineColorPrimary,
+          //     outlineOffset: odysseyTokens.FocusOutlineOffsetTight,
+          //     outlineStyle: odysseyTokens.FocusOutlineStyle,
+          //     outlineWidth: odysseyTokens.FocusOutlineWidthMain,
+          //   },
+          //   "&:active": {
+          //     boxShadow: "none",
+          //     backgroundColor: odysseyTokens.HueNeutral300,
+          //   },
+          // }),
 
-            ...(colorVariant === "accent2" && {
-              backgroundColor: odysseyTokens.HueAccent2100,
-              color: odysseyTokens.HueAccent2700,
-              borderColor: odysseyTokens.HueAccent2200,
-            }),
+          // [`& .${chipClasses.icon}`]: {
+          //   margin: 0,
+          //   marginInlineEnd: odysseyTokens.Spacing1,
+          // },
 
-            ...(colorVariant === "accent3" && {
-              backgroundColor: odysseyTokens.HueAccent3100,
-              color: odysseyTokens.HueAccent3700,
-              borderColor: odysseyTokens.HueAccent3200,
-            }),
+          ...(ownerState.variant === "lamp" && {
+            paddingBlock: 0,
+            paddingInline: 0,
+            borderRadius: 0,
+            border: 0,
+            backgroundColor: "transparent",
+            color: odysseyTokens.TypographyColorBody,
 
-            ...(colorVariant === "accent4" && {
-              backgroundColor: odysseyTokens.HueAccent4100,
-              color: odysseyTokens.HueAccent4700,
-              borderColor: odysseyTokens.HueAccent4200,
-            }),
+            "&::before": {
+              content: "''",
+              width: odysseyTokens.Spacing2,
+              height: odysseyTokens.Spacing2,
+              marginInlineEnd: odysseyTokens.Spacing2,
+              borderRadius: "100%",
+              backgroundColor: odysseyTokens.HueNeutral600,
+            },
 
-            ...(ownerState.onDelete && {
-              paddingInlineEnd: odysseyTokens.Spacing2,
-            }),
-
-            [`&.${chipClasses.disabled}`]: {
-              opacity: 1,
-              pointerEvents: "none",
-              borderColor: odysseyTokens.BorderColorDisabled,
-              color: odysseyTokens.TypographyColorDisabled,
-
-              [`& .${chipClasses.deleteIcon}`]: {
-                color: odysseyTokens.HueNeutral300,
+            [`&.${chipClasses.colorError}`]: {
+              "&::before": {
+                border: 0,
+                backgroundColor: odysseyTokens.PaletteDangerMain,
               },
             },
 
-            ...(ownerState.clickable && {
-              "&:hover": {
-                backgroundColor: (() => {
-                  switch (colorVariant) {
-                    case "blue":
-                      return odysseyTokens.HueBlue200;
-                    case "accent1":
-                      return odysseyTokens.HueAccent1200;
-                    case "accent2":
-                      return odysseyTokens.HueAccent2200;
-                    case "accent3":
-                      return odysseyTokens.HueAccent3200;
-                    case "accent4":
-                      return odysseyTokens.HueAccent4200;
-                    default:
-                      return odysseyTokens.HueNeutral200;
-                  }
-                })(),
-              },
-              [`&.${chipClasses.focusVisible}`]: {
-                backgroundColor: (() => {
-                  switch (colorVariant) {
-                    case "blue":
-                      return odysseyTokens.HueBlue200;
-                    case "accent1":
-                      return odysseyTokens.HueAccent1200;
-                    case "accent2":
-                      return odysseyTokens.HueAccent2200;
-                    case "accent3":
-                      return odysseyTokens.HueAccent3200;
-                    case "accent4":
-                      return odysseyTokens.HueAccent4200;
-                    default:
-                      return odysseyTokens.HueNeutral200;
-                  }
-                })(),
-                outlineColor: odysseyTokens.FocusOutlineColorPrimary,
-                outlineOffset: odysseyTokens.FocusOutlineOffsetTight,
-                outlineStyle: odysseyTokens.FocusOutlineStyle,
-                outlineWidth: odysseyTokens.FocusOutlineWidthMain,
-              },
-              "&:active": {
-                boxShadow: "none",
-                backgroundColor: (() => {
-                  switch (colorVariant) {
-                    case "blue":
-                      return odysseyTokens.HueBlue300;
-                    case "accent1":
-                      return odysseyTokens.HueAccent1300;
-                    case "accent2":
-                      return odysseyTokens.HueAccent2300;
-                    case "accent3":
-                      return odysseyTokens.HueAccent3300;
-                    case "accent4":
-                      return odysseyTokens.HueAccent4300;
-                    default:
-                      return odysseyTokens.HueNeutral300;
-                  }
-                })(),
-              },
-            }),
-
-            [`& .${chipClasses.icon}`]: {
-              margin: 0,
-              marginInlineEnd: odysseyTokens.Spacing1,
-            },
-
-            [`& .${chipClasses.deleteIcon}`]: {
-              WebkitTapHighlightColor: "transparent",
-              color: (() => {
-                switch (colorVariant) {
-                  case "blue":
-                    return odysseyTokens.HueBlue500;
-                  case "accent1":
-                    return odysseyTokens.HueAccent1500;
-                  case "accent2":
-                    return odysseyTokens.HueAccent2500;
-                  case "accent3":
-                    return odysseyTokens.HueAccent3500;
-                  case "accent4":
-                    return odysseyTokens.HueAccent4500;
-                  default:
-                    return odysseyTokens.HueNeutral500;
-                }
-              })(),
-              fontSize: "1em",
-              cursor: "pointer",
-              margin: "0",
-              marginInlineStart: odysseyTokens.Spacing2,
-
-              "&:hover": {
-                color: (() => {
-                  switch (colorVariant) {
-                    case "blue":
-                      return odysseyTokens.HueBlue600;
-                    case "accent1":
-                      return odysseyTokens.HueAccent1600;
-                    case "accent2":
-                      return odysseyTokens.HueAccent2600;
-                    case "accent3":
-                      return odysseyTokens.HueAccent3600;
-                    case "accent4":
-                      return odysseyTokens.HueAccent4600;
-                    default:
-                      return odysseyTokens.HueNeutral600;
-                  }
-                })(),
+            [`&.${chipClasses.colorSuccess}`]: {
+              "&::before": {
+                border: 0,
+                backgroundColor: odysseyTokens.PaletteSuccessMain,
               },
             },
-          };
-        },
+
+            [`&.${chipClasses.colorWarning}`]: {
+              "&::before": {
+                border: 0,
+                backgroundColor: odysseyTokens.HueYellow200,
+              },
+            },
+          }),
+          ...(ownerState.variant === "pill" && {
+            paddingBlock: odysseyTokens.Spacing1,
+            paddingInline: odysseyTokens.Spacing2,
+            borderRadius: odysseyTokens.BorderRadiusMain,
+            border: 0,
+            fontWeight: odysseyTokens.TypographyWeightHeadingBold,
+            lineHeight: odysseyTokens.TypographyLineHeightOverline,
+            backgroundColor: odysseyTokens.HueNeutral50,
+            color: odysseyTokens.TypographyColorSubordinate,
+            fontSize: "0.71428571rem",
+            textTransform: "uppercase",
+
+            [`&.${chipClasses.colorError}`]: {
+              backgroundColor: odysseyTokens.PaletteDangerLighter,
+              color: odysseyTokens.TypographyColorDanger,
+            },
+
+            [`&.${chipClasses.colorInfo}`]: {
+              backgroundColor: odysseyTokens.PalettePrimaryLighter,
+              color: odysseyTokens.PalettePrimaryText,
+            },
+
+            [`&.${chipClasses.colorSuccess}`]: {
+              backgroundColor: odysseyTokens.PaletteSuccessLighter,
+              color: odysseyTokens.TypographyColorSuccess,
+            },
+
+            [`&.${chipClasses.colorWarning}`]: {
+              backgroundColor: odysseyTokens.PaletteWarningLighter,
+              color: odysseyTokens.TypographyColorWarning,
+            },
+          }),
+
+          [`.${inputBaseClasses.root}.${inputBaseClasses.disabled} &`]: {
+            backgroundColor: odysseyTokens.HueNeutral200,
+          },
+        }),
 
         label: {
           padding: 0,
 
-          [`.${inputBaseClasses.root}.${inputBaseClasses.disabled} &`]: {
-            color: odysseyTokens.TypographyColorDisabled,
-            WebkitTextFillColor: odysseyTokens.TypographyColorDisabled,
-          },
+          // [`.${inputBaseClasses.root}.${inputBaseClasses.disabled} &`]: {
+          //   color: odysseyTokens.TypographyColorDisabled,
+          //   WebkitTextFillColor: odysseyTokens.TypographyColorDisabled,
+          // } satisfies CSSProperties,
         },
+
+        // deleteIcon: {
+        //   WebkitTapHighlightColor: "transparent",
+        //   color: odysseyTokens.HueNeutral500,
+        //   fontSize: "1em",
+        //   cursor: "pointer",
+        //   margin: "0",
+        //   marginInlineStart: odysseyTokens.Spacing2,
+
+        //   "&:hover": {
+        //     color: odysseyTokens.HueNeutral600,
+        //   },
+
+        //   [`.${inputBaseClasses.root}.${inputBaseClasses.disabled} &`]: {
+        //     display: "none",
+        //   },
+        // },
       },
     },
     MuiCircularProgress: {
