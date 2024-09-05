@@ -156,7 +156,7 @@ export const List: StoryObj<TagProps> = {
   render: function C(args) {
     return (
       <TagList>
-        <Tag label={args.label} colorVariant="default" />
+        <Tag label={args.label} />
         <Tag label="Blue tag" colorVariant="blue" />
         <Tag label="Accent1 tag" colorVariant="accent1" />
         <Tag label="Accent2 tag" colorVariant="accent2" />

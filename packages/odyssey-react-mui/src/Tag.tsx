@@ -43,7 +43,7 @@ export type TagProps = {
    */
   onRemove?: MuiChipProps["onDelete"];
   /**
-   * Color variant of the Tag, affecting its appearance
+   * Color variant of the Tag
    */
   colorVariant?: TagColorVariant;
 } & Pick<HtmlProps, "testId" | "translate">;
