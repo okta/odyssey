@@ -69,7 +69,7 @@ export * from "./Checkbox";
 export * from "./CheckboxGroup";
 export * from "./CircularProgress";
 export * from "./CssBaseline";
-export * from "./createShadowRootElement";
+export * from "./createShadowDomElements";
 export * from "./createUniqueId";
 export * from "./DataTable";
 export * from "./Dialog";

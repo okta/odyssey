@@ -25,7 +25,9 @@ import { OdysseyDesignTokensContext } from "./OdysseyDesignTokensContext";
 export type OdysseyThemeProviderProps = {
   children: ReactNode;
   designTokensOverride?: DesignTokensOverride;
+  /** @deprecated Use `shadowRootElement` instead. */
   shadowDomElement?: HTMLDivElement | HTMLElement | undefined;
+  shadowRootElement?: HTMLDivElement | HTMLElement;
   themeOverride?: ThemeOptions;
 };
 
@@ -38,19 +40,21 @@ const OdysseyThemeProvider = ({
   children,
   designTokensOverride,
   shadowDomElement,
+  shadowRootElement,
   themeOverride,
 }: OdysseyThemeProviderProps) => {
   const odysseyTokens = useMemo(
     () => ({ ...Tokens, ...designTokensOverride }),
     [designTokensOverride],
   );
+
   const odysseyTheme = useMemo(
     () =>
       createOdysseyMuiTheme({
         odysseyTokens,
-        shadowDomElement,
+        shadowRootElement: shadowRootElement || shadowDomElement,
       }),
-    [odysseyTokens, shadowDomElement],
+    [odysseyTokens, shadowDomElement, shadowRootElement],
   );
 
   const customOdysseyTheme = useMemo(
