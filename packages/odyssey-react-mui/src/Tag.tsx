@@ -117,7 +117,7 @@ const getChipColors = (
   return colors[colorVariant] || colors.default;
 };
 
-const StyledChip = styled(MuiChip, {
+const StyledTag = styled(MuiChip, {
   shouldForwardProp: (prop) =>
     !["colorVariant", "odysseyDesignTokens"].includes(prop as string),
 })<{ colorVariant: TagColorVariant; odysseyDesignTokens: DesignTokens }>(({
@@ -196,7 +196,7 @@ const Tag = ({
 
   const renderTag = useCallback(
     (muiProps: MuiPropsContextType) => (
-      <StyledChip
+      <StyledTag
         {...muiProps}
         aria-disabled={isDisabled}
         clickable={Boolean(onClick)}
