@@ -996,53 +996,8 @@ export const components = ({
       styleOverrides: {
         root: ({ ownerState }) => ({
           height: "auto",
-          // paddingBlock: `calc(${odysseyTokens.Spacing2} - ${odysseyTokens.BorderWidthMain})`,
-          // paddingInline: odysseyTokens.Spacing3,
           fontSize: odysseyTokens.TypographySizeBody,
           lineHeight: odysseyTokens.TypographyLineHeightUi,
-          // borderRadius: odysseyTokens.BorderRadiusRound,
-          // backgroundColor: odysseyTokens.HueNeutral100,
-          // borderWidth: odysseyTokens.BorderWidthMain,
-          // borderColor: odysseyTokens.HueNeutral200,
-          // borderStyle: odysseyTokens.BorderStyleMain,
-          // color: odysseyTokens.HueNeutral700,
-
-          // ...(ownerState.onDelete && {
-          //   paddingInlineEnd: odysseyTokens.Spacing2,
-          // }),
-
-          // [`&.${chipClasses.disabled}`]: {
-          //   opacity: 1,
-          //   pointerEvents: "none",
-          //   borderColor: odysseyTokens.BorderColorDisabled,
-          //   color: odysseyTokens.TypographyColorDisabled,
-
-          //   [`& .${chipClasses.deleteIcon}`]: {
-          //     color: odysseyTokens.HueNeutral300,
-          //   },
-          // },
-
-          // ...(ownerState.clickable && {
-          //   "&:hover": {
-          //     backgroundColor: odysseyTokens.HueNeutral200,
-          //   },
-          //   [`&.${chipClasses.focusVisible}`]: {
-          //     backgroundColor: odysseyTokens.HueNeutral200,
-          //     outlineColor: odysseyTokens.FocusOutlineColorPrimary,
-          //     outlineOffset: odysseyTokens.FocusOutlineOffsetTight,
-          //     outlineStyle: odysseyTokens.FocusOutlineStyle,
-          //     outlineWidth: odysseyTokens.FocusOutlineWidthMain,
-          //   },
-          //   "&:active": {
-          //     boxShadow: "none",
-          //     backgroundColor: odysseyTokens.HueNeutral300,
-          //   },
-          // }),
-
-          // [`& .${chipClasses.icon}`]: {
-          //   margin: 0,
-          //   marginInlineEnd: odysseyTokens.Spacing1,
-          // },
 
           ...(ownerState.variant === "lamp" && {
             paddingBlock: 0,
@@ -1122,29 +1077,7 @@ export const components = ({
 
         label: {
           padding: 0,
-
-          // [`.${inputBaseClasses.root}.${inputBaseClasses.disabled} &`]: {
-          //   color: odysseyTokens.TypographyColorDisabled,
-          //   WebkitTextFillColor: odysseyTokens.TypographyColorDisabled,
-          // } satisfies CSSProperties,
         },
-
-        // deleteIcon: {
-        //   WebkitTapHighlightColor: "transparent",
-        //   color: odysseyTokens.HueNeutral500,
-        //   fontSize: "1em",
-        //   cursor: "pointer",
-        //   margin: "0",
-        //   marginInlineStart: odysseyTokens.Spacing2,
-
-        //   "&:hover": {
-        //     color: odysseyTokens.HueNeutral600,
-        //   },
-
-        //   [`.${inputBaseClasses.root}.${inputBaseClasses.disabled} &`]: {
-        //     display: "none",
-        //   },
-        // },
       },
     },
     MuiCircularProgress: {
