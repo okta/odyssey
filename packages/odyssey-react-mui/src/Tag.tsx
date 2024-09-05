@@ -16,6 +16,17 @@ import { TagListContext } from "./TagListContext";
 import { MuiPropsContext, MuiPropsContextType } from "./MuiPropsContext";
 import { HtmlProps } from "./HtmlProps";
 
+export const tagColorVariants = [
+  "default",
+  "blue",
+  "accent1",
+  "accent2",
+  "accent3",
+  "accent4",
+] as const;
+
+type TagColorVariant = (typeof tagColorVariants)[number];
+
 export type TagProps = {
   icon?: ReactElement;
   isDisabled?: boolean;
@@ -31,6 +42,10 @@ export type TagProps = {
    * Callback fired when the remove button of the Tag is clicked
    */
   onRemove?: MuiChipProps["onDelete"];
+  /**
+   * Color variant of the Tag, affecting its appearance
+   */
+  colorVariant?: TagColorVariant;
 } & Pick<HtmlProps, "testId" | "translate">;
 
 const Tag = ({
@@ -41,6 +56,7 @@ const Tag = ({
   onRemove,
   testId,
   translate,
+  colorVariant = "default",
 }: TagProps) => {
   const { chipElementType } = useContext(TagListContext);
 
@@ -49,9 +65,10 @@ const Tag = ({
       <MuiChip
         {...muiProps}
         aria-disabled={isDisabled}
-        clickable={onClick ? true : false}
+        clickable={Boolean(onClick)}
         component={chipElementType}
         data-se={testId}
+        data-color-variant={colorVariant}
         disabled={isDisabled}
         icon={icon}
         label={label}
@@ -69,6 +86,7 @@ const Tag = ({
       onRemove,
       testId,
       translate,
+      colorVariant,
     ],
   );
 
