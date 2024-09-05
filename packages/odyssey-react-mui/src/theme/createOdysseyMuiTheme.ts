@@ -30,14 +30,17 @@ export type DesignTokensOverride = Partial<typeof Tokens>;
 export const createOdysseyMuiTheme = ({
   odysseyTokens,
   shadowDomElement,
+  shadowRootElement,
 }: {
   odysseyTokens: DesignTokens;
+  /** @deprecated Use `shadowRootElement` */
   shadowDomElement?: HTMLElement;
+  shadowRootElement?: HTMLElement;
 }) =>
   createTheme({
     components: components({
       odysseyTokens,
-      shadowDomElement,
+      shadowRootElement: shadowRootElement || shadowDomElement,
     }),
     mixins: mixins({ odysseyTokens }),
     palette: palette({ odysseyTokens }),

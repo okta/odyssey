@@ -39,7 +39,9 @@ const OdysseyProvider = <SupportedLanguages extends string>({
   children,
   designTokensOverride,
   emotionRoot,
+  emotionRootElement,
   shadowDomElement,
+  shadowRootElement,
   languageCode,
   nonce,
   stylisPlugins,
@@ -47,14 +49,15 @@ const OdysseyProvider = <SupportedLanguages extends string>({
   translationOverrides,
 }: OdysseyProviderProps<SupportedLanguages>) => (
   <OdysseyCacheProvider
-    nonce={nonce}
     emotionRoot={emotionRoot}
-    hasShadowDom={Boolean(shadowDomElement)}
+    emotionRootElement={emotionRootElement}
+    hasShadowDom={Boolean(shadowRootElement || shadowDomElement)}
+    nonce={nonce}
     stylisPlugins={stylisPlugins}
   >
     <OdysseyThemeProvider
       designTokensOverride={designTokensOverride}
-      shadowDomElement={shadowDomElement}
+      shadowRootElement={shadowRootElement || shadowDomElement}
       themeOverride={themeOverride}
     >
       <ScopedCssBaseline>

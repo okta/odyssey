@@ -62,9 +62,12 @@ const drawerSizes = {
 export const components = ({
   odysseyTokens,
   shadowDomElement,
+  shadowRootElement,
 }: {
   odysseyTokens: DesignTokens;
+  /** @deprecated use `shadowRootElement` */
   shadowDomElement?: HTMLElement;
+  shadowRootElement?: HTMLElement;
 }): ThemeOptions["components"] => {
   return {
     MuiAccordion: {
@@ -2222,7 +2225,7 @@ export const components = ({
     },
     MuiModal: {
       defaultProps: {
-        container: shadowDomElement,
+        container: shadowRootElement || shadowDomElement,
       },
     },
     MuiNativeSelect: {
@@ -2262,7 +2265,7 @@ export const components = ({
     },
     MuiPopover: {
       defaultProps: {
-        container: shadowDomElement,
+        container: shadowRootElement || shadowDomElement,
       },
       styleOverrides: {
         paper: {
@@ -2275,7 +2278,7 @@ export const components = ({
     },
     MuiPopper: {
       defaultProps: {
-        container: shadowDomElement,
+        container: shadowRootElement || shadowDomElement,
       },
     },
     MuiRadio: {
