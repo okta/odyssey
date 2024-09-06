@@ -61,14 +61,18 @@ const SideNavCollapsedContainer = styled("div", {
 
 const SideNavExpandContainer = styled("div", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "isSideNavCollapsed",
+    prop !== "odysseyDesignTokens" &&
+    prop !== "isSideNavCollapsed" &&
+    prop !== "maxWidth",
 })(
   ({
     odysseyDesignTokens,
     isSideNavCollapsed,
+    maxWidth,
   }: {
     odysseyDesignTokens: DesignTokens;
     isSideNavCollapsed: boolean;
+    maxWidth: string;
   }) => ({
     backgroundColor: odysseyDesignTokens.HueNeutralWhite,
     flexDirection: "column",
@@ -79,6 +83,11 @@ const SideNavExpandContainer = styled("div", {
     transitionProperty: "opacity, width",
     transitionDuration: odysseyDesignTokens.TransitionDurationMain,
     transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
+    maxWidth: maxWidth,
+    borderStyle: odysseyDesignTokens.BorderStyleMain,
+    borderWidth: 0,
+    borderRightWidth: odysseyDesignTokens.BorderWidthMain,
+    borderRightColor: odysseyDesignTokens.HueNeutral50,
   }),
 );
 
@@ -127,7 +136,9 @@ const SideNav = ({
   onCollapse,
   onExpand,
   sideNavItems,
+  maxWidth = "300px",
   footerItems,
+  footerComponent,
 }: SideNavProps) => {
   const [isSideNavCollapsed, setSideNavCollapsed] = useState(false);
   const odysseyDesignTokens = useOdysseyDesignTokens();
@@ -213,16 +224,21 @@ const SideNav = ({
     () => ({
       display: "flex",
       height: "100vh",
+      maxWidth,
     }),
-    [],
+    [maxWidth],
   );
 
   const sideNavHeaderContainerStyles = useMemo(
     () => ({
       position: "sticky",
       top: 0,
+      borderBottomWidth: odysseyDesignTokens.BorderWidthMain,
+      borderBottomStyle: odysseyDesignTokens.BorderStyleMain,
+      borderBottomColor: odysseyDesignTokens.HueNeutral50,
+      boxShadowBottom: odysseyDesignTokens.ShadowScale0,
     }),
-    [],
+    [odysseyDesignTokens],
   );
 
   const sideNavListContainerStyles = useMemo(
@@ -238,6 +254,9 @@ const SideNav = ({
       position: "sticky",
       bottom: 0,
       paddingTop: odysseyDesignTokens.Spacing2,
+      borderTopWidth: odysseyDesignTokens.BorderWidthMain,
+      borderTopStyle: odysseyDesignTokens.BorderStyleMain,
+      borderTopColor: odysseyDesignTokens.HueNeutral50,
     }),
     [odysseyDesignTokens],
   );
@@ -267,6 +286,7 @@ const SideNav = ({
       <SideNavExpandContainer
         odysseyDesignTokens={odysseyDesignTokens}
         isSideNavCollapsed={isSideNavCollapsed}
+        maxWidth={maxWidth}
         data-se="expanded-region"
       >
         <Box sx={sideNavHeaderContainerStyles}>
@@ -332,10 +352,13 @@ const SideNav = ({
             })}
           </SideNavListContainer>
         </Box>
-        {footerItems && (
+        {(footerItems || footerComponent) && (
           <Box sx={sideNavFooterContainerStyles}>
             <SideNavFooterContainer odysseyDesignTokens={odysseyDesignTokens}>
-              <SideNavFooterContent footerItems={footerItems} />
+              {footerComponent}
+              {footerItems && !footerComponent && (
+                <SideNavFooterContent footerItems={footerItems} />
+              )}
             </SideNavFooterContainer>
           </Box>
         )}

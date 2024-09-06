@@ -24,10 +24,6 @@ export type SideNavProps = {
    */
   isCollapsible?: boolean;
   /**
-   * Footer items in the side nav
-   */
-  footerItems?: SideNavFooterItem[];
-  /**
    *  Triggers when the side nav is collapsed
    */
   onCollapse?(): void;
@@ -39,7 +35,34 @@ export type SideNavProps = {
    * Nav items in the side nav
    */
   sideNavItems: SideNavItem[];
-} & Pick<HtmlProps, "testId">;
+  /**
+   * Customizable maximum width of the SideNav container
+   * (it will be smaller if collapsed). A CSS length string.
+   */
+  maxWidth?: string;
+} & (
+  | {
+      /**
+       * Footer items in the side nav
+       */
+      footerItems?: SideNavFooterItem[];
+      /**
+       * footerComponent cannot be used if footerItems are defined
+       */
+      footerComponent?: never;
+    }
+  | {
+      /**
+       * footerItems cannot be used if footerComponent is defined
+       */
+      footerItems?: never;
+      /**
+       * The component to display as the footer; if present the `footerItems` are ignored and not rendered.
+       */
+      footerComponent?: ReactElement;
+    }
+) &
+  Pick<HtmlProps, "testId">;
 
 export type SideNavItem = {
   id: string;
