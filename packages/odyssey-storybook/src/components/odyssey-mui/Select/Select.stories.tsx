@@ -137,6 +137,7 @@ const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
         },
       },
     },
+    hasVisibleLabel: fieldComponentPropsMetaData.hasVisibleLabel,
     hint: fieldComponentPropsMetaData.hint,
     HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
     id: fieldComponentPropsMetaData.id,

@@ -175,6 +175,15 @@ export type SelectProps<
 > &
   Pick<HtmlProps, "ariaDescribedBy" | "testId" | "translate">;
 
+type SelectNoVisibleLabelProps<Value extends SelectValueType<HasMultipleChoices>, HasMultipleChoices extends boolean> = SelectProps<
+  Value,
+  HasMultipleChoices
+> & {
+  hasVisibleLabel: boolean;
+  hint?: never;
+  HintLinkComponent?: never;
+};
+
 type SelectRenderProps = Partial<
   Pick<FieldComponentRenderProps, "ariaDescribedBy" | "errorMessageElementId">
 > &

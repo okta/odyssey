@@ -46,10 +46,6 @@ export type FieldProps = {
    */
   fieldType: (typeof fieldTypeValues)[number];
   /**
-   * If `true`, the Field label will be shown
-   */
-  hasVisibleLabel?: boolean;
-  /**
    * Important for narrowing down the `fieldset` role to "radiogroup".
    */
   isRadioGroup?: boolean;
@@ -76,7 +72,7 @@ export type FieldProps = {
     labelElementId,
     isReadOnly,
   }: RenderFieldComponentProps) => ReactElement;
-};
+} & Pick<FieldComponentProps, "hasVisibleLabel">;
 
 const Field = ({
   ariaDescribedBy,
