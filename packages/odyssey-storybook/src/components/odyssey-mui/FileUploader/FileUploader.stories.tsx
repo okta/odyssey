@@ -25,7 +25,7 @@ import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaDat
 // import { axeRun } from "../../../axe-util";
 
 const storybookMeta: Meta<typeof FileUploader> = {
-  title: "FileUploader",
+  title: "MUI Components/Forms/FileUploader",
   component: FileUploader,
   argTypes: {
     acceptedFileTypes: {
