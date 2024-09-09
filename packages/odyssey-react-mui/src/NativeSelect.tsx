@@ -97,6 +97,7 @@ export type NativeSelectProps<
   FieldComponentProps,
   | "errorMessage"
   | "errorMessageList"
+  | "hasVisibleLabel"
   | "hint"
   | "HintLinkComponent"
   | "id"
@@ -123,6 +124,7 @@ const NativeSelect = forwardRef(
       errorMessage,
       errorMessageList,
       hasMultipleChoices: hasMultipleChoicesProp,
+      hasVisibleLabel = true,
       hint,
       HintLinkComponent,
       id: idOverride,
@@ -233,7 +235,7 @@ const NativeSelect = forwardRef(
         errorMessage={errorMessage}
         errorMessageList={errorMessageList}
         fieldType="single"
-        hasVisibleLabel
+        hasVisibleLabel={hasVisibleLabel}
         hint={hint}
         HintLinkComponent={HintLinkComponent}
         id={idOverride}

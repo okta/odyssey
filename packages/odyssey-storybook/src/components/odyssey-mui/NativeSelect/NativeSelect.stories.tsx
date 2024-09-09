@@ -45,6 +45,7 @@ const storybookMeta: Meta<typeof NativeSelect> = {
     },
     errorMessage: fieldComponentPropsMetaData.errorMessage,
     errorMessageList: fieldComponentPropsMetaData.errorMessageList,
+    hasVisibleLabel: fieldComponentPropsMetaData.hasVisibleLabel,
     hint: fieldComponentPropsMetaData.hint,
     HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
     id: fieldComponentPropsMetaData.id,
@@ -200,6 +201,13 @@ export const DefaultDisabled: StoryObj<typeof NativeSelect> = {
   ...Template,
   args: {
     isDisabled: true,
+  },
+};
+
+export const NoVisibleLabel: StoryObj<typeof NativeSelect> = {
+  ...Template,
+  args: {
+    hasVisibleLabel: false,
   },
 };
 
