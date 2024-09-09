@@ -55,12 +55,12 @@ export type FieldComponentProps = {
   name?: string;
 } & (
   | {
-      hasVisibleLabel: false;
+      hasVisibleLabel?: false;
       hint: never;
       HintLinkComponent: never;
     }
   | {
-      hasVisibleLabel: true;
+      hasVisibleLabel?: true;
       /**
        * The helper text content.
        */
