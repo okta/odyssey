@@ -55,11 +55,17 @@ export type FieldComponentProps = {
   name?: string;
 } & (
   | {
+      /**
+       * If `hasVisibleLabel` is `false` it will also hide any `hint` text and `HintLinkComponent` that is passed in
+       */
       hasVisibleLabel?: false;
       hint: never;
       HintLinkComponent: never;
     }
   | {
+      /**
+       * defaults to `true` if `false` along with hiding the label it will also hide any `hint` text and `HintLinkComponent` that is passed in
+       */
       hasVisibleLabel?: true;
       /**
        * The helper text content.
