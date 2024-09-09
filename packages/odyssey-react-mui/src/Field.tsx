@@ -95,6 +95,7 @@ const Field = ({
     FieldComponentProps,
     | "errorMessage"
     | "errorMessageList"
+    | "hasVisibleLabel"
     | "hint"
     | "HintLinkComponent"
     | "id"
@@ -156,7 +157,7 @@ const Field = ({
         />
       )}
 
-      {hint && (
+      {hint && hasVisibleLabel && (
         <FieldHint id={hintId} LinkComponent={HintLinkComponent} text={hint} />
       )}
 

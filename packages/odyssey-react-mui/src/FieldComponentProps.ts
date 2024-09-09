@@ -30,14 +30,6 @@ export type FieldComponentProps = {
    */
   hasVisibleLabel?: boolean;
   /**
-   * The helper text content.
-   */
-  hint?: string;
-  /**
-   * A `Link` component to provide greater context that is rendered at the end of the `hint` text
-   */
-  HintLinkComponent?: ReactElement<typeof HintLink>;
-  /**
    * The id of the `input` element.
    */
   id?: string;
@@ -61,7 +53,24 @@ export type FieldComponentProps = {
    * The name of the `input` element. Defaults to the `id` if not set.
    */
   name?: string;
-};
+} & (
+  | {
+      hasVisibleLabel: false;
+      hint: never;
+      HintLinkComponent: never;
+    }
+  | {
+      hasVisibleLabel: true;
+      /**
+       * The helper text content.
+       */
+      hint?: string;
+      /**
+       * A `Link` component to provide greater context that is rendered at the end of the `hint` text
+       */
+      HintLinkComponent?: ReactElement<typeof HintLink>;
+    }
+);
 
 export type FieldComponentRenderProps = {
   ariaDescribedBy: string;

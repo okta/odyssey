@@ -178,6 +178,7 @@ const storybookMeta: Meta<typeof TextField> = {
   },
   args: {
     label: "Destination",
+    hint: "Specify your destination within the Sol system.",
     defaultValue: undefined,
   },
   decorators: [MuiThemeDecorator],
@@ -300,6 +301,7 @@ export const Email: StoryObj<typeof TextField> = {
     label: "Company email",
     type: "email",
     defaultValue: "",
+    hint: undefined,
   },
 };
 
@@ -337,11 +339,7 @@ export const NoVisibleLabel: StoryObj<typeof TextField> = {
     },
   },
   args: {
-    hint: "Specify your destination within the Sol system.",
     hasVisibleLabel: false,
-  },
-  render: function C({ ...props }) {
-    return <TextField {...props} />;
   },
 };
 
