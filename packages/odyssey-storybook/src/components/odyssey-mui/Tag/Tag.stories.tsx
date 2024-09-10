@@ -89,7 +89,14 @@ const storybookMeta: Meta<TagProps> = {
       control: {
         type: "select",
       },
-      options: ["default", "info", "accent1", "accent2", "accent3", "accent4"],
+      options: [
+        "default",
+        "info",
+        "accentOne",
+        "accentTwo",
+        "accentThree",
+        "accentFour",
+      ],
       description: "The color of the tag",
       table: {
         type: {
@@ -124,31 +131,31 @@ export const Info: StoryObj<TagProps> = {
   },
 };
 
-export const Accent1: StoryObj<TagProps> = {
+export const AccentOne: StoryObj<TagProps> = {
   args: {
     label: "Starship",
-    colorVariant: "accent1",
+    colorVariant: "accentOne",
   },
 };
 
-export const Accent2: StoryObj<TagProps> = {
+export const AccentTwo: StoryObj<TagProps> = {
   args: {
     label: "Starship",
-    colorVariant: "accent2",
+    colorVariant: "accentTwo",
   },
 };
 
-export const Accent3: StoryObj<TagProps> = {
+export const AccentThree: StoryObj<TagProps> = {
   args: {
     label: "Starship",
-    colorVariant: "accent3",
+    colorVariant: "accentThree",
   },
 };
 
-export const Accent4: StoryObj<TagProps> = {
+export const AccentFour: StoryObj<TagProps> = {
   args: {
     label: "Starship",
-    colorVariant: "accent4",
+    colorVariant: "accentFour",
   },
 };
 
@@ -158,10 +165,10 @@ export const List: StoryObj<TagProps> = {
       <TagList>
         <Tag label={args.label} />
         <Tag label="Info tag" colorVariant="info" />
-        <Tag label="Accent1 tag" colorVariant="accent1" />
-        <Tag label="Accent2 tag" colorVariant="accent2" />
-        <Tag label="Accent3 tag" colorVariant="accent3" />
-        <Tag label="Accent4 tag" colorVariant="accent4" />
+        <Tag label="AccentOne tag" colorVariant="accentOne" />
+        <Tag label="AccentTwo tag" colorVariant="accentTwo" />
+        <Tag label="AccentThree tag" colorVariant="accentThree" />
+        <Tag label="AccentFour tag" colorVariant="accentFour" />
       </TagList>
     );
   },
