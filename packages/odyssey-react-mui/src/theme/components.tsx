@@ -253,7 +253,6 @@ export const components = ({
             justifyContent: "center",
             alignItems: "center",
             borderRadius: 0,
-            border: 0,
 
             ...(ownerState.onClose !== undefined && {
               paddingInline: odysseyTokens.Spacing6,
