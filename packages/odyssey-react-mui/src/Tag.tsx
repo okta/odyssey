@@ -11,8 +11,9 @@
  */
 
 import { Chip as MuiChip, ChipProps as MuiChipProps } from "@mui/material";
-import { memo, ReactElement, useCallback } from "react";
+import { memo, ReactElement, useCallback, useContext } from "react";
 import styled from "@emotion/styled";
+import { TagListContext } from "./TagListContext";
 import { MuiPropsContext, MuiPropsContextType } from "./MuiPropsContext";
 import { HtmlProps } from "./HtmlProps";
 import {
@@ -120,10 +121,11 @@ const getChipColors = (
 const StyledTag = styled(MuiChip, {
   shouldForwardProp: (prop) =>
     !["colorVariant", "odysseyDesignTokens"].includes(prop as string),
-})<{ colorVariant: TagColorVariant; odysseyDesignTokens: DesignTokens }>(({
-  colorVariant,
-  odysseyDesignTokens,
-}) => {
+})<{
+  colorVariant: TagColorVariant;
+  odysseyDesignTokens: DesignTokens;
+  as?: React.ElementType; // Allow the 'as' prop to be forwarded
+}>(({ colorVariant, odysseyDesignTokens }) => {
   const colors = getChipColors(colorVariant, odysseyDesignTokens);
 
   return {
@@ -193,11 +195,13 @@ const Tag = ({
   colorVariant = "default",
 }: TagProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const { chipElementType } = useContext(TagListContext);
 
   const renderTag = useCallback(
     (muiProps: MuiPropsContextType) => (
       <StyledTag
         {...muiProps}
+        as={chipElementType}
         aria-disabled={isDisabled}
         clickable={Boolean(onClick)}
         data-se={testId}
@@ -213,6 +217,7 @@ const Tag = ({
       />
     ),
     [
+      chipElementType,
       icon,
       isDisabled,
       label,
