@@ -61,7 +61,7 @@
       "800": { "value": "#4c3302" },
       "900": { "value": "#352401" }
     },
-    "accent-1": {
+    "accentOne": {
       "50": { "value": "#F5F2FD" },
       "100": { "value": "#E4DFF1" },
       "200": { "value": "#D2C2FF" },
@@ -73,7 +73,7 @@
       "800": { "value": "#401895" },
       "900": { "value": "#2B0679" }
     },
-    "accent-2": {
+    "accentTwo": {
       "50": { "value": "#FCF2E8" },
       "100": { "value": "#F7DCD6" },
       "200": { "value": "#F2C299" },
@@ -85,7 +85,7 @@
       "800": { "value": "#50301B" },
       "900": { "value": "#3E1F09" }
     },
-    "accent-3": {
+    "accentThree": {
       "50": { "value": "#E1F7F7" },
       "100": { "value": "#BCEBEA" },
       "200": { "value": "#89D9D9" },
@@ -97,7 +97,7 @@
       "800": { "value": "#1C3D3D" },
       "900": { "value": "#12282B" }
     },
-    "accent-4": {
+    "accentFour": {
       "50": { "value": "#FFF2E6" },
       "100": { "value": "#EBDFCA" },
       "200": { "value": "#D6C9AD" },

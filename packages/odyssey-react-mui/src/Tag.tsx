@@ -23,7 +23,7 @@ import { CloseCircleFilledIcon } from "./icons.generated";
 
 export const tagColorVariants = [
   "default",
-  "blue",
+  "info",
   "accent1",
   "accent2",
   "accent3",
@@ -67,7 +67,7 @@ const getChipColors = (
       deleteIcon: odysseyDesignTokens.HueNeutral500,
       deleteIconHover: odysseyDesignTokens.HueNeutral600,
     },
-    blue: {
+    info: {
       background: odysseyDesignTokens.HueBlue100,
       hover: odysseyDesignTokens.HueBlue200,
       active: odysseyDesignTokens.HueBlue300,

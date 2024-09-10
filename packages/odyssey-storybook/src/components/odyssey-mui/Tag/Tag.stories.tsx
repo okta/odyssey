@@ -89,7 +89,7 @@ const storybookMeta: Meta<TagProps> = {
       control: {
         type: "select",
       },
-      options: ["default", "blue", "accent1", "accent2", "accent3", "accent4"],
+      options: ["default", "info", "accent1", "accent2", "accent3", "accent4"],
       description: "The color of the tag",
       table: {
         type: {
@@ -117,10 +117,10 @@ export const Default: StoryObj<TagProps> = {
   },
 };
 
-export const Blue: StoryObj<TagProps> = {
+export const Info: StoryObj<TagProps> = {
   args: {
     label: "Starship",
-    colorVariant: "blue",
+    colorVariant: "info",
   },
 };
 
@@ -157,7 +157,7 @@ export const List: StoryObj<TagProps> = {
     return (
       <TagList>
         <Tag label={args.label} />
-        <Tag label="Blue tag" colorVariant="blue" />
+        <Tag label="Info tag" colorVariant="info" />
         <Tag label="Accent1 tag" colorVariant="accent1" />
         <Tag label="Accent2 tag" colorVariant="accent2" />
         <Tag label="Accent3 tag" colorVariant="accent3" />
