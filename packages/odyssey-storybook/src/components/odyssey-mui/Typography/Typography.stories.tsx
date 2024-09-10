@@ -19,10 +19,11 @@ import {
   Heading4,
   Heading5,
   Heading6,
+  Legend,
+  Overline,
   Paragraph,
   Subordinate,
   Support,
-  Legend,
   TypographyProps,
   typographyColorValues,
   typographyVariantMapping,
@@ -40,9 +41,10 @@ const variantMapping = {
   h5: Heading5,
   h6: Heading6,
   body: Paragraph,
+  legend: Legend,
+  overline: Overline,
   subordinate: Subordinate,
   support: Support,
-  legend: Legend,
 };
 
 const storybookMeta: Meta<TypographyProps> = {
@@ -234,6 +236,30 @@ export const BodyStory: StoryObj<TypographyProps> = {
   },
 };
 
+export const LegendStory: StoryObj<TypographyProps> = {
+  name: "Legend",
+  args: {
+    children: "This is a legend",
+    variant: "legend",
+  },
+  render: (args) => <Legend {...args} children={args.children} />,
+  play: async ({}) => {
+    await axeRun("Typopgraphy legend");
+  },
+};
+
+export const OverlineStory: StoryObj<TypographyProps> = {
+  name: "Overline",
+  args: {
+    children: "This is an Overline",
+    variant: "overline",
+  },
+  render: (args) => <Overline {...args} children={args.children} />,
+  play: async ({}) => {
+    await axeRun("Typopgraphy Overline");
+  },
+};
+
 export const SubordinateStory: StoryObj<TypographyProps> = {
   name: "Subordinate",
   args: {
@@ -255,18 +281,6 @@ export const SupportStory: StoryObj<TypographyProps> = {
   render: (args) => <Support {...args} children={args.children} />,
   play: async ({}) => {
     await axeRun("Typopgraphy support");
-  },
-};
-
-export const LegendStory: StoryObj<TypographyProps> = {
-  name: "Legend",
-  args: {
-    children: "This is a legend",
-    variant: "legend",
-  },
-  render: (args) => <Legend {...args} children={args.children} />,
-  play: async ({}) => {
-    await axeRun("Typopgraphy legend");
   },
 };
 

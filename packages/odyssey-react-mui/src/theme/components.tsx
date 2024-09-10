@@ -3104,6 +3104,7 @@ export const components = ({
           body1: "p",
           inherit: "p",
           legend: "legend",
+          overline: "p",
         },
       },
       styleOverrides: {
@@ -3112,6 +3113,14 @@ export const components = ({
 
           [`&:last-child`]: {
             marginBlockEnd: 0,
+          },
+        },
+        overline: {
+          letterSpacing: 0.5,
+          textTransform: "none",
+
+          "html:lang(en) &": {
+            textTransform: "uppercase",
           },
         },
       },
