@@ -64,9 +64,12 @@ const BulkActionsContainer = styled("div")(() => ({
   justifyContent: "space-between",
 }));
 
-const AdditionalActionsContainer = styled("div")(() => ({
+const AdditionalActionsContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   display: "flex",
   justifyContent: "flex-end",
+  gap: odysseyDesignTokens.Spacing2,
 }));
 
 const DataView = ({
@@ -357,7 +360,7 @@ const DataView = ({
       )}
 
       {!shouldShowFilters && !bulkActionMenuItems && !hasRowSelection && (
-        <AdditionalActionsContainer>
+        <AdditionalActionsContainer odysseyDesignTokens={odysseyDesignTokens}>
           {additionalActions}
         </AdditionalActionsContainer>
       )}
