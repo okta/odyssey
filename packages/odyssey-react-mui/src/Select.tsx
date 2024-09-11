@@ -49,6 +49,44 @@ import {
   useOdysseyDesignTokens,
   DesignTokens,
 } from "./OdysseyDesignTokensContext";
+import { TestSelector } from "./test-selectors";
+
+export const SelectTestSelector = {
+  accessibleText: {
+    errorMessage: "errorMessage",
+    hint: "description",
+    label: "label",
+  },
+  children: {
+    list: {
+      accessibleText: {
+        label: "label",
+      },
+      children: {
+        listItem: {
+          accessibleText: {
+            label: "label",
+          },
+          elementSelector: {
+            method: "ByRole",
+            options: {
+              label: "name",
+            },
+            role: "option",
+          },
+        },
+      },
+      isControlledElement: true,
+    },
+  },
+  elementSelector: {
+    method: "ByRole",
+    options: {
+      label: "name",
+    },
+    role: "combobox",
+  },
+} as const satisfies TestSelector;
 
 export type SelectOption = {
   text: string;

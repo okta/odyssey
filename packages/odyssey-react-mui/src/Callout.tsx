@@ -20,46 +20,34 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext";
-import { type FeatureTestSelector } from "./test-selectors";
+import { type TestSelector } from "./test-selectors";
 import { Paragraph } from "./Typography";
 import { useUniqueId } from "./useUniqueId";
 
-export const CalloutTestSelectors = {
-  feature: {
+export const CalloutTestSelector = {
+  accessibleText: {
+    text: "description",
+    title: "label",
+  },
+  children: {
     link: {
-      selector: {
+      elementSelector: {
         method: "ByRole",
         options: {
-          name: "${linkText}",
+          linkText: "name",
         },
         role: "link",
-        templateVariableNames: ["linkText"],
-      },
-    },
-    text: {
-      selector: {
-        method: "ByText",
-        templateVariableNames: ["text"],
-        text: "${text}",
-      },
-    },
-    title: {
-      selector: {
-        method: "ByText",
-        templateVariableNames: ["title"],
-        text: "${title}",
       },
     },
   },
-  selector: {
+  elementSelector: {
     method: "ByRole",
     options: {
-      name: "${title}",
+      title: "name",
     },
-    role: "${role}",
-    templateVariableNames: ["role", "title"],
+    role: ["alert", "status"],
   },
-} as const satisfies FeatureTestSelector;
+} as const satisfies TestSelector;
 
 export const calloutRoleValues = ["status", "alert"] as const;
 export const calloutSeverityValues = [

@@ -12,7 +12,8 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import { Select, SelectProps, Link } from "@okta/odyssey-react-mui";
-import { userEvent, waitFor, screen } from "@storybook/testing-library";
+import { queryOdysseySelector } from "@okta/odyssey-react-mui/test-selectors";
+import { screen, userEvent, waitFor } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import { useCallback, useState } from "react";
 
@@ -223,6 +224,7 @@ const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
 export default storybookMeta;
 
 export const Default: StoryObj<typeof Select> = {
+  args: { defaultValue: "" },
   play: async ({ canvasElement, step }) => {
     await step("Select Roles and permissions from the listbox", async () => {
       const comboBoxElement = canvasElement.querySelector(
@@ -243,11 +245,51 @@ export const Default: StoryObj<typeof Select> = {
     });
   },
 };
-Default.args = { defaultValue: "" };
 
 export const DefaultValue: StoryObj<typeof Select> = {
   args: {
     defaultValue: "Roles and permissions",
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("can click dropdown option", async () => {
+      const querySelect = queryOdysseySelector("Select");
+
+      const selector = querySelect({
+        element: canvasElement,
+        options: {
+          label: /Okta documentation/,
+        },
+      });
+
+      await userEvent.click(selector.element);
+
+      const list = selector.selectChild({
+        name: "list",
+      });
+
+      await waitFor(() => {
+        expect(list.element).toBeVisible();
+      });
+
+      const listItemElement = list.selectChild({
+        name: "listItem",
+        options: {
+          label: "Roles and permissions",
+        },
+      }).element;
+
+      await waitFor(() => {
+        expect(listItemElement).toBeVisible();
+      });
+
+      if (listItemElement) {
+        await userEvent.click(listItemElement);
+      }
+
+      waitFor(() => {
+        expect(list?.element).not.toBeVisible();
+      });
+    });
   },
 };
 
