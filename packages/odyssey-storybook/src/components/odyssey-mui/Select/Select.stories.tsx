@@ -257,7 +257,7 @@ export const DefaultValue: StoryObj<typeof Select> = {
       const selector = querySelect({
         element: canvasElement,
         options: {
-          label: /Destination/,
+          label: /Okta documentation/,
         },
       });
 
@@ -274,7 +274,7 @@ export const DefaultValue: StoryObj<typeof Select> = {
       const listItemElement = list.selectChild({
         name: "listItem",
         options: {
-          label: "Mars",
+          label: "Roles and permissions",
         },
       }).element;
 
