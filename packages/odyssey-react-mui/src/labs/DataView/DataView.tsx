@@ -35,7 +35,7 @@ import { DataFilters } from "../DataFilters";
 import { EmptyState } from "../../EmptyState";
 import { fetchData } from "./fetchData";
 import { LayoutSwitcher } from "./LayoutSwitcher";
-import { MenuButton } from "../..";
+import { MenuButton } from "../../MenuButton";
 import { MoreIcon } from "../../icons.generated";
 import { TableSettings } from "./TableSettings";
 import { Pagination, usePagination } from "../../Pagination";
@@ -43,6 +43,7 @@ import { TableLayoutContent } from "./TableLayoutContent";
 import { CardLayoutContent } from "./CardLayoutContent";
 import { useFilterConversion } from "./useFilterConversion";
 import { useRowReordering } from "../../DataTable/useRowReordering";
+import { Typography } from "../../Typography";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
@@ -67,6 +68,24 @@ const BulkActionsContainer = styled("div")(() => ({
 const AdditionalActionsContainer = styled("div")(() => ({
   display: "flex",
   justifyContent: "flex-end",
+
+  ["&:empty"]: {
+    display: "none",
+  },
+}));
+
+const AdditionalActionsInner = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
+  display: "flex",
+  alignItems: "center",
+  gap: odysseyDesignTokens.Spacing2,
+}));
+
+const MetaTextContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
+  marginInlineEnd: odysseyDesignTokens.Spacing2,
 }));
 
 const DataView = ({
@@ -92,6 +111,7 @@ const DataView = ({
   isNoResults: isNoResultsProp,
   isPaginationMoreDisabled,
   isRowReorderingDisabled,
+  metaText,
   noResultsPlaceholder,
   onChangeRowSelection,
   onReorderRows,
@@ -264,7 +284,13 @@ const DataView = ({
 
   const additionalActions = useMemo(
     () => (
-      <>
+      <AdditionalActionsInner odysseyDesignTokens={odysseyDesignTokens}>
+        {metaText && (
+          <MetaTextContainer odysseyDesignTokens={odysseyDesignTokens}>
+            <Typography color="textSecondary">{metaText}</Typography>
+          </MetaTextContainer>
+        )}
+
         {currentLayout === "table" && tableLayoutOptions && (
           <TableSettings
             setTableState={setTableState}
@@ -293,9 +319,10 @@ const DataView = ({
             {additionalActionMenuItems}
           </MenuButton>
         )}
-      </>
+      </AdditionalActionsInner>
     ),
     [
+      metaText,
       currentLayout,
       tableLayoutOptions,
       tableState,
@@ -356,11 +383,14 @@ const DataView = ({
         </BulkActionsContainer>
       )}
 
-      {!shouldShowFilters && !bulkActionMenuItems && !hasRowSelection && (
-        <AdditionalActionsContainer>
-          {additionalActions}
-        </AdditionalActionsContainer>
-      )}
+      {!shouldShowFilters &&
+        !bulkActionMenuItems &&
+        !hasRowSelection &&
+        additionalActions && (
+          <AdditionalActionsContainer>
+            {additionalActions}
+          </AdditionalActionsContainer>
+        )}
 
       {currentLayout === "table" && tableLayoutOptions && (
         <TableLayoutContent

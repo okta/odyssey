@@ -118,6 +118,9 @@ const storybookMeta: Meta<DataViewMetaProps> = {
     currentPage: {
       control: "number",
     },
+    metaText: {
+      control: "text",
+    },
     paginationType: {
       control: "select",
       options: paginationTypeValues,
@@ -413,6 +416,7 @@ const BaseStory: StoryObj<DataViewMetaProps> = {
         hasSearch={args.hasSearch}
         hasSearchSubmitButton={args.hasSearchSubmitButton}
         isPaginationMoreDisabled={args.isPaginationMoreDisabled}
+        metaText={args.metaText}
         searchDelayTime={args.searchDelayTime}
         errorMessage={args.errorMessage}
         initialLayout={args.initialLayout}
@@ -502,6 +506,7 @@ export const Everything: StoryObj<DataViewMetaProps> = {
     hasRowSelection: true,
     hasAdditionalActionButton: true,
     hasAdditionalActionMenuItems: true,
+    metaText: "Last updated 12 hours ago",
   },
 };
 
