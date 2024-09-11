@@ -85,9 +85,32 @@ const storybookMeta: Meta<TagProps> = {
         },
       },
     },
+    colorVariant: {
+      control: {
+        type: "select",
+      },
+      options: [
+        "default",
+        "info",
+        "accentOne",
+        "accentTwo",
+        "accentThree",
+        "accentFour",
+      ],
+      description: "The color of the tag",
+      table: {
+        type: {
+          summary: "string",
+        },
+        defaultValue: {
+          summary: "default",
+        },
+      },
+    },
   },
   args: {
     label: "Starship",
+    colorVariant: "default",
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
@@ -101,18 +124,56 @@ export const Default: StoryObj<TagProps> = {
   },
 };
 
+export const Info: StoryObj<TagProps> = {
+  args: {
+    label: "Starship",
+    colorVariant: "info",
+  },
+};
+
+export const AccentOne: StoryObj<TagProps> = {
+  args: {
+    label: "Starship",
+    colorVariant: "accentOne",
+  },
+};
+
+export const AccentTwo: StoryObj<TagProps> = {
+  args: {
+    label: "Starship",
+    colorVariant: "accentTwo",
+  },
+};
+
+export const AccentThree: StoryObj<TagProps> = {
+  args: {
+    label: "Starship",
+    colorVariant: "accentThree",
+  },
+};
+
+export const AccentFour: StoryObj<TagProps> = {
+  args: {
+    label: "Starship",
+    colorVariant: "accentFour",
+  },
+};
+
 export const List: StoryObj<TagProps> = {
   render: function C(args) {
     return (
       <TagList>
         <Tag label={args.label} />
-        <Tag label="Another tag" />
-        <Tag label="A third tag" />
+        <Tag label="Info tag" colorVariant="info" />
+        <Tag label="AccentOne tag" colorVariant="accentOne" />
+        <Tag label="AccentTwo tag" colorVariant="accentTwo" />
+        <Tag label="AccentThree tag" colorVariant="accentThree" />
+        <Tag label="AccentFour tag" colorVariant="accentFour" />
       </TagList>
     );
   },
   args: {
-    label: "Starship",
+    label: "Default tag",
   },
 };
 
