@@ -197,9 +197,9 @@ const DataView = ({
   useEffect(() => {
     setPagination((prev) => ({
       pageIndex: 1,
-      pageSize: prev.pageSize,
+      pageSize: paginationType == "loadMore" ? resultsPerPage : prev.pageSize,
     }));
-  }, [filters, search]);
+  }, [filters, paginationType, resultsPerPage, search]);
 
   // Retrieve the data
   useEffect(() => {

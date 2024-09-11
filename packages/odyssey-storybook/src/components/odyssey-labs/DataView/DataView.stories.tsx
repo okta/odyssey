@@ -970,3 +970,13 @@ export const ColumnGrowDemo: StoryObj<DataViewMetaProps> = {
     );
   },
 };
+
+export const LoadMore: StoryObj<DataViewMetaProps> = {
+  ...BaseStory,
+  args: {
+    availableLayouts: ["table"],
+    hasPagination: true,
+    paginationType: "loadMore",
+    hasFilters: true,
+  },
+};
