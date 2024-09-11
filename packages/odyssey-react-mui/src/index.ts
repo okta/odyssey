@@ -77,6 +77,11 @@ export * from "./Drawer";
 export * from "./EmptyState";
 export * from "./Fieldset";
 export * from "./FieldComponentProps";
+export {
+  FileUploader,
+  fileUploadTypes,
+  fileUploadVariants,
+} from "./FileUploader";
 export * from "./Form";
 export * from "./HintLink";
 export * from "./IconWithTooltip";
@@ -104,7 +109,7 @@ export * from "./TextField";
 export * from "./theme";
 export * from "./Toast";
 export * from "./ToastStack";
-export * from "./labs/Switch";
+export * from "./Switch";
 export * from "./Tooltip";
 export * from "./Typography";
 export * from "./useUniqueId";
