@@ -34,18 +34,18 @@ export type InnerQuerySelectorProps<
    * Testing Library method used to query elements.
    */
   queryMethod?: LocalQueryMethod;
-} & (LocalTestSelector extends {
-  selector: {
-    role: infer Role;
-  };
-}
-  ? Role extends AriaRole[]
-    ? {
-        /**
-         * Role is used when you have an optional `role`; otherwise, it'd baked into the metadata.
-         */
-        role: Role[number];
-      }
+} & (LocalTestSelector extends ElementSelector
+  ? LocalTestSelector["elementSelector"] extends {
+      role: infer Role;
+    }
+    ? Role extends AriaRole[]
+      ? {
+          /**
+           * Role is used when you have an optional `role`; otherwise, it'd baked into the metadata.
+           */
+          role: Role[number];
+        }
+      : object
     : object
   : object) &
   (LocalTestSelector extends ElementSelector

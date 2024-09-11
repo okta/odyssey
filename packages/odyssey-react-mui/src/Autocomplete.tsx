@@ -45,10 +45,6 @@ import {
 } from "./inputUtils";
 import { TestSelector } from "./test-selectors";
 
-// This is required to get around a react-types issue for "AutoSizer is not a valid JSX element."
-// @see https://github.com/bvaughn/react-virtualized/issues/1739#issuecomment-1291444246
-const AutoSizer = _AutoSizer as unknown as FC<AutoSizerProps>;
-
 export const AutocompleteTestSelector = {
   accessibleText: {
     errorMessage: "errorMessage",
