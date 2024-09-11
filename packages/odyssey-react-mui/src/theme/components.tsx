@@ -995,6 +995,8 @@ export const components = ({
       styleOverrides: {
         root: ({ ownerState }) => ({
           height: "auto",
+          paddingBlock: `calc(${odysseyTokens.Spacing2} - ${odysseyTokens.BorderWidthMain})`,
+          paddingInline: odysseyTokens.Spacing3,
           fontSize: odysseyTokens.TypographySizeBody,
           lineHeight: odysseyTokens.TypographyLineHeightUi,
 

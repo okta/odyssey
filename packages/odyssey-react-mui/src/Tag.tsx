@@ -129,11 +129,6 @@ const StyledTag = styled(MuiChip, {
   const colors = getChipColors(colorVariant, odysseyDesignTokens);
 
   return {
-    height: "auto",
-    paddingBlock: `calc(${odysseyDesignTokens.Spacing2} - ${odysseyDesignTokens.BorderWidthMain})`,
-    paddingInline: odysseyDesignTokens.Spacing3,
-    fontSize: odysseyDesignTokens.TypographySizeBody,
-    lineHeight: odysseyDesignTokens.TypographyLineHeightUi,
     borderRadius: odysseyDesignTokens.BorderRadiusRound,
     borderWidth: odysseyDesignTokens.BorderWidthMain,
     borderStyle: odysseyDesignTokens.BorderStyleMain,
@@ -185,6 +180,7 @@ const StyledTag = styled(MuiChip, {
 });
 
 const Tag = ({
+  colorVariant = "default",
   icon,
   isDisabled,
   label,
@@ -192,7 +188,6 @@ const Tag = ({
   onRemove,
   testId,
   translate,
-  colorVariant = "default",
 }: TagProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { chipElementType } = useContext(TagListContext);
