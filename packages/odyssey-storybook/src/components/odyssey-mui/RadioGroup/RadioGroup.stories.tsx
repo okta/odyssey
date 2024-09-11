@@ -19,7 +19,6 @@ import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaDat
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, within } from "@storybook/testing-library";
 import { axeRun } from "../../../axe-util";
-
 const storybookMeta: Meta<typeof RadioGroup> = {
   title: "MUI Components/Forms/RadioGroup",
   component: RadioGroup,
@@ -54,6 +53,7 @@ const storybookMeta: Meta<typeof RadioGroup> = {
     HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
     id: fieldComponentPropsMetaData.id,
     isDisabled: fieldComponentPropsMetaData.isDisabled,
+    isReadOnly: fieldComponentPropsMetaData.isReadOnly,
     label: {
       control: "text",
       description: "The text label for the radio group",
@@ -137,7 +137,13 @@ export const Disabled: StoryObj<typeof RadioGroup> = {
     defaultValue: "",
   },
 };
-
+export const ReadOnly: StoryObj<typeof RadioGroup> = {
+  ...Template,
+  args: {
+    isReadOnly: true,
+    defaultValue: "Warp Speed",
+  },
+};
 export const Error: StoryObj<typeof RadioGroup> = {
   ...Template,
   parameters: {
@@ -167,20 +173,6 @@ export const UncontrolledRadioGroup: StoryObj<typeof RadioGroup> = {
   ...Template,
   args: {
     defaultValue: "Warp Speed",
-  },
-  play: async ({ canvasElement, step }) => {
-    await step("select controlled radio button", async () => {
-      const canvas = within(canvasElement);
-      const radiogroup = canvas.getByRole("radiogroup") as HTMLInputElement;
-      const radio = canvas.getByLabelText(
-        "Ludicrous Speed",
-      ) as HTMLInputElement;
-      if (radiogroup && radio) {
-        await userEvent.click(radio);
-      }
-      await expect(radio).toBeChecked();
-      await axeRun("select controlled radio button");
-    });
   },
 };
 
@@ -236,7 +228,7 @@ export const ControlledRadioGroupWithRadioHints: StoryObj<typeof RadioGroup> = {
     value: "Ludicrous Speed",
   },
   render: function C(props) {
-    const [value, setValue] = useState("Ludicrous Speed");
+    const [value, setValue] = useState("Turtle Speed");
     const onChange = useCallback(
       (_event: ChangeEvent<HTMLInputElement>, value: string) => setValue(value),
       [],

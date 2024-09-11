@@ -10,10 +10,22 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export { DataStack, type DataStackProps } from "./DataStack";
-export { DataTable, type DataTableProps } from "./DataTable";
-export { DataView, type DataViewProps } from "./DataView";
+import { memo } from "react";
+import { CardLayoutProps } from "./componentTypes";
+import { DataRow } from "./dataTypes";
 
-export * from "./componentTypes";
-export * from "./constants";
-export * from "./dataTypes";
+const DetailPanel = ({
+  row,
+  renderDetailPanel,
+}: {
+  row: DataRow;
+  renderDetailPanel: CardLayoutProps["renderDetailPanel"];
+}) => {
+  if (!renderDetailPanel) return null;
+  return renderDetailPanel({ row });
+};
+
+const MemoizedDetailPanel = memo(DetailPanel);
+MemoizedDetailPanel.displayName = "DetailPanel";
+
+export { MemoizedDetailPanel as DetailPanel };

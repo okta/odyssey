@@ -133,10 +133,10 @@
     },
     "yellow": {
       "50": {
-        "value": "#fcf6ac"
+        "value": "#fdfad9"
       },
       "100": {
-        "value": "#fce101"
+        "value": "#ffe01a"
       },
       "200": {
         "value": "#f9c503"

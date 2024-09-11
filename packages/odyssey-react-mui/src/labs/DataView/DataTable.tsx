@@ -13,11 +13,13 @@
 import { memo, useMemo } from "react";
 
 import { DataView } from "./DataView";
-import { TableProps, UniversalProps } from "./componentTypes";
+import { TableLayoutProps, UniversalProps } from "./componentTypes";
 
-export type DataTableProps = UniversalProps & TableProps;
+export type DataTableProps = UniversalProps & TableLayoutProps;
 
 const DataTable = ({
+  additionalActionButton,
+  additionalActionMenuItems,
   bulkActionMenuItems,
   columns,
   currentPage,
@@ -53,7 +55,7 @@ const DataTable = ({
   searchDelayTime,
   totalRows,
 }: DataTableProps) => {
-  const tableOptions = useMemo(
+  const tableLayoutOptions = useMemo(
     () => ({
       columns,
       hasChangeableDensity,
@@ -80,6 +82,8 @@ const DataTable = ({
 
   return (
     <DataView
+      additionalActionButton={additionalActionButton}
+      additionalActionMenuItems={additionalActionMenuItems}
       availableLayouts={["table"]}
       bulkActionMenuItems={bulkActionMenuItems}
       currentPage={currentPage}
@@ -105,7 +109,7 @@ const DataTable = ({
       paginationType={paginationType}
       resultsPerPage={resultsPerPage}
       searchDelayTime={searchDelayTime}
-      tableOptions={tableOptions}
+      tableLayoutOptions={tableLayoutOptions}
       totalRows={totalRows}
     />
   );

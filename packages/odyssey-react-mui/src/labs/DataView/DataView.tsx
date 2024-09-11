@@ -35,10 +35,12 @@ import { DataFilters } from "../DataFilters";
 import { EmptyState } from "../../EmptyState";
 import { fetchData } from "./fetchData";
 import { LayoutSwitcher } from "./LayoutSwitcher";
+import { MenuButton } from "../..";
+import { MoreIcon } from "../../icons.generated";
 import { TableSettings } from "./TableSettings";
 import { Pagination, usePagination } from "../../Pagination";
-import { TableContent } from "./TableContent";
-import { StackContent } from "./StackContent";
+import { TableLayoutContent } from "./TableLayoutContent";
+import { CardLayoutContent } from "./CardLayoutContent";
 import { useFilterConversion } from "./useFilterConversion";
 import { useRowReordering } from "../../DataTable/useRowReordering";
 import {
@@ -68,6 +70,8 @@ const AdditionalActionsContainer = styled("div")(() => ({
 }));
 
 const DataView = ({
+  additionalActionButton,
+  additionalActionMenuItems,
   availableLayouts = allAvailableLayouts,
   bulkActionMenuItems,
   currentPage = 1,
@@ -94,8 +98,8 @@ const DataView = ({
   paginationType = "paged",
   resultsPerPage = 20,
   searchDelayTime,
-  stackOptions,
-  tableOptions,
+  cardLayoutOptions,
+  tableLayoutOptions,
   totalRows,
   maxPages,
   maxResultsPerPage,
@@ -139,14 +143,18 @@ const DataView = ({
   const [tableState, setTableState] = useState<TableState>({
     columnSorting: [],
     columnVisibility: {},
-    rowDensity: tableOptions?.initialDensity ?? densityValues[0],
+    rowDensity: tableLayoutOptions?.initialDensity ?? densityValues[0],
   });
 
-  const shouldShowFilters = hasSearch || hasFilters;
+  const shouldShowFilters =
+    hasSearch ||
+    hasFilters ||
+    additionalActionButton ||
+    additionalActionMenuItems;
 
   const availableFilters = useFilterConversion({
     filters: filters,
-    columns: tableOptions?.columns,
+    columns: tableLayoutOptions?.columns,
   });
 
   useEffect(() => {
@@ -257,10 +265,10 @@ const DataView = ({
   const additionalActions = useMemo(
     () => (
       <>
-        {currentLayout === "table" && tableOptions && (
+        {currentLayout === "table" && tableLayoutOptions && (
           <TableSettings
             setTableState={setTableState}
-            tableOptions={tableOptions}
+            tableLayoutOptions={tableLayoutOptions}
             tableState={tableState}
           />
         )}
@@ -272,9 +280,30 @@ const DataView = ({
             setCurrentLayout={setCurrentLayout}
           />
         )}
+
+        {additionalActionButton}
+
+        {additionalActionMenuItems && (
+          <MenuButton
+            endIcon={<MoreIcon />}
+            ariaLabel={t("table.moreactions.arialabel")}
+            buttonVariant="secondary"
+            menuAlignment="right"
+          >
+            {additionalActionMenuItems}
+          </MenuButton>
+        )}
       </>
     ),
-    [currentLayout, tableOptions, tableState, availableLayouts],
+    [
+      currentLayout,
+      tableLayoutOptions,
+      tableState,
+      availableLayouts,
+      additionalActionButton,
+      additionalActionMenuItems,
+      t,
+    ],
   );
 
   const { lastRow: lastRowOnPage } = usePagination({
@@ -333,9 +362,9 @@ const DataView = ({
         </AdditionalActionsContainer>
       )}
 
-      {currentLayout === "table" && tableOptions && (
-        <TableContent
-          columns={tableOptions.columns}
+      {currentLayout === "table" && tableLayoutOptions && (
+        <TableLayoutContent
+          columns={tableLayoutOptions.columns}
           data={data}
           draggingRow={draggingRow}
           emptyState={emptyState}
@@ -352,14 +381,14 @@ const DataView = ({
           rowSelection={rowSelection}
           setRowSelection={setRowSelection}
           setTableState={setTableState}
-          tableOptions={tableOptions}
+          tableLayoutOptions={tableLayoutOptions}
           tableState={tableState}
           totalRows={totalRows}
         />
       )}
       {(currentLayout === "list" || currentLayout === "grid") &&
-        stackOptions && (
-          <StackContent
+        cardLayoutOptions && (
+          <CardLayoutContent
             currentLayout={currentLayout}
             data={data}
             draggingRow={draggingRow}
@@ -376,7 +405,7 @@ const DataView = ({
             rowReorderingUtilities={rowReorderingUtilities}
             rowSelection={rowSelection}
             setRowSelection={setRowSelection}
-            stackOptions={stackOptions}
+            cardLayoutOptions={cardLayoutOptions}
             totalRows={totalRows}
           />
         )}

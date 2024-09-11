@@ -19,22 +19,23 @@ import { densityValues } from "./constants";
 import { ListIcon, ShowIcon } from "../../icons.generated";
 import { MenuButton } from "../../MenuButton";
 import { MenuItem } from "../../MenuItem";
-import { TableProps, TableState } from "./componentTypes";
+import { TableLayoutProps, TableState } from "./componentTypes";
 
 export type TableSettingsProps = {
   setTableState: Dispatch<SetStateAction<TableState>>;
-  tableOptions: TableProps;
+  tableLayoutOptions: TableLayoutProps;
   tableState: TableState;
 };
 
 const TableSettings = ({
   setTableState,
-  tableOptions,
+  tableLayoutOptions,
   tableState,
 }: TableSettingsProps) => {
   const { t } = useTranslation();
 
-  const { hasChangeableDensity, hasColumnVisibility, columns } = tableOptions;
+  const { hasChangeableDensity, hasColumnVisibility, columns } =
+    tableLayoutOptions;
   const { rowDensity, columnVisibility } = tableState;
 
   const changeRowDensity = useCallback<(value: MRT_DensityState) => void>(

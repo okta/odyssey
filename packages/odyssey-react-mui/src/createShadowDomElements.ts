@@ -10,22 +10,41 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+export const createShadowDomElements = (containerElement: HTMLElement) => {
+  const shadowRoot = containerElement.attachShadow({ mode: "open" });
+
+  // Container for Emotion `<style>` elements.
+  const emotionRootElement = document.createElement("div");
+  emotionRootElement.setAttribute("id", "style-root");
+  emotionRootElement.setAttribute("nonce", window.cspNonce);
+
+  // React app root component.
+  const shadowRootElement = document.createElement("div");
+  shadowRootElement.setAttribute("id", "shadow-root");
+
+  shadowRoot.appendChild(emotionRootElement);
+  shadowRoot.appendChild(shadowRootElement);
+
+  return { emotionRootElement, shadowRootElement };
+};
+
+/** @deprecated Use `createShadowDomElements` instead. */
 export const createShadowRootElement = (
   containerElement: HTMLElement,
 ): [HTMLStyleElement, HTMLDivElement] => {
   const shadowRoot = containerElement.attachShadow({ mode: "open" });
 
   // the element that styles will be cached into
-  const emotionRoot = document.createElement("style");
-  emotionRoot.setAttribute("id", "style-root");
-  emotionRoot.setAttribute("nonce", window.cspNonce);
+  const emotionRootElement = document.createElement("style");
+  emotionRootElement.setAttribute("id", "style-root");
+  emotionRootElement.setAttribute("nonce", window.cspNonce);
 
   // the element that emotion renders html into
   const shadowRootElement = document.createElement("div");
   shadowRootElement.setAttribute("id", "shadow-root");
 
-  shadowRoot.appendChild(emotionRoot);
+  shadowRoot.appendChild(emotionRootElement);
   shadowRoot.appendChild(shadowRootElement);
 
-  return [emotionRoot, shadowRootElement];
+  return [emotionRootElement, shadowRootElement];
 };

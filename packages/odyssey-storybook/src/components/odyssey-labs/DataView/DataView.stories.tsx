@@ -20,10 +20,8 @@ import {
   DataRowSelectionState,
   densityValues,
   availableLayouts,
-  TableProps,
-  StackProps,
-  DataTable,
-  DataStack,
+  TableLayoutProps,
+  CardLayoutProps,
   UpdateFiltersOrValues,
   DataColumns,
   DataTableRowSelectionState,
@@ -54,18 +52,20 @@ import {
 } from "@okta/odyssey-react-mui";
 
 type DataViewMetaProps = DataViewProps &
-  TableProps &
-  StackProps & {
-    tableRowActionMenuItems: TableProps["rowActionMenuItems"];
-    stackRowActionMenuItems: StackProps["rowActionMenuItems"];
+  TableLayoutProps &
+  CardLayoutProps & {
+    tableRowActionMenuItems: TableLayoutProps["rowActionMenuItems"];
+    cardRowActionMenuItems: CardLayoutProps["rowActionMenuItems"];
     hasCustomEmptyPlaceholder: boolean;
     hasCustomNoResultsPlaceholder: boolean;
     hasActionMenuItems: boolean;
     hasActionButtons: boolean;
+    hasAdditionalActionButton: boolean;
+    hasAdditionalActionMenuItems: boolean;
   };
 
 const storybookMeta: Meta<DataViewMetaProps> = {
-  title: "Labs Components/Data components",
+  title: "Labs Components/DataView",
   component: DataView,
   argTypes: {
     getData: {
@@ -162,52 +162,52 @@ const storybookMeta: Meta<DataViewMetaProps> = {
     },
     columns: {
       control: null,
-      name: "tableOptions.columns",
+      name: "tableLayoutOptions.columns",
     },
     initialDensity: {
       control: "select",
       options: densityValues,
-      name: "tableOptions.columns",
+      name: "tableLayoutOptions.columns",
     },
     hasChangeableDensity: {
       control: "boolean",
-      name: "tableOptions.hasChangeableDensity",
+      name: "tableLayoutOptions.hasChangeableDensity",
     },
     hasColumnResizing: {
       control: "boolean",
-      name: "tableOptions.hasColumnResizing",
+      name: "tableLayoutOptions.hasColumnResizing",
     },
     hasColumnVisibility: {
       control: "boolean",
-      name: "tableOptions.hasColumnVisibility",
+      name: "tableLayoutOptions.hasColumnVisibility",
     },
     renderDetailPanel: {
       control: null,
-      name: "tableOptions.renderDetailPanel",
+      name: "tableLayoutOptions.renderDetailPanel",
     },
     rowActionButtons: {
       control: null,
-      name: "tableOptions.rowActionButtons",
+      name: "tableLayoutOptions.rowActionButtons",
     },
     tableRowActionMenuItems: {
       control: null,
-      name: "tableOptions.rowActionMenuItems",
+      name: "tableLayoutOptions.rowActionMenuItems",
     },
     hasSorting: {
       control: "boolean",
-      name: "tableOptions.hasSorting",
+      name: "tableLayoutOptions.hasSorting",
     },
-    cardProps: {
+    itemProps: {
       control: null,
-      name: "stackOptions.cardProps",
+      name: "cardLayoutOptions.itemProps",
     },
     maxGridColumns: {
       control: "number",
-      name: "stackOptions.maxGridColumns",
+      name: "cardLayoutOptions.maxGridColumns",
     },
-    stackRowActionMenuItems: {
+    cardRowActionMenuItems: {
       control: null,
-      name: "stackOptions.rowActionMenuItems",
+      name: "cardLayoutOptions.rowActionMenuItems",
     },
     isLoading: {
       control: "boolean",
@@ -243,6 +243,14 @@ const storybookMeta: Meta<DataViewMetaProps> = {
     hasActionButtons: {
       control: "boolean",
       name: "[STORY ONLY] Has action buttons in table view?",
+    },
+    hasAdditionalActionButton: {
+      control: "boolean",
+      name: "[STORY ONLY] Has additional action button?",
+    },
+    hasAdditionalActionMenuItems: {
+      control: "boolean",
+      name: "[STORY ONLY] Has additional action menu items?",
     },
   },
   args: {
@@ -291,6 +299,15 @@ const useDataCallbacks = (
 
   return { getData, onReorderRows, onChangeRowSelection };
 };
+
+const additionalActionButton = <Button variant="primary" label="Add widget" />;
+
+const additionalActionMenuItems = (
+  <>
+    <MenuItem onClick={() => console.log("Action 1")}>Action 1</MenuItem>
+    <MenuItem onClick={() => console.log("Action 2")}>Action 2</MenuItem>
+  </>
+);
 
 // Common action menu items
 const actionMenuItems = (selectedRows: DataRowSelectionState) => (
@@ -341,7 +358,7 @@ const customNoResultsPlaceholder = (
   />
 );
 
-const cardProps = (row: DataRow) => ({
+const itemProps = (row: DataRow) => ({
   overline: `${row.city}, ${row.state}`,
   title: row.name,
   description: `${row.name} is ${row.age} years old.`,
@@ -370,6 +387,14 @@ const BaseStory: StoryObj<DataViewMetaProps> = {
 
     return (
       <DataView
+        additionalActionButton={
+          args.hasAdditionalActionButton ? additionalActionButton : undefined
+        }
+        additionalActionMenuItems={
+          args.hasAdditionalActionMenuItems
+            ? additionalActionMenuItems
+            : undefined
+        }
         getData={getData}
         onReorderRows={onReorderRows}
         onChangeRowSelection={onChangeRowSelection}
@@ -403,7 +428,7 @@ const BaseStory: StoryObj<DataViewMetaProps> = {
             ? customNoResultsPlaceholder
             : undefined
         }
-        tableOptions={{
+        tableLayoutOptions={{
           columns: personColumns,
           hasSorting: args.hasSorting,
           rowActionMenuItems: args.hasActionMenuItems
@@ -416,8 +441,8 @@ const BaseStory: StoryObj<DataViewMetaProps> = {
           hasChangeableDensity: args.hasChangeableDensity,
           initialDensity: args.initialDensity,
         }}
-        stackOptions={{
-          cardProps: cardProps,
+        cardLayoutOptions={{
+          itemProps: itemProps,
           rowActionMenuItems: args.hasActionMenuItems
             ? actionMenuItems
             : undefined,
@@ -440,21 +465,21 @@ export const TableOnly: StoryObj<DataViewMetaProps> = {
   },
 };
 
-export const StackWithMultipleLayouts: StoryObj<DataViewMetaProps> = {
+export const ListAndGrid: StoryObj<DataViewMetaProps> = {
   ...BaseStory,
   args: {
     availableLayouts: ["list", "grid"],
   },
 };
 
-export const StackListOnly: StoryObj<DataViewMetaProps> = {
+export const ListOnly: StoryObj<DataViewMetaProps> = {
   ...BaseStory,
   args: {
     availableLayouts: ["list"],
   },
 };
 
-export const StackGridOnly: StoryObj<DataViewMetaProps> = {
+export const GridOnly: StoryObj<DataViewMetaProps> = {
   ...BaseStory,
   args: {
     availableLayouts: ["grid"],
@@ -475,112 +500,8 @@ export const Everything: StoryObj<DataViewMetaProps> = {
     hasActionButtons: true,
     hasActionMenuItems: true,
     hasRowSelection: true,
-  },
-};
-
-export const DataTableComponent: StoryObj<DataViewMetaProps> = {
-  render: function Base(args) {
-    const [data, setData] = useState<Person[]>(personData);
-    const { getData, onReorderRows, onChangeRowSelection } = useDataCallbacks(
-      data,
-      setData,
-    );
-
-    return (
-      <DataTable
-        getData={getData}
-        onReorderRows={onReorderRows}
-        onChangeRowSelection={onChangeRowSelection}
-        bulkActionMenuItems={
-          args.hasActionMenuItems ? actionMenuItems : undefined
-        }
-        hasRowReordering={args.hasRowReordering}
-        isRowReorderingDisabled={args.isRowReorderingDisabled}
-        hasRowSelection={args.hasRowSelection}
-        hasPagination={args.hasPagination}
-        currentPage={args.currentPage}
-        paginationType={args.paginationType}
-        resultsPerPage={args.resultsPerPage}
-        totalRows={args.totalRows}
-        hasFilters={args.hasFilters}
-        hasSearch={args.hasSearch}
-        hasSearchSubmitButton={args.hasSearchSubmitButton}
-        searchDelayTime={args.searchDelayTime}
-        errorMessage={args.errorMessage}
-        isLoading={args.isLoading}
-        isEmpty={args.isEmpty}
-        isNoResults={args.isNoResults}
-        emptyPlaceholder={
-          args.hasCustomEmptyPlaceholder ? customEmptyPlaceholder : undefined
-        }
-        noResultsPlaceholder={
-          args.hasCustomNoResultsPlaceholder
-            ? customNoResultsPlaceholder
-            : undefined
-        }
-        columns={personColumns}
-        hasSorting={args.hasSorting}
-        rowActionMenuItems={
-          args.hasActionMenuItems ? actionMenuItems : undefined
-        }
-        rowActionButtons={args.hasActionButtons ? actionButtons : undefined}
-        hasColumnVisibility={args.hasColumnVisibility}
-        hasColumnResizing={args.hasColumnResizing}
-        hasChangeableDensity={args.hasChangeableDensity}
-        initialDensity={args.initialDensity}
-      />
-    );
-  },
-};
-
-export const DataStackComponent: StoryObj<DataViewMetaProps> = {
-  render: function Base(args) {
-    const [data, setData] = useState<Person[]>(personData);
-    const { getData, onReorderRows, onChangeRowSelection } = useDataCallbacks(
-      data,
-      setData,
-    );
-
-    return (
-      <DataStack
-        availableLayouts={["list", "grid"]}
-        getData={getData}
-        onReorderRows={onReorderRows}
-        onChangeRowSelection={onChangeRowSelection}
-        bulkActionMenuItems={
-          args.hasActionMenuItems ? actionMenuItems : undefined
-        }
-        hasRowReordering={args.hasRowReordering}
-        isRowReorderingDisabled={args.isRowReorderingDisabled}
-        hasRowSelection={args.hasRowSelection}
-        hasPagination={args.hasPagination}
-        currentPage={args.currentPage}
-        paginationType={args.paginationType}
-        resultsPerPage={args.resultsPerPage}
-        totalRows={args.totalRows}
-        hasFilters={args.hasFilters}
-        hasSearch={args.hasSearch}
-        hasSearchSubmitButton={args.hasSearchSubmitButton}
-        searchDelayTime={args.searchDelayTime}
-        errorMessage={args.errorMessage}
-        isLoading={args.isLoading}
-        isEmpty={args.isEmpty}
-        isNoResults={args.isNoResults}
-        emptyPlaceholder={
-          args.hasCustomEmptyPlaceholder ? customEmptyPlaceholder : undefined
-        }
-        noResultsPlaceholder={
-          args.hasCustomNoResultsPlaceholder
-            ? customNoResultsPlaceholder
-            : undefined
-        }
-        cardProps={cardProps}
-        rowActionMenuItems={
-          args.hasActionMenuItems ? actionMenuItems : undefined
-        }
-        maxGridColumns={args.maxGridColumns}
-      />
-    );
+    hasAdditionalActionButton: true,
+    hasAdditionalActionMenuItems: true,
   },
 };
 
@@ -606,12 +527,12 @@ export const ExpandableRowsAndCards: StoryObj<DataViewMetaProps> = {
         hasRowSelection={args.hasRowSelection}
         onReorderRows={onReorderRows}
         onChangeRowSelection={onChangeRowSelection}
-        tableOptions={{
+        tableLayoutOptions={{
           columns: personColumns,
           renderDetailPanel: renderAdditionalContent,
         }}
-        stackOptions={{
-          cardProps: cardProps,
+        cardLayoutOptions={{
+          itemProps: itemProps,
           renderDetailPanel: renderAdditionalContent,
         }}
       />
@@ -649,7 +570,15 @@ export const Truncation: StoryObj<DataViewMetaProps> = {
       return data;
     }, []);
 
-    return <DataTable columns={columns} getData={getData} hasColumnResizing />;
+    return (
+      <DataView
+        tableLayoutOptions={{
+          columns: columns,
+          hasColumnResizing: true,
+        }}
+        getData={getData}
+      />
+    );
   },
 };
 
@@ -665,7 +594,13 @@ export const Empty: StoryObj<DataViewMetaProps> = {
     hasSorting: true,
     hasRowReordering: false,
   },
-  render: function C(props) {
+  render: function C({
+    hasChangeableDensity,
+    hasColumnResizing,
+    hasColumnVisibility,
+    hasSorting,
+    ...props
+  }) {
     const [data, setData] = useState<Person[]>(personData);
     const { onReorderRows, onChangeRowSelection } = useDataCallbacks(
       data,
@@ -689,9 +624,15 @@ export const Empty: StoryObj<DataViewMetaProps> = {
     );
 
     return (
-      <DataTable
+      <DataView
         {...props}
-        columns={personColumns}
+        tableLayoutOptions={{
+          columns: personColumns,
+          hasChangeableDensity: hasChangeableDensity,
+          hasColumnResizing: hasColumnResizing,
+          hasColumnVisibility: hasColumnVisibility,
+          hasSorting: hasSorting,
+        }}
         getData={() => []}
         onReorderRows={onReorderRows}
         onChangeRowSelection={onChangeRowSelection}
@@ -713,7 +654,13 @@ export const CustomFilters: StoryObj<DataViewMetaProps> = {
     hasSorting: true,
     hasRowReordering: false,
   },
-  render: function C(props) {
+  render: function C({
+    hasChangeableDensity,
+    hasColumnResizing,
+    hasColumnVisibility,
+    hasSorting,
+    ...props
+  }) {
     const [data, setData] = useState<Person[]>(personData);
     const { getData, onReorderRows } = useDataCallbacks(data, setData);
 
@@ -791,9 +738,15 @@ export const CustomFilters: StoryObj<DataViewMetaProps> = {
     );
 
     return (
-      <DataTable
+      <DataView
         {...props}
-        columns={personColumns}
+        tableLayoutOptions={{
+          columns: personColumns,
+          hasChangeableDensity: hasChangeableDensity,
+          hasColumnResizing: hasColumnResizing,
+          hasColumnVisibility: hasColumnVisibility,
+          hasSorting: hasSorting,
+        }}
         filters={filters}
         getData={getData}
         onReorderRows={onReorderRows}
@@ -814,7 +767,13 @@ export const FilterWithCustomRender: StoryObj<DataViewMetaProps> = {
     hasSorting: true,
     hasRowReordering: false,
   },
-  render: function C(props) {
+  render: function C({
+    hasChangeableDensity,
+    hasColumnResizing,
+    hasColumnVisibility,
+    hasSorting,
+    ...props
+  }) {
     const [data, setData] = useState<Person[]>(personData);
     const { getData, onReorderRows, onChangeRowSelection } = useDataCallbacks(
       data,
@@ -862,9 +821,15 @@ export const FilterWithCustomRender: StoryObj<DataViewMetaProps> = {
     }, []);
 
     return (
-      <DataTable
+      <DataView
         {...props}
-        columns={personColumns}
+        tableLayoutOptions={{
+          columns: personColumns,
+          hasChangeableDensity: hasChangeableDensity,
+          hasColumnResizing: hasColumnResizing,
+          hasColumnVisibility: hasColumnVisibility,
+          hasSorting: hasSorting,
+        }}
         filters={filters}
         getData={getData}
         onReorderRows={onReorderRows}
@@ -886,7 +851,13 @@ export const CustomFilterWithDefaultVariant: StoryObj<DataViewMetaProps> = {
     hasSorting: true,
     hasRowReordering: false,
   },
-  render: function C(props) {
+  render: function C({
+    hasChangeableDensity,
+    hasColumnResizing,
+    hasColumnVisibility,
+    hasSorting,
+    ...props
+  }) {
     const [data, setData] = useState<Person[]>(personData);
     const { getData } = useDataCallbacks(data, setData);
 
@@ -912,13 +883,27 @@ export const CustomFilterWithDefaultVariant: StoryObj<DataViewMetaProps> = {
     }, []);
 
     return (
-      <DataTable
+      <DataView
         {...props}
-        columns={personColumns}
+        tableLayoutOptions={{
+          columns: personColumns,
+          hasChangeableDensity: hasChangeableDensity,
+          hasColumnResizing: hasColumnResizing,
+          hasColumnVisibility: hasColumnVisibility,
+          hasSorting: hasSorting,
+        }}
         filters={filters}
         getData={getData}
       />
     );
+  },
+};
+
+export const AdditionalActions: StoryObj<DataViewMetaProps> = {
+  ...BaseStory,
+  args: {
+    hasAdditionalActionButton: true,
+    hasAdditionalActionMenuItems: true,
   },
 };
 
@@ -972,13 +957,15 @@ export const ColumnGrowDemo: StoryObj<DataViewMetaProps> = {
     );
 
     return (
-      <DataTable
+      <DataView
         hasSearch
-        hasColumnResizing
-        hasSorting
-        columns={columns}
+        tableLayoutOptions={{
+          hasColumnResizing: true,
+          hasSorting: true,
+          columns: columns,
+          rowActionMenuItems: actionMenuItems,
+        }}
         getData={getData}
-        rowActionMenuItems={actionMenuItems}
       />
     );
   },

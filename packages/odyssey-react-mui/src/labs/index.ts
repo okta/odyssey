@@ -14,10 +14,12 @@ export { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 export { LocalizationProvider } from "@mui/x-date-pickers";
 export type { LocalizationProviderProps } from "@mui/x-date-pickers";
 
+export * from "./AppTile";
+
 export * from "./DatePicker";
 export * from "./datePickerTheme";
 
-export * from "./DataComponents";
+export * from "./DataView";
 
 /** @deprecated Will be removed in a future Odyssey version in lieu of the one shipping with DataTable */
 export * from "./DataTablePagination";

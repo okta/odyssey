@@ -103,6 +103,14 @@ export type DataTableRenderDetailPanelType = {
 
 export type DataTableProps = {
   /**
+   * An optional action button above the table.
+   */
+  additionalActionButton?: ReactNode;
+  /**
+   * MenuItems that go in an optional action menu above the table.
+   */
+  additionalActionMenuItems?: ReactNode;
+  /**
    * Menu items to include in the bulk actions menu, which appears above the table if a row or rows are selected
    */
   bulkActionMenuItems?: (
@@ -314,6 +322,8 @@ const ScrollableTableContainer = styled("div", {
 );
 
 const DataTable = ({
+  additionalActionButton,
+  additionalActionMenuItems,
   bulkActionMenuItems,
   columns,
   currentPage = 1,
@@ -876,7 +886,9 @@ const DataTable = ({
         hasFilters ||
         hasChangeableDensity ||
         hasColumnVisibility ||
-        bulkActionMenuItems) && (
+        bulkActionMenuItems ||
+        additionalActionButton ||
+        additionalActionMenuItems) && (
         <Box sx={{ marginBottom: 5 }}>
           <DataFilters
             onChangeSearch={hasSearch ? setSearch : undefined}
@@ -898,6 +910,17 @@ const DataTable = ({
                   setColumnVisibility={setColumnVisibility}
                 />
                 {bulkActionMenuItems && bulkActionMenuButton}
+                {additionalActionButton}
+                {additionalActionMenuItems && (
+                  <MenuButton
+                    endIcon={<MoreIcon />}
+                    ariaLabel={t("table.moreactions.arialabel")}
+                    buttonVariant="secondary"
+                    menuAlignment="right"
+                  >
+                    {additionalActionMenuItems}
+                  </MenuButton>
+                )}
               </>
             }
           />
