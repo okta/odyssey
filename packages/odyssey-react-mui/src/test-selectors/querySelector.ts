@@ -11,188 +11,239 @@
  */
 
 import {
-  queries,
-  within,
-  type BoundFunctions,
-  type ByRoleOptions,
-  type GetByText,
-  GetByRole,
-} from "@testing-library/dom";
-
-import {
-  type FeatureTestSelector,
+  type AccessibleTextSelector,
+  type AriaRole,
+  type ElementChildSelector,
   type TestSelector,
-} from "./featureTestSelector";
-import { odysseyTestSelectors } from "./odysseyTestSelectors";
+  type ElementSelector,
+} from "./testSelector";
+import { getComputedAccessibleText } from "./getComputedAccessibleText";
+import {
+  getByRoleQuerySelector,
+  getByTextQuerySelector,
+  type QueryMethod,
+} from "./getByQuerySelector";
+import { getControlledElement } from "./linkedHtmlSelectors";
+import { ElementError } from "./sanityChecks";
 
-export const interpolateString = (
-  string: string,
-  values: Record<string, string | RegExp>,
-) => {
-  const interpolatedString = eval(`
-    ${Object.entries(values)
-      .map(
-        ([key, value]) =>
-          `const ${key} = ${
-            typeof value === "string" ? JSON.stringify(value) : value
-          };`,
-      )
-      .join("")}
+export type InnerQuerySelectorProps<
+  LocalTestSelector extends TestSelector,
+  LocalQueryMethod extends QueryMethod,
+> = {
+  /**
+   * Testing Library method used to query elements.
+   */
+  queryMethod?: LocalQueryMethod;
+} & (LocalTestSelector extends ElementSelector
+  ? LocalTestSelector["elementSelector"] extends {
+      role: infer Role;
+    }
+    ? Role extends AriaRole[]
+      ? {
+          /**
+           * Role is used when you have an optional `role`; otherwise, it'd baked into the metadata.
+           */
+          role: Role[number];
+        }
+      : object
+    : object
+  : object) &
+  (LocalTestSelector extends ElementSelector
+    ? {
+        /**
+         * Helps narrow down HTML selection to the correct element.
+         */
+        options: Record<
+          keyof LocalTestSelector["elementSelector"]["options"],
+          string | RegExp
+        >;
+      }
+    : object);
 
-    \`${string}\`
-  `) as string;
-
-  if (/^\/*(.+)\/$/.test(interpolatedString)) {
-    return eval(interpolatedString) as RegExp;
-  }
-
-  return interpolatedString;
-};
-
-const getByQuerySelector = ({
-  canvas,
-  method,
-  options,
+export const captureElement = <
+  LocalTestSelector extends TestSelector,
+  QuerySelectorOptions extends Record<string, string | RegExp>,
+  LocalQueryMethod extends QueryMethod = "get",
+>({
+  containerElement,
+  queryMethod,
+  querySelectorOptions,
   role,
-  text,
+  testSelector,
 }: {
-  canvas: BoundFunctions<typeof queries>;
-  method: "ByRole" | "ByLabelText" | "ByPlaceholderText" | "ByText";
-  options?: ByRoleOptions;
-  role?: Parameters<GetByRole>[1];
-  text?: Parameters<GetByText>[1];
+  containerElement: HTMLElement;
+  queryMethod: LocalQueryMethod;
+  querySelectorOptions?: QuerySelectorOptions;
+  role?: AriaRole;
+  testSelector: LocalTestSelector;
 }) => {
-  if (method === "ByRole") {
-    return canvas.getByRole(
-      // TODO: These should eventually reference `query` as the function identifier.
-      role!,
-      options,
-    );
-  } else if (method === "ByLabelText") {
-    return canvas.getByLabelText(
-      // These should eventually reference `query` as the function identifier.
-      text!, // TODO: Use TypeScript `Infer` to ensure `label` is required when it's `ByLabelText`.
-      options,
-    );
-  } else if (method === "ByPlaceholderText") {
-    return canvas.getByPlaceholderText(
-      // These should eventually reference `query` as the function identifier.
-      text!, // TODO: Use TypeScript `Infer` to ensure `label` is required when it's `ByLabelText`.
-      options,
-    );
-  } else if (method === "ByText") {
-    return canvas.getByText(
-      // These should eventually reference `query` as the function identifier.
-      text!, // TODO: Use TypeScript `Infer` to ensure `description` is required when it's `ByLabelText`.
-      options,
-    );
+  if ("elementSelector" in testSelector && querySelectorOptions) {
+    const sharedProps = {
+      element: containerElement,
+      queryMethod,
+      queryOptions: Object.fromEntries(
+        Object.entries(testSelector.elementSelector.options).map(
+          ([testSelectorOptionKey, testingLibraryOptionKey]) => [
+            testingLibraryOptionKey,
+            querySelectorOptions[testSelectorOptionKey],
+          ],
+        ),
+      ),
+    };
+
+    if (testSelector.elementSelector.method === "ByRole") {
+      return getByRoleQuerySelector({
+        ...sharedProps,
+        role:
+          Array.isArray(testSelector.elementSelector.role) || role
+            ? role || ""
+            : testSelector.elementSelector.role,
+      });
+    }
+
+    return getByTextQuerySelector({
+      ...sharedProps,
+      selectionMethod: testSelector.elementSelector.method,
+      text: testSelector.elementSelector.text,
+    });
+  } else if (
+    "isControlledElement" in testSelector &&
+    testSelector.isControlledElement
+  ) {
+    try {
+      return getControlledElement({ element: containerElement });
+    } catch (error) {
+      if (queryMethod === "query") {
+        return null;
+      }
+
+      throw error;
+    }
   }
 
   return null;
 };
 
-export const querySelector = <TestSelectors extends FeatureTestSelector>({
-  canvas,
-  templateArgs: templateArgsProp,
-  testSelectors,
-}: {
-  /**
-   * Testing Library canvas. This is usually `screen`, but Storybook uses `within(canvas)`.
-   */
-  canvas: BoundFunctions<typeof queries>;
-  templateArgs?: TestSelectors extends TestSelector
-    ? Record<
-        TestSelectors["selector"]["templateVariableNames"][number],
+export const querySelector =
+  <LocalTestSelector extends TestSelector>(
+    /**
+     * Selectors object including children and accessible text selections.
+     */
+    testSelector: LocalTestSelector,
+  ) =>
+  <LocalQueryMethod extends QueryMethod = "get">(
+    props: {
+      /**
+       * Refers to Testing Library's canvas. This is usually `screen`, but Storybook uses `within(canvas)`.
+       */
+      element: HTMLElement;
+    } & InnerQuerySelectorProps<LocalTestSelector, LocalQueryMethod>,
+  ) => {
+    const { element: containerElement, queryMethod } = props;
+
+    const capturedElement = captureElement({
+      containerElement,
+      queryMethod: queryMethod || ("get" as const),
+      querySelectorOptions: "options" in props ? props.options : undefined,
+      role: "role" in props ? (props.role as AriaRole) : undefined,
+      testSelector,
+    });
+
+    const getAccessibleText = <
+      LabelName extends LocalTestSelector extends AccessibleTextSelector
+        ? keyof LocalTestSelector["accessibleText"]
+        : never,
+    >(
+      labelName: LabelName,
+    ) => {
+      if (!capturedElement) {
+        throw new ElementError(
+          "No child HTML element available",
+          containerElement,
+        );
+      }
+
+      if (!("accessibleText" in testSelector)) {
+        throw new Error("Missing `accessibleText` in `TestSelector`");
+      }
+
+      return getComputedAccessibleText({
+        element: capturedElement,
+        type: testSelector.accessibleText[labelName],
+      });
+    };
+
+    const selectChild = <
+      ChildName extends LocalTestSelector extends ElementChildSelector
+        ? keyof LocalTestSelector["children"]
+        : keyof ElementChildSelector,
+      ChildQueryMethod extends QueryMethod = "get",
+    >(
+      childProps: {
+        name: ChildName;
+      } & InnerQuerySelectorProps<
+        LocalTestSelector extends ElementChildSelector
+          ? LocalTestSelector["children"][ChildName]
+          : TestSelector,
+        ChildQueryMethod
+      >,
+    ) => {
+      if (!capturedElement) {
+        throw new ElementError(
+          "No child HTML element available",
+          containerElement,
+        );
+      }
+
+      if (!("children" in testSelector)) {
+        throw new Error("Missing `children` in `TestSelector`");
+      }
+
+      type Options = Record<
+        LocalTestSelector extends ElementChildSelector
+          ? LocalTestSelector["children"][ChildName] extends ElementSelector
+            ? keyof LocalTestSelector["children"][ChildName]["elementSelector"]["options"]
+            : never
+          : never,
         string | RegExp
-      >
-    : never;
-  testSelectors: TestSelectors;
-}) => {
-  const element =
-    "selector" in testSelectors
-      ? getByQuerySelector({
-          canvas,
-          method: testSelectors.selector.method,
-          options:
-            templateArgsProp && testSelectors.selector.options
-              ? Object.fromEntries(
-                  Object.entries(testSelectors.selector.options).map(
-                    ([key, value]) => [
-                      key,
-                      interpolateString(value, templateArgsProp),
-                    ],
-                  ),
-                )
-              : testSelectors.selector.options,
-          ...(testSelectors.selector.method === "ByRole"
+      >;
+
+      return querySelector(
+        testSelector.children[
+          childProps.name
+        ] as LocalTestSelector extends ElementChildSelector
+          ? LocalTestSelector["children"][ChildName]
+          : TestSelector,
+      )(
+        // @ts-expect-error: Type '{ role?: AriaRole | undefined; options?: Record<LocalTestSelector extends ElementChildSelector ? LocalTestSelector["children"][ChildName] extends TestSelector ? keyof LocalTestSelector["children"][ChildName]["selector"]["options"] : string : string, string | RegExp> | undefined; element: HTMLElement...' is not assignable to type '(LocalTestSelector extends ElementChildSelector ? LocalTestSelector["children"][ChildName] : TestSelector) extends { ...; } ? Role extends AriaRole[] ? { ...; } : object : object'.ts(2345)
+        // `as testSelector.children[ChildName]` narrows the props down enough that TypeScript errors here. We're passing the correct information, but it doesn't know that, and it's difficult to fix this. -Kevin Ghadyani
+        {
+          element: capturedElement,
+          queryMethod: childProps.queryMethod,
+          ...("options" in childProps && childProps.options
             ? {
-                role: templateArgsProp
-                  ? (interpolateString(
-                      testSelectors.selector?.role,
-                      templateArgsProp,
-                    ) as string)
-                  : testSelectors.selector?.role,
+                options: childProps.options as Options,
               }
-            : {
-                text: templateArgsProp
-                  ? interpolateString(
-                      testSelectors.selector?.text,
-                      templateArgsProp,
-                    )
-                  : testSelectors.selector?.text,
-              }),
-        })
-      : null;
+            : {}),
+          ...("role" in childProps && childProps.role
+            ? {
+                role: childProps.role as AriaRole,
+              }
+            : {}),
+        },
+      );
+    };
 
-  const select =
-    "feature" in testSelectors
-      ? <FeatureName extends keyof (typeof testSelectors)["feature"]>(
-          featureName: FeatureName,
-          templateArgs?: (typeof testSelectors)["feature"][FeatureName] extends TestSelector
-            ? Record<
-                (typeof testSelectors)["feature"][FeatureName]["selector"]["templateVariableNames"][number],
-                string | RegExp
-              >
-            : never,
-        ) =>
-          querySelector({
-            canvas: element ? within(element) : canvas,
-            templateArgs,
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-expect-error: Type 'FeatureName' cannot be used to index type 'Record<string, FeatureTestSelector>'.ts(2536)
-            testSelectors: testSelectors.feature[featureName],
-          })
-      : null;
-
-  return {
-    element,
-    select,
+    return {
+      element: capturedElement as LocalQueryMethod extends "get"
+        ? HTMLElement
+        : HTMLElement | null,
+      getAccessibleText:
+        getAccessibleText as LocalTestSelector extends AccessibleTextSelector
+          ? typeof getAccessibleText
+          : never,
+      selectChild: selectChild as LocalTestSelector extends ElementChildSelector
+        ? typeof selectChild
+        : never,
+    };
   };
-};
-
-export const queryOdysseySelector = <
-  ComponentName extends keyof typeof odysseyTestSelectors,
->({
-  canvas,
-  componentName,
-  templateArgs,
-}: {
-  canvas: Parameters<
-    typeof querySelector<(typeof odysseyTestSelectors)[ComponentName]>
-  >[0]["canvas"];
-  /**
-   * Name of the component you want to select within.
-   */
-  componentName: ComponentName;
-  /**
-   * String or RegExp values required for this selector.
-   */
-  templateArgs?: Parameters<
-    typeof querySelector<(typeof odysseyTestSelectors)[ComponentName]>
-  >[0]["templateArgs"];
-}) =>
-  querySelector({
-    canvas,
-    templateArgs,
-    testSelectors: odysseyTestSelectors[componentName],
-  });

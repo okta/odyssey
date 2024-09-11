@@ -16,7 +16,7 @@ import { join } from "node:path";
 const distDirectory = join(__dirname, "../dist/test-selectors");
 
 import("../src/test-selectors/index").then(
-  ({ odysseyTestSelectors: testSelector }) =>
+  ({ odysseyTestSelector: testSelector }) =>
     mkdir(distDirectory)
       .catch(() => null)
       .then(() =>

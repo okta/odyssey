@@ -43,6 +43,38 @@ import {
   useInputValues,
   getControlState,
 } from "./inputUtils";
+import { TestSelector } from "./test-selectors";
+
+export const AutocompleteTestSelector = {
+  accessibleText: {
+    errorMessage: "errorMessage",
+    hint: "description",
+    label: "label",
+  },
+  children: {
+    list: {
+      children: {
+        listItem: {
+          elementSelector: {
+            method: "ByRole",
+            options: {
+              label: "name",
+            },
+            role: "option",
+          },
+        },
+      },
+      isControlledElement: true,
+    },
+  },
+  elementSelector: {
+    method: "ByRole",
+    options: {
+      label: "name",
+    },
+    role: "combobox",
+  },
+} as const satisfies TestSelector;
 
 type SetItemSize = (size: number) => void;
 
