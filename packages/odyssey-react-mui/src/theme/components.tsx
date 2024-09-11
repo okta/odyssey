@@ -3122,6 +3122,10 @@ export const components = ({
           "html:lang(en) &": {
             textTransform: "uppercase",
           },
+
+          "html:lang(en-*) &": {
+            textTransform: "uppercase",
+          },
         },
       },
     },
