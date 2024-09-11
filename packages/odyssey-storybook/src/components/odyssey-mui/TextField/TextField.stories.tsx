@@ -18,6 +18,7 @@ import {
   textFieldTypeValues,
 } from "@okta/odyssey-react-mui";
 
+import { queryOdysseySelector } from "@okta/odyssey-react-mui/test-selectors";
 import { userEvent, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
@@ -246,6 +247,19 @@ export const Error: StoryObj<typeof TextField> = {
     errorMessage: "This field is required.",
     defaultValue: "",
   },
+  play: async ({ canvasElement, step }) => {
+    await step("has visible error message", async () => {
+      const element = queryOdysseySelector({
+        canvas: within(canvasElement),
+        componentName: "TextField",
+        templateArgs: {
+          label: "Destination",
+        },
+      }).element;
+
+      expect(element).toHaveErrorMessage(/This field is required/);
+    });
+  },
 };
 
 export const ErrorsList: StoryObj<typeof TextField> = {
@@ -253,6 +267,21 @@ export const ErrorsList: StoryObj<typeof TextField> = {
     errorMessage: "This field is required:",
     errorMessageList: ["At least 2 chars", "No more than 20 chars"],
     defaultValue: "",
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("has visible error messages", async () => {
+      const element = queryOdysseySelector({
+        canvas: within(canvasElement),
+        componentName: "TextField",
+        templateArgs: {
+          label: "Destination",
+        },
+      }).element;
+
+      expect(element).toHaveErrorMessage(/This field is required:/);
+      expect(element).toHaveErrorMessage(/At least 2 chars/);
+      expect(element).toHaveErrorMessage(/No more than 20 chars/);
+    });
   },
 };
 
@@ -266,6 +295,21 @@ export const Hint: StoryObj<typeof TextField> = {
   args: {
     hint: "Specify your destination within the Sol system.",
     defaultValue: "",
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("has visible label", async () => {
+      const element = queryOdysseySelector({
+        canvas: within(canvasElement),
+        componentName: "TextField",
+        templateArgs: {
+          label: "Destination",
+        },
+      }).element;
+
+      expect(element).toHaveAccessibleDescription(
+        "Specify your destination within the Sol system.",
+      );
+    });
   },
 };
 
