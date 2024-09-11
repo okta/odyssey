@@ -129,9 +129,6 @@ const StyledTag = styled(MuiChip, {
   const colors = getChipColors(colorVariant, odysseyDesignTokens);
 
   return {
-    borderRadius: odysseyDesignTokens.BorderRadiusRound,
-    borderWidth: odysseyDesignTokens.BorderWidthMain,
-    borderStyle: odysseyDesignTokens.BorderStyleMain,
     backgroundColor: colors.background,
     color: colors.text,
     borderColor: colors.border,
@@ -145,36 +142,17 @@ const StyledTag = styled(MuiChip, {
     },
 
     "&.Mui-disabled": {
-      opacity: 1,
-      pointerEvents: "none",
-      borderColor: odysseyDesignTokens.BorderColorDisabled,
-      color: odysseyDesignTokens.TypographyColorDisabled,
-
       "& .MuiChip-deleteIcon": {
         color: odysseyDesignTokens.HueNeutral300,
       },
     },
 
-    "& .MuiChip-icon": {
-      margin: 0,
-      marginInlineEnd: odysseyDesignTokens.Spacing1,
-    },
-
     "& .MuiChip-deleteIcon": {
-      WebkitTapHighlightColor: "transparent",
       color: colors.deleteIcon,
-      fontSize: "1em",
-      cursor: "pointer",
-      margin: 0,
-      marginInlineStart: odysseyDesignTokens.Spacing2,
 
       "&:hover": {
         color: colors.deleteIconHover,
       },
-    },
-
-    "& .MuiChip-label": {
-      padding: 0,
     },
   };
 });
