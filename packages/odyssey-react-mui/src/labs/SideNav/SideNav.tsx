@@ -198,10 +198,6 @@ const SideNav = ({
     // Finally, we only want to have the border on the bottom of the header iff the user has scrolled
     // the scrollable container
     if (!intersectionObserverRef.current && scrollableContentRef.current) {
-      console.log(
-        "Creating IntersectionObserver with root:",
-        scrollableContentRef.current,
-      );
       intersectionObserverRef.current = new IntersectionObserver(
         (entries) => {
           // Sort the entries by time, getting the latest first
@@ -210,10 +206,6 @@ const SideNav = ({
           // If isIntersecting is false, some scrolling has occurred.
           const isIntersecting = sortedEntries.at(0)?.isIntersecting;
           setHasContentScrolled(!isIntersecting);
-          console.log(
-            "IntersectionObserver?",
-            scrollableContentRef.current?.scrollTop,
-          );
         },
         {
           root: scrollableContentRef.current.parentElement,
@@ -224,7 +216,6 @@ const SideNav = ({
     if (intersectionObserverRef.current && scrollableContentRef.current) {
       const ul = scrollableContentRef.current;
       const li = ul?.firstChild;
-      console.log("observing:", li);
       intersectionObserverRef.current.observe(li as HTMLElement);
     }
 
@@ -299,13 +290,11 @@ const SideNav = ({
   );
 
   const sideNavCollapseHandler = useCallback(() => {
-    console.log("sideNavCollapseHandler", !isSideNavCollapsed);
     setSideNavCollapsed(!isSideNavCollapsed);
     onCollapse?.();
   }, [isSideNavCollapsed, setSideNavCollapsed, onCollapse]);
 
   const sideNavExpandClickHandler = useCallback(() => {
-    console.log("sideNavExpandClickHandler", !isSideNavCollapsed);
     setSideNavCollapsed(!isSideNavCollapsed);
     onExpand?.();
   }, [isSideNavCollapsed, setSideNavCollapsed, onExpand]);
