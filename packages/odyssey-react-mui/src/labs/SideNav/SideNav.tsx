@@ -21,7 +21,6 @@ import {
   useEffect,
 } from "react";
 
-import { Box } from "../../Box";
 import { ExpandLeftIcon } from "../../icons.generated";
 import { NavAccordion } from "../NavAccordion";
 import {
@@ -38,6 +37,15 @@ import {
 import { SideNavFooterContent } from "./SideNavFooterContent";
 
 export const DEFAULT_SIDE_NAV_WIDTH = "300px";
+
+const SideNavContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "expandedWidth",
+})(({ expandedWidth }: { expandedWidth: SideNavProps["expandedWidth"] }) => ({
+  display: "flex",
+  height: "100%",
+  maxWidth: expandedWidth,
+  overflow: "hidden",
+}));
 
 const SideNavCollapsedContainer = styled("div", {
   shouldForwardProp: (prop) =>
@@ -90,6 +98,26 @@ const SideNavExpandContainer = styled("div", {
   }),
 );
 
+const SideNavHeaderContainer = styled("nav", {
+  shouldForwardProp: (prop) =>
+    prop !== "hasContentScrolled" && prop !== "odysseyDesignTokens",
+})(
+  ({
+    hasContentScrolled,
+    odysseyDesignTokens,
+  }: {
+    hasContentScrolled: boolean;
+    odysseyDesignTokens: DesignTokens;
+  }) => ({
+    position: "sticky",
+    top: 0,
+    // The bottom border should appear only if the scrollable region has been scrolled
+    ...(hasContentScrolled && {
+      borderBottom: `${odysseyDesignTokens.BorderWidthMain} ${odysseyDesignTokens.BorderStyleMain} ${odysseyDesignTokens.HueNeutral50}`,
+    }),
+  }),
+);
+
 const SideNavListContainer = styled.ul({
   padding: 0,
   listStyle: "none",
@@ -113,7 +141,31 @@ const SectionHeader = styled("li", {
   textTransform: "uppercase",
 }));
 
-const SideNavFooterContainer = styled("div", {
+const SideNavFooter = styled("div", {
+  shouldForwardProp: (prop) =>
+    prop !== "isContentScrollable" && prop !== "odysseyDesignTokens",
+})(
+  ({
+    isContentScrollable,
+    odysseyDesignTokens,
+  }: {
+    isContentScrollable: boolean;
+    odysseyDesignTokens: DesignTokens;
+  }) => ({
+    position: "sticky",
+    bottom: 0,
+    paddingTop: odysseyDesignTokens.Spacing2,
+    transitionProperty: "box-shadow",
+    transitionDuration: odysseyDesignTokens.TransitionDurationMain,
+    transitionTiming: odysseyDesignTokens.TransitionTimingMain,
+    // The box shadow should appear above the footer only if the scrollable region has overflow
+    ...(isContentScrollable && {
+      boxShadow: odysseyDesignTokens.DepthHigh,
+    }),
+  }),
+);
+
+const SideNavFooterItemsContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
   paddingTop: odysseyDesignTokens.Spacing2,
@@ -311,46 +363,6 @@ const SideNav = ({
     [isSideNavCollapsed, setSideNavCollapsed, onExpand],
   );
 
-  const sideNavStyles = useMemo(
-    () => ({
-      display: "flex",
-      height: "100%",
-      maxWidth: expandedWidth,
-      overflow: "hidden",
-    }),
-    [expandedWidth],
-  );
-
-  const sideNavHeaderContainerStyles = useMemo(
-    () => ({
-      position: "sticky",
-      top: 0,
-      // The bottom border should appear only if the scrollable region has been scrolled
-      ...(hasContentScrolled && {
-        borderBottomWidth: odysseyDesignTokens.BorderWidthMain,
-        borderBottomStyle: odysseyDesignTokens.BorderStyleMain,
-        borderBottomColor: odysseyDesignTokens.HueNeutral50,
-      }),
-    }),
-    [odysseyDesignTokens, hasContentScrolled],
-  );
-
-  const sideNavFooterContainerStyles = useMemo(
-    () => ({
-      position: "sticky",
-      bottom: 0,
-      paddingTop: odysseyDesignTokens.Spacing2,
-      transitionProperty: "box-shadow",
-      transitionDuration: odysseyDesignTokens.TransitionDurationMain,
-      transitionTiming: odysseyDesignTokens.TransitionTimingMain,
-      // The box shadow should appear above the footer only if the scrollable region has overflow
-      ...(isContentScrollable && {
-        boxShadow: odysseyDesignTokens.DepthHigh,
-      }),
-    }),
-    [odysseyDesignTokens, isContentScrollable],
-  );
-
   const expandLeftIconStyles = useMemo(
     () => ({
       fontSize: "1em",
@@ -360,7 +372,7 @@ const SideNav = ({
   );
 
   return (
-    <Box sx={sideNavStyles}>
+    <SideNavContainer expandedWidth={expandedWidth}>
       <SideNavCollapsedContainer
         tabIndex={0}
         role="button"
@@ -377,10 +389,10 @@ const SideNav = ({
         isSideNavCollapsed={isSideNavCollapsed}
         expandedWidth={expandedWidth}
       >
-        <Box
+        <SideNavHeaderContainer
+          odysseyDesignTokens={odysseyDesignTokens}
+          hasContentScrolled={hasContentScrolled}
           aria-label={navHeaderText}
-          component="nav"
-          sx={sideNavHeaderContainerStyles}
         >
           <SideNavHeader
             logo={logo || <OktaLogo />}
@@ -388,7 +400,7 @@ const SideNav = ({
             isCollapsible={isCollapsible}
             onCollapse={sideNavCollapseHandler}
           />
-        </Box>
+        </SideNavHeaderContainer>
         <SideNavScrollableContainer data-se="scrollable-region">
           <SideNavListContainer ref={scrollableContentRef}>
             {processedSideNavItems?.map((item) => {
@@ -446,17 +458,22 @@ const SideNav = ({
           </SideNavListContainer>
         </SideNavScrollableContainer>
         {(footerItems || footerComponent) && (
-          <Box sx={sideNavFooterContainerStyles}>
-            <SideNavFooterContainer odysseyDesignTokens={odysseyDesignTokens}>
-              {footerComponent}
-              {footerItems && !footerComponent && (
+          <SideNavFooter
+            odysseyDesignTokens={odysseyDesignTokens}
+            isContentScrollable={isContentScrollable}
+          >
+            {footerComponent}
+            {footerItems && !footerComponent && (
+              <SideNavFooterItemsContainer
+                odysseyDesignTokens={odysseyDesignTokens}
+              >
                 <SideNavFooterContent footerItems={footerItems} />
-              )}
-            </SideNavFooterContainer>
-          </Box>
+              </SideNavFooterItemsContainer>
+            )}
+          </SideNavFooter>
         )}
       </SideNavExpandContainer>
-    </Box>
+    </SideNavContainer>
   );
 };
 
