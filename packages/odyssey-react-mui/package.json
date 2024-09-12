@@ -82,7 +82,7 @@
     "@types/luxon": "^3.4.2",
     "date-fns": "^2.30.0",
     "dom-accessibility-api": "^0.7.0",
-    "i18next": "^23.8.2",
+    "i18next": "^23.15.1",
     "luxon": "^3.4.4",
     "material-react-table": "^2.11.3",
     "react-i18next": "^14.0.5",
