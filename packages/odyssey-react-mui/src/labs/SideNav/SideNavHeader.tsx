@@ -20,6 +20,18 @@ import { Box } from "../../Box";
 import { Heading6 } from "../../Typography";
 import { CollapseIcon } from "./CollapseIcon";
 import type { SideNavProps } from "./types";
+import { TOP_NAV_HEIGHT } from "../constants";
+
+const SideNavLogoContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  height: TOP_NAV_HEIGHT,
+  padding: odysseyDesignTokens.Spacing3,
+  borderColor: odysseyDesignTokens.HueNeutral50,
+  borderStyle: odysseyDesignTokens.BorderStyleMain,
+  borderWidth: 0,
+  borderBottomWidth: odysseyDesignTokens.BorderWidthMain,
+}));
 
 const SideNavHeaderContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
@@ -37,9 +49,10 @@ const SideNavHeader = ({
   navHeaderText,
   isCollapsible,
   onCollapse,
+  logo,
 }: Pick<
   SideNavProps,
-  "navHeaderText" | "isCollapsible" | "onCollapse"
+  "navHeaderText" | "isCollapsible" | "onCollapse" | "logo"
 >): ReactNode => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
@@ -51,12 +64,22 @@ const SideNavHeader = ({
   );
 
   return (
-    <SideNavHeaderContainer odysseyDesignTokens={odysseyDesignTokens}>
-      <Box sx={sideNavHeaderStyles}>
-        <Heading6>{navHeaderText}</Heading6>
-      </Box>
-      {isCollapsible && <CollapseIcon onClick={onCollapse} />}
-    </SideNavHeaderContainer>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <SideNavLogoContainer odysseyDesignTokens={odysseyDesignTokens}>
+        {logo}
+      </SideNavLogoContainer>
+      <SideNavHeaderContainer odysseyDesignTokens={odysseyDesignTokens}>
+        <Box sx={sideNavHeaderStyles}>
+          <Heading6>{navHeaderText}</Heading6>
+        </Box>
+        {isCollapsible && <CollapseIcon onClick={onCollapse} />}
+      </SideNavHeaderContainer>
+    </Box>
   );
 };
 const MemoizedSideNavHeader = memo(SideNavHeader);

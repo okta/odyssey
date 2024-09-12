@@ -36,10 +36,14 @@ export type SideNavProps = {
    */
   sideNavItems: SideNavItem[];
   /**
-   * Customizable maximum width of the SideNav container
-   * (it will be smaller if collapsed). A CSS length string.
+   * A CSS length string indicating the customizable expanded width of the SideNav container.
+   * (it will be smaller if isCollapsible and collapsed)
    */
-  maxWidth?: string;
+  expandedWidth?: string;
+  /**
+   * An optional logo to display in the header. If not provided, will default to the Okta logo
+   */
+  logo?: ReactElement;
 } & (
   | {
       /**

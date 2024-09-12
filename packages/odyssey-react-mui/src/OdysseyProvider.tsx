@@ -27,6 +27,10 @@ import {
 } from "./OdysseyTranslationProvider";
 import { DefaultSupportedLanguages } from "./OdysseyTranslationProvider.types";
 
+const scopedCssBaselineStyles = {
+  height: "inherit",
+};
+
 export type OdysseyProviderProps<
   SupportedLanguages extends string = DefaultSupportedLanguages,
 > = OdysseyCacheProviderProps &
@@ -60,7 +64,8 @@ const OdysseyProvider = <SupportedLanguages extends string>({
       shadowRootElement={shadowRootElement || shadowDomElement}
       themeOverride={themeOverride}
     >
-      <ScopedCssBaseline>
+      {/* This component creates a div; for flexibility of layout of children, make it inherit its parent's height */}
+      <ScopedCssBaseline sx={scopedCssBaselineStyles}>
         <OdysseyTranslationProvider<SupportedLanguages>
           languageCode={languageCode}
           translationOverrides={translationOverrides}
