@@ -17,7 +17,6 @@
  * on common shared constants.
  */
 
-// import * as Tokens from "@okta/odyssey-design-tokens";
-// The prior implementation was using Tokens.Spacing9; To unify with existing headers
-// trying out a fixed value to match:
-export const TOP_NAV_HEIGHT = "61px";
+import * as Tokens from "@okta/odyssey-design-tokens";
+
+export const TOP_NAV_HEIGHT = Tokens.Spacing9;
