@@ -21,6 +21,9 @@ export const createShadowDomElements = (containerElement: HTMLElement) => {
   // React app root component.
   const shadowRootElement = document.createElement("div");
   shadowRootElement.setAttribute("id", "shadow-root");
+  // This div could cause issues with layout of children.
+  // For flexibility, make it inherit its parent's height
+  shadowRootElement.style.setProperty("height", "inherit");
 
   shadowRoot.appendChild(emotionRootElement);
   shadowRoot.appendChild(shadowRootElement);
