@@ -37,6 +37,8 @@ import {
 } from "./SideNavItemContent";
 import { SideNavFooterContent } from "./SideNavFooterContent";
 
+export const DEFAULT_SIDE_NAV_WIDTH = "300px";
+
 const SideNavCollapsedContainer = styled("div", {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" && prop !== "isSideNavCollapsed",
@@ -141,7 +143,7 @@ const SideNav = ({
   onCollapse,
   onExpand,
   sideNavItems,
-  expandedWidth = "300px",
+  expandedWidth = DEFAULT_SIDE_NAV_WIDTH,
   footerItems,
   footerComponent,
   logo,
@@ -155,7 +157,7 @@ const SideNav = ({
   const intersectionObserverRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
-    const setWhetherContentIsScrollable = () => {
+    const updateIsContentScrollable = () => {
       if (
         scrollableContentRef.current &&
         scrollableContentRef.current.parentElement
@@ -173,7 +175,7 @@ const SideNav = ({
       resizeObserverRef.current = new ResizeObserver(() => {
         cancelAnimationFrame(resizeObserverDebounceTimer);
         resizeObserverDebounceTimer = requestAnimationFrame(
-          setWhetherContentIsScrollable,
+          updateIsContentScrollable,
         );
       });
     }
@@ -190,18 +192,20 @@ const SideNav = ({
     }
 
     // Determine if the scrollable container has overflow or not on load
-    setWhetherContentIsScrollable();
+    updateIsContentScrollable();
 
     // Finally, we only want to have the border on the bottom of the header iff the user has scrolled
     // the scrollable container
     if (!intersectionObserverRef.current && scrollableContentRef.current) {
       intersectionObserverRef.current = new IntersectionObserver(
         (entries) => {
-          // Sort the entries by time, getting the latest first
-          const sortedEntries = entries.slice().sort((a, b) => a.time - b.time);
           // If isIntersecting is true, then we're at the top of the scroll container
           // If isIntersecting is false, some scrolling has occurred.
-          const isIntersecting = sortedEntries.at(0)?.isIntersecting;
+          // The entries must be sorted by time and we only really need to look at the latest one
+          const isIntersecting = entries
+            .slice()
+            .sort((a, b) => a.time - b.time)
+            .at(0)?.isIntersecting;
           setHasContentScrolled(!isIntersecting);
         },
         {

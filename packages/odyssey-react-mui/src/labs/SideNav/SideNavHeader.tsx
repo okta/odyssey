@@ -20,12 +20,12 @@ import { Box } from "../../Box";
 import { Heading6 } from "../../Typography";
 import { CollapseIcon } from "./CollapseIcon";
 import type { SideNavProps } from "./types";
-import { TOP_NAV_HEIGHT } from "../constants";
+import { TOP_NAV_HEIGHT_TOKEN } from "../TopNav";
 
 const SideNavLogoContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
-  height: TOP_NAV_HEIGHT,
+  height: odysseyDesignTokens[TOP_NAV_HEIGHT_TOKEN],
   padding: odysseyDesignTokens.Spacing3,
   borderColor: odysseyDesignTokens.HueNeutral50,
   borderStyle: odysseyDesignTokens.BorderStyleMain,

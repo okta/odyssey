@@ -28,7 +28,8 @@ import {
   useOdysseyDesignTokens,
 } from "../OdysseyDesignTokensContext";
 import { Subordinate } from "../Typography";
-import { TOP_NAV_HEIGHT } from "./constants";
+
+export const TOP_NAV_HEIGHT_TOKEN = "Spacing9";
 
 export type TopNavLinkItem = {
   id: string;
@@ -307,7 +308,7 @@ const TopNavContainer = styled("div", {
   display: "flex",
   alignItems: "center",
   backgroundColor: odysseyDesignTokens.HueNeutralWhite,
-  height: TOP_NAV_HEIGHT,
+  height: odysseyDesignTokens[TOP_NAV_HEIGHT_TOKEN],
 }));
 
 const SearchFieldContainer = styled("div", {
