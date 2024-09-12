@@ -84,10 +84,7 @@ const SideNavExpandContainer = styled("div", {
     transitionProperty: "opacity, width",
     transitionDuration: odysseyDesignTokens.TransitionDurationMain,
     transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
-    borderStyle: odysseyDesignTokens.BorderStyleMain,
-    borderWidth: 0,
-    borderRightWidth: odysseyDesignTokens.BorderWidthMain,
-    borderRightColor: odysseyDesignTokens.HueNeutral50,
+    borderRight: `${odysseyDesignTokens.BorderWidthMain} ${odysseyDesignTokens.BorderStyleMain} ${odysseyDesignTokens.HueNeutral50}`,
   }),
 );
 
@@ -367,7 +364,6 @@ const SideNav = ({
         isSideNavCollapsed={isSideNavCollapsed}
         onClick={sideNavExpandClickHandler}
         onKeyDown={sideNavExpandKeyHandler}
-        data-se="collapsed-region"
         data-aria-label="expand side navigation"
       >
         <ExpandLeftIcon sx={expandLeftIconStyles} />
@@ -376,9 +372,12 @@ const SideNav = ({
         odysseyDesignTokens={odysseyDesignTokens}
         isSideNavCollapsed={isSideNavCollapsed}
         expandedWidth={expandedWidth}
-        data-se="expanded-region"
       >
-        <Box sx={sideNavHeaderContainerStyles}>
+        <Box
+          aria-label={navHeaderText}
+          component="nav"
+          sx={sideNavHeaderContainerStyles}
+        >
           <SideNavHeader
             logo={logo || <OktaLogo />}
             navHeaderText={navHeaderText}
