@@ -70,7 +70,7 @@ const SideNavCollapsedContainer = styled("div", {
   }),
 );
 
-const SideNavExpandContainer = styled("div", {
+const SideNavExpandContainer = styled("nav", {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" &&
     prop !== "isSideNavCollapsed" &&
@@ -98,7 +98,7 @@ const SideNavExpandContainer = styled("div", {
   }),
 );
 
-const SideNavHeaderContainer = styled("nav", {
+const SideNavHeaderContainer = styled("div", {
   shouldForwardProp: (prop) =>
     prop !== "hasContentScrolled" && prop !== "odysseyDesignTokens",
 })(
@@ -380,6 +380,7 @@ const SideNav = ({
         isSideNavCollapsed={isSideNavCollapsed}
         onClick={sideNavExpandClickHandler}
         onKeyDown={sideNavExpandKeyHandler}
+        data-se="collapsed-region"
         data-aria-label="expand side navigation"
       >
         <ExpandLeftIcon sx={expandLeftIconStyles} />
@@ -387,12 +388,13 @@ const SideNav = ({
       <SideNavExpandContainer
         odysseyDesignTokens={odysseyDesignTokens}
         isSideNavCollapsed={isSideNavCollapsed}
+        data-se="expanded-region"
         expandedWidth={expandedWidth}
+        aria-label={navHeaderText}
       >
         <SideNavHeaderContainer
           odysseyDesignTokens={odysseyDesignTokens}
           hasContentScrolled={hasContentScrolled}
-          aria-label={navHeaderText}
         >
           <SideNavHeader
             logo={logo || <OktaLogo />}
