@@ -57,7 +57,10 @@ export const useScrollIndication = ({
   ]);
 
   useEffect(() => {
-    if (resizeObserverRef.current) return; // Avoid creating multiple observers
+    // Avoid creating multiple observers or if ResizeObserver is unsupported
+    if (typeof ResizeObserver === "undefined" || resizeObserverRef.current) {
+      return;
+    }
 
     let debounceTimer: ReturnType<typeof setTimeout>;
 

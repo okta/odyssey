@@ -45,7 +45,7 @@
     "@okta/odyssey-eslint-config": "workspace:*",
     "@okta/odyssey-lint-staged": "workspace:*",
     "@okta/odyssey-stylelint": "workspace:*",
-    "caniuse-lite": "^1.0.30001587",
+    "caniuse-lite": "^1.0.30001660",
     "concurrently": "^8.2.2",
     "eslint": "^8.56.0",
     "husky": "^7.0.2",
