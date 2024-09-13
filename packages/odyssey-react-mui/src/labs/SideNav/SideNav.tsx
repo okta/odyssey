@@ -21,7 +21,6 @@ import {
   useEffect,
 } from "react";
 
-import { Box } from "../../Box";
 import { ExpandLeftIcon } from "../../icons.generated";
 import { NavAccordion } from "../NavAccordion";
 import {
@@ -29,12 +28,24 @@ import {
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
 import type { SideNavProps } from "./types";
+import { OktaLogo } from "./OktaLogo";
 import { SideNavHeader } from "./SideNavHeader";
 import {
   SideNavItemContent,
   SideNavListItemContainer,
 } from "./SideNavItemContent";
 import { SideNavFooterContent } from "./SideNavFooterContent";
+
+export const DEFAULT_SIDE_NAV_WIDTH = "300px";
+
+const SideNavContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "expandedWidth",
+})(({ expandedWidth }: { expandedWidth: SideNavProps["expandedWidth"] }) => ({
+  display: "flex",
+  height: "100%",
+  maxWidth: expandedWidth,
+  overflow: "hidden",
+}));
 
 const SideNavCollapsedContainer = styled("div", {
   shouldForwardProp: (prop) =>
@@ -59,26 +70,51 @@ const SideNavCollapsedContainer = styled("div", {
   }),
 );
 
-const SideNavExpandContainer = styled("div", {
+const SideNavExpandContainer = styled("nav", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "isSideNavCollapsed",
+    prop !== "odysseyDesignTokens" &&
+    prop !== "isSideNavCollapsed" &&
+    prop !== "expandedWidth",
 })(
   ({
     odysseyDesignTokens,
     isSideNavCollapsed,
+    expandedWidth,
   }: {
     odysseyDesignTokens: DesignTokens;
     isSideNavCollapsed: boolean;
+    expandedWidth: string;
   }) => ({
     backgroundColor: odysseyDesignTokens.HueNeutralWhite,
     flexDirection: "column",
     display: "flex",
     opacity: isSideNavCollapsed ? 0 : 1,
     visibility: isSideNavCollapsed ? "hidden" : "visible",
-    width: isSideNavCollapsed ? "0" : "100%",
+    width: isSideNavCollapsed ? "0" : expandedWidth,
     transitionProperty: "opacity, width",
     transitionDuration: odysseyDesignTokens.TransitionDurationMain,
     transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
+    borderRight: `${odysseyDesignTokens.BorderWidthMain} ${odysseyDesignTokens.BorderStyleMain} ${odysseyDesignTokens.HueNeutral50}`,
+  }),
+);
+
+const SideNavHeaderContainer = styled("div", {
+  shouldForwardProp: (prop) =>
+    prop !== "hasContentScrolled" && prop !== "odysseyDesignTokens",
+})(
+  ({
+    hasContentScrolled,
+    odysseyDesignTokens,
+  }: {
+    hasContentScrolled: boolean;
+    odysseyDesignTokens: DesignTokens;
+  }) => ({
+    position: "sticky",
+    top: 0,
+    // The bottom border should appear only if the scrollable region has been scrolled
+    ...(hasContentScrolled && {
+      borderBottom: `${odysseyDesignTokens.BorderWidthMain} ${odysseyDesignTokens.BorderStyleMain} ${odysseyDesignTokens.HueNeutral50}`,
+    }),
   }),
 );
 
@@ -86,6 +122,11 @@ const SideNavListContainer = styled.ul({
   padding: 0,
   listStyle: "none",
   listStyleType: "none",
+});
+
+const SideNavScrollableContainer = styled.div({
+  flex: 1,
+  overflowY: "auto",
 });
 
 const SectionHeader = styled("li", {
@@ -100,7 +141,31 @@ const SectionHeader = styled("li", {
   textTransform: "uppercase",
 }));
 
-const SideNavFooterContainer = styled("div", {
+const SideNavFooter = styled("div", {
+  shouldForwardProp: (prop) =>
+    prop !== "isContentScrollable" && prop !== "odysseyDesignTokens",
+})(
+  ({
+    isContentScrollable,
+    odysseyDesignTokens,
+  }: {
+    isContentScrollable: boolean;
+    odysseyDesignTokens: DesignTokens;
+  }) => ({
+    position: "sticky",
+    bottom: 0,
+    paddingTop: odysseyDesignTokens.Spacing2,
+    transitionProperty: "box-shadow",
+    transitionDuration: odysseyDesignTokens.TransitionDurationMain,
+    transitionTiming: odysseyDesignTokens.TransitionTimingMain,
+    // The box shadow should appear above the footer only if the scrollable region has overflow
+    ...(isContentScrollable && {
+      boxShadow: odysseyDesignTokens.DepthHigh,
+    }),
+  }),
+);
+
+const SideNavFooterItemsContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
   paddingTop: odysseyDesignTokens.Spacing2,
@@ -121,16 +186,105 @@ const SideNavFooterContainer = styled("div", {
   },
 }));
 
+const getHasScrollableContent = (scrollableContainer: HTMLElement) =>
+  scrollableContainer.scrollHeight > scrollableContainer.clientHeight;
+
 const SideNav = ({
   navHeaderText,
   isCollapsible,
   onCollapse,
   onExpand,
   sideNavItems,
+  expandedWidth = DEFAULT_SIDE_NAV_WIDTH,
   footerItems,
+  footerComponent,
+  logo,
 }: SideNavProps) => {
   const [isSideNavCollapsed, setSideNavCollapsed] = useState(false);
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const [isContentScrollable, setIsContentScrollable] = useState(false);
+  const [hasContentScrolled, setHasContentScrolled] = useState(false);
+  const scrollableContentRef = useRef<HTMLUListElement>(null);
+  const resizeObserverRef = useRef<ResizeObserver | null>(null);
+  const intersectionObserverRef = useRef<IntersectionObserver | null>(null);
+
+  useEffect(() => {
+    const updateIsContentScrollable = () => {
+      if (
+        scrollableContentRef.current &&
+        scrollableContentRef.current.parentElement
+      ) {
+        setIsContentScrollable(
+          getHasScrollableContent(scrollableContentRef.current.parentElement),
+        );
+      }
+    };
+
+    // If the window is resized, we may need to re-determine if the scrollable container has overflow
+    // Setup a ResizeObserver to know if the size of the scrollableContent changes
+    let resizeObserverDebounceTimer: ReturnType<typeof requestAnimationFrame>;
+    if (!resizeObserverRef.current) {
+      resizeObserverRef.current = new ResizeObserver(() => {
+        cancelAnimationFrame(resizeObserverDebounceTimer);
+        resizeObserverDebounceTimer = requestAnimationFrame(
+          updateIsContentScrollable,
+        );
+      });
+    }
+
+    if (resizeObserverRef.current && scrollableContentRef.current) {
+      // Observe the <ul> itself (in case it changes size due to the content expanding)
+      resizeObserverRef.current.observe(scrollableContentRef.current);
+      if (scrollableContentRef.current.parentElement) {
+        // ALSO observe the parent (<SideNavScrollableContainer>) in case the window resizes
+        resizeObserverRef.current.observe(
+          scrollableContentRef.current.parentElement,
+        );
+      }
+    }
+
+    // Determine if the scrollable container has overflow or not on load
+    updateIsContentScrollable();
+
+    // Finally, we only want to have the border on the bottom of the header iff the user has scrolled
+    // the scrollable container
+    if (!intersectionObserverRef.current && scrollableContentRef.current) {
+      intersectionObserverRef.current = new IntersectionObserver(
+        (entries) => {
+          // If isIntersecting is true, then we're at the top of the scroll container
+          // If isIntersecting is false, some scrolling has occurred.
+          // The entries must be sorted by time and we only really need to look at the latest one
+          const isIntersecting = entries
+            .slice()
+            .sort((a, b) => a.time - b.time)
+            .at(0)?.isIntersecting;
+          setHasContentScrolled(!isIntersecting);
+        },
+        {
+          root: scrollableContentRef.current.parentElement,
+          threshold: 1.0,
+        },
+      );
+    }
+    if (intersectionObserverRef.current && scrollableContentRef.current) {
+      const ul = scrollableContentRef.current;
+      const li = ul?.firstChild;
+      intersectionObserverRef.current.observe(li as HTMLElement);
+    }
+
+    // Cleanup when unmounted:
+    return () => {
+      if (resizeObserverRef.current) {
+        resizeObserverRef.current.disconnect();
+        resizeObserverRef.current = null;
+      }
+      if (intersectionObserverRef.current) {
+        intersectionObserverRef.current.disconnect();
+        intersectionObserverRef.current = null;
+      }
+      cancelAnimationFrame(resizeObserverDebounceTimer); // Ensure timer is cleared on component unmount
+    };
+  }, []);
 
   const scrollIntoViewRef = useRef<HTMLLIElement>(null);
   /**
@@ -209,39 +363,6 @@ const SideNav = ({
     [isSideNavCollapsed, setSideNavCollapsed, onExpand],
   );
 
-  const sideNavStyles = useMemo(
-    () => ({
-      display: "flex",
-      height: "100vh",
-    }),
-    [],
-  );
-
-  const sideNavHeaderContainerStyles = useMemo(
-    () => ({
-      position: "sticky",
-      top: 0,
-    }),
-    [],
-  );
-
-  const sideNavListContainerStyles = useMemo(
-    () => ({
-      flex: 1,
-      overflowY: "auto",
-    }),
-    [],
-  );
-
-  const sideNavFooterContainerStyles = useMemo(
-    () => ({
-      position: "sticky",
-      bottom: 0,
-      paddingTop: odysseyDesignTokens.Spacing2,
-    }),
-    [odysseyDesignTokens],
-  );
-
   const expandLeftIconStyles = useMemo(
     () => ({
       fontSize: "1em",
@@ -251,7 +372,7 @@ const SideNav = ({
   );
 
   return (
-    <Box sx={sideNavStyles}>
+    <SideNavContainer expandedWidth={expandedWidth}>
       <SideNavCollapsedContainer
         tabIndex={0}
         role="button"
@@ -268,16 +389,22 @@ const SideNav = ({
         odysseyDesignTokens={odysseyDesignTokens}
         isSideNavCollapsed={isSideNavCollapsed}
         data-se="expanded-region"
+        expandedWidth={expandedWidth}
+        aria-label={navHeaderText}
       >
-        <Box sx={sideNavHeaderContainerStyles}>
+        <SideNavHeaderContainer
+          odysseyDesignTokens={odysseyDesignTokens}
+          hasContentScrolled={hasContentScrolled}
+        >
           <SideNavHeader
+            logo={logo || <OktaLogo />}
             navHeaderText={navHeaderText}
             isCollapsible={isCollapsible}
             onCollapse={sideNavCollapseHandler}
           />
-        </Box>
-        <Box sx={sideNavListContainerStyles} testId="scrollable-region">
-          <SideNavListContainer>
+        </SideNavHeaderContainer>
+        <SideNavScrollableContainer data-se="scrollable-region">
+          <SideNavListContainer ref={scrollableContentRef}>
             {processedSideNavItems?.map((item) => {
               const {
                 id,
@@ -331,16 +458,24 @@ const SideNav = ({
               }
             })}
           </SideNavListContainer>
-        </Box>
-        {footerItems && (
-          <Box sx={sideNavFooterContainerStyles}>
-            <SideNavFooterContainer odysseyDesignTokens={odysseyDesignTokens}>
-              <SideNavFooterContent footerItems={footerItems} />
-            </SideNavFooterContainer>
-          </Box>
+        </SideNavScrollableContainer>
+        {(footerItems || footerComponent) && (
+          <SideNavFooter
+            odysseyDesignTokens={odysseyDesignTokens}
+            isContentScrollable={isContentScrollable}
+          >
+            {footerComponent}
+            {footerItems && !footerComponent && (
+              <SideNavFooterItemsContainer
+                odysseyDesignTokens={odysseyDesignTokens}
+              >
+                <SideNavFooterContent footerItems={footerItems} />
+              </SideNavFooterItemsContainer>
+            )}
+          </SideNavFooter>
         )}
       </SideNavExpandContainer>
-    </Box>
+    </SideNavContainer>
   );
 };
 

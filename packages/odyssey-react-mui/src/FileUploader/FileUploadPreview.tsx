@@ -15,7 +15,7 @@ import styled from "@emotion/styled";
 import { IconButton } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
-import { FileUploadProps } from "./FileUpload";
+import { FileUploaderProps } from "./FileUploader";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
@@ -25,7 +25,7 @@ import { MuiPropsContext, MuiPropsContextType } from "../MuiPropsContext";
 import { Tooltip } from "../Tooltip";
 
 const PreviewContainer = styled.div<{
-  isDisabled: FileUploadProps["isDisabled"];
+  isDisabled: FileUploaderProps["isDisabled"];
   odysseyDesignTokens: DesignTokens;
 }>(({ isDisabled, odysseyDesignTokens }) => ({
   color: isDisabled ? odysseyDesignTokens.TypographyColorDisabled : "inherit",
@@ -117,7 +117,7 @@ const UploadedFile = ({ name, onFileRemove }: UploadedFileProps) => {
 
 type FileUploadPreviewProps = {
   fileNames: string[];
-  isDisabled: FileUploadProps["isDisabled"];
+  isDisabled: FileUploaderProps["isDisabled"];
   onFileRemove?: (name: string) => void;
 };
 
