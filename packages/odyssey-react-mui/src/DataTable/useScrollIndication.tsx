@@ -76,7 +76,7 @@ export const useScrollIndication = ({
 
         setTableInnerContainerWidth(
           tableInnerContainer?.clientWidth
-            ? `${tableInnerContainer.clientWidth - parseInt(odysseyDesignTokens.BorderWidthMain) * 2}px` // Account for the border on the outer container
+            ? `${tableInnerContainer.clientWidth - Number(odysseyDesignTokens.BorderWidthMain) * 2}px` // Account for the border on the outer container
             : "100%",
         );
       }, 100); // debounce delay
