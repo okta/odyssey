@@ -130,7 +130,7 @@ const Toast = ({
         >
           <AlertTitle translate={translate}>
             <ScreenReaderText translate={translate}>
-              {t(`severity.${severity}:`)}
+              {t(`severity.${severity}`)}:
             </ScreenReaderText>
             {text}
           </AlertTitle>
