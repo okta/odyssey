@@ -10,7 +10,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-module.exports = {
+/** @type { import("jest").Config } */
+const jestConfig = {
+  collectCoverage: true,
+  collectCoverageFrom: ["src/**/*.{js,jsx,ts,tsx}"],
+  coveragePathIgnorePatterns: [
+    "/src/icons.generated/",
+    "/src/properties/",
+    "/node_modules/",
+  ],
+  coverageReporters: ["json", "html", "text", "text-summary"],
+  extensionsToTreatAsEsm: [".ts"],
   setupFilesAfterEnv: ["./jest.setup.js"],
   testEnvironment: "jsdom",
 };
+
+module.exports = jestConfig;
