@@ -3119,11 +3119,7 @@ export const components = ({
           letterSpacing: 0.5,
           textTransform: "none",
 
-          "html:lang(en) &": {
-            textTransform: "uppercase",
-          },
-
-          "html:lang(en-*) &": {
+          ":is(:lang(en-*), :lang(en))": {
             textTransform: "uppercase",
           },
         },
