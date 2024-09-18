@@ -3116,7 +3116,10 @@ export const components = ({
           },
         },
         overline: {
-          letterSpacing: 0.5,
+          fontSize: odysseyTokens.TypographySizeOverline,
+          fontWeight: odysseyTokens.TypographyWeightBodyBold,
+          lineHeight: odysseyTokens.TypographyLineHeightOverline,
+          letterSpacing: odysseyTokens.TypographyLetterSpacingOverline,
           textTransform: "none",
 
           ":is(:lang(en-*), :lang(en))": {

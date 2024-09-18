@@ -187,6 +187,11 @@
       "max": {
         "value": "55ch"
       }
+    },
+    "letterSpacing": {
+      "overline": {
+        "value": ".05em"
+      }
     }
   }
 }
