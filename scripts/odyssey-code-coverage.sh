@@ -9,7 +9,7 @@ export TEST_SUITE_TYPE="junit" # Bacon required config
 
 export CODE_COVERAGE=$(yarn workspace @okta/odyssey-storybook ci:coverage)
 # executes the interaction tests against a local instance of Odyssey storybook running
-if ! CODE_COVERAGE; then
+if [[ ! -z ${CODE_COVERAGE} ]]; then
   echo "Code coverage failure!"
   report_results FAILURE publish_type_and_result_dir_but_always_fail
   exit "$BUILD_FAILURE"
