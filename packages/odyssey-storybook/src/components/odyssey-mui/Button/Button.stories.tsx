@@ -11,6 +11,7 @@
  */
 
 import {
+  BackgroundProvider,
   Box,
   Button,
   buttonSizeValues,
@@ -21,7 +22,7 @@ import {
 import { AddIcon } from "@okta/odyssey-react-mui/icons";
 import { expect } from "@storybook/jest";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj, StoryFn, StoryContext } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import icons from "../../../../.storybook/components/iconUtils";
@@ -39,121 +40,73 @@ const storybookMeta: Meta<ButtonProps> = {
   component: Button,
   argTypes: {
     endIcon: {
-      control: {
-        type: "select",
-      },
+      control: { type: "select" },
       options: Object.keys(icons),
       mapping: icons,
       description: "An optional icon to display at the end of the button",
-      table: {
-        type: {
-          summary: "<Icon />",
-        },
-      },
+      table: { type: { summary: "<Icon />" } },
     },
     href: {
       control: "text",
       description: "Optional href to render the button as a link",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
+      table: { type: { summary: "string" } },
     },
     id: {
       control: null,
       description: "An optional ID for the button",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
+      table: { type: { summary: "string" } },
     },
     isDisabled: {
       control: "boolean",
       description: "If `true`, the button is disabled",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
+      table: { type: { summary: "boolean" } },
     },
     isFullWidth: {
       control: "boolean",
       description:
         "If `true`, the button will take up the full width available",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
+      table: { type: { summary: "boolean" } },
     },
     label: {
       control: "text",
       description:
         "The button text. If blank, the button must include an icon.",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
+      table: { type: { summary: "string" } },
     },
     onClick: {
       action: true,
       description: "Callback fired when the button is clicked",
-      table: {
-        type: {
-          summary: "(() => void)",
-        },
-      },
+      table: { type: { summary: "(() => void)" } },
     },
     size: {
       options: buttonSizeValues,
       control: { type: "radio" },
       description: "The size of the button",
       table: {
-        type: {
-          summary: buttonSizeValues.join(" | "),
-        },
-        defaultValue: {
-          summary: "medium",
-        },
+        type: { summary: buttonSizeValues.join(" | ") },
+        defaultValue: { summary: "medium" },
       },
     },
     startIcon: {
-      control: {
-        type: "select",
-      },
+      control: { type: "select" },
       options: Object.keys(icons),
       mapping: icons,
       description: "An optional icon to display at the start of the button",
-      table: {
-        type: {
-          summary: "<Icon />",
-        },
-      },
+      table: { type: { summary: "<Icon />" } },
     },
     tooltipText: {
       control: "text",
       description:
         "If defined, the button will include a tooltip that contains the string.",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
+      table: { type: { summary: "string" } },
     },
     type: {
       options: buttonTypeValues,
       control: { type: "radio" },
       description: "The type of the HTML button element.",
       table: {
-        type: {
-          summary: buttonTypeValues.join(" | "),
-        },
-        defaultValue: {
-          summary: "button",
-        },
+        type: { summary: buttonTypeValues.join(" | ") },
+        defaultValue: { summary: "button" },
       },
     },
     variant: {
@@ -161,25 +114,24 @@ const storybookMeta: Meta<ButtonProps> = {
       control: { type: "radio" },
       description: "The color and style of the button",
       table: {
-        type: {
-          summary: buttonVariantValues.join(" | "),
-        },
-        defaultValue: {
-          summary: "secondary",
-        },
+        type: { summary: buttonVariantValues.join(" | ") },
+        defaultValue: { summary: "secondary" },
       },
-      type: {
-        required: true,
-        name: "other",
-        value: "radio",
-      },
+      type: { required: true, name: "other", value: "radio" },
     },
   },
   args: {
     label: "Add crew",
     variant: "primary",
   },
-  decorators: [MuiThemeDecorator],
+  decorators: [
+    MuiThemeDecorator,
+    (Story: StoryFn<ButtonProps>, context: StoryContext<ButtonProps>) => (
+      <BackgroundProvider value="white">
+        <Story {...context.args} />
+      </BackgroundProvider>
+    ),
+  ],
   tags: ["autodocs"],
 };
 
@@ -210,6 +162,19 @@ const interactWithButton =
       });
     }
   };
+
+const checkButtonStyles = async (
+  canvas: ReturnType<typeof within>,
+  buttonLabel: string,
+  expectedBackgroundColor: string,
+  expectedColor: string,
+) => {
+  const button = canvas.getByText(buttonLabel);
+  await expect(button).toHaveStyle(
+    `background-color: ${expectedBackgroundColor}`,
+  );
+  await expect(button).toHaveStyle(`color: ${expectedColor}`);
+};
 
 export const ButtonPrimary: StoryObj<ButtonProps> = {
   name: "Primary",
@@ -252,6 +217,94 @@ export const ButtonSecondaryDisabled: StoryObj<ButtonProps> = {
     isDisabled: true,
     label: "Add crew",
     variant: "secondary",
+  },
+};
+
+export const ButtonSecondaryDisabledOnWhiteBackground: StoryObj<ButtonProps> = {
+  name: "Secondary, Disabled on white background",
+  decorators: [
+    (Story: StoryFn<ButtonProps>, context: StoryContext<ButtonProps>) => (
+      <BackgroundProvider value="white">
+        <Story {...context.args} />
+      </BackgroundProvider>
+    ),
+  ],
+  args: {
+    variant: "secondary",
+    isDisabled: true,
+    label: "Secondary",
+  },
+  play: async ({ canvasElement }: playType) => {
+    const canvas = within(canvasElement);
+    await checkButtonStyles(
+      canvas,
+      "Secondary",
+      "rgb(243, 244, 246)",
+      "rgb(143, 149, 158)",
+    );
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: `<BackgroundProvider>
+<Button
+  isDisabled
+  label="Secondary"
+  onClick={() => {}}
+  variant="secondary"
+/>
+</BackgroundProvider>`,
+      },
+      description: {
+        story:
+          "Demonstrates how the `Button` component behaves in a white background using `BackgroundProvider`.",
+      },
+    },
+  },
+};
+
+export const ButtonSecondaryDisabledOnGrayBackground: StoryObj<ButtonProps> = {
+  name: "Secondary, Disabled on gray background",
+  decorators: [
+    (Story: StoryFn<ButtonProps>, context: StoryContext<ButtonProps>) => (
+      <BackgroundProvider value="gray">
+        <Box sx={{ backgroundColor: "#F4F4F4", padding: "24px" }}>
+          <Story {...context.args} />
+        </Box>
+      </BackgroundProvider>
+    ),
+  ],
+  args: {
+    variant: "secondary",
+    isDisabled: true,
+    label: "Secondary",
+  },
+  play: async ({ canvasElement }: playType) => {
+    const canvas = within(canvasElement);
+    await checkButtonStyles(
+      canvas,
+      "Secondary",
+      "rgb(229, 231, 235)",
+      "rgb(143, 149, 158)",
+    );
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: `<BackgroundProvider value="gray">
+  <Button
+    isDisabled
+    label="Secondary"
+    onClick={() => {}}
+    variant="secondary"
+  />
+</BackgroundProvider>`,
+      },
+      description: {
+        story:
+          "Demonstrates how the `Button` component behaves in a gray background using `BackgroundProvider`.",
+      },
+    },
   },
 };
 

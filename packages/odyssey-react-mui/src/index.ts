@@ -59,6 +59,7 @@ export { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
 export * from "./Accordion";
 export * from "./Autocomplete";
 export { badgeContentMaxValues } from "./Badge";
+export * from "./BackgroundContext";
 export * from "./Banner";
 export * from "./Box";
 export * from "./Breadcrumbs";

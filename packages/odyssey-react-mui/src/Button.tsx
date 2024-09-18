@@ -10,8 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Button as MuiButton } from "@mui/material";
-import type { ButtonProps as MuiButtonProps } from "@mui/material";
 import {
   HTMLAttributes,
   memo,
@@ -21,8 +19,14 @@ import {
   useMemo,
   useRef,
 } from "react";
-
-import { useButton } from "./ButtonContext";
+import {
+  Button as MuiButton,
+  ButtonProps as MuiButtonProps,
+} from "@mui/material";
+import { buttonClasses } from "@mui/material/Button";
+import styled from "@emotion/styled";
+import { useBackground } from "./BackgroundContext"; // Custom hook to consume the background context
+import { useButton } from "./ButtonContext"; // Custom hook to consume the button context
 import type { HtmlProps } from "./HtmlProps";
 import { FocusHandle } from "./inputUtils";
 import {
@@ -31,6 +35,10 @@ import {
   useMuiProps,
 } from "./MuiPropsContext";
 import { Tooltip } from "./Tooltip";
+import {
+  DesignTokens,
+  useOdysseyDesignTokens,
+} from "./OdysseyDesignTokensContext";
 
 export const buttonSizeValues = ["small", "medium", "large"] as const;
 export const buttonTypeValues = ["button", "submit", "reset"] as const;
@@ -142,6 +150,24 @@ export type ButtonProps = {
     | "translate"
   >;
 
+// Styled version of the Button for gray background context style overrides
+const nonForwardedProps = ["isGrayBackground", "odysseyDesignTokens"];
+
+const StyledButton = styled(MuiButton, {
+  shouldForwardProp: (prop) => !nonForwardedProps.includes(prop as string),
+})<{
+  isGrayBackground?: boolean;
+  odysseyDesignTokens: DesignTokens;
+}>(({ isGrayBackground, odysseyDesignTokens }) => ({
+  ...(isGrayBackground && {
+    [`&.${buttonClasses.root}.${buttonClasses.disabled}.MuiButton-secondary`]: {
+      backgroundColor: odysseyDesignTokens.HueNeutral200,
+      color: odysseyDesignTokens.TypographyColorDisabled,
+      borderColor: "transparent",
+    },
+  }),
+}));
+
 const Button = ({
   ariaControls,
   ariaDescribedBy,
@@ -167,10 +193,15 @@ const Button = ({
   variant: variantProp,
 }: ButtonProps) => {
   const muiProps = useMuiProps();
+  const background = useBackground();
+  const odysseyDesignTokens = useOdysseyDesignTokens();
+  // Determine if the button is in a gray background and is a secondary variant
+  const isGrayBackground = background === "gray" && variantProp === "secondary";
 
   // We're deprecating the "tertiary" variant, so map it to
   // "secondary" in lieu of making a breaking change
   const variant = variantProp === "tertiary" ? "secondary" : variantProp;
+
   const localButtonRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
   const buttonContext = useButton();
   const isFullWidth = useMemo(
@@ -192,7 +223,7 @@ const Button = ({
   const renderButton = useCallback(
     (muiProps: MuiPropsContextType) => {
       return (
-        <MuiButton
+        <StyledButton
           {...muiProps}
           aria-controls={ariaControls}
           aria-describedby={ariaDescribedBy}
@@ -224,9 +255,11 @@ const Button = ({
           translate={translate}
           type={type}
           variant={variant}
+          isGrayBackground={isGrayBackground}
+          odysseyDesignTokens={odysseyDesignTokens}
         >
           {label}
-        </MuiButton>
+        </StyledButton>
       );
     },
     [
@@ -240,8 +273,10 @@ const Button = ({
       href,
       id,
       isDisabled,
+      isGrayBackground,
       isFullWidth,
       label,
+      odysseyDesignTokens,
       onClick,
       size,
       startIcon,
