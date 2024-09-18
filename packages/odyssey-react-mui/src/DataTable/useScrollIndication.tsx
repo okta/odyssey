@@ -17,6 +17,7 @@ import {
   useEffect,
   useRef,
 } from "react";
+import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext";
 
 type UseScrollIndicationProps = {
   tableOuterContainer: HTMLDivElement | null;
@@ -35,6 +36,8 @@ export const useScrollIndication = ({
   const animationFrameIdRef = useRef<number | null>(null);
 
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
+
+  const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const checkScrollIndicators = useCallback(() => {
     if (!tableOuterContainer || !tableInnerContainer) return;
@@ -76,7 +79,7 @@ export const useScrollIndication = ({
 
         setTableInnerContainerWidth(
           tableInnerContainer?.clientWidth
-            ? `${tableInnerContainer.clientWidth}px`
+            ? `${tableInnerContainer.clientWidth - Number(odysseyDesignTokens.BorderWidthMain) * 2}px` // Account for the border on the outer container
             : "100%",
         );
       }, 100); // debounce delay
@@ -104,6 +107,7 @@ export const useScrollIndication = ({
     tableInnerContainer,
     setIsTableContainerScrolledToStart,
     setIsTableContainerScrolledToEnd,
+    odysseyDesignTokens.BorderWidthMain,
   ]);
 
   useEffect(() => {

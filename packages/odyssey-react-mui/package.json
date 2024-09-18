@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-react-mui",
-  "version": "1.21.2",
+  "version": "1.22.0",
   "description": "React MUI components for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -81,6 +81,7 @@
     "@okta/odyssey-design-tokens": "workspace:^",
     "@types/luxon": "^3.4.2",
     "date-fns": "^2.30.0",
+    "dom-accessibility-api": "^0.7.0",
     "i18next": "^23.8.2",
     "luxon": "^3.4.4",
     "material-react-table": "^2.11.3",

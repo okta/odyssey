@@ -9,7 +9,6 @@ Build and design consistent, efficient, and accessible UIs for all Okta users.
 | [@okta/odyssey-design-tokens](https://github.com/okta/odyssey/blob/main/packages/odyssey-design-tokens/README.md)             | Design tokens        |
 | [@okta/browserslist-config-odyssey](https://github.com/okta/odyssey/blob/main/packages/browserslist-config-odyssey/README.md) | Browserslist config  |
 | [@okta/odyssey-babel-preset](https://github.com/okta/odyssey/blob/main/packages/odyssey-babel-preset/README.md)               | Babel preset         |
-| [@okta/odyssey-babel-loader](https://github.com/okta/odyssey/blob/main/packages/odyssey-babel-loader/README.md)               | Babel webpack loader |
 | [@okta/odyssey-react-mui](https://github.com/okta/odyssey/blob/main/packages/odyssey-react-mui/README.md)                     | React MUI components |
 
 ## Browser Support
