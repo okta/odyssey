@@ -11,7 +11,13 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
-import { Tag, TagList, TagProps } from "@okta/odyssey-react-mui";
+import {
+  BackgroundProvider,
+  Box,
+  Tag,
+  TagList,
+  TagProps,
+} from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { GroupIcon } from "@okta/odyssey-react-mui/icons";
 import icons from "../../../../.storybook/components/iconUtils";
@@ -118,6 +124,17 @@ const storybookMeta: Meta<TagProps> = {
 
 export default storybookMeta;
 
+const checkTagStyles = async (
+  canvas: ReturnType<typeof within>,
+  tagLabel: string,
+  expectedBackgroundColor: string,
+  expectedColor: string,
+) => {
+  const tag = canvas.getByText(tagLabel);
+  await expect(tag).toHaveStyle(`background-color: ${expectedBackgroundColor}`);
+  await expect(tag).toHaveStyle(`color: ${expectedColor}`);
+};
+
 export const Default: StoryObj<TagProps> = {
   args: {
     label: "Starship",
@@ -221,5 +238,115 @@ export const Disabled: StoryObj<TagProps> = {
   args: {
     label: "Starship",
     isDisabled: true,
+  },
+};
+
+export const TagsOnWhiteBackground: StoryObj<TagProps> = {
+  name: "Tags on White Background",
+  render: () => (
+    <BackgroundProvider value="white">
+      <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
+        <Tag label="Default" />
+        <Tag label="Info" colorVariant="info" />
+        <Tag label="AccentOne" colorVariant="accentOne" />
+        <Tag label="AccentTwo" colorVariant="accentTwo" />
+        <Tag label="AccentThree" colorVariant="accentThree" />
+        <Tag label="AccentFour" colorVariant="accentFour" />
+      </Box>
+    </BackgroundProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await checkTagStyles(
+      canvas,
+      "Default",
+      "rgb(243, 244, 246)",
+      "rgb(23, 27, 37)",
+    );
+    await checkTagStyles(
+      canvas,
+      "Info",
+      "rgb(236, 242, 255)",
+      "rgb(2, 48, 135)",
+    );
+    // Add checks for other color variants
+    await axeRun("Tags on White Background");
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: `<BackgroundProvider>
+  <Tag label="Default" />
+  <Tag label="Info" colorVariant="info" />
+  <Tag label="AccentOne" colorVariant="accentOne" />
+  <Tag label="AccentTwo" colorVariant="accentTwo" />
+  <Tag label="AccentThree" colorVariant="accentThree" />
+  <Tag label="AccentFour" colorVariant="accentFour" />
+</BackgroundProvider>`,
+      },
+      description: {
+        story:
+          "Demonstrates how the `Tag` component behaves on a white background using `BackgroundProvider`.",
+      },
+    },
+  },
+};
+
+export const TagsOnGrayBackground: StoryObj<TagProps> = {
+  name: "Tags on Gray Background",
+  render: () => (
+    <BackgroundProvider value="gray">
+      <Box
+        sx={{
+          backgroundColor: "#F4F4F4",
+          padding: "24px",
+          display: "flex",
+          flexWrap: "wrap",
+          gap: 2,
+        }}
+      >
+        <Tag label="Default" />
+        <Tag label="Info" colorVariant="info" />
+        <Tag label="AccentOne" colorVariant="accentOne" />
+        <Tag label="AccentTwo" colorVariant="accentTwo" />
+        <Tag label="AccentThree" colorVariant="accentThree" />
+        <Tag label="AccentFour" colorVariant="accentFour" />
+      </Box>
+    </BackgroundProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await checkTagStyles(
+      canvas,
+      "Default",
+      "rgb(229, 231, 235)",
+      "rgb(23, 27, 37)",
+    );
+    await checkTagStyles(
+      canvas,
+      "Info",
+      "rgb(225, 235, 255)",
+      "rgb(2, 48, 135)",
+    );
+    // Add checks for other color variants
+    await axeRun("Tags on Gray Background");
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: `<BackgroundProvider value="gray">
+  <Tag label="Default" />
+  <Tag label="Info" colorVariant="info" />
+  <Tag label="AccentOne" colorVariant="accentOne" />
+  <Tag label="AccentTwo" colorVariant="accentTwo" />
+  <Tag label="AccentThree" colorVariant="accentThree" />
+  <Tag label="AccentFour" colorVariant="accentFour" />
+</BackgroundProvider>`,
+      },
+      description: {
+        story:
+          "Demonstrates how the `Tag` component behaves on a gray background using `BackgroundProvider`.",
+      },
+    },
   },
 };
