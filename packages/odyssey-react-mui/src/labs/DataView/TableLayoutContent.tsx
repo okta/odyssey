@@ -20,6 +20,7 @@ import {
   ReactNode,
   Dispatch,
   ReactElement,
+  useEffect,
 } from "react";
 import styled, { CSSObject } from "@emotion/styled";
 import {
@@ -69,6 +70,7 @@ export type TableLayoutContentProps = {
   data: MRT_RowData[];
   draggingRow?: MRT_Row<MRT_RowData> | null;
   emptyState: ReactNode;
+  enableVirtualization?: boolean;
   getRowId: UniversalProps["getRowId"];
   hasRowReordering: UniversalProps["hasRowReordering"];
   hasRowSelection: UniversalProps["hasRowSelection"];
@@ -131,6 +133,7 @@ const TableLayoutContent = ({
   data,
   draggingRow,
   emptyState,
+  enableVirtualization,
   getRowId,
   hasRowReordering,
   hasRowSelection,
@@ -154,6 +157,7 @@ const TableLayoutContent = ({
     useState(true);
   const [tableInnerContainerWidth, setTableInnerContainerWidth] =
     useState<string>("100%");
+  const shouldUpdateScroll = useRef<boolean>(false);
   const tableOuterContainerRef = useRef<HTMLDivElement>(null);
   const tableInnerContainerRef = useRef<HTMLDivElement>(null);
   const tableContentRef = useRef<HTMLTableElement>(null);
@@ -266,6 +270,24 @@ const TableLayoutContent = ({
     () => <Box sx={innerWidthStyle}>{emptyState}</Box>,
     [innerWidthStyle, emptyState],
   );
+
+  // Scroll to the bottom as soon as data loads after clicking the
+  // loadMore pagination button
+  useEffect(() => {
+    if (enableVirtualization) {
+      shouldUpdateScroll.current = true;
+    }
+  }, [enableVirtualization, pagination]);
+
+  useEffect(() => {
+    if (shouldUpdateScroll.current && tableContentRef.current) {
+      tableInnerContainerRef.current?.scrollTo(
+        0,
+        tableContentRef.current.clientHeight,
+      );
+      shouldUpdateScroll.current = false;
+    }
+  }, [data]);
 
   const shouldDisplayRowActions = useMemo(
     () =>
@@ -401,7 +423,7 @@ const TableLayoutContent = ({
       ...dragHandleText,
     }),
     renderDetailPanel: tableLayoutOptions.renderDetailPanel,
-    enableRowVirtualization: data.length >= 50,
+    enableRowVirtualization: enableVirtualization,
     muiTableHeadCellProps: ({ column: currentColumn }) => ({
       className: tableState.columnSorting.find(
         (sortedColumn) => sortedColumn.id === currentColumn.id,

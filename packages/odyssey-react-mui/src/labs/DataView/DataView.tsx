@@ -79,6 +79,7 @@ const DataView = ({
   bulkActionMenuItems,
   currentPage = 1,
   emptyPlaceholder,
+  enableVirtualization: enableVirtualizationProp,
   errorMessage: errorMessageProp,
   filters: filtersProp,
   getData,
@@ -309,6 +310,10 @@ const DataView = ({
     ],
   );
 
+  const enableVirtualization = useMemo(() => {
+    return enableVirtualizationProp || paginationType === "loadMore";
+  }, [enableVirtualizationProp, paginationType]);
+
   const { lastRow: lastRowOnPage } = usePagination({
     currentRowsCount: data.length,
     pageIndex: pagination.pageIndex,
@@ -371,6 +376,7 @@ const DataView = ({
           data={data}
           draggingRow={draggingRow}
           emptyState={emptyState}
+          enableVirtualization={enableVirtualization}
           getRowId={getRowId}
           hasRowReordering={hasRowReordering}
           hasRowSelection={hasRowSelection}

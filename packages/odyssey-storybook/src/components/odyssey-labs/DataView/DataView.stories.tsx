@@ -31,7 +31,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import {
   Person,
   columns as personColumns,
-  data as personData,
+  lotsOfData as personData,
 } from "./personData";
 import { filterData, reorderData } from "./dataFunctions";
 import {
@@ -142,6 +142,9 @@ const storybookMeta: Meta<DataViewMetaProps> = {
     },
     searchDelayTime: {
       control: "number",
+    },
+    enableVirtualization: {
+      control: "boolean",
     },
     errorMessage: {
       control: "text",
@@ -401,6 +404,7 @@ const BaseStory: StoryObj<DataViewMetaProps> = {
         bulkActionMenuItems={
           args.hasActionMenuItems ? actionMenuItems : undefined
         }
+        enableVirtualization={args.enableVirtualization}
         hasRowReordering={args.hasRowReordering}
         isRowReorderingDisabled={args.isRowReorderingDisabled}
         hasRowSelection={args.hasRowSelection}
