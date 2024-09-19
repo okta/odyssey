@@ -304,14 +304,16 @@ export default storybookMeta;
 export const Default: StoryObj<SideNavProps> = {
   render: (props: SideNavProps) => {
     return (
-      <SideNav
-        navHeaderText={props.navHeaderText}
-        isCollapsible={props.isCollapsible}
-        onCollapse={props.onCollapse}
-        onExpand={props.onExpand}
-        sideNavItems={props.sideNavItems}
-        footerItems={props.footerItems}
-      />
+      <div style={{ height: "100vh" }}>
+        <SideNav
+          navHeaderText={props.navHeaderText}
+          isCollapsible={props.isCollapsible}
+          onCollapse={props.onCollapse}
+          onExpand={props.onExpand}
+          sideNavItems={props.sideNavItems}
+          footerItems={props.footerItems}
+        />
+      </div>
     );
   },
   play: async ({ canvasElement, step }: PlaywrightProps<SideNavProps>) => {
