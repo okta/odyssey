@@ -16,7 +16,7 @@ import { translation as en } from "../properties/ts/odyssey-react-mui";
 declare module "i18next" {
   interface CustomTypeOptions {
     resources: {
-      translations: typeof en;
+      translation: typeof en;
     };
   }
 }

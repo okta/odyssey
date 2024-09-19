@@ -46,7 +46,7 @@ export const useDateFieldsTranslations = (): DateFieldsTranslations => {
     empty: `${t("picker.labels.empty")}`,
     end: `${t("picker.labels.range.end")}`,
     endDate: `${t("picker.labels.range.enddate")}`,
-    endTime: `${t("picker.labels.range.endTime")}`,
+    endTime: `${t("picker.labels.range.endtime")}`,
     fieldClearLabel: `${t("picker.labels.field.clear")}`,
     fieldDayPlaceholder: () => `${t("picker.field.placeholder.day")}`,
     fieldMonthPlaceholder: () => `${t("picker.field.placeholder.month")}`,
