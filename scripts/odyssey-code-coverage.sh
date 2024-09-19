@@ -19,6 +19,6 @@ if [[ $EXIT_CODE -ne 0 ]]; then
 fi
 
 echo "Code coverage passed!"
-report_results SUCCESS publish_type_and_result_dir_but_succeed_if_no_results
-
 log_custom_message "Code Coverage Report" "$CODE_COVERAGE"
+
+report_results SUCCESS publish_type_and_result_dir_but_succeed_if_no_results
