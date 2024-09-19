@@ -35,7 +35,7 @@ import { DataFilters } from "../DataFilters";
 import { EmptyState } from "../../EmptyState";
 import { fetchData } from "./fetchData";
 import { LayoutSwitcher } from "./LayoutSwitcher";
-import { MenuButton } from "../..";
+import { MenuButton } from "../../MenuButton";
 import { MoreIcon } from "../../icons.generated";
 import { TableSettings } from "./TableSettings";
 import { Pagination, usePagination } from "../../Pagination";
@@ -43,6 +43,7 @@ import { TableLayoutContent } from "./TableLayoutContent";
 import { CardLayoutContent } from "./CardLayoutContent";
 import { useFilterConversion } from "./useFilterConversion";
 import { useRowReordering } from "../../DataTable/useRowReordering";
+import { Typography } from "../../Typography";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
@@ -72,6 +73,20 @@ const AdditionalActionsContainer = styled("div", {
   gap: odysseyDesignTokens.Spacing2,
 }));
 
+const AdditionalActionsInner = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
+  display: "flex",
+  alignItems: "center",
+  gap: odysseyDesignTokens.Spacing2,
+}));
+
+const MetaTextContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
+  marginInlineEnd: odysseyDesignTokens.Spacing2,
+}));
+
 const DataView = ({
   additionalActionButton,
   additionalActionMenuItems,
@@ -96,6 +111,7 @@ const DataView = ({
   isNoResults: isNoResultsProp,
   isPaginationMoreDisabled,
   isRowReorderingDisabled,
+  metaText,
   noResultsPlaceholder,
   onChangeRowSelection,
   onReorderRows,
@@ -266,49 +282,62 @@ const DataView = ({
     return;
   }, [noResultsPlaceholder, t, isEmpty, isNoResults, emptyPlaceholder]);
 
-  const additionalActions = useMemo(
-    () => (
-      <>
-        {currentLayout === "table" && tableLayoutOptions && (
-          <TableSettings
-            setTableState={setTableState}
-            tableLayoutOptions={tableLayoutOptions}
-            tableState={tableState}
-          />
-        )}
+  const additionalActions = useMemo(() => {
+    return (
+      (metaText ||
+        (currentLayout === "table" && tableLayoutOptions) ||
+        availableLayouts.length > 1 ||
+        additionalActionButton ||
+        additionalActionMenuItems) && (
+        <AdditionalActionsInner odysseyDesignTokens={odysseyDesignTokens}>
+          {metaText && (
+            <MetaTextContainer odysseyDesignTokens={odysseyDesignTokens}>
+              <Typography color="textSecondary">{metaText}</Typography>
+            </MetaTextContainer>
+          )}
 
-        {availableLayouts.length > 1 && (
-          <LayoutSwitcher
-            availableLayouts={availableLayouts}
-            currentLayout={currentLayout}
-            setCurrentLayout={setCurrentLayout}
-          />
-        )}
+          {currentLayout === "table" && tableLayoutOptions && (
+            <TableSettings
+              setTableState={setTableState}
+              tableLayoutOptions={tableLayoutOptions}
+              tableState={tableState}
+            />
+          )}
 
-        {additionalActionButton}
+          {availableLayouts.length > 1 && (
+            <LayoutSwitcher
+              availableLayouts={availableLayouts}
+              currentLayout={currentLayout}
+              setCurrentLayout={setCurrentLayout}
+            />
+          )}
 
-        {additionalActionMenuItems && (
-          <MenuButton
-            endIcon={<MoreIcon />}
-            ariaLabel={t("table.moreactions.arialabel")}
-            buttonVariant="secondary"
-            menuAlignment="right"
-          >
-            {additionalActionMenuItems}
-          </MenuButton>
-        )}
-      </>
-    ),
-    [
-      currentLayout,
-      tableLayoutOptions,
-      tableState,
-      availableLayouts,
-      additionalActionButton,
-      additionalActionMenuItems,
-      t,
-    ],
-  );
+          {additionalActionButton}
+
+          {additionalActionMenuItems && (
+            <MenuButton
+              endIcon={<MoreIcon />}
+              ariaLabel={t("table.moreactions.arialabel")}
+              buttonVariant="secondary"
+              menuAlignment="right"
+            >
+              {additionalActionMenuItems}
+            </MenuButton>
+          )}
+        </AdditionalActionsInner>
+      )
+    );
+  }, [
+    additionalActionButton,
+    additionalActionMenuItems,
+    availableLayouts,
+    currentLayout,
+    metaText,
+    odysseyDesignTokens,
+    tableLayoutOptions,
+    tableState,
+    t,
+  ]);
 
   const enableVirtualization = useMemo(
     () => enableVirtualizationProp ?? paginationType === "loadMore",
@@ -365,11 +394,14 @@ const DataView = ({
         </BulkActionsContainer>
       )}
 
-      {!shouldShowFilters && !bulkActionMenuItems && !hasRowSelection && (
-        <AdditionalActionsContainer odysseyDesignTokens={odysseyDesignTokens}>
-          {additionalActions}
-        </AdditionalActionsContainer>
-      )}
+      {!shouldShowFilters &&
+        !bulkActionMenuItems &&
+        !hasRowSelection &&
+        additionalActions && (
+          <AdditionalActionsContainer odysseyDesignTokens={odysseyDesignTokens}>
+            {additionalActions}
+          </AdditionalActionsContainer>
+        )}
 
       {currentLayout === "table" && tableLayoutOptions && (
         <TableLayoutContent
