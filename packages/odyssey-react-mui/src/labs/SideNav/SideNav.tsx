@@ -132,6 +132,7 @@ const SideNavScrollableContainer = styled.div({
 const SectionHeader = styled("li", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  fontFamily: odysseyDesignTokens.TypographyFamilyHeading,
   fontSize: odysseyDesignTokens.TypographySizeOverline,
   fontWeight: odysseyDesignTokens.TypographyWeightHeadingBold,
   color: odysseyDesignTokens.HueNeutral600,
