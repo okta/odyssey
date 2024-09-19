@@ -21,7 +21,7 @@ import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaDat
 import { axeRun } from "../../../axe-util";
 
 const storybookMeta: Meta<SwitchProps> = {
-  title: "Labs Components/Switch",
+  title: "MUI Components/Forms/Switch",
   component: Switch,
   argTypes: {
     isChecked: {

@@ -11,10 +11,10 @@
  */
 
 import {
-  FileUpload,
-  fileUploadVariants,
+  FileUploader,
   fileUploadTypes,
-} from "@okta/odyssey-react-mui/labs";
+  fileUploadVariants,
+} from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 // TODO: Write tests for this component @see https://oktainc.atlassian.net/browse/OKTA-704264
 // import { userEvent, within } from "@storybook/testing-library";
@@ -24,9 +24,9 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 // import { axeRun } from "../../../axe-util";
 
-const storybookMeta: Meta<typeof FileUpload> = {
-  title: "Labs Components/FileUpload",
-  component: FileUpload,
+const storybookMeta: Meta<typeof FileUploader> = {
+  title: "MUI Components/Forms/FileUploader",
+  component: FileUploader,
   argTypes: {
     acceptedFileTypes: {
       description:
@@ -54,7 +54,7 @@ const storybookMeta: Meta<typeof FileUpload> = {
     isFullWidth: fieldComponentPropsMetaData.isFullWidth,
     label: {
       control: "text",
-      description: "The label text for the FileUpload",
+      description: "The label text for the FileUploader",
       table: {
         type: {
           summary: "string",
@@ -100,39 +100,39 @@ const storybookMeta: Meta<typeof FileUpload> = {
 
 export default storybookMeta;
 
-export const ButtonOnly: StoryObj<typeof FileUpload> = {
+export const ButtonOnly: StoryObj<typeof FileUploader> = {
   args: {
     variant: "button",
   },
 };
 
-export const DragAndDropWithIcon: StoryObj<typeof FileUpload> = {
+export const DragAndDropWithIcon: StoryObj<typeof FileUploader> = {
   args: {
     type: "multiple",
     variant: "dragAndDropWithIcon",
   },
 };
 
-export const DragAndDropWithoutIcon: StoryObj<typeof FileUpload> = {
+export const DragAndDropWithoutIcon: StoryObj<typeof FileUploader> = {
   args: {
     variant: "dragAndDrop",
   },
 };
 
-export const SingleFileAllowed: StoryObj<typeof FileUpload> = {
+export const SingleFileAllowed: StoryObj<typeof FileUploader> = {
   args: {
     variant: "dragAndDropWithIcon",
   },
 };
 
-export const MultipleFileAllowed: StoryObj<typeof FileUpload> = {
+export const MultipleFileAllowed: StoryObj<typeof FileUploader> = {
   args: {
     type: "multiple",
     variant: "dragAndDropWithIcon",
   },
 };
 
-export const SpecificFileTypes: StoryObj<typeof FileUpload> = {
+export const SpecificFileTypes: StoryObj<typeof FileUploader> = {
   args: {
     acceptedFileTypes: [".jpg", ".png"],
     variant: "dragAndDropWithIcon",

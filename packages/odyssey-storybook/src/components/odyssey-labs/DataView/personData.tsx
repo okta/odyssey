@@ -1883,3 +1883,9 @@ export const data: Person[] = [
     risk: "medium",
   },
 ];
+
+let result: Person[] = [];
+for (let i = 0; i < 50; i++) {
+  result = result.concat(data);
+}
+export const lotsOfData = result;

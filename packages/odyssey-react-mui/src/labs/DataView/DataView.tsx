@@ -65,9 +65,12 @@ const BulkActionsContainer = styled("div")(() => ({
   justifyContent: "space-between",
 }));
 
-const AdditionalActionsContainer = styled("div")(() => ({
+const AdditionalActionsContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   display: "flex",
   justifyContent: "flex-end",
+  gap: odysseyDesignTokens.Spacing2,
 }));
 
 const AdditionalActionsInner = styled("div", {
@@ -91,6 +94,7 @@ const DataView = ({
   bulkActionMenuItems,
   currentPage = 1,
   emptyPlaceholder,
+  enableVirtualization: enableVirtualizationProp,
   errorMessage: errorMessageProp,
   filters: filtersProp,
   getData,
@@ -210,9 +214,9 @@ const DataView = ({
   useEffect(() => {
     setPagination((prev) => ({
       pageIndex: 1,
-      pageSize: prev.pageSize,
+      pageSize: paginationType == "loadMore" ? resultsPerPage : prev.pageSize,
     }));
-  }, [filters, search]);
+  }, [filters, paginationType, resultsPerPage, search]);
 
   // Retrieve the data
   useEffect(() => {
@@ -324,16 +328,21 @@ const DataView = ({
       )
     );
   }, [
-    odysseyDesignTokens,
-    metaText,
-    currentLayout,
-    tableLayoutOptions,
-    tableState,
-    availableLayouts,
     additionalActionButton,
     additionalActionMenuItems,
+    availableLayouts,
+    currentLayout,
+    metaText,
+    odysseyDesignTokens,
+    tableLayoutOptions,
+    tableState,
     t,
   ]);
+
+  const enableVirtualization = useMemo(
+    () => enableVirtualizationProp ?? paginationType === "loadMore",
+    [enableVirtualizationProp, paginationType],
+  );
 
   const { lastRow: lastRowOnPage } = usePagination({
     currentRowsCount: data.length,
@@ -389,7 +398,7 @@ const DataView = ({
         !bulkActionMenuItems &&
         !hasRowSelection &&
         additionalActions && (
-          <AdditionalActionsContainer>
+          <AdditionalActionsContainer odysseyDesignTokens={odysseyDesignTokens}>
             {additionalActions}
           </AdditionalActionsContainer>
         )}
@@ -400,6 +409,7 @@ const DataView = ({
           data={data}
           draggingRow={draggingRow}
           emptyState={emptyState}
+          enableVirtualization={enableVirtualization}
           getRowId={getRowId}
           hasRowReordering={hasRowReordering}
           hasRowSelection={hasRowSelection}
