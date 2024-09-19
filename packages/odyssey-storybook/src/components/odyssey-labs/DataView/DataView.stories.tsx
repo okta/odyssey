@@ -31,7 +31,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import {
   Person,
   columns as personColumns,
-  lotsOfData as personData,
+  data as personData,
 } from "./personData";
 import { filterData, reorderData } from "./dataFunctions";
 import {

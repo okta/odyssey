@@ -280,7 +280,11 @@ const TableLayoutContent = ({
   }, [enableVirtualization, pagination]);
 
   useEffect(() => {
-    if (shouldUpdateScroll.current && tableContentRef.current) {
+    if (
+      shouldUpdateScroll.current &&
+      tableContentRef.current &&
+      typeof tableInnerContainerRef.current?.scrollTo !== "undefined"
+    ) {
       tableInnerContainerRef.current?.scrollTo(
         0,
         tableContentRef.current.clientHeight,

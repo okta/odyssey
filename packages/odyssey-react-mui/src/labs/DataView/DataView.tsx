@@ -310,9 +310,10 @@ const DataView = ({
     ],
   );
 
-  const enableVirtualization = useMemo(() => {
-    return enableVirtualizationProp || paginationType === "loadMore";
-  }, [enableVirtualizationProp, paginationType]);
+  const enableVirtualization = useMemo(
+    () => enableVirtualizationProp ?? paginationType === "loadMore",
+    [enableVirtualizationProp, paginationType],
+  );
 
   const { lastRow: lastRowOnPage } = usePagination({
     currentRowsCount: data.length,

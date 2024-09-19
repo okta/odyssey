@@ -31,6 +31,8 @@ const testView = (
     }}
     hasSearch
     hasPagination
+    // virtualization has to be false for the tests to work properly
+    enableVirtualization={false}
     paginationType="loadMore"
     resultsPerPage={20}
   />
