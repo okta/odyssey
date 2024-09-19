@@ -13,3 +13,6 @@
 import "regenerator-runtime/runtime";
 import "@testing-library/jest-dom";
 import "jest-axe/extend-expect";
+
+import * as ResizeObserverModule from "resize-observer-polyfill";
+global.ResizeObserver = ResizeObserverModule.default;

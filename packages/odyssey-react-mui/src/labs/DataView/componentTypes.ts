@@ -47,6 +47,7 @@ export type UniversalProps = {
   ) => MenuButtonProps["children"];
   currentPage?: number;
   emptyPlaceholder?: ReactNode;
+  enableVirtualization?: boolean;
   errorMessage?: string;
   filters?: Array<DataFilter | DataTableColumn<MRT_RowData> | string>;
   getData: ({
