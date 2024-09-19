@@ -7,7 +7,7 @@ cd $OKTA_HOME/$REPO
 
 export TEST_SUITE_TYPE="junit" # Bacon required config
 
-export CODE_COVERAGE=$(yarn workspace @okta/odyssey-storybook ci:coverage)
+export CODE_COVERAGE=$(yarn workspace @okta/odyssey-react-mui ci:coverage)
 export EXIT_CODE=$?
 
 echo $CODE_COVERAGE
