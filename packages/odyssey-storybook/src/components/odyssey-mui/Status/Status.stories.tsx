@@ -16,8 +16,13 @@ import {
   StatusProps,
   statusSeverityValues,
   statusVariantValues,
+  BackgroundProvider,
+  Box,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { within } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
+import { axeRun } from "../../../axe-util";
 
 const storybookMeta: Meta<StatusProps> = {
   title: "MUI Components/Status",
@@ -74,6 +79,19 @@ const storybookMeta: Meta<StatusProps> = {
 
 export default storybookMeta;
 
+const checkStatusStyles = async (
+  canvas: ReturnType<typeof within>,
+  statusLabel: string,
+  expectedBackgroundColor: string,
+  expectedColor: string,
+) => {
+  const status = canvas.getByText(statusLabel);
+  await expect(status).toHaveStyle(
+    `background-color: ${expectedBackgroundColor}`,
+  );
+  await expect(status).toHaveStyle(`color: ${expectedColor}`);
+};
+
 export const DefaultPill: StoryObj<StatusProps> = {
   args: {
     label: "Warp drive in standby",
@@ -105,6 +123,112 @@ export const WarningPill: StoryObj<StatusProps> = {
   args: {
     label: "Warp fuel low",
     severity: "warning",
+  },
+};
+
+export const StatusesOnWhiteBackground: StoryObj<StatusProps> = {
+  name: "Statuses on White Background",
+  render: () => (
+    <BackgroundProvider value="white">
+      <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
+        <Status label="Default" severity="default" />
+        <Status label="Error" severity="error" />
+        <Status label="Info" severity="info" />
+        <Status label="Success" severity="success" />
+        <Status label="Warning" severity="warning" />
+      </Box>
+    </BackgroundProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await checkStatusStyles(
+      canvas,
+      "Default",
+      "rgb(243, 244, 246)",
+      "rgb(23, 27, 37)",
+    );
+    await checkStatusStyles(
+      canvas,
+      "Error",
+      "rgb(254, 242, 242)",
+      "rgb(153, 27, 27)",
+    );
+    // Add checks for other severities
+    await axeRun("Statuses on White Background");
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: `<BackgroundProvider>
+  <Status label="Default" severity="default" />
+  <Status label="Error" severity="error" />
+  <Status label="Info" severity="info" />
+  <Status label="Success" severity="success" />
+  <Status label="Warning" severity="warning" />
+</BackgroundProvider>`,
+      },
+      description: {
+        story:
+          "Demonstrates how the `Status` component behaves on a white background using `BackgroundProvider`.",
+      },
+    },
+  },
+};
+
+export const StatusesOnGrayBackground: StoryObj<StatusProps> = {
+  name: "Statuses on Gray Background",
+  render: () => (
+    <BackgroundProvider value="gray">
+      <Box
+        sx={{
+          backgroundColor: "#F4F4F4",
+          padding: "24px",
+          display: "flex",
+          flexWrap: "wrap",
+          gap: 2,
+        }}
+      >
+        <Status label="Default" severity="default" />
+        <Status label="Error" severity="error" />
+        <Status label="Info" severity="info" />
+        <Status label="Success" severity="success" />
+        <Status label="Warning" severity="warning" />
+      </Box>
+    </BackgroundProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await checkStatusStyles(
+      canvas,
+      "Default",
+      "rgb(229, 231, 235)",
+      "rgb(23, 27, 37)",
+    );
+    await checkStatusStyles(
+      canvas,
+      "Error",
+      "rgb(254, 226, 226)",
+      "rgb(120, 21, 21)",
+    );
+    // Add checks for other severities
+    await axeRun("Statuses on Gray Background");
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: `<BackgroundProvider value="gray">
+  <Status label="Default" severity="default" />
+  <Status label="Error" severity="error" />
+  <Status label="Info" severity="info" />
+  <Status label="Success" severity="success" />
+  <Status label="Warning" severity="warning" />
+</BackgroundProvider>`,
+      },
+      description: {
+        story:
+          "Demonstrates how the `Status` component behaves on a gray background using `BackgroundProvider`.",
+      },
+    },
   },
 };
 
