@@ -119,6 +119,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "regenerator-runtime": "^0.14.1",
+    "resize-observer-polyfill": "^1.5.1",
     "rimraf": "^5.0.1",
     "stylelint": "^14.13.0",
     "tsx": "^4.7.3",

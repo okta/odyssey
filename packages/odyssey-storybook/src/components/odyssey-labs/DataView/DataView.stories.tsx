@@ -143,6 +143,9 @@ const storybookMeta: Meta<DataViewMetaProps> = {
     searchDelayTime: {
       control: "number",
     },
+    enableVirtualization: {
+      control: "boolean",
+    },
     errorMessage: {
       control: "text",
     },
@@ -401,6 +404,7 @@ const BaseStory: StoryObj<DataViewMetaProps> = {
         bulkActionMenuItems={
           args.hasActionMenuItems ? actionMenuItems : undefined
         }
+        enableVirtualization={args.enableVirtualization}
         hasRowReordering={args.hasRowReordering}
         isRowReorderingDisabled={args.isRowReorderingDisabled}
         hasRowSelection={args.hasRowSelection}
@@ -968,5 +972,15 @@ export const ColumnGrowDemo: StoryObj<DataViewMetaProps> = {
         getData={getData}
       />
     );
+  },
+};
+
+export const LoadMore: StoryObj<DataViewMetaProps> = {
+  ...BaseStory,
+  args: {
+    availableLayouts: ["table"],
+    hasPagination: true,
+    paginationType: "loadMore",
+    hasFilters: true,
   },
 };
