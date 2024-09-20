@@ -578,7 +578,7 @@ export const components = ({
       },
       styleOverrides: {
         root: ({ ownerState, theme }) => {
-          const isLowContrast = theme.custom?.isLowContrast; // Access the gray background context
+          const isLowContrast = theme.custom?.isLowContrast;
 
           return {
             minWidth: "unset",
@@ -956,9 +956,9 @@ export const components = ({
       },
       styleOverrides: {
         root: ({ ownerState, theme }) => {
-          const isLowContrast = theme.custom?.isLowContrast; // Scoped to this component
+          const isLowContrast = theme.custom?.isLowContrast;
           const baseBackgroundColor = isLowContrast
-            ? odysseyTokens.HueNeutral100
+            ? odysseyTokens.HueNeutral200
             : odysseyTokens.HueNeutral50;
           return {
             height: "auto",

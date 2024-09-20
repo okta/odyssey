@@ -15,8 +15,8 @@ import { ScopedCssBaseline } from "@mui/material";
 import {
   createTheme,
   ThemeProvider as MuiThemeProvider,
-  ThemeOptions,
 } from "@mui/material/styles";
+import { ThemeOptions } from "@mui/material";
 import { deepmerge } from "@mui/utils";
 import {
   OdysseyCacheProvider,
