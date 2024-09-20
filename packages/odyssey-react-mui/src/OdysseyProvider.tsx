@@ -15,6 +15,7 @@ import { ScopedCssBaseline } from "@mui/material";
 import {
   createTheme,
   ThemeProvider as MuiThemeProvider,
+  ThemeOptions,
 } from "@mui/material/styles";
 import { deepmerge } from "@mui/utils";
 import {
@@ -30,7 +31,19 @@ import { createOdysseyMuiTheme, DesignTokensOverride } from "./theme";
 import * as Tokens from "@okta/odyssey-design-tokens";
 import { OdysseyDesignTokensContext } from "./OdysseyDesignTokensContext";
 import { useBackground } from "./BackgroundContext";
-import { ThemeOptions } from "@mui/material/styles";
+
+declare module "@mui/material/styles" {
+  interface Theme {
+    custom: {
+      isLowContrast: boolean;
+    };
+  }
+  interface ThemeOptions {
+    custom?: {
+      isLowContrast?: boolean;
+    };
+  }
+}
 
 const scopedCssBaselineStyles = {
   height: "inherit",
@@ -41,10 +54,10 @@ export type OdysseyProviderProps<
 > = OdysseyCacheProviderProps &
   OdysseyTranslationProviderProps<SupportedLanguages> & {
     children: ReactNode;
-    designTokensOverride?: DesignTokensOverride; // Typed DesignTokensOverride
+    designTokensOverride?: DesignTokensOverride;
     shadowDomElement?: HTMLDivElement | HTMLElement;
     shadowRootElement?: HTMLDivElement | HTMLElement;
-    themeOverride?: ThemeOptions; // Typed ThemeOptions instead of `any`
+    themeOverride?: ThemeOptions;
   };
 
 const OdysseyProvider = <SupportedLanguages extends string>({
@@ -60,7 +73,7 @@ const OdysseyProvider = <SupportedLanguages extends string>({
   themeOverride,
   translationOverrides,
 }: OdysseyProviderProps<SupportedLanguages>) => {
-  const { isLowContrast } = useBackground(); // Get the background context
+  const { isLowContrast } = useBackground();
 
   const odysseyTokens = useMemo(
     () => ({ ...Tokens, ...designTokensOverride }),
@@ -80,8 +93,10 @@ const OdysseyProvider = <SupportedLanguages extends string>({
     () =>
       createTheme({
         ...odysseyTheme,
-        custom: { isLowContrast },
-      }),
+        custom: {
+          isLowContrast: isLowContrast,
+        },
+      } as ThemeOptions),
     [odysseyTheme, isLowContrast],
   );
 
