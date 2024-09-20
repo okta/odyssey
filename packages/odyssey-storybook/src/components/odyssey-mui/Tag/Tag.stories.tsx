@@ -18,6 +18,7 @@ import {
   TagList,
   TagProps,
 } from "@okta/odyssey-react-mui";
+import * as Tokens from "@okta/odyssey-design-tokens";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { GroupIcon } from "@okta/odyssey-react-mui/icons";
 import icons from "../../../../.storybook/components/iconUtils";
@@ -117,6 +118,7 @@ const storybookMeta: Meta<TagProps> = {
   args: {
     label: "Starship",
     colorVariant: "default",
+    testId: "tag-default",
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
@@ -126,11 +128,11 @@ export default storybookMeta;
 
 const checkTagStyles = async (
   canvas: ReturnType<typeof within>,
-  tagLabel: string,
+  testId: string,
   expectedBackgroundColor: string,
   expectedColor: string,
 ) => {
-  const tag = canvas.getByText(tagLabel);
+  const tag = canvas.getByTestId(testId);
   await expect(tag).toHaveStyle(`background-color: ${expectedBackgroundColor}`);
   await expect(tag).toHaveStyle(`color: ${expectedColor}`);
 };
@@ -138,6 +140,7 @@ const checkTagStyles = async (
 export const Default: StoryObj<TagProps> = {
   args: {
     label: "Starship",
+    testId: "tag-default",
   },
 };
 
@@ -145,6 +148,7 @@ export const Info: StoryObj<TagProps> = {
   args: {
     label: "Starship",
     colorVariant: "info",
+    testId: "tag-info",
   },
 };
 
@@ -152,6 +156,7 @@ export const AccentOne: StoryObj<TagProps> = {
   args: {
     label: "Starship",
     colorVariant: "accentOne",
+    testId: "tag-accent-one",
   },
 };
 
@@ -159,6 +164,7 @@ export const AccentTwo: StoryObj<TagProps> = {
   args: {
     label: "Starship",
     colorVariant: "accentTwo",
+    testId: "tag-accent-two",
   },
 };
 
@@ -166,6 +172,7 @@ export const AccentThree: StoryObj<TagProps> = {
   args: {
     label: "Starship",
     colorVariant: "accentThree",
+    testId: "tag-accent-three",
   },
 };
 
@@ -173,6 +180,7 @@ export const AccentFour: StoryObj<TagProps> = {
   args: {
     label: "Starship",
     colorVariant: "accentFour",
+    testId: "tag-accent-four",
   },
 };
 
@@ -180,12 +188,28 @@ export const List: StoryObj<TagProps> = {
   render: function C(args) {
     return (
       <TagList>
-        <Tag label={args.label} />
-        <Tag label="Info tag" colorVariant="info" />
-        <Tag label="AccentOne tag" colorVariant="accentOne" />
-        <Tag label="AccentTwo tag" colorVariant="accentTwo" />
-        <Tag label="AccentThree tag" colorVariant="accentThree" />
-        <Tag label="AccentFour tag" colorVariant="accentFour" />
+        <Tag label={args.label} data-se="tag-default" />
+        <Tag label="Info tag" colorVariant="info" data-se="tag-info" />
+        <Tag
+          label="AccentOne tag"
+          colorVariant="accentOne"
+          data-se="tag-accent-one"
+        />
+        <Tag
+          label="AccentTwo tag"
+          colorVariant="accentTwo"
+          data-se="tag-accent-two"
+        />
+        <Tag
+          label="AccentThree tag"
+          colorVariant="accentThree"
+          data-se="tag-accent-three"
+        />
+        <Tag
+          label="AccentFour tag"
+          colorVariant="accentFour"
+          data-se="tag-accent-four"
+        />
       </TagList>
     );
   },
@@ -198,20 +222,25 @@ export const Icon: StoryObj<TagProps> = {
   args: {
     label: "Crew",
     icon: <GroupIcon />,
+    testId: "tag-icon",
   },
 };
 
 export const Clickable: StoryObj<TagProps> = {
   args: {
     label: "Starship",
+    testId: "tag-clickable",
   },
   play: async ({ args, canvasElement, step }) => {
     await step("remove the tag on click", async () => {
-      const canvas = within(canvasElement);
-      const tag = canvas.getByText(args.label);
-      await userEvent.click(tag);
-      expect(args.onClick).toHaveBeenCalledTimes(1);
-      await axeRun("Clickable Tag");
+      const tag = canvasElement.querySelector(`[data-se="${args.testId}"]`);
+      if (tag) {
+        await userEvent.click(tag);
+        expect(args.onClick).toHaveBeenCalledTimes(1);
+        await axeRun("Clickable Tag");
+      } else {
+        throw new Error(`Element with data-se="${args.testId}" not found`);
+      }
     });
   },
 };
@@ -219,6 +248,7 @@ export const Clickable: StoryObj<TagProps> = {
 export const Removable: StoryObj<TagProps> = {
   args: {
     label: "Starship",
+    testId: "tag-removable",
   },
   play: async ({ args, canvasElement, step }) => {
     await step("remove the tag on click", async () => {
@@ -238,6 +268,7 @@ export const Disabled: StoryObj<TagProps> = {
   args: {
     label: "Starship",
     isDisabled: true,
+    testId: "tag-disabled",
   },
 };
 
@@ -246,12 +277,28 @@ export const TagsOnWhiteBackground: StoryObj<TagProps> = {
   render: () => (
     <BackgroundProvider value="highContrast">
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
-        <Tag label="Default" />
-        <Tag label="Info" colorVariant="info" />
-        <Tag label="AccentOne" colorVariant="accentOne" />
-        <Tag label="AccentTwo" colorVariant="accentTwo" />
-        <Tag label="AccentThree" colorVariant="accentThree" />
-        <Tag label="AccentFour" colorVariant="accentFour" />
+        <Tag label="Default" data-se="tag-default" />
+        <Tag label="Info" colorVariant="info" data-se="tag-info" />
+        <Tag
+          label="AccentOne"
+          colorVariant="accentOne"
+          data-se="tag-accent-one"
+        />
+        <Tag
+          label="AccentTwo"
+          colorVariant="accentTwo"
+          data-se="tag-accent-two"
+        />
+        <Tag
+          label="AccentThree"
+          colorVariant="accentThree"
+          data-se="tag-accent-three"
+        />
+        <Tag
+          label="AccentFour"
+          colorVariant="accentFour"
+          data-se="tag-accent-four"
+        />
       </Box>
     </BackgroundProvider>
   ),
@@ -259,23 +306,47 @@ export const TagsOnWhiteBackground: StoryObj<TagProps> = {
     const canvas = within(canvasElement);
     await checkTagStyles(
       canvas,
-      "Default",
-      "rgb(243, 244, 246)",
-      "rgb(23, 27, 37)",
+      "tag-default",
+      Tokens.HueNeutral100,
+      Tokens.TypographyColorBody,
     );
     await checkTagStyles(
       canvas,
-      "Info",
-      "rgb(236, 242, 255)",
-      "rgb(2, 48, 135)",
+      "tag-info",
+      Tokens.HueBlue100,
+      Tokens.HueBlue700,
     );
-    // Add checks for other color variants
-    await axeRun("Tags on White Background");
+    await checkTagStyles(
+      canvas,
+      "tag-accent-one",
+      Tokens.HueAccentOne100,
+      Tokens.HueAccentOne700,
+    );
+    await checkTagStyles(
+      canvas,
+      "tag-accent-two",
+      Tokens.HueAccentTwo100,
+      Tokens.HueAccentTwo700,
+    );
+    await checkTagStyles(
+      canvas,
+      "tag-accent-three",
+      Tokens.HueAccentThree100,
+      Tokens.HueAccentThree700,
+    );
+    await checkTagStyles(
+      canvas,
+      "tag-accent-four",
+      Tokens.HueAccentFour100,
+      Tokens.HueAccentFour700,
+    );
+
+    await axeRun("Tags on white (`highContrast`) background");
   },
   parameters: {
     docs: {
       source: {
-        code: `<BackgroundProvider>
+        code: `<BackgroundProvider value="highContrast">
   <Tag label="Default" />
   <Tag label="Info" colorVariant="info" />
   <Tag label="AccentOne" colorVariant="accentOne" />
@@ -298,19 +369,35 @@ export const TagsOnGrayBackground: StoryObj<TagProps> = {
     <BackgroundProvider value="lowContrast">
       <Box
         sx={{
-          backgroundColor: "#F4F4F4",
+          backgroundColor: Tokens.HueNeutral50,
           padding: "24px",
           display: "flex",
           flexWrap: "wrap",
           gap: 2,
         }}
       >
-        <Tag label="Default" />
-        <Tag label="Info" colorVariant="info" />
-        <Tag label="AccentOne" colorVariant="accentOne" />
-        <Tag label="AccentTwo" colorVariant="accentTwo" />
-        <Tag label="AccentThree" colorVariant="accentThree" />
-        <Tag label="AccentFour" colorVariant="accentFour" />
+        <Tag label="Default" data-se="tag-default" />
+        <Tag label="Info" colorVariant="info" data-se="tag-info" />
+        <Tag
+          label="AccentOne"
+          colorVariant="accentOne"
+          data-se="tag-accent-one"
+        />
+        <Tag
+          label="AccentTwo"
+          colorVariant="accentTwo"
+          data-se="tag-accent-two"
+        />
+        <Tag
+          label="AccentThree"
+          colorVariant="accentThree"
+          data-se="tag-accent-three"
+        />
+        <Tag
+          label="AccentFour"
+          colorVariant="accentFour"
+          data-se="tag-accent-four"
+        />
       </Box>
     </BackgroundProvider>
   ),
@@ -318,18 +405,43 @@ export const TagsOnGrayBackground: StoryObj<TagProps> = {
     const canvas = within(canvasElement);
     await checkTagStyles(
       canvas,
-      "Default",
-      "rgb(229, 231, 235)",
-      "rgb(23, 27, 37)",
+      "tag-default",
+      Tokens.HueNeutral200,
+      Tokens.TypographyColorBody,
     );
     await checkTagStyles(
       canvas,
-      "Info",
-      "rgb(225, 235, 255)",
-      "rgb(2, 48, 135)",
+      "tag-info",
+      Tokens.HueBlue200,
+      Tokens.HueBlue700,
     );
-    // Add checks for other color variants
-    await axeRun("Tags on Gray Background");
+
+    await checkTagStyles(
+      canvas,
+      "tag-accent-one",
+      Tokens.HueAccentOne200,
+      Tokens.HueAccentOne700,
+    );
+    await checkTagStyles(
+      canvas,
+      "tag-accent-two",
+      Tokens.HueAccentTwo200,
+      Tokens.HueAccentTwo700,
+    );
+    await checkTagStyles(
+      canvas,
+      "tag-accent-three",
+      Tokens.HueAccentThree200,
+      Tokens.HueAccentThree700,
+    );
+    await checkTagStyles(
+      canvas,
+      "tag-accent-four",
+      Tokens.HueAccentFour200,
+      Tokens.HueAccentFour700,
+    );
+
+    await axeRun("Tags on gray (`lowContrast`) background");
   },
   parameters: {
     docs: {

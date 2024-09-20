@@ -19,6 +19,7 @@ import {
   BackgroundProvider,
   Box,
 } from "@okta/odyssey-react-mui";
+import * as Tokens from "@okta/odyssey-design-tokens";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
@@ -81,17 +82,16 @@ export default storybookMeta;
 
 const checkStatusStyles = async (
   canvas: ReturnType<typeof within>,
-  statusLabel: string,
+  testId: string,
   expectedBackgroundColor: string,
   expectedColor: string,
 ) => {
-  const status = canvas.getByText(statusLabel);
+  const status = canvas.getByTestId(testId);
   await expect(status).toHaveStyle(
     `background-color: ${expectedBackgroundColor}`,
   );
   await expect(status).toHaveStyle(`color: ${expectedColor}`);
 };
-
 export const DefaultPill: StoryObj<StatusProps> = {
   args: {
     label: "Warp drive in standby",
@@ -125,36 +125,53 @@ export const WarningPill: StoryObj<StatusProps> = {
     severity: "warning",
   },
 };
-
 export const StatusesOnWhiteBackground: StoryObj<StatusProps> = {
   name: "Statuses on White Background",
   render: () => (
     <BackgroundProvider value="highContrast">
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
-        <Status label="Default" severity="default" />
-        <Status label="Error" severity="error" />
-        <Status label="Info" severity="info" />
-        <Status label="Success" severity="success" />
-        <Status label="Warning" severity="warning" />
+        <Status label="Default" severity="default" data-se="status-default" />
+        <Status label="Error" severity="error" data-se="status-error" />
+        <Status label="Info" severity="info" data-se="status-info" />
+        <Status label="Success" severity="success" data-se="status-success" />
+        <Status label="Warning" severity="warning" data-se="status-warning" />
       </Box>
     </BackgroundProvider>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
+
     await checkStatusStyles(
       canvas,
-      "Default",
-      "rgb(243, 244, 246)",
-      "rgb(23, 27, 37)",
+      "status-default",
+      Tokens.HueNeutral50,
+      Tokens.TypographyColorSubordinate,
     );
     await checkStatusStyles(
       canvas,
-      "Error",
-      "rgb(254, 242, 242)",
-      "rgb(153, 27, 27)",
+      "status-error",
+      Tokens.PaletteDangerLighter,
+      Tokens.TypographyColorDanger,
     );
-    // Add checks for other severities
-    await axeRun("Statuses on White Background");
+    await checkStatusStyles(
+      canvas,
+      "status-info",
+      Tokens.PalettePrimaryLighter,
+      Tokens.PalettePrimaryText,
+    );
+    await checkStatusStyles(
+      canvas,
+      "status-success",
+      Tokens.PaletteSuccessLighter,
+      Tokens.TypographyColorSuccess,
+    );
+    await checkStatusStyles(
+      canvas,
+      "status-warning",
+      Tokens.PaletteWarningLighter,
+      Tokens.TypographyColorWarning,
+    );
+    await axeRun("Statuses on white (`highContrast`) background");
   },
   parameters: {
     docs: {
@@ -181,37 +198,55 @@ export const StatusesOnGrayBackground: StoryObj<StatusProps> = {
     <BackgroundProvider value="lowContrast">
       <Box
         sx={{
-          backgroundColor: "#F4F4F4",
+          backgroundColor: Tokens.HueNeutral50,
           padding: "24px",
           display: "flex",
           flexWrap: "wrap",
           gap: 2,
         }}
       >
-        <Status label="Default" severity="default" />
-        <Status label="Error" severity="error" />
-        <Status label="Info" severity="info" />
-        <Status label="Success" severity="success" />
-        <Status label="Warning" severity="warning" />
+        <Status label="Default" severity="default" data-se="status-default" />
+        <Status label="Error" severity="error" data-se="status-error" />
+        <Status label="Info" severity="info" data-se="status-info" />
+        <Status label="Success" severity="success" data-se="status-success" />
+        <Status label="Warning" severity="warning" data-se="status-warning" />
       </Box>
     </BackgroundProvider>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
+
     await checkStatusStyles(
       canvas,
-      "Default",
-      "rgb(229, 231, 235)",
-      "rgb(23, 27, 37)",
+      "status-default",
+      Tokens.HueNeutral100,
+      Tokens.TypographyColorBody,
     );
     await checkStatusStyles(
       canvas,
-      "Error",
-      "rgb(254, 226, 226)",
-      "rgb(120, 21, 21)",
+      "status-error",
+      Tokens.PaletteDangerLight,
+      Tokens.PaletteDangerDark,
     );
-    // Add checks for other severities
-    await axeRun("Statuses on Gray Background");
+    await checkStatusStyles(
+      canvas,
+      "status-info",
+      Tokens.PalettePrimaryLight,
+      Tokens.PalettePrimaryDark,
+    );
+    await checkStatusStyles(
+      canvas,
+      "status-success",
+      Tokens.PaletteSuccessLight,
+      Tokens.PaletteSuccessDark,
+    );
+    await checkStatusStyles(
+      canvas,
+      "status-warning",
+      Tokens.PaletteWarningLight,
+      Tokens.PaletteWarningDark,
+    );
+    await axeRun("Statuses on gray (`lowContrast`) background");
   },
   parameters: {
     docs: {
@@ -231,7 +266,6 @@ export const StatusesOnGrayBackground: StoryObj<StatusProps> = {
     },
   },
 };
-
 export const DefaultLamp: StoryObj<StatusProps> = {
   args: {
     label: "Warp drive in standby",
