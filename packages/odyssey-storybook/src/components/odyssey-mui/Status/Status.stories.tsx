@@ -129,7 +129,7 @@ export const WarningPill: StoryObj<StatusProps> = {
 export const StatusesOnWhiteBackground: StoryObj<StatusProps> = {
   name: "Statuses on White Background",
   render: () => (
-    <BackgroundProvider value="white">
+    <BackgroundProvider value="highContrast">
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
         <Status label="Default" severity="default" />
         <Status label="Error" severity="error" />
@@ -159,7 +159,7 @@ export const StatusesOnWhiteBackground: StoryObj<StatusProps> = {
   parameters: {
     docs: {
       source: {
-        code: `<BackgroundProvider>
+        code: `<BackgroundProvider value="highContrast">
   <Status label="Default" severity="default" />
   <Status label="Error" severity="error" />
   <Status label="Info" severity="info" />
@@ -169,7 +169,7 @@ export const StatusesOnWhiteBackground: StoryObj<StatusProps> = {
       },
       description: {
         story:
-          "Demonstrates how the `Status` component behaves on a white background using `BackgroundProvider`.",
+          "Demonstrates how the `Status` component behaves on a white (`highContrast`) background using `BackgroundProvider`.",
       },
     },
   },
@@ -178,7 +178,7 @@ export const StatusesOnWhiteBackground: StoryObj<StatusProps> = {
 export const StatusesOnGrayBackground: StoryObj<StatusProps> = {
   name: "Statuses on Gray Background",
   render: () => (
-    <BackgroundProvider value="gray">
+    <BackgroundProvider value="lowContrast">
       <Box
         sx={{
           backgroundColor: "#F4F4F4",
@@ -216,7 +216,7 @@ export const StatusesOnGrayBackground: StoryObj<StatusProps> = {
   parameters: {
     docs: {
       source: {
-        code: `<BackgroundProvider value="gray">
+        code: `<BackgroundProvider value="lowContrast">
   <Status label="Default" severity="default" />
   <Status label="Error" severity="error" />
   <Status label="Info" severity="info" />
@@ -226,7 +226,7 @@ export const StatusesOnGrayBackground: StoryObj<StatusProps> = {
       },
       description: {
         story:
-          "Demonstrates how the `Status` component behaves on a gray background using `BackgroundProvider`.",
+          "Demonstrates how the `Status` component behaves on a gray (`lowContrast`) background using `BackgroundProvider`.",
       },
     },
   },

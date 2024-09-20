@@ -17,7 +17,7 @@ import styled from "@emotion/styled";
 
 import { useMuiProps } from "./MuiPropsContext";
 import type { HtmlProps } from "./HtmlProps";
-import { useBackground } from "./BackgroundContext"; // Custom hook to consume the background context
+import { useBackground } from "./BackgroundContext";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
@@ -47,15 +47,15 @@ export type StatusProps = {
   variant?: (typeof statusVariantValues)[number];
 } & Pick<HtmlProps, "testId" | "translate">;
 
-const nonForwardedProps = ["isGrayBackground", "odysseyDesignTokens"];
+const nonForwardedProps = ["isLowContrast", "odysseyDesignTokens"];
 
 const StyledChip = styled(Chip, {
   shouldForwardProp: (prop) => !nonForwardedProps.includes(prop as string),
 })<{
-  isGrayBackground: boolean;
+  isLowContrast: boolean;
   odysseyDesignTokens: DesignTokens;
-}>(({ isGrayBackground, odysseyDesignTokens }) => ({
-  ...(isGrayBackground && {
+}>(({ isLowContrast, odysseyDesignTokens }) => ({
+  ...(isLowContrast && {
     [`&.${chipClasses.root}`]: {
       backgroundColor: odysseyDesignTokens.HueNeutral100,
       color: odysseyDesignTokens.TypographyColorBody,
@@ -90,7 +90,7 @@ const Status = ({
   const background = useBackground();
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
-  const isGrayBackground = background === "gray";
+  const isLowContrast = background === "lowContrast";
 
   return (
     <StyledChip
@@ -100,7 +100,7 @@ const Status = ({
       label={label}
       translate={translate}
       variant={variant}
-      isGrayBackground={isGrayBackground}
+      isLowContrast={isLowContrast}
       odysseyDesignTokens={odysseyDesignTokens}
     />
   );

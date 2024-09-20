@@ -12,9 +12,9 @@
 
 import { createContext, useContext, ReactNode } from "react";
 
-export type BackgroundType = "white" | "gray";
+export type BackgroundType = "highContrast" | "lowContrast";
 
-const BackgroundContext = createContext<BackgroundType>("white");
+const BackgroundContext = createContext<BackgroundType>("highContrast");
 
 export const useBackground = () => useContext(BackgroundContext);
 

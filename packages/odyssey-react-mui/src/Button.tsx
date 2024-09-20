@@ -25,8 +25,8 @@ import {
 } from "@mui/material";
 import { buttonClasses } from "@mui/material/Button";
 import styled from "@emotion/styled";
-import { useBackground } from "./BackgroundContext"; // Custom hook to consume the background context
-import { useButton } from "./ButtonContext"; // Custom hook to consume the button context
+import { useBackground } from "./BackgroundContext";
+import { useButton } from "./ButtonContext";
 import type { HtmlProps } from "./HtmlProps";
 import { FocusHandle } from "./inputUtils";
 import {
@@ -151,15 +151,15 @@ export type ButtonProps = {
   >;
 
 // Styled version of the Button for gray background context style overrides
-const nonForwardedProps = ["isGrayBackground", "odysseyDesignTokens"];
+const nonForwardedProps = ["isLowContrast", "odysseyDesignTokens"];
 
 const StyledButton = styled(MuiButton, {
-  shouldForwardProp: (prop) => !nonForwardedProps.includes(prop as string),
+  shouldForwardProp: (prop: string) => !nonForwardedProps.includes(prop),
 })<{
-  isGrayBackground?: boolean;
+  isLowContrast?: boolean;
   odysseyDesignTokens: DesignTokens;
-}>(({ isGrayBackground, odysseyDesignTokens }) => ({
-  ...(isGrayBackground && {
+}>(({ isLowContrast, odysseyDesignTokens }) => ({
+  ...(isLowContrast && {
     [`&.${buttonClasses.root}.${buttonClasses.disabled}.MuiButton-secondary`]: {
       backgroundColor: odysseyDesignTokens.HueNeutral200,
       color: odysseyDesignTokens.TypographyColorDisabled,
@@ -196,7 +196,8 @@ const Button = ({
   const background = useBackground();
   const odysseyDesignTokens = useOdysseyDesignTokens();
   // Determine if the button is in a gray background and is a secondary variant
-  const isGrayBackground = background === "gray" && variantProp === "secondary";
+  const isLowContrast =
+    background === "lowContrast" && variantProp === "secondary";
 
   // We're deprecating the "tertiary" variant, so map it to
   // "secondary" in lieu of making a breaking change
@@ -255,7 +256,7 @@ const Button = ({
           translate={translate}
           type={type}
           variant={variant}
-          isGrayBackground={isGrayBackground}
+          isLowContrast={isLowContrast}
           odysseyDesignTokens={odysseyDesignTokens}
         >
           {label}
@@ -273,7 +274,7 @@ const Button = ({
       href,
       id,
       isDisabled,
-      isGrayBackground,
+      isLowContrast,
       isFullWidth,
       label,
       odysseyDesignTokens,
