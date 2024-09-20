@@ -21,7 +21,7 @@ import {
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext";
 import { CloseCircleFilledIcon } from "./icons.generated";
-import { useBackground } from "./BackgroundContext"; // Custom hook to consume the background context
+import { useBackground } from "./BackgroundContext";
 
 export const tagColorVariants = [
   "default",
