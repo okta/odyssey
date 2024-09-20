@@ -57,7 +57,7 @@ const StyledChip = styled(Chip, {
 }>(({ isLowContrast, odysseyDesignTokens }) => ({
   ...(isLowContrast && {
     [`&.${chipClasses.root}`]: {
-      backgroundColor: odysseyDesignTokens.HueNeutral100,
+      backgroundColor: odysseyDesignTokens.HueNeutral200,
       color: odysseyDesignTokens.TypographyColorBody,
     },
     [`&.${chipClasses.colorError}`]: {
