@@ -12,16 +12,9 @@
 
 import { memo } from "react";
 import { Chip } from "@mui/material";
-import { chipClasses } from "@mui/material/Chip";
-import styled from "@emotion/styled";
 
 import { useMuiProps } from "./MuiPropsContext";
 import type { HtmlProps } from "./HtmlProps";
-import { useBackground } from "./BackgroundContext"; // Custom hook to consume the background context
-import {
-  DesignTokens,
-  useOdysseyDesignTokens,
-} from "./OdysseyDesignTokensContext";
 
 export const statusSeverityValues = [
   "default",
@@ -47,38 +40,6 @@ export type StatusProps = {
   variant?: (typeof statusVariantValues)[number];
 } & Pick<HtmlProps, "testId" | "translate">;
 
-const nonForwardedProps = ["isGrayBackground", "odysseyDesignTokens"];
-
-const StyledChip = styled(Chip, {
-  shouldForwardProp: (prop) => !nonForwardedProps.includes(prop as string),
-})<{
-  isGrayBackground: boolean;
-  odysseyDesignTokens: DesignTokens;
-}>(({ isGrayBackground, odysseyDesignTokens }) => ({
-  ...(isGrayBackground && {
-    [`&.${chipClasses.root}`]: {
-      backgroundColor: odysseyDesignTokens.HueNeutral100,
-      color: odysseyDesignTokens.TypographyColorBody,
-    },
-    [`&.${chipClasses.colorError}`]: {
-      backgroundColor: odysseyDesignTokens.PaletteDangerLight,
-      color: odysseyDesignTokens.PaletteDangerDark,
-    },
-    [`&.${chipClasses.colorInfo}`]: {
-      backgroundColor: odysseyDesignTokens.PalettePrimaryLight,
-      color: odysseyDesignTokens.PalettePrimaryDark,
-    },
-    [`&.${chipClasses.colorSuccess}`]: {
-      backgroundColor: odysseyDesignTokens.PaletteSuccessLight,
-      color: odysseyDesignTokens.PaletteSuccessDark,
-    },
-    [`&.${chipClasses.colorWarning}`]: {
-      backgroundColor: odysseyDesignTokens.PaletteWarningLight,
-      color: odysseyDesignTokens.PaletteWarningDark,
-    },
-  }),
-}));
-
 const Status = ({
   label,
   severity,
@@ -87,21 +48,15 @@ const Status = ({
   variant = "pill",
 }: StatusProps) => {
   const muiProps = useMuiProps();
-  const background = useBackground();
-  const odysseyDesignTokens = useOdysseyDesignTokens();
-
-  const isGrayBackground = background === "gray";
 
   return (
-    <StyledChip
+    <Chip
       {...muiProps}
       color={severity}
       data-se={testId}
       label={label}
       translate={translate}
       variant={variant}
-      isGrayBackground={isGrayBackground}
-      odysseyDesignTokens={odysseyDesignTokens}
     />
   );
 };

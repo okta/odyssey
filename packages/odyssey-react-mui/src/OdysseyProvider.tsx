@@ -10,22 +10,27 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, ReactNode } from "react";
+import { memo, ReactNode, useMemo } from "react";
 import { ScopedCssBaseline } from "@mui/material";
-
+import {
+  createTheme,
+  ThemeProvider as MuiThemeProvider,
+} from "@mui/material/styles";
+import { deepmerge } from "@mui/utils";
 import {
   OdysseyCacheProvider,
   OdysseyCacheProviderProps,
 } from "./OdysseyCacheProvider";
 import {
-  OdysseyThemeProvider,
-  OdysseyThemeProviderProps,
-} from "./OdysseyThemeProvider";
-import {
   OdysseyTranslationProvider,
   OdysseyTranslationProviderProps,
 } from "./OdysseyTranslationProvider";
 import { DefaultSupportedLanguages } from "./OdysseyTranslationProvider.types";
+import { createOdysseyMuiTheme, DesignTokensOverride } from "./theme";
+import * as Tokens from "@okta/odyssey-design-tokens";
+import { OdysseyDesignTokensContext } from "./OdysseyDesignTokensContext";
+import { useBackground } from "./BackgroundContext";
+import { ThemeOptions } from "@mui/material/styles";
 
 const scopedCssBaselineStyles = {
   height: "inherit",
@@ -34,9 +39,12 @@ const scopedCssBaselineStyles = {
 export type OdysseyProviderProps<
   SupportedLanguages extends string = DefaultSupportedLanguages,
 > = OdysseyCacheProviderProps &
-  OdysseyThemeProviderProps &
   OdysseyTranslationProviderProps<SupportedLanguages> & {
     children: ReactNode;
+    designTokensOverride?: DesignTokensOverride; // Typed DesignTokensOverride
+    shadowDomElement?: HTMLDivElement | HTMLElement;
+    shadowRootElement?: HTMLDivElement | HTMLElement;
+    themeOverride?: ThemeOptions; // Typed ThemeOptions instead of `any`
   };
 
 const OdysseyProvider = <SupportedLanguages extends string>({
@@ -51,32 +59,64 @@ const OdysseyProvider = <SupportedLanguages extends string>({
   stylisPlugins,
   themeOverride,
   translationOverrides,
-}: OdysseyProviderProps<SupportedLanguages>) => (
-  <OdysseyCacheProvider
-    emotionRoot={emotionRoot}
-    emotionRootElement={emotionRootElement}
-    hasShadowDom={Boolean(shadowRootElement || shadowDomElement)}
-    nonce={nonce}
-    stylisPlugins={stylisPlugins}
-  >
-    <OdysseyThemeProvider
-      designTokensOverride={designTokensOverride}
-      shadowRootElement={shadowRootElement || shadowDomElement}
-      themeOverride={themeOverride}
+}: OdysseyProviderProps<SupportedLanguages>) => {
+  const { isLowContrast } = useBackground(); // Get the background context
+
+  const odysseyTokens = useMemo(
+    () => ({ ...Tokens, ...designTokensOverride }),
+    [designTokensOverride],
+  );
+
+  const odysseyTheme = useMemo(
+    () =>
+      createOdysseyMuiTheme({
+        odysseyTokens,
+        shadowRootElement: shadowRootElement || shadowDomElement,
+      }),
+    [odysseyTokens, shadowDomElement, shadowRootElement],
+  );
+
+  const odysseyThemeWithBackground = useMemo(
+    () =>
+      createTheme({
+        ...odysseyTheme,
+        custom: { isLowContrast },
+      }),
+    [odysseyTheme, isLowContrast],
+  );
+
+  const customOdysseyTheme = useMemo(
+    () =>
+      themeOverride
+        ? createTheme(deepmerge(odysseyThemeWithBackground, themeOverride))
+        : odysseyThemeWithBackground,
+    [odysseyThemeWithBackground, themeOverride],
+  );
+
+  return (
+    <OdysseyCacheProvider
+      emotionRoot={emotionRoot}
+      emotionRootElement={emotionRootElement}
+      hasShadowDom={Boolean(shadowRootElement || shadowDomElement)}
+      nonce={nonce}
+      stylisPlugins={stylisPlugins}
     >
-      {/* This component creates a div; for flexibility of layout of children, make it inherit its parent's height */}
-      <ScopedCssBaseline sx={scopedCssBaselineStyles}>
-        <OdysseyTranslationProvider<SupportedLanguages>
-          languageCode={languageCode}
-          translationOverrides={translationOverrides}
-        >
-          {children}
-        </OdysseyTranslationProvider>
-      </ScopedCssBaseline>
-    </OdysseyThemeProvider>
-  </OdysseyCacheProvider>
-);
+      <MuiThemeProvider theme={customOdysseyTheme}>
+        <OdysseyDesignTokensContext.Provider value={odysseyTokens}>
+          <ScopedCssBaseline sx={scopedCssBaselineStyles}>
+            <OdysseyTranslationProvider<SupportedLanguages>
+              languageCode={languageCode}
+              translationOverrides={translationOverrides}
+            >
+              {children}
+            </OdysseyTranslationProvider>
+          </ScopedCssBaseline>
+        </OdysseyDesignTokensContext.Provider>
+      </MuiThemeProvider>
+    </OdysseyCacheProvider>
+  );
+};
 
-const MemoizedThemeProvider = memo(OdysseyProvider) as typeof OdysseyProvider;
+const MemoizedOdysseyProvider = memo(OdysseyProvider) as typeof OdysseyProvider;
 
-export { MemoizedThemeProvider as OdysseyProvider };
+export { MemoizedOdysseyProvider as OdysseyProvider };

@@ -127,9 +127,9 @@ export const WarningPill: StoryObj<StatusProps> = {
 };
 
 export const StatusesOnWhiteBackground: StoryObj<StatusProps> = {
-  name: "Statuses on White Background",
+  name: "Statuses on white background",
   render: () => (
-    <BackgroundProvider value="white">
+    <BackgroundProvider value="highContrast">
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
         <Status label="Default" severity="default" />
         <Status label="Error" severity="error" />
@@ -154,12 +154,12 @@ export const StatusesOnWhiteBackground: StoryObj<StatusProps> = {
       "rgb(153, 27, 27)",
     );
     // Add checks for other severities
-    await axeRun("Statuses on White Background");
+    await axeRun("Statuses on white background");
   },
   parameters: {
     docs: {
       source: {
-        code: `<BackgroundProvider>
+        code: `<BackgroundProvider value="highContrast">
   <Status label="Default" severity="default" />
   <Status label="Error" severity="error" />
   <Status label="Info" severity="info" />
@@ -169,16 +169,18 @@ export const StatusesOnWhiteBackground: StoryObj<StatusProps> = {
       },
       description: {
         story:
-          "Demonstrates how the `Status` component behaves on a white background using `BackgroundProvider`.",
+          "Demonstrates how the `Status` component behaves on a white (`highContrast`) background using `BackgroundProvider`.",
       },
     },
   },
 };
 
 export const StatusesOnGrayBackground: StoryObj<StatusProps> = {
-  name: "Statuses on Gray Background",
+  name: "Statuses on gray background",
   render: () => (
-    <BackgroundProvider value="gray">
+    <BackgroundProvider value="lowContrast">
+      {" "}
+      {/* Only affecting the Status component */}
       <Box
         sx={{
           backgroundColor: "#F4F4F4",
@@ -216,7 +218,7 @@ export const StatusesOnGrayBackground: StoryObj<StatusProps> = {
   parameters: {
     docs: {
       source: {
-        code: `<BackgroundProvider value="gray">
+        code: `<BackgroundProvider value="lowContrast">
   <Status label="Default" severity="default" />
   <Status label="Error" severity="error" />
   <Status label="Info" severity="info" />
@@ -226,7 +228,7 @@ export const StatusesOnGrayBackground: StoryObj<StatusProps> = {
       },
       description: {
         story:
-          "Demonstrates how the `Status` component behaves on a gray background using `BackgroundProvider`.",
+          "Demonstrates how the `Status` component behaves on a gray (`lowContrast`) background using `BackgroundProvider`.",
       },
     },
   },

@@ -242,9 +242,9 @@ export const Disabled: StoryObj<TagProps> = {
 };
 
 export const TagsOnWhiteBackground: StoryObj<TagProps> = {
-  name: "Tags on White Background",
+  name: "Tags on white background",
   render: () => (
-    <BackgroundProvider value="white">
+    <BackgroundProvider value="highContrast">
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
         <Tag label="Default" />
         <Tag label="Info" colorVariant="info" />
@@ -270,12 +270,12 @@ export const TagsOnWhiteBackground: StoryObj<TagProps> = {
       "rgb(2, 48, 135)",
     );
     // Add checks for other color variants
-    await axeRun("Tags on White Background");
+    await axeRun("Tags on white background");
   },
   parameters: {
     docs: {
       source: {
-        code: `<BackgroundProvider>
+        code: `<BackgroundProvider value="highContrast">
   <Tag label="Default" />
   <Tag label="Info" colorVariant="info" />
   <Tag label="AccentOne" colorVariant="accentOne" />
@@ -286,7 +286,7 @@ export const TagsOnWhiteBackground: StoryObj<TagProps> = {
       },
       description: {
         story:
-          "Demonstrates how the `Tag` component behaves on a white background using `BackgroundProvider`.",
+          "Demonstrates how the `Tag` component behaves on a white (`highContrast`) background using `BackgroundProvider`.",
       },
     },
   },
@@ -295,7 +295,7 @@ export const TagsOnWhiteBackground: StoryObj<TagProps> = {
 export const TagsOnGrayBackground: StoryObj<TagProps> = {
   name: "Tags on Gray Background",
   render: () => (
-    <BackgroundProvider value="gray">
+    <BackgroundProvider value="lowContrast">
       <Box
         sx={{
           backgroundColor: "#F4F4F4",
@@ -328,13 +328,12 @@ export const TagsOnGrayBackground: StoryObj<TagProps> = {
       "rgb(225, 235, 255)",
       "rgb(2, 48, 135)",
     );
-    // Add checks for other color variants
-    await axeRun("Tags on Gray Background");
+    await axeRun("Tags on gray background");
   },
   parameters: {
     docs: {
       source: {
-        code: `<BackgroundProvider value="gray">
+        code: `<BackgroundProvider value="lowContrast">
   <Tag label="Default" />
   <Tag label="Info" colorVariant="info" />
   <Tag label="AccentOne" colorVariant="accentOne" />
@@ -345,7 +344,7 @@ export const TagsOnGrayBackground: StoryObj<TagProps> = {
       },
       description: {
         story:
-          "Demonstrates how the `Tag` component behaves on a gray background using `BackgroundProvider`.",
+          "Demonstrates how the `Tag` component behaves on a gray (`lowContrast`) background using `BackgroundProvider`.",
       },
     },
   },

@@ -10,11 +10,20 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 import { createContext, useContext, ReactNode } from "react";
 
-export type BackgroundType = "white" | "gray";
+export type BackgroundType = "highContrast" | "lowContrast";
 
-const BackgroundContext = createContext<BackgroundType>("white");
+export type BackgroundContextType = {
+  background: BackgroundType;
+  isLowContrast: boolean;
+};
+
+const BackgroundContext = createContext<BackgroundContextType>({
+  background: "highContrast",
+  isLowContrast: false,
+});
 
 export const useBackground = () => useContext(BackgroundContext);
 
@@ -24,10 +33,23 @@ export const BackgroundProvider = ({
 }: {
   value: BackgroundType;
   children: ReactNode;
-}) => (
-  <BackgroundContext.Provider value={value}>
-    {children}
-  </BackgroundContext.Provider>
-);
+}) => {
+  const contextValue = {
+    background: value,
+    isLowContrast: value === "lowContrast",
+  };
 
-export { BackgroundContext };
+  const existingTheme = useTheme();
+  const theme = createTheme({
+    ...existingTheme,
+    custom: {
+      isLowContrast: contextValue.isLowContrast,
+    },
+  });
+
+  return (
+    <BackgroundContext.Provider value={contextValue}>
+      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+    </BackgroundContext.Provider>
+  );
+};

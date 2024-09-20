@@ -127,7 +127,7 @@ const storybookMeta: Meta<ButtonProps> = {
   decorators: [
     MuiThemeDecorator,
     (Story: StoryFn<ButtonProps>, context: StoryContext<ButtonProps>) => (
-      <BackgroundProvider value="white">
+      <BackgroundProvider value="highContrast">
         <Story {...context.args} />
       </BackgroundProvider>
     ),
@@ -224,7 +224,7 @@ export const ButtonSecondaryDisabledOnWhiteBackground: StoryObj<ButtonProps> = {
   name: "Secondary, Disabled on white background",
   decorators: [
     (Story: StoryFn<ButtonProps>, context: StoryContext<ButtonProps>) => (
-      <BackgroundProvider value="white">
+      <BackgroundProvider value="highContrast">
         <Story {...context.args} />
       </BackgroundProvider>
     ),
@@ -246,7 +246,7 @@ export const ButtonSecondaryDisabledOnWhiteBackground: StoryObj<ButtonProps> = {
   parameters: {
     docs: {
       source: {
-        code: `<BackgroundProvider>
+        code: `<BackgroundProvider value="highContrast">
 <Button
   isDisabled
   label="Secondary"
@@ -257,7 +257,7 @@ export const ButtonSecondaryDisabledOnWhiteBackground: StoryObj<ButtonProps> = {
       },
       description: {
         story:
-          "Demonstrates how the `Button` component behaves in a white background using `BackgroundProvider`.",
+          "Demonstrates how the `Button` component behaves in a white (`highContrast`) background using `BackgroundProvider`.",
       },
     },
   },
@@ -267,7 +267,7 @@ export const ButtonSecondaryDisabledOnGrayBackground: StoryObj<ButtonProps> = {
   name: "Secondary, Disabled on gray background",
   decorators: [
     (Story: StoryFn<ButtonProps>, context: StoryContext<ButtonProps>) => (
-      <BackgroundProvider value="gray">
+      <BackgroundProvider value="lowContrast">
         <Box sx={{ backgroundColor: "#F4F4F4", padding: "24px" }}>
           <Story {...context.args} />
         </Box>
@@ -291,7 +291,7 @@ export const ButtonSecondaryDisabledOnGrayBackground: StoryObj<ButtonProps> = {
   parameters: {
     docs: {
       source: {
-        code: `<BackgroundProvider value="gray">
+        code: `<BackgroundProvider value="lowContrast">
   <Button
     isDisabled
     label="Secondary"
@@ -302,7 +302,7 @@ export const ButtonSecondaryDisabledOnGrayBackground: StoryObj<ButtonProps> = {
       },
       description: {
         story:
-          "Demonstrates how the `Button` component behaves in a gray background using `BackgroundProvider`.",
+          "Demonstrates how the `Button` component behaves in a gray (`lowContrast`) background using `BackgroundProvider`.",
       },
     },
   },
