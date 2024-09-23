@@ -12,7 +12,6 @@
 
 /** @type { import("jest").Config } */
 const jestConfig = {
-  collectCoverage: true,
   collectCoverageFrom: ["src/**/*.{js,jsx,ts,tsx}"],
   coveragePathIgnorePatterns: [
     "/src/icons.generated/",

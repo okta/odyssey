@@ -17,8 +17,10 @@ if [[ $EXIT_CODE -ne 0 ]]; then
   exit ${PUBLISH_TYPE_AND_RESULT_DIR_BUT_ALWAYS_FAIL}
 fi
 
-echo "Visual Regression Tests passed!"
-log_custom_message "Unit Test Report" "$COMMAND"
-
 echo "Unit tests passed!"
+
+if [[ $COMMAND ]]; then
+  log_custom_message "Unit Test Report" "$COMMAND"
+fi
+
 report_results SUCCESS publish_type_and_result_dir_but_succeed_if_no_results
