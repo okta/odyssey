@@ -79,9 +79,7 @@ describe("DataView", () => {
     fireEvent.click(screen.getByText("Show more"));
 
     waitFor(() => {
-      const loadedRows = within(tableElement).getAllByRole("row", {
-        hidden: false,
-      });
+      const loadedRows = within(tableElement).getAllByRole("row");
       expect(loadedRows.length).toBe(41);
     });
   });
