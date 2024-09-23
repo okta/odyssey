@@ -76,6 +76,39 @@ describe("DataView", () => {
     });
     expect(rowElements.length).toBe(21);
 
+    waitFor(() => {
+      fireEvent.click(screen.getByText("Show more"));
+
+      const loadedRows = within(tableElement).getAllByRole("row", {
+        hidden: false,
+      });
+      expect(loadedRows.length).toBe(41);
+    });
+  });
+
+  it("resets the rows when searching", async () => {
+    render(
+      <DataView
+        availableLayouts={["table"]}
+        getData={getData}
+        tableLayoutOptions={{
+          columns: columns,
+        }}
+        hasSearch
+        hasPagination
+        // virtualization has to be false for the tests to work properly
+        enableVirtualization={false}
+        paginationType="loadMore"
+        resultsPerPage={20}
+      />,
+    );
+
+    const tableElement = await screen.findByRole("table", { name: "" });
+    const rowElements = within(tableElement).getAllByRole("row", {
+      hidden: false,
+    });
+    expect(rowElements.length).toBe(21);
+
     fireEvent.click(screen.getByText("Show more"));
 
     waitFor(() => {
@@ -84,48 +117,42 @@ describe("DataView", () => {
       });
       expect(loadedRows.length).toBe(41);
     });
-  });
-});
 
-it("resets the rows when searching", async () => {
-  render(
-    <DataView
-      availableLayouts={["table"]}
-      getData={getData}
-      tableLayoutOptions={{
-        columns: columns,
-      }}
-      hasSearch
-      hasPagination
-      // virtualization has to be false for the tests to work properly
-      enableVirtualization={false}
-      paginationType="loadMore"
-      resultsPerPage={20}
-    />,
-  );
+    const searchField = screen.getByPlaceholderText("Search");
+    fireEvent.change(searchField, { target: { value: "John" } });
 
-  const tableElement = await screen.findByRole("table", { name: "" });
-  const rowElements = within(tableElement).getAllByRole("row", {
-    hidden: false,
-  });
-  expect(rowElements.length).toBe(21);
-
-  fireEvent.click(screen.getByText("Show more"));
-
-  waitFor(() => {
-    const loadedRows = within(tableElement).getAllByRole("row", {
-      hidden: false,
+    waitFor(() => {
+      const rowsAfterFilter = within(tableElement).getAllByRole("row", {
+        hidden: false,
+      });
+      expect(rowsAfterFilter.length).toBeLessThanOrEqual(21);
     });
-    expect(loadedRows.length).toBe(41);
   });
 
-  const searchField = screen.getByPlaceholderText("Search");
-  fireEvent.change(searchField, { target: { value: "John" } });
+  it("fires onPaginationChange when pagination changes", async () => {
+    let currentPage = 1;
+    const onPaginationChange = (pagination: {
+      pageIndex: number;
+      pageSize: number;
+    }) => {
+      currentPage = pagination.pageIndex;
+    };
 
-  waitFor(() => {
-    const rowsAfterFilter = within(tableElement).getAllByRole("row", {
-      hidden: false,
+    render(
+      <>
+        <DataView
+          getData={getData}
+          hasPagination
+          onPaginationChange={onPaginationChange}
+        />
+      </>,
+    );
+
+    const nextButton = screen.getByLabelText("Next page");
+    fireEvent.click(nextButton);
+
+    await waitFor(() => {
+      expect(currentPage).toBe(2);
     });
-    expect(rowsAfterFilter.length).toBeLessThanOrEqual(21);
   });
 });
