@@ -21,4 +21,4 @@ fi
 echo "Code coverage passed!"
 log_custom_message "Code Coverage Report" "$CODE_COVERAGE"
 
-report_results SUCCESS publish_type_and_result_dir_but_succeed_if_no_results
+exit $SUCCESS
