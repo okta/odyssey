@@ -35,7 +35,7 @@ import { DataFilters } from "../DataFilters";
 import { EmptyState } from "../../EmptyState";
 import { fetchData } from "./fetchData";
 import { LayoutSwitcher } from "./LayoutSwitcher";
-import { MenuButton } from "../..";
+import { MenuButton } from "../../MenuButton";
 import { MoreIcon } from "../../icons.generated";
 import { TableSettings } from "./TableSettings";
 import { Pagination, usePagination } from "../../Pagination";
@@ -43,6 +43,7 @@ import { TableLayoutContent } from "./TableLayoutContent";
 import { CardLayoutContent } from "./CardLayoutContent";
 import { useFilterConversion } from "./useFilterConversion";
 import { useRowReordering } from "../../DataTable/useRowReordering";
+import { Typography } from "../../Typography";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
@@ -64,9 +65,26 @@ const BulkActionsContainer = styled("div")(() => ({
   justifyContent: "space-between",
 }));
 
-const AdditionalActionsContainer = styled("div")(() => ({
+const AdditionalActionsContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   display: "flex",
   justifyContent: "flex-end",
+  gap: odysseyDesignTokens.Spacing2,
+}));
+
+const AdditionalActionsInner = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
+  display: "flex",
+  alignItems: "center",
+  gap: odysseyDesignTokens.Spacing2,
+}));
+
+const MetaTextContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
+  marginInlineEnd: odysseyDesignTokens.Spacing2,
 }));
 
 const DataView = ({
@@ -76,6 +94,7 @@ const DataView = ({
   bulkActionMenuItems,
   currentPage = 1,
   emptyPlaceholder,
+  enableVirtualization: enableVirtualizationProp,
   errorMessage: errorMessageProp,
   filters: filtersProp,
   getData,
@@ -92,6 +111,7 @@ const DataView = ({
   isNoResults: isNoResultsProp,
   isPaginationMoreDisabled,
   isRowReorderingDisabled,
+  metaText,
   noResultsPlaceholder,
   onChangeRowSelection,
   onReorderRows,
@@ -194,9 +214,9 @@ const DataView = ({
   useEffect(() => {
     setPagination((prev) => ({
       pageIndex: 1,
-      pageSize: prev.pageSize,
+      pageSize: paginationType == "loadMore" ? resultsPerPage : prev.pageSize,
     }));
-  }, [filters, search]);
+  }, [filters, paginationType, resultsPerPage, search]);
 
   // Retrieve the data
   useEffect(() => {
@@ -262,48 +282,66 @@ const DataView = ({
     return;
   }, [noResultsPlaceholder, t, isEmpty, isNoResults, emptyPlaceholder]);
 
-  const additionalActions = useMemo(
-    () => (
-      <>
-        {currentLayout === "table" && tableLayoutOptions && (
-          <TableSettings
-            setTableState={setTableState}
-            tableLayoutOptions={tableLayoutOptions}
-            tableState={tableState}
-          />
-        )}
+  const additionalActions = useMemo(() => {
+    return (
+      (metaText ||
+        (currentLayout === "table" && tableLayoutOptions) ||
+        availableLayouts.length > 1 ||
+        additionalActionButton ||
+        additionalActionMenuItems) && (
+        <AdditionalActionsInner odysseyDesignTokens={odysseyDesignTokens}>
+          {metaText && (
+            <MetaTextContainer odysseyDesignTokens={odysseyDesignTokens}>
+              <Typography color="textSecondary">{metaText}</Typography>
+            </MetaTextContainer>
+          )}
 
-        {availableLayouts.length > 1 && (
-          <LayoutSwitcher
-            availableLayouts={availableLayouts}
-            currentLayout={currentLayout}
-            setCurrentLayout={setCurrentLayout}
-          />
-        )}
+          {currentLayout === "table" && tableLayoutOptions && (
+            <TableSettings
+              setTableState={setTableState}
+              tableLayoutOptions={tableLayoutOptions}
+              tableState={tableState}
+            />
+          )}
 
-        {additionalActionButton}
+          {availableLayouts.length > 1 && (
+            <LayoutSwitcher
+              availableLayouts={availableLayouts}
+              currentLayout={currentLayout}
+              setCurrentLayout={setCurrentLayout}
+            />
+          )}
 
-        {additionalActionMenuItems && (
-          <MenuButton
-            endIcon={<MoreIcon />}
-            ariaLabel={t("table.moreactions.arialabel")}
-            buttonVariant="secondary"
-            menuAlignment="right"
-          >
-            {additionalActionMenuItems}
-          </MenuButton>
-        )}
-      </>
-    ),
-    [
-      currentLayout,
-      tableLayoutOptions,
-      tableState,
-      availableLayouts,
-      additionalActionButton,
-      additionalActionMenuItems,
-      t,
-    ],
+          {additionalActionButton}
+
+          {additionalActionMenuItems && (
+            <MenuButton
+              endIcon={<MoreIcon />}
+              ariaLabel={t("table.moreactions.arialabel")}
+              buttonVariant="secondary"
+              menuAlignment="right"
+            >
+              {additionalActionMenuItems}
+            </MenuButton>
+          )}
+        </AdditionalActionsInner>
+      )
+    );
+  }, [
+    additionalActionButton,
+    additionalActionMenuItems,
+    availableLayouts,
+    currentLayout,
+    metaText,
+    odysseyDesignTokens,
+    tableLayoutOptions,
+    tableState,
+    t,
+  ]);
+
+  const enableVirtualization = useMemo(
+    () => enableVirtualizationProp ?? paginationType === "loadMore",
+    [enableVirtualizationProp, paginationType],
   );
 
   const { lastRow: lastRowOnPage } = usePagination({
@@ -356,11 +394,14 @@ const DataView = ({
         </BulkActionsContainer>
       )}
 
-      {!shouldShowFilters && !bulkActionMenuItems && !hasRowSelection && (
-        <AdditionalActionsContainer>
-          {additionalActions}
-        </AdditionalActionsContainer>
-      )}
+      {!shouldShowFilters &&
+        !bulkActionMenuItems &&
+        !hasRowSelection &&
+        additionalActions && (
+          <AdditionalActionsContainer odysseyDesignTokens={odysseyDesignTokens}>
+            {additionalActions}
+          </AdditionalActionsContainer>
+        )}
 
       {currentLayout === "table" && tableLayoutOptions && (
         <TableLayoutContent
@@ -368,6 +409,7 @@ const DataView = ({
           data={data}
           draggingRow={draggingRow}
           emptyState={emptyState}
+          enableVirtualization={enableVirtualization}
           getRowId={getRowId}
           hasRowReordering={hasRowReordering}
           hasRowSelection={hasRowSelection}

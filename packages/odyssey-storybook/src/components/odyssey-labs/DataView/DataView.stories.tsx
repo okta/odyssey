@@ -118,6 +118,9 @@ const storybookMeta: Meta<DataViewMetaProps> = {
     currentPage: {
       control: "number",
     },
+    metaText: {
+      control: "text",
+    },
     paginationType: {
       control: "select",
       options: paginationTypeValues,
@@ -142,6 +145,9 @@ const storybookMeta: Meta<DataViewMetaProps> = {
     },
     searchDelayTime: {
       control: "number",
+    },
+    enableVirtualization: {
+      control: "boolean",
     },
     errorMessage: {
       control: "text",
@@ -401,6 +407,7 @@ const BaseStory: StoryObj<DataViewMetaProps> = {
         bulkActionMenuItems={
           args.hasActionMenuItems ? actionMenuItems : undefined
         }
+        enableVirtualization={args.enableVirtualization}
         hasRowReordering={args.hasRowReordering}
         isRowReorderingDisabled={args.isRowReorderingDisabled}
         hasRowSelection={args.hasRowSelection}
@@ -413,6 +420,7 @@ const BaseStory: StoryObj<DataViewMetaProps> = {
         hasSearch={args.hasSearch}
         hasSearchSubmitButton={args.hasSearchSubmitButton}
         isPaginationMoreDisabled={args.isPaginationMoreDisabled}
+        metaText={args.metaText}
         searchDelayTime={args.searchDelayTime}
         errorMessage={args.errorMessage}
         initialLayout={args.initialLayout}
@@ -502,6 +510,7 @@ export const Everything: StoryObj<DataViewMetaProps> = {
     hasRowSelection: true,
     hasAdditionalActionButton: true,
     hasAdditionalActionMenuItems: true,
+    metaText: "Last updated 12 hours ago",
   },
 };
 
@@ -968,5 +977,15 @@ export const ColumnGrowDemo: StoryObj<DataViewMetaProps> = {
         getData={getData}
       />
     );
+  },
+};
+
+export const LoadMore: StoryObj<DataViewMetaProps> = {
+  ...BaseStory,
+  args: {
+    availableLayouts: ["table"],
+    hasPagination: true,
+    paginationType: "loadMore",
+    hasFilters: true,
   },
 };

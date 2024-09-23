@@ -47,6 +47,7 @@ export type UniversalProps = {
   ) => MenuButtonProps["children"];
   currentPage?: number;
   emptyPlaceholder?: ReactNode;
+  enableVirtualization?: boolean;
   errorMessage?: string;
   filters?: Array<DataFilter | DataTableColumn<MRT_RowData> | string>;
   getData: ({
@@ -70,6 +71,7 @@ export type UniversalProps = {
   isRowReorderingDisabled?: boolean;
   maxPages?: number;
   maxResultsPerPage?: number;
+  metaText?: string;
   noResultsPlaceholder?: ReactNode;
   onChangeRowSelection?: (rowSelection: DataRowSelectionState) => void;
   onReorderRows?: ({ rowId, newRowIndex }: DataOnReorderRowsType) => void;
