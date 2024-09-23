@@ -158,10 +158,11 @@ export const reorderData = <Data extends Person>({
     return data;
   }
 
+  const [removedRow] = data.splice(rowIndex, 1);
+
   const reorderedData = [
-    ...data.slice(0, rowIndex),
-    ...data.slice(rowIndex + 1, newRowIndex),
-    data[rowIndex],
+    ...data.slice(0, newRowIndex),
+    removedRow,
     ...data.slice(newRowIndex),
   ];
 
