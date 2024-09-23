@@ -73,8 +73,19 @@ export type UniversalProps = {
   maxResultsPerPage?: number;
   metaText?: string;
   noResultsPlaceholder?: ReactNode;
+  /**
+   * @deprecated onChangeRowSelection is now onRowSelectionChange
+   */
   onChangeRowSelection?: (rowSelection: DataRowSelectionState) => void;
+  onPaginationChange?: ({
+    pageIndex,
+    pageSize,
+  }: {
+    pageIndex: number;
+    pageSize: number;
+  }) => void;
   onReorderRows?: ({ rowId, newRowIndex }: DataOnReorderRowsType) => void;
+  onRowSelectionChange?: (rowSelection: DataRowSelectionState) => void;
   paginationType?: (typeof paginationTypeValues)[number];
   resultsPerPage?: number;
   searchDelayTime?: number;
