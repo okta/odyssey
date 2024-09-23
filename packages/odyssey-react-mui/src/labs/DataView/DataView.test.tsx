@@ -76,10 +76,12 @@ describe("DataView", () => {
     });
     expect(rowElements.length).toBe(21);
 
-    fireEvent.click(screen.getByText("Show more"));
+    fireEvent.click(await screen.findByText("Show more"));
 
     waitFor(() => {
-      const loadedRows = within(tableElement).getAllByRole("row");
+      const loadedRows = within(tableElement).getAllByRole("row", {
+        hidden: false,
+      });
       expect(loadedRows.length).toBe(41);
     });
   });
