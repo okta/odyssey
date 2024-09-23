@@ -7,10 +7,10 @@ cd $OKTA_HOME/$REPO
 
 export TEST_SUITE_TYPE="junit" # Bacon required config
 
-export CODE_COVERAGE=$(yarn workspace @okta/odyssey-react-mui ci:coverage)
+export COMMAND=$(yarn workspace @okta/odyssey-react-mui ci:coverage)
 export EXIT_CODE=$?
 
-echo $CODE_COVERAGE
+echo $COMMAND
 
 if [[ $EXIT_CODE -ne 0 ]]; then
   echo "Code coverage failure!"
@@ -19,6 +19,6 @@ if [[ $EXIT_CODE -ne 0 ]]; then
 fi
 
 echo "Code coverage passed!"
-log_custom_message "Code Coverage Report" "$CODE_COVERAGE"
+log_custom_message "Code Coverage Report" "$COMMAND"
 
 exit $SUCCESS
