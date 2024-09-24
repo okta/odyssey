@@ -153,7 +153,7 @@ const interactWithButton =
     if (args.label) {
       await step("hover and click", async () => {
         const canvas = within(canvasElement);
-        const button = canvas.getByText(args.label ?? "");
+        const button = canvas.getByRole("button", { name: args.label });
         userEvent.tab();
         await userEvent.click(button);
         expect(args.onClick).toHaveBeenCalledTimes(1);
@@ -171,7 +171,7 @@ const checkButtonStyles = async (
   expectedBackgroundColor: string,
   expectedColor: string,
 ) => {
-  const button = canvas.getByText(buttonLabel);
+  const button = canvas.getByRole("button", { name: buttonLabel });
   await expect(button).toHaveStyle(
     `background-color: ${expectedBackgroundColor}`,
   );
@@ -188,13 +188,13 @@ export const ButtonPrimary: StoryObj<ButtonProps> = {
     });
   },
 };
+
 export const ButtonPrimaryDisabled: StoryObj<ButtonProps> = {
   name: "Primary, Disabled",
   args: {
     isDisabled: true,
     label: "Add crew",
     variant: "primary",
-    testId: "button-primary-disabled",
   },
 };
 
@@ -203,7 +203,6 @@ export const ButtonSecondary: StoryObj<ButtonProps> = {
   args: {
     label: "Add crew",
     variant: "secondary",
-    testId: "button-secondary",
   },
   play: async ({ args, canvasElement, step }: playType) => {
     await interactWithButton({ canvasElement, step })({
@@ -220,7 +219,6 @@ export const ButtonSecondaryDisabled: StoryObj<ButtonProps> = {
     isDisabled: true,
     label: "Add crew",
     variant: "secondary",
-    testId: "button-secondary-disabled",
   },
 };
 
@@ -237,13 +235,12 @@ export const ButtonSecondaryDisabledOnWhiteBackground: StoryObj<ButtonProps> = {
     variant: "secondary",
     isDisabled: true,
     label: "Secondary",
-    testId: "button-secondary-disabled-white",
   },
   play: async ({ canvasElement }: playType) => {
     const canvas = within(canvasElement);
     await checkButtonStyles(
       canvas,
-      "button-secondary-disabled-white",
+      "Secondary",
       Tokens.HueNeutral100,
       Tokens.TypographyColorDisabled,
     );
@@ -265,13 +262,12 @@ export const ButtonSecondaryDisabledOnGrayBackground: StoryObj<ButtonProps> = {
     variant: "secondary",
     isDisabled: true,
     label: "Secondary",
-    testId: "button-secondary-disabled-gray",
   },
   play: async ({ canvasElement }: playType) => {
     const canvas = within(canvasElement);
     await checkButtonStyles(
       canvas,
-      "button-secondary-disabled-gray",
+      "Secondary",
       Tokens.HueNeutral200,
       Tokens.TypographyColorDisabled,
     );
@@ -283,7 +279,6 @@ export const ButtonDanger: StoryObj<ButtonProps> = {
   args: {
     label: "Add crew",
     variant: "danger",
-    testId: "button-danger",
   },
   play: async ({ args, canvasElement, step }: playType) => {
     await interactWithButton({ canvasElement, step })({
@@ -299,7 +294,6 @@ export const ButtonDangerSecondary: StoryObj<ButtonProps> = {
   args: {
     label: "Add crew",
     variant: "dangerSecondary",
-    testId: "button-danger-secondary",
   },
 };
 
@@ -309,7 +303,6 @@ export const ButtonDangerDisabled: StoryObj<ButtonProps> = {
     label: "Add crew",
     isDisabled: true,
     variant: "danger",
-    testId: "button-danger-disabled",
   },
 };
 
@@ -318,7 +311,6 @@ export const ButtonFloating: StoryObj<ButtonProps> = {
   args: {
     label: "Add crew",
     variant: "floating",
-    testId: "button-floating",
   },
   play: async ({ args, canvasElement, step }: playType) => {
     await interactWithButton({ canvasElement, step })({
@@ -334,7 +326,6 @@ export const ButtonFloatingAction: StoryObj<ButtonProps> = {
   args: {
     label: "Add crew",
     variant: "floatingAction",
-    testId: "button-floating-action",
   },
   play: async ({ args, canvasElement, step }: playType) => {
     await interactWithButton({ canvasElement, step })({
@@ -351,7 +342,6 @@ export const ButtonFloatingDisabled: StoryObj<ButtonProps> = {
     label: "Add crew",
     isDisabled: true,
     variant: "floating",
-    testId: "button-floating-disabled",
   },
 };
 
@@ -362,7 +352,6 @@ export const ButtonSecondaryAsLink: StoryObj<ButtonProps> = {
     variant: "floatingAction",
     href: "https://okta.com",
     onClick: undefined,
-    testId: "button-link",
   },
 };
 
@@ -371,7 +360,6 @@ export const ButtonSmall: StoryObj<ButtonProps> = {
   args: {
     label: "Add crew",
     size: "small",
-    testId: "button-small",
   },
   play: async ({ args, canvasElement, step }: playType) => {
     await interactWithButton({ canvasElement, step })({
@@ -388,7 +376,6 @@ export const ButtonMedium: StoryObj<ButtonProps> = {
     label: "Add crew",
     size: "medium",
     variant: "secondary",
-    testId: "button-medium",
   },
   play: async ({ args, canvasElement, step }: playType) => {
     await interactWithButton({ canvasElement, step })({
@@ -405,7 +392,6 @@ export const ButtonLarge: StoryObj<ButtonProps> = {
     label: "Add crew",
     size: "large",
     variant: "danger",
-    testId: "button-large",
   },
   play: async ({ args, canvasElement, step }: playType) => {
     await interactWithButton({ canvasElement, step })({
@@ -421,7 +407,6 @@ export const ButtonFullWidth: StoryObj<ButtonProps> = {
   args: {
     label: "Add crew",
     isFullWidth: true,
-    testId: "button-fullwidth",
   },
   play: async ({ args, canvasElement, step }: playType) => {
     await interactWithButton({ canvasElement, step })({
@@ -437,7 +422,6 @@ export const ButtonWithIcon: StoryObj<ButtonProps> = {
   args: {
     label: "Add crew",
     startIcon: <AddIcon />,
-    testId: "button-icon",
   },
   play: async ({ args, canvasElement, step }: playType) => {
     await interactWithButton({ canvasElement, step })({
@@ -463,7 +447,6 @@ export const IconOnly: StoryObj<ButtonProps> = {
     ariaLabel: "Add crew",
     label: undefined,
     tooltipText: "Add crew",
-    testId: "button-icon-only",
   },
 };
 
@@ -471,30 +454,13 @@ export const KitchenSink: StoryObj<ButtonProps> = {
   name: "Kitchen sink",
   render: ({}) => (
     <Box sx={{ display: "flex", flexWrap: "wrap", rowGap: 2 }}>
-      <Button label="Primary" variant="primary" data-se="button-primary" />
-      <Button
-        label="Secondary"
-        variant="secondary"
-        data-se="button-secondary"
-      />
-      <Button
-        label="Danger Secondary"
-        variant="dangerSecondary"
-        data-se="button-danger-secondary"
-      />
-      <Button label="Danger" variant="danger" data-se="button-danger" />
-      <Button label="Floating" variant="floating" data-se="button-floating" />
-      <Button
-        label="Floating Action"
-        variant="floatingAction"
-        data-se="button-floating-action"
-      />
-      <Button
-        ariaLabel="Add"
-        startIcon={<AddIcon />}
-        variant="primary"
-        data-se="button-icon-primary"
-      />
+      <Button label="Primary" variant="primary" />
+      <Button label="Secondary" variant="secondary" />
+      <Button label="Danger Secondary" variant="dangerSecondary" />
+      <Button label="Danger" variant="danger" />
+      <Button label="Floating" variant="floating" />
+      <Button label="Floating Action" variant="floatingAction" />
+      <Button ariaLabel="Add" startIcon={<AddIcon />} variant="primary" />
     </Box>
   ),
 };
