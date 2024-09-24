@@ -11,11 +11,32 @@
  */
 
 import { memo } from "react";
-
+import styled from "@emotion/styled";
 import { FormHelperText } from "@mui/material";
 
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { HtmlProps } from "./HtmlProps";
+import {
+  useOdysseyDesignTokens,
+  DesignTokens,
+} from "./OdysseyDesignTokensContext";
+
+const HintLinkContainer = styled.span<{ odysseyDesignTokens: DesignTokens }>(
+  ({ odysseyDesignTokens }) => ({
+    a: {
+      color: odysseyDesignTokens.TypographyColorBody,
+      textDecoration: "underline",
+
+      "&:visited": {
+        color: odysseyDesignTokens.TypographyColorBody,
+      },
+
+      "&:hover": {
+        color: odysseyDesignTokens.TypographyColorSubordinate,
+      },
+    },
+  }),
+);
 
 export type FieldHintProps = {
   LinkComponent?: FieldComponentProps["HintLinkComponent"];
@@ -30,13 +51,16 @@ const FieldHint = ({
   text,
   translate,
 }: FieldHintProps) => {
+  const odysseyDesignTokens = useOdysseyDesignTokens();
+
   return (
     <FormHelperText data-se={testId} id={id} translate={translate}>
       {text}
       {LinkComponent && (
-        <>
-          <span>&nbsp;{LinkComponent}</span>
-        </>
+        <HintLinkContainer odysseyDesignTokens={odysseyDesignTokens}>
+          {" "}
+          {LinkComponent}
+        </HintLinkContainer>
       )}
     </FormHelperText>
   );
