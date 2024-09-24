@@ -14,8 +14,6 @@ import { Meta, StoryObj } from "@storybook/react";
 import {
   Box,
   Divider,
-  ListItemIcon,
-  ListItemText,
   ListSubheader,
   MenuButton,
   MenuButtonProps,
@@ -215,22 +213,16 @@ export const ActionIcons: StoryObj<MenuButtonProps> = {
   args: {
     children: [
       <MenuItem key="1" isDisabled>
-        <ListItemIcon>
-          <GroupIcon />
-        </ListItemIcon>
-        <ListItemText>Assign crew</ListItemText>
+        <GroupIcon />
+        Assign crew
       </MenuItem>,
       <MenuItem key="2">
-        <ListItemIcon>
-          <GlobeIcon />
-        </ListItemIcon>
-        <ListItemText>View destination</ListItemText>
+        <GlobeIcon />
+        View destination
       </MenuItem>,
       <MenuItem key="3">
-        <ListItemIcon>
-          <CalendarIcon />
-        </ListItemIcon>
-        <ListItemText>Schedule launch</ListItemText>
+        <CalendarIcon />
+        Schedule launch
       </MenuItem>,
     ],
   },
