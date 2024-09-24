@@ -211,7 +211,7 @@ export const Clickable: StoryObj<TagProps> = {
   play: async ({ args, canvasElement, step }) => {
     await step("click the tag", async () => {
       const canvas = within(canvasElement);
-      const tag = canvas.getByText(args.label);
+      const tag = canvas.getByRole("button", { name: args.label });
       await userEvent.click(tag);
       expect(args.onClick).toHaveBeenCalledTimes(1);
       await axeRun("Clickable Tag");
