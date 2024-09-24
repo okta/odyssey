@@ -82,16 +82,17 @@ export default storybookMeta;
 
 const checkStatusStyles = async (
   canvas: ReturnType<typeof within>,
-  testId: string,
+  label: string,
   expectedBackgroundColor: string,
   expectedColor: string,
 ) => {
-  const status = canvas.getByTestId(testId);
+  const status = canvas.getByRole("status", { name: label });
   await expect(status).toHaveStyle(
     `background-color: ${expectedBackgroundColor}`,
   );
   await expect(status).toHaveStyle(`color: ${expectedColor}`);
 };
+
 export const DefaultPill: StoryObj<StatusProps> = {
   args: {
     label: "Warp drive in standby",
@@ -125,16 +126,17 @@ export const WarningPill: StoryObj<StatusProps> = {
     severity: "warning",
   },
 };
+
 export const StatusesOnWhiteBackground: StoryObj<StatusProps> = {
   name: "Statuses on White Background",
   render: () => (
     <BackgroundProvider value="highContrast">
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
-        <Status label="Default" severity="default" data-se="status-default" />
-        <Status label="Error" severity="error" data-se="status-error" />
-        <Status label="Info" severity="info" data-se="status-info" />
-        <Status label="Success" severity="success" data-se="status-success" />
-        <Status label="Warning" severity="warning" data-se="status-warning" />
+        <Status label="Default" severity="default" />
+        <Status label="Error" severity="error" />
+        <Status label="Info" severity="info" />
+        <Status label="Success" severity="success" />
+        <Status label="Warning" severity="warning" />
       </Box>
     </BackgroundProvider>
   ),
@@ -143,31 +145,31 @@ export const StatusesOnWhiteBackground: StoryObj<StatusProps> = {
 
     await checkStatusStyles(
       canvas,
-      "status-default",
+      "Default",
       Tokens.HueNeutral50,
       Tokens.TypographyColorSubordinate,
     );
     await checkStatusStyles(
       canvas,
-      "status-error",
+      "Error",
       Tokens.PaletteDangerLighter,
       Tokens.TypographyColorDanger,
     );
     await checkStatusStyles(
       canvas,
-      "status-info",
+      "Info",
       Tokens.PalettePrimaryLighter,
       Tokens.PalettePrimaryText,
     );
     await checkStatusStyles(
       canvas,
-      "status-success",
+      "Success",
       Tokens.PaletteSuccessLighter,
       Tokens.TypographyColorSuccess,
     );
     await checkStatusStyles(
       canvas,
-      "status-warning",
+      "Warning",
       Tokens.PaletteWarningLighter,
       Tokens.TypographyColorWarning,
     );
@@ -186,7 +188,7 @@ export const StatusesOnWhiteBackground: StoryObj<StatusProps> = {
       },
       description: {
         story:
-          "Demonstrates how the `Status` component behaves on a white (`highContrast`) background using `BackgroundProvider`.",
+          "`Status` component on a white (`highContrast`) background using `BackgroundProvider`.",
       },
     },
   },
@@ -205,11 +207,11 @@ export const StatusesOnGrayBackground: StoryObj<StatusProps> = {
           gap: 2,
         }}
       >
-        <Status label="Default" severity="default" data-se="status-default" />
-        <Status label="Error" severity="error" data-se="status-error" />
-        <Status label="Info" severity="info" data-se="status-info" />
-        <Status label="Success" severity="success" data-se="status-success" />
-        <Status label="Warning" severity="warning" data-se="status-warning" />
+        <Status label="Default" severity="default" />
+        <Status label="Error" severity="error" />
+        <Status label="Info" severity="info" />
+        <Status label="Success" severity="success" />
+        <Status label="Warning" severity="warning" />
       </Box>
     </BackgroundProvider>
   ),
@@ -218,31 +220,31 @@ export const StatusesOnGrayBackground: StoryObj<StatusProps> = {
 
     await checkStatusStyles(
       canvas,
-      "status-default",
+      "Default",
       Tokens.HueNeutral100,
       Tokens.TypographyColorBody,
     );
     await checkStatusStyles(
       canvas,
-      "status-error",
+      "Error",
       Tokens.PaletteDangerLight,
       Tokens.PaletteDangerDark,
     );
     await checkStatusStyles(
       canvas,
-      "status-info",
+      "Info",
       Tokens.PalettePrimaryLight,
       Tokens.PalettePrimaryDark,
     );
     await checkStatusStyles(
       canvas,
-      "status-success",
+      "Success",
       Tokens.PaletteSuccessLight,
       Tokens.PaletteSuccessDark,
     );
     await checkStatusStyles(
       canvas,
-      "status-warning",
+      "Warning",
       Tokens.PaletteWarningLight,
       Tokens.PaletteWarningDark,
     );
@@ -261,11 +263,12 @@ export const StatusesOnGrayBackground: StoryObj<StatusProps> = {
       },
       description: {
         story:
-          "Demonstrates how the `Status` component behaves on a gray (`lowContrast`) background using `BackgroundProvider`.",
+          "`Status` component on a gray (`lowContrast`) background using `BackgroundProvider`.",
       },
     },
   },
 };
+
 export const DefaultLamp: StoryObj<StatusProps> = {
   args: {
     label: "Warp drive in standby",
