@@ -246,7 +246,7 @@ export const Disabled: StoryObj<TagProps> = {
 export const TagsOnWhiteBackground: StoryObj<TagProps> = {
   name: "Tags on White Background",
   render: () => (
-    <BackgroundProvider value="highContrast">
+    <BackgroundProvider background="highContrast">
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
         <Tag label="Default" />
         <Tag label="Info" colorVariant="info" />
@@ -296,7 +296,7 @@ export const TagsOnWhiteBackground: StoryObj<TagProps> = {
   parameters: {
     docs: {
       source: {
-        code: `<BackgroundProvider value="highContrast">
+        code: `<BackgroundProvider background="highContrast">
   <Tag label="Default" />
   <Tag label="Info" colorVariant="info" />
   <Tag label="AccentOne" colorVariant="accentOne" />
@@ -316,7 +316,7 @@ export const TagsOnWhiteBackground: StoryObj<TagProps> = {
 export const TagsOnGrayBackground: StoryObj<TagProps> = {
   name: "Tags on Gray Background",
   render: () => (
-    <BackgroundProvider value="lowContrast">
+    <BackgroundProvider background="lowContrast">
       <Box
         sx={{
           backgroundColor: Tokens.HueNeutral50,
@@ -374,7 +374,7 @@ export const TagsOnGrayBackground: StoryObj<TagProps> = {
   parameters: {
     docs: {
       source: {
-        code: `<BackgroundProvider value="lowContrast">
+        code: `<BackgroundProvider background="lowContrast">
   <Tag label="Default" />
   <Tag label="Info" colorVariant="info" />
   <Tag label="AccentOne" colorVariant="accentOne" />

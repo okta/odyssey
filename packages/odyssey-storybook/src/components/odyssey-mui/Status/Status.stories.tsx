@@ -130,7 +130,7 @@ export const WarningPill: StoryObj<StatusProps> = {
 export const StatusesOnWhiteBackground: StoryObj<StatusProps> = {
   name: "Statuses on White Background",
   render: () => (
-    <BackgroundProvider value="highContrast">
+    <BackgroundProvider background="highContrast">
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
         <Status label="Default" severity="default" />
         <Status label="Error" severity="error" />
@@ -178,7 +178,7 @@ export const StatusesOnWhiteBackground: StoryObj<StatusProps> = {
   parameters: {
     docs: {
       source: {
-        code: `<BackgroundProvider value="highContrast">
+        code: `<BackgroundProvider background="highContrast">
   <Status label="Default" severity="default" />
   <Status label="Error" severity="error" />
   <Status label="Info" severity="info" />
@@ -197,7 +197,7 @@ export const StatusesOnWhiteBackground: StoryObj<StatusProps> = {
 export const StatusesOnGrayBackground: StoryObj<StatusProps> = {
   name: "Statuses on Gray Background",
   render: () => (
-    <BackgroundProvider value="lowContrast">
+    <BackgroundProvider background="lowContrast">
       <Box
         sx={{
           backgroundColor: Tokens.HueNeutral50,
@@ -253,7 +253,7 @@ export const StatusesOnGrayBackground: StoryObj<StatusProps> = {
   parameters: {
     docs: {
       source: {
-        code: `<BackgroundProvider value="lowContrast">
+        code: `<BackgroundProvider background="lowContrast">
   <Status label="Default" severity="default" />
   <Status label="Error" severity="error" />
   <Status label="Info" severity="info" />

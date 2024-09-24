@@ -30,7 +30,7 @@ import { DefaultSupportedLanguages } from "./OdysseyTranslationProvider.types";
 import { createOdysseyMuiTheme, DesignTokensOverride } from "./theme";
 import * as Tokens from "@okta/odyssey-design-tokens";
 import { OdysseyDesignTokensContext } from "./OdysseyDesignTokensContext";
-import { useBackground } from "./BackgroundContext";
+import { BackgroundProvider, useBackground } from "./BackgroundContext";
 
 declare module "@mui/material/styles" {
   interface Theme {
@@ -60,7 +60,7 @@ export type OdysseyProviderProps<
     themeOverride?: ThemeOptions;
   };
 
-const OdysseyProvider = <SupportedLanguages extends string>({
+const OdysseyProviderInner = <SupportedLanguages extends string>({
   children,
   designTokensOverride,
   emotionRoot,
@@ -131,6 +131,14 @@ const OdysseyProvider = <SupportedLanguages extends string>({
     </OdysseyCacheProvider>
   );
 };
+
+const OdysseyProvider = <SupportedLanguages extends string>(
+  props: OdysseyProviderProps<SupportedLanguages>,
+) => (
+  <BackgroundProvider>
+    <OdysseyProviderInner {...props} />
+  </BackgroundProvider>
+);
 
 const MemoizedOdysseyProvider = memo(OdysseyProvider) as typeof OdysseyProvider;
 

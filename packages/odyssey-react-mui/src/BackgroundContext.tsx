@@ -10,33 +10,73 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import React, {
+  createContext,
+  useContext,
+  useRef,
+  useEffect,
+  useState,
+  ReactNode,
+} from "react";
 import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
-import { createContext, useContext, ReactNode } from "react";
+import * as Tokens from "@okta/odyssey-design-tokens";
 
 export type BackgroundType = "highContrast" | "lowContrast";
 
 export type BackgroundContextType = {
   background: BackgroundType;
   isLowContrast: boolean;
+  parentBackgroundColor: string;
 };
 
 const BackgroundContext = createContext<BackgroundContextType>({
   background: "highContrast",
   isLowContrast: false,
+  parentBackgroundColor: "",
 });
 
 export const useBackground = () => useContext(BackgroundContext);
 
-export const BackgroundProvider = ({
-  value,
-  children,
-}: {
-  value: BackgroundType;
+export const useParentBackgroundColor = (ref: React.RefObject<HTMLElement>) => {
+  const [backgroundColor, setBackgroundColor] = useState("");
+
+  useEffect(() => {
+    if (ref.current) {
+      const computedStyle = window.getComputedStyle(ref.current);
+      setBackgroundColor(computedStyle.backgroundColor);
+    }
+  }, [ref]);
+
+  return backgroundColor;
+};
+
+type BackgroundProviderProps = {
   children: ReactNode;
-}) => {
-  const contextValue = {
-    background: value,
-    isLowContrast: value === "lowContrast",
+  background?: BackgroundType;
+};
+
+export const BackgroundProvider = ({
+  children,
+  background: explicitBackground,
+}: BackgroundProviderProps) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const parentBackgroundColor = useParentBackgroundColor(ref);
+  const [background, setBackground] = useState<BackgroundType>("highContrast");
+
+  useEffect(() => {
+    if (explicitBackground) {
+      setBackground(explicitBackground);
+    } else {
+      // Automatic detection logic using design token
+      const isLowContrast = parentBackgroundColor === Tokens.HueNeutral50;
+      setBackground(isLowContrast ? "lowContrast" : "highContrast");
+    }
+  }, [parentBackgroundColor, explicitBackground]);
+
+  const contextValue: BackgroundContextType = {
+    background,
+    isLowContrast: background === "lowContrast",
+    parentBackgroundColor,
   };
 
   const existingTheme = useTheme();
@@ -48,8 +88,10 @@ export const BackgroundProvider = ({
   });
 
   return (
-    <BackgroundContext.Provider value={contextValue}>
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>
-    </BackgroundContext.Provider>
+    <div ref={ref} style={{ height: "100%" }}>
+      <BackgroundContext.Provider value={contextValue}>
+        <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      </BackgroundContext.Provider>
+    </div>
   );
 };
