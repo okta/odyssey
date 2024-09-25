@@ -857,7 +857,7 @@ export const components = ({
           },
 
           "&.isClickable:hover": {
-            boxShadow: odysseyTokens.DepthHigh,
+            boxShadow: odysseyTokens.DepthMedium,
           },
 
           [`& .${typographyClasses.h5}`]: {
