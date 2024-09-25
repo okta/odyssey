@@ -606,3 +606,71 @@ export const ControlledMultipleVirtualizedAutocomplete: StoryObj<
     return <Autocomplete {...props} value={localValue} onChange={onChange} />;
   },
 };
+
+type OptionType = {
+  id: string;
+  label: string;
+  value: number;
+};
+
+export const CustomFilterAutocomplete: StoryObj<
+  typeof Autocomplete<OptionType, boolean, boolean>
+> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Searching by an attribute other than the label, `value` in this example",
+      },
+    },
+  },
+  args: {
+    hasMultipleChoices: true as const,
+    isVirtualized: true,
+    isReadOnly: false,
+    label: "label",
+    hint: 'Try searching "1" to get "Option One" and "Option Ten"',
+    getIsOptionEqualToValue: (option, value) => option.id === value.id,
+  },
+  render: function C(props) {
+    const numberWords = [
+      "Zero",
+      "One",
+      "Two",
+      "Three",
+      "Four",
+      "Five",
+      "Six",
+      "Seven",
+      "Eight",
+      "Nine",
+      "Ten",
+    ];
+
+    const options = Array.from({ length: 11 }, (_, i) => ({
+      id: `id-${i}`,
+      label: `Option ${numberWords[i]}`,
+      value: i,
+    }));
+    const getOptions = (options: OptionType[], inputValue: string) => {
+      return options.filter(
+        (option) =>
+          option.label.toLowerCase().includes(inputValue.toLowerCase()) ||
+          option.value.toString().includes(inputValue.toLowerCase()),
+      );
+    };
+
+    return (
+      <Autocomplete<OptionType, true, false>
+        {...props}
+        defaultValue={undefined}
+        hasMultipleChoices
+        isCustomValueAllowed={false}
+        getOptions={getOptions}
+        value={undefined}
+        onChange={undefined}
+        options={options}
+      />
+    );
+  },
+};

@@ -10,13 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import styled from "@emotion/styled";
 import {
+  AutocompleteRenderInputParams,
+  AutocompleteValue,
+  InputBase,
   Autocomplete as MuiAutocomplete,
   AutocompleteProps as MuiAutocompleteProps,
-  InputBase,
   UseAutocompleteProps,
-  AutocompleteValue,
-  AutocompleteRenderInputParams,
 } from "@mui/material";
 import {
   createContext,
@@ -31,17 +32,16 @@ import {
   useRef,
   useState,
 } from "react";
-import styled from "@emotion/styled";
-import { VariableSizeList, ListChildComponentProps } from "react-window";
 import { useTranslation } from "react-i18next";
+import { ListChildComponentProps, VariableSizeList } from "react-window";
 
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { HtmlProps } from "./HtmlProps";
 import {
   ComponentControlledState,
-  useInputValues,
   getControlState,
+  useInputValues,
 } from "./inputUtils";
 import { TestSelector } from "./test-selectors";
 
@@ -217,6 +217,11 @@ export type AutocompleteProps<
   getIsOptionEqualToValue?: (option: OptionType, value: OptionType) => boolean;
 
   /**
+   * Used to customize the filtering logic for the options in the dropdown
+   */
+  getOptions?: (options: OptionType[], inputValue: string) => OptionType[];
+
+  /**
    * If this component is required to display a virtualized list of options,
    * then this value needs to be set to true.
    * It is recommended if you're options are on the order of 10's of hundreds or more.
@@ -271,6 +276,7 @@ const Autocomplete = <
   options,
   value,
   getIsOptionEqualToValue,
+  getOptions,
   testId,
   translate,
 }: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
@@ -555,6 +561,21 @@ const Autocomplete = <
     [onInputChangeProp],
   );
 
+  const filterOptions: MuiAutocompleteProps<
+    OptionType,
+    HasMultipleChoices,
+    undefined,
+    IsCustomValueAllowed
+  >["filterOptions"] = useCallback(
+    (options: OptionType[], { inputValue }: { inputValue: string }) => {
+      if (getOptions) {
+        return getOptions(options, inputValue);
+      }
+      return options;
+    },
+    [getOptions],
+  );
+
   return (
     <MuiAutocomplete
       {...valueProps}
@@ -586,6 +607,7 @@ const Autocomplete = <
       renderInput={renderInput}
       isOptionEqualToValue={getIsOptionEqualToValue}
       translate={translate}
+      filterOptions={filterOptions}
     />
   );
 };
