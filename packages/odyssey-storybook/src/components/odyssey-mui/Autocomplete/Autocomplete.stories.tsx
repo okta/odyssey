@@ -652,7 +652,10 @@ export const CustomFilterAutocomplete: StoryObj<
       label: `Option ${numberWords[i]}`,
       value: i,
     }));
-    const getOptions = (options: OptionType[], inputValue: string) => {
+    const getOptions = (
+      options: OptionType[],
+      { inputValue }: { inputValue: string },
+    ) => {
       return options.filter(
         (option) =>
           option.label.toLowerCase().includes(inputValue.toLowerCase()) ||

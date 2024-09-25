@@ -219,7 +219,12 @@ export type AutocompleteProps<
   /**
    * Used to customize the filtering logic for the options in the dropdown
    */
-  getOptions?: (options: OptionType[], inputValue: string) => OptionType[];
+  getOptions?: MuiAutocompleteProps<
+    OptionType,
+    HasMultipleChoices,
+    undefined,
+    IsCustomValueAllowed
+  >["filterOptions"];
 
   /**
    * If this component is required to display a virtualized list of options,
@@ -561,21 +566,6 @@ const Autocomplete = <
     [onInputChangeProp],
   );
 
-  const filterOptions: MuiAutocompleteProps<
-    OptionType,
-    HasMultipleChoices,
-    undefined,
-    IsCustomValueAllowed
-  >["filterOptions"] = useCallback(
-    (options: OptionType[], { inputValue }: { inputValue: string }) => {
-      if (getOptions) {
-        return getOptions(options, inputValue);
-      }
-      return options;
-    },
-    [getOptions],
-  );
-
   return (
     <MuiAutocomplete
       {...valueProps}
@@ -591,6 +581,7 @@ const Autocomplete = <
       disableCloseOnSelect={hasMultipleChoices}
       disabled={isDisabled}
       freeSolo={isCustomValueAllowed}
+      filterOptions={getOptions}
       filterSelectedOptions={true}
       id={idOverride}
       fullWidth={isFullWidth}
@@ -607,7 +598,6 @@ const Autocomplete = <
       renderInput={renderInput}
       isOptionEqualToValue={getIsOptionEqualToValue}
       translate={translate}
-      filterOptions={filterOptions}
     />
   );
 };
