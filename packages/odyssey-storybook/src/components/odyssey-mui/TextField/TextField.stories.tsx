@@ -271,7 +271,7 @@ export const Hint: StoryObj<typeof TextField> = {
 
 export const HintLink: StoryObj<typeof TextField> = {
   args: {
-    hint: "Specify your destination within the Sol system. Learn more ",
+    hint: "Specify your destination within the Sol system. Learn more",
     HintLinkComponent: <Link href="/learn-more">about the Sol system</Link>,
     defaultValue: "",
   },
