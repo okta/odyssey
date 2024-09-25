@@ -129,7 +129,7 @@ const storybookMeta: Meta<ButtonProps> = {
   decorators: [
     MuiThemeDecorator,
     (Story: StoryFn<ButtonProps>, context: StoryContext<ButtonProps>) => (
-      <BackgroundProvider background="highContrast">
+      <BackgroundProvider contrastMode="highContrast">
         <Story {...context.args} />
       </BackgroundProvider>
     ),
@@ -226,7 +226,7 @@ export const ButtonSecondaryDisabledOnWhiteBackground: StoryObj<ButtonProps> = {
   name: "Secondary, Disabled on white background",
   decorators: [
     (Story: StoryFn<ButtonProps>, context: StoryContext<ButtonProps>) => (
-      <BackgroundProvider background="highContrast">
+      <BackgroundProvider contrastMode="highContrast">
         <Story {...context.args} />
       </BackgroundProvider>
     ),
@@ -251,7 +251,7 @@ export const ButtonSecondaryDisabledOnGrayBackground: StoryObj<ButtonProps> = {
   name: "Secondary, Disabled on gray background",
   decorators: [
     (Story: StoryFn<ButtonProps>, context: StoryContext<ButtonProps>) => (
-      <BackgroundProvider background="lowContrast">
+      <BackgroundProvider contrastMode="lowContrast">
         <Box sx={{ backgroundColor: Tokens.HueNeutral50, padding: "24px" }}>
           <Story {...context.args} />
         </Box>

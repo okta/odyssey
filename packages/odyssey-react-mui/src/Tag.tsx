@@ -21,7 +21,7 @@ import {
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext";
 import { CloseCircleFilledIcon } from "./icons.generated";
-import { useBackground } from "./BackgroundContext";
+import { useBackground, ContrastMode } from "./BackgroundContext";
 
 export const tagColorVariants = [
   "default",
@@ -58,8 +58,9 @@ export type TagProps = {
 const getChipColors = (
   colorVariant: TagColorVariant,
   odysseyDesignTokens: DesignTokens,
-  isLowContrast: boolean,
+  contrastMode: ContrastMode,
 ) => {
+  const isLowContrast = contrastMode === "lowContrast";
   const colors = {
     default: {
       background: isLowContrast
@@ -146,20 +147,16 @@ const getChipColors = (
 
 const StyledTag = styled(MuiChip, {
   shouldForwardProp: (prop) =>
-    !["colorVariant", "isLowContrast", "odysseyDesignTokens"].includes(
+    !["colorVariant", "contrastMode", "odysseyDesignTokens"].includes(
       prop as string,
     ),
 })<{
   colorVariant: TagColorVariant;
-  isLowContrast: boolean;
+  contrastMode: ContrastMode;
   odysseyDesignTokens: DesignTokens;
   as?: React.ElementType; // Allow the 'as' prop to be forwarded
-}>(({ colorVariant, isLowContrast, odysseyDesignTokens }) => {
-  const colors = getChipColors(
-    colorVariant,
-    odysseyDesignTokens,
-    isLowContrast,
-  );
+}>(({ colorVariant, contrastMode, odysseyDesignTokens }) => {
+  const colors = getChipColors(colorVariant, odysseyDesignTokens, contrastMode);
 
   return {
     backgroundColor: colors.background,
@@ -202,8 +199,7 @@ const Tag = ({
 }: TagProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { chipElementType } = useContext(TagListContext);
-  const { background } = useBackground();
-  const isLowContrast = background === "lowContrast";
+  const { contrastMode } = useBackground();
 
   const renderTag = useCallback(
     (muiProps: MuiPropsContextType) => (
@@ -215,7 +211,7 @@ const Tag = ({
         data-se={testId}
         colorVariant={colorVariant}
         odysseyDesignTokens={odysseyDesignTokens}
-        isLowContrast={isLowContrast}
+        contrastMode={contrastMode}
         disabled={isDisabled}
         icon={icon}
         label={label}
@@ -236,7 +232,7 @@ const Tag = ({
       translate,
       colorVariant,
       odysseyDesignTokens,
-      isLowContrast,
+      contrastMode,
     ],
   );
 

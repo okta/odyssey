@@ -14,81 +14,126 @@ import React, {
   createContext,
   useContext,
   useRef,
-  useEffect,
+  useLayoutEffect,
   useState,
+  useMemo,
   ReactNode,
 } from "react";
 import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 import * as Tokens from "@okta/odyssey-design-tokens";
 
-export type BackgroundType = "highContrast" | "lowContrast";
+declare module "@mui/material/styles" {
+  interface Theme {
+    custom: {
+      isLowContrast: boolean;
+    };
+    odysseyContrastMode: ContrastMode;
+  }
+  interface ThemeOptions {
+    custom?: {
+      isLowContrast?: boolean;
+    };
+    odysseyContrastMode?: ContrastMode;
+  }
+}
+
+export type ContrastMode = "lowContrast" | "highContrast";
 
 export type BackgroundContextType = {
-  background: BackgroundType;
-  isLowContrast: boolean;
+  contrastMode: ContrastMode;
   parentBackgroundColor: string;
 };
 
 const BackgroundContext = createContext<BackgroundContextType>({
-  background: "highContrast",
-  isLowContrast: false,
+  contrastMode: "highContrast",
   parentBackgroundColor: "",
 });
 
 export const useBackground = () => useContext(BackgroundContext);
 
+const hexToRgb = (hex: string): string => {
+  const bigint = parseInt(hex.slice(1), 16);
+  const r = (bigint >> 16) & 255;
+  const g = (bigint >> 8) & 255;
+  const b = bigint & 255;
+  return `rgb(${r}, ${g}, ${b})`;
+};
+
 export const useParentBackgroundColor = (ref: React.RefObject<HTMLElement>) => {
   const [backgroundColor, setBackgroundColor] = useState("");
 
-  useEffect(() => {
+  const hueNeutral50Rgb = useMemo(() => hexToRgb(Tokens.HueNeutral50), []);
+
+  useLayoutEffect(() => {
     if (ref.current) {
-      const computedStyle = window.getComputedStyle(ref.current);
-      setBackgroundColor(computedStyle.backgroundColor);
+      let element: HTMLElement | null = ref.current;
+      while (element) {
+        const bgColor = window.getComputedStyle(element).backgroundColor;
+
+        if (bgColor !== "rgba(0, 0, 0, 0)" && bgColor !== "transparent") {
+          // Compare computed color to precomputed HueNeutral50 RGB value
+          if (bgColor === hueNeutral50Rgb) {
+            setBackgroundColor(Tokens.HueNeutral50);
+          } else {
+            setBackgroundColor(bgColor);
+          }
+          break;
+        }
+        element = element.parentElement;
+      }
     }
-  }, [ref]);
+  }, [ref, hueNeutral50Rgb]);
 
   return backgroundColor;
 };
 
 type BackgroundProviderProps = {
   children: ReactNode;
-  background?: BackgroundType;
+  contrastMode?: ContrastMode;
 };
 
 export const BackgroundProvider = ({
   children,
-  background: explicitBackground,
+  contrastMode: explicitContrastMode,
 }: BackgroundProviderProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const parentBackgroundColor = useParentBackgroundColor(ref);
-  const [background, setBackground] = useState<BackgroundType>("highContrast");
+  const [contrastMode, setContrastMode] =
+    useState<ContrastMode>("highContrast");
 
-  useEffect(() => {
-    if (explicitBackground) {
-      setBackground(explicitBackground);
+  useLayoutEffect(() => {
+    if (explicitContrastMode) {
+      setContrastMode(explicitContrastMode);
     } else {
-      // Automatic detection logic using design token
       const isLowContrast = parentBackgroundColor === Tokens.HueNeutral50;
-      setBackground(isLowContrast ? "lowContrast" : "highContrast");
+      setContrastMode(isLowContrast ? "lowContrast" : "highContrast");
     }
-  }, [parentBackgroundColor, explicitBackground]);
+  }, [parentBackgroundColor, explicitContrastMode]);
 
-  const contextValue: BackgroundContextType = {
-    background,
-    isLowContrast: background === "lowContrast",
-    parentBackgroundColor,
-  };
+  const contextValue = useMemo<BackgroundContextType>(
+    () => ({
+      contrastMode,
+      parentBackgroundColor,
+    }),
+    [contrastMode, parentBackgroundColor],
+  );
 
   const existingTheme = useTheme();
-  const theme = createTheme({
-    ...existingTheme,
-    custom: {
-      isLowContrast: contextValue.isLowContrast,
-    },
-  });
+  const theme = useMemo(
+    () =>
+      createTheme({
+        ...existingTheme,
+        custom: {
+          ...existingTheme.custom,
+          isLowContrast: contrastMode === "lowContrast",
+        },
+        odysseyContrastMode: contrastMode,
+      }),
+    [existingTheme, contrastMode],
+  );
 
   return (
-    <div ref={ref} style={{ height: "100%" }}>
+    <div ref={ref}>
       <BackgroundContext.Provider value={contextValue}>
         <ThemeProvider theme={theme}>{children}</ThemeProvider>
       </BackgroundContext.Provider>

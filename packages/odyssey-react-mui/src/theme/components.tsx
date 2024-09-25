@@ -578,7 +578,7 @@ export const components = ({
       },
       styleOverrides: {
         root: ({ ownerState, theme }) => {
-          const isLowContrast = theme.custom?.isLowContrast;
+          const contrastMode = theme.odysseyContrastMode;
 
           return {
             minWidth: "unset",
@@ -659,13 +659,13 @@ export const components = ({
               },
 
               "&:disabled": {
-                ...(isLowContrast && {
+                ...(contrastMode === "lowContrast" && {
                   backgroundColor: odysseyTokens.HueNeutral200,
                   borderColor: "transparent",
                   color: odysseyTokens.TypographyColorDisabled,
                 }),
 
-                ...(isLowContrast === false && {
+                ...(contrastMode === "highContrast" && {
                   backgroundColor: odysseyTokens.HueNeutral100,
                   borderColor: "transparent",
                   color: odysseyTokens.TypographyColorDisabled,
@@ -956,10 +956,11 @@ export const components = ({
       },
       styleOverrides: {
         root: ({ ownerState, theme }) => {
-          const isLowContrast = theme.custom?.isLowContrast;
-          const baseBackgroundColor = isLowContrast
-            ? odysseyTokens.HueNeutral200
-            : odysseyTokens.HueNeutral50;
+          const contrastMode = theme.odysseyContrastMode;
+          const baseBackgroundColor =
+            contrastMode === "lowContrast"
+              ? odysseyTokens.HueNeutral200
+              : odysseyTokens.HueNeutral50;
           return {
             height: "auto",
             paddingBlock: `calc(${odysseyTokens.Spacing2} - ${odysseyTokens.BorderWidthMain})`,
@@ -1057,46 +1058,55 @@ export const components = ({
               fontWeight: odysseyTokens.TypographyWeightHeadingBold,
               lineHeight: odysseyTokens.TypographyLineHeightOverline,
               backgroundColor: baseBackgroundColor,
-              color: isLowContrast
-                ? odysseyTokens.TypographyColorBody
-                : odysseyTokens.TypographyColorSubordinate,
+              color:
+                contrastMode === "lowContrast"
+                  ? odysseyTokens.TypographyColorBody
+                  : odysseyTokens.TypographyColorSubordinate,
               fontSize: "0.71428571rem",
               textTransform: "uppercase",
 
               [`&.${chipClasses.colorError}`]: {
-                backgroundColor: isLowContrast
-                  ? odysseyTokens.PaletteDangerLight
-                  : odysseyTokens.PaletteDangerLighter,
-                color: isLowContrast
-                  ? odysseyTokens.PaletteDangerDark
-                  : odysseyTokens.TypographyColorDanger,
+                backgroundColor:
+                  contrastMode === "lowContrast"
+                    ? odysseyTokens.PaletteDangerLight
+                    : odysseyTokens.PaletteDangerLighter,
+                color:
+                  contrastMode === "lowContrast"
+                    ? odysseyTokens.PaletteDangerDark
+                    : odysseyTokens.TypographyColorDanger,
               },
 
               [`&.${chipClasses.colorInfo}`]: {
-                backgroundColor: isLowContrast
-                  ? odysseyTokens.PalettePrimaryLight
-                  : odysseyTokens.PalettePrimaryLighter,
-                color: isLowContrast
-                  ? odysseyTokens.PalettePrimaryDark
-                  : odysseyTokens.PalettePrimaryText,
+                backgroundColor:
+                  contrastMode === "lowContrast"
+                    ? odysseyTokens.PalettePrimaryLight
+                    : odysseyTokens.PalettePrimaryLighter,
+                color:
+                  contrastMode === "lowContrast"
+                    ? odysseyTokens.PalettePrimaryDark
+                    : odysseyTokens.PalettePrimaryText,
               },
 
               [`&.${chipClasses.colorSuccess}`]: {
-                backgroundColor: isLowContrast
-                  ? odysseyTokens.PaletteSuccessLight
-                  : odysseyTokens.PaletteSuccessLighter,
-                color: isLowContrast
-                  ? odysseyTokens.PaletteSuccessDark
-                  : odysseyTokens.TypographyColorSuccess,
+                backgroundColor:
+                  contrastMode === "lowContrast"
+                    ? odysseyTokens.PaletteSuccessLight
+                    : odysseyTokens.PaletteSuccessLighter,
+                color:
+                  contrastMode === "lowContrast"
+                    ? odysseyTokens.PaletteSuccessDark
+                    : odysseyTokens.TypographyColorSuccess,
               },
 
               [`&.${chipClasses.colorWarning}`]: {
-                backgroundColor: isLowContrast
-                  ? odysseyTokens.PaletteWarningLight
-                  : odysseyTokens.PaletteWarningLighter,
-                color: isLowContrast
-                  ? odysseyTokens.PaletteWarningDark
-                  : odysseyTokens.TypographyColorWarning,
+                backgroundColor:
+                  contrastMode === "lowContrast"
+                    ? odysseyTokens.PaletteWarningLight
+                    : odysseyTokens.PaletteWarningLighter,
+                color:
+                  contrastMode === "lowContrast"
+                    ? odysseyTokens.PaletteWarningDark
+                    : odysseyTokens.TypographyColorWarning,
               },
             }),
 

@@ -32,19 +32,6 @@ import * as Tokens from "@okta/odyssey-design-tokens";
 import { OdysseyDesignTokensContext } from "./OdysseyDesignTokensContext";
 import { BackgroundProvider, useBackground } from "./BackgroundContext";
 
-declare module "@mui/material/styles" {
-  interface Theme {
-    custom: {
-      isLowContrast: boolean;
-    };
-  }
-  interface ThemeOptions {
-    custom?: {
-      isLowContrast?: boolean;
-    };
-  }
-}
-
 const scopedCssBaselineStyles = {
   height: "inherit",
 };
@@ -73,7 +60,7 @@ const OdysseyProviderInner = <SupportedLanguages extends string>({
   themeOverride,
   translationOverrides,
 }: OdysseyProviderProps<SupportedLanguages>) => {
-  const { isLowContrast } = useBackground();
+  const { contrastMode } = useBackground();
 
   const odysseyTokens = useMemo(
     () => ({ ...Tokens, ...designTokensOverride }),
@@ -94,10 +81,12 @@ const OdysseyProviderInner = <SupportedLanguages extends string>({
       createTheme({
         ...odysseyTheme,
         custom: {
-          isLowContrast: isLowContrast,
+          ...odysseyTheme.custom,
+          isLowContrast: contrastMode === "lowContrast",
         },
-      } as ThemeOptions),
-    [odysseyTheme, isLowContrast],
+        odysseyContrastMode: contrastMode,
+      }),
+    [odysseyTheme, contrastMode],
   );
 
   const customOdysseyTheme = useMemo(

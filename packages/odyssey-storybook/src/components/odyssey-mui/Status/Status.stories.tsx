@@ -128,9 +128,9 @@ export const WarningPill: StoryObj<StatusProps> = {
 };
 
 export const StatusesOnWhiteBackground: StoryObj<StatusProps> = {
-  name: "Statuses on White Background",
+  name: "Statuses on white background",
   render: () => (
-    <BackgroundProvider background="highContrast">
+    <BackgroundProvider>
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
         <Status label="Default" severity="default" />
         <Status label="Error" severity="error" />
@@ -178,7 +178,7 @@ export const StatusesOnWhiteBackground: StoryObj<StatusProps> = {
   parameters: {
     docs: {
       source: {
-        code: `<BackgroundProvider background="highContrast">
+        code: `<BackgroundProvider contrastMode="highContrast">
   <Status label="Default" severity="default" />
   <Status label="Error" severity="error" />
   <Status label="Info" severity="info" />
@@ -195,25 +195,25 @@ export const StatusesOnWhiteBackground: StoryObj<StatusProps> = {
 };
 
 export const StatusesOnGrayBackground: StoryObj<StatusProps> = {
-  name: "Statuses on Gray Background",
+  name: "Statuses on gray background",
   render: () => (
-    <BackgroundProvider background="lowContrast">
-      <Box
-        sx={{
-          backgroundColor: Tokens.HueNeutral50,
-          padding: "24px",
-          display: "flex",
-          flexWrap: "wrap",
-          gap: 2,
-        }}
-      >
-        <Status label="Default" severity="default" />
-        <Status label="Error" severity="error" />
-        <Status label="Info" severity="info" />
-        <Status label="Success" severity="success" />
-        <Status label="Warning" severity="warning" />
-      </Box>
-    </BackgroundProvider>
+    <Box sx={{ backgroundColor: Tokens.HueNeutral50, padding: "24px" }}>
+      <BackgroundProvider>
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 2,
+          }}
+        >
+          <Status label="Default" severity="default" />
+          <Status label="Error" severity="error" />
+          <Status label="Info" severity="info" />
+          <Status label="Success" severity="success" />
+          <Status label="Warning" severity="warning" />
+        </Box>
+      </BackgroundProvider>
+    </Box>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -253,7 +253,7 @@ export const StatusesOnGrayBackground: StoryObj<StatusProps> = {
   parameters: {
     docs: {
       source: {
-        code: `<BackgroundProvider background="lowContrast">
+        code: `<BackgroundProvider contrastMode="lowContrast">
   <Status label="Default" severity="default" />
   <Status label="Error" severity="error" />
   <Status label="Info" severity="info" />

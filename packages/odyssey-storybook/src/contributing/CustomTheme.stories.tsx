@@ -12,6 +12,8 @@
 
 import type { StoryObj } from "@storybook/react";
 import {
+  BackgroundProvider,
+  Box,
   Button,
   createOdysseyMuiTheme,
   createTheme,
@@ -23,6 +25,7 @@ import {
   Paper,
   Radio,
   RadioGroup,
+  Status,
   TextField,
   ThemeOptions,
   ThemeProvider as MuiThemeProvider,
@@ -179,3 +182,28 @@ export const CustomComponentStory: StoryObj = {
 };
 
 CustomComponentStory.storyName = "CustomComponent";
+
+export const StatusesOnGrayBackground: StoryObj = {
+  name: "Statuses on Gray Background",
+  render: () => (
+    <Box sx={{ backgroundColor: "#f4f4f4", padding: "24px" }}>
+      <BackgroundProvider>
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 2,
+          }}
+        >
+          <Status label="Default" severity="default" />
+          <Status label="Error" severity="error" />
+          <Status label="Info" severity="info" />
+          <Status label="Success" severity="success" />
+          <Status label="Warning" severity="warning" />
+        </Box>
+      </BackgroundProvider>
+    </Box>
+  ),
+};
+
+StatusesOnGrayBackground.storyName = "Statuses on Gray Background";

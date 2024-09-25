@@ -6,11 +6,11 @@ import * as Stories from "./CustomTheme.stories";
 
 # Custom Theme
 
-A way to use custom theme to override odyssey default theme.
+A way to use a custom theme to override the Odyssey default theme.
 
 ## Behavior
 
-Visually, the mui components under `OdysseyThemeProvider` with custom theme would consume that theme.
+Visually, the MUI components under `OdysseyThemeProvider` with a custom theme would consume that theme.
 
 ### Button Primary
 
@@ -30,10 +30,42 @@ Visually, the mui components under `OdysseyThemeProvider` with custom theme woul
   <Story of={Stories.RadioGroupStory} />
 </Canvas>
 
-### Customizming MUI Components
+## BackgroundProvider
 
-Overriding the theme of MUI component directly that is not part of odyssey - <a href="https://mui.com/material-ui/customization/theme-components/">Components Customization - Material UI</a>
+The `BackgroundProvider` component manages the contrast mode (`lowContrast` or `highContrast`) to detect the white and gray background and provides background context for child components. It is designed to help ensure that components are styled correctly based on the background they are rendered on.
 
 <Canvas>
-  <Story id="customization-components--custom-component-story" />
+  <Story of={Stories.StatusesOnGrayBackground} />
 </Canvas>
+
+### Behavior
+
+#### Automatic Contrast Mode Detection
+
+By default, the `BackgroundProvider` will automatically detect the parent background color and determine the appropriate contrast mode. This is particularly useful when components need to adapt dynamically to different backgrounds for visual contrast consistency.
+
+- **Low Contrast** is used for the gray background (`HueNeutral50`).
+- **High Contrast** is used for the white background.
+
+The automatic detection works by inspecting the background color of the nearest parent element and determining whether it matches a predefined token value (e.g., `HueNeutral50`).
+
+#### Manually Controlling Contrast Mode
+
+If you need to override the automatic behavior, you can manually set the mode by passing the `contrastMode` prop either `"lowContrast"` or `"highContrast"`.
+
+```tsx
+//Auto background color detection
+<BackgroundProvider>
+  <YourComponent />
+</BackgroundProvider>
+
+//For gray background
+<BackgroundProvider contrastMode="lowContrast">
+  <YourComponent />
+</BackgroundProvider>
+
+//For white background
+<BackgroundProvider contrastMode="highContrast">
+  <YourComponent />
+</BackgroundProvider>
+```
