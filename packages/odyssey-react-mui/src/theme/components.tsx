@@ -843,7 +843,7 @@ export const components = ({
         root: () => ({
           backgroundColor: odysseyTokens.HueNeutralWhite,
           borderRadius: odysseyTokens.BorderRadiusOuter,
-          boxShadow: odysseyTokens.DepthMedium,
+          boxShadow: "none",
           padding: odysseyTokens.Spacing5,
           position: "relative",
           transition: `all ${odysseyTokens.TransitionDurationMain} ${odysseyTokens.TransitionTimingMain}`,
@@ -857,7 +857,6 @@ export const components = ({
           },
 
           "&.isClickable:hover": {
-            backgroundColor: odysseyTokens.HueNeutral50,
             boxShadow: odysseyTokens.DepthHigh,
           },
 
