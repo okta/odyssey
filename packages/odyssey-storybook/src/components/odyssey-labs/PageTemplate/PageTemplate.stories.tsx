@@ -31,6 +31,7 @@ import {
   Dialog,
   Drawer,
   Form as OdysseyForm,
+  Heading3,
   Heading5,
   MenuButton,
   MenuItem,
@@ -336,7 +337,18 @@ export const KitchenSink: StoryObj<PageTemplateProps> = {
             />
           </Surface>
           <Surface>
-            <h1>Another thing</h1>
+            <Heading3>Some supporting content could go here</Heading3>
+            <Paragraph>
+              Lorem ipsum odor amet, consectetuer adipiscing elit. Inceptos
+              turpis mattis; tempor proin per natoque. Ex eu dictum varius
+              tristique himenaeos aenean sem consectetur urna. Curabitur
+              ultricies aptent ac tempus natoque tellus. Rutrum facilisi
+              facilisi ligula aenean sociosqu nec velit parturient id. Egestas
+              viverra tempus non, turpis ad ex penatibus. Scelerisque maximus
+              etiam arcu laoreet nam vitae platea. Non fermentum potenti cursus,
+              varius augue varius. Cubilia imperdiet aptent viverra mus urna. Et
+              netus at ad lorem; hac eu.
+            </Paragraph>
           </Surface>
         </Layout>
       </PageTemplate>

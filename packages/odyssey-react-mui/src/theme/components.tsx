@@ -1746,24 +1746,19 @@ export const components = ({
       },
       styleOverrides: {
         root: {
-          display: "flex",
-          justifyContent: "flex-start",
-          alignItems: "center",
           fontSize: odysseyTokens.TypographySizeSubordinate,
           lineHeight: odysseyTokens.TypographyLineHeightBody,
+          marginBlockEnd: odysseyTokens.Spacing2,
           marginBlockStart: odysseyTokens.Spacing1,
+          textAlign: "start",
+
           [`.${formLabelClasses.root} + &`]: {
             marginBlockStart: `-${odysseyTokens.Spacing1}`,
             color: odysseyTokens.TypographyColorSubordinate,
           },
-          marginBlockEnd: odysseyTokens.Spacing2,
+
           "&:last-child": {
             marginBlockEnd: 0,
-          },
-          textAlign: "start",
-
-          ".field-hint-link-component": {
-            marginInlineStart: odysseyTokens.Spacing1,
           },
 
           ".Mui-disabled &": {
