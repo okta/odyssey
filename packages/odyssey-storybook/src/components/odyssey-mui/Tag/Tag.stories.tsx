@@ -12,7 +12,7 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import {
-  BackgroundProvider,
+  ContrastModeProvider,
   Box,
   Tag,
   TagList,
@@ -246,7 +246,7 @@ export const Disabled: StoryObj<TagProps> = {
 export const TagsOnWhiteBackground: StoryObj<TagProps> = {
   name: "Tags on White Background",
   render: () => (
-    <BackgroundProvider contrastMode="highContrast">
+    <ContrastModeProvider contrastMode="highContrast">
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
         <Tag label="Default" />
         <Tag label="Info" colorVariant="info" />
@@ -255,7 +255,7 @@ export const TagsOnWhiteBackground: StoryObj<TagProps> = {
         <Tag label="AccentThree" colorVariant="accentThree" />
         <Tag label="AccentFour" colorVariant="accentFour" />
       </Box>
-    </BackgroundProvider>
+    </ContrastModeProvider>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -296,18 +296,18 @@ export const TagsOnWhiteBackground: StoryObj<TagProps> = {
   parameters: {
     docs: {
       source: {
-        code: `<BackgroundProvider contrastMode="highContrast">
+        code: `<ContrastModeProvider contrastMode="highContrast">
   <Tag label="Default" />
   <Tag label="Info" colorVariant="info" />
   <Tag label="AccentOne" colorVariant="accentOne" />
   <Tag label="AccentTwo" colorVariant="accentTwo" />
   <Tag label="AccentThree" colorVariant="accentThree" />
   <Tag label="AccentFour" colorVariant="accentFour" />
-</BackgroundProvider>`,
+</ContrastModeProvider>`,
       },
       description: {
         story:
-          "Demonstrates how the `Tag` component behaves on a white (`highContrast`) background using `BackgroundProvider`.",
+          "Demonstrates how the `Tag` component behaves on a white (`highContrast`) background using `ContrastModeProvider`.",
       },
     },
   },
@@ -316,7 +316,7 @@ export const TagsOnWhiteBackground: StoryObj<TagProps> = {
 export const TagsOnGrayBackground: StoryObj<TagProps> = {
   name: "Tags on Gray Background",
   render: () => (
-    <BackgroundProvider contrastMode="lowContrast">
+    <ContrastModeProvider contrastMode="lowContrast">
       <Box
         sx={{
           backgroundColor: Tokens.HueNeutral50,
@@ -333,7 +333,7 @@ export const TagsOnGrayBackground: StoryObj<TagProps> = {
         <Tag label="AccentThree" colorVariant="accentThree" />
         <Tag label="AccentFour" colorVariant="accentFour" />
       </Box>
-    </BackgroundProvider>
+    </ContrastModeProvider>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -374,18 +374,18 @@ export const TagsOnGrayBackground: StoryObj<TagProps> = {
   parameters: {
     docs: {
       source: {
-        code: `<BackgroundProvider contrastMode="lowContrast">
+        code: `<ContrastModeProvider contrastMode="lowContrast">
   <Tag label="Default" />
   <Tag label="Info" colorVariant="info" />
   <Tag label="AccentOne" colorVariant="accentOne" />
   <Tag label="AccentTwo" colorVariant="accentTwo" />
   <Tag label="AccentThree" colorVariant="accentThree" />
   <Tag label="AccentFour" colorVariant="accentFour" />
-</BackgroundProvider>`,
+</ContrastModeProvider>`,
       },
       description: {
         story:
-          "Demonstrates how the `Tag` component behaves on a gray (`lowContrast`) background using `BackgroundProvider`.",
+          "Demonstrates how the `Tag` component behaves on a gray (`lowContrast`) background using `ContrastModeProvider`.",
       },
     },
   },

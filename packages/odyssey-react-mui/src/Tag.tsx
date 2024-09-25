@@ -21,7 +21,7 @@ import {
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext";
 import { CloseCircleFilledIcon } from "./icons.generated";
-import { useBackground, ContrastMode } from "./BackgroundContext";
+import { useBackground, ContrastMode } from "./ContrastModeProvider";
 
 export const tagColorVariants = [
   "default",

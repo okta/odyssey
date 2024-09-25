@@ -30,7 +30,7 @@ import { DefaultSupportedLanguages } from "./OdysseyTranslationProvider.types";
 import { createOdysseyMuiTheme, DesignTokensOverride } from "./theme";
 import * as Tokens from "@okta/odyssey-design-tokens";
 import { OdysseyDesignTokensContext } from "./OdysseyDesignTokensContext";
-import { BackgroundProvider, useBackground } from "./BackgroundContext";
+import { ContrastModeProvider, useBackground } from "./ContrastModeProvider";
 
 const scopedCssBaselineStyles = {
   height: "inherit",
@@ -125,9 +125,9 @@ const OdysseyProviderInner = <SupportedLanguages extends string>({
 const OdysseyProvider = <SupportedLanguages extends string>(
   props: OdysseyProviderProps<SupportedLanguages>,
 ) => (
-  <BackgroundProvider>
+  <ContrastModeProvider>
     <OdysseyProviderInner {...props} />
-  </BackgroundProvider>
+  </ContrastModeProvider>
 );
 
 const MemoizedOdysseyProvider = memo(OdysseyProvider) as typeof OdysseyProvider;

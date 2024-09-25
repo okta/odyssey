@@ -12,7 +12,7 @@
 
 import type { StoryObj } from "@storybook/react";
 import {
-  BackgroundProvider,
+  ContrastModeProvider,
   Box,
   Button,
   createOdysseyMuiTheme,
@@ -184,10 +184,10 @@ export const CustomComponentStory: StoryObj = {
 CustomComponentStory.storyName = "CustomComponent";
 
 export const StatusesOnGrayBackground: StoryObj = {
-  name: "Statuses on Gray Background",
+  name: "Statuses on gray background",
   render: () => (
     <Box sx={{ backgroundColor: "#f4f4f4", padding: "24px" }}>
-      <BackgroundProvider>
+      <ContrastModeProvider>
         <Box
           sx={{
             display: "flex",
@@ -201,7 +201,7 @@ export const StatusesOnGrayBackground: StoryObj = {
           <Status label="Success" severity="success" />
           <Status label="Warning" severity="warning" />
         </Box>
-      </BackgroundProvider>
+      </ContrastModeProvider>
     </Box>
   ),
 };

@@ -16,7 +16,7 @@ import {
   StatusProps,
   statusSeverityValues,
   statusVariantValues,
-  BackgroundProvider,
+  ContrastModeProvider,
   Box,
 } from "@okta/odyssey-react-mui";
 import * as Tokens from "@okta/odyssey-design-tokens";
@@ -130,7 +130,7 @@ export const WarningPill: StoryObj<StatusProps> = {
 export const StatusesOnWhiteBackground: StoryObj<StatusProps> = {
   name: "Statuses on white background",
   render: () => (
-    <BackgroundProvider>
+    <ContrastModeProvider>
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
         <Status label="Default" severity="default" />
         <Status label="Error" severity="error" />
@@ -138,7 +138,7 @@ export const StatusesOnWhiteBackground: StoryObj<StatusProps> = {
         <Status label="Success" severity="success" />
         <Status label="Warning" severity="warning" />
       </Box>
-    </BackgroundProvider>
+    </ContrastModeProvider>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -178,17 +178,17 @@ export const StatusesOnWhiteBackground: StoryObj<StatusProps> = {
   parameters: {
     docs: {
       source: {
-        code: `<BackgroundProvider contrastMode="highContrast">
+        code: `<ContrastModeProvider contrastMode="highContrast">
   <Status label="Default" severity="default" />
   <Status label="Error" severity="error" />
   <Status label="Info" severity="info" />
   <Status label="Success" severity="success" />
   <Status label="Warning" severity="warning" />
-</BackgroundProvider>`,
+</ContrastModeProvider>`,
       },
       description: {
         story:
-          "`Status` component on a white (`highContrast`) background using `BackgroundProvider`.",
+          "`Status` component on a white (`highContrast`) background using `ContrastModeProvider`.",
       },
     },
   },
@@ -198,7 +198,7 @@ export const StatusesOnGrayBackground: StoryObj<StatusProps> = {
   name: "Statuses on gray background",
   render: () => (
     <Box sx={{ backgroundColor: Tokens.HueNeutral50, padding: "24px" }}>
-      <BackgroundProvider>
+      <ContrastModeProvider>
         <Box
           sx={{
             display: "flex",
@@ -212,7 +212,7 @@ export const StatusesOnGrayBackground: StoryObj<StatusProps> = {
           <Status label="Success" severity="success" />
           <Status label="Warning" severity="warning" />
         </Box>
-      </BackgroundProvider>
+      </ContrastModeProvider>
     </Box>
   ),
   play: async ({ canvasElement }) => {
@@ -253,17 +253,17 @@ export const StatusesOnGrayBackground: StoryObj<StatusProps> = {
   parameters: {
     docs: {
       source: {
-        code: `<BackgroundProvider contrastMode="lowContrast">
+        code: `<ContrastModeProvider contrastMode="lowContrast">
   <Status label="Default" severity="default" />
   <Status label="Error" severity="error" />
   <Status label="Info" severity="info" />
   <Status label="Success" severity="success" />
   <Status label="Warning" severity="warning" />
-</BackgroundProvider>`,
+</ContrastModeProvider>`,
       },
       description: {
         story:
-          "`Status` component on a gray (`lowContrast`) background using `BackgroundProvider`.",
+          "`Status` component on a gray (`lowContrast`) background using `ContrastModeProvider`.",
       },
     },
   },

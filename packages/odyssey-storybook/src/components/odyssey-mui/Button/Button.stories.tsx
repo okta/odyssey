@@ -11,7 +11,7 @@
  */
 
 import {
-  BackgroundProvider,
+  ContrastModeProvider,
   Box,
   Button,
   buttonSizeValues,
@@ -129,9 +129,9 @@ const storybookMeta: Meta<ButtonProps> = {
   decorators: [
     MuiThemeDecorator,
     (Story: StoryFn<ButtonProps>, context: StoryContext<ButtonProps>) => (
-      <BackgroundProvider contrastMode="highContrast">
+      <ContrastModeProvider contrastMode="highContrast">
         <Story {...context.args} />
-      </BackgroundProvider>
+      </ContrastModeProvider>
     ),
   ],
   tags: ["autodocs"],
@@ -226,9 +226,9 @@ export const ButtonSecondaryDisabledOnWhiteBackground: StoryObj<ButtonProps> = {
   name: "Secondary, Disabled on white background",
   decorators: [
     (Story: StoryFn<ButtonProps>, context: StoryContext<ButtonProps>) => (
-      <BackgroundProvider contrastMode="highContrast">
+      <ContrastModeProvider contrastMode="highContrast">
         <Story {...context.args} />
-      </BackgroundProvider>
+      </ContrastModeProvider>
     ),
   ],
   args: {
@@ -251,11 +251,11 @@ export const ButtonSecondaryDisabledOnGrayBackground: StoryObj<ButtonProps> = {
   name: "Secondary, Disabled on gray background",
   decorators: [
     (Story: StoryFn<ButtonProps>, context: StoryContext<ButtonProps>) => (
-      <BackgroundProvider contrastMode="lowContrast">
+      <ContrastModeProvider contrastMode="lowContrast">
         <Box sx={{ backgroundColor: Tokens.HueNeutral50, padding: "24px" }}>
           <Story {...context.args} />
         </Box>
-      </BackgroundProvider>
+      </ContrastModeProvider>
     ),
   ],
   args: {

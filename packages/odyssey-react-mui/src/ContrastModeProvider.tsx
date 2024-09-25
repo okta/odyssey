@@ -39,17 +39,17 @@ declare module "@mui/material/styles" {
 
 export type ContrastMode = "lowContrast" | "highContrast";
 
-export type BackgroundContextType = {
+export type ContrastModeContextType = {
   contrastMode: ContrastMode;
   parentBackgroundColor: string;
 };
 
-const BackgroundContext = createContext<BackgroundContextType>({
+const ContrastModeContext = createContext<ContrastModeContextType>({
   contrastMode: "highContrast",
   parentBackgroundColor: "",
 });
 
-export const useBackground = () => useContext(BackgroundContext);
+export const useBackground = () => useContext(ContrastModeContext);
 
 const hexToRgb = (hex: string): string => {
   const bigint = parseInt(hex.slice(1), 16);
@@ -87,15 +87,15 @@ export const useParentBackgroundColor = (ref: React.RefObject<HTMLElement>) => {
   return backgroundColor;
 };
 
-type BackgroundProviderProps = {
+type ContrastModeProviderProps = {
   children: ReactNode;
   contrastMode?: ContrastMode;
 };
 
-export const BackgroundProvider = ({
+export const ContrastModeProvider = ({
   children,
   contrastMode: explicitContrastMode,
-}: BackgroundProviderProps) => {
+}: ContrastModeProviderProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const parentBackgroundColor = useParentBackgroundColor(ref);
   const [contrastMode, setContrastMode] =
@@ -110,7 +110,7 @@ export const BackgroundProvider = ({
     }
   }, [parentBackgroundColor, explicitContrastMode]);
 
-  const contextValue = useMemo<BackgroundContextType>(
+  const contextValue = useMemo<ContrastModeContextType>(
     () => ({
       contrastMode,
       parentBackgroundColor,
@@ -134,9 +134,9 @@ export const BackgroundProvider = ({
 
   return (
     <div ref={ref}>
-      <BackgroundContext.Provider value={contextValue}>
+      <ContrastModeContext.Provider value={contextValue}>
         <ThemeProvider theme={theme}>{children}</ThemeProvider>
-      </BackgroundContext.Provider>
+      </ContrastModeContext.Provider>
     </div>
   );
 };
