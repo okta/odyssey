@@ -957,10 +957,6 @@ export const components = ({
       styleOverrides: {
         root: ({ ownerState, theme }) => {
           const contrastMode = theme.odysseyContrastMode;
-          const baseBackgroundColor =
-            contrastMode === "lowContrast"
-              ? odysseyTokens.HueNeutral200
-              : odysseyTokens.HueNeutral50;
           return {
             height: "auto",
             paddingBlock: `calc(${odysseyTokens.Spacing2} - ${odysseyTokens.BorderWidthMain})`,
@@ -1057,56 +1053,60 @@ export const components = ({
               border: 0,
               fontWeight: odysseyTokens.TypographyWeightHeadingBold,
               lineHeight: odysseyTokens.TypographyLineHeightOverline,
-              backgroundColor: baseBackgroundColor,
-              color:
-                contrastMode === "lowContrast"
-                  ? odysseyTokens.TypographyColorBody
-                  : odysseyTokens.TypographyColorSubordinate,
               fontSize: "0.71428571rem",
               textTransform: "uppercase",
 
+              ...(contrastMode === "lowContrast" && {
+                backgroundColor: odysseyTokens.HueNeutral200,
+                color: odysseyTokens.TypographyColorBody,
+              }),
+              ...(contrastMode === "highContrast" && {
+                backgroundColor: odysseyTokens.HueNeutral50,
+                color: odysseyTokens.TypographyColorSubordinate,
+              }),
+
               [`&.${chipClasses.colorError}`]: {
-                backgroundColor:
-                  contrastMode === "lowContrast"
-                    ? odysseyTokens.PaletteDangerLight
-                    : odysseyTokens.PaletteDangerLighter,
-                color:
-                  contrastMode === "lowContrast"
-                    ? odysseyTokens.PaletteDangerDark
-                    : odysseyTokens.TypographyColorDanger,
+                ...(contrastMode === "lowContrast" && {
+                  backgroundColor: odysseyTokens.PaletteDangerLight,
+                  color: odysseyTokens.PaletteDangerDark,
+                }),
+                ...(contrastMode === "highContrast" && {
+                  backgroundColor: odysseyTokens.PaletteDangerLighter,
+                  color: odysseyTokens.TypographyColorDanger,
+                }),
               },
 
               [`&.${chipClasses.colorInfo}`]: {
-                backgroundColor:
-                  contrastMode === "lowContrast"
-                    ? odysseyTokens.PalettePrimaryLight
-                    : odysseyTokens.PalettePrimaryLighter,
-                color:
-                  contrastMode === "lowContrast"
-                    ? odysseyTokens.PalettePrimaryDark
-                    : odysseyTokens.PalettePrimaryText,
+                ...(contrastMode === "lowContrast" && {
+                  backgroundColor: odysseyTokens.PalettePrimaryLight,
+                  color: odysseyTokens.PalettePrimaryDark,
+                }),
+                ...(contrastMode === "highContrast" && {
+                  backgroundColor: odysseyTokens.PalettePrimaryLighter,
+                  color: odysseyTokens.PalettePrimaryText,
+                }),
               },
 
               [`&.${chipClasses.colorSuccess}`]: {
-                backgroundColor:
-                  contrastMode === "lowContrast"
-                    ? odysseyTokens.PaletteSuccessLight
-                    : odysseyTokens.PaletteSuccessLighter,
-                color:
-                  contrastMode === "lowContrast"
-                    ? odysseyTokens.PaletteSuccessDark
-                    : odysseyTokens.TypographyColorSuccess,
+                ...(contrastMode === "lowContrast" && {
+                  backgroundColor: odysseyTokens.PaletteSuccessLight,
+                  color: odysseyTokens.PaletteSuccessDark,
+                }),
+                ...(contrastMode === "highContrast" && {
+                  backgroundColor: odysseyTokens.PaletteSuccessLighter,
+                  color: odysseyTokens.TypographyColorSuccess,
+                }),
               },
 
               [`&.${chipClasses.colorWarning}`]: {
-                backgroundColor:
-                  contrastMode === "lowContrast"
-                    ? odysseyTokens.PaletteWarningLight
-                    : odysseyTokens.PaletteWarningLighter,
-                color:
-                  contrastMode === "lowContrast"
-                    ? odysseyTokens.PaletteWarningDark
-                    : odysseyTokens.TypographyColorWarning,
+                ...(contrastMode === "lowContrast" && {
+                  backgroundColor: odysseyTokens.PaletteWarningLight,
+                  color: odysseyTokens.PaletteWarningDark,
+                }),
+                ...(contrastMode === "highContrast" && {
+                  backgroundColor: odysseyTokens.PaletteWarningLighter,
+                  color: odysseyTokens.TypographyColorWarning,
+                }),
               },
             }),
 
