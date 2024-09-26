@@ -30,7 +30,10 @@ import { DefaultSupportedLanguages } from "./OdysseyTranslationProvider.types";
 import { createOdysseyMuiTheme, DesignTokensOverride } from "./theme";
 import * as Tokens from "@okta/odyssey-design-tokens";
 import { OdysseyDesignTokensContext } from "./OdysseyDesignTokensContext";
-import { ContrastModeProvider, useBackground } from "./ContrastModeProvider";
+import {
+  ContrastModeProvider,
+  useContrastContext,
+} from "./ContrastModeProvider";
 
 const scopedCssBaselineStyles = {
   height: "inherit",
@@ -60,7 +63,7 @@ const OdysseyProviderInner = <SupportedLanguages extends string>({
   themeOverride,
   translationOverrides,
 }: OdysseyProviderProps<SupportedLanguages>) => {
-  const { contrastMode } = useBackground();
+  const { contrastMode } = useContrastContext();
 
   const odysseyTokens = useMemo(
     () => ({ ...Tokens, ...designTokensOverride }),
@@ -80,10 +83,6 @@ const OdysseyProviderInner = <SupportedLanguages extends string>({
     () =>
       createTheme({
         ...odysseyTheme,
-        custom: {
-          ...odysseyTheme.custom,
-          isLowContrast: contrastMode === "lowContrast",
-        },
         odysseyContrastMode: contrastMode,
       }),
     [odysseyTheme, contrastMode],

@@ -24,15 +24,9 @@ import * as Tokens from "@okta/odyssey-design-tokens";
 
 declare module "@mui/material/styles" {
   interface Theme {
-    custom: {
-      isLowContrast: boolean;
-    };
     odysseyContrastMode: ContrastMode;
   }
   interface ThemeOptions {
-    custom?: {
-      isLowContrast?: boolean;
-    };
     odysseyContrastMode?: ContrastMode;
   }
 }
@@ -49,7 +43,7 @@ const ContrastModeContext = createContext<ContrastModeContextType>({
   parentBackgroundColor: "",
 });
 
-export const useBackground = () => useContext(ContrastModeContext);
+export const useContrastContext = () => useContext(ContrastModeContext);
 
 const hexToRgb = (hex: string): string => {
   const bigint = parseInt(hex.slice(1), 16);
@@ -71,7 +65,6 @@ export const useParentBackgroundColor = (ref: React.RefObject<HTMLElement>) => {
         const bgColor = window.getComputedStyle(element).backgroundColor;
 
         if (bgColor !== "rgba(0, 0, 0, 0)" && bgColor !== "transparent") {
-          // Compare computed color to precomputed HueNeutral50 RGB value
           if (bgColor === hueNeutral50Rgb) {
             setBackgroundColor(Tokens.HueNeutral50);
           } else {
@@ -123,10 +116,6 @@ export const ContrastModeProvider = ({
     () =>
       createTheme({
         ...existingTheme,
-        custom: {
-          ...existingTheme.custom,
-          isLowContrast: contrastMode === "lowContrast",
-        },
         odysseyContrastMode: contrastMode,
       }),
     [existingTheme, contrastMode],

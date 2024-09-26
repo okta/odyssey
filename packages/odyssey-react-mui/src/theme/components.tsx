@@ -1058,7 +1058,7 @@ export const components = ({
 
               ...(contrastMode === "lowContrast" && {
                 backgroundColor: odysseyTokens.HueNeutral200,
-                color: odysseyTokens.TypographyColorBody,
+                color: odysseyTokens.HueNeutral700,
               }),
               ...(contrastMode === "highContrast" && {
                 backgroundColor: odysseyTokens.HueNeutral50,
@@ -1067,8 +1067,8 @@ export const components = ({
 
               [`&.${chipClasses.colorError}`]: {
                 ...(contrastMode === "lowContrast" && {
-                  backgroundColor: odysseyTokens.PaletteDangerLight,
-                  color: odysseyTokens.PaletteDangerDark,
+                  backgroundColor: odysseyTokens.HueRed100,
+                  color: odysseyTokens.HueRed700,
                 }),
                 ...(contrastMode === "highContrast" && {
                   backgroundColor: odysseyTokens.PaletteDangerLighter,
@@ -1078,8 +1078,8 @@ export const components = ({
 
               [`&.${chipClasses.colorInfo}`]: {
                 ...(contrastMode === "lowContrast" && {
-                  backgroundColor: odysseyTokens.PalettePrimaryLight,
-                  color: odysseyTokens.PalettePrimaryDark,
+                  backgroundColor: odysseyTokens.HueBlue100,
+                  color: odysseyTokens.HueBlue700,
                 }),
                 ...(contrastMode === "highContrast" && {
                   backgroundColor: odysseyTokens.PalettePrimaryLighter,
@@ -1089,8 +1089,8 @@ export const components = ({
 
               [`&.${chipClasses.colorSuccess}`]: {
                 ...(contrastMode === "lowContrast" && {
-                  backgroundColor: odysseyTokens.PaletteSuccessLight,
-                  color: odysseyTokens.PaletteSuccessDark,
+                  backgroundColor: odysseyTokens.HueGreen100,
+                  color: odysseyTokens.HueGreen700,
                 }),
                 ...(contrastMode === "highContrast" && {
                   backgroundColor: odysseyTokens.PaletteSuccessLighter,
@@ -1100,8 +1100,8 @@ export const components = ({
 
               [`&.${chipClasses.colorWarning}`]: {
                 ...(contrastMode === "lowContrast" && {
-                  backgroundColor: odysseyTokens.PaletteWarningLight,
-                  color: odysseyTokens.PaletteWarningDark,
+                  backgroundColor: odysseyTokens.HueYellow100,
+                  color: odysseyTokens.HueYellow700,
                 }),
                 ...(contrastMode === "highContrast" && {
                   backgroundColor: odysseyTokens.PaletteWarningLighter,

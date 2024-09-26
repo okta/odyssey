@@ -40,7 +40,7 @@ The `ContrastModeProvider` component manages the contrast mode (`lowContrast` or
 
 ### Behavior
 
-#### Automatic Contrast Mode Detection
+#### Automatic contrast mode detection
 
 By default, the `ContrastModeProvider` will automatically detect the parent background color and determine the appropriate contrast mode. This is particularly useful when components need to adapt dynamically to different backgrounds for visual contrast consistency.
 
@@ -69,3 +69,7 @@ If you need to override the automatic behavior, you can manually set the mode by
   <YourComponent />
 </ContrastModeProvider>
 ```
+
+### Performance Considerations
+
+The `ContrastModeProvider` uses React's Context API and should be placed as close as possible to the components that need contrast mode information to avoid unnecessary re-renders in unrelated parts of the component tree.

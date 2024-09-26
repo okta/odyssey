@@ -184,7 +184,7 @@ export const CustomComponentStory: StoryObj = {
 CustomComponentStory.storyName = "CustomComponent";
 
 export const StatusesOnGrayBackground: StoryObj = {
-  name: "Statuses on gray background",
+  name: "ContrastModeProvider on gray background",
   render: () => (
     <Box sx={{ backgroundColor: "#f4f4f4", padding: "24px" }}>
       <ContrastModeProvider>
@@ -206,4 +206,4 @@ export const StatusesOnGrayBackground: StoryObj = {
   ),
 };
 
-StatusesOnGrayBackground.storyName = "Statuses on Gray Background";
+StatusesOnGrayBackground.storyName = "ContrastModeProvider";
