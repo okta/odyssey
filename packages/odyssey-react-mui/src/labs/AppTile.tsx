@@ -169,7 +169,15 @@ const AppTile = ({
   );
 
   return (
-    <MuiCard className="isClickable">
+    <MuiCard
+      className="isClickable"
+      sx={{
+        boxShadow: "none",
+        "&.isClickable:hover": {
+          "box-shadow": odysseyDesignTokens.DepthMedium,
+        },
+      }}
+    >
       <MuiCardActionArea onClick={onClick}>{tileContent}</MuiCardActionArea>
 
       {(onActionClick || auxiliaryText) && (
