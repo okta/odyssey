@@ -3104,6 +3104,7 @@ export const components = ({
           body1: "p",
           inherit: "p",
           legend: "legend",
+          overline: "p",
         },
       },
       styleOverrides: {
@@ -3112,6 +3113,17 @@ export const components = ({
 
           [`&:last-child`]: {
             marginBlockEnd: 0,
+          },
+        },
+        overline: {
+          fontSize: odysseyTokens.TypographySizeOverline,
+          fontWeight: odysseyTokens.TypographyWeightBodyBold,
+          lineHeight: odysseyTokens.TypographyLineHeightOverline,
+          letterSpacing: odysseyTokens.TypographyLetterSpacingOverline,
+          textTransform: "none",
+
+          ":is(:lang(en-*), :lang(en))": {
+            textTransform: "uppercase",
           },
         },
       },
