@@ -34,9 +34,10 @@ export type TypographyVariantValue =
   | "h5"
   | "h6"
   | "body"
+  | "legend"
+  | "overline"
   | "subordinate"
-  | "support"
-  | "legend";
+  | "support";
 
 export const typographyVariantMapping: Record<
   TypographyVariantValue,
@@ -49,9 +50,10 @@ export const typographyVariantMapping: Record<
   h5: "h5",
   h6: "h6",
   body: "body1",
+  legend: "legend",
+  overline: "overline",
   subordinate: "subtitle1",
   support: "subtitle2",
-  legend: "legend",
 } as const;
 
 export const typographyColorValues = [
@@ -102,9 +104,12 @@ const Typography = ({
 }: TypographyProps) => {
   const component = useMemo(() => {
     if (!componentProp) {
-      if (variant === "body") {
-        return "p";
-      } else if (variant === "subordinate" || variant === "support") {
+      if (
+        variant === "body" ||
+        variant === "subordinate" ||
+        variant === "support" ||
+        variant === "overline"
+      ) {
         return "p";
       } else {
         return variant;
@@ -406,6 +411,32 @@ const Legend = ({
 const MemoizedLegend = memo(Legend);
 MemoizedLegend.displayName = "Legend";
 
+const Overline = ({
+  ariaDescribedBy,
+  ariaLabel,
+  ariaLabelledBy,
+  children,
+  color,
+  component,
+  testId,
+  translate,
+}: TypographyProps) => (
+  <Typography
+    ariaDescribedBy={ariaDescribedBy}
+    ariaLabel={ariaLabel}
+    ariaLabelledBy={ariaLabelledBy}
+    children={children}
+    color={color}
+    component={component}
+    testId={testId}
+    translate={translate}
+    variant="overline"
+  />
+);
+
+const MemoizedOverline = memo(Overline);
+MemoizedOverline.displayName = "Overline";
+
 export {
   MemoizedTypography as Typography,
   MemoizedHeading1 as Heading1,
@@ -415,6 +446,7 @@ export {
   MemoizedHeading5 as Heading5,
   MemoizedHeading6 as Heading6,
   MemoizedLegend as Legend,
+  MemoizedOverline as Overline,
   MemoizedParagraph as Paragraph,
   MemoizedSubordinate as Subordinate,
   MemoizedSupport as Support,
