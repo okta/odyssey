@@ -123,6 +123,7 @@ const DataView = ({
   totalRows,
   maxPages,
   maxResultsPerPage,
+  onPaginationChange,
 }: DataViewProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
@@ -217,6 +218,11 @@ const DataView = ({
       pageSize: paginationType == "loadMore" ? resultsPerPage : prev.pageSize,
     }));
   }, [filters, paginationType, resultsPerPage, search]);
+
+  // Fire onPaginationChange if pagination changes
+  useEffect(() => {
+    onPaginationChange?.(pagination);
+  }, [onPaginationChange, pagination]);
 
   // Retrieve the data
   useEffect(() => {
