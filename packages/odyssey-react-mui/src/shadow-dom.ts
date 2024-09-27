@@ -10,20 +10,31 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+export const createUnattachedShadowDomElements = () => {
+  const emotionRootElement = document.createElement("div");
+
+  emotionRootElement.setAttribute("id", "style-root");
+  emotionRootElement.setAttribute("nonce", window.cspNonce);
+
+  const appRootElement = document.createElement("div");
+
+  appRootElement.setAttribute("id", "shadow-root");
+
+  // This div could cause issues with layout of children.
+  // For flexibility, make it inherit its parent's height
+  appRootElement.style.setProperty("height", "inherit");
+
+  const slotElement = document.createElement("slot");
+
+  return { appRootElement, emotionRootElement, slotElement };
+};
+
 export const createShadowDomElements = (containerElement: HTMLElement) => {
   const shadowRoot = containerElement.attachShadow({ mode: "open" });
 
   // Container for Emotion `<style>` elements.
-  const emotionRootElement = document.createElement("div");
-  emotionRootElement.setAttribute("id", "style-root");
-  emotionRootElement.setAttribute("nonce", window.cspNonce);
-
-  // React app root component.
-  const shadowRootElement = document.createElement("div");
-  shadowRootElement.setAttribute("id", "shadow-root");
-  // This div could cause issues with layout of children.
-  // For flexibility, make it inherit its parent's height
-  shadowRootElement.style.setProperty("height", "inherit");
+  const { appRootElement: shadowRootElement, emotionRootElement } =
+    createUnattachedShadowDomElements();
 
   shadowRoot.appendChild(emotionRootElement);
   shadowRoot.appendChild(shadowRootElement);

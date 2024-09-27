@@ -21,6 +21,9 @@
       ],
       "test-selectors": [
         "./dist/src/test-selectors/index.d.ts"
+      ],
+      "ui-shell": [
+        "./dist/src/ui-shell.d.ts"
       ]
     }
   },
@@ -36,6 +39,10 @@
     "./test-selectors": {
       "types": "./dist/src/test-selectors/index.d.ts",
       "default": "./dist/test-selectors/index.js"
+    },
+    "./ui-shell": {
+      "types": "./dist/src/ui-shell.d.ts",
+      "default": "./dist/ui-shell.js"
     },
     ".": {
       "types": "./dist/src/index.d.ts",
