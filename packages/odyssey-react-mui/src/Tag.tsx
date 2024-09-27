@@ -109,7 +109,7 @@ const getChipColors = (
     accentTwo: {
       ...(contrastMode === "lowContrast" && {
         background: odysseyDesignTokens.HueAccentTwo200,
-        text: odysseyDesignTokens.HueAccentTwo700,
+        text: odysseyDesignTokens.HueAccentTwo800,
       }),
       ...(contrastMode === "highContrast" && {
         background: odysseyDesignTokens.HueAccentTwo100,
