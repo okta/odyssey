@@ -188,7 +188,7 @@ export const StatusesOnWhiteBackground: StoryObj<StatusProps> = {
       },
       description: {
         story:
-          "`Status` component on a white (`highContrast`) background using `ContrastModeProvider`.",
+          "`Status` component on a white (`highContrast`) background using [`ContrastModeProvider`](/docs/customization-components--docs#contrastmodeprovider).",
       },
     },
   },
@@ -263,7 +263,7 @@ export const StatusesOnGrayBackground: StoryObj<StatusProps> = {
       },
       description: {
         story:
-          "`Status` component on a gray (`lowContrast`) background using `ContrastModeProvider`.",
+          "`Status` component on a gray (`lowContrast`) background using [`ContrastModeProvider`](/docs/customization-components--docs#contrastmodeprovider).",
       },
     },
   },

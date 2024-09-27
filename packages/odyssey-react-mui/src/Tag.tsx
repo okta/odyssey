@@ -68,13 +68,13 @@ const getChipColors = (
       }),
       ...(contrastMode === "highContrast" && {
         background: odysseyDesignTokens.HueNeutral100,
-        text: odysseyDesignTokens.HueNeutral600,
+        text: odysseyDesignTokens.HueNeutral700,
       }),
       hover: odysseyDesignTokens.HueNeutral200,
       active: odysseyDesignTokens.HueNeutral300,
       border: odysseyDesignTokens.HueNeutral200,
       deleteIcon: odysseyDesignTokens.HueNeutral500,
-      deleteIconHover: odysseyDesignTokens.HueNeutral600,
+      deleteIconHover: odysseyDesignTokens.HueNeutral700,
     },
     info: {
       ...(contrastMode === "lowContrast" && {
@@ -83,13 +83,13 @@ const getChipColors = (
       }),
       ...(contrastMode === "highContrast" && {
         background: odysseyDesignTokens.HueBlue100,
-        text: odysseyDesignTokens.HueBlue600,
+        text: odysseyDesignTokens.HueBlue700,
       }),
       hover: odysseyDesignTokens.HueBlue200,
       active: odysseyDesignTokens.HueBlue300,
       border: odysseyDesignTokens.HueBlue200,
       deleteIcon: odysseyDesignTokens.HueBlue500,
-      deleteIconHover: odysseyDesignTokens.HueBlue600,
+      deleteIconHover: odysseyDesignTokens.HueBlue700,
     },
     accentOne: {
       ...(contrastMode === "lowContrast" && {
@@ -98,13 +98,13 @@ const getChipColors = (
       }),
       ...(contrastMode === "highContrast" && {
         background: odysseyDesignTokens.HueAccentOne100,
-        text: odysseyDesignTokens.HueAccentOne600,
+        text: odysseyDesignTokens.HueAccentOne700,
       }),
       hover: odysseyDesignTokens.HueAccentOne200,
       active: odysseyDesignTokens.HueAccentOne300,
       border: odysseyDesignTokens.HueAccentOne200,
       deleteIcon: odysseyDesignTokens.HueAccentOne500,
-      deleteIconHover: odysseyDesignTokens.HueAccentOne600,
+      deleteIconHover: odysseyDesignTokens.HueAccentOne700,
     },
     accentTwo: {
       ...(contrastMode === "lowContrast" && {
@@ -113,13 +113,13 @@ const getChipColors = (
       }),
       ...(contrastMode === "highContrast" && {
         background: odysseyDesignTokens.HueAccentTwo100,
-        text: odysseyDesignTokens.HueAccentTwo600,
+        text: odysseyDesignTokens.HueAccentTwo700,
       }),
       hover: odysseyDesignTokens.HueAccentTwo200,
       active: odysseyDesignTokens.HueAccentTwo300,
       border: odysseyDesignTokens.HueAccentTwo200,
       deleteIcon: odysseyDesignTokens.HueAccentTwo500,
-      deleteIconHover: odysseyDesignTokens.HueAccentTwo600,
+      deleteIconHover: odysseyDesignTokens.HueAccentTwo700,
     },
     accentThree: {
       ...(contrastMode === "lowContrast" && {
@@ -128,13 +128,13 @@ const getChipColors = (
       }),
       ...(contrastMode === "highContrast" && {
         background: odysseyDesignTokens.HueAccentThree100,
-        text: odysseyDesignTokens.HueAccentThree600,
+        text: odysseyDesignTokens.HueAccentThree700,
       }),
       hover: odysseyDesignTokens.HueAccentThree200,
       active: odysseyDesignTokens.HueAccentThree300,
       border: odysseyDesignTokens.HueAccentThree200,
       deleteIcon: odysseyDesignTokens.HueAccentThree500,
-      deleteIconHover: odysseyDesignTokens.HueAccentThree600,
+      deleteIconHover: odysseyDesignTokens.HueAccentThree700,
     },
     accentFour: {
       ...(contrastMode === "lowContrast" && {
@@ -143,13 +143,13 @@ const getChipColors = (
       }),
       ...(contrastMode === "highContrast" && {
         background: odysseyDesignTokens.HueAccentFour100,
-        text: odysseyDesignTokens.HueAccentFour600,
+        text: odysseyDesignTokens.HueAccentFour700,
       }),
       hover: odysseyDesignTokens.HueAccentFour200,
       active: odysseyDesignTokens.HueAccentFour300,
       border: odysseyDesignTokens.HueAccentFour200,
       deleteIcon: odysseyDesignTokens.HueAccentFour500,
-      deleteIconHover: odysseyDesignTokens.HueAccentFour600,
+      deleteIconHover: odysseyDesignTokens.HueAccentFour700,
     },
   };
 

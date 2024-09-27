@@ -307,7 +307,7 @@ export const TagsOnWhiteBackground: StoryObj<TagProps> = {
       },
       description: {
         story:
-          "Demonstrates how the `Tag` component behaves on a white (`highContrast`) background using `ContrastModeProvider`.",
+          "`Tag` component on a white (`highContrast`) background using [`ContrastModeProvider`](/docs/customization-components--docs#contrastmodeprovider).",
       },
     },
   },
@@ -385,7 +385,7 @@ export const TagsOnGrayBackground: StoryObj<TagProps> = {
       },
       description: {
         story:
-          "Demonstrates how the `Tag` component behaves on a gray (`lowContrast`) background using `ContrastModeProvider`.",
+          "`Tag` component on a gray (`lowContrast`) background using [`ContrastModeProvider`](/docs/customization-components--docs#contrastmodeprovider).",
       },
     },
   },

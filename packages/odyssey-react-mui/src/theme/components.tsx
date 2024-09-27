@@ -623,7 +623,6 @@ export const components = ({
               },
             },
 
-            // Primary button variant styles
             ...(ownerState.variant === "primary" && {
               color: odysseyTokens.HueNeutralWhite,
               backgroundColor: odysseyTokens.PalettePrimaryMain,
@@ -642,7 +641,6 @@ export const components = ({
               },
             }),
 
-            // Secondary button variant styles
             ...(ownerState.variant === "secondary" && {
               backgroundColor: "transparent",
               borderColor: odysseyTokens.HueNeutral300,

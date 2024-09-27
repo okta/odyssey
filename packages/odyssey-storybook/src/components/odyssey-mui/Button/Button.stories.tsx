@@ -245,6 +245,24 @@ export const ButtonSecondaryDisabledOnWhiteBackground: StoryObj<ButtonProps> = {
       Tokens.TypographyColorDisabled,
     );
   },
+  parameters: {
+    docs: {
+      source: {
+        code: `<ContrastModeProvider contrastMode="highContrast">
+<Button
+  isDisabled
+  label="Secondary"
+  onClick={() => {}}
+  variant="secondary"
+/>
+</ContrastModeProvider>`,
+      },
+      description: {
+        story:
+          "Disabled secondary `Button` on a white (`highContrast`) background using [`ContrastModeProvider`](/docs/customization-components--docs#contrastmodeprovider).",
+      },
+    },
+  },
 };
 
 export const ButtonSecondaryDisabledOnGrayBackground: StoryObj<ButtonProps> = {
@@ -271,6 +289,24 @@ export const ButtonSecondaryDisabledOnGrayBackground: StoryObj<ButtonProps> = {
       Tokens.HueNeutral200,
       Tokens.TypographyColorDisabled,
     );
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: `<ContrastModeProvider contrastMode="lowContrast">
+<Button
+  isDisabled
+  label="Secondary"
+  onClick={() => {}}
+  variant="secondary"
+/>
+</ContrastModeProvider>`,
+      },
+      description: {
+        story:
+          "Disabled secondary `Button` on a gray (`lowContrast`) background using [`ContrastModeProvider`](/docs/customization-components--docs#contrastmodeprovider).",
+      },
+    },
   },
 };
 
