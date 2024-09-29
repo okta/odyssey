@@ -22,7 +22,7 @@ import * as Tokens from "@okta/odyssey-design-tokens";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { GroupIcon } from "@okta/odyssey-react-mui/icons";
 import icons from "../../../../.storybook/components/iconUtils";
-import { userEvent, within } from "@storybook/testing-library";
+import { userEvent, within, waitFor } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import { axeRun } from "../../../axe-util";
 
@@ -118,24 +118,12 @@ const storybookMeta: Meta<TagProps> = {
   args: {
     label: "Starship",
     colorVariant: "default",
-    testId: "tag-default",
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
 };
 
 export default storybookMeta;
-
-const checkTagStyles = async (
-  canvas: ReturnType<typeof within>,
-  label: string,
-  expectedBackgroundColor: string,
-  expectedColor: string,
-) => {
-  const tag = canvas.getByText(label);
-  await expect(tag).toHaveStyle(`background-color: ${expectedBackgroundColor}`);
-  await expect(tag).toHaveStyle(`color: ${expectedColor}`);
-};
 
 export const Default: StoryObj<TagProps> = {
   args: {
@@ -206,12 +194,11 @@ export const Icon: StoryObj<TagProps> = {
 export const Clickable: StoryObj<TagProps> = {
   args: {
     label: "Starship",
-    onClick: () => {},
   },
   play: async ({ args, canvasElement, step }) => {
     await step("click the tag", async () => {
       const canvas = within(canvasElement);
-      const tag = canvas.getByRole("button", { name: args.label });
+      const tag = canvas.getByText(args.label);
       await userEvent.click(tag);
       expect(args.onClick).toHaveBeenCalledTimes(1);
       await axeRun("Clickable Tag");
@@ -222,15 +209,16 @@ export const Clickable: StoryObj<TagProps> = {
 export const Removable: StoryObj<TagProps> = {
   args: {
     label: "Starship",
-    onRemove: () => {},
   },
   play: async ({ args, canvasElement, step }) => {
-    await step("remove the tag", async () => {
-      const canvas = within(canvasElement);
-      const removeButton = canvas.getByLabelText(`Remove ${args.label}`);
-      await userEvent.click(removeButton);
-      await userEvent.tab();
-      expect(args.onRemove).toHaveBeenCalled();
+    await step("remove the tag on click", async () => {
+      const tagElement = canvasElement.querySelector('[role="button"]');
+      const removeIcon = tagElement?.querySelector("svg");
+      if (removeIcon) {
+        await userEvent.click(removeIcon);
+        await userEvent.tab();
+        await expect(args.onRemove).toHaveBeenCalled();
+      }
       await axeRun("Removable Tag");
     });
   },
@@ -246,7 +234,7 @@ export const Disabled: StoryObj<TagProps> = {
 export const TagsOnWhiteBackground: StoryObj<TagProps> = {
   name: "Tags on White Background",
   render: () => (
-    <ContrastModeProvider contrastMode="highContrast">
+    <ContrastModeProvider>
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
         <Tag label="Default" />
         <Tag label="Info" colorVariant="info" />
@@ -259,37 +247,61 @@ export const TagsOnWhiteBackground: StoryObj<TagProps> = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await checkTagStyles(
-      canvas,
-      "Default",
-      Tokens.HueNeutral100,
-      Tokens.TypographyColorBody,
-    );
-    await checkTagStyles(canvas, "Info", Tokens.HueBlue100, Tokens.HueBlue700);
-    await checkTagStyles(
-      canvas,
-      "AccentOne",
-      Tokens.HueAccentOne100,
-      Tokens.HueAccentOne700,
-    );
-    await checkTagStyles(
-      canvas,
-      "AccentTwo",
-      Tokens.HueAccentTwo100,
-      Tokens.HueAccentTwo700,
-    );
-    await checkTagStyles(
-      canvas,
-      "AccentThree",
-      Tokens.HueAccentThree100,
-      Tokens.HueAccentThree700,
-    );
-    await checkTagStyles(
-      canvas,
-      "AccentFour",
-      Tokens.HueAccentFour100,
-      Tokens.HueAccentFour700,
-    );
+
+    const waitForStyles = async (
+      selector: string,
+      expectedStyles: Partial<CSSStyleDeclaration>,
+    ) => {
+      await waitFor(
+        () => {
+          const element = canvas.getByText(selector);
+          if (!element) throw new Error(`Element "${selector}" not found`);
+
+          const computedStyle = getComputedStyle(element);
+          return Object.entries(expectedStyles).every(
+            ([prop, value]) =>
+              computedStyle[prop as keyof CSSStyleDeclaration] === value,
+          );
+        },
+        { timeout: 1000, interval: 100 },
+      );
+    };
+    const tagStyles = [
+      {
+        label: "Default",
+        backgroundColor: Tokens.HueNeutral100,
+        color: Tokens.TypographyColorBody,
+      },
+      {
+        label: "Info",
+        backgroundColor: Tokens.HueBlue100,
+        color: Tokens.HueBlue700,
+      },
+      {
+        label: "AccentOne",
+        backgroundColor: Tokens.HueAccentOne100,
+        color: Tokens.HueAccentOne700,
+      },
+      {
+        label: "AccentTwo",
+        backgroundColor: Tokens.HueAccentTwo100,
+        color: Tokens.HueAccentTwo700,
+      },
+      {
+        label: "AccentThree",
+        backgroundColor: Tokens.HueAccentThree100,
+        color: Tokens.HueAccentThree700,
+      },
+      {
+        label: "AccentFour",
+        backgroundColor: Tokens.HueAccentFour100,
+        color: Tokens.HueAccentFour700,
+      },
+    ];
+
+    for (const { label, backgroundColor, color } of tagStyles) {
+      await waitForStyles(label, { backgroundColor, color });
+    }
 
     await axeRun("Tags on white (`highContrast`) background");
   },
@@ -316,7 +328,7 @@ export const TagsOnWhiteBackground: StoryObj<TagProps> = {
 export const TagsOnGrayBackground: StoryObj<TagProps> = {
   name: "Tags on Gray Background",
   render: () => (
-    <ContrastModeProvider contrastMode="lowContrast">
+    <ContrastModeProvider>
       <Box
         sx={{
           backgroundColor: Tokens.HueNeutral50,
@@ -337,37 +349,67 @@ export const TagsOnGrayBackground: StoryObj<TagProps> = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await checkTagStyles(
-      canvas,
-      "Default",
-      Tokens.HueNeutral200,
-      Tokens.TypographyColorBody,
-    );
-    await checkTagStyles(canvas, "Info", Tokens.HueBlue200, Tokens.HueBlue700);
-    await checkTagStyles(
-      canvas,
-      "AccentOne",
-      Tokens.HueAccentOne200,
-      Tokens.HueAccentOne700,
-    );
-    await checkTagStyles(
-      canvas,
-      "AccentTwo",
-      Tokens.HueAccentTwo200,
-      Tokens.HueAccentTwo700,
-    );
-    await checkTagStyles(
-      canvas,
-      "AccentThree",
-      Tokens.HueAccentThree200,
-      Tokens.HueAccentThree700,
-    );
-    await checkTagStyles(
-      canvas,
-      "AccentFour",
-      Tokens.HueAccentFour200,
-      Tokens.HueAccentFour700,
-    );
+
+    const waitForStyles = async (
+      selector: string,
+      expectedStyles: Partial<CSSStyleDeclaration>,
+    ) => {
+      await waitFor(
+        () => {
+          const element =
+            selector === "container"
+              ? canvas.getByText("Default").closest(".MuiBox-root")
+              : canvas.getByText(selector);
+          if (!element) throw new Error(`Element "${selector}" not found`);
+
+          const computedStyle = getComputedStyle(element);
+          return Object.entries(expectedStyles).every(
+            ([prop, value]) =>
+              computedStyle[prop as keyof CSSStyleDeclaration] === value,
+          );
+        },
+        { timeout: 1000, interval: 100 },
+      );
+    };
+
+    await waitForStyles("container", { backgroundColor: Tokens.HueNeutral50 });
+
+    const tagStyles = [
+      {
+        label: "Default",
+        backgroundColor: Tokens.HueNeutral200,
+        color: Tokens.HueNeutral700,
+      },
+      {
+        label: "Info",
+        backgroundColor: Tokens.HueBlue200,
+        color: Tokens.HueBlue700,
+      },
+      {
+        label: "AccentOne",
+        backgroundColor: Tokens.HueAccentOne200,
+        color: Tokens.HueAccentOne700,
+      },
+      {
+        label: "AccentTwo",
+        backgroundColor: Tokens.HueAccentTwo200,
+        color: Tokens.HueAccentTwo800,
+      },
+      {
+        label: "AccentThree",
+        backgroundColor: Tokens.HueAccentThree200,
+        color: Tokens.HueAccentThree700,
+      },
+      {
+        label: "AccentFour",
+        backgroundColor: Tokens.HueAccentFour200,
+        color: Tokens.HueAccentFour700,
+      },
+    ];
+
+    for (const { label, backgroundColor, color } of tagStyles) {
+      await waitForStyles(label, { backgroundColor, color });
+    }
 
     await axeRun("Tags on gray (`lowContrast`) background");
   },

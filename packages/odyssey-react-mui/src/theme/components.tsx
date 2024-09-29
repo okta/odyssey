@@ -1087,7 +1087,7 @@ export const components = ({
 
               [`&.${chipClasses.colorSuccess}`]: {
                 ...(contrastMode === "lowContrast" && {
-                  backgroundColor: odysseyTokens.HueGreen100,
+                  backgroundColor: odysseyTokens.HueGreen200,
                   color: odysseyTokens.HueGreen700,
                 }),
                 ...(contrastMode === "highContrast" && {

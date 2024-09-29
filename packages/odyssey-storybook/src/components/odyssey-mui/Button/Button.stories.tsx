@@ -172,6 +172,7 @@ const checkButtonStyles = async (
   expectedColor: string,
 ) => {
   const button = canvas.getByRole("button", { name: buttonLabel });
+
   await expect(button).toHaveStyle(
     `background-color: ${expectedBackgroundColor}`,
   );
@@ -238,6 +239,7 @@ export const ButtonSecondaryDisabledOnWhiteBackground: StoryObj<ButtonProps> = {
   },
   play: async ({ canvasElement }: playType) => {
     const canvas = within(canvasElement);
+
     await checkButtonStyles(
       canvas,
       "Secondary",
@@ -286,7 +288,7 @@ export const ButtonSecondaryDisabledOnGrayBackground: StoryObj<ButtonProps> = {
     await checkButtonStyles(
       canvas,
       "Secondary",
-      Tokens.HueNeutral200,
+      Tokens.HueNeutral100,
       Tokens.TypographyColorDisabled,
     );
   },

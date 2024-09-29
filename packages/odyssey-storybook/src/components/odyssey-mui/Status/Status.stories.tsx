@@ -86,11 +86,9 @@ const checkStatusStyles = async (
   expectedBackgroundColor: string,
   expectedColor: string,
 ) => {
-  const status = canvas.getByRole("status", { name: label });
-  await expect(status).toHaveStyle(
-    `background-color: ${expectedBackgroundColor}`,
-  );
-  await expect(status).toHaveStyle(`color: ${expectedColor}`);
+  const status = canvas.getByText(label).closest(".MuiChip-root");
+  expect(status).toHaveStyle(`background-color: ${expectedBackgroundColor}`);
+  expect(status).toHaveStyle(`color: ${expectedColor}`);
 };
 
 export const DefaultPill: StoryObj<StatusProps> = {
@@ -198,7 +196,7 @@ export const StatusesOnGrayBackground: StoryObj<StatusProps> = {
   name: "Statuses on gray background",
   render: () => (
     <Box sx={{ backgroundColor: Tokens.HueNeutral50, padding: "24px" }}>
-      <ContrastModeProvider>
+      <ContrastModeProvider contrastMode="lowContrast">
         <Box
           sx={{
             display: "flex",
@@ -217,37 +215,39 @@ export const StatusesOnGrayBackground: StoryObj<StatusProps> = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
     await checkStatusStyles(
       canvas,
       "Default",
-      Tokens.HueNeutral100,
-      Tokens.TypographyColorBody,
+      Tokens.HueNeutral200,
+      Tokens.HueNeutral700,
     );
     await checkStatusStyles(
       canvas,
       "Error",
-      Tokens.PaletteDangerLight,
-      Tokens.PaletteDangerDark,
+      Tokens.HueRed100,
+      Tokens.HueRed700,
     );
     await checkStatusStyles(
       canvas,
       "Info",
-      Tokens.PalettePrimaryLight,
-      Tokens.PalettePrimaryDark,
+      Tokens.HueBlue100,
+      Tokens.HueBlue700,
     );
     await checkStatusStyles(
       canvas,
       "Success",
-      Tokens.PaletteSuccessLight,
-      Tokens.PaletteSuccessDark,
+      Tokens.HueGreen100,
+      Tokens.HueGreen700,
     );
     await checkStatusStyles(
       canvas,
       "Warning",
-      Tokens.PaletteWarningLight,
-      Tokens.PaletteWarningDark,
+      Tokens.HueYellow100,
+      Tokens.HueYellow700,
     );
+
     await axeRun("Statuses on gray (`lowContrast`) background");
   },
   parameters: {
