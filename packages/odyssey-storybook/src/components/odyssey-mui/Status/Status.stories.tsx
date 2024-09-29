@@ -215,6 +215,7 @@ export const StatusesOnGrayBackground: StoryObj<StatusProps> = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
+
     await new Promise((resolve) => setTimeout(resolve, 500));
 
     await checkStatusStyles(
@@ -238,7 +239,7 @@ export const StatusesOnGrayBackground: StoryObj<StatusProps> = {
     await checkStatusStyles(
       canvas,
       "Success",
-      Tokens.HueGreen100,
+      Tokens.HueGreen200,
       Tokens.HueGreen700,
     );
     await checkStatusStyles(
