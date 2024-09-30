@@ -15,7 +15,7 @@ import { useTranslation } from "react-i18next";
 import { Alert, AlertColor, AlertTitle, AlertProps } from "@mui/material";
 
 import type { HtmlProps } from "./HtmlProps";
-import { Link } from "./Link";
+import { Link, LinkProps } from "./Link";
 import { ScreenReaderText } from "./ScreenReaderText";
 
 export const bannerRoleValues = ["status", "alert"] as const;
@@ -49,16 +49,8 @@ export type BannerProps = {
 } & Pick<HtmlProps, "testId" | "translate"> &
   (
     | {
-        /**
-         * The target property of the `HTMLAnchorElement` interface is a string that indicates where to display the linked resource.
-         *
-         * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/target
-         */
-        linkTarget?: HTMLAnchorElement["target"];
-        /**
-         * If linkUrl is not undefined, this is the text of the link.
-         */
-        linkUrl: string;
+        linkTarget?: LinkProps["target"];
+        linkUrl: LinkProps["href"];
         /**
          * If defined, the Banner will include a link to the URL
          */
