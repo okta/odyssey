@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, ReactNode } from "react";
+import { memo, ReactNode, useMemo } from "react";
 import { ScopedCssBaseline } from "@mui/material";
 
 import {
@@ -60,6 +60,25 @@ const OdysseyProviderInner = <SupportedLanguages extends string>({
 }: OdysseyProviderProps<SupportedLanguages>) => {
   const { contrastMode } = useContrastContext();
 
+  const memoizedThemeProps = useMemo(
+    () => ({
+      designTokensOverride,
+      shadowDomElement,
+      shadowRootElement,
+      themeOverride: {
+        ...themeOverride,
+        odysseyContrastMode: contrastMode,
+      },
+    }),
+    [
+      designTokensOverride,
+      shadowDomElement,
+      shadowRootElement,
+      themeOverride,
+      contrastMode,
+    ],
+  );
+
   return (
     <OdysseyCacheProvider
       emotionRoot={emotionRoot}
@@ -68,15 +87,7 @@ const OdysseyProviderInner = <SupportedLanguages extends string>({
       nonce={nonce}
       stylisPlugins={stylisPlugins}
     >
-      <OdysseyThemeProvider
-        designTokensOverride={designTokensOverride}
-        shadowDomElement={shadowDomElement}
-        shadowRootElement={shadowRootElement}
-        themeOverride={{
-          ...themeOverride,
-          odysseyContrastMode: contrastMode,
-        }}
-      >
+      <OdysseyThemeProvider {...memoizedThemeProps}>
         <ScopedCssBaseline sx={scopedCssBaselineStyles}>
           <OdysseyTranslationProvider<SupportedLanguages>
             languageCode={languageCode}
