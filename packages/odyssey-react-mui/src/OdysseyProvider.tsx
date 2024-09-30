@@ -90,11 +90,12 @@ const OdysseyProviderInner = <SupportedLanguages extends string>({
   );
 };
 
-const OdysseyProvider = <SupportedLanguages extends string>(
-  props: OdysseyProviderProps<SupportedLanguages>,
-) => (
-  <ContrastModeProvider contrastMode={props.contrastMode}>
-    <OdysseyProviderInner {...props} />
+const OdysseyProvider = <SupportedLanguages extends string>({
+  contrastMode,
+  ...providerProps
+}: OdysseyProviderProps<SupportedLanguages>) => (
+  <ContrastModeProvider contrastMode={contrastMode}>
+    <OdysseyProviderInner {...providerProps} />
   </ContrastModeProvider>
 );
 
