@@ -11,11 +11,12 @@
  */
 
 import styled from "@emotion/styled";
-import { Alert, AlertTitle, Box, Link as MuiLink } from "@mui/material";
+import { Alert, AlertTitle, Box } from "@mui/material";
 import { memo, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
 import type { HtmlProps } from "./HtmlProps";
+import { Link } from "./Link";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
@@ -127,6 +128,7 @@ const ContentContainer = styled("div", {
 
 const Callout = ({
   children,
+  linkTarget,
   linkText,
   linkUrl,
   role,
@@ -160,9 +162,9 @@ const Callout = ({
         {text && <Paragraph>{text}</Paragraph>}
         {linkUrl && (
           <Box>
-            <MuiLink href={linkUrl} variant="monochrome">
+            <Link href={linkUrl} target={linkTarget} variant="monochrome">
               {linkText}
-            </MuiLink>
+            </Link>
           </Box>
         )}
       </ContentContainer>
