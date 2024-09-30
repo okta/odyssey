@@ -22,8 +22,15 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, within } from "@storybook/testing-library";
 import { expect, jest } from "@storybook/jest";
 import { axeRun } from "../../../axe-util";
+import type { PlaywrightProps } from "../storybookTypes";
 
-const storybookMeta: Meta<typeof Banner> = {
+type PlayType = {
+  args: BannerProps;
+  canvasElement: HTMLElement;
+  step: PlaywrightProps<BannerProps>["step"];
+};
+
+const storybookMeta: Meta<BannerProps> = {
   title: "MUI Components/Banner",
   component: Banner,
   argTypes: {
@@ -138,7 +145,7 @@ export const Linked: StoryObj<BannerProps> = {
     severity: "error",
     text: "An unidentified flying object compromised Hangar 18.",
   },
-  play: async ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }: PlayType) => {
     await step("check for the link text", async () => {
       const canvas = within(canvasElement);
       const link = canvas.getByText("View report") as HTMLAnchorElement;
@@ -163,7 +170,7 @@ export const Dismissible: StoryObj<BannerProps> = {
   args: {
     onClose: jest.fn(),
   },
-  play: async ({ args, canvasElement, step }) => {
+  play: async ({ args, canvasElement, step }: PlayType) => {
     await step("dismiss the banner on click", async () => {
       const canvas = within(canvasElement);
       const button = canvas.getByTitle("Close");
