@@ -101,12 +101,10 @@ export type CalloutProps = {
         linkTarget?: HTMLAnchorElement["target"];
         /**
          * If linkUrl is not undefined, this is the text of the link.
-         * If left blank, it defaults to "Learn more".
-         * Note that linkText does nothing if linkUrl is not defined
          */
         linkUrl: string;
         /**
-         * If defined, the Toast will include a link to the URL
+         * If defined, the Callout will include a link to the URL
          */
         linkText: string;
       }

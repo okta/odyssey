@@ -148,6 +148,17 @@ export const Linked: StoryObj<BannerProps> = {
   },
 };
 
+export const LinkWithTarget: StoryObj<BannerProps> = {
+  args: {
+    linkTarget: "_blank",
+    linkText: "View report",
+    linkUrl: "#anchor",
+    role: "status",
+    severity: "error",
+    text: "An unidentified flying object compromised Hangar 18.",
+  },
+};
+
 export const Dismissible: StoryObj<BannerProps> = {
   args: {
     onClose: jest.fn(),

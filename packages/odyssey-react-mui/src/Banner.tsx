@@ -28,16 +28,6 @@ export const bannerSeverityValues: AlertColor[] = [
 
 export type BannerProps = {
   /**
-   * If linkUrl is not undefined, this is the text of the link.
-   * If left blank, it defaults to "Learn more".
-   * Note that linkText does nothing if linkUrl is not defined
-   */
-  linkText?: string;
-  /**
-   * If defined, the alert will include a link to the URL
-   */
-  linkUrl?: string;
-  /**
    * The function that's fired when the user clicks the close button. If undefined,
    * the close button will not be shown.
    */
@@ -56,11 +46,35 @@ export type BannerProps = {
    * The text content of the alert
    */
   text: string;
-} & Pick<HtmlProps, "testId" | "translate">;
+} & Pick<HtmlProps, "testId" | "translate"> &
+  (
+    | {
+        /**
+         * The target property of the `HTMLAnchorElement` interface is a string that indicates where to display the linked resource.
+         *
+         * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/target
+         */
+        linkTarget?: HTMLAnchorElement["target"];
+        /**
+         * If linkUrl is not undefined, this is the text of the link.
+         */
+        linkUrl: string;
+        /**
+         * If defined, the Banner will include a link to the URL
+         */
+        linkText: string;
+      }
+    | {
+        linkTarget?: never;
+        linkUrl?: never;
+        linkText?: never;
+      }
+  );
 
 const Banner = ({
-  linkUrl,
+  linkTarget,
   linkText,
+  linkUrl,
   onClose,
   role,
   severity,
@@ -83,7 +97,12 @@ const Banner = ({
       </ScreenReaderText>
       <AlertTitle translate={translate}>{text}</AlertTitle>
       {linkUrl && (
-        <Link href={linkUrl} variant="monochrome" translate={translate}>
+        <Link
+          href={linkUrl}
+          target={linkTarget}
+          translate={translate}
+          variant="monochrome"
+        >
           {linkText}
         </Link>
       )}
