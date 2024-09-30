@@ -93,6 +93,12 @@ export type CalloutProps = {
   (
     | {
         /**
+         * The target property of the `HTMLAnchorElement` interface is a string that indicates where to display the linked resource.
+         *
+         * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/target
+         */
+        linkTarget?: HTMLAnchorElement["target"];
+        /**
          * If linkUrl is not undefined, this is the text of the link.
          * If left blank, it defaults to "Learn more".
          * Note that linkText does nothing if linkUrl is not defined
@@ -104,6 +110,7 @@ export type CalloutProps = {
         linkText: string;
       }
     | {
+        linkTarget?: never;
         linkUrl?: never;
         linkText?: never;
       }

@@ -40,6 +40,16 @@ const storybookMeta: Meta<CalloutProps> = {
         value: "ReactNode | Array<ReactNode>",
       },
     },
+    linkTarget: {
+      control: "text",
+      description:
+        "The target property of the `HTMLAnchorElement` interface is a string that indicates where to display the linked resource.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     linkText: {
       control: "text",
       description:
