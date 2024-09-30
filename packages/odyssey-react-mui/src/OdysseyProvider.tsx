@@ -62,21 +62,10 @@ const OdysseyProviderInner = <SupportedLanguages extends string>({
 
   const memoizedThemeProps = useMemo(
     () => ({
-      designTokensOverride,
-      shadowDomElement,
-      shadowRootElement,
-      themeOverride: {
-        ...themeOverride,
-        odysseyContrastMode: contrastMode,
-      },
+      ...themeOverride,
+      odysseyContrastMode: contrastMode,
     }),
-    [
-      designTokensOverride,
-      shadowDomElement,
-      shadowRootElement,
-      themeOverride,
-      contrastMode,
-    ],
+    [themeOverride, contrastMode],
   );
 
   return (
@@ -87,7 +76,12 @@ const OdysseyProviderInner = <SupportedLanguages extends string>({
       nonce={nonce}
       stylisPlugins={stylisPlugins}
     >
-      <OdysseyThemeProvider {...memoizedThemeProps}>
+      <OdysseyThemeProvider
+        designTokensOverride={designTokensOverride}
+        shadowDomElement={shadowDomElement}
+        shadowRootElement={shadowRootElement}
+        themeOverride={memoizedThemeProps}
+      >
         <ScopedCssBaseline sx={scopedCssBaselineStyles}>
           <OdysseyTranslationProvider<SupportedLanguages>
             languageCode={languageCode}
