@@ -328,7 +328,7 @@ export const TagsOnWhiteBackground: StoryObj<TagProps> = {
 export const TagsOnGrayBackground: StoryObj<TagProps> = {
   name: "Tags on Gray Background",
   render: () => (
-    <ContrastModeProvider>
+    <ContrastModeProvider contrastMode="lowContrast">
       <Box
         sx={{
           backgroundColor: Tokens.HueNeutral50,

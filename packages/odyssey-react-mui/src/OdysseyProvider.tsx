@@ -10,26 +10,22 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, ReactNode, useMemo } from "react";
+import { memo, ReactNode } from "react";
 import { ScopedCssBaseline } from "@mui/material";
-import {
-  createTheme,
-  ThemeProvider as MuiThemeProvider,
-} from "@mui/material/styles";
-import { ThemeOptions } from "@mui/material";
-import { deepmerge } from "@mui/utils";
+
 import {
   OdysseyCacheProvider,
   OdysseyCacheProviderProps,
 } from "./OdysseyCacheProvider";
 import {
+  OdysseyThemeProvider,
+  OdysseyThemeProviderProps,
+} from "./OdysseyThemeProvider";
+import {
   OdysseyTranslationProvider,
   OdysseyTranslationProviderProps,
 } from "./OdysseyTranslationProvider";
 import { DefaultSupportedLanguages } from "./OdysseyTranslationProvider.types";
-import { createOdysseyMuiTheme, DesignTokensOverride } from "./theme";
-import * as Tokens from "@okta/odyssey-design-tokens";
-import { OdysseyDesignTokensContext } from "./OdysseyDesignTokensContext";
 import {
   ContrastMode,
   ContrastModeProvider,
@@ -43,12 +39,9 @@ const scopedCssBaselineStyles = {
 export type OdysseyProviderProps<
   SupportedLanguages extends string = DefaultSupportedLanguages,
 > = OdysseyCacheProviderProps &
+  OdysseyThemeProviderProps &
   OdysseyTranslationProviderProps<SupportedLanguages> & {
     children: ReactNode;
-    designTokensOverride?: DesignTokensOverride;
-    shadowDomElement?: HTMLDivElement | HTMLElement;
-    shadowRootElement?: HTMLDivElement | HTMLElement;
-    themeOverride?: ThemeOptions;
     contrastMode?: ContrastMode;
   };
 
@@ -67,37 +60,6 @@ const OdysseyProviderInner = <SupportedLanguages extends string>({
 }: OdysseyProviderProps<SupportedLanguages>) => {
   const { contrastMode } = useContrastContext();
 
-  const odysseyTokens = useMemo(
-    () => ({ ...Tokens, ...designTokensOverride }),
-    [designTokensOverride],
-  );
-
-  const odysseyTheme = useMemo(
-    () =>
-      createOdysseyMuiTheme({
-        odysseyTokens,
-        shadowRootElement: shadowRootElement || shadowDomElement,
-      }),
-    [odysseyTokens, shadowDomElement, shadowRootElement],
-  );
-
-  const odysseyThemeWithBackground = useMemo(
-    () =>
-      createTheme({
-        ...odysseyTheme,
-        odysseyContrastMode: contrastMode,
-      }),
-    [odysseyTheme, contrastMode],
-  );
-
-  const customOdysseyTheme = useMemo(
-    () =>
-      themeOverride
-        ? createTheme(deepmerge(odysseyThemeWithBackground, themeOverride))
-        : odysseyThemeWithBackground,
-    [odysseyThemeWithBackground, themeOverride],
-  );
-
   return (
     <OdysseyCacheProvider
       emotionRoot={emotionRoot}
@@ -106,19 +68,24 @@ const OdysseyProviderInner = <SupportedLanguages extends string>({
       nonce={nonce}
       stylisPlugins={stylisPlugins}
     >
-      <MuiThemeProvider theme={customOdysseyTheme}>
-        <OdysseyDesignTokensContext.Provider value={odysseyTokens}>
-          {/* This component creates a div; for flexibility of layout of children, make it inherit its parent's height */}
-          <ScopedCssBaseline sx={scopedCssBaselineStyles}>
-            <OdysseyTranslationProvider<SupportedLanguages>
-              languageCode={languageCode}
-              translationOverrides={translationOverrides}
-            >
-              {children}
-            </OdysseyTranslationProvider>
-          </ScopedCssBaseline>
-        </OdysseyDesignTokensContext.Provider>
-      </MuiThemeProvider>
+      <OdysseyThemeProvider
+        designTokensOverride={designTokensOverride}
+        shadowDomElement={shadowDomElement}
+        shadowRootElement={shadowRootElement}
+        themeOverride={{
+          ...themeOverride,
+          odysseyContrastMode: contrastMode,
+        }}
+      >
+        <ScopedCssBaseline sx={scopedCssBaselineStyles}>
+          <OdysseyTranslationProvider<SupportedLanguages>
+            languageCode={languageCode}
+            translationOverrides={translationOverrides}
+          >
+            {children}
+          </OdysseyTranslationProvider>
+        </ScopedCssBaseline>
+      </OdysseyThemeProvider>
     </OdysseyCacheProvider>
   );
 };
