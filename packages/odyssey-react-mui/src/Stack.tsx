@@ -13,7 +13,15 @@
 import { memo } from "react";
 import { Stack as MuiStack, StackProps as MuiStackProps } from "@mui/material";
 
-export type StackProps = {
+export const stackSpacingValues = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] as const;
+export const stackDirectionValues = [
+  "row",
+  "row-reverse",
+  "column",
+  "column-reverse",
+] as const;
+
+export type OdysseyStackProps = {
   children?: MuiStackProps["children"];
   /**
    * The component used for the root node. Either a string to use a HTML element or a component.
@@ -22,15 +30,24 @@ export type StackProps = {
   /**
    * Defines the flex-direction style property. It is applied for all screen sizes.
    */
-  direction?: MuiStackProps["direction"];
+  direction?: (typeof stackDirectionValues)[number];
   /**
    * Defines the space between immediate children.
    */
-  spacing?: MuiStackProps["spacing"];
+  spacing?: (typeof stackSpacingValues)[number];
+  sx?: MuiStackProps["sx"];
 };
 
-const Stack = ({ children, spacing }: StackProps) => {
-  return <MuiStack spacing={spacing}>{children}</MuiStack>;
+const Stack = ({
+  children,
+  direction = "column",
+  spacing = 2,
+}: OdysseyStackProps) => {
+  return (
+    <MuiStack direction={direction} spacing={spacing}>
+      {children}
+    </MuiStack>
+  );
 };
 
 const MemoizedStack = memo(Stack);
