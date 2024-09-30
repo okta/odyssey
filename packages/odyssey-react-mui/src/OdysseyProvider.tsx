@@ -31,6 +31,7 @@ import { createOdysseyMuiTheme, DesignTokensOverride } from "./theme";
 import * as Tokens from "@okta/odyssey-design-tokens";
 import { OdysseyDesignTokensContext } from "./OdysseyDesignTokensContext";
 import {
+  ContrastMode,
   ContrastModeProvider,
   useContrastContext,
 } from "./ContrastModeProvider";
@@ -48,6 +49,7 @@ export type OdysseyProviderProps<
     shadowDomElement?: HTMLDivElement | HTMLElement;
     shadowRootElement?: HTMLDivElement | HTMLElement;
     themeOverride?: ThemeOptions;
+    contrastMode?: ContrastMode;
   };
 
 const OdysseyProviderInner = <SupportedLanguages extends string>({
@@ -124,7 +126,7 @@ const OdysseyProviderInner = <SupportedLanguages extends string>({
 const OdysseyProvider = <SupportedLanguages extends string>(
   props: OdysseyProviderProps<SupportedLanguages>,
 ) => (
-  <ContrastModeProvider>
+  <ContrastModeProvider contrastMode={props.contrastMode}>
     <OdysseyProviderInner {...props} />
   </ContrastModeProvider>
 );
