@@ -93,7 +93,9 @@ export type AutocompleteProps<
     IsCustomValueAllowed
   >["defaultValue"];
   /**
-   * The default value. Use when the component is not controlled.
+   * Used to determine the string value for a given option. It's used to fill the input (and the list box options if renderOption is not provided). If used in free solo mode, it must accept both the type of the options and a string.
+   *
+   * `function(option: Value) => string`
    */
   getOptionLabel?: UseAutocompleteProps<
     OptionType,
