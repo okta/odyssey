@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.24.0](https://github.com/okta/odyssey/compare/v1.20.0...v1.24.0) (2024-10-01)
+
+### Features
+
+- **odyssey-react-mui:** add overline typography variant ([#2349](https://github.com/okta/odyssey/issues/2349)) ([4530f69](https://github.com/okta/odyssey/commit/4530f699dffc11117f366ca26826e7ca51f4f296))
+
 ## [1.23.0](https://github.com/okta/odyssey/compare/v1.19.0...v1.23.0) (2024-09-19)
 
 **Note:** Version bump only for package @okta/odyssey-design-tokens
