@@ -11,11 +11,18 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
-import { Tag, TagList, TagProps } from "@okta/odyssey-react-mui";
+import {
+  ContrastModeProvider,
+  Box,
+  Tag,
+  TagList,
+  TagProps,
+} from "@okta/odyssey-react-mui";
+import * as Tokens from "@okta/odyssey-design-tokens";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { GroupIcon } from "@okta/odyssey-react-mui/icons";
 import icons from "../../../../.storybook/components/iconUtils";
-import { userEvent, within } from "@storybook/testing-library";
+import { userEvent, within, waitFor } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import { axeRun } from "../../../axe-util";
 
@@ -189,7 +196,7 @@ export const Clickable: StoryObj<TagProps> = {
     label: "Starship",
   },
   play: async ({ args, canvasElement, step }) => {
-    await step("remove the tag on click", async () => {
+    await step("click the tag", async () => {
       const canvas = within(canvasElement);
       const tag = canvas.getByText(args.label);
       await userEvent.click(tag);
@@ -221,5 +228,207 @@ export const Disabled: StoryObj<TagProps> = {
   args: {
     label: "Starship",
     isDisabled: true,
+  },
+};
+
+export const TagsOnWhiteBackground: StoryObj<TagProps> = {
+  name: "Tags on White Background",
+  render: () => (
+    <ContrastModeProvider>
+      <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
+        <Tag label="Default" />
+        <Tag label="Info" colorVariant="info" />
+        <Tag label="AccentOne" colorVariant="accentOne" />
+        <Tag label="AccentTwo" colorVariant="accentTwo" />
+        <Tag label="AccentThree" colorVariant="accentThree" />
+        <Tag label="AccentFour" colorVariant="accentFour" />
+      </Box>
+    </ContrastModeProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const waitForStyles = async (
+      selector: string,
+      expectedStyles: Partial<CSSStyleDeclaration>,
+    ) => {
+      await waitFor(
+        () => {
+          const element = canvas.getByText(selector);
+          if (!element) throw new Error(`Element "${selector}" not found`);
+
+          const computedStyle = getComputedStyle(element);
+          return Object.entries(expectedStyles).every(
+            ([prop, value]) =>
+              computedStyle[prop as keyof CSSStyleDeclaration] === value,
+          );
+        },
+        { timeout: 1000, interval: 100 },
+      );
+    };
+    const tagStyles = [
+      {
+        label: "Default",
+        backgroundColor: Tokens.HueNeutral100,
+        color: Tokens.TypographyColorBody,
+      },
+      {
+        label: "Info",
+        backgroundColor: Tokens.HueBlue100,
+        color: Tokens.HueBlue700,
+      },
+      {
+        label: "AccentOne",
+        backgroundColor: Tokens.HueAccentOne100,
+        color: Tokens.HueAccentOne700,
+      },
+      {
+        label: "AccentTwo",
+        backgroundColor: Tokens.HueAccentTwo100,
+        color: Tokens.HueAccentTwo700,
+      },
+      {
+        label: "AccentThree",
+        backgroundColor: Tokens.HueAccentThree100,
+        color: Tokens.HueAccentThree700,
+      },
+      {
+        label: "AccentFour",
+        backgroundColor: Tokens.HueAccentFour100,
+        color: Tokens.HueAccentFour700,
+      },
+    ];
+
+    for (const { label, backgroundColor, color } of tagStyles) {
+      await waitForStyles(label, { backgroundColor, color });
+    }
+
+    await axeRun("Tags on white (`highContrast`) background");
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: `<ContrastModeProvider contrastMode="highContrast">
+  <Tag label="Default" />
+  <Tag label="Info" colorVariant="info" />
+  <Tag label="AccentOne" colorVariant="accentOne" />
+  <Tag label="AccentTwo" colorVariant="accentTwo" />
+  <Tag label="AccentThree" colorVariant="accentThree" />
+  <Tag label="AccentFour" colorVariant="accentFour" />
+</ContrastModeProvider>`,
+      },
+      description: {
+        story:
+          "`Tag` component on a white (`highContrast`) background using [`ContrastModeProvider`](/docs/customization-components--docs#contrastmodeprovider).",
+      },
+    },
+  },
+};
+
+export const TagsOnGrayBackground: StoryObj<TagProps> = {
+  name: "Tags on Gray Background",
+  render: () => (
+    <ContrastModeProvider contrastMode="lowContrast">
+      <Box
+        sx={{
+          backgroundColor: Tokens.HueNeutral50,
+          padding: "24px",
+          display: "flex",
+          flexWrap: "wrap",
+          gap: 2,
+        }}
+      >
+        <Tag label="Default" />
+        <Tag label="Info" colorVariant="info" />
+        <Tag label="AccentOne" colorVariant="accentOne" />
+        <Tag label="AccentTwo" colorVariant="accentTwo" />
+        <Tag label="AccentThree" colorVariant="accentThree" />
+        <Tag label="AccentFour" colorVariant="accentFour" />
+      </Box>
+    </ContrastModeProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const waitForStyles = async (
+      selector: string,
+      expectedStyles: Partial<CSSStyleDeclaration>,
+    ) => {
+      await waitFor(
+        () => {
+          const element =
+            selector === "container"
+              ? canvas.getByText("Default").closest(".MuiBox-root")
+              : canvas.getByText(selector);
+          if (!element) throw new Error(`Element "${selector}" not found`);
+
+          const computedStyle = getComputedStyle(element);
+          return Object.entries(expectedStyles).every(
+            ([prop, value]) =>
+              computedStyle[prop as keyof CSSStyleDeclaration] === value,
+          );
+        },
+        { timeout: 1000, interval: 100 },
+      );
+    };
+
+    await waitForStyles("container", { backgroundColor: Tokens.HueNeutral50 });
+
+    const tagStyles = [
+      {
+        label: "Default",
+        backgroundColor: Tokens.HueNeutral200,
+        color: Tokens.HueNeutral700,
+      },
+      {
+        label: "Info",
+        backgroundColor: Tokens.HueBlue200,
+        color: Tokens.HueBlue700,
+      },
+      {
+        label: "AccentOne",
+        backgroundColor: Tokens.HueAccentOne200,
+        color: Tokens.HueAccentOne700,
+      },
+      {
+        label: "AccentTwo",
+        backgroundColor: Tokens.HueAccentTwo200,
+        color: Tokens.HueAccentTwo800,
+      },
+      {
+        label: "AccentThree",
+        backgroundColor: Tokens.HueAccentThree200,
+        color: Tokens.HueAccentThree700,
+      },
+      {
+        label: "AccentFour",
+        backgroundColor: Tokens.HueAccentFour200,
+        color: Tokens.HueAccentFour700,
+      },
+    ];
+
+    for (const { label, backgroundColor, color } of tagStyles) {
+      await waitForStyles(label, { backgroundColor, color });
+    }
+
+    await axeRun("Tags on gray (`lowContrast`) background");
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: `<ContrastModeProvider contrastMode="lowContrast">
+  <Tag label="Default" />
+  <Tag label="Info" colorVariant="info" />
+  <Tag label="AccentOne" colorVariant="accentOne" />
+  <Tag label="AccentTwo" colorVariant="accentTwo" />
+  <Tag label="AccentThree" colorVariant="accentThree" />
+  <Tag label="AccentFour" colorVariant="accentFour" />
+</ContrastModeProvider>`,
+      },
+      description: {
+        story:
+          "`Tag` component on a gray (`lowContrast`) background using [`ContrastModeProvider`](/docs/customization-components--docs#contrastmodeprovider).",
+      },
+    },
   },
 };
