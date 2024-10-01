@@ -47,10 +47,6 @@ const dateStyles: StateStyles = {
   hoverSelected: ({ theme }) => ({
     backgroundColor: theme.palette.primary.dark,
     color: theme.palette.primary.contrastText,
-
-    "@media (pointer: fine)": {
-      backgroundColor: theme.palette.primary.main,
-    },
   }),
   outsideOfMonth: ({ theme }) => ({
     backgroundColor: "transparent",
@@ -158,8 +154,8 @@ export const datePickerTheme: ThemeOptions = {
             borderStyle: theme.mixins.borderStyle,
             borderWidth: theme.mixins.borderWidth,
             borderRadius: theme.mixins.borderRadius,
-            paddingBlock: theme.spacing(3),
-            paddingInline: theme.spacing(3),
+            paddingBlock: theme.spacing(6),
+            paddingInline: theme.spacing(6),
           },
         }),
       },
