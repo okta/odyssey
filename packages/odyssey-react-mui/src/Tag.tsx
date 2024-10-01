@@ -21,6 +21,7 @@ import {
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext";
 import { CloseCircleFilledIcon } from "./icons.generated";
+import { useContrastContext, ContrastMode } from "./ContrastModeProvider";
 
 export const tagColorVariants = [
   "default",
@@ -57,61 +58,98 @@ export type TagProps = {
 const getChipColors = (
   colorVariant: TagColorVariant,
   odysseyDesignTokens: DesignTokens,
+  contrastMode: ContrastMode,
 ) => {
   const colors = {
     default: {
-      background: odysseyDesignTokens.HueNeutral100,
+      ...(contrastMode === "lowContrast" && {
+        background: odysseyDesignTokens.HueNeutral200,
+        text: odysseyDesignTokens.HueNeutral700,
+      }),
+      ...(contrastMode === "highContrast" && {
+        background: odysseyDesignTokens.HueNeutral100,
+        text: odysseyDesignTokens.HueNeutral700,
+      }),
       hover: odysseyDesignTokens.HueNeutral200,
       active: odysseyDesignTokens.HueNeutral300,
-      text: odysseyDesignTokens.HueNeutral700,
       border: odysseyDesignTokens.HueNeutral200,
       deleteIcon: odysseyDesignTokens.HueNeutral500,
-      deleteIconHover: odysseyDesignTokens.HueNeutral600,
+      deleteIconHover: odysseyDesignTokens.HueNeutral700,
     },
     info: {
-      background: odysseyDesignTokens.HueBlue100,
+      ...(contrastMode === "lowContrast" && {
+        background: odysseyDesignTokens.HueBlue200,
+        text: odysseyDesignTokens.HueBlue700,
+      }),
+      ...(contrastMode === "highContrast" && {
+        background: odysseyDesignTokens.HueBlue100,
+        text: odysseyDesignTokens.HueBlue700,
+      }),
       hover: odysseyDesignTokens.HueBlue200,
       active: odysseyDesignTokens.HueBlue300,
-      text: odysseyDesignTokens.HueBlue700,
       border: odysseyDesignTokens.HueBlue200,
       deleteIcon: odysseyDesignTokens.HueBlue500,
-      deleteIconHover: odysseyDesignTokens.HueBlue600,
+      deleteIconHover: odysseyDesignTokens.HueBlue700,
     },
     accentOne: {
-      background: odysseyDesignTokens.HueAccentOne100,
+      ...(contrastMode === "lowContrast" && {
+        background: odysseyDesignTokens.HueAccentOne200,
+        text: odysseyDesignTokens.HueAccentOne700,
+      }),
+      ...(contrastMode === "highContrast" && {
+        background: odysseyDesignTokens.HueAccentOne100,
+        text: odysseyDesignTokens.HueAccentOne700,
+      }),
       hover: odysseyDesignTokens.HueAccentOne200,
       active: odysseyDesignTokens.HueAccentOne300,
-      text: odysseyDesignTokens.HueAccentOne700,
       border: odysseyDesignTokens.HueAccentOne200,
       deleteIcon: odysseyDesignTokens.HueAccentOne500,
-      deleteIconHover: odysseyDesignTokens.HueAccentOne600,
+      deleteIconHover: odysseyDesignTokens.HueAccentOne700,
     },
     accentTwo: {
-      background: odysseyDesignTokens.HueAccentTwo100,
+      ...(contrastMode === "lowContrast" && {
+        background: odysseyDesignTokens.HueAccentTwo200,
+        text: odysseyDesignTokens.HueAccentTwo800,
+      }),
+      ...(contrastMode === "highContrast" && {
+        background: odysseyDesignTokens.HueAccentTwo100,
+        text: odysseyDesignTokens.HueAccentTwo700,
+      }),
       hover: odysseyDesignTokens.HueAccentTwo200,
       active: odysseyDesignTokens.HueAccentTwo300,
-      text: odysseyDesignTokens.HueAccentTwo700,
       border: odysseyDesignTokens.HueAccentTwo200,
       deleteIcon: odysseyDesignTokens.HueAccentTwo500,
-      deleteIconHover: odysseyDesignTokens.HueAccentTwo600,
+      deleteIconHover: odysseyDesignTokens.HueAccentTwo700,
     },
     accentThree: {
-      background: odysseyDesignTokens.HueAccentThree100,
+      ...(contrastMode === "lowContrast" && {
+        background: odysseyDesignTokens.HueAccentThree200,
+        text: odysseyDesignTokens.HueAccentThree700,
+      }),
+      ...(contrastMode === "highContrast" && {
+        background: odysseyDesignTokens.HueAccentThree100,
+        text: odysseyDesignTokens.HueAccentThree700,
+      }),
       hover: odysseyDesignTokens.HueAccentThree200,
       active: odysseyDesignTokens.HueAccentThree300,
-      text: odysseyDesignTokens.HueAccentThree700,
       border: odysseyDesignTokens.HueAccentThree200,
       deleteIcon: odysseyDesignTokens.HueAccentThree500,
-      deleteIconHover: odysseyDesignTokens.HueAccentThree600,
+      deleteIconHover: odysseyDesignTokens.HueAccentThree700,
     },
     accentFour: {
-      background: odysseyDesignTokens.HueAccentFour100,
+      ...(contrastMode === "lowContrast" && {
+        background: odysseyDesignTokens.HueAccentFour200,
+        text: odysseyDesignTokens.HueAccentFour700,
+      }),
+      ...(contrastMode === "highContrast" && {
+        background: odysseyDesignTokens.HueAccentFour100,
+        text: odysseyDesignTokens.HueAccentFour700,
+      }),
       hover: odysseyDesignTokens.HueAccentFour200,
       active: odysseyDesignTokens.HueAccentFour300,
-      text: odysseyDesignTokens.HueAccentFour700,
       border: odysseyDesignTokens.HueAccentFour200,
       deleteIcon: odysseyDesignTokens.HueAccentFour500,
-      deleteIconHover: odysseyDesignTokens.HueAccentFour600,
+      deleteIconHover: odysseyDesignTokens.HueAccentFour700,
     },
   };
 
@@ -120,13 +158,16 @@ const getChipColors = (
 
 const StyledTag = styled(MuiChip, {
   shouldForwardProp: (prop) =>
-    !["colorVariant", "odysseyDesignTokens"].includes(prop as string),
+    !["colorVariant", "contrastMode", "odysseyDesignTokens"].includes(
+      prop as string,
+    ),
 })<{
   colorVariant: TagColorVariant;
+  contrastMode: ContrastMode;
   odysseyDesignTokens: DesignTokens;
   as?: React.ElementType; // Allow the 'as' prop to be forwarded
-}>(({ colorVariant, odysseyDesignTokens }) => {
-  const colors = getChipColors(colorVariant, odysseyDesignTokens);
+}>(({ colorVariant, contrastMode, odysseyDesignTokens }) => {
+  const colors = getChipColors(colorVariant, odysseyDesignTokens, contrastMode);
 
   return {
     backgroundColor: colors.background,
@@ -169,6 +210,7 @@ const Tag = ({
 }: TagProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { chipElementType } = useContext(TagListContext);
+  const { contrastMode } = useContrastContext();
 
   const renderTag = useCallback(
     (muiProps: MuiPropsContextType) => (
@@ -180,6 +222,7 @@ const Tag = ({
         data-se={testId}
         colorVariant={colorVariant}
         odysseyDesignTokens={odysseyDesignTokens}
+        contrastMode={contrastMode}
         disabled={isDisabled}
         icon={icon}
         label={label}
@@ -200,6 +243,7 @@ const Tag = ({
       translate,
       colorVariant,
       odysseyDesignTokens,
+      contrastMode,
     ],
   );
 
