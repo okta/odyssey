@@ -29,7 +29,8 @@ export const palette = ({
       lighter: odysseyTokens.HueBlue50,
       light: odysseyTokens.HueBlue300,
       main: odysseyTokens.HueBlue500,
-      dark: odysseyTokens.HueBlue900,
+      dark: odysseyTokens.HueBlue700,
+      darker: odysseyTokens.HueBlue800,
       contrastText: odysseyTokens.TypographyColorInverse,
     },
     secondary: {

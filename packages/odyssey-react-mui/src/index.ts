@@ -34,6 +34,7 @@ export {
   Paper,
   /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
   ScopedCssBaseline,
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
   ThemeProvider,
 } from "@mui/material";
 
@@ -49,6 +50,7 @@ export type {
   MenuListProps,
   PaperProps,
   ScopedCssBaselineProps,
+  StackProps,
   ThemeOptions,
 } from "@mui/material";
 
@@ -100,6 +102,7 @@ export * from "./RadioGroup";
 export * from "./ScreenReaderText";
 export * from "./SearchField";
 export * from "./Select";
+export * from "./Stack";
 export * from "./Status";
 export * from "./Surface";
 export * from "./Tabs";

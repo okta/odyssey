@@ -11,11 +11,12 @@
  */
 
 import styled from "@emotion/styled";
-import { Alert, AlertTitle, Box, Link as MuiLink } from "@mui/material";
+import { Alert, AlertTitle, Box } from "@mui/material";
 import { memo, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
 import type { HtmlProps } from "./HtmlProps";
+import { Link, LinkProps } from "./Link";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
@@ -92,18 +93,17 @@ export type CalloutProps = {
 ) &
   (
     | {
-        /**
-         * If linkUrl is not undefined, this is the text of the link.
-         * If left blank, it defaults to "Learn more".
-         * Note that linkText does nothing if linkUrl is not defined
-         */
-        linkUrl: string;
-        /**
-         * If defined, the Toast will include a link to the URL
-         */
+        linkRel?: LinkProps["rel"];
+        linkTarget?: LinkProps["target"];
         linkText: string;
+        /**
+         * If defined, the Callout will include a link to the URL
+         */
+        linkUrl: LinkProps["href"];
       }
     | {
+        linkRel?: never;
+        linkTarget?: never;
         linkUrl?: never;
         linkText?: never;
       }
@@ -120,6 +120,8 @@ const ContentContainer = styled("div", {
 
 const Callout = ({
   children,
+  linkRel,
+  linkTarget,
   linkText,
   linkUrl,
   role,
@@ -153,9 +155,14 @@ const Callout = ({
         {text && <Paragraph>{text}</Paragraph>}
         {linkUrl && (
           <Box>
-            <MuiLink href={linkUrl} variant="monochrome">
+            <Link
+              href={linkUrl}
+              rel={linkRel}
+              target={linkTarget}
+              variant="monochrome"
+            >
               {linkText}
-            </MuiLink>
+            </Link>
           </Box>
         )}
       </ContentContainer>

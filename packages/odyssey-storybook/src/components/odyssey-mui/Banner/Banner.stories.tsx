@@ -22,11 +22,38 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, within } from "@storybook/testing-library";
 import { expect, jest } from "@storybook/jest";
 import { axeRun } from "../../../axe-util";
+import type { PlaywrightProps } from "../storybookTypes";
 
-const storybookMeta: Meta<typeof Banner> = {
+type PlayType = {
+  args: BannerProps;
+  canvasElement: HTMLElement;
+  step: PlaywrightProps<BannerProps>["step"];
+};
+
+const storybookMeta: Meta<BannerProps> = {
   title: "MUI Components/Banner",
   component: Banner,
   argTypes: {
+    linkRel: {
+      control: "text",
+      description:
+        "The rel attribute defines the relationship between a linked resource and the current document.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    linkTarget: {
+      control: "text",
+      description:
+        "The target property of the `HTMLAnchorElement` interface is a string that indicates where to display the linked resource.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     linkText: {
       control: "text",
       description:
@@ -138,7 +165,7 @@ export const Linked: StoryObj<BannerProps> = {
     severity: "error",
     text: "An unidentified flying object compromised Hangar 18.",
   },
-  play: async ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }: PlayType) => {
     await step("check for the link text", async () => {
       const canvas = within(canvasElement);
       const link = canvas.getByText("View report") as HTMLAnchorElement;
@@ -148,11 +175,22 @@ export const Linked: StoryObj<BannerProps> = {
   },
 };
 
+export const LinkWithTarget: StoryObj<BannerProps> = {
+  args: {
+    linkTarget: "_blank",
+    linkText: "View report",
+    linkUrl: "#anchor",
+    role: "status",
+    severity: "error",
+    text: "An unidentified flying object compromised Hangar 18.",
+  },
+};
+
 export const Dismissible: StoryObj<BannerProps> = {
   args: {
     onClose: jest.fn(),
   },
-  play: async ({ args, canvasElement, step }) => {
+  play: async ({ args, canvasElement, step }: PlayType) => {
     await step("dismiss the banner on click", async () => {
       const canvas = within(canvasElement);
       const button = canvas.getByTitle("Close");
