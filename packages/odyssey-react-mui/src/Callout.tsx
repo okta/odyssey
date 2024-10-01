@@ -93,14 +93,16 @@ export type CalloutProps = {
 ) &
   (
     | {
+        linkRel?: LinkProps["rel"];
         linkTarget?: LinkProps["target"];
-        linkUrl: LinkProps["href"];
+        linkText: string;
         /**
          * If defined, the Callout will include a link to the URL
          */
-        linkText: string;
+        linkUrl: LinkProps["href"];
       }
     | {
+        linkRel?: never;
         linkTarget?: never;
         linkUrl?: never;
         linkText?: never;
@@ -118,6 +120,7 @@ const ContentContainer = styled("div", {
 
 const Callout = ({
   children,
+  linkRel,
   linkTarget,
   linkText,
   linkUrl,
@@ -152,7 +155,12 @@ const Callout = ({
         {text && <Paragraph>{text}</Paragraph>}
         {linkUrl && (
           <Box>
-            <Link href={linkUrl} target={linkTarget} variant="monochrome">
+            <Link
+              href={linkUrl}
+              rel={linkRel}
+              target={linkTarget}
+              variant="monochrome"
+            >
               {linkText}
             </Link>
           </Box>

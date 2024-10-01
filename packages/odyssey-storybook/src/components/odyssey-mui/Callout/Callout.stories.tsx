@@ -40,6 +40,16 @@ const storybookMeta: Meta<CalloutProps> = {
         value: "ReactNode | Array<ReactNode>",
       },
     },
+    linkRel: {
+      control: "text",
+      description:
+        "The rel attribute defines the relationship between a linked resource and the current document.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     linkTarget: {
       control: "text",
       description:

@@ -34,6 +34,26 @@ const storybookMeta: Meta<BannerProps> = {
   title: "MUI Components/Banner",
   component: Banner,
   argTypes: {
+    linkRel: {
+      control: "text",
+      description:
+        "The rel attribute defines the relationship between a linked resource and the current document.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    linkTarget: {
+      control: "text",
+      description:
+        "The target property of the `HTMLAnchorElement` interface is a string that indicates where to display the linked resource.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     linkText: {
       control: "text",
       description:

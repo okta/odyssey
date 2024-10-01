@@ -49,21 +49,24 @@ export type BannerProps = {
 } & Pick<HtmlProps, "testId" | "translate"> &
   (
     | {
+        linkRel?: LinkProps["rel"];
         linkTarget?: LinkProps["target"];
-        linkUrl: LinkProps["href"];
+        linkText: string;
         /**
          * If defined, the Banner will include a link to the URL
          */
-        linkText: string;
+        linkUrl: LinkProps["href"];
       }
     | {
+        linkRel?: never;
         linkTarget?: never;
-        linkUrl?: never;
         linkText?: never;
+        linkUrl?: never;
       }
   );
 
 const Banner = ({
+  linkRel,
   linkTarget,
   linkText,
   linkUrl,
@@ -91,6 +94,7 @@ const Banner = ({
       {linkUrl && (
         <Link
           href={linkUrl}
+          rel={linkRel}
           target={linkTarget}
           translate={translate}
           variant="monochrome"
