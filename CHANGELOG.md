@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.24.0](https://github.com/okta/odyssey/compare/v1.20.0...v1.24.0) (2024-10-01)
+
+### Features
+
+- add additional action button and menu slot to table ([#2334](https://github.com/okta/odyssey/issues/2334)) ([52b3f38](https://github.com/okta/odyssey/commit/52b3f3832adc442e0219be16fe8a4d96cf100a4e))
+- adds a generic top nav component ([#2296](https://github.com/okta/odyssey/issues/2296)) ([6f3165f](https://github.com/okta/odyssey/commit/6f3165f9fd4a1d1743c975b72132d4ec186d09bb))
+- adds Aeonik and Inter to Odyssey Storybook ([#2355](https://github.com/okta/odyssey/issues/2355)) ([e89997e](https://github.com/okta/odyssey/commit/e89997eeb83a461aa1a94c47ebea44b6a4a30990))
+- adds new Shadow DOM export with better naming ([#2338](https://github.com/okta/odyssey/issues/2338)) ([0997e36](https://github.com/okta/odyssey/commit/0997e36afd4d241f5b3960528aff2865fb6d6ac3))
+- automatically scroll to the first isSelected SideNavItem ([#2325](https://github.com/okta/odyssey/issues/2325)) ([52ce441](https://github.com/okta/odyssey/commit/52ce44137ffe5601cfa6044782a21afb5449167e))
+- Misc Odyssey updates ([#2326](https://github.com/okta/odyssey/issues/2326)) ([84fcef3](https://github.com/okta/odyssey/commit/84fcef346841f0a125995a61b80958499343e7e1))
+- **odyssey-react-mui:** add overline typography variant ([#2349](https://github.com/okta/odyssey/issues/2349)) ([4530f69](https://github.com/okta/odyssey/commit/4530f699dffc11117f366ca26826e7ca51f4f296))
+
+### Bug Fixes
+
+- Add missing props to Storybook ([#2313](https://github.com/okta/odyssey/issues/2313)) ([bbf96a2](https://github.com/okta/odyssey/commit/bbf96a257160b922c0ebc31b1c5dec1fe31c35b4))
+- Applitools isn't consistently running VRTs ([#2314](https://github.com/okta/odyssey/issues/2314)) ([0c9a10c](https://github.com/okta/odyssey/commit/0c9a10ca9036e34f74dd383f26dda8dc77211c90))
+- fixes translations not working with TypeScript ([#2354](https://github.com/okta/odyssey/issues/2354)) ([37653ee](https://github.com/okta/odyssey/commit/37653ee47c2fab8b54dec26efd5115f6633c2977))
+- **odyssey-design-tokens:** using correct weights in SB ([#2363](https://github.com/okta/odyssey/issues/2363)) ([2dfa614](https://github.com/okta/odyssey/commit/2dfa614cd4c09d71d8624be690ae788e134a74ba))
+- **odyssey-react-mui:** Add min-heights to keep correct heights ([#2324](https://github.com/okta/odyssey/issues/2324)) ([40d5a50](https://github.com/okta/odyssey/commit/40d5a5070ebfab1b650066e91b451c0ef4b3f2d8))
+- remove invalid pseudo element from theme overrides ([#2310](https://github.com/okta/odyssey/issues/2310)) ([fea0793](https://github.com/okta/odyssey/commit/fea0793acf0800494270a87e4e5d65129942b99e))
+- select multioption not rendering text when you use an options object ([#2323](https://github.com/okta/odyssey/issues/2323)) ([4bafbb9](https://github.com/okta/odyssey/commit/4bafbb99e03e52ad572fba9049013c058c75da38))
+- Update Test Selector types and improve functionality ([#2333](https://github.com/okta/odyssey/issues/2333)) ([7039009](https://github.com/okta/odyssey/commit/703900947861dfb36b8996414130a8db3414ccfa))
+- updates axios, body-parser libraries ([#2357](https://github.com/okta/odyssey/issues/2357)) ([7bc1deb](https://github.com/okta/odyssey/commit/7bc1deb4dc89218882750330aa023626d73b9fa7))
+
 ## [1.23.0](https://github.com/okta/odyssey/compare/v1.19.0...v1.23.0) (2024-09-19)
 
 ### Features
