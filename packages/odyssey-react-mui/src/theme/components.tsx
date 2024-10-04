@@ -736,25 +736,39 @@ export const components = ({
           };
         },
 
-        endIcon: ({ ownerState }) => ({
-          display: "inline-flex",
-          margin: 0,
-          marginInlineStart: odysseyTokens.Spacing2,
+        endIcon: ({ ownerState }) => {
+          const hasNoChildren =
+            ownerState.children === "" ||
+            ownerState.children === undefined ||
+            ownerState.children === null;
 
-          ...(ownerState.children === undefined && {
-            marginInlineStart: 0,
-          }),
-        }),
+          return {
+            display: "inline-flex",
+            margin: 0,
+            marginInlineEnd: odysseyTokens.Spacing2,
 
-        startIcon: ({ ownerState }) => ({
-          display: "inline-flex",
-          margin: 0,
-          marginInlineEnd: odysseyTokens.Spacing2,
+            ...(hasNoChildren && {
+              marginInlineEnd: 0,
+            }),
+          };
+        },
 
-          ...(ownerState.children === undefined && {
-            marginInlineEnd: 0,
-          }),
-        }),
+        startIcon: ({ ownerState }) => {
+          const hasNoChildren =
+            ownerState.children === "" ||
+            ownerState.children === undefined ||
+            ownerState.children === null;
+
+          return {
+            display: "inline-flex",
+            margin: 0,
+            marginInlineEnd: odysseyTokens.Spacing2,
+
+            ...(hasNoChildren && {
+              marginInlineEnd: 0,
+            }),
+          };
+        },
       },
     },
     MuiButtonBase: {
