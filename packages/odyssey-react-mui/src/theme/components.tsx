@@ -623,6 +623,29 @@ export const components = ({
               },
             },
 
+            ...(ownerState.size === "small" && {
+              height: odysseyTokens.Spacing6,
+              paddingBlock: odysseyTokens.Spacing2,
+              paddingInline: odysseyTokens.Spacing3,
+              fontSize: odysseyTokens.TypographySizeBody,
+            }),
+
+            ...(ownerState.size === "large" && {
+              height: odysseyTokens.Spacing8,
+              paddingBlock: odysseyTokens.Spacing4,
+              paddingInline: odysseyTokens.Spacing4,
+            }),
+
+            ...(ownerState.fullWidth === true && {
+              width: "100%",
+              marginBlock: "0",
+              marginInline: "0",
+
+              "&:not(:last-child)": {
+                marginBlockEnd: odysseyTokens.Spacing4,
+              },
+            }),
+
             ...(ownerState.variant === "primary" && {
               color: odysseyTokens.HueNeutralWhite,
               backgroundColor: odysseyTokens.PalettePrimaryMain,
@@ -733,28 +756,81 @@ export const components = ({
                 color: odysseyTokens.TypographyColorDisabled,
               },
             }),
+
+            ...(ownerState.variant === "floatingAction" && {
+              backgroundColor: "transparent",
+              color: odysseyTokens.TypographyColorAction,
+
+              "&:hover": {
+                backgroundColor: odysseyTokens.HueNeutral100,
+              },
+
+              "&:active": {
+                backgroundColor: odysseyTokens.HueNeutral200,
+              },
+
+              "&:disabled": {
+                backgroundColor: "transparent",
+                color: odysseyTokens.TypographyColorDisabled,
+              },
+            }),
+
+            ...(ownerState.children === "" && {
+              minWidth: "auto",
+              padding: odysseyTokens.Spacing3,
+
+              [`.${buttonClasses.endIcon}, .${buttonClasses.startIcon}`]: {
+                margin: "0",
+              },
+
+              ...(ownerState.size === "large" && {
+                padding: odysseyTokens.Spacing4,
+              }),
+
+              ...(ownerState.size === "small" && {
+                padding: odysseyTokens.Spacing2,
+              }),
+
+              ...(ownerState.size === "large" && {
+                padding: odysseyTokens.Spacing4,
+              }),
+            }),
           };
         },
 
-        endIcon: ({ ownerState }) => ({
-          display: "inline-flex",
-          margin: 0,
-          marginInlineStart: odysseyTokens.Spacing2,
+        endIcon: ({ ownerState }) => {
+          const hasNoChildren =
+            ownerState.children === "" ||
+            ownerState.children === undefined ||
+            ownerState.children === null;
 
-          ...(ownerState.children === undefined && {
-            marginInlineStart: 0,
-          }),
-        }),
+          return {
+            display: "inline-flex",
+            margin: 0,
+            marginInlineStart: odysseyTokens.Spacing2,
 
-        startIcon: ({ ownerState }) => ({
-          display: "inline-flex",
-          margin: 0,
-          marginInlineEnd: odysseyTokens.Spacing2,
+            ...(hasNoChildren && {
+              marginInlineStart: 0,
+            }),
+          };
+        },
 
-          ...(ownerState.children === undefined && {
-            marginInlineEnd: 0,
-          }),
-        }),
+        startIcon: ({ ownerState }) => {
+          const hasNoChildren =
+            ownerState.children === "" ||
+            ownerState.children === undefined ||
+            ownerState.children === null;
+
+          return {
+            display: "inline-flex",
+            margin: 0,
+            marginInlineEnd: odysseyTokens.Spacing2,
+
+            ...(hasNoChildren && {
+              marginInlineEnd: 0,
+            }),
+          };
+        },
       },
     },
     MuiButtonBase: {
