@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.24.1](https://github.com/okta/odyssey/compare/v1.24.0...v1.24.1) (2024-10-04)
+
+### Bug Fixes
+
+- **odyssey-react-mui:** add back margin removed in error ([e36cb89](https://github.com/okta/odyssey/commit/e36cb89d20daf7eb68cbc58d8391ea7cf512b281))
+- **odyssey-react-mui:** add back no children styling ([2a07fa3](https://github.com/okta/odyssey/commit/2a07fa37130d48206939aa94c42add4a3f105157))
+- **odyssey-react-mui:** add back size and full width styling ([11552fd](https://github.com/okta/odyssey/commit/11552fd7818d232535eb89c86d04c3ccc15896b3))
+- **odyssey-react-mui:** fix margin start ([478e20e](https://github.com/okta/odyssey/commit/478e20ef320ee26c1fd96e93a1dabb7131808d6f))
+- **odyssey-storybook:** add back floatingAction styles ([0b84954](https://github.com/okta/odyssey/commit/0b8495484de11e35e2959c2e3b6dba80394b6a3e))
+
 ## [1.24.0](https://github.com/okta/odyssey/compare/v1.20.0...v1.24.0) (2024-10-01)
 
 ### Features
