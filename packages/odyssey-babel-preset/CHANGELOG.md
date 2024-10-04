@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.24.1](https://github.com/okta/odyssey/compare/v1.24.0...v1.24.1) (2024-10-04)
+
+**Note:** Version bump only for package @okta/odyssey-babel-preset
+
 ## [1.24.0](https://github.com/okta/odyssey/compare/v1.20.0...v1.24.0) (2024-10-01)
 
 **Note:** Version bump only for package @okta/odyssey-babel-preset
