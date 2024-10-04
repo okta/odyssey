@@ -11,14 +11,14 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
   [#2348](https://github.com/okta/odyssey/pull/2348)
 - **Ensure Storybook demo of row reordering actually reorders rows**  
   [#2366](https://github.com/okta/odyssey/pull/2366)
-- **Fix hint link styling**  
+- **Fix hint link styling (blue to momochrome)**  
   [#2353](https://github.com/okta/odyssey/pull/2353)
 - **Add overline typography variant**  
   [#2349](https://github.com/okta/odyssey/pull/2349)
 - **Miscellaneous Odyssey updates**  
   [#2326](https://github.com/okta/odyssey/pull/2326)
 
-## [1.23.0](https://github.com/okta/odyssey/compare/v1.19.0...v1.23.0) (2024-09-19)
+## [1.23.0](https://github.com/okta/odyssey/compare/v1.22.0...v1.23.0) (2024-09-19)
 
 ### Features
 
@@ -40,7 +40,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - Update Test Selector types and improve functionality ([#2333](https://github.com/okta/odyssey/issues/2333)) ([7039009](https://github.com/okta/odyssey/commit/703900947861dfb36b8996414130a8db3414ccfa))
 - updates axios, body-parser libraries ([#2357](https://github.com/okta/odyssey/issues/2357)) ([7bc1deb](https://github.com/okta/odyssey/commit/7bc1deb4dc89218882750330aa023626d73b9fa7))
 
-## [1.22.0](https://github.com/okta/odyssey/compare/v1.19.0...v1.22.0) (2024-09-05)
+## [1.22.0](https://github.com/okta/odyssey/compare/v1.21.0...v1.22.0) (2024-09-05)
 
 ### Features
 
