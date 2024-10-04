@@ -623,6 +623,29 @@ export const components = ({
               },
             },
 
+            ...(ownerState.size === "small" && {
+              height: odysseyTokens.Spacing6,
+              paddingBlock: odysseyTokens.Spacing2,
+              paddingInline: odysseyTokens.Spacing3,
+              fontSize: odysseyTokens.TypographySizeBody,
+            }),
+
+            ...(ownerState.size === "large" && {
+              height: odysseyTokens.Spacing8,
+              paddingBlock: odysseyTokens.Spacing4,
+              paddingInline: odysseyTokens.Spacing4,
+            }),
+
+            ...(ownerState.fullWidth === true && {
+              width: "100%",
+              marginBlock: "0",
+              marginInline: "0",
+
+              "&:not(:last-child)": {
+                marginBlockEnd: odysseyTokens.Spacing4,
+              },
+            }),
+
             ...(ownerState.variant === "primary" && {
               color: odysseyTokens.HueNeutralWhite,
               backgroundColor: odysseyTokens.PalettePrimaryMain,
