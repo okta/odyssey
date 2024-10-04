@@ -757,6 +757,24 @@ export const components = ({
               },
             }),
 
+            ...(ownerState.variant === "floatingAction" && {
+              backgroundColor: "transparent",
+              color: odysseyTokens.TypographyColorAction,
+
+              "&:hover": {
+                backgroundColor: odysseyTokens.HueNeutral100,
+              },
+
+              "&:active": {
+                backgroundColor: odysseyTokens.HueNeutral200,
+              },
+
+              "&:disabled": {
+                backgroundColor: "transparent",
+                color: odysseyTokens.TypographyColorDisabled,
+              },
+            }),
+
             ...(ownerState.children === "" && {
               minWidth: "auto",
               padding: odysseyTokens.Spacing3,
