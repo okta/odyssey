@@ -733,6 +733,27 @@ export const components = ({
                 color: odysseyTokens.TypographyColorDisabled,
               },
             }),
+
+            ...(ownerState.children === "" && {
+              minWidth: "auto",
+              padding: odysseyTokens.Spacing3,
+
+              [`.${buttonClasses.endIcon}, .${buttonClasses.startIcon}`]: {
+                margin: "0",
+              },
+
+              ...(ownerState.size === "large" && {
+                padding: odysseyTokens.Spacing4,
+              }),
+
+              ...(ownerState.size === "small" && {
+                padding: odysseyTokens.Spacing2,
+              }),
+
+              ...(ownerState.size === "large" && {
+                padding: odysseyTokens.Spacing4,
+              }),
+            }),
           };
         },
 
