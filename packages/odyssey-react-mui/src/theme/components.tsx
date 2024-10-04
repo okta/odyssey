@@ -745,10 +745,10 @@ export const components = ({
           return {
             display: "inline-flex",
             margin: 0,
-            marginInlineEnd: odysseyTokens.Spacing2,
+            marginInlineStart: odysseyTokens.Spacing2,
 
             ...(hasNoChildren && {
-              marginInlineEnd: 0,
+              marginInlineStart: 0,
             }),
           };
         },
