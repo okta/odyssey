@@ -3,20 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.24.1](https://github.com/okta/odyssey/compare/v1.24.0...v1.24.1) (2024-10-04)
+
+### Bug Fixes
+
+- **odyssey-react-mui:** add back margin removed in error ([e36cb89](https://github.com/okta/odyssey/commit/e36cb89d20daf7eb68cbc58d8391ea7cf512b281))
+- **odyssey-react-mui:** add back no children styling ([2a07fa3](https://github.com/okta/odyssey/commit/2a07fa37130d48206939aa94c42add4a3f105157))
+- **odyssey-react-mui:** add back size and full width styling ([11552fd](https://github.com/okta/odyssey/commit/11552fd7818d232535eb89c86d04c3ccc15896b3))
+- **odyssey-react-mui:** fix margin start ([478e20e](https://github.com/okta/odyssey/commit/478e20ef320ee26c1fd96e93a1dabb7131808d6f))
+
 ## [1.24.0](https://github.com/okta/odyssey/compare/v1.23.0...v1.24.0) (2024-10-01)
 
-- **Add `BackgroundContext` for gray background component theme changes and `ContrastProvider` for detecting background color**  
-  [#2364](https://github.com/okta/odyssey/pull/2364)
-- **Add meta text to DataView**  
-  [#2348](https://github.com/okta/odyssey/pull/2348)
-- **Ensure Storybook demo of row reordering actually reorders rows**  
-  [#2366](https://github.com/okta/odyssey/pull/2366)
-- **Fix hint link styling (blue to momochrome)**  
-  [#2353](https://github.com/okta/odyssey/pull/2353)
-- **Add overline typography variant**  
-  [#2349](https://github.com/okta/odyssey/pull/2349)
-- **Miscellaneous Odyssey updates**  
-  [#2326](https://github.com/okta/odyssey/pull/2326)
+### Features
+
+- Add `BackgroundContext` for gray background component theme changes and `ContrastProvider` for detecting background color ([#2364](https://github.com/okta/odyssey/pull/2364))
+- Add meta text to DataView ([#2348](https://github.com/okta/odyssey/pull/2348))
+- Add overline typography variant ([#2349](https://github.com/okta/odyssey/pull/2349))
+
+### Bug fixes
+
+- Fix hint link styling (blue to momochrome) ([#2353](https://github.com/okta/odyssey/pull/2353))
+
+### Other changes
+
+- Ensure Storybook demo of row reordering actually reorders rows ([#2366](https://github.com/okta/odyssey/pull/2366))
+
+- Miscellaneous Odyssey updates ([#2326](https://github.com/okta/odyssey/pull/2326))
 
 ## [1.23.0](https://github.com/okta/odyssey/compare/v1.22.0...v1.23.0) (2024-09-19)
 
