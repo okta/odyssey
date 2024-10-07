@@ -1057,6 +1057,10 @@ export const components = ({
               [`& .${chipClasses.deleteIcon}`]: {
                 color: odysseyTokens.HueNeutral300,
               },
+
+              [`& .${chipClasses.icon}`]: {
+                color: odysseyTokens.HueNeutral300,
+              },
             },
 
             ...(ownerState.clickable && {
