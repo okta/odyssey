@@ -38,7 +38,7 @@ import {
   OptionLabelContainer,
   OptionMetaDataComponent,
   OptionProps,
-} from "./Picker";
+} from "./BasicPicker";
 import { Heading6 } from "../../Typography";
 
 type Adornment = ReactNode | string;
