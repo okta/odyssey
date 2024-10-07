@@ -15,50 +15,35 @@ import {
   GroupPickerProps,
   GroupPickerOptionType,
 } from "@okta/odyssey-react-mui/labs";
-import { Meta, StoryObj } from "@storybook/react";
-import {
-  FolderIcon,
-  GlobeIcon,
-  SettingsIcon,
-  SyncIcon,
-  VideoIcon,
-} from "@okta/odyssey-react-mui/icons";
 
-import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
+import { Meta, StoryObj } from "@storybook/react";
+
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import demoImage from "./demo.png";
 
 const stations: ReadonlyArray<GroupPickerOptionType> = [
-  { id: "en", title: "English", description: "", logo: <VideoIcon /> },
+  { id: "en", name: "English", description: "", logo: demoImage },
   {
     id: "fr",
-    title: "French",
+    name: "French",
     description: "Français",
-    logo: <SettingsIcon />,
+    logo: "",
     usersCount: 100,
     appsCount: 200,
   },
   {
     id: "jp",
-    title: "Japanese",
+    name: "Japanese",
     description: "日本語",
-    logo: <GlobeIcon />,
+    logo: demoImage,
     usersCount: 0,
     appsCount: 0,
   },
   {
     id: "es",
-    title: "Spanish",
+    name: "Spanish",
     description: "Español",
-    logo: <SyncIcon />,
-    usersCount: 101,
-    appsCount: 202,
-    groupPushMappingsCount: 303,
-  },
-  {
-    id: "image-as-logo",
-    title: "Image logo",
-    description: "This option has an image for a logo",
-    logo: "https://placehold.co/600x400",
+    logo: demoImage,
     usersCount: 101,
     appsCount: 202,
     groupPushMappingsCount: 303,
@@ -78,8 +63,15 @@ const storybookMeta: Meta<typeof GroupPicker> = {
         },
       },
     },
-    hint: fieldComponentPropsMetaData.hint,
-    HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
+    hint: {
+      control: "text",
+      description: "The hint text for the autocomplete input",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     isCustomValueAllowed: {
       control: "boolean",
       description: "Allows the input of custom values",
@@ -204,98 +196,16 @@ export const Multiple: StoryObj<GroupPickerPropsType> = {
 export const Disabled: StoryObj<GroupPickerPropsType> = {
   args: {
     isDisabled: true,
-    value: {
-      id: "en",
-      title: "English",
-      description: "",
-    },
-  },
-};
-
-export const WithUsersCount: StoryObj<GroupPickerPropsType> = {
-  args: {
-    options: [
+    hasMultipleChoices: true,
+    value: [
+      { id: "en", name: "English", description: "", logo: demoImage },
       {
-        id: "en",
-        title: "English",
-        description: "",
-        logo: <GlobeIcon />,
-        usersCount: 10,
-      },
-      {
-        id: "es",
-        title: "Spanish",
-        description: "",
-        usersCount: 10,
-      },
-    ],
-  },
-};
-
-export const WithAppsCount: StoryObj<GroupPickerPropsType> = {
-  args: {
-    options: [
-      {
-        id: "en",
-        title: "English",
-        description: "",
-        logo: <GlobeIcon />,
-        appsCount: 10,
-      },
-    ],
-  },
-};
-
-export const WithGroupMappingsCount: StoryObj<GroupPickerPropsType> = {
-  args: {
-    options: [
-      {
-        id: "en",
-        title: "English",
-        description: "",
-        logo: <GlobeIcon />,
-        groupPushMappingsCount: 10,
-      },
-    ],
-  },
-};
-
-export const WithCustomDetails: StoryObj<GroupPickerPropsType> = {
-  args: {
-    options: [
-      {
-        id: "en",
-        title: "English",
-        description: "",
-        logo: <GlobeIcon />,
-        customDetails: [
-          {
-            icon: <FolderIcon />,
-            detailText: 40,
-          },
-        ],
-      },
-    ],
-  },
-};
-
-export const WithKitchenSink: StoryObj<GroupPickerPropsType> = {
-  args: {
-    options: [
-      {
-        id: "en",
-        title: "English",
-        description: "",
-        logo: <GlobeIcon />,
-        usersCount: 10,
-        appsCount: 20,
-        groupPushMappingsCount: 30,
-        customDetails: [
-          {
-            icon: <FolderIcon />,
-            detailText: 40,
-          },
-        ],
+        id: "jp",
+        name: "Japanese",
+        description: "日本語",
+        logo: demoImage,
+        usersCount: 0,
+        appsCount: 0,
       },
     ],
   },
