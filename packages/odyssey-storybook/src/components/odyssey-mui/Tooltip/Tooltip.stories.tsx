@@ -175,18 +175,6 @@ export const StatusWrapper: StoryObj<TooltipProps> = {
   },
 };
 
-export const Disabled: StoryObj<TooltipProps> = {
-  ...Template,
-  args: {
-    children: (
-      <Button variant="secondary" isDisabled startIcon={<DownloadIcon />} />
-    ),
-    ariaType: "description",
-    placement: "top",
-    text: "You don't have access to these logs",
-  },
-};
-
 export const Placement: StoryObj<TooltipProps> = {
   render: function C({}) {
     return (

@@ -989,3 +989,28 @@ export const LoadMore: StoryObj<DataViewMetaProps> = {
     hasFilters: true,
   },
 };
+
+export const PaginationHook: StoryObj<DataViewMetaProps> = {
+  render: function C() {
+    const [data, setData] = useState<Person[]>(personData);
+    const { getData } = useDataCallbacks(data, setData);
+
+    const onPaginationChange = (pagination: {
+      pageIndex: number;
+      pageSize: number;
+    }) => {
+      console.log(pagination);
+    };
+
+    return (
+      <DataView
+        hasPagination
+        onPaginationChange={onPaginationChange}
+        tableLayoutOptions={{
+          columns: personColumns,
+        }}
+        getData={getData}
+      />
+    );
+  },
+};

@@ -41,7 +41,9 @@ export type LinkProps = {
    */
   onClick?: MuiLinkProps["onClick"];
   /**
-   * The HTML `rel` attribute for the Link
+   * The rel attribute defines the relationship between a linked resource and the current document
+   *
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel
    */
   rel?: string;
   /**

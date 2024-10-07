@@ -19,10 +19,11 @@ import {
   Heading4,
   Heading5,
   Heading6,
+  Legend,
+  Overline,
   Paragraph,
   Subordinate,
   Support,
-  Legend,
   TypographyProps,
   typographyColorValues,
   typographyVariantMapping,
@@ -40,9 +41,10 @@ const variantMapping = {
   h5: Heading5,
   h6: Heading6,
   body: Paragraph,
+  legend: Legend,
+  overline: Overline,
   subordinate: Subordinate,
   support: Support,
-  legend: Legend,
 };
 
 const storybookMeta: Meta<TypographyProps> = {
@@ -158,7 +160,7 @@ export const Heading1Story: StoryObj<TypographyProps> = {
   // h1 & h2 stories throw the "Incomplete" accessibility violation on color-contrast. Even though the contrast is correct,
   // disabling it for now as the typography color- contrast test is covered by other headings below.
   // play: async ({}) => {
-  //   await axeRun('Typopgraphy h1');
+  //   await axeRun('Typography h1');
   // },
 };
 
@@ -170,7 +172,7 @@ export const Heading2Story: StoryObj<TypographyProps> = {
   },
   render: (args) => <Heading2 {...args} children={args.children} />,
   // play: async ({}) => {
-  //   await axeRun('Typopgraphy h2');
+  //   await axeRun('Typography h2');
   // },
 };
 
@@ -182,7 +184,7 @@ export const Heading3Story: StoryObj<TypographyProps> = {
   },
   render: (args) => <Heading3 {...args} children={args.children} />,
   play: async ({}) => {
-    await axeRun("Typopgraphy h3");
+    await axeRun("Typography h3");
   },
 };
 
@@ -194,7 +196,7 @@ export const Heading4Story: StoryObj<TypographyProps> = {
   },
   render: (args) => <Heading4 {...args} children={args.children} />,
   play: async ({}) => {
-    await axeRun("Typopgraphy h4");
+    await axeRun("Typography h4");
   },
 };
 
@@ -206,7 +208,7 @@ export const Heading5Story: StoryObj<TypographyProps> = {
   },
   render: (args) => <Heading5 {...args} children={args.children} />,
   play: async ({}) => {
-    await axeRun("Typopgraphy h5");
+    await axeRun("Typography h5");
   },
 };
 
@@ -218,7 +220,7 @@ export const Heading6Story: StoryObj<TypographyProps> = {
   },
   render: (args) => <Heading6 {...args} children={args.children} />,
   play: async ({}) => {
-    await axeRun("Typopgraphy h6");
+    await axeRun("Typography h6");
   },
 };
 
@@ -230,31 +232,7 @@ export const BodyStory: StoryObj<TypographyProps> = {
   },
   render: (args) => <Paragraph {...args} children={args.children} />,
   play: async ({}) => {
-    await axeRun("Typopgraphy body");
-  },
-};
-
-export const SubordinateStory: StoryObj<TypographyProps> = {
-  name: "Subordinate",
-  args: {
-    children: "This is subordinate text.",
-    variant: "subordinate",
-  },
-  render: (args) => <Subordinate {...args} children={args.children} />,
-  play: async ({}) => {
-    await axeRun("Typopgraphy subordinate");
-  },
-};
-
-export const SupportStory: StoryObj<TypographyProps> = {
-  name: "Support",
-  args: {
-    children: "This is support text.",
-    variant: "support",
-  },
-  render: (args) => <Support {...args} children={args.children} />,
-  play: async ({}) => {
-    await axeRun("Typopgraphy support");
+    await axeRun("Typography body");
   },
 };
 
@@ -266,7 +244,43 @@ export const LegendStory: StoryObj<TypographyProps> = {
   },
   render: (args) => <Legend {...args} children={args.children} />,
   play: async ({}) => {
-    await axeRun("Typopgraphy legend");
+    await axeRun("Typography legend");
+  },
+};
+
+export const OverlineStory: StoryObj<TypographyProps> = {
+  name: "Overline",
+  args: {
+    children: "This is an Overline",
+    variant: "overline",
+  },
+  render: (args) => <Overline {...args} children={args.children} />,
+  play: async ({}) => {
+    await axeRun("Typography Overline");
+  },
+};
+
+export const SubordinateStory: StoryObj<TypographyProps> = {
+  name: "Subordinate",
+  args: {
+    children: "This is subordinate text.",
+    variant: "subordinate",
+  },
+  render: (args) => <Subordinate {...args} children={args.children} />,
+  play: async ({}) => {
+    await axeRun("Typography subordinate");
+  },
+};
+
+export const SupportStory: StoryObj<TypographyProps> = {
+  name: "Support",
+  args: {
+    children: "This is support text.",
+    variant: "support",
+  },
+  render: (args) => <Support {...args} children={args.children} />,
+  play: async ({}) => {
+    await axeRun("Typography support");
   },
 };
 

@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2022-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -10,15 +10,17 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-declare module "@mui/material/styles" {
-  interface PaletteColor {
-    darker?: string;
-    lighter?: string;
-  }
-  interface SimplePaletteColorOptions {
-    darker?: string;
-    lighter?: string;
-  }
-}
+import { render, screen } from "@testing-library/react";
+import { Typography } from "./Typography";
 
-export {};
+describe("Typography", () => {
+  test("renders Overline", () => {
+    render(
+      <Typography ariaLabel="overline" variant="overline">
+        Overline test
+      </Typography>,
+    );
+
+    expect(screen.getByLabelText("overline")).toBeVisible();
+  });
+});

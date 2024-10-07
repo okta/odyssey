@@ -40,6 +40,26 @@ const storybookMeta: Meta<CalloutProps> = {
         value: "ReactNode | Array<ReactNode>",
       },
     },
+    linkRel: {
+      control: "text",
+      description:
+        "The rel attribute defines the relationship between a linked resource and the current document.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    linkTarget: {
+      control: "text",
+      description:
+        "The target property of the `HTMLAnchorElement` interface is a string that indicates where to display the linked resource.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     linkText: {
       control: "text",
       description:
@@ -158,6 +178,18 @@ export const WithLink: StoryObj<CalloutProps> = {
     severity: "error",
     title: "Safety checks failed",
     text: "There is an issue with the fuel mixture ratios. Reconfigure the fuel mixture and perform the safety checks again.",
+    linkText: "Visit fueling console",
+    linkUrl: "#",
+  },
+};
+
+export const WithLinkAndTarget: StoryObj<CalloutProps> = {
+  args: {
+    role: "alert",
+    severity: "error",
+    title: "Safety checks failed",
+    text: "There is an issue with the fuel mixture ratios. Reconfigure the fuel mixture and perform the safety checks again.",
+    linkTarget: "_blank",
     linkText: "Visit fueling console",
     linkUrl: "#",
   },
