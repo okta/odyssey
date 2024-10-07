@@ -10,6 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export { adornmentSizeValues } from "./AdaptablePicker";
+export { adornmentSizeValues } from "./ComposablePicker";
 export * from "./BasicPicker";
 export * from "./PickerWithOptionAdornment";

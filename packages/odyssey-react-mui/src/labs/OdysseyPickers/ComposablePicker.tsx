@@ -31,6 +31,7 @@ export type BasePickerProps<
 };
 
 export type BasePickerType = {
+  displayName: string;
   <
     OptionType,
     HasMultipleChoices extends boolean | undefined,
@@ -44,7 +45,7 @@ export type BasePickerType = {
   ): ReactNode;
 };
 
-export type AdaptablePickerProps<
+export type ComposablePickerProps<
   OptionType,
   HasMultipleChoices extends boolean | undefined,
   IsCustomValueAllowed extends boolean | undefined,
@@ -71,7 +72,7 @@ export type AdaptablePickerProps<
   >["renderTags"];
 };
 
-const AdaptablePicker = <
+const ComposablePicker = <
   OptionType,
   HasMultipleChoices extends boolean | undefined,
   IsCustomValueAllowed extends boolean | undefined,
@@ -106,7 +107,7 @@ const AdaptablePicker = <
   value,
   testId,
   translate,
-}: AdaptablePickerProps<
+}: ComposablePickerProps<
   OptionType,
   HasMultipleChoices,
   IsCustomValueAllowed
@@ -172,8 +173,10 @@ const AdaptablePicker = <
 };
 
 // Need the `typeof Autocomplete` because generics don't get passed through
-const MemoizedAdaptablePicker = memo(AdaptablePicker) as typeof AdaptablePicker;
-// @ts-expect-error displayName is expected to not be on `typeof AdaptablePicker`
-MemoizedAdaptablePicker.displayName = "AdaptablePicker";
+const MemoizedComposablePicker = memo(
+  ComposablePicker,
+) as typeof ComposablePicker;
+// @ts-expect-error displayName is expected to not be on `typeof ComposablePicker`
+MemoizedComposablePicker.displayName = "ComposablePicker";
 
-export { MemoizedAdaptablePicker as AdaptablePicker };
+export { MemoizedComposablePicker as ComposablePicker };

@@ -20,11 +20,11 @@ import {
 import styled from "@emotion/styled";
 
 import {
-  AdaptablePicker,
+  ComposablePicker,
   type AdornmentSize,
   type BasePickerProps,
   type BasePickerType,
-} from "./AdaptablePicker";
+} from "./ComposablePicker";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
@@ -296,7 +296,7 @@ const PickerWithOptionAdornment: PickerWithOptionAdornmentComponentType = <
   );
 
   return (
-    <AdaptablePicker<OptionType, HasMultipleChoices, IsCustomValueAllowed>
+    <ComposablePicker<OptionType, HasMultipleChoices, IsCustomValueAllowed>
       ariaDescribedBy={ariaDescribedBy}
       defaultValue={defaultValue}
       errorMessage={errorMessage}
@@ -335,55 +335,7 @@ const PickerWithOptionAdornment: PickerWithOptionAdornmentComponentType = <
 const MemoizedPickerWithOptionAdornment = memo(
   PickerWithOptionAdornment,
 ) as BasePickerType;
-// @ts-expect-error displayName is expected to not be on `typeof AdaptablePicker`
+
 MemoizedPickerWithOptionAdornment.displayName = "PickerWithOptionAdornment";
 
 export { MemoizedPickerWithOptionAdornment as PickerWithOptionAdornment };
-
-// const TitleDescription = (
-//   props: AdaptablePickerProps<
-//     TitleDescription,
-//     boolean | undefined,
-//     boolean | undefined
-//   >,
-// ) => (
-//   <AdaptablePicker<TitleDescription, boolean | undefined, boolean | undefined> {...props} />
-// );
-
-// AdaptablePicker.TitleDescription = TitleDescription;
-
-// const IconTitleDescription = (
-//   props: AdaptablePickerProps<
-//     IconTitleDescription,
-//     boolean | undefined,
-//     boolean | undefined
-//   >,
-// ) => (
-//   <AdaptablePicker<
-//     IconTitleDescription,
-//     boolean | undefined,
-//     boolean | undefined
-//   >
-//     {...props}
-//   />
-// );
-
-// AdaptablePicker.IconTitleDescription = IconTitleDescription;
-
-// const IconTitleDescriptionMetadata = (
-//   props: AdaptablePickerProps<
-//     IconTitleDescriptionMetadata,
-//     boolean | undefined,
-//     boolean | undefined
-//   >,
-// ) => (
-//   <AdaptablePicker<
-//     IconTitleDescriptionMetadata,
-//     boolean | undefined,
-//     boolean | undefined
-//   >
-//     {...props}
-//   />
-// );
-
-// AdaptablePicker.IconTitleDescriptionMetadata = IconTitleDescriptionMetadata;
