@@ -14,8 +14,14 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { DateTime } from "luxon";
 import { useTranslation } from "react-i18next";
 
-import { FieldComponentProps } from "../FieldComponentProps";
-import { ComponentControlledState, getControlState } from "../inputUtils";
+import { FieldComponentProps } from "../../FieldComponentProps";
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  CalendarIcon,
+  ChevronDownIcon,
+} from "../../icons.generated";
+import { ComponentControlledState, getControlState } from "../../inputUtils";
 import { useDateFieldsTranslations } from "./useDateFieldsTranslations";
 
 const { CONTROLLED } = ComponentControlledState;
@@ -89,9 +95,12 @@ export const useOdysseyDateFields = ({
   timeZone = "system",
   value,
 }: OdysseyDateFieldProps & Pick<FieldComponentProps, "errorMessage">) => {
-  const internalValueRef = useRef<DateTime | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [popperElement, setPopperElement] = useState<HTMLInputElement | null>();
   const [internalTimeZone, setInternalTimeZone] = useState(timeZone);
 
+  const internalValueRef = useRef<DateTime | null>(null);
+  
   const [validationDateRanges, setValidationDateRanges] =
     useState<ValidationDateRanges>({
       minDate: undefined,
@@ -183,17 +192,29 @@ export const useOdysseyDateFields = ({
     return null;
   }, [defaultValue, validationDateRanges, value]);
 
+  const commonIcons = {
+    ArrowLeftIcon: ArrowLeftIcon,
+    ArrowRightIcon: ArrowRightIcon,
+    CalendarIcon: CalendarIcon,
+    ChevronDownIcon: ChevronDownIcon,
+  };
+
   return {
+    commonIcons,
     defaultedLanguageCode,
     formatDateTimeToUtcIsoDateString,
     inputValues,
     internalTimeZone,
     internalValueRef,
+    isOpen,
     isValidTimeZone,
     localeText,
     maxDate: validationDateRanges.maxDate,
     minDate: validationDateRanges.minDate,
+    popperElement,
     setInternalTimeZone,
+    setIsOpen,
+    setPopperElement,
     shouldDisableDate,
     shouldDisableMonth,
     shouldDisableYear,

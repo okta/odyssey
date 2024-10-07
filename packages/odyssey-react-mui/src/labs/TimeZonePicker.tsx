@@ -13,7 +13,7 @@
 import { memo, useCallback } from "react";
 
 import { Autocomplete, AutocompleteProps } from "../Autocomplete";
-import { TimeZoneOption } from "./useOdysseyDateFields";
+import { TimeZoneOption } from "./DatePickers/useOdysseyDateFields";
 
 export type TimeZonePickerProps = {
   label: string;
