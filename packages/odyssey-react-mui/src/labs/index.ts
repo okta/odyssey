@@ -33,7 +33,12 @@ export * from "./PageTemplate";
 /** @deprecated Will be removed in a future Odyssey version in lieu of DataTable */
 export * from "./PaginatedTable";
 
-export * from "./GroupPicker";
+export {
+  /** @deprecated Will be removed in a future Odyssey version. Use `PickerWithOptionAdornment` */
+  GroupPicker,
+  type GroupPickerOptionType,
+  type GroupPickerProps,
+} from "./GroupPicker";
 
 export * from "./NavAccordion";
 export * from "./SideNav";
