@@ -27,8 +27,57 @@ import {
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-const languages = [
+const languagesNoDescription = [
   { value: "en", label: "English", description: "", icon: <VideoIcon /> },
+  {
+    value: "fr",
+    label: "French",
+  },
+  {
+    value: "jp",
+    label: "Japanese",
+  },
+  {
+    value: "es",
+    label: "Spanish",
+  },
+];
+
+const languagesNoMetaData = [
+  {
+    value: "en",
+    label: "English",
+    description: "A description of the English language",
+  },
+  {
+    value: "fr",
+    label: "French",
+    description: "Français",
+  },
+  {
+    value: "jp",
+    label: "Japanese",
+    description: "日本語",
+  },
+  {
+    value: "es",
+    label: "Spanish",
+    description: "Español",
+  },
+];
+
+const languagesKitchenSink = [
+  {
+    value: "en",
+    label: "English",
+    description: "A description of the English language",
+    metaData: [
+      {
+        icon: <FolderIcon />,
+        detailText: "1",
+      },
+    ],
+  },
   {
     value: "fr",
     label: "French",
@@ -36,7 +85,7 @@ const languages = [
     metaData: [
       {
         icon: <SettingsIcon />,
-        detailText: "10",
+        detailText: "100",
       },
     ],
   },
@@ -46,8 +95,8 @@ const languages = [
     description: "日本語",
     metaData: [
       {
-        icon: <SettingsIcon />,
-        detailText: "10",
+        icon: <GlobeIcon />,
+        detailText: "1000",
       },
     ],
   },
@@ -58,14 +107,9 @@ const languages = [
     metaData: [
       {
         icon: <SettingsIcon />,
-        detailText: "10",
+        detailText: "37",
       },
     ],
-  },
-  {
-    value: "image-as-logo",
-    label: "Image logo",
-    description: "This option has an image for a logo",
   },
 ];
 
@@ -188,7 +232,7 @@ const storybookMeta: Meta<PickerType> = {
   args: {
     label: "Languages",
     hint: "Languages supported by the system",
-    options: languages,
+    options: languagesNoDescription,
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
@@ -203,6 +247,12 @@ type PickerPropsType = PickerProps<
 >;
 
 export const PickerDefault: StoryObj<PickerPropsType> = {};
+
+export const PickerWithDescription: StoryObj<PickerPropsType> = {
+  args: {
+    options: languagesNoMetaData,
+  },
+};
 
 export const Multiple: StoryObj<PickerPropsType> = {
   args: {
@@ -223,48 +273,6 @@ export const Disabled: StoryObj<PickerPropsType> = {
 
 export const WithMetaData: StoryObj<PickerPropsType> = {
   args: {
-    options: [
-      {
-        value: "en",
-        label: "English",
-        description: "",
-        metaData: [
-          {
-            icon: <SettingsIcon />,
-            detailText: "10",
-          },
-          {
-            icon: <GlobeIcon />,
-            detailText: "1",
-          },
-          {
-            icon: <FolderIcon />,
-            detailText: 40,
-          },
-        ],
-      },
-      {
-        value: "es",
-        label: "Spanish",
-        description: "",
-        metaData: [
-          {
-            icon: <SettingsIcon />,
-            detailText: "10",
-          },
-        ],
-      },
-      {
-        value: "image-as-logo",
-        label: "Image logo",
-        description: "This option has an image for a logo",
-        metaData: [
-          {
-            icon: <SettingsIcon />,
-            detailText: "10",
-          },
-        ],
-      },
-    ],
+    options: languagesKitchenSink,
   },
 };

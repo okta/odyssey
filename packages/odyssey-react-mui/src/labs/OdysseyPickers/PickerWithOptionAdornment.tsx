@@ -23,9 +23,8 @@ import {
   AdaptablePicker,
   type AdornmentSize,
   type BasePickerProps,
+  type BasePickerType,
 } from "./AdaptablePicker";
-// import { AutocompleteProps } from "../Autocomplete";
-// import { CustomizableAutocomplete } from "../CustomizableAutocomplete";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
@@ -332,10 +331,10 @@ const PickerWithOptionAdornment: PickerWithOptionAdornmentComponentType = <
   );
 };
 
-// Need the `typeof Autocomplete` because generics don't get passed through
+// Need the `as BasePickerType` because generics don't get passed through
 const MemoizedPickerWithOptionAdornment = memo(
   PickerWithOptionAdornment,
-) as typeof AdaptablePicker;
+) as BasePickerType;
 // @ts-expect-error displayName is expected to not be on `typeof AdaptablePicker`
 MemoizedPickerWithOptionAdornment.displayName = "PickerWithOptionAdornment";
 

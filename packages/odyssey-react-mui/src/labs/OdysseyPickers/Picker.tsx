@@ -20,15 +20,16 @@ import {
 } from "react";
 import styled from "@emotion/styled";
 
-// import { AutocompleteProps } from "../../Autocomplete";
-import { AdaptablePicker, type BasePickerProps } from "./AdaptablePicker";
-import { Heading6 } from "../../Typography";
+import {
+  AdaptablePicker,
+  type BasePickerProps,
+  type BasePickerType,
+} from "./AdaptablePicker";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
 } from "../../OdysseyDesignTokensContext";
-// import { Title } from "@mui/icons-material";
-// import { useAutocomplete } from "../useAutocomplete";
+import { Heading6 } from "../../Typography";
 
 export const StyledOption = styled.li<{ hasAdornment?: boolean }>(
   ({ hasAdornment }) => ({
@@ -37,47 +38,6 @@ export const StyledOption = styled.li<{ hasAdornment?: boolean }>(
     }),
   }),
 );
-
-// const OptionAdornmentContainer = styled("div", {
-//   shouldForwardProp: (prop) =>
-//     prop !== "odysseyDesignTokens" && prop !== "isLogo",
-// })<{ isLogo?: boolean; odysseyDesignTokens: DesignTokens }>(
-//   ({ isLogo, odysseyDesignTokens }) => ({
-//     position: "relative",
-//     overflow: "hidden",
-//     width: isLogo ? odysseyDesignTokens.Spacing8 : odysseyDesignTokens.Spacing5,
-//     height: isLogo
-//       ? odysseyDesignTokens.Spacing8
-//       : odysseyDesignTokens.Spacing5,
-//     marginInlineEnd: odysseyDesignTokens.Spacing3,
-
-//     ...(!isLogo && {
-//       alignSelf: "flex-start",
-//       // push icon up by one px for better visual alignment
-//       bottom: "1px",
-//     }),
-
-//     svg: {
-//       width: "100%",
-//       height: "auto",
-//     },
-
-//     img: {
-//       position: "absolute",
-//       top: "50%",
-//       width: "100%",
-//       transform: "translateY(-50%)",
-//     },
-//   }),
-// );
-
-// const OptionContent = styled("div", {
-//   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-// })<{ odysseyDesignTokens: DesignTokens }>(({  }) => ({
-//   // paddingInlineStart: `calc(
-//   //   ${odysseyDesignTokens.Spacing3} + ${odysseyDesignTokens.Spacing5}
-//   // )`,
-// }));
 
 export const OptionLabelContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
@@ -163,31 +123,6 @@ export const OptionMetaDataComponent = ({
   );
 };
 
-// type OptionIconProps = {
-//   icon: IconLabelDescription["icon"];
-//   odysseyDesignTokens: DesignTokens;
-// };
-
-// const OptionIcon = ({ icon, odysseyDesignTokens }: OptionIconProps) => {
-//   const isImageLogo = typeof icon === "string";
-
-//   if (isImageLogo) {
-//     return (
-//       <OptionAdornmentContainer odysseyDesignTokens={odysseyDesignTokens}>
-//         {/* NOTE: Intentionally leaving alt as an empty string here so screen readers will ignore this image */}
-//         {/* Image should be suffciently described by the adjacent title and/or description of the option */}
-//         <img src={icon} alt="" role="presentation" />
-//       </OptionAdornmentContainer>
-//     );
-//   } else {
-//     return (
-//       <OptionAdornmentContainer odysseyDesignTokens={odysseyDesignTokens}>
-//         {icon}
-//       </OptionAdornmentContainer>
-//     );
-//   }
-// };
-
 export const OptionDescriptionComponent = ({
   description,
   odysseyDesignTokens,
@@ -203,37 +138,6 @@ export const OptionDescriptionComponent = ({
     )
   );
 };
-
-// type OptionLogoProps = {
-//   logo: LogoLabelDescription["logo"];
-//   odysseyDesignTokens: DesignTokens;
-// };
-
-// const OptionLogo = ({ logo, odysseyDesignTokens }: OptionLogoProps) => {
-//   const isImageLogo = typeof logo === "string";
-
-//   if (isImageLogo) {
-//     return (
-//       <OptionAdornmentContainer
-//         isLogo
-//         odysseyDesignTokens={odysseyDesignTokens}
-//       >
-//         {/* NOTE: Intentionally leaving alt as an empty string here so screen readers will ignore this image */}
-//         {/* Image should be suffciently described by the adjacent title and/or description of the option */}
-//         <img src={logo} alt="" role="presentation" />
-//       </OptionAdornmentContainer>
-//     );
-//   } else {
-//     return (
-//       <OptionAdornmentContainer
-//         isLogo
-//         odysseyDesignTokens={odysseyDesignTokens}
-//       >
-//         {logo}
-//       </OptionAdornmentContainer>
-//     );
-//   }
-// };
 
 export type OptionProps<OptionType> = {
   option: OptionType;
@@ -258,46 +162,6 @@ const OptionLabelDescription = <OptionType extends LabelDescription>({
     </Option>
   );
 };
-
-// const OptionIconLabelDescription = <OptionType extends IconLabelDescription>({
-//   muiProps,
-//   odysseyDesignTokens,
-//   option,
-// }: BaseOptionProps & OptionProps<OptionType>) => {
-//   const { description, icon, label, value } = option;
-//   return (
-//     <Option hasAdornment key={value} muiProps={muiProps}>
-//       <OptionIcon icon={icon} odysseyDesignTokens={odysseyDesignTokens} />
-//       <OptionLabelContainer odysseyDesignTokens={odysseyDesignTokens}>
-//         <Heading6 component="p">{label}</Heading6>
-//         <OptionDescriptionComponent
-//           description={description}
-//           odysseyDesignTokens={odysseyDesignTokens}
-//         />
-//       </OptionLabelContainer>
-//     </Option>
-//   );
-// };
-
-// const OptionLogoLabelDescription = <OptionType extends LogoLabelDescription>({
-//   muiProps,
-//   odysseyDesignTokens,
-//   option,
-// }: BaseOptionProps & OptionProps<OptionType>) => {
-//   const { description, label, logo, value } = option;
-//   return (
-//     <Option hasAdornment key={value} muiProps={muiProps}>
-//       <OptionLogo logo={logo} odysseyDesignTokens={odysseyDesignTokens} />
-//       <OptionLabelContainer odysseyDesignTokens={odysseyDesignTokens}>
-//         <Heading6 component="p">{label}</Heading6>
-//         <OptionDescriptionComponent
-//           description={description}
-//           odysseyDesignTokens={odysseyDesignTokens}
-//         />
-//       </OptionLabelContainer>
-//     </Option>
-//   );
-// };
 
 const OptionLabelDescriptionMetaData = <
   OptionType extends LabelDescriptionMetaData,
@@ -325,64 +189,6 @@ const OptionLabelDescriptionMetaData = <
   );
 };
 
-// const OptionIconLabelDescriptionMetaData = <
-//   OptionType extends IconLabelDescriptionMetadata,
-// >({
-//   muiProps,
-//   odysseyDesignTokens,
-//   option,
-// }: BaseOptionProps & OptionProps<OptionType>) => {
-//   const { description, icon, label, metaData, value } = option;
-
-//   return (
-//     <Option hasAdornment key={value} muiProps={muiProps}>
-//       <OptionIcon icon={icon} odysseyDesignTokens={odysseyDesignTokens} />
-//       <div>
-//         <OptionLabelContainer odysseyDesignTokens={odysseyDesignTokens}>
-//           <Heading6 component="p">{label}</Heading6>
-//           <OptionDescriptionComponent
-//             description={description}
-//             odysseyDesignTokens={odysseyDesignTokens}
-//           />
-//         </OptionLabelContainer>
-//         <OptionMetaDataComponent
-//           metaData={metaData}
-//           odysseyDesignTokens={odysseyDesignTokens}
-//         />
-//       </div>
-//     </Option>
-//   );
-// };
-
-// const OptionLogoLabelDescriptionMetaData = <
-//   OptionType extends LogoLabelDescriptionMetadata,
-// >({
-//   muiProps,
-//   odysseyDesignTokens,
-//   option,
-// }: BaseOptionProps & OptionProps<OptionType>) => {
-//   const { description, label, logo, metaData, value } = option;
-
-//   return (
-//     <Option hasAdornment key={value} muiProps={muiProps}>
-//       <OptionLogo logo={logo} odysseyDesignTokens={odysseyDesignTokens} />
-//       <div>
-//         <OptionLabelContainer odysseyDesignTokens={odysseyDesignTokens}>
-//           <Heading6 component="p">{label}</Heading6>
-//           <OptionDescriptionComponent
-//             description={description}
-//             odysseyDesignTokens={odysseyDesignTokens}
-//           />
-//         </OptionLabelContainer>
-//         <OptionMetaDataComponent
-//           metaData={metaData}
-//           odysseyDesignTokens={odysseyDesignTokens}
-//         />
-//       </div>
-//     </Option>
-//   );
-// };
-
 export type OptionMetaData = {
   icon: ReactElement;
   detailText: string | number;
@@ -395,46 +201,6 @@ export type MetaData = {
 
 export type LabelDescription = Value & { label: string; description?: string };
 export type LabelDescriptionMetaData = LabelDescription & MetaData;
-// type IconLabelDescription = LabelDescription & {
-//   icon: ReactNode | string;
-// };
-// type IconLabelDescriptionMetadata = IconLabelDescription & MetaData;
-// type LogoLabelDescription = LabelDescription & {
-//   logo: ReactNode | string;
-// };
-// type LogoLabelDescriptionMetadata = LogoLabelDescription & MetaData;
-
-// type OptionsWithIcon = IconLabelDescription | IconLabelDescriptionMetadata;
-// type OptionsWithLogo = LogoLabelDescription | LogoLabelDescriptionMetadata;
-
-// export type AdaptablePickerOptionType =
-//   | LabelDescription
-//   | LabelDescriptionMetaData
-//   | OptionsWithIcon
-//   | OptionsWithLogo;
-// type Small = {
-//   adornmentSize: "small"
-// }
-// type Large = {
-//   adornmentSize: "small";
-// };
-
-// type RenderOptionComponentProps<OptionType> = {
-//   // muiProps:
-//   option: OptionType;
-// }
-
-// const OptionComponent = <OptionType extends string>({ option }: RenderOptionComponentProps<OptionType>) => {
-//   return (
-//     <></>
-//   )
-// }
-// const SmallOption = () => <div>Small Option</div>;
-// const LargeOption = () => <p>Large Option</p>;
-// type OptionComponent =
-//   | ReturnType<typeof SmallOption>
-//   | ReturnType<typeof LargeOption>;
-// type RenderOption = (props: unknown, option: unknown) => OptionComponent;
 
 export type PickerProps<
   OptionType extends LabelDescription | LabelDescriptionMetaData,
@@ -502,85 +268,7 @@ const Picker: PickerComponentType = <
   >(
     (muiProps, option) => {
       console.log("rendering picker", { option });
-      // const hasIcon = "icon" in option && option.icon;
-      // const hasLogo = "logo" in option && option.logo;
-      // const hasNoLogoOrIcon = !hasLogo && !hasIcon;
       const hasMetaData = "metaData" in option && option.metaData;
-      // const hasIconAndMetaData = hasIcon && hasMetaData;
-      // const hasLogoAndMetaData = hasLogo && hasMetaData;
-
-      // if (hasOptionsThatHaveLogo) {
-      //   console.log("hey")
-      //   if (hasMetaData) {
-      //     return (
-      //       <OptionLogoLabelDescriptionMetaData
-      //         muiProps={muiProps}
-      //         odysseyDesignTokens={odysseyDesignTokens}
-      //         option={{...option, logo: option?.logo || }}
-      //       />
-      //     );
-      //   }
-
-      //   if (hasLogo && !hasMetaData) {
-      //     return (
-      //       <OptionLogoLabelDescription
-      //         muiProps={muiProps}
-      //         odysseyDesignTokens={odysseyDesignTokens}
-      //         option={option}
-      //       />
-      //     );
-      //   }
-      // }
-
-      // if (hasIconAndMetaData) {
-      //   return (
-      //     <OptionIconLabelDescriptionMetaData
-      //       muiProps={muiProps}
-      //       odysseyDesignTokens={odysseyDesignTokens}
-      //       option={option}
-      //     />
-      //   );
-      // }
-
-      // if (hasLogoAndMetaData) {
-      //   return (
-      //     <OptionLogoLabelDescriptionMetaData
-      //       muiProps={muiProps}
-      //       odysseyDesignTokens={odysseyDesignTokens}
-      //       option={option}
-      //     />
-      //   );
-      // }
-
-      // if (hasIcon && !hasMetaData) {
-      //   return (
-      //     <OptionIconLabelDescription
-      //       muiProps={muiProps}
-      //       odysseyDesignTokens={odysseyDesignTokens}
-      //       option={option}
-      //     />
-      //   );
-      // }
-
-      // if (hasLogo && !hasMetaData) {
-      //   return (
-      //     <OptionLogoLabelDescription
-      //       muiProps={muiProps}
-      //       odysseyDesignTokens={odysseyDesignTokens}
-      //       option={option}
-      //     />
-      //   );
-      // }
-
-      // if (hasNoLogoOrIcon && hasMetaData) {
-      //   return (
-      //     <OptionLabelDescriptionMetaData
-      //       muiProps={muiProps}
-      //       odysseyDesignTokens={odysseyDesignTokens}
-      //       option={option}
-      //     />
-      //   );
-      // }
 
       if (hasMetaData) {
         return (
@@ -639,56 +327,9 @@ const Picker: PickerComponentType = <
   );
 };
 
-// Need the `typeof Autocomplete` because generics don't get passed through
-const MemoizedPicker = memo(Picker) as typeof AdaptablePicker;
+// Need the `as BasePickerType` because generics don't get passed through
+const MemoizedPicker = memo(Picker) as BasePickerType;
 // @ts-expect-error displayName is expected to not be on `typeof AdaptablePicker`
 MemoizedPicker.displayName = "Picker";
 
 export { MemoizedPicker as Picker };
-// const TitleDescription = (
-//   props: PickerProps<
-//     TitleDescription,
-//     boolean | undefined,
-//     boolean | undefined
-//   >,
-// ) => (
-//   <AdaptablePicker<TitleDescription, boolean | undefined, boolean | undefined> {...props} />
-// );
-
-// AdaptablePicker.TitleDescription = TitleDescription;
-
-// const IconTitleDescription = (
-//   props: BasePickerProps<
-//     IconTitleDescription,
-//     boolean | undefined,
-//     boolean | undefined
-//   >,
-// ) => (
-//   <AdaptablePicker<
-//     IconTitleDescription,
-//     boolean | undefined,
-//     boolean | undefined
-//   >
-//     {...props}
-//   />
-// );
-
-// AdaptablePicker.IconTitleDescription = IconTitleDescription;
-
-// const IconTitleDescriptionMetadata = (
-//   props: BasePickerProps<
-//     IconTitleDescriptionMetadata,
-//     boolean | undefined,
-//     boolean | undefined
-//   >,
-// ) => (
-//   <AdaptablePicker<
-//     IconTitleDescriptionMetadata,
-//     boolean | undefined,
-//     boolean | undefined
-//   >
-//     {...props}
-//   />
-// );
-
-// AdaptablePicker.IconTitleDescriptionMetadata = IconTitleDescriptionMetadata;
