@@ -21,10 +21,10 @@ import {
 import styled from "@emotion/styled";
 
 import {
-  AdaptablePicker,
+  ComposablePicker,
   type BasePickerProps,
   type BasePickerType,
-} from "./AdaptablePicker";
+} from "./ComposablePicker";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
@@ -214,14 +214,22 @@ export type BasicPickerComponentType = {
     HasMultipleChoices extends boolean | undefined,
     IsCustomValueAllowed extends boolean | undefined,
   >(
-    props: PickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>,
+    props: BasicPickerProps<
+      OptionType,
+      HasMultipleChoices,
+      IsCustomValueAllowed
+    >,
   ): ReactElement;
   <
     OptionType extends LabelDescriptionMetaData,
     HasMultipleChoices extends boolean | undefined,
     IsCustomValueAllowed extends boolean | undefined,
   >(
-    props: PickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>,
+    props: BasicPickerProps<
+      OptionType,
+      HasMultipleChoices,
+      IsCustomValueAllowed
+    >,
   ): ReactElement;
 };
 
@@ -291,7 +299,7 @@ const BasicPicker: BasicPickerComponentType = <
   );
 
   return (
-    <AdaptablePicker<OptionType, HasMultipleChoices, IsCustomValueAllowed>
+    <ComposablePicker<OptionType, HasMultipleChoices, IsCustomValueAllowed>
       ariaDescribedBy={ariaDescribedBy}
       defaultValue={defaultValue}
       errorMessage={errorMessage}
@@ -328,7 +336,7 @@ const BasicPicker: BasicPickerComponentType = <
 
 // Need the `as BasePickerType` because generics don't get passed through
 const MemoizedBasicPicker = memo(BasicPicker) as BasePickerType;
-// @ts-expect-error displayName is expected to not be on `typeof AdaptablePicker`
+
 MemoizedBasicPicker.displayName = "BasicPicker";
 
 export { MemoizedBasicPicker as BasicPicker };
