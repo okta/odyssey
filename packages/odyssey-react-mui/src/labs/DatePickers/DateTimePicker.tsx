@@ -11,48 +11,38 @@
  */
 
 import {
-  FocusEventHandler,
   memo,
   useCallback,
   useEffect,
   useMemo,
   useRef,
-  useState,
 } from "react";
 import { useTranslation } from "react-i18next";
 import {
-  type DatePickerSlots,
-  DatePicker as MuiDatePicker,
-  DatePickerProps as MuiDatePickerProps,
-  LocalizationProvider,
+  type DateTimePickerSlots,
+  MobileDateTimePicker as MuiDateTimePicker,
+  DateTimePickerProps as MuiDateTimePickerProps,
   PickersActionBarProps,
-  DatePickerSlotProps,
+  DateTimePickerSlotProps,
 } from "@mui/x-date-pickers";
 import { DateTime } from "luxon";
-import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
 import styled from "@emotion/styled";
 
-import { Button } from "../Buttons";
-import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  CalendarIcon,
-  ChevronDownIcon,
-} from "../icons.generated";
-import { DateField, DateFieldProps } from "./DateField";
-import { datePickerTheme } from "./datePickerTheme";
-import { FieldComponentProps } from "../FieldComponentProps";
+import { Button } from "../../Button";
+import { DateFieldLocalizationProvider } from "./DateFieldLocalizationProvider";
+import { DateTimeField, DateTimeFieldProps } from "./DateTimeField";
+import { dateTimePickerTheme } from "./dateTimePickerTheme";
+import { FieldComponentProps } from "../../FieldComponentProps";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
-} from "../OdysseyDesignTokensContext";
-import { OdysseyThemeProvider } from "../OdysseyThemeProvider";
-import { TimeZonePicker, TimeZonePickerProps } from "./TimeZonePicker";
+} from "../../OdysseyDesignTokensContext";
+import { OdysseyThemeProvider } from "../../OdysseyThemeProvider";
+import { TimeZonePicker } from "../TimeZonePicker";
 
 import {
   useOdysseyDateFields,
   OdysseyDateFieldProps,
-  TimeZoneOption,
 } from "./useOdysseyDateFields";
 
 const DatePickerContainer = styled.div({
@@ -115,43 +105,12 @@ MemoizedActionBar.displayName = "ActionBar";
 
 const formatDayOfWeek = (date: DateTime) => date.toFormat("EEE");
 
-type RenderDateFieldProps = {
-  defaultValue: DateFieldProps["defaultValue"];
-  value: DateFieldProps["value"];
-} & MuiDatePickerProps<DateTime>;
+type RenderDateTimeFieldProps = {
+  defaultValue: DateTimeFieldProps["defaultValue"];
+  value: DateTimeFieldProps["value"];
+} & MuiDateTimePickerProps<DateTime>;
 
-export type DatePickerProps = {
-  /**
-   * The label for the `input` element.
-   */
-  label: string;
-  /**
-   * Callback fired when the a date field loses focus
-   */
-  onBlur?: FocusEventHandler<HTMLInputElement>;
-  /**
-   * Callback fired when the a date is selected with the calendar.
-   */
-  onCalendarDateChange?: ({
-    value,
-    timeZone,
-  }: {
-    value: string | undefined;
-    timeZone: string;
-  }) => void;
-  /**
-   * Callback fired when the date/text input changes.
-   */
-  onInputChange?: (value: string) => void;
-  /**
-   * If provided, a `TimeZonePicker` will be rendered below the DatePicker. These options will populate as the Autocomplete options
-   */
-  timeZoneOptions?: TimeZoneOption[];
-  /**
-   * label for `TimeZonePicker`
-   */
-  timeZonePickerLabel?: TimeZonePickerProps["label"];
-} & OdysseyDateFieldProps &
+export type DateTimePickerProps = OdysseyDateFieldProps &
   Pick<
     FieldComponentProps,
     | "errorMessage"
@@ -162,7 +121,7 @@ export type DatePickerProps = {
     | "isOptional"
   >;
 
-const DatePicker = ({
+const DateTimePicker = ({
   defaultValue: defaultValueProp,
   errorMessage,
   hint,
@@ -183,24 +142,29 @@ const DatePicker = ({
   timeZonePickerLabel,
   timeZoneOptions,
   value: valueProp,
-}: DatePickerProps) => {
+}: DateTimePickerProps) => {
   const { i18n, t } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const {
+    closeCalendar,
+    commonIcons,
     defaultedLanguageCode,
     formatDateTimeToUtcIsoDateString,
     inputValues,
     internalTimeZone,
-    isValidTimeZone,
+    isOpen,
     localeText,
     minDate,
     maxDate,
-    setInternalTimeZone,
+    popperElement,
+    onTimeZoneChange,
+    setPopperElement,
     shouldDisableDate,
     shouldDisableMonth,
     shouldDisableYear,
+    toggleCalendarVisibility,
   } = useOdysseyDateFields({
     defaultValue: defaultValueProp,
     errorMessage,
@@ -212,8 +176,8 @@ const DatePicker = ({
     timeZone,
     value: valueProp,
   });
-  const [isOpen, setIsOpen] = useState(false);
-  const [popperElement, setPopperElement] = useState<HTMLInputElement | null>();
+  // const [isOpen, setIsOpen] = useState(false);
+  // const [popperElement, setPopperElement] = useState<HTMLInputElement | null>();
 
   const { language } = i18n;
   const containerRef = useRef<HTMLInputElement>(null);
@@ -223,7 +187,7 @@ const DatePicker = ({
   }, []);
 
   const formatDateTimeToJsDateStringOnCalendarSelection = useCallback<
-    NonNullable<MuiDatePickerProps<DateTime>["onChange"]>
+    NonNullable<MuiDateTimePickerProps<DateTime>["onChange"]>
   >(
     (value) => {
       if (value) {
@@ -247,19 +211,10 @@ const DatePicker = ({
     [onInputChangeProp],
   );
 
-  const toggleCalendarVisibility = useCallback(
-    () => setIsOpen(!isOpen),
-    [isOpen],
-  );
-
-  const resetIsOpen = useCallback(() => {
-    setIsOpen(false);
-  }, []);
-
-  const renderDateField = useCallback(
-    ({ defaultValue, inputRef, value }: RenderDateFieldProps) => {
+  const renderDateTimeField = useCallback(
+    ({ defaultValue, inputRef, value }: RenderDateTimeFieldProps) => {
       return (
-        <DateField
+        <DateTimeField
           defaultValue={defaultValue}
           endAdornment={
             <Button
@@ -267,7 +222,7 @@ const DatePicker = ({
               label=""
               onClick={toggleCalendarVisibility}
               size="small"
-              startIcon={<CalendarIcon />}
+              startIcon={<commonIcons.CalendarIcon />}
               variant="floating"
             />
           }
@@ -289,6 +244,7 @@ const DatePicker = ({
       );
     },
     [
+      commonIcons,
       errorMessage,
       hint,
       HintLinkComponent,
@@ -306,18 +262,18 @@ const DatePicker = ({
     ],
   );
 
-  const slots = useMemo<DatePickerSlots<DateTime>>(
+  const slots = useMemo<DateTimePickerSlots<DateTime>>(
     () => ({
       actionBar: MemoizedActionBar,
-      field: (muiProps) => renderDateField(muiProps),
-      leftArrowIcon: () => <ArrowLeftIcon />,
-      rightArrowIcon: () => <ArrowRightIcon />,
-      switchViewIcon: () => <ChevronDownIcon />,
+      field: (muiProps) => renderDateTimeField(muiProps),
+      leftArrowIcon: () => <commonIcons.ArrowLeftIcon />,
+      rightArrowIcon: () => <commonIcons.ArrowRightIcon />,
+      switchViewIcon: () => <commonIcons.ChevronDownIcon />,
     }),
-    [renderDateField],
+    [commonIcons, renderDateTimeField],
   );
 
-  const slotProps = useMemo<DatePickerSlotProps<DateTime, false>>(
+  const slotProps = useMemo<DateTimePickerSlotProps<DateTime, false>>(
     () => ({
       actionBar: ({ wrapperVariant, onAccept, onCancel }) => ({
         actions:
@@ -337,20 +293,10 @@ const DatePicker = ({
     [popperElement],
   );
 
-  const onTimeZoneChange = useCallback(
-    (timeZone: string | undefined) => {
-      if (timeZone && isValidTimeZone(timeZone)) {
-        setInternalTimeZone(timeZone);
-      }
-    },
-    [isValidTimeZone, setInternalTimeZone],
-  );
-
   return (
-    <OdysseyThemeProvider themeOverride={datePickerTheme}>
-      <LocalizationProvider
-        dateAdapter={AdapterLuxon}
-        adapterLocale={defaultedLanguageCode}
+    <OdysseyThemeProvider themeOverride={dateTimePickerTheme}>
+      <DateFieldLocalizationProvider
+        defaultedLanguageCode={defaultedLanguageCode}
         localeText={localeText}
       >
         <DatePickerContainer>
@@ -358,7 +304,7 @@ const DatePicker = ({
             odysseyDesignTokens={odysseyDesignTokens}
             ref={containerRef}
           >
-            <MuiDatePicker
+            <MuiDateTimePicker
               dayOfWeekFormatter={formatDayOfWeek}
               defaultValue={inputValues?.defaultValue}
               disabled={isDisabled}
@@ -369,7 +315,7 @@ const DatePicker = ({
               minDate={minDate}
               maxDate={maxDate}
               onChange={formatDateTimeToJsDateStringOnCalendarSelection}
-              onClose={resetIsOpen}
+              onClose={closeCalendar}
               open={isOpen}
               readOnly={isReadOnly}
               shouldDisableDate={shouldDisableDate}
@@ -393,12 +339,12 @@ const DatePicker = ({
             />
           </TimeZonePickerContainer>
         )}
-      </LocalizationProvider>
+      </DateFieldLocalizationProvider>
     </OdysseyThemeProvider>
   );
 };
 
-const MemoizedDatePicker = memo(DatePicker);
-MemoizedDatePicker.displayName = "DatePicker";
+const MemoizedDateTimePicker = memo(DateTimePicker);
+MemoizedDateTimePicker.displayName = "DateTimePicker";
 
-export { MemoizedDatePicker as DatePicker };
+export { MemoizedDateTimePicker as DateTimePicker };
