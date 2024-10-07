@@ -13,8 +13,8 @@
 import {
   LabelDescription,
   LabelDescriptionMetaData,
-  Picker,
-  PickerProps,
+  BasicPicker,
+  BasicPickerProps,
 } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react";
 import {
@@ -113,15 +113,15 @@ const languagesKitchenSink = [
   },
 ];
 
-type PickerType = typeof Picker<
+type BasicPickerType = typeof BasicPicker<
   LabelDescription | LabelDescriptionMetaData,
   boolean,
   boolean
 >;
 
-const storybookMeta: Meta<PickerType> = {
+const storybookMeta: Meta<BasicPickerType> = {
   title: "Labs Components/Pickers/Picker",
-  component: Picker,
+  component: BasicPicker,
   argTypes: {
     hasMultipleChoices: {
       control: "boolean",
@@ -240,7 +240,7 @@ const storybookMeta: Meta<PickerType> = {
 
 export default storybookMeta;
 
-type PickerPropsType = PickerProps<
+type PickerPropsType = BasicPickerProps<
   LabelDescription | LabelDescriptionMetaData,
   boolean | undefined,
   boolean | undefined

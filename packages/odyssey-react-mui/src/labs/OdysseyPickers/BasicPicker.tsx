@@ -202,13 +202,13 @@ export type MetaData = {
 export type LabelDescription = Value & { label: string; description?: string };
 export type LabelDescriptionMetaData = LabelDescription & MetaData;
 
-export type PickerProps<
+export type BasicPickerProps<
   OptionType extends LabelDescription | LabelDescriptionMetaData,
   HasMultipleChoices extends boolean | undefined,
   IsCustomValueAllowed extends boolean | undefined,
 > = BasePickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>;
 
-export type PickerComponentType = {
+export type BasicPickerComponentType = {
   <
     OptionType extends LabelDescription,
     HasMultipleChoices extends boolean | undefined,
@@ -225,7 +225,7 @@ export type PickerComponentType = {
   ): ReactElement;
 };
 
-const Picker: PickerComponentType = <
+const BasicPicker: BasicPickerComponentType = <
   OptionType extends LabelDescription | LabelDescriptionMetaData,
   HasMultipleChoices extends boolean | undefined,
   IsCustomValueAllowed extends boolean | undefined,
@@ -260,14 +260,13 @@ const Picker: PickerComponentType = <
   value,
   testId,
   translate,
-}: PickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
+}: BasicPickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const customOptionRender = useCallback<
     (props: HTMLAttributes<HTMLLIElement>, option: OptionType) => ReactNode
   >(
     (muiProps, option) => {
-      console.log("rendering picker", { option });
       const hasMetaData = "metaData" in option && option.metaData;
 
       if (hasMetaData) {
@@ -328,8 +327,8 @@ const Picker: PickerComponentType = <
 };
 
 // Need the `as BasePickerType` because generics don't get passed through
-const MemoizedPicker = memo(Picker) as BasePickerType;
+const MemoizedBasicPicker = memo(BasicPicker) as BasePickerType;
 // @ts-expect-error displayName is expected to not be on `typeof AdaptablePicker`
-MemoizedPicker.displayName = "Picker";
+MemoizedBasicPicker.displayName = "BasicPicker";
 
-export { MemoizedPicker as Picker };
+export { MemoizedBasicPicker as BasicPicker };
