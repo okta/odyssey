@@ -19,6 +19,14 @@ const jestConfig = {
     "/node_modules/",
   ],
   coverageReporters: ["json", "html", "text", "text-summary"],
+  coverageThreshold: {
+    global: {
+      branches: 13.63,
+      functions: 17.41,
+      lines: 29.98,
+      statements: 29.91,
+    },
+  },
   extensionsToTreatAsEsm: [".ts"],
   setupFilesAfterEnv: ["./jest.setup.js"],
   testEnvironment: "jsdom",
