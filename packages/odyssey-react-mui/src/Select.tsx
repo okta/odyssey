@@ -150,8 +150,6 @@ const ChipsInnerContainer = styled(MuiBox, {
   min-height: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing6};
 `;
 
-// const SelectStyleContainer = styled
-
 export type SelectValueType<HasMultipleChoices> =
   HasMultipleChoices extends true ? string[] : string;
 
