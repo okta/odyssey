@@ -32,11 +32,11 @@ import {
 import {
   type BaseOptionProps,
   type LabelDescription,
-  type MetaData,
+  type Metadata,
   Option,
   OptionDescriptionComponent,
   OptionLabelContainer,
-  OptionMetaDataComponent,
+  OptionMetadataComponent,
   OptionProps,
 } from "./BasicPicker";
 import { Heading6 } from "../../Typography";
@@ -47,11 +47,11 @@ type AdornmentLabelDescription = LabelDescription & {
   adornment: Adornment;
 };
 
-type AdornmentLabelDescriptionMetaData = AdornmentLabelDescription & MetaData;
+type AdornmentLabelDescriptionMetadata = AdornmentLabelDescription & Metadata;
 
 export type AdornmentOptionType =
   | AdornmentLabelDescription
-  | AdornmentLabelDescriptionMetaData;
+  | AdornmentLabelDescriptionMetadata;
 
 const OptionAdornmentContainer = styled("div", {
   shouldForwardProp: (prop) =>
@@ -154,8 +154,8 @@ const OptionWithLabelDescriptionOnly = <
   );
 };
 
-const OptionWithLabelDescriptionMetaData = <
-  OptionType extends AdornmentLabelDescriptionMetaData,
+const OptionWithLabelDescriptionMetadata = <
+  OptionType extends AdornmentLabelDescriptionMetadata,
 >({
   adornmentSize,
   muiProps,
@@ -182,7 +182,7 @@ const OptionWithLabelDescriptionMetaData = <
             odysseyDesignTokens={odysseyDesignTokens}
           />
         </OptionLabelContainer>
-        <OptionMetaDataComponent
+        <OptionMetadataComponent
           metaData={metaData}
           odysseyDesignTokens={odysseyDesignTokens}
         />
@@ -212,7 +212,7 @@ type PickerWithOptionAdornmentComponentType = {
     >,
   ): ReactElement;
   <
-    OptionType extends AdornmentLabelDescriptionMetaData,
+    OptionType extends AdornmentLabelDescriptionMetadata,
     HasMultipleChoices extends boolean | undefined,
     IsCustomValueAllowed extends boolean | undefined,
   >(
@@ -270,11 +270,11 @@ const PickerWithOptionAdornment: PickerWithOptionAdornmentComponentType = <
     (props: HTMLAttributes<HTMLLIElement>, option: OptionType) => ReactNode
   >(
     (muiProps, option) => {
-      const hasMetaData = "metaData" in option && option.metaData;
+      const hasMetadata = "metaData" in option && option.metaData;
 
-      if (hasMetaData) {
+      if (hasMetadata) {
         return (
-          <OptionWithLabelDescriptionMetaData
+          <OptionWithLabelDescriptionMetadata
             adornmentSize={adornmentSize}
             muiProps={muiProps}
             odysseyDesignTokens={odysseyDesignTokens}
