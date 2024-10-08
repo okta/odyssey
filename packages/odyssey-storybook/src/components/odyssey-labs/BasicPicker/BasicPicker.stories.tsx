@@ -120,7 +120,7 @@ type BasicPickerType = typeof BasicPicker<
 >;
 
 const storybookMeta: Meta<BasicPickerType> = {
-  title: "Labs Components/Pickers/Picker",
+  title: "Labs Components/Pickers/BasicPicker",
   component: BasicPicker,
   argTypes: {
     hasMultipleChoices: {
