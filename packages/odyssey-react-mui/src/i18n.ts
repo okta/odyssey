@@ -21,6 +21,7 @@ import { translation as en } from "./properties/ts/odyssey-react-mui";
 import { translation as es } from "./properties/ts/odyssey-react-mui_es";
 import { translation as fi } from "./properties/ts/odyssey-react-mui_fi";
 import { translation as fr } from "./properties/ts/odyssey-react-mui_fr";
+import { translation as ht } from "./properties/ts/odyssey-react-mui_ht";
 import { translation as hu } from "./properties/ts/odyssey-react-mui_hu";
 import { translation as id } from "./properties/ts/odyssey-react-mui_id";
 import { translation as it } from "./properties/ts/odyssey-react-mui_it";
@@ -57,6 +58,7 @@ export const resources: I18nResources = {
   es,
   fi,
   fr,
+  ht,
   hu,
   id,
   it,
