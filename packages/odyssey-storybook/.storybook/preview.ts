@@ -16,6 +16,7 @@ export const globalTypes = {
         { value: "es", title: "Spanish" },
         { value: "fi", title: "Finnish" },
         { value: "fr", title: "French" },
+        { value: "ht", title: "Haitian Creole" },
         { value: "hu", title: "Hungarian" },
         { value: "id", title: "Indonesian" },
         { value: "it", title: "Italian" },
