@@ -10,29 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { memo } from "react";
 import {
   Autocomplete as MuiAutocomplete,
   AutocompleteProps as MuiAutocompleteProps,
   UseAutocompleteProps as MuiUseAutocompleteProps,
 } from "@mui/material";
-import {
-  // createContext,
-  // forwardRef,
-  // HTMLAttributes,
-  memo,
-  // ReactElement,
-  // useCallback,
-  // useContext,
-  // useEffect,
-  // useMemo,
-  // useRef,
-  // useState,
-} from "react";
-// import styled from "@emotion/styled";
-// import { VariableSizeList, ListChildComponentProps } from "react-window";
-// import { useTranslation } from "react-i18next";
 
-// import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { HtmlProps } from "./HtmlProps";
 import { useAutocomplete } from "./useAutocomplete";
