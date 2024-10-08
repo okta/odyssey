@@ -12,7 +12,7 @@
 
 import {
   LabelDescription,
-  LabelDescriptionMetaData,
+  LabelDescriptionMetadata,
   BasicPicker,
   BasicPickerProps,
 } from "@okta/odyssey-react-mui/labs";
@@ -43,7 +43,7 @@ const languagesNoDescription = [
   },
 ];
 
-const languagesNoMetaData = [
+const languagesNoMetadata = [
   {
     value: "en",
     label: "English",
@@ -114,7 +114,7 @@ const languagesKitchenSink = [
 ];
 
 type BasicPickerType = typeof BasicPicker<
-  LabelDescription | LabelDescriptionMetaData,
+  LabelDescription | LabelDescriptionMetadata,
   boolean,
   boolean
 >;
@@ -241,7 +241,7 @@ const storybookMeta: Meta<BasicPickerType> = {
 export default storybookMeta;
 
 type PickerPropsType = BasicPickerProps<
-  LabelDescription | LabelDescriptionMetaData,
+  LabelDescription | LabelDescriptionMetadata,
   boolean | undefined,
   boolean | undefined
 >;
@@ -250,7 +250,7 @@ export const PickerDefault: StoryObj<PickerPropsType> = {};
 
 export const PickerWithDescription: StoryObj<PickerPropsType> = {
   args: {
-    options: languagesNoMetaData,
+    options: languagesNoMetadata,
   },
 };
 
@@ -271,7 +271,7 @@ export const Disabled: StoryObj<PickerPropsType> = {
   },
 };
 
-export const WithMetaData: StoryObj<PickerPropsType> = {
+export const WithMetadata: StoryObj<PickerPropsType> = {
   args: {
     options: languagesKitchenSink,
   },
