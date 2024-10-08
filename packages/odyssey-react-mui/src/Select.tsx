@@ -19,6 +19,7 @@ import {
   useState,
   useImperativeHandle,
 } from "react";
+import styled from "@emotion/styled";
 import {
   Box as MuiBox,
   Checkbox as MuiCheckbox,
@@ -27,9 +28,10 @@ import {
   ListSubheader,
   MenuItem as MuiMenuItem,
   Select as MuiSelect,
+  SelectProps as MuiSelectProps,
   SelectChangeEvent,
 } from "@mui/material";
-import { SelectProps as MuiSelectProps } from "@mui/material";
+
 import { Field } from "./Field";
 import {
   FieldComponentProps,
@@ -43,13 +45,12 @@ import {
   useInputValues,
   getControlState,
 } from "./inputUtils";
-import { normalizedKey } from "./useNormalizedKey";
-import styled from "@emotion/styled";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
 } from "./OdysseyDesignTokensContext";
 import { TestSelector } from "./test-selectors";
+import { normalizedKey } from "./useNormalizedKey";
 
 export const SelectTestSelector = {
   accessibleText: {
@@ -148,6 +149,8 @@ const ChipsInnerContainer = styled(MuiBox, {
     isInteractive || isReadOnly ? 1 : 0};
   min-height: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing6};
 `;
+
+// const SelectStyleContainer = styled
 
 export type SelectValueType<HasMultipleChoices> =
   HasMultipleChoices extends true ? string[] : string;
@@ -508,6 +511,14 @@ const Select = <
             selectRef.current = el;
           }}
           labelId={labelElementId}
+          MenuProps={{
+            sx: {
+              ".MuiPaper-root": {
+                maxHeight: "50vh",
+                minHeight: "200px",
+              },
+            },
+          }}
           multiple={hasMultipleChoices}
           name={nameOverride ?? id}
           onBlur={onBlur}
