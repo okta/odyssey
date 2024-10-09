@@ -172,8 +172,12 @@ const AppTile = ({
     <MuiCard
       sx={{
         boxShadow: "none",
-        "&:hover": {
+        "&::after": {
+          opacity: 0,
           "box-shadow": odysseyDesignTokens.DepthMedium,
+        },
+        "&:hover::after": {
+          opacity: 1,
         },
       }}
     >
