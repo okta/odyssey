@@ -856,7 +856,7 @@ export const components = ({
             paddingLeft: odysseyTokens.Spacing4,
           },
 
-          "&.isClickable:hover": {
+          "&:hover": {
             boxShadow: odysseyTokens.DepthHigh,
           },
 

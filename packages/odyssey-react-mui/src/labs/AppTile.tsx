@@ -170,10 +170,9 @@ const AppTile = ({
 
   return (
     <MuiCard
-      className="isClickable"
       sx={{
         boxShadow: "none",
-        "&.isClickable:hover": {
+        "&:hover": {
           "box-shadow": odysseyDesignTokens.DepthMedium,
         },
       }}
