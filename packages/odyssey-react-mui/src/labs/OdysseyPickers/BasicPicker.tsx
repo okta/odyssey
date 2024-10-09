@@ -29,7 +29,7 @@ import {
   useOdysseyDesignTokens,
   DesignTokens,
 } from "../../OdysseyDesignTokensContext";
-import { Heading6 } from "../../Typography";
+import { Heading6, Paragraph } from "../../Typography";
 
 export const StyledOption = styled.li<{ hasAdornment?: boolean }>(
   ({ hasAdornment }) => ({
@@ -143,6 +143,22 @@ export type OptionProps<OptionType> = {
   option: OptionType;
 };
 
+export const OptionLabelOnlyComponent = <OptionType extends OptionLabelOnly>({
+  muiProps,
+  odysseyDesignTokens,
+  option,
+}: BaseOptionProps & OptionProps<OptionType>) => {
+  const { label, value } = option;
+
+  return (
+    <Option muiProps={muiProps} key={value}>
+      <OptionLabelContainer odysseyDesignTokens={odysseyDesignTokens}>
+        <Paragraph>{label}</Paragraph>
+      </OptionLabelContainer>
+    </Option>
+  );
+};
+
 const OptionLabelDescription = <OptionType extends LabelDescription>({
   muiProps,
   odysseyDesignTokens,
@@ -198,8 +214,9 @@ export type Value = { value: string | number };
 export type Metadata = {
   metaData: OptionMetadata[];
 };
-
-export type LabelDescription = Value & { label: string; description?: string };
+export type OptionLabel = { label: string };
+export type OptionLabelOnly = Value & OptionLabel;
+export type LabelDescription = Value & OptionLabel & { description?: string };
 export type LabelDescriptionMetadata = LabelDescription & Metadata;
 
 export type BasicPickerProps<
@@ -209,6 +226,28 @@ export type BasicPickerProps<
 > = BasePickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>;
 
 export type BasicPickerComponentType = {
+  <
+    OptionType extends OptionLabelOnly,
+    HasMultipleChoices extends boolean | undefined,
+    IsCustomValueAllowed extends boolean | undefined,
+  >(
+    props: BasicPickerProps<
+      OptionType,
+      HasMultipleChoices,
+      IsCustomValueAllowed
+    >,
+  ): ReactElement;
+  <
+    OptionType extends LabelDescriptionMetadata,
+    HasMultipleChoices extends boolean | undefined,
+    IsCustomValueAllowed extends boolean | undefined,
+  >(
+    props: BasicPickerProps<
+      OptionType,
+      HasMultipleChoices,
+      IsCustomValueAllowed
+    >,
+  ): ReactElement;
   <
     OptionType extends LabelDescription,
     HasMultipleChoices extends boolean | undefined,
@@ -234,7 +273,10 @@ export type BasicPickerComponentType = {
 };
 
 const BasicPicker: BasicPickerComponentType = <
-  OptionType extends LabelDescription | LabelDescriptionMetadata,
+  OptionType extends
+    | OptionLabelOnly
+    | LabelDescription
+    | LabelDescriptionMetadata,
   HasMultipleChoices extends boolean | undefined,
   IsCustomValueAllowed extends boolean | undefined,
 >({
@@ -275,7 +317,19 @@ const BasicPicker: BasicPickerComponentType = <
     (props: HTMLAttributes<HTMLLIElement>, option: OptionType) => ReactNode
   >(
     (muiProps, option) => {
+      const hasDescription = "description" in option && option.description;
       const hasMetadata = "metaData" in option && option.metaData;
+      const isLabelOnly = !hasMetadata && !hasDescription;
+
+      if (isLabelOnly) {
+        return (
+          <OptionLabelOnlyComponent
+            muiProps={muiProps}
+            odysseyDesignTokens={odysseyDesignTokens}
+            option={option}
+          />
+        );
+      }
 
       if (hasMetadata) {
         return (
