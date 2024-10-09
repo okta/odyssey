@@ -246,9 +246,9 @@ type PickerPropsType = BasicPickerProps<
   boolean | undefined
 >;
 
-export const PickerDefault: StoryObj<PickerPropsType> = {};
+export const OptionWithLabelOnly: StoryObj<PickerPropsType> = {};
 
-export const PickerWithDescription: StoryObj<PickerPropsType> = {
+export const OptionWithDescription: StoryObj<PickerPropsType> = {
   args: {
     options: languagesNoMetadata,
   },
@@ -271,7 +271,7 @@ export const Disabled: StoryObj<PickerPropsType> = {
   },
 };
 
-export const WithMetadata: StoryObj<PickerPropsType> = {
+export const OptionWithMetadata: StoryObj<PickerPropsType> = {
   args: {
     options: languagesKitchenSink,
   },

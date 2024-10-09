@@ -33,7 +33,7 @@ const optionsSmall = [
   {
     value: "a",
     label: "An Option label",
-    description: "Some optional descriptive text",
+    // description: "Some optional descriptive text",
     adornment: <FolderIcon />,
   },
   {
@@ -239,14 +239,16 @@ type PickerWithOptionAdornmentPropsType = PickerWithOptionAdornmentProps<
   boolean | undefined
 >;
 
-export const SmallAdornment: StoryObj<PickerWithOptionAdornmentPropsType> = {};
+export const OptionWithSmallAdornment: StoryObj<PickerWithOptionAdornmentPropsType> =
+  {};
 
-export const LargeAdornment: StoryObj<PickerWithOptionAdornmentPropsType> = {
-  args: {
-    adornmentSize: "large",
-    options: optionsLarge,
-  },
-};
+export const OptionWithLargeAdornment: StoryObj<PickerWithOptionAdornmentPropsType> =
+  {
+    args: {
+      adornmentSize: "large",
+      options: optionsLarge,
+    },
+  };
 
 export const Multiple: StoryObj<PickerWithOptionAdornmentPropsType> = {
   args: {
@@ -270,7 +272,7 @@ export const MultiChoiceDisabled: StoryObj<PickerWithOptionAdornmentPropsType> =
     },
   };
 
-export const SmallAdornmentWithMetaData: StoryObj<PickerWithOptionAdornmentPropsType> =
+export const OptionWithSmallAdornmentAndMetaData: StoryObj<PickerWithOptionAdornmentPropsType> =
   {
     args: {
       options: optionsSmall.map((option) => ({
@@ -293,7 +295,7 @@ export const SmallAdornmentWithMetaData: StoryObj<PickerWithOptionAdornmentProps
     },
   };
 
-export const LargeAdornmentWithMetaData: StoryObj<PickerWithOptionAdornmentPropsType> =
+export const OptionWithLargeAdornmentAndMetaData: StoryObj<PickerWithOptionAdornmentPropsType> =
   {
     args: {
       adornmentSize: "large",
