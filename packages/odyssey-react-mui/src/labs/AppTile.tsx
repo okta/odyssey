@@ -114,6 +114,19 @@ const ChildrenContainer = styled("div", {
   },
 }));
 
+const StyledMuiCard = styled(MuiCard, {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
+  boxShadow: "none",
+  "&::after": {
+    opacity: 0,
+    "box-shadow": odysseyDesignTokens.DepthMedium,
+  },
+  "&:hover::after": {
+    opacity: 1,
+  },
+}));
+
 const AppTile = ({
   actionAriaControls,
   actionAriaHasPopup,
@@ -169,18 +182,7 @@ const AppTile = ({
   );
 
   return (
-    <MuiCard
-      sx={{
-        boxShadow: "none",
-        "&::after": {
-          opacity: 0,
-          "box-shadow": odysseyDesignTokens.DepthMedium,
-        },
-        "&:hover::after": {
-          opacity: 1,
-        },
-      }}
-    >
+    <StyledMuiCard odysseyDesignTokens={odysseyDesignTokens}>
       <MuiCardActionArea onClick={onClick}>{tileContent}</MuiCardActionArea>
 
       {(onActionClick || auxiliaryText) && (
@@ -201,7 +203,7 @@ const AppTile = ({
           )}
         </ActionContainer>
       )}
-    </MuiCard>
+    </StyledMuiCard>
   );
 };
 
