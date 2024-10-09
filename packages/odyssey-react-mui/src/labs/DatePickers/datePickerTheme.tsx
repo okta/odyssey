@@ -27,7 +27,7 @@ type ThemeStyles = ({
 
 type StateStyles = Record<string, ThemeStyles>;
 
-const dateStyles: StateStyles = {
+export const dateStyles: StateStyles = {
   default: ({ theme }) => ({
     color: theme.palette.text.primary,
   }),

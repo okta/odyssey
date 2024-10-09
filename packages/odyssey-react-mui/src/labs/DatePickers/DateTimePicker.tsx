@@ -17,7 +17,7 @@ import {
   useEffect,
   useMemo,
   useRef,
-  useState,
+  // useState,
 } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -40,7 +40,7 @@ import { Button } from "../../Button";
 //   ChevronDownIcon,
 // } from "../../icons.generated";
 import { DateTimeField, DateTimeFieldProps } from "./DateTimeField";
-import { datePickerTheme } from "./datePickerTheme";
+import { dateTimePickerTheme } from "./dateTimePickerTheme";
 import { FieldComponentProps } from "../../FieldComponentProps";
 import {
   useOdysseyDesignTokens,
@@ -191,7 +191,6 @@ const DateTimePicker = ({
   const {
     commonIcons,
     defaultedLanguageCode,
-    formatDateTimeToJsDateStringReturnValueAndTimeZone,
     formatDateTimeToUtcIsoDateString,
     inputValues,
     internalTimeZone,
@@ -203,7 +202,7 @@ const DateTimePicker = ({
     popperElement,
     setInternalTimeZone,
     setIsOpen,
-    setPopperElement.
+    setPopperElement,
     shouldDisableDate,
     shouldDisableMonth,
     shouldDisableYear,
@@ -255,14 +254,14 @@ const DateTimePicker = ({
 
   const toggleCalendarVisibility = useCallback(
     () => setIsOpen(!isOpen),
-    [isOpen],
+    [isOpen, setIsOpen],
   );
 
   const resetIsOpen = useCallback(() => {
     setIsOpen(false);
-  }, []);
+  }, [setIsOpen]);
 
-  const renderDateField = useCallback(
+  const renderDateTimeField = useCallback(
     ({ defaultValue, inputRef, value }: RenderDateTimeFieldProps) => {
       return (
         <DateTimeField
@@ -316,12 +315,12 @@ const DateTimePicker = ({
   const slots = useMemo<DateTimePickerSlots<DateTime>>(
     () => ({
       actionBar: MemoizedActionBar,
-      field: (muiProps) => renderDateField(muiProps),
+      field: (muiProps) => renderDateTimeField(muiProps),
       leftArrowIcon: () => <commonIcons.ArrowLeftIcon />,
       rightArrowIcon: () => <commonIcons.ArrowRightIcon />,
       switchViewIcon: () => <commonIcons.ChevronDownIcon />,
     }),
-    [commonIcons, renderDateField],
+    [commonIcons, renderDateTimeField],
   );
 
   const slotProps = useMemo<DateTimePickerSlotProps<DateTime, false>>(
@@ -354,7 +353,7 @@ const DateTimePicker = ({
   );
 
   return (
-    <OdysseyThemeProvider themeOverride={datePickerTheme}>
+    <OdysseyThemeProvider themeOverride={dateTimePickerTheme}>
       <LocalizationProvider
         dateAdapter={AdapterLuxon}
         adapterLocale={defaultedLanguageCode}

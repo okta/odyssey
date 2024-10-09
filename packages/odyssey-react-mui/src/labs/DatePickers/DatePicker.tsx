@@ -32,7 +32,6 @@ import { DateTime } from "luxon";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
 import styled from "@emotion/styled";
 
-import { BaseDatePicker } from "./BaseDatePicker";
 import { Button } from "../../Button";
 import {
   ArrowLeftIcon,
