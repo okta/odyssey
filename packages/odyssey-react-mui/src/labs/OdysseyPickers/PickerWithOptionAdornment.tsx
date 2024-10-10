@@ -93,17 +93,19 @@ const OptionAdornmentContainer = styled("div", {
       transform: "translate(-50%, -50%)",
     },
 
-    ...(adornmentSize === "large" && {
-      bottom: 0,
-      width: odysseyDesignTokens.Spacing8,
-      height: odysseyDesignTokens.Spacing8,
-    }),
+    ...(adornmentSize === "large" &&
+      !isTagContainer && {
+        bottom: 0,
+        width: odysseyDesignTokens.Spacing8,
+        height: odysseyDesignTokens.Spacing8,
+      }),
 
     ...(isTagContainer && {
       bottom: 0,
       alignSelf: "center",
       width: odysseyDesignTokens.Spacing4,
-      height: odysseyDesignTokens.Spacing4,
+      height: "auto",
+      maxHeight: odysseyDesignTokens.Spacing4,
       marginInlineEnd: odysseyDesignTokens.Spacing2,
 
       svg: {
