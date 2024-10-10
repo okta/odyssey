@@ -680,13 +680,13 @@ export const components = ({
               },
 
               "&:disabled": {
-                ...(contrastMode === "lowContrast" && {
+                ...(contrastMode === "highContrast" && {
                   backgroundColor: odysseyTokens.HueNeutral200,
                   borderColor: "transparent",
                   color: odysseyTokens.TypographyColorDisabled,
                 }),
 
-                ...(contrastMode === "highContrast" && {
+                ...(contrastMode === "lowContrast" && {
                   backgroundColor: odysseyTokens.HueNeutral100,
                   borderColor: "transparent",
                   color: odysseyTokens.TypographyColorDisabled,
@@ -1135,54 +1135,54 @@ export const components = ({
               fontSize: "0.71428571rem",
               textTransform: "uppercase",
 
-              ...(contrastMode === "lowContrast" && {
+              ...(contrastMode === "highContrast" && {
                 backgroundColor: odysseyTokens.HueNeutral200,
                 color: odysseyTokens.HueNeutral700,
               }),
-              ...(contrastMode === "highContrast" && {
+              ...(contrastMode === "lowContrast" && {
                 backgroundColor: odysseyTokens.HueNeutral50,
                 color: odysseyTokens.TypographyColorSubordinate,
               }),
 
               [`&.${chipClasses.colorError}`]: {
-                ...(contrastMode === "lowContrast" && {
+                ...(contrastMode === "highContrast" && {
                   backgroundColor: odysseyTokens.HueRed100,
                   color: odysseyTokens.HueRed700,
                 }),
-                ...(contrastMode === "highContrast" && {
+                ...(contrastMode === "lowContrast" && {
                   backgroundColor: odysseyTokens.PaletteDangerLighter,
                   color: odysseyTokens.TypographyColorDanger,
                 }),
               },
 
               [`&.${chipClasses.colorInfo}`]: {
-                ...(contrastMode === "lowContrast" && {
+                ...(contrastMode === "highContrast" && {
                   backgroundColor: odysseyTokens.HueBlue100,
                   color: odysseyTokens.HueBlue700,
                 }),
-                ...(contrastMode === "highContrast" && {
+                ...(contrastMode === "lowContrast" && {
                   backgroundColor: odysseyTokens.PalettePrimaryLighter,
                   color: odysseyTokens.PalettePrimaryText,
                 }),
               },
 
               [`&.${chipClasses.colorSuccess}`]: {
-                ...(contrastMode === "lowContrast" && {
+                ...(contrastMode === "highContrast" && {
                   backgroundColor: odysseyTokens.HueGreen200,
                   color: odysseyTokens.HueGreen700,
                 }),
-                ...(contrastMode === "highContrast" && {
+                ...(contrastMode === "lowContrast" && {
                   backgroundColor: odysseyTokens.PaletteSuccessLighter,
                   color: odysseyTokens.TypographyColorSuccess,
                 }),
               },
 
               [`&.${chipClasses.colorWarning}`]: {
-                ...(contrastMode === "lowContrast" && {
+                ...(contrastMode === "highContrast" && {
                   backgroundColor: odysseyTokens.HueYellow100,
                   color: odysseyTokens.HueYellow700,
                 }),
-                ...(contrastMode === "highContrast" && {
+                ...(contrastMode === "lowContrast" && {
                   backgroundColor: odysseyTokens.PaletteWarningLighter,
                   color: odysseyTokens.TypographyColorWarning,
                 }),
