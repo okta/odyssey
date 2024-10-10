@@ -199,11 +199,11 @@ const StyledTag = styled(MuiChip, {
     color: colors.text,
 
     ...(clickable === true && {
-      border: `1px solid ${colors.border}`,
+      borderColor: colors.border,
     }),
 
     ...(clickable === false && {
-      border: "none",
+      borderColor: "transparent",
     }),
 
     "&.MuiChip-clickable:hover": {
@@ -216,7 +216,7 @@ const StyledTag = styled(MuiChip, {
 
     "&.Mui-disabled": {
       color: colors.textDisabled,
-      border: `1px solid ${colors.border}`,
+      borderColor: colors.border,
       "& .MuiChip-icon, & .MuiChip-deleteIcon": {
         color: colors.iconDisabled,
       },
