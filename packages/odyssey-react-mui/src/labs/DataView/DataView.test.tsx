@@ -109,20 +109,14 @@ const itemProps = (row: DataRow) => ({
 describe("DataView", () => {
   it("displays a table view", async () => {
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["table"]}
-          getData={getData}
-          tableLayoutOptions={{
-            columns: columns,
-          }}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["table"]}
+        getData={getData}
+        tableLayoutOptions={{
+          columns: columns,
+        }}
+      />,
     );
-
-    waitFor(() => {
-      screen.findByTestId("container");
-    });
 
     expect(screen.queryByRole("table")).not.toBeNull();
     expect(screen.queryByTestId("list")).toBeNull();
@@ -131,20 +125,14 @@ describe("DataView", () => {
 
   it("displays a list view", async () => {
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["list"]}
-          getData={getData}
-          cardLayoutOptions={{
-            itemProps: itemProps,
-          }}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["list"]}
+        getData={getData}
+        cardLayoutOptions={{
+          itemProps: itemProps,
+        }}
+      />,
     );
-
-    waitFor(() => {
-      screen.findByTestId("container");
-    });
 
     expect(screen.queryByRole("table")).toBeNull();
     expect(screen.queryByTestId("list")).not.toBeNull();
@@ -153,20 +141,14 @@ describe("DataView", () => {
 
   it("displays a grid view", async () => {
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["grid"]}
-          getData={getData}
-          cardLayoutOptions={{
-            itemProps: itemProps,
-          }}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["grid"]}
+        getData={getData}
+        cardLayoutOptions={{
+          itemProps: itemProps,
+        }}
+      />,
     );
-
-    waitFor(() => {
-      screen.findByTestId("container");
-    });
 
     expect(screen.queryByRole("table")).toBeNull();
     expect(screen.queryByTestId("list")).toBeNull();
@@ -175,23 +157,17 @@ describe("DataView", () => {
 
   it("displays the layout switcher", async () => {
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["table", "list"]}
-          getData={getData}
-          tableLayoutOptions={{
-            columns: columns,
-          }}
-          cardLayoutOptions={{
-            itemProps: itemProps,
-          }}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["table", "list"]}
+        getData={getData}
+        tableLayoutOptions={{
+          columns: columns,
+        }}
+        cardLayoutOptions={{
+          itemProps: itemProps,
+        }}
+      />,
     );
-
-    waitFor(() => {
-      screen.findByTestId("container");
-    });
 
     expect(
       screen.queryByLabelText("Layout", { selector: "button" }),
@@ -202,42 +178,30 @@ describe("DataView", () => {
     const metaText = "Last updated 12 hours ago";
 
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["table"]}
-          getData={getData}
-          tableLayoutOptions={{
-            columns: columns,
-          }}
-          metaText={metaText}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["table"]}
+        getData={getData}
+        tableLayoutOptions={{
+          columns: columns,
+        }}
+        metaText={metaText}
+      />,
     );
-
-    waitFor(() => {
-      screen.findByTestId("container");
-    });
 
     expect(screen.queryAllByText(metaText).length).toBe(1);
   });
 
   it("can filter rows", async () => {
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["table"]}
-          hasFilters
-          getData={getSimpleData}
-          tableLayoutOptions={{
-            columns: columns,
-          }}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["table"]}
+        hasFilters
+        getData={getSimpleData}
+        tableLayoutOptions={{
+          columns: columns,
+        }}
+      />,
     );
-
-    waitFor(() => {
-      screen.findByTestId("container");
-    });
 
     expect((await screen.findAllByText("Han Solo")).length).toBe(1);
     expect((await screen.findAllByText("Luke Skywalker")).length).toBe(1);
@@ -265,22 +229,16 @@ describe("DataView", () => {
 
   it("can search rows", async () => {
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["table"]}
-          hasSearch
-          hasSearchSubmitButton
-          getData={getSimpleData}
-          tableLayoutOptions={{
-            columns: columns,
-          }}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["table"]}
+        hasSearch
+        hasSearchSubmitButton
+        getData={getSimpleData}
+        tableLayoutOptions={{
+          columns: columns,
+        }}
+      />,
     );
-
-    waitFor(() => {
-      screen.findByTestId("container");
-    });
 
     expect((await screen.findAllByText("Han Solo")).length).toBe(1);
     expect((await screen.findAllByText("Luke Skywalker")).length).toBe(1);
@@ -297,22 +255,16 @@ describe("DataView", () => {
   });
   it("can clear the search input", async () => {
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["table"]}
-          hasSearch
-          hasSearchSubmitButton
-          getData={getSimpleData}
-          tableLayoutOptions={{
-            columns: columns,
-          }}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["table"]}
+        hasSearch
+        hasSearchSubmitButton
+        getData={getSimpleData}
+        tableLayoutOptions={{
+          columns: columns,
+        }}
+      />,
     );
-
-    waitFor(() => {
-      screen.findByTestId("container");
-    });
 
     expect((await screen.findAllByText("Han Solo")).length).toBe(1);
     expect((await screen.findAllByText("Luke Skywalker")).length).toBe(1);
@@ -346,21 +298,15 @@ describe("DataView", () => {
     );
 
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["table"]}
-          getData={getSimpleData}
-          tableLayoutOptions={{
-            columns: columns,
-            rowActionMenuItems: rowActionMenuItems,
-          }}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["table"]}
+        getData={getSimpleData}
+        tableLayoutOptions={{
+          columns: columns,
+          rowActionMenuItems: rowActionMenuItems,
+        }}
+      />,
     );
-
-    waitFor(() => {
-      screen.findByTestId("container");
-    });
 
     expect((await screen.findAllByText("Luke Skywalker")).length).toBe(1);
     expect(screen.queryByText("Action for Luke Skywalker")).toBeNull();
@@ -380,21 +326,15 @@ describe("DataView", () => {
     );
 
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["table"]}
-          getData={getSimpleData}
-          tableLayoutOptions={{
-            columns: columns,
-            rowActionButtons: rowActionButtons,
-          }}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["table"]}
+        getData={getSimpleData}
+        tableLayoutOptions={{
+          columns: columns,
+          rowActionButtons: rowActionButtons,
+        }}
+      />,
     );
-
-    waitFor(() => {
-      screen.findByTestId("container");
-    });
 
     expect(
       (await screen.findAllByText("Button for Luke Skywalker")).length,
@@ -403,16 +343,14 @@ describe("DataView", () => {
 
   it("can select table rows", async () => {
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["table"]}
-          getData={getSimpleData}
-          hasRowSelection
-          tableLayoutOptions={{
-            columns: columns,
-          }}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["table"]}
+        getData={getSimpleData}
+        hasRowSelection
+        tableLayoutOptions={{
+          columns: columns,
+        }}
+      />,
     );
 
     await waitFor(async () => {
@@ -429,16 +367,14 @@ describe("DataView", () => {
   });
   it("can select card rows", async () => {
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["grid"]}
-          getData={getSimpleData}
-          hasRowSelection
-          cardLayoutOptions={{
-            itemProps: itemProps,
-          }}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["grid"]}
+        getData={getSimpleData}
+        hasRowSelection
+        cardLayoutOptions={{
+          itemProps: itemProps,
+        }}
+      />,
     );
 
     await waitFor(async () => {
@@ -456,16 +392,14 @@ describe("DataView", () => {
 
   it("can select all rows", async () => {
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["table"]}
-          getData={getSimpleData}
-          hasRowSelection
-          tableLayoutOptions={{
-            columns: columns,
-          }}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["table"]}
+        getData={getSimpleData}
+        hasRowSelection
+        tableLayoutOptions={{
+          columns: columns,
+        }}
+      />,
     );
 
     await waitFor(async () => {
@@ -484,16 +418,14 @@ describe("DataView", () => {
   });
   it("can deselect rows", async () => {
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["grid"]}
-          getData={getSimpleData}
-          hasRowSelection
-          cardLayoutOptions={{
-            itemProps: itemProps,
-          }}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["grid"]}
+        getData={getSimpleData}
+        hasRowSelection
+        cardLayoutOptions={{
+          itemProps: itemProps,
+        }}
+      />,
     );
 
     await waitFor(async () => {
@@ -515,16 +447,14 @@ describe("DataView", () => {
   });
   it("can deselect all rows", async () => {
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["table"]}
-          getData={getSimpleData}
-          hasRowSelection
-          tableLayoutOptions={{
-            columns: columns,
-          }}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["table"]}
+        getData={getSimpleData}
+        hasRowSelection
+        tableLayoutOptions={{
+          columns: columns,
+        }}
+      />,
     );
 
     await waitFor(async () => {
@@ -554,17 +484,15 @@ describe("DataView", () => {
     );
 
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["table"]}
-          getData={getSimpleData}
-          hasRowSelection
-          tableLayoutOptions={{
-            columns: columns,
-          }}
-          bulkActionMenuItems={bulkActionMenuItems}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["table"]}
+        getData={getSimpleData}
+        hasRowSelection
+        tableLayoutOptions={{
+          columns: columns,
+        }}
+        bulkActionMenuItems={bulkActionMenuItems}
+      />,
     );
 
     await waitFor(async () => {
@@ -600,17 +528,15 @@ describe("DataView", () => {
     };
 
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["table"]}
-          getData={() => data}
-          hasRowReordering
-          onReorderRows={handleReorderRows}
-          tableLayoutOptions={{
-            columns: columns,
-          }}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["table"]}
+        getData={() => data}
+        hasRowReordering
+        onReorderRows={handleReorderRows}
+        tableLayoutOptions={{
+          columns: columns,
+        }}
+      />,
     );
 
     await waitFor(async () => {
@@ -645,17 +571,15 @@ describe("DataView", () => {
     };
 
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["table"]}
-          getData={() => data}
-          hasRowReordering
-          onReorderRows={handleReorderRows}
-          tableLayoutOptions={{
-            columns: columns,
-          }}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["table"]}
+        getData={() => data}
+        hasRowReordering
+        onReorderRows={handleReorderRows}
+        tableLayoutOptions={{
+          columns: columns,
+        }}
+      />,
     );
 
     await waitFor(async () => {
@@ -690,18 +614,16 @@ describe("DataView", () => {
     };
 
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["table"]}
-          getData={() => data}
-          hasRowReordering
-          onReorderRows={handleReorderRows}
-          totalRows={simpleData.length}
-          tableLayoutOptions={{
-            columns: columns,
-          }}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["table"]}
+        getData={() => data}
+        hasRowReordering
+        onReorderRows={handleReorderRows}
+        totalRows={simpleData.length}
+        tableLayoutOptions={{
+          columns: columns,
+        }}
+      />,
     );
 
     await waitFor(async () => {
@@ -733,21 +655,15 @@ describe("DataView", () => {
     };
 
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["table"]}
-          getData={getSimpleData}
-          tableLayoutOptions={{
-            columns: columns,
-            renderDetailPanel: tableDetails,
-          }}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["table"]}
+        getData={getSimpleData}
+        tableLayoutOptions={{
+          columns: columns,
+          renderDetailPanel: tableDetails,
+        }}
+      />,
     );
-
-    waitFor(() => {
-      screen.findByTestId("container");
-    });
 
     expect((await screen.findAllByText("Luke Skywalker")).length).toBe(1);
     expect(
@@ -770,21 +686,15 @@ describe("DataView", () => {
     };
 
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["grid"]}
-          getData={getSimpleData}
-          cardLayoutOptions={{
-            itemProps: itemProps,
-            renderDetailPanel: cardDetails,
-          }}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["grid"]}
+        getData={getSimpleData}
+        cardLayoutOptions={{
+          itemProps: itemProps,
+          renderDetailPanel: cardDetails,
+        }}
+      />,
     );
-
-    waitFor(() => {
-      screen.findByTestId("container");
-    });
 
     expect((await screen.findAllByText("Luke Skywalker")).length).toBe(1);
     expect(
@@ -803,16 +713,14 @@ describe("DataView", () => {
 
   it("can display empty state", async () => {
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["table"]}
-          getData={() => []}
-          tableLayoutOptions={{
-            columns: columns,
-          }}
-          emptyPlaceholder={<EmptyState heading="Empty" description="Empty" />}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["table"]}
+        getData={() => []}
+        tableLayoutOptions={{
+          columns: columns,
+        }}
+        emptyPlaceholder={<EmptyState heading="Empty" description="Empty" />}
+      />,
     );
 
     await screen.findAllByRole("row");
@@ -821,19 +729,17 @@ describe("DataView", () => {
   });
   it("can display no-results state", async () => {
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["table"]}
-          getData={getSimpleData}
-          tableLayoutOptions={{
-            columns: columns,
-          }}
-          isNoResults
-          noResultsPlaceholder={
-            <EmptyState heading="No results" description="No results" />
-          }
-        />
-      </div>,
+      <DataView
+        availableLayouts={["table"]}
+        getData={getSimpleData}
+        tableLayoutOptions={{
+          columns: columns,
+        }}
+        isNoResults
+        noResultsPlaceholder={
+          <EmptyState heading="No results" description="No results" />
+        }
+      />,
     );
 
     await screen.findByRole("table");
@@ -841,19 +747,15 @@ describe("DataView", () => {
   });
 
   it("can sort rows", async () => {
-    console.log("SimpleData: " + simpleData.length);
-
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["table"]}
-          getData={getSimpleData}
-          tableLayoutOptions={{
-            columns: columns,
-            hasSorting: true,
-          }}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["table"]}
+        getData={getSimpleData}
+        tableLayoutOptions={{
+          columns: columns,
+          hasSorting: true,
+        }}
+      />,
     );
 
     // Detect if the data has loaded in
@@ -877,16 +779,14 @@ describe("DataView", () => {
 
   it("can change row density", async () => {
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["table"]}
-          getData={getSimpleData}
-          tableLayoutOptions={{
-            columns: columns,
-            hasChangeableDensity: true,
-          }}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["table"]}
+        getData={getSimpleData}
+        tableLayoutOptions={{
+          columns: columns,
+          hasChangeableDensity: true,
+        }}
+      />,
     );
 
     // Detect if the data has loaded in
@@ -908,16 +808,14 @@ describe("DataView", () => {
   });
   it("can change column visibility", async () => {
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["table"]}
-          getData={getSimpleData}
-          tableLayoutOptions={{
-            columns: columns,
-            hasColumnVisibility: true,
-          }}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["table"]}
+        getData={getSimpleData}
+        tableLayoutOptions={{
+          columns: columns,
+          hasColumnVisibility: true,
+        }}
+      />,
     );
 
     // Detect if the data has loaded in
@@ -933,16 +831,14 @@ describe("DataView", () => {
   });
   it("can resize columns", async () => {
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["table"]}
-          getData={getSimpleData}
-          tableLayoutOptions={{
-            columns: columns,
-            hasColumnResizing: true,
-          }}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["table"]}
+        getData={getSimpleData}
+        tableLayoutOptions={{
+          columns: columns,
+          hasColumnResizing: true,
+        }}
+      />,
     );
 
     // Detect if the data has loaded in
@@ -956,34 +852,30 @@ describe("DataView", () => {
 
   it("displays paged pagination", async () => {
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["table"]}
-          getData={getSimpleData}
-          hasPagination
-          paginationType="paged"
-          tableLayoutOptions={{
-            columns: columns,
-          }}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["table"]}
+        getData={getSimpleData}
+        hasPagination
+        paginationType="paged"
+        tableLayoutOptions={{
+          columns: columns,
+        }}
+      />,
     );
 
     expect(await screen.findByTestId("paged-pagination")).toBeInTheDocument();
   });
   it("displays loadMore pagination", async () => {
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["table"]}
-          getData={getSimpleData}
-          hasPagination
-          paginationType="loadMore"
-          tableLayoutOptions={{
-            columns: columns,
-          }}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["table"]}
+        getData={getSimpleData}
+        hasPagination
+        paginationType="loadMore"
+        tableLayoutOptions={{
+          columns: columns,
+        }}
+      />,
     );
 
     expect(
@@ -992,19 +884,17 @@ describe("DataView", () => {
   });
   it("can load more rows via loadMore pagination", async () => {
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["table"]}
-          getData={getSimpleData}
-          hasPagination
-          paginationType="loadMore"
-          resultsPerPage={3}
-          enableVirtualization={false}
-          tableLayoutOptions={{
-            columns: columns,
-          }}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["table"]}
+        getData={getSimpleData}
+        hasPagination
+        paginationType="loadMore"
+        resultsPerPage={3}
+        enableVirtualization={false}
+        tableLayoutOptions={{
+          columns: columns,
+        }}
+      />,
     );
 
     const table = await screen.findByRole("table");
@@ -1021,18 +911,16 @@ describe("DataView", () => {
   });
   it("can go to the next page", async () => {
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["table"]}
-          getData={getSimpleData}
-          hasPagination
-          paginationType="paged"
-          resultsPerPage={2}
-          tableLayoutOptions={{
-            columns: columns,
-          }}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["table"]}
+        getData={getSimpleData}
+        hasPagination
+        paginationType="paged"
+        resultsPerPage={2}
+        tableLayoutOptions={{
+          columns: columns,
+        }}
+      />,
     );
 
     expect(await screen.findByTestId("paged-pagination")).toBeInTheDocument();
@@ -1051,18 +939,16 @@ describe("DataView", () => {
   });
   it("can go to the previous page", async () => {
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["table"]}
-          getData={getSimpleData}
-          hasPagination
-          paginationType="paged"
-          resultsPerPage={2}
-          tableLayoutOptions={{
-            columns: columns,
-          }}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["table"]}
+        getData={getSimpleData}
+        hasPagination
+        paginationType="paged"
+        resultsPerPage={2}
+        tableLayoutOptions={{
+          columns: columns,
+        }}
+      />,
     );
 
     expect(await screen.findByTestId("paged-pagination")).toBeInTheDocument();
@@ -1089,19 +975,17 @@ describe("DataView", () => {
   });
   it("can disable the next page button based on max rows", async () => {
     render(
-      <div data-testid="container">
-        <DataView
-          availableLayouts={["table"]}
-          getData={getSimpleData}
-          hasPagination
-          paginationType="paged"
-          resultsPerPage={simpleData.length - 1}
-          totalRows={simpleData.length}
-          tableLayoutOptions={{
-            columns: columns,
-          }}
-        />
-      </div>,
+      <DataView
+        availableLayouts={["table"]}
+        getData={getSimpleData}
+        hasPagination
+        paginationType="paged"
+        resultsPerPage={simpleData.length - 1}
+        totalRows={simpleData.length}
+        tableLayoutOptions={{
+          columns: columns,
+        }}
+      />,
     );
 
     expect(await screen.findByText("Luke Skywalker")).toBeInTheDocument();
