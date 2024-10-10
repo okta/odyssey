@@ -19,8 +19,10 @@ import {
 } from "react";
 import styled from "@emotion/styled";
 
+import { Box } from "../../Box";
 import {
   ComposablePicker,
+  ComposablePickerProps,
   type AdornmentSize,
   type BasePickerProps,
   type BasePickerType,
@@ -40,6 +42,7 @@ import {
   OptionProps,
 } from "./BasicPicker";
 import { Heading6 } from "../../Typography";
+import { Tag } from "../../Tag";
 
 type Adornment = ReactNode | string;
 
@@ -55,40 +58,62 @@ export type AdornmentOptionType =
 
 const OptionAdornmentContainer = styled("div", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "adornmentSize",
+    prop !== "odysseyDesignTokens" &&
+    prop !== "adornmentSize" &&
+    prop !== "isTagContainer",
 })<{
-  adornmentSize: AdornmentSize;
+  adornmentSize?: AdornmentSize;
+  isTagContainer?: boolean;
   odysseyDesignTokens: DesignTokens;
-}>(({ adornmentSize, odysseyDesignTokens }) => ({
-  position: "relative",
-  // push icon up by one px for better visual alignment
-  bottom: "1px",
-  alignSelf: "flex-start",
-  width: odysseyDesignTokens.Spacing5,
-  height: odysseyDesignTokens.Spacing5,
-  overflow: "hidden",
-  marginInlineEnd: odysseyDesignTokens.Spacing3,
+}>(
+  ({
+    adornmentSize = "small",
+    isTagContainer = false,
+    odysseyDesignTokens,
+  }) => ({
+    position: "relative",
+    // push icon up by one px for better visual alignment
+    bottom: "1px",
+    alignSelf: "flex-start",
+    width: odysseyDesignTokens.Spacing5,
+    height: odysseyDesignTokens.Spacing5,
+    overflow: "hidden",
+    marginInlineEnd: odysseyDesignTokens.Spacing3,
 
-  ...(adornmentSize === "large" && {
-    // display: "flex",
-    // alignItems: "center",
-    bottom: 0,
-    width: odysseyDesignTokens.Spacing8,
-    height: odysseyDesignTokens.Spacing8,
+    svg: {
+      width: "100%",
+      height: "auto",
+    },
+
+    img: {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      width: "100%",
+      transform: "translate(-50%, -50%)",
+    },
+
+    ...(adornmentSize === "large" && {
+      bottom: 0,
+      width: odysseyDesignTokens.Spacing8,
+      height: odysseyDesignTokens.Spacing8,
+    }),
+
+    ...(isTagContainer && {
+      bottom: 0,
+      alignSelf: "center",
+      width: odysseyDesignTokens.Spacing4,
+      height: odysseyDesignTokens.Spacing4,
+      marginInlineEnd: odysseyDesignTokens.Spacing2,
+
+      svg: {
+        display: "flex",
+        width: "100%",
+        height: "auto",
+      },
+    }),
   }),
-
-  svg: {
-    width: "100%",
-    height: "auto",
-  },
-
-  img: {
-    position: "absolute",
-    top: "50%",
-    width: "100%",
-    transform: "translateY(-50%)",
-  },
-}));
+);
 
 type OptionAdornmentProps = {
   adornment: Adornment;
@@ -101,9 +126,9 @@ const OptionAdornment = ({
   adornmentSize,
   odysseyDesignTokens,
 }: OptionAdornmentProps) => {
-  const isImageLogo = typeof adornment === "string";
+  const isImageAdornment = typeof adornment === "string";
 
-  if (isImageLogo) {
+  if (isImageAdornment) {
     return (
       <OptionAdornmentContainer
         adornmentSize={adornmentSize}
@@ -191,6 +216,35 @@ const OptionWithLabelDescriptionMetadata = <
   );
 };
 
+type TagAdornmentProps = {
+  adornment: Adornment;
+};
+
+const TagAdornment = ({ adornment }: TagAdornmentProps) => {
+  const odysseyDesignTokens = useOdysseyDesignTokens();
+  const isImageAdornment = typeof adornment === "string";
+
+  if (isImageAdornment) {
+    return (
+      <OptionAdornmentContainer
+        isTagContainer
+        odysseyDesignTokens={odysseyDesignTokens}
+      >
+        <img src={adornment} alt="" role="presentation" />
+      </OptionAdornmentContainer>
+    );
+  }
+
+  return (
+    <OptionAdornmentContainer
+      isTagContainer
+      odysseyDesignTokens={odysseyDesignTokens}
+    >
+      {adornment}
+    </OptionAdornmentContainer>
+  );
+};
+
 export type PickerWithOptionAdornmentProps<
   OptionType extends AdornmentOptionType,
   HasMultipleChoices extends boolean | undefined,
@@ -266,6 +320,39 @@ const PickerWithOptionAdornment: PickerWithOptionAdornmentComponentType = <
 >) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
+  const customTagRender = useCallback<
+    NonNullable<
+      ComposablePickerProps<
+        OptionType,
+        HasMultipleChoices,
+        IsCustomValueAllowed
+      >["renderTags"]
+    >
+  >(
+    (values, getTagProps) =>
+      values.map((value, index) => {
+        const { key, onDelete } = getTagProps({ index });
+        const { adornment, label } = value;
+
+        return (
+          <Box
+            key={key}
+            sx={{
+              margin: odysseyDesignTokens.Spacing1,
+              marginInlineEnd: 0,
+            }}
+          >
+            <Tag
+              icon={<TagAdornment adornment={adornment} />}
+              label={label}
+              onRemove={onDelete}
+            />
+          </Box>
+        );
+      }),
+    [odysseyDesignTokens],
+  );
+
   const customOptionRender = useCallback<
     (props: HTMLAttributes<HTMLLIElement>, option: OptionType) => ReactNode
   >(
@@ -323,7 +410,7 @@ const PickerWithOptionAdornment: PickerWithOptionAdornmentComponentType = <
       onFocus={onFocus}
       options={options}
       renderOption={customOptionRender}
-      // renderTags={// renderTags}
+      renderTags={customTagRender}
       value={value}
       testId={testId}
       translate={translate}
