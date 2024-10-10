@@ -118,9 +118,10 @@ const StyledMuiCard = styled(MuiCard, {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   boxShadow: "none",
+  transition: "opacity 0.3s ease-in-out",
   "&::after": {
     opacity: 0,
-    "box-shadow": odysseyDesignTokens.DepthMedium,
+    boxShadow: odysseyDesignTokens.DepthMedium,
   },
   "&:hover::after": {
     opacity: 1,
