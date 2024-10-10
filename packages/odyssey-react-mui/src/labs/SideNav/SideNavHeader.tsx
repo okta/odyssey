@@ -18,7 +18,6 @@ import {
 } from "../../OdysseyDesignTokensContext";
 import { Box } from "../../Box";
 import { Heading6 } from "../../Typography";
-import { CollapseIcon } from "./CollapseIcon";
 import type { SideNavProps } from "./types";
 import { TOP_NAV_HEIGHT_TOKEN } from "../TopNav";
 
@@ -47,8 +46,6 @@ const SideNavHeaderContainer = styled("div", {
 
 const SideNavHeader = ({
   navHeaderText,
-  isCollapsible,
-  onCollapse,
   logo,
 }: Pick<
   SideNavProps,
@@ -77,7 +74,6 @@ const SideNavHeader = ({
         <Box sx={sideNavHeaderStyles}>
           <Heading6>{navHeaderText}</Heading6>
         </Box>
-        {isCollapsible && <CollapseIcon onClick={onCollapse} />}
       </SideNavHeaderContainer>
     </Box>
   );

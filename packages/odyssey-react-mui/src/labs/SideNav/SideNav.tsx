@@ -21,7 +21,7 @@ import {
   useEffect,
 } from "react";
 
-import { ExpandLeftIcon } from "../../icons.generated";
+import { Box } from "../../Box";
 import { NavAccordion } from "../NavAccordion";
 import {
   DesignTokens,
@@ -29,6 +29,8 @@ import {
 } from "../../OdysseyDesignTokensContext";
 import type { SideNavProps } from "./types";
 import { OktaLogo } from "./OktaLogo";
+import { HandleIcon } from "./HandleIcon";
+import { CollapseHandleIcon } from "./CollapseHandleIcon";
 import { SideNavHeader } from "./SideNavHeader";
 import {
   SideNavItemContent,
@@ -36,7 +38,7 @@ import {
 } from "./SideNavItemContent";
 import { SideNavFooterContent } from "./SideNavFooterContent";
 
-export const DEFAULT_SIDE_NAV_WIDTH = "300px";
+export const DEFAULT_SIDE_NAV_WIDTH = "301px";
 
 const SideNavContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "expandedWidth",
@@ -58,15 +60,19 @@ const SideNavCollapsedContainer = styled("div", {
     odysseyDesignTokens: DesignTokens;
     isSideNavCollapsed: boolean;
   }) => ({
-    backgroundColor: odysseyDesignTokens.HueNeutral300,
-    paddingTop: odysseyDesignTokens.Spacing5,
+    paddingTop: "75px",
     cursor: "pointer",
-    width: isSideNavCollapsed ? "auto" : 0,
-    opacity: isSideNavCollapsed ? 1 : 0,
-    visibility: isSideNavCollapsed ? "visible" : "hidden",
-    transitionProperty: "opacity",
+    width: isSideNavCollapsed ? "auto" : "auto",
+    opacity: isSideNavCollapsed ? 1 : 1,
+    visibility: isSideNavCollapsed ? "visible" : "visible",
+    transitionProperty: "opacity, background-color",
     transitionDuration: odysseyDesignTokens.TransitionDurationMain,
     transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
+    "&:hover": {
+      backgroundColor: isSideNavCollapsed
+        ? odysseyDesignTokens.HueNeutral100
+        : "transparent",
+    },
   }),
 );
 
@@ -90,7 +96,7 @@ const SideNavExpandContainer = styled("nav", {
     display: "flex",
     opacity: isSideNavCollapsed ? 0 : 1,
     visibility: isSideNavCollapsed ? "hidden" : "visible",
-    width: isSideNavCollapsed ? "0" : expandedWidth,
+    width: isSideNavCollapsed ? 0 : expandedWidth,
     transitionProperty: "opacity, width",
     transitionDuration: odysseyDesignTokens.TransitionDurationMain,
     transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
@@ -201,6 +207,10 @@ const SideNav = ({
   footerComponent,
   logo,
 }: SideNavProps) => {
+  expandedWidth = isCollapsible
+    ? parseInt(expandedWidth) + 32 + "px"
+    : expandedWidth;
+
   const [isSideNavCollapsed, setSideNavCollapsed] = useState(false);
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const [isContentScrollable, setIsContentScrollable] = useState(false);
@@ -340,6 +350,7 @@ const SideNav = ({
           <SideNavItemContent
             key={childProps.id}
             scrollRef={getRefIfThisIsFirstNodeWithIsSelected(childProps.id)}
+            __hasParent={true}
             {...childProps}
           />
         )),
@@ -353,46 +364,35 @@ const SideNav = ({
   }, [isSideNavCollapsed, setSideNavCollapsed, onCollapse]);
 
   const sideNavExpandClickHandler = useCallback(() => {
+    isSideNavCollapsed ? onExpand?.() : onCollapse?.();
     setSideNavCollapsed(!isSideNavCollapsed);
-    onExpand?.();
-  }, [isSideNavCollapsed, setSideNavCollapsed, onExpand]);
+  }, [isSideNavCollapsed, setSideNavCollapsed, onExpand, onCollapse]);
 
   const sideNavExpandKeyHandler = useCallback(
     (event: KeyboardEvent<HTMLDivElement>) => {
       if (event?.key === "Enter" || event?.code === "Space") {
         event.preventDefault();
+        isSideNavCollapsed ? onExpand?.() : onCollapse?.();
         setSideNavCollapsed(!isSideNavCollapsed);
-        onExpand?.();
       }
     },
-    [isSideNavCollapsed, setSideNavCollapsed, onExpand],
+    [isSideNavCollapsed, setSideNavCollapsed, onExpand, onCollapse],
   );
 
-  const expandLeftIconStyles = useMemo(
-    () => ({
-      fontSize: "1em",
-      margin: `0 ${odysseyDesignTokens.Spacing1}`,
-    }),
-    [odysseyDesignTokens],
-  );
+  // const expandLeftIconStyles = useMemo(
+  //   () => ({
+  //     fontSize: "1em",
+  //     margin: `0 ${odysseyDesignTokens.Spacing1}`,
+  //   }),
+  //   [odysseyDesignTokens],
+  // );
 
   return (
     <SideNavContainer expandedWidth={expandedWidth}>
-      <SideNavCollapsedContainer
-        tabIndex={0}
-        role="button"
-        odysseyDesignTokens={odysseyDesignTokens}
-        isSideNavCollapsed={isSideNavCollapsed}
-        onClick={sideNavExpandClickHandler}
-        onKeyDown={sideNavExpandKeyHandler}
-        data-se="collapsed-region"
-        data-aria-label="expand side navigation"
-      >
-        <ExpandLeftIcon sx={expandLeftIconStyles} />
-      </SideNavCollapsedContainer>
       <SideNavExpandContainer
         odysseyDesignTokens={odysseyDesignTokens}
         isSideNavCollapsed={isSideNavCollapsed}
+        tabIndex={-1}
         data-se="expanded-region"
         expandedWidth={expandedWidth}
         aria-label={navHeaderText}
@@ -404,7 +404,6 @@ const SideNav = ({
           <SideNavHeader
             logo={logo || <OktaLogo />}
             navHeaderText={navHeaderText}
-            isCollapsible={isCollapsible}
             onCollapse={sideNavCollapseHandler}
           />
         </SideNavHeaderContainer>
@@ -438,6 +437,8 @@ const SideNav = ({
                     id={id}
                     key={id}
                     odysseyDesignTokens={odysseyDesignTokens}
+                    disabled={isDisabled}
+                    aria-disabled={isDisabled}
                   >
                     <NavAccordion
                       label={label}
@@ -480,6 +481,57 @@ const SideNav = ({
           </SideNavFooter>
         )}
       </SideNavExpandContainer>
+      {isCollapsible && (
+        <SideNavCollapsedContainer
+          tabIndex={0}
+          role="button"
+          odysseyDesignTokens={odysseyDesignTokens}
+          isSideNavCollapsed={isSideNavCollapsed}
+          onClick={sideNavExpandClickHandler}
+          onKeyDown={sideNavExpandKeyHandler}
+          data-se="collapsed-region"
+          data-aria-label="expand side navigation"
+        >
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              "& > svg#collapse": {
+                opacity: 0,
+                display: "none",
+                transform: isSideNavCollapsed
+                  ? "rotate(180deg)"
+                  : "rotate(0deg)",
+              },
+              ":hover": {
+                "& > svg#collapse": {
+                  opacity: 1,
+                  display: "block",
+                  padding: "7px",
+                  transitionProperty: "opacity",
+                  transitionDuration:
+                    "odysseyDesignTokens.TransitionDurationMain",
+                  transitionTimingFunction:
+                    odysseyDesignTokens.TransitionTimingMain,
+                },
+                "& > svg#handle": {
+                  opacity: 0,
+                  display: "none",
+                  transitionProperty: "opacity",
+                  transitionDuration:
+                    "odysseyDesignTokens.TransitionDurationMain",
+                  transitionTimingFunction:
+                    odysseyDesignTokens.TransitionTimingMain,
+                },
+              },
+            }}
+          >
+            <HandleIcon />
+            <CollapseHandleIcon />
+          </Box>
+        </SideNavCollapsedContainer>
+      )}
     </SideNavContainer>
   );
 };

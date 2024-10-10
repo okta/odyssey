@@ -34,14 +34,6 @@ const SideNavItemLabelContainer = styled("div", {
   fontSize: odysseyDesignTokens.TypographyScale0,
   fontWeight: odysseyDesignTokens.TypographyWeightHeading,
   marginLeft: isIconVisible ? odysseyDesignTokens.Spacing2 : 0,
-  "& a": {
-    color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
-    fontSize: odysseyDesignTokens.TypographyScale0,
-  },
-  "& a:hover": {
-    textDecoration: "none",
-    cursor: "pointer",
-  },
 }));
 
 const SideNavItemLinkContent = ({
@@ -50,9 +42,10 @@ const SideNavItemLinkContent = ({
   endIcon,
   severity,
   statusLabel,
+  __hasParent,
 }: Pick<
   SideNavItem,
-  "label" | "startIcon" | "endIcon" | "severity" | "statusLabel"
+  "label" | "startIcon" | "endIcon" | "severity" | "statusLabel" | "__hasParent"
 >): ReactNode => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
@@ -65,11 +58,12 @@ const SideNavItemLinkContent = ({
 
   return (
     <>
-      {startIcon && startIcon}
+      {!__hasParent && startIcon && startIcon}
       <SideNavItemLabelContainer
         odysseyDesignTokens={odysseyDesignTokens}
-        isIconVisible={Boolean(startIcon)}
+        isIconVisible={!__hasParent && Boolean(startIcon)}
       >
+        {Boolean(startIcon)}
         {label}
         {severity && (
           <Box sx={sideNavItemContentStyles}>
@@ -77,7 +71,7 @@ const SideNavItemLinkContent = ({
           </Box>
         )}
       </SideNavItemLabelContainer>
-      {endIcon && endIcon}
+      {!__hasParent && endIcon && endIcon}
     </>
   );
 };

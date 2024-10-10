@@ -46,23 +46,23 @@ export const SideNavListItemContainer = styled("li", {
   "&:last-child": {
     marginBottom: odysseyDesignTokens.Spacing2,
   },
-  "& a": {
+  "& a, & div[role='button']": {
     display: "flex",
     alignItems: "center",
     width: "100%",
     minHeight: "48px",
     padding: `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
     color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
-    pointerEvents: isDisabled ? "none" : "auto",
   },
-  "& a:hover": {
+  "& a:hover, & div[role='button']:hover": {
     textDecoration: "none",
+    color: `${odysseyDesignTokens.TypographyColorAction} !important`,
     cursor: isDisabled ? "default" : "pointer",
     backgroundColor: !isDisabled ? odysseyDesignTokens.HueNeutral50 : "inherit",
   },
-  "& a:focus-visible": {
+  "& a:focus-visible, & div[role='button']:focus-visible": {
     outlineOffset: 0,
-    borderRadius: 0,
+    color: `${odysseyDesignTokens.TypographyColorAction} !important`,
     outlineWidth: odysseyDesignTokens.FocusOutlineWidthMain,
     backgroundColor: !isDisabled ? odysseyDesignTokens.HueNeutral50 : "inherit",
   },
@@ -83,6 +83,7 @@ type ScrollIntoViewHandle = {
 };
 
 const SideNavItemContent = ({
+  __hasParent,
   id,
   label,
   href,
@@ -108,6 +109,7 @@ const SideNavItemContent = ({
   | "onClick"
   | "isSelected"
   | "isDisabled"
+  | "__hasParent"
 > & {
   /**
    * The ref used to scroll to this item
@@ -178,6 +180,7 @@ const SideNavItemContent = ({
               endIcon={endIcon}
               statusLabel={statusLabel}
               severity={severity}
+              __hasParent={__hasParent}
             />
           </NavItemContentClickContainer>
         ) : !href ? (
@@ -193,6 +196,7 @@ const SideNavItemContent = ({
               endIcon={endIcon}
               statusLabel={statusLabel}
               severity={severity}
+              __hasParent={__hasParent}
             />
           </NavItemContentClickContainer>
         ) : (
@@ -203,6 +207,7 @@ const SideNavItemContent = ({
               endIcon={endIcon}
               statusLabel={statusLabel}
               severity={severity}
+              __hasParent={__hasParent}
             />
           </Link>
         )
