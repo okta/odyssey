@@ -117,14 +117,28 @@ const ChildrenContainer = styled("div", {
 const StyledMuiCard = styled(MuiCard, {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
+  position: "relative",
   boxShadow: "none",
-  transition: "opacity 0.3s ease-in-out",
+  overflow: "unset",
+
   "&::after": {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
     opacity: 0,
     boxShadow: odysseyDesignTokens.DepthMedium,
+    borderRadius: odysseyDesignTokens.BorderRadiusOuter,
+    transition: `opacity ${odysseyDesignTokens.TransitionDurationMain}`,
+    zIndex: "-1",
+    content: '""',
   },
-  "&:hover::after": {
-    opacity: 1,
+
+  "&:hover": {
+    "&::after": {
+      opacity: 1,
+    },
   },
 }));
 
