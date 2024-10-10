@@ -230,8 +230,8 @@ const storybookMeta: Meta<BasicPickerType> = {
     },
   },
   args: {
-    label: "Languages",
-    hint: "Languages supported by the system",
+    label: "Basic picker label",
+    hint: "Optional hint text for picker",
     options: languagesNoDescription,
   },
   decorators: [MuiThemeDecorator],
