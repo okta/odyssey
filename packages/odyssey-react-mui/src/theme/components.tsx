@@ -857,7 +857,6 @@ export const components = ({
           },
 
           "&.isClickable:hover": {
-            backgroundColor: odysseyTokens.HueNeutral50,
             boxShadow: odysseyTokens.DepthHigh,
           },
 
