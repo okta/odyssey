@@ -92,8 +92,7 @@ const StackContainer = styled("div", {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" &&
     prop !== "currentLayout" &&
-    prop !== "maxGridColumns" &&
-    prop !== "data-testid",
+    prop !== "maxGridColumns",
 })<{
   odysseyDesignTokens: DesignTokens;
   currentLayout: CardLayout;
@@ -176,7 +175,6 @@ const CardLayoutContent = ({
       odysseyDesignTokens={odysseyDesignTokens}
       currentLayout={currentLayout}
       maxGridColumns={cardLayoutOptions.maxGridColumns ?? 3}
-      data-testId={currentLayout}
     >
       {isLoading ? (
         <LoadingContainer odysseyDesignTokens={odysseyDesignTokens}>

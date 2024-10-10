@@ -286,7 +286,7 @@ const Pagination = ({
   );
 
   return variant === "paged" ? (
-    <PaginationContainer data-testId={`${variant}-pagination`}>
+    <PaginationContainer>
       <PaginationSegment odysseyDesignTokens={odysseyDesignTokens}>
         <Box>
           <Paragraph component="span" color="textSecondary">

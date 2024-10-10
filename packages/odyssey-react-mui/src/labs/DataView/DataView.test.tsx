@@ -102,8 +102,14 @@ const getSimpleData = ({ ...props }) => {
   return filterData({ data: [...simpleData], ...props });
 };
 
-const itemProps = (row: DataRow) => ({
+const listItemProps = (row: DataRow) => ({
   title: row.name,
+  overline: "List card",
+});
+
+const gridItemProps = (row: DataRow) => ({
+  title: row.name,
+  overline: "Grid card",
 });
 
 describe("DataView", () => {
@@ -118,9 +124,10 @@ describe("DataView", () => {
       />,
     );
 
+    await screen.findByText(data[0].name);
+
     expect(screen.queryByRole("table")).not.toBeNull();
-    expect(screen.queryByTestId("list")).toBeNull();
-    expect(screen.queryByTestId("grid")).toBeNull();
+    expect(screen.queryByText("Card")).toBeNull();
   });
 
   it("displays a list view", async () => {
@@ -129,14 +136,16 @@ describe("DataView", () => {
         availableLayouts={["list"]}
         getData={getData}
         cardLayoutOptions={{
-          itemProps: itemProps,
+          itemProps: listItemProps,
         }}
       />,
     );
 
+    await screen.findByText(data[0].name);
+
     expect(screen.queryByRole("table")).toBeNull();
-    expect(screen.queryByTestId("list")).not.toBeNull();
-    expect(screen.queryByTestId("grid")).toBeNull();
+    expect(screen.findAllByText("List card")).not.toBeNull();
+    expect(screen.queryByText("Grid card")).toBeNull();
   });
 
   it("displays a grid view", async () => {
@@ -145,14 +154,16 @@ describe("DataView", () => {
         availableLayouts={["grid"]}
         getData={getData}
         cardLayoutOptions={{
-          itemProps: itemProps,
+          itemProps: gridItemProps,
         }}
       />,
     );
 
+    await screen.findByText(data[0].name);
+
     expect(screen.queryByRole("table")).toBeNull();
-    expect(screen.queryByTestId("list")).toBeNull();
-    expect(screen.queryByTestId("grid")).not.toBeNull();
+    expect(screen.queryByText("List card")).toBeNull();
+    expect(screen.findAllByText("Grid card")).not.toBeNull();
   });
 
   it("displays the layout switcher", async () => {
@@ -164,7 +175,7 @@ describe("DataView", () => {
           columns: columns,
         }}
         cardLayoutOptions={{
-          itemProps: itemProps,
+          itemProps: listItemProps,
         }}
       />,
     );
@@ -372,7 +383,7 @@ describe("DataView", () => {
         getData={getSimpleData}
         hasRowSelection
         cardLayoutOptions={{
-          itemProps: itemProps,
+          itemProps: gridItemProps,
         }}
       />,
     );
@@ -423,7 +434,7 @@ describe("DataView", () => {
         getData={getSimpleData}
         hasRowSelection
         cardLayoutOptions={{
-          itemProps: itemProps,
+          itemProps: gridItemProps,
         }}
       />,
     );
@@ -690,7 +701,7 @@ describe("DataView", () => {
         availableLayouts={["grid"]}
         getData={getSimpleData}
         cardLayoutOptions={{
-          itemProps: itemProps,
+          itemProps: gridItemProps,
           renderDetailPanel: cardDetails,
         }}
       />,
@@ -863,7 +874,7 @@ describe("DataView", () => {
       />,
     );
 
-    expect(await screen.findByTestId("paged-pagination")).toBeInTheDocument();
+    expect(await screen.findByLabelText("Next page")).toBeInTheDocument();
   });
   it("displays loadMore pagination", async () => {
     render(
@@ -923,7 +934,7 @@ describe("DataView", () => {
       />,
     );
 
-    expect(await screen.findByTestId("paged-pagination")).toBeInTheDocument();
+    expect(await screen.findByLabelText("Next page")).toBeInTheDocument();
 
     const nextPageButton = screen.getByLabelText("Next page", {
       selector: "button",
@@ -951,7 +962,7 @@ describe("DataView", () => {
       />,
     );
 
-    expect(await screen.findByTestId("paged-pagination")).toBeInTheDocument();
+    expect(await screen.findByLabelText("Next page")).toBeInTheDocument();
 
     const nextPageButton = screen.getByLabelText("Next page", {
       selector: "button",
