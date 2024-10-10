@@ -235,8 +235,8 @@ const storybookMeta: Meta<PickerWithOptionAdornmentType> = {
     },
   },
   args: {
-    label: "Languages",
-    hint: "Languages supported by the system",
+    label: "Picker with option adornment label",
+    hint: "Optional hint text for picker",
     options: optionsSmall,
   },
   decorators: [MuiThemeDecorator],
