@@ -239,40 +239,9 @@ type PickerWithOptionAdornmentPropsType = PickerWithOptionAdornmentProps<
   boolean | undefined
 >;
 
-export const OptionWithSmallAdornment: StoryObj<PickerWithOptionAdornmentPropsType> =
-  {};
+export const SmallAdornment: StoryObj<PickerWithOptionAdornmentPropsType> = {};
 
-export const OptionWithLargeAdornment: StoryObj<PickerWithOptionAdornmentPropsType> =
-  {
-    args: {
-      adornmentSize: "large",
-      options: optionsLarge,
-    },
-  };
-
-export const Multiple: StoryObj<PickerWithOptionAdornmentPropsType> = {
-  args: {
-    hasMultipleChoices: true,
-  },
-};
-
-export const Disabled: StoryObj<PickerWithOptionAdornmentPropsType> = {
-  args: {
-    isDisabled: true,
-    value: optionsSmall[0],
-  },
-};
-
-export const MultiChoiceDisabled: StoryObj<PickerWithOptionAdornmentPropsType> =
-  {
-    args: {
-      isDisabled: true,
-      hasMultipleChoices: true,
-      value: [optionsSmall[0], optionsSmall[1]],
-    },
-  };
-
-export const OptionWithSmallAdornmentAndMetaData: StoryObj<PickerWithOptionAdornmentPropsType> =
+export const SmallAdornmentAndMetaData: StoryObj<PickerWithOptionAdornmentPropsType> =
   {
     args: {
       options: optionsSmall.map((option) => ({
@@ -295,7 +264,14 @@ export const OptionWithSmallAdornmentAndMetaData: StoryObj<PickerWithOptionAdorn
     },
   };
 
-export const OptionWithLargeAdornmentAndMetaData: StoryObj<PickerWithOptionAdornmentPropsType> =
+export const LargeAdornment: StoryObj<PickerWithOptionAdornmentPropsType> = {
+  args: {
+    adornmentSize: "large",
+    options: optionsLarge,
+  },
+};
+
+export const LargeAdornmentAndMetaData: StoryObj<PickerWithOptionAdornmentPropsType> =
   {
     args: {
       adornmentSize: "large",
@@ -316,5 +292,27 @@ export const OptionWithLargeAdornmentAndMetaData: StoryObj<PickerWithOptionAdorn
           },
         ],
       })),
+    },
+  };
+
+export const Disabled: StoryObj<PickerWithOptionAdornmentPropsType> = {
+  args: {
+    isDisabled: true,
+    value: optionsSmall[0],
+  },
+};
+
+export const MultiSelect: StoryObj<PickerWithOptionAdornmentPropsType> = {
+  args: {
+    hasMultipleChoices: true,
+  },
+};
+
+export const MultiSelectDisabled: StoryObj<PickerWithOptionAdornmentPropsType> =
+  {
+    args: {
+      isDisabled: true,
+      hasMultipleChoices: true,
+      value: [optionsSmall[0], optionsSmall[1]],
     },
   };
