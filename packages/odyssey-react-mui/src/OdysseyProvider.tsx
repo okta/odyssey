@@ -29,7 +29,7 @@ import { DefaultSupportedLanguages } from "./OdysseyTranslationProvider.types";
 import {
   ContrastMode,
   ContrastModeProvider,
-  useContrastContext,
+  useContrastModeContext,
 } from "./ContrastModeProvider";
 
 const scopedCssBaselineStyles = {
@@ -58,7 +58,7 @@ const OdysseyProviderInner = <SupportedLanguages extends string>({
   themeOverride,
   translationOverrides,
 }: OdysseyProviderProps<SupportedLanguages>) => {
-  const { contrastMode } = useContrastContext();
+  const { contrastMode } = useContrastModeContext();
 
   const memoizedThemeProps = useMemo(
     () => ({

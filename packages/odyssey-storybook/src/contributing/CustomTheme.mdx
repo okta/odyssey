@@ -44,8 +44,8 @@ The `ContrastModeProvider` component manages the contrast mode (`lowContrast` or
 
 By default, the `ContrastModeProvider` will automatically detect the parent background color and determine the appropriate contrast mode. This is particularly useful when components need to adapt dynamically to different backgrounds for visual contrast consistency.
 
-- **Low Contrast** is used for the gray background (`HueNeutral50`).
-- **High Contrast** is used for the white background.
+- **High Contrast** is used for the gray background (`HueNeutral50`).
+- **Low Contrast** is used for the white background.
 
 The automatic detection works by inspecting the background color of the nearest parent element and determining whether it matches a predefined token value (e.g., `HueNeutral50`).
 
@@ -60,12 +60,12 @@ If you need to override the automatic behavior, you can manually set the mode by
 </ContrastModeProvider>
 
 //For gray background
-<ContrastModeProvider contrastMode="lowContrast">
+<ContrastModeProvider contrastMode="highContrast">
   <YourComponent />
 </ContrastModeProvider>
 
 //For white background
-<ContrastModeProvider contrastMode="highContrast">
+<ContrastModeProvider contrastMode="lowContrast">
   <YourComponent />
 </ContrastModeProvider>
 ```

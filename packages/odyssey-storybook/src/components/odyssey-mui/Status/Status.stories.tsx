@@ -171,12 +171,12 @@ export const StatusesOnWhiteBackground: StoryObj<StatusProps> = {
       Tokens.PaletteWarningLighter,
       Tokens.TypographyColorWarning,
     );
-    await axeRun("Statuses on white (`highContrast`) background");
+    await axeRun("Statuses on white (`lowContrast`) background");
   },
   parameters: {
     docs: {
       source: {
-        code: `<ContrastModeProvider contrastMode="highContrast">
+        code: `<ContrastModeProvider contrastMode="lowContrast">
   <Status label="Default" severity="default" />
   <Status label="Error" severity="error" />
   <Status label="Info" severity="info" />
@@ -186,7 +186,7 @@ export const StatusesOnWhiteBackground: StoryObj<StatusProps> = {
       },
       description: {
         story:
-          "`Status` component on a white (`highContrast`) background using [`ContrastModeProvider`](/docs/customization-components--docs#contrastmodeprovider).",
+          "`Status` component on a white (`lowContrast`) background using [`ContrastModeProvider`](/docs/customization-components--docs#contrastmodeprovider).",
       },
     },
   },
@@ -196,7 +196,7 @@ export const StatusesOnGrayBackground: StoryObj<StatusProps> = {
   name: "Statuses on gray background",
   render: () => (
     <Box sx={{ backgroundColor: Tokens.HueNeutral50, padding: "24px" }}>
-      <ContrastModeProvider contrastMode="lowContrast">
+      <ContrastModeProvider contrastMode="highContrast">
         <Box
           sx={{
             display: "flex",
@@ -249,12 +249,12 @@ export const StatusesOnGrayBackground: StoryObj<StatusProps> = {
       Tokens.HueYellow700,
     );
 
-    await axeRun("Statuses on gray (`lowContrast`) background");
+    await axeRun("Statuses on gray (`highContrast`) background");
   },
   parameters: {
     docs: {
       source: {
-        code: `<ContrastModeProvider contrastMode="lowContrast">
+        code: `<ContrastModeProvider contrastMode="highContrast">
   <Status label="Default" severity="default" />
   <Status label="Error" severity="error" />
   <Status label="Info" severity="info" />
@@ -264,7 +264,7 @@ export const StatusesOnGrayBackground: StoryObj<StatusProps> = {
       },
       description: {
         story:
-          "`Status` component on a gray (`lowContrast`) background using [`ContrastModeProvider`](/docs/customization-components--docs#contrastmodeprovider).",
+          "`Status` component on a gray (`highContrast`) background using [`ContrastModeProvider`](/docs/customization-components--docs#contrastmodeprovider).",
       },
     },
   },

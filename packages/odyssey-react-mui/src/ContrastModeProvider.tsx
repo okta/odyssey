@@ -39,11 +39,11 @@ export type ContrastModeContextType = {
 };
 
 const ContrastModeContext = createContext<ContrastModeContextType>({
-  contrastMode: "highContrast",
+  contrastMode: "lowContrast",
   parentBackgroundColor: "",
 });
 
-export const useContrastContext = () => useContext(ContrastModeContext);
+export const useContrastModeContext = () => useContext(ContrastModeContext);
 
 const hexToRgb = (hex: string): string => {
   const bigint = parseInt(hex.slice(1), 16);
@@ -98,8 +98,8 @@ export const ContrastModeProvider = ({
     if (explicitContrastMode) {
       setContrastMode(explicitContrastMode);
     } else {
-      const isLowContrast = parentBackgroundColor === Tokens.HueNeutral50;
-      setContrastMode(isLowContrast ? "lowContrast" : "highContrast");
+      const isHighContrast = parentBackgroundColor === Tokens.HueNeutral50;
+      setContrastMode(isHighContrast ? "highContrast" : "lowContrast");
     }
   }, [parentBackgroundColor, explicitContrastMode]);
 

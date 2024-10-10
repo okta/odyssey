@@ -21,7 +21,7 @@ import {
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext";
 import { CloseCircleFilledIcon } from "./icons.generated";
-import { useContrastContext, ContrastMode } from "./ContrastModeProvider";
+import { useContrastModeContext, ContrastMode } from "./ContrastModeProvider";
 
 export const tagColorVariants = [
   "default",
@@ -62,11 +62,11 @@ const getChipColors = (
 ) => {
   const colors = {
     default: {
-      ...(contrastMode === "lowContrast" && {
+      ...(contrastMode === "highContrast" && {
         background: odysseyDesignTokens.HueNeutral200,
         text: odysseyDesignTokens.HueNeutral700,
       }),
-      ...(contrastMode === "highContrast" && {
+      ...(contrastMode === "lowContrast" && {
         background: odysseyDesignTokens.HueNeutral100,
         text: odysseyDesignTokens.HueNeutral700,
       }),
@@ -77,11 +77,11 @@ const getChipColors = (
       deleteIconHover: odysseyDesignTokens.HueNeutral700,
     },
     info: {
-      ...(contrastMode === "lowContrast" && {
+      ...(contrastMode === "highContrast" && {
         background: odysseyDesignTokens.HueBlue200,
         text: odysseyDesignTokens.HueBlue700,
       }),
-      ...(contrastMode === "highContrast" && {
+      ...(contrastMode === "lowContrast" && {
         background: odysseyDesignTokens.HueBlue100,
         text: odysseyDesignTokens.HueBlue700,
       }),
@@ -92,11 +92,11 @@ const getChipColors = (
       deleteIconHover: odysseyDesignTokens.HueBlue700,
     },
     accentOne: {
-      ...(contrastMode === "lowContrast" && {
+      ...(contrastMode === "highContrast" && {
         background: odysseyDesignTokens.HueAccentOne200,
         text: odysseyDesignTokens.HueAccentOne700,
       }),
-      ...(contrastMode === "highContrast" && {
+      ...(contrastMode === "lowContrast" && {
         background: odysseyDesignTokens.HueAccentOne100,
         text: odysseyDesignTokens.HueAccentOne700,
       }),
@@ -107,11 +107,11 @@ const getChipColors = (
       deleteIconHover: odysseyDesignTokens.HueAccentOne700,
     },
     accentTwo: {
-      ...(contrastMode === "lowContrast" && {
+      ...(contrastMode === "highContrast" && {
         background: odysseyDesignTokens.HueAccentTwo200,
         text: odysseyDesignTokens.HueAccentTwo800,
       }),
-      ...(contrastMode === "highContrast" && {
+      ...(contrastMode === "lowContrast" && {
         background: odysseyDesignTokens.HueAccentTwo100,
         text: odysseyDesignTokens.HueAccentTwo700,
       }),
@@ -122,11 +122,11 @@ const getChipColors = (
       deleteIconHover: odysseyDesignTokens.HueAccentTwo700,
     },
     accentThree: {
-      ...(contrastMode === "lowContrast" && {
+      ...(contrastMode === "highContrast" && {
         background: odysseyDesignTokens.HueAccentThree200,
         text: odysseyDesignTokens.HueAccentThree700,
       }),
-      ...(contrastMode === "highContrast" && {
+      ...(contrastMode === "lowContrast" && {
         background: odysseyDesignTokens.HueAccentThree100,
         text: odysseyDesignTokens.HueAccentThree700,
       }),
@@ -137,11 +137,11 @@ const getChipColors = (
       deleteIconHover: odysseyDesignTokens.HueAccentThree700,
     },
     accentFour: {
-      ...(contrastMode === "lowContrast" && {
+      ...(contrastMode === "highContrast" && {
         background: odysseyDesignTokens.HueAccentFour200,
         text: odysseyDesignTokens.HueAccentFour700,
       }),
-      ...(contrastMode === "highContrast" && {
+      ...(contrastMode === "lowContrast" && {
         background: odysseyDesignTokens.HueAccentFour100,
         text: odysseyDesignTokens.HueAccentFour700,
       }),
@@ -210,7 +210,7 @@ const Tag = ({
 }: TagProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { chipElementType } = useContext(TagListContext);
-  const { contrastMode } = useContrastContext();
+  const { contrastMode } = useContrastModeContext();
 
   const renderTag = useCallback(
     (muiProps: MuiPropsContextType) => (

@@ -129,7 +129,7 @@ const storybookMeta: Meta<ButtonProps> = {
   decorators: [
     MuiThemeDecorator,
     (Story: StoryFn<ButtonProps>, context: StoryContext<ButtonProps>) => (
-      <ContrastModeProvider contrastMode="highContrast">
+      <ContrastModeProvider contrastMode="lowContrast">
         <Story {...context.args} />
       </ContrastModeProvider>
     ),
@@ -227,7 +227,7 @@ export const ButtonSecondaryDisabledOnWhiteBackground: StoryObj<ButtonProps> = {
   name: "Secondary, Disabled on white background",
   decorators: [
     (Story: StoryFn<ButtonProps>, context: StoryContext<ButtonProps>) => (
-      <ContrastModeProvider contrastMode="highContrast">
+      <ContrastModeProvider contrastMode="lowContrast">
         <Story {...context.args} />
       </ContrastModeProvider>
     ),
@@ -250,7 +250,7 @@ export const ButtonSecondaryDisabledOnWhiteBackground: StoryObj<ButtonProps> = {
   parameters: {
     docs: {
       source: {
-        code: `<ContrastModeProvider contrastMode="highContrast">
+        code: `<ContrastModeProvider contrastMode="lowContrast">
 <Button
   isDisabled
   label="Secondary"
@@ -261,7 +261,7 @@ export const ButtonSecondaryDisabledOnWhiteBackground: StoryObj<ButtonProps> = {
       },
       description: {
         story:
-          "Disabled secondary `Button` on a white (`highContrast`) background using [`ContrastModeProvider`](/docs/customization-components--docs#contrastmodeprovider).",
+          "Disabled secondary `Button` on a white (`lowContrast`) background using [`ContrastModeProvider`](/docs/customization-components--docs#contrastmodeprovider).",
       },
     },
   },
@@ -271,7 +271,7 @@ export const ButtonSecondaryDisabledOnGrayBackground: StoryObj<ButtonProps> = {
   name: "Secondary, Disabled on gray background",
   decorators: [
     (Story: StoryFn<ButtonProps>, context: StoryContext<ButtonProps>) => (
-      <ContrastModeProvider contrastMode="lowContrast">
+      <ContrastModeProvider contrastMode="highContrast">
         <Box sx={{ backgroundColor: Tokens.HueNeutral50, padding: "24px" }}>
           <Story {...context.args} />
         </Box>
@@ -295,7 +295,7 @@ export const ButtonSecondaryDisabledOnGrayBackground: StoryObj<ButtonProps> = {
   parameters: {
     docs: {
       source: {
-        code: `<ContrastModeProvider contrastMode="lowContrast">
+        code: `<ContrastModeProvider contrastMode="highContrast">
 <Button
   isDisabled
   label="Secondary"
@@ -306,7 +306,7 @@ export const ButtonSecondaryDisabledOnGrayBackground: StoryObj<ButtonProps> = {
       },
       description: {
         story:
-          "Disabled secondary `Button` on a gray (`lowContrast`) background using [`ContrastModeProvider`](/docs/customization-components--docs#contrastmodeprovider).",
+          "Disabled secondary `Button` on a gray (`highContrast`) background using [`ContrastModeProvider`](/docs/customization-components--docs#contrastmodeprovider).",
       },
     },
   },

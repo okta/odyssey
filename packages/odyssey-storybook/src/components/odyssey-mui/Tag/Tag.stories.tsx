@@ -303,12 +303,12 @@ export const TagsOnWhiteBackground: StoryObj<TagProps> = {
       await waitForStyles(label, { backgroundColor, color });
     }
 
-    await axeRun("Tags on white (`highContrast`) background");
+    await axeRun("Tags on white (`lowContrast`) background");
   },
   parameters: {
     docs: {
       source: {
-        code: `<ContrastModeProvider contrastMode="highContrast">
+        code: `<ContrastModeProvider contrastMode="lowContrast">
   <Tag label="Default" />
   <Tag label="Info" colorVariant="info" />
   <Tag label="AccentOne" colorVariant="accentOne" />
@@ -319,7 +319,7 @@ export const TagsOnWhiteBackground: StoryObj<TagProps> = {
       },
       description: {
         story:
-          "`Tag` component on a white (`highContrast`) background using [`ContrastModeProvider`](/docs/customization-components--docs#contrastmodeprovider).",
+          "`Tag` component on a white (`lowContrast`) background using [`ContrastModeProvider`](/docs/customization-components--docs#contrastmodeprovider).",
       },
     },
   },
@@ -328,7 +328,7 @@ export const TagsOnWhiteBackground: StoryObj<TagProps> = {
 export const TagsOnGrayBackground: StoryObj<TagProps> = {
   name: "Tags on Gray Background",
   render: () => (
-    <ContrastModeProvider contrastMode="lowContrast">
+    <ContrastModeProvider contrastMode="highContrast">
       <Box
         sx={{
           backgroundColor: Tokens.HueNeutral50,
@@ -411,12 +411,12 @@ export const TagsOnGrayBackground: StoryObj<TagProps> = {
       await waitForStyles(label, { backgroundColor, color });
     }
 
-    await axeRun("Tags on gray (`lowContrast`) background");
+    await axeRun("Tags on gray (`highContrast`) background");
   },
   parameters: {
     docs: {
       source: {
-        code: `<ContrastModeProvider contrastMode="lowContrast">
+        code: `<ContrastModeProvider contrastMode="highContrast">
   <Tag label="Default" />
   <Tag label="Info" colorVariant="info" />
   <Tag label="AccentOne" colorVariant="accentOne" />
@@ -427,7 +427,7 @@ export const TagsOnGrayBackground: StoryObj<TagProps> = {
       },
       description: {
         story:
-          "`Tag` component on a gray (`lowContrast`) background using [`ContrastModeProvider`](/docs/customization-components--docs#contrastmodeprovider).",
+          "`Tag` component on a gray (`highContrast`) background using [`ContrastModeProvider`](/docs/customization-components--docs#contrastmodeprovider).",
       },
     },
   },
