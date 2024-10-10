@@ -51,6 +51,7 @@
     "build:testSelectors": "tsx scripts/generateTestSelectorsJson.ts",
     "build:types": "tsc --project tsconfig.production.json",
     "build": "yarn build:clean && yarn generate:i18n && yarn build:types && yarn build:source && yarn build:testSelectors",
+    "ci:coverage": "yarn jest --coverage --coverageReporters=text-summary",
     "dev:source": "yarn build:source --watch",
     "dev:types": "yarn build:types --watch",
     "dev": "yarn concurrently npm:dev:source npm:dev:types",
