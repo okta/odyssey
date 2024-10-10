@@ -115,6 +115,15 @@ const storybookMeta: Meta<AppTileProps> = {
         },
       },
     },
+    isLoading: {
+      control: null,
+      description: "If true, the component will display a loading state",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
     onActionClick: {
       control: null,
       description:
@@ -314,6 +323,44 @@ export const CustomContent: StoryObj<AppTileProps> = {
           }
         />
       </Box>
+    );
+  },
+};
+
+export const Loading: StoryObj<AppTileProps> = {
+  render: function C() {
+    const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
+
+    return (
+      <>
+        <Drawer
+          isOpen={isDrawerOpen}
+          onClose={() => setIsDrawerOpen(false)}
+          showDividers={false}
+        />
+        <Box sx={{ maxWidth: 262 }}>
+          <AppTile
+            actionAriaControls=""
+            actionAriaExpanded={isDrawerOpen}
+            actionAriaHasPopup="menu"
+            actionIcon={<SettingsIcon />}
+            actionLabel="Open app settings"
+            auxiliaryText="Single sign-on"
+            onActionClick={() => setIsDrawerOpen(true)}
+            onClick={() => alert("Open the app")}
+            title="App name"
+            description="This is a description of the app."
+            image={<img src="https://placehold.co/128" alt="Example logo" />}
+            isLoading
+            children={
+              <TagList>
+                <Tag label="Tag 1" />
+                <Tag label="Tag 2" />
+              </TagList>
+            }
+          />
+        </Box>
+      </>
     );
   },
 };
