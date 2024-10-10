@@ -31,67 +31,79 @@ import PlaceholderLogo from "./PlaceholderLogo";
 
 const optionsSmall = [
   {
-    value: "a",
+    value: "an",
     label: "An Option label",
-    // description: "Some optional descriptive text",
+    description: "Some optional descriptive text",
     adornment: <FolderIcon />,
   },
   {
-    value: "fr",
+    value: "the",
     label: "The Option label",
     description: "Some optional descriptive text",
     adornment: <GlobeIcon />,
   },
   {
-    value: "jp",
+    value: "another",
     label: "Another Option label",
     description: "Some optional descriptive text",
     adornment: <SettingsIcon />,
   },
   {
-    value: "es",
+    value: "this",
     label: "This Option label",
     description: "Some optional descriptive text",
     adornment: <SyncIcon />,
   },
   {
-    value: "image-as-logo",
+    value: "last",
     label: "The last Option label",
     description: "Some optional descriptive text.",
     adornment: <VideoIcon />,
+  },
+  {
+    value: "image",
+    label: "This adornment is an image",
+    description: "Some optional descriptive text.",
+    adornment: "https://placehold.co/400x600",
   },
 ];
 
 const optionsLarge = [
   {
-    value: "a",
+    value: "an",
     label: "An Option label",
     description: "Some optional descriptive text",
     adornment: <PlaceholderLogo.One />,
   },
   {
-    value: "fr",
+    value: "the",
     label: "The Option label",
     description: "Some optional descriptive text",
     adornment: <PlaceholderLogo.Two />,
   },
   {
-    value: "jp",
+    value: "another",
     label: "Another Option label",
     description: "Some optional descriptive text",
     adornment: <PlaceholderLogo.Three />,
   },
   {
-    value: "es",
+    value: "this",
     label: "This Option label",
     description: "Some optional descriptive text",
     adornment: <PlaceholderLogo.Four />,
   },
   {
-    value: "image-as-logo",
+    value: "last",
     label: "The last Option label",
     description: "Some optional descriptive text.",
     adornment: <PlaceholderLogo.Five />,
+  },
+  {
+    value: "image",
+    label: "This adornment is an image",
+    description: "Some optional descriptive text.",
+    adornment: "https://placehold.co/400x600",
   },
 ];
 
@@ -302,11 +314,21 @@ export const Disabled: StoryObj<PickerWithOptionAdornmentPropsType> = {
   },
 };
 
-export const MultiSelect: StoryObj<PickerWithOptionAdornmentPropsType> = {
-  args: {
-    hasMultipleChoices: true,
-  },
-};
+export const SmallAdornmentMultiSelect: StoryObj<PickerWithOptionAdornmentPropsType> =
+  {
+    args: {
+      hasMultipleChoices: true,
+    },
+  };
+
+export const LargeAdornmentMultiSelect: StoryObj<PickerWithOptionAdornmentPropsType> =
+  {
+    args: {
+      hasMultipleChoices: true,
+      adornmentSize: "large",
+      options: optionsLarge,
+    },
+  };
 
 export const MultiSelectDisabled: StoryObj<PickerWithOptionAdornmentPropsType> =
   {
