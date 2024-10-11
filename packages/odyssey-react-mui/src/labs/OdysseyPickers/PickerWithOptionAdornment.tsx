@@ -291,7 +291,7 @@ const PickerWithOptionAdornment: PickerWithOptionAdornmentComponentType = <
   errorMessage,
   errorMessageList,
   getIsOptionEqualToValue,
-  // getOptionLabel,
+  groupOptionsBy,
   hasMultipleChoices,
   id: idOverride,
   inputValue,
@@ -391,7 +391,7 @@ const PickerWithOptionAdornment: PickerWithOptionAdornmentComponentType = <
       errorMessage={errorMessage}
       errorMessageList={errorMessageList}
       getIsOptionEqualToValue={getIsOptionEqualToValue}
-      // getOptionLabel={// getOptionLabel}
+      groupOptionsBy={groupOptionsBy}
       hasMultipleChoices={hasMultipleChoices}
       id={idOverride}
       inputValue={inputValue}
