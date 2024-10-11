@@ -29,14 +29,16 @@ import type { SideNavItem } from "./types";
 export const SideNavListItemContainer = styled("li", {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" &&
+    prop !== "__isCompact" &&
     prop !== "isSelected" &&
     prop !== "isDisabled",
 })<{
   odysseyDesignTokens: DesignTokens;
+  __isCompact?: boolean;
   isSelected?: boolean;
   disabled?: boolean;
   isDisabled?: boolean;
-}>(({ odysseyDesignTokens, isSelected, isDisabled }) => ({
+}>(({ odysseyDesignTokens, __isCompact, isSelected, isDisabled }) => ({
   display: "flex",
   alignItems: "center",
   cursor: isDisabled ? "default" : "pointer",
@@ -50,8 +52,10 @@ export const SideNavListItemContainer = styled("li", {
     display: "flex",
     alignItems: "center",
     width: "100%",
-    minHeight: "48px",
-    padding: `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
+    minHeight: __isCompact ? "37px" : "48px",
+    padding: __isCompact
+      ? `${odysseyDesignTokens.Spacing0} ${odysseyDesignTokens.Spacing4}`
+      : `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
     color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
   },
   "& a:hover, & div[role='button']:hover": {
@@ -96,6 +100,7 @@ const SideNavItemContent = ({
   isSelected,
   isDisabled,
   scrollRef,
+  __isCompact,
 }: Pick<
   SideNavItem,
   | "id"
@@ -110,6 +115,7 @@ const SideNavItemContent = ({
   | "isSelected"
   | "isDisabled"
   | "__hasParent"
+  | "__isCompact"
 > & {
   /**
    * The ref used to scroll to this item
@@ -136,8 +142,10 @@ const SideNavItemContent = ({
     display: "flex",
     alignItems: "center",
     width: "100%",
-    minHeight: "48px",
-    padding: `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
+    minHeight: __isCompact ? "37px" : "48px",
+    padding: __isCompact
+      ? `${odysseyDesignTokens.Spacing0} ${odysseyDesignTokens.Spacing4}`
+      : `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
     color: `${isDisabled ? odysseyDesignTokens.TypographyColorDisabled : odysseyDesignTokens.TypographyColorHeading} !important`,
     "&:focus-visible": {
       borderRadius: 0,
@@ -164,6 +172,7 @@ const SideNavItemContent = ({
       ref={localScrollRef}
       id={id}
       key={id}
+      __isCompact={__isCompact}
       disabled={isDisabled}
       aria-disabled={isDisabled}
       isDisabled={isDisabled}

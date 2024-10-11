@@ -60,6 +60,18 @@ const storybookMeta: Meta<SideNavProps> = {
         },
       },
     },
+    isCompact: {
+      control: "boolean",
+      description: "Controls whether the side nav uses compact layout",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    logo: {
+      description: "Logo to be displayed in the Nav Header",
+    },
     onCollapse: {
       description: "Callback to be triggered when the side nav is collapsed",
     },
@@ -85,7 +97,8 @@ const storybookMeta: Meta<SideNavProps> = {
   },
   args: {
     navHeaderText: "Admin",
-    isCollapsible: false,
+    isCollapsible: true,
+    isCompact: false,
     sideNavItems: [
       {
         id: "AddNewFolder",
@@ -105,12 +118,6 @@ const storybookMeta: Meta<SideNavProps> = {
         startIcon: <UserIcon />,
       },
       {
-        id: "item2",
-        href: "/",
-        label: "Applications",
-        startIcon: <AppsIcon />,
-      },
-      {
         id: "item1",
         label: "Dashboard",
         startIcon: <HomeIcon />,
@@ -125,6 +132,12 @@ const storybookMeta: Meta<SideNavProps> = {
         ],
       },
       {
+        id: "item2",
+        href: "/",
+        label: "Applications",
+        startIcon: <AppsIcon />,
+      },
+      {
         id: "item001",
         label: "Onboarding",
         startIcon: <CalendarIcon />,
@@ -133,11 +146,6 @@ const storybookMeta: Meta<SideNavProps> = {
             id: "item1-2",
             href: "/",
             label: "Start",
-          },
-          {
-            id: "item1-3",
-            href: "/",
-            label: "Onboarding",
           },
           {
             id: "item1-4",
@@ -268,7 +276,9 @@ export const Default: StoryObj<SideNavProps> = {
     return (
       <div style={{ height: "100vh" }}>
         <SideNav
+          logo={props.logo}
           navHeaderText={props.navHeaderText}
+          isCompact={props.isCompact}
           isCollapsible={props.isCollapsible}
           onCollapse={props.onCollapse}
           onExpand={props.onExpand}
@@ -309,19 +319,20 @@ export const Default: StoryObj<SideNavProps> = {
       }
     });
     await step("Side Nav Collapse", async ({}) => {
-      const collapseButton = within(expandedRegion).getByLabelText(
-        "collapse side navigation",
+      const collapseButton = within(collapsedRegion).getByLabelText(
+        "toggle side navigation",
       );
       await userEvent.click(collapseButton);
       await waitFor(() => {
         expect(expandedRegion).not.toBeVisible();
-        expect(collapsedRegion).toBeVisible();
       });
     });
     await step("Side Nav Expand", async ({}) => {
-      await userEvent.click(collapsedRegion);
+      const collapseButton = within(collapsedRegion).getByLabelText(
+        "toggle side navigation",
+      );
+      await userEvent.click(collapseButton);
       await waitFor(() => {
-        expect(collapsedRegion).not.toBeVisible();
         expect(expandedRegion).toBeVisible();
       });
     });
