@@ -17,6 +17,7 @@ import React, {
   useLayoutEffect,
   useState,
   useMemo,
+  useCallback,
   ReactNode,
 } from "react";
 import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
@@ -58,24 +59,43 @@ export const useParentBackgroundColor = (ref: React.RefObject<HTMLElement>) => {
 
   const hueNeutral50Rgb = useMemo(() => hexToRgb(Tokens.HueNeutral50), []);
 
-  useLayoutEffect(() => {
+  const getBackgroundColor = useCallback(() => {
     if (ref.current) {
       let element: HTMLElement | null = ref.current;
       while (element) {
         const bgColor = window.getComputedStyle(element).backgroundColor;
 
         if (bgColor !== "rgba(0, 0, 0, 0)" && bgColor !== "transparent") {
-          if (bgColor === hueNeutral50Rgb) {
-            setBackgroundColor(Tokens.HueNeutral50);
-          } else {
-            setBackgroundColor(bgColor);
-          }
-          break;
+          return bgColor === hueNeutral50Rgb ? Tokens.HueNeutral50 : bgColor;
         }
         element = element.parentElement;
       }
     }
+    return "";
   }, [ref, hueNeutral50Rgb]);
+
+  useLayoutEffect(() => {
+    const updateBackgroundColor = () => {
+      const newBackgroundColor = getBackgroundColor();
+      if (newBackgroundColor !== backgroundColor) {
+        setBackgroundColor(newBackgroundColor);
+      }
+    };
+
+    updateBackgroundColor();
+
+    const observer = new MutationObserver(() => {
+      requestAnimationFrame(updateBackgroundColor);
+    });
+
+    observer.observe(document.body, {
+      attributes: true,
+      childList: true,
+      subtree: true,
+    });
+
+    return () => observer.disconnect();
+  }, [getBackgroundColor, backgroundColor]);
 
   return backgroundColor;
 };
@@ -85,14 +105,15 @@ type ContrastModeProviderProps = {
   contrastMode?: ContrastMode;
 };
 
-export const ContrastModeProvider = ({
+export const ContrastModeProvider: React.FC<ContrastModeProviderProps> = ({
   children,
   contrastMode: explicitContrastMode,
-}: ContrastModeProviderProps) => {
+}) => {
   const ref = useRef<HTMLDivElement>(null);
   const parentBackgroundColor = useParentBackgroundColor(ref);
-  const [contrastMode, setContrastMode] =
-    useState<ContrastMode>("highContrast");
+  const [contrastMode, setContrastMode] = useState<ContrastMode>(
+    () => explicitContrastMode || "highContrast",
+  );
 
   useLayoutEffect(() => {
     if (explicitContrastMode) {
