@@ -210,13 +210,18 @@ export type OptionMetadata = {
   detailText: string | number;
 };
 
-export type Value = { value: string | number };
+export type OptionGroupType = { group?: string };
+export type OptionValueType = { value: string | number };
+export type OptionLabelType = { label: string };
+export type BaseOptionType = OptionValueType &
+  OptionGroupType &
+  OptionLabelType;
 export type Metadata = {
   metaData: OptionMetadata[];
 };
-export type OptionLabel = { label: string };
-export type OptionLabelOnly = Value & OptionLabel;
-export type LabelDescription = Value & OptionLabel & { description?: string };
+
+export type OptionLabelOnly = BaseOptionType;
+export type LabelDescription = BaseOptionType & { description?: string };
 export type LabelDescriptionMetadata = LabelDescription & Metadata;
 
 export type BasicPickerProps<

@@ -57,6 +57,13 @@ export type ComposablePickerProps<
     IsCustomValueAllowed
   >["getOptionLabel"];
 
+  groupOptionsBy?: MuiAutocompleteProps<
+    OptionType,
+    HasMultipleChoices,
+    undefined,
+    IsCustomValueAllowed
+  >["groupBy"];
+
   renderOption: MuiAutocompleteProps<
     OptionType,
     HasMultipleChoices,
@@ -83,6 +90,7 @@ const ComposablePicker = <
   errorMessageList,
   getIsOptionEqualToValue,
   getOptionLabel,
+  groupOptionsBy,
   hasMultipleChoices,
   id: idOverride,
   inputValue,
@@ -154,6 +162,7 @@ const ComposablePicker = <
       filterSelectedOptions={true}
       fullWidth={isFullWidth}
       getOptionLabel={getOptionLabel}
+      groupBy={groupOptionsBy}
       id={idOverride}
       isOptionEqualToValue={getIsOptionEqualToValue}
       loading={isLoading}
@@ -168,6 +177,7 @@ const ComposablePicker = <
       renderOption={renderOption}
       renderTags={renderTags}
       translate={translate}
+      open={true}
     />
   );
 };
