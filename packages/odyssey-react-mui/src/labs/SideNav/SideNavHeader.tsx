@@ -47,10 +47,7 @@ const SideNavHeaderContainer = styled("div", {
 const SideNavHeader = ({
   navHeaderText,
   logo,
-}: Pick<
-  SideNavProps,
-  "navHeaderText" | "isCollapsible" | "onCollapse" | "logo"
->): ReactNode => {
+}: Pick<SideNavProps, "navHeaderText" | "logo">): ReactNode => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const sideNavHeaderStyles = useMemo(

@@ -21,7 +21,6 @@ import {
   useEffect,
 } from "react";
 
-import { Box } from "../../Box";
 import { NavAccordion } from "../NavAccordion";
 import {
   DesignTokens,
@@ -40,14 +39,11 @@ import { SideNavFooterContent } from "./SideNavFooterContent";
 
 export const DEFAULT_SIDE_NAV_WIDTH = "301px";
 
-const SideNavContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "expandedWidth",
-})(({ expandedWidth }: { expandedWidth: SideNavProps["expandedWidth"] }) => ({
+const SideNavContainer = styled.div({
   display: "flex",
   height: "100%",
-  maxWidth: expandedWidth,
   overflow: "hidden",
-}));
+});
 
 const SideNavCollapsedContainer = styled("div", {
   shouldForwardProp: (prop) =>
@@ -61,17 +57,50 @@ const SideNavCollapsedContainer = styled("div", {
     isSideNavCollapsed: boolean;
   }) => ({
     paddingTop: "75px",
-    cursor: "pointer",
-    width: isSideNavCollapsed ? "auto" : "auto",
-    opacity: isSideNavCollapsed ? 1 : 1,
-    visibility: isSideNavCollapsed ? "visible" : "visible",
-    transitionProperty: "opacity, background-color",
-    transitionDuration: odysseyDesignTokens.TransitionDurationMain,
-    transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
-    "&:hover": {
+    "&:has(svg:hover)": {
       backgroundColor: isSideNavCollapsed
         ? odysseyDesignTokens.HueNeutral100
         : "transparent",
+      transitionProperty: "background-color",
+      transitionDuration: odysseyDesignTokens.TransitionDurationMain,
+      transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
+    },
+  }),
+);
+
+const CollapseExpandHandleIconContainer = styled("div", {
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "isSideNavCollapsed",
+})(
+  ({
+    odysseyDesignTokens,
+    isSideNavCollapsed,
+  }: {
+    odysseyDesignTokens: DesignTokens;
+    isSideNavCollapsed: boolean;
+  }) => ({
+    cursor: "pointer",
+    "& > svg#collapse": {
+      opacity: 0,
+      width: 0,
+      transform: isSideNavCollapsed ? "rotate(180deg)" : "rotate(0deg)",
+    },
+    "&:hover, &:focus-visible": {
+      "& > svg#collapse": {
+        opacity: 1,
+        width: "32px",
+        padding: "7px",
+        transitionProperty: "width, opacity",
+        transitionDuration: odysseyDesignTokens.TransitionDurationMain,
+        transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
+      },
+      "& > svg#handle": {
+        opacity: 0,
+        width: 0,
+        transitionProperty: "width, opacity",
+        transitionDuration: odysseyDesignTokens.TransitionDurationMain,
+        transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
+      },
     },
   }),
 );
@@ -97,6 +126,7 @@ const SideNavExpandContainer = styled("nav", {
     opacity: isSideNavCollapsed ? 0 : 1,
     visibility: isSideNavCollapsed ? "hidden" : "visible",
     width: isSideNavCollapsed ? 0 : expandedWidth,
+    minWidth: isSideNavCollapsed ? 0 : expandedWidth,
     transitionProperty: "opacity, width",
     transitionDuration: odysseyDesignTokens.TransitionDurationMain,
     transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
@@ -208,7 +238,7 @@ const SideNav = ({
   logo,
 }: SideNavProps) => {
   expandedWidth = isCollapsible
-    ? parseInt(expandedWidth) + 32 + "px"
+    ? `${parseInt(expandedWidth) + 32}px`
     : expandedWidth;
 
   const [isSideNavCollapsed, setSideNavCollapsed] = useState(false);
@@ -358,11 +388,6 @@ const SideNav = ({
     [getRefIfThisIsFirstNodeWithIsSelected, sideNavItems],
   );
 
-  const sideNavCollapseHandler = useCallback(() => {
-    setSideNavCollapsed(!isSideNavCollapsed);
-    onCollapse?.();
-  }, [isSideNavCollapsed, setSideNavCollapsed, onCollapse]);
-
   const sideNavExpandClickHandler = useCallback(() => {
     isSideNavCollapsed ? onExpand?.() : onCollapse?.();
     setSideNavCollapsed(!isSideNavCollapsed);
@@ -379,16 +404,8 @@ const SideNav = ({
     [isSideNavCollapsed, setSideNavCollapsed, onExpand, onCollapse],
   );
 
-  // const expandLeftIconStyles = useMemo(
-  //   () => ({
-  //     fontSize: "1em",
-  //     margin: `0 ${odysseyDesignTokens.Spacing1}`,
-  //   }),
-  //   [odysseyDesignTokens],
-  // );
-
   return (
-    <SideNavContainer expandedWidth={expandedWidth}>
+    <SideNavContainer>
       <SideNavExpandContainer
         odysseyDesignTokens={odysseyDesignTokens}
         isSideNavCollapsed={isSideNavCollapsed}
@@ -404,7 +421,6 @@ const SideNav = ({
           <SideNavHeader
             logo={logo || <OktaLogo />}
             navHeaderText={navHeaderText}
-            onCollapse={sideNavCollapseHandler}
           />
         </SideNavHeaderContainer>
         <SideNavScrollableContainer data-se="scrollable-region">
@@ -483,53 +499,22 @@ const SideNav = ({
       </SideNavExpandContainer>
       {isCollapsible && (
         <SideNavCollapsedContainer
-          tabIndex={0}
-          role="button"
           odysseyDesignTokens={odysseyDesignTokens}
           isSideNavCollapsed={isSideNavCollapsed}
-          onClick={sideNavExpandClickHandler}
-          onKeyDown={sideNavExpandKeyHandler}
           data-se="collapsed-region"
           data-aria-label="expand side navigation"
         >
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              "& > svg#collapse": {
-                opacity: 0,
-                display: "none",
-                transform: isSideNavCollapsed
-                  ? "rotate(180deg)"
-                  : "rotate(0deg)",
-              },
-              ":hover": {
-                "& > svg#collapse": {
-                  opacity: 1,
-                  display: "block",
-                  padding: "7px",
-                  transitionProperty: "opacity",
-                  transitionDuration:
-                    "odysseyDesignTokens.TransitionDurationMain",
-                  transitionTimingFunction:
-                    odysseyDesignTokens.TransitionTimingMain,
-                },
-                "& > svg#handle": {
-                  opacity: 0,
-                  display: "none",
-                  transitionProperty: "opacity",
-                  transitionDuration:
-                    "odysseyDesignTokens.TransitionDurationMain",
-                  transitionTimingFunction:
-                    odysseyDesignTokens.TransitionTimingMain,
-                },
-              },
-            }}
+          <CollapseExpandHandleIconContainer
+            odysseyDesignTokens={odysseyDesignTokens}
+            isSideNavCollapsed={isSideNavCollapsed}
+            tabIndex={0}
+            role="button"
+            onClick={sideNavExpandClickHandler}
+            onKeyDown={sideNavExpandKeyHandler}
           >
             <HandleIcon />
             <CollapseHandleIcon />
-          </Box>
+          </CollapseExpandHandleIconContainer>
         </SideNavCollapsedContainer>
       )}
     </SideNavContainer>
