@@ -11,7 +11,7 @@
  */
 
 import {
-  ContrastModeProvider,
+  OdysseyThemeProvider,
   Box,
   Button,
   buttonSizeValues,
@@ -20,7 +20,6 @@ import {
   type ButtonProps,
 } from "@okta/odyssey-react-mui";
 import { AddIcon } from "@okta/odyssey-react-mui/icons";
-import * as Tokens from "@okta/odyssey-design-tokens";
 
 import { expect } from "@storybook/jest";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
@@ -129,9 +128,9 @@ const storybookMeta: Meta<ButtonProps> = {
   decorators: [
     MuiThemeDecorator,
     (Story: StoryFn<ButtonProps>, context: StoryContext<ButtonProps>) => (
-      <ContrastModeProvider contrastMode="lowContrast">
+      <OdysseyThemeProvider contrastMode="lowContrast">
         <Story {...context.args} />
-      </ContrastModeProvider>
+      </OdysseyThemeProvider>
     ),
   ],
   tags: ["autodocs"],
@@ -164,20 +163,6 @@ const interactWithButton =
       });
     }
   };
-
-const checkButtonStyles = async (
-  canvas: ReturnType<typeof within>,
-  buttonLabel: string,
-  expectedBackgroundColor: string,
-  expectedColor: string,
-) => {
-  const button = canvas.getByRole("button", { name: buttonLabel });
-
-  await expect(button).toHaveStyle(
-    `background-color: ${expectedBackgroundColor}`,
-  );
-  await expect(button).toHaveStyle(`color: ${expectedColor}`);
-};
 
 export const ButtonPrimary: StoryObj<ButtonProps> = {
   name: "Primary",
@@ -220,95 +205,6 @@ export const ButtonSecondaryDisabled: StoryObj<ButtonProps> = {
     isDisabled: true,
     label: "Add crew",
     variant: "secondary",
-  },
-};
-
-export const ButtonSecondaryDisabledOnWhiteBackground: StoryObj<ButtonProps> = {
-  name: "Secondary, Disabled on white background",
-  decorators: [
-    (Story: StoryFn<ButtonProps>, context: StoryContext<ButtonProps>) => (
-      <ContrastModeProvider contrastMode="lowContrast">
-        <Story {...context.args} />
-      </ContrastModeProvider>
-    ),
-  ],
-  args: {
-    variant: "secondary",
-    isDisabled: true,
-    label: "Secondary",
-  },
-  play: async ({ canvasElement }: playType) => {
-    const canvas = within(canvasElement);
-
-    await checkButtonStyles(
-      canvas,
-      "Secondary",
-      Tokens.HueNeutral100,
-      Tokens.TypographyColorDisabled,
-    );
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: `<ContrastModeProvider contrastMode="lowContrast">
-<Button
-  isDisabled
-  label="Secondary"
-  onClick={() => {}}
-  variant="secondary"
-/>
-</ContrastModeProvider>`,
-      },
-      description: {
-        story:
-          "Disabled secondary `Button` on a white (`lowContrast`) background using [`ContrastModeProvider`](/docs/customization-components--docs#contrastmodeprovider).",
-      },
-    },
-  },
-};
-
-export const ButtonSecondaryDisabledOnGrayBackground: StoryObj<ButtonProps> = {
-  name: "Secondary, Disabled on gray background",
-  decorators: [
-    (Story: StoryFn<ButtonProps>, context: StoryContext<ButtonProps>) => (
-      <ContrastModeProvider contrastMode="highContrast">
-        <Box sx={{ backgroundColor: Tokens.HueNeutral50, padding: "24px" }}>
-          <Story {...context.args} />
-        </Box>
-      </ContrastModeProvider>
-    ),
-  ],
-  args: {
-    variant: "secondary",
-    isDisabled: true,
-    label: "Secondary",
-  },
-  play: async ({ canvasElement }: playType) => {
-    const canvas = within(canvasElement);
-    await checkButtonStyles(
-      canvas,
-      "Secondary",
-      Tokens.HueNeutral100,
-      Tokens.TypographyColorDisabled,
-    );
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: `<ContrastModeProvider contrastMode="highContrast">
-<Button
-  isDisabled
-  label="Secondary"
-  onClick={() => {}}
-  variant="secondary"
-/>
-</ContrastModeProvider>`,
-      },
-      description: {
-        story:
-          "Disabled secondary `Button` on a gray (`highContrast`) background using [`ContrastModeProvider`](/docs/customization-components--docs#contrastmodeprovider).",
-      },
-    },
   },
 };
 

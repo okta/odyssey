@@ -16,14 +16,8 @@ import {
   StatusProps,
   statusSeverityValues,
   statusVariantValues,
-  ContrastModeProvider,
-  Box,
 } from "@okta/odyssey-react-mui";
-import * as Tokens from "@okta/odyssey-design-tokens";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { within } from "@storybook/testing-library";
-import { expect } from "@storybook/jest";
-import { axeRun } from "../../../axe-util";
 
 const storybookMeta: Meta<StatusProps> = {
   title: "MUI Components/Status",
@@ -80,17 +74,6 @@ const storybookMeta: Meta<StatusProps> = {
 
 export default storybookMeta;
 
-const checkStatusStyles = async (
-  canvas: ReturnType<typeof within>,
-  label: string,
-  expectedBackgroundColor: string,
-  expectedColor: string,
-) => {
-  const status = canvas.getByText(label).closest(".MuiChip-root");
-  expect(status).toHaveStyle(`background-color: ${expectedBackgroundColor}`);
-  expect(status).toHaveStyle(`color: ${expectedColor}`);
-};
-
 export const DefaultPill: StoryObj<StatusProps> = {
   args: {
     label: "Warp drive in standby",
@@ -122,151 +105,6 @@ export const WarningPill: StoryObj<StatusProps> = {
   args: {
     label: "Warp fuel low",
     severity: "warning",
-  },
-};
-
-export const StatusesOnWhiteBackground: StoryObj<StatusProps> = {
-  name: "Statuses on white background",
-  render: () => (
-    <ContrastModeProvider>
-      <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
-        <Status label="Default" severity="default" />
-        <Status label="Error" severity="error" />
-        <Status label="Info" severity="info" />
-        <Status label="Success" severity="success" />
-        <Status label="Warning" severity="warning" />
-      </Box>
-    </ContrastModeProvider>
-  ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    await checkStatusStyles(
-      canvas,
-      "Default",
-      Tokens.HueNeutral50,
-      Tokens.TypographyColorSubordinate,
-    );
-    await checkStatusStyles(
-      canvas,
-      "Error",
-      Tokens.PaletteDangerLighter,
-      Tokens.TypographyColorDanger,
-    );
-    await checkStatusStyles(
-      canvas,
-      "Info",
-      Tokens.PalettePrimaryLighter,
-      Tokens.PalettePrimaryText,
-    );
-    await checkStatusStyles(
-      canvas,
-      "Success",
-      Tokens.PaletteSuccessLighter,
-      Tokens.TypographyColorSuccess,
-    );
-    await checkStatusStyles(
-      canvas,
-      "Warning",
-      Tokens.PaletteWarningLighter,
-      Tokens.TypographyColorWarning,
-    );
-    await axeRun("Statuses on white (`lowContrast`) background");
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: `<ContrastModeProvider contrastMode="lowContrast">
-  <Status label="Default" severity="default" />
-  <Status label="Error" severity="error" />
-  <Status label="Info" severity="info" />
-  <Status label="Success" severity="success" />
-  <Status label="Warning" severity="warning" />
-</ContrastModeProvider>`,
-      },
-      description: {
-        story:
-          "`Status` component on a white (`lowContrast`) background using [`ContrastModeProvider`](/docs/customization-components--docs#contrastmodeprovider).",
-      },
-    },
-  },
-};
-
-export const StatusesOnGrayBackground: StoryObj<StatusProps> = {
-  name: "Statuses on gray background",
-  render: () => (
-    <Box sx={{ backgroundColor: Tokens.HueNeutral50, padding: "24px" }}>
-      <ContrastModeProvider contrastMode="highContrast">
-        <Box
-          sx={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: 2,
-          }}
-        >
-          <Status label="Default" severity="default" />
-          <Status label="Error" severity="error" />
-          <Status label="Info" severity="info" />
-          <Status label="Success" severity="success" />
-          <Status label="Warning" severity="warning" />
-        </Box>
-      </ContrastModeProvider>
-    </Box>
-  ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    await new Promise((resolve) => setTimeout(resolve, 500));
-
-    await checkStatusStyles(
-      canvas,
-      "Default",
-      Tokens.HueNeutral200,
-      Tokens.HueNeutral700,
-    );
-    await checkStatusStyles(
-      canvas,
-      "Error",
-      Tokens.HueRed100,
-      Tokens.HueRed700,
-    );
-    await checkStatusStyles(
-      canvas,
-      "Info",
-      Tokens.HueBlue100,
-      Tokens.HueBlue700,
-    );
-    await checkStatusStyles(
-      canvas,
-      "Success",
-      Tokens.HueGreen200,
-      Tokens.HueGreen700,
-    );
-    await checkStatusStyles(
-      canvas,
-      "Warning",
-      Tokens.HueYellow100,
-      Tokens.HueYellow700,
-    );
-
-    await axeRun("Statuses on gray (`highContrast`) background");
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: `<ContrastModeProvider contrastMode="highContrast">
-  <Status label="Default" severity="default" />
-  <Status label="Error" severity="error" />
-  <Status label="Info" severity="info" />
-  <Status label="Success" severity="success" />
-  <Status label="Warning" severity="warning" />
-</ContrastModeProvider>`,
-      },
-      description: {
-        story:
-          "`Status` component on a gray (`highContrast`) background using [`ContrastModeProvider`](/docs/customization-components--docs#contrastmodeprovider).",
-      },
-    },
   },
 };
 

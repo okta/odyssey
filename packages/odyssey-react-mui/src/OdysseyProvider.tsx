@@ -54,35 +54,34 @@ const OdysseyProvider = <SupportedLanguages extends string>({
   themeOverride,
   translationOverrides,
   contrastMode,
-}: OdysseyProviderProps<SupportedLanguages>) => {
-  return (
-    <ContrastModeProvider contrastMode={contrastMode}>
-      <OdysseyCacheProvider
-        emotionRoot={emotionRoot}
-        emotionRootElement={emotionRootElement}
-        hasShadowDom={Boolean(shadowRootElement || shadowDomElement)}
-        nonce={nonce}
-        stylisPlugins={stylisPlugins}
+}: OdysseyProviderProps<SupportedLanguages>) => (
+  <ContrastModeProvider contrastMode={contrastMode}>
+    <OdysseyCacheProvider
+      emotionRoot={emotionRoot}
+      emotionRootElement={emotionRootElement}
+      hasShadowDom={Boolean(shadowRootElement || shadowDomElement)}
+      nonce={nonce}
+      stylisPlugins={stylisPlugins}
+    >
+      <OdysseyThemeProvider
+        designTokensOverride={designTokensOverride}
+        shadowDomElement={shadowDomElement}
+        shadowRootElement={shadowRootElement}
+        themeOverride={themeOverride}
+        contrastMode={contrastMode}
       >
-        <OdysseyThemeProvider
-          designTokensOverride={designTokensOverride}
-          shadowDomElement={shadowDomElement}
-          shadowRootElement={shadowRootElement}
-          themeOverride={themeOverride}
-        >
-          <ScopedCssBaseline sx={scopedCssBaselineStyles}>
-            <OdysseyTranslationProvider<SupportedLanguages>
-              languageCode={languageCode}
-              translationOverrides={translationOverrides}
-            >
-              {children}
-            </OdysseyTranslationProvider>
-          </ScopedCssBaseline>
-        </OdysseyThemeProvider>
-      </OdysseyCacheProvider>
-    </ContrastModeProvider>
-  );
-};
+        <ScopedCssBaseline sx={scopedCssBaselineStyles}>
+          <OdysseyTranslationProvider<SupportedLanguages>
+            languageCode={languageCode}
+            translationOverrides={translationOverrides}
+          >
+            {children}
+          </OdysseyTranslationProvider>
+        </ScopedCssBaseline>
+      </OdysseyThemeProvider>
+    </OdysseyCacheProvider>
+  </ContrastModeProvider>
+);
 
 const MemoizedOdysseyProvider = memo(OdysseyProvider) as typeof OdysseyProvider;
 

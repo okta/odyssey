@@ -20,7 +20,6 @@ import React, {
   useCallback,
   ReactNode,
 } from "react";
-import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 import * as Tokens from "@okta/odyssey-design-tokens";
 
 declare module "@mui/material/styles" {
@@ -132,20 +131,10 @@ export const ContrastModeProvider: React.FC<ContrastModeProviderProps> = ({
     [contrastMode, parentBackgroundColor],
   );
 
-  const existingTheme = useTheme();
-  const theme = useMemo(
-    () =>
-      createTheme({
-        ...existingTheme,
-        odysseyContrastMode: contrastMode,
-      }),
-    [existingTheme, contrastMode],
-  );
-
   return (
     <div ref={ref}>
       <ContrastModeContext.Provider value={contextValue}>
-        <ThemeProvider theme={theme}>{children}</ThemeProvider>
+        {children}
       </ContrastModeContext.Provider>
     </div>
   );
