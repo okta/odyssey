@@ -24,6 +24,10 @@ export type SideNavProps = {
    */
   isCollapsible?: boolean;
   /**
+   *  Determines whether the side nav items use compact layout
+   */
+  isCompact?: boolean;
+  /**
    *  Triggers when the side nav is collapsed
    */
   onCollapse?(): void;
@@ -79,6 +83,10 @@ export type SideNavItem = {
    * internal flag to determine if the side-nav item is a child
    */
   __hasParent?: boolean;
+  /**
+   * internal flag to determine if the side-nav item is a child
+   */
+  __isCompact?: boolean;
   /**
    * Whether the item is disabled. When set to true the nav item is set to Disabled color,
    * the link/item is not clickable, and item with children is not expandable.

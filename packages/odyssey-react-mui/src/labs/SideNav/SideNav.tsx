@@ -29,7 +29,7 @@ import {
 import type { SideNavProps } from "./types";
 import { OktaLogo } from "./OktaLogo";
 import { HandleIcon } from "./HandleIcon";
-import { CollapseHandleIcon } from "./CollapseHandleIcon";
+import { CollapseIcon } from "./CollapseIcon";
 import { SideNavHeader } from "./SideNavHeader";
 import {
   SideNavItemContent,
@@ -56,19 +56,27 @@ const SideNavCollapsedContainer = styled("div", {
     odysseyDesignTokens: DesignTokens;
     isSideNavCollapsed: boolean;
   }) => ({
-    paddingTop: "75px",
+    display: "flex",
+    "&:before": {
+      height: "100%",
+      width: 0,
+      content: '" "',
+    },
     "&:has(svg:hover)": {
-      backgroundColor: isSideNavCollapsed
-        ? odysseyDesignTokens.HueNeutral100
-        : "transparent",
-      transitionProperty: "background-color",
-      transitionDuration: odysseyDesignTokens.TransitionDurationMain,
-      transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
+      "&:before": {
+        width: isSideNavCollapsed ? "8px" : 0,
+        transitionProperty: "width, background-color",
+        transitionDuration: odysseyDesignTokens.TransitionDurationMain,
+        transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
+        backgroundColor: isSideNavCollapsed
+          ? odysseyDesignTokens.HueNeutral200
+          : "transparent",
+      },
     },
   }),
 );
 
-const CollapseExpandHandleIconContainer = styled("div", {
+const ToggleSidenavHandleContainer = styled("div", {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" && prop !== "isSideNavCollapsed",
 })(
@@ -79,7 +87,9 @@ const CollapseExpandHandleIconContainer = styled("div", {
     odysseyDesignTokens: DesignTokens;
     isSideNavCollapsed: boolean;
   }) => ({
+    height: 0,
     cursor: "pointer",
+    marginTop: "75px",
     "& > svg#collapse": {
       opacity: 0,
       width: 0,
@@ -89,15 +99,15 @@ const CollapseExpandHandleIconContainer = styled("div", {
       "& > svg#collapse": {
         opacity: 1,
         width: "32px",
-        padding: "7px",
-        transitionProperty: "width, opacity",
+        padding: isSideNavCollapsed ? "8px 0 8px 8px" : "8px 8px 8px 0",
+        transitionProperty: "opacity",
         transitionDuration: odysseyDesignTokens.TransitionDurationMain,
         transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
       },
       "& > svg#handle": {
         opacity: 0,
         width: 0,
-        transitionProperty: "width, opacity",
+        transitionProperty: "opacity",
         transitionDuration: odysseyDesignTokens.TransitionDurationMain,
         transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
       },
@@ -229,6 +239,7 @@ const getHasScrollableContent = (scrollableContainer: HTMLElement) =>
 const SideNav = ({
   navHeaderText,
   isCollapsible,
+  isCompact,
   onCollapse,
   onExpand,
   sideNavItems,
@@ -237,10 +248,6 @@ const SideNav = ({
   footerComponent,
   logo,
 }: SideNavProps) => {
-  expandedWidth = isCollapsible
-    ? `${parseInt(expandedWidth) + 32}px`
-    : expandedWidth;
-
   const [isSideNavCollapsed, setSideNavCollapsed] = useState(false);
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const [isContentScrollable, setIsContentScrollable] = useState(false);
@@ -381,11 +388,12 @@ const SideNav = ({
             key={childProps.id}
             scrollRef={getRefIfThisIsFirstNodeWithIsSelected(childProps.id)}
             __hasParent={true}
+            __isCompact={isCompact}
             {...childProps}
           />
         )),
       })),
-    [getRefIfThisIsFirstNodeWithIsSelected, sideNavItems],
+    [getRefIfThisIsFirstNodeWithIsSelected, sideNavItems, isCompact],
   );
 
   const sideNavExpandClickHandler = useCallback(() => {
@@ -455,6 +463,7 @@ const SideNav = ({
                     odysseyDesignTokens={odysseyDesignTokens}
                     disabled={isDisabled}
                     aria-disabled={isDisabled}
+                    __isCompact={isCompact}
                   >
                     <NavAccordion
                       label={label}
@@ -474,6 +483,7 @@ const SideNav = ({
                   <SideNavItemContent
                     key={item.id}
                     scrollRef={getRefIfThisIsFirstNodeWithIsSelected(item.id)}
+                    __isCompact={isCompact}
                     {...item}
                   />
                 );
@@ -504,17 +514,18 @@ const SideNav = ({
           data-se="collapsed-region"
           data-aria-label="expand side navigation"
         >
-          <CollapseExpandHandleIconContainer
+          <ToggleSidenavHandleContainer
             odysseyDesignTokens={odysseyDesignTokens}
             isSideNavCollapsed={isSideNavCollapsed}
             tabIndex={0}
             role="button"
             onClick={sideNavExpandClickHandler}
             onKeyDown={sideNavExpandKeyHandler}
+            aria-label="toggle side navigation"
           >
             <HandleIcon />
-            <CollapseHandleIcon />
-          </CollapseExpandHandleIconContainer>
+            <CollapseIcon />
+          </ToggleSidenavHandleContainer>
         </SideNavCollapsedContainer>
       )}
     </SideNavContainer>
