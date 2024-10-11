@@ -10,11 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {
-  Autocomplete,
-  Link,
-} from "@okta/odyssey-react-mui";
-// import { AdaptablePicker } from "@okta/odyssey-react-mui/labs";
+import { Autocomplete, Link } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 import { expect } from "@storybook/jest";
 import { userEvent, waitFor, within, screen } from "@storybook/testing-library";
