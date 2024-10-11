@@ -53,48 +53,78 @@ const hexToRgb = (hex: string): string => {
   return `rgb(${r}, ${g}, ${b})`;
 };
 
-export const useParentBackgroundColor = (ref: React.RefObject<HTMLElement>) => {
-  const [backgroundColor, setBackgroundColor] = useState("");
+export const hueNeutral50Rgb = hexToRgb(Tokens.HueNeutral50);
 
-  const hueNeutral50Rgb = useMemo(() => hexToRgb(Tokens.HueNeutral50), []);
+export const useParentBackgroundColor = (ref: React.RefObject<HTMLElement>) => {
+  const [backgroundColor, setBackgroundColor] = useState("#ffffff");
 
   const getBackgroundColor = useCallback(() => {
     if (ref.current) {
       let element: HTMLElement | null = ref.current;
+
       while (element) {
-        const bgColor = window.getComputedStyle(element).backgroundColor;
+        const bgColor = window.getComputedStyle(element).backgroundColor; // TODO: Run this through a function to remove the alpha channel.
 
         if (bgColor !== "rgba(0, 0, 0, 0)" && bgColor !== "transparent") {
+          if (/rgba\((\d+), (\d+), (\d+), \d+\)/.test(bgColor)) {
+            const modifiedBgColor = bgColor.replace(
+              /rgba\((\d+), (\d+), (\d+), \d+\)/,
+              "rgb($1, $2, $3)",
+            );
+
+            return modifiedBgColor === hueNeutral50Rgb
+              ? Tokens.HueNeutral50
+              : modifiedBgColor;
+          }
           return bgColor === hueNeutral50Rgb ? Tokens.HueNeutral50 : bgColor;
         }
+
         element = element.parentElement;
       }
     }
-    return "";
-  }, [ref, hueNeutral50Rgb]);
+
+    return "#ffffff";
+  }, [ref]);
 
   useLayoutEffect(() => {
+    let requestAnimationFrameId: number;
+
     const updateBackgroundColor = () => {
-      const newBackgroundColor = getBackgroundColor();
-      if (newBackgroundColor !== backgroundColor) {
-        setBackgroundColor(newBackgroundColor);
-      }
+      cancelAnimationFrame(requestAnimationFrameId);
+
+      requestAnimationFrameId = requestAnimationFrame(() => {
+        setBackgroundColor(getBackgroundColor());
+      });
     };
 
-    updateBackgroundColor();
+    const observer = new MutationObserver(updateBackgroundColor);
 
-    const observer = new MutationObserver(() => {
-      requestAnimationFrame(updateBackgroundColor);
+    observer.observe(document.querySelector("html") as HTMLHtmlElement, {
+      attributes: true,
+      attributeFilter: ["class", "style"],
     });
 
-    observer.observe(document.body, {
-      attributes: true,
+    observer.observe(document.head, {
       childList: true,
       subtree: true,
     });
 
-    return () => observer.disconnect();
-  }, [getBackgroundColor, backgroundColor]);
+    const onTransitionEnd = (event: TransitionEvent) => {
+      if (event.propertyName === "background-color") {
+        updateBackgroundColor();
+      }
+    };
+
+    document.addEventListener("transitionend", onTransitionEnd);
+
+    updateBackgroundColor();
+
+    return () => {
+      document.removeEventListener("transitionend", onTransitionEnd);
+
+      observer.disconnect();
+    };
+  }, [getBackgroundColor]);
 
   return backgroundColor;
 };
@@ -118,8 +148,11 @@ export const ContrastModeProvider: React.FC<ContrastModeProviderProps> = ({
     if (explicitContrastMode) {
       setContrastMode(explicitContrastMode);
     } else {
-      const isHighContrast = parentBackgroundColor === Tokens.HueNeutral50;
-      setContrastMode(isHighContrast ? "highContrast" : "lowContrast");
+      setContrastMode(
+        parentBackgroundColor === Tokens.HueNeutral50
+          ? "highContrast"
+          : "lowContrast",
+      );
     }
   }, [parentBackgroundColor, explicitContrastMode]);
 

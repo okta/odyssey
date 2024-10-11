@@ -26,7 +26,7 @@ import {
   OdysseyTranslationProviderProps,
 } from "./OdysseyTranslationProvider";
 import { DefaultSupportedLanguages } from "./OdysseyTranslationProvider.types";
-import { ContrastMode, ContrastModeProvider } from "./ContrastModeProvider";
+import { ContrastModeProvider } from "./ContrastModeProvider";
 
 const scopedCssBaselineStyles = {
   height: "inherit",
@@ -38,7 +38,6 @@ export type OdysseyProviderProps<
   OdysseyThemeProviderProps &
   OdysseyTranslationProviderProps<SupportedLanguages> & {
     children: ReactNode;
-    contrastMode?: ContrastMode;
   };
 
 const OdysseyProvider = <SupportedLanguages extends string>({
@@ -53,9 +52,8 @@ const OdysseyProvider = <SupportedLanguages extends string>({
   stylisPlugins,
   themeOverride,
   translationOverrides,
-  contrastMode,
 }: OdysseyProviderProps<SupportedLanguages>) => (
-  <ContrastModeProvider contrastMode={contrastMode}>
+  <ContrastModeProvider>
     <OdysseyCacheProvider
       emotionRoot={emotionRoot}
       emotionRootElement={emotionRootElement}
@@ -68,7 +66,6 @@ const OdysseyProvider = <SupportedLanguages extends string>({
         shadowDomElement={shadowDomElement}
         shadowRootElement={shadowRootElement}
         themeOverride={themeOverride}
-        contrastMode={contrastMode}
       >
         <ScopedCssBaseline sx={scopedCssBaselineStyles}>
           <OdysseyTranslationProvider<SupportedLanguages>

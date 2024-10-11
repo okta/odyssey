@@ -128,7 +128,7 @@ const storybookMeta: Meta<ButtonProps> = {
   decorators: [
     MuiThemeDecorator,
     (Story: StoryFn<ButtonProps>, context: StoryContext<ButtonProps>) => (
-      <OdysseyThemeProvider contrastMode="lowContrast">
+      <OdysseyThemeProvider>
         <Story {...context.args} />
       </OdysseyThemeProvider>
     ),
