@@ -229,6 +229,7 @@ const Autocomplete = <
   defaultValue,
   errorMessage,
   errorMessageList,
+  getOptionLabel,
   hasMultipleChoices,
   id: idOverride,
   inputValue,
