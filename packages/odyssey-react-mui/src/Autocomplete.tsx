@@ -299,6 +299,7 @@ const Autocomplete = <
       disabled={isDisabled}
       freeSolo={isCustomValueAllowed}
       filterSelectedOptions={true}
+      getOptionLabel={getOptionLabel}
       id={idOverride}
       fullWidth={isFullWidth}
       loading={isLoading}
