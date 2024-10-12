@@ -21,7 +21,7 @@ import {
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext";
 import { CloseCircleFilledIcon } from "./icons.generated";
-import { useContrastModeContext, ContrastMode } from "./ContrastModeProvider";
+import { useThemeContrastContext, ContrastMode } from "./ThemeContrastProvider";
 
 export const tagColorVariants = [
   "default",
@@ -246,7 +246,7 @@ const Tag = ({
 }: TagProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { chipElementType } = useContext(TagListContext);
-  const { contrastMode } = useContrastModeContext();
+  const { contrastMode } = useThemeContrastContext();
 
   const renderTag = useCallback(
     (muiProps: MuiPropsContextType) => (
