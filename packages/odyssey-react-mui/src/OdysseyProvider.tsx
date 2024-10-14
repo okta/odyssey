@@ -12,6 +12,7 @@
 
 import { memo, ReactNode } from "react";
 import { ScopedCssBaseline } from "@mui/material";
+import { ThemeContrastProvider } from "./ThemeContrastProvider";
 
 import {
   OdysseyCacheProvider,
@@ -59,25 +60,25 @@ const OdysseyProvider = <SupportedLanguages extends string>({
     nonce={nonce}
     stylisPlugins={stylisPlugins}
   >
-    <OdysseyThemeProvider
-      designTokensOverride={designTokensOverride}
-      shadowDomElement={shadowDomElement}
-      shadowRootElement={shadowRootElement}
-      themeOverride={themeOverride}
-      contrastMode={contrastMode}
-    >
-      <ScopedCssBaseline sx={scopedCssBaselineStyles}>
-        <OdysseyTranslationProvider<SupportedLanguages>
-          languageCode={languageCode}
-          translationOverrides={translationOverrides}
-        >
-          {children}
-        </OdysseyTranslationProvider>
-      </ScopedCssBaseline>
-    </OdysseyThemeProvider>
+    <ThemeContrastProvider contrastMode={contrastMode}>
+      <OdysseyThemeProvider
+        designTokensOverride={designTokensOverride}
+        shadowDomElement={shadowDomElement}
+        shadowRootElement={shadowRootElement}
+        themeOverride={themeOverride}
+      >
+        <ScopedCssBaseline sx={scopedCssBaselineStyles}>
+          <OdysseyTranslationProvider<SupportedLanguages>
+            languageCode={languageCode}
+            translationOverrides={translationOverrides}
+          >
+            {children}
+          </OdysseyTranslationProvider>
+        </ScopedCssBaseline>
+      </OdysseyThemeProvider>
+    </ThemeContrastProvider>
   </OdysseyCacheProvider>
 );
-
 const MemoizedOdysseyProvider = memo(OdysseyProvider) as typeof OdysseyProvider;
 
 export { MemoizedOdysseyProvider as OdysseyProvider };
