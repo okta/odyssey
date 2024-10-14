@@ -10,9 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, ReactNode, useMemo } from "react";
+import { memo, ReactNode } from "react";
 import { ScopedCssBaseline } from "@mui/material";
-
 import {
   OdysseyCacheProvider,
   OdysseyCacheProviderProps,
@@ -26,26 +25,17 @@ import {
   OdysseyTranslationProviderProps,
 } from "./OdysseyTranslationProvider";
 import { DefaultSupportedLanguages } from "./OdysseyTranslationProvider.types";
-import {
-  ContrastMode,
-  ContrastModeProvider,
-  useContrastContext,
-} from "./ContrastModeProvider";
-
 const scopedCssBaselineStyles = {
   height: "inherit",
 };
-
 export type OdysseyProviderProps<
   SupportedLanguages extends string = DefaultSupportedLanguages,
 > = OdysseyCacheProviderProps &
   OdysseyThemeProviderProps &
   OdysseyTranslationProviderProps<SupportedLanguages> & {
     children: ReactNode;
-    contrastMode?: ContrastMode;
   };
-
-const OdysseyProviderInner = <SupportedLanguages extends string>({
+const OdysseyProvider = <SupportedLanguages extends string>({
   children,
   designTokensOverride,
   emotionRoot,
@@ -57,53 +47,30 @@ const OdysseyProviderInner = <SupportedLanguages extends string>({
   stylisPlugins,
   themeOverride,
   translationOverrides,
-}: OdysseyProviderProps<SupportedLanguages>) => {
-  const { contrastMode } = useContrastContext();
-
-  const memoizedThemeProps = useMemo(
-    () => ({
-      ...themeOverride,
-      odysseyContrastMode: contrastMode,
-    }),
-    [themeOverride, contrastMode],
-  );
-
-  return (
-    <OdysseyCacheProvider
-      emotionRoot={emotionRoot}
-      emotionRootElement={emotionRootElement}
-      hasShadowDom={Boolean(shadowRootElement || shadowDomElement)}
-      nonce={nonce}
-      stylisPlugins={stylisPlugins}
-    >
-      <OdysseyThemeProvider
-        designTokensOverride={designTokensOverride}
-        shadowDomElement={shadowDomElement}
-        shadowRootElement={shadowRootElement}
-        themeOverride={memoizedThemeProps}
-      >
-        <ScopedCssBaseline sx={scopedCssBaselineStyles}>
-          <OdysseyTranslationProvider<SupportedLanguages>
-            languageCode={languageCode}
-            translationOverrides={translationOverrides}
-          >
-            {children}
-          </OdysseyTranslationProvider>
-        </ScopedCssBaseline>
-      </OdysseyThemeProvider>
-    </OdysseyCacheProvider>
-  );
-};
-
-const OdysseyProvider = <SupportedLanguages extends string>({
-  contrastMode,
-  ...providerProps
 }: OdysseyProviderProps<SupportedLanguages>) => (
-  <ContrastModeProvider contrastMode={contrastMode}>
-    <OdysseyProviderInner {...providerProps} />
-  </ContrastModeProvider>
+  <OdysseyCacheProvider
+    emotionRoot={emotionRoot}
+    emotionRootElement={emotionRootElement}
+    hasShadowDom={Boolean(shadowRootElement || shadowDomElement)}
+    nonce={nonce}
+    stylisPlugins={stylisPlugins}
+  >
+    <OdysseyThemeProvider
+      designTokensOverride={designTokensOverride}
+      shadowRootElement={shadowRootElement || shadowDomElement}
+      themeOverride={themeOverride}
+    >
+      {/* This component creates a div; for flexibility of layout of children, make it inherit its parent's height */}
+      <ScopedCssBaseline sx={scopedCssBaselineStyles}>
+        <OdysseyTranslationProvider<SupportedLanguages>
+          languageCode={languageCode}
+          translationOverrides={translationOverrides}
+        >
+          {children}
+        </OdysseyTranslationProvider>
+      </ScopedCssBaseline>
+    </OdysseyThemeProvider>
+  </OdysseyCacheProvider>
 );
-
-const MemoizedOdysseyProvider = memo(OdysseyProvider) as typeof OdysseyProvider;
-
-export { MemoizedOdysseyProvider as OdysseyProvider };
+const MemoizedThemeProvider = memo(OdysseyProvider) as typeof OdysseyProvider;
+export { MemoizedThemeProvider as OdysseyProvider };
