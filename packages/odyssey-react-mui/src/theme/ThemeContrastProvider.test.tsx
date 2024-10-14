@@ -28,7 +28,7 @@ jest.mock("../ThemeContrastProvider", () => ({
 const TestComponent = () => {
   const { contrastMode, parentBackgroundColor } = useThemeContrastContext();
   return (
-    <div data-testid="test-component">
+    <div role="status" aria-label="Contrast Mode">
       {contrastMode}:{parentBackgroundColor}
     </div>
   );
@@ -57,9 +57,9 @@ describe("ThemeContrastProvider", () => {
       jest.runAllTimers();
     });
 
-    expect(screen.getByTestId("test-component")).toHaveTextContent(
-      "lowContrast:",
-    );
+    expect(
+      screen.getByRole("status", { name: "Contrast Mode" }),
+    ).toHaveTextContent("lowContrast:");
   });
 
   it("respects explicitly set contrast mode", async () => {
@@ -73,9 +73,9 @@ describe("ThemeContrastProvider", () => {
       jest.runAllTimers();
     });
 
-    expect(screen.getByTestId("test-component")).toHaveTextContent(
-      "highContrast:",
-    );
+    expect(
+      screen.getByRole("status", { name: "Contrast Mode" }),
+    ).toHaveTextContent("highContrast:");
   });
 
   it("maintains lowContrast mode when background color is HueNeutral50", async () => {
@@ -91,9 +91,9 @@ describe("ThemeContrastProvider", () => {
       jest.runAllTimers();
     });
 
-    expect(screen.getByTestId("test-component")).toHaveTextContent(
-      "lowContrast:",
-    );
+    expect(
+      screen.getByRole("status", { name: "Contrast Mode" }),
+    ).toHaveTextContent("lowContrast:");
   });
 
   it("maintains contrast mode when background color changes", async () => {
@@ -109,9 +109,9 @@ describe("ThemeContrastProvider", () => {
       jest.runAllTimers();
     });
 
-    expect(screen.getByTestId("test-component")).toHaveTextContent(
-      "lowContrast:",
-    );
+    expect(
+      screen.getByRole("status", { name: "Contrast Mode" }),
+    ).toHaveTextContent("lowContrast:");
 
     (getBackgroundColor as jest.Mock).mockReturnValue(Tokens.HueNeutral50);
 
@@ -125,9 +125,9 @@ describe("ThemeContrastProvider", () => {
       jest.runAllTimers();
     });
 
-    expect(screen.getByTestId("test-component")).toHaveTextContent(
-      "lowContrast:",
-    );
+    expect(
+      screen.getByRole("status", { name: "Contrast Mode" }),
+    ).toHaveTextContent("lowContrast:");
   });
 
   it("uses custom hook to manage contrast mode", async () => {
