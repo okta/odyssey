@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, {
+import {
   createContext,
   useContext,
   useRef,
@@ -92,10 +92,10 @@ type ThemeContrastProviderProps = {
   contrastMode?: ContrastMode;
 };
 
-export const ThemeContrastProvider: React.FC<ThemeContrastProviderProps> = ({
+export const ThemeContrastProvider = ({
   children,
   contrastMode: explicitContrastMode,
-}) => {
+}: ThemeContrastProviderProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const [parentBackgroundColor, setParentBackgroundColor] = useState("#ffffff");
   const [contrastMode, setContrastMode] = useState<ContrastMode>(
