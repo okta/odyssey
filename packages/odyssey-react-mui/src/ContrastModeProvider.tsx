@@ -34,7 +34,7 @@ const ThemeContrastModeContext = createContext<ContrastModeContextType>({
   parentBackgroundColor: "",
 });
 
-export const useThemeContrastModeContext = () =>
+export const useContrastModeContext = () =>
   useContext(ThemeContrastModeContext);
 
 const hexToRgb = (hex: string): string => {
@@ -87,15 +87,15 @@ export const getBackgroundColor = (element: HTMLElement | null): string => {
   return "#ffffff"; // Default to white/low contrast if no background color is found
 };
 
-type ThemeContrastProviderProps = {
+type ContrastModeProviderProps = {
   children: ReactNode;
   contrastMode?: ContrastMode;
 };
 
-export const ThemeContrastProvider = ({
+export const ContrastModeProvider = ({
   children,
   contrastMode: explicitContrastMode,
-}: ThemeContrastProviderProps) => {
+}: ContrastModeProviderProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const [parentBackgroundColor, setParentBackgroundColor] = useState("#ffffff");
   const [contrastMode, setContrastMode] = useState<ContrastMode>(

@@ -13,20 +13,20 @@
 import { render, screen, act } from "@testing-library/react";
 import { renderHook } from "@testing-library/react-hooks";
 import {
-  ThemeContrastProvider,
-  useThemeContrastModeContext,
+  ContrastModeProvider,
+  useContrastModeContext,
   getBackgroundColor,
-} from "../ThemeContrastProvider";
+} from "../ContrastModeProvider";
 import * as Tokens from "@okta/odyssey-design-tokens";
 import "@testing-library/jest-dom";
 
-jest.mock("../ThemeContrastProvider", () => ({
-  ...jest.requireActual("../ThemeContrastProvider"),
+jest.mock("../ContrastModeProvider", () => ({
+  ...jest.requireActual("../ContrastModeProvider"),
   getBackgroundColor: jest.fn(),
 }));
 
 const TestComponent = () => {
-  const { contrastMode, parentBackgroundColor } = useThemeContrastModeContext();
+  const { contrastMode, parentBackgroundColor } = useContrastModeContext();
   return (
     <div role="status" aria-label="Contrast Mode">
       {contrastMode}:{parentBackgroundColor}
@@ -34,7 +34,7 @@ const TestComponent = () => {
   );
 };
 
-describe("ThemeContrastProvider", () => {
+describe("ContrastModeProvider", () => {
   beforeEach(() => {
     jest.useFakeTimers();
   });
@@ -48,9 +48,9 @@ describe("ThemeContrastProvider", () => {
     (getBackgroundColor as jest.Mock).mockReturnValue("#ffffff");
 
     render(
-      <ThemeContrastProvider>
+      <ContrastModeProvider>
         <TestComponent />
-      </ThemeContrastProvider>,
+      </ContrastModeProvider>,
     );
 
     await act(async () => {
@@ -64,9 +64,9 @@ describe("ThemeContrastProvider", () => {
 
   it("respects explicitly set contrast mode", async () => {
     render(
-      <ThemeContrastProvider contrastMode="highContrast">
+      <ContrastModeProvider contrastMode="highContrast">
         <TestComponent />
-      </ThemeContrastProvider>,
+      </ContrastModeProvider>,
     );
 
     await act(async () => {
@@ -82,9 +82,9 @@ describe("ThemeContrastProvider", () => {
     (getBackgroundColor as jest.Mock).mockReturnValue(Tokens.HueNeutral50);
 
     render(
-      <ThemeContrastProvider>
+      <ContrastModeProvider>
         <TestComponent />
-      </ThemeContrastProvider>,
+      </ContrastModeProvider>,
     );
 
     await act(async () => {
@@ -100,9 +100,9 @@ describe("ThemeContrastProvider", () => {
     (getBackgroundColor as jest.Mock).mockReturnValue("#ffffff");
 
     const { rerender } = render(
-      <ThemeContrastProvider>
+      <ContrastModeProvider>
         <TestComponent />
-      </ThemeContrastProvider>,
+      </ContrastModeProvider>,
     );
 
     await act(async () => {
@@ -116,9 +116,9 @@ describe("ThemeContrastProvider", () => {
     (getBackgroundColor as jest.Mock).mockReturnValue(Tokens.HueNeutral50);
 
     rerender(
-      <ThemeContrastProvider>
+      <ContrastModeProvider>
         <TestComponent />
-      </ThemeContrastProvider>,
+      </ContrastModeProvider>,
     );
 
     await act(async () => {
@@ -133,12 +133,9 @@ describe("ThemeContrastProvider", () => {
   it("uses custom hook to manage contrast mode", async () => {
     (getBackgroundColor as jest.Mock).mockReturnValue("#ffffff");
 
-    const { result, rerender } = renderHook(
-      () => useThemeContrastModeContext(),
-      {
-        wrapper: ThemeContrastProvider,
-      },
-    );
+    const { result, rerender } = renderHook(() => useContrastModeContext(), {
+      wrapper: ContrastModeProvider,
+    });
 
     await act(async () => {
       jest.runAllTimers();

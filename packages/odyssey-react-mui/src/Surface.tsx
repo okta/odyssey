@@ -19,7 +19,7 @@ import {
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext";
 import { OdysseyThemeProvider } from "./OdysseyThemeProvider";
-import { ThemeContrastProvider } from "./ThemeContrastProvider";
+import { ContrastModeProvider } from "./ContrastModeProvider";
 
 const StyledContainer = styled(MuiPaper, {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
@@ -39,9 +39,9 @@ const Surface = ({ children }: SurfaceProps) => {
 
   return (
     <StyledContainer odysseyDesignTokens={odysseyDesignTokens}>
-      <ThemeContrastProvider>
+      <ContrastModeProvider>
         <OdysseyThemeProvider>{children}</OdysseyThemeProvider>
-      </ThemeContrastProvider>
+      </ContrastModeProvider>
     </StyledContainer>
   );
 };
