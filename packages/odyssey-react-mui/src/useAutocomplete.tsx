@@ -22,10 +22,6 @@ import {
   useRef,
   useState,
 } from "react";
-// import _AutoSizer, {
-//   Props as AutoSizerProps,
-//   Size as AutoSizerSize,
-// } from "react-virtualized-auto-sizer";
 import { VariableSizeList, ListChildComponentProps } from "react-window";
 import { useTranslation } from "react-i18next";
 import styled from "@emotion/styled";
@@ -49,7 +45,6 @@ const ListboxContainer = styled.div({
   height: "100%",
 });
 
-// const AutoSizer = _AutoSizer as unknown as FC<AutoSizerProps>;
 type SetItemSize = (size: number) => void;
 
 export type UseAutocompleteProps<
@@ -257,7 +252,7 @@ export const useAutocomplete = <
         [item].concat(item.children || []),
     );
 
-    const sizeMap = useRef<number[]>([]);
+    const sizeMapRef = useRef<number[]>([]);
 
     const getListBoxHeight = useCallback(() => {
       // 8px of padding top/bottom applied by MUI
@@ -265,23 +260,24 @@ export const useAutocomplete = <
 
       if (itemData.length > OVERSCAN_ROW_COUNT) {
         // has a max-height of 40vh set in CSS. This is only set because height needs to be a number
-        return 99999;
+        return 9999;
       } else {
-        const itemsHeightCalculated = itemData
-          .map((_, index) => sizeMap.current[index] || 0)
+        const itemsHeightCalculated = Array(itemData.length)
+          .fill(null)
+          .map((_, index) => sizeMapRef.current[index] || 0)
           .reduce(
             (prevItemHeight, nextItemHeight) => prevItemHeight + nextItemHeight,
             0,
           );
         return COMBINED_LISTBOX_PADDING + itemsHeightCalculated;
       }
-    }, [itemData, sizeMap]);
+    }, [itemData, sizeMapRef]);
 
     useEffect(() => {
-      if (sizeMap.current.length && itemData.length) {
+      if (sizeMapRef.current.length && itemData.length) {
         setListHeight(getListBoxHeight());
       }
-    }, [getListBoxHeight, itemData, sizeMap]);
+    }, [getListBoxHeight, itemData, sizeMapRef]);
 
     // The number of items (rows or columns) to render outside of the visible area for performance and scrolling reasons
     const OVERSCAN_ROW_COUNT = 8;
@@ -291,14 +287,14 @@ export const useAutocomplete = <
     const setItemSize = useCallback<SetItemSize>(
       (size) => {
         gridRef?.current?.resetAfterIndex(0, true);
-        sizeMap.current = sizeMap.current.concat(size);
+        sizeMapRef.current = sizeMapRef.current.concat(size);
       },
-      [gridRef, sizeMap],
+      [gridRef, sizeMapRef],
     );
     const getItemSize = useCallback(
       // using 45px as a sane default here to avoid a lot of content shift on repaint
-      (index: number) => sizeMap.current[index] || 45,
-      [sizeMap],
+      (index: number) => sizeMapRef.current[index] || 45,
+      [sizeMapRef],
     );
 
     return (

@@ -28,6 +28,12 @@ export type BasePickerProps<
   IsCustomValueAllowed extends boolean | undefined,
 > = AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed> & {
   adornmentSize?: AdornmentSize;
+  groupOptionsBy?: MuiAutocompleteProps<
+    OptionType,
+    HasMultipleChoices,
+    undefined,
+    IsCustomValueAllowed
+  >["groupBy"];
 };
 
 export type BasePickerType = {
@@ -56,13 +62,6 @@ export type ComposablePickerProps<
     undefined,
     IsCustomValueAllowed
   >["getOptionLabel"];
-
-  groupOptionsBy?: MuiAutocompleteProps<
-    OptionType,
-    HasMultipleChoices,
-    undefined,
-    IsCustomValueAllowed
-  >["groupBy"];
 
   renderOption: MuiAutocompleteProps<
     OptionType,
