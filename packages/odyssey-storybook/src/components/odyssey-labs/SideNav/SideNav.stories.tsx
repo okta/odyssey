@@ -20,7 +20,6 @@ import {
   HomeIcon,
   Fido2Icon,
   LockIcon,
-  CalendarIcon,
   CheckIcon,
   AddCircleIcon,
   DownloadIcon,
@@ -140,7 +139,6 @@ const storybookMeta: Meta<SideNavProps> = {
       {
         id: "item001",
         label: "Onboarding",
-        startIcon: <CalendarIcon />,
         children: [
           {
             id: "item1-2",
