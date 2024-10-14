@@ -26,6 +26,9 @@ import {
   OdysseyTranslationProviderProps,
 } from "./OdysseyTranslationProvider";
 import { DefaultSupportedLanguages } from "./OdysseyTranslationProvider.types";
+const scopedCssBaselineStyles = {
+  height: "inherit",
+};
 
 export type OdysseyProviderProps<
   SupportedLanguages extends string = DefaultSupportedLanguages,
@@ -63,7 +66,7 @@ const OdysseyProvider = <SupportedLanguages extends string>({
       themeOverride={themeOverride}
       contrastMode={contrastMode}
     >
-      <ScopedCssBaseline sx={{ height: "inherit" }}>
+      <ScopedCssBaseline sx={scopedCssBaselineStyles}>
         <OdysseyTranslationProvider<SupportedLanguages>
           languageCode={languageCode}
           translationOverrides={translationOverrides}
