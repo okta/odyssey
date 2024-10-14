@@ -11,35 +11,35 @@
  */
 
 export const createUnattachedShadowDomElements = () => {
-  const emotionRootElement = document.createElement("div");
-
-  emotionRootElement.setAttribute("id", "style-root");
-  emotionRootElement.setAttribute("nonce", window.cspNonce);
-
   const appRootElement = document.createElement("div");
-
-  appRootElement.setAttribute("id", "shadow-root");
+  const emotionRootElement = document.createElement("div");
 
   // This div could cause issues with layout of children.
   // For flexibility, make it inherit its parent's height
   appRootElement.style.setProperty("height", "inherit");
 
-  const slotElement = document.createElement("slot");
+  appRootElement.setAttribute("id", "app-root");
+  emotionRootElement.setAttribute("id", "style-root");
+  emotionRootElement.setAttribute("nonce", window.cspNonce);
 
-  return { appRootElement, emotionRootElement, slotElement };
+  return { appRootElement, emotionRootElement };
 };
+
+export type ShadowDomElements = ReturnType<
+  typeof createUnattachedShadowDomElements
+>;
 
 export const createShadowDomElements = (containerElement: HTMLElement) => {
   const shadowRoot = containerElement.attachShadow({ mode: "open" });
 
   // Container for Emotion `<style>` elements.
-  const { appRootElement: shadowRootElement, emotionRootElement } =
+  const { appRootElement, emotionRootElement } =
     createUnattachedShadowDomElements();
 
+  shadowRoot.appendChild(appRootElement);
   shadowRoot.appendChild(emotionRootElement);
-  shadowRoot.appendChild(shadowRootElement);
 
-  return { emotionRootElement, shadowRootElement };
+  return { emotionRootElement, shadowRootElement: appRootElement };
 };
 
 /** @deprecated Use `createShadowDomElements` instead. */
