@@ -18,8 +18,8 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext";
-import { ThemeContrastProvider } from "./ThemeContrastProvider";
 import { OdysseyThemeProvider } from "./OdysseyThemeProvider";
+import { ThemeContrastProvider } from "./ThemeContrastProvider";
 
 const StyledContainer = styled(MuiPaper, {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
