@@ -62,7 +62,7 @@ const OdysseyThemeProvider = ({
       createOdysseyMuiTheme({
         odysseyTokens,
         shadowRootElement: shadowRootElement || shadowDomElement,
-        contrastMode: "lowContrast",
+        contrastMode: "highContrast",
       }),
     [odysseyTokens, shadowDomElement, shadowRootElement],
   );

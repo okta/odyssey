@@ -1031,7 +1031,7 @@ export const components = ({
       styleOverrides: {
         root: ({ ownerState, theme }) => {
           const contrastMode = theme.contrastMode;
-          console.log(">>>" + contrastMode);
+
           return {
             height: "auto",
             paddingBlock: `calc(${odysseyTokens.Spacing2} - ${odysseyTokens.BorderWidthMain})`,

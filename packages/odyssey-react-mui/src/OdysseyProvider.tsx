@@ -25,6 +25,7 @@ import {
   OdysseyTranslationProviderProps,
 } from "./OdysseyTranslationProvider";
 import { DefaultSupportedLanguages } from "./OdysseyTranslationProvider.types";
+
 const scopedCssBaselineStyles = {
   height: "inherit",
 };
