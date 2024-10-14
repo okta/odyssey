@@ -170,6 +170,9 @@ export const StatusWrapper: StoryObj<TooltipProps> = {
         "The warp drive is currently online.",
       );
       userEvent.hover(button);
+
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
       await axeRun("Tooltip Icon Button");
     });
   },
