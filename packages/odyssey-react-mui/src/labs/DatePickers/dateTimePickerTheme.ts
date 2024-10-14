@@ -32,14 +32,17 @@ const theme: ThemeOptions = {
     MuiPickersLayout: {
       styleOverrides: {
         contentWrapper: ({ theme }) => ({
-          paddingInline: theme.spacing(2),
+          padding: theme.spacing(3),
+          paddingBlockStart: 0,
           gridTemplateColumns: "1fr 16px auto",
-
-          "@media (pointer: fine)": {
-            paddingBlock: theme.spacing(3),
-            paddingInline: theme.spacing(3),
-          },
         }),
+      },
+    },
+    MuiPickersToolbar: {
+      styleOverrides: {
+        // content: {
+        //   alignItems: "center",
+        // },
       },
     },
     MuiMultiSectionDigitalClockSection: {
@@ -66,6 +69,105 @@ const theme: ThemeOptions = {
             "&.Mui-disabled": dateStyles.disabled({ theme }),
           },
         ],
+      },
+    },
+    MuiDateTimePickerToolbar: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          padding: theme.spacing(3),
+        }),
+        dateContainer: ({ theme }) => ({
+          flexDirection: "row-reverse",
+
+          button: {
+            "+ button": {
+              marginInlineEnd: theme.spacing(2),
+            },
+          },
+        }),
+        timeContainer: {
+          // alignItems: "flex-start",
+        },
+        timeDigitsContainer: ({ theme }) => ({
+          alignItems: "center",
+        }),
+        ampmSelection: ({ theme }) => ({
+          margin: 0,
+          marginInlineStart: theme.spacing(2),
+
+          button: {
+            padding: theme.spacing(2),
+
+            "&:has(.Mui-selected)": {
+              backgroundColor: theme.palette.primary.main,
+              
+              ".Mui-selected": {
+                color: theme.palette.common.white,
+                "&::after": {
+                  display: "none"
+                }
+              }
+            }
+          }
+        }),
+        separator: ({ theme }) => ({
+          ...theme.typography.h5,
+          marginBlock: 0,
+          marginInline: theme.spacing(1),
+        }),
+      },
+    },
+    MuiPickersToolbarButton: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          height: "auto",
+          padding: 0,
+          margin: 0,
+          border: 0,
+          borderRadius: theme.mixins.borderRadius,
+          backgroundColor: "transparent",
+          color: theme.typography.subtitle1.color,
+
+          "&:hover": {
+            backgroundColor: "transparent",
+          },
+
+          "& + &": {
+            marginInlineStart: 0,
+          },
+        }),
+      },
+    },
+    MuiPickersToolbarText: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          ...theme.typography.h5,
+          position: "relative",
+          margin: 0,
+          lineHeight: 1,
+          color: "inherit",
+
+          "&::after": {
+            position: "absolute",
+            left: 0,
+            bottom: 0,
+            width: "100%",
+            height: 2,
+            backgroundColor: "currentColor",
+            opacity: 0,
+            content: "''",
+            transition: "opacity 100ms, transform 200ms",
+          },
+
+          "&.Mui-selected": {
+            color: theme.typography.body1.color,
+
+            "&::after": {
+              transform: "translateY(2px)",
+              opacity: 1,
+            },
+          },
+        }),
       },
     },
   },
