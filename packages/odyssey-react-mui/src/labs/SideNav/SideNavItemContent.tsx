@@ -70,6 +70,11 @@ export const SideNavListItemContainer = styled("li", {
     outlineWidth: odysseyDesignTokens.FocusOutlineWidthMain,
     backgroundColor: !isDisabled ? odysseyDesignTokens.HueNeutral50 : "inherit",
   },
+  ".nav-accordion-details a, .nav-accordion-details div[role='button']": {
+    padding: __isCompact
+      ? `${odysseyDesignTokens.Spacing0} ${odysseyDesignTokens.Spacing4} ${odysseyDesignTokens.Spacing0} ${odysseyDesignTokens.Spacing6}`
+      : `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4} ${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing6}`,
+  },
 }));
 
 const scrollToNode = (node: HTMLElement | null) => {

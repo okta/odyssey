@@ -89,22 +89,22 @@ const ToggleSidenavHandleContainer = styled("div", {
   }) => ({
     height: 0,
     cursor: "pointer",
-    marginTop: "75px",
-    "& > svg#collapse": {
+    marginTop: "77px",
+    "& svg#collapse": {
       opacity: 0,
       width: 0,
       transform: isSideNavCollapsed ? "rotate(180deg)" : "rotate(0deg)",
     },
     "&:hover, &:focus-visible": {
-      "& > svg#collapse": {
+      "& svg#collapse": {
         opacity: 1,
         width: "32px",
-        padding: isSideNavCollapsed ? "8px 0 8px 8px" : "8px 8px 8px 0",
+        padding: "8px",
         transitionProperty: "opacity",
         transitionDuration: odysseyDesignTokens.TransitionDurationMain,
         transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
       },
-      "& > svg#handle": {
+      "& svg#handle": {
         opacity: 0,
         width: 0,
         transitionProperty: "opacity",
@@ -512,7 +512,6 @@ const SideNav = ({
           odysseyDesignTokens={odysseyDesignTokens}
           isSideNavCollapsed={isSideNavCollapsed}
           data-se="collapsed-region"
-          data-aria-label="expand side navigation"
         >
           <ToggleSidenavHandleContainer
             odysseyDesignTokens={odysseyDesignTokens}
@@ -521,7 +520,11 @@ const SideNav = ({
             role="button"
             onClick={sideNavExpandClickHandler}
             onKeyDown={sideNavExpandKeyHandler}
-            aria-label="toggle side navigation"
+            aria-label={
+              isSideNavCollapsed
+                ? "expand side navigation"
+                : "collapse side navigation"
+            }
           >
             <HandleIcon />
             <CollapseIcon />
