@@ -578,7 +578,7 @@ export const components = ({
       },
       styleOverrides: {
         root: ({ ownerState, theme }) => {
-          const contrastMode = theme.odysseyContrastMode;
+          const contrastMode = theme.contrastMode;
 
           return {
             minWidth: "unset",
@@ -1030,7 +1030,8 @@ export const components = ({
       },
       styleOverrides: {
         root: ({ ownerState, theme }) => {
-          const contrastMode = theme.odysseyContrastMode;
+          const contrastMode = theme.contrastMode;
+
           return {
             height: "auto",
             paddingBlock: `calc(${odysseyTokens.Spacing2} - ${odysseyTokens.BorderWidthMain})`,
