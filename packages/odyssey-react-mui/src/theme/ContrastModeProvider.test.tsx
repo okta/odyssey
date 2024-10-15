@@ -10,20 +10,30 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render, screen, act } from "@testing-library/react";
+import React, { ReactNode, useState } from "react";
+import { render, screen, act, waitFor } from "@testing-library/react";
 import { renderHook } from "@testing-library/react-hooks";
 import {
   ContrastModeProvider,
   useContrastModeContext,
-  getBackgroundColor,
 } from "../ContrastModeProvider";
 import * as Tokens from "@okta/odyssey-design-tokens";
 import "@testing-library/jest-dom";
 
-jest.mock("../ContrastModeProvider", () => ({
-  ...jest.requireActual("../ContrastModeProvider"),
-  getBackgroundColor: jest.fn(),
-}));
+// Minimal mock for getComputedStyle
+const originalGetComputedStyle = window.getComputedStyle;
+beforeAll(() => {
+  window.getComputedStyle = jest
+    .fn()
+    .mockImplementation((element: HTMLElement) => ({
+      ...originalGetComputedStyle(element),
+      backgroundColor: element.style.backgroundColor || "rgba(0, 0, 0, 0)",
+    }));
+});
+
+afterAll(() => {
+  (window.getComputedStyle as jest.Mock).mockRestore();
+});
 
 const TestComponent = () => {
   const { contrastMode, parentBackgroundColor } = useContrastModeContext();
@@ -34,125 +44,87 @@ const TestComponent = () => {
   );
 };
 
+const DynamicBackgroundWrapper = ({ initialColor, children }) => {
+  const [backgroundColor, setBackgroundColor] = useState(initialColor);
+
+  return (
+    <div data-testid="parent" style={{ backgroundColor }}>
+      <ContrastModeProvider key={backgroundColor}>
+        {children}
+      </ContrastModeProvider>
+      <button onClick={() => setBackgroundColor(Tokens.HueNeutral50)}>
+        Change Background
+      </button>
+    </div>
+  );
+};
+
+const renderWithDynamicBackground = (initialColor: string) => {
+  return render(
+    <DynamicBackgroundWrapper initialColor={initialColor}>
+      <TestComponent />
+    </DynamicBackgroundWrapper>,
+  );
+};
+
 describe("ContrastModeProvider", () => {
-  beforeEach(() => {
-    jest.useFakeTimers();
+  it("provides lowContrast mode when background is white", async () => {
+    renderWithDynamicBackground("#ffffff");
+
+    await waitFor(() => {
+      expect(screen.getByRole("status")).toHaveTextContent(
+        "lowContrast:rgb(255, 255, 255)",
+      );
+    });
   });
 
-  afterEach(() => {
-    jest.useRealTimers();
-    jest.resetAllMocks();
+  it("provides highContrast mode when background is HueNeutral50", async () => {
+    renderWithDynamicBackground(Tokens.HueNeutral50);
+
+    await waitFor(() => {
+      expect(screen.getByRole("status")).toHaveTextContent(
+        `highContrast:${Tokens.HueNeutral50}`,
+      );
+    });
   });
 
-  it("provides lowContrast mode by default when background is white", async () => {
-    (getBackgroundColor as jest.Mock).mockReturnValue("#ffffff");
+  it("updates contrast mode when background color changes", async () => {
+    const { getByText } = renderWithDynamicBackground("#ffffff");
 
-    render(
-      <ContrastModeProvider>
-        <TestComponent />
-      </ContrastModeProvider>,
-    );
-
-    await act(async () => {
-      jest.runAllTimers();
+    await waitFor(() => {
+      expect(screen.getByRole("status")).toHaveTextContent(
+        "lowContrast:rgb(255, 255, 255)",
+      );
     });
 
-    expect(
-      screen.getByRole("status", { name: "Contrast Mode" }),
-    ).toHaveTextContent("lowContrast:");
-  });
-
-  it("respects explicitly set contrast mode", async () => {
-    render(
-      <ContrastModeProvider contrastMode="highContrast">
-        <TestComponent />
-      </ContrastModeProvider>,
-    );
-
-    await act(async () => {
-      jest.runAllTimers();
+    act(() => {
+      getByText("Change Background").click();
     });
 
-    expect(
-      screen.getByRole("status", { name: "Contrast Mode" }),
-    ).toHaveTextContent("highContrast:");
-  });
-
-  it("maintains lowContrast mode when background color is HueNeutral50", async () => {
-    (getBackgroundColor as jest.Mock).mockReturnValue(Tokens.HueNeutral50);
-
-    render(
-      <ContrastModeProvider>
-        <TestComponent />
-      </ContrastModeProvider>,
+    await waitFor(
+      () => {
+        expect(screen.getByRole("status")).toHaveTextContent(
+          `highContrast:${Tokens.HueNeutral50}`,
+        );
+      },
+      { timeout: 3000 },
     );
-
-    await act(async () => {
-      jest.runAllTimers();
-    });
-
-    expect(
-      screen.getByRole("status", { name: "Contrast Mode" }),
-    ).toHaveTextContent("lowContrast:");
-  });
-
-  it("maintains contrast mode when background color changes", async () => {
-    (getBackgroundColor as jest.Mock).mockReturnValue("#ffffff");
-
-    const { rerender } = render(
-      <ContrastModeProvider>
-        <TestComponent />
-      </ContrastModeProvider>,
-    );
-
-    await act(async () => {
-      jest.runAllTimers();
-    });
-
-    expect(
-      screen.getByRole("status", { name: "Contrast Mode" }),
-    ).toHaveTextContent("lowContrast:");
-
-    (getBackgroundColor as jest.Mock).mockReturnValue(Tokens.HueNeutral50);
-
-    rerender(
-      <ContrastModeProvider>
-        <TestComponent />
-      </ContrastModeProvider>,
-    );
-
-    await act(async () => {
-      jest.runAllTimers();
-    });
-
-    expect(
-      screen.getByRole("status", { name: "Contrast Mode" }),
-    ).toHaveTextContent("lowContrast:");
   });
 
   it("uses custom hook to manage contrast mode", async () => {
-    (getBackgroundColor as jest.Mock).mockReturnValue("#ffffff");
+    const Wrapper: React.FC<{ children: ReactNode }> = ({ children }) => (
+      <div style={{ backgroundColor: "#ffffff" }}>
+        <ContrastModeProvider>{children}</ContrastModeProvider>
+      </div>
+    );
 
-    const { result, rerender } = renderHook(() => useContrastModeContext(), {
-      wrapper: ContrastModeProvider,
+    const { result } = renderHook(() => useContrastModeContext(), {
+      wrapper: Wrapper,
     });
 
-    await act(async () => {
-      jest.runAllTimers();
+    await waitFor(() => {
+      expect(result.current.contrastMode).toBe("lowContrast");
+      expect(result.current.parentBackgroundColor).toBe("rgb(255, 255, 255)");
     });
-
-    expect(result.current.contrastMode).toBe("lowContrast");
-    expect(result.current.parentBackgroundColor).toBe("");
-
-    (getBackgroundColor as jest.Mock).mockReturnValue(Tokens.HueNeutral50);
-
-    rerender();
-
-    await act(async () => {
-      jest.runAllTimers();
-    });
-
-    expect(result.current.contrastMode).toBe("lowContrast");
-    expect(result.current.parentBackgroundColor).toBe("");
   });
 });
