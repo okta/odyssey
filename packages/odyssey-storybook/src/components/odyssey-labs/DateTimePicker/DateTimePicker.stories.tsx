@@ -225,7 +225,7 @@ export const Controlled: StoryObj<DateTimePickerProps> = {
       [props, value],
     );
 
-    return <DatePicker {...DateTimePickerProps} />;
+    return <DateTimePicker {...DateTimePickerProps} />;
   },
   play: async ({ canvasElement, step }) => {
     await step("select date", async () => {
@@ -243,7 +243,7 @@ export const Controlled: StoryObj<DateTimePickerProps> = {
       });
 
       const input = canvas.getByRole("textbox") as HTMLInputElement;
-      expect(input.value).toBe("07/26/2024");
+      expect(input.value).toBe("07/26/2024 11:00 PM");
 
       await step("Check for a11y errors", async () => {
         await waitFor(() => axeRun("Selecting a date"));
