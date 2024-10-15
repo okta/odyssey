@@ -21,6 +21,8 @@ import * as Tokens from "@okta/odyssey-design-tokens";
 import "@testing-library/jest-dom";
 
 // Minimal mock for getComputedStyle
+// This mock is necessary because jsdom doesn't fully implement getComputedStyle
+// and we need it to return background colors for our tests to work properly.
 const originalGetComputedStyle = window.getComputedStyle;
 beforeAll(() => {
   window.getComputedStyle = jest
