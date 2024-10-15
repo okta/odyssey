@@ -267,10 +267,14 @@ const SideNav = ({
         },
       );
     }
+
     if (intersectionObserverRef.current && scrollableContentRef.current) {
-      const ul = scrollableContentRef.current;
-      const li = ul?.firstChild;
-      intersectionObserverRef.current.observe(li as HTMLElement);
+      const ulElement = scrollableContentRef.current;
+      const [liElement] = Array.from(ulElement?.children || []);
+
+      if (liElement) {
+        intersectionObserverRef.current.observe(liElement);
+      }
     }
 
     // Cleanup when unmounted:
