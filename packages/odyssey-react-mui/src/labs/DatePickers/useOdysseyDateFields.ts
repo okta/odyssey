@@ -128,6 +128,7 @@ export const useOdysseyDateFields = ({
   isYearEnabled = () => true,
   minDate: minDateProp,
   maxDate: maxDateProp,
+  onInputChange: onInputChangeProp,
   timeZone = "system",
   value,
 }: Pick<
@@ -138,6 +139,7 @@ export const useOdysseyDateFields = ({
   | "isYearEnabled"
   | "minDate"
   | "maxDate"
+  | "onInputChange"
   | "timeZone"
   | "value"
 > &
@@ -259,6 +261,13 @@ export const useOdysseyDateFields = ({
 
   const formatDayOfWeek = (date: DateTime) => date.toFormat("EEE");
 
+  const onInputChange = useCallback<(value: string) => void>(
+    (value) => {
+      onInputChangeProp?.(value);
+    },
+    [onInputChangeProp],
+  );
+
   const commonIcons = {
     ArrowLeftIcon: ArrowLeftIcon,
     ArrowRightIcon: ArrowRightIcon,
@@ -281,6 +290,7 @@ export const useOdysseyDateFields = ({
     maxDate: validationDateRanges.maxDate,
     minDate: validationDateRanges.minDate,
     popperElement,
+    onInputChange,
     onTimeZoneChange,
     setInternalTimeZone,
     setIsOpen,

@@ -114,6 +114,7 @@ const DatePicker = ({
     localeText,
     minDate,
     maxDate,
+    onInputChange,
     onTimeZoneChange,
     popperElement,
     setPopperElement,
@@ -129,6 +130,7 @@ const DatePicker = ({
     isYearEnabled,
     minDate: minDateProp,
     maxDate: maxDateProp,
+    onInputChange: onInputChangeProp,
     timeZone,
     value: valueProp,
   });
@@ -156,13 +158,6 @@ const DatePicker = ({
       }
     },
     [formatDateTimeToUtcIsoDateString, internalTimeZone, onCalendarDateChange],
-  );
-
-  const onInputChange = useCallback<(value: string) => void>(
-    (value) => {
-      onInputChangeProp?.(value);
-    },
-    [onInputChangeProp],
   );
 
   const renderDateField = useCallback(
