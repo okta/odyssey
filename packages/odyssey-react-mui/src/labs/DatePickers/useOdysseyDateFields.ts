@@ -257,6 +257,8 @@ export const useOdysseyDateFields = ({
     setIsOpen(false);
   }, [setIsOpen]);
 
+  const formatDayOfWeek = (date: DateTime) => date.toFormat("EEE");
+
   const commonIcons = {
     ArrowLeftIcon: ArrowLeftIcon,
     ArrowRightIcon: ArrowRightIcon,
@@ -269,6 +271,7 @@ export const useOdysseyDateFields = ({
     commonIcons,
     defaultedLanguageCode,
     formatDateTimeToUtcIsoDateString,
+    formatDayOfWeek,
     inputValues,
     internalTimeZone,
     internalValueRef,

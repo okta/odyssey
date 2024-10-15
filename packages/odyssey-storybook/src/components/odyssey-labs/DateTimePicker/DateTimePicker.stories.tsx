@@ -16,7 +16,10 @@ import { expect } from "@storybook/jest";
 import { userEvent, within, screen, waitFor } from "@storybook/testing-library";
 
 import { odysseyTranslate } from "@okta/odyssey-react-mui";
-import { DateTimePicker, DateTimePickerProps } from "@okta/odyssey-react-mui/labs";
+import {
+  DateTimePicker,
+  DateTimePickerProps,
+} from "@okta/odyssey-react-mui/labs";
 import { axeRun } from "../../../axe-util";
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -111,6 +114,7 @@ export const Disabled: StoryObj<DateTimePickerProps> = {
 export const ReadOnly: StoryObj<DateTimePickerProps> = {
   args: {
     isReadOnly: true,
+    value: "2024-07-11T03:00:00.000Z",
   },
 };
 

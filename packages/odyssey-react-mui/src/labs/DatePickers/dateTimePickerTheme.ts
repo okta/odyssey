@@ -88,9 +88,9 @@ const theme: ThemeOptions = {
         timeContainer: {
           // alignItems: "flex-start",
         },
-        timeDigitsContainer: ({ theme }) => ({
+        timeDigitsContainer: {
           alignItems: "center",
-        }),
+        },
         ampmSelection: ({ theme }) => ({
           margin: 0,
           marginInlineStart: theme.spacing(2),
@@ -100,15 +100,15 @@ const theme: ThemeOptions = {
 
             "&:has(.Mui-selected)": {
               backgroundColor: theme.palette.primary.main,
-              
+
               ".Mui-selected": {
                 color: theme.palette.common.white,
                 "&::after": {
-                  display: "none"
-                }
-              }
-            }
-          }
+                  display: "none",
+                },
+              },
+            },
+          },
         }),
         separator: ({ theme }) => ({
           ...theme.typography.h5,
