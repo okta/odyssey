@@ -11,6 +11,7 @@
  */
 
 import { waitFor } from "@testing-library/dom";
+
 import {
   reactElementName,
   renderReactInWebComponent,
