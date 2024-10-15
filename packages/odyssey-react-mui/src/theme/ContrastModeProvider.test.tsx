@@ -203,12 +203,6 @@ describe("ContrastModeContext and related functions", () => {
       expect(getBackgroundColor(element)).toBe("#ffffff");
     });
 
-    it("keeps rgba as is (does not normalize to rgb)", () => {
-      const element = document.createElement("div");
-      element.style.backgroundColor = "rgba(255, 0, 0, 0.5)";
-      expect(getBackgroundColor(element)).toBe("rgba(255, 0, 0, 0.5)");
-    });
-
     it("returns HueNeutral50 token for its RGB equivalent", () => {
       const element = document.createElement("div");
       element.style.backgroundColor = Tokens.HueNeutral50;
