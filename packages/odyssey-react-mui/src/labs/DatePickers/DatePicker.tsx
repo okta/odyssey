@@ -10,25 +10,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {
-  memo,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-} from "react";
+import { memo, useCallback, useEffect, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import {
   type DatePickerSlots,
   DatePicker as MuiDatePicker,
   DatePickerProps as MuiDatePickerProps,
-  PickersActionBarProps,
   DatePickerSlotProps,
 } from "@mui/x-date-pickers";
 import { DateTime } from "luxon";
 import styled from "@emotion/styled";
 
 import { Button } from "../../Button";
+import { DateFieldActionBar } from "./DateFieldActionBar";
 import { DateField, DateFieldProps } from "./DateField";
 import { DateFieldLocalizationProvider } from "./DateFieldLocalizationProvider";
 import { datePickerTheme } from "./datePickerTheme";
@@ -65,45 +59,6 @@ const TimeZonePickerContainer = styled("div", {
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
   marginBlockStart: odysseyDesignTokens.Spacing3,
 }));
-
-const ActionContainer = styled.div<{ odysseyDesignTokens: DesignTokens }>(
-  ({ odysseyDesignTokens }) => ({
-    display: "flex",
-    justifyContent: "flex-end",
-    paddingInline: odysseyDesignTokens.Spacing4,
-    paddingBlockEnd: odysseyDesignTokens.Spacing4,
-  }),
-);
-
-const ActionBar = ({ actions, onAccept, onCancel }: PickersActionBarProps) => {
-  const { t } = useTranslation();
-  const odysseyDesignTokens = useOdysseyDesignTokens();
-
-  // actions will be [] or ["accept", "cancel"]
-  if (actions && actions.length > 0) {
-    return (
-      <ActionContainer odysseyDesignTokens={odysseyDesignTokens}>
-        <Button
-          label={t("picker.labels.action.cancel")}
-          onClick={onCancel}
-          variant="floating"
-        />
-        <Button
-          label={t("picker.labels.action.apply")}
-          onClick={onAccept}
-          variant="primary"
-        />
-      </ActionContainer>
-    );
-  }
-
-  return null;
-};
-
-const MemoizedActionBar = memo(ActionBar);
-MemoizedActionBar.displayName = "ActionBar";
-
-const formatDayOfWeek = (date: DateTime) => date.toFormat("EEE");
 
 type RenderDateFieldProps = {
   defaultValue: DateFieldProps["defaultValue"];
@@ -152,6 +107,7 @@ const DatePicker = ({
     commonIcons,
     defaultedLanguageCode,
     formatDateTimeToUtcIsoDateString,
+    formatDayOfWeek,
     inputValues,
     internalTimeZone,
     isOpen,
@@ -262,7 +218,7 @@ const DatePicker = ({
 
   const slots = useMemo<DatePickerSlots<DateTime>>(
     () => ({
-      actionBar: MemoizedActionBar,
+      actionBar: DateFieldActionBar,
       field: (muiProps) => renderDateField(muiProps),
       leftArrowIcon: () => <commonIcons.ArrowLeftIcon />,
       rightArrowIcon: () => <commonIcons.ArrowRightIcon />,
