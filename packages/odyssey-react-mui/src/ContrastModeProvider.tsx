@@ -29,13 +29,12 @@ export type ContrastModeContextType = {
   parentBackgroundColor: string;
 };
 
-const ThemeContrastModeContext = createContext<ContrastModeContextType>({
+export const ContrastModeContext = createContext<ContrastModeContextType>({
   contrastMode: "lowContrast",
   parentBackgroundColor: "",
 });
 
-export const useContrastModeContext = () =>
-  useContext(ThemeContrastModeContext);
+export const useContrastModeContext = () => useContext(ContrastModeContext);
 
 const hexToRgb = (hex: string): string => {
   const bigint = parseInt(hex.slice(1), 16);
@@ -149,9 +148,9 @@ export const ContrastModeProvider = ({
 
   return (
     <div ref={ref}>
-      <ThemeContrastModeContext.Provider value={contextValue}>
+      <ContrastModeContext.Provider value={contextValue}>
         {children}
-      </ThemeContrastModeContext.Provider>
+      </ContrastModeContext.Provider>
     </div>
   );
 };

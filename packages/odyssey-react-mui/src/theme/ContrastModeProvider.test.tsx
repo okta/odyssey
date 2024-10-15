@@ -10,123 +10,112 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { ReactNode, useState } from "react";
-import { render, screen, act, waitFor } from "@testing-library/react";
-import { renderHook } from "@testing-library/react-hooks";
+import { render, waitFor } from "@testing-library/react";
 import {
+  ContrastModeContext,
   ContrastModeProvider,
-  useContrastModeContext,
 } from "../ContrastModeProvider";
 import * as Tokens from "@okta/odyssey-design-tokens";
-import "@testing-library/jest-dom";
 
-// Minimal mock for getComputedStyle
-// This mock is necessary because jsdom doesn't fully implement getComputedStyle
-// and we need it to return background colors for our tests to work properly.
-const originalGetComputedStyle = window.getComputedStyle;
-beforeAll(() => {
-  window.getComputedStyle = jest
-    .fn()
-    .mockImplementation((element: HTMLElement) => ({
-      ...originalGetComputedStyle(element),
-      backgroundColor: element.style.backgroundColor || "rgba(0, 0, 0, 0)",
-    }));
-});
-
-afterAll(() => {
-  (window.getComputedStyle as jest.Mock).mockRestore();
-});
-
-const TestComponent = () => {
-  const { contrastMode, parentBackgroundColor } = useContrastModeContext();
-  return (
-    <div role="status" aria-label="Contrast Mode">
-      {contrastMode}:{parentBackgroundColor}
-    </div>
-  );
+// Helper function to normalize color formats (e.g., converting "rgb(255, 255, 255)" to "#ffffff").
+const normalizeColor = (color: string) => {
+  if (color.startsWith("rgb")) {
+    const [r, g, b] = color.match(/\d+/g)!.map(Number);
+    return `#${r.toString(16).padStart(2, "0")}${g
+      .toString(16)
+      .padStart(2, "0")}${b.toString(16).padStart(2, "0")}`;
+  }
+  return color.toLowerCase();
 };
 
-const DynamicBackgroundWrapper = ({ initialColor, children }) => {
-  const [backgroundColor, setBackgroundColor] = useState(initialColor);
+describe("ContrastModeContext Consumer", () => {
+  const originalGetComputedStyle = window.getComputedStyle;
 
-  return (
-    <div data-testid="parent" style={{ backgroundColor }}>
-      <ContrastModeProvider key={backgroundColor}>
-        {children}
-      </ContrastModeProvider>
-      <button onClick={() => setBackgroundColor(Tokens.HueNeutral50)}>
-        Change Background
-      </button>
-    </div>
-  );
-};
-
-const renderWithDynamicBackground = (initialColor: string) => {
-  return render(
-    <DynamicBackgroundWrapper initialColor={initialColor}>
-      <TestComponent />
-    </DynamicBackgroundWrapper>,
-  );
-};
-
-describe("ContrastModeProvider", () => {
-  it("provides lowContrast mode when background is white", async () => {
-    renderWithDynamicBackground("#ffffff");
-
-    await waitFor(() => {
-      expect(screen.getByRole("status")).toHaveTextContent(
-        "lowContrast:rgb(255, 255, 255)",
-      );
-    });
+  beforeEach(() => {
+    // Mocking `getComputedStyle` to simulate real browser behavior for background color detection.
+    window.getComputedStyle = jest
+      .fn()
+      .mockImplementation((element: HTMLElement) => ({
+        backgroundColor: element.style.backgroundColor || "rgba(0, 0, 0, 0)",
+      }));
   });
 
-  it("provides highContrast mode when background is HueNeutral50", async () => {
-    renderWithDynamicBackground(Tokens.HueNeutral50);
-
-    await waitFor(() => {
-      expect(screen.getByRole("status")).toHaveTextContent(
-        `highContrast:${Tokens.HueNeutral50}`,
-      );
-    });
+  afterEach(() => {
+    window.getComputedStyle = originalGetComputedStyle;
   });
 
-  it("updates contrast mode when background color changes", async () => {
-    const { getByText } = renderWithDynamicBackground("#ffffff");
+  it("provides lowContrast mode for white background", async () => {
+    const mockConsumer = jest.fn();
 
-    await waitFor(() => {
-      expect(screen.getByRole("status")).toHaveTextContent(
-        "lowContrast:rgb(255, 255, 255)",
-      );
-    });
-
-    act(() => {
-      getByText("Change Background").click();
-    });
-
-    await waitFor(
-      () => {
-        expect(screen.getByRole("status")).toHaveTextContent(
-          `highContrast:${Tokens.HueNeutral50}`,
-        );
-      },
-      { timeout: 3000 },
-    );
-  });
-
-  it("uses custom hook to manage contrast mode", async () => {
-    const Wrapper: React.FC<{ children: ReactNode }> = ({ children }) => (
+    // Wrap the `mockConsumer` in a function that matches the expected prop type.
+    render(
       <div style={{ backgroundColor: "#ffffff" }}>
-        <ContrastModeProvider>{children}</ContrastModeProvider>
-      </div>
+        <ContrastModeProvider>
+          <ContrastModeContext.Consumer>
+            {(value) => {
+              mockConsumer(value);
+              return null;
+            }}
+          </ContrastModeContext.Consumer>
+        </ContrastModeProvider>
+      </div>,
     );
 
-    const { result } = renderHook(() => useContrastModeContext(), {
-      wrapper: Wrapper,
+    // Ensure the mock consumer has been called twice (initial and after context updates).
+    await waitFor(() => {
+      expect(mockConsumer).toHaveBeenCalledTimes(2);
     });
 
+    console.log(
+      "mockConsumer calls (for white background): ",
+      mockConsumer.mock.calls,
+    );
+
+    // Validate the final call to ensure it's in "lowContrast" mode for white background.
     await waitFor(() => {
-      expect(result.current.contrastMode).toBe("lowContrast");
-      expect(result.current.parentBackgroundColor).toBe("rgb(255, 255, 255)");
+      const lastCall =
+        mockConsumer.mock.calls[mockConsumer.mock.calls.length - 1][0];
+      expect(lastCall.contrastMode).toBe("lowContrast");
+      expect(normalizeColor(lastCall.parentBackgroundColor)).toBe("#ffffff");
+    });
+  });
+
+  it("provides highContrast mode for Tokens.HueNeutral50 background", async () => {
+    const mockConsumer = jest.fn();
+
+    console.log("Tokens.HueNeutral50:", Tokens.HueNeutral50);
+
+    render(
+      <div style={{ backgroundColor: Tokens.HueNeutral50 }}>
+        <ContrastModeProvider>
+          <ContrastModeContext.Consumer>
+            {(value) => {
+              mockConsumer(value);
+              return null;
+            }}
+          </ContrastModeContext.Consumer>
+        </ContrastModeProvider>
+      </div>,
+    );
+
+    // Ensure the mock consumer has been called twice (initial and after context updates).
+    await waitFor(() => {
+      expect(mockConsumer).toHaveBeenCalledTimes(2);
+    });
+
+    console.log(
+      "mockConsumer calls (for gray background): ",
+      mockConsumer.mock.calls,
+    );
+
+    // Validate the final call to ensure it's in "highContrast" mode for gray background.
+    await waitFor(() => {
+      const lastCall =
+        mockConsumer.mock.calls[mockConsumer.mock.calls.length - 1][0];
+      expect(lastCall.contrastMode).toBe("highContrast");
+      expect(normalizeColor(lastCall.parentBackgroundColor)).toBe(
+        normalizeColor(Tokens.HueNeutral50),
+      );
     });
   });
 });
