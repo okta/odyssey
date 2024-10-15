@@ -21,13 +21,13 @@ import {
 export const reactElementName = "react-web-component";
 
 export type RenderReactInWebComponentProps = {
-  contentElementId: string;
+  contentElementId?: string;
   getReactComponent: (shadowDomElements: ShadowDomElements) => ReactNode;
   rootElement: HTMLElement;
 };
 
 export const renderReactInWebComponent = ({
-  contentElementId,
+  contentElementId = "react-app-root",
   getReactComponent,
   rootElement,
 }: RenderReactInWebComponentProps) => {
@@ -40,8 +40,19 @@ export const renderReactInWebComponent = ({
 
       this.shadowDomElements = createUnattachedShadowDomElements();
 
+      const styleElement = document.createElement("style");
       const shadowRoot = this.attachShadow({ mode: "open" });
 
+      styleElement.innerHTML = `
+        :host {
+          all: initial;
+          contain: content;
+        }
+      `;
+
+      styleElement.setAttribute("nonce", window.cspNonce);
+
+      this.shadowDomElements.emotionRootElement.appendChild(styleElement);
       shadowRoot.appendChild(this.shadowDomElements.emotionRootElement);
       shadowRoot.appendChild(this.shadowDomElements.appRootElement);
 
@@ -68,4 +79,6 @@ export const renderReactInWebComponent = ({
 
   reactElement.appendChild(reactAppRootElement);
   rootElement.appendChild(reactElement);
+
+  return reactAppRootElement;
 };
