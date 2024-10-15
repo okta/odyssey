@@ -97,6 +97,7 @@ export * from "./Pagination";
 export * from "./PasswordField";
 export * from "./Radio";
 export * from "./RadioGroup";
+export * from "./renderOktaUiShell";
 export * from "./ScreenReaderText";
 export * from "./SearchField";
 export * from "./Select";
