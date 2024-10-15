@@ -14,7 +14,7 @@ import { memo, useCallback, useEffect, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import {
   type DateTimePickerSlots,
-  DateTimePicker as MuiDateTimePicker,
+  MobileDateTimePicker as MuiDateTimePicker,
   DateTimePickerProps as MuiDateTimePickerProps,
   DateTimePickerSlotProps,
 } from "@mui/x-date-pickers";
@@ -27,6 +27,7 @@ import { DateFieldLocalizationProvider } from "./DateFieldLocalizationProvider";
 import { DateTimeField, DateTimeFieldProps } from "./DateTimeField";
 import { dateTimePickerTheme } from "./dateTimePickerTheme";
 import { FieldComponentProps } from "../../FieldComponentProps";
+import { CalendarIcon, ClockIcon } from "../../icons.generated";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
@@ -238,7 +239,10 @@ const DateTimePicker = ({
       popper: {
         anchorEl: popperElement,
       },
-
+      tabs: {
+        dateIcon: <CalendarIcon />,
+        timeIcon: <ClockIcon />,
+      },
       toolbar: {
         toolbarPlaceholder: "",
       },
