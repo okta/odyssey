@@ -15,20 +15,67 @@ import { deepmerge } from "@mui/utils";
 import { ThemeOptions } from "@mui/material";
 
 import { datePickerTheme, dateStyles } from "./datePickerTheme";
-// import { createOdysseyMuiTheme } from "../../theme";
-
-// import * as odysseyTokens from "@okta/odyssey-design-tokens";
-
-// const odysseyTheme = createOdysseyMuiTheme({ odysseyTokens });
-
-// type ThemeStyles = ({
-//   theme,
-// }: {
-//   theme: typeof odysseyTheme;
-// }) => CSSInterpolation;
 
 const theme: ThemeOptions = {
   components: {
+    // MuiClock: {
+    //   styleOverrides: {
+    //     clock: ({ theme }) => ({
+    //       width: `calc(${theme.spacing(9)} * 4)`,
+    //       height: `calc(${theme.spacing(9)} * 4)`,
+    //     }),
+    //     pin: ({ theme }) => ({
+    //       backgroundColor: theme.palette.primary.light,
+    //     }),
+    //   },
+    // },
+    // MuiClockPointer: {
+    //   styleOverrides: {
+    //     root: ({ theme }) => ({
+    //       backgroundColor: theme.palette.primary.light,
+    //     }),
+    //     thumb: ({ theme }) => ({
+    //       borderColor: theme.palette.primary.light,
+    //     }),
+    //   },
+    // },
+    MuiDateCalendar: {
+      styleOverrides: {
+        root: {
+          display: "block",
+          width: "100%",
+        },
+      },
+    },
+    // MuiPickersCalendarHeader: {
+    //   styleOverrides: {
+    //     switchViewButton: {
+    //       margin: "0 20px 0 20px",
+    //       color: "red"
+    //     },
+    //   },
+    // },
+    MuiPickersArrowSwitcher: {
+      styleOverrides: {
+        button: ({ theme }) => ({
+          display: "flex",
+          margin: 0,
+          padding: theme.spacing(2),
+          color: theme.typography.body1.color,
+
+          "& + &": {
+            marginInlineStart: theme.spacing(2),
+          },
+
+          svg: {
+            display: "flex",
+          },
+        }),
+        spacer: ({ theme }) => ({
+          width: theme.spacing(1),
+        }),
+      },
+    },
     MuiPickersLayout: {
       styleOverrides: {
         contentWrapper: ({ theme }) => ({
@@ -93,7 +140,7 @@ const theme: ThemeOptions = {
         },
         ampmSelection: ({ theme }) => ({
           margin: 0,
-          marginInlineStart: theme.spacing(2),
+          marginInlineStart: theme.spacing(3),
 
           button: {
             padding: theme.spacing(2),
@@ -168,6 +215,14 @@ const theme: ThemeOptions = {
             },
           },
         }),
+      },
+    },
+    MuiTimeClock: {
+      styleOverrides: {
+        arrowSwitcher: {
+          top: 0,
+          right: 0,
+        },
       },
     },
   },
