@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-react-mui",
-  "version": "1.24.1",
+  "version": "1.25.0",
   "description": "React MUI components for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
