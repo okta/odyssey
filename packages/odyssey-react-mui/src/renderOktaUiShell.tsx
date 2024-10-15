@@ -19,7 +19,7 @@ export const renderOktaUiShell = ({
   rootElement,
 }: {
   changeComponentProps: OktaUiShellProps["changeComponentProps"];
-  contentElementId: string;
+  contentElementId?: string;
   rootElement: HTMLElement;
 }) => {
   renderReactInWebComponent({
