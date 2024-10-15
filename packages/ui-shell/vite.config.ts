@@ -11,8 +11,22 @@
  */
 
 import { join } from "node:path";
-import { defineConfig } from "vite";
+import { defineConfig, type PluginOption } from "vite";
 import react from "@vitejs/plugin-react";
+
+const replaceProcessEnvPlugin = (): PluginOption => ({
+  name: "replace-process-env",
+  transform(code) {
+    if (code.includes("process.env.NODE_ENV")) {
+      return code.replace(
+        /process\.env\.NODE_ENV/g,
+        JSON.stringify("production"),
+      );
+    }
+
+    return code;
+  },
+});
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -25,5 +39,5 @@ export default defineConfig({
       name: "OktaUiShell",
     },
   },
-  plugins: [react()],
+  plugins: [react(), replaceProcessEnvPlugin()],
 });
