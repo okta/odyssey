@@ -94,7 +94,7 @@ const storybookMeta: Meta<DateTimePickerProps> = {
     },
   },
   args: {
-    label: "Date picker label",
+    label: "DateTime picker label",
     hint: "Select a date.",
   },
   decorators: [MuiThemeDecorator],
