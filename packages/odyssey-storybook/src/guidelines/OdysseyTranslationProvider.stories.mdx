@@ -8,7 +8,7 @@ Odyssey has its own globalization system which other devs can hook into.
 
 ## OdysseyTranslationProvider
 
-Odyssey comes out of the box with support for the following 26 languages:
+Odyssey comes out of the box with support for the following 30 languages:
 
 ```ts
 export const defaultSupportedLanguages = [
@@ -20,6 +20,7 @@ export const defaultSupportedLanguages = [
   "es", // Spanish
   "fi", // Finnish
   "fr", // French
+  "ht", // Haitian Creole
   "hu", // Hungarian
   "id", // Indonesian
   "it", // Italian
@@ -83,13 +84,71 @@ const YourAppRoot = ({ children }) => (
 
 The following keys can have their values overriden:
 
+- `breadcrumbs.home.text`
+- `breadcrumbs.label.text`
+- `close.text`
+- `clear.text`
+- `open.text`
 - `fielderror.screenreader.text`
 - `fieldlabel.optional.text`
+- `fieldlabel.required.text`
+- `filters.clear.label`
+- `filters.filter.any`
+- `filters.filter.clear`
+- `filters.filters.arialabel`
+- `filters.menuitem.any`
+- `filters.menuitem.selected`
+- `filters.search.label`
+- `fileupload.button.text`
+- `fileupload.prompt.text`
+- `fileupload.removefile.text`
+- `passwordfield.icon.label.hide`
+- `passwordfield.icon.label.hide`
+- `passwordfield.icon.label.show`
+- `severity.error`
+- `severity.info`
 - `severity.success`
 - `severity.warning`
-- `severity.info`
-- `severity.error`
-- `close.text`
+- `switch.active`
+- `switch.inactive`
+- `table.columnvisibility.arialabel`
+- `table.density.arialabel`
+- `table.draghandle.arialabel`
+- `table.draghandle.tooltip`
+- `table.actions`
+- `table.columnvisibility.arialabel`
+- `table.density.arialabel`
+- `table.draghandle.arialabel`
+- `table.draghandle.tooltip`
+- `table.error`
+- `table.fetchedrows.text`
+- `table.fetchedrows.text_plural`
+- `table.moreactions.arialabel`
+- `table.noresults.heading`
+- `table.noresults.text`
+- `table.reorder.backward`
+- `table.reorder.forward`
+- `table.reorder.toback`
+- `table.reorder.tofront`
+- `table.rows.text`
+- `table.rows.text_plural`
+- `pagination.loadmore`
+- `pagination.next`
+- `pagination.previous`
+- `pagination.page`
+- `pagination.rowsperpage`
+- `pagination.rowswithtotal`
+- `pagination.rowswithouttotal`
+- `table.actions.selectall`
+- `table.actions.selectnone`
+- `table.actions.selectsome`
+- `table.rowexpansion.expand`
+- `table.rowexpansion.expandall`
+- `table.rowexpansion.collapse`
+- `table.rowexpansion.collapseall`
+- `dataview.layout.table`
+- `dataview.layout.grid`
+- `dataview.layout.list`
 
 ## Passing the language from the Monolith
 
