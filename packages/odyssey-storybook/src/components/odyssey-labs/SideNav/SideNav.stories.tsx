@@ -20,7 +20,6 @@ import {
   HomeIcon,
   Fido2Icon,
   LockIcon,
-  CheckIcon,
   AddCircleIcon,
   DownloadIcon,
   UserIcon,
@@ -126,7 +125,6 @@ const storybookMeta: Meta<SideNavProps> = {
             id: "item1-1",
             href: "/",
             label: "Home",
-            startIcon: <CheckIcon />,
           },
         ],
       },
@@ -219,7 +217,6 @@ const storybookMeta: Meta<SideNavProps> = {
             id: "item4-1",
             href: "/",
             label: "General",
-            endIcon: <SettingsIcon />,
           },
           {
             id: "item4-2",
@@ -318,7 +315,7 @@ export const Default: StoryObj<SideNavProps> = {
     });
     await step("Side Nav Collapse", async ({}) => {
       const collapseButton = within(collapsedRegion).getByLabelText(
-        "toggle side navigation",
+        "collapse side navigation",
       );
       await userEvent.click(collapseButton);
       await waitFor(() => {
@@ -327,7 +324,7 @@ export const Default: StoryObj<SideNavProps> = {
     });
     await step("Side Nav Expand", async ({}) => {
       const collapseButton = within(collapsedRegion).getByLabelText(
-        "toggle side navigation",
+        "expand side navigation",
       );
       await userEvent.click(collapseButton);
       await waitFor(() => {

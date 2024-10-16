@@ -80,14 +80,6 @@ export type SideNavItem = {
    */
   endIcon?: ReactElement;
   /**
-   * internal flag to determine if the side-nav item is a child
-   */
-  __hasParent?: boolean;
-  /**
-   * internal flag to determine if the side-nav item is a child
-   */
-  __isCompact?: boolean;
-  /**
    * Whether the item is disabled. When set to true the nav item is set to Disabled color,
    * the link/item is not clickable, and item with children is not expandable.
    */
@@ -144,7 +136,7 @@ export type SideNavItem = {
       /**
        * An array of side nav items to be displayed as children within Accordion
        */
-      children?: SideNavItem[];
+      children?: Array<Omit<SideNavItem, "startIcon" | "endIcon">>;
       endIcon?: never;
       /**
        * Whether the accordion (nav item with children) is expanded by default

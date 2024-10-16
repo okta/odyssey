@@ -42,10 +42,9 @@ const SideNavItemLinkContent = ({
   endIcon,
   severity,
   statusLabel,
-  __hasParent,
 }: Pick<
   SideNavItem,
-  "label" | "startIcon" | "endIcon" | "severity" | "statusLabel" | "__hasParent"
+  "label" | "startIcon" | "endIcon" | "severity" | "statusLabel"
 >): ReactNode => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
@@ -58,10 +57,10 @@ const SideNavItemLinkContent = ({
 
   return (
     <>
-      {!__hasParent && startIcon && startIcon}
+      {startIcon && startIcon}
       <SideNavItemLabelContainer
         odysseyDesignTokens={odysseyDesignTokens}
-        isIconVisible={!__hasParent && Boolean(startIcon)}
+        isIconVisible={Boolean(startIcon)}
       >
         {Boolean(startIcon)}
         {label}
@@ -71,7 +70,7 @@ const SideNavItemLinkContent = ({
           </Box>
         )}
       </SideNavItemLabelContainer>
-      {!__hasParent && endIcon && endIcon}
+      {endIcon && endIcon}
     </>
   );
 };
