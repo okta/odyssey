@@ -24,20 +24,19 @@ describe("renderReactInWebComponent", () => {
     document.body.innerHTML = "";
   });
 
-  test("renders React app's root element", () => {
+  test("returns react's root element and renders it in the DOM", () => {
     const rootElement = document.createElement("div");
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(rootElement);
 
-    renderReactInWebComponent({
+    const reactAppRootElement = renderReactInWebComponent({
       getReactComponent: () => <div />,
       rootElement,
     });
 
-    expect(
-      document.getElementById(defaultContentElementId),
-    ).toBeInTheDocument();
+    expect(reactAppRootElement.id).toBe(defaultContentElementId);
+    expect(reactAppRootElement).toBeInTheDocument();
   });
 
   test("renders React app's root element with configurable ID", async () => {
@@ -95,7 +94,4 @@ describe("renderReactInWebComponent", () => {
       ).toHaveTextContent(testElementText);
     });
   });
-
-  // TODO: Test with custom contentElementId
-  // TODO: Test with returning the `reactAppRootElement` component to ensure apps can portal into it easier. Although, `rootElement`
 });
