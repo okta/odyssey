@@ -24,6 +24,10 @@ export type SideNavProps = {
    */
   isCollapsible?: boolean;
   /**
+   *  Determines whether the side nav items use compact layout
+   */
+  isCompact?: boolean;
+  /**
    *  Triggers when the side nav is collapsed
    */
   onCollapse?(): void;
@@ -114,23 +118,26 @@ export type SideNavItem = {
       children?: never;
       isDefaultExpanded?: never;
       isExpanded?: never;
+      __hasParent?: never;
     }
   | {
       /**
        * link added to the nav item. if it is undefined, static text will be displayed.
        * fires onClick event when it is passed
        */
-      href: string;
+      href?: string;
       children?: never;
       isSectionHeader?: never;
       isDefaultExpanded?: never;
       isExpanded?: never;
+      __hasParent?: never;
     }
   | {
       /**
        * An array of side nav items to be displayed as children within Accordion
        */
-      children?: SideNavItem[];
+      children?: Array<Omit<SideNavItem, "startIcon" | "endIcon">>;
+      endIcon?: never;
       /**
        * Whether the accordion (nav item with children) is expanded by default
        */
@@ -142,6 +149,10 @@ export type SideNavItem = {
       isExpanded?: boolean;
       isSectionHeader?: never;
       href?: never;
+      /**
+       * internal flag to determine if the side-nav item is a child
+       */
+      __hasParent?: boolean;
     }
 );
 

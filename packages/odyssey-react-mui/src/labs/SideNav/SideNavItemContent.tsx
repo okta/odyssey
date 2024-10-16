@@ -17,6 +17,7 @@ import {
   useCallback,
   memo,
   KeyboardEvent,
+  useMemo,
 } from "react";
 import { Link } from "../../Link";
 import {
@@ -25,18 +26,21 @@ import {
 } from "../../OdysseyDesignTokensContext";
 import { SideNavItemLinkContent } from "./SideNavItemLinkContent";
 import type { SideNavItem } from "./types";
+import { useSideNavItemContent } from "./SideNavItemContentContext";
 
 export const SideNavListItemContainer = styled("li", {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" &&
+    prop !== "isCompact" &&
     prop !== "isSelected" &&
     prop !== "isDisabled",
 })<{
   odysseyDesignTokens: DesignTokens;
+  isCompact?: boolean;
   isSelected?: boolean;
   disabled?: boolean;
   isDisabled?: boolean;
-}>(({ odysseyDesignTokens, isSelected, isDisabled }) => ({
+}>(({ odysseyDesignTokens, isCompact, isSelected, isDisabled }) => ({
   display: "flex",
   alignItems: "center",
   cursor: isDisabled ? "default" : "pointer",
@@ -46,25 +50,32 @@ export const SideNavListItemContainer = styled("li", {
   "&:last-child": {
     marginBottom: odysseyDesignTokens.Spacing2,
   },
-  "& a": {
+  "& a, & div[role='button']": {
     display: "flex",
     alignItems: "center",
     width: "100%",
-    minHeight: "48px",
-    padding: `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
+    minHeight: isCompact ? "37px" : "48px",
+    padding: isCompact
+      ? `${odysseyDesignTokens.Spacing0} ${odysseyDesignTokens.Spacing4}`
+      : `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
     color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
-    pointerEvents: isDisabled ? "none" : "auto",
   },
-  "& a:hover": {
+  "& a:hover, & div[role='button']:hover": {
     textDecoration: "none",
+    color: `${odysseyDesignTokens.TypographyColorAction} !important`,
     cursor: isDisabled ? "default" : "pointer",
     backgroundColor: !isDisabled ? odysseyDesignTokens.HueNeutral50 : "inherit",
   },
-  "& a:focus-visible": {
+  "& a:focus-visible, & div[role='button']:focus-visible": {
     outlineOffset: 0,
-    borderRadius: 0,
+    color: `${odysseyDesignTokens.TypographyColorAction} !important`,
     outlineWidth: odysseyDesignTokens.FocusOutlineWidthMain,
     backgroundColor: !isDisabled ? odysseyDesignTokens.HueNeutral50 : "inherit",
+  },
+  ".nav-accordion-details a, .nav-accordion-details div[role='button']": {
+    padding: isCompact
+      ? `${odysseyDesignTokens.Spacing0} ${odysseyDesignTokens.Spacing4} ${odysseyDesignTokens.Spacing0} ${odysseyDesignTokens.Spacing6}`
+      : `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4} ${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing6}`,
   },
 }));
 
@@ -81,6 +92,36 @@ const scrollToNode = (node: HTMLElement | null) => {
 type ScrollIntoViewHandle = {
   scrollIntoView: () => void;
 };
+
+const NavItemContentClickContainer = styled("div", {
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" &&
+    prop !== "isCompact" &&
+    prop !== "isDisabled",
+})<{
+  odysseyDesignTokens: DesignTokens;
+  isCompact?: boolean;
+  isSelected?: boolean;
+  disabled?: boolean;
+  isDisabled?: boolean;
+}>(({ odysseyDesignTokens, isCompact, isDisabled }) => ({
+  display: "flex",
+  alignItems: "center",
+  width: "100%",
+  minHeight: isCompact ? "37px" : "48px",
+  padding: isCompact
+    ? `${odysseyDesignTokens.Spacing0} ${odysseyDesignTokens.Spacing4}`
+    : `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
+  color: `${isDisabled ? odysseyDesignTokens.TypographyColorDisabled : odysseyDesignTokens.TypographyColorHeading} !important`,
+  "&:focus-visible": {
+    borderRadius: 0,
+    outlineColor: odysseyDesignTokens.FocusOutlineColorPrimary,
+    outlineStyle: odysseyDesignTokens.FocusOutlineStyle,
+    outlineWidth: odysseyDesignTokens.FocusOutlineWidthMain,
+    backgroundColor: odysseyDesignTokens.HueNeutral50,
+    textDecoration: "none",
+  },
+}));
 
 const SideNavItemContent = ({
   id,
@@ -114,6 +155,14 @@ const SideNavItemContent = ({
    */
   scrollRef?: React.RefObject<ScrollIntoViewHandle>;
 }) => {
+  const sidenavItemContentContext = useSideNavItemContent();
+  const isCompact = useMemo(
+    () => sidenavItemContentContext.isCompact || false,
+    [sidenavItemContentContext],
+  );
+
+  const odysseyDesignTokens = useOdysseyDesignTokens();
+
   const localScrollRef = useRef<HTMLLIElement>(null);
   useImperativeHandle(
     scrollRef,
@@ -126,26 +175,6 @@ const SideNavItemContent = ({
     },
     [],
   );
-  const odysseyDesignTokens = useOdysseyDesignTokens();
-
-  const NavItemContentClickContainer = styled("div", {
-    shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-  })(() => ({
-    display: "flex",
-    alignItems: "center",
-    width: "100%",
-    minHeight: "48px",
-    padding: `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
-    color: `${isDisabled ? odysseyDesignTokens.TypographyColorDisabled : odysseyDesignTokens.TypographyColorHeading} !important`,
-    "&:focus-visible": {
-      borderRadius: 0,
-      outlineColor: odysseyDesignTokens.FocusOutlineColorPrimary,
-      outlineStyle: odysseyDesignTokens.FocusOutlineStyle,
-      outlineWidth: odysseyDesignTokens.FocusOutlineWidthMain,
-      backgroundColor: odysseyDesignTokens.HueNeutral50,
-      textDecoration: "none",
-    },
-  }));
 
   const sideNavItemContentKeyHandler = useCallback(
     (event: KeyboardEvent<HTMLDivElement>) => {
@@ -162,6 +191,7 @@ const SideNavItemContent = ({
       ref={localScrollRef}
       id={id}
       key={id}
+      isCompact={isCompact}
       disabled={isDisabled}
       aria-disabled={isDisabled}
       isDisabled={isDisabled}
@@ -171,7 +201,11 @@ const SideNavItemContent = ({
       {
         // Use Link for nav items with links and div for disabled or non-link items
         isDisabled ? (
-          <NavItemContentClickContainer>
+          <NavItemContentClickContainer
+            odysseyDesignTokens={odysseyDesignTokens}
+            isCompact={isCompact}
+            isDisabled={isDisabled}
+          >
             <SideNavItemLinkContent
               label={label}
               startIcon={startIcon}
@@ -182,6 +216,9 @@ const SideNavItemContent = ({
           </NavItemContentClickContainer>
         ) : !href ? (
           <NavItemContentClickContainer
+            odysseyDesignTokens={odysseyDesignTokens}
+            isCompact={isCompact}
+            isDisabled={isDisabled}
             role="button"
             tabIndex={0}
             onClick={onClick}
