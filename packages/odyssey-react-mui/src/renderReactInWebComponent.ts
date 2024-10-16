@@ -18,62 +18,72 @@ import {
   type ShadowDomElements,
 } from "./shadow-dom";
 
-export const reactElementName = "react-web-component";
+export const defaultContentElementId = "react-app-root";
+export const reactInWebComponentElementName = "odyssey-react-web-component";
+
+export type GetReactComponentInWebComponent = (
+  shadowDomElements: ShadowDomElements,
+) => ReactNode;
 
 export type RenderReactInWebComponentProps = {
   contentElementId?: string;
-  getReactComponent: (shadowDomElements: ShadowDomElements) => ReactNode;
+  getReactComponent: GetReactComponentInWebComponent;
   rootElement: HTMLElement;
 };
 
+class ReactInWebComponentElement extends HTMLElement {
+  getReactComponent: GetReactComponentInWebComponent;
+  shadowDomElements: ShadowDomElements;
+  reactRoot: Root;
+
+  constructor(getReactComponent: GetReactComponentInWebComponent) {
+    super();
+
+    this.getReactComponent = getReactComponent;
+    this.shadowDomElements = createUnattachedShadowDomElements();
+
+    const styleElement = document.createElement("style");
+    const shadowRoot = this.attachShadow({ mode: "open" });
+
+    styleElement.innerHTML = `
+      :host {
+        all: initial;
+        contain: content;
+      }
+    `;
+
+    styleElement.setAttribute("nonce", window.cspNonce);
+
+    this.shadowDomElements.emotionRootElement.appendChild(styleElement);
+    shadowRoot.appendChild(this.shadowDomElements.emotionRootElement);
+    shadowRoot.appendChild(this.shadowDomElements.appRootElement);
+
+    this.reactRoot = createRoot(this.shadowDomElements.appRootElement);
+  }
+
+  connectedCallback() {
+    this.reactRoot.render(this.getReactComponent(this.shadowDomElements));
+  }
+
+  disconnectedCallback() {
+    this.reactRoot.unmount();
+  }
+}
+
+if (!customElements.get(reactInWebComponentElementName)) {
+  customElements.define(
+    reactInWebComponentElementName,
+    ReactInWebComponentElement,
+  );
+}
+
 export const renderReactInWebComponent = ({
-  contentElementId = "react-app-root",
+  contentElementId = defaultContentElementId,
   getReactComponent,
   rootElement,
 }: RenderReactInWebComponentProps) => {
-  class ReactElement extends HTMLElement {
-    shadowDomElements: ShadowDomElements;
-    reactRoot: Root;
-
-    constructor() {
-      super();
-
-      this.shadowDomElements = createUnattachedShadowDomElements();
-
-      const styleElement = document.createElement("style");
-      const shadowRoot = this.attachShadow({ mode: "open" });
-
-      styleElement.innerHTML = `
-        :host {
-          all: initial;
-          contain: content;
-        }
-      `;
-
-      styleElement.setAttribute("nonce", window.cspNonce);
-
-      this.shadowDomElements.emotionRootElement.appendChild(styleElement);
-      shadowRoot.appendChild(this.shadowDomElements.emotionRootElement);
-      shadowRoot.appendChild(this.shadowDomElements.appRootElement);
-
-      this.reactRoot = createRoot(this.shadowDomElements.appRootElement);
-    }
-
-    connectedCallback() {
-      this.reactRoot.render(getReactComponent(this.shadowDomElements));
-    }
-
-    disconnectedCallback() {
-      this.reactRoot.unmount();
-    }
-  }
-
-  if (!customElements.get(reactElementName)) {
-    customElements.define(reactElementName, ReactElement);
-  }
-
   const reactAppRootElement = document.createElement("div");
-  const reactElement = new ReactElement();
+  const reactElement = new ReactInWebComponentElement(getReactComponent);
 
   reactAppRootElement.id = contentElementId;
 

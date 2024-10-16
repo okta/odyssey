@@ -1571,6 +1571,7 @@ export const components = ({
     },
     MuiDialog: {
       defaultProps: {
+        container: shadowRootElement || shadowDomElement,
         scroll: "paper",
       },
       styleOverrides: {

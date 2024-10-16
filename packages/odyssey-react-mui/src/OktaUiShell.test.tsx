@@ -12,34 +12,89 @@
 
 import { render } from "@testing-library/react";
 
-import { OktaUiShell } from "./OktaUiShell";
+import { Dialog } from "./Dialog";
+import {
+  defaultComponentProps,
+  OktaUiShell,
+  OktaUiShellProps,
+} from "./OktaUiShell";
 
 describe("OktaUiShell", () => {
-  test("renders `OktaUiShell`", async () => {
+  test("renders the `appRootElement`", async () => {
+    const subscribeToPropChanges: OktaUiShellProps["subscribeToPropChanges"] = (
+      subscription,
+    ) => {
+      subscription({
+        ...defaultComponentProps,
+        topNavProps: {
+          ...defaultComponentProps.topNavProps,
+          SearchFieldComponent: (
+            <Dialog
+              children={undefined}
+              title="Hello World!"
+              isOpen
+              onClose={() => {}}
+            />
+          ),
+        },
+      });
+
+      return () => {};
+    };
+
+    const appRootElement = document.createElement("div");
+
+    render(
+      <OktaUiShell
+        appRootElement={appRootElement}
+        emotionRootElement={document.createElement("div")}
+        subscribeToPropChanges={subscribeToPropChanges}
+      />,
+    );
+
+    expect(Array.from(appRootElement.children)).toHaveLength(1);
+    expect(appRootElement).toHaveTextContent("Hello World!");
+  });
+
+  test("renders the `emotionRootElement`", async () => {
     const rootElement = document.createElement("div");
-    const navHeaderText = "Hello World!";
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(rootElement);
 
-    const { container } = render(
+    const emotionRootElement = document.createElement("div");
+
+    render(
       <OktaUiShell
         appRootElement={document.createElement("div")}
-        changeComponentProps={(setComponentProps) => {
-          setComponentProps({
-            sideNavProps: {
-              navHeaderText,
-              sideNavItems: [],
-            },
-            topNavProps: {
-              topNavLinkItems: [],
-            },
-          });
-        }}
-        emotionRootElement={document.createElement("div")}
+        emotionRootElement={emotionRootElement}
+        subscribeToPropChanges={() => () => {}}
       />,
     );
 
-    expect(container).toHaveTextContent(navHeaderText);
+    expect(Array.from(emotionRootElement.children).length).toBeGreaterThan(0);
+  });
+
+  test("Unsubscribes from prop changes when unmounted", async () => {
+    const rootElement = document.createElement("div");
+
+    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
+    document.body.append(rootElement);
+
+    const unsubscribeFromPropChanges = jest.fn();
+    const subscribeToPropChanges = jest.fn(() => unsubscribeFromPropChanges);
+
+    const { unmount } = render(
+      <OktaUiShell
+        appRootElement={document.createElement("div")}
+        emotionRootElement={document.createElement("div")}
+        subscribeToPropChanges={subscribeToPropChanges}
+      />,
+    );
+
+    unmount();
+
+    expect(subscribeToPropChanges).toHaveBeenCalledTimes(1);
+    expect(unsubscribeFromPropChanges).toHaveBeenCalledTimes(1);
   });
 });

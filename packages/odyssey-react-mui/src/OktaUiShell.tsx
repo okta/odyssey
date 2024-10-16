@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useState, type ReactNode } from "react";
 
 import { SideNav, type SideNavProps } from "./labs/SideNav";
 import { TopNav, type TopNavProps } from "./labs/TopNav";
@@ -27,32 +27,48 @@ export type OktaUiShellComponentProps = {
 };
 
 export type OktaUiShellProps = {
-  changeComponentProps: (
-    setComponentProps: (componentProps: OktaUiShellComponentProps) => void,
-  ) => void;
+  appComponent?: ReactNode;
+  onSubscriptionCreated: () => void;
+  subscribeToPropChanges: (
+    subscription: (componentProps: OktaUiShellComponentProps) => void,
+  ) => () => void;
 } & ShadowDomElements;
 
+export const defaultComponentProps: OktaUiShellComponentProps = {
+  sideNavProps: {
+    navHeaderText: "",
+    sideNavItems: [],
+  },
+  topNavProps: {
+    topNavLinkItems: [],
+  },
+};
+
+export const defaultProps = {
+  appComponent: <slot />,
+  onSubscriptionCreated: () => {},
+};
+
 const OktaUiShell = ({
+  appComponent = defaultProps.appComponent,
   appRootElement,
-  changeComponentProps,
   emotionRootElement,
+  onSubscriptionCreated = defaultProps.onSubscriptionCreated,
+  subscribeToPropChanges,
 }: OktaUiShellProps) => {
-  const [componentProps, setComponentProps] =
-    useState<OktaUiShellComponentProps>(() => ({
-      sideNavProps: {
-        navHeaderText: "",
-        sideNavItems: [],
-      },
-      topNavProps: {
-        topNavLinkItems: [],
-      },
-    }));
+  const [componentProps, setComponentProps] = useState(defaultComponentProps);
 
   useEffect(() => {
-    changeComponentProps((componentProps) => {
+    const unsubscribe = subscribeToPropChanges((componentProps) => {
       setComponentProps(componentProps);
     });
-  }, [changeComponentProps]);
+
+    onSubscriptionCreated();
+
+    return () => {
+      unsubscribe();
+    };
+  }, [onSubscriptionCreated, subscribeToPropChanges]);
 
   return (
     <OdysseyProvider
@@ -65,7 +81,7 @@ const OktaUiShell = ({
         <div>
           <TopNav {...componentProps.topNavProps} />
 
-          <slot />
+          {appComponent}
         </div>
       </div>
     </OdysseyProvider>

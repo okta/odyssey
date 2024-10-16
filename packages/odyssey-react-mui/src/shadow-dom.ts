@@ -14,8 +14,7 @@ export const createUnattachedShadowDomElements = () => {
   const appRootElement = document.createElement("div");
   const emotionRootElement = document.createElement("div");
 
-  // This div could cause issues with layout of children.
-  // For flexibility, make it inherit its parent's height
+  // This `div` may cause layout issues unless it inherits the parent's height.
   appRootElement.style.setProperty("height", "inherit");
 
   appRootElement.setAttribute("id", "app-root");

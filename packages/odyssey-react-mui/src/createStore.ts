@@ -10,4 +10,23 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export { createEventBus, renderOktaUiShell } from "@okta/odyssey-react-mui";
+export const createStore = <State extends object>(initialState?: State) => {
+  const state = initialState || ({} as Partial<State>);
+
+  const hasState = <Name extends keyof State>(name: Name) => name in state;
+
+  const getState = <Name extends keyof State>(name: Name) => state[name];
+
+  const setState = <Name extends keyof State>(
+    name: Name,
+    value: Required<State>[Name],
+  ) => {
+    state[name] = value;
+  };
+
+  return {
+    getState,
+    hasState,
+    setState,
+  };
+};

@@ -27,21 +27,19 @@ describe("createUnattachedShadowDomElements", () => {
   test("App root element has the correct attributes", () => {
     const { appRootElement } = createUnattachedShadowDomElements();
 
-    window.cspNonce = "hello-world";
-
     expect(appRootElement).toHaveAttribute("id", "app-root");
-    expect(appRootElement).toHaveStyle({
-      height: "inherit",
-    });
+    expect(appRootElement).toHaveAttribute("style", "height: inherit;");
   });
 
   test("Emotion root element has the correct attributes", () => {
+    const nonce = "hello-world";
+
+    window.cspNonce = nonce;
+
     const { emotionRootElement } = createUnattachedShadowDomElements();
 
-    window.cspNonce = "hello-world";
-
     expect(emotionRootElement).toHaveAttribute("id", "style-root");
-    expect(emotionRootElement).toHaveAttribute("nonce", "hello-world");
+    expect(emotionRootElement).toHaveAttribute("nonce", nonce);
   });
 });
 

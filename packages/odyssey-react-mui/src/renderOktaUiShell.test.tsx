@@ -12,7 +12,7 @@
 
 import { act } from "@testing-library/react";
 
-import { reactElementName } from "./renderReactInWebComponent";
+import { reactInWebComponentElementName } from "./renderReactInWebComponent";
 import { renderOktaUiShell } from "./renderOktaUiShell";
 
 describe("renderOktaUiShell", () => {
@@ -26,6 +26,60 @@ describe("renderOktaUiShell", () => {
 
   test("renders `OktaUiShell` component in a web component", async () => {
     const rootElement = document.createElement("div");
+
+    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
+    document.body.append(rootElement);
+
+    // This needs to be wrapped in `act` because the web component mounts the React app, and React events have to be wrapped in `act`.
+    act(() => {
+      renderOktaUiShell({
+        rootElement,
+      });
+    });
+
+    expect(
+      Array.from(
+        rootElement.querySelector(reactInWebComponentElementName)!.shadowRoot!
+          .children,
+      ).length,
+    ).toBeGreaterThan(0);
+  });
+
+  test("renders `OktaUiShell` with updated props", async () => {
+    const rootElement = document.createElement("div");
+    const navHeaderText = "Hello World!";
+
+    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
+    document.body.append(rootElement);
+
+    let publish: ReturnType<typeof renderOktaUiShell>;
+
+    // This needs to be wrapped in `act` because the web component mounts the React app, and React events have to be wrapped in `act`.
+    act(() => {
+      publish = renderOktaUiShell({
+        rootElement,
+      });
+    });
+
+    act(() => {
+      publish({
+        sideNavProps: {
+          navHeaderText,
+          sideNavItems: [],
+        },
+        topNavProps: {
+          topNavLinkItems: [],
+        },
+      });
+    });
+
+    expect(
+      rootElement.querySelector(reactInWebComponentElementName)!.shadowRoot,
+    ).toHaveTextContent(navHeaderText);
+  });
+
+  test("renders `OktaUiShell` with immediately updated props", async () => {
+    const rootElement = document.createElement("div");
     const navHeaderText = "Hello World!";
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
@@ -34,23 +88,20 @@ describe("renderOktaUiShell", () => {
     // This needs to be wrapped in `act` because the web component mounts the React app, and React events have to be wrapped in `act`.
     act(() => {
       renderOktaUiShell({
-        changeComponentProps: (setComponentProps) => {
-          setComponentProps({
-            sideNavProps: {
-              navHeaderText,
-              sideNavItems: [],
-            },
-            topNavProps: {
-              topNavLinkItems: [],
-            },
-          });
-        },
         rootElement,
+      })({
+        sideNavProps: {
+          navHeaderText,
+          sideNavItems: [],
+        },
+        topNavProps: {
+          topNavLinkItems: [],
+        },
       });
     });
 
     expect(
-      rootElement.querySelector(reactElementName)!.shadowRoot,
+      rootElement.querySelector(reactInWebComponentElementName)!.shadowRoot,
     ).toHaveTextContent(navHeaderText);
   });
 });

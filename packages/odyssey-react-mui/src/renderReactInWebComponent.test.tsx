@@ -13,7 +13,8 @@
 import { waitFor } from "@testing-library/dom";
 
 import {
-  reactElementName,
+  defaultContentElementId,
+  reactInWebComponentElementName,
   renderReactInWebComponent,
 } from "./renderReactInWebComponent";
 
@@ -21,6 +22,59 @@ describe("renderReactInWebComponent", () => {
   afterEach(() => {
     // Remove any appended elements
     document.body.innerHTML = "";
+  });
+
+  test("renders React app's root element", () => {
+    const rootElement = document.createElement("div");
+
+    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
+    document.body.append(rootElement);
+
+    renderReactInWebComponent({
+      getReactComponent: () => <div />,
+      rootElement,
+    });
+
+    expect(
+      document.getElementById(defaultContentElementId),
+    ).toBeInTheDocument();
+  });
+
+  test("renders React app's root element with configurable ID", async () => {
+    const rootElement = document.createElement("div");
+    const contentElementId = "test-app";
+
+    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
+    document.body.append(rootElement);
+
+    renderReactInWebComponent({
+      contentElementId,
+      getReactComponent: () => <div />,
+      rootElement,
+    });
+
+    expect(document.getElementById(contentElementId)).toBeInTheDocument();
+  });
+
+  test("can render 2 elements without erroring", () => {
+    const rootElement = document.createElement("div");
+
+    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
+    document.body.append(rootElement);
+
+    renderReactInWebComponent({
+      getReactComponent: () => <div />,
+      rootElement,
+    });
+
+    renderReactInWebComponent({
+      getReactComponent: () => <div />,
+      rootElement,
+    });
+
+    expect(
+      document.querySelectorAll(reactInWebComponentElementName),
+    ).toHaveLength(2);
   });
 
   test("renders a React app into a web component", async () => {
@@ -37,7 +91,7 @@ describe("renderReactInWebComponent", () => {
 
     await waitFor(() => {
       expect(
-        rootElement.querySelector(reactElementName)!.shadowRoot,
+        rootElement.querySelector(reactInWebComponentElementName)!.shadowRoot,
       ).toHaveTextContent(testElementText);
     });
   });

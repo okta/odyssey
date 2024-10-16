@@ -68,6 +68,7 @@ export * from "./Card";
 export * from "./Checkbox";
 export * from "./CheckboxGroup";
 export * from "./CircularProgress";
+export * from "./createMessageBus";
 export * from "./createUniqueId";
 export * from "./CssBaseline";
 export * from "./DataTable";

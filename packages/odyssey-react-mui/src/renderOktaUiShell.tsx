@@ -10,27 +10,43 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { OktaUiShell, type OktaUiShellProps } from "./OktaUiShell";
+import { bufferUntil } from "./bufferUntil";
+import { createMessageBus } from "./createMessageBus";
+import { OktaUiShell, type OktaUiShellComponentProps } from "./OktaUiShell";
 import { renderReactInWebComponent } from "./renderReactInWebComponent";
 
 export const renderOktaUiShell = ({
-  changeComponentProps,
   contentElementId,
   rootElement,
 }: {
-  changeComponentProps: OktaUiShellProps["changeComponentProps"];
   contentElementId?: string;
   rootElement: HTMLElement;
 }) => {
+  const { publish: publishPropChanges, subscribe: subscribeToPropChanges } =
+    createMessageBus<OktaUiShellComponentProps>();
+
+  const {
+    publish: publishSubscriptionCreated,
+    subscribe: subscribeToReactAppSubscribed,
+  } = createMessageBus();
+
+  const publishAfterReactAppReadyForProps = bufferUntil({
+    publish: publishPropChanges,
+    subscribe: subscribeToReactAppSubscribed,
+  });
+
   renderReactInWebComponent({
     getReactComponent: (shadowDomElements) => (
       <OktaUiShell
-        changeComponentProps={changeComponentProps}
-        emotionRootElement={shadowDomElements.emotionRootElement}
         appRootElement={shadowDomElements.appRootElement}
+        emotionRootElement={shadowDomElements.emotionRootElement}
+        onSubscriptionCreated={publishSubscriptionCreated}
+        subscribeToPropChanges={subscribeToPropChanges}
       />
     ),
     contentElementId,
     rootElement,
   });
+
+  return publishAfterReactAppReadyForProps;
 };
