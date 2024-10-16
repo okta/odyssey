@@ -36,6 +36,7 @@ import {
   SideNavListItemContainer,
 } from "./SideNavItemContent";
 import { SideNavFooterContent } from "./SideNavFooterContent";
+import { SideNavItemContentContext } from "./SideNavItemContentContext";
 
 export const DEFAULT_SIDE_NAV_WIDTH = "301px";
 
@@ -380,13 +381,16 @@ const SideNav = ({
       sideNavItems.map((item) => ({
         ...item,
         children: item.children?.map((childProps) => (
-          <SideNavItemContent
+          <SideNavItemContentContext.Provider
+            value={{ isCompact: isCompact }}
             key={childProps.id}
-            scrollRef={getRefIfThisIsFirstNodeWithIsSelected(childProps.id)}
-            __hasParent={true}
-            __isCompact={isCompact}
-            {...childProps}
-          />
+          >
+            <SideNavItemContent
+              key={childProps.id}
+              scrollRef={getRefIfThisIsFirstNodeWithIsSelected(childProps.id)}
+              {...childProps}
+            />
+          </SideNavItemContentContext.Provider>
         )),
       })),
     [getRefIfThisIsFirstNodeWithIsSelected, sideNavItems, isCompact],
@@ -459,7 +463,7 @@ const SideNav = ({
                     odysseyDesignTokens={odysseyDesignTokens}
                     disabled={isDisabled}
                     aria-disabled={isDisabled}
-                    __isCompact={isCompact}
+                    isCompact={isCompact}
                   >
                     <NavAccordion
                       label={label}
@@ -476,12 +480,16 @@ const SideNav = ({
                 );
               } else {
                 return (
-                  <SideNavItemContent
+                  <SideNavItemContentContext.Provider
+                    value={{ isCompact }}
                     key={item.id}
-                    scrollRef={getRefIfThisIsFirstNodeWithIsSelected(item.id)}
-                    __isCompact={isCompact}
-                    {...item}
-                  />
+                  >
+                    <SideNavItemContent
+                      key={item.id}
+                      scrollRef={getRefIfThisIsFirstNodeWithIsSelected(item.id)}
+                      {...item}
+                    />
+                  </SideNavItemContentContext.Provider>
                 );
               }
             })}
