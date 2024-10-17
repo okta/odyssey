@@ -28,10 +28,12 @@ export type DesignTokens = typeof Tokens;
 export type DesignTokensOverride = Partial<typeof Tokens>;
 
 export const createOdysseyMuiTheme = ({
+  contrastMode = "highContrast",
   odysseyTokens,
   shadowDomElement,
   shadowRootElement,
 }: {
+  contrastMode?: string;
   odysseyTokens: DesignTokens;
   /** @deprecated Use `shadowRootElement` */
   shadowDomElement?: HTMLElement;
@@ -42,6 +44,7 @@ export const createOdysseyMuiTheme = ({
       odysseyTokens,
       shadowRootElement: shadowRootElement || shadowDomElement,
     }),
+    contrastMode,
     mixins: mixins({ odysseyTokens }),
     palette: palette({ odysseyTokens }),
     shape: shape({ odysseyTokens }),

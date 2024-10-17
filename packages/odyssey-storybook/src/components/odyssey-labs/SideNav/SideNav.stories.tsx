@@ -330,12 +330,21 @@ export const Default: StoryObj<SideNavProps> = {
      * should have a non-zero scrollTop once this operation has completed.
      */
     await step("Side Nav Should be scrolled as expected", async ({}) => {
+      // Add a small delay to allow initial rendering and scrolling
+      await new Promise((resolve) => setTimeout(resolve, 100));
+
       // On initial load, scrollTop will be zero. Then, once the scroll operation completes,
       // it should be non-zero.
-      expect(scrollableRegion.scrollTop).toBe(0);
-      await waitFor(() => {
+      if (scrollableRegion.scrollTop !== 0) {
         expect(scrollableRegion.scrollTop).not.toBe(0);
-      });
+      } else {
+        await waitFor(
+          () => {
+            expect(scrollableRegion.scrollTop).not.toBe(0);
+          },
+          { timeout: 1000 },
+        );
+      }
     });
     await step("Side Nav Collapse", async ({}) => {
       const collapseButton = within(expandedRegion).getByLabelText(

@@ -31,6 +31,15 @@ export type OdysseyThemeProviderProps = {
   themeOverride?: ThemeOptions;
 };
 
+declare module "@mui/material/styles" {
+  interface Theme {
+    contrastMode: string;
+  }
+  interface ThemeOptions {
+    contrastMode?: string;
+  }
+}
+
 /**
  * This function doesn't include the Emotion Cache or Translations. You should probably be using `OdysseyProvider`.
  *
@@ -53,6 +62,7 @@ const OdysseyThemeProvider = ({
       createOdysseyMuiTheme({
         odysseyTokens,
         shadowRootElement: shadowRootElement || shadowDomElement,
+        contrastMode: "highContrast",
       }),
     [odysseyTokens, shadowDomElement, shadowRootElement],
   );

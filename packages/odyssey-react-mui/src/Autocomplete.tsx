@@ -93,6 +93,17 @@ export type AutocompleteProps<
     IsCustomValueAllowed
   >["defaultValue"];
   /**
+   * Used to determine the string value for a given option. It's used to fill the input (and the list box options if renderOption is not provided). If used in free solo mode, it must accept both the type of the options and a string.
+   *
+   * `function(option: Value) => string`
+   */
+  getOptionLabel?: UseAutocompleteProps<
+    OptionType,
+    HasMultipleChoices,
+    undefined,
+    IsCustomValueAllowed
+  >["getOptionLabel"];
+  /**
    * Enables multiple choice selection
    */
   hasMultipleChoices?: MuiAutocompleteProps<
@@ -249,6 +260,7 @@ const Autocomplete = <
   defaultValue,
   errorMessage,
   errorMessageList,
+  getOptionLabel,
   hasMultipleChoices,
   id: idOverride,
   inputValue,
@@ -571,6 +583,7 @@ const Autocomplete = <
       disabled={isDisabled}
       freeSolo={isCustomValueAllowed}
       filterSelectedOptions={true}
+      getOptionLabel={getOptionLabel}
       id={idOverride}
       fullWidth={isFullWidth}
       loading={isLoading}

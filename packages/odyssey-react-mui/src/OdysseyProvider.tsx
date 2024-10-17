@@ -12,7 +12,6 @@
 
 import { memo, ReactNode } from "react";
 import { ScopedCssBaseline } from "@mui/material";
-
 import {
   OdysseyCacheProvider,
   OdysseyCacheProviderProps,
@@ -30,7 +29,6 @@ import { DefaultSupportedLanguages } from "./OdysseyTranslationProvider.types";
 const scopedCssBaselineStyles = {
   height: "inherit",
 };
-
 export type OdysseyProviderProps<
   SupportedLanguages extends string = DefaultSupportedLanguages,
 > = OdysseyCacheProviderProps &
@@ -38,7 +36,6 @@ export type OdysseyProviderProps<
   OdysseyTranslationProviderProps<SupportedLanguages> & {
     children: ReactNode;
   };
-
 const OdysseyProvider = <SupportedLanguages extends string>({
   children,
   designTokensOverride,
@@ -76,7 +73,5 @@ const OdysseyProvider = <SupportedLanguages extends string>({
     </OdysseyThemeProvider>
   </OdysseyCacheProvider>
 );
-
 const MemoizedThemeProvider = memo(OdysseyProvider) as typeof OdysseyProvider;
-
 export { MemoizedThemeProvider as OdysseyProvider };

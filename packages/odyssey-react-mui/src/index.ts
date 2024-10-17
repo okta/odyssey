@@ -34,6 +34,7 @@ export {
   Paper,
   /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
   ScopedCssBaseline,
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
   ThemeProvider,
 } from "@mui/material";
 
@@ -49,6 +50,7 @@ export type {
   MenuListProps,
   PaperProps,
   ScopedCssBaselineProps,
+  StackProps,
   ThemeOptions,
 } from "@mui/material";
 
@@ -68,6 +70,7 @@ export * from "./Card";
 export * from "./Checkbox";
 export * from "./CheckboxGroup";
 export * from "./CircularProgress";
+export * from "./ContrastModeProvider";
 export * from "./createMessageBus";
 export * from "./createUniqueId";
 export * from "./CssBaseline";
@@ -103,6 +106,7 @@ export * from "./ScreenReaderText";
 export * from "./SearchField";
 export * from "./Select";
 export * from "./shadow-dom";
+export * from "./Stack";
 export * from "./Status";
 export * from "./Surface";
 export * from "./Switch";
