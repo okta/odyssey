@@ -23,8 +23,11 @@ const containerStyles = {
 };
 
 export type OktaUiShellComponentProps = {
-  sideNavProps: SideNavProps;
-  topNavProps: TopNavProps;
+  sideNavProps: Omit<SideNavProps, "logo" | "footerComponent">;
+  topNavProps: Omit<
+    TopNavProps,
+    "AdditionalNavItemComponent" | "SearchFieldComponent"
+  >;
 };
 
 export const defaultComponentProps: OktaUiShellComponentProps = {
@@ -41,6 +44,12 @@ export type OktaUiShellProps = {
   appComponent: ReactNode;
   onError?: () => void;
   onSubscriptionCreated: () => void;
+  optionalComponents?: {
+    additionalTopNavItems?: TopNavProps["AdditionalNavItemComponent"];
+    footer?: SideNavProps["footerComponent"];
+    logo?: SideNavProps["logo"];
+    searchField?: TopNavProps["SearchFieldComponent"];
+  };
   subscribeToPropChanges: (
     subscription: (componentProps: OktaUiShellComponentProps) => void,
   ) => () => void;
@@ -52,6 +61,7 @@ const OktaUiShell = ({
   emotionRootElement,
   onError = console.error,
   onSubscriptionCreated,
+  optionalComponents,
   subscribeToPropChanges,
 }: OktaUiShellProps) => {
   const [componentProps, setComponentProps] = useState(defaultComponentProps);
@@ -75,13 +85,28 @@ const OktaUiShell = ({
         shadowRootElement={appRootElement}
       >
         <div style={containerStyles}>
-          <ErrorBoundary fallback={<div />} onError={onError}>
-            <SideNav {...componentProps.sideNavProps} />
+          <ErrorBoundary fallback={null} onError={onError}>
+            <SideNav
+              {...("footerItems" in componentProps.sideNavProps
+                ? componentProps.sideNavProps
+                : {
+                    ...componentProps.sideNavProps,
+                    footerComponent: optionalComponents?.footer,
+                    footerItems: undefined,
+                  })}
+              logo={optionalComponents?.logo}
+            />
           </ErrorBoundary>
 
           <div>
-            <ErrorBoundary fallback={<div />} onError={onError}>
-              <TopNav {...componentProps.topNavProps} />
+            <ErrorBoundary fallback={null} onError={onError}>
+              <TopNav
+                {...componentProps.topNavProps}
+                AdditionalNavItemComponent={
+                  optionalComponents?.additionalTopNavItems
+                }
+                SearchFieldComponent={optionalComponents?.searchField}
+              />
             </ErrorBoundary>
 
             {appComponent}

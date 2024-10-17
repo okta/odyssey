@@ -53,17 +53,21 @@ describe("renderOktaUiShell", () => {
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(rootElement);
 
-    let publish: ReturnType<typeof renderOktaUiShell>;
+    let setComponentProps: ReturnType<
+      typeof renderOktaUiShell
+    >["setComponentProps"];
 
     // This needs to be wrapped in `act` because the web component mounts the React app, and React events have to be wrapped in `act`.
     act(() => {
-      publish = renderOktaUiShell({
+      const renderOktaUiShellReturnValue = renderOktaUiShell({
         rootElement,
       });
+
+      setComponentProps = renderOktaUiShellReturnValue.setComponentProps;
     });
 
     act(() => {
-      publish({
+      setComponentProps({
         sideNavProps: {
           navHeaderText,
           sideNavItems: [],
@@ -88,9 +92,11 @@ describe("renderOktaUiShell", () => {
 
     // This needs to be wrapped in `act` because the web component mounts the React app, and React events have to be wrapped in `act`.
     act(() => {
-      renderOktaUiShell({
+      const { setComponentProps } = renderOktaUiShell({
         rootElement,
-      })({
+      });
+
+      setComponentProps({
         sideNavProps: {
           navHeaderText,
           sideNavItems: [],
@@ -119,10 +125,12 @@ describe("renderOktaUiShell", () => {
       callback: () => {
         // This needs to be wrapped in `act` because the web component mounts the React app, and React events have to be wrapped in `act`.
         act(() => {
-          renderOktaUiShell({
+          const { setComponentProps } = renderOktaUiShell({
             onError,
             rootElement,
-          })(
+          });
+
+          setComponentProps(
             // @ts-expect-error We're purposefully testing an error state, so we need to send something that will cause an error.
             null,
           );

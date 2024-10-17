@@ -13,15 +13,34 @@
 import { ErrorBoundary } from "react-error-boundary";
 import { bufferUntil } from "./bufferUntil";
 import { createMessageBus } from "./createMessageBus";
-import { OktaUiShell, type OktaUiShellComponentProps } from "./OktaUiShell";
+import {
+  OktaUiShell,
+  OktaUiShellProps,
+  type OktaUiShellComponentProps,
+} from "./OktaUiShell";
 import { renderReactInWebComponent } from "./renderReactInWebComponent";
 
+export const optionalComponentSlotNames: Record<
+  keyof Required<OktaUiShellProps>["optionalComponents"],
+  string
+> = {
+  additionalTopNavItems: "additional-top-nav-items",
+  footer: "footer",
+  logo: "logo",
+  searchField: "search-field",
+};
+
+export const defaultReactAppRootId = "react-app-root";
+export const defaultAppElement = document.createElement("div");
+
+defaultAppElement.setAttribute("id", defaultReactAppRootId);
+
 export const renderOktaUiShell = ({
-  contentElementId,
+  appElement = defaultAppElement,
   onError = console.error,
   rootElement,
 }: {
-  contentElementId?: string;
+  appElement?: HTMLDivElement;
   onError?: () => void;
   rootElement: HTMLElement;
 }) => {
@@ -38,7 +57,22 @@ export const renderOktaUiShell = ({
     subscribe: subscribeToReactAppSubscribed,
   });
 
-  renderReactInWebComponent({
+  const slottedComponents = Object.fromEntries(
+    Object.entries(optionalComponentSlotNames).map(
+      ([optionalComponentKey, slotName]) => {
+        const element = document.createElement("div");
+
+        element.setAttribute("slot", slotName);
+
+        return [optionalComponentKey, element];
+      },
+    ),
+  );
+
+  const webComponentChildren =
+    Object.values(slottedComponents).concat(appElement);
+
+  const reactInWebComponentElement = renderReactInWebComponent({
     getReactComponent: (shadowDomElements) => (
       <ErrorBoundary fallback={<slot />} onError={onError}>
         <OktaUiShell
@@ -47,13 +81,25 @@ export const renderOktaUiShell = ({
           emotionRootElement={shadowDomElements.emotionRootElement}
           onError={onError}
           onSubscriptionCreated={publishSubscriptionCreated}
+          optionalComponents={Object.fromEntries(
+            Object.entries(optionalComponentSlotNames).map(
+              ([optionalComponentKey, slotName]) => [
+                optionalComponentKey,
+                <slot name={slotName} />,
+              ],
+            ),
+          )}
           subscribeToPropChanges={subscribeToPropChanges}
         />
       </ErrorBoundary>
     ),
-    contentElementId,
     rootElement,
+    webComponentChildren,
   });
 
-  return publishAfterReactAppReadyForProps;
+  return {
+    reactInWebComponentElement,
+    setComponentProps: publishAfterReactAppReadyForProps,
+    slottedComponents,
+  };
 };

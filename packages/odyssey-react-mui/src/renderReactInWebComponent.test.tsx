@@ -13,7 +13,7 @@
 import { waitFor } from "@testing-library/dom";
 
 import {
-  defaultContentElementId,
+  ReactInWebComponentElement,
   reactInWebComponentElementName,
   renderReactInWebComponent,
 } from "./renderReactInWebComponent";
@@ -24,38 +24,47 @@ describe("renderReactInWebComponent", () => {
     document.body.innerHTML = "";
   });
 
-  test("returns react's root element and renders it in the DOM", () => {
+  test("returns web component element", async () => {
     const rootElement = document.createElement("div");
+    const testElementText = "I'm a test component!";
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(rootElement);
 
-    const reactAppRootElement = renderReactInWebComponent({
-      getReactComponent: () => <div />,
+    const reactInWebComponentElement = renderReactInWebComponent({
+      getReactComponent: () => <div>{testElementText}</div>,
       rootElement,
     });
 
-    expect(reactAppRootElement.id).toBe(defaultContentElementId);
-    expect(reactAppRootElement).toBeInTheDocument();
+    await waitFor(() => {
+      expect(reactInWebComponentElement).toBeInstanceOf(
+        ReactInWebComponentElement,
+      );
+      expect(reactInWebComponentElement.shadowRoot).toBeInstanceOf(ShadowRoot);
+      expect(reactInWebComponentElement).toBeInTheDocument();
+    });
   });
 
-  test("renders React app's root element with configurable ID", async () => {
+  test("renders a React app into a web component", async () => {
     const rootElement = document.createElement("div");
-    const contentElementId = "test-app";
+    const testElementText = "I'm a test component!";
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(rootElement);
 
-    renderReactInWebComponent({
-      contentElementId,
-      getReactComponent: () => <div />,
+    const reactInWebComponentElement = renderReactInWebComponent({
+      getReactComponent: () => <div>{testElementText}</div>,
       rootElement,
     });
 
-    expect(document.getElementById(contentElementId)).toBeInTheDocument();
+    await waitFor(() => {
+      expect(reactInWebComponentElement!.shadowRoot).toHaveTextContent(
+        testElementText,
+      );
+    });
   });
 
-  test("can render 2 elements without erroring", () => {
+  test("renders 2 React apps without erroring", () => {
     const rootElement = document.createElement("div");
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
@@ -76,22 +85,44 @@ describe("renderReactInWebComponent", () => {
     ).toHaveLength(2);
   });
 
-  test("renders a React app into a web component", async () => {
+  test("renders a single element as children of the web component", () => {
     const rootElement = document.createElement("div");
-    const testElementText = "I'm a test component!";
+    const webComponentChildren = document.createElement("div");
+
+    webComponentChildren.setAttribute("slot", "app");
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(rootElement);
 
     renderReactInWebComponent({
-      getReactComponent: () => <div>{testElementText}</div>,
+      getReactComponent: () => <div />,
       rootElement,
+      webComponentChildren,
     });
 
-    await waitFor(() => {
-      expect(
-        rootElement.querySelector(reactInWebComponentElementName)!.shadowRoot,
-      ).toHaveTextContent(testElementText);
+    expect(document.querySelector("[slot=app]")).toBe(webComponentChildren);
+  });
+
+  test("renders multiple elements as children of the web component", () => {
+    const rootElement = document.createElement("div");
+    const webComponentChild1 = document.createElement("div");
+    const webComponentChild2 = document.createElement("div");
+
+    const webComponentChildren = [webComponentChild1, webComponentChild2];
+
+    webComponentChild1.setAttribute("slot", "app");
+    webComponentChild2.setAttribute("slot", "footer");
+
+    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
+    document.body.append(rootElement);
+
+    renderReactInWebComponent({
+      getReactComponent: () => <div />,
+      rootElement,
+      webComponentChildren,
     });
+
+    expect(document.querySelector("[slot=app]")).toBe(webComponentChild1);
+    expect(document.querySelector("[slot=footer]")).toBe(webComponentChild2);
   });
 });

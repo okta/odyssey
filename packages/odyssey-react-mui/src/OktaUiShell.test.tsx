@@ -13,35 +13,11 @@
 import { render, within } from "@testing-library/react";
 
 import { Dialog } from "./Dialog";
-import {
-  defaultComponentProps,
-  OktaUiShell,
-  OktaUiShellProps,
-} from "./OktaUiShell";
+import { OktaUiShell, OktaUiShellProps } from "./OktaUiShell";
+import { ReactElement } from "react";
 
 describe("OktaUiShell", () => {
   test("renders `appRootElement`", async () => {
-    const subscribeToPropChanges: OktaUiShellProps["subscribeToPropChanges"] = (
-      subscription,
-    ) => {
-      subscription({
-        ...defaultComponentProps,
-        topNavProps: {
-          ...defaultComponentProps.topNavProps,
-          SearchFieldComponent: (
-            <Dialog
-              children={undefined}
-              title="Hello World!"
-              isOpen
-              onClose={() => {}}
-            />
-          ),
-        },
-      });
-
-      return () => {};
-    };
-
     const appRootElement = document.createElement("div");
 
     render(
@@ -50,7 +26,20 @@ describe("OktaUiShell", () => {
         appRootElement={appRootElement}
         emotionRootElement={document.createElement("div")}
         onSubscriptionCreated={() => {}}
-        subscribeToPropChanges={subscribeToPropChanges}
+        optionalComponents={{
+          additionalTopNavItems: <div />,
+          footer: <div />,
+          logo: <div />,
+          searchField: (
+            <Dialog
+              children={undefined}
+              title="Hello World!"
+              isOpen
+              onClose={() => {}}
+            />
+          ),
+        }}
+        subscribeToPropChanges={() => () => {}}
       />,
     );
 
@@ -93,6 +82,37 @@ describe("OktaUiShell", () => {
     );
 
     expect(within(container).getByTestId(testId)).toBeInTheDocument();
+  });
+
+  test("renders `componentSlots`", async () => {
+    const optionalComponentTestIds: Array<
+      keyof Required<OktaUiShellProps>["optionalComponents"]
+    > = ["additionalTopNavItems", "footer", "logo", "searchField"];
+
+    const { container } = render(
+      <OktaUiShell
+        appComponent={<div />}
+        appRootElement={document.createElement("div")}
+        emotionRootElement={document.createElement("div")}
+        onSubscriptionCreated={() => {}}
+        optionalComponents={
+          Object.fromEntries(
+            optionalComponentTestIds.map((testId) => [
+              testId,
+              <div data-testid={testId} />,
+            ]),
+          ) as Record<
+            keyof OktaUiShellProps["optionalComponents"],
+            ReactElement
+          >
+        }
+        subscribeToPropChanges={() => () => {}}
+      />,
+    );
+
+    optionalComponentTestIds.forEach((testId) => {
+      expect(within(container).getByTestId(testId)).toBeInTheDocument();
+    });
   });
 
   test("Unsubscribes from prop changes when unmounted", async () => {

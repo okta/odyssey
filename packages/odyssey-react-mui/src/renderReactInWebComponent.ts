@@ -18,20 +18,13 @@ import {
   type ShadowDomElements,
 } from "./shadow-dom";
 
-export const defaultContentElementId = "react-app-root";
 export const reactInWebComponentElementName = "odyssey-react-web-component";
 
 export type GetReactComponentInWebComponent = (
   shadowDomElements: ShadowDomElements,
 ) => ReactNode;
 
-export type RenderReactInWebComponentProps = {
-  contentElementId?: string;
-  getReactComponent: GetReactComponentInWebComponent;
-  rootElement: HTMLElement;
-};
-
-class ReactInWebComponentElement extends HTMLElement {
+export class ReactInWebComponentElement extends HTMLElement {
   getReactComponent: GetReactComponentInWebComponent;
   shadowDomElements: ShadowDomElements;
   reactRoot: Root;
@@ -77,18 +70,29 @@ if (!customElements.get(reactInWebComponentElementName)) {
   );
 }
 
+export type RenderReactInWebComponentProps = {
+  getReactComponent: GetReactComponentInWebComponent;
+  webComponentChildren?: HTMLElement | HTMLElement[];
+  rootElement: HTMLElement;
+};
+
 export const renderReactInWebComponent = ({
-  contentElementId = defaultContentElementId,
   getReactComponent,
   rootElement,
+  webComponentChildren,
 }: RenderReactInWebComponentProps) => {
-  const reactAppRootElement = document.createElement("div");
   const reactElement = new ReactInWebComponentElement(getReactComponent);
 
-  reactAppRootElement.id = contentElementId;
+  if (webComponentChildren) {
+    (Array.isArray(webComponentChildren)
+      ? webComponentChildren
+      : [webComponentChildren]
+    ).forEach((webComponentChild) => {
+      reactElement.appendChild(webComponentChild);
+    });
+  }
 
-  reactElement.appendChild(reactAppRootElement);
   rootElement.appendChild(reactElement);
 
-  return reactAppRootElement;
+  return reactElement;
 };
