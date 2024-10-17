@@ -52,6 +52,7 @@ import {
 } from "../icons.generated";
 import { DesignTokens } from "./theme";
 import { CSSProperties } from "react";
+import { ContrastMode } from "../ContrastModeProvider";
 
 //Widths used in `Drawer` component
 const drawerSizes = {
@@ -60,10 +61,12 @@ const drawerSizes = {
 };
 
 export const components = ({
+  contrastMode,
   odysseyTokens,
   shadowDomElement,
   shadowRootElement,
 }: {
+  contrastMode: ContrastMode;
   odysseyTokens: DesignTokens;
   /** @deprecated use `shadowRootElement` */
   shadowDomElement?: HTMLElement;
@@ -577,9 +580,7 @@ export const components = ({
         disableElevation: true,
       },
       styleOverrides: {
-        root: ({ ownerState, theme }) => {
-          const contrastMode = theme.contrastMode;
-
+        root: ({ ownerState }) => {
           return {
             minWidth: "unset",
             paddingBlock: odysseyTokens.Spacing3,
@@ -1029,9 +1030,7 @@ export const components = ({
         deleteIcon: <CloseCircleFilledIcon />,
       },
       styleOverrides: {
-        root: ({ ownerState, theme }) => {
-          const contrastMode = theme.contrastMode;
-
+        root: ({ ownerState }) => {
           return {
             height: "auto",
             paddingBlock: `calc(${odysseyTokens.Spacing2} - ${odysseyTokens.BorderWidthMain})`,
@@ -1058,7 +1057,6 @@ export const components = ({
               [`& .${chipClasses.deleteIcon}`]: {
                 color: odysseyTokens.HueNeutral300,
               },
-
               [`& .${chipClasses.icon}`]: {
                 color: odysseyTokens.HueNeutral300,
               },
