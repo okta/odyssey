@@ -23,17 +23,18 @@ import "./components.types";
 import "./mixins.types";
 import "./palette.types";
 import "./typography.types";
+import { type ContrastMode } from "../ContrastModeProvider";
 
 export type DesignTokens = typeof Tokens;
 export type DesignTokensOverride = Partial<typeof Tokens>;
 
 export const createOdysseyMuiTheme = ({
-  contrastMode = "highContrast",
+  contrastMode = "lowContrast",
   odysseyTokens,
   shadowDomElement,
   shadowRootElement,
 }: {
-  contrastMode?: string;
+  contrastMode?: ContrastMode;
   odysseyTokens: DesignTokens;
   /** @deprecated Use `shadowRootElement` */
   shadowDomElement?: HTMLElement;
@@ -41,10 +42,10 @@ export const createOdysseyMuiTheme = ({
 }) =>
   createTheme({
     components: components({
+      contrastMode,
       odysseyTokens,
       shadowRootElement: shadowRootElement || shadowDomElement,
     }),
-    contrastMode,
     mixins: mixins({ odysseyTokens }),
     palette: palette({ odysseyTokens }),
     shape: shape({ odysseyTokens }),
