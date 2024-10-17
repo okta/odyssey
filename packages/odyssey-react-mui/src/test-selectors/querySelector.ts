@@ -41,7 +41,7 @@ export type InnerQuerySelectorProps<
     ? Role extends AriaRole[]
       ? {
           /**
-           * Role is used when you have an optional `role`; otherwise, it'd baked into the metadata.
+           * Role is used when you have an optional `role`; otherwise, it's baked into the metadata.
            */
           role: Role[number];
         }

@@ -36,12 +36,13 @@ module.exports = {
       "error",
       {
         devDependencies: [
-          "**/*.ts",
-          "**/*.stories.*",
           "**/*.docgen.*",
-          "**/jest.setup.js",
+          "**/*.stories.*",
           "**/*.test.*",
+          "**/*.ts",
+          "**/jest.setup.js",
           "**/scripts/*",
+          "**/vite.config.js",
         ],
       },
     ],
