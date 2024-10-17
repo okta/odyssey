@@ -243,13 +243,14 @@ const DataView = ({
       pagination.pageIndex === currentPage &&
         pagination.pageSize === resultsPerPage &&
         search === "" &&
-        filters === initialFilters &&
+        (!hasFilters || filters === initialFilters) &&
         data.length === 0,
     );
   }, [
     currentPage,
     data,
     filters,
+    hasFilters,
     initialFilters,
     pagination,
     resultsPerPage,
