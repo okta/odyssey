@@ -70,7 +70,6 @@ export * from "./Callout";
 export * from "./Checkbox";
 export * from "./CheckboxGroup";
 export * from "./CircularProgress";
-export * from "./ContrastModeProvider";
 export * from "./CssBaseline";
 export * from "./createShadowDomElements";
 export * from "./createUniqueId";

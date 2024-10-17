@@ -10,77 +10,95 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import React, { createContext, ReactNode, useMemo } from "react";
 import {
   createTheme,
   ThemeProvider as MuiThemeProvider,
 } from "@mui/material/styles";
-import { memo, ReactNode, useMemo } from "react";
-
 import { ThemeOptions } from "@mui/material";
 import { deepmerge } from "@mui/utils";
 import { createOdysseyMuiTheme, DesignTokensOverride } from "./theme";
 import * as Tokens from "@okta/odyssey-design-tokens";
 import { OdysseyDesignTokensContext } from "./OdysseyDesignTokensContext";
+import {
+  useContrastModeContext,
+  ContrastModeProvider,
+} from "./ContrastModeProvider";
 
 export type OdysseyThemeProviderProps = {
   children: ReactNode;
   designTokensOverride?: DesignTokensOverride;
-  /** @deprecated Use `shadowRootElement` instead. */
-  shadowDomElement?: HTMLDivElement | HTMLElement | undefined;
   shadowRootElement?: HTMLDivElement | HTMLElement;
+  /** @deprecated Use shadowRootElement instead */
+  shadowDomElement?: HTMLDivElement | HTMLElement;
   themeOverride?: ThemeOptions;
+  contrastMode?: "lowContrast" | "highContrast";
 };
 
-declare module "@mui/material/styles" {
-  interface Theme {
-    contrastMode: string;
-  }
-  interface ThemeOptions {
-    contrastMode?: string;
-  }
-}
+type OdysseyThemeProviderContextProps = Omit<
+  OdysseyThemeProviderProps,
+  "children" | "contrastMode"
+>;
 
-/**
- * This function doesn't include the Emotion Cache or Translations. You should probably be using `OdysseyProvider`.
- *
- * Some teams have a need to wrap separately (SIW), but most teams will never need to use this explicitly.
- */
-const OdysseyThemeProvider = ({
+const OdysseyThemeProviderPropsContext =
+  createContext<OdysseyThemeProviderContextProps>({});
+
+const InnerOdysseyThemeProvider: React.FC<OdysseyThemeProviderProps> = ({
   children,
   designTokensOverride,
-  shadowDomElement,
   shadowRootElement,
+  shadowDomElement,
   themeOverride,
-}: OdysseyThemeProviderProps) => {
+}) => {
+  const { contrastMode } = useContrastModeContext();
+
   const odysseyTokens = useMemo(
     () => ({ ...Tokens, ...designTokensOverride }),
     [designTokensOverride],
   );
 
+  const effectiveShadowRootElement = shadowRootElement || shadowDomElement;
+
   const odysseyTheme = useMemo(
     () =>
       createOdysseyMuiTheme({
+        contrastMode,
         odysseyTokens,
-        shadowRootElement: shadowRootElement || shadowDomElement,
-        contrastMode: "highContrast",
+        shadowRootElement: effectiveShadowRootElement,
       }),
-    [odysseyTokens, shadowDomElement, shadowRootElement],
+    [contrastMode, odysseyTokens, effectiveShadowRootElement],
   );
 
   const customOdysseyTheme = useMemo(
-    () => themeOverride && createTheme(deepmerge(odysseyTheme, themeOverride)),
+    () => createTheme(deepmerge(odysseyTheme, themeOverride || {})),
     [odysseyTheme, themeOverride],
   );
 
+  const contextValue = useMemo(
+    () => ({
+      designTokensOverride,
+      shadowRootElement,
+      shadowDomElement,
+      themeOverride,
+    }),
+    [designTokensOverride, shadowRootElement, shadowDomElement, themeOverride],
+  );
+
   return (
-    <MuiThemeProvider theme={customOdysseyTheme ?? odysseyTheme}>
+    <MuiThemeProvider theme={customOdysseyTheme}>
       <OdysseyDesignTokensContext.Provider value={odysseyTokens}>
-        {children}
+        <OdysseyThemeProviderPropsContext.Provider value={contextValue}>
+          {children}
+        </OdysseyThemeProviderPropsContext.Provider>
       </OdysseyDesignTokensContext.Provider>
     </MuiThemeProvider>
   );
 };
 
-const MemoizedOdysseyThemeProvider = memo(OdysseyThemeProvider);
-
-export { MemoizedOdysseyThemeProvider as OdysseyThemeProvider };
+export const OdysseyThemeProvider: React.FC<OdysseyThemeProviderProps> = (
+  props,
+) => (
+  <ContrastModeProvider contrastMode={props.contrastMode}>
+    <InnerOdysseyThemeProvider {...props} />
+  </ContrastModeProvider>
+);

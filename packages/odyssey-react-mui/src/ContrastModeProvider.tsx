@@ -10,26 +10,17 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, {
+import {
   createContext,
   useContext,
   useRef,
   useLayoutEffect,
   useState,
   useMemo,
+  useCallback,
   ReactNode,
 } from "react";
-import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 import * as Tokens from "@okta/odyssey-design-tokens";
-
-declare module "@mui/material/styles" {
-  interface Theme {
-    odysseyContrastMode: ContrastMode;
-  }
-  interface ThemeOptions {
-    odysseyContrastMode?: ContrastMode;
-  }
-}
 
 export type ContrastMode = "lowContrast" | "highContrast";
 
@@ -38,12 +29,12 @@ export type ContrastModeContextType = {
   parentBackgroundColor: string;
 };
 
-const ContrastModeContext = createContext<ContrastModeContextType>({
-  contrastMode: "highContrast",
+export const ContrastModeContext = createContext<ContrastModeContextType>({
+  contrastMode: "lowContrast",
   parentBackgroundColor: "",
 });
 
-export const useContrastContext = () => useContext(ContrastModeContext);
+export const useContrastModeContext = () => useContext(ContrastModeContext);
 
 const hexToRgb = (hex: string): string => {
   const bigint = parseInt(hex.slice(1), 16);
@@ -53,31 +44,46 @@ const hexToRgb = (hex: string): string => {
   return `rgb(${r}, ${g}, ${b})`;
 };
 
-export const useParentBackgroundColor = (ref: React.RefObject<HTMLElement>) => {
-  const [backgroundColor, setBackgroundColor] = useState("");
+export const hueNeutral50Rgb = hexToRgb(Tokens.HueNeutral50);
 
-  const hueNeutral50Rgb = useMemo(() => hexToRgb(Tokens.HueNeutral50), []);
+const isTransparentColor = (color: string): boolean =>
+  color === "rgba(0, 0, 0, 0)" || color === "transparent";
 
-  useLayoutEffect(() => {
-    if (ref.current) {
-      let element: HTMLElement | null = ref.current;
-      while (element) {
-        const bgColor = window.getComputedStyle(element).backgroundColor;
+const normalizeRgbaToRgb = (rgba: string): string =>
+  rgba.replace(/rgba\((\d+), (\d+), (\d+), \d+\)/, "rgb($1, $2, $3)");
 
-        if (bgColor !== "rgba(0, 0, 0, 0)" && bgColor !== "transparent") {
-          if (bgColor === hueNeutral50Rgb) {
-            setBackgroundColor(Tokens.HueNeutral50);
-          } else {
-            setBackgroundColor(bgColor);
-          }
-          break;
-        }
-        element = element.parentElement;
-      }
+const getElementComputedBackgroundColor = (element: HTMLElement): string =>
+  window.getComputedStyle(element).backgroundColor;
+
+const normalizeBackgroundColor = (bgColor: string): string => {
+  if (/rgba\((\d+), (\d+), (\d+), \d+\)/.test(bgColor)) {
+    const normalizedColor = normalizeRgbaToRgb(bgColor);
+    return normalizedColor === hueNeutral50Rgb
+      ? Tokens.HueNeutral50
+      : normalizedColor;
+  }
+  return bgColor === hueNeutral50Rgb ? Tokens.HueNeutral50 : bgColor;
+};
+
+/**
+ * Determines the effective background color of an element.
+ *
+ * @param element - The HTML element to check.
+ * @returns The effective background color. Returns "#ffffff" if no non-transparent background is found.
+ *
+ * Note:
+ * - Low contrast mode is used for white background (#ffffff or HueNeutralWhite).
+ * - High contrast mode is used for gray background (#f4f4f4 or HueNeutral50).
+ */
+export const getBackgroundColor = (element: HTMLElement | null): string => {
+  while (element) {
+    const bgColor = getElementComputedBackgroundColor(element);
+    if (!isTransparentColor(bgColor)) {
+      return normalizeBackgroundColor(bgColor);
     }
-  }, [ref, hueNeutral50Rgb]);
-
-  return backgroundColor;
+    element = element.parentElement;
+  }
+  return "#ffffff"; // Default to white/low contrast if no background color is found
 };
 
 type ContrastModeProviderProps = {
@@ -90,20 +96,49 @@ export const ContrastModeProvider = ({
   contrastMode: explicitContrastMode,
 }: ContrastModeProviderProps) => {
   const ref = useRef<HTMLDivElement>(null);
-  const parentBackgroundColor = useParentBackgroundColor(ref);
-  const [contrastMode, setContrastMode] =
-    useState<ContrastMode>("highContrast");
+  const [parentBackgroundColor, setParentBackgroundColor] = useState("#ffffff");
+  const [contrastMode, setContrastMode] = useState<ContrastMode>(
+    () => explicitContrastMode || "highContrast",
+  );
+
+  const updateBackgroundColor = useCallback(() => {
+    const newBgColor = getBackgroundColor(ref.current);
+    setParentBackgroundColor(newBgColor);
+
+    if (!explicitContrastMode) {
+      setContrastMode(
+        newBgColor === Tokens.HueNeutral50 ? "highContrast" : "lowContrast",
+      );
+    }
+  }, [explicitContrastMode]);
 
   useLayoutEffect(() => {
-    if (explicitContrastMode) {
-      setContrastMode(explicitContrastMode);
-    } else {
-      const isLowContrast = parentBackgroundColor === Tokens.HueNeutral50;
-      setContrastMode(isLowContrast ? "lowContrast" : "highContrast");
-    }
-  }, [parentBackgroundColor, explicitContrastMode]);
+    const observer = new MutationObserver(updateBackgroundColor);
+    observer.observe(document.querySelector("html") as HTMLHtmlElement, {
+      attributes: true,
+      attributeFilter: ["class", "style"],
+    });
+    observer.observe(document.head, {
+      childList: true,
+      subtree: true,
+    });
 
-  const contextValue = useMemo<ContrastModeContextType>(
+    const onTransitionEnd = (event: TransitionEvent) => {
+      if (event.propertyName === "background-color") {
+        updateBackgroundColor();
+      }
+    };
+
+    document.addEventListener("transitionend", onTransitionEnd);
+    updateBackgroundColor();
+
+    return () => {
+      document.removeEventListener("transitionend", onTransitionEnd);
+      observer.disconnect();
+    };
+  }, [updateBackgroundColor]);
+
+  const contextValue = useMemo(
     () => ({
       contrastMode,
       parentBackgroundColor,
@@ -111,20 +146,10 @@ export const ContrastModeProvider = ({
     [contrastMode, parentBackgroundColor],
   );
 
-  const existingTheme = useTheme();
-  const theme = useMemo(
-    () =>
-      createTheme({
-        ...existingTheme,
-        odysseyContrastMode: contrastMode,
-      }),
-    [existingTheme, contrastMode],
-  );
-
   return (
     <div ref={ref}>
       <ContrastModeContext.Provider value={contextValue}>
-        <ThemeProvider theme={theme}>{children}</ThemeProvider>
+        {children}
       </ContrastModeContext.Provider>
     </div>
   );

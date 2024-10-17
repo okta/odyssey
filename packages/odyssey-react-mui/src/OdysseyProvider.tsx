@@ -12,6 +12,7 @@
 
 import { memo, ReactNode } from "react";
 import { ScopedCssBaseline } from "@mui/material";
+
 import {
   OdysseyCacheProvider,
   OdysseyCacheProviderProps,
@@ -25,10 +26,10 @@ import {
   OdysseyTranslationProviderProps,
 } from "./OdysseyTranslationProvider";
 import { DefaultSupportedLanguages } from "./OdysseyTranslationProvider.types";
-
 const scopedCssBaselineStyles = {
   height: "inherit",
 };
+
 export type OdysseyProviderProps<
   SupportedLanguages extends string = DefaultSupportedLanguages,
 > = OdysseyCacheProviderProps &
@@ -36,6 +37,7 @@ export type OdysseyProviderProps<
   OdysseyTranslationProviderProps<SupportedLanguages> & {
     children: ReactNode;
   };
+
 const OdysseyProvider = <SupportedLanguages extends string>({
   children,
   designTokensOverride,
@@ -48,6 +50,7 @@ const OdysseyProvider = <SupportedLanguages extends string>({
   stylisPlugins,
   themeOverride,
   translationOverrides,
+  contrastMode,
 }: OdysseyProviderProps<SupportedLanguages>) => (
   <OdysseyCacheProvider
     emotionRoot={emotionRoot}
@@ -58,10 +61,11 @@ const OdysseyProvider = <SupportedLanguages extends string>({
   >
     <OdysseyThemeProvider
       designTokensOverride={designTokensOverride}
-      shadowRootElement={shadowRootElement || shadowDomElement}
+      shadowDomElement={shadowDomElement}
+      shadowRootElement={shadowRootElement}
       themeOverride={themeOverride}
+      contrastMode={contrastMode}
     >
-      {/* This component creates a div; for flexibility of layout of children, make it inherit its parent's height */}
       <ScopedCssBaseline sx={scopedCssBaselineStyles}>
         <OdysseyTranslationProvider<SupportedLanguages>
           languageCode={languageCode}
@@ -73,5 +77,6 @@ const OdysseyProvider = <SupportedLanguages extends string>({
     </OdysseyThemeProvider>
   </OdysseyCacheProvider>
 );
-const MemoizedThemeProvider = memo(OdysseyProvider) as typeof OdysseyProvider;
-export { MemoizedThemeProvider as OdysseyProvider };
+const MemoizedOdysseyProvider = memo(OdysseyProvider) as typeof OdysseyProvider;
+
+export { MemoizedOdysseyProvider as OdysseyProvider };
