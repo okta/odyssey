@@ -17716,21 +17716,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"markdown-to-jsx@npm:^7.1.8":
-  version: 7.2.0
-  resolution: "markdown-to-jsx@npm:7.2.0"
+"markdown-to-jsx@npm:^7.1.8, markdown-to-jsx@npm:^7.4.1":
+  version: 7.5.0
+  resolution: "markdown-to-jsx@npm:7.5.0"
   peerDependencies:
     react: ">= 0.14.0"
-  checksum: 10/99616b7d83434c1fcb5c7d12e320c06a14111e8c26ca691e330b5200f88f166601c7027ed480de56af20ea5628d1864f3702887cdc7081b3cf327fac4611a968
-  languageName: node
-  linkType: hard
-
-"markdown-to-jsx@npm:^7.4.1":
-  version: 7.4.1
-  resolution: "markdown-to-jsx@npm:7.4.1"
-  peerDependencies:
-    react: ">= 0.14.0"
-  checksum: 10/7f68a6f3ae0855c13d2d54881c1c1e2c1776c4f4149e84e41ce35a76a007b4deb9784fd19018eebf1bba31d7dfd6a92c30ad6815d481dcb38b74da7a20d4cb44
+  checksum: 10/b1fbe4429b968aefe02d4549eebb8d7456ccd7a8417805bb7f4bde1b466bdd0c81df3b14c5a1d9dcc49c6451ae50cf23cd04228fb6a0e1f8579ad0b76adae044
   languageName: node
   linkType: hard
 
