@@ -85,6 +85,7 @@
     "i18next": "^23.15.1",
     "luxon": "^3.4.4",
     "material-react-table": "^2.11.3",
+    "react-error-boundary": "^4.1.1",
     "react-i18next": "^14.0.5",
     "react-window": "^1.8.10",
     "word-wrap": "^1.2.5"

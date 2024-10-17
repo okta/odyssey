@@ -11,6 +11,7 @@
  */
 
 import { memo, useEffect, useState, type ReactNode } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 
 import { SideNav, type SideNavProps } from "./labs/SideNav";
 import { TopNav, type TopNavProps } from "./labs/TopNav";
@@ -26,14 +27,6 @@ export type OktaUiShellComponentProps = {
   topNavProps: TopNavProps;
 };
 
-export type OktaUiShellProps = {
-  appComponent?: ReactNode;
-  onSubscriptionCreated: () => void;
-  subscribeToPropChanges: (
-    subscription: (componentProps: OktaUiShellComponentProps) => void,
-  ) => () => void;
-} & ShadowDomElements;
-
 export const defaultComponentProps: OktaUiShellComponentProps = {
   sideNavProps: {
     navHeaderText: "",
@@ -44,16 +37,21 @@ export const defaultComponentProps: OktaUiShellComponentProps = {
   },
 };
 
-export const defaultProps = {
-  appComponent: <slot />,
-  onSubscriptionCreated: () => {},
-};
+export type OktaUiShellProps = {
+  appComponent: ReactNode;
+  onError?: () => void;
+  onSubscriptionCreated: () => void;
+  subscribeToPropChanges: (
+    subscription: (componentProps: OktaUiShellComponentProps) => void,
+  ) => () => void;
+} & ShadowDomElements;
 
 const OktaUiShell = ({
-  appComponent = defaultProps.appComponent,
+  appComponent,
   appRootElement,
   emotionRootElement,
-  onSubscriptionCreated = defaultProps.onSubscriptionCreated,
+  onError = console.error,
+  onSubscriptionCreated,
   subscribeToPropChanges,
 }: OktaUiShellProps) => {
   const [componentProps, setComponentProps] = useState(defaultComponentProps);
@@ -71,20 +69,26 @@ const OktaUiShell = ({
   }, [onSubscriptionCreated, subscribeToPropChanges]);
 
   return (
-    <OdysseyProvider
-      emotionRootElement={emotionRootElement}
-      shadowRootElement={appRootElement}
-    >
-      <div style={containerStyles}>
-        <SideNav {...componentProps.sideNavProps} />
+    <ErrorBoundary fallback={appComponent} onError={onError}>
+      <OdysseyProvider
+        emotionRootElement={emotionRootElement}
+        shadowRootElement={appRootElement}
+      >
+        <div style={containerStyles}>
+          <ErrorBoundary fallback={<div />} onError={onError}>
+            <SideNav {...componentProps.sideNavProps} />
+          </ErrorBoundary>
 
-        <div>
-          <TopNav {...componentProps.topNavProps} />
+          <div>
+            <ErrorBoundary fallback={<div />} onError={onError}>
+              <TopNav {...componentProps.topNavProps} />
+            </ErrorBoundary>
 
-          {appComponent}
+            {appComponent}
+          </div>
         </div>
-      </div>
-    </OdysseyProvider>
+      </OdysseyProvider>
+    </ErrorBoundary>
   );
 };
 

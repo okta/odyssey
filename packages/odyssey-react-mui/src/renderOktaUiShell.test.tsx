@@ -12,6 +12,7 @@
 
 import { act } from "@testing-library/react";
 
+import { captureConsoleError } from "./captureConsoleError";
 import { reactInWebComponentElementName } from "./renderReactInWebComponent";
 import { renderOktaUiShell } from "./renderOktaUiShell";
 
@@ -103,5 +104,39 @@ describe("renderOktaUiShell", () => {
     expect(
       rootElement.querySelector(reactInWebComponentElementName)!.shadowRoot,
     ).toHaveTextContent(navHeaderText);
+  });
+
+  test("renders `<slot>` in the event of an error", async () => {
+    const rootElement = document.createElement("div");
+    const onError = jest.fn();
+
+    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
+    document.body.append(rootElement);
+
+    const replacementConsoleError = jest.fn();
+
+    captureConsoleError({
+      callback: () => {
+        // This needs to be wrapped in `act` because the web component mounts the React app, and React events have to be wrapped in `act`.
+        act(() => {
+          renderOktaUiShell({
+            onError,
+            rootElement,
+          })(
+            // @ts-expect-error We're purposefully testing an error state, so we need to send something that will cause an error.
+            null,
+          );
+        });
+      },
+      replacementConsoleError,
+    });
+
+    expect(onError).toHaveBeenCalledTimes(1);
+    expect(replacementConsoleError).toHaveBeenCalledTimes(1);
+    expect(
+      rootElement
+        .querySelector(reactInWebComponentElementName)!
+        .shadowRoot?.querySelector("slot"),
+    ).toBeInstanceOf(HTMLSlotElement);
   });
 });

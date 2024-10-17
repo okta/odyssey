@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render } from "@testing-library/react";
+import { render, within } from "@testing-library/react";
 
 import { Dialog } from "./Dialog";
 import {
@@ -20,7 +20,7 @@ import {
 } from "./OktaUiShell";
 
 describe("OktaUiShell", () => {
-  test("renders the `appRootElement`", async () => {
+  test("renders `appRootElement`", async () => {
     const subscribeToPropChanges: OktaUiShellProps["subscribeToPropChanges"] = (
       subscription,
     ) => {
@@ -46,8 +46,10 @@ describe("OktaUiShell", () => {
 
     render(
       <OktaUiShell
+        appComponent={<div />}
         appRootElement={appRootElement}
         emotionRootElement={document.createElement("div")}
+        onSubscriptionCreated={() => {}}
         subscribeToPropChanges={subscribeToPropChanges}
       />,
     );
@@ -56,7 +58,7 @@ describe("OktaUiShell", () => {
     expect(appRootElement).toHaveTextContent("Hello World!");
   });
 
-  test("renders the `emotionRootElement`", async () => {
+  test("renders `emotionRootElement`", async () => {
     const rootElement = document.createElement("div");
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
@@ -66,13 +68,31 @@ describe("OktaUiShell", () => {
 
     render(
       <OktaUiShell
+        appComponent={<div />}
         appRootElement={document.createElement("div")}
         emotionRootElement={emotionRootElement}
+        onSubscriptionCreated={() => {}}
         subscribeToPropChanges={() => () => {}}
       />,
     );
 
     expect(Array.from(emotionRootElement.children).length).toBeGreaterThan(0);
+  });
+
+  test("renders `appComponent`", async () => {
+    const testId = "app-component";
+
+    const { container } = render(
+      <OktaUiShell
+        appComponent={<div data-testid={testId} />}
+        appRootElement={document.createElement("div")}
+        emotionRootElement={document.createElement("div")}
+        onSubscriptionCreated={() => {}}
+        subscribeToPropChanges={() => () => {}}
+      />,
+    );
+
+    expect(within(container).getByTestId(testId)).toBeInTheDocument();
   });
 
   test("Unsubscribes from prop changes when unmounted", async () => {
@@ -86,8 +106,10 @@ describe("OktaUiShell", () => {
 
     const { unmount } = render(
       <OktaUiShell
+        appComponent={<div />}
         appRootElement={document.createElement("div")}
         emotionRootElement={document.createElement("div")}
+        onSubscriptionCreated={() => {}}
         subscribeToPropChanges={subscribeToPropChanges}
       />,
     );

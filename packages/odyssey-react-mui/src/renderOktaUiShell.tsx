@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { ErrorBoundary } from "react-error-boundary";
 import { bufferUntil } from "./bufferUntil";
 import { createMessageBus } from "./createMessageBus";
 import { OktaUiShell, type OktaUiShellComponentProps } from "./OktaUiShell";
@@ -17,9 +18,11 @@ import { renderReactInWebComponent } from "./renderReactInWebComponent";
 
 export const renderOktaUiShell = ({
   contentElementId,
+  onError = console.error,
   rootElement,
 }: {
   contentElementId?: string;
+  onError?: () => void;
   rootElement: HTMLElement;
 }) => {
   const { publish: publishPropChanges, subscribe: subscribeToPropChanges } =
@@ -37,12 +40,16 @@ export const renderOktaUiShell = ({
 
   renderReactInWebComponent({
     getReactComponent: (shadowDomElements) => (
-      <OktaUiShell
-        appRootElement={shadowDomElements.appRootElement}
-        emotionRootElement={shadowDomElements.emotionRootElement}
-        onSubscriptionCreated={publishSubscriptionCreated}
-        subscribeToPropChanges={subscribeToPropChanges}
-      />
+      <ErrorBoundary fallback={<slot />} onError={onError}>
+        <OktaUiShell
+          appComponent={<slot />}
+          appRootElement={shadowDomElements.appRootElement}
+          emotionRootElement={shadowDomElements.emotionRootElement}
+          onError={onError}
+          onSubscriptionCreated={publishSubscriptionCreated}
+          subscribeToPropChanges={subscribeToPropChanges}
+        />
+      </ErrorBoundary>
     ),
     contentElementId,
     rootElement,

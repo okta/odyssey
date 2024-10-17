@@ -5704,6 +5704,7 @@ __metadata:
     properties: "npm:1.2.1"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
+    react-error-boundary: "npm:^4.1.1"
     react-i18next: "npm:^14.0.5"
     react-window: "npm:^1.8.10"
     regenerator-runtime: "npm:^0.14.1"
@@ -21759,6 +21760,17 @@ __metadata:
   peerDependencies:
     react: ">=16.13.1"
   checksum: 10/7418637bf352b88f35ff3798e6faa094ee046df9d422fc08f54c017892c3c0738dac661ba3d64d97209464e7a60e7fbbeffdbeaee5edc38f3aaf5f1f4a8bf610
+  languageName: node
+  linkType: hard
+
+"react-error-boundary@npm:^4.1.1":
+  version: 4.1.1
+  resolution: "react-error-boundary@npm:4.1.1"
+  dependencies:
+    "@babel/runtime": "npm:^7.12.5"
+  peerDependencies:
+    react: ">=16.13.1"
+  checksum: 10/06ad1e4fb0d12e5067e8ffcccf0b058a3da804c9e48b5181d0be4af4afcb3e09186f0a73cbc4494d931fff8988408f0e9377635cb0c69292bb6603f8a6a7604e
   languageName: node
   linkType: hard
 
