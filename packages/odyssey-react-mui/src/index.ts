@@ -102,6 +102,7 @@ export * from "./PasswordField";
 export * from "./Radio";
 export * from "./RadioGroup";
 export * from "./renderOktaUiShell";
+export * from "./renderReactInWebComponent";
 export * from "./ScreenReaderText";
 export * from "./SearchField";
 export * from "./Select";
