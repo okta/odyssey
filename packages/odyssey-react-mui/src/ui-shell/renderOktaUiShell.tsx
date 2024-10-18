@@ -18,7 +18,7 @@ import {
   OktaUiShellProps,
   type OktaUiShellComponentProps,
 } from "./OktaUiShell";
-import { renderReactInWebComponent } from "./renderReactInWebComponent";
+import { renderReactInWebComponent } from "../web-component/renderReactInWebComponent";
 
 export const optionalComponentSlotNames: Record<
   keyof Required<OktaUiShellProps>["optionalComponents"],

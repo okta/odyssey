@@ -12,7 +12,7 @@
 
 import { render, within } from "@testing-library/react";
 
-import { Dialog } from "./Dialog";
+import { Dialog } from "../Dialog";
 import { OktaUiShell, OktaUiShellProps } from "./OktaUiShell";
 import { ReactElement } from "react";
 

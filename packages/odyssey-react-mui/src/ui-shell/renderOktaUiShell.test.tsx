@@ -12,8 +12,8 @@
 
 import { act } from "@testing-library/react";
 
-import { captureConsoleError } from "./captureConsoleError";
-import { reactInWebComponentElementName } from "./renderReactInWebComponent";
+import { captureConsoleError } from "../test-utils/captureConsoleError";
+import { reactInWebComponentElementName } from "../web-component/renderReactInWebComponent";
 import { renderOktaUiShell } from "./renderOktaUiShell";
 
 describe("renderOktaUiShell", () => {

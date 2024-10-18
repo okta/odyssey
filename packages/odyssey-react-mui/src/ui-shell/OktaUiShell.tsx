@@ -13,10 +13,10 @@
 import { memo, useEffect, useState, type ReactNode } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
-import { SideNav, type SideNavProps } from "./labs/SideNav";
-import { TopNav, type TopNavProps } from "./labs/TopNav";
-import { OdysseyProvider } from "./OdysseyProvider";
-import { ShadowDomElements } from "./shadow-dom";
+import { SideNav, type SideNavProps } from "../labs/SideNav";
+import { TopNav, type TopNavProps } from "../labs/TopNav";
+import { OdysseyProvider } from "../OdysseyProvider";
+import { ShadowDomElements } from "../web-component/shadow-dom";
 
 const containerStyles = {
   display: "flex",
