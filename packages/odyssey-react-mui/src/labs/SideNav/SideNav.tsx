@@ -382,7 +382,7 @@ const SideNav = ({
         onClick={sideNavExpandClickHandler}
         onKeyDown={sideNavExpandKeyHandler}
         data-se="collapsed-region"
-        data-aria-label="expand side navigation"
+        aria-label="expand side navigation"
       >
         <ExpandLeftIcon sx={expandLeftIconStyles} />
       </SideNavCollapsedContainer>
