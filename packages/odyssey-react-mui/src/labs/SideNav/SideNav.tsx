@@ -38,7 +38,7 @@ import {
 import { SideNavFooterContent } from "./SideNavFooterContent";
 import { SideNavItemContentContext } from "./SideNavItemContentContext";
 
-export const DEFAULT_SIDE_NAV_WIDTH = "301px";
+export const DEFAULT_SIDE_NAV_WIDTH = "300px";
 
 const SideNavContainer = styled.div({
   display: "flex",

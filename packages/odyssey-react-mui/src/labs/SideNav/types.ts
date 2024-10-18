@@ -118,7 +118,6 @@ export type SideNavItem = {
       children?: never;
       isDefaultExpanded?: never;
       isExpanded?: never;
-      __hasParent?: never;
     }
   | {
       /**
@@ -130,7 +129,6 @@ export type SideNavItem = {
       isSectionHeader?: never;
       isDefaultExpanded?: never;
       isExpanded?: never;
-      __hasParent?: never;
     }
   | {
       /**
@@ -149,10 +147,6 @@ export type SideNavItem = {
       isExpanded?: boolean;
       isSectionHeader?: never;
       href?: never;
-      /**
-       * internal flag to determine if the side-nav item is a child
-       */
-      __hasParent?: boolean;
     }
 );
 

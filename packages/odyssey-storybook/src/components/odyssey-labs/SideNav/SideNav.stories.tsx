@@ -49,6 +49,15 @@ const storybookMeta: Meta<SideNavProps> = {
         },
       },
     },
+    expandedWidth: {
+      control: "text",
+      description: "Width of the side nav in px",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     isCollapsible: {
       control: "boolean",
       description: "Controls whether the side nav is collapsible",
@@ -273,6 +282,7 @@ export const Default: StoryObj<SideNavProps> = {
         <SideNav
           logo={props.logo}
           navHeaderText={props.navHeaderText}
+          expandedWidth={props.expandedWidth}
           isCompact={props.isCompact}
           isCollapsible={props.isCollapsible}
           onCollapse={props.onCollapse}
