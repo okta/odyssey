@@ -630,6 +630,7 @@ const DataFilters = ({
                                 variant="primary"
                                 endIcon={<CheckIcon />}
                                 type="submit"
+                                ariaLabel={t("filters.submit.label")}
                               />
                             </AutocompleteOuterContainer>
                           )}
@@ -697,6 +698,7 @@ const DataFilters = ({
                               variant="primary"
                               endIcon={<CheckIcon />}
                               type="submit"
+                              ariaLabel={t("filters.submit.label")}
                             />
                           </Box>
                         )}
