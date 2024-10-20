@@ -74,6 +74,20 @@ export type PaginationProps = {
    */
   currentRowsCount?: number;
   /**
+   * If true, the page input will be visible and the user can directly manipulate which page
+   * is visible.
+   */
+  hasPageInput?: boolean;
+  /**
+   * If true, the row count input will be visible and the user can directly manipulate how many rows
+   * are visible.
+   */
+  hasRowCountInput?: boolean;
+  /**
+   * If true, the "X - X of total X" label will be visible
+   */
+  hasRowCountLabel?: boolean;
+  /**
    * If true, the pagination controls will be disabled
    */
   isDisabled?: boolean;
@@ -140,6 +154,10 @@ export type PaginationProps = {
 
 const Pagination = ({
   currentPageLabel,
+  currentRowsCount,
+  hasPageInput = true,
+  hasRowCountInput = true,
+  hasRowCountLabel = true,
   isDisabled,
   isMoreDisabled,
   lastRow,
@@ -147,13 +165,12 @@ const Pagination = ({
   maxPageIndex,
   maxPageSize,
   nextLabel,
-  onPaginationChange,
+  onPaginationChange: onPaginationChangeProp,
   pageIndex,
   pageSize,
   previousLabel,
   rowsPerPageLabel,
   totalRows,
-  currentRowsCount,
   variant,
 }: PaginationProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
@@ -167,6 +184,15 @@ const Pagination = ({
     setRowsPerPage(pageSize);
   }, [pageIndex, pageSize]);
 
+  const onPaginationChange = useCallback(
+    ({ pageIndex, pageSize }: { pageIndex: number; pageSize: number }) => {
+      console.log({ pageIndex, pageSize });
+      onPaginationChangeProp({ pageIndex, pageSize });
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    },
+    [],
+  );
+
   const { totalRowsLabel } = usePagination({
     pageIndex,
     pageSize,
@@ -175,18 +201,30 @@ const Pagination = ({
   });
 
   const handlePaginationChange = useCallback(() => {
-    const updatedPage =
-      totalRows && page * totalRows > lastRow
-        ? Math.ceil(totalRows / rowsPerPage)
-        : page;
-    const updatedRowsPerPage =
-      totalRows && rowsPerPage > totalRows ? totalRows : rowsPerPage;
+    let updatedPage = page;
+    let updatedRowsPerPage = rowsPerPage;
+
+    if (totalRows) {
+      const maxPageIndex = Math.ceil(totalRows / updatedRowsPerPage);
+
+      // Ensure rowsPerPage does not exceed totalRows
+      if (updatedRowsPerPage > totalRows) {
+        updatedRowsPerPage = totalRows;
+      }
+
+      // Ensure page is within valid range
+      if (updatedPage > maxPageIndex) {
+        updatedPage = maxPageIndex;
+      } else if (updatedPage < 1) {
+        updatedPage = 1;
+      }
+    }
 
     onPaginationChange({
       pageIndex: updatedPage,
       pageSize: updatedRowsPerPage,
     });
-  }, [page, rowsPerPage, lastRow, onPaginationChange, totalRows]);
+  }, [page, rowsPerPage, onPaginationChange, totalRows]);
 
   // The following handlers use React.KeyboardEvent (rather than just KeyboardEvent) becuase React.KeyboardEvent
   // is generic, while plain KeyboardEvent is not. We need this generic so we can specify the HTMLInputElement,
@@ -288,28 +326,32 @@ const Pagination = ({
   return variant === "paged" ? (
     <PaginationContainer>
       <PaginationSegment odysseyDesignTokens={odysseyDesignTokens}>
-        <Box>
+        {hasRowCountInput && (
+          <Box>
+            <Paragraph component="span" color="textSecondary">
+              {rowsPerPageLabel}
+            </Paragraph>
+            <PaginationInput
+              odysseyDesignTokens={odysseyDesignTokens}
+              type="number"
+              value={rowsPerPage}
+              onChange={setRowsPerPageFromEvent}
+              onBlur={handlePaginationChange}
+              onKeyDown={handleRowsPerPageSubmit}
+              disabled={isDisabled}
+              inputProps={rowsPerPageInputProps}
+            />
+          </Box>
+        )}
+        {hasRowCountLabel && (
           <Paragraph component="span" color="textSecondary">
-            {rowsPerPageLabel}
+            {totalRowsLabel}
           </Paragraph>
-          <PaginationInput
-            odysseyDesignTokens={odysseyDesignTokens}
-            type="number"
-            value={rowsPerPage}
-            onChange={setRowsPerPageFromEvent}
-            onBlur={handlePaginationChange}
-            onKeyDown={handleRowsPerPageSubmit}
-            disabled={isDisabled}
-            inputProps={rowsPerPageInputProps}
-          />
-        </Box>
-        <Paragraph component="span" color="textSecondary">
-          {totalRowsLabel}
-        </Paragraph>
+        )}
       </PaginationSegment>
 
       <PaginationSegment odysseyDesignTokens={odysseyDesignTokens}>
-        {totalRows && (
+        {totalRows && hasPageInput && (
           <Box>
             <Paragraph component="span" color="textSecondary">
               {currentPageLabel}

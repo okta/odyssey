@@ -78,6 +78,41 @@ const storyBookMeta: Meta<PaginationProps> = {
       },
     },
 
+    hasPageInput: {
+      control: "boolean",
+      description:
+        "If true, the page input will be visible and the user can directly manipulate which page is visible.",
+      table: {
+        type: {
+          summary: "boolean",
+          default: "true",
+        },
+      },
+    },
+
+    hasRowCountInput: {
+      control: "boolean",
+      description:
+        "If true, the row count input will be visible and the user can directly manipulate how many rows are visible.",
+      table: {
+        type: {
+          summary: "boolean",
+          default: "true",
+        },
+      },
+    },
+
+    hasRowCountLabel: {
+      control: "boolean",
+      description: "If true, the pagination controls will be disabled.",
+      table: {
+        type: {
+          summary: "boolean",
+          default: "true",
+        },
+      },
+    },
+
     isDisabled: {
       control: "boolean",
       description: "If true, the pagination controls will be disabled",
@@ -188,19 +223,14 @@ const storyBookMeta: Meta<PaginationProps> = {
       },
     },
   },
-
-  decorators: [MuiThemeDecorator],
-  tags: ["autodocs"],
-};
-
-export default storyBookMeta;
-
-export const Default: StoryObj<PaginationProps> = {
   args: {
     pageIndex: 1,
     pageSize: 20,
     lastRow: 20,
     currentRowsCount: 20,
+    hasPageInput: true,
+    hasRowCountInput: true,
+    hasRowCountLabel: true,
     isDisabled: false,
     variant: "paged",
     rowsPerPageLabel: "Rows per page",
@@ -211,7 +241,30 @@ export const Default: StoryObj<PaginationProps> = {
     totalRows: 100,
   },
 
+  decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
+};
+
+export default storyBookMeta;
+
+export const Default: StoryObj<PaginationProps> = {
   render: (props) => {
     return <Pagination {...props} />;
+  },
+};
+
+export const LoadMore: StoryObj<PaginationProps> = {
+  ...Default,
+  args: {
+    variant: "loadMore",
+  },
+};
+
+export const JustButtons: StoryObj<PaginationProps> = {
+  ...Default,
+  args: {
+    hasPageInput: false,
+    hasRowCountInput: false,
+    hasRowCountLabel: false,
   },
 };
