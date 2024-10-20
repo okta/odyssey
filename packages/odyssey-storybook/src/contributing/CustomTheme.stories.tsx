@@ -63,6 +63,7 @@ export const ButtonStory: StoryObj = {
       );
     },
   ],
+  name: "Button",
   render: function C() {
     return (
       <div>
@@ -71,8 +72,6 @@ export const ButtonStory: StoryObj = {
     );
   },
 };
-
-ButtonStory.storyName = "Button";
 
 export const TextFieldStory: StoryObj = {
   decorators: [
@@ -92,6 +91,7 @@ export const TextFieldStory: StoryObj = {
       );
     },
   ],
+  name: "TextField",
   render: function C() {
     return (
       <>
@@ -101,8 +101,6 @@ export const TextFieldStory: StoryObj = {
     );
   },
 };
-
-TextFieldStory.storyName = "TextField";
 
 export const RadioGroupStory: StoryObj = {
   decorators: [
@@ -122,6 +120,7 @@ export const RadioGroupStory: StoryObj = {
       );
     },
   ],
+  name: "RadioGroup",
   render: function C() {
     return (
       <RadioGroup
@@ -138,9 +137,8 @@ export const RadioGroupStory: StoryObj = {
   },
 };
 
-RadioGroupStory.storyName = "RadioGroup";
-
 export const CustomComponentStory: StoryObj = {
+  name: "CustomComponent",
   render: function C() {
     const themeOverrides: ThemeOptions = useMemo(() => {
       return {
