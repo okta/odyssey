@@ -19,6 +19,7 @@ export const defaultSupportedLanguages = [
   "es", // Spanish
   "fi", // Finnish
   "fr", // French
+  "ht", // Haitian Creole
   "hu", // Hungarian
   "id", // Indonesian
   "it", // Italian

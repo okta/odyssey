@@ -189,7 +189,7 @@ export const Clickable: StoryObj<TagProps> = {
     label: "Starship",
   },
   play: async ({ args, canvasElement, step }) => {
-    await step("remove the tag on click", async () => {
+    await step("click the tag", async () => {
       const canvas = within(canvasElement);
       const tag = canvas.getByText(args.label);
       await userEvent.click(tag);
