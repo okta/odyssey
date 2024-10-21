@@ -12,7 +12,6 @@
 
 import { act } from "@testing-library/react";
 
-import { captureConsoleError } from "../test-utils/captureConsoleError";
 import { reactInWebComponentElementName } from "../web-component/renderReactInWebComponent";
 import { renderOktaUiShell } from "./renderOktaUiShell";
 
@@ -114,33 +113,28 @@ describe("renderOktaUiShell", () => {
 
   test("renders `<slot>` in the event of an error", async () => {
     const rootElement = document.createElement("div");
+    const consoleError = jest.fn();
     const onError = jest.fn();
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(rootElement);
 
-    const replacementConsoleError = jest.fn();
+    jest.spyOn(console, "error").mockImplementation(consoleError);
 
-    captureConsoleError({
-      callback: () => {
-        // This needs to be wrapped in `act` because the web component mounts the React app, and React events have to be wrapped in `act`.
-        act(() => {
-          const { setComponentProps } = renderOktaUiShell({
-            onError,
-            rootElement,
-          });
+    act(() => {
+      const { setComponentProps } = renderOktaUiShell({
+        onError,
+        rootElement,
+      });
 
-          setComponentProps(
-            // @ts-expect-error We're purposefully testing an error state, so we need to send something that will cause an error.
-            {},
-          );
-        });
-      },
-      replacementConsoleError,
+      setComponentProps(
+        // @ts-expect-error We're purposefully testing an error state, so we need to send something that will cause an error.
+        {},
+      );
     });
 
     expect(onError).toHaveBeenCalledTimes(1);
-    expect(replacementConsoleError).toHaveBeenCalledTimes(1);
+    expect(consoleError).toHaveBeenCalledTimes(1);
     expect(
       rootElement
         .querySelector(reactInWebComponentElementName)!
