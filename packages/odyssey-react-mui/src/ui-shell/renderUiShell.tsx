@@ -55,7 +55,7 @@ export const renderUiShell = ({
     subscribe: subscribeToReactAppSubscribed,
   });
 
-  const slottedComponents = Object.fromEntries(
+  const slottedElements = Object.fromEntries(
     Object.entries(optionalComponentSlotNames).map(
       ([optionalComponentKey, slotName]) => {
         const element = document.createElement("div");
@@ -65,12 +65,15 @@ export const renderUiShell = ({
         return [optionalComponentKey, element];
       },
     ),
-  );
+  ) as Record<
+    keyof Required<UiShellProps>["optionalComponents"],
+    HTMLDivElement
+  >;
 
   const webComponentChildren =
-    Object.values(slottedComponents).concat(appElement);
+    Object.values(slottedElements).concat(appElement);
 
-  const reactInWebComponentElement = renderReactInWebComponent({
+  const uiShellElement = renderReactInWebComponent({
     getReactComponent: (shadowDomElements) => (
       <ErrorBoundary fallback={<slot />} onError={onError}>
         <UiShell
@@ -96,8 +99,8 @@ export const renderUiShell = ({
   });
 
   return {
-    reactInWebComponentElement,
     setComponentProps: publishAfterReactAppReadyForProps,
-    slottedComponents,
+    slottedElements,
+    uiShellElement,
   };
 };

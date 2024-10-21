@@ -18,7 +18,7 @@ import {
   type ShadowDomElements,
 } from "./shadow-dom";
 
-export const reactInWebComponentElementName = "odyssey-react-web-component";
+export const reactWebComponentElementName = "odyssey-react-web-component";
 
 export type GetReactComponentInWebComponent = (
   shadowDomElements: ShadowDomElements,
@@ -63,9 +63,9 @@ export class ReactInWebComponentElement extends HTMLElement {
   }
 }
 
-if (!customElements.get(reactInWebComponentElementName)) {
+if (!customElements.get(reactWebComponentElementName)) {
   customElements.define(
-    reactInWebComponentElementName,
+    reactWebComponentElementName,
     ReactInWebComponentElement,
   );
 }

@@ -12,7 +12,7 @@
 
 import { act } from "@testing-library/react";
 
-import { reactInWebComponentElementName } from "../web-component/renderReactInWebComponent";
+import { reactWebComponentElementName } from "../web-component/renderReactInWebComponent";
 import { renderUiShell } from "./renderUiShell";
 
 describe("renderUiShell", () => {
@@ -39,7 +39,7 @@ describe("renderUiShell", () => {
 
     expect(
       Array.from(
-        rootElement.querySelector(reactInWebComponentElementName)!.shadowRoot!
+        rootElement.querySelector(reactWebComponentElementName)!.shadowRoot!
           .children,
       ).length,
     ).toBeGreaterThan(0);
@@ -78,7 +78,7 @@ describe("renderUiShell", () => {
     });
 
     expect(
-      rootElement.querySelector(reactInWebComponentElementName)!.shadowRoot,
+      rootElement.querySelector(reactWebComponentElementName)!.shadowRoot,
     ).toHaveTextContent(navHeaderText);
   });
 
@@ -107,7 +107,7 @@ describe("renderUiShell", () => {
     });
 
     expect(
-      rootElement.querySelector(reactInWebComponentElementName)!.shadowRoot,
+      rootElement.querySelector(reactWebComponentElementName)!.shadowRoot,
     ).toHaveTextContent(navHeaderText);
   });
 
@@ -141,7 +141,7 @@ describe("renderUiShell", () => {
     expect(consoleError).toHaveBeenCalledTimes(1);
     expect(
       rootElement
-        .querySelector(reactInWebComponentElementName)!
+        .querySelector(reactWebComponentElementName)!
         .shadowRoot?.querySelector("slot"),
     ).toBeInstanceOf(HTMLSlotElement);
   });

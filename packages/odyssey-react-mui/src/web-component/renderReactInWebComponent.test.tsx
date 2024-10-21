@@ -14,7 +14,7 @@ import { waitFor } from "@testing-library/dom";
 
 import {
   ReactInWebComponentElement,
-  reactInWebComponentElementName,
+  reactWebComponentElementName,
   renderReactInWebComponent,
 } from "./renderReactInWebComponent";
 
@@ -81,7 +81,7 @@ describe("renderReactInWebComponent", () => {
     });
 
     expect(
-      document.querySelectorAll(reactInWebComponentElementName),
+      document.querySelectorAll(reactWebComponentElementName),
     ).toHaveLength(2);
   });
 
