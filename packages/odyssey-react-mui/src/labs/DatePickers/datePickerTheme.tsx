@@ -11,7 +11,7 @@
  */
 
 import { CSSInterpolation } from "@mui/material/styles";
-import { createOdysseyMuiTheme } from "../theme";
+import { createOdysseyMuiTheme } from "../../theme";
 import { ThemeOptions } from "@mui/material";
 import * as odysseyTokens from "@okta/odyssey-design-tokens";
 
@@ -27,7 +27,7 @@ type ThemeStyles = ({
 
 type StateStyles = Record<string, ThemeStyles>;
 
-const dateStyles: StateStyles = {
+export const dateStyles: StateStyles = {
   default: ({ theme }) => ({
     color: theme.palette.text.primary,
   }),
