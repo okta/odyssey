@@ -35,7 +35,7 @@ import { expect } from "@storybook/jest";
 import { axeRun } from "../../../axe-util";
 import type { PlaywrightProps } from "../storybookTypes";
 
-const storybookMeta: Meta<MenuButtonProps> = {
+const storybookMeta: Meta<typeof MenuButton> = {
   title: "MUI Components/Menu Button",
   component: MenuButton,
   argTypes: {
