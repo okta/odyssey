@@ -181,7 +181,7 @@ const ComposablePicker = <
   );
 };
 
-// Need the `typeof Autocomplete` because generics don't get passed through
+// Need the `typeof ComposablePicker` because generics don't get passed through
 const MemoizedComposablePicker = memo(
   ComposablePicker,
 ) as typeof ComposablePicker;
