@@ -147,7 +147,7 @@ const OptionAdornment = ({
         adornmentSize={adornmentSize}
         odysseyDesignTokens={odysseyDesignTokens}
       >
-        <>{adornment}</>
+        {adornment}
       </OptionAdornmentContainer>
     );
   }
