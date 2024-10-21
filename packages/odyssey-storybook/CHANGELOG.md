@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.25.0](https://github.com/okta/odyssey/compare/v1.24.1...v1.25.0) (2024-10-15)
+
+### Features
+
+- **odyssey-react-mui:** Add haitian creole to suported languages ([#2382](https://github.com/okta/odyssey/issues/2382)) ([71c40b5](https://github.com/okta/odyssey/commit/71c40b5990c074bf409300b02177ba0ff163aaed))
+
 ## [1.24.1](https://github.com/okta/odyssey/compare/v1.24.0...v1.24.1) (2024-10-04)
 
 **Note:** Version bump only for package @okta/odyssey-storybook

@@ -578,7 +578,7 @@ export const components = ({
       },
       styleOverrides: {
         root: ({ ownerState, theme }) => {
-          const contrastMode = theme.odysseyContrastMode;
+          const contrastMode = theme.contrastMode;
 
           return {
             minWidth: "unset",
@@ -1030,7 +1030,8 @@ export const components = ({
       },
       styleOverrides: {
         root: ({ ownerState, theme }) => {
-          const contrastMode = theme.odysseyContrastMode;
+          const contrastMode = theme.contrastMode;
+
           return {
             height: "auto",
             paddingBlock: `calc(${odysseyTokens.Spacing2} - ${odysseyTokens.BorderWidthMain})`,
@@ -1055,6 +1056,10 @@ export const components = ({
               color: odysseyTokens.TypographyColorDisabled,
 
               [`& .${chipClasses.deleteIcon}`]: {
+                color: odysseyTokens.HueNeutral300,
+              },
+
+              [`& .${chipClasses.icon}`]: {
                 color: odysseyTokens.HueNeutral300,
               },
             },

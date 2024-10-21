@@ -23,4 +23,4 @@ if ! yarn workspace @okta/odyssey-storybook ci:coverage; then
 fi
 
 echo "Playwright code coverage tests passed!"
-report_results SUCCESS publish_type_and_result_dir_but_succeed_if_no_results
+exit $SUCCESS
