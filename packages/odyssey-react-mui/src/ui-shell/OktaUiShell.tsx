@@ -10,7 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, useEffect, useState, type ReactNode } from "react";
+import {
+  memo,
+  useEffect,
+  useState,
+  type ReactNode,
+  type SetStateAction,
+} from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 import { SideNav, type SideNavProps } from "../labs/SideNav";
@@ -51,7 +57,9 @@ export type OktaUiShellProps = {
     searchField?: TopNavProps["SearchFieldComponent"];
   };
   subscribeToPropChanges: (
-    subscription: (componentProps: OktaUiShellComponentProps) => void,
+    subscription: (
+      componentProps: SetStateAction<OktaUiShellComponentProps>,
+    ) => void,
   ) => () => void;
 } & ShadowDomElements;
 
@@ -68,7 +76,8 @@ const OktaUiShell = ({
 
   useEffect(() => {
     const unsubscribe = subscribeToPropChanges((componentProps) => {
-      setComponentProps(componentProps);
+      // If for some reason nothing is passed as `componentProps`, we fallback on `defaultComponentProps` as a safety mechanism to ensure nothing breaks.
+      setComponentProps(componentProps || defaultComponentProps);
     });
 
     onSubscriptionCreated();

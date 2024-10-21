@@ -132,7 +132,7 @@ describe("renderOktaUiShell", () => {
 
           setComponentProps(
             // @ts-expect-error We're purposefully testing an error state, so we need to send something that will cause an error.
-            null,
+            {},
           );
         });
       },

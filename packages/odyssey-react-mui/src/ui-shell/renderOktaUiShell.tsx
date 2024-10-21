@@ -10,7 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { type SetStateAction } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+
 import { bufferUntil } from "./bufferUntil";
 import { createMessageBus } from "./createMessageBus";
 import {
@@ -45,7 +47,7 @@ export const renderOktaUiShell = ({
   rootElement: HTMLElement;
 }) => {
   const { publish: publishPropChanges, subscribe: subscribeToPropChanges } =
-    createMessageBus<OktaUiShellComponentProps>();
+    createMessageBus<SetStateAction<OktaUiShellComponentProps>>();
 
   const {
     publish: publishSubscriptionCreated,
