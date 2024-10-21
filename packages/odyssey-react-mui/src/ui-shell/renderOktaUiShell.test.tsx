@@ -119,7 +119,9 @@ describe("renderOktaUiShell", () => {
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(rootElement);
 
-    jest.spyOn(console, "error").mockImplementation(consoleError);
+    const consoleErrorSpy = jest
+      .spyOn(console, "error")
+      .mockImplementation(consoleError);
 
     act(() => {
       const { setComponentProps } = renderOktaUiShell({
@@ -132,6 +134,8 @@ describe("renderOktaUiShell", () => {
         {},
       );
     });
+
+    consoleErrorSpy.mockRestore();
 
     expect(onError).toHaveBeenCalledTimes(1);
     expect(consoleError).toHaveBeenCalledTimes(1);
