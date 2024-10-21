@@ -13,9 +13,9 @@
 import { act } from "@testing-library/react";
 
 import { reactInWebComponentElementName } from "../web-component/renderReactInWebComponent";
-import { renderOktaUiShell } from "./renderOktaUiShell";
+import { renderUiShell } from "./renderUiShell";
 
-describe("renderOktaUiShell", () => {
+describe("renderUiShell", () => {
   afterEach(() => {
     // This needs to be wrapped in `act` because the web component unmounts the React app, and React events have to be wrapped in `act`.
     act(() => {
@@ -24,7 +24,7 @@ describe("renderOktaUiShell", () => {
     });
   });
 
-  test("renders `OktaUiShell` component in a web component", async () => {
+  test("renders `UiShell` component in a web component", async () => {
     const rootElement = document.createElement("div");
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
@@ -32,7 +32,7 @@ describe("renderOktaUiShell", () => {
 
     // This needs to be wrapped in `act` because the web component mounts the React app, and React events have to be wrapped in `act`.
     act(() => {
-      renderOktaUiShell({
+      renderUiShell({
         rootElement,
       });
     });
@@ -45,7 +45,7 @@ describe("renderOktaUiShell", () => {
     ).toBeGreaterThan(0);
   });
 
-  test("renders `OktaUiShell` with updated props", async () => {
+  test("renders `UiShell` with updated props", async () => {
     const rootElement = document.createElement("div");
     const navHeaderText = "Hello World!";
 
@@ -53,16 +53,16 @@ describe("renderOktaUiShell", () => {
     document.body.append(rootElement);
 
     let setComponentProps: ReturnType<
-      typeof renderOktaUiShell
+      typeof renderUiShell
     >["setComponentProps"];
 
     // This needs to be wrapped in `act` because the web component mounts the React app, and React events have to be wrapped in `act`.
     act(() => {
-      const renderOktaUiShellReturnValue = renderOktaUiShell({
+      const renderUiShellReturnValue = renderUiShell({
         rootElement,
       });
 
-      setComponentProps = renderOktaUiShellReturnValue.setComponentProps;
+      setComponentProps = renderUiShellReturnValue.setComponentProps;
     });
 
     act(() => {
@@ -82,7 +82,7 @@ describe("renderOktaUiShell", () => {
     ).toHaveTextContent(navHeaderText);
   });
 
-  test("renders `OktaUiShell` with immediately updated props", async () => {
+  test("renders `UiShell` with immediately updated props", async () => {
     const rootElement = document.createElement("div");
     const navHeaderText = "Hello World!";
 
@@ -91,7 +91,7 @@ describe("renderOktaUiShell", () => {
 
     // This needs to be wrapped in `act` because the web component mounts the React app, and React events have to be wrapped in `act`.
     act(() => {
-      const { setComponentProps } = renderOktaUiShell({
+      const { setComponentProps } = renderUiShell({
         rootElement,
       });
 
@@ -124,7 +124,7 @@ describe("renderOktaUiShell", () => {
       .mockImplementation(consoleError);
 
     act(() => {
-      const { setComponentProps } = renderOktaUiShell({
+      const { setComponentProps } = renderUiShell({
         onError,
         rootElement,
       });

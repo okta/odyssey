@@ -10,4 +10,4 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export { renderOktaUiShell } from "@okta/odyssey-react-mui/labs";
+export { renderUiShell } from "@okta/odyssey-react-mui/labs";

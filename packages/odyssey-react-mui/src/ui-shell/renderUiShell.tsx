@@ -15,15 +15,11 @@ import { ErrorBoundary } from "react-error-boundary";
 
 import { bufferUntil } from "./bufferUntil";
 import { createMessageBus } from "./createMessageBus";
-import {
-  OktaUiShell,
-  OktaUiShellProps,
-  type OktaUiShellComponentProps,
-} from "./OktaUiShell";
+import { UiShell, UiShellProps, type UiShellComponentProps } from "./UiShell";
 import { renderReactInWebComponent } from "../web-component/renderReactInWebComponent";
 
 export const optionalComponentSlotNames: Record<
-  keyof Required<OktaUiShellProps>["optionalComponents"],
+  keyof Required<UiShellProps>["optionalComponents"],
   string
 > = {
   additionalTopNavItems: "additional-top-nav-items",
@@ -37,7 +33,7 @@ export const defaultAppElement = document.createElement("div");
 
 defaultAppElement.setAttribute("id", defaultReactAppRootId);
 
-export const renderOktaUiShell = ({
+export const renderUiShell = ({
   appElement = defaultAppElement,
   onError = console.error,
   rootElement,
@@ -47,7 +43,7 @@ export const renderOktaUiShell = ({
   rootElement: HTMLElement;
 }) => {
   const { publish: publishPropChanges, subscribe: subscribeToPropChanges } =
-    createMessageBus<SetStateAction<OktaUiShellComponentProps>>();
+    createMessageBus<SetStateAction<UiShellComponentProps>>();
 
   const {
     publish: publishSubscriptionCreated,
@@ -77,7 +73,7 @@ export const renderOktaUiShell = ({
   const reactInWebComponentElement = renderReactInWebComponent({
     getReactComponent: (shadowDomElements) => (
       <ErrorBoundary fallback={<slot />} onError={onError}>
-        <OktaUiShell
+        <UiShell
           appComponent={<slot />}
           appRootElement={shadowDomElements.appRootElement}
           emotionRootElement={shadowDomElements.emotionRootElement}

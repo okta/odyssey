@@ -13,19 +13,15 @@
 import { render, within } from "@testing-library/react";
 
 import { Dialog } from "../Dialog";
-import {
-  defaultComponentProps,
-  OktaUiShell,
-  OktaUiShellProps,
-} from "./OktaUiShell";
+import { defaultComponentProps, UiShell, UiShellProps } from "./UiShell";
 import { ReactElement } from "react";
 
-describe("OktaUiShell", () => {
+describe("UiShell", () => {
   test("renders `appRootElement`", async () => {
     const appRootElement = document.createElement("div");
 
     render(
-      <OktaUiShell
+      <UiShell
         appComponent={<div />}
         appRootElement={appRootElement}
         emotionRootElement={document.createElement("div")}
@@ -60,7 +56,7 @@ describe("OktaUiShell", () => {
     const emotionRootElement = document.createElement("div");
 
     render(
-      <OktaUiShell
+      <UiShell
         appComponent={<div />}
         appRootElement={document.createElement("div")}
         emotionRootElement={emotionRootElement}
@@ -76,7 +72,7 @@ describe("OktaUiShell", () => {
     const testId = "app-component";
 
     const { container } = render(
-      <OktaUiShell
+      <UiShell
         appComponent={<div data-testid={testId} />}
         appRootElement={document.createElement("div")}
         emotionRootElement={document.createElement("div")}
@@ -90,11 +86,11 @@ describe("OktaUiShell", () => {
 
   test("renders `componentSlots`", async () => {
     const optionalComponentTestIds: Array<
-      keyof Required<OktaUiShellProps>["optionalComponents"]
+      keyof Required<UiShellProps>["optionalComponents"]
     > = ["additionalTopNavItems", "footer", "logo", "searchField"];
 
     const { container } = render(
-      <OktaUiShell
+      <UiShell
         appComponent={<div />}
         appRootElement={document.createElement("div")}
         emotionRootElement={document.createElement("div")}
@@ -105,10 +101,7 @@ describe("OktaUiShell", () => {
               testId,
               <div data-testid={testId} />,
             ]),
-          ) as Record<
-            keyof OktaUiShellProps["optionalComponents"],
-            ReactElement
-          >
+          ) as Record<keyof UiShellProps["optionalComponents"], ReactElement>
         }
         subscribeToPropChanges={() => () => {}}
       />,
@@ -128,7 +121,7 @@ describe("OktaUiShell", () => {
     const subscribeToPropChanges = jest.fn(() => unsubscribeFromPropChanges);
 
     const { unmount } = render(
-      <OktaUiShell
+      <UiShell
         appComponent={<div />}
         appRootElement={document.createElement("div")}
         emotionRootElement={document.createElement("div")}
@@ -151,7 +144,7 @@ describe("OktaUiShell", () => {
     document.body.append(rootElement);
 
     // This is the subscription we give the component, and then once subscribed, we're going to immediately call it with new props.
-    const subscribeToPropChanges: OktaUiShellProps["subscribeToPropChanges"] = (
+    const subscribeToPropChanges: UiShellProps["subscribeToPropChanges"] = (
       subscription,
     ) => {
       subscription({
@@ -172,7 +165,7 @@ describe("OktaUiShell", () => {
     };
 
     const { container } = render(
-      <OktaUiShell
+      <UiShell
         appComponent={<div />}
         appRootElement={document.createElement("div")}
         emotionRootElement={document.createElement("div")}
@@ -191,7 +184,7 @@ describe("OktaUiShell", () => {
     document.body.append(rootElement);
 
     // This is the subscription we give the component, and then once subscribed, we're going to immediately call it with new props.
-    const subscribeToPropChanges: OktaUiShellProps["subscribeToPropChanges"] = (
+    const subscribeToPropChanges: UiShellProps["subscribeToPropChanges"] = (
       subscription,
     ) => {
       // @ts-expect-error This unit test is checking what happens when we don't pass a value.
@@ -201,7 +194,7 @@ describe("OktaUiShell", () => {
     };
 
     const { container } = render(
-      <OktaUiShell
+      <UiShell
         appComponent={<div />}
         appRootElement={document.createElement("div")}
         emotionRootElement={document.createElement("div")}
@@ -223,7 +216,7 @@ describe("OktaUiShell", () => {
     const stateUpdater = jest.fn(() => defaultComponentProps);
 
     // This is the subscription we give the component, and then once subscribed, we're going to immediately call it to see if it passes us the previous state.
-    const subscribeToPropChanges: OktaUiShellProps["subscribeToPropChanges"] = (
+    const subscribeToPropChanges: UiShellProps["subscribeToPropChanges"] = (
       subscription,
     ) => {
       subscription(stateUpdater);
@@ -232,7 +225,7 @@ describe("OktaUiShell", () => {
     };
 
     render(
-      <OktaUiShell
+      <UiShell
         appComponent={<div />}
         appRootElement={document.createElement("div")}
         emotionRootElement={document.createElement("div")}

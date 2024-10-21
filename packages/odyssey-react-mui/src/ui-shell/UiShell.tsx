@@ -28,7 +28,7 @@ const containerStyles = {
   display: "flex",
 };
 
-export type OktaUiShellComponentProps = {
+export type UiShellComponentProps = {
   sideNavProps: Omit<SideNavProps, "logo" | "footerComponent">;
   topNavProps: Omit<
     TopNavProps,
@@ -36,7 +36,7 @@ export type OktaUiShellComponentProps = {
   >;
 };
 
-export const defaultComponentProps: OktaUiShellComponentProps = {
+export const defaultComponentProps: UiShellComponentProps = {
   sideNavProps: {
     navHeaderText: "",
     sideNavItems: [],
@@ -46,7 +46,7 @@ export const defaultComponentProps: OktaUiShellComponentProps = {
   },
 };
 
-export type OktaUiShellProps = {
+export type UiShellProps = {
   appComponent: ReactNode;
   onError?: () => void;
   onSubscriptionCreated: () => void;
@@ -58,12 +58,12 @@ export type OktaUiShellProps = {
   };
   subscribeToPropChanges: (
     subscription: (
-      componentProps: SetStateAction<OktaUiShellComponentProps>,
+      componentProps: SetStateAction<UiShellComponentProps>,
     ) => void,
   ) => () => void;
 } & ShadowDomElements;
 
-const OktaUiShell = ({
+const UiShell = ({
   appComponent,
   appRootElement,
   emotionRootElement,
@@ -71,7 +71,7 @@ const OktaUiShell = ({
   onSubscriptionCreated,
   optionalComponents,
   subscribeToPropChanges,
-}: OktaUiShellProps) => {
+}: UiShellProps) => {
   const [componentProps, setComponentProps] = useState(defaultComponentProps);
 
   useEffect(() => {
@@ -126,7 +126,7 @@ const OktaUiShell = ({
   );
 };
 
-const MemoizedOktaUiShell = memo(OktaUiShell);
-MemoizedOktaUiShell.displayName = "OktaUiShell";
+const MemoizedUiShell = memo(UiShell);
+MemoizedUiShell.displayName = "UiShell";
 
-export { MemoizedOktaUiShell as OktaUiShell };
+export { MemoizedUiShell as UiShell };
