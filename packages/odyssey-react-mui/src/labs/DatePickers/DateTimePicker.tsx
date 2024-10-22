@@ -14,7 +14,7 @@ import { memo, useCallback, useEffect, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import {
   type DateTimePickerSlots,
-  MobileDateTimePicker as MuiDateTimePicker,
+  DateTimePicker as MuiDateTimePicker,
   DateTimePickerProps as MuiDateTimePickerProps,
   DateTimePickerSlotProps,
 } from "@mui/x-date-pickers";
@@ -60,8 +60,6 @@ const TimeZonePickerContainer = styled("div", {
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
   marginBlockStart: odysseyDesignTokens.Spacing3,
 }));
-
-// const formatDayOfWeek = (date: DateTime) => date.toFormat("EEE");
 
 type RenderDateTimeFieldProps = {
   defaultValue: DateTimeFieldProps["defaultValue"];

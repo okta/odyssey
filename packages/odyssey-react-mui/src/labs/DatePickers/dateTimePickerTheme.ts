@@ -85,13 +85,6 @@ const theme: ThemeOptions = {
         }),
       },
     },
-    MuiPickersToolbar: {
-      styleOverrides: {
-        // content: {
-        //   alignItems: "center",
-        // },
-      },
-    },
     MuiMultiSectionDigitalClockSection: {
       styleOverrides: {
         root: {
@@ -132,9 +125,6 @@ const theme: ThemeOptions = {
             },
           },
         }),
-        timeContainer: {
-          // alignItems: "flex-start",
-        },
         timeDigitsContainer: {
           alignItems: "center",
         },
