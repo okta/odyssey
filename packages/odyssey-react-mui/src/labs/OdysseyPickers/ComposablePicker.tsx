@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 
 import { AutocompleteProps } from "../../Autocomplete";
+import { PickerVirtualizationListBox } from "./PickerVirtualizationListBox";
 import { useAutocomplete } from "../../useAutocomplete";
 
 export const adornmentSizeValues = ["small", "large"] as const;
@@ -99,7 +100,7 @@ const ComposablePicker = <
   isLoading,
   isOptional = false,
   isReadOnly,
-  isVirtualized: isVirtualizedProp = false,
+  isVirtualized = false,
   hint,
   HintLinkComponent,
   label,
@@ -121,12 +122,11 @@ const ComposablePicker = <
 >) => {
   const {
     inputValueProp,
-    isVirtualized,
+    isVirtualizedRef,
     onChange,
     onInputChange,
     renderInput,
     valueProps,
-    ListboxComponent,
   } = useAutocomplete<OptionType, HasMultipleChoices, IsCustomValueAllowed>({
     ariaDescribedBy,
     defaultValue,
@@ -138,7 +138,7 @@ const ComposablePicker = <
     inputValue,
     isFullWidth,
     isOptional,
-    isVirtualized: isVirtualizedProp,
+    isVirtualized,
     label,
     name: nameOverride,
     onChange: onChangeProp,
@@ -152,7 +152,9 @@ const ComposablePicker = <
       {...valueProps}
       {...inputValueProp}
       // conditionally provide the ListboxComponent if this needs to be virtualized
-      {...(isVirtualized.current && { ListboxComponent })}
+      {...(isVirtualizedRef.current && {
+        ListboxComponent: PickerVirtualizationListBox,
+      })}
       // AutoComplete is wrapped in a div within MUI which does not get the disabled attr. So this aria-disabled gets set in the div
       aria-disabled={isDisabled}
       disableCloseOnSelect={hasMultipleChoices}
