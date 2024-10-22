@@ -224,60 +224,44 @@ export type OptionLabelOnly = BaseOptionType;
 export type LabelDescription = BaseOptionType & { description?: string };
 export type LabelDescriptionMetadata = LabelDescription & Metadata;
 
-export type BasicPickerProps<
+export type PickerProps<
   OptionType extends LabelDescription | LabelDescriptionMetadata,
   HasMultipleChoices extends boolean | undefined,
   IsCustomValueAllowed extends boolean | undefined,
 > = BasePickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>;
 
-export type BasicPickerComponentType = {
+export type PickerComponentType = {
   <
     OptionType extends OptionLabelOnly,
     HasMultipleChoices extends boolean | undefined,
     IsCustomValueAllowed extends boolean | undefined,
   >(
-    props: BasicPickerProps<
-      OptionType,
-      HasMultipleChoices,
-      IsCustomValueAllowed
-    >,
+    props: PickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>,
   ): ReactElement;
   <
     OptionType extends LabelDescriptionMetadata,
     HasMultipleChoices extends boolean | undefined,
     IsCustomValueAllowed extends boolean | undefined,
   >(
-    props: BasicPickerProps<
-      OptionType,
-      HasMultipleChoices,
-      IsCustomValueAllowed
-    >,
+    props: PickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>,
   ): ReactElement;
   <
     OptionType extends LabelDescription,
     HasMultipleChoices extends boolean | undefined,
     IsCustomValueAllowed extends boolean | undefined,
   >(
-    props: BasicPickerProps<
-      OptionType,
-      HasMultipleChoices,
-      IsCustomValueAllowed
-    >,
+    props: PickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>,
   ): ReactElement;
   <
     OptionType extends LabelDescriptionMetadata,
     HasMultipleChoices extends boolean | undefined,
     IsCustomValueAllowed extends boolean | undefined,
   >(
-    props: BasicPickerProps<
-      OptionType,
-      HasMultipleChoices,
-      IsCustomValueAllowed
-    >,
+    props: PickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>,
   ): ReactElement;
 };
 
-const BasicPicker: BasicPickerComponentType = <
+const Picker: PickerComponentType = <
   OptionType extends
     | OptionLabelOnly
     | LabelDescription
@@ -312,7 +296,7 @@ const BasicPicker: BasicPickerComponentType = <
   value,
   testId,
   translate,
-}: BasicPickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
+}: PickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const customOptionRender = useCallback<
@@ -382,7 +366,6 @@ const BasicPicker: BasicPickerComponentType = <
       onFocus={onFocus}
       options={options}
       renderOption={customOptionRender}
-      // renderTags={// renderTags}
       value={value}
       testId={testId}
       translate={translate}
@@ -391,8 +374,8 @@ const BasicPicker: BasicPickerComponentType = <
 };
 
 // Need the `as BasePickerType` because generics don't get passed through
-const MemoizedBasicPicker = memo(BasicPicker) as BasePickerType;
+const MemoizedPicker = memo(Picker) as BasePickerType;
 
-MemoizedBasicPicker.displayName = "BasicPicker";
+MemoizedPicker.displayName = "Picker";
 
-export { MemoizedBasicPicker as BasicPicker };
+export { MemoizedPicker as Picker };

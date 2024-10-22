@@ -115,7 +115,7 @@ type PickerWithOptionAdornmentType = typeof PickerWithOptionAdornment<
 >;
 
 const storybookMeta: Meta<PickerWithOptionAdornmentType> = {
-  title: "Labs Components/Pickers/PickerWithOptionAdornment",
+  title: "Labs Components/Odyssey Pickers/PickerWithOptionAdornment",
   component: PickerWithOptionAdornment,
   argTypes: {
     ...pickerComponentPropsMetadata,
