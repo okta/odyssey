@@ -19,6 +19,7 @@ import {
 
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { HtmlProps } from "./HtmlProps";
+import { PickerVirtualizationListBox } from "./labs/OdysseyPickers/PickerVirtualizationListBox";
 import { useAutocomplete } from "./useAutocomplete";
 import { TestSelector } from "./test-selectors";
 
@@ -239,7 +240,7 @@ const Autocomplete = <
   isLoading,
   isOptional = false,
   isReadOnly,
-  isVirtualized: isVirtualizedProp = false,
+  isVirtualized = false,
   hint,
   HintLinkComponent,
   label,
@@ -257,13 +258,12 @@ const Autocomplete = <
 }: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
   const {
     inputValueProp,
-    isVirtualized,
+    isVirtualizedRef,
     onChange,
     onInputChange,
     renderInput,
     t,
     valueProps,
-    ListboxComponent,
   } = useAutocomplete<OptionType, HasMultipleChoices, IsCustomValueAllowed>({
     ariaDescribedBy,
     defaultValue,
@@ -275,7 +275,7 @@ const Autocomplete = <
     inputValue,
     isFullWidth,
     isOptional,
-    isVirtualized: isVirtualizedProp,
+    isVirtualized,
     label,
     name: nameOverride,
     onChange: onChangeProp,
@@ -289,8 +289,8 @@ const Autocomplete = <
       {...valueProps}
       {...inputValueProp}
       // conditionally provide the ListboxComponent if this needs to be virtualized
-      {...(isVirtualized.current && {
-        ListboxComponent,
+      {...(isVirtualizedRef.current && {
+        ListboxComponent: PickerVirtualizationListBox,
       })}
       // AutoComplete is wrapped in a div within MUI which does not get the disabled attr. So this aria-disabled gets set in the div
       aria-disabled={isDisabled}
