@@ -2792,6 +2792,7 @@ export const components = ({
           [`.${tableHeadClasses.root} .ods-actions-cell + &:last-of-type, .${tableBodyClasses.root} .ods-actions-cell + &:last-of-type`]:
             {
               flexGrow: 0,
+              padding: "0 !important",
               width: odysseyTokens.Spacing2,
             },
           [`.ods-hide-spacer-column .${tableHeadClasses.root} &:last-of-type, .ods-hide-spacer-column .${tableBodyClasses.root} &:last-of-type`]:
