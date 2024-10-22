@@ -11,5 +11,5 @@
  */
 
 export { adornmentSizeValues } from "./ComposablePicker";
-export * from "./BasicPicker";
+export * from "./Picker";
 export * from "./PickerWithOptionAdornment";

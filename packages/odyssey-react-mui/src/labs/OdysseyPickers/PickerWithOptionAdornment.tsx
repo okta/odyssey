@@ -40,7 +40,7 @@ import {
   OptionLabelContainer,
   OptionMetadataComponent,
   OptionProps,
-} from "./BasicPicker";
+} from "./Picker";
 import { Heading6 } from "../../Typography";
 import { Tag } from "../../Tag";
 
