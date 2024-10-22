@@ -135,8 +135,8 @@ export const useAutocomplete = <
       >["onChange"]
     >
   >(
-    (event, value, reason, details) => {
-      onChangeProp?.(event, value, reason, details);
+    (...args) => {
+      onChangeProp?.(...args);
     },
     [onChangeProp],
   );
@@ -151,8 +151,8 @@ export const useAutocomplete = <
       >["onInputChange"]
     >
   >(
-    (event, value, reason) => {
-      onInputChangeProp?.(event, value, reason);
+    (...args) => {
+      onInputChangeProp?.(...args);
     },
     [onInputChangeProp],
   );
