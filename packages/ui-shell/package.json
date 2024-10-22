@@ -17,8 +17,8 @@
   },
   "exports": {
     ".": {
-      "types": "./dist/src/index.d.ts",
-      "default": "./dist/index.js"
+      "types": "./dist/ui-shell.es.d.ts",
+      "default": "./dist/ui-shell.es.js"
     },
     "./README.md": "./README.md"
   },
@@ -59,6 +59,7 @@
     "rimraf": "^5.0.1",
     "tsx": "^4.7.3",
     "typescript": "^5.5.4",
-    "vite": "^5.4.9"
+    "vite": "^5.4.9",
+    "vite-plugin-dts": "^4.2.4"
   }
 }

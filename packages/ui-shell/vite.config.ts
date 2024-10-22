@@ -10,34 +10,48 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import react from "@vitejs/plugin-react";
 import { join } from "node:path";
 import { defineConfig, type PluginOption } from "vite";
-import react from "@vitejs/plugin-react";
+import dts from "vite-plugin-dts";
 
 const replaceProcessEnvPlugin = (): PluginOption => ({
   name: "replace-process-env",
   transform(code) {
     if (code.includes("process.env.NODE_ENV")) {
-      return code.replace(
-        /process\.env\.NODE_ENV/g,
-        JSON.stringify("production"),
-      );
+      return {
+        code: code.replace(
+          /process\.env\.NODE_ENV/g,
+          JSON.stringify("production"),
+        ),
+        map: null,
+      };
     }
 
-    return code;
+    return null;
   },
 });
 
 // https://vitejs.dev/config/
 export default defineConfig({
   build: {
-    outDir: "./dist",
     lib: {
       entry: join(__dirname, "./src/index.ts"),
-      fileName: (format) => `ui-shell.${format}.js`,
+      fileName: (formatName) => `ui-shell.${formatName}.js`,
       formats: ["es", "iife", "umd"],
-      name: "OktaUiShell",
+      name: "__oktaUiShell",
     },
+    outDir: "./dist",
+    sourcemap: true,
   },
-  plugins: [react(), replaceProcessEnvPlugin()],
+  plugins: [
+    replaceProcessEnvPlugin(),
+    react(),
+    dts({
+      copyDtsFiles: true,
+      insertTypesEntry: true,
+      rollupTypes: true,
+      declarationOnly: true,
+    }),
+  ],
 });
