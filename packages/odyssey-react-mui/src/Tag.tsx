@@ -21,7 +21,7 @@ import {
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext";
 import { CloseCircleFilledIcon } from "./icons.generated";
-import { useContrastModeContext, ContrastMode } from "./ContrastModeProvider";
+import { useContrastModeContext, ContrastMode } from "./useContrastMode";
 
 export const tagColorVariants = [
   "default",
@@ -55,11 +55,15 @@ export type TagProps = {
   colorVariant?: TagColorVariant;
 } & Pick<HtmlProps, "testId" | "translate">;
 
-const getChipColors = (
-  colorVariant: TagColorVariant,
-  odysseyDesignTokens: DesignTokens,
-  contrastMode: ContrastMode,
-) => {
+const getChipColors = ({
+  colorVariant,
+  contrastMode,
+  odysseyDesignTokens,
+}: {
+  colorVariant: TagColorVariant;
+  contrastMode: ContrastMode;
+  odysseyDesignTokens: DesignTokens;
+}) => {
   const colors = {
     default: {
       ...(contrastMode === "highContrast" && {
@@ -192,7 +196,11 @@ const StyledTag = styled(MuiChip, {
   as?: React.ElementType; // Allow the 'as' prop to be forwarded
   clickable?: boolean;
 }>(({ colorVariant, contrastMode, odysseyDesignTokens, clickable }) => {
-  const colors = getChipColors(colorVariant, odysseyDesignTokens, contrastMode);
+  const colors = getChipColors({
+    colorVariant,
+    odysseyDesignTokens,
+    contrastMode,
+  });
 
   return {
     backgroundColor: colors.background,

@@ -23,7 +23,7 @@ import "./components.types";
 import "./mixins.types";
 import "./palette.types";
 import "./typography.types";
-import { type ContrastMode } from "../ContrastModeProvider";
+import { type ContrastMode } from "../useContrastMode";
 
 export type DesignTokens = typeof Tokens;
 export type DesignTokensOverride = Partial<typeof Tokens>;

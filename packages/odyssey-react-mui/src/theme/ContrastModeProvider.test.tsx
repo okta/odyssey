@@ -17,7 +17,7 @@ import {
   ContrastModeProvider,
   useContrastModeContext,
   getBackgroundColor,
-} from "../ContrastModeProvider";
+} from "../useContrastMode";
 import * as Tokens from "@okta/odyssey-design-tokens";
 import { renderHook } from "@testing-library/react-hooks";
 

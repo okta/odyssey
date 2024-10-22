@@ -52,7 +52,7 @@ import {
 } from "../icons.generated";
 import { DesignTokens } from "./theme";
 import { CSSProperties } from "react";
-import { ContrastMode } from "../ContrastModeProvider";
+import { ContrastMode } from "../useContrastMode";
 
 //Widths used in `Drawer` component
 const drawerSizes = {

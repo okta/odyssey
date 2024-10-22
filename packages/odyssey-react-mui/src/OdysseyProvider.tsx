@@ -40,17 +40,17 @@ export type OdysseyProviderProps<
 
 const OdysseyProvider = <SupportedLanguages extends string>({
   children,
+  contrastMode,
   designTokensOverride,
   emotionRoot,
   emotionRootElement,
-  shadowDomElement,
-  shadowRootElement,
   languageCode,
   nonce,
+  shadowDomElement,
+  shadowRootElement,
   stylisPlugins,
   themeOverride,
   translationOverrides,
-  contrastMode,
 }: OdysseyProviderProps<SupportedLanguages>) => (
   <OdysseyCacheProvider
     emotionRoot={emotionRoot}
@@ -60,11 +60,11 @@ const OdysseyProvider = <SupportedLanguages extends string>({
     stylisPlugins={stylisPlugins}
   >
     <OdysseyThemeProvider
+      contrastMode={contrastMode}
       designTokensOverride={designTokensOverride}
       shadowDomElement={shadowDomElement}
       shadowRootElement={shadowRootElement}
       themeOverride={themeOverride}
-      contrastMode={contrastMode}
     >
       <ScopedCssBaseline sx={scopedCssBaselineStyles}>
         <OdysseyTranslationProvider<SupportedLanguages>

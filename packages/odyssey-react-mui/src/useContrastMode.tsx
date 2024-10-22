@@ -16,9 +16,7 @@ import {
   useRef,
   useLayoutEffect,
   useState,
-  useMemo,
   useCallback,
-  ReactNode,
 } from "react";
 import * as Tokens from "@okta/odyssey-design-tokens";
 
@@ -26,12 +24,10 @@ export type ContrastMode = "lowContrast" | "highContrast";
 
 export type ContrastModeContextType = {
   contrastMode: ContrastMode;
-  parentBackgroundColor: string;
 };
 
 export const ContrastModeContext = createContext<ContrastModeContextType>({
   contrastMode: "lowContrast",
-  parentBackgroundColor: "",
 });
 
 export const useContrastModeContext = () => useContext(ContrastModeContext);
@@ -86,23 +82,23 @@ export const getBackgroundColor = (element: HTMLElement | null): string => {
   return "#ffffff"; // Default to white/low contrast if no background color is found
 };
 
-type ContrastModeProviderProps = {
-  children: ReactNode;
+type UseContrastModeProps = {
   contrastMode?: ContrastMode;
 };
 
-export const ContrastModeProvider = ({
-  children,
+export const useContrastMode = ({
   contrastMode: explicitContrastMode,
-}: ContrastModeProviderProps) => {
-  const ref = useRef<HTMLDivElement>(null);
+}: UseContrastModeProps) => {
+  const contrastContainerRef = useRef<HTMLDivElement>(null);
+  const { contrastMode: existingContrastMode } = useContrastModeContext();
+
   const [parentBackgroundColor, setParentBackgroundColor] = useState("#ffffff");
   const [contrastMode, setContrastMode] = useState<ContrastMode>(
-    () => explicitContrastMode || "highContrast",
+    () => explicitContrastMode || existingContrastMode,
   );
 
   const updateBackgroundColor = useCallback(() => {
-    const newBgColor = getBackgroundColor(ref.current);
+    const newBgColor = getBackgroundColor(contrastContainerRef.current);
     setParentBackgroundColor(newBgColor);
 
     if (!explicitContrastMode) {
@@ -138,19 +134,9 @@ export const ContrastModeProvider = ({
     };
   }, [updateBackgroundColor]);
 
-  const contextValue = useMemo(
-    () => ({
-      contrastMode,
-      parentBackgroundColor,
-    }),
-    [contrastMode, parentBackgroundColor],
-  );
-
-  return (
-    <div ref={ref}>
-      <ContrastModeContext.Provider value={contextValue}>
-        {children}
-      </ContrastModeContext.Provider>
-    </div>
-  );
+  return {
+    contrastContainerRef,
+    contrastMode,
+    parentBackgroundColor,
+  };
 };
