@@ -24,7 +24,11 @@ import { TopNav, type TopNavProps } from "../labs/TopNav";
 import { OdysseyProvider } from "../OdysseyProvider";
 import { ShadowDomElements } from "../web-component/shadow-dom";
 
-const containerStyles = {
+const appContainerStyles = {
+  flexGrow: "1",
+};
+
+const uiShellContainerStyles = {
   display: "flex",
 };
 
@@ -93,7 +97,7 @@ const UiShell = ({
         emotionRootElement={emotionRootElement}
         shadowRootElement={appRootElement}
       >
-        <div style={containerStyles}>
+        <div style={uiShellContainerStyles}>
           <ErrorBoundary fallback={null} onError={onError}>
             <SideNav
               {...("footerItems" in componentProps.sideNavProps
@@ -107,7 +111,7 @@ const UiShell = ({
             />
           </ErrorBoundary>
 
-          <div>
+          <div style={appContainerStyles}>
             <ErrorBoundary fallback={null} onError={onError}>
               <TopNav
                 {...componentProps.topNavProps}
