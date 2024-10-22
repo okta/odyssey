@@ -311,7 +311,6 @@ const PickerWithOptionAdornment: PickerWithOptionAdornmentComponentType = <
   onInputChange: onInputChangeProp,
   onFocus,
   options,
-  // renderTags,
   value,
   testId,
   translate,

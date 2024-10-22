@@ -25,6 +25,7 @@ import {
 } from "@okta/odyssey-react-mui/icons";
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
+import { pickerComponentPropsMetadata } from "../../../pickerComponentPropsMetadata";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const languagesNoDescription = [
@@ -123,111 +124,9 @@ const storybookMeta: Meta<BasicPickerType> = {
   title: "Labs Components/Pickers/BasicPicker",
   component: BasicPicker,
   argTypes: {
-    hasMultipleChoices: {
-      control: "boolean",
-      description: "Enables multiple choice selection",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
+    ...pickerComponentPropsMetadata,
     hint: fieldComponentPropsMetaData.hint,
     HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
-    isCustomValueAllowed: {
-      control: "boolean",
-      description: "Allows the input of custom values",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
-    isDisabled: {
-      control: "boolean",
-      description: "Disables the Picker input",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
-    isLoading: {
-      control: "boolean",
-      description: "Displays a loading indicator",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
-    isReadOnly: {
-      control: "boolean",
-      description: "Makes the Picker input read-only",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
-    label: {
-      control: "text",
-      description: "The label text for the Picker input",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
-    onChange: {
-      control: null,
-      description: "Callback fired when the value of the Picker input changes",
-      table: {
-        type: {
-          summary: "func",
-        },
-      },
-    },
-    onInputChange: {
-      control: null,
-      description:
-        "Callback fired when the input value of the Picker input changes",
-      table: {
-        type: {
-          summary: "func",
-        },
-      },
-    },
-    options: {
-      control: null,
-      description: "The options for the Picker input",
-      table: {
-        type: {
-          summary:
-            "Array<OptionType> | GroupedOptionType<OptionType>[] | Promise<Array<OptionType> | GroupedOptionType<OptionType>[]>",
-        },
-      },
-    },
-    value: {
-      control: null,
-      description: "The value of the Picker input",
-      table: {
-        type: {
-          summary: "OptionType | OptionType[]",
-        },
-      },
-    },
-    isOptional: {
-      control: "boolean",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-        defaultValue: {
-          summary: false,
-        },
-      },
-    },
   },
   args: {
     label: "Basic picker label",
