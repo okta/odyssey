@@ -28,20 +28,18 @@ export const optionalComponentSlotNames: Record<
   searchField: "search-field",
 };
 
-export const defaultReactAppRootId = "react-app-root";
-export const defaultAppElement = document.createElement("div");
-
-defaultAppElement.setAttribute("id", defaultReactAppRootId);
-
 export const renderUiShell = ({
-  appElement = defaultAppElement,
+  appRootElement: explicitAppRootElement,
   onError = console.error,
-  rootElement,
+  uiShellRootElement,
 }: {
-  appElement?: HTMLDivElement;
+  appRootElement?: HTMLDivElement;
   onError?: () => void;
-  rootElement: HTMLElement;
+  uiShellRootElement: HTMLElement;
 }) => {
+  const appRootElement =
+    explicitAppRootElement || document.createElement("div");
+
   const { publish: publishPropChanges, subscribe: subscribeToPropChanges } =
     createMessageBus<SetStateAction<UiShellComponentProps>>();
 
@@ -71,7 +69,7 @@ export const renderUiShell = ({
   >;
 
   const webComponentChildren =
-    Object.values(slottedElements).concat(appElement);
+    Object.values(slottedElements).concat(appRootElement);
 
   const uiShellElement = renderReactInWebComponent({
     getReactComponent: (shadowDomElements) => (
@@ -94,11 +92,12 @@ export const renderUiShell = ({
         />
       </ErrorBoundary>
     ),
-    rootElement,
+    rootElement: uiShellRootElement,
     webComponentChildren,
   });
 
   return {
+    appRootElement,
     setComponentProps: publishAfterReactAppReadyForProps,
     slottedElements,
     uiShellElement,
