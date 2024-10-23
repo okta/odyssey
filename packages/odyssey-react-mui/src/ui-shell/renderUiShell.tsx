@@ -95,7 +95,6 @@ export const renderUiShell = ({
         <UiShell
           appComponent={<slot />}
           appRootElement={shadowDomElements.appRootElement}
-          emotionRootElement={shadowDomElements.emotionRootElement}
           onError={onError}
           onSubscriptionCreated={publishSubscriptionCreated}
           optionalComponents={Object.fromEntries(
@@ -106,6 +105,7 @@ export const renderUiShell = ({
               ],
             ),
           )}
+          stylesRootElement={shadowDomElements.stylesRootElement}
           subscribeToPropChanges={subscribeToPropChanges}
         />
       </ErrorBoundary>

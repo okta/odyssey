@@ -22,7 +22,7 @@ import { ErrorBoundary, ErrorBoundaryProps } from "react-error-boundary";
 import { SideNav, type SideNavProps } from "../labs/SideNav";
 import { TopNav, type TopNavProps } from "../labs/TopNav";
 import { OdysseyProvider } from "../OdysseyProvider";
-import { ShadowDomElements } from "../web-component/shadow-dom";
+import { type ReactRootElements } from "../web-component";
 
 const appContainerStyles = {
   flexGrow: "1",
@@ -41,6 +41,10 @@ export type UiShellComponentProps = {
 };
 
 export const defaultComponentProps: UiShellComponentProps = {
+  sideNavProps: {
+    navHeaderText: "",
+    sideNavItems: [],
+  },
   topNavProps: {
     topNavLinkItems: [],
   },
@@ -79,7 +83,7 @@ export type UiShellProps = {
   subscribeToPropChanges: (
     subscriber: (componentProps: SetStateAction<UiShellComponentProps>) => void,
   ) => () => void;
-} & ShadowDomElements;
+} & ReactRootElements;
 
 /**
  * Our new Unified Platform UI Shell.
@@ -91,10 +95,10 @@ export type UiShellProps = {
 const UiShell = ({
   appComponent,
   appRootElement,
-  emotionRootElement,
   onError = console.error,
   onSubscriptionCreated,
   optionalComponents,
+  stylesRootElement,
   subscribeToPropChanges,
 }: UiShellProps) => {
   const [componentProps, setComponentProps] = useState(defaultComponentProps);
@@ -115,7 +119,7 @@ const UiShell = ({
   return (
     <ErrorBoundary fallback={appComponent} onError={onError}>
       <OdysseyProvider
-        emotionRootElement={emotionRootElement}
+        emotionRootElement={stylesRootElement}
         shadowRootElement={appRootElement}
       >
         <div style={uiShellContainerStyles}>

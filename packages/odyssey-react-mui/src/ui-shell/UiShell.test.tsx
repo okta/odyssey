@@ -24,7 +24,6 @@ describe("UiShell", () => {
       <UiShell
         appComponent={<div />}
         appRootElement={appRootElement}
-        emotionRootElement={document.createElement("div")}
         onSubscriptionCreated={() => {}}
         optionalComponents={{
           additionalTopNavItems: <div />,
@@ -39,6 +38,7 @@ describe("UiShell", () => {
             />
           ),
         }}
+        stylesRootElement={document.createElement("div")}
         subscribeToPropChanges={() => () => {}}
       />,
     );
@@ -47,25 +47,25 @@ describe("UiShell", () => {
     expect(appRootElement).toHaveTextContent("Hello World!");
   });
 
-  test("renders `emotionRootElement`", async () => {
+  test("renders `stylesRootElement`", async () => {
     const rootElement = document.createElement("div");
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(rootElement);
 
-    const emotionRootElement = document.createElement("div");
+    const stylesRootElement = document.createElement("div");
 
     render(
       <UiShell
         appComponent={<div />}
         appRootElement={document.createElement("div")}
-        emotionRootElement={emotionRootElement}
         onSubscriptionCreated={() => {}}
+        stylesRootElement={stylesRootElement}
         subscribeToPropChanges={() => () => {}}
       />,
     );
 
-    expect(Array.from(emotionRootElement.children).length).toBeGreaterThan(0);
+    expect(Array.from(stylesRootElement.children).length).toBeGreaterThan(0);
   });
 
   test("renders `appComponent`", async () => {
@@ -75,8 +75,8 @@ describe("UiShell", () => {
       <UiShell
         appComponent={<div data-testid={testId} />}
         appRootElement={document.createElement("div")}
-        emotionRootElement={document.createElement("div")}
         onSubscriptionCreated={() => {}}
+        stylesRootElement={document.createElement("div")}
         subscribeToPropChanges={() => () => {}}
       />,
     );
@@ -93,7 +93,6 @@ describe("UiShell", () => {
       <UiShell
         appComponent={<div />}
         appRootElement={document.createElement("div")}
-        emotionRootElement={document.createElement("div")}
         onSubscriptionCreated={() => {}}
         optionalComponents={
           Object.fromEntries(
@@ -103,6 +102,7 @@ describe("UiShell", () => {
             ]),
           ) as Record<keyof UiShellProps["optionalComponents"], ReactElement>
         }
+        stylesRootElement={document.createElement("div")}
         subscribeToPropChanges={() => () => {}}
       />,
     );
@@ -124,8 +124,8 @@ describe("UiShell", () => {
       <UiShell
         appComponent={<div />}
         appRootElement={document.createElement("div")}
-        emotionRootElement={document.createElement("div")}
         onSubscriptionCreated={() => {}}
+        stylesRootElement={document.createElement("div")}
         subscribeToPropChanges={subscribeToPropChanges}
       />,
     );
@@ -168,8 +168,8 @@ describe("UiShell", () => {
       <UiShell
         appComponent={<div />}
         appRootElement={document.createElement("div")}
-        emotionRootElement={document.createElement("div")}
         onSubscriptionCreated={() => {}}
+        stylesRootElement={document.createElement("div")}
         subscribeToPropChanges={subscribeToPropChanges}
       />,
     );
@@ -197,8 +197,8 @@ describe("UiShell", () => {
       <UiShell
         appComponent={<div />}
         appRootElement={document.createElement("div")}
-        emotionRootElement={document.createElement("div")}
         onSubscriptionCreated={() => {}}
+        stylesRootElement={document.createElement("div")}
         subscribeToPropChanges={subscribeToPropChanges}
       />,
     );
@@ -228,8 +228,8 @@ describe("UiShell", () => {
       <UiShell
         appComponent={<div />}
         appRootElement={document.createElement("div")}
-        emotionRootElement={document.createElement("div")}
         onSubscriptionCreated={() => {}}
+        stylesRootElement={document.createElement("div")}
         subscribeToPropChanges={subscribeToPropChanges}
       />,
     );

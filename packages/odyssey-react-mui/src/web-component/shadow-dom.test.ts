@@ -10,38 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {
-  createShadowDomElements,
-  createUnattachedShadowDomElements,
-} from "./shadow-dom";
-
-describe("createUnattachedShadowDomElements", () => {
-  test("returns two elements at attach to a Shadow DOM", () => {
-    const { appRootElement, emotionRootElement } =
-      createUnattachedShadowDomElements();
-
-    expect(appRootElement).toBeInstanceOf(HTMLDivElement);
-    expect(emotionRootElement).toBeInstanceOf(HTMLDivElement);
-  });
-
-  test("App root element has the correct attributes", () => {
-    const { appRootElement } = createUnattachedShadowDomElements();
-
-    expect(appRootElement).toHaveAttribute("id", "app-root");
-    expect(appRootElement).toHaveAttribute("style", "height: inherit;");
-  });
-
-  test("Emotion root element has the correct attributes", () => {
-    const nonce = "hello-world";
-
-    window.cspNonce = nonce;
-
-    const { emotionRootElement } = createUnattachedShadowDomElements();
-
-    expect(emotionRootElement).toHaveAttribute("id", "style-root");
-    expect(emotionRootElement).toHaveAttribute("nonce", nonce);
-  });
-});
+import { createShadowDomElements } from "./shadow-dom";
 
 describe("createShadowDomElements", () => {
   test("returns two elements attached to a Shadow DOM", () => {

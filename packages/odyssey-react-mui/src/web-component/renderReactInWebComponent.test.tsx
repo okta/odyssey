@@ -13,10 +13,38 @@
 import { waitFor } from "@testing-library/dom";
 
 import {
+  createReactRootElements,
   ReactInWebComponentElement,
   reactWebComponentElementName,
   renderReactInWebComponent,
 } from "./renderReactInWebComponent";
+
+describe("createReactRootElements", () => {
+  test("returns two elements at attach to a Shadow DOM", () => {
+    const { appRootElement, stylesRootElement } = createReactRootElements();
+
+    expect(appRootElement).toBeInstanceOf(HTMLDivElement);
+    expect(stylesRootElement).toBeInstanceOf(HTMLDivElement);
+  });
+
+  test("App root element has the correct attributes", () => {
+    const { appRootElement } = createReactRootElements();
+
+    expect(appRootElement).toHaveAttribute("id", "app-root");
+    expect(appRootElement).toHaveAttribute("style", "height: inherit;");
+  });
+
+  test("Emotion root element has the correct attributes", () => {
+    const nonce = "hello-world";
+
+    window.cspNonce = nonce;
+
+    const { stylesRootElement } = createReactRootElements();
+
+    expect(stylesRootElement).toHaveAttribute("id", "style-root");
+    expect(stylesRootElement).toHaveAttribute("nonce", nonce);
+  });
+});
 
 describe("renderReactInWebComponent", () => {
   afterEach(() => {
