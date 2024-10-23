@@ -13,7 +13,6 @@
 import { useCallback, useMemo, useRef } from "react";
 import {
   InputBase,
-  UseAutocompleteProps as MuiUseAutocompleteProps,
   AutocompleteValue,
   AutocompleteRenderInputParams,
 } from "@mui/material";
@@ -45,8 +44,6 @@ export type UseAutocompleteProps<
   | "isVirtualized"
   | "label"
   | "name"
-  | "onChange"
-  | "onInputChange"
   | "testId"
   | "value"
 >;
@@ -69,8 +66,6 @@ export const useAutocomplete = <
   isVirtualized: isVirtualizedProp,
   label,
   name: nameOverride,
-  onChange: onChangeProp,
-  onInputChange: onInputChangeProp,
   testId,
   value,
 }: UseAutocompleteProps<
@@ -122,38 +117,6 @@ export const useAutocomplete = <
     }
     return undefined;
   }, [inputValue]);
-
-  const onChange = useCallback<
-    NonNullable<
-      MuiUseAutocompleteProps<
-        OptionType,
-        HasMultipleChoices,
-        undefined,
-        IsCustomValueAllowed
-      >["onChange"]
-    >
-  >(
-    (...args) => {
-      onChangeProp?.(...args);
-    },
-    [onChangeProp],
-  );
-
-  const onInputChange = useCallback<
-    NonNullable<
-      MuiUseAutocompleteProps<
-        OptionType,
-        HasMultipleChoices,
-        undefined,
-        IsCustomValueAllowed
-      >["onInputChange"]
-    >
-  >(
-    (...args) => {
-      onInputChangeProp?.(...args);
-    },
-    [onInputChangeProp],
-  );
 
   const renderInput = useCallback(
     ({
@@ -214,8 +177,6 @@ export const useAutocomplete = <
   return {
     inputValueProp,
     isVirtualizedRef,
-    onChange,
-    onInputChange,
     renderInput,
     valueProps,
   };
