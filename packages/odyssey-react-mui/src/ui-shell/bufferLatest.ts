@@ -12,11 +12,26 @@
 
 import { createStore } from "./createStore";
 
-export const bufferUntil = <Value>({
+/**
+ * Buffers the values passed to a publisher, keeping only the latest value, until the subscriber emits.
+ *
+ * This is useful in restricting publishers from firing events until specific subscribers are active. Once active, the `publish` function reverts to its previous behavior.
+ */
+export const bufferLatest = <Value>({
   publish,
   subscribe,
 }: {
+  /**
+   * A function that publishes values to a subscriber, but not the same subscriber as the one passed to this function.
+   *
+   * Only the latest value published by this publisher is kept until the subscriber emits.
+   */
   publish: (value: Value) => void;
+  /**
+   * A subscription that listens for emissions from a separate publisher.
+   *
+   * When that separate publisher emits, the latest value from the passed-in publish function is emitted as are all future values.
+   */
   subscribe: (subscriber: () => void) => () => void;
 }) => {
   const store = createStore<{

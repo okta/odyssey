@@ -33,7 +33,7 @@ describe("renderReactInWebComponent", () => {
 
     const reactInWebComponentElement = renderReactInWebComponent({
       getReactComponent: () => <div>{testElementText}</div>,
-      rootElement,
+      webComponentRootElement: rootElement,
     });
 
     await waitFor(() => {
@@ -54,7 +54,7 @@ describe("renderReactInWebComponent", () => {
 
     const reactInWebComponentElement = renderReactInWebComponent({
       getReactComponent: () => <div>{testElementText}</div>,
-      rootElement,
+      webComponentRootElement: rootElement,
     });
 
     await waitFor(() => {
@@ -72,12 +72,12 @@ describe("renderReactInWebComponent", () => {
 
     renderReactInWebComponent({
       getReactComponent: () => <div />,
-      rootElement,
+      webComponentRootElement: rootElement,
     });
 
     renderReactInWebComponent({
       getReactComponent: () => <div />,
-      rootElement,
+      webComponentRootElement: rootElement,
     });
 
     expect(
@@ -96,7 +96,7 @@ describe("renderReactInWebComponent", () => {
 
     renderReactInWebComponent({
       getReactComponent: () => <div />,
-      rootElement,
+      webComponentRootElement: rootElement,
       webComponentChildren,
     });
 
@@ -118,7 +118,7 @@ describe("renderReactInWebComponent", () => {
 
     renderReactInWebComponent({
       getReactComponent: () => <div />,
-      rootElement,
+      webComponentRootElement: rootElement,
       webComponentChildren,
     });
 

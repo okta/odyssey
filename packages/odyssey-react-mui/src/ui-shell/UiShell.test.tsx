@@ -145,12 +145,12 @@ describe("UiShell", () => {
 
     // This is the subscription we give the component, and then once subscribed, we're going to immediately call it with new props.
     const subscribeToPropChanges: UiShellProps["subscribeToPropChanges"] = (
-      subscription,
+      subscriber,
     ) => {
-      subscription({
+      subscriber({
         ...defaultComponentProps,
         sideNavProps: {
-          ...defaultComponentProps.sideNavProps,
+          navHeaderText: "",
           sideNavItems: [
             {
               id: "AddNewFolder",
@@ -185,10 +185,10 @@ describe("UiShell", () => {
 
     // This is the subscription we give the component, and then once subscribed, we're going to immediately call it with new props.
     const subscribeToPropChanges: UiShellProps["subscribeToPropChanges"] = (
-      subscription,
+      subscriber,
     ) => {
       // @ts-expect-error This unit test is checking what happens when we don't pass a value.
-      subscription();
+      subscriber();
 
       return () => {};
     };
@@ -217,9 +217,9 @@ describe("UiShell", () => {
 
     // This is the subscription we give the component, and then once subscribed, we're going to immediately call it to see if it passes us the previous state.
     const subscribeToPropChanges: UiShellProps["subscribeToPropChanges"] = (
-      subscription,
+      subscriber,
     ) => {
-      subscription(stateUpdater);
+      subscriber(stateUpdater);
 
       return () => {};
     };

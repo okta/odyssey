@@ -16,26 +16,26 @@ describe("createEventBus", () => {
   test("messages are not sent once unsubscribed", async () => {
     const { publish, subscribe } = createMessageBus<null>();
 
-    const subscription = jest.fn();
+    const subscriber = jest.fn();
 
-    const unsubscribe = subscribe(subscription);
+    const unsubscribe = subscribe(subscriber);
 
     unsubscribe();
     publish(null);
 
-    expect(subscription).toHaveBeenCalledTimes(0);
+    expect(subscriber).toHaveBeenCalledTimes(0);
   });
 
   test("messages are not sent once unsubscribed from multiple subscribers", async () => {
     const { publish, subscribe } = createMessageBus<null>();
 
-    const subscription1 = jest.fn();
-    const subscription2 = jest.fn();
-    const subscription3 = jest.fn();
+    const subscriber1 = jest.fn();
+    const subscriber2 = jest.fn();
+    const subscriber3 = jest.fn();
 
-    const unsubscribe1 = subscribe(subscription1);
-    const unsubscribe2 = subscribe(subscription2);
-    const unsubscribe3 = subscribe(subscription3);
+    const unsubscribe1 = subscribe(subscriber1);
+    const unsubscribe2 = subscribe(subscriber2);
+    const unsubscribe3 = subscribe(subscriber3);
 
     unsubscribe1();
     unsubscribe2();
@@ -43,28 +43,28 @@ describe("createEventBus", () => {
     publish(null);
     publish(null);
 
-    expect(subscription1).toHaveBeenCalledTimes(0);
-    expect(subscription2).toHaveBeenCalledTimes(0);
-    expect(subscription3).toHaveBeenCalledTimes(0);
+    expect(subscriber1).toHaveBeenCalledTimes(0);
+    expect(subscriber2).toHaveBeenCalledTimes(0);
+    expect(subscriber3).toHaveBeenCalledTimes(0);
   });
 
-  test("when publishing message, receives message in subscription", async () => {
+  test("when publishing message, receives message in a subscriber", async () => {
     const message = Symbol();
 
     const { publish, subscribe } = createMessageBus<typeof message>();
 
-    const subscription = jest.fn();
+    const subscriber = jest.fn();
 
-    const unsubscribe = subscribe(subscription);
+    const unsubscribe = subscribe(subscriber);
 
     publish(message);
     unsubscribe();
 
-    expect(subscription).toHaveBeenCalledWith(message);
-    expect(subscription).toHaveBeenCalledTimes(1);
+    expect(subscriber).toHaveBeenCalledWith(message);
+    expect(subscriber).toHaveBeenCalledTimes(1);
   });
 
-  test("when publishing 2 messages, receives both messages in subscription", async () => {
+  test("when publishing 2 messages, receives both messages in a subscriber", async () => {
     const message1 = Symbol();
     const message2 = Symbol();
 
@@ -72,20 +72,20 @@ describe("createEventBus", () => {
       typeof message1 | typeof message2
     >();
 
-    const subscription = jest.fn();
+    const subscriber = jest.fn();
 
-    const unsubscribe = subscribe(subscription);
+    const unsubscribe = subscribe(subscriber);
 
     publish(message1);
     publish(message2);
     unsubscribe();
 
-    expect(subscription).toHaveBeenNthCalledWith(1, message1);
-    expect(subscription).toHaveBeenNthCalledWith(2, message2);
-    expect(subscription).toHaveBeenCalledTimes(2);
+    expect(subscriber).toHaveBeenNthCalledWith(1, message1);
+    expect(subscriber).toHaveBeenNthCalledWith(2, message2);
+    expect(subscriber).toHaveBeenCalledTimes(2);
   });
 
-  test("when subscribing twice, both subscriptions receive multiple messages", async () => {
+  test("when subscribing twice, both subscribers receive multiple messages", async () => {
     const message1 = Symbol();
     const message2 = Symbol();
 
@@ -93,23 +93,23 @@ describe("createEventBus", () => {
       typeof message1 | typeof message2
     >();
 
-    const subscription1 = jest.fn();
-    const subscription2 = jest.fn();
+    const subscriber1 = jest.fn();
+    const subscriber2 = jest.fn();
 
-    const unsubscribe1 = subscribe(subscription1);
-    const unsubscribe2 = subscribe(subscription2);
+    const unsubscribe1 = subscribe(subscriber1);
+    const unsubscribe2 = subscribe(subscriber2);
 
     publish(message1);
     publish(message2);
     unsubscribe1();
     unsubscribe2();
 
-    expect(subscription1).toHaveBeenNthCalledWith(1, message1);
-    expect(subscription1).toHaveBeenNthCalledWith(2, message2);
-    expect(subscription1).toHaveBeenCalledTimes(2);
+    expect(subscriber1).toHaveBeenNthCalledWith(1, message1);
+    expect(subscriber1).toHaveBeenNthCalledWith(2, message2);
+    expect(subscriber1).toHaveBeenCalledTimes(2);
 
-    expect(subscription2).toHaveBeenNthCalledWith(1, message1);
-    expect(subscription2).toHaveBeenNthCalledWith(2, message2);
-    expect(subscription2).toHaveBeenCalledTimes(2);
+    expect(subscriber2).toHaveBeenNthCalledWith(1, message1);
+    expect(subscriber2).toHaveBeenNthCalledWith(2, message2);
+    expect(subscriber2).toHaveBeenCalledTimes(2);
   });
 });

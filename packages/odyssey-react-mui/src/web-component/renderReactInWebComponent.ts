@@ -71,15 +71,39 @@ if (!customElements.get(reactWebComponentElementName)) {
 }
 
 export type RenderReactInWebComponentProps = {
+  /**
+   * This is a callback function for rendering your React component or app in the Web Component.
+   * It gives you access to the Shadow DOM elements if you need them for Odyssey, Emotion, or MUI.
+   *
+   * You will need to add `<slot>` elements if you want to pass child elements or components or React apps.
+   * You can have multiple slots in your app if you add a `name` attribute to your `<slot>` elements.
+   */
   getReactComponent: GetReactComponentInWebComponent;
+  /**
+   * One or more HTML elements that are going to render as `children` of the web component.
+   * If your React component doesn't take children, this is unnecessary.
+   *
+   * Typically, a React app root element is passed, but it can include an array of other elements if there are multiple slots for children.
+   *
+   * You will need to have rendered `<slot>` elements in your React component or `children` won't show up.
+   */
   webComponentChildren?: HTMLElement | HTMLElement[];
-  rootElement: HTMLElement;
+  /**
+   * You React app renders in the web component, but you then need to render the web component in the document.
+   * This is the element the web component renders into.
+   */
+  webComponentRootElement: HTMLElement;
 };
 
+/**
+ * Lets you render React apps or components in a Web Component.
+ *
+ * This is useful when global styles are causing conflicts with your React components.
+ */
 export const renderReactInWebComponent = ({
   getReactComponent,
-  rootElement,
   webComponentChildren,
+  webComponentRootElement,
 }: RenderReactInWebComponentProps) => {
   const reactElement = new ReactInWebComponentElement(getReactComponent);
 
@@ -92,7 +116,7 @@ export const renderReactInWebComponent = ({
     });
   }
 
-  rootElement.appendChild(reactElement);
+  webComponentRootElement.appendChild(reactElement);
 
   return reactElement;
 };

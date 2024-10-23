@@ -10,14 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export type MessageEvent<Message> = (message: Message) => void;
+export type MessageHandler<Message> = (message: Message) => void;
 
-export type PublishMessage<Message> = MessageEvent<Message>;
+export type PublishMessage<Message> = MessageHandler<Message>;
 
 export type UnsubscribeMessageSubscription = () => void;
 
 export type MessageSubscription<Message> = (
-  subscription: MessageEvent<Message>,
+  subscriber: MessageHandler<Message>,
 ) => UnsubscribeMessageSubscription;
 
 export type MessageBus<Message> = {
@@ -25,8 +25,11 @@ export type MessageBus<Message> = {
   subscribe: MessageSubscription<Message>;
 };
 
+/**
+ * Create a self-contained message bus that allows you to subscribe to events published by the publisher.
+ */
 export const createMessageBus = <Message = void>(): MessageBus<Message> => {
-  const subscribers = new Map<symbol, MessageEvent<Message>>();
+  const subscribers = new Map<symbol, MessageHandler<Message>>();
 
   const publish: PublishMessage<Message> = (message) => {
     Array.from(subscribers.values()).forEach((subscriber) => {
@@ -34,12 +37,12 @@ export const createMessageBus = <Message = void>(): MessageBus<Message> => {
     });
   };
 
-  const subscribe: MessageSubscription<Message> = (subscription) => {
-    const subscriptionId = Symbol();
-    subscribers.set(subscriptionId, subscription);
+  const subscribe: MessageSubscription<Message> = (subscriber) => {
+    const subscriberId = Symbol();
+    subscribers.set(subscriberId, subscriber);
 
     return () => {
-      subscribers.delete(subscriptionId);
+      subscribers.delete(subscriberId);
     };
   };
 

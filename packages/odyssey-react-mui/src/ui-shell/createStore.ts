@@ -10,6 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+/**
+ * Creates an internal state and gives access to those values via functions.
+ *
+ * It can be optionally given an initial state.
+ */
 export const createStore = <State extends object>(initialState?: State) => {
   const state = initialState || ({} as Partial<State>);
 

@@ -17,7 +17,7 @@ import {
   type ReactNode,
   type SetStateAction,
 } from "react";
-import { ErrorBoundary } from "react-error-boundary";
+import { ErrorBoundary, ErrorBoundaryProps } from "react-error-boundary";
 
 import { SideNav, type SideNavProps } from "../labs/SideNav";
 import { TopNav, type TopNavProps } from "../labs/TopNav";
@@ -33,7 +33,7 @@ const uiShellContainerStyles = {
 };
 
 export type UiShellComponentProps = {
-  sideNavProps: Omit<SideNavProps, "logo" | "footerComponent">;
+  sideNavProps?: Omit<SideNavProps, "logo" | "footerComponent">;
   topNavProps: Omit<
     TopNavProps,
     "AdditionalNavItemComponent" | "SearchFieldComponent"
@@ -41,32 +41,53 @@ export type UiShellComponentProps = {
 };
 
 export const defaultComponentProps: UiShellComponentProps = {
-  sideNavProps: {
-    navHeaderText: "",
-    sideNavItems: [],
-  },
   topNavProps: {
     topNavLinkItems: [],
   },
-};
+} as const;
 
 export type UiShellProps = {
+  /**
+   * React app component that renders as children in the correct location of the shell.
+   */
   appComponent: ReactNode;
-  onError?: () => void;
+  /**
+   * Notifies when a React rendering error occurs. This could be useful for logging, flagging "p0"s, and recovering UI Shell when errors occur.
+   */
+  onError?: ErrorBoundaryProps["onError"];
+  /**
+   * Notifies when subscribed to prop changes.
+   *
+   * UI Shell listens to prop updates, and it won't subscribe synchronously. Because of that, this callback notifies when that subscription is ready.
+   */
   onSubscriptionCreated: () => void;
+  /**
+   * Components that will render as children of various other components such as the top nav or side nav.
+   */
   optionalComponents?: {
     additionalTopNavItems?: TopNavProps["AdditionalNavItemComponent"];
     footer?: SideNavProps["footerComponent"];
     logo?: SideNavProps["logo"];
     searchField?: TopNavProps["SearchFieldComponent"];
   };
+  /**
+   * This is a callback that provides a subscriber callback to listen for changes to state.
+   * It allows UI Shell to listen for state changes.
+   *
+   * The props coming in this callback go directly to a React state; therefore, it shares the same signature and provides a previous state.
+   */
   subscribeToPropChanges: (
-    subscription: (
-      componentProps: SetStateAction<UiShellComponentProps>,
-    ) => void,
+    subscriber: (componentProps: SetStateAction<UiShellComponentProps>) => void,
   ) => () => void;
 } & ShadowDomElements;
 
+/**
+ * Our new Unified Platform UI Shell.
+ *
+ * This includes the top and side navigation as well as the footer and provides a spot for your app to render into.
+ *
+ * If an error occurs, this will revert to only showing the app.
+ */
 const UiShell = ({
   appComponent,
   appRootElement,
@@ -98,18 +119,20 @@ const UiShell = ({
         shadowRootElement={appRootElement}
       >
         <div style={uiShellContainerStyles}>
-          <ErrorBoundary fallback={null} onError={onError}>
-            <SideNav
-              {...("footerItems" in componentProps.sideNavProps
-                ? componentProps.sideNavProps
-                : {
-                    ...componentProps.sideNavProps,
-                    footerComponent: optionalComponents?.footer,
-                    footerItems: undefined,
-                  })}
-              logo={optionalComponents?.logo}
-            />
-          </ErrorBoundary>
+          {componentProps.sideNavProps && (
+            <ErrorBoundary fallback={null} onError={onError}>
+              <SideNav
+                {...("footerItems" in componentProps.sideNavProps
+                  ? componentProps.sideNavProps
+                  : {
+                      ...componentProps.sideNavProps,
+                      footerComponent: optionalComponents?.footer,
+                      footerItems: undefined,
+                    })}
+                logo={optionalComponents?.logo}
+              />
+            </ErrorBoundary>
+          )}
 
           <div style={appContainerStyles}>
             <ErrorBoundary fallback={null} onError={onError}>

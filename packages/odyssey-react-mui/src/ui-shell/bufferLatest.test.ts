@@ -10,20 +10,20 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { bufferUntil } from "./bufferUntil";
+import { bufferLatest } from "./bufferLatest";
 import { createMessageBus } from "./createMessageBus";
 
-describe("bufferUntil", () => {
-  test("calls subscription after ready", async () => {
+describe("bufferLatest", () => {
+  test("calls subscriber after ready", async () => {
     const { publish: publish1, subscribe: subscribe1 } = createMessageBus();
 
     const { publish: publish2, subscribe: subscribe2 } = createMessageBus();
 
-    const subscription = jest.fn();
+    const subscriber = jest.fn();
 
-    subscribe1(subscription);
+    subscribe1(subscriber);
 
-    const bufferedPublish1 = bufferUntil({
+    const bufferedPublish1 = bufferLatest({
       publish: publish1,
       subscribe: subscribe2,
     });
@@ -31,19 +31,19 @@ describe("bufferUntil", () => {
     publish2();
     bufferedPublish1();
 
-    expect(subscription).toHaveBeenCalledTimes(1);
+    expect(subscriber).toHaveBeenCalledTimes(1);
   });
 
-  test("calls subscription before ready", async () => {
+  test("calls subscriber before ready", async () => {
     const { publish: publish1, subscribe: subscribe1 } = createMessageBus();
 
     const { publish: publish2, subscribe: subscribe2 } = createMessageBus();
 
-    const subscription = jest.fn();
+    const subscriber = jest.fn();
 
-    subscribe1(subscription);
+    subscribe1(subscriber);
 
-    const bufferedPublish1 = bufferUntil({
+    const bufferedPublish1 = bufferLatest({
       publish: publish1,
       subscribe: subscribe2,
     });
@@ -51,7 +51,7 @@ describe("bufferUntil", () => {
     bufferedPublish1();
     publish2();
 
-    expect(subscription).toHaveBeenCalledTimes(1);
+    expect(subscriber).toHaveBeenCalledTimes(1);
   });
 
   test("keeps only the last value passed when ready", async () => {
@@ -60,11 +60,11 @@ describe("bufferUntil", () => {
 
     const { publish: publish2, subscribe: subscribe2 } = createMessageBus();
 
-    const subscription = jest.fn();
+    const subscriber = jest.fn();
 
-    subscribe1(subscription);
+    subscribe1(subscriber);
 
-    const bufferedPublish1 = bufferUntil({
+    const bufferedPublish1 = bufferLatest({
       publish: publish1,
       subscribe: subscribe2,
     });
@@ -73,7 +73,7 @@ describe("bufferUntil", () => {
     bufferedPublish1("b");
     publish2();
 
-    expect(subscription).toHaveBeenCalledWith("b");
-    expect(subscription).toHaveBeenCalledTimes(1);
+    expect(subscriber).toHaveBeenCalledWith("b");
+    expect(subscriber).toHaveBeenCalledTimes(1);
   });
 });
