@@ -10,10 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {
-  createUnattachedShadowDomElements,
-  createShadowDomElements,
-} from "./shadow-dom";
+import { createUnattachedShadowDomElements } from "./shadow-dom";
 
 describe("createUnattachedShadowDomElements", () => {
   test("returns two elements at attach to a Shadow DOM", () => {
@@ -40,16 +37,5 @@ describe("createUnattachedShadowDomElements", () => {
 
     expect(emotionRootElement).toHaveAttribute("id", "style-root");
     expect(emotionRootElement).toHaveAttribute("nonce", nonce);
-  });
-});
-
-describe("createShadowDomElements", () => {
-  test("returns two elements attached to a Shadow DOM", () => {
-    const { emotionRootElement, shadowRootElement } = createShadowDomElements(
-      document.createElement("div"),
-    );
-
-    expect(emotionRootElement.parentNode).toBeInstanceOf(ShadowRoot);
-    expect(shadowRootElement.parentNode).toBeInstanceOf(ShadowRoot);
   });
 });
