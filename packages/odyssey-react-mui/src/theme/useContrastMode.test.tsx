@@ -22,11 +22,10 @@ import {
 } from "../useContrastMode";
 import * as Tokens from "@okta/odyssey-design-tokens";
 import { renderHook } from "@testing-library/react";
+
 // Common wrapper component for tests
-const createWrapper = (
-  contextValue: ContrastModeContextType,
-): React.FC<{ children: React.ReactNode }> => {
-  return ({ children }) => (
+const createWrapper = (contextValue: ContrastModeContextType) => {
+  return ({ children }: { children: React.ReactNode }) => (
     <ContrastModeContext.Provider value={contextValue}>
       {children}
     </ContrastModeContext.Provider>
