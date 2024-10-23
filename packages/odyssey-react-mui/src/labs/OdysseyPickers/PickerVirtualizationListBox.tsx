@@ -11,11 +11,10 @@
  */
 
 import {
+  Children,
   createContext,
   forwardRef,
-  HTMLAttributes,
   memo,
-  ReactElement,
   useCallback,
   useContext,
   useEffect,
@@ -25,6 +24,7 @@ import {
 } from "react";
 import { VariableSizeList, ListChildComponentProps } from "react-window";
 import styled from "@emotion/styled";
+import { AutocompleteProps } from "@mui/material";
 
 type SetItemSize = (size: number) => void;
 
@@ -98,14 +98,17 @@ const useResetCache = (length: number) => {
 
 const PickerVirtualizationListBox = forwardRef<
   HTMLDivElement,
-  HTMLAttributes<HTMLElement>
->(function (props, ref) {
+  AutocompleteProps<undefined, undefined, undefined, undefined>["ListboxProps"]
+>((props = {}, ref) => {
   const [listHeight, setListHeight] = useState(0);
 
   const { children, ...other } = props;
-  const itemData: ReactElement[] = (children as ReactElement[]).flatMap(
-    (item: ReactElement & { children?: ReactElement[] }) =>
-      [item].concat(item.children || []),
+
+  const itemData = Children.toArray(children).flatMap<typeof children>(
+    (child) =>
+      typeof child === "number" || typeof child === "string"
+        ? [child]
+        : [child].concat("children" in child ? Children.toArray(children) : []),
   );
 
   const sizeMapRef = useRef<number[]>([]);
@@ -118,8 +121,8 @@ const PickerVirtualizationListBox = forwardRef<
       // has a max-height of 40vh set in CSS. This is only set because height needs to be a number
       return 9999;
     } else {
-      const itemsHeightCalculated = Array(itemData.length)
-        .fill(null)
+      const itemsHeightCalculated = sizeMapRef.current
+        .slice(0, itemData.length - 1)
         .map((_, index) => sizeMapRef.current[index] || 0)
         .reduce(
           (prevItemHeight, nextItemHeight) => prevItemHeight + nextItemHeight,
