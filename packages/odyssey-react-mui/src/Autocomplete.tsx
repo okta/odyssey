@@ -248,8 +248,8 @@ const Autocomplete = <
   name: nameOverride,
   noOptionsText,
   onBlur,
-  onChange: onChangeProp,
-  onInputChange: onInputChangeProp,
+  onChange,
+  onInputChange,
   onFocus,
   options,
   value,
@@ -258,32 +258,24 @@ const Autocomplete = <
   translate,
 }: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
   const { t } = useTranslation();
-  const {
-    inputValueProp,
-    isVirtualizedRef,
-    onChange,
-    onInputChange,
-    renderInput,
-    valueProps,
-  } = useAutocomplete<OptionType, HasMultipleChoices, IsCustomValueAllowed>({
-    ariaDescribedBy,
-    defaultValue,
-    errorMessage,
-    errorMessageList,
-    hasMultipleChoices,
-    hint,
-    HintLinkComponent,
-    inputValue,
-    isFullWidth,
-    isOptional,
-    isVirtualized,
-    label,
-    name: nameOverride,
-    onChange: onChangeProp,
-    onInputChange: onInputChangeProp,
-    testId,
-    value,
-  });
+  const { inputValueProp, isVirtualizedRef, renderInput, valueProps } =
+    useAutocomplete<OptionType, HasMultipleChoices, IsCustomValueAllowed>({
+      ariaDescribedBy,
+      defaultValue,
+      errorMessage,
+      errorMessageList,
+      hasMultipleChoices,
+      hint,
+      HintLinkComponent,
+      inputValue,
+      isFullWidth,
+      isOptional,
+      isVirtualized,
+      label,
+      name: nameOverride,
+      testId,
+      value,
+    });
 
   return (
     <MuiAutocomplete
