@@ -146,6 +146,7 @@ const storybookMeta: Meta<SideNavProps> = {
       {
         id: "item001",
         label: "Onboarding",
+        startIcon: <SettingsIcon />,
         children: [
           {
             id: "item1-2",
@@ -219,7 +220,6 @@ const storybookMeta: Meta<SideNavProps> = {
       {
         id: "item4",
         label: "Settings",
-        startIcon: <SettingsIcon />,
         isDefaultExpanded: true,
         children: [
           {
@@ -230,13 +230,19 @@ const storybookMeta: Meta<SideNavProps> = {
           {
             id: "item4-2",
             href: "/",
-            isSelected: true,
             label: "Custom Domain",
+            isSelected: true,
+          },
+          {
+            id: "item4-3",
+            href: "/",
+            label: "Account Management",
           },
           {
             id: "item4-4",
             href: "/",
-            label: "Authentication Policies Rules",
+            label: "Authentication Policies",
+            isDisabled: true,
           },
           {
             id: "item4-5",

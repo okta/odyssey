@@ -15,7 +15,7 @@ import { memo } from "react";
 const HandleIcon = () => {
   return (
     <svg
-      id="handle"
+      id="sidenavhandleicon"
       width="32"
       height="32"
       viewBox="0 0 32 32"
