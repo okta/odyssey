@@ -17,27 +17,14 @@ import {
   AppsIcon,
   ClockIcon,
   SettingsIcon,
-  CopyIcon,
   HomeIcon,
   Fido2Icon,
   LockIcon,
-  BugIcon,
-  CloseIcon,
-  CalendarIcon,
-  CallIcon,
-  CheckIcon,
   AddCircleIcon,
   DownloadIcon,
-  ChatIcon,
-  RefreshIcon,
   UserIcon,
   DirectoryIcon,
-  GlobeIcon,
-  IdpIcon,
-  InformationCircleIcon,
-  InformationCircleFilledIcon,
   ServerIcon,
-  ExpandLeftIcon,
   FolderIcon,
 } from "@okta/odyssey-react-mui/icons";
 import { expect } from "@storybook/jest";
@@ -62,6 +49,15 @@ const storybookMeta: Meta<SideNavProps> = {
         },
       },
     },
+    expandedWidth: {
+      control: "text",
+      description: "Width of the side nav in px",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     isCollapsible: {
       control: "boolean",
       description: "Controls whether the side nav is collapsible",
@@ -70,6 +66,18 @@ const storybookMeta: Meta<SideNavProps> = {
           summary: "boolean",
         },
       },
+    },
+    isCompact: {
+      control: "boolean",
+      description: "Controls whether the side nav uses compact layout",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    logo: {
+      description: "Logo to be displayed in the Nav Header",
     },
     onCollapse: {
       description: "Callback to be triggered when the side nav is collapsed",
@@ -97,6 +105,7 @@ const storybookMeta: Meta<SideNavProps> = {
   args: {
     navHeaderText: "Admin",
     isCollapsible: true,
+    isCompact: false,
     sideNavItems: [
       {
         id: "AddNewFolder",
@@ -125,57 +134,35 @@ const storybookMeta: Meta<SideNavProps> = {
             id: "item1-1",
             href: "/",
             label: "Home",
-            startIcon: <CheckIcon />,
           },
         ],
-      },
-      {
-        id: "item001",
-        label: "Onboarding",
-        startIcon: <CalendarIcon />,
-        children: [
-          {
-            id: "item1-2",
-            href: "/",
-            label: "Start",
-            startIcon: <CloseIcon />,
-            endIcon: <InformationCircleFilledIcon />,
-          },
-          {
-            id: "item1-3",
-            href: "/",
-            label: "Onboarding",
-            startIcon: <HomeIcon />,
-          },
-          {
-            id: "item1-4",
-            href: "/",
-            label: "Tasks",
-            startIcon: <CallIcon />,
-            endIcon: <ExpandLeftIcon />,
-          },
-          {
-            id: "item1-5",
-            href: "/",
-            label: "Getting Started",
-            startIcon: <InformationCircleIcon />,
-            endIcon: <CalendarIcon />,
-          },
-        ],
-      },
-      {
-        id: "item0-2",
-        href: "/",
-        label: "Profiles",
-        startIcon: <GlobeIcon />,
-        endIcon: <GlobeIcon />,
-        isDisabled: true,
       },
       {
         id: "item2",
         href: "/",
         label: "Applications",
         startIcon: <AppsIcon />,
+      },
+      {
+        id: "item001",
+        label: "Onboarding",
+        children: [
+          {
+            id: "item1-2",
+            href: "/",
+            label: "Start",
+          },
+          {
+            id: "item1-4",
+            href: "/",
+            label: "Tasks",
+          },
+          {
+            id: "item1-5",
+            href: "/",
+            label: "Getting Started",
+          },
+        ],
       },
       {
         id: "item0-1-2",
@@ -195,7 +182,6 @@ const storybookMeta: Meta<SideNavProps> = {
         startIcon: <ServerIcon />,
         severity: "success",
         statusLabel: "success",
-        endIcon: <ServerIcon />,
       },
       {
         id: "item5",
@@ -240,34 +226,22 @@ const storybookMeta: Meta<SideNavProps> = {
             id: "item4-1",
             href: "/",
             label: "General",
-            startIcon: <BugIcon />,
-            endIcon: <ChatIcon />,
-          },
-          {
-            id: "item4-3",
-            href: "/",
-            label: "Custom Login page",
-            startIcon: <CheckIcon />,
           },
           {
             id: "item4-2",
             href: "/",
             isSelected: true,
             label: "Custom Domain",
-            startIcon: <CloseIcon />,
-            endIcon: <CopyIcon />,
           },
           {
             id: "item4-4",
             href: "/",
             label: "Authentication Policies Rules",
-            startIcon: <RefreshIcon />,
           },
           {
             id: "item4-5",
             href: "/",
             label: "IDP Configuration",
-            startIcon: <IdpIcon />,
           },
         ],
       },
@@ -306,7 +280,10 @@ export const Default: StoryObj<SideNavProps> = {
     return (
       <div style={{ height: "100vh" }}>
         <SideNav
+          logo={props.logo}
           navHeaderText={props.navHeaderText}
+          expandedWidth={props.expandedWidth}
+          isCompact={props.isCompact}
           isCollapsible={props.isCollapsible}
           onCollapse={props.onCollapse}
           onExpand={props.onExpand}
@@ -347,19 +324,20 @@ export const Default: StoryObj<SideNavProps> = {
       }
     });
     await step("Side Nav Collapse", async ({}) => {
-      const collapseButton = within(expandedRegion).getByLabelText(
+      const collapseButton = within(collapsedRegion).getByLabelText(
         "collapse side navigation",
       );
       await userEvent.click(collapseButton);
       await waitFor(() => {
         expect(expandedRegion).not.toBeVisible();
-        expect(collapsedRegion).toBeVisible();
       });
     });
     await step("Side Nav Expand", async ({}) => {
-      await userEvent.click(collapsedRegion);
+      const collapseButton = within(collapsedRegion).getByLabelText(
+        "expand side navigation",
+      );
+      await userEvent.click(collapseButton);
       await waitFor(() => {
-        expect(collapsedRegion).not.toBeVisible();
         expect(expandedRegion).toBeVisible();
       });
     });
