@@ -11,6 +11,7 @@
  */
 
 import { memo, ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Autocomplete as MuiAutocomplete,
   AutocompleteProps as MuiAutocompleteProps,
@@ -120,6 +121,7 @@ const ComposablePicker = <
   HasMultipleChoices,
   IsCustomValueAllowed
 >) => {
+  const { t } = useTranslation();
   const {
     inputValueProp,
     isVirtualizedRef,
@@ -157,6 +159,8 @@ const ComposablePicker = <
       })}
       // AutoComplete is wrapped in a div within MUI which does not get the disabled attr. So this aria-disabled gets set in the div
       aria-disabled={isDisabled}
+      clearText={t("clear.text")}
+      closeText={t("close.text")}
       disableCloseOnSelect={hasMultipleChoices}
       disabled={isDisabled}
       freeSolo={isCustomValueAllowed}

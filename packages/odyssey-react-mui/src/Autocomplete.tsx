@@ -11,6 +11,7 @@
  */
 
 import { memo } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Autocomplete as MuiAutocomplete,
   AutocompleteProps as MuiAutocompleteProps,
@@ -256,13 +257,13 @@ const Autocomplete = <
   testId,
   translate,
 }: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
+  const { t } = useTranslation();
   const {
     inputValueProp,
     isVirtualizedRef,
     onChange,
     onInputChange,
     renderInput,
-    t,
     valueProps,
   } = useAutocomplete<OptionType, HasMultipleChoices, IsCustomValueAllowed>({
     ariaDescribedBy,

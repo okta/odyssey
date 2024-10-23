@@ -11,7 +11,6 @@
  */
 
 import { useCallback, useMemo, useRef } from "react";
-import { useTranslation } from "react-i18next";
 import {
   InputBase,
   UseAutocompleteProps as MuiUseAutocompleteProps,
@@ -79,7 +78,6 @@ export const useAutocomplete = <
   HasMultipleChoices,
   IsCustomValueAllowed
 >) => {
-  const { t } = useTranslation();
   const controlledStateRef = useRef(
     getControlState({
       controlledValue: value,
@@ -219,7 +217,6 @@ export const useAutocomplete = <
     onChange,
     onInputChange,
     renderInput,
-    t,
     valueProps,
   };
 };
