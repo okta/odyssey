@@ -28,6 +28,9 @@ export type ShadowDomElements = ReturnType<
   typeof createUnattachedShadowDomElements
 >;
 
+/**
+ * @deprecated Use `renderReactInWebComponent` instead. This function was necessary when using bare Shadow DOM, but with UI Shell rendering in a Web Component, you won't be able to render your Shadow DOM in its Shadow DOM without using a Web Component.
+ */
 export const createShadowDomElements = (containerElement: HTMLElement) => {
   const shadowRoot = containerElement.attachShadow({ mode: "open" });
 
