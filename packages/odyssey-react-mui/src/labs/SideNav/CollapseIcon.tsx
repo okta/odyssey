@@ -15,7 +15,7 @@ import { memo } from "react";
 const CollapseIcon = () => {
   return (
     <svg
-      id="collapse"
+      id="sidenavcollapseicon"
       width="32"
       height="32"
       viewBox="0 0 12 20"

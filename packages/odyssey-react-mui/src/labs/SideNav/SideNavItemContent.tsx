@@ -17,6 +17,7 @@ import {
   useCallback,
   memo,
   KeyboardEvent,
+  useMemo,
 } from "react";
 import { Link } from "../../Link";
 import {
@@ -25,7 +26,7 @@ import {
 } from "../../OdysseyDesignTokensContext";
 import { SideNavItemLinkContent } from "./SideNavItemLinkContent";
 import type { SideNavItem } from "./types";
-import { SideNavItemContentContext } from "./SideNavItemContentContext";
+import { useSideNavItemContent } from "./SideNavItemContentContext";
 
 export const SideNavListItemContainer = styled("li", {
   shouldForwardProp: (prop) =>
@@ -37,45 +38,46 @@ export const SideNavListItemContainer = styled("li", {
   odysseyDesignTokens: DesignTokens;
   isCompact?: boolean;
   isSelected?: boolean;
-  disabled?: boolean;
   isDisabled?: boolean;
+  disabled?: boolean;
 }>(({ odysseyDesignTokens, isCompact, isSelected, isDisabled }) => ({
   display: "flex",
   alignItems: "center",
-  cursor: isDisabled ? "default" : "pointer",
-  pointerEvents: isDisabled ? "none" : "auto",
   backgroundColor: isSelected ? odysseyDesignTokens.HueNeutral50 : "unset",
   margin: `${odysseyDesignTokens.Spacing1} 0`,
   "&:last-child": {
     marginBottom: odysseyDesignTokens.Spacing2,
   },
-  "& a, & div[role='button']": {
+  "& [data-se='navlink']": {
     display: "flex",
     alignItems: "center",
     width: "100%",
-    minHeight: isCompact ? "37px" : "48px",
+    minHeight: isCompact
+      ? odysseyDesignTokens.Spacing6
+      : odysseyDesignTokens.Spacing7,
     padding: isCompact
       ? `${odysseyDesignTokens.Spacing0} ${odysseyDesignTokens.Spacing4}`
       : `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
     color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
   },
-  "& a:hover, & div[role='button']:hover": {
+  "& [data-se='navlink']:hover": {
     textDecoration: "none",
-    color: `${odysseyDesignTokens.TypographyColorAction} !important`,
     cursor: isDisabled ? "default" : "pointer",
+    color: `${odysseyDesignTokens.TypographyColorAction} !important`,
     backgroundColor: !isDisabled ? odysseyDesignTokens.HueNeutral50 : "inherit",
   },
-  "& a:focus-visible, & div[role='button']:focus-visible": {
+  "& [data-se='navlink']:focus-visible": {
     outlineOffset: 0,
     color: `${odysseyDesignTokens.TypographyColorAction} !important`,
     outlineWidth: odysseyDesignTokens.FocusOutlineWidthMain,
     backgroundColor: !isDisabled ? odysseyDesignTokens.HueNeutral50 : "inherit",
   },
-  ".nav-accordion-details a, .nav-accordion-details div[role='button']": {
-    padding: isCompact
-      ? `${odysseyDesignTokens.Spacing0} ${odysseyDesignTokens.Spacing4} ${odysseyDesignTokens.Spacing0} ${odysseyDesignTokens.Spacing6}`
-      : `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4} ${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing6}`,
-  },
+  ".nav-accordion-details [data-se='navlink'], .nav-accordion-details [data-se='navlink-disabled']":
+    {
+      padding: isCompact
+        ? `${odysseyDesignTokens.Spacing0} ${odysseyDesignTokens.Spacing4} ${odysseyDesignTokens.Spacing0} ${odysseyDesignTokens.Spacing6}`
+        : `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4} ${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing6}`,
+    },
 }));
 
 const scrollToNode = (node: HTMLElement | null) => {
@@ -107,7 +109,10 @@ const NavItemContentClickContainer = styled("div", {
   display: "flex",
   alignItems: "center",
   width: "100%",
-  minHeight: isCompact ? "37px" : "48px",
+  minHeight: isCompact
+    ? odysseyDesignTokens.Spacing6
+    : odysseyDesignTokens.Spacing7,
+  cursor: "default",
   padding: isCompact
     ? `${odysseyDesignTokens.Spacing0} ${odysseyDesignTokens.Spacing4}`
     : `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
@@ -154,6 +159,12 @@ const SideNavItemContent = ({
    */
   scrollRef?: React.RefObject<ScrollIntoViewHandle>;
 }) => {
+  const sidenavItemContentContext = useSideNavItemContent();
+  const isCompact = useMemo(
+    () => sidenavItemContentContext.isCompact || false,
+    [sidenavItemContentContext],
+  );
+
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const localScrollRef = useRef<HTMLLIElement>(null);
@@ -180,68 +191,66 @@ const SideNavItemContent = ({
   );
 
   return (
-    <SideNavItemContentContext.Consumer>
-      {(value) => (
-        <SideNavListItemContainer
-          ref={localScrollRef}
-          id={id}
-          key={id}
-          isCompact={value.isCompact}
-          disabled={isDisabled}
-          aria-disabled={isDisabled}
-          isDisabled={isDisabled}
-          isSelected={isSelected}
-          odysseyDesignTokens={odysseyDesignTokens}
-        >
-          {
-            // Use Link for nav items with links and div for disabled or non-link items
-            isDisabled ? (
-              <NavItemContentClickContainer
-                odysseyDesignTokens={odysseyDesignTokens}
-                isCompact={value.isCompact}
-                isDisabled={isDisabled}
-              >
-                <SideNavItemLinkContent
-                  label={label}
-                  startIcon={startIcon}
-                  endIcon={endIcon}
-                  statusLabel={statusLabel}
-                  severity={severity}
-                />
-              </NavItemContentClickContainer>
-            ) : !href ? (
-              <NavItemContentClickContainer
-                odysseyDesignTokens={odysseyDesignTokens}
-                isCompact={value.isCompact}
-                isDisabled={isDisabled}
-                role="button"
-                tabIndex={0}
-                onClick={onClick}
-                onKeyDown={sideNavItemContentKeyHandler}
-              >
-                <SideNavItemLinkContent
-                  label={label}
-                  startIcon={startIcon}
-                  endIcon={endIcon}
-                  statusLabel={statusLabel}
-                  severity={severity}
-                />
-              </NavItemContentClickContainer>
-            ) : (
-              <Link href={href} target={target} onClick={onClick}>
-                <SideNavItemLinkContent
-                  label={label}
-                  startIcon={startIcon}
-                  endIcon={endIcon}
-                  statusLabel={statusLabel}
-                  severity={severity}
-                />
-              </Link>
-            )
-          }
-        </SideNavListItemContainer>
-      )}
-    </SideNavItemContentContext.Consumer>
+    <SideNavListItemContainer
+      ref={localScrollRef}
+      id={id}
+      key={id}
+      isCompact={isCompact}
+      isSelected={isSelected}
+      isDisabled={isDisabled}
+      disabled={isDisabled}
+      aria-disabled={isDisabled}
+      odysseyDesignTokens={odysseyDesignTokens}
+    >
+      {
+        // Use Link for nav items with links and div for disabled or non-link items
+        isDisabled ? (
+          <NavItemContentClickContainer
+            odysseyDesignTokens={odysseyDesignTokens}
+            isCompact={isCompact}
+            isDisabled={isDisabled}
+            data-se="navlink-disabled"
+          >
+            <SideNavItemLinkContent
+              label={label}
+              startIcon={startIcon}
+              endIcon={endIcon}
+              statusLabel={statusLabel}
+              severity={severity}
+            />
+          </NavItemContentClickContainer>
+        ) : !href ? (
+          <NavItemContentClickContainer
+            odysseyDesignTokens={odysseyDesignTokens}
+            isCompact={isCompact}
+            isDisabled={isDisabled}
+            role="button"
+            tabIndex={0}
+            onClick={onClick}
+            onKeyDown={sideNavItemContentKeyHandler}
+            data-se="navlink"
+          >
+            <SideNavItemLinkContent
+              label={label}
+              startIcon={startIcon}
+              endIcon={endIcon}
+              statusLabel={statusLabel}
+              severity={severity}
+            />
+          </NavItemContentClickContainer>
+        ) : (
+          <Link href={href} target={target} onClick={onClick} testId="navlink">
+            <SideNavItemLinkContent
+              label={label}
+              startIcon={startIcon}
+              endIcon={endIcon}
+              statusLabel={statusLabel}
+              severity={severity}
+            />
+          </Link>
+        )
+      }
+    </SideNavListItemContainer>
   );
 };
 const MemoizedSideNavItemContent = memo(SideNavItemContent);
