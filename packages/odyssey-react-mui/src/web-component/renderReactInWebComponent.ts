@@ -119,8 +119,9 @@ export type RenderReactInWebComponentProps = {
    */
   webComponentChildren?: HTMLElement | HTMLElement[];
   /**
-   * You React app renders in the web component, but you then need to render the web component in the document.
-   * This is the element the web component renders into.
+   * You React app renders in the web component, but the web component needs to be rendered in the document.
+   *
+   * This is the element the web component is rendered into.
    */
   webComponentRootElement: HTMLElement;
 };
