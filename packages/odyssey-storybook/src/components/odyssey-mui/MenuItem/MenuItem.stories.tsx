@@ -10,7 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { useRef } from "react";
 import { Meta, StoryObj } from "@storybook/react";
+import { Menu as MuiMenu } from "@mui/material";
 import { MenuItem, MenuItemProps } from "@okta/odyssey-react-mui";
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
@@ -69,7 +71,7 @@ const storybookMeta: Meta<typeof MenuItem> = {
     },
   },
   args: {
-    children: "Content for MenuItem",
+    children: "MenuItem content",
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
@@ -77,12 +79,31 @@ const storybookMeta: Meta<typeof MenuItem> = {
 
 export default storybookMeta;
 
-export const Simple: StoryObj<MenuItemProps> = {};
+const BaseStory = (props: MenuItemProps) => {
+  const anchorRef = useRef<HTMLDivElement>(null);
+
+  return (
+    <div ref={anchorRef}>
+      <MuiMenu anchorEl={anchorRef.current} open>
+        <MenuItem {...props}>{props.children}</MenuItem>
+      </MuiMenu>
+    </div>
+  );
+};
+
+export const Simple: StoryObj<MenuItemProps> = {
+  render: function C(props: MenuItemProps) {
+    return <BaseStory {...props} />;
+  },
+};
 
 export const Destructive: StoryObj<MenuItemProps> = {
   args: {
     variant: "destructive",
     children: "Destructive MenuItem",
+  },
+  render: function C(props: MenuItemProps) {
+    return <BaseStory {...props} />;
   },
 };
 
@@ -91,11 +112,17 @@ export const Disabled: StoryObj<MenuItemProps> = {
     isDisabled: true,
     children: "Disabled MenuItem",
   },
+  render: function C(props: MenuItemProps) {
+    return <BaseStory {...props} />;
+  },
 };
 
 export const Selected: StoryObj<MenuItemProps> = {
   args: {
     isSelected: true,
     children: "Selected MenuItem",
+  },
+  render: function C(props: MenuItemProps) {
+    return <BaseStory {...props} />;
   },
 };
