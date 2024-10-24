@@ -10,12 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { FieldComponentProps } from "@okta/odyssey-react-mui";
-import { ArgTypes } from "@storybook/react";
-
-export const fieldComponentPropsMetaData: Partial<
-  ArgTypes<FieldComponentProps>
-> = {
+export const pickerComponentPropsMetadata = {
   errorMessage: {
     control: "text",
     description:
@@ -29,7 +24,7 @@ export const fieldComponentPropsMetaData: Partial<
   errorMessageList: {
     control: null,
     description:
-      "The list of error messages rendered at the buttom of the `error` message",
+      "The list of error messages rendered at the bottom of the `error` message",
     table: {
       type: {
         summary: "array",

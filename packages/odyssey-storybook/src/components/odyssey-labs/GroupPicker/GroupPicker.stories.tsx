@@ -15,6 +15,7 @@ import {
   GroupPickerProps,
   GroupPickerOptionType,
 } from "@okta/odyssey-react-mui/labs";
+
 import { Meta, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
