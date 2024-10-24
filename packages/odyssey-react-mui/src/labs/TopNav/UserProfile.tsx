@@ -64,6 +64,7 @@ const UserProfile = ({ profileIcon, userName, orgName }: UserProfileProps) => {
           {profileIcon}
         </UserProfileIconContainer>
       )}
+
       <UserProfileInfoContainer>
         <Subordinate color="textPrimary">{userName}</Subordinate>
         <Subordinate color="textSecondary">{orgName}</Subordinate>

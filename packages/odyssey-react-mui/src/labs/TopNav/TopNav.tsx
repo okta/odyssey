@@ -23,8 +23,6 @@ import {
 import { UserProfile, UserProfileProps } from "./UserProfile";
 import { TopNavItemContent, TopNavItemContentProps } from "./TopNavItemContent";
 
-export const TOP_NAV_HEIGHT_TOKEN = "Spacing9";
-
 export type TopNavProps = {
   /**
    *  Pass in a SearchField component with the variant="filled" prop set
@@ -96,7 +94,7 @@ const TopNavContainer = styled("div", {
   display: "flex",
   alignItems: "center",
   backgroundColor: odysseyDesignTokens.HueNeutralWhite,
-  height: odysseyDesignTokens[TOP_NAV_HEIGHT_TOKEN],
+  height: odysseyDesignTokens.Spacing9,
 }));
 
 const SearchFieldContainer = styled("div", {
@@ -141,9 +139,11 @@ const TopNav = ({
           {SearchFieldComponent}
         </SearchFieldContainer>
       )}
+
       <TopNavListContainer>
         {processedNavItems?.map((item) => item)}
       </TopNavListContainer>
+
       <LinkAndProfileWrapper>
         {(AdditionalNavItemComponent || settingsPageHref || helpPageHref) && (
           <AdditionalLinkContainerWithBorder
@@ -156,6 +156,7 @@ const TopNav = ({
                 {AdditionalNavItemComponent}
               </AdditionalNavItemContainer>
             )}
+
             {settingsPageHref && (
               <LinkContainer odysseyDesignTokens={odysseyDesignTokens}>
                 <Link href={settingsPageHref} ariaLabel="settings page">
@@ -163,6 +164,7 @@ const TopNav = ({
                 </Link>
               </LinkContainer>
             )}
+
             {helpPageHref && (
               <LinkContainer odysseyDesignTokens={odysseyDesignTokens}>
                 <Link href={helpPageHref} ariaLabel="help page">
@@ -172,6 +174,7 @@ const TopNav = ({
             )}
           </AdditionalLinkContainerWithBorder>
         )}
+
         {userProfile && <UserProfile {...userProfile} />}
       </LinkAndProfileWrapper>
     </TopNavContainer>
