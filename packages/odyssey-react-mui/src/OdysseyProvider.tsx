@@ -66,6 +66,7 @@ const OdysseyProvider = <SupportedLanguages extends string>({
       shadowRootElement={shadowRootElement}
       themeOverride={themeOverride}
     >
+      {/* This component creates a div; for flexibility of layout of children, make it inherit its parent's height */}
       <ScopedCssBaseline sx={scopedCssBaselineStyles}>
         <OdysseyTranslationProvider<SupportedLanguages>
           languageCode={languageCode}

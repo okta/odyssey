@@ -21,7 +21,6 @@ import {
 import * as Tokens from "@okta/odyssey-design-tokens";
 
 export type ContrastMode = "lowContrast" | "highContrast";
-
 export type ContrastModeContextType = {
   contrastMode: ContrastMode;
 };
@@ -29,6 +28,8 @@ export type ContrastModeContextType = {
 export const ContrastModeContext = createContext<ContrastModeContextType>({
   contrastMode: "lowContrast",
 });
+
+export const defaultContrast = "lowContrast";
 
 export const useContrastModeContext = () => useContext(ContrastModeContext);
 

@@ -23,13 +23,13 @@ import "./components.types";
 import "./mixins.types";
 import "./palette.types";
 import "./typography.types";
-import { type ContrastMode } from "../useContrastMode";
+import { type ContrastMode, defaultContrast } from "../useContrastMode";
 
 export type DesignTokens = typeof Tokens;
 export type DesignTokensOverride = Partial<typeof Tokens>;
 
 export const createOdysseyMuiTheme = ({
-  contrastMode = "lowContrast",
+  contrastMode = defaultContrast,
   odysseyTokens,
   shadowDomElement,
   shadowRootElement,
