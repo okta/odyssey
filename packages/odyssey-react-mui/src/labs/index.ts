@@ -36,4 +36,4 @@ export * from "./GroupPicker";
 
 export * from "./NavAccordion";
 export * from "./SideNav";
-export * from "./TopNav";
+export * from "./TopNav/TopNav";
