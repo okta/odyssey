@@ -77,6 +77,7 @@ describe("useContrastMode and related functions", () => {
     });
 
     it("should update contrast mode based on background color changes", async () => {
+      // Mock getComputedStyle to simulate background color checks
       const getComputedStyleSpy = jest
         .spyOn(window, "getComputedStyle")
         .mockImplementation(
@@ -93,6 +94,7 @@ describe("useContrastMode and related functions", () => {
         );
       };
 
+      // Render component within ContrastMode context
       const { getByTestId } = render(
         <ContrastModeContext.Provider value={{ contrastMode: "lowContrast" }}>
           <TestComponent />
@@ -101,19 +103,22 @@ describe("useContrastMode and related functions", () => {
 
       const testContainer = getByTestId("container");
 
-      act(() => {
-        testContainer.style.backgroundColor = Tokens.HueNeutral50;
-        const event = new Event("transitionend");
-        Object.defineProperty(event, "propertyName", {
-          value: "background-color",
-        });
-        testContainer.dispatchEvent(event);
-      });
-
+      // Create and dispatch a transitionend event to simulate CSS transition completion
+      // Storybook and certain elements use transitions which could interfere with tests
       await act(async () => {
-        await new Promise((resolve) => setTimeout(resolve, 0));
+        testContainer.style.backgroundColor = Tokens.HueNeutral50;
+
+        const transitionEvent = new Event("transitionend");
+
+        testContainer.dispatchEvent(
+          Object.assign(transitionEvent, { propertyName: "background-color" }),
+        );
+
+        // Allow time for the event handling and state updates to complete
+        await Promise.resolve();
       });
 
+      // Wait for the contrast mode to update
       await waitFor(
         () => {
           expect(getByTestId("container").textContent).toBe("highContrast");
