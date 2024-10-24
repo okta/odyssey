@@ -23,6 +23,8 @@ import {
 import { UserProfile, UserProfileProps } from "./UserProfile";
 import { TopNavItemContent, TopNavItemContentProps } from "./TopNavItemContent";
 
+export const TOP_NAV_HEIGHT_TOKEN = "Spacing9";
+
 export type TopNavProps = {
   /**
    *  Pass in a SearchField component with the variant="filled" prop set
@@ -94,7 +96,7 @@ const TopNavContainer = styled("div", {
   display: "flex",
   alignItems: "center",
   backgroundColor: odysseyDesignTokens.HueNeutralWhite,
-  height: odysseyDesignTokens.Spacing9,
+  height: odysseyDesignTokens[TOP_NAV_HEIGHT_TOKEN],
 }));
 
 const SearchFieldContainer = styled("div", {
