@@ -43,10 +43,9 @@ describe("useContrastMode and related functions", () => {
           </ContrastModeContext.Provider>
         ),
       });
-
+      expect(result.current.parentBackgroundColor).toBe("#ffffff");
       expect(result.current.contrastMode).toBe("lowContrast");
       expect(result.current.contrastContainerRef.current).toBe(null);
-      expect(result.current.parentBackgroundColor).toBe("#ffffff");
 
       getComputedStyleSpy.mockRestore();
     });
@@ -147,6 +146,20 @@ describe("useContrastMode and related functions", () => {
       getComputedStyleSpy.mockRestore();
     });
 
+    it('returns "#ffffff" if no non-transparent background is found', () => {
+      const getComputedStyleSpy = jest
+        .spyOn(window, "getComputedStyle")
+        .mockImplementation(
+          () =>
+            ({ backgroundColor: "rgba(0, 0, 0, 0)" }) as CSSStyleDeclaration,
+        );
+
+      const element = document.createElement("div");
+      expect(getBackgroundColor(element)).toBe("#ffffff");
+
+      getComputedStyleSpy.mockRestore();
+    });
+
     it("returns the background color of the parent if the element is transparent", () => {
       const parent = document.createElement("div");
       const child = document.createElement("div");
@@ -164,20 +177,6 @@ describe("useContrastMode and related functions", () => {
         );
 
       expect(getBackgroundColor(child)).toBe("rgb(0, 255, 0)");
-
-      getComputedStyleSpy.mockRestore();
-    });
-
-    it('returns "#ffffff" if no non-transparent background is found', () => {
-      const getComputedStyleSpy = jest
-        .spyOn(window, "getComputedStyle")
-        .mockImplementation(
-          () =>
-            ({ backgroundColor: "rgba(0, 0, 0, 0)" }) as CSSStyleDeclaration,
-        );
-
-      const element = document.createElement("div");
-      expect(getBackgroundColor(element)).toBe("#ffffff");
 
       getComputedStyleSpy.mockRestore();
     });
@@ -290,5 +289,26 @@ describe("useContrastMode and related functions", () => {
 
       expect(result.current.contrastMode).toBe("highContrast");
     });
+  });
+
+  it("detects parent background color changes", () => {
+    const parent = document.createElement("div");
+    const child = document.createElement("div");
+    parent.appendChild(child);
+
+    const getComputedStyleSpy = jest
+      .spyOn(window, "getComputedStyle")
+      .mockImplementation(
+        (el: Element) =>
+          ({
+            backgroundColor:
+              el === parent ? Tokens.HueNeutral50 : "rgba(0, 0, 0, 0)",
+          }) as CSSStyleDeclaration,
+      );
+
+    const result = getBackgroundColor(child);
+    expect(result).toBe(Tokens.HueNeutral50);
+
+    getComputedStyleSpy.mockRestore();
   });
 });
