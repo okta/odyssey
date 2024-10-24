@@ -34,6 +34,6 @@ export * from "./PaginatedTable";
 
 export * from "./GroupPicker";
 
-export * from "./NavAccordion";
+export * from "./SideNav/NavAccordion";
 export * from "./SideNav";
 export * from "./TopNav";

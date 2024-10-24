@@ -19,14 +19,14 @@ import {
 } from "@mui/material";
 import { ReactNode, memo } from "react";
 
-import type { HtmlProps } from "../HtmlProps";
-import { ChevronRightIcon } from "../icons.generated";
+import type { HtmlProps } from "../../HtmlProps";
+import { ChevronRightIcon } from "../../icons.generated";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "../OdysseyDesignTokensContext";
-import { Support } from "../Typography";
-import { useUniqueId } from "../useUniqueId";
+} from "../../OdysseyDesignTokensContext";
+import { Support } from "../../Typography";
+import { useUniqueId } from "../../useUniqueId";
 
 export type NavAccordionProps = {
   /**

@@ -21,7 +21,7 @@ import {
   useEffect,
 } from "react";
 
-import { NavAccordion } from "../NavAccordion";
+import { NavAccordion } from "./NavAccordion";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
