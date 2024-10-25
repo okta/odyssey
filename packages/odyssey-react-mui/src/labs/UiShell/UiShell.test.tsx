@@ -12,7 +12,7 @@
 
 import { render, within } from "@testing-library/react";
 
-import { Dialog } from "../Dialog";
+import { Dialog } from "../../Dialog";
 import { defaultComponentProps, UiShell, UiShellProps } from "./UiShell";
 import { ReactElement } from "react";
 

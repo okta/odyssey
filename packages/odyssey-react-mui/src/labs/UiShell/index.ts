@@ -11,3 +11,4 @@
  */
 
 export * from "./renderUiShell";
+export * from "./UiShell";

@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import styled from "@emotion/styled";
 import {
   memo,
   useEffect,
@@ -19,18 +20,26 @@ import {
 } from "react";
 import { ErrorBoundary, ErrorBoundaryProps } from "react-error-boundary";
 
-import { SideNav, type SideNavProps } from "../labs/SideNav";
-import { TopNav, type TopNavProps } from "../labs/TopNav";
-import { OdysseyProvider } from "../OdysseyProvider";
-import { type ReactRootElements } from "../web-component";
+import { SideNav, type SideNavProps } from "../SideNav";
+import { TopNav, type TopNavProps } from "../TopNav";
+import { OdysseyProvider } from "../../OdysseyProvider";
+import { type ReactRootElements } from "../../web-component";
+import { AppContent } from "./AppContainer";
 
-const appContainerStyles = {
-  flexGrow: "1",
-};
-
-const uiShellContainerStyles = {
+const FlexContainer = styled("div")(() => ({
   display: "flex",
-};
+  height: "inherit",
+}));
+
+const FlexibleContentContainer = styled("div")(() => ({
+  flexGrow: 1,
+  height: "inherit",
+}));
+
+const RigidContentContainer = styled("div")(() => ({
+  flexShrink: 0,
+  height: "inherit",
+}));
 
 export type UiShellComponentProps = {
   sideNavProps?: Omit<SideNavProps, "logo" | "footerComponent">;
@@ -122,23 +131,25 @@ const UiShell = ({
         emotionRootElement={stylesRootElement}
         shadowRootElement={appRootElement}
       >
-        <div style={uiShellContainerStyles}>
-          {componentProps.sideNavProps && (
-            <ErrorBoundary fallback={null} onError={onError}>
-              <SideNav
-                {...("footerItems" in componentProps.sideNavProps
-                  ? componentProps.sideNavProps
-                  : {
-                      ...componentProps.sideNavProps,
-                      footerComponent: optionalComponents?.footer,
-                      footerItems: undefined,
-                    })}
-                logo={optionalComponents?.logo}
-              />
-            </ErrorBoundary>
-          )}
+        <FlexContainer>
+          <RigidContentContainer>
+            {componentProps.sideNavProps && (
+              <ErrorBoundary fallback={null} onError={onError}>
+                <SideNav
+                  {...("footerItems" in componentProps.sideNavProps
+                    ? componentProps.sideNavProps
+                    : {
+                        ...componentProps.sideNavProps,
+                        footerComponent: optionalComponents?.footer,
+                        footerItems: undefined,
+                      })}
+                  logo={optionalComponents?.logo}
+                />
+              </ErrorBoundary>
+            )}
+          </RigidContentContainer>
 
-          <div style={appContainerStyles}>
+          <FlexibleContentContainer>
             <ErrorBoundary fallback={null} onError={onError}>
               <TopNav
                 {...componentProps.topNavProps}
@@ -149,9 +160,9 @@ const UiShell = ({
               />
             </ErrorBoundary>
 
-            {appComponent}
-          </div>
-        </div>
+            <AppContent>{appComponent}</AppContent>
+          </FlexibleContentContainer>
+        </FlexContainer>
       </OdysseyProvider>
     </ErrorBoundary>
   );

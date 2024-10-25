@@ -16,7 +16,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { bufferLatest } from "./bufferLatest";
 import { createMessageBus } from "./createMessageBus";
 import { UiShell, UiShellProps, type UiShellComponentProps } from "./UiShell";
-import { renderReactInWebComponent } from "../web-component/renderReactInWebComponent";
+import { renderReactInWebComponent } from "../../web-component/renderReactInWebComponent";
 
 export const optionalComponentSlotNames: Record<
   keyof Required<UiShellProps>["optionalComponents"],
@@ -90,11 +90,11 @@ export const renderUiShell = ({
     Object.values(slottedElements).concat(appRootElement);
 
   const uiShellElement = renderReactInWebComponent({
-    getReactComponent: (shadowDomElements) => (
+    getReactComponent: (reactRootElements) => (
       <ErrorBoundary fallback={<slot />} onError={onError}>
         <UiShell
           appComponent={<slot />}
-          appRootElement={shadowDomElements.appRootElement}
+          appRootElement={reactRootElements.appRootElement}
           onError={onError}
           onSubscriptionCreated={publishSubscriptionCreated}
           optionalComponents={Object.fromEntries(
@@ -105,7 +105,7 @@ export const renderUiShell = ({
               ],
             ),
           )}
-          stylesRootElement={shadowDomElements.stylesRootElement}
+          stylesRootElement={reactRootElements.stylesRootElement}
           subscribeToPropChanges={subscribeToPropChanges}
         />
       </ErrorBoundary>
