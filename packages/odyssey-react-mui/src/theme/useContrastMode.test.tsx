@@ -28,14 +28,22 @@ describe("useContrastMode and related functions", () => {
   });
 
   describe("useContrastMode hook", () => {
-    it("should return lowContrast mode by default", () => {
-      const getComputedStyleSpy = jest
+    let getComputedStyleSpy: jest.SpyInstance;
+
+    beforeEach(() => {
+      getComputedStyleSpy = jest
         .spyOn(window, "getComputedStyle")
         .mockImplementation(
           () =>
             ({ backgroundColor: "rgba(0, 0, 0, 0)" }) as CSSStyleDeclaration,
         );
+    });
 
+    afterEach(() => {
+      getComputedStyleSpy.mockRestore();
+    });
+
+    it("should return lowContrast mode by default", () => {
       const { result } = renderHook(() => useContrastMode({}), {
         wrapper: ({ children }) => (
           <ContrastModeContext.Provider value={{ contrastMode: "lowContrast" }}>
@@ -46,18 +54,9 @@ describe("useContrastMode and related functions", () => {
       expect(result.current.parentBackgroundColor).toBe("#ffffff");
       expect(result.current.contrastMode).toBe("lowContrast");
       expect(result.current.contrastContainerRef.current).toBe(null);
-
-      getComputedStyleSpy.mockRestore();
     });
 
     it("should respect explicitly set contrast mode", () => {
-      const getComputedStyleSpy = jest
-        .spyOn(window, "getComputedStyle")
-        .mockImplementation(
-          () =>
-            ({ backgroundColor: "rgba(0, 0, 0, 0)" }) as CSSStyleDeclaration,
-        );
-
       const { result } = renderHook(
         () => useContrastMode({ contrastMode: "highContrast" }),
         {
@@ -72,18 +71,13 @@ describe("useContrastMode and related functions", () => {
       );
 
       expect(result.current.contrastMode).toBe("highContrast");
-
-      getComputedStyleSpy.mockRestore();
     });
 
     it("should update contrast mode based on background color changes", async () => {
       // Mock getComputedStyle to simulate background color checks
-      const getComputedStyleSpy = jest
-        .spyOn(window, "getComputedStyle")
-        .mockImplementation(
-          () =>
-            ({ backgroundColor: Tokens.HueNeutral50 }) as CSSStyleDeclaration,
-        );
+      getComputedStyleSpy.mockImplementation(
+        () => ({ backgroundColor: Tokens.HueNeutral50 }) as CSSStyleDeclaration,
+      );
 
       const TestComponent = () => {
         const { contrastContainerRef, contrastMode } = useContrastMode({});
@@ -119,18 +113,78 @@ describe("useContrastMode and related functions", () => {
       });
 
       // Wait for the contrast mode to update
-      await waitFor(
-        () => {
-          expect(getByTestId("container").textContent).toBe("highContrast");
-        },
-        { timeout: 1000 },
+      await waitFor(() => {
+        expect(getByTestId("container").textContent).toBe("highContrast");
+      });
+    });
+
+    it("should clean up observers and event listeners on unmount", () => {
+      const disconnect = jest.fn();
+      const observe = jest.fn();
+      const addEventListenerSpy = jest.spyOn(document, "addEventListener");
+      const removeEventListenerSpy = jest.spyOn(
+        document,
+        "removeEventListener",
       );
 
-      getComputedStyleSpy.mockRestore();
+      const mockMutationObserver = jest.fn<
+        MutationObserver,
+        [MutationCallback]
+      >(() => ({
+        disconnect,
+        observe,
+        takeRecords: jest.fn(),
+      }));
+
+      const originalMutationObserver = global.MutationObserver;
+      global.MutationObserver = mockMutationObserver;
+
+      const TestComponent = () => {
+        const { contrastContainerRef } = useContrastMode({});
+        return <div ref={contrastContainerRef}>Test</div>;
+      };
+
+      const { unmount } = render(
+        <ContrastModeContext.Provider value={{ contrastMode: "lowContrast" }}>
+          <TestComponent />
+        </ContrastModeContext.Provider>,
+      );
+
+      unmount();
+
+      expect(disconnect).toHaveBeenCalled();
+      expect(removeEventListenerSpy).toHaveBeenCalledWith(
+        "transitionend",
+        expect.any(Function),
+      );
+
+      global.MutationObserver = originalMutationObserver;
+      addEventListenerSpy.mockRestore();
+      removeEventListenerSpy.mockRestore();
     });
   });
 
   describe("getBackgroundColor", () => {
+    let getComputedStyleSpy: jest.SpyInstance;
+
+    beforeEach(() => {
+      getComputedStyleSpy = jest
+        .spyOn(window, "getComputedStyle")
+        .mockImplementation(
+          () =>
+            ({ backgroundColor: "rgba(0, 0, 0, 0)" }) as CSSStyleDeclaration,
+        );
+    });
+
+    afterEach(() => {
+      getComputedStyleSpy.mockRestore();
+    });
+
+    it('returns "#ffffff" if transparent background is found', () => {
+      const element = document.createElement("div");
+      expect(getBackgroundColor(element)).toBe("#ffffff");
+    });
+
     it("returns the background color of the element if it is not transparent", () => {
       const getComputedStyleSpy = jest
         .spyOn(window, "getComputedStyle")
@@ -144,7 +198,7 @@ describe("useContrastMode and related functions", () => {
         );
 
       const element = document.createElement("div");
-      element.style.backgroundColor = "rgb(255, 0, 0)";
+      element.style.setProperty("background-color", "rgb(255, 0, 0)");
       const result = getBackgroundColor(element);
       expect(result).toBe("rgb(255, 0, 0)");
 
@@ -169,7 +223,7 @@ describe("useContrastMode and related functions", () => {
       const parent = document.createElement("div");
       const child = document.createElement("div");
       parent.appendChild(child);
-      parent.style.backgroundColor = "rgb(0, 255, 0)";
+      parent.style.setProperty("background-color", "rgb(0, 255, 0)");
 
       const getComputedStyleSpy = jest
         .spyOn(window, "getComputedStyle")
@@ -194,7 +248,7 @@ describe("useContrastMode and related functions", () => {
         );
 
       const element = document.createElement("div");
-      element.style.backgroundColor = hueNeutral50Rgb;
+      element.style.setProperty("background-color", hueNeutral50Rgb);
       expect(getBackgroundColor(element)).toBe(Tokens.HueNeutral50);
 
       getComputedStyleSpy.mockRestore();
@@ -206,7 +260,7 @@ describe("useContrastMode and related functions", () => {
       const child = document.createElement("div");
       grandparent.appendChild(parent);
       parent.appendChild(child);
-      grandparent.style.backgroundColor = "rgb(0, 0, 255)";
+      grandparent.style.setProperty("backgroundColor", "rgb(0, 0, 255)");
 
       const getComputedStyleSpy = jest
         .spyOn(window, "getComputedStyle")

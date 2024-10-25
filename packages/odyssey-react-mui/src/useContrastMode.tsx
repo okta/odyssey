@@ -33,20 +33,20 @@ export const defaultContrast = "lowContrast";
 
 export const useContrastModeContext = () => useContext(ContrastModeContext);
 
-const hexToRgb = (hex: string): string => {
-  const bigint = parseInt(hex.slice(1), 16);
-  const r = (bigint >> 16) & 255;
-  const g = (bigint >> 8) & 255;
-  const b = bigint & 255;
-  return `rgb(${r}, ${g}, ${b})`;
+const hexToRgb = (hexString: string) => {
+  const hexNumber = parseInt(hexString.slice(1), 16);
+  const red = (hexNumber >> 16) & 255;
+  const green = (hexNumber >> 8) & 255;
+  const blue = hexNumber & 255;
+  return `rgb(${red}, ${green}, ${blue})`;
 };
 
 export const hueNeutral50Rgb = hexToRgb(Tokens.HueNeutral50);
 
-const isTransparentColor = (color: string): boolean =>
+const isTransparentColor = (color: string) =>
   color === "rgba(0, 0, 0, 0)" || color === "transparent";
 
-const normalizeRgbaToRgb = (rgba: string): string =>
+const normalizeRgbaToRgb = (rgba: string) =>
   rgba.replace(/rgba\((\d+), (\d+), (\d+), \d+\)/, "rgb($1, $2, $3)");
 
 const getElementComputedBackgroundColor = (element: HTMLElement): string =>

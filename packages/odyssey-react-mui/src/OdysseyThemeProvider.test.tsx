@@ -14,7 +14,7 @@ import { render, waitFor, act } from "@testing-library/react";
 import { OdysseyThemeProvider } from "./OdysseyThemeProvider";
 import { ContrastModeContext } from "./useContrastMode";
 import * as Tokens from "@okta/odyssey-design-tokens";
-import React, { useContext } from "react";
+import { useContext } from "react";
 
 describe("OdysseyThemeProvider", () => {
   afterEach(() => {
