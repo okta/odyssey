@@ -857,7 +857,6 @@ export const components = ({
           },
 
           "&.isClickable:hover": {
-            backgroundColor: odysseyTokens.HueNeutral50,
             boxShadow: odysseyTokens.DepthHigh,
           },
 
@@ -1647,6 +1646,7 @@ export const components = ({
     },
     MuiDialog: {
       defaultProps: {
+        container: shadowRootElement || shadowDomElement,
         scroll: "paper",
       },
       styleOverrides: {
