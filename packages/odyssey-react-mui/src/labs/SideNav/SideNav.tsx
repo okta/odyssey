@@ -142,7 +142,7 @@ const SideNavExpandContainer = styled("nav", {
     visibility: isSideNavCollapsed ? "hidden" : "visible",
     width: isSideNavCollapsed ? 0 : expandedWidth,
     minWidth: isSideNavCollapsed ? 0 : expandedWidth,
-    transitionProperty: "opacity, width",
+    transitionProperty: "opacity",
     transitionDuration: odysseyDesignTokens.TransitionDurationMain,
     transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
     borderRight: `${odysseyDesignTokens.BorderWidthMain} ${odysseyDesignTokens.BorderStyleMain} ${odysseyDesignTokens.HueNeutral50}`,
@@ -478,10 +478,10 @@ const SideNav = ({
                     odysseyDesignTokens={odysseyDesignTokens}
                     disabled={isDisabled}
                     aria-disabled={isDisabled}
-                    isCompact={isCompact}
                   >
                     <NavAccordion
                       label={label}
+                      isCompact={isCompact}
                       isDefaultExpanded={isDefaultExpanded}
                       isExpanded={isExpanded}
                       startIcon={startIcon}

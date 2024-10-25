@@ -19,7 +19,7 @@ import {
   KeyboardEvent,
   useMemo,
 } from "react";
-import { Link } from "../../Link";
+import { Link as MuiLink } from "@mui/material";
 import {
   type DesignTokens,
   useOdysseyDesignTokens,
@@ -27,20 +27,16 @@ import {
 import { SideNavItemLinkContent } from "./SideNavItemLinkContent";
 import type { SideNavItem } from "./types";
 import { useSideNavItemContent } from "./SideNavItemContentContext";
+import { ExternalLinkIcon } from "../../icons.generated";
 
 export const SideNavListItemContainer = styled("li", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" &&
-    prop !== "isCompact" &&
-    prop !== "isSelected" &&
-    prop !== "isDisabled",
+    prop !== "odysseyDesignTokens" && prop !== "isSelected",
 })<{
   odysseyDesignTokens: DesignTokens;
-  isCompact?: boolean;
   isSelected?: boolean;
-  isDisabled?: boolean;
   disabled?: boolean;
-}>(({ odysseyDesignTokens, isCompact, isSelected, isDisabled }) => ({
+}>(({ odysseyDesignTokens, isSelected }) => ({
   display: "flex",
   alignItems: "center",
   backgroundColor: isSelected ? odysseyDesignTokens.HueNeutral50 : "unset",
@@ -48,36 +44,6 @@ export const SideNavListItemContainer = styled("li", {
   "&:last-child": {
     marginBottom: odysseyDesignTokens.Spacing2,
   },
-  "& [data-se='navlink']": {
-    display: "flex",
-    alignItems: "center",
-    width: "100%",
-    minHeight: isCompact
-      ? odysseyDesignTokens.Spacing6
-      : odysseyDesignTokens.Spacing7,
-    padding: isCompact
-      ? `${odysseyDesignTokens.Spacing0} ${odysseyDesignTokens.Spacing4}`
-      : `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
-    color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
-  },
-  "& [data-se='navlink']:hover": {
-    textDecoration: "none",
-    cursor: isDisabled ? "default" : "pointer",
-    color: `${odysseyDesignTokens.TypographyColorAction} !important`,
-    backgroundColor: !isDisabled ? odysseyDesignTokens.HueNeutral50 : "inherit",
-  },
-  "& [data-se='navlink']:focus-visible": {
-    outlineOffset: 0,
-    color: `${odysseyDesignTokens.TypographyColorAction} !important`,
-    outlineWidth: odysseyDesignTokens.FocusOutlineWidthMain,
-    backgroundColor: !isDisabled ? odysseyDesignTokens.HueNeutral50 : "inherit",
-  },
-  ".nav-accordion-details [data-se='navlink'], .nav-accordion-details [data-se='navlink-disabled']":
-    {
-      padding: isCompact
-        ? `${odysseyDesignTokens.Spacing0} ${odysseyDesignTokens.Spacing4} ${odysseyDesignTokens.Spacing0} ${odysseyDesignTokens.Spacing6}`
-        : `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4} ${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing6}`,
-    },
 }));
 
 const scrollToNode = (node: HTMLElement | null) => {
@@ -93,39 +59,6 @@ const scrollToNode = (node: HTMLElement | null) => {
 type ScrollIntoViewHandle = {
   scrollIntoView: () => void;
 };
-
-const NavItemContentClickContainer = styled("div", {
-  shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" &&
-    prop !== "isCompact" &&
-    prop !== "isDisabled",
-})<{
-  odysseyDesignTokens: DesignTokens;
-  isCompact?: boolean;
-  isSelected?: boolean;
-  disabled?: boolean;
-  isDisabled?: boolean;
-}>(({ odysseyDesignTokens, isCompact, isDisabled }) => ({
-  display: "flex",
-  alignItems: "center",
-  width: "100%",
-  minHeight: isCompact
-    ? odysseyDesignTokens.Spacing6
-    : odysseyDesignTokens.Spacing7,
-  cursor: "default",
-  padding: isCompact
-    ? `${odysseyDesignTokens.Spacing0} ${odysseyDesignTokens.Spacing4}`
-    : `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
-  color: `${isDisabled ? odysseyDesignTokens.TypographyColorDisabled : odysseyDesignTokens.TypographyColorHeading} !important`,
-  "&:focus-visible": {
-    borderRadius: 0,
-    outlineColor: odysseyDesignTokens.FocusOutlineColorPrimary,
-    outlineStyle: odysseyDesignTokens.FocusOutlineStyle,
-    outlineWidth: odysseyDesignTokens.FocusOutlineWidthMain,
-    backgroundColor: odysseyDesignTokens.HueNeutral50,
-    textDecoration: "none",
-  },
-}));
 
 const SideNavItemContent = ({
   id,
@@ -167,6 +100,67 @@ const SideNavItemContent = ({
 
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
+  const navItemContentStyles = useMemo(
+    () => ({
+      display: "flex",
+      alignItems: "center",
+      width: "100%",
+      textDecoration: "none",
+      color: `${isDisabled ? odysseyDesignTokens.TypographyColorDisabled : odysseyDesignTokens.TypographyColorHeading} !important`,
+      minHeight: isCompact
+        ? odysseyDesignTokens.Spacing6
+        : odysseyDesignTokens.Spacing7,
+      padding: isCompact
+        ? `${odysseyDesignTokens.Spacing0} ${odysseyDesignTokens.Spacing4}`
+        : `${odysseyDesignTokens.Spacing2} ${odysseyDesignTokens.Spacing4}`,
+      "&:focus-visible": {
+        borderRadius: 0,
+        outlineColor: odysseyDesignTokens.FocusOutlineColorPrimary,
+        outlineStyle: odysseyDesignTokens.FocusOutlineStyle,
+        outlineWidth: odysseyDesignTokens.FocusOutlineWidthMain,
+        textDecoration: "none",
+        outlineOffset: 0,
+        backgroundColor: !isDisabled
+          ? odysseyDesignTokens.HueNeutral50
+          : "inherit",
+        color: `${odysseyDesignTokens.TypographyColorAction} !important`,
+      },
+      "&:hover": {
+        textDecoration: "none",
+        cursor: isDisabled ? "default" : "pointer",
+        color: isDisabled
+          ? "default"
+          : `${odysseyDesignTokens.TypographyColorAction} !important`,
+        backgroundColor: !isDisabled
+          ? odysseyDesignTokens.HueNeutral50
+          : "inherit",
+      },
+    }),
+    [odysseyDesignTokens, isCompact, isDisabled],
+  );
+
+  const NavItemContentContainer = styled("div", {
+    shouldForwardProp: (prop) =>
+      prop !== "odysseyDesignTokens" &&
+      prop !== "isCompact" &&
+      prop !== "isDisabled",
+  })<{
+    disabled?: boolean;
+  }>(({}) => ({
+    ...navItemContentStyles,
+  }));
+
+  const NavItemLinkContainer = styled(MuiLink, {
+    shouldForwardProp: (prop) =>
+      prop !== "odysseyDesignTokens" &&
+      prop !== "isCompact" &&
+      prop !== "isDisabled",
+  })<{
+    disabled?: boolean;
+  }>(({}) => ({
+    ...navItemContentStyles,
+  }));
+
   const localScrollRef = useRef<HTMLLIElement>(null);
   useImperativeHandle(
     scrollRef,
@@ -195,9 +189,7 @@ const SideNavItemContent = ({
       ref={localScrollRef}
       id={id}
       key={id}
-      isCompact={isCompact}
       isSelected={isSelected}
-      isDisabled={isDisabled}
       disabled={isDisabled}
       aria-disabled={isDisabled}
       odysseyDesignTokens={odysseyDesignTokens}
@@ -205,12 +197,7 @@ const SideNavItemContent = ({
       {
         // Use Link for nav items with links and div for disabled or non-link items
         isDisabled ? (
-          <NavItemContentClickContainer
-            odysseyDesignTokens={odysseyDesignTokens}
-            isCompact={isCompact}
-            isDisabled={isDisabled}
-            data-se="navlink-disabled"
-          >
+          <NavItemContentContainer disabled={isDisabled}>
             <SideNavItemLinkContent
               label={label}
               startIcon={startIcon}
@@ -218,17 +205,14 @@ const SideNavItemContent = ({
               statusLabel={statusLabel}
               severity={severity}
             />
-          </NavItemContentClickContainer>
+          </NavItemContentContainer>
         ) : !href ? (
-          <NavItemContentClickContainer
-            odysseyDesignTokens={odysseyDesignTokens}
-            isCompact={isCompact}
-            isDisabled={isDisabled}
+          <NavItemContentContainer
+            disabled={isDisabled}
             role="button"
             tabIndex={0}
             onClick={onClick}
             onKeyDown={sideNavItemContentKeyHandler}
-            data-se="navlink"
           >
             <SideNavItemLinkContent
               label={label}
@@ -237,9 +221,9 @@ const SideNavItemContent = ({
               statusLabel={statusLabel}
               severity={severity}
             />
-          </NavItemContentClickContainer>
+          </NavItemContentContainer>
         ) : (
-          <Link href={href} target={target} onClick={onClick} testId="navlink">
+          <NavItemLinkContainer href={href} target={target} onClick={onClick}>
             <SideNavItemLinkContent
               label={label}
               startIcon={startIcon}
@@ -247,7 +231,12 @@ const SideNavItemContent = ({
               statusLabel={statusLabel}
               severity={severity}
             />
-          </Link>
+            {target === "_blank" && (
+              <span className="Link-indicator" role="presentation">
+                <ExternalLinkIcon />
+              </span>
+            )}
+          </NavItemLinkContainer>
         )
       }
     </SideNavListItemContainer>
