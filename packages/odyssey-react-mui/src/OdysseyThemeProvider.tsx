@@ -84,7 +84,7 @@ export const OdysseyThemeProvider = ({
   );
 
   return (
-    <div ref={contrastContainerRef}>
+    <div style={{ height: "inherit" }} ref={contrastContainerRef}>
       <ContrastModeContext.Provider value={contrastModeProviderValue}>
         <MuiThemeProvider theme={customOdysseyTheme}>
           <OdysseyDesignTokensContext.Provider value={odysseyTokens}>
