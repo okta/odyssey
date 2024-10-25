@@ -209,6 +209,34 @@ const LoadingTile = ({
   );
 };
 
+const StyledMuiCard = styled(MuiCard, {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
+  position: "relative",
+  boxShadow: "none",
+  overflow: "unset",
+
+  "&::after": {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    opacity: 0,
+    boxShadow: odysseyDesignTokens.DepthMedium,
+    borderRadius: odysseyDesignTokens.BorderRadiusOuter,
+    transition: `opacity ${odysseyDesignTokens.TransitionDurationMain}`,
+    zIndex: "-1",
+    content: '""',
+  },
+
+  "&:hover": {
+    "&::after": {
+      opacity: 1,
+    },
+  },
+}));
+
 const AppTile = ({
   actionAriaControls,
   actionAriaHasPopup,
@@ -293,7 +321,7 @@ const AppTile = ({
       children={Boolean(children)}
     />
   ) : (
-    <MuiCard className="isClickable">
+    <StyledMuiCard odysseyDesignTokens={odysseyDesignTokens}>
       {(onActionClick || auxiliaryText) && (
         <ActionContainer odysseyDesignTokens={odysseyDesignTokens}>
           {auxiliaryText && !isLoading && (
@@ -316,7 +344,7 @@ const AppTile = ({
       )}
 
       <MuiCardActionArea onClick={onClick}>{tileContent}</MuiCardActionArea>
-    </MuiCard>
+    </StyledMuiCard>
   );
 };
 

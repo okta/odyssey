@@ -10,28 +10,29 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { createReactRootElements } from "./renderReactInWebComponent";
+
+/**
+ * @deprecated Use `renderReactInWebComponent` instead. This function was necessary when using bare Shadow DOM, but with UI Shell rendering in a Web Component, you won't be able to render your Shadow DOM in its Shadow DOM without using a Web Component.
+ */
 export const createShadowDomElements = (containerElement: HTMLElement) => {
   const shadowRoot = containerElement.attachShadow({ mode: "open" });
 
   // Container for Emotion `<style>` elements.
-  const emotionRootElement = document.createElement("div");
-  emotionRootElement.setAttribute("id", "style-root");
-  emotionRootElement.setAttribute("nonce", window.cspNonce);
+  const { appRootElement, stylesRootElement } = createReactRootElements();
 
-  // React app root component.
-  const shadowRootElement = document.createElement("div");
-  shadowRootElement.setAttribute("id", "shadow-root");
-  // This div could cause issues with layout of children.
-  // For flexibility, make it inherit its parent's height
-  shadowRootElement.style.setProperty("height", "inherit");
+  shadowRoot.appendChild(appRootElement);
+  shadowRoot.appendChild(stylesRootElement);
 
-  shadowRoot.appendChild(emotionRootElement);
-  shadowRoot.appendChild(shadowRootElement);
-
-  return { emotionRootElement, shadowRootElement };
+  return {
+    emotionRootElement: stylesRootElement,
+    shadowRootElement: appRootElement,
+  };
 };
 
-/** @deprecated Use `createShadowDomElements` instead. */
+/**
+ * @deprecated Use `createShadowDomElements` instead which returns an object instead of an array. It's otherwise the same.
+ * @deprecated Ideally, use `renderReactInWebComponent` instead. This function was necessary when using bare Shadow DOM, but with UI Shell rendering in a Web Component, you won't be able to render your Shadow DOM in its Shadow DOM without using a Web Component. */
 export const createShadowRootElement = (
   containerElement: HTMLElement,
 ): [HTMLStyleElement, HTMLDivElement] => {
