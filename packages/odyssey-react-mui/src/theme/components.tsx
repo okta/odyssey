@@ -37,8 +37,6 @@ import { tableCellClasses } from "@mui/material/TableCell";
 import { tooltipClasses } from "@mui/material/Tooltip";
 import { typographyClasses } from "@mui/material/Typography";
 
-import { CARD_IMAGE_HEIGHT } from "../Card";
-
 import {
   CheckCircleFilledIcon,
   CheckIcon,
@@ -845,11 +843,19 @@ export const components = ({
           borderRadius: odysseyTokens.BorderRadiusOuter,
           boxShadow: odysseyTokens.DepthMedium,
           padding: odysseyTokens.Spacing5,
+          marginBlockEnd: odysseyTokens.Spacing5,
           position: "relative",
           transition: `all ${odysseyTokens.TransitionDurationMain} ${odysseyTokens.TransitionTimingMain}`,
 
+          "&.ods-card-compact": {
+            marginBlockEnd: odysseyTokens.Spacing3,
+            padding: odysseyTokens.Spacing3,
+          },
+
           "& img": {
-            height: CARD_IMAGE_HEIGHT,
+            maxHeight: "100%",
+            height: "auto",
+            alignSelf: "flex-start",
           },
 
           "&.hasAccessory": {
