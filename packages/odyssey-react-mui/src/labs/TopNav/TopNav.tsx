@@ -11,7 +11,8 @@
  */
 
 import styled from "@emotion/styled";
-import { memo, useMemo, ReactElement } from "react";
+import { memo, type ReactElement } from "react";
+import { useTranslation } from "react-i18next";
 
 import type { HtmlProps } from "../../HtmlProps";
 import { QuestionCircleIcon, SettingsIcon } from "../../icons.generated";
@@ -21,7 +22,8 @@ import {
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
 import { UserProfile, UserProfileProps } from "./UserProfile";
-import { TopNavItemContent, TopNavItemContentProps } from "./TopNavItemContent";
+import { TopNavLinkProps } from "./TopNavLink";
+import { TopNavLinksList } from "./TopNavLinksList";
 
 export const TOP_NAV_HEIGHT_TOKEN = "Spacing9";
 
@@ -33,7 +35,7 @@ export type TopNavProps = {
   /**
    * Nav links in the top nav
    */
-  topNavLinkItems: TopNavItemContentProps[];
+  topNavLinkItems: TopNavLinkProps[];
   /**
    * Pass in an additional component like `Button` that will be displayed after the nav link items
    */
@@ -51,14 +53,6 @@ export type TopNavProps = {
    */
   userProfile?: UserProfileProps;
 } & Pick<HtmlProps, "testId">;
-
-const TopNavListContainer = styled("ul")(() => ({
-  padding: 0,
-  listStyle: "none",
-  listStyleType: "none",
-  display: "flex",
-  alignItems: "center",
-}));
 
 const LinkAndProfileWrapper = styled("div")(() => ({
   display: "flex",
@@ -83,6 +77,7 @@ const LinkContainer = styled("div", {
   odysseyDesignTokens: DesignTokens;
 }>(({ odysseyDesignTokens }) => ({
   paddingRight: odysseyDesignTokens.Spacing3,
+
   "& a": {
     color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
   },
@@ -93,9 +88,9 @@ const TopNavContainer = styled("div", {
 })<{
   odysseyDesignTokens: DesignTokens;
 }>(({ odysseyDesignTokens }) => ({
-  display: "flex",
   alignItems: "center",
-  backgroundColor: odysseyDesignTokens.HueNeutralWhite,
+  backgroundColor: odysseyDesignTokens.HueNeutral50,
+  display: "flex",
   height: odysseyDesignTokens[TOP_NAV_HEIGHT_TOKEN],
 }));
 
@@ -125,14 +120,7 @@ const TopNav = ({
   userProfile,
 }: TopNavProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
-
-  const processedNavItems = useMemo(
-    () =>
-      topNavLinkItems.map((item) => (
-        <TopNavItemContent {...item} key={item.id} />
-      )),
-    [topNavLinkItems],
-  );
+  const { t } = useTranslation();
 
   return (
     <TopNavContainer odysseyDesignTokens={odysseyDesignTokens}>
@@ -142,9 +130,7 @@ const TopNav = ({
         </SearchFieldContainer>
       )}
 
-      <TopNavListContainer>
-        {processedNavItems?.map((item) => item)}
-      </TopNavListContainer>
+      {topNavLinkItems && <TopNavLinksList topNavLinkItems={topNavLinkItems} />}
 
       <LinkAndProfileWrapper>
         {(AdditionalNavItemComponent || settingsPageHref || helpPageHref) && (
@@ -161,7 +147,10 @@ const TopNav = ({
 
             {settingsPageHref && (
               <LinkContainer odysseyDesignTokens={odysseyDesignTokens}>
-                <Link href={settingsPageHref} ariaLabel="settings page">
+                <Link
+                  href={settingsPageHref}
+                  ariaLabel={t("topnav.settingsicon")}
+                >
                   <SettingsIcon />
                 </Link>
               </LinkContainer>
@@ -169,7 +158,7 @@ const TopNav = ({
 
             {helpPageHref && (
               <LinkContainer odysseyDesignTokens={odysseyDesignTokens}>
-                <Link href={helpPageHref} ariaLabel="help page">
+                <Link href={helpPageHref} ariaLabel={t("topnav.helpicon")}>
                   <QuestionCircleIcon />
                 </Link>
               </LinkContainer>

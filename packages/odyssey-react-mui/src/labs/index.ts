@@ -36,5 +36,5 @@ export * from "./GroupPicker";
 
 export * from "./NavAccordion";
 export * from "./SideNav";
-export * from "./TopNav/TopNav";
-export * from "../ui-shell";
+export * from "./TopNav";
+export * from "./UiShell";

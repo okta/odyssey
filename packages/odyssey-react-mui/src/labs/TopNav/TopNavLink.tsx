@@ -29,9 +29,9 @@ const TopNavItemLabelContainer = styled("div", {
 })<{
   odysseyDesignTokens: DesignTokens;
 }>(({ odysseyDesignTokens }) => ({
+  alignItems: "center",
   display: "flex",
   flexWrap: "wrap",
-  alignItems: "center",
   fontSize: odysseyDesignTokens.TypographyScale0,
   fontWeight: odysseyDesignTokens.TypographyWeightHeading,
 }));
@@ -43,29 +43,33 @@ const TopNavListItemContainer = styled("li", {
   odysseyDesignTokens: DesignTokens;
   isDisabled?: boolean;
 }>(({ odysseyDesignTokens, isDisabled }) => ({
-  display: "flex",
   alignItems: "center",
-  cursor: isDisabled ? "default" : "pointer",
-  pointerEvents: isDisabled ? "none" : "auto",
   color: `${isDisabled ? odysseyDesignTokens.TypographyColorDisabled : odysseyDesignTokens.TypographyColorHeading} !important`,
+  cursor: isDisabled ? "default" : "pointer",
+  display: "flex",
+  pointerEvents: isDisabled ? "none" : "auto",
+
   "& a": {
-    display: "flex",
     alignItems: "center",
-    padding: `${odysseyDesignTokens.Spacing2} ${odysseyDesignTokens.Spacing4}`,
     color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
+    display: "flex",
+    padding: `${odysseyDesignTokens.Spacing2} ${odysseyDesignTokens.Spacing4}`,
   },
+
   "& a:hover": {
     textDecoration: "none",
     backgroundColor: !isDisabled ? odysseyDesignTokens.HueNeutral50 : "inherit",
   },
+
   "& div[role='button']:hover": {
     backgroundColor: !isDisabled ? odysseyDesignTokens.HueNeutral50 : "inherit",
   },
+
   "& a:focus-visible": {
-    outlineOffset: 0,
-    borderRadius: 0,
-    outlineWidth: odysseyDesignTokens.FocusOutlineWidthMain,
     backgroundColor: !isDisabled ? odysseyDesignTokens.HueNeutral50 : "inherit",
+    borderRadius: 0,
+    outlineOffset: 0,
+    outlineWidth: odysseyDesignTokens.FocusOutlineWidthMain,
   },
 }));
 
@@ -74,52 +78,61 @@ const NavItemContentClickContainer = styled("div", {
 })<{
   odysseyDesignTokens: DesignTokens;
 }>(({ odysseyDesignTokens }) => ({
-  display: "flex",
   alignItems: "center",
-  width: "100%",
-  padding: `${odysseyDesignTokens.Spacing2} ${odysseyDesignTokens.Spacing4}`,
+  display: "flex",
+  paddingBottom: odysseyDesignTokens.Spacing2,
+  paddingLeft: odysseyDesignTokens.Spacing4,
+  paddingRight: odysseyDesignTokens.Spacing4,
+  paddingTop: odysseyDesignTokens.Spacing2,
   "&:focus-visible": {
+    backgroundColor: odysseyDesignTokens.HueNeutral50,
     borderRadius: 0,
     outlineColor: odysseyDesignTokens.FocusOutlineColorPrimary,
     outlineStyle: odysseyDesignTokens.FocusOutlineStyle,
     outlineWidth: odysseyDesignTokens.FocusOutlineWidthMain,
-    backgroundColor: odysseyDesignTokens.HueNeutral50,
     textDecoration: "none",
   },
+  width: "100%",
 }));
 
-export type TopNavItemContentProps = {
-  id: string;
-  label: string;
+export type TopNavLinkProps = {
   /**
-   * link added to the nav item. if it is undefined, static text will be displayed.
-   * fires onClick event when it is passed
+   * Without a hyperlink reference, `onClick` functionality will not function.
+   * If `undefined`, static text will be displayed.
    */
   href?: string;
   /**
-   * determines whether the link item is diabled
+   * HTML `id` attribute.
+   */
+  id: string;
+  /**
+   * Determines whether the link item is disabled.
    */
   isDisabled?: boolean;
   /**
-   * Event fired when the nav item is clicked
+   * Display text for the link.
+   */
+  label: string;
+  /**
+   * Handles both mouse and keyboard interactions.
    */
   onClick?: MouseEventHandler<HTMLAnchorElement> &
     MouseEventHandler<HTMLDivElement> &
     KeyboardEventHandler<HTMLDivElement>;
   /**
-   * The link target prop. e.g., "_blank"
+   * Where to display the linked URL.
    */
   target?: string;
 };
 
-const TopNavItemContent = ({
-  id,
-  label,
+const TopNavLink = ({
   href,
-  target,
-  onClick,
+  id,
   isDisabled,
-}: TopNavItemContentProps) => {
+  label,
+  onClick,
+  target,
+}: TopNavLinkProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const topNavItemContentKeyHandler = useCallback<
@@ -137,10 +150,10 @@ const TopNavItemContent = ({
 
   return (
     <TopNavListItemContainer
-      id={id}
-      key={id}
       aria-disabled={isDisabled}
+      id={id}
       isDisabled={isDisabled}
+      key={id}
       odysseyDesignTokens={odysseyDesignTokens}
     >
       {
@@ -156,17 +169,17 @@ const TopNavItemContent = ({
         ) : !href ? (
           <NavItemContentClickContainer
             odysseyDesignTokens={odysseyDesignTokens}
-            role="button"
-            tabIndex={0}
             onClick={onClick}
             onKeyDown={topNavItemContentKeyHandler}
+            role="button"
+            tabIndex={0}
           >
             <TopNavItemLabelContainer odysseyDesignTokens={odysseyDesignTokens}>
               {label}
             </TopNavItemLabelContainer>
           </NavItemContentClickContainer>
         ) : (
-          <Link href={href} target={target} onClick={onClick}>
+          <Link href={href} onClick={onClick} target={target}>
             <TopNavItemLabelContainer odysseyDesignTokens={odysseyDesignTokens}>
               {label}
             </TopNavItemLabelContainer>
@@ -177,7 +190,7 @@ const TopNavItemContent = ({
   );
 };
 
-const MemoizedTopNavItemContent = memo(TopNavItemContent);
-MemoizedTopNavItemContent.displayName = "TopNavItemContent";
+const MemoizedTopNavLink = memo(TopNavLink);
+MemoizedTopNavLink.displayName = "TopNavLink";
 
-export { MemoizedTopNavItemContent as TopNavItemContent };
+export { MemoizedTopNavLink as TopNavLink };
