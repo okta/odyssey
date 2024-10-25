@@ -329,11 +329,11 @@ const AdditionalNavItemContainer = styled("div", {
 }));
 
 const TopNav = ({
-  SearchFieldComponent,
-  topNavLinkItems,
   AdditionalNavItemComponent,
-  settingsPageHref,
   helpPageHref,
+  SearchFieldComponent,
+  settingsPageHref,
+  topNavLinkItems,
   userProfile,
 }: TopNavProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
