@@ -8,36 +8,31 @@ import { Meta } from "@storybook/blocks";
 
 Sometimes, you may need to sandbox your application's styles so Odyssey components show up correctly in other applications. This typically happens when other global styles are on the page.
 
-To sandbox your application's styles, you need to use a Shadow DOM. Odyssey natively supports the use of a Shadow DOM and even exports some helper functions.
+To sandbox your application's styles, you need to use a Web Component which also includes a Shadow DOM. Odyssey natively supports the use of a Shadow DOM and even exports a helper function.
 
-When creating the shadow root for your application, `createShadowDomElements` will return 2 elements in an object:
-
-<dl>
-  <dt>emotionRoot</dt>
-  <dd>An element that holds Emotion's styles.</dd>
-
-  <dt>shadowDomElementRoot</dt>
-  <dd>An element that is going to be the new root element React-DOM renders into.</dd>
-</dl>
-
-To create a Shadow DOM, simply use the `createShadowDomElements` in your app's top-level file (typically `index.ts`):
+To create a Shadow DOM, simply use the `renderReactInWebComponent` in your app's top-level file (typically `index.ts`):
 
 ```tsx
-import { createShadowDomElements } from "@okta/odyssey-react-mui";
+import { renderReactInWebComponent } from "@okta/odyssey-react-mui/labs";
 
-const { emotionRootElement, shadowRootElement } = createShadowDomElements(
-  document.querySelector("#root") as HTMLElement,
-);
+const appRootElement = document.createElement("div");
+const containerRootElement = document.getElementById("container-root");
 
-createRoot(shadowDomElementRoot).render(
-  <OdysseyProvider
-    emotionRootElement={emotionRootElement}
-    shadowRootElement={shadowRootElement}
-  >
-    <App />
-  </OdysseyProvider>,
-);
+const reactElement = renderReactInWebComponent({
+  getReactComponent: ({ appRootElement, emotionRootElement }) => (
+    <OdysseyProvider
+      appRootElement={appRootElement}
+      emotionRootElement={emotionRootElement}
+    >
+      <App />
+    </OdysseyProvider>
+  ),
+  rootElement: containerRootElement,
+  webComponentChildren: appRootElement,
+});
 ```
+
+`reactElement` is the actual rendered web component DOM node. To look inside, you'll need to use `reactElement.shadowRoot`.
 
 ## Advanced Usage (Custom Emotion Cache)
 
@@ -84,4 +79,4 @@ export const MyComponent = () => {
 };
 ```
 
-If you're using separate `OdysseyThemeProvider` and `OdysseyCacheProvider` components, both of those also take the `shadowRootElement` element.
+If you're using separate `OdysseyThemeProvider` and `OdysseyCacheProvider` components, both of those also take the `appRootElement` element.
