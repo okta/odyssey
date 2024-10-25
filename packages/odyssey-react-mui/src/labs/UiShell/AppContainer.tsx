@@ -17,6 +17,7 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
+import { TOP_NAV_HEIGHT_TOKEN } from "../TopNav";
 
 const AppContentContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
@@ -24,6 +25,14 @@ const AppContentContainer = styled("div", {
   odysseyDesignTokens: DesignTokens;
 }>(({ odysseyDesignTokens }) => ({
   backgroundColor: odysseyDesignTokens.HueNeutral50,
+  display: "flex",
+  flexDirection: "column",
+  flexWrap: "nowrap",
+  height: `calc(100% - ${odysseyDesignTokens[TOP_NAV_HEIGHT_TOKEN]})`,
+}));
+
+const FlexibleContentContainer = styled("div")(() => ({
+  flexGrow: 1,
 }));
 
 export type AppContentProps = {
@@ -42,7 +51,7 @@ const AppContent = ({ children }: AppContentProps) => {
 
   return (
     <AppContentContainer odysseyDesignTokens={odysseyDesignTokens}>
-      {children}
+      <FlexibleContentContainer>{children}</FlexibleContentContainer>
     </AppContentContainer>
   );
 };

@@ -28,6 +28,7 @@ import { AppContent } from "./AppContainer";
 
 const FlexContainer = styled("div")(() => ({
   display: "flex",
+  flexWrap: "nowrap",
   height: "inherit",
 }));
 

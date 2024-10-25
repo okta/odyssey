@@ -11,4 +11,8 @@
  */
 
 export * from "./renderUiShell";
-export * from "./UiShell";
+export {
+  UiShell,
+  type UiShellComponentProps,
+  type UiShellProps,
+} from "./UiShell";

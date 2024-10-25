@@ -79,17 +79,17 @@ const storybookMeta: Meta<TopNavProps> = {
       {
         id: "link-01",
         label: "Home",
-        href: "/",
+        href: "#none",
       },
       {
         id: "link-02",
         label: "Flows",
-        href: "/",
+        href: "#none",
       },
       {
         id: "link-03",
         label: "Connections",
-        href: "/",
+        href: "#none",
         isDisabled: true,
       },
       {
@@ -101,8 +101,8 @@ const storybookMeta: Meta<TopNavProps> = {
     AdditionalNavItemComponent: (
       <Button variant="secondary" label="Connect Builder" />
     ),
-    settingsPageHref: "/",
-    helpPageHref: "/",
+    settingsPageHref: "#none",
+    helpPageHref: "#none",
     userProfile: {
       profileIcon: <UserIcon />,
       userName: "test.user@test.com",
