@@ -168,6 +168,7 @@ const storybookMeta: Meta<AppTileProps> = {
     description: "This is a description of the app.",
     image: <img src="https://placehold.co/128" alt="Example logo" />,
     onClick: jest.fn(),
+    onActionClick: undefined,
   },
   decorators: [MuiThemeDecorator],
   parameters: {
