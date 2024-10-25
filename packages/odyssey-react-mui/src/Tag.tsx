@@ -10,18 +10,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Chip as MuiChip, ChipProps as MuiChipProps } from "@mui/material";
 import { memo, ReactElement, useCallback, useContext } from "react";
+import { Chip as MuiChip, ChipProps as MuiChipProps } from "@mui/material";
 import styled from "@emotion/styled";
-import { TagListContext } from "./TagListContext";
-import { MuiPropsContext, MuiPropsContextType } from "./MuiPropsContext";
+
+import { useContrastContext, ContrastMode } from "./ContrastModeProvider";
 import { HtmlProps } from "./HtmlProps";
+import { CloseCircleFilledIcon } from "./icons.generated";
+import { MuiPropsContext, MuiPropsContextType } from "./MuiPropsContext";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext";
-import { CloseCircleFilledIcon } from "./icons.generated";
-import { useContrastContext, ContrastMode } from "./ContrastModeProvider";
+import { TagListContext } from "./TagListContext";
 
 export const tagColorVariants = [
   "default",
