@@ -93,7 +93,6 @@ describe("useContrastMode and related functions", () => {
         );
       };
 
-      // Render component within ContrastMode context
       const { getByTestId } = render(
         <ContrastModeContext.Provider value={{ contrastMode: "lowContrast" }}>
           <TestComponent />
@@ -113,11 +112,9 @@ describe("useContrastMode and related functions", () => {
           Object.assign(transitionEvent, { propertyName: "background-color" }),
         );
 
-        // Allow time for the event handling and state updates to complete
         await Promise.resolve();
       });
 
-      // Wait for the contrast mode to update
       await waitFor(() => {
         expect(getByTestId("container").textContent).toBe("highContrast");
       });
@@ -283,7 +280,6 @@ describe("useContrastMode and related functions", () => {
     });
   });
 
-  // Rest of the tests remain unchanged...
   describe("MutationObserver functionality", () => {
     let originalAddEventListener: typeof document.addEventListener;
     let originalRemoveEventListener: typeof document.removeEventListener;
@@ -439,7 +435,6 @@ describe("useContrastMode and related functions", () => {
 
     describe("normalizeBackgroundColor", () => {
       it("converts rgba to rgb and matches against HueNeutral50", () => {
-        // Create rgba version of HueNeutral50
         const rgbaColor = hueNeutral50Rgb
           .replace("rgb", "rgba")
           .replace(")", ", 0.5)");

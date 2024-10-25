@@ -171,8 +171,6 @@ export const StatusWrapper: StoryObj<TooltipProps> = {
       );
       userEvent.hover(button);
 
-      await new Promise((resolve) => setTimeout(resolve, 500));
-
       await axeRun("Tooltip Icon Button");
     });
   },
