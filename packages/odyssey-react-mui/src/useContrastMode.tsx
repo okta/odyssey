@@ -33,7 +33,7 @@ export const defaultContrast = "lowContrast";
 
 export const useContrastModeContext = () => useContext(ContrastModeContext);
 
-const hexToRgb = (hexString: string) => {
+export const hexToRgb = (hexString: string) => {
   const hexNumber = parseInt(hexString.slice(1), 16);
   const red = (hexNumber >> 16) & 255;
   const green = (hexNumber >> 8) & 255;
@@ -43,17 +43,18 @@ const hexToRgb = (hexString: string) => {
 
 export const hueNeutral50Rgb = hexToRgb(Tokens.HueNeutral50);
 
-const isTransparentColor = (color: string) =>
+export const isTransparentColor = (color: string) =>
   color === "rgba(0, 0, 0, 0)" || color === "transparent";
 
-const normalizeRgbaToRgb = (rgba: string) =>
-  rgba.replace(/rgba\((\d+), (\d+), (\d+), \d+\)/, "rgb($1, $2, $3)");
+export const normalizeRgbaToRgb = (rgba: string) =>
+  rgba.replace(/rgba\((\d+),\s*(\d+),\s*(\d+),\s*[\d.]+\)/, "rgb($1, $2, $3)");
 
-const getElementComputedBackgroundColor = (element: HTMLElement): string =>
-  window.getComputedStyle(element).backgroundColor;
+export const getElementComputedBackgroundColor = (
+  element: HTMLElement,
+): string => window.getComputedStyle(element).backgroundColor;
 
-const normalizeBackgroundColor = (bgColor: string): string => {
-  if (/rgba\((\d+), (\d+), (\d+), \d+\)/.test(bgColor)) {
+export const normalizeBackgroundColor = (bgColor: string): string => {
+  if (/rgba\((\d+),\s*(\d+),\s*(\d+),\s*[\d.]+\)/.test(bgColor)) {
     const normalizedColor = normalizeRgbaToRgb(bgColor);
     return normalizedColor === hueNeutral50Rgb
       ? Tokens.HueNeutral50

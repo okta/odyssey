@@ -13,10 +13,15 @@
 import { render, waitFor, act } from "@testing-library/react";
 import {
   ContrastModeContext,
+  getBackgroundColor,
+  getElementComputedBackgroundColor,
+  hexToRgb,
+  hueNeutral50Rgb,
+  isTransparentColor,
+  normalizeBackgroundColor,
+  normalizeRgbaToRgb,
   useContrastMode,
   useContrastModeContext,
-  getBackgroundColor,
-  hueNeutral50Rgb,
 } from "../useContrastMode";
 import * as Tokens from "@okta/odyssey-design-tokens";
 import { renderHook } from "@testing-library/react";
@@ -369,5 +374,132 @@ describe("useContrastMode and related functions", () => {
     expect(result).toBe(Tokens.HueNeutral50);
 
     getComputedStyleSpy.mockRestore();
+  });
+
+  describe("Color utility functions", () => {
+    describe("hexToRgb", () => {
+      it("converts black hex to rgb", () => {
+        expect(hexToRgb("#000000")).toBe("rgb(0, 0, 0)");
+      });
+
+      it("converts white hex to rgb", () => {
+        expect(hexToRgb("#ffffff")).toBe("rgb(255, 255, 255)");
+      });
+
+      it("converts mixed color hex to rgb", () => {
+        expect(hexToRgb("#ff0088")).toBe("rgb(255, 0, 136)");
+      });
+
+      it("correctly converts HueNeutral50 token to rgb", () => {
+        const result = hexToRgb(Tokens.HueNeutral50);
+        expect(result).toBe(hueNeutral50Rgb);
+      });
+    });
+
+    describe("isTransparentColor", () => {
+      it("identifies rgba(0, 0, 0, 0) as transparent", () => {
+        expect(isTransparentColor("rgba(0, 0, 0, 0)")).toBe(true);
+      });
+
+      it('identifies "transparent" keyword as transparent', () => {
+        expect(isTransparentColor("transparent")).toBe(true);
+      });
+
+      it("identifies solid colors as non-transparent", () => {
+        expect(isTransparentColor("rgb(255, 255, 255)")).toBe(false);
+        expect(isTransparentColor("rgba(255, 255, 255, 1)")).toBe(false);
+        expect(isTransparentColor("#ffffff")).toBe(false);
+      });
+    });
+
+    describe("normalizeRgbaToRgb", () => {
+      it("converts rgba to rgb format", () => {
+        expect(normalizeRgbaToRgb("rgba(255, 128, 0, 0.5)")).toBe(
+          "rgb(255, 128, 0)",
+        );
+      });
+
+      it("handles zero alpha value", () => {
+        expect(normalizeRgbaToRgb("rgba(255, 128, 0, 0)")).toBe(
+          "rgb(255, 128, 0)",
+        );
+      });
+
+      it("handles full alpha value", () => {
+        expect(normalizeRgbaToRgb("rgba(255, 128, 0, 1)")).toBe(
+          "rgb(255, 128, 0)",
+        );
+      });
+
+      it("does not modify rgb format", () => {
+        const rgbColor = "rgb(255, 128, 0)";
+        expect(normalizeRgbaToRgb(rgbColor)).toBe(rgbColor);
+      });
+    });
+
+    describe("normalizeBackgroundColor", () => {
+      it("converts rgba to rgb and matches against HueNeutral50", () => {
+        // Create rgba version of HueNeutral50
+        const rgbaColor = hueNeutral50Rgb
+          .replace("rgb", "rgba")
+          .replace(")", ", 0.5)");
+        expect(normalizeBackgroundColor(rgbaColor)).toBe(Tokens.HueNeutral50);
+      });
+
+      it("returns original color if not matching HueNeutral50", () => {
+        const rgbaColor = "rgba(255, 0, 0, 0.5)";
+        expect(normalizeBackgroundColor(rgbaColor)).toBe("rgb(255, 0, 0)");
+      });
+
+      it("returns HueNeutral50 token for matching rgb value", () => {
+        expect(normalizeBackgroundColor(hueNeutral50Rgb)).toBe(
+          Tokens.HueNeutral50,
+        );
+      });
+
+      it("returns original color for non-matching rgb value", () => {
+        const rgbColor = "rgb(255, 0, 0)";
+        expect(normalizeBackgroundColor(rgbColor)).toBe(rgbColor);
+      });
+    });
+
+    describe("getElementComputedBackgroundColor", () => {
+      let getComputedStyleSpy: jest.SpyInstance;
+
+      beforeEach(() => {
+        getComputedStyleSpy = jest.spyOn(window, "getComputedStyle");
+      });
+
+      afterEach(() => {
+        getComputedStyleSpy.mockRestore();
+      });
+
+      it("returns the computed background color of an element", () => {
+        const element = document.createElement("div");
+        const expectedColor = "rgb(255, 0, 0)";
+
+        getComputedStyleSpy.mockImplementation(
+          () =>
+            ({
+              backgroundColor: expectedColor,
+            }) as CSSStyleDeclaration,
+        );
+
+        expect(getElementComputedBackgroundColor(element)).toBe(expectedColor);
+      });
+
+      it("handles transparent background color", () => {
+        const element = document.createElement("div");
+
+        getComputedStyleSpy.mockImplementation(
+          () =>
+            ({
+              backgroundColor: "transparent",
+            }) as CSSStyleDeclaration,
+        );
+
+        expect(getElementComputedBackgroundColor(element)).toBe("transparent");
+      });
+    });
   });
 });
