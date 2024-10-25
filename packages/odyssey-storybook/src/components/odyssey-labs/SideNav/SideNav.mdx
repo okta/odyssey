@@ -1,0 +1,108 @@
+import {
+  Canvas,
+  Meta,
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  Controls,
+  Stories,
+} from "@storybook/addon-docs";
+import { hrefTo } from "@storybook/addon-links";
+import LinkTo from "@storybook/addon-links/react";
+import { Story } from "@storybook/blocks";
+
+import { Link } from "@okta/odyssey-react-mui";
+import * as SideNavStories from "./SideNav.stories";
+
+<Meta of={SideNavStories} />
+<Title of={SideNavStories} />
+<Subtitle of={SideNavStories} />
+<Description of={SideNavStories} />
+<Primary of={SideNavStories} />
+
+#### sideNavItems
+
+the `sideNavItems` prop takes an array of objects with type `SideNavItem`
+
+```
+type SideNavItem = {
+  id: string;
+  label: string;
+  /**
+   * The icon element to display at the end of the Nav Item
+   */
+  endIcon?: ReactElement;
+  /**
+   * Whether the item is disabled. When set to true the nav item is set to Disabled color,
+   * the link/item is not clickable, and item with children is not expandable.
+   */
+  isDisabled?: boolean;
+  /**
+   * Whether the item is active/selected
+   */
+  isSelected?: boolean;
+  /**
+   * Event fired when the nav item is clicked
+   */
+  onClick?(): void;
+  /**
+   * The status element to display after the label
+   */
+  severity?: (typeof statusSeverityValues)[number];
+  /**
+   * The icon element to display at the start of the Nav Item
+   */
+  startIcon?: ReactElement;
+  /**
+   * The label to display inside the status
+   */
+  statusLabel?: string;
+  /**
+   * The link target prop. e.g., "_blank"
+   */
+  target?: string;
+} & (
+  | {
+      /**
+       * Determines if the side nav item is a section header
+       */
+      isSectionHeader: true;
+      href?: never;
+      children?: never;
+      isDefaultExpanded?: never;
+      isExpanded?: never;
+    }
+  | {
+      /**
+       * link added to the nav item. if it is undefined, static text will be displayed.
+       * fires onClick event when it is passed
+       */
+      href: string;
+      children?: never;
+      isSectionHeader?: never;
+      isDefaultExpanded?: never;
+      isExpanded?: never;
+    }
+  | {
+      /**
+       * An array of side nav items to be displayed as children within Accordion
+       */
+      children?: SideNavItem[];
+      /**
+       * Whether the accordion (nav item with children) is expanded by default
+       */
+      isDefaultExpanded?: boolean;
+      /**
+       * If true, expands the accordion, otherwise collapse it.
+       * Setting this prop enables control over the accordion.
+       */
+      isExpanded?: boolean;
+      isSectionHeader?: never;
+      href?: never;
+    }
+);
+```
+
+<Controls />
+<Stories />

@@ -50,8 +50,7 @@ const OdysseyProvider = <SupportedLanguages extends string>({
   translationOverrides,
 }: OdysseyProviderProps<SupportedLanguages>) => (
   <OdysseyCacheProvider
-    emotionRoot={emotionRoot}
-    emotionRootElement={emotionRootElement}
+    emotionRootElement={emotionRootElement || emotionRoot}
     hasShadowDom={Boolean(shadowRootElement || shadowDomElement)}
     nonce={nonce}
     stylisPlugins={stylisPlugins}
