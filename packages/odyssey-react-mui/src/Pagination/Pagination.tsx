@@ -23,6 +23,7 @@ import {
 import { Box } from "../Box";
 import { paginationTypeValues } from "./constants";
 import { usePagination } from "./usePagination";
+import { useTranslation } from "react-i18next";
 
 const PaginationContainer = styled("div")({
   display: "flex",
@@ -68,7 +69,7 @@ export type PaginationProps = {
   /**
    * The labeled rendered for the current page index
    */
-  currentPageLabel: string;
+  currentPageLabel?: string;
   /**
    * The number of items currently visible on the page
    */
@@ -98,11 +99,11 @@ export type PaginationProps = {
   /**
    * The current page last row index
    */
-  lastRow: number;
+  lastRow?: number;
   /**
    * If the pagination is of "loadMore" variant, then this is the the load more label
    */
-  loadMoreLabel: string;
+  loadMoreLabel?: string;
   /**
    * The max page
    */
@@ -114,7 +115,7 @@ export type PaginationProps = {
   /**
    * The label for the next control
    */
-  nextLabel: string;
+  nextLabel?: string;
   /**
    * Page index and page size setter
    */
@@ -136,11 +137,11 @@ export type PaginationProps = {
   /**
    * The label for the previous control
    */
-  previousLabel: string;
+  previousLabel?: string;
   /**
    * The label that shows how many results are rendered per page
    */
-  rowsPerPageLabel: string;
+  rowsPerPageLabel?: string;
   /**
    * Total rows count
    */
@@ -153,7 +154,7 @@ export type PaginationProps = {
 };
 
 const Pagination = ({
-  currentPageLabel,
+  currentPageLabel: currentPageLabelProp,
   currentRowsCount,
   hasPageInput = true,
   hasRowCountInput = true,
@@ -161,23 +162,30 @@ const Pagination = ({
   isDisabled,
   isMoreDisabled,
   lastRow,
-  loadMoreLabel,
+  loadMoreLabel: loadMoreLabelProp,
   maxPageIndex,
   maxPageSize,
-  nextLabel,
+  nextLabel: nextLabelProp,
   onPaginationChange: onPaginationChangeProp,
   pageIndex,
   pageSize,
-  previousLabel,
-  rowsPerPageLabel,
+  previousLabel: previousLabelProp,
+  rowsPerPageLabel: rowsPerPageLabelProp,
   totalRows,
   variant,
 }: PaginationProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const { t } = useTranslation();
 
   const [page, setPage] = useState<number>(pageIndex);
   const [rowsPerPage, setRowsPerPage] = useState<number>(pageSize);
   const initialRowsPerPage = useRef<number>(pageSize);
+
+  const currentPageLabel = currentPageLabelProp ?? t("pagination.page");
+  const loadMoreLabel = loadMoreLabelProp ?? t("pagination.loadmore");
+  const nextLabel = nextLabelProp ?? t("pagination.next");
+  const previousLabel = previousLabelProp ?? t("pagination.previous");
+  const rowsPerPageLabel = rowsPerPageLabelProp ?? t("pagination.rowsperpage");
 
   useEffect(() => {
     setPage(pageIndex);
@@ -186,11 +194,9 @@ const Pagination = ({
 
   const onPaginationChange = useCallback(
     ({ pageIndex, pageSize }: { pageIndex: number; pageSize: number }) => {
-      console.log({ pageIndex, pageSize });
       onPaginationChangeProp({ pageIndex, pageSize });
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     },
-    [],
+    [onPaginationChangeProp],
   );
 
   const { totalRowsLabel } = usePagination({
@@ -297,7 +303,7 @@ const Pagination = ({
   const nextButtonDisabled = useMemo(
     () =>
       isMoreDisabled ||
-      (totalRows ? lastRow >= totalRows : false) ||
+      (lastRow && (totalRows ? lastRow >= totalRows : false)) ||
       isDisabled,
     [isMoreDisabled, totalRows, lastRow, isDisabled],
   );
