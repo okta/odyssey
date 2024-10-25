@@ -88,7 +88,6 @@ const preview: Preview = {
       "storybook/docs/panel": { index: -1 },
     },
     backgrounds: {
-      // default: "white",
       values: [
         {
           name: "White",
@@ -99,7 +98,7 @@ const preview: Preview = {
           value: "#f4f4f4",
         },
         {
-          name: "Page Background (dark)",
+          name: "Dark (unused)",
           value: "#1d1d21",
         },
       ],
