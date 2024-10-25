@@ -22,84 +22,15 @@ import {
   within,
 } from "@testing-library/react";
 import { DataOnReorderRowsType, DataRow, DataView } from "./index";
-import {
-  data,
-  columns,
-  Person,
-} from "@okta/odyssey-storybook/src/components/odyssey-labs/DataView/personData";
-import {
-  filterData,
-  reorderData,
-} from "@okta/odyssey-storybook/src/components/odyssey-labs/DataView/dataFunctions";
+import { data, columns, filterData, reorderData } from "./testSupportData";
 import { EmptyState } from "../../EmptyState";
 import { DataTableRowData } from "../../DataTable";
 import { MenuItem } from "../../MenuItem";
 import { Button } from "../../Button";
 import { MRT_RowSelectionState } from "material-react-table";
 
-const simpleData: Person[] = [
-  {
-    order: 1,
-    id: "1",
-    name: "Luke Skywalker",
-    city: "Mos Eisley",
-    state: "Tatooine",
-    age: 19,
-    risk: "low",
-  },
-  {
-    order: 2,
-    id: "2",
-    name: "Han Solo",
-    city: "Corellia",
-    state: "Corellia",
-    age: 40,
-    risk: "medium",
-  },
-  {
-    order: 3,
-    id: "3",
-    name: "Leia Organa",
-    city: "Alderaan City",
-    state: "Alderaan",
-    age: 19,
-    risk: "low",
-  },
-  {
-    order: 4,
-    id: "4",
-    name: "Chewbacca",
-    city: "Kashyyyk City",
-    state: "Kashyyyk",
-    age: 50,
-    risk: "high",
-  },
-  {
-    order: 5,
-    id: "5",
-    name: "C-3P0",
-    city: "Mos Espa",
-    state: "Tatooine",
-    age: 25,
-    risk: "low",
-  },
-  {
-    order: 6,
-    id: "6",
-    name: "R2-D2",
-    city: "Theed",
-    state: "Naboo",
-    age: 25,
-    risk: "low",
-  },
-];
-
 const getData = ({ ...props }) => {
   return filterData({ data, ...props });
-};
-
-const getSimpleData = ({ ...props }) => {
-  return filterData({ data: [...simpleData], ...props });
 };
 
 const listItemProps = (row: DataRow) => ({
@@ -207,7 +138,7 @@ describe("DataView", () => {
       <DataView
         availableLayouts={["table"]}
         hasFilters
-        getData={getSimpleData}
+        getData={getData}
         tableLayoutOptions={{
           columns: columns,
         }}
@@ -248,7 +179,7 @@ describe("DataView", () => {
         availableLayouts={["table"]}
         hasSearch
         hasSearchSubmitButton
-        getData={getSimpleData}
+        getData={getData}
         tableLayoutOptions={{
           columns: columns,
         }}
@@ -279,7 +210,7 @@ describe("DataView", () => {
         availableLayouts={["table"]}
         hasSearch
         hasSearchSubmitButton
-        getData={getSimpleData}
+        getData={getData}
         tableLayoutOptions={{
           columns: columns,
         }}
@@ -320,7 +251,7 @@ describe("DataView", () => {
     render(
       <DataView
         availableLayouts={["table"]}
-        getData={getSimpleData}
+        getData={getData}
         tableLayoutOptions={{
           columns: columns,
           rowActionMenuItems: rowActionMenuItems,
@@ -348,7 +279,7 @@ describe("DataView", () => {
     render(
       <DataView
         availableLayouts={["table"]}
-        getData={getSimpleData}
+        getData={getData}
         tableLayoutOptions={{
           columns: columns,
           rowActionButtons: rowActionButtons,
@@ -365,7 +296,7 @@ describe("DataView", () => {
     render(
       <DataView
         availableLayouts={["table"]}
-        getData={getSimpleData}
+        getData={getData}
         hasRowSelection
         tableLayoutOptions={{
           columns: columns,
@@ -379,7 +310,7 @@ describe("DataView", () => {
     });
 
     const checkboxes = await screen.findAllByRole("checkbox");
-    expect(checkboxes.length).toBe(simpleData.length + 1);
+    expect(checkboxes.length).toBe(data.length + 1);
 
     fireEvent.click(checkboxes[1]);
 
@@ -389,7 +320,7 @@ describe("DataView", () => {
     render(
       <DataView
         availableLayouts={["grid"]}
-        getData={getSimpleData}
+        getData={getData}
         hasRowSelection
         cardLayoutOptions={{
           itemProps: gridItemProps,
@@ -403,7 +334,7 @@ describe("DataView", () => {
     });
 
     const checkboxes = await screen.findAllByRole("checkbox");
-    expect(checkboxes.length).toBe(simpleData.length);
+    expect(checkboxes.length).toBe(data.length);
 
     fireEvent.click(checkboxes[1]);
 
@@ -414,7 +345,7 @@ describe("DataView", () => {
     render(
       <DataView
         availableLayouts={["table"]}
-        getData={getSimpleData}
+        getData={getData}
         hasRowSelection
         tableLayoutOptions={{
           columns: columns,
@@ -433,14 +364,14 @@ describe("DataView", () => {
     fireEvent.click(selectAllButton);
 
     expect(
-      await screen.findByText(`${simpleData.length} selected`),
+      await screen.findByText(`${data.length} selected`),
     ).toBeInTheDocument();
   });
   it("can deselect rows", async () => {
     render(
       <DataView
         availableLayouts={["grid"]}
-        getData={getSimpleData}
+        getData={getData}
         hasRowSelection
         cardLayoutOptions={{
           itemProps: gridItemProps,
@@ -454,7 +385,7 @@ describe("DataView", () => {
     });
 
     const checkboxes = await screen.findAllByRole("checkbox");
-    expect(checkboxes.length).toBe(simpleData.length);
+    expect(checkboxes.length).toBe(data.length);
 
     fireEvent.click(checkboxes[1]);
     fireEvent.click(checkboxes[2]);
@@ -469,7 +400,7 @@ describe("DataView", () => {
     render(
       <DataView
         availableLayouts={["table"]}
-        getData={getSimpleData}
+        getData={getData}
         hasRowSelection
         tableLayoutOptions={{
           columns: columns,
@@ -488,7 +419,7 @@ describe("DataView", () => {
     fireEvent.click(selectAllButton);
 
     expect(
-      await screen.findByText(`${simpleData.length} selected`),
+      await screen.findByText(`${data.length} selected`),
     ).toBeInTheDocument();
 
     const selectNoneButton = screen.getByText("Select none", {
@@ -506,7 +437,7 @@ describe("DataView", () => {
     render(
       <DataView
         availableLayouts={["table"]}
-        getData={getSimpleData}
+        getData={getData}
         hasRowSelection
         tableLayoutOptions={{
           columns: columns,
@@ -526,31 +457,29 @@ describe("DataView", () => {
     fireEvent.click(selectAllButton);
 
     const bulkActionsButton = await screen.findByText(
-      `${simpleData.length} selected`,
+      `${data.length} selected`,
     );
     expect(bulkActionsButton).toBeInTheDocument();
     fireEvent.click(bulkActionsButton);
 
     const bulkActionMenu = await screen.findByRole("menuitem");
-    expect(bulkActionMenu.textContent).toBe(
-      `Bulk action for ${simpleData.length}`,
-    );
+    expect(bulkActionMenu.textContent).toBe(`Bulk action for ${data.length}`);
   });
 
   it("can reorder rows", async () => {
-    let data = [...simpleData];
+    let updatedData = [...data];
 
     const handleReorderRows = ({
       rowId,
       newRowIndex,
     }: DataOnReorderRowsType) => {
-      data = reorderData({ data, rowId, newRowIndex });
+      updatedData = reorderData({ data: updatedData, rowId, newRowIndex });
     };
 
     render(
       <DataView
         availableLayouts={["table"]}
-        getData={() => data}
+        getData={() => updatedData}
         hasRowReordering
         onReorderRows={handleReorderRows}
         tableLayoutOptions={{
@@ -581,19 +510,19 @@ describe("DataView", () => {
     expect(updatedRows[2].textContent).toContain("Luke Skywalker");
   });
   it("can reorder to front", async () => {
-    let data = [...simpleData];
+    let updatedData = [...data];
 
     const handleReorderRows = ({
       rowId,
       newRowIndex,
     }: DataOnReorderRowsType) => {
-      data = reorderData({ data, rowId, newRowIndex });
+      updatedData = reorderData({ data: updatedData, rowId, newRowIndex });
     };
 
     render(
       <DataView
         availableLayouts={["table"]}
-        getData={() => data}
+        getData={() => updatedData}
         hasRowReordering
         onReorderRows={handleReorderRows}
         tableLayoutOptions={{
@@ -624,22 +553,22 @@ describe("DataView", () => {
     expect(updatedRows[2].textContent).toContain("Luke Skywalker");
   });
   it("can reorder to back", async () => {
-    let data = [...simpleData];
+    let updatedData = [...data];
 
     const handleReorderRows = ({
       rowId,
       newRowIndex,
     }: DataOnReorderRowsType) => {
-      data = reorderData({ data, rowId, newRowIndex });
+      updatedData = reorderData({ data: updatedData, rowId, newRowIndex });
     };
 
     render(
       <DataView
         availableLayouts={["table"]}
-        getData={() => data}
+        getData={() => updatedData}
         hasRowReordering
         onReorderRows={handleReorderRows}
-        totalRows={simpleData.length}
+        totalRows={updatedData.length}
         tableLayoutOptions={{
           columns: columns,
         }}
@@ -677,7 +606,7 @@ describe("DataView", () => {
     render(
       <DataView
         availableLayouts={["table"]}
-        getData={getSimpleData}
+        getData={getData}
         tableLayoutOptions={{
           columns: columns,
           renderDetailPanel: tableDetails,
@@ -708,7 +637,7 @@ describe("DataView", () => {
     render(
       <DataView
         availableLayouts={["grid"]}
-        getData={getSimpleData}
+        getData={getData}
         cardLayoutOptions={{
           itemProps: gridItemProps,
           renderDetailPanel: cardDetails,
@@ -751,7 +680,7 @@ describe("DataView", () => {
     render(
       <DataView
         availableLayouts={["table"]}
-        getData={getSimpleData}
+        getData={getData}
         tableLayoutOptions={{
           columns: columns,
         }}
@@ -770,7 +699,7 @@ describe("DataView", () => {
     render(
       <DataView
         availableLayouts={["table"]}
-        getData={getSimpleData}
+        getData={getData}
         tableLayoutOptions={{
           columns: columns,
           hasSorting: true,
@@ -801,7 +730,7 @@ describe("DataView", () => {
     render(
       <DataView
         availableLayouts={["table"]}
-        getData={getSimpleData}
+        getData={getData}
         tableLayoutOptions={{
           columns: columns,
           hasChangeableDensity: true,
@@ -830,7 +759,7 @@ describe("DataView", () => {
     render(
       <DataView
         availableLayouts={["table"]}
-        getData={getSimpleData}
+        getData={getData}
         tableLayoutOptions={{
           columns: columns,
           hasColumnVisibility: true,
@@ -853,7 +782,7 @@ describe("DataView", () => {
     render(
       <DataView
         availableLayouts={["table"]}
-        getData={getSimpleData}
+        getData={getData}
         tableLayoutOptions={{
           columns: columns,
           hasColumnResizing: true,
@@ -874,7 +803,7 @@ describe("DataView", () => {
     render(
       <DataView
         availableLayouts={["table"]}
-        getData={getSimpleData}
+        getData={getData}
         hasPagination
         paginationType="paged"
         tableLayoutOptions={{
@@ -889,7 +818,7 @@ describe("DataView", () => {
     render(
       <DataView
         availableLayouts={["table"]}
-        getData={getSimpleData}
+        getData={getData}
         hasPagination
         paginationType="loadMore"
         tableLayoutOptions={{
@@ -906,7 +835,7 @@ describe("DataView", () => {
     render(
       <DataView
         availableLayouts={["table"]}
-        getData={getSimpleData}
+        getData={getData}
         hasPagination
         paginationType="loadMore"
         resultsPerPage={3}
@@ -933,7 +862,7 @@ describe("DataView", () => {
     render(
       <DataView
         availableLayouts={["table"]}
-        getData={getSimpleData}
+        getData={getData}
         hasPagination
         paginationType="paged"
         resultsPerPage={2}
@@ -961,7 +890,7 @@ describe("DataView", () => {
     render(
       <DataView
         availableLayouts={["table"]}
-        getData={getSimpleData}
+        getData={getData}
         hasPagination
         paginationType="paged"
         resultsPerPage={2}
@@ -997,11 +926,11 @@ describe("DataView", () => {
     render(
       <DataView
         availableLayouts={["table"]}
-        getData={getSimpleData}
+        getData={getData}
         hasPagination
         paginationType="paged"
-        resultsPerPage={simpleData.length - 1}
-        totalRows={simpleData.length}
+        resultsPerPage={data.length - 1}
+        totalRows={data.length}
         tableLayoutOptions={{
           columns: columns,
         }}
