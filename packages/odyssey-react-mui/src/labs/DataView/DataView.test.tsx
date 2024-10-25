@@ -229,8 +229,12 @@ describe("DataView", () => {
     const submitButton = screen.getByLabelText("Submit", {
       selector: "button",
     });
+
     fireEvent.change(nameInput, { target: { value: "Han Solo" } });
     fireEvent.click(submitButton);
+
+    // Detect if the data has loaded in
+    await screen.findByText("Clear filters");
 
     const updatedTable = await screen.findByRole("table");
 
@@ -259,6 +263,11 @@ describe("DataView", () => {
     fireEvent.change(searchInput, { target: { value: "Han Solo" } });
     fireEvent.click(submitButton);
 
+    await waitFor(() =>
+      expect(
+        screen.queryByLabelText("Submit", { selector: "button" }),
+      ).toBeNull(),
+    );
     const updatedTable = await screen.findByRole("table");
 
     expect(queryByText(updatedTable, "Han Solo")).not.toBeNull();
