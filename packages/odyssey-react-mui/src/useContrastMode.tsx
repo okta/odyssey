@@ -60,17 +60,20 @@ export const normalizeBackgroundColor = (bgColor: string): string => {
       ? Tokens.HueNeutral50
       : normalizedColor;
   }
+
   return bgColor === hueNeutral50Rgb ? Tokens.HueNeutral50 : bgColor;
 };
+
+export const defaultParentBackgroundColor = "#ffffff";
 
 /**
  * Determines the effective background color of an element.
  *
  * @param element - The HTML element to check.
- * @returns The effective background color. Returns "#ffffff" if no non-transparent background is found.
+ * @returns The effective background color. Returns  defaultParentBackgroundColor if no non-transparent background is found.
  *
  * Note:
- * - Low contrast mode is used for white background (#ffffff or HueNeutralWhite).
+ * - Low contrast mode is used for white background (defaultParentBackgroundColor or HueNeutralWhite).
  * - High contrast mode is used for gray background (#f4f4f4 or HueNeutral50).
  */
 export const getBackgroundColor = (element: HTMLElement | null): string => {
@@ -81,7 +84,7 @@ export const getBackgroundColor = (element: HTMLElement | null): string => {
     }
     element = element.parentElement;
   }
-  return "#ffffff"; // Default to white/low contrast if no background color is found
+  return defaultParentBackgroundColor; // Default to white/low contrast if no background color is found
 };
 
 type UseContrastModeProps = {
@@ -94,7 +97,9 @@ export const useContrastMode = ({
   const contrastContainerRef = useRef<HTMLDivElement>(null);
   const { contrastMode: existingContrastMode } = useContrastModeContext();
 
-  const [parentBackgroundColor, setParentBackgroundColor] = useState("#ffffff");
+  const [parentBackgroundColor, setParentBackgroundColor] = useState(
+    defaultParentBackgroundColor,
+  );
   const [contrastMode, setContrastMode] = useState<ContrastMode>(
     () => explicitContrastMode || existingContrastMode,
   );

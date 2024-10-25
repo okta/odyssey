@@ -13,6 +13,7 @@
 import { render, waitFor, act } from "@testing-library/react";
 import {
   ContrastModeContext,
+  defaultParentBackgroundColor,
   getBackgroundColor,
   getElementComputedBackgroundColor,
   hexToRgb,
@@ -56,7 +57,9 @@ describe("useContrastMode and related functions", () => {
           </ContrastModeContext.Provider>
         ),
       });
-      expect(result.current.parentBackgroundColor).toBe("#ffffff");
+      expect(result.current.parentBackgroundColor).toBe(
+        defaultParentBackgroundColor,
+      );
       expect(result.current.contrastMode).toBe("lowContrast");
       expect(result.current.contrastContainerRef.current).toBe(null);
     });
@@ -182,9 +185,9 @@ describe("useContrastMode and related functions", () => {
       getComputedStyleSpy.mockRestore();
     });
 
-    it('returns "#ffffff" if transparent background is found', () => {
+    it("returns defaultParentBackgroundColor if transparent background is found", () => {
       const element = document.createElement("div");
-      expect(getBackgroundColor(element)).toBe("#ffffff");
+      expect(getBackgroundColor(element)).toBe(defaultParentBackgroundColor);
     });
 
     it("returns the background color of the element if it is not transparent", () => {
@@ -207,7 +210,7 @@ describe("useContrastMode and related functions", () => {
       getComputedStyleSpy.mockRestore();
     });
 
-    it('returns "#ffffff" if no non-transparent background is found', () => {
+    it("returns defaultParentBackgroundColor if no non-transparent background is found", () => {
       const getComputedStyleSpy = jest
         .spyOn(window, "getComputedStyle")
         .mockImplementation(
@@ -216,7 +219,7 @@ describe("useContrastMode and related functions", () => {
         );
 
       const element = document.createElement("div");
-      expect(getBackgroundColor(element)).toBe("#ffffff");
+      expect(getBackgroundColor(element)).toBe(defaultParentBackgroundColor);
 
       getComputedStyleSpy.mockRestore();
     });
@@ -404,7 +407,7 @@ describe("useContrastMode and related functions", () => {
       it("identifies solid colors as non-transparent", () => {
         expect(isTransparentColor("rgb(255, 255, 255)")).toBe(false);
         expect(isTransparentColor("rgba(255, 255, 255, 1)")).toBe(false);
-        expect(isTransparentColor("#ffffff")).toBe(false);
+        expect(isTransparentColor(defaultParentBackgroundColor)).toBe(false);
       });
     });
 
