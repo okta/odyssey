@@ -129,7 +129,7 @@ const storybookMeta: Meta<PickerType> = {
     HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
   },
   args: {
-    label: "Basic picker label",
+    label: "Picker label",
     hint: "Optional hint text for picker",
     options: languagesNoDescription,
   },
