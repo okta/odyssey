@@ -15,7 +15,6 @@ import { memo } from "react";
 const CollapseIcon = () => {
   return (
     <svg
-      id="sidenavcollapseicon"
       width="32"
       height="32"
       viewBox="0 0 12 20"
@@ -29,6 +28,7 @@ const CollapseIcon = () => {
     </svg>
   );
 };
+
 const MemoizedCollapseIcon = memo(CollapseIcon);
 
 export { MemoizedCollapseIcon as CollapseIcon };

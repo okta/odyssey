@@ -67,7 +67,7 @@ const SideNavCollapsedContainer = styled("div", {
       width: 0,
       content: '""',
     },
-    "&:has(svg:hover)": {
+    "&:hover": {
       "&:before": {
         width: isSideNavCollapsed ? "8px" : 0,
         transitionProperty: "width, background-color",
@@ -95,21 +95,21 @@ const ToggleSideNavHandleContainer = styled("div", {
     height: 0,
     cursor: "pointer",
     marginTop: SIDENAV_COLLAPSE_ICON_POSITION,
-    "& svg#sidenavcollapseicon": {
+    "& svg:nth-of-type(2)": {
       opacity: 0,
       width: 0,
       transform: isSideNavCollapsed ? "rotate(180deg)" : "rotate(0deg)",
     },
     "&:hover, &:focus-visible": {
-      "& svg#sidenavcollapseicon": {
+      "& svg:nth-of-type(2)": {
         opacity: 1,
         width: "32px",
-        padding: "8px",
+        padding: odysseyDesignTokens.Spacing2,
         transitionProperty: "opacity",
         transitionDuration: odysseyDesignTokens.TransitionDurationMain,
         transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
       },
-      "& svg#sidenavhandleicon": {
+      "& svg:nth-of-type(1)": {
         opacity: 0,
         width: 0,
         transitionProperty: "opacity",
