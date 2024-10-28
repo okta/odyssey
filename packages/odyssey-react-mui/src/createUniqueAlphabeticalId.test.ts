@@ -13,7 +13,7 @@
 import { createUniqueAlphabeticalId } from "./createUniqueAlphabeticalId";
 
 describe("createUniqueAlphabeticalId", () => {
-  it("only has lowercase letters", () => {
+  test("only has lowercase letters", () => {
     const uniqueAlphabeticalId = createUniqueAlphabeticalId();
 
     expect(uniqueAlphabeticalId.match(/[a-z]/)).not.toBeNull();
