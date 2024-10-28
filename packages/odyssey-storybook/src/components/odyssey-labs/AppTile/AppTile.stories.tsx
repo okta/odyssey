@@ -12,6 +12,7 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { jest } from "@storybook/jest";
 import { AppTile, AppTileProps } from "@okta/odyssey-react-mui/labs";
 import {
   Box,
@@ -21,7 +22,7 @@ import {
   Tag,
   TagList,
 } from "@okta/odyssey-react-mui";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { SettingsIcon } from "@okta/odyssey-react-mui/icons";
 
 const storybookMeta: Meta<AppTileProps> = {
@@ -29,7 +30,7 @@ const storybookMeta: Meta<AppTileProps> = {
   component: AppTile,
   argTypes: {
     actionAriaControls: {
-      control: null,
+      control: "text",
       description:
         "The ID of the element which the button controls (for instance, a drawer or dialog), if any.",
       table: {
@@ -39,7 +40,7 @@ const storybookMeta: Meta<AppTileProps> = {
       },
     },
     actionAriaExpanded: {
-      control: null,
+      control: "boolean",
       description:
         "Should be true if the button controls a popup element that is currently expanded. Should be synced to the state of the popup element",
       table: {
@@ -69,7 +70,7 @@ const storybookMeta: Meta<AppTileProps> = {
       },
     },
     actionLabel: {
-      control: null,
+      control: "text",
       description:
         "The label for the button, used as the aria-label and tooltip.",
       table: {
@@ -79,7 +80,7 @@ const storybookMeta: Meta<AppTileProps> = {
       },
     },
     auxiliaryText: {
-      control: null,
+      control: "text",
       description: "Text that appears in the upper right corner of the tile.",
       table: {
         type: {
@@ -98,7 +99,7 @@ const storybookMeta: Meta<AppTileProps> = {
       },
     },
     description: {
-      control: null,
+      control: "text",
       description: "A string description.",
       table: {
         type: {
@@ -112,6 +113,15 @@ const storybookMeta: Meta<AppTileProps> = {
       table: {
         type: {
           summary: "ReactElement",
+        },
+      },
+    },
+    isLoading: {
+      control: "boolean",
+      description: "If true, the component will display a loading state",
+      table: {
+        type: {
+          summary: "boolean",
         },
       },
     },
@@ -135,7 +145,7 @@ const storybookMeta: Meta<AppTileProps> = {
       },
     },
     overline: {
-      control: null,
+      control: "text",
       description: "An 'eyebrow' of text above the title.",
       table: {
         type: {
@@ -144,7 +154,7 @@ const storybookMeta: Meta<AppTileProps> = {
       },
     },
     title: {
-      control: null,
+      control: "text",
       description: "A string for the tile title.",
       table: {
         type: {
@@ -152,6 +162,13 @@ const storybookMeta: Meta<AppTileProps> = {
         },
       },
     },
+  },
+  args: {
+    title: "App name",
+    description: "This is a description of the app.",
+    image: <img src="https://placehold.co/128" alt="Example logo" />,
+    onClick: jest.fn(),
+    onActionClick: undefined,
   },
   decorators: [MuiThemeDecorator],
   parameters: {
@@ -168,132 +185,134 @@ const storybookMeta: Meta<AppTileProps> = {
 export default storybookMeta;
 
 export const Default: StoryObj<AppTileProps> = {
-  render: function C() {
-    const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
-
-    return (
-      <>
-        <Drawer
-          isOpen={isDrawerOpen}
-          onClose={() => setIsDrawerOpen(false)}
-          showDividers={false}
-        />
-        <Box sx={{ maxWidth: 262 }}>
-          <AppTile
-            onClick={() => alert("Open the app")}
-            title="App name"
-            description="This is a description of the app."
-            image={<img src="https://placehold.co/128" alt="Example logo" />}
-            children={
-              <TagList>
-                <Tag label="Tag 1" />
-                <Tag label="Tag 2" />
-              </TagList>
-            }
-          />
-        </Box>
-      </>
-    );
+  args: {
+    children: (
+      <TagList>
+        <Tag label="Tag 1" />
+        <Tag label="Tag 2" />
+      </TagList>
+    ),
   },
 };
 
 export const ActionButton: StoryObj<AppTileProps> = {
-  render: function C() {
-    const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
+  args: {
+    actionAriaControls: "",
+    actionAriaExpanded: false,
+    actionAriaHasPopup: "menu",
+    actionIcon: <SettingsIcon />,
+    actionLabel: "Open app settings",
+    children: (
+      <TagList>
+        <Tag label="Tag 1" />
+        <Tag label="Tag 2" />
+      </TagList>
+    ),
+  },
+  render: function C({ ...args }) {
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const toggleDrawer = useCallback(
+      () => setIsDrawerOpen(!isDrawerOpen),
+      [isDrawerOpen],
+    );
 
     return (
       <>
         <Drawer
           isOpen={isDrawerOpen}
-          onClose={() => setIsDrawerOpen(false)}
+          onClose={toggleDrawer}
           showDividers={false}
         />
         <Box sx={{ maxWidth: 262 }}>
           <AppTile
-            actionAriaControls=""
+            {...args}
+            onClick={args.onClick}
             actionAriaExpanded={isDrawerOpen}
-            actionAriaHasPopup="menu"
-            actionIcon={<SettingsIcon />}
-            actionLabel="Open app settings"
-            onActionClick={() => setIsDrawerOpen(true)}
-            onClick={() => alert("Open the app")}
-            title="App name"
-            description="This is a description of the app."
-            image={<img src="https://placehold.co/128" alt="Example logo" />}
-            children={
-              <TagList>
-                <Tag label="Tag 1" />
-                <Tag label="Tag 2" />
-              </TagList>
-            }
+            onActionClick={toggleDrawer}
+            actionIcon={args.actionIcon}
+            actionLabel={args.actionLabel}
           />
         </Box>
       </>
     );
+  },
+};
+
+export const SquareImage: StoryObj<AppTileProps> = {
+  args: {
+    image: <img src="https://placehold.co/600" alt="Square logo" />,
+  },
+};
+
+export const TallImage: StoryObj<AppTileProps> = {
+  args: {
+    image: <img src="https://placehold.co/400x800" alt="Tall logo" />,
+  },
+};
+
+export const WideImage: StoryObj<AppTileProps> = {
+  args: {
+    image: <img src="https://placehold.co/800x400" alt="Wide logo" />,
+  },
+};
+
+export const WideImageWithActionButton: StoryObj<AppTileProps> = {
+  args: {
+    actionIcon: <SettingsIcon />,
+    actionLabel: "Open app settings",
+    auxiliaryText: "Single sign-on",
+    image: <img src="https://placehold.co/800x400" alt="Wide logo" />,
   },
 };
 
 export const AuxiliaryText: StoryObj<AppTileProps> = {
-  render: function C() {
-    const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
-
-    return (
-      <>
-        <Drawer
-          isOpen={isDrawerOpen}
-          onClose={() => setIsDrawerOpen(false)}
-          showDividers={false}
-        />
-        <Box sx={{ maxWidth: 262 }}>
-          <AppTile
-            auxiliaryText="Single sign-on"
-            onClick={() => alert("Open the app")}
-            title="App name"
-            description="This is a description of the app."
-            image={<img src="https://placehold.co/128" alt="Example logo" />}
-            children={
-              <TagList>
-                <Tag label="Tag 1" />
-                <Tag label="Tag 2" />
-              </TagList>
-            }
-          />
-        </Box>
-      </>
-    );
+  args: {
+    auxiliaryText: "Single sign-on",
+    children: (
+      <TagList>
+        <Tag label="Tag 1" />
+        <Tag label="Tag 2" />
+      </TagList>
+    ),
   },
 };
 
 export const ActionButtonAndAuxiliaryText: StoryObj<AppTileProps> = {
-  render: function C() {
-    const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
+  args: {
+    actionAriaControls: "",
+    actionAriaHasPopup: "menu",
+    actionIcon: <SettingsIcon />,
+    actionLabel: "Open app settings",
+    auxiliaryText: "Single sign-on",
+    children: (
+      <TagList>
+        <Tag label="Tag 1" />
+        <Tag label="Tag 2" />
+      </TagList>
+    ),
+  },
+  render: function C({ ...args }) {
+    const [isDrawerOpen, setIsDrawerOpen] = useState(args.actionAriaExpanded);
+    const toggleDrawer = useCallback(
+      () => setIsDrawerOpen(!isDrawerOpen),
+      [isDrawerOpen],
+    );
 
     return (
       <>
         <Drawer
           isOpen={isDrawerOpen}
-          onClose={() => setIsDrawerOpen(false)}
+          onClose={toggleDrawer}
           showDividers={false}
         />
         <Box sx={{ maxWidth: 262 }}>
           <AppTile
-            actionAriaControls=""
+            {...args}
+            onClick={args.onClick}
             actionAriaExpanded={isDrawerOpen}
-            actionAriaHasPopup="menu"
-            actionIcon={<SettingsIcon />}
-            actionLabel="Open app settings"
-            auxiliaryText="Single sign-on"
-            onActionClick={() => setIsDrawerOpen(true)}
-            onClick={() => alert("Open the app")}
-            title="App name"
-            description="This is a description of the app."
-            image={<img src="https://placehold.co/128" alt="Example logo" />}
-            children={
-              <TagList>
-                <Tag label="Tag 1" />
-                <Tag label="Tag 2" />
-              </TagList>
-            }
+            onActionClick={toggleDrawer}
+            actionIcon={args.actionIcon}
+            actionLabel={args.actionLabel}
           />
         </Box>
       </>
@@ -301,28 +320,40 @@ export const ActionButtonAndAuxiliaryText: StoryObj<AppTileProps> = {
   },
 };
 
-export const CustomContent: StoryObj<AppTileProps> = {
-  render: function C() {
-    return (
-      <Box sx={{ maxWidth: 262 }}>
-        <AppTile
-          onClick={() => alert("Open the app")}
-          children={
-            <>
-              <Box sx={{ marginBottom: 2 }}>
-                <Status label="Active" severity="success" />
-              </Box>
-              <Heading5>This is arbitrary content.</Heading5>
-              <Box>
-                <TagList>
-                  <Tag label="Tag 1" />
-                  <Tag label="Tag 2" />
-                </TagList>
-              </Box>
-            </>
-          }
-        />
-      </Box>
-    );
+export const FullyCustomContent: StoryObj<AppTileProps> = {
+  args: {
+    title: undefined,
+    description: undefined,
+    image: undefined,
+    children: (
+      <>
+        <Box sx={{ marginBottom: 2 }}>
+          <Status label="Active" severity="success" />
+        </Box>
+        <Heading5>This is arbitrary content.</Heading5>
+        <TagList>
+          <Tag label="Tag 1" />
+          <Tag label="Tag 2" />
+        </TagList>
+      </>
+    ),
+  },
+};
+
+export const Loading: StoryObj<AppTileProps> = {
+  args: {
+    isLoading: true,
+    actionAriaControls: "",
+    actionAriaExpanded: false,
+    actionAriaHasPopup: "menu",
+    actionIcon: <SettingsIcon />,
+    actionLabel: "Open app settings",
+    auxiliaryText: "Single sign-on",
+    children: (
+      <TagList>
+        <Tag label="Tag 1" />
+        <Tag label="Tag 2" />
+      </TagList>
+    ),
   },
 };
