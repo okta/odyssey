@@ -21,11 +21,17 @@ import {
   type DesignTokens,
 } from "../../OdysseyDesignTokensContext";
 
-const ShellContainer = styled("div")(() => ({
-  display: "flex",
-  flexWrap: "nowrap",
-  height: "100vh",
-  width: "100vw",
+const AppContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  overflowX: "hidden",
+  overflowY: "scroll",
+  paddingBlockEnd: odysseyDesignTokens.Spacing4,
+  paddingBlockStart: odysseyDesignTokens.Spacing4,
+  paddingInlineEnd: odysseyDesignTokens.Spacing4,
+  paddingInlineStart: odysseyDesignTokens.Spacing6,
 }));
 
 const FlexibleContentContainer = styled("div", {
@@ -35,6 +41,7 @@ const FlexibleContentContainer = styled("div", {
 }>(({ odysseyDesignTokens }) => ({
   backgroundColor: odysseyDesignTokens.HueNeutral50,
   display: "flex",
+  flexBasis: "100%",
   flexDirection: "column",
   flexGrow: 1,
 }));
@@ -42,6 +49,13 @@ const FlexibleContentContainer = styled("div", {
 const RigidContentContainer = styled("div")(() => ({
   flexShrink: 0,
   height: "100%",
+}));
+
+const ShellContainer = styled("div")(() => ({
+  display: "flex",
+  flexWrap: "nowrap",
+  height: "100vh",
+  width: "100vw",
 }));
 
 export type UiShellContentProps = {
@@ -118,7 +132,9 @@ const UiShellContent = ({
           />
         </ErrorBoundary>
 
-        {appComponent}
+        <AppContainer odysseyDesignTokens={odysseyDesignTokens}>
+          {appComponent}
+        </AppContainer>
       </FlexibleContentContainer>
     </ShellContainer>
   );
