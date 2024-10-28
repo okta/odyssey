@@ -12,6 +12,7 @@
 
 export { DataTable, type DataTableProps } from "./DataTable";
 export { DataView, type DataViewProps } from "./DataView";
+export { type DataCardProps } from "./DataCard";
 
 export * from "./componentTypes";
 export * from "./constants";
