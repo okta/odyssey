@@ -17,6 +17,7 @@ import {
 } from "@mui/material/styles";
 import { ThemeOptions } from "@mui/material";
 import { deepmerge } from "@mui/utils";
+import styled from "@emotion/styled";
 import { createOdysseyMuiTheme, DesignTokensOverride } from "./theme";
 import * as Tokens from "@okta/odyssey-design-tokens";
 
@@ -36,6 +37,10 @@ export type OdysseyThemeProviderProps = {
   shadowRootElement?: HTMLDivElement | HTMLElement;
   themeOverride?: ThemeOptions;
 };
+
+const ContrastContainer = styled.div`
+  height: inherit;
+`;
 
 /**
  * This function doesn't include the Emotion Cache or Translations. You should probably be using `OdysseyProvider`.
@@ -84,7 +89,7 @@ export const OdysseyThemeProvider = ({
   );
 
   return (
-    <div style={{ height: "inherit" }} ref={contrastContainerRef}>
+    <ContrastContainer ref={contrastContainerRef}>
       <ContrastModeContext.Provider value={contrastModeProviderValue}>
         <MuiThemeProvider theme={customOdysseyTheme}>
           <OdysseyDesignTokensContext.Provider value={odysseyTokens}>
@@ -92,6 +97,6 @@ export const OdysseyThemeProvider = ({
           </OdysseyDesignTokensContext.Provider>
         </MuiThemeProvider>
       </ContrastModeContext.Provider>
-    </div>
+    </ContrastContainer>
   );
 };
