@@ -110,6 +110,9 @@ const storybookMeta: Meta<TopNavProps> = {
     },
   },
   decorators: [MuiThemeDecorator],
+  parameters: {
+    layout: "fullscreen",
+  },
   tags: ["autodocs"],
 };
 

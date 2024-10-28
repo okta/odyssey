@@ -296,6 +296,9 @@ const storybookMeta: Meta<SideNavProps> = {
     ],
   },
   decorators: [MuiThemeDecorator],
+  parameters: {
+    layout: "fullscreen",
+  },
   tags: ["autodocs"],
 };
 

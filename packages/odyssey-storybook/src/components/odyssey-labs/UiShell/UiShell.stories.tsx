@@ -85,6 +85,9 @@ const storybookMeta: Meta<UiShellProps> = {
     subscribeToPropChanges: () => () => {},
   },
   decorators: [MuiThemeDecorator],
+  parameters: {
+    layout: "fullscreen",
+  },
 };
 
 export default storybookMeta;
