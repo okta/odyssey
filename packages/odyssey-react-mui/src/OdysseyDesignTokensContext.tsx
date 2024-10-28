@@ -10,11 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import * as Tokens from "@okta/odyssey-design-tokens";
+import * as odysseyDesignTokens from "@okta/odyssey-design-tokens";
 import { createContext, useContext } from "react";
 
-export type DesignTokens = typeof Tokens;
-export const OdysseyDesignTokensContext = createContext<DesignTokens>(Tokens);
+export type DesignTokens = typeof odysseyDesignTokens;
+export const defaultOdysseyDesignTokensContextValue = odysseyDesignTokens;
+export const OdysseyDesignTokensContext = createContext(
+  defaultOdysseyDesignTokensContextValue,
+);
 
 export const useOdysseyDesignTokens = () =>
   useContext(OdysseyDesignTokensContext);

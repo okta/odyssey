@@ -20,7 +20,7 @@ import { Box } from "../../Box";
 import { Heading6 } from "../../Typography";
 import { CollapseIcon } from "./CollapseIcon";
 import type { SideNavProps } from "./types";
-import { TOP_NAV_HEIGHT_TOKEN } from "../TopNav/TopNav";
+import { TOP_NAV_HEIGHT_TOKEN } from "../TopNav";
 
 const SideNavLogoContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",

@@ -10,39 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import styled from "@emotion/styled";
-import {
-  memo,
-  useEffect,
-  useState,
-  type ReactNode,
-  type SetStateAction,
-} from "react";
-import { ErrorBoundary, ErrorBoundaryProps } from "react-error-boundary";
+import { memo, useEffect, useState, type SetStateAction } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 
-import { SideNav, type SideNavProps } from "../SideNav";
-import { TopNav, type TopNavProps } from "../TopNav";
+import { type SideNavProps } from "../SideNav";
+import { type TopNavProps } from "../TopNav";
 import { OdysseyProvider } from "../../OdysseyProvider";
+import { UiShellContent, type UiShellContentProps } from "./UiShellContent";
 import { type ReactRootElements } from "../../web-component";
-import { AppContent } from "./AppContainer";
 
-const FlexContainer = styled("div")(() => ({
-  display: "flex",
-  flexWrap: "nowrap",
-  height: "inherit",
-}));
-
-const FlexibleContentContainer = styled("div")(() => ({
-  flexGrow: 1,
-  height: "inherit",
-}));
-
-const RigidContentContainer = styled("div")(() => ({
-  flexShrink: 0,
-  height: "inherit",
-}));
-
-export type UiShellComponentProps = {
+export type UiShellNavComponentProps = {
   sideNavProps?: Omit<SideNavProps, "logo" | "footerComponent">;
   topNavProps: Omit<
     TopNavProps,
@@ -50,7 +27,7 @@ export type UiShellComponentProps = {
   >;
 };
 
-export const defaultComponentProps: UiShellComponentProps = {
+export const defaultComponentProps: UiShellNavComponentProps = {
   sideNavProps: {
     navHeaderText: "",
     sideNavItems: [],
@@ -62,28 +39,11 @@ export const defaultComponentProps: UiShellComponentProps = {
 
 export type UiShellProps = {
   /**
-   * React app component that renders as children in the correct location of the shell.
-   */
-  appComponent: ReactNode;
-  /**
-   * Notifies when a React rendering error occurs. This could be useful for logging, flagging "p0"s, and recovering UI Shell when errors occur.
-   */
-  onError?: ErrorBoundaryProps["onError"];
-  /**
    * Notifies when subscribed to prop changes.
    *
    * UI Shell listens to prop updates, and it won't subscribe synchronously. Because of that, this callback notifies when that subscription is ready.
    */
   onSubscriptionCreated: () => void;
-  /**
-   * Components that will render as children of various other components such as the top nav or side nav.
-   */
-  optionalComponents?: {
-    additionalTopNavItems?: TopNavProps["AdditionalNavItemComponent"];
-    footer?: SideNavProps["footerComponent"];
-    logo?: SideNavProps["logo"];
-    searchField?: TopNavProps["SearchFieldComponent"];
-  };
   /**
    * This is a callback that provides a subscriber callback to listen for changes to state.
    * It allows UI Shell to listen for state changes.
@@ -91,9 +51,12 @@ export type UiShellProps = {
    * The props coming in this callback go directly to a React state; therefore, it shares the same signature and provides a previous state.
    */
   subscribeToPropChanges: (
-    subscriber: (componentProps: SetStateAction<UiShellComponentProps>) => void,
+    subscriber: (
+      componentProps: SetStateAction<UiShellNavComponentProps>,
+    ) => void,
   ) => () => void;
-} & ReactRootElements;
+} & Pick<ReactRootElements, "appRootElement" | "stylesRootElement"> &
+  Pick<UiShellContentProps, "appComponent" | "onError" | "optionalComponents">;
 
 /**
  * Our new Unified Platform UI Shell.
@@ -132,38 +95,14 @@ const UiShell = ({
         emotionRootElement={stylesRootElement}
         shadowRootElement={appRootElement}
       >
-        <FlexContainer>
-          <RigidContentContainer>
-            {componentProps.sideNavProps && (
-              <ErrorBoundary fallback={null} onError={onError}>
-                <SideNav
-                  {...("footerItems" in componentProps.sideNavProps
-                    ? componentProps.sideNavProps
-                    : {
-                        ...componentProps.sideNavProps,
-                        footerComponent: optionalComponents?.footer,
-                        footerItems: undefined,
-                      })}
-                  logo={optionalComponents?.logo}
-                />
-              </ErrorBoundary>
-            )}
-          </RigidContentContainer>
-
-          <FlexibleContentContainer>
-            <ErrorBoundary fallback={null} onError={onError}>
-              <TopNav
-                {...componentProps.topNavProps}
-                AdditionalNavItemComponent={
-                  optionalComponents?.additionalTopNavItems
-                }
-                SearchFieldComponent={optionalComponents?.searchField}
-              />
-            </ErrorBoundary>
-
-            <AppContent>{appComponent}</AppContent>
-          </FlexibleContentContainer>
-        </FlexContainer>
+        <ErrorBoundary fallback={appComponent} onError={onError}>
+          <UiShellContent
+            {...componentProps}
+            appComponent={appComponent}
+            onError={onError}
+            optionalComponents={optionalComponents}
+          />
+        </ErrorBoundary>
       </OdysseyProvider>
     </ErrorBoundary>
   );

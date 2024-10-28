@@ -13,6 +13,6 @@
 export * from "./renderUiShell";
 export {
   UiShell,
-  type UiShellComponentProps,
+  type UiShellNavComponentProps,
   type UiShellProps,
 } from "./UiShell";

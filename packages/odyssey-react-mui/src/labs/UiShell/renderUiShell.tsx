@@ -15,7 +15,11 @@ import { ErrorBoundary } from "react-error-boundary";
 
 import { bufferLatest } from "./bufferLatest";
 import { createMessageBus } from "./createMessageBus";
-import { UiShell, UiShellProps, type UiShellComponentProps } from "./UiShell";
+import {
+  UiShell,
+  UiShellProps,
+  type UiShellNavComponentProps,
+} from "./UiShell";
 import { renderReactInWebComponent } from "../../web-component/renderReactInWebComponent";
 
 export const optionalComponentSlotNames: Record<
@@ -59,7 +63,7 @@ export const renderUiShell = ({
     explicitAppRootElement || document.createElement("div");
 
   const { publish: publishPropChanges, subscribe: subscribeToPropChanges } =
-    createMessageBus<SetStateAction<UiShellComponentProps>>();
+    createMessageBus<SetStateAction<UiShellNavComponentProps>>();
 
   const {
     publish: publishSubscriptionCreated,
@@ -97,6 +101,7 @@ export const renderUiShell = ({
           appRootElement={reactRootElements.appRootElement}
           onError={onError}
           onSubscriptionCreated={publishSubscriptionCreated}
+          // `optionalComponents` doesn't need to be memoized because gets passed in once.
           optionalComponents={Object.fromEntries(
             Object.entries(optionalComponentSlotNames).map(
               ([optionalComponentKey, slotName]) => [
