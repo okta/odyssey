@@ -105,7 +105,7 @@ export type TableLayoutProps = {
 };
 
 export type CardLayoutProps = {
-  itemProps: (row: MRT_RowData) => DataCardProps;
+  itemProps: (row: MRT_RowData) => Omit<DataCardProps, "row">;
   maxGridColumns?: number;
   renderDetailPanel?: (props: { row: MRT_RowData }) => ReactNode;
   rowActionMenuItems?: DataTableRowActionsProps["rowActionMenuItems"];

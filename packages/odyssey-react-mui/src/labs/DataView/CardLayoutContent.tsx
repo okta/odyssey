@@ -29,7 +29,6 @@ import {
 import { RowActions } from "./RowActions";
 import { DataCard } from "./DataCard";
 import { CardLayout, CardLayoutProps, UniversalProps } from "./componentTypes";
-import { DetailPanel } from "./DetailPanel";
 
 export type CardLayoutContentProps = {
   currentLayout: CardLayout;
@@ -100,7 +99,7 @@ const StackContainer = styled("div", {
 }>(({ odysseyDesignTokens, currentLayout, maxGridColumns }) => ({
   display: currentLayout === "list" ? "flex" : "grid",
   flexDirection: "column",
-  gap: odysseyDesignTokens.Spacing5,
+  columnGap: odysseyDesignTokens.Spacing5,
 
   ...(currentLayout === "grid" && {
     [`@media (max-width: 720px)`]: {
@@ -187,8 +186,14 @@ const CardLayoutContent = ({
           ) : (
             <>
               {data.map((row: MRT_RowData, index: number) => {
-                const { overline, title, description, image, children } =
-                  cardLayoutOptions.itemProps(row);
+                const {
+                  overline,
+                  title,
+                  description,
+                  image,
+                  children,
+                  variant,
+                } = cardLayoutOptions.itemProps(row);
                 const currentIndex =
                   index + (pagination.pageIndex - 1) * pagination.pageSize;
 
@@ -209,16 +214,8 @@ const CardLayoutContent = ({
                     }
                     children={children}
                     description={description}
-                    detailPanel={
-                      cardLayoutOptions.renderDetailPanel ? (
-                        <DetailPanel
-                          row={row}
-                          renderDetailPanel={
-                            cardLayoutOptions.renderDetailPanel
-                          }
-                        />
-                      ) : undefined
-                    }
+                    renderDetailPanel={cardLayoutOptions.renderDetailPanel}
+                    row={row}
                     image={image}
                     key={row.id}
                     menuButtonChildren={
@@ -242,6 +239,7 @@ const CardLayoutContent = ({
                     }
                     overline={overline}
                     title={title}
+                    variant={variant}
                   />
                 );
               })}
