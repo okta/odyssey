@@ -10,30 +10,33 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, ReactElement, useCallback, useContext } from "react";
 import { Chip as MuiChip, ChipProps as MuiChipProps } from "@mui/material";
+import { memo, ReactElement, useCallback, useContext } from "react";
 import styled from "@emotion/styled";
 
-import { useContrastModeContext, ContrastMode } from "./useContrastMode";
-import { HtmlProps } from "./HtmlProps";
 import { CloseCircleFilledIcon } from "./icons.generated";
+import { HtmlProps } from "./HtmlProps";
 import { MuiPropsContext, MuiPropsContextType } from "./MuiPropsContext";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext";
 import { TagListContext } from "./TagListContext";
+import { ContrastMode, useContrastModeContext } from "./useContrastMode";
+
+const tagSizeValues = ["medium", "small"] as const;
 
 export const tagColorVariants = [
+  "accentFour",
+  "accentOne",
+  "accentThree",
+  "accentTwo",
   "default",
   "info",
-  "accentOne",
-  "accentTwo",
-  "accentThree",
-  "accentFour",
 ] as const;
 
 type TagColorVariant = (typeof tagColorVariants)[number];
+type TagSize = (typeof tagSizeValues)[number];
 
 export type TagProps = {
   icon?: ReactElement;
@@ -54,6 +57,10 @@ export type TagProps = {
    * Color variant of the Tag, affecting its appearance
    */
   colorVariant?: TagColorVariant;
+  /*
+   *  Size variant of the Tag
+   */
+  size?: TagSize;
 } & Pick<HtmlProps, "testId" | "translate">;
 
 const getChipColors = ({
@@ -187,16 +194,17 @@ const getChipColors = ({
 
 const StyledTag = styled(MuiChip, {
   shouldForwardProp: (prop) =>
-    !["colorVariant", "contrastMode", "odysseyDesignTokens"].includes(
+    !["colorVariant", "contrastMode", "odysseyDesignTokens", "size"].includes(
       prop as string,
     ),
 })<{
+  as?: React.ElementType; // Allow the 'as' prop to be forwarded
+  clickable?: boolean;
   colorVariant: TagColorVariant;
   contrastMode: ContrastMode;
   odysseyDesignTokens: DesignTokens;
-  as?: React.ElementType; // Allow the 'as' prop to be forwarded
-  clickable?: boolean;
-}>(({ colorVariant, contrastMode, odysseyDesignTokens, clickable }) => {
+  size?: TagSize;
+}>(({ colorVariant, contrastMode, odysseyDesignTokens, clickable, size }) => {
   const colors = getChipColors({
     colorVariant,
     odysseyDesignTokens,
@@ -213,6 +221,10 @@ const StyledTag = styled(MuiChip, {
 
     ...(clickable === false && {
       borderColor: "transparent",
+    }),
+
+    ...(size === "small" && {
+      paddingBlock: `calc(${odysseyDesignTokens.Spacing1})`,
     }),
 
     "&.MuiChip-clickable:hover": {
@@ -234,6 +246,7 @@ const StyledTag = styled(MuiChip, {
     "& .MuiChip-icon": {
       color: colors.icon,
     },
+
     "& .MuiChip-deleteIcon": {
       color: colors.deleteIcon,
       "&:hover": {
@@ -250,6 +263,7 @@ const Tag = ({
   label,
   onClick,
   onRemove,
+  size = "medium",
   testId,
   translate,
 }: TagProps) => {
@@ -261,34 +275,36 @@ const Tag = ({
     (muiProps: MuiPropsContextType) => (
       <StyledTag
         {...muiProps}
-        as={chipElementType}
         aria-disabled={isDisabled}
+        as={chipElementType}
         clickable={Boolean(onClick)}
-        data-se={testId}
         colorVariant={colorVariant}
-        odysseyDesignTokens={odysseyDesignTokens}
         contrastMode={contrastMode}
+        data-se={testId}
+        deleteIcon={<CloseCircleFilledIcon />}
         disabled={isDisabled}
         icon={icon}
         label={label}
+        odysseyDesignTokens={odysseyDesignTokens}
         onClick={onClick}
         onDelete={onRemove}
-        deleteIcon={<CloseCircleFilledIcon />}
+        size={size}
         translate={translate}
       />
     ),
     [
       chipElementType,
+      colorVariant,
+      contrastMode,
       icon,
       isDisabled,
       label,
+      odysseyDesignTokens,
       onClick,
       onRemove,
+      size,
       testId,
       translate,
-      colorVariant,
-      odysseyDesignTokens,
-      contrastMode,
     ],
   );
 
