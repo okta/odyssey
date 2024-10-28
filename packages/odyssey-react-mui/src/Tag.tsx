@@ -225,7 +225,6 @@ const StyledTag = styled(MuiChip, {
 
     ...(size === "small" && {
       paddingBlock: `calc(0.31875rem - ${odysseyDesignTokens.BorderWidthMain})`,
-      height: "26px",
     }),
 
     "&.MuiChip-clickable:hover": {
