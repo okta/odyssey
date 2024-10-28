@@ -10,25 +10,18 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo } from "react";
+import { createContext, useContext } from "react";
 
-const CollapseIcon = () => {
-  return (
-    <svg
-      width="32"
-      height="32"
-      viewBox="0 0 12 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M3.55226 9.99998L11.2761 2.27612L9.39051 0.390503L0.723837 9.05717C0.473789 9.30722 0.333313 9.64636 0.333313 9.99998C0.333313 10.3536 0.473789 10.6927 0.723837 10.9428L9.3905 19.6095L11.2761 17.7238L3.55226 9.99998Z"
-        fill="#6E6E6E"
-      />
-    </svg>
-  );
+export type SideNavItemContentContextValue = {
+  isCompact?: boolean;
+  depth: number;
 };
 
-const MemoizedCollapseIcon = memo(CollapseIcon);
+export const SideNavItemContentContext =
+  createContext<SideNavItemContentContextValue>({
+    isCompact: false,
+    depth: 1,
+  });
 
-export { MemoizedCollapseIcon as CollapseIcon };
+export const useSideNavItemContent = () =>
+  useContext(SideNavItemContentContext);

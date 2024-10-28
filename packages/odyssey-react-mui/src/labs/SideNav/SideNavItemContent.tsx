@@ -17,54 +17,35 @@ import {
   useCallback,
   memo,
   KeyboardEvent,
+  useMemo,
 } from "react";
-import { Link } from "../../Link";
+import { Link as NavItemLink } from "@mui/material";
 import {
   type DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
 import { SideNavItemLinkContent } from "./SideNavItemLinkContent";
 import type { SideNavItem } from "./types";
+import {
+  SideNavItemContentContextValue,
+  useSideNavItemContent,
+} from "./SideNavItemContentContext";
+import { ExternalLinkIcon } from "../../icons.generated";
 
 export const SideNavListItemContainer = styled("li", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" &&
-    prop !== "isSelected" &&
-    prop !== "isDisabled",
+    prop !== "odysseyDesignTokens" && prop !== "isSelected",
 })<{
   odysseyDesignTokens: DesignTokens;
   isSelected?: boolean;
   disabled?: boolean;
-  isDisabled?: boolean;
-}>(({ odysseyDesignTokens, isSelected, isDisabled }) => ({
+}>(({ odysseyDesignTokens, isSelected }) => ({
   display: "flex",
   alignItems: "center",
-  cursor: isDisabled ? "default" : "pointer",
-  pointerEvents: isDisabled ? "none" : "auto",
   backgroundColor: isSelected ? odysseyDesignTokens.HueNeutral50 : "unset",
   margin: `${odysseyDesignTokens.Spacing1} 0`,
   "&:last-child": {
     marginBottom: odysseyDesignTokens.Spacing2,
-  },
-  "& a": {
-    display: "flex",
-    alignItems: "center",
-    width: "100%",
-    minHeight: "48px",
-    padding: `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
-    color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
-    pointerEvents: isDisabled ? "none" : "auto",
-  },
-  "& a:hover": {
-    textDecoration: "none",
-    cursor: isDisabled ? "default" : "pointer",
-    backgroundColor: !isDisabled ? odysseyDesignTokens.HueNeutral50 : "inherit",
-  },
-  "& a:focus-visible": {
-    outlineOffset: 0,
-    borderRadius: 0,
-    outlineWidth: odysseyDesignTokens.FocusOutlineWidthMain,
-    backgroundColor: !isDisabled ? odysseyDesignTokens.HueNeutral50 : "inherit",
   },
 }));
 
@@ -81,6 +62,66 @@ const scrollToNode = (node: HTMLElement | null) => {
 type ScrollIntoViewHandle = {
   scrollIntoView: () => void;
 };
+
+const GetNavItemContentStyles = ({
+  odysseyDesignTokens,
+  contextValue,
+  isDisabled,
+}: {
+  odysseyDesignTokens: DesignTokens;
+  contextValue: SideNavItemContentContextValue;
+  isDisabled?: boolean;
+}) => {
+  return {
+    display: "flex",
+    alignItems: "center",
+    width: "100%",
+    textDecoration: "none",
+    color: `${isDisabled ? odysseyDesignTokens.TypographyColorDisabled : odysseyDesignTokens.TypographyColorHeading} !important`,
+    minHeight: contextValue.isCompact
+      ? odysseyDesignTokens.Spacing6
+      : odysseyDesignTokens.Spacing7,
+    padding: contextValue.isCompact
+      ? `${odysseyDesignTokens.Spacing0} ${odysseyDesignTokens.Spacing4} ${odysseyDesignTokens.Spacing0} calc(${odysseyDesignTokens.Spacing4} * ${contextValue.depth})`
+      : `${odysseyDesignTokens.Spacing2} ${odysseyDesignTokens.Spacing4} ${odysseyDesignTokens.Spacing2} calc(${odysseyDesignTokens.Spacing4} * ${contextValue.depth})`,
+    "&:focus-visible": {
+      borderRadius: 0,
+      outlineColor: odysseyDesignTokens.FocusOutlineColorPrimary,
+      outlineStyle: odysseyDesignTokens.FocusOutlineStyle,
+      outlineWidth: odysseyDesignTokens.FocusOutlineWidthMain,
+      textDecoration: "none",
+      outlineOffset: 0,
+      color: isDisabled
+        ? "default"
+        : `${odysseyDesignTokens.TypographyColorAction} !important`,
+      backgroundColor: !isDisabled
+        ? odysseyDesignTokens.HueNeutral50
+        : "inherit",
+    },
+    "&:hover": {
+      textDecoration: "none",
+      cursor: isDisabled ? "default" : "pointer",
+      color: isDisabled
+        ? "default"
+        : `${odysseyDesignTokens.TypographyColorAction} !important`,
+      backgroundColor: !isDisabled ? odysseyDesignTokens.HueBlue50 : "inherit",
+    },
+  };
+};
+
+const NavItemContentContainer = styled("div", {
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" &&
+    prop != "contextValue" &&
+    prop !== "isDisabled",
+})(GetNavItemContentStyles);
+
+const NavItemLinkContainer = styled(NavItemLink, {
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" &&
+    prop != "contextValue" &&
+    prop !== "isDisabled",
+})(GetNavItemContentStyles);
 
 const SideNavItemContent = ({
   id,
@@ -114,6 +155,13 @@ const SideNavItemContent = ({
    */
   scrollRef?: React.RefObject<ScrollIntoViewHandle>;
 }) => {
+  const sidenavItemContentContext = useSideNavItemContent();
+  const contextValue = useMemo(
+    () => sidenavItemContentContext,
+    [sidenavItemContentContext],
+  );
+  const odysseyDesignTokens = useOdysseyDesignTokens();
+
   const localScrollRef = useRef<HTMLLIElement>(null);
   useImperativeHandle(
     scrollRef,
@@ -126,26 +174,6 @@ const SideNavItemContent = ({
     },
     [],
   );
-  const odysseyDesignTokens = useOdysseyDesignTokens();
-
-  const NavItemContentClickContainer = styled("div", {
-    shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-  })(() => ({
-    display: "flex",
-    alignItems: "center",
-    width: "100%",
-    minHeight: "48px",
-    padding: `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
-    color: `${isDisabled ? odysseyDesignTokens.TypographyColorDisabled : odysseyDesignTokens.TypographyColorHeading} !important`,
-    "&:focus-visible": {
-      borderRadius: 0,
-      outlineColor: odysseyDesignTokens.FocusOutlineColorPrimary,
-      outlineStyle: odysseyDesignTokens.FocusOutlineStyle,
-      outlineWidth: odysseyDesignTokens.FocusOutlineWidthMain,
-      backgroundColor: odysseyDesignTokens.HueNeutral50,
-      textDecoration: "none",
-    },
-  }));
 
   const sideNavItemContentKeyHandler = useCallback(
     (event: KeyboardEvent<HTMLDivElement>) => {
@@ -162,16 +190,19 @@ const SideNavItemContent = ({
       ref={localScrollRef}
       id={id}
       key={id}
+      isSelected={isSelected}
       disabled={isDisabled}
       aria-disabled={isDisabled}
-      isDisabled={isDisabled}
-      isSelected={isSelected}
       odysseyDesignTokens={odysseyDesignTokens}
     >
       {
         // Use Link for nav items with links and div for disabled or non-link items
         isDisabled ? (
-          <NavItemContentClickContainer>
+          <NavItemContentContainer
+            odysseyDesignTokens={odysseyDesignTokens}
+            contextValue={contextValue}
+            isDisabled={isDisabled}
+          >
             <SideNavItemLinkContent
               label={label}
               startIcon={startIcon}
@@ -179,9 +210,12 @@ const SideNavItemContent = ({
               statusLabel={statusLabel}
               severity={severity}
             />
-          </NavItemContentClickContainer>
+          </NavItemContentContainer>
         ) : !href ? (
-          <NavItemContentClickContainer
+          <NavItemContentContainer
+            odysseyDesignTokens={odysseyDesignTokens}
+            contextValue={contextValue}
+            isDisabled={isDisabled}
             role="button"
             tabIndex={0}
             onClick={onClick}
@@ -194,9 +228,16 @@ const SideNavItemContent = ({
               statusLabel={statusLabel}
               severity={severity}
             />
-          </NavItemContentClickContainer>
+          </NavItemContentContainer>
         ) : (
-          <Link href={href} target={target} onClick={onClick}>
+          <NavItemLinkContainer
+            odysseyDesignTokens={odysseyDesignTokens}
+            contextValue={contextValue}
+            isDisabled={isDisabled}
+            href={href}
+            target={target}
+            onClick={onClick}
+          >
             <SideNavItemLinkContent
               label={label}
               startIcon={startIcon}
@@ -204,7 +245,12 @@ const SideNavItemContent = ({
               statusLabel={statusLabel}
               severity={severity}
             />
-          </Link>
+            {target === "_blank" && (
+              <span className="Link-indicator" role="presentation">
+                <ExternalLinkIcon />
+              </span>
+            )}
+          </NavItemLinkContainer>
         )
       }
     </SideNavListItemContainer>
