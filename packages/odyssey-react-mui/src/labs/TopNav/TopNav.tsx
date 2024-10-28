@@ -54,10 +54,13 @@ export type TopNavProps = {
   userProfile?: UserProfileProps;
 } & Pick<HtmlProps, "testId">;
 
-const LinkAndProfileWrapper = styled("div")(() => ({
-  display: "flex",
-  alignItems: "center",
-  marginLeft: "auto",
+const AdditionalNavItemContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  paddingBlock: 0,
+  paddingInline: odysseyDesignTokens.Spacing3,
 }));
 
 const AdditionalLinkContainerWithBorder = styled("div", {
@@ -65,10 +68,16 @@ const AdditionalLinkContainerWithBorder = styled("div", {
 })<{
   odysseyDesignTokens: DesignTokens;
 }>(({ odysseyDesignTokens }) => ({
-  display: "flex",
   alignItems: "center",
-  marginRight: odysseyDesignTokens.Spacing3,
-  borderRight: `${odysseyDesignTokens.BorderWidthMain} solid ${odysseyDesignTokens.HueNeutral200}`,
+  borderInlineEnd: `${odysseyDesignTokens.BorderWidthMain} solid ${odysseyDesignTokens.HueNeutral200}`,
+  display: "flex",
+  marginInlineEnd: odysseyDesignTokens.Spacing3,
+}));
+
+const LinkAndProfileWrapper = styled("div")(() => ({
+  alignItems: "center",
+  display: "flex",
+  marginInlineStart: "auto",
 }));
 
 const LinkContainer = styled("div", {
@@ -76,11 +85,21 @@ const LinkContainer = styled("div", {
 })<{
   odysseyDesignTokens: DesignTokens;
 }>(({ odysseyDesignTokens }) => ({
-  paddingRight: odysseyDesignTokens.Spacing3,
+  padding: odysseyDesignTokens.Spacing3,
 
   "& a": {
     color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
   },
+}));
+
+const SearchFieldContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  paddingBlock: odysseyDesignTokens.Spacing2,
+  paddingInline: odysseyDesignTokens.Spacing3,
+  width: "350px",
 }));
 
 const TopNavContainer = styled("div", {
@@ -94,29 +113,12 @@ const TopNavContainer = styled("div", {
   height: odysseyDesignTokens[TOP_NAV_HEIGHT_TOKEN],
 }));
 
-const SearchFieldContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{
-  odysseyDesignTokens: DesignTokens;
-}>(({ odysseyDesignTokens }) => ({
-  width: "350px",
-  padding: `${odysseyDesignTokens.Spacing2} ${odysseyDesignTokens.Spacing3}`,
-}));
-
-const AdditionalNavItemContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{
-  odysseyDesignTokens: DesignTokens;
-}>(({ odysseyDesignTokens }) => ({
-  padding: `0 ${odysseyDesignTokens.Spacing3}`,
-}));
-
 const TopNav = ({
-  SearchFieldComponent,
-  topNavLinkItems,
   AdditionalNavItemComponent,
-  settingsPageHref,
   helpPageHref,
+  SearchFieldComponent,
+  settingsPageHref,
+  topNavLinkItems,
   userProfile,
 }: TopNavProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();

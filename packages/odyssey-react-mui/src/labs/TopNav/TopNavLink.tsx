@@ -53,12 +53,13 @@ const TopNavListItemContainer = styled("li", {
     alignItems: "center",
     color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
     display: "flex",
-    padding: `${odysseyDesignTokens.Spacing2} ${odysseyDesignTokens.Spacing4}`,
+    paddingBlock: odysseyDesignTokens.Spacing2,
+    paddingInline: odysseyDesignTokens.Spacing4,
   },
 
   "& a:hover": {
-    textDecoration: "none",
     backgroundColor: !isDisabled ? odysseyDesignTokens.HueNeutral50 : "inherit",
+    textDecoration: "none",
   },
 
   "& div[role='button']:hover": {
@@ -80,10 +81,9 @@ const NavItemContentClickContainer = styled("div", {
 }>(({ odysseyDesignTokens }) => ({
   alignItems: "center",
   display: "flex",
-  paddingBottom: odysseyDesignTokens.Spacing2,
-  paddingLeft: odysseyDesignTokens.Spacing4,
-  paddingRight: odysseyDesignTokens.Spacing4,
-  paddingTop: odysseyDesignTokens.Spacing2,
+  paddingBlock: odysseyDesignTokens.Spacing2,
+  paddingInline: odysseyDesignTokens.Spacing4,
+
   "&:focus-visible": {
     backgroundColor: odysseyDesignTokens.HueNeutral50,
     borderRadius: 0,

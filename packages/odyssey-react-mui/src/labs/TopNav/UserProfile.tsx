@@ -39,14 +39,14 @@ const UserProfileContainer = styled("div", {
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
   display: "flex",
   alignItems: "center",
-  paddingRight: odysseyDesignTokens.Spacing4,
+  paddingInlineEnd: odysseyDesignTokens.Spacing4,
 }));
 
 const UserProfileIconContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
   display: "flex",
-  paddingRight: odysseyDesignTokens.Spacing2,
+  paddingInlineEnd: odysseyDesignTokens.Spacing2,
 }));
 
 const UserProfileInfoContainer = styled("div")(() => ({
