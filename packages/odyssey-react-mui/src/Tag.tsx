@@ -10,29 +10,29 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, ReactElement, useCallback, useContext } from "react";
 import { Chip as MuiChip, ChipProps as MuiChipProps } from "@mui/material";
+import { memo, ReactElement, useCallback, useContext } from "react";
 import styled from "@emotion/styled";
 
-import { useContrastModeContext, ContrastMode } from "./useContrastMode";
-import { HtmlProps } from "./HtmlProps";
 import { CloseCircleFilledIcon } from "./icons.generated";
+import { HtmlProps } from "./HtmlProps";
 import { MuiPropsContext, MuiPropsContextType } from "./MuiPropsContext";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext";
 import { TagListContext } from "./TagListContext";
+import { ContrastMode, useContrastModeContext } from "./useContrastMode";
 
-export const tagSizeValues = ["medium", "small"] as const;
+const tagSizeValues = ["medium", "small"] as const;
 
 export const tagColorVariants = [
+  "accentFour",
+  "accentOne",
+  "accentThree",
+  "accentTwo",
   "default",
   "info",
-  "accentOne",
-  "accentTwo",
-  "accentThree",
-  "accentFour",
 ] as const;
 
 type TagColorVariant = (typeof tagColorVariants)[number];
