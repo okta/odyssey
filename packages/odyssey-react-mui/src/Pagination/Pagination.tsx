@@ -23,6 +23,7 @@ import {
 import { Box } from "../Box";
 import { paginationTypeValues } from "./constants";
 import { usePagination } from "./usePagination";
+import { useTranslation } from "react-i18next";
 
 const PaginationContainer = styled("div")({
   display: "flex",
@@ -68,11 +69,25 @@ export type PaginationProps = {
   /**
    * The labeled rendered for the current page index
    */
-  currentPageLabel: string;
+  currentPageLabel?: string;
   /**
    * The number of items currently visible on the page
    */
   currentRowsCount?: number;
+  /**
+   * If true, the page input will be visible and the user can directly manipulate which page
+   * is visible.
+   */
+  hasPageInput?: boolean;
+  /**
+   * If true, the row count input will be visible and the user can directly manipulate how many rows
+   * are visible.
+   */
+  hasRowCountInput?: boolean;
+  /**
+   * If true, the "X - X of total X" label will be visible
+   */
+  hasRowCountLabel?: boolean;
   /**
    * If true, the pagination controls will be disabled
    */
@@ -84,11 +99,11 @@ export type PaginationProps = {
   /**
    * The current page last row index
    */
-  lastRow: number;
+  lastRow?: number;
   /**
    * If the pagination is of "loadMore" variant, then this is the the load more label
    */
-  loadMoreLabel: string;
+  loadMoreLabel?: string;
   /**
    * The max page
    */
@@ -100,7 +115,7 @@ export type PaginationProps = {
   /**
    * The label for the next control
    */
-  nextLabel: string;
+  nextLabel?: string;
   /**
    * Page index and page size setter
    */
@@ -122,11 +137,11 @@ export type PaginationProps = {
   /**
    * The label for the previous control
    */
-  previousLabel: string;
+  previousLabel?: string;
   /**
    * The label that shows how many results are rendered per page
    */
-  rowsPerPageLabel: string;
+  rowsPerPageLabel?: string;
   /**
    * Total rows count
    */
@@ -139,33 +154,50 @@ export type PaginationProps = {
 };
 
 const Pagination = ({
-  currentPageLabel,
+  currentPageLabel: currentPageLabelProp,
+  currentRowsCount,
+  hasPageInput = true,
+  hasRowCountInput = true,
+  hasRowCountLabel = true,
   isDisabled,
   isMoreDisabled,
   lastRow,
-  loadMoreLabel,
+  loadMoreLabel: loadMoreLabelProp,
   maxPageIndex,
   maxPageSize,
-  nextLabel,
-  onPaginationChange,
+  nextLabel: nextLabelProp,
+  onPaginationChange: onPaginationChangeProp,
   pageIndex,
   pageSize,
-  previousLabel,
-  rowsPerPageLabel,
+  previousLabel: previousLabelProp,
+  rowsPerPageLabel: rowsPerPageLabelProp,
   totalRows,
-  currentRowsCount,
   variant,
 }: PaginationProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const { t } = useTranslation();
 
   const [page, setPage] = useState<number>(pageIndex);
   const [rowsPerPage, setRowsPerPage] = useState<number>(pageSize);
   const initialRowsPerPage = useRef<number>(pageSize);
 
+  const currentPageLabel = currentPageLabelProp ?? t("pagination.page");
+  const loadMoreLabel = loadMoreLabelProp ?? t("pagination.loadmore");
+  const nextLabel = nextLabelProp ?? t("pagination.next");
+  const previousLabel = previousLabelProp ?? t("pagination.previous");
+  const rowsPerPageLabel = rowsPerPageLabelProp ?? t("pagination.rowsperpage");
+
   useEffect(() => {
     setPage(pageIndex);
     setRowsPerPage(pageSize);
   }, [pageIndex, pageSize]);
+
+  const onPaginationChange = useCallback(
+    ({ pageIndex, pageSize }: { pageIndex: number; pageSize: number }) => {
+      onPaginationChangeProp({ pageIndex, pageSize });
+    },
+    [onPaginationChangeProp],
+  );
 
   const { totalRowsLabel } = usePagination({
     pageIndex,
@@ -175,18 +207,30 @@ const Pagination = ({
   });
 
   const handlePaginationChange = useCallback(() => {
-    const updatedPage =
-      totalRows && page * totalRows > lastRow
-        ? Math.ceil(totalRows / rowsPerPage)
-        : page;
-    const updatedRowsPerPage =
-      totalRows && rowsPerPage > totalRows ? totalRows : rowsPerPage;
+    let updatedPage = page;
+    let updatedRowsPerPage = rowsPerPage;
+
+    if (totalRows) {
+      const maxPageIndex = Math.ceil(totalRows / updatedRowsPerPage);
+
+      // Ensure rowsPerPage does not exceed totalRows
+      if (updatedRowsPerPage > totalRows) {
+        updatedRowsPerPage = totalRows;
+      }
+
+      // Ensure page is within valid range
+      if (updatedPage > maxPageIndex) {
+        updatedPage = maxPageIndex;
+      } else if (updatedPage < 1) {
+        updatedPage = 1;
+      }
+    }
 
     onPaginationChange({
       pageIndex: updatedPage,
       pageSize: updatedRowsPerPage,
     });
-  }, [page, rowsPerPage, lastRow, onPaginationChange, totalRows]);
+  }, [page, rowsPerPage, onPaginationChange, totalRows]);
 
   // The following handlers use React.KeyboardEvent (rather than just KeyboardEvent) becuase React.KeyboardEvent
   // is generic, while plain KeyboardEvent is not. We need this generic so we can specify the HTMLInputElement,
@@ -259,7 +303,7 @@ const Pagination = ({
   const nextButtonDisabled = useMemo(
     () =>
       isMoreDisabled ||
-      (totalRows ? lastRow >= totalRows : false) ||
+      (lastRow && (totalRows ? lastRow >= totalRows : false)) ||
       isDisabled,
     [isMoreDisabled, totalRows, lastRow, isDisabled],
   );
@@ -288,28 +332,32 @@ const Pagination = ({
   return variant === "paged" ? (
     <PaginationContainer>
       <PaginationSegment odysseyDesignTokens={odysseyDesignTokens}>
-        <Box>
+        {hasRowCountInput && (
+          <Box>
+            <Paragraph component="span" color="textSecondary">
+              {rowsPerPageLabel}
+            </Paragraph>
+            <PaginationInput
+              odysseyDesignTokens={odysseyDesignTokens}
+              type="number"
+              value={rowsPerPage}
+              onChange={setRowsPerPageFromEvent}
+              onBlur={handlePaginationChange}
+              onKeyDown={handleRowsPerPageSubmit}
+              disabled={isDisabled}
+              inputProps={rowsPerPageInputProps}
+            />
+          </Box>
+        )}
+        {hasRowCountLabel && (
           <Paragraph component="span" color="textSecondary">
-            {rowsPerPageLabel}
+            {totalRowsLabel}
           </Paragraph>
-          <PaginationInput
-            odysseyDesignTokens={odysseyDesignTokens}
-            type="number"
-            value={rowsPerPage}
-            onChange={setRowsPerPageFromEvent}
-            onBlur={handlePaginationChange}
-            onKeyDown={handleRowsPerPageSubmit}
-            disabled={isDisabled}
-            inputProps={rowsPerPageInputProps}
-          />
-        </Box>
-        <Paragraph component="span" color="textSecondary">
-          {totalRowsLabel}
-        </Paragraph>
+        )}
       </PaginationSegment>
 
       <PaginationSegment odysseyDesignTokens={odysseyDesignTokens}>
-        {totalRows && (
+        {totalRows && hasPageInput && (
           <Box>
             <Paragraph component="span" color="textSecondary">
               {currentPageLabel}
