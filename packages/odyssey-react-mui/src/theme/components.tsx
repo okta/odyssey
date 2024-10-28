@@ -514,6 +514,12 @@ export const components = ({
               borderColor: "transparent",
             },
           }),
+
+          ".MuiChip-root": {
+            // using 55ch - (48px(padding + clear button) + 4px) for spacing between chip and clear button to account for the 24px of padding on the right side of the container and the width of the clear button.
+            // Ensures chip does not enlarge the container or overlap the clear button
+            maxWidth: `calc(${odysseyTokens.TypographyLineLengthMax} - (${odysseyTokens.Spacing6} + ${odysseyTokens.Spacing6} + ${odysseyTokens.Spacing1}))`,
+          },
         }),
       },
     },
@@ -1755,6 +1761,12 @@ export const components = ({
           },
           [`&:has(+ [data-file-preview-container])`]: {
             marginBlockEnd: 0,
+          },
+
+          ".MuiChip-root": {
+            // using 55ch - 24px to account for the 24px of padding on the right side of the container.
+            // Ensures chip does not enlarge the container
+            maxWidth: `calc(${odysseyTokens.TypographyLineLengthMax} - ${odysseyTokens.Spacing6})`,
           },
         }),
       },
