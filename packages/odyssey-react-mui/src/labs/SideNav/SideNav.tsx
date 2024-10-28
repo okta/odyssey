@@ -385,7 +385,7 @@ const SideNav = ({
   );
 
   const sideNavItemContentProviderValue = useMemo(
-    () => ({ isCompact }),
+    () => ({ isCompact, depth: 1 }),
     [isCompact],
   );
 
@@ -393,18 +393,20 @@ const SideNav = ({
     () =>
       sideNavItems.map((item) => ({
         ...item,
-        children: item.children?.map((childProps) => (
-          <SideNavItemContentContext.Provider
-            value={sideNavItemContentProviderValue}
-            key={childProps.id}
-          >
-            <SideNavItemContent
-              {...childProps}
+        children: item.children?.map((childProps) => {
+          return (
+            <SideNavItemContentContext.Provider
+              value={{ ...sideNavItemContentProviderValue, depth: 2 }}
               key={childProps.id}
-              scrollRef={getRefIfThisIsFirstNodeWithIsSelected(childProps.id)}
-            />
-          </SideNavItemContentContext.Provider>
-        )),
+            >
+              <SideNavItemContent
+                {...childProps}
+                key={childProps.id}
+                scrollRef={getRefIfThisIsFirstNodeWithIsSelected(childProps.id)}
+              />
+            </SideNavItemContentContext.Provider>
+          );
+        }),
       })),
     [
       getRefIfThisIsFirstNodeWithIsSelected,

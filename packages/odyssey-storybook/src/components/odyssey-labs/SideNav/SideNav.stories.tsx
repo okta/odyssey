@@ -120,7 +120,7 @@ const storybookMeta: Meta<SideNavProps> = {
       },
       {
         id: "item0-1",
-        href: "/?path=/story/labs-components-switch--default",
+        href: "/?path=/docs/mui-components-typography--docs",
         label: "Users",
         startIcon: <UserIcon />,
       },

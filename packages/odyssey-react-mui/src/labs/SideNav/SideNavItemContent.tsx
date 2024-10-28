@@ -19,7 +19,7 @@ import {
   KeyboardEvent,
   useMemo,
 } from "react";
-import { Link as MuiLink } from "@mui/material";
+import { Link as NavItemLink } from "@mui/material";
 import {
   type DesignTokens,
   useOdysseyDesignTokens,
@@ -93,13 +93,11 @@ const SideNavItemContent = ({
   scrollRef?: React.RefObject<ScrollIntoViewHandle>;
 }) => {
   const sidenavItemContentContext = useSideNavItemContent();
-  const isCompact = useMemo(
-    () => sidenavItemContentContext.isCompact || false,
+  const contextValue = useMemo(
+    () => sidenavItemContentContext,
     [sidenavItemContentContext],
   );
-
   const odysseyDesignTokens = useOdysseyDesignTokens();
-
   const navItemContentStyles = useMemo(
     () => ({
       display: "flex",
@@ -107,12 +105,12 @@ const SideNavItemContent = ({
       width: "100%",
       textDecoration: "none",
       color: `${isDisabled ? odysseyDesignTokens.TypographyColorDisabled : odysseyDesignTokens.TypographyColorHeading} !important`,
-      minHeight: isCompact
+      minHeight: contextValue.isCompact
         ? odysseyDesignTokens.Spacing6
         : odysseyDesignTokens.Spacing7,
-      padding: isCompact
-        ? `${odysseyDesignTokens.Spacing0} ${odysseyDesignTokens.Spacing4}`
-        : `${odysseyDesignTokens.Spacing2} ${odysseyDesignTokens.Spacing4}`,
+      padding: contextValue.isCompact
+        ? `${odysseyDesignTokens.Spacing0} ${odysseyDesignTokens.Spacing4} ${odysseyDesignTokens.Spacing0} calc(${odysseyDesignTokens.Spacing4} * ${contextValue.depth})`
+        : `${odysseyDesignTokens.Spacing2} ${odysseyDesignTokens.Spacing4} ${odysseyDesignTokens.Spacing2} calc(${odysseyDesignTokens.Spacing4} * ${contextValue.depth})`,
       "&:focus-visible": {
         borderRadius: 0,
         outlineColor: odysseyDesignTokens.FocusOutlineColorPrimary,
@@ -120,10 +118,12 @@ const SideNavItemContent = ({
         outlineWidth: odysseyDesignTokens.FocusOutlineWidthMain,
         textDecoration: "none",
         outlineOffset: 0,
+        color: isDisabled
+          ? "default"
+          : `${odysseyDesignTokens.TypographyColorAction} !important`,
         backgroundColor: !isDisabled
           ? odysseyDesignTokens.HueNeutral50
           : "inherit",
-        color: `${odysseyDesignTokens.TypographyColorAction} !important`,
       },
       "&:hover": {
         textDecoration: "none",
@@ -136,28 +136,14 @@ const SideNavItemContent = ({
           : "inherit",
       },
     }),
-    [odysseyDesignTokens, isCompact, isDisabled],
+    [odysseyDesignTokens, contextValue, isDisabled],
   );
 
-  const NavItemContentContainer = styled("div", {
-    shouldForwardProp: (prop) =>
-      prop !== "odysseyDesignTokens" &&
-      prop !== "isCompact" &&
-      prop !== "isDisabled",
-  })<{
-    disabled?: boolean;
-  }>(({}) => ({
+  const NavItemContentContainer = styled("div")(() => ({
     ...navItemContentStyles,
   }));
 
-  const NavItemLinkContainer = styled(MuiLink, {
-    shouldForwardProp: (prop) =>
-      prop !== "odysseyDesignTokens" &&
-      prop !== "isCompact" &&
-      prop !== "isDisabled",
-  })<{
-    disabled?: boolean;
-  }>(({}) => ({
+  const NavItemLinkContainer = styled(NavItemLink)(() => ({
     ...navItemContentStyles,
   }));
 
@@ -197,7 +183,7 @@ const SideNavItemContent = ({
       {
         // Use Link for nav items with links and div for disabled or non-link items
         isDisabled ? (
-          <NavItemContentContainer disabled={isDisabled}>
+          <NavItemContentContainer>
             <SideNavItemLinkContent
               label={label}
               startIcon={startIcon}
@@ -208,7 +194,6 @@ const SideNavItemContent = ({
           </NavItemContentContainer>
         ) : !href ? (
           <NavItemContentContainer
-            disabled={isDisabled}
             role="button"
             tabIndex={0}
             onClick={onClick}

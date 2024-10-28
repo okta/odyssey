@@ -14,11 +14,13 @@ import { createContext, useContext } from "react";
 
 export type SideNavItemContentContextValue = {
   isCompact?: boolean;
+  depth: number;
 };
 
 export const SideNavItemContentContext =
   createContext<SideNavItemContentContextValue>({
     isCompact: false,
+    depth: 1,
   });
 
 export const useSideNavItemContent = () =>
