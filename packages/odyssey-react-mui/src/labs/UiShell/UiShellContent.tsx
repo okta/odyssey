@@ -31,7 +31,7 @@ const AppContainer = styled("div", {
   paddingBlockEnd: odysseyDesignTokens.Spacing4,
   paddingBlockStart: odysseyDesignTokens.Spacing4,
   paddingInlineEnd: odysseyDesignTokens.Spacing4,
-  paddingInlineStart: odysseyDesignTokens.Spacing6,
+  paddingInlineStart: odysseyDesignTokens.Spacing4,
 }));
 
 const FlexibleContentContainer = styled("div", {
