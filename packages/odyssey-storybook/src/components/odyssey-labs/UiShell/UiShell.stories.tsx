@@ -14,7 +14,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import {
   UiShell,
-  type UiShellComponentProps,
+  type UiShellNavComponentProps,
   type UiShellProps,
 } from "@okta/odyssey-react-mui/labs";
 import { SearchField } from "@okta/odyssey-react-mui";
@@ -92,7 +92,7 @@ const storybookMeta: Meta<UiShellProps> = {
 
 export default storybookMeta;
 
-const sharedSideNavProps: UiShellComponentProps["sideNavProps"] = {
+const sharedSideNavProps: UiShellNavComponentProps["sideNavProps"] = {
   navHeaderText: "Enduser",
   sideNavItems: [
     {
@@ -129,7 +129,7 @@ const sharedSideNavProps: UiShellComponentProps["sideNavProps"] = {
   ],
 };
 
-const sharedTopNavProps: UiShellComponentProps["topNavProps"] = {
+const sharedTopNavProps: UiShellNavComponentProps["topNavProps"] = {
   helpPageHref: "#none",
   settingsPageHref: "#none",
   topNavLinkItems: [
