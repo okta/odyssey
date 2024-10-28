@@ -107,10 +107,26 @@ const storybookMeta: Meta<TagProps> = {
         },
       },
     },
+    size: {
+      control: {
+        type: "select",
+      },
+      options: ["default", "small"],
+      description: "The size of the tag",
+      table: {
+        type: {
+          summary: "string",
+        },
+        defaultValue: {
+          summary: "default",
+        },
+      },
+    },
   },
   args: {
     label: "Starship",
     colorVariant: "default",
+    size: "medium",
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
@@ -121,6 +137,13 @@ export default storybookMeta;
 export const Default: StoryObj<TagProps> = {
   args: {
     label: "Starship",
+  },
+};
+
+export const Small: StoryObj<TagProps> = {
+  args: {
+    label: "Starship",
+    size: "small",
   },
 };
 
@@ -164,6 +187,7 @@ export const List: StoryObj<TagProps> = {
     return (
       <TagList>
         <Tag label={args.label} />
+        <Tag label="Small tag" size="small" />
         <Tag label="Info tag" colorVariant="info" />
         <Tag label="AccentOne tag" colorVariant="accentOne" />
         <Tag label="AccentTwo tag" colorVariant="accentTwo" />
@@ -181,6 +205,14 @@ export const Icon: StoryObj<TagProps> = {
   args: {
     label: "Crew",
     icon: <GroupIcon />,
+  },
+};
+
+export const SmallIcon: StoryObj<TagProps> = {
+  args: {
+    label: "Crew",
+    icon: <GroupIcon />,
+    size: "small",
   },
 };
 
@@ -221,5 +253,34 @@ export const Disabled: StoryObj<TagProps> = {
   args: {
     label: "Starship",
     isDisabled: true,
+  },
+};
+
+export const SizeInteraction: StoryObj<TagProps> = {
+  args: {
+    label: "Starship",
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("verify size differences", async () => {
+      const canvas = within(canvasElement);
+      const defaultTag = canvas.getByText("Starship");
+
+      // Get computed styles for default size
+      const defaultStyles = window.getComputedStyle(defaultTag);
+      const defaultHeight = defaultStyles.height;
+
+      // Update to small size
+      defaultTag.setAttribute("size", "small");
+
+      // Get computed styles for small size
+      const smallStyles = window.getComputedStyle(defaultTag);
+      const smallHeight = smallStyles.height;
+
+      // Verify sizes are different
+      expect(defaultHeight).not.toBe(smallHeight);
+      expect(smallHeight).toBe("26px");
+
+      await axeRun("Size Interaction Tag");
+    });
   },
 };
