@@ -180,7 +180,6 @@ export const List: StoryObj<TagProps> = {
     return (
       <TagList>
         <Tag label={args.label} />
-        <Tag label="Small tag" size="small" />
         <Tag label="Info tag" colorVariant="info" />
         <Tag label="AccentOne tag" colorVariant="accentOne" />
         <Tag label="AccentTwo tag" colorVariant="accentTwo" />
@@ -205,14 +204,6 @@ export const Icon: StoryObj<TagProps> = {
   args: {
     label: "Crew",
     icon: <GroupIcon />,
-  },
-};
-
-export const SmallIcon: StoryObj<TagProps> = {
-  args: {
-    label: "Crew",
-    icon: <GroupIcon />,
-    size: "small",
   },
 };
 
