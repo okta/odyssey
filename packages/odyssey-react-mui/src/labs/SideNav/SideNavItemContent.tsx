@@ -26,7 +26,10 @@ import {
 } from "../../OdysseyDesignTokensContext";
 import { SideNavItemLinkContent } from "./SideNavItemLinkContent";
 import type { SideNavItem } from "./types";
-import { useSideNavItemContent } from "./SideNavItemContentContext";
+import {
+  SideNavItemContentContextValue,
+  useSideNavItemContent,
+} from "./SideNavItemContentContext";
 import { ExternalLinkIcon } from "../../icons.generated";
 
 export const SideNavListItemContainer = styled("li", {
@@ -59,6 +62,66 @@ const scrollToNode = (node: HTMLElement | null) => {
 type ScrollIntoViewHandle = {
   scrollIntoView: () => void;
 };
+
+const GetNavItemContentStyles = ({
+  odysseyDesignTokens,
+  contextValue,
+  isDisabled,
+}: {
+  odysseyDesignTokens: DesignTokens;
+  contextValue: SideNavItemContentContextValue;
+  isDisabled?: boolean;
+}) => {
+  return {
+    display: "flex",
+    alignItems: "center",
+    width: "100%",
+    textDecoration: "none",
+    color: `${isDisabled ? odysseyDesignTokens.TypographyColorDisabled : odysseyDesignTokens.TypographyColorHeading} !important`,
+    minHeight: contextValue.isCompact
+      ? odysseyDesignTokens.Spacing6
+      : odysseyDesignTokens.Spacing7,
+    padding: contextValue.isCompact
+      ? `${odysseyDesignTokens.Spacing0} ${odysseyDesignTokens.Spacing4} ${odysseyDesignTokens.Spacing0} calc(${odysseyDesignTokens.Spacing4} * ${contextValue.depth})`
+      : `${odysseyDesignTokens.Spacing2} ${odysseyDesignTokens.Spacing4} ${odysseyDesignTokens.Spacing2} calc(${odysseyDesignTokens.Spacing4} * ${contextValue.depth})`,
+    "&:focus-visible": {
+      borderRadius: 0,
+      outlineColor: odysseyDesignTokens.FocusOutlineColorPrimary,
+      outlineStyle: odysseyDesignTokens.FocusOutlineStyle,
+      outlineWidth: odysseyDesignTokens.FocusOutlineWidthMain,
+      textDecoration: "none",
+      outlineOffset: 0,
+      color: isDisabled
+        ? "default"
+        : `${odysseyDesignTokens.TypographyColorAction} !important`,
+      backgroundColor: !isDisabled
+        ? odysseyDesignTokens.HueNeutral50
+        : "inherit",
+    },
+    "&:hover": {
+      textDecoration: "none",
+      cursor: isDisabled ? "default" : "pointer",
+      color: isDisabled
+        ? "default"
+        : `${odysseyDesignTokens.TypographyColorAction} !important`,
+      backgroundColor: !isDisabled ? odysseyDesignTokens.HueBlue50 : "inherit",
+    },
+  };
+};
+
+const NavItemContentContainer = styled("div", {
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" &&
+    prop != "contextValue" &&
+    prop !== "isDisabled",
+})(GetNavItemContentStyles);
+
+const NavItemLinkContainer = styled(NavItemLink, {
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" &&
+    prop != "contextValue" &&
+    prop !== "isDisabled",
+})(GetNavItemContentStyles);
 
 const SideNavItemContent = ({
   id,
@@ -98,54 +161,6 @@ const SideNavItemContent = ({
     [sidenavItemContentContext],
   );
   const odysseyDesignTokens = useOdysseyDesignTokens();
-  const navItemContentStyles = useMemo(
-    () => ({
-      display: "flex",
-      alignItems: "center",
-      width: "100%",
-      textDecoration: "none",
-      color: `${isDisabled ? odysseyDesignTokens.TypographyColorDisabled : odysseyDesignTokens.TypographyColorHeading} !important`,
-      minHeight: contextValue.isCompact
-        ? odysseyDesignTokens.Spacing6
-        : odysseyDesignTokens.Spacing7,
-      padding: contextValue.isCompact
-        ? `${odysseyDesignTokens.Spacing0} ${odysseyDesignTokens.Spacing4} ${odysseyDesignTokens.Spacing0} calc(${odysseyDesignTokens.Spacing4} * ${contextValue.depth})`
-        : `${odysseyDesignTokens.Spacing2} ${odysseyDesignTokens.Spacing4} ${odysseyDesignTokens.Spacing2} calc(${odysseyDesignTokens.Spacing4} * ${contextValue.depth})`,
-      "&:focus-visible": {
-        borderRadius: 0,
-        outlineColor: odysseyDesignTokens.FocusOutlineColorPrimary,
-        outlineStyle: odysseyDesignTokens.FocusOutlineStyle,
-        outlineWidth: odysseyDesignTokens.FocusOutlineWidthMain,
-        textDecoration: "none",
-        outlineOffset: 0,
-        color: isDisabled
-          ? "default"
-          : `${odysseyDesignTokens.TypographyColorAction} !important`,
-        backgroundColor: !isDisabled
-          ? odysseyDesignTokens.HueNeutral50
-          : "inherit",
-      },
-      "&:hover": {
-        textDecoration: "none",
-        cursor: isDisabled ? "default" : "pointer",
-        color: isDisabled
-          ? "default"
-          : `${odysseyDesignTokens.TypographyColorAction} !important`,
-        backgroundColor: !isDisabled
-          ? odysseyDesignTokens.HueNeutral50
-          : "inherit",
-      },
-    }),
-    [odysseyDesignTokens, contextValue, isDisabled],
-  );
-
-  const NavItemContentContainer = styled("div")(() => ({
-    ...navItemContentStyles,
-  }));
-
-  const NavItemLinkContainer = styled(NavItemLink)(() => ({
-    ...navItemContentStyles,
-  }));
 
   const localScrollRef = useRef<HTMLLIElement>(null);
   useImperativeHandle(
@@ -183,7 +198,11 @@ const SideNavItemContent = ({
       {
         // Use Link for nav items with links and div for disabled or non-link items
         isDisabled ? (
-          <NavItemContentContainer>
+          <NavItemContentContainer
+            odysseyDesignTokens={odysseyDesignTokens}
+            contextValue={contextValue}
+            isDisabled={isDisabled}
+          >
             <SideNavItemLinkContent
               label={label}
               startIcon={startIcon}
@@ -194,6 +213,9 @@ const SideNavItemContent = ({
           </NavItemContentContainer>
         ) : !href ? (
           <NavItemContentContainer
+            odysseyDesignTokens={odysseyDesignTokens}
+            contextValue={contextValue}
+            isDisabled={isDisabled}
             role="button"
             tabIndex={0}
             onClick={onClick}
@@ -208,7 +230,14 @@ const SideNavItemContent = ({
             />
           </NavItemContentContainer>
         ) : (
-          <NavItemLinkContainer href={href} target={target} onClick={onClick}>
+          <NavItemLinkContainer
+            odysseyDesignTokens={odysseyDesignTokens}
+            contextValue={contextValue}
+            isDisabled={isDisabled}
+            href={href}
+            target={target}
+            onClick={onClick}
+          >
             <SideNavItemLinkContent
               label={label}
               startIcon={startIcon}

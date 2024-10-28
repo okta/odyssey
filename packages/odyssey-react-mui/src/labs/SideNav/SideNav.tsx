@@ -67,7 +67,7 @@ const SideNavCollapsedContainer = styled("div", {
       width: 0,
       content: '""',
     },
-    "&:hover": {
+    "&:has(svg:hover)": {
       "&:before": {
         width: isSideNavCollapsed ? "8px" : 0,
         transitionProperty: "width, background-color",
@@ -254,12 +254,12 @@ const SideNav = ({
   logo,
 }: SideNavProps) => {
   const [isSideNavCollapsed, setSideNavCollapsed] = useState(false);
-  const odysseyDesignTokens = useOdysseyDesignTokens();
   const [isContentScrollable, setIsContentScrollable] = useState(false);
   const [hasContentScrolled, setHasContentScrolled] = useState(false);
   const scrollableContentRef = useRef<HTMLUListElement>(null);
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
   const intersectionObserverRef = useRef<IntersectionObserver | null>(null);
+  const odysseyDesignTokens: DesignTokens = useOdysseyDesignTokens();
 
   useEffect(() => {
     const updateIsContentScrollable = () => {

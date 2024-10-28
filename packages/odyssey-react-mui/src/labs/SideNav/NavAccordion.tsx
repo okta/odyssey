@@ -84,17 +84,28 @@ const AccordionLabelContainer = styled("span", {
 
 const AccordionSummaryContainer = styled(MuiAccordionSummary, {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "isCompact",
+    prop !== "odysseyDesignTokens" &&
+    prop !== "isCompact" &&
+    prop != "isDisabled",
 })<{
   odysseyDesignTokens: DesignTokens;
   isCompact?: boolean;
-}>(({ odysseyDesignTokens, isCompact }) => ({
+  isDisabled?: boolean;
+}>(({ odysseyDesignTokens, isCompact, isDisabled }) => ({
   minHeight: isCompact
     ? `${odysseyDesignTokens.Spacing6}`
     : `${odysseyDesignTokens.Spacing7}`,
   padding: isCompact
     ? `${odysseyDesignTokens.Spacing0} ${odysseyDesignTokens.Spacing4}`
     : `${odysseyDesignTokens.Spacing2} ${odysseyDesignTokens.Spacing4}`,
+  "&:hover": {
+    backgroundColor: !isDisabled ? odysseyDesignTokens.HueBlue50 : "inherit",
+    "& span": {
+      color: isDisabled
+        ? "default"
+        : `${odysseyDesignTokens.TypographyColorAction}`,
+    },
+  },
 }));
 
 const NavAccordion = ({
@@ -128,6 +139,7 @@ const NavAccordion = ({
         id={headerId}
         odysseyDesignTokens={odysseyDesignTokens}
         isCompact={isCompact}
+        isDisabled={isDisabled}
       >
         <Support component="div" translate={translate}>
           {startIcon && startIcon}

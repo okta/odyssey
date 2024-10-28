@@ -330,19 +330,19 @@ export const Default: StoryObj<SideNavProps> = {
       }
     });
     await step("Side Nav Collapse", async ({}) => {
-      const collapseButton = within(collapsedRegion).getByLabelText(
-        "collapse side navigation",
-      );
+      const collapseButton = within(collapsedRegion).getByRole("button", {
+        name: "collapse side navigation",
+      });
       await userEvent.click(collapseButton);
       await waitFor(() => {
         expect(expandedRegion).not.toBeVisible();
       });
     });
     await step("Side Nav Expand", async ({}) => {
-      const collapseButton = within(collapsedRegion).getByLabelText(
-        "expand side navigation",
-      );
-      await userEvent.click(collapseButton);
+      const expandeButton = within(collapsedRegion).getByRole("button", {
+        name: "expand side navigation",
+      });
+      await userEvent.click(expandeButton);
       await waitFor(() => {
         expect(expandedRegion).toBeVisible();
       });
