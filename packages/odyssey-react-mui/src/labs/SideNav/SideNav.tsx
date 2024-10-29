@@ -242,16 +242,16 @@ const getHasScrollableContent = (scrollableContainer: HTMLElement) =>
   scrollableContainer.scrollHeight > scrollableContainer.clientHeight;
 
 const SideNav = ({
-  navHeaderText,
+  expandedWidth = DEFAULT_SIDE_NAV_WIDTH,
+  footerComponent,
+  footerItems,
   isCollapsible,
   isCompact,
+  logo,
+  navHeaderText,
   onCollapse,
   onExpand,
   sideNavItems,
-  expandedWidth = DEFAULT_SIDE_NAV_WIDTH,
-  footerItems,
-  footerComponent,
-  logo,
 }: SideNavProps) => {
   const [isSideNavCollapsed, setSideNavCollapsed] = useState(false);
   const [isContentScrollable, setIsContentScrollable] = useState(false);
