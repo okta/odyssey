@@ -21,7 +21,7 @@ export type TopNavProps = {
   /**
    * Pass in an additional component like `Button` that will be displayed after the nav link items
    */
-  AdditionalNavItemComponent?: ReactElement;
+  additionalNavItem?: ReactElement;
   /**
    * URL to the help page.
    */
@@ -29,7 +29,7 @@ export type TopNavProps = {
   /**
    *  Pass in a SearchField component with the variant="filled" prop set
    */
-  SearchFieldComponent?: ReactElement;
+  searchField?: ReactElement;
   /**
    * URL to settings page.
    */
