@@ -193,7 +193,9 @@ const SideNavItemContent = ({
       isSelected={isSelected}
       disabled={isDisabled}
       aria-disabled={isDisabled}
+      aria-current={isSelected ? "page" : undefined}
       odysseyDesignTokens={odysseyDesignTokens}
+      role="menuitem"
     >
       {
         // Use Link for nav items with links and div for disabled or non-link items

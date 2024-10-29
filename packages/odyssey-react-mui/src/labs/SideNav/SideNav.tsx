@@ -38,6 +38,7 @@ import {
 import { SideNavFooterContent } from "./SideNavFooterContent";
 import { SideNavItemContentContext } from "./SideNavItemContentContext";
 import { Skeleton } from "@mui/material";
+import { t } from "i18next";
 
 export const DEFAULT_SIDE_NAV_WIDTH = "300px";
 
@@ -457,7 +458,7 @@ const SideNav = ({
   );
 
   return (
-    <SideNavContainer>
+    <SideNavContainer role="navigation" aria-label={t("navigation.label")}>
       <SideNavExpandContainer
         odysseyDesignTokens={odysseyDesignTokens}
         isSideNavCollapsed={isSideNavCollapsed}
@@ -497,6 +498,7 @@ const SideNav = ({
                         id={id}
                         key={id}
                         odysseyDesignTokens={odysseyDesignTokens}
+                        role="heading"
                       >
                         {label}
                       </SectionHeader>

@@ -15,6 +15,7 @@ import { useOdysseyDesignTokens } from "../../OdysseyDesignTokensContext";
 import type { SideNavFooterItem } from "./types";
 import { Box } from "../../Box";
 import { Link } from "../../Link";
+import { t } from "i18next";
 
 const SideNavFooterContent = ({
   footerItems,
@@ -26,6 +27,9 @@ const SideNavFooterContent = ({
   const footerContent = useMemo(() => {
     return footerItems?.map((item, index) => (
       <Box
+        component="nav"
+        role="menubar"
+        aria-label={t("navigation.footer")}
         key={`${item.id}-wrapper`}
         sx={{
           display: "flex",
