@@ -9,31 +9,13 @@
     "deliverableTiming": "Q2 FY25"
   },
   {
-    "name": "Aerial account page",
-    "type": "Page template",
-    "status": "Not started",
-    "define": "-",
-    "design": "-",
-    "develop": "-",
-    "deliverableTiming": "-"
-  },
-  {
-    "name": "Aerial org details page",
-    "type": "Page template",
-    "status": "Not started",
-    "define": "-",
-    "design": "-",
-    "develop": "-",
-    "deliverableTiming": "-"
-  },
-  {
-    "name": "Aerial user page",
-    "type": "Page template",
-    "status": "Not started",
-    "define": "-",
-    "design": "-",
-    "develop": "-",
-    "deliverableTiming": "-"
+    "name": "Advanced forms",
+    "type": "Component",
+    "status": "In progress",
+    "define": "Complete",
+    "design": "Complete",
+    "develop": "Complete",
+    "deliverableTiming": "Q3 FY25"
   },
   {
     "name": "Autocomplete",
@@ -117,15 +99,6 @@
     "deliverableTiming": "FY24"
   },
   {
-    "name": "Configuration ",
-    "type": "Page template",
-    "status": "Not started",
-    "define": "-",
-    "design": "Complete",
-    "develop": "Complete",
-    "deliverableTiming": "-"
-  },
-  {
     "name": "Dashboard",
     "type": "Page template",
     "status": "Not started",
@@ -153,7 +126,7 @@
     "deliverableTiming": "TBD"
   },
   {
-    "name": "DataView - move",
+    "name": "DataView",
     "type": "Component",
     "status": "In Labs",
     "define": "Complete",
@@ -261,13 +234,13 @@
     "deliverableTiming": "FY24"
   },
   {
-    "name": "Form layout (Advanced)",
+    "name": "GroupPicker",
     "type": "Component",
-    "status": "In progress",
+    "status": "In Labs",
     "define": "Complete",
     "design": "Complete",
-    "develop": "Complete",
-    "deliverableTiming": "Q3 FY25"
+    "develop": "In progress",
+    "deliverableTiming": "Q2 FY25"
   },
   {
     "name": "Inline text field",
