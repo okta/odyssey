@@ -28,6 +28,7 @@ export type SideNavProps = {
    *  Determines whether the side nav items use compact layout
    */
   isCompact?: boolean;
+  isLoading?: boolean;
   /**
    * An optional logo to display in the header. If not provided, will default to the Okta logo
    */

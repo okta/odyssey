@@ -76,6 +76,15 @@ const storybookMeta: Meta<SideNavProps> = {
         },
       },
     },
+    isLoading: {
+      control: "boolean",
+      description: "Controls whether the side nav shows the skeleton loader.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
     logo: {
       description: "Logo to be displayed in the Nav Header",
     },
@@ -291,6 +300,7 @@ export const Default: StoryObj<SideNavProps> = {
           expandedWidth={props.expandedWidth}
           isCompact={props.isCompact}
           isCollapsible={props.isCollapsible}
+          isLoading={props.isLoading}
           onCollapse={props.onCollapse}
           onExpand={props.onExpand}
           sideNavItems={props.sideNavItems}
@@ -347,5 +357,29 @@ export const Default: StoryObj<SideNavProps> = {
         expect(expandedRegion).toBeVisible();
       });
     });
+  },
+};
+
+export const Loading: StoryObj<SideNavProps> = {
+  args: {
+    isLoading: true,
+  },
+  render: (props: SideNavProps) => {
+    return (
+      <div style={{ height: "100vh" }}>
+        <SideNav
+          logo={props.logo}
+          navHeaderText={props.navHeaderText}
+          expandedWidth={props.expandedWidth}
+          isCompact={props.isCompact}
+          isCollapsible={props.isCollapsible}
+          isLoading={props.isLoading}
+          onCollapse={props.onCollapse}
+          onExpand={props.onExpand}
+          sideNavItems={props.sideNavItems}
+          footerItems={props.footerItems}
+        />
+      </div>
+    );
   },
 };

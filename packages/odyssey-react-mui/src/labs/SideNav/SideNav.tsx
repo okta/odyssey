@@ -37,6 +37,7 @@ import {
 } from "./SideNavItemContent";
 import { SideNavFooterContent } from "./SideNavFooterContent";
 import { SideNavItemContentContext } from "./SideNavItemContentContext";
+import { Skeleton } from "@mui/material";
 
 export const DEFAULT_SIDE_NAV_WIDTH = "300px";
 
@@ -238,8 +239,32 @@ const SideNavFooterItemsContainer = styled("div", {
   },
 }));
 
+const LoadingItemContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  alignItems: "center",
+  display: "flex",
+  gap: odysseyDesignTokens.Spacing2,
+  paddingBlock: odysseyDesignTokens.Spacing2,
+  paddingInline: odysseyDesignTokens.Spacing4,
+}));
+
 const getHasScrollableContent = (scrollableContainer: HTMLElement) =>
   scrollableContainer.scrollHeight > scrollableContainer.clientHeight;
+
+const LoadingItem = () => {
+  const odysseyDesignTokens: DesignTokens = useOdysseyDesignTokens();
+  return (
+    <LoadingItemContainer odysseyDesignTokens={odysseyDesignTokens}>
+      <Skeleton
+        variant="circular"
+        width={odysseyDesignTokens.Spacing4}
+        height={odysseyDesignTokens.Spacing4}
+      />
+      <Skeleton variant="rounded" width="100%" />
+    </LoadingItemContainer>
+  );
+};
 
 const SideNav = ({
   expandedWidth = DEFAULT_SIDE_NAV_WIDTH,
@@ -247,6 +272,7 @@ const SideNav = ({
   footerItems,
   isCollapsible,
   isCompact,
+  isLoading,
   logo,
   navHeaderText,
   onCollapse,
@@ -444,75 +470,80 @@ const SideNav = ({
           hasContentScrolled={hasContentScrolled}
         >
           <SideNavHeader
+            isLoading={isLoading}
             logo={logo || <OktaLogo />}
             navHeaderText={navHeaderText}
           />
         </SideNavHeaderContainer>
         <SideNavScrollableContainer data-se="scrollable-region">
           <SideNavListContainer ref={scrollableContentRef}>
-            {processedSideNavItems?.map((item) => {
-              const {
-                id,
-                label,
-                isSectionHeader,
-                startIcon,
-                children,
-                isDefaultExpanded,
-                isDisabled,
-                isExpanded,
-              } = item;
+            {isLoading
+              ? [...Array(6)].map((_, index) => <LoadingItem key={index} />)
+              : processedSideNavItems?.map((item) => {
+                  const {
+                    id,
+                    label,
+                    isSectionHeader,
+                    startIcon,
+                    children,
+                    isDefaultExpanded,
+                    isDisabled,
+                    isExpanded,
+                  } = item;
 
-              if (isSectionHeader) {
-                return (
-                  <SectionHeader
-                    id={id}
-                    key={id}
-                    odysseyDesignTokens={odysseyDesignTokens}
-                  >
-                    {label}
-                  </SectionHeader>
-                );
-              } else if (children) {
-                return (
-                  <SideNavListItemContainer
-                    id={id}
-                    key={id}
-                    odysseyDesignTokens={odysseyDesignTokens}
-                    disabled={isDisabled}
-                    aria-disabled={isDisabled}
-                  >
-                    <NavAccordion
-                      label={label}
-                      isCompact={isCompact}
-                      isDefaultExpanded={isDefaultExpanded}
-                      isExpanded={isExpanded}
-                      startIcon={startIcon}
-                      isDisabled={isDisabled}
-                    >
-                      <SideNavListContainer id={`${id}-list`}>
-                        {children}
-                      </SideNavListContainer>
-                    </NavAccordion>
-                  </SideNavListItemContainer>
-                );
-              } else {
-                return (
-                  <SideNavItemContentContext.Provider
-                    key={item.id}
-                    value={sideNavItemContentProviderValue}
-                  >
-                    <SideNavItemContent
-                      {...item}
-                      key={item.id}
-                      scrollRef={getRefIfThisIsFirstNodeWithIsSelected(item.id)}
-                    />
-                  </SideNavItemContentContext.Provider>
-                );
-              }
-            })}
+                  if (isSectionHeader) {
+                    return (
+                      <SectionHeader
+                        id={id}
+                        key={id}
+                        odysseyDesignTokens={odysseyDesignTokens}
+                      >
+                        {label}
+                      </SectionHeader>
+                    );
+                  } else if (children) {
+                    return (
+                      <SideNavListItemContainer
+                        id={id}
+                        key={id}
+                        odysseyDesignTokens={odysseyDesignTokens}
+                        disabled={isDisabled}
+                        aria-disabled={isDisabled}
+                      >
+                        <NavAccordion
+                          label={label}
+                          isCompact={isCompact}
+                          isDefaultExpanded={isDefaultExpanded}
+                          isExpanded={isExpanded}
+                          startIcon={startIcon}
+                          isDisabled={isDisabled}
+                        >
+                          <SideNavListContainer id={`${id}-list`}>
+                            {children}
+                          </SideNavListContainer>
+                        </NavAccordion>
+                      </SideNavListItemContainer>
+                    );
+                  } else {
+                    return (
+                      <SideNavItemContentContext.Provider
+                        key={item.id}
+                        value={sideNavItemContentProviderValue}
+                      >
+                        <SideNavItemContent
+                          {...item}
+                          key={item.id}
+                          scrollRef={getRefIfThisIsFirstNodeWithIsSelected(
+                            item.id,
+                          )}
+                        />
+                      </SideNavItemContentContext.Provider>
+                    );
+                  }
+                })}
           </SideNavListContainer>
         </SideNavScrollableContainer>
-        {(footerItems || footerComponent) && (
+        {(footerItems || footerComponent) && !isLoading && (
           <SideNavFooter
             odysseyDesignTokens={odysseyDesignTokens}
             isContentScrollable={isContentScrollable}

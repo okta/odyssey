@@ -20,6 +20,7 @@ import { Box } from "../../Box";
 import { Heading6 } from "../../Typography";
 import type { SideNavProps } from "./types";
 import { TOP_NAV_HEIGHT_TOKEN } from "../TopNav";
+import { Skeleton } from "@mui/material";
 
 const SideNavLogoContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
@@ -45,14 +46,16 @@ const SideNavHeaderContainer = styled("div", {
 }));
 
 const SideNavHeader = ({
-  navHeaderText,
+  isLoading,
   logo,
-}: Pick<SideNavProps, "navHeaderText" | "logo">): ReactNode => {
+  navHeaderText,
+}: Pick<SideNavProps, "isLoading" | "logo" | "navHeaderText">): ReactNode => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const sideNavHeaderStyles = useMemo(
     () => ({
       marginTop: odysseyDesignTokens.Spacing2,
+      width: "100%",
     }),
     [odysseyDesignTokens],
   );
@@ -65,11 +68,18 @@ const SideNavHeader = ({
       }}
     >
       <SideNavLogoContainer odysseyDesignTokens={odysseyDesignTokens}>
-        {logo}
+        {/* The skeleton takes the hardcoded dimensions of the Okta logo */}
+        {isLoading ? (
+          <Skeleton variant="rounded" height={24} width={67} />
+        ) : (
+          logo
+        )}
       </SideNavLogoContainer>
       <SideNavHeaderContainer odysseyDesignTokens={odysseyDesignTokens}>
         <Box sx={sideNavHeaderStyles}>
-          <Heading6>{navHeaderText}</Heading6>
+          <Heading6>
+            {isLoading ? <Skeleton width="50%" /> : navHeaderText}
+          </Heading6>
         </Box>
       </SideNavHeaderContainer>
     </Box>
