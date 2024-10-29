@@ -27,6 +27,7 @@ export const optionalComponentSlotNames: Record<
   string
 > = {
   additionalTopNavItems: "additional-top-nav-items",
+  banners: "banners",
   footer: "footer",
   logo: "logo",
   searchField: "search-field",

@@ -13,6 +13,7 @@
 import { memo, useEffect, useState, type SetStateAction } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
+import { CssBaseline } from "../../CssBaseline";
 import { type SideNavProps } from "../SideNav";
 import { type TopNavProps } from "../TopNav";
 import { OdysseyProvider } from "../../OdysseyProvider";
@@ -96,6 +97,8 @@ const UiShell = ({
         shadowRootElement={appRootElement}
       >
         <ErrorBoundary fallback={appComponent} onError={onError}>
+          <CssBaseline />
+
           <UiShellContent
             {...componentProps}
             appComponent={appComponent}

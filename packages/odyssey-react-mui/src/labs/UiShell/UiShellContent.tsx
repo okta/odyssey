@@ -11,7 +11,7 @@
  */
 
 import styled from "@emotion/styled";
-import { memo, type ReactNode } from "react";
+import { memo, ReactElement, type ReactNode } from "react";
 import { ErrorBoundary, ErrorBoundaryProps } from "react-error-boundary";
 
 import { SideNav, type SideNavProps } from "../SideNav";
@@ -70,6 +70,7 @@ export type UiShellContentProps = {
    */
   optionalComponents?: {
     additionalTopNavItems?: TopNavProps["additionalNavItem"];
+    banners?: ReactElement;
     footer?: SideNavProps["footerComponent"];
     logo?: SideNavProps["logo"];
     searchField?: TopNavProps["searchField"];
@@ -134,6 +135,8 @@ const UiShellContent = ({
           odysseyDesignTokens={odysseyDesignTokens}
           tabIndex={0}
         >
+          {optionalComponents?.banners}
+
           {appComponent}
         </StyledAppContainer>
       </StyledFlexibleContentContainer>
