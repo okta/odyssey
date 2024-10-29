@@ -112,13 +112,13 @@ export const useColumns = (): DataTableColumn<DataTableRowData>[] => {
           accessorKey: "name",
           header: "Name",
           enableHiding: false,
-          size: 290,
+          size: 280,
         },
         {
           accessorKey: "type",
           header: "Type",
           enableHiding: true,
-          size: 110,
+          size: 120,
         },
         {
           accessorKey: "status",
