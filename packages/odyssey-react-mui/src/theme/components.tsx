@@ -37,8 +37,6 @@ import { tableCellClasses } from "@mui/material/TableCell";
 import { tooltipClasses } from "@mui/material/Tooltip";
 import { typographyClasses } from "@mui/material/Typography";
 
-import { CARD_IMAGE_HEIGHT } from "../Card";
-
 import {
   CheckCircleFilledIcon,
   CheckIcon,
@@ -52,6 +50,7 @@ import {
 } from "../icons.generated";
 import { DesignTokens } from "./theme";
 import { CSSProperties } from "react";
+import { ContrastMode } from "../useContrastMode";
 
 //Widths used in `Drawer` component
 const drawerSizes = {
@@ -60,10 +59,12 @@ const drawerSizes = {
 };
 
 export const components = ({
+  contrastMode,
   odysseyTokens,
   shadowDomElement,
   shadowRootElement,
 }: {
+  contrastMode: ContrastMode;
   odysseyTokens: DesignTokens;
   /** @deprecated use `shadowRootElement` */
   shadowDomElement?: HTMLElement;
@@ -511,6 +512,12 @@ export const components = ({
               borderColor: "transparent",
             },
           }),
+
+          ".MuiChip-root": {
+            // using 55ch - (48px(padding + clear button) + 4px) for spacing between chip and clear button to account for the 24px of padding on the right side of the container and the width of the clear button.
+            // Ensures chip does not enlarge the container or overlap the clear button
+            maxWidth: `calc(${odysseyTokens.TypographyLineLengthMax} - (${odysseyTokens.Spacing6} + ${odysseyTokens.Spacing6} + ${odysseyTokens.Spacing1}))`,
+          },
         }),
       },
     },
@@ -577,9 +584,7 @@ export const components = ({
         disableElevation: true,
       },
       styleOverrides: {
-        root: ({ ownerState, theme }) => {
-          const contrastMode = theme.contrastMode;
-
+        root: ({ ownerState }) => {
           return {
             minWidth: "unset",
             paddingBlock: odysseyTokens.Spacing3,
@@ -680,13 +685,13 @@ export const components = ({
               },
 
               "&:disabled": {
-                ...(contrastMode === "lowContrast" && {
+                ...(contrastMode === "highContrast" && {
                   backgroundColor: odysseyTokens.HueNeutral200,
                   borderColor: "transparent",
                   color: odysseyTokens.TypographyColorDisabled,
                 }),
 
-                ...(contrastMode === "highContrast" && {
+                ...(contrastMode === "lowContrast" && {
                   backgroundColor: odysseyTokens.HueNeutral100,
                   borderColor: "transparent",
                   color: odysseyTokens.TypographyColorDisabled,
@@ -845,11 +850,19 @@ export const components = ({
           borderRadius: odysseyTokens.BorderRadiusOuter,
           boxShadow: odysseyTokens.DepthMedium,
           padding: odysseyTokens.Spacing5,
+          marginBlockEnd: odysseyTokens.Spacing5,
           position: "relative",
           transition: `all ${odysseyTokens.TransitionDurationMain} ${odysseyTokens.TransitionTimingMain}`,
 
+          "&.ods-card-compact": {
+            marginBlockEnd: odysseyTokens.Spacing3,
+            padding: odysseyTokens.Spacing3,
+          },
+
           "& img": {
-            height: CARD_IMAGE_HEIGHT,
+            maxHeight: "100%",
+            height: "auto",
+            alignSelf: "flex-start",
           },
 
           "&.hasAccessory": {
@@ -857,7 +870,6 @@ export const components = ({
           },
 
           "&.isClickable:hover": {
-            backgroundColor: odysseyTokens.HueNeutral50,
             boxShadow: odysseyTokens.DepthHigh,
           },
 
@@ -1029,9 +1041,7 @@ export const components = ({
         deleteIcon: <CloseCircleFilledIcon />,
       },
       styleOverrides: {
-        root: ({ ownerState, theme }) => {
-          const contrastMode = theme.contrastMode;
-
+        root: ({ ownerState }) => {
           return {
             height: "auto",
             paddingBlock: `calc(${odysseyTokens.Spacing2} - ${odysseyTokens.BorderWidthMain})`,
@@ -1058,7 +1068,6 @@ export const components = ({
               [`& .${chipClasses.deleteIcon}`]: {
                 color: odysseyTokens.HueNeutral300,
               },
-
               [`& .${chipClasses.icon}`]: {
                 color: odysseyTokens.HueNeutral300,
               },
@@ -1135,54 +1144,54 @@ export const components = ({
               fontSize: "0.71428571rem",
               textTransform: "uppercase",
 
-              ...(contrastMode === "lowContrast" && {
+              ...(contrastMode === "highContrast" && {
                 backgroundColor: odysseyTokens.HueNeutral200,
                 color: odysseyTokens.HueNeutral700,
               }),
-              ...(contrastMode === "highContrast" && {
+              ...(contrastMode === "lowContrast" && {
                 backgroundColor: odysseyTokens.HueNeutral50,
                 color: odysseyTokens.TypographyColorSubordinate,
               }),
 
               [`&.${chipClasses.colorError}`]: {
-                ...(contrastMode === "lowContrast" && {
+                ...(contrastMode === "highContrast" && {
                   backgroundColor: odysseyTokens.HueRed100,
                   color: odysseyTokens.HueRed700,
                 }),
-                ...(contrastMode === "highContrast" && {
+                ...(contrastMode === "lowContrast" && {
                   backgroundColor: odysseyTokens.PaletteDangerLighter,
                   color: odysseyTokens.TypographyColorDanger,
                 }),
               },
 
               [`&.${chipClasses.colorInfo}`]: {
-                ...(contrastMode === "lowContrast" && {
+                ...(contrastMode === "highContrast" && {
                   backgroundColor: odysseyTokens.HueBlue100,
                   color: odysseyTokens.HueBlue700,
                 }),
-                ...(contrastMode === "highContrast" && {
+                ...(contrastMode === "lowContrast" && {
                   backgroundColor: odysseyTokens.PalettePrimaryLighter,
                   color: odysseyTokens.PalettePrimaryText,
                 }),
               },
 
               [`&.${chipClasses.colorSuccess}`]: {
-                ...(contrastMode === "lowContrast" && {
+                ...(contrastMode === "highContrast" && {
                   backgroundColor: odysseyTokens.HueGreen200,
                   color: odysseyTokens.HueGreen700,
                 }),
-                ...(contrastMode === "highContrast" && {
+                ...(contrastMode === "lowContrast" && {
                   backgroundColor: odysseyTokens.PaletteSuccessLighter,
                   color: odysseyTokens.TypographyColorSuccess,
                 }),
               },
 
               [`&.${chipClasses.colorWarning}`]: {
-                ...(contrastMode === "lowContrast" && {
+                ...(contrastMode === "highContrast" && {
                   backgroundColor: odysseyTokens.HueYellow100,
                   color: odysseyTokens.HueYellow700,
                 }),
-                ...(contrastMode === "highContrast" && {
+                ...(contrastMode === "lowContrast" && {
                   backgroundColor: odysseyTokens.PaletteWarningLighter,
                   color: odysseyTokens.TypographyColorWarning,
                 }),
@@ -1758,6 +1767,12 @@ export const components = ({
           },
           [`&:has(+ [data-file-preview-container])`]: {
             marginBlockEnd: 0,
+          },
+
+          ".MuiChip-root": {
+            // using 55ch - 24px to account for the 24px of padding on the right side of the container.
+            // Ensures chip does not enlarge the container
+            maxWidth: `calc(${odysseyTokens.TypographyLineLengthMax} - ${odysseyTokens.Spacing6})`,
           },
         }),
       },
@@ -2793,6 +2808,11 @@ export const components = ({
           [`.${tableHeadClasses.root} .ods-actions-cell + &:last-of-type, .${tableBodyClasses.root} .ods-actions-cell + &:last-of-type`]:
             {
               flexGrow: 0,
+              // When a table has an actions column, we need to 0 the padding on the final (spacing-related) column otherwise
+              // the last column is too wide
+              padding: "0 !important",
+              // The last column needs to be the same width as the border-radius of the thead row to ensure the border-radius isn't
+              // cut off
               width: odysseyTokens.Spacing2,
             },
           [`.ods-hide-spacer-column .${tableHeadClasses.root} &:last-of-type, .ods-hide-spacer-column .${tableBodyClasses.root} &:last-of-type`]:

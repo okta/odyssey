@@ -25,6 +25,7 @@ import {
   UpdateFiltersOrValues,
   DataColumns,
   DataTableRowSelectionState,
+  DataCardProps,
 } from "@okta/odyssey-react-mui/labs";
 import { PauseIcon, RefreshIcon } from "@okta/odyssey-react-mui/icons";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -1010,6 +1011,60 @@ export const PaginationHook: StoryObj<DataViewMetaProps> = {
           columns: personColumns,
         }}
         getData={getData}
+      />
+    );
+  },
+};
+
+const stackItemProps = (row: DataRow) => ({
+  overline: "Overline",
+  title: row.name,
+  description: `${row.name} is ${row.age} years old.`,
+  variant: "stack" as DataCardProps["variant"],
+  image: <img src="https://placehold.co/400" alt="Logo" />,
+});
+
+export const StackCards: StoryObj<DataViewMetaProps> = {
+  render: function C() {
+    const [data, setData] = useState<Person[]>(personData);
+    const { getData } = useDataCallbacks(data, setData);
+
+    return (
+      <DataView
+        availableLayouts={["list"]}
+        getData={getData}
+        cardLayoutOptions={{
+          itemProps: stackItemProps,
+          renderDetailPanel: () => <Box>Details</Box>,
+          rowActionMenuItems: () => <MenuItem>Test</MenuItem>,
+        }}
+      />
+    );
+  },
+};
+
+const compactItemProps = (row: DataRow) => ({
+  title: row.name,
+  description: `${row.name} is ${row.age} years old.`,
+  variant: "compact" as DataCardProps["variant"],
+  image: <img src="https://placehold.co/400" alt="Logo" />,
+});
+
+export const CompactCards: StoryObj<DataViewMetaProps> = {
+  render: function C() {
+    const [data, setData] = useState<Person[]>(personData);
+    const { getData } = useDataCallbacks(data, setData);
+
+    return (
+      <DataView
+        availableLayouts={["list"]}
+        getData={getData}
+        cardLayoutOptions={{
+          itemProps: compactItemProps,
+          renderDetailPanel: ({ row }) =>
+            row.age % 2 ? <Box>Detail content</Box> : false,
+          rowActionMenuItems: () => <MenuItem>Test</MenuItem>,
+        }}
       />
     );
   },

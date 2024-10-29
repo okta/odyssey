@@ -34,14 +34,6 @@ const SideNavItemLabelContainer = styled("div", {
   fontSize: odysseyDesignTokens.TypographyScale0,
   fontWeight: odysseyDesignTokens.TypographyWeightHeading,
   marginLeft: isIconVisible ? odysseyDesignTokens.Spacing2 : 0,
-  "& a": {
-    color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
-    fontSize: odysseyDesignTokens.TypographyScale0,
-  },
-  "& a:hover": {
-    textDecoration: "none",
-    cursor: "pointer",
-  },
 }));
 
 const SideNavItemLinkContent = ({
@@ -70,6 +62,7 @@ const SideNavItemLinkContent = ({
         odysseyDesignTokens={odysseyDesignTokens}
         isIconVisible={Boolean(startIcon)}
       >
+        {Boolean(startIcon)}
         {label}
         {severity && (
           <Box sx={sideNavItemContentStyles}>
