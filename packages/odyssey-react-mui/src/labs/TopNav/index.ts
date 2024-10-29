@@ -11,3 +11,4 @@
  */
 
 export * from "./TopNav";
+export * from "./UserProfile";

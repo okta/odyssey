@@ -21,20 +21,18 @@ import {
   type DesignTokens,
 } from "../../OdysseyDesignTokensContext";
 
-const AppContainer = styled("div", {
+const StyledAppContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{
   odysseyDesignTokens: DesignTokens;
 }>(({ odysseyDesignTokens }) => ({
   overflowX: "hidden",
   overflowY: "scroll",
-  paddingBlockEnd: odysseyDesignTokens.Spacing4,
-  paddingBlockStart: odysseyDesignTokens.Spacing4,
-  paddingInlineEnd: odysseyDesignTokens.Spacing4,
-  paddingInlineStart: odysseyDesignTokens.Spacing4,
+  paddingBlock: odysseyDesignTokens.Spacing5,
+  paddingInline: odysseyDesignTokens.Spacing6,
 }));
 
-const FlexibleContentContainer = styled("div", {
+const StyledFlexibleContentContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{
   odysseyDesignTokens: DesignTokens;
@@ -46,12 +44,12 @@ const FlexibleContentContainer = styled("div", {
   flexGrow: 1,
 }));
 
-const RigidContentContainer = styled("div")(() => ({
+const StyledRigidContentContainer = styled("div")(() => ({
   flexShrink: 0,
   height: "100%",
 }));
 
-const ShellContainer = styled("div")(() => ({
+const StyledShellContainer = styled("div")(() => ({
   display: "flex",
   flexWrap: "nowrap",
   height: "100vh",
@@ -71,10 +69,11 @@ export type UiShellContentProps = {
    * Components that will render as children of various other components such as the top nav or side nav.
    */
   optionalComponents?: {
-    additionalTopNavItems?: TopNavProps["AdditionalNavItemComponent"];
+    additionalTopNavItems?: TopNavProps["additionalNavItem"];
     footer?: SideNavProps["footerComponent"];
     logo?: SideNavProps["logo"];
-    searchField?: TopNavProps["SearchFieldComponent"];
+    searchField?: TopNavProps["searchField"];
+    userProfile?: TopNavProps["userProfile"];
   };
   /**
    * Object that gets pass directly to the side nav component.
@@ -103,8 +102,8 @@ const UiShellContent = ({
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   return (
-    <ShellContainer>
-      <RigidContentContainer>
+    <StyledShellContainer>
+      <StyledRigidContentContainer>
         {sideNavProps && (
           <ErrorBoundary fallback={null} onError={onError}>
             <SideNav
@@ -119,24 +118,26 @@ const UiShellContent = ({
             />
           </ErrorBoundary>
         )}
-      </RigidContentContainer>
+      </StyledRigidContentContainer>
 
-      <FlexibleContentContainer odysseyDesignTokens={odysseyDesignTokens}>
+      <StyledFlexibleContentContainer odysseyDesignTokens={odysseyDesignTokens}>
         <ErrorBoundary fallback={null} onError={onError}>
           <TopNav
             {...topNavProps}
-            AdditionalNavItemComponent={
-              optionalComponents?.additionalTopNavItems
-            }
-            SearchFieldComponent={optionalComponents?.searchField}
+            additionalNavItem={optionalComponents?.additionalTopNavItems}
+            searchField={optionalComponents?.searchField}
+            userProfile={optionalComponents?.userProfile}
           />
         </ErrorBoundary>
 
-        <AppContainer odysseyDesignTokens={odysseyDesignTokens}>
+        <StyledAppContainer
+          odysseyDesignTokens={odysseyDesignTokens}
+          tabIndex={0}
+        >
           {appComponent}
-        </AppContainer>
-      </FlexibleContentContainer>
-    </ShellContainer>
+        </StyledAppContainer>
+      </StyledFlexibleContentContainer>
+    </StyledShellContainer>
   );
 };
 

@@ -16,54 +16,52 @@ import { useTranslation } from "react-i18next";
 
 import type { HtmlProps } from "../../HtmlProps";
 import { QuestionCircleIcon, SettingsIcon } from "../../icons.generated";
-import { Link } from "../../Link";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
-import { UserProfile, UserProfileProps } from "./UserProfile";
-import { TopNavLinkProps } from "./TopNavLink";
 import { TopNavLinksList } from "./TopNavLinksList";
+import { TopNavListItemProps } from "./TopNavListItem";
+import { Link } from "../../Link";
 
-export const TOP_NAV_HEIGHT_TOKEN = "Spacing9";
+export const TOP_NAV_HEIGHT = `${64 / 14}rem`;
 
 export type TopNavProps = {
   /**
-   *  Pass in a SearchField component with the variant="filled" prop set
-   */
-  SearchFieldComponent?: ReactElement;
-  /**
-   * Nav links in the top nav
-   */
-  topNavLinkItems: TopNavLinkProps[];
-  /**
    * Pass in an additional component like `Button` that will be displayed after the nav link items
    */
-  AdditionalNavItemComponent?: ReactElement;
-  /**
-   * URL to settings page.
-   */
-  settingsPageHref?: string;
+  additionalNavItem?: ReactElement;
   /**
    * URL to the help page.
    */
   helpPageHref?: string;
   /**
+   *  Pass in a SearchField component with the variant="filled" prop set
+   */
+  searchField?: ReactElement;
+  /**
+   * URL to settings page.
+   */
+  settingsPageHref?: string;
+  /**
+   * Nav links in the top nav
+   */
+  topNavLinkItems: TopNavListItemProps[];
+  /**
    * Displays user account info
    */
-  userProfile?: UserProfileProps;
+  userProfile?: ReactElement;
 } & Pick<HtmlProps, "testId">;
 
-const AdditionalNavItemContainer = styled("div", {
+const StyledAdditionalNavItemContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{
   odysseyDesignTokens: DesignTokens;
 }>(({ odysseyDesignTokens }) => ({
-  paddingBlock: 0,
   paddingInline: odysseyDesignTokens.Spacing3,
 }));
 
-const AdditionalLinkContainerWithBorder = styled("div", {
+const StyledAdditionalLinkContainerWithBorder = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{
   odysseyDesignTokens: DesignTokens;
@@ -74,35 +72,34 @@ const AdditionalLinkContainerWithBorder = styled("div", {
   marginInlineEnd: odysseyDesignTokens.Spacing3,
 }));
 
-const LinkAndProfileWrapper = styled("div")(() => ({
+const StyledLinkAndProfileWrapper = styled("div")(() => ({
   alignItems: "center",
   display: "flex",
   marginInlineStart: "auto",
 }));
 
-const LinkContainer = styled("div", {
+const StyledLinkContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{
   odysseyDesignTokens: DesignTokens;
 }>(({ odysseyDesignTokens }) => ({
   padding: odysseyDesignTokens.Spacing3,
 
-  "& a": {
-    color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
-  },
+  // "a": {
+  //   color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
+  // },
 }));
 
-const SearchFieldContainer = styled("div", {
+const StyledSearchFieldContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{
   odysseyDesignTokens: DesignTokens;
 }>(({ odysseyDesignTokens }) => ({
-  paddingBlock: odysseyDesignTokens.Spacing2,
-  paddingInline: odysseyDesignTokens.Spacing3,
-  width: "350px",
+  maxWidth: odysseyDesignTokens.TypographyLineLengthMax,
+  width: "100%",
 }));
 
-const TopNavContainer = styled("div", {
+const StyledTopNavContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{
   odysseyDesignTokens: DesignTokens;
@@ -110,13 +107,15 @@ const TopNavContainer = styled("div", {
   alignItems: "center",
   backgroundColor: odysseyDesignTokens.HueNeutral50,
   display: "flex",
-  height: odysseyDesignTokens[TOP_NAV_HEIGHT_TOKEN],
+  height: TOP_NAV_HEIGHT,
+  paddingBlock: odysseyDesignTokens.Spacing2,
+  paddingInline: odysseyDesignTokens.Spacing6,
 }));
 
 const TopNav = ({
-  AdditionalNavItemComponent,
+  additionalNavItem,
   helpPageHref,
-  SearchFieldComponent,
+  searchField,
   settingsPageHref,
   topNavLinkItems,
   userProfile,
@@ -125,52 +124,53 @@ const TopNav = ({
   const { t } = useTranslation();
 
   return (
-    <TopNavContainer odysseyDesignTokens={odysseyDesignTokens}>
-      {SearchFieldComponent && (
-        <SearchFieldContainer odysseyDesignTokens={odysseyDesignTokens}>
-          {SearchFieldComponent}
-        </SearchFieldContainer>
+    <StyledTopNavContainer odysseyDesignTokens={odysseyDesignTokens}>
+      {searchField && (
+        <StyledSearchFieldContainer odysseyDesignTokens={odysseyDesignTokens}>
+          {searchField}
+        </StyledSearchFieldContainer>
       )}
 
       {topNavLinkItems && <TopNavLinksList topNavLinkItems={topNavLinkItems} />}
 
-      <LinkAndProfileWrapper>
-        {(AdditionalNavItemComponent || settingsPageHref || helpPageHref) && (
-          <AdditionalLinkContainerWithBorder
+      <StyledLinkAndProfileWrapper>
+        {(additionalNavItem || settingsPageHref || helpPageHref) && (
+          <StyledAdditionalLinkContainerWithBorder
             odysseyDesignTokens={odysseyDesignTokens}
           >
-            {AdditionalNavItemComponent && (
-              <AdditionalNavItemContainer
+            {additionalNavItem && (
+              <StyledAdditionalNavItemContainer
                 odysseyDesignTokens={odysseyDesignTokens}
               >
-                {AdditionalNavItemComponent}
-              </AdditionalNavItemContainer>
+                {additionalNavItem}
+              </StyledAdditionalNavItemContainer>
             )}
 
             {settingsPageHref && (
-              <LinkContainer odysseyDesignTokens={odysseyDesignTokens}>
+              <StyledLinkContainer odysseyDesignTokens={odysseyDesignTokens}>
                 <Link
-                  href={settingsPageHref}
                   ariaLabel={t("topnav.settingsicon")}
+                  href={settingsPageHref}
+                  variant="monochrome"
                 >
                   <SettingsIcon />
                 </Link>
-              </LinkContainer>
+              </StyledLinkContainer>
             )}
 
             {helpPageHref && (
-              <LinkContainer odysseyDesignTokens={odysseyDesignTokens}>
-                <Link href={helpPageHref} ariaLabel={t("topnav.helpicon")}>
+              <StyledLinkContainer odysseyDesignTokens={odysseyDesignTokens}>
+                <Link ariaLabel={t("topnav.helpicon")} href={helpPageHref}>
                   <QuestionCircleIcon />
                 </Link>
-              </LinkContainer>
+              </StyledLinkContainer>
             )}
-          </AdditionalLinkContainerWithBorder>
+          </StyledAdditionalLinkContainerWithBorder>
         )}
 
-        {userProfile && <UserProfile {...userProfile} />}
-      </LinkAndProfileWrapper>
-    </TopNavContainer>
+        {userProfile}
+      </StyledLinkAndProfileWrapper>
+    </StyledTopNavContainer>
   );
 };
 

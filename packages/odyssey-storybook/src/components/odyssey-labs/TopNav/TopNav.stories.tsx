@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { TopNav, TopNavProps } from "@okta/odyssey-react-mui/labs";
+import { TopNav, TopNavProps, UserProfile } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { Button, SearchField } from "@okta/odyssey-react-mui";
@@ -20,29 +20,29 @@ const storybookMeta: Meta<TopNavProps> = {
   title: "Labs Components/TopNav",
   component: TopNav,
   argTypes: {
-    SearchFieldComponent: {
-      control: "ReactElement",
-      description: "Display global search field",
-      table: {
-        type: {
-          summary: "ReactElement (SearchField)",
-        },
-      },
-    },
-    topNavLinkItems: {
-      description: "Array of links to be displayed in the top nav",
-      table: {
-        type: {
-          summary: "Array<TopNavLinkItem>",
-        },
-      },
-    },
-    AdditionalNavItemComponent: {
+    additionalNavItem: {
       description:
         "Additional element to be displayed at the end of the top nav",
       table: {
         type: {
           summary: "ReactElement (Button)",
+        },
+      },
+    },
+    helpPageHref: {
+      description: "Display the help icon/link",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    searchField: {
+      control: "ReactElement",
+      description: "Display global search field",
+      table: {
+        type: {
+          summary: "ReactElement (SearchField)",
         },
       },
     },
@@ -54,11 +54,11 @@ const storybookMeta: Meta<TopNavProps> = {
         },
       },
     },
-    helpPageHref: {
-      description: "Display the help icon/link",
+    topNavLinkItems: {
+      description: "Array of links to be displayed in the top nav",
       table: {
         type: {
-          summary: "boolean",
+          summary: "Array<TopNavLinkItem>",
         },
       },
     },
@@ -72,9 +72,10 @@ const storybookMeta: Meta<TopNavProps> = {
     },
   },
   args: {
-    SearchFieldComponent: (
-      <SearchField label="Search" placeholder="Search..." />
-    ),
+    additionalNavItem: <Button variant="secondary" label="Connect Builder" />,
+    helpPageHref: "#none",
+    searchField: <SearchField label="Search" placeholder="Search..." />,
+    settingsPageHref: "#none",
     topNavLinkItems: [
       {
         id: "link-01",
@@ -98,16 +99,13 @@ const storybookMeta: Meta<TopNavProps> = {
         onClick: () => {},
       },
     ],
-    AdditionalNavItemComponent: (
-      <Button variant="secondary" label="Connect Builder" />
+    userProfile: (
+      <UserProfile
+        profileIcon={<UserIcon />}
+        orgName="ORG123"
+        userName="test.user@test.com"
+      />
     ),
-    settingsPageHref: "#none",
-    helpPageHref: "#none",
-    userProfile: {
-      profileIcon: <UserIcon />,
-      userName: "test.user@test.com",
-      orgName: "ORG123",
-    },
   },
   decorators: [MuiThemeDecorator],
   parameters: {

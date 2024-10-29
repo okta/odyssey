@@ -14,7 +14,7 @@ import styled from "@emotion/styled";
 import { memo, type ReactElement } from "react";
 
 import type { HtmlProps } from "../../HtmlProps";
-import { TopNavLink, TopNavLinkProps } from "./TopNavLink";
+import { TopNavListItem, TopNavListItemProps } from "./TopNavListItem";
 import { UserProfileProps } from "./UserProfile";
 
 export type TopNavProps = {
@@ -37,14 +37,14 @@ export type TopNavProps = {
   /**
    * Nav links in the top nav
    */
-  topNavLinkItems: TopNavLinkProps[];
+  topNavLinkItems: TopNavListItemProps[];
   /**
    * Displays user account info
    */
   userProfile?: UserProfileProps;
 } & Pick<HtmlProps, "testId">;
 
-const TopNavList = styled("ul")(() => ({
+const StyledTopNavList = styled("ul")(() => ({
   alignItems: "center",
   display: "flex",
   listStyle: "none",
@@ -54,11 +54,11 @@ const TopNavList = styled("ul")(() => ({
 
 const TopNavLinksList = ({ topNavLinkItems }: TopNavProps) => (
   <nav>
-    <TopNavList>
+    <StyledTopNavList>
       {topNavLinkItems.map((item) => (
-        <TopNavLink {...item} key={item.id} />
+        <TopNavListItem {...item} key={item.id} />
       ))}
-    </TopNavList>
+    </StyledTopNavList>
   </nav>
 );
 

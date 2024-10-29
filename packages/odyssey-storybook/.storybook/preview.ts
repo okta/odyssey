@@ -97,10 +97,6 @@ const preview: Preview = {
           name: "Gray",
           value: "#f4f4f4",
         },
-        {
-          name: "Dark (unused)",
-          value: "#1d1d21",
-        },
       ],
     },
     docs: {

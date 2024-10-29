@@ -30,6 +30,7 @@ export const optionalComponentSlotNames: Record<
   footer: "footer",
   logo: "logo",
   searchField: "search-field",
+  userProfile: "user-profile",
 };
 
 /**
