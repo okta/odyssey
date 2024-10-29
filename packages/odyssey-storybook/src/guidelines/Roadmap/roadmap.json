@@ -126,7 +126,7 @@
     "deliverableTiming": "TBD"
   },
   {
-    "name": "DataView",
+    "name": "DataView - move",
     "type": "Component",
     "status": "In Labs",
     "define": "Complete",
@@ -412,6 +412,15 @@
     "design": "Complete",
     "develop": "In Labs",
     "deliverableTiming": "Q3 FY25"
+  },
+  {
+    "name": "Template: Policy",
+    "type": "Page template",
+    "status": "In progress",
+    "define": "In progress",
+    "design": "-",
+    "develop": "-",
+    "deliverableTiming": "Q4 FY25"
   },
   {
     "name": "Text field",
