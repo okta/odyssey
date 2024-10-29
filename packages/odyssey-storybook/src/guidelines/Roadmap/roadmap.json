@@ -126,7 +126,7 @@
     "deliverableTiming": "TBD"
   },
   {
-    "name": "DataView - move",
+    "name": "DataView",
     "type": "Component",
     "status": "In Labs",
     "define": "Complete",
