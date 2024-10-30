@@ -11,3 +11,7 @@
  */
 
 export * from "./renderUiShell";
+
+export { UiShell, type UiShellProps } from "./UiShell";
+
+export { type UiShellNavComponentProps } from "./UiShellContent";

@@ -99,7 +99,8 @@ const ImageContainer = styled("div", {
   maxHeight: APP_TILE_IMAGE_HEIGHT,
   marginBlockEnd: odysseyDesignTokens.Spacing5,
 
-  ["& img"]: {
+  ["img"]: {
+    height: APP_TILE_IMAGE_HEIGHT,
     maxWidth: "100%",
   },
 }));

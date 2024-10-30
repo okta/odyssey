@@ -11,22 +11,24 @@
  */
 
 import styled from "@emotion/styled";
-import { memo, ReactNode } from "react";
+import { memo, type ReactElement } from "react";
 import {
   type DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
 import { Box } from "../../Box";
 import { Heading6 } from "../../Typography";
-import type { SideNavProps } from "./types";
-// import { TOP_NAV_HEIGHT_TOKEN } from "../TopNav";
+import { TOP_NAV_HEIGHT } from "../TopNav";
 import { Skeleton } from "@mui/material";
 
 const SideNavLogoContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
-  paddingInline: odysseyDesignTokens.Spacing5,
+  height: "100%",
+  maxHeight: TOP_NAV_HEIGHT,
+  minHeight: TOP_NAV_HEIGHT,
   paddingBlock: odysseyDesignTokens.Spacing4,
+  paddingInline: odysseyDesignTokens.Spacing5,
 }));
 
 const SideNavHeaderContainer = styled("div", {
@@ -43,11 +45,22 @@ const SideNavHeaderContainer = styled("div", {
   },
 }));
 
-const SideNavHeader = ({
-  isLoading,
-  logo,
-  navHeaderText,
-}: Pick<SideNavProps, "isLoading" | "logo" | "navHeaderText">): ReactNode => {
+export type SideNavHeader = {
+  /**
+   * The app's name.
+   */
+  appName: string;
+  /**
+   * If the side nav currently has no items, it will be loading.
+   */
+  isLoading?: boolean;
+  /**
+   * Company logo that displays above the app name.
+   */
+  logo: ReactElement;
+};
+
+const SideNavHeader = ({ appName, isLoading, logo }: SideNavHeader) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   return (
@@ -65,14 +78,16 @@ const SideNavHeader = ({
           logo
         )}
       </SideNavLogoContainer>
+
       <SideNavHeaderContainer odysseyDesignTokens={odysseyDesignTokens}>
         <Heading6 component="h2">
-          {isLoading ? <Skeleton width="50%" /> : navHeaderText}
+          {isLoading ? <Skeleton width="50%" /> : appName}
         </Heading6>
       </SideNavHeaderContainer>
     </Box>
   );
 };
+
 const MemoizedSideNavHeader = memo(SideNavHeader);
 MemoizedSideNavHeader.displayName = "SideNavHeader";
 

@@ -16,6 +16,10 @@ import type { statusSeverityValues } from "../../Status";
 
 export type SideNavProps = {
   /**
+   * Side Nav header text that is usually reserved to show the App name
+   */
+  appName: string;
+  /**
    * A CSS length string indicating the customizable expanded width of the SideNav container.
    * (it will be smaller if isCollapsible and collapsed)
    */
@@ -28,15 +32,14 @@ export type SideNavProps = {
    *  Determines whether the side nav items use compact layout
    */
   isCompact?: boolean;
+  /**
+   *  Before the side nav has items, it will be in a loading state.
+   */
   isLoading?: boolean;
   /**
    * An optional logo to display in the header. If not provided, will default to the Okta logo
    */
   logo?: ReactElement;
-  /**
-   * Side Nav header text that is usually reserved to show the App name
-   */
-  navHeaderText: string;
   /**
    *  Triggers when the side nav is collapsed
    */
@@ -52,25 +55,37 @@ export type SideNavProps = {
 } & (
   | {
       /**
-       * footerComponent cannot be used if footerItems are defined
+       * An optional logo to display in the header. If not provided, will default to the Okta logo.
        */
-      footerComponent?: never;
+      customCompanyLogo: ReactElement;
       /**
-       * Footer items in the side nav
+       * Use the built-in Okta logo or a custom one.
        */
-      footerItems?: SideNavFooterItem[];
+      hasCustomCompanyLogo: true;
     }
   | {
-      /**
-       * The component to display as the footer; if present the `footerItems` are ignored and not rendered.
-       */
-      footerComponent?: ReactElement;
-      /**
-       * footerItems cannot be used if footerComponent is defined
-       */
-      footerItems?: never;
+      customCompanyLogo?: never;
+      hasCustomCompanyLogo?: false;
     }
 ) &
+  (
+    | {
+        /**
+         * The component to display as the footer; if present the `footerItems` are ignored and not rendered.
+         */
+        footerComponent?: ReactElement;
+        footerItems?: never;
+        hasCustomFooter: true;
+      }
+    | {
+        footerComponent?: never;
+        /**
+         * Footer items in the side nav
+         */
+        footerItems?: SideNavFooterItem[];
+        hasCustomFooter?: false;
+      }
+  ) &
   Pick<HtmlProps, "testId">;
 
 export type SideNavItem = {

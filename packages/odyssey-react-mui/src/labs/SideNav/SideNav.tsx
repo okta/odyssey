@@ -152,8 +152,10 @@ const SideNavHeaderContainer = styled("div", {
   }),
 );
 
-const SideNavListContainer = styled("div")(() => ({
+const SideNavListContainer = styled("ul")(() => ({
   padding: 0,
+  listStyle: "none",
+  listStyleType: "none",
 }));
 
 const SideNavScrollableContainer = styled("div")(() => ({
@@ -245,14 +247,16 @@ const LoadingItem = () => {
 };
 
 const SideNav = ({
+  appName,
+  customCompanyLogo,
   expandedWidth = DEFAULT_SIDE_NAV_WIDTH,
   footerComponent,
   footerItems,
+  hasCustomCompanyLogo,
+  hasCustomFooter,
   isCollapsible,
   isCompact,
   isLoading,
-  logo,
-  navHeaderText,
   onCollapse,
   onExpand,
   sideNavItems,
@@ -450,8 +454,9 @@ const SideNav = ({
             onKeyDown={sideNavExpandKeyHandler}
           />
         )}
+
         <CollapsibleContent
-          aria-label={navHeaderText}
+          aria-label={appName}
           data-se="expanded-region"
           expandedWidth={expandedWidth}
           id="side-nav-expandable"
@@ -463,11 +468,12 @@ const SideNav = ({
             hasContentScrolled={hasContentScrolled}
           >
             <SideNavHeader
+              appName={appName}
               isLoading={isLoading}
-              logo={logo || <OktaLogo />}
-              navHeaderText={navHeaderText}
+              logo={hasCustomCompanyLogo ? customCompanyLogo : <OktaLogo />}
             />
           </SideNavHeaderContainer>
+
           <SideNavScrollableContainer data-se="scrollable-region">
             <SideNavListContainer role="menu" ref={scrollableContentRef}>
               {isLoading
@@ -536,19 +542,21 @@ const SideNav = ({
                   })}
             </SideNavListContainer>
           </SideNavScrollableContainer>
-          {(footerItems || footerComponent) && !isLoading && (
+
+          {!isLoading && (footerItems || hasCustomFooter) && (
             <SideNavFooter
               odysseyDesignTokens={odysseyDesignTokens}
               isContentScrollable={isContentScrollable}
             >
-              {footerComponent}
-              {footerItems && !footerComponent && (
-                <SideNavFooterItemsContainer
-                  odysseyDesignTokens={odysseyDesignTokens}
-                >
-                  <SideNavFooterContent footerItems={footerItems} />
-                </SideNavFooterItemsContainer>
-              )}
+              {hasCustomFooter
+                ? footerComponent
+                : footerItems && (
+                    <SideNavFooterItemsContainer
+                      odysseyDesignTokens={odysseyDesignTokens}
+                    >
+                      <SideNavFooterContent footerItems={footerItems} />
+                    </SideNavFooterItemsContainer>
+                  )}
             </SideNavFooter>
           )}
         </CollapsibleContent>

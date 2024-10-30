@@ -32,7 +32,7 @@ import {
 } from "./SideNavItemContentContext";
 import { ExternalLinkIcon } from "../../icons.generated";
 
-export const StyledSideNavListItem = styled("div", {
+export const StyledSideNavListItem = styled("li", {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" && prop !== "isSelected",
 })<{
@@ -40,9 +40,10 @@ export const StyledSideNavListItem = styled("div", {
   isSelected?: boolean;
   disabled?: boolean;
 }>(({ odysseyDesignTokens, isSelected }) => ({
-  display: "flex",
   alignItems: "center",
   backgroundColor: isSelected ? odysseyDesignTokens.HueNeutral50 : "unset",
+  display: "flex",
+
   "&:last-child": {
     marginBottom: odysseyDesignTokens.Spacing2,
   },

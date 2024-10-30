@@ -15,17 +15,19 @@ import { ErrorBoundary } from "react-error-boundary";
 
 import { bufferLatest } from "./bufferLatest";
 import { createMessageBus } from "./createMessageBus";
-import { UiShell, UiShellProps, type UiShellComponentProps } from "./UiShell";
-import { renderReactInWebComponent } from "../web-component/renderReactInWebComponent";
+import { UiShell, UiShellProps } from "./UiShell";
+import { renderReactInWebComponent } from "../../web-component/renderReactInWebComponent";
+import { type UiShellNavComponentProps } from "./UiShellContent";
 
 export const optionalComponentSlotNames: Record<
   keyof Required<UiShellProps>["optionalComponents"],
   string
 > = {
-  additionalTopNavItems: "additional-top-nav-items",
-  footer: "footer",
-  logo: "logo",
-  searchField: "search-field",
+  banners: "banners",
+  companyLogo: "company-logo",
+  sideNavFooter: "side-nav-footer",
+  topNavLeftSide: "top-nav-left-side",
+  topNavRightSide: "top-nav-right-side",
 };
 
 /**
@@ -59,7 +61,7 @@ export const renderUiShell = ({
     explicitAppRootElement || document.createElement("div");
 
   const { publish: publishPropChanges, subscribe: subscribeToPropChanges } =
-    createMessageBus<SetStateAction<UiShellComponentProps>>();
+    createMessageBus<SetStateAction<UiShellNavComponentProps>>();
 
   const {
     publish: publishSubscriptionCreated,
@@ -89,14 +91,17 @@ export const renderUiShell = ({
   const webComponentChildren =
     Object.values(slottedElements).concat(appRootElement);
 
+  const appComponent = <slot />;
+
   const uiShellElement = renderReactInWebComponent({
-    getReactComponent: (shadowDomElements) => (
-      <ErrorBoundary fallback={<slot />} onError={onError}>
+    getReactComponent: (reactRootElements) => (
+      <ErrorBoundary fallback={appComponent} onError={onError}>
         <UiShell
-          appComponent={<slot />}
-          appRootElement={shadowDomElements.appRootElement}
+          appComponent={appComponent}
+          appRootElement={reactRootElements.appRootElement}
           onError={onError}
           onSubscriptionCreated={publishSubscriptionCreated}
+          // `optionalComponents` doesn't need to be memoized because gets passed in once.
           optionalComponents={Object.fromEntries(
             Object.entries(optionalComponentSlotNames).map(
               ([optionalComponentKey, slotName]) => [
@@ -105,7 +110,7 @@ export const renderUiShell = ({
               ],
             ),
           )}
-          stylesRootElement={shadowDomElements.stylesRootElement}
+          stylesRootElement={reactRootElements.stylesRootElement}
           subscribeToPropChanges={subscribeToPropChanges}
         />
       </ErrorBoundary>
