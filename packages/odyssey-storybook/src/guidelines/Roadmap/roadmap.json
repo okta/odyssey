@@ -126,7 +126,7 @@
     "deliverableTiming": "TBD"
   },
   {
-    "name": "DataView",
+    "name": "DataView - move",
     "type": "Component",
     "status": "In Labs",
     "define": "Complete",
@@ -189,7 +189,7 @@
     "deliverableTiming": "Q2 FY25"
   },
   {
-    "name": "Empty states v2 \n(illustration)",
+    "name": "Empty states with illustration",
     "type": "Component",
     "status": "In progress",
     "define": "Complete",
@@ -306,6 +306,15 @@
     "deliverableTiming": "-"
   },
   {
+    "name": "Policy",
+    "type": "TBD",
+    "status": "In progress",
+    "define": "In progress",
+    "design": "-",
+    "develop": "-",
+    "deliverableTiming": "Q4 FY25"
+  },
+  {
     "name": "Policy Recommender\n(AI Pattern)",
     "type": "Pattern",
     "status": "In progress",
@@ -412,15 +421,6 @@
     "design": "Complete",
     "develop": "In Labs",
     "deliverableTiming": "Q3 FY25"
-  },
-  {
-    "name": "Template: Policy",
-    "type": "Page template",
-    "status": "In progress",
-    "define": "In progress",
-    "design": "-",
-    "develop": "-",
-    "deliverableTiming": "Q4 FY25"
   },
   {
     "name": "Text field",
