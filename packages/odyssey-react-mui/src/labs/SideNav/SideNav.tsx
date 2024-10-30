@@ -37,7 +37,7 @@ import { SideNavFooterContent } from "./SideNavFooterContent";
 import { SideNavItemContentContext } from "./SideNavItemContentContext";
 import { SideNavToggleButton } from "./SideNavToggleButton";
 import { Skeleton } from "@mui/material";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 export const DEFAULT_SIDE_NAV_WIDTH = "300px";
 
@@ -268,6 +268,7 @@ const SideNav = ({
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
   const intersectionObserverRef = useRef<IntersectionObserver | null>(null);
   const odysseyDesignTokens: DesignTokens = useOdysseyDesignTokens();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const updateIsContentScrollable = () => {

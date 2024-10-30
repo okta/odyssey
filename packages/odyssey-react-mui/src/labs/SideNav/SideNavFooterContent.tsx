@@ -15,7 +15,7 @@ import { useOdysseyDesignTokens } from "../../OdysseyDesignTokensContext";
 import type { SideNavFooterItem } from "./types";
 import { Box } from "../../Box";
 import { Link } from "../../Link";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 const SideNavFooterContent = ({
   footerItems,
@@ -23,6 +23,7 @@ const SideNavFooterContent = ({
   footerItems: SideNavFooterItem[];
 }) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const { t } = useTranslation();
 
   const footerContent = useMemo(() => {
     return footerItems?.map((item, index) => (
