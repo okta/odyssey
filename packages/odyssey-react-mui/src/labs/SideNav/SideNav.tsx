@@ -45,13 +45,12 @@ export const DEFAULT_SIDE_NAV_WIDTH = "300px";
 // to align it in the middle of the nav header text
 export const SIDENAV_COLLAPSE_ICON_POSITION = "77px";
 
-const SideNavContainer = styled("div")(() => ({
+const StyledSideNavContainer = styled("div")(() => ({
   display: "flex",
   height: "100%",
-  overflow: "hidden",
 }));
 
-const CollapsibleContent = styled("div", {
+const StyledCollapsibleContent = styled("div", {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" &&
     prop !== "isSideNavCollapsed" &&
@@ -91,21 +90,21 @@ const StyledSideNav = styled("nav", {
     odysseyDesignTokens: DesignTokens;
     isSideNavCollapsed: boolean;
   }) => ({
-    position: "relative",
-    display: "flex",
     backgroundColor: odysseyDesignTokens.HueNeutralWhite,
+    display: "flex",
+    position: "relative",
 
     "&::after": {
-      position: "absolute",
-      top: 0,
-      right: 0,
-      height: "100%",
-      width: odysseyDesignTokens.Spacing2,
       backgroundColor: odysseyDesignTokens.HueNeutral200,
       content: "''",
+      height: "100%",
       opacity: 0,
-      transition: `opacity ${odysseyDesignTokens.TransitionDurationMain}, transform ${odysseyDesignTokens.TransitionDurationMain}`,
+      position: "absolute",
+      right: 0,
+      top: 0,
       transform: `translateX(0)`,
+      transition: `opacity ${odysseyDesignTokens.TransitionDurationMain}, transform ${odysseyDesignTokens.TransitionDurationMain}`,
+      width: odysseyDesignTokens.Spacing2,
     },
 
     "&:has([data-sidenav-toggle='true']:hover), &:has([data-sidenav-toggle='true']:focus)":
@@ -440,7 +439,7 @@ const SideNav = ({
   );
 
   return (
-    <SideNavContainer>
+    <StyledSideNavContainer>
       <StyledSideNav
         aria-label={t("navigation.label")}
         isSideNavCollapsed={isSideNavCollapsed}
@@ -455,7 +454,7 @@ const SideNav = ({
           />
         )}
 
-        <CollapsibleContent
+        <StyledCollapsibleContent
           aria-label={appName}
           data-se="expanded-region"
           expandedWidth={expandedWidth}
@@ -559,9 +558,9 @@ const SideNav = ({
                   )}
             </SideNavFooter>
           )}
-        </CollapsibleContent>
+        </StyledCollapsibleContent>
       </StyledSideNav>
-    </SideNavContainer>
+    </StyledSideNavContainer>
   );
 };
 

@@ -13,12 +13,14 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import {
+  PageTemplate,
   UiShell,
   UserProfile,
   type UiShellNavComponentProps,
   type UiShellProps,
 } from "@okta/odyssey-react-mui/labs";
 import {
+  Banner,
   Button,
   OdysseyProvider,
   Paragraph,
@@ -389,30 +391,38 @@ export const WithOdysseyAppContent: StoryObj<UiShellProps> = {
   args: {
     appComponent: (
       <OdysseyProvider>
-        <Surface>
-          <div style={{ marginBlockEnd: `${16 / 14}rem` }}>
-            <Paragraph>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
-              lacinia leo quis sodales scelerisque. Maecenas tempor eget nunc
-              sit amet ultrices. Maecenas et varius ante. Nulla eu quam sit amet
-              orci fermentum dictum sit amet scelerisque libero. Proin luctus
-              semper elit, ut pretium massa tristique a. Mauris hendrerit ex eu
-              commodo egestas. Etiam a lacus aliquet, convallis metus et,
-              sollicitudin odio. Fusce vehicula purus sed orci elementum, ut
-              cursus diam sollicitudin. Pellentesque pulvinar nibh turpis, eu
-              finibus dolor egestas eget. Duis tellus mauris, pulvinar sit amet
-              ante a, aliquet laoreet sapien. Ut quis tempus massa. Fusce
-              fringilla mattis lacinia. Cras at pharetra quam, eu ultrices
-              ipsum.
-            </Paragraph>
-          </div>
-          <div>
-            <Button label="Odyssey Button" variant="primary" />
-          </div>
-        </Surface>
+        <PageTemplate
+          description="This is my app."
+          title="Access Certification"
+        >
+          <Surface>
+            <div style={{ marginBlockEnd: `${16 / 14}rem` }}>
+              <Paragraph>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
+                lacinia leo quis sodales scelerisque. Maecenas tempor eget nunc
+                sit amet ultrices. Maecenas et varius ante. Nulla eu quam sit
+                amet orci fermentum dictum sit amet scelerisque libero. Proin
+                luctus semper elit, ut pretium massa tristique a. Mauris
+                hendrerit ex eu commodo egestas. Etiam a lacus aliquet,
+                convallis metus et, sollicitudin odio. Fusce vehicula purus sed
+                orci elementum, ut cursus diam sollicitudin. Pellentesque
+                pulvinar nibh turpis, eu finibus dolor egestas eget. Duis tellus
+                mauris, pulvinar sit amet ante a, aliquet laoreet sapien. Ut
+                quis tempus massa. Fusce fringilla mattis lacinia. Cras at
+                pharetra quam, eu ultrices ipsum.
+              </Paragraph>
+            </div>
+            <div>
+              <Button label="I understand" variant="primary" />
+            </div>
+          </Surface>
+        </PageTemplate>
       </OdysseyProvider>
     ),
-    optionalComponents: sharedOptionalComponents,
+    optionalComponents: {
+      ...sharedOptionalComponents,
+      banners: <Banner severity="success" text="This is an app!" />,
+    },
     subscribeToPropChanges: (subscriber) => {
       subscriber({
         sideNavProps: sharedSideNavProps,
