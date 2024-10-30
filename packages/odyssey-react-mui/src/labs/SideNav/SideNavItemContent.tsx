@@ -32,7 +32,7 @@ import {
 } from "./SideNavItemContentContext";
 import { ExternalLinkIcon } from "../../icons.generated";
 
-export const SideNavListItemContainer = styled("li", {
+export const StyledSideNavListItem = styled("li", {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" && prop !== "isSelected",
 })<{
@@ -43,7 +43,6 @@ export const SideNavListItemContainer = styled("li", {
   display: "flex",
   alignItems: "center",
   backgroundColor: isSelected ? odysseyDesignTokens.HueNeutral50 : "unset",
-  margin: `${odysseyDesignTokens.Spacing1} 0`,
   "&:last-child": {
     marginBottom: odysseyDesignTokens.Spacing2,
   },
@@ -81,9 +80,13 @@ const GetNavItemContentStyles = ({
     minHeight: contextValue.isCompact
       ? odysseyDesignTokens.Spacing6
       : odysseyDesignTokens.Spacing7,
-    padding: contextValue.isCompact
-      ? `${odysseyDesignTokens.Spacing0} ${odysseyDesignTokens.Spacing4} ${odysseyDesignTokens.Spacing0} calc(${odysseyDesignTokens.Spacing4} * ${contextValue.depth})`
-      : `${odysseyDesignTokens.Spacing2} ${odysseyDesignTokens.Spacing4} ${odysseyDesignTokens.Spacing2} calc(${odysseyDesignTokens.Spacing4} * ${contextValue.depth})`,
+    paddingBlock: odysseyDesignTokens.Spacing2,
+    paddingInline: odysseyDesignTokens.Spacing5,
+
+    ...(contextValue.isCompact && {
+      paddingBlock: odysseyDesignTokens.Spacing1,
+    }),
+
     "&:focus-visible": {
       borderRadius: 0,
       outlineColor: odysseyDesignTokens.FocusOutlineColorPrimary,
@@ -186,7 +189,7 @@ const SideNavItemContent = ({
   );
 
   return (
-    <SideNavListItemContainer
+    <StyledSideNavListItem
       ref={localScrollRef}
       id={id}
       key={id}
@@ -255,7 +258,7 @@ const SideNavItemContent = ({
           </NavItemLinkContainer>
         )
       }
-    </SideNavListItemContainer>
+    </StyledSideNavListItem>
   );
 };
 const MemoizedSideNavItemContent = memo(SideNavItemContent);

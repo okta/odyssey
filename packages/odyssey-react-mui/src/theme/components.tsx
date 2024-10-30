@@ -138,7 +138,7 @@ export const components = ({
             width: "1em",
           },
           "&.nav-accordion-summary": {
-            padding: `${odysseyTokens.Spacing2} ${odysseyTokens.Spacing4}`,
+            padding: `${odysseyTokens.Spacing2} ${odysseyTokens.Spacing5}`,
             ".MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
               transform: "rotate(-90deg) !important",
             },

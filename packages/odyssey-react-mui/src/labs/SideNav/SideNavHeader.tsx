@@ -11,7 +11,7 @@
  */
 
 import styled from "@emotion/styled";
-import { memo, ReactNode, useMemo } from "react";
+import { memo, ReactNode } from "react";
 import {
   type DesignTokens,
   useOdysseyDesignTokens,
@@ -19,18 +19,14 @@ import {
 import { Box } from "../../Box";
 import { Heading6 } from "../../Typography";
 import type { SideNavProps } from "./types";
-import { TOP_NAV_HEIGHT_TOKEN } from "../TopNav";
+// import { TOP_NAV_HEIGHT_TOKEN } from "../TopNav";
 import { Skeleton } from "@mui/material";
 
 const SideNavLogoContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
-  height: odysseyDesignTokens[TOP_NAV_HEIGHT_TOKEN],
-  padding: odysseyDesignTokens.Spacing3,
-  borderColor: odysseyDesignTokens.HueNeutral50,
-  borderStyle: odysseyDesignTokens.BorderStyleMain,
-  borderWidth: 0,
-  borderBottomWidth: odysseyDesignTokens.BorderWidthMain,
+  paddingInline: odysseyDesignTokens.Spacing5,
+  paddingBlock: odysseyDesignTokens.Spacing4,
 }));
 
 const SideNavHeaderContainer = styled("div", {
@@ -39,10 +35,12 @@ const SideNavHeaderContainer = styled("div", {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  paddingLeft: odysseyDesignTokens.Spacing4,
-  paddingRight: odysseyDesignTokens.Spacing4,
-  paddingTop: odysseyDesignTokens.Spacing3,
-  paddingBottom: odysseyDesignTokens.Spacing3,
+  paddingInline: odysseyDesignTokens.Spacing5,
+  paddingBlock: odysseyDesignTokens.Spacing4,
+
+  h2: {
+    margin: 0,
+  },
 }));
 
 const SideNavHeader = ({
@@ -51,14 +49,6 @@ const SideNavHeader = ({
   navHeaderText,
 }: Pick<SideNavProps, "isLoading" | "logo" | "navHeaderText">): ReactNode => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
-
-  const sideNavHeaderStyles = useMemo(
-    () => ({
-      marginTop: odysseyDesignTokens.Spacing2,
-      width: "100%",
-    }),
-    [odysseyDesignTokens],
-  );
 
   return (
     <Box
@@ -76,11 +66,9 @@ const SideNavHeader = ({
         )}
       </SideNavLogoContainer>
       <SideNavHeaderContainer odysseyDesignTokens={odysseyDesignTokens}>
-        <Box sx={sideNavHeaderStyles}>
-          <Heading6>
-            {isLoading ? <Skeleton width="50%" /> : navHeaderText}
-          </Heading6>
-        </Box>
+        <Heading6 component="h2">
+          {isLoading ? <Skeleton width="50%" /> : navHeaderText}
+        </Heading6>
       </SideNavHeaderContainer>
     </Box>
   );

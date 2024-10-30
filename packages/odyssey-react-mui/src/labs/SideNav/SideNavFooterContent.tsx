@@ -11,11 +11,30 @@
  */
 
 import { memo, useMemo } from "react";
-import { useOdysseyDesignTokens } from "../../OdysseyDesignTokensContext";
+import styled from "@emotion/styled";
+
+import {
+  useOdysseyDesignTokens,
+  DesignTokens,
+} from "../../OdysseyDesignTokensContext";
 import type { SideNavFooterItem } from "./types";
 import { Box } from "../../Box";
 import { Link } from "../../Link";
 import { useTranslation } from "react-i18next";
+
+const StyledFooterNav = styled("nav")({
+  display: "flex",
+});
+
+const StyledFooterItemContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  "& + &": {
+    marginInlineStart: odysseyDesignTokens.Spacing4,
+    paddingInlineStart: odysseyDesignTokens.Spacing4,
+    borderInlineStart: `1px solid ${odysseyDesignTokens.HueNeutral300}`,
+  },
+}));
 
 const SideNavFooterContent = ({
   footerItems,
@@ -25,43 +44,26 @@ const SideNavFooterContent = ({
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
 
-  const footerContent = useMemo(() => {
-    return footerItems?.map((item, index) => (
-      <Box
-        component="nav"
-        role="menubar"
-        aria-label={t("navigation.footer")}
-        key={`${item.id}-wrapper`}
-        sx={{
-          display: "flex",
-        }}
+  const memoizedFooterContent = useMemo(() => {
+    return footerItems?.map((item) => (
+      <StyledFooterItemContainer
+        key={item.id}
+        odysseyDesignTokens={odysseyDesignTokens}
       >
         {item.href ? (
-          <Link key={item.id} href={item.href}>
-            {item.label}
-          </Link>
+          <Link href={item.href}>{item.label}</Link>
         ) : (
-          <Box component="span" key={item.id}>
-            {item.label}
-          </Box>
+          <Box component="span">{item.label}</Box>
         )}
-        {index < footerItems.length - 1 && (
-          <Box
-            key={`${item.id}-separator`}
-            sx={{
-              marginLeft: odysseyDesignTokens.Spacing4,
-              marginRight: odysseyDesignTokens.Spacing4,
-              color: odysseyDesignTokens.HueNeutral300,
-            }}
-          >
-            |
-          </Box>
-        )}
-      </Box>
+      </StyledFooterItemContainer>
     ));
   }, [footerItems, odysseyDesignTokens]);
 
-  return footerContent;
+  return (
+    <StyledFooterNav role="menubar" aria-label={t("navigation.footer")}>
+      {memoizedFooterContent}
+    </StyledFooterNav>
+  );
 };
 const MemoizedSideNavFooterContent = memo(SideNavFooterContent);
 MemoizedSideNavFooterContent.displayName = "SideNavFooterContent";

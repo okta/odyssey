@@ -31,7 +31,7 @@ import { OktaLogo } from "./OktaLogo";
 import { SideNavHeader } from "./SideNavHeader";
 import {
   SideNavItemContent,
-  SideNavListItemContainer,
+  StyledSideNavListItem,
 } from "./SideNavItemContent";
 import { SideNavFooterContent } from "./SideNavFooterContent";
 import { SideNavItemContentContext } from "./SideNavItemContentContext";
@@ -170,9 +170,8 @@ const SectionHeader = styled("li", {
   fontSize: odysseyDesignTokens.TypographySizeOverline,
   fontWeight: odysseyDesignTokens.TypographyWeightHeadingBold,
   color: odysseyDesignTokens.HueNeutral600,
-  paddingTop: odysseyDesignTokens.Spacing3,
-  paddingBottom: odysseyDesignTokens.Spacing3,
-  paddingLeft: odysseyDesignTokens.Spacing4,
+  paddingBlock: odysseyDesignTokens.Spacing3,
+  paddingInline: odysseyDesignTokens.Spacing5,
   textTransform: "uppercase",
 }));
 
@@ -189,7 +188,7 @@ const SideNavFooter = styled("div", {
   }) => ({
     position: "sticky",
     bottom: 0,
-    paddingTop: odysseyDesignTokens.Spacing2,
+    paddingBlockStart: odysseyDesignTokens.Spacing2,
     transitionProperty: "box-shadow",
     transitionDuration: odysseyDesignTokens.TransitionDurationMain,
     transitionTiming: odysseyDesignTokens.TransitionTimingMain,
@@ -203,8 +202,7 @@ const SideNavFooter = styled("div", {
 const SideNavFooterItemsContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
-  paddingTop: odysseyDesignTokens.Spacing2,
-  paddingBottom: odysseyDesignTokens.Spacing2,
+  paddingBlock: odysseyDesignTokens.Spacing2,
   display: "flex",
   justifyContent: "center",
   flexWrap: "wrap",
@@ -228,7 +226,7 @@ const LoadingItemContainer = styled("div", {
   display: "flex",
   gap: odysseyDesignTokens.Spacing2,
   paddingBlock: odysseyDesignTokens.Spacing2,
-  paddingInline: odysseyDesignTokens.Spacing4,
+  paddingInline: odysseyDesignTokens.Spacing5,
 }));
 
 const getHasScrollableContent = (scrollableContainer: HTMLElement) =>
@@ -501,7 +499,7 @@ const SideNav = ({
                       );
                     } else if (children) {
                       return (
-                        <SideNavListItemContainer
+                        <StyledSideNavListItem
                           id={id}
                           key={id}
                           odysseyDesignTokens={odysseyDesignTokens}
@@ -520,7 +518,7 @@ const SideNav = ({
                               {children}
                             </SideNavListContainer>
                           </NavAccordion>
-                        </SideNavListItemContainer>
+                        </StyledSideNavListItem>
                       );
                     } else {
                       return (
