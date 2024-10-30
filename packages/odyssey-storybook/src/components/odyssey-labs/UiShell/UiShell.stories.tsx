@@ -159,20 +159,22 @@ const sharedTopNavProps: UiShellNavComponentProps["topNavProps"] = {
   // ],
 };
 
+const sharedOptionalComponents: UiShellProps["optionalComponents"] = {
+  topNavLeftSide: <SearchField label="Search" placeholder="Search..." />,
+  topNavRightSide: (
+    <UserProfile
+      profileIcon={<UserIcon />}
+      orgName="ORG123"
+      userName="test.user@test.com"
+    />
+  ),
+};
+
 export const Default: StoryObj<UiShellProps> = {};
 
 export const TopNavOnly: StoryObj<UiShellProps> = {
   args: {
-    optionalComponents: {
-      topNavLeftSide: <SearchField label="Search" placeholder="Search..." />,
-      topNavRightSide: (
-        <UserProfile
-          profileIcon={<UserIcon />}
-          orgName="ORG123"
-          userName="test.user@test.com"
-        />
-      ),
-    },
+    optionalComponents: sharedOptionalComponents,
     subscribeToPropChanges: (subscriber) => {
       subscriber({
         topNavProps: sharedTopNavProps,
@@ -185,9 +187,7 @@ export const TopNavOnly: StoryObj<UiShellProps> = {
 
 export const WithoutAppContent: StoryObj<UiShellProps> = {
   args: {
-    optionalComponents: {
-      topNavRightSide: <SearchField label="Search" placeholder="Search..." />,
-    },
+    optionalComponents: sharedOptionalComponents,
     subscribeToPropChanges: (subscriber) => {
       subscriber({
         sideNavProps: sharedSideNavProps,
@@ -351,7 +351,11 @@ export const WithAppContent: StoryObj<UiShellProps> = {
       </div>
     ),
     optionalComponents: {
-      topNavLeftSide: <SearchField label="Search" placeholder="Search..." />,
+      topNavLeftSide: (
+        <div>
+          <SearchField label="Search" placeholder="Search..." />
+        </div>
+      ),
       topNavRightSide: (
         <UserProfile
           profileIcon={<UserIcon />}
@@ -391,16 +395,7 @@ export const WithOdysseyAppContent: StoryObj<UiShellProps> = {
         <Button label="Odyssey Button" variant="primary" />
       </OdysseyProvider>
     ),
-    optionalComponents: {
-      topNavLeftSide: <SearchField label="Search" placeholder="Search..." />,
-      topNavRightSide: (
-        <UserProfile
-          profileIcon={<UserIcon />}
-          orgName="ORG123"
-          userName="test.user@test.com"
-        />
-      ),
-    },
+    optionalComponents: sharedOptionalComponents,
     subscribeToPropChanges: (subscriber) => {
       subscriber({
         sideNavProps: sharedSideNavProps,

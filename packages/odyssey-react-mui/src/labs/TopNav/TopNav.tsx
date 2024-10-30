@@ -40,8 +40,10 @@ const StyledTopNavContainer = styled("div", {
   alignItems: "center",
   backgroundColor: odysseyDesignTokens.HueNeutral50,
   display: "flex",
-  height: TOP_NAV_HEIGHT,
+  height: "100%",
   justifyContent: "space-between",
+  maxHeight: TOP_NAV_HEIGHT,
+  minHeight: TOP_NAV_HEIGHT,
   paddingBlock: odysseyDesignTokens.Spacing2,
   paddingInline: odysseyDesignTokens.Spacing6,
 }));
