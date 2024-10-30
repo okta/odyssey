@@ -171,15 +171,17 @@ describe("renderUiShell", () => {
       .spyOn(console, "error")
       .mockImplementation(consoleError);
 
-    act(() => {
+    await act(() => {
       const { setComponentProps } = renderUiShell({
         onError,
         uiShellRootElement: rootElement,
       });
 
       setComponentProps(
-        // @ts-expect-error We're purposefully testing an error state, so we need to send something that will cause an error.
-        Symbol(),
+        // We're purposefully testing an error state, so we need to send something that will cause an error.
+        () => {
+          throw new Error("TEST BREAK!");
+        },
       );
     });
 

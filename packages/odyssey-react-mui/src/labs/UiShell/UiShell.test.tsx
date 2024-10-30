@@ -125,13 +125,9 @@ describe("UiShell", () => {
         ...defaultComponentProps,
         sideNavProps: {
           appName: "",
-          sideNavItems: [
-            {
-              id: "AddNewFolder",
-              label: sideNavItemText,
-              onClick: () => {},
-            },
-          ],
+          hasCustomCompanyLogo: true,
+          hasCustomFooter: true,
+          sideNavItems: [],
         },
       });
 
