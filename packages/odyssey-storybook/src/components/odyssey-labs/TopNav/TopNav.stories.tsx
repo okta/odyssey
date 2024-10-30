@@ -85,8 +85,8 @@ const storybookMeta: Meta<TopNavProps> = {
 
 export default storybookMeta;
 
-export const Default: StoryObj<TopNavProps> = {
-  render: (props: TopNavProps) => {
+export const Default: StoryObj<TopNavLinksList> = {
+  render: (props: TopNavLinksList) => {
     return <TopNav {...props} />;
   },
 };

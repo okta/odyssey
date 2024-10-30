@@ -17,7 +17,7 @@ import type { HtmlProps } from "../../HtmlProps";
 import { TopNavListItem, TopNavListItemProps } from "./TopNavListItem";
 import { UserProfileProps } from "./UserProfile";
 
-export type TopNavProps = {
+export type TopNavLinksListProps = {
   /**
    * Pass in an additional component like `Button` that will be displayed after the nav link items
    */
@@ -52,7 +52,7 @@ const StyledTopNavList = styled("ul")(() => ({
   padding: 0,
 }));
 
-const TopNavLinksList = ({ topNavLinkItems }: TopNavProps) => (
+const TopNavLinksList = ({ topNavLinkItems }: TopNavLinksListProps) => (
   <nav>
     <StyledTopNavList>
       {topNavLinkItems.map((item) => (

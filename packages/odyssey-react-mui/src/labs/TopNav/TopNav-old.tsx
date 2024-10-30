@@ -21,7 +21,7 @@ import {
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
 import { TopNavLinksList } from "./TopNavLinksList";
-import { TopNavListItemProps } from "./TopNavListItem";
+import { type TopNavListItemProps } from "./TopNavListItem";
 import { Link } from "../../Link";
 
 export const TOP_NAV_HEIGHT = `${64 / 14}rem`;
