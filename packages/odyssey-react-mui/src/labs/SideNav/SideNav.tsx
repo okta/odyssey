@@ -152,10 +152,8 @@ const SideNavHeaderContainer = styled("div", {
   }),
 );
 
-const SideNavListContainer = styled("ul")(() => ({
+const SideNavListContainer = styled("div")(() => ({
   padding: 0,
-  listStyle: "none",
-  listStyleType: "none",
 }));
 
 const SideNavScrollableContainer = styled("div")(() => ({
@@ -163,7 +161,7 @@ const SideNavScrollableContainer = styled("div")(() => ({
   overflowY: "auto",
 }));
 
-const SectionHeader = styled("li", {
+const SectionHeader = styled("h3", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
   fontFamily: odysseyDesignTokens.TypographyFamilyHeading,
@@ -471,7 +469,7 @@ const SideNav = ({
             />
           </SideNavHeaderContainer>
           <SideNavScrollableContainer data-se="scrollable-region">
-            <SideNavListContainer ref={scrollableContentRef}>
+            <SideNavListContainer role="menu" ref={scrollableContentRef}>
               {isLoading
                 ? [...Array(6)].map((_, index) => <LoadingItem key={index} />)
                 : processedSideNavItems?.map((item) => {
@@ -492,7 +490,6 @@ const SideNav = ({
                           id={id}
                           key={id}
                           odysseyDesignTokens={odysseyDesignTokens}
-                          role="heading"
                         >
                           {label}
                         </SectionHeader>
@@ -514,7 +511,7 @@ const SideNav = ({
                             startIcon={startIcon}
                             isDisabled={isDisabled}
                           >
-                            <SideNavListContainer id={`${id}-list`}>
+                            <SideNavListContainer id={`${id}-list`} role="menu">
                               {children}
                             </SideNavListContainer>
                           </NavAccordion>

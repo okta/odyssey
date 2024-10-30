@@ -32,7 +32,7 @@ import {
 } from "./SideNavItemContentContext";
 import { ExternalLinkIcon } from "../../icons.generated";
 
-export const StyledSideNavListItem = styled("li", {
+export const StyledSideNavListItem = styled("div", {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" && prop !== "isSelected",
 })<{
@@ -224,7 +224,6 @@ const SideNavItemContent = ({
             odysseyDesignTokens={odysseyDesignTokens}
             contextValue={contextValue}
             isDisabled={isDisabled}
-            role="button"
             tabIndex={0}
             onClick={onClick}
             onKeyDown={sideNavItemContentKeyHandler}

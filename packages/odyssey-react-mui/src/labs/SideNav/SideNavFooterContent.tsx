@@ -49,6 +49,7 @@ const SideNavFooterContent = ({
       <StyledFooterItemContainer
         key={item.id}
         odysseyDesignTokens={odysseyDesignTokens}
+        role="menuitem"
       >
         {item.href ? (
           <Link href={item.href}>{item.label}</Link>
