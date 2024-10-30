@@ -17,9 +17,11 @@ import {
   memo,
   useCallback,
   useImperativeHandle,
+  useMemo,
   useRef,
 } from "react";
 import styled from "@emotion/styled";
+import { useTranslation } from "react-i18next";
 
 import { FocusHandle } from "../../inputUtils";
 import { MuiPropsContext, MuiPropsContextType } from "../../MuiPropsContext";
@@ -165,6 +167,7 @@ const SideNavToggleButton = ({
   tabIndex,
 }: SideNavToggleButtonProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const { t } = useTranslation();
 
   const localButtonRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
 
@@ -178,6 +181,14 @@ const SideNavToggleButton = ({
     [],
   );
 
+  const toggleLabel = useMemo(
+    () =>
+      isSideNavCollapsed
+        ? t("sidenav.toggle.expand")
+        : t("sidenav.toggle.collapse"),
+    [isSideNavCollapsed, t],
+  );
+
   const renderButton = useCallback(
     (muiProps: MuiPropsContextType) => {
       return (
@@ -185,11 +196,7 @@ const SideNavToggleButton = ({
           {...muiProps}
           aria-controls={ariaControls}
           aria-expanded={!isSideNavCollapsed}
-          aria-label={
-            isSideNavCollapsed
-              ? "expand side navigation"
-              : "collapse side navigation"
-          }
+          aria-label={toggleLabel}
           data-sidenav-toggle={true}
           id={id}
           isSideNavCollapsed={isSideNavCollapsed}
@@ -219,19 +226,12 @@ const SideNavToggleButton = ({
       odysseyDesignTokens,
       onClick,
       tabIndex,
+      toggleLabel,
     ],
   );
 
   return (
-    <Tooltip
-      ariaType="description"
-      placement="right"
-      text={
-        isSideNavCollapsed
-          ? "expand side navigation"
-          : "collapse side navigation"
-      }
-    >
+    <Tooltip ariaType="description" placement="right" text={toggleLabel}>
       <MuiPropsContext.Consumer>{renderButton}</MuiPropsContext.Consumer>
     </Tooltip>
   );
