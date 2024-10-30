@@ -493,6 +493,7 @@ const SideNav = ({
                           id={id}
                           key={id}
                           odysseyDesignTokens={odysseyDesignTokens}
+                          role="heading"
                         >
                           {label}
                         </SectionHeader>
