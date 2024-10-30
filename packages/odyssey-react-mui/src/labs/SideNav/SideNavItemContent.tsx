@@ -127,6 +127,7 @@ const NavItemLinkContainer = styled(NavItemLink, {
 })(GetNavItemContentStyles);
 
 const SideNavItemContent = ({
+  count,
   id,
   label,
   href,
@@ -141,6 +142,7 @@ const SideNavItemContent = ({
   scrollRef,
 }: Pick<
   SideNavItem,
+  | "count"
   | "id"
   | "label"
   | "href"
@@ -209,6 +211,7 @@ const SideNavItemContent = ({
             isDisabled={isDisabled}
           >
             <SideNavItemLinkContent
+              count={count}
               label={label}
               startIcon={startIcon}
               endIcon={endIcon}
@@ -227,6 +230,7 @@ const SideNavItemContent = ({
             onKeyDown={sideNavItemContentKeyHandler}
           >
             <SideNavItemLinkContent
+              count={count}
               label={label}
               startIcon={startIcon}
               endIcon={endIcon}
@@ -244,6 +248,7 @@ const SideNavItemContent = ({
             onClick={onClick}
           >
             <SideNavItemLinkContent
+              count={count}
               label={label}
               startIcon={startIcon}
               endIcon={endIcon}

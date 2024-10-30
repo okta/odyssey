@@ -19,6 +19,7 @@ import {
 import { Box } from "../../Box";
 import { Status } from "../../Status";
 import type { SideNavItem } from "./types";
+import { Badge } from "../../Badge";
 
 const SideNavItemLabelContainer = styled("div", {
   shouldForwardProp: (prop) =>
@@ -37,6 +38,7 @@ const SideNavItemLabelContainer = styled("div", {
 }));
 
 const SideNavItemLinkContent = ({
+  count,
   label,
   startIcon,
   endIcon,
@@ -44,12 +46,15 @@ const SideNavItemLinkContent = ({
   statusLabel,
 }: Pick<
   SideNavItem,
-  "label" | "startIcon" | "endIcon" | "severity" | "statusLabel"
+  "count" | "label" | "startIcon" | "endIcon" | "severity" | "statusLabel"
 >): ReactNode => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const sideNavItemContentStyles = useMemo(
     () => ({
+      alignItems: "center",
+      display: "flex",
+      gap: odysseyDesignTokens.Spacing1,
       marginLeft: odysseyDesignTokens.Spacing2,
     }),
     [odysseyDesignTokens],
@@ -64,9 +69,12 @@ const SideNavItemLinkContent = ({
       >
         {Boolean(startIcon)}
         {label}
-        {severity && (
+        {(severity || count) && (
           <Box sx={sideNavItemContentStyles}>
-            <Status severity={severity} label={statusLabel || ""} />
+            {count && <Badge badgeContent={count} />}
+            {severity && (
+              <Status severity={severity} label={statusLabel || ""} />
+            )}
           </Box>
         )}
       </SideNavItemLabelContainer>

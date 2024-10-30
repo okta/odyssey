@@ -75,6 +75,10 @@ export type SideNavProps = {
 
 export type SideNavItem = {
   /**
+   * The number to display as a count alongside the nav item
+   */
+  count?: number;
+  /**
    * The icon element to display at the end of the Nav Item
    */
   endIcon?: ReactElement;

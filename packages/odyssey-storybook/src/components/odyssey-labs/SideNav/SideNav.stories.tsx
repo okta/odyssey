@@ -26,6 +26,7 @@ import {
   DirectoryIcon,
   ServerIcon,
   FolderIcon,
+  NotificationIcon,
 } from "@okta/odyssey-react-mui/icons";
 import { expect } from "@storybook/jest";
 import {
@@ -265,6 +266,13 @@ const storybookMeta: Meta<SideNavProps> = {
         href: "/",
         label: "System Configuration",
         startIcon: <FolderIcon />,
+      },
+      {
+        id: "item6",
+        href: "/",
+        label: "Notifications",
+        startIcon: <NotificationIcon />,
+        count: 1,
       },
     ],
     footerItems: [
