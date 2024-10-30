@@ -15,23 +15,19 @@ import { ErrorBoundary } from "react-error-boundary";
 
 import { bufferLatest } from "./bufferLatest";
 import { createMessageBus } from "./createMessageBus";
-import {
-  UiShell,
-  UiShellProps,
-  type UiShellNavComponentProps,
-} from "./UiShell";
+import { UiShell, UiShellProps } from "./UiShell";
 import { renderReactInWebComponent } from "../../web-component/renderReactInWebComponent";
+import { type UiShellNavComponentProps } from "./UiShellContent";
 
 export const optionalComponentSlotNames: Record<
   keyof Required<UiShellProps>["optionalComponents"],
   string
 > = {
-  additionalTopNavItems: "additional-top-nav-items",
   banners: "banners",
-  footer: "footer",
-  logo: "logo",
-  searchField: "search-field",
-  userProfile: "user-profile",
+  companyLogo: "company-logo",
+  sideNavFooter: "side-nav-footer",
+  topNavLeftSide: "top-nav-left-side",
+  topNavRightSide: "top-nav-right-side",
 };
 
 /**
@@ -95,11 +91,13 @@ export const renderUiShell = ({
   const webComponentChildren =
     Object.values(slottedElements).concat(appRootElement);
 
+  const appComponent = <slot />;
+
   const uiShellElement = renderReactInWebComponent({
     getReactComponent: (reactRootElements) => (
-      <ErrorBoundary fallback={<slot />} onError={onError}>
+      <ErrorBoundary fallback={appComponent} onError={onError}>
         <UiShell
-          appComponent={<slot />}
+          appComponent={appComponent}
           appRootElement={reactRootElements.appRootElement}
           onError={onError}
           onSubscriptionCreated={publishSubscriptionCreated}

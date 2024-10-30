@@ -98,7 +98,7 @@ const storybookMeta: Meta<UiShellProps> = {
 export default storybookMeta;
 
 const sharedSideNavProps: UiShellNavComponentProps["sideNavProps"] = {
-  navHeaderText: "Enduser",
+  appName: "Enduser",
   sideNavItems: [
     {
       id: "AddNewFolder",
@@ -134,31 +134,29 @@ const sharedSideNavProps: UiShellNavComponentProps["sideNavProps"] = {
 };
 
 const sharedTopNavProps: UiShellNavComponentProps["topNavProps"] = {
-  helpPageHref: "#none",
-  settingsPageHref: "#none",
-  topNavLinkItems: [
-    {
-      id: "link-01",
-      label: "Home",
-      href: "#none",
-    },
-    {
-      id: "link-02",
-      label: "Flows",
-      href: "#none",
-    },
-    {
-      id: "link-03",
-      label: "Connections",
-      href: "#none",
-      isDisabled: true,
-    },
-    {
-      id: "link-04",
-      label: "Template",
-      onClick: () => {},
-    },
-  ],
+  // topNavLinkItems: [
+  //   {
+  //     id: "link-01",
+  //     label: "Home",
+  //     href: "#none",
+  //   },
+  //   {
+  //     id: "link-02",
+  //     label: "Flows",
+  //     href: "#none",
+  //   },
+  //   {
+  //     id: "link-03",
+  //     label: "Connections",
+  //     href: "#none",
+  //     isDisabled: true,
+  //   },
+  //   {
+  //     id: "link-04",
+  //     label: "Template",
+  //     onClick: () => {},
+  //   },
+  // ],
 };
 
 export const Default: StoryObj<UiShellProps> = {};
@@ -166,8 +164,8 @@ export const Default: StoryObj<UiShellProps> = {};
 export const TopNavOnly: StoryObj<UiShellProps> = {
   args: {
     optionalComponents: {
-      searchField: <SearchField label="Search" placeholder="Search..." />,
-      userProfile: (
+      topNavLeftSide: <SearchField label="Search" placeholder="Search..." />,
+      topNavRightSide: (
         <UserProfile
           profileIcon={<UserIcon />}
           orgName="ORG123"
@@ -188,7 +186,7 @@ export const TopNavOnly: StoryObj<UiShellProps> = {
 export const WithoutAppContent: StoryObj<UiShellProps> = {
   args: {
     optionalComponents: {
-      searchField: <SearchField label="Search" placeholder="Search..." />,
+      topNavRightSide: <SearchField label="Search" placeholder="Search..." />,
     },
     subscribeToPropChanges: (subscriber) => {
       subscriber({
@@ -353,8 +351,8 @@ export const WithAppContent: StoryObj<UiShellProps> = {
       </div>
     ),
     optionalComponents: {
-      searchField: <SearchField label="Search" placeholder="Search..." />,
-      userProfile: (
+      topNavLeftSide: <SearchField label="Search" placeholder="Search..." />,
+      topNavRightSide: (
         <UserProfile
           profileIcon={<UserIcon />}
           orgName="ORG123"
@@ -394,8 +392,8 @@ export const WithOdysseyAppContent: StoryObj<UiShellProps> = {
       </OdysseyProvider>
     ),
     optionalComponents: {
-      searchField: <SearchField label="Search" placeholder="Search..." />,
-      userProfile: (
+      topNavLeftSide: <SearchField label="Search" placeholder="Search..." />,
+      topNavRightSide: (
         <UserProfile
           profileIcon={<UserIcon />}
           orgName="ORG123"

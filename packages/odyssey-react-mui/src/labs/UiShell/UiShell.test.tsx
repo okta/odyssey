@@ -26,10 +26,10 @@ describe("UiShell", () => {
         appRootElement={appRootElement}
         onSubscriptionCreated={() => {}}
         optionalComponents={{
-          additionalTopNavItems: <div />,
-          footer: <div />,
-          logo: <div />,
-          searchField: (
+          topNavLeftSide: <div />,
+          sideNavFooter: <div />,
+          companyLogo: <div />,
+          topNavRightSide: (
             <Dialog
               children={undefined}
               title="Hello World!"
@@ -84,10 +84,10 @@ describe("UiShell", () => {
     expect(within(container).getByTestId(testId)).toBeInTheDocument();
   });
 
-  test("renders `componentSlots`", async () => {
+  test("renders always-available `componentSlots`", async () => {
     const optionalComponentTestIds: Array<
       keyof Required<UiShellProps>["optionalComponents"]
-    > = ["additionalTopNavItems", "footer", "logo", "searchField"];
+    > = ["banners", "topNavLeftSide", "topNavRightSide"];
 
     const { container } = render(
       <UiShell
@@ -111,6 +111,56 @@ describe("UiShell", () => {
       expect(within(container).getByTestId(testId)).toBeInTheDocument();
     });
   });
+
+  test("renders optionally-available `componentSlots`", async () => {
+    const optionalComponentTestIds: Array<
+      keyof Required<UiShellProps>["optionalComponents"]
+    > = ["companyLogo", "sideNavFooter"];
+
+    // This is the subscription we give the component, and then once subscribed, we're going to immediately call it with new props.
+    const subscribeToPropChanges: UiShellProps["subscribeToPropChanges"] = (
+      subscriber,
+    ) => {
+      subscriber({
+        ...defaultComponentProps,
+        sideNavProps: {
+          appName: "",
+          sideNavItems: [
+            {
+              id: "AddNewFolder",
+              label: sideNavItemText,
+              onClick: () => {},
+            },
+          ],
+        },
+      });
+
+      return () => {};
+    };
+
+    const { container } = render(
+      <UiShell
+        appComponent={<div />}
+        appRootElement={document.createElement("div")}
+        onSubscriptionCreated={() => {}}
+        optionalComponents={
+          Object.fromEntries(
+            optionalComponentTestIds.map((testId) => [
+              testId,
+              <div data-testid={testId} />,
+            ]),
+          ) as Record<keyof UiShellProps["optionalComponents"], ReactElement>
+        }
+        stylesRootElement={document.createElement("div")}
+        subscribeToPropChanges={subscribeToPropChanges}
+      />,
+    );
+
+    optionalComponentTestIds.forEach((testId) => {
+      expect(within(container).getByTestId(testId)).toBeInTheDocument();
+    });
+  });
+
   test("unsubscribes from prop changes when unmounted", async () => {
     const rootElement = document.createElement("div");
 
@@ -150,7 +200,7 @@ describe("UiShell", () => {
       subscriber({
         ...defaultComponentProps,
         sideNavProps: {
-          navHeaderText: "",
+          appName: "",
           sideNavItems: [
             {
               id: "AddNewFolder",

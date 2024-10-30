@@ -14,28 +14,20 @@ import { memo, useEffect, useState, type SetStateAction } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 import { CssBaseline } from "../../CssBaseline";
-import { type SideNavProps } from "../SideNav";
-import { type TopNavProps } from "../TopNav";
 import { OdysseyProvider } from "../../OdysseyProvider";
-import { UiShellContent, type UiShellContentProps } from "./UiShellContent";
+import {
+  UiShellContent,
+  type UiShellContentProps,
+  type UiShellNavComponentProps,
+} from "./UiShellContent";
 import { type ReactRootElements } from "../../web-component";
-
-export type UiShellNavComponentProps = {
-  sideNavProps?: Omit<SideNavProps, "logo" | "footerComponent">;
-  topNavProps: Omit<
-    TopNavProps,
-    "AdditionalNavItemComponent" | "SearchFieldComponent"
-  >;
-};
 
 export const defaultComponentProps: UiShellNavComponentProps = {
   sideNavProps: {
-    navHeaderText: "",
+    appName: "",
     sideNavItems: [],
   },
-  topNavProps: {
-    topNavLinkItems: [],
-  },
+  topNavProps: {},
 } as const;
 
 export type UiShellProps = {

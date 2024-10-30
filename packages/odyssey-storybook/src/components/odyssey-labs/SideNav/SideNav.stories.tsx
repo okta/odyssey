@@ -40,7 +40,7 @@ const storybookMeta: Meta<SideNavProps> = {
   title: "Labs Components/SideNav",
   component: SideNav,
   argTypes: {
-    navHeaderText: {
+    appName: {
       control: "text",
       description: "Header text for the side nav",
       table: {
@@ -49,12 +49,47 @@ const storybookMeta: Meta<SideNavProps> = {
         },
       },
     },
+    customCompanyLogo: {
+      description: "Logo to be displayed in the Nav Header.",
+    },
     expandedWidth: {
       control: "text",
       description: "Width of the side nav in px",
       table: {
         type: {
           summary: "string",
+        },
+      },
+    },
+    footerComponent: {
+      description:
+        "Custom footer component to render in place of footer items.",
+    },
+    footerItems: {
+      description: "",
+      table: {
+        type: {
+          summary: "Array<SideNavFooterItem>",
+        },
+      },
+    },
+    hasCustomCompanyLogo: {
+      control: "boolean",
+      description:
+        "Defines if a custom company logo should be visible when available.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    hasCustomFooter: {
+      control: "boolean",
+      description:
+        "Defines if a custom footer should be visible when available.",
+      table: {
+        type: {
+          summary: "boolean",
         },
       },
     },
@@ -76,9 +111,6 @@ const storybookMeta: Meta<SideNavProps> = {
         },
       },
     },
-    logo: {
-      description: "Logo to be displayed in the Nav Header",
-    },
     onCollapse: {
       description: "Callback to be triggered when the side nav is collapsed",
     },
@@ -93,17 +125,9 @@ const storybookMeta: Meta<SideNavProps> = {
         },
       },
     },
-    footerItems: {
-      description: "",
-      table: {
-        type: {
-          summary: "Array<SideNavFooterItem>",
-        },
-      },
-    },
   },
   args: {
-    navHeaderText: "Admin",
+    appName: "Admin",
     isCollapsible: true,
     isCompact: false,
     sideNavItems: [
@@ -288,17 +312,7 @@ export const Default: StoryObj<SideNavProps> = {
   render: (props: SideNavProps) => {
     return (
       <div style={{ height: "100vh" }}>
-        <SideNav
-          logo={props.logo}
-          navHeaderText={props.navHeaderText}
-          expandedWidth={props.expandedWidth}
-          isCompact={props.isCompact}
-          isCollapsible={props.isCollapsible}
-          onCollapse={props.onCollapse}
-          onExpand={props.onExpand}
-          sideNavItems={props.sideNavItems}
-          footerItems={props.footerItems}
-        />
+        <SideNav {...props} />
       </div>
     );
   },

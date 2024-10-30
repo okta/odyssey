@@ -11,7 +11,7 @@
  */
 
 import styled from "@emotion/styled";
-import { memo, ReactElement, type ReactNode } from "react";
+import { memo, type ReactElement, type ReactNode } from "react";
 import { ErrorBoundary, ErrorBoundaryProps } from "react-error-boundary";
 
 import { SideNav, type SideNavProps } from "../SideNav";
@@ -56,6 +56,17 @@ const StyledShellContainer = styled("div")(() => ({
   width: "100vw",
 }));
 
+export type UiShellNavComponentProps = {
+  /**
+   * Object that gets pass directly to the side nav component.
+   */
+  sideNavProps?: Omit<SideNavProps, "customLogo" | "footerComponent">;
+  /**
+   * Object that gets pass directly to the top nav component.
+   */
+  topNavProps: Omit<TopNavProps, "leftSideComponent" | "rightSideComponent">;
+};
+
 export type UiShellContentProps = {
   /**
    * React app component that renders as children in the correct location of the shell.
@@ -69,22 +80,13 @@ export type UiShellContentProps = {
    * Components that will render as children of various other components such as the top nav or side nav.
    */
   optionalComponents?: {
-    additionalTopNavItems?: TopNavProps["additionalNavItem"];
     banners?: ReactElement;
-    footer?: SideNavProps["footerComponent"];
-    logo?: SideNavProps["logo"];
-    searchField?: TopNavProps["searchField"];
-    userProfile?: TopNavProps["userProfile"];
+    companyLogo?: SideNavProps["customCompanyLogo"];
+    sideNavFooter?: SideNavProps["footerComponent"];
+    topNavLeftSide?: TopNavProps["leftSideComponent"];
+    topNavRightSide?: TopNavProps["rightSideComponent"];
   };
-  /**
-   * Object that gets pass directly to the side nav component.
-   */
-  sideNavProps?: SideNavProps;
-  /**
-   * Object that gets pass directly to the top nav component.
-   */
-  topNavProps: TopNavProps;
-};
+} & UiShellNavComponentProps;
 
 /**
  * Our new Unified Platform UI Shell.
@@ -108,14 +110,30 @@ const UiShellContent = ({
         {sideNavProps && (
           <ErrorBoundary fallback={null} onError={onError}>
             <SideNav
-              {...("footerItems" in sideNavProps
-                ? sideNavProps
-                : {
-                    ...sideNavProps,
-                    footerComponent: optionalComponents?.footer,
-                    footerItems: undefined,
-                  })}
-              logo={optionalComponents?.logo}
+              {...{
+                ...sideNavProps,
+                ...(sideNavProps.hasCustomCompanyLogo &&
+                optionalComponents?.companyLogo
+                  ? {
+                      customCompanyLogo: optionalComponents.companyLogo,
+                      hasCustomCompanyLogo: sideNavProps.hasCustomCompanyLogo,
+                    }
+                  : {
+                      customCompanyLogo: undefined,
+                      hasCustomCompanyLogo: false,
+                    }),
+                ...(sideNavProps.hasCustomFooter &&
+                optionalComponents?.sideNavFooter
+                  ? {
+                      footerComponent: optionalComponents.sideNavFooter,
+                      footerItems: undefined,
+                      hasCustomFooter: sideNavProps.hasCustomFooter,
+                    }
+                  : {
+                      footerItems: sideNavProps.footerItems,
+                      hasCustomFooter: false,
+                    }),
+              }}
             />
           </ErrorBoundary>
         )}
@@ -125,9 +143,8 @@ const UiShellContent = ({
         <ErrorBoundary fallback={null} onError={onError}>
           <TopNav
             {...topNavProps}
-            additionalNavItem={optionalComponents?.additionalTopNavItems}
-            searchField={optionalComponents?.searchField}
-            userProfile={optionalComponents?.userProfile}
+            leftSideComponent={optionalComponents?.topNavLeftSide}
+            rightSideComponent={optionalComponents?.topNavRightSide}
           />
         </ErrorBoundary>
 

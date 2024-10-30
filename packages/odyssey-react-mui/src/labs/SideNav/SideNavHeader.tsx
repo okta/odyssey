@@ -11,14 +11,13 @@
  */
 
 import styled from "@emotion/styled";
-import { memo, ReactNode, useMemo } from "react";
+import { memo, useMemo, type ReactElement } from "react";
 import {
   type DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
 import { Box } from "../../Box";
 import { Heading6 } from "../../Typography";
-import type { SideNavProps } from "./types";
 import { TOP_NAV_HEIGHT } from "../TopNav";
 
 const SideNavLogoContainer = styled("div", {
@@ -44,10 +43,18 @@ const SideNavHeaderContainer = styled("div", {
   paddingBottom: odysseyDesignTokens.Spacing3,
 }));
 
-const SideNavHeader = ({
-  navHeaderText,
-  logo,
-}: Pick<SideNavProps, "navHeaderText" | "logo">): ReactNode => {
+export type SideNavHeader = {
+  /**
+   * The app's name.
+   */
+  appName: string;
+  /**
+   * Company logo that displays above the app name.
+   */
+  companyLogo: ReactElement;
+};
+
+const SideNavHeader = ({ appName, companyLogo }: SideNavHeader) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const sideNavHeaderStyles = useMemo(
@@ -65,16 +72,18 @@ const SideNavHeader = ({
       }}
     >
       <SideNavLogoContainer odysseyDesignTokens={odysseyDesignTokens}>
-        {logo}
+        {companyLogo}
       </SideNavLogoContainer>
+
       <SideNavHeaderContainer odysseyDesignTokens={odysseyDesignTokens}>
         <Box sx={sideNavHeaderStyles}>
-          <Heading6>{navHeaderText}</Heading6>
+          <Heading6>{appName}</Heading6>
         </Box>
       </SideNavHeaderContainer>
     </Box>
   );
 };
+
 const MemoizedSideNavHeader = memo(SideNavHeader);
 MemoizedSideNavHeader.displayName = "SideNavHeader";
 

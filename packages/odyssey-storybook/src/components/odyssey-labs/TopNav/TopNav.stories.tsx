@@ -20,92 +20,61 @@ const storybookMeta: Meta<TopNavProps> = {
   title: "Labs Components/TopNav",
   component: TopNav,
   argTypes: {
-    additionalNavItem: {
-      description:
-        "Additional element to be displayed at the end of the top nav",
-      table: {
-        type: {
-          summary: "ReactElement (Button)",
-        },
-      },
-    },
-    helpPageHref: {
-      description: "Display the help icon/link",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
-    searchField: {
+    leftSideComponent: {
       control: "ReactElement",
       description: "Display global search field",
       table: {
         type: {
-          summary: "ReactElement (SearchField)",
+          summary: "ReactElement",
         },
       },
     },
-    settingsPageHref: {
-      description: "Display the settings icon/link",
+    rightSideComponent: {
+      description:
+        "Additional element to be displayed at the end of the top nav",
       table: {
         type: {
-          summary: "boolean",
-        },
-      },
-    },
-    topNavLinkItems: {
-      description: "Array of links to be displayed in the top nav",
-      table: {
-        type: {
-          summary: "Array<TopNavLinkItem>",
-        },
-      },
-    },
-    userProfile: {
-      description: "Shows the logged in user account info",
-      table: {
-        type: {
-          summary: "UserProfileProps",
+          summary: "ReactElement",
         },
       },
     },
   },
   args: {
-    additionalNavItem: <Button variant="secondary" label="Connect Builder" />,
-    helpPageHref: "#none",
-    searchField: <SearchField label="Search" placeholder="Search..." />,
-    settingsPageHref: "#none",
-    topNavLinkItems: [
-      {
-        id: "link-01",
-        label: "Home",
-        href: "#none",
-      },
-      {
-        id: "link-02",
-        label: "Flows",
-        href: "#none",
-      },
-      {
-        id: "link-03",
-        label: "Connections",
-        href: "#none",
-        isDisabled: true,
-      },
-      {
-        id: "link-04",
-        label: "Template",
-        onClick: () => {},
-      },
-    ],
-    userProfile: (
-      <UserProfile
-        profileIcon={<UserIcon />}
-        orgName="ORG123"
-        userName="test.user@test.com"
-      />
+    leftSideComponent: <SearchField label="Search" placeholder="Search..." />,
+    rightSideComponent: (
+      <>
+        <Button variant="secondary" label="Connect Builder" />
+
+        <UserProfile
+          profileIcon={<UserIcon />}
+          orgName="ORG123"
+          userName="test.user@test.com"
+        />
+      </>
     ),
+    // topNavLinkItems: [
+    //   {
+    //     id: "link-01",
+    //     label: "Home",
+    //     href: "#none",
+    //   },
+    //   {
+    //     id: "link-02",
+    //     label: "Flows",
+    //     href: "#none",
+    //   },
+    //   {
+    //     id: "link-03",
+    //     label: "Connections",
+    //     href: "#none",
+    //     isDisabled: true,
+    //   },
+    //   {
+    //     id: "link-04",
+    //     label: "Template",
+    //     onClick: () => {},
+    //   },
+    // ],
   },
   decorators: [MuiThemeDecorator],
   parameters: {

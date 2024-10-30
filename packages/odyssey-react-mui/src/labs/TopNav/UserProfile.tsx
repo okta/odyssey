@@ -19,21 +19,6 @@ import {
 } from "../../OdysseyDesignTokensContext";
 import { Subordinate } from "../../Typography";
 
-export type UserProfileProps = {
-  /**
-   * Logged in user profile icon to be displayed in the top nav
-   */
-  profileIcon?: ReactElement;
-  /**
-   * Logged in user info to be displayed in the top nav
-   */
-  userName: string;
-  /**
-   * Org name of the logged in user
-   */
-  orgName: string;
-};
-
 const UserProfileContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
@@ -53,6 +38,21 @@ const UserProfileInfoContainer = styled("div")(() => ({
   display: "flex",
   flexDirection: "column",
 }));
+
+export type UserProfileProps = {
+  /**
+   * Logged in user profile icon to be displayed in the top nav
+   */
+  profileIcon?: ReactElement;
+  /**
+   * Logged in user info to be displayed in the top nav
+   */
+  userName: string;
+  /**
+   * Org name of the logged in user
+   */
+  orgName: string;
+};
 
 const UserProfile = ({ profileIcon, userName, orgName }: UserProfileProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();

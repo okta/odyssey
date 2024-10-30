@@ -53,12 +53,11 @@ describe("renderUiShell", () => {
         uiShellRootElement: rootElement,
       });
 
-      expect(slottedElements.additionalTopNavItems).toBeInstanceOf(
-        HTMLDivElement,
-      );
-      expect(slottedElements.footer).toBeInstanceOf(HTMLDivElement);
-      expect(slottedElements.logo).toBeInstanceOf(HTMLDivElement);
-      expect(slottedElements.searchField).toBeInstanceOf(HTMLDivElement);
+      expect(slottedElements.banners).toBeInstanceOf(HTMLDivElement);
+      expect(slottedElements.companyLogo).toBeInstanceOf(HTMLDivElement);
+      expect(slottedElements.sideNavFooter).toBeInstanceOf(HTMLDivElement);
+      expect(slottedElements.topNavLeftSide).toBeInstanceOf(HTMLDivElement);
+      expect(slottedElements.topNavRightSide).toBeInstanceOf(HTMLDivElement);
     });
   });
 
@@ -100,7 +99,7 @@ describe("renderUiShell", () => {
 
   test("renders `UiShell` with updated props", async () => {
     const rootElement = document.createElement("div");
-    const navHeaderText = "Hello World!";
+    const appName = "Hello World!";
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(rootElement);
@@ -121,23 +120,21 @@ describe("renderUiShell", () => {
     act(() => {
       setComponentProps({
         sideNavProps: {
-          navHeaderText,
+          appName,
           sideNavItems: [],
         },
-        topNavProps: {
-          topNavLinkItems: [],
-        },
+        topNavProps: {},
       });
     });
 
     expect(
       rootElement.querySelector(reactWebComponentElementName)!.shadowRoot,
-    ).toHaveTextContent(navHeaderText);
+    ).toHaveTextContent(appName);
   });
 
   test("renders `UiShell` with immediately updated props", async () => {
     const rootElement = document.createElement("div");
-    const navHeaderText = "Hello World!";
+    const appName = "Hello World!";
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(rootElement);
@@ -150,18 +147,16 @@ describe("renderUiShell", () => {
 
       setComponentProps({
         sideNavProps: {
-          navHeaderText,
+          appName,
           sideNavItems: [],
         },
-        topNavProps: {
-          topNavLinkItems: [],
-        },
+        topNavProps: {},
       });
     });
 
     expect(
       rootElement.querySelector(reactWebComponentElementName)!.shadowRoot,
-    ).toHaveTextContent(navHeaderText);
+    ).toHaveTextContent(appName);
   });
 
   test("renders `<slot>` in the event of an error", async () => {
@@ -184,7 +179,7 @@ describe("renderUiShell", () => {
 
       setComponentProps(
         // @ts-expect-error We're purposefully testing an error state, so we need to send something that will cause an error.
-        {},
+        Symbol(),
       );
     });
 
