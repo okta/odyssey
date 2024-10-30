@@ -20,7 +20,7 @@ import { axeRun } from "../../../axe-util";
 import type { PlaywrightProps } from "../storybookTypes";
 
 const storybookMeta: Meta<IconWithTooltipProps> = {
-  title: "MUI Components/IconWIthTooltip",
+  title: "MUI Components/IconWithTooltip",
   component: IconWithTooltip,
   argTypes: {
     IconComponent: {

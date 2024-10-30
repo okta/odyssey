@@ -67,15 +67,6 @@ const storybookMeta: Meta<AccordionProps> = {
     label: "Label",
   },
   decorators: [MuiThemeDecorator],
-  parameters: {
-    backgrounds: {
-      default: "gray",
-      values: [
-        { name: "gray", value: "#f4f4f4" },
-        { name: "white", value: "#ffffff" },
-      ],
-    },
-  },
 };
 
 export default storybookMeta;
