@@ -18,7 +18,7 @@ export type SideNavProps = {
   /**
    * Side Nav header text that is usually reserved to show the App name
    */
-  navHeaderText: string;
+  appName: string;
   /**
    *  Determines whether the side nav is collapsible
    */
@@ -44,32 +44,40 @@ export type SideNavProps = {
    * (it will be smaller if isCollapsible and collapsed)
    */
   expandedWidth?: string;
-  /**
-   * An optional logo to display in the header. If not provided, will default to the Okta logo
-   */
-  logo?: ReactElement;
 } & (
   | {
       /**
-       * Footer items in the side nav
+       * An optional logo to display in the header. If not provided, will default to the Okta logo.
        */
-      footerItems?: SideNavFooterItem[];
+      customCompanyLogo: ReactElement;
       /**
-       * footerComponent cannot be used if footerItems are defined
+       * Use the built-in Okta logo or a custom one.
        */
-      footerComponent?: never;
+      hasCustomCompanyLogo: true;
     }
   | {
-      /**
-       * footerItems cannot be used if footerComponent is defined
-       */
-      footerItems?: never;
-      /**
-       * The component to display as the footer; if present the `footerItems` are ignored and not rendered.
-       */
-      footerComponent?: ReactElement;
+      customCompanyLogo?: never;
+      hasCustomCompanyLogo?: false;
     }
 ) &
+  (
+    | {
+        /**
+         * The component to display as the footer; if present the `footerItems` are ignored and not rendered.
+         */
+        footerComponent?: ReactElement;
+        footerItems?: never;
+        hasCustomFooter: true;
+      }
+    | {
+        footerComponent?: never;
+        /**
+         * Footer items in the side nav
+         */
+        footerItems?: SideNavFooterItem[];
+        hasCustomFooter?: false;
+      }
+  ) &
   Pick<HtmlProps, "testId">;
 
 export type SideNavItem = {

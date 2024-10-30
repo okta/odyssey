@@ -38,9 +38,9 @@ export type OdysseyThemeProviderProps = {
   themeOverride?: ThemeOptions;
 };
 
-const ContrastContainer = styled.div`
-  height: inherit;
-`;
+const StyledContrastContainer = styled("div")(() => ({
+  height: "inherit",
+}));
 
 /**
  * This function doesn't include the Emotion Cache or Translations. You should probably be using `OdysseyProvider`.
@@ -89,7 +89,7 @@ export const OdysseyThemeProvider = ({
   );
 
   return (
-    <ContrastContainer ref={contrastContainerRef}>
+    <StyledContrastContainer ref={contrastContainerRef}>
       <ContrastModeContext.Provider value={contrastModeProviderValue}>
         <MuiThemeProvider theme={customOdysseyTheme}>
           <OdysseyDesignTokensContext.Provider value={odysseyTokens}>
@@ -97,6 +97,6 @@ export const OdysseyThemeProvider = ({
           </OdysseyDesignTokensContext.Provider>
         </MuiThemeProvider>
       </ContrastModeContext.Provider>
-    </ContrastContainer>
+    </StyledContrastContainer>
   );
 };

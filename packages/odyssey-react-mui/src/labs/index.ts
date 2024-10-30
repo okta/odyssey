@@ -43,4 +43,4 @@ export {
 export * from "./SideNav/NavAccordion";
 export * from "./SideNav";
 export * from "./TopNav";
-export * from "../ui-shell";
+export * from "./UiShell";

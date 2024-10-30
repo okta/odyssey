@@ -162,8 +162,6 @@ describe("Pagination", () => {
     fireEvent.change(pageInput, { target: { value: "5" } });
     fireEvent.blur(pageInput);
 
-    console.log(pageInput);
-
     await waitFor(() => {
       expect(onPaginationChange).toHaveBeenCalledWith({
         pageIndex: 5,
@@ -193,7 +191,6 @@ describe("Pagination", () => {
     const rowsPerPageInput = screen.getByLabelText("Rows per page");
     fireEvent.change(rowsPerPageInput, { target: { value: "20" } });
     fireEvent.blur(rowsPerPageInput);
-    console.log(rowsPerPageInput);
 
     await waitFor(() => {
       expect(onPaginationChange).toHaveBeenCalledWith({
