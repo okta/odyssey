@@ -224,14 +224,13 @@ const UiShellContent = ({
         </ErrorBoundary>
       </StyledTopNavContainer>
 
-        <StyledAppContainer
-          odysseyDesignTokens={odysseyDesignTokens}
-          tabIndex={0}
-          ref={scrollableContentRef}
-        >
-          {appComponent}
-        </StyledAppContainer>
-      </StyledFlexibleContentContainer>
+      <StyledAppContainer
+        odysseyDesignTokens={odysseyDesignTokens}
+        tabIndex={0}
+        ref={scrollableContentRef}
+      >
+        {appComponent}
+      </StyledAppContainer>
     </StyledShellContainer>
   );
 };
