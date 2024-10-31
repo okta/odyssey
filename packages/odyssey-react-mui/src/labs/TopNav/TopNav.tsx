@@ -30,13 +30,19 @@ export type TopNavProps = {
    * React components that render into the right side of the top nav.
    */
   rightSideComponent?: ReactElement;
+  /**
+   * Whether or not the underlying content has been scrolled
+   */
+  isScrolled?: boolean;
 } & Pick<HtmlProps, "testId">;
 
 const StyledTopNavContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "isScrolled",
 })<{
   odysseyDesignTokens: DesignTokens;
-}>(({ odysseyDesignTokens }) => ({
+  isScrolled?: boolean;
+}>(({ odysseyDesignTokens, isScrolled }) => ({
   alignItems: "center",
   backgroundColor: odysseyDesignTokens.HueNeutral50,
   display: "flex",
@@ -46,13 +52,22 @@ const StyledTopNavContainer = styled("div", {
   minHeight: TOP_NAV_HEIGHT,
   paddingBlock: odysseyDesignTokens.Spacing2,
   paddingInline: odysseyDesignTokens.Spacing6,
+  boxShadow: isScrolled ? odysseyDesignTokens.DepthMedium : undefined,
+  transition: `box-shadow ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
 }));
 
-const TopNav = ({ leftSideComponent, rightSideComponent }: TopNavProps) => {
+const TopNav = ({
+  leftSideComponent,
+  rightSideComponent,
+  isScrolled,
+}: TopNavProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   return (
-    <StyledTopNavContainer odysseyDesignTokens={odysseyDesignTokens}>
+    <StyledTopNavContainer
+      odysseyDesignTokens={odysseyDesignTokens}
+      isScrolled={isScrolled}
+    >
       {leftSideComponent ?? <div />}
       {rightSideComponent ?? <div />}
     </StyledTopNavContainer>
