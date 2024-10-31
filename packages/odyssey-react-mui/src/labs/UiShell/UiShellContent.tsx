@@ -67,7 +67,7 @@ export type UiShellNavComponentProps = {
   /**
    * Object that gets pass directly to the side nav component.
    */
-  sideNavProps?: Omit<SideNavProps, "customLogo" | "footerComponent">;
+  sideNavProps?: Omit<SideNavProps, "footerComponent">;
   /**
    * Object that gets pass directly to the top nav component.
    */
@@ -88,7 +88,6 @@ export type UiShellContentProps = {
    */
   optionalComponents?: {
     banners?: ReactElement;
-    companyLogo?: SideNavProps["customCompanyLogo"];
     sideNavFooter?: SideNavProps["footerComponent"];
     topNavLeftSide?: TopNavProps["leftSideComponent"];
     topNavRightSide?: TopNavProps["rightSideComponent"];
@@ -185,16 +184,6 @@ const UiShellContent = ({
             <SideNav
               {...{
                 ...sideNavProps,
-                ...(sideNavProps.hasCustomCompanyLogo &&
-                optionalComponents?.companyLogo
-                  ? {
-                      customCompanyLogo: optionalComponents.companyLogo,
-                      hasCustomCompanyLogo: sideNavProps.hasCustomCompanyLogo,
-                    }
-                  : {
-                      customCompanyLogo: undefined,
-                      hasCustomCompanyLogo: false,
-                    }),
                 ...(sideNavProps.hasCustomFooter &&
                 optionalComponents?.sideNavFooter
                   ? {

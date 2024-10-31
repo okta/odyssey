@@ -27,7 +27,6 @@ import {
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
 import type { SideNavProps } from "./types";
-import { OktaLogo } from "./OktaLogo";
 import { SideNavHeader } from "./SideNavHeader";
 import {
   SideNavItemContent,
@@ -90,9 +89,9 @@ const StyledSideNav = styled("nav", {
     odysseyDesignTokens: DesignTokens;
     isSideNavCollapsed: boolean;
   }) => ({
-    backgroundColor: odysseyDesignTokens.HueNeutralWhite,
     display: "flex",
     position: "relative",
+    backgroundColor: odysseyDesignTokens.HueNeutralWhite,
 
     "&::after": {
       backgroundColor: odysseyDesignTokens.HueNeutral200,
@@ -157,16 +156,19 @@ const SideNavListContainer = styled("ul")(() => ({
   listStyleType: "none",
 }));
 
-const SideNavScrollableContainer = styled("div")(() => ({
+const SideNavScrollableContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
   flex: 1,
   overflowY: "auto",
+  paddingInline: odysseyDesignTokens.Spacing2,
 }));
 
 const SectionHeaderContainer = styled("li", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
   paddingBlock: odysseyDesignTokens.Spacing3,
-  paddingInline: odysseyDesignTokens.Spacing5,
+  paddingInline: odysseyDesignTokens.Spacing4,
 }));
 
 const SectionHeader = styled("h3", {
@@ -192,13 +194,13 @@ const SideNavFooter = styled("div", {
   }) => ({
     position: "sticky",
     bottom: 0,
-    paddingBlockStart: odysseyDesignTokens.Spacing2,
     transitionProperty: "box-shadow",
     transitionDuration: odysseyDesignTokens.TransitionDurationMain,
     transitionTiming: odysseyDesignTokens.TransitionTimingMain,
+    backgroundColor: odysseyDesignTokens.HueNeutralWhite,
     // The box shadow should appear above the footer only if the scrollable region has overflow
     ...(isContentScrollable && {
-      boxShadow: odysseyDesignTokens.DepthHigh,
+      boxShadow: "0px -8px 8px -8px rgba(39, 39, 39, 0.08)",
     }),
   }),
 );
@@ -230,7 +232,7 @@ const LoadingItemContainer = styled("div", {
   display: "flex",
   gap: odysseyDesignTokens.Spacing2,
   paddingBlock: odysseyDesignTokens.Spacing2,
-  paddingInline: odysseyDesignTokens.Spacing5,
+  paddingInline: odysseyDesignTokens.Spacing4,
 }));
 
 const getHasScrollableContent = (scrollableContainer: HTMLElement) =>
@@ -252,15 +254,14 @@ const LoadingItem = () => {
 
 const SideNav = ({
   appName,
-  customCompanyLogo,
   expandedWidth = DEFAULT_SIDE_NAV_WIDTH,
   footerComponent,
   footerItems,
-  hasCustomCompanyLogo,
   hasCustomFooter,
   isCollapsible,
   isCompact,
   isLoading,
+  logoProps,
   onCollapse,
   onExpand,
   sideNavItems,
@@ -474,11 +475,14 @@ const SideNav = ({
             <SideNavHeader
               appName={appName}
               isLoading={isLoading}
-              logo={hasCustomCompanyLogo ? customCompanyLogo : <OktaLogo />}
+              logoProps={logoProps}
             />
           </SideNavHeaderContainer>
 
-          <SideNavScrollableContainer data-se="scrollable-region">
+          <SideNavScrollableContainer
+            odysseyDesignTokens={odysseyDesignTokens}
+            data-se="scrollable-region"
+          >
             <SideNavListContainer role="list" ref={scrollableContentRef}>
               {isLoading
                 ? [...Array(6)].map((_, index) => <LoadingItem key={index} />)

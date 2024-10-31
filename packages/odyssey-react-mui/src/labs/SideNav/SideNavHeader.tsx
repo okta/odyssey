@@ -11,24 +11,30 @@
  */
 
 import styled from "@emotion/styled";
-import { memo, type ReactElement } from "react";
+import { memo } from "react";
+import { Skeleton } from "@mui/material";
+
+import { Box } from "../../Box";
 import {
   type DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
-import { Box } from "../../Box";
+import { SideNavLogo } from "./SideNavLogo";
+import { SideNavProps } from "./types";
 import { Heading6 } from "../../Typography";
 import { TOP_NAV_HEIGHT } from "../TopNav";
-import { Skeleton } from "@mui/material";
 
 const SideNavLogoContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
-  height: "100%",
-  maxHeight: TOP_NAV_HEIGHT,
-  minHeight: TOP_NAV_HEIGHT,
-  paddingBlock: odysseyDesignTokens.Spacing4,
-  paddingInline: odysseyDesignTokens.Spacing5,
+  height: TOP_NAV_HEIGHT,
+  padding: odysseyDesignTokens.Spacing4,
+
+  "svg, img": {
+    height: "100%",
+    width: "auto",
+    maxWidth: "100%",
+  },
 }));
 
 const SideNavHeaderContainer = styled("div", {
@@ -37,8 +43,7 @@ const SideNavHeaderContainer = styled("div", {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  paddingInline: odysseyDesignTokens.Spacing5,
-  paddingBlock: odysseyDesignTokens.Spacing4,
+  padding: odysseyDesignTokens.Spacing4,
   width: "100%",
 
   h2: {
@@ -47,7 +52,7 @@ const SideNavHeaderContainer = styled("div", {
   },
 }));
 
-export type SideNavHeader = {
+export type SideNavHeaderProps = {
   /**
    * The app's name.
    */
@@ -56,13 +61,13 @@ export type SideNavHeader = {
    * If the side nav currently has no items, it will be loading.
    */
   isLoading?: boolean;
-  /**
-   * Company logo that displays above the app name.
-   */
-  logo: ReactElement;
-};
+} & Pick<SideNavProps, "logoProps">;
 
-const SideNavHeader = ({ appName, isLoading, logo }: SideNavHeader) => {
+const SideNavHeader = ({
+  appName,
+  isLoading,
+  logoProps,
+}: SideNavHeaderProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   return (
@@ -73,11 +78,11 @@ const SideNavHeader = ({ appName, isLoading, logo }: SideNavHeader) => {
       }}
     >
       <SideNavLogoContainer odysseyDesignTokens={odysseyDesignTokens}>
-        {/* The skeleton takes the hardcoded dimensions of the Okta logo */}
         {isLoading ? (
+          //  The skeleton takes the hardcoded dimensions of the Okta logo
           <Skeleton variant="rounded" height={24} width={67} />
         ) : (
-          logo
+          <SideNavLogo {...logoProps} />
         )}
       </SideNavLogoContainer>
 

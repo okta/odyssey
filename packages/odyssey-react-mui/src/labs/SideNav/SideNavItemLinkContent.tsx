@@ -33,8 +33,7 @@ const SideNavItemLabelContainer = styled("div", {
   flexWrap: "wrap",
   alignItems: "center",
   fontSize: odysseyDesignTokens.TypographyScale0,
-  fontWeight: odysseyDesignTokens.TypographyWeightHeading,
-  marginLeft: isIconVisible ? odysseyDesignTokens.Spacing2 : 0,
+  marginInlineStart: isIconVisible ? odysseyDesignTokens.Spacing2 : 0,
 }));
 
 const SideNavItemLinkContent = ({
@@ -55,7 +54,7 @@ const SideNavItemLinkContent = ({
       alignItems: "center",
       display: "flex",
       gap: odysseyDesignTokens.Spacing1,
-      marginLeft: odysseyDesignTokens.Spacing2,
+      marginInlineStart: odysseyDesignTokens.Spacing2,
     }),
     [odysseyDesignTokens],
   );
@@ -67,7 +66,6 @@ const SideNavItemLinkContent = ({
         odysseyDesignTokens={odysseyDesignTokens}
         isIconVisible={Boolean(startIcon)}
       >
-        {Boolean(startIcon)}
         {label}
         {(severity || count) && (
           <Box sx={sideNavItemContentStyles}>

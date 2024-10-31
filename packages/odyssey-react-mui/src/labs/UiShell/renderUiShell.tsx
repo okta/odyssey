@@ -24,7 +24,6 @@ export const optionalComponentSlotNames: Record<
   string
 > = {
   banners: "banners",
-  companyLogo: "company-logo",
   sideNavFooter: "side-nav-footer",
   topNavLeftSide: "top-nav-left-side",
   topNavRightSide: "top-nav-right-side",

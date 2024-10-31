@@ -40,9 +40,19 @@ export const StyledSideNavListItem = styled("li", {
   isSelected?: boolean;
   disabled?: boolean;
 }>(({ odysseyDesignTokens, isSelected }) => ({
-  alignItems: "center",
-  backgroundColor: isSelected ? odysseyDesignTokens.HueNeutral50 : "unset",
   display: "flex",
+  alignItems: "center",
+  backgroundColor: "unset",
+  borderRadius: odysseyDesignTokens.BorderRadiusMain,
+
+  ...(isSelected && {
+    color: `${odysseyDesignTokens.TypographyColorAction} !important`,
+    backgroundColor: odysseyDesignTokens.HueBlue50,
+  }),
+
+  // "+ li": {
+  //   marginBlockStart: odysseyDesignTokens.Spacing1
+  // },
 
   "&:last-child": {
     marginBottom: odysseyDesignTokens.Spacing2,
@@ -67,48 +77,66 @@ const GetNavItemContentStyles = ({
   odysseyDesignTokens,
   contextValue,
   isDisabled,
+  isSelected,
 }: {
   odysseyDesignTokens: DesignTokens;
   contextValue: SideNavItemContentContextValue;
   isDisabled?: boolean;
+  isSelected?: boolean;
 }) => {
   return {
     display: "flex",
     alignItems: "center",
     width: "100%",
     textDecoration: "none",
-    color: `${isDisabled ? odysseyDesignTokens.TypographyColorDisabled : odysseyDesignTokens.TypographyColorHeading} !important`,
-    minHeight: contextValue.isCompact
-      ? odysseyDesignTokens.Spacing6
-      : odysseyDesignTokens.Spacing7,
+    color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
+    minHeight: odysseyDesignTokens.Spacing7,
     paddingBlock: odysseyDesignTokens.Spacing2,
-    paddingInline: odysseyDesignTokens.Spacing5,
+    paddingInline: odysseyDesignTokens.Spacing4,
+    borderRadius: odysseyDesignTokens.BorderRadiusMain,
+
+    ...(isSelected && {
+      color: `${odysseyDesignTokens.TypographyColorAction} !important`,
+      fontWeight: odysseyDesignTokens.TypographyWeightBodyBold,
+    }),
+
+    ...(isDisabled && {
+      color: `${odysseyDesignTokens.TypographyColorDisabled} !important`,
+    }),
 
     ...(contextValue.isCompact && {
       paddingBlock: odysseyDesignTokens.Spacing1,
+      minHeight: odysseyDesignTokens.Spacing6,
     }),
 
     "&:focus-visible": {
-      borderRadius: 0,
-      outlineColor: odysseyDesignTokens.FocusOutlineColorPrimary,
-      outlineStyle: odysseyDesignTokens.FocusOutlineStyle,
-      outlineWidth: odysseyDesignTokens.FocusOutlineWidthMain,
-      textDecoration: "none",
-      outlineOffset: 0,
-      color: isDisabled
-        ? "default"
-        : `${odysseyDesignTokens.TypographyColorAction} !important`,
-      backgroundColor: !isDisabled
-        ? odysseyDesignTokens.HueNeutral50
-        : "inherit",
+      // borderRadius: 0,
+      // outlineColor: odysseyDesignTokens.FocusOutlineColorPrimary,
+      // outlineStyle: odysseyDesignTokens.FocusOutlineStyle,
+      // outlineWidth: odysseyDesignTokens.FocusOutlineWidthMain,
+      outline: "none",
+      boxShadow: `inset 0 0 0 3px ${odysseyDesignTokens.PalettePrimaryMain}`,
+      // textDecoration: "none",
+      // outlineOffset: 0,
+      // color: isDisabled
+      //   ? "default"
+      //   : `${odysseyDesignTokens.TypographyColorAction} !important`,
+      // backgroundColor: !isDisabled
+      //   ? odysseyDesignTokens.HueNeutral50
+      //   : "inherit",
     },
+
     "&:hover": {
       textDecoration: "none",
       cursor: isDisabled ? "default" : "pointer",
-      color: isDisabled
-        ? "default"
-        : `${odysseyDesignTokens.TypographyColorAction} !important`,
-      backgroundColor: !isDisabled ? odysseyDesignTokens.HueBlue50 : "inherit",
+      // color: `${odysseyDesignTokens.TypographyColorAction} !important`,
+      backgroundColor: !isDisabled
+        ? odysseyDesignTokens.HueNeutral50
+        : "inherit",
+
+      ...(isDisabled && {
+        color: "inherit",
+      }),
     },
   };
 };
@@ -209,6 +237,7 @@ const SideNavItemContent = ({
             odysseyDesignTokens={odysseyDesignTokens}
             contextValue={contextValue}
             isDisabled={isDisabled}
+            isSelected={isSelected}
           >
             <SideNavItemLinkContent
               count={count}
@@ -242,6 +271,7 @@ const SideNavItemContent = ({
             odysseyDesignTokens={odysseyDesignTokens}
             contextValue={contextValue}
             isDisabled={isDisabled}
+            isSelected={isSelected}
             href={href}
             target={target}
             onClick={onClick}

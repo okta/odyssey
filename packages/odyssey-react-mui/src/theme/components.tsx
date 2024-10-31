@@ -138,7 +138,15 @@ export const components = ({
             width: "1em",
           },
           "&.nav-accordion-summary": {
-            padding: `${odysseyTokens.Spacing2} ${odysseyTokens.Spacing5}`,
+            borderRadius: odysseyTokens.BorderRadiusMain,
+            padding: `${odysseyTokens.Spacing2} ${odysseyTokens.Spacing4}`,
+
+            "&:focus-visible": {
+              backgroundColor: "unset",
+              outline: "none",
+              boxShadow: `inset 0 0 0 3px ${odysseyTokens.PalettePrimaryMain}`,
+            },
+
             ".MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
               transform: "rotate(-90deg) !important",
             },
@@ -160,9 +168,7 @@ export const components = ({
           paddingInline: odysseyTokens.Spacing3,
           paddingBlock: odysseyTokens.Spacing4,
           "&.nav-accordion-details": {
-            paddingTop: 0,
-            paddingBottom: 0,
-            paddingLeft: odysseyTokens.Spacing2,
+            padding: 0,
           },
         }),
       },

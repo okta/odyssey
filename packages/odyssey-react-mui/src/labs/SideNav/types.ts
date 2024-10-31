@@ -14,6 +14,41 @@ import type { ReactElement } from "react";
 import type { HtmlProps } from "../../HtmlProps";
 import type { statusSeverityValues } from "../../Status";
 
+export type SideNavLogoProps = {
+  href?: string;
+} & (
+  | {
+      /**
+       * a component to render as the logo
+       */
+      logoComponent: ReactElement;
+      imageAltText?: never;
+      imageUrl?: never;
+    }
+  | {
+      /**
+       * The src url to render in an `img` tag
+       */
+      imageUrl: string;
+      /**
+       * alt text for the img logo
+       */
+      imageAltText: string;
+      logoComponent?: never;
+    }
+  | {
+      /**
+       * The src url to render in an `img` tag
+       */
+      imageUrl?: never;
+      /**
+       * alt text for the img logo
+       */
+      imageAltText?: never;
+      logoComponent?: never;
+    }
+);
+
 export type SideNavProps = {
   /**
    * Side Nav header text that is usually reserved to show the App name
@@ -37,9 +72,9 @@ export type SideNavProps = {
    */
   isLoading?: boolean;
   /**
-   * An optional logo to display in the header. If not provided, will default to the Okta logo
+   * An optional logo component or src string for an img to display in the header. If not provided, will default to the Okta logo
    */
-  logo?: ReactElement;
+  logoProps?: SideNavLogoProps;
   /**
    *  Triggers when the side nav is collapsed
    */
@@ -55,37 +90,21 @@ export type SideNavProps = {
 } & (
   | {
       /**
-       * An optional logo to display in the header. If not provided, will default to the Okta logo.
+       * The component to display as the footer; if present the `footerItems` are ignored and not rendered.
        */
-      customCompanyLogo: ReactElement;
-      /**
-       * Use the built-in Okta logo or a custom one.
-       */
-      hasCustomCompanyLogo: true;
+      footerComponent?: ReactElement;
+      footerItems?: never;
+      hasCustomFooter: true;
     }
   | {
-      customCompanyLogo?: never;
-      hasCustomCompanyLogo?: false;
+      footerComponent?: never;
+      /**
+       * Footer items in the side nav
+       */
+      footerItems?: SideNavFooterItem[];
+      hasCustomFooter?: false;
     }
 ) &
-  (
-    | {
-        /**
-         * The component to display as the footer; if present the `footerItems` are ignored and not rendered.
-         */
-        footerComponent?: ReactElement;
-        footerItems?: never;
-        hasCustomFooter: true;
-      }
-    | {
-        footerComponent?: never;
-        /**
-         * Footer items in the side nav
-         */
-        footerItems?: SideNavFooterItem[];
-        hasCustomFooter?: false;
-      }
-  ) &
   Pick<HtmlProps, "testId">;
 
 export type SideNavItem = {

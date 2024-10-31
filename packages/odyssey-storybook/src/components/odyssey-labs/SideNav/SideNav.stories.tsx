@@ -36,6 +36,7 @@ import {
   within,
 } from "@storybook/testing-library";
 import { PlaywrightProps } from "../../odyssey-mui/storybookTypes";
+import PlaceholderLogo from "../PickerWithOptionAdornment/PlaceholderLogo";
 
 const storybookMeta: Meta<SideNavProps> = {
   title: "Labs Components/SideNav",
@@ -49,9 +50,6 @@ const storybookMeta: Meta<SideNavProps> = {
           summary: "string",
         },
       },
-    },
-    customCompanyLogo: {
-      description: "Logo to be displayed in the Nav Header.",
     },
     expandedWidth: {
       control: "text",
@@ -74,26 +72,16 @@ const storybookMeta: Meta<SideNavProps> = {
         },
       },
     },
-    hasCustomCompanyLogo: {
-      control: "boolean",
-      description:
-        "Defines if a custom company logo should be visible when available.",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
-    hasCustomFooter: {
-      control: "boolean",
-      description:
-        "Defines if a custom footer should be visible when available.",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
+    // hasCustomFooter: {
+    //   control: "boolean",
+    //   description:
+    //     "Defines if a custom footer should be visible when available.",
+    //   table: {
+    //     type: {
+    //       summary: "boolean",
+    //     },
+    //   },
+    // },
     isCollapsible: {
       control: "boolean",
       description: "Controls whether the side nav is collapsible",
@@ -121,8 +109,14 @@ const storybookMeta: Meta<SideNavProps> = {
         },
       },
     },
-    logo: {
-      description: "Logo to be displayed in the Nav Header",
+    logoProps: {
+      description: "Props passed in to render custom logo and/or link",
+      table: {
+        type: {
+          summary:
+            "href?: string; logoSrcUrl?: string; altText?: string; logoComponent?: ReactElement",
+        },
+      },
     },
     onCollapse: {
       description: "Callback to be triggered when the side nav is collapsed",
@@ -390,6 +384,37 @@ export const Default: StoryObj<typeof SideNav> = {
 export const Loading: StoryObj<typeof SideNav> = {
   args: {
     isLoading: true,
+  },
+  render: (props) => {
+    return (
+      <div style={{ height: "100vh" }}>
+        <SideNav {...props} />
+      </div>
+    );
+  },
+};
+
+export const CustomLogoElement: StoryObj<typeof SideNav> = {
+  args: {
+    logoProps: {
+      logoComponent: <PlaceholderLogo.One />,
+    },
+  },
+  render: (props) => {
+    return (
+      <div style={{ height: "100vh" }}>
+        <SideNav {...props} />
+      </div>
+    );
+  },
+};
+
+export const CustomLogoImage: StoryObj<typeof SideNav> = {
+  args: {
+    logoProps: {
+      imageUrl: "https://placehold.co/600x60",
+      imageAltText: "My custom image logo",
+    },
   },
   render: (props) => {
     return (
