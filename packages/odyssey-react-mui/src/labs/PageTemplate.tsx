@@ -86,8 +86,7 @@ const TemplateContainer = styled("div", {
     : `calc(1440px + ${odysseyDesignTokens.Spacing6} + ${odysseyDesignTokens.Spacing6})`,
   marginInline:
     isFullWidth && !hasUiShell ? odysseyDesignTokens.Spacing6 : "auto",
-  paddingBlock: odysseyDesignTokens.Spacing6,
-  paddingInline: hasUiShell ? 0 : odysseyDesignTokens.Spacing6,
+  padding: hasUiShell ? 0 : odysseyDesignTokens.Spacing6,
 }));
 
 const TemplateHeader = styled("div")(() => ({
