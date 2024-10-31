@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import styled from "@emotion/styled";
+import styled, { CSSObject } from "@emotion/styled";
 import {
   memo,
   useMemo,
@@ -144,9 +144,12 @@ const SideNavHeaderContainer = styled("div", {
     position: "sticky",
     top: 0,
     // The bottom border should appear only if the scrollable region has been scrolled
-    ...(hasContentScrolled && {
-      borderBottom: `${odysseyDesignTokens.BorderWidthMain} ${odysseyDesignTokens.BorderStyleMain} ${odysseyDesignTokens.HueNeutral50}`,
-    }),
+    ...(hasContentScrolled &&
+      ({
+        borderBottom: `${odysseyDesignTokens.BorderWidthMain} ${odysseyDesignTokens.BorderStyleMain} ${odysseyDesignTokens.HueNeutral50}`,
+        // boxShadow: true ? odysseyDesignTokens.DepthMedium : undefined,
+        // clipPath: "inset(0 0 -100% 0)",
+      } satisfies CSSObject)),
   }),
 );
 
@@ -355,7 +358,7 @@ const SideNav = ({
       }
       cancelAnimationFrame(resizeObserverDebounceTimer); // Ensure timer is cleared on component unmount
     };
-  }, []);
+  }, [sideNavItems]);
 
   const scrollIntoViewRef = useRef<HTMLLIElement>(null);
   /**
