@@ -33,34 +33,42 @@ const StyledAppContainer = styled("div", {
 })<{
   odysseyDesignTokens: DesignTokens;
 }>(({ odysseyDesignTokens }) => ({
+  gridArea: "app-content",
   overflowX: "hidden",
-  overflowY: "scroll",
+  overflowY: "auto",
   paddingBlock: odysseyDesignTokens.Spacing5,
   paddingInline: odysseyDesignTokens.Spacing6,
 }));
 
-const StyledFlexibleContentContainer = styled("div", {
+const StyledBannersContainer = styled("div")(() => ({
+  gridArea: "banners",
+}));
+
+const StyledSideNavContainer = styled("div")(() => ({
+  gridArea: "side-nav",
+}));
+
+const StyledShellContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{
   odysseyDesignTokens: DesignTokens;
 }>(({ odysseyDesignTokens }) => ({
   backgroundColor: odysseyDesignTokens.HueNeutral50,
-  display: "flex",
-  flexBasis: "100%",
-  flexDirection: "column",
-  flexGrow: 1,
-}));
-
-const StyledRigidContentContainer = styled("div")(() => ({
-  flexShrink: 0,
-  height: "100%",
-}));
-
-const StyledShellContainer = styled("div")(() => ({
-  display: "flex",
-  flexWrap: "nowrap",
+  display: "grid",
+  gridGap: 0,
+  gridTemplateAreas: `
+    "banners banners"
+    "side-nav top-nav"
+    "side-nav app-content"
+  `,
+  gridTemplateColumns: "auto 1fr",
+  gridTemplateRows: "auto auto 1fr",
   height: "100vh",
   width: "100vw",
+}));
+
+const StyledTopNavContainer = styled("div")(() => ({
+  gridArea: "top-nav",
 }));
 
 export type UiShellNavComponentProps = {
@@ -177,8 +185,12 @@ const UiShellContent = ({
   }, []);
 
   return (
-    <StyledShellContainer>
-      <StyledRigidContentContainer>
+    <StyledShellContainer odysseyDesignTokens={odysseyDesignTokens}>
+      <StyledBannersContainer>
+        {optionalComponents?.banners}
+      </StyledBannersContainer>
+
+      <StyledSideNavContainer>
         {sideNavProps && (
           <ErrorBoundary fallback={null} onError={onError}>
             <SideNav
@@ -199,9 +211,9 @@ const UiShellContent = ({
             />
           </ErrorBoundary>
         )}
-      </StyledRigidContentContainer>
+      </StyledSideNavContainer>
 
-      <StyledFlexibleContentContainer odysseyDesignTokens={odysseyDesignTokens}>
+      <StyledTopNavContainer>
         <ErrorBoundary fallback={null} onError={onError}>
           <TopNav
             {...topNavProps}
@@ -210,14 +222,13 @@ const UiShellContent = ({
             rightSideComponent={optionalComponents?.topNavRightSide}
           />
         </ErrorBoundary>
+      </StyledTopNavContainer>
 
         <StyledAppContainer
           odysseyDesignTokens={odysseyDesignTokens}
           tabIndex={0}
           ref={scrollableContentRef}
         >
-          {optionalComponents?.banners}
-
           {appComponent}
         </StyledAppContainer>
       </StyledFlexibleContentContainer>
