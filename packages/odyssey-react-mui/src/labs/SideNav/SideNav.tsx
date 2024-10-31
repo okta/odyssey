@@ -162,6 +162,13 @@ const SideNavScrollableContainer = styled("div")(() => ({
   overflowY: "auto",
 }));
 
+const SectionHeaderContainer = styled("li", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  paddingBlock: odysseyDesignTokens.Spacing3,
+  paddingInline: odysseyDesignTokens.Spacing5,
+}));
+
 const SectionHeader = styled("h3", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
@@ -169,8 +176,6 @@ const SectionHeader = styled("h3", {
   fontSize: odysseyDesignTokens.TypographySizeOverline,
   fontWeight: odysseyDesignTokens.TypographyWeightHeadingBold,
   color: odysseyDesignTokens.HueNeutral600,
-  paddingBlock: odysseyDesignTokens.Spacing3,
-  paddingInline: odysseyDesignTokens.Spacing5,
   textTransform: "uppercase",
 }));
 
@@ -474,7 +479,7 @@ const SideNav = ({
           </SideNavHeaderContainer>
 
           <SideNavScrollableContainer data-se="scrollable-region">
-            <SideNavListContainer role="menu" ref={scrollableContentRef}>
+            <SideNavListContainer role="list" ref={scrollableContentRef}>
               {isLoading
                 ? [...Array(6)].map((_, index) => <LoadingItem key={index} />)
                 : processedSideNavItems?.map((item) => {
@@ -491,13 +496,17 @@ const SideNav = ({
 
                     if (isSectionHeader) {
                       return (
-                        <SectionHeader
+                        <SectionHeaderContainer
                           id={id}
                           key={id}
                           odysseyDesignTokens={odysseyDesignTokens}
                         >
-                          {label}
-                        </SectionHeader>
+                          <SectionHeader
+                            odysseyDesignTokens={odysseyDesignTokens}
+                          >
+                            {label}
+                          </SectionHeader>
+                        </SectionHeaderContainer>
                       );
                     } else if (children) {
                       return (
@@ -516,7 +525,7 @@ const SideNav = ({
                             startIcon={startIcon}
                             isDisabled={isDisabled}
                           >
-                            <SideNavListContainer id={`${id}-list`} role="menu">
+                            <SideNavListContainer id={`${id}-list`} role="list">
                               {children}
                             </SideNavListContainer>
                           </NavAccordion>
