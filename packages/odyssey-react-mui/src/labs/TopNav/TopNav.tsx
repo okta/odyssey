@@ -49,6 +49,7 @@ const StyledTopNavContainer = styled("div", {
   paddingBlock: odysseyDesignTokens.Spacing2,
   paddingInline: odysseyDesignTokens.Spacing6,
   transition: `box-shadow ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
+  zIndex: 1,
 }));
 
 export type TopNavProps = {
