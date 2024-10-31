@@ -13,11 +13,11 @@
 import { useEffect, useRef, useState } from "react";
 
 export const useScrollState = <
-  ScollingContentElement extends HTMLElement = HTMLDivElement,
+  ScrollableContentElement extends HTMLElement = HTMLDivElement,
 >() => {
   const [isContentScrolled, setIsContentScrolled] = useState(false);
 
-  const scrollableContentRef = useRef<ScollingContentElement>(null);
+  const scrollableContentRef = useRef<ScrollableContentElement>(null);
 
   useEffect(() => {
     if (scrollableContentRef.current) {
