@@ -15,6 +15,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import {
   PageTemplate,
   UiShell,
+  uiShellDataAttribute,
   UserProfile,
   type UiShellNavComponentProps,
   type UiShellProps,
@@ -391,6 +392,9 @@ export const WithOdysseyAppContent: StoryObj<UiShellProps> = {
   args: {
     appComponent: (
       <OdysseyProvider>
+        {/* This is normally rendered by `renderUiShell`, but we're rendering `UiShell` outside of a web component, so we need to add this data attribute ourselves. */}
+        <div {...{ [uiShellDataAttribute]: "" }} />
+
         <PageTemplate
           description="This is my app."
           title="Access Certification"

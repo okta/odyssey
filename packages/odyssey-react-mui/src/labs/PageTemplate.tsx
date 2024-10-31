@@ -20,6 +20,7 @@ import {
 import { DocumentationIcon } from "../icons.generated";
 import { Heading4, Subordinate } from "../Typography";
 import { Link } from "../Link";
+import { useHasUiShell } from "./UiShell";
 
 export type PageTemplateProps = {
   /**
@@ -72,16 +73,21 @@ type TemplateContentProps = {
 
 const TemplateContainer = styled("div", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "isFullWidth",
+    prop !== "odysseyDesignTokens" &&
+    prop !== "hasUiShell" &&
+    prop !== "isFullWidth",
 })<{
-  odysseyDesignTokens: DesignTokens;
+  hasUiShell: boolean;
   isFullWidth: boolean;
-}>(({ odysseyDesignTokens, isFullWidth }) => ({
+  odysseyDesignTokens: DesignTokens;
+}>(({ hasUiShell, isFullWidth, odysseyDesignTokens }) => ({
   maxWidth: isFullWidth
     ? "100%"
     : `calc(1440px + ${odysseyDesignTokens.Spacing6} + ${odysseyDesignTokens.Spacing6})`,
-  marginInline: isFullWidth ? odysseyDesignTokens.Spacing6 : "auto",
-  padding: odysseyDesignTokens.Spacing6,
+  marginInline:
+    isFullWidth && !hasUiShell ? odysseyDesignTokens.Spacing6 : "auto",
+  paddingBlock: odysseyDesignTokens.Spacing6,
+  paddingInline: hasUiShell ? 0 : odysseyDesignTokens.Spacing6,
 }));
 
 const TemplateHeader = styled("div")(() => ({
@@ -163,24 +169,27 @@ const TemplateContent = styled("div", {
 );
 
 const PageTemplate = ({
-  title,
+  children,
   description,
   documentationLink,
   documentationText,
+  drawer,
+  isFullWidth = false,
   primaryCallToActionComponent,
   secondaryCallToActionComponent,
   tertiaryCallToActionComponent,
-  children,
-  drawer,
-  isFullWidth = false,
+  title,
 }: PageTemplateProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { isOpen: isDrawerOpen, variant: drawerVariant } = drawer?.props ?? {};
 
+  const hasUiShell = useHasUiShell();
+
   return (
     <TemplateContainer
-      odysseyDesignTokens={odysseyDesignTokens}
+      hasUiShell={hasUiShell}
       isFullWidth={isFullWidth}
+      odysseyDesignTokens={odysseyDesignTokens}
     >
       <TemplateHeader>
         <TemplateHeaderPrimaryContent>

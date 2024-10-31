@@ -19,6 +19,8 @@ import { UiShell, UiShellProps } from "./UiShell";
 import { renderReactInWebComponent } from "../../web-component/renderReactInWebComponent";
 import { type UiShellNavComponentProps } from "./UiShellContent";
 
+export const uiShellDataAttribute = "data-unified-ui-shell";
+
 export const optionalComponentSlotNames: Record<
   keyof Required<UiShellProps>["optionalComponents"],
   string
@@ -58,6 +60,9 @@ export const renderUiShell = ({
 }) => {
   const appRootElement =
     explicitAppRootElement || document.createElement("div");
+
+  // Add this attribute so `PageTemplate` and potentially other components will know if they're in UI Shell with special padding already available.
+  uiShellRootElement.setAttribute(uiShellDataAttribute, "");
 
   const { publish: publishPropChanges, subscribe: subscribeToPropChanges } =
     createMessageBus<SetStateAction<UiShellNavComponentProps>>();
