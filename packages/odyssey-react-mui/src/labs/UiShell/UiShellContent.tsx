@@ -11,14 +11,7 @@
  */
 
 import styled from "@emotion/styled";
-import {
-  memo,
-  useEffect,
-  useRef,
-  useState,
-  type ReactElement,
-  type ReactNode,
-} from "react";
+import { memo, type ReactElement, type ReactNode } from "react";
 import { ErrorBoundary, ErrorBoundaryProps } from "react-error-boundary";
 
 import { SideNav, type SideNavProps } from "../SideNav";
@@ -27,6 +20,7 @@ import {
   useOdysseyDesignTokens,
   type DesignTokens,
 } from "../../OdysseyDesignTokensContext";
+import { useScrollState } from "./useScrollState";
 
 const StyledAppContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
@@ -117,72 +111,7 @@ const UiShellContent = ({
   topNavProps,
 }: UiShellContentProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
-  const [hasContentScrolled, setHasContentScrolled] = useState(false);
-  const scrollableContentRef = useRef<HTMLDivElement>(null);
-  const resizeObserverRef = useRef<ResizeObserver | null>(null);
-  const scrollFrameRef = useRef<number | null>(null);
-  const isScrolledRef = useRef(false);
-
-  useEffect(() => {
-    const checkScrollPosition = () => {
-      if (scrollableContentRef.current) {
-        const isCurrentlyScrolled = scrollableContentRef.current.scrollTop > 0;
-
-        // Only update state if the scrolled status has changed
-        if (isCurrentlyScrolled !== isScrolledRef.current) {
-          isScrolledRef.current = isCurrentlyScrolled;
-          setHasContentScrolled(isCurrentlyScrolled);
-        }
-      }
-      scrollFrameRef.current = null;
-    };
-
-    const handleScroll = () => {
-      // Only schedule a new frame if we don't already have one pending
-      if (!scrollFrameRef.current) {
-        scrollFrameRef.current = requestAnimationFrame(checkScrollPosition);
-      }
-    };
-
-    // If the window is resized, we may need to re-determine if the scrollable container has overflow
-    // Setup a ResizeObserver to know if the size of the scrollableContent changes
-    let resizeObserverDebounceTimer: ReturnType<typeof requestAnimationFrame>;
-    if (!resizeObserverRef.current) {
-      resizeObserverRef.current = new ResizeObserver(() => {
-        cancelAnimationFrame(resizeObserverDebounceTimer);
-      });
-    }
-
-    if (resizeObserverRef.current && scrollableContentRef.current) {
-      // Observe the container itself for size changes
-      resizeObserverRef.current.observe(scrollableContentRef.current);
-    }
-
-    // Add scroll event listener to the container
-    if (scrollableContentRef.current) {
-      scrollableContentRef.current.addEventListener("scroll", handleScroll);
-      // Check initial scroll position
-      checkScrollPosition();
-    }
-
-    // Cleanup when unmounted:
-    return () => {
-      if (resizeObserverRef.current) {
-        resizeObserverRef.current.disconnect();
-        resizeObserverRef.current = null;
-      }
-      if (scrollableContentRef.current) {
-        scrollableContentRef.current.removeEventListener(
-          "scroll",
-          handleScroll,
-        );
-      }
-      if (scrollFrameRef.current) {
-        cancelAnimationFrame(scrollFrameRef.current);
-      }
-      cancelAnimationFrame(resizeObserverDebounceTimer);
-    };
-  }, []);
+  const { isContentScrolled, scrollableContentRef } = useScrollState();
 
   return (
     <StyledShellContainer odysseyDesignTokens={odysseyDesignTokens}>
@@ -217,7 +146,7 @@ const UiShellContent = ({
         <ErrorBoundary fallback={null} onError={onError}>
           <TopNav
             {...topNavProps}
-            isScrolled={hasContentScrolled}
+            isScrolled={isContentScrolled}
             leftSideComponent={optionalComponents?.topNavLeftSide}
             rightSideComponent={optionalComponents?.topNavRightSide}
           />
