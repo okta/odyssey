@@ -39,9 +39,11 @@ const SideNavHeaderContainer = styled("div", {
   alignItems: "center",
   paddingInline: odysseyDesignTokens.Spacing5,
   paddingBlock: odysseyDesignTokens.Spacing4,
+  width: "100%",
 
   h2: {
     margin: 0,
+    width: "100%",
   },
 }));
 
@@ -80,9 +82,7 @@ const SideNavHeader = ({ appName, isLoading, logo }: SideNavHeader) => {
       </SideNavLogoContainer>
 
       <SideNavHeaderContainer odysseyDesignTokens={odysseyDesignTokens}>
-        <Heading6 component="h2">
-          {isLoading ? <Skeleton width="50%" /> : appName}
-        </Heading6>
+        <Heading6 component="h2">{isLoading ? <Skeleton /> : appName}</Heading6>
       </SideNavHeaderContainer>
     </Box>
   );
