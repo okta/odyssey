@@ -137,20 +137,6 @@ export const components = ({
             verticalAlign: "middle",
             width: "1em",
           },
-          "&.nav-accordion-summary": {
-            borderRadius: odysseyTokens.BorderRadiusMain,
-            padding: `${odysseyTokens.Spacing2} ${odysseyTokens.Spacing4}`,
-
-            "&:focus-visible": {
-              backgroundColor: "unset",
-              outline: "none",
-              boxShadow: `inset 0 0 0 3px ${odysseyTokens.PalettePrimaryMain}`,
-            },
-
-            ".MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
-              transform: "rotate(-90deg) !important",
-            },
-          },
         }),
         content: () => ({
           marginBlock: 0,

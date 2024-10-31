@@ -44,15 +44,13 @@ export const StyledSideNavListItem = styled("li", {
   alignItems: "center",
   backgroundColor: "unset",
   borderRadius: odysseyDesignTokens.BorderRadiusMain,
+  lineHeight: 1.5,
+  transition: `backgroundColor ${odysseyDesignTokens.TransitionDurationMain}, color ${odysseyDesignTokens.TransitionDurationMain}`,
 
   ...(isSelected && {
     color: `${odysseyDesignTokens.TypographyColorAction} !important`,
     backgroundColor: odysseyDesignTokens.HueBlue50,
   }),
-
-  // "+ li": {
-  //   marginBlockStart: odysseyDesignTokens.Spacing1
-  // },
 
   "&:last-child": {
     marginBottom: odysseyDesignTokens.Spacing2,
@@ -91,9 +89,10 @@ const GetNavItemContentStyles = ({
     textDecoration: "none",
     color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
     minHeight: odysseyDesignTokens.Spacing7,
-    paddingBlock: odysseyDesignTokens.Spacing2,
-    paddingInline: odysseyDesignTokens.Spacing4,
+    paddingBlock: odysseyDesignTokens.Spacing4,
+    paddingInline: `calc(${odysseyDesignTokens.Spacing4} * ${contextValue.depth})`,
     borderRadius: odysseyDesignTokens.BorderRadiusMain,
+    transition: `backgroundColor ${odysseyDesignTokens.TransitionDurationMain}, color ${odysseyDesignTokens.TransitionDurationMain}`,
 
     ...(isSelected && {
       color: `${odysseyDesignTokens.TypographyColorAction} !important`,
@@ -110,32 +109,20 @@ const GetNavItemContentStyles = ({
     }),
 
     "&:focus-visible": {
-      // borderRadius: 0,
-      // outlineColor: odysseyDesignTokens.FocusOutlineColorPrimary,
-      // outlineStyle: odysseyDesignTokens.FocusOutlineStyle,
-      // outlineWidth: odysseyDesignTokens.FocusOutlineWidthMain,
       outline: "none",
       boxShadow: `inset 0 0 0 3px ${odysseyDesignTokens.PalettePrimaryMain}`,
-      // textDecoration: "none",
-      // outlineOffset: 0,
-      // color: isDisabled
-      //   ? "default"
-      //   : `${odysseyDesignTokens.TypographyColorAction} !important`,
-      // backgroundColor: !isDisabled
-      //   ? odysseyDesignTokens.HueNeutral50
-      //   : "inherit",
     },
 
     "&:hover": {
       textDecoration: "none",
-      cursor: isDisabled ? "default" : "pointer",
-      // color: `${odysseyDesignTokens.TypographyColorAction} !important`,
+      cursor: "pointer",
       backgroundColor: !isDisabled
         ? odysseyDesignTokens.HueNeutral50
         : "inherit",
 
       ...(isDisabled && {
         color: "inherit",
+        cursor: "default",
       }),
     },
   };
@@ -145,14 +132,16 @@ const NavItemContentContainer = styled("div", {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" &&
     prop != "contextValue" &&
-    prop !== "isDisabled",
+    prop !== "isDisabled" &&
+    prop !== "isSelected",
 })(GetNavItemContentStyles);
 
 const NavItemLinkContainer = styled(NavItemLink, {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" &&
     prop != "contextValue" &&
-    prop !== "isDisabled",
+    prop !== "isDisabled" &&
+    prop !== "isSelected",
 })(GetNavItemContentStyles);
 
 const SideNavItemContent = ({
