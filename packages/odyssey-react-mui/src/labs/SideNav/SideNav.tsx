@@ -51,18 +51,14 @@ const StyledSideNavContainer = styled("div")(() => ({
 
 const StyledCollapsibleContent = styled("div", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" &&
-    prop !== "isSideNavCollapsed" &&
-    prop !== "expandedWidth",
+    prop !== "odysseyDesignTokens" && prop !== "isSideNavCollapsed",
 })(
   ({
     odysseyDesignTokens,
     isSideNavCollapsed,
-    expandedWidth,
   }: {
     odysseyDesignTokens: DesignTokens;
     isSideNavCollapsed: boolean;
-    expandedWidth: string;
   }) => ({
     position: "relative",
     backgroundColor: odysseyDesignTokens.HueNeutralWhite,
@@ -70,8 +66,8 @@ const StyledCollapsibleContent = styled("div", {
     display: "flex",
     opacity: isSideNavCollapsed ? 0 : 1,
     visibility: isSideNavCollapsed ? "hidden" : "visible",
-    width: isSideNavCollapsed ? 0 : expandedWidth,
-    minWidth: isSideNavCollapsed ? 0 : expandedWidth,
+    width: isSideNavCollapsed ? 0 : DEFAULT_SIDE_NAV_WIDTH,
+    minWidth: isSideNavCollapsed ? 0 : DEFAULT_SIDE_NAV_WIDTH,
     transitionProperty: "opacity",
     transitionDuration: odysseyDesignTokens.TransitionDurationMain,
     transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
@@ -257,7 +253,6 @@ const LoadingItem = () => {
 
 const SideNav = ({
   appName,
-  expandedWidth = DEFAULT_SIDE_NAV_WIDTH,
   footerComponent,
   footerItems,
   hasCustomFooter,
@@ -466,7 +461,6 @@ const SideNav = ({
         <StyledCollapsibleContent
           aria-label={appName}
           data-se="expanded-region"
-          expandedWidth={expandedWidth}
           id="side-nav-expandable"
           isSideNavCollapsed={isSideNavCollapsed}
           odysseyDesignTokens={odysseyDesignTokens}

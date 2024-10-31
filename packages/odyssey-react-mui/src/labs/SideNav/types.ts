@@ -55,11 +55,6 @@ export type SideNavProps = {
    */
   appName: string;
   /**
-   * A CSS length string indicating the customizable expanded width of the SideNav container.
-   * (it will be smaller if isCollapsible and collapsed)
-   */
-  expandedWidth?: string;
-  /**
    *  Determines whether the side nav is collapsible
    */
   isCollapsible?: boolean;

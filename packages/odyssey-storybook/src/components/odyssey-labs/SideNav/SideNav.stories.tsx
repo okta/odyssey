@@ -51,15 +51,6 @@ const storybookMeta: Meta<SideNavProps> = {
         },
       },
     },
-    expandedWidth: {
-      control: "text",
-      description: "Width of the side nav in px",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
     footerComponent: {
       description:
         "Custom footer component to render in place of footer items.",

@@ -19,7 +19,7 @@ describe("SideNav", () => {
     render(
       <OdysseyProvider>
         <SideNav
-          navHeaderText="Header text"
+          appName="Header text"
           sideNavItems={[
             {
               id: "item0",
@@ -44,7 +44,7 @@ describe("SideNav", () => {
               alt="Custom logo"
             />
           }
-          navHeaderText="Header text"
+          appName="Header text"
           sideNavItems={[
             {
               id: "item0",
@@ -65,7 +65,7 @@ describe("SideNav", () => {
     render(
       <OdysseyProvider>
         <SideNav
-          navHeaderText={headerText}
+          appName={headerText}
           sideNavItems={[
             {
               id: "item0",
@@ -89,7 +89,7 @@ describe("SideNav", () => {
       <OdysseyProvider>
         <SideNav
           isCollapsible
-          navHeaderText="Header text"
+          appName="Header text"
           sideNavItems={[
             {
               id: "item0",
@@ -123,7 +123,7 @@ describe("SideNav", () => {
         <SideNav
           isCollapsible
           onCollapse={mockOnCollapse}
-          navHeaderText="Header text"
+          appName="Header text"
           sideNavItems={[
             {
               id: "item0",
@@ -150,7 +150,7 @@ describe("SideNav", () => {
         <SideNav
           isCollapsible
           onExpand={mockOnExpand}
-          navHeaderText="Header text"
+          appName="Header text"
           sideNavItems={[
             {
               id: "item0",
@@ -178,7 +178,7 @@ describe("SideNav", () => {
       <OdysseyProvider>
         <SideNav
           isLoading
-          navHeaderText="Header text"
+          appName="Header text"
           sideNavItems={[
             {
               id: "item0",
@@ -198,7 +198,7 @@ describe("SideNav", () => {
     render(
       <OdysseyProvider>
         <SideNav
-          navHeaderText="Header text"
+          appName="Header text"
           footerItems={[
             {
               id: "footer-item-1",
@@ -228,8 +228,9 @@ describe("SideNav", () => {
     render(
       <OdysseyProvider>
         <SideNav
-          navHeaderText="Header text"
+          appName="Header text"
           footerComponent={footerComponent}
+          hasCustomFooter
           sideNavItems={[
             {
               id: "item0",
@@ -254,7 +255,7 @@ describe("SideNav", () => {
     render(
       <OdysseyProvider>
         <SideNav
-          navHeaderText="Header text"
+          appName="Header text"
           sideNavItems={[
             {
               id: "menuClickable",
@@ -306,7 +307,7 @@ describe("SideNav", () => {
     render(
       <OdysseyProvider>
         <SideNav
-          navHeaderText="Header text"
+          appName="Header text"
           sideNavItems={[
             {
               id: "item0",
