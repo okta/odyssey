@@ -207,8 +207,8 @@ const SideNavFooter = styled("div", {
 const SideNavFooterItemsContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
-  paddingBlockStart: odysseyDesignTokens.Spacing5,
-  paddingBlockEnd: odysseyDesignTokens.Spacing4,
+  paddingBlock: odysseyDesignTokens.Spacing4,
+  // paddingBlockEnd: odysseyDesignTokens.Spacing4,
   paddingInline: odysseyDesignTokens.Spacing5,
   display: "flex",
   flexWrap: "wrap",

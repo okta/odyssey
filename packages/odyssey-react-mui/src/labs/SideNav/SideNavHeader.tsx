@@ -27,11 +27,13 @@ import { TOP_NAV_HEIGHT } from "../TopNav";
 const SideNavLogoContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  display: "flex",
+  alignItems: "center",
   height: TOP_NAV_HEIGHT,
   padding: odysseyDesignTokens.Spacing4,
 
   "svg, img": {
-    height: "100%",
+    maxHeight: "100%",
     width: "auto",
     maxWidth: "100%",
   },
