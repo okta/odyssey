@@ -62,7 +62,7 @@ const StyledCollapsibleContent = styled("div", {
     gridTemplateRows: "max-content 1fr max-content",
     minWidth: isSideNavCollapsed ? 0 : DEFAULT_SIDE_NAV_WIDTH,
     height: "100%",
-    transition: `grid-template-columns ${odysseyDesignTokens.TransitionDurationMain} opacity ${odysseyDesignTokens.TransitionDurationMain}`,
+    transition: `grid-template-columns ${odysseyDesignTokens.TransitionDurationMain}, opacity 300ms`,
     transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
     overflow: "hidden",
     opacity: isSideNavCollapsed ? 0 : 1,
