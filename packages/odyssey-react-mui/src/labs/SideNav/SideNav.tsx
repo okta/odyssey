@@ -20,12 +20,15 @@ import {
   useEffect,
   KeyboardEventHandler,
 } from "react";
+import { Skeleton } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import { NavAccordion } from "./NavAccordion";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
+import { OdysseyThemeProvider } from "../../OdysseyThemeProvider";
 import type { SideNavProps } from "./types";
 import { SideNavHeader } from "./SideNavHeader";
 import {
@@ -35,19 +38,12 @@ import {
 import { SideNavFooterContent } from "./SideNavFooterContent";
 import { SideNavItemContentContext } from "./SideNavItemContentContext";
 import { SideNavToggleButton } from "./SideNavToggleButton";
-import { Skeleton } from "@mui/material";
-import { useTranslation } from "react-i18next";
 
 export const DEFAULT_SIDE_NAV_WIDTH = "300px";
 
 // The side nav collapse icon is placed absolutely from the top (Logo container + nav header height)
 // to align it in the middle of the nav header text
 export const SIDENAV_COLLAPSE_ICON_POSITION = "77px";
-
-const StyledSideNavContainer = styled("div")(() => ({
-  display: "flex",
-  height: "100%",
-}));
 
 const StyledCollapsibleContent = styled("div", {
   shouldForwardProp: (prop) =>
@@ -61,16 +57,15 @@ const StyledCollapsibleContent = styled("div", {
     isSideNavCollapsed: boolean;
   }) => ({
     position: "relative",
-    backgroundColor: odysseyDesignTokens.HueNeutralWhite,
-    flexDirection: "column",
-    display: "flex",
-    opacity: isSideNavCollapsed ? 0 : 1,
-    visibility: isSideNavCollapsed ? "hidden" : "visible",
-    width: isSideNavCollapsed ? 0 : DEFAULT_SIDE_NAV_WIDTH,
+    display: "inline-grid",
+    gridTemplateColumns: isSideNavCollapsed ? 0 : DEFAULT_SIDE_NAV_WIDTH,
+    gridTemplateRows: "max-content 1fr max-content",
     minWidth: isSideNavCollapsed ? 0 : DEFAULT_SIDE_NAV_WIDTH,
-    transitionProperty: "opacity",
-    transitionDuration: odysseyDesignTokens.TransitionDurationMain,
+    height: "100%",
+    transition: `grid-template-columns ${odysseyDesignTokens.TransitionDurationMain} opacity ${odysseyDesignTokens.TransitionDurationMain}`,
     transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
+    overflow: "hidden",
+    opacity: isSideNavCollapsed ? 0 : 1,
   }),
 );
 
@@ -85,8 +80,9 @@ const StyledSideNav = styled("nav", {
     odysseyDesignTokens: DesignTokens;
     isSideNavCollapsed: boolean;
   }) => ({
-    display: "flex",
     position: "relative",
+    display: "inline-block",
+    height: "100%",
     backgroundColor: odysseyDesignTokens.HueNeutralWhite,
 
     "&::after": {
@@ -137,8 +133,7 @@ const SideNavHeaderContainer = styled("div", {
     hasContentScrolled: boolean;
     odysseyDesignTokens: DesignTokens;
   }) => ({
-    position: "sticky",
-    top: 0,
+    flexShrink: 0,
     // The bottom border should appear only if the scrollable region has been scrolled
     ...(hasContentScrolled &&
       ({
@@ -156,7 +151,7 @@ const SideNavListContainer = styled("ul")(() => ({
 const SideNavScrollableContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
-  flex: 1,
+  flex: "1 1 100%",
   overflowY: "auto",
   paddingInline: odysseyDesignTokens.Spacing2,
 }));
@@ -189,8 +184,7 @@ const SideNavFooter = styled("div", {
     isContentScrollable: boolean;
     odysseyDesignTokens: DesignTokens;
   }) => ({
-    position: "sticky",
-    bottom: 0,
+    flexShrink: 0,
     transitionProperty: "box-shadow",
     transitionDuration: odysseyDesignTokens.TransitionDurationMain,
     transitionTiming: odysseyDesignTokens.TransitionTimingMain,
@@ -446,25 +440,21 @@ const SideNav = ({
   );
 
   return (
-    <StyledSideNavContainer>
-      <StyledSideNav
-        aria-label={t("navigation.label")}
-        isSideNavCollapsed={isSideNavCollapsed}
-        odysseyDesignTokens={odysseyDesignTokens}
-      >
-        {isCollapsible && (
-          <SideNavToggleButton
-            ariaControls="side-nav-expandable"
-            isSideNavCollapsed={isSideNavCollapsed}
-            onClick={sideNavExpandClickHandler}
-            onKeyDown={sideNavExpandKeyHandler}
-          />
-        )}
-
+    <StyledSideNav
+      aria-label={t("navigation.label")}
+      isSideNavCollapsed={isSideNavCollapsed}
+      odysseyDesignTokens={odysseyDesignTokens}
+    >
+      {isCollapsible && (
+        <SideNavToggleButton
+          ariaControls="side-nav-expandable"
+          isSideNavCollapsed={isSideNavCollapsed}
+          onClick={sideNavExpandClickHandler}
+          onKeyDown={sideNavExpandKeyHandler}
+        />
+      )}
+      <OdysseyThemeProvider>
         <StyledCollapsibleContent
-          aria-label={appName}
-          data-se="expanded-region"
-          id="side-nav-expandable"
           isSideNavCollapsed={isSideNavCollapsed}
           odysseyDesignTokens={odysseyDesignTokens}
         >
@@ -478,7 +468,6 @@ const SideNav = ({
               logoProps={logoProps}
             />
           </SideNavHeaderContainer>
-
           <SideNavScrollableContainer
             odysseyDesignTokens={odysseyDesignTokens}
             data-se="scrollable-region"
@@ -554,7 +543,6 @@ const SideNav = ({
                   })}
             </SideNavListContainer>
           </SideNavScrollableContainer>
-
           {!isLoading && (footerItems || hasCustomFooter) && (
             <SideNavFooter
               odysseyDesignTokens={odysseyDesignTokens}
@@ -572,8 +560,8 @@ const SideNav = ({
             </SideNavFooter>
           )}
         </StyledCollapsibleContent>
-      </StyledSideNav>
-    </StyledSideNavContainer>
+      </OdysseyThemeProvider>
+    </StyledSideNav>
   );
 };
 

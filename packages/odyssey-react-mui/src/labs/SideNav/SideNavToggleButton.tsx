@@ -131,7 +131,7 @@ const StyledToggleButton = styled(MuiButton, {
       height: odysseyDesignTokens.Spacing4,
       backgroundColor: odysseyDesignTokens.HueNeutral500,
       transform: "translate3d(-50%, -50%, 0)",
-      transition: `transform 250ms`,
+      transition: `transform ${odysseyDesignTokens.TransitionDurationMain}`,
     },
   }),
 );

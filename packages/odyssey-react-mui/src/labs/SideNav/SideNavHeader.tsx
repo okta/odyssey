@@ -14,7 +14,6 @@ import styled from "@emotion/styled";
 import { memo } from "react";
 import { Skeleton } from "@mui/material";
 
-import { Box } from "../../Box";
 import {
   type DesignTokens,
   useOdysseyDesignTokens,
@@ -23,6 +22,16 @@ import { SideNavLogo } from "./SideNavLogo";
 import { SideNavProps } from "./types";
 import { Heading6 } from "../../Typography";
 import { TOP_NAV_HEIGHT } from "../TopNav";
+
+const SideNavHeaderContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  position: "relative",
+  display: "flex",
+  flexDirection: "column",
+  backgroundColor: odysseyDesignTokens.HueNeutralWhite,
+  zIndex: 1,
+}));
 
 const SideNavLogoContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
@@ -39,7 +48,7 @@ const SideNavLogoContainer = styled("div", {
   },
 }));
 
-const SideNavHeaderContainer = styled("div", {
+const SideNavHeadingContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
   display: "flex",
@@ -73,12 +82,7 @@ const SideNavHeader = ({
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
+    <SideNavHeaderContainer odysseyDesignTokens={odysseyDesignTokens}>
       <SideNavLogoContainer odysseyDesignTokens={odysseyDesignTokens}>
         {isLoading ? (
           //  The skeleton takes the hardcoded dimensions of the Okta logo
@@ -88,10 +92,10 @@ const SideNavHeader = ({
         )}
       </SideNavLogoContainer>
 
-      <SideNavHeaderContainer odysseyDesignTokens={odysseyDesignTokens}>
+      <SideNavHeadingContainer odysseyDesignTokens={odysseyDesignTokens}>
         <Heading6 component="h2">{isLoading ? <Skeleton /> : appName}</Heading6>
-      </SideNavHeaderContainer>
-    </Box>
+      </SideNavHeadingContainer>
+    </SideNavHeaderContainer>
   );
 };
 
