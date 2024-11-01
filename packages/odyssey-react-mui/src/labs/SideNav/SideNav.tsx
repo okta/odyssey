@@ -207,20 +207,23 @@ const SideNavFooter = styled("div", {
 const SideNavFooterItemsContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
-  paddingBlock: odysseyDesignTokens.Spacing2,
+  paddingBlockStart: odysseyDesignTokens.Spacing5,
+  paddingBlockEnd: odysseyDesignTokens.Spacing4,
+  paddingInline: odysseyDesignTokens.Spacing5,
   display: "flex",
-  justifyContent: "center",
   flexWrap: "wrap",
   alignItems: "center",
   fontSize: odysseyDesignTokens.TypographySizeOverline,
-  "& a": {
+
+  a: {
     color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
-  },
-  "& a:hover": {
-    textDecoration: "none",
-  },
-  "& a:visited": {
-    color: odysseyDesignTokens.TypographyColorHeading,
+
+    "&:hover": {
+      textDecoration: "none",
+    },
+    "&:visited": {
+      color: odysseyDesignTokens.TypographyColorHeading,
+    },
   },
 }));
 

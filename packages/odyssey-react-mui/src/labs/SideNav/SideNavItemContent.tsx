@@ -94,6 +94,25 @@ const GetNavItemContentStyles = ({
     borderRadius: odysseyDesignTokens.BorderRadiusMain,
     transition: `backgroundColor ${odysseyDesignTokens.TransitionDurationMain}, color ${odysseyDesignTokens.TransitionDurationMain}`,
 
+    "&:hover": {
+      textDecoration: "none",
+      cursor: "pointer",
+      backgroundColor: !isDisabled
+        ? odysseyDesignTokens.HueNeutral50
+        : "inherit",
+
+      ...(isDisabled && {
+        color: "inherit",
+        cursor: "default",
+      }),
+
+      ...(isSelected && {
+        "&:hover": {
+          backgroundColor: odysseyDesignTokens.HueBlue50,
+        },
+      }),
+    },
+
     ...(isSelected && {
       color: `${odysseyDesignTokens.TypographyColorAction} !important`,
       fontWeight: odysseyDesignTokens.TypographyWeightBodyBold,
@@ -111,19 +130,6 @@ const GetNavItemContentStyles = ({
     "&:focus-visible": {
       outline: "none",
       boxShadow: `inset 0 0 0 3px ${odysseyDesignTokens.PalettePrimaryMain}`,
-    },
-
-    "&:hover": {
-      textDecoration: "none",
-      cursor: "pointer",
-      backgroundColor: !isDisabled
-        ? odysseyDesignTokens.HueNeutral50
-        : "inherit",
-
-      ...(isDisabled && {
-        color: "inherit",
-        cursor: "default",
-      }),
     },
   };
 };
