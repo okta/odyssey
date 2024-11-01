@@ -38,13 +38,11 @@ describe("SideNav", () => {
     render(
       <OdysseyProvider>
         <SideNav
-          logo={
-            <img
-              src="https://placehold.co/600x400/EEE/31343C"
-              alt="Custom logo"
-            />
-          }
           appName="Header text"
+          logoProps={{
+            imageAltText: "Custom logo",
+            imageUrl: "https://placehold.co/600x400/EEE/31343C",
+          }}
           sideNavItems={[
             {
               id: "item0",

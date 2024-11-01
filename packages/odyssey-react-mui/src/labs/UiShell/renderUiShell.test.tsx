@@ -54,7 +54,6 @@ describe("renderUiShell", () => {
       });
 
       expect(slottedElements.banners).toBeInstanceOf(HTMLDivElement);
-      expect(slottedElements.logoProps).toBeInstanceOf(HTMLDivElement);
       expect(slottedElements.sideNavFooter).toBeInstanceOf(HTMLDivElement);
       expect(slottedElements.topNavLeftSide).toBeInstanceOf(HTMLDivElement);
       expect(slottedElements.topNavRightSide).toBeInstanceOf(HTMLDivElement);
