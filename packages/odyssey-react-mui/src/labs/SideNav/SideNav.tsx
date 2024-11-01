@@ -442,6 +442,7 @@ const SideNav = ({
   return (
     <StyledSideNav
       aria-label={t("navigation.label")}
+      id="side-nav-expandable"
       isSideNavCollapsed={isSideNavCollapsed}
       odysseyDesignTokens={odysseyDesignTokens}
     >
