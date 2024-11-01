@@ -244,11 +244,11 @@ describe("SideNav", () => {
   });
 
   test("displays sidenav link", async () => {
-    const menuLinkText = "Link";
-    const menuClickableText = "Clickable";
-    const headingText = "Heading";
-    const accordionOuter = "Accordion outside";
     const accordionInner = "Accordion inside";
+    const accordionOuter = "Accordion outside";
+    const headingText = "Heading";
+    const menuClickableText = "Clickable";
+    const menuLinkText = "Link";
 
     render(
       <OdysseyProvider>
