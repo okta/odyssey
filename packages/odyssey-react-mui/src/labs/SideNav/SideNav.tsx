@@ -16,9 +16,9 @@ import {
   useMemo,
   useState,
   useCallback,
-  KeyboardEvent,
   useRef,
   useEffect,
+  KeyboardEventHandler,
 } from "react";
 
 import { NavAccordion } from "./NavAccordion";
@@ -433,8 +433,10 @@ const SideNav = ({
     setSideNavCollapsed(!isSideNavCollapsed);
   }, [isSideNavCollapsed, setSideNavCollapsed, onExpand, onCollapse]);
 
-  const sideNavExpandKeyHandler = useCallback(
-    (event: KeyboardEvent<HTMLButtonElement>) => {
+  const sideNavExpandKeyHandler = useCallback<
+    KeyboardEventHandler<HTMLButtonElement>
+  >(
+    (event) => {
       if (event?.key === "Enter" || event?.code === "Space") {
         event.preventDefault();
         sideNavExpandClickHandler();
