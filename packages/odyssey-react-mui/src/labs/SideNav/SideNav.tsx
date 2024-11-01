@@ -143,8 +143,6 @@ const SideNavHeaderContainer = styled("div", {
     ...(hasContentScrolled &&
       ({
         borderBottom: `${odysseyDesignTokens.BorderWidthMain} ${odysseyDesignTokens.BorderStyleMain} ${odysseyDesignTokens.HueNeutral50}`,
-        // boxShadow: true ? odysseyDesignTokens.DepthMedium : undefined,
-        // clipPath: "inset(0 0 -100% 0)",
       } satisfies CSSObject)),
   }),
 );
