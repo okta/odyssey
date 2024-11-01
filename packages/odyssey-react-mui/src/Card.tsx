@@ -65,6 +65,7 @@ const ImageContainer = styled("div", {
   display: "flex",
   alignItems: "flex-start",
   maxHeight: CARD_IMAGE_HEIGHT,
+  height: CARD_IMAGE_HEIGHT,
   marginBlockEnd: odysseyDesignTokens.Spacing5,
   paddingRight: hasMenuButtonChildren ? odysseyDesignTokens.Spacing5 : 0,
 }));

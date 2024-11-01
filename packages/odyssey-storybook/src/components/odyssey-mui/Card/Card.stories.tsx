@@ -107,15 +107,6 @@ const storybookMeta: Meta<CardProps> = {
     onClick: undefined,
   },
   decorators: [MuiThemeDecorator],
-  parameters: {
-    backgrounds: {
-      default: "gray",
-      values: [
-        { name: "gray", value: "#f4f4f4" },
-        { name: "white", value: "#ffffff" },
-      ],
-    },
-  },
 };
 
 export default storybookMeta;
@@ -125,6 +116,7 @@ export const Default: StoryObj<CardProps> = {
     <Box sx={{ maxWidth: 262 }}>
       <Card
         {...props}
+        button={<Button variant="primary" label="Button" />}
         image={<img src="https://placehold.co/128" alt="Example logo" />}
         menuButtonChildren={
           <>
@@ -133,7 +125,6 @@ export const Default: StoryObj<CardProps> = {
             <MenuItem>Menu option</MenuItem>
           </>
         }
-        button={<Button variant="primary" label="Button" />}
       />
     </Box>
   ),
@@ -148,11 +139,11 @@ export const Clickable: StoryObj<CardProps> = {
     return (
       <Box sx={{ maxWidth: 262 }}>
         <Card
-          overline={props.overline}
-          title={props.title}
           description={props.description}
           image={<img src="https://placehold.co/128" alt="Example logo" />}
           onClick={onClick}
+          overline={props.overline}
+          title={props.title}
         />
       </Box>
     );
@@ -168,11 +159,11 @@ export const ClickableWithoutImage: StoryObj<CardProps> = {
     return (
       <Box sx={{ maxWidth: 262 }}>
         <Card
-          overline={props.overline}
-          title={props.title}
           description={props.description}
           image={props.image}
           onClick={onClick}
+          overline={props.overline}
+          title={props.title}
         />
       </Box>
     );
@@ -183,8 +174,7 @@ export const ButtonWithoutImage: StoryObj<typeof Card> = {
   render: ({ ...props }) => (
     <Box sx={{ maxWidth: 262 }}>
       <Card
-        overline={props.overline}
-        title={props.title}
+        button={<Button variant="primary" label="Button" />}
         description={props.description}
         image={props.image}
         menuButtonChildren={
@@ -194,7 +184,8 @@ export const ButtonWithoutImage: StoryObj<typeof Card> = {
             <MenuItem>Menu option 3</MenuItem>
           </>
         }
-        button={<Button variant="primary" label="Button" />}
+        overline={props.overline}
+        title={props.title}
       />
     </Box>
   ),

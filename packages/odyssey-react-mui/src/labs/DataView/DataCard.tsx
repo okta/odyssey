@@ -42,16 +42,23 @@ import {
   ChevronUpIcon,
   MoreIcon,
 } from "../../icons.generated";
+import { CardLayoutProps } from "./componentTypes";
+import { MRT_RowData } from "material-react-table";
 
-export const CARD_IMAGE_HEIGHT = "64px";
+export const CARD_IMAGE_SIZE = "64px";
+export const CARD_IMAGE_SIZE_COMPACT = "48px";
+
+export const cardVariantValues = ["tile", "stack", "compact"] as const;
 
 export type DataCardProps = {
   children?: ReactNode;
   description?: string;
-  detailPanel?: ReactNode;
   image?: ReactElement;
   overline?: string;
+  renderDetailPanel?: CardLayoutProps["renderDetailPanel"];
+  row: MRT_RowData;
   title?: string;
+  variant?: (typeof cardVariantValues)[number];
 } & (
   | {
       Accessory?: never;
@@ -68,43 +75,74 @@ export type DataCardProps = {
 );
 
 const AccessoryContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "variant",
 })<{
   odysseyDesignTokens: DesignTokens;
-}>(({ odysseyDesignTokens }) => ({
+  variant: (typeof cardVariantValues)[number];
+}>(({ odysseyDesignTokens, variant }) => ({
   display: "flex",
-  flexDirection: "column",
+  flexDirection: variant === "compact" ? "row" : "column",
   alignItems: "center",
   gap: odysseyDesignTokens.Spacing2,
+  height: variant === "compact" ? CARD_IMAGE_SIZE_COMPACT : "auto",
 }));
 
 const ImageContainer = styled("div", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "hasMenuButtonChildren",
+    prop !== "odysseyDesignTokens" &&
+    prop !== "hasMenuButtonChildren" &&
+    prop !== "variant",
 })<{
   odysseyDesignTokens: DesignTokens;
   hasMenuButtonChildren: boolean;
-}>(({ odysseyDesignTokens, hasMenuButtonChildren }) => ({
+  variant: (typeof cardVariantValues)[number];
+}>(({ odysseyDesignTokens, hasMenuButtonChildren, variant }) => ({
   display: "flex",
   alignItems: "flex-start",
-  maxHeight: `${CARD_IMAGE_HEIGHT}`,
-  marginBlockEnd: odysseyDesignTokens.Spacing5,
+  height: variant === "compact" ? CARD_IMAGE_SIZE_COMPACT : CARD_IMAGE_SIZE,
+  maxHeight: variant === "compact" ? CARD_IMAGE_SIZE_COMPACT : CARD_IMAGE_SIZE,
+  marginBlockEnd: variant === "tile" ? odysseyDesignTokens.Spacing5 : 0,
   paddingRight: hasMenuButtonChildren ? odysseyDesignTokens.Spacing5 : 0,
 }));
 
 const MenuButtonContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
+})<{
+  odysseyDesignTokens: DesignTokens;
+  variant: (typeof cardVariantValues)[number];
+}>(({ odysseyDesignTokens, variant }) => ({
   position: "absolute",
   right: odysseyDesignTokens.Spacing3,
   top: odysseyDesignTokens.Spacing3,
+  height: variant === "compact" ? CARD_IMAGE_SIZE_COMPACT : "auto",
+  display: "flex",
+  alignItems: "center",
 }));
 
-const CardContentContainer = styled("div", {
+const CardInnerContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   display: "flex",
   gap: odysseyDesignTokens.Spacing3,
+}));
+
+const CardImageAndContentContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "variant",
+})<{ variant: (typeof cardVariantValues)[number] }>(({ variant }) => ({
+  display: "flex",
+  flexDirection: variant === "tile" ? "column" : "row",
+}));
+
+const CardContent = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+  variant: (typeof cardVariantValues)[number];
+}>(({ odysseyDesignTokens, variant }) => ({
+  "& > .MuiTypography-h5": {
+    marginBlockEnd: `${variant === "compact" ? odysseyDesignTokens.Spacing1 : odysseyDesignTokens.Spacing3} !important`,
+  },
 }));
 
 const CardChildrenContainer = styled("div", {
@@ -115,6 +153,9 @@ const CardChildrenContainer = styled("div", {
   },
 }));
 
+const AccessoryPlaceholder = styled(MuiIconButton)(() => ({
+  visibility: "hidden",
+}));
 const buttonProviderValue = { isFullWidth: true };
 
 const DataCard = ({
@@ -122,95 +163,118 @@ const DataCard = ({
   button,
   children,
   description,
-  detailPanel,
   image,
   menuButtonChildren,
   onClick,
   overline,
+  renderDetailPanel,
+  row,
   title,
+  variant = "tile",
 }: DataCardProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
 
   const [isDetailPanelOpen, setIsDetailPanelOpen] = useState<boolean>(false);
 
-  const Accessory = useMemo(
-    () => (
-      <AccessoryContainer odysseyDesignTokens={odysseyDesignTokens}>
+  const ExpansionToggle = useMemo(() => {
+    return renderDetailPanel?.({ row }) ? (
+      <MuiTooltip
+        title={
+          isDetailPanelOpen
+            ? t("table.rowexpansion.collapse")
+            : t("table.rowexpansion.expand")
+        }
+      >
+        <MuiIconButton
+          children={isDetailPanelOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
+          onClick={() => setIsDetailPanelOpen(!isDetailPanelOpen)}
+          aria-label={
+            isDetailPanelOpen
+              ? t("table.rowexpansion.collapse")
+              : t("table.rowexpansion.expand")
+          }
+        />
+      </MuiTooltip>
+    ) : (
+      <AccessoryPlaceholder disabled>
+        <ChevronDownIcon />
+      </AccessoryPlaceholder>
+    );
+  }, [isDetailPanelOpen, renderDetailPanel, row, t]);
+
+  const Accessory = useMemo(() => {
+    return (
+      <AccessoryContainer
+        odysseyDesignTokens={odysseyDesignTokens}
+        variant={variant}
+      >
         {AccessoryProp}
-        {detailPanel && (
-          <MuiTooltip
-            title={
-              isDetailPanelOpen
-                ? t("table.rowexpansion.collapse")
-                : t("table.rowexpansion.expand")
-            }
-          >
-            <MuiIconButton
-              children={
-                isDetailPanelOpen ? <ChevronUpIcon /> : <ChevronDownIcon />
-              }
-              onClick={() => setIsDetailPanelOpen(!isDetailPanelOpen)}
-              aria-label={
-                isDetailPanelOpen
-                  ? t("table.rowexpansion.collapse")
-                  : t("table.rowexpansion.expand")
-              }
-            />
-          </MuiTooltip>
-        )}
+        {renderDetailPanel && ExpansionToggle}
       </AccessoryContainer>
-    ),
-    [AccessoryProp, detailPanel, isDetailPanelOpen, odysseyDesignTokens, t],
-  );
+    );
+  }, [
+    AccessoryProp,
+    ExpansionToggle,
+    odysseyDesignTokens,
+    renderDetailPanel,
+    variant,
+  ]);
 
   const cardContent = useMemo(
     () => (
-      <CardContentContainer odysseyDesignTokens={odysseyDesignTokens}>
-        {(AccessoryProp || detailPanel) && <Box>{Accessory}</Box>}
-        <Box>
+      <CardInnerContainer odysseyDesignTokens={odysseyDesignTokens}>
+        {(AccessoryProp || renderDetailPanel) && <Box>{Accessory}</Box>}
+        <CardImageAndContentContainer variant={variant}>
           {image && (
             <ImageContainer
               odysseyDesignTokens={odysseyDesignTokens}
               hasMenuButtonChildren={Boolean(menuButtonChildren)}
+              variant={variant}
             >
               {image}
             </ImageContainer>
           )}
 
-          {overline && <Support component="div">{overline}</Support>}
-          {title && <Heading5 component="div">{title}</Heading5>}
-          {description && (
-            <Paragraph color="textSecondary">{description}</Paragraph>
-          )}
+          <CardContent
+            odysseyDesignTokens={odysseyDesignTokens}
+            variant={variant}
+          >
+            {overline && <Support component="div">{overline}</Support>}
+            {title && <Heading5 component="div">{title}</Heading5>}
+            {description && (
+              <Paragraph color="textSecondary">{description}</Paragraph>
+            )}
 
-          {button && (
-            <MuiCardActions>
-              <ButtonContext.Provider value={buttonProviderValue}>
-                {button}
-              </ButtonContext.Provider>
-            </MuiCardActions>
-          )}
+            {button && (
+              <MuiCardActions>
+                <ButtonContext.Provider value={buttonProviderValue}>
+                  {button}
+                </ButtonContext.Provider>
+              </MuiCardActions>
+            )}
 
-          {children && (
-            <CardChildrenContainer odysseyDesignTokens={odysseyDesignTokens}>
-              {children}
-            </CardChildrenContainer>
-          )}
+            {children && (
+              <CardChildrenContainer odysseyDesignTokens={odysseyDesignTokens}>
+                {children}
+              </CardChildrenContainer>
+            )}
 
-          {detailPanel && isDetailPanelOpen && (
-            <CardChildrenContainer odysseyDesignTokens={odysseyDesignTokens}>
-              {detailPanel}
-            </CardChildrenContainer>
-          )}
-        </Box>
-      </CardContentContainer>
+            {renderDetailPanel && isDetailPanelOpen && (
+              <CardChildrenContainer odysseyDesignTokens={odysseyDesignTokens}>
+                {renderDetailPanel({ row })}
+              </CardChildrenContainer>
+            )}
+          </CardContent>
+        </CardImageAndContentContainer>
+      </CardInnerContainer>
     ),
     [
       odysseyDesignTokens,
       AccessoryProp,
-      detailPanel,
+      renderDetailPanel,
       Accessory,
+      variant,
       image,
       menuButtonChildren,
       overline,
@@ -219,12 +283,13 @@ const DataCard = ({
       button,
       children,
       isDetailPanelOpen,
+      row,
     ],
   );
 
   return (
     <MuiCard
-      className={`${onClick ? "isClickable" : ""} ${Accessory ? "hasAccessory" : ""}`}
+      className={`${onClick ? "isClickable" : ""} ${Accessory ? "hasAccessory" : ""} ods-card-${variant}`}
     >
       {onClick ? (
         <MuiCardActionArea onClick={onClick}>{cardContent}</MuiCardActionArea>
@@ -233,7 +298,10 @@ const DataCard = ({
       )}
 
       {menuButtonChildren && (
-        <MenuButtonContainer odysseyDesignTokens={odysseyDesignTokens}>
+        <MenuButtonContainer
+          odysseyDesignTokens={odysseyDesignTokens}
+          variant={variant}
+        >
           <MenuButton
             endIcon={<MoreIcon />}
             ariaLabel={t("table.moreactions.arialabel")}

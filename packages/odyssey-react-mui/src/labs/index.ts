@@ -14,8 +14,8 @@ export { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 export { LocalizationProvider } from "@mui/x-date-pickers";
 export type { LocalizationProviderProps } from "@mui/x-date-pickers";
 
+// export * from "./AdaptablePicker";
 export * from "./AppTile";
-
 export * from "./DatePicker";
 export * from "./datePickerTheme";
 
@@ -28,13 +28,19 @@ export * from "./Layout";
 export * from "./materialReactTableTypes";
 /** @deprecated Will be removed in a future Odyssey version in lieu of DataTable */
 export * from "./StaticTable";
+export * from "./OdysseyPickers";
 export * from "./PageTemplate";
 /** @deprecated Will be removed in a future Odyssey version in lieu of DataTable */
 export * from "./PaginatedTable";
 
-export * from "./GroupPicker";
+export {
+  /** @deprecated Will be removed in a future Odyssey version. Use `PickerWithOptionAdornment` */
+  GroupPicker,
+  type GroupPickerOptionType,
+  type GroupPickerProps,
+} from "./GroupPicker";
 
-export * from "./NavAccordion";
+export * from "./SideNav/NavAccordion";
 export * from "./SideNav";
 export * from "./TopNav";
-export * from "../ui-shell";
+export * from "./UiShell";

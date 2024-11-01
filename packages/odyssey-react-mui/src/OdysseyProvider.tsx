@@ -12,6 +12,7 @@
 
 import { memo, ReactNode } from "react";
 import { ScopedCssBaseline } from "@mui/material";
+
 import {
   OdysseyCacheProvider,
   OdysseyCacheProviderProps,
@@ -25,10 +26,10 @@ import {
   OdysseyTranslationProviderProps,
 } from "./OdysseyTranslationProvider";
 import { DefaultSupportedLanguages } from "./OdysseyTranslationProvider.types";
-
 const scopedCssBaselineStyles = {
   height: "inherit",
 };
+
 export type OdysseyProviderProps<
   SupportedLanguages extends string = DefaultSupportedLanguages,
 > = OdysseyCacheProviderProps &
@@ -36,15 +37,17 @@ export type OdysseyProviderProps<
   OdysseyTranslationProviderProps<SupportedLanguages> & {
     children: ReactNode;
   };
+
 const OdysseyProvider = <SupportedLanguages extends string>({
   children,
+  contrastMode,
   designTokensOverride,
   emotionRoot,
   emotionRootElement,
-  shadowDomElement,
-  shadowRootElement,
   languageCode,
   nonce,
+  shadowDomElement,
+  shadowRootElement,
   stylisPlugins,
   themeOverride,
   translationOverrides,
@@ -56,8 +59,10 @@ const OdysseyProvider = <SupportedLanguages extends string>({
     stylisPlugins={stylisPlugins}
   >
     <OdysseyThemeProvider
+      contrastMode={contrastMode}
       designTokensOverride={designTokensOverride}
-      shadowRootElement={shadowRootElement || shadowDomElement}
+      shadowDomElement={shadowDomElement}
+      shadowRootElement={shadowRootElement}
       themeOverride={themeOverride}
     >
       {/* This component creates a div; for flexibility of layout of children, make it inherit its parent's height */}
@@ -72,5 +77,6 @@ const OdysseyProvider = <SupportedLanguages extends string>({
     </OdysseyThemeProvider>
   </OdysseyCacheProvider>
 );
-const MemoizedThemeProvider = memo(OdysseyProvider) as typeof OdysseyProvider;
-export { MemoizedThemeProvider as OdysseyProvider };
+const MemoizedOdysseyProvider = memo(OdysseyProvider) as typeof OdysseyProvider;
+
+export { MemoizedOdysseyProvider as OdysseyProvider };

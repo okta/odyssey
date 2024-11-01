@@ -45,21 +45,21 @@ export const fieldComponentPropsMetaData: Partial<
       },
     },
   },
-  id: {
-    control: "text",
-    description: "The id of the `input` element.",
-    table: {
-      type: {
-        summary: "string",
-      },
-    },
-  },
   HintLinkComponent: {
     description:
       "A `HintLink` component to provide greater context that is rendered at the end of the `hint` text",
     table: {
       type: {
         summary: "ReactNode",
+      },
+    },
+  },
+  id: {
+    control: "text",
+    description: "The id of the `input` element.",
+    table: {
+      type: {
+        summary: "string",
       },
     },
   },

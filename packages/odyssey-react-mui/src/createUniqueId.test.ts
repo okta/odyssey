@@ -13,7 +13,7 @@
 import { createUniqueId, uniqueIdLength } from "./createUniqueId";
 
 describe("createUniqueId", () => {
-  it("returns a nice id string", () => {
+  test("returns a nice id string", () => {
     const result = createUniqueId();
 
     expect(typeof result).toBe("string");

@@ -107,10 +107,26 @@ const storybookMeta: Meta<TagProps> = {
         },
       },
     },
+    size: {
+      control: {
+        type: "select",
+      },
+      options: ["default", "small"],
+      description: "The size of the tag",
+      table: {
+        type: {
+          summary: "string",
+        },
+        defaultValue: {
+          summary: "default",
+        },
+      },
+    },
   },
   args: {
     label: "Starship",
     colorVariant: "default",
+    size: "medium",
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
@@ -174,6 +190,13 @@ export const List: StoryObj<TagProps> = {
   },
   args: {
     label: "Default tag",
+  },
+};
+
+export const Small: StoryObj<TagProps> = {
+  args: {
+    label: "Starship",
+    size: "small",
   },
 };
 

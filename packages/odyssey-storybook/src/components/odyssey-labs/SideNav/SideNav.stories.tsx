@@ -17,27 +17,14 @@ import {
   AppsIcon,
   ClockIcon,
   SettingsIcon,
-  CopyIcon,
   HomeIcon,
   Fido2Icon,
   LockIcon,
-  BugIcon,
-  CloseIcon,
-  CalendarIcon,
-  CallIcon,
-  CheckIcon,
   AddCircleIcon,
   DownloadIcon,
-  ChatIcon,
-  RefreshIcon,
   UserIcon,
   DirectoryIcon,
-  GlobeIcon,
-  IdpIcon,
-  InformationCircleIcon,
-  InformationCircleFilledIcon,
   ServerIcon,
-  ExpandLeftIcon,
   FolderIcon,
 } from "@okta/odyssey-react-mui/icons";
 import { expect } from "@storybook/jest";
@@ -53,7 +40,7 @@ const storybookMeta: Meta<SideNavProps> = {
   title: "Labs Components/SideNav",
   component: SideNav,
   argTypes: {
-    navHeaderText: {
+    appName: {
       control: "text",
       description: "Header text for the side nav",
       table: {
@@ -62,9 +49,62 @@ const storybookMeta: Meta<SideNavProps> = {
         },
       },
     },
+    customCompanyLogo: {
+      description: "Logo to be displayed in the Nav Header.",
+    },
+    expandedWidth: {
+      control: "text",
+      description: "Width of the side nav in px",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    footerComponent: {
+      description:
+        "Custom footer component to render in place of footer items.",
+    },
+    footerItems: {
+      description: "",
+      table: {
+        type: {
+          summary: "Array<SideNavFooterItem>",
+        },
+      },
+    },
+    hasCustomCompanyLogo: {
+      control: "boolean",
+      description:
+        "Defines if a custom company logo should be visible when available.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    hasCustomFooter: {
+      control: "boolean",
+      description:
+        "Defines if a custom footer should be visible when available.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
     isCollapsible: {
       control: "boolean",
       description: "Controls whether the side nav is collapsible",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    isCompact: {
+      control: "boolean",
+      description: "Controls whether the side nav uses compact layout",
       table: {
         type: {
           summary: "boolean",
@@ -85,18 +125,11 @@ const storybookMeta: Meta<SideNavProps> = {
         },
       },
     },
-    footerItems: {
-      description: "",
-      table: {
-        type: {
-          summary: "Array<SideNavFooterItem>",
-        },
-      },
-    },
   },
   args: {
-    navHeaderText: "Admin",
+    appName: "Admin",
     isCollapsible: true,
+    isCompact: false,
     sideNavItems: [
       {
         id: "AddNewFolder",
@@ -111,7 +144,7 @@ const storybookMeta: Meta<SideNavProps> = {
       },
       {
         id: "item0-1",
-        href: "/?path=/story/labs-components-switch--default",
+        href: "/?path=/docs/mui-components-typography--docs",
         label: "Users",
         startIcon: <UserIcon />,
       },
@@ -125,57 +158,36 @@ const storybookMeta: Meta<SideNavProps> = {
             id: "item1-1",
             href: "/",
             label: "Home",
-            startIcon: <CheckIcon />,
           },
         ],
-      },
-      {
-        id: "item001",
-        label: "Onboarding",
-        startIcon: <CalendarIcon />,
-        children: [
-          {
-            id: "item1-2",
-            href: "/",
-            label: "Start",
-            startIcon: <CloseIcon />,
-            endIcon: <InformationCircleFilledIcon />,
-          },
-          {
-            id: "item1-3",
-            href: "/",
-            label: "Onboarding",
-            startIcon: <HomeIcon />,
-          },
-          {
-            id: "item1-4",
-            href: "/",
-            label: "Tasks",
-            startIcon: <CallIcon />,
-            endIcon: <ExpandLeftIcon />,
-          },
-          {
-            id: "item1-5",
-            href: "/",
-            label: "Getting Started",
-            startIcon: <InformationCircleIcon />,
-            endIcon: <CalendarIcon />,
-          },
-        ],
-      },
-      {
-        id: "item0-2",
-        href: "/",
-        label: "Profiles",
-        startIcon: <GlobeIcon />,
-        endIcon: <GlobeIcon />,
-        isDisabled: true,
       },
       {
         id: "item2",
         href: "/",
         label: "Applications",
         startIcon: <AppsIcon />,
+      },
+      {
+        id: "item001",
+        label: "Onboarding",
+        startIcon: <SettingsIcon />,
+        children: [
+          {
+            id: "item1-2",
+            href: "/",
+            label: "Start",
+          },
+          {
+            id: "item1-4",
+            href: "/",
+            label: "Tasks",
+          },
+          {
+            id: "item1-5",
+            href: "/",
+            label: "Getting Started",
+          },
+        ],
       },
       {
         id: "item0-1-2",
@@ -195,7 +207,6 @@ const storybookMeta: Meta<SideNavProps> = {
         startIcon: <ServerIcon />,
         severity: "success",
         statusLabel: "success",
-        endIcon: <ServerIcon />,
       },
       {
         id: "item5",
@@ -233,41 +244,34 @@ const storybookMeta: Meta<SideNavProps> = {
       {
         id: "item4",
         label: "Settings",
-        startIcon: <SettingsIcon />,
         isDefaultExpanded: true,
         children: [
           {
             id: "item4-1",
             href: "/",
             label: "General",
-            startIcon: <BugIcon />,
-            endIcon: <ChatIcon />,
-          },
-          {
-            id: "item4-3",
-            href: "/",
-            label: "Custom Login page",
-            startIcon: <CheckIcon />,
           },
           {
             id: "item4-2",
             href: "/",
-            isSelected: true,
             label: "Custom Domain",
-            startIcon: <CloseIcon />,
-            endIcon: <CopyIcon />,
+            isSelected: true,
+          },
+          {
+            id: "item4-3",
+            href: "/",
+            label: "Account Management",
           },
           {
             id: "item4-4",
             href: "/",
-            label: "Authentication Policies Rules",
-            startIcon: <RefreshIcon />,
+            label: "Authentication Policies",
+            isDisabled: true,
           },
           {
             id: "item4-5",
             href: "/",
             label: "IDP Configuration",
-            startIcon: <IdpIcon />,
           },
         ],
       },
@@ -296,6 +300,9 @@ const storybookMeta: Meta<SideNavProps> = {
     ],
   },
   decorators: [MuiThemeDecorator],
+  parameters: {
+    layout: "fullscreen",
+  },
   tags: ["autodocs"],
 };
 
@@ -305,14 +312,7 @@ export const Default: StoryObj<SideNavProps> = {
   render: (props: SideNavProps) => {
     return (
       <div style={{ height: "100vh" }}>
-        <SideNav
-          navHeaderText={props.navHeaderText}
-          isCollapsible={props.isCollapsible}
-          onCollapse={props.onCollapse}
-          onExpand={props.onExpand}
-          sideNavItems={props.sideNavItems}
-          footerItems={props.footerItems}
-        />
+        <SideNav {...props} />
       </div>
     );
   },
@@ -347,19 +347,20 @@ export const Default: StoryObj<SideNavProps> = {
       }
     });
     await step("Side Nav Collapse", async ({}) => {
-      const collapseButton = within(expandedRegion).getByLabelText(
-        "collapse side navigation",
-      );
+      const collapseButton = within(collapsedRegion).getByRole("button", {
+        name: "collapse side navigation",
+      });
       await userEvent.click(collapseButton);
       await waitFor(() => {
         expect(expandedRegion).not.toBeVisible();
-        expect(collapsedRegion).toBeVisible();
       });
     });
     await step("Side Nav Expand", async ({}) => {
-      await userEvent.click(collapsedRegion);
+      const expandeButton = within(collapsedRegion).getByRole("button", {
+        name: "expand side navigation",
+      });
+      await userEvent.click(expandeButton);
       await waitFor(() => {
-        expect(collapsedRegion).not.toBeVisible();
         expect(expandedRegion).toBeVisible();
       });
     });

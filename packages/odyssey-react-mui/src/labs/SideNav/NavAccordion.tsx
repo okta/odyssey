@@ -19,14 +19,14 @@ import {
 } from "@mui/material";
 import { ReactNode, memo } from "react";
 
-import type { HtmlProps } from "../HtmlProps";
-import { ChevronRightIcon } from "../icons.generated";
+import type { HtmlProps } from "../../HtmlProps";
+import { ChevronRightIcon } from "../../icons.generated";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "../OdysseyDesignTokensContext";
-import { Support } from "../Typography";
-import { useUniqueId } from "../useUniqueId";
+} from "../../OdysseyDesignTokensContext";
+import { Support } from "../../Typography";
+import { useUniqueId } from "../../useUniqueId";
 
 export type NavAccordionProps = {
   /**
@@ -41,6 +41,10 @@ export type NavAccordionProps = {
    * Defines IDs for the header and the content of the Accordion
    */
   id?: string;
+  /**
+   *  Determines if the Accordion component use compact layout
+   */
+  isCompact?: boolean;
   /**
    * Whether the item is expanded by default
    */
@@ -78,10 +82,37 @@ const AccordionLabelContainer = styled("span", {
   color: odysseyDesignTokens.TypographyColorHeading,
 }));
 
+const AccordionSummaryContainer = styled(MuiAccordionSummary, {
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" &&
+    prop !== "isCompact" &&
+    prop != "isDisabled",
+})<{
+  odysseyDesignTokens: DesignTokens;
+  isCompact?: boolean;
+  isDisabled?: boolean;
+}>(({ odysseyDesignTokens, isCompact, isDisabled }) => ({
+  minHeight: isCompact
+    ? `${odysseyDesignTokens.Spacing6}`
+    : `${odysseyDesignTokens.Spacing7}`,
+  padding: isCompact
+    ? `${odysseyDesignTokens.Spacing0} ${odysseyDesignTokens.Spacing4}`
+    : `${odysseyDesignTokens.Spacing2} ${odysseyDesignTokens.Spacing4}`,
+  "&:hover": {
+    backgroundColor: !isDisabled ? odysseyDesignTokens.HueBlue50 : "inherit",
+    "& span": {
+      color: isDisabled
+        ? "default"
+        : `${odysseyDesignTokens.TypographyColorAction}`,
+    },
+  },
+}));
+
 const NavAccordion = ({
   children,
   label,
   id: idOverride,
+  isCompact,
   isDefaultExpanded,
   isDisabled,
   isExpanded,
@@ -101,11 +132,14 @@ const NavAccordion = ({
       expanded={isExpanded}
       className="nav-accordion"
     >
-      <MuiAccordionSummary
+      <AccordionSummaryContainer
         className="nav-accordion-summary"
         aria-controls={contentId}
         expandIcon={<ChevronRightIcon />}
         id={headerId}
+        odysseyDesignTokens={odysseyDesignTokens}
+        isCompact={isCompact}
+        isDisabled={isDisabled}
       >
         <Support component="div" translate={translate}>
           {startIcon && startIcon}
@@ -116,7 +150,7 @@ const NavAccordion = ({
             {label}
           </AccordionLabelContainer>
         </Support>
-      </MuiAccordionSummary>
+      </AccordionSummaryContainer>
       <MuiAccordionDetails
         className="nav-accordion-details"
         aria-labelledby={headerId}
