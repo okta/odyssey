@@ -39,7 +39,7 @@ const StyledTopNavContainer = styled("div", {
   alignItems: "center",
   backgroundColor: odysseyDesignTokens.HueNeutral50,
   boxShadow: isScrolled ? odysseyDesignTokens.DepthMedium : undefined,
-  clipPath: "inset(0 0 -100% 0)",
+  clipPath: "inset(0 0 -100vh 0)",
   display: "flex",
   gap: odysseyDesignTokens.Spacing4,
   height: "100%",
