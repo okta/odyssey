@@ -58,7 +58,7 @@ describe("DataView", () => {
     await screen.findByText(data[0].name);
 
     expect(screen.queryByRole("table")).not.toBeNull();
-    expect(screen.queryByText("Card")).toBeNull();
+    expect(screen.queryByRole("list")).toBeNull();
   });
 
   it("displays a list view", async () => {

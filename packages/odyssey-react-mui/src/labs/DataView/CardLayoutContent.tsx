@@ -171,11 +171,7 @@ const CardLayoutContent = ({
   const { updateRowOrder } = rowReorderingUtilities;
 
   return (
-    <StackContainer
-      odysseyDesignTokens={odysseyDesignTokens}
-      currentLayout={currentLayout}
-      maxGridColumns={cardLayoutOptions.maxGridColumns ?? 3}
-    >
+    <Box>
       {isLoading ? (
         <LoadingContainer odysseyDesignTokens={odysseyDesignTokens}>
           <CircularProgress />
@@ -185,7 +181,11 @@ const CardLayoutContent = ({
           {!data || data.length === 0 || isEmpty || isNoResults ? (
             <Box>{emptyState}</Box>
           ) : (
-            <>
+            <StackContainer
+              odysseyDesignTokens={odysseyDesignTokens}
+              currentLayout={currentLayout}
+              maxGridColumns={cardLayoutOptions.maxGridColumns ?? 3}
+            >
               {data.map((row: MRT_RowData, index: number) => {
                 const { overline, title, description, image, children } =
                   cardLayoutOptions.itemProps(row);
@@ -245,11 +245,11 @@ const CardLayoutContent = ({
                   />
                 );
               })}
-            </>
+            </StackContainer>
           )}
         </>
       )}
-    </StackContainer>
+    </Box>
   );
 };
 
