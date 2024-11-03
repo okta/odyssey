@@ -115,6 +115,10 @@ const storybookMeta: Meta<SideNavProps> = {
     onExpand: {
       description: "Callback to be triggered when the side nav is expanded",
     },
+    onSort: {
+      description:
+        "Callback to be triggered when a nested side nav item inside is reordered. Returns the new items list",
+    },
     sideNavItems: {
       description: "",
       table: {
@@ -168,20 +172,20 @@ const storybookMeta: Meta<SideNavProps> = {
       {
         id: "item001",
         label: "Onboarding",
-        startIcon: <SettingsIcon />,
+        startIcon: <FolderIcon />,
         children: [
           {
-            id: "item1-2",
+            id: "item1-1",
             href: "/",
             label: "Start",
           },
           {
-            id: "item1-4",
+            id: "item1-2",
             href: "/",
             label: "Tasks",
           },
           {
-            id: "item1-5",
+            id: "item1-3",
             href: "/",
             label: "Getting Started",
           },
@@ -238,11 +242,14 @@ const storybookMeta: Meta<SideNavProps> = {
         label: "Security",
         startIcon: <LockIcon />,
         endIcon: <LockIcon />,
+        isSelected: true,
       },
       {
         id: "item4",
         label: "Settings",
         isDefaultExpanded: true,
+        isSortable: true,
+        startIcon: <SettingsIcon />,
         children: [
           {
             id: "item4-1",
@@ -253,11 +260,9 @@ const storybookMeta: Meta<SideNavProps> = {
             id: "item4-2",
             href: "/",
             label: "Custom Domain",
-            isSelected: true,
           },
           {
             id: "item4-3",
-            href: "/",
             label: "Account Management",
           },
           {

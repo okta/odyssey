@@ -79,6 +79,10 @@ export type SideNavProps = {
    */
   onExpand?(): void;
   /**
+   *  Triggers when the item is reordered
+   */
+  onSort?(reorderedItems: SideNavItem[]): void;
+  /**
    * Nav items in the side nav
    */
   sideNavItems: SideNavItem[];
@@ -152,6 +156,7 @@ export type SideNavItem = {
        * Determines if the side nav item is a section header
        */
       isSectionHeader: true;
+      isSortable?: never;
     }
   | {
       children?: never;
@@ -163,6 +168,7 @@ export type SideNavItem = {
       isDefaultExpanded?: never;
       isExpanded?: never;
       isSectionHeader?: never;
+      isSortable?: never;
     }
   | {
       /**
@@ -180,7 +186,11 @@ export type SideNavItem = {
        * Setting this prop enables control over the accordion.
        */
       isExpanded?: boolean;
+      /**
+       * If true, enables sorting for the accordion items
+       */
       isSectionHeader?: never;
+      isSortable?: boolean;
     }
 );
 

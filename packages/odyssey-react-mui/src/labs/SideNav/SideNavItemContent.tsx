@@ -145,7 +145,7 @@ const NavItemContentContainer = styled("div", {
     prop !== "isSelected",
 })(GetNavItemContentStyles);
 
-const NavItemLinkContainer = styled(NavItemLink, {
+const StyledNavItemLink = styled(NavItemLink, {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" &&
     prop != "contextValue" &&
@@ -164,9 +164,10 @@ const SideNavItemContent = ({
   statusLabel,
   endIcon,
   onClick,
-  isSelected,
   isDisabled,
+  isSelected,
   scrollRef,
+  onItemSelected,
 }: Pick<
   SideNavItem,
   | "count"
@@ -179,13 +180,14 @@ const SideNavItemContent = ({
   | "statusLabel"
   | "endIcon"
   | "onClick"
-  | "isSelected"
   | "isDisabled"
+  | "isSelected"
 > & {
   /**
    * The ref used to scroll to this item
    */
   scrollRef?: React.RefObject<ScrollIntoViewHandle>;
+  onItemSelected?(selectedItemId: string): void;
 }) => {
   const sidenavItemContentContext = useSideNavItemContent();
   const contextValue = useMemo(
@@ -205,6 +207,16 @@ const SideNavItemContent = ({
       };
     },
     [],
+  );
+
+  const itemClickHandler = useCallback(
+    (id: string) => {
+      return () => {
+        onItemSelected?.(id);
+        onClick?.();
+      };
+    },
+    [onClick, onItemSelected],
   );
 
   const sideNavItemContentKeyHandler = useCallback(
@@ -252,8 +264,9 @@ const SideNavItemContent = ({
             contextValue={contextValue}
             isDisabled={isDisabled}
             tabIndex={0}
-            onClick={onClick}
+            onClick={itemClickHandler(id)}
             onKeyDown={sideNavItemContentKeyHandler}
+            isSelected={isSelected}
           >
             <SideNavItemLinkContent
               count={count}
@@ -265,14 +278,14 @@ const SideNavItemContent = ({
             />
           </NavItemContentContainer>
         ) : (
-          <NavItemLinkContainer
+          <StyledNavItemLink
             odysseyDesignTokens={odysseyDesignTokens}
             contextValue={contextValue}
             isDisabled={isDisabled}
             isSelected={isSelected}
             href={href}
             target={target}
-            onClick={onClick}
+            onClick={itemClickHandler(id)}
           >
             <SideNavItemLinkContent
               count={count}
@@ -287,12 +300,13 @@ const SideNavItemContent = ({
                 <ExternalLinkIcon />
               </span>
             )}
-          </NavItemLinkContainer>
+          </StyledNavItemLink>
         )
       }
     </StyledSideNavListItem>
   );
 };
+
 const MemoizedSideNavItemContent = memo(SideNavItemContent);
 MemoizedSideNavItemContent.displayName = "SideNavItemContent";
 

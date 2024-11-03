@@ -29,7 +29,7 @@ import {
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
 import { OdysseyThemeProvider } from "../../OdysseyThemeProvider";
-import type { SideNavProps } from "./types";
+import type { SideNavItem, SideNavProps } from "./types";
 import { SideNavHeader } from "./SideNavHeader";
 import {
   SideNavItemContent,
@@ -38,6 +38,9 @@ import {
 import { SideNavFooterContent } from "./SideNavFooterContent";
 import { SideNavItemContentContext } from "./SideNavItemContentContext";
 import { SideNavToggleButton } from "./SideNavToggleButton";
+import { SortableList } from "./SortableList/SortableList";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { arrayMove } from "@dnd-kit/sortable";
 
 export const DEFAULT_SIDE_NAV_WIDTH = "300px";
 
@@ -263,6 +266,7 @@ const SideNav = ({
   logoProps,
   onCollapse,
   onExpand,
+  onSort,
   sideNavItems,
 }: SideNavProps) => {
   const [isSideNavCollapsed, setSideNavCollapsed] = useState(false);
@@ -273,6 +277,7 @@ const SideNav = ({
   const intersectionObserverRef = useRef<IntersectionObserver | null>(null);
   const odysseyDesignTokens: DesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
+  const [sideNavItemsList, updateSideNavItemsList] = useState(sideNavItems);
 
   useEffect(() => {
     const updateIsContentScrollable = () => {
@@ -402,31 +407,90 @@ const SideNav = ({
     [isCompact],
   );
 
-  const processedSideNavItems = useMemo(
-    () =>
-      sideNavItems.map((item) => ({
-        ...item,
-        children: item.children?.map((childProps) => {
-          return (
+  const setSelectedInChildItems = useCallback(
+    ({
+      children,
+      selectedItemId,
+    }: {
+      children: Array<Omit<SideNavItem, "startIcon" | "endIcon">>;
+      selectedItemId: string;
+    }) => {
+      const childItems = children.map((childItem) => {
+        if (childItem.isSelected) {
+          childItem.isSelected = false;
+        }
+        if (childItem.id === selectedItemId) {
+          childItem.isSelected = true;
+        }
+        if (childItem.children) {
+          setSelectedInChildItems({
+            children: childItem.children,
+            selectedItemId,
+          });
+        }
+        return childItem;
+      });
+      return childItems;
+    },
+    [],
+  );
+
+  const setSelectedItem = useCallback(
+    (selectedItemId: string) => {
+      const newNavItems = sideNavItemsList.map((item) => {
+        if (item.isSelected) {
+          item.isSelected = false;
+        }
+        if (item.id === selectedItemId) {
+          item.isSelected = true;
+        }
+        if (item.children) {
+          item.children = setSelectedInChildItems({
+            children: item.children,
+            selectedItemId,
+          });
+        }
+        return item;
+      });
+      updateSideNavItemsList(newNavItems);
+    },
+    [sideNavItemsList, setSelectedInChildItems],
+  );
+
+  const processedSideNavItems = useMemo(() => {
+    return sideNavItemsList?.map((item) => ({
+      ...item,
+      childNavItems: item.children?.map((childProps) => {
+        return {
+          id: childProps.id,
+          isSelected: childProps.isSelected,
+          isDisabled: childProps.isDisabled,
+          navItem: (
             <SideNavItemContentContext.Provider
-              value={{ ...sideNavItemContentProviderValue, depth: 2 }}
+              value={{
+                ...sideNavItemContentProviderValue,
+                depth: 2,
+                isSortable: item.isSortable,
+              }}
               key={childProps.id}
             >
               <SideNavItemContent
                 {...childProps}
                 key={childProps.id}
                 scrollRef={getRefIfThisIsFirstNodeWithIsSelected(childProps.id)}
+                onItemSelected={setSelectedItem}
               />
             </SideNavItemContentContext.Provider>
-          );
-        }),
-      })),
-    [
-      getRefIfThisIsFirstNodeWithIsSelected,
-      sideNavItems,
-      sideNavItemContentProviderValue,
-    ],
-  );
+          ),
+        };
+      }),
+    }));
+  }, [
+    getRefIfThisIsFirstNodeWithIsSelected,
+    sideNavItemsList,
+    sideNavItemContentProviderValue,
+    setSelectedItem,
+  ]);
 
   const sideNavExpandClickHandler = useCallback(() => {
     isSideNavCollapsed ? onExpand?.() : onCollapse?.();
@@ -444,6 +508,21 @@ const SideNav = ({
     },
     [sideNavExpandClickHandler],
   );
+
+  const setSortedItems = (
+    parentId: string,
+    activeIndex: number,
+    overIndex: number,
+  ) => {
+    const newSideNavItems = sideNavItemsList.map((item) => {
+      if (item.id === parentId && item.children) {
+        item.children = arrayMove(item.children, activeIndex, overIndex);
+      }
+      return item;
+    });
+    updateSideNavItemsList(newSideNavItems);
+    onSort?.(newSideNavItems);
+  };
 
   return (
     <StyledSideNav
@@ -489,7 +568,8 @@ const SideNav = ({
                       label,
                       isSectionHeader,
                       startIcon,
-                      children,
+                      childNavItems,
+                      isSortable,
                       isDefaultExpanded,
                       isDisabled,
                       isExpanded,
@@ -509,7 +589,7 @@ const SideNav = ({
                           </SectionHeader>
                         </SectionHeaderContainer>
                       );
-                    } else if (children) {
+                    } else if (childNavItems) {
                       return (
                         <StyledSideNavListItem
                           id={id}
@@ -527,7 +607,23 @@ const SideNav = ({
                             isDisabled={isDisabled}
                           >
                             <SideNavListContainer id={`${id}-list`} role="list">
-                              {children}
+                            {isSortable ? (
+                              <SortableList
+                                parentId={item.id}
+                                items={childNavItems}
+                                onChange={setSortedItems}
+                                renderItem={(sortableItem) => (
+                                  <SortableList.Item
+                                    id={sortableItem.id}
+                                    isDisabled={sortableItem.isDisabled}
+                                    isSelected={sortableItem.isSelected}
+                                  >
+                                    {sortableItem.navItem}
+                                  </SortableList.Item>
+                                )}
+                              />) : (
+                                childNavItems.map((item) => item.navItem)
+                              )}
                             </SideNavListContainer>
                           </NavAccordion>
                         </StyledSideNavListItem>
@@ -544,6 +640,7 @@ const SideNav = ({
                             scrollRef={getRefIfThisIsFirstNodeWithIsSelected(
                               item.id,
                             )}
+                            onItemSelected={setSelectedItem}
                           />
                         </SideNavItemContentContext.Provider>
                       );
