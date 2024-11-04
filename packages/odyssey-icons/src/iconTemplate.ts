@@ -21,24 +21,26 @@ import type { Template } from "@svgr/babel-plugin-transform-svg-component";
 import { headerCopyrightLicense } from "./headerCopyrightLicense";
 
 export const iconTemplate: Template = ({ componentName, jsx }, { tpl }) => {
-  const compName = componentName.substring(3) + "Icon";
-  const compProps = compName + "Props";
+  const iconComponentName = `${componentName.replace(/^Svg/, "")}Icon`;
+
+  const iconComponentPropsTypeName = `${iconComponentName}Props`;
+  const memoizedIconComponentName = `Memoized${iconComponentName}`;
 
   const fragmentJsx = jsxFragment(
     jsxOpeningFragment(),
     jsxClosingFragment(),
     jsx.children,
   );
-  const svgChildren = generate(fragmentJsx).code;
+  const svgIconChildren = generate(fragmentJsx).code;
 
-  const icon = `<SvgIcon
+  const iconChildren = `<SvgIcon
   viewBox="0 0 24 24"
   fill="none"
   xmlns="http://www.w3.org/2000/svg"
   ref={ref}
   {...props}
 >
-  ${svgChildren}
+  ${svgIconChildren}
 </SvgIcon>`;
 
   const newLine = `
@@ -47,23 +49,28 @@ export const iconTemplate: Template = ({ componentName, jsx }, { tpl }) => {
   return tpl`
 ${headerCopyrightLicense}
 
-import { forwardRef } from "react";
+import { forwardRef, memo } from "react";
 import { SvgIcon, type SvgIconNoChildrenProps } from '../SvgIcon';
 
 ${newLine}
 
-export type ${compProps} = SvgIconNoChildrenProps
+export type ${iconComponentPropsTypeName} = SvgIconNoChildrenProps;
 
 ${newLine}
 
-export const ${compName} = forwardRef<SVGSVGElement, ${compProps}>((props, ref) => {
+const ${iconComponentName} = forwardRef<SVGSVGElement, ${iconComponentPropsTypeName}>((props, ref) => {
   return (
-    ${icon}
+    ${iconChildren}
   )
 });
 
 ${newLine}
 
-${compName}.displayName = "${compName}";
+const ${memoizedIconComponentName} = memo(${iconComponentName});
+${memoizedIconComponentName}.displayName = "${iconComponentName}";
+
+${newLine}
+
+export { ${memoizedIconComponentName} as ${iconComponentName} };
 `;
 };
