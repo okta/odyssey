@@ -2824,11 +2824,15 @@ export const components = ({
             {
               borderTopRightRadius: odysseyTokens.Spacing2,
               borderBottomRightRadius: odysseyTokens.Spacing2,
-              flexGrow: 1,
 
               [`& .Mui-TableHeadCell-ResizeHandle-Wrapper`]: {
                 display: "none",
               },
+            },
+
+          [`.ods-column-grow .${tableHeadClasses.root} &:nth-last-of-type(2), .ods-column-grow .${tableBodyClasses.root} &:nth-last-of-type(2)`]:
+            {
+              flexGrow: 1,
             },
 
           ...(ownerState.variant === "number" && {

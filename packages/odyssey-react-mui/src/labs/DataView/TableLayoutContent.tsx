@@ -308,6 +308,8 @@ const TableLayoutContent = ({
     ],
   );
 
+  const hasColumnWithGrow = columns.some((column) => column.grow === true);
+
   const dataTable = useMaterialReactTable({
     data: !isEmpty && !isNoResults ? data : [],
     columns,
@@ -332,7 +334,7 @@ const TableLayoutContent = ({
       >),
       "mrt-row-actions": {
         header: "",
-        grow: true,
+        grow: !hasColumnWithGrow,
         muiTableBodyCellProps: {
           align: "right" as const,
           sx: {
@@ -372,7 +374,9 @@ const TableLayoutContent = ({
       ref: tableContentRef,
       className:
         !shouldDisplayRowActions && tableLayoutOptions.hasColumnResizing
-          ? "ods-hide-spacer-column"
+          ? hasColumnWithGrow
+            ? "ods-hide-spacer-column"
+            : "ods-hide-spacer-column ods-column-grow"
           : "",
     },
     muiTableContainerProps: {
