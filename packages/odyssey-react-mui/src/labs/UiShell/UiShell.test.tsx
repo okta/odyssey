@@ -26,9 +26,8 @@ describe("UiShell", () => {
         appRootElement={appRootElement}
         onSubscriptionCreated={() => {}}
         optionalComponents={{
-          topNavLeftSide: <div />,
           sideNavFooter: <div />,
-          companyLogo: <div />,
+          topNavLeftSide: <div />,
           topNavRightSide: (
             <Dialog
               children={undefined}
@@ -115,7 +114,7 @@ describe("UiShell", () => {
   test("renders optionally-available `componentSlots`", async () => {
     const optionalComponentTestIds: Array<
       keyof Required<UiShellProps>["optionalComponents"]
-    > = ["companyLogo", "sideNavFooter"];
+    > = ["sideNavFooter"];
 
     // This is the subscription we give the component, and then once subscribed, we're going to immediately call it with new props.
     const subscribeToPropChanges: UiShellProps["subscribeToPropChanges"] = (
@@ -125,7 +124,6 @@ describe("UiShell", () => {
         ...defaultComponentProps,
         sideNavProps: {
           appName: "",
-          hasCustomCompanyLogo: true,
           hasCustomFooter: true,
           sideNavItems: [],
         },

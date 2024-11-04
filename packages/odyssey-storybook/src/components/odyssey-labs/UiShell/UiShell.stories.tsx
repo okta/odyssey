@@ -13,16 +13,20 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import {
+  PageTemplate,
   UiShell,
+  uiShellDataAttribute,
   UserProfile,
   type UiShellNavComponentProps,
   type UiShellProps,
 } from "@okta/odyssey-react-mui/labs";
 import {
+  Banner,
   Button,
   OdysseyProvider,
   Paragraph,
   SearchField,
+  Surface,
 } from "@okta/odyssey-react-mui";
 import {
   AddCircleIcon,
@@ -99,6 +103,7 @@ export default storybookMeta;
 
 const sharedSideNavProps: UiShellNavComponentProps["sideNavProps"] = {
   appName: "Enduser",
+  isCollapsible: true,
   sideNavItems: [
     {
       id: "AddNewFolder",
@@ -160,7 +165,11 @@ const sharedTopNavProps: UiShellNavComponentProps["topNavProps"] = {
 };
 
 const sharedOptionalComponents: UiShellProps["optionalComponents"] = {
-  topNavLeftSide: <SearchField label="Search" placeholder="Search..." />,
+  topNavLeftSide: (
+    <div>
+      <SearchField label="Search" placeholder="Search..." />
+    </div>
+  ),
   topNavRightSide: (
     <UserProfile
       profileIcon={<UserIcon />}
@@ -185,6 +194,23 @@ export const TopNavOnly: StoryObj<UiShellProps> = {
   },
 };
 
+export const LoadingData: StoryObj<UiShellProps> = {
+  args: {
+    optionalComponents: sharedOptionalComponents,
+    subscribeToPropChanges: (subscriber) => {
+      subscriber({
+        sideNavProps: {
+          ...sharedSideNavProps,
+          isLoading: true,
+        },
+        topNavProps: {},
+      });
+
+      return () => {};
+    },
+  },
+};
+
 export const WithoutAppContent: StoryObj<UiShellProps> = {
   args: {
     optionalComponents: sharedOptionalComponents,
@@ -199,7 +225,7 @@ export const WithoutAppContent: StoryObj<UiShellProps> = {
   },
 };
 
-export const WithAppContent: StoryObj<UiShellProps> = {
+export const WithTallAppContent: StoryObj<UiShellProps> = {
   args: {
     appComponent: (
       <div style={{ backgroundColor: "transparent" }}>
@@ -350,20 +376,7 @@ export const WithAppContent: StoryObj<UiShellProps> = {
         Et…
       </div>
     ),
-    optionalComponents: {
-      topNavLeftSide: (
-        <div>
-          <SearchField label="Search" placeholder="Search..." />
-        </div>
-      ),
-      topNavRightSide: (
-        <UserProfile
-          profileIcon={<UserIcon />}
-          orgName="ORG123"
-          userName="test.user@test.com"
-        />
-      ),
-    },
+    optionalComponents: sharedOptionalComponents,
     subscribeToPropChanges: (subscriber) => {
       subscriber({
         sideNavProps: sharedSideNavProps,
@@ -379,23 +392,41 @@ export const WithOdysseyAppContent: StoryObj<UiShellProps> = {
   args: {
     appComponent: (
       <OdysseyProvider>
-        <Paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
-          lacinia leo quis sodales scelerisque. Maecenas tempor eget nunc sit
-          amet ultrices. Maecenas et varius ante. Nulla eu quam sit amet orci
-          fermentum dictum sit amet scelerisque libero. Proin luctus semper
-          elit, ut pretium massa tristique a. Mauris hendrerit ex eu commodo
-          egestas. Etiam a lacus aliquet, convallis metus et, sollicitudin odio.
-          Fusce vehicula purus sed orci elementum, ut cursus diam sollicitudin.
-          Pellentesque pulvinar nibh turpis, eu finibus dolor egestas eget. Duis
-          tellus mauris, pulvinar sit amet ante a, aliquet laoreet sapien. Ut
-          quis tempus massa. Fusce fringilla mattis lacinia. Cras at pharetra
-          quam, eu ultrices ipsum.
-        </Paragraph>
-        <Button label="Odyssey Button" variant="primary" />
+        {/* This is normally rendered by `renderUiShell`, but we're rendering `UiShell` outside of a web component, so we need to add this data attribute ourselves. */}
+        <div {...{ [uiShellDataAttribute]: "" }} />
+
+        <PageTemplate
+          description="This is my app."
+          title="Access Certification"
+        >
+          <Surface>
+            <div style={{ marginBlockEnd: `${16 / 14}rem` }}>
+              <Paragraph>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
+                lacinia leo quis sodales scelerisque. Maecenas tempor eget nunc
+                sit amet ultrices. Maecenas et varius ante. Nulla eu quam sit
+                amet orci fermentum dictum sit amet scelerisque libero. Proin
+                luctus semper elit, ut pretium massa tristique a. Mauris
+                hendrerit ex eu commodo egestas. Etiam a lacus aliquet,
+                convallis metus et, sollicitudin odio. Fusce vehicula purus sed
+                orci elementum, ut cursus diam sollicitudin. Pellentesque
+                pulvinar nibh turpis, eu finibus dolor egestas eget. Duis tellus
+                mauris, pulvinar sit amet ante a, aliquet laoreet sapien. Ut
+                quis tempus massa. Fusce fringilla mattis lacinia. Cras at
+                pharetra quam, eu ultrices ipsum.
+              </Paragraph>
+            </div>
+            <div>
+              <Button label="I understand" variant="primary" />
+            </div>
+          </Surface>
+        </PageTemplate>
       </OdysseyProvider>
     ),
-    optionalComponents: sharedOptionalComponents,
+    optionalComponents: {
+      ...sharedOptionalComponents,
+      banners: <Banner severity="success" text="This is an app!" />,
+    },
     subscribeToPropChanges: (subscriber) => {
       subscriber({
         sideNavProps: sharedSideNavProps,
