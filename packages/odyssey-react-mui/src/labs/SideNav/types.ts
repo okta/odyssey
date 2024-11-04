@@ -14,6 +14,41 @@ import type { ReactElement } from "react";
 import type { HtmlProps } from "../../HtmlProps";
 import type { statusSeverityValues } from "../../Status";
 
+export type SideNavLogoProps = {
+  href?: string;
+} & (
+  | {
+      /**
+       * a component to render as the logo
+       */
+      logoComponent: ReactElement;
+      imageAltText?: never;
+      imageUrl?: never;
+    }
+  | {
+      /**
+       * The src url to render in an `img` tag
+       */
+      imageUrl: string;
+      /**
+       * alt text for the img logo
+       */
+      imageAltText: string;
+      logoComponent?: never;
+    }
+  | {
+      /**
+       * The src url to render in an `img` tag
+       */
+      imageUrl?: never;
+      /**
+       * alt text for the img logo
+       */
+      imageAltText?: never;
+      logoComponent?: never;
+    }
+);
+
 export type SideNavProps = {
   /**
    * Side Nav header text that is usually reserved to show the App name
@@ -28,6 +63,14 @@ export type SideNavProps = {
    */
   isCompact?: boolean;
   /**
+   *  Before the side nav has items, it will be in a loading state.
+   */
+  isLoading?: boolean;
+  /**
+   * An optional logo component or src string for an img to display in the header. If not provided, will default to the Okta logo
+   */
+  logoProps?: SideNavLogoProps;
+  /**
    *  Triggers when the side nav is collapsed
    */
   onCollapse?(): void;
@@ -39,54 +82,36 @@ export type SideNavProps = {
    * Nav items in the side nav
    */
   sideNavItems: SideNavItem[];
-  /**
-   * A CSS length string indicating the customizable expanded width of the SideNav container.
-   * (it will be smaller if isCollapsible and collapsed)
-   */
-  expandedWidth?: string;
 } & (
   | {
       /**
-       * An optional logo to display in the header. If not provided, will default to the Okta logo.
+       * The component to display as the footer; if present the `footerItems` are ignored and not rendered.
        */
-      customCompanyLogo: ReactElement;
-      /**
-       * Use the built-in Okta logo or a custom one.
-       */
-      hasCustomCompanyLogo: true;
+      footerComponent?: ReactElement;
+      footerItems?: never;
+      hasCustomFooter: true;
     }
   | {
-      customCompanyLogo?: never;
-      hasCustomCompanyLogo?: false;
+      footerComponent?: never;
+      /**
+       * Footer items in the side nav
+       */
+      footerItems?: SideNavFooterItem[];
+      hasCustomFooter?: false;
     }
 ) &
-  (
-    | {
-        /**
-         * The component to display as the footer; if present the `footerItems` are ignored and not rendered.
-         */
-        footerComponent?: ReactElement;
-        footerItems?: never;
-        hasCustomFooter: true;
-      }
-    | {
-        footerComponent?: never;
-        /**
-         * Footer items in the side nav
-         */
-        footerItems?: SideNavFooterItem[];
-        hasCustomFooter?: false;
-      }
-  ) &
   Pick<HtmlProps, "testId">;
 
 export type SideNavItem = {
-  id: string;
-  label: string;
+  /**
+   * The number to display as a count alongside the nav item
+   */
+  count?: number;
   /**
    * The icon element to display at the end of the Nav Item
    */
   endIcon?: ReactElement;
+  id: string;
   /**
    * Whether the item is disabled. When set to true the nav item is set to Disabled color,
    * the link/item is not clickable, and item with children is not expandable.
@@ -96,6 +121,7 @@ export type SideNavItem = {
    * Whether the item is active/selected
    */
   isSelected?: boolean;
+  label: string;
   /**
    * Event fired when the nav item is clicked
    */
@@ -118,25 +144,25 @@ export type SideNavItem = {
   target?: string;
 } & (
   | {
+      children?: never;
+      href?: never;
+      isDefaultExpanded?: never;
+      isExpanded?: never;
       /**
        * Determines if the side nav item is a section header
        */
       isSectionHeader: true;
-      href?: never;
-      children?: never;
-      isDefaultExpanded?: never;
-      isExpanded?: never;
     }
   | {
+      children?: never;
       /**
        * link added to the nav item. if it is undefined, static text will be displayed.
        * fires onClick event when it is passed
        */
       href?: string;
-      children?: never;
-      isSectionHeader?: never;
       isDefaultExpanded?: never;
       isExpanded?: never;
+      isSectionHeader?: never;
     }
   | {
       /**
@@ -144,6 +170,7 @@ export type SideNavItem = {
        */
       children?: Array<Omit<SideNavItem, "startIcon" | "endIcon">>;
       endIcon?: never;
+      href?: never;
       /**
        * Whether the accordion (nav item with children) is expanded by default
        */
@@ -154,7 +181,6 @@ export type SideNavItem = {
        */
       isExpanded?: boolean;
       isSectionHeader?: never;
-      href?: never;
     }
 );
 

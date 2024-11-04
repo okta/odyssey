@@ -10,8 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export * from "./renderUiShell";
-export * from "./useHasUiShell";
+import { useEffect, useState } from "react";
 
-export { UiShell, type UiShellProps } from "./UiShell";
-export { type UiShellNavComponentProps } from "./UiShellContent";
+import { uiShellDataAttribute } from "./renderUiShell";
+
+export const useHasUiShell = () => {
+  const [hasUiShell, setHasUiShell] = useState(false);
+
+  useEffect(() => {
+    setHasUiShell(Boolean(document.querySelector(`[${uiShellDataAttribute}]`)));
+  }, []);
+
+  return hasUiShell;
+};

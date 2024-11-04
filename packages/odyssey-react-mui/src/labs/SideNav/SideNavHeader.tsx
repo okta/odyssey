@@ -11,76 +11,91 @@
  */
 
 import styled from "@emotion/styled";
-import { memo, useMemo, type ReactElement } from "react";
+import { memo } from "react";
+import { Skeleton } from "@mui/material";
+
 import {
   type DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
-import { Box } from "../../Box";
+import { SideNavLogo } from "./SideNavLogo";
+import { SideNavProps } from "./types";
 import { Heading6 } from "../../Typography";
 import { TOP_NAV_HEIGHT } from "../TopNav";
+
+const SideNavHeaderContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  position: "relative",
+  display: "flex",
+  flexDirection: "column",
+  backgroundColor: odysseyDesignTokens.HueNeutralWhite,
+  zIndex: 1,
+}));
 
 const SideNavLogoContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  display: "flex",
+  alignItems: "center",
   height: TOP_NAV_HEIGHT,
-  padding: odysseyDesignTokens.Spacing3,
-  borderColor: odysseyDesignTokens.HueNeutral50,
-  borderStyle: odysseyDesignTokens.BorderStyleMain,
-  borderWidth: 0,
-  borderBottomWidth: odysseyDesignTokens.BorderWidthMain,
+  padding: odysseyDesignTokens.Spacing4,
+
+  "svg, img": {
+    maxHeight: "100%",
+    width: "auto",
+    maxWidth: "100%",
+  },
 }));
 
-const SideNavHeaderContainer = styled("div", {
+const SideNavHeadingContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  paddingLeft: odysseyDesignTokens.Spacing4,
-  paddingRight: odysseyDesignTokens.Spacing4,
-  paddingTop: odysseyDesignTokens.Spacing3,
-  paddingBottom: odysseyDesignTokens.Spacing3,
+  padding: odysseyDesignTokens.Spacing4,
+  width: "100%",
+
+  ["& .MuiTypography-root"]: {
+    margin: 0,
+    width: "100%",
+  },
 }));
 
-export type SideNavHeader = {
+export type SideNavHeaderProps = {
   /**
    * The app's name.
    */
   appName: string;
   /**
-   * Company logo that displays above the app name.
+   * If the side nav currently has no items, it will be loading.
    */
-  companyLogo: ReactElement;
-};
+  isLoading?: boolean;
+} & Pick<SideNavProps, "logoProps">;
 
-const SideNavHeader = ({ appName, companyLogo }: SideNavHeader) => {
+const SideNavHeader = ({
+  appName,
+  isLoading,
+  logoProps,
+}: SideNavHeaderProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
-  const sideNavHeaderStyles = useMemo(
-    () => ({
-      marginTop: odysseyDesignTokens.Spacing2,
-    }),
-    [odysseyDesignTokens],
-  );
-
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
+    <SideNavHeaderContainer odysseyDesignTokens={odysseyDesignTokens}>
       <SideNavLogoContainer odysseyDesignTokens={odysseyDesignTokens}>
-        {companyLogo}
+        {isLoading ? (
+          //  The skeleton takes the hardcoded dimensions of the Okta logo
+          <Skeleton variant="rounded" height={24} width={67} />
+        ) : (
+          <SideNavLogo {...logoProps} />
+        )}
       </SideNavLogoContainer>
 
-      <SideNavHeaderContainer odysseyDesignTokens={odysseyDesignTokens}>
-        <Box sx={sideNavHeaderStyles}>
-          <Heading6>{appName}</Heading6>
-        </Box>
-      </SideNavHeaderContainer>
-    </Box>
+      <SideNavHeadingContainer odysseyDesignTokens={odysseyDesignTokens}>
+        <Heading6 component="h2">{isLoading ? <Skeleton /> : appName}</Heading6>
+      </SideNavHeadingContainer>
+    </SideNavHeaderContainer>
   );
 };
 

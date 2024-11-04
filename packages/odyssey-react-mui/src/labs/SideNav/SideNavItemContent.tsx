@@ -32,7 +32,7 @@ import {
 } from "./SideNavItemContentContext";
 import { ExternalLinkIcon } from "../../icons.generated";
 
-export const SideNavListItemContainer = styled("li", {
+export const StyledSideNavListItem = styled("li", {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" && prop !== "isSelected",
 })<{
@@ -42,8 +42,16 @@ export const SideNavListItemContainer = styled("li", {
 }>(({ odysseyDesignTokens, isSelected }) => ({
   display: "flex",
   alignItems: "center",
-  backgroundColor: isSelected ? odysseyDesignTokens.HueNeutral50 : "unset",
-  margin: `${odysseyDesignTokens.Spacing1} 0`,
+  backgroundColor: "unset",
+  borderRadius: odysseyDesignTokens.BorderRadiusMain,
+  lineHeight: 1.5,
+  transition: `backgroundColor ${odysseyDesignTokens.TransitionDurationMain}, color ${odysseyDesignTokens.TransitionDurationMain}`,
+
+  ...(isSelected && {
+    color: `${odysseyDesignTokens.TypographyColorAction} !important`,
+    backgroundColor: odysseyDesignTokens.HueBlue50,
+  }),
+
   "&:last-child": {
     marginBottom: odysseyDesignTokens.Spacing2,
   },
@@ -67,44 +75,61 @@ const GetNavItemContentStyles = ({
   odysseyDesignTokens,
   contextValue,
   isDisabled,
+  isSelected,
 }: {
   odysseyDesignTokens: DesignTokens;
   contextValue: SideNavItemContentContextValue;
   isDisabled?: boolean;
+  isSelected?: boolean;
 }) => {
   return {
     display: "flex",
     alignItems: "center",
     width: "100%",
     textDecoration: "none",
-    color: `${isDisabled ? odysseyDesignTokens.TypographyColorDisabled : odysseyDesignTokens.TypographyColorHeading} !important`,
-    minHeight: contextValue.isCompact
-      ? odysseyDesignTokens.Spacing6
-      : odysseyDesignTokens.Spacing7,
-    padding: contextValue.isCompact
-      ? `${odysseyDesignTokens.Spacing0} ${odysseyDesignTokens.Spacing4} ${odysseyDesignTokens.Spacing0} calc(${odysseyDesignTokens.Spacing4} * ${contextValue.depth})`
-      : `${odysseyDesignTokens.Spacing2} ${odysseyDesignTokens.Spacing4} ${odysseyDesignTokens.Spacing2} calc(${odysseyDesignTokens.Spacing4} * ${contextValue.depth})`,
-    "&:focus-visible": {
-      borderRadius: 0,
-      outlineColor: odysseyDesignTokens.FocusOutlineColorPrimary,
-      outlineStyle: odysseyDesignTokens.FocusOutlineStyle,
-      outlineWidth: odysseyDesignTokens.FocusOutlineWidthMain,
+    color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
+    minHeight: odysseyDesignTokens.Spacing7,
+    paddingBlock: odysseyDesignTokens.Spacing4,
+    paddingInline: `calc(${odysseyDesignTokens.Spacing4} * ${contextValue.depth})`,
+    borderRadius: odysseyDesignTokens.BorderRadiusMain,
+    transition: `backgroundColor ${odysseyDesignTokens.TransitionDurationMain}, color ${odysseyDesignTokens.TransitionDurationMain}`,
+
+    "&:hover": {
       textDecoration: "none",
-      outlineOffset: 0,
-      color: isDisabled
-        ? "default"
-        : `${odysseyDesignTokens.TypographyColorAction} !important`,
+      cursor: "pointer",
       backgroundColor: !isDisabled
         ? odysseyDesignTokens.HueNeutral50
         : "inherit",
+
+      ...(isDisabled && {
+        color: "inherit",
+        cursor: "default",
+      }),
+
+      ...(isSelected && {
+        "&:hover": {
+          backgroundColor: odysseyDesignTokens.HueBlue50,
+        },
+      }),
     },
-    "&:hover": {
-      textDecoration: "none",
-      cursor: isDisabled ? "default" : "pointer",
-      color: isDisabled
-        ? "default"
-        : `${odysseyDesignTokens.TypographyColorAction} !important`,
-      backgroundColor: !isDisabled ? odysseyDesignTokens.HueBlue50 : "inherit",
+
+    ...(isSelected && {
+      color: `${odysseyDesignTokens.TypographyColorAction} !important`,
+      fontWeight: odysseyDesignTokens.TypographyWeightBodyBold,
+    }),
+
+    ...(isDisabled && {
+      color: `${odysseyDesignTokens.TypographyColorDisabled} !important`,
+    }),
+
+    ...(contextValue.isCompact && {
+      paddingBlock: odysseyDesignTokens.Spacing1,
+      minHeight: odysseyDesignTokens.Spacing6,
+    }),
+
+    "&:focus-visible": {
+      outline: "none",
+      boxShadow: `inset 0 0 0 3px ${odysseyDesignTokens.PalettePrimaryMain}`,
     },
   };
 };
@@ -113,17 +138,20 @@ const NavItemContentContainer = styled("div", {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" &&
     prop != "contextValue" &&
-    prop !== "isDisabled",
+    prop !== "isDisabled" &&
+    prop !== "isSelected",
 })(GetNavItemContentStyles);
 
 const NavItemLinkContainer = styled(NavItemLink, {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" &&
     prop != "contextValue" &&
-    prop !== "isDisabled",
+    prop !== "isDisabled" &&
+    prop !== "isSelected",
 })(GetNavItemContentStyles);
 
 const SideNavItemContent = ({
+  count,
   id,
   label,
   href,
@@ -138,6 +166,7 @@ const SideNavItemContent = ({
   scrollRef,
 }: Pick<
   SideNavItem,
+  | "count"
   | "id"
   | "label"
   | "href"
@@ -186,13 +215,14 @@ const SideNavItemContent = ({
   );
 
   return (
-    <SideNavListItemContainer
+    <StyledSideNavListItem
       ref={localScrollRef}
       id={id}
       key={id}
       isSelected={isSelected}
       disabled={isDisabled}
       aria-disabled={isDisabled}
+      aria-current={isSelected ? "page" : undefined}
       odysseyDesignTokens={odysseyDesignTokens}
     >
       {
@@ -202,8 +232,10 @@ const SideNavItemContent = ({
             odysseyDesignTokens={odysseyDesignTokens}
             contextValue={contextValue}
             isDisabled={isDisabled}
+            isSelected={isSelected}
           >
             <SideNavItemLinkContent
+              count={count}
               label={label}
               startIcon={startIcon}
               endIcon={endIcon}
@@ -216,12 +248,12 @@ const SideNavItemContent = ({
             odysseyDesignTokens={odysseyDesignTokens}
             contextValue={contextValue}
             isDisabled={isDisabled}
-            role="button"
             tabIndex={0}
             onClick={onClick}
             onKeyDown={sideNavItemContentKeyHandler}
           >
             <SideNavItemLinkContent
+              count={count}
               label={label}
               startIcon={startIcon}
               endIcon={endIcon}
@@ -234,11 +266,13 @@ const SideNavItemContent = ({
             odysseyDesignTokens={odysseyDesignTokens}
             contextValue={contextValue}
             isDisabled={isDisabled}
+            isSelected={isSelected}
             href={href}
             target={target}
             onClick={onClick}
           >
             <SideNavItemLinkContent
+              count={count}
               label={label}
               startIcon={startIcon}
               endIcon={endIcon}
@@ -253,7 +287,7 @@ const SideNavItemContent = ({
           </NavItemLinkContainer>
         )
       }
-    </SideNavListItemContainer>
+    </StyledSideNavListItem>
   );
 };
 const MemoizedSideNavItemContent = memo(SideNavItemContent);

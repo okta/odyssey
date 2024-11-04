@@ -19,6 +19,7 @@ import {
 import { Box } from "../../Box";
 import { Status } from "../../Status";
 import type { SideNavItem } from "./types";
+import { Badge } from "../../Badge";
 
 const SideNavItemLabelContainer = styled("div", {
   shouldForwardProp: (prop) =>
@@ -32,11 +33,11 @@ const SideNavItemLabelContainer = styled("div", {
   flexWrap: "wrap",
   alignItems: "center",
   fontSize: odysseyDesignTokens.TypographyScale0,
-  fontWeight: odysseyDesignTokens.TypographyWeightHeading,
-  marginLeft: isIconVisible ? odysseyDesignTokens.Spacing2 : 0,
+  marginInlineStart: isIconVisible ? odysseyDesignTokens.Spacing2 : 0,
 }));
 
 const SideNavItemLinkContent = ({
+  count,
   label,
   startIcon,
   endIcon,
@@ -44,13 +45,16 @@ const SideNavItemLinkContent = ({
   statusLabel,
 }: Pick<
   SideNavItem,
-  "label" | "startIcon" | "endIcon" | "severity" | "statusLabel"
+  "count" | "label" | "startIcon" | "endIcon" | "severity" | "statusLabel"
 >): ReactNode => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const sideNavItemContentStyles = useMemo(
     () => ({
-      marginLeft: odysseyDesignTokens.Spacing2,
+      alignItems: "center",
+      display: "flex",
+      gap: odysseyDesignTokens.Spacing1,
+      marginInlineStart: odysseyDesignTokens.Spacing2,
     }),
     [odysseyDesignTokens],
   );
@@ -62,11 +66,17 @@ const SideNavItemLinkContent = ({
         odysseyDesignTokens={odysseyDesignTokens}
         isIconVisible={Boolean(startIcon)}
       >
-        {Boolean(startIcon)}
         {label}
-        {severity && (
+        {!count && severity && (
           <Box sx={sideNavItemContentStyles}>
-            <Status severity={severity} label={statusLabel || ""} />
+            {severity && (
+              <Status severity={severity} label={statusLabel || ""} />
+            )}
+          </Box>
+        )}
+        {!severity && count && (
+          <Box sx={sideNavItemContentStyles}>
+            {count && <Badge badgeContent={count} />}
           </Box>
         )}
       </SideNavItemLabelContainer>
