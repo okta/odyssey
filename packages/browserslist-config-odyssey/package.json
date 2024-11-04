@@ -13,11 +13,9 @@
     "directory": "packages/browserslist-config-odyssey"
   },
   "scripts": {
-    "build": "tsc",
-    "prepack": "yarn exec prepack"
+    "build": "tsc"
   },
   "devDependencies": {
-    "@okta/odyssey-lifecycle": "workspace:*",
     "@okta/odyssey-typescript": "workspace:*",
     "typescript": "^5.5.4"
   }

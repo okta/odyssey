@@ -61,7 +61,6 @@
     "generate:icons": "yarn build:cleanIconComponents && yarn generate:iconComponents && yarn build:cleanIconsIndex && yarn generate:iconsIndex",
     "generate:iconsIndex": "tsx scripts/generateIconsIndex.ts",
     "lint": "eslint .",
-    "prepack": "yarn exec prepack",
     "test": "jest",
     "typecheck": "tsc"
   },
@@ -97,9 +96,7 @@
     "@babel/core": "^7.23.9",
     "@happy-dom/jest-environment": "^15.7.4",
     "@okta/browserslist-config-odyssey": "workspace:*",
-    "@okta/odyssey-babel-preset": "workspace:*",
     "@okta/odyssey-icons": "workspace:*",
-    "@okta/odyssey-lifecycle": "workspace:*",
     "@okta/odyssey-svgr": "workspace:*",
     "@okta/odyssey-typescript": "workspace:*",
     "@svgr/cli": "^7.0.0",
