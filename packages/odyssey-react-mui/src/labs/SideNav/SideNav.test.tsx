@@ -104,7 +104,7 @@ describe("SideNav", () => {
     const collapseButton = screen.getByLabelText("Collapse side navigation");
     fireEvent.click(collapseButton);
 
-    expect(screen.getByText(menuItemText)).not.toBeVisible;
+    expect(screen.getByText(menuItemText)).not.toBeVisible();
 
     const expandButton = screen.getByLabelText("Expand side navigation");
     fireEvent.click(expandButton);

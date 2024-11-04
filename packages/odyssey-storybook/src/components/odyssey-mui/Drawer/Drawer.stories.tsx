@@ -303,7 +303,11 @@ const DefaultTemplate: StoryObj<DrawerProps> = {
             <Button
               label={isVisible ? "Close drawer" : "Open drawer"}
               onClick={() => {
-                isVisible ? onClose() : onOpen();
+                if (isVisible) {
+                  onClose();
+                } else {
+                  onOpen();
+                }
               }}
               variant="primary"
             />

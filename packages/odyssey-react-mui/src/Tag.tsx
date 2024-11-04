@@ -24,7 +24,7 @@ import {
 import { TagListContext } from "./TagListContext";
 import { ContrastMode, useContrastModeContext } from "./useContrastMode";
 
-const tagSizeValues = ["medium", "small"] as const;
+export const tagSizeValues = ["medium", "small"] as const;
 
 export const tagColorVariants = [
   "accentFour",

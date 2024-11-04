@@ -423,7 +423,12 @@ const SideNav = ({
   );
 
   const sideNavExpandClickHandler = useCallback(() => {
-    isSideNavCollapsed ? onExpand?.() : onCollapse?.();
+    if (isSideNavCollapsed) {
+      onExpand?.();
+    } else {
+      onCollapse?.();
+    }
+
     setSideNavCollapsed(!isSideNavCollapsed);
   }, [isSideNavCollapsed, setSideNavCollapsed, onExpand, onCollapse]);
 

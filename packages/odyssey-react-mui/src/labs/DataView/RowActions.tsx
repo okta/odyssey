@@ -54,25 +54,30 @@ const RowActions = ({
   const { t } = useTranslation();
 
   const handleToFrontClick = useCallback(() => {
-    updateRowOrder && updateRowOrder({ rowId: row.id, newRowIndex: 0 });
+    if (updateRowOrder) {
+      updateRowOrder({ rowId: row.id, newRowIndex: 0 });
+    }
   }, [row.id, updateRowOrder]);
 
   const handleForwardClick = useCallback(() => {
-    updateRowOrder &&
+    if (updateRowOrder) {
       updateRowOrder({ rowId: row.id, newRowIndex: Math.max(0, rowIndex - 1) });
+    }
   }, [row.id, rowIndex, updateRowOrder]);
 
   const handleBackwardClick = useCallback(() => {
-    updateRowOrder &&
+    if (updateRowOrder) {
       updateRowOrder({ rowId: row.id, newRowIndex: rowIndex + 1 });
+    }
   }, [row.id, rowIndex, updateRowOrder]);
 
   const handleToBackClick = useCallback(() => {
-    updateRowOrder &&
+    if (updateRowOrder) {
       updateRowOrder({
         rowId: row.id,
         newRowIndex: totalRows ? totalRows - 1 : rowIndex,
       });
+    }
   }, [row.id, rowIndex, totalRows, updateRowOrder]);
 
   return (

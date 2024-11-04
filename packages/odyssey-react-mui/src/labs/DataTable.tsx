@@ -358,6 +358,7 @@ const DataTable = ({
       setData(newData);
       setShowSkeletons(false);
     } catch (error) {
+      console.error(error);
       setShowSkeletons(false);
     }
   }, [page, resultsPerPage, sorting, globalFilter, filters, fetchDataFn]);
