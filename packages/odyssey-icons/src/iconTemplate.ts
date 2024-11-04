@@ -18,7 +18,7 @@ import {
 } from "@babel/types";
 import type { Template } from "@svgr/babel-plugin-transform-svg-component";
 
-import { headerComment } from "./headerComment";
+import { headerCopyrightLicense } from "./headerCopyrightLicense";
 
 export const iconTemplate: Template = ({ componentName, jsx }, { tpl }) => {
   const compName = componentName.substring(3) + "Icon";
@@ -45,7 +45,7 @@ export const iconTemplate: Template = ({ componentName, jsx }, { tpl }) => {
   `;
 
   return tpl`
-${headerComment}
+${headerCopyrightLicense}
 
 import { forwardRef } from "react";
 import { SvgIcon, type SvgIconNoChildrenProps } from '../SvgIcon';
