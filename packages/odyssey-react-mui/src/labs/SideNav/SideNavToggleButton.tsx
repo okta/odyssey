@@ -49,6 +49,11 @@ const StyledToggleButton = styled(MuiButton, {
     border: 0,
     zIndex: 2,
 
+    "&:focus-visible": {
+      boxShadow: `inset 0 0 0 2px ${odysseyDesignTokens.PalettePrimaryMain}`,
+      outline: "none",
+    },
+
     "&:hover, &:focus": {
       backgroundColor: "transparent",
 

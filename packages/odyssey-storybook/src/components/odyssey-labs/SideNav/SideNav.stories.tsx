@@ -324,8 +324,14 @@ export const Default: StoryObj<typeof SideNav> = {
   play: async ({ canvasElement, step }: PlaywrightProps<SideNavProps>) => {
     configure({ testIdAttribute: "data-se" });
     const canvas = within(canvasElement);
-    const expandedRegion = canvas.getByTestId("expanded-region");
-    const collapsedRegion = canvas.getByTestId("collapsed-region");
+
+    const toggleButton = canvas.getByRole("button", {
+      name: "Close navigation",
+    });
+    const navElement = canvas.getByRole("navigation", {
+      name: "Main navigation",
+    });
+    // const collapsedRegion = canvas.getByTestId("collapsed-region");
     const scrollableRegion = canvas.getByTestId("scrollable-region");
 
     /**
@@ -352,21 +358,18 @@ export const Default: StoryObj<typeof SideNav> = {
       }
     });
     await step("Side Nav Collapse", async ({}) => {
-      const collapseButton = within(collapsedRegion).getByRole("button", {
-        name: "collapse side navigation",
-      });
-      await userEvent.click(collapseButton);
+      await userEvent.click(toggleButton);
+
       await waitFor(() => {
-        expect(expandedRegion).not.toBeVisible();
+        expect(toggleButton.ariaExpanded).toEqual("false");
+        expect(navElement).toHaveStyle({ width: 0 });
       });
     });
     await step("Side Nav Expand", async ({}) => {
-      const expandeButton = within(collapsedRegion).getByRole("button", {
-        name: "expand side navigation",
-      });
-      await userEvent.click(expandeButton);
+      await userEvent.click(toggleButton);
       await waitFor(() => {
-        expect(expandedRegion).toBeVisible();
+        expect(toggleButton.ariaExpanded).toEqual("true");
+        expect(navElement).toBeVisible();
       });
     });
   },

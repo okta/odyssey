@@ -456,6 +456,7 @@ const SideNav = ({
       )}
       <OdysseyThemeProvider>
         <StyledCollapsibleContent
+          data-se="collapsible-region"
           isSideNavCollapsed={isSideNavCollapsed}
           odysseyDesignTokens={odysseyDesignTokens}
         >
