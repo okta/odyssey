@@ -20,10 +20,8 @@ import {
   ArrowTopIcon,
   ArrowUpIcon,
 } from "../../icons.generated";
-import { Button } from "../../Button";
-import { MenuItem } from "../../MenuItem";
+import { Button, MenuButtonProps, MenuItem } from "../../Buttons";
 import { DataTableProps } from "./DataTable";
-import { MenuButtonProps } from "../../MenuButton";
 
 export type RowActionsProps = {
   isRowReorderingDisabled?: boolean;

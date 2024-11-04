@@ -18,6 +18,7 @@ import {
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
 import { Subordinate } from "../../Typography";
+import { Box } from "../../Box";
 
 const UserProfileContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
@@ -37,6 +38,7 @@ const UserProfileIconContainer = styled("div", {
 const UserProfileInfoContainer = styled("div")(() => ({
   display: "flex",
   flexDirection: "column",
+  textAlign: "left",
 }));
 
 export type UserProfileProps = {
@@ -52,9 +54,18 @@ export type UserProfileProps = {
    * Org name of the logged in user
    */
   orgName: string;
+  /**
+   * The icon element to display after the username
+   */
+  userNameEndIcon?: ReactElement;
 };
 
-const UserProfile = ({ profileIcon, userName, orgName }: UserProfileProps) => {
+const UserProfile = ({
+  profileIcon,
+  userName,
+  orgName,
+  userNameEndIcon,
+}: UserProfileProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   return (
@@ -66,7 +77,20 @@ const UserProfile = ({ profileIcon, userName, orgName }: UserProfileProps) => {
       )}
 
       <UserProfileInfoContainer>
-        <Subordinate color="textPrimary">{userName}</Subordinate>
+        {userNameEndIcon ? (
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              gap: odysseyDesignTokens.Spacing2,
+            }}
+          >
+            <Subordinate color="textPrimary">{userName}</Subordinate>
+            {userNameEndIcon}
+          </Box>
+        ) : (
+          <Subordinate color="textPrimary">{userName}</Subordinate>
+        )}
         <Subordinate color="textSecondary">{orgName}</Subordinate>
       </UserProfileInfoContainer>
     </UserProfileContainer>

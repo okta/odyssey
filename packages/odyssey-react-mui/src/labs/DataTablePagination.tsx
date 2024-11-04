@@ -12,7 +12,7 @@
 
 import { memo } from "react";
 import { Box } from "../Box";
-import { Button } from "../Button";
+import { Button } from "../Buttons";
 import { Support } from "../Typography";
 import { ArrowLeftIcon, ArrowRightIcon } from "../icons.generated";
 

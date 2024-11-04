@@ -14,7 +14,7 @@ import { useEffect, memo, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert, AlertTitle, Snackbar } from "@mui/material";
 
-import { Button } from "./Button";
+import { Button } from "./Buttons";
 import { HtmlProps } from "./HtmlProps";
 import { CloseIcon } from "./icons.generated";
 import { Link } from "./Link";
