@@ -18,6 +18,33 @@
     "deliverableTiming": "Q3 FY25"
   },
   {
+    "name": "Aerial account page",
+    "type": "Page template",
+    "status": "Not started",
+    "define": "-",
+    "design": "-",
+    "develop": "-",
+    "deliverableTiming": "-"
+  },
+  {
+    "name": "Aerial org details page",
+    "type": "Page template",
+    "status": "Not started",
+    "define": "-",
+    "design": "-",
+    "develop": "-",
+    "deliverableTiming": "-"
+  },
+  {
+    "name": "Aerial user page",
+    "type": "Page template",
+    "status": "Not started",
+    "define": "-",
+    "design": "-",
+    "develop": "-",
+    "deliverableTiming": "-"
+  },
+  {
     "name": "Autocomplete",
     "type": "Component",
     "status": "Released",
@@ -97,6 +124,15 @@
     "design": "Complete",
     "develop": "Complete",
     "deliverableTiming": "FY24"
+  },
+  {
+    "name": "Configuration ",
+    "type": "Page template",
+    "status": "Not started",
+    "define": "-",
+    "design": "Complete",
+    "develop": "Complete",
+    "deliverableTiming": "-"
   },
   {
     "name": "Dashboard",
