@@ -57,7 +57,7 @@ const SideNavHeadingContainer = styled("div", {
   padding: odysseyDesignTokens.Spacing4,
   width: "100%",
 
-  h2: {
+  ["& .MuiTypography-root"]: {
     margin: 0,
     width: "100%",
   },
