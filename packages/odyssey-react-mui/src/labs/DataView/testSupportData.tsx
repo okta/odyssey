@@ -11,11 +11,7 @@
  */
 
 import { Status } from "../../Status";
-import {
-  DataColumns,
-  DataFilter,
-  DataGetDataType,
-} from "@okta/odyssey-react-mui/labs";
+import { DataColumns, DataFilter, DataGetDataType } from "../";
 
 export type Person = {
   order: number;

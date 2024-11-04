@@ -163,7 +163,7 @@ const MenuButton = ({
   return (
     <div>
       <Button
-        ariaControls={isOpen ? `${uniqueId}-menu` : undefined}
+        ariaControls={`${uniqueId}-menu`}
         ariaExpanded={isOpen ? "true" : undefined}
         ariaHasPopup="true"
         ariaDescribedBy={ariaDescribedBy}

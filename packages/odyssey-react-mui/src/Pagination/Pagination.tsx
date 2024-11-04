@@ -25,7 +25,7 @@ import { paginationTypeValues } from "./constants";
 import { usePagination } from "./usePagination";
 import { useTranslation } from "react-i18next";
 
-const PaginationContainer = styled("div")({
+const PaginationContainer = styled("nav")({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
@@ -330,7 +330,7 @@ const Pagination = ({
   );
 
   return variant === "paged" ? (
-    <PaginationContainer>
+    <PaginationContainer aria-label={t("pagination.label")}>
       <PaginationSegment odysseyDesignTokens={odysseyDesignTokens}>
         {hasRowCountInput && (
           <Box>

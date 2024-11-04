@@ -290,6 +290,7 @@ const DataCard = ({
   return (
     <MuiCard
       className={`${onClick ? "isClickable" : ""} ${Accessory ? "hasAccessory" : ""} ods-card-${variant}`}
+      role="listitem"
     >
       {onClick ? (
         <MuiCardActionArea onClick={onClick}>{cardContent}</MuiCardActionArea>

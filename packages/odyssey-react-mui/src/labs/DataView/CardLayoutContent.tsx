@@ -184,6 +184,7 @@ const CardLayoutContent = ({
               odysseyDesignTokens={odysseyDesignTokens}
               currentLayout={currentLayout}
               maxGridColumns={cardLayoutOptions.maxGridColumns ?? 3}
+              role="list"
             >
               {data.map((row: MRT_RowData, index: number) => {
                 const {

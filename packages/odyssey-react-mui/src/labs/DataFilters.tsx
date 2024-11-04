@@ -433,9 +433,9 @@ const DataFilters = ({
       <>
         <Box>
           <Button
-            aria-controls={isFiltersMenuOpen ? "filters-menu" : undefined}
-            aria-expanded={isFiltersMenuOpen ? "true" : undefined}
-            aria-haspopup="true"
+            ariaControls="filters-menu"
+            ariaExpanded={isFiltersMenuOpen ? "true" : undefined}
+            ariaHasPopup="true"
             ariaLabel={t("filters.filters.arialabel")}
             isDisabled={isDisabled}
             endIcon={<FilterIcon />}
@@ -469,6 +469,7 @@ const DataFilters = ({
             return (
               <MuiMenuItem
                 key={filter.id}
+                aria-controls="filter-form"
                 onClick={(event) => {
                   setIsFilterPopoverOpen(true);
                   setFilterPopoverAnchorElement(event.currentTarget);
@@ -563,6 +564,7 @@ const DataFilters = ({
               {filterMenu}
               {/* Filter popover */}
               <MuiPopover
+                id="filter-form"
                 anchorEl={filterPopoverAnchorElement}
                 // Positions the popover flush with the edge of the parent menu
                 // and at the right shadow elevation. These magic values are simply

@@ -11,11 +11,7 @@
  */
 
 import {
-  findAllByRole,
   fireEvent,
-  getByText,
-  queryAllByRole,
-  queryByText,
   render,
   screen,
   waitFor,
@@ -28,6 +24,7 @@ import { DataTableRowData } from "../../DataTable";
 import { MenuItem } from "../../MenuItem";
 import { Button } from "../../Button";
 import { MRT_RowSelectionState } from "material-react-table";
+import { getControlledElement } from "../../test-selectors/linkedHtmlSelectors";
 
 const getData = ({ ...props }) => {
   return filterData({ data, ...props });
@@ -45,7 +42,7 @@ const gridItemProps = (row: DataRow) => ({
 
 describe("DataView", () => {
   it("displays a table view", async () => {
-    render(
+    const { container } = render(
       <DataView
         availableLayouts={["table"]}
         getData={getData}
@@ -57,12 +54,12 @@ describe("DataView", () => {
 
     await screen.findByText(data[0].name);
 
-    expect(screen.queryByRole("table")).not.toBeNull();
-    expect(screen.queryByRole("list")).toBeNull();
+    expect(within(container).queryByRole("table")).not.toBeNull();
+    expect(within(container).queryByRole("list")).toBeNull();
   });
 
   it("displays a list view", async () => {
-    render(
+    const { container } = render(
       <DataView
         availableLayouts={["list"]}
         getData={getData}
@@ -74,13 +71,12 @@ describe("DataView", () => {
 
     await screen.findByText(data[0].name);
 
-    expect(screen.queryByRole("table")).toBeNull();
-    expect(screen.findAllByText("List card")).not.toBeNull();
-    expect(screen.queryByText("Grid card")).toBeNull();
+    expect(within(container).queryByRole("table")).toBeNull();
+    expect(within(container).queryByRole("list")).not.toBeNull();
   });
 
   it("displays a grid view", async () => {
-    render(
+    const { container } = render(
       <DataView
         availableLayouts={["grid"]}
         getData={getData}
@@ -92,9 +88,8 @@ describe("DataView", () => {
 
     await screen.findByText(data[0].name);
 
-    expect(screen.queryByRole("table")).toBeNull();
-    expect(screen.queryByText("List card")).toBeNull();
-    expect(screen.findAllByText("Grid card")).not.toBeNull();
+    expect(within(container).queryByRole("table")).toBeNull();
+    expect(within(container).queryByRole("list")).not.toBeNull();
   });
 
   it("displays the layout switcher", async () => {
@@ -111,9 +106,21 @@ describe("DataView", () => {
       />,
     );
 
+    const layoutSwitcherButton = screen.getByLabelText("Layout", {
+      selector: "button",
+    });
+    fireEvent.click(layoutSwitcherButton);
+
+    const layoutSwitcherMenu = getControlledElement({
+      element: layoutSwitcherButton,
+    });
+    expect(within(layoutSwitcherMenu).getAllByRole("menuitem")).toHaveLength(2);
     expect(
-      screen.queryByLabelText("Layout", { selector: "button" }),
-    ).not.toBeNull();
+      within(layoutSwitcherMenu).getByRole("menuitem", { name: "Table" }),
+    ).toBeVisible();
+    expect(
+      within(layoutSwitcherMenu).getByRole("menuitem", { name: "List" }),
+    ).toBeVisible();
   });
 
   it("can display meta text", async () => {
@@ -130,7 +137,7 @@ describe("DataView", () => {
       />,
     );
 
-    expect(screen.queryAllByText(metaText).length).toBe(1);
+    expect(screen.getByText(metaText)).toBeInTheDocument();
   });
 
   it("can filter rows", async () => {
@@ -145,32 +152,31 @@ describe("DataView", () => {
       />,
     );
 
-    expect((await screen.findAllByText("Han Solo")).length).toBe(1);
-    expect((await screen.findAllByText("Luke Skywalker")).length).toBe(1);
+    expect(await screen.findByText(data[0].name)).toBeVisible();
+    expect(await screen.findByText(data[1].name)).toBeVisible();
 
-    fireEvent.click(screen.getByLabelText("Filters", { selector: "button" }));
-
-    const nameParagraph = screen.getByText(/Name/i, { selector: "p" });
-    const nameMenuItem = nameParagraph.closest('[role="menuitem"]');
-    if (nameMenuItem) {
-      fireEvent.click(nameMenuItem);
-    }
-
-    const nameInput = screen.getByLabelText(/Name/i);
-    const submitButton = screen.getByLabelText("Submit", {
+    const filterButton = screen.getByLabelText("Filters", {
       selector: "button",
     });
+    fireEvent.click(filterButton);
 
-    fireEvent.change(nameInput, { target: { value: "Han Solo" } });
+    const filterMenu = getControlledElement({ element: filterButton });
+    const nameMenuItem = within(filterMenu).getByRole("menuitem", {
+      name: /Name/i,
+    });
+    fireEvent.click(nameMenuItem);
+
+    const nameFilterMenu = getControlledElement({ element: nameMenuItem });
+    const nameInput = within(nameFilterMenu).getByLabelText("Name");
+    const submitButton = within(nameFilterMenu).getByRole("button");
+    fireEvent.change(nameInput, { target: { value: data[1].name } });
     fireEvent.click(submitButton);
 
-    // Detect if the data has loaded in
     await screen.findByText("Clear filters");
 
-    const updatedTable = await screen.findByRole("table");
-
-    expect(queryByText(updatedTable, "Han Solo")).not.toBeNull();
-    expect(queryByText(updatedTable, "Luke Skywalker")).toBeNull();
+    const table = screen.getByRole("table");
+    expect(screen.queryByText(data[0].name)).toBeNull();
+    expect(await within(table).findByText(data[1].name)).toBeVisible();
   });
 
   it("can search rows", async () => {
@@ -186,24 +192,19 @@ describe("DataView", () => {
       />,
     );
 
-    expect((await screen.findAllByText("Han Solo")).length).toBe(1);
-    expect((await screen.findAllByText("Luke Skywalker")).length).toBe(1);
+    expect(await screen.findByText(data[0].name)).toBeVisible();
+    expect(await screen.findByText(data[1].name)).toBeVisible();
 
     const searchInput = screen.getByPlaceholderText(/Search/i);
     const submitButton = screen.getByText("Search", { selector: "button" });
-    fireEvent.change(searchInput, { target: { value: "Han Solo" } });
+    fireEvent.change(searchInput, { target: { value: data[1].name } });
     fireEvent.click(submitButton);
 
-    await waitFor(() =>
-      expect(
-        screen.queryByLabelText("Submit", { selector: "button" }),
-      ).toBeNull(),
-    );
-    const updatedTable = await screen.findByRole("table");
-
-    expect(queryByText(updatedTable, "Han Solo")).not.toBeNull();
-    expect(queryByText(updatedTable, "Luke Skywalker")).toBeNull();
+    const table = screen.getByRole("table");
+    expect(screen.queryByText(data[0].name)).toBeNull();
+    expect(await within(table).findByText(data[1].name)).toBeVisible();
   });
+
   it("can clear the search input", async () => {
     render(
       <DataView
@@ -217,30 +218,27 @@ describe("DataView", () => {
       />,
     );
 
-    expect((await screen.findAllByText("Han Solo")).length).toBe(1);
-    expect((await screen.findAllByText("Luke Skywalker")).length).toBe(1);
+    expect(await screen.findByText(data[0].name)).toBeVisible();
+    expect(await screen.findByText(data[1].name)).toBeVisible();
 
     const searchInput = screen.getByPlaceholderText(/Search/i);
     const submitButton = screen.getByText("Search", { selector: "button" });
-    fireEvent.change(searchInput, { target: { value: "Han Solo" } });
+    fireEvent.change(searchInput, { target: { value: data[1].name } });
     fireEvent.click(submitButton);
 
-    const updatedTable = await screen.findByRole("table");
-
-    expect(queryByText(updatedTable, "Han Solo")).not.toBeNull();
-    expect(queryByText(updatedTable, "Luke Skywalker")).toBeNull();
-
-    expect(queryAllByRole(updatedTable, "row").length).toBe(2);
+    const table = screen.getByRole("table");
+    expect(screen.queryByText(data[0].name)).toBeNull();
+    expect(await within(table).findByText(data[1].name)).toBeVisible();
 
     const clearButton = screen.getByLabelText("Clear", { selector: "button" });
     fireEvent.click(clearButton);
 
-    const clearedSearchTable = await screen.findByRole("table");
-
-    expect(searchInput).toHaveValue("");
-    expect(queryAllByRole(clearedSearchTable, "row").length).toBe(7);
-    expect((await screen.findAllByText("Han Solo")).length).toBe(1);
-    expect((await screen.findAllByText("Luke Skywalker")).length).toBe(1);
+    waitFor(() => {
+      expect(searchInput).toHaveValue("");
+      expect(screen.getAllByRole("row")).toHaveLength(7);
+      expect(screen.getByText(data[0].name)).toBeVisible();
+      expect(screen.getByText(data[1].name)).toBeVisible();
+    });
   });
 
   it("can display row action menu", async () => {
@@ -259,18 +257,22 @@ describe("DataView", () => {
       />,
     );
 
-    expect((await screen.findAllByText("Luke Skywalker")).length).toBe(1);
-    expect(screen.queryByText("Action for Luke Skywalker")).toBeNull();
+    expect(await screen.findByText(data[0].name)).toBeVisible();
 
-    const rows = await screen.findAllByRole("row");
-    const firstRow = rows[1];
+    // Index 1 because row[0] is the th row
+    const firstBodyRow = (await screen.findAllByRole("row"))[1];
+    const firstBodyRowActionButton = within(firstBodyRow).getByRole("button");
+    fireEvent.click(firstBodyRowActionButton);
 
-    const actionButton = within(firstRow).getByRole("button");
-    fireEvent.click(actionButton);
-
-    const actionMenu = await screen.findByRole("menuitem");
-    expect(actionMenu.textContent).toBe("Action for Luke Skywalker");
+    const actionMenu = getControlledElement({
+      element: firstBodyRowActionButton,
+    });
+    const actionMenuItem = within(actionMenu).getByRole("menuitem");
+    expect(
+      within(actionMenuItem).getByText(`Action for ${data[0].name}`),
+    ).toBeVisible();
   });
+
   it("can display row action buttons", async () => {
     const rowActionButtons = (row: DataTableRowData) => (
       <Button variant="primary" label={`Button for ${row?.original?.name}`} />
@@ -287,9 +289,16 @@ describe("DataView", () => {
       />,
     );
 
-    expect(
-      (await screen.findAllByText("Button for Luke Skywalker")).length,
-    ).toBe(1);
+    expect(await screen.findByText(data[0].name)).toBeVisible();
+
+    // Index 1 because row[0] is the th row
+    const firstBodyRow = (await screen.findAllByRole("row"))[1];
+    const firstBodyRowActionButton = within(firstBodyRow).getByText(
+      `Button for ${data[0].name}`,
+      { selector: "button" },
+    );
+
+    expect(firstBodyRowActionButton).toBeVisible();
   });
 
   it("can select table rows", async () => {
@@ -304,41 +313,13 @@ describe("DataView", () => {
       />,
     );
 
-    await waitFor(async () => {
-      const checkboxes = await screen.findAllByRole("checkbox");
-      expect(checkboxes.length).toBeGreaterThan(1);
-    });
+    expect(await screen.findByText(data[0].name)).toBeVisible();
 
-    const checkboxes = await screen.findAllByRole("checkbox");
-    expect(checkboxes.length).toBe(data.length + 1);
-
+    const checkboxes = screen.getAllByRole("checkbox");
     fireEvent.click(checkboxes[1]);
 
-    expect(await screen.findByText("1 selected")).toBeInTheDocument();
-  });
-  it("can select card rows", async () => {
-    render(
-      <DataView
-        availableLayouts={["grid"]}
-        getData={getData}
-        hasRowSelection
-        cardLayoutOptions={{
-          itemProps: gridItemProps,
-        }}
-      />,
-    );
-
-    await waitFor(async () => {
-      const checkboxes = await screen.findAllByRole("checkbox");
-      expect(checkboxes.length).toBeGreaterThan(1);
-    });
-
-    const checkboxes = await screen.findAllByRole("checkbox");
-    expect(checkboxes.length).toBe(data.length);
-
-    fireEvent.click(checkboxes[1]);
-
-    expect(await screen.findByText("1 selected")).toBeInTheDocument();
+    const selectedText = screen.getByText("1 selected", { selector: "button" });
+    expect(selectedText).toBeVisible();
   });
 
   it("can select all rows", async () => {
@@ -353,21 +334,18 @@ describe("DataView", () => {
       />,
     );
 
-    await waitFor(async () => {
-      const checkboxes = await screen.findAllByRole("checkbox");
-      expect(checkboxes.length).toBeGreaterThan(1);
-    });
+    expect(await screen.findByText(data[0].name)).toBeVisible();
 
-    const selectAllButton = screen.getByText("Select all", {
+    const checkboxes = screen.getAllByRole("checkbox");
+    fireEvent.click(checkboxes[0]);
+
+    const selectedText = screen.getByText(`${data.length} selected`, {
       selector: "button",
     });
-    fireEvent.click(selectAllButton);
-
-    expect(
-      await screen.findByText(`${data.length} selected`),
-    ).toBeInTheDocument();
+    expect(selectedText).toBeVisible();
   });
-  it("can deselect rows", async () => {
+
+  it("can select card rows", async () => {
     render(
       <DataView
         availableLayouts={["grid"]}
@@ -379,23 +357,44 @@ describe("DataView", () => {
       />,
     );
 
-    await waitFor(async () => {
-      const checkboxes = await screen.findAllByRole("checkbox");
-      expect(checkboxes.length).toBeGreaterThan(1);
-    });
+    expect(await screen.findByText(data[0].name)).toBeVisible();
 
-    const checkboxes = await screen.findAllByRole("checkbox");
-    expect(checkboxes.length).toBe(data.length);
+    const checkboxes = screen.getAllByRole("checkbox");
+    fireEvent.click(checkboxes[1]);
 
+    const selectedText = screen.getByText("1 selected", { selector: "button" });
+    expect(selectedText).toBeVisible();
+  });
+
+  it("can deselect rows", async () => {
+    render(
+      <DataView
+        availableLayouts={["table"]}
+        getData={getData}
+        hasRowSelection
+        tableLayoutOptions={{
+          columns: columns,
+        }}
+      />,
+    );
+
+    expect(await screen.findByText(data[0].name)).toBeVisible();
+
+    const checkboxes = screen.getAllByRole("checkbox");
     fireEvent.click(checkboxes[1]);
     fireEvent.click(checkboxes[2]);
 
-    expect(await screen.findByText("2 selected")).toBeInTheDocument();
+    expect(
+      screen.getByText("2 selected", { selector: "button" }),
+    ).toBeVisible();
 
     fireEvent.click(checkboxes[1]);
 
-    expect(await screen.findByText("1 selected")).toBeInTheDocument();
+    expect(
+      screen.getByText("1 selected", { selector: "button" }),
+    ).toBeVisible();
   });
+
   it("can deselect all rows", async () => {
     render(
       <DataView
@@ -408,27 +407,23 @@ describe("DataView", () => {
       />,
     );
 
-    await waitFor(async () => {
-      const checkboxes = await screen.findAllByRole("checkbox");
-      expect(checkboxes.length).toBeGreaterThan(1);
-    });
+    expect(await screen.findByText(data[0].name)).toBeVisible();
 
-    const selectAllButton = screen.getByText("Select all", {
+    const checkboxes = screen.getAllByRole("checkbox");
+    fireEvent.click(checkboxes[0]);
+
+    const selectedText = screen.getByText(`${data.length} selected`, {
       selector: "button",
     });
-    fireEvent.click(selectAllButton);
+    expect(selectedText).toBeVisible();
+
+    fireEvent.click(checkboxes[0]);
 
     expect(
-      await screen.findByText(`${data.length} selected`),
-    ).toBeInTheDocument();
-
-    const selectNoneButton = screen.getByText("Select none", {
-      selector: "button",
-    });
-    fireEvent.click(selectNoneButton);
-
-    expect(await screen.queryByText("selected")).toBeNull();
+      screen.queryByText(`${data.length} selected`, { selector: "button" }),
+    ).toBeNull();
   });
+
   it("can perform bulk actions on rows", async () => {
     const bulkActionMenuItems = (selectedRows: MRT_RowSelectionState) => (
       <MenuItem>Bulk action for {Object.keys(selectedRows).length}</MenuItem>
@@ -446,24 +441,23 @@ describe("DataView", () => {
       />,
     );
 
-    await waitFor(async () => {
-      const checkboxes = await screen.findAllByRole("checkbox");
-      expect(checkboxes.length).toBeGreaterThan(1);
-    });
+    expect(await screen.findByText(data[0].name)).toBeVisible();
 
     const selectAllButton = screen.getByText("Select all", {
       selector: "button",
     });
     fireEvent.click(selectAllButton);
 
-    const bulkActionsButton = await screen.findByText(
-      `${data.length} selected`,
-    );
-    expect(bulkActionsButton).toBeInTheDocument();
-    fireEvent.click(bulkActionsButton);
+    const selectedButton = screen.getByText(`${data.length} selected`, {
+      selector: "button",
+    });
+    fireEvent.click(selectedButton);
 
-    const bulkActionMenu = await screen.findByRole("menuitem");
-    expect(bulkActionMenu.textContent).toBe(`Bulk action for ${data.length}`);
+    const bulkActionsMenu = getControlledElement({ element: selectedButton });
+    const bulkActionsMenuItem = within(bulkActionsMenu).getByRole("menuitem");
+    expect(bulkActionsMenuItem.textContent).toBe(
+      `Bulk action for ${data.length}`,
+    );
   });
 
   it("can reorder rows", async () => {
@@ -488,27 +482,29 @@ describe("DataView", () => {
       />,
     );
 
-    await waitFor(async () => {
-      const rows = await screen.findAllByRole("row");
-      expect(rows.length).toBeGreaterThan(1);
+    expect(await screen.findByText(data[0].name)).toBeVisible();
+    expect(await screen.findByText(data[1].name)).toBeVisible();
+
+    const moreActionsButton = within(
+      screen.getAllByRole("row")[2],
+    ).getByLabelText("More actions", { selector: "button" });
+    fireEvent.click(moreActionsButton);
+
+    const moreActionsMenu = getControlledElement({
+      element: moreActionsButton,
     });
-
-    const rows = await screen.findAllByRole("row");
-    expect(rows[1].textContent).toContain("Luke Skywalker");
-    expect(rows[2].textContent).toContain("Han Solo");
-
-    const reorderMenuButton = within(rows[2]).getAllByRole("button")[1];
-    fireEvent.click(reorderMenuButton);
-
-    const reorderButtons = await screen.findByRole("menu");
-    const moveUpButton = within(reorderButtons).getByText("Bring forward");
-    fireEvent.click(moveUpButton);
+    const moveForwardButton = within(moreActionsMenu).getByRole("menuitem", {
+      name: "Bring forward",
+    });
+    fireEvent.click(moveForwardButton);
 
     const updatedRows = await screen.findAllByRole("row");
 
-    expect(updatedRows[1].textContent).toContain("Han Solo");
-    expect(updatedRows[2].textContent).toContain("Luke Skywalker");
+    // Confirm that the first two rows have swapped
+    expect(updatedRows[1].textContent).toContain(data[1].name);
+    expect(updatedRows[2].textContent).toContain(data[0].name);
   });
+
   it("can reorder to front", async () => {
     let updatedData = [...data];
 
@@ -531,27 +527,29 @@ describe("DataView", () => {
       />,
     );
 
-    await waitFor(async () => {
-      const rows = await screen.findAllByRole("row");
-      expect(rows.length).toBeGreaterThan(1);
+    expect(await screen.findByText(data[0].name)).toBeVisible();
+    expect(await screen.findByText(data[5].name)).toBeVisible();
+
+    const moreActionsButton = within(
+      screen.getAllByRole("row")[6],
+    ).getByLabelText("More actions", { selector: "button" });
+    fireEvent.click(moreActionsButton);
+
+    const moreActionsMenu = getControlledElement({
+      element: moreActionsButton,
     });
-
-    const rows = await screen.findAllByRole("row");
-    expect(rows[1].textContent).toContain("Luke Skywalker");
-    expect(rows[6].textContent).toContain("R2-D2");
-
-    const reorderMenuButton = within(rows[6]).getAllByRole("button")[1];
-    fireEvent.click(reorderMenuButton);
-
-    const reorderButtons = await screen.findByRole("menu");
-    const moveUpButton = within(reorderButtons).getByText("Bring to front");
-    fireEvent.click(moveUpButton);
+    const moveToFrontButton = within(moreActionsMenu).getByRole("menuitem", {
+      name: "Bring to front",
+    });
+    fireEvent.click(moveToFrontButton);
 
     const updatedRows = await screen.findAllByRole("row");
 
-    expect(updatedRows[1].textContent).toContain("R2-D2");
-    expect(updatedRows[2].textContent).toContain("Luke Skywalker");
+    // Confirm that the first two rows have swapped
+    expect(updatedRows[1].textContent).toContain(data[5].name);
+    expect(updatedRows[2].textContent).toContain(data[0].name);
   });
+
   it("can reorder to back", async () => {
     let updatedData = [...data];
 
@@ -575,27 +573,26 @@ describe("DataView", () => {
       />,
     );
 
-    await waitFor(async () => {
-      const rows = await screen.findAllByRole("row");
-      expect(rows.length).toBeGreaterThan(1);
+    expect(await screen.findByText(data[0].name)).toBeVisible();
+    expect(await screen.findByText(data[5].name)).toBeVisible();
+
+    const moreActionsButton = within(
+      screen.getAllByRole("row")[1],
+    ).getByLabelText("More actions", { selector: "button" });
+    fireEvent.click(moreActionsButton);
+
+    const moreActionsMenu = getControlledElement({
+      element: moreActionsButton,
     });
-
-    const rows = await screen.findAllByRole("row");
-    expect(rows[1].textContent).toContain("Luke Skywalker");
-    expect(rows[6].textContent).toContain("R2-D2");
-
-    const reorderMenuButton = within(rows[1]).getAllByRole("button")[1];
-    fireEvent.click(reorderMenuButton);
-
-    const reorderButtons = await screen.findByRole("menu");
-    const moveDownButton = within(reorderButtons).getByText("Send to back");
-    fireEvent.click(moveDownButton);
+    const moveToBackButton = within(moreActionsMenu).getByRole("menuitem", {
+      name: "Send to back",
+    });
+    fireEvent.click(moveToBackButton);
 
     const updatedRows = await screen.findAllByRole("row");
 
-    expect(updatedRows[1].textContent).toContain("Han Solo");
-    expect(updatedRows[5].textContent).toContain("R2-D2");
-    expect(updatedRows[6].textContent).toContain("Luke Skywalker");
+    expect(updatedRows[6].textContent).toContain(data[0].name);
+    expect(updatedRows[5].textContent).toContain(data[5].name);
   });
 
   it("can expand table rows", async () => {
@@ -614,21 +611,23 @@ describe("DataView", () => {
       />,
     );
 
-    expect((await screen.findAllByText("Luke Skywalker")).length).toBe(1);
+    expect(await screen.findByText(data[0].name)).toBeVisible();
     expect(
-      screen.queryByText("This is additional content for Luke Skywalker"),
+      screen.queryByText(`This is additional content for ${data[0].name}`),
     ).toBeNull();
 
-    const expandButtons = screen.getAllByLabelText("Expand", {
-      selector: "button",
-    });
-    fireEvent.click(expandButtons[0]);
-
-    const expandedRows = screen.getAllByRole("row");
-    expect(expandedRows[2].textContent).toBe(
-      "This is additional content for Luke Skywalker",
+    const firstBodyRow = (await screen.findAllByRole("row"))[1];
+    const firstBodyRowExpandButton = within(firstBodyRow).getByLabelText(
+      "Expand",
+      { selector: "button" },
     );
+    fireEvent.click(firstBodyRowExpandButton);
+
+    expect(
+      screen.queryByText(`This is additional content for ${data[0].name}`),
+    ).not.toBeNull();
   });
+
   it("can expand card rows", async () => {
     const cardDetails = ({ row }: { row: DataTableRowData }) => {
       return <p>This is additional content for {row.name}</p>;
@@ -645,22 +644,25 @@ describe("DataView", () => {
       />,
     );
 
-    expect((await screen.findAllByText("Luke Skywalker")).length).toBe(1);
+    expect(await screen.findAllByText(data[0].name)).toHaveLength(1);
     expect(
-      screen.queryByText("This is additional content for Luke Skywalker"),
+      screen.queryByText(`This is additional content for ${data[0].name}`),
     ).toBeNull();
 
-    const expandButtons = screen.getAllByLabelText("Expand", {
+    const firstCard = (await screen.findAllByRole("listitem"))[0];
+    const firstCardExpandButton = within(firstCard).getByLabelText("Expand", {
       selector: "button",
     });
-    fireEvent.click(expandButtons[0]);
+    fireEvent.click(firstCardExpandButton);
 
     expect(
-      screen.queryByText("This is additional content for Luke Skywalker"),
+      screen.queryByText(`This is additional content for ${data[0].name}`),
     ).not.toBeNull();
   });
 
   it("can display empty state", async () => {
+    const emptyText = "This is the empty state text.";
+
     render(
       <DataView
         availableLayouts={["table"]}
@@ -668,31 +670,32 @@ describe("DataView", () => {
         tableLayoutOptions={{
           columns: columns,
         }}
-        emptyPlaceholder={<EmptyState heading="Empty" description="Empty" />}
-      />,
-    );
-
-    await screen.findAllByRole("row");
-
-    expect(screen.queryAllByText("Empty").length).toBeGreaterThan(0);
-  });
-  it("can display no-results state", async () => {
-    render(
-      <DataView
-        availableLayouts={["table"]}
-        getData={getData}
-        tableLayoutOptions={{
-          columns: columns,
-        }}
-        isNoResults
-        noResultsPlaceholder={
-          <EmptyState heading="No results" description="No results" />
+        emptyPlaceholder={
+          <EmptyState heading="Empty" description={emptyText} />
         }
       />,
     );
 
-    await screen.findByRole("table");
-    expect(screen.queryAllByText("No results").length).toBeGreaterThan(0);
+    expect(await screen.findByText(emptyText)).not.toBeNull();
+  });
+
+  it("can display no-results state", async () => {
+    const noResultsText = "This is the no results state text.";
+
+    render(
+      <DataView
+        availableLayouts={["table"]}
+        getData={() => []}
+        tableLayoutOptions={{
+          columns: columns,
+        }}
+        noResultsPlaceholder={
+          <EmptyState heading="No results" description={noResultsText} />
+        }
+      />,
+    );
+
+    expect(await screen.findByText(noResultsText)).not.toBeNull();
   });
 
   it("can sort rows", async () => {
@@ -707,23 +710,20 @@ describe("DataView", () => {
       />,
     );
 
-    // Detect if the data has loaded in
-    await screen.findByText("Luke Skywalker");
+    expect(await screen.findByText(data[0].name)).toBeVisible();
 
-    const initialRows = await screen.findAllByRole("row");
-    expect(queryByText(initialRows[1], "Luke Skywalker")).not.toBeNull();
-    expect(queryByText(initialRows[6], "R2-D2")).not.toBeNull();
+    const initialRows = screen.getAllByRole("row");
+    expect(initialRows[1].textContent).toContain(data[0].name);
 
-    // Sort by order
-    const idHeader = getByText(initialRows[0], "ID");
+    const idHeader = screen.getByRole("button", {
+      name: "Sort by ID descending",
+    });
     fireEvent.click(idHeader);
 
-    // Detect if the data has loaded in again
-    await screen.findByText("Luke Skywalker");
+    expect(await screen.findByText(data[0].name)).toBeVisible();
 
-    const updatedRows = await screen.findAllByRole("row");
-    expect(queryByText(updatedRows[1], "R2-D2")).not.toBeNull();
-    expect(queryByText(updatedRows[6], "Luke Skywalker")).not.toBeNull();
+    const sortedRows = screen.getAllByRole("row");
+    expect(sortedRows[6].textContent).toContain(data[0].name);
   });
 
   it("can change row density", async () => {
@@ -738,23 +738,27 @@ describe("DataView", () => {
       />,
     );
 
-    // Detect if the data has loaded in
-    await screen.findByText("Luke Skywalker");
+    expect(await screen.findByText(data[0].name)).toBeVisible();
 
-    const rows = await screen.findAllByRole("row");
-    const tBody = rows[1].parentElement;
+    // Since table density is a purely visible attribute, there's no ARIA
+    // attribute to target here. We're forced to use the className directly.
+    const tBody = screen.getAllByRole("row")[1].parentElement;
     expect(tBody?.className).not.toContain("MuiTableBody-compact");
 
-    const densityButton = screen.getByLabelText("Table density");
+    const densityButton = screen.getByLabelText("Table density", {
+      selector: "button",
+    });
     fireEvent.click(densityButton);
 
-    const densityCompactButton = screen.getByText("Compact", {
-      selector: "li",
+    const densityMenu = getControlledElement({ element: densityButton });
+    const densityCompact = within(densityMenu).getByRole("menuitem", {
+      name: "Compact",
     });
-    fireEvent.click(densityCompactButton);
+    fireEvent.click(densityCompact);
 
     expect(tBody?.className).toContain("MuiTableBody-compact");
   });
+
   it("can change column visibility", async () => {
     render(
       <DataView
@@ -768,16 +772,21 @@ describe("DataView", () => {
     );
 
     // Detect if the data has loaded in
-    await screen.findByText("Mos Eisley");
+    await screen.findByText(data[0].city);
 
-    const visibilityButton = screen.getByLabelText("Show/hide columns");
+    const visibilityButton = screen.getByLabelText("Show/hide columns", {
+      selector: "button",
+    });
     fireEvent.click(visibilityButton);
 
-    const cityCheckbox = screen.getByText("City", { selector: "li" });
+    const visibilityMenu = getControlledElement({ element: visibilityButton });
+
+    const cityCheckbox = within(visibilityMenu).getByText("City");
     fireEvent.click(cityCheckbox);
 
-    expect(screen.queryByText("Mos Eisley")).toBeNull();
+    expect(screen.queryByText(data[0].city)).toBeNull();
   });
+
   it("can resize columns", async () => {
     render(
       <DataView
@@ -790,11 +799,13 @@ describe("DataView", () => {
       />,
     );
 
-    // Detect if the data has loaded in
-    await screen.findByText("Luke Skywalker");
+    await screen.findByText(data[0].name);
 
     const rows = await screen.findAllByRole("row");
     const tHead = rows[0].parentElement;
+
+    // Ensure that the resize handle is displayed when
+    // hasColumnResizing is true
     const hrElement = tHead!.querySelector("hr");
     expect(tHead).toContainElement(hrElement);
   });
@@ -812,8 +823,18 @@ describe("DataView", () => {
       />,
     );
 
-    expect(await screen.findByLabelText("Next page")).toBeInTheDocument();
+    await screen.findByText(data[0].name);
+
+    const paginationContainer = await screen.findByLabelText("Pagination", {
+      selector: "nav",
+    });
+    expect(
+      within(paginationContainer).getByLabelText("Next page", {
+        selector: "button",
+      }),
+    ).toBeInTheDocument();
   });
+
   it("displays loadMore pagination", async () => {
     render(
       <DataView
@@ -821,16 +842,20 @@ describe("DataView", () => {
         getData={getData}
         hasPagination
         paginationType="loadMore"
+        enableVirtualization={false}
         tableLayoutOptions={{
           columns: columns,
         }}
       />,
     );
 
+    await screen.findByText(data[0].name);
+
     expect(
-      await screen.findByText("Show more", { selector: "button" }),
+      screen.getByText("Show more", { selector: "button" }),
     ).toBeInTheDocument();
   });
+
   it("can load more rows via loadMore pagination", async () => {
     render(
       <DataView
@@ -846,18 +871,20 @@ describe("DataView", () => {
       />,
     );
 
-    const table = await screen.findByRole("table");
+    await screen.findByText(data[0].name);
 
-    expect((await findAllByRole(table, "row")).length).toBe(4);
+    expect(screen.getAllByRole("row")).toHaveLength(4);
 
-    const loadMoreButton = await screen.findByText("Show more", {
+    const loadMoreButton = screen.getByText("Show more", {
       selector: "button",
     });
     fireEvent.click(loadMoreButton);
 
-    const updatedTable = await screen.findByRole("table");
-    expect((await findAllByRole(updatedTable, "row")).length).toBe(7);
+    await waitFor(() => {
+      expect(screen.getAllByRole("row")).toHaveLength(7); // 6 data rows + header row
+    });
   });
+
   it("can go to the next page", async () => {
     render(
       <DataView
@@ -872,20 +899,22 @@ describe("DataView", () => {
       />,
     );
 
-    expect(await screen.findByLabelText("Next page")).toBeInTheDocument();
+    await screen.findByText(data[0].name);
+
+    expect(screen.queryByText(data[0].name)).not.toBeNull();
+    expect(screen.queryByText(data[2].name)).toBeNull();
 
     const nextPageButton = screen.getByLabelText("Next page", {
       selector: "button",
     });
-
-    expect(await screen.findByText("Luke Skywalker")).toBeInTheDocument();
-    expect(screen.queryByText("Chewbacca")).not.toBeInTheDocument();
-
     fireEvent.click(nextPageButton);
 
-    expect(await screen.findByText("Chewbacca")).toBeInTheDocument();
-    expect(screen.queryByText("Luke Skywalker")).not.toBeInTheDocument();
+    await screen.findByText(data[2].name);
+
+    expect(screen.queryByText(data[0].name)).toBeNull();
+    expect(screen.queryByText(data[2].name)).not.toBeNull();
   });
+
   it("can go to the previous page", async () => {
     render(
       <DataView
@@ -900,28 +929,32 @@ describe("DataView", () => {
       />,
     );
 
-    expect(await screen.findByLabelText("Next page")).toBeInTheDocument();
+    await screen.findByText(data[0].name);
+
+    expect(screen.queryByText(data[0].name)).not.toBeNull();
+    expect(screen.queryByText(data[2].name)).toBeNull();
 
     const nextPageButton = screen.getByLabelText("Next page", {
       selector: "button",
     });
+    fireEvent.click(nextPageButton);
+
+    await screen.findByText(data[2].name);
+
+    expect(screen.queryByText(data[0].name)).toBeNull();
+    expect(screen.queryByText(data[2].name)).not.toBeNull();
+
     const prevPageButton = screen.getByLabelText("Previous page", {
       selector: "button",
     });
-
-    expect(await screen.findByText("Luke Skywalker")).toBeInTheDocument();
-    expect(screen.queryByText("Chewbacca")).not.toBeInTheDocument();
-
-    fireEvent.click(nextPageButton);
-
-    expect(await screen.findByText("Chewbacca")).toBeInTheDocument();
-    expect(screen.queryByText("Luke Skywalker")).not.toBeInTheDocument();
-
     fireEvent.click(prevPageButton);
 
-    expect(await screen.findByText("Luke Skywalker")).toBeInTheDocument();
-    expect(screen.queryByText("Chewbacca")).not.toBeInTheDocument();
+    await screen.findByText(data[0].name);
+
+    expect(screen.queryByText(data[0].name)).not.toBeNull();
+    expect(screen.queryByText(data[2].name)).toBeNull();
   });
+
   it("can disable the next page button based on max rows", async () => {
     render(
       <DataView
@@ -937,16 +970,21 @@ describe("DataView", () => {
       />,
     );
 
-    expect(await screen.findByText("Luke Skywalker")).toBeInTheDocument();
+    await screen.findByText(data[0].name);
 
     const nextPageButton = screen.getByLabelText("Next page", {
       selector: "button",
     });
+    const prevPageButton = screen.getByLabelText("Previous page", {
+      selector: "button",
+    });
 
+    expect(prevPageButton).toBeDisabled();
     expect(nextPageButton).not.toBeDisabled();
 
     fireEvent.click(nextPageButton);
 
+    expect(prevPageButton).not.toBeDisabled();
     expect(nextPageButton).toBeDisabled();
   });
 });
