@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.26.0](https://github.com/okta/odyssey/compare/v1.25.0...v1.26.0) (2024-11-04)
+
+### Features
+
+- adds side-nav collapse handle ([#2385](https://github.com/okta/odyssey/issues/2385)) ([1582be5](https://github.com/okta/odyssey/commit/1582be5669000c6dcec5881ba8178406a457a3b0))
+- adds the ability to render an encapsulated Unified UI Shell ([#2373](https://github.com/okta/odyssey/issues/2373)) ([f964a29](https://github.com/okta/odyssey/commit/f964a29c7eb956fc05cb16fd51963a03c6b08507))
+
 ## [1.25.0](https://github.com/okta/odyssey/compare/v1.24.1...v1.25.0) (2024-10-15)
 
 ### Features
