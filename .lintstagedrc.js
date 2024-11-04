@@ -12,6 +12,5 @@
 
 module.exports = {
   "*": "prettier --ignore-unknown --loglevel warn --write",
-  "*.scss": "stylelint",
   "*.{js,jsx,ts,tsx}": "eslint",
 };

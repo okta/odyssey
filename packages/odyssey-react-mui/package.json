@@ -118,7 +118,6 @@
     "react-dom": "^18.2.0",
     "regenerator-runtime": "^0.14.1",
     "rimraf": "^5.0.1",
-    "stylelint": "^14.13.0",
     "tsd": "^0.31.2",
     "tsx": "^4.7.3",
     "typescript": "^5.5.4",

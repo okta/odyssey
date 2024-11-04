@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const { pattern, template, header } = require("./utils/header");
+const { header, pattern, template } = require("./utils/header");
 
 module.exports = {
   root: true,
@@ -63,12 +63,6 @@ module.exports = {
       files: ["jest.setup.js", "*.test.*"],
       env: {
         jest: true,
-      },
-    },
-    {
-      files: ["*.theme.ts"],
-      rules: {
-        "@okta/odyssey/no-invalid-theme-properties": "error",
       },
     },
     {
