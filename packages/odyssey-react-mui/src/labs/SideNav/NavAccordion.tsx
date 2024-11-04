@@ -20,7 +20,7 @@ import {
 import { ReactNode, memo } from "react";
 
 import type { HtmlProps } from "../../HtmlProps";
-import { ChevronRightIcon } from "../../icons.generated";
+import { ChevronDownIcon } from "../../icons.generated";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
@@ -86,26 +86,32 @@ const AccordionSummaryContainer = styled(MuiAccordionSummary, {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" &&
     prop !== "isCompact" &&
-    prop != "isDisabled",
+    prop !== "isDisabled",
 })<{
   odysseyDesignTokens: DesignTokens;
   isCompact?: boolean;
   isDisabled?: boolean;
 }>(({ odysseyDesignTokens, isCompact, isDisabled }) => ({
-  minHeight: isCompact
-    ? `${odysseyDesignTokens.Spacing6}`
-    : `${odysseyDesignTokens.Spacing7}`,
-  padding: isCompact
-    ? `${odysseyDesignTokens.Spacing0} ${odysseyDesignTokens.Spacing4}`
-    : `${odysseyDesignTokens.Spacing2} ${odysseyDesignTokens.Spacing4}`,
-  "&:hover": {
-    backgroundColor: !isDisabled ? odysseyDesignTokens.HueBlue50 : "inherit",
-    "& span": {
-      color: isDisabled
-        ? "default"
-        : `${odysseyDesignTokens.TypographyColorAction}`,
-    },
+  borderRadius: odysseyDesignTokens.BorderRadiusMain,
+  paddingBlock: odysseyDesignTokens.Spacing3,
+  paddingInline: odysseyDesignTokens.Spacing4,
+  lineHeight: 1.5,
+
+  "&:focus-visible": {
+    backgroundColor: "unset",
+    outline: "none",
+    boxShadow: `inset 0 0 0 3px ${odysseyDesignTokens.PalettePrimaryMain}`,
   },
+
+  ...(isCompact && {
+    paddingBlock: odysseyDesignTokens.Spacing2,
+  }),
+
+  ...(!isDisabled && {
+    "&:hover": {
+      backgroundColor: odysseyDesignTokens.HueNeutral50,
+    },
+  }),
 }));
 
 const NavAccordion = ({
@@ -135,7 +141,7 @@ const NavAccordion = ({
       <AccordionSummaryContainer
         className="nav-accordion-summary"
         aria-controls={contentId}
-        expandIcon={<ChevronRightIcon />}
+        expandIcon={<ChevronDownIcon />}
         id={headerId}
         odysseyDesignTokens={odysseyDesignTokens}
         isCompact={isCompact}

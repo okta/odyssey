@@ -137,12 +137,6 @@ export const components = ({
             verticalAlign: "middle",
             width: "1em",
           },
-          "&.nav-accordion-summary": {
-            padding: `${odysseyTokens.Spacing2} ${odysseyTokens.Spacing4}`,
-            ".MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
-              transform: "rotate(-90deg) !important",
-            },
-          },
         }),
         content: () => ({
           marginBlock: 0,
@@ -160,9 +154,7 @@ export const components = ({
           paddingInline: odysseyTokens.Spacing3,
           paddingBlock: odysseyTokens.Spacing4,
           "&.nav-accordion-details": {
-            paddingTop: 0,
-            paddingBottom: 0,
-            paddingLeft: odysseyTokens.Spacing2,
+            padding: 0,
           },
         }),
       },

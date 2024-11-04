@@ -26,6 +26,7 @@ import {
   DirectoryIcon,
   ServerIcon,
   FolderIcon,
+  NotificationIcon,
 } from "@okta/odyssey-react-mui/icons";
 import { expect } from "@storybook/jest";
 import {
@@ -35,6 +36,7 @@ import {
   within,
 } from "@storybook/testing-library";
 import { PlaywrightProps } from "../../odyssey-mui/storybookTypes";
+import PlaceholderLogo from "../PickerWithOptionAdornment/PlaceholderLogo";
 
 const storybookMeta: Meta<SideNavProps> = {
   title: "Labs Components/SideNav",
@@ -43,18 +45,6 @@ const storybookMeta: Meta<SideNavProps> = {
     appName: {
       control: "text",
       description: "Header text for the side nav",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
-    customCompanyLogo: {
-      description: "Logo to be displayed in the Nav Header.",
-    },
-    expandedWidth: {
-      control: "text",
-      description: "Width of the side nav in px",
       table: {
         type: {
           summary: "string",
@@ -73,26 +63,16 @@ const storybookMeta: Meta<SideNavProps> = {
         },
       },
     },
-    hasCustomCompanyLogo: {
-      control: "boolean",
-      description:
-        "Defines if a custom company logo should be visible when available.",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
-    hasCustomFooter: {
-      control: "boolean",
-      description:
-        "Defines if a custom footer should be visible when available.",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
+    // hasCustomFooter: {
+    //   control: "boolean",
+    //   description:
+    //     "Defines if a custom footer should be visible when available.",
+    //   table: {
+    //     type: {
+    //       summary: "boolean",
+    //     },
+    //   },
+    // },
     isCollapsible: {
       control: "boolean",
       description: "Controls whether the side nav is collapsible",
@@ -108,6 +88,24 @@ const storybookMeta: Meta<SideNavProps> = {
       table: {
         type: {
           summary: "boolean",
+        },
+      },
+    },
+    isLoading: {
+      control: "boolean",
+      description: "Controls whether the side nav shows the skeleton loader.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    logoProps: {
+      description: "Props passed in to render custom logo and/or link",
+      table: {
+        type: {
+          summary:
+            "href?: string; logoSrcUrl?: string; altText?: string; logoComponent?: ReactElement",
         },
       },
     },
@@ -281,6 +279,13 @@ const storybookMeta: Meta<SideNavProps> = {
         label: "System Configuration",
         startIcon: <FolderIcon />,
       },
+      {
+        id: "item6",
+        href: "/",
+        label: "Notifications",
+        startIcon: <NotificationIcon />,
+        count: 1,
+      },
     ],
     footerItems: [
       {
@@ -308,8 +313,8 @@ const storybookMeta: Meta<SideNavProps> = {
 
 export default storybookMeta;
 
-export const Default: StoryObj<SideNavProps> = {
-  render: (props: SideNavProps) => {
+export const Default: StoryObj<typeof SideNav> = {
+  render: (props) => {
     return (
       <div style={{ height: "100vh" }}>
         <SideNav {...props} />
@@ -319,8 +324,14 @@ export const Default: StoryObj<SideNavProps> = {
   play: async ({ canvasElement, step }: PlaywrightProps<SideNavProps>) => {
     configure({ testIdAttribute: "data-se" });
     const canvas = within(canvasElement);
-    const expandedRegion = canvas.getByTestId("expanded-region");
-    const collapsedRegion = canvas.getByTestId("collapsed-region");
+
+    const toggleButton = canvas.getByRole("button", {
+      name: "Close navigation",
+    });
+    const navElement = canvas.getByRole("navigation", {
+      name: "Main navigation",
+    });
+    // const collapsedRegion = canvas.getByTestId("collapsed-region");
     const scrollableRegion = canvas.getByTestId("scrollable-region");
 
     /**
@@ -347,22 +358,63 @@ export const Default: StoryObj<SideNavProps> = {
       }
     });
     await step("Side Nav Collapse", async ({}) => {
-      const collapseButton = within(collapsedRegion).getByRole("button", {
-        name: "collapse side navigation",
-      });
-      await userEvent.click(collapseButton);
+      await userEvent.click(toggleButton);
+
       await waitFor(() => {
-        expect(expandedRegion).not.toBeVisible();
+        expect(toggleButton.ariaExpanded).toEqual("false");
+        expect(navElement).toHaveStyle({ width: 0 });
       });
     });
     await step("Side Nav Expand", async ({}) => {
-      const expandeButton = within(collapsedRegion).getByRole("button", {
-        name: "expand side navigation",
-      });
-      await userEvent.click(expandeButton);
+      await userEvent.click(toggleButton);
       await waitFor(() => {
-        expect(expandedRegion).toBeVisible();
+        expect(toggleButton.ariaExpanded).toEqual("true");
+        expect(navElement).toBeVisible();
       });
     });
+  },
+};
+
+export const Loading: StoryObj<typeof SideNav> = {
+  args: {
+    isLoading: true,
+  },
+  render: (props) => {
+    return (
+      <div style={{ height: "100vh" }}>
+        <SideNav {...props} />
+      </div>
+    );
+  },
+};
+
+export const CustomLogoElement: StoryObj<typeof SideNav> = {
+  args: {
+    logoProps: {
+      logoComponent: <PlaceholderLogo.One />,
+    },
+  },
+  render: (props) => {
+    return (
+      <div style={{ height: "100vh" }}>
+        <SideNav {...props} />
+      </div>
+    );
+  },
+};
+
+export const CustomLogoImage: StoryObj<typeof SideNav> = {
+  args: {
+    logoProps: {
+      imageUrl: "https://placehold.co/600x60",
+      imageAltText: "My custom image logo",
+    },
+  },
+  render: (props) => {
+    return (
+      <div style={{ height: "100vh" }}>
+        <SideNav {...props} />
+      </div>
+    );
   },
 };

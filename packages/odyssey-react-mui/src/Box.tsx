@@ -11,7 +11,7 @@
  */
 
 import { Box as MuiBox, BoxProps as MuiBoxProps } from "@mui/material";
-import { ReactNode, forwardRef, memo } from "react";
+import { AriaRole, ReactNode, forwardRef, memo } from "react";
 
 import type { HtmlProps } from "./HtmlProps";
 
@@ -19,17 +19,19 @@ export type BoxProps = {
   children?: ReactNode;
   component?: MuiBoxProps["component"];
   id?: MuiBoxProps["id"];
+  role?: AriaRole;
   sx?: MuiBoxProps["sx"];
 } & Pick<HtmlProps, "testId" | "translate">;
 
 const Box = forwardRef<HTMLElement, BoxProps>(
-  ({ children, component, id, sx, testId, translate }, ref) => (
+  ({ children, component, id, role, sx, testId, translate }, ref) => (
     <MuiBox
       ref={ref}
       children={children}
       component={component}
       data-se={testId}
       id={id}
+      role={role}
       sx={sx}
       translate={translate}
     />
