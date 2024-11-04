@@ -97,7 +97,6 @@
     "@happy-dom/jest-environment": "^15.7.4",
     "@okta/browserslist-config-odyssey": "workspace:*",
     "@okta/odyssey-icons": "workspace:*",
-    "@okta/odyssey-svgr": "workspace:*",
     "@okta/odyssey-typescript": "workspace:*",
     "@svgr/cli": "^7.0.0",
     "@testing-library/dom": "^10.4.0",

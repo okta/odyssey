@@ -170,8 +170,8 @@ const FileUploader = ({
       if (files && files.length > 0) {
         const mergedFiles =
           type === "multiple"
-            ? [...filesToUpload, ...files]
-            : ([...files] satisfies File[] as File[]);
+            ? filesToUpload.concat(Array.from(files))
+            : Array.from(files).slice();
 
         setFilesToUpload(mergedFiles);
       }
