@@ -10,7 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, MouseEventHandler, ReactNode, useCallback, useRef } from "react";
+import {
+  memo,
+  MouseEventHandler,
+  ReactNode,
+  useCallback,
+  useRef,
+  useState,
+} from "react";
 import { Button, ButtonProps } from "../Button";
 import { NullElement } from "../NullElement";
 import { OpenHandle, Popover, PopoverProps } from "./Popover";
@@ -30,6 +37,7 @@ export type ButtonPopoverProps = {
 
 const ButtonPopover = (props: ButtonPopoverProps) => {
   const { children, popoverAlignment, ...buttonProps } = props;
+  const [isOpen, setIsOpen] = useState(false);
 
   // Adding a tooltip to the button means the popover does not get placed in the right location
   delete buttonProps.tooltipText;
@@ -41,15 +49,26 @@ const ButtonPopover = (props: ButtonPopoverProps) => {
     },
     [],
   );
+  const popoverOpened = useCallback(() => {
+    setIsOpen(true);
+  }, []);
+  const popoverClosed = useCallback(() => {
+    setIsOpen(false);
+  }, []);
 
   return (
     <>
       <Button
         {...buttonProps}
-        // isDisabled={isDisabled}
+        isDisabled={buttonProps.isDisabled || isOpen}
         onClick={openPopover}
       />
-      <Popover popoverAlignment={popoverAlignment} popoverRef={popoverRef}>
+      <Popover
+        popoverAlignment={popoverAlignment}
+        popoverRef={popoverRef}
+        onOpen={popoverOpened}
+        onClose={popoverClosed}
+      >
         {children}
       </Popover>
     </>

@@ -46,9 +46,23 @@ export type PopoverProps = {
    * The contents of the popover
    */
   children: ReactNode | NullElement;
+  /**
+   * Called when the popover has opened
+   */
+  onOpen?: () => void;
+  /**
+   * Called when the popover has closed
+   */
+  onClose?: () => void;
 };
 
-const Popover = ({ popoverRef, popoverAlignment, children }: PopoverProps) => {
+const Popover = ({
+  popoverRef,
+  popoverAlignment,
+  children,
+  onOpen,
+  onClose,
+}: PopoverProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const odysseyDesignTokens: DesignTokens = useOdysseyDesignTokens();
   const muiProps = useMuiProps();
@@ -60,14 +74,16 @@ const Popover = ({ popoverRef, popoverAlignment, children }: PopoverProps) => {
     () => ({
       openWithElement: (element) => {
         setAnchorEl(element);
+        onOpen && onOpen();
       },
     }),
-    [],
+    [onOpen],
   );
 
   const closePopover = useCallback(() => {
     setAnchorEl(null);
-  }, []);
+    onClose && onClose();
+  }, [onClose]);
 
   const anchorOrigin = useMemo(
     () =>

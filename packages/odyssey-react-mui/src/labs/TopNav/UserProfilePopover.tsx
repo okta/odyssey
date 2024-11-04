@@ -10,7 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, MouseEventHandler, ReactNode, useCallback, useRef } from "react";
+import {
+  memo,
+  MouseEventHandler,
+  ReactNode,
+  useCallback,
+  useRef,
+  useState,
+} from "react";
 import {
   Button as MuiButton,
   // ButtonBase as MuiButtonBase,
@@ -40,7 +47,7 @@ const UserProfilePopover = ({
   orgName,
 }: UserProfilePopoverProps) => {
   const muiProps = useMuiProps();
-
+  const [isOpen, setIsOpen] = useState(false);
   const popoverRef = useRef<OpenHandle>(null);
   const openPopover = useCallback<MouseEventHandler<HTMLButtonElement>>(
     (event) => {
@@ -48,6 +55,12 @@ const UserProfilePopover = ({
     },
     [],
   );
+  const popoverOpened = useCallback(() => {
+    setIsOpen(true);
+  }, []);
+  const popoverClosed = useCallback(() => {
+    setIsOpen(false);
+  }, []);
 
   return (
     <>
@@ -78,9 +91,9 @@ const UserProfilePopover = ({
         // translate={translate}
         // type={type}
 
-        // disabled={isOpen}
+        disabled={isOpen}
         onClick={openPopover}
-        variant="floating"
+        variant={isOpen ? "secondary" : "floating"}
       >
         <UserProfile
           profileIcon={profileIcon}
@@ -90,7 +103,12 @@ const UserProfilePopover = ({
         />
       </MuiButton>
 
-      <Popover popoverAlignment={popoverAlignment} popoverRef={popoverRef}>
+      <Popover
+        popoverAlignment={popoverAlignment}
+        popoverRef={popoverRef}
+        onOpen={popoverOpened}
+        onClose={popoverClosed}
+      >
         {children}
       </Popover>
     </>
