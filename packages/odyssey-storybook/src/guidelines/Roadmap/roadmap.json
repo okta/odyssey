@@ -18,6 +18,33 @@
     "deliverableTiming": "Q3 FY25"
   },
   {
+    "name": "Aerial account page",
+    "type": "Page template",
+    "status": "Not started",
+    "define": "-",
+    "design": "-",
+    "develop": "-",
+    "deliverableTiming": "-"
+  },
+  {
+    "name": "Aerial org details page",
+    "type": "Page template",
+    "status": "Not started",
+    "define": "-",
+    "design": "-",
+    "develop": "-",
+    "deliverableTiming": "-"
+  },
+  {
+    "name": "Aerial user page",
+    "type": "Page template",
+    "status": "Not started",
+    "define": "-",
+    "design": "-",
+    "develop": "-",
+    "deliverableTiming": "-"
+  },
+  {
     "name": "Autocomplete",
     "type": "Component",
     "status": "Released",
@@ -99,6 +126,15 @@
     "deliverableTiming": "FY24"
   },
   {
+    "name": "Configuration ",
+    "type": "Page template",
+    "status": "Not started",
+    "define": "-",
+    "design": "Complete",
+    "develop": "Complete",
+    "deliverableTiming": "-"
+  },
+  {
     "name": "Dashboard",
     "type": "Page template",
     "status": "Not started",
@@ -126,7 +162,7 @@
     "deliverableTiming": "TBD"
   },
   {
-    "name": "DataView",
+    "name": "DataView - move",
     "type": "Component",
     "status": "In Labs",
     "define": "Complete",
@@ -189,7 +225,7 @@
     "deliverableTiming": "Q2 FY25"
   },
   {
-    "name": "Empty states v2 \n(illustration)",
+    "name": "Empty states with illustration",
     "type": "Component",
     "status": "In progress",
     "define": "Complete",
@@ -304,6 +340,15 @@
     "design": "In progress",
     "develop": "-",
     "deliverableTiming": "-"
+  },
+  {
+    "name": "Policy",
+    "type": "TBD",
+    "status": "In progress",
+    "define": "In progress",
+    "design": "-",
+    "develop": "-",
+    "deliverableTiming": "Q4 FY25"
   },
   {
     "name": "Policy Recommender\n(AI Pattern)",
