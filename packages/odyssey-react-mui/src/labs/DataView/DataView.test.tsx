@@ -41,7 +41,7 @@ const gridItemProps = (row: DataRow) => ({
 });
 
 describe("DataView", () => {
-  it("displays a table view", async () => {
+  test("displays a table view", async () => {
     const { container } = render(
       <DataView
         availableLayouts={["table"]}
@@ -58,7 +58,7 @@ describe("DataView", () => {
     expect(within(container).queryByRole("list")).toBeNull();
   });
 
-  it("displays a list view", async () => {
+  test("displays a list view", async () => {
     const { container } = render(
       <DataView
         availableLayouts={["list"]}
@@ -75,7 +75,7 @@ describe("DataView", () => {
     expect(within(container).queryByRole("list")).not.toBeNull();
   });
 
-  it("displays a grid view", async () => {
+  test("displays a grid view", async () => {
     const { container } = render(
       <DataView
         availableLayouts={["grid"]}
@@ -92,7 +92,7 @@ describe("DataView", () => {
     expect(within(container).queryByRole("list")).not.toBeNull();
   });
 
-  it("displays the layout switcher", async () => {
+  test("displays the layout switcher", async () => {
     render(
       <DataView
         availableLayouts={["table", "list"]}
@@ -123,7 +123,7 @@ describe("DataView", () => {
     ).toBeVisible();
   });
 
-  it("can display meta text", async () => {
+  test("can display meta text", async () => {
     const metaText = "Last updated 12 hours ago";
 
     render(
@@ -140,7 +140,7 @@ describe("DataView", () => {
     expect(screen.getByText(metaText)).toBeInTheDocument();
   });
 
-  it("can filter rows", async () => {
+  test("can filter rows", async () => {
     render(
       <DataView
         availableLayouts={["table"]}
@@ -179,7 +179,7 @@ describe("DataView", () => {
     expect(await within(table).findByText(data[1].name)).toBeVisible();
   });
 
-  it("can search rows", async () => {
+  test("can search rows", async () => {
     render(
       <DataView
         availableLayouts={["table"]}
@@ -205,7 +205,7 @@ describe("DataView", () => {
     expect(await within(table).findByText(data[1].name)).toBeVisible();
   });
 
-  it("can clear the search input", async () => {
+  test("can clear the search input", async () => {
     render(
       <DataView
         availableLayouts={["table"]}
@@ -241,7 +241,7 @@ describe("DataView", () => {
     });
   });
 
-  it("can display row action menu", async () => {
+  test("can display row action menu", async () => {
     const rowActionMenuItems = (row: DataTableRowData) => (
       <MenuItem>Action for {row.original.name}</MenuItem>
     );
@@ -273,7 +273,7 @@ describe("DataView", () => {
     ).toBeVisible();
   });
 
-  it("can display row action buttons", async () => {
+  test("can display row action buttons", async () => {
     const rowActionButtons = (row: DataTableRowData) => (
       <Button variant="primary" label={`Button for ${row?.original?.name}`} />
     );
@@ -301,7 +301,7 @@ describe("DataView", () => {
     expect(firstBodyRowActionButton).toBeVisible();
   });
 
-  it("can select table rows", async () => {
+  test("can select table rows", async () => {
     render(
       <DataView
         availableLayouts={["table"]}
@@ -322,7 +322,7 @@ describe("DataView", () => {
     expect(selectedText).toBeVisible();
   });
 
-  it("can select all rows", async () => {
+  test("can select all rows", async () => {
     render(
       <DataView
         availableLayouts={["table"]}
@@ -345,7 +345,7 @@ describe("DataView", () => {
     expect(selectedText).toBeVisible();
   });
 
-  it("can select card rows", async () => {
+  test("can select card rows", async () => {
     render(
       <DataView
         availableLayouts={["grid"]}
@@ -366,7 +366,7 @@ describe("DataView", () => {
     expect(selectedText).toBeVisible();
   });
 
-  it("can deselect rows", async () => {
+  test("can deselect rows", async () => {
     render(
       <DataView
         availableLayouts={["table"]}
@@ -395,7 +395,7 @@ describe("DataView", () => {
     ).toBeVisible();
   });
 
-  it("can deselect all rows", async () => {
+  test("can deselect all rows", async () => {
     render(
       <DataView
         availableLayouts={["table"]}
@@ -424,7 +424,7 @@ describe("DataView", () => {
     ).toBeNull();
   });
 
-  it("can perform bulk actions on rows", async () => {
+  test("can perform bulk actions on rows", async () => {
     const bulkActionMenuItems = (selectedRows: MRT_RowSelectionState) => (
       <MenuItem>Bulk action for {Object.keys(selectedRows).length}</MenuItem>
     );
@@ -460,7 +460,7 @@ describe("DataView", () => {
     );
   });
 
-  it("can reorder rows", async () => {
+  test("can reorder rows", async () => {
     let updatedData = [...data];
 
     const handleReorderRows = ({
@@ -505,7 +505,7 @@ describe("DataView", () => {
     expect(updatedRows[2].textContent).toContain(data[0].name);
   });
 
-  it("can reorder to front", async () => {
+  test("can reorder to front", async () => {
     let updatedData = [...data];
 
     const handleReorderRows = ({
@@ -550,7 +550,7 @@ describe("DataView", () => {
     expect(updatedRows[2].textContent).toContain(data[0].name);
   });
 
-  it("can reorder to back", async () => {
+  test("can reorder to back", async () => {
     let updatedData = [...data];
 
     const handleReorderRows = ({
@@ -595,7 +595,7 @@ describe("DataView", () => {
     expect(updatedRows[5].textContent).toContain(data[5].name);
   });
 
-  it("can expand table rows", async () => {
+  test("can expand table rows", async () => {
     const tableDetails = ({ row }: { row: DataTableRowData }) => {
       return <p>This is additional content for {row.original.name}</p>;
     };
@@ -628,7 +628,7 @@ describe("DataView", () => {
     ).not.toBeNull();
   });
 
-  it("can expand card rows", async () => {
+  test("can expand card rows", async () => {
     const cardDetails = ({ row }: { row: DataTableRowData }) => {
       return <p>This is additional content for {row.name}</p>;
     };
@@ -660,7 +660,7 @@ describe("DataView", () => {
     ).not.toBeNull();
   });
 
-  it("can display empty state", async () => {
+  test("can display empty state", async () => {
     const emptyText = "This is the empty state text.";
 
     render(
@@ -679,7 +679,7 @@ describe("DataView", () => {
     expect(await screen.findByText(emptyText)).not.toBeNull();
   });
 
-  it("can display no-results state", async () => {
+  test("can display no-results state", async () => {
     const noResultsText = "This is the no results state text.";
 
     render(
@@ -698,7 +698,7 @@ describe("DataView", () => {
     expect(await screen.findByText(noResultsText)).not.toBeNull();
   });
 
-  it("can sort rows", async () => {
+  test("can sort rows", async () => {
     render(
       <DataView
         availableLayouts={["table"]}
@@ -726,7 +726,7 @@ describe("DataView", () => {
     expect(sortedRows[6].textContent).toContain(data[0].name);
   });
 
-  it("can change row density", async () => {
+  test("can change row density", async () => {
     render(
       <DataView
         availableLayouts={["table"]}
@@ -759,7 +759,7 @@ describe("DataView", () => {
     expect(tBody?.className).toContain("MuiTableBody-compact");
   });
 
-  it("can change column visibility", async () => {
+  test("can change column visibility", async () => {
     render(
       <DataView
         availableLayouts={["table"]}
@@ -787,7 +787,7 @@ describe("DataView", () => {
     expect(screen.queryByText(data[0].city)).toBeNull();
   });
 
-  it("can resize columns", async () => {
+  test("can resize columns", async () => {
     render(
       <DataView
         availableLayouts={["table"]}
@@ -810,7 +810,7 @@ describe("DataView", () => {
     expect(tHead).toContainElement(hrElement);
   });
 
-  it("displays paged pagination", async () => {
+  test("displays paged pagination", async () => {
     render(
       <DataView
         availableLayouts={["table"]}
@@ -835,7 +835,7 @@ describe("DataView", () => {
     ).toBeInTheDocument();
   });
 
-  it("displays loadMore pagination", async () => {
+  test("displays loadMore pagination", async () => {
     render(
       <DataView
         availableLayouts={["table"]}
@@ -856,7 +856,7 @@ describe("DataView", () => {
     ).toBeInTheDocument();
   });
 
-  it("can load more rows via loadMore pagination", async () => {
+  test("can load more rows via loadMore pagination", async () => {
     render(
       <DataView
         availableLayouts={["table"]}
@@ -885,7 +885,7 @@ describe("DataView", () => {
     });
   });
 
-  it("can go to the next page", async () => {
+  test("can go to the next page", async () => {
     render(
       <DataView
         availableLayouts={["table"]}
@@ -915,7 +915,7 @@ describe("DataView", () => {
     expect(screen.queryByText(data[2].name)).not.toBeNull();
   });
 
-  it("can go to the previous page", async () => {
+  test("can go to the previous page", async () => {
     render(
       <DataView
         availableLayouts={["table"]}
@@ -955,7 +955,7 @@ describe("DataView", () => {
     expect(screen.queryByText(data[2].name)).toBeNull();
   });
 
-  it("can disable the next page button based on max rows", async () => {
+  test("can disable the next page button based on max rows", async () => {
     render(
       <DataView
         availableLayouts={["table"]}
