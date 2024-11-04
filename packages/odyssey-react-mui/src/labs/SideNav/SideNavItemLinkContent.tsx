@@ -67,12 +67,16 @@ const SideNavItemLinkContent = ({
         isIconVisible={Boolean(startIcon)}
       >
         {label}
-        {(severity || count) && (
+        {!count && severity && (
           <Box sx={sideNavItemContentStyles}>
-            {count && <Badge badgeContent={count} />}
             {severity && (
               <Status severity={severity} label={statusLabel || ""} />
             )}
+          </Box>
+        )}
+        {!severity && count && (
+          <Box sx={sideNavItemContentStyles}>
+            {count && <Badge badgeContent={count} />}
           </Box>
         )}
       </SideNavItemLabelContainer>

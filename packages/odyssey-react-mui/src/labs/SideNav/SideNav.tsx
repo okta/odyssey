@@ -117,7 +117,7 @@ const StyledSideNav = styled("nav", {
       top: SIDENAV_COLLAPSE_ICON_POSITION,
       right: 0,
       transition: `transform ${odysseyDesignTokens.TransitionDurationMain}`,
-      transform: `translate3d(calc(100% + ${odysseyDesignTokens.Spacing1}), 0, 0)`,
+      transform: `translate3d(100%, 0, 0)`,
     },
   }),
 );
