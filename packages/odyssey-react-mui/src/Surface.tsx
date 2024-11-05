@@ -32,8 +32,9 @@ const StyledContainer = styled(MuiPaper, {
   padding: odysseyDesignTokens.Spacing5,
   border:
     contrastMode === "lowContrast"
-      ? `1px solid ${odysseyDesignTokens.HueNeutral200}`
+      ? `1px solid ${odysseyDesignTokens.HueNeutral100}`
       : "none",
+  boxShadow: "none",
 }));
 
 export type SurfaceProps = {
