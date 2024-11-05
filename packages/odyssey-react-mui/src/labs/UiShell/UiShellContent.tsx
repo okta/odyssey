@@ -31,7 +31,7 @@ const StyledAppContainer = styled("div", {
   overflowX: "hidden",
   overflowY: "auto",
   paddingBlock: odysseyDesignTokens.Spacing5,
-  paddingInline: odysseyDesignTokens.Spacing6,
+  paddingInline: odysseyDesignTokens.Spacing8,
 }));
 
 const StyledBannersContainer = styled("div")(() => ({
