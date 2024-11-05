@@ -58,8 +58,7 @@ const StyledToggleButton = styled(MuiButton, {
       backgroundColor: "transparent",
 
       "#lineOne": {
-        animation:
-          "lineOne-animate-to-collapse 100ms cubic-bezier(0, 0, 0.2, 1)",
+        animation: `lineOne-animate-to-collapse ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
         animationFillMode: "forwards",
         "@keyframes lineOne-animate-to-collapse": {
           "0%": {
@@ -75,8 +74,7 @@ const StyledToggleButton = styled(MuiButton, {
       },
 
       "#lineTwo": {
-        animation:
-          "lineTwo-animate-to-collapse 100ms cubic-bezier(0, 0, 0.2, 1)",
+        animation: `lineTwo-animate-to-collapse ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
         animationFillMode: "forwards",
         "@keyframes lineTwo-animate-to-collapse": {
           "0%": {
@@ -93,8 +91,7 @@ const StyledToggleButton = styled(MuiButton, {
 
       ...(isSideNavCollapsed && {
         "#lineOne": {
-          animation:
-            "lineOne-animate-to-expand 100ms cubic-bezier(0, 0, 0.2, 1)",
+          animation: `lineOne-animate-to-expand ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
           animationFillMode: "forwards",
           "@keyframes lineOne-animate-to-expand": {
             "0%": {
@@ -111,8 +108,7 @@ const StyledToggleButton = styled(MuiButton, {
         },
 
         "#lineTwo": {
-          animation:
-            "lineTwo-animate-to-expand 100ms cubic-bezier(0, 0, 0.2, 1)",
+          animation: `lineTwo-animate-to-expand ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
           animationFillMode: "forwards",
           "@keyframes lineTwo-animate-to-expand": {
             "0%": {
@@ -135,7 +131,7 @@ const StyledToggleButton = styled(MuiButton, {
       left: "50%",
       width: "2px",
       height: odysseyDesignTokens.Spacing4,
-      backgroundColor: odysseyDesignTokens.HueNeutral500,
+      backgroundColor: odysseyDesignTokens.HueNeutral600,
       transform: "translate3d(-50%, -50%, 0)",
       transition: `transform ${odysseyDesignTokens.TransitionDurationMain}`,
     },
