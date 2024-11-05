@@ -19,14 +19,21 @@ import {
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext";
 import { OdysseyThemeProvider } from "./OdysseyThemeProvider";
+import { useContrastModeContext, ContrastMode } from "./useContrastMode";
 
 const StyledContainer = styled(MuiPaper, {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "contrastMode",
 })<{
+  contrastMode: ContrastMode;
   odysseyDesignTokens: DesignTokens;
-}>(({ odysseyDesignTokens }) => ({
+}>(({ contrastMode, odysseyDesignTokens }) => ({
   borderRadius: odysseyDesignTokens.Spacing4,
-  padding: odysseyDesignTokens.Spacing4,
+  padding: odysseyDesignTokens.Spacing5,
+  border:
+    contrastMode === "lowContrast"
+      ? `1px solid ${odysseyDesignTokens.HueNeutral200}`
+      : "none",
 }));
 
 export type SurfaceProps = {
@@ -35,9 +42,13 @@ export type SurfaceProps = {
 
 const Surface = ({ children }: SurfaceProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const { contrastMode } = useContrastModeContext();
 
   return (
-    <StyledContainer odysseyDesignTokens={odysseyDesignTokens}>
+    <StyledContainer
+      contrastMode={contrastMode}
+      odysseyDesignTokens={odysseyDesignTokens}
+    >
       <OdysseyThemeProvider>{children}</OdysseyThemeProvider>
     </StyledContainer>
   );
