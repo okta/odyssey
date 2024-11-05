@@ -59,7 +59,7 @@ const StyledToggleButton = styled(MuiButton, {
 
       "#lineOne": {
         animation:
-          "lineOne-animate-to-collapse 250ms cubic-bezier(0, 0, 0.2, 1)",
+          "lineOne-animate-to-collapse 100ms cubic-bezier(0, 0, 0.2, 1)",
         animationFillMode: "forwards",
         "@keyframes lineOne-animate-to-collapse": {
           "0%": {
@@ -76,7 +76,7 @@ const StyledToggleButton = styled(MuiButton, {
 
       "#lineTwo": {
         animation:
-          "lineTwo-animate-to-collapse 250ms cubic-bezier(0, 0, 0.2, 1)",
+          "lineTwo-animate-to-collapse 100ms cubic-bezier(0, 0, 0.2, 1)",
         animationFillMode: "forwards",
         "@keyframes lineTwo-animate-to-collapse": {
           "0%": {
@@ -94,7 +94,7 @@ const StyledToggleButton = styled(MuiButton, {
       ...(isSideNavCollapsed && {
         "#lineOne": {
           animation:
-            "lineOne-animate-to-expand 250ms cubic-bezier(0, 0, 0.2, 1)",
+            "lineOne-animate-to-expand 100ms cubic-bezier(0, 0, 0.2, 1)",
           animationFillMode: "forwards",
           "@keyframes lineOne-animate-to-expand": {
             "0%": {
@@ -112,7 +112,7 @@ const StyledToggleButton = styled(MuiButton, {
 
         "#lineTwo": {
           animation:
-            "lineTwo-animate-to-expand 250ms cubic-bezier(0, 0, 0.2, 1)",
+            "lineTwo-animate-to-expand 100ms cubic-bezier(0, 0, 0.2, 1)",
           animationFillMode: "forwards",
           "@keyframes lineTwo-animate-to-expand": {
             "0%": {
