@@ -163,7 +163,7 @@ const SideNavScrollableContainer = styled("div", {
 const SectionHeaderContainer = styled("li", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
-  paddingBlock: odysseyDesignTokens.Spacing3,
+  paddingBlock: odysseyDesignTokens.Spacing1,
   paddingInline: odysseyDesignTokens.Spacing4,
 
   "& + &": {
@@ -369,8 +369,8 @@ const SideNav = ({
    */
   const firstSideNavItemIdWithIsSelected = useMemo(() => {
     const flattenedItems = sideNavItems.flatMap((sideNavItem) =>
-      sideNavItem.children
-        ? [sideNavItem, ...sideNavItem.children]
+      sideNavItem.nestedNavItems
+        ? [sideNavItem, ...sideNavItem.nestedNavItems]
         : sideNavItem,
     );
     const firstItemWithIsSelected = flattenedItems.find(
@@ -409,22 +409,22 @@ const SideNav = ({
 
   const setSelectedInChildItems = useCallback(
     ({
-      children,
+      nestedNavItems,
       selectedItemId,
     }: {
-      children: Array<Omit<SideNavItem, "startIcon" | "endIcon">>;
+      nestedNavItems: Array<Omit<SideNavItem, "startIcon" | "endIcon">>;
       selectedItemId: string;
     }) => {
-      const childItems = children.map((childItem) => {
+      const childItems = nestedNavItems.map((childItem) => {
         if (childItem.isSelected) {
           childItem.isSelected = false;
         }
         if (childItem.id === selectedItemId) {
           childItem.isSelected = true;
         }
-        if (childItem.children) {
+        if (childItem.nestedNavItems) {
           setSelectedInChildItems({
-            children: childItem.children,
+            nestedNavItems: childItem.nestedNavItems,
             selectedItemId,
           });
         }
@@ -444,9 +444,9 @@ const SideNav = ({
         if (item.id === selectedItemId) {
           item.isSelected = true;
         }
-        if (item.children) {
-          item.children = setSelectedInChildItems({
-            children: item.children,
+        if (item.nestedNavItems) {
+          item.nestedNavItems = setSelectedInChildItems({
+            nestedNavItems: item.nestedNavItems,
             selectedItemId,
           });
         }
@@ -460,7 +460,7 @@ const SideNav = ({
   const processedSideNavItems = useMemo(() => {
     return sideNavItemsList?.map((item) => ({
       ...item,
-      childNavItems: item.children?.map((childProps) => {
+      childNavItems: item.nestedNavItems?.map((childProps) => {
         return {
           id: childProps.id,
           isSelected: childProps.isSelected,
@@ -515,8 +515,12 @@ const SideNav = ({
     overIndex: number,
   ) => {
     const newSideNavItems = sideNavItemsList.map((item) => {
-      if (item.id === parentId && item.children) {
-        item.children = arrayMove(item.children, activeIndex, overIndex);
+      if (item.id === parentId && item.nestedNavItems) {
+        item.nestedNavItems = arrayMove(
+          item.nestedNavItems,
+          activeIndex,
+          overIndex,
+        );
       }
       return item;
     });
@@ -607,21 +611,22 @@ const SideNav = ({
                             isDisabled={isDisabled}
                           >
                             <SideNavListContainer id={`${id}-list`} role="list">
-                            {isSortable ? (
-                              <SortableList
-                                parentId={item.id}
-                                items={childNavItems}
-                                onChange={setSortedItems}
-                                renderItem={(sortableItem) => (
-                                  <SortableList.Item
-                                    id={sortableItem.id}
-                                    isDisabled={sortableItem.isDisabled}
-                                    isSelected={sortableItem.isSelected}
-                                  >
-                                    {sortableItem.navItem}
-                                  </SortableList.Item>
-                                )}
-                              />) : (
+                              {isSortable ? (
+                                <SortableList
+                                  parentId={item.id}
+                                  items={childNavItems}
+                                  onChange={setSortedItems}
+                                  renderItem={(sortableItem) => (
+                                    <SortableList.Item
+                                      id={sortableItem.id}
+                                      isDisabled={sortableItem.isDisabled}
+                                      isSelected={sortableItem.isSelected}
+                                    >
+                                      {sortableItem.navItem}
+                                    </SortableList.Item>
+                                  )}
+                                />
+                              ) : (
                                 childNavItems.map((item) => item.navItem)
                               )}
                             </SideNavListContainer>

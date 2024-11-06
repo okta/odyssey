@@ -155,7 +155,7 @@ const storybookMeta: Meta<SideNavProps> = {
         label: "Dashboard",
         startIcon: <HomeIcon />,
         isDisabled: true,
-        children: [
+        nestedNavItems: [
           {
             id: "item1-1",
             href: "/",
@@ -173,7 +173,7 @@ const storybookMeta: Meta<SideNavProps> = {
         id: "item001",
         label: "Onboarding",
         startIcon: <FolderIcon />,
-        children: [
+        nestedNavItems: [
           {
             id: "item1-1",
             href: "/",
@@ -242,7 +242,6 @@ const storybookMeta: Meta<SideNavProps> = {
         label: "Security",
         startIcon: <LockIcon />,
         endIcon: <LockIcon />,
-        isSelected: true,
       },
       {
         id: "item4",
@@ -250,7 +249,7 @@ const storybookMeta: Meta<SideNavProps> = {
         isDefaultExpanded: true,
         isSortable: true,
         startIcon: <SettingsIcon />,
-        children: [
+        nestedNavItems: [
           {
             id: "item4-1",
             href: "/",
@@ -275,6 +274,7 @@ const storybookMeta: Meta<SideNavProps> = {
             id: "item4-5",
             href: "/",
             label: "IDP Configuration",
+            isSelected: true,
           },
         ],
       },
@@ -286,7 +286,6 @@ const storybookMeta: Meta<SideNavProps> = {
       },
       {
         id: "item6",
-        href: "/",
         label: "Notifications",
         startIcon: <NotificationIcon />,
         count: 1,

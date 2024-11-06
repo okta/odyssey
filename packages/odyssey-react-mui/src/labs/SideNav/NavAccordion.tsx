@@ -17,7 +17,7 @@ import {
   AccordionSummary as MuiAccordionSummary,
   AccordionProps as MuiAccordionProps,
 } from "@mui/material";
-import { ReactNode, memo } from "react";
+import { PropsWithChildren, ReactNode, memo } from "react";
 
 import type { HtmlProps } from "../../HtmlProps";
 import { ChevronDownIcon } from "../../icons.generated";
@@ -29,10 +29,6 @@ import { Support } from "../../Typography";
 import { useUniqueId } from "../../useUniqueId";
 
 export type NavAccordionProps = {
-  /**
-   * The content of the Accordion itself
-   */
-  children: ReactNode;
   /**
    * The label text for the AccordionSummary
    */
@@ -92,8 +88,9 @@ const AccordionSummaryContainer = styled(MuiAccordionSummary, {
   isDisabled?: boolean;
 }>(({ odysseyDesignTokens, isCompact, isDisabled }) => ({
   borderRadius: odysseyDesignTokens.BorderRadiusMain,
-  paddingBlock: odysseyDesignTokens.Spacing3,
+  paddingBlock: odysseyDesignTokens.Spacing2,
   paddingInline: odysseyDesignTokens.Spacing4,
+  minHeight: odysseyDesignTokens.Spacing5,
 
   "&:focus-visible": {
     backgroundColor: "unset",
@@ -103,6 +100,7 @@ const AccordionSummaryContainer = styled(MuiAccordionSummary, {
 
   ...(isCompact && {
     paddingBlock: odysseyDesignTokens.Spacing2,
+    minHeight: odysseyDesignTokens.Spacing4,
   }),
 
   ...(!isDisabled && {
@@ -122,7 +120,7 @@ const NavAccordion = ({
   isExpanded,
   translate,
   startIcon,
-}: NavAccordionProps) => {
+}: PropsWithChildren<NavAccordionProps>) => {
   const id = useUniqueId(idOverride);
   const headerId = `${id}-header`;
   const contentId = `${id}-content`;

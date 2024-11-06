@@ -273,7 +273,7 @@ describe("SideNav", () => {
             {
               id: "accordionOuter",
               label: accordionOuter,
-              children: [
+              nestedNavItems: [
                 {
                   id: "accordionInner",
                   href: "#",

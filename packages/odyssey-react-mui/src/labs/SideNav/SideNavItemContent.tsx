@@ -46,15 +46,12 @@ export const StyledSideNavListItem = styled("li", {
   backgroundColor: "unset",
   borderRadius: odysseyDesignTokens.BorderRadiusMain,
   transition: `backgroundColor ${odysseyDesignTokens.TransitionDurationMain}, color ${odysseyDesignTokens.TransitionDurationMain}`,
+  marginBlock: "2px",
 
   ...(isSelected && {
     color: `${odysseyDesignTokens.TypographyColorAction} !important`,
     backgroundColor: odysseyDesignTokens.HueBlue50,
   }),
-
-  "&:last-child": {
-    marginBlockEnd: odysseyDesignTokens.Spacing2,
-  },
 }));
 
 const scrollToNode = (node: HTMLElement | null) => {
@@ -89,8 +86,14 @@ const GetNavItemContentStyles = ({
     textDecoration: "none",
     color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
     minHeight: odysseyDesignTokens.Spacing7,
-    paddingBlock: odysseyDesignTokens.Spacing3,
-    paddingInline: `calc(${odysseyDesignTokens.Spacing4} * ${contextValue.depth})`,
+    paddingBlock: odysseyDesignTokens.Spacing2,
+    paddingInlineStart:
+      contextValue.depth === 1
+        ? odysseyDesignTokens.Spacing4
+        : !contextValue.isSortable
+          ? `calc(${odysseyDesignTokens.Spacing4} * ${contextValue.depth} + ${odysseyDesignTokens.Spacing3})`
+          : odysseyDesignTokens.Spacing4,
+    paddingInlineEnd: odysseyDesignTokens.Spacing4,
     borderRadius: odysseyDesignTokens.BorderRadiusMain,
     transition: `backgroundColor ${odysseyDesignTokens.TransitionDurationMain}, color ${odysseyDesignTokens.TransitionDurationMain}`,
 
@@ -103,21 +106,18 @@ const GetNavItemContentStyles = ({
       backgroundColor: !isDisabled
         ? odysseyDesignTokens.HueNeutral50
         : "inherit",
+      color: isDisabled
+        ? `${odysseyDesignTokens.TypographyColorDisabled}`
+        : `${odysseyDesignTokens.TypographyColorAction}  !important`,
 
       ...(isDisabled && {
         color: "inherit",
         cursor: "default",
       }),
-
-      ...(isSelected && {
-        "&:hover": {
-          backgroundColor: odysseyDesignTokens.HueBlue50,
-        },
-      }),
     },
 
     ...(isSelected && {
-      color: `${odysseyDesignTokens.TypographyColorAction} !important`,
+      color: `${odysseyDesignTokens.TypographyColorAction}`,
       fontWeight: odysseyDesignTokens.TypographyWeightBodyBold,
     }),
 
@@ -220,13 +220,14 @@ const SideNavItemContent = ({
   );
 
   const sideNavItemContentKeyHandler = useCallback(
-    (event: KeyboardEvent<HTMLDivElement>) => {
+    (id: string, event: KeyboardEvent<HTMLDivElement>) => {
       if (event?.key === "Enter") {
         event.preventDefault();
+        onItemSelected?.(id);
         onClick?.();
       }
     },
-    [onClick],
+    [onClick, onItemSelected],
   );
 
   return (
@@ -265,7 +266,9 @@ const SideNavItemContent = ({
             isDisabled={isDisabled}
             tabIndex={0}
             onClick={itemClickHandler(id)}
-            onKeyDown={sideNavItemContentKeyHandler}
+            onKeyDown={(event: KeyboardEvent<HTMLDivElement>) =>
+              sideNavItemContentKeyHandler(id, event)
+            }
             isSelected={isSelected}
           >
             <SideNavItemLinkContent
