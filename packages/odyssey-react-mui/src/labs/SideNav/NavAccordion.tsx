@@ -76,8 +76,7 @@ const AccordionLabelContainer = styled("span", {
   isIconVisible: boolean;
 }>(({ odysseyDesignTokens, isIconVisible }) => ({
   width: "100%",
-  marginLeft: isIconVisible ? odysseyDesignTokens.Spacing2 : 0,
-  fontSize: odysseyDesignTokens.TypographyScale0,
+  marginInlineStart: isIconVisible ? odysseyDesignTokens.Spacing2 : 0,
   fontWeight: odysseyDesignTokens.TypographyWeightHeading,
   color: odysseyDesignTokens.TypographyColorHeading,
 }));
@@ -95,12 +94,11 @@ const AccordionSummaryContainer = styled(MuiAccordionSummary, {
   borderRadius: odysseyDesignTokens.BorderRadiusMain,
   paddingBlock: odysseyDesignTokens.Spacing3,
   paddingInline: odysseyDesignTokens.Spacing4,
-  lineHeight: 1.5,
 
   "&:focus-visible": {
     backgroundColor: "unset",
     outline: "none",
-    boxShadow: `inset 0 0 0 3px ${odysseyDesignTokens.PalettePrimaryMain}`,
+    boxShadow: `inset 0 0 0 2px ${odysseyDesignTokens.PalettePrimaryMain}`,
   },
 
   ...(isCompact && {

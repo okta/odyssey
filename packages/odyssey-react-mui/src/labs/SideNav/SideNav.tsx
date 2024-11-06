@@ -96,6 +96,7 @@ const StyledSideNav = styled("nav", {
       transform: `translateX(0)`,
       transition: `opacity ${odysseyDesignTokens.TransitionDurationMain}, transform ${odysseyDesignTokens.TransitionDurationMain}`,
       width: odysseyDesignTokens.Spacing2,
+      zIndex: 2,
     },
 
     "&:has([data-sidenav-toggle='true']:hover), &:has([data-sidenav-toggle='true']:focus)":
@@ -161,6 +162,11 @@ const SectionHeaderContainer = styled("li", {
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
   paddingBlock: odysseyDesignTokens.Spacing3,
   paddingInline: odysseyDesignTokens.Spacing4,
+
+  "& + &": {
+    backgroundColor: "red !important",
+    marginBlockStart: "1px",
+  },
 }));
 
 const SectionHeader = styled("h3", {

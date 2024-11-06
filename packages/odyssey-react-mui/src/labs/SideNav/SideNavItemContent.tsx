@@ -42,9 +42,9 @@ export const StyledSideNavListItem = styled("li", {
 }>(({ odysseyDesignTokens, isSelected }) => ({
   display: "flex",
   alignItems: "center",
+  marginBlockEnd: "1px",
   backgroundColor: "unset",
   borderRadius: odysseyDesignTokens.BorderRadiusMain,
-  lineHeight: 1.5,
   transition: `backgroundColor ${odysseyDesignTokens.TransitionDurationMain}, color ${odysseyDesignTokens.TransitionDurationMain}`,
 
   ...(isSelected && {
@@ -53,7 +53,7 @@ export const StyledSideNavListItem = styled("li", {
   }),
 
   "&:last-child": {
-    marginBottom: odysseyDesignTokens.Spacing2,
+    marginBlockEnd: odysseyDesignTokens.Spacing2,
   },
 }));
 
@@ -89,11 +89,14 @@ const GetNavItemContentStyles = ({
     textDecoration: "none",
     color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
     minHeight: odysseyDesignTokens.Spacing7,
-    paddingBlock: odysseyDesignTokens.Spacing4,
+    paddingBlock: odysseyDesignTokens.Spacing3,
     paddingInline: `calc(${odysseyDesignTokens.Spacing4} * ${contextValue.depth})`,
     borderRadius: odysseyDesignTokens.BorderRadiusMain,
     transition: `backgroundColor ${odysseyDesignTokens.TransitionDurationMain}, color ${odysseyDesignTokens.TransitionDurationMain}`,
 
+    "& + &": {
+      marginTop: 4,
+    },
     "&:hover": {
       textDecoration: "none",
       cursor: "pointer",
@@ -129,7 +132,7 @@ const GetNavItemContentStyles = ({
 
     "&:focus-visible": {
       outline: "none",
-      boxShadow: `inset 0 0 0 3px ${odysseyDesignTokens.PalettePrimaryMain}`,
+      boxShadow: `inset 0 0 0 2px ${odysseyDesignTokens.PalettePrimaryMain}`,
     },
   };
 };
