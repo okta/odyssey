@@ -60,6 +60,7 @@ const StyledSortableListItem = styled("div", {
   listStyle: "none",
   cursor: "pointer",
   backgroundColor: `${isSelected && odysseyDesignTokens.HueBlue50}`,
+  borderRadius: odysseyDesignTokens.BorderRadiusMain,
   "&:hover": {
     backgroundColor: isSelected
       ? odysseyDesignTokens.HueBlue50
@@ -72,7 +73,6 @@ const StyledSortableListItem = styled("div", {
   },
   ":has(:focus-visible)": {
     outline: "none",
-    borderRadius: odysseyDesignTokens.Spacing1,
     boxShadow: `inset 0 0 0 2px ${odysseyDesignTokens.PalettePrimaryMain}`,
   },
   "a:focus-visible, div:focus-visible": {

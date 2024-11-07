@@ -88,11 +88,9 @@ const GetNavItemContentStyles = ({
     minHeight: odysseyDesignTokens.Spacing7,
     paddingBlock: odysseyDesignTokens.Spacing2,
     paddingInlineStart:
-      contextValue.depth === 1
+      contextValue.depth === 1 || contextValue.isSortable
         ? odysseyDesignTokens.Spacing4
-        : !contextValue.isSortable
-          ? `calc(${odysseyDesignTokens.Spacing4} * ${contextValue.depth} + ${odysseyDesignTokens.Spacing3})`
-          : odysseyDesignTokens.Spacing4,
+        : `calc(${odysseyDesignTokens.Spacing4} * ${contextValue.depth} + ${odysseyDesignTokens.Spacing3})`,
     paddingInlineEnd: odysseyDesignTokens.Spacing4,
     borderRadius: odysseyDesignTokens.BorderRadiusMain,
     transition: `backgroundColor ${odysseyDesignTokens.TransitionDurationMain}, color ${odysseyDesignTokens.TransitionDurationMain}`,
@@ -103,12 +101,12 @@ const GetNavItemContentStyles = ({
     "&:hover": {
       textDecoration: "none",
       cursor: "pointer",
-      backgroundColor: !isDisabled
-        ? odysseyDesignTokens.HueNeutral50
-        : "inherit",
-      color: isDisabled
-        ? `${odysseyDesignTokens.TypographyColorDisabled}`
-        : `${odysseyDesignTokens.TypographyColorAction}  !important`,
+      backgroundColor: isSelected
+        ? odysseyDesignTokens.HueBlue50
+        : !isDisabled
+          ? odysseyDesignTokens.HueNeutral50
+          : "inherit",
+      color: `${odysseyDesignTokens.TypographyColorAction} !important`,
 
       ...(isDisabled && {
         color: "inherit",

@@ -41,6 +41,8 @@ import { SideNavToggleButton } from "./SideNavToggleButton";
 import { SortableList } from "./SortableList/SortableList";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { arrayMove } from "@dnd-kit/sortable";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { produce } from "immer";
 
 export const DEFAULT_SIDE_NAV_WIDTH = "300px";
 
@@ -407,6 +409,24 @@ const SideNav = ({
     [isCompact],
   );
 
+  const updateItemIsSelected = useCallback(
+    ({
+      navItem,
+      selectedItemId,
+    }: {
+      navItem: SideNavItem | Omit<SideNavItem, "startIcon" | "endIcon">;
+      selectedItemId: string;
+    }) => {
+      if (navItem.isSelected) {
+        navItem.isSelected = false;
+      }
+      if (navItem.id === selectedItemId) {
+        navItem.isSelected = true;
+      }
+    },
+    [],
+  );
+
   const setSelectedInChildItems = useCallback(
     ({
       nestedNavItems,
@@ -416,12 +436,7 @@ const SideNav = ({
       selectedItemId: string;
     }) => {
       const childItems = nestedNavItems.map((childItem) => {
-        if (childItem.isSelected) {
-          childItem.isSelected = false;
-        }
-        if (childItem.id === selectedItemId) {
-          childItem.isSelected = true;
-        }
+        updateItemIsSelected({ navItem: childItem, selectedItemId });
         if (childItem.nestedNavItems) {
           setSelectedInChildItems({
             nestedNavItems: childItem.nestedNavItems,
@@ -432,29 +447,26 @@ const SideNav = ({
       });
       return childItems;
     },
-    [],
+    [updateItemIsSelected],
   );
 
   const setSelectedItem = useCallback(
     (selectedItemId: string) => {
-      const newNavItems = sideNavItemsList.map((item) => {
-        if (item.isSelected) {
-          item.isSelected = false;
-        }
-        if (item.id === selectedItemId) {
-          item.isSelected = true;
-        }
-        if (item.nestedNavItems) {
-          item.nestedNavItems = setSelectedInChildItems({
-            nestedNavItems: item.nestedNavItems,
-            selectedItemId,
-          });
-        }
-        return item;
+      const newNavItems = produce(sideNavItemsList, (draft) => {
+        draft.map((item) => {
+          updateItemIsSelected({ navItem: item, selectedItemId });
+          if (item.nestedNavItems) {
+            item.nestedNavItems = setSelectedInChildItems({
+              nestedNavItems: item.nestedNavItems,
+              selectedItemId,
+            });
+          }
+          return item;
+        });
       });
       updateSideNavItemsList(newNavItems);
     },
-    [sideNavItemsList, setSelectedInChildItems],
+    [sideNavItemsList, updateItemIsSelected, setSelectedInChildItems],
   );
 
   const processedSideNavItems = useMemo(() => {
@@ -476,7 +488,6 @@ const SideNav = ({
             >
               <SideNavItemContent
                 {...childProps}
-                key={childProps.id}
                 scrollRef={getRefIfThisIsFirstNodeWithIsSelected(childProps.id)}
                 onItemSelected={setSelectedItem}
               />
@@ -509,24 +520,24 @@ const SideNav = ({
     [sideNavExpandClickHandler],
   );
 
-  const setSortedItems = (
-    parentId: string,
-    activeIndex: number,
-    overIndex: number,
-  ) => {
-    const newSideNavItems = sideNavItemsList.map((item) => {
-      if (item.id === parentId && item.nestedNavItems) {
-        item.nestedNavItems = arrayMove(
-          item.nestedNavItems,
-          activeIndex,
-          overIndex,
-        );
-      }
-      return item;
-    });
-    updateSideNavItemsList(newSideNavItems);
-    onSort?.(newSideNavItems);
-  };
+  const setSortedItems = useCallback(
+    (parentId: string, activeIndex: number, overIndex: number) => {
+      const sortedSideNavItems = produce(sideNavItemsList, (draft) => {
+        draft.map((item) => {
+          if (item.id === parentId && item.nestedNavItems) {
+            item.nestedNavItems = arrayMove(
+              item.nestedNavItems,
+              activeIndex,
+              overIndex,
+            );
+          }
+        });
+      });
+      updateSideNavItemsList(sortedSideNavItems);
+      onSort?.(sortedSideNavItems);
+    },
+    [onSort, sideNavItemsList],
+  );
 
   return (
     <StyledSideNav

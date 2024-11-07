@@ -88,9 +88,8 @@ const AccordionSummaryContainer = styled(MuiAccordionSummary, {
   isDisabled?: boolean;
 }>(({ odysseyDesignTokens, isCompact, isDisabled }) => ({
   borderRadius: odysseyDesignTokens.BorderRadiusMain,
-  paddingBlock: odysseyDesignTokens.Spacing2,
+  paddingBlock: odysseyDesignTokens.Spacing3,
   paddingInline: odysseyDesignTokens.Spacing4,
-  minHeight: odysseyDesignTokens.Spacing5,
 
   "&:focus-visible": {
     backgroundColor: "unset",
@@ -100,7 +99,7 @@ const AccordionSummaryContainer = styled(MuiAccordionSummary, {
 
   ...(isCompact && {
     paddingBlock: odysseyDesignTokens.Spacing2,
-    minHeight: odysseyDesignTokens.Spacing4,
+    minHeight: "unset",
   }),
 
   ...(!isDisabled && {

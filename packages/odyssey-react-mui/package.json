@@ -88,6 +88,7 @@
     "date-fns": "^2.30.0",
     "dom-accessibility-api": "^0.7.0",
     "i18next": "^23.15.1",
+    "immer": "^10.1.1",
     "luxon": "^3.4.4",
     "material-react-table": "^2.11.3",
     "react-error-boundary": "^4.1.1",

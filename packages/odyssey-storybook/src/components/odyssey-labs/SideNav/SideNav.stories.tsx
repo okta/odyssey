@@ -207,8 +207,8 @@ const storybookMeta: Meta<SideNavProps> = {
         href: "/",
         label: "Kubernetes",
         startIcon: <ServerIcon />,
-        severity: "success",
-        statusLabel: "success",
+        severity: "info",
+        statusLabel: "BETA",
       },
       {
         id: "item5",
