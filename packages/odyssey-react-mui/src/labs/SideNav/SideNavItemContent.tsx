@@ -68,72 +68,73 @@ type ScrollIntoViewHandle = {
   scrollIntoView: () => void;
 };
 
-const GetNavItemContentStyles = ({
+export const getBaseNavItemContentStyles = ({
   odysseyDesignTokens,
-  contextValue,
   isDisabled,
   isSelected,
 }: {
   odysseyDesignTokens: DesignTokens;
-  contextValue: SideNavItemContentContextValue;
   isDisabled?: boolean;
   isSelected?: boolean;
-}) => {
-  return {
-    display: "flex",
-    alignItems: "center",
-    width: "100%",
+}) => ({
+  display: "flex",
+  alignItems: "center",
+  width: "100%",
+  textDecoration: "none",
+  color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
+  minHeight: "unset",
+  paddingBlock: odysseyDesignTokens.Spacing3,
+  paddingInlineEnd: odysseyDesignTokens.Spacing4,
+  borderRadius: odysseyDesignTokens.BorderRadiusMain,
+  transition: `backgroundColor ${odysseyDesignTokens.TransitionDurationMain}, color ${odysseyDesignTokens.TransitionDurationMain}`,
+  cursor: "pointer",
+
+  "&:hover": {
     textDecoration: "none",
-    color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
-    minHeight: odysseyDesignTokens.Spacing7,
-    paddingBlock: odysseyDesignTokens.Spacing2,
-    paddingInlineStart:
-      contextValue.depth === 1 || contextValue.isSortable
-        ? odysseyDesignTokens.Spacing4
-        : `calc(${odysseyDesignTokens.Spacing4} * ${contextValue.depth} + ${odysseyDesignTokens.Spacing3})`,
-    paddingInlineEnd: odysseyDesignTokens.Spacing4,
-    borderRadius: odysseyDesignTokens.BorderRadiusMain,
-    transition: `backgroundColor ${odysseyDesignTokens.TransitionDurationMain}, color ${odysseyDesignTokens.TransitionDurationMain}`,
-
-    "& + &": {
-      marginTop: 4,
-    },
-    "&:hover": {
-      textDecoration: "none",
-      cursor: "pointer",
-      backgroundColor: isSelected
-        ? odysseyDesignTokens.HueBlue50
-        : !isDisabled
-          ? odysseyDesignTokens.HueNeutral50
-          : "inherit",
-      color: `${odysseyDesignTokens.TypographyColorAction} !important`,
-
-      ...(isDisabled && {
-        color: "inherit",
-        cursor: "default",
-      }),
-    },
+    backgroundColor: odysseyDesignTokens.HueNeutral50,
 
     ...(isSelected && {
-      color: `${odysseyDesignTokens.TypographyColorAction}`,
-      fontWeight: odysseyDesignTokens.TypographyWeightBodyBold,
+      backgroundColor: odysseyDesignTokens.HueBlue50,
+      color: odysseyDesignTokens.TypographyColorAction,
     }),
 
     ...(isDisabled && {
-      color: `${odysseyDesignTokens.TypographyColorDisabled} !important`,
+      backgroundColor: odysseyDesignTokens.HueNeutralWhite,
     }),
+  },
 
-    ...(contextValue.isCompact && {
-      paddingBlock: odysseyDesignTokens.Spacing1,
-      minHeight: odysseyDesignTokens.Spacing6,
-    }),
+  ...(isSelected && {
+    color: `${odysseyDesignTokens.TypographyColorAction}`,
+    fontWeight: odysseyDesignTokens.TypographyWeightBodyBold,
+  }),
 
-    "&:focus-visible": {
-      outline: "none",
-      boxShadow: `inset 0 0 0 2px ${odysseyDesignTokens.PalettePrimaryMain}`,
-    },
-  };
-};
+  ...(isDisabled && {
+    color: `${odysseyDesignTokens.TypographyColorDisabled} !important`,
+  }),
+
+  "&:focus-visible": {
+    outline: "none",
+    boxShadow: `inset 0 0 0 2px ${odysseyDesignTokens.PalettePrimaryMain}`,
+  },
+});
+
+export const getNavItemContentStyles = ({
+  odysseyDesignTokens,
+  contextValue,
+}: {
+  odysseyDesignTokens: DesignTokens;
+  contextValue: SideNavItemContentContextValue;
+}) => ({
+  paddingInlineStart: `calc(${odysseyDesignTokens.Spacing4} * ${contextValue.depth} + ${odysseyDesignTokens.Spacing6})`,
+
+  ...(contextValue.depth === 1 && {
+    paddingInlineStart: odysseyDesignTokens.Spacing4,
+  }),
+
+  ...(contextValue.isCompact && {
+    paddingBlock: odysseyDesignTokens.Spacing1,
+  }),
+});
 
 const NavItemContentContainer = styled("div", {
   shouldForwardProp: (prop) =>
@@ -141,7 +142,23 @@ const NavItemContentContainer = styled("div", {
     prop != "contextValue" &&
     prop !== "isDisabled" &&
     prop !== "isSelected",
-})(GetNavItemContentStyles);
+})<{
+  contextValue: SideNavItemContentContextValue;
+  odysseyDesignTokens: DesignTokens;
+  isSelected?: boolean;
+  isDisabled?: boolean;
+}>(({ contextValue, odysseyDesignTokens, isDisabled, isSelected }) => ({
+  ...getBaseNavItemContentStyles({
+    odysseyDesignTokens,
+    isDisabled,
+    isSelected,
+  }),
+
+  ...getNavItemContentStyles({
+    odysseyDesignTokens,
+    contextValue,
+  }),
+}));
 
 const StyledNavItemLink = styled(NavItemLink, {
   shouldForwardProp: (prop) =>
@@ -149,7 +166,23 @@ const StyledNavItemLink = styled(NavItemLink, {
     prop != "contextValue" &&
     prop !== "isDisabled" &&
     prop !== "isSelected",
-})(GetNavItemContentStyles);
+})<{
+  contextValue: SideNavItemContentContextValue;
+  odysseyDesignTokens: DesignTokens;
+  isSelected?: boolean;
+  isDisabled?: boolean;
+}>(({ contextValue, odysseyDesignTokens, isDisabled, isSelected }) => ({
+  ...getBaseNavItemContentStyles({
+    odysseyDesignTokens,
+    isDisabled,
+    isSelected,
+  }),
+
+  ...getNavItemContentStyles({
+    odysseyDesignTokens,
+    contextValue,
+  }),
+}));
 
 const SideNavItemContent = ({
   count,

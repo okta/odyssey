@@ -47,40 +47,40 @@ const SortableItemContext = createContext<Context>({
 
 const StyledSortableListItem = styled("div", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" &&
-    prop !== "isDisabled" &&
-    prop !== "isSelected",
+    prop !== "odysseyDesignTokens" && prop !== "isSelected",
 })<{
   odysseyDesignTokens: DesignTokens;
-  isDisabled?: boolean;
   isSelected?: boolean;
-}>(({ odysseyDesignTokens, isDisabled, isSelected }) => ({
-  display: "flex",
-  alignContent: "center",
-  listStyle: "none",
-  cursor: "pointer",
-  backgroundColor: `${isSelected && odysseyDesignTokens.HueBlue50}`,
-  borderRadius: odysseyDesignTokens.BorderRadiusMain,
-  "&:hover": {
-    backgroundColor: isSelected
-      ? odysseyDesignTokens.HueBlue50
-      : !isDisabled
-        ? odysseyDesignTokens.HueNeutral50
-        : "inherit",
-    "& button": {
-      opacity: 1,
+}>(({ odysseyDesignTokens, isSelected }) => ({
+  position: "relative",
+
+  button: {
+    top: "50%",
+    left: odysseyDesignTokens.Spacing2,
+    transform: "translateY(-50%)",
+  },
+
+  svg: {
+    path: {
+      fill: "currentColor",
     },
   },
-  ":has(:focus-visible)": {
-    outline: "none",
-    boxShadow: `inset 0 0 0 2px ${odysseyDesignTokens.PalettePrimaryMain}`,
+
+  "&:focus-visible, &:focus, &:hover": {
+    button: {
+      opacity: 1,
+      outlineWidth: 0,
+      boxShadow: "none",
+    },
   },
-  "a:focus-visible, div:focus-visible": {
-    outline: "none",
-    outlineWidth: 0,
-    boxShadow: "none",
-    color: `${odysseyDesignTokens.TypographyColorAction} !important`,
-  },
+
+  ...(isSelected && {
+    svg: {
+      path: {
+        fill: odysseyDesignTokens.TypographyColorAction,
+      },
+    },
+  }),
 }));
 
 const StyledDragHandleButton = styled("button", {
@@ -90,24 +90,20 @@ const StyledDragHandleButton = styled("button", {
   odysseyDesignTokens: DesignTokens;
   isDragging?: boolean;
 }>(({ odysseyDesignTokens, isDragging }) => ({
+  position: "absolute",
   opacity: 0,
-  paddingInlineStart: odysseyDesignTokens.Spacing4,
-  paddingInlineEnd: 0,
-  paddingBlock: 0,
+  // paddingInlineStart: odysseyDesignTokens.Spacing4,
+  padding: odysseyDesignTokens.Spacing2,
+  // paddingBlock: 0,
   border: "none",
   backgroundColor: "transparent",
   cursor: `${isDragging ? "grabbing" : "grab"}`,
-  ":focus-visible": {
-    opacity: 1,
-    outlineWidth: 0,
-    boxShadow: "none",
+  transition: `opacity ${odysseyDesignTokens.TransitionDurationMain}`,
+
+  svg: {
+    display: "flex",
   },
 }));
-
-const StyledChildContainer = styled("div")({
-  width: "95%",
-  marginInlineEnd: "2px",
-});
 
 type DragHandleProps = {
   isDisabled?: boolean;
@@ -177,14 +173,14 @@ export const SortableItem = ({
   return (
     <SortableItemContext.Provider value={context}>
       <StyledSortableListItem
+        data-hello="hello"
         ref={setNodeRef}
         style={style}
         odysseyDesignTokens={odysseyDesignTokens}
-        isDisabled={isDisabled}
         isSelected={isSelected}
       >
-        <DragHandle isDragging={isDragging} />
-        <StyledChildContainer>{children}</StyledChildContainer>
+        {!isDisabled && <DragHandle isDragging={isDragging} />}
+        {children}
       </StyledSortableListItem>
     </SortableItemContext.Provider>
   );

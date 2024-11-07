@@ -167,11 +167,6 @@ const SectionHeaderContainer = styled("li", {
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
   paddingBlock: odysseyDesignTokens.Spacing1,
   paddingInline: odysseyDesignTokens.Spacing4,
-
-  "& + &": {
-    backgroundColor: "red !important",
-    marginBlockStart: "1px",
-  },
 }));
 
 const SectionHeader = styled("h3", {

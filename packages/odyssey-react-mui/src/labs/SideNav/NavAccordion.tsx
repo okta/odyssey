@@ -72,7 +72,7 @@ const AccordionLabelContainer = styled("span", {
   isIconVisible: boolean;
 }>(({ odysseyDesignTokens, isIconVisible }) => ({
   width: "100%",
-  marginInlineStart: isIconVisible ? odysseyDesignTokens.Spacing2 : 0,
+  marginInlineStart: isIconVisible ? odysseyDesignTokens.Spacing3 : 0,
   fontWeight: odysseyDesignTokens.TypographyWeightHeading,
   color: odysseyDesignTokens.TypographyColorHeading,
 }));
