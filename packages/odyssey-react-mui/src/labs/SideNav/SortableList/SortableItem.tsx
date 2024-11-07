@@ -66,13 +66,13 @@ const StyledSortableListItem = styled("div", {
     },
   },
 
-  "&:focus-visible, &:focus, &:hover": {
-    button: {
-      opacity: 1,
-      outlineWidth: 0,
-      boxShadow: "none",
+  "&:has(a:hover, button:hover, a:focus, button:focus, a:focus-visible, button:focus-visible)":
+    {
+      button: {
+        opacity: 1,
+        outlineWidth: 0,
+      },
     },
-  },
 
   ...(isSelected && {
     svg: {
@@ -99,9 +99,15 @@ const StyledDragHandleButton = styled("button", {
   backgroundColor: "transparent",
   cursor: `${isDragging ? "grabbing" : "grab"}`,
   transition: `opacity ${odysseyDesignTokens.TransitionDurationMain}`,
+  borderRadius: odysseyDesignTokens.BorderRadiusMain,
 
   svg: {
     display: "flex",
+  },
+
+  "&:focus, &:focus-visible": {
+    outline: "none",
+    boxShadow: `inset 0 0 0 2px ${odysseyDesignTokens.PalettePrimaryMain}`,
   },
 }));
 
@@ -173,7 +179,7 @@ export const SortableItem = ({
   return (
     <SortableItemContext.Provider value={context}>
       <StyledSortableListItem
-        data-hello="hello"
+        data-sortable-container="true"
         ref={setNodeRef}
         style={style}
         odysseyDesignTokens={odysseyDesignTokens}

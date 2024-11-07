@@ -89,19 +89,21 @@ export const getBaseNavItemContentStyles = ({
   transition: `backgroundColor ${odysseyDesignTokens.TransitionDurationMain}, color ${odysseyDesignTokens.TransitionDurationMain}`,
   cursor: "pointer",
 
-  "&:hover": {
-    textDecoration: "none",
-    backgroundColor: odysseyDesignTokens.HueNeutral50,
+  // `[data-sortable-container='true']:has(button:hover) &` - when the sortable item's drag handle is hovered we want to trigger the same hover behavior as if you were hovering the actual item
+  "&:hover, [data-sortable-container='true']:has(button:hover, button:focus, button:focus-visible) &":
+    {
+      textDecoration: "none",
+      backgroundColor: odysseyDesignTokens.HueNeutral50,
 
-    ...(isSelected && {
-      backgroundColor: odysseyDesignTokens.HueBlue50,
-      color: odysseyDesignTokens.TypographyColorAction,
-    }),
+      ...(isSelected && {
+        backgroundColor: odysseyDesignTokens.HueBlue50,
+        color: odysseyDesignTokens.TypographyColorAction,
+      }),
 
-    ...(isDisabled && {
-      backgroundColor: odysseyDesignTokens.HueNeutralWhite,
-    }),
-  },
+      ...(isDisabled && {
+        backgroundColor: odysseyDesignTokens.HueNeutralWhite,
+      }),
+    },
 
   ...(isSelected && {
     color: `${odysseyDesignTokens.TypographyColorAction}`,
@@ -112,7 +114,7 @@ export const getBaseNavItemContentStyles = ({
     color: `${odysseyDesignTokens.TypographyColorDisabled} !important`,
   }),
 
-  "&:focus-visible": {
+  "&:focus-visible, &:focus": {
     outline: "none",
     boxShadow: `inset 0 0 0 2px ${odysseyDesignTokens.PalettePrimaryMain}`,
   },
