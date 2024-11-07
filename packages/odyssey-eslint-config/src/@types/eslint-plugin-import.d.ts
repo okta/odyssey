@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2023-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -10,5 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-// eslint-disable-next-line import/no-extraneous-dependencies
-module.exports = require("@okta/odyssey-eslint-config");
+declare module "eslint-plugin-import" {
+  import type { TSESLint } from "@typescript-eslint/utils";
+
+  export const flatConfigs: Record<
+    "recommended" | "react" | "typescript",
+    TSESLint.FlatConfig.Config
+  >;
+}

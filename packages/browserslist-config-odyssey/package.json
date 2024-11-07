@@ -13,10 +13,13 @@
     "directory": "packages/browserslist-config-odyssey"
   },
   "scripts": {
-    "build": "tsc"
+    "build:clean": "rimraf dist",
+    "build:source": "tsc",
+    "build": "yarn build:clean && yarn build:source"
   },
   "devDependencies": {
     "@okta/odyssey-typescript": "workspace:*",
+    "rimraf": "^5.0.1",
     "typescript": "^5.5.4"
   }
 }

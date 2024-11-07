@@ -60,7 +60,7 @@
     "generate:iconComponents": "svgr ../odyssey-icons/dist/icons --out-dir ./src/icons.generated",
     "generate:icons": "yarn build:cleanIconComponents && yarn generate:iconComponents && yarn build:cleanIconsIndex && yarn generate:iconsIndex",
     "generate:iconsIndex": "tsx scripts/generateIconsIndex.ts",
-    "lint": "eslint .",
+    "lint": "eslint . --flag unstable_ts_config",
     "test": "jest",
     "typecheck": "tsc"
   },
@@ -110,7 +110,7 @@
     "@types/react-window": "^1.8.8",
     "babel-plugin-import": "^1.13.5",
     "concurrently": "^8.2.2",
-    "eslint": "^8.56.0",
+    "eslint": "^9.14.0",
     "jest": "^29.7.0",
     "jest-axe": "^5.0.1",
     "properties": "1.2.1",
