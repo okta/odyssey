@@ -242,7 +242,7 @@ export const TitleWithLink: StoryObj<CalloutProps> = {
     canvasElement: HTMLElement;
     step: PlaywrightProps<CalloutProps>["step"];
   }) => {
-    await step("has visible link", async () => {
+    await step("has visible link", () => {
       const querySelect = queryOdysseySelector("Callout");
 
       const element = querySelect({

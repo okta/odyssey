@@ -386,7 +386,7 @@ export const IconOnly: StoryObj<ButtonProps> = {
 
 export const KitchenSink: StoryObj<ButtonProps> = {
   name: "Kitchen sink",
-  render: ({}) => (
+  render: () => (
     <Box sx={{ display: "flex", flexWrap: "wrap", rowGap: 2 }}>
       <Button label="Primary" variant="primary" />
       <Button label="Secondary" variant="secondary" />

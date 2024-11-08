@@ -340,7 +340,7 @@ export const Default: StoryObj<typeof SideNav> = {
      * So, we should expect that the scrollable container (found by data-se="scrollable-region")
      * should have a non-zero scrollTop once this operation has completed.
      */
-    await step("Side Nav Should be scrolled as expected", async ({}) => {
+    await step("Side Nav Should be scrolled as expected", async () => {
       // Add a small delay to allow initial rendering and scrolling
       await new Promise((resolve) => setTimeout(resolve, 100));
 
@@ -357,7 +357,7 @@ export const Default: StoryObj<typeof SideNav> = {
         );
       }
     });
-    await step("Side Nav Collapse", async ({}) => {
+    await step("Side Nav Collapse", async () => {
       await userEvent.click(toggleButton);
 
       await waitFor(() => {
@@ -365,7 +365,7 @@ export const Default: StoryObj<typeof SideNav> = {
         expect(navElement).toHaveStyle({ width: 0 });
       });
     });
-    await step("Side Nav Expand", async ({}) => {
+    await step("Side Nav Expand", async () => {
       await userEvent.click(toggleButton);
       await waitFor(() => {
         expect(toggleButton.ariaExpanded).toEqual("true");

@@ -111,8 +111,8 @@ const storybookMeta: Meta<CardProps> = {
 
 export default storybookMeta;
 
-export const Default: StoryObj<CardProps> = {
-  render: ({ ...props }) => (
+export const Default: StoryObj<typeof Card> = {
+  render: (props) => (
     <Box sx={{ maxWidth: 262 }}>
       <Card
         {...props}
@@ -130,8 +130,8 @@ export const Default: StoryObj<CardProps> = {
   ),
 };
 
-export const Clickable: StoryObj<CardProps> = {
-  render: ({ ...props }) => {
+export const Clickable: StoryObj<typeof Card> = {
+  render: (props) => {
     const onClick = () => {
       alert("Clicked!");
     };
@@ -139,18 +139,16 @@ export const Clickable: StoryObj<CardProps> = {
     return (
       <Box sx={{ maxWidth: 262 }}>
         <Card
-          description={props.description}
+          {...props}
           image={<img src="https://placehold.co/128" alt="Example logo" />}
           onClick={onClick}
-          overline={props.overline}
-          title={props.title}
         />
       </Box>
     );
   },
 };
 
-export const ClickableWithoutImage: StoryObj<CardProps> = {
+export const ClickableWithoutImage: StoryObj<typeof Card> = {
   render: ({ ...props }) => {
     const onClick = () => {
       alert("Clicked!");
@@ -159,11 +157,8 @@ export const ClickableWithoutImage: StoryObj<CardProps> = {
     return (
       <Box sx={{ maxWidth: 262 }}>
         <Card
-          description={props.description}
-          image={props.image}
+          {...props}
           onClick={onClick}
-          overline={props.overline}
-          title={props.title}
         />
       </Box>
     );
@@ -171,7 +166,7 @@ export const ClickableWithoutImage: StoryObj<CardProps> = {
 };
 
 export const ButtonWithoutImage: StoryObj<typeof Card> = {
-  render: ({ ...props }) => (
+  render: (props) => (
     <Box sx={{ maxWidth: 262 }}>
       <Card
         button={<Button variant="primary" label="Button" />}

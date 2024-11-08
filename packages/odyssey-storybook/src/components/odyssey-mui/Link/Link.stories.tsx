@@ -140,7 +140,7 @@ export const External: StoryObj<LinkProps> = {
     ariaLabel: "External Link",
   },
   play: async ({ canvasElement, step }) => {
-    await step("Link Aria-Label", async ({ args }) => {
+    await step("Link Aria-Label", ({ args }) => {
       const canvas = within(canvasElement);
       const link = canvas.getByRole("link", { name: "External Link" });
       expect(link).toHaveAttribute("href", args.href);

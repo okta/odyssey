@@ -304,7 +304,7 @@ export const MultipleToasts: StoryObj<ToastProps> = {
       },
     },
   },
-  render: function C({}) {
+  render: function C() {
     const [toasts, setToasts] = useState([
       <Toast
         isDismissable

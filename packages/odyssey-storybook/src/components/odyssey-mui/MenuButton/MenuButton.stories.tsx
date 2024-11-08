@@ -257,7 +257,7 @@ export const ButtonVariant: StoryObj<MenuButtonProps> = {
     await step("Filter and Select from listbox", async () => {
       const canvas = within(canvasElement);
       const button = canvas.getByRole("button", { name: "More actions" });
-      expect(button).toHaveAttribute("id", "floating-button");
+      await expect(button).toHaveAttribute("id", "floating-button");
     });
   },
 };
@@ -334,7 +334,7 @@ export const IconButton: StoryObj<MenuButtonProps> = {
     await step("MenuButton Aria-Label", async () => {
       const canvas = within(canvasElement);
       const menuButton = canvas.queryByRole("button", { name: "More actions" });
-      expect(menuButton).not.toBeNull();
+      await expect(menuButton).not.toBeNull();
     });
   },
 };

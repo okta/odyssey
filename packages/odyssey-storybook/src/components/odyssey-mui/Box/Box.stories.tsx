@@ -82,7 +82,7 @@ export const Simple: StoryObj<BoxProps> = {
     id: "container-id",
   },
   play: async ({ canvasElement, step }) => {
-    await step("Box Id", async ({ args }) => {
+    await step("Box Id", ({ args }) => {
       const canvas = within(canvasElement);
       const box = canvas.getByText("This is the content of the box.");
       expect(box).toHaveAttribute("id", args.id);

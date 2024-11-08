@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2023-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -10,16 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import "i18next"
-import { defaultNS, keySeparator, resources } from "../i18n"
+import { useTranslation } from "react-i18next";
 
-declare module "i18next" {
+export const useOdysseyTranslate = () => {
+  const { t } = useTranslation()
 
-  interface CustomTypeOptions {
-    defaultNS: typeof defaultNS
-    keySeparator: typeof keySeparator
-    resources: {
-      odyssey: (typeof resources)["en"];
-    }
-  }
+  const blah = t("table.rowexpansion.collapse")
+      // ^?
+  return blah
 }

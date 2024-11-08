@@ -49,7 +49,7 @@ export const Indeterminate: StoryObj<CircularProgressProps> = {
     ariaLabel: "progress",
   },
   play: async ({ canvasElement, step }) => {
-    await step("Circular Aria-Label", async () => {
+    await step("Circular Aria-Label", () => {
       const canvas = within(canvasElement);
       const circular = canvas.getByLabelText("progress");
       expect(circular).toHaveAttribute("role", "progressbar");

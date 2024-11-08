@@ -198,7 +198,7 @@ type AutocompleteType = typeof Autocomplete<StationType, boolean, boolean>;
 export const Default: StoryObj<AutocompleteType> = {
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
-    const comboBoxElement = canvas.getByRole("combobox") as HTMLInputElement;
+    const comboBoxElement = canvas.getByRole<HTMLInputElement>("combobox");
     await step("Filter and Select from listbox", async () => {
       await userEvent.click(comboBoxElement);
       const listboxElement = screen.getByRole("listbox");
@@ -296,7 +296,7 @@ export const IsCustomValueAllowed: StoryObj<AutocompleteType> = {
   play: async ({ canvasElement, step }) => {
     await step("Enter custom value", async () => {
       const canvas = within(canvasElement);
-      const comboBoxElement = canvas.getByRole("combobox") as HTMLInputElement;
+      const comboBoxElement = canvas.getByRole<HTMLInputElement>("combobox");
       await userEvent.click(comboBoxElement);
       await userEvent.type(comboBoxElement, "qwerty");
       await userEvent.tab();
@@ -312,7 +312,7 @@ export const Loading: StoryObj<AutocompleteType> = {
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
-    const comboBoxElement = canvas.getByRole("combobox") as HTMLInputElement;
+    const comboBoxElement = canvas.getByRole<HTMLInputElement>("combobox");
     await step("Click for loading to be visible", async () => {
       await userEvent.click(comboBoxElement);
       const loadingElement = screen.getByText("Loading…");
@@ -327,7 +327,7 @@ export const NoOptions: StoryObj<AutocompleteType> = {
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
-    const comboBoxElement = canvas.getByRole("combobox") as HTMLInputElement;
+    const comboBoxElement = canvas.getByRole<HTMLInputElement>("combobox");
     await step("Click for loading to be visible", async () => {
       await userEvent.click(comboBoxElement);
       const loadingElement = screen.getByText("No options");
@@ -343,7 +343,7 @@ export const Multiple: StoryObj<AutocompleteType> = {
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
-    const comboBoxElement = canvas.getByRole("combobox") as HTMLInputElement;
+    const comboBoxElement = canvas.getByRole<HTMLInputElement>("combobox");
     await step("Check for list box to be visible", async () => {
       await userEvent.click(comboBoxElement);
       const listboxElement = screen.getByRole("listbox");

@@ -150,7 +150,7 @@ export const Expanded: StoryObj<AccordionProps> = {
     );
   },
   play: async ({ canvasElement, step }: PlaywrightProps<AccordionProps>) => {
-    await step("Accordion Expanded", async ({}) => {
+    await step("Accordion Expanded", async () => {
       const canvas = within(canvasElement);
       const accordion = canvas.getByRole("button");
       const accordionContent = canvas.getByRole("region");

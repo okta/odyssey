@@ -219,7 +219,7 @@ export type DataTableProps = {
     search?: string;
     filters?: DataFilter[];
     sort?: MRT_SortingState;
-  }) => MRT_TableOptions<MRT_RowData>["data"];
+  }) => MRT_TableOptions<MRT_RowData>["data"] | Promise<MRT_TableOptions<MRT_RowData>["data"]>;
   /**
    * Callback that fires when the user reorders rows within the table. Can be used
    * to propogate order change to the backend.
@@ -325,7 +325,7 @@ const DataTable = ({
 
   const initialColumnVisibility = useMemo(() => {
     return columns.reduce((acc, column) => {
-      acc[column.accessorKey as string] = true;
+      acc[column.accessorKey] = true;
       return acc;
     }, {} as MRT_VisibilityState);
   }, [columns]);
@@ -429,7 +429,7 @@ const DataTable = ({
   const rowVirtualizerInstanceRef =
     useRef<MRT_RowVirtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
 
-  const setHoveredRow = (table: TableType, id: MRT_RowData["id"]) => {
+  const setHoveredRow = (table: TableType, id: MRT_Row<MRT_RowData>["id"]) => {
     if (id) {
       const nextRow: MRT_RowData = table.getRow(id);
 
@@ -499,12 +499,14 @@ const DataTable = ({
 
           if (isArrowDown || isArrowUp) {
             const nextIndex = isArrowDown ? index + 1 : index - 1;
-            setHoveredRow(table, data[nextIndex]?.id);
+            // This is a legacy file. In general, we shouldn't have `as` here. Newer versions will have this fixed. --Kevin Ghadyani
+            setHoveredRow(table, (data as { id: string }[])[nextIndex]?.id);
           }
         } else {
           if (isArrowDown || isArrowUp) {
             const nextIndex = isArrowDown ? row.index + 1 : row.index - 1;
-            setHoveredRow(table, data[nextIndex]?.id);
+            // This is a legacy file. In general, we shouldn't have `as` here. Newer versions will have this fixed. --Kevin Ghadyani
+            setHoveredRow(table, (data as { id: string }[])[nextIndex]?.id);
           }
         }
       } else {
@@ -529,10 +531,11 @@ const DataTable = ({
       cols[0].toggleVisibility();
 
       const { draggingRow, hoveredRow } = table.getState();
+
       if (draggingRow) {
         updateRowOrder({
           rowId: draggingRow.id,
-          newIndex: (hoveredRow as MRT_RowData).index,
+          newIndex: hoveredRow?.index || 0,
         });
       }
 
@@ -787,12 +790,12 @@ const DataTable = ({
                   <MenuItem
                     key={column.accessorKey}
                     onClick={() =>
-                      handleColumnVisibility(column.accessorKey as string)
+                      handleColumnVisibility(column.accessorKey)
                     }
                   >
                     <MuiCheckbox
                       checked={
-                        columnVisibility[column.accessorKey as string] !== false
+                        columnVisibility[column.accessorKey] !== false
                       }
                     />
                     {column.header}
@@ -827,7 +830,7 @@ const DataTable = ({
                 .filter((column) => column.enableColumnFilter !== false)
                 .map((column) => {
                   return {
-                    id: column.accessorKey as string,
+                    id: column.accessorKey,
                     label: column.header,
                     variant: column.filterVariant ?? "text",
                     options: column.filterSelectOptions,

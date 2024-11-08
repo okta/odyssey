@@ -177,7 +177,7 @@ export const StatusWrapper: StoryObj<TooltipProps> = {
 };
 
 export const Placement: StoryObj<TooltipProps> = {
-  render: function C({}) {
+  render: function C() {
     return (
       <>
         <Tooltip text="Top" placement="top" ariaType="label">

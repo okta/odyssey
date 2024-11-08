@@ -123,7 +123,7 @@ export const Default: StoryObj<typeof Radio> = {
   play: async ({ canvasElement, step }) => {
     await step("select the radio button", async ({ args }) => {
       const canvas = within(canvasElement);
-      const radio = canvas.getByRole("radio") as HTMLInputElement;
+      const radio = canvas.getByRole("radio");
       if (radio) {
         await userEvent.click(radio);
       }

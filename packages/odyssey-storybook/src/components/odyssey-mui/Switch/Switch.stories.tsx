@@ -102,7 +102,7 @@ export const Default: StoryObj<typeof Switch> = {
   play: async ({ canvasElement, step }) => {
     await step("select the switch button", async () => {
       const canvas = within(canvasElement);
-      const switchCheckbox = canvas.getByRole("checkbox") as HTMLInputElement;
+      const switchCheckbox = canvas.getByRole("checkbox");
       if (switchCheckbox) {
         await userEvent.click(switchCheckbox);
       }

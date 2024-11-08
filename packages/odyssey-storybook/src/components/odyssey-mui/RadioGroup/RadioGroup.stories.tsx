@@ -205,8 +205,8 @@ export const ControlledRadioGroup: StoryObj<typeof RadioGroup> = {
   play: async ({ canvasElement, step }) => {
     await step("select uncontrolled radio button", async () => {
       const canvas = within(canvasElement);
-      const radiogroup = canvas.getByRole("radiogroup") as HTMLInputElement;
-      const radio = canvas.getByLabelText("Warp Speed") as HTMLInputElement;
+      const radiogroup = canvas.getByRole("radiogroup");
+      const radio = canvas.getByLabelText("Warp Speed");
       if (radiogroup && radio) {
         await userEvent.click(radio);
       }
