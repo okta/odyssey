@@ -62,14 +62,38 @@ const StyledCollapsibleContent = styled("div", {
     position: "relative",
     display: "inline-grid",
     gridTemplateColumns: DEFAULT_SIDE_NAV_WIDTH,
-    gridTemplateRows: "max-content 1fr max-content",
+    // gridTemplateRows: "max-content 1fr max-content",
     height: "100%",
-    transition: `grid-template-columns ${odysseyDesignTokens.TransitionDurationMain}, opacity 500ms`,
+    transition: `grid-template-columns ${odysseyDesignTokens.TransitionDurationMain}, opacity 300ms`,
     transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
     overflow: "hidden",
 
     ...(isSideNavCollapsed && {
       gridTemplateColumns: 0,
+      opacity: 0,
+    }),
+  }),
+);
+
+const StyledOpacityTransitionContainer = styled("div", {
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "isSideNavCollapsed",
+})(
+  ({
+    odysseyDesignTokens,
+    isSideNavCollapsed,
+  }: {
+    odysseyDesignTokens: DesignTokens;
+    isSideNavCollapsed: boolean;
+  }) => ({
+    display: "inline-grid",
+    gridTemplateRows: "max-content 1fr max-content",
+    height: "100%",
+    transition: `opacity 50ms`,
+    transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
+    overflow: "hidden",
+
+    ...(isSideNavCollapsed && {
       opacity: 0,
     }),
   }),
@@ -526,126 +550,131 @@ const SideNav = ({
           isSideNavCollapsed={isSideNavCollapsed}
           odysseyDesignTokens={odysseyDesignTokens}
         >
-          <SideNavHeaderContainer
+          <StyledOpacityTransitionContainer
+            isSideNavCollapsed={isSideNavCollapsed}
             odysseyDesignTokens={odysseyDesignTokens}
-            hasContentScrolled={hasContentScrolled}
           >
-            <SideNavHeader
-              appName={appName}
-              isLoading={isLoading}
-              logoProps={logoProps}
-            />
-          </SideNavHeaderContainer>
-          <SideNavScrollableContainer
-            odysseyDesignTokens={odysseyDesignTokens}
-            data-se="scrollable-region"
-          >
-            <SideNavListContainer role="none" ref={scrollableContentRef}>
-              {isLoading
-                ? [...Array(6)].map((_, index) => <LoadingItem key={index} />)
-                : processedSideNavItems?.map((item) => {
-                    const {
-                      id,
-                      label,
-                      isSectionHeader,
-                      startIcon,
-                      childNavItems,
-                      isSortable,
-                      isDefaultExpanded,
-                      isDisabled,
-                      isExpanded,
-                    } = item;
+            <SideNavHeaderContainer
+              odysseyDesignTokens={odysseyDesignTokens}
+              hasContentScrolled={hasContentScrolled}
+            >
+              <SideNavHeader
+                appName={appName}
+                isLoading={isLoading}
+                logoProps={logoProps}
+              />
+            </SideNavHeaderContainer>
+            <SideNavScrollableContainer
+              odysseyDesignTokens={odysseyDesignTokens}
+              data-se="scrollable-region"
+            >
+              <SideNavListContainer role="none" ref={scrollableContentRef}>
+                {isLoading
+                  ? [...Array(6)].map((_, index) => <LoadingItem key={index} />)
+                  : processedSideNavItems?.map((item) => {
+                      const {
+                        id,
+                        label,
+                        isSectionHeader,
+                        startIcon,
+                        childNavItems,
+                        isSortable,
+                        isDefaultExpanded,
+                        isDisabled,
+                        isExpanded,
+                      } = item;
 
-                    if (isSectionHeader) {
-                      return (
-                        <SectionHeaderContainer
-                          id={id}
-                          key={id}
-                          odysseyDesignTokens={odysseyDesignTokens}
-                        >
-                          <SectionHeader
+                      if (isSectionHeader) {
+                        return (
+                          <SectionHeaderContainer
+                            id={id}
+                            key={id}
                             odysseyDesignTokens={odysseyDesignTokens}
                           >
-                            {label}
-                          </SectionHeader>
-                        </SectionHeaderContainer>
-                      );
-                    } else if (childNavItems) {
-                      return (
-                        <StyledSideNavListItem
-                          id={id}
-                          key={id}
-                          odysseyDesignTokens={odysseyDesignTokens}
-                          disabled={isDisabled}
-                          aria-disabled={isDisabled}
-                        >
-                          <NavAccordion
-                            label={label}
-                            isCompact={isCompact}
-                            isDefaultExpanded={isDefaultExpanded}
-                            isExpanded={isExpanded}
-                            startIcon={startIcon}
-                            isDisabled={isDisabled}
+                            <SectionHeader
+                              odysseyDesignTokens={odysseyDesignTokens}
+                            >
+                              {label}
+                            </SectionHeader>
+                          </SectionHeaderContainer>
+                        );
+                      } else if (childNavItems) {
+                        return (
+                          <StyledSideNavListItem
+                            id={id}
+                            key={id}
+                            odysseyDesignTokens={odysseyDesignTokens}
+                            disabled={isDisabled}
+                            aria-disabled={isDisabled}
                           >
-                            <SideNavListContainer role="none">
-                              {isSortable ? (
-                                <SortableList
-                                  parentId={item.id}
-                                  items={childNavItems}
-                                  onChange={setSortedItems}
-                                  renderItem={(sortableItem) => (
-                                    <SortableList.Item
-                                      id={sortableItem.id}
-                                      isDisabled={sortableItem.isDisabled}
-                                      isSelected={sortableItem.isSelected}
-                                    >
-                                      {sortableItem.navItem}
-                                    </SortableList.Item>
-                                  )}
-                                />
-                              ) : (
-                                childNavItems.map((item) => item.navItem)
-                              )}
-                            </SideNavListContainer>
-                          </NavAccordion>
-                        </StyledSideNavListItem>
-                      );
-                    } else {
-                      return (
-                        <SideNavItemContentContext.Provider
-                          key={item.id}
-                          value={sideNavItemContentProviderValue}
-                        >
-                          <SideNavItemContent
-                            {...item}
+                            <NavAccordion
+                              label={label}
+                              isCompact={isCompact}
+                              isDefaultExpanded={isDefaultExpanded}
+                              isExpanded={isExpanded}
+                              startIcon={startIcon}
+                              isDisabled={isDisabled}
+                            >
+                              <SideNavListContainer role="none">
+                                {isSortable ? (
+                                  <SortableList
+                                    parentId={item.id}
+                                    items={childNavItems}
+                                    onChange={setSortedItems}
+                                    renderItem={(sortableItem) => (
+                                      <SortableList.Item
+                                        id={sortableItem.id}
+                                        isDisabled={sortableItem.isDisabled}
+                                        isSelected={sortableItem.isSelected}
+                                      >
+                                        {sortableItem.navItem}
+                                      </SortableList.Item>
+                                    )}
+                                  />
+                                ) : (
+                                  childNavItems.map((item) => item.navItem)
+                                )}
+                              </SideNavListContainer>
+                            </NavAccordion>
+                          </StyledSideNavListItem>
+                        );
+                      } else {
+                        return (
+                          <SideNavItemContentContext.Provider
                             key={item.id}
-                            scrollRef={getRefIfThisIsFirstNodeWithIsSelected(
-                              item.id,
-                            )}
-                            onItemSelected={setSelectedItem}
-                          />
-                        </SideNavItemContentContext.Provider>
-                      );
-                    }
-                  })}
-            </SideNavListContainer>
-          </SideNavScrollableContainer>
-          {!isLoading && (footerItems || hasCustomFooter) && (
-            <SideNavFooter
-              odysseyDesignTokens={odysseyDesignTokens}
-              isContentScrollable={isContentScrollable}
-            >
-              {hasCustomFooter
-                ? footerComponent
-                : footerItems && (
-                    <SideNavFooterItemsContainer
-                      odysseyDesignTokens={odysseyDesignTokens}
-                    >
-                      <SideNavFooterContent footerItems={footerItems} />
-                    </SideNavFooterItemsContainer>
-                  )}
-            </SideNavFooter>
-          )}
+                            value={sideNavItemContentProviderValue}
+                          >
+                            <SideNavItemContent
+                              {...item}
+                              key={item.id}
+                              scrollRef={getRefIfThisIsFirstNodeWithIsSelected(
+                                item.id,
+                              )}
+                              onItemSelected={setSelectedItem}
+                            />
+                          </SideNavItemContentContext.Provider>
+                        );
+                      }
+                    })}
+              </SideNavListContainer>
+            </SideNavScrollableContainer>
+            {!isLoading && (footerItems || hasCustomFooter) && (
+              <SideNavFooter
+                odysseyDesignTokens={odysseyDesignTokens}
+                isContentScrollable={isContentScrollable}
+              >
+                {hasCustomFooter
+                  ? footerComponent
+                  : footerItems && (
+                      <SideNavFooterItemsContainer
+                        odysseyDesignTokens={odysseyDesignTokens}
+                      >
+                        <SideNavFooterContent footerItems={footerItems} />
+                      </SideNavFooterItemsContainer>
+                    )}
+              </SideNavFooter>
+            )}
+          </StyledOpacityTransitionContainer>
         </StyledCollapsibleContent>
       </OdysseyThemeProvider>
     </StyledSideNav>
