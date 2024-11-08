@@ -97,7 +97,7 @@ const ImageContainer = styled("div", {
   display: "flex",
   alignItems: "flex-start",
   maxHeight: APP_TILE_IMAGE_HEIGHT,
-  marginBlockEnd: odysseyDesignTokens.Spacing5,
+  marginBlockEnd: odysseyDesignTokens.Spacing3,
 
   ["img"]: {
     height: APP_TILE_IMAGE_HEIGHT,
@@ -129,6 +129,7 @@ const ContentContainer = styled("div", {
   ({ odysseyDesignTokens, hasTopSection }) => ({
     alignItems: "flex-start",
     paddingBlockStart: hasTopSection ? odysseyDesignTokens.Spacing4 : 0,
+    height: "100%",
   }),
 );
 
@@ -136,7 +137,7 @@ const ChildrenContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   ["&:not(:first-child)"]: {
-    marginBlockStart: odysseyDesignTokens.Spacing3,
+    marginBlockStart: odysseyDesignTokens.Spacing4,
   },
 }));
 
@@ -210,6 +211,8 @@ const StyledMuiCard = styled(MuiCard, {
   position: "relative",
   boxShadow: "none",
   overflow: "unset",
+  display: "flex",
+  padding: odysseyDesignTokens.Spacing4,
 
   "&::after": {
     position: "absolute",
@@ -230,6 +233,13 @@ const StyledMuiCard = styled(MuiCard, {
       opacity: 1,
     },
   },
+}));
+
+const StyledMuiCardActionArea = styled(MuiCardActionArea, {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
+  margin: `-${odysseyDesignTokens.Spacing4}`,
+  padding: odysseyDesignTokens.Spacing4,
 }));
 
 const AppTile = ({
@@ -318,7 +328,12 @@ const AppTile = ({
         </ActionContainer>
       )}
 
-      <MuiCardActionArea onClick={onClick}>{tileContent}</MuiCardActionArea>
+      <StyledMuiCardActionArea
+        odysseyDesignTokens={odysseyDesignTokens}
+        onClick={onClick}
+      >
+        {tileContent}
+      </StyledMuiCardActionArea>
     </StyledMuiCard>
   );
 };

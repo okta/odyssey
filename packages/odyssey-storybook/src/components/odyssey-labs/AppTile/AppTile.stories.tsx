@@ -195,6 +195,47 @@ export const Default: StoryObj<AppTileProps> = {
   },
 };
 
+export const Multiple: StoryObj<AppTileProps> = {
+  render: function C() {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          width: "800px",
+          gap: "20px",
+
+          ["& > *"]: {
+            width: "100%",
+          },
+        }}
+      >
+        <AppTile
+          title="App name"
+          image={<img src="https://placehold.co/128" alt="Example logo" />}
+          onClick={() => {}}
+        />
+        <AppTile
+          title="App name"
+          description="Lorem ipsum dolor sit amet."
+          image={<img src="https://placehold.co/128" alt="Example logo" />}
+          isLoading
+          onClick={() => {}}
+        />
+        <AppTile
+          title="App name"
+          description=" 
+
+
+ 
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac lectus vel dui ullamcorper commodo at vitae lectus. Proin porta urna vitae quam hendrerit pellentesque. Nam nec neque a sapien pharetra commodo. Curabitur ut lacinia dolor. Sed pulvinar nibh nec rutrum interdum. Duis velit nunc, fringilla ut eleifend lacinia, porta at neque. Nulla quis magna sollicitudin, feugiat tellus vitae, tristique magna. Pellentesque pretium leo vitae odio aliquet, eu placerat orci luctus. Nunc sagittis leo nec nulla rhoncus, ut tempus libero maximus."
+          onClick={() => {}}
+        />
+      </Box>
+    );
+  },
+};
+
 export const ActionButton: StoryObj<AppTileProps> = {
   args: {
     actionAriaControls: "",
