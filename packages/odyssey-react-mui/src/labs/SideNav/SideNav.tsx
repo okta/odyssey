@@ -61,14 +61,17 @@ const StyledCollapsibleContent = styled("div", {
   }) => ({
     position: "relative",
     display: "inline-grid",
-    gridTemplateColumns: isSideNavCollapsed ? 0 : DEFAULT_SIDE_NAV_WIDTH,
+    gridTemplateColumns: DEFAULT_SIDE_NAV_WIDTH,
     gridTemplateRows: "max-content 1fr max-content",
-    minWidth: isSideNavCollapsed ? 0 : DEFAULT_SIDE_NAV_WIDTH,
     height: "100%",
-    transition: `grid-template-columns ${odysseyDesignTokens.TransitionDurationMain}, opacity 300ms`,
+    transition: `grid-template-columns ${odysseyDesignTokens.TransitionDurationMain}, opacity 500ms`,
     transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
     overflow: "hidden",
-    opacity: isSideNavCollapsed ? 0 : 1,
+
+    ...(isSideNavCollapsed && {
+      gridTemplateColumns: 0,
+      opacity: 0,
+    }),
   }),
 );
 
