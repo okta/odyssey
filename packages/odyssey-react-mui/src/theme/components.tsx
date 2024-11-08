@@ -847,8 +847,8 @@ export const components = ({
           transition: `all ${odysseyTokens.TransitionDurationMain} ${odysseyTokens.TransitionTimingMain}`,
 
           "&.ods-card-compact": {
-            marginBlockEnd: odysseyTokens.Spacing3,
-            padding: odysseyTokens.Spacing3,
+            marginBlockEnd: odysseyTokens.Spacing2,
+            padding: odysseyTokens.Spacing4,
           },
 
           "& img": {
