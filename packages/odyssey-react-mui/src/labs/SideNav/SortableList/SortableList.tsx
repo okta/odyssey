@@ -20,7 +20,7 @@ import {
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
-import type { Active, UniqueIdentifier } from "@dnd-kit/core";
+import type { Active, Announcements, UniqueIdentifier } from "@dnd-kit/core";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import {
   SortableContext,
@@ -29,6 +29,7 @@ import {
 
 import { SortableItem } from "./SortableItem";
 import { SortableOverlay } from "./SortableOverlay";
+import { useTranslation } from "react-i18next";
 
 export interface BaseItem {
   id: UniqueIdentifier;
@@ -62,8 +63,34 @@ export const SortableList = <T extends BaseItem>({
     }),
   );
 
+  const { t } = useTranslation();
+  const announcements: Announcements = useMemo(
+    () => ({
+      onDragStart: ({ active }) => {
+        return `${t("sortable.list.drag.start", { activeId: active.id })}`;
+      },
+      onDragOver: ({ active, over }) => {
+        if (over) {
+          return `${t("sortable.list.drag.moved.over", { activeId: active.id, overId: over.id })}`;
+        }
+        return `${t("sortable.list.drag.nolonger.over", { activeId: active.id })}`;
+      },
+      onDragEnd: ({ active, over }) => {
+        if (over) {
+          return `${t("sortable.list.drag.end.dropped.over", { activeId: active.id, overId: over.id })}`;
+        }
+        return `${t("sortable.list.drag.end.dropped", { activeId: active.id })}`;
+      },
+      onDragCancel: ({ active }) => {
+        return `${t("sortable.list.drag.cancel", { activeId: active.id })}`;
+      },
+    }),
+    [t],
+  );
+
   return (
     <DndContext
+      accessibility={{ announcements: announcements }}
       sensors={sensors}
       onDragStart={({ active }) => {
         setActive(active);

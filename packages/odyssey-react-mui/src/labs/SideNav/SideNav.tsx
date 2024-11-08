@@ -537,7 +537,7 @@ const SideNav = ({
             odysseyDesignTokens={odysseyDesignTokens}
             data-se="scrollable-region"
           >
-            <SideNavListContainer role="list" ref={scrollableContentRef}>
+            <SideNavListContainer role="none" ref={scrollableContentRef}>
               {isLoading
                 ? [...Array(6)].map((_, index) => <LoadingItem key={index} />)
                 : processedSideNavItems?.map((item) => {
@@ -584,7 +584,7 @@ const SideNav = ({
                             startIcon={startIcon}
                             isDisabled={isDisabled}
                           >
-                            <SideNavListContainer id={`${id}-list`} role="list">
+                            <SideNavListContainer role="none">
                               {isSortable ? (
                                 <SortableList
                                   parentId={item.id}
