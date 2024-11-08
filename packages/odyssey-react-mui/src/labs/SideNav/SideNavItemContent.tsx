@@ -42,11 +42,9 @@ export const StyledSideNavListItem = styled("li", {
 }>(({ odysseyDesignTokens, isSelected }) => ({
   display: "flex",
   alignItems: "center",
-  marginBlockEnd: "1px",
   backgroundColor: "unset",
   borderRadius: odysseyDesignTokens.BorderRadiusMain,
   transition: `backgroundColor ${odysseyDesignTokens.TransitionDurationMain}, color ${odysseyDesignTokens.TransitionDurationMain}`,
-  marginBlock: "2px",
 
   ...(isSelected && {
     color: `${odysseyDesignTokens.TypographyColorAction} !important`,
@@ -101,7 +99,7 @@ export const getBaseNavItemContentStyles = ({
       }),
 
       ...(isDisabled && {
-        backgroundColor: odysseyDesignTokens.HueNeutralWhite,
+        backgroundColor: "unset",
       }),
     },
 
@@ -111,6 +109,7 @@ export const getBaseNavItemContentStyles = ({
   }),
 
   ...(isDisabled && {
+    cursor: "default",
     color: `${odysseyDesignTokens.TypographyColorDisabled} !important`,
   }),
 
@@ -298,6 +297,7 @@ const SideNavItemContent = ({
             contextValue={contextValue}
             isDisabled={isDisabled}
             tabIndex={0}
+            role="button"
             onClick={itemClickHandler(id)}
             onKeyDown={(event: KeyboardEvent<HTMLDivElement>) =>
               sideNavItemContentKeyHandler(id, event)

@@ -174,7 +174,7 @@ export type SideNavItem = {
       /**
        * An array of side nav items to be displayed as nestedNavItems within Accordion
        */
-      nestedNavItems?: Array<Omit<SideNavItem, "startIcon" | "endIcon">>;
+      nestedNavItems?: Array<Omit<SideNavItem, "startIcon" | "nestedNavItems">>;
       endIcon?: never;
       href?: never;
       /**

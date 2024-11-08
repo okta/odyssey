@@ -25,6 +25,7 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../../../OdysseyDesignTokensContext";
+import { useTranslation } from "react-i18next";
 
 type ItemProps = {
   id: UniqueIdentifier;
@@ -45,7 +46,7 @@ const SortableItemContext = createContext<Context>({
   ref() {},
 });
 
-const StyledSortableListItem = styled("div", {
+const StyledSortableListItem = styled("li", {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" && prop !== "isSelected",
 })<{
@@ -66,7 +67,7 @@ const StyledSortableListItem = styled("div", {
     },
   },
 
-  "&:has(a:hover, button:hover, a:focus, button:focus, a:focus-visible, button:focus-visible)":
+  "&:has(a:hover, button:hover, a:focus, button:focus, a:focus-visible, button:focus-visible, [role='button']:hover, [role='button']:focus, [role='button']:focus-visible)":
     {
       button: {
         opacity: 1,
@@ -82,6 +83,12 @@ const StyledSortableListItem = styled("div", {
     },
   }),
 }));
+
+const StyledUl = styled("ul")({
+  padding: 0,
+  listStyle: "none",
+  listStyleType: "none",
+});
 
 const StyledDragHandleButton = styled("button", {
   shouldForwardProp: (prop) =>
@@ -119,6 +126,7 @@ type DragHandleProps = {
 export const DragHandle = ({ isDragging }: DragHandleProps) => {
   const { attributes, listeners, ref } = useContext(SortableItemContext);
   const odysseyDesignTokens: DesignTokens = useOdysseyDesignTokens();
+  const { t } = useTranslation();
 
   return (
     <StyledDragHandleButton
@@ -127,6 +135,7 @@ export const DragHandle = ({ isDragging }: DragHandleProps) => {
       odysseyDesignTokens={odysseyDesignTokens}
       isDragging={isDragging}
       ref={ref}
+      aria-label={t("navigation.drag.handle")}
     >
       <svg
         width="16"
@@ -186,7 +195,7 @@ export const SortableItem = ({
         isSelected={isSelected}
       >
         {!isDisabled && <DragHandle isDragging={isDragging} />}
-        {children}
+        <StyledUl>{children}</StyledUl>
       </StyledSortableListItem>
     </SortableItemContext.Provider>
   );
