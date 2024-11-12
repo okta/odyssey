@@ -145,14 +145,6 @@ const NavItemContentContainer = styled("div", {
     prop !== "isSelected",
 })(GetNavItemContentStyles);
 
-const NavItemContentButton = styled("button", {
-  shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" &&
-    prop != "contextValue" &&
-    prop !== "isDisabled" &&
-    prop !== "isSelected",
-})(GetNavItemContentStyles);
-
 const NavItemLinkContainer = styled(NavItemLink, {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" &&
@@ -216,7 +208,7 @@ const SideNavItemContent = ({
   );
 
   const sideNavItemContentKeyHandler = useCallback(
-    (event: KeyboardEvent<HTMLButtonElement>) => {
+    (event: KeyboardEvent<HTMLDivElement>) => {
       if (event?.key === "Enter") {
         event.preventDefault();
         onClick?.();
@@ -255,7 +247,7 @@ const SideNavItemContent = ({
             />
           </NavItemContentContainer>
         ) : !href ? (
-          <NavItemContentButton
+          <NavItemContentContainer
             odysseyDesignTokens={odysseyDesignTokens}
             contextValue={contextValue}
             isDisabled={isDisabled}
@@ -271,7 +263,7 @@ const SideNavItemContent = ({
               statusLabel={statusLabel}
               severity={severity}
             />
-          </NavItemContentButton>
+          </NavItemContentContainer>
         ) : (
           <NavItemLinkContainer
             odysseyDesignTokens={odysseyDesignTokens}
