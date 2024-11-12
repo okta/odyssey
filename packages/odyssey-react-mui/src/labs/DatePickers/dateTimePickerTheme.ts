@@ -80,7 +80,6 @@ const theme: ThemeOptions = {
       styleOverrides: {
         contentWrapper: ({ theme }) => ({
           padding: theme.spacing(3),
-          paddingBlockStart: 0,
           gridTemplateColumns: "1fr 16px auto",
         }),
       },
