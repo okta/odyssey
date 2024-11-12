@@ -438,7 +438,7 @@ const SideNav = ({
           delete item.isSelected;
         }
 
-        item.nestedNavItems
+        return item.nestedNavItems
           ? {
               ...item,
               nestedNavItems: item.nestedNavItems.map((childItem) => {
@@ -451,7 +451,6 @@ const SideNav = ({
               }),
             }
           : item;
-        return item;
       });
       updateSideNavItemsList(updatedSideNavItems);
     },
