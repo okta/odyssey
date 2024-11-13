@@ -469,7 +469,7 @@ const DataFilters = ({
             return (
               <MuiMenuItem
                 key={filter.id}
-                aria-controls="filter-form"
+                aria-controls={isFilterPopoverOpen ? "filter-form" : undefined}
                 onClick={(event) => {
                   setIsFilterPopoverOpen(true);
                   setFilterPopoverAnchorElement(event.currentTarget);
