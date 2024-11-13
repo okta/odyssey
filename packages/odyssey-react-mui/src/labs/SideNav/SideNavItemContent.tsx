@@ -254,6 +254,7 @@ const SideNavItemContent = ({
             tabIndex={0}
             onClick={onClick}
             onKeyDown={sideNavItemContentKeyHandler}
+            role="button"
           >
             <SideNavItemLinkContent
               count={count}
