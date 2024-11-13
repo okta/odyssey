@@ -101,12 +101,12 @@ describe("SideNav", () => {
 
     expect(screen.getByText(menuItemText)).toBeVisible();
 
-    const collapseButton = screen.getByLabelText("Collapse side navigation");
+    const collapseButton = screen.getByLabelText("Close navigation");
     fireEvent.click(collapseButton);
 
     expect(screen.getByText(menuItemText)).not.toBeVisible;
 
-    const expandButton = screen.getByLabelText("Expand side navigation");
+    const expandButton = screen.getByLabelText("Open navigation");
     fireEvent.click(expandButton);
 
     expect(screen.getByText(menuItemText)).toBeVisible();
@@ -133,7 +133,7 @@ describe("SideNav", () => {
       </OdysseyProvider>,
     );
 
-    const collapseButton = screen.getByLabelText("Collapse side navigation");
+    const collapseButton = screen.getByLabelText("Close navigation");
     fireEvent.click(collapseButton);
 
     expect(mockOnCollapse).toBeCalled();
@@ -160,10 +160,10 @@ describe("SideNav", () => {
       </OdysseyProvider>,
     );
 
-    const collapseButton = screen.getByLabelText("Collapse side navigation");
+    const collapseButton = screen.getByLabelText("Close navigation");
     fireEvent.click(collapseButton);
 
-    const expandButton = screen.getByLabelText("Expand side navigation");
+    const expandButton = screen.getByLabelText("Open navigation");
     fireEvent.click(expandButton);
 
     expect(mockOnExpand).toBeCalled();
@@ -286,7 +286,7 @@ describe("SideNav", () => {
       </OdysseyProvider>,
     );
 
-    expect(screen.getByRole("menuitem", { name: menuLinkText })).toBeVisible();
+    expect(screen.getByRole("link", { name: menuLinkText })).toBeVisible();
     expect(
       screen.getByRole("button", { name: menuClickableText }),
     ).toBeVisible();
@@ -318,6 +318,6 @@ describe("SideNav", () => {
       </OdysseyProvider>,
     );
 
-    expect(screen.getByRole("menuitem")).toHaveTextContent(`${badgeCount}`);
+    expect(screen.getByRole("listitem")).toHaveTextContent(`${badgeCount}`);
   });
 });
