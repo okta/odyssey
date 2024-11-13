@@ -115,6 +115,10 @@ const storybookMeta: Meta<SideNavProps> = {
     onExpand: {
       description: "Callback to be triggered when the side nav is expanded",
     },
+    onSort: {
+      description:
+        "Callback to be triggered when a nested side nav item inside is reordered. Returns the new items list",
+    },
     sideNavItems: {
       description: "",
       table: {
@@ -130,90 +134,90 @@ const storybookMeta: Meta<SideNavProps> = {
     isCompact: false,
     sideNavItems: [
       {
-        id: "AddNewFolder",
+        id: "item1",
         label: "Add new folder",
         endIcon: <AddCircleIcon />,
         onClick: () => {},
       },
       {
-        id: "item0-0",
+        id: "item2",
         label: "Admin",
         isSectionHeader: true,
       },
       {
-        id: "item0-1",
+        id: "item3",
         href: "/?path=/docs/mui-components-typography--docs",
         label: "Users",
         startIcon: <UserIcon />,
       },
       {
-        id: "item1",
+        id: "item4",
         label: "Dashboard",
         startIcon: <HomeIcon />,
         isDisabled: true,
-        children: [
+        nestedNavItems: [
           {
-            id: "item1-1",
+            id: "item4-1",
             href: "/",
             label: "Home",
           },
         ],
       },
       {
-        id: "item2",
+        id: "item5",
         href: "/",
         label: "Applications",
         startIcon: <AppsIcon />,
       },
       {
-        id: "item001",
+        id: "item6",
         label: "Onboarding",
-        startIcon: <SettingsIcon />,
-        children: [
+        startIcon: <FolderIcon />,
+        nestedNavItems: [
           {
-            id: "item1-2",
+            id: "item6-1",
             href: "/",
             label: "Start",
           },
           {
-            id: "item1-4",
+            id: "item6-2",
             href: "/",
             label: "Tasks",
           },
           {
-            id: "item1-5",
+            id: "item6-3",
             href: "/",
             label: "Getting Started",
           },
         ],
       },
       {
-        id: "item0-1-2",
+        id: "item7",
         href: "/",
         label: "Directory",
         startIcon: <DirectoryIcon />,
       },
       {
-        id: "item0-3",
+        id: "item8",
         label: "Resource Management",
         isSectionHeader: true,
       },
       {
-        id: "item3-2-1",
+        id: "item9",
         href: "/",
         label: "Kubernetes",
         startIcon: <ServerIcon />,
-        severity: "success",
-        statusLabel: "success",
+        severity: "info",
+        statusLabel: "BETA",
       },
       {
-        id: "item5",
+        id: "item10",
         href: "/",
         label: "Reports",
         startIcon: <DownloadIcon />,
       },
       {
-        id: "item3-1-0",
+        id: "item11",
         href: "/",
         label: "Identify Governance",
         target: "_blank",
@@ -221,70 +225,102 @@ const storybookMeta: Meta<SideNavProps> = {
         startIcon: <Fido2Icon />,
       },
       {
-        id: "item3-1-3",
+        id: "item12",
         href: "/",
         label: "Workflows",
         target: "_blank",
         startIcon: <ClockIcon />,
       },
       {
-        id: "item3-0",
+        id: "item13",
         label: "Security Administration",
         isSectionHeader: true,
       },
       {
-        id: "item3",
+        id: "item14",
         href: "/",
         label: "Security",
         startIcon: <LockIcon />,
         endIcon: <LockIcon />,
       },
       {
-        id: "item4",
+        id: "item15",
         label: "Settings",
         isDefaultExpanded: true,
-        children: [
+        isSortable: true,
+        startIcon: <SettingsIcon />,
+        nestedNavItems: [
           {
-            id: "item4-1",
+            id: "item15-1",
             href: "/",
             label: "General",
           },
           {
-            id: "item4-2",
+            id: "item15-2",
             href: "/",
             label: "Custom Domain",
             isSelected: true,
           },
           {
-            id: "item4-3",
-            href: "/",
+            id: "item15-3",
             label: "Account Management",
           },
           {
-            id: "item4-4",
+            id: "item15-4",
             href: "/",
             label: "Authentication Policies",
             isDisabled: true,
           },
           {
-            id: "item4-5",
+            id: "item15-5",
             href: "/",
             label: "IDP Configuration",
           },
         ],
       },
       {
-        id: "item5-0",
+        id: "item16",
         href: "/",
         label: "System Configuration",
         startIcon: <FolderIcon />,
       },
       {
-        id: "item6",
-        href: "/",
+        id: "item17-0",
+        label: "Enduser",
+        isSectionHeader: true,
+      },
+      {
+        id: "item17",
+        label: "My Apps",
+        isDefaultExpanded: true,
+        isSortable: true,
+        startIcon: <HomeIcon />,
+        nestedNavItems: [
+          {
+            id: "item17-1",
+            label: "Recently Used",
+          },
+          {
+            id: "item17-2",
+            label: "Work",
+          },
+          {
+            id: "item17-3",
+            label: "Add section",
+            endIcon: <AddCircleIcon />,
+          },
+        ],
+      },
+      {
+        id: "item18",
         label: "Notifications",
         startIcon: <NotificationIcon />,
         count: 1,
+      },
+      {
+        id: "item19",
+        label: "Add apps",
+        startIcon: <AppsIcon />,
       },
     ],
     footerItems: [

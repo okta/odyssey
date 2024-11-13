@@ -127,7 +127,7 @@ const sharedSideNavProps: UiShellNavComponentProps["sideNavProps"] = {
       label: "Dashboard",
       startIcon: <HomeIcon />,
       isDisabled: true,
-      children: [
+      nestedNavItems: [
         {
           id: "item1-1",
           href: "/",

@@ -2689,6 +2689,66 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@dnd-kit/accessibility@npm:^3.0.0":
+  version: 3.1.0
+  resolution: "@dnd-kit/accessibility@npm:3.1.0"
+  dependencies:
+    tslib: "npm:^2.0.0"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: 10/750a0537877d5dde3753e9ef59d19628b553567e90fc3e3b14a79bded08f47f4a7161bc0d003d7cd6b3bd9e10aa233628dca07d2aa5a2120cac84555ba1653d8
+  languageName: node
+  linkType: hard
+
+"@dnd-kit/core@npm:6.0.3":
+  version: 6.0.3
+  resolution: "@dnd-kit/core@npm:6.0.3"
+  dependencies:
+    "@dnd-kit/accessibility": "npm:^3.0.0"
+    "@dnd-kit/utilities": "npm:^3.2.0"
+    tslib: "npm:^2.0.0"
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: 10/32585e23ec8c2b1d4d4ca55228c64d39def1f2124ee45d6861d8b1ccd50b71bcaebefb277ef7161273f3783b90bc90f7c755c9b97eee37d0d40a632a9b30832b
+  languageName: node
+  linkType: hard
+
+"@dnd-kit/sortable@npm:7.0.0":
+  version: 7.0.0
+  resolution: "@dnd-kit/sortable@npm:7.0.0"
+  dependencies:
+    "@dnd-kit/utilities": "npm:^3.2.0"
+    tslib: "npm:^2.0.0"
+  peerDependencies:
+    "@dnd-kit/core": ^6.0.0
+    react: ">=16.8.0"
+  checksum: 10/01e712d902c63ce6794cfdb774388e4af40d42ee56f7ce5d6d6ffa81b240b1352bc9f1309cf515adfeab48349168183eef70f3e2746fe016d269713c850ed6ac
+  languageName: node
+  linkType: hard
+
+"@dnd-kit/utilities@npm:3.2.0":
+  version: 3.2.0
+  resolution: "@dnd-kit/utilities@npm:3.2.0"
+  dependencies:
+    tslib: "npm:^2.0.0"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: 10/6756055f502f1b7cbd5cfa29e26c6be7589d48fe10aeb81ab46651f11bc84e06169ad35c4e1fcb91c548a626be3fd8e9ec4a0de0d60cad3ccd444827af66502e
+  languageName: node
+  linkType: hard
+
+"@dnd-kit/utilities@npm:^3.2.0":
+  version: 3.2.2
+  resolution: "@dnd-kit/utilities@npm:3.2.2"
+  dependencies:
+    tslib: "npm:^2.0.0"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: 10/6cfe46a5fcdaced943982e7ae66b08b89235493e106eb5bc833737c25905e13375c6ecc3aa0c357d136cb21dae3966213dba063f19b7a60b1235a29a7b05ff84
+  languageName: node
+  linkType: hard
+
 "@emotion/babel-plugin@npm:^11.11.0":
   version: 11.11.0
   resolution: "@emotion/babel-plugin@npm:11.11.0"
@@ -5240,6 +5300,9 @@ __metadata:
   dependencies:
     "@babel/cli": "npm:^7.23.9"
     "@babel/core": "npm:^7.23.9"
+    "@dnd-kit/core": "npm:6.0.3"
+    "@dnd-kit/sortable": "npm:7.0.0"
+    "@dnd-kit/utilities": "npm:3.2.0"
     "@emotion/cache": "npm:^11.11.0"
     "@emotion/react": "npm:^11.11.4"
     "@emotion/styled": "npm:^11.11.0"

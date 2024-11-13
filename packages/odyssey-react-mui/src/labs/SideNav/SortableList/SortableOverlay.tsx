@@ -10,20 +10,25 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createContext, useContext } from "react";
+import type { PropsWithChildren } from "react";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { DragOverlay, defaultDropAnimationSideEffects } from "@dnd-kit/core";
+import type { DropAnimation } from "@dnd-kit/core";
 
-export type SideNavItemContentContextValue = {
-  isCompact?: boolean;
-  isSortable?: boolean;
-  depth: number;
+const dropAnimationConfig: DropAnimation = {
+  sideEffects: defaultDropAnimationSideEffects({
+    styles: {
+      active: {
+        opacity: "0.4",
+      },
+    },
+  }),
 };
 
-export const SideNavItemContentContext =
-  createContext<SideNavItemContentContextValue>({
-    isCompact: false,
-    isSortable: false,
-    depth: 1,
-  });
+interface Props {}
 
-export const useSideNavItemContent = () =>
-  useContext(SideNavItemContentContext);
+export function SortableOverlay({ children }: PropsWithChildren<Props>) {
+  return (
+    <DragOverlay dropAnimation={dropAnimationConfig}>{children}</DragOverlay>
+  );
+}
