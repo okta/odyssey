@@ -42,7 +42,6 @@ export const StyledSideNavListItem = styled("li", {
 }>(({ odysseyDesignTokens, isSelected }) => ({
   display: "flex",
   alignItems: "center",
-  marginBlockEnd: "1px",
   backgroundColor: "unset",
   borderRadius: odysseyDesignTokens.BorderRadiusMain,
   transition: `backgroundColor ${odysseyDesignTokens.TransitionDurationMain}, color ${odysseyDesignTokens.TransitionDurationMain}`,
@@ -51,10 +50,6 @@ export const StyledSideNavListItem = styled("li", {
     color: `${odysseyDesignTokens.TypographyColorAction} !important`,
     backgroundColor: odysseyDesignTokens.HueBlue50,
   }),
-
-  "&:last-child": {
-    marginBlockEnd: odysseyDesignTokens.Spacing2,
-  },
 }));
 
 const scrollToNode = (node: HTMLElement | null) => {
@@ -71,71 +66,76 @@ type ScrollIntoViewHandle = {
   scrollIntoView: () => void;
 };
 
-const GetNavItemContentStyles = ({
+export const getBaseNavItemContentStyles = ({
   odysseyDesignTokens,
-  contextValue,
   isDisabled,
   isSelected,
 }: {
   odysseyDesignTokens: DesignTokens;
-  contextValue: SideNavItemContentContextValue;
   isDisabled?: boolean;
   isSelected?: boolean;
-}) => {
-  return {
-    display: "flex",
-    alignItems: "center",
-    width: "100%",
-    textDecoration: "none",
-    color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
-    minHeight: odysseyDesignTokens.Spacing7,
-    paddingBlock: odysseyDesignTokens.Spacing3,
-    paddingInline: `calc(${odysseyDesignTokens.Spacing4} * ${contextValue.depth})`,
-    borderRadius: odysseyDesignTokens.BorderRadiusMain,
-    transition: `backgroundColor ${odysseyDesignTokens.TransitionDurationMain}, color ${odysseyDesignTokens.TransitionDurationMain}`,
+}) => ({
+  display: "flex",
+  alignItems: "center",
+  width: "100%",
+  textDecoration: "none",
+  color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
+  minHeight: "unset",
+  paddingBlock: odysseyDesignTokens.Spacing3,
+  paddingInlineEnd: odysseyDesignTokens.Spacing4,
+  borderRadius: odysseyDesignTokens.BorderRadiusMain,
+  transition: `backgroundColor ${odysseyDesignTokens.TransitionDurationMain}, color ${odysseyDesignTokens.TransitionDurationMain}`,
+  cursor: "pointer",
 
-    "& + &": {
-      marginTop: 4,
-    },
-    "&:hover": {
+  // `[data-sortable-container='true']:has(button:hover) &` - when the sortable item's drag handle is hovered we want to trigger the same hover behavior as if you were hovering the actual item
+  "&:hover, [data-sortable-container='true']:has(button:hover, button:focus, button:focus-visible) &":
+    {
       textDecoration: "none",
-      cursor: "pointer",
-      backgroundColor: !isDisabled
-        ? odysseyDesignTokens.HueNeutral50
-        : "inherit",
-
-      ...(isDisabled && {
-        color: "inherit",
-        cursor: "default",
-      }),
+      backgroundColor: odysseyDesignTokens.HueNeutral50,
 
       ...(isSelected && {
-        "&:hover": {
-          backgroundColor: odysseyDesignTokens.HueBlue50,
-        },
+        backgroundColor: odysseyDesignTokens.HueBlue50,
+        color: odysseyDesignTokens.TypographyColorAction,
+      }),
+
+      ...(isDisabled && {
+        backgroundColor: "unset",
       }),
     },
 
-    ...(isSelected && {
-      color: `${odysseyDesignTokens.TypographyColorAction} !important`,
-      fontWeight: odysseyDesignTokens.TypographyWeightBodyBold,
-    }),
+  ...(isSelected && {
+    color: `${odysseyDesignTokens.TypographyColorAction}`,
+    fontWeight: odysseyDesignTokens.TypographyWeightBodyBold,
+  }),
 
-    ...(isDisabled && {
-      color: `${odysseyDesignTokens.TypographyColorDisabled} !important`,
-    }),
+  ...(isDisabled && {
+    cursor: "default",
+    color: `${odysseyDesignTokens.TypographyColorDisabled} !important`,
+  }),
 
-    ...(contextValue.isCompact && {
-      paddingBlock: odysseyDesignTokens.Spacing1,
-      minHeight: odysseyDesignTokens.Spacing6,
-    }),
+  "&:focus-visible, &:focus": {
+    outline: "none",
+    boxShadow: `inset 0 0 0 2px ${odysseyDesignTokens.PalettePrimaryMain}`,
+  },
+});
 
-    "&:focus-visible": {
-      outline: "none",
-      boxShadow: `inset 0 0 0 2px ${odysseyDesignTokens.PalettePrimaryMain}`,
-    },
-  };
-};
+export const getNavItemContentStyles = ({
+  odysseyDesignTokens,
+  contextValue,
+}: {
+  odysseyDesignTokens: DesignTokens;
+  contextValue: SideNavItemContentContextValue;
+}) => ({
+  paddingInlineStart: `calc(${odysseyDesignTokens.Spacing4} * ${contextValue.depth} + ${odysseyDesignTokens.Spacing6})`,
+
+  ...(contextValue.depth === 1 && {
+    paddingInlineStart: odysseyDesignTokens.Spacing4,
+  }),
+
+  ...(contextValue.isCompact && {
+    paddingBlock: odysseyDesignTokens.Spacing1,
+  }),
+});
 
 const NavItemContentContainer = styled("div", {
   shouldForwardProp: (prop) =>
@@ -143,15 +143,47 @@ const NavItemContentContainer = styled("div", {
     prop != "contextValue" &&
     prop !== "isDisabled" &&
     prop !== "isSelected",
-})(GetNavItemContentStyles);
+})<{
+  contextValue: SideNavItemContentContextValue;
+  odysseyDesignTokens: DesignTokens;
+  isSelected?: boolean;
+  isDisabled?: boolean;
+}>(({ contextValue, odysseyDesignTokens, isDisabled, isSelected }) => ({
+  ...getBaseNavItemContentStyles({
+    odysseyDesignTokens,
+    isDisabled,
+    isSelected,
+  }),
 
-const NavItemLinkContainer = styled(NavItemLink, {
+  ...getNavItemContentStyles({
+    odysseyDesignTokens,
+    contextValue,
+  }),
+}));
+
+const StyledNavItemLink = styled(NavItemLink, {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" &&
     prop != "contextValue" &&
     prop !== "isDisabled" &&
     prop !== "isSelected",
-})(GetNavItemContentStyles);
+})<{
+  contextValue: SideNavItemContentContextValue;
+  odysseyDesignTokens: DesignTokens;
+  isSelected?: boolean;
+  isDisabled?: boolean;
+}>(({ contextValue, odysseyDesignTokens, isDisabled, isSelected }) => ({
+  ...getBaseNavItemContentStyles({
+    odysseyDesignTokens,
+    isDisabled,
+    isSelected,
+  }),
+
+  ...getNavItemContentStyles({
+    odysseyDesignTokens,
+    contextValue,
+  }),
+}));
 
 const SideNavItemContent = ({
   count,
@@ -164,9 +196,10 @@ const SideNavItemContent = ({
   statusLabel,
   endIcon,
   onClick,
-  isSelected,
   isDisabled,
+  isSelected,
   scrollRef,
+  onItemSelected,
 }: Pick<
   SideNavItem,
   | "count"
@@ -179,13 +212,14 @@ const SideNavItemContent = ({
   | "statusLabel"
   | "endIcon"
   | "onClick"
-  | "isSelected"
   | "isDisabled"
+  | "isSelected"
 > & {
   /**
    * The ref used to scroll to this item
    */
   scrollRef?: React.RefObject<ScrollIntoViewHandle>;
+  onItemSelected?(selectedItemId: string): void;
 }) => {
   const sidenavItemContentContext = useSideNavItemContent();
   const contextValue = useMemo(
@@ -207,14 +241,25 @@ const SideNavItemContent = ({
     [],
   );
 
+  const itemClickHandler = useCallback(
+    (id: string) => {
+      return () => {
+        onItemSelected?.(id);
+        onClick?.();
+      };
+    },
+    [onClick, onItemSelected],
+  );
+
   const sideNavItemContentKeyHandler = useCallback(
-    (event: KeyboardEvent<HTMLDivElement>) => {
+    (id: string, event: KeyboardEvent<HTMLDivElement>) => {
       if (event?.key === "Enter") {
         event.preventDefault();
+        onItemSelected?.(id);
         onClick?.();
       }
     },
-    [onClick],
+    [onClick, onItemSelected],
   );
 
   return (
@@ -252,8 +297,12 @@ const SideNavItemContent = ({
             contextValue={contextValue}
             isDisabled={isDisabled}
             tabIndex={0}
-            onClick={onClick}
-            onKeyDown={sideNavItemContentKeyHandler}
+            role="button"
+            onClick={itemClickHandler(id)}
+            onKeyDown={(event: KeyboardEvent<HTMLDivElement>) =>
+              sideNavItemContentKeyHandler(id, event)
+            }
+            isSelected={isSelected}
           >
             <SideNavItemLinkContent
               count={count}
@@ -265,14 +314,14 @@ const SideNavItemContent = ({
             />
           </NavItemContentContainer>
         ) : (
-          <NavItemLinkContainer
+          <StyledNavItemLink
             odysseyDesignTokens={odysseyDesignTokens}
             contextValue={contextValue}
             isDisabled={isDisabled}
             isSelected={isSelected}
             href={href}
             target={target}
-            onClick={onClick}
+            onClick={itemClickHandler(id)}
           >
             <SideNavItemLinkContent
               count={count}
@@ -287,12 +336,13 @@ const SideNavItemContent = ({
                 <ExternalLinkIcon />
               </span>
             )}
-          </NavItemLinkContainer>
+          </StyledNavItemLink>
         )
       }
     </StyledSideNavListItem>
   );
 };
+
 const MemoizedSideNavItemContent = memo(SideNavItemContent);
 MemoizedSideNavItemContent.displayName = "SideNavItemContent";
 
