@@ -1069,3 +1069,79 @@ export const CompactCards: StoryObj<DataViewMetaProps> = {
     );
   },
 };
+
+export const GrowColumnWithoutActions: StoryObj<DataViewMetaProps> = {
+  render: function C() {
+    const [data, setData] = useState<Person[]>(personData);
+    const { getData } = useDataCallbacks(data, setData);
+
+    const columns: DataColumns = [
+      {
+        accessorKey: "order",
+        header: "ID",
+        enableColumnFilter: false,
+        grow: true,
+      },
+      {
+        accessorKey: "name",
+        header: "Name",
+      },
+      {
+        accessorKey: "city",
+        header: "City",
+      },
+    ];
+
+    return (
+      <DataView
+        availableLayouts={["table"]}
+        getData={getData}
+        tableLayoutOptions={{
+          columns: columns,
+          hasColumnResizing: true,
+        }}
+      />
+    );
+  },
+};
+
+export const GrowColumnWithActions: StoryObj<DataViewMetaProps> = {
+  render: function C() {
+    const [data, setData] = useState<Person[]>(personData);
+    const { getData } = useDataCallbacks(data, setData);
+
+    const columns: DataColumns = [
+      {
+        accessorKey: "order",
+        header: "ID",
+        enableColumnFilter: false,
+        grow: true,
+      },
+      {
+        accessorKey: "name",
+        header: "Name",
+      },
+      {
+        accessorKey: "city",
+        header: "City",
+      },
+    ];
+
+    const rowActions = useCallback(
+      () => <Button variant="secondary" label="Action" size="small" />,
+      [],
+    );
+
+    return (
+      <DataView
+        availableLayouts={["table"]}
+        getData={getData}
+        tableLayoutOptions={{
+          hasColumnResizing: true,
+          columns: columns,
+          rowActionButtons: rowActions,
+        }}
+      />
+    );
+  },
+};

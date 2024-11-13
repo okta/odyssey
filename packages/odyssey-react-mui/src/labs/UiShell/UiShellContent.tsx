@@ -20,47 +20,56 @@ import {
   useOdysseyDesignTokens,
   type DesignTokens,
 } from "../../OdysseyDesignTokensContext";
+import { useScrollState } from "./useScrollState";
 
 const StyledAppContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{
   odysseyDesignTokens: DesignTokens;
 }>(({ odysseyDesignTokens }) => ({
+  gridArea: "app-content",
   overflowX: "hidden",
-  overflowY: "scroll",
+  overflowY: "auto",
   paddingBlock: odysseyDesignTokens.Spacing5,
-  paddingInline: odysseyDesignTokens.Spacing6,
+  paddingInline: odysseyDesignTokens.Spacing8,
 }));
 
-const StyledFlexibleContentContainer = styled("div", {
+const StyledBannersContainer = styled("div")(() => ({
+  gridArea: "banners",
+}));
+
+const StyledSideNavContainer = styled("div")(() => ({
+  gridArea: "side-nav",
+}));
+
+const StyledShellContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{
   odysseyDesignTokens: DesignTokens;
 }>(({ odysseyDesignTokens }) => ({
   backgroundColor: odysseyDesignTokens.HueNeutral50,
-  display: "flex",
-  flexBasis: "100%",
-  flexDirection: "column",
-  flexGrow: 1,
-}));
-
-const StyledRigidContentContainer = styled("div")(() => ({
-  flexShrink: 0,
-  height: "100%",
-}));
-
-const StyledShellContainer = styled("div")(() => ({
-  display: "flex",
-  flexWrap: "nowrap",
+  display: "grid",
+  gridGap: 0,
+  gridTemplateAreas: `
+    "banners banners"
+    "side-nav top-nav"
+    "side-nav app-content"
+  `,
+  gridTemplateColumns: "auto 1fr",
+  gridTemplateRows: "auto auto 1fr",
   height: "100vh",
   width: "100vw",
+}));
+
+const StyledTopNavContainer = styled("div")(() => ({
+  gridArea: "top-nav",
 }));
 
 export type UiShellNavComponentProps = {
   /**
    * Object that gets pass directly to the side nav component.
    */
-  sideNavProps?: Omit<SideNavProps, "customLogo" | "footerComponent">;
+  sideNavProps?: Omit<SideNavProps, "footerComponent">;
   /**
    * Object that gets pass directly to the top nav component.
    */
@@ -81,7 +90,6 @@ export type UiShellContentProps = {
    */
   optionalComponents?: {
     banners?: ReactElement;
-    companyLogo?: SideNavProps["customCompanyLogo"];
     sideNavFooter?: SideNavProps["footerComponent"];
     topNavLeftSide?: TopNavProps["leftSideComponent"];
     topNavRightSide?: TopNavProps["rightSideComponent"];
@@ -103,25 +111,20 @@ const UiShellContent = ({
   topNavProps,
 }: UiShellContentProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const { isContentScrolled, scrollableContentRef } = useScrollState();
 
   return (
-    <StyledShellContainer>
-      <StyledRigidContentContainer>
+    <StyledShellContainer odysseyDesignTokens={odysseyDesignTokens}>
+      <StyledBannersContainer>
+        {optionalComponents?.banners}
+      </StyledBannersContainer>
+
+      <StyledSideNavContainer>
         {sideNavProps && (
           <ErrorBoundary fallback={null} onError={onError}>
             <SideNav
               {...{
                 ...sideNavProps,
-                ...(sideNavProps.hasCustomCompanyLogo &&
-                optionalComponents?.companyLogo
-                  ? {
-                      customCompanyLogo: optionalComponents.companyLogo,
-                      hasCustomCompanyLogo: sideNavProps.hasCustomCompanyLogo,
-                    }
-                  : {
-                      customCompanyLogo: undefined,
-                      hasCustomCompanyLogo: false,
-                    }),
                 ...(sideNavProps.hasCustomFooter &&
                 optionalComponents?.sideNavFooter
                   ? {
@@ -137,26 +140,26 @@ const UiShellContent = ({
             />
           </ErrorBoundary>
         )}
-      </StyledRigidContentContainer>
+      </StyledSideNavContainer>
 
-      <StyledFlexibleContentContainer odysseyDesignTokens={odysseyDesignTokens}>
+      <StyledTopNavContainer>
         <ErrorBoundary fallback={null} onError={onError}>
           <TopNav
             {...topNavProps}
+            isScrolled={isContentScrolled}
             leftSideComponent={optionalComponents?.topNavLeftSide}
             rightSideComponent={optionalComponents?.topNavRightSide}
           />
         </ErrorBoundary>
+      </StyledTopNavContainer>
 
-        <StyledAppContainer
-          odysseyDesignTokens={odysseyDesignTokens}
-          tabIndex={0}
-        >
-          {optionalComponents?.banners}
-
-          {appComponent}
-        </StyledAppContainer>
-      </StyledFlexibleContentContainer>
+      <StyledAppContainer
+        odysseyDesignTokens={odysseyDesignTokens}
+        tabIndex={0}
+        ref={scrollableContentRef}
+      >
+        {appComponent}
+      </StyledAppContainer>
     </StyledShellContainer>
   );
 };
