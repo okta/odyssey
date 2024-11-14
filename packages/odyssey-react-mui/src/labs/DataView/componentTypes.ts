@@ -32,7 +32,7 @@ import { DataTableRowActionsProps } from "../../DataTable/DataTableRowActions";
 import { MenuButtonProps } from "../..";
 import { paginationTypeValues } from "../DataTablePagination";
 import { DataCardProps } from "./DataCard";
-import { type PaginationProps } from "../Pagination";
+import { type PaginationProps } from "../../Pagination";
 
 export type DataLayout = (typeof availableLayouts)[number];
 export type CardLayout = (typeof availableCardLayouts)[number];
