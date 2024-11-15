@@ -111,6 +111,34 @@ const storybookMeta: Meta<UiShellProps> = {
 
 export default storybookMeta;
 
+const sharedAppSwitcherProps: UiShellNavComponentProps["appSwitcherProps"] = {
+  appIcons: [
+    {
+      appIconDefaultUrl: "/appswitcher/admin-app-default.svg",
+      appIconSelectedUrl: "/appswitcher/admin-app-selected.svg",
+      appName: "saasure",
+      label: "Admin Dashboard",
+      linkUrl: "http://rain-admin.okta1.com:1802/admin/dashboard",
+    },
+    {
+      appIconDefaultUrl: "/appswitcher/okta-dashboard-default.svg",
+      appIconSelectedUrl: "/appswitcher/okta-dashboard-selected.svg",
+      appName: "okta_enduser",
+      label: "Okta Dashboard",
+      linkUrl: "http://rain.okta1.com:1802/app/UserHome",
+    },
+    {
+      appIconDefaultUrl: "/appswitcher/workflows-default.svg",
+      appIconSelectedUrl: "/appswitcher/workflows-selected.svg",
+      appName: "okta_flow_sso",
+      label: "Okta Workflows",
+      linkUrl: "http://rain-admin.okta1.com:1802/flow/go",
+    },
+  ],
+  isLoading: false,
+  selectedAppName: "okta_enduser",
+};
+
 const sharedSideNavProps: UiShellNavComponentProps["sideNavProps"] = {
   appName: "Enduser",
   isCollapsible: true,
@@ -226,11 +254,28 @@ export const TopNavOnly: StoryObj<UiShellProps> = {
   },
 };
 
+export const AppSwitcherOnly: StoryObj<UiShellProps> = {
+  args: {
+    subscribeToPropChanges: (subscriber) => {
+      subscriber({
+        topNavProps: {},
+        appSwitcherProps: sharedAppSwitcherProps,
+      });
+
+      return () => {};
+    },
+  },
+};
+
 export const LoadingData: StoryObj<UiShellProps> = {
   args: {
     optionalComponents: sharedOptionalComponents,
     subscribeToPropChanges: (subscriber) => {
       subscriber({
+        appSwitcherProps: {
+          ...sharedAppSwitcherProps,
+          isLoading: true,
+        },
         sideNavProps: {
           ...sharedSideNavProps,
           isLoading: true,
@@ -248,6 +293,7 @@ export const WithoutAppContent: StoryObj<UiShellProps> = {
     optionalComponents: sharedOptionalComponents,
     subscribeToPropChanges: (subscriber) => {
       subscriber({
+        appSwitcherProps: sharedAppSwitcherProps,
         sideNavProps: sharedSideNavProps,
         topNavProps: sharedTopNavProps,
       });
@@ -411,6 +457,7 @@ export const WithTallAppContent: StoryObj<UiShellProps> = {
     optionalComponents: sharedOptionalComponents,
     subscribeToPropChanges: (subscriber) => {
       subscriber({
+        appSwitcherProps: sharedAppSwitcherProps,
         sideNavProps: sharedSideNavProps,
         topNavProps: sharedTopNavProps,
       });
@@ -461,6 +508,7 @@ export const WithOdysseyAppContent: StoryObj<UiShellProps> = {
     },
     subscribeToPropChanges: (subscriber) => {
       subscriber({
+        appSwitcherProps: sharedAppSwitcherProps,
         sideNavProps: sharedSideNavProps,
         topNavProps: sharedTopNavProps,
       });
