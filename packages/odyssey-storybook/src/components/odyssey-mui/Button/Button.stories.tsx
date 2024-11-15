@@ -378,6 +378,7 @@ export const IconOnly: StoryObj<ButtonProps> = {
   },
   args: {
     startIcon: <AddIcon />,
+    endIcon: <AddIcon />,
     ariaLabel: "Add crew",
     label: undefined,
     tooltipText: "Add crew",

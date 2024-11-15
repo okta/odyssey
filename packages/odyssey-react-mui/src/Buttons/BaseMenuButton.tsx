@@ -30,10 +30,31 @@ import { BaseButton } from "./BaseButton";
 import { ChevronDownIcon, MoreIcon } from "../icons.generated";
 import { FieldComponentProps } from "../FieldComponentProps";
 import { MenuContext, MenuContextType } from "./MenuContext";
-import { NullElement } from "../NullElement";
+// import { NullElement } from "../NullElement";
 import type { HtmlProps } from "../HtmlProps";
 
 export const menuAlignmentValues = ["left", "right"] as const;
+
+type BaseMenuButtonLabelProps =
+  | {
+      buttonLabel: string;
+    }
+  | (
+      | (Required<Pick<HtmlProps, "ariaLabelledBy">> &
+          Partial<Pick<HtmlProps, "ariaLabel">> & {
+            buttonLabel?: undefined | "";
+          })
+      | (Required<Pick<HtmlProps, "ariaLabel">> &
+          Partial<Pick<HtmlProps, "ariaLabelledBy">> & {
+            buttonLabel?: undefined | "";
+          })
+    );
+
+export type AdditionalBaseMenuButtonProps = Pick<
+  HtmlProps,
+  "ariaDescribedBy" | "ariaLabel" | "ariaLabelledBy" | "testId" | "translate"
+> &
+  Pick<FieldComponentProps, "isDisabled">;
 
 export type BaseMenuButtonProps = {
   /**
@@ -41,15 +62,11 @@ export type BaseMenuButtonProps = {
    */
   buttonChildren?: ReactNode;
   /**
-   * The label on the triggering Button
-   */
-  buttonLabel?: string;
-  /**
    * The variant of the triggering Button
    */
   buttonVariant?: (typeof buttonVariantValues)[number];
   /**
-   * The end Icon on the trigggering Button
+   * The end Icon on the triggering Button
    */
   endIcon?: ReactElement;
   /**
@@ -81,49 +98,22 @@ export type BaseMenuButtonProps = {
    * The tooltip text for the Button if it's icon-only
    */
   tooltipText?: string;
-};
+} & BaseMenuButtonLabelProps &
+  AdditionalBaseMenuButtonProps;
 
-// These are split and exported separately from the above because wrappers of this (e.g. MenuButton) will
-// want to omit buttonChildren, which they cannot do from the combined union type. Instead, they should
-// omit from BaseMenuButtonProps, then union with the AdditionalBaseMenuButtonProps (as seen in MenuButton)
-export type AdditionalBaseMenuButtonProps = Pick<
-  HtmlProps,
-  "ariaDescribedBy" | "ariaLabel" | "ariaLabelledBy" | "testId" | "translate"
-> &
-  Pick<FieldComponentProps, "isDisabled"> &
-  (
-    | { buttonLabel: string }
-    | (Required<Pick<HtmlProps, "ariaLabelledBy">> &
-        Partial<Pick<HtmlProps, "ariaLabel">> & {
-          buttonLabel?: undefined | "";
-        })
-    | (Required<Pick<HtmlProps, "ariaLabel">> &
-        Partial<Pick<HtmlProps, "ariaLabelledBy">> & {
-          buttonLabel?: undefined | "";
-        })
-  ) &
-  (
-    | {
-        /**
-         * The <MenuItem> components within the Menu.
-         */
-        children: ReactNode | NullElement;
-        /**
-         * popoverConten is disallowed if children are present
-         */
-        popoverContent?: never;
-      }
-    | {
-        /**
-         * children is disallowed if popoverContent is present
-         */
-        children?: never;
-        /**
-         * The content for the popover that is triggered on click.
-         */
-        popoverContent: ReactNode | NullElement;
-      }
-  );
+export type BaseMenuButtonWithPopoverContentProps = {
+  /**
+   * The content for the popover that is triggered on click.
+   */
+  popoverContent: ReactNode;
+} & BaseMenuButtonProps;
+
+export type BaseMenuButtonWithChildrenProps = {
+  /**
+   * The <MenuItem> components within the Menu.
+   */
+  children: ReactNode;
+} & BaseMenuButtonProps;
 
 const BaseMenuButton = ({
   ariaLabel,
@@ -132,8 +122,6 @@ const BaseMenuButton = ({
   buttonChildren,
   buttonLabel = "",
   buttonVariant = "secondary",
-  children,
-  popoverContent,
   shouldCloseOnSelect = true,
   endIcon: endIconProp,
   id: idOverride,
@@ -145,7 +133,8 @@ const BaseMenuButton = ({
   testId,
   tooltipText,
   translate,
-}: BaseMenuButtonProps & AdditionalBaseMenuButtonProps) => {
+  ...conditionalProps
+}: BaseMenuButtonWithPopoverContentProps | BaseMenuButtonWithChildrenProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -175,12 +164,16 @@ const BaseMenuButton = ({
     [closeMenu, openMenu, shouldCloseOnSelect],
   );
 
-  const endIcon = omitEndIcon ? undefined : endIconProp ? (
-    endIconProp
-  ) : isOverflow ? (
-    <MoreIcon />
-  ) : (
-    <ChevronDownIcon />
+  const endIcon = useMemo(
+    () =>
+      omitEndIcon ? undefined : endIconProp ? (
+        endIconProp
+      ) : isOverflow ? (
+        <MoreIcon />
+      ) : (
+        <ChevronDownIcon />
+      ),
+    [endIconProp, isOverflow, omitEndIcon],
   );
 
   const anchorOrigin = useMemo(
@@ -201,29 +194,76 @@ const BaseMenuButton = ({
     [menuAlignment],
   );
 
+  const renderBaseButton = useCallback(() => {
+    if (buttonLabel || endIcon) {
+      return (
+        <BaseButton
+          ariaControls={isOpen ? `${uniqueId}-menu` : undefined}
+          ariaExpanded={isOpen ? "true" : undefined}
+          ariaHasPopup="true"
+          ariaDescribedBy={ariaDescribedBy}
+          ariaLabel={ariaLabel}
+          ariaLabelledBy={ariaLabelledBy}
+          testId={testId}
+          endIcon={endIcon}
+          id={`${uniqueId}-button`}
+          isDisabled={isDisabled}
+          label={buttonLabel}
+          onClick={openMenu}
+          size={size}
+          tooltipText={tooltipText}
+          translate={translate}
+          variant={buttonVariant}
+        />
+      );
+    }
+
+    if (buttonChildren) {
+      return (
+        <BaseButton
+          ariaControls={isOpen ? `${uniqueId}-menu` : undefined}
+          ariaExpanded={isOpen ? "true" : undefined}
+          ariaHasPopup="true"
+          ariaDescribedBy={ariaDescribedBy}
+          ariaLabel={ariaLabel}
+          ariaLabelledBy={ariaLabelledBy}
+          id={`${uniqueId}-button`}
+          isDisabled={isDisabled}
+          children={buttonChildren}
+          onClick={openMenu}
+          size={size}
+          tooltipText={tooltipText}
+          testId={testId}
+          translate={translate}
+          variant={buttonVariant}
+        />
+      );
+    }
+
+    return null;
+  }, [
+    ariaDescribedBy,
+    ariaLabel,
+    ariaLabelledBy,
+    buttonChildren,
+    buttonLabel,
+    buttonVariant,
+    endIcon,
+    isDisabled,
+    isOpen,
+    openMenu,
+    size,
+    tooltipText,
+    testId,
+    translate,
+    uniqueId,
+  ]);
+
   return (
     <div>
-      <BaseButton
-        ariaControls={isOpen ? `${uniqueId}-menu` : undefined}
-        ariaExpanded={isOpen ? "true" : undefined}
-        ariaHasPopup="true"
-        ariaDescribedBy={ariaDescribedBy}
-        ariaLabel={ariaLabel}
-        ariaLabelledBy={ariaLabelledBy}
-        testId={testId}
-        endIcon={endIcon}
-        id={`${uniqueId}-button`}
-        isDisabled={isDisabled}
-        label={buttonLabel}
-        children={buttonChildren}
-        onClick={openMenu}
-        size={size}
-        tooltipText={tooltipText}
-        translate={translate}
-        variant={buttonVariant}
-      />
+      {renderBaseButton()}
 
-      {children && (
+      {"children" in conditionalProps && (
         <MuiMenu
           anchorOrigin={anchorOrigin}
           transformOrigin={transformOrigin}
@@ -234,12 +274,12 @@ const BaseMenuButton = ({
           open={isOpen}
         >
           <MenuContext.Provider value={providerValue}>
-            {children}
+            {conditionalProps.children}
           </MenuContext.Provider>
         </MuiMenu>
       )}
 
-      {popoverContent && (
+      {"popoverContent" in conditionalProps && (
         <MuiPopover
           open={isOpen}
           anchorEl={anchorEl}
@@ -252,7 +292,7 @@ const BaseMenuButton = ({
               padding: odysseyDesignTokens.Spacing4,
             }}
           >
-            {popoverContent}
+            {conditionalProps.popoverContent}
           </Box>
         </MuiPopover>
       )}

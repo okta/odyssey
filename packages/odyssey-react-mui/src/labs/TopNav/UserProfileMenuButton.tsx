@@ -14,26 +14,25 @@ import { memo } from "react";
 import { UserProfile, UserProfileProps } from "./UserProfile";
 import { ChevronDownIcon } from "../../icons.generated";
 import {
-  AdditionalBaseMenuButtonProps,
   BaseMenuButton,
-  BaseMenuButtonProps,
+  BaseMenuButtonWithChildrenProps,
+  BaseMenuButtonWithPopoverContentProps,
 } from "../../Buttons/BaseMenuButton";
 
-export type UserProfileMenuButtonProps = Omit<
-  BaseMenuButtonProps,
-  "endIcon" | "variant"
-> &
-  AdditionalBaseMenuButtonProps &
-  UserProfileProps;
+export type UserProfileMenuButtonProps = (
+  | BaseMenuButtonWithChildrenProps
+  | BaseMenuButtonWithPopoverContentProps
+) &
+  UserProfileProps & { buttonVariant?: never, endIcon?: never };
 
-const UserProfileMenuButton = (props: UserProfileMenuButtonProps) => {
-  const {
-    profileIcon,
-    userName,
-    orgName,
-    userNameEndIcon,
-    ...menuButtonProps
-  } = props;
+const UserProfileMenuButton = ({
+  profileIcon,
+  userName,
+  orgName,
+  userNameEndIcon,
+  ...menuButtonProps
+}: UserProfileMenuButtonProps) => {
+
   return (
     <BaseMenuButton
       {...menuButtonProps}

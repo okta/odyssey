@@ -12,20 +12,15 @@
 
 import { memo } from "react";
 import {
-  AdditionalBaseMenuButtonProps,
   BaseMenuButton,
-  BaseMenuButtonProps,
+  BaseMenuButtonWithChildrenProps,
 } from "./BaseMenuButton";
 
 export const menuAlignmentValues = ["left", "right"] as const;
 
-export type MenuButtonProps = Omit<
-  BaseMenuButtonProps,
-  "buttonChildren" | "omitEndIcon"
-> &
-  AdditionalBaseMenuButtonProps;
+export type MenuButtonProps = BaseMenuButtonWithChildrenProps;
 
-const MenuButton = (props: MenuButtonProps) => {
+const MenuButton = (props: BaseMenuButtonWithChildrenProps) => {
   return <BaseMenuButton {...props} />;
 };
 

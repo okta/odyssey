@@ -44,7 +44,20 @@ export const buttonVariantValues = [
   "floatingAction",
 ] as const;
 
-export type BaseButtonProps = {
+export type AdditionalBaseButtonProps = Pick<
+  HtmlProps,
+  | "ariaControls"
+  | "ariaDescribedBy"
+  | "ariaExpanded"
+  | "ariaHasPopup"
+  | "ariaLabel"
+  | "ariaLabelledBy"
+  | "tabIndex"
+  | "testId"
+  | "translate"
+>;
+
+export type SharedButtonProps = {
   /**
    * The ref forwarded to the Button
    */
@@ -86,39 +99,65 @@ export type BaseButtonProps = {
    * The click event handler for the Button
    */
   onClick?: MuiButtonProps["onClick"];
+} & AdditionalBaseButtonProps;
+
+export type BaseButtonWithChildrenProps = {
   /**
    * The contents of the button. Only available internal to Odyssey here in BaseButton. If set, label is ignored.
    */
-  children?: ReactNode;
-  /**
-   * The icon element to display at the end of the Button
-   */
-  endIcon?: ReactElement;
+  children: ReactNode;
+} & SharedButtonProps;
+
+export type BaseButtonWithLabelProps = {
   /**
    * The text content of the Button
    */
   label?: string;
-  /**
-   * The icon element to display at the start of the Button
-   */
-  startIcon?: ReactElement;
-};
-
-// These are split and exported separately from the above because wrappers of this (e.g. Button) will
-// want to omit children, which they cannot do from the combined union type. Instead, they should
-// omit from BaseButtonProps, then union with the AdditionalBaseButtonProps (as seen in Button)
-export type AdditionalBaseButtonProps = Pick<
-  HtmlProps,
-  | "ariaControls"
-  | "ariaDescribedBy"
-  | "ariaExpanded"
-  | "ariaHasPopup"
-  | "ariaLabel"
-  | "ariaLabelledBy"
-  | "tabIndex"
-  | "testId"
-  | "translate"
->;
+} & SharedButtonProps &
+  (
+    | {
+        /**
+         * The icon element to display at the end of the Button
+         */
+        endIcon?: ReactElement;
+        /**
+         * The text content of the Button
+         */
+        label: string;
+        /**
+         * The icon element to display at the start of the Button
+         */
+        startIcon?: ReactElement;
+      }
+    | {
+        /**
+         * The icon element to display at the end of the Button
+         */
+        endIcon?: ReactElement;
+        /**
+         * The text content of the Button
+         */
+        label?: string | "" | undefined;
+        /**
+         * The icon element to display at the start of the Button
+         */
+        startIcon: ReactElement;
+      }
+    | {
+        /**
+         * The icon element to display at the end of the Button
+         */
+        endIcon: ReactElement;
+        /**
+         * The text content of the Button
+         */
+        label?: never;
+        /**
+         * The icon element to display at the start of the Button
+         */
+        startIcon?: ReactElement;
+      }
+  );
 
 const BaseButton = ({
   ariaControls,
@@ -128,23 +167,20 @@ const BaseButton = ({
   ariaLabel,
   ariaLabelledBy,
   buttonRef,
-  endIcon,
   href,
   id,
   isDisabled,
   isFullWidth: isFullWidthProp,
-  label = "",
-  children,
   onClick,
   size = "medium",
-  startIcon,
   tabIndex,
   testId,
   tooltipText,
   translate,
   type = "button",
   variant: variantProp,
-}: BaseButtonProps & AdditionalBaseButtonProps) => {
+  ...conditionalProps
+}: BaseButtonWithChildrenProps | BaseButtonWithLabelProps) => {
   const muiProps = useMuiProps();
 
   // We're deprecating the "tertiary" variant, so map it to
@@ -168,45 +204,93 @@ const BaseButton = ({
     [],
   );
 
-  const renderButton = useCallback(
-    (muiProps: MuiPropsContextType) => {
-      return (
-        <MuiButton
-          {...muiProps}
-          aria-controls={ariaControls}
-          aria-describedby={ariaDescribedBy}
-          aria-expanded={ariaExpanded}
-          aria-haspopup={ariaHasPopup}
-          aria-label={ariaLabel}
-          aria-labelledby={ariaLabelledBy}
-          data-se={testId}
-          disabled={isDisabled}
-          endIcon={endIcon}
-          fullWidth={isFullWidth}
-          href={href}
-          id={id}
-          onClick={onClick}
-          ref={(element) => {
-            if (element) {
-              (
-                localButtonRef as React.MutableRefObject<
-                  HTMLButtonElement | HTMLAnchorElement
-                >
-              ).current = element;
-              //@ts-expect-error ref is not an optional prop on the props context type
-              muiProps?.ref?.(element);
-            }
-          }}
-          size={size}
-          startIcon={startIcon}
-          tabIndex={tabIndex}
-          translate={translate}
-          type={type}
-          variant={variant}
-        >
-          {children ?? label}
-        </MuiButton>
-      );
+  const renderButton = useCallback<
+    (muiProps: MuiPropsContextType) => ReactElement | null
+  >(
+    (muiProps) => {
+      if (
+        "label" in conditionalProps ||
+        "endIcon" in conditionalProps ||
+        "startIcon" in conditionalProps
+      ) {
+        return (
+          <MuiButton
+            {...muiProps}
+            aria-controls={ariaControls}
+            aria-describedby={ariaDescribedBy}
+            aria-expanded={ariaExpanded}
+            aria-haspopup={ariaHasPopup}
+            aria-label={ariaLabel}
+            aria-labelledby={ariaLabelledBy}
+            data-se={testId}
+            disabled={isDisabled}
+            endIcon={conditionalProps?.endIcon}
+            fullWidth={isFullWidth}
+            href={href}
+            id={id}
+            onClick={onClick}
+            ref={(element) => {
+              if (element) {
+                (
+                  localButtonRef as React.MutableRefObject<
+                    HTMLButtonElement | HTMLAnchorElement
+                  >
+                ).current = element;
+                //@ts-expect-error ref is not an optional prop on the props context type
+                muiProps?.ref?.(element);
+              }
+            }}
+            size={size}
+            startIcon={conditionalProps?.startIcon}
+            tabIndex={tabIndex}
+            translate={translate}
+            type={type}
+            variant={variant}
+          >
+            {conditionalProps?.label}
+          </MuiButton>
+        );
+      }
+
+      if ("children" in conditionalProps) {
+        return (
+          <MuiButton
+            {...muiProps}
+            aria-controls={ariaControls}
+            aria-describedby={ariaDescribedBy}
+            aria-expanded={ariaExpanded}
+            aria-haspopup={ariaHasPopup}
+            aria-label={ariaLabel}
+            aria-labelledby={ariaLabelledBy}
+            data-se={testId}
+            disabled={isDisabled}
+            fullWidth={isFullWidth}
+            href={href}
+            id={id}
+            onClick={onClick}
+            ref={(element) => {
+              if (element) {
+                (
+                  localButtonRef as React.MutableRefObject<
+                    HTMLButtonElement | HTMLAnchorElement
+                  >
+                ).current = element;
+                //@ts-expect-error ref is not an optional prop on the props context type
+                muiProps?.ref?.(element);
+              }
+            }}
+            size={size}
+            tabIndex={tabIndex}
+            translate={translate}
+            type={type}
+            variant={variant}
+          >
+            {conditionalProps.children}
+          </MuiButton>
+        );
+      }
+
+      return null;
     },
     [
       ariaControls,
@@ -215,16 +299,13 @@ const BaseButton = ({
       ariaHasPopup,
       ariaLabel,
       ariaLabelledBy,
-      endIcon,
+      conditionalProps,
       href,
       id,
       isDisabled,
       isFullWidth,
-      label,
-      children,
       onClick,
       size,
-      startIcon,
       tabIndex,
       testId,
       translate,

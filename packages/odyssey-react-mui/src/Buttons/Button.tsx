@@ -11,16 +11,10 @@
  */
 
 import { memo } from "react";
-import {
-  AdditionalBaseButtonProps,
-  BaseButton,
-  BaseButtonProps,
-} from "./BaseButton";
+import { BaseButton, BaseButtonWithLabelProps } from "./BaseButton";
 
-export type ButtonProps = Omit<BaseButtonProps, "children"> &
-  AdditionalBaseButtonProps;
-
-const Button = (props: ButtonProps) => {
+export type ButtonProps = BaseButtonWithLabelProps;
+const Button = (props: BaseButtonWithLabelProps) => {
   return <BaseButton {...props} />;
 };
 
