@@ -11,9 +11,16 @@
  */
 
 import {
-  popoverAlignmentValues,
-  UserProfilePopover,
-  UserProfilePopoverProps,
+  Box,
+  Heading3,
+  Link,
+  menuAlignmentValues,
+  Subordinate,
+  useOdysseyDesignTokens,
+} from "@okta/odyssey-react-mui";
+import {
+  UserProfileMenuButton,
+  UserProfileMenuButtonProps,
 } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -21,11 +28,25 @@ import icons from "../../../../.storybook/components/iconUtils";
 import { within } from "@storybook/testing-library";
 import { UserIcon } from "@okta/odyssey-react-mui/icons";
 import { PlaywrightProps } from "../../odyssey-mui/storybookTypes";
-import { Heading5, Paragraph } from "@okta/odyssey-react-mui";
+import { ReactNode } from "react";
 
-const storybookMeta: Meta<UserProfilePopoverProps> = {
-  title: "Labs Components/UserProfilePopover",
-  component: UserProfilePopover,
+const BoxWithBottomMargin = ({ children }: { children: ReactNode }) => {
+  const odysseyDesignTokens = useOdysseyDesignTokens();
+
+  return (
+    <Box
+      sx={{
+        marginBottom: odysseyDesignTokens.Spacing4,
+      }}
+    >
+      {children}
+    </Box>
+  );
+};
+
+const storybookMeta: Meta<UserProfileMenuButtonProps> = {
+  title: "Labs Components/UserProfileMenuButton",
+  component: UserProfileMenuButton,
   argTypes: {
     profileIcon: {
       control: { type: "select" },
@@ -51,20 +72,20 @@ const storybookMeta: Meta<UserProfilePopoverProps> = {
       description: "An optional icon to display at the end of the user profile",
       table: { type: { summary: "<Icon />" } },
     },
-    popoverAlignment: {
-      options: popoverAlignmentValues,
+    menuAlignment: {
+      options: menuAlignmentValues,
       control: { type: "radio" },
       description: "The horizontal alignment of the popover.",
       table: {
         type: {
-          summary: popoverAlignmentValues.join(" | "),
+          summary: menuAlignmentValues.join(" | "),
         },
         defaultValue: {
           summary: "left",
         },
       },
     },
-    children: {
+    popoverContent: {
       control: "obj",
       description: "The content to appear in the popover",
       table: {
@@ -83,12 +104,23 @@ const storybookMeta: Meta<UserProfilePopoverProps> = {
     userName: "test.user@test.com",
     orgName: "ORG123",
     profileIcon: <UserIcon />,
-    popoverAlignment: "right",
-    children: (
-      <>
-        <Heading5 key="1">Popover Content</Heading5>
-        <Paragraph key="2">Some more popover content.</Paragraph>
-      </>
+    menuAlignment: "left",
+    popoverContent: (
+      <Box sx={{ minWidth: "392px" }}>
+        <BoxWithBottomMargin>
+          <Heading3>Add-Min O'Cloudy Tud</Heading3>
+        </BoxWithBottomMargin>
+        <BoxWithBottomMargin>
+          <Subordinate>administrator1@clouditude.net</Subordinate>
+          <Subordinate>rain.okta1.com</Subordinate>
+        </BoxWithBottomMargin>
+        <BoxWithBottomMargin>
+          <Link href="#">My Settings</Link>
+        </BoxWithBottomMargin>
+        <BoxWithBottomMargin>
+          <Link href="#">Sign Out</Link>
+        </BoxWithBottomMargin>
+      </Box>
     ),
   },
   decorators: [MuiThemeDecorator],
@@ -97,16 +129,23 @@ const storybookMeta: Meta<UserProfilePopoverProps> = {
 
 export default storybookMeta;
 
-export const Default: StoryObj<UserProfilePopoverProps> = {};
+export const Default: StoryObj<UserProfileMenuButtonProps> = {};
 
-export const WithLeftPopoverAlignment: StoryObj<UserProfilePopoverProps> = {
+export const WithRightPopoverAlignment: StoryObj<UserProfileMenuButtonProps> = {
   args: {
-    popoverAlignment: "left",
+    menuAlignment: "right",
+  },
+  render: function C(props: UserProfileMenuButtonProps) {
+    return (
+      <Box sx={{ ml: "500px" }}>
+        <UserProfileMenuButton {...props} />
+      </Box>
+    );
   },
   play: async ({
     canvasElement,
     step,
-  }: PlaywrightProps<UserProfilePopoverProps>) => {
+  }: PlaywrightProps<UserProfileMenuButtonProps>) => {
     await step("With profile icon", async () => {
       const canvas = within(canvasElement);
       const buttonPopover = canvas.queryByRole("button", {
@@ -117,14 +156,14 @@ export const WithLeftPopoverAlignment: StoryObj<UserProfilePopoverProps> = {
   },
 };
 
-export const WithoutProfileIcon: StoryObj<UserProfilePopoverProps> = {
+export const WithoutProfileIcon: StoryObj<UserProfileMenuButtonProps> = {
   args: {
     profileIcon: undefined,
   },
   play: async ({
     canvasElement,
     step,
-  }: PlaywrightProps<UserProfilePopoverProps>) => {
+  }: PlaywrightProps<UserProfileMenuButtonProps>) => {
     await step("With profile icon", async () => {
       const canvas = within(canvasElement);
       const buttonPopover = canvas.queryByRole("button", {
@@ -132,5 +171,35 @@ export const WithoutProfileIcon: StoryObj<UserProfilePopoverProps> = {
       });
       expect(buttonPopover).not.toBeNull();
     });
+  },
+};
+
+export const PrimaryVariant: StoryObj<UserProfileMenuButtonProps> = {
+  args: {
+    buttonVariant: "primary",
+  },
+};
+
+export const SecondaryVariant: StoryObj<UserProfileMenuButtonProps> = {
+  args: {
+    buttonVariant: "secondary",
+  },
+};
+
+export const DangerVariant: StoryObj<UserProfileMenuButtonProps> = {
+  args: {
+    buttonVariant: "danger",
+  },
+};
+
+export const DangerSecondaryVariant: StoryObj<UserProfileMenuButtonProps> = {
+  args: {
+    buttonVariant: "dangerSecondary",
+  },
+};
+
+export const FloatingActionVariant: StoryObj<UserProfileMenuButtonProps> = {
+  args: {
+    buttonVariant: "floatingAction",
   },
 };

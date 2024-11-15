@@ -53,7 +53,7 @@ import {
   paginationTypeValues,
 } from "./DataTablePagination";
 import { DataFilter, DataFilters } from "./DataFilters";
-import { Button } from "../Button";
+import { Button } from "../Buttons";
 import { Box } from "../Box";
 import { MenuButton, MenuItem } from "..";
 import { ArrowUnsortedIcon } from "../icons.generated";

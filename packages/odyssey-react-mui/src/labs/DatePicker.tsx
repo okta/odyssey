@@ -32,7 +32,7 @@ import { DateTime } from "luxon";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
 import styled from "@emotion/styled";
 
-import { Button } from "../Button";
+import { Button } from "../Buttons";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
