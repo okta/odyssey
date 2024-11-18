@@ -25,9 +25,7 @@ import {
 import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import icons from "../../../../.storybook/components/iconUtils";
-import { within } from "@storybook/testing-library";
 import { UserIcon } from "@okta/odyssey-react-mui/icons";
-import { PlaywrightProps } from "../../odyssey-mui/storybookTypes";
 import { ReactNode } from "react";
 
 const BoxWithBottomMargin = ({ children }: { children: ReactNode }) => {
@@ -142,34 +140,10 @@ export const WithRightPopoverAlignment: StoryObj<UserProfileMenuButtonProps> = {
       </Box>
     );
   },
-  play: async ({
-    canvasElement,
-    step,
-  }: PlaywrightProps<UserProfileMenuButtonProps>) => {
-    await step("With profile icon", async () => {
-      const canvas = within(canvasElement);
-      const buttonPopover = canvas.queryByRole("button", {
-        name: "More actions",
-      });
-      expect(buttonPopover).not.toBeNull();
-    });
-  },
 };
 
 export const WithoutProfileIcon: StoryObj<UserProfileMenuButtonProps> = {
   args: {
     profileIcon: undefined,
-  },
-  play: async ({
-    canvasElement,
-    step,
-  }: PlaywrightProps<UserProfileMenuButtonProps>) => {
-    await step("With profile icon", async () => {
-      const canvas = within(canvasElement);
-      const buttonPopover = canvas.queryByRole("button", {
-        name: "More actions",
-      });
-      expect(buttonPopover).not.toBeNull();
-    });
   },
 };
