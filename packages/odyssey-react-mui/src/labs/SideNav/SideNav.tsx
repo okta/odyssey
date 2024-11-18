@@ -29,7 +29,7 @@ import {
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
 import { OdysseyThemeProvider } from "../../OdysseyThemeProvider";
-import type { SideNavItem, SideNavProps } from "./types";
+import type { SideNavProps } from "./types";
 import { SideNavHeader } from "./SideNavHeader";
 import {
   SideNavItemContent,
@@ -299,8 +299,7 @@ const SideNav = ({
   const intersectionObserverRef = useRef<IntersectionObserver | null>(null);
   const odysseyDesignTokens: DesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
-  const [sideNavItemsList, updateSideNavItemsList] =
-    useState<SideNavItem[]>(sideNavItems);
+  const [sideNavItemsList, updateSideNavItemsList] = useState(sideNavItems);
 
   // The default value (sideNavItems) passed to useState is ONLY used by the useState hook for
   // the very first value. Subsequent updates to the prop (sideNavItems) need to cause the state
