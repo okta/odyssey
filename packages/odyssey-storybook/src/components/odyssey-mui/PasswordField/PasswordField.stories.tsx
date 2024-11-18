@@ -11,9 +11,8 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
-import { within } from "@storybook/testing-library";
 import { PasswordField, odysseyTranslate } from "@okta/odyssey-react-mui";
-import { userEvent, waitFor } from "@storybook/testing-library";
+import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
@@ -236,7 +235,7 @@ export const NoShowPassword: StoryObj<typeof PasswordField> = {
     defaultValue: "",
   },
   play: async ({ canvasElement, step }) => {
-    await step("toggle password", async () => {
+    await step("toggle password", () => {
       const canvas = within(canvasElement);
       const fieldElement = canvas.getByRole("textbox", {
         name: "Password",
