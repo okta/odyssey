@@ -26,14 +26,14 @@ import {
 import { DataTableProps } from "./DataTable";
 import { Trans, useTranslation } from "react-i18next";
 
-export type DataTableRowActionsProps<TData extends MRT_RowData> = {
+export type DataTableRowActionsProps = {
   row: MRT_Row<MRT_RowData> | MRT_RowData;
   rowIndex: number;
   rowActionButtons?: (
     row: MRT_RowData,
   ) => ReactElement<typeof Button | typeof Fragment>;
   rowActionMenuItems?: (row: MRT_RowData) => MenuButtonProps["children"];
-  totalRows?: DataTableProps<TData>["totalRows"];
+  totalRows?: DataTableProps["totalRows"];
   updateRowOrder?: ({
     rowId,
     newRowIndex,
@@ -43,14 +43,14 @@ export type DataTableRowActionsProps<TData extends MRT_RowData> = {
   }) => void;
 };
 
-const DataTableRowActions = <TData extends MRT_RowData>({
+const DataTableRowActions = ({
   row,
   rowIndex,
   rowActionButtons,
   rowActionMenuItems,
   totalRows,
   updateRowOrder,
-}: DataTableRowActionsProps<TData>) => {
+}: DataTableRowActionsProps) => {
   const { t } = useTranslation();
 
   const handleToFrontClick = useCallback(() => {

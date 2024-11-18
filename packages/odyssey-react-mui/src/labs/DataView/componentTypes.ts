@@ -27,11 +27,11 @@ import {
   DataRowSelectionState,
   DataTableColumn,
 } from "./dataTypes";
-import { DataTableRowActionsProps } from "../../DataTable/DataTableRowActions";
 import { MenuButtonProps } from "../..";
 import { paginationTypeValues } from "../DataTablePagination";
 import { ReactNode } from "react";
 import { DataCardProps } from "./DataCard";
+import { RowActionsProps } from "./RowActions";
 
 export type DataLayout = (typeof availableLayouts)[number];
 export type CardLayout = (typeof availableCardLayouts)[number];
@@ -49,14 +49,14 @@ export type UniversalProps<TData extends MRT_RowData> = {
   emptyPlaceholder?: ReactNode;
   enableVirtualization?: boolean;
   errorMessage?: string;
-  filters?: Array<DataFilter<TData> | DataTableColumn<TData> | string>;
+  filters?: Array<DataFilter | DataTableColumn<TData> | string>;
   getData: ({
     page,
     resultsPerPage,
     search,
     filters,
     sort,
-  }: DataGetDataType<TData>) => TData[] | Promise<TData[]>;
+  }: DataGetDataType) => TData[] | Promise<TData[]>;
   getRowId?: MRT_TableOptions<TData>["getRowId"];
   hasFilters?: boolean;
   hasPagination?: boolean;
@@ -100,15 +100,15 @@ export type TableLayoutProps<TData extends MRT_RowData> = {
   hasSorting?: boolean;
   initialDensity?: MRT_DensityState;
   renderDetailPanel?: MRT_TableOptions<TData>["renderDetailPanel"];
-  rowActionButtons?: DataTableRowActionsProps<TData>["rowActionButtons"];
-  rowActionMenuItems?: DataTableRowActionsProps<TData>["rowActionMenuItems"];
+  rowActionButtons?: RowActionsProps<TData>["rowActionButtons"];
+  rowActionMenuItems?: RowActionsProps<TData>["rowActionMenuItems"];
 };
 
 export type CardLayoutProps<TData extends MRT_RowData> = {
   itemProps: (row: TData) => Omit<DataCardProps<TData>, "row">;
   maxGridColumns?: number;
   renderDetailPanel?: (props: { row: TData }) => ReactNode;
-  rowActionMenuItems?: DataTableRowActionsProps<TData>["rowActionMenuItems"];
+  rowActionMenuItems?: RowActionsProps<TData>["rowActionMenuItems"];
 };
 
 export type ViewProps<TData extends MRT_RowData, L extends DataLayout> = {

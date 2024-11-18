@@ -26,8 +26,8 @@ export const useRowReordering = <TData extends MRT_RowData>({
   resultsPerPage,
   page,
 }: {
-  totalRows: DataTableProps<TData>["totalRows"];
-  onReorderRows: DataTableProps<TData>["onReorderRows"];
+  totalRows: DataTableProps["totalRows"];
+  onReorderRows: DataTableProps["onReorderRows"];
   data: TData[];
   setData: Dispatch<SetStateAction<TData[]>>;
   draggingRow?: MRT_Row<TData> | null;

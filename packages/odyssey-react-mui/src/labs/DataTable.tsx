@@ -217,7 +217,7 @@ export type DataTableProps<TData extends MRT_RowData> = {
     page?: number;
     resultsPerPage?: number;
     search?: string;
-    filters?: DataFilter<TData>[];
+    filters?: DataFilter[];
     sort?: MRT_SortingState;
   }) => MRT_TableOptions<TData>["data"];
   /**
@@ -334,7 +334,7 @@ const DataTable = <TData extends MRT_RowData>({
   );
 
   const [globalFilter, setGlobalFilter] = useState<string>("");
-  const [filters, setFilters] = useState<Array<DataFilter<TData>>>();
+  const [filters, setFilters] = useState<Array<DataFilter>>();
 
   useEffect(() => {
     setShowSkeletons(false);
@@ -388,12 +388,9 @@ const DataTable = <TData extends MRT_RowData>({
     setGlobalFilter(value);
   }, []);
 
-  const handleFilters = useCallback(
-    (updatedFilters: Array<DataFilter<TData>>) => {
-      setFilters(updatedFilters);
-    },
-    [],
-  );
+  const handleFilters = useCallback((updatedFilters: Array<DataFilter>) => {
+    setFilters(updatedFilters);
+  }, []);
 
   const handleRowSelectionChange = useCallback(
     (updater: MRT_Updater<MRT_RowSelectionState>) => {

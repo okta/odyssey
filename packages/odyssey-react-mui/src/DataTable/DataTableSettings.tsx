@@ -17,28 +17,22 @@ import { MenuItem } from "../MenuItem";
 import { ListIcon, ShowIcon } from "../icons.generated";
 import { densityValues } from "./constants";
 import { DataTableProps } from "./DataTable";
-import { MRT_RowData, MRT_VisibilityState } from "material-react-table";
+import { MRT_VisibilityState } from "material-react-table";
 import { useTranslation } from "react-i18next";
 
-export type DataTableSettingsProps<TData extends MRT_RowData> = {
-  hasChangeableDensity: DataTableProps<TData>["hasChangeableDensity"];
+export type DataTableSettingsProps = {
+  hasChangeableDensity: DataTableProps["hasChangeableDensity"];
   rowDensity: (typeof densityValues)[number];
   setRowDensity: Dispatch<SetStateAction<(typeof densityValues)[number]>>;
-  hasColumnVisibility: DataTableProps<TData>["hasColumnVisibility"];
-  columns: DataTableProps<TData>["columns"];
+  hasColumnVisibility: DataTableProps["hasColumnVisibility"];
+  columns: DataTableProps["columns"];
   columnVisibility?: MRT_VisibilityState;
   setColumnVisibility: Dispatch<
     SetStateAction<MRT_VisibilityState | undefined>
   >;
 };
 
-type DataTableSettingsComponent = (<TData extends MRT_RowData>(
-  props: DataTableSettingsProps<TData>,
-) => JSX.Element) & {
-  displayName?: string;
-};
-
-const DataTableSettings = <TData extends MRT_RowData>({
+const DataTableSettings = ({
   hasChangeableDensity,
   rowDensity,
   setRowDensity,
@@ -46,7 +40,7 @@ const DataTableSettings = <TData extends MRT_RowData>({
   columns,
   columnVisibility,
   setColumnVisibility,
-}: DataTableSettingsProps<TData>) => {
+}: DataTableSettingsProps) => {
   const { t } = useTranslation();
 
   const changeRowDensity = useCallback(
@@ -137,9 +131,7 @@ const DataTableSettings = <TData extends MRT_RowData>({
   );
 };
 
-const MemoizedDataTableSettings = memo(
-  DataTableSettings,
-) as DataTableSettingsComponent;
+const MemoizedDataTableSettings = memo(DataTableSettings);
 MemoizedDataTableSettings.displayName = "DataTableSettings";
 
 export { MemoizedDataTableSettings as DataTableSettings };

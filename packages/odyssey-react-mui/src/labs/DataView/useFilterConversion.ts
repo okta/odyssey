@@ -62,7 +62,7 @@ export const useFilterConversion = <TData extends MRT_RowData>({
     // If not, they may be inferred from `columns`
     const providedFilters = filters || columns || [];
 
-    return providedFilters.reduce<DataFilter<TData>[]>((accumulator, item) => {
+    return providedFilters.reduce<DataFilter[]>((accumulator, item) => {
       if (typeof item === "string") {
         const foundColumn = columns?.find(
           (column) => column.accessorKey === item,

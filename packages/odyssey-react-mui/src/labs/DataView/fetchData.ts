@@ -18,7 +18,7 @@ import { DataQueryParamsType } from "./dataTypes";
 import { UniversalProps } from "./componentTypes";
 
 type DataRequestType<TData extends MRT_RowData> = {
-  dataQueryParams: DataQueryParamsType<TData>;
+  dataQueryParams: DataQueryParamsType;
   errorMessageProp: UniversalProps<TData>["errorMessage"];
   getData: UniversalProps<TData>["getData"];
   setData: Dispatch<SetStateAction<TData[]>>;
