@@ -107,6 +107,9 @@ const DataView = <TData extends MRT_RowData>({
   getRowId: getRowIdProp,
   hasFilters,
   hasPagination,
+  hasPageInput,
+  hasRowCountInput,
+  hasRowCountLabel,
   hasSearch,
   hasSearchSubmitButton,
   hasRowReordering,
@@ -467,6 +470,9 @@ const DataView = <TData extends MRT_RowData>({
       {hasPagination && (
         <Pagination
           currentPageLabel={t("pagination.page")}
+          hasPageInput={hasPageInput}
+          hasRowCountInput={hasRowCountInput}
+          hasRowCountLabel={hasRowCountLabel}
           isDisabled={isEmpty}
           isMoreDisabled={isPaginationMoreDisabled}
           lastRow={lastRowOnPage}
