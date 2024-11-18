@@ -651,7 +651,7 @@ export const components = ({
                 backgroundColor: odysseyTokens.PalettePrimaryDark,
               },
 
-              "&:active": {
+              "&:active, &[aria-expanded='true']": {
                 backgroundColor: odysseyTokens.PalettePrimaryDarker,
               },
 
@@ -671,7 +671,7 @@ export const components = ({
                 borderColor: odysseyTokens.HueNeutral400,
               },
 
-              "&:active": {
+              "&:active, &[aria-expanded='true']": {
                 backgroundColor: "transparent",
                 borderColor: odysseyTokens.BorderColorPrimaryControl,
                 color: odysseyTokens.TypographyColorAction,
@@ -696,7 +696,7 @@ export const components = ({
                 boxShadow: `0 0 0 2px ${odysseyTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyTokens.PaletteDangerMain}`,
               },
 
-              "&:active": {
+              "&:active, &[aria-expanded='true']": {
                 backgroundColor: odysseyTokens.PaletteDangerDarker,
               },
 
@@ -717,7 +717,7 @@ export const components = ({
                 color: odysseyTokens.PaletteDangerMain,
               },
 
-              "&:active": {
+              "&:active, &[aria-expanded='true']": {
                 backgroundColor: "transparent",
                 borderColor: odysseyTokens.PaletteDangerMain,
                 color: odysseyTokens.PaletteDangerMain,
@@ -738,7 +738,7 @@ export const components = ({
                 backgroundColor: odysseyTokens.HueNeutral200,
               },
 
-              "&:active": {
+              "&:active, &[aria-expanded='true']": {
                 backgroundColor: "transparent",
                 color: odysseyTokens.HueBlue600,
                 borderColor: odysseyTokens.HueBlue600,
@@ -758,7 +758,7 @@ export const components = ({
                 backgroundColor: odysseyTokens.HueNeutral200,
               },
 
-              "&:active": {
+              "&:active, &[aria-expanded='true']": {
                 backgroundColor: "transparent",
                 borderColor: odysseyTokens.HueBlue600,
               },
