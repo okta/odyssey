@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.27.1](https://github.com/okta/odyssey/compare/v1.27.0...v1.27.1) (2024-11-18)
+
+### Bug Fixes
+
+- **odyssey-react-mui:** ensure table is 100% width ([#2417](https://github.com/okta/odyssey/issues/2417)) ([2616640](https://github.com/okta/odyssey/commit/2616640b27c5670a69ea6fe47c8069034c9b3840))
+
 ## [1.27.0](https://github.com/okta/odyssey/compare/v1.26.0...v1.27.0) (2024-11-14)
 
 ### Features
