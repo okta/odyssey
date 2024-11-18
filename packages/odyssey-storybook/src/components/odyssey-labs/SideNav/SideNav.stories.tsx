@@ -461,16 +461,27 @@ export const CustomLogoImage: StoryObj<typeof SideNav> = {
 };
 
 export const DelayedSideNavItems: StoryObj<typeof SideNav> = {
-  render: function C({ sideNavItems, ...props }) {
+  args: {
+    isLoading: true,
+  },
+  render: function C({ sideNavItems, isLoading, ...props }) {
     const [sideNavItemsInState, setSideNavItemsInState] = useState<
       SideNavItem[]
     >([]);
+    const [isLoadingInState, setIsLoadingInState] = useState(isLoading);
     useEffect(() => {
-      setTimeout(() => setSideNavItemsInState(sideNavItems), 1000);
+      setTimeout(() => {
+        setSideNavItemsInState(sideNavItems);
+        setIsLoadingInState(false);
+      }, 1000);
     });
     return (
       <div style={{ height: "100vh" }}>
-        <SideNav sideNavItems={sideNavItemsInState} {...props} />
+        <SideNav
+          sideNavItems={sideNavItemsInState}
+          isLoading={isLoadingInState}
+          {...props}
+        />
       </div>
     );
   },
