@@ -86,7 +86,7 @@ describe("renderReactInWebComponent", () => {
     });
 
     await waitFor(() => {
-      expect(reactInWebComponentElement!.shadowRoot).toHaveTextContent(
+      expect(reactInWebComponentElement.shadowRoot).toHaveTextContent(
         testElementText,
       );
     });

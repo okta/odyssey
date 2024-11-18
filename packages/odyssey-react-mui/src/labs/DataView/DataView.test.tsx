@@ -94,7 +94,7 @@ describe("DataView", () => {
         availableLayouts={["table"]}
         getData={getData}
         tableLayoutOptions={{
-          columns: columns,
+          columns,
         }}
         hasSearch
         hasPagination
