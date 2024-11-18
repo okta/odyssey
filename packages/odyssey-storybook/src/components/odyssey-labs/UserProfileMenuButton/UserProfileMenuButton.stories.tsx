@@ -173,33 +173,3 @@ export const WithoutProfileIcon: StoryObj<UserProfileMenuButtonProps> = {
     });
   },
 };
-
-export const PrimaryVariant: StoryObj<UserProfileMenuButtonProps> = {
-  args: {
-    buttonVariant: "primary",
-  },
-};
-
-export const SecondaryVariant: StoryObj<UserProfileMenuButtonProps> = {
-  args: {
-    buttonVariant: "secondary",
-  },
-};
-
-export const DangerVariant: StoryObj<UserProfileMenuButtonProps> = {
-  args: {
-    buttonVariant: "danger",
-  },
-};
-
-export const DangerSecondaryVariant: StoryObj<UserProfileMenuButtonProps> = {
-  args: {
-    buttonVariant: "dangerSecondary",
-  },
-};
-
-export const FloatingActionVariant: StoryObj<UserProfileMenuButtonProps> = {
-  args: {
-    buttonVariant: "floatingAction",
-  },
-};

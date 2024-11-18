@@ -19,7 +19,10 @@ import {
   BaseMenuButtonProps,
 } from "../../Buttons/BaseMenuButton";
 
-export type UserProfileMenuButtonProps = Omit<BaseMenuButtonProps, "endIcon"> &
+export type UserProfileMenuButtonProps = Omit<
+  BaseMenuButtonProps,
+  "endIcon" | "variant"
+> &
   AdditionalBaseMenuButtonProps &
   UserProfileProps;
 
@@ -29,13 +32,12 @@ const UserProfileMenuButton = (props: UserProfileMenuButtonProps) => {
     userName,
     orgName,
     userNameEndIcon,
-    buttonVariant = "floating",
     ...menuButtonProps
   } = props;
   return (
     <BaseMenuButton
       {...menuButtonProps}
-      buttonVariant={buttonVariant}
+      buttonVariant="floating"
       omitEndIcon={true}
       buttonChildren={
         <UserProfile
