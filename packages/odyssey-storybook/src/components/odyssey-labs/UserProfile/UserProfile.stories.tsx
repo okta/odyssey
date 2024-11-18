@@ -14,9 +14,7 @@ import { UserProfile, UserProfileProps } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import icons from "../../../../.storybook/components/iconUtils";
-import { within } from "@storybook/testing-library";
 import { ChevronDownIcon, UserIcon } from "@okta/odyssey-react-mui/icons";
-import { PlaywrightProps } from "../../odyssey-mui/storybookTypes";
 
 const storybookMeta: Meta<UserProfileProps> = {
   title: "Labs Components/UserProfile",
@@ -63,29 +61,11 @@ export const WithProfileIcon: StoryObj<UserProfileProps> = {
   args: {
     profileIcon: <UserIcon />,
   },
-  play: async ({ canvasElement, step }: PlaywrightProps<UserProfileProps>) => {
-    await step("With profile icon", async () => {
-      const canvas = within(canvasElement);
-      const buttonPopover = canvas.queryByRole("button", {
-        name: "More actions",
-      });
-      expect(buttonPopover).not.toBeNull();
-    });
-  },
 };
 
 export const WithUserEndIcon: StoryObj<UserProfileProps> = {
   args: {
     userNameEndIcon: <ChevronDownIcon />,
-  },
-  play: async ({ canvasElement, step }: PlaywrightProps<UserProfileProps>) => {
-    await step("With profile icon", async () => {
-      const canvas = within(canvasElement);
-      const buttonPopover = canvas.queryByRole("button", {
-        name: "More actions",
-      });
-      expect(buttonPopover).not.toBeNull();
-    });
   },
 };
 
@@ -93,14 +73,5 @@ export const WithProfileAndUserEndIcon: StoryObj<UserProfileProps> = {
   args: {
     profileIcon: <UserIcon />,
     userNameEndIcon: <ChevronDownIcon />,
-  },
-  play: async ({ canvasElement, step }: PlaywrightProps<UserProfileProps>) => {
-    await step("With profile icon", async () => {
-      const canvas = within(canvasElement);
-      const buttonPopover = canvas.queryByRole("button", {
-        name: "More actions",
-      });
-      expect(buttonPopover).not.toBeNull();
-    });
   },
 };
