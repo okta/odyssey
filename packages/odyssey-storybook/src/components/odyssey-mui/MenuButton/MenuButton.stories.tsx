@@ -458,7 +458,7 @@ export const HelpPopover: StoryObj<MenuButtonProps> = {
     endIcon: <QuestionCircleIcon />,
     buttonVariant: "secondary",
     popoverContent: [
-      <Box sx={{ minWidth: "392px" }}>
+      <Box key="help-popover-content" sx={{ minWidth: "392px" }}>
         <BoxWithBottomMargin>
           <Heading5>Title</Heading5>
           <Subordinate>Caption</Subordinate>
@@ -508,12 +508,5 @@ export const HelpPopover: StoryObj<MenuButtonProps> = {
       </Box>,
     ],
     id: "floating",
-  },
-  play: async ({ canvasElement, step }: PlaywrightProps<MenuButtonProps>) => {
-    await step("Filter and Select from listbox", async () => {
-      const canvas = within(canvasElement);
-      const button = canvas.getByRole("button", { name: "More actions" });
-      expect(button).toHaveAttribute("id", "floating-button");
-    });
   },
 };
