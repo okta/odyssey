@@ -508,5 +508,13 @@ export const HelpPopover: StoryObj<MenuButtonProps> = {
       </Box>,
     ],
     id: "floating",
+    tooltipText: "More actions",
+  },
+  play: async ({ canvasElement, step }: PlaywrightProps<MenuButtonProps>) => {
+    await step("MenuButton Aria-Label", async () => {
+      const canvas = within(canvasElement);
+      const menuButton = canvas.queryByRole("button", { name: "More actions" });
+      expect(menuButton).not.toBeNull();
+    });
   },
 };
