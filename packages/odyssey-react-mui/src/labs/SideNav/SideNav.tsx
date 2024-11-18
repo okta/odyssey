@@ -301,7 +301,13 @@ const SideNav = ({
   const { t } = useTranslation();
   const [sideNavItemsList, updateSideNavItemsList] = useState(sideNavItems);
 
+  // The default value (sideNavItems) passed to useState is ONLY used by the useState hook for
+  // the very first value. Subsequent updates to the prop (sideNavItems) need to cause the state
+  // to update!
+  useEffect(() => updateSideNavItemsList(sideNavItems), [sideNavItems]);
+
   useEffect(() => {
+    // This is called directly in this effect AND perhaps as a result of the ResizeObserver
     const updateIsContentScrollable = () => {
       if (
         scrollableContentRef.current &&
@@ -381,7 +387,7 @@ const SideNav = ({
       }
       cancelAnimationFrame(resizeObserverDebounceTimer); // Ensure timer is cleared on component unmount
     };
-  }, [sideNavItems]);
+  }, [sideNavItemsList]);
 
   const scrollIntoViewRef = useRef<HTMLLIElement>(null);
   /**
@@ -390,7 +396,7 @@ const SideNav = ({
    * call scrollIntoView in the effect
    */
   const firstSideNavItemIdWithIsSelected = useMemo(() => {
-    const flattenedItems = sideNavItems.flatMap((sideNavItem) =>
+    const flattenedItems = sideNavItemsList.flatMap((sideNavItem) =>
       sideNavItem.nestedNavItems
         ? [sideNavItem, ...sideNavItem.nestedNavItems]
         : sideNavItem,
@@ -399,7 +405,7 @@ const SideNav = ({
       (sideNavItem) => sideNavItem.isSelected,
     );
     return firstItemWithIsSelected?.id;
-  }, [sideNavItems]);
+  }, [sideNavItemsList]);
   /**
    * Once we've rendered and if we have an item to scroll to, do the scroll action.
    * This must rely on checking firstSideNavItemIdWithIsSelected or it will not run
@@ -409,7 +415,7 @@ const SideNav = ({
     if (firstSideNavItemIdWithIsSelected && scrollIntoViewRef.current) {
       scrollIntoViewRef.current.scrollIntoView();
     }
-  }, [firstSideNavItemIdWithIsSelected, scrollIntoViewRef]);
+  }, [firstSideNavItemIdWithIsSelected]);
 
   /**
    * We only want to put a ref on a node iff it is the first selected node.

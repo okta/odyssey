@@ -10,7 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { SideNav, SideNavProps } from "@okta/odyssey-react-mui/labs";
+import {
+  SideNav,
+  SideNavItem,
+  SideNavProps,
+} from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import {
@@ -37,6 +41,7 @@ import {
 } from "@storybook/testing-library";
 import { PlaywrightProps } from "../../odyssey-mui/storybookTypes";
 import PlaceholderLogo from "../PickerWithOptionAdornment/PlaceholderLogo";
+import { useEffect, useState } from "react";
 
 const storybookMeta: Meta<SideNavProps> = {
   title: "Labs Components/SideNav",
@@ -450,6 +455,33 @@ export const CustomLogoImage: StoryObj<typeof SideNav> = {
     return (
       <div style={{ height: "100vh" }}>
         <SideNav {...props} />
+      </div>
+    );
+  },
+};
+
+export const DelayedSideNavItems: StoryObj<typeof SideNav> = {
+  args: {
+    isLoading: true,
+  },
+  render: function C({ sideNavItems, isLoading, ...props }) {
+    const [sideNavItemsInState, setSideNavItemsInState] = useState<
+      SideNavItem[]
+    >([]);
+    const [isLoadingInState, setIsLoadingInState] = useState(isLoading);
+    useEffect(() => {
+      setTimeout(() => {
+        setSideNavItemsInState(sideNavItems);
+        setIsLoadingInState(false);
+      }, 1000);
+    });
+    return (
+      <div style={{ height: "100vh" }}>
+        <SideNav
+          sideNavItems={sideNavItemsInState}
+          isLoading={isLoadingInState}
+          {...props}
+        />
       </div>
     );
   },
