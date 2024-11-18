@@ -667,7 +667,8 @@ export const components = ({
               color: odysseyTokens.TypographyColorBody,
 
               "&:hover": {
-                backgroundColor: odysseyTokens.HueNeutral100,
+                backgroundColor: odysseyTokens.HueNeutral300,
+                borderColor: odysseyTokens.HueNeutral400,
               },
 
               "&:active": {
@@ -677,17 +678,9 @@ export const components = ({
               },
 
               "&:disabled": {
-                ...(contrastMode === "highContrast" && {
-                  backgroundColor: odysseyTokens.HueNeutral200,
-                  borderColor: "transparent",
-                  color: odysseyTokens.TypographyColorDisabled,
-                }),
-
-                ...(contrastMode === "lowContrast" && {
-                  backgroundColor: odysseyTokens.HueNeutral100,
-                  borderColor: "transparent",
-                  color: odysseyTokens.TypographyColorDisabled,
-                }),
+                backgroundColor: odysseyTokens.HueNeutral200,
+                borderColor: "transparent",
+                color: odysseyTokens.TypographyColorDisabled,
               },
             }),
 
@@ -719,7 +712,8 @@ export const components = ({
               color: odysseyTokens.PaletteDangerMain,
 
               "&:hover": {
-                backgroundColor: odysseyTokens.HueNeutral100,
+                backgroundColor: odysseyTokens.HueNeutral200,
+                borderColor: odysseyTokens.HueNeutral400,
                 color: odysseyTokens.PaletteDangerMain,
               },
 
@@ -730,8 +724,8 @@ export const components = ({
               },
 
               "&:disabled": {
-                backgroundColor: "transparent",
-                borderColor: odysseyTokens.PaletteDangerLight,
+                backgroundColor: odysseyTokens.PaletteDangerHighlight,
+                borderColor: "transparent",
                 color: odysseyTokens.PaletteDangerLight,
               },
             }),
@@ -741,11 +735,13 @@ export const components = ({
               color: odysseyTokens.TypographyColorBody,
 
               "&:hover": {
-                backgroundColor: odysseyTokens.HueNeutral100,
+                backgroundColor: odysseyTokens.HueNeutral200,
               },
 
               "&:active": {
-                backgroundColor: odysseyTokens.HueNeutral200,
+                backgroundColor: "transparent",
+                color: odysseyTokens.HueBlue600,
+                borderColor: odysseyTokens.HueBlue600,
               },
 
               "&:disabled": {
@@ -759,11 +755,12 @@ export const components = ({
               color: odysseyTokens.TypographyColorAction,
 
               "&:hover": {
-                backgroundColor: odysseyTokens.HueNeutral100,
+                backgroundColor: odysseyTokens.HueNeutral200,
               },
 
               "&:active": {
-                backgroundColor: odysseyTokens.HueNeutral200,
+                backgroundColor: "transparent",
+                borderColor: odysseyTokens.HueBlue600,
               },
 
               "&:disabled": {
