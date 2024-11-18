@@ -39,6 +39,7 @@ import { SideNavFooterContent } from "./SideNavFooterContent";
 import { SideNavItemContentContext } from "./SideNavItemContentContext";
 import { SideNavToggleButton } from "./SideNavToggleButton";
 import { SortableList } from "./SortableList/SortableList";
+import { Overline } from "../../Typography";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { arrayMove } from "@dnd-kit/sortable";
 
@@ -129,7 +130,7 @@ const StyledSideNav = styled("nav", {
       zIndex: 2,
     },
 
-    "&:has([data-sidenav-toggle='true']:hover), &:has([data-sidenav-toggle='true']:focus)":
+    "&:has([data-sidenav-toggle='true']:hover), &:has([data-sidenav-toggle='true']:focus-visible)":
       {
         ...(isSideNavCollapsed && {
           "&::after": {
@@ -192,16 +193,8 @@ const SectionHeaderContainer = styled("li", {
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
   paddingBlock: odysseyDesignTokens.Spacing1,
   paddingInline: odysseyDesignTokens.Spacing4,
-}));
-
-const SectionHeader = styled("h3", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
-  fontFamily: odysseyDesignTokens.TypographyFamilyHeading,
-  fontSize: odysseyDesignTokens.TypographySizeOverline,
-  fontWeight: odysseyDesignTokens.TypographyWeightHeadingBold,
+  marginBlock: `${odysseyDesignTokens.Spacing3}`,
   color: odysseyDesignTokens.HueNeutral600,
-  textTransform: "uppercase",
 }));
 
 const SideNavFooter = styled("div", {
@@ -596,11 +589,7 @@ const SideNav = ({
                             key={id}
                             odysseyDesignTokens={odysseyDesignTokens}
                           >
-                            <SectionHeader
-                              odysseyDesignTokens={odysseyDesignTokens}
-                            >
-                              {label}
-                            </SectionHeader>
+                            <Overline component="h3">{label}</Overline>
                           </SectionHeaderContainer>
                         );
                       } else if (childNavItems) {
