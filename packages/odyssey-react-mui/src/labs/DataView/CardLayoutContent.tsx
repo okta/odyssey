@@ -30,19 +30,19 @@ import { RowActions } from "./RowActions";
 import { DataCard } from "./DataCard";
 import { CardLayout, CardLayoutProps, UniversalProps } from "./componentTypes";
 
-export type CardLayoutContentProps = {
+export type CardLayoutContentProps<TData extends MRT_RowData> = {
   currentLayout: CardLayout;
-  data: MRT_RowData[];
-  draggingRow?: MRT_Row<MRT_RowData> | null;
+  data: TData[];
+  draggingRow?: MRT_Row<TData> | null;
   emptyState: ReactNode;
-  getRowId: UniversalProps["getRowId"];
-  hasRowReordering: UniversalProps["hasRowReordering"];
-  hasRowSelection: UniversalProps["hasRowSelection"];
+  getRowId: UniversalProps<TData>["getRowId"];
+  hasRowReordering: UniversalProps<TData>["hasRowReordering"];
+  hasRowSelection: UniversalProps<TData>["hasRowSelection"];
   isEmpty?: boolean;
   isLoading: boolean;
   isNoResults?: boolean;
   isRowReorderingDisabled?: boolean;
-  onReorderRows: UniversalProps["onReorderRows"];
+  onReorderRows: UniversalProps<TData>["onReorderRows"];
   pagination: { pageIndex: number; pageSize: number };
   rowReorderingUtilities: {
     dragHandleStyles: CSSObject;
@@ -64,15 +64,13 @@ export type CardLayoutContentProps = {
       row,
       event,
     }: {
-      table: MRT_TableInstance<MRT_RowData>;
-      row: MRT_Row<MRT_RowData>;
+      table: MRT_TableInstance<TData>;
+      row: MRT_Row<TData>;
       event: React.KeyboardEvent<HTMLButtonElement>;
     }) => void;
-    handleDragHandleOnDragCapture: (
-      table: MRT_TableInstance<MRT_RowData>,
-    ) => void;
-    handleDragHandleOnDragEnd: (table: MRT_TableInstance<MRT_RowData>) => void;
-    resetDraggingAndHoveredRow: (table: MRT_TableInstance<MRT_RowData>) => void;
+    handleDragHandleOnDragCapture: (table: MRT_TableInstance<TData>) => void;
+    handleDragHandleOnDragEnd: (table: MRT_TableInstance<TData>) => void;
+    resetDraggingAndHoveredRow: (table: MRT_TableInstance<TData>) => void;
     updateRowOrder: ({
       rowId,
       newRowIndex,
@@ -83,8 +81,13 @@ export type CardLayoutContentProps = {
   };
   rowSelection: MRT_RowSelectionState;
   setRowSelection: Dispatch<SetStateAction<MRT_RowSelectionState>>;
-  cardLayoutOptions: CardLayoutProps;
-  totalRows: UniversalProps["totalRows"];
+  cardLayoutOptions: CardLayoutProps<TData>;
+  totalRows: UniversalProps<TData>["totalRows"];
+};
+type CardLayoutContentComponent = (<TData extends MRT_RowData>(
+  props: CardLayoutContentProps<TData>,
+) => JSX.Element) & {
+  displayName?: string;
 };
 
 const StackContainer = styled("div", {
@@ -134,7 +137,7 @@ const CheckboxContainer = styled("div", {
   marginBlockStart: `-${odysseyDesignTokens.Spacing1}`,
 }));
 
-const CardLayoutContent = ({
+const CardLayoutContent = <TData extends MRT_RowData>({
   currentLayout,
   data,
   emptyState,
@@ -151,7 +154,7 @@ const CardLayoutContent = ({
   setRowSelection,
   cardLayoutOptions,
   totalRows,
-}: CardLayoutContentProps) => {
+}: CardLayoutContentProps<TData>) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const handleRowSelectionChange = useCallback(
@@ -185,7 +188,7 @@ const CardLayoutContent = ({
             <Box>{emptyState}</Box>
           ) : (
             <>
-              {data.map((row: MRT_RowData, index: number) => {
+              {data.map((row: TData, index: number) => {
                 const {
                   overline,
                   title,
@@ -251,7 +254,9 @@ const CardLayoutContent = ({
   );
 };
 
-const MemoizedCardLayoutContent = memo(CardLayoutContent);
+const MemoizedCardLayoutContent = memo(
+  CardLayoutContent,
+) as CardLayoutContentComponent;
 MemoizedCardLayoutContent.displayName = "CardLayoutContent";
 
 export { MemoizedCardLayoutContent as CardLayoutContent };

@@ -82,12 +82,12 @@ export type UpdateFiltersOrValues = ({
 }) => void;
 
 // This is the shape of each individual filter
-export type DataFilter = {
+export type DataFilter<TData extends MRT_RowData> = {
   /**
    * A unique ID for the filter, typically the same id
    * as the column it'll be applied to.
    */
-  id: Exclude<MRT_ColumnDef<MRT_RowData>["accessorKey"], undefined>;
+  id: Exclude<MRT_ColumnDef<TData>["accessorKey"], undefined>;
   /**
    * `Autocomplete` normally only allows values that exist in the list box. This feature allows you to enter in any value in the text field and have that be the stored value in `Autocomplete`
    *
@@ -102,7 +102,7 @@ export type DataFilter = {
    * The type of filter, which determines which filtering control
    * is shown.
    */
-  variant?: MRT_ColumnDef<MRT_RowData>["filterVariant"];
+  variant?: MRT_ColumnDef<TData>["filterVariant"];
   /**
    * The current value of the filter. Typically a string, but
    * filters that allow for multiple selections (such as multi-select)
@@ -121,7 +121,7 @@ export type DataFilter = {
 };
 
 // This is the type of the DataFilters component itself
-export type DataFiltersProps = {
+export type DataFiltersProps<TData extends MRT_RowData> = {
   /**
    * The callback that's fired when the search input changes
    * (either on change or on submit, based on the value of `hasSearchSubmitButton`).
@@ -131,7 +131,7 @@ export type DataFiltersProps = {
   /**
    * The callback that's fired when filter values change.
    */
-  onChangeFilters?: (filters: Array<DataFilter>) => void;
+  onChangeFilters?: (filters: Array<DataFilter<TData>>) => void;
   /**
    * If true, a Search button will be provided alongside the search input
    * and `onChangeSearch` will fire when the button is clicked, rather than
@@ -157,16 +157,28 @@ export type DataFiltersProps = {
    * The filters available in the filter menu. If undefined,
    * the filter menu won't be shown.
    */
-  filters?: Array<DataFilter>;
+  filters?: Array<DataFilter<TData>>;
   /**
    * If true, the filter and search will be disabled
    */
   isDisabled?: boolean;
 };
 
-type FilterTagsProps = {
-  activeFilters: DataFilter[];
+type DataFiltersComponent = (<TData extends MRT_RowData>(
+  props: DataFiltersProps<TData>,
+) => JSX.Element) & {
+  displayName?: string;
+};
+
+type FilterTagsProps<TData extends MRT_RowData> = {
+  activeFilters: DataFilter<TData>[];
   updateFilterAndInputValues: UpdateFiltersOrValues;
+};
+
+type FilterTagsComponent = (<TData extends MRT_RowData>(
+  props: FilterTagsProps<TData>,
+) => JSX.Element) & {
+  displayName?: string;
 };
 
 type FiltersToRender = {
@@ -175,12 +187,12 @@ type FiltersToRender = {
   value: string;
 };
 
-const FilterTags = ({
+const FilterTags: FilterTagsComponent = <TData extends MRT_RowData>({
   activeFilters,
   updateFilterAndInputValues,
-}: FilterTagsProps) => {
+}: FilterTagsProps<TData>) => {
   const filtersWithValues = activeFilters.filter(
-    (activeFilter: DataFilter) => activeFilter.value,
+    (activeFilter: DataFilter<TData>) => activeFilter.value,
   );
   const filtersToRender: FiltersToRender[] = [];
 
@@ -252,10 +264,10 @@ const FilterTags = ({
   );
 };
 
-const MemoizedFilterTags = memo(FilterTags);
+const MemoizedFilterTags = memo(FilterTags) as FilterTagsComponent;
 MemoizedFilterTags.displayName = "FilterTags";
 
-const DataFilters = ({
+const DataFilters = <TData extends MRT_RowData>({
   onChangeSearch,
   onChangeFilters,
   hasSearchSubmitButton = false,
@@ -264,8 +276,8 @@ const DataFilters = ({
   additionalActions,
   filters: filtersProp = [],
   isDisabled,
-}: DataFiltersProps) => {
-  const [filters, setFilters] = useState<DataFilter[]>(filtersProp);
+}: DataFiltersProps<TData>) => {
+  const [filters, setFilters] = useState<DataFilter<TData>[]>(filtersProp);
   const { t } = useTranslation();
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
@@ -301,7 +313,7 @@ const DataFilters = ({
   >();
 
   const [filterPopoverCurrentFilter, setFilterPopoverCurrentFilter] = useState<
-    DataFilter | undefined
+    DataFilter<TData> | undefined
   >();
 
   const menuRef = useRef<HTMLDivElement>();
@@ -861,7 +873,7 @@ const DataFilters = ({
   );
 };
 
-const MemoizedDataFilters = memo(DataFilters);
+const MemoizedDataFilters = memo(DataFilters) as DataFiltersComponent;
 MemoizedDataFilters.displayName = "DataFilters";
 
 export { MemoizedDataFilters as DataFilters };

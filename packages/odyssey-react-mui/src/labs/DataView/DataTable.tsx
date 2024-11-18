@@ -14,10 +14,17 @@ import { memo, useMemo } from "react";
 
 import { DataView } from "./DataView";
 import { TableLayoutProps, UniversalProps } from "./componentTypes";
+import { MRT_RowData } from "material-react-table";
 
-export type DataTableProps = UniversalProps & TableLayoutProps;
+export type DataTableProps<TData extends MRT_RowData> = UniversalProps<TData> &
+  TableLayoutProps<TData>;
+type DataTableComponent = (<TData extends MRT_RowData>(
+  props: DataTableProps<TData>,
+) => JSX.Element) & {
+  displayName?: string;
+};
 
-const DataTable = ({
+const DataTable = <TData extends MRT_RowData>({
   additionalActionButton,
   additionalActionMenuItems,
   bulkActionMenuItems,
@@ -54,7 +61,7 @@ const DataTable = ({
   rowActionMenuItems,
   searchDelayTime,
   totalRows,
-}: DataTableProps) => {
+}: DataTableProps<TData>) => {
   const tableLayoutOptions = useMemo(
     () => ({
       columns,
@@ -115,7 +122,7 @@ const DataTable = ({
   );
 };
 
-const MemoizedDataTable = memo(DataTable);
+const MemoizedDataTable = memo(DataTable) as DataTableComponent;
 MemoizedDataTable.displayName = "DataTable";
 
 export { MemoizedDataTable as DataTable };

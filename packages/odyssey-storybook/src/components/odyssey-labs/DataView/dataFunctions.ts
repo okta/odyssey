@@ -18,7 +18,7 @@ export const filterData = ({
   ...args
 }: {
   data: Person[];
-} & DataGetDataType) => {
+} & DataGetDataType<Person>) => {
   const { search, filters, sort, page = 1, resultsPerPage = 20 } = args;
 
   const searchFiltered = search
@@ -45,7 +45,7 @@ export const filterData = ({
 
   const handleStartLetterFilter = (
     row: Person,
-    value: DataFilter["value"],
+    value: DataFilter<Person>["value"],
   ): boolean => {
     if (typeof row.name !== "string") return true;
     const firstLetter = row.name[0]?.toLowerCase();
@@ -57,7 +57,7 @@ export const filterData = ({
   const handleStandardFilter = (
     row: Person,
     id: keyof Person,
-    value: DataFilter["value"],
+    value: DataFilter<Person>["value"],
   ): boolean => {
     const rowValue = String(row[id]).toLowerCase();
 
@@ -98,7 +98,7 @@ export const filterData = ({
   // for the provided sample data and demo filters.
   const columnFiltered = filters
     ? searchFiltered.filter((row) =>
-        filters.every(({ id, value }: DataFilter) => {
+        filters.every(({ id, value }: DataFilter<Person>) => {
           // If the filter value is null, return all the data
           if (value === null || value === undefined) {
             return true;

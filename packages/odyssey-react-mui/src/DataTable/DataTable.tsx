@@ -33,6 +33,7 @@ import {
   MRT_Column,
   MRT_ColumnDef,
   MRT_TableInstance,
+  MRT_RowData,
 } from "material-react-table";
 import { useTranslation } from "react-i18next";
 import {
@@ -64,30 +65,34 @@ import { EmptyState } from "../EmptyState";
 import { Button } from "../Button";
 import { Callout } from "../Callout";
 
-export type DataTableColumn<T extends DataTableRowData> = MRT_ColumnDef<T> & {
-  /**
-   * @deprecated use hasTextWrapping instead of enableWrapping
-   */
-  enableWrapping?: boolean;
-  hasTextWrapping?: boolean;
-};
+export type DataTableColumn<TData extends DataTableRowData> =
+  MRT_ColumnDef<TData> & {
+    /**
+     * @deprecated use hasTextWrapping instead of enableWrapping
+     */
+    enableWrapping?: boolean;
+    hasTextWrapping?: boolean;
+  };
 
-type DataTableColumnInstance<T extends DataTableRowData> = Omit<
-  MRT_Column<T, unknown>,
+type DataTableColumnInstance<TData extends DataTableRowData> = Omit<
+  MRT_Column<TData, unknown>,
   "columnDef"
 > & {
-  columnDef: DataTableColumn<T>;
+  columnDef: DataTableColumn<TData>;
 };
 
-type DataTableCell<T extends DataTableRowData> = Omit<MRT_Cell<T>, "column"> & {
-  column: DataTableColumnInstance<T>;
+type DataTableCell<TData extends DataTableRowData> = Omit<
+  MRT_Cell<TData>,
+  "column"
+> & {
+  column: DataTableColumnInstance<TData>;
 };
 
-export type DataTableGetDataType = {
+export type DataTableGetDataType<TData extends MRT_RowData> = {
   page?: number;
   resultsPerPage?: number;
   search?: string;
-  filters?: DataFilter[];
+  filters?: DataFilter<TData>[];
   sort?: MRT_SortingState;
 };
 
@@ -101,7 +106,7 @@ export type DataTableRenderDetailPanelType = {
   table: MRT_TableInstance<DataTableRowData>;
 };
 
-export type DataTableProps = {
+export type DataTableProps<TData extends MRT_RowData> = {
   /**
    * An optional action button above the table.
    */
@@ -119,7 +124,7 @@ export type DataTableProps = {
   /**
    * The columns that make up the table
    */
-  columns: DataTableColumn<DataTableRowData>[];
+  columns: DataTableColumn<TData>[];
   /**
    * The current page number.
    */
@@ -135,11 +140,11 @@ export type DataTableProps = {
   /**
    * An optional set of filters to render in the filters menu
    */
-  filters?: Array<DataFilter | DataTableColumn<DataTableRowData> | string>;
+  filters?: Array<DataFilter<TData> | DataTableColumn<TData> | string>;
   /**
    * The function to get the ID of a row
    */
-  getRowId?: MRT_TableOptions<DataTableRowData>["getRowId"];
+  getRowId?: MRT_TableOptions<TData>["getRowId"];
   /**
    * Callback that fires whenever the table needs to fetch new data, due to changes in
    * page, results per page, search input, filters, or sorting
@@ -150,9 +155,9 @@ export type DataTableProps = {
     search,
     filters,
     sort,
-  }: DataTableGetDataType) =>
-    | MRT_TableOptions<DataTableRowData>["data"]
-    | Promise<MRT_TableOptions<DataTableRowData>["data"]>;
+  }: DataTableGetDataType<TData>) =>
+    | MRT_TableOptions<TData>["data"]
+    | Promise<MRT_TableOptions<TData>["data"]>;
   /**
    * If true, the end user can resize individual columns.
    */
@@ -219,15 +224,15 @@ export type DataTableProps = {
   /**
    * The optional component to display when expanding a row.
    */
-  renderDetailPanel?: MRT_TableOptions<DataTableRowData>["renderDetailPanel"];
+  renderDetailPanel?: MRT_TableOptions<TData>["renderDetailPanel"];
   /**
    * Action buttons to display in each row
    */
-  rowActionButtons?: DataTableRowActionsProps["rowActionButtons"];
+  rowActionButtons?: DataTableRowActionsProps<TData>["rowActionButtons"];
   /**
    * Menu items to include in the optional actions menu on each row.
    */
-  rowActionMenuItems?: DataTableRowActionsProps["rowActionMenuItems"];
+  rowActionMenuItems?: DataTableRowActionsProps<TData>["rowActionMenuItems"];
   /**
    * The debounce time, in milliseconds, for the search input firing
    * `onChangeSearch` when changed. If `hasSearchSubmitButton` is true,
@@ -321,7 +326,7 @@ const ScrollableTableContainer = styled("div", {
   }),
 );
 
-const DataTable = ({
+const DataTable = <TData extends MRT_RowData>({
   additionalActionButton,
   additionalActionMenuItems,
   bulkActionMenuItems,
@@ -357,16 +362,15 @@ const DataTable = ({
   rowActionMenuItems,
   searchDelayTime,
   totalRows,
-}: DataTableProps) => {
+}: DataTableProps<TData>) => {
   const { t } = useTranslation();
 
-  const [data, setData] = useState<DataTableRowData[]>([]);
+  const [data, setData] = useState<TData[]>([]);
   const [pagination, setPagination] = useState({
     pageIndex: currentPage,
     pageSize: resultsPerPage,
   });
-  const [draggingRow, setDraggingRow] =
-    useState<MRT_Row<DataTableRowData> | null>();
+  const [draggingRow, setDraggingRow] = useState<MRT_Row<TData> | null>();
   const [isTableContainerScrolledToStart, setIsTableContainerScrolledToStart] =
     useState(true);
   const [isTableContainerScrolledToEnd, setIsTableContainerScrolledToEnd] =
@@ -385,8 +389,8 @@ const DataTable = ({
     useState<MRT_DensityState>(initialDensity);
   const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
   const [search, setSearch] = useState<string>(initialSearchValue);
-  const [filters, setFilters] = useState<DataFilter[]>();
-  const [initialFilters, setInitialFilters] = useState<DataFilter[]>();
+  const [filters, setFilters] = useState<DataFilter<TData>[]>();
+  const [initialFilters, setInitialFilters] = useState<DataFilter<TData>[]>();
   const [isLoading, setIsLoading] = useState<boolean | undefined>(true);
   const [isEmpty, setIsEmpty] = useState<boolean | undefined>();
   const [errorMessage, setErrorMessage] = useState<string | undefined>(
@@ -423,9 +427,7 @@ const DataTable = ({
     page: pagination.pageIndex,
   });
 
-  const getRowId = getRowIdProp
-    ? getRowIdProp
-    : (row: DataTableRowData) => row.id;
+  const getRowId = getRowIdProp ? getRowIdProp : (row: TData) => row.id;
 
   const rowDensityClassName = useMemo(() => {
     return rowDensity === "spacious"
@@ -436,7 +438,7 @@ const DataTable = ({
   }, [rowDensity]);
 
   const renderRowActions = useCallback(
-    ({ row }: { row: MRT_Row<DataTableRowData> }) => {
+    ({ row }: { row: MRT_Row<TData> }) => {
       const currentIndex =
         row.index + (pagination.pageIndex - 1) * pagination.pageSize;
       return (
@@ -468,7 +470,7 @@ const DataTable = ({
    * filterOptions format, which allows for strings and { label: string, value: string }
    */
   const convertFilterSelectOptions = useCallback(
-    (options: DataTableColumn<DataTableRowData>["filterSelectOptions"]) =>
+    (options: DataTableColumn<TData>["filterSelectOptions"]) =>
       options?.map((option) =>
         typeof option === "string"
           ? {
@@ -486,15 +488,16 @@ const DataTable = ({
   );
 
   const convertColumnToFilter = useCallback(
-    (column: DataTableColumn<DataTableRowData>) =>
+    (column: DataTableColumn<TData>) =>
       column.enableColumnFilter !== false && column.accessorKey
-        ? ({
+        ? {
             id: column.accessorKey,
             label: column.header,
             variant: column.filterVariant,
             options: convertFilterSelectOptions(column.filterSelectOptions),
-          } satisfies DataFilter as DataFilter)
-        : null,
+          }
+        : // } satisfies DataFilter as DataFilter)
+          null,
     [convertFilterSelectOptions],
   );
 
@@ -505,7 +508,7 @@ const DataTable = ({
    */
   const dataTableFilters = useMemo(() => {
     const providedFilters = filtersProp || columns;
-    return providedFilters.reduce<DataFilter[]>((accumulator, item) => {
+    return providedFilters.reduce<DataFilter<TData>[]>((accumulator, item) => {
       if (typeof item === "string") {
         const foundColumn = columns.find(
           (column) => column.accessorKey === item,
@@ -532,7 +535,7 @@ const DataTable = ({
   }, [columns, filtersProp, convertColumnToFilter]);
 
   const defaultCell = useCallback(
-    ({ cell }: { cell: DataTableCell<DataTableRowData> }) => {
+    ({ cell }: { cell: DataTableCell<TData> }) => {
       const value = cell.getValue<string>();
       const hasTextWrapping =
         cell.column.columnDef.hasTextWrapping ||
@@ -745,7 +748,7 @@ const DataTable = ({
     // Row actions
     enableRowActions: shouldDisplayRowActions,
     positionActionsColumn:
-      "last" as MRT_TableOptions<DataTableRowData>["positionActionsColumn"],
+      "last" as MRT_TableOptions<TData>["positionActionsColumn"],
     renderRowActions: ({ row }) => renderRowActions({ row }),
 
     // Row selection

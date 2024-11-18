@@ -25,7 +25,7 @@ import { MenuItem } from "../../MenuItem";
 import { DataTableProps } from "./DataTable";
 import { MenuButtonProps } from "../../MenuButton";
 
-export type RowActionsProps = {
+export type RowActionsProps<TData extends MRT_RowData> = {
   isRowReorderingDisabled?: boolean;
   row: MRT_Row<MRT_RowData> | MRT_RowData;
   rowActionButtons?: (
@@ -33,7 +33,7 @@ export type RowActionsProps = {
   ) => ReactElement<typeof Button> | ReactElement<typeof Fragment>;
   rowActionMenuItems?: (row: MRT_RowData) => MenuButtonProps["children"];
   rowIndex: number;
-  totalRows?: DataTableProps["totalRows"];
+  totalRows?: DataTableProps<TData>["totalRows"];
   updateRowOrder?: ({
     newRowIndex,
     rowId,
@@ -43,14 +43,14 @@ export type RowActionsProps = {
   }) => void;
 };
 
-const RowActions = ({
+const RowActions = <TData extends MRT_RowData>({
   isRowReorderingDisabled,
   row,
   rowActionMenuItems,
   rowIndex,
   totalRows,
   updateRowOrder,
-}: RowActionsProps) => {
+}: RowActionsProps<TData>) => {
   const { t } = useTranslation();
 
   const handleToFrontClick = useCallback(() => {

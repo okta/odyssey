@@ -21,42 +21,43 @@ import {
 
 import { DataFilter } from "../DataFilters";
 
-export type DataQueryParamsType = {
-  filters?: DataFilter[];
+export type DataQueryParamsType<TData extends MRT_RowData> = {
+  filters?: DataFilter<TData>[];
   page?: number;
   resultsPerPage?: number;
   search?: string;
   sort?: MRT_SortingState;
 };
 
-export type DataTableColumn<T extends MRT_RowData> = MRT_ColumnDef<T> & {
-  /**
-   * @deprecated use hasTextWrapping instead of enableWrapping
-   */
-  enableWrapping?: boolean;
-  hasTextWrapping?: boolean;
-};
+export type DataTableColumn<TData extends MRT_RowData> =
+  MRT_ColumnDef<TData> & {
+    /**
+     * @deprecated use hasTextWrapping instead of enableWrapping
+     */
+    enableWrapping?: boolean;
+    hasTextWrapping?: boolean;
+  };
 
-export type DataTableColumnInstance<T extends MRT_RowData> = Omit<
-  MRT_Column<T, unknown>,
+export type DataTableColumnInstance<TData extends MRT_RowData> = Omit<
+  MRT_Column<TData, unknown>,
   "columnDef"
 > & {
-  columnDef: DataTableColumn<T>;
+  columnDef: DataTableColumn<TData>;
 };
 
-export type DataTableCell<T extends MRT_RowData> = Omit<
-  MRT_Cell<T>,
+export type DataTableCell<TData extends MRT_RowData> = Omit<
+  MRT_Cell<TData>,
   "column"
 > & {
-  column: DataTableColumnInstance<T>;
+  column: DataTableColumnInstance<TData>;
 };
 
 export type DataColumns = DataTableColumn<MRT_RowData>[];
 
 export type DataRow = MRT_RowData;
 
-export type DataGetDataType = {
-  filters?: DataFilter[];
+export type DataGetDataType<TData extends MRT_RowData> = {
+  filters?: DataFilter<TData>[];
   page?: number;
   resultsPerPage?: number;
   search?: string;
@@ -71,7 +72,8 @@ export type DataOnReorderRowsType = {
 export type DataRowSelectionState = MRT_RowSelectionState;
 
 // Provided for backwards compatibilty with old DataTable types
-export type DataTableGetDataType = DataGetDataType;
+export type DataTableGetDataType<TData extends MRT_RowData> =
+  DataGetDataType<TData>;
 export type DataTableOnReorderRowsType = DataOnReorderRowsType;
 export type DataTableRowSelectionState = DataRowSelectionState;
 export type DataTableRow = DataRow;

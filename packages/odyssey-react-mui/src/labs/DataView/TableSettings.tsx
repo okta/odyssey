@@ -12,7 +12,7 @@
 
 import { Dispatch, SetStateAction, memo, useCallback, useMemo } from "react";
 import { Checkbox as MuiCheckbox } from "@mui/material";
-import { MRT_DensityState } from "material-react-table";
+import { MRT_DensityState, MRT_RowData } from "material-react-table";
 import { useTranslation } from "react-i18next";
 
 import { densityValues } from "./constants";
@@ -21,17 +21,23 @@ import { MenuButton } from "../../MenuButton";
 import { MenuItem } from "../../MenuItem";
 import { TableLayoutProps, TableState } from "./componentTypes";
 
-export type TableSettingsProps = {
+export type TableSettingsProps<TData extends MRT_RowData> = {
   setTableState: Dispatch<SetStateAction<TableState>>;
-  tableLayoutOptions: TableLayoutProps;
+  tableLayoutOptions: TableLayoutProps<TData>;
   tableState: TableState;
 };
 
-const TableSettings = ({
+type TableSettingsComponent = (<TData extends MRT_RowData>(
+  props: TableSettingsProps<TData>,
+) => JSX.Element) & {
+  displayName?: string;
+};
+
+const TableSettings: TableSettingsComponent = <TData extends MRT_RowData>({
   setTableState,
   tableLayoutOptions,
   tableState,
-}: TableSettingsProps) => {
+}: TableSettingsProps<TData>) => {
   const { t } = useTranslation();
 
   const { hasChangeableDensity, hasColumnVisibility, columns } =
@@ -133,7 +139,7 @@ const TableSettings = ({
   );
 };
 
-const MemoizedTableSettings = memo(TableSettings);
+const MemoizedTableSettings = memo(TableSettings) as TableSettingsComponent;
 MemoizedTableSettings.displayName = "TableSettings";
 
 export { MemoizedTableSettings as TableSettings };

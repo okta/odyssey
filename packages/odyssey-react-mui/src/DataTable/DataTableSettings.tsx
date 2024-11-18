@@ -17,22 +17,28 @@ import { MenuItem } from "../MenuItem";
 import { ListIcon, ShowIcon } from "../icons.generated";
 import { densityValues } from "./constants";
 import { DataTableProps } from "./DataTable";
-import { MRT_VisibilityState } from "material-react-table";
+import { MRT_RowData, MRT_VisibilityState } from "material-react-table";
 import { useTranslation } from "react-i18next";
 
-export type DataTableSettingsProps = {
-  hasChangeableDensity: DataTableProps["hasChangeableDensity"];
+export type DataTableSettingsProps<TData extends MRT_RowData> = {
+  hasChangeableDensity: DataTableProps<TData>["hasChangeableDensity"];
   rowDensity: (typeof densityValues)[number];
   setRowDensity: Dispatch<SetStateAction<(typeof densityValues)[number]>>;
-  hasColumnVisibility: DataTableProps["hasColumnVisibility"];
-  columns: DataTableProps["columns"];
+  hasColumnVisibility: DataTableProps<TData>["hasColumnVisibility"];
+  columns: DataTableProps<TData>["columns"];
   columnVisibility?: MRT_VisibilityState;
   setColumnVisibility: Dispatch<
     SetStateAction<MRT_VisibilityState | undefined>
   >;
 };
 
-const DataTableSettings = ({
+type DataTableSettingsComponent = (<TData extends MRT_RowData>(
+  props: DataTableSettingsProps<TData>,
+) => JSX.Element) & {
+  displayName?: string;
+};
+
+const DataTableSettings = <TData extends MRT_RowData>({
   hasChangeableDensity,
   rowDensity,
   setRowDensity,
@@ -40,7 +46,7 @@ const DataTableSettings = ({
   columns,
   columnVisibility,
   setColumnVisibility,
-}: DataTableSettingsProps) => {
+}: DataTableSettingsProps<TData>) => {
   const { t } = useTranslation();
 
   const changeRowDensity = useCallback(
@@ -131,7 +137,9 @@ const DataTableSettings = ({
   );
 };
 
-const MemoizedDataTableSettings = memo(DataTableSettings);
+const MemoizedDataTableSettings = memo(
+  DataTableSettings,
+) as DataTableSettingsComponent;
 MemoizedDataTableSettings.displayName = "DataTableSettings";
 
 export { MemoizedDataTableSettings as DataTableSettings };
