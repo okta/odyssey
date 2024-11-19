@@ -79,6 +79,10 @@ export type SideNavProps = {
    */
   onExpand?(): void;
   /**
+   *  Triggers when the item is reordered
+   */
+  onSort?(reorderedItems: SideNavItem[]): void;
+  /**
    * Nav items in the side nav
    */
   sideNavItems: SideNavItem[];
@@ -114,7 +118,7 @@ export type SideNavItem = {
   id: string;
   /**
    * Whether the item is disabled. When set to true the nav item is set to Disabled color,
-   * the link/item is not clickable, and item with children is not expandable.
+   * the link/item is not clickable, and item with nestedNavItems is not expandable.
    */
   isDisabled?: boolean;
   /**
@@ -144,7 +148,7 @@ export type SideNavItem = {
   target?: string;
 } & (
   | {
-      children?: never;
+      nestedNavItems?: never;
       href?: never;
       isDefaultExpanded?: never;
       isExpanded?: never;
@@ -152,9 +156,10 @@ export type SideNavItem = {
        * Determines if the side nav item is a section header
        */
       isSectionHeader: true;
+      isSortable?: never;
     }
   | {
-      children?: never;
+      nestedNavItems?: never;
       /**
        * link added to the nav item. if it is undefined, static text will be displayed.
        * fires onClick event when it is passed
@@ -163,16 +168,17 @@ export type SideNavItem = {
       isDefaultExpanded?: never;
       isExpanded?: never;
       isSectionHeader?: never;
+      isSortable?: never;
     }
   | {
       /**
-       * An array of side nav items to be displayed as children within Accordion
+       * An array of side nav items to be displayed as nestedNavItems within Accordion
        */
-      children?: Array<Omit<SideNavItem, "startIcon" | "endIcon">>;
+      nestedNavItems?: Array<Omit<SideNavItem, "startIcon" | "nestedNavItems">>;
       endIcon?: never;
       href?: never;
       /**
-       * Whether the accordion (nav item with children) is expanded by default
+       * Whether the accordion (nav item with nestedNavItems) is expanded by default
        */
       isDefaultExpanded?: boolean;
       /**
@@ -180,7 +186,11 @@ export type SideNavItem = {
        * Setting this prop enables control over the accordion.
        */
       isExpanded?: boolean;
+      /**
+       * If true, enables sorting for the accordion items
+       */
       isSectionHeader?: never;
+      isSortable?: boolean;
     }
 );
 

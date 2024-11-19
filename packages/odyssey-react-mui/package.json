@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-react-mui",
-  "version": "1.26.0",
+  "version": "1.27.1",
   "description": "React MUI components for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -71,6 +71,9 @@
     "directory": "packages/odyssey-react-mui"
   },
   "dependencies": {
+    "@dnd-kit/core": "6.0.3",
+    "@dnd-kit/sortable": "7.0.0",
+    "@dnd-kit/utilities": "3.2.0",
     "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",

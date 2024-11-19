@@ -18,6 +18,7 @@ import {
   MRT_TableOptions,
   MRT_VisibilityState,
 } from "material-react-table";
+import { ReactNode } from "react";
 
 import { availableLayouts, availableCardLayouts } from "./constants";
 import { DataFilter } from "../DataFilters";
@@ -30,8 +31,8 @@ import {
 import { DataTableRowActionsProps } from "../../DataTable/DataTableRowActions";
 import { MenuButtonProps } from "../..";
 import { paginationTypeValues } from "../DataTablePagination";
-import { ReactNode } from "react";
 import { DataCardProps } from "./DataCard";
+import { type PaginationProps } from "../../Pagination";
 
 export type DataLayout = (typeof availableLayouts)[number];
 export type CardLayout = (typeof availableCardLayouts)[number];
@@ -90,7 +91,10 @@ export type UniversalProps = {
   resultsPerPage?: number;
   searchDelayTime?: number;
   totalRows?: number;
-};
+} & Pick<
+  PaginationProps,
+  "hasPageInput" | "hasRowCountInput" | "hasRowCountLabel"
+>;
 
 export type TableLayoutProps = {
   columns: DataTableColumn<MRT_RowData>[];
