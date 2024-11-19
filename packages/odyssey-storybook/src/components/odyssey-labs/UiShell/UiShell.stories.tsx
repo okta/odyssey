@@ -47,7 +47,7 @@ const storybookMeta: Meta<UiShellProps> = {
         },
       },
     },
-    initiallyVisible: {
+    initialVisibleSections: {
       control: "text",
       description:
         "A list of UiShell components that should be (minimally) rendered initially, with their isLoading property set when applicable. Allows the initial visibility of UiShell components to be influenced.",
@@ -208,13 +208,13 @@ export const LoadingFirstRender: StoryObj<UiShellProps> = {};
 
 export const InvisibleFirstRender: StoryObj<UiShellProps> = {
   args: {
-    initiallyVisible: [],
+    initialVisibleSections: [],
   },
 };
 
 export const TopNavOnly: StoryObj<UiShellProps> = {
   args: {
-    initiallyVisible: ["TopNav", "AppSwitcher"],
+    initialVisibleSections: ["TopNav", "AppSwitcher"],
     optionalComponents: sharedOptionalComponents,
     subscribeToPropChanges: (subscriber) => {
       subscriber({

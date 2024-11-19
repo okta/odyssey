@@ -48,7 +48,7 @@ export type UiShellProps = {
 } & Pick<ReactRootElements, "appRootElement" | "stylesRootElement"> &
   Pick<
     UiShellContentProps,
-    "appComponent" | "initiallyVisible" | "onError" | "optionalComponents"
+    "appComponent" | "initialVisibleSections" | "onError" | "optionalComponents"
   >;
 
 /**
@@ -61,7 +61,7 @@ export type UiShellProps = {
 const UiShell = ({
   appComponent,
   appRootElement,
-  initiallyVisible,
+  initialVisibleSections,
   onError = console.error,
   onSubscriptionCreated,
   optionalComponents,
@@ -95,7 +95,7 @@ const UiShell = ({
           <UiShellContent
             {...componentProps}
             appComponent={appComponent}
-            initiallyVisible={initiallyVisible}
+            initialVisibleSections={initialVisibleSections}
             onError={onError}
             optionalComponents={optionalComponents}
           />

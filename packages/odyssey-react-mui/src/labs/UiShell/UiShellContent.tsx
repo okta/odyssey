@@ -90,7 +90,7 @@ export type UiShellContentProps = {
    * Which parts of the UI Shell should be visible initially? For example,
    * if sideNavProps is undefined, should the space for the sidenav be initially visible?
    */
-  initiallyVisible?: SubComponentName[];
+  initialVisibleSections?: SubComponentName[];
   /**
    * Notifies when a React rendering error occurs. This could be useful for logging, flagging "p0"s, and recovering UI Shell when errors occur.
    */
@@ -115,7 +115,7 @@ export type UiShellContentProps = {
  */
 const UiShellContent = ({
   appComponent,
-  initiallyVisible = ["TopNav", "SideNav", "AppSwitcher"],
+  initialVisibleSections = ["TopNav", "SideNav", "AppSwitcher"],
   onError = console.error,
   optionalComponents,
   sideNavProps,
@@ -133,7 +133,7 @@ const UiShellContent = ({
       <StyledSideNavContainer>
         {
           /* If SideNav should be initially visible and we have not yet received props, render SideNav with minimal inputs */
-          initiallyVisible?.includes("SideNav") && !sideNavProps && (
+          initialVisibleSections?.includes("SideNav") && !sideNavProps && (
             <ErrorBoundary fallback={null} onError={onError}>
               <SideNav isLoading appName="" sideNavItems={emptySideNavItems} />
             </ErrorBoundary>
@@ -164,7 +164,7 @@ const UiShellContent = ({
       <StyledTopNavContainer>
         {
           /* If TopNav should be initially visible and we have not yet received props, render Topnav with minimal inputs */
-          initiallyVisible?.includes("TopNav") && !topNavProps && (
+          initialVisibleSections?.includes("TopNav") && !topNavProps && (
             <ErrorBoundary fallback={null} onError={onError}>
               <TopNav />
             </ErrorBoundary>
