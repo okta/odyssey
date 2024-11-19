@@ -17,7 +17,7 @@ import { defaultComponentProps, UiShell, UiShellProps } from "./UiShell";
 import { ReactElement } from "react";
 
 describe("UiShell", () => {
-  test("renders `appRootElement`", async () => {
+  test("renders `appRootElement`", () => {
     const appRootElement = document.createElement("div");
 
     render(
@@ -46,7 +46,7 @@ describe("UiShell", () => {
     expect(appRootElement).toHaveTextContent("Hello World!");
   });
 
-  test("renders `stylesRootElement`", async () => {
+  test("renders `stylesRootElement`", () => {
     const rootElement = document.createElement("div");
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
@@ -67,7 +67,7 @@ describe("UiShell", () => {
     expect(Array.from(stylesRootElement.children).length).toBeGreaterThan(0);
   });
 
-  test("renders `appComponent`", async () => {
+  test("renders `appComponent`", () => {
     const testId = "app-component";
 
     const { container } = render(
@@ -83,7 +83,7 @@ describe("UiShell", () => {
     expect(within(container).getByTestId(testId)).toBeInTheDocument();
   });
 
-  test("renders always-available `componentSlots`", async () => {
+  test("renders always-available `componentSlots`", () => {
     const optionalComponentTestIds: Array<
       keyof Required<UiShellProps>["optionalComponents"]
     > = ["banners", "topNavLeftSide", "topNavRightSide"];
@@ -111,7 +111,7 @@ describe("UiShell", () => {
     });
   });
 
-  test("renders optionally-available `componentSlots`", async () => {
+  test("renders optionally-available `componentSlots`", () => {
     const optionalComponentTestIds: Array<
       keyof Required<UiShellProps>["optionalComponents"]
     > = ["sideNavFooter"];
@@ -155,7 +155,7 @@ describe("UiShell", () => {
     });
   });
 
-  test("unsubscribes from prop changes when unmounted", async () => {
+  test("unsubscribes from prop changes when unmounted", () => {
     const rootElement = document.createElement("div");
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
@@ -180,7 +180,7 @@ describe("UiShell", () => {
     expect(unsubscribeFromPropChanges).toHaveBeenCalledTimes(1);
   });
 
-  test("allows changing props through the subscription", async () => {
+  test("allows changing props through the subscription", () => {
     const rootElement = document.createElement("div");
     const sideNavItemText = "Add New Folder";
 
@@ -221,7 +221,7 @@ describe("UiShell", () => {
     expect(container).toHaveTextContent(sideNavItemText);
   });
 
-  test("uses default props if no value passed to subscription", async () => {
+  test("uses default props if no value passed to subscription", () => {
     const rootElement = document.createElement("div");
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
@@ -250,7 +250,7 @@ describe("UiShell", () => {
     expect(container).toBeInTheDocument();
   });
 
-  test("has previous state in prop change subscription", async () => {
+  test("has previous state in prop change subscription", () => {
     const rootElement = document.createElement("div");
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.

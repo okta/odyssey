@@ -86,7 +86,7 @@ export const Default: StoryObj<BreadcrumbsProps> = {
     </BreadcrumbList>
   ),
   play: async ({ canvasElement, step }) => {
-    await step("Breadcrumbs Home Link", async ({ args }) => {
+    await step("Breadcrumbs Home Link", ({ args }) => {
       const canvas = within(canvasElement);
       const box = canvas.getByLabelText("Home");
       expect(box).toHaveAttribute("href", args.homeHref);

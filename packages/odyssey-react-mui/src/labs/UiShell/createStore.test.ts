@@ -13,7 +13,7 @@
 import { createStore } from "./createStore";
 
 describe("createStore", () => {
-  test("starts with no initial state", async () => {
+  test("starts with no initial state", () => {
     const store = createStore<{
       value: null;
     }>();
@@ -22,7 +22,7 @@ describe("createStore", () => {
     expect(store.getState("value")).toBe(undefined);
   });
 
-  test("changes state when set", async () => {
+  test("changes state when set", () => {
     const store = createStore<{
       value: null;
     }>();
@@ -33,7 +33,7 @@ describe("createStore", () => {
     expect(store.getState("value")).toBe(null);
   });
 
-  test("reads initial state value", async () => {
+  test("reads initial state value", () => {
     const store = createStore({
       value: null,
     });
@@ -42,7 +42,7 @@ describe("createStore", () => {
     expect(store.getState("value")).toBe(null);
   });
 
-  test("changes initial state when set", async () => {
+  test("changes initial state when set", () => {
     const store = createStore<{
       value: boolean;
     }>({
@@ -55,7 +55,7 @@ describe("createStore", () => {
     expect(store.getState("value")).toBe(true);
   });
 
-  test("changes initial state when set", async () => {
+  test("changes initial state when set", () => {
     const store = createStore<{
       value: boolean;
     }>({
@@ -68,7 +68,7 @@ describe("createStore", () => {
     expect(store.getState("value")).toBe(true);
   });
 
-  test("allows for multiple different states", async () => {
+  test("allows for multiple different states", () => {
     const store = createStore<{
       value1: boolean;
       value2: number;
@@ -83,7 +83,7 @@ describe("createStore", () => {
     expect(store.getState("value2")).toBe(0);
   });
 
-  test("allows setting multiple states", async () => {
+  test("allows setting multiple states", () => {
     const store = createStore<{
       value1: boolean;
       value2: number;

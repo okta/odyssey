@@ -27,7 +27,7 @@ describe("renderUiShell", () => {
     });
   });
 
-  test("returns app root element", async () => {
+  test("returns app root element", () => {
     const rootElement = document.createElement("div");
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
@@ -42,7 +42,7 @@ describe("renderUiShell", () => {
     });
   });
 
-  test("returns slotted elements", async () => {
+  test("returns slotted elements", () => {
     const rootElement = document.createElement("div");
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
@@ -60,7 +60,7 @@ describe("renderUiShell", () => {
     });
   });
 
-  test("returns ui shell root element", async () => {
+  test("returns ui shell root element", () => {
     const rootElement = document.createElement("div");
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
@@ -75,7 +75,7 @@ describe("renderUiShell", () => {
     });
   });
 
-  test("renders `UiShell` component in a web component", async () => {
+  test("renders `UiShell` component in a web component", () => {
     const rootElement = document.createElement("div");
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
@@ -96,7 +96,7 @@ describe("renderUiShell", () => {
     ).toBeGreaterThan(0);
   });
 
-  test("renders `UiShell` with updated props", async () => {
+  test("renders `UiShell` with updated props", () => {
     const rootElement = document.createElement("div");
     const appName = "Hello World!";
 
@@ -131,7 +131,7 @@ describe("renderUiShell", () => {
     ).toHaveTextContent(appName);
   });
 
-  test("renders `UiShell` with immediately updated props", async () => {
+  test("renders `UiShell` with immediately updated props", () => {
     const rootElement = document.createElement("div");
     const appName = "Hello World!";
 
@@ -158,7 +158,7 @@ describe("renderUiShell", () => {
     ).toHaveTextContent(appName);
   });
 
-  test("renders `<slot>` in the event of an error", async () => {
+  test("renders `<slot>` in the event of an error", () => {
     const rootElement = document.createElement("div");
     const consoleError = jest.fn();
     const onError = jest.fn();

@@ -13,7 +13,7 @@
 import { createMessageBus } from "./createMessageBus";
 
 describe("createEventBus", () => {
-  test("messages are not sent once unsubscribed", async () => {
+  test("messages are not sent once unsubscribed", () => {
     const { publish, subscribe } = createMessageBus<null>();
 
     const subscriber = jest.fn();
@@ -26,7 +26,7 @@ describe("createEventBus", () => {
     expect(subscriber).toHaveBeenCalledTimes(0);
   });
 
-  test("messages are not sent once unsubscribed from multiple subscribers", async () => {
+  test("messages are not sent once unsubscribed from multiple subscribers", () => {
     const { publish, subscribe } = createMessageBus<null>();
 
     const subscriber1 = jest.fn();
@@ -48,7 +48,7 @@ describe("createEventBus", () => {
     expect(subscriber3).toHaveBeenCalledTimes(0);
   });
 
-  test("when publishing message, receives message in a subscriber", async () => {
+  test("when publishing message, receives message in a subscriber", () => {
     const message = Symbol();
 
     const { publish, subscribe } = createMessageBus<typeof message>();
@@ -64,7 +64,7 @@ describe("createEventBus", () => {
     expect(subscriber).toHaveBeenCalledTimes(1);
   });
 
-  test("when publishing 2 messages, receives both messages in a subscriber", async () => {
+  test("when publishing 2 messages, receives both messages in a subscriber", () => {
     const message1 = Symbol();
     const message2 = Symbol();
 
@@ -85,7 +85,7 @@ describe("createEventBus", () => {
     expect(subscriber).toHaveBeenCalledTimes(2);
   });
 
-  test("when subscribing twice, both subscribers receive multiple messages", async () => {
+  test("when subscribing twice, both subscribers receive multiple messages", () => {
     const message1 = Symbol();
     const message2 = Symbol();
 
