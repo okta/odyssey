@@ -667,7 +667,7 @@ export const components = ({
               color: odysseyTokens.TypographyColorBody,
 
               "&:hover": {
-                backgroundColor: odysseyTokens.HueNeutral300,
+                backgroundColor: odysseyTokens.HueNeutral200,
                 borderColor: odysseyTokens.HueNeutral400,
               },
 
