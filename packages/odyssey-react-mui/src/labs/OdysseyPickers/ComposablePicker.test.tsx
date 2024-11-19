@@ -14,7 +14,7 @@ import { render, screen } from "@testing-library/react";
 import { ComposablePicker } from "./ComposablePicker";
 
 describe("ComposablePicker", () => {
-  it("displays the ComposablePicker", async () => {
+  it("displays the ComposablePicker", () => {
     render(
       <ComposablePicker
         label="picker label"
@@ -23,7 +23,7 @@ describe("ComposablePicker", () => {
       />,
     );
 
-    const input = await screen.getByLabelText("picker label");
+    const input = screen.getByLabelText("picker label");
     expect(input).toBeInTheDocument();
   });
 });

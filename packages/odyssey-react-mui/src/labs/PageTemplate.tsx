@@ -10,16 +10,17 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, ReactElement, ReactNode } from "react";
 import styled from "@emotion/styled";
+import { memo, ReactElement, ReactNode } from "react";
 
+import { Drawer, DrawerProps } from "../Drawer";
+import { DocumentationIcon } from "../icons.generated";
+import { Link } from "../Link";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../OdysseyDesignTokensContext";
-import { DocumentationIcon } from "../icons.generated";
 import { Heading4, Subordinate } from "../Typography";
-import { Link } from "../Link";
 import { useHasUiShell } from "./UiShell";
 
 export type PageTemplateProps = {
@@ -42,7 +43,7 @@ export type PageTemplateProps = {
   /**
    * An optional `Drawer` object. Can be of variant 'temporary' or 'persistent'.
    */
-  drawer?: ReactElement;
+  drawer?: ReactElement<DrawerProps>;
   /**
    * An optional `Button` object to be situated in the layout header. Should almost always be of variant `primary`.
    */

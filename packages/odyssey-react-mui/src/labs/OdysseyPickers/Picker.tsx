@@ -41,7 +41,7 @@ export const StyledOption = styled.li<{ hasAdornment?: boolean }>(
 
 export const OptionLabelContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{ odysseyDesignTokens: DesignTokens }>(({}) => ({
+})<{ odysseyDesignTokens: DesignTokens }>(() => ({
   p: {
     margin: 0,
   },

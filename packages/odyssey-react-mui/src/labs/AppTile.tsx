@@ -323,7 +323,7 @@ const AppTile = ({
   );
 };
 
-const MemoizedAppTile = memo(AppTile);
+const MemoizedAppTile = memo(AppTile) as typeof AppTile;
 MemoizedAppTile.displayName = "AppTile";
 
 export { MemoizedAppTile as AppTile };

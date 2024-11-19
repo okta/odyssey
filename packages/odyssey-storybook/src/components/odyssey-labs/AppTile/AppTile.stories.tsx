@@ -13,7 +13,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { jest } from "@storybook/jest";
-import { AppTile, AppTileProps } from "@okta/odyssey-react-mui/labs";
+import { AppTile } from "@okta/odyssey-react-mui/labs";
 import {
   Box,
   Drawer,
@@ -25,7 +25,7 @@ import {
 import { useCallback, useState } from "react";
 import { SettingsIcon } from "@okta/odyssey-react-mui/icons";
 
-const storybookMeta: Meta<AppTileProps> = {
+const storybookMeta: Meta<typeof AppTile> = {
   title: "Labs Components/AppTile",
   component: AppTile,
   argTypes: {
@@ -164,27 +164,18 @@ const storybookMeta: Meta<AppTileProps> = {
     },
   },
   args: {
-    title: "App name",
     description: "This is a description of the app.",
     image: <img src="https://placehold.co/128" alt="Example logo" />,
-    onClick: jest.fn(),
     onActionClick: undefined,
+    onClick: jest.fn(),
+    title: "App name",
   },
   decorators: [MuiThemeDecorator],
-  parameters: {
-    backgrounds: {
-      default: "gray",
-      values: [
-        { name: "gray", value: "#f4f4f4" },
-        { name: "white", value: "#ffffff" },
-      ],
-    },
-  },
 };
 
 export default storybookMeta;
 
-export const Default: StoryObj<AppTileProps> = {
+export const Default: StoryObj<typeof AppTile> = {
   args: {
     children: (
       <TagList>
@@ -195,7 +186,7 @@ export const Default: StoryObj<AppTileProps> = {
   },
 };
 
-export const ActionButton: StoryObj<AppTileProps> = {
+export const ActionButton: StoryObj<typeof AppTile> = {
   args: {
     actionAriaControls: "",
     actionAriaExpanded: false,
@@ -226,11 +217,8 @@ export const ActionButton: StoryObj<AppTileProps> = {
         <Box sx={{ maxWidth: 262 }}>
           <AppTile
             {...args}
-            onClick={args.onClick}
             actionAriaExpanded={isDrawerOpen}
             onActionClick={toggleDrawer}
-            actionIcon={args.actionIcon}
-            actionLabel={args.actionLabel}
           />
         </Box>
       </>
@@ -238,25 +226,25 @@ export const ActionButton: StoryObj<AppTileProps> = {
   },
 };
 
-export const SquareImage: StoryObj<AppTileProps> = {
+export const SquareImage: StoryObj<typeof AppTile> = {
   args: {
     image: <img src="https://placehold.co/600" alt="Square logo" />,
   },
 };
 
-export const TallImage: StoryObj<AppTileProps> = {
+export const TallImage: StoryObj<typeof AppTile> = {
   args: {
     image: <img src="https://placehold.co/400x800" alt="Tall logo" />,
   },
 };
 
-export const WideImage: StoryObj<AppTileProps> = {
+export const WideImage: StoryObj<typeof AppTile> = {
   args: {
     image: <img src="https://placehold.co/800x400" alt="Wide logo" />,
   },
 };
 
-export const WideImageWithActionButton: StoryObj<AppTileProps> = {
+export const WideImageWithActionButton: StoryObj<typeof AppTile> = {
   args: {
     actionIcon: <SettingsIcon />,
     actionLabel: "Open app settings",
@@ -265,7 +253,7 @@ export const WideImageWithActionButton: StoryObj<AppTileProps> = {
   },
 };
 
-export const AuxiliaryText: StoryObj<AppTileProps> = {
+export const AuxiliaryText: StoryObj<typeof AppTile> = {
   args: {
     auxiliaryText: "Single sign-on",
     children: (
@@ -277,7 +265,7 @@ export const AuxiliaryText: StoryObj<AppTileProps> = {
   },
 };
 
-export const ActionButtonAndAuxiliaryText: StoryObj<AppTileProps> = {
+export const ActionButtonAndAuxiliaryText: StoryObj<typeof AppTile> = {
   args: {
     actionAriaControls: "",
     actionAriaHasPopup: "menu",
@@ -292,7 +280,12 @@ export const ActionButtonAndAuxiliaryText: StoryObj<AppTileProps> = {
     ),
   },
   render: function C({ ...args }) {
-    const [isDrawerOpen, setIsDrawerOpen] = useState(args.actionAriaExpanded);
+    const [isDrawerOpen, setIsDrawerOpen] = useState(() => (
+      typeof args.actionAriaExpanded === "string"
+      ? JSON.parse(args.actionAriaExpanded) as boolean // TS doesn't have a clue what JSON.parse will return even if it should.
+      : args.actionAriaExpanded
+    ));
+
     const toggleDrawer = useCallback(
       () => setIsDrawerOpen(!isDrawerOpen),
       [isDrawerOpen],
@@ -308,11 +301,8 @@ export const ActionButtonAndAuxiliaryText: StoryObj<AppTileProps> = {
         <Box sx={{ maxWidth: 262 }}>
           <AppTile
             {...args}
-            onClick={args.onClick}
             actionAriaExpanded={isDrawerOpen}
             onActionClick={toggleDrawer}
-            actionIcon={args.actionIcon}
-            actionLabel={args.actionLabel}
           />
         </Box>
       </>
@@ -320,11 +310,8 @@ export const ActionButtonAndAuxiliaryText: StoryObj<AppTileProps> = {
   },
 };
 
-export const FullyCustomContent: StoryObj<AppTileProps> = {
+export const FullyCustomContent: StoryObj<typeof AppTile> = {
   args: {
-    title: undefined,
-    description: undefined,
-    image: undefined,
     children: (
       <>
         <Box sx={{ marginBottom: 2 }}>
@@ -337,12 +324,14 @@ export const FullyCustomContent: StoryObj<AppTileProps> = {
         </TagList>
       </>
     ),
+    description: undefined,
+    image: undefined,
+    title: undefined,
   },
 };
 
-export const Loading: StoryObj<AppTileProps> = {
+export const Loading: StoryObj<typeof AppTile> = {
   args: {
-    isLoading: true,
     actionAriaControls: "",
     actionAriaExpanded: false,
     actionAriaHasPopup: "menu",
@@ -355,5 +344,6 @@ export const Loading: StoryObj<AppTileProps> = {
         <Tag label="Tag 2" />
       </TagList>
     ),
+    isLoading: true,
   },
 };
