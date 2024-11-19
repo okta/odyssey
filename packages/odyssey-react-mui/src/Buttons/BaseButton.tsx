@@ -16,21 +16,22 @@ import {
   HTMLAttributes,
   memo,
   ReactElement,
+  ReactNode,
   useCallback,
   useImperativeHandle,
   useMemo,
   useRef,
 } from "react";
 
-import { useButton } from "./ButtonContext";
-import type { HtmlProps } from "./HtmlProps";
-import { FocusHandle } from "./inputUtils";
+import { useButton } from "../Buttons";
+import type { HtmlProps } from "../HtmlProps";
+import { FocusHandle } from "../inputUtils";
 import {
   MuiPropsContext,
   MuiPropsContextType,
   useMuiProps,
-} from "./MuiPropsContext";
-import { Tooltip } from "./Tooltip";
+} from "../MuiPropsContext";
+import { Tooltip } from "../Tooltip";
 
 export const buttonSizeValues = ["small", "medium", "large"] as const;
 export const buttonTypeValues = ["button", "submit", "reset"] as const;
@@ -43,7 +44,7 @@ export const buttonVariantValues = [
   "floatingAction",
 ] as const;
 
-export type ButtonProps = {
+export type BaseButtonProps = {
   /**
    * The ref forwarded to the Button
    */
@@ -85,64 +86,41 @@ export type ButtonProps = {
    * The click event handler for the Button
    */
   onClick?: MuiButtonProps["onClick"];
-} & (
-  | {
-      /**
-       * The icon element to display at the end of the Button
-       */
-      endIcon?: ReactElement;
-      /**
-       * The text content of the Button
-       */
-      label: string;
-      /**
-       * The icon element to display at the start of the Button
-       */
-      startIcon?: ReactElement;
-    }
-  | {
-      /**
-       * The icon element to display at the end of the Button
-       */
-      endIcon?: ReactElement;
-      /**
-       * The text content of the Button
-       */
-      label?: string | "" | undefined;
-      /**
-       * The icon element to display at the start of the Button
-       */
-      startIcon: ReactElement;
-    }
-  | {
-      /**
-       * The icon element to display at the end of the Button
-       */
-      endIcon: ReactElement;
-      /**
-       * The text content of the Button
-       */
-      label?: never;
-      /**
-       * The icon element to display at the start of the Button
-       */
-      startIcon?: ReactElement;
-    }
-) &
-  Pick<
-    HtmlProps,
-    | "ariaControls"
-    | "ariaDescribedBy"
-    | "ariaExpanded"
-    | "ariaHasPopup"
-    | "ariaLabel"
-    | "ariaLabelledBy"
-    | "tabIndex"
-    | "testId"
-    | "translate"
-  >;
+  /**
+   * The contents of the button. Only available internal to Odyssey here in BaseButton. If set, label is ignored.
+   */
+  children?: ReactNode;
+  /**
+   * The icon element to display at the end of the Button
+   */
+  endIcon?: ReactElement;
+  /**
+   * The text content of the Button
+   */
+  label?: string;
+  /**
+   * The icon element to display at the start of the Button
+   */
+  startIcon?: ReactElement;
+};
 
-const Button = ({
+// These are split and exported separately from the above because wrappers of this (e.g. Button) will
+// want to omit children, which they cannot do from the combined union type. Instead, they should
+// omit from BaseButtonProps, then union with the AdditionalBaseButtonProps (as seen in Button)
+export type AdditionalBaseButtonProps = Pick<
+  HtmlProps,
+  | "ariaControls"
+  | "ariaDescribedBy"
+  | "ariaExpanded"
+  | "ariaHasPopup"
+  | "ariaLabel"
+  | "ariaLabelledBy"
+  | "tabIndex"
+  | "testId"
+  | "translate"
+>;
+
+const BaseButton = ({
   ariaControls,
   ariaDescribedBy,
   ariaExpanded,
@@ -156,6 +134,7 @@ const Button = ({
   isDisabled,
   isFullWidth: isFullWidthProp,
   label = "",
+  children,
   onClick,
   size = "medium",
   startIcon,
@@ -165,7 +144,7 @@ const Button = ({
   translate,
   type = "button",
   variant: variantProp,
-}: ButtonProps) => {
+}: BaseButtonProps & AdditionalBaseButtonProps) => {
   const muiProps = useMuiProps();
 
   // We're deprecating the "tertiary" variant, so map it to
@@ -225,7 +204,7 @@ const Button = ({
           type={type}
           variant={variant}
         >
-          {label}
+          {children ?? label}
         </MuiButton>
       );
     },
@@ -242,6 +221,7 @@ const Button = ({
       isDisabled,
       isFullWidth,
       label,
+      children,
       onClick,
       size,
       startIcon,
@@ -264,7 +244,7 @@ const Button = ({
   return renderButton(muiProps);
 };
 
-const MemoizedButton = memo(Button);
-MemoizedButton.displayName = "Button";
+const MemoizedBaseButton = memo(BaseButton);
+MemoizedBaseButton.displayName = "BaseButton";
 
-export { MemoizedButton as Button };
+export { MemoizedBaseButton as BaseButton };

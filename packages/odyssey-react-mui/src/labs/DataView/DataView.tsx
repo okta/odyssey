@@ -35,7 +35,7 @@ import { DataFilters } from "../DataFilters";
 import { EmptyState } from "../../EmptyState";
 import { fetchData } from "./fetchData";
 import { LayoutSwitcher } from "./LayoutSwitcher";
-import { MenuButton } from "../../MenuButton";
+import { MenuButton } from "../../Buttons";
 import { MoreIcon } from "../../icons.generated";
 import { TableSettings } from "./TableSettings";
 import { Pagination, usePagination } from "../../Pagination";

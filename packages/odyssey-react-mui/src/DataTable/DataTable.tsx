@@ -51,7 +51,6 @@ import {
 } from "./DataTableRowActions";
 import { useRowReordering } from "./useRowReordering";
 import { DataTableSettings } from "./DataTableSettings";
-import { MenuButton, MenuButtonProps } from "../MenuButton";
 import { Box } from "../Box";
 import { DataTableRowSelectionState, DataTableRowData } from ".";
 import {
@@ -61,7 +60,7 @@ import {
 import { useScrollIndication } from "./useScrollIndication";
 import styled from "@emotion/styled";
 import { EmptyState } from "../EmptyState";
-import { Button } from "../Button";
+import { Button, MenuButton, MenuButtonProps } from "../Buttons";
 import { Callout } from "../Callout";
 
 export type DataTableColumn<T extends DataTableRowData> = MRT_ColumnDef<T> & {

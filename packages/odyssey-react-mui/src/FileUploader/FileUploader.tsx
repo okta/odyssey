@@ -21,7 +21,7 @@ import {
 import styled from "@emotion/styled";
 import { useTranslation } from "react-i18next";
 
-import { Button } from "../Button";
+import { Button } from "../Buttons";
 import { UploadIcon } from "../icons.generated";
 import { Field, RenderFieldComponentProps } from "../Field";
 import { FieldComponentProps } from "../FieldComponentProps";
