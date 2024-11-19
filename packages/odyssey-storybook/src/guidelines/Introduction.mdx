@@ -1,7 +1,8 @@
 import { Meta } from "@storybook/blocks";
 import Readme from "../../../../README.md?raw";
 import Markdown from "markdown-to-jsx";
+import * as IntroductionStories from "./Introduction.stories";
 
-<Meta title="Welcome/Introduction (README)" />
+<Meta of={IntroductionStories} />
 
 <Markdown>{Readme}</Markdown>

@@ -1,6 +1,7 @@
 import { Meta } from "@storybook/blocks";
+import * as MigrationsStories from "./Migrations.stories";
 
-<Meta title="Installation/Migrations" />
+<Meta of={MigrationsStories} />
 
 # Migrations
 
@@ -37,9 +38,9 @@ import { Meta } from "@storybook/blocks";
 
 ### Deprecations
 
-1. `InputAdornment` is no longer erquired for `startAdronment` and `endAdornment` on `TextField`.
-1. `InputBase` should be replaced with `TextField`.
-1. The `size` prop on `Icon` is now required.
+1.  `InputAdornment` is no longer erquired for `startAdronment` and `endAdornment` on `TextField`.
+2.  `InputBase` should be replaced with `TextField`.
+3.  The `size` prop on `Icon` is now required.
 
 ## `v0.17.x` ➡️ `v0.21.x`
 
@@ -67,13 +68,13 @@ import { Meta } from "@storybook/blocks";
 
 ### Component API
 
-1. Many new components have been added and wrapped; although, prop names in these versions are not necessarily following Odyssey guidelines.
-1. MUI-passthrough is still allowed even for wrapped components. This will change in later versions.
+1.  Many new components have been added and wrapped; although, prop names in these versions are not necessarily following Odyssey guidelines.
+2.  MUI-passthrough is still allowed even for wrapped components. This will change in later versions.
 
 ### Deprecations
 
-1. `InputBase` should be replaced with `TextField`.
-1. `InputLabel` should not be used. We build it into our field components and created an internal `Field` component to ensure matching styles. If you have custom field components that we don't support, message in `#odyssey` to see if we should add your field or expose `Field`.
+1.  `InputBase` should be replaced with `TextField`.
+2.  `InputLabel` should not be used. We build it into our field components and created an internal `Field` component to ensure matching styles. If you have custom field components that we don't support, message in `#odyssey` to see if we should add your field or expose `Field`.
 
 ## `v0.14.x` ➡️ `0.17.x`
 
