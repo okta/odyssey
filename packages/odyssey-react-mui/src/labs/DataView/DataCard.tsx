@@ -239,7 +239,7 @@ const DataCard = ({
 
     const shouldCenterContent =
       variant === "compact" &&
-      !(renderDetailPanel && isDetailPanelOpen) &&
+      (!renderDetailPanel || !isDetailPanelOpen) &&
       countDefinedProps([title, description, overline, button, children]) <= 2;
 
     return (
