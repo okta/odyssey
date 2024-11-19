@@ -384,7 +384,7 @@ const TableLayoutContent = ({
     },
     muiTableBodyProps: () => ({
       className: rowDensityClassName,
-      tabIndex: enableVirtualization ? 0 : undefined,
+      tabIndex: 0,
     }),
     enableColumnResizing: tableLayoutOptions.hasColumnResizing,
     defaultColumn: {
