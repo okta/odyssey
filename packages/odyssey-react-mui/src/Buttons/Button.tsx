@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2022-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -10,6 +10,21 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export * from "./TopNav";
-export * from "./UserProfile";
-export * from "./UserProfileMenuButton";
+import { memo } from "react";
+import {
+  AdditionalBaseButtonProps,
+  BaseButton,
+  BaseButtonProps,
+} from "./BaseButton";
+
+export type ButtonProps = Omit<BaseButtonProps, "children"> &
+  AdditionalBaseButtonProps;
+
+const Button = (props: ButtonProps) => {
+  return <BaseButton {...props} />;
+};
+
+const MemoizedButton = memo(Button);
+MemoizedButton.displayName = "Button";
+
+export { MemoizedButton as Button };

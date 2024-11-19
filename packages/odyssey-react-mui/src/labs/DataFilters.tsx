@@ -33,7 +33,7 @@ import styled from "@emotion/styled";
 
 import { Autocomplete } from "../Autocomplete";
 import { Box } from "../Box";
-import { Button } from "../Button";
+import { Button } from "../Buttons";
 import { CheckboxGroup } from "../CheckboxGroup";
 import { Checkbox } from "../Checkbox";
 import {
