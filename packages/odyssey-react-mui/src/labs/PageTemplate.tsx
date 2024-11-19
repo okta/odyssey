@@ -13,7 +13,7 @@
 import styled from "@emotion/styled";
 import { memo, ReactElement, ReactNode } from "react";
 
-import { Drawer, DrawerProps } from "../Drawer";
+import { DrawerProps } from "../Drawer";
 import { DocumentationIcon } from "../icons.generated";
 import { Link } from "../Link";
 import {
