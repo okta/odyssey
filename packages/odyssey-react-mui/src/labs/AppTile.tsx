@@ -33,8 +33,11 @@ import {
 import { Heading5, Paragraph, Subordinate, Support } from ".././Typography";
 import { Box } from ".././Box";
 
+export const APP_TILE_COMPACT_IMAGE_HEIGHT = "40px";
 export const APP_TILE_IMAGE_HEIGHT = "64px";
 export const APP_TILE_PLACEHOLDER_IMAGE_WIDTH = "64px";
+
+export const appTileVariantValues = ["comfortable", "compact"] as const;
 
 export type AppTileProps = {
   // Text that appears in the upper right corner of the tile
@@ -53,6 +56,8 @@ export type AppTileProps = {
   overline?: string;
   // A string for the tile title
   title?: string;
+  // Whether the tile is comfortable or compact
+  variant?: (typeof appTileVariantValues)[number];
 } & (
   | {
       // Event that fires when the user clicks the action button in the upper-right corner
@@ -87,51 +92,81 @@ type LoadingTileProps = {
   image: boolean;
   overline: boolean;
   title: boolean;
+  variant: AppTileProps["variant"];
 };
 
 const ImageContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "variant",
 })<{
   odysseyDesignTokens: DesignTokens;
-}>(({ odysseyDesignTokens }) => ({
+  variant: AppTileProps["variant"];
+}>(({ odysseyDesignTokens, variant }) => ({
   display: "flex",
   alignItems: "flex-start",
-  maxHeight: APP_TILE_IMAGE_HEIGHT,
+  justifyContent: variant === "compact" ? "center" : "flex-start",
+  maxHeight:
+    variant === "compact"
+      ? APP_TILE_COMPACT_IMAGE_HEIGHT
+      : APP_TILE_IMAGE_HEIGHT,
   marginBlockEnd: odysseyDesignTokens.Spacing3,
 
   ["img"]: {
-    height: APP_TILE_IMAGE_HEIGHT,
+    height:
+      variant === "compact"
+        ? APP_TILE_COMPACT_IMAGE_HEIGHT
+        : APP_TILE_IMAGE_HEIGHT,
+    width: variant === "compact" ? "100%" : "auto",
     maxWidth: "100%",
   },
 }));
 
 const ActionContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
-  alignItems: "center",
-  display: "flex",
-  minHeight: odysseyDesignTokens.Spacing6,
-  position: "absolute",
-  right: odysseyDesignTokens.Spacing2,
-  top: odysseyDesignTokens.Spacing2,
-  gap: odysseyDesignTokens.Spacing1,
-  zIndex: 1,
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "variant",
+})<{ odysseyDesignTokens: DesignTokens; variant: AppTileProps["variant"] }>(
+  ({ odysseyDesignTokens, variant = "comfortable" }) => ({
+    alignItems: "center",
+    display: "flex",
+    minHeight: odysseyDesignTokens.Spacing6,
+    position: "absolute",
+    right: variant === "compact" ? 0 : odysseyDesignTokens.Spacing2,
+    top: variant === "compact" ? 0 : odysseyDesignTokens.Spacing2,
+    gap: odysseyDesignTokens.Spacing1,
+    zIndex: 1,
 
-  ["& > .MuiTypography-root:last-child"]: {
-    marginInlineEnd: odysseyDesignTokens.Spacing2,
-  },
-}));
+    ["& > .MuiTypography-root:last-child"]: {
+      marginInlineEnd: odysseyDesignTokens.Spacing2,
+    },
+  }),
+);
 
 const ContentContainer = styled("div", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "hasTopSection",
-})<{ odysseyDesignTokens: DesignTokens; hasTopSection: boolean }>(
-  ({ odysseyDesignTokens, hasTopSection }) => ({
-    alignItems: "flex-start",
-    paddingBlockStart: hasTopSection ? odysseyDesignTokens.Spacing4 : 0,
-    height: "100%",
-  }),
-);
+    prop !== "odysseyDesignTokens" &&
+    prop !== "hasTopSection" &&
+    prop !== "variant",
+})<{
+  odysseyDesignTokens: DesignTokens;
+  hasTopSection: boolean;
+  variant: AppTileProps["variant"];
+}>(({ odysseyDesignTokens, hasTopSection, variant }) => ({
+  alignItems: "flex-start",
+  paddingBlockStart: hasTopSection ? odysseyDesignTokens.Spacing4 : 0,
+  height: "100%",
+
+  [".MuiTypography-root"]: {
+    fontSize:
+      variant === "compact"
+        ? odysseyDesignTokens.TypographySizeSubordinate
+        : "auto",
+    textAlign: variant === "compact" ? "center" : "left",
+  },
+
+  ["& :last-child"]: {
+    marginBlockEnd: "0 !important",
+  },
+}));
 
 const ChildrenContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
@@ -141,6 +176,54 @@ const ChildrenContainer = styled("div", {
   },
 }));
 
+const StyledMuiCard = styled(MuiCard, {
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "isPlaceholder",
+})<{ odysseyDesignTokens: DesignTokens; isPlaceholder?: boolean }>(
+  ({ odysseyDesignTokens, isPlaceholder = false }) => ({
+    position: "relative",
+    boxShadow: "none",
+    overflow: "unset",
+    display: "flex",
+    justifyContent: isPlaceholder ? "center" : "flex-start",
+    padding: odysseyDesignTokens.Spacing4,
+    borderWidth: odysseyDesignTokens.BorderWidthMain,
+    borderStyle: odysseyDesignTokens.BorderStyleMain,
+    borderColor: odysseyDesignTokens.HueNeutral200,
+    borderRadius: odysseyDesignTokens.BorderRadiusMain,
+    transition: `border ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
+
+    "&::after": {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      opacity: 0,
+      boxShadow: odysseyDesignTokens.DepthMedium,
+      borderRadius: odysseyDesignTokens.BorderRadiusMain,
+      transition: `opacity ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
+      zIndex: "-1",
+      content: '""',
+    },
+
+    "&:hover": {
+      borderColor: "transparent",
+
+      "&::after": {
+        opacity: 1,
+      },
+    },
+  }),
+);
+
+const StyledMuiCardActionArea = styled(MuiCardActionArea, {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
+  margin: `-${odysseyDesignTokens.Spacing4}`,
+  padding: odysseyDesignTokens.Spacing4,
+}));
+
 const LoadingTile = ({
   image,
   overline,
@@ -148,17 +231,22 @@ const LoadingTile = ({
   description,
   children,
   hasTopSection,
+  variant,
 }: LoadingTileProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   return (
-    <MuiCard className="isClickable">
+    <StyledMuiCard odysseyDesignTokens={odysseyDesignTokens} isPlaceholder>
       <ContentContainer
         odysseyDesignTokens={odysseyDesignTokens}
         hasTopSection={hasTopSection}
+        variant={variant}
       >
         {hasTopSection && (
-          <ActionContainer odysseyDesignTokens={odysseyDesignTokens}>
+          <ActionContainer
+            odysseyDesignTokens={odysseyDesignTokens}
+            variant={variant}
+          >
             <Subordinate>
               <MuiSkeleton width={50} />
             </Subordinate>
@@ -166,10 +254,21 @@ const LoadingTile = ({
         )}
         <Box sx={{ width: "100%" }}>
           {image && (
-            <ImageContainer odysseyDesignTokens={odysseyDesignTokens}>
+            <ImageContainer
+              odysseyDesignTokens={odysseyDesignTokens}
+              variant={variant}
+            >
               <MuiSkeleton
-                height={APP_TILE_IMAGE_HEIGHT}
-                width={APP_TILE_PLACEHOLDER_IMAGE_WIDTH}
+                height={
+                  variant === "compact"
+                    ? APP_TILE_COMPACT_IMAGE_HEIGHT
+                    : APP_TILE_IMAGE_HEIGHT
+                }
+                width={
+                  variant === "compact"
+                    ? APP_TILE_COMPACT_IMAGE_HEIGHT
+                    : APP_TILE_PLACEHOLDER_IMAGE_WIDTH
+                }
                 variant="rectangular"
               />
             </ImageContainer>
@@ -201,46 +300,9 @@ const LoadingTile = ({
           )}
         </Box>
       </ContentContainer>
-    </MuiCard>
+    </StyledMuiCard>
   );
 };
-
-const StyledMuiCard = styled(MuiCard, {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
-  position: "relative",
-  boxShadow: "none",
-  overflow: "unset",
-  display: "flex",
-  padding: odysseyDesignTokens.Spacing4,
-
-  "&::after": {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    opacity: 0,
-    boxShadow: odysseyDesignTokens.DepthMedium,
-    borderRadius: odysseyDesignTokens.BorderRadiusOuter,
-    transition: `opacity ${odysseyDesignTokens.TransitionDurationMain}`,
-    zIndex: "-1",
-    content: '""',
-  },
-
-  "&:hover": {
-    "&::after": {
-      opacity: 1,
-    },
-  },
-}));
-
-const StyledMuiCardActionArea = styled(MuiCardActionArea, {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
-  margin: `-${odysseyDesignTokens.Spacing4}`,
-  padding: odysseyDesignTokens.Spacing4,
-}));
 
 const AppTile = ({
   actionAriaControls,
@@ -257,6 +319,7 @@ const AppTile = ({
   onClick,
   overline,
   title,
+  variant = "comfortable",
 }: AppTileProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
@@ -265,9 +328,13 @@ const AppTile = ({
       <ContentContainer
         odysseyDesignTokens={odysseyDesignTokens}
         hasTopSection={typeof onActionClick === "function" || !!auxiliaryText}
+        variant={variant}
       >
         {image && (
-          <ImageContainer odysseyDesignTokens={odysseyDesignTokens}>
+          <ImageContainer
+            odysseyDesignTokens={odysseyDesignTokens}
+            variant={variant}
+          >
             {image}
           </ImageContainer>
         )}
@@ -293,6 +360,7 @@ const AppTile = ({
       title,
       description,
       children,
+      variant,
     ],
   );
 
@@ -304,11 +372,15 @@ const AppTile = ({
       description={Boolean(description)}
       children={Boolean(children)}
       hasTopSection={typeof onActionClick === "function" || !!auxiliaryText}
+      variant={variant}
     />
   ) : (
     <StyledMuiCard odysseyDesignTokens={odysseyDesignTokens}>
       {(onActionClick || auxiliaryText) && (
-        <ActionContainer odysseyDesignTokens={odysseyDesignTokens}>
+        <ActionContainer
+          odysseyDesignTokens={odysseyDesignTokens}
+          variant={variant}
+        >
           {auxiliaryText && !isLoading && (
             <Subordinate>{auxiliaryText}</Subordinate>
           )}
