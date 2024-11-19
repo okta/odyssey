@@ -38,7 +38,7 @@ const UserProfileMenuButton = ({
       {...menuButtonProps}
       buttonVariant="floating"
       omitEndIcon={true}
-      buttonChildren={
+      popoverContent={
         <UserProfile
           profileIcon={profileIcon}
           userName={userName}

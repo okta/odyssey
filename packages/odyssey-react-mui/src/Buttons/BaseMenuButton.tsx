@@ -115,6 +115,9 @@ export type BaseMenuButtonWithChildrenProps = {
   children: ReactNode;
 } & BaseMenuButtonProps;
 
+export type BaseButtonWithNoButtonChildren = { buttonChildren?: never };
+export type BaseButtonWithNoIconOmit = { omitEndIcon?: never };
+
 const BaseMenuButton = ({
   ariaLabel,
   ariaLabelledBy,

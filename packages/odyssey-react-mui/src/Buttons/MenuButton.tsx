@@ -14,13 +14,21 @@ import { memo } from "react";
 import {
   BaseMenuButton,
   BaseMenuButtonWithChildrenProps,
+  BaseButtonWithNoButtonChildren,
+  BaseButtonWithNoIconOmit,
+  BaseMenuButtonWithPopoverContentProps,
 } from "./BaseMenuButton";
 
 export const menuAlignmentValues = ["left", "right"] as const;
 
-export type MenuButtonProps = BaseMenuButtonWithChildrenProps;
+export type MenuButtonProps = (
+  | BaseMenuButtonWithChildrenProps
+  | BaseMenuButtonWithPopoverContentProps
+) &
+  BaseButtonWithNoButtonChildren &
+  BaseButtonWithNoIconOmit;
 
-const MenuButton = (props: BaseMenuButtonWithChildrenProps) => {
+const MenuButton = (props: MenuButtonProps) => {
   return <BaseMenuButton {...props} />;
 };
 

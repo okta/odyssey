@@ -20,19 +20,12 @@ import {
   buttonVariantValues,
   MenuItem,
   menuAlignmentValues,
-  Subordinate,
-  Paragraph,
-  useOdysseyDesignTokens,
-  Heading5,
-  Link,
 } from "@okta/odyssey-react-mui";
 import {
   GroupIcon,
   GlobeIcon,
   CalendarIcon,
-  QuestionCircleIcon,
 } from "@okta/odyssey-react-mui/icons";
-import type { ReactNode } from "react";
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import icons from "../../../../.storybook/components/iconUtils";
@@ -41,20 +34,6 @@ import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import { axeRun } from "../../../axe-util";
 import type { PlaywrightProps } from "../storybookTypes";
-
-const BoxWithBottomMargin = ({ children }: { children: ReactNode }) => {
-  const odysseyDesignTokens = useOdysseyDesignTokens();
-
-  return (
-    <Box
-      sx={{
-        marginBottom: odysseyDesignTokens.Spacing4,
-      }}
-    >
-      {children}
-    </Box>
-  );
-};
 
 const storybookMeta: Meta<typeof MenuButton> = {
   title: "MUI Components/Menu Button",
@@ -449,72 +428,5 @@ export const Alignment: StoryObj<MenuButtonProps> = {
       args,
       "Menu Button Alignment",
     );
-  },
-};
-
-export const HelpPopover: StoryObj<MenuButtonProps> = {
-  args: {
-    buttonLabel: "",
-    endIcon: <QuestionCircleIcon />,
-    buttonVariant: "secondary",
-    popoverContent: [
-      <Box key="help-popover-content" sx={{ minWidth: "392px" }}>
-        <BoxWithBottomMargin>
-          <Heading5>Title</Heading5>
-          <Subordinate>Caption</Subordinate>
-          <Paragraph>Body</Paragraph>
-        </BoxWithBottomMargin>
-        <BoxWithBottomMargin>
-          <Link href="#" target="_blank">
-            Link
-          </Link>
-          <Subordinate>Caption</Subordinate>
-        </BoxWithBottomMargin>
-        <BoxWithBottomMargin>
-          <Link href="#" target="_blank">
-            Link
-          </Link>
-          <Subordinate>Caption</Subordinate>
-        </BoxWithBottomMargin>
-        <BoxWithBottomMargin>
-          <Link href="#" target="_blank">
-            Link
-          </Link>
-          <Subordinate>Caption</Subordinate>
-        </BoxWithBottomMargin>
-        <BoxWithBottomMargin>
-          <Link href="#" target="_blank">
-            Link
-          </Link>
-          <Subordinate>Caption</Subordinate>
-        </BoxWithBottomMargin>
-        <BoxWithBottomMargin>
-          <Link href="#" target="_blank">
-            Link
-          </Link>
-          <Subordinate>Caption</Subordinate>
-        </BoxWithBottomMargin>
-        <BoxWithBottomMargin>
-          <Divider />
-        </BoxWithBottomMargin>
-        <Box sx={{ fontWeight: "bold" }}>
-          <Paragraph>
-            Body{" "}
-            <Link href="#" target="_blank">
-              Link
-            </Link>
-          </Paragraph>
-        </Box>
-      </Box>,
-    ],
-    id: "floating",
-    tooltipText: "More actions",
-  },
-  play: async ({ canvasElement, step }: PlaywrightProps<MenuButtonProps>) => {
-    await step("MenuButton Aria-Label", async () => {
-      const canvas = within(canvasElement);
-      const menuButton = canvas.queryByRole("button", { name: "More actions" });
-      expect(menuButton).not.toBeNull();
-    });
   },
 };
