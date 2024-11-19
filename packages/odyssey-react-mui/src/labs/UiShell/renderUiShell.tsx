@@ -51,10 +51,6 @@ export const renderUiShell = ({
    */
   appRootElement?: HTMLDivElement;
   /**
-   * Initial visbility of UiShell components.
-   */
-  initiallyVisible?: UiShellProps["initiallyVisible"];
-  /**
    * Notifies when a React rendering error occurs. This could be useful for logging, reporting priority 0 issues, and recovering UI Shell when errors occur.
    */
   onError?: () => void;
@@ -62,7 +58,7 @@ export const renderUiShell = ({
    * HTML element used as the root for UI Shell.
    */
   uiShellRootElement: HTMLElement;
-}) => {
+} & Pick<UiShellProps, "initiallyVisible">) => {
   const appRootElement =
     explicitAppRootElement || document.createElement("div");
 

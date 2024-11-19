@@ -22,6 +22,8 @@ import {
 } from "../../OdysseyDesignTokensContext";
 import { useScrollState } from "./useScrollState";
 
+const emptySideNavItems = [] satisfies SideNavProps["sideNavItems"];
+
 const StyledAppContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{
@@ -65,9 +67,8 @@ const StyledTopNavContainer = styled("div")(() => ({
   gridArea: "top-nav",
 }));
 
-const TopNavComponent = "TopNav";
-const SideNavComponent = "SideNav";
-const AppSwitcherComponent = "AppSwitcher";
+const subComponentNames = ["TopNav", "SideNav", "AppSwitcher"] as const;
+type SubComponentName = (typeof subComponentNames)[number];
 
 export type UiShellNavComponentProps = {
   /**
@@ -89,11 +90,7 @@ export type UiShellContentProps = {
    * Which parts of the UI Shell should be visible initially? For example,
    * if sideNavProps is undefined, should the space for the sidenav be initially visible?
    */
-  initiallyVisible?: (
-    | typeof TopNavComponent
-    | typeof SideNavComponent
-    | typeof AppSwitcherComponent
-  )[];
+  initiallyVisible?: SubComponentName[];
   /**
    * Notifies when a React rendering error occurs. This could be useful for logging, flagging "p0"s, and recovering UI Shell when errors occur.
    */
@@ -118,7 +115,7 @@ export type UiShellContentProps = {
  */
 const UiShellContent = ({
   appComponent,
-  initiallyVisible = [TopNavComponent, SideNavComponent, AppSwitcherComponent],
+  initiallyVisible = ["TopNav", "SideNav", "AppSwitcher"],
   onError = console.error,
   optionalComponents,
   sideNavProps,
@@ -136,9 +133,9 @@ const UiShellContent = ({
       <StyledSideNavContainer>
         {
           /* If SideNav should be initially visible and we have not yet received props, render SideNav with minimal inputs */
-          initiallyVisible?.includes(SideNavComponent) && !sideNavProps && (
+          initiallyVisible?.includes("SideNav") && !sideNavProps && (
             <ErrorBoundary fallback={null} onError={onError}>
-              <SideNav isLoading appName="" sideNavItems={[]} />
+              <SideNav isLoading appName="" sideNavItems={emptySideNavItems} />
             </ErrorBoundary>
           )
         }
@@ -167,7 +164,7 @@ const UiShellContent = ({
       <StyledTopNavContainer>
         {
           /* If TopNav should be initially visible and we have not yet received props, render Topnav with minimal inputs */
-          initiallyVisible?.includes(TopNavComponent) && !topNavProps && (
+          initiallyVisible?.includes("TopNav") && !topNavProps && (
             <ErrorBoundary fallback={null} onError={onError}>
               <TopNav />
             </ErrorBoundary>
