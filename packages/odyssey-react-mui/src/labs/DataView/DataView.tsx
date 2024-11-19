@@ -101,6 +101,9 @@ const DataView = ({
   getRowId: getRowIdProp,
   hasFilters,
   hasPagination,
+  hasPageInput,
+  hasRowCountInput,
+  hasRowCountLabel,
   hasSearch,
   hasSearchSubmitButton,
   hasRowReordering,
@@ -462,6 +465,9 @@ const DataView = ({
       {hasPagination && (
         <Pagination
           currentPageLabel={t("pagination.page")}
+          hasPageInput={hasPageInput}
+          hasRowCountInput={hasRowCountInput}
+          hasRowCountLabel={hasRowCountLabel}
           isDisabled={isEmpty}
           isMoreDisabled={isPaginationMoreDisabled}
           lastRow={lastRowOnPage}
