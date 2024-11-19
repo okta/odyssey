@@ -23,11 +23,8 @@ import {
 import { type ReactRootElements } from "../../web-component";
 
 export const defaultComponentProps: UiShellNavComponentProps = {
-  sideNavProps: {
-    appName: "",
-    sideNavItems: [],
-  },
-  topNavProps: {},
+  sideNavProps: undefined,
+  topNavProps: undefined,
 } as const;
 
 export type UiShellProps = {
@@ -49,7 +46,10 @@ export type UiShellProps = {
     ) => void,
   ) => () => void;
 } & Pick<ReactRootElements, "appRootElement" | "stylesRootElement"> &
-  Pick<UiShellContentProps, "appComponent" | "onError" | "optionalComponents">;
+  Pick<
+    UiShellContentProps,
+    "appComponent" | "initiallyVisible" | "onError" | "optionalComponents"
+  >;
 
 /**
  * Our new Unified Platform UI Shell.
@@ -61,6 +61,7 @@ export type UiShellProps = {
 const UiShell = ({
   appComponent,
   appRootElement,
+  initiallyVisible,
   onError = console.error,
   onSubscriptionCreated,
   optionalComponents,
@@ -94,6 +95,7 @@ const UiShell = ({
           <UiShellContent
             {...componentProps}
             appComponent={appComponent}
+            initiallyVisible={initiallyVisible}
             onError={onError}
             optionalComponents={optionalComponents}
           />

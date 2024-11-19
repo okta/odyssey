@@ -42,6 +42,7 @@ export const optionalComponentSlotNames: Record<
  */
 export const renderUiShell = ({
   appRootElement: explicitAppRootElement,
+  initiallyVisible,
   onError = console.error,
   uiShellRootElement,
 }: {
@@ -49,6 +50,10 @@ export const renderUiShell = ({
    * HTML element used as the root for a React app.
    */
   appRootElement?: HTMLDivElement;
+  /**
+   * Initial visbility of UiShell components.
+   */
+  initiallyVisible?: UiShellProps["initiallyVisible"];
   /**
    * Notifies when a React rendering error occurs. This could be useful for logging, reporting priority 0 issues, and recovering UI Shell when errors occur.
    */
@@ -103,6 +108,7 @@ export const renderUiShell = ({
         <UiShell
           appComponent={appComponent}
           appRootElement={reactRootElements.appRootElement}
+          initiallyVisible={initiallyVisible}
           onError={onError}
           onSubscriptionCreated={publishSubscriptionCreated}
           // `optionalComponents` doesn't need to be memoized because gets passed in once.

@@ -47,6 +47,16 @@ const storybookMeta: Meta<UiShellProps> = {
         },
       },
     },
+    initiallyVisible: {
+      control: "text",
+      description:
+        "A list of UiShell components that should be (minimally) rendered initially, with their isLoading property set when applicable. Allows the initial visibility of UiShell components to be influenced.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     onError: {
       control: "function",
       description:
@@ -179,10 +189,32 @@ const sharedOptionalComponents: UiShellProps["optionalComponents"] = {
   ),
 };
 
-export const Default: StoryObj<UiShellProps> = {};
+export const Default: StoryObj<UiShellProps> = {
+  args: {
+    subscribeToPropChanges: (subscriber) => {
+      subscriber({
+        sideNavProps: {
+          appName: "Odyssey Storybook",
+          sideNavItems: [],
+        },
+      });
+
+      return () => {};
+    },
+  },
+};
+
+export const LoadingFirstRender: StoryObj<UiShellProps> = {};
+
+export const InvisibleFirstRender: StoryObj<UiShellProps> = {
+  args: {
+    initiallyVisible: [],
+  },
+};
 
 export const TopNavOnly: StoryObj<UiShellProps> = {
   args: {
+    initiallyVisible: ["TopNav", "AppSwitcher"],
     optionalComponents: sharedOptionalComponents,
     subscribeToPropChanges: (subscriber) => {
       subscriber({
