@@ -31,7 +31,7 @@ const convert = (baseFiles: string[], propertiesTargetDir: string) => {
   baseFiles.forEach((src) => {
     const extension = extname(src);
     const filename = basename(src, extension);
-    const source = `${readFileSync(src)}`;
+    const source = readFileSync(src).toString();
 
     properties.parse(source, (error, propertiesJson) => {
       if (error) {

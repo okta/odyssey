@@ -111,7 +111,7 @@ export const useRowReordering = ({
     id: MRT_RowData["id"],
   ) => {
     if (id) {
-      const nextRow: MRT_RowData = table.getRow(id);
+      const nextRow: MRT_RowData = table.getRow(id as string);
 
       if (nextRow) {
         table.setHoveredRow(nextRow);
@@ -200,7 +200,7 @@ export const useRowReordering = ({
     if (draggingRow) {
       updateRowOrder({
         rowId: draggingRow.id,
-        newRowIndex: (hoveredRow as MRT_RowData).index,
+        newRowIndex: (hoveredRow as MRT_RowData).index as number,
       });
     }
 

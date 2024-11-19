@@ -16,7 +16,10 @@ import headerPlugin from "eslint-plugin-header";
 import importPlugin from "eslint-plugin-import";
 import jsxA11yPlugin from "eslint-plugin-jsx-a11y";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
-import tseslint from "typescript-eslint";
+import {
+  config as createTsEslintConfig,
+  configs as tsEslintConfigs,
+} from "typescript-eslint";
 
 // import * as headerPlugin from "./utils/headerPlugin.cjs"
 import { headerText, pattern, template } from "./utils/header.js";
@@ -52,7 +55,7 @@ const modifiedReactHooksPlugin = {
 const getPrefixedEslintConfigName = (name: string) =>
   `odyssey-eslint-config/${name}`;
 
-const eslintConfig = tseslint.config(
+const eslintConfig = createTsEslintConfig(
   {
     name: getPrefixedEslintConfigName("global"),
     languageOptions: {
@@ -95,7 +98,7 @@ const eslintConfig = tseslint.config(
     extends: [
       js.configs.recommended,
       importPlugin.flatConfigs.recommended,
-      tseslint.configs.eslintRecommended,
+      tsEslintConfigs.eslintRecommended,
     ],
     name: getPrefixedEslintConfigName("javascript"),
     // rules: {
@@ -121,8 +124,8 @@ const eslintConfig = tseslint.config(
       js.configs.recommended,
       importPlugin.flatConfigs.recommended,
       importPlugin.flatConfigs.typescript,
-      tseslint.configs.eslintRecommended,
-      ...tseslint.configs.recommendedTypeChecked,
+      tsEslintConfigs.eslintRecommended,
+      ...tsEslintConfigs.recommendedTypeChecked,
     ],
     files: ["**/*.ts", "**/*.cts", "**/*.mts", "**/*.tsx"],
     name: getPrefixedEslintConfigName("typescript"),

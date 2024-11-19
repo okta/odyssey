@@ -108,7 +108,7 @@ export type ButtonProps = {
       /**
        * The text content of the Button
        */
-      label?: string | "" | undefined;
+      label?: string | undefined;
       /**
        * The icon element to display at the start of the Button
        */
