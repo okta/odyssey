@@ -10,7 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
+import { userEvent } from "@testing-library/user-event";
 import { Pagination } from "./Pagination";
 
 describe("Pagination", () => {
@@ -60,7 +61,7 @@ describe("Pagination", () => {
       />,
     );
 
-    fireEvent.click(screen.getByLabelText("Next page"));
+    userEvent.click(screen.getByLabelText("Next page"));
 
     await waitFor(() => {
       expect(onPaginationChange).toHaveBeenCalledWith({
@@ -88,7 +89,7 @@ describe("Pagination", () => {
       />,
     );
 
-    fireEvent.click(screen.getByLabelText("Previous page"));
+    userEvent.click(screen.getByLabelText("Previous page"));
 
     await waitFor(() => {
       expect(onPaginationChange).toHaveBeenCalledWith({
@@ -159,8 +160,9 @@ describe("Pagination", () => {
     );
 
     const pageInput = screen.getByLabelText("Page");
-    fireEvent.change(pageInput, { target: { value: "5" } });
-    fireEvent.blur(pageInput);
+    userEvent.click(pageInput);
+    userEvent.keyboard("5");
+    userEvent.click(document.body);
 
     await waitFor(() => {
       expect(onPaginationChange).toHaveBeenCalledWith({
@@ -189,8 +191,9 @@ describe("Pagination", () => {
     );
 
     const rowsPerPageInput = screen.getByLabelText("Rows per page");
-    fireEvent.change(rowsPerPageInput, { target: { value: "20" } });
-    fireEvent.blur(rowsPerPageInput);
+    userEvent.click(rowsPerPageInput);
+    userEvent.keyboard("20");
+    userEvent.click(document.body);
 
     await waitFor(() => {
       expect(onPaginationChange).toHaveBeenCalledWith({
@@ -229,7 +232,7 @@ describe("Pagination", () => {
       />,
     );
 
-    fireEvent.click(screen.getByText("Load more"));
+    userEvent.click(screen.getByText("Load more"));
 
     await waitFor(() => {
       expect(onPaginationChange).toHaveBeenCalledWith({

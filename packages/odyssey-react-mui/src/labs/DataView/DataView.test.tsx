@@ -11,12 +11,12 @@
  */
 
 import {
-  fireEvent,
   render,
   screen,
   waitFor,
   within,
 } from "@testing-library/react";
+import { userEvent } from "@testing-library/user-event";
 import { DataView } from "./index";
 import {
   data,
@@ -78,7 +78,7 @@ describe("DataView", () => {
     expect(rowElements.length).toBe(21);
 
     waitFor(() => {
-      fireEvent.click(screen.getByText("Show more"));
+      userEvent.click(screen.getByText("Show more"));
 
       const loadedRows = within(tableElement).getAllByRole("row", {
         hidden: false,
@@ -111,7 +111,7 @@ describe("DataView", () => {
     });
     expect(rowElements.length).toBe(21);
 
-    fireEvent.click(screen.getByText("Show more"));
+    userEvent.click(screen.getByText("Show more"));
 
     waitFor(() => {
       const loadedRows = within(tableElement).getAllByRole("row", {
@@ -121,7 +121,8 @@ describe("DataView", () => {
     });
 
     const searchField = screen.getByPlaceholderText("Search");
-    fireEvent.change(searchField, { target: { value: "John" } });
+    userEvent.click(searchField);
+    userEvent.keyboard("John");
 
     waitFor(() => {
       const rowsAfterFilter = within(tableElement).getAllByRole("row", {
@@ -151,7 +152,7 @@ describe("DataView", () => {
     );
 
     const nextButton = screen.getByLabelText("Next page");
-    fireEvent.click(nextButton);
+    userEvent.click(nextButton);
 
     await waitFor(() => {
       expect(currentPage).toBe(2);
