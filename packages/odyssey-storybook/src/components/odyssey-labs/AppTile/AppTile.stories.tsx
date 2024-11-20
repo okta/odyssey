@@ -27,7 +27,7 @@ import {
   TagList,
 } from "@okta/odyssey-react-mui";
 import { useCallback, useState } from "react";
-import { SettingsIcon } from "@okta/odyssey-react-mui/icons";
+import { MoreIcon, SettingsIcon } from "@okta/odyssey-react-mui/icons";
 
 const storybookMeta: Meta<AppTileProps> = {
   title: "Labs Components/AppTile",
@@ -148,15 +148,6 @@ const storybookMeta: Meta<AppTileProps> = {
         },
       },
     },
-    overline: {
-      control: "text",
-      description: "An 'eyebrow' of text above the title.",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
     title: {
       control: "text",
       description: "A string for the tile title.",
@@ -270,7 +261,7 @@ export const Compact: StoryObj<AppTileProps> = {
             title="App name"
             image={<img src="https://placehold.co/128" alt="Example logo" />}
             onClick={() => {}}
-            actionIcon={<SettingsIcon />}
+            actionIcon={<MoreIcon />}
             actionLabel="Open app settings"
             onActionClick={() => {}}
           />
@@ -279,7 +270,7 @@ export const Compact: StoryObj<AppTileProps> = {
             title="App name"
             image={<img src="https://placehold.co/256x48" alt="Example logo" />}
             onClick={() => {}}
-            actionIcon={<SettingsIcon />}
+            actionIcon={<MoreIcon />}
             actionLabel="Open app settings"
             onActionClick={() => {}}
           />
@@ -288,7 +279,7 @@ export const Compact: StoryObj<AppTileProps> = {
             title="App name"
             image={<img src="https://placehold.co/256x96" alt="Example logo" />}
             onClick={() => {}}
-            actionIcon={<SettingsIcon />}
+            actionIcon={<MoreIcon />}
             actionLabel="Open app settings"
             onActionClick={() => {}}
           />
@@ -297,7 +288,7 @@ export const Compact: StoryObj<AppTileProps> = {
             title="App name"
             image={<img src="https://placehold.co/128" alt="Example logo" />}
             onClick={() => {}}
-            actionIcon={<SettingsIcon />}
+            actionIcon={<MoreIcon />}
             actionLabel="Open app settings"
             onActionClick={() => {}}
             isLoading
@@ -317,10 +308,9 @@ export const Compact: StoryObj<AppTileProps> = {
             variant="compact"
             title="Fully loaded"
             description="This is a description of the app."
-            overline="Overline"
             image={<img src="https://placehold.co/128" alt="Example logo" />}
             onClick={() => {}}
-            actionIcon={<SettingsIcon />}
+            actionIcon={<MoreIcon />}
             actionLabel="Open app settings"
             onActionClick={() => {}}
             auxiliaryText="Auxiliary text"

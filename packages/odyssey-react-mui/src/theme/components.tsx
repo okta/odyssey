@@ -786,6 +786,7 @@ export const components = ({
 
               ...(ownerState.size === "small" && {
                 padding: odysseyTokens.Spacing2,
+                width: odysseyTokens.Spacing6,
               }),
 
               ...(ownerState.size === "large" && {
