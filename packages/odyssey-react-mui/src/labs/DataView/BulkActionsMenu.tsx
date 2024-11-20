@@ -16,9 +16,8 @@ import styled from "@emotion/styled";
 import { useTranslation } from "react-i18next";
 
 import { Box } from "../../Box";
-import { Button } from "../../Button";
+import { Button, MenuButton } from "../../Buttons";
 import { ChevronDownIcon } from "../../icons.generated";
-import { MenuButton } from "../../MenuButton";
 import { UniversalProps } from "./componentTypes";
 import {
   DesignTokens,

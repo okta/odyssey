@@ -42,6 +42,7 @@ export const optionalComponentSlotNames: Record<
  */
 export const renderUiShell = ({
   appRootElement: explicitAppRootElement,
+  initialVisibleSections,
   onError = console.error,
   uiShellRootElement,
 }: {
@@ -57,7 +58,7 @@ export const renderUiShell = ({
    * HTML element used as the root for UI Shell.
    */
   uiShellRootElement: HTMLElement;
-}) => {
+} & Pick<UiShellProps, "initialVisibleSections">) => {
   const appRootElement =
     explicitAppRootElement || document.createElement("div");
 
@@ -103,6 +104,7 @@ export const renderUiShell = ({
         <UiShell
           appComponent={appComponent}
           appRootElement={reactRootElements.appRootElement}
+          initialVisibleSections={initialVisibleSections}
           onError={onError}
           onSubscriptionCreated={publishSubscriptionCreated}
           // `optionalComponents` doesn't need to be memoized because gets passed in once.

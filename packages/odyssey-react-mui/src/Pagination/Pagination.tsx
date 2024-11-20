@@ -13,7 +13,7 @@
 import { InputBase } from "@mui/material";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Paragraph } from "../Typography";
-import { Button } from "../Button";
+import { Button } from "../Buttons";
 import { ArrowLeftIcon, ArrowRightIcon } from "../icons.generated";
 import styled from "@emotion/styled";
 import {

@@ -17,7 +17,7 @@ import {
   AccordionSummary as MuiAccordionSummary,
   AccordionProps as MuiAccordionProps,
 } from "@mui/material";
-import { ReactNode, memo } from "react";
+import { PropsWithChildren, ReactNode, memo } from "react";
 
 import type { HtmlProps } from "../../HtmlProps";
 import { ChevronDownIcon } from "../../icons.generated";
@@ -29,10 +29,6 @@ import { Support } from "../../Typography";
 import { useUniqueId } from "../../useUniqueId";
 
 export type NavAccordionProps = {
-  /**
-   * The content of the Accordion itself
-   */
-  children: ReactNode;
   /**
    * The label text for the AccordionSummary
    */
@@ -76,8 +72,7 @@ const AccordionLabelContainer = styled("span", {
   isIconVisible: boolean;
 }>(({ odysseyDesignTokens, isIconVisible }) => ({
   width: "100%",
-  marginLeft: isIconVisible ? odysseyDesignTokens.Spacing2 : 0,
-  fontSize: odysseyDesignTokens.TypographyScale0,
+  marginInlineStart: isIconVisible ? odysseyDesignTokens.Spacing3 : 0,
   fontWeight: odysseyDesignTokens.TypographyWeightHeading,
   color: odysseyDesignTokens.TypographyColorHeading,
 }));
@@ -95,16 +90,16 @@ const AccordionSummaryContainer = styled(MuiAccordionSummary, {
   borderRadius: odysseyDesignTokens.BorderRadiusMain,
   paddingBlock: odysseyDesignTokens.Spacing3,
   paddingInline: odysseyDesignTokens.Spacing4,
-  lineHeight: 1.5,
 
   "&:focus-visible": {
     backgroundColor: "unset",
     outline: "none",
-    boxShadow: `inset 0 0 0 3px ${odysseyDesignTokens.PalettePrimaryMain}`,
+    boxShadow: `inset 0 0 0 2px ${odysseyDesignTokens.PalettePrimaryMain}`,
   },
 
   ...(isCompact && {
     paddingBlock: odysseyDesignTokens.Spacing2,
+    minHeight: "unset",
   }),
 
   ...(!isDisabled && {
@@ -124,7 +119,7 @@ const NavAccordion = ({
   isExpanded,
   translate,
   startIcon,
-}: NavAccordionProps) => {
+}: PropsWithChildren<NavAccordionProps>) => {
   const id = useUniqueId(idOverride);
   const headerId = `${id}-header`;
   const contentId = `${id}-content`;

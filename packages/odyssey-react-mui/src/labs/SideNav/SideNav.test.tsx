@@ -102,12 +102,12 @@ describe("SideNav", () => {
 
     expect(screen.getByText(menuItemText)).toBeVisible();
 
-    const collapseButton = screen.getByLabelText("Collapse side navigation");
+    const collapseButton = screen.getByLabelText("Close navigation");
     userEvent.click(collapseButton);
 
     expect(screen.getByText(menuItemText)).not.toBeVisible();
 
-    const expandButton = screen.getByLabelText("Expand side navigation");
+    const expandButton = screen.getByLabelText("Open navigation");
     userEvent.click(expandButton);
 
     expect(screen.getByText(menuItemText)).toBeVisible();
@@ -134,7 +134,7 @@ describe("SideNav", () => {
       </OdysseyProvider>,
     );
 
-    const collapseButton = screen.getByLabelText("Collapse side navigation");
+    const collapseButton = screen.getByLabelText("Close navigation");
     userEvent.click(collapseButton);
 
     expect(mockOnCollapse).toBeCalled();
@@ -161,10 +161,10 @@ describe("SideNav", () => {
       </OdysseyProvider>,
     );
 
-    const collapseButton = screen.getByLabelText("Collapse side navigation");
+    const collapseButton = screen.getByLabelText("Close navigation");
     userEvent.click(collapseButton);
 
-    const expandButton = screen.getByLabelText("Expand side navigation");
+    const expandButton = screen.getByLabelText("Open navigation");
     userEvent.click(expandButton);
 
     expect(mockOnExpand).toBeCalled();
@@ -274,7 +274,7 @@ describe("SideNav", () => {
             {
               id: "accordionOuter",
               label: accordionOuter,
-              children: [
+              nestedNavItems: [
                 {
                   id: "accordionInner",
                   href: "#",
@@ -287,7 +287,7 @@ describe("SideNav", () => {
       </OdysseyProvider>,
     );
 
-    expect(screen.getByRole("menuitem", { name: menuLinkText })).toBeVisible();
+    expect(screen.getByRole("link", { name: menuLinkText })).toBeVisible();
     expect(
       screen.getByRole("button", { name: menuClickableText }),
     ).toBeVisible();
@@ -319,6 +319,6 @@ describe("SideNav", () => {
       </OdysseyProvider>,
     );
 
-    expect(screen.getByRole("menuitem")).toHaveTextContent(String(badgeCount));
+    expect(screen.getByRole("listitem")).toHaveTextContent(String(badgeCount));
   });
 });

@@ -41,7 +41,7 @@ import {
   DragIndicatorIcon,
 } from "../../icons.generated";
 import { Box } from "../../Box";
-import { Button } from "../../Button";
+import { Button, MenuButton } from "../../Buttons";
 import { TableLayoutProps, TableState, UniversalProps } from "./componentTypes";
 import { DataTableCell } from "./dataTypes";
 import {
@@ -49,7 +49,6 @@ import {
   displayColumnDefOptions,
   ScrollableTableContainer,
 } from "./tableConstants";
-import { MenuButton } from "../../MenuButton";
 import { MoreIcon } from "../../icons.generated";
 import { RowActions } from "./RowActions";
 import { useOdysseyDesignTokens } from "../../OdysseyDesignTokensContext";

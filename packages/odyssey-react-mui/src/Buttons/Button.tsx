@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2022-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -10,20 +10,21 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createContext, useContext } from "react";
+import { memo } from "react";
+import {
+  AdditionalBaseButtonProps,
+  BaseButton,
+  BaseButtonProps,
+} from "./BaseButton";
 
-export type SideNavItemContentContextValue = {
-  isCompact?: boolean;
-  isSortable?: boolean;
-  depth: number;
+export type ButtonProps = Omit<BaseButtonProps, "children"> &
+  AdditionalBaseButtonProps;
+
+const Button = (props: ButtonProps) => {
+  return <BaseButton {...props} />;
 };
 
-export const SideNavItemContentContext =
-  createContext<SideNavItemContentContextValue>({
-    isCompact: false,
-    isSortable: false,
-    depth: 1,
-  });
+const MemoizedButton = memo(Button);
+MemoizedButton.displayName = "Button";
 
-export const useSideNavItemContent = () =>
-  useContext(SideNavItemContentContext);
+export { MemoizedButton as Button };

@@ -24,7 +24,7 @@ import { Drawer as MuiDrawer } from "@mui/material";
 import styled from "@emotion/styled";
 import { useTranslation } from "react-i18next";
 
-import { Button } from "./Button";
+import { Button } from "./Buttons";
 import { CloseIcon } from "./icons.generated";
 import {
   DesignTokens,

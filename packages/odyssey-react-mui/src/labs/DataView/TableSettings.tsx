@@ -17,8 +17,7 @@ import { useTranslation } from "react-i18next";
 
 import { densityValues } from "./constants";
 import { ListIcon, ShowIcon } from "../../icons.generated";
-import { MenuButton } from "../../MenuButton";
-import { MenuItem } from "../../MenuItem";
+import { MenuButton, MenuItem } from "../../Buttons";
 import { TableLayoutProps, TableState } from "./componentTypes";
 
 export type TableSettingsProps = {

@@ -18,7 +18,7 @@ import {
   DialogContentText,
   DialogActions,
 } from "@mui/material";
-import { Button } from "./Button";
+import { Button } from "./Buttons";
 import { CloseIcon } from "./icons.generated";
 import {
   cloneElement,

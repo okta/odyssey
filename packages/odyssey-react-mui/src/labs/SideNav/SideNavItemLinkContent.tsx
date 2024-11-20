@@ -32,8 +32,8 @@ const SideNavItemLabelContainer = styled("div", {
   display: "flex",
   flexWrap: "wrap",
   alignItems: "center",
-  fontSize: odysseyDesignTokens.TypographyScale0,
-  marginInlineStart: isIconVisible ? odysseyDesignTokens.Spacing2 : 0,
+  fontSize: odysseyDesignTokens.TypographySizeBody,
+  marginInlineStart: isIconVisible ? odysseyDesignTokens.Spacing3 : 0,
 }));
 
 const SideNavItemLinkContent = ({
