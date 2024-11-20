@@ -202,7 +202,7 @@ const TableLayoutContent = <TData extends MRT_RowData>({
   }, [tableState]);
 
   const defaultCell = useCallback<
-    ({ cell }: { cell: DataTableCell<TData> }) => ReactElement | string
+    ({ cell }: { cell: DataTableCell<TData, unknown> }) => ReactElement | string
   >(({ cell }) => {
     const value = cell.getValue<string>();
     const hasTextWrapping =
