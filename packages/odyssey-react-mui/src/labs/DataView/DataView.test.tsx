@@ -35,7 +35,7 @@ describe("DataView", () => {
         availableLayouts={["table"]}
         getData={getData}
         tableLayoutOptions={{
-          columns: columns,
+          columns,
         }}
         hasSearch
         hasPagination
@@ -60,7 +60,7 @@ describe("DataView", () => {
         availableLayouts={["table"]}
         getData={getData}
         tableLayoutOptions={{
-          columns: columns,
+          columns,
         }}
         hasSearch
         hasPagination
@@ -77,8 +77,8 @@ describe("DataView", () => {
     });
     expect(rowElements.length).toBe(21);
 
-    waitFor(() => {
-      userEvent.click(screen.getByText("Show more"));
+    await waitFor(async () => {
+      await userEvent.click(screen.getByText("Show more"));
 
       const loadedRows = within(tableElement).getAllByRole("row", {
         hidden: false,
@@ -111,9 +111,9 @@ describe("DataView", () => {
     });
     expect(rowElements.length).toBe(21);
 
-    userEvent.click(screen.getByText("Show more"));
+    await userEvent.click(screen.getByText("Show more"));
 
-    waitFor(() => {
+    await waitFor(() => {
       const loadedRows = within(tableElement).getAllByRole("row", {
         hidden: false,
       });
@@ -121,10 +121,10 @@ describe("DataView", () => {
     });
 
     const searchField = screen.getByPlaceholderText("Search");
-    userEvent.click(searchField);
-    userEvent.keyboard("John");
+    await userEvent.click(searchField);
+    await userEvent.keyboard("John");
 
-    waitFor(() => {
+    await waitFor(() => {
       const rowsAfterFilter = within(tableElement).getAllByRole("row", {
         hidden: false,
       });
@@ -152,7 +152,7 @@ describe("DataView", () => {
     );
 
     const nextButton = screen.getByLabelText("Next page");
-    userEvent.click(nextButton);
+    await userEvent.click(nextButton);
 
     await waitFor(() => {
       expect(currentPage).toBe(2);

@@ -10,14 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render, within } from "@testing-library/react";
+import { render, waitFor, within } from "@testing-library/react";
 
 import { Dialog } from "../../Dialog";
 import { defaultComponentProps, UiShell, UiShellProps } from "./UiShell";
 import { ReactElement } from "react";
 
 describe("UiShell", () => {
-  test("renders `appRootElement`", () => {
+  test("renders `appRootElement`", async () => {
     const appRootElement = document.createElement("div");
 
     render(
@@ -31,9 +31,9 @@ describe("UiShell", () => {
           topNavRightSide: (
             <Dialog
               children={undefined}
-              title="Hello World!"
               isOpen
               onClose={() => {}}
+              title="Hello World!"
             />
           ),
         }}
@@ -42,8 +42,10 @@ describe("UiShell", () => {
       />,
     );
 
-    expect(Array.from(appRootElement.children)).toHaveLength(1);
-    expect(appRootElement).toHaveTextContent("Hello World!");
+    await waitFor(() => {
+      expect(() => Array.from(appRootElement.children)).toHaveLength(1);
+      expect(appRootElement).toHaveTextContent("Hello World!");
+    })
   });
 
   test("renders `stylesRootElement`", () => {
@@ -83,7 +85,7 @@ describe("UiShell", () => {
     expect(within(container).getByTestId(testId)).toBeInTheDocument();
   });
 
-  test("renders always-available `componentSlots`", () => {
+  test("renders always-available `componentSlots`", async () => {
     const optionalComponentTestIds: Array<
       keyof Required<UiShellProps>["optionalComponents"]
     > = ["banners", "topNavLeftSide", "topNavRightSide"];
@@ -106,9 +108,11 @@ describe("UiShell", () => {
       />,
     );
 
-    optionalComponentTestIds.forEach((testId) => {
-      expect(within(container).getByTestId(testId)).toBeInTheDocument();
-    });
+    await waitFor(() => {
+      optionalComponentTestIds.forEach((testId) => {
+        expect(within(container).getByTestId(testId)).toBeInTheDocument();
+      });
+    })
   });
 
   test("renders optionally-available `componentSlots`", () => {

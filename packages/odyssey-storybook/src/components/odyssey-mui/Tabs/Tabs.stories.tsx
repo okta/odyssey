@@ -149,7 +149,7 @@ const selectTab =
     await step(`select the ${tabName} tab`, async () => {
       await axeRun(actionName);
 
-      waitFor(() => {
+      await waitFor(() => {
         const canvas = within(canvasElement);
         const tabElement = canvas.getByText(tabName);
         userEvent.click(tabElement);

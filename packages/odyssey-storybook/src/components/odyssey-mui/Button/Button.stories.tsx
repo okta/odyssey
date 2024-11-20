@@ -158,7 +158,7 @@ const interactWithButton =
         expect(args.onClick).toHaveBeenCalledTimes(1);
         axeRun(actionName);
         if (!hoverState) {
-          waitFor(() => userEvent.tab());
+          await waitFor(() => userEvent.tab());
         }
       });
     }

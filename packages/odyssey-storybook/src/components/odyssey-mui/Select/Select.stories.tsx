@@ -286,7 +286,7 @@ export const DefaultValue: StoryObj<typeof Select> = {
         await userEvent.click(listItemElement);
       }
 
-      waitFor(() => {
+      await waitFor(() => {
         expect(list?.element).not.toBeVisible();
       });
     });

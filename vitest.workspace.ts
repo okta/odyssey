@@ -10,23 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render, screen } from "@testing-library/react";
-import { ComposablePicker } from "./ComposablePicker";
-import { OdysseyProvider } from "../../OdysseyProvider";
-
-describe("ComposablePicker", () => {
-  it("displays the ComposablePicker", () => {
-    render(
-      <OdysseyProvider>
-        <ComposablePicker
-          label="picker label"
-          options={[]}
-          renderOption={() => <></>}
-        />
-      </OdysseyProvider>,
-    );
-
-    const input = screen.getByLabelText("picker label");
-    expect(input).toBeVisible();
-  });
-});
+export default [
+  'packages/*'
+]

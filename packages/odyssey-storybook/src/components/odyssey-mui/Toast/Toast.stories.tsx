@@ -278,7 +278,7 @@ export const Dismissible: StoryObj<ToastProps> = {
           });
           if (dismissToastButton) {
             userEvent.click(dismissToastButton);
-            waitFor(() => {
+            await waitFor(() => {
               expect(toastElement).not.toBeVisible();
 
               const buttonElement = canvas.getByText(

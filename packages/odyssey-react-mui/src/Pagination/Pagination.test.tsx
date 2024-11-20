@@ -61,7 +61,7 @@ describe("Pagination", () => {
       />,
     );
 
-    userEvent.click(screen.getByLabelText("Next page"));
+    await userEvent.click(screen.getByLabelText("Next page"));
 
     await waitFor(() => {
       expect(onPaginationChange).toHaveBeenCalledWith({
@@ -89,7 +89,7 @@ describe("Pagination", () => {
       />,
     );
 
-    userEvent.click(screen.getByLabelText("Previous page"));
+    await userEvent.click(screen.getByLabelText("Previous page"));
 
     await waitFor(() => {
       expect(onPaginationChange).toHaveBeenCalledWith({
@@ -143,6 +143,7 @@ describe("Pagination", () => {
 
   it("updates pageIndex when entering a new page number", async () => {
     const onPaginationChange = vi.fn();
+
     render(
       <Pagination
         currentPageLabel="Page"
@@ -159,10 +160,11 @@ describe("Pagination", () => {
       />,
     );
 
-    const pageInput = screen.getByLabelText("Page");
-    userEvent.click(pageInput);
-    userEvent.keyboard("5");
-    userEvent.click(document.body);
+    const pageElement = await screen.findByLabelText("Page")
+
+    await userEvent.click(pageElement);
+    await userEvent.keyboard("5");
+    await userEvent.click(document.body);
 
     await waitFor(() => {
       expect(onPaginationChange).toHaveBeenCalledWith({
@@ -190,10 +192,11 @@ describe("Pagination", () => {
       />,
     );
 
-    const rowsPerPageInput = screen.getByLabelText("Rows per page");
-    userEvent.click(rowsPerPageInput);
-    userEvent.keyboard("20");
-    userEvent.click(document.body);
+    const rowsPerPageInput = await screen.findByLabelText("Rows per page");
+
+    await userEvent.click(rowsPerPageInput);
+    await userEvent.keyboard("20");
+    await userEvent.click(document.body);
 
     await waitFor(() => {
       expect(onPaginationChange).toHaveBeenCalledWith({
@@ -232,7 +235,7 @@ describe("Pagination", () => {
       />,
     );
 
-    userEvent.click(screen.getByText("Load more"));
+    await userEvent.click(screen.getByText("Load more"));
 
     await waitFor(() => {
       expect(onPaginationChange).toHaveBeenCalledWith({

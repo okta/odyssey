@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render, screen, within } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import { SideNav } from "./SideNav";
 import { OdysseyProvider } from "../../OdysseyProvider";
@@ -32,7 +32,7 @@ describe("SideNav", () => {
       </OdysseyProvider>,
     );
 
-    expect(screen.getByTitle("Okta")).toBeInTheDocument();
+    expect(screen.getByTitle("Okta")).toBeVisible();
   });
 
   test("can show a custom logo", () => {
@@ -55,7 +55,7 @@ describe("SideNav", () => {
       </OdysseyProvider>,
     );
 
-    expect(screen.getByAltText("Custom logo")).toBeInTheDocument();
+    expect(screen.getByAltText("Custom logo")).toBeVisible();
   });
 
   test("can show header text", () => {
@@ -78,10 +78,10 @@ describe("SideNav", () => {
 
     expect(
       screen.getByRole("heading", { name: headerText }),
-    ).toBeInTheDocument();
+    ).toBeVisible();
   });
 
-  test("is collapsible", () => {
+  test("is collapsible", async () => {
     const menuItemText = "Users";
 
     render(
@@ -103,17 +103,17 @@ describe("SideNav", () => {
     expect(screen.getByText(menuItemText)).toBeVisible();
 
     const collapseButton = screen.getByLabelText("Close navigation");
-    userEvent.click(collapseButton);
+    await userEvent.click(collapseButton);
 
     expect(screen.getByText(menuItemText)).not.toBeVisible();
 
     const expandButton = screen.getByLabelText("Open navigation");
-    userEvent.click(expandButton);
+    await userEvent.click(expandButton);
 
     expect(screen.getByText(menuItemText)).toBeVisible();
   });
 
-  test("can fire onCollapse event", () => {
+  test("can fire onCollapse event", async () => {
     const menuItemText = "Users";
     const mockOnCollapse = vi.fn();
 
@@ -135,12 +135,12 @@ describe("SideNav", () => {
     );
 
     const collapseButton = screen.getByLabelText("Close navigation");
-    userEvent.click(collapseButton);
+    await userEvent.click(collapseButton);
 
     expect(mockOnCollapse).toBeCalled();
   });
 
-  test("can fire onExpand event", () => {
+  test("can fire onExpand event", async () => {
     const menuItemText = "Users";
     const mockOnExpand = vi.fn();
 
@@ -162,10 +162,10 @@ describe("SideNav", () => {
     );
 
     const collapseButton = screen.getByLabelText("Close navigation");
-    userEvent.click(collapseButton);
+    await userEvent.click(collapseButton);
 
     const expandButton = screen.getByLabelText("Open navigation");
-    userEvent.click(expandButton);
+    await userEvent.click(expandButton);
 
     expect(mockOnExpand).toBeCalled();
   });
@@ -244,7 +244,7 @@ describe("SideNav", () => {
     expect(screen.getByText(footerComponentText)).toBeVisible();
   });
 
-  test("displays sidenav link", () => {
+  test("displays sidenav link", async () => {
     const accordionInner = "Accordion inside";
     const accordionOuter = "Accordion outside";
     const headingText = "Heading";
@@ -295,11 +295,11 @@ describe("SideNav", () => {
 
     const accordion = screen.getByText(accordionOuter);
     expect(screen.getByText(accordionInner)).not.toBeVisible();
-    userEvent.click(accordion);
+    await userEvent.click(accordion);
     expect(screen.getByText(accordionInner)).toBeVisible();
   });
 
-  test("can show notification badge", () => {
+  test("can show notification badge", async () => {
     const menuItemText = "Menu item text";
     const badgeCount = 9;
 
@@ -319,6 +319,8 @@ describe("SideNav", () => {
       </OdysseyProvider>,
     );
 
-    expect(screen.getByRole("listitem")).toHaveTextContent(String(badgeCount));
+    await waitFor(() => {
+      expect(screen.getByRole("listitem")).toHaveTextContent(String(badgeCount));
+    })
   });
 });
