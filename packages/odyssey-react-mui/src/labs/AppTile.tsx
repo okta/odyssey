@@ -33,9 +33,9 @@ import {
 import { Heading5, Paragraph, Subordinate } from ".././Typography";
 import { Box } from ".././Box";
 
-export const APP_TILE_COMPACT_IMAGE_HEIGHT = "40px";
-export const APP_TILE_IMAGE_HEIGHT = "64px";
-export const APP_TILE_PLACEHOLDER_IMAGE_WIDTH = "64px";
+export const APP_TILE_COMPACT_IMAGE_HEIGHT = "2.85714286rem"; // 40px
+export const APP_TILE_IMAGE_HEIGHT = "4.57142857rem"; // 64px
+export const APP_TILE_PLACEHOLDER_IMAGE_WIDTH = "4.57142857rem"; // 64px
 
 export const appTileVariantValues = ["comfortable", "compact"] as const;
 
@@ -192,9 +192,7 @@ const StyledMuiCard = styled(MuiCard, {
   display: "flex",
   justifyContent: isPlaceholder && isCompact ? "center" : "flex-start",
   padding: odysseyDesignTokens.Spacing4,
-  borderWidth: odysseyDesignTokens.BorderWidthMain,
-  borderStyle: odysseyDesignTokens.BorderStyleMain,
-  borderColor: odysseyDesignTokens.HueNeutral200,
+  border: `${odysseyDesignTokens.BorderWidthMain} ${odysseyDesignTokens.HueNeutral200} ${odysseyDesignTokens.BorderStyleMain}`,
   borderRadius: odysseyDesignTokens.BorderRadiusMain,
   transition: `border ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
 
