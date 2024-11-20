@@ -21,8 +21,8 @@ import { DataOnReorderRowsType, DataRow, DataView } from "./index";
 import { data, columns, filterData, reorderData } from "./testSupportData";
 import { EmptyState } from "../../EmptyState";
 import { DataTableRowData } from "../../DataTable";
-import { MenuItem } from "../../MenuItem";
-import { Button } from "../../Button";
+import { Button } from "../../Buttons";
+import { MenuItem } from "../../Buttons";
 import { MRT_RowSelectionState } from "material-react-table";
 import { getControlledElement } from "../../test-selectors/linkedHtmlSelectors";
 
