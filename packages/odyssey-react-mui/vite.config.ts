@@ -14,9 +14,8 @@ import react from "@vitejs/plugin-react";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { defineConfig } from "vite";
-// import dts from 'vite-plugin-dts';
 
-console.log(join(import.meta.dirname, "src"))
+console.log(join(import.meta.dirname, "src"));
 
 export default defineConfig({
   build: {
@@ -25,23 +24,22 @@ export default defineConfig({
       entry: {
         icons: "./src/icons.generated/index.ts",
         labs: "./src/labs/index.ts",
-        index: './src/index.ts',
+        index: "./src/index.ts",
         testSelectors: "./src/test-selectors/index.ts",
       },
-      formats: ['es'],
+      formats: ["es"],
     },
     outDir: "dist",
     sourcemap: true,
   },
   define: {
     "process.env.BROWSERSLIST_ENV": JSON.stringify("modern"),
-    "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV || "production"),
+    "process.env.NODE_ENV": JSON.stringify(
+      process.env.NODE_ENV || "production",
+    ),
   },
   plugins: [
     react(),
-    // dts({
-    //   entryRoot: join(import.meta.dirname, "src"),
-    // }),
     {
       name: "generateTestSelectorsJson",
       apply: "build",
@@ -59,7 +57,7 @@ export default defineConfig({
               writeFile(
                 join(distDirectory, "testSelectors.json"),
                 JSON.stringify(odysseyTestSelector),
-              )
+              ),
             )
             .then(() => {
               console.log("Test selectors written to", distDirectory);
