@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.27.1](https://github.com/okta/odyssey/compare/v1.27.0...v1.27.1) (2024-11-18)
+
+**Note:** Version bump only for package @okta/odyssey-storybook
+
+## [1.27.0](https://github.com/okta/odyssey/compare/v1.26.0...v1.27.0) (2024-11-14)
+
+### Features
+
+- adds drag-n-drop feature to the sidenav ([#2405](https://github.com/okta/odyssey/issues/2405)) ([aca8dad](https://github.com/okta/odyssey/commit/aca8dadd7130847112483f49bdc52b065bde3c88))
+
 ## [1.26.0](https://github.com/okta/odyssey/compare/v1.25.0...v1.26.0) (2024-11-04)
 
 ### Features

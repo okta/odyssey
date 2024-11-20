@@ -2686,7 +2686,7 @@ export const components = ({
       styleOverrides: {
         root: ({ ownerState }) => ({
           display: "table",
-          width: "auto",
+          width: "100%",
           borderCollapse: "separate",
           borderSpacing: 0,
           marginBlock: odysseyTokens.Spacing0,
