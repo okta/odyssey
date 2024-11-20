@@ -151,18 +151,18 @@ const openToast =
   async (args: ToastProps, actionName: string) => {
     const canvas = within(canvasElement);
     await step(`open ${actionName}`, async () => {
-      await waitFor(() => {
+      await waitFor(async () => {
         const buttonElement = canvas.getByText(`Open ${args.severity} toast`);
-        userEvent.hover(buttonElement);
-        userEvent.click(buttonElement);
-        userEvent.tab();
+        await userEvent.hover(buttonElement);
+        await userEvent.click(buttonElement);
+        await userEvent.tab();
       });
 
       await axeRun(actionName);
     });
   };
 
-const Single: StoryObj<ToastProps> = {
+const Single: StoryObj<typeof Toast> = {
   args: {
     isVisible: false,
     role: "status",
@@ -196,7 +196,7 @@ const Single: StoryObj<ToastProps> = {
   },
 };
 
-export const Info: StoryObj<ToastProps> = {
+export const Info: StoryObj<typeof Toast> = {
   ...Single,
   args: {
     text: "The mission to Sagittarius A is set for January 7.",
@@ -207,7 +207,7 @@ export const Info: StoryObj<ToastProps> = {
   },
 };
 
-export const ErrorToast: StoryObj<ToastProps> = {
+export const ErrorToast: StoryObj<typeof Toast> = {
   ...Single,
   name: "Error",
   args: {
@@ -220,7 +220,7 @@ export const ErrorToast: StoryObj<ToastProps> = {
   },
 };
 
-export const Warning: StoryObj<ToastProps> = {
+export const Warning: StoryObj<typeof Toast> = {
   ...Single,
   args: {
     text: "Severe solar winds may delay local system flights",
@@ -232,7 +232,7 @@ export const Warning: StoryObj<ToastProps> = {
   },
 };
 
-export const Success: StoryObj<ToastProps> = {
+export const Success: StoryObj<typeof Toast> = {
   ...Single,
   args: {
     text: "Docking completed",
@@ -244,7 +244,7 @@ export const Success: StoryObj<ToastProps> = {
   },
 };
 
-export const Dismissible: StoryObj<ToastProps> = {
+export const Dismissible: StoryObj<typeof Toast> = {
   ...Single,
   args: {
     isDismissable: true,
@@ -256,9 +256,9 @@ export const Dismissible: StoryObj<ToastProps> = {
     await step(`open Dismissible Toast}`, async () => {
       await waitFor(() => {
         const buttonElement = canvas.getByText(`Open ${args.severity} toast`);
-        userEvent.hover(buttonElement);
-        userEvent.click(buttonElement);
-        userEvent.tab();
+        await userEvent.hover(buttonElement);
+        await userEvent.click(buttonElement);
+        await userEvent.tab();
       });
     });
 
@@ -277,14 +277,14 @@ export const Dismissible: StoryObj<ToastProps> = {
             name: "Close",
           });
           if (dismissToastButton) {
-            userEvent.click(dismissToastButton);
+            await userEvent.click(dismissToastButton);
             await waitFor(() => {
               expect(toastElement).not.toBeVisible();
 
               const buttonElement = canvas.getByText(
                 `Open ${args.severity} toast`,
               );
-              userEvent.click(buttonElement);
+              await userEvent.click(buttonElement);
             });
           }
         }
@@ -295,7 +295,7 @@ export const Dismissible: StoryObj<ToastProps> = {
   },
 };
 
-export const MultipleToasts: StoryObj<ToastProps> = {
+export const MultipleToasts: StoryObj<typeof Toast> = {
   parameters: {
     docs: {
       description: {

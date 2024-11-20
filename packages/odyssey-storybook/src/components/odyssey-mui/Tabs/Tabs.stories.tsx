@@ -152,8 +152,8 @@ const selectTab =
       await waitFor(() => {
         const canvas = within(canvasElement);
         const tabElement = canvas.getByText(tabName);
-        userEvent.click(tabElement);
-        userEvent.tab();
+        await userEvent.click(tabElement);
+        await userEvent.tab();
         const tabData = canvas.getByText(`Information about ${tabName}`);
         expect(tabData).toBeInTheDocument();
       });

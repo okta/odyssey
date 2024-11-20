@@ -24,7 +24,7 @@ import { userEvent, within } from "@storybook/testing-library";
 import { axeRun } from "../../../axe-util";
 import type { PlaywrightProps } from "../storybookTypes";
 
-const storybookMeta: Meta<TooltipProps> = {
+const storybookMeta: Meta<typeof Tooltip> = {
   title: "MUI Components/Tooltip",
   component: Tooltip,
   argTypes: {
@@ -93,7 +93,7 @@ const storybookMeta: Meta<TooltipProps> = {
 
 export default storybookMeta;
 
-const Template: StoryObj<TooltipProps> = {
+const Template: StoryObj<typeof Tooltip> = {
   render: function C(args) {
     return (
       <Tooltip
@@ -108,17 +108,17 @@ const Template: StoryObj<TooltipProps> = {
 };
 
 const showTooltip =
-  ({ canvasElement, step }: PlaywrightProps<TooltipProps>) =>
+  ({ canvasElement, step }: PlaywrightProps<typeof Tooltip>) =>
   async (actionName: string) => {
     await step("show the tooltip on hover", async () => {
       const canvas = within(canvasElement);
       const button = canvas.getByText("Launch");
-      userEvent.hover(button);
+      await userEvent.hover(button);
       await axeRun(actionName);
     });
   };
 
-export const Default: StoryObj<TooltipProps> = {
+export const Default: StoryObj<typeof Tooltip> = {
   ...Template,
   args: {
     children: <Button label="Launch" variant="primary" />,
@@ -131,7 +131,7 @@ export const Default: StoryObj<TooltipProps> = {
   },
 };
 
-export const IconButton: StoryObj<TooltipProps> = {
+export const IconButton: StoryObj<typeof Tooltip> = {
   ...Template,
   args: {
     children: (
@@ -145,17 +145,17 @@ export const IconButton: StoryObj<TooltipProps> = {
     placement: "top",
     text: "Download logs",
   },
-  play: async ({ canvasElement, step }: PlaywrightProps<TooltipProps>) => {
+  play: async ({ canvasElement, step }: PlaywrightProps<typeof Tooltip>) => {
     await step("tooltip text", async () => {
       const canvas = within(canvasElement);
       const button = canvas.getByRole("button");
-      userEvent.hover(button);
+      await userEvent.hover(button);
       await axeRun("Tooltip Icon Button");
     });
   },
 };
 
-export const StatusWrapper: StoryObj<TooltipProps> = {
+export const StatusWrapper: StoryObj<typeof Tooltip> = {
   ...Template,
   args: {
     children: <Status label="Warp drive online" severity="success" />,
@@ -163,20 +163,20 @@ export const StatusWrapper: StoryObj<TooltipProps> = {
     placement: "top",
     text: "The warp drive is currently online.",
   },
-  play: async ({ canvasElement, step }: PlaywrightProps<TooltipProps>) => {
+  play: async ({ canvasElement, step }: PlaywrightProps<typeof Tooltip>) => {
     await step("tooltip text", async () => {
       const canvas = within(canvasElement);
       const button = canvas.getByLabelText(
         "The warp drive is currently online.",
       );
-      userEvent.hover(button);
+      await userEvent.hover(button);
 
       await axeRun("Tooltip Icon Button");
     });
   },
 };
 
-export const Placement: StoryObj<TooltipProps> = {
+export const Placement: StoryObj<typeof Tooltip> = {
   render: function C() {
     return (
       <>

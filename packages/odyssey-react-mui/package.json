@@ -28,15 +28,15 @@
   "exports": {
     "./icons": {
       "types": "./dist/src/icons.generated/index.d.ts",
-      "default": "./dist/icons.generated/index.js"
+      "default": "./dist/icons.js"
     },
     "./labs": {
       "types": "./dist/src/labs/index.d.ts",
-      "default": "./dist/labs/index.js"
+      "default": "./dist/labs.js"
     },
     "./test-selectors": {
       "types": "./dist/src/test-selectors/index.d.ts",
-      "default": "./dist/test-selectors/index.js"
+      "default": "./dist/test-selectors.js"
     },
     ".": {
       "types": "./dist/src/index.d.ts",

@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createContext, useContext, useMemo } from "react";
+import { createContext, createRef, RefObject, useContext, useMemo } from "react";
 import type { CSSProperties, PropsWithChildren } from "react";
 import type {
   DraggableSyntheticListeners,
@@ -33,17 +33,17 @@ type ItemProps = {
   isSelected?: boolean;
 };
 
-interface Context {
+export type SortableItemContextType = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   attributes: Record<string, any>;
   listeners: DraggableSyntheticListeners;
-  ref(node: HTMLElement | null): void;
+  ref: RefObject<HTMLButtonElement>;
 }
 
-const SortableItemContext = createContext<Context>({
+const SortableItemContext = createContext<SortableItemContextType>({
   attributes: {},
   listeners: undefined,
-  ref() {},
+  ref: createRef<HTMLButtonElement>(),
 });
 
 const StyledSortableListItem = styled("li", {
@@ -170,11 +170,12 @@ export const SortableItem = ({
     transform,
     transition,
   } = useSortable({ id });
-  const context: Context = useMemo(
+  const context: SortableItemContextType = useMemo(
     () => ({
       attributes,
       listeners,
-      ref: setActivatorNodeRef,
+      // This library gives us a legacy ref function, and I can't change it, so I had to override the type. --Kevin Ghadyani
+      ref: setActivatorNodeRef as unknown as RefObject<HTMLButtonElement>,
     }),
     [attributes, listeners, setActivatorNodeRef],
   );

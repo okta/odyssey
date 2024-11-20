@@ -14,14 +14,24 @@ import react from "@vitejs/plugin-react";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { defineConfig } from "vite";
+// import dts from 'vite-plugin-dts';
+
+console.log(join(import.meta.dirname, "src"))
 
 export default defineConfig({
   build: {
+    emptyOutDir: false,
+    lib: {
+      entry: {
+        icons: "./src/icons.generated/index.ts",
+        labs: "./src/labs/index.ts",
+        index: './src/index.ts',
+        testSelectors: "./src/test-selectors/index.ts",
+      },
+      formats: ['es'],
+    },
     outDir: "dist",
     sourcemap: true,
-    rollupOptions: {
-      input: "./src",
-    },
   },
   define: {
     "process.env.BROWSERSLIST_ENV": JSON.stringify("modern"),
@@ -29,6 +39,9 @@ export default defineConfig({
   },
   plugins: [
     react(),
+    // dts({
+    //   entryRoot: join(import.meta.dirname, "src"),
+    // }),
     {
       name: "generateTestSelectorsJson",
       apply: "build",
