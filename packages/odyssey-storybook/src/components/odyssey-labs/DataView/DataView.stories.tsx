@@ -1045,7 +1045,6 @@ export const StackCards: StoryObj<DataViewMetaProps> = {
 
 const compactItemProps = (row: Person) => ({
   title: row.name,
-  description: `${row.name} is ${row.age} years old.`,
   variant: "compact" as DataCardProps<Person>["variant"],
   image: <img src="https://placehold.co/400" alt="Logo" />,
 });
