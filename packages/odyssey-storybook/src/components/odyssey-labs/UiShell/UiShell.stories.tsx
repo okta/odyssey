@@ -242,7 +242,7 @@ export const InvisibleFirstRender: StoryObj<UiShellProps> = {
 
 export const TopNavOnly: StoryObj<UiShellProps> = {
   args: {
-    initialVisibleSections: ["TopNav", "AppSwitcher"],
+    initialVisibleSections: ["TopNav"],
     optionalComponents: sharedOptionalComponents,
     subscribeToPropChanges: (subscriber) => {
       subscriber({
@@ -256,6 +256,7 @@ export const TopNavOnly: StoryObj<UiShellProps> = {
 
 export const AppSwitcherOnly: StoryObj<UiShellProps> = {
   args: {
+    initialVisibleSections: ["AppSwitcher"],
     subscribeToPropChanges: (subscriber) => {
       subscriber({
         topNavProps: {},
