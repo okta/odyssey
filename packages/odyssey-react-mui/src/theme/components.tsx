@@ -651,7 +651,7 @@ export const components = ({
                 backgroundColor: odysseyTokens.PalettePrimaryDark,
               },
 
-              "&:active": {
+              "&:active, &[aria-expanded='true']": {
                 backgroundColor: odysseyTokens.PalettePrimaryDarker,
               },
 
@@ -667,27 +667,20 @@ export const components = ({
               color: odysseyTokens.TypographyColorBody,
 
               "&:hover": {
-                backgroundColor: odysseyTokens.HueNeutral100,
+                backgroundColor: odysseyTokens.HueNeutral200,
+                borderColor: odysseyTokens.HueNeutral400,
               },
 
-              "&:active": {
+              "&:active, &[aria-expanded='true']": {
                 backgroundColor: "transparent",
                 borderColor: odysseyTokens.BorderColorPrimaryControl,
                 color: odysseyTokens.TypographyColorAction,
               },
 
               "&:disabled": {
-                ...(contrastMode === "highContrast" && {
-                  backgroundColor: odysseyTokens.HueNeutral200,
-                  borderColor: "transparent",
-                  color: odysseyTokens.TypographyColorDisabled,
-                }),
-
-                ...(contrastMode === "lowContrast" && {
-                  backgroundColor: odysseyTokens.HueNeutral100,
-                  borderColor: "transparent",
-                  color: odysseyTokens.TypographyColorDisabled,
-                }),
+                backgroundColor: odysseyTokens.HueNeutral200,
+                borderColor: "transparent",
+                color: odysseyTokens.TypographyColorDisabled,
               },
             }),
 
@@ -703,7 +696,7 @@ export const components = ({
                 boxShadow: `0 0 0 2px ${odysseyTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyTokens.PaletteDangerMain}`,
               },
 
-              "&:active": {
+              "&:active, &[aria-expanded='true']": {
                 backgroundColor: odysseyTokens.PaletteDangerDarker,
               },
 
@@ -719,19 +712,20 @@ export const components = ({
               color: odysseyTokens.PaletteDangerMain,
 
               "&:hover": {
-                backgroundColor: odysseyTokens.HueNeutral100,
+                backgroundColor: odysseyTokens.HueNeutral200,
+                borderColor: odysseyTokens.HueNeutral400,
                 color: odysseyTokens.PaletteDangerMain,
               },
 
-              "&:active": {
+              "&:active, &[aria-expanded='true']": {
                 backgroundColor: "transparent",
                 borderColor: odysseyTokens.PaletteDangerMain,
                 color: odysseyTokens.PaletteDangerMain,
               },
 
               "&:disabled": {
-                backgroundColor: "transparent",
-                borderColor: odysseyTokens.PaletteDangerLight,
+                backgroundColor: odysseyTokens.PaletteDangerHighlight,
+                borderColor: "transparent",
                 color: odysseyTokens.PaletteDangerLight,
               },
             }),
@@ -741,11 +735,13 @@ export const components = ({
               color: odysseyTokens.TypographyColorBody,
 
               "&:hover": {
-                backgroundColor: odysseyTokens.HueNeutral100,
+                backgroundColor: odysseyTokens.HueNeutral200,
               },
 
-              "&:active": {
-                backgroundColor: odysseyTokens.HueNeutral200,
+              "&:active, &[aria-expanded='true']": {
+                backgroundColor: "transparent",
+                color: odysseyTokens.HueBlue600,
+                borderColor: odysseyTokens.HueBlue600,
               },
 
               "&:disabled": {
@@ -759,11 +755,12 @@ export const components = ({
               color: odysseyTokens.TypographyColorAction,
 
               "&:hover": {
-                backgroundColor: odysseyTokens.HueNeutral100,
+                backgroundColor: odysseyTokens.HueNeutral200,
               },
 
-              "&:active": {
-                backgroundColor: odysseyTokens.HueNeutral200,
+              "&:active, &[aria-expanded='true']": {
+                backgroundColor: "transparent",
+                borderColor: odysseyTokens.HueBlue600,
               },
 
               "&:disabled": {
