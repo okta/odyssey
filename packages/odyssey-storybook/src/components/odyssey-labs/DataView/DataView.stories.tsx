@@ -52,11 +52,11 @@ import {
   DataTableRowData,
 } from "@okta/odyssey-react-mui";
 
-type DataViewMetaProps = DataViewProps &
-  TableLayoutProps &
-  CardLayoutProps & {
-    tableRowActionMenuItems: TableLayoutProps["rowActionMenuItems"];
-    cardRowActionMenuItems: CardLayoutProps["rowActionMenuItems"];
+type DataViewMetaProps = DataViewProps<Person> &
+  TableLayoutProps<Person> &
+  CardLayoutProps<Person> & {
+    tableRowActionMenuItems: TableLayoutProps<Person>["rowActionMenuItems"];
+    cardRowActionMenuItems: CardLayoutProps<Person>["rowActionMenuItems"];
     hasCustomEmptyPlaceholder: boolean;
     hasCustomNoResultsPlaceholder: boolean;
     hasActionMenuItems: boolean;
@@ -920,7 +920,7 @@ export const AdditionalActions: StoryObj<DataViewMetaProps> = {
 export const ColumnGrowDemo: StoryObj<DataViewMetaProps> = {
   render: function C() {
     const columns = useMemo(
-      (): DataColumns => [
+      (): DataColumns<DataRow> => [
         {
           accessorKey: "name",
           header: "Name",
@@ -1016,11 +1016,11 @@ export const PaginationHook: StoryObj<DataViewMetaProps> = {
   },
 };
 
-const stackItemProps = (row: DataRow) => ({
+const stackItemProps = (row: Person) => ({
   overline: "Overline",
   title: row.name,
   description: `${row.name} is ${row.age} years old.`,
-  variant: "stack" as DataCardProps["variant"],
+  variant: "stack" as DataCardProps<Person>["variant"],
   image: <img src="https://placehold.co/400" alt="Logo" />,
 });
 
@@ -1043,10 +1043,10 @@ export const StackCards: StoryObj<DataViewMetaProps> = {
   },
 };
 
-const compactItemProps = (row: DataRow) => ({
+const compactItemProps = (row: Person) => ({
   title: row.name,
   description: `${row.name} is ${row.age} years old.`,
-  variant: "compact" as DataCardProps["variant"],
+  variant: "compact" as DataCardProps<Person>["variant"],
   image: <img src="https://placehold.co/400" alt="Logo" />,
 });
 
@@ -1075,7 +1075,7 @@ export const GrowColumnWithoutActions: StoryObj<DataViewMetaProps> = {
     const [data, setData] = useState<Person[]>(personData);
     const { getData } = useDataCallbacks(data, setData);
 
-    const columns: DataColumns = [
+    const columns: DataColumns<Person> = [
       {
         accessorKey: "order",
         header: "ID",
@@ -1110,7 +1110,7 @@ export const GrowColumnWithActions: StoryObj<DataViewMetaProps> = {
     const [data, setData] = useState<Person[]>(personData);
     const { getData } = useDataCallbacks(data, setData);
 
-    const columns: DataColumns = [
+    const columns: DataColumns<Person> = [
       {
         accessorKey: "order",
         header: "ID",

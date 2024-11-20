@@ -17,23 +17,25 @@ import { t } from "i18next";
 import { DataQueryParamsType } from "./dataTypes";
 import { UniversalProps } from "./componentTypes";
 
-type DataRequestType = {
+type DataRequestType<TData extends MRT_RowData> = {
   dataQueryParams: DataQueryParamsType;
-  errorMessageProp: UniversalProps["errorMessage"];
-  getData: UniversalProps["getData"];
-  setData: Dispatch<SetStateAction<MRT_RowData[]>>;
-  setErrorMessage: Dispatch<SetStateAction<UniversalProps["errorMessage"]>>;
+  errorMessageProp: UniversalProps<TData>["errorMessage"];
+  getData: UniversalProps<TData>["getData"];
+  setData: Dispatch<SetStateAction<TData[]>>;
+  setErrorMessage: Dispatch<
+    SetStateAction<UniversalProps<TData>["errorMessage"]>
+  >;
   setIsLoading?: Dispatch<SetStateAction<boolean>>;
 };
 
-export const fetchData = async ({
+export const fetchData = async <TData extends MRT_RowData>({
   dataQueryParams,
   errorMessageProp,
   getData,
   setData,
   setErrorMessage,
   setIsLoading,
-}: DataRequestType) => {
+}: DataRequestType<TData>) => {
   setIsLoading?.(true);
   setErrorMessage(errorMessageProp);
   try {

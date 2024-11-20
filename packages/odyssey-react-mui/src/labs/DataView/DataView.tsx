@@ -50,7 +50,13 @@ import {
 } from "../../OdysseyDesignTokensContext";
 import styled from "@emotion/styled";
 
-export type DataViewProps = UniversalProps & ViewProps<DataLayout>;
+export type DataViewProps<TData extends MRT_RowData> = UniversalProps<TData> &
+  ViewProps<TData, DataLayout>;
+type DataViewComponent = (<TData extends MRT_RowData>(
+  props: DataViewProps<TData>,
+) => JSX.Element) & {
+  displayName?: string;
+};
 
 const DataViewContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
@@ -87,7 +93,7 @@ const MetaTextContainer = styled("div", {
   marginInlineEnd: odysseyDesignTokens.Spacing2,
 }));
 
-const DataView = ({
+const DataView = <TData extends MRT_RowData>({
   additionalActionButton,
   additionalActionMenuItems,
   availableLayouts = allAvailableLayouts,
@@ -127,7 +133,7 @@ const DataView = ({
   maxPages,
   maxResultsPerPage,
   onPaginationChange,
-}: DataViewProps) => {
+}: DataViewProps<TData>) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
 
@@ -135,23 +141,23 @@ const DataView = ({
     initialLayout ?? availableLayouts[0],
   );
 
-  const [data, setData] = useState<MRT_RowData[]>([]);
+  const [data, setData] = useState<TData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(isLoadingProp ?? true);
   const [isEmpty, setIsEmpty] = useState<boolean>(isEmptyProp ?? true);
   const [isNoResults, setIsNoResults] = useState<boolean>(
     isNoResultsProp ?? false,
   );
   const [errorMessage, setErrorMessage] =
-    useState<UniversalProps["errorMessage"]>(errorMessageProp);
+    useState<UniversalProps<TData>["errorMessage"]>(errorMessageProp);
 
   const [search, setSearch] = useState<string>("");
 
   const [initialFilters, setInitialFilters] =
-    useState<UniversalProps["filters"]>(filtersProp);
+    useState<UniversalProps<TData>["filters"]>(filtersProp);
   const [filters, setFilters] =
-    useState<UniversalProps["filters"]>(filtersProp);
+    useState<UniversalProps<TData>["filters"]>(filtersProp);
 
-  const [draggingRow, setDraggingRow] = useState<MRT_Row<MRT_RowData> | null>();
+  const [draggingRow, setDraggingRow] = useState<MRT_Row<TData> | null>();
 
   const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
 
@@ -204,7 +210,7 @@ const DataView = ({
     ],
   );
 
-  const getRowId = getRowIdProp ? getRowIdProp : (row: MRT_RowData) => row.id;
+  const getRowId = getRowIdProp ? getRowIdProp : (row: TData) => row.id;
 
   // Update pagination state if props change
   useEffect(() => {
@@ -489,7 +495,7 @@ const DataView = ({
   );
 };
 
-const MemoizedDataView = memo(DataView);
+const MemoizedDataView = memo(DataView) as DataViewComponent;
 MemoizedDataView.displayName = "DataView";
 
 export { MemoizedDataView as DataView };
