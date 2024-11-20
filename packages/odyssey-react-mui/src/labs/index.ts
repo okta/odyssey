@@ -40,6 +40,7 @@ export {
   type GroupPickerProps,
 } from "./GroupPicker";
 
+export * from "./AppSwitcher";
 export * from "./SideNav/NavAccordion";
 export * from "./SideNav";
 export * from "./TopNav";
