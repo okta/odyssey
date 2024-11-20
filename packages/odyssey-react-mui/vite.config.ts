@@ -41,16 +41,12 @@ export default defineConfig({
 
         import("./src/test-selectors/index").then(({ odysseyTestSelector }) =>
           mkdir(distDirectory, { recursive: true })
-            .catch((t) => console.error("MKDIR", t))
-            .then(
-              (t) =>
-                // eslint-disable-next-line
-                // @ts-ignore
-                console.log("HI", t) ||
-                writeFile(
-                  join(distDirectory, "testSelectors.json"),
-                  JSON.stringify(odysseyTestSelector),
-                ),
+            .catch(() => null)
+            .then(() =>
+              writeFile(
+                join(distDirectory, "testSelectors.json"),
+                JSON.stringify(odysseyTestSelector),
+              )
             )
             .then(() => {
               console.log("Test selectors written to", distDirectory);

@@ -10,8 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { DataTableRowData, Status } from "@okta/odyssey-react-mui";
-import { DataTableColumn } from "@okta/odyssey-react-mui";
+import { DataTableColumn, DataTableRowData, Status } from "@okta/odyssey-react-mui";
 
 export type Person = {
   order: number;

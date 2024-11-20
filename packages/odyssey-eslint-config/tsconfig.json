@@ -2,6 +2,6 @@
   "extends": "@okta/odyssey-typescript/tsconfig.node16.json",
   "compilerOptions": {
     "outDir": "dist",
-    "skipLibCheck": false
+    "skipLibCheck": true
   }
 }

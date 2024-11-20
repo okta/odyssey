@@ -20,7 +20,7 @@ import { Meta, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, within } from "@storybook/testing-library";
-import { expect, jest } from "@storybook/jest";
+import { expect, fn } from "@storybook/test";
 import { axeRun } from "../../../axe-util";
 import type { PlaywrightProps } from "../storybookTypes";
 
@@ -188,7 +188,7 @@ export const LinkWithTarget: StoryObj<BannerProps> = {
 
 export const Dismissible: StoryObj<BannerProps> = {
   args: {
-    onClose: jest.fn(),
+    onClose: fn(),
   },
   play: async ({ args, canvasElement, step }: PlayType) => {
     await step("dismiss the banner on click", async () => {

@@ -12,7 +12,7 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { jest } from "@storybook/jest";
+import { fn } from "@storybook/test";
 import { AppTile } from "@okta/odyssey-react-mui/labs";
 import {
   Box,
@@ -167,7 +167,7 @@ const storybookMeta: Meta<typeof AppTile> = {
     description: "This is a description of the app.",
     image: <img src="https://placehold.co/128" alt="Example logo" />,
     onActionClick: undefined,
-    onClick: jest.fn(),
+    onClick: fn(),
     title: "App name",
   },
   decorators: [MuiThemeDecorator],
