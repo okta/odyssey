@@ -721,6 +721,10 @@ const DataTable = ({
     },
     muiTableBodyCellProps: ({ column }) => ({
       className: column.getIsResizing() ? "isResizing" : "",
+      sx: {
+        overflowWrap: "anywhere",
+        maxWidth: odysseyDesignTokens.TypographyLineLengthMax,
+      },
     }),
 
     // Reordering
