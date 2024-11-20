@@ -16,7 +16,7 @@ describe("createEventBus", () => {
   test("messages are not sent once unsubscribed", () => {
     const { publish, subscribe } = createMessageBus<null>();
 
-    const subscriber = vitest.fn();
+    const subscriber = vi.fn();
 
     const unsubscribe = subscribe(subscriber);
 
@@ -29,9 +29,9 @@ describe("createEventBus", () => {
   test("messages are not sent once unsubscribed from multiple subscribers", () => {
     const { publish, subscribe } = createMessageBus<null>();
 
-    const subscriber1 = vitest.fn();
-    const subscriber2 = vitest.fn();
-    const subscriber3 = vitest.fn();
+    const subscriber1 = vi.fn();
+    const subscriber2 = vi.fn();
+    const subscriber3 = vi.fn();
 
     const unsubscribe1 = subscribe(subscriber1);
     const unsubscribe2 = subscribe(subscriber2);
@@ -53,7 +53,7 @@ describe("createEventBus", () => {
 
     const { publish, subscribe } = createMessageBus<typeof message>();
 
-    const subscriber = vitest.fn();
+    const subscriber = vi.fn();
 
     const unsubscribe = subscribe(subscriber);
 
@@ -72,7 +72,7 @@ describe("createEventBus", () => {
       typeof message1 | typeof message2
     >();
 
-    const subscriber = vitest.fn();
+    const subscriber = vi.fn();
 
     const unsubscribe = subscribe(subscriber);
 
@@ -93,8 +93,8 @@ describe("createEventBus", () => {
       typeof message1 | typeof message2
     >();
 
-    const subscriber1 = vitest.fn();
-    const subscriber2 = vitest.fn();
+    const subscriber1 = vi.fn();
+    const subscriber2 = vi.fn();
 
     const unsubscribe1 = subscribe(subscriber1);
     const unsubscribe2 = subscribe(subscriber2);

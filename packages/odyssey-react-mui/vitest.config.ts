@@ -21,6 +21,11 @@ export default mergeConfig(viteConfig, defineConfig({
     //   name: 'chromium',
     //   provider: 'playwright',
     // },
+    // deps: {
+    //   inline: [
+    //     "@testing-library/react",
+    //   ],
+    // },
     environment: 'happy-dom',
     globals: true,
     setupFiles: ['./vitest.setup.ts'],

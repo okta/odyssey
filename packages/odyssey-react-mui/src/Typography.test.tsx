@@ -14,6 +14,7 @@ import { render, screen } from "@testing-library/react";
 import { Typography } from "./Typography";
 
 describe("Typography", () => {
+  console.log(process.env.NODE_ENV, "AHHHHHHHHHH")
   test("renders Overline", () => {
     render(
       <Typography ariaLabel="overline" variant="overline">

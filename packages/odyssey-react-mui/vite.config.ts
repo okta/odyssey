@@ -25,7 +25,7 @@ export default defineConfig({
   },
   define: {
     "process.env.BROWSERSLIST_ENV": JSON.stringify("modern"),
-    "process.env.NODE_ENV": JSON.stringify("production"),
+    "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV || "production"),
   },
   plugins: [
     react(),

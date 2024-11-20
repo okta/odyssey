@@ -15,7 +15,7 @@ import { Pagination } from "./Pagination";
 
 describe("Pagination", () => {
   it("renders the expected controls in 'paged' variant", () => {
-    const onPaginationChange = vitest.fn();
+    const onPaginationChange = vi.fn();
     render(
       <Pagination
         currentPageLabel="Page"
@@ -43,7 +43,7 @@ describe("Pagination", () => {
   });
 
   it("calls onPaginationChange with correct pageIndex when clicking next", async () => {
-    const onPaginationChange = vitest.fn();
+    const onPaginationChange = vi.fn();
     render(
       <Pagination
         currentPageLabel="Page"
@@ -71,7 +71,7 @@ describe("Pagination", () => {
   });
 
   it("calls onPaginationChange with correct pageIndex when clicking previous", async () => {
-    const onPaginationChange = vitest.fn();
+    const onPaginationChange = vi.fn();
     render(
       <Pagination
         currentPageLabel="Page"
@@ -99,7 +99,7 @@ describe("Pagination", () => {
   });
 
   it("disables previous button on first page", () => {
-    const onPaginationChange = vitest.fn();
+    const onPaginationChange = vi.fn();
     render(
       <Pagination
         currentPageLabel="Page"
@@ -120,7 +120,7 @@ describe("Pagination", () => {
   });
 
   it("disables next button on last page", () => {
-    const onPaginationChange = vitest.fn();
+    const onPaginationChange = vi.fn();
     render(
       <Pagination
         currentPageLabel="Page"
@@ -141,7 +141,7 @@ describe("Pagination", () => {
   });
 
   it("updates pageIndex when entering a new page number", async () => {
-    const onPaginationChange = vitest.fn();
+    const onPaginationChange = vi.fn();
     render(
       <Pagination
         currentPageLabel="Page"
@@ -171,7 +171,7 @@ describe("Pagination", () => {
   });
 
   it("updates pageSize when entering a new rows per page value", async () => {
-    const onPaginationChange = vitest.fn();
+    const onPaginationChange = vi.fn();
     render(
       <Pagination
         currentPageLabel="Page"
@@ -201,7 +201,7 @@ describe("Pagination", () => {
   });
 
   it("renders 'Load more' button in 'loadMore' variant", () => {
-    const onPaginationChange = vitest.fn();
+    const onPaginationChange = vi.fn();
     render(
       <Pagination
         loadMoreLabel="Load more"
@@ -217,7 +217,7 @@ describe("Pagination", () => {
   });
 
   it("calls onPaginationChange with increased pageSize when clicking 'Load more'", async () => {
-    const onPaginationChange = vitest.fn();
+    const onPaginationChange = vi.fn();
     render(
       <Pagination
         loadMoreLabel="Load more"
@@ -240,7 +240,7 @@ describe("Pagination", () => {
   });
 
   it("disables 'Load more' button when isMoreDisabled is true", () => {
-    const onPaginationChange = vitest.fn();
+    const onPaginationChange = vi.fn();
     render(
       <Pagination
         loadMoreLabel="Load more"
@@ -257,7 +257,7 @@ describe("Pagination", () => {
   });
 
   it("disables 'Next page' button when isMoreDisabled is true", () => {
-    const onPaginationChange = vitest.fn();
+    const onPaginationChange = vi.fn();
     render(
       <Pagination
         currentPageLabel="Page"
@@ -279,7 +279,7 @@ describe("Pagination", () => {
   });
 
   it("disables all controls when isDisabled is true", () => {
-    const onPaginationChange = vitest.fn();
+    const onPaginationChange = vi.fn();
     render(
       <Pagination
         currentPageLabel="Page"

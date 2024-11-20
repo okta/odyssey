@@ -114,7 +114,7 @@ describe("SideNav", () => {
 
   test("can fire onCollapse event", () => {
     const menuItemText = "Users";
-    const mockOnCollapse = vitest.fn();
+    const mockOnCollapse = vi.fn();
 
     render(
       <OdysseyProvider>
@@ -141,7 +141,7 @@ describe("SideNav", () => {
 
   test("can fire onExpand event", () => {
     const menuItemText = "Users";
-    const mockOnExpand = vitest.fn();
+    const mockOnExpand = vi.fn();
 
     render(
       <OdysseyProvider>

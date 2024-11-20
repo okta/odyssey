@@ -161,8 +161,8 @@ describe("UiShell", () => {
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(rootElement);
 
-    const unsubscribeFromPropChanges = vitest.fn();
-    const subscribeToPropChanges = vitest.fn(() => unsubscribeFromPropChanges);
+    const unsubscribeFromPropChanges = vi.fn();
+    const subscribeToPropChanges = vi.fn(() => unsubscribeFromPropChanges);
 
     const { unmount } = render(
       <UiShell
@@ -257,7 +257,7 @@ describe("UiShell", () => {
     document.body.append(rootElement);
 
     // This passed to React's state setter. The return value here prevents a test error. It wouldn't be required otherwise as this test could care less what's returned.
-    const stateUpdater = vitest.fn(() => defaultComponentProps);
+    const stateUpdater = vi.fn(() => defaultComponentProps);
 
     // This is the subscription we give the component, and then once subscribed, we're going to immediately call it to see if it passes us the previous state.
     const subscribeToPropChanges: UiShellProps["subscribeToPropChanges"] = (

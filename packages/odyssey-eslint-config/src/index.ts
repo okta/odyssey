@@ -16,6 +16,7 @@ import headerPlugin from "eslint-plugin-header";
 import importPlugin from "eslint-plugin-import";
 import jsxA11yPlugin from "eslint-plugin-jsx-a11y";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
+import globals from "globals";
 import {
   config as createTsEslintConfig,
   configs as tsEslintConfigs,
@@ -175,11 +176,9 @@ const eslintConfig = createTsEslintConfig(
     files: ["**/vitest.setup.*", "**/*.test.*"],
     languageOptions: {
       globals: {
-        describe: "readonly",
-        expect: "readonly",
-        it: "readonly",
-        test: "readonly",
-        vitest: "readonly",
+        ...globals.jest,
+        vi: true,
+        vitest: true,
       },
     },
     name: getPrefixedEslintConfigName("test"),
