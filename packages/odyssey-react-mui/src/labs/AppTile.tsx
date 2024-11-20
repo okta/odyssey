@@ -389,7 +389,7 @@ const AppTile = ({
             <Button
               endIcon={actionIcon}
               ariaLabel={actionLabel}
-              variant="floatingAction"
+              variant="floating"
               size="small"
               tooltipText={actionLabel}
               ariaControls={actionAriaControls}
