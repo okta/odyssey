@@ -13,7 +13,11 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { jest } from "@storybook/jest";
-import { AppTile, AppTileProps } from "@okta/odyssey-react-mui/labs";
+import {
+  AppTile,
+  AppTileProps,
+  appTileVariantValues,
+} from "@okta/odyssey-react-mui/labs";
 import {
   Box,
   Drawer,
@@ -23,7 +27,7 @@ import {
   TagList,
 } from "@okta/odyssey-react-mui";
 import { useCallback, useState } from "react";
-import { SettingsIcon } from "@okta/odyssey-react-mui/icons";
+import { MoreIcon, SettingsIcon } from "@okta/odyssey-react-mui/icons";
 
 const storybookMeta: Meta<AppTileProps> = {
   title: "Labs Components/AppTile",
@@ -144,21 +148,22 @@ const storybookMeta: Meta<AppTileProps> = {
         },
       },
     },
-    overline: {
-      control: "text",
-      description: "An 'eyebrow' of text above the title.",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
     title: {
       control: "text",
       description: "A string for the tile title.",
       table: {
         type: {
           summary: "string",
+        },
+      },
+    },
+    variant: {
+      control: { type: "radio" },
+      options: appTileVariantValues,
+      description: "Whether the tile is comfortable or compact.",
+      table: {
+        defaultValue: {
+          summary: appTileVariantValues[0],
         },
       },
     },
@@ -169,6 +174,7 @@ const storybookMeta: Meta<AppTileProps> = {
     image: <img src="https://placehold.co/128" alt="Example logo" />,
     onClick: jest.fn(),
     onActionClick: undefined,
+    variant: "comfortable",
   },
   decorators: [MuiThemeDecorator],
   parameters: {
@@ -192,6 +198,98 @@ export const Default: StoryObj<AppTileProps> = {
         <Tag label="Tag 2" />
       </TagList>
     ),
+  },
+};
+
+export const Multiple: StoryObj<AppTileProps> = {
+  render: function C() {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          width: "800px",
+          gap: "20px",
+
+          ["& > *"]: {
+            width: "100%",
+          },
+        }}
+      >
+        <AppTile
+          title="App name"
+          image={<img src="https://placehold.co/128" alt="Example logo" />}
+          onClick={() => {}}
+        />
+        <AppTile
+          title="App name"
+          description="Lorem ipsum dolor sit amet."
+          image={<img src="https://placehold.co/128" alt="Example logo" />}
+          isLoading
+          onClick={() => {}}
+        />
+        <AppTile
+          title="App name"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac lectus vel dui ullamcorper commodo at vitae lectus. Proin porta urna vitae quam hendrerit pellentesque. Nam nec neque a sapien pharetra commodo. Curabitur ut lacinia dolor. Sed pulvinar nibh nec rutrum interdum. Duis velit nunc, fringilla ut eleifend lacinia, porta at neque. Nulla quis magna sollicitudin, feugiat tellus vitae, tristique magna. Pellentesque pretium leo vitae odio aliquet, eu placerat orci luctus. Nunc sagittis leo nec nulla rhoncus, ut tempus libero maximus."
+          onClick={() => {}}
+        />
+      </Box>
+    );
+  },
+};
+
+export const Compact: StoryObj<AppTileProps> = {
+  render: function C() {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          width: "572px",
+          gap: "20px",
+
+          ["& > *"]: {
+            width: "100%",
+          },
+        }}
+      >
+        <AppTile
+          variant="compact"
+          title="App name"
+          image={<img src="https://placehold.co/128" alt="Example logo" />}
+          onClick={() => {}}
+          actionIcon={<MoreIcon />}
+          actionLabel="Open app settings"
+          onActionClick={() => {}}
+        />
+        <AppTile
+          variant="compact"
+          title="App name"
+          image={<img src="https://placehold.co/256x48" alt="Example logo" />}
+          onClick={() => {}}
+          actionIcon={<MoreIcon />}
+          actionLabel="Open app settings"
+          onActionClick={() => {}}
+        />
+        <AppTile
+          variant="compact"
+          title="App name"
+          image={<img src="https://placehold.co/256x96" alt="Example logo" />}
+          onClick={() => {}}
+          actionIcon={<MoreIcon />}
+          actionLabel="Open app settings"
+          onActionClick={() => {}}
+        />
+        <AppTile
+          variant="compact"
+          title="App name"
+          image={<img src="https://placehold.co/128" alt="Example logo" />}
+          onClick={() => {}}
+          actionIcon={<MoreIcon />}
+          actionLabel="Open app settings"
+          onActionClick={() => {}}
+          isLoading
+        />
+      </Box>
+    );
   },
 };
 
