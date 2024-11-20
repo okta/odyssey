@@ -166,11 +166,11 @@ describe("renderUiShell", () => {
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(rootElement);
 
-    const consoleErrorSpy = jest
+    const consoleErrorSpy = vi
       .spyOn(console, "error")
       .mockImplementation(consoleError);
 
-    await act(() => {
+    act(() => {
       const { setComponentProps } = renderUiShell({
         onError,
         uiShellRootElement: rootElement,

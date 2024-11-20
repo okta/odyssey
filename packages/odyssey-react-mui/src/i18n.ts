@@ -46,7 +46,7 @@ import { translation as znTW } from "./properties/ts/odyssey-react-mui_zh_TW";
 
 export const defaultLNG = "en";
 export const defaultNS = "odyssey";
-export const keySeparator = false
+export const keySeparator = false;
 
 // Note: This is type "string" to allow translation overrides from other languages
 export type I18nResources = Record<string, Partial<typeof en>>;
@@ -84,6 +84,7 @@ export const resources = {
   zh_TW: znTW,
 } as const satisfies Record<string, Partial<typeof en>>;
 
+// eslint-disable-next-line import/no-named-as-default-member
 i18n.use(initReactI18next).init({
   defaultNS,
   ns: [defaultNS],
@@ -98,12 +99,12 @@ i18n.use(initReactI18next).init({
     bindI18nStore: "added",
     useSuspense: false,
   },
-  resources,
 } as const);
 
-// Object.entries(resources).forEach(([locale, property]) => {
-//   i18n.addResourceBundle(locale, defaultNS, property);
-// });
+Object.entries(resources).forEach(([locale, property]) => {
+  i18n.addResourceBundle(locale, defaultNS, property);
+});
 
+// eslint-disable-next-line import/no-named-as-default-member
 export const odysseyTranslate = i18n.t.bind(i18n);
 export { i18n };
