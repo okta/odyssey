@@ -10,7 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
+import { userEvent } from "@testing-library/user-event";
 import { SideNav } from "./SideNav";
 import { OdysseyProvider } from "../../OdysseyProvider";
 
@@ -102,12 +103,12 @@ describe("SideNav", () => {
     expect(screen.getByText(menuItemText)).toBeVisible();
 
     const collapseButton = screen.getByLabelText("Collapse side navigation");
-    fireEvent.click(collapseButton);
+    userEvent.click(collapseButton);
 
     expect(screen.getByText(menuItemText)).not.toBeVisible();
 
     const expandButton = screen.getByLabelText("Expand side navigation");
-    fireEvent.click(expandButton);
+    userEvent.click(expandButton);
 
     expect(screen.getByText(menuItemText)).toBeVisible();
   });
@@ -134,7 +135,7 @@ describe("SideNav", () => {
     );
 
     const collapseButton = screen.getByLabelText("Collapse side navigation");
-    fireEvent.click(collapseButton);
+    userEvent.click(collapseButton);
 
     expect(mockOnCollapse).toBeCalled();
   });
@@ -161,10 +162,10 @@ describe("SideNav", () => {
     );
 
     const collapseButton = screen.getByLabelText("Collapse side navigation");
-    fireEvent.click(collapseButton);
+    userEvent.click(collapseButton);
 
     const expandButton = screen.getByLabelText("Expand side navigation");
-    fireEvent.click(expandButton);
+    userEvent.click(expandButton);
 
     expect(mockOnExpand).toBeCalled();
   });
@@ -294,7 +295,7 @@ describe("SideNav", () => {
 
     const accordion = screen.getByText(accordionOuter);
     expect(screen.getByText(accordionInner)).not.toBeVisible();
-    fireEvent.click(accordion);
+    userEvent.click(accordion);
     expect(screen.getByText(accordionInner)).toBeVisible();
   });
 
@@ -318,6 +319,6 @@ describe("SideNav", () => {
       </OdysseyProvider>,
     );
 
-    expect(screen.getByRole("menuitem")).toHaveTextContent(`${badgeCount}`);
+    expect(screen.getByRole("menuitem")).toHaveTextContent(String(badgeCount));
   });
 });
