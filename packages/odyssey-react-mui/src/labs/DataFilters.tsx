@@ -433,7 +433,7 @@ const DataFilters = ({
       <>
         <Box>
           <Button
-            ariaControls="filters-menu"
+            ariaControls={isFiltersMenuOpen ? "filters-menu" : undefined}
             ariaExpanded={isFiltersMenuOpen ? "true" : undefined}
             ariaHasPopup="true"
             ariaLabel={t("filters.filters.arialabel")}
