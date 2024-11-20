@@ -12,15 +12,24 @@
 
 import styled from "@emotion/styled";
 import { memo } from "react";
+import {
+  DesignTokens,
+  useOdysseyDesignTokens,
+} from "../../OdysseyDesignTokensContext";
 
-const OktaAuraSvgComponent = styled("svg")(() => ({
-  width: "32px",
-  height: "32px",
+const OktaAuraSvgComponent = styled("svg", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  width: odysseyDesignTokens.Spacing6,
+  height: odysseyDesignTokens.Spacing6,
+  margin: "auto",
 }));
 
 const OktaAura = () => {
+  const odysseyDesignTokens = useOdysseyDesignTokens();
   return (
     <OktaAuraSvgComponent
+      odysseyDesignTokens={odysseyDesignTokens}
       width="32"
       height="32"
       viewBox="0 0 32 32"

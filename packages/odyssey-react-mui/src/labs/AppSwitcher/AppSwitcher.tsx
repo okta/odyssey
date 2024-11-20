@@ -24,8 +24,6 @@ import {
 } from "./AppSwitcherApp";
 import { TOP_NAV_HEIGHT } from "../TopNav";
 
-const APP_SWITCHER_WIDTH = `${64 / 14}rem`;
-
 export type AppSwitcherProps = {
   appIcons: AppSwitcherAppIconData[];
   selectedAppName: string;
@@ -37,7 +35,6 @@ const AppSwitcherWrapperComponent = styled("nav", {
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
   position: "relative",
   display: "inline-block",
-  width: APP_SWITCHER_WIDTH,
   height: "100%",
   backgroundColor: odysseyDesignTokens.HueNeutralWhite,
   borderInlineEndStyle: "solid",
@@ -48,18 +45,18 @@ const AppSwitcherWrapperComponent = styled("nav", {
 const AppSwitcherOktaAuraWrapperComponent = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
-  width: "100%",
   height: TOP_NAV_HEIGHT,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  marginBottom: odysseyDesignTokens.Spacing4,
+  padding: odysseyDesignTokens.Spacing4,
+  margin: "auto",
+  marginBlockEnd: odysseyDesignTokens.Spacing4,
 }));
 
-const AppSwitcherAppIconULComponent = styled("ul")(() => ({
+const AppSwitcherAppIconULComponent = styled("ul", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
   listStyleType: "none",
-  margin: 0,
-  padding: 0,
+  margin: odysseyDesignTokens.Spacing0,
+  padding: odysseyDesignTokens.Spacing0,
 }));
 
 const AppSwitcher = ({
@@ -76,11 +73,15 @@ const AppSwitcher = ({
       >
         <OktaAura />
       </AppSwitcherOktaAuraWrapperComponent>
-      <AppSwitcherAppIconULComponent>
+      <AppSwitcherAppIconULComponent odysseyDesignTokens={odysseyDesignTokens}>
         {isLoading
-          ? [...Array(3)].map(() => <AppSwitcherAppSkeleton />)
+          ? [0, 1, 2].map((key) => <AppSwitcherAppSkeleton key={key} />)
           : appIcons?.map((appIcon) => (
-              <AppSwitcherApp selectedAppName={selectedAppName} {...appIcon} />
+              <AppSwitcherApp
+                key={appIcon.appName}
+                selectedAppName={selectedAppName}
+                {...appIcon}
+              />
             ))}
       </AppSwitcherAppIconULComponent>
     </AppSwitcherWrapperComponent>

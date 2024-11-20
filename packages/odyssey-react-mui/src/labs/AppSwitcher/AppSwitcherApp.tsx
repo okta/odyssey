@@ -20,17 +20,12 @@ import {
 import { Tooltip } from "../../Tooltip";
 import { MuiPropsContext, MuiPropsContextType } from "../../MuiPropsContext";
 
-const APP_SIDE_LENGTH_VAL = 36;
-const APP_SIDE_LENGTH_REM = `${APP_SIDE_LENGTH_VAL / 14}rem`;
-const APP_ICON_SIDE_LENGTH = `${32 / 14}rem`;
-
 const AppSwitcherAppWrapperComponent = styled("li", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
   margin: "auto",
-  marginBottom: odysseyDesignTokens.Spacing3,
-  width: APP_SIDE_LENGTH_REM,
-  height: APP_SIDE_LENGTH_REM,
+  marginBlockEnd: odysseyDesignTokens.Spacing3,
+  textAlign: "center",
 }));
 
 const AppSwitcherAppLinkComponent = styled("a", {
@@ -44,12 +39,9 @@ const AppSwitcherAppLinkComponent = styled("a", {
     odysseyDesignTokens: DesignTokens;
     isSelected: boolean;
   }) => ({
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    margin: 0,
-    width: APP_SIDE_LENGTH_REM,
-    height: APP_SIDE_LENGTH_REM,
+    display: "inline-block",
+    margin: "auto",
+    padding: odysseyDesignTokens.Spacing1,
     backgroundColor: isSelected
       ? odysseyDesignTokens.PalettePrimaryLighter
       : "transparent",
@@ -62,10 +54,21 @@ const AppSwitcherAppLinkComponent = styled("a", {
   }),
 );
 
-const AppSwitcherAppImgComponent = styled("img")(() => ({
-  margin: 0,
-  width: APP_ICON_SIDE_LENGTH,
-  height: APP_ICON_SIDE_LENGTH,
+// Similar to AppSwitcherAppLinkComponent
+const AppSwitcherAppSkeletonWrapperComponent = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  display: "inline-block",
+  margin: "auto",
+  padding: odysseyDesignTokens.Spacing1,
+}));
+
+const AppSwitcherAppImgComponent = styled("img", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  display: "block",
+  width: odysseyDesignTokens.Spacing6,
+  height: odysseyDesignTokens.Spacing6,
 }));
 
 export interface AppSwitcherAppIconData {
@@ -101,6 +104,7 @@ export const AppSwitcherApp = ({
         aria-current={isSelected ? "page" : undefined}
       >
         <AppSwitcherAppImgComponent
+          odysseyDesignTokens={odysseyDesignTokens}
           src={isSelected ? appIconSelectedUrl : appIconDefaultUrl}
           role="presentation"
         />
@@ -128,11 +132,15 @@ export const AppSwitcherAppSkeleton = () => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   return (
     <AppSwitcherAppWrapperComponent odysseyDesignTokens={odysseyDesignTokens}>
-      <Skeleton
-        variant="rounded"
-        width={APP_SIDE_LENGTH_VAL}
-        height={APP_SIDE_LENGTH_VAL}
-      />
+      <AppSwitcherAppSkeletonWrapperComponent
+        odysseyDesignTokens={odysseyDesignTokens}
+      >
+        <Skeleton
+          variant="rounded"
+          width={odysseyDesignTokens.Spacing6}
+          height={odysseyDesignTokens.Spacing6}
+        />
+      </AppSwitcherAppSkeletonWrapperComponent>
     </AppSwitcherAppWrapperComponent>
   );
 };

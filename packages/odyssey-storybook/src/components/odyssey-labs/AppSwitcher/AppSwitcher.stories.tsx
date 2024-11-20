@@ -89,9 +89,18 @@ export const AllApps: Story = {
     const canvas = within(canvasElement);
 
     await step("App switcher shows all items", async () => {
-      await expect(canvas.getAllByRole("navigation")).toHaveLength(1);
+      await expect(canvas.getByRole("navigation")).toBeVisible();
       await expect(canvas.queryAllByRole("listitem")).toHaveLength(3);
       await expect(canvas.queryAllByRole("link")).toHaveLength(3);
+      await expect(
+        canvas.queryByRole("link", { name: "Admin Dashboard" }),
+      ).toBeVisible();
+      await expect(
+        canvas.queryByRole("link", { name: "Okta Dashboard" }),
+      ).toBeVisible();
+      await expect(
+        canvas.queryByRole("link", { name: "Okta Workflows" }),
+      ).toBeVisible();
     });
   },
 };
@@ -113,7 +122,7 @@ export const NoApps: Story = {
     const canvas = within(canvasElement);
 
     await step("App switcher shows no items, but is loaded", async () => {
-      await expect(canvas.getAllByRole("navigation")).toHaveLength(1);
+      await expect(canvas.getByRole("navigation")).toBeVisible();
       await expect(canvas.queryAllByRole("listitem")).toHaveLength(0);
       await expect(canvas.queryAllByRole("link")).toHaveLength(0);
     });
@@ -137,7 +146,7 @@ export const Loading: Story = {
     const canvas = within(canvasElement);
 
     await step("App switcher shows no items, but is loaded", async () => {
-      await expect(canvas.getAllByRole("navigation")).toHaveLength(1);
+      await expect(canvas.getByRole("navigation")).toBeVisible();
       await expect(canvas.queryAllByRole("listitem")).toHaveLength(3);
       await expect(canvas.queryAllByRole("link")).toHaveLength(0);
     });
