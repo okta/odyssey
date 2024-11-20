@@ -286,7 +286,7 @@ const LoadingTile = ({
               <MuiSkeleton />
             </Heading5>
           )}
-          {description && (
+          {description && variant !== "compact" && (
             <Paragraph>
               <MuiSkeleton />
             </Paragraph>
@@ -341,7 +341,7 @@ const AppTile = ({
         )}
 
         {title && <Heading5 component="div">{title}</Heading5>}
-        {description && (
+        {description && variant !== "compact" && (
           <Paragraph color="textSecondary">{description}</Paragraph>
         )}
         {children && (

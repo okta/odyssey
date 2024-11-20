@@ -242,80 +242,52 @@ export const Compact: StoryObj<AppTileProps> = {
     return (
       <Box
         sx={{
-          display: "block",
+          display: "flex",
+          width: "572px",
+          gap: "20px",
+
+          ["& > *"]: {
+            width: "100%",
+          },
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            width: "572px",
-            gap: "20px",
-
-            ["& > *"]: {
-              width: "100%",
-            },
-          }}
-        >
-          <AppTile
-            variant="compact"
-            title="App name"
-            image={<img src="https://placehold.co/128" alt="Example logo" />}
-            onClick={() => {}}
-            actionIcon={<MoreIcon />}
-            actionLabel="Open app settings"
-            onActionClick={() => {}}
-          />
-          <AppTile
-            variant="compact"
-            title="App name"
-            image={<img src="https://placehold.co/256x48" alt="Example logo" />}
-            onClick={() => {}}
-            actionIcon={<MoreIcon />}
-            actionLabel="Open app settings"
-            onActionClick={() => {}}
-          />
-          <AppTile
-            variant="compact"
-            title="App name"
-            image={<img src="https://placehold.co/256x96" alt="Example logo" />}
-            onClick={() => {}}
-            actionIcon={<MoreIcon />}
-            actionLabel="Open app settings"
-            onActionClick={() => {}}
-          />
-          <AppTile
-            variant="compact"
-            title="App name"
-            image={<img src="https://placehold.co/128" alt="Example logo" />}
-            onClick={() => {}}
-            actionIcon={<MoreIcon />}
-            actionLabel="Open app settings"
-            onActionClick={() => {}}
-            isLoading
-          />
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            width: "128px",
-
-            ["& > *"]: {
-              width: "100%",
-            },
-          }}
-        >
-          <AppTile
-            variant="compact"
-            title="Fully loaded"
-            description="This is a description of the app."
-            image={<img src="https://placehold.co/128" alt="Example logo" />}
-            onClick={() => {}}
-            actionIcon={<MoreIcon />}
-            actionLabel="Open app settings"
-            onActionClick={() => {}}
-            auxiliaryText="Auxiliary text"
-          />
-        </Box>
+        <AppTile
+          variant="compact"
+          title="App name"
+          image={<img src="https://placehold.co/128" alt="Example logo" />}
+          onClick={() => {}}
+          actionIcon={<MoreIcon />}
+          actionLabel="Open app settings"
+          onActionClick={() => {}}
+        />
+        <AppTile
+          variant="compact"
+          title="App name"
+          image={<img src="https://placehold.co/256x48" alt="Example logo" />}
+          onClick={() => {}}
+          actionIcon={<MoreIcon />}
+          actionLabel="Open app settings"
+          onActionClick={() => {}}
+        />
+        <AppTile
+          variant="compact"
+          title="App name"
+          image={<img src="https://placehold.co/256x96" alt="Example logo" />}
+          onClick={() => {}}
+          actionIcon={<MoreIcon />}
+          actionLabel="Open app settings"
+          onActionClick={() => {}}
+        />
+        <AppTile
+          variant="compact"
+          title="App name"
+          image={<img src="https://placehold.co/128" alt="Example logo" />}
+          onClick={() => {}}
+          actionIcon={<MoreIcon />}
+          actionLabel="Open app settings"
+          onActionClick={() => {}}
+          isLoading
+        />
       </Box>
     );
   },
