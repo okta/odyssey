@@ -172,15 +172,17 @@ const eslintConfig = createTsEslintConfig(
   },
 
   {
-    files: ["**/jest.setup.*", "**/*.test.*"],
+    files: ["**/vitest.setup.*", "**/*.test.*"],
     languageOptions: {
       globals: {
-        it: "readonly",
-        expect: "readonly",
         describe: "readonly",
+        expect: "readonly",
+        it: "readonly",
+        test: "readonly",
+        vitest: "readonly",
       },
     },
-    name: getPrefixedEslintConfigName("jest"),
+    name: getPrefixedEslintConfigName("test"),
   },
 
   {

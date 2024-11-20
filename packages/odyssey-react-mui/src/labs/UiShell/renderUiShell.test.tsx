@@ -160,8 +160,8 @@ describe("renderUiShell", () => {
 
   test("renders `<slot>` in the event of an error", () => {
     const rootElement = document.createElement("div");
-    const consoleError = jest.fn();
-    const onError = jest.fn();
+    const consoleError = vitest.fn();
+    const onError = vitest.fn();
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(rootElement);

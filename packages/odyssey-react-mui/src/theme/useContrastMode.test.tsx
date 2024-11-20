@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render, waitFor, act } from "@testing-library/react";
+import { render, renderHook, waitFor, act } from "@testing-library/react";
 import {
   ContrastModeContext,
   defaultParentBackgroundColor,
@@ -25,7 +25,6 @@ import {
   useContrastModeContext,
 } from "../useContrastMode";
 import * as Tokens from "@okta/odyssey-design-tokens";
-import { renderHook } from "@testing-library/react";
 
 describe("useContrastMode and related functions", () => {
   afterEach(() => {
@@ -124,21 +123,21 @@ describe("useContrastMode and related functions", () => {
     });
 
     it("should clean up observers and event listeners on unmount", () => {
-      const disconnect = jest.fn();
-      const observe = jest.fn();
+      const disconnect = vitest.fn();
+      const observe = vitest.fn();
       const addEventListenerSpy = jest.spyOn(document, "addEventListener");
       const removeEventListenerSpy = jest.spyOn(
         document,
         "removeEventListener",
       );
 
-      const mockMutationObserver = jest.fn<
+      const mockMutationObserver = vitest.fn<
         MutationObserver,
         [MutationCallback]
       >(() => ({
         disconnect,
         observe,
-        takeRecords: jest.fn(),
+        takeRecords: vitest.fn(),
       }));
 
       const originalMutationObserver = global.MutationObserver;
@@ -290,8 +289,8 @@ describe("useContrastMode and related functions", () => {
     beforeEach(() => {
       originalAddEventListener = document.addEventListener;
       originalRemoveEventListener = document.removeEventListener;
-      document.addEventListener = jest.fn();
-      document.removeEventListener = jest.fn();
+      document.addEventListener = vitest.fn();
+      document.removeEventListener = vitest.fn();
     });
 
     afterEach(() => {
@@ -300,16 +299,16 @@ describe("useContrastMode and related functions", () => {
     });
 
     it("should clean up observers and event listeners on unmount", () => {
-      const disconnect = jest.fn();
-      const observe = jest.fn();
+      const disconnect = vitest.fn();
+      const observe = vitest.fn();
 
-      const mockMutationObserver = jest.fn<
+      const mockMutationObserver = vitest.fn<
         MutationObserver,
         [MutationCallback]
       >(() => ({
         disconnect,
         observe,
-        takeRecords: jest.fn(),
+        takeRecords: vitest.fn(),
       }));
 
       const originalMutationObserver = global.MutationObserver;

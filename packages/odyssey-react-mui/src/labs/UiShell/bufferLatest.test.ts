@@ -19,7 +19,7 @@ describe("bufferLatest", () => {
 
     const { publish: publish2, subscribe: subscribe2 } = createMessageBus();
 
-    const subscriber = jest.fn();
+    const subscriber = vitest.fn();
 
     subscribe1(subscriber);
 
@@ -39,7 +39,7 @@ describe("bufferLatest", () => {
 
     const { publish: publish2, subscribe: subscribe2 } = createMessageBus();
 
-    const subscriber = jest.fn();
+    const subscriber = vitest.fn();
 
     subscribe1(subscriber);
 
@@ -60,7 +60,7 @@ describe("bufferLatest", () => {
 
     const { publish: publish2, subscribe: subscribe2 } = createMessageBus();
 
-    const subscriber = jest.fn();
+    const subscriber = vitest.fn();
 
     subscribe1(subscriber);
 

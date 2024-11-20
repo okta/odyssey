@@ -15,7 +15,7 @@ import { SideNav } from "./SideNav";
 import { OdysseyProvider } from "../../OdysseyProvider";
 
 describe("SideNav", () => {
-  test("can show the default Okta logo", async () => {
+  test("can show the default Okta logo", () => {
     render(
       <OdysseyProvider>
         <SideNav
@@ -34,7 +34,7 @@ describe("SideNav", () => {
     expect(screen.getByTitle("Okta")).toBeInTheDocument();
   });
 
-  test("can show a custom logo", async () => {
+  test("can show a custom logo", () => {
     render(
       <OdysseyProvider>
         <SideNav
@@ -57,7 +57,7 @@ describe("SideNav", () => {
     expect(screen.getByAltText("Custom logo")).toBeInTheDocument();
   });
 
-  test("can show header text", async () => {
+  test("can show header text", () => {
     const headerText = "Header text";
 
     render(
@@ -80,7 +80,7 @@ describe("SideNav", () => {
     ).toBeInTheDocument();
   });
 
-  test("is collapsible", async () => {
+  test("is collapsible", () => {
     const menuItemText = "Users";
 
     render(
@@ -112,9 +112,9 @@ describe("SideNav", () => {
     expect(screen.getByText(menuItemText)).toBeVisible();
   });
 
-  test("can fire onCollapse event", async () => {
+  test("can fire onCollapse event", () => {
     const menuItemText = "Users";
-    const mockOnCollapse = jest.fn();
+    const mockOnCollapse = vitest.fn();
 
     render(
       <OdysseyProvider>
@@ -139,9 +139,9 @@ describe("SideNav", () => {
     expect(mockOnCollapse).toBeCalled();
   });
 
-  test("can fire onExpand event", async () => {
+  test("can fire onExpand event", () => {
     const menuItemText = "Users";
-    const mockOnExpand = jest.fn();
+    const mockOnExpand = vitest.fn();
 
     render(
       <OdysseyProvider>
@@ -169,7 +169,7 @@ describe("SideNav", () => {
     expect(mockOnExpand).toBeCalled();
   });
 
-  test("shows loading skeleton state", async () => {
+  test("shows loading skeleton state", () => {
     const menuItemText = "Menu item";
 
     render(
@@ -191,7 +191,7 @@ describe("SideNav", () => {
     expect(screen.queryByText(menuItemText)).not.toBeInTheDocument();
   });
 
-  test("shows footer links", async () => {
+  test("shows footer links", () => {
     const footerItemLabel = "Footer item";
     render(
       <OdysseyProvider>
@@ -219,7 +219,7 @@ describe("SideNav", () => {
     expect(within(footer).getByText(footerItemLabel)).toBeVisible();
   });
 
-  test("shows custom footer component", async () => {
+  test("shows custom footer component", () => {
     const footerComponentText = "This is a custom footer component.";
     const footerComponent = <p>{footerComponentText}</p>;
 
@@ -243,7 +243,7 @@ describe("SideNav", () => {
     expect(screen.getByText(footerComponentText)).toBeVisible();
   });
 
-  test("displays sidenav link", async () => {
+  test("displays sidenav link", () => {
     const accordionInner = "Accordion inside";
     const accordionOuter = "Accordion outside";
     const headingText = "Heading";
@@ -298,7 +298,7 @@ describe("SideNav", () => {
     expect(screen.getByText(accordionInner)).toBeVisible();
   });
 
-  test("can show notification badge", async () => {
+  test("can show notification badge", () => {
     const menuItemText = "Menu item text";
     const badgeCount = 9;
 
