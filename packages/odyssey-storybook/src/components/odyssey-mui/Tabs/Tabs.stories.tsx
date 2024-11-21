@@ -22,8 +22,8 @@ import {
   TabsProps,
 } from "@okta/odyssey-react-mui";
 import { BugIcon } from "@okta/odyssey-react-mui/icons";
-import { expect } from "@storybook/test";
-import { userEvent, waitFor, within } from "@storybook/test";
+import { expect, userEvent, waitFor, within } from "@storybook/test";
+
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import icons from "../../../../.storybook/components/iconUtils";
 import { axeRun } from "../../../axe-util";
@@ -149,11 +149,13 @@ const selectTab =
     await step(`select the ${tabName} tab`, async () => {
       await axeRun(actionName);
 
-      await waitFor(() => {
+      await waitFor(async () => {
         const canvas = within(canvasElement);
         const tabElement = canvas.getByText(tabName);
+
         await userEvent.click(tabElement);
         await userEvent.tab();
+
         const tabData = canvas.getByText(`Information about ${tabName}`);
         expect(tabData).toBeInTheDocument();
       });

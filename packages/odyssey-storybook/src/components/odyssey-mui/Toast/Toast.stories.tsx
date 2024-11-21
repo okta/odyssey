@@ -22,12 +22,11 @@ import {
 import { useCallback, useState } from "react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { userEvent, waitFor, within } from "@storybook/test";
-import { expect } from "@storybook/test";
+import { expect, userEvent, waitFor, within } from "@storybook/test";
 import { axeRun } from "../../../axe-util";
 import type { PlaywrightProps } from "../storybookTypes";
 
-const meta: Meta<ToastProps> = {
+const meta: Meta<typeof Toast> = {
   title: "MUI Components/Toast",
   component: Toast,
   argTypes: {
@@ -254,7 +253,7 @@ export const Dismissible: StoryObj<typeof Toast> = {
   play: async ({ args, canvasElement, step }) => {
     const canvas = within(canvasElement);
     await step(`open Dismissible Toast}`, async () => {
-      await waitFor(() => {
+      await waitFor(async () => {
         const buttonElement = canvas.getByText(`Open ${args.severity} toast`);
         await userEvent.hover(buttonElement);
         await userEvent.click(buttonElement);
@@ -270,7 +269,7 @@ export const Dismissible: StoryObj<typeof Toast> = {
     });
 
     await step("dismiss toast and reopen", async () => {
-      await waitFor(() => {
+      await waitFor(async () => {
         const toastElement = canvas.getByRole("status");
         if (toastElement) {
           const dismissToastButton = within(toastElement).getByRole("button", {
@@ -278,7 +277,7 @@ export const Dismissible: StoryObj<typeof Toast> = {
           });
           if (dismissToastButton) {
             await userEvent.click(dismissToastButton);
-            await waitFor(() => {
+            await waitFor(async () => {
               expect(toastElement).not.toBeVisible();
 
               const buttonElement = canvas.getByText(
