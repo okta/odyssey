@@ -10,13 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-  within,
-} from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
+import { userEvent } from "@testing-library/user-event";
 import { DataOnReorderRowsType, DataRow, DataView } from "./index";
 import { data, columns, filterData, reorderData } from "./testSupportData";
 import { EmptyState } from "../../EmptyState";
@@ -40,87 +35,98 @@ const gridItemProps = (row: DataRow) => ({
   overline: "Grid card",
 });
 
+const waitUntilTableLoadedHack = async () => {
+  return expect(await screen.findByText(data[0].name)).toBeVisible();
+};
+
 describe("DataView", () => {
-  test("displays a table view", async () => {
-    const { container } = render(
-      <DataView
-        availableLayouts={["table"]}
-        getData={getData}
-        tableLayoutOptions={{
-          columns: columns,
-        }}
-      />,
-    );
+  describe("DataView layouts", () => {
+    test("displays a table view", async () => {
+      const { container } = render(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
+      );
 
-    await screen.findByText(data[0].name);
+      await waitUntilTableLoadedHack();
 
-    expect(within(container).queryByRole("table")).not.toBeNull();
-    expect(within(container).queryByRole("list")).toBeNull();
-  });
-
-  test("displays a list view", async () => {
-    const { container } = render(
-      <DataView
-        availableLayouts={["list"]}
-        getData={getData}
-        cardLayoutOptions={{
-          itemProps: listItemProps,
-        }}
-      />,
-    );
-
-    await screen.findByText(data[0].name);
-
-    expect(within(container).queryByRole("table")).toBeNull();
-    expect(within(container).queryByRole("list")).not.toBeNull();
-  });
-
-  test("displays a grid view", async () => {
-    const { container } = render(
-      <DataView
-        availableLayouts={["grid"]}
-        getData={getData}
-        cardLayoutOptions={{
-          itemProps: gridItemProps,
-        }}
-      />,
-    );
-
-    await screen.findByText(data[0].name);
-
-    expect(within(container).queryByRole("table")).toBeNull();
-    expect(within(container).queryByRole("list")).not.toBeNull();
-  });
-
-  test("displays the layout switcher", async () => {
-    render(
-      <DataView
-        availableLayouts={["table", "list"]}
-        getData={getData}
-        tableLayoutOptions={{
-          columns: columns,
-        }}
-        cardLayoutOptions={{
-          itemProps: listItemProps,
-        }}
-      />,
-    );
-
-    const layoutSwitcherButton = screen.getByLabelText("Layout", {
-      selector: "button",
+      expect(within(container).queryByRole("table")).not.toBeNull();
+      expect(within(container).queryByRole("list")).toBeNull();
     });
-    fireEvent.click(layoutSwitcherButton);
 
-    const layoutSwitcherMenu = getControlledElement({
-      element: layoutSwitcherButton,
+    test("displays a list view", async () => {
+      const { container } = render(
+        <DataView
+          availableLayouts={["list"]}
+          getData={getData}
+          cardLayoutOptions={{
+            itemProps: listItemProps,
+          }}
+        />,
+      );
+
+      await waitUntilTableLoadedHack();
+
+      expect(within(container).queryByRole("table")).toBeNull();
+      expect(within(container).queryByRole("list")).not.toBeNull();
     });
-    expect(within(layoutSwitcherMenu).getAllByRole("menuitem")).toHaveLength(2);
-    expect(
-      within(layoutSwitcherMenu).getByRole("menuitem", { name: "Table" }),
-    ).toBeVisible();
-    expect(
-      within(layoutSwitcherMenu).getByRole("menuitem", { name: "List" }),
-    ).toBeVisible();
+
+    test("displays a grid view", async () => {
+      const { container } = render(
+        <DataView
+          availableLayouts={["grid"]}
+          getData={getData}
+          cardLayoutOptions={{
+            itemProps: gridItemProps,
+          }}
+        />,
+      );
+
+      await waitUntilTableLoadedHack();
+
+      expect(within(container).queryByRole("table")).toBeNull();
+      expect(within(container).queryByRole("list")).not.toBeNull();
+    });
+
+    test("displays the layout switcher", async () => {
+      const user = userEvent.setup();
+
+      render(
+        <DataView
+          availableLayouts={["table", "list"]}
+          getData={getData}
+          tableLayoutOptions={{
+            columns,
+          }}
+          cardLayoutOptions={{
+            itemProps: listItemProps,
+          }}
+        />,
+      );
+
+      const layoutSwitcherButton = screen.getByLabelText("Layout", {
+        selector: "button",
+      });
+      await user.click(layoutSwitcherButton);
+
+      const layoutSwitcherMenu = getControlledElement({
+        element: layoutSwitcherButton,
+      });
+      expect(within(layoutSwitcherMenu).getAllByRole("menuitem")).toHaveLength(
+        2,
+      );
+
+      expect(
+        within(layoutSwitcherMenu).getByRole("menuitem", { name: "Table" }),
+      ).toBeVisible();
+      expect(
+        within(layoutSwitcherMenu).getByRole("menuitem", { name: "List" }),
+      ).toBeVisible();
+    });
   });
 
   test("can display meta text", async () => {
@@ -131,504 +137,577 @@ describe("DataView", () => {
         availableLayouts={["table"]}
         getData={getData}
         tableLayoutOptions={{
-          columns: columns,
+          columns,
         }}
         metaText={metaText}
       />,
     );
 
-    expect(screen.getByText(metaText)).toBeInTheDocument();
+    expect(screen.getByText(metaText)).toBeVisible();
   });
 
-  test("can filter rows", async () => {
-    render(
-      <DataView
-        availableLayouts={["table"]}
-        hasFilters
-        getData={getData}
-        tableLayoutOptions={{
-          columns: columns,
-        }}
-      />,
-    );
+  describe("Filter and search", () => {
+    test("can filter rows", async () => {
+      const user = userEvent.setup();
 
-    expect(await screen.findByText(data[0].name)).toBeVisible();
-    expect(await screen.findByText(data[1].name)).toBeVisible();
+      render(
+        <DataView
+          availableLayouts={["table"]}
+          hasFilters
+          getData={getData}
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
+      );
 
-    const filterButton = screen.getByLabelText("Filters", {
-      selector: "button",
+      expect(await screen.findByText(data[0].name)).toBeVisible();
+      expect(await screen.findByText(data[1].name)).toBeVisible();
+
+      const filterButton = screen.getByLabelText("Filters", {
+        selector: "button",
+      });
+      await user.click(filterButton);
+
+      const filterMenu = getControlledElement({ element: filterButton });
+      const nameMenuItem = within(filterMenu).getByRole("menuitem", {
+        name: /Name/i,
+      });
+      await user.click(nameMenuItem);
+
+      const nameFilterMenu = getControlledElement({ element: nameMenuItem });
+      const nameInput = within(nameFilterMenu).getByLabelText("Name");
+      const submitButton = within(nameFilterMenu).getByRole("button");
+
+      await user.click(nameInput);
+      await user.keyboard(`${data[1].name}{ENTER}`);
+      await user.click(submitButton);
+
+      await screen.findByText("Clear filters");
+
+      const table = screen.getByRole("table");
+      expect(screen.queryByText(data[0].name)).toBeNull();
+      expect(await within(table).findByText(data[1].name)).toBeVisible();
     });
-    fireEvent.click(filterButton);
 
-    const filterMenu = getControlledElement({ element: filterButton });
-    const nameMenuItem = within(filterMenu).getByRole("menuitem", {
-      name: /Name/i,
+    test("can search rows", async () => {
+      const user = userEvent.setup();
+
+      render(
+        <DataView
+          availableLayouts={["table"]}
+          hasSearch
+          hasSearchSubmitButton
+          getData={getData}
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
+      );
+
+      expect(await screen.findByText(data[0].name)).toBeVisible();
+      expect(await screen.findByText(data[1].name)).toBeVisible();
+
+      const searchInput = screen.getByPlaceholderText(/Search/i);
+      const submitButton = screen.getByText("Search", { selector: "button" });
+      await user.click(searchInput);
+      await user.keyboard(`${data[1].name}`);
+      await user.click(submitButton);
+
+      const table = screen.getByRole("table");
+      expect(screen.queryByText(data[0].name)).toBeNull();
+      expect(await within(table).findByText(data[1].name)).toBeVisible();
     });
-    fireEvent.click(nameMenuItem);
 
-    const nameFilterMenu = getControlledElement({ element: nameMenuItem });
-    const nameInput = within(nameFilterMenu).getByLabelText("Name");
-    const submitButton = within(nameFilterMenu).getByRole("button");
-    fireEvent.change(nameInput, { target: { value: data[1].name } });
-    fireEvent.click(submitButton);
+    test("can clear the search input", async () => {
+      const user = userEvent.setup();
 
-    await screen.findByText("Clear filters");
+      render(
+        <DataView
+          availableLayouts={["table"]}
+          hasSearch
+          hasSearchSubmitButton
+          getData={getData}
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
+      );
 
-    const table = screen.getByRole("table");
-    expect(screen.queryByText(data[0].name)).toBeNull();
-    expect(await within(table).findByText(data[1].name)).toBeVisible();
-  });
+      expect(await screen.findByText(data[0].name)).toBeVisible();
+      expect(await screen.findByText(data[1].name)).toBeVisible();
 
-  test("can search rows", async () => {
-    render(
-      <DataView
-        availableLayouts={["table"]}
-        hasSearch
-        hasSearchSubmitButton
-        getData={getData}
-        tableLayoutOptions={{
-          columns: columns,
-        }}
-      />,
-    );
+      const searchInput = screen.getByPlaceholderText(/Search/i);
+      const submitButton = screen.getByText("Search", { selector: "button" });
+      await user.click(searchInput);
+      await user.keyboard(`${data[1].name}`);
+      await user.click(submitButton);
 
-    expect(await screen.findByText(data[0].name)).toBeVisible();
-    expect(await screen.findByText(data[1].name)).toBeVisible();
+      const table = screen.getByRole("table");
+      expect(screen.queryByText(data[0].name)).toBeNull();
+      expect(await within(table).findByText(data[1].name)).toBeVisible();
 
-    const searchInput = screen.getByPlaceholderText(/Search/i);
-    const submitButton = screen.getByText("Search", { selector: "button" });
-    fireEvent.change(searchInput, { target: { value: data[1].name } });
-    fireEvent.click(submitButton);
+      const clearButton = screen.getByLabelText("Clear", {
+        selector: "button",
+      });
+      await user.click(clearButton);
 
-    const table = screen.getByRole("table");
-    expect(screen.queryByText(data[0].name)).toBeNull();
-    expect(await within(table).findByText(data[1].name)).toBeVisible();
-  });
-
-  test("can clear the search input", async () => {
-    render(
-      <DataView
-        availableLayouts={["table"]}
-        hasSearch
-        hasSearchSubmitButton
-        getData={getData}
-        tableLayoutOptions={{
-          columns: columns,
-        }}
-      />,
-    );
-
-    expect(await screen.findByText(data[0].name)).toBeVisible();
-    expect(await screen.findByText(data[1].name)).toBeVisible();
-
-    const searchInput = screen.getByPlaceholderText(/Search/i);
-    const submitButton = screen.getByText("Search", { selector: "button" });
-    fireEvent.change(searchInput, { target: { value: data[1].name } });
-    fireEvent.click(submitButton);
-
-    const table = screen.getByRole("table");
-    expect(screen.queryByText(data[0].name)).toBeNull();
-    expect(await within(table).findByText(data[1].name)).toBeVisible();
-
-    const clearButton = screen.getByLabelText("Clear", { selector: "button" });
-    fireEvent.click(clearButton);
-
-    waitFor(() => {
-      expect(searchInput).toHaveValue("");
-      expect(screen.getAllByRole("row")).toHaveLength(7);
-      expect(screen.getByText(data[0].name)).toBeVisible();
-      expect(screen.getByText(data[1].name)).toBeVisible();
+      waitFor(() => {
+        expect(searchInput).toHaveValue("");
+        expect(screen.getAllByRole("row")).toHaveLength(7);
+        expect(screen.getByText(data[0].name)).toBeVisible();
+        expect(screen.getByText(data[1].name)).toBeVisible();
+      });
     });
   });
 
-  test("can display row action menu", async () => {
-    const rowActionMenuItems = (row: DataTableRowData) => (
-      <MenuItem>Action for {row.original.name}</MenuItem>
-    );
+  describe("Row actions", () => {
+    test("can display row action menu", async () => {
+      const user = userEvent.setup();
 
-    render(
-      <DataView
-        availableLayouts={["table"]}
-        getData={getData}
-        tableLayoutOptions={{
-          columns: columns,
-          rowActionMenuItems: rowActionMenuItems,
-        }}
-      />,
-    );
+      const rowActionMenuItems = (row: DataTableRowData) => (
+        <MenuItem>Action for {row.original.name}</MenuItem>
+      );
 
-    expect(await screen.findByText(data[0].name)).toBeVisible();
+      render(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          tableLayoutOptions={{
+            columns,
+            rowActionMenuItems: rowActionMenuItems,
+          }}
+        />,
+      );
 
-    // Index 1 because row[0] is the th row
-    const firstBodyRow = (await screen.findAllByRole("row"))[1];
-    const firstBodyRowActionButton = within(firstBodyRow).getByRole("button");
-    fireEvent.click(firstBodyRowActionButton);
+      await waitUntilTableLoadedHack();
 
-    const actionMenu = getControlledElement({
-      element: firstBodyRowActionButton,
+      // Index 1 because row[0] is the th row
+      const firstBodyRow = (await screen.findAllByRole("row"))[1];
+      const firstBodyRowActionButton = within(firstBodyRow).getByRole("button");
+      await user.click(firstBodyRowActionButton);
+
+      const actionMenu = getControlledElement({
+        element: firstBodyRowActionButton,
+      });
+      const actionMenuItem = within(actionMenu).getByRole("menuitem");
+      expect(
+        within(actionMenuItem).getByText(`Action for ${data[0].name}`),
+      ).toBeVisible();
     });
-    const actionMenuItem = within(actionMenu).getByRole("menuitem");
-    expect(
-      within(actionMenuItem).getByText(`Action for ${data[0].name}`),
-    ).toBeVisible();
+
+    test("can display row action buttons", async () => {
+      const rowActionButtons = (row: DataTableRowData) => (
+        <Button variant="primary" label={`Button for ${row?.original?.name}`} />
+      );
+
+      render(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          tableLayoutOptions={{
+            columns,
+            rowActionButtons: rowActionButtons,
+          }}
+        />,
+      );
+
+      await waitUntilTableLoadedHack();
+
+      // Index 1 because row[0] is the th row
+      const firstBodyRow = (await screen.findAllByRole("row"))[1];
+      const firstBodyRowActionButton = within(firstBodyRow).getByText(
+        `Button for ${data[0].name}`,
+        { selector: "button" },
+      );
+
+      expect(firstBodyRowActionButton).toBeVisible();
+    });
   });
 
-  test("can display row action buttons", async () => {
-    const rowActionButtons = (row: DataTableRowData) => (
-      <Button variant="primary" label={`Button for ${row?.original?.name}`} />
-    );
+  describe("Row selection", () => {
+    test("can select table rows", async () => {
+      const user = userEvent.setup();
 
-    render(
-      <DataView
-        availableLayouts={["table"]}
-        getData={getData}
-        tableLayoutOptions={{
-          columns: columns,
-          rowActionButtons: rowActionButtons,
-        }}
-      />,
-    );
+      render(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasRowSelection
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
+      );
 
-    expect(await screen.findByText(data[0].name)).toBeVisible();
+      await waitUntilTableLoadedHack();
 
-    // Index 1 because row[0] is the th row
-    const firstBodyRow = (await screen.findAllByRole("row"))[1];
-    const firstBodyRowActionButton = within(firstBodyRow).getByText(
-      `Button for ${data[0].name}`,
-      { selector: "button" },
-    );
+      const checkboxes = screen.getAllByRole("checkbox");
+      await user.click(checkboxes[1]);
 
-    expect(firstBodyRowActionButton).toBeVisible();
+      const selectedText = screen.getByText("1 selected", {
+        selector: "button",
+      });
+      expect(selectedText).toBeVisible();
+    });
+
+    test("can select all rows", async () => {
+      const user = userEvent.setup();
+
+      render(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasRowSelection
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
+      );
+
+      await waitUntilTableLoadedHack();
+
+      const checkboxes = screen.getAllByRole("checkbox");
+      await user.click(checkboxes[0]);
+
+      const selectedText = screen.getByText(`${data.length} selected`, {
+        selector: "button",
+      });
+      expect(selectedText).toBeVisible();
+    });
+
+    test("can select card rows", async () => {
+      const user = userEvent.setup();
+
+      render(
+        <DataView
+          availableLayouts={["grid"]}
+          getData={getData}
+          hasRowSelection
+          cardLayoutOptions={{
+            itemProps: gridItemProps,
+          }}
+        />,
+      );
+
+      await waitUntilTableLoadedHack();
+
+      const checkboxes = screen.getAllByRole("checkbox");
+      await user.click(checkboxes[1]);
+
+      const selectedText = screen.getByText("1 selected", {
+        selector: "button",
+      });
+      expect(selectedText).toBeVisible();
+    });
+
+    test("can select all card rows", async () => {
+      const user = userEvent.setup();
+
+      render(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasRowSelection
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
+      );
+
+      await waitUntilTableLoadedHack();
+
+      const checkboxes = screen.getAllByRole("checkbox");
+      await user.click(checkboxes[0]);
+
+      const selectedText = screen.getByText(`${data.length} selected`, {
+        selector: "button",
+      });
+      expect(selectedText).toBeVisible();
+    });
+
+    test("can deselect rows", async () => {
+      const user = userEvent.setup();
+
+      render(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasRowSelection
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
+      );
+
+      await waitUntilTableLoadedHack();
+
+      const checkboxes = screen.getAllByRole("checkbox");
+      await user.click(checkboxes[1]);
+      await user.click(checkboxes[2]);
+
+      expect(
+        screen.getByText("2 selected", { selector: "button" }),
+      ).toBeVisible();
+
+      await user.click(checkboxes[1]);
+
+      expect(
+        screen.getByText("1 selected", { selector: "button" }),
+      ).toBeVisible();
+    });
+
+    test("can deselect all rows", async () => {
+      const user = userEvent.setup();
+
+      render(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasRowSelection
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
+      );
+
+      await waitUntilTableLoadedHack();
+
+      const checkboxes = screen.getAllByRole("checkbox");
+      await user.click(checkboxes[0]);
+
+      const selectedText = screen.getByText(`${data.length} selected`, {
+        selector: "button",
+      });
+      expect(selectedText).toBeVisible();
+
+      await user.click(checkboxes[0]);
+
+      expect(
+        screen.queryByText(`${data.length} selected`, { selector: "button" }),
+      ).toBeNull();
+    });
+
+    test("can perform bulk actions on rows", async () => {
+      const user = userEvent.setup();
+
+      const bulkActionMenuItems = (selectedRows: MRT_RowSelectionState) => (
+        <MenuItem>Bulk action for {Object.keys(selectedRows).length}</MenuItem>
+      );
+
+      render(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasRowSelection
+          tableLayoutOptions={{
+            columns,
+          }}
+          bulkActionMenuItems={bulkActionMenuItems}
+        />,
+      );
+
+      await waitUntilTableLoadedHack();
+
+      const selectAllButton = screen.getByText("Select all", {
+        selector: "button",
+      });
+      await user.click(selectAllButton);
+
+      const selectedButton = screen.getByText(`${data.length} selected`, {
+        selector: "button",
+      });
+      await user.click(selectedButton);
+
+      const bulkActionsMenu = getControlledElement({ element: selectedButton });
+      const bulkActionsMenuItem = within(bulkActionsMenu).getByRole("menuitem");
+      expect(bulkActionsMenuItem.textContent).toBe(
+        `Bulk action for ${data.length}`,
+      );
+    });
   });
 
-  test("can select table rows", async () => {
-    render(
-      <DataView
-        availableLayouts={["table"]}
-        getData={getData}
-        hasRowSelection
-        tableLayoutOptions={{
-          columns: columns,
-        }}
-      />,
-    );
+  describe("Row reordering", () => {
+    test("can reorder rows", async () => {
+      const user = userEvent.setup();
 
-    expect(await screen.findByText(data[0].name)).toBeVisible();
+      let updatedData = data.slice();
 
-    const checkboxes = screen.getAllByRole("checkbox");
-    fireEvent.click(checkboxes[1]);
+      const handleReorderRows = ({
+        rowId,
+        newRowIndex,
+      }: DataOnReorderRowsType) => {
+        updatedData = reorderData({ data: updatedData, rowId, newRowIndex });
+      };
 
-    const selectedText = screen.getByText("1 selected", { selector: "button" });
-    expect(selectedText).toBeVisible();
-  });
+      render(
+        <DataView
+          availableLayouts={["table"]}
+          getData={() => updatedData}
+          hasRowReordering
+          onReorderRows={handleReorderRows}
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
+      );
 
-  test("can select all rows", async () => {
-    render(
-      <DataView
-        availableLayouts={["table"]}
-        getData={getData}
-        hasRowSelection
-        tableLayoutOptions={{
-          columns: columns,
-        }}
-      />,
-    );
+      expect(await screen.findByText(data[0].name)).toBeVisible();
+      expect(await screen.findByText(data[1].name)).toBeVisible();
 
-    expect(await screen.findByText(data[0].name)).toBeVisible();
+      const moreActionsButton = within(
+        screen.getAllByRole("row")[2],
+      ).getByLabelText("More actions", { selector: "button" });
+      await user.click(moreActionsButton);
 
-    const checkboxes = screen.getAllByRole("checkbox");
-    fireEvent.click(checkboxes[0]);
+      const moreActionsMenu = getControlledElement({
+        element: moreActionsButton,
+      });
+      const moveForwardButton = within(moreActionsMenu).getByRole("menuitem", {
+        name: "Bring forward",
+      });
+      await user.click(moveForwardButton);
 
-    const selectedText = screen.getByText(`${data.length} selected`, {
-      selector: "button",
+      const updatedRows = await screen.findAllByRole("row");
+
+      // Confirm that the first two rows have swapped
+      expect(updatedRows[1].textContent).toContain(data[1].name);
+      expect(updatedRows[2].textContent).toContain(data[0].name);
     });
-    expect(selectedText).toBeVisible();
-  });
 
-  test("can select card rows", async () => {
-    render(
-      <DataView
-        availableLayouts={["grid"]}
-        getData={getData}
-        hasRowSelection
-        cardLayoutOptions={{
-          itemProps: gridItemProps,
-        }}
-      />,
-    );
+    test("can reorder to front", async () => {
+      const user = userEvent.setup();
 
-    expect(await screen.findByText(data[0].name)).toBeVisible();
+      let updatedData = data.slice();
 
-    const checkboxes = screen.getAllByRole("checkbox");
-    fireEvent.click(checkboxes[1]);
+      const handleReorderRows = ({
+        rowId,
+        newRowIndex,
+      }: DataOnReorderRowsType) => {
+        updatedData = reorderData({ data: updatedData, rowId, newRowIndex });
+      };
 
-    const selectedText = screen.getByText("1 selected", { selector: "button" });
-    expect(selectedText).toBeVisible();
-  });
+      render(
+        <DataView
+          availableLayouts={["table"]}
+          getData={() => updatedData}
+          hasRowReordering
+          onReorderRows={handleReorderRows}
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
+      );
 
-  test("can deselect rows", async () => {
-    render(
-      <DataView
-        availableLayouts={["table"]}
-        getData={getData}
-        hasRowSelection
-        tableLayoutOptions={{
-          columns: columns,
-        }}
-      />,
-    );
+      expect(await screen.findByText(data[0].name)).toBeVisible();
+      expect(await screen.findByText(data[5].name)).toBeVisible();
 
-    expect(await screen.findByText(data[0].name)).toBeVisible();
+      const moreActionsButton = within(
+        screen.getAllByRole("row")[6],
+      ).getByLabelText("More actions", { selector: "button" });
+      await user.click(moreActionsButton);
 
-    const checkboxes = screen.getAllByRole("checkbox");
-    fireEvent.click(checkboxes[1]);
-    fireEvent.click(checkboxes[2]);
+      const moreActionsMenu = getControlledElement({
+        element: moreActionsButton,
+      });
+      const moveToFrontButton = within(moreActionsMenu).getByRole("menuitem", {
+        name: "Bring to front",
+      });
+      await user.click(moveToFrontButton);
 
-    expect(
-      screen.getByText("2 selected", { selector: "button" }),
-    ).toBeVisible();
+      const updatedRows = await screen.findAllByRole("row");
 
-    fireEvent.click(checkboxes[1]);
-
-    expect(
-      screen.getByText("1 selected", { selector: "button" }),
-    ).toBeVisible();
-  });
-
-  test("can deselect all rows", async () => {
-    render(
-      <DataView
-        availableLayouts={["table"]}
-        getData={getData}
-        hasRowSelection
-        tableLayoutOptions={{
-          columns: columns,
-        }}
-      />,
-    );
-
-    expect(await screen.findByText(data[0].name)).toBeVisible();
-
-    const checkboxes = screen.getAllByRole("checkbox");
-    fireEvent.click(checkboxes[0]);
-
-    const selectedText = screen.getByText(`${data.length} selected`, {
-      selector: "button",
+      // Confirm that the first two rows have swapped
+      expect(updatedRows[1].textContent).toContain(data[5].name);
+      expect(updatedRows[2].textContent).toContain(data[0].name);
     });
-    expect(selectedText).toBeVisible();
 
-    fireEvent.click(checkboxes[0]);
+    test("can reorder to back", async () => {
+      const user = userEvent.setup();
 
-    expect(
-      screen.queryByText(`${data.length} selected`, { selector: "button" }),
-    ).toBeNull();
-  });
+      let updatedData = data.slice();
 
-  test("can perform bulk actions on rows", async () => {
-    const bulkActionMenuItems = (selectedRows: MRT_RowSelectionState) => (
-      <MenuItem>Bulk action for {Object.keys(selectedRows).length}</MenuItem>
-    );
+      const handleReorderRows = ({
+        rowId,
+        newRowIndex,
+      }: DataOnReorderRowsType) => {
+        updatedData = reorderData({ data: updatedData, rowId, newRowIndex });
+      };
 
-    render(
-      <DataView
-        availableLayouts={["table"]}
-        getData={getData}
-        hasRowSelection
-        tableLayoutOptions={{
-          columns: columns,
-        }}
-        bulkActionMenuItems={bulkActionMenuItems}
-      />,
-    );
+      render(
+        <DataView
+          availableLayouts={["table"]}
+          getData={() => updatedData}
+          hasRowReordering
+          onReorderRows={handleReorderRows}
+          totalRows={updatedData.length}
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
+      );
 
-    expect(await screen.findByText(data[0].name)).toBeVisible();
+      expect(await screen.findByText(data[0].name)).toBeVisible();
+      expect(await screen.findByText(data[5].name)).toBeVisible();
 
-    const selectAllButton = screen.getByText("Select all", {
-      selector: "button",
+      const moreActionsButton = within(
+        screen.getAllByRole("row")[1],
+      ).getByLabelText("More actions", { selector: "button" });
+      await user.click(moreActionsButton);
+
+      const moreActionsMenu = getControlledElement({
+        element: moreActionsButton,
+      });
+      const moveToBackButton = within(moreActionsMenu).getByRole("menuitem", {
+        name: "Send to back",
+      });
+      await user.click(moveToBackButton);
+
+      const updatedRows = await screen.findAllByRole("row");
+
+      expect(updatedRows[6].textContent).toContain(data[0].name);
+      expect(updatedRows[5].textContent).toContain(data[5].name);
     });
-    fireEvent.click(selectAllButton);
 
-    const selectedButton = screen.getByText(`${data.length} selected`, {
-      selector: "button",
+    test("can expand table rows", async () => {
+      const user = userEvent.setup();
+
+      const tableDetails = ({ row }: { row: DataTableRowData }) => {
+        return <p>This is additional content for {row.original.name}</p>;
+      };
+
+      render(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          tableLayoutOptions={{
+            columns,
+            renderDetailPanel: tableDetails,
+          }}
+        />,
+      );
+
+      await waitUntilTableLoadedHack();
+      expect(
+        screen.queryByText(`This is additional content for ${data[0].name}`),
+      ).toBeNull();
+
+      const firstBodyRow = (await screen.findAllByRole("row"))[1];
+      const firstBodyRowExpandButton = within(firstBodyRow).getByLabelText(
+        "Expand",
+        { selector: "button" },
+      );
+      await user.click(firstBodyRowExpandButton);
+
+      expect(
+        screen.queryByText(`This is additional content for ${data[0].name}`),
+      ).not.toBeNull();
     });
-    fireEvent.click(selectedButton);
-
-    const bulkActionsMenu = getControlledElement({ element: selectedButton });
-    const bulkActionsMenuItem = within(bulkActionsMenu).getByRole("menuitem");
-    expect(bulkActionsMenuItem.textContent).toBe(
-      `Bulk action for ${data.length}`,
-    );
-  });
-
-  test("can reorder rows", async () => {
-    let updatedData = [...data];
-
-    const handleReorderRows = ({
-      rowId,
-      newRowIndex,
-    }: DataOnReorderRowsType) => {
-      updatedData = reorderData({ data: updatedData, rowId, newRowIndex });
-    };
-
-    render(
-      <DataView
-        availableLayouts={["table"]}
-        getData={() => updatedData}
-        hasRowReordering
-        onReorderRows={handleReorderRows}
-        tableLayoutOptions={{
-          columns: columns,
-        }}
-      />,
-    );
-
-    expect(await screen.findByText(data[0].name)).toBeVisible();
-    expect(await screen.findByText(data[1].name)).toBeVisible();
-
-    const moreActionsButton = within(
-      screen.getAllByRole("row")[2],
-    ).getByLabelText("More actions", { selector: "button" });
-    fireEvent.click(moreActionsButton);
-
-    const moreActionsMenu = getControlledElement({
-      element: moreActionsButton,
-    });
-    const moveForwardButton = within(moreActionsMenu).getByRole("menuitem", {
-      name: "Bring forward",
-    });
-    fireEvent.click(moveForwardButton);
-
-    const updatedRows = await screen.findAllByRole("row");
-
-    // Confirm that the first two rows have swapped
-    expect(updatedRows[1].textContent).toContain(data[1].name);
-    expect(updatedRows[2].textContent).toContain(data[0].name);
-  });
-
-  test("can reorder to front", async () => {
-    let updatedData = [...data];
-
-    const handleReorderRows = ({
-      rowId,
-      newRowIndex,
-    }: DataOnReorderRowsType) => {
-      updatedData = reorderData({ data: updatedData, rowId, newRowIndex });
-    };
-
-    render(
-      <DataView
-        availableLayouts={["table"]}
-        getData={() => updatedData}
-        hasRowReordering
-        onReorderRows={handleReorderRows}
-        tableLayoutOptions={{
-          columns: columns,
-        }}
-      />,
-    );
-
-    expect(await screen.findByText(data[0].name)).toBeVisible();
-    expect(await screen.findByText(data[5].name)).toBeVisible();
-
-    const moreActionsButton = within(
-      screen.getAllByRole("row")[6],
-    ).getByLabelText("More actions", { selector: "button" });
-    fireEvent.click(moreActionsButton);
-
-    const moreActionsMenu = getControlledElement({
-      element: moreActionsButton,
-    });
-    const moveToFrontButton = within(moreActionsMenu).getByRole("menuitem", {
-      name: "Bring to front",
-    });
-    fireEvent.click(moveToFrontButton);
-
-    const updatedRows = await screen.findAllByRole("row");
-
-    // Confirm that the first two rows have swapped
-    expect(updatedRows[1].textContent).toContain(data[5].name);
-    expect(updatedRows[2].textContent).toContain(data[0].name);
-  });
-
-  test("can reorder to back", async () => {
-    let updatedData = [...data];
-
-    const handleReorderRows = ({
-      rowId,
-      newRowIndex,
-    }: DataOnReorderRowsType) => {
-      updatedData = reorderData({ data: updatedData, rowId, newRowIndex });
-    };
-
-    render(
-      <DataView
-        availableLayouts={["table"]}
-        getData={() => updatedData}
-        hasRowReordering
-        onReorderRows={handleReorderRows}
-        totalRows={updatedData.length}
-        tableLayoutOptions={{
-          columns: columns,
-        }}
-      />,
-    );
-
-    expect(await screen.findByText(data[0].name)).toBeVisible();
-    expect(await screen.findByText(data[5].name)).toBeVisible();
-
-    const moreActionsButton = within(
-      screen.getAllByRole("row")[1],
-    ).getByLabelText("More actions", { selector: "button" });
-    fireEvent.click(moreActionsButton);
-
-    const moreActionsMenu = getControlledElement({
-      element: moreActionsButton,
-    });
-    const moveToBackButton = within(moreActionsMenu).getByRole("menuitem", {
-      name: "Send to back",
-    });
-    fireEvent.click(moveToBackButton);
-
-    const updatedRows = await screen.findAllByRole("row");
-
-    expect(updatedRows[6].textContent).toContain(data[0].name);
-    expect(updatedRows[5].textContent).toContain(data[5].name);
-  });
-
-  test("can expand table rows", async () => {
-    const tableDetails = ({ row }: { row: DataTableRowData }) => {
-      return <p>This is additional content for {row.original.name}</p>;
-    };
-
-    render(
-      <DataView
-        availableLayouts={["table"]}
-        getData={getData}
-        tableLayoutOptions={{
-          columns: columns,
-          renderDetailPanel: tableDetails,
-        }}
-      />,
-    );
-
-    expect(await screen.findByText(data[0].name)).toBeVisible();
-    expect(
-      screen.queryByText(`This is additional content for ${data[0].name}`),
-    ).toBeNull();
-
-    const firstBodyRow = (await screen.findAllByRole("row"))[1];
-    const firstBodyRowExpandButton = within(firstBodyRow).getByLabelText(
-      "Expand",
-      { selector: "button" },
-    );
-    fireEvent.click(firstBodyRowExpandButton);
-
-    expect(
-      screen.queryByText(`This is additional content for ${data[0].name}`),
-    ).not.toBeNull();
   });
 
   test("can expand card rows", async () => {
+    const user = userEvent.setup();
+
     const cardDetails = ({ row }: { row: DataTableRowData }) => {
       return <p>This is additional content for {row.name}</p>;
     };
@@ -653,7 +732,7 @@ describe("DataView", () => {
     const firstCardExpandButton = within(firstCard).getByLabelText("Expand", {
       selector: "button",
     });
-    fireEvent.click(firstCardExpandButton);
+    await user.click(firstCardExpandButton);
 
     expect(
       screen.queryByText(`This is additional content for ${data[0].name}`),
@@ -668,7 +747,7 @@ describe("DataView", () => {
         availableLayouts={["table"]}
         getData={() => []}
         tableLayoutOptions={{
-          columns: columns,
+          columns,
         }}
         emptyPlaceholder={
           <EmptyState heading="Empty" description={emptyText} />
@@ -687,7 +766,7 @@ describe("DataView", () => {
         availableLayouts={["table"]}
         getData={() => []}
         tableLayoutOptions={{
-          columns: columns,
+          columns,
         }}
         noResultsPlaceholder={
           <EmptyState heading="No results" description={noResultsText} />
@@ -699,18 +778,20 @@ describe("DataView", () => {
   });
 
   test("can sort rows", async () => {
+    const user = userEvent.setup();
+
     render(
       <DataView
         availableLayouts={["table"]}
         getData={getData}
         tableLayoutOptions={{
-          columns: columns,
+          columns,
           hasSorting: true,
         }}
       />,
     );
 
-    expect(await screen.findByText(data[0].name)).toBeVisible();
+    await waitUntilTableLoadedHack();
 
     const initialRows = screen.getAllByRole("row");
     expect(initialRows[1].textContent).toContain(data[0].name);
@@ -718,7 +799,7 @@ describe("DataView", () => {
     const idHeader = screen.getByRole("button", {
       name: "Sort by ID descending",
     });
-    fireEvent.click(idHeader);
+    await user.click(idHeader);
 
     expect(await screen.findByText(data[0].name)).toBeVisible();
 
@@ -727,18 +808,20 @@ describe("DataView", () => {
   });
 
   test("can change row density", async () => {
+    const user = userEvent.setup();
+
     render(
       <DataView
         availableLayouts={["table"]}
         getData={getData}
         tableLayoutOptions={{
-          columns: columns,
+          columns,
           hasChangeableDensity: true,
         }}
       />,
     );
 
-    expect(await screen.findByText(data[0].name)).toBeVisible();
+    await waitUntilTableLoadedHack();
 
     // Since table density is a purely visible attribute, there's no ARIA
     // attribute to target here. We're forced to use the className directly.
@@ -748,24 +831,26 @@ describe("DataView", () => {
     const densityButton = screen.getByLabelText("Table density", {
       selector: "button",
     });
-    fireEvent.click(densityButton);
+    await user.click(densityButton);
 
     const densityMenu = getControlledElement({ element: densityButton });
     const densityCompact = within(densityMenu).getByRole("menuitem", {
       name: "Compact",
     });
-    fireEvent.click(densityCompact);
+    await user.click(densityCompact);
 
     expect(tBody?.className).toContain("MuiTableBody-compact");
   });
 
   test("can change column visibility", async () => {
+    const user = userEvent.setup();
+
     render(
       <DataView
         availableLayouts={["table"]}
         getData={getData}
         tableLayoutOptions={{
-          columns: columns,
+          columns,
           hasColumnVisibility: true,
         }}
       />,
@@ -777,12 +862,12 @@ describe("DataView", () => {
     const visibilityButton = screen.getByLabelText("Show/hide columns", {
       selector: "button",
     });
-    fireEvent.click(visibilityButton);
+    await user.click(visibilityButton);
 
     const visibilityMenu = getControlledElement({ element: visibilityButton });
 
     const cityCheckbox = within(visibilityMenu).getByText("City");
-    fireEvent.click(cityCheckbox);
+    await user.click(cityCheckbox);
 
     expect(screen.queryByText(data[0].city)).toBeNull();
   });
@@ -793,13 +878,13 @@ describe("DataView", () => {
         availableLayouts={["table"]}
         getData={getData}
         tableLayoutOptions={{
-          columns: columns,
+          columns,
           hasColumnResizing: true,
         }}
       />,
     );
 
-    await screen.findByText(data[0].name);
+    await waitUntilTableLoadedHack();
 
     const rows = await screen.findAllByRole("row");
     const tHead = rows[0].parentElement;
@@ -810,181 +895,191 @@ describe("DataView", () => {
     expect(tHead).toContainElement(hrElement);
   });
 
-  test("displays paged pagination", async () => {
-    render(
-      <DataView
-        availableLayouts={["table"]}
-        getData={getData}
-        hasPagination
-        paginationType="paged"
-        tableLayoutOptions={{
-          columns: columns,
-        }}
-      />,
-    );
+  describe("Pagination", () => {
+    test("displays paged pagination", async () => {
+      render(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasPagination
+          paginationType="paged"
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
+      );
 
-    await screen.findByText(data[0].name);
+      await waitUntilTableLoadedHack();
 
-    const paginationContainer = await screen.findByLabelText("Pagination", {
-      selector: "nav",
+      const paginationContainer = await screen.findByLabelText("Pagination", {
+        selector: "nav",
+      });
+      expect(
+        within(paginationContainer).getByLabelText("Next page", {
+          selector: "button",
+        }),
+      ).toBeInTheDocument();
     });
-    expect(
-      within(paginationContainer).getByLabelText("Next page", {
+
+    test("displays loadMore pagination", async () => {
+      render(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasPagination
+          paginationType="loadMore"
+          enableVirtualization={false}
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
+      );
+
+      await waitUntilTableLoadedHack();
+
+      expect(
+        screen.getByText("Show more", { selector: "button" }),
+      ).toBeInTheDocument();
+    });
+
+    test("can load more rows via loadMore pagination", async () => {
+      const user = userEvent.setup();
+
+      render(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasPagination
+          paginationType="loadMore"
+          resultsPerPage={3}
+          enableVirtualization={false}
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
+      );
+
+      await waitUntilTableLoadedHack();
+
+      expect(screen.getAllByRole("row")).toHaveLength(4);
+
+      const loadMoreButton = screen.getByText("Show more", {
         selector: "button",
-      }),
-    ).toBeInTheDocument();
-  });
+      });
+      await user.click(loadMoreButton);
 
-  test("displays loadMore pagination", async () => {
-    render(
-      <DataView
-        availableLayouts={["table"]}
-        getData={getData}
-        hasPagination
-        paginationType="loadMore"
-        enableVirtualization={false}
-        tableLayoutOptions={{
-          columns: columns,
-        }}
-      />,
-    );
-
-    await screen.findByText(data[0].name);
-
-    expect(
-      screen.getByText("Show more", { selector: "button" }),
-    ).toBeInTheDocument();
-  });
-
-  test("can load more rows via loadMore pagination", async () => {
-    render(
-      <DataView
-        availableLayouts={["table"]}
-        getData={getData}
-        hasPagination
-        paginationType="loadMore"
-        resultsPerPage={3}
-        enableVirtualization={false}
-        tableLayoutOptions={{
-          columns: columns,
-        }}
-      />,
-    );
-
-    await screen.findByText(data[0].name);
-
-    expect(screen.getAllByRole("row")).toHaveLength(4);
-
-    const loadMoreButton = screen.getByText("Show more", {
-      selector: "button",
-    });
-    fireEvent.click(loadMoreButton);
-
-    await waitFor(() => {
-      expect(screen.getAllByRole("row")).toHaveLength(7); // 6 data rows + header row
-    });
-  });
-
-  test("can go to the next page", async () => {
-    render(
-      <DataView
-        availableLayouts={["table"]}
-        getData={getData}
-        hasPagination
-        paginationType="paged"
-        resultsPerPage={2}
-        tableLayoutOptions={{
-          columns: columns,
-        }}
-      />,
-    );
-
-    await screen.findByText(data[0].name);
-
-    expect(screen.queryByText(data[0].name)).not.toBeNull();
-    expect(screen.queryByText(data[2].name)).toBeNull();
-
-    const nextPageButton = screen.getByLabelText("Next page", {
-      selector: "button",
-    });
-    fireEvent.click(nextPageButton);
-
-    await screen.findByText(data[2].name);
-
-    expect(screen.queryByText(data[0].name)).toBeNull();
-    expect(screen.queryByText(data[2].name)).not.toBeNull();
-  });
-
-  test("can go to the previous page", async () => {
-    render(
-      <DataView
-        availableLayouts={["table"]}
-        getData={getData}
-        hasPagination
-        paginationType="paged"
-        resultsPerPage={2}
-        tableLayoutOptions={{
-          columns: columns,
-        }}
-      />,
-    );
-
-    await screen.findByText(data[0].name);
-
-    expect(screen.queryByText(data[0].name)).not.toBeNull();
-    expect(screen.queryByText(data[2].name)).toBeNull();
-
-    const nextPageButton = screen.getByLabelText("Next page", {
-      selector: "button",
-    });
-    fireEvent.click(nextPageButton);
-
-    await screen.findByText(data[2].name);
-
-    expect(screen.queryByText(data[0].name)).toBeNull();
-    expect(screen.queryByText(data[2].name)).not.toBeNull();
-
-    const prevPageButton = screen.getByLabelText("Previous page", {
-      selector: "button",
-    });
-    fireEvent.click(prevPageButton);
-
-    await screen.findByText(data[0].name);
-
-    expect(screen.queryByText(data[0].name)).not.toBeNull();
-    expect(screen.queryByText(data[2].name)).toBeNull();
-  });
-
-  test("can disable the next page button based on max rows", async () => {
-    render(
-      <DataView
-        availableLayouts={["table"]}
-        getData={getData}
-        hasPagination
-        paginationType="paged"
-        resultsPerPage={data.length - 1}
-        totalRows={data.length}
-        tableLayoutOptions={{
-          columns: columns,
-        }}
-      />,
-    );
-
-    await screen.findByText(data[0].name);
-
-    const nextPageButton = screen.getByLabelText("Next page", {
-      selector: "button",
-    });
-    const prevPageButton = screen.getByLabelText("Previous page", {
-      selector: "button",
+      await waitFor(() => {
+        expect(screen.getAllByRole("row")).toHaveLength(7); // 6 data rows + header row
+      });
     });
 
-    expect(prevPageButton).toBeDisabled();
-    expect(nextPageButton).not.toBeDisabled();
+    test("can go to the next page", async () => {
+      const user = userEvent.setup();
 
-    fireEvent.click(nextPageButton);
+      render(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasPagination
+          paginationType="paged"
+          resultsPerPage={2}
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
+      );
 
-    expect(prevPageButton).not.toBeDisabled();
-    expect(nextPageButton).toBeDisabled();
+      await waitUntilTableLoadedHack();
+
+      expect(screen.queryByText(data[0].name)).not.toBeNull();
+      expect(screen.queryByText(data[2].name)).toBeNull();
+
+      const nextPageButton = screen.getByLabelText("Next page", {
+        selector: "button",
+      });
+      await user.click(nextPageButton);
+
+      await screen.findByText(data[2].name);
+
+      expect(screen.queryByText(data[0].name)).toBeNull();
+      expect(screen.queryByText(data[2].name)).not.toBeNull();
+    });
+
+    test("can go to the previous page", async () => {
+      const user = userEvent.setup();
+
+      render(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasPagination
+          paginationType="paged"
+          resultsPerPage={2}
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
+      );
+
+      await waitUntilTableLoadedHack();
+
+      expect(screen.queryByText(data[0].name)).not.toBeNull();
+      expect(screen.queryByText(data[2].name)).toBeNull();
+
+      const nextPageButton = screen.getByLabelText("Next page", {
+        selector: "button",
+      });
+      await user.click(nextPageButton);
+
+      await screen.findByText(data[2].name);
+
+      expect(screen.queryByText(data[0].name)).toBeNull();
+      expect(screen.queryByText(data[2].name)).not.toBeNull();
+
+      const prevPageButton = screen.getByLabelText("Previous page", {
+        selector: "button",
+      });
+      await user.click(prevPageButton);
+
+      await waitUntilTableLoadedHack();
+
+      expect(screen.queryByText(data[0].name)).not.toBeNull();
+      expect(screen.queryByText(data[2].name)).toBeNull();
+    });
+
+    test("can disable the next page button based on max rows", async () => {
+      const user = userEvent.setup();
+
+      render(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasPagination
+          paginationType="paged"
+          resultsPerPage={data.length - 1}
+          totalRows={data.length}
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
+      );
+
+      await waitUntilTableLoadedHack();
+
+      const nextPageButton = screen.getByLabelText("Next page", {
+        selector: "button",
+      });
+      const prevPageButton = screen.getByLabelText("Previous page", {
+        selector: "button",
+      });
+
+      expect(prevPageButton).toBeDisabled();
+      expect(nextPageButton).not.toBeDisabled();
+
+      await user.click(nextPageButton);
+
+      expect(prevPageButton).not.toBeDisabled();
+      expect(nextPageButton).toBeDisabled();
+    });
   });
 });
