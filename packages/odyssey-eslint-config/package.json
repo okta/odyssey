@@ -30,7 +30,7 @@
     "@types/node": "^22.9.0",
     "jiti": "^2.4.0",
     "rimraf": "^5.0.1",
-    "typescript": "^5.5.4"
+    "typescript": "^5.6.3"
   },
   "peerDependencies": {
     "eslint": "^9.14.0"
