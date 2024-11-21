@@ -12,8 +12,8 @@
 
 import { Autocomplete, Link } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
-import { expect } from "@storybook/jest";
-import { userEvent, waitFor, within, screen } from "@storybook/testing-library";
+import { expect } from "@storybook/test";
+import { userEvent, waitFor, within, screen } from "@storybook/test";
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { axeRun } from "../../../axe-util";

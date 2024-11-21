@@ -12,8 +12,8 @@
 
 import type { StoryObj } from "@storybook/react";
 
-import { within } from "@storybook/testing-library";
-import { expect } from "@storybook/jest";
+import { within } from "@storybook/test";
+import { expect } from "@storybook/test";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { Link, LinkProps, linkVariantValues } from "@okta/odyssey-react-mui";
 import { InformationCircleFilledIcon } from "@okta/odyssey-react-mui/icons";

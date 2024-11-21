@@ -13,11 +13,11 @@
 import { ChangeEvent, useCallback, useState } from "react";
 import { Radio, RadioGroup, Link } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
-import { expect } from "@storybook/jest";
+import { expect } from "@storybook/test";
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { userEvent, within } from "@storybook/testing-library";
+import { userEvent, within } from "@storybook/test";
 import { axeRun } from "../../../axe-util";
 const storybookMeta: Meta<typeof RadioGroup> = {
   title: "MUI Components/Forms/RadioGroup",

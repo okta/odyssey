@@ -49,17 +49,17 @@ const config: StorybookConfig = {
   stories: ["../src/**/*.stories.@(js|jsx|ts|tsx)"],
   typescript: {
     check: false,
-    reactDocgen: "react-docgen-typescript",
-    reactDocgenTypescriptOptions: {
-      shouldExtractLiteralValuesFromEnum: true,
-      propFilter: (prop) => {
-        if (!prop.parent) return true;
-        return (
-          /odyssey-react-mui/.test(prop.parent.fileName) ||
-          !/node_modules/.test(prop.parent.fileName)
-        );
-      },
-    },
+    // reactDocgen: "react-docgen-typescript",
+    // reactDocgenTypescriptOptions: {
+    //   shouldExtractLiteralValuesFromEnum: true,
+    //   propFilter: (prop) => {
+    //     if (!prop.parent) return true;
+    //     return (
+    //       /odyssey-react-mui/.test(prop.parent.fileName) ||
+    //       !/node_modules/.test(prop.parent.fileName)
+    //     );
+    //   },
+    // },
   },
 };
 

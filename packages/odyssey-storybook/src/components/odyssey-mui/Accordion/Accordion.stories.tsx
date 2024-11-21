@@ -15,8 +15,8 @@ import { Meta, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { Accordion, AccordionProps } from "@okta/odyssey-react-mui";
-import { expect } from "@storybook/jest";
-import { userEvent, within, waitFor } from "@storybook/testing-library";
+import { expect } from "@storybook/test";
+import { userEvent, within, waitFor } from "@storybook/test";
 import { PlaywrightProps } from "../storybookTypes";
 
 const storybookMeta: Meta<AccordionProps> = {

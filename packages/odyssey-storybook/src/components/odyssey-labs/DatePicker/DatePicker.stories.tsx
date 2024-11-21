@@ -12,8 +12,8 @@
 
 import { useMemo, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { expect } from "@storybook/jest";
-import { userEvent, within, screen, waitFor } from "@storybook/testing-library";
+import { expect } from "@storybook/test";
+import { userEvent, within, screen, waitFor } from "@storybook/test";
 
 import { odysseyTranslate } from "@okta/odyssey-react-mui";
 import { DatePicker, DatePickerProps } from "@okta/odyssey-react-mui/labs";

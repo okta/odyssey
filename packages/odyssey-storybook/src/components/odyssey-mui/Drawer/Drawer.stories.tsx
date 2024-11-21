@@ -16,7 +16,7 @@ import { Drawer, DrawerProps, variantValues } from "@okta/odyssey-react-mui";
 
 import { Accordion, Box, Button } from "@okta/odyssey-react-mui";
 import { useCallback, useState } from "react";
-import { userEvent, waitFor, within } from "@storybook/testing-library";
+import { userEvent, waitFor, within } from "@storybook/test";
 import { axeRun } from "../../../axe-util";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";

@@ -18,7 +18,7 @@ import {
   DialogProps,
 } from "@okta/odyssey-react-mui";
 import { useCallback, useState } from "react";
-import { userEvent, within, screen } from "@storybook/testing-library";
+import { userEvent, within, screen } from "@storybook/test";
 import type { PlaywrightProps } from "../storybookTypes";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 

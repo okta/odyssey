@@ -13,8 +13,8 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Select, SelectProps, Link } from "@okta/odyssey-react-mui";
 import { queryOdysseySelector } from "@okta/odyssey-react-mui/test-selectors";
-import { screen, userEvent, waitFor } from "@storybook/testing-library";
-import { expect } from "@storybook/jest";
+import { screen, userEvent, waitFor } from "@storybook/test";
+import { expect } from "@storybook/test";
 import { useCallback, useState } from "react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";

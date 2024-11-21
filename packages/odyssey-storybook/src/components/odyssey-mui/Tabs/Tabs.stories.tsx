@@ -22,8 +22,8 @@ import {
   TabsProps,
 } from "@okta/odyssey-react-mui";
 import { BugIcon } from "@okta/odyssey-react-mui/icons";
-import { expect } from "@storybook/jest";
-import { userEvent, waitFor, within } from "@storybook/testing-library";
+import { expect } from "@storybook/test";
+import { userEvent, waitFor, within } from "@storybook/test";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import icons from "../../../../.storybook/components/iconUtils";
 import { axeRun } from "../../../axe-util";

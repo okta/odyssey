@@ -32,13 +32,13 @@ import {
   FolderIcon,
   NotificationIcon,
 } from "@okta/odyssey-react-mui/icons";
-import { expect } from "@storybook/jest";
+import { expect } from "@storybook/test";
 import {
   configure,
   userEvent,
   waitFor,
   within,
-} from "@storybook/testing-library";
+} from "@storybook/test";
 import { PlaywrightProps } from "../../odyssey-mui/storybookTypes";
 import PlaceholderLogo from "../PickerWithOptionAdornment/PlaceholderLogo";
 import { useEffect, useState } from "react";

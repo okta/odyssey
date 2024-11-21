@@ -12,8 +12,8 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import { PasswordField, odysseyTranslate } from "@okta/odyssey-react-mui";
-import { userEvent, waitFor, within } from "@storybook/testing-library";
-import { expect } from "@storybook/jest";
+import { userEvent, waitFor, within } from "@storybook/test";
+import { expect } from "@storybook/test";
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { axeRun } from "../../../axe-util";

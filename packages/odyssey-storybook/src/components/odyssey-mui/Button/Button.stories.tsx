@@ -21,8 +21,8 @@ import {
 } from "@okta/odyssey-react-mui";
 import { AddIcon } from "@okta/odyssey-react-mui/icons";
 
-import { expect } from "@storybook/jest";
-import { userEvent, waitFor, within } from "@storybook/testing-library";
+import { expect } from "@storybook/test";
+import { userEvent, waitFor, within } from "@storybook/test";
 import type { Meta, StoryObj, StoryFn, StoryContext } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";

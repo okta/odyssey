@@ -17,7 +17,7 @@ import {
   calloutSeverityValues,
 } from "@okta/odyssey-react-mui";
 import { queryOdysseySelector } from "@okta/odyssey-react-mui/test-selectors";
-import { expect } from "@storybook/jest";
+import { expect } from "@storybook/test";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
