@@ -3,6 +3,6 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
-    "types": ["vitest/globals"],
+    "types": ["vitest/globals"]
   }
 }

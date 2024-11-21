@@ -3,6 +3,7 @@
   "compilerOptions": {
     "composite": true,
     "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
     "outDir": "dist"
   },
   "exclude": ["./test", "**/*.test.**", "**/dist/**/*"]
