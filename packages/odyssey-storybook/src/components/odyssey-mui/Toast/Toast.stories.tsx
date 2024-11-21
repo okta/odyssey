@@ -170,6 +170,7 @@ const Single: StoryObj<typeof Toast> = {
     const [isVisible, setIsVisible] = useState(args.isVisible);
     const showToast = useCallback(() => setIsVisible(true), []);
     const hideToast = useCallback(() => setIsVisible(false), []);
+
     return (
       <>
         <Button

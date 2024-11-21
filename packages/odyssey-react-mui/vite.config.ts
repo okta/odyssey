@@ -15,8 +15,6 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { defineConfig } from "vite";
 
-console.log(join(import.meta.dirname, "src"));
-
 export default defineConfig({
   build: {
     emptyOutDir: false,
@@ -47,10 +45,9 @@ export default defineConfig({
         const distDirectory = join(
           import.meta.dirname,
           "dist",
-          "test-selectors",
         );
 
-        import("./src/test-selectors/index").then(({ odysseyTestSelector }) =>
+        import("./src/test-selectors").then(({ odysseyTestSelector }) =>
           mkdir(distDirectory, { recursive: true })
             .catch(() => null)
             .then(() =>
