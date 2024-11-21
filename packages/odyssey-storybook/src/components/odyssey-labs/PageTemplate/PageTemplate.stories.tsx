@@ -138,7 +138,7 @@ const storybookMeta: Meta<PageTemplateProps> = {
       },
     },
     drawer: {
-      control: null,
+      // control: null,
       description:
         "An optional `Drawer` object. Can be of variant 'temporary' or 'persistent'.",
       table: {
@@ -148,7 +148,7 @@ const storybookMeta: Meta<PageTemplateProps> = {
       },
     },
     primaryCallToActionComponent: {
-      control: null,
+      // control: null,
       description:
         "An optional `Button` object to be situated in the `PageTemplate` header. Should almost always be of variant `primary`.",
       table: {
@@ -158,7 +158,7 @@ const storybookMeta: Meta<PageTemplateProps> = {
       },
     },
     secondaryCallToActionComponent: {
-      control: null,
+      // control: null,
       description:
         "An optional `Button` object to be situated in the `PageTemplate` header, alongside the `callToActionPrimaryComponent`.",
       table: {
@@ -168,7 +168,7 @@ const storybookMeta: Meta<PageTemplateProps> = {
       },
     },
     tertiaryCallToActionComponent: {
-      control: null,
+      // control: null,
       description:
         "An optional `Button` object to be situated in the `PageTemplate` header, alongside the other two `callToAction` components.",
       table: {
@@ -178,7 +178,7 @@ const storybookMeta: Meta<PageTemplateProps> = {
       },
     },
     children: {
-      control: null,
+      // control: null,
       description:
         "The content of the `PageTemplate`. May be a `string` or any other `ReactNode` or array of `ReactNode`s. Will often be `Grid` objects.",
       table: {

@@ -79,7 +79,7 @@ const storybookMeta: Meta<UiShellProps> = {
       },
     },
     optionalComponents: {
-      control: null,
+      // control: null,
       description:
         "Components that will render as children of various other components such as the top nav or side nav.",
       table: {

@@ -22,7 +22,7 @@ const storybookMeta: Meta<BoxProps> = {
   component: Box,
   argTypes: {
     children: {
-      control: null,
+      // control: null,
       description:
         "The content of the component, whether text or other components.",
       table: {
@@ -32,7 +32,7 @@ const storybookMeta: Meta<BoxProps> = {
       },
     },
     component: {
-      control: null,
+      // control: null,
       description:
         "The HTML element the component should render, if different from the default.",
       table: {

@@ -67,7 +67,7 @@ const storybookMeta: Meta<FormProps> = {
       },
     },
     alert: {
-      control: null,
+      // control: null,
       description: "A Callout indicating a Form-wide error or status update",
       table: {
         type: {

@@ -91,7 +91,7 @@ const storybookMeta: Meta<typeof PasswordField> = {
       },
     },
     onBlur: {
-      control: null,
+      // control: null,
       description:
         "Callback fired when the autocomplete component loses focus.",
       table: {
@@ -101,7 +101,7 @@ const storybookMeta: Meta<typeof PasswordField> = {
       },
     },
     onChange: {
-      control: null,
+      // control: null,
       description: "Callback fired when the password value is changed.",
       table: {
         type: {
@@ -110,7 +110,7 @@ const storybookMeta: Meta<typeof PasswordField> = {
       },
     },
     onFocus: {
-      control: null,
+      // control: null,
       description:
         "Callback fired when the autocomplete component gains focus.",
       table: {

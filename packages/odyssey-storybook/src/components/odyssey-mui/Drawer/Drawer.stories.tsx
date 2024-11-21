@@ -102,7 +102,7 @@ const storybookMeta: Meta<DrawerProps> = {
   component: Drawer,
   argTypes: {
     primaryCallToActionComponent: {
-      control: null,
+      // control: null,
       description:
         "An optional Button object to be situated in the Drawer footer. Should almost always be of variant `primary`.",
       table: {
@@ -112,7 +112,7 @@ const storybookMeta: Meta<DrawerProps> = {
       },
     },
     secondaryCallToActionComponent: {
-      control: null,
+      // control: null,
       description:
         "An optional Button object to be situated in the Drawer footer, alongside the `callToActionPrimaryComponent`.",
       table: {
@@ -122,7 +122,7 @@ const storybookMeta: Meta<DrawerProps> = {
       },
     },
     tertiaryCallToActionComponent: {
-      control: null,
+      // control: null,
       description:
         "An optional Button object to be situated in the Drawer footer, alongside the other two `callToAction` components.",
       table: {

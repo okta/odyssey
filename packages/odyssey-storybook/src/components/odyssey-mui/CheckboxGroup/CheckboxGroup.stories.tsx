@@ -31,7 +31,7 @@ const storybookMeta: Meta<CheckboxGroupStoryProps> = {
   component: CheckboxGroup,
   argTypes: {
     children: {
-      control: null,
+      // control: null,
       description: "A single Checkbox element or an array of Checkbox elements",
       table: {
         type: {

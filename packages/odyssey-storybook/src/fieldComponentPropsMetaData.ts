@@ -27,7 +27,7 @@ export const fieldComponentPropsMetaData: Partial<
     },
   },
   errorMessageList: {
-    control: null,
+    // control: null,
     description:
       "The list of error messages rendered at the buttom of the `error` message",
     table: {

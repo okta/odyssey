@@ -70,7 +70,7 @@ const storybookMeta: Meta<DataViewMetaProps> = {
   component: DataView,
   argTypes: {
     getData: {
-      control: null,
+      // control: null,
       table: {
         type: {
           summary: "",
@@ -78,7 +78,7 @@ const storybookMeta: Meta<DataViewMetaProps> = {
       },
     },
     getRowId: {
-      control: null,
+      // control: null,
       table: {
         type: {
           summary: "",
@@ -97,7 +97,7 @@ const storybookMeta: Meta<DataViewMetaProps> = {
       control: "boolean",
     },
     onReorderRows: {
-      control: null,
+      // control: null,
       table: {
         type: {
           summary: "",
@@ -108,10 +108,10 @@ const storybookMeta: Meta<DataViewMetaProps> = {
       control: "boolean",
     },
     onChangeRowSelection: {
-      control: null,
+      // control: null,
     },
     bulkActionMenuItems: {
-      control: null,
+      // control: null,
     },
     hasPagination: {
       control: "boolean",
@@ -142,7 +142,7 @@ const storybookMeta: Meta<DataViewMetaProps> = {
       control: "boolean",
     },
     filters: {
-      control: null,
+      // control: null,
     },
     searchDelayTime: {
       control: "number",
@@ -154,10 +154,10 @@ const storybookMeta: Meta<DataViewMetaProps> = {
       control: "text",
     },
     emptyPlaceholder: {
-      control: null,
+      // control: null,
     },
     noResultsPlaceholder: {
-      control: null,
+      // control: null,
     },
     initialLayout: {
       control: "select",
@@ -168,7 +168,7 @@ const storybookMeta: Meta<DataViewMetaProps> = {
       options: availableLayouts,
     },
     columns: {
-      control: null,
+      // control: null,
       name: "tableLayoutOptions.columns",
     },
     initialDensity: {
@@ -189,15 +189,15 @@ const storybookMeta: Meta<DataViewMetaProps> = {
       name: "tableLayoutOptions.hasColumnVisibility",
     },
     renderDetailPanel: {
-      control: null,
+      // control: null,
       name: "tableLayoutOptions.renderDetailPanel",
     },
     rowActionButtons: {
-      control: null,
+      // control: null,
       name: "tableLayoutOptions.rowActionButtons",
     },
     tableRowActionMenuItems: {
-      control: null,
+      // control: null,
       name: "tableLayoutOptions.rowActionMenuItems",
     },
     hasSorting: {
@@ -205,7 +205,7 @@ const storybookMeta: Meta<DataViewMetaProps> = {
       name: "tableLayoutOptions.hasSorting",
     },
     itemProps: {
-      control: null,
+      // control: null,
       name: "cardLayoutOptions.itemProps",
     },
     maxGridColumns: {
@@ -213,7 +213,7 @@ const storybookMeta: Meta<DataViewMetaProps> = {
       name: "cardLayoutOptions.maxGridColumns",
     },
     cardRowActionMenuItems: {
-      control: null,
+      // control: null,
       name: "cardLayoutOptions.rowActionMenuItems",
     },
     isLoading: {

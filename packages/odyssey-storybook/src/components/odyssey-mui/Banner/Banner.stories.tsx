@@ -74,7 +74,7 @@ const storybookMeta: Meta<BannerProps> = {
       },
     },
     onClose: {
-      control: null,
+      // control: null,
       description:
         "The function that's fired when the user clicks the close button. If undefined, the close button will not be shown",
       table: {

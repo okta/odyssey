@@ -118,7 +118,7 @@ const storybookMeta: Meta<typeof GroupPicker> = {
       },
     },
     onChange: {
-      control: null,
+      // control: null,
       description:
         "Callback fired when the value of the autocomplete input changes",
       table: {
@@ -128,7 +128,7 @@ const storybookMeta: Meta<typeof GroupPicker> = {
       },
     },
     onInputChange: {
-      control: null,
+      // control: null,
       description:
         "Callback fired when the input value of the autocomplete input changes",
       table: {
@@ -138,7 +138,7 @@ const storybookMeta: Meta<typeof GroupPicker> = {
       },
     },
     options: {
-      control: null,
+      // control: null,
       description: "The options for the autocomplete input",
       table: {
         type: {
@@ -148,7 +148,7 @@ const storybookMeta: Meta<typeof GroupPicker> = {
       },
     },
     value: {
-      control: null,
+      // control: null,
       description: "The value of the autocomplete input",
       table: {
         type: {

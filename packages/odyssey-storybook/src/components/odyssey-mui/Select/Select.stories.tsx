@@ -160,7 +160,7 @@ const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
     },
     name: fieldComponentPropsMetaData.name,
     onBlur: {
-      control: null,
+      // control: null,
       description: "Callback fired when the select component loses focus",
       table: {
         type: {
@@ -169,7 +169,7 @@ const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
       },
     },
     onChange: {
-      control: null,
+      // control: null,
       description:
         "Callback fired when the value of the select component changes",
       table: {
@@ -179,7 +179,7 @@ const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
       },
     },
     onFocus: {
-      control: null,
+      // control: null,
       description: "Callback fired when the select component gains focus",
       table: {
         type: {

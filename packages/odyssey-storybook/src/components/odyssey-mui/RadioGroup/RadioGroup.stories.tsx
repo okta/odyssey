@@ -24,7 +24,7 @@ const storybookMeta: Meta<typeof RadioGroup> = {
   component: RadioGroup,
   argTypes: {
     children: {
-      control: null,
+      // control: null,
       description: "An array of Radio components within the group",
       table: {
         type: {
@@ -68,7 +68,7 @@ const storybookMeta: Meta<typeof RadioGroup> = {
       },
     },
     onChange: {
-      control: null,
+      // control: null,
       description: "Callback fired when the value of the radio group changes",
       table: {
         type: {

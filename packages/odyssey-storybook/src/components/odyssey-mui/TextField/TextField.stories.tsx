@@ -105,7 +105,7 @@ const storybookMeta: Meta<typeof TextField> = {
     },
     name: fieldComponentPropsMetaData.name,
     onBlur: {
-      control: null,
+      // control: null,
       description: "Callback fired when the `input` element loses focus",
       table: {
         type: {
@@ -114,7 +114,7 @@ const storybookMeta: Meta<typeof TextField> = {
       },
     },
     onChange: {
-      control: null,
+      // control: null,
       description: "Callback fired when the value is changed",
       table: {
         type: {
@@ -123,7 +123,7 @@ const storybookMeta: Meta<typeof TextField> = {
       },
     },
     onFocus: {
-      control: null,
+      // control: null,
       description: "Callback fired when the `input` element gets focus",
       table: {
         type: {

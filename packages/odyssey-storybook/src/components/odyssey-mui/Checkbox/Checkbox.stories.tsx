@@ -117,7 +117,7 @@ const storybookMeta: Meta<typeof Checkbox> = {
     },
     name: fieldComponentPropsMetaData.name,
     onChange: {
-      control: null,
+      // control: null,
       description: "Callback fired when the checkbox value changes",
       table: {
         type: {
@@ -126,7 +126,7 @@ const storybookMeta: Meta<typeof Checkbox> = {
       },
     },
     onBlur: {
-      control: null,
+      // control: null,
       description: "Callback fired when the blur event happens",
       table: {
         type: {

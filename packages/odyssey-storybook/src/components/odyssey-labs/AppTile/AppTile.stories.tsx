@@ -50,7 +50,7 @@ const storybookMeta: Meta<typeof AppTile> = {
       },
     },
     actionAriaHasPopup: {
-      control: null,
+      // control: null,
       description:
         "Should be filled if the button controls a popup element such as a Drawer or Dialog.",
       table: {
@@ -61,7 +61,7 @@ const storybookMeta: Meta<typeof AppTile> = {
       },
     },
     actionIcon: {
-      control: null,
+      // control: null,
       description: "An icon for the action button.",
       table: {
         type: {
@@ -89,7 +89,7 @@ const storybookMeta: Meta<typeof AppTile> = {
       },
     },
     children: {
-      control: null,
+      // control: null,
       description:
         "Arbitrary content to render underneath any other tile content.",
       table: {
@@ -108,7 +108,7 @@ const storybookMeta: Meta<typeof AppTile> = {
       },
     },
     image: {
-      control: null,
+      // control: null,
       description: "An image or icon at the top of the tile.",
       table: {
         type: {
@@ -126,7 +126,7 @@ const storybookMeta: Meta<typeof AppTile> = {
       },
     },
     onActionClick: {
-      control: null,
+      // control: null,
       description:
         "Event that fires when the user clicks the action button in the upper-right corner. If this isn't set, the other action props can't be set either",
       table: {
@@ -136,7 +136,7 @@ const storybookMeta: Meta<typeof AppTile> = {
       },
     },
     onClick: {
-      control: null,
+      // control: null,
       description: "Event handler for when the user clicks the tile.",
       table: {
         type: {

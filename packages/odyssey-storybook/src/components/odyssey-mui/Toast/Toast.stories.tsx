@@ -84,7 +84,7 @@ const meta: Meta<typeof Toast> = {
       },
     },
     onHide: {
-      control: null,
+      // control: null,
       description: "An optional function to run when the Toast is closed",
       table: {
         type: {

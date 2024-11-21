@@ -22,7 +22,7 @@ export const pickerComponentPropsMetadata = {
     },
   },
   errorMessageList: {
-    control: null,
+    // control: null,
     description:
       "The list of error messages rendered at the bottom of the `error` message",
     table: {

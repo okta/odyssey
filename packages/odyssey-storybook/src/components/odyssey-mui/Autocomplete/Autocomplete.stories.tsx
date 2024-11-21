@@ -117,7 +117,7 @@ const storybookMeta: Meta<typeof Autocomplete> = {
     },
     name: fieldComponentPropsMetaData.name,
     onBlur: {
-      control: null,
+      // control: null,
       description:
         "Callback fired when the autocomplete component loses focus.",
       table: {
@@ -127,7 +127,7 @@ const storybookMeta: Meta<typeof Autocomplete> = {
       },
     },
     onChange: {
-      control: null,
+      // control: null,
       description: "Callback fired when a selection is made.",
       table: {
         type: {
@@ -136,7 +136,7 @@ const storybookMeta: Meta<typeof Autocomplete> = {
       },
     },
     onInputChange: {
-      control: null,
+      // control: null,
       description: "Callback fired when the textbox receives typed characters.",
       table: {
         type: {
@@ -145,7 +145,7 @@ const storybookMeta: Meta<typeof Autocomplete> = {
       },
     },
     onFocus: {
-      control: null,
+      // control: null,
       description:
         "Callback fired when the autocomplete component gains focus.",
       table: {
@@ -155,7 +155,7 @@ const storybookMeta: Meta<typeof Autocomplete> = {
       },
     },
     options: {
-      control: null,
+      // control: null,
       description: "The options for the autocomplete input",
       table: {
         type: {
@@ -171,7 +171,7 @@ const storybookMeta: Meta<typeof Autocomplete> = {
       },
     },
     value: {
-      control: null,
+      // control: null,
       description: "The value of the autocomplete input",
       table: {
         type: {

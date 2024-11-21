@@ -28,19 +28,19 @@ const storybookMeta: Meta<typeof Dialog> = {
   component: Dialog,
   argTypes: {
     primaryCallToActionComponent: {
-      control: null,
+      // control: null,
       description:
         "An optional Button object to be situated in the Dialog footer. Should almost always be of variant `primary`.",
       table: { type: { summary: "<Button />" } },
     },
     secondaryCallToActionComponent: {
-      control: null,
+      // control: null,
       description:
         "An optional Button object to be situated in the Dialog footer, alongside the `callToActionPrimaryComponent`.",
       table: { type: { summary: "<Button />" } },
     },
     tertiaryCallToActionComponent: {
-      control: null,
+      // control: null,
       description:
         "An optional Button object to be situated in the Dialog footer, alongside the other two `callToAction` components.",
       table: { type: { summary: "<Button />" } },

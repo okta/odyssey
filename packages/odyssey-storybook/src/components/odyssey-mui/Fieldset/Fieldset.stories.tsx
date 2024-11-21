@@ -24,7 +24,7 @@ const storybookMeta: Meta<FieldsetProps> = {
   component: Fieldset,
   argTypes: {
     alert: {
-      control: null,
+      // control: null,
       description:
         "A Callout indicating a Fieldset-wide error or status update",
       table: {

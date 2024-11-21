@@ -94,7 +94,7 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
       },
     },
     onChange: {
-      control: null,
+      // control: null,
       description: "Callback fired when the active tab is changed",
       table: {
         type: {
