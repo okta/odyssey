@@ -23,20 +23,21 @@ const getAbsolutePath = (value: string): any => {
 
 const config: StorybookConfig = {
   addons: [
-    // {
-    //   name: "@storybook/addon-docs",
-    //   options: {
-    //     transcludeMarkdown: true,
-    //   },
-    // },
-    // getAbsolutePath("@storybook/addon-links"),
-    // getAbsolutePath("@storybook/addon-a11y"),
-    // getAbsolutePath("@storybook/addon-essentials"),
-    // getAbsolutePath("@storybook/addon-interactions"),
-    // getAbsolutePath("@storybook/addon-mdx-gfm"),
+    {
+      name: "@storybook/addon-docs",
+      options: {
+        transcludeMarkdown: true,
+      },
+    },
+    getAbsolutePath("@storybook/addon-links"),
+    getAbsolutePath("@storybook/addon-a11y"),
+    getAbsolutePath("@storybook/addon-essentials"),
+    getAbsolutePath("@storybook/addon-interactions"),
+    getAbsolutePath("@storybook/addon-mdx-gfm"),
     // getAbsolutePath("storybook-addon-rtl-direction"),
   ],
   core: {
+    builder: "@storybook/builder-vite",
     disableTelemetry: true,
   },
   docs: {
@@ -49,17 +50,17 @@ const config: StorybookConfig = {
   stories: ["../src/**/*.stories.@(js|jsx|ts|tsx)"],
   typescript: {
     check: false,
-    // reactDocgen: "react-docgen-typescript",
-    // reactDocgenTypescriptOptions: {
-    //   shouldExtractLiteralValuesFromEnum: true,
-    //   propFilter: (prop) => {
-    //     if (!prop.parent) return true;
-    //     return (
-    //       /odyssey-react-mui/.test(prop.parent.fileName) ||
-    //       !/node_modules/.test(prop.parent.fileName)
-    //     );
-    //   },
-    // },
+    reactDocgen: "react-docgen-typescript",
+    reactDocgenTypescriptOptions: {
+      shouldExtractLiteralValuesFromEnum: true,
+      propFilter: (prop) => {
+        if (!prop.parent) return true;
+        return (
+          /odyssey-react-mui/.test(prop.parent.fileName) ||
+          !/node_modules/.test(prop.parent.fileName)
+        );
+      },
+    },
   },
 };
 

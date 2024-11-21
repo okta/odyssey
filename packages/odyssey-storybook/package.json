@@ -21,7 +21,7 @@
     "@faker-js/faker": "^8.4.1",
     "@mui/material": "^5.15.10",
     "@okta/odyssey-design-tokens": "workspace:*",
-    "@okta/odyssey-react-mui": "1.27.0",
+    "@okta/odyssey-react-mui": "workspace:*",
     "@okta/odyssey-typescript": "workspace:*",
     "@pxblue/storybook-rtl-addon": "^1.1.0",
     "@storybook/addon-a11y": "^8.4.5",
