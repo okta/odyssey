@@ -117,7 +117,10 @@ const MenuButtonContainer = styled("div", {
 }>(({ odysseyDesignTokens, variant }) => ({
   position: "absolute",
   right: odysseyDesignTokens.Spacing3,
-  top: odysseyDesignTokens.Spacing3,
+  top:
+    variant === "compact"
+      ? odysseyDesignTokens.Spacing4
+      : odysseyDesignTokens.Spacing3,
   height: variant === "compact" ? CARD_IMAGE_SIZE_COMPACT : "auto",
   display: "flex",
   alignItems: "center",
@@ -131,11 +134,14 @@ const CardInnerContainer = styled("div", {
 }));
 
 const CardImageAndContentContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "variant",
-})<{ variant: (typeof cardVariantValues)[number] }>(({ variant }) => ({
-  display: "flex",
-  flexDirection: variant === "tile" ? "column" : "row",
-}));
+  shouldForwardProp: (prop) => prop !== "variant" && prop !== "centerContent",
+})<{ variant: (typeof cardVariantValues)[number]; centerContent: boolean }>(
+  ({ variant, centerContent }) => ({
+    display: "flex",
+    flexDirection: variant === "tile" ? "column" : "row",
+    alignItems: centerContent ? "center" : "flex-start",
+  }),
+);
 
 const CardContent = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
@@ -143,8 +149,11 @@ const CardContent = styled("div", {
   odysseyDesignTokens: DesignTokens;
   variant: (typeof cardVariantValues)[number];
 }>(({ odysseyDesignTokens, variant }) => ({
-  "& > .MuiTypography-h5": {
+  "& > .MuiTypography-h5:not(:last-child)": {
     marginBlockEnd: `${variant === "compact" ? odysseyDesignTokens.Spacing1 : odysseyDesignTokens.Spacing3} !important`,
+  },
+  "& > *:last-child": {
+    marginBlockEnd: 0,
   },
 }));
 
@@ -224,11 +233,25 @@ const DataCard = ({
     variant,
   ]);
 
-  const cardContent = useMemo(
-    () => (
+  const cardContent = useMemo(() => {
+    const countDefinedProps = (
+      props: Array<string | ReactNode | undefined>,
+    ) => {
+      return props.filter((prop) => prop !== undefined).length;
+    };
+
+    const shouldCenterContent =
+      variant === "compact" &&
+      (!renderDetailPanel || !isDetailPanelOpen) &&
+      countDefinedProps([title, description, overline, button, children]) <= 2;
+
+    return (
       <CardInnerContainer odysseyDesignTokens={odysseyDesignTokens}>
         {(AccessoryProp || renderDetailPanel) && <Box>{Accessory}</Box>}
-        <CardImageAndContentContainer variant={variant}>
+        <CardImageAndContentContainer
+          variant={variant}
+          centerContent={shouldCenterContent}
+        >
           {image && (
             <ImageContainer
               odysseyDesignTokens={odysseyDesignTokens}
@@ -271,24 +294,23 @@ const DataCard = ({
           </CardContent>
         </CardImageAndContentContainer>
       </CardInnerContainer>
-    ),
-    [
-      odysseyDesignTokens,
-      AccessoryProp,
-      renderDetailPanel,
-      Accessory,
-      variant,
-      image,
-      menuButtonChildren,
-      overline,
-      title,
-      description,
-      button,
-      children,
-      isDetailPanelOpen,
-      row,
-    ],
-  );
+    );
+  }, [
+    odysseyDesignTokens,
+    AccessoryProp,
+    renderDetailPanel,
+    Accessory,
+    variant,
+    image,
+    menuButtonChildren,
+    overline,
+    title,
+    description,
+    button,
+    children,
+    isDetailPanelOpen,
+    row,
+  ]);
 
   return (
     <MuiCard

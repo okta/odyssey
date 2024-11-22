@@ -14,6 +14,7 @@ import styled from "@emotion/styled";
 import { memo, type ReactElement, type ReactNode } from "react";
 import { ErrorBoundary, ErrorBoundaryProps } from "react-error-boundary";
 
+import { AppSwitcher, type AppSwitcherProps } from "../AppSwitcher";
 import { SideNav, type SideNavProps } from "../SideNav";
 import { TopNav, type TopNavProps } from "../TopNav";
 import {
@@ -40,6 +41,10 @@ const StyledBannersContainer = styled("div")(() => ({
   gridArea: "banners",
 }));
 
+const StyledAppSwitcherContainer = styled("div")(() => ({
+  gridArea: "app-switcher",
+}));
+
 const StyledSideNavContainer = styled("div")(() => ({
   gridArea: "side-nav",
 }));
@@ -53,11 +58,11 @@ const StyledShellContainer = styled("div", {
   display: "grid",
   gridGap: 0,
   gridTemplateAreas: `
-    "banners banners"
-    "side-nav top-nav"
-    "side-nav app-content"
+    "banners banners banners"
+    "app-switcher side-nav top-nav"
+    "app-switcher side-nav app-content"
   `,
-  gridTemplateColumns: "auto 1fr",
+  gridTemplateColumns: "auto auto 1fr",
   gridTemplateRows: "auto auto 1fr",
   height: "100vh",
   width: "100vw",
@@ -71,6 +76,10 @@ const subComponentNames = ["TopNav", "SideNav", "AppSwitcher"] as const;
 type SubComponentName = (typeof subComponentNames)[number];
 
 export type UiShellNavComponentProps = {
+  /**
+   * Object that gets pass directly to the app switcher component.
+   */
+  appSwitcherProps?: AppSwitcherProps;
   /**
    * Object that gets pass directly to the side nav component.
    */
@@ -118,6 +127,7 @@ const UiShellContent = ({
   initialVisibleSections = ["TopNav", "SideNav", "AppSwitcher"],
   onError = console.error,
   optionalComponents,
+  appSwitcherProps,
   sideNavProps,
   topNavProps,
 }: UiShellContentProps) => {
@@ -129,6 +139,23 @@ const UiShellContent = ({
       <StyledBannersContainer>
         {optionalComponents?.banners}
       </StyledBannersContainer>
+
+      <StyledAppSwitcherContainer>
+        {
+          /* If AppSwitcher should be initially visible and we have not yet received props, render AppSwitcher in the loading state */
+          initialVisibleSections?.includes("AppSwitcher") &&
+            !appSwitcherProps && (
+              <ErrorBoundary fallback={null} onError={onError}>
+                <AppSwitcher isLoading appIcons={[]} selectedAppName="" />
+              </ErrorBoundary>
+            )
+        }
+        {appSwitcherProps && (
+          <ErrorBoundary fallback={null} onError={onError}>
+            <AppSwitcher {...appSwitcherProps} />
+          </ErrorBoundary>
+        )}
+      </StyledAppSwitcherContainer>
 
       <StyledSideNavContainer>
         {
