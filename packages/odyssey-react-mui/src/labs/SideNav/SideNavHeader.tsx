@@ -20,7 +20,7 @@ import {
 } from "../../OdysseyDesignTokensContext";
 import { SideNavLogo } from "./SideNavLogo";
 import { SideNavProps } from "./types";
-import { Heading6 } from "../../Typography";
+import { Heading5 } from "../../Typography";
 import { TOP_NAV_HEIGHT } from "../TopNav";
 
 const SideNavHeaderContainer = styled("div", {
@@ -39,7 +39,8 @@ const SideNavLogoContainer = styled("div", {
   display: "flex",
   alignItems: "center",
   height: TOP_NAV_HEIGHT,
-  padding: odysseyDesignTokens.Spacing4,
+  paddingBlock: odysseyDesignTokens.Spacing4,
+  paddingInline: odysseyDesignTokens.Spacing5,
 
   "svg, img": {
     maxHeight: "100%",
@@ -54,7 +55,8 @@ const SideNavHeadingContainer = styled("div", {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  padding: odysseyDesignTokens.Spacing4,
+  paddingBlock: odysseyDesignTokens.Spacing4,
+  paddingInline: odysseyDesignTokens.Spacing5,
   width: "100%",
 
   ["& .MuiTypography-root"]: {
@@ -93,7 +95,7 @@ const SideNavHeader = ({
       </SideNavLogoContainer>
 
       <SideNavHeadingContainer odysseyDesignTokens={odysseyDesignTokens}>
-        <Heading6 component="h2">{isLoading ? <Skeleton /> : appName}</Heading6>
+        <Heading5 component="h2">{isLoading ? <Skeleton /> : appName}</Heading5>
       </SideNavHeadingContainer>
     </SideNavHeaderContainer>
   );
