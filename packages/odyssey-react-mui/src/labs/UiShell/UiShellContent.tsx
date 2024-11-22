@@ -22,19 +22,26 @@ import {
   type DesignTokens,
 } from "../../OdysseyDesignTokensContext";
 import { useScrollState } from "./useScrollState";
+import { ContrastMode } from "../../useContrastMode";
 
 const emptySideNavItems = [] satisfies SideNavProps["sideNavItems"];
 
 const StyledAppContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "appBackgroundContrastMode",
 })<{
+  appBackgroundContrastMode: ContrastMode;
   odysseyDesignTokens: DesignTokens;
-}>(({ odysseyDesignTokens }) => ({
+}>(({ appBackgroundContrastMode, odysseyDesignTokens }) => ({
   gridArea: "app-content",
   overflowX: "hidden",
   overflowY: "auto",
   paddingBlock: odysseyDesignTokens.Spacing5,
   paddingInline: odysseyDesignTokens.Spacing8,
+  backgroundColor:
+    appBackgroundContrastMode === "highContrast"
+      ? odysseyDesignTokens.HueNeutralWhite
+      : odysseyDesignTokens.HueNeutral50,
 }));
 
 const StyledBannersContainer = styled("div")(() => ({
@@ -72,8 +79,8 @@ const StyledTopNavContainer = styled("div")(() => ({
   gridArea: "top-nav",
 }));
 
-const subComponentNames = ["TopNav", "SideNav", "AppSwitcher"] as const;
-type SubComponentName = (typeof subComponentNames)[number];
+export const subComponentNames = ["TopNav", "SideNav", "AppSwitcher"] as const;
+export type SubComponentName = (typeof subComponentNames)[number];
 
 export type UiShellNavComponentProps = {
   /**
@@ -91,6 +98,10 @@ export type UiShellNavComponentProps = {
 };
 
 export type UiShellContentProps = {
+  /**
+   * Sets the background color for the app content area.
+   */
+  appBackgroundContrastMode?: ContrastMode;
   /**
    * React app component that renders as children in the correct location of the shell.
    */
@@ -123,6 +134,7 @@ export type UiShellContentProps = {
  * If an error occurs, this will revert to only showing the app.
  */
 const UiShellContent = ({
+  appBackgroundContrastMode = "lowContrast",
   appComponent,
   initialVisibleSections = ["TopNav", "SideNav", "AppSwitcher"],
   onError = console.error,
@@ -211,8 +223,9 @@ const UiShellContent = ({
 
       <StyledAppContainer
         odysseyDesignTokens={odysseyDesignTokens}
-        tabIndex={0}
+        appBackgroundContrastMode={appBackgroundContrastMode}
         ref={scrollableContentRef}
+        tabIndex={0}
       >
         {appComponent}
       </StyledAppContainer>
