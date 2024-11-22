@@ -25,11 +25,15 @@ import { useScrollState } from "./useScrollState";
 
 const emptySideNavItems = [] satisfies SideNavProps["sideNavItems"];
 
-const StyledAppContainer = styled("div")(() => ({
+const StyledAppContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
   gridArea: "app-content",
   overflowX: "hidden",
   overflowY: "auto",
-  backgroundColor: "white",
+  backgroundColor: odysseyDesignTokens.HueNeutralWhite,
 }));
 
 const StyledBannersContainer = styled("div")(() => ({
@@ -204,7 +208,11 @@ const UiShellContent = ({
         )}
       </StyledTopNavContainer>
 
-      <StyledAppContainer tabIndex={0} ref={scrollableContentRef}>
+      <StyledAppContainer
+        odysseyDesignTokens={odysseyDesignTokens}
+        tabIndex={0}
+        ref={scrollableContentRef}
+      >
         {appComponent}
       </StyledAppContainer>
     </StyledShellContainer>
