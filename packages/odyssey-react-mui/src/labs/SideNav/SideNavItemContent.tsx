@@ -113,7 +113,7 @@ export const getBaseNavItemContentStyles = ({
     color: `${odysseyDesignTokens.TypographyColorDisabled} !important`,
   }),
 
-  "&:focus-visible, &:focus": {
+  "&:focus-visible": {
     outline: "none",
     boxShadow: `inset 0 0 0 2px ${odysseyDesignTokens.PalettePrimaryMain}`,
   },

@@ -63,7 +63,6 @@ const StyledCollapsibleContent = styled("div", {
     position: "relative",
     display: "inline-grid",
     gridTemplateColumns: DEFAULT_SIDE_NAV_WIDTH,
-    // gridTemplateRows: "max-content 1fr max-content",
     height: "100%",
     transition: `grid-template-columns ${odysseyDesignTokens.TransitionDurationMain}, opacity 300ms`,
     transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
@@ -119,7 +118,7 @@ const StyledSideNav = styled("nav", {
     "&::after": {
       backgroundColor: odysseyDesignTokens.HueNeutral200,
       content: "''",
-      height: "100%",
+      height: "100vh",
       opacity: 0,
       position: "absolute",
       right: 0,
@@ -178,6 +177,7 @@ const SideNavListContainer = styled("ul")(() => ({
   padding: 0,
   listStyle: "none",
   listStyleType: "none",
+  margin: 0,
 }));
 
 const SideNavScrollableContainer = styled("div", {
@@ -186,6 +186,7 @@ const SideNavScrollableContainer = styled("div", {
   flex: "1 1 100%",
   overflowY: "auto",
   paddingInline: odysseyDesignTokens.Spacing2,
+  scrollbarWidth: "thin",
 }));
 
 const SectionHeaderContainer = styled("li", {
@@ -223,22 +224,24 @@ const SideNavFooter = styled("div", {
 const SideNavFooterItemsContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
-  paddingBlock: odysseyDesignTokens.Spacing4,
-  // paddingBlockEnd: odysseyDesignTokens.Spacing4,
-  paddingInline: odysseyDesignTokens.Spacing5,
   display: "flex",
   flexWrap: "wrap",
   alignItems: "center",
+  paddingBlock: odysseyDesignTokens.Spacing4,
+  paddingInline: odysseyDesignTokens.Spacing5,
   fontSize: odysseyDesignTokens.TypographySizeOverline,
 
-  a: {
-    color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
+  "a, span": {
+    color: odysseyDesignTokens.HueNeutral600,
+    transition: `color ${odysseyDesignTokens.TransitionDurationMain}`,
+
+    "&:visited": {
+      color: odysseyDesignTokens.HueNeutral600,
+    },
 
     "&:hover": {
       textDecoration: "none",
-    },
-    "&:visited": {
-      color: odysseyDesignTokens.TypographyColorHeading,
+      color: odysseyDesignTokens.HueNeutral900,
     },
   },
 }));
