@@ -28,19 +28,19 @@
   "exports": {
     "./icons": {
       "types": "./dist/src/icons.generated/index.d.ts",
-      "default": "./dist/icons.js"
+      "default": "./dist/src/icons.generated/index.js"
     },
     "./labs": {
       "types": "./dist/src/labs/index.d.ts",
-      "default": "./dist/labs.js"
+      "default": "./dist/src/labs/index.js"
     },
     "./test-selectors": {
       "types": "./dist/src/test-selectors/index.d.ts",
-      "default": "./dist/test-selectors.js"
+      "default": "./dist/src/test-selectors/test-selectors.js"
     },
     ".": {
       "types": "./dist/src/index.d.ts",
-      "default": "./dist/index.js"
+      "default": "./dist/src/index.js"
     },
     "./README.md": "./README.md"
   },
@@ -49,8 +49,8 @@
     "build:cleanIconComponents": "rimraf src/icons.generated",
     "build:cleanIconsIndex": "rimraf src/icons.generated/index.ts",
     "build:generateTranslations": "tsx scripts/properties-to-ts.ts bundle",
-    "build:source": "vite build",
-    "build:types": "tsc --project tsconfig.production.json",
+    "build:source": "tsc --project tsconfig.production-code.json",
+    "build:types": "tsc --project tsconfig.production-types.json",
     "build": "yarn build:clean && yarn build:generateTranslations && yarn build:types && yarn build:source",
     "ci:coverage": "NODE_ENV=test yarn vitest --coverage --coverageReporters=text-summary",
     "dev:generateTranslations": "build:generateTranslations --watch",

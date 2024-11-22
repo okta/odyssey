@@ -5,6 +5,7 @@
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "sideEffects": false,
+  "type": "module",
   "engines": {
     "node": ">=16"
   },

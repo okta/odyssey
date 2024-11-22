@@ -18,26 +18,24 @@ import { SvgIcon, type SvgIconNoChildrenProps } from "../SvgIcon";
 export type ExternalLinkIconProps = SvgIconNoChildrenProps;
 
 const ExternalLinkIcon = forwardRef<SVGSVGElement, ExternalLinkIconProps>(
-  (props, ref) => {
-    return (
-      <SvgIcon
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        ref={ref}
-        {...props}
-      >
-        <>
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M8.293 14.293 18.586 4H10V2h10.223c.12 0 .262 0 .387.01.145.012.353.042.571.153a1.5 1.5 0 0 1 .655.656c.112.218.142.426.154.571.01.125.01.268.01.387V14h-2V5.414L9.707 15.707l-1.414-1.414Zm7.745 5.74v-7.847l2-2.042v11.89H2.024V5.966h11.828l-2.041 2H4.024v12.068h12.014Z"
-            fill="currentColor"
-          />
-        </>
-      </SvgIcon>
-    );
-  },
+  (props, ref) => (
+    <SvgIcon
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      ref={ref}
+      {...props}
+    >
+      <>
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M8.293 14.293 18.586 4H10V2h10.223c.12 0 .262 0 .387.01.145.012.353.042.571.153a1.5 1.5 0 0 1 .655.656c.112.218.142.426.154.571.01.125.01.268.01.387V14h-2V5.414L9.707 15.707l-1.414-1.414Zm7.745 5.74v-7.847l2-2.042v11.89H2.024V5.966h11.828l-2.041 2H4.024v12.068h12.014Z"
+          fill="currentColor"
+        />
+      </>
+    </SvgIcon>
+  ),
 );
 
 const MemoizedExternalLinkIcon = memo(ExternalLinkIcon);
