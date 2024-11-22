@@ -19,21 +19,21 @@ if [[ -z "$APPLITOOLS_API_KEY" ]]; then
 fi
 
 # Fetch open pull requests
-export GITHUB_RESPONSE=$(curl -s -L \
+GITHUB_RESPONSE=$(curl -s -L \
   -H "Accept: application/vnd.github+json" \
   -H "Authorization: Bearer $GITHUB_TOKEN" \
   -H "X-GitHub-Api-Version: 2022-11-28" \
   "https://api.github.com/repos/$GITHUB_ORG/$REPO/commits/$SHA/pulls")
 
-export BASE_BRANCH_NAME=$(echo $GITHUB_RESPONSE | jq -r '.[0].base.ref')
-export COMMIT_MESSAGE=$(echo $GITHUB_RESPONSE | jq -r '.[0].body')
-export PR_NUMBER=$(echo $GITHUB_RESPONSE | jq -r '.[0].number')
-export PR_TITLE=$(echo $GITHUB_RESPONSE | jq -r '.[0].title')
-export PR_URL=$(echo $GITHUB_RESPONSE | jq -r '.[0].html_url')
+BASE_BRANCH_NAME=$(echo $GITHUB_RESPONSE | jq -r '.[0].base.ref')
+COMMIT_MESSAGE=$(echo $GITHUB_RESPONSE | jq -r '.[0].body')
+PR_NUMBER=$(echo $GITHUB_RESPONSE | jq -r '.[0].number')
+PR_TITLE=$(echo $GITHUB_RESPONSE | jq -r '.[0].title')
+PR_URL=$(echo $GITHUB_RESPONSE | jq -r '.[0].html_url')
 
-export APPLITOOLS_BATCH_ID=$SHA
-export CURRENT_BRANCH_NAME=$BRANCH
-export CHROME_VERSION="126.0.6478.55"
+APPLITOOLS_BATCH_ID=$SHA
+CURRENT_BRANCH_NAME=$BRANCH
+CHROME_VERSION="126.0.6478.55"
 
 if ! setup_service google-chrome-stable ${CHROME_VERSION}-1 ; then
   echo "failure" > ${setup_chrome_status_file}
@@ -48,8 +48,8 @@ mv chromedriver-linux64 /usr/local/bin/
 chmod +x /usr/local/bin/chromedriver-linux64
 rm chromedriver-linux64.zip
 
-export COMMAND=$(yarn workspace @okta/odyssey-storybook ci:visualRegressionTest)
-export EXIT_CODE=$?
+COMMAND=$(yarn workspace @okta/odyssey-storybook ci:visualRegressionTest)
+EXIT_CODE=$?
 
 if [[ $EXIT_CODE -ne 0 ]]; then
   echo "Applitools Visual Regression Tests failed! Exiting..."
