@@ -10,14 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, waitFor, within } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import { Pagination } from "./Pagination";
 
 describe("Pagination", () => {
   it("renders the expected controls in 'paged' variant", () => {
     const onPaginationChange = vi.fn();
-    render(
+
+    const { container } = render(
       <Pagination
         currentPageLabel="Page"
         nextLabel="Next page"
@@ -33,19 +34,24 @@ describe("Pagination", () => {
       />,
     );
 
-    expect(screen.getByLabelText("Rows per page")).toBeInTheDocument();
-    expect(screen.getByLabelText("Page")).toBeInTheDocument();
-    expect(screen.getByLabelText("Previous page")).toBeInTheDocument();
-    expect(screen.getByLabelText("Next page")).toBeInTheDocument();
+    expect(
+      within(container).getByLabelText("Rows per page"),
+    ).toBeInTheDocument();
+    expect(within(container).getByLabelText("Page")).toBeInTheDocument();
+    expect(
+      within(container).getByLabelText("Previous page"),
+    ).toBeInTheDocument();
+    expect(within(container).getByLabelText("Next page")).toBeInTheDocument();
     // Temporarily disabled while we figure out why i18n string interpolation
     // isn't playing nicely with testing-library. Can confirm this works properly
     // via VRT results
-    // expect(screen.getByText("1-10 of 100")).toBeInTheDocument();
+    // expect(within(container).getByText("1-10 of 100")).toBeInTheDocument();
   });
 
   it("calls onPaginationChange with correct pageIndex when clicking next", async () => {
     const onPaginationChange = vi.fn();
-    render(
+
+    const { container } = render(
       <Pagination
         currentPageLabel="Page"
         nextLabel="Next page"
@@ -61,7 +67,7 @@ describe("Pagination", () => {
       />,
     );
 
-    await userEvent.click(screen.getByLabelText("Next page"));
+    await userEvent.click(within(container).getByLabelText("Next page"));
 
     await waitFor(() => {
       expect(onPaginationChange).toHaveBeenCalledWith({
@@ -73,7 +79,8 @@ describe("Pagination", () => {
 
   it("calls onPaginationChange with correct pageIndex when clicking previous", async () => {
     const onPaginationChange = vi.fn();
-    render(
+
+    const { container } = render(
       <Pagination
         currentPageLabel="Page"
         nextLabel="Next page"
@@ -89,7 +96,7 @@ describe("Pagination", () => {
       />,
     );
 
-    await userEvent.click(screen.getByLabelText("Previous page"));
+    await userEvent.click(within(container).getByLabelText("Previous page"));
 
     await waitFor(() => {
       expect(onPaginationChange).toHaveBeenCalledWith({
@@ -101,7 +108,8 @@ describe("Pagination", () => {
 
   it("disables previous button on first page", () => {
     const onPaginationChange = vi.fn();
-    render(
+
+    const { container } = render(
       <Pagination
         currentPageLabel="Page"
         nextLabel="Next page"
@@ -117,12 +125,13 @@ describe("Pagination", () => {
       />,
     );
 
-    expect(screen.getByLabelText("Previous page")).toBeDisabled();
+    expect(within(container).getByLabelText("Previous page")).toBeDisabled();
   });
 
   it("disables next button on last page", () => {
     const onPaginationChange = vi.fn();
-    render(
+
+    const { container } = render(
       <Pagination
         currentPageLabel="Page"
         nextLabel="Next page"
@@ -138,13 +147,13 @@ describe("Pagination", () => {
       />,
     );
 
-    expect(screen.getByLabelText("Next page")).toBeDisabled();
+    expect(within(container).getByLabelText("Next page")).toBeDisabled();
   });
 
   it("updates pageIndex when entering a new page number", async () => {
     const onPaginationChange = vi.fn();
 
-    render(
+    const { container } = render(
       <Pagination
         currentPageLabel="Page"
         nextLabel="Next page"
@@ -160,9 +169,9 @@ describe("Pagination", () => {
       />,
     );
 
-    const pageElement = await screen.findByLabelText("Page")
+    const pageElement = await within(container).findByLabelText("Page");
 
-    await userEvent.click(pageElement);
+    await userEvent.tripleClick(pageElement);
     await userEvent.keyboard("5");
     await userEvent.click(document.body);
 
@@ -176,7 +185,8 @@ describe("Pagination", () => {
 
   it("updates pageSize when entering a new rows per page value", async () => {
     const onPaginationChange = vi.fn();
-    render(
+
+    const { container } = render(
       <Pagination
         currentPageLabel="Page"
         nextLabel="Next page"
@@ -192,9 +202,10 @@ describe("Pagination", () => {
       />,
     );
 
-    const rowsPerPageInput = await screen.findByLabelText("Rows per page");
+    const rowsPerPageInput =
+      await within(container).findByLabelText("Rows per page");
 
-    await userEvent.click(rowsPerPageInput);
+    await userEvent.tripleClick(rowsPerPageInput);
     await userEvent.keyboard("20");
     await userEvent.click(document.body);
 
@@ -208,7 +219,8 @@ describe("Pagination", () => {
 
   it("renders 'Load more' button in 'loadMore' variant", () => {
     const onPaginationChange = vi.fn();
-    render(
+
+    const { container } = render(
       <Pagination
         loadMoreLabel="Load more"
         onPaginationChange={onPaginationChange}
@@ -219,12 +231,13 @@ describe("Pagination", () => {
       />,
     );
 
-    expect(screen.getByText("Load more")).toBeInTheDocument();
+    expect(within(container).getByText("Load more")).toBeInTheDocument();
   });
 
   it("calls onPaginationChange with increased pageSize when clicking 'Load more'", async () => {
     const onPaginationChange = vi.fn();
-    render(
+
+    const { container } = render(
       <Pagination
         loadMoreLabel="Load more"
         onPaginationChange={onPaginationChange}
@@ -235,7 +248,7 @@ describe("Pagination", () => {
       />,
     );
 
-    await userEvent.click(screen.getByText("Load more"));
+    await userEvent.click(within(container).getByText("Load more"));
 
     await waitFor(() => {
       expect(onPaginationChange).toHaveBeenCalledWith({
@@ -247,7 +260,8 @@ describe("Pagination", () => {
 
   it("disables 'Load more' button when isMoreDisabled is true", () => {
     const onPaginationChange = vi.fn();
-    render(
+
+    const { container } = render(
       <Pagination
         loadMoreLabel="Load more"
         onPaginationChange={onPaginationChange}
@@ -259,12 +273,13 @@ describe("Pagination", () => {
       />,
     );
 
-    expect(screen.getByText("Load more")).toBeDisabled();
+    expect(within(container).getByText("Load more")).toBeDisabled();
   });
 
   it("disables 'Next page' button when isMoreDisabled is true", () => {
     const onPaginationChange = vi.fn();
-    render(
+
+    const { container } = render(
       <Pagination
         currentPageLabel="Page"
         nextLabel="Next page"
@@ -281,12 +296,13 @@ describe("Pagination", () => {
       />,
     );
 
-    expect(screen.getByLabelText("Next page")).toBeDisabled();
+    expect(within(container).getByLabelText("Next page")).toBeDisabled();
   });
 
   it("disables all controls when isDisabled is true", () => {
     const onPaginationChange = vi.fn();
-    render(
+
+    const { container } = render(
       <Pagination
         currentPageLabel="Page"
         nextLabel="Next page"
@@ -303,9 +319,9 @@ describe("Pagination", () => {
       />,
     );
 
-    expect(screen.getByLabelText("Rows per page")).toBeDisabled();
-    expect(screen.getByLabelText("Page")).toBeDisabled();
-    expect(screen.getByLabelText("Previous page")).toBeDisabled();
-    expect(screen.getByLabelText("Next page")).toBeDisabled();
+    expect(within(container).getByLabelText("Rows per page")).toBeDisabled();
+    expect(within(container).getByLabelText("Page")).toBeDisabled();
+    expect(within(container).getByLabelText("Previous page")).toBeDisabled();
+    expect(within(container).getByLabelText("Next page")).toBeDisabled();
   });
 });

@@ -72,8 +72,8 @@ const StyledTopNavContainer = styled("div")(() => ({
   gridArea: "top-nav",
 }));
 
-const subComponentNames = ["TopNav", "SideNav", "AppSwitcher"] as const;
-type SubComponentName = (typeof subComponentNames)[number];
+export const subComponentNames = ["TopNav", "SideNav", "AppSwitcher"] as const;
+export type SubComponentName = (typeof subComponentNames)[number];
 
 export type UiShellNavComponentProps = {
   /**
@@ -211,8 +211,8 @@ const UiShellContent = ({
 
       <StyledAppContainer
         odysseyDesignTokens={odysseyDesignTokens}
-        tabIndex={0}
         ref={scrollableContentRef}
+        tabIndex={0}
       >
         {appComponent}
       </StyledAppContainer>
