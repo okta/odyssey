@@ -8,7 +8,7 @@ get_terminus_secret "/" AWS_ACCESS_KEY_ID AWS_ACCESS_KEY_ID
 get_terminus_secret "/" AWS_SECRET_ACCESS_KEY AWS_SECRET_ACCESS_KEY
 get_terminus_secret "/" AWS_REGION AWS_REGION
 
-export URL_STORYBOOK="https://${SHA}.ods.dev"
+URL_STORYBOOK="https://${SHA}.ods.dev"
 echo $URL_STORYBOOK
 
 # Build all packages except Storybook because it's excluded.
