@@ -184,9 +184,8 @@ const SideNavScrollableContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
   flex: "1 1 100%",
-  overflowY: "auto",
+  overflowY: "scroll",
   paddingInline: odysseyDesignTokens.Spacing2,
-  scrollbarWidth: "thin",
 }));
 
 const SectionHeaderContainer = styled("li", {
@@ -203,7 +202,7 @@ const SideNavFooter = styled("div", {
     prop !== "isContentScrollable" && prop !== "odysseyDesignTokens",
 })(
   ({
-    isContentScrollable,
+    // isContentScrollable,
     odysseyDesignTokens,
   }: {
     isContentScrollable: boolean;
@@ -214,10 +213,10 @@ const SideNavFooter = styled("div", {
     transitionDuration: odysseyDesignTokens.TransitionDurationMain,
     transitionTiming: odysseyDesignTokens.TransitionTimingMain,
     backgroundColor: odysseyDesignTokens.HueNeutralWhite,
-    // The box shadow should appear above the footer only if the scrollable region has overflow
-    ...(isContentScrollable && {
-      boxShadow: "0px -8px 8px -8px rgba(39, 39, 39, 0.08)",
-    }),
+    // // The box shadow should appear above the footer only if the scrollable region has overflow
+    // ...(isContentScrollable && {
+    //   boxShadow: "0px -8px 8px -8px rgba(39, 39, 39, 0.08)",
+    // }),
   }),
 );
 
@@ -227,8 +226,7 @@ const SideNavFooterItemsContainer = styled("div", {
   display: "flex",
   flexWrap: "wrap",
   alignItems: "center",
-  paddingBlock: odysseyDesignTokens.Spacing4,
-  paddingInline: odysseyDesignTokens.Spacing5,
+  padding: odysseyDesignTokens.Spacing4,
   fontSize: odysseyDesignTokens.TypographySizeOverline,
 
   "a, span": {
@@ -654,23 +652,23 @@ const SideNav = ({
                       }
                     })}
               </SideNavListContainer>
+              {!isLoading && (footerItems || hasCustomFooter) && (
+                <SideNavFooter
+                  odysseyDesignTokens={odysseyDesignTokens}
+                  isContentScrollable={isContentScrollable}
+                >
+                  {hasCustomFooter
+                    ? footerComponent
+                    : footerItems && (
+                        <SideNavFooterItemsContainer
+                          odysseyDesignTokens={odysseyDesignTokens}
+                        >
+                          <SideNavFooterContent footerItems={footerItems} />
+                        </SideNavFooterItemsContainer>
+                      )}
+                </SideNavFooter>
+              )}
             </SideNavScrollableContainer>
-            {!isLoading && (footerItems || hasCustomFooter) && (
-              <SideNavFooter
-                odysseyDesignTokens={odysseyDesignTokens}
-                isContentScrollable={isContentScrollable}
-              >
-                {hasCustomFooter
-                  ? footerComponent
-                  : footerItems && (
-                      <SideNavFooterItemsContainer
-                        odysseyDesignTokens={odysseyDesignTokens}
-                      >
-                        <SideNavFooterContent footerItems={footerItems} />
-                      </SideNavFooterItemsContainer>
-                    )}
-              </SideNavFooter>
-            )}
           </StyledOpacityTransitionContainer>
         </StyledCollapsibleContent>
       </OdysseyThemeProvider>
