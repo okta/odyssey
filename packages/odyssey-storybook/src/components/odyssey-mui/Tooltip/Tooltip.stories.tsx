@@ -16,7 +16,6 @@ import {
   Status,
   Tag,
   Tooltip,
-  TooltipProps,
 } from "@okta/odyssey-react-mui";
 import { DownloadIcon } from "@okta/odyssey-react-mui/icons";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -29,7 +28,7 @@ const storybookMeta: Meta<typeof Tooltip> = {
   component: Tooltip,
   argTypes: {
     children: {
-      control: "obj",
+      control: "object",
       description: "The content that will trigger the tooltip",
       table: {
         type: {

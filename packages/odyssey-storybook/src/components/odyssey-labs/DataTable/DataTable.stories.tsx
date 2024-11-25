@@ -56,7 +56,6 @@ const storybookMeta: Meta<DataTableMetaProps> = {
   component: DataView,
   argTypes: {
     getData: {
-      // control: null,
       table: {
         type: {
           summary: "",
@@ -64,7 +63,6 @@ const storybookMeta: Meta<DataTableMetaProps> = {
       },
     },
     getRowId: {
-      // control: null,
       table: {
         type: {
           summary: "",
@@ -83,7 +81,6 @@ const storybookMeta: Meta<DataTableMetaProps> = {
       control: "boolean",
     },
     onReorderRows: {
-      // control: null,
       table: {
         type: {
           summary: "",
@@ -94,10 +91,8 @@ const storybookMeta: Meta<DataTableMetaProps> = {
       control: "boolean",
     },
     onChangeRowSelection: {
-      // control: null,
     },
     bulkActionMenuItems: {
-      // control: null,
     },
     hasPagination: {
       control: "boolean",
@@ -125,7 +120,6 @@ const storybookMeta: Meta<DataTableMetaProps> = {
       control: "boolean",
     },
     filters: {
-      // control: null,
     },
     searchDelayTime: {
       control: "number",
@@ -134,13 +128,10 @@ const storybookMeta: Meta<DataTableMetaProps> = {
       control: "text",
     },
     emptyPlaceholder: {
-      // control: null,
     },
     noResultsPlaceholder: {
-      // control: null,
     },
     columns: {
-      // control: null,
     },
     initialDensity: {
       control: "select",
@@ -156,13 +147,10 @@ const storybookMeta: Meta<DataTableMetaProps> = {
       control: "boolean",
     },
     renderDetailPanel: {
-      // control: null,
     },
     rowActionButtons: {
-      // control: null,
     },
     tableRowActionMenuItems: {
-      // control: null,
     },
     hasSorting: {
       control: "boolean",

@@ -25,7 +25,6 @@ const storybookMeta: Meta<DataFiltersProps> = {
   component: DataFilters,
   argTypes: {
     onChangeSearch: {
-      // control: null,
       description: "",
       table: {
         type: {
@@ -34,7 +33,6 @@ const storybookMeta: Meta<DataFiltersProps> = {
       },
     },
     onChangeFilters: {
-      // control: null,
       description: "",
       table: {
         type: {
@@ -70,7 +68,6 @@ const storybookMeta: Meta<DataFiltersProps> = {
       },
     },
     additionalActions: {
-      // control: null,
       description: "",
       table: {
         type: {
@@ -79,7 +76,6 @@ const storybookMeta: Meta<DataFiltersProps> = {
       },
     },
     filters: {
-      // control: null,
       description: "",
       table: {
         type: {

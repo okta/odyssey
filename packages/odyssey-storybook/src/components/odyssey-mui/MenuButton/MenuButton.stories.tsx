@@ -113,7 +113,7 @@ const storybookMeta: Meta<typeof MenuButton> = {
       },
     },
     children: {
-      control: "obj",
+      control: "object",
       description: "The <MenuItem> components within the Menu",
       table: {
         type: {
@@ -127,7 +127,7 @@ const storybookMeta: Meta<typeof MenuButton> = {
       },
     },
     popoverContent: {
-      control: "obj",
+      control: "object",
       description:
         "The contents to display in the popover (instead of children)",
       table: {

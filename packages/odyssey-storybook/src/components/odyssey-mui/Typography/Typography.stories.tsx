@@ -57,7 +57,6 @@ const storybookMeta: Meta<TypographyProps> = {
   },
   argTypes: {
     ariaDescribedBy: {
-      // control: null,
       description: "The ID of the element that describes the component.",
       table: {
         type: {
@@ -75,7 +74,6 @@ const storybookMeta: Meta<TypographyProps> = {
       },
     },
     ariaLabelledBy: {
-      // control: null,
       description: "The ID of the element that labels the component.",
       table: {
         type: {
@@ -107,7 +105,6 @@ const storybookMeta: Meta<TypographyProps> = {
       },
     },
     component: {
-      // control: null,
       description:
         "The HTML element the component should render, if different from the default",
       table: {

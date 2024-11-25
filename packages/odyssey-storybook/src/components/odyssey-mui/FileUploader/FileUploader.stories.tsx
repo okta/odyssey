@@ -66,7 +66,6 @@ const storybookMeta: Meta<typeof FileUploader> = {
       },
     },
     onChange: {
-      // control: null,
       description: "Callback fired when a file is uploaded or deleted",
       table: {
         type: {

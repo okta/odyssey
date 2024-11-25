@@ -54,7 +54,7 @@ const storybookMeta: Meta<SwitchProps> = {
           summary: "boolean",
         },
         defaultValue: {
-          summary: false,
+          summary: "false",
         },
       },
     },

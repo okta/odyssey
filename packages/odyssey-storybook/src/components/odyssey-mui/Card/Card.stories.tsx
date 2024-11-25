@@ -56,7 +56,6 @@ const storybookMeta: Meta<CardProps> = {
       },
     },
     image: {
-      // control: null,
       description:
         "An optional image or icon at the top of the card, preferably as an img or svg element.",
       table: {
@@ -67,7 +66,6 @@ const storybookMeta: Meta<CardProps> = {
       },
     },
     onClick: {
-      // control: null,
       description: "The event handler for when the user clicks the card.",
       table: {
         type: {
@@ -77,7 +75,6 @@ const storybookMeta: Meta<CardProps> = {
       },
     },
     button: {
-      // control: null,
       description:
         "The main action button for the card. Not valid if the card itself is clickable.",
       table: {
@@ -88,7 +85,6 @@ const storybookMeta: Meta<CardProps> = {
       },
     },
     menuButtonChildren: {
-      // control: null,
       description:
         "Menu items to be rendered in the card's optional menu button. If this prop is undefined, the menu button will not be shown. Not valid if the card itself is clickable.",
       table: {

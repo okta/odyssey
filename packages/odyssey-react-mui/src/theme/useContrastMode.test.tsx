@@ -126,25 +126,15 @@ describe("useContrastMode and related functions", () => {
     });
 
     it("should clean up observers and event listeners on unmount", () => {
-      const disconnect = vi.fn();
-      const observe = vi.fn();
+      const observeSpy = vi.spyOn(MutationObserver.prototype, 'observe').mockImplementation(vi.fn());
+      const disconnectSpy = vi.spyOn(MutationObserver.prototype, 'disconnect').mockImplementation(vi.fn());
+      const takeRecordsSpy = vi.spyOn(MutationObserver.prototype, 'takeRecords').mockImplementation(vi.fn());
+
       const addEventListenerSpy = vi.spyOn(document, "addEventListener");
       const removeEventListenerSpy = vi.spyOn(
         document,
         "removeEventListener",
       );
-
-      const mockMutationObserver = vi.fn<
-        MutationObserver,
-        [MutationCallback]
-      >(() => ({
-        disconnect,
-        observe,
-        takeRecords: vi.fn(),
-      }));
-
-      const originalMutationObserver = global.MutationObserver;
-      global.MutationObserver = mockMutationObserver;
 
       const TestComponent = () => {
         const { contrastContainerRef } = useContrastMode({});
@@ -159,15 +149,18 @@ describe("useContrastMode and related functions", () => {
 
       unmount();
 
-      expect(disconnect).toHaveBeenCalled();
+      expect(disconnectSpy).toHaveBeenCalled();
       expect(removeEventListenerSpy).toHaveBeenCalledWith(
         "transitionend",
         expect.any(Function),
       );
 
-      global.MutationObserver = originalMutationObserver;
       addEventListenerSpy.mockRestore();
       removeEventListenerSpy.mockRestore();
+
+      disconnectSpy.mockRestore()
+      observeSpy.mockRestore()
+      takeRecordsSpy.mockRestore()
     });
   });
 

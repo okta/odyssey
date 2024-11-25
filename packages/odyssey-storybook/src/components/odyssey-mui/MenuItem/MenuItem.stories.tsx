@@ -23,7 +23,7 @@ const storybookMeta: Meta<typeof MenuItem> = {
   component: MenuItem,
   argTypes: {
     children: {
-      control: "obj",
+      control: "object",
       description: "The content for the `MenuItem` components within the Menu",
       table: {
         type: {

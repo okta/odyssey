@@ -58,7 +58,6 @@ const storybookMeta: Meta<UiShellProps> = {
       },
     },
     onError: {
-      control: "function",
       description:
         'Notifies when a React rendering error occurs. This could be useful for logging, flagging "p0"s, and recovering UI Shell when errors occur.',
       table: {
@@ -69,7 +68,6 @@ const storybookMeta: Meta<UiShellProps> = {
       },
     },
     onSubscriptionCreated: {
-      control: "function",
       description:
         "Notifies when subscribed to prop changes. UI Shell listens to prop updates, and it won't subscribe synchronously. Because of that, this callback notifies when that subscription is ready.",
       table: {
@@ -79,7 +77,6 @@ const storybookMeta: Meta<UiShellProps> = {
       },
     },
     optionalComponents: {
-      // control: null,
       description:
         "Components that will render as children of various other components such as the top nav or side nav.",
       table: {
@@ -89,7 +86,6 @@ const storybookMeta: Meta<UiShellProps> = {
       },
     },
     subscribeToPropChanges: {
-      control: "function",
       description:
         "This is a callback that provides a subscriber callback to listen for changes to state. It allows UI Shell to listen for state changes. The props coming in this callback go directly to a React state; therefore, it shares the same signature and provides a previous state.",
       table: {

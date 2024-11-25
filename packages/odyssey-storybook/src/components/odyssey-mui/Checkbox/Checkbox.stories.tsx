@@ -12,7 +12,6 @@
 
 import {
   Checkbox,
-  CheckboxProps,
   checkboxValidityValues,
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
@@ -22,10 +21,9 @@ import { expect } from "@storybook/test";
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { axeRun } from "../../../axe-util";
-import type { PlaywrightProps } from "../storybookTypes";
 import { ChangeEvent, useCallback, useState } from "react";
 
-const storybookMeta: Meta<typeof Checkbox> = {
+const meta = {
   title: "MUI Components/Forms/Checkbox",
   component: Checkbox,
   argTypes: {
@@ -84,7 +82,7 @@ const storybookMeta: Meta<typeof Checkbox> = {
           summary: "boolean",
         },
         defaultValue: {
-          summary: false,
+          summary: "false",
         },
       },
     },
@@ -117,7 +115,6 @@ const storybookMeta: Meta<typeof Checkbox> = {
     },
     name: fieldComponentPropsMetaData.name,
     onChange: {
-      // control: null,
       description: "Callback fired when the checkbox value changes",
       table: {
         type: {
@@ -126,7 +123,6 @@ const storybookMeta: Meta<typeof Checkbox> = {
       },
     },
     onBlur: {
-      // control: null,
       description: "Callback fired when the blur event happens",
       table: {
         type: {
@@ -160,37 +156,38 @@ const storybookMeta: Meta<typeof Checkbox> = {
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
-};
+} satisfies Meta<typeof Checkbox>;
 
-export default storybookMeta;
+export default meta;
+
+type Story = StoryObj<typeof meta>
 
 const checkTheBox =
-  ({ canvasElement, step }: PlaywrightProps<CheckboxProps>) =>
-  async (actionName: string) => {
-    await step("check the box", async ({ args }) => {
-      const canvas = within(canvasElement);
-      const checkBox = canvas.getByRole("checkbox");
-      if (checkBox) {
-        await userEvent.click(checkBox);
-      }
-      await userEvent.tab();
-      await expect(checkBox).toBeChecked();
-      await expect(args.onBlur).toHaveBeenCalledTimes(1);
-      await axeRun(actionName);
-    });
-  };
+  (actionName: string): Story["play"] => (
+    ({ canvasElement, step }) => (
+      step("check the box", async ({ args }) => {
+        const canvas = within(canvasElement);
+        const checkBox = canvas.getByRole("checkbox");
+        if (checkBox) {
+          await userEvent.click(checkBox);
+        }
+        await userEvent.tab();
+        await expect(checkBox).toBeChecked();
+        await expect(args.onBlur).toHaveBeenCalledTimes(1);
+        await axeRun(actionName);
+      })
+    )
+  )
 
-export const Default: StoryObj<typeof Checkbox> = {
+export const Default: Story = {
   args: {
     label: "Enable warp drive recalibration",
     isDefaultChecked: false,
   },
-  play: async ({ canvasElement, step }) => {
-    await checkTheBox({ canvasElement, step })("Checkbox Default");
-  },
+  play: checkTheBox("Checkbox Default"),
 };
 
-export const Required: StoryObj<typeof Checkbox> = {
+export const Required: Story = {
   parameters: {
     docs: {
       description: {
@@ -204,19 +201,17 @@ export const Required: StoryObj<typeof Checkbox> = {
     isRequired: true,
     isDefaultChecked: false,
   },
-  play: async ({ canvasElement, step }) => {
-    await checkTheBox({ canvasElement, step })("Checkbox Required");
-  },
+  play: checkTheBox("Checkbox Required"),
 };
 
-export const Checked: StoryObj<typeof Checkbox> = {
+export const Checked: Story = {
   args: {
     label: "Automatically assign Okta Admin Console",
     isDefaultChecked: true,
   },
 };
 
-export const Disabled: StoryObj<typeof Checkbox> = {
+export const Disabled: Story = {
   parameters: {
     docs: {
       description: {
@@ -232,7 +227,7 @@ export const Disabled: StoryObj<typeof Checkbox> = {
   },
 };
 
-export const Indeterminate: StoryObj<typeof Checkbox> = {
+export const Indeterminate: Story = {
   parameters: {
     docs: {
       description: {
@@ -248,29 +243,25 @@ export const Indeterminate: StoryObj<typeof Checkbox> = {
   },
 };
 
-export const Invalid: StoryObj<typeof Checkbox> = {
+export const Invalid: Story = {
   args: {
     label: "Automatically assign Okta Admin Console",
     validity: "invalid",
     isDefaultChecked: false,
   },
-  play: async ({ canvasElement, step }) => {
-    await checkTheBox({ canvasElement, step })("Checkbox Disabled");
-  },
+  play: checkTheBox("Checkbox Disabled"),
 };
 
-export const ReadOnly: StoryObj<typeof Checkbox> = {
+export const ReadOnly: Story = {
   args: {
     label: "Automatically assign Okta Admin Console",
     isReadOnly: true,
     isDefaultChecked: true,
   },
-  play: async ({ canvasElement, step }) => {
-    await checkTheBox({ canvasElement, step })("ReadOnly Checkbox");
-  },
+  play: checkTheBox("ReadOnly Checkbox"),
 };
 
-export const Hint: StoryObj<typeof Checkbox> = {
+export const Hint: Story = {
   parameters: {
     docs: {
       description: {
@@ -282,12 +273,10 @@ export const Hint: StoryObj<typeof Checkbox> = {
     label: "I agree to the terms and conditions",
     hint: "Really helpful hint",
   },
-  play: async ({ canvasElement, step }) => {
-    await checkTheBox({ canvasElement, step })("Checkbox Hint");
-  },
+  play: checkTheBox("Checkbox Hint"),
 };
 
-export const Controlled: StoryObj<typeof Checkbox> = {
+export const Controlled: Story = {
   parameters: {
     docs: {
       description: {

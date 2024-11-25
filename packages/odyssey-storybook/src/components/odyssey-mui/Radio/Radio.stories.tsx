@@ -59,7 +59,7 @@ const storybookMeta: Meta<RadioProps> = {
           summary: "boolean",
         },
         defaultValue: {
-          summary: false,
+          summary: "false",
         },
       },
     },
@@ -77,7 +77,6 @@ const storybookMeta: Meta<RadioProps> = {
       },
     },
     onChange: {
-      // control: null,
       description: "Callback fired when the the radio button value changes",
       table: {
         type: {
@@ -86,7 +85,6 @@ const storybookMeta: Meta<RadioProps> = {
       },
     },
     onBlur: {
-      // control: null,
       description: "Callback fired when the blur event happens",
       table: {
         type: {

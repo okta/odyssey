@@ -80,7 +80,7 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
           summary: "boolean",
         },
         defaultValue: {
-          summary: false,
+          summary: "false",
         },
       },
     },
@@ -94,7 +94,6 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
       },
     },
     onChange: {
-      // control: null,
       description: "Callback fired when the active tab is changed",
       table: {
         type: {

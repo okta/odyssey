@@ -38,10 +38,8 @@ const storybookMeta: Meta = {
       },
     },
     getRowId: {
-      control: "function",
     },
     fetchMoreData: {
-      control: "function",
     },
     hasError: {
       control: "boolean",
@@ -56,13 +54,10 @@ const storybookMeta: Meta = {
       control: "boolean",
     },
     onGlobalFilterChange: {
-      control: "function",
     },
     onPaginationChange: {
-      control: "function",
     },
     onRowSelectionChange: {
-      control: "function",
     },
     state: {
       control: "object",

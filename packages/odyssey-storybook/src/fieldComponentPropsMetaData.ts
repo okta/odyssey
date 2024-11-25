@@ -71,7 +71,7 @@ export const fieldComponentPropsMetaData: Partial<
         summary: "boolean",
       },
       defaultValue: {
-        summary: false,
+        summary: "false",
       },
     },
   },
@@ -84,7 +84,7 @@ export const fieldComponentPropsMetaData: Partial<
         summary: "boolean",
       },
       defaultValue: {
-        summary: false,
+        summary: "false",
       },
     },
   },
@@ -96,7 +96,7 @@ export const fieldComponentPropsMetaData: Partial<
         summary: "boolean",
       },
       defaultValue: {
-        summary: false,
+        summary: "false",
       },
     },
   },

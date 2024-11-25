@@ -10,14 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { AppSwitcher } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react";
+import { expect, within } from "@storybook/test";
+
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { AppSwitcher, AppSwitcherProps } from "@okta/odyssey-react-mui/labs";
-import { expect } from "@storybook/jest";
-import { within } from "@storybook/testing-library";
 import { PlaywrightProps } from "../../odyssey-mui/storybookTypes";
 
-const storybookMeta: Meta<AppSwitcherProps> = {
+const meta = {
   title: "Labs Components/AppSwitcher",
   component: AppSwitcher,
   argTypes: {
@@ -44,11 +44,11 @@ const storybookMeta: Meta<AppSwitcherProps> = {
   parameters: {
     layout: "fullscreen",
   },
-};
+} satisfies Meta<typeof AppSwitcher>;
 
-export default storybookMeta;
+export default meta;
 
-type Story = StoryObj<AppSwitcherProps>;
+type Story = StoryObj<typeof meta>;
 
 export const AllApps: Story = {
   args: {
@@ -85,7 +85,7 @@ export const AllApps: Story = {
       </div>
     );
   },
-  play: async ({ canvasElement, step }: PlaywrightProps<AppSwitcherProps>) => {
+  play: async ({ canvasElement, step }: PlaywrightProps<typeof AppSwitcher>) => {
     const canvas = within(canvasElement);
 
     await step("App switcher shows all items", async () => {
@@ -118,7 +118,7 @@ export const NoApps: Story = {
       </div>
     );
   },
-  play: async ({ canvasElement, step }: PlaywrightProps<AppSwitcherProps>) => {
+  play: async ({ canvasElement, step }: PlaywrightProps<typeof AppSwitcher>) => {
     const canvas = within(canvasElement);
 
     await step("App switcher shows no items, but is loaded", async () => {
@@ -142,7 +142,7 @@ export const Loading: Story = {
       </div>
     );
   },
-  play: async ({ canvasElement, step }: PlaywrightProps<AppSwitcherProps>) => {
+  play: async ({ canvasElement, step }: PlaywrightProps<typeof AppSwitcher>) => {
     const canvas = within(canvasElement);
 
     await step("App switcher shows no items, but is loaded", async () => {

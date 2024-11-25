@@ -53,7 +53,6 @@ const storybookMeta: Meta<ButtonProps> = {
       table: { type: { summary: "string" } },
     },
     id: {
-      // control: null,
       description: "An optional ID for the button",
       table: { type: { summary: "string" } },
     },

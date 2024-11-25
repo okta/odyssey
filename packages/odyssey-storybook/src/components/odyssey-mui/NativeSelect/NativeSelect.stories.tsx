@@ -23,7 +23,6 @@ const storybookMeta: Meta<typeof NativeSelect> = {
   component: NativeSelect,
   argTypes: {
     children: {
-      // control: null,
       description:
         "The options or optgroup elements within the native select component",
       table: {
@@ -59,7 +58,7 @@ const storybookMeta: Meta<typeof NativeSelect> = {
           summary: "boolean",
         },
         defaultValue: {
-          summary: false,
+          summary: "false",
         },
       },
     },
@@ -78,7 +77,6 @@ const storybookMeta: Meta<typeof NativeSelect> = {
       },
     },
     onBlur: {
-      // control: null,
       description:
         "Callback fired when the native select component loses focus",
       table: {
@@ -88,7 +86,6 @@ const storybookMeta: Meta<typeof NativeSelect> = {
       },
     },
     onChange: {
-      // control: null,
       description:
         "Callback fired when the value of the native select component changes",
       table: {
@@ -98,7 +95,6 @@ const storybookMeta: Meta<typeof NativeSelect> = {
       },
     },
     onFocus: {
-      // control: null,
       description:
         "Callback fired when the native select component gains focus",
       table: {

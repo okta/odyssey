@@ -107,7 +107,7 @@ const optionsGrouped: SelectProps<string | string[], boolean>["options"] = [
   "Date",
 ];
 
-const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
+const meta = {
   title: "MUI Components/Forms/Select",
   component: Select,
   argTypes: {
@@ -134,7 +134,7 @@ const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
           summary: "boolean",
         },
         defaultValue: {
-          summary: false,
+          summary: "false",
         },
       },
     },
@@ -160,7 +160,6 @@ const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
     },
     name: fieldComponentPropsMetaData.name,
     onBlur: {
-      // control: null,
       description: "Callback fired when the select component loses focus",
       table: {
         type: {
@@ -169,7 +168,6 @@ const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
       },
     },
     onChange: {
-      // control: null,
       description:
         "Callback fired when the value of the select component changes",
       table: {
@@ -179,7 +177,6 @@ const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
       },
     },
     onFocus: {
-      // control: null,
       description: "Callback fired when the select component gains focus",
       table: {
         type: {
@@ -219,11 +216,13 @@ const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
-};
+} satisfies Meta<typeof Select>;
 
-export default storybookMeta;
+export default meta;
 
-export const Default: StoryObj<typeof Select> = {
+type Story = StoryObj<typeof meta>
+
+export const Default: Story = {
   args: { defaultValue: "" },
   play: async ({ canvasElement, step }) => {
     await step("Select Roles and permissions from the listbox", async () => {
@@ -246,7 +245,7 @@ export const Default: StoryObj<typeof Select> = {
   },
 };
 
-export const DefaultValue: StoryObj<typeof Select> = {
+export const DefaultValue: Story = {
   args: {
     defaultValue: "Roles and permissions",
   },
@@ -293,13 +292,13 @@ export const DefaultValue: StoryObj<typeof Select> = {
   },
 };
 
-export const Disabled: StoryObj<typeof Select> = {
+export const Disabled: Story = {
   args: {
     isDisabled: true,
     defaultValue: "",
   },
 };
-export const Error: StoryObj<typeof Select> = {
+export const Error: Story = {
   args: {
     errorMessage: "Select a topic.",
     defaultValue: "",
@@ -311,7 +310,7 @@ export const Error: StoryObj<typeof Select> = {
   },
 };
 
-export const ErrorsList: StoryObj<typeof Select> = {
+export const ErrorsList: Story = {
   args: {
     isMultiSelect: true,
     errorMessage: "Select a topic.",
@@ -328,19 +327,19 @@ export const ErrorsList: StoryObj<typeof Select> = {
   },
 };
 
-export const FullWidth: StoryObj<typeof Select> = {
+export const FullWidth: Story = {
   args: {
     isFullWidth: true,
   },
 };
 
-export const HintLink: StoryObj<typeof Select> = {
+export const HintLink: Story = {
   args: {
     HintLinkComponent: <Link href="/learn-more">Learn more</Link>,
   },
 };
 
-export const EmptyValue: StoryObj<typeof Select> = {
+export const EmptyValue: Story = {
   args: {
     value: "",
     options: [
@@ -351,7 +350,7 @@ export const EmptyValue: StoryObj<typeof Select> = {
   },
 };
 
-export const OptionsObject: StoryObj<typeof Select> = {
+export const OptionsObject: Story = {
   args: {
     options: optionsObject,
     defaultValue: "",
@@ -366,7 +365,7 @@ export const OptionsObject: StoryObj<typeof Select> = {
   },
 };
 
-export const OptionsObjectAndMultiSelect: StoryObj<typeof Select> = {
+export const OptionsObjectAndMultiSelect: Story = {
   args: {
     options: optionsObject,
     value: [],
@@ -383,7 +382,7 @@ export const OptionsObjectAndMultiSelect: StoryObj<typeof Select> = {
   },
 };
 
-export const OptionsGrouped: StoryObj<typeof Select> = {
+export const OptionsGrouped: Story = {
   args: {
     options: optionsGrouped,
     defaultValue: "",
@@ -398,7 +397,7 @@ export const OptionsGrouped: StoryObj<typeof Select> = {
   },
 };
 
-export const MultiSelect: StoryObj<typeof Select> = {
+export const MultiSelect: Story = {
   args: {
     isMultiSelect: true,
     defaultValue: [],
@@ -428,13 +427,13 @@ export const MultiSelect: StoryObj<typeof Select> = {
     });
   },
 };
-export const ReadOnly: StoryObj<typeof Select> = {
+export const ReadOnly: Story = {
   args: {
     isReadOnly: true,
     defaultValue: "Security administration",
   },
 };
-export const ReadOnlyMultiSelect: StoryObj<typeof Select> = {
+export const ReadOnlyMultiSelect: Story = {
   args: {
     isMultiSelect: true,
     isReadOnly: true,
@@ -445,7 +444,7 @@ export const ReadOnlyMultiSelect: StoryObj<typeof Select> = {
     ],
   },
 };
-export const ControlledSelect: StoryObj<typeof Select> = {
+export const ControlledSelect: Story = {
   parameters: {
     docs: {
       description: {
@@ -468,7 +467,7 @@ export const ControlledSelect: StoryObj<typeof Select> = {
   },
 };
 
-export const ControlledMultipleSelect: StoryObj<typeof Select> = {
+export const ControlledMultipleSelect: Story = {
   parameters: {
     docs: {
       description: {
@@ -492,7 +491,7 @@ export const ControlledMultipleSelect: StoryObj<typeof Select> = {
   },
 };
 
-export const ControlledPreselectedMultipleSelect: StoryObj<typeof Select> = {
+export const ControlledPreselectedMultipleSelect: Story = {
   parameters: {
     docs: {
       description: {

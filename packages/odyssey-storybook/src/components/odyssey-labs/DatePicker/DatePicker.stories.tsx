@@ -30,7 +30,6 @@ const storybookMeta: Meta<DatePickerProps> = {
       defaultValue: "DatePicker label",
     },
     onCalendarDateChange: {
-      control: "function",
     },
     defaultValue: {
       description:
