@@ -17,8 +17,6 @@ import {
   BaseMenuButtonProps,
 } from "./BaseMenuButton";
 
-export const menuAlignmentValues = ["left", "right"] as const;
-
 export type MenuButtonProps = Omit<
   BaseMenuButtonProps,
   "buttonChildren" | "omitEndIcon"

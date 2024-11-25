@@ -195,7 +195,7 @@ const getChipColors = ({
 const StyledTag = styled(MuiChip, {
   shouldForwardProp: (prop) =>
     !["colorVariant", "contrastMode", "odysseyDesignTokens", "size"].includes(
-      prop as string,
+      prop,
     ),
 })<{
   as?: React.ElementType; // Allow the 'as' prop to be forwarded
