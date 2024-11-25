@@ -219,7 +219,9 @@ export type DataTableProps<TData extends MRT_RowData> = {
     search?: string;
     filters?: DataFilter[];
     sort?: MRT_SortingState;
-  }) => MRT_TableOptions<TData>["data"];
+  }) =>
+    | MRT_TableOptions<TData>["data"]
+    | Promise<MRT_TableOptions<TData>["data"]>;
   /**
    * Callback that fires when the user reorders rows within the table. Can be used
    * to propogate order change to the backend.
@@ -347,14 +349,16 @@ const DataTable = <TData extends MRT_RowData>({
   const refreshData = useCallback(async () => {
     setShowSkeletons(true);
     try {
-      const newData = await fetchDataFn({
+      const newData = fetchDataFn({
         page: page,
         resultsPerPage: resultsPerPage,
         sort: sorting,
         search: globalFilter,
         filters: filters,
       });
-      setData(newData);
+
+      setData(newData instanceof Promise ? await newData : newData);
+
       setShowSkeletons(false);
     } catch (error) {
       console.error(error);
@@ -428,20 +432,23 @@ const DataTable = <TData extends MRT_RowData>({
   const rowVirtualizerInstanceRef =
     useRef<MRT_RowVirtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
 
-  const setHoveredRow = (table: TableType<TData>, id: TData["id"]) => {
-    if (id) {
-      const nextRow = table.getRow(id) as MRT_Row<TData>;
+  const setHoveredRow = useCallback(
+    (table: TableType<TData>, id: TData["id"]) => {
+      if (id) {
+        const nextRow = table.getRow(id) as MRT_Row<TData>;
 
-      if (nextRow) {
-        table.setHoveredRow(nextRow);
+        if (nextRow) {
+          table.setHoveredRow(nextRow);
+        }
       }
-    }
-  };
+    },
+    [],
+  );
 
-  const resetDraggingAndHoveredRow = (table: TableType<TData>) => {
+  const resetDraggingAndHoveredRow = useCallback((table: TableType<TData>) => {
     setDraggingRow(null);
     table.setHoveredRow(null);
-  };
+  }, []);
 
   type HandleDragHandleKeyDownArgs = {
     table: TableType<TData>;
@@ -499,13 +506,13 @@ const DataTable = <TData extends MRT_RowData>({
           if (isArrowDown || isArrowUp) {
             const nextIndex = isArrowDown ? index + 1 : index - 1;
             // This is a legacy file. In general, we shouldn't have `as` here. Newer versions will have this fixed. --Kevin Ghadyani
-            setHoveredRow(table, (data as { id: string }[])[nextIndex]?.id);
+            setHoveredRow(table, data[nextIndex]?.id as TData["id"]);
           }
         } else {
           if (isArrowDown || isArrowUp) {
             const nextIndex = isArrowDown ? row.index + 1 : row.index - 1;
             // This is a legacy file. In general, we shouldn't have `as` here. Newer versions will have this fixed. --Kevin Ghadyani
-            setHoveredRow(table, (data as { id: string }[])[nextIndex]?.id);
+            setHoveredRow(table, data[nextIndex]?.id as TData["id"]);
           }
         }
       } else {
@@ -535,8 +542,8 @@ const DataTable = <TData extends MRT_RowData>({
 
       if (draggingRow) {
         updateRowOrder({
+          newIndex: (hoveredRow as TData).index as number,
           rowId: draggingRow.id,
-          newIndex: (hoveredRow as TData).index,
         });
       }
 
