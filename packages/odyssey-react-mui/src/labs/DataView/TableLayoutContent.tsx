@@ -64,20 +64,20 @@ const RowActionsContainer = styled("div")(() => ({
   display: "flex",
 }));
 
-export type TableLayoutContentProps = {
-  columns: TableLayoutProps["columns"];
+export type TableLayoutContentProps<TData extends MRT_RowData> = {
+  columns: TableLayoutProps<TData>["columns"];
   data: MRT_RowData[];
-  draggingRow?: MRT_Row<MRT_RowData> | null;
+  draggingRow?: MRT_Row<TData> | null;
   emptyState: ReactNode;
   enableVirtualization?: boolean;
-  getRowId: UniversalProps["getRowId"];
-  hasRowReordering: UniversalProps["hasRowReordering"];
-  hasRowSelection: UniversalProps["hasRowSelection"];
+  getRowId: UniversalProps<TData>["getRowId"];
+  hasRowReordering: UniversalProps<TData>["hasRowReordering"];
+  hasRowSelection: UniversalProps<TData>["hasRowSelection"];
   isEmpty?: boolean;
   isLoading: boolean;
   isNoResults?: boolean;
   isRowReorderingDisabled?: boolean;
-  onReorderRows: UniversalProps["onReorderRows"];
+  onReorderRows: UniversalProps<TData>["onReorderRows"];
   pagination: {
     pageIndex: number;
     pageSize: number;
@@ -102,15 +102,13 @@ export type TableLayoutContentProps = {
       row,
       event,
     }: {
-      table: MRT_TableInstance<MRT_RowData>;
-      row: MRT_Row<MRT_RowData>;
+      table: MRT_TableInstance<TData>;
+      row: MRT_Row<TData>;
       event: React.KeyboardEvent<HTMLButtonElement>;
     }) => void;
-    handleDragHandleOnDragCapture: (
-      table: MRT_TableInstance<MRT_RowData>,
-    ) => void;
-    handleDragHandleOnDragEnd: (table: MRT_TableInstance<MRT_RowData>) => void;
-    resetDraggingAndHoveredRow: (table: MRT_TableInstance<MRT_RowData>) => void;
+    handleDragHandleOnDragCapture: (table: MRT_TableInstance<TData>) => void;
+    handleDragHandleOnDragEnd: (table: MRT_TableInstance<TData>) => void;
+    resetDraggingAndHoveredRow: (table: MRT_TableInstance<TData>) => void;
     updateRowOrder: ({
       rowId,
       newRowIndex,
@@ -122,12 +120,18 @@ export type TableLayoutContentProps = {
   rowSelection: MRT_RowSelectionState;
   setRowSelection: Dispatch<SetStateAction<MRT_RowSelectionState>>;
   setTableState: Dispatch<SetStateAction<TableState>>;
-  tableLayoutOptions: TableLayoutProps;
+  tableLayoutOptions: TableLayoutProps<TData>;
   tableState: TableState;
-  totalRows: UniversalProps["totalRows"];
+  totalRows: UniversalProps<TData>["totalRows"];
 };
 
-const TableLayoutContent = ({
+type TableLayoutContentComponent = (<TData extends MRT_RowData>(
+  props: TableLayoutContentProps<TData>,
+) => JSX.Element) & {
+  displayName?: string;
+};
+
+const TableLayoutContent = <TData extends MRT_RowData>({
   columns,
   data,
   draggingRow,
@@ -149,7 +153,7 @@ const TableLayoutContent = ({
   tableLayoutOptions,
   tableState,
   totalRows,
-}: TableLayoutContentProps) => {
+}: TableLayoutContentProps<TData>) => {
   const [isTableContainerScrolledToStart, setIsTableContainerScrolledToStart] =
     useState(true);
   const [isTableContainerScrolledToEnd, setIsTableContainerScrolledToEnd] =
@@ -197,7 +201,7 @@ const TableLayoutContent = ({
   }, [tableState]);
 
   const defaultCell = useCallback<
-    ({ cell }: { cell: DataTableCell<MRT_RowData> }) => ReactElement | string
+    ({ cell }: { cell: DataTableCell<TData, unknown> }) => ReactElement | string
   >(({ cell }) => {
     const value = cell.getValue<string>();
     const hasTextWrapping =
@@ -218,7 +222,7 @@ const TableLayoutContent = ({
   } = rowReorderingUtilities;
 
   const renderRowActions = useCallback(
-    ({ row }: { row: MRT_Row<MRT_RowData> }) => {
+    ({ row }: { row: MRT_Row<TData> }) => {
       const currentIndex =
         row.index + (pagination.pageIndex - 1) * pagination.pageSize;
       return (
@@ -309,8 +313,8 @@ const TableLayoutContent = ({
 
   const hasColumnWithGrow = columns.some((column) => column.grow === true);
 
-  const dataTable = useMaterialReactTable({
-    data: !isEmpty && !isNoResults ? data : [],
+  const dataTable = useMaterialReactTable<TData>({
+    data: (!isEmpty && !isNoResults ? data : []) as TData[],
     columns,
     getRowId,
     state: {
@@ -383,7 +387,7 @@ const TableLayoutContent = ({
     },
     muiTableBodyProps: () => ({
       className: rowDensityClassName,
-      tabIndex: enableVirtualization ? 0 : undefined,
+      tabIndex: 0,
     }),
     enableColumnResizing: tableLayoutOptions.hasColumnResizing,
     defaultColumn: {
@@ -476,7 +480,9 @@ const TableLayoutContent = ({
   );
 };
 
-const MemoizedTableLayoutContent = memo(TableLayoutContent);
+const MemoizedTableLayoutContent = memo(
+  TableLayoutContent,
+) as TableLayoutContentComponent;
 MemoizedTableLayoutContent.displayName = "TableLayoutContent";
 
 export { MemoizedTableLayoutContent as TableLayoutContent };

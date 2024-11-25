@@ -12,14 +12,14 @@
 
 import { memo } from "react";
 import { CardLayoutProps } from "./componentTypes";
-import { DataRow } from "./dataTypes";
+import { MRT_RowData } from "material-react-table";
 
-const DetailPanel = ({
+const DetailPanel = <TData extends MRT_RowData>({
   row,
   renderDetailPanel,
 }: {
-  row: DataRow;
-  renderDetailPanel: CardLayoutProps["renderDetailPanel"];
+  row: TData;
+  renderDetailPanel: CardLayoutProps<TData>["renderDetailPanel"];
 }) => {
   if (!renderDetailPanel) return null;
   return renderDetailPanel({ row });

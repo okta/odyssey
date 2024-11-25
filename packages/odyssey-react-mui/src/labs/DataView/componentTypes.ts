@@ -28,11 +28,11 @@ import {
   DataRowSelectionState,
   DataTableColumn,
 } from "./dataTypes";
-import { DataTableRowActionsProps } from "../../DataTable/DataTableRowActions";
 import { MenuButtonProps } from "../..";
 import { paginationTypeValues } from "../DataTablePagination";
 import { DataCardProps } from "./DataCard";
 import { type PaginationProps } from "../../Pagination";
+import { RowActionsProps } from "./RowActions";
 
 export type DataLayout = (typeof availableLayouts)[number];
 export type CardLayout = (typeof availableCardLayouts)[number];
@@ -40,7 +40,7 @@ export type CardLayout = (typeof availableCardLayouts)[number];
 export type AvailableLayouts = DataLayout[];
 export type AvailableCardLayouts = CardLayout[];
 
-export type UniversalProps = {
+export type UniversalProps<TData extends MRT_RowData> = {
   additionalActionButton?: ReactNode;
   additionalActionMenuItems?: ReactNode;
   bulkActionMenuItems?: (
@@ -50,15 +50,15 @@ export type UniversalProps = {
   emptyPlaceholder?: ReactNode;
   enableVirtualization?: boolean;
   errorMessage?: string;
-  filters?: Array<DataFilter | DataTableColumn<MRT_RowData> | string>;
+  filters?: Array<DataFilter | DataTableColumn<TData> | string>;
   getData: ({
     page,
     resultsPerPage,
     search,
     filters,
     sort,
-  }: DataGetDataType) => MRT_RowData[] | Promise<MRT_RowData[]>;
-  getRowId?: MRT_TableOptions<MRT_RowData>["getRowId"];
+  }: DataGetDataType) => TData[] | Promise<TData[]>;
+  getRowId?: MRT_TableOptions<TData>["getRowId"];
   hasFilters?: boolean;
   hasPagination?: boolean;
   hasRowReordering?: boolean;
@@ -96,30 +96,30 @@ export type UniversalProps = {
   "hasPageInput" | "hasRowCountInput" | "hasRowCountLabel"
 >;
 
-export type TableLayoutProps = {
-  columns: DataTableColumn<MRT_RowData>[];
+export type TableLayoutProps<TData extends MRT_RowData> = {
+  columns: DataTableColumn<TData>[];
   hasChangeableDensity?: boolean;
   hasColumnResizing?: boolean;
   hasColumnVisibility?: boolean;
   hasSorting?: boolean;
   initialDensity?: MRT_DensityState;
-  renderDetailPanel?: MRT_TableOptions<MRT_RowData>["renderDetailPanel"];
-  rowActionButtons?: DataTableRowActionsProps["rowActionButtons"];
-  rowActionMenuItems?: DataTableRowActionsProps["rowActionMenuItems"];
+  renderDetailPanel?: MRT_TableOptions<TData>["renderDetailPanel"];
+  rowActionButtons?: RowActionsProps<TData>["rowActionButtons"];
+  rowActionMenuItems?: RowActionsProps<TData>["rowActionMenuItems"];
 };
 
-export type CardLayoutProps = {
-  itemProps: (row: MRT_RowData) => Omit<DataCardProps, "row">;
+export type CardLayoutProps<TData extends MRT_RowData> = {
+  itemProps: (row: TData) => Omit<DataCardProps<TData>, "row">;
   maxGridColumns?: number;
-  renderDetailPanel?: (props: { row: MRT_RowData }) => ReactNode;
-  rowActionMenuItems?: DataTableRowActionsProps["rowActionMenuItems"];
+  renderDetailPanel?: (props: { row: TData }) => ReactNode;
+  rowActionMenuItems?: RowActionsProps<TData>["rowActionMenuItems"];
 };
 
-export type ViewProps<L extends DataLayout> = {
+export type ViewProps<TData extends MRT_RowData, L extends DataLayout> = {
   availableLayouts?: L[];
   initialLayout?: L;
-  cardLayoutOptions?: CardLayoutProps;
-  tableLayoutOptions?: TableLayoutProps;
+  cardLayoutOptions?: CardLayoutProps<TData>;
+  tableLayoutOptions?: TableLayoutProps<TData>;
 };
 
 export type TableState = {

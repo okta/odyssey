@@ -17,15 +17,15 @@ import { DataFilter } from "../DataFilters";
 import { DataTableColumn } from "../../DataTable";
 import { UniversalProps, TableLayoutProps } from "./componentTypes";
 
-type FilterConversionType = {
-  columns?: TableLayoutProps["columns"];
-  filters?: UniversalProps["filters"];
+type FilterConversionType<TData extends MRT_RowData> = {
+  columns?: TableLayoutProps<TData>["columns"];
+  filters?: UniversalProps<TData>["filters"];
 };
 
-export const useFilterConversion = ({
+export const useFilterConversion = <TData extends MRT_RowData>({
   columns,
   filters,
-}: FilterConversionType) => {
+}: FilterConversionType<TData>) => {
   const convertFilterSelectOptions = useCallback(
     (options: DataTableColumn<MRT_RowData>["filterSelectOptions"]) =>
       options?.map((option) =>
@@ -45,14 +45,14 @@ export const useFilterConversion = ({
   );
 
   const convertColumnToFilter = useCallback(
-    (column: DataTableColumn<MRT_RowData>) =>
+    (column: DataTableColumn<TData>) =>
       column.enableColumnFilter !== false && column.accessorKey
-        ? ({
+        ? {
             id: column.accessorKey,
             label: column.header,
             variant: column.filterVariant,
             options: convertFilterSelectOptions(column.filterSelectOptions),
-          } satisfies DataFilter as DataFilter)
+          }
         : null,
     [convertFilterSelectOptions],
   );

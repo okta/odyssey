@@ -20,15 +20,15 @@ import { MRT_RowData } from "material-react-table";
  * @param newIndex - The new index to move the row to.
  * @returns A new array of data with the row moved to the specified index.
  */
-export const reorderDataRowsLocally = ({
+export const reorderDataRowsLocally = <TData extends MRT_RowData>({
   currentData,
   rowId,
   newRowIndex,
 }: {
-  currentData: MRT_RowData[];
+  currentData: TData[];
   rowId: string;
   newRowIndex: number;
-}): MRT_RowData[] => {
+}): TData[] => {
   const updatedData = [...currentData];
   const rowIndex = updatedData.findIndex((row) => row.id === rowId);
 
