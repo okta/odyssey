@@ -15,7 +15,6 @@ import { Meta, StoryObj } from "@storybook/react";
 import { expect, within } from "@storybook/test";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { PlaywrightProps } from "../../odyssey-mui/storybookTypes";
 
 const meta = {
   title: "Labs Components/AppSwitcher",
