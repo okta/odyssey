@@ -29,7 +29,10 @@ export type DataQueryParamsType = {
   sort?: MRT_SortingState;
 };
 
-export type DataTableColumn<T extends MRT_RowData> = MRT_ColumnDef<T> & {
+export type DataTableColumn<
+  TData extends MRT_RowData,
+  TValue = unknown,
+> = MRT_ColumnDef<TData, TValue> & {
   /**
    * @deprecated use hasTextWrapping instead of enableWrapping
    */
@@ -37,21 +40,24 @@ export type DataTableColumn<T extends MRT_RowData> = MRT_ColumnDef<T> & {
   hasTextWrapping?: boolean;
 };
 
-export type DataTableColumnInstance<T extends MRT_RowData> = Omit<
-  MRT_Column<T, unknown>,
+export type DataTableColumnInstance<TData extends MRT_RowData, TValue> = Omit<
+  MRT_Column<TData, TValue>,
   "columnDef"
 > & {
-  columnDef: DataTableColumn<T>;
+  columnDef: DataTableColumn<TData, TValue>;
 };
 
-export type DataTableCell<T extends MRT_RowData> = Omit<
-  MRT_Cell<T>,
+export type DataTableCell<TData extends MRT_RowData, TValue> = Omit<
+  MRT_Cell<TData>,
   "column"
 > & {
-  column: DataTableColumnInstance<T>;
+  column: DataTableColumnInstance<TData, TValue>;
 };
 
-export type DataColumns = DataTableColumn<MRT_RowData>[];
+export type DataColumns<
+  TData extends MRT_RowData,
+  TValue = unknown,
+> = DataTableColumn<TData, TValue>[];
 
 export type DataRow = MRT_RowData;
 

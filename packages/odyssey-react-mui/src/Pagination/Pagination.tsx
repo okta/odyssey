@@ -26,8 +26,7 @@ import {
 import { usePagination } from "./usePagination";
 import { Paragraph } from "../Typography";
 
-const PaginationContainer = styled("div")({
-  alignItems: "center",
+const PaginationContainer = styled("nav")({
   display: "flex",
   justifyContent: "space-between",
 });
@@ -338,7 +337,7 @@ const Pagination = ({
   );
 
   return variant === "paged" ? (
-    <PaginationContainer>
+    <PaginationContainer aria-label={t("pagination.label")}>
       <PaginationSegment odysseyDesignTokens={odysseyDesignTokens}>
         {hasRowCountInput && (
           <Box>

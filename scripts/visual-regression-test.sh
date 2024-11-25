@@ -51,12 +51,13 @@ rm chromedriver-linux64.zip
 COMMAND=$(yarn workspace @okta/odyssey-storybook ci:visualRegressionTest)
 EXIT_CODE=$?
 
+log_custom_message "Visual Regression Test Report" "$COMMAND"
+
 if [[ $EXIT_CODE -ne 0 ]]; then
   echo "Applitools Visual Regression Tests failed! Exiting..."
   exit ${PUBLISH_TYPE_AND_RESULT_DIR_BUT_ALWAYS_FAIL}
 fi
 
 echo "Visual Regression Tests passed!"
-log_custom_message "Visual Regression Test Report" "$COMMAND"
 
 report_results SUCCESS publish_type_and_result_dir_but_succeed_if_no_results

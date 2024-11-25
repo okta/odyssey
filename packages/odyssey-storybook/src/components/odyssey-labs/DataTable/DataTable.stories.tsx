@@ -39,10 +39,10 @@ import {
   paginationTypeValues,
 } from "@okta/odyssey-react-mui";
 
-type DataTableMetaProps = DataViewProps &
-  TableLayoutProps & {
-    tableRowActionMenuItems: TableLayoutProps["rowActionMenuItems"];
-    listRowActionMenuItems: CardLayoutProps["rowActionMenuItems"];
+type DataTableMetaProps = DataViewProps<Person> &
+  TableLayoutProps<Person> & {
+    tableRowActionMenuItems: TableLayoutProps<Person>["rowActionMenuItems"];
+    listRowActionMenuItems: CardLayoutProps<Person>["rowActionMenuItems"];
     hasCustomEmptyPlaceholder: boolean;
     hasCustomNoResultsPlaceholder: boolean;
     hasActionMenuItems: boolean;

@@ -23,7 +23,7 @@ export type Person = {
   risk: "high" | "medium" | "low";
 };
 
-export const columns: DataColumns = [
+export const columns: DataColumns<Person> = [
   {
     accessorKey: "order",
     header: "ID",

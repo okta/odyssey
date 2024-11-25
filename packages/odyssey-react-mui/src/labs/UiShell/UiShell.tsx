@@ -48,7 +48,11 @@ export type UiShellProps = {
 } & Pick<ReactRootElements, "appRootElement" | "stylesRootElement"> &
   Pick<
     UiShellContentProps,
-    "appComponent" | "initialVisibleSections" | "onError" | "optionalComponents"
+    | "appBackgroundContrastMode"
+    | "appComponent"
+    | "initialVisibleSections"
+    | "onError"
+    | "optionalComponents"
   >;
 
 /**
@@ -59,6 +63,7 @@ export type UiShellProps = {
  * If an error occurs, this will revert to only showing the app.
  */
 const UiShell = ({
+  appBackgroundContrastMode,
   appComponent,
   appRootElement,
   initialVisibleSections,
@@ -94,6 +99,7 @@ const UiShell = ({
 
           <UiShellContent
             {...componentProps}
+            appBackgroundContrastMode={appBackgroundContrastMode}
             appComponent={appComponent}
             initialVisibleSections={initialVisibleSections}
             onError={onError}

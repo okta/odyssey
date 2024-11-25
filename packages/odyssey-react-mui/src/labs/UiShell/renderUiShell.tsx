@@ -41,6 +41,7 @@ export const optionalComponentSlotNames: Record<
  * It also provides you with other elements fitted to slots in the web component. **In React, you can portal to these components.**
  */
 export const renderUiShell = ({
+  appBackgroundContrastMode,
   appRootElement: explicitAppRootElement,
   initialVisibleSections,
   onError = console.error,
@@ -58,7 +59,10 @@ export const renderUiShell = ({
    * HTML element used as the root for UI Shell.
    */
   uiShellRootElement: HTMLElement;
-} & Pick<UiShellProps, "initialVisibleSections">) => {
+} & Pick<
+  UiShellProps,
+  "appBackgroundContrastMode" | "initialVisibleSections"
+>) => {
   const appRootElement =
     explicitAppRootElement || document.createElement("div");
 
@@ -102,6 +106,7 @@ export const renderUiShell = ({
     getReactComponent: (reactRootElements) => (
       <ErrorBoundary fallback={appComponent} onError={onError}>
         <UiShell
+          appBackgroundContrastMode={appBackgroundContrastMode}
           appComponent={appComponent}
           appRootElement={reactRootElements.appRootElement}
           initialVisibleSections={initialVisibleSections}

@@ -24,9 +24,9 @@ import {
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
 
-export type BulkActionsMenuProps = {
+export type BulkActionsMenuProps<TData extends MRT_RowData> = {
   data: MRT_RowData[];
-  menuItems: UniversalProps["bulkActionMenuItems"];
+  menuItems: UniversalProps<TData>["bulkActionMenuItems"];
   rowSelection: MRT_RowSelectionState;
   setRowSelection: Dispatch<SetStateAction<MRT_RowSelectionState>>;
 };
@@ -40,12 +40,12 @@ const BulkActionsContainer = styled("div", {
   gap: odysseyDesignTokens.Spacing2,
 }));
 
-const BulkActionsMenu = ({
+const BulkActionsMenu = <TData extends MRT_RowData>({
   data,
   menuItems,
   rowSelection,
   setRowSelection,
-}: BulkActionsMenuProps) => {
+}: BulkActionsMenuProps<TData>) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
 

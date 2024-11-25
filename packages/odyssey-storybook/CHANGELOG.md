@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.28.0](https://github.com/okta/odyssey/compare/v1.27.1...v1.28.0) (2024-11-25)
+
+### Features
+
+- adds app switcher lab component ([#2416](https://github.com/okta/odyssey/issues/2416)) ([1b48073](https://github.com/okta/odyssey/commit/1b480738d1c91823f496aa0ff41d678edb76f655))
+- better first-render options for UiShell ([#2422](https://github.com/okta/odyssey/issues/2422)) ([c49b233](https://github.com/okta/odyssey/commit/c49b23360dafa1fdcaab696f1c6bd8fdae63891e))
+- new popoverContent feature for MenuButton, plus UserProfileMenuButton ([#2414](https://github.com/okta/odyssey/issues/2414)) ([5647ec9](https://github.com/okta/odyssey/commit/5647ec91826662195ed09eb81e0d05d3ce6057a1))
+
+### Bug Fixes
+
+- bug in SideNav when sideNavItems comes delayed ([#2419](https://github.com/okta/odyssey/issues/2419)) ([bce2083](https://github.com/okta/odyssey/commit/bce20836db6763b013178a9c4d8784cec6eb5e93))
+
 ## [1.27.1](https://github.com/okta/odyssey/compare/v1.27.0...v1.27.1) (2024-11-18)
 
 **Note:** Version bump only for package @okta/odyssey-storybook
