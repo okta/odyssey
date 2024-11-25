@@ -48,8 +48,10 @@ mv chromedriver-linux64 /usr/local/bin/
 chmod +x /usr/local/bin/chromedriver-linux64
 rm chromedriver-linux64.zip
 
-export COMMAND=$(yarn workspace @okta/odyssey-storybook ci:visualRegressionTest)
-export EXIT_CODE=$?
+COMMAND=$(yarn workspace @okta/odyssey-storybook ci:visualRegressionTest)
+EXIT_CODE=$?
+
+log_custom_message "Visual Regression Test Report" "$COMMAND"
 
 if [[ $EXIT_CODE -ne 0 ]]; then
   echo "Applitools Visual Regression Tests failed! Exiting..."
@@ -57,6 +59,5 @@ if [[ $EXIT_CODE -ne 0 ]]; then
 fi
 
 echo "Visual Regression Tests passed!"
-log_custom_message "Visual Regression Test Report" "$COMMAND"
 
 report_results SUCCESS publish_type_and_result_dir_but_succeed_if_no_results
