@@ -53,13 +53,13 @@ export const CARD_IMAGE_SIZE_COMPACT = "48px";
 
 export const cardVariantValues = ["tile", "stack", "compact"] as const;
 
-export type DataCardProps = {
+export type DataCardProps<TData extends MRT_RowData> = {
   children?: ReactNode;
   description?: string;
   image?: ReactElement;
   overline?: string;
-  renderDetailPanel?: CardLayoutProps["renderDetailPanel"];
-  row: MRT_RowData;
+  renderDetailPanel?: CardLayoutProps<TData>["renderDetailPanel"];
+  row: TData;
   title?: string;
   variant?: (typeof cardVariantValues)[number];
 } & (
@@ -76,6 +76,12 @@ export type DataCardProps = {
       onClick?: never;
     }
 );
+
+type DataCardComponent = (<TData extends MRT_RowData>(
+  props: DataCardProps<TData>,
+) => JSX.Element) & {
+  displayName?: string;
+};
 
 const AccessoryContainer = styled("div", {
   shouldForwardProp: (prop) =>
@@ -170,7 +176,7 @@ const AccessoryPlaceholder = styled(MuiIconButton)(() => ({
 }));
 const buttonProviderValue = { isFullWidth: true };
 
-const DataCard = ({
+const DataCard: DataCardComponent = <TData extends MRT_RowData>({
   Accessory: AccessoryProp,
   button,
   children,
@@ -183,7 +189,7 @@ const DataCard = ({
   row,
   title,
   variant = "tile",
-}: DataCardProps) => {
+}: DataCardProps<TData>) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
 
@@ -315,6 +321,7 @@ const DataCard = ({
   return (
     <MuiCard
       className={`${onClick ? "isClickable" : ""} ${Accessory ? "hasAccessory" : ""} ods-card-${variant}`}
+      role="listitem"
     >
       {onClick ? (
         <MuiCardActionArea onClick={onClick}>{cardContent}</MuiCardActionArea>
@@ -343,7 +350,7 @@ const DataCard = ({
   );
 };
 
-const MemoizedDataCard = memo(DataCard);
+const MemoizedDataCard = memo(DataCard) as DataCardComponent;
 MemoizedDataCard.displayName = "DataCard";
 
 export { MemoizedDataCard as DataCard };
