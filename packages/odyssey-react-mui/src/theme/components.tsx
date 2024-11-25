@@ -51,6 +51,7 @@ import {
 import { DesignTokens } from "./theme";
 import { CSSProperties } from "react";
 import { ContrastMode } from "../useContrastMode";
+import { CSSObject } from "@emotion/react";
 
 //Widths used in `Drawer` component
 const drawerSizes = {
@@ -2061,11 +2062,12 @@ export const components = ({
           justifyContent: "space-between",
           overflow: "unset",
           whiteSpace: "unset",
-          // @ts-expect-error: Incorrect typing in MUI
-          ...(ownerState.formControl && {
-            position: "initial",
-            transform: "none",
-          }),
+          ...(ownerState.formControl
+            ? {
+                position: "initial",
+                transform: "none",
+              }
+            : {}),
           ...(ownerState.variant === "outlined" && {
             pointerEvents: "initial",
             transform: "none",
@@ -2076,7 +2078,7 @@ export const components = ({
           }),
           [`& > .${typographyClasses.root}`]: {
             lineHeight: "unset",
-          },
+          } satisfies CSSObject,
         }),
       },
     },
@@ -2490,18 +2492,20 @@ export const components = ({
       },
       styleOverrides: {
         root: ({ ownerState }) => ({
-          ...(ownerState?.inputProps?.readOnly && {
-            "&.MuiInputBase-root": {
-              backgroundColor: odysseyTokens.HueNeutral50,
-              borderColor: odysseyTokens.HueNeutral200,
-              "&:hover": {
-                backgroundColor: odysseyTokens.HueNeutral50,
-              },
-              "&.Mui-focused": {
-                borderColor: odysseyTokens.PalettePrimaryMain,
-              },
-            },
-          }),
+          ...(ownerState?.inputProps?.readOnly
+            ? {
+                "&.MuiInputBase-root": {
+                  backgroundColor: odysseyTokens.HueNeutral50,
+                  borderColor: odysseyTokens.HueNeutral200,
+                  "&:hover": {
+                    backgroundColor: odysseyTokens.HueNeutral50,
+                  },
+                  "&.Mui-focused": {
+                    borderColor: odysseyTokens.PalettePrimaryMain,
+                  },
+                },
+              }
+            : {}),
           "& .MuiSelect-icon": {
             right: "unset",
             insetInlineEnd: odysseyTokens.Spacing3,
@@ -2532,14 +2536,16 @@ export const components = ({
             display: "none",
           },
 
-          ...(ownerState?.inputProps?.readOnly && {
-            color: odysseyTokens.HueNeutral700,
-            cursor: "default",
-            "&:focus": {
-              backgroundColor: "transparent",
-              borderColor: odysseyTokens.PalettePrimaryMain,
-            },
-          }),
+          ...(ownerState?.inputProps?.readOnly
+            ? {
+                color: odysseyTokens.HueNeutral700,
+                cursor: "default",
+                "&:focus": {
+                  backgroundColor: "transparent",
+                  borderColor: odysseyTokens.PalettePrimaryMain,
+                },
+              }
+            : {}),
         }),
       },
     },
