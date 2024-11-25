@@ -114,13 +114,13 @@ const languagesKitchenSink = [
   },
 ];
 
-type PickerType = typeof Picker<
-  LabelDescription | LabelDescriptionMetadata,
-  boolean,
-  boolean
->;
+// type PickerType = typeof Picker<
+//   LabelDescription | LabelDescriptionMetadata,
+//   boolean,
+//   boolean
+// >;
 
-const storybookMeta: Meta<PickerType> = {
+const meta = {
   title: "Labs Components/Odyssey Pickers/Picker",
   component: Picker,
   argTypes: {
@@ -135,37 +135,39 @@ const storybookMeta: Meta<PickerType> = {
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
-};
+} satisfies Meta<typeof Picker>;
 
-export default storybookMeta;
+export default meta;
 
-type PickerPropsType = PickerProps<
-  LabelDescription | LabelDescriptionMetadata,
-  boolean | undefined,
-  boolean | undefined
->;
+type Story = StoryObj<typeof meta>
 
-export const LabelOnly: StoryObj<PickerPropsType> = {};
+// type PickerPropsType = PickerProps<
+//   LabelDescription | LabelDescriptionMetadata,
+//   boolean | undefined,
+//   boolean | undefined
+// >;
 
-export const WithDescription: StoryObj<PickerPropsType> = {
+export const LabelOnly: Story = {};
+
+export const WithDescription: Story = {
   args: {
     options: languagesNoMetadata,
   },
 };
 
-export const WithMetadata: StoryObj<PickerPropsType> = {
+export const WithMetadata: Story = {
   args: {
     options: languagesKitchenSink,
   },
 };
 
-export const MultipleSelect: StoryObj<PickerPropsType> = {
+export const MultipleSelect: Story = {
   args: {
     hasMultipleChoices: true,
   },
 };
 
-export const Disabled: StoryObj<PickerPropsType> = {
+export const Disabled: Story = {
   args: {
     isDisabled: true,
     value: languagesNoDescription[0],

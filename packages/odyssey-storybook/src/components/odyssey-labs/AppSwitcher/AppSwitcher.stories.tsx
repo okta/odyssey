@@ -85,7 +85,7 @@ export const AllApps: Story = {
       </div>
     );
   },
-  play: async ({ canvasElement, step }: PlaywrightProps<typeof AppSwitcher>) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
 
     await step("App switcher shows all items", async () => {
@@ -118,7 +118,7 @@ export const NoApps: Story = {
       </div>
     );
   },
-  play: async ({ canvasElement, step }: PlaywrightProps<typeof AppSwitcher>) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
 
     await step("App switcher shows no items, but is loaded", async () => {
@@ -142,7 +142,7 @@ export const Loading: Story = {
       </div>
     );
   },
-  play: async ({ canvasElement, step }: PlaywrightProps<typeof AppSwitcher>) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
 
     await step("App switcher shows no items, but is loaded", async () => {
