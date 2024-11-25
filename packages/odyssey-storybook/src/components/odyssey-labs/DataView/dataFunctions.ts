@@ -73,7 +73,7 @@ export const filterData = ({
       return value.some((arrayValue) => {
         const filterValue =
           typeof arrayValue === "object" ? arrayValue.value : arrayValue;
-        return row[id as keyof Person]
+        return row[id]
           ?.toString()
           .toLowerCase()
           .includes(filterValue.toString().toLowerCase());

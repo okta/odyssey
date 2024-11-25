@@ -206,7 +206,7 @@ const CardLayoutContent = ({
                           odysseyDesignTokens={odysseyDesignTokens}
                         >
                           <MuiCheckbox
-                            checked={rowSelection[row.id] ?? false}
+                            checked={rowSelection[row.id as string] ?? false}
                             onChange={() => handleRowSelectionChange(row)}
                           />
                         </CheckboxContainer>
@@ -217,7 +217,7 @@ const CardLayoutContent = ({
                     renderDetailPanel={cardLayoutOptions.renderDetailPanel}
                     row={row}
                     image={image}
-                    key={row.id}
+                    key={row.id as string}
                     menuButtonChildren={
                       (cardLayoutOptions.rowActionMenuItems ||
                         hasRowReordering) && (

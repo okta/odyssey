@@ -24,7 +24,7 @@ const applitoolsConfig = {
   },
   branchName,
   batch: {
-    name: branchName?.concat(" ", commitHash || ""),
+    name: (branchName || "").concat(" ", commitHash || ""),
     notifyOnCompletion: true,
     sequenceName: "Regression",
   },

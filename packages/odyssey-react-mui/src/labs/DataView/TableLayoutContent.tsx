@@ -39,6 +39,7 @@ import {
   ArrowUnsortedIcon,
   ChevronDownIcon,
   DragIndicatorIcon,
+  MoreIcon,
 } from "../../icons.generated";
 import { Box } from "../../Box";
 import { Button, MenuButton } from "../../Buttons";
@@ -49,7 +50,6 @@ import {
   displayColumnDefOptions,
   ScrollableTableContainer,
 } from "./tableConstants";
-import { MoreIcon } from "../../icons.generated";
 import { RowActions } from "./RowActions";
 import { useOdysseyDesignTokens } from "../../OdysseyDesignTokensContext";
 import { useScrollIndication } from "../../DataTable/useScrollIndication";
