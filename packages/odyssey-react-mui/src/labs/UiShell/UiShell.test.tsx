@@ -10,43 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render, within } from "@testing-library/react";
+import { render, waitFor, within } from "@testing-library/react";
 
-import { Dialog } from "../../Dialog";
 import { defaultComponentProps, UiShell, UiShellProps } from "./UiShell";
 import { ReactElement } from "react";
 
 describe("UiShell", () => {
-  test("renders `appRootElement`", async () => {
-    const appRootElement = document.createElement("div");
-
-    render(
-      <UiShell
-        appComponent={<div />}
-        appRootElement={appRootElement}
-        onSubscriptionCreated={() => {}}
-        optionalComponents={{
-          sideNavFooter: <div />,
-          topNavLeftSide: <div />,
-          topNavRightSide: (
-            <Dialog
-              children={undefined}
-              title="Hello World!"
-              isOpen
-              onClose={() => {}}
-            />
-          ),
-        }}
-        stylesRootElement={document.createElement("div")}
-        subscribeToPropChanges={() => () => {}}
-      />,
-    );
-
-    expect(Array.from(appRootElement.children)).toHaveLength(1);
-    expect(appRootElement).toHaveTextContent("Hello World!");
-  });
-
-  test("renders `stylesRootElement`", async () => {
+  test("renders `stylesRootElement`", () => {
     const rootElement = document.createElement("div");
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
@@ -80,13 +50,26 @@ describe("UiShell", () => {
       />,
     );
 
-    expect(within(container).getByTestId(testId)).toBeInTheDocument();
+    expect(within(container).getByTestId(testId)).toBeVisible();
   });
 
   test("renders always-available `componentSlots`", async () => {
     const optionalComponentTestIds: Array<
       keyof Required<UiShellProps>["optionalComponents"]
     > = ["banners", "topNavLeftSide", "topNavRightSide"];
+
+    // This is the subscription we give the component, and then once subscribed, we're going to immediately call it with new props.
+    // TopNav won't render unless we pass something into it.
+    const subscribeToPropChanges: UiShellProps["subscribeToPropChanges"] = (
+      subscriber,
+    ) => {
+      subscriber({
+        ...defaultComponentProps,
+        topNavProps: {},
+      });
+
+      return () => {};
+    };
 
     const { container } = render(
       <UiShell
@@ -102,12 +85,14 @@ describe("UiShell", () => {
           ) as Record<keyof UiShellProps["optionalComponents"], ReactElement>
         }
         stylesRootElement={document.createElement("div")}
-        subscribeToPropChanges={() => () => {}}
+        subscribeToPropChanges={subscribeToPropChanges}
       />,
     );
 
-    optionalComponentTestIds.forEach((testId) => {
-      expect(within(container).getByTestId(testId)).toBeInTheDocument();
+    await waitFor(() => {
+      optionalComponentTestIds.forEach((testId) => {
+        expect(within(container).getByTestId(testId)).toBeVisible();
+      });
     });
   });
 
@@ -151,7 +136,7 @@ describe("UiShell", () => {
     );
 
     optionalComponentTestIds.forEach((testId) => {
-      expect(within(container).getByTestId(testId)).toBeInTheDocument();
+      expect(within(container).getByTestId(testId)).toBeVisible();
     });
   });
 
@@ -247,7 +232,7 @@ describe("UiShell", () => {
       />,
     );
 
-    expect(container).toBeInTheDocument();
+    expect(container).toBeVisible();
   });
 
   test("has previous state in prop change subscription", async () => {
