@@ -14,7 +14,6 @@ import {
   LabelDescription,
   LabelDescriptionMetadata,
   Picker,
-  PickerProps,
 } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react";
 import {
@@ -114,17 +113,17 @@ const languagesKitchenSink = [
   },
 ];
 
-// type PickerType = typeof Picker<
-//   LabelDescription | LabelDescriptionMetadata,
-//   boolean,
-//   boolean
-// >;
+type PickerType = typeof Picker<
+  LabelDescription | LabelDescriptionMetadata,
+  boolean,
+  boolean
+>;
 
 const meta = {
   title: "Labs Components/Odyssey Pickers/Picker",
   component: Picker,
   argTypes: {
-    ...pickerComponentPropsMetadata,
+    ...(pickerComponentPropsMetadata as Partial<PickerType>),
     hint: fieldComponentPropsMetaData.hint,
     HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
   },
@@ -139,13 +138,7 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>
-
-// type PickerPropsType = PickerProps<
-//   LabelDescription | LabelDescriptionMetadata,
-//   boolean | undefined,
-//   boolean | undefined
-// >;
+type Story = StoryObj<typeof meta>;
 
 export const LabelOnly: Story = {};
 
