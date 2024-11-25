@@ -39,11 +39,11 @@ const storybookMeta: Meta<UiShellProps> = {
   component: UiShell,
   argTypes: {
     appComponent: {
-      control: "",
+      control: undefined,
       description: "App component that renders inside the content area.",
       table: {
         type: {
-          summary: "string",
+          summary: "InputType",
         },
       },
     },
@@ -61,7 +61,9 @@ const storybookMeta: Meta<UiShellProps> = {
       description:
         'Notifies when a React rendering error occurs. This could be useful for logging, flagging "p0"s, and recovering UI Shell when errors occur.',
       table: {
-        defaultValue: console.error,
+        defaultValue: {
+          summary: "console.error",
+        },
         type: {
           summary: "string",
         },
