@@ -16,15 +16,13 @@ import {
   fileUploadVariants,
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
-// TODO: Write tests for this component @see https://oktainc.atlassian.net/browse/OKTA-704264
-// import { userEvent, within } from "@storybook/test";
-// import { expect } from "@storybook/test";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
-// import { axeRun } from "../../../axe-util";
+import { FileUploaderProps } from "../../../../../odyssey-react-mui/src/FileUploader";
 
-const storybookMeta: Meta<typeof FileUploader> = {
+// TODO: Write tests for this component @see https://oktainc.atlassian.net/browse/OKTA-704264
+const meta = {
   title: "MUI Components/Forms/FileUploader",
   component: FileUploader,
   argTypes: {
@@ -83,9 +81,12 @@ const storybookMeta: Meta<typeof FileUploader> = {
       description: "How the component appears visually",
       table: {
         type: {
-          required: true,
           summary: fileUploadVariants.join(" | "),
         },
+      },
+      type: {
+        name: "string",
+        required: true,
       },
     },
   },
@@ -95,45 +96,47 @@ const storybookMeta: Meta<typeof FileUploader> = {
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
-};
+} satisfies Meta<typeof FileUploader>;
 
-export default storybookMeta;
+export default meta;
 
-export const ButtonOnly: StoryObj<typeof FileUploader> = {
+type Story = StoryObj<typeof meta>;
+
+export const ButtonOnly: Story = {
   args: {
     variant: "button",
-  },
+  } as FileUploaderProps, // This is a hack.
 };
 
-export const DragAndDropWithIcon: StoryObj<typeof FileUploader> = {
+export const DragAndDropWithIcon: Story = {
   args: {
     type: "multiple",
     variant: "dragAndDropWithIcon",
-  },
+  } as FileUploaderProps, // This is a hack.
 };
 
-export const DragAndDropWithoutIcon: StoryObj<typeof FileUploader> = {
+export const DragAndDropWithoutIcon: Story = {
   args: {
     variant: "dragAndDrop",
-  },
+  } as FileUploaderProps, // This is a hack.
 };
 
-export const SingleFileAllowed: StoryObj<typeof FileUploader> = {
+export const SingleFileAllowed: Story = {
   args: {
     variant: "dragAndDropWithIcon",
-  },
+  } as FileUploaderProps, // This is a hack.
 };
 
-export const MultipleFileAllowed: StoryObj<typeof FileUploader> = {
+export const MultipleFileAllowed: Story = {
   args: {
     type: "multiple",
     variant: "dragAndDropWithIcon",
-  },
+  } as FileUploaderProps, // This is a hack.
 };
 
-export const SpecificFileTypes: StoryObj<typeof FileUploader> = {
+export const SpecificFileTypes: Story = {
   args: {
     acceptedFileTypes: [".jpg", ".png"],
     variant: "dragAndDropWithIcon",
-  },
+  } as FileUploaderProps, // This is a hack.
 };

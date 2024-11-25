@@ -10,16 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { CircularProgress } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
-import {
-  CircularProgress,
-  CircularProgressProps,
-} from "@okta/odyssey-react-mui";
-import { within } from "@storybook/test";
-import { expect } from "@storybook/test";
+import { expect, within } from "@storybook/test";
+
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-const storybookMeta: Meta<CircularProgressProps> = {
+const meta = {
   title: "MUI Components/Circular Progress",
   component: CircularProgress,
   argTypes: {
@@ -27,16 +24,18 @@ const storybookMeta: Meta<CircularProgressProps> = {
       control: { type: "number" },
     },
     ariaLabel: {
-      control: { type: "string" },
+      control: { type: "text" },
     },
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
-};
+} satisfies Meta<typeof CircularProgress>;
 
-export default storybookMeta;
+export default meta;
 
-export const Indeterminate: StoryObj<CircularProgressProps> = {
+type Story = StoryObj<typeof meta>;
+
+export const Indeterminate: Story = {
   parameters: {
     docs: {
       description: {
@@ -57,7 +56,7 @@ export const Indeterminate: StoryObj<CircularProgressProps> = {
   },
 };
 
-export const Determinate: StoryObj<CircularProgressProps> = {
+export const Determinate: Story = {
   parameters: {
     docs: {
       description: {
