@@ -80,7 +80,6 @@ const storybookMeta: Meta<DatePickerProps> = {
       },
     },
     timeZoneOptions: {
-      control: "none",
       description: "an array of options for the TimeZonePicker",
       table: {
         type: {
