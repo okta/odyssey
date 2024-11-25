@@ -37,14 +37,15 @@ import {
   KeyboardEvent,
 } from "react";
 import {
-  ArrowTopIcon,
   ArrowBottomIcon,
   ArrowDownIcon,
+  ArrowTopIcon,
+  ArrowUnsortedIcon,
   ArrowUpIcon,
   DragIndicatorIcon,
   ListIcon,
-  ShowIcon,
   MoreIcon,
+  ShowIcon,
 } from "../icons.generated";
 import { Checkbox as MuiCheckbox } from "@mui/material";
 import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext";
@@ -56,7 +57,6 @@ import { DataFilter, DataFilters } from "./DataFilters";
 import { Button } from "../Buttons";
 import { Box } from "../Box";
 import { MenuButton, MenuItem } from "..";
-import { ArrowUnsortedIcon } from "../icons.generated";
 import { useTranslation } from "react-i18next";
 
 export const densityValues = ["comfortable", "spacious", "compact"] as const;
@@ -219,7 +219,9 @@ export type DataTableProps = {
     search?: string;
     filters?: DataFilter[];
     sort?: MRT_SortingState;
-  }) => MRT_TableOptions<MRT_RowData>["data"] | Promise<MRT_TableOptions<MRT_RowData>["data"]>;
+  }) =>
+    | MRT_TableOptions<MRT_RowData>["data"]
+    | Promise<MRT_TableOptions<MRT_RowData>["data"]>;
   /**
    * Callback that fires when the user reorders rows within the table. Can be used
    * to propogate order change to the backend.
@@ -789,14 +791,10 @@ const DataTable = ({
                 .map((column) => (
                   <MenuItem
                     key={column.accessorKey}
-                    onClick={() =>
-                      handleColumnVisibility(column.accessorKey)
-                    }
+                    onClick={() => handleColumnVisibility(column.accessorKey)}
                   >
                     <MuiCheckbox
-                      checked={
-                        columnVisibility[column.accessorKey] !== false
-                      }
+                      checked={columnVisibility[column.accessorKey] !== false}
                     />
                     {column.header}
                   </MenuItem>

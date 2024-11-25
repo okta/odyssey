@@ -39,7 +39,6 @@ import { SideNavFooterContent } from "./SideNavFooterContent";
 import { SideNavItemContentContext } from "./SideNavItemContentContext";
 import { SideNavToggleButton } from "./SideNavToggleButton";
 import { SortableList } from "./SortableList/SortableList";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { arrayMove } from "@dnd-kit/sortable";
 
 export const DEFAULT_SIDE_NAV_WIDTH = "300px";
@@ -580,7 +579,9 @@ const SideNav = ({
             >
               <SideNavListContainer role="none" ref={scrollableContentRef}>
                 {isLoading
-                  ? [...Array(6)].map((_, index) => <LoadingItem key={index} />)
+                  ? Array(6)
+                      .fill(null)
+                      .map((_, index) => <LoadingItem key={index} />)
                   : processedSideNavItems?.map((item) => {
                       const {
                         id,

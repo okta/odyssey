@@ -10,22 +10,28 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createContext, createRef, RefObject, useContext, useMemo } from "react";
-import type { CSSProperties, PropsWithChildren } from "react";
 import type {
   DraggableSyntheticListeners,
   UniqueIdentifier,
 } from "@dnd-kit/core";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { useSortable } from "@dnd-kit/sortable";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { CSS } from "@dnd-kit/utilities";
 import styled from "@emotion/styled";
+import {
+  createContext,
+  createRef,
+  RefObject,
+  useContext,
+  useMemo,
+  CSSProperties,
+  PropsWithChildren,
+} from "react";
+import { useTranslation } from "react-i18next";
+
 import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../../../OdysseyDesignTokensContext";
-import { useTranslation } from "react-i18next";
 
 type ItemProps = {
   id: UniqueIdentifier;
@@ -38,7 +44,7 @@ export type SortableItemContextType = {
   attributes: Record<string, any>;
   listeners: DraggableSyntheticListeners;
   ref: RefObject<HTMLButtonElement>;
-}
+};
 
 const SortableItemContext = createContext<SortableItemContextType>({
   attributes: {},
