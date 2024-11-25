@@ -25,6 +25,8 @@ export GITHUB_RESPONSE=$(curl -s -L \
   -H "X-GitHub-Api-Version: 2022-11-28" \
   "https://api.github.com/repos/$GITHUB_ORG/$REPO/commits/$SHA/pulls")
 
+echo "Got GITHUB_RESPONSE: $GITHUB_RESPONSE"
+
 export BASE_BRANCH_NAME=$(echo $GITHUB_RESPONSE | jq -r '.[0].base.ref')
 export COMMIT_MESSAGE=$(echo $GITHUB_RESPONSE | jq -r '.[0].body')
 export PR_NUMBER=$(echo $GITHUB_RESPONSE | jq -r '.[0].number')
