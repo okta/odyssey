@@ -26,7 +26,7 @@ const storybookMeta: Meta = {
   component: PaginatedTable,
   argTypes: {
     columns: {
-      control: "array",
+      control: "object",
       type: {
         required: true,
         name: "other",
@@ -41,10 +41,8 @@ const storybookMeta: Meta = {
         value: "MaterialReactTableProps<TData>",
       },
     },
-    getRowId: {
-    },
-    fetchMoreData: {
-    },
+    getRowId: {},
+    fetchMoreData: {},
     hasError: {
       control: "boolean",
     },
@@ -57,21 +55,17 @@ const storybookMeta: Meta = {
     isFetching: {
       control: "boolean",
     },
-    onGlobalFilterChange: {
-    },
-    onPaginationChange: {
-    },
-    onRowSelectionChange: {
-    },
+    onGlobalFilterChange: {},
+    onPaginationChange: {},
+    onRowSelectionChange: {},
     state: {
       control: "object",
     },
-    ToolbarButtons: {
-    },
+    ToolbarButtons: {},
     rowsPerPage: {
       table: {
         defaultValue: {
-          summary: 10,
+          summary: "10",
         },
       },
     },

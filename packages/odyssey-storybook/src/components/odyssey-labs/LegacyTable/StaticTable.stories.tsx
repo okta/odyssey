@@ -22,7 +22,7 @@ const storybookMeta: Meta = {
   component: StaticTable,
   argTypes: {
     columns: {
-      control: "array",
+      control: "object",
       type: {
         required: true,
         name: "other",
@@ -37,10 +37,8 @@ const storybookMeta: Meta = {
         value: "MaterialReactTableProps<TData>",
       },
     },
-    getRowId: {
-    },
-    fetchMoreData: {
-    },
+    getRowId: {},
+    fetchMoreData: {},
     hasError: {
       control: "boolean",
     },
@@ -53,12 +51,9 @@ const storybookMeta: Meta = {
     isFetching: {
       control: "boolean",
     },
-    onGlobalFilterChange: {
-    },
-    onPaginationChange: {
-    },
-    onRowSelectionChange: {
-    },
+    onGlobalFilterChange: {},
+    onPaginationChange: {},
+    onRowSelectionChange: {},
     state: {
       control: "object",
     },
