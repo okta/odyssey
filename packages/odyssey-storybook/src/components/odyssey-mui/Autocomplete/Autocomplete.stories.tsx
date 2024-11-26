@@ -97,7 +97,6 @@ const storybookMeta: Meta<typeof Autocomplete> = {
       description: "Let's the component know it should virtualize the list",
       table: {
         type: {
-          required: false,
           summary: "boolean",
         },
       },

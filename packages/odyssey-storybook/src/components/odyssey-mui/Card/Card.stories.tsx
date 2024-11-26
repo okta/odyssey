@@ -108,7 +108,6 @@ const meta = {
     description:
       "Identity can create great user experiences, increase customer sign-ups, and...",
     overline: "Overline",
-    onClick: undefined,
   },
   decorators: [MuiThemeDecorator],
 } satisfies Meta<typeof Card>;
@@ -121,7 +120,9 @@ export const Default: Story = {
   render: (args) => (
     <Box sx={{ maxWidth: 262 }}>
       <Card
-        {...args}
+        title={args.title}
+        description={args.description}
+        overline={args.overline}
         button={<Button variant="primary" label="Button" />}
         image={<img src="https://placehold.co/128" alt="Example logo" />}
         menuButtonChildren={
@@ -145,7 +146,9 @@ export const Clickable: Story = {
     return (
       <Box sx={{ maxWidth: 262 }}>
         <Card
-          {...args}
+          title={args.title}
+          description={args.description}
+          overline={args.overline}
           image={<img src="https://placehold.co/128" alt="Example logo" />}
           onClick={onClick}
         />
@@ -155,14 +158,19 @@ export const Clickable: Story = {
 };
 
 export const ClickableWithoutImage: Story = {
-  render: ({ ...args }) => {
+  render: (args) => {
     const onClick = () => {
       alert("Clicked!");
     };
 
     return (
       <Box sx={{ maxWidth: 262 }}>
-        <Card {...args} onClick={onClick} />
+        <Card
+          title={args.title}
+          description={args.description}
+          overline={args.overline}
+          onClick={onClick}
+        />
       </Box>
     );
   },
@@ -172,8 +180,10 @@ export const ButtonWithoutImage: Story = {
   render: (args) => (
     <Box sx={{ maxWidth: 262 }}>
       <Card
-        button={<Button variant="primary" label="Button" />}
+        title={args.title}
         description={args.description}
+        overline={args.overline}
+        button={<Button variant="primary" label="Button" />}
         image={args.image}
         menuButtonChildren={
           <>
@@ -182,8 +192,6 @@ export const ButtonWithoutImage: Story = {
             <MenuItem>Menu option 3</MenuItem>
           </>
         }
-        overline={args.overline}
-        title={args.title}
       />
     </Box>
   ),
