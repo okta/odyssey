@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # must install dependencies for Odyssey and perform standard setup (eg. install yarn)
 source $OKTA_HOME/$REPO/scripts/setup.sh
