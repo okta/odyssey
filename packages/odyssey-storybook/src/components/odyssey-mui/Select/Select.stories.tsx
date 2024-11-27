@@ -10,17 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { SelectChangeEvent } from "@mui/material";
 import { Meta, StoryObj } from "@storybook/react";
 import { Select, SelectProps, Link } from "@okta/odyssey-react-mui";
 import { queryOdysseySelector } from "@okta/odyssey-react-mui/test-selectors";
-import { screen, userEvent, waitFor } from "@storybook/test";
-import { expect } from "@storybook/test";
+import { expect, screen, userEvent, waitFor } from "@storybook/test";
 import { useCallback, useState } from "react";
 
-import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { axeRun } from "../../../axe-util";
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
-import { SelectChangeEvent } from "@mui/material";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const optionsArray: SelectProps<string | string[], boolean>["options"] = [
   "Roles and permissions",
@@ -236,10 +235,14 @@ export const Default: Story = {
         const listItem = listboxElement.children[0];
         await userEvent.click(listItem);
         await userEvent.tab();
-        await waitFor(() => expect(listboxElement).not.toBeInTheDocument());
+        await waitFor(() => {
+          expect(listboxElement).not.toBeInTheDocument()
+        });
         const inputElement = canvasElement.querySelector("input");
         await expect(inputElement?.value).toBe("Roles and permissions");
-        await waitFor(() => axeRun("Select Default"));
+        await waitFor(() => {
+          axeRun("Select Default")
+        });
       }
     });
   },
@@ -415,14 +418,18 @@ export const MultiSelect: Story = {
         await userEvent.click(listboxElement.children[0]);
         await userEvent.click(listboxElement.children[1]);
         await userEvent.tab();
-        await waitFor(() => expect(listboxElement).not.toBeInTheDocument());
+        await waitFor(() => {
+          expect(listboxElement).not.toBeInTheDocument()
+        });
 
         const inputElement = canvasElement.querySelector("input");
         await expect(inputElement?.value).toBe(
           "Roles and permissions,Okta Privileged Access components",
         );
         await userEvent.click(canvasElement);
-        await waitFor(() => axeRun("Select Multiple"));
+        await waitFor(() => {
+          axeRun("Select Multiple")
+        });
       }
     });
   },

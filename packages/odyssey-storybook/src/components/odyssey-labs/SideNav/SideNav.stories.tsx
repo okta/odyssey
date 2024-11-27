@@ -16,7 +16,6 @@ import {
   SideNavProps,
 } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
 import {
   AppsIcon,
   ClockIcon,
@@ -32,16 +31,18 @@ import {
   FolderIcon,
   NotificationIcon,
 } from "@okta/odyssey-react-mui/icons";
-import { expect } from "@storybook/test";
 import {
   configure,
+  expect,
   userEvent,
   waitFor,
   within,
 } from "@storybook/test";
-import { PlaywrightProps } from "../../odyssey-mui/storybookTypes";
-import PlaceholderLogo from "../PickerWithOptionAdornment/PlaceholderLogo";
 import { useEffect, useState } from "react";
+
+import { PlaywrightProps } from "../../odyssey-mui/storybookTypes";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
+import PlaceholderLogo from "../PickerWithOptionAdornment/PlaceholderLogo";
 
 const storybookMeta: Meta<SideNavProps> = {
   title: "Labs Components/SideNav",

@@ -10,14 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useCallback, useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
-
-import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { Accordion, AccordionProps } from "@okta/odyssey-react-mui";
-import { expect } from "@storybook/test";
-import { userEvent, within, waitFor } from "@storybook/test";
+import { expect, userEvent, within, waitFor } from "@storybook/test";
+import { useCallback, useState } from "react";
+
 import { PlaywrightProps } from "../storybookTypes";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<AccordionProps> = {
   title: "MUI Components/Accordion",

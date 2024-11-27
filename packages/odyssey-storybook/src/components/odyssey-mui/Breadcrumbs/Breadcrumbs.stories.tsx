@@ -16,9 +16,8 @@ import {
   type BreadcrumbsProps,
 } from "@okta/odyssey-react-mui";
 import type { Meta, StoryObj } from "@storybook/react";
+import { expect, within } from "@storybook/test";
 
-import { within } from "@storybook/test";
-import { expect } from "@storybook/test";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<BreadcrumbsProps> = {

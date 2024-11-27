@@ -387,12 +387,16 @@ const filterData = ({
 
         // If filter value is array, search for each array value
         if (Array.isArray(value)) {
-          return value.some((arrayValue) => {
-            return row[id as keyof (Planet | Person)]
+          return value.some((arrayValue) => (
+            typeof arrayValue === "string"
+            ? (
+              row[id as keyof (Planet | Person)]
               ?.toString()
               .toLowerCase()
-              .includes(arrayValue.toString().toLowerCase());
-          });
+              .includes(arrayValue.toString().toLowerCase())
+            )
+            : false
+          ));
         }
 
         // In the custom filter examples, we provide a "starting letter"
@@ -1004,7 +1008,7 @@ export const Truncation: StoryObj<DataTableProps> = {
 
     const getData = useCallback(() => {
       const data: Array<{ truncated: string; wrapped: string }> = [];
-      [...Array(10)].forEach(() => {
+      Array(10).fill(null).forEach(() => {
         data.push({
           truncated:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla a quam et vulputate. Phasellus elementum turpis a lacus feugiat bibendum.",

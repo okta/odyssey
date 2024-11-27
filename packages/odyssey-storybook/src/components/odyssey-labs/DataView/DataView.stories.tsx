@@ -65,7 +65,7 @@ type DataViewMetaProps = DataViewProps<Person> &
     hasAdditionalActionMenuItems: boolean;
   };
 
-const storybookMeta: Meta<DataViewMetaProps> = {
+const meta = {
   title: "Labs Components/DataView",
   component: DataView,
   argTypes: {
@@ -258,9 +258,11 @@ const storybookMeta: Meta<DataViewMetaProps> = {
     availableLayouts: ["table", "list", "grid"],
   },
   decorators: [MuiThemeDecorator],
-};
+} satisfies Meta<DataViewMetaProps>;
 
-export default storybookMeta;
+export default meta;
+
+type Story = StoryObj<typeof meta>
 
 const useDataCallbacks = (
   data: Person[],
@@ -351,7 +353,7 @@ const customNoResultsPlaceholder = (
   />
 );
 
-const itemProps = (row: DataRow) => ({
+const itemProps: CardLayoutProps<Person>["itemProps"] = (row) => ({
   overline: `${row.city}, ${row.state}`,
   title: row.name,
   description: `${row.name} is ${row.age} years old.`,
@@ -370,8 +372,9 @@ const itemProps = (row: DataRow) => ({
 });
 
 // Base story configuration
-const BaseStory: StoryObj<DataViewMetaProps> = {
-  render: function Base(args) {
+const BaseStory: Story = {
+  args: {} as DataViewMetaProps, // This is a hack.
+  render: function C(args) {
     const [data, setData] = useState<Person[]>(personData);
     const { getData, onReorderRows, onChangeRowSelection } = useDataCallbacks(
       data,
@@ -437,7 +440,7 @@ const BaseStory: StoryObj<DataViewMetaProps> = {
           initialDensity: args.initialDensity,
         }}
         cardLayoutOptions={{
-          itemProps: itemProps,
+          itemProps,
           rowActionMenuItems: args.hasActionMenuItems
             ? actionMenuItems
             : undefined,
@@ -448,40 +451,40 @@ const BaseStory: StoryObj<DataViewMetaProps> = {
   },
 };
 
-export const Default: StoryObj<DataViewMetaProps> = {
+export const Default: Story = {
   ...BaseStory,
   args: {},
 };
 
-export const TableOnly: StoryObj<DataViewMetaProps> = {
+export const TableOnly: Story = {
   ...BaseStory,
   args: {
     availableLayouts: ["table"],
   },
 };
 
-export const ListAndGrid: StoryObj<DataViewMetaProps> = {
+export const ListAndGrid: Story = {
   ...BaseStory,
   args: {
     availableLayouts: ["list", "grid"],
   },
 };
 
-export const ListOnly: StoryObj<DataViewMetaProps> = {
+export const ListOnly: Story = {
   ...BaseStory,
   args: {
     availableLayouts: ["list"],
   },
 };
 
-export const GridOnly: StoryObj<DataViewMetaProps> = {
+export const GridOnly: Story = {
   ...BaseStory,
   args: {
     availableLayouts: ["grid"],
   },
 };
 
-export const Everything: StoryObj<DataViewMetaProps> = {
+export const Everything: Story = {
   ...BaseStory,
   args: {
     hasRowReordering: true,
@@ -501,7 +504,7 @@ export const Everything: StoryObj<DataViewMetaProps> = {
   },
 };
 
-export const ExpandableRowsAndCards: StoryObj<DataViewMetaProps> = {
+export const ExpandableRowsAndCards: Story = {
   render: function Base(args) {
     const [data, setData] = useState<Person[]>(personData);
     const { getData, onReorderRows, onChangeRowSelection } = useDataCallbacks(
@@ -536,7 +539,7 @@ export const ExpandableRowsAndCards: StoryObj<DataViewMetaProps> = {
   },
 };
 
-export const Truncation: StoryObj<DataViewMetaProps> = {
+export const Truncation: Story = {
   render: function C() {
     const columns = useMemo(
       () => [
@@ -578,7 +581,7 @@ export const Truncation: StoryObj<DataViewMetaProps> = {
   },
 };
 
-export const Empty: StoryObj<DataViewMetaProps> = {
+export const Empty: Story = {
   args: {
     hasChangeableDensity: true,
     hasColumnResizing: true,
@@ -638,7 +641,7 @@ export const Empty: StoryObj<DataViewMetaProps> = {
   },
 };
 
-export const CustomFilters: StoryObj<DataViewMetaProps> = {
+export const CustomFilters: Story = {
   args: {
     hasChangeableDensity: true,
     hasColumnResizing: true,
@@ -751,7 +754,7 @@ export const CustomFilters: StoryObj<DataViewMetaProps> = {
   },
 };
 
-export const FilterWithCustomRender: StoryObj<DataViewMetaProps> = {
+export const FilterWithCustomRender: Story = {
   args: {
     hasChangeableDensity: true,
     hasColumnResizing: true,
@@ -835,7 +838,7 @@ export const FilterWithCustomRender: StoryObj<DataViewMetaProps> = {
   },
 };
 
-export const CustomFilterWithDefaultVariant: StoryObj<DataViewMetaProps> = {
+export const CustomFilterWithDefaultVariant: Story = {
   args: {
     hasChangeableDensity: true,
     hasColumnResizing: true,
@@ -895,7 +898,7 @@ export const CustomFilterWithDefaultVariant: StoryObj<DataViewMetaProps> = {
   },
 };
 
-export const AdditionalActions: StoryObj<DataViewMetaProps> = {
+export const AdditionalActions: Story = {
   ...BaseStory,
   args: {
     hasAdditionalActionButton: true,
@@ -903,7 +906,7 @@ export const AdditionalActions: StoryObj<DataViewMetaProps> = {
   },
 };
 
-export const ColumnGrowDemo: StoryObj<DataViewMetaProps> = {
+export const ColumnGrowDemo: Story = {
   render: function C() {
     const columns = useMemo(
       (): DataColumns<DataRow> => [
@@ -967,7 +970,7 @@ export const ColumnGrowDemo: StoryObj<DataViewMetaProps> = {
   },
 };
 
-export const LoadMore: StoryObj<DataViewMetaProps> = {
+export const LoadMore: Story = {
   ...BaseStory,
   args: {
     availableLayouts: ["table"],
@@ -977,7 +980,7 @@ export const LoadMore: StoryObj<DataViewMetaProps> = {
   },
 };
 
-export const PaginationHook: StoryObj<DataViewMetaProps> = {
+export const PaginationHook: Story = {
   render: function C() {
     const [data, setData] = useState<Person[]>(personData);
     const { getData } = useDataCallbacks(data, setData);
@@ -1010,7 +1013,7 @@ const stackItemProps = (row: Person) => ({
   image: <img src="https://placehold.co/400" alt="Logo" />,
 });
 
-export const StackCards: StoryObj<DataViewMetaProps> = {
+export const StackCards: Story = {
   render: function C() {
     const [data, setData] = useState<Person[]>(personData);
     const { getData } = useDataCallbacks(data, setData);
@@ -1035,7 +1038,7 @@ const compactItemProps = (row: Person) => ({
   image: <img src="https://placehold.co/400" alt="Logo" />,
 });
 
-export const CompactCards: StoryObj<DataViewMetaProps> = {
+export const CompactCards: Story = {
   render: function C() {
     const [data, setData] = useState<Person[]>(personData);
     const { getData } = useDataCallbacks(data, setData);
@@ -1055,7 +1058,7 @@ export const CompactCards: StoryObj<DataViewMetaProps> = {
   },
 };
 
-export const GrowColumnWithoutActions: StoryObj<DataViewMetaProps> = {
+export const GrowColumnWithoutActions: Story = {
   render: function C() {
     const [data, setData] = useState<Person[]>(personData);
     const { getData } = useDataCallbacks(data, setData);
@@ -1090,7 +1093,7 @@ export const GrowColumnWithoutActions: StoryObj<DataViewMetaProps> = {
   },
 };
 
-export const GrowColumnWithActions: StoryObj<DataViewMetaProps> = {
+export const GrowColumnWithActions: Story = {
   render: function C() {
     const [data, setData] = useState<Person[]>(personData);
     const { getData } = useDataCallbacks(data, setData);

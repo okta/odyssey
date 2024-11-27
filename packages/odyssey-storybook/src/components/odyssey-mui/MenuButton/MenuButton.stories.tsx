@@ -10,7 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, StoryObj } from "@storybook/react";
 import {
   Box,
   Divider,
@@ -32,13 +31,13 @@ import {
   CalendarIcon,
   QuestionCircleIcon,
 } from "@okta/odyssey-react-mui/icons";
+import { Meta, StoryObj } from "@storybook/react";
 import type { ReactNode } from "react";
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import icons from "../../../../.storybook/components/iconUtils";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { userEvent, waitFor, within } from "@storybook/test";
-import { expect } from "@storybook/test";
+import { expect, userEvent, waitFor, within } from "@storybook/test";
 import { axeRun } from "../../../axe-util";
 import type { PlaywrightProps } from "../storybookTypes";
 
@@ -511,7 +510,7 @@ export const HelpPopover: StoryObj<MenuButtonProps> = {
     tooltipText: "More actions",
   },
   play: async ({ canvasElement, step }: PlaywrightProps<MenuButtonProps>) => {
-    await step("MenuButton Aria-Label", async () => {
+    await step("MenuButton Aria-Label", () => {
       const canvas = within(canvasElement);
       const menuButton = canvas.queryByRole("button", { name: "More actions" });
       expect(menuButton).not.toBeNull();

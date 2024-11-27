@@ -12,14 +12,13 @@
 
 import { Autocomplete, Link } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
-import { expect } from "@storybook/test";
-import { userEvent, waitFor, within, screen } from "@storybook/test";
-
-import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
-import { axeRun } from "../../../axe-util";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { expect, screen, userEvent, waitFor, within } from "@storybook/test";
 import { SyntheticEvent, useCallback, useState } from "react";
+
 import { LargeDataSet, largeDataSet } from "./large-data-collection";
+import { axeRun } from "../../../axe-util";
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const stations: ReadonlyArray<StationType> = [
   { label: "Anderson Station" },

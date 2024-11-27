@@ -15,13 +15,12 @@ import {
   checkboxValidityValues,
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
-import { userEvent, within } from "@storybook/test";
-import { expect } from "@storybook/test";
+import { expect, userEvent, within } from "@storybook/test";
+import { ChangeEvent, useCallback, useState } from "react";
 
+import { axeRun } from "../../../axe-util";
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { axeRun } from "../../../axe-util";
-import { ChangeEvent, useCallback, useState } from "react";
 
 const meta = {
   title: "MUI Components/Forms/Checkbox",
@@ -29,7 +28,7 @@ const meta = {
   argTypes: {
     ariaLabel: {
       control: "text",
-      description: "Aria-label for the checkboxx",
+      description: "Aria-label for the checkbox",
       table: {
         type: {
           summary: "string",

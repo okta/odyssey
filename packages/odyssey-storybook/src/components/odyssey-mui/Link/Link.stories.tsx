@@ -10,13 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { StoryObj } from "@storybook/react";
-
-import { within } from "@storybook/test";
-import { expect } from "@storybook/test";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { Link, LinkProps, linkVariantValues } from "@okta/odyssey-react-mui";
 import { InformationCircleFilledIcon } from "@okta/odyssey-react-mui/icons";
+import type { StoryObj } from "@storybook/react";
+import { expect, within } from "@storybook/test";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
+
 import icons from "../../../../.storybook/components/iconUtils";
 
 export default {

@@ -17,11 +17,10 @@ import {
   bannerSeverityValues,
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
+import { expect, fn, userEvent, within } from "@storybook/test";
 
-import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { userEvent, within } from "@storybook/test";
-import { expect, fn } from "@storybook/test";
 import { axeRun } from "../../../axe-util";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
 import type { PlaywrightProps } from "../storybookTypes";
 
 type PlayType = {

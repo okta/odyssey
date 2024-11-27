@@ -10,14 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useCallback, useMemo, useRef, useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
-import { Button } from "@okta/odyssey-react-mui";
+import { Button, DataTableColumn } from "@okta/odyssey-react-mui";
 import {
   PaginatedTable,
   PaginatedTableProps,
 } from "@okta/odyssey-react-mui/labs";
-import { DataTableColumn } from "@okta/odyssey-react-mui";
+import { useCallback, useMemo, useRef, useState } from "react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
@@ -676,7 +675,6 @@ export const CustomToolbar: StoryObj<PaginatedTableProps<Person>> = {
 - Pass component to expanded row. -- NOT TODAY
 - Infinite scroll.
 */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 // export const Reports: StoryObj<TableProps<any>> = {
 //   args: {
 //     columns: reportColumns,
