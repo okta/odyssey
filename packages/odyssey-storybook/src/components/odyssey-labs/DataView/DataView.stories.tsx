@@ -104,10 +104,8 @@ const meta = {
     hasRowSelection: {
       control: "boolean",
     },
-    onChangeRowSelection: {
-    },
-    bulkActionMenuItems: {
-    },
+    onChangeRowSelection: {},
+    bulkActionMenuItems: {},
     hasPagination: {
       control: "boolean",
     },
@@ -136,8 +134,7 @@ const meta = {
     hasSearchSubmitButton: {
       control: "boolean",
     },
-    filters: {
-    },
+    filters: {},
     searchDelayTime: {
       control: "number",
     },
@@ -147,10 +144,8 @@ const meta = {
     errorMessage: {
       control: "text",
     },
-    emptyPlaceholder: {
-    },
-    noResultsPlaceholder: {
-    },
+    emptyPlaceholder: {},
+    noResultsPlaceholder: {},
     initialLayout: {
       control: "select",
       options: availableLayouts,
@@ -262,7 +257,7 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>
+type Story = StoryObj<DataViewMetaProps>;
 
 const useDataCallbacks = (
   data: Person[],
@@ -429,6 +424,7 @@ const BaseStory: Story = {
         tableLayoutOptions={{
           columns: personColumns,
           hasSorting: args.hasSorting,
+          // @ts-expect-error TODO: We need to fix this.
           rowActionMenuItems: args.hasActionMenuItems
             ? actionMenuItems
             : undefined,
@@ -441,6 +437,7 @@ const BaseStory: Story = {
         }}
         cardLayoutOptions={{
           itemProps,
+          // @ts-expect-error TODO: We need to fix this.
           rowActionMenuItems: args.hasActionMenuItems
             ? actionMenuItems
             : undefined,
@@ -558,14 +555,16 @@ export const Truncation: Story = {
 
     const getData = useCallback(() => {
       const data: Array<{ truncated: string; wrapped: string }> = [];
-      [...Array(10)].forEach(() => {
-        data.push({
-          truncated:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla a quam et vulputate. Phasellus elementum turpis a lacus feugiat bibendum.",
-          wrapped:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla a quam et vulputate. Phasellus elementum turpis a lacus feugiat bibendum.",
-        });
-      }); // Corrected the missing parenthesis here
+      Array(10)
+        .fill(null)
+        .forEach(() => {
+          data.push({
+            truncated:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla a quam et vulputate. Phasellus elementum turpis a lacus feugiat bibendum.",
+            wrapped:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla a quam et vulputate. Phasellus elementum turpis a lacus feugiat bibendum.",
+          });
+        }); // Corrected the missing parenthesis here
       return data;
     }, []);
 

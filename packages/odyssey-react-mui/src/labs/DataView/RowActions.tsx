@@ -25,11 +25,11 @@ import { DataTableProps } from "./DataTable";
 
 export type RowActionsProps<TData extends MRT_RowData> = {
   isRowReorderingDisabled?: boolean;
-  row: MRT_Row<MRT_RowData> | MRT_RowData;
+  row: MRT_Row<TData>;
   rowActionButtons?: (
-    row: MRT_RowData,
+    row: TData,
   ) => ReactElement<typeof Button> | ReactElement<typeof Fragment>;
-  rowActionMenuItems?: (row: MRT_RowData) => MenuButtonProps["children"];
+  rowActionMenuItems?: (row: TData) => MenuButtonProps["children"];
   rowIndex: number;
   totalRows?: DataTableProps<TData>["totalRows"];
   updateRowOrder?: ({
