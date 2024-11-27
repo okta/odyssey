@@ -1,5 +1,4 @@
 #!/bin/bash
-set -euo pipefail
 
 source $OKTA_HOME/$REPO/scripts/setup.sh
 
