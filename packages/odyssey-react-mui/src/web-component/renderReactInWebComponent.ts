@@ -81,6 +81,7 @@ export class ReactInWebComponentElement extends HTMLElement {
     shadowRoot.appendChild(this.reactRootElements.stylesRootElement);
     shadowRoot.appendChild(this.reactRootElements.appRootElement);
 
+    // If we want to support React v17 in the future, we can use a try-catch on the import to grab the old `ReactDOM.render` function if `react-dom/client` errors. --Kevin Ghadyani
     this.reactRootPromise = import("react-dom/client").then(({ createRoot }) =>
       createRoot(this.reactRootElements.appRootElement),
     );
