@@ -22,6 +22,9 @@
       ],
       "test-selectors": [
         "./dist/src/test-selectors/index.d.ts"
+      ],
+      "unified-ui": [
+        "./dist/src/unified-ui/index.d.ts"
       ]
     }
   },
@@ -38,6 +41,10 @@
       "types": "./dist/src/test-selectors/index.d.ts",
       "default": "./dist/src/test-selectors/index.js"
     },
+    "./unified-ui": {
+      "types": "./dist/src/unified-ui/index.d.ts",
+      "default": "./dist/src/unified-ui/index.js"
+    },
     ".": {
       "types": "./dist/src/index.d.ts",
       "default": "./dist/src/index.js"
@@ -50,8 +57,9 @@
     "build:cleanIconsIndex": "rimraf src/icons.generated/index.ts",
     "build:generateTranslations": "tsx scripts/properties-to-ts.ts bundle",
     "build:source": "tsc --project tsconfig.production.json",
+    "build:testSelectors": "tsx scripts/generateTestSelectorsJson.ts",
     "build:types": "tsc --project tsconfig.production-types.json",
-    "build": "yarn build:clean && yarn build:generateTranslations && yarn build:source",
+    "build": "yarn build:clean && yarn build:generateTranslations && yarn build:source && yarn build:testSelectors",
     "ci:coverage": "NODE_ENV=test yarn vitest --coverage --coverageReporters=text-summary",
     "dev:generateTranslations": "build:generateTranslations --watch",
     "dev:source": "yarn build:source --watch",

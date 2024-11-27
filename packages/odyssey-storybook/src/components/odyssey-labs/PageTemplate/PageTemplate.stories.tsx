@@ -22,7 +22,7 @@ import {
   Layout,
   PageTemplate,
   PageTemplateProps,
-} from "@okta/odyssey-react-mui/labs";
+} from "@okta/odyssey-react-mui/unified-ui";
 import {
   Box,
   Button,

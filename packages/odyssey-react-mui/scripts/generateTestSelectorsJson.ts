@@ -10,4 +10,24 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-// Don't put anything in here. These files are separately exported elsewhere.
+import { mkdir, writeFile } from "node:fs/promises";
+import { join } from "node:path";
+
+const distDirectory = join(
+  import.meta.url.replace("file:", ""),
+  "..",
+  "..",
+  "dist",
+);
+
+import("../src/test-selectors/index").then(
+  ({ odysseyTestSelector: testSelector }) =>
+    mkdir(distDirectory)
+      .catch(() => null)
+      .then(() =>
+        writeFile(
+          join(distDirectory, "testSelectors.json"),
+          JSON.stringify(testSelector),
+        ),
+      ),
+);

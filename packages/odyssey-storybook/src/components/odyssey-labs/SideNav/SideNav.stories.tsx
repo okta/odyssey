@@ -14,7 +14,7 @@ import {
   SideNav,
   SideNavItem,
   SideNavProps,
-} from "@okta/odyssey-react-mui/labs";
+} from "@okta/odyssey-react-mui/unified-ui";
 import { Meta, StoryObj } from "@storybook/react";
 import {
   AppsIcon,
@@ -31,13 +31,7 @@ import {
   FolderIcon,
   NotificationIcon,
 } from "@okta/odyssey-react-mui/icons";
-import {
-  configure,
-  expect,
-  userEvent,
-  waitFor,
-  within,
-} from "@storybook/test";
+import { configure, expect, userEvent, waitFor, within } from "@storybook/test";
 import { useEffect, useState } from "react";
 
 import { PlaywrightProps } from "../../odyssey-mui/storybookTypes";

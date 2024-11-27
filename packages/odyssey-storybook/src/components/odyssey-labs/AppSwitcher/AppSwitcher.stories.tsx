@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { AppSwitcher } from "@okta/odyssey-react-mui/labs";
+import { AppSwitcher } from "@okta/odyssey-react-mui/unified-ui";
 import { Meta, StoryObj } from "@storybook/react";
 import { expect, within } from "@storybook/test";
 

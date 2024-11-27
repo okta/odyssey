@@ -76,9 +76,7 @@ describe("SideNav", () => {
       </OdysseyProvider>,
     );
 
-    expect(
-      screen.getByRole("heading", { name: headerText }),
-    ).toBeVisible();
+    expect(screen.getByRole("heading", { name: headerText })).toBeVisible();
   });
 
   test("is collapsible", async () => {
@@ -320,7 +318,9 @@ describe("SideNav", () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByRole("listitem")).toHaveTextContent(String(badgeCount));
-    })
+      expect(screen.getByRole("listitem")).toHaveTextContent(
+        String(badgeCount),
+      );
+    });
   });
 });

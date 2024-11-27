@@ -114,4 +114,4 @@ export * from "./ToastStack";
 export * from "./Tooltip";
 export * from "./Typography";
 export * from "./useUniqueId";
-export * from "./web-component";
+export * from "./web-component/shadow-dom";

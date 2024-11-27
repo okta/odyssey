@@ -10,4 +10,5 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-// Don't put anything in here. These files are separately exported elsewhere.
+export * from "./Layout";
+export * from "./PageTemplate";

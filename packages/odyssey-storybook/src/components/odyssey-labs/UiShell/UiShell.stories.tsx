@@ -17,7 +17,7 @@ import {
   UserProfile,
   type UiShellNavComponentProps,
   type UiShellProps,
-} from "@okta/odyssey-react-mui/labs";
+} from "@okta/odyssey-react-mui/unified-ui";
 import {
   Banner,
   Button,
