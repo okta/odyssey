@@ -19,7 +19,6 @@ import { Meta, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
-import { FileUploaderProps } from "../../../../../odyssey-react-mui/src/FileUploader";
 import { fn } from "@storybook/test";
 
 // TODO: Write tests for this component @see https://oktainc.atlassian.net/browse/OKTA-704264
@@ -107,38 +106,38 @@ type Story = StoryObj<typeof meta>;
 export const ButtonOnly: Story = {
   args: {
     variant: "button",
-  } as FileUploaderProps, // This is a hack.
+  },
 };
 
 export const DragAndDropWithIcon: Story = {
   args: {
     type: "multiple",
     variant: "dragAndDropWithIcon",
-  } as FileUploaderProps, // This is a hack.
+  },
 };
 
 export const DragAndDropWithoutIcon: Story = {
   args: {
     variant: "dragAndDrop",
-  } as FileUploaderProps, // This is a hack.
+  },
 };
 
 export const SingleFileAllowed: Story = {
   args: {
     variant: "dragAndDropWithIcon",
-  } as FileUploaderProps, // This is a hack.
+  },
 };
 
 export const MultipleFileAllowed: Story = {
   args: {
     type: "multiple",
     variant: "dragAndDropWithIcon",
-  } as FileUploaderProps, // This is a hack.
+  },
 };
 
 export const SpecificFileTypes: Story = {
   args: {
     acceptedFileTypes: [".jpg", ".png"],
     variant: "dragAndDropWithIcon",
-  } as FileUploaderProps, // This is a hack.
+  },
 };
