@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { act } from "@testing-library/react";
+import { act, waitFor } from "@testing-library/react";
 
 import { renderUiShell } from "./renderUiShell";
 import {
@@ -96,7 +96,7 @@ describe("renderUiShell", () => {
     ).toBeGreaterThan(0);
   });
 
-  test("renders `UiShell` with updated props", () => {
+  test("renders `UiShell` with updated props", async () => {
     const rootElement = document.createElement("div");
     const appName = "Hello World!";
 
@@ -126,12 +126,14 @@ describe("renderUiShell", () => {
       });
     });
 
-    expect(
-      rootElement.querySelector(reactWebComponentElementName)!.shadowRoot,
-    ).toHaveTextContent(appName);
+    await waitFor(() => {
+      expect(
+        rootElement.querySelector(reactWebComponentElementName)!.shadowRoot,
+      ).toHaveTextContent(appName);
+    });
   });
 
-  test("renders `UiShell` with immediately updated props", () => {
+  test("renders `UiShell` with immediately updated props", async () => {
     const rootElement = document.createElement("div");
     const appName = "Hello World!";
 
@@ -153,12 +155,14 @@ describe("renderUiShell", () => {
       });
     });
 
-    expect(
-      rootElement.querySelector(reactWebComponentElementName)!.shadowRoot,
-    ).toHaveTextContent(appName);
+    await waitFor(() => {
+      expect(
+        rootElement.querySelector(reactWebComponentElementName)!.shadowRoot,
+      ).toHaveTextContent(appName);
+    });
   });
 
-  test("renders `<slot>` in the event of an error", () => {
+  test("renders `<slot>` in the event of an error", async () => {
     const rootElement = document.createElement("div");
     const consoleError = vi.fn();
     const onError = vi.fn();
@@ -184,14 +188,16 @@ describe("renderUiShell", () => {
       );
     });
 
-    consoleErrorSpy.mockRestore();
+    await waitFor(() => {
+      expect(onError).toHaveBeenCalledTimes(1);
+      expect(consoleError).toHaveBeenCalledTimes(1);
+      expect(
+        rootElement
+          .querySelector(reactWebComponentElementName)!
+          .shadowRoot?.querySelector("slot"),
+      ).toBeInstanceOf(HTMLSlotElement);
+    });
 
-    expect(onError).toHaveBeenCalledTimes(1);
-    expect(consoleError).toHaveBeenCalledTimes(1);
-    expect(
-      rootElement
-        .querySelector(reactWebComponentElementName)!
-        .shadowRoot?.querySelector("slot"),
-    ).toBeInstanceOf(HTMLSlotElement);
+    consoleErrorSpy.mockRestore();
   });
 });
