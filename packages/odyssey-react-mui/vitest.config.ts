@@ -10,11 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { defineConfig, mergeConfig } from 'vitest/config';
+import { defineConfig } from "vitest/config";
 
-import viteConfig from './vite.config';
-
-export default mergeConfig(viteConfig, defineConfig({
+export default defineConfig({
   test: {
     // browser: {
     //   enabled: true,
@@ -26,8 +24,8 @@ export default mergeConfig(viteConfig, defineConfig({
     //     "@testing-library/react",
     //   ],
     // },
-    environment: 'happy-dom',
+    environment: "happy-dom",
     globals: true,
-    setupFiles: ['./vitest.setup.ts'],
+    setupFiles: ["./vitest.setup.ts"],
   },
-}))
+});
