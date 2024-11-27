@@ -14,7 +14,7 @@ import {
   SideNav,
   SideNavItem,
   SideNavProps,
-} from "@okta/odyssey-react-mui/unified-ui";
+} from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react";
 import {
   AppsIcon,

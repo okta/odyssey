@@ -10,14 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { PageTemplate } from "@okta/odyssey-react-mui/labs";
 import {
+  PageTemplate,
   UiShell,
   uiShellDataAttribute,
   UserProfile,
   type UiShellNavComponentProps,
   type UiShellProps,
-} from "@okta/odyssey-react-mui/unified-ui";
+} from "@okta/odyssey-react-mui/labs";
 import {
   Banner,
   Button,

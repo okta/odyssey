@@ -21,7 +21,7 @@ import {
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
 import { Heading4, Subordinate } from "../../Typography";
-import { useHasUiShell } from "../../unified-ui/UiShell";
+import { useHasUiShell } from "../UiShell";
 
 export type PageTemplateProps = {
   /**

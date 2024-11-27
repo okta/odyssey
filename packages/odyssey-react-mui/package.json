@@ -22,9 +22,6 @@
       ],
       "test-selectors": [
         "./dist/src/test-selectors/index.d.ts"
-      ],
-      "unified-ui": [
-        "./dist/src/unified-ui/index.d.ts"
       ]
     }
   },
@@ -40,10 +37,6 @@
     "./test-selectors": {
       "types": "./dist/src/test-selectors/index.d.ts",
       "default": "./dist/src/test-selectors/index.js"
-    },
-    "./unified-ui": {
-      "types": "./dist/src/unified-ui/index.d.ts",
-      "default": "./dist/src/unified-ui/index.js"
     },
     ".": {
       "types": "./dist/src/index.d.ts",

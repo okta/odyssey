@@ -10,6 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import GettingStarted from "./GettingStarted.mdx";
+
+console.log(GettingStarted);
+
 export default {
   title: "Contributing/Getting Started",
+  parameters: {
+    docs: {
+      page: GettingStarted,
+    },
+  },
 };
