@@ -20,6 +20,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { FileUploaderProps } from "../../../../../odyssey-react-mui/src/FileUploader";
+import { fn } from "@storybook/test";
 
 // TODO: Write tests for this component @see https://oktainc.atlassian.net/browse/OKTA-704264
 const meta = {
@@ -93,6 +94,7 @@ const meta = {
   args: {
     hint: "Maybe some helpful text about what format to use",
     label: "Upload your files here",
+    onChange: fn(),
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],

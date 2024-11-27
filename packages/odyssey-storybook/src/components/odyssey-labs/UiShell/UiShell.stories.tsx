@@ -10,8 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, StoryObj } from "@storybook/react";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
 import {
   PageTemplate,
   UiShell,
@@ -33,6 +31,10 @@ import {
   HomeIcon,
   UserIcon,
 } from "@okta/odyssey-react-mui/icons";
+import { Meta, StoryObj } from "@storybook/react";
+import { fn } from "@storybook/test";
+
+import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<UiShellProps> = {
   title: "Labs Components/UI Shell",
@@ -99,7 +101,8 @@ const storybookMeta: Meta<UiShellProps> = {
   },
   args: {
     appComponent: <div />,
-    subscribeToPropChanges: () => () => {},
+    onSubscriptionCreated: fn(),
+    subscribeToPropChanges: () => fn(),
   },
   decorators: [MuiThemeDecorator],
   parameters: {
