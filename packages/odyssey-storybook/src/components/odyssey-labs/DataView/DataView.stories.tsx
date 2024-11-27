@@ -373,7 +373,7 @@ const itemProps: CardLayoutProps<Person>["itemProps"] = (row) => ({
 
 // Base story configuration
 const BaseStory: Story = {
-  args: {} as DataViewMetaProps, // This is a hack.
+  args: {} as Story["args"], // This is a hack.
   render: function C(args) {
     const [data, setData] = useState<Person[]>(personData);
     const { getData, onReorderRows, onChangeRowSelection } = useDataCallbacks(
