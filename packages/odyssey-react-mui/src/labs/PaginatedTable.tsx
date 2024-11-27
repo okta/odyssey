@@ -241,8 +241,8 @@ const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
     [],
   );
 
-  // @ts-expect-error This breaks after the upgrade, but it doesn't matter as this is a legacy function and internal type.
   const muiCheckboxStyles = useCallback<
+    // @ts-expect-error This breaks after the upgrade, but it doesn't matter as this is a legacy function and internal type.
     NonNullable<Required<CheckboxProps>["sx"]>
   >(
     (theme) =>
