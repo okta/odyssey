@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { act } from "@testing-library/react";
+import { act, waitFor } from "@testing-library/react";
 
 import { renderUiShell } from "./renderUiShell";
 import {
@@ -126,9 +126,11 @@ describe("renderUiShell", () => {
       });
     });
 
-    expect(
-      rootElement.querySelector(reactWebComponentElementName)!.shadowRoot,
-    ).toHaveTextContent(appName);
+    await waitFor(() => {
+      expect(
+        rootElement.querySelector(reactWebComponentElementName)!.shadowRoot,
+      ).toHaveTextContent(appName);
+    });
   });
 
   test("renders `UiShell` with immediately updated props", async () => {
@@ -153,9 +155,11 @@ describe("renderUiShell", () => {
       });
     });
 
-    expect(
-      rootElement.querySelector(reactWebComponentElementName)!.shadowRoot,
-    ).toHaveTextContent(appName);
+    await waitFor(() => {
+      expect(
+        rootElement.querySelector(reactWebComponentElementName)!.shadowRoot,
+      ).toHaveTextContent(appName);
+    });
   });
 
   test("renders `<slot>` in the event of an error", async () => {
@@ -184,14 +188,16 @@ describe("renderUiShell", () => {
       );
     });
 
-    consoleErrorSpy.mockRestore();
+    await waitFor(() => {
+      expect(onError).toHaveBeenCalledTimes(1);
+      expect(consoleError).toHaveBeenCalledTimes(1);
+      expect(
+        rootElement
+          .querySelector(reactWebComponentElementName)!
+          .shadowRoot?.querySelector("slot"),
+      ).toBeInstanceOf(HTMLSlotElement);
+    });
 
-    expect(onError).toHaveBeenCalledTimes(1);
-    expect(consoleError).toHaveBeenCalledTimes(1);
-    expect(
-      rootElement
-        .querySelector(reactWebComponentElementName)!
-        .shadowRoot?.querySelector("slot"),
-    ).toBeInstanceOf(HTMLSlotElement);
+    consoleErrorSpy.mockRestore();
   });
 });
