@@ -11,7 +11,6 @@
  */
 
 export * from "./AppSwitcher";
-export * from "./PageTemplate";
 export * from "./SideNav";
 export * from "./SideNav/NavAccordion";
 export * from "./TopNav";

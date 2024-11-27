@@ -28,6 +28,7 @@ export * from "./materialReactTableTypes";
 /** @deprecated Will be removed in a future Odyssey version in lieu of DataTable */
 export * from "./StaticTable";
 export * from "./OdysseyPickers";
+export * from "./PageTemplate";
 /** @deprecated Will be removed in a future Odyssey version in lieu of DataTable */
 export * from "./PaginatedTable";
 
