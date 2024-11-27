@@ -11,7 +11,7 @@
  */
 
 import { type ReactNode } from "react";
-import { createRoot, type Root } from "react-dom/client";
+import type { Root } from "react-dom/client";
 
 /**
  * Creates elements for a Shadow DOM that Odyssey will render into.
@@ -56,8 +56,8 @@ export type GetReactComponentInWebComponent = (
 
 export class ReactInWebComponentElement extends HTMLElement {
   getReactComponent: GetReactComponentInWebComponent;
-  reactRoot: Root;
   reactRootElements: ReactRootElements;
+  reactRootPromise: Promise<Root>;
 
   constructor(getReactComponent: GetReactComponentInWebComponent) {
     super();
@@ -81,15 +81,19 @@ export class ReactInWebComponentElement extends HTMLElement {
     shadowRoot.appendChild(this.reactRootElements.stylesRootElement);
     shadowRoot.appendChild(this.reactRootElements.appRootElement);
 
-    this.reactRoot = createRoot(this.reactRootElements.appRootElement);
+    this.reactRootPromise = import("react-dom/client").then(({ createRoot }) =>
+      createRoot(this.reactRootElements.appRootElement),
+    );
   }
 
   connectedCallback() {
-    this.reactRoot.render(this.getReactComponent(this.reactRootElements));
+    this.reactRootPromise.then((reactRoot) =>
+      reactRoot.render(this.getReactComponent(this.reactRootElements)),
+    );
   }
 
   disconnectedCallback() {
-    this.reactRoot.unmount();
+    this.reactRootPromise.then((reactRoot) => reactRoot.unmount());
   }
 }
 
