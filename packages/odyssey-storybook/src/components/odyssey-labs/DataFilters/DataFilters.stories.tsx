@@ -11,11 +11,7 @@
  */
 
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  DataFilter,
-  DataFilters,
-  DataFiltersProps,
-} from "@okta/odyssey-react-mui/labs";
+import { DataFilter, DataFilters } from "@okta/odyssey-react-mui/labs";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { BugIcon, SettingsIcon } from "@okta/odyssey-react-mui/icons";
 import { Box, Button } from "@okta/odyssey-react-mui";
@@ -93,7 +89,7 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>
+type Story = StoryObj<typeof meta>;
 
 const demoFilters: DataFilter[] = [
   {

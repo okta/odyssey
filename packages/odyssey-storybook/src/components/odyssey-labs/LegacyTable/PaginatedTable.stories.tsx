@@ -10,12 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, StoryObj } from "@storybook/react";
 import { Button, DataTableColumn } from "@okta/odyssey-react-mui";
 import {
   PaginatedTable,
   PaginatedTableProps,
 } from "@okta/odyssey-react-mui/labs";
+import { Meta, StoryObj } from "@storybook/react";
+import { fn } from "@storybook/test";
 import { useCallback, useMemo, useRef, useState } from "react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -68,6 +69,10 @@ const storybookMeta: Meta = {
         },
       },
     },
+  },
+  args: {
+    onPaginationChange: fn(),
+    onRowSelectionChange: fn(),
   },
   decorators: [MuiThemeDecorator],
 };
