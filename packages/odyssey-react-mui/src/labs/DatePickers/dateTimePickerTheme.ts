@@ -18,27 +18,29 @@ import { datePickerTheme, dateStyles } from "./datePickerTheme";
 
 const theme: ThemeOptions = {
   components: {
-    // MuiClock: {
-    //   styleOverrides: {
-    //     clock: ({ theme }) => ({
-    //       width: `calc(${theme.spacing(9)} * 4)`,
-    //       height: `calc(${theme.spacing(9)} * 4)`,
-    //     }),
-    //     pin: ({ theme }) => ({
-    //       backgroundColor: theme.palette.primary.light,
-    //     }),
-    //   },
-    // },
-    // MuiClockPointer: {
-    //   styleOverrides: {
-    //     root: ({ theme }) => ({
-    //       backgroundColor: theme.palette.primary.light,
-    //     }),
-    //     thumb: ({ theme }) => ({
-    //       borderColor: theme.palette.primary.light,
-    //     }),
-    //   },
-    // },
+    MuiClock: {
+      styleOverrides: {
+        clock: ({ theme }) => ({
+          width: `calc(${theme.spacing(9)} * 4)`,
+          height: `calc(${theme.spacing(9)} * 4)`,
+          backgroundColor: theme.palette.grey[50],
+        }),
+        pin: ({ theme }) => ({
+          backgroundColor: theme.palette.primary.light,
+        }),
+      },
+    },
+    MuiClockPointer: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          backgroundColor: theme.palette.primary.light,
+        }),
+        thumb: ({ theme }) => ({
+          borderColor: theme.palette.primary.light,
+          backgroundColor: theme.palette.primary.main,
+        }),
+      },
+    },
     MuiDateCalendar: {
       styleOverrides: {
         root: {
@@ -47,14 +49,6 @@ const theme: ThemeOptions = {
         },
       },
     },
-    // MuiPickersCalendarHeader: {
-    //   styleOverrides: {
-    //     switchViewButton: {
-    //       margin: "0 20px 0 20px",
-    //       color: "red"
-    //     },
-    //   },
-    // },
     MuiPickersArrowSwitcher: {
       styleOverrides: {
         button: ({ theme }) => ({
