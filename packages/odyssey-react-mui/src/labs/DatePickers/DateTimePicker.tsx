@@ -135,8 +135,6 @@ const DateTimePicker = ({
     timeZone,
     value: valueProp,
   });
-  // const [isOpen, setIsOpen] = useState(false);
-  // const [popperElement, setPopperElement] = useState<HTMLInputElement | null>();
 
   const { language } = i18n;
   const containerRef = useRef<HTMLInputElement>(null);
