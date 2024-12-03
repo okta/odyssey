@@ -20,7 +20,7 @@ import {
 import { DocumentationIcon } from "../icons.generated";
 import { Heading4, Subordinate } from "../Typography";
 import { Link } from "../Link";
-import { useHasUiShell } from "./UiShell";
+import { useHasUiShell } from "../ui-shell/UiShell/useHasUiShell";
 
 export type PageTemplateProps = {
   /**
