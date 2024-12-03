@@ -10,4 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export * from "./shadow-dom";
+import { useEffect, useState } from "react";
+
+export const uiShellDataAttribute = "data-unified-ui-shell";
+
+export const useHasUiShell = () => {
+  const [hasUiShell, setHasUiShell] = useState(false);
+
+  useEffect(() => {
+    setHasUiShell(Boolean(document.querySelector(`[${uiShellDataAttribute}]`)));
+  }, []);
+
+  return hasUiShell;
+};

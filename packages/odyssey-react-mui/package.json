@@ -19,6 +19,9 @@
       "labs": [
         "./dist/src/labs/index.d.ts"
       ],
+      "ui-shell": [
+        "./dist/src/ui-shell/index.d.ts"
+      ],
       "test-selectors": [
         "./dist/src/test-selectors/index.d.ts"
       ]
@@ -32,6 +35,10 @@
     "./labs": {
       "types": "./dist/src/labs/index.d.ts",
       "default": "./dist/labs/index.js"
+    },
+    "./ui-shell": {
+      "types": "./dist/src/ui-shell/index.d.ts",
+      "default": "./dist/ui-shell/index.js"
     },
     "./test-selectors": {
       "types": "./dist/src/test-selectors/index.d.ts",
