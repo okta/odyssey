@@ -14,9 +14,9 @@ import styled from "@emotion/styled";
 import { memo, type ReactElement, type ReactNode } from "react";
 import { ErrorBoundary, ErrorBoundaryProps } from "react-error-boundary";
 
-import { AppSwitcher, type AppSwitcherProps } from "../AppSwitcher";
-import { SideNav, type SideNavProps } from "../SideNav";
-import { TopNav, type TopNavProps } from "../TopNav";
+import { AppSwitcher, type AppSwitcherProps } from "../../labs/AppSwitcher";
+import { SideNav, type SideNavProps } from "../../labs/SideNav";
+import { TopNav, type TopNavProps } from "../../labs/TopNav";
 import {
   useOdysseyDesignTokens,
   type DesignTokens,

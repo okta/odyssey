@@ -13,14 +13,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import {
-  PageTemplate,
-  UiShell,
-  uiShellDataAttribute,
-  UserProfile,
-  type UiShellNavComponentProps,
-  type UiShellProps,
-} from "@okta/odyssey-react-mui/labs";
-import {
   Banner,
   Button,
   OdysseyProvider,
@@ -28,6 +20,13 @@ import {
   SearchField,
   Surface,
 } from "@okta/odyssey-react-mui";
+import { PageTemplate, UserProfile } from "@okta/odyssey-react-mui/labs";
+import {
+  UiShell,
+  uiShellDataAttribute,
+  type UiShellNavComponentProps,
+  type UiShellProps,
+} from "@okta/odyssey-react-mui/ui-shell";
 import {
   AddCircleIcon,
   HomeIcon,
@@ -35,7 +34,7 @@ import {
 } from "@okta/odyssey-react-mui/icons";
 
 const storybookMeta: Meta<UiShellProps> = {
-  title: "Labs Components/UI Shell",
+  title: "UI Shell Components/UI Shell",
   component: UiShell,
   argTypes: {
     appComponent: {
