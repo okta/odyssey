@@ -14,7 +14,7 @@ import { memo, useCallback, useEffect, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import {
   type DateTimePickerSlots,
-  MobileDateTimePicker as MuiDateTimePicker,
+  DateTimePicker as MuiDateTimePicker,
   DateTimePickerProps as MuiDateTimePickerProps,
   DateTimePickerSlotProps,
 } from "@mui/x-date-pickers";
