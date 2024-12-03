@@ -16,7 +16,7 @@ import { renderUiShell } from "./renderUiShell";
 import {
   ReactInWebComponentElement,
   reactWebComponentElementName,
-} from "../../web-component/renderReactInWebComponent";
+} from "../renderReactInWebComponent";
 
 describe("renderUiShell", () => {
   afterEach(() => {

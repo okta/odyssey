@@ -12,41 +12,10 @@
 
 import { type ReactNode } from "react";
 import { createRoot, type Root } from "react-dom/client";
-
-/**
- * Creates elements for a Shadow DOM that Odyssey will render into.
- * The Emotion root is for `<style>` tags and the app root is for an app to render into.
- * These are bare elements that
- */
-export const createReactRootElements = () => {
-  const appRootElement = document.createElement("div");
-  const stylesRootElement = document.createElement("div");
-
-  // This `div` may cause layout issues unless it inherits the parent's height.
-  appRootElement.style.setProperty("height", "inherit");
-
-  appRootElement.setAttribute("id", "app-root");
-  stylesRootElement.setAttribute("id", "style-root");
-  stylesRootElement.setAttribute("nonce", window.cspNonce);
-
-  return {
-    /**
-     * The element your React root component renders into.
-     * React has to render or portal somewhere, and this element can be used for that root element.
-     *
-     * In the case of a web component, there is no defined root element, so you have to define it yourself.
-     */
-    appRootElement,
-    /**
-     * In React apps, your styles typically go in `document.head`, but you may want to render them somewhere else.
-     *
-     * Specifically when rendering in a web component, there is no `<head>`, so you have to create a spot for styles to render.
-     */
-    stylesRootElement,
-  };
-};
-
-export type ReactRootElements = ReturnType<typeof createReactRootElements>;
+import {
+  createReactRootElements,
+  type ReactRootElements,
+} from "../web-component";
 
 export const reactWebComponentElementName = "odyssey-react-web-component";
 
