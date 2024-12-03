@@ -16,10 +16,9 @@ import { ErrorBoundary } from "react-error-boundary";
 import { bufferLatest } from "./bufferLatest";
 import { createMessageBus } from "./createMessageBus";
 import { UiShell, UiShellProps } from "./UiShell";
-import { renderReactInWebComponent } from "../../web-component/renderReactInWebComponent";
+import { renderReactInWebComponent } from "../renderReactInWebComponent";
 import { type UiShellNavComponentProps } from "./UiShellContent";
-
-export const uiShellDataAttribute = "data-unified-ui-shell";
+import { uiShellDataAttribute } from "./useHasUiShell";
 
 export const optionalComponentSlotNames: Record<
   keyof Required<UiShellProps>["optionalComponents"],
