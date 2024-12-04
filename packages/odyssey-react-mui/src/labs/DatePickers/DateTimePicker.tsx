@@ -141,7 +141,7 @@ const DateTimePicker = ({
 
   useEffect(() => {
     setPopperElement(containerRef.current);
-  }, []);
+  }, [setPopperElement]);
 
   const formatDateTimeToJsDateStringOnCalendarSelection = useCallback<
     NonNullable<MuiDateTimePickerProps<DateTime>["onChange"]>
