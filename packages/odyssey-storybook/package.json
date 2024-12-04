@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-storybook",
-  "version": "1.28.2",
+  "version": "1.28.0",
   "description": "Documentation for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
