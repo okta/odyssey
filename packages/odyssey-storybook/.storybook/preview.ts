@@ -78,6 +78,7 @@ const preview: Preview = {
           "Contributing",
           "MUI Components",
           "Labs Components",
+          "UI Shell Components",
           "Customization",
         ],
         locales: "",

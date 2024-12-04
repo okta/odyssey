@@ -10,10 +10,43 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createReactRootElements } from "./renderReactInWebComponent";
+/**
+ * Creates elements for a Shadow DOM that Odyssey will render into.
+ * The Emotion root is for `<style>` tags and the app root is for an app to render into.
+ * These are bare elements that
+ */
+export const createReactRootElements = () => {
+  const appRootElement = document.createElement("div");
+  const stylesRootElement = document.createElement("div");
+
+  // This `div` may cause layout issues unless it inherits the parent's height.
+  appRootElement.style.setProperty("height", "inherit");
+
+  appRootElement.setAttribute("id", "app-root");
+  stylesRootElement.setAttribute("id", "style-root");
+  stylesRootElement.setAttribute("nonce", window.cspNonce);
+
+  return {
+    /**
+     * The element your React root component renders into.
+     * React has to render or portal somewhere, and this element can be used for that root element.
+     *
+     * In the case of a web component, there is no defined root element, so you have to define it yourself.
+     */
+    appRootElement,
+    /**
+     * In React apps, your styles typically go in `document.head`, but you may want to render them somewhere else.
+     *
+     * Specifically when rendering in a web component, there is no `<head>`, so you have to create a spot for styles to render.
+     */
+    stylesRootElement,
+  };
+};
+
+export type ReactRootElements = ReturnType<typeof createReactRootElements>;
 
 /**
- * @deprecated Use `renderReactInWebComponent` instead. This function was necessary when using bare Shadow DOM, but with UI Shell rendering in a Web Component, you won't be able to render your Shadow DOM in its Shadow DOM without using a Web Component.
+ * @deprecated Use `renderReactInWebComponent` from `@okta/odyssey-react-mui/ui-shell` instead. This function was necessary when using bare Shadow DOM, but with UI Shell rendering in a Web Component, you won't be able to render your Shadow DOM in its Shadow DOM without using a Web Component.
  */
 export const createShadowDomElements = (containerElement: HTMLElement) => {
   const shadowRoot = containerElement.attachShadow({ mode: "open" });
@@ -32,7 +65,7 @@ export const createShadowDomElements = (containerElement: HTMLElement) => {
 
 /**
  * @deprecated Use `createShadowDomElements` instead which returns an object instead of an array. It's otherwise the same.
- * @deprecated Ideally, use `renderReactInWebComponent` instead. This function was necessary when using bare Shadow DOM, but with UI Shell rendering in a Web Component, you won't be able to render your Shadow DOM in its Shadow DOM without using a Web Component. */
+ * @deprecated Ideally, use `renderReactInWebComponent` from `@okta/odyssey-react-mui/ui-shell` instead. This function was necessary when using bare Shadow DOM, but with UI Shell rendering in a Web Component, you won't be able to render your Shadow DOM in its Shadow DOM without using a Web Component. */
 export const createShadowRootElement = (
   containerElement: HTMLElement,
 ): [HTMLStyleElement, HTMLDivElement] => {
