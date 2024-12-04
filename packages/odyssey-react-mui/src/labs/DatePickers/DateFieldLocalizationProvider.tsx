@@ -11,9 +11,7 @@
  */
 
 import { memo, PropsWithChildren } from "react";
-import {
-  LocalizationProvider,
-} from "@mui/x-date-pickers";
+import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
 
 import { DateFieldsTranslations } from "./useDateFieldsTranslations";
@@ -39,7 +37,10 @@ const DateFieldLocalizationProvider = ({
   );
 };
 
-const MemoizedDateFieldLocalizationProvider = memo(DateFieldLocalizationProvider);
-MemoizedDateFieldLocalizationProvider.displayName = "DateFieldLocalizationProvider";
+const MemoizedDateFieldLocalizationProvider = memo(
+  DateFieldLocalizationProvider,
+);
+MemoizedDateFieldLocalizationProvider.displayName =
+  "DateFieldLocalizationProvider";
 
 export { MemoizedDateFieldLocalizationProvider as DateFieldLocalizationProvider };
