@@ -10,12 +10,26 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  FocusEventHandler,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { DateTime } from "luxon";
 import { useTranslation } from "react-i18next";
 
-import { FieldComponentProps } from "../FieldComponentProps";
-import { ComponentControlledState, getControlState } from "../inputUtils";
+import { FieldComponentProps } from "../../FieldComponentProps";
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  CalendarIcon,
+  ChevronDownIcon,
+} from "../../icons.generated";
+import { ComponentControlledState, getControlState } from "../../inputUtils";
+import { TimeZoneOption, TimeZonePickerProps } from "../TimeZonePicker";
 import { useDateFieldsTranslations } from "./useDateFieldsTranslations";
 
 const { CONTROLLED } = ComponentControlledState;
@@ -24,11 +38,6 @@ const isValidDateTime = (dateTime: DateTime) => dateTime.isValid;
 
 const utcDateTimeFromIsoString = (dateString: string) =>
   DateTime.fromISO(dateString).toUTC();
-
-export type TimeZoneOption = {
-  label: string;
-  value: string;
-};
 
 export type OdysseyDateFieldProps = {
   /**
@@ -52,6 +61,10 @@ export type OdysseyDateFieldProps = {
    */
   isYearEnabled?: (date: Date) => boolean;
   /**
+   * The label for the `input` element.
+   */
+  label: string;
+  /**
    * Minimum date allowed.
    *
    * NOTE: If not a valid date string in ISO format, `minDate` will not apply
@@ -63,7 +76,36 @@ export type OdysseyDateFieldProps = {
    * NOTE: If not a valid date string in ISO format, `maxDate` will not apply
    */
   maxDate?: string;
+  /**
+   * Callback fired when the a date field loses focus
+   */
+  onBlur?: FocusEventHandler<HTMLInputElement>;
+  /**
+   * Callback fired when the a date is selected with the calendar.
+   */
+  onCalendarDateChange?: ({
+    value,
+    timeZone,
+  }: {
+    value: string | undefined;
+    timeZone: string;
+  }) => void;
+  /**
+   * Callback fired when the date/text input changes.
+   */
+  onInputChange?: (value: string) => void;
+  /**
+   * a default timezone for the picker
+   */
   timeZone?: string;
+  /**
+   * If provided, a `TimeZonePicker` will be rendered below the DatePicker. These options will populate as the Autocomplete options
+   */
+  timeZoneOptions?: TimeZoneOption[];
+  /**
+   * label for `TimeZonePicker`
+   */
+  timeZonePickerLabel?: TimeZonePickerProps["label"];
   /**
    * value when controlled.
    *
@@ -86,11 +128,27 @@ export const useOdysseyDateFields = ({
   isYearEnabled = () => true,
   minDate: minDateProp,
   maxDate: maxDateProp,
+  onInputChange: onInputChangeProp,
   timeZone = "system",
   value,
-}: OdysseyDateFieldProps & Pick<FieldComponentProps, "errorMessage">) => {
-  const internalValueRef = useRef<DateTime | null>(null);
+}: Pick<
+  OdysseyDateFieldProps,
+  | "defaultValue"
+  | "isDateEnabled"
+  | "isMonthEnabled"
+  | "isYearEnabled"
+  | "minDate"
+  | "maxDate"
+  | "onInputChange"
+  | "timeZone"
+  | "value"
+> &
+  Pick<FieldComponentProps, "errorMessage">) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [popperElement, setPopperElement] = useState<HTMLInputElement | null>();
   const [internalTimeZone, setInternalTimeZone] = useState(timeZone);
+
+  const internalValueRef = useRef<DateTime | null>(null);
 
   const [validationDateRanges, setValidationDateRanges] =
     useState<ValidationDateRanges>({
@@ -183,19 +241,63 @@ export const useOdysseyDateFields = ({
     return null;
   }, [defaultValue, validationDateRanges, value]);
 
+  const onTimeZoneChange = useCallback(
+    (timeZone: string | undefined) => {
+      if (timeZone && isValidTimeZone(timeZone)) {
+        setInternalTimeZone(timeZone);
+      }
+    },
+    [isValidTimeZone, setInternalTimeZone],
+  );
+
+  const toggleCalendarVisibility = useCallback(
+    () => setIsOpen(!isOpen),
+    [isOpen, setIsOpen],
+  );
+
+  const closeCalendar = useCallback(() => {
+    setIsOpen(false);
+  }, [setIsOpen]);
+
+  const formatDayOfWeek = (date: DateTime) => date.toFormat("EEE");
+
+  const onInputChange = useCallback<(value: string) => void>(
+    (value) => {
+      onInputChangeProp?.(value);
+    },
+    [onInputChangeProp],
+  );
+
+  const commonIcons = {
+    ArrowLeftIcon: ArrowLeftIcon,
+    ArrowRightIcon: ArrowRightIcon,
+    CalendarIcon: CalendarIcon,
+    ChevronDownIcon: ChevronDownIcon,
+  };
+
   return {
+    closeCalendar,
+    commonIcons,
     defaultedLanguageCode,
     formatDateTimeToUtcIsoDateString,
+    formatDayOfWeek,
     inputValues,
     internalTimeZone,
     internalValueRef,
+    isOpen,
     isValidTimeZone,
     localeText,
     maxDate: validationDateRanges.maxDate,
     minDate: validationDateRanges.minDate,
+    popperElement,
+    onInputChange,
+    onTimeZoneChange,
     setInternalTimeZone,
+    setIsOpen,
+    setPopperElement,
     shouldDisableDate,
     shouldDisableMonth,
     shouldDisableYear,
+    toggleCalendarVisibility,
   };
 };
