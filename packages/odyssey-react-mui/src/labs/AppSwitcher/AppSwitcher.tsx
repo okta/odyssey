@@ -16,6 +16,7 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
+import { ContrastMode, useContrastModeContext } from "../../useContrastMode";
 import { OktaAura } from "./OktaAura";
 import {
   AppSwitcherApp,
@@ -31,12 +32,19 @@ export type AppSwitcherProps = {
 };
 
 const AppSwitcherWrapperComponent = styled("nav", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "contrastMode",
+})<{
+  odysseyDesignTokens: DesignTokens;
+  contrastMode: ContrastMode;
+}>(({ odysseyDesignTokens, contrastMode }) => ({
   position: "relative",
   display: "inline-block",
   height: "100%",
-  backgroundColor: odysseyDesignTokens.HueNeutralWhite,
+  backgroundColor:
+    contrastMode === "highContrast"
+      ? "#121212"
+      : odysseyDesignTokens.HueNeutralWhite,
   borderInlineEndStyle: "solid",
   borderInlineEndWidth: odysseyDesignTokens.BorderWidthMain,
   borderInlineEndColor: odysseyDesignTokens.BorderColorDisplay,
@@ -65,13 +73,17 @@ const AppSwitcher = ({
   selectedAppName,
 }: AppSwitcherProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const { contrastMode } = useContrastModeContext();
 
   return (
-    <AppSwitcherWrapperComponent odysseyDesignTokens={odysseyDesignTokens}>
+    <AppSwitcherWrapperComponent
+      odysseyDesignTokens={odysseyDesignTokens}
+      contrastMode={contrastMode}
+    >
       <AppSwitcherOktaAuraWrapperComponent
         odysseyDesignTokens={odysseyDesignTokens}
       >
-        <OktaAura />
+        <OktaAura contrastMode={contrastMode} />
       </AppSwitcherOktaAuraWrapperComponent>
       <AppSwitcherAppIconULComponent odysseyDesignTokens={odysseyDesignTokens}>
         {isLoading

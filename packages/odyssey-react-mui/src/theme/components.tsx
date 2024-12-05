@@ -74,7 +74,12 @@ export const components = ({
     MuiAccordion: {
       styleOverrides: {
         root: () => ({
-          backgroundColor: odysseyTokens.HueNeutralWhite,
+          ...(contrastMode === "highContrast" && {
+            backgroundColor: odysseyTokens.HueNeutral900,
+          }),
+          ...(contrastMode === "lowContrast" && {
+            backgroundColor: odysseyTokens.HueNeutralWhite,
+          }),
           border: 0,
           borderBottomColor: odysseyTokens.BorderColorDisplay,
           borderBottomStyle: "solid",
@@ -83,7 +88,12 @@ export const components = ({
           boxShadow: "none",
 
           "&.Mui-disabled": {
-            backgroundColor: odysseyTokens.HueNeutralWhite,
+            ...(contrastMode === "highContrast" && {
+              backgroundColor: odysseyTokens.HueNeutral900,
+            }),
+            ...(contrastMode === "lowContrast" && {
+              backgroundColor: odysseyTokens.HueNeutralWhite,
+            }),
             color: odysseyTokens.TypographyColorDisabled,
             cursor: "default",
 
@@ -119,11 +129,21 @@ export const components = ({
           paddingInline: odysseyTokens.Spacing3,
 
           "&:hover": {
-            backgroundColor: odysseyTokens.HueNeutral50,
+            ...(contrastMode === "highContrast" && {
+              backgroundColor: odysseyTokens.HueNeutral800,
+            }),
+            ...(contrastMode === "lowContrast" && {
+              backgroundColor: odysseyTokens.HueNeutral50,
+            }),
           },
 
           "&:focus-visible": {
-            backgroundColor: odysseyTokens.HueNeutral50,
+            ...(contrastMode === "highContrast" && {
+              backgroundColor: odysseyTokens.HueNeutral800,
+            }),
+            ...(contrastMode === "lowContrast" && {
+              backgroundColor: odysseyTokens.HueNeutral50,
+            }),
             outlineColor: odysseyTokens.PalettePrimaryMain,
             outlineWidth: 2,
             outlineStyle: "solid",
@@ -428,7 +448,13 @@ export const components = ({
         listbox: {
           borderWidth: odysseyTokens.BorderWidthMain,
           borderStyle: odysseyTokens.BorderStyleMain,
-          borderColor: odysseyTokens.HueNeutral200,
+
+          ...(contrastMode === "highContrast" && {
+            borderColor: odysseyTokens.HueNeutral600,
+          }),
+          ...(contrastMode === "lowContrast" && {
+            borderColor: odysseyTokens.HueNeutral200,
+          }),
           paddingBlock: odysseyTokens.Spacing2,
           paddingInline: odysseyTokens.Spacing2,
           borderRadius: odysseyTokens.BorderRadiusMain,
@@ -440,11 +466,21 @@ export const components = ({
             borderRadius: odysseyTokens.BorderRadiusTight,
 
             [`&:hover`]: {
-              backgroundColor: odysseyTokens.HueNeutral100,
+              ...(contrastMode === "highContrast" && {
+                backgroundColor: odysseyTokens.HueNeutral700,
+              }),
+              ...(contrastMode === "lowContrast" && {
+                backgroundColor: odysseyTokens.HueNeutral100,
+              }),
             },
 
             [`&.${autocompleteClasses.focused}`]: {
-              backgroundColor: odysseyTokens.HueNeutral100,
+              ...(contrastMode === "highContrast" && {
+                backgroundColor: odysseyTokens.HueNeutral700,
+              }),
+              ...(contrastMode === "lowContrast" && {
+                backgroundColor: odysseyTokens.HueNeutral100,
+              }),
             },
 
             [`&[aria-selected="true"]`]: {
@@ -472,7 +508,13 @@ export const components = ({
           paddingInline: odysseyTokens.Spacing4,
           borderWidth: odysseyTokens.BorderWidthMain,
           borderStyle: odysseyTokens.BorderStyleMain,
-          borderColor: odysseyTokens.HueNeutral200,
+
+          ...(contrastMode === "highContrast" && {
+            borderColor: odysseyTokens.HueNeutral600,
+          }),
+          ...(contrastMode === "lowContrast" && {
+            borderColor: odysseyTokens.HueNeutral200,
+          }),
           borderRadius: odysseyTokens.BorderRadiusMain,
         },
         popupIndicator: {
@@ -498,7 +540,12 @@ export const components = ({
         }),
         inputRoot: ({ ownerState }) => ({
           ...(ownerState.readOnly === true && {
-            backgroundColor: odysseyTokens.HueNeutral50,
+            ...(contrastMode === "highContrast" && {
+              backgroundColor: odysseyTokens.HueNeutral800,
+            }),
+            ...(contrastMode === "lowContrast" && {
+              backgroundColor: odysseyTokens.HueNeutral50,
+            }),
 
             [`&:not(:hover)`]: {
               borderColor: "transparent",
@@ -549,7 +596,12 @@ export const components = ({
             transitionTimingFunction: "linear",
 
             "&:hover": {
-              backgroundColor: odysseyTokens.HueNeutral100,
+              ...(contrastMode === "highContrast" && {
+                backgroundColor: odysseyTokens.HueNeutral700,
+              }),
+              ...(contrastMode === "lowContrast" && {
+                backgroundColor: odysseyTokens.HueNeutral100,
+              }),
               color: odysseyTokens.TypographyColorBody,
             },
 
@@ -663,12 +715,29 @@ export const components = ({
 
             ...(ownerState.variant === "secondary" && {
               backgroundColor: "transparent",
-              borderColor: odysseyTokens.HueNeutral300,
+
+              ...(contrastMode === "highContrast" && {
+                borderColor: odysseyTokens.HueNeutral500,
+              }),
+              ...(contrastMode === "lowContrast" && {
+                borderColor: odysseyTokens.HueNeutral300,
+              }),
               color: odysseyTokens.TypographyColorBody,
 
               "&:hover": {
-                backgroundColor: odysseyTokens.HueNeutral200,
-                borderColor: odysseyTokens.HueNeutral400,
+                ...(contrastMode === "highContrast" && {
+                  backgroundColor: odysseyTokens.HueNeutral600,
+                }),
+                ...(contrastMode === "lowContrast" && {
+                  backgroundColor: odysseyTokens.HueNeutral200,
+                }),
+
+                ...(contrastMode === "highContrast" && {
+                  borderColor: odysseyTokens.HueNeutral400,
+                }),
+                ...(contrastMode === "lowContrast" && {
+                  borderColor: odysseyTokens.HueNeutral400,
+                }),
               },
 
               "&:active, &[aria-expanded='true']": {
@@ -678,7 +747,12 @@ export const components = ({
               },
 
               "&:disabled": {
-                backgroundColor: odysseyTokens.HueNeutral200,
+                ...(contrastMode === "highContrast" && {
+                  backgroundColor: odysseyTokens.HueNeutral600,
+                }),
+                ...(contrastMode === "lowContrast" && {
+                  backgroundColor: odysseyTokens.HueNeutral200,
+                }),
                 borderColor: "transparent",
                 color: odysseyTokens.TypographyColorDisabled,
               },
@@ -708,12 +782,29 @@ export const components = ({
 
             ...(ownerState.variant === "dangerSecondary" && {
               backgroundColor: "transparent",
-              borderColor: odysseyTokens.HueNeutral300,
+
+              ...(contrastMode === "highContrast" && {
+                borderColor: odysseyTokens.HueNeutral500,
+              }),
+              ...(contrastMode === "lowContrast" && {
+                borderColor: odysseyTokens.HueNeutral300,
+              }),
               color: odysseyTokens.PaletteDangerMain,
 
               "&:hover": {
-                backgroundColor: odysseyTokens.HueNeutral200,
-                borderColor: odysseyTokens.HueNeutral400,
+                ...(contrastMode === "highContrast" && {
+                  backgroundColor: odysseyTokens.HueNeutral600,
+                }),
+                ...(contrastMode === "lowContrast" && {
+                  backgroundColor: odysseyTokens.HueNeutral200,
+                }),
+
+                ...(contrastMode === "highContrast" && {
+                  borderColor: odysseyTokens.HueNeutral400,
+                }),
+                ...(contrastMode === "lowContrast" && {
+                  borderColor: odysseyTokens.HueNeutral400,
+                }),
                 color: odysseyTokens.PaletteDangerMain,
               },
 
@@ -735,7 +826,12 @@ export const components = ({
               color: odysseyTokens.TypographyColorBody,
 
               "&:hover": {
-                backgroundColor: odysseyTokens.HueNeutral200,
+                ...(contrastMode === "highContrast" && {
+                  backgroundColor: odysseyTokens.HueNeutral600,
+                }),
+                ...(contrastMode === "lowContrast" && {
+                  backgroundColor: odysseyTokens.HueNeutral200,
+                }),
               },
 
               "&:active, &[aria-expanded='true']": {
@@ -755,7 +851,12 @@ export const components = ({
               color: odysseyTokens.TypographyColorAction,
 
               "&:hover": {
-                backgroundColor: odysseyTokens.HueNeutral200,
+                ...(contrastMode === "highContrast" && {
+                  backgroundColor: odysseyTokens.HueNeutral600,
+                }),
+                ...(contrastMode === "lowContrast" && {
+                  backgroundColor: odysseyTokens.HueNeutral200,
+                }),
               },
 
               "&:active, &[aria-expanded='true']": {
@@ -835,7 +936,12 @@ export const components = ({
     MuiCard: {
       styleOverrides: {
         root: () => ({
-          backgroundColor: odysseyTokens.HueNeutralWhite,
+          ...(contrastMode === "highContrast" && {
+            backgroundColor: odysseyTokens.HueNeutral900,
+          }),
+          ...(contrastMode === "lowContrast" && {
+            backgroundColor: odysseyTokens.HueNeutralWhite,
+          }),
           borderRadius: odysseyTokens.BorderRadiusOuter,
           boxShadow: odysseyTokens.DepthMedium,
           padding: odysseyTokens.Spacing5,
@@ -982,12 +1088,34 @@ export const components = ({
               outlineOffset: "1px",
             },
             "&.Mui-disabled": {
-              backgroundColor: odysseyTokens.HueNeutral50,
-              borderColor: odysseyTokens.HueNeutral300,
+              ...(contrastMode === "highContrast" && {
+                backgroundColor: odysseyTokens.HueNeutral800,
+              }),
+              ...(contrastMode === "lowContrast" && {
+                backgroundColor: odysseyTokens.HueNeutral50,
+              }),
+
+              ...(contrastMode === "highContrast" && {
+                borderColor: odysseyTokens.HueNeutral500,
+              }),
+              ...(contrastMode === "lowContrast" && {
+                borderColor: odysseyTokens.HueNeutral300,
+              }),
 
               ".Mui-error:not(.Mui-valid) > &": {
-                backgroundColor: odysseyTokens.HueNeutral50,
-                borderColor: odysseyTokens.HueNeutral300,
+                ...(contrastMode === "highContrast" && {
+                  backgroundColor: odysseyTokens.HueNeutral800,
+                }),
+                ...(contrastMode === "lowContrast" && {
+                  backgroundColor: odysseyTokens.HueNeutral50,
+                }),
+
+                ...(contrastMode === "highContrast" && {
+                  borderColor: odysseyTokens.HueNeutral500,
+                }),
+                ...(contrastMode === "lowContrast" && {
+                  borderColor: odysseyTokens.HueNeutral300,
+                }),
               },
 
               [`.${svgIconClasses.root}`]: {
@@ -997,23 +1125,62 @@ export const components = ({
 
             ...(isReadOnly && {
               // Override default styles
-              backgroundColor: odysseyTokens.HueNeutral100,
+
+              ...(contrastMode === "highContrast" && {
+                backgroundColor: odysseyTokens.HueNeutral700,
+              }),
+              ...(contrastMode === "lowContrast" && {
+                backgroundColor: odysseyTokens.HueNeutral100,
+              }),
               border: `1px solid ${odysseyTokens.HueNeutral300}`,
               cursor: "default",
 
               // Override checked/indeterminate styles
               "&.Mui-checked, &.MuiCheckbox-indeterminate": {
-                backgroundColor: odysseyTokens.HueNeutral100,
-                borderColor: odysseyTokens.HueNeutral300,
+                ...(contrastMode === "highContrast" && {
+                  backgroundColor: odysseyTokens.HueNeutral700,
+                }),
+                ...(contrastMode === "lowContrast" && {
+                  backgroundColor: odysseyTokens.HueNeutral100,
+                }),
+
+                ...(contrastMode === "highContrast" && {
+                  borderColor: odysseyTokens.HueNeutral500,
+                }),
+                ...(contrastMode === "lowContrast" && {
+                  borderColor: odysseyTokens.HueNeutral300,
+                }),
 
                 [`.${formControlLabelClasses.root}:hover > &`]: {
-                  backgroundColor: odysseyTokens.HueNeutral100,
-                  borderColor: odysseyTokens.HueNeutral300,
+                  ...(contrastMode === "highContrast" && {
+                    backgroundColor: odysseyTokens.HueNeutral700,
+                  }),
+                  ...(contrastMode === "lowContrast" && {
+                    backgroundColor: odysseyTokens.HueNeutral100,
+                  }),
+
+                  ...(contrastMode === "highContrast" && {
+                    borderColor: odysseyTokens.HueNeutral500,
+                  }),
+                  ...(contrastMode === "lowContrast" && {
+                    borderColor: odysseyTokens.HueNeutral300,
+                  }),
                 },
               },
               [`.${formControlLabelClasses.root}:hover > &`]: {
-                backgroundColor: odysseyTokens.HueNeutral100,
-                borderColor: odysseyTokens.HueNeutral300,
+                ...(contrastMode === "highContrast" && {
+                  backgroundColor: odysseyTokens.HueNeutral700,
+                }),
+                ...(contrastMode === "lowContrast" && {
+                  backgroundColor: odysseyTokens.HueNeutral100,
+                }),
+
+                ...(contrastMode === "highContrast" && {
+                  borderColor: odysseyTokens.HueNeutral500,
+                }),
+                ...(contrastMode === "lowContrast" && {
+                  borderColor: odysseyTokens.HueNeutral300,
+                }),
               },
               // ReadOnly styles for SVG check icon
               [`.${svgIconClasses.root}`]: {
@@ -1030,172 +1197,85 @@ export const components = ({
         deleteIcon: <CloseCircleFilledIcon />,
       },
       styleOverrides: {
-        root: ({ ownerState }) => {
-          return {
-            height: "auto",
-            paddingBlock: `calc(${odysseyTokens.Spacing2} - ${odysseyTokens.BorderWidthMain})`,
-            paddingInline: odysseyTokens.Spacing3,
-            fontSize: odysseyTokens.TypographySizeBody,
-            lineHeight: odysseyTokens.TypographyLineHeightUi,
-            borderRadius: odysseyTokens.BorderRadiusRound,
+        root: ({ ownerState }) => ({
+          height: "auto",
+          paddingBlock: `calc(${odysseyTokens.Spacing2} - ${odysseyTokens.BorderWidthMain})`,
+          paddingInline: odysseyTokens.Spacing3,
+          fontSize: odysseyTokens.TypographySizeBody,
+          lineHeight: odysseyTokens.TypographyLineHeightUi,
+          borderRadius: odysseyTokens.BorderRadiusRound,
+
+          ...(contrastMode === "highContrast" && {
+            backgroundColor: odysseyTokens.HueNeutral700,
+            borderColor: odysseyTokens.HueNeutral600,
+          }),
+          ...(contrastMode === "lowContrast" && {
             backgroundColor: odysseyTokens.HueNeutral100,
-            borderWidth: odysseyTokens.BorderWidthMain,
             borderColor: odysseyTokens.HueNeutral200,
-            borderStyle: odysseyTokens.BorderStyleMain,
-            color: odysseyTokens.HueNeutral700,
+          }),
 
-            ...(ownerState.onDelete && {
-              paddingInlineEnd: odysseyTokens.Spacing2,
-            }),
+          borderWidth: odysseyTokens.BorderWidthMain,
+          borderStyle: odysseyTokens.BorderStyleMain,
+          color: odysseyTokens.HueNeutral700,
 
-            [`&.${chipClasses.disabled}`]: {
-              opacity: 1,
-              pointerEvents: "none",
-              borderColor: odysseyTokens.BorderColorDisabled,
-              color: odysseyTokens.TypographyColorDisabled,
+          ...(ownerState.onDelete && {
+            paddingInlineEnd: odysseyTokens.Spacing2,
+          }),
 
-              [`& .${chipClasses.deleteIcon}`]: {
-                color: odysseyTokens.HueNeutral300,
-              },
-              [`& .${chipClasses.icon}`]: {
-                color: odysseyTokens.HueNeutral300,
-              },
+          [`&.${chipClasses.disabled}`]: {
+            opacity: 1,
+            pointerEvents: "none",
+            borderColor: odysseyTokens.BorderColorDisabled,
+            color: odysseyTokens.TypographyColorDisabled,
+
+            [`& .${chipClasses.deleteIcon}`]: {
+              color: odysseyTokens.HueNeutral300,
             },
-
-            ...(ownerState.clickable && {
-              "&:hover": {
-                backgroundColor: odysseyTokens.HueNeutral200,
-              },
-              [`&.${chipClasses.focusVisible}`]: {
-                backgroundColor: odysseyTokens.HueNeutral200,
-                outlineColor: odysseyTokens.FocusOutlineColorPrimary,
-                outlineOffset: odysseyTokens.FocusOutlineOffsetTight,
-                outlineStyle: odysseyTokens.FocusOutlineStyle,
-                outlineWidth: odysseyTokens.FocusOutlineWidthMain,
-              },
-              "&:active": {
-                boxShadow: "none",
-                backgroundColor: odysseyTokens.HueNeutral300,
-              },
-            }),
-
             [`& .${chipClasses.icon}`]: {
-              margin: 0,
-              marginInlineEnd: odysseyTokens.Spacing1,
+              color: odysseyTokens.HueNeutral300,
             },
+          },
 
-            ...(ownerState.variant === "lamp" && {
-              paddingBlock: 0,
-              paddingInline: 0,
-              borderRadius: 0,
-              border: 0,
-              backgroundColor: "transparent",
-              color: odysseyTokens.TypographyColorBody,
-
-              "&::before": {
-                content: "''",
-                width: odysseyTokens.Spacing2,
-                height: odysseyTokens.Spacing2,
-                marginInlineEnd: odysseyTokens.Spacing2,
-                borderRadius: "100%",
-                backgroundColor: odysseyTokens.HueNeutral600,
-              },
-
-              [`&.${chipClasses.colorError}`]: {
-                "&::before": {
-                  border: 0,
-                  backgroundColor: odysseyTokens.PaletteDangerMain,
-                },
-              },
-
-              [`&.${chipClasses.colorSuccess}`]: {
-                "&::before": {
-                  border: 0,
-                  backgroundColor: odysseyTokens.PaletteSuccessMain,
-                },
-              },
-
-              [`&.${chipClasses.colorWarning}`]: {
-                "&::before": {
-                  border: 0,
-                  backgroundColor: odysseyTokens.HueYellow200,
-                },
-              },
-            }),
-
-            ...(ownerState.variant === "pill" && {
-              paddingBlock: odysseyTokens.Spacing1,
-              paddingInline: odysseyTokens.Spacing2,
-              borderRadius: odysseyTokens.BorderRadiusMain,
-              border: 0,
-              fontWeight: odysseyTokens.TypographyWeightHeadingBold,
-              lineHeight: odysseyTokens.TypographyLineHeightOverline,
-              fontSize: "0.71428571rem",
-              textTransform: "uppercase",
-
+          ...(ownerState.clickable && {
+            "&:hover": {
               ...(contrastMode === "highContrast" && {
-                backgroundColor: odysseyTokens.HueNeutral200,
-                color: odysseyTokens.HueNeutral700,
+                backgroundColor: odysseyTokens.HueNeutral600,
               }),
               ...(contrastMode === "lowContrast" && {
-                backgroundColor: odysseyTokens.HueNeutral50,
-                color: odysseyTokens.TypographyColorSubordinate,
+                backgroundColor: odysseyTokens.HueNeutral200,
               }),
-
-              [`&.${chipClasses.colorError}`]: {
-                ...(contrastMode === "highContrast" && {
-                  backgroundColor: odysseyTokens.HueRed100,
-                  color: odysseyTokens.HueRed700,
-                }),
-                ...(contrastMode === "lowContrast" && {
-                  backgroundColor: odysseyTokens.PaletteDangerLighter,
-                  color: odysseyTokens.TypographyColorDanger,
-                }),
-              },
-
-              [`&.${chipClasses.colorInfo}`]: {
-                ...(contrastMode === "highContrast" && {
-                  backgroundColor: odysseyTokens.HueBlue100,
-                  color: odysseyTokens.HueBlue700,
-                }),
-                ...(contrastMode === "lowContrast" && {
-                  backgroundColor: odysseyTokens.PalettePrimaryLighter,
-                  color: odysseyTokens.PalettePrimaryText,
-                }),
-              },
-
-              [`&.${chipClasses.colorSuccess}`]: {
-                ...(contrastMode === "highContrast" && {
-                  backgroundColor: odysseyTokens.HueGreen200,
-                  color: odysseyTokens.HueGreen700,
-                }),
-                ...(contrastMode === "lowContrast" && {
-                  backgroundColor: odysseyTokens.PaletteSuccessLighter,
-                  color: odysseyTokens.TypographyColorSuccess,
-                }),
-              },
-
-              [`&.${chipClasses.colorWarning}`]: {
-                ...(contrastMode === "highContrast" && {
-                  backgroundColor: odysseyTokens.HueYellow100,
-                  color: odysseyTokens.HueYellow700,
-                }),
-                ...(contrastMode === "lowContrast" && {
-                  backgroundColor: odysseyTokens.PaletteWarningLighter,
-                  color: odysseyTokens.TypographyColorWarning,
-                }),
-              },
-            }),
-
-            [`.${inputBaseClasses.root}.${inputBaseClasses.disabled} &`]: {
-              backgroundColor: odysseyTokens.HueNeutral200,
             },
-          };
-        },
+            [`&.${chipClasses.focusVisible}`]: {
+              ...(contrastMode === "highContrast" && {
+                backgroundColor: odysseyTokens.HueNeutral600,
+              }),
+              ...(contrastMode === "lowContrast" && {
+                backgroundColor: odysseyTokens.HueNeutral200,
+              }),
+              outlineColor: odysseyTokens.FocusOutlineColorPrimary,
+              outlineOffset: odysseyTokens.FocusOutlineOffsetTight,
+              outlineStyle: odysseyTokens.FocusOutlineStyle,
+              outlineWidth: odysseyTokens.FocusOutlineWidthMain,
+            },
+            "&:active": {
+              boxShadow: "none",
+              ...(contrastMode === "highContrast" && {
+                backgroundColor: odysseyTokens.HueNeutral500,
+              }),
+              ...(contrastMode === "lowContrast" && {
+                backgroundColor: odysseyTokens.HueNeutral300,
+              }),
+            },
+          }),
+
+          [`& .${chipClasses.icon}`]: {
+            margin: 0,
+            marginInlineEnd: odysseyTokens.Spacing1,
+          },
+        }),
 
         label: {
           padding: 0,
-
           [`.${inputBaseClasses.root}.${inputBaseClasses.disabled} &`]: {
             color: odysseyTokens.TypographyColorDisabled,
             WebkitTextFillColor: odysseyTokens.TypographyColorDisabled,
@@ -1209,11 +1289,9 @@ export const components = ({
           cursor: "pointer",
           margin: "0",
           marginInlineStart: odysseyTokens.Spacing2,
-
           "&:hover": {
             color: odysseyTokens.HueNeutral600,
           },
-
           [`.${inputBaseClasses.root}.${inputBaseClasses.disabled} &`]: {
             display: "none",
           },
@@ -1354,7 +1432,13 @@ export const components = ({
             borderWidth: odysseyTokens.BorderWidthMain,
             borderRadius: odysseyTokens.BorderRadiusTight,
             borderColor: odysseyTokens.BorderColorDisplay,
-            backgroundColor: odysseyTokens.HueNeutral50,
+
+            ...(contrastMode === "highContrast" && {
+              backgroundColor: odysseyTokens.HueNeutral800,
+            }),
+            ...(contrastMode === "lowContrast" && {
+              backgroundColor: odysseyTokens.HueNeutral50,
+            }),
             padding: `calc(${odysseyTokens.Spacing1} / 2) ${odysseyTokens.Spacing1}`,
             fontSize: odysseyTokens.TypographySizeSubordinate,
             lineHeight: odysseyTokens.TypographyLineHeightHeading5,
@@ -1450,7 +1534,13 @@ export const components = ({
             marginInline: 0,
             borderWidth: odysseyTokens.BorderWidthMain,
             borderStyle: odysseyTokens.BorderStyleMain,
-            borderColor: odysseyTokens.HueNeutral200,
+
+            ...(contrastMode === "highContrast" && {
+              borderColor: odysseyTokens.HueNeutral600,
+            }),
+            ...(contrastMode === "lowContrast" && {
+              borderColor: odysseyTokens.HueNeutral200,
+            }),
           },
 
           ins: {
@@ -1482,8 +1572,20 @@ export const components = ({
             borderStyle: odysseyTokens.BorderStyleMain,
             borderWidth: odysseyTokens.BorderWidthMain,
             borderRadius: odysseyTokens.BorderRadiusMain,
-            borderColor: odysseyTokens.HueNeutral200,
-            backgroundColor: odysseyTokens.HueNeutral50,
+
+            ...(contrastMode === "highContrast" && {
+              borderColor: odysseyTokens.HueNeutral600,
+            }),
+            ...(contrastMode === "lowContrast" && {
+              borderColor: odysseyTokens.HueNeutral200,
+            }),
+
+            ...(contrastMode === "highContrast" && {
+              backgroundColor: odysseyTokens.HueNeutral800,
+            }),
+            ...(contrastMode === "lowContrast" && {
+              backgroundColor: odysseyTokens.HueNeutral50,
+            }),
             padding: `calc(${odysseyTokens.Spacing1} / 2) ${odysseyTokens.Spacing1}`,
             fontFamily:
               "'Inconsolata', 'SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', 'Courier', monospace",
@@ -1593,7 +1695,13 @@ export const components = ({
 
           samp: {
             padding: "0 0.5ch",
-            backgroundColor: odysseyTokens.HueNeutral100,
+
+            ...(contrastMode === "highContrast" && {
+              backgroundColor: odysseyTokens.HueNeutral700,
+            }),
+            ...(contrastMode === "lowContrast" && {
+              backgroundColor: odysseyTokens.HueNeutral100,
+            }),
             boxShadow: `0 1px 0 ${odysseyTokens.HueNeutral50}`,
             fontSize: odysseyTokens.TypographySizeBody,
 
@@ -1878,7 +1986,12 @@ export const components = ({
           padding: odysseyTokens.Spacing1,
           borderRadius: odysseyTokens.BorderRadiusMain,
           "&:hover": {
-            backgroundColor: odysseyTokens.HueNeutral100,
+            ...(contrastMode === "highContrast" && {
+              backgroundColor: odysseyTokens.HueNeutral700,
+            }),
+            ...(contrastMode === "lowContrast" && {
+              backgroundColor: odysseyTokens.HueNeutral100,
+            }),
           },
           "&:focus-visible": {
             boxShadow: `0 0 0 2px ${odysseyTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyTokens.PalettePrimaryMain}`,
@@ -1938,7 +2051,14 @@ export const components = ({
           borderRadius: odysseyTokens.BorderRadiusMain,
           borderColor: odysseyTokens.HueNeutral500,
           boxShadow: `0 0 0 0 transparent`,
-          backgroundColor: odysseyTokens.HueNeutralWhite,
+
+          ...(contrastMode === "highContrast" && {
+            backgroundColor: odysseyTokens.HueNeutral900,
+            color: odysseyTokens.HueNeutralWhite,
+          }),
+          ...(contrastMode === "lowContrast" && {
+            backgroundColor: odysseyTokens.HueNeutralWhite,
+          }),
           transition: theme.transitions.create(
             ["border-color", "background-color", "box-shadow"],
             {
@@ -1947,7 +2067,12 @@ export const components = ({
           ),
 
           ["&[data-ods-type='search']"]: {
-            borderColor: odysseyTokens.HueNeutral400,
+            ...(contrastMode === "highContrast" && {
+              borderColor: odysseyTokens.HueNeutral400,
+            }),
+            ...(contrastMode === "lowContrast" && {
+              borderColor: odysseyTokens.HueNeutral400,
+            }),
 
             [`& .${inputBaseClasses.input}::placeholder`]: {
               color: odysseyTokens.TypographyColorSupport,
@@ -1956,11 +2081,27 @@ export const components = ({
           },
 
           ["&[data-ods-variant='filled']"]: {
-            backgroundColor: odysseyTokens.HueNeutral50,
-            borderColor: odysseyTokens.HueNeutral50,
+            ...(contrastMode === "highContrast" && {
+              backgroundColor: odysseyTokens.HueNeutral800,
+            }),
+            ...(contrastMode === "lowContrast" && {
+              backgroundColor: odysseyTokens.HueNeutral50,
+            }),
+
+            ...(contrastMode === "highContrast" && {
+              borderColor: odysseyTokens.HueNeutral800,
+            }),
+            ...(contrastMode === "lowContrast" && {
+              borderColor: odysseyTokens.HueNeutral50,
+            }),
 
             [`&:hover`]: {
-              borderColor: odysseyTokens.HueNeutral400,
+              ...(contrastMode === "highContrast" && {
+                borderColor: odysseyTokens.HueNeutral400,
+              }),
+              ...(contrastMode === "lowContrast" && {
+                borderColor: odysseyTokens.HueNeutral400,
+              }),
             },
 
             [`&.${inputBaseClasses.focused}`]: {
@@ -1975,7 +2116,13 @@ export const components = ({
 
           ...(ownerState.readOnly === true && {
             borderColor: "transparent",
-            backgroundColor: odysseyTokens.HueNeutral50,
+
+            ...(contrastMode === "highContrast" && {
+              backgroundColor: odysseyTokens.HueNeutral800,
+            }),
+            ...(contrastMode === "lowContrast" && {
+              backgroundColor: odysseyTokens.HueNeutral50,
+            }),
           }),
 
           [`&:hover`]: {
@@ -2006,7 +2153,13 @@ export const components = ({
             color: odysseyTokens.TypographyColorDisabled,
             borderColor: odysseyTokens.BorderColorDisabled,
             pointerEvents: "auto",
-            backgroundColor: odysseyTokens.HueNeutral50,
+
+            ...(contrastMode === "highContrast" && {
+              backgroundColor: odysseyTokens.HueNeutral800,
+            }),
+            ...(contrastMode === "lowContrast" && {
+              backgroundColor: odysseyTokens.HueNeutral50,
+            }),
             cursor: "not-allowed",
           },
         }),
@@ -2213,7 +2366,13 @@ export const components = ({
 
           "&:hover": {
             textDecoration: "none",
-            backgroundColor: odysseyTokens.HueNeutral100,
+
+            ...(contrastMode === "highContrast" && {
+              backgroundColor: odysseyTokens.HueNeutral700,
+            }),
+            ...(contrastMode === "lowContrast" && {
+              backgroundColor: odysseyTokens.HueNeutral100,
+            }),
 
             // Reset on touch devices, it doesn't add specificity
             "@media (hover: none)": {
@@ -2222,7 +2381,12 @@ export const components = ({
           },
 
           [`:focus-visible`]: {
-            backgroundColor: odysseyTokens.HueNeutral100,
+            ...(contrastMode === "highContrast" && {
+              backgroundColor: odysseyTokens.HueNeutral700,
+            }),
+            ...(contrastMode === "lowContrast" && {
+              backgroundColor: odysseyTokens.HueNeutral100,
+            }),
           },
 
           [`&.${menuItemClasses.root}-destructive`]: {
@@ -2348,7 +2512,13 @@ export const components = ({
           marginBlockStart: odysseyTokens.Spacing1,
           borderWidth: odysseyTokens.BorderWidthMain,
           borderStyle: odysseyTokens.BorderStyleMain,
-          borderColor: odysseyTokens.HueNeutral200,
+
+          ...(contrastMode === "highContrast" && {
+            borderColor: odysseyTokens.HueNeutral600,
+          }),
+          ...(contrastMode === "lowContrast" && {
+            borderColor: odysseyTokens.HueNeutral200,
+          }),
         },
       },
     },
@@ -2429,15 +2599,31 @@ export const components = ({
               backgroundColor: odysseyTokens.PaletteDangerMain,
             },
             "&.Mui-disabled": {
-              backgroundColor: odysseyTokens.HueNeutral50,
+              ...(contrastMode === "highContrast" && {
+                backgroundColor: odysseyTokens.HueNeutral800,
+              }),
+              ...(contrastMode === "lowContrast" && {
+                backgroundColor: odysseyTokens.HueNeutral50,
+              }),
               borderColor: odysseyTokens.BorderColorDisabled,
               "&.Mui-checked::before": {
                 backgroundColor: odysseyTokens.BorderColorDisabled,
               },
             },
             ...(isReadOnly && {
-              backgroundColor: odysseyTokens.HueNeutral100,
-              borderColor: odysseyTokens.HueNeutral300,
+              ...(contrastMode === "highContrast" && {
+                backgroundColor: odysseyTokens.HueNeutral700,
+              }),
+              ...(contrastMode === "lowContrast" && {
+                backgroundColor: odysseyTokens.HueNeutral100,
+              }),
+
+              ...(contrastMode === "highContrast" && {
+                borderColor: odysseyTokens.HueNeutral500,
+              }),
+              ...(contrastMode === "lowContrast" && {
+                borderColor: odysseyTokens.HueNeutral300,
+              }),
               cursor: "default",
               "&::before": {
                 content: "''",
@@ -2454,8 +2640,19 @@ export const components = ({
                 backgroundColor: odysseyTokens.HueNeutral700,
               },
               [`.${formControlLabelClasses.root}:hover > &`]: {
-                backgroundColor: odysseyTokens.HueNeutral100,
-                borderColor: odysseyTokens.HueNeutral300,
+                ...(contrastMode === "highContrast" && {
+                  backgroundColor: odysseyTokens.HueNeutral700,
+                }),
+                ...(contrastMode === "lowContrast" && {
+                  backgroundColor: odysseyTokens.HueNeutral100,
+                }),
+
+                ...(contrastMode === "highContrast" && {
+                  borderColor: odysseyTokens.HueNeutral500,
+                }),
+                ...(contrastMode === "lowContrast" && {
+                  borderColor: odysseyTokens.HueNeutral300,
+                }),
               },
             }),
           };
@@ -2492,10 +2689,26 @@ export const components = ({
         root: ({ ownerState }) => ({
           ...(ownerState?.inputProps?.readOnly && {
             "&.MuiInputBase-root": {
-              backgroundColor: odysseyTokens.HueNeutral50,
-              borderColor: odysseyTokens.HueNeutral200,
-              "&:hover": {
+              ...(contrastMode === "highContrast" && {
+                backgroundColor: odysseyTokens.HueNeutral800,
+              }),
+              ...(contrastMode === "lowContrast" && {
                 backgroundColor: odysseyTokens.HueNeutral50,
+              }),
+
+              ...(contrastMode === "highContrast" && {
+                borderColor: odysseyTokens.HueNeutral600,
+              }),
+              ...(contrastMode === "lowContrast" && {
+                borderColor: odysseyTokens.HueNeutral200,
+              }),
+              "&:hover": {
+                ...(contrastMode === "highContrast" && {
+                  backgroundColor: odysseyTokens.HueNeutral800,
+                }),
+                ...(contrastMode === "lowContrast" && {
+                  backgroundColor: odysseyTokens.HueNeutral50,
+                }),
               },
               "&.Mui-focused": {
                 borderColor: odysseyTokens.PalettePrimaryMain,
@@ -2775,7 +2988,13 @@ export const components = ({
             color: odysseyTokens.TypographyColorHeading,
             fontWeight: odysseyTokens.TypographyWeightBodyBold,
             textTransform: "uppercase",
-            backgroundColor: odysseyTokens.HueNeutral50,
+
+            ...(contrastMode === "highContrast" && {
+              backgroundColor: odysseyTokens.HueNeutral800,
+            }),
+            ...(contrastMode === "lowContrast" && {
+              backgroundColor: odysseyTokens.HueNeutral50,
+            }),
             borderBottom: 0,
             height: `${odysseyTokens.Spacing7} !important`,
             paddingBlock: `${odysseyTokens.Spacing3} !important`,
@@ -2877,7 +3096,13 @@ export const components = ({
             borderWidth: 1,
             borderRadius: 0,
             marginRight: 2,
-            borderColor: odysseyTokens.HueNeutral400,
+
+            ...(contrastMode === "highContrast" && {
+              borderColor: odysseyTokens.HueNeutral400,
+            }),
+            ...(contrastMode === "lowContrast" && {
+              borderColor: odysseyTokens.HueNeutral400,
+            }),
             height: 18,
           },
 
@@ -3017,7 +3242,13 @@ export const components = ({
             right: 0,
             top: 0,
             bottom: 0,
-            borderColor: odysseyTokens.HueNeutral200,
+
+            ...(contrastMode === "highContrast" && {
+              borderColor: odysseyTokens.HueNeutral600,
+            }),
+            ...(contrastMode === "lowContrast" && {
+              borderColor: odysseyTokens.HueNeutral200,
+            }),
             borderStyle: "dashed",
             borderWidth: 2,
             borderRadius: odysseyTokens.BorderRadiusOuter,

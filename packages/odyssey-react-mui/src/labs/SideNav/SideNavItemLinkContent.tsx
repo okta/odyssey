@@ -16,6 +16,7 @@ import {
   type DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
+import { ContrastMode, useContrastModeContext } from "../../useContrastMode";
 import { Box } from "../../Box";
 import { Status } from "../../Status";
 import type { SideNavItem } from "./types";
@@ -23,17 +24,21 @@ import { Badge } from "../../Badge";
 
 const SideNavItemLabelContainer = styled("div", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "isIconVisible",
+    prop !== "odysseyDesignTokens" &&
+    prop !== "isIconVisible" &&
+    prop !== "contrastMode",
 })<{
   odysseyDesignTokens: DesignTokens;
   isIconVisible: boolean;
-}>(({ odysseyDesignTokens, isIconVisible }) => ({
+  contrastMode: ContrastMode;
+}>(({ odysseyDesignTokens, isIconVisible, contrastMode }) => ({
   width: "100%",
   display: "flex",
   flexWrap: "wrap",
   alignItems: "center",
   fontSize: odysseyDesignTokens.TypographySizeBody,
   marginInlineStart: isIconVisible ? odysseyDesignTokens.Spacing3 : 0,
+  color: contrastMode === "highContrast" ? "#ffffff !important" : "inherit",
 }));
 
 const SideNavItemLinkContent = ({
@@ -48,6 +53,7 @@ const SideNavItemLinkContent = ({
   "count" | "label" | "startIcon" | "endIcon" | "severity" | "statusLabel"
 >): ReactNode => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const { contrastMode } = useContrastModeContext();
 
   const sideNavItemContentStyles = useMemo(
     () => ({
@@ -65,6 +71,7 @@ const SideNavItemLinkContent = ({
       <SideNavItemLabelContainer
         odysseyDesignTokens={odysseyDesignTokens}
         isIconVisible={Boolean(startIcon)}
+        contrastMode={contrastMode}
       >
         {label}
         {!count && severity && (

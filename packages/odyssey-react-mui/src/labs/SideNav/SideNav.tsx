@@ -20,6 +20,7 @@ import {
   useEffect,
   KeyboardEventHandler,
 } from "react";
+
 import { Skeleton } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
@@ -28,6 +29,7 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
+import { ContrastMode, useContrastModeContext } from "../../useContrastMode";
 import { OdysseyThemeProvider } from "../../OdysseyThemeProvider";
 import type { SideNavProps } from "./types";
 import { SideNavHeader } from "./SideNavHeader";
@@ -101,19 +103,26 @@ const StyledOpacityTransitionContainer = styled("div", {
 
 const StyledSideNav = styled("nav", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "isSideNavCollapsed",
+    prop !== "odysseyDesignTokens" &&
+    prop !== "isSideNavCollapsed" &&
+    prop !== "contrastMode",
 })(
   ({
     odysseyDesignTokens,
     isSideNavCollapsed,
+    contrastMode,
   }: {
     odysseyDesignTokens: DesignTokens;
     isSideNavCollapsed: boolean;
+    contrastMode: ContrastMode;
   }) => ({
     position: "relative",
     display: "inline-block",
     height: "100%",
-    backgroundColor: odysseyDesignTokens.HueNeutralWhite,
+    backgroundColor:
+      contrastMode === "highContrast"
+        ? "#121212"
+        : odysseyDesignTokens.HueNeutralWhite,
 
     "&::after": {
       backgroundColor: odysseyDesignTokens.HueNeutral200,
@@ -298,6 +307,8 @@ const SideNav = ({
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
   const intersectionObserverRef = useRef<IntersectionObserver | null>(null);
   const odysseyDesignTokens: DesignTokens = useOdysseyDesignTokens();
+  const { contrastMode } = useContrastModeContext();
+  console.log("Current contrast mode1:", contrastMode);
   const { t } = useTranslation();
   const [sideNavItemsList, updateSideNavItemsList] = useState(sideNavItems);
 
@@ -484,6 +495,7 @@ const SideNav = ({
                 {...childProps}
                 scrollRef={getRefIfThisIsFirstNodeWithIsSelected(childProps.id)}
                 onItemSelected={setSelectedItem}
+                contrastMode={contrastMode}
               />
             </SideNavItemContentContext.Provider>
           ),
@@ -495,6 +507,7 @@ const SideNav = ({
     sideNavItemsList,
     sideNavItemContentProviderValue,
     setSelectedItem,
+    contrastMode,
   ]);
 
   const sideNavExpandClickHandler = useCallback(() => {
@@ -540,6 +553,7 @@ const SideNav = ({
       id="side-nav-expandable"
       isSideNavCollapsed={isSideNavCollapsed}
       odysseyDesignTokens={odysseyDesignTokens}
+      contrastMode={contrastMode}
     >
       {isCollapsible && (
         <SideNavToggleButton
@@ -567,6 +581,7 @@ const SideNav = ({
                 appName={appName}
                 isLoading={isLoading}
                 logoProps={logoProps}
+                contrastMode={contrastMode}
               />
             </SideNavHeaderContainer>
             <SideNavScrollableContainer
@@ -611,6 +626,7 @@ const SideNav = ({
                             odysseyDesignTokens={odysseyDesignTokens}
                             disabled={isDisabled}
                             aria-disabled={isDisabled}
+                            contrastMode={contrastMode}
                           >
                             <NavAccordion
                               label={label}
@@ -652,6 +668,7 @@ const SideNav = ({
                             <SideNavItemContent
                               {...item}
                               key={item.id}
+                              contrastMode={contrastMode}
                               scrollRef={getRefIfThisIsFirstNodeWithIsSelected(
                                 item.id,
                               )}

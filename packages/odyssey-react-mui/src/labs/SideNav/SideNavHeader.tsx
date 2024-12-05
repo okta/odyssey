@@ -18,18 +18,26 @@ import {
   type DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
+import { ContrastMode } from "../../useContrastMode";
 import { SideNavLogo } from "./SideNavLogo";
 import { SideNavProps } from "./types";
 import { Heading6 } from "../../Typography";
 import { TOP_NAV_HEIGHT } from "../TopNav";
 
 const SideNavHeaderContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "contrastMode",
+})<{
+  odysseyDesignTokens: DesignTokens;
+  contrastMode: ContrastMode;
+}>(({ odysseyDesignTokens, contrastMode }) => ({
   position: "relative",
   display: "flex",
   flexDirection: "column",
-  backgroundColor: odysseyDesignTokens.HueNeutralWhite,
+  backgroundColor:
+    contrastMode === "highContrast"
+      ? "#121212"
+      : odysseyDesignTokens.HueNeutralWhite,
   zIndex: 1,
 }));
 
@@ -49,8 +57,12 @@ const SideNavLogoContainer = styled("div", {
 }));
 
 const SideNavHeadingContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "contrastMode",
+})<{
+  odysseyDesignTokens: DesignTokens;
+  contrastMode: ContrastMode;
+}>(({ odysseyDesignTokens, contrastMode }) => ({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
@@ -60,6 +72,10 @@ const SideNavHeadingContainer = styled("div", {
   ["& .MuiTypography-root"]: {
     margin: 0,
     width: "100%",
+    color:
+      contrastMode === "highContrast"
+        ? odysseyDesignTokens.HueNeutralWhite
+        : odysseyDesignTokens.HueNeutral800,
   },
 }));
 
@@ -72,27 +88,37 @@ export type SideNavHeaderProps = {
    * If the side nav currently has no items, it will be loading.
    */
   isLoading?: boolean;
+  /**
+   * The current contrast mode
+   */
+  contrastMode: ContrastMode;
 } & Pick<SideNavProps, "logoProps">;
 
 const SideNavHeader = ({
   appName,
   isLoading,
   logoProps,
+  contrastMode,
 }: SideNavHeaderProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   return (
-    <SideNavHeaderContainer odysseyDesignTokens={odysseyDesignTokens}>
+    <SideNavHeaderContainer
+      odysseyDesignTokens={odysseyDesignTokens}
+      contrastMode={contrastMode}
+    >
       <SideNavLogoContainer odysseyDesignTokens={odysseyDesignTokens}>
         {isLoading ? (
-          //  The skeleton takes the hardcoded dimensions of the Okta logo
           <Skeleton variant="rounded" height={24} width={67} />
         ) : (
-          <SideNavLogo {...logoProps} />
+          <SideNavLogo {...logoProps} contrastMode={contrastMode} />
         )}
       </SideNavLogoContainer>
 
-      <SideNavHeadingContainer odysseyDesignTokens={odysseyDesignTokens}>
+      <SideNavHeadingContainer
+        odysseyDesignTokens={odysseyDesignTokens}
+        contrastMode={contrastMode}
+      >
         <Heading6 component="h2">{isLoading ? <Skeleton /> : appName}</Heading6>
       </SideNavHeadingContainer>
     </SideNavHeaderContainer>

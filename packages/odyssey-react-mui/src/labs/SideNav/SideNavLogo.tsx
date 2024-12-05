@@ -11,15 +11,30 @@
  */
 
 import { memo, useMemo } from "react";
+import styled from "@emotion/styled";
+import { ContrastMode } from "../../useContrastMode";
 import { OktaLogo } from "./OktaLogo";
 import { SideNavLogoProps } from "./types";
+
+// Create a styled wrapper for the logo
+const LogoWrapper = styled.div<{ contrastMode: ContrastMode }>(
+  ({ contrastMode }) => ({
+    "& svg, & img": {
+      filter:
+        contrastMode === "highContrast"
+          ? "brightness(0) invert(1)" // makes logo white in Dark Mode
+          : "none",
+    },
+  }),
+);
 
 const SideNavLogo = ({
   imageAltText,
   href,
   logoComponent,
   imageUrl,
-}: SideNavLogoProps) => {
+  contrastMode,
+}: SideNavLogoProps & { contrastMode: ContrastMode }) => {
   const logo = useMemo(() => {
     if (logoComponent) {
       return logoComponent;
@@ -32,7 +47,11 @@ const SideNavLogo = ({
     return <OktaLogo />;
   }, [imageAltText, logoComponent, imageUrl]);
 
-  return href ? <a href={href}>{logo}</a> : logo;
+  const wrappedLogo = (
+    <LogoWrapper contrastMode={contrastMode}>{logo}</LogoWrapper>
+  );
+
+  return href ? <a href={href}>{wrappedLogo}</a> : wrappedLogo;
 };
 
 const MemoizedSideNavLogo = memo(SideNavLogo);

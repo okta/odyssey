@@ -18,6 +18,7 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
+import { ContrastMode, useContrastModeContext } from "../../useContrastMode";
 
 export const TOP_NAV_HEIGHT = `${64 / 14}rem`;
 
@@ -31,13 +32,19 @@ const StyledRightSideContainer = styled("div")(() => ({
 
 const StyledTopNavContainer = styled("div", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "isScrolled",
+    prop !== "odysseyDesignTokens" &&
+    prop !== "isScrolled" &&
+    prop !== "contrastMode",
 })<{
   odysseyDesignTokens: DesignTokens;
   isScrolled?: boolean;
-}>(({ odysseyDesignTokens, isScrolled }) => ({
+  contrastMode: ContrastMode;
+}>(({ odysseyDesignTokens, isScrolled, contrastMode }) => ({
   alignItems: "center",
-  backgroundColor: odysseyDesignTokens.HueNeutral50,
+  backgroundColor:
+    contrastMode === "highContrast"
+      ? "#252525" // Dark mode background
+      : odysseyDesignTokens.HueNeutral50, // Light mode background
   boxShadow: isScrolled ? odysseyDesignTokens.DepthMedium : undefined,
   clipPath: "inset(0 0 -100vh 0)",
   display: "flex",
@@ -73,11 +80,13 @@ const TopNav = ({
   rightSideComponent,
 }: TopNavProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const { contrastMode } = useContrastModeContext();
 
   return (
     <StyledTopNavContainer
       odysseyDesignTokens={odysseyDesignTokens}
       isScrolled={isScrolled}
+      contrastMode={contrastMode}
     >
       <StyledLeftSideContainer>
         {leftSideComponent ?? <div />}
