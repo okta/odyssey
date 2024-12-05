@@ -2198,7 +2198,7 @@ export const components = ({
     },
     MuiMenuItem: {
       styleOverrides: {
-        root: ({ ownerState }) => ({
+        root: ({ ownerState, theme }) => ({
           gap: odysseyTokens.Spacing2,
           minHeight: "unset",
           maxWidth: `calc(55ch - ${odysseyTokens.Spacing4})`,
@@ -2257,6 +2257,10 @@ export const components = ({
               backgroundColor: odysseyTokens.PalettePrimaryLighter,
               color: odysseyTokens.TypographyColorAction,
             },
+          },
+
+          [`&.${menuItemClasses.focusVisible}`]: {
+            boxShadow: theme.mixins.insetFocusRing,
           },
 
           "&[data-empty='true']": {
