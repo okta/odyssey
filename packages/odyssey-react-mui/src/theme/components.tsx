@@ -2252,6 +2252,11 @@ export const components = ({
                 backgroundColor: odysseyTokens.PalettePrimaryLighter,
               },
             },
+
+            [`&.${menuItemClasses.focusVisible}`]: {
+              backgroundColor: odysseyTokens.PalettePrimaryLighter,
+              color: odysseyTokens.TypographyColorAction,
+            },
           },
 
           "&[data-empty='true']": {
