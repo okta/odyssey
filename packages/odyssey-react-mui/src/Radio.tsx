@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { memo, useCallback, useMemo, useRef, useImperativeHandle } from "react";
 import {
   FormControlLabel,
   FormControlLabelProps as MuiFormControlLabelProps,
@@ -17,11 +18,24 @@ import {
   Radio as MuiRadio,
   RadioProps as MuiRadioProps,
 } from "@mui/material";
-import { memo, useCallback, useMemo, useRef, useImperativeHandle } from "react";
+import styled from "@emotion/styled";
+
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { HtmlProps } from "./HtmlProps";
 import { FocusHandle } from "./inputUtils";
+import {
+  useOdysseyDesignTokens,
+  DesignTokens,
+} from "./OdysseyDesignTokensContext";
 import { Typography } from "./Typography";
+import { useUniqueId } from "./useUniqueId";
+
+const HintContainerWithInlineStartSpacing = styled.div<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  paddingInlineStart: `calc(${odysseyDesignTokens.TypographyLineHeightUi}em + ${odysseyDesignTokens.Spacing2})`,
+  marginBlockEnd: odysseyDesignTokens.Spacing2,
+}));
 
 export type RadioProps = {
   /**
@@ -58,6 +72,7 @@ export type RadioProps = {
 
 const Radio = ({
   hint,
+  id: idOverride,
   inputRef,
   isChecked,
   isDisabled,
@@ -73,6 +88,10 @@ const Radio = ({
   onClick,
 }: RadioProps) => {
   const localInputRef = useRef<HTMLInputElement>(null);
+  const odysseyDesignTokens = useOdysseyDesignTokens();
+  const id = useUniqueId(idOverride);
+  const hintId = hint ? `${id}-hint` : undefined;
+
   useImperativeHandle(
     inputRef,
     () => {
@@ -86,13 +105,8 @@ const Radio = ({
   );
 
   const label = useMemo(
-    () => (
-      <>
-        <Typography component="span">{labelProp}</Typography>
-        {hint && <FormHelperText translate={translate}>{hint}</FormHelperText>}
-      </>
-    ),
-    [labelProp, hint, translate],
+    () => <Typography component="span">{labelProp}</Typography>,
+    [labelProp, translate],
   );
 
   const onChange = useCallback<NonNullable<MuiRadioProps["onChange"]>>(
@@ -123,38 +137,57 @@ const Radio = ({
   );
 
   return (
-    <FormControlLabel
-      checked={isChecked}
-      className={isInvalid ? "Mui-error" : ""}
-      control={
-        <MuiRadio
-          inputProps={{
-            "data-se": testId,
-            "aria-disabled": isDisabled || isReadOnly,
-            readOnly: isReadOnly,
-            tabIndex: isReadOnly ? 0 : undefined,
-          }}
-          inputRef={localInputRef}
-          onChange={onChange}
-          onClick={onClick || handleClick}
-          disabled={isDisabled}
-        />
-      }
-      label={label}
-      name={name}
-      translate={translate}
-      value={value}
-      onBlur={onBlur}
-      disabled={isDisabled}
-      sx={{
-        ...(isReadOnly && {
-          cursor: "default",
-          "& .MuiTypography-root": {
+    <>
+      <FormControlLabel
+        checked={isChecked}
+        className={isInvalid ? "Mui-error" : ""}
+        control={
+          <MuiRadio
+            inputProps={{
+              "aria-describedby": hintId,
+              "aria-disabled": isDisabled || isReadOnly,
+              "data-se": testId,
+              readOnly: isReadOnly,
+              tabIndex: isReadOnly ? 0 : undefined,
+            }}
+            inputRef={localInputRef}
+            onChange={onChange}
+            onClick={onClick || handleClick}
+            disabled={isDisabled}
+          />
+        }
+        label={label}
+        name={name}
+        translate={translate}
+        value={value}
+        onBlur={onBlur}
+        disabled={isDisabled}
+        sx={{
+          ...(isReadOnly && {
             cursor: "default",
-          },
-        }),
-      }}
-    />
+            "& .MuiTypography-root": {
+              cursor: "default",
+            },
+          }),
+
+          ...(hint && {
+            // needed to override specific :not(:last-child) selector
+            ":not(:last-child)": {
+              marginBlockEnd: 0,
+            },
+          }),
+        }}
+      />
+      {hint && (
+        <HintContainerWithInlineStartSpacing
+          odysseyDesignTokens={odysseyDesignTokens}
+        >
+          <FormHelperText id={hintId} translate={translate}>
+            {hint}
+          </FormHelperText>
+        </HintContainerWithInlineStartSpacing>
+      )}
+    </>
   );
 };
 
