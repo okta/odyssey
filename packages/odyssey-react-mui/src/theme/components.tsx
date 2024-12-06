@@ -2184,7 +2184,7 @@ export const components = ({
       styleOverrides: {
         list: {
           paddingBlock: odysseyTokens.Spacing2,
-          paddingInline: odysseyTokens.Spacing2,
+          paddingInline: `${odysseyTokens.Spacing2} !important`,
           borderRadius: odysseyTokens.BorderRadiusMain,
         },
         root: {
@@ -2256,12 +2256,29 @@ export const components = ({
             [`&.${menuItemClasses.focusVisible}`]: {
               backgroundColor: odysseyTokens.PalettePrimaryLighter,
               color: odysseyTokens.TypographyColorAction,
+
+              "&:hover": {
+                backgroundColor: odysseyTokens.PalettePrimaryLighter,
+
+                "@media (hover: none)": {
+                  backgroundColor: odysseyTokens.PalettePrimaryLighter,
+                },
+              },
             },
           },
 
           [`&.${menuItemClasses.focusVisible}`]: {
             backgroundColor: "transparent",
             boxShadow: theme.mixins.insetFocusRing,
+
+            "&:hover": {
+              backgroundColor: odysseyTokens.HueNeutral100,
+
+              // Reset on touch devices, it doesn't add specificity
+              "@media (hover: none)": {
+                backgroundColor: "transparent",
+              },
+            },
           },
 
           "&[data-empty='true']": {
