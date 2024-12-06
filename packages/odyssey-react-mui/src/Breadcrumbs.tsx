@@ -80,7 +80,11 @@ export const Breadcrumb = ({ children, href, iconName }: BreadcrumbProps) => {
   }
 
   if (breadcrumbType === "currentPage") {
-    return <Subordinate color="textPrimary">{breadcrumbContent}</Subordinate>;
+    return (
+      <Subordinate ariaCurrent="page" color="textPrimary">
+        {breadcrumbContent}
+      </Subordinate>
+    );
   }
 
   // breadcrumbType === "listItem" is the default
