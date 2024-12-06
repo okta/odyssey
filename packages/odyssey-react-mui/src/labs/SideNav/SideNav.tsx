@@ -631,6 +631,7 @@ const SideNav = ({
                             <NavAccordion
                               label={label}
                               isCompact={isCompact}
+                              contrastMode={contrastMode}
                               isDefaultExpanded={isDefaultExpanded}
                               isExpanded={isExpanded}
                               startIcon={startIcon}

@@ -47,7 +47,10 @@ const AppSwitcherWrapperComponent = styled("nav", {
       : odysseyDesignTokens.HueNeutralWhite,
   borderInlineEndStyle: "solid",
   borderInlineEndWidth: odysseyDesignTokens.BorderWidthMain,
-  borderInlineEndColor: odysseyDesignTokens.BorderColorDisplay,
+  borderInlineEndColor:
+    contrastMode === "highContrast"
+      ? "#292930"
+      : odysseyDesignTokens.BorderColorDisplay,
 }));
 
 const AppSwitcherOktaAuraWrapperComponent = styled("div", {

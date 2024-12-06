@@ -17,7 +17,7 @@ import {
   Button,
   OdysseyProvider,
   Paragraph,
-  SearchField,
+  // SearchField,
   Surface,
 } from "@okta/odyssey-react-mui";
 import { PageTemplate, UserProfile } from "@okta/odyssey-react-mui/labs";
@@ -27,11 +27,98 @@ import {
   type UiShellNavComponentProps,
   type UiShellProps,
 } from "@okta/odyssey-react-mui/ui-shell";
+import { DataTable } from "@okta/odyssey-react-mui";
+import {
+  columns as planetColumns,
+  data as planetData,
+} from "../../odyssey-mui/DataTable/planetData";
+import {
+  DataTableGetDataType,
+  DataTableOnReorderRowsType,
+} from "@okta/odyssey-react-mui/labs";
+import { Planet } from "../../odyssey-mui/DataTable/planetData";
+import { Person } from "../../odyssey-mui/DataTable/personData";
 import {
   AddCircleIcon,
-  HomeIcon,
+  //  HomeIcon,
   UserIcon,
 } from "@okta/odyssey-react-mui/icons";
+
+const filterData = ({
+  data,
+  ...args
+}: {
+  data: (Planet | Person)[];
+} & DataTableGetDataType) => {
+  let filteredData = data;
+  const { search, filters, sort, page = 1, resultsPerPage = 20 } = args;
+
+  if (search) {
+    filteredData = filteredData.filter((row) =>
+      Object.values(row).some((value) =>
+        value.toString().toLowerCase().includes(search.toLowerCase()),
+      ),
+    );
+  }
+
+  if (filters) {
+    filteredData = filteredData.filter((row) => {
+      return filters.every(({ id, value }) => {
+        if (value === null || value === undefined) {
+          return true;
+        }
+        if (Array.isArray(value)) {
+          return value.some((arrayValue) =>
+            row[id as keyof (Planet | Person)]
+              ?.toString()
+              .toLowerCase()
+              .includes(arrayValue.toString().toLowerCase()),
+          );
+        }
+        return row[id as keyof (Planet | Person)]
+          ?.toString()
+          .toLowerCase()
+          .includes(value.toString().toLowerCase());
+      });
+    });
+  }
+
+  if (sort && sort.length > 0) {
+    filteredData.sort((a, b) => {
+      for (const { id, desc } of sort) {
+        const aValue = a[id as keyof (Planet | Person)];
+        const bValue = b[id as keyof (Planet | Person)];
+        if (aValue < bValue) return desc ? 1 : -1;
+        if (aValue > bValue) return desc ? -1 : 1;
+      }
+      return 0;
+    });
+  }
+
+  const startRow = (page - 1) * resultsPerPage;
+  const endRow = startRow + resultsPerPage;
+  filteredData = filteredData.slice(startRow, endRow);
+
+  return filteredData;
+};
+
+const reorderData = <T extends { id: string | number }>({
+  data,
+  ...args
+}: {
+  data: T[];
+} & DataTableOnReorderRowsType) => {
+  const updatedData = data;
+  const { rowId, newRowIndex } = args;
+  const rowIndex = updatedData.findIndex((row) => row.id === rowId);
+
+  if (rowIndex !== -1) {
+    const [removedRow] = updatedData.splice(rowIndex, 1);
+    updatedData.splice(newRowIndex, 0, removedRow);
+  }
+
+  return updatedData;
+};
 
 const storybookMeta: Meta<UiShellProps> = {
   title: "UI Shell Components/UI Shell",
@@ -162,7 +249,7 @@ const sharedSideNavProps: UiShellNavComponentProps["sideNavProps"] = {
     {
       id: "item1",
       label: "Dashboard",
-      startIcon: <HomeIcon />,
+      // startIcon: <HomeIcon />,
       isDisabled: true,
       nestedNavItems: [
         {
@@ -203,13 +290,16 @@ const sharedTopNavProps: UiShellNavComponentProps["topNavProps"] = {
 
 const sharedOptionalComponents: UiShellProps["optionalComponents"] = {
   topNavLeftSide: (
-    <div>
-      <SearchField label="Search" placeholder="Search..." />
-    </div>
+    <div>{/* <SearchField label="Search" placeholder="Search..." /> */}</div>
   ),
   topNavRightSide: (
     <UserProfile
       profileIcon={<UserIcon />}
+      contrastMode={
+        window.location.href.includes("backgrounds.value:!hex(1d1d1d)")
+          ? "highContrast"
+          : "lowContrast"
+      }
       orgName="ORG123"
       userName="test.user@test.com"
     />
@@ -303,155 +393,53 @@ export const WithoutAppContent: StoryObj<UiShellProps> = {
   },
 };
 
-export const WithTallAppContent: StoryObj<UiShellProps> = {
+export const HackweekTableExample: StoryObj<UiShellProps> = {
   args: {
     appComponent: (
-      <div style={{ backgroundColor: "transparent" }}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lacinia
-        leo quis sodales scelerisque. Maecenas tempor eget nunc sit amet
-        ultrices. Maecenas et varius ante. Nulla eu quam sit amet orci fermentum
-        dictum sit amet scelerisque libero. Proin luctus semper elit, ut pretium
-        massa tristique a. Mauris hendrerit ex eu commodo egestas. Etiam a lacus
-        aliquet, convallis metus et, sollicitudin odio. Fusce vehicula purus sed
-        orci elementum, ut cursus diam sollicitudin. Pellentesque pulvinar nibh
-        turpis, eu finibus dolor egestas eget. Duis tellus mauris, pulvinar sit
-        amet ante a, aliquet laoreet sapien. Ut quis tempus massa. Fusce
-        fringilla mattis lacinia. Cras at pharetra quam, eu ultrices ipsum.
-        Etiam malesuada, ex consectetur fringilla faucibus, quam lorem luctus
-        diam, vitae lobortis urna lorem ac libero. Nulla a fermentum ligula, ut
-        pulvinar odio. Cras in dictum nibh. Ut et orci sodales, laoreet sem nec,
-        volutpat sapien. Phasellus dui turpis, euismod vitae euismod porta,
-        semper a tellus. Morbi bibendum eros quam, et suscipit ex blandit eu.
-        Etiam placerat, tellus viverra rutrum porttitor, elit arcu molestie
-        nibh, at porta arcu odio ut neque. Donec id odio ut neque malesuada
-        pulvinar a in tortor. Fusce eu urna lobortis, rhoncus odio nec,
-        scelerisque dolor. Donec tempor eros sed condimentum rutrum. Vivamus ac
-        odio ac erat bibendum ultricies. Cras nec libero sit amet leo luctus
-        gravida. Praesent placerat massa ex. Donec vehicula orci ac consequat
-        mollis. Sed vitae magna ligula. Nulla pulvinar lectus ex, sed varius
-        enim pulvinar vel. Morbi viverra vitae dui sit amet mattis. Phasellus
-        quis augue viverra, rhoncus tellus non, elementum massa. Donec posuere
-        luctus ultrices. Ut eu massa sem. Aliquam sed mattis nulla, ac fermentum
-        magna. Vestibulum ac ex ut massa molestie gravida. Cras est arcu, varius
-        nec fringilla semper, aliquet id nunc. Quisque facilisis, nulla nec
-        ornare vehicula, justo urna feugiat lorem, nec pretium odio nisl
-        facilisis diam. Sed a quam in risus semper convallis sed eget mauris.
-        Proin vitae purus augue. Ut et risus justo. Mauris porta, leo non
-        vestibulum cursus, ante nisi sagittis magna, et convallis enim arcu a
-        diam. Ut tincidunt urna ac massa consectetur euismod. Aenean sagittis
-        nisi mi, eu bibendum arcu auctor at. Sed et urna sit amet sapien euismod
-        vulputate molestie eu ipsum. Phasellus mattis semper neque, et porttitor
-        mi scelerisque eget. Donec non egestas ex, ac consequat nunc. Nunc sed
-        risus ac orci ullamcorper lacinia vel at risus. Nulla et odio eros.
-        Vivamus tempor ultricies mi sed luctus. Duis faucibus sollicitudin odio,
-        quis rhoncus orci volutpat nec. Vivamus id eros et est aliquam
-        porttitor. Maecenas maximus magna sed est condimentum hendrerit. Integer
-        fringilla posuere nisl, vitae molestie magna dictum id. Suspendisse
-        volutpat pharetra mauris, sed vehicula nulla suscipit a. Morbi sed augue
-        sodales, molestie purus et, egestas enim. Proin ut metus tempus,
-        ultricies neque vel, vulputate lectus. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit. Mauris lacinia leo quis sodales
-        scelerisque. Maecenas tempor eget nunc sit amet ultrices. Maecenas et
-        varius ante. Nulla eu quam sit amet orci fermentum dictum sit amet
-        scelerisque libero. Proin luctus semper elit, ut pretium massa tristique
-        a. Mauris hendrerit ex eu commodo egestas. Etiam a lacus aliquet,
-        convallis metus et, sollicitudin odio. Fusce vehicula purus sed orci
-        elementum, ut cursus diam sollicitudin. Pellentesque pulvinar nibh
-        turpis, eu finibus dolor egestas eget. Duis tellus mauris, pulvinar sit
-        amet ante a, aliquet laoreet sapien. Ut quis tempus massa. Fusce
-        fringilla mattis lacinia. Cras at pharetra quam, eu ultrices ipsum.
-        Etiam malesuada, ex consectetur fringilla faucibus, quam lorem luctus
-        diam, vitae lobortis urna lorem ac libero. Nulla a fermentum ligula, ut
-        pulvinar odio. Cras in dictum nibh. Ut et orci sodales, laoreet sem nec,
-        volutpat sapien. Phasellus dui turpis, euismod vitae euismod porta,
-        semper a tellus. Morbi bibendum eros quam, et suscipit ex blandit eu.
-        Etiam placerat, tellus viverra rutrum porttitor, elit arcu molestie
-        nibh, at porta arcu odio ut neque. Donec id odio ut neque malesuada
-        pulvinar a in tortor. Fusce eu urna lobortis, rhoncus odio nec,
-        scelerisque dolor. Donec tempor eros sed condimentum rutrum. Vivamus ac
-        odio ac erat bibendum ultricies. Cras nec libero sit amet leo luctus
-        gravida. Praesent placerat massa ex. Donec vehicula orci ac consequat
-        mollis. Sed vitae magna ligula. Nulla pulvinar lectus ex, sed varius
-        enim pulvinar vel. Morbi viverra vitae dui sit amet mattis. Phasellus
-        quis augue viverra, rhoncus tellus non, elementum massa. Donec posuere
-        luctus ultrices. Ut eu massa sem. Aliquam sed mattis nulla, ac fermentum
-        magna. Vestibulum ac ex ut massa molestie gravida. Cras est arcu, varius
-        nec fringilla semper, aliquet id nunc. Quisque facilisis, nulla nec
-        ornare vehicula, justo urna feugiat lorem, nec pretium odio nisl
-        facilisis diam. Sed a quam in risus semper convallis sed eget mauris.
-        Proin vitae purus augue. Ut et risus justo. Mauris porta, leo non
-        vestibulum cursus, ante nisi sagittis magna, et convallis enim arcu a
-        diam. Ut tincidunt urna ac massa consectetur euismod. Aenean sagittis
-        nisi mi, eu bibendum arcu auctor at. Sed et urna sit amet sapien euismod
-        vulputate molestie eu ipsum. Phasellus mattis semper neque, et porttitor
-        mi scelerisque eget. Donec non egestas ex, ac consequat nunc. Nunc sed
-        risus ac orci ullamcorper lacinia vel at risus. Nulla et odio eros.
-        Vivamus tempor ultricies mi sed luctus. Duis faucibus sollicitudin odio,
-        quis rhoncus orci volutpat nec. Vivamus id eros et est aliquam
-        porttitor. Maecenas maximus magna sed est condimentum hendrerit. Integer
-        fringilla posuere nisl, vitae molestie magna dictum id. Suspendisse
-        volutpat pharetra mauris, sed vehicula nulla suscipit a. Morbi sed augue
-        sodales, molestie purus et, egestas enim. Proin ut metus tempus,
-        ultricies neque vel, vulputate lectus. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit. Mauris lacinia leo quis sodales
-        scelerisque. Maecenas tempor eget nunc sit amet ultrices. Maecenas et
-        varius ante. Nulla eu quam sit amet orci fermentum dictum sit amet
-        scelerisque libero. Proin luctus semper elit, ut pretium massa tristique
-        a. Mauris hendrerit ex eu commodo egestas. Etiam a lacus aliquet,
-        convallis metus et, sollicitudin odio. Fusce vehicula purus sed orci
-        elementum, ut cursus diam sollicitudin. Pellentesque pulvinar nibh
-        turpis, eu finibus dolor egestas eget. Duis tellus mauris, pulvinar sit
-        amet ante a, aliquet laoreet sapien. Ut quis tempus massa. Fusce
-        fringilla mattis lacinia. Cras at pharetra quam, eu ultrices ipsum.
-        Etiam malesuada, ex consectetur fringilla faucibus, quam lorem luctus
-        diam, vitae lobortis urna lorem ac libero. Nulla a fermentum ligula, ut
-        pulvinar odio. Cras in dictum nibh. Ut et orci sodales, laoreet sem nec,
-        volutpat sapien. Phasellus dui turpis, euismod vitae euismod porta,
-        semper a tellus. Morbi bibendum eros quam, et suscipit ex blandit eu.
-        Etiam placerat, tellus viverra rutrum porttitor, elit arcu molestie
-        nibh, at porta arcu odio ut neque. Donec id odio ut neque malesuada
-        pulvinar a in tortor. Fusce eu urna lobortis, rhoncus odio nec,
-        scelerisque dolor. Donec tempor eros sed condimentum rutrum. Vivamus ac
-        odio ac erat bibendum ultricies. Cras nec libero sit amet leo luctus
-        gravida. Praesent placerat massa ex. Donec vehicula orci ac consequat
-        mollis. Sed vitae magna ligula. Nulla pulvinar lectus ex, sed varius
-        enim pulvinar vel. Morbi viverra vitae dui sit amet mattis. Phasellus
-        quis augue viverra, rhoncus tellus non, elementum massa. Donec posuere
-        luctus ultrices. Ut eu massa sem. Aliquam sed mattis nulla, ac fermentum
-        magna. Vestibulum ac ex ut massa molestie gravida. Cras est arcu, varius
-        nec fringilla semper, aliquet id nunc. Quisque facilisis, nulla nec
-        ornare vehicula, justo urna feugiat lorem, nec pretium odio nisl
-        facilisis diam. Sed a quam in risus semper convallis sed eget mauris.
-        Proin vitae purus augue. Ut et risus justo. Mauris porta, leo non
-        vestibulum cursus, ante nisi sagittis magna, et convallis enim arcu a
-        diam. Ut tincidunt urna ac massa consectetur euismod. Aenean sagittis
-        nisi mi, eu bibendum arcu auctor at. Sed et urna sit amet sapien euismod
-        vulputate molestie eu ipsum. Phasellus mattis semper neque, et porttitor
-        mi scelerisque eget. Donec non egestas ex, ac consequat nunc. Nunc sed
-        risus ac orci ullamcorper lacinia vel at risus. Nulla et odio eros.
-        Vivamus tempor ultricies mi sed luctus. Duis faucibus sollicitudin odio,
-        quis rhoncus orci volutpat nec. Vivamus id eros et est aliquam
-        porttitor. Maecenas maximus magna sed est condimentum hendrerit. Integer
-        fringilla posuere nisl, vitae molestie magna dictum id. Suspendisse
-        volutpat pharetra mauris, sed vehicula nulla suscipit a. Morbi sed augue
-        sodales, molestie purus et, egestas enim. Proin ut metus tempus,
-        ultricies neque vel, vulputate lectus. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit. Mauris lacinia leo quis sodales
-        scelerisque. Maecenas tempor eget nunc sit amet ultrices. Maecenas et
-        varius ante. Nulla eu quam sit amet orci fermentum dictum sit amet
-        scelerisque libero. Proin luctus semper elit, ut pretium massa tristique
-        a. Mauris hendrerit ex eu commodo egestas. Etiam a lacus aliquet,
-        convallis metus et, sollicitudin odio. Fusce vehicula purus sed orci
-        elementum, ut cursus diam sollicitudin. Pellentesque pulvinar nibh
-        turpis, eu finibus dolor egestas eget. Duis tellus mauris, pulvinar sit
-        amet ante a, aliquet laoreet sapien. Ut quis tempus massa. Fusce
-        fringilla mattis lacinia. Cras at pharetra quam, eu ultrices ipsum.
-        Etiam malesuada, ex consectetur fringilla faucibus, quam lorem luctus
-        diam, vitae lobortis urna lorem ac libero. Nulla a fermentum ligula, ut
-        pulvinar odio. Cras in dictum nibh. Ut et orci sodales, laoreet sem nec,
-        volutpat sapien. Phasellus dui turpis, euismod vitae euismod porta,
-        semper a tellus. Morbi bibendum eros quam, et suscipit ex blandit eu.
-        Et…
+      <div
+        style={{
+          backgroundColor: window.location.href.includes(
+            "backgrounds.value:!hex(1d1d1d)",
+          )
+            ? "#1d1d1d"
+            : "#fff",
+          padding: "16px",
+          borderRadius: "12px",
+        }}
+      >
+        {/* DataTable integration */}
+        <DataTable
+          hasChangeableDensity={true}
+          hasColumnResizing={true}
+          hasColumnVisibility={false}
+          hasFilters={true}
+          hasPagination={false}
+          hasRowSelection={true}
+          hasSearch={true}
+          hasSorting={true}
+          hasRowReordering={false}
+          columns={planetColumns}
+          getData={({ page, resultsPerPage, search, filters, sort }) =>
+            filterData({
+              data: planetData,
+              page,
+              resultsPerPage,
+              search,
+              filters,
+              sort,
+            })
+          }
+          onReorderRows={({ rowId, newRowIndex }) =>
+            reorderData({
+              data: planetData,
+              rowId,
+              newRowIndex,
+            })
+          }
+          onChangeRowSelection={(rowSelection) =>
+            console.log(`${Object.keys(rowSelection).length} selected rows`)
+          }
+        />
       </div>
     ),
     optionalComponents: sharedOptionalComponents,

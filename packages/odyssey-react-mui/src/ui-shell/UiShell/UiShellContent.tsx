@@ -38,6 +38,10 @@ const StyledAppContainer = styled("div", {
   overflowY: "auto",
   paddingBlock: odysseyDesignTokens.Spacing5,
   paddingInline: odysseyDesignTokens.Spacing8,
+  color:
+    appBackgroundContrastMode === "highContrast"
+      ? "#ffffff"
+      : odysseyDesignTokens.HueNeutral900,
   backgroundColor:
     appBackgroundContrastMode === "highContrast"
       ? "#252525"

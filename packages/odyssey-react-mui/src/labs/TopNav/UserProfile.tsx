@@ -17,46 +17,57 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
+import { ContrastMode } from "../../useContrastMode";
 import { Subordinate } from "../../Typography";
 import { Box } from "../../Box";
 
 const UserProfileContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "contrastMode",
+})<{
+  odysseyDesignTokens: DesignTokens;
+  contrastMode: ContrastMode;
+}>(({ odysseyDesignTokens, contrastMode }) => ({
   display: "flex",
   alignItems: "center",
   paddingInlineEnd: odysseyDesignTokens.Spacing4,
+  color: contrastMode === "highContrast" ? "#ffffff" : "inherit",
 }));
 
 const UserProfileIconContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "contrastMode",
+})<{
+  odysseyDesignTokens: DesignTokens;
+  contrastMode: ContrastMode;
+}>(({ odysseyDesignTokens, contrastMode }) => ({
   display: "flex",
   paddingInlineEnd: odysseyDesignTokens.Spacing2,
+  color: contrastMode === "highContrast" ? "#ffffff" : "inherit",
 }));
 
-const UserProfileInfoContainer = styled("div")(() => ({
+const UserProfileInfoContainer = styled("div", {
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "contrastMode",
+})<{
+  odysseyDesignTokens: DesignTokens;
+  contrastMode: ContrastMode;
+}>(({ odysseyDesignTokens, contrastMode }) => ({
   display: "flex",
   flexDirection: "column",
   textAlign: "left",
+  color:
+    contrastMode === "highContrast"
+      ? odysseyDesignTokens.HueNeutralWhite
+      : "inherit",
 }));
 
+// Update props type
 export type UserProfileProps = {
-  /**
-   * Logged in user profile icon to be displayed in the top nav
-   */
+  contrastMode: ContrastMode; // Add this
   profileIcon?: ReactElement;
-  /**
-   * Logged in user info to be displayed in the top nav
-   */
   userName: string;
-  /**
-   * Org name of the logged in user
-   */
   orgName: string;
-  /**
-   * The icon element to display after the username
-   */
   userNameEndIcon?: ReactElement;
 };
 
@@ -65,18 +76,28 @@ const UserProfile = ({
   userName,
   orgName,
   userNameEndIcon,
+  contrastMode, // Add this
 }: UserProfileProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   return (
-    <UserProfileContainer odysseyDesignTokens={odysseyDesignTokens}>
+    <UserProfileContainer
+      odysseyDesignTokens={odysseyDesignTokens}
+      contrastMode={contrastMode}
+    >
       {profileIcon && (
-        <UserProfileIconContainer odysseyDesignTokens={odysseyDesignTokens}>
+        <UserProfileIconContainer
+          odysseyDesignTokens={odysseyDesignTokens}
+          contrastMode={contrastMode}
+        >
           {profileIcon}
         </UserProfileIconContainer>
       )}
 
-      <UserProfileInfoContainer>
+      <UserProfileInfoContainer
+        odysseyDesignTokens={odysseyDesignTokens}
+        contrastMode={contrastMode}
+      >
         {userNameEndIcon ? (
           <Box
             sx={{
@@ -85,13 +106,25 @@ const UserProfile = ({
               gap: odysseyDesignTokens.Spacing2,
             }}
           >
-            <Subordinate color="textPrimary">{userName}</Subordinate>
+            <Subordinate
+              color={contrastMode === "highContrast" ? "white" : "textPrimary"}
+            >
+              {userName}
+            </Subordinate>
             {userNameEndIcon}
           </Box>
         ) : (
-          <Subordinate color="textPrimary">{userName}</Subordinate>
+          <Subordinate
+            color={contrastMode === "highContrast" ? "white" : "textPrimary"}
+          >
+            {userName}
+          </Subordinate>
         )}
-        <Subordinate color="textSecondary">{orgName}</Subordinate>
+        <Subordinate
+          color={contrastMode === "highContrast" ? "#a0a0a0" : "textSecondary"}
+        >
+          {orgName}
+        </Subordinate>
       </UserProfileInfoContainer>
     </UserProfileContainer>
   );

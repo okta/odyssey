@@ -17,6 +17,7 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
+import { ContrastMode, useContrastModeContext } from "../../useContrastMode";
 import { Tooltip } from "../../Tooltip";
 import { MuiPropsContext, MuiPropsContextType } from "../../MuiPropsContext";
 
@@ -30,26 +31,32 @@ const AppSwitcherAppWrapperComponent = styled("li", {
 
 const AppSwitcherAppLinkComponent = styled("a", {
   shouldForwardProp: (prop) =>
-    !["odysseyDesignTokens", "isSelected"].includes(prop),
+    !["odysseyDesignTokens", "isSelected", "contrastMode"].includes(prop),
 })(
   ({
     odysseyDesignTokens,
     isSelected,
+    contrastMode,
   }: {
     odysseyDesignTokens: DesignTokens;
     isSelected: boolean;
+    contrastMode: ContrastMode;
   }) => ({
     display: "inline-block",
     margin: "auto",
     padding: odysseyDesignTokens.Spacing1,
     backgroundColor: isSelected
-      ? odysseyDesignTokens.PalettePrimaryLighter
+      ? contrastMode === "highContrast"
+        ? "#292930"
+        : odysseyDesignTokens.PalettePrimaryLighter
       : "transparent",
     borderRadius: odysseyDesignTokens.BorderRadiusTight,
     transition: `background-color ${odysseyDesignTokens.TransitionDurationMain}`,
-
     "&:hover, &:focus": {
-      backgroundColor: odysseyDesignTokens.HueNeutral50,
+      backgroundColor:
+        contrastMode === "highContrast"
+          ? "#252525"
+          : odysseyDesignTokens.HueNeutral50,
     },
   }),
 );
@@ -93,6 +100,7 @@ export const AppSwitcherApp = ({
 }: AppSwitcherAppProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const isSelected = appName === selectedAppName;
+  const { contrastMode } = useContrastModeContext();
 
   const renderAppIconLink = useCallback(
     (muiProps: MuiPropsContextType) => (
@@ -100,6 +108,7 @@ export const AppSwitcherApp = ({
         {...muiProps}
         odysseyDesignTokens={odysseyDesignTokens}
         isSelected={isSelected}
+        contrastMode={contrastMode}
         href={linkUrl}
         aria-current={isSelected ? "page" : undefined}
       >
@@ -116,6 +125,7 @@ export const AppSwitcherApp = ({
       linkUrl,
       appIconDefaultUrl,
       appIconSelectedUrl,
+      contrastMode,
     ],
   );
 

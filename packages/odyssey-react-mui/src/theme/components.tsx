@@ -88,12 +88,12 @@ export const components = ({
           boxShadow: "none",
 
           "&.Mui-disabled": {
-            ...(contrastMode === "highContrast" && {
-              backgroundColor: odysseyTokens.HueNeutral900,
-            }),
-            ...(contrastMode === "lowContrast" && {
-              backgroundColor: odysseyTokens.HueNeutralWhite,
-            }),
+            // ...(contrastMode === "highContrast" && {
+            //   backgroundColor: odysseyTokens.HueNeutral900,
+            // }),
+            // ...(contrastMode === "lowContrast" && {
+            //   backgroundColor: odysseyTokens.HueNeutralWhite,
+            // }),
             color: odysseyTokens.TypographyColorDisabled,
             cursor: "default",
 
@@ -715,14 +715,14 @@ export const components = ({
 
             ...(ownerState.variant === "secondary" && {
               backgroundColor: "transparent",
-
               ...(contrastMode === "highContrast" && {
                 borderColor: odysseyTokens.HueNeutral500,
+                color: odysseyTokens.HueNeutralWhite,
               }),
               ...(contrastMode === "lowContrast" && {
                 borderColor: odysseyTokens.HueNeutral300,
+                color: odysseyTokens.TypographyColorBody,
               }),
-              color: odysseyTokens.TypographyColorBody,
 
               "&:hover": {
                 ...(contrastMode === "highContrast" && {
@@ -2902,6 +2902,7 @@ export const components = ({
           marginBlock: odysseyTokens.Spacing0,
           marginInline: odysseyTokens.Spacing0,
           lineHeight: odysseyTokens.TypographyLineHeightUi,
+          backgroundColor: odysseyTokens.HueNeutral900,
 
           "&.narrow": {
             width: "100%",
@@ -2938,6 +2939,17 @@ export const components = ({
           overflow: "visible !important",
           position: "relative",
           overflowWrap: "break-word",
+
+          ...(contrastMode === "highContrast" && {
+            color: "#ffffff !important", // Force white text in dark mode
+            backgroundColor: "transparent !important", // Ensure it doesn't interfere with background
+            "& *": {
+              color: "#ffffff !important", // Ensure child elements inherit white text
+            },
+          }),
+          ...(contrastMode === "lowContrast" && {
+            color: odysseyTokens.TypographyColorBody, // Default light mode color
+          }),
 
           [`&.${tableCellClasses.root}`]: {
             borderTop: `none !important`,
@@ -3138,141 +3150,204 @@ export const components = ({
     },
     MuiTableRow: {
       styleOverrides: {
-        root: () => ({
-          borderTop: `${odysseyTokens.BorderWidthMain} ${odysseyTokens.BorderStyleMain} ${odysseyTokens.HueNeutral100}`,
-          transition: "none !important",
-          verticalAlign: "unset",
+        root: ({}) => {
+          return {
+            borderTop: `${odysseyTokens.BorderWidthMain} ${odysseyTokens.BorderStyleMain} ${
+              contrastMode === "highContrast"
+                ? "#313231"
+                : odysseyTokens.HueNeutral100
+            } !important`,
+            transition: "none !important",
+            verticalAlign: "unset",
 
-          [`&:hover`]: {
-            backgroundColor: `${odysseyTokens.HueNeutral50} !important`,
-          },
+            // Adding specificity by nesting classes or using attributes
+            "&.MuiTableRow-root": {
+              ...(contrastMode === "highContrast" && {
+                backgroundColor: "#1d1d1d !important", // High contrast background
+                color: "#ffffff !important", // High contrast text
+              }),
+              ...(contrastMode === "lowContrast" && {
+                backgroundColor: "rgb(255, 255, 255) !important", // Default light mode background
+              }),
+            },
+            "&:hover.MuiTableRow-root": {
+              ...(contrastMode === "highContrast" && {
+                backgroundColor: "#313231 !important", // High contrast hover
+              }),
+              ...(contrastMode === "lowContrast" && {
+                backgroundColor: `${odysseyTokens.HueNeutral50} !important`,
+              }),
+            },
+            ...(contrastMode === "highContrast" && {
+              backgroundColor: "#252525 !important", // Force dark mode background
+              color: "#ffffff !important", // Force white text color
+            }),
+            ...(contrastMode === "lowContrast" &&
+              {
+                // Default light mode styles
+              }),
 
-          [`&:first-of-type`]: {
-            borderTopColor: odysseyTokens.HueNeutralWhite,
-          },
-
-          [`&.${tableRowClasses.selected}`]: {
-            backgroundColor: `${odysseyTokens.PalettePrimaryLighter} !important`,
-
-            "&:hover": {
-              backgroundColor: `${odysseyTokens.PalettePrimaryLighter} !important`,
+            [`&:hover`]: {
+              ...(contrastMode === "highContrast" && {
+                backgroundColor: "#313231 !important", // Dark mode hover
+              }),
+              ...(contrastMode === "lowContrast" && {
+                backgroundColor: `${odysseyTokens.HueNeutral50} !important`,
+              }),
             },
 
-            [`&:hover + .${tableRowClasses.root}`]: {
-              borderTopColor: odysseyTokens.PalettePrimaryMain,
-            },
-          },
-          [`.${tableRowClasses.selected} + &`]: {
-            borderTopColor: odysseyTokens.PalettePrimaryLight,
-          },
-          [`&.${tableRowClasses.head}`]: {
-            boxShadow: "none !important",
-            borderBottom: 0,
-
-            "&:hover, &:focus-within": {
-              backgroundColor: "transparent !important",
-            },
-          },
-
-          [`.${tableBodyClasses.root} &`]: {
-            // Target is 48px height
-            paddingBlock: odysseyTokens.Spacing3,
-
-            [`& .${tableCellClasses.root}::after`]: {
-              top: `-${odysseyTokens.Spacing3} !important`,
-              bottom: `-${odysseyTokens.Spacing3} !important`,
-            },
-          },
-
-          [`.${tableBodyClasses.root}.MuiTableBody-compact &`]: {
-            // Target is 36px height
-            paddingBlock: odysseyTokens.Spacing2,
-
-            [`& .${tableCellClasses.root}::after`]: {
-              top: `-${odysseyTokens.Spacing2} !important`,
-              bottom: `-${odysseyTokens.Spacing2} !important`,
-            },
-          },
-
-          [`.${tableBodyClasses.root}.MuiTableBody-spacious &`]: {
-            // Target is 56px height
-            paddingBlock: odysseyTokens.Spacing4,
-
-            [`& .${tableCellClasses.root}::after`]: {
-              top: `-${odysseyTokens.Spacing4} !important`,
-              bottom: `-${odysseyTokens.Spacing4} !important`,
-            },
-          },
-
-          "&.isDragTarget": {
-            opacity: 1,
-            position: "relative",
-            backgroundColor: odysseyTokens.PalettePrimaryMain,
-            borderRadius: odysseyTokens.BorderRadiusOuter,
-
-            [`& td.${tableCellClasses.root}`]: {
-              borderTop: "0 !important",
-              borderRight: "0 !important",
-              borderBottom: "0 !important",
-              borderLeft: "0 !important",
+            [`&:first-of-type`]: {
+              ...(contrastMode === "highContrast" && {
+                borderTopColor: "#252525 !important", // Match dark mode background
+              }),
+              ...(contrastMode === "lowContrast" && {
+                borderTopColor: odysseyTokens.HueNeutralWhite,
+              }),
             },
 
-            "&::after": {
+            [`&.${tableRowClasses.selected}`]: {
+              ...(contrastMode === "highContrast" && {
+                backgroundColor: "#313231 !important",
+              }),
+              ...(contrastMode === "lowContrast" && {
+                backgroundColor: `${odysseyTokens.PalettePrimaryLighter} !important`,
+              }),
+
+              "&:hover": {
+                ...(contrastMode === "highContrast" && {
+                  backgroundColor: "#313231 !important",
+                }),
+                ...(contrastMode === "lowContrast" && {
+                  backgroundColor: `${odysseyTokens.PalettePrimaryLighter} !important`,
+                }),
+              },
+
+              [`&:hover + .${tableRowClasses.root}`]: {
+                ...(contrastMode === "highContrast" && {
+                  borderTopColor: "#252525 !important",
+                }),
+                ...(contrastMode === "lowContrast" && {
+                  borderTopColor: odysseyTokens.PalettePrimaryMain,
+                }),
+              },
+            },
+
+            [`.${tableRowClasses.selected} + &`]: {
+              ...(contrastMode === "highContrast" && {
+                borderTopColor: "#252525 !important",
+              }),
+              ...(contrastMode === "lowContrast" && {
+                borderTopColor: odysseyTokens.PalettePrimaryLight,
+              }),
+            },
+            [`&.${tableRowClasses.head}`]: {
+              border: "0 !important", // No border
+              ...(contrastMode === "highContrast" && {
+                backgroundColor: "#252525 !important", // High contrast header background
+                color: "#ffffff !important", // High contrast header text
+              }),
+              ...(contrastMode === "lowContrast" && {
+                backgroundColor: "rgb(244, 244, 244) !important", // Light mode header background
+                color: "inherit !important", // Default light mode text
+              }),
+
+              [`&:hover`]: {
+                ...(contrastMode === "highContrast" && {
+                  backgroundColor: "#313231 !important", // High contrast header hover
+                  color: "#ffffff !important", // High contrast hover text
+                }),
+                ...(contrastMode === "lowContrast" && {
+                  backgroundColor: "rgb(244, 244, 244) !important !important", // Light mode header hover
+                  color: "inherit !important", // Default light mode hover text
+                }),
+              },
+            },
+
+            // Adjust row padding for table body
+            [`.${tableBodyClasses.root} &`]: {
+              paddingBlock: odysseyTokens.Spacing3,
+              [`& .${tableCellClasses.root}::after`]: {
+                top: `-${odysseyTokens.Spacing3} !important`,
+                bottom: `-${odysseyTokens.Spacing3} !important`,
+              },
+            },
+
+            [`.${tableBodyClasses.root}.MuiTableBody-compact &`]: {
+              paddingBlock: odysseyTokens.Spacing2,
+              [`& .${tableCellClasses.root}::after`]: {
+                top: `-${odysseyTokens.Spacing2} !important`,
+                bottom: `-${odysseyTokens.Spacing2} !important`,
+              },
+            },
+
+            [`.${tableBodyClasses.root}.MuiTableBody-spacious &`]: {
+              paddingBlock: odysseyTokens.Spacing4,
+              [`& .${tableCellClasses.root}::after`]: {
+                top: `-${odysseyTokens.Spacing4} !important`,
+                bottom: `-${odysseyTokens.Spacing4} !important`,
+              },
+            },
+
+            "&.isDragTarget": {
+              opacity: 1,
+              position: "relative",
+              ...(contrastMode === "highContrast" && {
+                backgroundColor: "#252525 !important",
+              }),
+              ...(contrastMode === "lowContrast" && {
+                backgroundColor: odysseyTokens.PalettePrimaryMain,
+              }),
+              borderRadius: odysseyTokens.BorderRadiusOuter,
+
+              [`& td.${tableCellClasses.root}`]: {
+                border: "0 !important",
+              },
+
+              "&::after": {
+                content: '""',
+                position: "absolute",
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0,
+                ...(contrastMode === "highContrast" && {
+                  borderColor: "#313231 !important",
+                }),
+                ...(contrastMode === "lowContrast" && {
+                  borderColor: odysseyTokens.PalettePrimaryLight,
+                }),
+                borderStyle: "dashed",
+                borderWidth: 2,
+                borderRadius: odysseyTokens.BorderRadiusOuter,
+              },
+            },
+
+            "&.isDragging": {
+              borderRadius: odysseyTokens.BorderRadiusOuter,
+            },
+
+            "&.isDragging::after": {
               content: '""',
               position: "absolute",
               left: 0,
               right: 0,
               top: 0,
               bottom: 0,
-              borderColor: odysseyTokens.PalettePrimaryLight,
+              ...(contrastMode === "highContrast" && {
+                borderColor: "#313231 !important",
+              }),
+              ...(contrastMode === "lowContrast" && {
+                borderColor: odysseyTokens.HueNeutral200,
+              }),
               borderStyle: "dashed",
               borderWidth: 2,
               borderRadius: odysseyTokens.BorderRadiusOuter,
             },
-          },
-
-          "&.isDragging": {
-            borderRadius: odysseyTokens.BorderRadiusOuter,
-          },
-
-          "&.isDragging::after": {
-            content: '""',
-            position: "absolute",
-            left: 0,
-            right: 0,
-            top: 0,
-            bottom: 0,
-
-            ...(contrastMode === "highContrast" && {
-              borderColor: odysseyTokens.HueNeutral600,
-            }),
-            ...(contrastMode === "lowContrast" && {
-              borderColor: odysseyTokens.HueNeutral200,
-            }),
-            borderStyle: "dashed",
-            borderWidth: 2,
-            borderRadius: odysseyTokens.BorderRadiusOuter,
-          },
-
-          "&.isDragging, &.isDragging.isDragTarget": {
-            position: "relative",
-            opacity: 1,
-            backgroundColor: "transparent",
-          },
-
-          "&.isDragging.isDragTarget::after": {
-            borderColor: odysseyTokens.PalettePrimaryLight,
-            left: 0,
-            right: 0,
-          },
-
-          [`&.isDragging + .${tableRowClasses.root}, &.isDragTarget + .${tableRowClasses.root}`]:
-            {
-              borderTopColor: "transparent",
-            },
-        }),
+          };
+        },
       },
     },
+
     MuiTableSortLabel: {
       styleOverrides: {
         root: {

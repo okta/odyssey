@@ -25,10 +25,12 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
+import { ContrastMode } from "../../useContrastMode";
 import { Support } from "../../Typography";
 import { useUniqueId } from "../../useUniqueId";
 
 export type NavAccordionProps = {
+  contrastMode: ContrastMode;
   /**
    * The label text for the AccordionSummary
    */
@@ -66,31 +68,39 @@ export type NavAccordionProps = {
 
 const AccordionLabelContainer = styled("span", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "isIconVisible",
+    prop !== "odysseyDesignTokens" &&
+    prop !== "isIconVisible" &&
+    prop !== "contrastMode",
 })<{
   odysseyDesignTokens: DesignTokens;
   isIconVisible: boolean;
-}>(({ odysseyDesignTokens, isIconVisible }) => ({
+  contrastMode: ContrastMode;
+}>(({ odysseyDesignTokens, isIconVisible, contrastMode }) => ({
   width: "100%",
   marginInlineStart: isIconVisible ? odysseyDesignTokens.Spacing3 : 0,
   fontWeight: odysseyDesignTokens.TypographyWeightHeading,
-  color: odysseyDesignTokens.TypographyColorHeading,
+  color:
+    contrastMode === "highContrast"
+      ? "#ffffff"
+      : odysseyDesignTokens.TypographyColorHeading,
 }));
 
 const AccordionSummaryContainer = styled(MuiAccordionSummary, {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" &&
     prop !== "isCompact" &&
-    prop !== "isDisabled",
+    prop !== "isDisabled" &&
+    prop !== "contrastMode",
 })<{
   odysseyDesignTokens: DesignTokens;
   isCompact?: boolean;
   isDisabled?: boolean;
-}>(({ odysseyDesignTokens, isCompact, isDisabled }) => ({
+  contrastMode: ContrastMode;
+}>(({ odysseyDesignTokens, isCompact, isDisabled, contrastMode }) => ({
   borderRadius: odysseyDesignTokens.BorderRadiusMain,
+
   paddingBlock: odysseyDesignTokens.Spacing3,
   paddingInline: odysseyDesignTokens.Spacing4,
-
   "&:focus-visible": {
     backgroundColor: "unset",
     outline: "none",
@@ -104,7 +114,10 @@ const AccordionSummaryContainer = styled(MuiAccordionSummary, {
 
   ...(!isDisabled && {
     "&:hover": {
-      backgroundColor: odysseyDesignTokens.HueNeutral50,
+      backgroundColor:
+        contrastMode === "highContrast"
+          ? "#252525"
+          : odysseyDesignTokens.HueNeutral50,
     },
   }),
 }));
@@ -119,6 +132,7 @@ const NavAccordion = ({
   isExpanded,
   translate,
   startIcon,
+  contrastMode,
 }: PropsWithChildren<NavAccordionProps>) => {
   const id = useUniqueId(idOverride);
   const headerId = `${id}-header`;
@@ -136,6 +150,7 @@ const NavAccordion = ({
       <AccordionSummaryContainer
         className="nav-accordion-summary"
         aria-controls={contentId}
+        contrastMode={contrastMode}
         expandIcon={<ChevronDownIcon />}
         id={headerId}
         odysseyDesignTokens={odysseyDesignTokens}
@@ -147,6 +162,7 @@ const NavAccordion = ({
           <AccordionLabelContainer
             odysseyDesignTokens={odysseyDesignTokens}
             isIconVisible={Boolean(startIcon)}
+            contrastMode={contrastMode}
           >
             {label}
           </AccordionLabelContainer>
