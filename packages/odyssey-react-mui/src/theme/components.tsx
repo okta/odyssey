@@ -425,7 +425,7 @@ export const components = ({
             display: "none",
           }),
         }),
-        listbox: {
+        listbox: ({ theme }) => ({
           borderWidth: odysseyTokens.BorderWidthMain,
           borderStyle: odysseyTokens.BorderStyleMain,
           borderColor: odysseyTokens.HueNeutral200,
@@ -447,6 +447,15 @@ export const components = ({
               backgroundColor: odysseyTokens.HueNeutral100,
             },
 
+            [`&.${autocompleteClasses.focusVisible}`]: {
+              backgroundColor: "transparent",
+              boxShadow: theme.mixins.insetFocusRing,
+
+              [`&:hover`]: {
+                backgroundColor: odysseyTokens.HueNeutral100,
+              },
+            },
+
             [`&[aria-selected="true"]`]: {
               backgroundColor: "transparent",
               color: odysseyTokens.TypographyColorAction,
@@ -466,7 +475,7 @@ export const components = ({
             marginBlockStart: 0,
             marginBlockEnd: 0,
           },
-        },
+        }),
         loading: {
           paddingBlock: odysseyTokens.Spacing3,
           paddingInline: odysseyTokens.Spacing4,
@@ -2244,6 +2253,7 @@ export const components = ({
           [`&.${menuItemClasses.selected}`]: {
             backgroundColor: "transparent",
             color: odysseyTokens.TypographyColorAction,
+            fontWeight: odysseyTokens.TypographyWeightBodyBold,
 
             "&:hover": {
               backgroundColor: odysseyTokens.PalettePrimaryLighter,

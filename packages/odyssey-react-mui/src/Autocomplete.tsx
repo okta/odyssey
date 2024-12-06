@@ -309,6 +309,7 @@ const Autocomplete = <
       renderInput={renderInput}
       isOptionEqualToValue={getIsOptionEqualToValue}
       translate={translate}
+      open={true}
     />
   );
 };
