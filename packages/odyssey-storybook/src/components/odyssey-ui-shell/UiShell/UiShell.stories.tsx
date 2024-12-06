@@ -293,19 +293,44 @@ const sharedOptionalComponents: UiShellProps["optionalComponents"] = {
     <div>{/* <SearchField label="Search" placeholder="Search..." /> */}</div>
   ),
   topNavRightSide: (
-    <UserProfile
-      profileIcon={<UserIcon />}
-      contrastMode={
-        window.location.href.includes("backgrounds.value:!hex(1d1d1d)")
-          ? "highContrast"
-          : "lowContrast"
-      }
-      orgName="ORG123"
-      userName="test.user@test.com"
-    />
+    <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+      <Button
+        variant="secondary"
+        tooltipText={
+          window.location.href.includes("backgrounds.value:!hex(1d1d1d)")
+            ? "Toggle Light mode"
+            : "Toggle Dark mode"
+        }
+        href={
+          window.location.href.includes("backgrounds.value:!hex(1d1d1d)")
+            ? window.location.href.replace(
+                "backgrounds.value:!hex(1d1d1d)",
+                "backgrounds.value:!hex(ffffff)",
+              )
+            : window.location.href.replace(
+                "backgrounds.value:!hex(ffffff)",
+                "backgrounds.value:!hex(1d1d1d)",
+              )
+        }
+        label={
+          window.location.href.includes("backgrounds.value:!hex(1d1d1d)")
+            ? "☾"
+            : "☼"
+        }
+      />
+      <UserProfile
+        profileIcon={<UserIcon />}
+        contrastMode={
+          window.location.href.includes("backgrounds.value:!hex(1d1d1d)")
+            ? "highContrast"
+            : "lowContrast"
+        }
+        orgName="ORG123"
+        userName="test.user@test.com"
+      />
+    </div>
   ),
 };
-
 export const Default: StoryObj<UiShellProps> = {
   args: {
     subscribeToPropChanges: (subscriber) => {
@@ -412,7 +437,7 @@ export const HackweekTableExample: StoryObj<UiShellProps> = {
           hasChangeableDensity={true}
           hasColumnResizing={true}
           hasColumnVisibility={false}
-          hasFilters={true}
+          hasFilters={false}
           hasPagination={false}
           hasRowSelection={true}
           hasSearch={true}

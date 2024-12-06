@@ -2363,11 +2363,14 @@ export const components = ({
           [`& .${formControlLabelClasses.root}`]: {
             gap: "unset",
           },
-
+          ...(contrastMode === "highContrast" && {
+            color: "#fff",
+          }),
           "&:hover": {
             textDecoration: "none",
 
             ...(contrastMode === "highContrast" && {
+              color: "#fff",
               backgroundColor: odysseyTokens.HueNeutral700,
             }),
             ...(contrastMode === "lowContrast" && {
@@ -2407,7 +2410,13 @@ export const components = ({
 
           [`&.${menuItemClasses.selected}`]: {
             backgroundColor: "transparent",
-            color: odysseyTokens.TypographyColorAction,
+            ...(contrastMode === "highContrast" && {
+              color: odysseyTokens.HueBlue700,
+              background: odysseyTokens.HueBlue50,
+            }),
+            ...(contrastMode === "lowContrast" && {
+              color: odysseyTokens.TypographyColorAction,
+            }),
 
             "&:hover": {
               backgroundColor: odysseyTokens.PalettePrimaryLighter,
@@ -2514,10 +2523,12 @@ export const components = ({
           borderStyle: odysseyTokens.BorderStyleMain,
 
           ...(contrastMode === "highContrast" && {
-            borderColor: odysseyTokens.HueNeutral600,
+            borderColor: "#1d1d1d",
+            background: "#313231",
           }),
           ...(contrastMode === "lowContrast" && {
             borderColor: odysseyTokens.HueNeutral200,
+            background: "#ffffff",
           }),
         },
       },
