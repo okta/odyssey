@@ -2260,6 +2260,7 @@ export const components = ({
           },
 
           [`&.${menuItemClasses.focusVisible}`]: {
+            backgroundColor: "transparent",
             boxShadow: theme.mixins.insetFocusRing,
           },
 
