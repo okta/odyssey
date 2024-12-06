@@ -34,7 +34,7 @@ export const columns: DataTableColumn<DataTableRowData>[] = [
   },
   {
     accessorKey: "distance",
-    header: "Distance from Sun (AU)",
+    header: "Distance to Sun",
   },
   {
     accessorKey: "visit",

@@ -22,7 +22,7 @@ import {
   type DesignTokens,
 } from "../../OdysseyDesignTokensContext";
 import { useScrollState } from "./useScrollState";
-import { ContrastMode } from "../../useContrastMode";
+import { ContrastMode, useContrastModeContext } from "../../useContrastMode";
 
 const emptySideNavItems = [] satisfies SideNavProps["sideNavItems"];
 
@@ -38,9 +38,13 @@ const StyledAppContainer = styled("div", {
   overflowY: "auto",
   paddingBlock: odysseyDesignTokens.Spacing5,
   paddingInline: odysseyDesignTokens.Spacing8,
+  color:
+    appBackgroundContrastMode === "highContrast"
+      ? "#ffffff"
+      : odysseyDesignTokens.HueNeutral900,
   backgroundColor:
     appBackgroundContrastMode === "highContrast"
-      ? odysseyDesignTokens.HueNeutralWhite
+      ? "#252525"
       : odysseyDesignTokens.HueNeutral50,
 }));
 
@@ -134,7 +138,7 @@ export type UiShellContentProps = {
  * If an error occurs, this will revert to only showing the app.
  */
 const UiShellContent = ({
-  appBackgroundContrastMode = "lowContrast",
+  appBackgroundContrastMode: propContrastMode = "lowContrast",
   appComponent,
   initialVisibleSections = ["TopNav", "SideNav", "AppSwitcher"],
   onError = console.error,
@@ -145,6 +149,8 @@ const UiShellContent = ({
 }: UiShellContentProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { isContentScrolled, scrollableContentRef } = useScrollState();
+  const { contrastMode } = useContrastModeContext();
+  const effectiveContrastMode = contrastMode || propContrastMode;
 
   return (
     <StyledShellContainer odysseyDesignTokens={odysseyDesignTokens}>
@@ -158,6 +164,8 @@ const UiShellContent = ({
           initialVisibleSections?.includes("AppSwitcher") &&
             !appSwitcherProps && (
               <ErrorBoundary fallback={null} onError={onError}>
+                {" "}
+                appBackgroundContrastMode={effectiveContrastMode}
                 <AppSwitcher isLoading appIcons={[]} selectedAppName="" />
               </ErrorBoundary>
             )
@@ -223,7 +231,7 @@ const UiShellContent = ({
 
       <StyledAppContainer
         odysseyDesignTokens={odysseyDesignTokens}
-        appBackgroundContrastMode={appBackgroundContrastMode}
+        appBackgroundContrastMode={effectiveContrastMode}
         ref={scrollableContentRef}
         tabIndex={0}
       >

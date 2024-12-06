@@ -18,7 +18,6 @@ import {
   useState,
   useCallback,
 } from "react";
-import * as Tokens from "@okta/odyssey-design-tokens";
 
 export type ContrastMode = "lowContrast" | "highContrast";
 export type ContrastModeContextType = {
@@ -41,7 +40,7 @@ export const hexToRgb = (hexString: string) => {
   return `rgb(${red}, ${green}, ${blue})`;
 };
 
-export const hueNeutral50Rgb = hexToRgb(Tokens.HueNeutral50);
+export const hueNeutral50Rgb = "#1d1d1d";
 
 export const isTransparentColor = (color: string) =>
   color === "rgba(0, 0, 0, 0)" || color === "transparent";
@@ -56,12 +55,10 @@ export const getElementComputedBackgroundColor = (
 export const normalizeBackgroundColor = (bgColor: string): string => {
   if (/rgba\((\d+),\s*(\d+),\s*(\d+),\s*[\d.]+\)/.test(bgColor)) {
     const normalizedColor = normalizeRgbaToRgb(bgColor);
-    return normalizedColor === hueNeutral50Rgb
-      ? Tokens.HueNeutral50
-      : normalizedColor;
+    return normalizedColor === hueNeutral50Rgb ? "#1d1d1d" : normalizedColor;
   }
 
-  return bgColor === hueNeutral50Rgb ? Tokens.HueNeutral50 : bgColor;
+  return bgColor === hueNeutral50Rgb ? "#1d1d1d" : bgColor;
 };
 
 export const defaultParentBackgroundColor = "#ffffff";
@@ -110,7 +107,7 @@ export const useContrastMode = ({
 
     if (!explicitContrastMode) {
       setContrastMode(
-        newBgColor === Tokens.HueNeutral50 ? "highContrast" : "lowContrast",
+        newBgColor === "rgb(29, 29, 29)" ? "highContrast" : "lowContrast",
       );
     }
   }, [explicitContrastMode]);

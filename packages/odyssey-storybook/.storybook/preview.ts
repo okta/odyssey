@@ -91,12 +91,12 @@ const preview: Preview = {
     backgrounds: {
       values: [
         {
-          name: "White",
+          name: "Light mode",
           value: "#ffffff",
         },
         {
-          name: "Gray",
-          value: "#f4f4f4",
+          name: "Dark Mode",
+          value: "#1d1d1d",
         },
       ],
     },

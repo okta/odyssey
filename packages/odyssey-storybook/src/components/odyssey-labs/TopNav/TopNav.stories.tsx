@@ -49,6 +49,7 @@ const storybookMeta: Meta<TopNavProps> = {
           profileIcon={<UserIcon />}
           orgName="ORG123"
           userName="test.user@test.com"
+          contrastMode="lowContrast"
         />
       </>
     ),

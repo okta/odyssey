@@ -62,6 +62,8 @@ export const typographyColorValues = [
   "secondary",
   "textSecondary",
   "error",
+  "white",
+  "#a0a0a0",
 ] as const;
 
 export type TypographyProps = {

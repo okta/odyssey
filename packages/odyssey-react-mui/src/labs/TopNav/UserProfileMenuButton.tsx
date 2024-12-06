@@ -44,6 +44,7 @@ const UserProfileMenuButton = (props: UserProfileMenuButtonProps) => {
           profileIcon={profileIcon}
           userName={userName}
           orgName={orgName}
+          contrastMode={"highContrast"}
           userNameEndIcon={userNameEndIcon ?? <ChevronDownIcon />}
         />
       }
