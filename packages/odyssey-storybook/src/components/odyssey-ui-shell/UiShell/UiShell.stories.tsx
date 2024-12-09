@@ -46,6 +46,16 @@ const storybookMeta: Meta<UiShellProps> = {
         },
       },
     },
+    hasStandardAppContentPadding: {
+      control: "boolean",
+      description:
+        "defaults to `true`. If `false`, the content area will have no padding provided",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
     initialVisibleSections: {
       control: "text",
       description:
@@ -255,6 +265,7 @@ export const TopNavOnly: StoryObj<UiShellProps> = {
 
 export const AppSwitcherOnly: StoryObj<UiShellProps> = {
   args: {
+    hasStandardAppContentPadding: false,
     initialVisibleSections: ["AppSwitcher"],
     subscribeToPropChanges: (subscriber) => {
       subscriber({

@@ -28,21 +28,33 @@ const emptySideNavItems = [] satisfies SideNavProps["sideNavItems"];
 
 const StyledAppContainer = styled("div", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "appBackgroundContrastMode",
+    prop !== "odysseyDesignTokens" &&
+    prop !== "appBackgroundContrastMode" &&
+    prop !== "hasStandardAppContentPadding",
 })<{
   appBackgroundContrastMode: ContrastMode;
+  hasStandardAppContentPadding: UiShellContentProps["hasStandardAppContentPadding"];
   odysseyDesignTokens: DesignTokens;
-}>(({ appBackgroundContrastMode, odysseyDesignTokens }) => ({
-  gridArea: "app-content",
-  overflowX: "hidden",
-  overflowY: "auto",
-  paddingBlock: odysseyDesignTokens.Spacing5,
-  paddingInline: odysseyDesignTokens.Spacing8,
-  backgroundColor:
-    appBackgroundContrastMode === "highContrast"
-      ? odysseyDesignTokens.HueNeutralWhite
-      : odysseyDesignTokens.HueNeutral50,
-}));
+}>(
+  ({
+    appBackgroundContrastMode,
+    hasStandardAppContentPadding,
+    odysseyDesignTokens,
+  }) => ({
+    gridArea: "app-content",
+    overflowX: "hidden",
+    overflowY: "auto",
+    backgroundColor:
+      appBackgroundContrastMode === "highContrast"
+        ? odysseyDesignTokens.HueNeutralWhite
+        : odysseyDesignTokens.HueNeutral50,
+
+    ...(hasStandardAppContentPadding && {
+      paddingBlock: odysseyDesignTokens.Spacing5,
+      paddingInline: odysseyDesignTokens.Spacing8,
+    }),
+  }),
+);
 
 const StyledBannersContainer = styled("div")(() => ({
   gridArea: "banners",
@@ -107,6 +119,10 @@ export type UiShellContentProps = {
    */
   appComponent: ReactNode;
   /**
+   * defaults to `true`. If `false`, the content area will have no padding provided
+   */
+  hasStandardAppContentPadding?: boolean;
+  /**
    * Which parts of the UI Shell should be visible initially? For example,
    * if sideNavProps is undefined, should the space for the sidenav be initially visible?
    */
@@ -136,6 +152,7 @@ export type UiShellContentProps = {
 const UiShellContent = ({
   appBackgroundContrastMode = "lowContrast",
   appComponent,
+  hasStandardAppContentPadding = true,
   initialVisibleSections = ["TopNav", "SideNav", "AppSwitcher"],
   onError = console.error,
   optionalComponents,
@@ -145,7 +162,7 @@ const UiShellContent = ({
 }: UiShellContentProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { isContentScrolled, scrollableContentRef } = useScrollState();
-
+  console.log({ hasStandardAppContentPadding });
   return (
     <StyledShellContainer odysseyDesignTokens={odysseyDesignTokens}>
       <StyledBannersContainer>
@@ -199,17 +216,18 @@ const UiShellContent = ({
           </ErrorBoundary>
         )}
       </StyledSideNavContainer>
-
-      <StyledTopNavContainer>
-        {
-          /* If TopNav should be initially visible and we have not yet received props, render Topnav with minimal inputs */
-          initialVisibleSections?.includes("TopNav") && !topNavProps && (
+      {
+        /* If TopNav should be initially visible and we have not yet received props, render Topnav with minimal inputs */
+        initialVisibleSections?.includes("TopNav") && !topNavProps && (
+          <StyledTopNavContainer>
             <ErrorBoundary fallback={null} onError={onError}>
               <TopNav />
             </ErrorBoundary>
-          )
-        }
-        {topNavProps && (
+          </StyledTopNavContainer>
+        )
+      }
+      {topNavProps && (
+        <StyledTopNavContainer>
           <ErrorBoundary fallback={null} onError={onError}>
             <TopNav
               {...topNavProps}
@@ -218,12 +236,13 @@ const UiShellContent = ({
               rightSideComponent={optionalComponents?.topNavRightSide}
             />
           </ErrorBoundary>
-        )}
-      </StyledTopNavContainer>
+        </StyledTopNavContainer>
+      )}
 
       <StyledAppContainer
-        odysseyDesignTokens={odysseyDesignTokens}
         appBackgroundContrastMode={appBackgroundContrastMode}
+        hasStandardAppContentPadding={hasStandardAppContentPadding}
+        odysseyDesignTokens={odysseyDesignTokens}
         ref={scrollableContentRef}
         tabIndex={0}
       >
