@@ -425,7 +425,7 @@ export const components = ({
             display: "none",
           }),
         }),
-        listbox: {
+        listbox: ({ theme }) => ({
           borderWidth: odysseyTokens.BorderWidthMain,
           borderStyle: odysseyTokens.BorderStyleMain,
           borderColor: odysseyTokens.HueNeutral200,
@@ -447,6 +447,15 @@ export const components = ({
               backgroundColor: odysseyTokens.HueNeutral100,
             },
 
+            [`&.${autocompleteClasses.focusVisible}`]: {
+              backgroundColor: "transparent",
+              boxShadow: theme.mixins.insetFocusRing,
+
+              [`&:hover`]: {
+                backgroundColor: odysseyTokens.HueNeutral100,
+              },
+            },
+
             [`&[aria-selected="true"]`]: {
               backgroundColor: "transparent",
               color: odysseyTokens.TypographyColorAction,
@@ -466,7 +475,7 @@ export const components = ({
             marginBlockStart: 0,
             marginBlockEnd: 0,
           },
-        },
+        }),
         loading: {
           paddingBlock: odysseyTokens.Spacing3,
           paddingInline: odysseyTokens.Spacing4,
@@ -2184,7 +2193,7 @@ export const components = ({
       styleOverrides: {
         list: {
           paddingBlock: odysseyTokens.Spacing2,
-          paddingInline: odysseyTokens.Spacing2,
+          paddingInline: `${odysseyTokens.Spacing2} !important`,
           borderRadius: odysseyTokens.BorderRadiusMain,
         },
         root: {
@@ -2198,7 +2207,7 @@ export const components = ({
     },
     MuiMenuItem: {
       styleOverrides: {
-        root: ({ ownerState }) => ({
+        root: ({ ownerState, theme }) => ({
           gap: odysseyTokens.Spacing2,
           minHeight: "unset",
           maxWidth: `calc(55ch - ${odysseyTokens.Spacing4})`,
@@ -2244,12 +2253,40 @@ export const components = ({
           [`&.${menuItemClasses.selected}`]: {
             backgroundColor: "transparent",
             color: odysseyTokens.TypographyColorAction,
+            fontWeight: odysseyTokens.TypographyWeightBodyBold,
 
             "&:hover": {
               backgroundColor: odysseyTokens.PalettePrimaryLighter,
 
               "@media (hover: none)": {
                 backgroundColor: odysseyTokens.PalettePrimaryLighter,
+              },
+            },
+
+            [`&.${menuItemClasses.focusVisible}`]: {
+              backgroundColor: odysseyTokens.PalettePrimaryLighter,
+              color: odysseyTokens.TypographyColorAction,
+
+              "&:hover": {
+                backgroundColor: odysseyTokens.PalettePrimaryLighter,
+
+                "@media (hover: none)": {
+                  backgroundColor: odysseyTokens.PalettePrimaryLighter,
+                },
+              },
+            },
+          },
+
+          [`&.${menuItemClasses.focusVisible}`]: {
+            backgroundColor: "transparent",
+            boxShadow: theme.mixins.insetFocusRing,
+
+            "&:hover": {
+              backgroundColor: odysseyTokens.HueNeutral100,
+
+              // Reset on touch devices, it doesn't add specificity
+              "@media (hover: none)": {
+                backgroundColor: "transparent",
               },
             },
           },

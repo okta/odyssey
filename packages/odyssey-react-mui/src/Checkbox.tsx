@@ -19,6 +19,7 @@ import {
   FormControlLabelProps as MuiFormControlLabelProps,
   FormHelperText,
 } from "@mui/material";
+import styled from "@emotion/styled";
 
 import { CheckedFieldProps } from "./FormCheckedProps";
 import type { HtmlProps } from "./HtmlProps";
@@ -28,9 +29,21 @@ import {
   getControlState,
 } from "./inputUtils";
 import { FieldComponentProps } from "./FieldComponentProps";
+import {
+  useOdysseyDesignTokens,
+  DesignTokens,
+} from "./OdysseyDesignTokensContext";
 import { Typography } from "./Typography";
+import { useUniqueId } from "./useUniqueId";
 
 export const checkboxValidityValues = ["valid", "invalid", "inherit"] as const;
+
+const HintContainerWithInlineStartSpacing = styled.div<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  paddingInlineStart: `calc(${odysseyDesignTokens.TypographyLineHeightUi}em + ${odysseyDesignTokens.Spacing2})`,
+  marginBlockEnd: odysseyDesignTokens.Spacing2,
+}));
 
 export type CheckboxProps = {
   /**
@@ -90,6 +103,10 @@ const Checkbox = ({
   value,
 }: CheckboxProps) => {
   const { t } = useTranslation();
+  const odysseyDesignTokens = useOdysseyDesignTokens();
+  const id = useUniqueId(idOverride);
+  const hintId = hint ? `${id}-hint` : undefined;
+
   const controlledStateRef = useRef(
     getControlState({
       controlledValue: isChecked,
@@ -126,10 +143,9 @@ const Checkbox = ({
             </Typography>
           </>
         )}
-        {hint && <FormHelperText translate={translate}>{hint}</FormHelperText>}
       </>
     );
-  }, [isRequired, labelProp, hint, t, translate]);
+  }, [isRequired, labelProp, t, translate]);
 
   const onChange = useCallback<NonNullable<MuiCheckboxProps["onChange"]>>(
     (event, checked) => {
@@ -158,58 +174,78 @@ const Checkbox = ({
   const checkboxStyles = useMemo(
     () => ({
       alignItems: "flex-start",
+
       ...(isReadOnly && {
         cursor: "default",
         "& .MuiTypography-root": {
           cursor: "default",
         },
       }),
+
+      ...(hint && {
+        // needed to override specific :not(:last-child) selector
+        ":not(:last-child)": {
+          marginBlockEnd: 0,
+        },
+      }),
     }),
-    [isReadOnly],
+    [hint, isReadOnly],
   );
 
   return (
-    <FormControlLabel
-      sx={checkboxStyles}
-      aria-label={ariaLabel}
-      aria-labelledby={ariaLabelledBy}
-      className={
-        validity === "invalid"
-          ? "Mui-error"
-          : validity === "valid"
-            ? "Mui-valid"
-            : ""
-      }
-      control={
-        <MuiCheckbox
-          {...inputValues}
-          indeterminate={isIndeterminate}
-          onChange={onChange}
-          onClick={
-            onClick as unknown as React.MouseEventHandler<HTMLButtonElement>
-          }
-          required={isRequired}
-          inputProps={{
-            "data-se": testId,
-            "aria-readonly": isReadOnly,
-            readOnly: isReadOnly,
-          }}
-          disabled={isDisabled}
-          inputRef={localInputRef}
-          sx={{
-            marginBlockStart: "2px",
-          }}
-        />
-      }
-      disabled={isDisabled}
-      id={idOverride}
-      label={label}
-      name={nameOverride ?? idOverride}
-      value={value}
-      required={isRequired}
-      onBlur={onBlur}
-      translate={translate}
-    />
+    <>
+      <FormControlLabel
+        sx={checkboxStyles}
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
+        className={
+          validity === "invalid"
+            ? "Mui-error"
+            : validity === "valid"
+              ? "Mui-valid"
+              : ""
+        }
+        control={
+          <MuiCheckbox
+            {...inputValues}
+            indeterminate={isIndeterminate}
+            onChange={onChange}
+            onClick={
+              onClick as unknown as React.MouseEventHandler<HTMLButtonElement>
+            }
+            required={isRequired}
+            inputProps={{
+              "aria-describedby": hintId,
+              "aria-readonly": isReadOnly,
+              "data-se": testId,
+              readOnly: isReadOnly,
+            }}
+            disabled={isDisabled}
+            inputRef={localInputRef}
+            sx={{
+              marginBlockStart: "2px",
+            }}
+          />
+        }
+        disabled={isDisabled}
+        id={idOverride}
+        label={label}
+        name={nameOverride ?? idOverride}
+        value={value}
+        required={isRequired}
+        onBlur={onBlur}
+        translate={translate}
+      />
+      {hint && (
+        <HintContainerWithInlineStartSpacing
+          odysseyDesignTokens={odysseyDesignTokens}
+        >
+          <FormHelperText id={hintId} translate={translate}>
+            {hint}
+          </FormHelperText>
+        </HintContainerWithInlineStartSpacing>
+      )}
+    </>
   );
 };
 

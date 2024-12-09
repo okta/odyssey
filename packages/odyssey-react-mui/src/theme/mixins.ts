@@ -24,5 +24,6 @@ export const mixins = ({
     borderRadius: odysseyTokens.BorderRadiusMain,
     borderStyle: odysseyTokens.BorderStyleMain,
     borderWidth: odysseyTokens.BorderWidthMain,
+    insetFocusRing: `inset 0 0 0 2px ${odysseyTokens.PalettePrimaryMain}`,
   };
 };
