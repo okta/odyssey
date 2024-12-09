@@ -42,6 +42,7 @@ export const optionalComponentSlotNames: Record<
 export const renderUiShell = ({
   appBackgroundContrastMode,
   appRootElement: explicitAppRootElement,
+  hasStandardAppContentPadding,
   initialVisibleSections,
   onError = console.error,
   uiShellRootElement,
@@ -60,7 +61,9 @@ export const renderUiShell = ({
   uiShellRootElement: HTMLElement;
 } & Pick<
   UiShellProps,
-  "appBackgroundContrastMode" | "initialVisibleSections"
+  | "appBackgroundContrastMode"
+  | "hasStandardAppContentPadding"
+  | "initialVisibleSections"
 >) => {
   const appRootElement =
     explicitAppRootElement || document.createElement("div");
@@ -108,6 +111,7 @@ export const renderUiShell = ({
           appBackgroundContrastMode={appBackgroundContrastMode}
           appComponent={appComponent}
           appRootElement={reactRootElements.appRootElement}
+          hasStandardAppContentPadding={hasStandardAppContentPadding}
           initialVisibleSections={initialVisibleSections}
           onError={onError}
           onSubscriptionCreated={publishSubscriptionCreated}
