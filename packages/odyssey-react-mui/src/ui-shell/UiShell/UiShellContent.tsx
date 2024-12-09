@@ -216,18 +216,16 @@ const UiShellContent = ({
           </ErrorBoundary>
         )}
       </StyledSideNavContainer>
-      {
-        /* If TopNav should be initially visible and we have not yet received props, render Topnav with minimal inputs */
-        initialVisibleSections?.includes("TopNav") && !topNavProps && (
-          <StyledTopNavContainer>
+      <StyledTopNavContainer>
+        {
+          /* If TopNav should be initially visible and we have not yet received props, render Topnav with minimal inputs */
+          initialVisibleSections?.includes("TopNav") && !topNavProps && (
             <ErrorBoundary fallback={null} onError={onError}>
               <TopNav />
             </ErrorBoundary>
-          </StyledTopNavContainer>
-        )
-      }
-      {topNavProps && (
-        <StyledTopNavContainer>
+          )
+        }
+        {topNavProps && (
           <ErrorBoundary fallback={null} onError={onError}>
             <TopNav
               {...topNavProps}
@@ -236,8 +234,8 @@ const UiShellContent = ({
               rightSideComponent={optionalComponents?.topNavRightSide}
             />
           </ErrorBoundary>
-        </StyledTopNavContainer>
-      )}
+        )}
+      </StyledTopNavContainer>
 
       <StyledAppContainer
         appBackgroundContrastMode={appBackgroundContrastMode}
