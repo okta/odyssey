@@ -39,6 +39,7 @@ import { SideNavFooterContent } from "./SideNavFooterContent";
 import { SideNavItemContentContext } from "./SideNavItemContentContext";
 import { SideNavToggleButton } from "./SideNavToggleButton";
 import { SortableList } from "./SortableList/SortableList";
+import { Overline } from "../../Typography";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { arrayMove } from "@dnd-kit/sortable";
 
@@ -62,7 +63,6 @@ const StyledCollapsibleContent = styled("div", {
     position: "relative",
     display: "inline-grid",
     gridTemplateColumns: DEFAULT_SIDE_NAV_WIDTH,
-    // gridTemplateRows: "max-content 1fr max-content",
     height: "100%",
     transition: `grid-template-columns ${odysseyDesignTokens.TransitionDurationMain}, opacity 300ms`,
     transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
@@ -118,7 +118,7 @@ const StyledSideNav = styled("nav", {
     "&::after": {
       backgroundColor: odysseyDesignTokens.HueNeutral200,
       content: "''",
-      height: "100%",
+      height: "100vh",
       opacity: 0,
       position: "absolute",
       right: 0,
@@ -129,7 +129,7 @@ const StyledSideNav = styled("nav", {
       zIndex: 2,
     },
 
-    "&:has([data-sidenav-toggle='true']:hover), &:has([data-sidenav-toggle='true']:focus)":
+    "&:has([data-sidenav-toggle='true']:hover), &:has([data-sidenav-toggle='true']:focus-visible)":
       {
         ...(isSideNavCollapsed && {
           "&::after": {
@@ -177,13 +177,16 @@ const SideNavListContainer = styled("ul")(() => ({
   padding: 0,
   listStyle: "none",
   listStyleType: "none",
+  margin: 0,
 }));
 
 const SideNavScrollableContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  display: "grid",
+  gridTemplateRows: "1fr max-content",
   flex: "1 1 100%",
-  overflowY: "auto",
+  overflowY: "scroll",
   paddingInline: odysseyDesignTokens.Spacing2,
 }));
 
@@ -192,60 +195,40 @@ const SectionHeaderContainer = styled("li", {
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
   paddingBlock: odysseyDesignTokens.Spacing1,
   paddingInline: odysseyDesignTokens.Spacing4,
-}));
-
-const SectionHeader = styled("h3", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
-  fontFamily: odysseyDesignTokens.TypographyFamilyHeading,
-  fontSize: odysseyDesignTokens.TypographySizeOverline,
-  fontWeight: odysseyDesignTokens.TypographyWeightHeadingBold,
+  marginBlock: `${odysseyDesignTokens.Spacing3}`,
   color: odysseyDesignTokens.HueNeutral600,
-  textTransform: "uppercase",
 }));
 
 const SideNavFooter = styled("div", {
-  shouldForwardProp: (prop) =>
-    prop !== "isContentScrollable" && prop !== "odysseyDesignTokens",
-})(
-  ({
-    isContentScrollable,
-    odysseyDesignTokens,
-  }: {
-    isContentScrollable: boolean;
-    odysseyDesignTokens: DesignTokens;
-  }) => ({
-    flexShrink: 0,
-    transitionProperty: "box-shadow",
-    transitionDuration: odysseyDesignTokens.TransitionDurationMain,
-    transitionTiming: odysseyDesignTokens.TransitionTimingMain,
-    backgroundColor: odysseyDesignTokens.HueNeutralWhite,
-    // The box shadow should appear above the footer only if the scrollable region has overflow
-    ...(isContentScrollable && {
-      boxShadow: "0px -8px 8px -8px rgba(39, 39, 39, 0.08)",
-    }),
-  }),
-);
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  flexShrink: 0,
+  transitionProperty: "box-shadow",
+  transitionDuration: odysseyDesignTokens.TransitionDurationMain,
+  transitionTiming: odysseyDesignTokens.TransitionTimingMain,
+  backgroundColor: odysseyDesignTokens.HueNeutralWhite,
+}));
 
 const SideNavFooterItemsContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
-  paddingBlock: odysseyDesignTokens.Spacing4,
-  // paddingBlockEnd: odysseyDesignTokens.Spacing4,
-  paddingInline: odysseyDesignTokens.Spacing5,
   display: "flex",
   flexWrap: "wrap",
   alignItems: "center",
+  padding: odysseyDesignTokens.Spacing4,
   fontSize: odysseyDesignTokens.TypographySizeOverline,
 
-  a: {
-    color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
+  "a, span": {
+    color: odysseyDesignTokens.HueNeutral600,
+    transition: `color ${odysseyDesignTokens.TransitionDurationMain}`,
+
+    "&:visited": {
+      color: odysseyDesignTokens.HueNeutral600,
+    },
 
     "&:hover": {
       textDecoration: "none",
-    },
-    "&:visited": {
-      color: odysseyDesignTokens.TypographyColorHeading,
+      color: odysseyDesignTokens.HueNeutral900,
     },
   },
 }));
@@ -259,9 +242,6 @@ const LoadingItemContainer = styled("div", {
   paddingBlock: odysseyDesignTokens.Spacing2,
   paddingInline: odysseyDesignTokens.Spacing4,
 }));
-
-const getHasScrollableContent = (scrollableContainer: HTMLElement) =>
-  scrollableContainer.scrollHeight > scrollableContainer.clientHeight;
 
 const LoadingItem = () => {
   const odysseyDesignTokens: DesignTokens = useOdysseyDesignTokens();
@@ -292,7 +272,6 @@ const SideNav = ({
   sideNavItems,
 }: SideNavProps) => {
   const [isSideNavCollapsed, setSideNavCollapsed] = useState(false);
-  const [isContentScrollable, setIsContentScrollable] = useState(false);
   const [hasContentScrolled, setHasContentScrolled] = useState(false);
   const scrollableContentRef = useRef<HTMLUListElement>(null);
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
@@ -307,30 +286,6 @@ const SideNav = ({
   useEffect(() => updateSideNavItemsList(sideNavItems), [sideNavItems]);
 
   useEffect(() => {
-    // This is called directly in this effect AND perhaps as a result of the ResizeObserver
-    const updateIsContentScrollable = () => {
-      if (
-        scrollableContentRef.current &&
-        scrollableContentRef.current.parentElement
-      ) {
-        setIsContentScrollable(
-          getHasScrollableContent(scrollableContentRef.current.parentElement),
-        );
-      }
-    };
-
-    // If the window is resized, we may need to re-determine if the scrollable container has overflow
-    // Setup a ResizeObserver to know if the size of the scrollableContent changes
-    let resizeObserverDebounceTimer: ReturnType<typeof requestAnimationFrame>;
-    if (!resizeObserverRef.current) {
-      resizeObserverRef.current = new ResizeObserver(() => {
-        cancelAnimationFrame(resizeObserverDebounceTimer);
-        resizeObserverDebounceTimer = requestAnimationFrame(
-          updateIsContentScrollable,
-        );
-      });
-    }
-
     if (resizeObserverRef.current && scrollableContentRef.current) {
       // Observe the <ul> itself (in case it changes size due to the content expanding)
       resizeObserverRef.current.observe(scrollableContentRef.current);
@@ -341,9 +296,6 @@ const SideNav = ({
         );
       }
     }
-
-    // Determine if the scrollable container has overflow or not on load
-    updateIsContentScrollable();
 
     // Finally, we only want to have the border on the bottom of the header iff the user has scrolled
     // the scrollable container
@@ -385,7 +337,6 @@ const SideNav = ({
         intersectionObserverRef.current.disconnect();
         intersectionObserverRef.current = null;
       }
-      cancelAnimationFrame(resizeObserverDebounceTimer); // Ensure timer is cleared on component unmount
     };
   }, [sideNavItemsList]);
 
@@ -596,11 +547,7 @@ const SideNav = ({
                             key={id}
                             odysseyDesignTokens={odysseyDesignTokens}
                           >
-                            <SectionHeader
-                              odysseyDesignTokens={odysseyDesignTokens}
-                            >
-                              {label}
-                            </SectionHeader>
+                            <Overline component="h3">{label}</Overline>
                           </SectionHeaderContainer>
                         );
                       } else if (childNavItems) {
@@ -662,23 +609,20 @@ const SideNav = ({
                       }
                     })}
               </SideNavListContainer>
+              {!isLoading && (footerItems || hasCustomFooter) && (
+                <SideNavFooter odysseyDesignTokens={odysseyDesignTokens}>
+                  {hasCustomFooter
+                    ? footerComponent
+                    : footerItems && (
+                        <SideNavFooterItemsContainer
+                          odysseyDesignTokens={odysseyDesignTokens}
+                        >
+                          <SideNavFooterContent footerItems={footerItems} />
+                        </SideNavFooterItemsContainer>
+                      )}
+                </SideNavFooter>
+              )}
             </SideNavScrollableContainer>
-            {!isLoading && (footerItems || hasCustomFooter) && (
-              <SideNavFooter
-                odysseyDesignTokens={odysseyDesignTokens}
-                isContentScrollable={isContentScrollable}
-              >
-                {hasCustomFooter
-                  ? footerComponent
-                  : footerItems && (
-                      <SideNavFooterItemsContainer
-                        odysseyDesignTokens={odysseyDesignTokens}
-                      >
-                        <SideNavFooterContent footerItems={footerItems} />
-                      </SideNavFooterItemsContainer>
-                    )}
-              </SideNavFooter>
-            )}
           </StyledOpacityTransitionContainer>
         </StyledCollapsibleContent>
       </OdysseyThemeProvider>
