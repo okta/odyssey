@@ -269,7 +269,6 @@ export const AppSwitcherOnly: StoryObj<UiShellProps> = {
     initialVisibleSections: ["AppSwitcher"],
     subscribeToPropChanges: (subscriber) => {
       subscriber({
-        topNavProps: {},
         appSwitcherProps: sharedAppSwitcherProps,
       });
 
