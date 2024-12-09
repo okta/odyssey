@@ -77,6 +77,7 @@ const MenuItem = ({
 
   return (
     <MuiMenuItem
+      aria-current={isSelected}
       /* eslint-disable-next-line jsx-a11y/no-autofocus */
       autoFocus={hasInitialFocus}
       className={

@@ -87,10 +87,16 @@ export type TypographyProps = {
   variant?: keyof typeof typographyVariantMapping;
 } & Pick<
   HtmlProps,
-  "ariaDescribedBy" | "ariaLabel" | "ariaLabelledBy" | "testId" | "translate"
+  | "ariaCurrent"
+  | "ariaDescribedBy"
+  | "ariaLabel"
+  | "ariaLabelledBy"
+  | "testId"
+  | "translate"
 >;
 
 const Typography = ({
+  ariaCurrent,
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -133,6 +139,7 @@ const Typography = ({
 
   return (
     <MuiTypography
+      aria-current={ariaCurrent}
       aria-describedby={ariaDescribedBy}
       aria-label={ariaLabel}
       aria-labelledby={ariaLabelledBy}
@@ -152,6 +159,7 @@ const MemoizedTypography = memo(Typography);
 MemoizedTypography.displayName = "Typography";
 
 const Heading1 = ({
+  ariaCurrent,
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -162,6 +170,7 @@ const Heading1 = ({
   translate,
 }: TypographyProps) => (
   <Typography
+    ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
@@ -178,6 +187,7 @@ const MemoizedHeading1 = memo(Heading1);
 MemoizedHeading1.displayName = "Heading1";
 
 const Heading2 = ({
+  ariaCurrent,
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -188,6 +198,7 @@ const Heading2 = ({
   translate,
 }: TypographyProps) => (
   <Typography
+    ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
@@ -204,6 +215,7 @@ const MemoizedHeading2 = memo(Heading2);
 MemoizedHeading2.displayName = "Heading2";
 
 const Heading3 = ({
+  ariaCurrent,
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -214,6 +226,7 @@ const Heading3 = ({
   translate,
 }: TypographyProps) => (
   <Typography
+    ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
@@ -230,6 +243,7 @@ const MemoizedHeading3 = memo(Heading3);
 MemoizedHeading3.displayName = "Heading3";
 
 const Heading4 = ({
+  ariaCurrent,
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -240,6 +254,7 @@ const Heading4 = ({
   translate,
 }: TypographyProps) => (
   <Typography
+    ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
@@ -256,6 +271,7 @@ const MemoizedHeading4 = memo(Heading4);
 MemoizedHeading4.displayName = "Heading4";
 
 const Heading5 = ({
+  ariaCurrent,
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -266,6 +282,7 @@ const Heading5 = ({
   translate,
 }: TypographyProps) => (
   <Typography
+    ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
@@ -282,6 +299,7 @@ const MemoizedHeading5 = memo(Heading5);
 MemoizedHeading5.displayName = "Heading5";
 
 const Heading6 = ({
+  ariaCurrent,
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -292,6 +310,7 @@ const Heading6 = ({
   translate,
 }: TypographyProps) => (
   <Typography
+    ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
@@ -308,6 +327,7 @@ const MemoizedHeading6 = memo(Heading6);
 MemoizedHeading6.displayName = "Heading6";
 
 const Paragraph = ({
+  ariaCurrent,
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -318,6 +338,7 @@ const Paragraph = ({
   translate,
 }: TypographyProps) => (
   <Typography
+    ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
@@ -334,6 +355,7 @@ const MemoizedParagraph = memo(Paragraph);
 MemoizedParagraph.displayName = "Paragraph";
 
 const Subordinate = ({
+  ariaCurrent,
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -344,6 +366,7 @@ const Subordinate = ({
   translate,
 }: TypographyProps) => (
   <Typography
+    ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
@@ -360,6 +383,7 @@ const MemoizedSubordinate = memo(Subordinate);
 MemoizedSubordinate.displayName = "Subordinate";
 
 const Support = ({
+  ariaCurrent,
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -370,6 +394,7 @@ const Support = ({
   translate,
 }: TypographyProps) => (
   <Typography
+    ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}

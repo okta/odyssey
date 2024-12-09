@@ -16,6 +16,7 @@ declare module "@mui/material/styles" {
     borderStyle?: string;
     borderWidth?: string;
     maxWidth?: string;
+    insetFocusRing?: string;
   }
 
   interface MixinsOptions {
@@ -23,6 +24,7 @@ declare module "@mui/material/styles" {
     borderStyle?: string;
     borderWidth?: string;
     maxWidth?: string;
+    insetFocusRing?: string;
   }
 }
 
