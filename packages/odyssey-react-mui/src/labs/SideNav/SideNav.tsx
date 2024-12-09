@@ -183,6 +183,8 @@ const SideNavListContainer = styled("ul")(() => ({
 const SideNavScrollableContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  display: "grid",
+  gridTemplateRows: "1fr max-content",
   flex: "1 1 100%",
   overflowY: "scroll",
   paddingInline: odysseyDesignTokens.Spacing2,
