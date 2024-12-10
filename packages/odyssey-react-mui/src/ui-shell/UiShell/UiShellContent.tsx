@@ -162,7 +162,7 @@ const UiShellContent = ({
 }: UiShellContentProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { isContentScrolled, scrollableContentRef } = useScrollState();
-  console.log({ hasStandardAppContentPadding });
+
   return (
     <StyledShellContainer odysseyDesignTokens={odysseyDesignTokens}>
       <StyledBannersContainer>
