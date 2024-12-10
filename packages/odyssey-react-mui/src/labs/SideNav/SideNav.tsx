@@ -118,7 +118,7 @@ const StyledSideNav = styled("nav", {
     "&::after": {
       backgroundColor: odysseyDesignTokens.HueNeutral200,
       content: "''",
-      height: "100vh",
+      height: "100%",
       opacity: 0,
       position: "absolute",
       right: 0,
