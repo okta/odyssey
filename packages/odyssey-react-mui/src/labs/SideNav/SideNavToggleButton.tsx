@@ -54,7 +54,7 @@ const StyledToggleButton = styled(MuiButton, {
       outline: "none",
     },
 
-    "&:hover, &:focus": {
+    "&:hover, &:focus-visible": {
       backgroundColor: "transparent",
 
       "#lineOne": {

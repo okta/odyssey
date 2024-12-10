@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { Box, Heading5, Support } from "@okta/odyssey-react-mui";
 import {
   SideNav,
   SideNavItem,
@@ -43,6 +44,20 @@ import { PlaywrightProps } from "../../odyssey-mui/storybookTypes";
 import PlaceholderLogo from "../PickerWithOptionAdornment/PlaceholderLogo";
 import { useEffect, useState } from "react";
 
+const CustomFooterComponent = () => {
+  return (
+    <Box
+      sx={{
+        border: "1px dashed gray",
+      }}
+    >
+      <Heading5>Your custom footer content goes here</Heading5>
+      <Support>
+        Dashed border to show content box. Not present outside of this example
+      </Support>
+    </Box>
+  );
+};
 const storybookMeta: Meta<SideNavProps> = {
   title: "Labs Components/SideNav",
   component: SideNav,
@@ -68,16 +83,16 @@ const storybookMeta: Meta<SideNavProps> = {
         },
       },
     },
-    // hasCustomFooter: {
-    //   control: "boolean",
-    //   description:
-    //     "Defines if a custom footer should be visible when available.",
-    //   table: {
-    //     type: {
-    //       summary: "boolean",
-    //     },
-    //   },
-    // },
+    hasCustomFooter: {
+      control: "boolean",
+      description:
+        "Defines if a custom footer should be visible when available.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
     isCollapsible: {
       control: "boolean",
       description: "Controls whether the side nav is collapsible",
@@ -450,6 +465,21 @@ export const CustomLogoImage: StoryObj<typeof SideNav> = {
       imageUrl: "https://placehold.co/600x60",
       imageAltText: "My custom image logo",
     },
+  },
+  render: (props) => {
+    return (
+      <div style={{ height: "100vh" }}>
+        <SideNav {...props} />
+      </div>
+    );
+  },
+};
+
+export const CustomFooterContent: StoryObj<typeof SideNav> = {
+  args: {
+    footerItems: undefined,
+    hasCustomFooter: true,
+    footerComponent: <CustomFooterComponent />,
   },
   render: (props) => {
     return (
