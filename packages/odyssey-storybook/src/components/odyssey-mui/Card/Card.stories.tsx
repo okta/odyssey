@@ -13,97 +13,90 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import {
-  Box,
   Button,
   Card,
   MenuItem,
   CardProps,
+  cardVariantValues,
+  Checkbox,
 } from "@okta/odyssey-react-mui";
+import { CheckboxProps as MuiCheckboxProps } from "@okta/odyssey-react-mui";
+import { ChevronDownIcon, ChevronUpIcon } from "@okta/odyssey-react-mui/icons";
+import { jest } from "@storybook/jest";
+import { MouseEventHandler, useCallback, useState } from "react";
+type CardMetaProps = Omit<
+  CardProps,
+  | "children"
+  | "detailPanel"
+  | "image"
+  | "accessory"
+  | "button"
+  | "menuButtonChildren"
+  | "onClick"
+> & {
+  children?: boolean;
+  detailPanel?: boolean;
+  image?: boolean;
+  accessory?: boolean;
+  button?: boolean;
+  menuButtonChildren?: boolean;
+  onClick?: boolean;
+};
 
-const storybookMeta: Meta<CardProps> = {
+const storybookMeta: Meta<CardMetaProps> = {
   title: "MUI Components/Card",
-  component: Card,
   argTypes: {
-    title: {
-      control: "text",
-      description: "The heading of the card.",
-      table: {
-        type: {
-          summary: "string",
-        },
-        defaultValue: "",
-      },
+    children: {
+      control: "boolean",
     },
     description: {
       control: "text",
-      description:
-        "The body text of the card. The consumer is responsible for truncating this string.",
-      table: {
-        type: {
-          summary: "string",
-        },
-        defaultValue: "",
-      },
+    },
+    detailPanel: {
+      control: "boolean",
+    },
+    image: {
+      control: "boolean",
+    },
+    isLoading: {
+      control: "boolean",
     },
     overline: {
       control: "text",
-      description: 'The "eyebrow" text above the card title.',
-      table: {
-        type: {
-          summary: "string",
-        },
-        defaultValue: "",
-      },
     },
-    image: {
-      control: null,
-      description:
-        "An optional image or icon at the top of the card, preferably as an img or svg element.",
-      table: {
-        type: {
-          summary: "ReactElement",
-        },
-        defaultValue: "",
-      },
+    title: {
+      control: "text",
     },
-    onClick: {
-      control: null,
-      description: "The event handler for when the user clicks the card.",
-      table: {
-        type: {
-          summary: "MouseEventHandler",
-        },
-        defaultValue: "",
-      },
+    variant: {
+      control: "select",
+      options: cardVariantValues,
+    },
+    accessory: {
+      control: "boolean",
     },
     button: {
-      control: null,
-      description:
-        "The main action button for the card. Not valid if the card itself is clickable.",
-      table: {
-        type: {
-          summary: "ReactElement<typeof Button>",
-        },
-        defaultValue: "",
-      },
+      control: "boolean",
     },
     menuButtonChildren: {
-      control: null,
-      description:
-        "Menu items to be rendered in the card's optional menu button. If this prop is undefined, the menu button will not be shown. Not valid if the card itself is clickable.",
-      table: {
-        type: {
-          summary: "[MenuItem | Divider | ListSubheader]",
-        },
-        defaultValue: "",
-      },
+      control: "boolean",
+    },
+    onClick: {
+      control: "boolean",
     },
   },
   args: {
-    title: "Title",
+    children: false,
     description:
-      "Identity can create great user experiences, increase customer sign-ups, and...",
-    overline: "Overline",
+      "This is a description of the app. Descriptions should be concise, and truncation is handled by the consumer rather than the component, so if you write a novel, it will display a novel.",
+    detailPanel: false,
+    image: undefined,
+    isLoading: false,
+    overline: "Category",
+    title: "App title",
+    variant: "tile",
+    accessory: false,
+    button: undefined,
+    menuButtonChildren: false,
     onClick: undefined,
   },
   decorators: [MuiThemeDecorator],
@@ -111,82 +104,184 @@ const storybookMeta: Meta<CardProps> = {
 
 export default storybookMeta;
 
-export const Default: StoryObj<CardProps> = {
-  render: ({ ...props }) => (
-    <Box sx={{ maxWidth: 262 }}>
-      <Card
-        {...props}
-        button={<Button variant="primary" label="Button" />}
-        image={<img src="https://placehold.co/128" alt="Example logo" />}
-        menuButtonChildren={
-          <>
-            <MenuItem>Menu option</MenuItem>
-            <MenuItem>Menu option</MenuItem>
-            <MenuItem>Menu option</MenuItem>
-          </>
-        }
-      />
-    </Box>
-  ),
-};
+const image = <img src="https://placehold.co/128" alt="Example logo" />;
 
-export const Clickable: StoryObj<CardProps> = {
-  render: ({ ...props }) => {
-    const onClick = () => {
-      alert("Clicked!");
-    };
+const children = <>Children.</>;
+const detailPanel = <>Detail panel.</>;
+const button = <Button variant="primary" label="Access app" />;
+const onClick: MouseEventHandler<HTMLButtonElement> = jest.fn();
+const menuButtonChildren = (
+  <>
+    <MenuItem onClick={() => console.log("Action 1")}>Action 1</MenuItem>
+    <MenuItem onClick={() => console.log("Action 2")}>Action 2</MenuItem>
+  </>
+);
+
+const BaseStory: StoryObj<CardMetaProps> = {
+  render: function Base(args: CardMetaProps) {
+    const [isExpanded, setIsExpanded] = useState(false);
+    const [isSelected, setIsSelected] = useState(false);
+
+    const handleSelect = useCallback(() => {
+      setIsSelected(!isSelected);
+    }, [isSelected, setIsSelected]);
+
+    const handleExpand = useCallback(() => {
+      setIsExpanded(!isExpanded);
+    }, [isExpanded, setIsExpanded]);
+
+    const SelectionAccessory = ({
+      isChecked,
+      onChange,
+    }: {
+      isChecked: boolean;
+      onChange: MuiCheckboxProps["onChange"];
+    }) => <Checkbox isChecked={isChecked} onChange={onChange} />;
+
+    const ExpansionAccessory = ({
+      isExpanded,
+      onToggle,
+    }: {
+      isExpanded: boolean;
+      onToggle: MouseEventHandler<HTMLButtonElement>;
+    }) => (
+      <Button
+        ariaLabel={isExpanded ? "Collapse" : "Expand"}
+        endIcon={isExpanded ? <ChevronDownIcon /> : <ChevronUpIcon />}
+        variant="floating"
+        size="small"
+        onClick={onToggle}
+      />
+    );
+
+    const Accessory = ({
+      isExpandable,
+      isSelected,
+      isExpanded,
+      onToggleExpansion,
+      onChangeSelection,
+    }: {
+      isExpandable: boolean;
+      isSelected: boolean;
+      isExpanded: boolean;
+      onToggleExpansion: MouseEventHandler<HTMLButtonElement>;
+      onChangeSelection?: MuiCheckboxProps["onChange"];
+    }) => (
+      <>
+        <SelectionAccessory
+          isChecked={isSelected}
+          onChange={onChangeSelection}
+        />
+        {isExpandable && (
+          <ExpansionAccessory
+            isExpanded={isExpanded}
+            onToggle={onToggleExpansion}
+          />
+        )}
+      </>
+    );
+
+    if (args.onClick) {
+      return (
+        <Card
+          description={args.description}
+          overline={args.overline}
+          title={args.title}
+          variant={args.variant}
+          isLoading={args.isLoading}
+          children={args.children ? children : undefined}
+          detailPanel={args.detailPanel ? detailPanel : undefined}
+          onClick={onClick}
+          image={args.image ? image : undefined}
+        />
+      );
+    }
 
     return (
-      <Box sx={{ maxWidth: 262 }}>
-        <Card
-          description={props.description}
-          image={<img src="https://placehold.co/128" alt="Example logo" />}
-          onClick={onClick}
-          overline={props.overline}
-          title={props.title}
-        />
-      </Box>
+      <Card
+        description={args.description}
+        overline={args.overline}
+        title={args.title}
+        variant={args.variant}
+        isLoading={args.isLoading}
+        children={args.children ? children : undefined}
+        detailPanel={args.detailPanel && isExpanded ? detailPanel : undefined}
+        button={args.button ? button : undefined}
+        menuButtonChildren={
+          args.menuButtonChildren ? menuButtonChildren : undefined
+        }
+        accessory={
+          args.accessory ? (
+            <Accessory
+              isExpandable={Boolean(args.detailPanel)}
+              isExpanded={isExpanded}
+              isSelected={isSelected}
+              onToggleExpansion={handleExpand}
+              onChangeSelection={handleSelect}
+            />
+          ) : undefined
+        }
+        image={args.image ? image : undefined}
+      />
     );
   },
 };
 
-export const ClickableWithoutImage: StoryObj<CardProps> = {
-  render: ({ ...props }) => {
-    const onClick = () => {
-      alert("Clicked!");
-    };
-
-    return (
-      <Box sx={{ maxWidth: 262 }}>
-        <Card
-          description={props.description}
-          image={props.image}
-          onClick={onClick}
-          overline={props.overline}
-          title={props.title}
-        />
-      </Box>
-    );
+export const Default: StoryObj<CardMetaProps> = {
+  ...BaseStory,
+  args: {
+    image: true,
+    children: false,
+    menuButtonChildren: true,
+    detailPanel: false,
+    accessory: false,
+    button: true,
   },
 };
 
-export const ButtonWithoutImage: StoryObj<typeof Card> = {
-  render: ({ ...props }) => (
-    <Box sx={{ maxWidth: 262 }}>
-      <Card
-        button={<Button variant="primary" label="Button" />}
-        description={props.description}
-        image={props.image}
-        menuButtonChildren={
-          <>
-            <MenuItem>Menu option 1</MenuItem>
-            <MenuItem>Menu option 2</MenuItem>
-            <MenuItem>Menu option 3</MenuItem>
-          </>
-        }
-        overline={props.overline}
-        title={props.title}
-      />
-    </Box>
-  ),
+export const Clickable: StoryObj<CardMetaProps> = {
+  ...BaseStory,
+  args: {
+    image: true,
+    onClick: true,
+  },
+};
+
+export const Tile: StoryObj<CardMetaProps> = {
+  ...BaseStory,
+  args: {
+    image: true,
+    children: true,
+    menuButtonChildren: true,
+    detailPanel: true,
+    accessory: true,
+    button: true,
+    variant: "tile",
+  },
+};
+
+export const Stack: StoryObj<CardMetaProps> = {
+  ...BaseStory,
+  args: {
+    image: true,
+    children: true,
+    menuButtonChildren: true,
+    detailPanel: true,
+    accessory: true,
+    button: true,
+    variant: "stack",
+  },
+};
+
+export const Compact: StoryObj<CardMetaProps> = {
+  ...BaseStory,
+  args: {
+    image: true,
+    children: true,
+    menuButtonChildren: true,
+    detailPanel: true,
+    accessory: true,
+    button: true,
+    variant: "compact",
+  },
 };

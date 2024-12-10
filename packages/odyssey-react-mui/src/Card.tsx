@@ -11,105 +11,200 @@
  */
 
 import {
+  memo,
   MouseEventHandler,
   ReactElement,
-  memo,
+  ReactNode,
   useMemo,
-  useEffect,
 } from "react";
 import {
+  CardActionArea as MuiCardActionArea,
   Card as MuiCard,
   CardActions as MuiCardActions,
-  CardActionArea as MuiCardActionArea,
 } from "@mui/material";
+import {
+  Button,
+  ButtonContext,
+  DesignTokens,
+  Heading5,
+  MenuButtonProps,
+  Paragraph,
+  Support,
+  useOdysseyDesignTokens,
+} from ".";
 import styled from "@emotion/styled";
 
-import { Button, ButtonContext, MenuButton, MenuButtonProps } from "./Buttons";
-import { MoreIcon } from "./icons.generated";
-import {
-  DesignTokens,
-  useOdysseyDesignTokens,
-} from "./OdysseyDesignTokensContext";
-import { Heading5, Paragraph, Support } from "./Typography";
-import { Box } from "./Box";
-
-export const CARD_IMAGE_HEIGHT = "64px";
+export const cardVariantValues = ["tile", "stack", "compact"] as const;
 
 export type CardProps = {
+  children?: ReactNode;
   description?: string;
+  detailPanel?: ReactNode;
   image?: ReactElement;
+  isLoading?: boolean;
   overline?: string;
   title?: string;
+  variant?: (typeof cardVariantValues)[number];
 } & (
   | {
-      onClick: MouseEventHandler;
+      accessory?: never;
       button?: never;
       menuButtonChildren?: never;
+      onClick: MouseEventHandler;
     }
   | {
-      onClick?: never;
+      accessory?: ReactNode;
       button?: ReactElement<typeof Button>;
       menuButtonChildren?: MenuButtonProps["children"];
+      onClick?: never;
     }
 );
 
-const ImageContainer = styled("div", {
+const StyledCard = styled(MuiCard, {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "hasMenuButtonChildren",
+    prop !== "odysseyDesignTokens" && prop !== "isClickable",
 })<{
   odysseyDesignTokens: DesignTokens;
-  hasMenuButtonChildren: boolean;
-}>(({ odysseyDesignTokens, hasMenuButtonChildren }) => ({
-  display: "flex",
-  alignItems: "flex-start",
-  maxHeight: CARD_IMAGE_HEIGHT,
-  height: CARD_IMAGE_HEIGHT,
-  marginBlockEnd: odysseyDesignTokens.Spacing5,
-  paddingRight: hasMenuButtonChildren ? odysseyDesignTokens.Spacing5 : 0,
+  isClickable: boolean;
+}>(({ odysseyDesignTokens, isClickable }) => ({
+  border: `${odysseyDesignTokens.BorderWidthMain} ${odysseyDesignTokens.BorderColorDisplay} ${odysseyDesignTokens.BorderStyleMain}`,
+  boxShadow: "none",
+  padding: 0,
+
+  ["&:hover"]: isClickable
+    ? {
+        borderColor: odysseyDesignTokens.HueNeutralWhite,
+        boxShadow: odysseyDesignTokens.DepthMedium,
+      }
+    : {},
 }));
 
-const MenuButtonContainer = styled("div", {
+const StyledCardActionArea = styled(MuiCardActionArea)(() => ({
+  margin: 0,
+  padding: 0,
+}));
+
+const AccessoriesContainer = styled("div", {
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "variant",
+})<{
+  odysseyDesignTokens: DesignTokens;
+  variant: CardProps["variant"];
+}>(({ odysseyDesignTokens, variant }) => ({
+  // display: "flex",
+  // TODO: remove the variant thing
+  backgroundColor:
+    variant === "tile"
+      ? odysseyDesignTokens.HueNeutralWhite
+      : odysseyDesignTokens.HueNeutralWhite,
+  display: "none",
+}));
+
+const InnerContainer = styled("div", {
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "variant",
+})<{
+  odysseyDesignTokens: DesignTokens;
+  variant: CardProps["variant"];
+}>(({ odysseyDesignTokens, variant }) => ({
+  display: "flex",
+  backgroundColor: odysseyDesignTokens.HueNeutralWhite,
+  padding: odysseyDesignTokens.Spacing5,
+  flexDirection: variant === "tile" ? "column" : "row",
+  gap: odysseyDesignTokens.Spacing4,
+}));
+
+const ImageContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
-  position: "absolute",
-  right: odysseyDesignTokens.Spacing3,
-  top: odysseyDesignTokens.Spacing3,
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  height: "4.5714285714rem",
+  backgroundColor: odysseyDesignTokens.HueNeutralWhite, // TODO: remove
 }));
 
-const CardContentContainer = styled("div")(() => ({
+const ContentContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
   display: "flex",
+  flexDirection: "column",
+  backgroundColor: odysseyDesignTokens.HueNeutralWhite,
+  gap: odysseyDesignTokens.Spacing4,
+
+  "& > *": {
+    marginBlock: 0,
+  },
 }));
 
-const buttonProviderValue = { isFullWidth: true };
+const UpperContentContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  display: "flex",
+  flexDirection: "column",
+  gap: odysseyDesignTokens.Spacing1,
+
+  "& > .MuiTypography-root": {
+    marginBlockEnd: 0,
+  },
+}));
+
+const Content = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  display: "flex",
+  flexDirection: "column",
+  backgroundColor: odysseyDesignTokens.HueNeutralWhite,
+}));
 
 const Card = ({
-  button,
+  children,
   description,
+  detailPanel,
   image,
-  menuButtonChildren,
-  onClick,
+  isLoading,
   overline,
   title,
+  variant,
+  accessory,
+  button,
+  menuButtonChildren,
+  onClick,
 }: CardProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
-  const cardContent = useMemo(
-    () => (
-      <CardContentContainer>
-        <Box>
-          {image && (
-            <ImageContainer
-              odysseyDesignTokens={odysseyDesignTokens}
-              hasMenuButtonChildren={Boolean(menuButtonChildren)}
-            >
-              {image}
-            </ImageContainer>
-          )}
+  console.log(isLoading, variant, menuButtonChildren, onClick);
 
-          {overline && <Support component="div">{overline}</Support>}
-          {title && <Heading5 component="div">{title}</Heading5>}
+  const cardContent = useMemo(() => {
+    const buttonProviderValue = { isFullWidth: true };
+    return (
+      <InnerContainer
+        odysseyDesignTokens={odysseyDesignTokens}
+        variant={variant}
+      >
+        {image && (
+          <ImageContainer odysseyDesignTokens={odysseyDesignTokens}>
+            {image}
+          </ImageContainer>
+        )}
+        <ContentContainer odysseyDesignTokens={odysseyDesignTokens}>
+          <UpperContentContainer odysseyDesignTokens={odysseyDesignTokens}>
+            {overline && <Support component="div">{overline}</Support>}
+            {title && <Heading5 component="div">{title}</Heading5>}
+          </UpperContentContainer>
           {description && (
             <Paragraph color="textSecondary">{description}</Paragraph>
+          )}
+
+          {children && (
+            <Content odysseyDesignTokens={odysseyDesignTokens}>
+              {children}
+            </Content>
           )}
 
           {button && (
@@ -119,63 +214,322 @@ const Card = ({
               </ButtonContext.Provider>
             </MuiCardActions>
           )}
-        </Box>
-      </CardContentContainer>
-    ),
-    [
-      button,
-      description,
-      image,
-      menuButtonChildren,
-      overline,
-      title,
-      odysseyDesignTokens,
-    ],
-  );
+
+          {detailPanel && (
+            <Content odysseyDesignTokens={odysseyDesignTokens}>
+              {detailPanel}
+            </Content>
+          )}
+        </ContentContainer>
+      </InnerContainer>
+    );
+  }, [
+    button,
+    children,
+    description,
+    detailPanel,
+    image,
+    odysseyDesignTokens,
+    overline,
+    title,
+    variant,
+  ]);
 
   return (
-    <MuiCard className={onClick ? "isClickable" : ""}>
+    <StyledCard
+      odysseyDesignTokens={odysseyDesignTokens}
+      isClickable={Boolean(onClick)}
+    >
+      <AccessoriesContainer
+        odysseyDesignTokens={odysseyDesignTokens}
+        variant={variant}
+      >
+        {accessory}
+      </AccessoriesContainer>
       {onClick ? (
-        <MuiCardActionArea onClick={onClick}>{cardContent}</MuiCardActionArea>
+        <StyledCardActionArea onClick={onClick}>
+          {cardContent}
+        </StyledCardActionArea>
       ) : (
         cardContent
       )}
-
-      {menuButtonChildren && (
-        <MenuButtonContainer odysseyDesignTokens={odysseyDesignTokens}>
-          <MenuButton
-            endIcon={<MoreIcon />}
-            ariaLabel="Card menu"
-            buttonVariant="floating"
-            menuAlignment="right"
-            size="small"
-            tooltipText="Actions"
-          >
-            {menuButtonChildren}
-          </MenuButton>
-        </MenuButtonContainer>
-      )}
-    </MuiCard>
+    </StyledCard>
   );
 };
 
 const MemoizedCard = memo(Card);
 MemoizedCard.displayName = "Card";
 
-/**
- * @deprecated The 'Tile' component is now called 'Card'. Please update your references as 'Tile' will be deprecated soon.
- */
-const Tile = (props: CardProps) => {
-  useEffect(() => {
-    console.warn(
-      "Warning: The 'Tile' component is now called 'Card'. Please update your references as 'Tile' will be deprecated soon.",
-    );
-  }, []);
+export { MemoizedCard as Card };
 
-  return <MemoizedCard {...props} />;
-};
+// import {
+//   MouseEventHandler,
+//   ReactElement,
+//   memo,
+//   useMemo,
+//   ReactNode,
+// } from "react";
+// import {
+//   Card as MuiCard,
+//   CardActions as MuiCardActions,
+//   CardActionArea as MuiCardActionArea,
+// } from "@mui/material";
+// import styled from "@emotion/styled";
+// import { useTranslation } from "react-i18next";
 
-const MemoizedTile = memo(Tile);
-MemoizedTile.displayName = "Tile";
+// import { Box } from "./Box";
+// import {
+//   Button,
+//   ButtonContext,
+//   MenuButton,
+//   MenuButtonProps,
+// } from "./Buttons";
+// import {
+//   DesignTokens,
+//   useOdysseyDesignTokens,
+// } from "./OdysseyDesignTokensContext";
+// import { Heading5, Paragraph, Support } from "./Typography";
+// import {
+//   MoreIcon,
+// } from "./icons.generated";
 
-export { MemoizedCard as Card, MemoizedTile as Tile };
+// export const CARD_IMAGE_SIZE = "64px";
+// export const CARD_IMAGE_SIZE_COMPACT = "48px";
+
+// export const cardVariantValues = ["tile", "stack", "compact"] as const;
+
+// export type CardProps = {
+//   children?: ReactNode;
+//   description?: string;
+//   image?: ReactElement;
+//   overline?: string;
+//   title?: string;
+//   variant?: (typeof cardVariantValues)[number];
+// } & (
+//     | {
+//       Accessory?: never;
+//       button?: never;
+//       menuButtonChildren?: never;
+//       onClick: MouseEventHandler;
+//     }
+//     | {
+//       Accessory?: ReactNode;
+//       button?: ReactElement<typeof Button>;
+//       menuButtonChildren?: MenuButtonProps["children"];
+//       onClick?: never;
+//     }
+//   );
+
+// const StyledMuiCard = styled(MuiCard, {
+//   shouldForwardProp: (prop) =>
+//     prop !== "odysseyDesignTokens" &&
+//     prop !== "hasAccessory" &&
+//     prop !== "variant",
+// })<{
+//   odysseyDesignTokens: DesignTokens;
+//   hasAccessory?: boolean;
+//   variant: (typeof cardVariantValues)[number];
+// }>(({ odysseyDesignTokens, hasAccessory = false, variant = "tile" }) => ({
+//   border: `${odysseyDesignTokens.BorderWidthMain} ${odysseyDesignTokens.HueNeutral200} ${odysseyDesignTokens.BorderStyleMain}`,
+// }));
+
+// const AccessoryContainer = styled("div", {
+//   shouldForwardProp: (prop) =>
+//     prop !== "odysseyDesignTokens" && prop !== "variant",
+// })<{
+//   odysseyDesignTokens: DesignTokens;
+//   variant: (typeof cardVariantValues)[number];
+// }>(({ odysseyDesignTokens, variant }) => ({
+//   display: "flex",
+//   flexDirection: variant === "compact" ? "row" : "column",
+//   alignItems: "center",
+//   gap: odysseyDesignTokens.Spacing2,
+//   height: variant === "compact" ? CARD_IMAGE_SIZE_COMPACT : "auto",
+// }));
+
+// const ImageContainer = styled("div", {
+//   shouldForwardProp: (prop) =>
+//     prop !== "odysseyDesignTokens" &&
+//     prop !== "hasMenuButtonChildren" &&
+//     prop !== "variant",
+// })<{
+//   odysseyDesignTokens: DesignTokens;
+//   hasMenuButtonChildren: boolean;
+//   variant: (typeof cardVariantValues)[number];
+// }>(({ odysseyDesignTokens, hasMenuButtonChildren, variant }) => ({
+//   display: "flex",
+//   alignItems: "flex-start",
+//   height: variant === "compact" ? CARD_IMAGE_SIZE_COMPACT : CARD_IMAGE_SIZE,
+//   maxHeight: variant === "compact" ? CARD_IMAGE_SIZE_COMPACT : CARD_IMAGE_SIZE,
+//   marginBlockEnd: variant === "tile" ? odysseyDesignTokens.Spacing5 : 0,
+//   paddingRight: hasMenuButtonChildren ? odysseyDesignTokens.Spacing5 : 0,
+// }));
+
+// const MenuButtonContainer = styled("div", {
+//   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+// })<{
+//   odysseyDesignTokens: DesignTokens;
+//   variant: (typeof cardVariantValues)[number];
+// }>(({ odysseyDesignTokens, variant }) => ({
+//   position: "absolute",
+//   right: odysseyDesignTokens.Spacing3,
+//   top:
+//     variant === "compact"
+//       ? odysseyDesignTokens.Spacing4
+//       : odysseyDesignTokens.Spacing3,
+//   height: variant === "compact" ? CARD_IMAGE_SIZE_COMPACT : "auto",
+//   display: "flex",
+//   alignItems: "center",
+// }));
+
+// const CardInnerContainer = styled("div", {
+//   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+// })<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
+//   display: "flex",
+//   gap: odysseyDesignTokens.Spacing3,
+// }));
+
+// const CardImageAndContentContainer = styled("div", {
+//   shouldForwardProp: (prop) => prop !== "variant",
+// })<{ variant: (typeof cardVariantValues)[number]; }>(
+//   ({ variant }) => ({
+//     display: "flex",
+//     flexDirection: variant === "tile" ? "column" : "row",
+//     alignItems: "flex-start",
+//   }),
+// );
+
+// const CardContent = styled("div", {
+//   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+// })<{
+//   odysseyDesignTokens: DesignTokens;
+//   variant: (typeof cardVariantValues)[number];
+// }>(({ odysseyDesignTokens, variant }) => ({
+//   "& > .MuiTypography-h5:not(:last-child)": {
+//     marginBlockEnd: `${variant === "compact" ? odysseyDesignTokens.Spacing1 : odysseyDesignTokens.Spacing3} !important`,
+//   },
+//   "& > *:last-child": {
+//     marginBlockEnd: 0,
+//   },
+// }));
+
+// const CardChildrenContainer = styled("div", {
+//   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+// })<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
+//   ["&:not(:first-child)"]: {
+//     marginBlockStart: odysseyDesignTokens.Spacing3,
+//   },
+// }));
+
+// const buttonProviderValue = { isFullWidth: true };
+
+// const Card = ({
+//   Accessory: AccessoryProp,
+//   button,
+//   children,
+//   description,
+//   image,
+//   menuButtonChildren,
+//   onClick,
+//   overline,
+//   title,
+//   variant = "tile",
+// }: CardProps) => {
+//   const odysseyDesignTokens = useOdysseyDesignTokens();
+//   const { t } = useTranslation();
+
+//   const Accessory = useMemo(() => {
+//     return (
+//       <AccessoryContainer
+//         odysseyDesignTokens={odysseyDesignTokens}
+//         variant={variant}
+//       >
+//         {AccessoryProp}
+//       </AccessoryContainer>
+//     );
+//   }, [AccessoryProp, odysseyDesignTokens, variant]);
+
+//   const cardContent = useMemo(() => {
+//     return (
+//       <CardInnerContainer odysseyDesignTokens={odysseyDesignTokens}>
+//         {AccessoryProp && <Box>{Accessory}</Box>}
+//         <CardImageAndContentContainer
+//           variant={variant}
+//         >
+//           {image && (
+//             <ImageContainer
+//               odysseyDesignTokens={odysseyDesignTokens}
+//               hasMenuButtonChildren={Boolean(menuButtonChildren)}
+//               variant={variant}
+//             >
+//               {image}
+//             </ImageContainer>
+//           )}
+
+//           <CardContent
+//             odysseyDesignTokens={odysseyDesignTokens}
+//             variant={variant}
+//           >
+//             {overline && <Support component="div">{overline}</Support>}
+//             {title && <Heading5 component="div">{title}</Heading5>}
+//             {description && (
+//               <Paragraph color="textSecondary">{description}</Paragraph>
+//             )}
+
+//             {button && (
+//               <MuiCardActions>
+//                 <ButtonContext.Provider value={buttonProviderValue}>
+//                   {button}
+//                 </ButtonContext.Provider>
+//               </MuiCardActions>
+//             )}
+
+//             {children && (
+//               <CardChildrenContainer odysseyDesignTokens={odysseyDesignTokens}>
+//                 {children}
+//               </CardChildrenContainer>
+//             )}
+
+//           </CardContent>
+//         </CardImageAndContentContainer>
+//       </CardInnerContainer>
+//     );
+//   }, [odysseyDesignTokens, AccessoryProp, Accessory, variant, image, menuButtonChildren, overline, title, description, button, children]);
+
+//   return (
+//     <StyledMuiCard
+//       hasAccessory={Boolean(Accessory)}
+//       role="listitem"
+//       variant={variant}
+//     >
+//       {onClick ? (
+//         <MuiCardActionArea onClick={onClick}>{cardContent}</MuiCardActionArea>
+//       ) : (
+//         cardContent
+//       )}
+
+//       {menuButtonChildren && (
+//         <MenuButtonContainer
+//           odysseyDesignTokens={odysseyDesignTokens}
+//           variant={variant}
+//         >
+//           <MenuButton
+//             endIcon={<MoreIcon />}
+//             ariaLabel={t("table.moreactions.arialabel")}
+//             buttonVariant="floating"
+//             menuAlignment="right"
+//             size="small"
+//             tooltipText={t("table.actions")}
+//           >
+//             {menuButtonChildren}
+//           </MenuButton>
+//         </MenuButtonContainer>
+//       )}
+//     </StyledMuiCard>
+//   );
+// };
+
+// const MemoizedCard = memo(Card);
+// MemoizedCard.displayName = "Card";
+
+// export { MemoizedCard as Card };
