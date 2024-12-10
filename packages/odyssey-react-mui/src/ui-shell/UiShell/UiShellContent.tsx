@@ -230,7 +230,10 @@ const UiShellContent = ({
           initialVisibleSections?.includes("TopNav") &&
             topNavProps === undefined && (
               <ErrorBoundary fallback={null} onError={onError}>
-                <TopNav />
+                <TopNav
+                  leftSideComponent={optionalComponents?.topNavLeftSide}
+                  rightSideComponent={optionalComponents?.topNavRightSide}
+                />
               </ErrorBoundary>
             )
         }
