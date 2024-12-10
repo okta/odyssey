@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ReactElement } from "react";
+import type { ReactElement, SyntheticEvent } from "react";
 import type { HtmlProps } from "../../HtmlProps";
 import type { statusSeverityValues } from "../../Status";
 
@@ -129,7 +129,7 @@ export type SideNavItem = {
   /**
    * Event fired when the nav item is clicked
    */
-  onClick?(): void;
+  onClick?: (event: SyntheticEvent) => void;
   /**
    * The status element to display after the label
    */

@@ -12,12 +12,13 @@
 
 import styled from "@emotion/styled";
 import {
-  useRef,
-  useImperativeHandle,
-  useCallback,
+  KeyboardEventHandler,
   memo,
-  KeyboardEvent,
+  MouseEventHandler,
+  useCallback,
+  useImperativeHandle,
   useMemo,
+  useRef,
 } from "react";
 import { Link as NavItemLink } from "@mui/material";
 import {
@@ -241,25 +242,29 @@ const SideNavItemContent = ({
     [],
   );
 
-  const itemClickHandler = useCallback(
-    (id: string) => {
+  const itemClickHandler = useCallback<
+    MouseEventHandler<HTMLDivElement | HTMLAnchorElement>
+  >(
+    (event) => {
       return () => {
         onItemSelected?.(id);
-        onClick?.();
+        onClick?.(event);
       };
     },
-    [onClick, onItemSelected],
+    [id, onClick, onItemSelected],
   );
 
-  const sideNavItemContentKeyHandler = useCallback(
-    (id: string, event: KeyboardEvent<HTMLDivElement>) => {
+  const sideNavItemContentKeyHandler = useCallback<
+    KeyboardEventHandler<HTMLDivElement>
+  >(
+    (event) => {
       if (event?.key === "Enter") {
         event.preventDefault();
         onItemSelected?.(id);
-        onClick?.();
+        onClick?.(event);
       }
     },
-    [onClick, onItemSelected],
+    [id, onClick, onItemSelected],
   );
 
   return (
@@ -298,10 +303,8 @@ const SideNavItemContent = ({
             isDisabled={isDisabled}
             tabIndex={0}
             role="button"
-            onClick={itemClickHandler(id)}
-            onKeyDown={(event: KeyboardEvent<HTMLDivElement>) =>
-              sideNavItemContentKeyHandler(id, event)
-            }
+            onClick={itemClickHandler}
+            onKeyDown={sideNavItemContentKeyHandler}
             isSelected={isSelected}
           >
             <SideNavItemLinkContent
@@ -321,7 +324,7 @@ const SideNavItemContent = ({
             isSelected={isSelected}
             href={href}
             target={target}
-            onClick={itemClickHandler(id)}
+            onClick={itemClickHandler}
           >
             <SideNavItemLinkContent
               count={count}
