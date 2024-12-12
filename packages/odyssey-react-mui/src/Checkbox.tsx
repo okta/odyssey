@@ -43,6 +43,12 @@ const HintContainerWithInlineStartSpacing = styled.div<{
 }>(({ odysseyDesignTokens }) => ({
   paddingInlineStart: `calc(${odysseyDesignTokens.TypographyLineHeightUi}em + ${odysseyDesignTokens.Spacing2})`,
   marginBlockEnd: odysseyDesignTokens.Spacing2,
+
+  // MUI applies the '.Mui-error' class to this hint text when the checkbox is invalid which turns the copy red
+  // We want to keep the hint text gray in the error state
+  ".Mui-error": {
+    color: odysseyDesignTokens.TypographyColorSubordinate,
+  },
 }));
 
 export type CheckboxProps = {
