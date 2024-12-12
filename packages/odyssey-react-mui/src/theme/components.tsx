@@ -2306,6 +2306,10 @@ export const components = ({
             borderBlockEnd: `1px solid ${odysseyTokens.BorderColorDisplay}`,
           }),
 
+          ...(!ownerState.isFullWidth && {
+            maxWidth: "100%",
+          }),
+
           [`&.${menuItemClasses.disabled}`]: {
             opacity: 1,
             color: odysseyTokens.TypographyColorDisabled,
