@@ -136,7 +136,7 @@ const StepLabel = styled(MuiStepLabel, {
   active: boolean;
   allowBackStep?: boolean;
   nonLinear?: boolean;
-}>(({ completed, active, odysseyDesignTokens }) => ({
+}>(({ completed, active, nonLinear, odysseyDesignTokens }) => ({
   "& .MuiStepLabel-label": {
     fontFamily: "inherit",
     fontSize: odysseyDesignTokens.TypographySizeHeading6,
@@ -153,7 +153,7 @@ const StepLabel = styled(MuiStepLabel, {
     },
 
     "&:hover": {
-      cursor: active ? "default" : "pointer",
+      cursor: nonLinear && !active ? "pointer" : "default",
       color: active
         ? odysseyDesignTokens.HueBlue600 // No hover color change for active
         : completed
@@ -334,10 +334,11 @@ const Stepper = ({
             completed={completed}
             onClick={() => handleStepClick(index)}
             sx={{
-              cursor:
-                (completed && allowBackStep) || (!completed && nonLinear)
+              cursor: nonLinear
+                ? (completed && allowBackStep) || !completed
                   ? "pointer"
-                  : "default",
+                  : "default"
+                : "default",
               flex: orientation === "vertical" ? 1 : "none",
               padding:
                 orientation === "vertical"
