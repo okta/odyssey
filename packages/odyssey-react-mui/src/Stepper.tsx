@@ -77,7 +77,7 @@ const StepperContainer = styled(MuiStepper, {
   "& .MuiStepConnector-line": {
     borderColor: odysseyDesignTokens.HueNeutral200,
     borderWidth: "1px",
-    minHeight: orientation === "vertical" ? "8px" : undefined,
+    minHeight: orientation === "vertical" ? "24px" : undefined,
   },
   "& .MuiStepConnector-root": {
     marginLeft: orientation === "vertical" ? "11px" : undefined, // Center connector with circle (24px/2 - 1px)
@@ -136,12 +136,12 @@ const StepLabel = styled(MuiStepLabel, {
   "& .MuiStepLabel-label": {
     fontFamily: "inherit",
     fontSize: odysseyDesignTokens.TypographySizeHeading6,
-    fontWeight: odysseyDesignTokens.TypographyWeightHeading,
+    fontWeight: "600",
     lineHeight: odysseyDesignTokens.TypographyLineHeightHeading6,
     color: active
-      ? odysseyDesignTokens.HueBlue700
+      ? odysseyDesignTokens.HueBlue600
       : completed
-        ? odysseyDesignTokens.HueGreen400
+        ? odysseyDesignTokens.HueNeutral800
         : odysseyDesignTokens.HueNeutral700,
 
     "&.Mui-active": {
@@ -149,10 +149,17 @@ const StepLabel = styled(MuiStepLabel, {
     },
 
     "&:hover": {
-      cursor: "pointer",
-      color: completed
-        ? odysseyDesignTokens.HueGreen100
-        : odysseyDesignTokens.HueNeutral900,
+      cursor: active ? "default" : "pointer",
+      color: active
+        ? odysseyDesignTokens.HueBlue600 // No hover color change for active
+        : completed
+          ? odysseyDesignTokens.HueNeutral800 // Keep color same for completed
+          : odysseyDesignTokens.HueNeutral900,
+      background: active
+        ? "transparent"
+        : completed
+          ? "transparent"
+          : "transparent",
     },
   },
 }));
@@ -166,15 +173,17 @@ const StepDescription = styled("div")<{
   lineHeight: odysseyDesignTokens.TypographyLineHeightBody,
   marginTop: "4px",
   color: active
-    ? odysseyDesignTokens.HueBlue500
+    ? odysseyDesignTokens.HueBlue400
     : completed
-      ? odysseyDesignTokens.HueGreen400
+      ? odysseyDesignTokens.HueNeutral500
       : odysseyDesignTokens.HueNeutral600,
 
   "&:hover": {
-    color: completed
-      ? odysseyDesignTokens.HueGreen100
-      : odysseyDesignTokens.HueNeutral800,
+    color: active
+      ? odysseyDesignTokens.HueBlue400 // No color change for active
+      : completed
+        ? odysseyDesignTokens.HueNeutral500 // Keep color same for completed
+        : odysseyDesignTokens.HueNeutral800,
   },
 }));
 
@@ -197,7 +206,11 @@ const StepIcon = ({
     variant={variant}
     odysseyDesignTokens={odysseyDesignTokens}
   >
-    {completed ? <CheckIcon /> : variant === "numeric" && stepNumber + 1}
+    {completed && variant === "numeric" ? (
+      <CheckIcon />
+    ) : variant === "numeric" ? (
+      <span style={{ fontWeight: 700 }}>{stepNumber + 1}</span>
+    ) : null}
   </StepIconContainer>
 );
 
