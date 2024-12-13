@@ -141,7 +141,7 @@ const DefaultTemplate: StoryObj<StepperProps> = {
       <Stepper
         {...args}
         activeStep={activeStep}
-        steps={defaultSteps}
+        steps={args.steps || defaultSteps}
         onChange={handleStepChange}
       />
     );
@@ -170,6 +170,7 @@ export const NonLinearNavigation: StoryObj<StepperProps> = {
   ...DefaultTemplate,
   args: {
     nonLinear: true,
+    allowBackStep: true,
   },
   play: async ({ canvasElement, step }) => {
     // Try to skip to last step
@@ -201,6 +202,97 @@ export const WithLongDescription: StoryObj<StepperProps> = {
     ],
   },
 };
+
+export const VerticalUserOnboarding: StoryObj<StepperProps> = {
+  ...DefaultTemplate,
+  args: {
+    orientation: "vertical",
+    steps: [
+      {
+        label: "Organization Details",
+        description:
+          "Set up your organization's name, domain, and basic information.",
+      },
+      {
+        label: "Security Settings",
+        description:
+          "Configure multi-factor authentication and password policies.",
+      },
+      {
+        label: "Directory Setup",
+        description:
+          "Connect your user directory or create a new one for user management.",
+      },
+      {
+        label: "Admin Configuration",
+        description: "Set up initial administrator accounts and permissions.",
+      },
+      {
+        label: "Review & Launch",
+        description: "Review all settings and activate your organization.",
+      },
+    ],
+  },
+};
+
+export const HorizontalWorkflow: StoryObj<StepperProps> = {
+  ...DefaultTemplate,
+  args: {
+    orientation: "horizontal",
+    steps: [
+      {
+        label: "Create Request",
+        description: "Submit new workflow request",
+      },
+      {
+        label: "Department Review",
+        description: "Awaiting department approval",
+      },
+      {
+        label: "Manager Approval",
+        description: "Final management review",
+      },
+      {
+        label: "Completion",
+        description: "Process workflow completion",
+      },
+    ],
+  },
+};
+
+export const DescriptionTest: StoryObj<StepperProps> = {
+  render: function C() {
+    const [activeStep, setActiveStep] = useState(0);
+    const handleStepChange = (step: number) => {
+      setActiveStep(step);
+    };
+
+    const stepsWithDescription = [
+      {
+        label: "Step One",
+        description: "First step description",
+      },
+      {
+        label: "Step Two",
+        description: "Second step description",
+      },
+      {
+        label: "Step Three",
+        description: "Third step description",
+      },
+    ];
+
+    return (
+      <Stepper
+        orientation="horizontal"
+        activeStep={activeStep}
+        steps={stepsWithDescription}
+        onChange={handleStepChange}
+      />
+    );
+  },
+};
+
 export const WithNavigation: StoryObj<StepperProps> = {
   render: function C(args) {
     const [activeStep, setActiveStep] = useState(0);
