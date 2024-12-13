@@ -134,6 +134,8 @@ const StepLabel = styled(MuiStepLabel, {
   odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
   completed: boolean;
   active: boolean;
+  allowBackStep?: boolean;
+  nonLinear?: boolean;
 }>(({ completed, active, odysseyDesignTokens }) => ({
   "& .MuiStepLabel-label": {
     fontFamily: "inherit",
@@ -157,11 +159,6 @@ const StepLabel = styled(MuiStepLabel, {
         : completed
           ? odysseyDesignTokens.HueNeutral800 // Keep color same for completed
           : odysseyDesignTokens.HueNeutral900,
-      background: active
-        ? "transparent"
-        : completed
-          ? "transparent"
-          : "transparent",
     },
   },
 }));
@@ -320,12 +317,6 @@ const Stepper = ({
     [activeStep, allowBackStep, nonLinear, onChange],
   );
 
-  if (steps.length > 5) {
-    console.warn(
-      "Stepper component supports maximum of 5 steps. Additional steps will be ignored.",
-    );
-  }
-
   return (
     <StepperContainer
       activeStep={activeStep}
@@ -333,7 +324,7 @@ const Stepper = ({
       odysseyDesignTokens={odysseyDesignTokens}
       data-se={testId}
     >
-      {steps.slice(0, 5).map((step, index) => {
+      {steps.map((step, index) => {
         const completed = index < activeStep;
         const active = index === activeStep;
 
@@ -344,8 +335,7 @@ const Stepper = ({
             onClick={() => handleStepClick(index)}
             sx={{
               cursor:
-                (completed && allowBackStep) ||
-                (nonLinear && index !== activeStep) // Only allow clicking future steps in nonLinear mode
+                (completed && allowBackStep) || (!completed && nonLinear)
                   ? "pointer"
                   : "default",
               flex: orientation === "vertical" ? 1 : "none",
@@ -359,6 +349,8 @@ const Stepper = ({
               odysseyDesignTokens={odysseyDesignTokens}
               completed={completed}
               active={active}
+              allowBackStep={allowBackStep}
+              nonLinear={nonLinear}
               StepIconComponent={(props) => (
                 <StepIcon
                   {...props}
