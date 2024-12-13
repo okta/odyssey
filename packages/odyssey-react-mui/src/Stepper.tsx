@@ -14,8 +14,10 @@ import {
   Stepper as MuiStepper,
   Step as MuiStep,
   StepLabel as MuiStepLabel,
+  Box,
 } from "@mui/material";
 import { memo, useCallback } from "react";
+import { Button } from "./Buttons";
 import styled from "@emotion/styled";
 import { CheckIcon } from "./icons.generated";
 import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
@@ -187,6 +189,79 @@ const StepDescription = styled("div")<{
   },
 }));
 
+const StepperDot = styled("div")<{
+  status: "previous" | "current" | "next";
+  odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
+}>(({ status, odysseyDesignTokens }) => ({
+  width: "8px",
+  height: "8px",
+  borderRadius: "50%",
+  border: "1px solid",
+  borderColor:
+    status === "current"
+      ? odysseyDesignTokens.HueNeutral500
+      : status === "previous"
+        ? odysseyDesignTokens.HueNeutral400
+        : odysseyDesignTokens.HueNeutral100,
+  background:
+    status === "current" ? odysseyDesignTokens.HueNeutral500 : "transparent",
+  margin: "0 2px",
+}));
+
+const StepperNavigation = ({
+  totalSteps,
+  currentStep,
+  onBack,
+  onNext,
+  odysseyDesignTokens,
+}: {
+  totalSteps: number;
+  currentStep: number;
+  onBack: () => void;
+  onNext: () => void;
+  odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
+}) => {
+  const dots = Array.from({ length: totalSteps }, (_, i) => {
+    let status: "previous" | "current" | "next" = "next";
+    if (i === currentStep) status = "current";
+    else if (i < currentStep) status = "previous";
+    return (
+      <StepperDot
+        key={i}
+        status={status}
+        odysseyDesignTokens={odysseyDesignTokens}
+      />
+    );
+  });
+
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        mt: 2,
+        gap: 2,
+      }}
+    >
+      <Button
+        label="Previous"
+        variant="secondary"
+        onClick={onBack}
+        isDisabled={currentStep === 0}
+        size="small"
+      />
+      <Box sx={{ display: "flex", alignItems: "center" }}>{dots}</Box>
+      <Button
+        label={currentStep === totalSteps - 1 ? "Finish" : "Next"}
+        variant="primary"
+        onClick={onNext}
+        isDisabled={currentStep === totalSteps - 1}
+        size="small"
+      />
+    </Box>
+  );
+};
 const StepIcon = ({
   completed,
   active,
@@ -270,8 +345,7 @@ const Stepper = ({
             sx={{
               cursor:
                 (completed && allowBackStep) ||
-                (!completed && nonLinear) ||
-                index === activeStep
+                (nonLinear && index !== activeStep) // Only allow clicking future steps in nonLinear mode
                   ? "pointer"
                   : "default",
               flex: orientation === "vertical" ? 1 : "none",
@@ -317,4 +391,4 @@ const Stepper = ({
 const MemoizedStepper = memo(Stepper);
 MemoizedStepper.displayName = "Stepper";
 
-export { MemoizedStepper as Stepper };
+export { MemoizedStepper as Stepper, StepperNavigation };

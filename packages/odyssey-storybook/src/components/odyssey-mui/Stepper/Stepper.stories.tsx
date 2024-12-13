@@ -12,7 +12,12 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { Box, Button, Stepper, StepperProps } from "@okta/odyssey-react-mui";
+import {
+  Stepper,
+  StepperNavigation,
+  StepperProps,
+  useOdysseyDesignTokens,
+} from "@okta/odyssey-react-mui";
 import { expect } from "@storybook/jest";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -103,9 +108,9 @@ const storybookMeta: Meta<StepperProps> = {
 export default storybookMeta;
 
 const defaultSteps = [
-  { label: "Account details", description: "Provide basic information" },
-  { label: "Personal info", description: "Tell us about yourself" },
-  { label: "Review", description: "Verify your information" },
+  { label: "Account details" },
+  { label: "Personal info" },
+  { label: "Review" },
 ];
 
 // Helper function to test step navigation
@@ -128,46 +133,17 @@ const navigateSteps = async (
 const DefaultTemplate: StoryObj<StepperProps> = {
   render: function C(args) {
     const [activeStep, setActiveStep] = useState(0);
-
-    const handleNext = () => {
-      setActiveStep((prevStep) =>
-        Math.min(prevStep + 1, defaultSteps.length - 1),
-      );
-    };
-
-    const handleBack = () => {
-      setActiveStep((prevStep) => Math.max(prevStep - 1, 0));
-    };
-
     const handleStepChange = (step: number) => {
       setActiveStep(step);
     };
 
     return (
-      <>
-        <Stepper
-          {...args}
-          activeStep={activeStep}
-          steps={defaultSteps}
-          onChange={handleStepChange}
-        />
-        <Box sx={{ mt: 2, display: "flex", gap: 2 }}>
-          <Button
-            label="Back"
-            variant="secondary"
-            onClick={handleBack}
-            isDisabled={activeStep === 0}
-            size="small"
-          />
-          <Button
-            label={activeStep === defaultSteps.length - 1 ? "Finish" : "Next"}
-            variant="primary"
-            onClick={handleNext}
-            isDisabled={activeStep === defaultSteps.length - 1}
-            size="small"
-          />
-        </Box>
-      </>
+      <Stepper
+        {...args}
+        activeStep={activeStep}
+        steps={defaultSteps}
+        onChange={handleStepChange}
+      />
     );
   },
 };
@@ -231,23 +207,59 @@ export const NonLinearNavigation: StoryObj<StepperProps> = {
   },
 };
 
-export const MaxSteps: StoryObj<StepperProps> = {
+export const WithLongDescription: StoryObj<StepperProps> = {
   ...DefaultTemplate,
   args: {
     steps: [
-      { label: "Step 1", description: "First step" },
-      { label: "Step 2", description: "Second step" },
-      { label: "Step 3", description: "Third step" },
-      { label: "Step 4", description: "Fourth step" },
-      { label: "Step 5", description: "Fifth step" },
-      { label: "Step 6", description: "This step will not be shown" },
+      {
+        label: "Account setup",
+        description:
+          "Configure your account settings including authentication preferences, security options, and basic profile information.",
+      },
+      {
+        label: "User profile",
+        description:
+          "Tell us more about yourself including your role, department, and any relevant professional details.",
+      },
+      { label: "Review" },
     ],
   },
-  play: async ({ canvasElement, step }) => {
-    await step("verify max steps", async () => {
-      const canvas = within(canvasElement);
-      expect(canvas.getByText("Step 5")).toBeInTheDocument();
-      expect(canvas.queryByText("Step 6")).not.toBeInTheDocument();
-    });
+};
+export const WithNavigation: StoryObj<StepperProps> = {
+  render: function C(args) {
+    const [activeStep, setActiveStep] = useState(0);
+    const odysseyDesignTokens = useOdysseyDesignTokens();
+
+    const handleNext = () => {
+      setActiveStep((prevStep) =>
+        Math.min(prevStep + 1, defaultSteps.length - 1),
+      );
+    };
+
+    const handleBack = () => {
+      setActiveStep((prevStep) => Math.max(prevStep - 1, 0));
+    };
+
+    const handleStepChange = (step: number) => {
+      setActiveStep(step);
+    };
+
+    return (
+      <>
+        <Stepper
+          {...args}
+          activeStep={activeStep}
+          steps={defaultSteps}
+          onChange={handleStepChange}
+        />
+        <StepperNavigation
+          totalSteps={defaultSteps.length}
+          currentStep={activeStep}
+          onBack={handleBack}
+          onNext={handleNext}
+          odysseyDesignTokens={odysseyDesignTokens}
+        />
+      </>
+    );
   },
 };
