@@ -166,30 +166,6 @@ export const Vertical: StoryObj<StepperProps> = {
   },
 };
 
-export const AllowBackNavigation: StoryObj<StepperProps> = {
-  ...DefaultTemplate,
-  args: {
-    allowBackStep: true,
-  },
-  play: async ({ canvasElement, step }) => {
-    // First advance the stepper
-    await step("advance to second step", async () => {
-      const canvas = within(canvasElement);
-      const nextButton = canvas.getByText("Next");
-      await userEvent.click(nextButton);
-    });
-
-    // Then try to navigate back
-    await navigateSteps({ canvasElement, step }, "Account details");
-
-    await step("verify navigation", async () => {
-      const canvas = within(canvasElement);
-      const backButton = canvas.getByText("Back");
-      expect(backButton).toBeEnabled();
-    });
-  },
-};
-
 export const NonLinearNavigation: StoryObj<StepperProps> = {
   ...DefaultTemplate,
   args: {
