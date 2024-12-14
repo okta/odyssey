@@ -65,6 +65,21 @@ export type StepperProps = {
   onChange?: (step: number) => void;
 } & Pick<HtmlProps, "testId">;
 
+const StyledStep = styled(MuiStep, {
+  shouldForwardProp: (prop) =>
+    !["odysseyDesignTokens", "orientation", "isClickable"].includes(
+      prop as string,
+    ),
+})<{
+  odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
+  orientation?: "horizontal" | "vertical";
+  isClickable: boolean;
+}>(({ orientation, odysseyDesignTokens, isClickable }) => ({
+  cursor: isClickable ? "pointer" : "default",
+  flex: orientation === "vertical" ? 1 : "none",
+  padding: orientation === "vertical" ? `${odysseyDesignTokens.Spacing1} 0` : 0,
+}));
+
 const StepperContainer = styled(MuiStepper, {
   shouldForwardProp: (prop) =>
     !["odysseyDesignTokens"].includes(prop as string),
@@ -75,6 +90,7 @@ const StepperContainer = styled(MuiStepper, {
     justifyContent: "flex-start", // Align steps to the start
     "& .MuiStep-root": {
       flex: "0 0 auto", // Prevent flex growth
+      padding: "12px 16px",
       "&:last-child": {
         paddingRight: 0, // Remove padding from last step
       },
@@ -115,6 +131,7 @@ const StepperContainer = styled(MuiStepper, {
   "& .MuiStepConnector-line": {
     borderColor: odysseyDesignTokens.HueNeutral200,
     borderWidth: "1px",
+    minWidth: "16px",
     minHeight: orientation === "vertical" ? "24px" : undefined,
   },
   "& .MuiStepConnector-root": {
@@ -377,22 +394,15 @@ const Stepper = ({
         const active = index === activeStep;
 
         return (
-          <MuiStep
+          <StyledStep
             key={index}
             completed={completed}
             onClick={() => handleStepClick(index)}
-            sx={{
-              cursor: nonLinear
-                ? (completed && allowBackStep) || !completed
-                  ? "pointer"
-                  : "default"
-                : "default",
-              flex: orientation === "vertical" ? 1 : "none",
-              padding:
-                orientation === "vertical"
-                  ? `${odysseyDesignTokens.Spacing1} 0`
-                  : 0,
-            }}
+            odysseyDesignTokens={odysseyDesignTokens}
+            orientation={orientation}
+            isClickable={
+              nonLinear ? (completed && allowBackStep) || !completed : false
+            }
           >
             <StepLabel
               odysseyDesignTokens={odysseyDesignTokens}
@@ -406,7 +416,6 @@ const Stepper = ({
                   {...props}
                   completed={completed}
                   active={active}
-                  orientation={orientation}
                   stepNumber={index}
                   variant={variant}
                   odysseyDesignTokens={odysseyDesignTokens}
@@ -425,7 +434,7 @@ const Stepper = ({
                 </StepDescription>
               )}
             </StepLabel>
-          </MuiStep>
+          </StyledStep>
         );
       })}
     </StepperContainer>
