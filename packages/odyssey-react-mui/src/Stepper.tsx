@@ -71,23 +71,63 @@ const StepperContainer = styled(MuiStepper, {
 })<{
   odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
 }>(({ orientation, odysseyDesignTokens }) => ({
+  ...(orientation === "horizontal" && {
+    justifyContent: "flex-start", // Align steps to the start
+    "& .MuiStep-root": {
+      flex: "0 0 auto", // Prevent flex growth
+      "&:last-child": {
+        paddingRight: 0, // Remove padding from last step
+      },
+    },
+  }),
+  ...(orientation === "vertical" && {
+    "& .MuiStep-root": {
+      flex: 1,
+    },
+  }),
   padding:
     orientation === "horizontal"
       ? `${odysseyDesignTokens.Spacing1} ${odysseyDesignTokens.Spacing2}`
-      : odysseyDesignTokens.Spacing2,
+      : odysseyDesignTokens.Spacing3,
   borderRadius: "12px",
+  ...(orientation === "vertical" && {
+    "& .MuiStep-root": {
+      position: "relative",
+      paddingLeft: "24px",
+      "&::before": {
+        content: '""',
+        position: "absolute",
+        left: "35.5px",
+        top: "46px",
+        height: "calc(100% - 46px)", // Subtract top offset to end at the right position
+        width: "1px",
+        backgroundColor: odysseyDesignTokens.HueNeutral200,
+      },
+      "&:last-child::before": {
+        display: "none", // Remove connector from last step
+      },
+      // Hide default MUI connector
+      "& .MuiStepConnector-root": {
+        display: "none",
+      },
+    },
+  }),
   "& .MuiStepConnector-line": {
     borderColor: odysseyDesignTokens.HueNeutral200,
     borderWidth: "1px",
     minHeight: orientation === "vertical" ? "24px" : undefined,
   },
   "& .MuiStepConnector-root": {
-    marginLeft: orientation === "vertical" ? "11px" : undefined, // Center connector with circle (24px/2 - 1px)
-    ...(orientation === "horizontal" && {
-      top: "12px", // Center connector with circle
-      left: "calc(-50% + 20px)",
-      right: "calc(50% + 20px)",
-    }),
+    ...(orientation === "horizontal"
+      ? {
+          top: "24px",
+          left: "calc(-50% + 20px)",
+          right: "calc(50% + 20px)",
+          margin: "0 8px",
+        }
+      : {
+          marginLeft: "35.5px", // Center connector with circle
+        }),
   },
 }));
 
@@ -129,14 +169,20 @@ const StepIconContainer = styled("div")<{
 
 const StepLabel = styled(MuiStepLabel, {
   shouldForwardProp: (prop) =>
-    !["odysseyDesignTokens"].includes(prop as string),
+    !["odysseyDesignTokens", "orientation"].includes(prop as string),
 })<{
   odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
   completed: boolean;
   active: boolean;
   allowBackStep?: boolean;
   nonLinear?: boolean;
+  orientation?: "horizontal" | "vertical";
 }>(({ completed, active, nonLinear, odysseyDesignTokens }) => ({
+  "& .MuiStepLabel-iconContainer": {
+    paddingRight: "12px",
+    alignSelf: "flex-start", // Always align icons to the top
+    paddingTop: "2px", // Fine-tune the vertical alignment consistently
+  },
   "& .MuiStepLabel-label": {
     fontFamily: "inherit",
     fontSize: odysseyDesignTokens.TypographySizeHeading6,
@@ -167,10 +213,12 @@ const StepDescription = styled("div")<{
   odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
   completed: boolean;
   active: boolean;
-}>(({ completed, active, odysseyDesignTokens }) => ({
+  orientation?: "horizontal" | "vertical";
+}>(({ completed, active, odysseyDesignTokens, orientation }) => ({
   fontSize: odysseyDesignTokens.TypographySizeSubordinate,
   lineHeight: odysseyDesignTokens.TypographyLineHeightBody,
   marginTop: "4px",
+  maxWidth: orientation === "horizontal" ? "200px" : "170px",
   color: active
     ? odysseyDesignTokens.HueBlue400
     : completed
@@ -352,11 +400,13 @@ const Stepper = ({
               active={active}
               allowBackStep={allowBackStep}
               nonLinear={nonLinear}
+              orientation={orientation}
               StepIconComponent={(props) => (
                 <StepIcon
                   {...props}
                   completed={completed}
                   active={active}
+                  orientation={orientation}
                   stepNumber={index}
                   variant={variant}
                   odysseyDesignTokens={odysseyDesignTokens}
@@ -369,6 +419,7 @@ const Stepper = ({
                   odysseyDesignTokens={odysseyDesignTokens}
                   completed={completed}
                   active={active}
+                  orientation={orientation}
                 >
                   {step.description}
                 </StepDescription>
