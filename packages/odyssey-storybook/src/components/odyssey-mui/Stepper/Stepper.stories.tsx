@@ -198,7 +198,7 @@ export const WithLongDescription: StoryObj<StepperProps> = {
         description:
           "Tell us more about yourself including your role, department, and any relevant professional details.",
       },
-      { label: "Review" },
+      { label: "Review", description: "Confirm the details." },
     ],
   },
 };
