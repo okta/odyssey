@@ -186,7 +186,14 @@ const StepIconContainer = styled("div")<{
 
 const StepLabel = styled(MuiStepLabel, {
   shouldForwardProp: (prop) =>
-    !["odysseyDesignTokens", "orientation"].includes(prop as string),
+    ![
+      "odysseyDesignTokens",
+      "completed",
+      "active",
+      "allowBackStep",
+      "nonLinear",
+      "orientation",
+    ].includes(prop as string),
 })<{
   odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
   completed: boolean;
@@ -194,10 +201,10 @@ const StepLabel = styled(MuiStepLabel, {
   allowBackStep?: boolean;
   nonLinear?: boolean;
   orientation?: "horizontal" | "vertical";
-}>(({ completed, active, nonLinear, odysseyDesignTokens }) => ({
+}>(({ completed, active, nonLinear, odysseyDesignTokens, orientation }) => ({
   "& .MuiStepLabel-iconContainer": {
     paddingRight: "12px",
-    alignSelf: "flex-start", // Always align icons to the top
+    alignSelf: orientation === "horizontal" ? "center" : "flex-start", // Always align icons to the top
     paddingTop: "2px", // Fine-tune the vertical alignment consistently
   },
   "& .MuiStepLabel-label": {
