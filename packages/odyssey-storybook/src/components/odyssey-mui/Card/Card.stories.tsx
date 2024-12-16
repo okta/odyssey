@@ -20,10 +20,12 @@ import {
   cardVariantValues,
   Checkbox,
 } from "@okta/odyssey-react-mui";
+import { IconButton as MuiIconButton } from "@mui/material";
 import { CheckboxProps as MuiCheckboxProps } from "@okta/odyssey-react-mui";
 import { ChevronDownIcon, ChevronUpIcon } from "@okta/odyssey-react-mui/icons";
 import { jest } from "@storybook/jest";
 import { MouseEventHandler, useCallback, useState } from "react";
+import styled from "@emotion/styled";
 type CardMetaProps = Omit<
   CardProps,
   | "children"
@@ -117,6 +119,13 @@ const menuButtonChildren = (
   </>
 );
 
+const CheckboxContainer = styled("div")(() => ({
+  "& *": {
+    margin: 0,
+    display: "block",
+  },
+}));
+
 const BaseStory: StoryObj<CardMetaProps> = {
   render: function Base(args: CardMetaProps) {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -136,7 +145,11 @@ const BaseStory: StoryObj<CardMetaProps> = {
     }: {
       isChecked: boolean;
       onChange: MuiCheckboxProps["onChange"];
-    }) => <Checkbox isChecked={isChecked} onChange={onChange} />;
+    }) => (
+      <CheckboxContainer>
+        <Checkbox isChecked={isChecked} onChange={onChange} />
+      </CheckboxContainer>
+    );
 
     const ExpansionAccessory = ({
       isExpanded,
@@ -145,13 +158,9 @@ const BaseStory: StoryObj<CardMetaProps> = {
       isExpanded: boolean;
       onToggle: MouseEventHandler<HTMLButtonElement>;
     }) => (
-      <Button
-        ariaLabel={isExpanded ? "Collapse" : "Expand"}
-        endIcon={isExpanded ? <ChevronDownIcon /> : <ChevronUpIcon />}
-        variant="floating"
-        size="small"
-        onClick={onToggle}
-      />
+      <MuiIconButton size="small" onClick={onToggle}>
+        {isExpanded ? <ChevronDownIcon /> : <ChevronUpIcon />}
+      </MuiIconButton>
     );
 
     const Accessory = ({
@@ -283,5 +292,19 @@ export const Compact: StoryObj<CardMetaProps> = {
     accessory: true,
     button: true,
     variant: "compact",
+  },
+};
+
+export const Loading: StoryObj<CardMetaProps> = {
+  ...BaseStory,
+  args: {
+    image: true,
+    children: true,
+    menuButtonChildren: true,
+    detailPanel: true,
+    accessory: true,
+    button: true,
+    isLoading: true,
+    variant: "tile",
   },
 };
