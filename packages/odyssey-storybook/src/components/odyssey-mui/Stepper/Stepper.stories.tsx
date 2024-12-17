@@ -141,7 +141,7 @@ const navigateSteps = async (
 // Default template with controlled state
 const DefaultTemplate: StoryObj<StepperProps> = {
   render: function C(args) {
-    const [activeStep, setActiveStep] = useState(0);
+    const [activeStep, setActiveStep] = useState(args.activeStep || 0);
     const handleStepChange = (step: number) => {
       setActiveStep(step);
     };
@@ -155,10 +155,56 @@ const DefaultTemplate: StoryObj<StepperProps> = {
       />
     );
   },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    // Test initial button states
+    await step("verify initial button states", async () => {
+      const backButton = canvas.getByText("Back");
+      const nextButton = canvas.getByText("Next");
+      expect(backButton).toBeDisabled();
+      expect(nextButton).toBeEnabled();
+    });
+
+    // Test next navigation
+    await step("navigate forward", async () => {
+      const nextButton = canvas.getByText("Next");
+      userEvent.click(nextButton);
+      await waitFor(() => {
+        expect(canvas.getByText("Personal info")).toHaveAttribute(
+          "aria-selected",
+          "true",
+        );
+      });
+    });
+
+    // Test both buttons enabled in middle step
+    await step("verify middle step button states", async () => {
+      const backButton = canvas.getByText("Back");
+      const nextButton = canvas.getByText("Next");
+      expect(backButton).toBeEnabled();
+      expect(nextButton).toBeEnabled();
+    });
+
+    // Test back navigation
+    await step("navigate back", async () => {
+      const backButton = canvas.getByText("Back");
+      userEvent.click(backButton);
+      await waitFor(() => {
+        expect(canvas.getByText("Account details")).toHaveAttribute(
+          "aria-selected",
+          "true",
+        );
+      });
+    });
+  },
 };
 
 export const Default: StoryObj<StepperProps> = {
   ...DefaultTemplate,
+  args: {
+    activeStep: 1,
+  },
 };
 
 export const NonNumeric: StoryObj<StepperProps> = {
@@ -182,13 +228,37 @@ export const NonLinearNavigation: StoryObj<StepperProps> = {
     allowBackStep: true,
   },
   play: async ({ canvasElement, step }) => {
-    // Try to skip to last step
-    await navigateSteps({ canvasElement, step }, "Review");
+    const canvas = within(canvasElement);
 
-    await step("verify navigation", async () => {
-      const canvas = within(canvasElement);
-      const finishButton = canvas.getByText("Finish");
-      expect(finishButton).toBeEnabled();
+    // Test that future steps are not clickable by default
+    await step("verify future steps not clickable", async () => {
+      const reviewStep = canvas.getByText("Review");
+      userEvent.click(reviewStep);
+      await waitFor(() => {
+        // Should still be on first step
+        expect(canvas.getByText("Account details")).toHaveAttribute(
+          "aria-selected",
+          "true",
+        );
+      });
+    });
+
+    // Test skipping to last step when nonLinear is true
+    await navigateSteps({ canvasElement, step }, "Review");
+    await step("verify navigation allowed with nonLinear", async () => {
+      expect(canvas.getByText("Review")).toHaveAttribute(
+        "aria-selected",
+        "true",
+      );
+    });
+
+    // Test going back is allowed when allowBackStep is true
+    await navigateSteps({ canvasElement, step }, "Account details");
+    await step("verify back navigation allowed", async () => {
+      expect(canvas.getByText("Account details")).toHaveAttribute(
+        "aria-selected",
+        "true",
+      );
     });
   },
 };
@@ -215,6 +285,7 @@ export const WithLongDescription: StoryObj<StepperProps> = {
 export const VerticalUserOnboarding: StoryObj<StepperProps> = {
   ...DefaultTemplate,
   args: {
+    activeStep: 2,
     orientation: "vertical",
     steps: [
       {
