@@ -517,7 +517,7 @@ export const WithCustomColors: StoryObj<UiShellProps> = {
             sideNavProps: {
               ...sharedSideNavProps,
               logoProps: {
-                isSameBackgroundAsMain: true,
+                isSameBackgroundAsMain: false,
               },
               mainBackgroundColor: props.sideNavBackgroundColor,
             },

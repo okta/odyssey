@@ -41,7 +41,7 @@ const hexToRgb = (hexBackgroundColor: string): RgbColorObject | undefined => {
 export const generateContrastColors = (
   backgroundColor: string,
   odysseyDesignTokens: DesignTokens,
-): ContrastColors => {
+) => {
   // Convert hex to RGB
   const rgbFromHex = hexToRgb(backgroundColor);
 
@@ -49,26 +49,37 @@ export const generateContrastColors = (
     const { red, green, blue } = rgbFromHex;
 
     // Calculate relative luminance
-    const luminance = 0.299 * red + 0.587 * green + 0.114 * blue;
-
+    const luminance = 0.2126 * red + 0.7152 * green + 0.0722 * blue;
     // Determine if the color is light or dark.
-    // 128 is a magic number. This feels roughly where we should switch from dark to light.
+    // 128 is a magic number. This feels like roughly where we should switch from dark to light.
     const isLight = luminance > 128;
 
     const fontColor = isLight
       ? odysseyDesignTokens.TypographyColorBody
       : odysseyDesignTokens.HueNeutralWhite;
 
-    const fontColorInRgb = hexToRgb(fontColor);
+    const calculatedFontColorInRgb = hexToRgb(fontColor);
+    const lightFontColorInRgb = hexToRgb(odysseyDesignTokens.HueNeutralWhite);
+    const darkFontColorInRgb = hexToRgb(
+      odysseyDesignTokens.TypographyColorBody,
+    );
 
-    const fontColorRgbString = `${fontColorInRgb?.red}, ${fontColorInRgb?.green}, ${fontColorInRgb?.blue}`;
+    const calculatedFontRgbString = `${calculatedFontColorInRgb?.red}, ${calculatedFontColorInRgb?.green}, ${calculatedFontColorInRgb?.blue}`;
+    const lightFontRgbString = `${lightFontColorInRgb?.red}, ${lightFontColorInRgb?.green}, ${lightFontColorInRgb?.blue}`;
+    const darkFontRgbString = `${darkFontColorInRgb?.red}, ${darkFontColorInRgb?.green}, ${darkFontColorInRgb?.blue}`;
 
     return {
       fontColor,
-      focusRingColor: `rgba(${fontColorRgbString}, .8)`,
-      itemDisabledFontColor: `rgba(${fontColorRgbString}, .4)`,
-      itemHoverBackgroundColor: `rgba(${fontColorRgbString}, .1)`,
-      itemSelectedBackgroundColor: `rgba(${fontColorRgbString}, .15)`,
+      focusRingColor: `rgba(${calculatedFontRgbString}, .8)`,
+      itemDisabledFontColor: `rgba(${calculatedFontRgbString}, .4)`,
+      itemHoverBackgroundColor: isLight
+        ? `rgba(${lightFontRgbString}, .1)`
+        : `rgba(${darkFontRgbString}, .1)`,
+      itemSelectedBackgroundColor: isLight
+        ? `rgba(${lightFontRgbString}, .15)`
+        : `rgba(${darkFontRgbString}, .15)`,
     };
   }
+
+  return undefined;
 };
