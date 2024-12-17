@@ -33,7 +33,7 @@ export const useUiShellContrastColorContext = () => {
 };
 
 export type UiShellColorsProviderProps = {
-  sideNavBackgroundColor?: string;
+  sideNavBackgroundColor: string;
   topNavBackgroundColor?: string;
   contrastMode?: string;
 };
@@ -45,7 +45,6 @@ const UiShellColorsProvider = ({
 }: PropsWithChildren<UiShellColorsProviderProps>) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const sideNavContrastColors =
-    sideNavBackgroundColor &&
     sideNavBackgroundColor != odysseyDesignTokens.HueNeutralWhite
       ? generateContrastColors(
           sideNavBackgroundColor || odysseyDesignTokens.HueNeutralWhite,
