@@ -16,6 +16,7 @@ import type { statusSeverityValues } from "../../Status";
 
 export type SideNavLogoProps = {
   href?: string;
+  isSameBackgroundAsMain?: boolean;
 } & (
   | {
       /**
@@ -86,6 +87,9 @@ export type SideNavProps = {
    * Nav items in the side nav
    */
   sideNavItems: SideNavItem[];
+  fontColor?: string;
+  logoBackgroundColor?: string;
+  mainBackgroundColor?: string;
 } & (
   | {
       /**
