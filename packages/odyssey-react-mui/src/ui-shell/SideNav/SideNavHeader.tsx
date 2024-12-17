@@ -19,51 +19,72 @@ import {
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
 import { SideNavLogo } from "./SideNavLogo";
-import { SideNavProps } from "./types";
+import { SideNavLogoProps, SideNavProps } from "./types";
 import { Heading5 } from "../../Typography";
 import { TOP_NAV_HEIGHT } from "../TopNav";
+import { ContrastColors } from "../../createContrastColors";
+import { useUiShellContrastColorContext } from "../../ui-shell/UiShell/UiShellColorsProvider";
 
-const SideNavHeaderContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
+const SideNavHeaderContainer = styled("div")(() => ({
   position: "relative",
   display: "flex",
   flexDirection: "column",
-  backgroundColor: odysseyDesignTokens.HueNeutralWhite,
   zIndex: 1,
 }));
 
 const SideNavLogoContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
-  display: "flex",
-  alignItems: "center",
-  height: TOP_NAV_HEIGHT,
-  paddingBlock: odysseyDesignTokens.Spacing4,
-  paddingInline: odysseyDesignTokens.Spacing5,
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "isSameBackgroundAsMain",
+})(
+  ({
+    isSameBackgroundAsMain,
+    odysseyDesignTokens,
+  }: {
+    isSameBackgroundAsMain: SideNavLogoProps["isSameBackgroundAsMain"];
+    odysseyDesignTokens: DesignTokens;
+  }) => ({
+    display: "flex",
+    alignItems: "center",
+    height: TOP_NAV_HEIGHT,
+    paddingBlock: odysseyDesignTokens.Spacing4,
+    paddingInline: odysseyDesignTokens.Spacing5,
+    backgroundColor: isSameBackgroundAsMain
+      ? "transparent"
+      : odysseyDesignTokens.HueNeutralWhite,
 
-  "svg, img": {
-    maxHeight: "100%",
-    width: "auto",
-    maxWidth: "100%",
-  },
-}));
+    "svg, img": {
+      maxHeight: "100%",
+      width: "auto",
+      maxWidth: "100%",
+    },
+  }),
+);
 
 const SideNavHeadingContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  paddingBlock: odysseyDesignTokens.Spacing4,
-  paddingInline: odysseyDesignTokens.Spacing5,
-  width: "100%",
-
-  ["& .MuiTypography-root"]: {
-    margin: 0,
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "contrastFontColor",
+})(
+  ({
+    contrastFontColor,
+    odysseyDesignTokens,
+  }: {
+    contrastFontColor: ContrastColors["fontColor"];
+    odysseyDesignTokens: DesignTokens;
+  }) => ({
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingBlock: odysseyDesignTokens.Spacing4,
+    paddingInline: odysseyDesignTokens.Spacing5,
     width: "100%",
-  },
-}));
+
+    ["& .MuiTypography-root"]: {
+      margin: 0,
+      width: "100%",
+      color: contrastFontColor || "inherit",
+    },
+  }),
+);
 
 export type SideNavHeaderProps = {
   /**
@@ -82,10 +103,14 @@ const SideNavHeader = ({
   logoProps,
 }: SideNavHeaderProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const shellContrastColors = useUiShellContrastColorContext();
 
   return (
-    <SideNavHeaderContainer odysseyDesignTokens={odysseyDesignTokens}>
-      <SideNavLogoContainer odysseyDesignTokens={odysseyDesignTokens}>
+    <SideNavHeaderContainer>
+      <SideNavLogoContainer
+        isSameBackgroundAsMain={logoProps?.isSameBackgroundAsMain}
+        odysseyDesignTokens={odysseyDesignTokens}
+      >
         {isLoading ? (
           //  The skeleton takes the hardcoded dimensions of the Okta logo
           <Skeleton variant="rounded" height={24} width={67} />
@@ -95,7 +120,12 @@ const SideNavHeader = ({
       </SideNavLogoContainer>
 
       {appName && (
-        <SideNavHeadingContainer odysseyDesignTokens={odysseyDesignTokens}>
+        <SideNavHeadingContainer
+          contrastFontColor={
+            shellContrastColors?.sideNavContrastColors?.fontColor
+          }
+          odysseyDesignTokens={odysseyDesignTokens}
+        >
           <Heading5 component="h2">
             {isLoading ? <Skeleton /> : appName}
           </Heading5>

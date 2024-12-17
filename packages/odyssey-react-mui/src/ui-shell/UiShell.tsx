@@ -21,6 +21,8 @@ import {
   type UiShellNavComponentProps,
 } from "./UiShellContent";
 import { type ReactRootElements } from "../web-component/renderReactInWebComponent";
+import { UiShellColorsProvider } from "./UiShellColorsProvider";
+import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext";
 
 export const defaultComponentProps: UiShellNavComponentProps = {
   sideNavProps: undefined,
@@ -76,6 +78,7 @@ const UiShell = ({
   subscribeToPropChanges,
 }: UiShellProps) => {
   const [componentProps, setComponentProps] = useState(defaultComponentProps);
+  const odysseyDesignTokens = useOdysseyDesignTokens();
 
   useEffect(() => {
     const unsubscribe = subscribeToPropChanges((componentProps) => {
@@ -98,16 +101,23 @@ const UiShell = ({
       >
         <ErrorBoundary fallback={appComponent} onError={onError}>
           <CssBaseline />
-
-          <UiShellContent
-            {...componentProps}
-            appBackgroundContrastMode={appBackgroundContrastMode}
-            appComponent={appComponent}
-            hasStandardAppContentPadding={hasStandardAppContentPadding}
-            initialVisibleSections={initialVisibleSections}
-            onError={onError}
-            optionalComponents={optionalComponents}
-          />
+          <UiShellColorsProvider
+            contrastMode={appBackgroundContrastMode}
+            sideNavBackgroundColor={
+              componentProps?.sideNavProps?.mainBackgroundColor ||
+              odysseyDesignTokens.HueNeutralWhite
+            }
+          >
+            <UiShellContent
+              {...componentProps}
+              appBackgroundContrastMode={appBackgroundContrastMode}
+              appComponent={appComponent}
+              hasStandardAppContentPadding={hasStandardAppContentPadding}
+              initialVisibleSections={initialVisibleSections}
+              onError={onError}
+              optionalComponents={optionalComponents}
+            />
+          </UiShellColorsProvider>
         </ErrorBoundary>
       </OdysseyProvider>
     </ErrorBoundary>

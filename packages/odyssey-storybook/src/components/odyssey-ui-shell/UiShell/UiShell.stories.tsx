@@ -26,16 +26,26 @@ import {
   type UiShellProps,
 } from "@okta/odyssey-react-mui/ui-shell";
 import {
-  AddCircleIcon,
+  AppsIcon,
+  ClockIcon,
+  SettingsIcon,
   HomeIcon,
+  Fido2Icon,
+  LockIcon,
+  AddCircleIcon,
+  DownloadIcon,
   UserIcon,
+  DirectoryIcon,
+  ServerIcon,
+  FolderIcon,
+  NotificationIcon,
 } from "@okta/odyssey-react-mui/icons";
 import { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-const storybookMeta: Meta<UiShellProps> = {
+const storybookMeta: Meta<UiShellProps & { sideNavBackgroundColor?: string }> = {
   title: "UI Shell Components/UI Shell",
   component: UiShell,
   argTypes: {
@@ -47,24 +57,24 @@ const storybookMeta: Meta<UiShellProps> = {
           summary: "InputType",
         },
       },
-    },
-    hasStandardAppContentPadding: {
-      control: "boolean",
-      description:
-        "defaults to `true`. If `false`, the content area will have no padding provided",
-      table: {
-        type: {
-          summary: "boolean",
+      hasStandardAppContentPadding: {
+        control: "boolean",
+        description:
+          "defaults to `true`. If `false`, the content area will have no padding provided",
+        table: {
+          type: {
+            summary: "boolean",
+          },
         },
       },
-    },
-    initialVisibleSections: {
-      control: "text",
-      description:
-        "A list of UiShell components that should be (minimally) rendered initially, with their isLoading property set when applicable. Allows the initial visibility of UiShell components to be influenced.",
-      table: {
-        type: {
-          summary: "string",
+      initialVisibleSections: {
+        control: "text",
+        description:
+          "A list of UiShell components that should be (minimally) rendered initially, with their isLoading property set when applicable. Allows the initial visibility of UiShell components to be influenced.",
+        table: {
+          type: {
+            summary: "string",
+          },
         },
       },
     },
@@ -105,6 +115,10 @@ const storybookMeta: Meta<UiShellProps> = {
         type: {
           summary: "MouseEventHandler",
         },
+      },
+      sideNavBackgroundColor: {
+        control: "color",
+        name: "[STORY ONLY] Custom color for side nav background",
       },
     },
   },
@@ -154,34 +168,209 @@ const sharedSideNavProps: UiShellNavComponentProps["sideNavProps"] = {
   isCollapsible: true,
   sideNavItems: [
     {
-      id: "AddNewFolder",
+      id: "item1",
       label: "Add new folder",
       endIcon: <AddCircleIcon />,
       onClick: () => {},
     },
     {
-      id: "item0-0",
+      id: "item2",
       label: "Admin",
       isSectionHeader: true,
     },
     {
-      id: "item0-1",
-      href: "/?path=/story/labs-components-switch--default",
+      id: "item3",
+      href: "/?path=/docs/mui-components-typography--docs",
       label: "Users",
       startIcon: <UserIcon />,
     },
     {
-      id: "item1",
+      id: "item4",
       label: "Dashboard",
       startIcon: <HomeIcon />,
       isDisabled: true,
       nestedNavItems: [
         {
-          id: "item1-1",
+          id: "item4-1",
           href: "/",
           label: "Home",
         },
       ],
+    },
+    {
+      id: "item5",
+      href: "/",
+      label: "Applications",
+      startIcon: <AppsIcon />,
+    },
+    {
+      id: "item6",
+      label: "Onboarding",
+      startIcon: <FolderIcon />,
+      nestedNavItems: [
+        {
+          id: "item6-1",
+          href: "/",
+          label: "Start",
+        },
+        {
+          id: "item6-2",
+          href: "/",
+          label: "Tasks",
+        },
+        {
+          id: "item6-3",
+          href: "/",
+          label: "Getting Started",
+        },
+      ],
+    },
+    {
+      id: "item7",
+      href: "/",
+      label: "Directory",
+      startIcon: <DirectoryIcon />,
+    },
+    {
+      id: "item8",
+      label: "Resource Management",
+      isSectionHeader: true,
+    },
+    {
+      id: "item9",
+      href: "/",
+      label: "Kubernetes",
+      startIcon: <ServerIcon />,
+      severity: "info",
+      statusLabel: "BETA",
+    },
+    {
+      id: "item10",
+      href: "/",
+      label: "Reports",
+      startIcon: <DownloadIcon />,
+    },
+    {
+      id: "item11",
+      href: "/",
+      label: "Identify Governance",
+      target: "_blank",
+      isDisabled: true,
+      startIcon: <Fido2Icon />,
+    },
+    {
+      id: "item12",
+      href: "/",
+      label: "Workflows",
+      target: "_blank",
+      startIcon: <ClockIcon />,
+    },
+    {
+      id: "item13",
+      label: "Security Administration",
+      isSectionHeader: true,
+    },
+    {
+      id: "item14",
+      href: "/",
+      label: "Security",
+      startIcon: <LockIcon />,
+      endIcon: <LockIcon />,
+    },
+    {
+      id: "item15",
+      label: "Settings",
+      isDefaultExpanded: true,
+      isSortable: true,
+      startIcon: <SettingsIcon />,
+      nestedNavItems: [
+        {
+          id: "item15-1",
+          href: "/",
+          label: "General",
+        },
+        {
+          id: "item15-2",
+          href: "/",
+          label: "Custom Domain",
+          isSelected: true,
+        },
+        {
+          id: "item15-3",
+          label: "Account Management",
+        },
+        {
+          id: "item15-4",
+          href: "/",
+          label: "Authentication Policies",
+          isDisabled: true,
+        },
+        {
+          id: "item15-5",
+          href: "/",
+          label: "IDP Configuration",
+        },
+      ],
+    },
+    {
+      id: "item16",
+      href: "/",
+      label: "System Configuration",
+      startIcon: <FolderIcon />,
+    },
+    {
+      id: "item17-0",
+      label: "Enduser",
+      isSectionHeader: true,
+    },
+    {
+      id: "item17",
+      label: "My Apps",
+      isDefaultExpanded: true,
+      isSortable: true,
+      startIcon: <HomeIcon />,
+      nestedNavItems: [
+        {
+          id: "item17-1",
+          label: "Recently Used",
+        },
+        {
+          id: "item17-2",
+          label: "Work",
+        },
+        {
+          id: "item17-3",
+          label: "Add section",
+          endIcon: <AddCircleIcon />,
+        },
+      ],
+    },
+    {
+      id: "item18",
+      label: "Notifications",
+      startIcon: <NotificationIcon />,
+      count: 1,
+    },
+    {
+      id: "item19",
+      label: "Add apps",
+      startIcon: <AppsIcon />,
+    },
+  ],
+  footerItems: [
+    {
+      id: "footer-item-1",
+      label: "Docs",
+      href: "/",
+    },
+    {
+      id: "footer-item-2",
+      label: "Privacy",
+    },
+    {
+      id: "footer-item-3",
+      label: "Security",
+      href: "/",
     },
   ],
 };
@@ -296,6 +485,47 @@ export const LoadingData: StoryObj<UiShellProps> = {
 
       return () => {};
     },
+  },
+};
+
+export const WithCustomColors: StoryObj<UiShellProps> = {
+  args: {
+    optionalComponents: sharedOptionalComponents,
+    // subscribeToPropChanges: (subscriber) => {
+    //   subscriber({
+    //     topNavProps: sharedTopNavProps,
+    //     sideNavProps: {
+    //       ...sharedSideNavProps,
+    //       logoProps: {
+    //         isSameBackgroundAsMain: true,
+    //       },
+    //       mainBackgroundColor: "#e87474",
+    //     },
+    //   });
+
+    //   return () => {};
+    // },
+  },
+  render: (props: UiShellProps & { sideNavBackgroundColor?: string }) => {
+    return (
+      <UiShell
+        {...props}
+        subscribeToPropChanges={(subscriber) => {
+          subscriber({
+            topNavProps: sharedTopNavProps,
+            sideNavProps: {
+              ...sharedSideNavProps,
+              logoProps: {
+                isSameBackgroundAsMain: true,
+              },
+              mainBackgroundColor: props.sideNavBackgroundColor,
+            },
+          });
+
+          return () => {};
+        }}
+      />
+    );
   },
 };
 

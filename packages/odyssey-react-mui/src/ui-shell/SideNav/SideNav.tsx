@@ -22,7 +22,11 @@ import {
 } from "react";
 import { Skeleton } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { arrayMove } from "@dnd-kit/sortable";
+import { UniqueIdentifier } from "@dnd-kit/core";
+import { ErrorBoundary } from "react-error-boundary";
 
+import { ContrastColors } from "../../createContrastColors";
 import { NavAccordion } from "./NavAccordion";
 import {
   DesignTokens,
@@ -40,9 +44,7 @@ import { SideNavItemContentContext } from "./SideNavItemContentContext";
 import { SideNavToggleButton } from "./SideNavToggleButton";
 import { SortableList } from "./SortableList/SortableList";
 import { Overline } from "../../Typography";
-import { arrayMove } from "@dnd-kit/sortable";
-import { UniqueIdentifier } from "@dnd-kit/core";
-import { ErrorBoundary } from "react-error-boundary";
+import { useUiShellContrastColorContext } from "../../ui-shell/UiShellColorsProvider";
 
 export const DEFAULT_SIDE_NAV_WIDTH = "300px";
 
@@ -97,29 +99,23 @@ const StyledOpacityTransitionContainer = styled("div", {
 
 const StyledSideNav = styled("nav", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "isSideNavCollapsed",
-})<{
-  odysseyDesignTokens: DesignTokens;
-  isSideNavCollapsed: boolean;
-}>(({ odysseyDesignTokens, isSideNavCollapsed }) => ({
-  position: "relative",
-  display: "inline-block",
-  height: "100%",
-  backgroundColor: odysseyDesignTokens.HueNeutralWhite,
-
-  "&::after": {
-    backgroundColor: odysseyDesignTokens.HueNeutral200,
-    content: "''",
+    prop !== "odysseyDesignTokens" &&
+    prop !== "isSideNavCollapsed" &&
+    prop !== "backgroundColor",
+})(
+  ({
+    backgroundColor,
+    isSideNavCollapsed,
+    odysseyDesignTokens,
+  }: {
+    backgroundColor: SideNavProps["mainBackgroundColor"];
+    isSideNavCollapsed: boolean;
+    odysseyDesignTokens: DesignTokens;
+  }) => ({
+    position: "relative",
+    display: "inline-block",
     height: "100%",
-    opacity: 0,
-    position: "absolute",
-    right: 0,
-    top: 0,
-    transform: `translateX(0)`,
-    transition: `opacity ${odysseyDesignTokens.TransitionDurationMain}, transform ${odysseyDesignTokens.TransitionDurationMain}`,
-    width: odysseyDesignTokens.Spacing2,
-    zIndex: 2,
-  },
+    backgroundColor: backgroundColor || odysseyDesignTokens.HueNeutralWhite,
 
   "&:has([data-sidenav-toggle='true']:hover), &:has([data-sidenav-toggle='true']:focus-visible)":
     {
@@ -182,13 +178,22 @@ const SideNavScrollableContainer = styled("div", {
 }));
 
 const SectionHeaderContainer = styled("li", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
-  paddingBlock: odysseyDesignTokens.Spacing1,
-  paddingInline: odysseyDesignTokens.Spacing4,
-  marginBlock: `${odysseyDesignTokens.Spacing3}`,
-  color: odysseyDesignTokens.HueNeutral600,
-}));
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "contrastFontColor",
+})(
+  ({
+    contrastFontColor,
+    odysseyDesignTokens,
+  }: {
+    contrastFontColor: ContrastColors["fontColor"];
+    odysseyDesignTokens: DesignTokens;
+  }) => ({
+    paddingBlock: odysseyDesignTokens.Spacing1,
+    paddingInline: odysseyDesignTokens.Spacing4,
+    marginBlock: `${odysseyDesignTokens.Spacing3}`,
+    color: contrastFontColor || odysseyDesignTokens.HueNeutral600,
+  }),
+);
 
 const SideNavFooter = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
@@ -287,12 +292,15 @@ const SideNav = ({
   const [isSideNavCollapsed, setSideNavCollapsed] = useState(false);
   const [hasContentScrolled, setHasContentScrolled] = useState(false);
   const [isContentScrollable, setIsContentScrollable] = useState(false);
+  const [sideNavItemsList, updateSideNavItemsList] = useState(sideNavItems);
+
+  const shellColors = useUiShellContrastColorContext();
+  const odysseyDesignTokens: DesignTokens = useOdysseyDesignTokens();
+  const { t } = useTranslation();
+
   const scrollableContentRef = useRef<HTMLUListElement>(null);
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
   const intersectionObserverRef = useRef<IntersectionObserver | null>(null);
-  const odysseyDesignTokens: DesignTokens = useOdysseyDesignTokens();
-  const { t } = useTranslation();
-  const [sideNavItemsList, updateSideNavItemsList] = useState(sideNavItems);
 
   const blankElement = useMemo(() => <div />, []);
 
@@ -412,6 +420,18 @@ const SideNav = ({
     }
   }, [firstSideNavItemIdWithIsSelected]);
 
+  // useEffect(() => {
+  //   if (mainBackgroundColor && mainBackgroundColor !== odysseyDesignTokens.HueNeutralWhite) {
+  //     const generatedContrastColors = generateContrastColors(
+  //       mainBackgroundColor,
+  //       odysseyDesignTokens,
+  //     );
+
+  //     if (generatedContrastColors) {
+  //       setContrastColors(generatedContrastColors);
+  //     }
+  //   }
+  // },[mainBackgroundColor, odysseyDesignTokens])
   /**
    * We only want to put a ref on a node iff it is the first selected node.
    * This function returns the ref only if the ID provided matches the first
@@ -543,6 +563,7 @@ const SideNav = ({
   return (
     <StyledSideNav
       aria-label={t("navigation.label")}
+      backgroundColor={shellColors?.sideNavBackgroundColor}
       id="side-nav-expandable"
       isSideNavCollapsed={isSideNavCollapsed}
       odysseyDesignTokens={odysseyDesignTokens}
@@ -566,8 +587,8 @@ const SideNav = ({
             odysseyDesignTokens={odysseyDesignTokens}
           >
             <SideNavHeaderContainer
-              odysseyDesignTokens={odysseyDesignTokens}
               hasContentScrolled={hasContentScrolled}
+              odysseyDesignTokens={odysseyDesignTokens}
             >
               <SideNavHeader
                 appName={appName}
@@ -601,6 +622,9 @@ const SideNav = ({
                         return (
                           <ErrorBoundary fallback={blankElement}>
                             <SectionHeaderContainer
+                              contrastFontColor={
+                                shellColors?.sideNavContrastColors?.fontColor
+                              }
                               id={id}
                               key={id}
                               odysseyDesignTokens={odysseyDesignTokens}
