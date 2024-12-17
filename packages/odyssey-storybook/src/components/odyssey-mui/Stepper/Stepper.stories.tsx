@@ -108,9 +108,18 @@ const storybookMeta: Meta<StepperProps> = {
 export default storybookMeta;
 
 const defaultSteps = [
-  { label: "Account details" },
-  { label: "Personal info" },
-  { label: "Review" },
+  {
+    label: "Account details",
+    description: "Setup login and preferences",
+  },
+  {
+    label: "Personal info",
+    description: "Basic user information",
+  },
+  {
+    label: "Review",
+    description: "Verify all information",
+  },
 ];
 
 // Helper function to test step navigation

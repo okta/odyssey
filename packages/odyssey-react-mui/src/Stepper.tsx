@@ -82,17 +82,43 @@ const StyledStep = styled(MuiStep, {
 
 const StepperContainer = styled(MuiStepper, {
   shouldForwardProp: (prop) =>
-    !["odysseyDesignTokens"].includes(prop as string),
+    !["odysseyDesignTokens", "allowBackStep", "nonLinear"].includes(
+      prop as string,
+    ),
 })<{
   odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
-}>(({ orientation, odysseyDesignTokens }) => ({
+  orientation?: "horizontal" | "vertical";
+  allowBackStep?: boolean;
+  nonLinear?: boolean;
+  activeStep: number;
+}>(({ orientation, odysseyDesignTokens, allowBackStep, nonLinear }) => ({
   ...(orientation === "horizontal" && {
     justifyContent: "flex-start", // Align steps to the start
     "& .MuiStep-root": {
       flex: "0 0 auto", // Prevent flex growth
       padding: "12px 16px",
-      "&:last-child": {
-        paddingRight: 0, // Remove padding from last step
+      borderRadius: "12px",
+
+      // Only style steps that can be interacted with
+      "&:not(:has(.Mui-active))": {
+        // Exclude steps with active labels
+        "&.Mui-completed": {
+          "&:hover": {
+            backgroundColor:
+              nonLinear || allowBackStep
+                ? odysseyDesignTokens.HueGreen300
+                : "transparent",
+            cursor: nonLinear || allowBackStep ? "pointer" : "default",
+          },
+        },
+        "&:not(.Mui-completed)": {
+          "&:hover": {
+            backgroundColor: nonLinear
+              ? odysseyDesignTokens.HueNeutral300
+              : "transparent",
+            cursor: nonLinear ? "pointer" : "default",
+          },
+        },
       },
     },
   }),
@@ -201,37 +227,66 @@ const StepLabel = styled(MuiStepLabel, {
   allowBackStep?: boolean;
   nonLinear?: boolean;
   orientation?: "horizontal" | "vertical";
-}>(({ completed, active, nonLinear, odysseyDesignTokens, orientation }) => ({
-  "& .MuiStepLabel-iconContainer": {
-    paddingRight: "12px",
-    alignSelf: orientation === "horizontal" ? "center" : "flex-start", // Always align icons to the top
-    paddingTop: "2px", // Fine-tune the vertical alignment consistently
-  },
-  "& .MuiStepLabel-label": {
-    fontFamily: "inherit",
-    fontSize: odysseyDesignTokens.TypographySizeHeading6,
-    fontWeight: "600",
-    lineHeight: odysseyDesignTokens.TypographyLineHeightHeading6,
-    color: active
-      ? odysseyDesignTokens.HueBlue600
-      : completed
-        ? odysseyDesignTokens.HueNeutral800
-        : odysseyDesignTokens.HueNeutral700,
-
-    "&.Mui-active": {
-      color: odysseyDesignTokens.HueBlue700,
+}>(
+  ({
+    completed,
+    active,
+    nonLinear,
+    allowBackStep,
+    odysseyDesignTokens,
+    orientation,
+  }) => ({
+    "& .MuiStepLabel-iconContainer": {
+      paddingRight: "12px",
+      alignSelf: orientation === "horizontal" ? "center" : "flex-start",
+      paddingTop: "2px",
+      cursor: "default", // Always default cursor for icons
     },
-
-    "&:hover": {
-      cursor: nonLinear && !active ? "pointer" : "default",
+    "& .MuiStepLabel-label": {
+      fontFamily: "inherit",
+      fontSize: odysseyDesignTokens.TypographySizeHeading6,
+      fontWeight: "600",
+      lineHeight: odysseyDesignTokens.TypographyLineHeightHeading6,
       color: active
-        ? odysseyDesignTokens.HueBlue600 // No hover color change for active
+        ? odysseyDesignTokens.HueBlue600
         : completed
-          ? odysseyDesignTokens.HueNeutral800 // Keep color same for completed
-          : odysseyDesignTokens.HueNeutral900,
+          ? odysseyDesignTokens.HueNeutral800
+          : odysseyDesignTokens.HueNeutral700,
+
+      "&.Mui-active": {
+        color: odysseyDesignTokens.HueBlue700,
+      },
     },
-  },
-}));
+    // Apply hover styles to the whole step when interactive
+    "&:hover": {
+      cursor:
+        !active && (nonLinear || (allowBackStep && completed))
+          ? "pointer"
+          : "default",
+      "& .MuiStepLabel-label": {
+        color:
+          (nonLinear || allowBackStep) && !active
+            ? odysseyDesignTokens.HueNeutral800 // Interactive hover
+            : active
+              ? odysseyDesignTokens.HueBlue600 // Keep active color
+              : completed
+                ? odysseyDesignTokens.HueNeutral800 // Keep completed color
+                : odysseyDesignTokens.HueNeutral900, // Default hover
+      },
+      "& .MuiStepLabel-labelContainer div": {
+        // Target the description div directly
+        color:
+          (nonLinear || allowBackStep) && !active
+            ? odysseyDesignTokens.HueNeutral800 // Interactive hover
+            : active
+              ? odysseyDesignTokens.HueBlue400 // Keep active color
+              : completed
+                ? odysseyDesignTokens.HueNeutral500 // Keep completed color
+                : odysseyDesignTokens.HueNeutral600, // Keep default color
+      },
+    },
+  }),
+);
 
 const StepDescription = styled("div")<{
   odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
@@ -240,6 +295,7 @@ const StepDescription = styled("div")<{
   orientation?: "horizontal" | "vertical";
 }>(({ completed, active, odysseyDesignTokens, orientation }) => ({
   fontSize: odysseyDesignTokens.TypographySizeSubordinate,
+  fontWeight: "normal",
   lineHeight: odysseyDesignTokens.TypographyLineHeightBody,
   marginTop: "4px",
   maxWidth: orientation === "horizontal" ? "200px" : "170px",
@@ -248,14 +304,7 @@ const StepDescription = styled("div")<{
     : completed
       ? odysseyDesignTokens.HueNeutral500
       : odysseyDesignTokens.HueNeutral600,
-
-  "&:hover": {
-    color: active
-      ? odysseyDesignTokens.HueBlue400 // No color change for active
-      : completed
-        ? odysseyDesignTokens.HueNeutral500 // Keep color same for completed
-        : odysseyDesignTokens.HueNeutral800,
-  },
+  className: "MuiStepDescription-root",
 }));
 
 const StepperDot = styled("div")<{
@@ -395,6 +444,8 @@ const Stepper = ({
       orientation={orientation}
       odysseyDesignTokens={odysseyDesignTokens}
       data-se={testId}
+      allowBackStep={allowBackStep}
+      nonLinear={nonLinear}
     >
       {steps.map((step, index) => {
         const completed = index < activeStep;
