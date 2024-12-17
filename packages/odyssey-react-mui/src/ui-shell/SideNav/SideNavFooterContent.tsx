@@ -21,20 +21,30 @@ import type { SideNavFooterItem } from "./types";
 import { Box } from "../../Box";
 import { Link } from "../../Link";
 import { useTranslation } from "react-i18next";
+import { useUiShellContrastColorContext } from "../../ui-shell/UiShellColorsProvider";
 
 const StyledFooterNav = styled("nav")({
   display: "flex",
 });
 
 const StyledFooterItemContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
-  "& + &": {
-    marginInlineStart: odysseyDesignTokens.Spacing4,
-    paddingInlineStart: odysseyDesignTokens.Spacing4,
-    borderInlineStart: `1px solid ${odysseyDesignTokens.HueNeutral300}`,
-  },
-}));
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "borderColor",
+})(
+  ({
+    borderColor,
+    odysseyDesignTokens,
+  }: {
+    borderColor?: string;
+    odysseyDesignTokens: DesignTokens;
+  }) => ({
+    "& + &": {
+      marginInlineStart: odysseyDesignTokens.Spacing4,
+      paddingInlineStart: odysseyDesignTokens.Spacing4,
+      borderInlineStart: `1px solid ${borderColor || odysseyDesignTokens.HueNeutral300}`,
+    },
+  }),
+);
 
 const SideNavFooterContent = ({
   footerItems,
@@ -43,10 +53,12 @@ const SideNavFooterContent = ({
 }) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
+  const shellColors = useUiShellContrastColorContext();
 
   const memoizedFooterContent = useMemo(() => {
     return footerItems?.map((item) => (
       <StyledFooterItemContainer
+        borderColor={shellColors?.sideNavContrastColors?.fontColor}
         key={item.id}
         odysseyDesignTokens={odysseyDesignTokens}
         role="menuitem"
