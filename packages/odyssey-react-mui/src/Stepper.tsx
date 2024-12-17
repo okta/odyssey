@@ -95,8 +95,8 @@ const StepperContainer = styled(MuiStepper, {
     justifyContent: "flex-start", // Align steps to the start
     "& .MuiStep-root": {
       flex: "0 0 auto", // Prevent flex growth
-      padding: "12px 16px",
-      borderRadius: "12px",
+      padding: `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
+      borderRadius: odysseyDesignTokens.BorderRadiusMain,
 
       "&:not(:has(.Mui-active))": {
         // Exclude steps with active labels
@@ -155,7 +155,7 @@ const StepperContainer = styled(MuiStepper, {
     orientation === "horizontal"
       ? `${odysseyDesignTokens.Spacing1} ${odysseyDesignTokens.Spacing2}`
       : odysseyDesignTokens.Spacing3,
-  borderRadius: "12px",
+  borderRadius: odysseyDesignTokens.BorderRadiusMain,
   ...(orientation === "vertical" && {
     "& .MuiStep-root": {
       position: "relative",
@@ -204,8 +204,14 @@ const StepIconContainer = styled("div")<{
   variant: "numeric" | "nonNumeric";
   odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
 }>(({ completed, active, variant, odysseyDesignTokens }) => ({
-  width: variant === "numeric" ? "24px" : "16px",
-  height: variant === "numeric" ? "24px" : "16px",
+  width:
+    variant === "numeric"
+      ? odysseyDesignTokens.Spacing5
+      : odysseyDesignTokens.Spacing3,
+  height:
+    variant === "numeric"
+      ? odysseyDesignTokens.Spacing5
+      : odysseyDesignTokens.Spacing3,
   borderRadius: "50%",
   display: "flex",
   alignItems: "center",
@@ -229,8 +235,14 @@ const StepIconContainer = styled("div")<{
   transition: "all 0.2s",
 
   "& svg": {
-    width: variant === "numeric" ? "16px" : "12px",
-    height: variant === "numeric" ? "16px" : "12px",
+    width:
+      variant === "numeric"
+        ? odysseyDesignTokens.Spacing4
+        : odysseyDesignTokens.Spacing3,
+    height:
+      variant === "numeric"
+        ? odysseyDesignTokens.Spacing4
+        : odysseyDesignTokens.Spacing3,
   },
 }));
 
