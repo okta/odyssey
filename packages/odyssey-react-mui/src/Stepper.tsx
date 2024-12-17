@@ -309,6 +309,18 @@ const StepDescription = styled("div")<{
   className: "MuiStepDescription-root",
 }));
 
+const StepNumber = styled("span")<{
+  odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
+  completed: boolean;
+  active: boolean;
+}>(({ completed, active, odysseyDesignTokens }) => ({
+  fontWeight: 700,
+  color:
+    completed || active
+      ? odysseyDesignTokens.HueNeutralWhite
+      : odysseyDesignTokens.HueNeutral900,
+}));
+
 const StepperDot = styled("div")<{
   status: "previous" | "current" | "next";
   odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
@@ -404,7 +416,13 @@ const StepIcon = ({
     {completed && variant === "numeric" ? (
       <CheckIcon />
     ) : variant === "numeric" ? (
-      <span style={{ fontWeight: 700 }}>{stepNumber + 1}</span>
+      <StepNumber
+        completed={completed}
+        active={active}
+        odysseyDesignTokens={odysseyDesignTokens}
+      >
+        {stepNumber + 1}
+      </StepNumber>
     ) : null}
   </StepIconContainer>
 );
