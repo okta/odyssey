@@ -22,6 +22,7 @@ import { Box } from "../../Box";
 import { Link } from "../../Link";
 import { useTranslation } from "react-i18next";
 import { useUiShellContrastColorContext } from "../../ui-shell/UiShell/UiShellColorsProvider";
+import { ContrastColors } from "../../createContrastColors";
 
 const StyledFooterNav = styled("nav")({
   display: "flex",
@@ -35,6 +36,7 @@ const StyledFooterItemContainer = styled("div", {
     borderColor,
     odysseyDesignTokens,
   }: {
+    borderColor: ContrastColors["fontColor"];
     odysseyDesignTokens: DesignTokens;
   }) => ({
     "& + &": {
@@ -69,7 +71,7 @@ const SideNavFooterContent = ({
         )}
       </StyledFooterItemContainer>
     ));
-  }, [footerItems, odysseyDesignTokens]);
+  }, [footerItems, odysseyDesignTokens, shellColors]);
 
   return (
     <StyledFooterNav role="menubar" aria-label={t("navigation.footer")}>
