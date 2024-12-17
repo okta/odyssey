@@ -94,9 +94,13 @@ const SideNavHeader = ({
         )}
       </SideNavLogoContainer>
 
-      <SideNavHeadingContainer odysseyDesignTokens={odysseyDesignTokens}>
-        <Heading5 component="h2">{isLoading ? <Skeleton /> : appName}</Heading5>
-      </SideNavHeadingContainer>
+      {appName && (
+        <SideNavHeadingContainer odysseyDesignTokens={odysseyDesignTokens}>
+          <Heading5 component="h2">
+            {isLoading ? <Skeleton /> : appName}
+          </Heading5>
+        </SideNavHeadingContainer>
+      )}
     </SideNavHeaderContainer>
   );
 };

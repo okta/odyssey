@@ -149,7 +149,7 @@ const storybookMeta: Meta<SideNavProps> = {
     },
   },
   args: {
-    appName: "Admin",
+    appName: "",
     isCollapsible: true,
     isCompact: false,
     sideNavItems: [
@@ -319,6 +319,10 @@ const storybookMeta: Meta<SideNavProps> = {
           {
             id: "item17-1",
             label: "Recently Used",
+            isSortable: false,
+            onClick: () => {
+              console.log("Recent clicked");
+            },
           },
           {
             id: "item17-2",
@@ -326,8 +330,17 @@ const storybookMeta: Meta<SideNavProps> = {
           },
           {
             id: "item17-3",
+            label: "Group 1",
+          },
+          {
+            id: "item17-4",
+            label: "Group 2",
+          },
+          {
+            id: "item17-5",
             label: "Add section",
             endIcon: <AddCircleIcon />,
+            isSortable: false,
           },
         ],
       },
