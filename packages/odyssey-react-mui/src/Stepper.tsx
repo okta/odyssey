@@ -74,8 +74,7 @@ const StyledStep = styled(MuiStep, {
   odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
   orientation?: "horizontal" | "vertical";
   isClickable: boolean;
-}>(({ orientation, odysseyDesignTokens, isClickable }) => ({
-  cursor: isClickable ? "pointer" : "default",
+}>(({ orientation, odysseyDesignTokens }) => ({
   flex: orientation === "vertical" ? 1 : "none",
   padding: orientation === "vertical" ? `${odysseyDesignTokens.Spacing1} 0` : 0,
 }));
@@ -99,16 +98,29 @@ const StepperContainer = styled(MuiStepper, {
       padding: "12px 16px",
       borderRadius: "12px",
 
-      // Only style steps that can be interacted with
       "&:not(:has(.Mui-active))": {
         // Exclude steps with active labels
         "&.Mui-completed": {
           "&:hover": {
             backgroundColor:
               nonLinear || allowBackStep
-                ? odysseyDesignTokens.HueGreen300
+                ? odysseyDesignTokens.HueGreen50
                 : "transparent",
             cursor: nonLinear || allowBackStep ? "pointer" : "default",
+            // Apply hover text colors
+            "& .MuiStepLabel-label": {
+              color:
+                nonLinear || allowBackStep
+                  ? odysseyDesignTokens.HueNeutral800
+                  : odysseyDesignTokens.HueNeutral800,
+            },
+            // Apply hover description colors
+            "& .MuiStepLabel-labelContainer div": {
+              color:
+                nonLinear || allowBackStep
+                  ? odysseyDesignTokens.HueNeutral800
+                  : odysseyDesignTokens.HueNeutral500,
+            },
           },
         },
         "&:not(.Mui-completed)": {
@@ -117,6 +129,18 @@ const StepperContainer = styled(MuiStepper, {
               ? odysseyDesignTokens.HueNeutral300
               : "transparent",
             cursor: nonLinear ? "pointer" : "default",
+            // Apply hover text colors
+            "& .MuiStepLabel-label": {
+              color: nonLinear
+                ? odysseyDesignTokens.HueNeutral800
+                : odysseyDesignTokens.HueNeutral900,
+            },
+            // Apply hover description colors
+            "& .MuiStepLabel-labelContainer div": {
+              color: nonLinear
+                ? odysseyDesignTokens.HueNeutral800
+                : odysseyDesignTokens.HueNeutral600,
+            },
           },
         },
       },
@@ -240,7 +264,6 @@ const StepLabel = styled(MuiStepLabel, {
       paddingRight: "12px",
       alignSelf: orientation === "horizontal" ? "center" : "flex-start",
       paddingTop: "2px",
-      cursor: "default", // Always default cursor for icons
     },
     "& .MuiStepLabel-label": {
       fontFamily: "inherit",
@@ -257,33 +280,12 @@ const StepLabel = styled(MuiStepLabel, {
         color: odysseyDesignTokens.HueBlue700,
       },
     },
-    // Apply hover styles to the whole step when interactive
+
     "&:hover": {
       cursor:
         !active && (nonLinear || (allowBackStep && completed))
           ? "pointer"
           : "default",
-      "& .MuiStepLabel-label": {
-        color:
-          (nonLinear || allowBackStep) && !active
-            ? odysseyDesignTokens.HueNeutral800 // Interactive hover
-            : active
-              ? odysseyDesignTokens.HueBlue600 // Keep active color
-              : completed
-                ? odysseyDesignTokens.HueNeutral800 // Keep completed color
-                : odysseyDesignTokens.HueNeutral900, // Default hover
-      },
-      "& .MuiStepLabel-labelContainer div": {
-        // Target the description div directly
-        color:
-          (nonLinear || allowBackStep) && !active
-            ? odysseyDesignTokens.HueNeutral800 // Interactive hover
-            : active
-              ? odysseyDesignTokens.HueBlue400 // Keep active color
-              : completed
-                ? odysseyDesignTokens.HueNeutral500 // Keep completed color
-                : odysseyDesignTokens.HueNeutral600, // Keep default color
-      },
     },
   }),
 );
@@ -300,10 +302,10 @@ const StepDescription = styled("div")<{
   marginTop: "4px",
   maxWidth: orientation === "horizontal" ? "200px" : "170px",
   color: active
-    ? odysseyDesignTokens.HueBlue400
+    ? odysseyDesignTokens.HueBlue600
     : completed
-      ? odysseyDesignTokens.HueNeutral500
-      : odysseyDesignTokens.HueNeutral600,
+      ? odysseyDesignTokens.HueNeutral600
+      : odysseyDesignTokens.HueNeutral700,
   className: "MuiStepDescription-root",
 }));
 
