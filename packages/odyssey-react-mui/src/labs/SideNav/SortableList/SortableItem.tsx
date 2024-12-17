@@ -26,6 +26,11 @@ import {
   useOdysseyDesignTokens,
 } from "../../../OdysseyDesignTokensContext";
 import { useTranslation } from "react-i18next";
+import {
+  UiShellColors,
+  useUiShellContrastColorContext,
+} from "../../../ui-shell/UiShell/UiShellColorsProvider";
+import { ContrastColors } from "../../../createContrastColors";
 
 type ItemProps = {
   id: UniqueIdentifier;
@@ -48,11 +53,14 @@ const SortableItemContext = createContext<Context>({
 
 const StyledSortableListItem = styled("li", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "isSelected",
+    prop !== "odysseyDesignTokens" &&
+    prop !== "isSelected" &&
+    prop !== "sideNavContrastColors",
 })<{
-  odysseyDesignTokens: DesignTokens;
   isSelected?: boolean;
-}>(({ odysseyDesignTokens, isSelected }) => ({
+  odysseyDesignTokens: DesignTokens;
+  sideNavContrastColors: UiShellColors["sideNavContrastColors"];
+}>(({ odysseyDesignTokens, isSelected, sideNavContrastColors }) => ({
   position: "relative",
 
   button: {
@@ -64,6 +72,9 @@ const StyledSortableListItem = styled("li", {
   svg: {
     path: {
       fill: "currentColor",
+      ...(sideNavContrastColors?.fontColor && {
+        fill: sideNavContrastColors.fontColor,
+      }),
     },
   },
 
@@ -79,6 +90,10 @@ const StyledSortableListItem = styled("li", {
     svg: {
       path: {
         fill: odysseyDesignTokens.TypographyColorAction,
+
+        ...(sideNavContrastColors?.fontColor && {
+          fill: sideNavContrastColors.fontColor,
+        }),
       },
     },
   }),
@@ -92,16 +107,17 @@ const StyledUl = styled("ul")({
 
 const StyledDragHandleButton = styled("button", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "isDragging",
+    prop !== "odysseyDesignTokens" &&
+    prop !== "isDragging" &&
+    prop !== "focusRingColor",
 })<{
-  odysseyDesignTokens: DesignTokens;
+  focusRingColor: ContrastColors["focusRingColor"];
   isDragging?: boolean;
-}>(({ odysseyDesignTokens, isDragging }) => ({
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens, isDragging, focusRingColor }) => ({
   position: "absolute",
   opacity: 0,
-  // paddingInlineStart: odysseyDesignTokens.Spacing4,
   padding: odysseyDesignTokens.Spacing2,
-  // paddingBlock: 0,
   border: "none",
   backgroundColor: "transparent",
   cursor: `${isDragging ? "grabbing" : "grab"}`,
@@ -115,6 +131,10 @@ const StyledDragHandleButton = styled("button", {
   "&:focus, &:focus-visible": {
     outline: "none",
     boxShadow: `inset 0 0 0 2px ${odysseyDesignTokens.PalettePrimaryMain}`,
+
+    ...(focusRingColor && {
+      boxShadow: `inset 0 0 0 2px ${focusRingColor}`,
+    }),
   },
 }));
 
@@ -127,15 +147,19 @@ export const DragHandle = ({ isDragging }: DragHandleProps) => {
   const { attributes, listeners, ref } = useContext(SortableItemContext);
   const odysseyDesignTokens: DesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
+  const shellContrastColors = useUiShellContrastColorContext();
 
   return (
     <StyledDragHandleButton
       {...attributes}
       {...listeners}
-      odysseyDesignTokens={odysseyDesignTokens}
+      aria-label={t("navigation.drag.handle")}
+      focusRingColor={
+        shellContrastColors?.sideNavContrastColors?.focusRingColor
+      }
       isDragging={isDragging}
       ref={ref}
-      aria-label={t("navigation.drag.handle")}
+      odysseyDesignTokens={odysseyDesignTokens}
     >
       <svg
         width="16"
@@ -170,6 +194,7 @@ export const SortableItem = ({
     transform,
     transition,
   } = useSortable({ id });
+
   const context: Context = useMemo(
     () => ({
       attributes,
@@ -178,21 +203,25 @@ export const SortableItem = ({
     }),
     [attributes, listeners, setActivatorNodeRef],
   );
+
   const style: CSSProperties = {
     opacity: isDragging ? 0.4 : undefined,
     transform: CSS.Translate.toString(transform),
     transition,
   };
 
+  const shellContrastColors = useUiShellContrastColorContext();
   const odysseyDesignTokens: DesignTokens = useOdysseyDesignTokens();
+
   return (
     <SortableItemContext.Provider value={context}>
       <StyledSortableListItem
         data-sortable-container="true"
-        ref={setNodeRef}
-        style={style}
-        odysseyDesignTokens={odysseyDesignTokens}
         isSelected={isSelected}
+        odysseyDesignTokens={odysseyDesignTokens}
+        ref={setNodeRef}
+        sideNavContrastColors={shellContrastColors?.sideNavContrastColors}
+        style={style}
       >
         {!isDisabled && <DragHandle isDragging={isDragging} />}
         <StyledUl>{children}</StyledUl>
