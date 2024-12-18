@@ -352,7 +352,8 @@ const StyledStepNumber = styled("span")<{
 const StyledStepperDot = styled("div")<{
   status: "previous" | "current" | "next";
   odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
-}>(({ status, odysseyDesignTokens }) => ({
+  isClickable: boolean;
+}>(({ status, odysseyDesignTokens, isClickable }) => ({
   width: odysseyDesignTokens.Spacing2,
   height: odysseyDesignTokens.Spacing2,
   borderRadius: "50%",
@@ -366,6 +367,13 @@ const StyledStepperDot = styled("div")<{
   background:
     status === "current" ? odysseyDesignTokens.HueNeutral500 : "transparent",
   margin: "0 2px",
+  cursor: isClickable ? "pointer" : "default",
+  "&:hover": isClickable
+    ? {
+        background: odysseyDesignTokens.HueNeutral300,
+        borderColor: odysseyDesignTokens.HueNeutral500,
+      }
+    : undefined,
 }));
 
 const StepperNavigation = ({
@@ -377,14 +385,17 @@ const StepperNavigation = ({
   nextButtonLabel,
 
   odysseyDesignTokens,
+  onStepClick,
+  isStepClickable,
 }: {
   totalSteps: number;
   currentStep: number;
   onBack: () => void;
   onNext: () => void;
+  onStepClick: (step: number) => void;
+  isStepClickable: (step: number) => boolean;
   previousButtonLabel?: string;
   nextButtonLabel?: string;
-  finishButtonLabel?: string;
   odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
 }) => {
   const { t } = useTranslation();
@@ -401,11 +412,19 @@ const StepperNavigation = ({
     let status: "previous" | "current" | "next" = "next";
     if (i === currentStep) status = "current";
     else if (i < currentStep) status = "previous";
+
+    const isClickable = isStepClickable(i);
+
     return (
       <StyledStepperDot
         key={i}
         status={status}
         odysseyDesignTokens={odysseyDesignTokens}
+        isClickable={isClickable}
+        onClick={() => isClickable && onStepClick(i)}
+        role="button"
+        tabIndex={isClickable ? 0 : -1}
+        aria-label={`Go to step ${i + 1}`}
       />
     );
   });
@@ -500,15 +519,19 @@ const Stepper = ({
       const canAdvance = nonLinear;
       const canGoBack = allowBackStep;
 
-      if (
-        (isCompleted && canGoBack) ||
-        (!isCompleted && canAdvance) ||
-        step === activeStep
-      ) {
+      if ((isCompleted && canGoBack) || (!isCompleted && canAdvance)) {
         onChange(step);
       }
     },
     [activeStep, allowBackStep, nonLinear, onChange],
+  );
+
+  const isStepClickable = useCallback(
+    (step: number) => {
+      const isCompleted = step < activeStep;
+      return (isCompleted && allowBackStep) || (!isCompleted && nonLinear);
+    },
+    [activeStep, allowBackStep, nonLinear],
   );
 
   return (
@@ -577,6 +600,8 @@ const Stepper = ({
           previousButtonLabel={previousButtonLabel}
           nextButtonLabel={nextButtonLabel}
           odysseyDesignTokens={odysseyDesignTokens}
+          onStepClick={handleStepClick}
+          isStepClickable={isStepClickable}
         />
       )}
     </StepperContainer>

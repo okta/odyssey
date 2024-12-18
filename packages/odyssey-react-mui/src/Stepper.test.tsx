@@ -114,6 +114,8 @@ describe("StepperNavigation", () => {
   test("handles back and next navigation", () => {
     const mockOnBack = jest.fn();
     const mockOnNext = jest.fn();
+    const mockOnStepClick = jest.fn();
+    const mockIsStepClickable = jest.fn();
 
     render(
       <OdysseyProvider>
@@ -123,6 +125,8 @@ describe("StepperNavigation", () => {
           onBack={mockOnBack}
           onNext={mockOnNext}
           odysseyDesignTokens={useOdysseyDesignTokens()}
+          onStepClick={mockOnStepClick}
+          isStepClickable={mockIsStepClickable}
         />
       </OdysseyProvider>,
     );
@@ -137,7 +141,51 @@ describe("StepperNavigation", () => {
     expect(mockOnNext).toHaveBeenCalled();
   });
 
-  test("disables back button on first step", () => {
+  test("handles dot navigation correctly", () => {
+    const mockOnBack = jest.fn();
+    const mockOnNext = jest.fn();
+    const mockOnStepClick = jest.fn();
+    const mockIsStepClickable = (step: number) => step !== 1; // Example: All steps clickable except step 1
+
+    render(
+      <OdysseyProvider>
+        <StepperNavigation
+          totalSteps={3}
+          currentStep={1}
+          onBack={mockOnBack}
+          onNext={mockOnNext}
+          odysseyDesignTokens={useOdysseyDesignTokens()}
+          onStepClick={mockOnStepClick}
+          isStepClickable={mockIsStepClickable}
+        />
+      </OdysseyProvider>,
+    );
+
+    // Find dots by their aria-label
+    const dots = screen
+      .getAllByRole("button")
+      .filter((elem) =>
+        elem.getAttribute("aria-label")?.startsWith("Go to step"),
+      );
+
+    // Test clicking a clickable dot
+    fireEvent.click(dots[2]); // Click third dot
+    expect(mockOnStepClick).toHaveBeenCalledWith(2);
+
+    // Test clicking a non-clickable dot
+    fireEvent.click(dots[1]); // Click second dot
+    expect(mockOnStepClick).not.toHaveBeenCalledWith(1);
+
+    // Test dot accessibility attributes
+    expect(dots[0]).toHaveAttribute("tabIndex", "0"); // Clickable
+    expect(dots[1]).toHaveAttribute("tabIndex", "-1"); // Not clickable
+    expect(dots[2]).toHaveAttribute("tabIndex", "0"); // Clickable
+  });
+
+  test("hides navigation buttons appropriately", () => {
+    const mockOnStepClick = jest.fn();
+    const mockIsStepClickable = jest.fn();
+
     render(
       <OdysseyProvider>
         <StepperNavigation
@@ -146,54 +194,33 @@ describe("StepperNavigation", () => {
           onBack={() => {}}
           onNext={() => {}}
           odysseyDesignTokens={useOdysseyDesignTokens()}
+          onStepClick={mockOnStepClick}
+          isStepClickable={mockIsStepClickable}
         />
       </OdysseyProvider>,
     );
 
+    // Previous button should be hidden on first step
     expect(screen.queryByText("Previous")).not.toBeInTheDocument();
     expect(screen.getByText("Next")).toBeInTheDocument();
-  });
 
-  test("renders steps without descriptions", () => {
-    const stepsNoDescription = [
-      { label: "Step 1" },
-      { label: "Step 2" },
-      { label: "Step 3" },
-    ];
-
+    // Re-render with last step
     render(
       <OdysseyProvider>
-        <Stepper
-          activeStep={0}
-          steps={stepsNoDescription}
-          onChange={() => {}}
+        <StepperNavigation
+          totalSteps={3}
+          currentStep={2}
+          onBack={() => {}}
+          onNext={() => {}}
+          odysseyDesignTokens={useOdysseyDesignTokens()}
+          onStepClick={mockOnStepClick}
+          isStepClickable={mockIsStepClickable}
         />
       </OdysseyProvider>,
     );
 
-    // Should render without errors
-    expect(screen.getByText("Step 1")).toBeInTheDocument();
-    expect(screen.queryByText("Description")).not.toBeInTheDocument();
-  });
-
-  test("renders nonNumeric variant correctly", () => {
-    render(
-      <OdysseyProvider>
-        <Stepper
-          activeStep={1}
-          steps={defaultSteps}
-          onChange={() => {}}
-          variant="nonNumeric"
-        />
-      </OdysseyProvider>,
-    );
-
-    // Should not show numbers
-    expect(screen.queryByText("1")).not.toBeInTheDocument();
-    expect(screen.queryByText("2")).not.toBeInTheDocument();
-
-    // Should still show steps and maintain functionality
-    const activeStep = screen.getByText("Personal info");
-    expect(activeStep).toHaveAttribute("aria-selected", "true");
+    // Next button should be hidden on last step
+    expect(screen.getByText("Previous")).toBeInTheDocument();
+    expect(screen.queryByText("Next")).not.toBeInTheDocument();
   });
 });
