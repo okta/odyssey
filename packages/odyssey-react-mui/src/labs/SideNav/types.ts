@@ -53,7 +53,7 @@ export type SideNavProps = {
   /**
    * Side Nav header text that is usually reserved to show the App name
    */
-  appName: string;
+  appName?: string;
   /**
    *  Determines whether the side nav is collapsible
    */

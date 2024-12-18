@@ -149,7 +149,7 @@ const storybookMeta: Meta<SideNavProps> = {
     },
   },
   args: {
-    appName: "",
+    appName: "Admin Console",
     isCollapsible: true,
     isCompact: false,
     sideNavItems: [
@@ -304,57 +304,6 @@ const storybookMeta: Meta<SideNavProps> = {
         label: "System Configuration",
         startIcon: <FolderIcon />,
       },
-      {
-        id: "item17-0",
-        label: "Enduser",
-        isSectionHeader: true,
-      },
-      {
-        id: "item17",
-        label: "My Apps",
-        isDefaultExpanded: true,
-        isSortable: true,
-        startIcon: <HomeIcon />,
-        nestedNavItems: [
-          {
-            id: "item17-1",
-            label: "Recently Used",
-            isSortable: false,
-            onClick: () => {
-              console.log("Recent clicked");
-            },
-          },
-          {
-            id: "item17-2",
-            label: "Work",
-          },
-          {
-            id: "item17-3",
-            label: "Group 1",
-          },
-          {
-            id: "item17-4",
-            label: "Group 2",
-          },
-          {
-            id: "item17-5",
-            label: "Add section",
-            endIcon: <AddCircleIcon />,
-            isSortable: false,
-          },
-        ],
-      },
-      {
-        id: "item18",
-        label: "Notifications",
-        startIcon: <NotificationIcon />,
-        count: 1,
-      },
-      {
-        id: "item19",
-        label: "Add apps",
-        startIcon: <AppsIcon />,
-      },
     ],
     footerItems: [
       {
@@ -441,6 +390,67 @@ export const Default: StoryObj<typeof SideNav> = {
         expect(navElement).toBeVisible();
       });
     });
+  },
+};
+
+export const SortableSideNav: StoryObj<typeof SideNav> = {
+  args: {
+    appName: "",
+    sideNavItems: [
+      {
+        id: "item17",
+        label: "My Apps",
+        isDefaultExpanded: true,
+        isSortable: true,
+        startIcon: <HomeIcon />,
+        nestedNavItems: [
+          {
+            id: "item17-1",
+            label: "Recently Used",
+            isSortable: false,
+          },
+          {
+            id: "item17-2",
+            label: "Work",
+            isSortable: true,
+          },
+          {
+            id: "item17-3",
+            label: "Group 1",
+            isSortable: true,
+          },
+          {
+            id: "item17-4",
+            label: "Group 2",
+            isSortable: true,
+          },
+          {
+            id: "item17-5",
+            label: "Add section",
+            endIcon: <AddCircleIcon />,
+            isSortable: false,
+          },
+        ],
+      },
+      {
+        id: "item18",
+        label: "Notifications",
+        startIcon: <NotificationIcon />,
+        count: 1,
+      },
+      {
+        id: "item19",
+        label: "Add apps",
+        startIcon: <AppsIcon />,
+      },
+    ],
+  },
+  render: (props) => {
+    return (
+      <div style={{ height: "100vh" }}>
+        <SideNav {...props} />
+      </div>
+    );
   },
 };
 

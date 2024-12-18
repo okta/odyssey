@@ -69,7 +69,7 @@ export type SideNavHeaderProps = {
   /**
    * The app's name.
    */
-  appName: string;
+  appName?: string;
   /**
    * If the side nav currently has no items, it will be loading.
    */
