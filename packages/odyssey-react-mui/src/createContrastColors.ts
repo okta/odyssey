@@ -50,13 +50,25 @@ export const generateContrastColors = (
 
     // Calculate relative luminance
     const luminance = 0.2126 * red + 0.7152 * green + 0.0722 * blue;
-    // Determine if the color is light or dark.
-    // 128 is a magic number. This feels like roughly where we should switch from dark to light.
-    const isLight = luminance > 128;
 
-    const fontColor = isLight
-      ? odysseyDesignTokens.TypographyColorBody
-      : odysseyDesignTokens.HueNeutralWhite;
+    // 128 is a magic number. This feels like roughly where we should switch from dark to light.
+    const LUMINANCE_THRESHOLD = 128;
+    const LUMINANCE_EDGE_MIN = 108;
+    const LUMINANCE_EDGE_MAX = 142;
+
+    // Luminance values between LUMINANCE_EDGE_MIN-LUMINANCE_EDGE_MAX can cause contrast ration issues
+    // Using #000000 helps in these cases
+    const luminanceValueInEdgeRange =
+      luminance > LUMINANCE_EDGE_MIN && luminance < LUMINANCE_EDGE_MAX;
+
+    // Determine if the color is light or dark.
+    const isLight = luminance > LUMINANCE_THRESHOLD;
+
+    const fontColor = luminanceValueInEdgeRange
+      ? "#000000"
+      : isLight
+        ? odysseyDesignTokens.TypographyColorBody
+        : odysseyDesignTokens.HueNeutralWhite;
 
     const calculatedFontColorInRgb = hexToRgb(fontColor);
     const lightFontColorInRgb = hexToRgb(odysseyDesignTokens.HueNeutralWhite);
@@ -68,16 +80,23 @@ export const generateContrastColors = (
     const lightFontRgbString = `${lightFontColorInRgb?.red}, ${lightFontColorInRgb?.green}, ${lightFontColorInRgb?.blue}`;
     const darkFontRgbString = `${darkFontColorInRgb?.red}, ${darkFontColorInRgb?.green}, ${darkFontColorInRgb?.blue}`;
 
+    const getHighlightColor: (
+      luminanceValueInEdgeRange: boolean,
+      isLight: boolean,
+    ) => string = (luminanceValueInEdgeRange, isLight) => {
+      if (luminanceValueInEdgeRange) {
+        return isLight ? darkFontRgbString : lightFontRgbString;
+      }
+
+      return calculatedFontRgbString;
+    };
+
     return {
       fontColor,
       focusRingColor: `rgba(${calculatedFontRgbString}, .8)`,
       itemDisabledFontColor: `rgba(${calculatedFontRgbString}, .4)`,
-      itemHoverBackgroundColor: isLight
-        ? `rgba(${lightFontRgbString}, .1)`
-        : `rgba(${darkFontRgbString}, .1)`,
-      itemSelectedBackgroundColor: isLight
-        ? `rgba(${lightFontRgbString}, .15)`
-        : `rgba(${darkFontRgbString}, .15)`,
+      itemHoverBackgroundColor: `rgba(${getHighlightColor(luminanceValueInEdgeRange, isLight)}, .1)`,
+      itemSelectedBackgroundColor: `rgba(${getHighlightColor(luminanceValueInEdgeRange, isLight)}, .15)`,
     };
   }
 
