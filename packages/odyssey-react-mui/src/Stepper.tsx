@@ -413,28 +413,34 @@ const StepperNavigation = ({
   return (
     <Box
       sx={{
-        display: "flex",
-        justifyContent: "space-between",
+        display: "grid",
+        gridTemplateColumns: "1fr auto 1fr",
         alignItems: "center",
         mt: 2,
         gap: 2,
       }}
     >
-      <Button
-        label={labels.previous}
-        variant="secondary"
-        onClick={onBack}
-        isDisabled={currentStep === 0}
-        size="small"
-      />
+      <Box sx={{ justifySelf: "flex-start" }}>
+        {currentStep > 0 && (
+          <Button
+            label={labels.previous}
+            variant="secondary"
+            onClick={onBack}
+            size="small"
+          />
+        )}
+      </Box>
       <Box sx={{ display: "flex", alignItems: "center" }}>{dots}</Box>
-      <Button
-        label={labels.next}
-        variant="primary"
-        onClick={onNext}
-        isDisabled={currentStep === totalSteps - 1}
-        size="small"
-      />
+      <Box sx={{ justifySelf: "flex-end" }}>
+        {currentStep < totalSteps - 1 && (
+          <Button
+            label={labels.next}
+            variant="primary"
+            onClick={onNext}
+            size="small"
+          />
+        )}
+      </Box>
     </Box>
   );
 };
