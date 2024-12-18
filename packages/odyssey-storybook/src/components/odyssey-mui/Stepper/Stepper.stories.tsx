@@ -386,6 +386,10 @@ export const DescriptionTest: StoryObj<StepperProps> = {
 };
 
 export const WithNavigation: StoryObj<StepperProps> = {
+  args: {
+    allowBackStep: true,
+    nonLinear: true,
+  },
   render: function C(args) {
     const [activeStep, setActiveStep] = useState(0);
     const odysseyDesignTokens = useOdysseyDesignTokens();
@@ -400,8 +404,17 @@ export const WithNavigation: StoryObj<StepperProps> = {
       setActiveStep((prevStep) => Math.max(prevStep - 1, 0));
     };
 
-    const handleStepChange = (step: number) => {
+    const handleStepClick = (step: number) => {
       setActiveStep(step);
+    };
+
+    const isStepClickable = (step: number) => {
+      // Follow same rules as the step clicking logic
+      const isCompleted = step < activeStep;
+      return (
+        (isCompleted && (args.allowBackStep ?? false)) ||
+        (!isCompleted && (args.nonLinear ?? false))
+      );
     };
 
     return (
@@ -410,14 +423,16 @@ export const WithNavigation: StoryObj<StepperProps> = {
           {...args}
           activeStep={activeStep}
           steps={defaultSteps}
-          onChange={handleStepChange}
-          showNavigation={false} // Add this line
+          onChange={handleStepClick}
+          showNavigation={false}
         />
         <StepperNavigation
           totalSteps={defaultSteps.length}
           currentStep={activeStep}
           onBack={handleBack}
           onNext={handleNext}
+          onStepClick={handleStepClick}
+          isStepClickable={isStepClickable}
           odysseyDesignTokens={odysseyDesignTokens}
         />
       </>
