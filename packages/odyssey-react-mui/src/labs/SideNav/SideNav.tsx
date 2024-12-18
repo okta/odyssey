@@ -473,6 +473,7 @@ const SideNav = ({
           id: childProps.id,
           isSelected: childProps.isSelected,
           isDisabled: childProps.isDisabled,
+          isSortable: childProps.isSortable,
           navItem: (
             <SideNavItemContentContext.Provider
               value={{
@@ -629,6 +630,7 @@ const SideNav = ({
                                         id={sortableItem.id}
                                         isDisabled={sortableItem.isDisabled}
                                         isSelected={sortableItem.isSelected}
+                                        isSortable={sortableItem.isSortable}
                                       >
                                         {sortableItem.navItem}
                                       </SortableList.Item>

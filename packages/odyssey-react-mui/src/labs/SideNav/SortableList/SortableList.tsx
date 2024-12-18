@@ -35,6 +35,7 @@ export interface BaseItem {
   id: UniqueIdentifier;
   isDisabled: boolean | undefined;
   isSelected: boolean | undefined;
+  isSortable: boolean | undefined;
   navItem: ReactNode;
 }
 
@@ -99,7 +100,9 @@ export const SortableList = <T extends BaseItem>({
         if (over && active.id !== over?.id) {
           const activeIndex = items.findIndex(({ id }) => id === active.id);
           const overIndex = items.findIndex(({ id }) => id === over.id);
-          onChange(parentId, activeIndex, overIndex);
+          if (items[overIndex].isSortable) {
+            onChange(parentId, activeIndex, overIndex);
+          }
         }
         setActive(null);
       }}

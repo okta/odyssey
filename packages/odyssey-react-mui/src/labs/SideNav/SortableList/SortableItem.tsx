@@ -31,6 +31,7 @@ type ItemProps = {
   id: UniqueIdentifier;
   isDisabled?: boolean;
   isSelected?: boolean;
+  isSortable?: boolean;
 };
 
 interface Context {
@@ -159,6 +160,7 @@ export const SortableItem = ({
   id,
   isDisabled,
   isSelected,
+  isSortable = true,
   children,
 }: PropsWithChildren<ItemProps>) => {
   const {
@@ -194,7 +196,7 @@ export const SortableItem = ({
         odysseyDesignTokens={odysseyDesignTokens}
         isSelected={isSelected}
       >
-        {!isDisabled && <DragHandle isDragging={isDragging} />}
+        {!isDisabled && isSortable && <DragHandle isDragging={isDragging} />}
         <StyledUl>{children}</StyledUl>
       </StyledSortableListItem>
     </SortableItemContext.Provider>

@@ -69,7 +69,7 @@ export type SideNavHeaderProps = {
   /**
    * The app's name.
    */
-  appName: string;
+  appName?: string;
   /**
    * If the side nav currently has no items, it will be loading.
    */
@@ -94,9 +94,13 @@ const SideNavHeader = ({
         )}
       </SideNavLogoContainer>
 
-      <SideNavHeadingContainer odysseyDesignTokens={odysseyDesignTokens}>
-        <Heading5 component="h2">{isLoading ? <Skeleton /> : appName}</Heading5>
-      </SideNavHeadingContainer>
+      {appName && (
+        <SideNavHeadingContainer odysseyDesignTokens={odysseyDesignTokens}>
+          <Heading5 component="h2">
+            {isLoading ? <Skeleton /> : appName}
+          </Heading5>
+        </SideNavHeadingContainer>
+      )}
     </SideNavHeaderContainer>
   );
 };
