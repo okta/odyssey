@@ -16,7 +16,8 @@ import {
   StepLabel as MuiStepLabel,
   Box,
 } from "@mui/material";
-import { memo, useCallback } from "react";
+import { memo, useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { Button } from "./Buttons";
 import styled from "@emotion/styled";
 import { CheckIcon } from "./icons.generated";
@@ -35,6 +36,11 @@ export type StepData = {
 };
 
 export type StepperProps = {
+  /**
+   * Whether to show the stepper navigation controls
+   * @default false
+   */
+  showNavigation?: boolean;
   /**
    * Current active step (0-based index)
    */
@@ -63,6 +69,14 @@ export type StepperProps = {
    * Callback fired when a step is clicked
    */
   onChange?: (step: number) => void;
+  /**
+   * Button label for the previous navigation button
+   */
+  previousButtonLabel?: string;
+  /**
+   * Button label for the next navigation button
+   */
+  nextButtonLabel?: string;
 } & Pick<HtmlProps, "testId">;
 
 const StyledStep = styled(MuiStep, {
@@ -71,6 +85,9 @@ const StyledStep = styled(MuiStep, {
       prop as string,
     ),
 })<{
+  previousButtonLabel?: string;
+  nextButtonLabel?: string;
+
   odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
   orientation?: "horizontal" | "vertical";
   isClickable: boolean;
@@ -356,14 +373,30 @@ const StepperNavigation = ({
   currentStep,
   onBack,
   onNext,
+  previousButtonLabel,
+  nextButtonLabel,
+
   odysseyDesignTokens,
 }: {
   totalSteps: number;
   currentStep: number;
   onBack: () => void;
   onNext: () => void;
+  previousButtonLabel?: string;
+  nextButtonLabel?: string;
+  finishButtonLabel?: string;
   odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
 }) => {
+  const { t } = useTranslation();
+
+  const labels = useMemo(
+    () => ({
+      previous: previousButtonLabel ?? t("pagination.previous"),
+      next: nextButtonLabel ?? t("pagination.next"),
+    }),
+    [previousButtonLabel, nextButtonLabel, t],
+  );
+
   const dots = Array.from({ length: totalSteps }, (_, i) => {
     let status: "previous" | "current" | "next" = "next";
     if (i === currentStep) status = "current";
@@ -388,7 +421,7 @@ const StepperNavigation = ({
       }}
     >
       <Button
-        label="Previous"
+        label={labels.previous}
         variant="secondary"
         onClick={onBack}
         isDisabled={currentStep === 0}
@@ -396,7 +429,7 @@ const StepperNavigation = ({
       />
       <Box sx={{ display: "flex", alignItems: "center" }}>{dots}</Box>
       <Button
-        label={currentStep === totalSteps - 1 ? "Finish" : "Next"}
+        label={labels.next}
         variant="primary"
         onClick={onNext}
         isDisabled={currentStep === totalSteps - 1}
@@ -447,6 +480,9 @@ const Stepper = ({
   steps,
   onChange,
   testId,
+  previousButtonLabel,
+  nextButtonLabel,
+  showNavigation = false,
 }: StepperProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
@@ -526,6 +562,17 @@ const Stepper = ({
           </StyledStep>
         );
       })}
+      {showNavigation && (
+        <StepperNavigation
+          totalSteps={steps.length}
+          currentStep={activeStep}
+          onBack={() => handleStepClick(activeStep - 1)}
+          onNext={() => handleStepClick(activeStep + 1)}
+          previousButtonLabel={previousButtonLabel}
+          nextButtonLabel={nextButtonLabel}
+          odysseyDesignTokens={odysseyDesignTokens}
+        />
+      )}
     </StepperContainer>
   );
 };

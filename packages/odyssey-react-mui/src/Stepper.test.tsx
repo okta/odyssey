@@ -127,7 +127,7 @@ describe("StepperNavigation", () => {
       </OdysseyProvider>,
     );
 
-    const backButton = screen.getByText("Back");
+    const backButton = screen.getByText("Previous");
     const nextButton = screen.getByText("Next");
 
     fireEvent.click(backButton);
@@ -150,25 +150,50 @@ describe("StepperNavigation", () => {
       </OdysseyProvider>,
     );
 
-    expect(screen.getByText("Back")).toBeDisabled();
+    expect(screen.getByText("Previous")).toBeDisabled();
     expect(screen.getByText("Next")).toBeEnabled();
   });
 
-  test("shows Finish instead of Next on last step", () => {
+  test("renders steps without descriptions", () => {
+    const stepsNoDescription = [
+      { label: "Step 1" },
+      { label: "Step 2" },
+      { label: "Step 3" },
+    ];
+
     render(
       <OdysseyProvider>
-        <StepperNavigation
-          totalSteps={3}
-          currentStep={2}
-          onBack={() => {}}
-          onNext={() => {}}
-          odysseyDesignTokens={useOdysseyDesignTokens()}
+        <Stepper
+          activeStep={0}
+          steps={stepsNoDescription}
+          onChange={() => {}}
         />
       </OdysseyProvider>,
     );
 
-    expect(screen.getByText("Back")).toBeEnabled();
-    expect(screen.getByText("Finish")).toBeInTheDocument();
-    expect(screen.queryByText("Next")).not.toBeInTheDocument();
+    // Should render without errors
+    expect(screen.getByText("Step 1")).toBeInTheDocument();
+    expect(screen.queryByText("Description")).not.toBeInTheDocument();
+  });
+
+  test("renders nonNumeric variant correctly", () => {
+    render(
+      <OdysseyProvider>
+        <Stepper
+          activeStep={1}
+          steps={defaultSteps}
+          onChange={() => {}}
+          variant="nonNumeric"
+        />
+      </OdysseyProvider>,
+    );
+
+    // Should not show numbers
+    expect(screen.queryByText("1")).not.toBeInTheDocument();
+    expect(screen.queryByText("2")).not.toBeInTheDocument();
+
+    // Should still show steps and maintain functionality
+    const activeStep = screen.getByText("Personal info");
+    expect(activeStep).toHaveAttribute("aria-selected", "true");
   });
 });

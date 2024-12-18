@@ -100,6 +100,18 @@ const storybookMeta: Meta<StepperProps> = {
         },
       },
     },
+    showNavigation: {
+      control: "boolean",
+      description: "Whether to show the stepper navigation controls",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+        defaultValue: {
+          summary: true,
+        },
+      },
+    },
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
@@ -399,6 +411,7 @@ export const WithNavigation: StoryObj<StepperProps> = {
           activeStep={activeStep}
           steps={defaultSteps}
           onChange={handleStepChange}
+          showNavigation={false} // Add this line
         />
         <StepperNavigation
           totalSteps={defaultSteps.length}
