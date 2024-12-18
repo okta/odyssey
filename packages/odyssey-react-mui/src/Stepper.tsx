@@ -92,9 +92,9 @@ const StepperContainer = styled(MuiStepper, {
   activeStep: number;
 }>(({ orientation, odysseyDesignTokens, allowBackStep, nonLinear }) => ({
   ...(orientation === "horizontal" && {
-    justifyContent: "flex-start", // Align steps to the start
+    justifyContent: "flex-start",
     "& .MuiStep-root": {
-      flex: "0 0 auto", // Prevent flex growth
+      flex: "0 0 auto",
       padding: `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
       borderRadius: odysseyDesignTokens.BorderRadiusMain,
 
@@ -107,14 +107,13 @@ const StepperContainer = styled(MuiStepper, {
                 ? odysseyDesignTokens.HueGreen50
                 : "transparent",
             cursor: nonLinear || allowBackStep ? "pointer" : "default",
-            // Apply hover text colors
+
             "& .MuiStepLabel-label": {
               color:
                 nonLinear || allowBackStep
                   ? odysseyDesignTokens.HueNeutral800
                   : odysseyDesignTokens.HueNeutral800,
             },
-            // Apply hover description colors
             "& .MuiStepLabel-labelContainer div": {
               color:
                 nonLinear || allowBackStep
@@ -147,6 +146,7 @@ const StepperContainer = styled(MuiStepper, {
     },
   }),
   ...(orientation === "vertical" && {
+    width: "fit-content",
     "& .MuiStep-root": {
       flex: 1,
     },
@@ -159,7 +159,7 @@ const StepperContainer = styled(MuiStepper, {
   ...(orientation === "vertical" && {
     "& .MuiStep-root": {
       position: "relative",
-      paddingLeft: "24px",
+      paddingLeft: odysseyDesignTokens.Spacing5,
       "&::before": {
         content: '""',
         position: "absolute",
@@ -190,7 +190,7 @@ const StepperContainer = styled(MuiStepper, {
           top: "24px",
           left: "calc(-50% + 20px)",
           right: "calc(50% + 20px)",
-          margin: "0 8px",
+          margin: `0 ${odysseyDesignTokens.Spacing2}`,
         }
       : {
           marginLeft: "35.5px", // Center connector with circle
@@ -198,7 +198,7 @@ const StepperContainer = styled(MuiStepper, {
   },
 }));
 
-const StepIconContainer = styled("div")<{
+const StyledStepIconContainer = styled("div")<{
   completed: boolean;
   active: boolean;
   variant: "numeric" | "nonNumeric";
@@ -232,7 +232,7 @@ const StepIconContainer = styled("div")<{
     : active
       ? odysseyDesignTokens.HueBlue600
       : "transparent",
-  transition: "all 0.2s",
+  transition: `all ${odysseyDesignTokens.TransitionDurationMain}`,
 
   "& svg": {
     width:
@@ -273,14 +273,14 @@ const StepLabel = styled(MuiStepLabel, {
     orientation,
   }) => ({
     "& .MuiStepLabel-iconContainer": {
-      paddingRight: "12px",
+      paddingRight: odysseyDesignTokens.Spacing3,
       alignSelf: orientation === "horizontal" ? "center" : "flex-start",
-      paddingTop: "2px",
+      paddingTop: odysseyDesignTokens.Spacing0,
     },
     "& .MuiStepLabel-label": {
       fontFamily: "inherit",
       fontSize: odysseyDesignTokens.TypographySizeHeading6,
-      fontWeight: "600",
+      fontWeight: odysseyDesignTokens.TypographyWeightHeadingBold,
       lineHeight: odysseyDesignTokens.TypographyLineHeightHeading6,
       color: active
         ? odysseyDesignTokens.HueBlue600
@@ -302,16 +302,15 @@ const StepLabel = styled(MuiStepLabel, {
   }),
 );
 
-const StepDescription = styled("div")<{
+const StyledStepDescription = styled("div")<{
   odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
   completed: boolean;
   active: boolean;
   orientation?: "horizontal" | "vertical";
 }>(({ completed, active, odysseyDesignTokens, orientation }) => ({
   fontSize: odysseyDesignTokens.TypographySizeSubordinate,
-  fontWeight: "normal",
+  fontWeight: odysseyDesignTokens.TypographyWeightBody,
   lineHeight: odysseyDesignTokens.TypographyLineHeightBody,
-  marginTop: "4px",
   maxWidth: orientation === "horizontal" ? "200px" : "170px",
   color: active
     ? odysseyDesignTokens.HueBlue600
@@ -321,24 +320,24 @@ const StepDescription = styled("div")<{
   className: "MuiStepDescription-root",
 }));
 
-const StepNumber = styled("span")<{
+const StyledStepNumber = styled("span")<{
   odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
   completed: boolean;
   active: boolean;
 }>(({ completed, active, odysseyDesignTokens }) => ({
-  fontWeight: 700,
+  fontWeight: odysseyDesignTokens.TypographyWeightHeadingBold,
   color:
     completed || active
       ? odysseyDesignTokens.HueNeutralWhite
       : odysseyDesignTokens.HueNeutral900,
 }));
 
-const StepperDot = styled("div")<{
+const StyledStepperDot = styled("div")<{
   status: "previous" | "current" | "next";
   odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
 }>(({ status, odysseyDesignTokens }) => ({
-  width: "8px",
-  height: "8px",
+  width: odysseyDesignTokens.Spacing2,
+  height: odysseyDesignTokens.Spacing2,
   borderRadius: "50%",
   border: "1px solid",
   borderColor:
@@ -370,7 +369,7 @@ const StepperNavigation = ({
     if (i === currentStep) status = "current";
     else if (i < currentStep) status = "previous";
     return (
-      <StepperDot
+      <StyledStepperDot
         key={i}
         status={status}
         odysseyDesignTokens={odysseyDesignTokens}
@@ -419,7 +418,7 @@ const StepIcon = ({
   variant: "numeric" | "nonNumeric";
   odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
 }) => (
-  <StepIconContainer
+  <StyledStepIconContainer
     completed={completed}
     active={active}
     variant={variant}
@@ -428,15 +427,15 @@ const StepIcon = ({
     {completed && variant === "numeric" ? (
       <CheckIcon />
     ) : variant === "numeric" ? (
-      <StepNumber
+      <StyledStepNumber
         completed={completed}
         active={active}
         odysseyDesignTokens={odysseyDesignTokens}
       >
         {stepNumber + 1}
-      </StepNumber>
+      </StyledStepNumber>
     ) : null}
-  </StepIconContainer>
+  </StyledStepIconContainer>
 );
 
 const Stepper = ({
@@ -514,14 +513,14 @@ const Stepper = ({
             >
               {step.label}
               {step.description && (
-                <StepDescription
+                <StyledStepDescription
                   odysseyDesignTokens={odysseyDesignTokens}
                   completed={completed}
                   active={active}
                   orientation={orientation}
                 >
                   {step.description}
-                </StepDescription>
+                </StyledStepDescription>
               )}
             </StepLabel>
           </StyledStep>
