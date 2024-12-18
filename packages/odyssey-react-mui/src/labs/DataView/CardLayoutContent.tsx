@@ -197,6 +197,7 @@ const CardLayoutContent = <TData extends MRT_RowData>({
                   image,
                   children,
                   variant,
+                  button,
                 } = cardLayoutOptions.itemProps(row);
                 const currentIndex =
                   index + (pagination.pageIndex - 1) * pagination.pageSize;
@@ -216,6 +217,7 @@ const CardLayoutContent = <TData extends MRT_RowData>({
                         </CheckboxContainer>
                       )
                     }
+                    button={button}
                     children={children}
                     description={description}
                     renderDetailPanel={cardLayoutOptions.renderDetailPanel}
