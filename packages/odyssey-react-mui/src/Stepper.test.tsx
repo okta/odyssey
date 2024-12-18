@@ -150,8 +150,8 @@ describe("StepperNavigation", () => {
       </OdysseyProvider>,
     );
 
-    expect(screen.getByText("Previous")).toBeDisabled();
-    expect(screen.getByText("Next")).toBeEnabled();
+    expect(screen.queryByText("Previous")).not.toBeInTheDocument();
+    expect(screen.getByText("Next")).toBeInTheDocument();
   });
 
   test("renders steps without descriptions", () => {
