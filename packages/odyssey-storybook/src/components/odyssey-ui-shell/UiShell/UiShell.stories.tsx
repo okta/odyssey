@@ -11,6 +11,7 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
+
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import {
   Banner,
@@ -28,9 +29,19 @@ import {
   type UiShellProps,
 } from "@okta/odyssey-react-mui/ui-shell";
 import {
-  AddCircleIcon,
+  AppsIcon,
+  ClockIcon,
+  SettingsIcon,
   HomeIcon,
+  Fido2Icon,
+  LockIcon,
+  AddCircleIcon,
+  DownloadIcon,
   UserIcon,
+  DirectoryIcon,
+  ServerIcon,
+  FolderIcon,
+  NotificationIcon,
 } from "@okta/odyssey-react-mui/icons";
 
 const storybookMeta: Meta<UiShellProps> = {
@@ -107,6 +118,35 @@ const storybookMeta: Meta<UiShellProps> = {
         },
       },
     },
+    appBackgroundColor: {
+      control: "color",
+      description:
+        "Custom color for app content background. Should only be used as a stop-gap to allow support for dark mode.",
+      table: {
+        type: {
+          summary: "hex color code",
+        },
+      },
+    },
+    sideNavBackgroundColor: {
+      control: "color",
+      description: "Custom color for side nav background",
+      table: {
+        type: {
+          summary: "hex color code",
+        },
+      },
+    },
+    topNavBackgroundColor: {
+      control: "color",
+      description:
+        "Custom color for top nav background. Should only be used as a stop-gap to allow support for dark mode.",
+      table: {
+        type: {
+          summary: "hex color code",
+        },
+      },
+    },
   },
   args: {
     appComponent: <div />,
@@ -153,34 +193,209 @@ const sharedSideNavProps: UiShellNavComponentProps["sideNavProps"] = {
   isCollapsible: true,
   sideNavItems: [
     {
-      id: "AddNewFolder",
+      id: "item1",
       label: "Add new folder",
       endIcon: <AddCircleIcon />,
       onClick: () => {},
     },
     {
-      id: "item0-0",
+      id: "item2",
       label: "Admin",
       isSectionHeader: true,
     },
     {
-      id: "item0-1",
-      href: "/?path=/story/labs-components-switch--default",
+      id: "item3",
+      href: "/?path=/docs/mui-components-typography--docs",
       label: "Users",
       startIcon: <UserIcon />,
     },
     {
-      id: "item1",
+      id: "item4",
       label: "Dashboard",
       startIcon: <HomeIcon />,
       isDisabled: true,
       nestedNavItems: [
         {
-          id: "item1-1",
+          id: "item4-1",
           href: "/",
           label: "Home",
         },
       ],
+    },
+    {
+      id: "item5",
+      href: "/",
+      label: "Applications",
+      startIcon: <AppsIcon />,
+    },
+    {
+      id: "item6",
+      label: "Onboarding",
+      startIcon: <FolderIcon />,
+      nestedNavItems: [
+        {
+          id: "item6-1",
+          href: "/",
+          label: "Start",
+        },
+        {
+          id: "item6-2",
+          href: "/",
+          label: "Tasks",
+        },
+        {
+          id: "item6-3",
+          href: "/",
+          label: "Getting Started",
+        },
+      ],
+    },
+    {
+      id: "item7",
+      href: "/",
+      label: "Directory",
+      startIcon: <DirectoryIcon />,
+    },
+    {
+      id: "item8",
+      label: "Resource Management",
+      isSectionHeader: true,
+    },
+    {
+      id: "item9",
+      href: "/",
+      label: "Kubernetes",
+      startIcon: <ServerIcon />,
+      severity: "info",
+      statusLabel: "BETA",
+    },
+    {
+      id: "item10",
+      href: "/",
+      label: "Reports",
+      startIcon: <DownloadIcon />,
+    },
+    {
+      id: "item11",
+      href: "/",
+      label: "Identify Governance",
+      target: "_blank",
+      isDisabled: true,
+      startIcon: <Fido2Icon />,
+    },
+    {
+      id: "item12",
+      href: "/",
+      label: "Workflows",
+      target: "_blank",
+      startIcon: <ClockIcon />,
+    },
+    {
+      id: "item13",
+      label: "Security Administration",
+      isSectionHeader: true,
+    },
+    {
+      id: "item14",
+      href: "/",
+      label: "Security",
+      startIcon: <LockIcon />,
+      endIcon: <LockIcon />,
+    },
+    {
+      id: "item15",
+      label: "Settings",
+      isDefaultExpanded: true,
+      isSortable: true,
+      startIcon: <SettingsIcon />,
+      nestedNavItems: [
+        {
+          id: "item15-1",
+          href: "/",
+          label: "General",
+        },
+        {
+          id: "item15-2",
+          href: "/",
+          label: "Custom Domain",
+          isSelected: true,
+        },
+        {
+          id: "item15-3",
+          label: "Account Management",
+        },
+        {
+          id: "item15-4",
+          href: "/",
+          label: "Authentication Policies",
+          isDisabled: true,
+        },
+        {
+          id: "item15-5",
+          href: "/",
+          label: "IDP Configuration",
+        },
+      ],
+    },
+    {
+      id: "item16",
+      href: "/",
+      label: "System Configuration",
+      startIcon: <FolderIcon />,
+    },
+    {
+      id: "item17-0",
+      label: "Enduser",
+      isSectionHeader: true,
+    },
+    {
+      id: "item17",
+      label: "My Apps",
+      isDefaultExpanded: true,
+      isSortable: true,
+      startIcon: <HomeIcon />,
+      nestedNavItems: [
+        {
+          id: "item17-1",
+          label: "Recently Used",
+        },
+        {
+          id: "item17-2",
+          label: "Work",
+        },
+        {
+          id: "item17-3",
+          label: "Add section",
+          endIcon: <AddCircleIcon />,
+        },
+      ],
+    },
+    {
+      id: "item18",
+      label: "Notifications",
+      startIcon: <NotificationIcon />,
+      count: 1,
+    },
+    {
+      id: "item19",
+      label: "Add apps",
+      startIcon: <AppsIcon />,
+    },
+  ],
+  footerItems: [
+    {
+      id: "footer-item-1",
+      label: "Docs",
+      href: "/",
+    },
+    {
+      id: "footer-item-2",
+      label: "Privacy",
+    },
+    {
+      id: "footer-item-3",
+      label: "Security",
+      href: "/",
     },
   ],
 };
@@ -291,6 +506,29 @@ export const LoadingData: StoryObj<UiShellProps> = {
           isLoading: true,
         },
         topNavProps: {},
+      });
+
+      return () => {};
+    },
+  },
+};
+
+export const WithCustomColors: StoryObj<UiShellProps> = {
+  args: {
+    appBackgroundContrastMode: "highContrast",
+    sideNavBackgroundColor: undefined,
+    topNavBackgroundColor: undefined,
+    appBackgroundColor: undefined,
+    optionalComponents: sharedOptionalComponents,
+    subscribeToPropChanges: (subscriber) => {
+      subscriber({
+        topNavProps: sharedTopNavProps,
+        sideNavProps: {
+          ...sharedSideNavProps,
+          logoProps: {
+            isSameBackgroundAsMain: true,
+          },
+        },
       });
 
       return () => {};
