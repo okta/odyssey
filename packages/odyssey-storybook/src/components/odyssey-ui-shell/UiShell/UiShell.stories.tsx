@@ -491,41 +491,23 @@ export const LoadingData: StoryObj<UiShellProps> = {
 export const WithCustomColors: StoryObj<UiShellProps> = {
   args: {
     optionalComponents: sharedOptionalComponents,
-    // subscribeToPropChanges: (subscriber) => {
-    //   subscriber({
-    //     topNavProps: sharedTopNavProps,
-    //     sideNavProps: {
-    //       ...sharedSideNavProps,
-    //       logoProps: {
-    //         isSameBackgroundAsMain: true,
-    //       },
-    //       mainBackgroundColor: "#e87474",
-    //     },
-    //   });
+    subscribeToPropChanges: (subscriber) => {
+      subscriber({
+        topNavProps: sharedTopNavProps,
+        sideNavProps: {
+          ...sharedSideNavProps,
+          logoProps: {
+            isSameBackgroundAsMain: true,
+          },
+        },
+      });
 
-    //   return () => {};
-    // },
+      return () => {};
+    },
   },
-  render: (props: UiShellProps & { sideNavBackgroundColor?: string }) => {
-    return (
-      <UiShell
-        {...props}
-        subscribeToPropChanges={(subscriber) => {
-          subscriber({
-            topNavProps: sharedTopNavProps,
-            sideNavProps: {
-              ...sharedSideNavProps,
-              logoProps: {
-                isSameBackgroundAsMain: false,
-              },
-              mainBackgroundColor: props.sideNavBackgroundColor,
-            },
-          });
-
-          return () => {};
-        }}
-      />
-    );
+  render: (props: UiShellProps) => {
+    console.log({ props });
+    return <UiShell {...props} />;
   },
 };
 

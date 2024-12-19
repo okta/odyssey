@@ -18,10 +18,10 @@ import {
 import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext";
 
 export type UiShellColors = {
+  appBackgroundColor: string;
   sideNavBackgroundColor: string;
   sideNavContrastColors?: ContrastColors | undefined;
   topNavBackgroundColor: string;
-  appContentBackgroundColor: string;
 };
 
 const UiShellColorsContext = createContext<UiShellColors | undefined>(
@@ -33,28 +33,38 @@ export const useUiShellContrastColorContext = () => {
 };
 
 export type UiShellColorsProviderProps = {
-  sideNavBackgroundColor: string;
+  appBackgroundColor?: string;
+  sideNavBackgroundColor?: string;
   topNavBackgroundColor?: string;
   contrastMode?: string;
 };
+
 const UiShellColorsProvider = ({
+  appBackgroundColor,
   sideNavBackgroundColor,
   topNavBackgroundColor,
   contrastMode,
   children,
 }: PropsWithChildren<UiShellColorsProviderProps>) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const defaultedSideNavBackgroundColor =
+    sideNavBackgroundColor || odysseyDesignTokens.HueNeutralWhite;
+
   const sideNavContrastColors =
-    sideNavBackgroundColor != odysseyDesignTokens.HueNeutralWhite
+    defaultedSideNavBackgroundColor !== odysseyDesignTokens.HueNeutralWhite
       ? generateContrastColors(
-          sideNavBackgroundColor || odysseyDesignTokens.HueNeutralWhite,
+          defaultedSideNavBackgroundColor,
           odysseyDesignTokens,
         )
       : undefined;
+
   const isHightContrast = contrastMode === "highContrast";
 
   const topNavColor = topNavBackgroundColor || isHightContrast ? "red" : "blue";
-  const appContentBackgroundColor = isHightContrast ? "red" : "blue";
+  const appContentBackgroundColor =
+    appBackgroundColor || isHightContrast
+      ? odysseyDesignTokens.HueNeutralWhite
+      : odysseyDesignTokens.HueNeutral50;
 
   return (
     <UiShellColorsContext.Provider
@@ -63,7 +73,7 @@ const UiShellColorsProvider = ({
           sideNavBackgroundColor || odysseyDesignTokens.HueNeutralWhite,
         sideNavContrastColors,
         topNavBackgroundColor: topNavColor,
-        appContentBackgroundColor,
+        appBackgroundColor: appContentBackgroundColor,
       }}
     >
       {children}

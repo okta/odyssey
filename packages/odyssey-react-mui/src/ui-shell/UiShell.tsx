@@ -22,7 +22,6 @@ import {
 } from "./UiShellContent";
 import { type ReactRootElements } from "../web-component/renderReactInWebComponent";
 import { UiShellColorsProvider } from "./UiShellColorsProvider";
-import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext";
 
 export const defaultComponentProps: UiShellNavComponentProps = {
   sideNavProps: undefined,
@@ -47,9 +46,12 @@ export type UiShellProps = {
       componentProps: SetStateAction<UiShellNavComponentProps>,
     ) => void,
   ) => () => void;
+  sideNavBackgroundColor?: string;
+  topNavBackgroundColor?: string;
 } & Pick<ReactRootElements, "appRootElement" | "stylesRootElement"> &
   Pick<
     UiShellContentProps,
+    | "appBackgroundColor"
     | "appBackgroundContrastMode"
     | "appComponent"
     | "hasStandardAppContentPadding"
@@ -66,6 +68,7 @@ export type UiShellProps = {
  * If an error occurs, this will revert to only showing the app.
  */
 const UiShell = ({
+  appBackgroundColor,
   appBackgroundContrastMode,
   appComponent,
   appRootElement,
@@ -74,11 +77,12 @@ const UiShell = ({
   onError = console.error,
   onSubscriptionCreated,
   optionalComponents,
+  sideNavBackgroundColor,
   stylesRootElement,
+  topNavBackgroundColor,
   subscribeToPropChanges,
 }: UiShellProps) => {
   const [componentProps, setComponentProps] = useState(defaultComponentProps);
-  const odysseyDesignTokens = useOdysseyDesignTokens();
 
   useEffect(() => {
     const unsubscribe = subscribeToPropChanges((componentProps) => {
@@ -102,11 +106,10 @@ const UiShell = ({
         <ErrorBoundary fallback={appComponent} onError={onError}>
           <CssBaseline />
           <UiShellColorsProvider
+            appBackgroundColor={appBackgroundColor}
             contrastMode={appBackgroundContrastMode}
-            sideNavBackgroundColor={
-              componentProps?.sideNavProps?.mainBackgroundColor ||
-              odysseyDesignTokens.HueNeutralWhite
-            }
+            sideNavBackgroundColor={sideNavBackgroundColor}
+            topNavBackgroundColor={topNavBackgroundColor}
           >
             <UiShellContent
               {...componentProps}
