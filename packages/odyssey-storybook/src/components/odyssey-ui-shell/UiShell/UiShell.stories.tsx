@@ -116,9 +116,34 @@ const storybookMeta: Meta<UiShellProps & { sideNavBackgroundColor?: string }> = 
           summary: "MouseEventHandler",
         },
       },
-      sideNavBackgroundColor: {
-        control: "color",
-        name: "[STORY ONLY] Custom color for side nav background",
+    },
+    appBackgroundColor: {
+      control: "color",
+      description:
+        "Custom color for app content background. Should only be used as a stop-gap to allow support for dark mode.",
+      table: {
+        type: {
+          summary: "hex color code",
+        },
+      },
+    },
+    sideNavBackgroundColor: {
+      control: "color",
+      description: "Custom color for side nav background",
+      table: {
+        type: {
+          summary: "hex color code",
+        },
+      },
+    },
+    topNavBackgroundColor: {
+      control: "color",
+      description:
+        "Custom color for top nav background. Should only be used as a stop-gap to allow support for dark mode.",
+      table: {
+        type: {
+          summary: "hex color code",
+        },
       },
     },
   },
@@ -490,6 +515,10 @@ export const LoadingData: StoryObj<UiShellProps> = {
 
 export const WithCustomColors: StoryObj<UiShellProps> = {
   args: {
+    appBackgroundContrastMode: "highContrast",
+    sideNavBackgroundColor: undefined,
+    topNavBackgroundColor: undefined,
+    appBackgroundColor: undefined,
     optionalComponents: sharedOptionalComponents,
     subscribeToPropChanges: (subscriber) => {
       subscriber({
@@ -504,10 +533,6 @@ export const WithCustomColors: StoryObj<UiShellProps> = {
 
       return () => {};
     },
-  },
-  render: (props: UiShellProps) => {
-    console.log({ props });
-    return <UiShell {...props} />;
   },
 };
 

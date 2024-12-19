@@ -23,6 +23,10 @@ import {
 import styled from "@emotion/styled";
 import { useTranslation } from "react-i18next";
 
+import {
+  ContrastColors,
+  generateContrastColors,
+} from "../../createContrastColors";
 import { FocusHandle } from "../../inputUtils";
 import { MuiPropsContext, MuiPropsContextType } from "../../MuiPropsContext";
 import {
@@ -30,6 +34,7 @@ import {
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
 import { Tooltip } from "../../Tooltip";
+import { useUiShellContrastColorContext } from "../../ui-shell/UiShellColorsProvider";
 
 const StyledToggleButton = styled(MuiButton, {
   shouldForwardProp: (prop) =>
@@ -37,7 +42,8 @@ const StyledToggleButton = styled(MuiButton, {
 })<{
   isSideNavCollapsed: boolean;
   odysseyDesignTokens: DesignTokens;
-}>(({ isSideNavCollapsed, odysseyDesignTokens }) => ({
+  toggleContrastColors?: ContrastColors;
+}>(({ isSideNavCollapsed, odysseyDesignTokens, toggleContrastColors }) => ({
   backgroundColor: "transparent",
   position: "relative",
   width: odysseyDesignTokens.Spacing6,
@@ -129,6 +135,10 @@ const StyledToggleButton = styled(MuiButton, {
     backgroundColor: odysseyDesignTokens.HueNeutral600,
     transform: "translate3d(-50%, -50%, 0)",
     transition: `transform ${odysseyDesignTokens.TransitionDurationMain}`,
+
+    ...(toggleContrastColors?.fontColor && {
+      backgroundColor: toggleContrastColors.fontColor,
+    }),
   },
 }));
 
@@ -164,8 +174,25 @@ const SideNavToggleButton = ({
 }: SideNavToggleButtonProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
+  const shellColors = useUiShellContrastColorContext();
 
   const localButtonRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
+
+  const toggleContrastColors = useMemo(() => {
+    const hasNonStandardAppBackgroundColor =
+      shellColors?.appBackgroundColor &&
+      shellColors?.appBackgroundColor !== odysseyDesignTokens.HueNeutralWhite &&
+      shellColors?.appBackgroundColor !== odysseyDesignTokens.HueNeutral50;
+
+    if (hasNonStandardAppBackgroundColor) {
+      return generateContrastColors(
+        shellColors.appBackgroundColor,
+        odysseyDesignTokens,
+      );
+    }
+
+    return null;
+  }, [odysseyDesignTokens, shellColors]);
 
   useImperativeHandle(
     buttonRef,
@@ -209,6 +236,7 @@ const SideNavToggleButton = ({
             }
           }}
           tabIndex={tabIndex}
+          toggleContrastColors={toggleContrastColors}
           variant="floating"
         >
           <span id="lineOne" />
@@ -223,6 +251,7 @@ const SideNavToggleButton = ({
       odysseyDesignTokens,
       onClick,
       tabIndex,
+      toggleContrastColors,
       toggleLabel,
     ],
   );
