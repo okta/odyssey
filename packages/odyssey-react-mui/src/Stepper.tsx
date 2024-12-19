@@ -37,11 +37,6 @@ export type StepData = {
 
 export type StepperProps = {
   /**
-   * Whether to show the stepper navigation controls
-   * @default false
-   */
-  showNavigation?: boolean;
-  /**
    * Current active step (0-based index)
    */
   activeStep: number;
@@ -454,7 +449,7 @@ const StepperNavigation = ({
         {currentStep < totalSteps - 1 && (
           <Button
             label={labels.next}
-            variant="primary"
+            variant="secondary"
             onClick={onNext}
             size="small"
           />
@@ -505,9 +500,6 @@ const Stepper = ({
   steps,
   onChange,
   testId,
-  previousButtonLabel,
-  nextButtonLabel,
-  showNavigation = false,
 }: StepperProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
@@ -524,14 +516,6 @@ const Stepper = ({
       }
     },
     [activeStep, allowBackStep, nonLinear, onChange],
-  );
-
-  const isStepClickable = useCallback(
-    (step: number) => {
-      const isCompleted = step < activeStep;
-      return (isCompleted && allowBackStep) || (!isCompleted && nonLinear);
-    },
-    [activeStep, allowBackStep, nonLinear],
   );
 
   return (
@@ -591,19 +575,6 @@ const Stepper = ({
           </StyledStep>
         );
       })}
-      {showNavigation && (
-        <StepperNavigation
-          totalSteps={steps.length}
-          currentStep={activeStep}
-          onBack={() => handleStepClick(activeStep - 1)}
-          onNext={() => handleStepClick(activeStep + 1)}
-          previousButtonLabel={previousButtonLabel}
-          nextButtonLabel={nextButtonLabel}
-          odysseyDesignTokens={odysseyDesignTokens}
-          onStepClick={handleStepClick}
-          isStepClickable={isStepClickable}
-        />
-      )}
     </StepperContainer>
   );
 };
