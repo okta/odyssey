@@ -44,95 +44,109 @@ import {
   NotificationIcon,
 } from "@okta/odyssey-react-mui/icons";
 
-const storybookMeta: Meta<UiShellProps & { sideNavBackgroundColor?: string }> =
-  {
-    title: "UI Shell Components/UI Shell",
-    component: UiShell,
-    argTypes: {
-      appComponent: {
-        control: "",
-        description: "App component that renders inside the content area.",
-        table: {
-          type: {
-            summary: "string",
-          },
+const storybookMeta: Meta<UiShellProps> = {
+  title: "UI Shell Components/UI Shell",
+  component: UiShell,
+  argTypes: {
+    appComponent: {
+      control: "",
+      description: "App component that renders inside the content area.",
+      table: {
+        type: {
+          summary: "string",
         },
-      },
-      hasStandardAppContentPadding: {
-        control: "boolean",
-        description:
-          "defaults to `true`. If `false`, the content area will have no padding provided",
-        table: {
-          type: {
-            summary: "boolean",
-          },
-        },
-      },
-      initialVisibleSections: {
-        control: "text",
-        description:
-          "A list of UiShell components that should be (minimally) rendered initially, with their isLoading property set when applicable. Allows the initial visibility of UiShell components to be influenced.",
-        table: {
-          type: {
-            summary: "string",
-          },
-        },
-      },
-      onError: {
-        control: "function",
-        description:
-          'Notifies when a React rendering error occurs. This could be useful for logging, flagging "p0"s, and recovering UI Shell when errors occur.',
-        table: {
-          defaultValue: console.error,
-          type: {
-            summary: "string",
-          },
-        },
-      },
-      onSubscriptionCreated: {
-        control: "function",
-        description:
-          "Notifies when subscribed to prop changes. UI Shell listens to prop updates, and it won't subscribe synchronously. Because of that, this callback notifies when that subscription is ready.",
-        table: {
-          type: {
-            summary: "string",
-          },
-        },
-      },
-      optionalComponents: {
-        control: null,
-        description:
-          "Components that will render as children of various other components such as the top nav or side nav.",
-        table: {
-          type: {
-            summary: "ReactElement",
-          },
-        },
-      },
-      subscribeToPropChanges: {
-        control: "function",
-        description:
-          "This is a callback that provides a subscriber callback to listen for changes to state. It allows UI Shell to listen for state changes. The props coming in this callback go directly to a React state; therefore, it shares the same signature and provides a previous state.",
-        table: {
-          type: {
-            summary: "MouseEventHandler",
-          },
-        },
-      },
-      sideNavBackgroundColor: {
-        control: "color",
-        name: "[STORY ONLY] Custom color for side nav background",
       },
     },
-    args: {
-      appComponent: <div />,
-      subscribeToPropChanges: () => () => {},
+    hasStandardAppContentPadding: {
+      control: "boolean",
+      description:
+        "defaults to `true`. If `false`, the content area will have no padding provided",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
     },
-    decorators: [MuiThemeDecorator],
-    parameters: {
-      layout: "fullscreen",
+    initialVisibleSections: {
+      control: "text",
+      description:
+        "A list of UiShell components that should be (minimally) rendered initially, with their isLoading property set when applicable. Allows the initial visibility of UiShell components to be influenced.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
-  };
+    onError: {
+      control: "function",
+      description:
+        'Notifies when a React rendering error occurs. This could be useful for logging, flagging "p0"s, and recovering UI Shell when errors occur.',
+      table: {
+        defaultValue: console.error,
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    onSubscriptionCreated: {
+      control: "function",
+      description:
+        "Notifies when subscribed to prop changes. UI Shell listens to prop updates, and it won't subscribe synchronously. Because of that, this callback notifies when that subscription is ready.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    optionalComponents: {
+      control: null,
+      description:
+        "Components that will render as children of various other components such as the top nav or side nav.",
+      table: {
+        type: {
+          summary: "ReactElement",
+        },
+      },
+    },
+    subscribeToPropChanges: {
+      control: "function",
+      description:
+        "This is a callback that provides a subscriber callback to listen for changes to state. It allows UI Shell to listen for state changes. The props coming in this callback go directly to a React state; therefore, it shares the same signature and provides a previous state.",
+      table: {
+        type: {
+          summary: "MouseEventHandler",
+        },
+      },
+    },
+    sideNavBackgroundColor: {
+      control: "color",
+      description: "Custom color for side nav background",
+      table: {
+        type: {
+          summary: "hex color code",
+        },
+      },
+    },
+    topNavBackgroundColor: {
+      control: "color",
+      description:
+        "Should only be used as a stop-gap to allow support for dark mode.",
+      table: {
+        type: {
+          summary: "hex color code",
+        },
+      },
+    },
+  },
+  args: {
+    appComponent: <div />,
+    subscribeToPropChanges: () => () => {},
+  },
+  decorators: [MuiThemeDecorator],
+  parameters: {
+    layout: "fullscreen",
+  },
+};
 
 export default storybookMeta;
 
@@ -492,41 +506,23 @@ export const LoadingData: StoryObj<UiShellProps> = {
 export const WithCustomColors: StoryObj<UiShellProps> = {
   args: {
     optionalComponents: sharedOptionalComponents,
-    // subscribeToPropChanges: (subscriber) => {
-    //   subscriber({
-    //     topNavProps: sharedTopNavProps,
-    //     sideNavProps: {
-    //       ...sharedSideNavProps,
-    //       logoProps: {
-    //         isSameBackgroundAsMain: true,
-    //       },
-    //       mainBackgroundColor: "#e87474",
-    //     },
-    //   });
+    subscribeToPropChanges: (subscriber) => {
+      subscriber({
+        topNavProps: sharedTopNavProps,
+        sideNavProps: {
+          ...sharedSideNavProps,
+          logoProps: {
+            isSameBackgroundAsMain: true,
+          },
+        },
+      });
 
-    //   return () => {};
-    // },
+      return () => {};
+    },
   },
-  render: (props: UiShellProps & { sideNavBackgroundColor?: string }) => {
-    return (
-      <UiShell
-        {...props}
-        subscribeToPropChanges={(subscriber) => {
-          subscriber({
-            topNavProps: sharedTopNavProps,
-            sideNavProps: {
-              ...sharedSideNavProps,
-              logoProps: {
-                isSameBackgroundAsMain: false,
-              },
-              mainBackgroundColor: props.sideNavBackgroundColor,
-            },
-          });
-
-          return () => {};
-        }}
-      />
-    );
+  render: (props: UiShellProps) => {
+    console.log({ props });
+    return <UiShell {...props} />;
   },
 };
 

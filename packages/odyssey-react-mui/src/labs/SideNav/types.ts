@@ -87,9 +87,6 @@ export type SideNavProps = {
    * Nav items in the side nav
    */
   sideNavItems: SideNavItem[];
-  fontColor?: string;
-  logoBackgroundColor?: string;
-  mainBackgroundColor?: string;
 } & (
   | {
       /**

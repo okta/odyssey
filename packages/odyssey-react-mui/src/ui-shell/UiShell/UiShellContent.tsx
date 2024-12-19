@@ -113,6 +113,7 @@ export type UiShellNavComponentProps = {
 };
 
 export type UiShellContentProps = {
+  appBackgroundColor?: string;
   /**
    * Sets the background color for the app content area.
    */
