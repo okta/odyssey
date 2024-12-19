@@ -100,18 +100,6 @@ const storybookMeta: Meta<StepperProps> = {
         },
       },
     },
-    showNavigation: {
-      control: "boolean",
-      description: "Whether to show the stepper navigation controls",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-        defaultValue: {
-          summary: true,
-        },
-      },
-    },
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
@@ -168,46 +156,12 @@ const DefaultTemplate: StoryObj<StepperProps> = {
     );
   },
   play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    // Test initial button states
-    await step("verify initial button states", async () => {
-      const backButton = canvas.getByText("Back");
-      const nextButton = canvas.getByText("Next");
-      expect(backButton).toBeDisabled();
-      expect(nextButton).toBeEnabled();
-    });
-
-    // Test next navigation
-    await step("navigate forward", async () => {
-      const nextButton = canvas.getByText("Next");
-      userEvent.click(nextButton);
-      await waitFor(() => {
-        expect(canvas.getByText("Personal info")).toHaveAttribute(
-          "aria-selected",
-          "true",
-        );
-      });
-    });
-
-    // Test both buttons enabled in middle step
-    await step("verify middle step button states", async () => {
-      const backButton = canvas.getByText("Back");
-      const nextButton = canvas.getByText("Next");
-      expect(backButton).toBeEnabled();
-      expect(nextButton).toBeEnabled();
-    });
-
-    // Test back navigation
-    await step("navigate back", async () => {
-      const backButton = canvas.getByText("Back");
-      userEvent.click(backButton);
-      await waitFor(() => {
-        expect(canvas.getByText("Account details")).toHaveAttribute(
-          "aria-selected",
-          "true",
-        );
-      });
+    // Just verify the stepper renders correctly
+    await step("verify stepper renders", async () => {
+      const canvas = within(canvasElement);
+      expect(canvas.getByText("Account details")).toBeInTheDocument();
+      expect(canvas.getByText("Personal info")).toBeInTheDocument();
+      expect(canvas.getByText("Review")).toBeInTheDocument();
     });
   },
 };
@@ -424,7 +378,6 @@ export const WithNavigation: StoryObj<StepperProps> = {
           activeStep={activeStep}
           steps={defaultSteps}
           onChange={handleStepClick}
-          showNavigation={false}
         />
         <StepperNavigation
           totalSteps={defaultSteps.length}
