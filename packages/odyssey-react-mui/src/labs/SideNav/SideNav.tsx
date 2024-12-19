@@ -106,15 +106,18 @@ const StyledOpacityTransitionContainer = styled("div", {
 
 const StyledSideNav = styled("nav", {
   shouldForwardProp: (prop) =>
+    prop !== "backgroundColor" &&
     prop !== "odysseyDesignTokens" &&
-    prop !== "isSideNavCollapsed" &&
-    prop !== "backgroundColor",
+    prop !== "isAppContentWhiteBackground" &&
+    prop !== "isSideNavCollapsed",
 })(
   ({
     backgroundColor,
+    isAppContentWhiteBackground,
     isSideNavCollapsed,
     odysseyDesignTokens,
   }: {
+    isAppContentWhiteBackground: boolean;
     backgroundColor?: UiShellColors["sideNavBackgroundColor"];
     isSideNavCollapsed: boolean;
     odysseyDesignTokens: DesignTokens;
@@ -123,6 +126,10 @@ const StyledSideNav = styled("nav", {
     display: "inline-block",
     height: "100%",
     backgroundColor: backgroundColor || odysseyDesignTokens.HueNeutralWhite,
+
+    ...(isAppContentWhiteBackground && {
+      borderRight: `${odysseyDesignTokens.BorderWidthMain} ${odysseyDesignTokens.BorderStyleMain} ${odysseyDesignTokens.HueNeutral100}`,
+    }),
 
     "&::after": {
       backgroundColor: odysseyDesignTokens.HueNeutral200,
@@ -181,7 +188,7 @@ const SideNavHeaderContainer = styled("div", {
     // The bottom border should appear only if the scrollable region has been scrolled
     ...(hasContentScrolled &&
       ({
-        borderBottom: `${odysseyDesignTokens.BorderWidthMain} ${odysseyDesignTokens.BorderStyleMain} ${odysseyDesignTokens.HueNeutral50}`,
+        borderBottom: `${odysseyDesignTokens.BorderWidthMain} ${odysseyDesignTokens.BorderStyleMain} ${odysseyDesignTokens.HueNeutral100}`,
 
         ...(borderColor && {
           borderBottom: `${odysseyDesignTokens.BorderWidthMain} ${odysseyDesignTokens.BorderStyleMain} ${borderColor + 15}`,
@@ -482,18 +489,6 @@ const SideNav = ({
     }
   }, [firstSideNavItemIdWithIsSelected]);
 
-  // useEffect(() => {
-  //   if (mainBackgroundColor && mainBackgroundColor !== odysseyDesignTokens.HueNeutralWhite) {
-  //     const generatedContrastColors = generateContrastColors(
-  //       mainBackgroundColor,
-  //       odysseyDesignTokens,
-  //     );
-
-  //     if (generatedContrastColors) {
-  //       setContrastColors(generatedContrastColors);
-  //     }
-  //   }
-  // },[mainBackgroundColor, odysseyDesignTokens])
   /**
    * We only want to put a ref on a node iff it is the first selected node.
    * This function returns the ref only if the ID provided matches the first
@@ -617,6 +612,9 @@ const SideNav = ({
       aria-label={t("navigation.label")}
       backgroundColor={shellColors?.sideNavBackgroundColor}
       id="side-nav-expandable"
+      isAppContentWhiteBackground={
+        shellColors?.appBackgroundColor === odysseyDesignTokens.HueNeutralWhite
+      }
       isSideNavCollapsed={isSideNavCollapsed}
       odysseyDesignTokens={odysseyDesignTokens}
     >

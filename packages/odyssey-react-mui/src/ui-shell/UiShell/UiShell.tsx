@@ -107,13 +107,13 @@ const UiShell = ({
           <CssBaseline />
           <UiShellColorsProvider
             appBackgroundColor={appBackgroundColor}
-            contrastMode={appBackgroundContrastMode}
+            appBackgroundContrastMode={appBackgroundContrastMode}
             sideNavBackgroundColor={sideNavBackgroundColor}
             topNavBackgroundColor={topNavBackgroundColor}
           >
             <UiShellContent
               {...componentProps}
-              appBackgroundContrastMode={appBackgroundContrastMode}
+              // appBackgroundContrastMode={appBackgroundContrastMode}
               appComponent={appComponent}
               hasStandardAppContentPadding={hasStandardAppContentPadding}
               initialVisibleSections={initialVisibleSections}

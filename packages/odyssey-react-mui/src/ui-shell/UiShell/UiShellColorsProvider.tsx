@@ -36,14 +36,14 @@ export type UiShellColorsProviderProps = {
   appBackgroundColor?: string;
   sideNavBackgroundColor?: string;
   topNavBackgroundColor?: string;
-  contrastMode?: string;
+  appBackgroundContrastMode?: string;
 };
 
 const UiShellColorsProvider = ({
   appBackgroundColor,
+  appBackgroundContrastMode,
   sideNavBackgroundColor,
   topNavBackgroundColor,
-  contrastMode,
   children,
 }: PropsWithChildren<UiShellColorsProviderProps>) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
@@ -58,22 +58,26 @@ const UiShellColorsProvider = ({
         )
       : undefined;
 
-  const isHightContrast = contrastMode === "highContrast";
+  const isAppBackgroundHightContrast =
+    appBackgroundContrastMode === "highContrast";
 
-  const topNavColor = topNavBackgroundColor || isHightContrast ? "red" : "blue";
+  const defaultTopAndAppBackgroundColor = isAppBackgroundHightContrast
+    ? odysseyDesignTokens.HueNeutralWhite
+    : odysseyDesignTokens.HueNeutral50;
+
+  const topNavColor = topNavBackgroundColor || defaultTopAndAppBackgroundColor;
+
   const appContentBackgroundColor =
-    appBackgroundColor || isHightContrast
-      ? odysseyDesignTokens.HueNeutralWhite
-      : odysseyDesignTokens.HueNeutral50;
+    appBackgroundColor || defaultTopAndAppBackgroundColor;
 
   return (
     <UiShellColorsContext.Provider
       value={{
+        appBackgroundColor: appContentBackgroundColor,
         sideNavBackgroundColor:
           sideNavBackgroundColor || odysseyDesignTokens.HueNeutralWhite,
         sideNavContrastColors,
         topNavBackgroundColor: topNavColor,
-        appBackgroundColor: appContentBackgroundColor,
       }}
     >
       {children}
