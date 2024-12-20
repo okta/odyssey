@@ -49,6 +49,8 @@ export const generateContrastColors = (
     const { red, green, blue } = rgbFromHex;
 
     // Calculate relative luminance
+    // @see https://contrastchecker.online/color-relative-luminance-calculator#:~:text=For%20the%20sRGB%20colorspace%2C%20the,%2B0.055)%2F1.055)%20%5E%202.4
+    // returns a number between 0(black) and 255(white)
     const luminance = 0.2126 * red + 0.7152 * green + 0.0722 * blue;
 
     // 128 is a magic number. This feels like roughly where we should switch from dark to light.
