@@ -10,19 +10,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import styled from "@emotion/styled";
 import {
-  Stepper as MuiStepper,
   Step as MuiStep,
   StepLabel as MuiStepLabel,
-  Box,
+  Stepper as MuiStepper,
 } from "@mui/material";
 import { memo, useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { Button } from "./Buttons";
-import styled from "@emotion/styled";
-import { CheckIcon } from "./icons.generated";
-import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
-import { HtmlProps } from "./HtmlProps";
+import { Box } from "../.././Box";
+import { Button } from "../../Buttons";
+import { HtmlProps } from "../../HtmlProps";
+import { CheckIcon } from "../../icons.generated";
+import { useOdysseyDesignTokens } from "../../OdysseyDesignTokensContext";
 
 export type StepData = {
   /**
