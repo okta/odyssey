@@ -20,15 +20,14 @@ import {
 } from "material-react-table";
 
 import { Box } from "../../Box";
-import { Checkbox as MuiCheckbox } from "@mui/material";
 import { CircularProgress } from "../../CircularProgress";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
 import { RowActions } from "./RowActions";
-import { DataCard } from "./DataCard";
 import { CardLayout, CardLayoutProps, UniversalProps } from "./componentTypes";
+import { DataCard } from "./DataCard";
 
 export type CardLayoutContentProps<TData extends MRT_RowData> = {
   currentLayout: CardLayout;
@@ -129,14 +128,6 @@ const LoadingContainer = styled("div", {
   paddingBlock: odysseyDesignTokens.Spacing5,
 }));
 
-const CheckboxContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{
-  odysseyDesignTokens: DesignTokens;
-}>(({ odysseyDesignTokens }) => ({
-  marginBlockStart: `-${odysseyDesignTokens.Spacing1}`,
-}));
-
 const CardLayoutContent = <TData extends MRT_RowData>({
   currentLayout,
   data,
@@ -203,24 +194,13 @@ const CardLayoutContent = <TData extends MRT_RowData>({
 
                 return (
                   <DataCard
-                    Accessory={
-                      hasRowSelection && (
-                        // Negative margin to counteract the checkbox's inbuilt spacing
-                        <CheckboxContainer
-                          odysseyDesignTokens={odysseyDesignTokens}
-                        >
-                          <MuiCheckbox
-                            checked={rowSelection[row.id] ?? false}
-                            onChange={() => handleRowSelectionChange(row)}
-                          />
-                        </CheckboxContainer>
-                      )
-                    }
                     children={children}
                     description={description}
-                    renderDetailPanel={cardLayoutOptions.renderDetailPanel}
-                    row={row}
+                    detailPanel={cardLayoutOptions.renderDetailPanel?.({ row })}
+                    hasSelection={hasRowSelection}
                     image={image}
+                    isSelected={rowSelection[row.id] ?? false}
+                    onSelectionChange={() => handleRowSelectionChange(row)}
                     key={row.id}
                     menuButtonChildren={
                       (cardLayoutOptions.rowActionMenuItems ||
