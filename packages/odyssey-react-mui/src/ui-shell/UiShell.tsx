@@ -113,7 +113,6 @@ const UiShell = ({
           >
             <UiShellContent
               {...componentProps}
-              // appBackgroundContrastMode={appBackgroundContrastMode}
               appComponent={appComponent}
               hasStandardAppContentPadding={hasStandardAppContentPadding}
               initialVisibleSections={initialVisibleSections}
