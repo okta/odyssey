@@ -515,7 +515,6 @@ export const LoadingData: StoryObj<UiShellProps> = {
 
 export const WithCustomColors: StoryObj<UiShellProps> = {
   args: {
-    appBackgroundContrastMode: "highContrast",
     sideNavBackgroundColor: undefined,
     topNavBackgroundColor: undefined,
     appBackgroundColor: undefined,
