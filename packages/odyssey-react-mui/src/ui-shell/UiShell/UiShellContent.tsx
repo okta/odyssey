@@ -155,7 +155,6 @@ export type UiShellContentProps = {
  * If an error occurs, this will revert to only showing the app.
  */
 const UiShellContent = ({
-  // appBackgroundContrastMode = "lowContrast",
   appComponent,
   hasStandardAppContentPadding = true,
   initialVisibleSections = ["TopNav", "SideNav", "AppSwitcher"],

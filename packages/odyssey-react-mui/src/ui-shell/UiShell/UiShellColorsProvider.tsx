@@ -41,7 +41,7 @@ export type UiShellColorsProviderProps = {
 
 const UiShellColorsProvider = ({
   appBackgroundColor,
-  appBackgroundContrastMode,
+  appBackgroundContrastMode = "lowContrast",
   sideNavBackgroundColor,
   topNavBackgroundColor,
   children,
