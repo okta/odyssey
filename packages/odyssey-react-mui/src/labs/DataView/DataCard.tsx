@@ -10,205 +10,83 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { memo, useMemo, useState } from "react";
 import {
-  MouseEventHandler,
-  ReactElement,
-  memo,
-  useMemo,
-  ReactNode,
-  useState,
-} from "react";
-import {
-  IconButton as MuiIconButton,
-  Card as MuiCard,
-  CardActions as MuiCardActions,
-  CardActionArea as MuiCardActionArea,
   Tooltip as MuiTooltip,
+  IconButton as MuiIconButton,
+  Checkbox as MuiCheckbox,
 } from "@mui/material";
-import styled from "@emotion/styled";
 import { useTranslation } from "react-i18next";
-
-import { Box } from "../../Box";
-import {
-  Button,
-  ButtonContext,
-  MenuButton,
-  MenuButtonProps,
-} from "../../Buttons";
+import { ChevronDownIcon, ChevronUpIcon } from "../../icons.generated";
+import { Card, CardProps } from "../../Card";
+import styled from "@emotion/styled";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
-import { Heading5, Paragraph, Support } from "../../Typography";
-import {
-  ChevronDownIcon,
-  ChevronUpIcon,
-  MoreIcon,
-} from "../../icons.generated";
-import { CardLayoutProps } from "./componentTypes";
-import { MRT_RowData } from "material-react-table";
 
-export const CARD_IMAGE_SIZE = "64px";
-export const CARD_IMAGE_SIZE_COMPACT = "48px";
-
-export const cardVariantValues = ["tile", "stack", "compact"] as const;
-
-export type DataCardProps<TData extends MRT_RowData> = {
-  children?: ReactNode;
-  description?: string;
-  image?: ReactElement;
-  overline?: string;
-  renderDetailPanel?: CardLayoutProps<TData>["renderDetailPanel"];
-  row: TData;
-  title?: string;
-  variant?: (typeof cardVariantValues)[number];
-} & (
-  | {
-      Accessory?: never;
-      button?: never;
-      menuButtonChildren?: never;
-      onClick: MouseEventHandler;
-    }
-  | {
-      Accessory?: ReactNode;
-      button?: ReactElement<typeof Button>;
-      menuButtonChildren?: MenuButtonProps["children"];
-      onClick?: never;
-    }
-);
-
-type DataCardComponent = (<TData extends MRT_RowData>(
-  props: DataCardProps<TData>,
-) => JSX.Element) & {
-  displayName?: string;
+export type DataCardProps = Omit<
+  CardProps,
+  "accessory|button|isLoading|onClick"
+> & {
+  hasSelection?: boolean;
+  isSelected?: boolean;
+  onSelectionChange?: () => void;
 };
 
-const AccessoryContainer = styled("div", {
-  shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "variant",
-})<{
-  odysseyDesignTokens: DesignTokens;
-  variant: (typeof cardVariantValues)[number];
-}>(({ odysseyDesignTokens, variant }) => ({
-  display: "flex",
-  flexDirection: variant === "compact" ? "row" : "column",
-  alignItems: "center",
-  gap: odysseyDesignTokens.Spacing2,
-  height: variant === "compact" ? CARD_IMAGE_SIZE_COMPACT : "auto",
-}));
-
-const ImageContainer = styled("div", {
-  shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" &&
-    prop !== "hasMenuButtonChildren" &&
-    prop !== "variant",
-})<{
-  odysseyDesignTokens: DesignTokens;
-  hasMenuButtonChildren: boolean;
-  variant: (typeof cardVariantValues)[number];
-}>(({ odysseyDesignTokens, hasMenuButtonChildren, variant }) => ({
-  display: "flex",
-  alignItems: "flex-start",
-  height: variant === "compact" ? CARD_IMAGE_SIZE_COMPACT : CARD_IMAGE_SIZE,
-  maxHeight: variant === "compact" ? CARD_IMAGE_SIZE_COMPACT : CARD_IMAGE_SIZE,
-  marginBlockEnd: variant === "tile" ? odysseyDesignTokens.Spacing5 : 0,
-  paddingRight: hasMenuButtonChildren ? odysseyDesignTokens.Spacing5 : 0,
-}));
-
-const MenuButtonContainer = styled("div", {
+const CheckboxContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{
   odysseyDesignTokens: DesignTokens;
-  variant: (typeof cardVariantValues)[number];
-}>(({ odysseyDesignTokens, variant }) => ({
-  position: "absolute",
-  right: odysseyDesignTokens.Spacing3,
-  top:
-    variant === "compact"
-      ? odysseyDesignTokens.Spacing4
-      : odysseyDesignTokens.Spacing3,
-  height: variant === "compact" ? CARD_IMAGE_SIZE_COMPACT : "auto",
-  display: "flex",
-  alignItems: "center",
-}));
-
-const CardInnerContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
-  display: "flex",
-  gap: odysseyDesignTokens.Spacing3,
-}));
-
-const CardImageAndContentContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "variant" && prop !== "centerContent",
-})<{ variant: (typeof cardVariantValues)[number]; centerContent: boolean }>(
-  ({ variant, centerContent }) => ({
-    display: "flex",
-    flexDirection: variant === "tile" ? "column" : "row",
-    alignItems: centerContent ? "center" : "flex-start",
-  }),
-);
-
-const CardContent = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{
-  odysseyDesignTokens: DesignTokens;
-  variant: (typeof cardVariantValues)[number];
-}>(({ odysseyDesignTokens, variant }) => ({
-  "& > .MuiTypography-h5:not(:last-child)": {
-    marginBlockEnd: `${variant === "compact" ? odysseyDesignTokens.Spacing1 : odysseyDesignTokens.Spacing3} !important`,
-  },
-  "& > *:last-child": {
-    marginBlockEnd: 0,
-  },
-}));
-
-const CardChildrenContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
-  ["&:not(:first-child)"]: {
-    marginBlockStart: odysseyDesignTokens.Spacing3,
-  },
+}>(({ odysseyDesignTokens }) => ({
+  marginBlockStart: `-${odysseyDesignTokens.Spacing1}`,
 }));
 
 const AccessoryPlaceholder = styled(MuiIconButton)(() => ({
   visibility: "hidden",
 }));
-const buttonProviderValue = { isFullWidth: true };
 
-const DataCard: DataCardComponent = <TData extends MRT_RowData>({
-  Accessory: AccessoryProp,
-  button,
+const DataCard = ({
   children,
   description,
+  detailPanel,
+  hasSelection,
   image,
-  menuButtonChildren,
-  onClick,
+  isSelected,
+  onSelectionChange,
   overline,
-  renderDetailPanel,
-  row,
   title,
-  variant = "tile",
-}: DataCardProps<TData>) => {
+  variant,
+  menuButtonChildren,
+}: DataCardProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
 
-  const [isDetailPanelOpen, setIsDetailPanelOpen] = useState<boolean>(false);
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
+
+  const SelectionCheckbox = useMemo(
+    () => (
+      <CheckboxContainer odysseyDesignTokens={odysseyDesignTokens}>
+        <MuiCheckbox checked={isSelected} onChange={onSelectionChange} />
+      </CheckboxContainer>
+    ),
+    [isSelected, odysseyDesignTokens, onSelectionChange],
+  );
 
   const ExpansionToggle = useMemo(() => {
-    return renderDetailPanel?.({ row }) ? (
+    return detailPanel ? (
       <MuiTooltip
         title={
-          isDetailPanelOpen
+          isExpanded
             ? t("table.rowexpansion.collapse")
             : t("table.rowexpansion.expand")
         }
       >
         <MuiIconButton
-          children={isDetailPanelOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
-          onClick={() => setIsDetailPanelOpen(!isDetailPanelOpen)}
+          children={isExpanded ? <ChevronUpIcon /> : <ChevronDownIcon />}
+          onClick={() => setIsExpanded(!isExpanded)}
           aria-label={
-            isDetailPanelOpen
+            isExpanded
               ? t("table.rowexpansion.collapse")
               : t("table.rowexpansion.expand")
           }
@@ -219,138 +97,33 @@ const DataCard: DataCardComponent = <TData extends MRT_RowData>({
         <ChevronDownIcon />
       </AccessoryPlaceholder>
     );
-  }, [isDetailPanelOpen, renderDetailPanel, row, t]);
+  }, [isExpanded, detailPanel, t]);
 
   const Accessory = useMemo(() => {
     return (
-      <AccessoryContainer
-        odysseyDesignTokens={odysseyDesignTokens}
-        variant={variant}
-      >
-        {AccessoryProp}
-        {renderDetailPanel && ExpansionToggle}
-      </AccessoryContainer>
+      <>
+        {hasSelection && SelectionCheckbox}
+        {detailPanel && ExpansionToggle}
+      </>
     );
-  }, [
-    AccessoryProp,
-    ExpansionToggle,
-    odysseyDesignTokens,
-    renderDetailPanel,
-    variant,
-  ]);
-
-  const cardContent = useMemo(() => {
-    const countDefinedProps = (
-      props: Array<string | ReactNode | undefined>,
-    ) => {
-      return props.filter((prop) => prop !== undefined).length;
-    };
-
-    const shouldCenterContent =
-      variant === "compact" &&
-      (!renderDetailPanel || !isDetailPanelOpen) &&
-      countDefinedProps([title, description, overline, button, children]) <= 2;
-
-    return (
-      <CardInnerContainer odysseyDesignTokens={odysseyDesignTokens}>
-        {(AccessoryProp || renderDetailPanel) && <Box>{Accessory}</Box>}
-        <CardImageAndContentContainer
-          variant={variant}
-          centerContent={shouldCenterContent}
-        >
-          {image && (
-            <ImageContainer
-              odysseyDesignTokens={odysseyDesignTokens}
-              hasMenuButtonChildren={Boolean(menuButtonChildren)}
-              variant={variant}
-            >
-              {image}
-            </ImageContainer>
-          )}
-
-          <CardContent
-            odysseyDesignTokens={odysseyDesignTokens}
-            variant={variant}
-          >
-            {overline && <Support component="div">{overline}</Support>}
-            {title && <Heading5 component="div">{title}</Heading5>}
-            {description && (
-              <Paragraph color="textSecondary">{description}</Paragraph>
-            )}
-
-            {button && (
-              <MuiCardActions>
-                <ButtonContext.Provider value={buttonProviderValue}>
-                  {button}
-                </ButtonContext.Provider>
-              </MuiCardActions>
-            )}
-
-            {children && (
-              <CardChildrenContainer odysseyDesignTokens={odysseyDesignTokens}>
-                {children}
-              </CardChildrenContainer>
-            )}
-
-            {renderDetailPanel && isDetailPanelOpen && (
-              <CardChildrenContainer odysseyDesignTokens={odysseyDesignTokens}>
-                {renderDetailPanel({ row })}
-              </CardChildrenContainer>
-            )}
-          </CardContent>
-        </CardImageAndContentContainer>
-      </CardInnerContainer>
-    );
-  }, [
-    odysseyDesignTokens,
-    AccessoryProp,
-    renderDetailPanel,
-    Accessory,
-    variant,
-    image,
-    menuButtonChildren,
-    overline,
-    title,
-    description,
-    button,
-    children,
-    isDetailPanelOpen,
-    row,
-  ]);
+  }, [ExpansionToggle, SelectionCheckbox, detailPanel, hasSelection]);
 
   return (
-    <MuiCard
-      className={`${onClick ? "isClickable" : ""} ${Accessory ? "hasAccessory" : ""} ods-card-${variant}`}
-      role="listitem"
-    >
-      {onClick ? (
-        <MuiCardActionArea onClick={onClick}>{cardContent}</MuiCardActionArea>
-      ) : (
-        cardContent
-      )}
-
-      {menuButtonChildren && (
-        <MenuButtonContainer
-          odysseyDesignTokens={odysseyDesignTokens}
-          variant={variant}
-        >
-          <MenuButton
-            endIcon={<MoreIcon />}
-            ariaLabel={t("table.moreactions.arialabel")}
-            buttonVariant="floating"
-            menuAlignment="right"
-            size="small"
-            tooltipText={t("table.actions")}
-          >
-            {menuButtonChildren}
-          </MenuButton>
-        </MenuButtonContainer>
-      )}
-    </MuiCard>
+    <Card
+      accessory={Accessory}
+      children={children}
+      description={description}
+      detailPanel={isExpanded && detailPanel}
+      image={image}
+      overline={overline}
+      title={title}
+      variant={variant}
+      menuButtonChildren={menuButtonChildren}
+    />
   );
 };
 
-const MemoizedDataCard = memo(DataCard) as DataCardComponent;
+const MemoizedDataCard = memo(DataCard);
 MemoizedDataCard.displayName = "DataCard";
 
 export { MemoizedDataCard as DataCard };
