@@ -43,4 +43,5 @@ export {
 export * from "./AppSwitcher";
 export * from "./SideNav/NavAccordion";
 export * from "./SideNav";
+export * from "./Stepper";
 export * from "./TopNav";

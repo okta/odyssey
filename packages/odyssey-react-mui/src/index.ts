@@ -103,7 +103,6 @@ export * from "./Select";
 export * from "./Stack";
 export * from "./Status";
 export * from "./Surface";
-export * from "./Stepper";
 export * from "./Switch";
 export * from "./Tabs";
 export * from "./Tag";

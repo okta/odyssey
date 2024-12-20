@@ -10,22 +10,22 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
+import { useOdysseyDesignTokens } from "@okta/odyssey-react-mui";
 import {
   Stepper,
   StepperNavigation,
   StepperProps,
-  useOdysseyDesignTokens,
-} from "@okta/odyssey-react-mui";
+} from "@okta/odyssey-react-mui/labs";
 import { expect } from "@storybook/jest";
+import { Meta, StoryObj } from "@storybook/react";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
+import { useState } from "react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { axeRun } from "../../../axe-util";
-import type { PlaywrightProps } from "../storybookTypes";
+import type { PlaywrightProps } from "../../odyssey-mui/storybookTypes";
 
 const storybookMeta: Meta<StepperProps> = {
-  title: "MUI Components/Stepper",
+  title: "Labs Components/Stepper",
   component: Stepper,
   argTypes: {
     activeStep: {
