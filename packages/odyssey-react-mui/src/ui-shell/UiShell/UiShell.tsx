@@ -20,6 +20,7 @@ import {
   type UiShellContentProps,
   type UiShellNavComponentProps,
 } from "./UiShellContent";
+import { UiShellColorsProvider } from "./UiShellColorsProvider";
 import { type ReactRootElements } from "../../web-component";
 
 export const defaultComponentProps: UiShellNavComponentProps = {
@@ -45,9 +46,12 @@ export type UiShellProps = {
       componentProps: SetStateAction<UiShellNavComponentProps>,
     ) => void,
   ) => () => void;
+  sideNavBackgroundColor?: string;
+  topNavBackgroundColor?: string;
 } & Pick<ReactRootElements, "appRootElement" | "stylesRootElement"> &
   Pick<
     UiShellContentProps,
+    | "appBackgroundColor"
     | "appBackgroundContrastMode"
     | "appComponent"
     | "hasStandardAppContentPadding"
@@ -64,6 +68,7 @@ export type UiShellProps = {
  * If an error occurs, this will revert to only showing the app.
  */
 const UiShell = ({
+  appBackgroundColor,
   appBackgroundContrastMode,
   appComponent,
   appRootElement,
@@ -72,7 +77,9 @@ const UiShell = ({
   onError = console.error,
   onSubscriptionCreated,
   optionalComponents,
+  sideNavBackgroundColor,
   stylesRootElement,
+  topNavBackgroundColor,
   subscribeToPropChanges,
 }: UiShellProps) => {
   const [componentProps, setComponentProps] = useState(defaultComponentProps);
@@ -98,16 +105,21 @@ const UiShell = ({
       >
         <ErrorBoundary fallback={appComponent} onError={onError}>
           <CssBaseline />
-
-          <UiShellContent
-            {...componentProps}
+          <UiShellColorsProvider
+            appBackgroundColor={appBackgroundColor}
             appBackgroundContrastMode={appBackgroundContrastMode}
-            appComponent={appComponent}
-            hasStandardAppContentPadding={hasStandardAppContentPadding}
-            initialVisibleSections={initialVisibleSections}
-            onError={onError}
-            optionalComponents={optionalComponents}
-          />
+            sideNavBackgroundColor={sideNavBackgroundColor}
+            topNavBackgroundColor={topNavBackgroundColor}
+          >
+            <UiShellContent
+              {...componentProps}
+              appComponent={appComponent}
+              hasStandardAppContentPadding={hasStandardAppContentPadding}
+              initialVisibleSections={initialVisibleSections}
+              onError={onError}
+              optionalComponents={optionalComponents}
+            />
+          </UiShellColorsProvider>
         </ErrorBoundary>
       </OdysseyProvider>
     </ErrorBoundary>

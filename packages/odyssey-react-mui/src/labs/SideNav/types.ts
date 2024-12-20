@@ -16,6 +16,7 @@ import type { statusSeverityValues } from "../../Status";
 
 export type SideNavLogoProps = {
   href?: string;
+  isSameBackgroundAsMain?: boolean;
 } & (
   | {
       /**

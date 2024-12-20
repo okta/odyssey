@@ -1675,10 +1675,6 @@ export const components = ({
           paddingBlockStart: odysseyTokens.Spacing5,
           paddingBlockEnd: odysseyTokens.Spacing5,
           paddingInline: odysseyTokens.Spacing6,
-
-          "& > .${ buttonClasses.root }": {
-            margin: "0 !important",
-          },
         },
       },
     },
@@ -2304,10 +2300,6 @@ export const components = ({
 
           ...(ownerState.divider && {
             borderBlockEnd: `1px solid ${odysseyTokens.BorderColorDisplay}`,
-          }),
-
-          ...(!ownerState.isFullWidth && {
-            maxWidth: "100%",
           }),
 
           [`&.${menuItemClasses.disabled}`]: {
