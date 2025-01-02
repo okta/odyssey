@@ -204,7 +204,7 @@ const SideNavToggleButton = ({
       );
     }
 
-    return null;
+    return undefined;
   }, [odysseyDesignTokens, shellColors]);
 
   useImperativeHandle(
