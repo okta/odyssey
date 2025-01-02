@@ -111,7 +111,7 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<FieldsetProps>
+type Story = StoryObj<FieldsetProps>;
 
 export const Simple: Story = {};
 

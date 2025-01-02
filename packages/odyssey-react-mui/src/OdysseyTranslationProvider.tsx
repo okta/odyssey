@@ -25,17 +25,18 @@ export type TranslationOverrides<
   SupportedLanguages extends string = DefaultSupportedLanguages,
 > = Record<SupportedLanguages, Partial<OdysseyI18nResourceKeys>>;
 
-const mergeBundleOverrides = <SupportedLanguages extends string = DefaultSupportedLanguages>(
+const mergeBundleOverrides = <
+  SupportedLanguages extends string = DefaultSupportedLanguages,
+>(
   languageCode: SupportedLanguages,
   translationOverrides: TranslationOverrides<SupportedLanguages>,
 ) => {
   const translationStringOverrides = translationOverrides[languageCode];
 
-  const translationStrings = (
+  const translationStrings =
     languageCode in resources
-    ? resources[languageCode as DefaultSupportedLanguages]
-    : {}
-  );
+      ? resources[languageCode as DefaultSupportedLanguages]
+      : {};
 
   return {
     ...translationStrings,

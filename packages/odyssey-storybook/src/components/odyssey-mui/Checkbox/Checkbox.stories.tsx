@@ -10,10 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {
-  Checkbox,
-  checkboxValidityValues,
-} from "@okta/odyssey-react-mui";
+import { Checkbox, checkboxValidityValues } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 import { expect, userEvent, within } from "@storybook/test";
 import { ChangeEvent, useCallback, useState } from "react";
@@ -159,24 +156,22 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>
+type Story = StoryObj<typeof meta>;
 
 const checkTheBox =
-  (actionName: string): Story["play"] => (
-    ({ canvasElement, step }) => (
-      step("check the box", async ({ args }) => {
-        const canvas = within(canvasElement);
-        const checkBox = canvas.getByRole("checkbox");
-        if (checkBox) {
-          await userEvent.click(checkBox);
-        }
-        await userEvent.tab();
-        await expect(checkBox).toBeChecked();
-        await expect(args.onBlur).toHaveBeenCalledTimes(1);
-        await axeRun(actionName);
-      })
-    )
-  )
+  (actionName: string): Story["play"] =>
+  ({ canvasElement, step }) =>
+    step("check the box", async ({ args }) => {
+      const canvas = within(canvasElement);
+      const checkBox = canvas.getByRole("checkbox");
+      if (checkBox) {
+        await userEvent.click(checkBox);
+      }
+      await userEvent.tab();
+      await expect(checkBox).toBeChecked();
+      await expect(args.onBlur).toHaveBeenCalledTimes(1);
+      await axeRun(actionName);
+    });
 
 export const Default: Story = {
   args: {

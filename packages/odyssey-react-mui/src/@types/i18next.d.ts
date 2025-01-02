@@ -10,16 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import "i18next"
-import { defaultNS, keySeparator, resources } from "../i18n"
+import "i18next";
+import { defaultNS, keySeparator, resources } from "../i18n";
 
 declare module "i18next" {
-
   interface CustomTypeOptions {
-    defaultNS: typeof defaultNS
-    keySeparator: typeof keySeparator
+    defaultNS: typeof defaultNS;
+    keySeparator: typeof keySeparator;
     resources: {
       odyssey: (typeof resources)["en"];
-    }
+    };
   }
 }

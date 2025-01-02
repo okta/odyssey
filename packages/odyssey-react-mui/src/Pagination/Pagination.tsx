@@ -231,7 +231,7 @@ const Pagination = ({
       updatedPage,
       rowsPerPage,
       updatedRowsPerPage,
-    })
+    });
 
     onPaginationChange({
       pageIndex: updatedPage,

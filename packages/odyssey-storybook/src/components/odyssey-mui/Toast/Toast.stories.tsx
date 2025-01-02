@@ -142,23 +142,23 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>
+type Story = StoryObj<typeof meta>;
 
 const openToast =
-  (actionName: string): Story["play"] => (
-    ({ args, canvasElement, step }) => (
-      step(`open ${actionName}`, async () => {
-        await waitFor(async () => {
-          const buttonElement = within(canvasElement).getByText(`Open ${args.severity} toast`);
-          await userEvent.hover(buttonElement);
-          await userEvent.click(buttonElement);
-          await userEvent.tab();
-        });
+  (actionName: string): Story["play"] =>
+  ({ args, canvasElement, step }) =>
+    step(`open ${actionName}`, async () => {
+      await waitFor(async () => {
+        const buttonElement = within(canvasElement).getByText(
+          `Open ${args.severity} toast`,
+        );
+        await userEvent.hover(buttonElement);
+        await userEvent.click(buttonElement);
+        await userEvent.tab();
+      });
 
-        await axeRun(actionName);
-      })
-    )
-  )
+      await axeRun(actionName);
+    });
 
 const Single: Story = {
   args: {

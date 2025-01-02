@@ -28,8 +28,7 @@ const meta = {
       control: "text",
       defaultValue: "DatePicker label",
     },
-    onCalendarDateChange: {
-    },
+    onCalendarDateChange: {},
     defaultValue: {
       description:
         "A date object passed into the component to pre-fill the input",
@@ -97,7 +96,7 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof DatePicker>
+type Story = StoryObj<typeof DatePicker>;
 
 export const Default: Story = {};
 

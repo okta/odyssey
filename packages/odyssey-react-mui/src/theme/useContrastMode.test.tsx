@@ -35,7 +35,7 @@ describe("useContrastMode and related functions", () => {
   });
 
   describe("useContrastMode hook", () => {
-    let getComputedStyleSpy: MockInstance<typeof window.getComputedStyle>
+    let getComputedStyleSpy: MockInstance<typeof window.getComputedStyle>;
 
     beforeEach(() => {
       getComputedStyleSpy = vi
@@ -126,15 +126,18 @@ describe("useContrastMode and related functions", () => {
     });
 
     it("should clean up observers and event listeners on unmount", () => {
-      const observeSpy = vi.spyOn(MutationObserver.prototype, 'observe').mockImplementation(vi.fn());
-      const disconnectSpy = vi.spyOn(MutationObserver.prototype, 'disconnect').mockImplementation(vi.fn());
-      const takeRecordsSpy = vi.spyOn(MutationObserver.prototype, 'takeRecords').mockImplementation(vi.fn());
+      const observeSpy = vi
+        .spyOn(MutationObserver.prototype, "observe")
+        .mockImplementation(vi.fn());
+      const disconnectSpy = vi
+        .spyOn(MutationObserver.prototype, "disconnect")
+        .mockImplementation(vi.fn());
+      const takeRecordsSpy = vi
+        .spyOn(MutationObserver.prototype, "takeRecords")
+        .mockImplementation(vi.fn());
 
       const addEventListenerSpy = vi.spyOn(document, "addEventListener");
-      const removeEventListenerSpy = vi.spyOn(
-        document,
-        "removeEventListener",
-      );
+      const removeEventListenerSpy = vi.spyOn(document, "removeEventListener");
 
       const TestComponent = () => {
         const { contrastContainerRef } = useContrastMode({});
@@ -158,9 +161,9 @@ describe("useContrastMode and related functions", () => {
       addEventListenerSpy.mockRestore();
       removeEventListenerSpy.mockRestore();
 
-      disconnectSpy.mockRestore()
-      observeSpy.mockRestore()
-      takeRecordsSpy.mockRestore()
+      disconnectSpy.mockRestore();
+      observeSpy.mockRestore();
+      takeRecordsSpy.mockRestore();
     });
   });
 
@@ -280,12 +283,18 @@ describe("useContrastMode and related functions", () => {
 
   describe("MutationObserver functionality", () => {
     let addEventListenerSpy: MockInstance<typeof document.addEventListener>;
-    let removeEventListenerSpy: MockInstance<typeof document.removeEventListener>;
+    let removeEventListenerSpy: MockInstance<
+      typeof document.removeEventListener
+    >;
 
     beforeEach(() => {
-      addEventListenerSpy = vi.spyOn(document, "addEventListener").mockImplementation(vi.fn());
-      removeEventListenerSpy = vi.spyOn(document, "removeEventListener").mockImplementation(vi.fn());
-      });
+      addEventListenerSpy = vi
+        .spyOn(document, "addEventListener")
+        .mockImplementation(vi.fn());
+      removeEventListenerSpy = vi
+        .spyOn(document, "removeEventListener")
+        .mockImplementation(vi.fn());
+    });
 
     afterEach(() => {
       addEventListenerSpy.mockRestore();
@@ -293,9 +302,15 @@ describe("useContrastMode and related functions", () => {
     });
 
     it("should clean up observers and event listeners on unmount", () => {
-      const observeSpy = vi.spyOn(MutationObserver.prototype, 'observe').mockImplementation(vi.fn());
-      const disconnectSpy = vi.spyOn(MutationObserver.prototype, 'disconnect').mockImplementation(vi.fn());
-      const takeRecordsSpy = vi.spyOn(MutationObserver.prototype, 'takeRecords').mockImplementation(vi.fn());
+      const observeSpy = vi
+        .spyOn(MutationObserver.prototype, "observe")
+        .mockImplementation(vi.fn());
+      const disconnectSpy = vi
+        .spyOn(MutationObserver.prototype, "disconnect")
+        .mockImplementation(vi.fn());
+      const takeRecordsSpy = vi
+        .spyOn(MutationObserver.prototype, "takeRecords")
+        .mockImplementation(vi.fn());
 
       const TestComponent = () => {
         const { contrastContainerRef } = useContrastMode({});
@@ -316,9 +331,9 @@ describe("useContrastMode and related functions", () => {
         expect.any(Function),
       );
 
-      disconnectSpy.mockRestore()
-      observeSpy.mockRestore()
-      takeRecordsSpy.mockRestore()
+      disconnectSpy.mockRestore();
+      observeSpy.mockRestore();
+      takeRecordsSpy.mockRestore();
     });
   });
 

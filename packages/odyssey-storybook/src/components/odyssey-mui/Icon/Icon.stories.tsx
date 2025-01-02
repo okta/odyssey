@@ -113,6 +113,7 @@ const columns: DataTableColumn<IconData>[] = [
   {
     accessorKey: "icon",
     Cell: ({ row }) =>
+      // TODO: Fix this. There's an error about being unable to validate a computed value.
       // eslint-disable-next-line import/namespace
       createElement(iconDictionary[row.original.name]),
     header: "Icon",
@@ -124,6 +125,7 @@ const columns: DataTableColumn<IconData>[] = [
   {
     accessorKey: "className",
     Cell: ({ row }) =>
+      // TODO: Fix this. There's an error about being unable to validate a computed value.
       // eslint-disable-next-line import/namespace
       iconDictionary[row.original.name]?.displayName ?? "",
     header: "Class Name",
@@ -142,10 +144,12 @@ export const Default: StoryObj = {
   render: function C() {
     return (
       <DataTable
-      // The `as` here shouldn't be required because `DataTable` should be inferring the type of `columns`, but it doesn't take a generic to know that. --Kevin Ghadyani
+        // The `as` here shouldn't be required because `DataTable` should be inferring the type of `columns`, but it doesn't take a generic to know that. --Kevin Ghadyani
         columns={columns as DataTableColumn<DataTableRowData>[]}
         // The `as` here shouldn't be required because `DataTable` should know the return type of `getData` and infer the rest. It needs to ta generic to fix that. --Kevin Ghadyani
-        getRowId={(originalRow) => originalRow.name as keyof typeof iconDictionary}
+        getRowId={(originalRow) =>
+          originalRow.name as keyof typeof iconDictionary
+        }
         getData={() => icons}
         hasSorting={false}
       />

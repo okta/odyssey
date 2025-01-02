@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { PropertySymbol } from 'happy-dom';
+import { PropertySymbol } from "happy-dom";
 import "@testing-library/jest-dom/vitest";
 import "jest-axe/extend-expect";
 import "regenerator-runtime/runtime";
@@ -18,9 +18,9 @@ import "regenerator-runtime/runtime";
 /* eslint-disable */
 const browserWindow =
   // @ts-expect-error
-  global.document[PropertySymbol.ownerWindow]
+  global.document[PropertySymbol.ownerWindow] ||
   // @ts-expect-error
-  || global.document[PropertySymbol.window];
+  global.document[PropertySymbol.window];
 
 global.setTimeout = browserWindow.setTimeout;
 global.clearTimeout = browserWindow.clearTimeout;

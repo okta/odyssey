@@ -189,7 +189,7 @@ const CardLayoutContent = <TData extends MRT_RowData>({
               maxGridColumns={cardLayoutOptions.maxGridColumns ?? 3}
               role="list"
             >
-              {data.map((row: TData, index: number) => {
+              {data.map((row, index) => {
                 const {
                   overline,
                   title,
@@ -226,10 +226,13 @@ const CardLayoutContent = <TData extends MRT_RowData>({
                       (cardLayoutOptions.rowActionMenuItems ||
                         hasRowReordering) && (
                         <RowActions
-                          row={row}
+                          row={row as unknown as MRT_Row<MRT_RowData>} // TODO: FIX THIS! The types are wrong. `row` is incorrectly set in `RowActions` to not be TData.
                           rowIndex={currentIndex}
                           rowActionMenuItems={
-                            cardLayoutOptions.rowActionMenuItems
+                            // TODO: FIX THIS! The types are wrong. `row` is incorrectly set in `RowActions` to not be TData.
+                            cardLayoutOptions.rowActionMenuItems as unknown as (
+                              row: MRT_Row<MRT_RowData>,
+                            ) => any // eslint-disable-line @typescript-eslint/no-explicit-any
                           }
                           isRowReorderingDisabled={isRowReorderingDisabled}
                           totalRows={totalRows}

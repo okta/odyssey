@@ -93,7 +93,7 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>
+type Story = StoryObj<typeof meta>;
 
 const Template: Story = {
   args: {} as Story["args"], // This is a hack.

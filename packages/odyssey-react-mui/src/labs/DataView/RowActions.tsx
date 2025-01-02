@@ -27,9 +27,9 @@ export type RowActionsProps<TData extends MRT_RowData> = {
   isRowReorderingDisabled?: boolean;
   row: MRT_Row<TData>;
   rowActionButtons?: (
-    row: TData,
+    row: MRT_Row<TData>,
   ) => ReactElement<typeof Button> | ReactElement<typeof Fragment>;
-  rowActionMenuItems?: (row: TData) => MenuButtonProps["children"];
+  rowActionMenuItems?: (row: MRT_Row<TData>) => MenuButtonProps["children"];
   rowIndex: number;
   totalRows?: DataTableProps<TData>["totalRows"];
   updateRowOrder?: ({

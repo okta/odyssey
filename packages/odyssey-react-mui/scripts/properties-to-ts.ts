@@ -79,7 +79,7 @@ const convertPropertiesToJson = async ({
       .map((propertiesFilePath) => join(sourceDirectory, propertiesFilePath)),
     propertiesTargetDirectory,
   );
-}
+};
 
 yargs(hideBin(process.argv))
   .scriptName("properties-to-ts")

@@ -219,7 +219,7 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: { defaultValue: "" },
@@ -236,12 +236,12 @@ export const Default: Story = {
         await userEvent.click(listItem);
         await userEvent.tab();
         await waitFor(() => {
-          expect(listboxElement).not.toBeInTheDocument()
+          expect(listboxElement).not.toBeInTheDocument();
         });
         const inputElement = canvasElement.querySelector("input");
         await expect(inputElement?.value).toBe("Roles and permissions");
         await waitFor(() => {
-          axeRun("Select Default")
+          axeRun("Select Default");
         });
       }
     });
@@ -419,7 +419,7 @@ export const MultiSelect: Story = {
         await userEvent.click(listboxElement.children[1]);
         await userEvent.tab();
         await waitFor(() => {
-          expect(listboxElement).not.toBeInTheDocument()
+          expect(listboxElement).not.toBeInTheDocument();
         });
 
         const inputElement = canvasElement.querySelector("input");
@@ -428,7 +428,7 @@ export const MultiSelect: Story = {
         );
         await userEvent.click(canvasElement);
         await waitFor(() => {
-          axeRun("Select Multiple")
+          axeRun("Select Multiple");
         });
       }
     });

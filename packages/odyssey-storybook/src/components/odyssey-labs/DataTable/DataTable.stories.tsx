@@ -90,10 +90,8 @@ const storybookMeta: Meta<DataTableMetaProps> = {
     hasRowSelection: {
       control: "boolean",
     },
-    onChangeRowSelection: {
-    },
-    bulkActionMenuItems: {
-    },
+    onChangeRowSelection: {},
+    bulkActionMenuItems: {},
     hasPagination: {
       control: "boolean",
     },
@@ -119,20 +117,16 @@ const storybookMeta: Meta<DataTableMetaProps> = {
     hasSearchSubmitButton: {
       control: "boolean",
     },
-    filters: {
-    },
+    filters: {},
     searchDelayTime: {
       control: "number",
     },
     errorMessage: {
       control: "text",
     },
-    emptyPlaceholder: {
-    },
-    noResultsPlaceholder: {
-    },
-    columns: {
-    },
+    emptyPlaceholder: {},
+    noResultsPlaceholder: {},
+    columns: {},
     initialDensity: {
       control: "select",
       options: densityValues,
@@ -146,12 +140,9 @@ const storybookMeta: Meta<DataTableMetaProps> = {
     hasColumnVisibility: {
       control: "boolean",
     },
-    renderDetailPanel: {
-    },
-    rowActionButtons: {
-    },
-    tableRowActionMenuItems: {
-    },
+    renderDetailPanel: {},
+    rowActionButtons: {},
+    tableRowActionMenuItems: {},
     hasSorting: {
       control: "boolean",
     },

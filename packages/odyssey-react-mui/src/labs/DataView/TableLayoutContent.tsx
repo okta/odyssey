@@ -238,8 +238,15 @@ const TableLayoutContent = <TData extends MRT_RowData>({
             >
               <RowActions
                 isRowReorderingDisabled={isRowReorderingDisabled}
-                row={row}
-                rowActionMenuItems={tableLayoutOptions.rowActionMenuItems}
+                row={
+                  row as unknown as MRT_Row<MRT_RowData> // TODO: FIX THIS! The types are wrong. `row` is incorrectly set in `RowActions` to not be TData.
+                }
+                rowActionMenuItems={
+                  // TODO: FIX THIS! The types are wrong. `row` is incorrectly set in `RowActions` to not be TData.
+                  tableLayoutOptions.rowActionMenuItems as unknown as (
+                    row: MRT_Row<MRT_RowData>,
+                  ) => any // eslint-disable-line @typescript-eslint/no-explicit-any
+                }
                 rowIndex={currentIndex}
                 totalRows={totalRows}
                 updateRowOrder={
@@ -355,6 +362,7 @@ const TableLayoutContent = <TData extends MRT_RowData>({
           children: (
             <Box sx={{ display: "flex", visibility: "hidden" }}>
               {tableLayoutOptions.rowActionButtons &&
+                // @ts-expect-error TODO: This type is wrong and needs to be fixed
                 tableLayoutOptions.rowActionButtons({ id: null })}
               {((hasRowReordering === true && onReorderRows) ||
                 tableLayoutOptions.rowActionMenuItems) && (

@@ -10,7 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Accordion, Box, Button, Drawer, DrawerProps, variantValues } from "@okta/odyssey-react-mui";
+import {
+  Accordion,
+  Box,
+  Button,
+  Drawer,
+  DrawerProps,
+  variantValues,
+} from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 import { userEvent, waitFor, within } from "@storybook/test";
 import { useCallback, useState } from "react";
@@ -226,7 +233,7 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>
+type Story = StoryObj<typeof meta>;
 
 const DefaultTemplate: Story = {
   args: {} as DrawerProps, // This is a hack

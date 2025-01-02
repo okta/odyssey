@@ -13,10 +13,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { fn } from "@storybook/test";
-import {
-  AppTile,
-  appTileVariantValues,
-} from "@okta/odyssey-react-mui/labs";
+import { AppTile, appTileVariantValues } from "@okta/odyssey-react-mui/labs";
 import {
   Box,
   Drawer,

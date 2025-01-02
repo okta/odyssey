@@ -320,7 +320,7 @@ const ScrollableTableContainer = styled("div", {
   }),
 );
 
-const defaultGetRowId: DataTableProps["getRowId"] = (row) => row.id as string
+const defaultGetRowId: DataTableProps["getRowId"] = (row) => row.id as string;
 
 const DataTable = ({
   additionalActionButton,

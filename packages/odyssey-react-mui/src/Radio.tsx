@@ -73,17 +73,13 @@ const Radio = ({
   onClick,
 }: RadioProps) => {
   const localInputRef = useRef<HTMLInputElement>(null);
-  useImperativeHandle(
-    inputRef,
-    () => {
-      return {
-        focus: () => {
-          localInputRef.current?.focus();
-        },
-      };
-    },
-    [],
-  );
+  useImperativeHandle(inputRef, () => {
+    return {
+      focus: () => {
+        localInputRef.current?.focus();
+      },
+    };
+  }, []);
 
   const label = useMemo(
     () => (
