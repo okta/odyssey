@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2022-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -10,22 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-declare module "@mui/material/styles" {
-  interface Mixins {
-    borderRadius?: string;
-    borderStyle?: string;
-    borderWidth?: string;
-    maxWidth?: string;
-    insetFocusRing?: string;
-  }
+import { useEffect, useState } from "react";
 
-  interface MixinsOptions {
-    borderRadius?: string;
-    borderStyle?: string;
-    borderWidth?: string;
-    maxWidth?: string;
-    insetFocusRing?: string;
-  }
-}
+export const uiShellDataAttribute = "data-unified-ui-shell";
 
-export {};
+export const useHasUiShell = () => {
+  const [hasUiShell, setHasUiShell] = useState(false);
+
+  useEffect(() => {
+    setHasUiShell(Boolean(document.querySelector(`[${uiShellDataAttribute}]`)));
+  }, []);
+
+  return hasUiShell;
+};

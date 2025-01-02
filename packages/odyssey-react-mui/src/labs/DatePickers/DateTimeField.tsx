@@ -21,20 +21,20 @@ import {
 } from "react";
 import { InputAdornment } from "@mui/material";
 import {
-  DateField as MuiDateField,
-  DateFieldProps as MuiDateFieldProps,
-  DateValidationError,
+  DateTimeField as MuiDateTimeField,
+  DateTimeFieldProps as MuiDateTimeFieldProps,
+  DateTimeValidationError,
 } from "@mui/x-date-pickers";
 import { DateTime } from "luxon";
 import { useTranslation } from "react-i18next";
 
-import { Field, RenderFieldComponentProps } from "../Field";
-import { TextFieldProps } from "../TextField";
+import { Field, RenderFieldComponentProps } from "../../Field";
+import { TextFieldProps } from "../../TextField";
 
-export type DateFieldProps = {
+export type DateTimeFieldProps = {
   onChange?: (value: string) => void;
 } & Pick<
-  MuiDateFieldProps<DateTime>,
+  MuiDateTimeFieldProps<DateTime>,
   "defaultValue" | "inputRef" | "minDate" | "maxDate" | "timezone" | "value"
 > &
   Pick<
@@ -56,7 +56,7 @@ export type DateFieldProps = {
 const useOdysseyDateError = () => {
   const { t } = useTranslation();
 
-  return new Map<DateValidationError, string>([
+  return new Map<DateTimeValidationError, string>([
     ["invalidDate", t("picker.error.invalid")],
     ["maxDate", t("picker.error.maxdate")],
     ["minDate", t("picker.error.mindate")],
@@ -66,7 +66,7 @@ const useOdysseyDateError = () => {
 const formatDateTimeToUtcIsoDateString = (value: DateTime) =>
   value.toUTC().toISO();
 
-const DateField = ({
+const DateTimeField = ({
   defaultValue,
   endAdornment,
   errorMessage,
@@ -86,7 +86,7 @@ const DateField = ({
   onFocus,
   timezone,
   value,
-}: DateFieldProps) => {
+}: DateTimeFieldProps) => {
   const errorMap = useOdysseyDateError();
   const [displayedErrorMessage, setDisplayedErrorMessage] =
     useState(errorMessage);
@@ -140,7 +140,7 @@ const DateField = ({
   }, [internalValidationError, setDisplayedErrorMessage]);
 
   const validateAndCallOnChange = useCallback<
-    NonNullable<MuiDateFieldProps<DateTime>["onChange"]>
+    NonNullable<MuiDateTimeFieldProps<DateTime>["onChange"]>
   >(
     (value, validationContext) => {
       clearErrorMessages();
@@ -191,7 +191,7 @@ const DateField = ({
       id,
       labelElementId,
     }: RenderFieldComponentProps) => (
-      <MuiDateField
+      <MuiDateTimeField
         /* eslint-disable-next-line jsx-a11y/no-autofocus */
         autoFocus={hasInitialFocus}
         defaultValue={defaultValue}
@@ -261,7 +261,7 @@ const DateField = ({
   );
 };
 
-const MemoizedDateField = memo(DateField);
-MemoizedDateField.displayName = "DateField";
+const MemoizedDateTimeField = memo(DateTimeField);
+MemoizedDateTimeField.displayName = "DateTimeField";
 
-export { MemoizedDateField as DateField };
+export { MemoizedDateTimeField as DateTimeField };

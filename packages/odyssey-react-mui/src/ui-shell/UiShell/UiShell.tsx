@@ -50,6 +50,7 @@ export type UiShellProps = {
     UiShellContentProps,
     | "appBackgroundContrastMode"
     | "appComponent"
+    | "hasStandardAppContentPadding"
     | "initialVisibleSections"
     | "onError"
     | "optionalComponents"
@@ -66,6 +67,7 @@ const UiShell = ({
   appBackgroundContrastMode,
   appComponent,
   appRootElement,
+  hasStandardAppContentPadding,
   initialVisibleSections,
   onError = console.error,
   onSubscriptionCreated,
@@ -101,6 +103,7 @@ const UiShell = ({
             {...componentProps}
             appBackgroundContrastMode={appBackgroundContrastMode}
             appComponent={appComponent}
+            hasStandardAppContentPadding={hasStandardAppContentPadding}
             initialVisibleSections={initialVisibleSections}
             onError={onError}
             optionalComponents={optionalComponents}

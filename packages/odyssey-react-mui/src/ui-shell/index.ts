@@ -10,22 +10,5 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-declare module "@mui/material/styles" {
-  interface Mixins {
-    borderRadius?: string;
-    borderStyle?: string;
-    borderWidth?: string;
-    maxWidth?: string;
-    insetFocusRing?: string;
-  }
-
-  interface MixinsOptions {
-    borderRadius?: string;
-    borderStyle?: string;
-    borderWidth?: string;
-    maxWidth?: string;
-    insetFocusRing?: string;
-  }
-}
-
-export {};
+export * from "./UiShell";
+export * from "../web-component/renderReactInWebComponent";

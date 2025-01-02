@@ -18,8 +18,7 @@ import { createMessageBus } from "./createMessageBus";
 import { UiShell, UiShellProps } from "./UiShell";
 import { renderReactInWebComponent } from "../../web-component/renderReactInWebComponent";
 import { type UiShellNavComponentProps } from "./UiShellContent";
-
-export const uiShellDataAttribute = "data-unified-ui-shell";
+import { uiShellDataAttribute } from "./useHasUiShell";
 
 export const optionalComponentSlotNames: Record<
   keyof Required<UiShellProps>["optionalComponents"],
@@ -43,6 +42,7 @@ export const optionalComponentSlotNames: Record<
 export const renderUiShell = ({
   appBackgroundContrastMode,
   appRootElement: explicitAppRootElement,
+  hasStandardAppContentPadding,
   initialVisibleSections,
   onError = console.error,
   uiShellRootElement,
@@ -61,7 +61,9 @@ export const renderUiShell = ({
   uiShellRootElement: HTMLElement;
 } & Pick<
   UiShellProps,
-  "appBackgroundContrastMode" | "initialVisibleSections"
+  | "appBackgroundContrastMode"
+  | "hasStandardAppContentPadding"
+  | "initialVisibleSections"
 >) => {
   const appRootElement =
     explicitAppRootElement || document.createElement("div");
@@ -109,6 +111,7 @@ export const renderUiShell = ({
           appBackgroundContrastMode={appBackgroundContrastMode}
           appComponent={appComponent}
           appRootElement={reactRootElements.appRootElement}
+          hasStandardAppContentPadding={hasStandardAppContentPadding}
           initialVisibleSections={initialVisibleSections}
           onError={onError}
           onSubscriptionCreated={publishSubscriptionCreated}

@@ -39,6 +39,7 @@ import { SideNavFooterContent } from "./SideNavFooterContent";
 import { SideNavItemContentContext } from "./SideNavItemContentContext";
 import { SideNavToggleButton } from "./SideNavToggleButton";
 import { SortableList } from "./SortableList/SortableList";
+import { Overline } from "../../Typography";
 import { arrayMove } from "@dnd-kit/sortable";
 
 export const DEFAULT_SIDE_NAV_WIDTH = "300px";
@@ -61,7 +62,6 @@ const StyledCollapsibleContent = styled("div", {
     position: "relative",
     display: "inline-grid",
     gridTemplateColumns: DEFAULT_SIDE_NAV_WIDTH,
-    // gridTemplateRows: "max-content 1fr max-content",
     height: "100%",
     transition: `grid-template-columns ${odysseyDesignTokens.TransitionDurationMain}, opacity 300ms`,
     transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
@@ -128,7 +128,7 @@ const StyledSideNav = styled("nav", {
       zIndex: 2,
     },
 
-    "&:has([data-sidenav-toggle='true']:hover), &:has([data-sidenav-toggle='true']:focus)":
+    "&:has([data-sidenav-toggle='true']:hover), &:has([data-sidenav-toggle='true']:focus-visible)":
       {
         ...(isSideNavCollapsed && {
           "&::after": {
@@ -176,13 +176,16 @@ const SideNavListContainer = styled("ul")(() => ({
   padding: 0,
   listStyle: "none",
   listStyleType: "none",
+  margin: 0,
 }));
 
 const SideNavScrollableContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  display: "grid",
+  gridTemplateRows: "1fr max-content",
   flex: "1 1 100%",
-  overflowY: "auto",
+  overflowY: "scroll",
   paddingInline: odysseyDesignTokens.Spacing2,
 }));
 
@@ -191,19 +194,19 @@ const SectionHeaderContainer = styled("li", {
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
   paddingBlock: odysseyDesignTokens.Spacing1,
   paddingInline: odysseyDesignTokens.Spacing4,
-}));
-
-const SectionHeader = styled("h3", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
-  fontFamily: odysseyDesignTokens.TypographyFamilyHeading,
-  fontSize: odysseyDesignTokens.TypographySizeOverline,
-  fontWeight: odysseyDesignTokens.TypographyWeightHeadingBold,
+  marginBlock: `${odysseyDesignTokens.Spacing3}`,
   color: odysseyDesignTokens.HueNeutral600,
-  textTransform: "uppercase",
 }));
 
 const SideNavFooter = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+  flexShrink: 0,
+  padding: odysseyDesignTokens.Spacing4,
+  backgroundColor: odysseyDesignTokens.HueNeutralWhite,
+}));
+
+const PersistentSideNavFooter = styled(SideNavFooter, {
   shouldForwardProp: (prop) =>
     prop !== "isContentScrollable" && prop !== "odysseyDesignTokens",
 })(
@@ -214,11 +217,10 @@ const SideNavFooter = styled("div", {
     isContentScrollable: boolean;
     odysseyDesignTokens: DesignTokens;
   }) => ({
-    flexShrink: 0,
     transitionProperty: "box-shadow",
     transitionDuration: odysseyDesignTokens.TransitionDurationMain,
     transitionTiming: odysseyDesignTokens.TransitionTimingMain,
-    backgroundColor: odysseyDesignTokens.HueNeutralWhite,
+    zIndex: 2,
     // The box shadow should appear above the footer only if the scrollable region has overflow
     ...(isContentScrollable && {
       boxShadow: "0px -8px 8px -8px rgba(39, 39, 39, 0.08)",
@@ -229,22 +231,22 @@ const SideNavFooter = styled("div", {
 const SideNavFooterItemsContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
-  paddingBlock: odysseyDesignTokens.Spacing4,
-  // paddingBlockEnd: odysseyDesignTokens.Spacing4,
-  paddingInline: odysseyDesignTokens.Spacing5,
   display: "flex",
   flexWrap: "wrap",
   alignItems: "center",
   fontSize: odysseyDesignTokens.TypographySizeOverline,
 
-  a: {
-    color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
+  "a, span": {
+    color: odysseyDesignTokens.HueNeutral600,
+    transition: `color ${odysseyDesignTokens.TransitionDurationMain}`,
+
+    "&:visited": {
+      color: odysseyDesignTokens.HueNeutral600,
+    },
 
     "&:hover": {
       textDecoration: "none",
-    },
-    "&:visited": {
-      color: odysseyDesignTokens.TypographyColorHeading,
+      color: odysseyDesignTokens.HueNeutral900,
     },
   },
 }));
@@ -291,8 +293,8 @@ const SideNav = ({
   sideNavItems,
 }: SideNavProps) => {
   const [isSideNavCollapsed, setSideNavCollapsed] = useState(false);
-  const [isContentScrollable, setIsContentScrollable] = useState(false);
   const [hasContentScrolled, setHasContentScrolled] = useState(false);
+  const [isContentScrollable, setIsContentScrollable] = useState(false);
   const scrollableContentRef = useRef<HTMLUListElement>(null);
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
   const intersectionObserverRef = useRef<IntersectionObserver | null>(null);
@@ -470,6 +472,7 @@ const SideNav = ({
           id: childProps.id,
           isSelected: childProps.isSelected,
           isDisabled: childProps.isDisabled,
+          isSortable: childProps.isSortable,
           navItem: (
             <SideNavItemContentContext.Provider
               value={{
@@ -602,11 +605,7 @@ const SideNav = ({
                             key={id}
                             odysseyDesignTokens={odysseyDesignTokens}
                           >
-                            <SectionHeader
-                              odysseyDesignTokens={odysseyDesignTokens}
-                            >
-                              {label}
-                            </SectionHeader>
+                            <Overline component="h3">{label}</Overline>
                           </SectionHeaderContainer>
                         );
                       } else if (childNavItems) {
@@ -637,6 +636,7 @@ const SideNav = ({
                                         id={sortableItem.id}
                                         isDisabled={sortableItem.isDisabled}
                                         isSelected={sortableItem.isSelected}
+                                        isSortable={sortableItem.isSortable}
                                       >
                                         {sortableItem.navItem}
                                       </SortableList.Item>
@@ -668,22 +668,23 @@ const SideNav = ({
                       }
                     })}
               </SideNavListContainer>
+              {!isLoading && footerItems && !hasCustomFooter && (
+                <SideNavFooter odysseyDesignTokens={odysseyDesignTokens}>
+                  <SideNavFooterItemsContainer
+                    odysseyDesignTokens={odysseyDesignTokens}
+                  >
+                    <SideNavFooterContent footerItems={footerItems} />
+                  </SideNavFooterItemsContainer>
+                </SideNavFooter>
+              )}
             </SideNavScrollableContainer>
-            {!isLoading && (footerItems || hasCustomFooter) && (
-              <SideNavFooter
-                odysseyDesignTokens={odysseyDesignTokens}
+            {!isLoading && !footerItems && hasCustomFooter && (
+              <PersistentSideNavFooter
                 isContentScrollable={isContentScrollable}
+                odysseyDesignTokens={odysseyDesignTokens}
               >
-                {hasCustomFooter
-                  ? footerComponent
-                  : footerItems && (
-                      <SideNavFooterItemsContainer
-                        odysseyDesignTokens={odysseyDesignTokens}
-                      >
-                        <SideNavFooterContent footerItems={footerItems} />
-                      </SideNavFooterItemsContainer>
-                    )}
-              </SideNavFooter>
+                {footerComponent}
+              </PersistentSideNavFooter>
             )}
           </StyledOpacityTransitionContainer>
         </StyledCollapsibleContent>

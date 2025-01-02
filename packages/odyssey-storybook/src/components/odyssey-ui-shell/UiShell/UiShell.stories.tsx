@@ -11,14 +11,6 @@
  */
 
 import {
-  PageTemplate,
-  UiShell,
-  uiShellDataAttribute,
-  UserProfile,
-  type UiShellNavComponentProps,
-  type UiShellProps,
-} from "@okta/odyssey-react-mui/labs";
-import {
   Banner,
   Button,
   OdysseyProvider,
@@ -26,6 +18,13 @@ import {
   SearchField,
   Surface,
 } from "@okta/odyssey-react-mui";
+import { PageTemplate, UserProfile } from "@okta/odyssey-react-mui/labs";
+import {
+  UiShell,
+  uiShellDataAttribute,
+  type UiShellNavComponentProps,
+  type UiShellProps,
+} from "@okta/odyssey-react-mui/ui-shell";
 import {
   AddCircleIcon,
   HomeIcon,
@@ -37,7 +36,7 @@ import { fn } from "@storybook/test";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<UiShellProps> = {
-  title: "Labs Components/UI Shell",
+  title: "UI Shell Components/UI Shell",
   component: UiShell,
   argTypes: {
     appComponent: {
@@ -46,6 +45,16 @@ const storybookMeta: Meta<UiShellProps> = {
       table: {
         type: {
           summary: "InputType",
+        },
+      },
+    },
+    hasStandardAppContentPadding: {
+      control: "boolean",
+      description:
+        "defaults to `true`. If `false`, the content area will have no padding provided",
+      table: {
+        type: {
+          summary: "boolean",
         },
       },
     },
@@ -257,10 +266,10 @@ export const TopNavOnly: StoryObj<UiShellProps> = {
 
 export const AppSwitcherOnly: StoryObj<UiShellProps> = {
   args: {
+    hasStandardAppContentPadding: false,
     initialVisibleSections: ["AppSwitcher"],
     subscribeToPropChanges: (subscriber) => {
       subscriber({
-        topNavProps: {},
         appSwitcherProps: sharedAppSwitcherProps,
       });
 

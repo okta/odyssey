@@ -310,7 +310,7 @@ describe("DataView", () => {
       const rowActionButtons: TableLayoutProps<Person>["rowActionButtons"] = (
         row,
       ) => (
-        <Button variant="primary" label={`Button for ${row.original.name}`} />
+        <Button variant="primary" label={`Button for ${row.original?.name}`} />
       );
 
       render(

@@ -14,9 +14,9 @@ import styled from "@emotion/styled";
 import { memo, type ReactElement, type ReactNode } from "react";
 import { ErrorBoundary, ErrorBoundaryProps } from "react-error-boundary";
 
-import { AppSwitcher, type AppSwitcherProps } from "../AppSwitcher";
-import { SideNav, type SideNavProps } from "../SideNav";
-import { TopNav, type TopNavProps } from "../TopNav";
+import { AppSwitcher, type AppSwitcherProps } from "../../labs/AppSwitcher";
+import { SideNav, type SideNavProps } from "../../labs/SideNav";
+import { TopNav, type TopNavProps } from "../../labs/TopNav";
 import {
   useOdysseyDesignTokens,
   type DesignTokens,
@@ -28,21 +28,33 @@ const emptySideNavItems = [] satisfies SideNavProps["sideNavItems"];
 
 const StyledAppContainer = styled("div", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "appBackgroundContrastMode",
+    prop !== "odysseyDesignTokens" &&
+    prop !== "appBackgroundContrastMode" &&
+    prop !== "hasStandardAppContentPadding",
 })<{
   appBackgroundContrastMode: ContrastMode;
+  hasStandardAppContentPadding: UiShellContentProps["hasStandardAppContentPadding"];
   odysseyDesignTokens: DesignTokens;
-}>(({ appBackgroundContrastMode, odysseyDesignTokens }) => ({
-  gridArea: "app-content",
-  overflowX: "hidden",
-  overflowY: "auto",
-  paddingBlock: odysseyDesignTokens.Spacing5,
-  paddingInline: odysseyDesignTokens.Spacing8,
-  backgroundColor:
-    appBackgroundContrastMode === "highContrast"
-      ? odysseyDesignTokens.HueNeutralWhite
-      : odysseyDesignTokens.HueNeutral50,
-}));
+}>(
+  ({
+    appBackgroundContrastMode,
+    hasStandardAppContentPadding,
+    odysseyDesignTokens,
+  }) => ({
+    gridArea: "app-content",
+    overflowX: "hidden",
+    overflowY: "auto",
+    backgroundColor:
+      appBackgroundContrastMode === "highContrast"
+        ? odysseyDesignTokens.HueNeutralWhite
+        : odysseyDesignTokens.HueNeutral50,
+
+    ...(hasStandardAppContentPadding && {
+      paddingBlock: odysseyDesignTokens.Spacing5,
+      paddingInline: odysseyDesignTokens.Spacing8,
+    }),
+  }),
+);
 
 const StyledBannersContainer = styled("div")(() => ({
   gridArea: "banners",
@@ -88,13 +100,16 @@ export type UiShellNavComponentProps = {
    */
   appSwitcherProps?: AppSwitcherProps;
   /**
-   * Object that gets pass directly to the side nav component.
+   * Object that gets pass directly to the side nav component. If `undefined` and in `initialVisibleSections`, SideNav will be initially rendered. Pass `null` to hide a previously-visible SideNav.
    */
-  sideNavProps?: Omit<SideNavProps, "footerComponent">;
+  sideNavProps?: Omit<SideNavProps, "footerComponent"> | null;
   /**
-   * Object that gets pass directly to the top nav component.
+   * Object that gets pass directly to the top nav component. If `undefined` and in `initialVisibleSections`, TopNav will be initially rendered. Pass `null` to hide a previously-visible TopNav.
    */
-  topNavProps?: Omit<TopNavProps, "leftSideComponent" | "rightSideComponent">;
+  topNavProps?: Omit<
+    TopNavProps,
+    "leftSideComponent" | "rightSideComponent"
+  > | null;
 };
 
 export type UiShellContentProps = {
@@ -106,6 +121,10 @@ export type UiShellContentProps = {
    * React app component that renders as children in the correct location of the shell.
    */
   appComponent: ReactNode;
+  /**
+   * defaults to `true`. If `false`, the content area will have no padding provided
+   */
+  hasStandardAppContentPadding?: boolean;
   /**
    * Which parts of the UI Shell should be visible initially? For example,
    * if sideNavProps is undefined, should the space for the sidenav be initially visible?
@@ -136,6 +155,7 @@ export type UiShellContentProps = {
 const UiShellContent = ({
   appBackgroundContrastMode = "lowContrast",
   appComponent,
+  hasStandardAppContentPadding = true,
   initialVisibleSections = ["TopNav", "SideNav", "AppSwitcher"],
   onError = console.error,
   optionalComponents,
@@ -172,11 +192,16 @@ const UiShellContent = ({
       <StyledSideNavContainer>
         {
           /* If SideNav should be initially visible and we have not yet received props, render SideNav with minimal inputs */
-          initialVisibleSections?.includes("SideNav") && !sideNavProps && (
-            <ErrorBoundary fallback={null} onError={onError}>
-              <SideNav isLoading appName="" sideNavItems={emptySideNavItems} />
-            </ErrorBoundary>
-          )
+          initialVisibleSections?.includes("SideNav") &&
+            sideNavProps === undefined && (
+              <ErrorBoundary fallback={null} onError={onError}>
+                <SideNav
+                  isLoading
+                  appName=""
+                  sideNavItems={emptySideNavItems}
+                />
+              </ErrorBoundary>
+            )
         }
         {sideNavProps && (
           <ErrorBoundary fallback={null} onError={onError}>
@@ -199,15 +224,18 @@ const UiShellContent = ({
           </ErrorBoundary>
         )}
       </StyledSideNavContainer>
-
       <StyledTopNavContainer>
         {
           /* If TopNav should be initially visible and we have not yet received props, render Topnav with minimal inputs */
-          initialVisibleSections?.includes("TopNav") && !topNavProps && (
-            <ErrorBoundary fallback={null} onError={onError}>
-              <TopNav />
-            </ErrorBoundary>
-          )
+          initialVisibleSections?.includes("TopNav") &&
+            topNavProps === undefined && (
+              <ErrorBoundary fallback={null} onError={onError}>
+                <TopNav
+                  leftSideComponent={optionalComponents?.topNavLeftSide}
+                  rightSideComponent={optionalComponents?.topNavRightSide}
+                />
+              </ErrorBoundary>
+            )
         }
         {topNavProps && (
           <ErrorBoundary fallback={null} onError={onError}>
@@ -222,8 +250,9 @@ const UiShellContent = ({
       </StyledTopNavContainer>
 
       <StyledAppContainer
-        odysseyDesignTokens={odysseyDesignTokens}
         appBackgroundContrastMode={appBackgroundContrastMode}
+        hasStandardAppContentPadding={hasStandardAppContentPadding}
+        odysseyDesignTokens={odysseyDesignTokens}
         ref={scrollableContentRef}
         tabIndex={0}
       >

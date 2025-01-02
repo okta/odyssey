@@ -432,23 +432,27 @@ const DataTable = <TData extends MRT_RowData>({
   const rowVirtualizerInstanceRef =
     useRef<MRT_RowVirtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
 
-  const setHoveredRow = useCallback(
-    (table: TableType<TData>, id: TData["id"]) => {
-      if (id) {
-        const nextRow = table.getRow(id) as MRT_Row<TData>;
+  const setHoveredRow = useCallback<
+    (table: TableType<TData>, id: TData["id"]) => void
+  >((table, id) => {
+    if (id) {
+      const nextRow = table.getRow(id) as MRT_Row<TData>;
 
-        if (nextRow) {
-          table.setHoveredRow(nextRow);
-        }
+      if (nextRow) {
+        table.setHoveredRow(nextRow);
       }
-    },
-    [],
-  );
-
-  const resetDraggingAndHoveredRow = useCallback((table: TableType<TData>) => {
-    setDraggingRow(null);
-    table.setHoveredRow(null);
+    }
   }, []);
+
+  const resetDraggingAndHoveredRow = useCallback<
+    (table: TableType<TData>) => void
+  >(
+    (table) => {
+      setDraggingRow(null);
+      table.setHoveredRow(null);
+    },
+    [setDraggingRow],
+  );
 
   type HandleDragHandleKeyDownArgs = {
     table: TableType<TData>;

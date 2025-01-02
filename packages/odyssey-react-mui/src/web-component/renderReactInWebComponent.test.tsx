@@ -12,8 +12,8 @@
 
 import { waitFor } from "@testing-library/dom";
 
+import { createReactRootElements } from ".";
 import {
-  createReactRootElements,
   ReactInWebComponentElement,
   reactWebComponentElementName,
   renderReactInWebComponent,

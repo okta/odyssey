@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { Box, Heading5, Support } from "@okta/odyssey-react-mui";
 import {
   SideNav,
   SideNavItem,
@@ -38,6 +39,20 @@ import { PlaywrightProps } from "../../odyssey-mui/storybookTypes";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import PlaceholderLogo from "../PickerWithOptionAdornment/PlaceholderLogo";
 
+const CustomFooterComponent = () => {
+  return (
+    <Box
+      sx={{
+        border: "1px dashed gray",
+      }}
+    >
+      <Heading5>Your custom footer content goes here</Heading5>
+      <Support>
+        Dashed border to show content box. Not present outside of this example
+      </Support>
+    </Box>
+  );
+};
 const storybookMeta: Meta<SideNavProps> = {
   title: "Labs Components/SideNav",
   component: SideNav,
@@ -63,16 +78,16 @@ const storybookMeta: Meta<SideNavProps> = {
         },
       },
     },
-    // hasCustomFooter: {
-    //   control: "boolean",
-    //   description:
-    //     "Defines if a custom footer should be visible when available.",
-    //   table: {
-    //     type: {
-    //       summary: "boolean",
-    //     },
-    //   },
-    // },
+    hasCustomFooter: {
+      control: "boolean",
+      description:
+        "Defines if a custom footer should be visible when available.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
     isCollapsible: {
       control: "boolean",
       description: "Controls whether the side nav is collapsible",
@@ -129,7 +144,7 @@ const storybookMeta: Meta<SideNavProps> = {
     },
   },
   args: {
-    appName: "Admin",
+    appName: "Admin Console",
     isCollapsible: true,
     isCompact: false,
     sideNavItems: [
@@ -284,44 +299,6 @@ const storybookMeta: Meta<SideNavProps> = {
         label: "System Configuration",
         startIcon: <FolderIcon />,
       },
-      {
-        id: "item17-0",
-        label: "Enduser",
-        isSectionHeader: true,
-      },
-      {
-        id: "item17",
-        label: "My Apps",
-        isDefaultExpanded: true,
-        isSortable: true,
-        startIcon: <HomeIcon />,
-        nestedNavItems: [
-          {
-            id: "item17-1",
-            label: "Recently Used",
-          },
-          {
-            id: "item17-2",
-            label: "Work",
-          },
-          {
-            id: "item17-3",
-            label: "Add section",
-            endIcon: <AddCircleIcon />,
-          },
-        ],
-      },
-      {
-        id: "item18",
-        label: "Notifications",
-        startIcon: <NotificationIcon />,
-        count: 1,
-      },
-      {
-        id: "item19",
-        label: "Add apps",
-        startIcon: <AppsIcon />,
-      },
     ],
     footerItems: [
       {
@@ -411,6 +388,67 @@ export const Default: StoryObj<typeof SideNav> = {
   },
 };
 
+export const SortableSideNav: StoryObj<typeof SideNav> = {
+  args: {
+    appName: "",
+    sideNavItems: [
+      {
+        id: "item17",
+        label: "My Apps",
+        isDefaultExpanded: true,
+        isSortable: true,
+        startIcon: <HomeIcon />,
+        nestedNavItems: [
+          {
+            id: "item17-1",
+            label: "Recently Used",
+            isSortable: false,
+          },
+          {
+            id: "item17-2",
+            label: "Work",
+            isSortable: true,
+          },
+          {
+            id: "item17-3",
+            label: "Group 1",
+            isSortable: true,
+          },
+          {
+            id: "item17-4",
+            label: "Group 2",
+            isSortable: true,
+          },
+          {
+            id: "item17-5",
+            label: "Add section",
+            endIcon: <AddCircleIcon />,
+            isSortable: false,
+          },
+        ],
+      },
+      {
+        id: "item18",
+        label: "Notifications",
+        startIcon: <NotificationIcon />,
+        count: 1,
+      },
+      {
+        id: "item19",
+        label: "Add apps",
+        startIcon: <AppsIcon />,
+      },
+    ],
+  },
+  render: (props) => {
+    return (
+      <div style={{ height: "100vh" }}>
+        <SideNav {...props} />
+      </div>
+    );
+  },
+};
+
 export const Loading: StoryObj<typeof SideNav> = {
   args: {
     isLoading: true,
@@ -445,6 +483,21 @@ export const CustomLogoImage: StoryObj<typeof SideNav> = {
       imageUrl: "https://placehold.co/600x60",
       imageAltText: "My custom image logo",
     },
+  },
+  render: (props) => {
+    return (
+      <div style={{ height: "100vh" }}>
+        <SideNav {...props} />
+      </div>
+    );
+  },
+};
+
+export const CustomFooterContent: StoryObj<typeof SideNav> = {
+  args: {
+    footerItems: undefined,
+    hasCustomFooter: true,
+    footerComponent: <CustomFooterComponent />,
   },
   render: (props) => {
     return (

@@ -10,10 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createReactRootElements } from "./renderReactInWebComponent";
+import { createReactRootElements } from "../ui-shell";
 
 /**
- * @deprecated Use `renderReactInWebComponent` instead. This function was necessary when using bare Shadow DOM, but with UI Shell rendering in a Web Component, you won't be able to render your Shadow DOM in its Shadow DOM without using a Web Component.
+ * @deprecated Use `renderReactInWebComponent` from `@okta/odyssey-react-mui/ui-shell` instead. This function was necessary when using bare Shadow DOM, but with UI Shell rendering in a Web Component, you won't be able to render your Shadow DOM in its Shadow DOM without using a Web Component.
  */
 export const createShadowDomElements = (containerElement: HTMLElement) => {
   const shadowRoot = containerElement.attachShadow({ mode: "open" });
@@ -32,7 +32,7 @@ export const createShadowDomElements = (containerElement: HTMLElement) => {
 
 /**
  * @deprecated Use `createShadowDomElements` instead which returns an object instead of an array. It's otherwise the same.
- * @deprecated Ideally, use `renderReactInWebComponent` instead. This function was necessary when using bare Shadow DOM, but with UI Shell rendering in a Web Component, you won't be able to render your Shadow DOM in its Shadow DOM without using a Web Component. */
+ * @deprecated Ideally, use `renderReactInWebComponent` from `@okta/odyssey-react-mui/ui-shell` instead. This function was necessary when using bare Shadow DOM, but with UI Shell rendering in a Web Component, you won't be able to render your Shadow DOM in its Shadow DOM without using a Web Component. */
 export const createShadowRootElement = (
   containerElement: HTMLElement,
 ): [HTMLStyleElement, HTMLDivElement] => {

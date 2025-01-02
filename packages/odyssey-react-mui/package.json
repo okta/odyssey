@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-react-mui",
-  "version": "1.28.0",
+  "version": "1.29.0",
   "description": "React MUI components for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -20,6 +20,9 @@
       "labs": [
         "./dist/src/labs/index.d.ts"
       ],
+      "ui-shell": [
+        "./dist/src/ui-shell/index.d.ts"
+      ],
       "test-selectors": [
         "./dist/src/test-selectors/index.d.ts"
       ]
@@ -33,6 +36,10 @@
     "./labs": {
       "types": "./dist/src/labs/index.d.ts",
       "default": "./dist/src/labs/index.js"
+    },
+    "./ui-shell": {
+      "types": "./dist/src/ui-shell/index.d.ts",
+      "default": "./dist/ui-shell/index.js"
     },
     "./test-selectors": {
       "types": "./dist/src/test-selectors/index.d.ts",

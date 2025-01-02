@@ -30,6 +30,33 @@ export type HtmlProps = {
    */
   ariaControls?: HTMLAttributes<HTMLElement>["aria-controls"];
   /**
+   * A non-null aria-current state on an element indicates that this element represents the current item within a container or set of related elements.
+   *
+   * Value:
+   * 
+   * `page`
+      Represents the current page within a set of pages such as the link to the current document in a breadcrumb.
+
+      `step`
+      Represents the current step within a process such as the current step in an enumerated multi step checkout flow.
+
+      `location`
+      Represents the current location within an environment or context such as the image that is visually highlighted as the current component of a flow chart.
+
+      `date`
+      Represents the current date within a collection of dates such as the current date within a calendar.
+
+      `time`
+      Represents the current time within a set of times such as the current time within a timetable.
+
+      `true`
+      Represents the current item within a set.
+
+      `false` (default)
+        Does not represent the current item within a set.
+   */
+  ariaCurrent?: HTMLAttributes<HTMLElement>["aria-current"];
+  /**
    * The global `aria-describedby` attribute identifies the element (or elements) that describes the element on which the attribute is set.
    *
    * Value: The id or space-separated list of element ids that describe the current element.
