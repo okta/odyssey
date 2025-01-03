@@ -31,9 +31,7 @@ const storybookMeta: Meta<DateTimePickerProps> = {
       control: "text",
       defaultValue: "DateTimePicker label",
     },
-    onCalendarDateChange: {
-      control: "function",
-    },
+    onCalendarDateChange: {},
     defaultValue: {
       description:
         "A date object passed into the component to pre-fill the input",
@@ -83,7 +81,6 @@ const storybookMeta: Meta<DateTimePickerProps> = {
       },
     },
     timeZoneOptions: {
-      control: "none",
       description: "an array of options for the TimeZonePicker",
       table: {
         type: {
