@@ -98,21 +98,17 @@ const Radio = ({
   const id = useUniqueId(idOverride);
   const hintId = hint ? `${id}-hint` : undefined;
 
-  useImperativeHandle(
-    inputRef,
-    () => {
-      return {
-        focus: () => {
-          localInputRef.current?.focus();
-        },
-      };
-    },
-    [],
-  );
+  useImperativeHandle(inputRef, () => {
+    return {
+      focus: () => {
+        localInputRef.current?.focus();
+      },
+    };
+  }, []);
 
   const label = useMemo(
     () => <Typography component="span">{labelProp}</Typography>,
-    [labelProp, translate],
+    [labelProp],
   );
 
   const onChange = useCallback<NonNullable<MuiRadioProps["onChange"]>>(

@@ -33,12 +33,12 @@ const ListboxContainer = styled.div({
   height: "100%",
 });
 
-const Row = ({
+const Row = <Data extends { key: string; props: Record<string, unknown> }[]>({
   data,
   index,
   setItemSize,
   style,
-}: ListChildComponentProps & { setItemSize: SetItemSize }) => {
+}: ListChildComponentProps<Data> & { setItemSize: SetItemSize }) => {
   const rowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -57,7 +57,7 @@ const Row = ({
   }, [index, rowRef, setItemSize]);
 
   const baseOption = data[index];
-  const { key, props } = baseOption;
+  const { props } = baseOption;
 
   /**
    * react-window calculates the absolute positions of the list items, via an inline style, so
@@ -74,7 +74,7 @@ const Row = ({
 
   return (
     <div ref={rowRef}>
-      <li {...props} key={key} style={styles} />
+      <li {...props} style={styles} />
     </div>
   );
 };
@@ -172,6 +172,7 @@ const PickerVirtualizationListBox = forwardRef<
         >
           {({ data, index, style }) => (
             <Row
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               data={data}
               index={index}
               style={style}

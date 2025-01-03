@@ -11,21 +11,17 @@
  */
 
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  DataFilter,
-  DataFilters,
-  DataFiltersProps,
-} from "@okta/odyssey-react-mui/labs";
+import { DataFilter, DataFilters } from "@okta/odyssey-react-mui/labs";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { BugIcon, SettingsIcon } from "@okta/odyssey-react-mui/icons";
 import { Box, Button } from "@okta/odyssey-react-mui";
+import { fn } from "@storybook/test";
 
-const storybookMeta: Meta<DataFiltersProps> = {
+const meta = {
   title: "Labs Components/DataFilters",
   component: DataFilters,
   argTypes: {
     onChangeSearch: {
-      control: null,
       description: "",
       table: {
         type: {
@@ -34,7 +30,6 @@ const storybookMeta: Meta<DataFiltersProps> = {
       },
     },
     onChangeFilters: {
-      control: null,
       description: "",
       table: {
         type: {
@@ -70,7 +65,6 @@ const storybookMeta: Meta<DataFiltersProps> = {
       },
     },
     additionalActions: {
-      control: null,
       description: "",
       table: {
         type: {
@@ -79,7 +73,6 @@ const storybookMeta: Meta<DataFiltersProps> = {
       },
     },
     filters: {
-      control: null,
       description: "",
       table: {
         type: {
@@ -88,12 +81,17 @@ const storybookMeta: Meta<DataFiltersProps> = {
       },
     },
   },
+  args: {
+    onChangeFilters: fn(),
+  },
   decorators: [MuiThemeDecorator],
-};
+} satisfies Meta<typeof DataFilters>;
 
-export default storybookMeta;
+export default meta;
 
-const demoFilters: Array<DataFilter> = [
+type Story = StoryObj<typeof meta>;
+
+const demoFilters: DataFilter[] = [
   {
     id: "text-filter",
     label: "Text filter",
@@ -163,48 +161,36 @@ const demoFilters: Array<DataFilter> = [
   },
 ];
 
-export const Default: StoryObj<DataFiltersProps> = {
+export const Default: Story = {
   args: {
     filters: demoFilters,
     onChangeSearch: (value) => console.log(value),
   },
-  render: function C(props) {
-    return <DataFilters {...props} />;
-  },
 };
 
-export const NoSearch: StoryObj<DataFiltersProps> = {
+export const NoSearch: Story = {
   args: {
     filters: demoFilters,
     onChangeSearch: undefined,
   },
-  render: function C(props) {
-    return <DataFilters {...props} />;
-  },
 };
 
-export const JustSearch: StoryObj<DataFiltersProps> = {
+export const JustSearch: Story = {
   args: {
     filters: [],
     onChangeSearch: (value) => console.log(value),
   },
-  render: function C(props) {
-    return <DataFilters {...props} />;
-  },
 };
 
-export const SearchOnSubmit: StoryObj<DataFiltersProps> = {
+export const SearchOnSubmit: Story = {
   args: {
     filters: [],
     hasSearchSubmitButton: true,
     onChangeSearch: (value) => console.log(value),
   },
-  render: function C(props) {
-    return <DataFilters {...props} />;
-  },
 };
 
-export const AdditionalActions: StoryObj<DataFiltersProps> = {
+export const AdditionalActions: Story = {
   args: {
     filters: demoFilters,
     onChangeSearch: (value) => console.log(value),
@@ -222,8 +208,5 @@ export const AdditionalActions: StoryObj<DataFiltersProps> = {
         />
       </Box>
     ),
-  },
-  render: function C(props) {
-    return <DataFilters {...props} />;
   },
 };

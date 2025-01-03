@@ -212,7 +212,8 @@ const GroupPicker = <
       <Field
         fieldType="single"
         hasVisibleLabel
-        //@ts-expect-error htmlFor is not available on the currently typed params
+        // @ts-expect-error The `htmlFor` prop doesn't exist `HTMLAttributes` for a `<label>` element even though it exists in JavaScript.
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         id={InputLabelProps.htmlFor}
         hint={hint}
         label={label}

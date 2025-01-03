@@ -215,7 +215,8 @@ const DateTimePicker = ({
   const slots = useMemo<DateTimePickerSlots<DateTime>>(
     () => ({
       actionBar: DateFieldActionBar,
-      field: (muiProps) => renderDateTimeField(muiProps),
+      field: (muiProps: RenderDateTimeFieldProps) =>
+        renderDateTimeField(muiProps),
       leftArrowIcon: () => <commonIcons.ArrowLeftIcon />,
       rightArrowIcon: () => <commonIcons.ArrowRightIcon />,
       switchViewIcon: () => <commonIcons.ChevronDownIcon />,

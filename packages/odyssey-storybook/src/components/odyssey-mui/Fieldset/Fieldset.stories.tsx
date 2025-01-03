@@ -19,12 +19,11 @@ import {
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-const storybookMeta: Meta<FieldsetProps> = {
+const meta = {
   title: "MUI Components/Forms/Fieldset",
   component: Fieldset,
   argTypes: {
     alert: {
-      control: null,
       description:
         "A Callout indicating a Fieldset-wide error or status update",
       table: {
@@ -34,7 +33,7 @@ const storybookMeta: Meta<FieldsetProps> = {
       },
     },
     children: {
-      control: "obj",
+      control: "object",
       description: "Field components within the Fieldset",
       table: {
         type: {
@@ -108,19 +107,21 @@ const storybookMeta: Meta<FieldsetProps> = {
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
-};
+} satisfies Meta<typeof Fieldset>;
 
-export default storybookMeta;
+export default meta;
 
-export const Simple: StoryObj<FieldsetProps> = {};
+type Story = StoryObj<FieldsetProps>;
 
-export const Description: StoryObj<FieldsetProps> = {
+export const Simple: Story = {};
+
+export const Description: Story = {
   args: {
     description: "Register your ship before docking with the station.",
   },
 };
 
-export const Alert: StoryObj<FieldsetProps> = {
+export const Alert: Story = {
   args: {
     alert: (
       <Callout severity="error" role="alert" title="Something went wrong">
@@ -130,7 +131,7 @@ export const Alert: StoryObj<FieldsetProps> = {
   },
 };
 
-export const Disabled: StoryObj<FieldsetProps> = {
+export const Disabled: Story = {
   args: {
     isDisabled: true,
   },

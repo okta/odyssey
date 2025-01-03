@@ -10,7 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, StoryObj } from "@storybook/react";
 import {
   Box,
   Divider,
@@ -32,13 +31,13 @@ import {
   CalendarIcon,
   QuestionCircleIcon,
 } from "@okta/odyssey-react-mui/icons";
+import { Meta, StoryObj } from "@storybook/react";
 import type { ReactNode } from "react";
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import icons from "../../../../.storybook/components/iconUtils";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { userEvent, waitFor, within } from "@storybook/testing-library";
-import { expect } from "@storybook/jest";
+import { expect, userEvent, waitFor, within } from "@storybook/test";
 import { axeRun } from "../../../axe-util";
 import type { PlaywrightProps } from "../storybookTypes";
 
@@ -113,7 +112,7 @@ const storybookMeta: Meta<typeof MenuButton> = {
       },
     },
     children: {
-      control: "obj",
+      control: "object",
       description: "The <MenuItem> components within the Menu",
       table: {
         type: {
@@ -127,7 +126,7 @@ const storybookMeta: Meta<typeof MenuButton> = {
       },
     },
     popoverContent: {
-      control: "obj",
+      control: "object",
       description:
         "The contents to display in the popover (instead of children)",
       table: {
@@ -293,7 +292,7 @@ export const ButtonVariant: StoryObj<MenuButtonProps> = {
     await step("Filter and Select from listbox", async () => {
       const canvas = within(canvasElement);
       const button = canvas.getByRole("button", { name: "More actions" });
-      expect(button).toHaveAttribute("id", "floating-button");
+      await expect(button).toHaveAttribute("id", "floating-button");
     });
   },
 };
@@ -370,7 +369,7 @@ export const IconButton: StoryObj<MenuButtonProps> = {
     await step("MenuButton Aria-Label", async () => {
       const canvas = within(canvasElement);
       const menuButton = canvas.queryByRole("button", { name: "More actions" });
-      expect(menuButton).not.toBeNull();
+      await expect(menuButton).not.toBeNull();
     });
   },
 };
@@ -511,7 +510,7 @@ export const HelpPopover: StoryObj<MenuButtonProps> = {
     tooltipText: "More actions",
   },
   play: async ({ canvasElement, step }: PlaywrightProps<MenuButtonProps>) => {
-    await step("MenuButton Aria-Label", async () => {
+    await step("MenuButton Aria-Label", () => {
       const canvas = within(canvasElement);
       const menuButton = canvas.queryByRole("button", { name: "More actions" });
       expect(menuButton).not.toBeNull();

@@ -37,7 +37,7 @@ describe("UiShell", () => {
     expect(Array.from(stylesRootElement.children).length).toBeGreaterThan(0);
   });
 
-  test("renders `appComponent`", async () => {
+  test("renders `appComponent`", () => {
     const testId = "app-component";
 
     const { container } = render(
@@ -96,7 +96,7 @@ describe("UiShell", () => {
     });
   });
 
-  test("renders optionally-available `componentSlots`", async () => {
+  test("renders optionally-available `componentSlots`", () => {
     const optionalComponentTestIds: Array<
       keyof Required<UiShellProps>["optionalComponents"]
     > = ["sideNavFooter"];
@@ -140,14 +140,14 @@ describe("UiShell", () => {
     });
   });
 
-  test("unsubscribes from prop changes when unmounted", async () => {
+  test("unsubscribes from prop changes when unmounted", () => {
     const rootElement = document.createElement("div");
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(rootElement);
 
-    const unsubscribeFromPropChanges = jest.fn();
-    const subscribeToPropChanges = jest.fn(() => unsubscribeFromPropChanges);
+    const unsubscribeFromPropChanges = vi.fn();
+    const subscribeToPropChanges = vi.fn(() => unsubscribeFromPropChanges);
 
     const { unmount } = render(
       <UiShell
@@ -165,7 +165,7 @@ describe("UiShell", () => {
     expect(unsubscribeFromPropChanges).toHaveBeenCalledTimes(1);
   });
 
-  test("allows changing props through the subscription", async () => {
+  test("allows changing props through the subscription", () => {
     const rootElement = document.createElement("div");
     const sideNavItemText = "Add New Folder";
 
@@ -206,7 +206,7 @@ describe("UiShell", () => {
     expect(container).toHaveTextContent(sideNavItemText);
   });
 
-  test("uses default props if no value passed to subscription", async () => {
+  test("uses default props if no value passed to subscription", () => {
     const rootElement = document.createElement("div");
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
@@ -235,14 +235,14 @@ describe("UiShell", () => {
     expect(container).toBeVisible();
   });
 
-  test("has previous state in prop change subscription", async () => {
+  test("has previous state in prop change subscription", () => {
     const rootElement = document.createElement("div");
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(rootElement);
 
     // This passed to React's state setter. The return value here prevents a test error. It wouldn't be required otherwise as this test could care less what's returned.
-    const stateUpdater = jest.fn(() => defaultComponentProps);
+    const stateUpdater = vi.fn(() => defaultComponentProps);
 
     // This is the subscription we give the component, and then once subscribed, we're going to immediately call it to see if it passes us the previous state.
     const subscribeToPropChanges: UiShellProps["subscribeToPropChanges"] = (

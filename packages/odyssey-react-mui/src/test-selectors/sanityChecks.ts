@@ -35,7 +35,7 @@ export const getWindow = (htmlElement: HTMLElement) => {
     throw new ElementError("Expected element to have a `window`", htmlElement);
   }
 
-  return htmlElement.ownerDocument.defaultView!;
+  return htmlElement.ownerDocument.defaultView;
 };
 
 export const validateHtmlElement = (htmlElement: HTMLElement) => {

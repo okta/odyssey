@@ -18,7 +18,7 @@ import {
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-const storyBookMeta: Meta<PaginationProps> = {
+const meta = {
   title: "MUI Components/Pagination",
   component: Pagination,
   argTypes: {
@@ -47,7 +47,6 @@ const storyBookMeta: Meta<PaginationProps> = {
     },
 
     onPaginationChange: {
-      control: "function",
       description: "Page index and page size setter",
       type: {
         required: true,
@@ -85,7 +84,9 @@ const storyBookMeta: Meta<PaginationProps> = {
       table: {
         type: {
           summary: "boolean",
-          default: "true",
+        },
+        defaultValue: {
+          summary: "true",
         },
       },
     },
@@ -97,7 +98,9 @@ const storyBookMeta: Meta<PaginationProps> = {
       table: {
         type: {
           summary: "boolean",
-          default: "true",
+        },
+        defaultValue: {
+          summary: "true",
         },
       },
     },
@@ -108,7 +111,9 @@ const storyBookMeta: Meta<PaginationProps> = {
       table: {
         type: {
           summary: "boolean",
-          default: "true",
+        },
+        defaultValue: {
+          summary: "true",
         },
       },
     },
@@ -243,9 +248,9 @@ const storyBookMeta: Meta<PaginationProps> = {
 
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
-};
+} satisfies Meta<PaginationProps>;
 
-export default storyBookMeta;
+export default meta;
 
 export const Default: StoryObj<PaginationProps> = {
   render: (props) => {

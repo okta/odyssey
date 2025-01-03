@@ -22,30 +22,11 @@ export const pickerComponentPropsMetadata = {
     },
   },
   errorMessageList: {
-    control: null,
     description:
       "The list of error messages rendered at the bottom of the `error` message",
     table: {
       type: {
         summary: "array",
-      },
-    },
-  },
-  hint: {
-    control: "text",
-    description: "The helper text content",
-    table: {
-      type: {
-        summary: "string",
-      },
-    },
-  },
-  HintLinkComponent: {
-    description:
-      "A `HintLink` component to provide greater context that is rendered at the end of the `hint` text",
-    table: {
-      type: {
-        summary: "ReactNode",
       },
     },
   },

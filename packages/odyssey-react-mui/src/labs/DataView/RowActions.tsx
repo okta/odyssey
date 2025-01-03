@@ -25,11 +25,11 @@ import { DataTableProps } from "./DataTable";
 
 export type RowActionsProps<TData extends MRT_RowData> = {
   isRowReorderingDisabled?: boolean;
-  row: MRT_Row<MRT_RowData> | MRT_RowData;
+  row: MRT_Row<TData>;
   rowActionButtons?: (
-    row: MRT_RowData,
+    row: MRT_Row<TData>,
   ) => ReactElement<typeof Button> | ReactElement<typeof Fragment>;
-  rowActionMenuItems?: (row: MRT_RowData) => MenuButtonProps["children"];
+  rowActionMenuItems?: (row: MRT_Row<TData>) => MenuButtonProps["children"];
   rowIndex: number;
   totalRows?: DataTableProps<TData>["totalRows"];
   updateRowOrder?: ({
@@ -52,25 +52,30 @@ const RowActions = <TData extends MRT_RowData>({
   const { t } = useTranslation();
 
   const handleToFrontClick = useCallback(() => {
-    updateRowOrder && updateRowOrder({ rowId: row.id, newRowIndex: 0 });
+    if (updateRowOrder) {
+      updateRowOrder({ rowId: row.id, newRowIndex: 0 });
+    }
   }, [row.id, updateRowOrder]);
 
   const handleForwardClick = useCallback(() => {
-    updateRowOrder &&
+    if (updateRowOrder) {
       updateRowOrder({ rowId: row.id, newRowIndex: Math.max(0, rowIndex - 1) });
+    }
   }, [row.id, rowIndex, updateRowOrder]);
 
   const handleBackwardClick = useCallback(() => {
-    updateRowOrder &&
+    if (updateRowOrder) {
       updateRowOrder({ rowId: row.id, newRowIndex: rowIndex + 1 });
+    }
   }, [row.id, rowIndex, updateRowOrder]);
 
   const handleToBackClick = useCallback(() => {
-    updateRowOrder &&
+    if (updateRowOrder) {
       updateRowOrder({
         rowId: row.id,
         newRowIndex: totalRows ? totalRows - 1 : rowIndex,
       });
+    }
   }, [row.id, rowIndex, totalRows, updateRowOrder]);
 
   return (

@@ -151,7 +151,7 @@ const Checkbox = ({
         )}
       </>
     );
-  }, [isRequired, labelProp, t, translate]);
+  }, [isRequired, labelProp, t]);
 
   const onChange = useCallback<NonNullable<MuiCheckboxProps["onChange"]>>(
     (event, checked) => {

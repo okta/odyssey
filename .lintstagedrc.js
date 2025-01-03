@@ -10,4 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-module.exports = require("@okta/odyssey-lint-staged");
+module.exports = {
+  "*": "prettier --ignore-unknown --loglevel warn --write",
+  "*.{js,jsx,ts,tsx}": "eslint --flag unstable_ts_config",
+};

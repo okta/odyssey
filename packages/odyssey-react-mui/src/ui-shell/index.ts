@@ -11,4 +11,4 @@
  */
 
 export * from "./UiShell";
-export * from "./renderReactInWebComponent";
+export * from "../web-component/renderReactInWebComponent";

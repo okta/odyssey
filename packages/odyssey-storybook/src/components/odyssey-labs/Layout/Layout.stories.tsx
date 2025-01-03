@@ -68,7 +68,6 @@ const storybookMeta: Meta<LayoutProps> = {
       },
     },
     children: {
-      control: null,
       description:
         "The content of the `Layout`. May be a `string` or any other `ReactNode` or array of `ReactNode`s. Will often be either a single `Surface` or multiple `Surface's",
       table: {

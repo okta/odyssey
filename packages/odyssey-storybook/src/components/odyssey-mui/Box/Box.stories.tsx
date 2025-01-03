@@ -10,19 +10,17 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { Box, TextField } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
+import { expect, within } from "@storybook/test";
 
-import { Box, TextField, BoxProps } from "@okta/odyssey-react-mui";
-import { within } from "@storybook/testing-library";
-import { expect } from "@storybook/jest";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-const storybookMeta: Meta<BoxProps> = {
+const meta = {
   title: "MUI Components/Box",
   component: Box,
   argTypes: {
     children: {
-      control: null,
       description:
         "The content of the component, whether text or other components.",
       table: {
@@ -32,7 +30,6 @@ const storybookMeta: Meta<BoxProps> = {
       },
     },
     component: {
-      control: null,
       description:
         "The HTML element the component should render, if different from the default.",
       table: {
@@ -66,11 +63,13 @@ const storybookMeta: Meta<BoxProps> = {
     children: "This is the tab content. This tab happens to be about stars.",
   },
   decorators: [MuiThemeDecorator],
-};
+} satisfies Meta<typeof Box>;
 
-export default storybookMeta;
+export default meta;
 
-export const Simple: StoryObj<BoxProps> = {
+type Story = StoryObj<typeof meta>;
+
+export const Simple: Story = {
   args: {
     children: "This is the content of the box.",
     sx: {
@@ -82,7 +81,7 @@ export const Simple: StoryObj<BoxProps> = {
     id: "container-id",
   },
   play: async ({ canvasElement, step }) => {
-    await step("Box Id", async ({ args }) => {
+    await step("Box Id", ({ args }) => {
       const canvas = within(canvasElement);
       const box = canvas.getByText("This is the content of the box.");
       expect(box).toHaveAttribute("id", args.id);
@@ -90,7 +89,7 @@ export const Simple: StoryObj<BoxProps> = {
   },
 };
 
-export const Layout: StoryObj<BoxProps> = {
+export const Layout: Story = {
   args: {
     children: (
       <>

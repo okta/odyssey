@@ -14,7 +14,6 @@ import {
   LabelDescription,
   LabelDescriptionMetadata,
   Picker,
-  PickerProps,
 } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react";
 import {
@@ -120,11 +119,11 @@ type PickerType = typeof Picker<
   boolean
 >;
 
-const storybookMeta: Meta<PickerType> = {
+const meta = {
   title: "Labs Components/Odyssey Pickers/Picker",
   component: Picker,
   argTypes: {
-    ...pickerComponentPropsMetadata,
+    ...(pickerComponentPropsMetadata as Partial<PickerType>),
     hint: fieldComponentPropsMetaData.hint,
     HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
   },
@@ -135,37 +134,33 @@ const storybookMeta: Meta<PickerType> = {
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
-};
+} satisfies Meta<typeof Picker>;
 
-export default storybookMeta;
+export default meta;
 
-type PickerPropsType = PickerProps<
-  LabelDescription | LabelDescriptionMetadata,
-  boolean | undefined,
-  boolean | undefined
->;
+type Story = StoryObj<typeof meta>;
 
-export const LabelOnly: StoryObj<PickerPropsType> = {};
+export const LabelOnly: Story = {};
 
-export const WithDescription: StoryObj<PickerPropsType> = {
+export const WithDescription: Story = {
   args: {
     options: languagesNoMetadata,
   },
 };
 
-export const WithMetadata: StoryObj<PickerPropsType> = {
+export const WithMetadata: Story = {
   args: {
     options: languagesKitchenSink,
   },
 };
 
-export const MultipleSelect: StoryObj<PickerPropsType> = {
+export const MultipleSelect: Story = {
   args: {
     hasMultipleChoices: true,
   },
 };
 
-export const Disabled: StoryObj<PickerPropsType> = {
+export const Disabled: Story = {
   args: {
     isDisabled: true,
     value: languagesNoDescription[0],

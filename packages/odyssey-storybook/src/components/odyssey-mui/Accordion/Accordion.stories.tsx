@@ -10,14 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useCallback, useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
-
-import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { Accordion, AccordionProps } from "@okta/odyssey-react-mui";
-import { expect } from "@storybook/jest";
-import { userEvent, within, waitFor } from "@storybook/testing-library";
+import { expect, userEvent, within, waitFor } from "@storybook/test";
+import { useCallback, useState } from "react";
+
 import { PlaywrightProps } from "../storybookTypes";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<AccordionProps> = {
   title: "MUI Components/Accordion",
@@ -150,7 +149,7 @@ export const Expanded: StoryObj<AccordionProps> = {
     );
   },
   play: async ({ canvasElement, step }: PlaywrightProps<AccordionProps>) => {
-    await step("Accordion Expanded", async ({}) => {
+    await step("Accordion Expanded", async () => {
       const canvas = within(canvasElement);
       const accordion = canvas.getByRole("button");
       const accordionContent = canvas.getByRole("region");

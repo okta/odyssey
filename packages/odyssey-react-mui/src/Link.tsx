@@ -75,17 +75,13 @@ const Link = ({
   onClick,
 }: LinkProps) => {
   const localLinkRef = useRef<HTMLAnchorElement>(null);
-  useImperativeHandle(
-    linkRef,
-    () => {
-      return {
-        focus: () => {
-          localLinkRef.current?.focus();
-        },
-      };
-    },
-    [],
-  );
+  useImperativeHandle(linkRef, () => {
+    return {
+      focus: () => {
+        localLinkRef.current?.focus();
+      },
+    };
+  }, []);
 
   return (
     <MuiLink

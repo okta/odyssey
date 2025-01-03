@@ -220,7 +220,7 @@ const SideNavItemContent = ({
    * The ref used to scroll to this item
    */
   scrollRef?: React.RefObject<ScrollIntoViewHandle>;
-  onItemSelected?(selectedItemId: string): void;
+  onItemSelected?: (selectedItemId: string) => void;
 }) => {
   const sidenavItemContentContext = useSideNavItemContent();
   const contextValue = useMemo(
@@ -230,17 +230,13 @@ const SideNavItemContent = ({
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const localScrollRef = useRef<HTMLLIElement>(null);
-  useImperativeHandle(
-    scrollRef,
-    () => {
-      return {
-        scrollIntoView: () => {
-          scrollToNode(localScrollRef.current);
-        },
-      };
-    },
-    [],
-  );
+  useImperativeHandle(scrollRef, () => {
+    return {
+      scrollIntoView: () => {
+        scrollToNode(localScrollRef.current);
+      },
+    };
+  }, []);
 
   const itemClickHandler = useCallback<
     MouseEventHandler<HTMLDivElement | HTMLAnchorElement>

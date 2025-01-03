@@ -2,8 +2,12 @@
   "extends": "@okta/odyssey-typescript/tsconfig.react.types.json",
   "compilerOptions": {
     "composite": true,
+    "emitDeclarationOnly": false,
     "jsx": "react-jsx",
-    "outDir": "dist"
+    "jsxImportSource": "@emotion/react",
+    "outDir": "dist",
+    "sourceMap": true
   },
+  "include": ["./src/**/*"],
   "exclude": ["./test", "**/*.test.**", "**/dist/**/*"]
 }

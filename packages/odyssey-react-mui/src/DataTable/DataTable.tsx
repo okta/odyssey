@@ -320,6 +320,8 @@ const ScrollableTableContainer = styled("div", {
   }),
 );
 
+const defaultGetRowId: DataTableProps["getRowId"] = (row) => row.id as string;
+
 const DataTable = ({
   additionalActionButton,
   additionalActionMenuItems,
@@ -330,7 +332,7 @@ const DataTable = ({
   errorMessage: errorMessageProp,
   filters: filtersProp,
   getData,
-  getRowId: getRowIdProp,
+  getRowId = defaultGetRowId,
   hasChangeableDensity,
   hasColumnResizing,
   hasColumnVisibility,
@@ -422,10 +424,6 @@ const DataTable = ({
     page: pagination.pageIndex,
   });
 
-  const getRowId = getRowIdProp
-    ? getRowIdProp
-    : (row: DataTableRowData) => row.id;
-
   const rowDensityClassName = useMemo(() => {
     return rowDensity === "spacious"
       ? "MuiTableBody-spacious"
@@ -477,8 +475,9 @@ const DataTable = ({
           : {
               // If the option isn't a string, it must have value and/or option defined
               // If either is undefined, use the other
-              label: option.label ?? option.value,
-              value: option.value ?? option.label,
+              // These shouldn't need `as`, but this is a legacy file now. --Kevin Ghadyani
+              label: (option.label ?? option.value) as string,
+              value: (option.value ?? option.label) as string,
             },
       ),
     [],
@@ -606,7 +605,7 @@ const DataTable = ({
   const dataTable = useMaterialReactTable({
     columns: columns,
     data: data,
-    getRowId: getRowId,
+    getRowId,
     state: {
       sorting: columnSorting,
       globalFilter: search,

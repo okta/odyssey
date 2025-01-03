@@ -12,14 +12,13 @@
 
 import { Autocomplete, Link } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
-import { expect } from "@storybook/jest";
-import { userEvent, waitFor, within, screen } from "@storybook/testing-library";
-
-import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
-import { axeRun } from "../../../axe-util";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { expect, screen, userEvent, waitFor, within } from "@storybook/test";
 import { SyntheticEvent, useCallback, useState } from "react";
+
 import { LargeDataSet, largeDataSet } from "./large-data-collection";
+import { axeRun } from "../../../axe-util";
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const stations: ReadonlyArray<StationType> = [
   { label: "Anderson Station" },
@@ -86,7 +85,7 @@ const storybookMeta: Meta<typeof Autocomplete> = {
           summary: "boolean",
         },
         defaultValue: {
-          summary: false,
+          summary: "false",
         },
       },
     },
@@ -97,7 +96,6 @@ const storybookMeta: Meta<typeof Autocomplete> = {
       description: "Let's the component know it should virtualize the list",
       table: {
         type: {
-          required: false,
           summary: "boolean",
         },
       },
@@ -117,7 +115,6 @@ const storybookMeta: Meta<typeof Autocomplete> = {
     },
     name: fieldComponentPropsMetaData.name,
     onBlur: {
-      control: null,
       description:
         "Callback fired when the autocomplete component loses focus.",
       table: {
@@ -127,7 +124,6 @@ const storybookMeta: Meta<typeof Autocomplete> = {
       },
     },
     onChange: {
-      control: null,
       description: "Callback fired when a selection is made.",
       table: {
         type: {
@@ -136,7 +132,6 @@ const storybookMeta: Meta<typeof Autocomplete> = {
       },
     },
     onInputChange: {
-      control: null,
       description: "Callback fired when the textbox receives typed characters.",
       table: {
         type: {
@@ -145,7 +140,6 @@ const storybookMeta: Meta<typeof Autocomplete> = {
       },
     },
     onFocus: {
-      control: null,
       description:
         "Callback fired when the autocomplete component gains focus.",
       table: {
@@ -155,7 +149,6 @@ const storybookMeta: Meta<typeof Autocomplete> = {
       },
     },
     options: {
-      control: null,
       description: "The options for the autocomplete input",
       table: {
         type: {
@@ -171,7 +164,6 @@ const storybookMeta: Meta<typeof Autocomplete> = {
       },
     },
     value: {
-      control: null,
       description: "The value of the autocomplete input",
       table: {
         type: {
@@ -198,7 +190,7 @@ type AutocompleteType = typeof Autocomplete<StationType, boolean, boolean>;
 export const Default: StoryObj<AutocompleteType> = {
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
-    const comboBoxElement = canvas.getByRole("combobox") as HTMLInputElement;
+    const comboBoxElement = canvas.getByRole<HTMLInputElement>("combobox");
     await step("Filter and Select from listbox", async () => {
       await userEvent.click(comboBoxElement);
       const listboxElement = screen.getByRole("listbox");
@@ -296,7 +288,7 @@ export const IsCustomValueAllowed: StoryObj<AutocompleteType> = {
   play: async ({ canvasElement, step }) => {
     await step("Enter custom value", async () => {
       const canvas = within(canvasElement);
-      const comboBoxElement = canvas.getByRole("combobox") as HTMLInputElement;
+      const comboBoxElement = canvas.getByRole<HTMLInputElement>("combobox");
       await userEvent.click(comboBoxElement);
       await userEvent.type(comboBoxElement, "qwerty");
       await userEvent.tab();
@@ -312,7 +304,7 @@ export const Loading: StoryObj<AutocompleteType> = {
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
-    const comboBoxElement = canvas.getByRole("combobox") as HTMLInputElement;
+    const comboBoxElement = canvas.getByRole<HTMLInputElement>("combobox");
     await step("Click for loading to be visible", async () => {
       await userEvent.click(comboBoxElement);
       const loadingElement = screen.getByText("Loading…");
@@ -327,7 +319,7 @@ export const NoOptions: StoryObj<AutocompleteType> = {
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
-    const comboBoxElement = canvas.getByRole("combobox") as HTMLInputElement;
+    const comboBoxElement = canvas.getByRole<HTMLInputElement>("combobox");
     await step("Click for loading to be visible", async () => {
       await userEvent.click(comboBoxElement);
       const loadingElement = screen.getByText("No options");
@@ -343,7 +335,7 @@ export const Multiple: StoryObj<AutocompleteType> = {
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
-    const comboBoxElement = canvas.getByRole("combobox") as HTMLInputElement;
+    const comboBoxElement = canvas.getByRole<HTMLInputElement>("combobox");
     await step("Check for list box to be visible", async () => {
       await userEvent.click(comboBoxElement);
       const listboxElement = screen.getByRole("listbox");

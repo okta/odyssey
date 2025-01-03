@@ -12,25 +12,36 @@
 
 import { render, screen, waitFor, within } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
-import { DataOnReorderRowsType, DataRow, DataView } from "./index";
-import { data, columns, filterData, reorderData } from "./testSupportData";
-import { EmptyState } from "../../EmptyState";
-import { DataTableRowData } from "../../DataTable";
-import { Button } from "../../Buttons";
-import { MenuItem } from "../../Buttons";
 import { MRT_RowSelectionState } from "material-react-table";
+
+import {
+  CardLayoutProps,
+  DataOnReorderRowsType,
+  DataView,
+  TableLayoutProps,
+} from "./index";
+import {
+  data,
+  columns,
+  filterData,
+  reorderData,
+  Person,
+} from "./testSupportData";
+import { Button, MenuItem } from "../../Buttons";
+import { DataTableRowData } from "../../DataTable";
+import { EmptyState } from "../../EmptyState";
 import { getControlledElement } from "../../test-selectors/linkedHtmlSelectors";
 
 const getData = ({ ...props }) => {
   return filterData({ data, ...props });
 };
 
-const listItemProps = (row: DataRow) => ({
+const listItemProps: CardLayoutProps<Person>["itemProps"] = (row) => ({
   title: row.name,
   overline: "List card",
 });
 
-const gridItemProps = (row: DataRow) => ({
+const gridItemProps: CardLayoutProps<Person>["itemProps"] = (row) => ({
   title: row.name,
   overline: "Grid card",
 });
@@ -129,7 +140,7 @@ describe("DataView", () => {
     });
   });
 
-  test("can display meta text", async () => {
+  test("can display meta text", () => {
     const metaText = "Last updated 12 hours ago";
 
     render(
@@ -265,9 +276,8 @@ describe("DataView", () => {
     test("can display row action menu", async () => {
       const user = userEvent.setup();
 
-      const rowActionMenuItems = (row: DataTableRowData) => (
-        <MenuItem>Action for {row.original.name}</MenuItem>
-      );
+      const rowActionMenuItems: TableLayoutProps<Person>["rowActionMenuItems"] =
+        (row) => <MenuItem>Action for {row.original.name}</MenuItem>;
 
       render(
         <DataView
@@ -275,7 +285,7 @@ describe("DataView", () => {
           getData={getData}
           tableLayoutOptions={{
             columns,
-            rowActionMenuItems: rowActionMenuItems,
+            rowActionMenuItems,
           }}
         />,
       );
@@ -297,8 +307,10 @@ describe("DataView", () => {
     });
 
     test("can display row action buttons", async () => {
-      const rowActionButtons = (row: DataTableRowData) => (
-        <Button variant="primary" label={`Button for ${row?.original?.name}`} />
+      const rowActionButtons: TableLayoutProps<Person>["rowActionButtons"] = (
+        row,
+      ) => (
+        <Button variant="primary" label={`Button for ${row.original?.name}`} />
       );
 
       render(
@@ -307,7 +319,7 @@ describe("DataView", () => {
           getData={getData}
           tableLayoutOptions={{
             columns,
-            rowActionButtons: rowActionButtons,
+            rowActionButtons,
           }}
         />,
       );
@@ -672,7 +684,9 @@ describe("DataView", () => {
     test("can expand table rows", async () => {
       const user = userEvent.setup();
 
-      const tableDetails = ({ row }: { row: DataTableRowData }) => {
+      const tableDetails: TableLayoutProps<Person>["renderDetailPanel"] = ({
+        row,
+      }) => {
         return <p>This is additional content for {row.original.name}</p>;
       };
 

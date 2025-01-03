@@ -12,8 +12,7 @@
 
 import { useMemo, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { expect } from "@storybook/jest";
-import { userEvent, within, screen, waitFor } from "@storybook/testing-library";
+import { expect, userEvent, within, screen, waitFor } from "@storybook/test";
 
 import { odysseyTranslate } from "@okta/odyssey-react-mui";
 import {
@@ -32,9 +31,7 @@ const storybookMeta: Meta<DateTimePickerProps> = {
       control: "text",
       defaultValue: "DateTimePicker label",
     },
-    onCalendarDateChange: {
-      control: "function",
-    },
+    onCalendarDateChange: {},
     defaultValue: {
       description:
         "A date object passed into the component to pre-fill the input",
@@ -84,7 +81,6 @@ const storybookMeta: Meta<DateTimePickerProps> = {
       },
     },
     timeZoneOptions: {
-      control: "none",
       description: "an array of options for the TimeZonePicker",
       table: {
         type: {
@@ -207,16 +203,16 @@ export const Controlled: StoryObj<DateTimePickerProps> = {
   render: function C({ ...props }) {
     const [value, setValue] = useState<string>("2024-07-11T03:00:00.000Z");
 
-    const DateTimePickerProps: DateTimePickerProps = useMemo(
+    const dateTimePickerProps: DateTimePickerProps = useMemo(
       () => ({
         ...props,
         onCalendarDateChange: ({ value }) => {
-          if (value) {
+          if (typeof value === "string") {
             setValue(value);
           }
         },
         onInputChange: (value) => {
-          if (value) {
+          if (typeof value === "string") {
             setValue(value);
           }
         },
@@ -225,7 +221,7 @@ export const Controlled: StoryObj<DateTimePickerProps> = {
       [props, value],
     );
 
-    return <DateTimePicker {...DateTimePickerProps} />;
+    return <DateTimePicker {...dateTimePickerProps} />;
   },
   play: async ({ canvasElement, step }) => {
     await step("select date", async () => {
@@ -242,7 +238,7 @@ export const Controlled: StoryObj<DateTimePickerProps> = {
         await userEvent.click(dateButton);
       });
 
-      const input = canvas.getByRole("textbox") as HTMLInputElement;
+      const input = canvas.getByRole<HTMLInputElement>("textbox");
       expect(input.value).toBe("07/26/2024 11:00 PM");
 
       await step("Check for a11y errors", async () => {

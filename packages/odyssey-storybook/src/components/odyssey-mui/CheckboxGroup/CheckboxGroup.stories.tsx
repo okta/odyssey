@@ -21,17 +21,16 @@ import { Meta, StoryObj } from "@storybook/react";
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-type CheckboxGroupStoryProps = CheckboxGroupProps & {
-  isDefaultChecked: Parameters<typeof Checkbox>[0]["isDefaultChecked"];
-  isIndeterminate: Parameters<typeof Checkbox>[0]["isIndeterminate"];
-};
+// type CheckboxGroupStoryProps = CheckboxGroupProps & {
+//   isDefaultChecked: Parameters<typeof Checkbox>[0]["isDefaultChecked"];
+//   isIndeterminate: Parameters<typeof Checkbox>[0]["isIndeterminate"];
+// };
 
-const storybookMeta: Meta<CheckboxGroupStoryProps> = {
+const meta = {
   title: "MUI Components/Forms/CheckboxGroup",
   component: CheckboxGroup,
   argTypes: {
     children: {
-      control: null,
       description: "A single Checkbox element or an array of Checkbox elements",
       table: {
         type: {
@@ -59,7 +58,7 @@ const storybookMeta: Meta<CheckboxGroupStoryProps> = {
           summary: "boolean",
         },
         defaultValue: {
-          summary: false,
+          summary: "false",
         },
       },
     },
@@ -71,7 +70,7 @@ const storybookMeta: Meta<CheckboxGroupStoryProps> = {
           summary: "boolean",
         },
         defaultValue: {
-          summary: false,
+          summary: "false",
         },
       },
     },
@@ -91,11 +90,14 @@ const storybookMeta: Meta<CheckboxGroupStoryProps> = {
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
-};
+} satisfies Meta<typeof CheckboxGroup>;
 
-export default storybookMeta;
+export default meta;
 
-const GroupTemplate: StoryObj<CheckboxGroupProps> = {
+type Story = StoryObj<typeof meta>;
+
+const GroupTemplate: Story = {
+  args: {} as CheckboxGroupProps, // This is a hack,
   render: (args) => (
     <CheckboxGroup
       errorMessage={args.errorMessage}
@@ -123,11 +125,11 @@ const GroupTemplate: StoryObj<CheckboxGroupProps> = {
   },
 };
 
-export const Group: StoryObj<CheckboxGroupStoryProps> = {
+export const Group: Story = {
   ...GroupTemplate,
 };
 
-export const Disabled: StoryObj<CheckboxGroupStoryProps> = {
+export const Disabled: Story = {
   ...GroupTemplate,
   parameters: {
     controls: {
@@ -136,10 +138,10 @@ export const Disabled: StoryObj<CheckboxGroupStoryProps> = {
   },
   args: {
     isDisabled: true,
-  },
+  } as CheckboxGroupProps, // This is a hack
 };
 
-export const ReadOnly: StoryObj<CheckboxGroupStoryProps> = {
+export const ReadOnly: Story = {
   ...GroupTemplate,
   parameters: {
     controls: {
@@ -148,10 +150,10 @@ export const ReadOnly: StoryObj<CheckboxGroupStoryProps> = {
   },
   args: {
     isReadOnly: true,
-  },
+  } as CheckboxGroupProps, // This is a hack
 };
 
-export const Error: StoryObj<CheckboxGroupStoryProps> = {
+export const Error: Story = {
   ...GroupTemplate,
   parameters: {
     controls: {
@@ -166,10 +168,10 @@ export const Error: StoryObj<CheckboxGroupStoryProps> = {
   },
   args: {
     errorMessage: "Select 1 or more systems to check before initiating warp.",
-  },
+  } as CheckboxGroupProps, // This is a hack
 };
 
-export const ErrorsList: StoryObj<CheckboxGroupStoryProps> = {
+export const ErrorsList: Story = {
   ...GroupTemplate,
   args: {
     isRequired: true,
@@ -178,32 +180,32 @@ export const ErrorsList: StoryObj<CheckboxGroupStoryProps> = {
       "Select at least one item",
       "Select no more than 3 items",
     ],
-  },
+  } as CheckboxGroupProps, // This is a hack
 };
 
-export const Hint: StoryObj<CheckboxGroupStoryProps> = {
+export const Hint: Story = {
   ...GroupTemplate,
   args: {
     hint: "Select 1 or more systems to check before initiating warp.",
-  },
+  } as CheckboxGroupProps, // This is a hack
 };
 
-export const HintLink: StoryObj<CheckboxGroupStoryProps> = {
+export const HintLink: Story = {
   ...GroupTemplate,
   args: {
     hint: "Select 1 or more systems to check before initiating warp.",
     HintLinkComponent: <Link href="/learn-more">Learn more</Link>,
-  },
+  } as CheckboxGroupProps, // This is a hack
 };
 
-export const Required: StoryObj<CheckboxGroupStoryProps> = {
+export const Required: Story = {
   ...GroupTemplate,
   args: {
     isRequired: true,
-  },
+  } as CheckboxGroupProps, // This is a hack
 };
 
-export const MixedError: StoryObj<CheckboxGroupStoryProps> = {
+export const MixedError: Story = {
   render: (args) => (
     <CheckboxGroup
       isDisabled={args.isDisabled}
@@ -246,5 +248,5 @@ export const MixedError: StoryObj<CheckboxGroupStoryProps> = {
   },
   args: {
     errorMessage: "These choices are incompatible.",
-  },
+  } as CheckboxGroupProps, // This is a hack
 };

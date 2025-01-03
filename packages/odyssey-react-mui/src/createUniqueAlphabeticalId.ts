@@ -14,6 +14,4 @@
 export const uniqueIdLength = 6;
 
 export const createUniqueAlphabeticalId = () =>
-  Math.random()
-    .toString(36)
-    .replace(/[\d\.]/g, "");
+  Math.random().toString(36).replace(/[\d.]/g, "");

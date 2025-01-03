@@ -11,10 +11,10 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
-import { Button, EmptyState, EmptyStateProps } from "@okta/odyssey-react-mui";
+import { Button, EmptyState } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-const storyBookMeta: Meta<EmptyStateProps> = {
+const meta = {
   title: "MUI Components/EmptyState",
   component: EmptyState,
   argTypes: {
@@ -39,21 +39,21 @@ const storyBookMeta: Meta<EmptyStateProps> = {
 
     PrimaryCallToActionComponent: {
       description: "Primary call to action",
-      control: "custom",
     },
 
     SecondaryCallToActionComponent: {
       description: "Secondary call to action",
-      control: "custom",
     },
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
-};
+} satisfies Meta<typeof EmptyState>;
 
-export default storyBookMeta;
+export default meta;
 
-export const Default: StoryObj<EmptyStateProps> = {
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
   args: {
     heading: "Start by adding data assets",
     description:

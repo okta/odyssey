@@ -12,14 +12,16 @@
 
 /* eslint-disable import/no-extraneous-dependencies */
 import { memo, useCallback } from "react";
-import { Box, DataTable, DataTableGetDataType } from "@okta/odyssey-react-mui";
 import { useColumns, data, OdysseyComponent } from "./roadmapData";
 import {
+  Box,
   Callout,
+  createOdysseyMuiTheme,
   CssBaseline,
+  DataTable,
+  DataTableGetDataType,
   OdysseyThemeProvider,
   ScopedCssBaseline,
-  createOdysseyMuiTheme,
 } from "@okta/odyssey-react-mui";
 import { ThemeProvider as StorybookThemeProvider } from "@storybook/theming";
 import * as odysseyTokens from "@okta/odyssey-design-tokens";

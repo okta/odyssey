@@ -10,10 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import {
+  defaultDropAnimationSideEffects,
+  DragOverlay,
+  DropAnimation,
+} from "@dnd-kit/core";
 import type { PropsWithChildren } from "react";
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { DragOverlay, defaultDropAnimationSideEffects } from "@dnd-kit/core";
-import type { DropAnimation } from "@dnd-kit/core";
 
 const dropAnimationConfig: DropAnimation = {
   sideEffects: defaultDropAnimationSideEffects({
@@ -25,9 +27,7 @@ const dropAnimationConfig: DropAnimation = {
   }),
 };
 
-interface Props {}
-
-export function SortableOverlay({ children }: PropsWithChildren<Props>) {
+export function SortableOverlay({ children }: PropsWithChildren<object>) {
   return (
     <DragOverlay dropAnimation={dropAnimationConfig}>{children}</DragOverlay>
   );

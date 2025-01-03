@@ -12,15 +12,9 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import {
-  Box,
-  Button,
-  Card,
-  MenuItem,
-  CardProps,
-} from "@okta/odyssey-react-mui";
+import { Box, Button, Card, MenuItem } from "@okta/odyssey-react-mui";
 
-const storybookMeta: Meta<CardProps> = {
+const meta = {
   title: "MUI Components/Card",
   component: Card,
   argTypes: {
@@ -31,7 +25,9 @@ const storybookMeta: Meta<CardProps> = {
         type: {
           summary: "string",
         },
-        defaultValue: "",
+        defaultValue: {
+          summary: "",
+        },
       },
     },
     description: {
@@ -42,7 +38,9 @@ const storybookMeta: Meta<CardProps> = {
         type: {
           summary: "string",
         },
-        defaultValue: "",
+        defaultValue: {
+          summary: "",
+        },
       },
     },
     overline: {
@@ -52,50 +50,56 @@ const storybookMeta: Meta<CardProps> = {
         type: {
           summary: "string",
         },
-        defaultValue: "",
+        defaultValue: {
+          summary: "",
+        },
       },
     },
     image: {
-      control: null,
       description:
         "An optional image or icon at the top of the card, preferably as an img or svg element.",
       table: {
         type: {
           summary: "ReactElement",
         },
-        defaultValue: "",
+        defaultValue: {
+          summary: "",
+        },
       },
     },
     onClick: {
-      control: null,
       description: "The event handler for when the user clicks the card.",
       table: {
         type: {
           summary: "MouseEventHandler",
         },
-        defaultValue: "",
+        defaultValue: {
+          summary: "",
+        },
       },
     },
     button: {
-      control: null,
       description:
         "The main action button for the card. Not valid if the card itself is clickable.",
       table: {
         type: {
           summary: "ReactElement<typeof Button>",
         },
-        defaultValue: "",
+        defaultValue: {
+          summary: "",
+        },
       },
     },
     menuButtonChildren: {
-      control: null,
       description:
         "Menu items to be rendered in the card's optional menu button. If this prop is undefined, the menu button will not be shown. Not valid if the card itself is clickable.",
       table: {
         type: {
           summary: "[MenuItem | Divider | ListSubheader]",
         },
-        defaultValue: "",
+        defaultValue: {
+          summary: "",
+        },
       },
     },
   },
@@ -104,18 +108,21 @@ const storybookMeta: Meta<CardProps> = {
     description:
       "Identity can create great user experiences, increase customer sign-ups, and...",
     overline: "Overline",
-    onClick: undefined,
   },
   decorators: [MuiThemeDecorator],
-};
+} satisfies Meta<typeof Card>;
 
-export default storybookMeta;
+export default meta;
 
-export const Default: StoryObj<CardProps> = {
-  render: ({ ...props }) => (
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  render: (args) => (
     <Box sx={{ maxWidth: 262 }}>
       <Card
-        {...props}
+        title={args.title}
+        description={args.description}
+        overline={args.overline}
         button={<Button variant="primary" label="Button" />}
         image={<img src="https://placehold.co/128" alt="Example logo" />}
         menuButtonChildren={
@@ -130,8 +137,8 @@ export const Default: StoryObj<CardProps> = {
   ),
 };
 
-export const Clickable: StoryObj<CardProps> = {
-  render: ({ ...props }) => {
+export const Clickable: Story = {
+  render: (args) => {
     const onClick = () => {
       alert("Clicked!");
     };
@@ -139,19 +146,19 @@ export const Clickable: StoryObj<CardProps> = {
     return (
       <Box sx={{ maxWidth: 262 }}>
         <Card
-          description={props.description}
+          title={args.title}
+          description={args.description}
+          overline={args.overline}
           image={<img src="https://placehold.co/128" alt="Example logo" />}
           onClick={onClick}
-          overline={props.overline}
-          title={props.title}
         />
       </Box>
     );
   },
 };
 
-export const ClickableWithoutImage: StoryObj<CardProps> = {
-  render: ({ ...props }) => {
+export const ClickableWithoutImage: Story = {
+  render: (args) => {
     const onClick = () => {
       alert("Clicked!");
     };
@@ -159,24 +166,25 @@ export const ClickableWithoutImage: StoryObj<CardProps> = {
     return (
       <Box sx={{ maxWidth: 262 }}>
         <Card
-          description={props.description}
-          image={props.image}
+          title={args.title}
+          description={args.description}
+          overline={args.overline}
           onClick={onClick}
-          overline={props.overline}
-          title={props.title}
         />
       </Box>
     );
   },
 };
 
-export const ButtonWithoutImage: StoryObj<typeof Card> = {
-  render: ({ ...props }) => (
+export const ButtonWithoutImage: Story = {
+  render: (args) => (
     <Box sx={{ maxWidth: 262 }}>
       <Card
+        title={args.title}
+        description={args.description}
+        overline={args.overline}
         button={<Button variant="primary" label="Button" />}
-        description={props.description}
-        image={props.image}
+        image={args.image}
         menuButtonChildren={
           <>
             <MenuItem>Menu option 1</MenuItem>
@@ -184,8 +192,6 @@ export const ButtonWithoutImage: StoryObj<typeof Card> = {
             <MenuItem>Menu option 3</MenuItem>
           </>
         }
-        overline={props.overline}
-        title={props.title}
       />
     </Box>
   ),

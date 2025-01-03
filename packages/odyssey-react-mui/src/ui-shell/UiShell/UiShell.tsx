@@ -20,7 +20,7 @@ import {
   type UiShellContentProps,
   type UiShellNavComponentProps,
 } from "./UiShellContent";
-import { type ReactRootElements } from "../../web-component";
+import { type ReactRootElements } from "../../web-component/renderReactInWebComponent";
 
 export const defaultComponentProps: UiShellNavComponentProps = {
   sideNavProps: undefined,

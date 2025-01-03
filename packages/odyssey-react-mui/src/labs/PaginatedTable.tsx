@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { AlertProps } from "@mui/material";
+import { AlertProps, CheckboxProps } from "@mui/material";
 import { Typography } from "../Typography";
 import {
   MRT_PaginationState,
@@ -51,9 +51,7 @@ export type PaginatedTableProps<TData extends DefaultMaterialReactTableData> = {
   onRowSelectionChange?: MaterialReactTableProps<TData>["onRowSelectionChange"];
   rowsPerPage?: number;
   state?: MaterialReactTableProps<TData>["state"];
-  ToolbarButtons?: FunctionComponent<
-    { table: MRT_TableInstance<TData> } & unknown
-  >;
+  ToolbarButtons?: FunctionComponent<{ table: MRT_TableInstance<TData> }>;
 };
 
 const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
@@ -153,12 +151,17 @@ const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
 
   const dataLengthRef = useRef(data.length);
 
-  const updatePagination = useCallback(
-    // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
+  const updatePagination = useCallback<
+    Required<MaterialReactTableProps<TData>>["onPaginationChange"]
+  >(
     (paginationFunction) => {
       if (data.length === dataLengthRef.current) {
         setPagination((previousPagination) => {
+          // @ts-expect-error This broke in the upgrade, but this component is legacy and replaced by `DataView`.
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           const nextPagination = paginationFunction(previousPagination);
+
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-return
           return nextPagination;
         });
       } else {
@@ -238,8 +241,10 @@ const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
     [],
   );
 
-  const muiCheckboxStyles = useCallback(
-    // @ts-expect-error TEMP: This type aren't working after the upgrade, but they need to be fixed.
+  const muiCheckboxStyles = useCallback<
+    // @ts-expect-error This breaks after the upgrade, but it doesn't matter as this is a legacy function and internal type.
+    NonNullable<Required<CheckboxProps>["sx"]>
+  >(
     (theme) =>
       typeof theme.components?.MuiCheckbox?.styleOverrides?.root === "function"
         ? theme.components?.MuiCheckbox?.styleOverrides?.root?.({

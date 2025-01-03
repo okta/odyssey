@@ -10,12 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
+import { userEvent } from "@testing-library/user-event";
 import { SideNav } from "./SideNav";
 import { OdysseyProvider } from "../../OdysseyProvider";
 
 describe("SideNav", () => {
-  test("can show the default Okta logo", async () => {
+  test("can show the default Okta logo", () => {
     render(
       <OdysseyProvider>
         <SideNav
@@ -31,10 +32,10 @@ describe("SideNav", () => {
       </OdysseyProvider>,
     );
 
-    expect(screen.getByTitle("Okta")).toBeInTheDocument();
+    expect(screen.getByTitle("Okta")).toBeVisible();
   });
 
-  test("can show a custom logo", async () => {
+  test("can show a custom logo", () => {
     render(
       <OdysseyProvider>
         <SideNav
@@ -54,10 +55,10 @@ describe("SideNav", () => {
       </OdysseyProvider>,
     );
 
-    expect(screen.getByAltText("Custom logo")).toBeInTheDocument();
+    expect(screen.getByAltText("Custom logo")).toBeVisible();
   });
 
-  test("can show header text", async () => {
+  test("can show header text", () => {
     const headerText = "Header text";
 
     render(
@@ -75,9 +76,7 @@ describe("SideNav", () => {
       </OdysseyProvider>,
     );
 
-    expect(
-      screen.getByRole("heading", { name: headerText }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: headerText })).toBeVisible();
   });
 
   test("is collapsible", async () => {
@@ -102,19 +101,19 @@ describe("SideNav", () => {
     expect(screen.getByText(menuItemText)).toBeVisible();
 
     const collapseButton = screen.getByLabelText("Close navigation");
-    fireEvent.click(collapseButton);
+    await userEvent.click(collapseButton);
 
-    expect(screen.getByText(menuItemText)).not.toBeVisible;
+    expect(screen.getByText(menuItemText)).not.toBeVisible();
 
     const expandButton = screen.getByLabelText("Open navigation");
-    fireEvent.click(expandButton);
+    await userEvent.click(expandButton);
 
     expect(screen.getByText(menuItemText)).toBeVisible();
   });
 
   test("can fire onCollapse event", async () => {
     const menuItemText = "Users";
-    const mockOnCollapse = jest.fn();
+    const mockOnCollapse = vi.fn();
 
     render(
       <OdysseyProvider>
@@ -134,14 +133,14 @@ describe("SideNav", () => {
     );
 
     const collapseButton = screen.getByLabelText("Close navigation");
-    fireEvent.click(collapseButton);
+    await userEvent.click(collapseButton);
 
     expect(mockOnCollapse).toBeCalled();
   });
 
   test("can fire onExpand event", async () => {
     const menuItemText = "Users";
-    const mockOnExpand = jest.fn();
+    const mockOnExpand = vi.fn();
 
     render(
       <OdysseyProvider>
@@ -161,15 +160,15 @@ describe("SideNav", () => {
     );
 
     const collapseButton = screen.getByLabelText("Close navigation");
-    fireEvent.click(collapseButton);
+    await userEvent.click(collapseButton);
 
     const expandButton = screen.getByLabelText("Open navigation");
-    fireEvent.click(expandButton);
+    await userEvent.click(expandButton);
 
     expect(mockOnExpand).toBeCalled();
   });
 
-  test("shows loading skeleton state", async () => {
+  test("shows loading skeleton state", () => {
     const menuItemText = "Menu item";
 
     render(
@@ -191,7 +190,7 @@ describe("SideNav", () => {
     expect(screen.queryByText(menuItemText)).not.toBeInTheDocument();
   });
 
-  test("shows footer links", async () => {
+  test("shows footer links", () => {
     const footerItemLabel = "Footer item";
     render(
       <OdysseyProvider>
@@ -219,7 +218,7 @@ describe("SideNav", () => {
     expect(within(footer).getByText(footerItemLabel)).toBeVisible();
   });
 
-  test("shows custom footer component", async () => {
+  test("shows custom footer component", () => {
     const footerComponentText = "This is a custom footer component.";
     const footerComponent = <p>{footerComponentText}</p>;
 
@@ -294,7 +293,7 @@ describe("SideNav", () => {
 
     const accordion = screen.getByText(accordionOuter);
     expect(screen.getByText(accordionInner)).not.toBeVisible();
-    fireEvent.click(accordion);
+    await userEvent.click(accordion);
     expect(screen.getByText(accordionInner)).toBeVisible();
   });
 
@@ -318,6 +317,10 @@ describe("SideNav", () => {
       </OdysseyProvider>,
     );
 
-    expect(screen.getByRole("listitem")).toHaveTextContent(`${badgeCount}`);
+    await waitFor(() => {
+      expect(screen.getByRole("listitem")).toHaveTextContent(
+        String(badgeCount),
+      );
+    });
   });
 });

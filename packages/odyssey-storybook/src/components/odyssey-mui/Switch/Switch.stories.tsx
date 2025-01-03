@@ -13,8 +13,7 @@
 import { useCallback, useState } from "react";
 import { Switch, SwitchProps, HintLink } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
-import { userEvent, within } from "@storybook/testing-library";
-import { expect } from "@storybook/jest";
+import { expect, userEvent, within } from "@storybook/test";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
@@ -54,7 +53,7 @@ const storybookMeta: Meta<SwitchProps> = {
           summary: "boolean",
         },
         defaultValue: {
-          summary: false,
+          summary: "false",
         },
       },
     },
@@ -102,7 +101,7 @@ export const Default: StoryObj<typeof Switch> = {
   play: async ({ canvasElement, step }) => {
     await step("select the switch button", async () => {
       const canvas = within(canvasElement);
-      const switchCheckbox = canvas.getByRole("checkbox") as HTMLInputElement;
+      const switchCheckbox = canvas.getByRole("checkbox");
       if (switchCheckbox) {
         await userEvent.click(switchCheckbox);
       }

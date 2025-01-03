@@ -10,18 +10,17 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useMemo, useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { expect } from "@storybook/jest";
-import { userEvent, within, screen, waitFor } from "@storybook/testing-library";
-
 import { odysseyTranslate } from "@okta/odyssey-react-mui";
 import { DatePicker, DatePickerProps } from "@okta/odyssey-react-mui/labs";
+import type { Meta, StoryObj } from "@storybook/react";
+import { expect, userEvent, within, screen, waitFor } from "@storybook/test";
+import { useMemo, useState } from "react";
+
 import { axeRun } from "../../../axe-util";
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-const storybookMeta: Meta<DatePickerProps> = {
+const meta = {
   title: "Labs Components/DatePicker",
   component: DatePicker,
   argTypes: {
@@ -29,9 +28,7 @@ const storybookMeta: Meta<DatePickerProps> = {
       control: "text",
       defaultValue: "DatePicker label",
     },
-    onCalendarDateChange: {
-      control: "function",
-    },
+    onCalendarDateChange: {},
     defaultValue: {
       description:
         "A date object passed into the component to pre-fill the input",
@@ -81,7 +78,6 @@ const storybookMeta: Meta<DatePickerProps> = {
       },
     },
     timeZoneOptions: {
-      control: "none",
       description: "an array of options for the TimeZonePicker",
       table: {
         type: {
@@ -96,38 +92,40 @@ const storybookMeta: Meta<DatePickerProps> = {
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
-};
+} satisfies Meta<typeof DatePicker>;
 
-export default storybookMeta;
+export default meta;
 
-export const Default: StoryObj<DatePickerProps> = {};
+type Story = StoryObj<typeof DatePicker>;
 
-export const Disabled: StoryObj<DatePickerProps> = {
+export const Default: Story = {};
+
+export const Disabled: Story = {
   args: {
     isDisabled: true,
   },
 };
 
-export const ReadOnly: StoryObj<DatePickerProps> = {
+export const ReadOnly: Story = {
   args: {
     isReadOnly: true,
   },
 };
 
-export const Error: StoryObj<DatePickerProps> = {
+export const Error: Story = {
   args: {
     errorMessage: "Select a date",
   },
 };
 
-export const MinDate: StoryObj<DatePickerProps> = {
+export const MinDate: Story = {
   args: {
     hint: "Select a date after July 16, 2024",
     minDate: "2024-07-16",
   },
 };
 
-export const MinDateWithError: StoryObj<DatePickerProps> = {
+export const MinDateWithError: Story = {
   args: {
     hint: "Select a date after July 16, 2024",
     minDate: "2024-07-16T03:00:00.000Z",
@@ -149,14 +147,14 @@ export const MinDateWithError: StoryObj<DatePickerProps> = {
   },
 };
 
-export const MaxDate: StoryObj<DatePickerProps> = {
+export const MaxDate: Story = {
   args: {
     hint: "Select a date before July 19, 2024",
     maxDate: "2024-07-18",
   },
 };
 
-export const MaxDateWithError: StoryObj<DatePickerProps> = {
+export const MaxDateWithError: Story = {
   args: {
     hint: "Select a date before July 18, 2024",
     maxDate: "2024-07-18T03:00:00.000Z",
@@ -178,7 +176,7 @@ export const MaxDateWithError: StoryObj<DatePickerProps> = {
   },
 };
 
-export const WithTimeZonePicker: StoryObj<DatePickerProps> = {
+export const WithTimeZonePicker: Story = {
   args: {
     timeZonePickerLabel: "Time zone picker label",
     timeZoneOptions: [
@@ -189,7 +187,7 @@ export const WithTimeZonePicker: StoryObj<DatePickerProps> = {
   },
 };
 
-export const Controlled: StoryObj<DatePickerProps> = {
+export const Controlled: Story = {
   args: {
     timeZonePickerLabel: "Time zone picker label",
     timeZone: "America/New_York",
@@ -238,7 +236,7 @@ export const Controlled: StoryObj<DatePickerProps> = {
         await userEvent.click(dateButton);
       });
 
-      const input = canvas.getByRole("textbox") as HTMLInputElement;
+      const input = canvas.getByRole<HTMLInputElement>("textbox");
       expect(input.value).toBe("07/26/2024");
 
       await step("Check for a11y errors", async () => {

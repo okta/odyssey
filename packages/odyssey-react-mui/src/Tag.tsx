@@ -24,7 +24,7 @@ import {
 import { TagListContext } from "./TagListContext";
 import { ContrastMode, useContrastModeContext } from "./useContrastMode";
 
-const tagSizeValues = ["medium", "small"] as const;
+export const tagSizeValues = ["medium", "small"] as const;
 
 export const tagColorVariants = [
   "accentFour",
@@ -195,7 +195,7 @@ const getChipColors = ({
 const StyledTag = styled(MuiChip, {
   shouldForwardProp: (prop) =>
     !["colorVariant", "contrastMode", "odysseyDesignTokens", "size"].includes(
-      prop as string,
+      prop,
     ),
 })<{
   as?: React.ElementType; // Allow the 'as' prop to be forwarded

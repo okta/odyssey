@@ -22,8 +22,8 @@ import {
   TabsProps,
 } from "@okta/odyssey-react-mui";
 import { BugIcon } from "@okta/odyssey-react-mui/icons";
-import { expect } from "@storybook/jest";
-import { userEvent, waitFor, within } from "@storybook/testing-library";
+import { expect, userEvent, waitFor, within } from "@storybook/test";
+
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import icons from "../../../../.storybook/components/iconUtils";
 import { axeRun } from "../../../axe-util";
@@ -80,7 +80,7 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
           summary: "boolean",
         },
         defaultValue: {
-          summary: false,
+          summary: "false",
         },
       },
     },
@@ -94,7 +94,6 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
       },
     },
     onChange: {
-      control: null,
       description: "Callback fired when the active tab is changed",
       table: {
         type: {
@@ -149,11 +148,13 @@ const selectTab =
     await step(`select the ${tabName} tab`, async () => {
       await axeRun(actionName);
 
-      waitFor(() => {
+      await waitFor(async () => {
         const canvas = within(canvasElement);
         const tabElement = canvas.getByText(tabName);
-        userEvent.click(tabElement);
-        userEvent.tab();
+
+        await userEvent.click(tabElement);
+        await userEvent.tab();
+
         const tabData = canvas.getByText(`Information about ${tabName}`);
         expect(tabData).toBeInTheDocument();
       });
@@ -229,7 +230,7 @@ export const Icons: StoryObj<TabItemProps> = {
 };
 
 export const Controlled: StoryObj<TabItemProps> = {
-  render: function C({}) {
+  render: function C() {
     const [value, setValue] = useState("planets");
 
     const onChange: TabsProps["onChange"] = (_e: unknown, value: string) => {

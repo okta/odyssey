@@ -10,7 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render, waitFor, act } from "@testing-library/react";
+import * as Tokens from "@okta/odyssey-design-tokens";
+import { act, render, renderHook, waitFor } from "@testing-library/react";
+import { MockInstance } from "vitest";
+
 import {
   ContrastModeContext,
   defaultParentBackgroundColor,
@@ -24,20 +27,18 @@ import {
   useContrastMode,
   useContrastModeContext,
 } from "../useContrastMode";
-import * as Tokens from "@okta/odyssey-design-tokens";
-import { renderHook } from "@testing-library/react";
 
 describe("useContrastMode and related functions", () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     document.documentElement.style.setProperty("backgroundColor", null);
   });
 
   describe("useContrastMode hook", () => {
-    let getComputedStyleSpy: jest.SpyInstance;
+    let getComputedStyleSpy: MockInstance<typeof window.getComputedStyle>;
 
     beforeEach(() => {
-      getComputedStyleSpy = jest
+      getComputedStyleSpy = vi
         .spyOn(window, "getComputedStyle")
         .mockImplementation(
           () =>
@@ -57,6 +58,7 @@ describe("useContrastMode and related functions", () => {
           </ContrastModeContext.Provider>
         ),
       });
+
       expect(result.current.parentBackgroundColor).toBe(
         defaultParentBackgroundColor,
       );
@@ -124,25 +126,18 @@ describe("useContrastMode and related functions", () => {
     });
 
     it("should clean up observers and event listeners on unmount", () => {
-      const disconnect = jest.fn();
-      const observe = jest.fn();
-      const addEventListenerSpy = jest.spyOn(document, "addEventListener");
-      const removeEventListenerSpy = jest.spyOn(
-        document,
-        "removeEventListener",
-      );
+      const observeSpy = vi
+        .spyOn(MutationObserver.prototype, "observe")
+        .mockImplementation(vi.fn());
+      const disconnectSpy = vi
+        .spyOn(MutationObserver.prototype, "disconnect")
+        .mockImplementation(vi.fn());
+      const takeRecordsSpy = vi
+        .spyOn(MutationObserver.prototype, "takeRecords")
+        .mockImplementation(vi.fn());
 
-      const mockMutationObserver = jest.fn<
-        MutationObserver,
-        [MutationCallback]
-      >(() => ({
-        disconnect,
-        observe,
-        takeRecords: jest.fn(),
-      }));
-
-      const originalMutationObserver = global.MutationObserver;
-      global.MutationObserver = mockMutationObserver;
+      const addEventListenerSpy = vi.spyOn(document, "addEventListener");
+      const removeEventListenerSpy = vi.spyOn(document, "removeEventListener");
 
       const TestComponent = () => {
         const { contrastContainerRef } = useContrastMode({});
@@ -157,23 +152,26 @@ describe("useContrastMode and related functions", () => {
 
       unmount();
 
-      expect(disconnect).toHaveBeenCalled();
+      expect(disconnectSpy).toHaveBeenCalled();
       expect(removeEventListenerSpy).toHaveBeenCalledWith(
         "transitionend",
         expect.any(Function),
       );
 
-      global.MutationObserver = originalMutationObserver;
       addEventListenerSpy.mockRestore();
       removeEventListenerSpy.mockRestore();
+
+      disconnectSpy.mockRestore();
+      observeSpy.mockRestore();
+      takeRecordsSpy.mockRestore();
     });
   });
 
   describe("getBackgroundColor", () => {
-    let getComputedStyleSpy: jest.SpyInstance;
+    let getComputedStyleSpy: MockInstance<typeof window.getComputedStyle>;
 
     beforeEach(() => {
-      getComputedStyleSpy = jest
+      getComputedStyleSpy = vi
         .spyOn(window, "getComputedStyle")
         .mockImplementation(
           () =>
@@ -191,7 +189,7 @@ describe("useContrastMode and related functions", () => {
     });
 
     it("returns the background color of the element if it is not transparent", () => {
-      const getComputedStyleSpy = jest
+      const getComputedStyleSpy = vi
         .spyOn(window, "getComputedStyle")
         .mockImplementation(
           (element: Element) =>
@@ -211,7 +209,7 @@ describe("useContrastMode and related functions", () => {
     });
 
     it("returns defaultParentBackgroundColor if no non-transparent background is found", () => {
-      const getComputedStyleSpy = jest
+      const getComputedStyleSpy = vi
         .spyOn(window, "getComputedStyle")
         .mockImplementation(
           () =>
@@ -230,7 +228,7 @@ describe("useContrastMode and related functions", () => {
       parent.appendChild(child);
       parent.style.setProperty("background-color", "rgb(0, 255, 0)");
 
-      const getComputedStyleSpy = jest
+      const getComputedStyleSpy = vi
         .spyOn(window, "getComputedStyle")
         .mockImplementation(
           (el: Element) =>
@@ -246,7 +244,7 @@ describe("useContrastMode and related functions", () => {
     });
 
     it("returns HueNeutral50 token for its RGB equivalent", () => {
-      const getComputedStyleSpy = jest
+      const getComputedStyleSpy = vi
         .spyOn(window, "getComputedStyle")
         .mockImplementation(
           () => ({ backgroundColor: hueNeutral50Rgb }) as CSSStyleDeclaration,
@@ -267,7 +265,7 @@ describe("useContrastMode and related functions", () => {
       parent.appendChild(child);
       grandparent.style.setProperty("backgroundColor", "rgb(0, 0, 255)");
 
-      const getComputedStyleSpy = jest
+      const getComputedStyleSpy = vi
         .spyOn(window, "getComputedStyle")
         .mockImplementation(
           (el: Element) =>
@@ -284,36 +282,35 @@ describe("useContrastMode and related functions", () => {
   });
 
   describe("MutationObserver functionality", () => {
-    let originalAddEventListener: typeof document.addEventListener;
-    let originalRemoveEventListener: typeof document.removeEventListener;
+    let addEventListenerSpy: MockInstance<typeof document.addEventListener>;
+    let removeEventListenerSpy: MockInstance<
+      typeof document.removeEventListener
+    >;
 
     beforeEach(() => {
-      originalAddEventListener = document.addEventListener;
-      originalRemoveEventListener = document.removeEventListener;
-      document.addEventListener = jest.fn();
-      document.removeEventListener = jest.fn();
+      addEventListenerSpy = vi
+        .spyOn(document, "addEventListener")
+        .mockImplementation(vi.fn());
+      removeEventListenerSpy = vi
+        .spyOn(document, "removeEventListener")
+        .mockImplementation(vi.fn());
     });
 
     afterEach(() => {
-      document.addEventListener = originalAddEventListener;
-      document.removeEventListener = originalRemoveEventListener;
+      addEventListenerSpy.mockRestore();
+      removeEventListenerSpy.mockRestore();
     });
 
     it("should clean up observers and event listeners on unmount", () => {
-      const disconnect = jest.fn();
-      const observe = jest.fn();
-
-      const mockMutationObserver = jest.fn<
-        MutationObserver,
-        [MutationCallback]
-      >(() => ({
-        disconnect,
-        observe,
-        takeRecords: jest.fn(),
-      }));
-
-      const originalMutationObserver = global.MutationObserver;
-      global.MutationObserver = mockMutationObserver;
+      const observeSpy = vi
+        .spyOn(MutationObserver.prototype, "observe")
+        .mockImplementation(vi.fn());
+      const disconnectSpy = vi
+        .spyOn(MutationObserver.prototype, "disconnect")
+        .mockImplementation(vi.fn());
+      const takeRecordsSpy = vi
+        .spyOn(MutationObserver.prototype, "takeRecords")
+        .mockImplementation(vi.fn());
 
       const TestComponent = () => {
         const { contrastContainerRef } = useContrastMode({});
@@ -328,13 +325,15 @@ describe("useContrastMode and related functions", () => {
 
       unmount();
 
-      expect(disconnect).toHaveBeenCalled();
-      expect(document.removeEventListener).toHaveBeenCalledWith(
+      expect(disconnectSpy).toHaveBeenCalled();
+      expect(removeEventListenerSpy).toHaveBeenCalledWith(
         "transitionend",
         expect.any(Function),
       );
 
-      global.MutationObserver = originalMutationObserver;
+      disconnectSpy.mockRestore();
+      observeSpy.mockRestore();
+      takeRecordsSpy.mockRestore();
     });
   });
 
@@ -359,7 +358,7 @@ describe("useContrastMode and related functions", () => {
     const child = document.createElement("div");
     parent.appendChild(child);
 
-    const getComputedStyleSpy = jest
+    const getComputedStyleSpy = vi
       .spyOn(window, "getComputedStyle")
       .mockImplementation(
         (el: Element) =>
@@ -462,10 +461,10 @@ describe("useContrastMode and related functions", () => {
     });
 
     describe("getElementComputedBackgroundColor", () => {
-      let getComputedStyleSpy: jest.SpyInstance;
+      let getComputedStyleSpy: MockInstance<typeof window.getComputedStyle>;
 
       beforeEach(() => {
-        getComputedStyleSpy = jest.spyOn(window, "getComputedStyle");
+        getComputedStyleSpy = vi.spyOn(window, "getComputedStyle");
       });
 
       afterEach(() => {

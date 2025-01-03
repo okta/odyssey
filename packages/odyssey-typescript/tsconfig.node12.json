@@ -2,13 +2,13 @@
   "extends": "./tsconfig.strict.json",
 
   "compilerOptions": {
-    "lib": ["es2019", "es2020.bigint", "es2020.promise", "es2020.string"],
-    "module": "commonjs",
-    "target": "es2019",
-
-    "noEmit": false,
-    "emitDeclarationOnly": false,
     "declaration": true,
-    "declarationMap": true
+    "declarationMap": true,
+    "emitDeclarationOnly": false,
+    "lib": ["es2019", "es2020.bigint", "es2020.promise", "es2020.string"],
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "noEmit": false,
+    "target": "es2019"
   }
 }

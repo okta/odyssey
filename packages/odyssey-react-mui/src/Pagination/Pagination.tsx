@@ -10,24 +10,24 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import styled from "@emotion/styled";
 import { InputBase } from "@mui/material";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Paragraph } from "../Typography";
+import { useTranslation } from "react-i18next";
+
+import { Box } from "../Box";
 import { Button } from "../Buttons";
+import { paginationTypeValues } from "./constants";
 import { ArrowLeftIcon, ArrowRightIcon } from "../icons.generated";
-import styled from "@emotion/styled";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../OdysseyDesignTokensContext";
-import { Box } from "../Box";
-import { paginationTypeValues } from "./constants";
 import { usePagination } from "./usePagination";
-import { useTranslation } from "react-i18next";
+import { Paragraph } from "../Typography";
 
 const PaginationContainer = styled("nav")({
   display: "flex",
-  alignItems: "center",
   justifyContent: "space-between",
 });
 
@@ -225,6 +225,13 @@ const Pagination = ({
         updatedPage = 1;
       }
     }
+
+    console.log({
+      page,
+      updatedPage,
+      rowsPerPage,
+      updatedRowsPerPage,
+    });
 
     onPaginationChange({
       pageIndex: updatedPage,

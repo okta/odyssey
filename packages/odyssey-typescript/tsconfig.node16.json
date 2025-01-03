@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.strict.json",
+
+  "compilerOptions": {
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": false,
+    "lib": ["es2020", "es2020.bigint", "es2020.promise", "es2020.string"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "noEmit": false,
+    "target": "es2020"
+  }
+}

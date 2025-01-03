@@ -10,13 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { StoryObj } from "@storybook/react";
-
-import { within } from "@storybook/testing-library";
-import { expect } from "@storybook/jest";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { Link, LinkProps, linkVariantValues } from "@okta/odyssey-react-mui";
 import { InformationCircleFilledIcon } from "@okta/odyssey-react-mui/icons";
+import type { StoryObj } from "@storybook/react";
+import { expect, within } from "@storybook/test";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
+
 import icons from "../../../../.storybook/components/iconUtils";
 
 export default {
@@ -140,7 +139,7 @@ export const External: StoryObj<LinkProps> = {
     ariaLabel: "External Link",
   },
   play: async ({ canvasElement, step }) => {
-    await step("Link Aria-Label", async ({ args }) => {
+    await step("Link Aria-Label", ({ args }) => {
       const canvas = within(canvasElement);
       const link = canvas.getByRole("link", { name: "External Link" });
       expect(link).toHaveAttribute("href", args.href);

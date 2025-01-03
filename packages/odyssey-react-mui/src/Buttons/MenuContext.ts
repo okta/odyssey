@@ -19,9 +19,7 @@ export type MenuContextType = {
 };
 
 export const MenuContext = createContext<MenuContextType>({
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   closeMenu: () => {},
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   openMenu: () => {},
   shouldCloseOnSelect: true,
 });

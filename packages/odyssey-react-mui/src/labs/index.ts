@@ -24,7 +24,6 @@ export * from "./DataView";
 /** @deprecated Will be removed in a future Odyssey version in lieu of the one shipping with DataTable */
 export * from "./DataTablePagination";
 export * from "./DataFilters";
-export * from "./Layout";
 export * from "./materialReactTableTypes";
 /** @deprecated Will be removed in a future Odyssey version in lieu of DataTable */
 export * from "./StaticTable";
@@ -40,7 +39,8 @@ export {
   type GroupPickerProps,
 } from "./GroupPicker";
 
+// Unified UI
 export * from "./AppSwitcher";
-export * from "./SideNav/NavAccordion";
 export * from "./SideNav";
+export * from "./SideNav/NavAccordion";
 export * from "./TopNav";

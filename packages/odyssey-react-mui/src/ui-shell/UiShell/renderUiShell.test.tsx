@@ -10,13 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { act } from "@testing-library/react";
+import { act, waitFor } from "@testing-library/react";
 
 import { renderUiShell } from "./renderUiShell";
 import {
   ReactInWebComponentElement,
   reactWebComponentElementName,
-} from "../renderReactInWebComponent";
+} from "../../web-component/renderReactInWebComponent";
 
 describe("renderUiShell", () => {
   afterEach(() => {
@@ -27,7 +27,7 @@ describe("renderUiShell", () => {
     });
   });
 
-  test("returns app root element", async () => {
+  test("returns app root element", () => {
     const rootElement = document.createElement("div");
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
@@ -42,7 +42,7 @@ describe("renderUiShell", () => {
     });
   });
 
-  test("returns slotted elements", async () => {
+  test("returns slotted elements", () => {
     const rootElement = document.createElement("div");
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
@@ -60,7 +60,7 @@ describe("renderUiShell", () => {
     });
   });
 
-  test("returns ui shell root element", async () => {
+  test("returns ui shell root element", () => {
     const rootElement = document.createElement("div");
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
@@ -75,7 +75,7 @@ describe("renderUiShell", () => {
     });
   });
 
-  test("renders `UiShell` component in a web component", async () => {
+  test("renders `UiShell` component in a web component", () => {
     const rootElement = document.createElement("div");
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
@@ -126,9 +126,11 @@ describe("renderUiShell", () => {
       });
     });
 
-    expect(
-      rootElement.querySelector(reactWebComponentElementName)!.shadowRoot,
-    ).toHaveTextContent(appName);
+    await waitFor(() => {
+      expect(
+        rootElement.querySelector(reactWebComponentElementName)!.shadowRoot,
+      ).toHaveTextContent(appName);
+    });
   });
 
   test("renders `UiShell` with immediately updated props", async () => {
@@ -153,24 +155,26 @@ describe("renderUiShell", () => {
       });
     });
 
-    expect(
-      rootElement.querySelector(reactWebComponentElementName)!.shadowRoot,
-    ).toHaveTextContent(appName);
+    await waitFor(() => {
+      expect(
+        rootElement.querySelector(reactWebComponentElementName)!.shadowRoot,
+      ).toHaveTextContent(appName);
+    });
   });
 
   test("renders `<slot>` in the event of an error", async () => {
     const rootElement = document.createElement("div");
-    const consoleError = jest.fn();
-    const onError = jest.fn();
+    const consoleError = vi.fn();
+    const onError = vi.fn();
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(rootElement);
 
-    const consoleErrorSpy = jest
+    const consoleErrorSpy = vi
       .spyOn(console, "error")
       .mockImplementation(consoleError);
 
-    await act(() => {
+    act(() => {
       const { setComponentProps } = renderUiShell({
         onError,
         uiShellRootElement: rootElement,
@@ -184,14 +188,16 @@ describe("renderUiShell", () => {
       );
     });
 
-    consoleErrorSpy.mockRestore();
+    await waitFor(() => {
+      expect(onError).toHaveBeenCalledTimes(1);
+      expect(consoleError).toHaveBeenCalledTimes(1);
+      expect(
+        rootElement
+          .querySelector(reactWebComponentElementName)!
+          .shadowRoot?.querySelector("slot"),
+      ).toBeInstanceOf(HTMLSlotElement);
+    });
 
-    expect(onError).toHaveBeenCalledTimes(1);
-    expect(consoleError).toHaveBeenCalledTimes(1);
-    expect(
-      rootElement
-        .querySelector(reactWebComponentElementName)!
-        .shadowRoot?.querySelector("slot"),
-    ).toBeInstanceOf(HTMLSlotElement);
+    consoleErrorSpy.mockRestore();
   });
 });

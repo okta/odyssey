@@ -11,7 +11,7 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
-import { userEvent, within } from "@storybook/testing-library";
+import { userEvent, within } from "@storybook/test";
 import { IconWithTooltip, IconWithTooltipProps } from "@okta/odyssey-react-mui";
 import { GroupIcon } from "@okta/odyssey-react-mui/icons";
 

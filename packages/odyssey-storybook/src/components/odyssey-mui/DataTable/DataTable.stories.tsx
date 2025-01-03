@@ -48,7 +48,6 @@ const storybookMeta: Meta<DataTableProps> = {
   component: DataTable,
   argTypes: {
     columns: {
-      control: null,
       description: "The columns that make up the table.",
       table: {
         type: {
@@ -66,7 +65,6 @@ const storybookMeta: Meta<DataTableProps> = {
       },
     },
     getRowId: {
-      control: null,
       description: "The function to get the ID of a row",
       table: {
         type: {
@@ -201,7 +199,6 @@ const storybookMeta: Meta<DataTableProps> = {
       },
     },
     onChangeRowSelection: {
-      control: null,
       description:
         "Callback that fires when a row (or rows) is selected or unselected.",
       table: {
@@ -211,7 +208,6 @@ const storybookMeta: Meta<DataTableProps> = {
       },
     },
     getData: {
-      control: null,
       description:
         "Callback that fires whenever the table needs to fetch new data, due to changes in page, results per page, search input, filters, or sorting",
       table: {
@@ -221,7 +217,6 @@ const storybookMeta: Meta<DataTableProps> = {
       },
     },
     onReorderRows: {
-      control: null,
       description:
         "Callback that fires when the user reorders rows within the table. Can be used to propogate order change to the backend.",
       table: {
@@ -289,7 +284,6 @@ const storybookMeta: Meta<DataTableProps> = {
       },
     },
     rowActionButtons: {
-      control: null,
       description: "Action buttons to display in each row.",
       table: {
         type: {
@@ -298,7 +292,6 @@ const storybookMeta: Meta<DataTableProps> = {
       },
     },
     rowActionMenuItems: {
-      control: null,
       description:
         "Menu items to include in the optional actions menu on each row.",
       table: {
@@ -308,7 +301,6 @@ const storybookMeta: Meta<DataTableProps> = {
       },
     },
     bulkActionMenuItems: {
-      control: null,
       description:
         "Menu items to include in the bulk actions menu, which appears above the table if a row or rows are selected",
       table: {
@@ -318,7 +310,6 @@ const storybookMeta: Meta<DataTableProps> = {
       },
     },
     emptyPlaceholder: {
-      control: null,
       description:
         "The component to display when the table is displaying the initial empty state.",
       table: {
@@ -328,7 +319,6 @@ const storybookMeta: Meta<DataTableProps> = {
       },
     },
     noResultsPlaceholder: {
-      control: null,
       description:
         "The component to display when the query returns no results.",
       table: {
@@ -338,7 +328,6 @@ const storybookMeta: Meta<DataTableProps> = {
       },
     },
     renderDetailPanel: {
-      control: null,
       description: "The optional component to display when expanding a row.",
       table: {
         type: {
@@ -347,7 +336,6 @@ const storybookMeta: Meta<DataTableProps> = {
       },
     },
     additionalActionButton: {
-      control: null,
       description: "An optional action button above the table.",
       table: {
         type: {
@@ -356,7 +344,6 @@ const storybookMeta: Meta<DataTableProps> = {
       },
     },
     additionalActionMenuItems: {
-      control: null,
       description:
         "MenuItems that go in an optional action menu above the table.",
       table: {
@@ -400,12 +387,14 @@ const filterData = ({
 
         // If filter value is array, search for each array value
         if (Array.isArray(value)) {
-          return value.some((arrayValue) => {
-            return row[id as keyof (Planet | Person)]
-              ?.toString()
-              .toLowerCase()
-              .includes(arrayValue.toString().toLowerCase());
-          });
+          return value.some((arrayValue) =>
+            typeof arrayValue === "string"
+              ? row[id as keyof (Planet | Person)]
+                  ?.toString()
+                  .toLowerCase()
+                  .includes(arrayValue.toString().toLowerCase())
+              : false,
+          );
         }
 
         // In the custom filter examples, we provide a "starting letter"
@@ -1017,14 +1006,16 @@ export const Truncation: StoryObj<DataTableProps> = {
 
     const getData = useCallback(() => {
       const data: Array<{ truncated: string; wrapped: string }> = [];
-      [...Array(10)].forEach(() => {
-        data.push({
-          truncated:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla a quam et vulputate. Phasellus elementum turpis a lacus feugiat bibendum.",
-          wrapped:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla a quam et vulputate. Phasellus elementum turpis a lacus feugiat bibendum.",
-        });
-      }); // Corrected the missing parenthesis here
+      Array(10)
+        .fill(null)
+        .forEach(() => {
+          data.push({
+            truncated:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla a quam et vulputate. Phasellus elementum turpis a lacus feugiat bibendum.",
+            wrapped:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla a quam et vulputate. Phasellus elementum turpis a lacus feugiat bibendum.",
+          });
+        }); // Corrected the missing parenthesis here
       return data;
     }, []);
 

@@ -52,7 +52,9 @@ const BulkActionsMenu = <TData extends MRT_RowData>({
   const selectedRowCount = Object.values(rowSelection).filter(Boolean).length;
 
   const handleSelectAll = useCallback(() => {
-    const rows = Object.fromEntries(data.map((row) => [row.id, true]));
+    const rows = Object.fromEntries(
+      data.map((row) => [row.id as string, true]),
+    );
     setRowSelection(rows);
   }, [data, setRowSelection]);
 

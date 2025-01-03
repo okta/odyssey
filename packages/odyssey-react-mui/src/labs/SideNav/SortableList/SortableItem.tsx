@@ -10,22 +10,28 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createContext, useContext, useMemo } from "react";
-import type { CSSProperties, PropsWithChildren } from "react";
 import type {
   DraggableSyntheticListeners,
   UniqueIdentifier,
 } from "@dnd-kit/core";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { useSortable } from "@dnd-kit/sortable";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { CSS } from "@dnd-kit/utilities";
 import styled from "@emotion/styled";
+import {
+  createContext,
+  createRef,
+  RefObject,
+  useContext,
+  useMemo,
+  CSSProperties,
+  PropsWithChildren,
+} from "react";
+import { useTranslation } from "react-i18next";
+
 import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../../../OdysseyDesignTokensContext";
-import { useTranslation } from "react-i18next";
 
 type ItemProps = {
   id: UniqueIdentifier;
@@ -34,17 +40,17 @@ type ItemProps = {
   isSortable?: boolean;
 };
 
-interface Context {
+export type SortableItemContextType = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   attributes: Record<string, any>;
   listeners: DraggableSyntheticListeners;
-  ref(node: HTMLElement | null): void;
-}
+  ref: RefObject<HTMLButtonElement>;
+};
 
-const SortableItemContext = createContext<Context>({
+const SortableItemContext = createContext<SortableItemContextType>({
   attributes: {},
   listeners: undefined,
-  ref() {},
+  ref: createRef<HTMLButtonElement>(),
 });
 
 const StyledSortableListItem = styled("li", {
@@ -172,11 +178,12 @@ export const SortableItem = ({
     transform,
     transition,
   } = useSortable({ id });
-  const context: Context = useMemo(
+  const context: SortableItemContextType = useMemo(
     () => ({
       attributes,
       listeners,
-      ref: setActivatorNodeRef,
+      // This library gives us a legacy ref function, and I can't change it, so I had to override the type. --Kevin Ghadyani
+      ref: setActivatorNodeRef as unknown as RefObject<HTMLButtonElement>,
     }),
     [attributes, listeners, setActivatorNodeRef],
   );

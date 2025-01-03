@@ -14,12 +14,12 @@ import { bufferLatest } from "./bufferLatest";
 import { createMessageBus } from "./createMessageBus";
 
 describe("bufferLatest", () => {
-  test("calls subscriber after ready", async () => {
+  test("calls subscriber after ready", () => {
     const { publish: publish1, subscribe: subscribe1 } = createMessageBus();
 
     const { publish: publish2, subscribe: subscribe2 } = createMessageBus();
 
-    const subscriber = jest.fn();
+    const subscriber = vi.fn();
 
     subscribe1(subscriber);
 
@@ -34,12 +34,12 @@ describe("bufferLatest", () => {
     expect(subscriber).toHaveBeenCalledTimes(1);
   });
 
-  test("calls subscriber before ready", async () => {
+  test("calls subscriber before ready", () => {
     const { publish: publish1, subscribe: subscribe1 } = createMessageBus();
 
     const { publish: publish2, subscribe: subscribe2 } = createMessageBus();
 
-    const subscriber = jest.fn();
+    const subscriber = vi.fn();
 
     subscribe1(subscriber);
 
@@ -54,13 +54,13 @@ describe("bufferLatest", () => {
     expect(subscriber).toHaveBeenCalledTimes(1);
   });
 
-  test("keeps only the last value passed when ready", async () => {
+  test("keeps only the last value passed when ready", () => {
     const { publish: publish1, subscribe: subscribe1 } =
       createMessageBus<string>();
 
     const { publish: publish2, subscribe: subscribe2 } = createMessageBus();
 
-    const subscriber = jest.fn();
+    const subscriber = vi.fn();
 
     subscribe1(subscriber);
 
