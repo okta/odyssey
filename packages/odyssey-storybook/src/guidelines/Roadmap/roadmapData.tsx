@@ -13,12 +13,12 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { useMemo } from "react";
 import {
+  DataTableColumn,
   DataTableRowData,
   Status,
   statusSeverityValues,
   Tooltip,
 } from "@okta/odyssey-react-mui";
-import { DataTableColumn } from "@okta/odyssey-react-mui";
 
 import rawData from "./roadmap.json";
 
