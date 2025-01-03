@@ -1,7 +1,6 @@
 import { Meta } from "@storybook/blocks";
-import * as RtlStories from "./RTL.stories";
 
-<Meta of={RtlStories} />
+<Meta title="Guidelines/RTL" />
 
 # Right-to-Left (RTL) language support
 
@@ -26,569 +25,415 @@ For a quick visualization of how these properties are related, see <a href="http
         <td scope="column">Notes</td>
       </tr>
     </thead>
-
     <tbody>
       <tr>
         <td scope="row" rowSpan="7">
           Margin
         </td>
-
         <td>
           <code>margin</code>
         </td>
-
-        <td />
-
+        <td></td>
         <td>no auto-fix</td>
-
         <td>
           See <a href="#linting-notes">Linting notes</a>
         </td>
       </tr>
-
       <tr>
         <td>
           <code>margin-top</code>
         </td>
-
         <td>
           <code>margin-block-start</code>
         </td>
-
         <td>auto-fixed</td>
-
         <td>
           See <a href="#linting-notes">Linting notes</a>
         </td>
       </tr>
-
       <tr>
         <td>
           <code>margin-bottom</code>
         </td>
-
         <td>
           <code>margin-block-end</code>
         </td>
-
         <td>auto-fixed</td>
-
         <td>
           See <a href="#linting-notes">Linting notes</a>
         </td>
       </tr>
-
       <tr>
         <td>
           <code>margin-left</code>
         </td>
-
         <td>
           <code>margin-inline-start</code>
         </td>
-
         <td>auto-fixed</td>
-
         <td>
           See <a href="#linting-notes">Linting notes</a>
         </td>
       </tr>
-
       <tr>
         <td>
           <code>margin-right</code>
         </td>
-
         <td>
           <code>margin-inline-end</code>
         </td>
-
         <td>auto-fixed</td>
-
         <td>
           See <a href="#linting-notes">Linting notes</a>
         </td>
       </tr>
-
       <tr>
-        <td />
-
+        <td></td>
         <td>
           <code>margin-block</code>
         </td>
-
-        <td />
-
+        <td></td>
         <td>Sets both block margins</td>
       </tr>
-
       <tr>
-        <td />
-
+        <td></td>
         <td>
           <code>margin-inline</code>
         </td>
-
-        <td />
-
+        <td></td>
         <td>Sets both inline margins</td>
       </tr>
-
       <tr>
         <td scope="row" rowSpan="7">
           Padding
         </td>
-
         <td>
           <code>padding</code>
         </td>
-
-        <td />
-
+        <td></td>
         <td>no auto-fix</td>
-
         <td>
           See <a href="#linting-notes">Linting notes</a>
         </td>
       </tr>
-
       <tr>
         <td>
           <code>padding-top</code>
         </td>
-
         <td>
           <code>padding-block-start</code>
         </td>
-
         <td>auto-fixed</td>
-
         <td>
           See <a href="#linting-notes">Linting notes</a>
         </td>
       </tr>
-
       <tr>
         <td>
           <code>padding-bottom</code>
         </td>
-
         <td>
           <code>padding-block-end</code>
         </td>
-
         <td>auto-fixed</td>
-
         <td>
           See <a href="#linting-notes">Linting notes</a>
         </td>
       </tr>
-
       <tr>
         <td>
           <code>padding-left</code>
         </td>
-
         <td>
           <code>padding-inline-start</code>
         </td>
-
         <td>auto-fixed</td>
-
         <td>
           See <a href="#linting-notes">Linting notes</a>
         </td>
       </tr>
-
       <tr>
         <td>
           <code>padding-right</code>
         </td>
-
         <td>
           <code>padding-inline-end</code>
         </td>
-
         <td>auto-fixed</td>
-
         <td>
           See <a href="#linting-notes">Linting notes</a>
         </td>
       </tr>
-
       <tr>
-        <td />
-
+        <td></td>
         <td>
           <code>padding-block</code>
         </td>
-
-        <td />
-
+        <td></td>
         <td>Sets both block paddings</td>
       </tr>
-
       <tr>
-        <td />
-
+        <td></td>
         <td>
           <code>padding-inline</code>
         </td>
-
-        <td />
-
+        <td></td>
         <td>Sets both inline paddings</td>
       </tr>
-
       <tr>
         <td scope="row" rowSpan="11">
           Borders
         </td>
-
         <td>
           <code>border-top</code>
         </td>
-
         <td>
           <code>border-block-start</code>
         </td>
-
         <td>auto-fixed</td>
-
         <td>
-          Also applies to <code>\*-size|style|color</code>
+          Also applies to <code>*-size|style|color</code>
         </td>
       </tr>
-
       <tr>
         <td>
           <code>border-bottom</code>
         </td>
-
         <td>
           <code>border-block-end</code>
         </td>
-
         <td>auto-fixed</td>
-
         <td>
-          Also applies to <code>\*-size|style|color</code>
+          Also applies to <code>*-size|style|color</code>
         </td>
       </tr>
-
       <tr>
         <td>
           <code>border-left</code>
         </td>
-
         <td>
           <code>border-inline-start</code>
         </td>
-
         <td>auto-fixed</td>
-
         <td>
-          Also applies to <code>\*-size|style|color</code>
+          Also applies to <code>*-size|style|color</code>
         </td>
       </tr>
-
       <tr>
         <td>
           <code>border-right</code>
         </td>
-
         <td>
           <code>border-inline-end</code>
         </td>
-
         <td>auto-fixed</td>
-
         <td>
-          Also applies to <code>\*-size|style|color</code>
+          Also applies to <code>*-size|style|color</code>
         </td>
       </tr>
-
       <tr>
-        <td />
-
+        <td></td>
         <td>
           <code>border-block</code>
         </td>
-
-        <td />
-
+        <td></td>
         <td>Sets both block borders</td>
       </tr>
-
       <tr>
-        <td />
-
+        <td></td>
         <td>
           <code>border-inline</code>
         </td>
-
-        <td />
-
+        <td></td>
         <td>Sets both inline borders</td>
       </tr>
-
       <tr>
         <td>
           <code>border-radius</code>
         </td>
-
-        <td />
-
+        <td></td>
         <td>no auto-fix</td>
-
         <td>
           See <a href="#linting-notes">Linting notes</a>
         </td>
       </tr>
-
       <tr>
         <td>
           <code>border-top-left-radius</code>
         </td>
-
         <td>
           <code>border-start-start-radius</code>
         </td>
-
         <td>auto-fixed</td>
-
-        <td />
+        <td></td>
       </tr>
-
       <tr>
         <td>
           <code>border-top-right-radius</code>
         </td>
-
         <td>
           <code>border-start-end-radius</code>
         </td>
-
         <td>auto-fixed</td>
-
-        <td />
+        <td></td>
       </tr>
-
       <tr>
         <td>
           <code>border-bottom-left-radius</code>
         </td>
-
         <td>
           <code>border-end-start-radius</code>
         </td>
-
         <td>auto-fixed</td>
-
-        <td />
+        <td></td>
       </tr>
-
       <tr>
         <td>
           <code>border-bottom-right-radius</code>
         </td>
-
         <td>
           <code>border-end-end-radius</code>
         </td>
-
         <td>auto-fixed</td>
-
-        <td />
+        <td></td>
       </tr>
-
       <tr>
         <td scope="row" rowSpan="7">
           Position
         </td>
-
         <td>
           <code>top</code>
         </td>
-
         <td>
           <code>inset-block-start</code>
         </td>
-
         <td>auto-fixed</td>
-
-        <td />
+        <td></td>
       </tr>
-
       <tr>
         <td>
           <code>bottom</code>
         </td>
-
         <td>
           <code>inset-block-end</code>
         </td>
-
         <td>auto-fixed</td>
-
-        <td />
+        <td></td>
       </tr>
-
       <tr>
         <td>
           <code>left</code>
         </td>
-
         <td>
           <code>inset-inline-start</code>
         </td>
-
         <td>auto-fixed</td>
-
-        <td />
+        <td></td>
       </tr>
-
       <tr>
         <td>
           <code>right</code>
         </td>
-
         <td>
           <code>inset-inline-end</code>
         </td>
-
         <td>auto-fixed</td>
-
-        <td />
+        <td></td>
       </tr>
-
       <tr>
-        <td />
-
+        <td></td>
         <td>
           <code>inset</code>
         </td>
-
-        <td />
-
+        <td></td>
         <td>Sets all inset values</td>
       </tr>
-
       <tr>
-        <td />
-
+        <td></td>
         <td>
           <code>inset-block</code>
         </td>
-
-        <td />
-
+        <td></td>
         <td>Sets block inset values</td>
       </tr>
-
       <tr>
-        <td />
-
+        <td></td>
         <td>
           <code>inset-inline</code>
         </td>
-
-        <td />
-
+        <td></td>
         <td>Sets inline inset values</td>
       </tr>
-
       <tr>
         <td scope="row" rowSpan="6">
           Layout
         </td>
-
         <td>
           <code>text-align: left</code>
         </td>
-
         <td>
           <code>text-align: start</code>
         </td>
-
         <td>auto-fixed</td>
-
-        <td />
+        <td></td>
       </tr>
-
       <tr>
         <td>
           <code>text-align: right</code>
         </td>
-
         <td>
           <code>text-align: end</code>
         </td>
-
         <td>auto-fixed</td>
-
-        <td />
+        <td></td>
       </tr>
-
       <tr>
         <td>
           <code>float: left</code>
         </td>
-
         <td>
           <code>float: inline-start</code>
         </td>
-
         <td>auto-fixed</td>
         <td>Prefer Grid or Flex instead</td>
       </tr>
-
       <tr>
         <td>
           <code>float: right</code>
         </td>
-
         <td>
           <code>float: inline-end</code>
         </td>
-
         <td>auto-fixed</td>
         <td>Prefer Grid or Flex instead</td>
       </tr>
-
       <tr>
         <td>
           <code>clear: left</code>
         </td>
-
         <td>
           <code>clear: inline-start</code>
         </td>
-
         <td>auto-fixed</td>
         <td>Prefer Grid or Flex instead</td>
       </tr>
-
       <tr>
         <td>
           <code>clear: right</code>
         </td>
-
         <td>
           <code>clear: inline-end</code>
         </td>
-
         <td>auto-fixed</td>
         <td>Prefer Grid or Flex instead</td>
       </tr>
     </tbody>
-
   </table>
 </div>
 
 ### Linting notes
 
-Browsers have not settled on a standard RTL syntax for 4-value shorthands. Currently, using standard 4-value shorthands (`margin: 4px 3px 2px 1px`) will be parsed as physical CSS by the browser. Things to watch out for when adding styles for margin and padding:
+Browsers have not settled on a standard RTL syntax for 4-value shorthands. Currently, using standard 4-value shorthands (`margin: 4px 3px 2px 1px`) will be parsed as physical CSS by the browser. Stylelint's auto-fix behavior in this regard has a few gaps:
 
 - When four properties are present, `margin` and `padding` are collapsed into two forms of shorthand:
   - When all values are the same: `margin: x`
@@ -634,161 +479,122 @@ Our current implementation focuses on providing "automatic" RTL support with the
         <td scope="column">Lint status</td>
       </tr>
     </thead>
-
     <tbody>
       <tr>
         <td scope="row" rowSpan="6">
           Box
         </td>
-
         <td>
           <code>width</code>
         </td>
-
         <td>
           <code>inline-size</code>
         </td>
-
         <td>auto-fix available</td>
       </tr>
-
       <tr>
         <td>
           <code>min-width</code>
         </td>
-
         <td>
           <code>min-inline-size</code>
         </td>
-
         <td>auto-fix available</td>
       </tr>
-
       <tr>
         <td>
           <code>max-width</code>
         </td>
-
         <td>
           <code>max-inline-size</code>
         </td>
-
         <td>auto-fix available</td>
       </tr>
-
       <tr>
         <td>
           <code>height</code>
         </td>
-
         <td>
           <code>block-size</code>
         </td>
-
         <td>auto-fix available</td>
       </tr>
-
       <tr>
         <td>
           <code>min-height</code>
         </td>
-
         <td>
           <code>min-block-size</code>
         </td>
-
         <td>auto-fix available</td>
       </tr>
-
       <tr>
         <td>
           <code>max-height</code>
         </td>
-
         <td>
           <code>max-block-size</code>
         </td>
-
         <td>auto-fix available</td>
       </tr>
-
       <tr>
         <td scope="row" rowSpan="6">
           Overflow
         </td>
-
         <td>
           <code>overflow-y</code>
         </td>
-
         <td>
           <code>overflow-block</code>
         </td>
-
         <td>undetected</td>
       </tr>
-
       <tr>
         <td>
           <code>overflow-x</code>
         </td>
-
         <td>
           <code>overflow-inline</code>
         </td>
-
         <td>undetected</td>
       </tr>
-
       <tr>
         <td>
           <code>overscroll-behavior-y</code>
         </td>
-
         <td>
           <code>overscroll-behavior-block</code>
         </td>
-
         <td>undetected</td>
       </tr>
-
       <tr>
         <td>
           <code>overscroll-behavior-x</code>
         </td>
-
         <td>
           <code>overscroll-behavior-inline</code>
         </td>
-
         <td>undetected</td>
       </tr>
-
       <tr>
         <td>
           <code>resize: horizontal</code>
         </td>
-
         <td>
           <code>resize: inline</code>
         </td>
-
         <td>undetected</td>
       </tr>
-
       <tr>
         <td>
           <code>resize: vertical</code>
         </td>
-
         <td>
           <code>resize: block</code>
         </td>
-
         <td>undetected</td>
       </tr>
     </tbody>
-
   </table>
 </div>
 
@@ -797,7 +603,7 @@ not required for RTL support.
 
 Browser support is as above.
 
-Box properties need to be logical, not positional.
+Box properties are correctly detected and auto-fixed by stylelint-use-logical, but Overflow properties are not.
 
 PostCSS supports detection and fallback generation for all of these properties.
 

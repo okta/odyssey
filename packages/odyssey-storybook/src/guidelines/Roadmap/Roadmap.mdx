@@ -1,9 +1,7 @@
 import { Canvas, Meta } from "@storybook/blocks";
+
 import { RoadmapTable } from "./RoadmapTable";
-import * as RoadmapStories from "./Roadmap.stories";
 
-<Meta of={RoadmapStories} />
+<Meta title="Welcome/Roadmap" />
 
-<Canvas withSource="none" layout="fullscreen">
-  <RoadmapTable />
-</Canvas>
+<RoadmapTable />

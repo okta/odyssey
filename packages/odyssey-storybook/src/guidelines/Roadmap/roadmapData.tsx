@@ -10,14 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+/* eslint-disable import/no-extraneous-dependencies */
+import { useMemo } from "react";
 import {
-  DataTableColumn,
   DataTableRowData,
   Status,
   statusSeverityValues,
   Tooltip,
 } from "@okta/odyssey-react-mui";
-import { useMemo } from "react";
+import { DataTableColumn } from "@okta/odyssey-react-mui";
 
 import rawData from "./roadmap.json";
 
