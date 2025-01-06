@@ -83,9 +83,14 @@ export const getComponents = ({
           borderRadius: 0,
           boxShadow: "none",
 
-          '&[data-ods-type="accordion"][data-ods-variant="borderless"]': {
+          "&.MuiPaper-root.MuiAccordion-root[data-ods-variant='borderless']": {
             border: "none",
+
+            "&::before": {
+              display: "none",
+            },
           },
+
           "&.Mui-disabled": {
             backgroundColor: odysseyTokens.HueNeutralWhite,
             color: odysseyTokens.TypographyColorDisabled,

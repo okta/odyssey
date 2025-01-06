@@ -88,7 +88,6 @@ const Accordion = ({
   return (
     <MuiAccordion
       data-se={testId}
-      data-ods-type="accordion"
       data-ods-variant={variant}
       defaultExpanded={isDefaultExpanded}
       disabled={isDisabled}
