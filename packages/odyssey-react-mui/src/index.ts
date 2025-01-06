@@ -73,6 +73,7 @@ export * from "./CircularProgress";
 export * from "./createUniqueId";
 export * from "./CssBaseline";
 export * from "./DataTable";
+export { DatePicker, type DatePickerProps } from "./DatePickers";
 export * from "./Dialog";
 export * from "./Drawer";
 export * from "./EmptyState";

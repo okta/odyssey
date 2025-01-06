@@ -15,14 +15,17 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { expect } from "@storybook/jest";
 import { userEvent, within, screen, waitFor } from "@storybook/testing-library";
 
-import { odysseyTranslate } from "@okta/odyssey-react-mui";
-import { DatePicker, DatePickerProps } from "@okta/odyssey-react-mui/labs";
+import {
+  DatePicker,
+  DatePickerProps,
+  odysseyTranslate,
+} from "@okta/odyssey-react-mui";
 import { axeRun } from "../../../axe-util";
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<DatePickerProps> = {
-  title: "Labs Components/DatePicker",
+  title: "MUI Components/DatePickers/DatePicker",
   component: DatePicker,
   argTypes: {
     label: {
@@ -180,6 +183,7 @@ export const MaxDateWithError: StoryObj<DatePickerProps> = {
 
 export const WithTimeZonePicker: StoryObj<DatePickerProps> = {
   args: {
+    value: "2024-07-21T03:00:00.000Z",
     timeZonePickerLabel: "Time zone picker label",
     timeZoneOptions: [
       { label: "New York", value: "America/New_York" },
