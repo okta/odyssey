@@ -25,10 +25,15 @@ import {
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
 
-export type DataCardProps = Omit<
-  CardProps,
-  "accessory|button|isLoading|onClick"
-> & {
+export type DataCardProps = {
+  children?: CardProps["children"];
+  description?: CardProps["description"];
+  detailPanel?: CardProps["detailPanel"];
+  image?: CardProps["image"];
+  overline?: CardProps["overline"];
+  title?: CardProps["title"];
+  variant?: CardProps["variant"];
+  menuButtonChildren?: CardProps["menuButtonChildren"];
   hasSelection?: boolean;
   isSelected?: boolean;
   onSelectionChange?: () => void;

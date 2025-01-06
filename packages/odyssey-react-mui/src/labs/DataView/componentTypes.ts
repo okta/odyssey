@@ -28,10 +28,11 @@ import {
   DataRowSelectionState,
   DataTableColumn,
 } from "./dataTypes";
-import { CardProps, MenuButtonProps } from "../..";
+import { MenuButtonProps } from "../..";
 import { paginationTypeValues } from "../DataTablePagination";
 import { type PaginationProps } from "../../Pagination";
 import { RowActionsProps } from "./RowActions";
+import { DataCardProps } from "./DataCard";
 
 export type DataLayout = (typeof availableLayouts)[number];
 export type CardLayout = (typeof availableCardLayouts)[number];
@@ -108,7 +109,7 @@ export type TableLayoutProps<TData extends MRT_RowData> = {
 };
 
 export type CardLayoutProps<TData extends MRT_RowData> = {
-  itemProps: CardProps;
+  itemProps: (row: TData) => DataCardProps;
   maxGridColumns?: number;
   renderDetailPanel?: (props: { row: TData }) => ReactNode;
   rowActionMenuItems?: RowActionsProps<TData>["rowActionMenuItems"];

@@ -365,7 +365,7 @@ const customNoResultsPlaceholder = (
   />
 );
 
-const itemProps = (row: DataRow) => ({
+const itemProps = (row: DataRow): DataCardProps => ({
   overline: `${row.city}, ${row.state}`,
   title: row.name,
   description: `${row.name} is ${row.age} years old.`,
@@ -1020,7 +1020,7 @@ const stackItemProps = (row: Person) => ({
   overline: "Overline",
   title: row.name,
   description: `${row.name} is ${row.age} years old.`,
-  variant: "stack" as DataCardProps<Person>["variant"],
+  variant: "stack" as DataCardProps["variant"],
   image: <img src="https://placehold.co/400" alt="Logo" />,
 });
 
@@ -1045,7 +1045,7 @@ export const StackCards: StoryObj<DataViewMetaProps> = {
 
 const compactItemProps = (row: Person) => ({
   title: row.name,
-  variant: "compact" as DataCardProps<Person>["variant"],
+  variant: "compact" as DataCardProps["variant"],
   image: <img src="https://placehold.co/400" alt="Logo" />,
 });
 

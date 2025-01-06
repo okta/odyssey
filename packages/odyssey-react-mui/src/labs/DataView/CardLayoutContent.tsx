@@ -188,7 +188,7 @@ const CardLayoutContent = <TData extends MRT_RowData>({
                   image,
                   children,
                   variant,
-                } = cardLayoutOptions.itemProps;
+                } = cardLayoutOptions.itemProps(row);
                 const currentIndex =
                   index + (pagination.pageIndex - 1) * pagination.pageSize;
 
