@@ -46,7 +46,13 @@ export type UiShellProps = {
       componentProps: SetStateAction<UiShellNavComponentProps>,
     ) => void,
   ) => () => void;
+  /**
+   * Sets a custom background color for the side nav area.
+   */
   sideNavBackgroundColor?: string;
+  /**
+   * Sets a custom background color for the top nav area.
+   */
   topNavBackgroundColor?: string;
 } & Pick<ReactRootElements, "appRootElement" | "stylesRootElement"> &
   Pick<

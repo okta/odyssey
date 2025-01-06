@@ -114,9 +114,12 @@ export type UiShellNavComponentProps = {
 };
 
 export type UiShellContentProps = {
+  /**
+   * Sets a custom background color for the app content area.
+   */
   appBackgroundColor?: string;
   /**
-   * Sets the background color for the app content area.
+   * Sets either a gray or white background color for the app content area.
    */
   appBackgroundContrastMode?: ContrastMode;
   /**
