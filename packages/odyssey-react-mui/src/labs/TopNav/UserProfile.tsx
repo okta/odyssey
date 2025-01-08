@@ -43,7 +43,6 @@ const UserProfileInfoContainer = styled("div")(() => ({
 }));
 
 export type UserProfileProps = {
-  translateUserAndOrgName?: HtmlProps["translate"];
   /**
    * Logged in user profile icon to be displayed in the top nav
    */
@@ -60,13 +59,13 @@ export type UserProfileProps = {
    * The icon element to display after the username
    */
   userNameEndIcon?: ReactElement;
-};
+} & Pick<HtmlProps, "translate">;
 
 const UserProfile = ({
-  translateUserAndOrgName,
   profileIcon,
   userName,
   orgName,
+  translate,
   userNameEndIcon,
 }: UserProfileProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
@@ -79,7 +78,7 @@ const UserProfile = ({
         </UserProfileIconContainer>
       )}
 
-      <UserProfileInfoContainer translate={translateUserAndOrgName}>
+      <UserProfileInfoContainer translate={translate}>
         {userNameEndIcon ? (
           <Box
             sx={{
