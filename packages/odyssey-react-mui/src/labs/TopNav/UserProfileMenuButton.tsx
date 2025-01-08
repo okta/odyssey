@@ -50,7 +50,7 @@ const UserProfileMenuButton = ({
           profileIcon={profileIcon}
           userName={userName}
           orgName={orgName}
-          hasTranslatedUserAndOrgName={translate}
+          translateUserAndOrgName={translate}
           userNameEndIcon={userNameEndIcon ?? <ChevronDownIcon />}
         />
       }
