@@ -43,7 +43,7 @@ const UserProfileInfoContainer = styled("div")(() => ({
 }));
 
 export type UserProfileProps = {
-  hasTranslatedUserAndOrgName?: HtmlProps["translate"];
+  translateUserAndOrgName?: HtmlProps["translate"];
   /**
    * Logged in user profile icon to be displayed in the top nav
    */
@@ -63,7 +63,7 @@ export type UserProfileProps = {
 };
 
 const UserProfile = ({
-  hasTranslatedUserAndOrgName,
+  translateUserAndOrgName,
   profileIcon,
   userName,
   orgName,
@@ -79,7 +79,7 @@ const UserProfile = ({
         </UserProfileIconContainer>
       )}
 
-      <UserProfileInfoContainer translate={hasTranslatedUserAndOrgName}>
+      <UserProfileInfoContainer translate={translateUserAndOrgName}>
         {userNameEndIcon ? (
           <Box
             sx={{
