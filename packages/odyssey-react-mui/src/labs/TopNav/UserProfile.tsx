@@ -13,12 +13,13 @@
 import styled from "@emotion/styled";
 import { memo, type ReactElement } from "react";
 
+import { Box } from "../../Box";
+import { HtmlProps } from "../../HtmlProps";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
 import { Subordinate } from "../../Typography";
-import { Box } from "../../Box";
 
 const UserProfileContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
@@ -42,6 +43,7 @@ const UserProfileInfoContainer = styled("div")(() => ({
 }));
 
 export type UserProfileProps = {
+  hasTranslatedUserAndOrgName?: HtmlProps["translate"];
   /**
    * Logged in user profile icon to be displayed in the top nav
    */
@@ -61,6 +63,7 @@ export type UserProfileProps = {
 };
 
 const UserProfile = ({
+  hasTranslatedUserAndOrgName,
   profileIcon,
   userName,
   orgName,
@@ -76,7 +79,7 @@ const UserProfile = ({
         </UserProfileIconContainer>
       )}
 
-      <UserProfileInfoContainer>
+      <UserProfileInfoContainer translate={hasTranslatedUserAndOrgName}>
         {userNameEndIcon ? (
           <Box
             sx={{
