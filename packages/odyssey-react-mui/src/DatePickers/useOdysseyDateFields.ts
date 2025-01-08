@@ -21,15 +21,15 @@ import {
 import { DateTime } from "luxon";
 import { useTranslation } from "react-i18next";
 
-import { FieldComponentProps } from "../../FieldComponentProps";
+import { FieldComponentProps } from "../FieldComponentProps";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
   CalendarIcon,
   ChevronDownIcon,
-} from "../../icons.generated";
-import { ComponentControlledState, getControlState } from "../../inputUtils";
-import { TimeZoneOption, TimeZonePickerProps } from "../TimeZonePicker";
+} from "../icons.generated";
+import { ComponentControlledState, getControlState } from "../inputUtils";
+import { TimeZoneOption, TimeZonePickerProps } from "./TimeZonePicker";
 import { useDateFieldsTranslations } from "./useDateFieldsTranslations";
 
 const { CONTROLLED } = ComponentControlledState;
