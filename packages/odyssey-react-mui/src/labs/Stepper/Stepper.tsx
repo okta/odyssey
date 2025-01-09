@@ -74,6 +74,10 @@ export type StepperProps = {
    * Button label for the next navigation button
    */
   nextButtonLabel?: string;
+  /**
+   * Aria label for the stepper container
+   */
+  ariaLabel?: string;
 } & Pick<HtmlProps, "testId">;
 
 const createShouldForwardProp = (excludedProps: string[]) => (prop: string) =>
@@ -486,6 +490,7 @@ const StepperNavigation = ({
 
   const labels = useMemo(
     () => ({
+      //TODO: Determine if translation is needed or if we can re-use
       previous: previousButtonLabel ?? t("pagination.previous"),
       next: nextButtonLabel ?? t("pagination.next"),
     }),
@@ -587,8 +592,15 @@ const Stepper = ({
   steps,
   onChange,
   testId,
+  ariaLabel,
 }: StepperProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+
+  // Generate unique IDs for description elements
+  const stepDescriptionIds = useMemo(
+    () => steps.map((_, index) => `step-description-${index}`),
+    [steps],
+  );
 
   const handleStepClick = useCallback(
     (step: number) => {
@@ -610,6 +622,34 @@ const Stepper = ({
     return steps.map((step, index) => {
       const completed = index < activeStep;
       const active = index === activeStep;
+      const stepDescriptionId = stepDescriptionIds[index];
+
+      const getStepAriaLabel = (
+        index: number,
+        total: number,
+        status: "completed" | "active" | "pending",
+      ) => {
+        const statusText = {
+          completed: "Completed",
+          active: "Current",
+          pending: "Pending",
+        }[status];
+        return `Step ${index + 1} of ${total}: ${statusText}`;
+      };
+
+      const ariaProps = {
+        "aria-current": active ? ("step" as const) : undefined, // Type assertion to ensure correct aria-current value
+        "aria-label": getStepAriaLabel(
+          index,
+          steps.length,
+          completed ? "completed" : active ? "active" : "pending",
+        ),
+        ...(step.description && { "aria-describedby": stepDescriptionId }),
+        ...(orientation === "vertical" && {
+          "aria-expanded": active,
+          "aria-controls": `step-content-${index}`,
+        }),
+      };
 
       return (
         <StyledStep
@@ -621,6 +661,7 @@ const Stepper = ({
           isClickable={
             nonLinear ? (completed && allowBackStep) || !completed : false
           }
+          {...ariaProps}
         >
           <StepLabel
             odysseyDesignTokens={odysseyDesignTokens}
@@ -644,6 +685,7 @@ const Stepper = ({
             {step.label}
             {step.description && (
               <StyledStepDescription
+                id={stepDescriptionId}
                 odysseyDesignTokens={odysseyDesignTokens}
                 completed={completed}
                 active={active}
@@ -653,6 +695,15 @@ const Stepper = ({
               </StyledStepDescription>
             )}
           </StepLabel>
+          {orientation === "vertical" && (
+            <div
+              id={`step-content-${index}`}
+              role="region"
+              aria-labelledby={stepDescriptionId}
+            >
+              {/* Step content would go here */}
+            </div>
+          )}
         </StyledStep>
       );
     });
@@ -665,6 +716,7 @@ const Stepper = ({
     odysseyDesignTokens,
     orientation,
     variant,
+    stepDescriptionIds,
   ]);
 
   return (
@@ -676,6 +728,8 @@ const Stepper = ({
       allowBackStep={allowBackStep}
       nonLinear={nonLinear}
       stepVariant={variant}
+      aria-label={ariaLabel || "Progress steps"} // TODO: Use Trasnlated string
+      role="navigation"
     >
       {renderedSteps}
     </StepperContainer>
