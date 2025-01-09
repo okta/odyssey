@@ -11,8 +11,16 @@
  */
 
 import { memo, useMemo } from "react";
+import styled from "@emotion/styled";
+
 import { OktaLogo } from "./OktaLogo";
 import { SideNavLogoProps } from "./types";
+
+const StyledLogoLink = styled("a")(() => ({
+  display: "flex",
+  alignItems: "center",
+  height: "100%",
+}));
 
 const SideNavLogo = ({
   imageAltText,
@@ -32,7 +40,13 @@ const SideNavLogo = ({
     return <OktaLogo />;
   }, [imageAltText, logoComponent, imageUrl]);
 
-  return href ? <a href={href}>{logo}</a> : logo;
+  return href ? (
+    <StyledLogoLink data-se="sidenav-header-logo" href={href}>
+      {logo}
+    </StyledLogoLink>
+  ) : (
+    logo
+  );
 };
 
 const MemoizedSideNavLogo = memo(SideNavLogo);
