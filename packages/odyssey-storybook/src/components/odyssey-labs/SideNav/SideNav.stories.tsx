@@ -503,6 +503,7 @@ export const LogoWithLink: StoryObj<typeof SideNav> = {
     logoProps: {
       href: "/",
       logoComponent: <PlaceholderLogo.One />,
+      ariaLabel: "My custom image logo",
     },
   },
   render: (props) => {

@@ -16,6 +16,12 @@ import styled from "@emotion/styled";
 import { OktaLogo } from "./OktaLogo";
 import { SideNavLogoProps } from "./types";
 
+const StyledLogoContainer = styled("div")(() => ({
+  display: "flex",
+  alignItems: "center",
+  height: "100%",
+}));
+
 const StyledLogoLink = styled("a")(() => ({
   display: "flex",
   alignItems: "center",
@@ -24,9 +30,9 @@ const StyledLogoLink = styled("a")(() => ({
 
 const SideNavLogo = ({
   imageAltText,
-  href,
   logoComponent,
   imageUrl,
+  ...optionalProps
 }: SideNavLogoProps) => {
   const logo = useMemo(() => {
     if (logoComponent) {
@@ -40,12 +46,16 @@ const SideNavLogo = ({
     return <OktaLogo />;
   }, [imageAltText, logoComponent, imageUrl]);
 
-  return href ? (
-    <StyledLogoLink data-se="sidenav-header-logo" href={href}>
+  return "href" in optionalProps && "ariaLabel" in optionalProps ? (
+    <StyledLogoLink
+      aria-label={optionalProps.ariaLabel}
+      data-se="sidenav-header-logo"
+      href={optionalProps.href}
+    >
       {logo}
     </StyledLogoLink>
   ) : (
-    logo
+    <StyledLogoContainer role="presentation">{logo}</StyledLogoContainer>
   );
 };
 
