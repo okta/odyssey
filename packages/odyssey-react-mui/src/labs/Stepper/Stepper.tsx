@@ -21,7 +21,10 @@ import { useTranslation } from "react-i18next";
 import { Button } from "../../Buttons";
 import { HtmlProps } from "../../HtmlProps";
 import { CheckIcon } from "../../icons.generated";
-import { useOdysseyDesignTokens } from "../../OdysseyDesignTokensContext";
+import {
+  DesignTokens,
+  useOdysseyDesignTokens,
+} from "../../OdysseyDesignTokensContext";
 
 export type StepData = {
   /**
@@ -126,7 +129,7 @@ const StyledStep = styled(MuiStep, {
 })<{
   previousButtonLabel?: string;
   nextButtonLabel?: string;
-  odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
+  odysseyDesignTokens: DesignTokens;
   orientation?: "horizontal" | "vertical";
   isClickable: boolean;
 }>(({ orientation, odysseyDesignTokens }) => ({
@@ -137,7 +140,7 @@ const StyledStep = styled(MuiStep, {
 const StepperContainer = styled(MuiStepper, {
   shouldForwardProp: shouldForwardStepperProps,
 })<{
-  odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
+  odysseyDesignTokens: DesignTokens;
   orientation?: "horizontal" | "vertical";
   allowBackStep?: boolean;
   nonLinear?: boolean;
@@ -261,7 +264,7 @@ const StyledStepIconContainer = styled("div", {
   completed: boolean;
   active: boolean;
   variant: "numeric" | "nonNumeric";
-  odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
+  odysseyDesignTokens: DesignTokens;
 }>(({ completed, active, variant, odysseyDesignTokens }) => ({
   width:
     variant === "numeric"
@@ -317,7 +320,7 @@ const StepLabel = styled(MuiStepLabel, {
       "variant",
     ].includes(prop as string),
 })<{
-  odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
+  odysseyDesignTokens: DesignTokens;
   completed: boolean;
   active: boolean;
   allowBackStep?: boolean;
@@ -375,7 +378,7 @@ const StepLabel = styled(MuiStepLabel, {
 const StyledStepDescription = styled("div", {
   shouldForwardProp: shouldForwardStepDescriptionProps,
 })<{
-  odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
+  odysseyDesignTokens: DesignTokens;
   completed: boolean;
   active: boolean;
   orientation?: "horizontal" | "vertical";
@@ -395,7 +398,7 @@ const StyledStepDescription = styled("div", {
 const StyledStepNumber = styled("span", {
   shouldForwardProp: shouldForwardStepNumberProps,
 })<{
-  odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
+  odysseyDesignTokens: DesignTokens;
   completed: boolean;
   active: boolean;
 }>(({ completed, active, odysseyDesignTokens }) => ({
@@ -410,7 +413,7 @@ const StyledStepperDot = styled("div", {
   shouldForwardProp: shouldForwardStepperDotProps,
 })<{
   status: "previous" | "current" | "next";
-  odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
+  odysseyDesignTokens: DesignTokens;
   isClickable: boolean;
 }>(({ status, odysseyDesignTokens, isClickable }) => ({
   width: odysseyDesignTokens.Spacing2,
@@ -438,7 +441,7 @@ const StyledStepperDot = styled("div", {
 const StepperNavigationContainer = styled("div", {
   shouldForwardProp: shouldForwardStepperNavigationProps,
 })<{
-  odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
+  odysseyDesignTokens: DesignTokens;
 }>(({ odysseyDesignTokens }) => ({
   display: "grid",
   gridTemplateColumns: "1fr auto 1fr",
@@ -477,7 +480,7 @@ const StepperNavigation = ({
   isStepClickable: (step: number) => boolean;
   previousButtonLabel?: string;
   nextButtonLabel?: string;
-  odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
+  odysseyDesignTokens: DesignTokens;
 }) => {
   const { t } = useTranslation();
 
@@ -547,7 +550,7 @@ const StepIcon = ({
   active: boolean;
   stepNumber: number;
   variant: "numeric" | "nonNumeric";
-  odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
+  odysseyDesignTokens: DesignTokens;
 }) => (
   <StyledStepIconContainer
     completed={completed}
