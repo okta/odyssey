@@ -73,15 +73,59 @@ export type StepperProps = {
   nextButtonLabel?: string;
 } & Pick<HtmlProps, "testId">;
 
+const createShouldForwardProp = (excludedProps: string[]) => (prop: string) =>
+  !excludedProps.includes(prop);
+
+const shouldForwardStepProps = createShouldForwardProp([
+  "odysseyDesignTokens",
+  "orientation",
+  "isClickable",
+]);
+
+const shouldForwardStepIconContainerProps = createShouldForwardProp([
+  "completed",
+  "active",
+  "variant",
+  "odysseyDesignTokens",
+]);
+
+const shouldForwardStepperProps = createShouldForwardProp([
+  "odysseyDesignTokens",
+  "allowBackStep",
+  "nonLinear",
+  "stepVariant",
+]);
+
+const shouldForwardStepDescriptionProps = createShouldForwardProp([
+  "odysseyDesignTokens",
+  "completed",
+  "active",
+  "orientation",
+]);
+
+const shouldForwardStepNumberProps = createShouldForwardProp([
+  "odysseyDesignTokens",
+  "completed",
+  "active",
+]);
+
+const shouldForwardStepperDotProps = createShouldForwardProp([
+  "status",
+  "odysseyDesignTokens",
+  "isClickable",
+]);
+
+const shouldForwardStepperNavigationProps = createShouldForwardProp([
+  "odysseyDesignTokens",
+]);
+
+const shouldForwardNavigationSectionProps = createShouldForwardProp(["align"]);
+
 const StyledStep = styled(MuiStep, {
-  shouldForwardProp: (prop) =>
-    !["odysseyDesignTokens", "orientation", "isClickable"].includes(
-      prop as string,
-    ),
+  shouldForwardProp: shouldForwardStepProps,
 })<{
   previousButtonLabel?: string;
   nextButtonLabel?: string;
-
   odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
   orientation?: "horizontal" | "vertical";
   isClickable: boolean;
@@ -91,15 +135,7 @@ const StyledStep = styled(MuiStep, {
 }));
 
 const StepperContainer = styled(MuiStepper, {
-  shouldForwardProp: (prop) => {
-    console.log("shouldForwardProp checking:", prop);
-    return ![
-      "odysseyDesignTokens",
-      "allowBackStep",
-      "nonLinear",
-      "stepVariant",
-    ].includes(prop as string);
-  },
+  shouldForwardProp: shouldForwardStepperProps,
 })<{
   odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
   orientation?: "horizontal" | "vertical";
@@ -114,7 +150,6 @@ const StepperContainer = styled(MuiStepper, {
   nonLinear,
   stepVariant,
 }) => {
-  console.log("StepperContainer styled props:", { orientation, stepVariant });
   return {
     ...(orientation === "horizontal" && {
       justifyContent: "flex-start",
@@ -171,7 +206,7 @@ const StepperContainer = styled(MuiStepper, {
       "& .MuiStep-root": {
         flex: 1,
         paddingBottom: 0,
-        paddongTop: 0,
+        paddingTop: 0,
       },
     }),
     padding: 0,
@@ -219,7 +254,10 @@ const StepperContainer = styled(MuiStepper, {
     },
   };
 });
-const StyledStepIconContainer = styled("div")<{
+
+const StyledStepIconContainer = styled("div", {
+  shouldForwardProp: shouldForwardStepIconContainerProps,
+})<{
   completed: boolean;
   active: boolean;
   variant: "numeric" | "nonNumeric";
@@ -334,7 +372,9 @@ const StepLabel = styled(MuiStepLabel, {
   }),
 );
 
-const StyledStepDescription = styled("div")<{
+const StyledStepDescription = styled("div", {
+  shouldForwardProp: shouldForwardStepDescriptionProps,
+})<{
   odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
   completed: boolean;
   active: boolean;
@@ -352,7 +392,9 @@ const StyledStepDescription = styled("div")<{
   className: "MuiStepDescription-root",
 }));
 
-const StyledStepNumber = styled("span")<{
+const StyledStepNumber = styled("span", {
+  shouldForwardProp: shouldForwardStepNumberProps,
+})<{
   odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
   completed: boolean;
   active: boolean;
@@ -364,7 +406,9 @@ const StyledStepNumber = styled("span")<{
       : odysseyDesignTokens.HueNeutral900,
 }));
 
-const StyledStepperDot = styled("div")<{
+const StyledStepperDot = styled("div", {
+  shouldForwardProp: shouldForwardStepperDotProps,
+})<{
   status: "previous" | "current" | "next";
   odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
   isClickable: boolean;
@@ -391,7 +435,9 @@ const StyledStepperDot = styled("div")<{
     : undefined,
 }));
 
-const StepperNavigationContainer = styled("div")<{
+const StepperNavigationContainer = styled("div", {
+  shouldForwardProp: shouldForwardStepperNavigationProps,
+})<{
   odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
 }>(({ odysseyDesignTokens }) => ({
   display: "grid",
@@ -401,7 +447,9 @@ const StepperNavigationContainer = styled("div")<{
   gap: odysseyDesignTokens.Spacing3,
 }));
 
-const NavigationSection = styled("div")<{
+const NavigationSection = styled("div", {
+  shouldForwardProp: shouldForwardNavigationSectionProps,
+})<{
   align: "start" | "center" | "end";
 }>(({ align }) => ({
   display: "flex",
