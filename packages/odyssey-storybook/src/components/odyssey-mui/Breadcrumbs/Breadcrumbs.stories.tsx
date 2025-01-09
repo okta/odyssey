@@ -16,9 +16,8 @@ import {
   type BreadcrumbsProps,
 } from "@okta/odyssey-react-mui";
 import type { Meta, StoryObj } from "@storybook/react";
+import { expect, within } from "@storybook/test";
 
-import { within } from "@storybook/testing-library";
-import { expect } from "@storybook/jest";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<BreadcrumbsProps> = {
@@ -86,7 +85,7 @@ export const Default: StoryObj<BreadcrumbsProps> = {
     </BreadcrumbList>
   ),
   play: async ({ canvasElement, step }) => {
-    await step("Breadcrumbs Home Link", async ({ args }) => {
+    await step("Breadcrumbs Home Link", ({ args }) => {
       const canvas = within(canvasElement);
       const box = canvas.getByLabelText("Home");
       expect(box).toHaveAttribute("href", args.homeHref);

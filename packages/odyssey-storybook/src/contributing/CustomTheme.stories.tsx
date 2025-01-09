@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   Button,
   createOdysseyMuiTheme,
@@ -33,10 +33,12 @@ import { MuiThemeDecorator } from "../../.storybook/components/MuiThemeDecorator
 import { useMemo } from "react";
 import * as odysseyTokens from "@okta/odyssey-design-tokens";
 
-export default {
+const meta = {
   title: "Customization/Components",
   decorators: [MuiThemeDecorator],
-};
+} satisfies Meta;
+
+export default meta;
 
 export const ButtonStory: StoryObj = {
   decorators: [

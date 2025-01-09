@@ -1,8 +1,7 @@
-import { Canvas, Meta } from "@storybook/addon-docs";
-import { Story } from "@storybook/blocks";
-import * as Stories from "./CustomTheme.stories";
+import { Canvas, Meta, Story } from "@storybook/blocks";
+import * as CustomThemeStories from "./CustomTheme.stories";
 
-<Meta title="Customization/Components" anchor />
+<Meta of={CustomThemeStories} />
 
 # Custom Theme
 
@@ -14,18 +13,12 @@ Visually, the MUI components under `OdysseyThemeProvider` with a custom theme wo
 
 ### Button Primary
 
-<Canvas>
-  <Story of={Stories.ButtonStory} />
-</Canvas>
+<Canvas of={CustomThemeStories.ButtonStory} />
 
 ### Input Default
 
-<Canvas>
-  <Story of={Stories.TextFieldStory} />
-</Canvas>
+<Canvas of={CustomThemeStories.TextFieldStory} />
 
 ### Radio Default
 
-<Canvas>
-  <Story of={Stories.RadioGroupStory} />
-</Canvas>
+<Canvas of={CustomThemeStories.RadioGroupStory} />

@@ -18,7 +18,7 @@ import {
   DialogProps,
 } from "@okta/odyssey-react-mui";
 import { useCallback, useState } from "react";
-import { userEvent, within, screen } from "@storybook/testing-library";
+import { userEvent, within, screen } from "@storybook/test";
 import type { PlaywrightProps } from "../storybookTypes";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
@@ -28,19 +28,16 @@ const storybookMeta: Meta<typeof Dialog> = {
   component: Dialog,
   argTypes: {
     primaryCallToActionComponent: {
-      control: null,
       description:
         "An optional Button object to be situated in the Dialog footer. Should almost always be of variant `primary`.",
       table: { type: { summary: "<Button />" } },
     },
     secondaryCallToActionComponent: {
-      control: null,
       description:
         "An optional Button object to be situated in the Dialog footer, alongside the `callToActionPrimaryComponent`.",
       table: { type: { summary: "<Button />" } },
     },
     tertiaryCallToActionComponent: {
-      control: null,
       description:
         "An optional Button object to be situated in the Dialog footer, alongside the other two `callToAction` components.",
       table: { type: { summary: "<Button />" } },
@@ -63,7 +60,6 @@ const storybookMeta: Meta<typeof Dialog> = {
       type: { required: true, name: "boolean" },
     },
     onClose: {
-      control: "function",
       description:
         "Callback that controls what happens when the dialog is dismissed",
       table: { type: { summary: "func" } },

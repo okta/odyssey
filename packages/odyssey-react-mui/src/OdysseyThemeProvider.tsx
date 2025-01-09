@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ReactNode, useMemo } from "react";
+import { memo, ReactNode, useMemo } from "react";
 import {
   createTheme,
   ThemeProvider as MuiThemeProvider,
@@ -38,7 +38,7 @@ export type OdysseyThemeProviderProps = {
   themeOverride?: ThemeOptions;
 };
 
-const StyledContrastContainer = styled("div")(() => ({
+const StyledContrastContainerStyles = styled("div")(() => ({
   height: "inherit",
 }));
 
@@ -47,7 +47,7 @@ const StyledContrastContainer = styled("div")(() => ({
  *
  * Some teams have a need to wrap separately (SIW), but most teams will never need to use this explicitly.
  */
-export const OdysseyThemeProvider = ({
+const OdysseyThemeProvider = ({
   children,
   contrastMode: explicitContrastMode,
   designTokensOverride,
@@ -89,7 +89,7 @@ export const OdysseyThemeProvider = ({
   );
 
   return (
-    <StyledContrastContainer ref={contrastContainerRef}>
+    <StyledContrastContainerStyles ref={contrastContainerRef}>
       <ContrastModeContext.Provider value={contrastModeProviderValue}>
         <MuiThemeProvider theme={customOdysseyTheme}>
           <OdysseyDesignTokensContext.Provider value={odysseyTokens}>
@@ -97,6 +97,12 @@ export const OdysseyThemeProvider = ({
           </OdysseyDesignTokensContext.Provider>
         </MuiThemeProvider>
       </ContrastModeContext.Provider>
-    </StyledContrastContainer>
+    </StyledContrastContainerStyles>
   );
 };
+
+const MemoizedOdysseyThemeProvider = memo(
+  OdysseyThemeProvider,
+) as typeof OdysseyThemeProvider;
+
+export { MemoizedOdysseyThemeProvider as OdysseyThemeProvider };

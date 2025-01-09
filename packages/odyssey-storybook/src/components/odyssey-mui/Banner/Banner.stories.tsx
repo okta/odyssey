@@ -17,11 +17,10 @@ import {
   bannerSeverityValues,
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
+import { expect, fn, userEvent, within } from "@storybook/test";
 
-import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { userEvent, within } from "@storybook/testing-library";
-import { expect, jest } from "@storybook/jest";
 import { axeRun } from "../../../axe-util";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
 import type { PlaywrightProps } from "../storybookTypes";
 
 type PlayType = {
@@ -74,7 +73,6 @@ const storybookMeta: Meta<BannerProps> = {
       },
     },
     onClose: {
-      control: null,
       description:
         "The function that's fired when the user clicks the close button. If undefined, the close button will not be shown",
       table: {
@@ -168,7 +166,7 @@ export const Linked: StoryObj<BannerProps> = {
   play: async ({ canvasElement, step }: PlayType) => {
     await step("check for the link text", async () => {
       const canvas = within(canvasElement);
-      const link = canvas.getByText("View report") as HTMLAnchorElement;
+      const link = canvas.getByText<HTMLAnchorElement>("View report");
       await expect(link?.tagName).toBe("A");
       await expect(link?.href).toBe(`${link?.baseURI}#anchor`);
     });
@@ -188,7 +186,7 @@ export const LinkWithTarget: StoryObj<BannerProps> = {
 
 export const Dismissible: StoryObj<BannerProps> = {
   args: {
-    onClose: jest.fn(),
+    onClose: fn(),
   },
   play: async ({ args, canvasElement, step }: PlayType) => {
     await step("dismiss the banner on click", async () => {

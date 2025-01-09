@@ -37,7 +37,9 @@ import {
   MenuItem,
   EmptyState,
   paginationTypeValues,
+  DataTableProps,
 } from "@okta/odyssey-react-mui";
+import { fn } from "@storybook/test";
 
 type DataTableMetaProps = DataViewProps<Person> &
   TableLayoutProps<Person> & {
@@ -56,7 +58,6 @@ const storybookMeta: Meta<DataTableMetaProps> = {
   component: DataView,
   argTypes: {
     getData: {
-      control: null,
       table: {
         type: {
           summary: "",
@@ -64,7 +65,6 @@ const storybookMeta: Meta<DataTableMetaProps> = {
       },
     },
     getRowId: {
-      control: null,
       table: {
         type: {
           summary: "",
@@ -83,7 +83,6 @@ const storybookMeta: Meta<DataTableMetaProps> = {
       control: "boolean",
     },
     onReorderRows: {
-      control: null,
       table: {
         type: {
           summary: "",
@@ -93,12 +92,8 @@ const storybookMeta: Meta<DataTableMetaProps> = {
     hasRowSelection: {
       control: "boolean",
     },
-    onChangeRowSelection: {
-      control: null,
-    },
-    bulkActionMenuItems: {
-      control: null,
-    },
+    onChangeRowSelection: {},
+    bulkActionMenuItems: {},
     hasPagination: {
       control: "boolean",
     },
@@ -124,24 +119,16 @@ const storybookMeta: Meta<DataTableMetaProps> = {
     hasSearchSubmitButton: {
       control: "boolean",
     },
-    filters: {
-      control: null,
-    },
+    filters: {},
     searchDelayTime: {
       control: "number",
     },
     errorMessage: {
       control: "text",
     },
-    emptyPlaceholder: {
-      control: null,
-    },
-    noResultsPlaceholder: {
-      control: null,
-    },
-    columns: {
-      control: null,
-    },
+    emptyPlaceholder: {},
+    noResultsPlaceholder: {},
+    columns: {},
     initialDensity: {
       control: "select",
       options: densityValues,
@@ -155,15 +142,9 @@ const storybookMeta: Meta<DataTableMetaProps> = {
     hasColumnVisibility: {
       control: "boolean",
     },
-    renderDetailPanel: {
-      control: null,
-    },
-    rowActionButtons: {
-      control: null,
-    },
-    tableRowActionMenuItems: {
-      control: null,
-    },
+    renderDetailPanel: {},
+    rowActionButtons: {},
+    tableRowActionMenuItems: {},
     hasSorting: {
       control: "boolean",
     },
@@ -211,7 +192,9 @@ const storybookMeta: Meta<DataTableMetaProps> = {
       name: "[STORY ONLY] Has additional action menu items?",
     },
   },
-  args: {},
+  args: {
+    onChangeRowSelection: fn(),
+  },
   decorators: [MuiThemeDecorator],
 };
 
@@ -249,7 +232,9 @@ const useDataCallbacks = (
 };
 
 // Common action menu items
-const actionMenuItems = (selectedRows: DataRowSelectionState) => (
+const actionMenuItems: DataTableProps["rowActionMenuItems"] = (
+  selectedRows,
+) => (
   <>
     <MenuItem onClick={() => console.log(selectedRows)}>Action 1</MenuItem>
     <MenuItem onClick={() => console.log(selectedRows)}>Action 2</MenuItem>

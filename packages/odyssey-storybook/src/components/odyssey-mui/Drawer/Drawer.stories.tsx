@@ -10,15 +10,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import {
+  Accordion,
+  Box,
+  Button,
+  Drawer,
+  DrawerProps,
+  variantValues,
+} from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
-
-import { Drawer, DrawerProps, variantValues } from "@okta/odyssey-react-mui";
-
-import { Accordion, Box, Button } from "@okta/odyssey-react-mui";
+import { userEvent, waitFor, within } from "@storybook/test";
 import { useCallback, useState } from "react";
-import { userEvent, waitFor, within } from "@storybook/testing-library";
-import { axeRun } from "../../../axe-util";
 
+import { axeRun } from "../../../axe-util";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const gridStubText = (
@@ -97,12 +101,11 @@ const drawerLongText = (
   </>
 );
 
-const storybookMeta: Meta<DrawerProps> = {
+const meta = {
   title: "MUI Components/Drawer",
   component: Drawer,
   argTypes: {
     primaryCallToActionComponent: {
-      control: null,
       description:
         "An optional Button object to be situated in the Drawer footer. Should almost always be of variant `primary`.",
       table: {
@@ -112,7 +115,6 @@ const storybookMeta: Meta<DrawerProps> = {
       },
     },
     secondaryCallToActionComponent: {
-      control: null,
       description:
         "An optional Button object to be situated in the Drawer footer, alongside the `callToActionPrimaryComponent`.",
       table: {
@@ -122,7 +124,6 @@ const storybookMeta: Meta<DrawerProps> = {
       },
     },
     tertiaryCallToActionComponent: {
-      control: null,
       description:
         "An optional Button object to be situated in the Drawer footer, alongside the other two `callToAction` components.",
       table: {
@@ -137,7 +138,6 @@ const storybookMeta: Meta<DrawerProps> = {
         "The content of the Drawer. May be a `string` or any other `ReactNode` or array of `ReactNode`s.",
       table: {
         type: {
-          required: true,
           summary: "ReactNode | Array<ReactNode>",
         },
       },
@@ -152,7 +152,6 @@ const storybookMeta: Meta<DrawerProps> = {
       description: "When set to `true`, the drawer will be visible.",
       table: {
         type: {
-          required: true,
           summary: "boolean",
         },
       },
@@ -161,7 +160,6 @@ const storybookMeta: Meta<DrawerProps> = {
       },
     },
     onClose: {
-      control: "function",
       description:
         "Callback that controls what happens when the drawer is dismissed",
       table: {
@@ -176,19 +174,21 @@ const storybookMeta: Meta<DrawerProps> = {
         "Shows divider lines separating header, content, and footer (if using action buttons)",
       table: {
         type: {
-          required: false,
           summary: "boolean",
         },
         defaultValue: {
           summary: "false",
         },
       },
+      type: {
+        required: true,
+        name: "string",
+      },
     },
     title: {
       control: "text",
       table: {
         type: {
-          required: true,
           summary: "string",
         },
       },
@@ -203,12 +203,15 @@ const storybookMeta: Meta<DrawerProps> = {
       description: "The type of drawer",
       table: {
         type: {
-          required: true,
           summary: variantValues.join(" | "),
         },
         defaultValue: {
           summary: "temporary",
         },
+      },
+      type: {
+        required: true,
+        name: "string",
       },
     },
 
@@ -226,11 +229,14 @@ const storybookMeta: Meta<DrawerProps> = {
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
-};
+} satisfies Meta<typeof Drawer>;
 
-export default storybookMeta;
+export default meta;
 
-const DefaultTemplate: StoryObj<DrawerProps> = {
+type Story = StoryObj<typeof meta>;
+
+const DefaultTemplate: Story = {
+  args: {} as DrawerProps, // This is a hack
   render: function C(props) {
     const [isVisible, setIsVisible] = useState(false);
     const onOpen = useCallback(() => {
@@ -303,7 +309,11 @@ const DefaultTemplate: StoryObj<DrawerProps> = {
             <Button
               label={isVisible ? "Close drawer" : "Open drawer"}
               onClick={() => {
-                isVisible ? onClose() : onOpen();
+                if (isVisible) {
+                  onClose();
+                } else {
+                  onOpen();
+                }
               }}
               variant="primary"
             />
@@ -337,7 +347,7 @@ const DefaultTemplate: StoryObj<DrawerProps> = {
   },
 };
 
-export const Overlay: StoryObj<DrawerProps> = {
+export const Overlay: Story = {
   ...DefaultTemplate,
   parameters: {
     docs: {
@@ -350,7 +360,7 @@ export const Overlay: StoryObj<DrawerProps> = {
   args: {
     children: drawerLongText,
     title: "Okta Privileged Access",
-  },
+  } as DrawerProps, // This is a hack,
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
     await step("open Default Drawer", async () => {
@@ -363,7 +373,7 @@ export const Overlay: StoryObj<DrawerProps> = {
   },
 };
 
-export const Persistent: StoryObj<DrawerProps> = {
+export const Persistent: Story = {
   ...DefaultTemplate,
   parameters: {
     docs: {
@@ -389,10 +399,10 @@ export const Persistent: StoryObj<DrawerProps> = {
       </>
     ),
     title: "Profile details",
-  },
+  } as DrawerProps, // This is a hack,
 };
 
-export const ShowDividers: StoryObj<DrawerProps> = {
+export const ShowDividers: Story = {
   ...DefaultTemplate,
   parameters: {
     docs: {
@@ -418,10 +428,10 @@ export const ShowDividers: StoryObj<DrawerProps> = {
       </>
     ),
     title: "Profile details",
-  },
+  } as DrawerProps, // This is a hack
 };
 
-export const NoFooter: StoryObj<DrawerProps> = {
+export const NoFooter: Story = {
   render: function C(props) {
     const [isVisible, setIsVisible] = useState(false);
 
@@ -443,5 +453,5 @@ export const NoFooter: StoryObj<DrawerProps> = {
   args: {
     children: drawerLongText,
     title: "Okta Privileged Access",
-  },
+  } as DrawerProps, // This is a hack
 };

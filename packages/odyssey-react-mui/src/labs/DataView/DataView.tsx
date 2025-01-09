@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, useEffect, useMemo, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import {
   MRT_Row,
   MRT_RowData,
@@ -210,7 +210,10 @@ const DataView = <TData extends MRT_RowData>({
     ],
   );
 
-  const getRowId = getRowIdProp ? getRowIdProp : (row: TData) => row.id;
+  const getRowId = useCallback<Required<DataViewProps<TData>>["getRowId"]>(
+    (originalRow) => originalRow.id as string,
+    [],
+  );
 
   // Update pagination state if props change
   useEffect(() => {
@@ -426,7 +429,7 @@ const DataView = <TData extends MRT_RowData>({
           draggingRow={draggingRow}
           emptyState={emptyState}
           enableVirtualization={enableVirtualization}
-          getRowId={getRowId}
+          getRowId={getRowIdProp || getRowId}
           hasRowReordering={hasRowReordering}
           hasRowSelection={hasRowSelection}
           isEmpty={isEmpty}
@@ -451,7 +454,7 @@ const DataView = <TData extends MRT_RowData>({
             data={data}
             draggingRow={draggingRow}
             emptyState={emptyState}
-            getRowId={getRowId}
+            getRowId={getRowIdProp || getRowId}
             hasRowReordering={hasRowReordering}
             hasRowSelection={hasRowSelection}
             isEmpty={isEmpty}

@@ -130,7 +130,8 @@ export const useAutocomplete = <
         errorMessageList={errorMessageList}
         fieldType="single"
         hasVisibleLabel
-        //@ts-expect-error htmlFor does not exist ont he InputLabelProps for autocomplete
+        //@ts-expect-error htmlFor exists on `InputLabelProps`, but not the type.
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         id={InputLabelProps.htmlFor}
         isFullWidth={isFullWidth}
         hint={hint}

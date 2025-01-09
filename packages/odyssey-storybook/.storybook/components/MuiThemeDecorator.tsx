@@ -20,6 +20,7 @@ export const MuiThemeDecorator: Decorator = (Story, context) => {
   const {
     globals: { locale },
   } = context;
+
   return (
     <OdysseyProvider languageCode={locale}>
       {/* @ts-expect-error type mismatch on "typography" */}

@@ -64,9 +64,7 @@ A typical usage of `onChangeFilters` would be to set the parent component's stat
 or perform an effect whenever the return value changes. In the case of `DataTable`, it fires the `fetchDataFn` whenever
 the filters change.
 
-<Canvas>
-  <Story of={DataFiltersStories.NoSearch} />
-</Canvas>
+<Canvas of={DataFiltersStories.NoSearch} />
 
 ## Search
 
@@ -77,13 +75,9 @@ By default, `onChangeSearch` fires whenever the user changes the input value, de
 by setting a different number of milliseconds in `searchDelay`. Or, you can force `onChangeSearch` to only fire on submit by setting
 `searchOnSubmit` to `true`.
 
-<Canvas>
-  <Story of={DataFiltersStories.JustSearch} />
-</Canvas>
+<Canvas of={DataFiltersStories.JustSearch} />
 
-<Canvas>
-  <Story of={DataFiltersStories.SearchOnSubmit} />
-</Canvas>
+<Canvas of={DataFiltersStories.SearchOnSubmit} />
 
 ## Additional actions
 
@@ -92,6 +86,4 @@ by setting a different number of milliseconds in `searchDelay`. Or, you can forc
 
 `DataTable` uses this to expose density and column visibility controls.
 
-<Canvas>
-  <Story of={DataFiltersStories.AdditionalActions} />
-</Canvas>
+<Canvas of={DataFiltersStories.AdditionalActions} />

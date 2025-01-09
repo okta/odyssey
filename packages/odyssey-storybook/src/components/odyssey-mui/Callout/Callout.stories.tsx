@@ -17,7 +17,7 @@ import {
   calloutSeverityValues,
 } from "@okta/odyssey-react-mui";
 import { queryOdysseySelector } from "@okta/odyssey-react-mui/test-selectors";
-import { expect } from "@storybook/jest";
+import { expect } from "@storybook/test";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -242,7 +242,7 @@ export const TitleWithLink: StoryObj<CalloutProps> = {
     canvasElement: HTMLElement;
     step: PlaywrightProps<CalloutProps>["step"];
   }) => {
-    await step("has visible link", async () => {
+    await step("has visible link", () => {
       const querySelect = queryOdysseySelector("Callout");
 
       const element = querySelect({

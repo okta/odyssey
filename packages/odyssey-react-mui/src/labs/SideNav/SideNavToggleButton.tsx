@@ -34,109 +34,103 @@ import { Tooltip } from "../../Tooltip";
 const StyledToggleButton = styled(MuiButton, {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" && prop !== "isSideNavCollapsed",
-})(
-  ({
-    isSideNavCollapsed,
-    odysseyDesignTokens,
-  }: {
-    isSideNavCollapsed: boolean;
-    odysseyDesignTokens: DesignTokens;
-  }) => ({
-    backgroundColor: "transparent",
-    position: "relative",
-    width: odysseyDesignTokens.Spacing6,
-    height: odysseyDesignTokens.Spacing6,
-    border: 0,
-    zIndex: 2,
+})<{
+  isSideNavCollapsed: boolean;
+  odysseyDesignTokens: DesignTokens;
+}>(({ isSideNavCollapsed, odysseyDesignTokens }) => ({
+  backgroundColor: "transparent",
+  position: "relative",
+  width: odysseyDesignTokens.Spacing6,
+  height: odysseyDesignTokens.Spacing6,
+  border: 0,
+  zIndex: 2,
 
-    "&:focus-visible": {
-      boxShadow: `inset 0 0 0 2px ${odysseyDesignTokens.PalettePrimaryMain}`,
-      outline: "none",
+  "&:focus-visible": {
+    boxShadow: `inset 0 0 0 2px ${odysseyDesignTokens.PalettePrimaryMain}`,
+    outline: "none",
+  },
+
+  "&:hover, &:focus-visible": {
+    backgroundColor: "transparent",
+
+    "#lineOne": {
+      animation: `lineOne-animate-to-collapse ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
+      animationFillMode: "forwards",
+      "@keyframes lineOne-animate-to-collapse": {
+        "0%": {
+          transform: "translate3d(-50%, -50%, 0)",
+        },
+        "50%": {
+          transform: "translate3d(-50%, -50%, 0) rotate(-90deg) scaleY(.75)",
+        },
+        "100%": {
+          transform: "translate3d(-50%, -27%, 0) rotate(-45deg) scaleY(.75)",
+        },
+      },
     },
 
-    "&:hover, &:focus-visible": {
-      backgroundColor: "transparent",
+    "#lineTwo": {
+      animation: `lineTwo-animate-to-collapse ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
+      animationFillMode: "forwards",
+      "@keyframes lineTwo-animate-to-collapse": {
+        "0%": {
+          transform: "translate3d(-50%, -50%, 0)",
+        },
+        "50%": {
+          transform: "translate3d(-50%, -50%, 0) rotate(-90deg) scaleY(.75)",
+        },
+        "100%": {
+          transform: "translate3d(-50%, -73%, 0) rotate(-135deg) scaleY(.75)",
+        },
+      },
+    },
 
+    ...(isSideNavCollapsed && {
       "#lineOne": {
-        animation: `lineOne-animate-to-collapse ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
+        animation: `lineOne-animate-to-expand ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
         animationFillMode: "forwards",
-        "@keyframes lineOne-animate-to-collapse": {
+        "@keyframes lineOne-animate-to-expand": {
           "0%": {
             transform: "translate3d(-50%, -50%, 0)",
           },
           "50%": {
-            transform: "translate3d(-50%, -50%, 0) rotate(-90deg) scaleY(.75)",
+            transform: "translate3d(-50%, -50%, 0) rotate(90deg) scaleY(.75)",
           },
           "100%": {
-            transform: "translate3d(-50%, -27%, 0) rotate(-45deg) scaleY(.75)",
+            transform: "translate3d(-50%, -73%, 0) rotate(135deg) scaleY(.75)",
           },
         },
       },
 
       "#lineTwo": {
-        animation: `lineTwo-animate-to-collapse ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
+        animation: `lineTwo-animate-to-expand ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
         animationFillMode: "forwards",
-        "@keyframes lineTwo-animate-to-collapse": {
+        "@keyframes lineTwo-animate-to-expand": {
           "0%": {
             transform: "translate3d(-50%, -50%, 0)",
           },
           "50%": {
-            transform: "translate3d(-50%, -50%, 0) rotate(-90deg) scaleY(.75)",
+            transform: "translate3d(-50%, -50%, 0) rotate(90deg) scaleY(.75)",
           },
           "100%": {
-            transform: "translate3d(-50%, -73%, 0) rotate(-135deg) scaleY(.75)",
+            transform: "translate3d(-50%, -27%, 0) rotate(45deg) scaleY(.75)",
           },
         },
       },
+    }),
+  },
 
-      ...(isSideNavCollapsed && {
-        "#lineOne": {
-          animation: `lineOne-animate-to-expand ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
-          animationFillMode: "forwards",
-          "@keyframes lineOne-animate-to-expand": {
-            "0%": {
-              transform: "translate3d(-50%, -50%, 0)",
-            },
-            "50%": {
-              transform: "translate3d(-50%, -50%, 0) rotate(90deg) scaleY(.75)",
-            },
-            "100%": {
-              transform:
-                "translate3d(-50%, -73%, 0) rotate(135deg) scaleY(.75)",
-            },
-          },
-        },
-
-        "#lineTwo": {
-          animation: `lineTwo-animate-to-expand ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
-          animationFillMode: "forwards",
-          "@keyframes lineTwo-animate-to-expand": {
-            "0%": {
-              transform: "translate3d(-50%, -50%, 0)",
-            },
-            "50%": {
-              transform: "translate3d(-50%, -50%, 0) rotate(90deg) scaleY(.75)",
-            },
-            "100%": {
-              transform: "translate3d(-50%, -27%, 0) rotate(45deg) scaleY(.75)",
-            },
-          },
-        },
-      }),
-    },
-
-    span: {
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      width: "2px",
-      height: odysseyDesignTokens.Spacing4,
-      backgroundColor: odysseyDesignTokens.HueNeutral600,
-      transform: "translate3d(-50%, -50%, 0)",
-      transition: `transform ${odysseyDesignTokens.TransitionDurationMain}`,
-    },
-  }),
-);
+  span: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    width: "2px",
+    height: odysseyDesignTokens.Spacing4,
+    backgroundColor: odysseyDesignTokens.HueNeutral600,
+    transform: "translate3d(-50%, -50%, 0)",
+    transition: `transform ${odysseyDesignTokens.TransitionDurationMain}`,
+  },
+}));
 
 export type SideNavToggleButtonProps = {
   /**

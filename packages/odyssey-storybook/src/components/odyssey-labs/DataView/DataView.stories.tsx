@@ -12,7 +12,6 @@
 
 import type { Meta, StoryObj } from "@storybook/react";
 import {
-  DataRow,
   DataView,
   DataViewProps,
   DataGetDataType,
@@ -24,7 +23,6 @@ import {
   CardLayoutProps,
   UpdateFiltersOrValues,
   DataColumns,
-  DataTableRowSelectionState,
   DataCardProps,
 } from "@okta/odyssey-react-mui/labs";
 import { PauseIcon, RefreshIcon } from "@okta/odyssey-react-mui/icons";
@@ -51,6 +49,7 @@ import {
   paginationTypeValues,
   DataTableRowData,
 } from "@okta/odyssey-react-mui";
+import { fn } from "@storybook/test";
 
 type DataViewMetaProps = DataViewProps<Person> &
   TableLayoutProps<Person> &
@@ -65,12 +64,11 @@ type DataViewMetaProps = DataViewProps<Person> &
     hasAdditionalActionMenuItems: boolean;
   };
 
-const storybookMeta: Meta<DataViewMetaProps> = {
+const meta = {
   title: "Labs Components/DataView",
   component: DataView,
   argTypes: {
     getData: {
-      control: null,
       table: {
         type: {
           summary: "",
@@ -78,7 +76,6 @@ const storybookMeta: Meta<DataViewMetaProps> = {
       },
     },
     getRowId: {
-      control: null,
       table: {
         type: {
           summary: "",
@@ -97,7 +94,6 @@ const storybookMeta: Meta<DataViewMetaProps> = {
       control: "boolean",
     },
     onReorderRows: {
-      control: null,
       table: {
         type: {
           summary: "",
@@ -107,12 +103,8 @@ const storybookMeta: Meta<DataViewMetaProps> = {
     hasRowSelection: {
       control: "boolean",
     },
-    onChangeRowSelection: {
-      control: null,
-    },
-    bulkActionMenuItems: {
-      control: null,
-    },
+    onChangeRowSelection: {},
+    bulkActionMenuItems: {},
     hasPagination: {
       control: "boolean",
     },
@@ -141,9 +133,7 @@ const storybookMeta: Meta<DataViewMetaProps> = {
     hasSearchSubmitButton: {
       control: "boolean",
     },
-    filters: {
-      control: null,
-    },
+    filters: {},
     searchDelayTime: {
       control: "number",
     },
@@ -153,12 +143,8 @@ const storybookMeta: Meta<DataViewMetaProps> = {
     errorMessage: {
       control: "text",
     },
-    emptyPlaceholder: {
-      control: null,
-    },
-    noResultsPlaceholder: {
-      control: null,
-    },
+    emptyPlaceholder: {},
+    noResultsPlaceholder: {},
     initialLayout: {
       control: "select",
       options: availableLayouts,
@@ -168,7 +154,6 @@ const storybookMeta: Meta<DataViewMetaProps> = {
       options: availableLayouts,
     },
     columns: {
-      control: null,
       name: "tableLayoutOptions.columns",
     },
     initialDensity: {
@@ -189,15 +174,12 @@ const storybookMeta: Meta<DataViewMetaProps> = {
       name: "tableLayoutOptions.hasColumnVisibility",
     },
     renderDetailPanel: {
-      control: null,
       name: "tableLayoutOptions.renderDetailPanel",
     },
     rowActionButtons: {
-      control: null,
       name: "tableLayoutOptions.rowActionButtons",
     },
     tableRowActionMenuItems: {
-      control: null,
       name: "tableLayoutOptions.rowActionMenuItems",
     },
     hasSorting: {
@@ -205,7 +187,6 @@ const storybookMeta: Meta<DataViewMetaProps> = {
       name: "tableLayoutOptions.hasSorting",
     },
     itemProps: {
-      control: null,
       name: "cardLayoutOptions.itemProps",
     },
     maxGridColumns: {
@@ -213,7 +194,6 @@ const storybookMeta: Meta<DataViewMetaProps> = {
       name: "cardLayoutOptions.maxGridColumns",
     },
     cardRowActionMenuItems: {
-      control: null,
       name: "cardLayoutOptions.rowActionMenuItems",
     },
     isLoading: {
@@ -261,20 +241,23 @@ const storybookMeta: Meta<DataViewMetaProps> = {
     },
   },
   args: {
+    availableLayouts: ["table", "list", "grid"],
     currentPage: 1,
-    resultsPerPage: 20,
-    paginationType: "paged",
-    maxGridColumns: 3,
     hasActionButtons: false,
     hasActionMenuItems: false,
     hasCustomEmptyPlaceholder: false,
     hasCustomNoResultsPlaceholder: false,
-    availableLayouts: ["table", "list", "grid"],
+    maxGridColumns: 3,
+    onChangeRowSelection: fn(),
+    paginationType: "paged",
+    resultsPerPage: 20,
   },
   decorators: [MuiThemeDecorator],
-};
+} satisfies Meta<DataViewMetaProps>;
 
-export default storybookMeta;
+export default meta;
+
+type Story = StoryObj<DataViewMetaProps>;
 
 const useDataCallbacks = (
   data: Person[],
@@ -365,7 +348,7 @@ const customNoResultsPlaceholder = (
   />
 );
 
-const itemProps = (row: DataRow) => ({
+const itemProps: CardLayoutProps<Person>["itemProps"] = (row) => ({
   overline: `${row.city}, ${row.state}`,
   title: row.name,
   description: `${row.name} is ${row.age} years old.`,
@@ -384,8 +367,9 @@ const itemProps = (row: DataRow) => ({
 });
 
 // Base story configuration
-const BaseStory: StoryObj<DataViewMetaProps> = {
-  render: function Base(args) {
+const BaseStory: Story = {
+  args: {} as Story["args"], // This is a hack.
+  render: function C(args) {
     const [data, setData] = useState<Person[]>(personData);
     const { getData, onReorderRows, onChangeRowSelection } = useDataCallbacks(
       data,
@@ -440,6 +424,7 @@ const BaseStory: StoryObj<DataViewMetaProps> = {
         tableLayoutOptions={{
           columns: personColumns,
           hasSorting: args.hasSorting,
+          // @ts-expect-error TODO: We need to fix this.
           rowActionMenuItems: args.hasActionMenuItems
             ? actionMenuItems
             : undefined,
@@ -451,7 +436,8 @@ const BaseStory: StoryObj<DataViewMetaProps> = {
           initialDensity: args.initialDensity,
         }}
         cardLayoutOptions={{
-          itemProps: itemProps,
+          itemProps,
+          // @ts-expect-error TODO: We need to fix this.
           rowActionMenuItems: args.hasActionMenuItems
             ? actionMenuItems
             : undefined,
@@ -462,40 +448,40 @@ const BaseStory: StoryObj<DataViewMetaProps> = {
   },
 };
 
-export const Default: StoryObj<DataViewMetaProps> = {
+export const Default: Story = {
   ...BaseStory,
   args: {},
 };
 
-export const TableOnly: StoryObj<DataViewMetaProps> = {
+export const TableOnly: Story = {
   ...BaseStory,
   args: {
     availableLayouts: ["table"],
   },
 };
 
-export const ListAndGrid: StoryObj<DataViewMetaProps> = {
+export const ListAndGrid: Story = {
   ...BaseStory,
   args: {
     availableLayouts: ["list", "grid"],
   },
 };
 
-export const ListOnly: StoryObj<DataViewMetaProps> = {
+export const ListOnly: Story = {
   ...BaseStory,
   args: {
     availableLayouts: ["list"],
   },
 };
 
-export const GridOnly: StoryObj<DataViewMetaProps> = {
+export const GridOnly: Story = {
   ...BaseStory,
   args: {
     availableLayouts: ["grid"],
   },
 };
 
-export const Everything: StoryObj<DataViewMetaProps> = {
+export const Everything: Story = {
   ...BaseStory,
   args: {
     hasRowReordering: true,
@@ -515,7 +501,7 @@ export const Everything: StoryObj<DataViewMetaProps> = {
   },
 };
 
-export const ExpandableRowsAndCards: StoryObj<DataViewMetaProps> = {
+export const ExpandableRowsAndCards: Story = {
   render: function Base(args) {
     const [data, setData] = useState<Person[]>(personData);
     const { getData, onReorderRows, onChangeRowSelection } = useDataCallbacks(
@@ -550,7 +536,7 @@ export const ExpandableRowsAndCards: StoryObj<DataViewMetaProps> = {
   },
 };
 
-export const Truncation: StoryObj<DataViewMetaProps> = {
+export const Truncation: Story = {
   render: function C() {
     const columns = useMemo(
       () => [
@@ -569,14 +555,16 @@ export const Truncation: StoryObj<DataViewMetaProps> = {
 
     const getData = useCallback(() => {
       const data: Array<{ truncated: string; wrapped: string }> = [];
-      [...Array(10)].forEach(() => {
-        data.push({
-          truncated:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla a quam et vulputate. Phasellus elementum turpis a lacus feugiat bibendum.",
-          wrapped:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla a quam et vulputate. Phasellus elementum turpis a lacus feugiat bibendum.",
-        });
-      }); // Corrected the missing parenthesis here
+      Array(10)
+        .fill(null)
+        .forEach(() => {
+          data.push({
+            truncated:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla a quam et vulputate. Phasellus elementum turpis a lacus feugiat bibendum.",
+            wrapped:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla a quam et vulputate. Phasellus elementum turpis a lacus feugiat bibendum.",
+          });
+        }); // Corrected the missing parenthesis here
       return data;
     }, []);
 
@@ -592,7 +580,7 @@ export const Truncation: StoryObj<DataViewMetaProps> = {
   },
 };
 
-export const Empty: StoryObj<DataViewMetaProps> = {
+export const Empty: Story = {
   args: {
     hasChangeableDensity: true,
     hasColumnResizing: true,
@@ -652,7 +640,7 @@ export const Empty: StoryObj<DataViewMetaProps> = {
   },
 };
 
-export const CustomFilters: StoryObj<DataViewMetaProps> = {
+export const CustomFilters: Story = {
   args: {
     hasChangeableDensity: true,
     hasColumnResizing: true,
@@ -765,7 +753,7 @@ export const CustomFilters: StoryObj<DataViewMetaProps> = {
   },
 };
 
-export const FilterWithCustomRender: StoryObj<DataViewMetaProps> = {
+export const FilterWithCustomRender: Story = {
   args: {
     hasChangeableDensity: true,
     hasColumnResizing: true,
@@ -849,7 +837,7 @@ export const FilterWithCustomRender: StoryObj<DataViewMetaProps> = {
   },
 };
 
-export const CustomFilterWithDefaultVariant: StoryObj<DataViewMetaProps> = {
+export const CustomFilterWithDefaultVariant: Story = {
   args: {
     hasChangeableDensity: true,
     hasColumnResizing: true,
@@ -909,7 +897,7 @@ export const CustomFilterWithDefaultVariant: StoryObj<DataViewMetaProps> = {
   },
 };
 
-export const AdditionalActions: StoryObj<DataViewMetaProps> = {
+export const AdditionalActions: Story = {
   ...BaseStory,
   args: {
     hasAdditionalActionButton: true,
@@ -917,10 +905,16 @@ export const AdditionalActions: StoryObj<DataViewMetaProps> = {
   },
 };
 
-export const ColumnGrowDemo: StoryObj<DataViewMetaProps> = {
+type Privilege = {
+  name: string;
+  apps: number;
+  users: number;
+};
+
+export const ColumnGrowDemo: Story = {
   render: function C() {
-    const columns = useMemo(
-      (): DataColumns<DataRow> => [
+    const columns = useMemo<DataColumns<Privilege>>(
+      () => [
         {
           accessorKey: "name",
           header: "Name",
@@ -938,7 +932,7 @@ export const ColumnGrowDemo: StoryObj<DataViewMetaProps> = {
       [],
     );
 
-    const getData = useCallback(
+    const getData = useCallback<() => Privilege[]>(
       () => [
         {
           name: "Core engineering access",
@@ -959,7 +953,9 @@ export const ColumnGrowDemo: StoryObj<DataViewMetaProps> = {
       [],
     );
 
-    const actionMenuItems = (selectedRows: DataTableRowSelectionState) => (
+    const actionMenuItems: TableLayoutProps<Privilege>["rowActionMenuItems"] = (
+      selectedRows,
+    ) => (
       <>
         <MenuItem onClick={() => console.log(selectedRows)}>Action 1</MenuItem>
         <MenuItem onClick={() => console.log(selectedRows)}>Action 2</MenuItem>
@@ -972,7 +968,7 @@ export const ColumnGrowDemo: StoryObj<DataViewMetaProps> = {
         tableLayoutOptions={{
           hasColumnResizing: true,
           hasSorting: true,
-          columns: columns,
+          columns,
           rowActionMenuItems: actionMenuItems,
         }}
         getData={getData}
@@ -981,7 +977,7 @@ export const ColumnGrowDemo: StoryObj<DataViewMetaProps> = {
   },
 };
 
-export const LoadMore: StoryObj<DataViewMetaProps> = {
+export const LoadMore: Story = {
   ...BaseStory,
   args: {
     availableLayouts: ["table"],
@@ -991,7 +987,7 @@ export const LoadMore: StoryObj<DataViewMetaProps> = {
   },
 };
 
-export const PaginationHook: StoryObj<DataViewMetaProps> = {
+export const PaginationHook: Story = {
   render: function C() {
     const [data, setData] = useState<Person[]>(personData);
     const { getData } = useDataCallbacks(data, setData);
@@ -1024,7 +1020,7 @@ const stackItemProps = (row: Person) => ({
   image: <img src="https://placehold.co/400" alt="Logo" />,
 });
 
-export const StackCards: StoryObj<DataViewMetaProps> = {
+export const StackCards: Story = {
   render: function C() {
     const [data, setData] = useState<Person[]>(personData);
     const { getData } = useDataCallbacks(data, setData);
@@ -1049,7 +1045,7 @@ const compactItemProps = (row: Person) => ({
   image: <img src="https://placehold.co/400" alt="Logo" />,
 });
 
-export const CompactCards: StoryObj<DataViewMetaProps> = {
+export const CompactCards: Story = {
   render: function C() {
     const [data, setData] = useState<Person[]>(personData);
     const { getData } = useDataCallbacks(data, setData);
@@ -1069,7 +1065,7 @@ export const CompactCards: StoryObj<DataViewMetaProps> = {
   },
 };
 
-export const GrowColumnWithoutActions: StoryObj<DataViewMetaProps> = {
+export const GrowColumnWithoutActions: Story = {
   render: function C() {
     const [data, setData] = useState<Person[]>(personData);
     const { getData } = useDataCallbacks(data, setData);
@@ -1104,7 +1100,7 @@ export const GrowColumnWithoutActions: StoryObj<DataViewMetaProps> = {
   },
 };
 
-export const GrowColumnWithActions: StoryObj<DataViewMetaProps> = {
+export const GrowColumnWithActions: Story = {
   render: function C() {
     const [data, setData] = useState<Person[]>(personData);
     const { getData } = useDataCallbacks(data, setData);

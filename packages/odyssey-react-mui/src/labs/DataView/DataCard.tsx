@@ -171,9 +171,10 @@ const CardChildrenContainer = styled("div", {
   },
 }));
 
-const AccessoryPlaceholder = styled(MuiIconButton)(() => ({
+const AccessoryPlaceholder = styled(MuiIconButton)({
   visibility: "hidden",
-}));
+});
+
 const buttonProviderValue = { isFullWidth: true };
 
 const DataCard: DataCardComponent = <TData extends MRT_RowData>({

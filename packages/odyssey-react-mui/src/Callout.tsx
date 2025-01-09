@@ -112,7 +112,7 @@ export type CalloutProps = {
 
 const ContentContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   "& > * + *": {
     marginBlockStart: odysseyDesignTokens.Spacing4,
   },

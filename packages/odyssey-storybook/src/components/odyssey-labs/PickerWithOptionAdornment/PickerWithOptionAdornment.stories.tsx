@@ -118,7 +118,7 @@ const storybookMeta: Meta<PickerWithOptionAdornmentType> = {
   title: "Labs Components/Odyssey Pickers/PickerWithOptionAdornment",
   component: PickerWithOptionAdornment,
   argTypes: {
-    ...pickerComponentPropsMetadata,
+    ...(pickerComponentPropsMetadata as Partial<PickerWithOptionAdornmentType>),
     adornmentSize: {
       control: "radio",
       options: adornmentSizeValues,

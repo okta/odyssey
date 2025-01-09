@@ -84,7 +84,7 @@ const storybookMeta: Meta<UserProfileMenuButtonProps> = {
       },
     },
     popoverContent: {
-      control: "obj",
+      control: "object",
       description: "The content to appear in the popover",
       table: {
         type: {

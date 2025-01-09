@@ -10,20 +10,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { SelectChangeEvent } from "@mui/material";
 import { Meta, StoryObj } from "@storybook/react";
-import { NativeSelect, Link } from "@okta/odyssey-react-mui";
+import { NativeSelect, Link, NativeSelectProps } from "@okta/odyssey-react-mui";
+import { useCallback, useState } from "react";
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { useCallback, useState } from "react";
-import { SelectChangeEvent } from "@mui/material";
 
 const storybookMeta: Meta<typeof NativeSelect> = {
   title: "MUI Components/Forms/NativeSelect",
   component: NativeSelect,
   argTypes: {
     children: {
-      control: null,
       description:
         "The options or optgroup elements within the native select component",
       table: {
@@ -59,7 +58,7 @@ const storybookMeta: Meta<typeof NativeSelect> = {
           summary: "boolean",
         },
         defaultValue: {
-          summary: false,
+          summary: "false",
         },
       },
     },
@@ -78,7 +77,6 @@ const storybookMeta: Meta<typeof NativeSelect> = {
       },
     },
     onBlur: {
-      control: null,
       description:
         "Callback fired when the native select component loses focus",
       table: {
@@ -88,7 +86,6 @@ const storybookMeta: Meta<typeof NativeSelect> = {
       },
     },
     onChange: {
-      control: null,
       description:
         "Callback fired when the value of the native select component changes",
       table: {
@@ -98,7 +95,6 @@ const storybookMeta: Meta<typeof NativeSelect> = {
       },
     },
     onFocus: {
-      control: null,
       description:
         "Callback fired when the native select component gains focus",
       table: {
@@ -302,47 +298,46 @@ export const ControlledMultiselect: StoryObj<typeof NativeSelect> = {
   },
   render: function C(args) {
     const [localValue, setLocalValue] = useState([""]);
-    const onChange = useCallback(
-      (event: SelectChangeEvent<string | string[]>) => {
-        // We need to fix the typing issue here to get the options from the event target
-        const options = (
-          event as unknown as React.ChangeEvent<HTMLSelectElement>
-        ).target.options;
-        const selectedOptions: string[] = [...options]
-          .filter((option) => option.selected)
-          .map((selectedOption) => selectedOption.value);
-        setLocalValue(selectedOptions);
-      },
-      [],
-    );
+
+    const onChange = useCallback<
+      Required<NativeSelectProps<typeof localValue, true>>["onChange"]
+    >((event) => {
+      const selectedOptions = [event.target]
+        .filter((option) => option instanceof HTMLOptionElement)
+        .filter((option) => option.selected)
+        .map((selectedOption) => selectedOption.value);
+
+      setLocalValue(selectedOptions);
+    }, []);
+
     return (
       <NativeSelect
         {...args}
         defaultValue={undefined}
         hasMultipleChoices={true}
-        value={localValue}
+        // @ts-expect-error This is going to break because generics aren't passed through.
         onChange={onChange}
-        children={
-          <>
-            <optgroup label="Sol System">
-              <option value="earth">Earth</option>
-              <option value="mars">Mars</option>
-              <option value="ceres">Ceres</option>
-              <option value="eros">Eros</option>
-              <option value="tycho-station">Tycho Station</option>
-              <option value="phoebe">Phoebe</option>
-              <option value="ganymede">Ganymede</option>
-            </optgroup>
-            <optgroup label="Extrasolar">
-              <option value="auberon">Auberon</option>
-              <option value="al-halub">Al-Halub</option>
-              <option value="freehold">Freehold</option>
-              <option value="laconia">Laconia</option>
-              <option value="new-terra">New Terra</option>
-            </optgroup>
-          </>
-        }
-      />
+        value={localValue}
+      >
+        <>
+          <optgroup label="Sol System">
+            <option value="earth">Earth</option>
+            <option value="mars">Mars</option>
+            <option value="ceres">Ceres</option>
+            <option value="eros">Eros</option>
+            <option value="tycho-station">Tycho Station</option>
+            <option value="phoebe">Phoebe</option>
+            <option value="ganymede">Ganymede</option>
+          </optgroup>
+          <optgroup label="Extrasolar">
+            <option value="auberon">Auberon</option>
+            <option value="al-halub">Al-Halub</option>
+            <option value="freehold">Freehold</option>
+            <option value="laconia">Laconia</option>
+            <option value="new-terra">New Terra</option>
+          </optgroup>
+        </>
+      </NativeSelect>
     );
   },
 };
@@ -405,47 +400,46 @@ export const ControlledPreselectedMultiselect: StoryObj<typeof NativeSelect> = {
   },
   render: function C(args) {
     const [localValue, setLocalValue] = useState(["laconia", "new-terra"]);
-    const onChange = useCallback(
-      (event: SelectChangeEvent<string | string[]>) => {
-        // We need to fix the typing issue here to get the options from the event target
-        const options = (
-          event as unknown as React.ChangeEvent<HTMLSelectElement>
-        ).target;
-        const selectedOptions: string[] = [...options]
-          .filter((option) => option.selected)
-          .map((selectedOption) => selectedOption.value);
-        setLocalValue(selectedOptions);
-      },
-      [],
-    );
+
+    const onChange = useCallback<
+      Required<NativeSelectProps<typeof localValue, true>>["onChange"]
+    >((event) => {
+      const selectedOptions = [event.target]
+        .filter((option) => option instanceof HTMLOptionElement)
+        .filter((option) => option.selected)
+        .map((selectedOption) => selectedOption.value);
+
+      setLocalValue(selectedOptions);
+    }, []);
+
     return (
       <NativeSelect
         {...args}
         defaultValue={undefined}
-        hasMultipleChoices={true}
-        value={localValue}
+        hasMultipleChoices
+        // @ts-expect-error This is going to break because generics aren't passed through.
         onChange={onChange}
-        children={
-          <>
-            <optgroup label="Sol System">
-              <option value="earth">Earth</option>
-              <option value="mars">Mars</option>
-              <option value="ceres">Ceres</option>
-              <option value="eros">Eros</option>
-              <option value="tycho-station">Tycho Station</option>
-              <option value="phoebe">Phoebe</option>
-              <option value="ganymede">Ganymede</option>
-            </optgroup>
-            <optgroup label="Extrasolar">
-              <option value="auberon">Auberon</option>
-              <option value="al-halub">Al-Halub</option>
-              <option value="freehold">Freehold</option>
-              <option value="laconia">Laconia</option>
-              <option value="new-terra">New Terra</option>
-            </optgroup>
-          </>
-        }
-      />
+        value={localValue}
+      >
+        <>
+          <optgroup label="Sol System">
+            <option value="earth">Earth</option>
+            <option value="mars">Mars</option>
+            <option value="ceres">Ceres</option>
+            <option value="eros">Eros</option>
+            <option value="tycho-station">Tycho Station</option>
+            <option value="phoebe">Phoebe</option>
+            <option value="ganymede">Ganymede</option>
+          </optgroup>
+          <optgroup label="Extrasolar">
+            <option value="auberon">Auberon</option>
+            <option value="al-halub">Al-Halub</option>
+            <option value="freehold">Freehold</option>
+            <option value="laconia">Laconia</option>
+            <option value="new-terra">New Terra</option>
+          </optgroup>
+        </>
+      </NativeSelect>
     );
   },
 };

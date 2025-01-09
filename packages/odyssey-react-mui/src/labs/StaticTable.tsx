@@ -41,9 +41,7 @@ export type StaticTableProps<TData extends DefaultMaterialReactTableData> = {
   initialState?: MaterialReactTableProps<TData>["initialState"];
   onGlobalFilterChange?: MaterialReactTableProps<TData>["onGlobalFilterChange"];
   state?: MaterialReactTableProps<TData>["state"];
-  ToolbarButtons?: FunctionComponent<
-    { table: MRT_TableInstance<TData> } & unknown
-  >;
+  ToolbarButtons?: FunctionComponent<{ table: MRT_TableInstance<TData> }>;
 };
 
 const StaticTable = <TData extends DefaultMaterialReactTableData>({

@@ -21,7 +21,7 @@ const storybookMeta: Meta<TopNavProps> = {
   component: TopNav,
   argTypes: {
     leftSideComponent: {
-      control: "ReactElement",
+      control: undefined,
       description: "Display global search field",
       table: {
         type: {

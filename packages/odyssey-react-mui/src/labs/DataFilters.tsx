@@ -56,7 +56,7 @@ import { Subordinate } from "../Typography";
 
 const AutocompleteOuterContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   display: "flex",
   alignItems: "flex-end",
   gap: odysseyDesignTokens.Spacing2,

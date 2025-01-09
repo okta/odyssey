@@ -23,7 +23,7 @@ import { Subordinate } from "../../Typography";
 
 const UserProfileContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   display: "flex",
   alignItems: "center",
   paddingInlineEnd: odysseyDesignTokens.Spacing4,
@@ -31,16 +31,16 @@ const UserProfileContainer = styled("div", {
 
 const UserProfileIconContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   display: "flex",
   paddingInlineEnd: odysseyDesignTokens.Spacing2,
 }));
 
-const UserProfileInfoContainer = styled("div")(() => ({
+const UserProfileInfoContainer = styled("div")({
   display: "flex",
   flexDirection: "column",
   textAlign: "left",
-}));
+});
 
 export type UserProfileProps = {
   /**

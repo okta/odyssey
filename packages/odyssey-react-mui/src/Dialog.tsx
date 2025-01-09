@@ -11,8 +11,8 @@
  */
 
 import { useTranslation } from "react-i18next";
-import { Dialog as MuiDialog } from "@mui/material";
 import {
+  Dialog as MuiDialog,
   DialogTitle,
   DialogContent,
   DialogContentText,
