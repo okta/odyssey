@@ -492,26 +492,32 @@ const StepperNavigation = ({
     [previousButtonLabel, nextButtonLabel, t],
   );
 
-  const dots = Array.from({ length: totalSteps }, (_, i) => {
-    let status: "previous" | "current" | "next" = "next";
-    if (i === currentStep) status = "current";
-    else if (i < currentStep) status = "previous";
+  const dots = useMemo(() => {
+    return Array.from({ length: totalSteps }, (_, i) => {
+      const status: "previous" | "current" | "next" =
+        i === currentStep ? "current" : i < currentStep ? "previous" : "next";
+      const isClickable = isStepClickable(i);
 
-    const isClickable = isStepClickable(i);
-
-    return (
-      <StyledStepperDot
-        key={i}
-        status={status}
-        odysseyDesignTokens={odysseyDesignTokens}
-        isClickable={isClickable}
-        onClick={() => isClickable && onStepClick(i)}
-        role="button"
-        tabIndex={isClickable ? 0 : -1}
-        aria-label={`Go to step ${i + 1}`}
-      />
-    );
-  });
+      return (
+        <StyledStepperDot
+          key={i}
+          status={status}
+          odysseyDesignTokens={odysseyDesignTokens}
+          isClickable={isClickable}
+          onClick={() => isClickable && onStepClick(i)}
+          role="button"
+          tabIndex={isClickable ? 0 : -1}
+          aria-label={`Go to step ${i + 1}`}
+        />
+      );
+    });
+  }, [
+    totalSteps,
+    currentStep,
+    isStepClickable,
+    onStepClick,
+    odysseyDesignTokens,
+  ]);
 
   return (
     <StepperNavigationContainer odysseyDesignTokens={odysseyDesignTokens}>
@@ -599,6 +605,68 @@ const Stepper = ({
     [activeStep, allowBackStep, nonLinear, onChange],
   );
 
+  // Memoize steps mapping to prevent unnecessary recalculations
+  const renderedSteps = useMemo(() => {
+    return steps.map((step, index) => {
+      const completed = index < activeStep;
+      const active = index === activeStep;
+
+      return (
+        <StyledStep
+          key={index}
+          completed={completed}
+          onClick={() => handleStepClick(index)}
+          odysseyDesignTokens={odysseyDesignTokens}
+          orientation={orientation}
+          isClickable={
+            nonLinear ? (completed && allowBackStep) || !completed : false
+          }
+        >
+          <StepLabel
+            odysseyDesignTokens={odysseyDesignTokens}
+            completed={completed}
+            active={active}
+            allowBackStep={allowBackStep}
+            nonLinear={nonLinear}
+            orientation={orientation}
+            variant={variant}
+            StepIconComponent={(props) => (
+              <StepIcon
+                {...props}
+                completed={completed}
+                active={active}
+                stepNumber={index}
+                variant={variant}
+                odysseyDesignTokens={odysseyDesignTokens}
+              />
+            )}
+          >
+            {step.label}
+            {step.description && (
+              <StyledStepDescription
+                odysseyDesignTokens={odysseyDesignTokens}
+                completed={completed}
+                active={active}
+                orientation={orientation}
+              >
+                {step.description}
+              </StyledStepDescription>
+            )}
+          </StepLabel>
+        </StyledStep>
+      );
+    });
+  }, [
+    steps,
+    activeStep,
+    allowBackStep,
+    nonLinear,
+    handleStepClick,
+    odysseyDesignTokens,
+    orientation,
+    variant,
+  ]);
+
   return (
     <StepperContainer
       activeStep={activeStep}
@@ -609,60 +677,21 @@ const Stepper = ({
       nonLinear={nonLinear}
       stepVariant={variant}
     >
-      {steps.map((step, index) => {
-        const completed = index < activeStep;
-        const active = index === activeStep;
-
-        return (
-          <StyledStep
-            key={index}
-            completed={completed}
-            onClick={() => handleStepClick(index)}
-            odysseyDesignTokens={odysseyDesignTokens}
-            orientation={orientation}
-            isClickable={
-              nonLinear ? (completed && allowBackStep) || !completed : false
-            }
-          >
-            <StepLabel
-              odysseyDesignTokens={odysseyDesignTokens}
-              completed={completed}
-              active={active}
-              allowBackStep={allowBackStep}
-              nonLinear={nonLinear}
-              orientation={orientation}
-              variant={variant}
-              StepIconComponent={(props) => (
-                <StepIcon
-                  {...props}
-                  completed={completed}
-                  active={active}
-                  stepNumber={index}
-                  variant={variant}
-                  odysseyDesignTokens={odysseyDesignTokens}
-                />
-              )}
-            >
-              {step.label}
-              {step.description && (
-                <StyledStepDescription
-                  odysseyDesignTokens={odysseyDesignTokens}
-                  completed={completed}
-                  active={active}
-                  orientation={orientation}
-                >
-                  {step.description}
-                </StyledStepDescription>
-              )}
-            </StepLabel>
-          </StyledStep>
-        );
-      })}
+      {renderedSteps}
     </StepperContainer>
   );
 };
 
+const MemoizedStepperNavigation = memo(StepperNavigation);
+MemoizedStepperNavigation.displayName = "StepperNavigation";
+
+const MemoizedStepIcon = memo(StepIcon);
+MemoizedStepIcon.displayName = "StepIcon";
+
 const MemoizedStepper = memo(Stepper);
 MemoizedStepper.displayName = "Stepper";
 
-export { MemoizedStepper as Stepper, StepperNavigation };
+export {
+  MemoizedStepper as Stepper,
+  MemoizedStepperNavigation as StepperNavigation,
+};
