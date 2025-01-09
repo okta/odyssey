@@ -498,6 +498,23 @@ export const CustomLogoImage: StoryObj<typeof SideNav> = {
   },
 };
 
+export const LogoWithLink: StoryObj<typeof SideNav> = {
+  args: {
+    logoProps: {
+      href: "/",
+      logoComponent: <PlaceholderLogo.One />,
+      ariaLabel: "My custom image logo",
+    },
+  },
+  render: (props) => {
+    return (
+      <div style={{ height: "100vh" }}>
+        <SideNav {...props} />
+      </div>
+    );
+  },
+};
+
 export const CustomFooterContent: StoryObj<typeof SideNav> = {
   args: {
     footerItems: undefined,

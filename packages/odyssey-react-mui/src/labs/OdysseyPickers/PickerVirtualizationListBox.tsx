@@ -122,7 +122,7 @@ const PickerVirtualizationListBox = forwardRef<
       return 9999;
     } else {
       const itemsHeightCalculated = sizeMapRef.current
-        .slice(0, itemData.length - 1)
+        .slice(0, itemData.length)
         .map((_, index) => sizeMapRef.current[index] || 0)
         .reduce(
           (prevItemHeight, nextItemHeight) => prevItemHeight + nextItemHeight,

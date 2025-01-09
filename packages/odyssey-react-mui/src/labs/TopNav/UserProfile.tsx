@@ -13,12 +13,13 @@
 import styled from "@emotion/styled";
 import { memo, type ReactElement } from "react";
 
+import { Box } from "../../Box";
+import { HtmlProps } from "../../HtmlProps";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
 import { Subordinate } from "../../Typography";
-import { Box } from "../../Box";
 
 const UserProfileContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
@@ -58,12 +59,13 @@ export type UserProfileProps = {
    * The icon element to display after the username
    */
   userNameEndIcon?: ReactElement;
-};
+} & Pick<HtmlProps, "translate">;
 
 const UserProfile = ({
   profileIcon,
   userName,
   orgName,
+  translate,
   userNameEndIcon,
 }: UserProfileProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
@@ -76,7 +78,7 @@ const UserProfile = ({
         </UserProfileIconContainer>
       )}
 
-      <UserProfileInfoContainer>
+      <UserProfileInfoContainer translate={translate}>
         {userNameEndIcon ? (
           <Box
             sx={{

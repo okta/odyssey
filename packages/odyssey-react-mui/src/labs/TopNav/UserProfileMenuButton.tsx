@@ -24,16 +24,22 @@ export type UserProfileMenuButtonProps = Omit<
   "endIcon" | "variant"
 > &
   AdditionalBaseMenuButtonProps &
-  UserProfileProps;
+  UserProfileProps & {
+    /**
+     *
+     * NOTE: In this case, attribute only applies to user name and org name
+     */
+    translate?: string;
+  };
 
-const UserProfileMenuButton = (props: UserProfileMenuButtonProps) => {
-  const {
-    profileIcon,
-    userName,
-    orgName,
-    userNameEndIcon,
-    ...menuButtonProps
-  } = props;
+const UserProfileMenuButton = ({
+  profileIcon,
+  userName,
+  orgName,
+  translate,
+  userNameEndIcon,
+  ...menuButtonProps
+}: UserProfileMenuButtonProps) => {
   return (
     <BaseMenuButton
       {...menuButtonProps}
@@ -44,6 +50,7 @@ const UserProfileMenuButton = (props: UserProfileMenuButtonProps) => {
           profileIcon={profileIcon}
           userName={userName}
           orgName={orgName}
+          translate={translate}
           userNameEndIcon={userNameEndIcon ?? <ChevronDownIcon />}
         />
       }

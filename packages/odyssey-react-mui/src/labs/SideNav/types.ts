@@ -14,40 +14,48 @@ import type { ReactElement, SyntheticEvent } from "react";
 import type { HtmlProps } from "../../HtmlProps";
 import type { statusSeverityValues } from "../../Status";
 
-export type SideNavLogoProps = {
-  href?: string;
-} & (
-  | {
-      /**
-       * a component to render as the logo
-       */
-      logoComponent: ReactElement;
-      imageAltText?: never;
-      imageUrl?: never;
-    }
-  | {
-      /**
-       * The src url to render in an `img` tag
-       */
-      imageUrl: string;
-      /**
-       * alt text for the img logo
-       */
-      imageAltText: string;
-      logoComponent?: never;
-    }
-  | {
-      /**
-       * The src url to render in an `img` tag
-       */
-      imageUrl?: never;
-      /**
-       * alt text for the img logo
-       */
-      imageAltText?: never;
-      logoComponent?: never;
-    }
-);
+type LogoWithLink = {
+  href: string;
+  ariaLabel: string;
+};
+type LogoWithNoLink = {
+  href?: never;
+  ariaLabel?: never;
+};
+
+export type SideNavLogoProps = (LogoWithLink | LogoWithNoLink) &
+  (
+    | {
+        /**
+         * a component to render as the logo
+         */
+        logoComponent: ReactElement;
+        imageAltText?: never;
+        imageUrl?: never;
+      }
+    | {
+        /**
+         * The src url to render in an `img` tag
+         */
+        imageUrl: string;
+        /**
+         * alt text for the img logo
+         */
+        imageAltText: string;
+        logoComponent?: never;
+      }
+    | {
+        /**
+         * The src url to render in an `img` tag
+         */
+        imageUrl?: never;
+        /**
+         * alt text for the img logo
+         */
+        imageAltText?: never;
+        logoComponent?: never;
+      }
+  );
 
 export type SideNavProps = {
   /**

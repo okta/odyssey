@@ -246,10 +246,8 @@ const SideNavItemContent = ({
     MouseEventHandler<HTMLDivElement | HTMLAnchorElement>
   >(
     (event) => {
-      return () => {
-        onItemSelected?.(id);
-        onClick?.(event);
-      };
+      onItemSelected?.(id);
+      onClick?.(event);
     },
     [id, onClick, onItemSelected],
   );
