@@ -513,7 +513,6 @@ const Select = <
             sx: {
               ".MuiPaper-root": {
                 maxHeight: "50vh",
-                minHeight: "200px",
               },
             },
           }}

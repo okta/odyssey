@@ -199,6 +199,7 @@ const SideNavToggleButton = ({
           aria-controls={ariaControls}
           aria-expanded={!isSideNavCollapsed}
           aria-label={toggleLabel}
+          data-se="sidenav-toggle-button"
           data-sidenav-toggle={true}
           id={id}
           isSideNavCollapsed={isSideNavCollapsed}
