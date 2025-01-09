@@ -20,16 +20,15 @@ import {
 } from "@okta/odyssey-react-mui";
 import { DownloadIcon } from "@okta/odyssey-react-mui/icons";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { userEvent, within } from "@storybook/testing-library";
+import { userEvent, within } from "@storybook/test";
 import { axeRun } from "../../../axe-util";
-import type { PlaywrightProps } from "../storybookTypes";
 
-const storybookMeta: Meta<TooltipProps> = {
+const meta = {
   title: "MUI Components/Tooltip",
   component: Tooltip,
   argTypes: {
     children: {
-      control: "obj",
+      control: "object",
       description: "The content that will trigger the tooltip",
       table: {
         type: {
@@ -89,11 +88,14 @@ const storybookMeta: Meta<TooltipProps> = {
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
-};
+} satisfies Meta<typeof Tooltip>;
 
-export default storybookMeta;
+export default meta;
 
-const Template: StoryObj<TooltipProps> = {
+type Story = StoryObj<typeof meta>;
+
+const Template: Story = {
+  args: {} as TooltipProps, // This is a hack.
   render: function C(args) {
     return (
       <Tooltip
@@ -108,17 +110,16 @@ const Template: StoryObj<TooltipProps> = {
 };
 
 const showTooltip =
-  ({ canvasElement, step }: PlaywrightProps<TooltipProps>) =>
-  async (actionName: string) => {
-    await step("show the tooltip on hover", async () => {
+  (actionName: string): Story["play"] =>
+  ({ canvasElement, step }) =>
+    step("show the tooltip on hover", async () => {
       const canvas = within(canvasElement);
       const button = canvas.getByText("Launch");
-      userEvent.hover(button);
+      await userEvent.hover(button);
       await axeRun(actionName);
     });
-  };
 
-export const Default: StoryObj<TooltipProps> = {
+export const Default: Story = {
   ...Template,
   args: {
     children: <Button label="Launch" variant="primary" />,
@@ -126,12 +127,10 @@ export const Default: StoryObj<TooltipProps> = {
     placement: "top",
     text: "This will begin a 10-second countdown",
   },
-  play: async ({ canvasElement, step }) => {
-    await showTooltip({ canvasElement, step })("Tooltip Default");
-  },
+  play: showTooltip("Tooltip Default"),
 };
 
-export const IconButton: StoryObj<TooltipProps> = {
+export const IconButton: Story = {
   ...Template,
   args: {
     children: (
@@ -145,17 +144,17 @@ export const IconButton: StoryObj<TooltipProps> = {
     placement: "top",
     text: "Download logs",
   },
-  play: async ({ canvasElement, step }: PlaywrightProps<TooltipProps>) => {
+  play: async ({ canvasElement, step }) => {
     await step("tooltip text", async () => {
       const canvas = within(canvasElement);
       const button = canvas.getByRole("button");
-      userEvent.hover(button);
+      await userEvent.hover(button);
       await axeRun("Tooltip Icon Button");
     });
   },
 };
 
-export const StatusWrapper: StoryObj<TooltipProps> = {
+export const StatusWrapper: Story = {
   ...Template,
   args: {
     children: <Status label="Warp drive online" severity="success" />,
@@ -163,50 +162,38 @@ export const StatusWrapper: StoryObj<TooltipProps> = {
     placement: "top",
     text: "The warp drive is currently online.",
   },
-  play: async ({ canvasElement, step }: PlaywrightProps<TooltipProps>) => {
+  play: async ({ canvasElement, step }) => {
     await step("tooltip text", async () => {
       const canvas = within(canvasElement);
       const button = canvas.getByLabelText(
         "The warp drive is currently online.",
       );
-      userEvent.hover(button);
+      await userEvent.hover(button);
+
       await axeRun("Tooltip Icon Button");
     });
   },
 };
 
-export const Disabled: StoryObj<TooltipProps> = {
-  ...Template,
-  args: {
-    children: (
-      <Button variant="secondary" isDisabled startIcon={<DownloadIcon />} />
-    ),
-    ariaType: "description",
-    placement: "top",
-    text: "You don't have access to these logs",
-  },
-};
+export const Placement: Story = {
+  args: {} as TooltipProps, // This is a hack.
+  render: () => (
+    <>
+      <Tooltip text="Top" placement="top" ariaType="label">
+        <Tag label="Bow" />
+      </Tooltip>
 
-export const Placement: StoryObj<TooltipProps> = {
-  render: function C({}) {
-    return (
-      <>
-        <Tooltip text="Top" placement="top" ariaType="label">
-          <Tag label="Bow" />
-        </Tooltip>
+      <Tooltip text="Left" placement="left" ariaType="label">
+        <Tag label="Stern" />
+      </Tooltip>
 
-        <Tooltip text="Left" placement="left" ariaType="label">
-          <Tag label="Stern" />
-        </Tooltip>
+      <Tooltip text="Bottom" placement="bottom" ariaType="label">
+        <Tag label="Port" />
+      </Tooltip>
 
-        <Tooltip text="Bottom" placement="bottom" ariaType="label">
-          <Tag label="Port" />
-        </Tooltip>
-
-        <Tooltip text="Right" placement="right" ariaType="label">
-          <Tag label="Starboard" />
-        </Tooltip>
-      </>
-    );
-  },
+      <Tooltip text="Right" placement="right" ariaType="label">
+        <Tag label="Starboard" />
+      </Tooltip>
+    </>
+  ),
 };

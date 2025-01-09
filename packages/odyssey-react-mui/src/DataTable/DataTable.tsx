@@ -34,6 +34,7 @@ import {
   MRT_ColumnDef,
   MRT_TableInstance,
 } from "material-react-table";
+import { useTranslation } from "react-i18next";
 import {
   ArrowDownIcon,
   ArrowUnsortedIcon,
@@ -50,7 +51,6 @@ import {
 } from "./DataTableRowActions";
 import { useRowReordering } from "./useRowReordering";
 import { DataTableSettings } from "./DataTableSettings";
-import { MenuButton, MenuButtonProps } from "../MenuButton";
 import { Box } from "../Box";
 import { DataTableRowSelectionState, DataTableRowData } from ".";
 import {
@@ -60,10 +60,14 @@ import {
 import { useScrollIndication } from "./useScrollIndication";
 import styled from "@emotion/styled";
 import { EmptyState } from "../EmptyState";
+import { Button, MenuButton, MenuButtonProps } from "../Buttons";
 import { Callout } from "../Callout";
-import { t } from "i18next";
 
 export type DataTableColumn<T extends DataTableRowData> = MRT_ColumnDef<T> & {
+  /**
+   * @deprecated use hasTextWrapping instead of enableWrapping
+   */
+  enableWrapping?: boolean;
   hasTextWrapping?: boolean;
 };
 
@@ -98,27 +102,56 @@ export type DataTableRenderDetailPanelType = {
 
 export type DataTableProps = {
   /**
+   * An optional action button above the table.
+   */
+  additionalActionButton?: ReactNode;
+  /**
+   * MenuItems that go in an optional action menu above the table.
+   */
+  additionalActionMenuItems?: ReactNode;
+  /**
+   * Menu items to include in the bulk actions menu, which appears above the table if a row or rows are selected
+   */
+  bulkActionMenuItems?: (
+    selectedRows: MRT_RowSelectionState,
+  ) => MenuButtonProps["children"];
+  /**
    * The columns that make up the table
    */
   columns: DataTableColumn<DataTableRowData>[];
   /**
-   * The total number of rows in the table. Optional, because it's sometimes impossible
-   * to calculate. Used in table pagination to know when to disable the "next"/"more" button.
+   * The current page number.
    */
-  totalRows?: number;
+  currentPage?: number;
+  /**
+   * If `error` is not undefined, the DataTable will indicate an error.
+   */
+  errorMessage?: string;
+  /**
+   * The component to display when the table is displaying the initial empty state
+   */
+  emptyPlaceholder?: ReactNode;
+  /**
+   * An optional set of filters to render in the filters menu
+   */
+  filters?: Array<DataFilter | DataTableColumn<DataTableRowData> | string>;
   /**
    * The function to get the ID of a row
    */
   getRowId?: MRT_TableOptions<DataTableRowData>["getRowId"];
   /**
-   * The initial density (height & padding) of the table rows. This is available even if the
-   * table density isn't changeable by the end user via hasChangeableDensity.
+   * Callback that fires whenever the table needs to fetch new data, due to changes in
+   * page, results per page, search input, filters, or sorting
    */
-  initialDensity?: (typeof densityValues)[number];
-  /**
-   * If true, the end user will be able to change the table density.
-   */
-  hasChangeableDensity?: boolean;
+  getData: ({
+    page,
+    resultsPerPage,
+    search,
+    filters,
+    sort,
+  }: DataTableGetDataType) =>
+    | MRT_TableOptions<DataTableRowData>["data"]
+    | Promise<MRT_TableOptions<DataTableRowData>["data"]>;
   /**
    * If true, the end user can resize individual columns.
    */
@@ -136,6 +169,10 @@ export type DataTableProps = {
    */
   hasPagination?: boolean;
   /**
+   * If true, the end user can reorder rows via a drag-and-drop interface
+   */
+  hasRowReordering?: boolean;
+  /**
    * If true, the table will include checkboxes on each row, enabling
    * the user to select some or all rows.
    */
@@ -145,18 +182,51 @@ export type DataTableProps = {
    */
   hasSearch?: boolean;
   /**
-   * If true, the end user can sort columns (ascending, descending, or neither)
-   */
-  hasSorting?: boolean;
-  /**
-   * If true, the end user can reorder rows via a drag-and-drop interface
-   */
-  hasRowReordering?: boolean;
-  /**
    * If true, the search field will include a Search button, rather than
    * firing on input change.
    */
   hasSearchSubmitButton?: boolean;
+  /**
+   * If true, the end user can sort columns (ascending, descending, or neither)
+   */
+  hasSorting?: boolean;
+  /**
+   * If true, the end user will be able to change the table density.
+   */
+  hasChangeableDensity?: boolean;
+  /**
+   * The initial density (height & padding) of the table rows. This is available even if the
+   * table density isn't changeable by the end user via hasChangeableDensity.
+   */
+  initialDensity?: (typeof densityValues)[number];
+  /**
+   * The initial search value
+   */
+  initialSearchValue?: string;
+  /**
+   * Is the next or show-more button disabled
+   */
+  isPaginationMoreDisabled?: boolean;
+  /**
+   * The component to display when the query returns no results
+   */
+  noResultsPlaceholder?: ReactNode;
+  /**
+   * The number of results per page.
+   */
+  resultsPerPage?: number;
+  /**
+   * The optional component to display when expanding a row.
+   */
+  renderDetailPanel?: MRT_TableOptions<DataTableRowData>["renderDetailPanel"];
+  /**
+   * Action buttons to display in each row
+   */
+  rowActionButtons?: DataTableRowActionsProps["rowActionButtons"];
+  /**
+   * Menu items to include in the optional actions menu on each row.
+   */
+  rowActionMenuItems?: DataTableRowActionsProps["rowActionMenuItems"];
   /**
    * The debounce time, in milliseconds, for the search input firing
    * `onChangeSearch` when changed. If `hasSearchSubmitButton` is true,
@@ -168,126 +238,29 @@ export type DataTableProps = {
    */
   onChangeRowSelection?: (rowSelection: DataTableRowSelectionState) => void;
   /**
-   * Callback that fires whenever the table needs to fetch new data, due to changes in
-   * page, results per page, search input, filters, or sorting
-   */
-  getData: ({
-    page,
-    resultsPerPage,
-    search,
-    filters,
-    sort,
-  }: DataTableGetDataType) =>
-    | MRT_TableOptions<DataTableRowData>["data"]
-    | Promise<MRT_TableOptions<DataTableRowData>["data"]>;
-  /**
    * Callback that fires when the user reorders rows within the table. Can be used
    * to propogate order change to the backend.
    */
   onReorderRows?: ({ rowId, newRowIndex }: DataTableOnReorderRowsType) => void;
-  /**
-   * The current page number.
-   */
-  currentPage?: number;
-  /**
-   * The number of results per page.
-   */
-  resultsPerPage?: number;
   /**
    * The type of pagination controls shown. Defaults to next/prev buttons, but can be
    * set to a simple "Load more" button by setting to "loadMore".
    */
   paginationType?: (typeof paginationTypeValues)[number];
   /**
-   * Action buttons to display in each row
+   * The total number of rows in the table. Optional, because it's sometimes impossible
+   * to calculate. Used in table pagination to know when to disable the "next"/"more" button.
    */
-  rowActionButtons?: DataTableRowActionsProps["rowActionButtons"];
+  totalRows?: number;
   /**
-   * Menu items to include in the optional actions menu on each row.
+   * The largest number of rows allowed to be shown per page. This only affects the row input
+   * in pagination.
    */
-  rowActionMenuItems?: DataTableRowActionsProps["rowActionMenuItems"];
+  maxResultsPerPage?: number;
   /**
-   * Menu items to include in the bulk actions menu, which appears above the table if a row or rows are selected
+   * The highest page number allowed to be manually input in pagination
    */
-  bulkActionMenuItems?: (
-    selectedRows: MRT_RowSelectionState,
-  ) => MenuButtonProps["children"];
-  /**
-   * If `error` is not undefined, the DataTable will indicate an error.
-   */
-  errorMessage?: string;
-  /**
-   * The component to display when the table is displaying the initial empty state
-   */
-  emptyPlaceholder?: ReactNode;
-  /**
-   * The component to display when the query returns no results
-   */
-  noResultsPlaceholder?: ReactNode;
-  /**
-   * An optional set of filters to render in the filters menu
-   */
-  filters?: Array<DataFilter | DataTableColumn<DataTableRowData> | string>;
-  /**
-   * The optional component to display when expanding a row.
-   */
-  renderDetailPanel?: MRT_TableOptions<DataTableRowData>["renderDetailPanel"];
-};
-
-const displayColumnDefOptions = {
-  "mrt-row-actions": {
-    header: "",
-    grow: true,
-    muiTableBodyCellProps: {
-      align: "right",
-      sx: {
-        overflow: "visible",
-        width: "unset",
-      },
-      className: "ods-actions-cell",
-    },
-    muiTableHeadCellProps: {
-      align: "right",
-      sx: {
-        width: "unset",
-      },
-      className: "ods-actions-cell",
-    },
-  },
-  "mrt-row-drag": {
-    header: "",
-    muiTableBodyCellProps: {
-      sx: {
-        minWidth: 0,
-        width: "auto",
-      },
-      className: "ods-drag-handle",
-    },
-    muiTableHeadCellProps: {
-      sx: {
-        minWidth: 0,
-        width: "auto",
-      },
-      children: (
-        // Add a spacer to simulate the width of the drag handle in the column.
-        // Without this, the head cells are offset from their body cell counterparts
-        <Box sx={{ marginInline: "-0.1rem" }}>
-          <DragIndicatorIcon sx={{ marginInline: 1, opacity: 0 }} />
-        </Box>
-      ),
-    },
-  },
-  "mrt-row-select": {
-    muiTableHeadCellProps: {
-      padding: "checkbox",
-    },
-    muiTableBodyCellProps: {
-      padding: "checkbox",
-    },
-  },
-  "mrt-row-expand": {
-    header: "",
-  },
+  maxPages?: number;
 };
 
 const ScrollableTableContainer = styled("div", {
@@ -295,73 +268,65 @@ const ScrollableTableContainer = styled("div", {
     prop !== "odysseyDesignTokens" &&
     prop !== "isScrollableStart" &&
     prop !== "isScrollableEnd",
-})(
-  ({
-    odysseyDesignTokens,
-    isScrollableStart,
-    isScrollableEnd,
-  }: {
-    odysseyDesignTokens: DesignTokens;
-    isScrollableStart: boolean;
-    isScrollableEnd: boolean;
-  }) => ({
-    marginBlockEnd: odysseyDesignTokens.Spacing4,
-    position: "relative",
-    borderInlineStartColor: isScrollableStart
-      ? odysseyDesignTokens.HueNeutral200
-      : "transparent",
-    borderInlineStartStyle: "solid",
-    borderInlineStartWidth: odysseyDesignTokens.BorderWidthMain,
-    "::before": {
-      background:
-        "linear-gradient(-90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.33) 50%, rgba(0, 0, 0, 1) 100%)",
-      content: '""',
-      opacity: isScrollableStart ? "0.075" : "0",
-      pointerEvents: "none",
-      position: "absolute",
-      top: 0,
-      left: 0,
-      bottom: 0,
-      width: odysseyDesignTokens.Spacing6,
-      zIndex: 100,
-      transition: `opacity ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
-    },
-    borderInlineEndColor: isScrollableEnd
-      ? odysseyDesignTokens.HueNeutral200
-      : "transparent",
-    borderInlineEndStyle: "solid",
-    borderInlineEndWidth: odysseyDesignTokens.BorderWidthMain,
-    "::after": {
-      background:
-        "linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.33) 50%, rgba(0, 0, 0, 1) 100%)",
-      content: '""',
-      opacity: isScrollableEnd ? "0.075" : "0",
-      pointerEvents: "none",
-      position: "absolute",
-      top: 0,
-      right: 0,
-      bottom: 0,
-      width: odysseyDesignTokens.Spacing6,
-      transition: `opacity ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
-    },
-  }),
-);
+})<{
+  odysseyDesignTokens: DesignTokens;
+  isScrollableStart: boolean;
+  isScrollableEnd: boolean;
+}>(({ odysseyDesignTokens, isScrollableStart, isScrollableEnd }) => ({
+  marginBlockEnd: odysseyDesignTokens.Spacing4,
+  position: "relative",
+  borderInlineStartColor: isScrollableStart
+    ? odysseyDesignTokens.HueNeutral200
+    : "transparent",
+  borderInlineStartStyle: "solid",
+  borderInlineStartWidth: odysseyDesignTokens.BorderWidthMain,
+  "::before": {
+    background:
+      "linear-gradient(-90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.33) 50%, rgba(0, 0, 0, 1) 100%)",
+    content: '""',
+    opacity: isScrollableStart ? "0.075" : "0",
+    pointerEvents: "none",
+    position: "absolute",
+    top: 0,
+    left: 0,
+    bottom: 0,
+    width: odysseyDesignTokens.Spacing6,
+    zIndex: 100,
+    transition: `opacity ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
+  },
+  borderInlineEndColor: isScrollableEnd
+    ? odysseyDesignTokens.HueNeutral200
+    : "transparent",
+  borderInlineEndStyle: "solid",
+  borderInlineEndWidth: odysseyDesignTokens.BorderWidthMain,
+  "::after": {
+    background:
+      "linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.33) 50%, rgba(0, 0, 0, 1) 100%)",
+    content: '""',
+    opacity: isScrollableEnd ? "0.075" : "0",
+    pointerEvents: "none",
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    width: odysseyDesignTokens.Spacing6,
+    transition: `opacity ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
+  },
+}));
+
+const defaultGetRowId: DataTableProps["getRowId"] = (row) => row.id as string;
 
 const DataTable = ({
+  additionalActionButton,
+  additionalActionMenuItems,
+  bulkActionMenuItems,
   columns,
-  getRowId: getRowIdProp,
   currentPage = 1,
-  initialDensity = densityValues[0],
-  resultsPerPage = 20,
+  emptyPlaceholder,
+  errorMessage: errorMessageProp,
+  filters: filtersProp,
   getData,
-  onReorderRows,
-  totalRows,
-  hasSearchSubmitButton,
-  searchDelayTime,
-  paginationType = "paged",
-  onChangeRowSelection,
-  rowActionButtons,
-  rowActionMenuItems,
+  getRowId = defaultGetRowId,
   hasChangeableDensity,
   hasColumnResizing,
   hasColumnVisibility,
@@ -370,14 +335,26 @@ const DataTable = ({
   hasRowReordering,
   hasRowSelection,
   hasSearch,
+  hasSearchSubmitButton,
   hasSorting,
-  bulkActionMenuItems,
-  errorMessage: errorMessageProp,
-  emptyPlaceholder,
+  initialDensity = densityValues[0],
+  initialSearchValue = "",
+  isPaginationMoreDisabled,
   noResultsPlaceholder,
-  filters: filtersProp,
+  onChangeRowSelection,
+  onReorderRows,
+  paginationType = "paged",
   renderDetailPanel,
+  resultsPerPage = 20,
+  maxResultsPerPage,
+  maxPages,
+  rowActionButtons,
+  rowActionMenuItems,
+  searchDelayTime,
+  totalRows,
 }: DataTableProps) => {
+  const { t } = useTranslation();
+
   const [data, setData] = useState<DataTableRowData[]>([]);
   const [pagination, setPagination] = useState({
     pageIndex: currentPage,
@@ -402,7 +379,7 @@ const DataTable = ({
   const [rowDensity, setRowDensity] =
     useState<MRT_DensityState>(initialDensity);
   const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
-  const [search, setSearch] = useState<string>("");
+  const [search, setSearch] = useState<string>(initialSearchValue);
   const [filters, setFilters] = useState<DataFilter[]>();
   const [initialFilters, setInitialFilters] = useState<DataFilter[]>();
   const [isLoading, setIsLoading] = useState<boolean | undefined>(true);
@@ -440,10 +417,6 @@ const DataTable = ({
     resultsPerPage: pagination.pageSize,
     page: pagination.pageIndex,
   });
-
-  const getRowId = getRowIdProp
-    ? getRowIdProp
-    : (row: DataTableRowData) => row.id;
 
   const rowDensityClassName = useMemo(() => {
     return rowDensity === "spacious"
@@ -496,8 +469,9 @@ const DataTable = ({
           : {
               // If the option isn't a string, it must have value and/or option defined
               // If either is undefined, use the other
-              label: option.label ?? option.value,
-              value: option.value ?? option.label,
+              // These shouldn't need `as`, but this is a legacy file now. --Kevin Ghadyani
+              label: (option.label ?? option.value) as string,
+              value: (option.value ?? option.label) as string,
             },
       ),
     [],
@@ -552,7 +526,9 @@ const DataTable = ({
   const defaultCell = useCallback(
     ({ cell }: { cell: DataTableCell<DataTableRowData> }) => {
       const value = cell.getValue<string>();
-      const hasTextWrapping = cell.column.columnDef.hasTextWrapping;
+      const hasTextWrapping =
+        cell.column.columnDef.hasTextWrapping ||
+        cell.column.columnDef.enableWrapping;
 
       return hasTextWrapping ? (
         value
@@ -588,10 +564,11 @@ const DataTable = ({
       </Box>
     );
   }, [
-    tableInnerContainerWidth,
     emptyPlaceholder,
-    noResultsPlaceholder,
     isEmpty,
+    noResultsPlaceholder,
+    t,
+    tableInnerContainerWidth,
   ]);
 
   const columnIds = useMemo(() => {
@@ -609,10 +586,20 @@ const DataTable = ({
     [columnIds],
   ) as string[];
 
+  const shouldDisplayRowActions = useMemo(
+    () =>
+      (hasRowReordering === true && onReorderRows) ||
+      rowActionButtons ||
+      rowActionMenuItems
+        ? true
+        : false,
+    [hasRowReordering, onReorderRows, rowActionButtons, rowActionMenuItems],
+  );
+
   const dataTable = useMaterialReactTable({
     columns: columns,
     data: data,
-    getRowId: getRowId,
+    getRowId,
     state: {
       sorting: columnSorting,
       globalFilter: search,
@@ -647,14 +634,86 @@ const DataTable = ({
       },
     },
     selectAllMode: "all",
-    displayColumnDefOptions:
-      displayColumnDefOptions as MRT_TableOptions<DataTableRowData>["displayColumnDefOptions"],
+    displayColumnDefOptions: {
+      "mrt-row-actions": {
+        header: "",
+        grow: true,
+        muiTableBodyCellProps: {
+          align: "right",
+          sx: {
+            overflow: "visible",
+            width: "unset",
+          },
+          className: "ods-actions-cell",
+        },
+        muiTableHeadCellProps: {
+          align: "right",
+          sx: {
+            width: "unset",
+          },
+          className: "ods-actions-cell",
+          children: (
+            <Box sx={{ display: "flex", visibility: "hidden" }}>
+              {rowActionButtons && rowActionButtons({ id: null })}
+              {((hasRowReordering && onReorderRows) || rowActionMenuItems) && (
+                <Box>
+                  <Button
+                    endIcon={<MoreIcon />}
+                    size="small"
+                    variant="floating"
+                    ariaLabel={t("table.moreactions.arialabel")}
+                    isDisabled
+                  />
+                </Box>
+              )}
+            </Box>
+          ),
+        },
+      },
+      "mrt-row-drag": {
+        header: "",
+        muiTableBodyCellProps: {
+          sx: {
+            minWidth: 0,
+            width: "auto",
+          },
+          className: "ods-drag-handle",
+        },
+        muiTableHeadCellProps: {
+          sx: {
+            minWidth: 0,
+            width: "auto",
+          },
+          children: (
+            // Add a spacer to simulate the width of the drag handle in the column.
+            // Without this, the head cells are offset from their body cell counterparts
+            <Box sx={{ marginInline: "-0.1rem" }}>
+              <DragIndicatorIcon sx={{ marginInline: 1, opacity: 0 }} />
+            </Box>
+          ),
+        },
+      },
+      "mrt-row-select": {
+        muiTableHeadCellProps: {
+          padding: "checkbox",
+        },
+        muiTableBodyCellProps: {
+          padding: "checkbox",
+        },
+      },
+      "mrt-row-expand": {
+        header: "",
+      },
+    },
     muiTableBodyProps: () => ({
       className: rowDensityClassName,
     }),
     defaultColumn: {
       Cell: defaultCell,
     },
+    muiTableBodyCellProps: ({ column }) => ({
+      className: column.getIsResizing() ? "isResizing" : "",
+    }),
 
     // Reordering
     enableRowOrdering: hasRowReordering && Boolean(onReorderRows),
@@ -676,12 +735,7 @@ const DataTable = ({
     }),
 
     // Row actions
-    enableRowActions:
-      (hasRowReordering === true && onReorderRows) ||
-      rowActionButtons ||
-      rowActionMenuItems
-        ? true
-        : false,
+    enableRowActions: shouldDisplayRowActions,
     positionActionsColumn:
       "last" as MRT_TableOptions<DataTableRowData>["positionActionsColumn"],
     renderRowActions: ({ row }) => renderRowActions({ row }),
@@ -716,6 +770,10 @@ const DataTable = ({
     // Refs
     muiTableProps: {
       ref: tableContentRef,
+      className:
+        !shouldDisplayRowActions && hasColumnResizing
+          ? "ods-hide-spacer-column"
+          : "",
     },
 
     muiTableContainerProps: {
@@ -763,7 +821,15 @@ const DataTable = ({
         setIsLoading(false);
       }
     })();
-  }, [pagination, columnSorting, search, filters, getData, errorMessageProp]);
+  }, [
+    columnSorting,
+    errorMessageProp,
+    filters,
+    getData,
+    pagination,
+    search,
+    t,
+  ]);
 
   useEffect(() => {
     if (!initialFilters && filters) {
@@ -788,10 +854,18 @@ const DataTable = ({
   ]);
 
   useEffect(() => {
+    setPagination((prev) => ({
+      pageIndex: 1,
+      pageSize: prev.pageSize,
+    }));
+  }, [filters, search]);
+
+  useEffect(() => {
     onChangeRowSelection?.(rowSelection);
   }, [rowSelection, onChangeRowSelection]);
 
   const { lastRow } = usePagination({
+    currentRowsCount: data.length,
     pageIndex: pagination.pageIndex,
     pageSize: pagination.pageSize,
     totalRows,
@@ -804,7 +878,9 @@ const DataTable = ({
         hasFilters ||
         hasChangeableDensity ||
         hasColumnVisibility ||
-        bulkActionMenuItems) && (
+        bulkActionMenuItems ||
+        additionalActionButton ||
+        additionalActionMenuItems) && (
         <Box sx={{ marginBottom: 5 }}>
           <DataFilters
             onChangeSearch={hasSearch ? setSearch : undefined}
@@ -812,6 +888,7 @@ const DataTable = ({
             hasSearchSubmitButton={hasSearchSubmitButton}
             searchDelayTime={searchDelayTime}
             filters={hasFilters ? dataTableFilters : undefined}
+            defaultSearchTerm={initialSearchValue}
             isDisabled={isEmpty}
             additionalActions={
               <>
@@ -825,6 +902,17 @@ const DataTable = ({
                   setColumnVisibility={setColumnVisibility}
                 />
                 {bulkActionMenuItems && bulkActionMenuButton}
+                {additionalActionButton}
+                {additionalActionMenuItems && (
+                  <MenuButton
+                    endIcon={<MoreIcon />}
+                    ariaLabel={t("table.moreactions.arialabel")}
+                    buttonVariant="secondary"
+                    menuAlignment="right"
+                  >
+                    {additionalActionMenuItems}
+                  </MenuButton>
+                )}
               </>
             }
           />
@@ -850,10 +938,14 @@ const DataTable = ({
         <Pagination
           pageIndex={pagination.pageIndex}
           pageSize={pagination.pageSize}
+          maxPageIndex={maxPages}
+          maxPageSize={maxResultsPerPage}
           onPaginationChange={setPagination}
           lastRow={lastRow}
           totalRows={totalRows}
+          currentRowsCount={data.length}
           isDisabled={isEmpty}
+          isMoreDisabled={isPaginationMoreDisabled}
           variant={paginationType}
           rowsPerPageLabel={t("pagination.rowsperpage")}
           currentPageLabel={t("pagination.page")}

@@ -30,56 +30,33 @@ import {
 import { Field } from "./Field";
 import { HtmlProps } from "./HtmlProps";
 import { FocusHandle, useInputValues, getControlState } from "./inputUtils";
-import { type FeatureTestSelector } from "./test-selectors";
+import { type TestSelector } from "./test-selectors";
 
-export const TextFieldTestSelectors = {
-  feature: {
-    description: {
-      selector: {
-        method: "ByText",
-        templateVariableNames: ["hint"],
-        text: "${hint}",
-      },
-    },
-    errorMessage: {
-      selector: {
-        method: "ByText",
-        templateVariableNames: ["errorMessage"],
-        text: "${errorMessage}",
-      },
-    },
-    input: {
-      selector: {
-        method: "ByRole",
-        options: {
-          name: "${label}",
-        },
-        role: "textbox",
-        templateVariableNames: ["label"],
-      },
-    },
-    label: {
-      selector: {
-        method: "ByRole",
-        options: {
-          name: "${label}",
-        },
-        role: "LabelText",
-        templateVariableNames: ["label"],
-      },
-    },
+export const TextFieldTestSelector = {
+  accessibleText: {
+    errorMessage: "errorMessage",
+    hint: "description",
+    label: "label",
+  },
+  children: {
     link: {
-      selector: {
+      elementSelector: {
         method: "ByRole",
         options: {
-          name: "${label}",
+          label: "name",
         },
-        templateVariableNames: ["label"],
         role: "link",
       },
     },
   },
-} as const satisfies FeatureTestSelector;
+  elementSelector: {
+    method: "ByRole",
+    options: {
+      label: "name",
+    },
+    role: "textbox",
+  },
+} as const satisfies TestSelector;
 
 export const textFieldTypeValues = [
   "email",
@@ -208,17 +185,13 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     });
 
     const localInputRef = useRef<HTMLInputElement>(null);
-    useImperativeHandle(
-      inputRef,
-      () => {
-        return {
-          focus: () => {
-            localInputRef.current?.focus();
-          },
-        };
-      },
-      [],
-    );
+    useImperativeHandle(inputRef, () => {
+      return {
+        focus: () => {
+          localInputRef.current?.focus();
+        },
+      };
+    }, []);
 
     const onChange = useCallback<
       NonNullable<ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>>

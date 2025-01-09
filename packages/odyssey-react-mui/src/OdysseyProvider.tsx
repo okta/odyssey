@@ -26,6 +26,9 @@ import {
   OdysseyTranslationProviderProps,
 } from "./OdysseyTranslationProvider";
 import { DefaultSupportedLanguages } from "./OdysseyTranslationProvider.types";
+const scopedCssBaselineStyles = {
+  height: "inherit",
+};
 
 export type OdysseyProviderProps<
   SupportedLanguages extends string = DefaultSupportedLanguages,
@@ -37,27 +40,33 @@ export type OdysseyProviderProps<
 
 const OdysseyProvider = <SupportedLanguages extends string>({
   children,
+  contrastMode,
   designTokensOverride,
   emotionRoot,
-  shadowDomElement,
+  emotionRootElement,
   languageCode,
   nonce,
+  shadowDomElement,
+  shadowRootElement,
   stylisPlugins,
   themeOverride,
   translationOverrides,
 }: OdysseyProviderProps<SupportedLanguages>) => (
   <OdysseyCacheProvider
+    emotionRootElement={emotionRootElement || emotionRoot}
+    hasShadowDom={Boolean(shadowRootElement || shadowDomElement)}
     nonce={nonce}
-    emotionRoot={emotionRoot}
-    shadowDomElement={shadowDomElement}
     stylisPlugins={stylisPlugins}
   >
     <OdysseyThemeProvider
+      contrastMode={contrastMode}
       designTokensOverride={designTokensOverride}
       shadowDomElement={shadowDomElement}
+      shadowRootElement={shadowRootElement}
       themeOverride={themeOverride}
     >
-      <ScopedCssBaseline>
+      {/* This component creates a div; for flexibility of layout of children, make it inherit its parent's height */}
+      <ScopedCssBaseline sx={scopedCssBaselineStyles}>
         <OdysseyTranslationProvider<SupportedLanguages>
           languageCode={languageCode}
           translationOverrides={translationOverrides}
@@ -69,6 +78,6 @@ const OdysseyProvider = <SupportedLanguages extends string>({
   </OdysseyCacheProvider>
 );
 
-const MemoizedThemeProvider = memo(OdysseyProvider) as typeof OdysseyProvider;
+const MemoizedOdysseyProvider = memo(OdysseyProvider) as typeof OdysseyProvider;
 
-export { MemoizedThemeProvider as OdysseyProvider };
+export { MemoizedOdysseyProvider as OdysseyProvider };

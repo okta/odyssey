@@ -16,6 +16,7 @@ export const globalTypes = {
         { value: "es", title: "Spanish" },
         { value: "fi", title: "Finnish" },
         { value: "fr", title: "French" },
+        { value: "ht", title: "Haitian Creole" },
         { value: "hu", title: "Hungarian" },
         { value: "id", title: "Indonesian" },
         { value: "it", title: "Italian" },
@@ -57,37 +58,7 @@ const preview: Preview = {
         ],
       },
     },
-    controls: {
-      expanded: true,
-      sort: "requiredFirst",
-    },
-    grid: {
-      cellSize: 10,
-    },
-    actions: { argTypesRegex: "^on[A-Z].*" },
-    options: {
-      storySort: {
-        method: "alphabetical",
-        order: [
-          "Welcome",
-          ["Introduction (README)", "Docs Status"],
-          "Installation",
-          "Odyssey-React-MUI",
-          "Guidelines",
-          "Contributing",
-          "MUI Components",
-          "Labs Components",
-          "Customization",
-        ],
-        locales: "",
-      },
-    },
-    viewMode: "docs",
-    previewTabs: {
-      "storybook/docs/panel": { index: -1 },
-    },
     backgrounds: {
-      // default: "white",
       values: [
         {
           name: "White",
@@ -97,11 +68,11 @@ const preview: Preview = {
           name: "Gray",
           value: "#f4f4f4",
         },
-        {
-          name: "Page Background (dark)",
-          value: "#1d1d21",
-        },
       ],
+    },
+    controls: {
+      expanded: true,
+      sort: "requiredFirst",
     },
     docs: {
       argTypes: {
@@ -114,6 +85,34 @@ const preview: Preview = {
         excludeDecorators: true,
       },
     },
+    grid: {
+      cellSize: 10,
+    },
+    options: {
+      storySort: {
+        method: "alphabetical",
+        order: [
+          "Welcome",
+          ["Introduction (README)", "Docs Status"],
+          "Installation",
+          "Odyssey-React-MUI",
+          "Guidelines",
+          "Contributing",
+          "MUI Components",
+          "Labs Components",
+          "UI Shell Components",
+          "Customization",
+        ],
+        locales: "",
+      },
+    },
+    react: {
+      strictMode: true,
+    },
+    previewTabs: {
+      "storybook/docs/panel": { index: -1 },
+    },
+    viewMode: "docs",
   },
 };
 

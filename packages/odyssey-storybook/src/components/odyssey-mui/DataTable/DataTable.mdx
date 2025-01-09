@@ -132,9 +132,7 @@ const getData = () => {
 
 The example is slightly simplified. Here's a live example of this same table:
 
-<Canvas>
-  <Story of={DataTableStories.Default} />
-</Canvas>
+<Canvas of={DataTableStories.Default} />
 
 And here's how we get there:
 
@@ -291,9 +289,7 @@ const filterData = ({
 Here's a table that hits a (simulated) API and includes filtering, sorting, drag-and-drop reordering,
 pagination, and more:
 
-<Canvas>
-  <Story of={DataTableStories.API} />
-</Canvas>
+<Canvas of={DataTableStories.API} />
 
 ### Row reordering
 
@@ -388,9 +384,7 @@ emptyPlaceholder={
 }
 ```
 
-<Canvas>
-  <Story of={DataTableStories.Empty} />
-</Canvas>
+<Canvas of={DataTableStories.Empty} />
 
 ## Row reordering
 
@@ -422,6 +416,11 @@ Action buttons and menu items can be added to each row. If rows are selectable, 
 which will be applied to all selected rows. (For example, the bulk actions menu starts out disabled, but if the user selects 3 rows,
 the actions menu will be enabled and any actions performed would be applied to all 3 selected rows.)
 
+## Additional action buttons and menu items
+
+Using `additionalActionButton` and `additionalActionMenuItems`, you can provide additional actions that sit at the top of the `DataView`. This is
+perfect for things like an "Add row" button or a menu of actions that affect the entire table or list.
+
 ## Row details
 
 Rows can optionally expand down to reveal additional content, defined via the `renderDetailPanel` prop, which expects a function with two
@@ -430,9 +429,7 @@ mechanism, you can choose to display details for some rows and not others.
 
 ## Custom filters
 
-<Canvas>
-  <Story of={DataTableStories.CustomFilters} />
-</Canvas>
+<Canvas of={DataTableStories.CustomFilters} />
 
 Within `<DataTable>`, you can now pass a custom `filters` prop. _This will override the default filters, which are based off the table columns_.
 
@@ -501,15 +498,11 @@ The `label` is the human-readable name of the filter.
 
 You can add a custom control to a default filter:
 
-<Canvas>
-  <Story of={DataTableStories.FilterWithCustomRender} />
-</Canvas>
+<Canvas of={DataTableStories.FilterWithCustomRender} />
 
 You can use an out-of-the-box filter variant with a custom filter:
 
-<Canvas>
-  <Story of={DataTableStories.CustomFilterWithDefaultVariant} />
-</Canvas>
+<Canvas of={DataTableStories.CustomFilterWithDefaultVariant} />
 
 # Gotchas
 

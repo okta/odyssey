@@ -1,39 +1,24 @@
-import { Canvas, Meta } from "@storybook/addon-docs";
-import { Story } from "@storybook/blocks";
-import * as Stories from "./CustomTheme.stories";
+import { Canvas, Meta, Story } from "@storybook/blocks";
+import * as CustomThemeStories from "./CustomTheme.stories";
 
-<Meta title="Customization/Components" anchor />
+<Meta of={CustomThemeStories} />
 
 # Custom Theme
 
-A way to use custom theme to override odyssey default theme.
+A way to use a custom theme to override the Odyssey default theme.
 
 ## Behavior
 
-Visually, the mui components under `OdysseyThemeProvider` with custom theme would consume that theme.
+Visually, the MUI components under `OdysseyThemeProvider` with a custom theme would consume that theme.
 
 ### Button Primary
 
-<Canvas>
-  <Story of={Stories.ButtonStory} />
-</Canvas>
+<Canvas of={CustomThemeStories.ButtonStory} />
 
 ### Input Default
 
-<Canvas>
-  <Story of={Stories.TextFieldStory} />
-</Canvas>
+<Canvas of={CustomThemeStories.TextFieldStory} />
 
 ### Radio Default
 
-<Canvas>
-  <Story of={Stories.RadioGroupStory} />
-</Canvas>
-
-### Customizming MUI Components
-
-Overriding the theme of MUI component directly that is not part of odyssey - <a href="https://mui.com/material-ui/customization/theme-components/">Components Customization - Material UI</a>
-
-<Canvas>
-  <Story id="customization-components--custom-component-story" />
-</Canvas>
+<Canvas of={CustomThemeStories.RadioGroupStory} />

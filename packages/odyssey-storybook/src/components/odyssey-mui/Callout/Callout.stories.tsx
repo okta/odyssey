@@ -17,9 +17,8 @@ import {
   calloutSeverityValues,
 } from "@okta/odyssey-react-mui";
 import { queryOdysseySelector } from "@okta/odyssey-react-mui/test-selectors";
-import { expect } from "@storybook/jest";
+import { expect } from "@storybook/test";
 import { Meta, StoryObj } from "@storybook/react";
-import { within } from "@storybook/testing-library";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { PlaywrightProps } from "../storybookTypes";
@@ -39,6 +38,26 @@ const storybookMeta: Meta<CalloutProps> = {
       type: {
         name: "other",
         value: "ReactNode | Array<ReactNode>",
+      },
+    },
+    linkRel: {
+      control: "text",
+      description:
+        "The rel attribute defines the relationship between a linked resource and the current document.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    linkTarget: {
+      control: "text",
+      description:
+        "The target property of the `HTMLAnchorElement` interface is a string that indicates where to display the linked resource.",
+      table: {
+        type: {
+          summary: "string",
+        },
       },
     },
     linkText: {
@@ -164,6 +183,18 @@ export const WithLink: StoryObj<CalloutProps> = {
   },
 };
 
+export const WithLinkAndTarget: StoryObj<CalloutProps> = {
+  args: {
+    role: "alert",
+    severity: "error",
+    title: "Safety checks failed",
+    text: "There is an issue with the fuel mixture ratios. Reconfigure the fuel mixture and perform the safety checks again.",
+    linkTarget: "_blank",
+    linkText: "Visit fueling console",
+    linkUrl: "#",
+  },
+};
+
 export const ChildrenWithList: StoryObj<CalloutProps> = {
   args: {
     role: "status",
@@ -211,16 +242,20 @@ export const TitleWithLink: StoryObj<CalloutProps> = {
     canvasElement: HTMLElement;
     step: PlaywrightProps<CalloutProps>["step"];
   }) => {
-    await step("has visible link", async () => {
-      const element = queryOdysseySelector({
-        canvas: within(canvasElement),
-        componentName: "Callout",
-        templateArgs: {
-          role: "alert",
+    await step("has visible link", () => {
+      const querySelect = queryOdysseySelector("Callout");
+
+      const element = querySelect({
+        element: canvasElement,
+        role: "alert",
+        options: {
           title: /Safety checks failed/,
         },
-      }).select?.("link", {
-        linkText: "Visit fueling console",
+      }).selectChild?.({
+        name: "link",
+        options: {
+          linkText: "Visit fueling console",
+        },
       }).element;
 
       expect(element).toBeVisible();

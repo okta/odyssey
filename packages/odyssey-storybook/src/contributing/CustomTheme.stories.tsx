@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   Button,
   createOdysseyMuiTheme,
@@ -33,10 +33,12 @@ import { MuiThemeDecorator } from "../../.storybook/components/MuiThemeDecorator
 import { useMemo } from "react";
 import * as odysseyTokens from "@okta/odyssey-design-tokens";
 
-export default {
+const meta = {
   title: "Customization/Components",
   decorators: [MuiThemeDecorator],
-};
+} satisfies Meta;
+
+export default meta;
 
 export const ButtonStory: StoryObj = {
   decorators: [
@@ -60,6 +62,7 @@ export const ButtonStory: StoryObj = {
       );
     },
   ],
+  name: "Button",
   render: function C() {
     return (
       <div>
@@ -68,8 +71,6 @@ export const ButtonStory: StoryObj = {
     );
   },
 };
-
-ButtonStory.storyName = "Button";
 
 export const TextFieldStory: StoryObj = {
   decorators: [
@@ -89,6 +90,7 @@ export const TextFieldStory: StoryObj = {
       );
     },
   ],
+  name: "TextField",
   render: function C() {
     return (
       <>
@@ -98,8 +100,6 @@ export const TextFieldStory: StoryObj = {
     );
   },
 };
-
-TextFieldStory.storyName = "TextField";
 
 export const RadioGroupStory: StoryObj = {
   decorators: [
@@ -119,6 +119,7 @@ export const RadioGroupStory: StoryObj = {
       );
     },
   ],
+  name: "RadioGroup",
   render: function C() {
     return (
       <RadioGroup
@@ -135,9 +136,8 @@ export const RadioGroupStory: StoryObj = {
   },
 };
 
-RadioGroupStory.storyName = "RadioGroup";
-
 export const CustomComponentStory: StoryObj = {
+  name: "CustomComponent",
   render: function C() {
     const themeOverrides: ThemeOptions = useMemo(() => {
       return {
@@ -177,5 +177,3 @@ export const CustomComponentStory: StoryObj = {
     );
   },
 };
-
-CustomComponentStory.storyName = "CustomComponent";

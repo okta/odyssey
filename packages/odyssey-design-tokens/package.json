@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-design-tokens",
-  "version": "1.18.0",
+  "version": "1.30.0",
   "description": "Design tokens for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -20,12 +20,10 @@
     "directory": "packages/odyssey-design-tokens"
   },
   "devDependencies": {
-    "@okta/odyssey-lifecycle": "workspace:*",
     "style-dictionary": "^3.9.2"
   },
   "scripts": {
     "prebuild": "style-dictionary clean --config ./config.cjs",
-    "build": "style-dictionary build --config ./config.cjs",
-    "prepack": "yarn exec prepack"
+    "build": "style-dictionary build --config ./config.cjs"
   }
 }

@@ -1,6 +1,5 @@
 .DS_Store
 dist/
-dist-composite/
 node_modules/
 npm-debug.log
 package-lock.json
@@ -10,7 +9,6 @@ yarn-error.log
 **/reports/
 .pnp.*
 .yarn/*
-!.yarn/cache
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases

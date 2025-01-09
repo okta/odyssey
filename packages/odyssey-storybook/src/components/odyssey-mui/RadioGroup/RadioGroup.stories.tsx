@@ -10,22 +10,20 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ChangeEvent, useCallback, useState } from "react";
 import { Radio, RadioGroup, Link } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
-import { expect } from "@storybook/jest";
+import { expect, userEvent, within } from "@storybook/test";
+import { ChangeEvent, useCallback, useState } from "react";
 
+import { axeRun } from "../../../axe-util";
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { userEvent, within } from "@storybook/testing-library";
-import { axeRun } from "../../../axe-util";
 
-const storybookMeta: Meta<typeof RadioGroup> = {
+const meta = {
   title: "MUI Components/Forms/RadioGroup",
   component: RadioGroup,
   argTypes: {
     children: {
-      control: null,
       description: "An array of Radio components within the group",
       table: {
         type: {
@@ -54,6 +52,7 @@ const storybookMeta: Meta<typeof RadioGroup> = {
     HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
     id: fieldComponentPropsMetaData.id,
     isDisabled: fieldComponentPropsMetaData.isDisabled,
+    isReadOnly: fieldComponentPropsMetaData.isReadOnly,
     label: {
       control: "text",
       description: "The text label for the radio group",
@@ -68,7 +67,6 @@ const storybookMeta: Meta<typeof RadioGroup> = {
       },
     },
     onChange: {
-      control: null,
       description: "Callback fired when the value of the radio group changes",
       table: {
         type: {
@@ -91,11 +89,14 @@ const storybookMeta: Meta<typeof RadioGroup> = {
     label: "Speed",
   },
   decorators: [MuiThemeDecorator],
-};
+} satisfies Meta<typeof RadioGroup>;
 
-export default storybookMeta;
+export default meta;
 
-const Template: StoryObj<typeof RadioGroup> = {
+type Story = StoryObj<typeof meta>;
+
+const Template: Story = {
+  args: {} as Story["args"], // This is a hack.
   render: function C(props) {
     return (
       <RadioGroup {...props}>
@@ -107,38 +108,44 @@ const Template: StoryObj<typeof RadioGroup> = {
   },
 };
 
-export const Default: StoryObj<typeof RadioGroup> = {
+export const Default: Story = {
   ...Template,
   args: {
     defaultValue: "",
-  },
+  } as Story["args"], // This is a hack.,
 };
 
-export const Hint: StoryObj<typeof RadioGroup> = {
+export const Hint: Story = {
   ...Template,
   args: {
     hint: "Select the speed at which you wish to travel.",
     defaultValue: "",
-  },
+  } as Story["args"], // This is a hack.,
 };
 
-export const HintLink: StoryObj<typeof RadioGroup> = {
+export const HintLink: Story = {
   ...Template,
   args: {
     hint: "Select the speed at which you wish to travel.",
     HintLinkComponent: <Link href="/learn-more">Learn more</Link>,
-  },
+  } as Story["args"], // This is a hack.,
 };
 
-export const Disabled: StoryObj<typeof RadioGroup> = {
+export const Disabled: Story = {
   ...Template,
   args: {
     isDisabled: true,
     defaultValue: "",
-  },
+  } as Story["args"], // This is a hack.,
 };
-
-export const Error: StoryObj<typeof RadioGroup> = {
+export const ReadOnly: Story = {
+  ...Template,
+  args: {
+    isReadOnly: true,
+    defaultValue: "Warp Speed",
+  } as Story["args"], // This is a hack.,
+};
+export const Error: Story = {
   ...Template,
   parameters: {
     docs: {
@@ -151,40 +158,26 @@ export const Error: StoryObj<typeof RadioGroup> = {
   args: {
     errorMessage: "This field is required.",
     defaultValue: "",
-  },
+  } as Story["args"], // This is a hack.,
 };
 
-export const ErrorsList: StoryObj<typeof RadioGroup> = {
+export const ErrorsList: Story = {
   ...Template,
   args: {
     errorMessage: "This field is required.",
     errorMessageList: ["Message 1", "Message 2"],
     defaultValue: "",
-  },
+  } as Story["args"], // This is a hack.,
 };
 
-export const UncontrolledRadioGroup: StoryObj<typeof RadioGroup> = {
+export const UncontrolledRadioGroup: Story = {
   ...Template,
   args: {
     defaultValue: "Warp Speed",
-  },
-  play: async ({ canvasElement, step }) => {
-    await step("select controlled radio button", async () => {
-      const canvas = within(canvasElement);
-      const radiogroup = canvas.getByRole("radiogroup") as HTMLInputElement;
-      const radio = canvas.getByLabelText(
-        "Ludicrous Speed",
-      ) as HTMLInputElement;
-      if (radiogroup && radio) {
-        await userEvent.click(radio);
-      }
-      await expect(radio).toBeChecked();
-      await axeRun("select controlled radio button");
-    });
-  },
+  } as Story["args"], // This is a hack.,
 };
 
-export const ControlledRadioGroup: StoryObj<typeof RadioGroup> = {
+export const ControlledRadioGroup: Story = {
   parameters: {
     docs: {
       description: {
@@ -195,7 +188,7 @@ export const ControlledRadioGroup: StoryObj<typeof RadioGroup> = {
   },
   args: {
     value: "Ludicrous Speed",
-  },
+  } as Story["args"], // This is a hack.,
   render: function C(props) {
     const [value, setValue] = useState("Ludicrous Speed");
     const onChange = useCallback(
@@ -213,8 +206,8 @@ export const ControlledRadioGroup: StoryObj<typeof RadioGroup> = {
   play: async ({ canvasElement, step }) => {
     await step("select uncontrolled radio button", async () => {
       const canvas = within(canvasElement);
-      const radiogroup = canvas.getByRole("radiogroup") as HTMLInputElement;
-      const radio = canvas.getByLabelText("Warp Speed") as HTMLInputElement;
+      const radiogroup = canvas.getByRole("radiogroup");
+      const radio = canvas.getByLabelText("Warp Speed");
       if (radiogroup && radio) {
         await userEvent.click(radio);
       }
@@ -224,7 +217,7 @@ export const ControlledRadioGroup: StoryObj<typeof RadioGroup> = {
   },
 };
 
-export const ControlledRadioGroupWithRadioHints: StoryObj<typeof RadioGroup> = {
+export const ControlledRadioGroupWithRadioHints: Story = {
   parameters: {
     docs: {
       description: {
@@ -234,9 +227,9 @@ export const ControlledRadioGroupWithRadioHints: StoryObj<typeof RadioGroup> = {
   },
   args: {
     value: "Ludicrous Speed",
-  },
+  } as Story["args"], // This is a hack.,
   render: function C(props) {
-    const [value, setValue] = useState("Ludicrous Speed");
+    const [value, setValue] = useState("Turtle Speed");
     const onChange = useCallback(
       (_event: ChangeEvent<HTMLInputElement>, value: string) => setValue(value),
       [],

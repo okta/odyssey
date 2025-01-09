@@ -15,6 +15,7 @@ import {
   GroupPickerProps,
   GroupPickerOptionType,
 } from "@okta/odyssey-react-mui/labs";
+
 import { Meta, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -117,7 +118,6 @@ const storybookMeta: Meta<typeof GroupPicker> = {
       },
     },
     onChange: {
-      control: null,
       description:
         "Callback fired when the value of the autocomplete input changes",
       table: {
@@ -127,7 +127,6 @@ const storybookMeta: Meta<typeof GroupPicker> = {
       },
     },
     onInputChange: {
-      control: null,
       description:
         "Callback fired when the input value of the autocomplete input changes",
       table: {
@@ -137,7 +136,6 @@ const storybookMeta: Meta<typeof GroupPicker> = {
       },
     },
     options: {
-      control: null,
       description: "The options for the autocomplete input",
       table: {
         type: {
@@ -147,7 +145,6 @@ const storybookMeta: Meta<typeof GroupPicker> = {
       },
     },
     value: {
-      control: null,
       description: "The value of the autocomplete input",
       table: {
         type: {
@@ -162,7 +159,7 @@ const storybookMeta: Meta<typeof GroupPicker> = {
           summary: "boolean",
         },
         defaultValue: {
-          summary: false,
+          summary: "false",
         },
       },
     },

@@ -18,7 +18,7 @@ import {
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-const storyBookMeta: Meta<PaginationProps> = {
+const meta = {
   title: "MUI Components/Pagination",
   component: Pagination,
   argTypes: {
@@ -47,7 +47,6 @@ const storyBookMeta: Meta<PaginationProps> = {
     },
 
     onPaginationChange: {
-      control: "function",
       description: "Page index and page size setter",
       type: {
         required: true,
@@ -78,9 +77,60 @@ const storyBookMeta: Meta<PaginationProps> = {
       },
     },
 
+    hasPageInput: {
+      control: "boolean",
+      description:
+        "If true, the page input will be visible and the user can directly manipulate which page is visible.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+        defaultValue: {
+          summary: "true",
+        },
+      },
+    },
+
+    hasRowCountInput: {
+      control: "boolean",
+      description:
+        "If true, the row count input will be visible and the user can directly manipulate how many rows are visible.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+        defaultValue: {
+          summary: "true",
+        },
+      },
+    },
+
+    hasRowCountLabel: {
+      control: "boolean",
+      description: "If true, the pagination controls will be disabled.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+        defaultValue: {
+          summary: "true",
+        },
+      },
+    },
+
     isDisabled: {
       control: "boolean",
       description: "If true, the pagination controls will be disabled",
+      type: {
+        required: true,
+        name: "boolean",
+      },
+    },
+
+    isMoreDisabled: {
+      control: "boolean",
+      description:
+        "If true, the pagination next/show more button will be disabled",
       type: {
         required: true,
         name: "boolean",
@@ -147,19 +197,45 @@ const storyBookMeta: Meta<PaginationProps> = {
         name: "string",
       },
     },
+
+    maxPageIndex: {
+      control: "number",
+      description:
+        "The highest page number allowed to be manually input in pagination.",
+      table: {
+        type: {
+          summary: "number",
+        },
+      },
+    },
+    maxPageSize: {
+      control: "number",
+      description:
+        "The largest number of rows allowed to be shown per page. This only affects the row input in pagination.",
+      table: {
+        type: {
+          summary: "number",
+        },
+      },
+    },
+    currentRowsCount: {
+      control: "number",
+      description: "The number of items currently visible on the page",
+      table: {
+        type: {
+          summary: "number",
+        },
+      },
+    },
   },
-
-  decorators: [MuiThemeDecorator],
-  tags: ["autodocs"],
-};
-
-export default storyBookMeta;
-
-export const Default: StoryObj<PaginationProps> = {
   args: {
     pageIndex: 1,
     pageSize: 20,
     lastRow: 20,
+    currentRowsCount: 20,
+    hasPageInput: true,
+    hasRowCountInput: true,
+    hasRowCountLabel: true,
     isDisabled: false,
     variant: "paged",
     rowsPerPageLabel: "Rows per page",
@@ -170,7 +246,30 @@ export const Default: StoryObj<PaginationProps> = {
     totalRows: 100,
   },
 
+  decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
+} satisfies Meta<PaginationProps>;
+
+export default meta;
+
+export const Default: StoryObj<PaginationProps> = {
   render: (props) => {
     return <Pagination {...props} />;
+  },
+};
+
+export const LoadMore: StoryObj<PaginationProps> = {
+  ...Default,
+  args: {
+    variant: "loadMore",
+  },
+};
+
+export const JustButtons: StoryObj<PaginationProps> = {
+  ...Default,
+  args: {
+    hasPageInput: false,
+    hasRowCountInput: false,
+    hasRowCountLabel: false,
   },
 };

@@ -16,7 +16,7 @@ import { reorderDataRowsLocally } from "./reorderDataRowsLocally";
 import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext";
 import { MRT_Row, MRT_RowData, MRT_TableInstance } from "material-react-table";
 
-export const useRowReordering = ({
+export const useRowReordering = <TData extends MRT_RowData>({
   totalRows,
   onReorderRows,
   data,
@@ -28,12 +28,10 @@ export const useRowReordering = ({
 }: {
   totalRows: DataTableProps["totalRows"];
   onReorderRows: DataTableProps["onReorderRows"];
-  data: MRT_RowData[];
-  setData: Dispatch<SetStateAction<MRT_RowData[]>>;
-  draggingRow?: MRT_Row<MRT_RowData> | null;
-  setDraggingRow: Dispatch<
-    SetStateAction<MRT_Row<MRT_RowData> | null | undefined>
-  >;
+  data: TData[];
+  setData: Dispatch<SetStateAction<TData[]>>;
+  draggingRow?: MRT_Row<TData> | null;
+  setDraggingRow: Dispatch<SetStateAction<MRT_Row<TData> | null | undefined>>;
   resultsPerPage: number;
   page: number;
 }) => {
@@ -68,7 +66,6 @@ export const useRowReordering = ({
   const dragHandleStyles = {
     padding: odysseyDesignTokens.Spacing1,
     borderRadius: odysseyDesignTokens.BorderRadiusMain,
-
     "&:focus-visible": {
       boxShadow: `0 0 0 2px ${odysseyDesignTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyDesignTokens.PalettePrimaryMain}`,
       outline: "2px solid transparent",
@@ -106,12 +103,12 @@ export const useRowReordering = ({
     return undefined;
   };
 
-  const setHoveredRow = (
-    table: MRT_TableInstance<MRT_RowData>,
-    id: MRT_RowData["id"],
-  ) => {
+  const setHoveredRow = (table: MRT_TableInstance<TData>, id: TData["id"]) => {
     if (id) {
-      const nextRow: MRT_RowData = table.getRow(id);
+      // The `as MRT_Row<TData>` is necessary here to overcome some type/generic
+      // issues with the type of `setHoveredRow` defined by MRT. It's not ideal code,
+      // but it's the only way that works without a much larger rewrite.
+      const nextRow = table.getRow(id) as MRT_Row<TData>;
 
       if (nextRow) {
         table.setHoveredRow(nextRow);
@@ -120,8 +117,8 @@ export const useRowReordering = ({
   };
 
   type HandleDragHandleKeyDownArgs = {
-    table: MRT_TableInstance<MRT_RowData>;
-    row: MRT_Row<MRT_RowData>;
+    table: MRT_TableInstance<TData>;
+    row: MRT_Row<TData>;
     event: KeyboardEvent<HTMLButtonElement>;
   };
 
@@ -177,11 +174,15 @@ export const useRowReordering = ({
 
         if (isArrowDown || isArrowUp) {
           const nextIndex = isArrowDown ? index + 1 : index - 1;
+          // This is a legacy file, and this type isn't a problem in `DataView` --Kevin Ghadyani
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
           setHoveredRow(table, data[nextIndex]?.id);
         }
       } else {
         if (isArrowDown || isArrowUp) {
           const nextIndex = isArrowDown ? row.index + 1 : row.index - 1;
+          // This is a legacy file, and this type isn't a problem in `DataView` --Kevin Ghadyani
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
           setHoveredRow(table, data[nextIndex]?.id);
         }
       }
@@ -192,32 +193,28 @@ export const useRowReordering = ({
     }
   };
 
-  const handleDragHandleOnDragEnd = (table: MRT_TableInstance<MRT_RowData>) => {
+  const handleDragHandleOnDragEnd = (table: MRT_TableInstance<TData>) => {
     const cols = table.getAllColumns();
     cols[0].toggleVisibility();
 
     const { draggingRow, hoveredRow } = table.getState();
     if (draggingRow) {
       updateRowOrder({
+        newRowIndex: (hoveredRow as TData).index as number,
         rowId: draggingRow.id,
-        newRowIndex: (hoveredRow as MRT_RowData).index,
       });
     }
 
     setDraggingRow(null);
   };
 
-  const handleDragHandleOnDragCapture = (
-    table: MRT_TableInstance<MRT_RowData>,
-  ) => {
+  const handleDragHandleOnDragCapture = (table: MRT_TableInstance<TData>) => {
     if (!draggingRow && table.getState().draggingRow?.id) {
       setDraggingRow(table.getState().draggingRow);
     }
   };
 
-  const resetDraggingAndHoveredRow = (
-    table: MRT_TableInstance<MRT_RowData>,
-  ) => {
+  const resetDraggingAndHoveredRow = (table: MRT_TableInstance<TData>) => {
     setDraggingRow(null);
     table.setHoveredRow(null);
   };

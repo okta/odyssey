@@ -11,12 +11,14 @@
  */
 
 import "i18next";
-import { translation as en } from "../properties/ts/odyssey-react-mui";
+import { defaultNS, keySeparator, resources } from "../i18n";
 
 declare module "i18next" {
   interface CustomTypeOptions {
+    defaultNS: typeof defaultNS;
+    keySeparator: typeof keySeparator;
     resources: {
-      translations: typeof en;
+      odyssey: (typeof resources)["en"];
     };
   }
 }

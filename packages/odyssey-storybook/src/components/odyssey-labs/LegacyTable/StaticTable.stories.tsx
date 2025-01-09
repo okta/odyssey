@@ -11,9 +11,8 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
-import { Button } from "@okta/odyssey-react-mui";
+import { Button, DataTableColumn } from "@okta/odyssey-react-mui";
 import { StaticTable, StaticTableProps } from "@okta/odyssey-react-mui/labs";
-import { DataTableColumn } from "@okta/odyssey-react-mui";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
@@ -22,7 +21,7 @@ const storybookMeta: Meta = {
   component: StaticTable,
   argTypes: {
     columns: {
-      control: "array",
+      control: "object",
       type: {
         required: true,
         name: "other",
@@ -37,12 +36,8 @@ const storybookMeta: Meta = {
         value: "MaterialReactTableProps<TData>",
       },
     },
-    getRowId: {
-      control: "function",
-    },
-    fetchMoreData: {
-      control: "function",
-    },
+    getRowId: {},
+    fetchMoreData: {},
     hasError: {
       control: "boolean",
     },
@@ -55,15 +50,9 @@ const storybookMeta: Meta = {
     isFetching: {
       control: "boolean",
     },
-    onGlobalFilterChange: {
-      control: "function",
-    },
-    onPaginationChange: {
-      control: "function",
-    },
-    onRowSelectionChange: {
-      control: "function",
-    },
+    onGlobalFilterChange: {},
+    onPaginationChange: {},
+    onRowSelectionChange: {},
     state: {
       control: "object",
     },

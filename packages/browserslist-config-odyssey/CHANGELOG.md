@@ -3,6 +3,78 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.29.0](https://github.com/okta/odyssey/compare/v1.28.0...v1.29.0) (2024-12-11)
+
+**Note:** Version bump only for package @okta/browserslist-config-odyssey
+
+## [1.28.2](https://github.com/okta/odyssey/compare/v1.28.1...v1.28.2) (2024-12-03)
+
+**Note:** Version bump only for package @okta/browserslist-config-odyssey
+
+## [1.28.1](https://github.com/okta/odyssey/compare/v1.28.0...v1.28.1) (2024-12-02)
+
+**Note:** Version bump only for package @okta/browserslist-config-odyssey
+
+## [1.28.0](https://github.com/okta/odyssey/compare/v1.27.1...v1.28.0) (2024-11-25)
+
+**Note:** Version bump only for package @okta/browserslist-config-odyssey
+
+## [1.27.1](https://github.com/okta/odyssey/compare/v1.27.0...v1.27.1) (2024-11-18)
+
+**Note:** Version bump only for package @okta/browserslist-config-odyssey
+
+## [1.27.0](https://github.com/okta/odyssey/compare/v1.26.0...v1.27.0) (2024-11-14)
+
+**Note:** Version bump only for package @okta/browserslist-config-odyssey
+
+## [1.26.0](https://github.com/okta/odyssey/compare/v1.25.0...v1.26.0) (2024-11-04)
+
+**Note:** Version bump only for package @okta/browserslist-config-odyssey
+
+## [1.25.0](https://github.com/okta/odyssey/compare/v1.24.1...v1.25.0) (2024-10-15)
+
+**Note:** Version bump only for package @okta/browserslist-config-odyssey
+
+## [1.24.1](https://github.com/okta/odyssey/compare/v1.24.0...v1.24.1) (2024-10-04)
+
+**Note:** Version bump only for package @okta/browserslist-config-odyssey
+
+## [1.24.0](https://github.com/okta/odyssey/compare/v1.20.0...v1.24.0) (2024-10-01)
+
+**Note:** Version bump only for package @okta/browserslist-config-odyssey
+
+## [1.23.0](https://github.com/okta/odyssey/compare/v1.19.0...v1.23.0) (2024-09-19)
+
+**Note:** Version bump only for package @okta/browserslist-config-odyssey
+
+## [1.22.0](https://github.com/okta/odyssey/compare/v1.19.0...v1.22.0) (2024-09-05)
+
+**Note:** Version bump only for package @okta/browserslist-config-odyssey
+
+## [1.21.2](https://github.com/okta/odyssey/compare/v1.21.1...v1.21.2) (2024-08-09)
+
+**Note:** Version bump only for package @okta/browserslist-config-odyssey
+
+## [1.21.0](https://github.com/okta/odyssey/compare/v1.15.9...v1.21.0) (2024-08-07)
+
+### Bug Fixes
+
+- bump version to 1.17 ([0e32aba](https://github.com/okta/odyssey/commit/0e32aba973ef00d5a872dbd408a84fb54c8a7408))
+
+## [1.20.0](https://github.com/okta/odyssey/compare/v1.19.0...v1.20.0) (2024-07-25)
+
+**Note:** Version bump only for package @okta/browserslist-config-odyssey
+
+## [1.19.0](https://github.com/okta/odyssey/compare/v1.18.0...v1.19.0) (2024-07-15)
+
+**Note:** Version bump only for package @okta/browserslist-config-odyssey
+
+## [1.18.0](https://github.com/okta/odyssey/compare/v1.15.9...v1.18.0) (2024-06-26)
+
+### Bug Fixes
+
+- bump version to 1.17 ([0e32aba](https://github.com/okta/odyssey/commit/0e32aba973ef00d5a872dbd408a84fb54c8a7408))
+
 ## [1.15.9](https://github.com/okta/odyssey/compare/v1.15.8...v1.15.9) (2024-03-26)
 
 **Note:** Version bump only for package @okta/browserslist-config-odyssey

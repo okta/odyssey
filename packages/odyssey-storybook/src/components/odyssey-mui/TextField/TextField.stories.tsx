@@ -10,21 +10,20 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, StoryObj } from "@storybook/react";
 import {
   InputAdornment,
   Link,
   TextField,
   textFieldTypeValues,
 } from "@okta/odyssey-react-mui";
-
-import { userEvent, within } from "@storybook/testing-library";
-import { expect } from "@storybook/jest";
-import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { Meta, StoryObj } from "@storybook/react";
+import { expect, fn, userEvent, within } from "@storybook/test";
 import { ChangeEvent, useCallback, useState } from "react";
 
-const storybookMeta: Meta<typeof TextField> = {
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
+
+const meta = {
   title: "MUI Components/Forms/TextField",
   component: TextField,
   argTypes: {
@@ -84,7 +83,7 @@ const storybookMeta: Meta<typeof TextField> = {
           summary: "boolean",
         },
         defaultValue: {
-          summary: false,
+          summary: "false",
         },
       },
     },
@@ -105,7 +104,6 @@ const storybookMeta: Meta<typeof TextField> = {
     },
     name: fieldComponentPropsMetaData.name,
     onBlur: {
-      control: null,
       description: "Callback fired when the `input` element loses focus",
       table: {
         type: {
@@ -114,7 +112,6 @@ const storybookMeta: Meta<typeof TextField> = {
       },
     },
     onChange: {
-      control: null,
       description: "Callback fired when the value is changed",
       table: {
         type: {
@@ -123,7 +120,6 @@ const storybookMeta: Meta<typeof TextField> = {
       },
     },
     onFocus: {
-      control: null,
       description: "Callback fired when the `input` element gets focus",
       table: {
         type: {
@@ -176,18 +172,21 @@ const storybookMeta: Meta<typeof TextField> = {
     },
   },
   args: {
-    label: "Destination",
     defaultValue: undefined,
+    label: "Destination",
+    onBlur: fn(),
+    onChange: fn(),
+    onFocus: fn(),
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
-};
+} satisfies Meta<typeof TextField>;
 
-export default storybookMeta;
+export default meta;
 
-// States
+type Story = StoryObj<typeof meta>;
 
-export const Default: StoryObj<typeof TextField> = {
+export const Default: Story = {
   args: {
     defaultValue: "",
   },
@@ -206,7 +205,7 @@ export const Default: StoryObj<typeof TextField> = {
   },
 };
 
-export const Disabled: StoryObj<typeof TextField> = {
+export const Disabled: Story = {
   parameters: {
     docs: {
       description: {
@@ -220,14 +219,14 @@ export const Disabled: StoryObj<typeof TextField> = {
   },
 };
 
-export const Optional: StoryObj<typeof TextField> = {
+export const Optional: Story = {
   args: {
     isOptional: true,
     defaultValue: "",
   },
 };
 
-export const ReadOnly: StoryObj<typeof TextField> = {
+export const ReadOnly: Story = {
   parameters: {
     docs: {
       description: {
@@ -241,14 +240,14 @@ export const ReadOnly: StoryObj<typeof TextField> = {
   },
 };
 
-export const Error: StoryObj<typeof TextField> = {
+export const Error: Story = {
   args: {
     errorMessage: "This field is required.",
     defaultValue: "",
   },
 };
 
-export const ErrorsList: StoryObj<typeof TextField> = {
+export const ErrorsList: Story = {
   args: {
     errorMessage: "This field is required:",
     errorMessageList: ["At least 2 chars", "No more than 20 chars"],
@@ -256,28 +255,28 @@ export const ErrorsList: StoryObj<typeof TextField> = {
   },
 };
 
-export const FullWidth: StoryObj<typeof TextField> = {
+export const FullWidth: Story = {
   args: {
     isFullWidth: true,
   },
 };
 
-export const Hint: StoryObj<typeof TextField> = {
+export const Hint: Story = {
   args: {
     hint: "Specify your destination within the Sol system.",
     defaultValue: "",
   },
 };
 
-export const HintLink: StoryObj<typeof TextField> = {
+export const HintLink: Story = {
   args: {
-    hint: "Specify your destination within the Sol system. Learn more ",
+    hint: "Specify your destination within the Sol system. Learn more",
     HintLinkComponent: <Link href="/learn-more">about the Sol system</Link>,
     defaultValue: "",
   },
 };
 
-export const Adornment: StoryObj<typeof TextField> = {
+export const Adornment: Story = {
   parameters: {
     docs: {
       description: {
@@ -293,7 +292,7 @@ export const Adornment: StoryObj<typeof TextField> = {
 };
 
 // Types
-export const Email: StoryObj<typeof TextField> = {
+export const Email: Story = {
   args: {
     autoCompleteType: "work email",
     label: "Company email",
@@ -302,7 +301,7 @@ export const Email: StoryObj<typeof TextField> = {
   },
 };
 
-export const Multiline: StoryObj<typeof TextField> = {
+export const Multiline: Story = {
   parameters: {
     docs: {
       description: {
@@ -317,16 +316,16 @@ export const Multiline: StoryObj<typeof TextField> = {
     isMultiline: true,
     defaultValue: "",
   },
-  storyName: "Multiline (Textarea)",
+  name: "Multiline (Textarea)",
 };
 
-export const Placeholder: StoryObj<typeof TextField> = {
+export const Placeholder: Story = {
   args: {
     placeholder: "Destination within the Sol system",
   },
 };
 
-export const Tel: StoryObj<typeof TextField> = {
+export const Tel: Story = {
   parameters: {
     docs: {
       description: {
@@ -344,7 +343,7 @@ export const Tel: StoryObj<typeof TextField> = {
   },
 };
 
-export const ControlledTextField: StoryObj<typeof TextField> = {
+export const ControlledTextField: Story = {
   parameters: {
     docs: {
       description: {

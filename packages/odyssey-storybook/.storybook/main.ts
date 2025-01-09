@@ -1,4 +1,3 @@
-import { dirname, join } from "path";
 /*!
  * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
@@ -12,7 +11,7 @@ import { dirname, join } from "path";
  */
 
 import type { StorybookConfig } from "@storybook/react-vite";
-
+import { dirname, join } from "node:path";
 /**
  * This function is used to resolve the absolute path of a package.
  * It is needed in projects that use Yarn PnP or are set up within a monorepo.
@@ -22,7 +21,6 @@ const getAbsolutePath = (value: string): any => {
 };
 
 const config: StorybookConfig = {
-  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
     {
       name: "@storybook/addon-docs",
@@ -35,12 +33,20 @@ const config: StorybookConfig = {
     getAbsolutePath("@storybook/addon-essentials"),
     getAbsolutePath("@storybook/addon-interactions"),
     getAbsolutePath("@storybook/addon-mdx-gfm"),
-    getAbsolutePath("storybook-addon-rtl-direction"),
+    // getAbsolutePath("storybook-addon-rtl-direction"),
   ],
+  core: {
+    builder: "@storybook/builder-vite",
+    disableTelemetry: true,
+  },
+  docs: {
+    autodocs: true,
+  },
   framework: {
     name: getAbsolutePath("@storybook/react-vite"),
     options: {},
   },
+  stories: ["../src/**/*.stories.@(js|jsx|ts|tsx)", "../src/**/*.mdx"],
   typescript: {
     check: false,
     reactDocgen: "react-docgen-typescript",
@@ -55,9 +61,7 @@ const config: StorybookConfig = {
       },
     },
   },
-  docs: {
-    autodocs: true,
-  },
+  staticDirs: ["../src/static"],
 };
 
 export default config;

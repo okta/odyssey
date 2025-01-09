@@ -11,7 +11,7 @@
  */
 
 import type { ReactRenderer } from "@storybook/react";
-import type { PlayFunctionContext } from "@storybook/types";
+import { PlayFunctionContext } from "storybook/internal/types";
 
 export type PlaywrightProps<ComponentProps> = Pick<
   PlayFunctionContext<ReactRenderer, ComponentProps>,

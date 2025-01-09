@@ -10,34 +10,52 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, StoryObj } from "@storybook/react";
 import {
   Box,
   Divider,
-  ListItemIcon,
-  ListItemText,
   ListSubheader,
   MenuButton,
   MenuButtonProps,
   buttonVariantValues,
   MenuItem,
   menuAlignmentValues,
+  Subordinate,
+  Paragraph,
+  useOdysseyDesignTokens,
+  Heading5,
+  Link,
 } from "@okta/odyssey-react-mui";
 import {
   GroupIcon,
   GlobeIcon,
   CalendarIcon,
+  QuestionCircleIcon,
 } from "@okta/odyssey-react-mui/icons";
+import { Meta, StoryObj } from "@storybook/react";
+import type { ReactNode } from "react";
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import icons from "../../../../.storybook/components/iconUtils";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { userEvent, waitFor, within } from "@storybook/testing-library";
-import { expect } from "@storybook/jest";
+import { expect, userEvent, waitFor, within } from "@storybook/test";
 import { axeRun } from "../../../axe-util";
 import type { PlaywrightProps } from "../storybookTypes";
 
-const storybookMeta: Meta<MenuButtonProps> = {
+const BoxWithBottomMargin = ({ children }: { children: ReactNode }) => {
+  const odysseyDesignTokens = useOdysseyDesignTokens();
+
+  return (
+    <Box
+      sx={{
+        marginBottom: odysseyDesignTokens.Spacing4,
+      }}
+    >
+      {children}
+    </Box>
+  );
+};
+
+const storybookMeta: Meta<typeof MenuButton> = {
   title: "MUI Components/Menu Button",
   component: MenuButton,
   argTypes: {
@@ -94,7 +112,7 @@ const storybookMeta: Meta<MenuButtonProps> = {
       },
     },
     children: {
-      control: "obj",
+      control: "object",
       description: "The <MenuItem> components within the Menu",
       table: {
         type: {
@@ -102,9 +120,24 @@ const storybookMeta: Meta<MenuButtonProps> = {
         },
       },
       type: {
-        required: true,
+        required: false,
         name: "other",
         value: "[MenuItem | Divider | ListSubheader]",
+      },
+    },
+    popoverContent: {
+      control: "object",
+      description:
+        "The contents to display in the popover (instead of children)",
+      table: {
+        type: {
+          summary: "[ReactNode | NullElement]",
+        },
+      },
+      type: {
+        required: false,
+        name: "other",
+        value: "ReactNode",
       },
     },
     endIcon: {
@@ -215,22 +248,16 @@ export const ActionIcons: StoryObj<MenuButtonProps> = {
   args: {
     children: [
       <MenuItem key="1" isDisabled>
-        <ListItemIcon>
-          <GroupIcon />
-        </ListItemIcon>
-        <ListItemText>Assign crew</ListItemText>
+        <GroupIcon />
+        Assign crew
       </MenuItem>,
       <MenuItem key="2">
-        <ListItemIcon>
-          <GlobeIcon />
-        </ListItemIcon>
-        <ListItemText>View destination</ListItemText>
+        <GlobeIcon />
+        View destination
       </MenuItem>,
       <MenuItem key="3">
-        <ListItemIcon>
-          <CalendarIcon />
-        </ListItemIcon>
-        <ListItemText>Schedule launch</ListItemText>
+        <CalendarIcon />
+        Schedule launch
       </MenuItem>,
     ],
   },
@@ -265,7 +292,7 @@ export const ButtonVariant: StoryObj<MenuButtonProps> = {
     await step("Filter and Select from listbox", async () => {
       const canvas = within(canvasElement);
       const button = canvas.getByRole("button", { name: "More actions" });
-      expect(button).toHaveAttribute("id", "floating-button");
+      await expect(button).toHaveAttribute("id", "floating-button");
     });
   },
 };
@@ -342,7 +369,7 @@ export const IconButton: StoryObj<MenuButtonProps> = {
     await step("MenuButton Aria-Label", async () => {
       const canvas = within(canvasElement);
       const menuButton = canvas.queryByRole("button", { name: "More actions" });
-      expect(menuButton).not.toBeNull();
+      await expect(menuButton).not.toBeNull();
     });
   },
 };
@@ -421,5 +448,72 @@ export const Alignment: StoryObj<MenuButtonProps> = {
       args,
       "Menu Button Alignment",
     );
+  },
+};
+
+export const HelpPopover: StoryObj<MenuButtonProps> = {
+  args: {
+    buttonLabel: "",
+    endIcon: <QuestionCircleIcon />,
+    buttonVariant: "secondary",
+    popoverContent: [
+      <Box key="help-popover-content" sx={{ minWidth: "392px" }}>
+        <BoxWithBottomMargin>
+          <Heading5>Title</Heading5>
+          <Subordinate>Caption</Subordinate>
+          <Paragraph>Body</Paragraph>
+        </BoxWithBottomMargin>
+        <BoxWithBottomMargin>
+          <Link href="#" target="_blank">
+            Link
+          </Link>
+          <Subordinate>Caption</Subordinate>
+        </BoxWithBottomMargin>
+        <BoxWithBottomMargin>
+          <Link href="#" target="_blank">
+            Link
+          </Link>
+          <Subordinate>Caption</Subordinate>
+        </BoxWithBottomMargin>
+        <BoxWithBottomMargin>
+          <Link href="#" target="_blank">
+            Link
+          </Link>
+          <Subordinate>Caption</Subordinate>
+        </BoxWithBottomMargin>
+        <BoxWithBottomMargin>
+          <Link href="#" target="_blank">
+            Link
+          </Link>
+          <Subordinate>Caption</Subordinate>
+        </BoxWithBottomMargin>
+        <BoxWithBottomMargin>
+          <Link href="#" target="_blank">
+            Link
+          </Link>
+          <Subordinate>Caption</Subordinate>
+        </BoxWithBottomMargin>
+        <BoxWithBottomMargin>
+          <Divider />
+        </BoxWithBottomMargin>
+        <Box sx={{ fontWeight: "bold" }}>
+          <Paragraph>
+            Body{" "}
+            <Link href="#" target="_blank">
+              Link
+            </Link>
+          </Paragraph>
+        </Box>
+      </Box>,
+    ],
+    id: "floating",
+    tooltipText: "More actions",
+  },
+  play: async ({ canvasElement, step }: PlaywrightProps<MenuButtonProps>) => {
+    await step("MenuButton Aria-Label", () => {
+      const canvas = within(canvasElement);
+      const menuButton = canvas.queryByRole("button", { name: "More actions" });
+      expect(menuButton).not.toBeNull();
+    });
   },
 };

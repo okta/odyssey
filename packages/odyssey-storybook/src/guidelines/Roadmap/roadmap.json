@@ -5,8 +5,44 @@
     "status": "Released",
     "define": "Complete",
     "design": "Complete",
-    "develop": "In progress",
+    "develop": "Complete",
     "deliverableTiming": "Q2 FY25"
+  },
+  {
+    "name": "Advanced forms",
+    "type": "Component",
+    "status": "In progress",
+    "define": "Complete",
+    "design": "Complete",
+    "develop": "Complete",
+    "deliverableTiming": "Q3 FY25"
+  },
+  {
+    "name": "Aerial account page",
+    "type": "Page template",
+    "status": "Not started",
+    "define": "-",
+    "design": "-",
+    "develop": "-",
+    "deliverableTiming": "-"
+  },
+  {
+    "name": "Aerial org details page",
+    "type": "Page template",
+    "status": "Not started",
+    "define": "-",
+    "design": "-",
+    "develop": "-",
+    "deliverableTiming": "-"
+  },
+  {
+    "name": "Aerial user page",
+    "type": "Page template",
+    "status": "Not started",
+    "define": "-",
+    "design": "-",
+    "develop": "-",
+    "deliverableTiming": "-"
   },
   {
     "name": "Autocomplete",
@@ -63,12 +99,12 @@
     "deliverableTiming": "Q1 FY25"
   },
   {
-    "name": "Card",
+    "name": "Card for PAM",
     "type": "Component",
-    "status": "In Labs",
-    "define": "In Labs",
-    "design": "In Labs",
-    "develop": "In Labs",
+    "status": "Not started",
+    "define": "-",
+    "design": "-",
+    "develop": "-",
     "deliverableTiming": "TBD"
   },
   {
@@ -90,22 +126,22 @@
     "deliverableTiming": "FY24"
   },
   {
+    "name": "Configuration ",
+    "type": "Page template",
+    "status": "Not started",
+    "define": "-",
+    "design": "Complete",
+    "develop": "Complete",
+    "deliverableTiming": "-"
+  },
+  {
     "name": "Dashboard",
-    "type": "Component",
+    "type": "Page template",
     "status": "Not started",
     "define": "Not started",
     "design": "Not started",
     "develop": "Not started",
-    "deliverableTiming": "Q2 FY25"
-  },
-  {
-    "name": "Data stack (data list, resource list?)",
-    "type": "Component",
-    "status": "In progress",
-    "define": "In progress",
-    "design": "Not started",
-    "develop": "Not started",
-    "deliverableTiming": "Q2 FY25"
+    "deliverableTiming": "Q4 FY25"
   },
   {
     "name": "Data table",
@@ -117,11 +153,38 @@
     "deliverableTiming": "Q1 FY25"
   },
   {
-    "name": "Date picker",
+    "name": "DataStack \n(rolls up to DataView)",
+    "type": "Component",
+    "status": "Not started",
+    "define": "-",
+    "design": "-",
+    "develop": "-",
+    "deliverableTiming": "TBD"
+  },
+  {
+    "name": "DataView - move",
     "type": "Component",
     "status": "In Labs",
     "define": "Complete",
-    "design": "In progress",
+    "design": "Complete",
+    "develop": "In Labs",
+    "deliverableTiming": "Q2 FY25"
+  },
+  {
+    "name": "Date/Time Picker ",
+    "type": "Component",
+    "status": "In progress",
+    "define": "Complete",
+    "design": "Complete",
+    "develop": "In progress",
+    "deliverableTiming": "Q3 FY25"
+  },
+  {
+    "name": "DatePicker",
+    "type": "Component",
+    "status": "In Labs",
+    "define": "Complete",
+    "design": "Complete",
     "develop": "In progress",
     "deliverableTiming": "Q2 FY25"
   },
@@ -146,29 +209,38 @@
   {
     "name": "Duration picker\n(or fieldset)",
     "type": "Component",
-    "status": "Not started",
-    "define": "Not started",
-    "design": "Not started",
+    "status": "In progress",
+    "define": "Complete",
+    "design": "Complete",
     "develop": "Not started",
-    "deliverableTiming": "Q2 FY25"
+    "deliverableTiming": "Q4 FY25"
   },
   {
-    "name": "Empty states v1 (no illustration)",
+    "name": "Empty states v1 \n(no illustration)",
     "type": "Component",
-    "status": "In progress",
+    "status": "In Labs",
     "define": "Complete",
     "design": "Complete",
     "develop": "Complete",
     "deliverableTiming": "Q2 FY25"
   },
   {
-    "name": "Empty states v2 (illustration)",
+    "name": "Empty states with illustration",
     "type": "Component",
-    "status": "Not started",
-    "define": "Not started",
-    "design": "Not started",
+    "status": "In progress",
+    "define": "Complete",
+    "design": "In progress",
     "develop": "Not started",
     "deliverableTiming": "Q3 FY25"
+  },
+  {
+    "name": "End user tile",
+    "type": "Component",
+    "status": "In progress",
+    "define": "Complete",
+    "design": "Complete",
+    "develop": "Not started",
+    "deliverableTiming": "TBD"
   },
   {
     "name": "Fieldset",
@@ -177,15 +249,15 @@
     "define": "Complete",
     "design": "Complete",
     "develop": "Complete",
-    "deliverableTiming": "FY24"
+    "deliverableTiming": "Q2 FY25"
   },
   {
-    "name": "File uploader",
+    "name": "FileUploader",
     "type": "Component",
-    "status": "In Labs",
-    "define": "In Labs",
-    "design": "In Labs",
-    "develop": "In Labs",
+    "status": "Released",
+    "define": "Complete",
+    "design": "Complete",
+    "develop": "Complete",
     "deliverableTiming": "Q2 FY25"
   },
   {
@@ -198,13 +270,22 @@
     "deliverableTiming": "FY24"
   },
   {
-    "name": "Form Layout (Advanced)",
+    "name": "GroupPicker",
+    "type": "Component",
+    "status": "In Labs",
+    "define": "Complete",
+    "design": "Complete",
+    "develop": "In progress",
+    "deliverableTiming": "Q2 FY25"
+  },
+  {
+    "name": "Inline text field",
     "type": "Component",
     "status": "In progress",
-    "define": "In progress",
-    "design": "-",
-    "develop": "-",
-    "deliverableTiming": "Q2 FY25"
+    "define": "Complete",
+    "design": "Complete",
+    "develop": "Complete",
+    "deliverableTiming": "Q3 FY25"
   },
   {
     "name": "Link",
@@ -218,11 +299,11 @@
   {
     "name": "Log Investigator \n(AI Pattern)",
     "type": "Pattern",
-    "status": "Not started",
+    "status": "In progress",
     "define": "Not started",
     "design": "Not started",
     "develop": "Not started",
-    "deliverableTiming": "Q3 FY25"
+    "deliverableTiming": "Q4 FY25"
   },
   {
     "name": "Menu button",
@@ -231,12 +312,12 @@
     "define": "Complete",
     "design": "Complete",
     "develop": "Complete",
-    "deliverableTiming": "FY24"
+    "deliverableTiming": "TBD"
   },
   {
     "name": "Multi-select dropdown",
     "type": "Component",
-    "status": "-",
+    "status": "Not started",
     "define": "-",
     "design": "-",
     "develop": "-",
@@ -252,22 +333,40 @@
     "deliverableTiming": "Q2 FY25"
   },
   {
-    "name": "Policy Recommender\n(AI Pattern)",
+    "name": "Page Header",
     "type": "Pattern",
-    "status": "Not started",
-    "define": "Not started",
-    "design": "Not started",
-    "develop": "Not started",
-    "deliverableTiming": "Q3 FY25"
+    "status": "In progress",
+    "define": "In progress",
+    "design": "In progress",
+    "develop": "-",
+    "deliverableTiming": "-"
   },
   {
-    "name": "Progress Bar",
-    "type": "Component",
-    "status": "Not started",
-    "define": "Not started",
+    "name": "Policy",
+    "type": "TBD",
+    "status": "In progress",
+    "define": "In progress",
+    "design": "-",
+    "develop": "-",
+    "deliverableTiming": "Q4 FY25"
+  },
+  {
+    "name": "Policy Recommender\n(AI Pattern)",
+    "type": "Pattern",
+    "status": "In progress",
+    "define": "In progress",
     "design": "Not started",
     "develop": "Not started",
-    "deliverableTiming": "Q3 FY25"
+    "deliverableTiming": "Q4 FY25"
+  },
+  {
+    "name": "Progress bar",
+    "type": "Component",
+    "status": "In progress",
+    "define": "Complete",
+    "design": "In progress",
+    "develop": "Not started",
+    "deliverableTiming": "Q4 FY25"
   },
   {
     "name": "Radio group",
@@ -285,7 +384,16 @@
     "define": "Not started",
     "design": "Not started",
     "develop": "Not started",
-    "deliverableTiming": "TBD"
+    "deliverableTiming": "Q4 FY25"
+  },
+  {
+    "name": "Search input",
+    "type": "Component",
+    "status": "In progress",
+    "define": "Complete",
+    "design": "Complete",
+    "develop": "Complete",
+    "deliverableTiming": "Q2 FY25"
   },
   {
     "name": "Select",
@@ -297,15 +405,6 @@
     "deliverableTiming": "FY24"
   },
   {
-    "name": "Show all",
-    "type": "Component",
-    "status": "Not started",
-    "define": "Not started",
-    "design": "Not started",
-    "develop": "Not started",
-    "deliverableTiming": "Q3 FY25"
-  },
-  {
     "name": "Status",
     "type": "Component",
     "status": "Released",
@@ -315,13 +414,22 @@
     "deliverableTiming": "FY24"
   },
   {
+    "name": "Surface ",
+    "type": "Component",
+    "status": "In progress",
+    "define": "In progress",
+    "design": "In progress",
+    "develop": "-",
+    "deliverableTiming": "Q4 FY25"
+  },
+  {
     "name": "Switch",
     "type": "Component",
-    "status": "In Labs",
-    "define": "In Labs",
-    "design": "In Labs",
-    "develop": "In Labs",
-    "deliverableTiming": "Q1 FY25"
+    "status": "Released",
+    "define": "Complete",
+    "design": "Complete",
+    "develop": "Complete",
+    "deliverableTiming": "Q2 FY25"
   },
   {
     "name": "Tabs",
@@ -342,6 +450,15 @@
     "deliverableTiming": "FY24"
   },
   {
+    "name": "Template: Admin ",
+    "type": "Page template",
+    "status": "In progress",
+    "define": "Complete",
+    "design": "Complete",
+    "develop": "In Labs",
+    "deliverableTiming": "Q3 FY25"
+  },
+  {
     "name": "Text field",
     "type": "Component",
     "status": "Released",
@@ -351,12 +468,12 @@
     "deliverableTiming": "FY24"
   },
   {
-    "name": "Time Picker\n(or field set)",
+    "name": "Tile (formerly Card)",
     "type": "Component",
-    "status": "Not started",
-    "define": "Not started",
-    "design": "Not started",
-    "develop": "Not started",
+    "status": "In Labs",
+    "define": "Complete",
+    "design": "Complete",
+    "develop": "Complete",
     "deliverableTiming": "Q2 FY25"
   },
   {
@@ -378,12 +495,12 @@
     "deliverableTiming": "FY24"
   },
   {
-    "name": "Wizard",
+    "name": "Wizard / Stepper",
     "type": "Pattern",
-    "status": "Not started",
-    "define": "Not started",
+    "status": "In progress",
+    "define": "In progress",
     "design": "Not started",
     "develop": "Not started",
-    "deliverableTiming": "Q3 FY25"
+    "deliverableTiming": "Q4 FY25"
   }
 ]

@@ -150,17 +150,13 @@ const NativeSelect = forwardRef(
     );
     const localInputRef = useRef<HTMLSelectElement>(null);
 
-    useImperativeHandle(
-      inputRef,
-      () => {
-        return {
-          focus: () => {
-            localInputRef.current?.focus();
-          },
-        };
-      },
-      [],
-    );
+    useImperativeHandle(inputRef, () => {
+      return {
+        focus: () => {
+          localInputRef.current?.focus();
+        },
+      };
+    }, []);
 
     const inputValues = useInputValues({
       defaultValue,

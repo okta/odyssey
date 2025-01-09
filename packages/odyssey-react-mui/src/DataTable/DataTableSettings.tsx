@@ -12,8 +12,7 @@
 
 import { Dispatch, SetStateAction, memo, useCallback, useMemo } from "react";
 import { Checkbox as MuiCheckbox } from "@mui/material";
-import { MenuButton } from "../MenuButton";
-import { MenuItem } from "../MenuItem";
+import { MenuButton, MenuItem } from "../Buttons";
 import { ListIcon, ShowIcon } from "../icons.generated";
 import { densityValues } from "./constants";
 import { DataTableProps } from "./DataTable";

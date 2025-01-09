@@ -19,13 +19,12 @@ import {
   type ButtonProps,
 } from "@okta/odyssey-react-mui";
 import { AddIcon } from "@okta/odyssey-react-mui/icons";
-import { expect } from "@storybook/jest";
-import { userEvent, waitFor, within } from "@storybook/testing-library";
 import type { Meta, StoryObj } from "@storybook/react";
+import { expect, fn, userEvent, waitFor, within } from "@storybook/test";
 
+import { axeRun } from "../../../axe-util";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import icons from "../../../../.storybook/components/iconUtils";
-import { axeRun } from "../../../axe-util";
 import type { PlaywrightProps } from "../storybookTypes";
 
 type playType = {
@@ -39,121 +38,72 @@ const storybookMeta: Meta<ButtonProps> = {
   component: Button,
   argTypes: {
     endIcon: {
-      control: {
-        type: "select",
-      },
+      control: { type: "select" },
       options: Object.keys(icons),
       mapping: icons,
       description: "An optional icon to display at the end of the button",
-      table: {
-        type: {
-          summary: "<Icon />",
-        },
-      },
+      table: { type: { summary: "<Icon />" } },
     },
     href: {
       control: "text",
       description: "Optional href to render the button as a link",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
+      table: { type: { summary: "string" } },
     },
     id: {
-      control: null,
       description: "An optional ID for the button",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
+      table: { type: { summary: "string" } },
     },
     isDisabled: {
       control: "boolean",
       description: "If `true`, the button is disabled",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
+      table: { type: { summary: "boolean" } },
     },
     isFullWidth: {
       control: "boolean",
       description:
         "If `true`, the button will take up the full width available",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
+      table: { type: { summary: "boolean" } },
     },
     label: {
       control: "text",
       description:
         "The button text. If blank, the button must include an icon.",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
+      table: { type: { summary: "string" } },
     },
     onClick: {
       action: true,
       description: "Callback fired when the button is clicked",
-      table: {
-        type: {
-          summary: "(() => void)",
-        },
-      },
+      table: { type: { summary: "(() => void)" } },
     },
     size: {
       options: buttonSizeValues,
       control: { type: "radio" },
       description: "The size of the button",
       table: {
-        type: {
-          summary: buttonSizeValues.join(" | "),
-        },
-        defaultValue: {
-          summary: "medium",
-        },
+        type: { summary: buttonSizeValues.join(" | ") },
+        defaultValue: { summary: "medium" },
       },
     },
     startIcon: {
-      control: {
-        type: "select",
-      },
+      control: { type: "select" },
       options: Object.keys(icons),
       mapping: icons,
       description: "An optional icon to display at the start of the button",
-      table: {
-        type: {
-          summary: "<Icon />",
-        },
-      },
+      table: { type: { summary: "<Icon />" } },
     },
     tooltipText: {
       control: "text",
       description:
         "If defined, the button will include a tooltip that contains the string.",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
+      table: { type: { summary: "string" } },
     },
     type: {
       options: buttonTypeValues,
       control: { type: "radio" },
       description: "The type of the HTML button element.",
       table: {
-        type: {
-          summary: buttonTypeValues.join(" | "),
-        },
-        defaultValue: {
-          summary: "button",
-        },
+        type: { summary: buttonTypeValues.join(" | ") },
+        defaultValue: { summary: "button" },
       },
     },
     variant: {
@@ -161,22 +111,15 @@ const storybookMeta: Meta<ButtonProps> = {
       control: { type: "radio" },
       description: "The color and style of the button",
       table: {
-        type: {
-          summary: buttonVariantValues.join(" | "),
-        },
-        defaultValue: {
-          summary: "secondary",
-        },
+        type: { summary: buttonVariantValues.join(" | ") },
+        defaultValue: { summary: "secondary" },
       },
-      type: {
-        required: true,
-        name: "other",
-        value: "radio",
-      },
+      type: { required: true, name: "other", value: "radio" },
     },
   },
   args: {
     label: "Add crew",
+    onClick: fn(),
     variant: "primary",
   },
   decorators: [MuiThemeDecorator],
@@ -199,13 +142,13 @@ const interactWithButton =
     if (args.label) {
       await step("hover and click", async () => {
         const canvas = within(canvasElement);
-        const button = canvas.getByText(args.label ?? "");
+        const button = canvas.getByRole("button", { name: args.label });
         userEvent.tab();
         await userEvent.click(button);
         expect(args.onClick).toHaveBeenCalledTimes(1);
         axeRun(actionName);
         if (!hoverState) {
-          waitFor(() => userEvent.tab());
+          await waitFor(() => userEvent.tab());
         }
       });
     }
@@ -301,6 +244,7 @@ export const ButtonFloating: StoryObj<ButtonProps> = {
     });
   },
 };
+
 export const ButtonFloatingAction: StoryObj<ButtonProps> = {
   name: "Floating Action",
   args: {
@@ -315,6 +259,7 @@ export const ButtonFloatingAction: StoryObj<ButtonProps> = {
     });
   },
 };
+
 export const ButtonFloatingDisabled: StoryObj<ButtonProps> = {
   name: "Floating, Disabled",
   args: {
@@ -323,6 +268,7 @@ export const ButtonFloatingDisabled: StoryObj<ButtonProps> = {
     variant: "floating",
   },
 };
+
 export const ButtonSecondaryAsLink: StoryObj<ButtonProps> = {
   name: "Button as a link",
   args: {
@@ -332,6 +278,7 @@ export const ButtonSecondaryAsLink: StoryObj<ButtonProps> = {
     onClick: undefined,
   },
 };
+
 export const ButtonSmall: StoryObj<ButtonProps> = {
   name: "Small",
   args: {
@@ -429,7 +376,7 @@ export const IconOnly: StoryObj<ButtonProps> = {
 
 export const KitchenSink: StoryObj<ButtonProps> = {
   name: "Kitchen sink",
-  render: ({}) => (
+  render: () => (
     <Box sx={{ display: "flex", flexWrap: "wrap", rowGap: 2 }}>
       <Button label="Primary" variant="primary" />
       <Button label="Secondary" variant="secondary" />

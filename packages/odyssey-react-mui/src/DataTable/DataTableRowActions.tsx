@@ -12,10 +12,8 @@
 
 import { MRT_Row, MRT_RowData } from "material-react-table";
 import { Fragment, ReactElement, memo, useCallback } from "react";
-import { Button } from "../Button";
-import { MenuItem } from "../MenuItem";
+import { Button, MenuButton, MenuButtonProps, MenuItem } from "../Buttons";
 import { Box as MuiBox } from "@mui/material";
-import { MenuButton, MenuButtonProps } from "../MenuButton";
 import {
   ArrowBottomIcon,
   ArrowDownIcon,
@@ -27,7 +25,7 @@ import { DataTableProps } from "./DataTable";
 import { Trans, useTranslation } from "react-i18next";
 
 export type DataTableRowActionsProps = {
-  row: MRT_Row<MRT_RowData>;
+  row: (MRT_Row<MRT_RowData> | MRT_RowData) & { id: string };
   rowIndex: number;
   rowActionButtons?: (
     row: MRT_RowData,
@@ -54,25 +52,30 @@ const DataTableRowActions = ({
   const { t } = useTranslation();
 
   const handleToFrontClick = useCallback(() => {
-    updateRowOrder && updateRowOrder({ rowId: row.id, newRowIndex: 0 });
+    if (updateRowOrder) {
+      updateRowOrder({ rowId: row.id, newRowIndex: 0 });
+    }
   }, [row.id, updateRowOrder]);
 
   const handleForwardClick = useCallback(() => {
-    updateRowOrder &&
+    if (updateRowOrder) {
       updateRowOrder({ rowId: row.id, newRowIndex: Math.max(0, rowIndex - 1) });
+    }
   }, [row.id, rowIndex, updateRowOrder]);
 
   const handleBackwardClick = useCallback(() => {
-    updateRowOrder &&
+    if (updateRowOrder) {
       updateRowOrder({ rowId: row.id, newRowIndex: rowIndex + 1 });
+    }
   }, [row.id, rowIndex, updateRowOrder]);
 
   const handleToBackClick = useCallback(() => {
-    updateRowOrder &&
+    if (updateRowOrder) {
       updateRowOrder({
         rowId: row.id,
         newRowIndex: totalRows ? totalRows - 1 : rowIndex,
       });
+    }
   }, [row.id, rowIndex, totalRows, updateRowOrder]);
 
   return (

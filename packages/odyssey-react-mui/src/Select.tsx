@@ -18,8 +18,8 @@ import {
   useRef,
   useState,
   useImperativeHandle,
-  MouseEvent,
 } from "react";
+import styled from "@emotion/styled";
 import {
   Box as MuiBox,
   Checkbox as MuiCheckbox,
@@ -28,9 +28,9 @@ import {
   ListSubheader,
   MenuItem as MuiMenuItem,
   Select as MuiSelect,
+  SelectProps as MuiSelectProps,
   SelectChangeEvent,
 } from "@mui/material";
-import { SelectProps as MuiSelectProps } from "@mui/material";
 
 import { Field } from "./Field";
 import {
@@ -45,13 +45,49 @@ import {
   useInputValues,
   getControlState,
 } from "./inputUtils";
-import { normalizedKey } from "./useNormalizedKey";
-import styled from "@emotion/styled";
-
 import {
   useOdysseyDesignTokens,
   DesignTokens,
 } from "./OdysseyDesignTokensContext";
+import { TestSelector } from "./test-selectors";
+import { normalizedKey } from "./useNormalizedKey";
+
+export const SelectTestSelector = {
+  accessibleText: {
+    errorMessage: "errorMessage",
+    hint: "description",
+    label: "label",
+  },
+  children: {
+    list: {
+      accessibleText: {
+        label: "label",
+      },
+      children: {
+        listItem: {
+          accessibleText: {
+            label: "label",
+          },
+          elementSelector: {
+            method: "ByRole",
+            options: {
+              label: "name",
+            },
+            role: "option",
+          },
+        },
+      },
+      isControlledElement: true,
+    },
+  },
+  elementSelector: {
+    method: "ByRole",
+    options: {
+      label: "name",
+    },
+    role: "combobox",
+  },
+} as const satisfies TestSelector;
 
 export type SelectOption = {
   text: string;
@@ -97,16 +133,20 @@ const NonInteractiveIcon = styled(CloseCircleFilledIcon, {
 
 const ChipsInnerContainer = styled(MuiBox, {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "isInteractive",
+    prop !== "odysseyDesignTokens" &&
+    prop !== "isInteractive" &&
+    prop !== "isReadOnly",
 })<{
   isInteractive?: boolean;
+  isReadOnly?: boolean;
   odysseyDesignTokens: DesignTokens;
 }>`
   display: flex;
   flex-wrap: wrap;
   gap: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing1};
   pointer-events: none;
-  opacity: ${({ isInteractive }) => (isInteractive ? 1 : 0)};
+  opacity: ${({ isInteractive, isReadOnly }) =>
+    isInteractive || isReadOnly ? 1 : 0};
   min-height: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing6};
 `;
 
@@ -168,6 +208,7 @@ export type SelectProps<
   | "isDisabled"
   | "isFullWidth"
   | "isOptional"
+  | "isReadOnly"
   | "name"
 > &
   Pick<HtmlProps, "ariaDescribedBy" | "testId" | "translate">;
@@ -210,6 +251,7 @@ const Select = <
   isFullWidth = false,
   isMultiSelect,
   isOptional = false,
+  isReadOnly = false,
   label,
   name: nameOverride,
   onBlur,
@@ -220,6 +262,8 @@ const Select = <
   translate,
   value,
 }: SelectProps<Value, HasMultipleChoices>) => {
+  const selectRef = useRef<HTMLInputElement | HTMLTextAreaElement | null>(null);
+
   const hasMultipleChoices = useMemo(
     () =>
       hasMultipleChoicesProp === undefined
@@ -227,6 +271,7 @@ const Select = <
         : hasMultipleChoicesProp,
     [hasMultipleChoicesProp, isMultiSelect],
   );
+
   const controlledStateRef = useRef(
     getControlState({
       controlledValue: value,
@@ -240,17 +285,13 @@ const Select = <
   const localInputRef = useRef<HTMLSelectElement>(null);
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
-  useImperativeHandle(
-    inputRef,
-    () => {
-      return {
-        focus: () => {
-          localInputRef.current?.focus();
-        },
-      };
-    },
-    [],
-  );
+  useImperativeHandle(inputRef, () => {
+    return {
+      focus: () => {
+        localInputRef.current?.focus();
+      },
+    };
+  }, []);
 
   useEffect(() => {
     if (controlledStateRef.current === CONTROLLED) {
@@ -266,44 +307,51 @@ const Select = <
 
   const onChange = useCallback<NonNullable<MuiSelectProps<Value>["onChange"]>>(
     (event, child) => {
-      const {
-        target: { value },
-      } = event;
-      if (controlledStateRef.current !== CONTROLLED) {
-        setInternalSelectedValues(
-          (typeof value === "string" && hasMultipleChoices
-            ? value.split(",")
-            : value) as Value,
-        );
+      if (isReadOnly) {
+        event.preventDefault();
+      } else {
+        const {
+          target: { value },
+        } = event;
+        if (controlledStateRef.current !== CONTROLLED) {
+          setInternalSelectedValues(
+            (typeof value === "string" && hasMultipleChoices
+              ? value.split(",")
+              : value) as Value,
+          );
+        }
+        onChangeProp?.(event, child);
       }
-      onChangeProp?.(event, child);
     },
-    [hasMultipleChoices, onChangeProp],
+    [hasMultipleChoices, onChangeProp, isReadOnly],
   );
-
   // Normalize the options array to accommodate the various
   // data types that might be passed
-  const normalizedOptions = useMemo(
-    () =>
-      options.map((option) => {
-        if (typeof option === "object") {
-          /**
-           * If the value of `option?.value is an empty string, we need to make sure that we
-           * set an empty string to `value` in the normalized option so that the select component
-           * can potentially set it as the selected one in the text input
-           */
-          const value =
-            option?.value === "" ? option.value : option.value || option.text;
-          return {
-            text: option.text,
-            value,
-            type: option.type === "heading" ? "heading" : "option",
-          };
-        }
-        return { text: option, value: option, type: "option" };
-      }),
-    [options],
-  );
+  const [normalizedOptions, normalizedOptionsMap] = useMemo(() => {
+    const normalizedOptions = options.map((option) => {
+      if (typeof option === "object") {
+        /**
+         * If the value of `option?.value is an empty string, we need to make sure that we
+         * set an empty string to `value` in the normalized option so that the select component
+         * can potentially set it as the selected one in the text input
+         */
+        const value =
+          option?.value === "" ? option.value : option.value || option.text;
+        return {
+          text: option.text,
+          value,
+          type: option.type === "heading" ? "heading" : "option",
+        };
+      }
+
+      return { text: option, value: option, type: "option" };
+    });
+
+    const normalizedOptionsMap = new Map(
+      normalizedOptions.map((option) => [option.value, option]),
+    );
+    return [normalizedOptions, normalizedOptionsMap];
+  }, [options]);
 
   const removeSelectedValue = useCallback(
     (selectedValue: string) => {
@@ -323,19 +371,25 @@ const Select = <
   );
 
   const Chips = useCallback(
-    ({ isInteractive }: { isInteractive: boolean }) => {
-      const stopPropagation = (event: MouseEvent<SVGSVGElement>) =>
+    ({
+      isInteractive,
+      isReadOnly,
+    }: {
+      isInteractive: boolean;
+      isReadOnly?: boolean;
+    }) => {
+      const stopPropagation = (event: React.MouseEvent<SVGSVGElement>) =>
         event.stopPropagation();
 
       const hasNonInteractiveIcon =
         !isInteractive &&
         controlledStateRef.current === CONTROLLED &&
         hasMultipleChoices;
-
       return (
         Array.isArray(internalSelectedValues) && (
           <ChipsInnerContainer
             isInteractive={isInteractive}
+            isReadOnly={isReadOnly}
             odysseyDesignTokens={odysseyDesignTokens}
           >
             {internalSelectedValues.map(
@@ -345,7 +399,7 @@ const Select = <
                     key={item}
                     label={
                       <>
-                        {item}
+                        {normalizedOptionsMap.get(item)?.text}
                         {hasNonInteractiveIcon && (
                           <NonInteractiveIcon
                             odysseyDesignTokens={odysseyDesignTokens}
@@ -381,6 +435,7 @@ const Select = <
       internalSelectedValues,
       odysseyDesignTokens,
       removeSelectedValue,
+      normalizedOptionsMap,
     ],
   );
 
@@ -401,6 +456,7 @@ const Select = <
 
         return (
           <MuiMenuItem
+            data-empty={!option.text}
             key={normalizedKey(option.text, index.toString())}
             value={option.value}
             selected={isSelected}
@@ -417,6 +473,7 @@ const Select = <
       }),
     [hasMultipleChoices, normalizedOptions, internalSelectedValues],
   );
+
   const renderValue = useCallback(
     (value: Value) => Array.isArray(value) && <Chips isInteractive={false} />,
     [Chips],
@@ -436,9 +493,25 @@ const Select = <
           aria-errormessage={errorMessageElementId}
           displayEmpty
           id={id}
-          inputProps={{ "data-se": testId }}
-          inputRef={localInputRef}
+          inputProps={{
+            "data-se": testId,
+            "aria-disabled": isDisabled || isReadOnly,
+            readOnly: isReadOnly,
+          }}
+          inputRef={(el: HTMLInputElement | HTMLTextAreaElement | null) => {
+            if (localInputRef.current !== el) {
+              (localInputRef as React.MutableRefObject<typeof el>).current = el;
+            }
+            selectRef.current = el;
+          }}
           labelId={labelElementId}
+          MenuProps={{
+            sx: {
+              ".MuiPaper-root": {
+                maxHeight: "50vh",
+              },
+            },
+          }}
           multiple={hasMultipleChoices}
           name={nameOverride ?? id}
           onBlur={onBlur}
@@ -454,7 +527,7 @@ const Select = <
             <ChipsPositioningContainer
               odysseyDesignTokens={odysseyDesignTokens}
             >
-              <Chips isInteractive={true} />
+              <Chips isInteractive={!isReadOnly} isReadOnly={isReadOnly} />
             </ChipsPositioningContainer>
           </>
         )}
@@ -464,6 +537,8 @@ const Select = <
       Chips,
       inputValues,
       hasMultipleChoices,
+      isDisabled,
+      isReadOnly,
       nameOverride,
       odysseyDesignTokens,
       onBlur,

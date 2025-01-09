@@ -34,6 +34,7 @@ export {
   Paper,
   /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
   ScopedCssBaseline,
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
   ThemeProvider,
 } from "@mui/material";
 
@@ -49,6 +50,7 @@ export type {
   MenuListProps,
   PaperProps,
   ScopedCssBaselineProps,
+  StackProps,
   ThemeOptions,
 } from "@mui/material";
 
@@ -62,40 +64,48 @@ export { badgeContentMaxValues } from "./Badge";
 export * from "./Banner";
 export * from "./Box";
 export * from "./Breadcrumbs";
-export * from "./Button";
-export * from "./Tile";
+export * from "./Buttons";
 export * from "./Callout";
+export * from "./Card";
 export * from "./Checkbox";
 export * from "./CheckboxGroup";
 export * from "./CircularProgress";
-export * from "./CssBaseline";
-export * from "./createShadowRootElement";
 export * from "./createUniqueId";
+export * from "./CssBaseline";
 export * from "./DataTable";
+export { DatePicker, type DatePickerProps } from "./DatePickers";
 export * from "./Dialog";
 export * from "./Drawer";
 export * from "./EmptyState";
-export * from "./Fieldset";
 export * from "./FieldComponentProps";
+export * from "./Fieldset";
+export {
+  FileUploader,
+  fileUploadTypes,
+  fileUploadVariants,
+} from "./FileUploader";
 export * from "./Form";
 export * from "./HintLink";
 export * from "./IconWithTooltip";
 export * from "./Link";
-export * from "./MenuButton";
-export * from "./MenuItem";
 export * from "./NativeSelect";
 export * from "./NullElement";
 export * from "./OdysseyCacheProvider";
 export * from "./OdysseyProvider";
 export * from "./OdysseyThemeProvider";
 export * from "./OdysseyTranslationProvider";
+export * from "./Pagination";
 export * from "./PasswordField";
 export * from "./Radio";
 export * from "./RadioGroup";
 export * from "./ScreenReaderText";
 export * from "./SearchField";
 export * from "./Select";
+export * from "./shadow-dom";
+export * from "./Stack";
 export * from "./Status";
+export * from "./Surface";
+export * from "./Switch";
 export * from "./Tabs";
 export * from "./Tag";
 export * from "./TagList";
@@ -103,8 +113,6 @@ export * from "./TextField";
 export * from "./theme";
 export * from "./Toast";
 export * from "./ToastStack";
-export * from "./labs/Switch";
 export * from "./Tooltip";
 export * from "./Typography";
 export * from "./useUniqueId";
-export * from "./Pagination";

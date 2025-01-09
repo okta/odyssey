@@ -10,16 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, StoryObj } from "@storybook/react";
-import { Tag, TagList, TagProps } from "@okta/odyssey-react-mui";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { Tag, TagList } from "@okta/odyssey-react-mui";
 import { GroupIcon } from "@okta/odyssey-react-mui/icons";
+import { Meta, StoryObj } from "@storybook/react";
+import { expect, fn, userEvent, within } from "@storybook/test";
+
+import { MuiThemeDecorator } from "../../../../.storybook/components";
 import icons from "../../../../.storybook/components/iconUtils";
-import { userEvent, within } from "@storybook/testing-library";
-import { expect } from "@storybook/jest";
 import { axeRun } from "../../../axe-util";
 
-const storybookMeta: Meta<TagProps> = {
+const meta = {
   title: "MUI Components/Tag",
   component: Tag,
   parameters: {
@@ -47,7 +47,7 @@ const storybookMeta: Meta<TagProps> = {
           summary: "boolean",
         },
         defaultValue: {
-          summary: false,
+          summary: "false",
         },
       },
     },
@@ -65,7 +65,7 @@ const storybookMeta: Meta<TagProps> = {
       },
     },
     onClick: {
-      control: "obj",
+      control: "object",
       action: true,
       description: "Callback fired when the tag is clicked",
       table: {
@@ -75,7 +75,7 @@ const storybookMeta: Meta<TagProps> = {
       },
     },
     onRemove: {
-      control: "obj",
+      control: "object",
       action: true,
       description:
         "Callback fired when the remove button of the tag is clicked",
@@ -85,50 +85,137 @@ const storybookMeta: Meta<TagProps> = {
         },
       },
     },
+    colorVariant: {
+      control: {
+        type: "select",
+      },
+      options: [
+        "default",
+        "info",
+        "accentOne",
+        "accentTwo",
+        "accentThree",
+        "accentFour",
+      ],
+      description: "The color of the tag",
+      table: {
+        type: {
+          summary: "string",
+        },
+        defaultValue: {
+          summary: "default",
+        },
+      },
+    },
+    size: {
+      control: {
+        type: "select",
+      },
+      options: ["default", "small"],
+      description: "The size of the tag",
+      table: {
+        type: {
+          summary: "string",
+        },
+        defaultValue: {
+          summary: "default",
+        },
+      },
+    },
   },
   args: {
     label: "Starship",
+    colorVariant: "default",
+    onClick: fn(),
+    size: "medium",
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
-};
+} satisfies Meta<typeof Tag>;
 
-export default storybookMeta;
+export default meta;
 
-export const Default: StoryObj<TagProps> = {
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
   args: {
     label: "Starship",
   },
 };
 
-export const List: StoryObj<TagProps> = {
+export const Info: Story = {
+  args: {
+    label: "Starship",
+    colorVariant: "info",
+  },
+};
+
+export const AccentOne: Story = {
+  args: {
+    label: "Starship",
+    colorVariant: "accentOne",
+  },
+};
+
+export const AccentTwo: Story = {
+  args: {
+    label: "Starship",
+    colorVariant: "accentTwo",
+  },
+};
+
+export const AccentThree: Story = {
+  args: {
+    label: "Starship",
+    colorVariant: "accentThree",
+  },
+};
+
+export const AccentFour: Story = {
+  args: {
+    label: "Starship",
+    colorVariant: "accentFour",
+  },
+};
+
+export const List: Story = {
   render: function C(args) {
     return (
       <TagList>
         <Tag label={args.label} />
-        <Tag label="Another tag" />
-        <Tag label="A third tag" />
+        <Tag label="Info tag" colorVariant="info" />
+        <Tag label="AccentOne tag" colorVariant="accentOne" />
+        <Tag label="AccentTwo tag" colorVariant="accentTwo" />
+        <Tag label="AccentThree tag" colorVariant="accentThree" />
+        <Tag label="AccentFour tag" colorVariant="accentFour" />
       </TagList>
     );
   },
   args: {
-    label: "Starship",
+    label: "Default tag",
   },
 };
 
-export const Icon: StoryObj<TagProps> = {
+export const Small: Story = {
+  args: {
+    label: "Starship",
+    size: "small",
+  },
+};
+
+export const Icon: Story = {
   args: {
     label: "Crew",
     icon: <GroupIcon />,
   },
 };
 
-export const Clickable: StoryObj<TagProps> = {
+export const Clickable: Story = {
   args: {
     label: "Starship",
   },
   play: async ({ args, canvasElement, step }) => {
-    await step("remove the tag on click", async () => {
+    await step("click the tag", async () => {
       const canvas = within(canvasElement);
       const tag = canvas.getByText(args.label);
       await userEvent.click(tag);
@@ -138,7 +225,7 @@ export const Clickable: StoryObj<TagProps> = {
   },
 };
 
-export const Removable: StoryObj<TagProps> = {
+export const Removable: Story = {
   args: {
     label: "Starship",
   },
@@ -156,7 +243,7 @@ export const Removable: StoryObj<TagProps> = {
   },
 };
 
-export const Disabled: StoryObj<TagProps> = {
+export const Disabled: Story = {
   args: {
     label: "Starship",
     isDisabled: true,

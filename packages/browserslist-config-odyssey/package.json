@@ -1,6 +1,6 @@
 {
   "name": "@okta/browserslist-config-odyssey",
-  "version": "1.18.0",
+  "version": "1.30.0",
   "description": "Browserslist config for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -13,12 +13,13 @@
     "directory": "packages/browserslist-config-odyssey"
   },
   "scripts": {
-    "build": "tsc",
-    "prepack": "yarn exec prepack"
+    "build:clean": "rimraf dist",
+    "build:source": "tsc",
+    "build": "yarn build:clean && yarn build:source"
   },
   "devDependencies": {
-    "@okta/odyssey-lifecycle": "workspace:*",
     "@okta/odyssey-typescript": "workspace:*",
-    "typescript": "^5.4.5"
+    "rimraf": "^5.0.1",
+    "typescript": "^5.6.3"
   }
 }

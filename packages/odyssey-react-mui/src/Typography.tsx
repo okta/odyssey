@@ -34,9 +34,10 @@ export type TypographyVariantValue =
   | "h5"
   | "h6"
   | "body"
+  | "legend"
+  | "overline"
   | "subordinate"
-  | "support"
-  | "legend";
+  | "support";
 
 export const typographyVariantMapping: Record<
   TypographyVariantValue,
@@ -49,9 +50,10 @@ export const typographyVariantMapping: Record<
   h5: "h5",
   h6: "h6",
   body: "body1",
+  legend: "legend",
+  overline: "overline",
   subordinate: "subtitle1",
   support: "subtitle2",
-  legend: "legend",
 } as const;
 
 export const typographyColorValues = [
@@ -85,10 +87,16 @@ export type TypographyProps = {
   variant?: keyof typeof typographyVariantMapping;
 } & Pick<
   HtmlProps,
-  "ariaDescribedBy" | "ariaLabel" | "ariaLabelledBy" | "testId" | "translate"
+  | "ariaCurrent"
+  | "ariaDescribedBy"
+  | "ariaLabel"
+  | "ariaLabelledBy"
+  | "testId"
+  | "translate"
 >;
 
 const Typography = ({
+  ariaCurrent,
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -102,9 +110,12 @@ const Typography = ({
 }: TypographyProps) => {
   const component = useMemo(() => {
     if (!componentProp) {
-      if (variant === "body") {
-        return "p";
-      } else if (variant === "subordinate" || variant === "support") {
+      if (
+        variant === "body" ||
+        variant === "subordinate" ||
+        variant === "support" ||
+        variant === "overline"
+      ) {
         return "p";
       } else {
         return variant;
@@ -114,20 +125,17 @@ const Typography = ({
   }, [componentProp, variant]);
 
   const localTypographyRef = useRef<HTMLElement>(null);
-  useImperativeHandle(
-    typographyRef,
-    () => {
-      return {
-        focus: () => {
-          localTypographyRef.current?.focus();
-        },
-      };
-    },
-    [],
-  );
+  useImperativeHandle(typographyRef, () => {
+    return {
+      focus: () => {
+        localTypographyRef.current?.focus();
+      },
+    };
+  }, []);
 
   return (
     <MuiTypography
+      aria-current={ariaCurrent}
       aria-describedby={ariaDescribedBy}
       aria-label={ariaLabel}
       aria-labelledby={ariaLabelledBy}
@@ -147,6 +155,7 @@ const MemoizedTypography = memo(Typography);
 MemoizedTypography.displayName = "Typography";
 
 const Heading1 = ({
+  ariaCurrent,
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -157,6 +166,7 @@ const Heading1 = ({
   translate,
 }: TypographyProps) => (
   <Typography
+    ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
@@ -173,6 +183,7 @@ const MemoizedHeading1 = memo(Heading1);
 MemoizedHeading1.displayName = "Heading1";
 
 const Heading2 = ({
+  ariaCurrent,
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -183,6 +194,7 @@ const Heading2 = ({
   translate,
 }: TypographyProps) => (
   <Typography
+    ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
@@ -199,6 +211,7 @@ const MemoizedHeading2 = memo(Heading2);
 MemoizedHeading2.displayName = "Heading2";
 
 const Heading3 = ({
+  ariaCurrent,
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -209,6 +222,7 @@ const Heading3 = ({
   translate,
 }: TypographyProps) => (
   <Typography
+    ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
@@ -225,6 +239,7 @@ const MemoizedHeading3 = memo(Heading3);
 MemoizedHeading3.displayName = "Heading3";
 
 const Heading4 = ({
+  ariaCurrent,
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -235,6 +250,7 @@ const Heading4 = ({
   translate,
 }: TypographyProps) => (
   <Typography
+    ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
@@ -251,6 +267,7 @@ const MemoizedHeading4 = memo(Heading4);
 MemoizedHeading4.displayName = "Heading4";
 
 const Heading5 = ({
+  ariaCurrent,
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -261,6 +278,7 @@ const Heading5 = ({
   translate,
 }: TypographyProps) => (
   <Typography
+    ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
@@ -277,6 +295,7 @@ const MemoizedHeading5 = memo(Heading5);
 MemoizedHeading5.displayName = "Heading5";
 
 const Heading6 = ({
+  ariaCurrent,
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -287,6 +306,7 @@ const Heading6 = ({
   translate,
 }: TypographyProps) => (
   <Typography
+    ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
@@ -303,6 +323,7 @@ const MemoizedHeading6 = memo(Heading6);
 MemoizedHeading6.displayName = "Heading6";
 
 const Paragraph = ({
+  ariaCurrent,
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -313,6 +334,7 @@ const Paragraph = ({
   translate,
 }: TypographyProps) => (
   <Typography
+    ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
@@ -329,6 +351,7 @@ const MemoizedParagraph = memo(Paragraph);
 MemoizedParagraph.displayName = "Paragraph";
 
 const Subordinate = ({
+  ariaCurrent,
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -339,6 +362,7 @@ const Subordinate = ({
   translate,
 }: TypographyProps) => (
   <Typography
+    ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
@@ -355,6 +379,7 @@ const MemoizedSubordinate = memo(Subordinate);
 MemoizedSubordinate.displayName = "Subordinate";
 
 const Support = ({
+  ariaCurrent,
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -365,6 +390,7 @@ const Support = ({
   translate,
 }: TypographyProps) => (
   <Typography
+    ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
@@ -406,6 +432,32 @@ const Legend = ({
 const MemoizedLegend = memo(Legend);
 MemoizedLegend.displayName = "Legend";
 
+const Overline = ({
+  ariaDescribedBy,
+  ariaLabel,
+  ariaLabelledBy,
+  children,
+  color,
+  component,
+  testId,
+  translate,
+}: TypographyProps) => (
+  <Typography
+    ariaDescribedBy={ariaDescribedBy}
+    ariaLabel={ariaLabel}
+    ariaLabelledBy={ariaLabelledBy}
+    children={children}
+    color={color}
+    component={component}
+    testId={testId}
+    translate={translate}
+    variant="overline"
+  />
+);
+
+const MemoizedOverline = memo(Overline);
+MemoizedOverline.displayName = "Overline";
+
 export {
   MemoizedTypography as Typography,
   MemoizedHeading1 as Heading1,
@@ -415,6 +467,7 @@ export {
   MemoizedHeading5 as Heading5,
   MemoizedHeading6 as Heading6,
   MemoizedLegend as Legend,
+  MemoizedOverline as Overline,
   MemoizedParagraph as Paragraph,
   MemoizedSubordinate as Subordinate,
   MemoizedSupport as Support,

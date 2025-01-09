@@ -10,16 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { useMemo } from "react";
 import {
+  DataTableColumn,
   DataTableRowData,
   Status,
   statusSeverityValues,
   Tooltip,
 } from "@okta/odyssey-react-mui";
-import { DataTableColumn } from "@okta/odyssey-react-mui";
 
 import rawData from "./roadmap.json";
-export const data: OdysseyComponent[] = rawData as OdysseyComponent[];
 
 export type OdysseyComponent = {
   name: string;
@@ -31,86 +31,109 @@ export type OdysseyComponent = {
   deliverableTiming: string;
 };
 
-export const columns: DataTableColumn<DataTableRowData>[] = [
-  {
-    accessorKey: "name",
-    header: "Name",
-    enableHiding: false,
-    size: 325,
-  },
-  {
-    accessorKey: "type",
-    header: "Type",
-    enableHiding: true,
-    size: 200,
-  },
-  {
-    accessorKey: "status",
-    header: "Status",
-    size: 200,
-    Cell: ({ cell, row }) => {
-      const statusValue = cell.getValue<string>();
-      const defineValue = row.original.define;
-      const designValue = row.original.design;
-      const developValue = row.original.develop;
-      const severityMap = new Map<
-        string,
-        (typeof statusSeverityValues)[number]
-      >([
-        ["Released", "success"],
-        ["In Labs", "warning"],
-        ["In progress", "default"],
-        ["Not started", "error"],
-      ]);
-      const severity = severityMap.get(statusValue) || "default";
+export const data: OdysseyComponent[] = rawData as OdysseyComponent[];
 
-      // First priority: Check if the define stage is "In Progress"
-      if (defineValue === "In Progress") {
-        // Return a Tooltip specifically for this condition and do nothing else
-        return (
-          <Tooltip
-            ariaType="label"
-            placement="top"
-            text="Planning and research in progress"
-          >
-            <Status
-              label="Planning and research in progress"
-              severity={severity}
-            />
-          </Tooltip>
-        );
-      }
+const severityMap = new Map<string, (typeof statusSeverityValues)[number]>([
+  ["Released", "success"],
+  ["In Labs", "warning"],
+  ["In progress", "default"],
+  ["Not started", "error"],
+]);
 
-      // If defineValue is not "In Progress", then proceed with this logic:
-      let tooltipText = "";
-      if (defineValue === "In progress") {
-        tooltipText += "Project definition in progress";
-      }
-      if (["Complete", "In progress"].includes(designValue)) {
-        tooltipText += "Design: " + designValue + " ";
-      }
-      if (["Complete", "In progress"].includes(developValue)) {
-        tooltipText += "Develop: " + developValue;
-      }
+const getTooltipText = (
+  defineValue: string,
+  designValue: string,
+  developValue: string,
+): string => {
+  let text = "";
+  if (defineValue === "In progress") {
+    text += "Project definition in progress";
+  }
+  if (["Complete", "In progress"].includes(designValue)) {
+    text += (text ? " " : "") + "Design: " + designValue;
+  }
+  if (["Complete", "In progress"].includes(developValue)) {
+    text += (text ? " " : "") + "Develop: " + developValue;
+  }
+  return text.trim();
+};
 
-      // Only show the tooltip if there's relevant information to display
-      if (tooltipText && statusValue !== "Released") {
-        return (
-          <Tooltip ariaType="label" placement="top" text={tooltipText.trim()}>
-            <Status label={statusValue} severity={severity} />
-          </Tooltip>
-        );
-      }
+type CellProps = {
+  cell: { getValue: () => string };
+  row: { original: OdysseyComponent };
+};
 
-      // If there is no relevant tooltip text, just show the status without any tooltip
-      return <Status label={statusValue} severity={severity} />;
-    },
-  },
+const StatusCell: React.FC<CellProps> = ({ cell, row }) => {
+  const statusValue = cell.getValue();
+  const {
+    define: defineValue,
+    design: designValue,
+    develop: developValue,
+  } = row.original;
 
-  {
-    accessorKey: "deliverableTiming",
-    header: "Deliverable timing",
-    enableHiding: false,
-    size: 200,
-  },
-];
+  const severity = useMemo(
+    () => severityMap.get(statusValue) || "default",
+    [statusValue],
+  );
+  const tooltipText = useMemo(
+    () => getTooltipText(defineValue, designValue, developValue),
+    [defineValue, designValue, developValue],
+  );
+
+  if (defineValue === "In Progress") {
+    return (
+      <Tooltip
+        ariaType="label"
+        placement="top"
+        text="Planning and research in progress"
+      >
+        <Status label="Planning and research in progress" severity={severity} />
+      </Tooltip>
+    );
+  }
+
+  if (tooltipText && statusValue !== "Released") {
+    return (
+      <Tooltip ariaType="label" placement="top" text={tooltipText}>
+        <Status label={statusValue} severity={severity} />
+      </Tooltip>
+    );
+  }
+
+  return <Status label={statusValue} severity={severity} />;
+};
+
+export const useColumns = (): DataTableColumn<DataTableRowData>[] => {
+  return useMemo(
+    () =>
+      [
+        {
+          accessorKey: "name",
+          header: "Name",
+          enableHiding: false,
+          size: 280,
+        },
+        {
+          accessorKey: "type",
+          header: "Type",
+          enableHiding: true,
+          size: 120,
+        },
+        {
+          accessorKey: "status",
+          header: "Status",
+          size: 115,
+          Cell: ({ cell, row }: CellProps) => (
+            <StatusCell cell={cell} row={row} />
+          ),
+        },
+        {
+          accessorKey: "deliverableTiming",
+          header: "Deliverable timing",
+          enableHiding: false,
+          size: 155,
+        },
+      ] as DataTableColumn<DataTableRowData>[],
+    [],
+  );
+};

@@ -37,14 +37,15 @@ import {
   KeyboardEvent,
 } from "react";
 import {
-  ArrowTopIcon,
   ArrowBottomIcon,
   ArrowDownIcon,
+  ArrowTopIcon,
+  ArrowUnsortedIcon,
   ArrowUpIcon,
   DragIndicatorIcon,
   ListIcon,
-  ShowIcon,
   MoreIcon,
+  ShowIcon,
 } from "../icons.generated";
 import { Checkbox as MuiCheckbox } from "@mui/material";
 import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext";
@@ -53,10 +54,9 @@ import {
   paginationTypeValues,
 } from "./DataTablePagination";
 import { DataFilter, DataFilters } from "./DataFilters";
-import { Button } from "../Button";
+import { Button } from "../Buttons";
 import { Box } from "../Box";
 import { MenuButton, MenuItem } from "..";
-import { ArrowUnsortedIcon } from "../icons.generated";
 import { useTranslation } from "react-i18next";
 
 export const densityValues = ["comfortable", "spacious", "compact"] as const;
@@ -69,7 +69,7 @@ export type {
 
 // The shape of the table columns,
 // with props named to match their MRT_ColumnDef counterparts
-export type DataTableColumn = {
+export type DataTableColumn<TData extends MRT_RowData> = {
   /**
    * The unique ID of the column
    */
@@ -82,12 +82,12 @@ export type DataTableColumn = {
    * Customize the way each cell in the column is
    * displayed via a custom React component.
    */
-  Cell?: MRT_ColumnDef<MRT_RowData>["Cell"];
+  Cell?: MRT_ColumnDef<TData>["Cell"];
   /**
    * The UI control that will be used to filter the column.
    * Defaults to a standard text input.
    */
-  filterVariant?: MRT_ColumnDef<MRT_RowData>["filterVariant"];
+  filterVariant?: MRT_ColumnDef<TData>["filterVariant"];
   /**
    * If the filter control has preset options (such as a select or multi-select),
    * these are the options provided.
@@ -127,16 +127,16 @@ export type DataTableColumn = {
   enableHiding?: boolean;
 };
 
-export type DataTableProps = {
+export type DataTableProps<TData extends MRT_RowData> = {
   /**
    * The columns that make up the table
    */
-  columns: DataTableColumn[];
+  columns: DataTableColumn<TData>[];
   /**
    * The data that goes into the table, which will be displayed
    * as the table rows
    */
-  data: MRT_TableOptions<MRT_RowData>["data"];
+  data: MRT_TableOptions<TData>["data"];
   /**
    * The total number of rows in the table. Optional, because it's sometimes impossible
    * to calculate. Used in table pagination to know when to disable the "next"/"more" button.
@@ -145,7 +145,7 @@ export type DataTableProps = {
   /**
    * The function to get the ID of a row
    */
-  getRowId?: MRT_TableOptions<MRT_RowData>["getRowId"];
+  getRowId?: MRT_TableOptions<TData>["getRowId"];
   /**
    * The initial density of the table. This is available even if the table density
    * isn't changeable.
@@ -219,7 +219,9 @@ export type DataTableProps = {
     search?: string;
     filters?: DataFilter[];
     sort?: MRT_SortingState;
-  }) => MRT_TableOptions<MRT_RowData>["data"];
+  }) =>
+    | MRT_TableOptions<TData>["data"]
+    | Promise<MRT_TableOptions<TData>["data"]>;
   /**
    * Callback that fires when the user reorders rows within the table. Can be used
    * to propogate order change to the backend.
@@ -248,24 +250,24 @@ export type DataTableProps = {
    * Action buttons to display in each row
    */
   rowActionButtons?: (
-    row: MRT_RowData,
+    row: TData,
   ) => ReactElement<typeof Button | typeof Fragment>;
   /**
    * Menu items to include in the optional actions menu on each row.
    */
   rowActionMenuItems?: (
-    row: MRT_RowData,
+    row: TData,
   ) => ReactElement<typeof MenuItem | typeof Fragment>;
 };
 
-type TableType = MRT_TableInstance<MRT_RowData>;
+type TableType<TData extends MRT_RowData> = MRT_TableInstance<TData>;
 
-const reorderDataRowsLocally = ({
+const reorderDataRowsLocally = <TData extends MRT_RowData>({
   currentData,
   rowId,
   newIndex,
 }: {
-  currentData: MRT_TableOptions<MRT_RowData>["data"];
+  currentData: MRT_TableOptions<TData>["data"];
   rowId: string;
   newIndex: number;
 }) => {
@@ -284,7 +286,7 @@ const reorderDataRowsLocally = ({
   return updatedData;
 };
 
-const DataTable = ({
+const DataTable = <TData extends MRT_RowData>({
   columns,
   data: dataProp,
   getRowId,
@@ -309,13 +311,12 @@ const DataTable = ({
   hasRowSelection,
   hasSearch,
   hasSorting,
-}: DataTableProps) => {
+}: DataTableProps<TData>) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
-  const [draggingRow, setDraggingRow] = useState<MRT_Row<MRT_RowData> | null>();
+  const [draggingRow, setDraggingRow] = useState<MRT_Row<TData> | null>();
   const [showSkeletons, setShowSkeletons] = useState<boolean>(true);
-  const [data, setData] =
-    useState<MRT_TableOptions<MRT_RowData>["data"]>(dataProp);
+  const [data, setData] = useState<MRT_TableOptions<TData>["data"]>(dataProp);
   const [page, setPage] = useState<number>(pageProp);
   const [resultsPerPage, setResultsPerPage] =
     useState<number>(resultsPerPageProp);
@@ -325,7 +326,7 @@ const DataTable = ({
 
   const initialColumnVisibility = useMemo(() => {
     return columns.reduce((acc, column) => {
-      acc[column.accessorKey as string] = true;
+      acc[column.accessorKey] = true;
       return acc;
     }, {} as MRT_VisibilityState);
   }, [columns]);
@@ -348,16 +349,19 @@ const DataTable = ({
   const refreshData = useCallback(async () => {
     setShowSkeletons(true);
     try {
-      const newData = await fetchDataFn({
+      const newData = fetchDataFn({
         page: page,
         resultsPerPage: resultsPerPage,
         sort: sorting,
         search: globalFilter,
         filters: filters,
       });
-      setData(newData);
+
+      setData(newData instanceof Promise ? await newData : newData);
+
       setShowSkeletons(false);
     } catch (error) {
+      console.error(error);
       setShowSkeletons(false);
     }
   }, [page, resultsPerPage, sorting, globalFilter, filters, fetchDataFn]);
@@ -428,24 +432,31 @@ const DataTable = ({
   const rowVirtualizerInstanceRef =
     useRef<MRT_RowVirtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
 
-  const setHoveredRow = (table: TableType, id: MRT_RowData["id"]) => {
+  const setHoveredRow = useCallback<
+    (table: TableType<TData>, id: TData["id"]) => void
+  >((table, id) => {
     if (id) {
-      const nextRow: MRT_RowData = table.getRow(id);
+      const nextRow = table.getRow(id) as MRT_Row<TData>;
 
       if (nextRow) {
         table.setHoveredRow(nextRow);
       }
     }
-  };
+  }, []);
 
-  const resetDraggingAndHoveredRow = (table: TableType) => {
-    setDraggingRow(null);
-    table.setHoveredRow(null);
-  };
+  const resetDraggingAndHoveredRow = useCallback<
+    (table: TableType<TData>) => void
+  >(
+    (table) => {
+      setDraggingRow(null);
+      table.setHoveredRow(null);
+    },
+    [setDraggingRow],
+  );
 
   type HandleDragHandleKeyDownArgs = {
-    table: TableType;
-    row: MRT_Row<MRT_RowData>;
+    table: TableType<TData>;
+    row: MRT_Row<TData>;
     event: KeyboardEvent<HTMLButtonElement>;
   };
 
@@ -498,12 +509,14 @@ const DataTable = ({
 
           if (isArrowDown || isArrowUp) {
             const nextIndex = isArrowDown ? index + 1 : index - 1;
-            setHoveredRow(table, data[nextIndex]?.id);
+            // This is a legacy file. In general, we shouldn't have `as` here. Newer versions will have this fixed. --Kevin Ghadyani
+            setHoveredRow(table, data[nextIndex]?.id as TData["id"]);
           }
         } else {
           if (isArrowDown || isArrowUp) {
             const nextIndex = isArrowDown ? row.index + 1 : row.index - 1;
-            setHoveredRow(table, data[nextIndex]?.id);
+            // This is a legacy file. In general, we shouldn't have `as` here. Newer versions will have this fixed. --Kevin Ghadyani
+            setHoveredRow(table, data[nextIndex]?.id as TData["id"]);
           }
         }
       } else {
@@ -515,23 +528,26 @@ const DataTable = ({
     [
       data,
       draggingRow,
-      odysseyDesignTokens,
+      odysseyDesignTokens.TransitionDurationMainAsNumber,
       page,
+      resetDraggingAndHoveredRow,
       resultsPerPage,
+      setHoveredRow,
       updateRowOrder,
     ],
   );
 
   const handleDragHandleOnDragEnd = useCallback(
-    (table: TableType) => {
+    (table: TableType<TData>) => {
       const cols = table.getAllColumns();
       cols[0].toggleVisibility();
 
       const { draggingRow, hoveredRow } = table.getState();
+
       if (draggingRow) {
         updateRowOrder({
+          newIndex: (hoveredRow as TData).index as number,
           rowId: draggingRow.id,
-          newIndex: (hoveredRow as MRT_RowData).index,
         });
       }
 
@@ -541,7 +557,7 @@ const DataTable = ({
   );
 
   const handleDragHandleOnDragCapture = useCallback(
-    (table: TableType) => {
+    (table: TableType<TData>) => {
       if (!draggingRow && table.getState().draggingRow?.id) {
         setDraggingRow(table.getState().draggingRow);
       }
@@ -683,7 +699,7 @@ const DataTable = ({
 
       return (
         <Box sx={{ display: "flex" }}>
-          {rowActionButtons?.(row)}
+          {rowActionButtons?.(row.original)}
           {(rowActionMenuItems || hasRowReordering) && (
             <MenuButton
               endIcon={<MoreIcon />}
@@ -694,7 +710,7 @@ const DataTable = ({
             >
               {rowActionMenuItems && (
                 <>
-                  {rowActionMenuItems(row)}
+                  {rowActionMenuItems(row.original)}
                   <hr />
                 </>
               )}
@@ -785,14 +801,10 @@ const DataTable = ({
                 .map((column) => (
                   <MenuItem
                     key={column.accessorKey}
-                    onClick={() =>
-                      handleColumnVisibility(column.accessorKey as string)
-                    }
+                    onClick={() => handleColumnVisibility(column.accessorKey)}
                   >
                     <MuiCheckbox
-                      checked={
-                        columnVisibility[column.accessorKey as string] !== false
-                      }
+                      checked={columnVisibility[column.accessorKey] !== false}
                     />
                     {column.header}
                   </MenuItem>
@@ -826,7 +838,7 @@ const DataTable = ({
                 .filter((column) => column.enableColumnFilter !== false)
                 .map((column) => {
                   return {
-                    id: column.accessorKey as string,
+                    id: column.accessorKey,
                     label: column.header,
                     variant: column.filterVariant ?? "text",
                     options: column.filterSelectOptions,

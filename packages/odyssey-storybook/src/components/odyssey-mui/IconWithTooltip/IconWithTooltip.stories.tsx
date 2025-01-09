@@ -11,7 +11,7 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
-import { userEvent, within } from "@storybook/testing-library";
+import { userEvent, within } from "@storybook/test";
 import { IconWithTooltip, IconWithTooltipProps } from "@okta/odyssey-react-mui";
 import { GroupIcon } from "@okta/odyssey-react-mui/icons";
 
@@ -20,7 +20,7 @@ import { axeRun } from "../../../axe-util";
 import type { PlaywrightProps } from "../storybookTypes";
 
 const storybookMeta: Meta<IconWithTooltipProps> = {
-  title: "MUI Components/IconWIthTooltip",
+  title: "MUI Components/IconWithTooltip",
   component: IconWithTooltip,
   argTypes: {
     IconComponent: {

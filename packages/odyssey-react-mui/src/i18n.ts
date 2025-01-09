@@ -21,6 +21,7 @@ import { translation as en } from "./properties/ts/odyssey-react-mui";
 import { translation as es } from "./properties/ts/odyssey-react-mui_es";
 import { translation as fi } from "./properties/ts/odyssey-react-mui_fi";
 import { translation as fr } from "./properties/ts/odyssey-react-mui_fr";
+import { translation as ht } from "./properties/ts/odyssey-react-mui_ht";
 import { translation as hu } from "./properties/ts/odyssey-react-mui_hu";
 import { translation as id } from "./properties/ts/odyssey-react-mui_id";
 import { translation as it } from "./properties/ts/odyssey-react-mui_it";
@@ -44,11 +45,13 @@ import { translation as zhCN } from "./properties/ts/odyssey-react-mui_zh_CN";
 import { translation as znTW } from "./properties/ts/odyssey-react-mui_zh_TW";
 
 export const defaultLNG = "en";
-export const defaultNS = "translations";
+export const defaultNS = "odyssey";
+export const keySeparator = false;
 
 // Note: This is type "string" to allow translation overrides from other languages
 export type I18nResources = Record<string, Partial<typeof en>>;
-export const resources: I18nResources = {
+
+export const resources = {
   cs,
   da,
   de,
@@ -57,6 +60,7 @@ export const resources: I18nResources = {
   es,
   fi,
   fr,
+  ht,
   hu,
   id,
   it,
@@ -78,27 +82,29 @@ export const resources: I18nResources = {
   vi,
   zh_CN: zhCN,
   zh_TW: znTW,
-};
+} as const satisfies Record<string, Partial<typeof en>>;
 
+// eslint-disable-next-line import/no-named-as-default-member
 i18n.use(initReactI18next).init({
   defaultNS,
   ns: [defaultNS],
   fallbackLng: defaultLNG,
   load: "currentOnly",
-  keySeparator: false,
+  keySeparator,
   interpolation: {
     escapeValue: false, // react already safe from xss
     skipOnVariables: false, // to handle translations that use nesting
   },
   react: {
-    useSuspense: false,
     bindI18nStore: "added",
+    useSuspense: false,
   },
-});
+} as const);
 
 Object.entries(resources).forEach(([locale, property]) => {
   i18n.addResourceBundle(locale, defaultNS, property);
 });
 
+// eslint-disable-next-line import/no-named-as-default-member
 export const odysseyTranslate = i18n.t.bind(i18n);
 export { i18n };

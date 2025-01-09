@@ -19,6 +19,7 @@ import {
   FormControlLabelProps as MuiFormControlLabelProps,
   FormHelperText,
 } from "@mui/material";
+import styled from "@emotion/styled";
 
 import { CheckedFieldProps } from "./FormCheckedProps";
 import type { HtmlProps } from "./HtmlProps";
@@ -28,9 +29,27 @@ import {
   getControlState,
 } from "./inputUtils";
 import { FieldComponentProps } from "./FieldComponentProps";
+import {
+  useOdysseyDesignTokens,
+  DesignTokens,
+} from "./OdysseyDesignTokensContext";
 import { Typography } from "./Typography";
+import { useUniqueId } from "./useUniqueId";
 
 export const checkboxValidityValues = ["valid", "invalid", "inherit"] as const;
+
+const HintContainerWithInlineStartSpacing = styled.div<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  paddingInlineStart: `calc(${odysseyDesignTokens.TypographyLineHeightUi}em + ${odysseyDesignTokens.Spacing2})`,
+  marginBlockEnd: odysseyDesignTokens.Spacing2,
+
+  // MUI applies the '.Mui-error' class to this hint text when the checkbox is invalid which turns the copy red
+  // We want to keep the hint text gray in the error state
+  ".Mui-error": {
+    color: odysseyDesignTokens.TypographyColorSubordinate,
+  },
+}));
 
 export type CheckboxProps = {
   /**
@@ -61,7 +80,10 @@ export type CheckboxProps = {
    * Callback fired when the blur event happens. Provides event value.
    */
   onBlur?: MuiFormControlLabelProps["onBlur"];
-} & Pick<FieldComponentProps, "hint" | "id" | "isDisabled" | "name"> &
+} & Pick<
+  FieldComponentProps,
+  "hint" | "id" | "isDisabled" | "isReadOnly" | "name"
+> &
   CheckedFieldProps<MuiCheckboxProps> &
   Pick<HtmlProps, "ariaLabel" | "ariaLabelledBy" | "testId" | "translate">;
 
@@ -74,6 +96,7 @@ const Checkbox = ({
   isDefaultChecked,
   isDisabled,
   isIndeterminate,
+  isReadOnly = false,
   isRequired,
   label: labelProp,
   hint,
@@ -86,6 +109,10 @@ const Checkbox = ({
   value,
 }: CheckboxProps) => {
   const { t } = useTranslation();
+  const odysseyDesignTokens = useOdysseyDesignTokens();
+  const id = useUniqueId(idOverride);
+  const hintId = hint ? `${id}-hint` : undefined;
+
   const controlledStateRef = useRef(
     getControlState({
       controlledValue: isChecked,
@@ -102,13 +129,11 @@ const Checkbox = ({
   const localInputRef = useRef<HTMLInputElement>(null);
   useImperativeHandle(
     inputRef,
-    () => {
-      return {
-        focus: () => {
-          localInputRef.current?.focus();
-        },
-      };
-    },
+    () => ({
+      focus: () => {
+        localInputRef.current?.focus();
+      },
+    }),
     [],
   );
 
@@ -124,16 +149,25 @@ const Checkbox = ({
             </Typography>
           </>
         )}
-        {hint && <FormHelperText translate={translate}>{hint}</FormHelperText>}
       </>
     );
-  }, [isRequired, labelProp, hint, t, translate]);
+  }, [isRequired, labelProp, t]);
 
   const onChange = useCallback<NonNullable<MuiCheckboxProps["onChange"]>>(
     (event, checked) => {
       onChangeProp?.(event, checked);
     },
     [onChangeProp],
+  );
+
+  const onClick = useCallback<NonNullable<MuiCheckboxProps["onClick"]>>(
+    (event) => {
+      if (isReadOnly) {
+        event.stopPropagation();
+        event.preventDefault();
+      }
+    },
+    [isReadOnly],
   );
 
   const onBlur = useCallback<NonNullable<MuiFormControlLabelProps["onBlur"]>>(
@@ -143,43 +177,81 @@ const Checkbox = ({
     [onBlurProp],
   );
 
+  const checkboxStyles = useMemo(
+    () => ({
+      alignItems: "flex-start",
+
+      ...(isReadOnly && {
+        cursor: "default",
+        "& .MuiTypography-root": {
+          cursor: "default",
+        },
+      }),
+
+      ...(hint && {
+        // needed to override specific :not(:last-child) selector
+        ":not(:last-child)": {
+          marginBlockEnd: 0,
+        },
+      }),
+    }),
+    [hint, isReadOnly],
+  );
+
   return (
-    <FormControlLabel
-      sx={{ alignItems: "flex-start" }}
-      aria-label={ariaLabel}
-      aria-labelledby={ariaLabelledBy}
-      className={
-        validity === "invalid"
-          ? "Mui-error"
-          : validity === "valid"
-            ? "Mui-valid"
-            : ""
-      }
-      control={
-        <MuiCheckbox
-          {...inputValues}
-          indeterminate={isIndeterminate}
-          onChange={onChange}
-          required={isRequired}
-          inputProps={{
-            "data-se": testId,
-          }}
-          disabled={isDisabled}
-          inputRef={localInputRef}
-          sx={{
-            marginBlockStart: "2px",
-          }}
-        />
-      }
-      disabled={isDisabled}
-      id={idOverride}
-      label={label}
-      name={nameOverride ?? idOverride}
-      value={value}
-      required={isRequired}
-      onBlur={onBlur}
-      translate={translate}
-    />
+    <>
+      <FormControlLabel
+        sx={checkboxStyles}
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
+        className={
+          validity === "invalid"
+            ? "Mui-error"
+            : validity === "valid"
+              ? "Mui-valid"
+              : ""
+        }
+        control={
+          <MuiCheckbox
+            {...inputValues}
+            indeterminate={isIndeterminate}
+            onChange={onChange}
+            onClick={
+              onClick as unknown as React.MouseEventHandler<HTMLButtonElement>
+            }
+            required={isRequired}
+            inputProps={{
+              "aria-describedby": hintId,
+              "aria-readonly": isReadOnly,
+              "data-se": testId,
+              readOnly: isReadOnly,
+            }}
+            disabled={isDisabled}
+            inputRef={localInputRef}
+            sx={{
+              marginBlockStart: "2px",
+            }}
+          />
+        }
+        disabled={isDisabled}
+        id={idOverride}
+        label={label}
+        name={nameOverride ?? idOverride}
+        value={value}
+        required={isRequired}
+        onBlur={onBlur}
+        translate={translate}
+      />
+      {hint && (
+        <HintContainerWithInlineStartSpacing
+          odysseyDesignTokens={odysseyDesignTokens}
+        >
+          <FormHelperText id={hintId} translate={translate}>
+            {hint}
+          </FormHelperText>
+        </HintContainerWithInlineStartSpacing>
+      )}
+    </>
   );
 };
 

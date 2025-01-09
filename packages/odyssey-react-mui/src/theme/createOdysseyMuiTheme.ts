@@ -13,7 +13,7 @@
 import { createTheme } from "@mui/material/styles";
 import * as Tokens from "@okta/odyssey-design-tokens";
 
-import { components } from "./components";
+import { getComponents } from "./components";
 import { mixins } from "./mixins";
 import { palette } from "./palette";
 import { shape } from "./shape";
@@ -23,21 +23,28 @@ import "./components.types";
 import "./mixins.types";
 import "./palette.types";
 import "./typography.types";
+import { type ContrastMode, defaultContrast } from "../useContrastMode";
 
 export type DesignTokens = typeof Tokens;
 export type DesignTokensOverride = Partial<typeof Tokens>;
 
 export const createOdysseyMuiTheme = ({
+  contrastMode = defaultContrast,
   odysseyTokens,
   shadowDomElement,
+  shadowRootElement,
 }: {
+  contrastMode?: ContrastMode;
   odysseyTokens: DesignTokens;
+  /** @deprecated Use `shadowRootElement` */
   shadowDomElement?: HTMLElement;
+  shadowRootElement?: HTMLElement;
 }) =>
   createTheme({
-    components: components({
+    components: getComponents({
+      contrastMode,
       odysseyTokens,
-      shadowDomElement,
+      shadowRootElement: shadowRootElement || shadowDomElement,
     }),
     mixins: mixins({ odysseyTokens }),
     palette: palette({ odysseyTokens }),

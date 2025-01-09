@@ -27,6 +27,8 @@ import {
   DataTableRowSelectionState,
   MenuItem,
   densityValues,
+  DataTableColumn,
+  DataTableRowData,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import {
@@ -40,13 +42,13 @@ import {
   data as personData,
 } from "./personData";
 import { useCallback, useMemo, useState } from "react";
+import { fn } from "@storybook/test";
 
 const storybookMeta: Meta<DataTableProps> = {
   title: "MUI Components/DataTable",
   component: DataTable,
   argTypes: {
     columns: {
-      control: null,
       description: "The columns that make up the table.",
       table: {
         type: {
@@ -64,7 +66,6 @@ const storybookMeta: Meta<DataTableProps> = {
       },
     },
     getRowId: {
-      control: null,
       description: "The function to get the ID of a row",
       table: {
         type: {
@@ -199,7 +200,6 @@ const storybookMeta: Meta<DataTableProps> = {
       },
     },
     onChangeRowSelection: {
-      control: null,
       description:
         "Callback that fires when a row (or rows) is selected or unselected.",
       table: {
@@ -209,7 +209,6 @@ const storybookMeta: Meta<DataTableProps> = {
       },
     },
     getData: {
-      control: null,
       description:
         "Callback that fires whenever the table needs to fetch new data, due to changes in page, results per page, search input, filters, or sorting",
       table: {
@@ -219,7 +218,6 @@ const storybookMeta: Meta<DataTableProps> = {
       },
     },
     onReorderRows: {
-      control: null,
       description:
         "Callback that fires when the user reorders rows within the table. Can be used to propogate order change to the backend.",
       table: {
@@ -246,6 +244,36 @@ const storybookMeta: Meta<DataTableProps> = {
         },
       },
     },
+    isPaginationMoreDisabled: {
+      control: "boolean",
+      description:
+        "If true, the pagination next or show more button will be disabled.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    maxPages: {
+      control: "number",
+      description:
+        "The highest page number allowed to be manually input in pagination.",
+      table: {
+        type: {
+          summary: "number",
+        },
+      },
+    },
+    maxResultsPerPage: {
+      control: "number",
+      description:
+        "The largest number of rows allowed to be shown per page. This only affects the row input in pagination.",
+      table: {
+        type: {
+          summary: "number",
+        },
+      },
+    },
     paginationType: {
       options: paginationTypeValues,
       control: { type: "radio" },
@@ -257,7 +285,6 @@ const storybookMeta: Meta<DataTableProps> = {
       },
     },
     rowActionButtons: {
-      control: null,
       description: "Action buttons to display in each row.",
       table: {
         type: {
@@ -266,7 +293,6 @@ const storybookMeta: Meta<DataTableProps> = {
       },
     },
     rowActionMenuItems: {
-      control: null,
       description:
         "Menu items to include in the optional actions menu on each row.",
       table: {
@@ -276,7 +302,6 @@ const storybookMeta: Meta<DataTableProps> = {
       },
     },
     bulkActionMenuItems: {
-      control: null,
       description:
         "Menu items to include in the bulk actions menu, which appears above the table if a row or rows are selected",
       table: {
@@ -286,7 +311,6 @@ const storybookMeta: Meta<DataTableProps> = {
       },
     },
     emptyPlaceholder: {
-      control: null,
       description:
         "The component to display when the table is displaying the initial empty state.",
       table: {
@@ -296,7 +320,6 @@ const storybookMeta: Meta<DataTableProps> = {
       },
     },
     noResultsPlaceholder: {
-      control: null,
       description:
         "The component to display when the query returns no results.",
       table: {
@@ -306,7 +329,6 @@ const storybookMeta: Meta<DataTableProps> = {
       },
     },
     renderDetailPanel: {
-      control: null,
       description: "The optional component to display when expanding a row.",
       table: {
         type: {
@@ -314,6 +336,26 @@ const storybookMeta: Meta<DataTableProps> = {
         },
       },
     },
+    additionalActionButton: {
+      description: "An optional action button above the table.",
+      table: {
+        type: {
+          summary: "ReactNode",
+        },
+      },
+    },
+    additionalActionMenuItems: {
+      description:
+        "MenuItems that go in an optional action menu above the table.",
+      table: {
+        type: {
+          summary: "ReactNode",
+        },
+      },
+    },
+  },
+  args: {
+    onChangeRowSelection: fn(),
   },
   decorators: [MuiThemeDecorator],
 };
@@ -349,12 +391,14 @@ const filterData = ({
 
         // If filter value is array, search for each array value
         if (Array.isArray(value)) {
-          return value.some((arrayValue) => {
-            return row[id as keyof (Planet | Person)]
-              ?.toString()
-              .toLowerCase()
-              .includes(arrayValue.toString().toLowerCase());
-          });
+          return value.some((arrayValue) =>
+            typeof arrayValue === "string"
+              ? row[id as keyof (Planet | Person)]
+                  ?.toString()
+                  .toLowerCase()
+                  .includes(arrayValue.toString().toLowerCase())
+              : false,
+          );
         }
 
         // In the custom filter examples, we provide a "starting letter"
@@ -966,17 +1010,145 @@ export const Truncation: StoryObj<DataTableProps> = {
 
     const getData = useCallback(() => {
       const data: Array<{ truncated: string; wrapped: string }> = [];
-      [...Array(10)].forEach(() => {
-        data.push({
-          truncated:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla a quam et vulputate. Phasellus elementum turpis a lacus feugiat bibendum.",
-          wrapped:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla a quam et vulputate. Phasellus elementum turpis a lacus feugiat bibendum.",
-        });
-      }); // Corrected the missing parenthesis here
+      Array(10)
+        .fill(null)
+        .forEach(() => {
+          data.push({
+            truncated:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla a quam et vulputate. Phasellus elementum turpis a lacus feugiat bibendum.",
+            wrapped:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla a quam et vulputate. Phasellus elementum turpis a lacus feugiat bibendum.",
+          });
+        }); // Corrected the missing parenthesis here
       return data;
     }, []);
 
     return <DataTable columns={columns} getData={getData} hasColumnResizing />;
+  },
+};
+
+export const ColumnGrowDemo: StoryObj<DataTableProps> = {
+  render: function C() {
+    const columns = useMemo(
+      (): DataTableColumn<DataTableRowData>[] => [
+        {
+          accessorKey: "name",
+          header: "Name",
+          grow: true,
+        },
+        {
+          accessorKey: "apps",
+          header: "Apps",
+        },
+        {
+          accessorKey: "users",
+          header: "Users assigned",
+        },
+      ],
+      [],
+    );
+
+    const getData = useCallback(
+      () => [
+        {
+          name: "Core engineering access",
+          apps: 5,
+          users: 10,
+        },
+        {
+          name: "Core sales access",
+          apps: 8,
+          users: 28,
+        },
+        {
+          name: "Super user access",
+          apps: 3,
+          users: 1,
+        },
+      ],
+      [],
+    );
+
+    const actionMenuItems = (selectedRows: DataTableRowSelectionState) => (
+      <>
+        <MenuItem onClick={() => console.log(selectedRows)}>Action 1</MenuItem>
+        <MenuItem onClick={() => console.log(selectedRows)}>Action 2</MenuItem>
+      </>
+    );
+
+    return (
+      <DataTable
+        hasSearch
+        hasColumnResizing
+        hasSorting
+        columns={columns}
+        getData={getData}
+        rowActionMenuItems={actionMenuItems}
+      />
+    );
+  },
+};
+
+export const AdditionalActions: StoryObj<DataTableProps> = {
+  args: {
+    hasChangeableDensity: true,
+    hasColumnResizing: true,
+    hasColumnVisibility: false,
+    hasFilters: true,
+    hasPagination: false,
+    hasRowSelection: true,
+    hasSearch: true,
+    hasSorting: true,
+    hasRowReordering: false,
+  },
+  render: function C(props) {
+    const [data, setData] = useState<Planet[]>(planetData);
+
+    const getData = useCallback(
+      ({ ...props }: DataTableGetDataType) => {
+        return filterData({ data, ...props });
+      },
+      [data],
+    );
+
+    const onReorderRows = useCallback(
+      ({ ...props }: DataTableOnReorderRowsType) => {
+        const reorderedData = reorderData({ data, ...props });
+        setData(reorderedData);
+      },
+      [data],
+    );
+
+    const onChangeRowSelection = useCallback(
+      (rowSelection: DataTableRowSelectionState) => {
+        if (Object.keys(rowSelection).length > 0) {
+          console.log(`${Object.keys(rowSelection).length} selected`);
+        }
+      },
+      [],
+    );
+
+    const additionalActionButton = (
+      <Button variant="primary" label="Add widget" />
+    );
+
+    const additionalActionMenuItems = (
+      <>
+        <MenuItem onClick={() => console.log("Action 1")}>Action 1</MenuItem>
+        <MenuItem onClick={() => console.log("Action 2")}>Action 2</MenuItem>
+      </>
+    );
+
+    return (
+      <DataTable
+        {...props}
+        columns={planetColumns}
+        getData={getData}
+        onReorderRows={onReorderRows}
+        onChangeRowSelection={onChangeRowSelection}
+        additionalActionButton={additionalActionButton}
+        additionalActionMenuItems={additionalActionMenuItems}
+      />
+    );
   },
 };

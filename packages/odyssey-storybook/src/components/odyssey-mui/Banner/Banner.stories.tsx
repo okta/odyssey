@@ -17,16 +17,42 @@ import {
   bannerSeverityValues,
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
+import { expect, fn, userEvent, within } from "@storybook/test";
 
-import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { userEvent, within } from "@storybook/testing-library";
-import { expect, jest } from "@storybook/jest";
 import { axeRun } from "../../../axe-util";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
+import type { PlaywrightProps } from "../storybookTypes";
 
-const storybookMeta: Meta<typeof Banner> = {
+type PlayType = {
+  args: BannerProps;
+  canvasElement: HTMLElement;
+  step: PlaywrightProps<BannerProps>["step"];
+};
+
+const storybookMeta: Meta<BannerProps> = {
   title: "MUI Components/Banner",
   component: Banner,
   argTypes: {
+    linkRel: {
+      control: "text",
+      description:
+        "The rel attribute defines the relationship between a linked resource and the current document.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    linkTarget: {
+      control: "text",
+      description:
+        "The target property of the `HTMLAnchorElement` interface is a string that indicates where to display the linked resource.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     linkText: {
       control: "text",
       description:
@@ -47,7 +73,6 @@ const storybookMeta: Meta<typeof Banner> = {
       },
     },
     onClose: {
-      control: null,
       description:
         "The function that's fired when the user clicks the close button. If undefined, the close button will not be shown",
       table: {
@@ -138,21 +163,32 @@ export const Linked: StoryObj<BannerProps> = {
     severity: "error",
     text: "An unidentified flying object compromised Hangar 18.",
   },
-  play: async ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }: PlayType) => {
     await step("check for the link text", async () => {
       const canvas = within(canvasElement);
-      const link = canvas.getByText("View report") as HTMLAnchorElement;
+      const link = canvas.getByText<HTMLAnchorElement>("View report");
       await expect(link?.tagName).toBe("A");
       await expect(link?.href).toBe(`${link?.baseURI}#anchor`);
     });
   },
 };
 
+export const LinkWithTarget: StoryObj<BannerProps> = {
+  args: {
+    linkTarget: "_blank",
+    linkText: "View report",
+    linkUrl: "#anchor",
+    role: "status",
+    severity: "error",
+    text: "An unidentified flying object compromised Hangar 18.",
+  },
+};
+
 export const Dismissible: StoryObj<BannerProps> = {
   args: {
-    onClose: jest.fn(),
+    onClose: fn(),
   },
-  play: async ({ args, canvasElement, step }) => {
+  play: async ({ args, canvasElement, step }: PlayType) => {
     await step("dismiss the banner on click", async () => {
       const canvas = within(canvasElement);
       const button = canvas.getByTitle("Close");

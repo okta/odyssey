@@ -10,103 +10,103 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { SelectChangeEvent } from "@mui/material";
 import { Meta, StoryObj } from "@storybook/react";
 import { Select, SelectProps, Link } from "@okta/odyssey-react-mui";
-import { userEvent, waitFor, screen } from "@storybook/testing-library";
-import { expect } from "@storybook/jest";
+import { queryOdysseySelector } from "@okta/odyssey-react-mui/test-selectors";
+import { expect, fn, screen, userEvent, waitFor } from "@storybook/test";
 import { useCallback, useState } from "react";
 
-import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { axeRun } from "../../../axe-util";
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
-import { SelectChangeEvent } from "@mui/material";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const optionsArray: SelectProps<string | string[], boolean>["options"] = [
-  "Earth",
-  "Mars",
-  "Ceres",
-  "Eros",
-  "Tycho Station",
-  "Phoebe",
-  "Ganymede",
+  "Roles and permissions",
+  "Okta Privileged Access components",
+  "Users and Groups administration",
+  "Resource administration",
+  "Security administration",
+  "Deploy and manage servers",
+  "Okta Privileged Access clients",
 ];
 
 const optionsObject: SelectProps<string | string[], boolean>["options"] = [
   {
-    text: "Earth",
-    value: "earth",
+    text: "Roles and permissions",
+    value: "roles-and-permissions",
   },
   {
-    text: "Mars",
-    value: "mars",
+    text: "Okta Privileged Access gateways",
+    value: "okta-privileged-access-gateways",
   },
   {
-    text: "Ceres",
-    value: "ceres",
+    text: "Users and Groups administration",
+    value: "users-and-groups-administration",
   },
   {
-    text: "Eros",
-    value: "eros",
+    text: "Resource administration",
+    value: "resource-administration",
   },
   {
-    text: "Tycho Station",
-    value: "tycho-station",
+    text: "Security administration",
+    value: "security-administrator",
   },
   {
-    text: "Phoebe",
-    value: "phoebe",
+    text: "Deploy and manage servers",
+    value: "deploy-and-manage-servers",
   },
   {
-    text: "Ganymede",
-    value: "ganymede",
+    text: "Okta Privileged Access clients",
+    value: "okta-privileged-access-clients",
   },
 ];
 
 const optionsGrouped: SelectProps<string | string[], boolean>["options"] = [
   {
-    text: "Sol System",
+    text: "Okta Privileged Access",
     type: "heading",
   },
   {
-    text: "Earth",
-    value: "earth",
+    text: "Roles and permissions",
+    value: "roles-and-permissions",
   },
   {
-    text: "Mars",
-    value: "mars",
+    text: "Okta Privileged Access gateways",
+    value: "okta-privileged-access-gateways",
   },
   {
-    text: "Ceres",
-    value: "ceres",
+    text: "Users and Groups administration",
+    value: "users-and-groups-administration",
   },
   {
-    text: "Eros",
-    value: "eros",
+    text: "Resource administration",
+    value: "resource-administration",
   },
   {
-    text: "Tycho Station",
-    value: "tycho-station",
+    text: "Security administration",
+    value: "security-administrator",
   },
   {
-    text: "Phoebe",
-    value: "phoebe",
+    text: "Deploy and manage servers",
+    value: "deploy-and-manage-servers",
   },
   {
-    text: "Ganymede",
-    value: "ganymede",
+    text: "Okta Privileged Access clients",
+    value: "okta-privileged-access-clients",
   },
   {
-    text: "Extrasolar",
+    text: "Audit events",
     type: "heading",
   },
-  "Auberon",
-  "Al-Halub",
-  "Freehold",
-  "Laconia",
-  "New Terra",
+  "Resource",
+  "Action",
+  "Related Info",
+  "Actor",
+  "Date",
 ];
 
-const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
+const meta = {
   title: "MUI Components/Forms/Select",
   component: Select,
   argTypes: {
@@ -133,7 +133,7 @@ const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
           summary: "boolean",
         },
         defaultValue: {
-          summary: false,
+          summary: "false",
         },
       },
     },
@@ -143,6 +143,7 @@ const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
     isDisabled: fieldComponentPropsMetaData.isFullWidth,
     isFullWidth: fieldComponentPropsMetaData.isFullWidth,
     isOptional: fieldComponentPropsMetaData.isOptional,
+    isReadOnly: fieldComponentPropsMetaData.isReadOnly,
     label: {
       control: "text",
       description: "The label text for the select component",
@@ -158,7 +159,6 @@ const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
     },
     name: fieldComponentPropsMetaData.name,
     onBlur: {
-      control: null,
       description: "Callback fired when the select component loses focus",
       table: {
         type: {
@@ -167,7 +167,6 @@ const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
       },
     },
     onChange: {
-      control: null,
       description:
         "Callback fired when the value of the select component changes",
       table: {
@@ -177,7 +176,6 @@ const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
       },
     },
     onFocus: {
-      control: null,
       description: "Callback fired when the select component gains focus",
       table: {
         type: {
@@ -211,19 +209,25 @@ const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
     },
   },
   args: {
-    hint: "Select your destination in the Sol system.",
-    label: "Destination",
+    hint: "Select a topic to learn more",
+    label: "Okta documentation",
+    onBlur: fn(),
+    onChange: fn(),
+    onFocus: fn(),
     options: optionsArray,
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
-};
+} satisfies Meta<typeof Select>;
 
-export default storybookMeta;
+export default meta;
 
-export const Default: StoryObj<typeof Select> = {
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: { defaultValue: "" },
   play: async ({ canvasElement, step }) => {
-    await step("Select Earth from the listbox", async () => {
+    await step("Select Roles and permissions from the listbox", async () => {
       const comboBoxElement = canvasElement.querySelector(
         '[aria-haspopup="listbox"]',
       );
@@ -234,32 +238,75 @@ export const Default: StoryObj<typeof Select> = {
         const listItem = listboxElement.children[0];
         await userEvent.click(listItem);
         await userEvent.tab();
-        await waitFor(() => expect(listboxElement).not.toBeInTheDocument());
+        await waitFor(() => {
+          expect(listboxElement).not.toBeInTheDocument();
+        });
         const inputElement = canvasElement.querySelector("input");
-        await expect(inputElement?.value).toBe("Earth");
-        await waitFor(() => axeRun("Select Default"));
+        await expect(inputElement?.value).toBe("Roles and permissions");
+        await waitFor(() => {
+          axeRun("Select Default");
+        });
       }
     });
   },
 };
-Default.args = { defaultValue: "" };
 
-export const DefaultValue: StoryObj<typeof Select> = {
+export const DefaultValue: Story = {
   args: {
-    defaultValue: "Mars",
+    defaultValue: "Roles and permissions",
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("can click dropdown option", async () => {
+      const querySelect = queryOdysseySelector("Select");
+
+      const selector = querySelect({
+        element: canvasElement,
+        options: {
+          label: /Okta documentation/,
+        },
+      });
+
+      await userEvent.click(selector.element);
+
+      const list = selector.selectChild({
+        name: "list",
+      });
+
+      await waitFor(() => {
+        expect(list.element).toBeVisible();
+      });
+
+      const listItemElement = list.selectChild({
+        name: "listItem",
+        options: {
+          label: "Roles and permissions",
+        },
+      }).element;
+
+      await waitFor(() => {
+        expect(listItemElement).toBeVisible();
+      });
+
+      if (listItemElement) {
+        await userEvent.click(listItemElement);
+      }
+
+      await waitFor(() => {
+        expect(list?.element).not.toBeVisible();
+      });
+    });
   },
 };
 
-export const Disabled: StoryObj<typeof Select> = {
+export const Disabled: Story = {
   args: {
     isDisabled: true,
     defaultValue: "",
   },
 };
-
-export const Error: StoryObj<typeof Select> = {
+export const Error: Story = {
   args: {
-    errorMessage: "Select your destination.",
+    errorMessage: "Select a topic.",
     defaultValue: "",
   },
   play: async ({ step }) => {
@@ -269,10 +316,10 @@ export const Error: StoryObj<typeof Select> = {
   },
 };
 
-export const ErrorsList: StoryObj<typeof Select> = {
+export const ErrorsList: Story = {
   args: {
     isMultiSelect: true,
-    errorMessage: "Select your destination.",
+    errorMessage: "Select a topic.",
     errorMessageList: [
       "Select at least one item",
       "Select no more than 3 items",
@@ -286,19 +333,30 @@ export const ErrorsList: StoryObj<typeof Select> = {
   },
 };
 
-export const FullWidth: StoryObj<typeof Select> = {
+export const FullWidth: Story = {
   args: {
     isFullWidth: true,
   },
 };
 
-export const HintLink: StoryObj<typeof Select> = {
+export const HintLink: Story = {
   args: {
     HintLinkComponent: <Link href="/learn-more">Learn more</Link>,
   },
 };
 
-export const OptionsObject: StoryObj<typeof Select> = {
+export const EmptyValue: Story = {
+  args: {
+    value: "",
+    options: [
+      { value: "", text: "" },
+      { value: "value1", text: "Value 1" },
+      { value: "value2", text: "Value 2" },
+    ],
+  },
+};
+
+export const OptionsObject: Story = {
   args: {
     options: optionsObject,
     defaultValue: "",
@@ -313,7 +371,24 @@ export const OptionsObject: StoryObj<typeof Select> = {
   },
 };
 
-export const OptionsGrouped: StoryObj<typeof Select> = {
+export const OptionsObjectAndMultiSelect: Story = {
+  args: {
+    options: optionsObject,
+    value: [],
+    hasMultipleChoices: true,
+  },
+  render: function C(props) {
+    const [localValue, setLocalValue] = useState<string[]>([]);
+    const onChange = useCallback(
+      (event: SelectChangeEvent<string | string[]>) =>
+        setLocalValue(event.target.value as string[]),
+      [],
+    );
+    return <Select {...props} value={localValue} onChange={onChange} />;
+  },
+};
+
+export const OptionsGrouped: Story = {
   args: {
     options: optionsGrouped,
     defaultValue: "",
@@ -328,7 +403,7 @@ export const OptionsGrouped: StoryObj<typeof Select> = {
   },
 };
 
-export const MultiSelect: StoryObj<typeof Select> = {
+export const MultiSelect: Story = {
   args: {
     isMultiSelect: true,
     defaultValue: [],
@@ -346,18 +421,40 @@ export const MultiSelect: StoryObj<typeof Select> = {
         await userEvent.click(listboxElement.children[0]);
         await userEvent.click(listboxElement.children[1]);
         await userEvent.tab();
-        await waitFor(() => expect(listboxElement).not.toBeInTheDocument());
+        await waitFor(() => {
+          expect(listboxElement).not.toBeInTheDocument();
+        });
 
         const inputElement = canvasElement.querySelector("input");
-        await expect(inputElement?.value).toBe("Earth,Mars");
+        await expect(inputElement?.value).toBe(
+          "Roles and permissions,Okta Privileged Access components",
+        );
         await userEvent.click(canvasElement);
-        await waitFor(() => axeRun("Select Multiple"));
+        await waitFor(() => {
+          axeRun("Select Multiple");
+        });
       }
     });
   },
 };
-
-export const ControlledSelect: StoryObj<typeof Select> = {
+export const ReadOnly: Story = {
+  args: {
+    isReadOnly: true,
+    defaultValue: "Security administration",
+  },
+};
+export const ReadOnlyMultiSelect: Story = {
+  args: {
+    isMultiSelect: true,
+    isReadOnly: true,
+    defaultValue: [
+      "Roles and permissions",
+      "Security administration",
+      "Deploy and manage servers",
+    ],
+  },
+};
+export const ControlledSelect: Story = {
   parameters: {
     docs: {
       description: {
@@ -380,7 +477,7 @@ export const ControlledSelect: StoryObj<typeof Select> = {
   },
 };
 
-export const ControlledMultipleSelect: StoryObj<typeof Select> = {
+export const ControlledMultipleSelect: Story = {
   parameters: {
     docs: {
       description: {
@@ -404,7 +501,7 @@ export const ControlledMultipleSelect: StoryObj<typeof Select> = {
   },
 };
 
-export const ControlledPreselectedMultipleSelect: StoryObj<typeof Select> = {
+export const ControlledPreselectedMultipleSelect: Story = {
   parameters: {
     docs: {
       description: {
@@ -418,30 +515,13 @@ export const ControlledPreselectedMultipleSelect: StoryObj<typeof Select> = {
     hasMultipleChoices: true,
   },
   render: function C(props) {
-    const [localValue, setLocalValue] = useState(["Earth", "Mars"]);
+    const [localValue, setLocalValue] = useState([
+      "Roles and permissions",
+      "Resource administration",
+    ]);
     const onChange = useCallback(
       (event: SelectChangeEvent<string | string[]>) =>
         setLocalValue(event.target.value as string[]),
-      [],
-    );
-    return <Select {...props} value={localValue} onChange={onChange} />;
-  },
-};
-
-export const ControlledEmptyValue: StoryObj<typeof Select> = {
-  args: {
-    value: "",
-    options: [
-      { value: "", text: "Default option" },
-      { value: "value1", text: "Value 1" },
-      { value: "value2", text: "Value 2" },
-    ],
-  },
-  render: function C(props) {
-    const [localValue, setLocalValue] = useState("");
-    const onChange = useCallback(
-      (event: SelectChangeEvent<string | string[]>) =>
-        setLocalValue(event.target.value as string),
       [],
     );
     return <Select {...props} value={localValue} onChange={onChange} />;

@@ -33,7 +33,7 @@ import styled from "@emotion/styled";
 
 import { Autocomplete } from "../Autocomplete";
 import { Box } from "../Box";
-import { Button } from "../Button";
+import { Button } from "../Buttons";
 import { CheckboxGroup } from "../CheckboxGroup";
 import { Checkbox } from "../Checkbox";
 import {
@@ -56,7 +56,7 @@ import { Subordinate } from "../Typography";
 
 const AutocompleteOuterContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   display: "flex",
   alignItems: "flex-end",
   gap: odysseyDesignTokens.Spacing2,
@@ -88,6 +88,12 @@ export type DataFilter = {
    * as the column it'll be applied to.
    */
   id: Exclude<MRT_ColumnDef<MRT_RowData>["accessorKey"], undefined>;
+  /**
+   * `Autocomplete` normally only allows values that exist in the list box. This feature allows you to enter in any value in the text field and have that be the stored value in `Autocomplete`
+   *
+   * NOTE: This only applies when `variant` is `autocomplete`
+   */
+  isCustomValueAllowed?: boolean;
   /**
    * The human-friendly name of the filter.
    */
@@ -277,10 +283,9 @@ const DataFilters = ({
 
   const [searchValue, setSearchValue] = useState<string>(defaultSearchTerm);
 
-  const activeFilters = useMemo(
-    () => filters.filter((filter) => filter.value),
-    [filters],
-  );
+  const activeFilters = useMemo(() => {
+    return filters.filter((filter) => filter.value);
+  }, [filters]);
 
   const [isFiltersMenuOpen, setIsFiltersMenuOpen] = useState<boolean>(false);
 
@@ -332,11 +337,14 @@ const DataFilters = ({
 
   const updateFilters = useCallback<UpdateFiltersOrValues>(
     ({ filterId, value }) => {
+      setInputValues((prevInputValues) => ({
+        ...prevInputValues,
+        [filterId]: value,
+      }));
       const updatedFilters = filtersProp.map((filter) => ({
         ...filter,
         value: filter.id === filterId ? value : inputValues[filter.id],
       }));
-
       setFilters(updatedFilters);
     },
     [inputValues, filtersProp],
@@ -425,9 +433,9 @@ const DataFilters = ({
       <>
         <Box>
           <Button
-            aria-controls={isFiltersMenuOpen ? "filters-menu" : undefined}
-            aria-expanded={isFiltersMenuOpen ? "true" : undefined}
-            aria-haspopup="true"
+            ariaControls={isFiltersMenuOpen ? "filters-menu" : undefined}
+            ariaExpanded={isFiltersMenuOpen ? "true" : undefined}
+            ariaHasPopup="true"
             ariaLabel={t("filters.filters.arialabel")}
             isDisabled={isDisabled}
             endIcon={<FilterIcon />}
@@ -461,6 +469,7 @@ const DataFilters = ({
             return (
               <MuiMenuItem
                 key={filter.id}
+                aria-controls={isFilterPopoverOpen ? "filter-form" : undefined}
                 onClick={(event) => {
                   setIsFilterPopoverOpen(true);
                   setFilterPopoverAnchorElement(event.currentTarget);
@@ -535,13 +544,13 @@ const DataFilters = ({
     ],
   );
 
-  const autoCompleteValue = useMemo(() => {
-    if (filterPopoverCurrentFilter?.id) {
-      return [...(inputValues[filterPopoverCurrentFilter.id] as Option[])];
-    }
-
-    return undefined;
-  }, [filterPopoverCurrentFilter]);
+  const autoCompleteValue = useMemo(
+    () =>
+      filterPopoverCurrentFilter?.id
+        ? (inputValues[filterPopoverCurrentFilter.id] as Option[])
+        : undefined,
+    [filterPopoverCurrentFilter, inputValues],
+  );
 
   return (
     <Box>
@@ -555,6 +564,7 @@ const DataFilters = ({
               {filterMenu}
               {/* Filter popover */}
               <MuiPopover
+                id="filter-form"
                 anchorEl={filterPopoverAnchorElement}
                 // Positions the popover flush with the edge of the parent menu
                 // and at the right shadow elevation. These magic values are simply
@@ -604,6 +614,9 @@ const DataFilters = ({
                               <AutocompleteInnerContainer>
                                 <Autocomplete
                                   hasMultipleChoices
+                                  isCustomValueAllowed={
+                                    filterPopoverCurrentFilter?.isCustomValueAllowed
+                                  }
                                   label={filterPopoverCurrentFilter.label}
                                   value={autoCompleteValue}
                                   onChange={(_, value) => {
@@ -619,6 +632,7 @@ const DataFilters = ({
                                 variant="primary"
                                 endIcon={<CheckIcon />}
                                 type="submit"
+                                ariaLabel={t("filters.submit.label")}
                               />
                             </AutocompleteOuterContainer>
                           )}
@@ -686,6 +700,7 @@ const DataFilters = ({
                               variant="primary"
                               endIcon={<CheckIcon />}
                               type="submit"
+                              ariaLabel={t("filters.submit.label")}
                             />
                           </Box>
                         )}

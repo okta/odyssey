@@ -3,6 +3,424 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.29.0](https://github.com/okta/odyssey/compare/v1.28.0...v1.29.0) (2024-12-11)
+
+**Note:** Version bump only for package odyssey
+
+## [1.28.2](https://github.com/okta/odyssey/compare/v1.28.1...v1.28.2) (2024-12-03)
+
+**Note:** Version bump only for package odyssey
+
+## [1.28.1](https://github.com/okta/odyssey/compare/v1.28.0...v1.28.1) (2024-12-02)
+
+**Note:** Version bump only for package odyssey
+
+## [1.28.0](https://github.com/okta/odyssey/compare/v1.27.1...v1.28.0) (2024-11-25)
+
+### Features
+
+- adds app switcher lab component ([#2416](https://github.com/okta/odyssey/issues/2416)) ([1b48073](https://github.com/okta/odyssey/commit/1b480738d1c91823f496aa0ff41d678edb76f655))
+- better first-render options for UiShell ([#2422](https://github.com/okta/odyssey/issues/2422)) ([c49b233](https://github.com/okta/odyssey/commit/c49b23360dafa1fdcaab696f1c6bd8fdae63891e))
+- new popoverContent feature for MenuButton, plus UserProfileMenuButton ([#2414](https://github.com/okta/odyssey/issues/2414)) ([5647ec9](https://github.com/okta/odyssey/commit/5647ec91826662195ed09eb81e0d05d3ce6057a1))
+
+### Bug Fixes
+
+- bug in SideNav when sideNavItems comes delayed ([#2419](https://github.com/okta/odyssey/issues/2419)) ([bce2083](https://github.com/okta/odyssey/commit/bce20836db6763b013178a9c4d8784cec6eb5e93))
+- the UiShell should not have gray background or padding in app area ([#2428](https://github.com/okta/odyssey/issues/2428)) ([973e0f5](https://github.com/okta/odyssey/commit/973e0f53c64fc7f21c03f2776871b26338a0676c))
+
+## [1.27.1](https://github.com/okta/odyssey/compare/v1.27.0...v1.27.1) (2024-11-18)
+
+### Bug Fixes
+
+- **odyssey-react-mui:** ensure table is 100% width ([#2417](https://github.com/okta/odyssey/issues/2417)) ([2616640](https://github.com/okta/odyssey/commit/2616640b27c5670a69ea6fe47c8069034c9b3840))
+
+## [1.27.0](https://github.com/okta/odyssey/compare/v1.26.0...v1.27.0) (2024-11-14)
+
+### Features
+
+- adds drag-n-drop feature to the sidenav ([#2405](https://github.com/okta/odyssey/issues/2405)) ([aca8dad](https://github.com/okta/odyssey/commit/aca8dadd7130847112483f49bdc52b065bde3c88))
+
+## [1.26.0](https://github.com/okta/odyssey/compare/v1.25.0...v1.26.0) (2024-11-04)
+
+### Features
+
+- adds side-nav collapse handle ([#2385](https://github.com/okta/odyssey/issues/2385)) ([1582be5](https://github.com/okta/odyssey/commit/1582be5669000c6dcec5881ba8178406a457a3b0))
+- adds the ability to render an encapsulated Unified UI Shell ([#2373](https://github.com/okta/odyssey/issues/2373)) ([f964a29](https://github.com/okta/odyssey/commit/f964a29c7eb956fc05cb16fd51963a03c6b08507))
+
+### Bug Fixes
+
+- enforce AppTile image heighgt ([#2400](https://github.com/okta/odyssey/issues/2400)) ([7e91875](https://github.com/okta/odyssey/commit/7e9187582cf1c33e6da8297c778549aebbe81d88))
+
+## [1.25.0](https://github.com/okta/odyssey/compare/v1.24.1...v1.25.0) (2024-10-15)
+
+### Features
+
+- **odyssey-react-mui:** Add haitian creole to suported languages ([#2382](https://github.com/okta/odyssey/issues/2382)) ([71c40b5](https://github.com/okta/odyssey/commit/71c40b5990c074bf409300b02177ba0ff163aaed))
+
+### Bug Fixes
+
+- **odyssey-react-mui:** wrap long menu items. Add sane max-height ([#2381](https://github.com/okta/odyssey/issues/2381)) ([d3045a1](https://github.com/okta/odyssey/commit/d3045a1eece9e2d1aabdd1f999557e9a54a6485b))
+
+## [1.24.1](https://github.com/okta/odyssey/compare/v1.24.0...v1.24.1) (2024-10-04)
+
+### Bug Fixes
+
+- **odyssey-react-mui:** add back margin removed in error ([e36cb89](https://github.com/okta/odyssey/commit/e36cb89d20daf7eb68cbc58d8391ea7cf512b281))
+- **odyssey-react-mui:** add back no children styling ([2a07fa3](https://github.com/okta/odyssey/commit/2a07fa37130d48206939aa94c42add4a3f105157))
+- **odyssey-react-mui:** add back size and full width styling ([11552fd](https://github.com/okta/odyssey/commit/11552fd7818d232535eb89c86d04c3ccc15896b3))
+- **odyssey-react-mui:** fix margin start ([478e20e](https://github.com/okta/odyssey/commit/478e20ef320ee26c1fd96e93a1dabb7131808d6f))
+- **odyssey-react-mui:** trigger test run ([4c4b3ac](https://github.com/okta/odyssey/commit/4c4b3acde21aab8ade82f8ac25f47d310016c0c0))
+- **odyssey-storybook:** add back floatingAction styles ([0b84954](https://github.com/okta/odyssey/commit/0b8495484de11e35e2959c2e3b6dba80394b6a3e))
+
+## [1.24.0](https://github.com/okta/odyssey/compare/v1.20.0...v1.24.0) (2024-10-01)
+
+### Features
+
+- add additional action button and menu slot to table ([#2334](https://github.com/okta/odyssey/issues/2334)) ([52b3f38](https://github.com/okta/odyssey/commit/52b3f3832adc442e0219be16fe8a4d96cf100a4e))
+- adds a generic top nav component ([#2296](https://github.com/okta/odyssey/issues/2296)) ([6f3165f](https://github.com/okta/odyssey/commit/6f3165f9fd4a1d1743c975b72132d4ec186d09bb))
+- adds Aeonik and Inter to Odyssey Storybook ([#2355](https://github.com/okta/odyssey/issues/2355)) ([e89997e](https://github.com/okta/odyssey/commit/e89997eeb83a461aa1a94c47ebea44b6a4a30990))
+- adds new Shadow DOM export with better naming ([#2338](https://github.com/okta/odyssey/issues/2338)) ([0997e36](https://github.com/okta/odyssey/commit/0997e36afd4d241f5b3960528aff2865fb6d6ac3))
+- automatically scroll to the first isSelected SideNavItem ([#2325](https://github.com/okta/odyssey/issues/2325)) ([52ce441](https://github.com/okta/odyssey/commit/52ce44137ffe5601cfa6044782a21afb5449167e))
+- Misc Odyssey updates ([#2326](https://github.com/okta/odyssey/issues/2326)) ([84fcef3](https://github.com/okta/odyssey/commit/84fcef346841f0a125995a61b80958499343e7e1))
+- **odyssey-react-mui:** add overline typography variant ([#2349](https://github.com/okta/odyssey/issues/2349)) ([4530f69](https://github.com/okta/odyssey/commit/4530f699dffc11117f366ca26826e7ca51f4f296))
+
+### Bug Fixes
+
+- Add missing props to Storybook ([#2313](https://github.com/okta/odyssey/issues/2313)) ([bbf96a2](https://github.com/okta/odyssey/commit/bbf96a257160b922c0ebc31b1c5dec1fe31c35b4))
+- Applitools isn't consistently running VRTs ([#2314](https://github.com/okta/odyssey/issues/2314)) ([0c9a10c](https://github.com/okta/odyssey/commit/0c9a10ca9036e34f74dd383f26dda8dc77211c90))
+- fixes translations not working with TypeScript ([#2354](https://github.com/okta/odyssey/issues/2354)) ([37653ee](https://github.com/okta/odyssey/commit/37653ee47c2fab8b54dec26efd5115f6633c2977))
+- **odyssey-design-tokens:** using correct weights in SB ([#2363](https://github.com/okta/odyssey/issues/2363)) ([2dfa614](https://github.com/okta/odyssey/commit/2dfa614cd4c09d71d8624be690ae788e134a74ba))
+- **odyssey-react-mui:** Add min-heights to keep correct heights ([#2324](https://github.com/okta/odyssey/issues/2324)) ([40d5a50](https://github.com/okta/odyssey/commit/40d5a5070ebfab1b650066e91b451c0ef4b3f2d8))
+- remove invalid pseudo element from theme overrides ([#2310](https://github.com/okta/odyssey/issues/2310)) ([fea0793](https://github.com/okta/odyssey/commit/fea0793acf0800494270a87e4e5d65129942b99e))
+- select multioption not rendering text when you use an options object ([#2323](https://github.com/okta/odyssey/issues/2323)) ([4bafbb9](https://github.com/okta/odyssey/commit/4bafbb99e03e52ad572fba9049013c058c75da38))
+- Update Test Selector types and improve functionality ([#2333](https://github.com/okta/odyssey/issues/2333)) ([7039009](https://github.com/okta/odyssey/commit/703900947861dfb36b8996414130a8db3414ccfa))
+- updates axios, body-parser libraries ([#2357](https://github.com/okta/odyssey/issues/2357)) ([7bc1deb](https://github.com/okta/odyssey/commit/7bc1deb4dc89218882750330aa023626d73b9fa7))
+
+## [1.23.0](https://github.com/okta/odyssey/compare/v1.19.0...v1.23.0) (2024-09-19)
+
+### Features
+
+- add additional action button and menu slot to table ([#2334](https://github.com/okta/odyssey/issues/2334)) ([52b3f38](https://github.com/okta/odyssey/commit/52b3f3832adc442e0219be16fe8a4d96cf100a4e))
+- adds a generic top nav component ([#2296](https://github.com/okta/odyssey/issues/2296)) ([6f3165f](https://github.com/okta/odyssey/commit/6f3165f9fd4a1d1743c975b72132d4ec186d09bb))
+- adds Aeonik and Inter to Odyssey Storybook ([#2355](https://github.com/okta/odyssey/issues/2355)) ([e89997e](https://github.com/okta/odyssey/commit/e89997eeb83a461aa1a94c47ebea44b6a4a30990))
+- adds new Shadow DOM export with better naming ([#2338](https://github.com/okta/odyssey/issues/2338)) ([0997e36](https://github.com/okta/odyssey/commit/0997e36afd4d241f5b3960528aff2865fb6d6ac3))
+- automatically scroll to the first isSelected SideNavItem ([#2325](https://github.com/okta/odyssey/issues/2325)) ([52ce441](https://github.com/okta/odyssey/commit/52ce44137ffe5601cfa6044782a21afb5449167e))
+
+### Bug Fixes
+
+- Add missing props to Storybook ([#2313](https://github.com/okta/odyssey/issues/2313)) ([bbf96a2](https://github.com/okta/odyssey/commit/bbf96a257160b922c0ebc31b1c5dec1fe31c35b4))
+- Applitools isn't consistently running VRTs ([#2314](https://github.com/okta/odyssey/issues/2314)) ([0c9a10c](https://github.com/okta/odyssey/commit/0c9a10ca9036e34f74dd383f26dda8dc77211c90))
+- fixes translations not working with TypeScript ([#2354](https://github.com/okta/odyssey/issues/2354)) ([37653ee](https://github.com/okta/odyssey/commit/37653ee47c2fab8b54dec26efd5115f6633c2977))
+- **odyssey-design-tokens:** using correct weights in SB ([#2363](https://github.com/okta/odyssey/issues/2363)) ([2dfa614](https://github.com/okta/odyssey/commit/2dfa614cd4c09d71d8624be690ae788e134a74ba))
+- **odyssey-react-mui:** Add min-heights to keep correct heights ([#2324](https://github.com/okta/odyssey/issues/2324)) ([40d5a50](https://github.com/okta/odyssey/commit/40d5a5070ebfab1b650066e91b451c0ef4b3f2d8))
+- remove invalid pseudo element from theme overrides ([#2310](https://github.com/okta/odyssey/issues/2310)) ([fea0793](https://github.com/okta/odyssey/commit/fea0793acf0800494270a87e4e5d65129942b99e))
+- select multioption not rendering text when you use an options object ([#2323](https://github.com/okta/odyssey/issues/2323)) ([4bafbb9](https://github.com/okta/odyssey/commit/4bafbb99e03e52ad572fba9049013c058c75da38))
+- Update Test Selector types and improve functionality ([#2333](https://github.com/okta/odyssey/issues/2333)) ([7039009](https://github.com/okta/odyssey/commit/703900947861dfb36b8996414130a8db3414ccfa))
+- updates axios, body-parser libraries ([#2357](https://github.com/okta/odyssey/issues/2357)) ([7bc1deb](https://github.com/okta/odyssey/commit/7bc1deb4dc89218882750330aa023626d73b9fa7))
+
+## [1.22.0](https://github.com/okta/odyssey/compare/v1.19.0...v1.22.0) (2024-09-05)
+
+### Features
+
+- add additional action button and menu slot to table ([#2334](https://github.com/okta/odyssey/issues/2334)) ([52b3f38](https://github.com/okta/odyssey/commit/52b3f3832adc442e0219be16fe8a4d96cf100a4e))
+- adds a generic top nav component ([#2296](https://github.com/okta/odyssey/issues/2296)) ([6f3165f](https://github.com/okta/odyssey/commit/6f3165f9fd4a1d1743c975b72132d4ec186d09bb))
+- adds new Shadow DOM export with better naming ([#2338](https://github.com/okta/odyssey/issues/2338)) ([0997e36](https://github.com/okta/odyssey/commit/0997e36afd4d241f5b3960528aff2865fb6d6ac3))
+- automatically scroll to the first isSelected SideNavItem ([#2325](https://github.com/okta/odyssey/issues/2325)) ([52ce441](https://github.com/okta/odyssey/commit/52ce44137ffe5601cfa6044782a21afb5449167e))
+
+### Bug Fixes
+
+- Applitools isn't consistently running VRTs ([#2314](https://github.com/okta/odyssey/issues/2314)) ([0c9a10c](https://github.com/okta/odyssey/commit/0c9a10ca9036e34f74dd383f26dda8dc77211c90))
+- **odyssey-react-mui:** Add min-heights to keep correct heights ([#2324](https://github.com/okta/odyssey/issues/2324)) ([40d5a50](https://github.com/okta/odyssey/commit/40d5a5070ebfab1b650066e91b451c0ef4b3f2d8))
+- remove invalid pseudo element from theme overrides ([#2310](https://github.com/okta/odyssey/issues/2310)) ([fea0793](https://github.com/okta/odyssey/commit/fea0793acf0800494270a87e4e5d65129942b99e))
+- select multioption not rendering text when you use an options object ([#2323](https://github.com/okta/odyssey/issues/2323)) ([4bafbb9](https://github.com/okta/odyssey/commit/4bafbb99e03e52ad572fba9049013c058c75da38))
+
+## [1.21.2](https://github.com/okta/odyssey/compare/v1.21.1...v1.21.2) (2024-08-09)
+
+**Note:** Version bump only for package odyssey
+
+## [1.21.1](https://github.com/okta/odyssey/compare/v1.21.0...v1.21.1) (2024-08-07)
+
+### Features
+
+- add backwards compatible empty state export ([#2266](https://github.com/okta/odyssey/issues/2266)) ([0fe3203](https://github.com/okta/odyssey/commit/0fe3203629dc85f7c91c58e3ff078c9a89360407))
+- add initial search prop to DataTable ([#2265](https://github.com/okta/odyssey/issues/2265)) ([5829534](https://github.com/okta/odyssey/commit/582953472b9a4e9946a57c852b78cd890a6ab674))
+- adds a generic top nav component ([#2296](https://github.com/okta/odyssey/issues/2296)) ([6f3165f](https://github.com/okta/odyssey/commit/6f3165f9fd4a1d1743c975b72132d4ec186d09bb))
+- adds new side navigation component for unified nav design ([#2269](https://github.com/okta/odyssey/issues/2269)) ([e54a470](https://github.com/okta/odyssey/commit/e54a470aaa71eec4fd85f19ac8519425f1d64e8f))
+- bumps lerna version ([#2238](https://github.com/okta/odyssey/issues/2238)) ([615f080](https://github.com/okta/odyssey/commit/615f080082ea42ded591a262fb2affe36d51cbf7))
+- EmptyState component ([#2175](https://github.com/okta/odyssey/issues/2175)) ([8c86845](https://github.com/okta/odyssey/commit/8c868450b6e1b8c63775afe1f38219507e9bacc7))
+- move Pagination to its own component ([#2166](https://github.com/okta/odyssey/issues/2166)) ([61eda40](https://github.com/okta/odyssey/commit/61eda40aaf1a5dc5477799694594ea5625715fe0))
+- Test Selectors ([#2209](https://github.com/okta/odyssey/issues/2209)) ([dfa8451](https://github.com/okta/odyssey/commit/dfa8451d0cb6ed63cbd3ac1ce740203b638348f7))
+
+### Bug Fixes
+
+- add changes back, remove required label ([cccce45](https://github.com/okta/odyssey/commit/cccce454c33588369786b2dc8cc6e39bbace4678))
+- add clarification in TextField label ([e6f7d80](https://github.com/okta/odyssey/commit/e6f7d8007dcdf0e0738c647342d901252061b705))
+- add comment ([9af7d11](https://github.com/okta/odyssey/commit/9af7d11f2964fa1b17be673c4e84a0bbb1a47ab9))
+- add errorMessageList to form components ([ad6de75](https://github.com/okta/odyssey/commit/ad6de75175043491b10c966646f95858b3217bea))
+- add floating action button variant ([a32110d](https://github.com/okta/odyssey/commit/a32110d5aa71efd7fcbf3f1606eae613a639c721))
+- add hint text to Radio and RadioGroup ([6518de5](https://github.com/okta/odyssey/commit/6518de5b38e54ec6aa3146a310c7c02a3b7d8a4e))
+- add more tests ([0149621](https://github.com/okta/odyssey/commit/0149621f7f762f0106149d6d9533d8c8596c62e8))
+- add optional href prop to button ([f46123b](https://github.com/okta/odyssey/commit/f46123b538947aa0040b29832dafaf6df9da332e))
+- add secondary danger button variant ([170e6e0](https://github.com/okta/odyssey/commit/170e6e03476d3a7fdef9bdca9f94a8d7e0d6f00a))
+- add secondary danger button variant ([d398e39](https://github.com/okta/odyssey/commit/d398e391e2d80d2f95f54182bf01adb8c78d3c63))
+- add test ([37755b4](https://github.com/okta/odyssey/commit/37755b48c1be6a7d82e9f0e6ac377049abcab8a8))
+- add test for no options ([d997be1](https://github.com/okta/odyssey/commit/d997be145086c9f3142f8c24e733a7f7abdb9133))
+- add tests ([0774e0a](https://github.com/okta/odyssey/commit/0774e0ae7dfc5f8ee2cd355e2186ad29827fa0b4))
+- add translation keys for Autocomplete ([#2308](https://github.com/okta/odyssey/issues/2308)) ([9617768](https://github.com/okta/odyssey/commit/961776881b3e07667cb09c6ffb51c57ffa0c1ca7))
+- address comments ([c335306](https://github.com/okta/odyssey/commit/c335306a727b7879348cdacfdafda57a878af631))
+- alphabetize props ([988bd74](https://github.com/okta/odyssey/commit/988bd74e98794f2f48589e6be3e37f608f87a07a))
+- alphabetize props in imports ([ca56f0a](https://github.com/okta/odyssey/commit/ca56f0a3ad5b3a4902bf38111bc6c229ad1533f6))
+- Applitools isn't consistently running VRTs ([#2314](https://github.com/okta/odyssey/issues/2314)) ([0c9a10c](https://github.com/okta/odyssey/commit/0c9a10ca9036e34f74dd383f26dda8dc77211c90))
+- await on toBeVisible ([74038da](https://github.com/okta/odyssey/commit/74038daca8211c7ba74971610e49332a0ffee054))
+- bump version to 1.17 ([0e32aba](https://github.com/okta/odyssey/commit/0e32aba973ef00d5a872dbd408a84fb54c8a7408))
+- button tests ([b427ee5](https://github.com/okta/odyssey/commit/b427ee5cf2901d380112eaae10a813a4f1781f53))
+- checkbox test ([69101bb](https://github.com/okta/odyssey/commit/69101bb4fc7f980116f1e1cef2ee736a7126d998))
+- expose "filled" variant of search ([af345d6](https://github.com/okta/odyssey/commit/af345d6e3265bd3addf0a3153695a0c03d30ba70))
+- fix props issue in storybook ([967fd49](https://github.com/okta/odyssey/commit/967fd494dcf7394b3c182f7d7bd6d95884e39a5c))
+- fix storybook error ([a7f3179](https://github.com/okta/odyssey/commit/a7f3179dd78969341744d8d29d903ee706a3ad61))
+- fix tests ([a730e69](https://github.com/okta/odyssey/commit/a730e69216735829d0e448dc4a8f39d41fe93a1e))
+- loading in autocomplete ([f99e09e](https://github.com/okta/odyssey/commit/f99e09ed70ba941a22875dc41abef35282d9459b))
+- make return implicit in label ([e2a26df](https://github.com/okta/odyssey/commit/e2a26df5082bfb5e7573c83a9ab53b364941713b))
+- move Drawer from labs to Odyssey OKTA-700393 ([247b30a](https://github.com/okta/odyssey/commit/247b30af6e598119b78d97c971f490c48cd1dfca))
+- prevent mixing old and new button props ([7aed65b](https://github.com/okta/odyssey/commit/7aed65be175c12525c9aee5fca18af0251dd2fec))
+- re-add support for "callToAction" button usage ([0eb6ec7](https://github.com/okta/odyssey/commit/0eb6ec704ba6a0a9da12dcd6d864a6d1d1421915))
+- remove invalid pseudo element from theme overrides ([#2310](https://github.com/okta/odyssey/issues/2310)) ([fea0793](https://github.com/okta/odyssey/commit/fea0793acf0800494270a87e4e5d65129942b99e))
+- rename new variant ([28466a4](https://github.com/okta/odyssey/commit/28466a46c8a254f543f595d2abf26115eff7b66b))
+- rename tests ([85b59a0](https://github.com/okta/odyssey/commit/85b59a02d8999c1d4cd6d9fc7c86556266c63c63))
+- resolve eslint error ([6be8bd0](https://github.com/okta/odyssey/commit/6be8bd0ca6f333949d80cbe59e28fac48528388b))
+- resolve type issues in storybook ([1e11cbe](https://github.com/okta/odyssey/commit/1e11cbe40299c62c6a47a419ef0026d932765129))
+- revert changes for radio group stories ([b9e3007](https://github.com/okta/odyssey/commit/b9e30071649ff9a0a723b2aa4d546a16973bd43f))
+- revert last commit ([beefba3](https://github.com/okta/odyssey/commit/beefba3fe35de567abed72c914048e2662f35b0f))
+- revert stories update ([47d5dc4](https://github.com/okta/odyssey/commit/47d5dc4b7f8756648fe20adbb5e267c9352f694a))
+- revert type change ([9d9e16b](https://github.com/okta/odyssey/commit/9d9e16b83cc3047b7dd6c5eb7e8027b2dd0898cb))
+- show code block in storybook ([b2bd444](https://github.com/okta/odyssey/commit/b2bd444d11af21ef3aa53fde651863c84f763f13))
+- show form components with different attribute settings in storybook for visual testing ([f21a9eb](https://github.com/okta/odyssey/commit/f21a9eb028308b6c2c9d97e84d30392ad8ec8e1d))
+- storybook tests ([2b3f92d](https://github.com/okta/odyssey/commit/2b3f92dfdceecef3fd425d9040bbfaef2b22249c))
+- style in breadcrumbs ([a01ab07](https://github.com/okta/odyssey/commit/a01ab079397ad8d570e44e5573e1e9dd2e41c0b8))
+- tests ([a2d7ec9](https://github.com/okta/odyssey/commit/a2d7ec9144456e0abe3d0bd8c249d38dedf82b2d))
+- tests ([5a8dd46](https://github.com/okta/odyssey/commit/5a8dd4626ddb6e7bc8ea963b5bfb8c3d9fae2266))
+- text update, follow HTML-style prop additions ([a8eb111](https://github.com/okta/odyssey/commit/a8eb1111fa5891901af769e1fdd9af13c7d0d909))
+- tooltip ([395047a](https://github.com/okta/odyssey/commit/395047ac00c0ec3656e2e6aa3088cbb176c3e73d))
+- tooltip test ([d413a9e](https://github.com/okta/odyssey/commit/d413a9edcce6316bc5bf76e62a0e34325d759fc7))
+- update callout storybook docs ([2ce411a](https://github.com/okta/odyssey/commit/2ce411ac3b07a98e2b9b052ea06170d936f832c3))
+- update glob to v9 ([#2275](https://github.com/okta/odyssey/issues/2275)) ([c4d73ea](https://github.com/okta/odyssey/commit/c4d73eaf2ae972ad4b9afda13428bd96f6b626e0))
+- update roadmap page ([bf2af54](https://github.com/okta/odyssey/commit/bf2af54bae0109ddca86006d5bc648104ccd1391))
+- update story ([b453549](https://github.com/okta/odyssey/commit/b453549866aa997988bba568f479ce66084d377b))
+- update story to fix a11y test ([63c0e62](https://github.com/okta/odyssey/commit/63c0e623cdcb4faad64af03c0ee80e9cf3952b08))
+- update storybook to show Label not Title ([9378fae](https://github.com/okta/odyssey/commit/9378faeead9e226150d448c19acd99154cace297))
+- update tests ([3aa9976](https://github.com/okta/odyssey/commit/3aa9976ac37de4bc5b82833b7d94c1e15604a0a4))
+- updated vulnerable packages per Snyk ([#2268](https://github.com/okta/odyssey/issues/2268)) ([1efe177](https://github.com/okta/odyssey/commit/1efe177f79c2a13a8d2c942c472120b30d42410f))
+
+## [1.21.0](https://github.com/okta/odyssey/compare/v1.15.9...v1.21.0) (2024-08-07)
+
+### Features
+
+- add backwards compatible empty state export ([#2266](https://github.com/okta/odyssey/issues/2266)) ([0fe3203](https://github.com/okta/odyssey/commit/0fe3203629dc85f7c91c58e3ff078c9a89360407))
+- add initial search prop to DataTable ([#2265](https://github.com/okta/odyssey/issues/2265)) ([5829534](https://github.com/okta/odyssey/commit/582953472b9a4e9946a57c852b78cd890a6ab674))
+- adds a generic top nav component ([#2296](https://github.com/okta/odyssey/issues/2296)) ([6f3165f](https://github.com/okta/odyssey/commit/6f3165f9fd4a1d1743c975b72132d4ec186d09bb))
+- adds new side navigation component for unified nav design ([#2269](https://github.com/okta/odyssey/issues/2269)) ([e54a470](https://github.com/okta/odyssey/commit/e54a470aaa71eec4fd85f19ac8519425f1d64e8f))
+- bumps lerna version ([#2238](https://github.com/okta/odyssey/issues/2238)) ([615f080](https://github.com/okta/odyssey/commit/615f080082ea42ded591a262fb2affe36d51cbf7))
+- EmptyState component ([#2175](https://github.com/okta/odyssey/issues/2175)) ([8c86845](https://github.com/okta/odyssey/commit/8c868450b6e1b8c63775afe1f38219507e9bacc7))
+- move Pagination to its own component ([#2166](https://github.com/okta/odyssey/issues/2166)) ([61eda40](https://github.com/okta/odyssey/commit/61eda40aaf1a5dc5477799694594ea5625715fe0))
+- Test Selectors ([#2209](https://github.com/okta/odyssey/issues/2209)) ([dfa8451](https://github.com/okta/odyssey/commit/dfa8451d0cb6ed63cbd3ac1ce740203b638348f7))
+
+### Bug Fixes
+
+- add changes back, remove required label ([cccce45](https://github.com/okta/odyssey/commit/cccce454c33588369786b2dc8cc6e39bbace4678))
+- add clarification in TextField label ([e6f7d80](https://github.com/okta/odyssey/commit/e6f7d8007dcdf0e0738c647342d901252061b705))
+- add comment ([9af7d11](https://github.com/okta/odyssey/commit/9af7d11f2964fa1b17be673c4e84a0bbb1a47ab9))
+- add errorMessageList to form components ([ad6de75](https://github.com/okta/odyssey/commit/ad6de75175043491b10c966646f95858b3217bea))
+- add floating action button variant ([a32110d](https://github.com/okta/odyssey/commit/a32110d5aa71efd7fcbf3f1606eae613a639c721))
+- add hint text to Radio and RadioGroup ([6518de5](https://github.com/okta/odyssey/commit/6518de5b38e54ec6aa3146a310c7c02a3b7d8a4e))
+- add more tests ([0149621](https://github.com/okta/odyssey/commit/0149621f7f762f0106149d6d9533d8c8596c62e8))
+- add optional href prop to button ([f46123b](https://github.com/okta/odyssey/commit/f46123b538947aa0040b29832dafaf6df9da332e))
+- add secondary danger button variant ([170e6e0](https://github.com/okta/odyssey/commit/170e6e03476d3a7fdef9bdca9f94a8d7e0d6f00a))
+- add secondary danger button variant ([d398e39](https://github.com/okta/odyssey/commit/d398e391e2d80d2f95f54182bf01adb8c78d3c63))
+- add test ([37755b4](https://github.com/okta/odyssey/commit/37755b48c1be6a7d82e9f0e6ac377049abcab8a8))
+- add test for no options ([d997be1](https://github.com/okta/odyssey/commit/d997be145086c9f3142f8c24e733a7f7abdb9133))
+- add tests ([0774e0a](https://github.com/okta/odyssey/commit/0774e0ae7dfc5f8ee2cd355e2186ad29827fa0b4))
+- address comments ([c335306](https://github.com/okta/odyssey/commit/c335306a727b7879348cdacfdafda57a878af631))
+- alphabetize props ([988bd74](https://github.com/okta/odyssey/commit/988bd74e98794f2f48589e6be3e37f608f87a07a))
+- alphabetize props in imports ([ca56f0a](https://github.com/okta/odyssey/commit/ca56f0a3ad5b3a4902bf38111bc6c229ad1533f6))
+- Applitools isn't consistently running VRTs ([#2314](https://github.com/okta/odyssey/issues/2314)) ([0c9a10c](https://github.com/okta/odyssey/commit/0c9a10ca9036e34f74dd383f26dda8dc77211c90))
+- await on toBeVisible ([74038da](https://github.com/okta/odyssey/commit/74038daca8211c7ba74971610e49332a0ffee054))
+- bump version to 1.17 ([0e32aba](https://github.com/okta/odyssey/commit/0e32aba973ef00d5a872dbd408a84fb54c8a7408))
+- button tests ([b427ee5](https://github.com/okta/odyssey/commit/b427ee5cf2901d380112eaae10a813a4f1781f53))
+- checkbox test ([69101bb](https://github.com/okta/odyssey/commit/69101bb4fc7f980116f1e1cef2ee736a7126d998))
+- expose "filled" variant of search ([af345d6](https://github.com/okta/odyssey/commit/af345d6e3265bd3addf0a3153695a0c03d30ba70))
+- fix props issue in storybook ([967fd49](https://github.com/okta/odyssey/commit/967fd494dcf7394b3c182f7d7bd6d95884e39a5c))
+- fix storybook error ([a7f3179](https://github.com/okta/odyssey/commit/a7f3179dd78969341744d8d29d903ee706a3ad61))
+- fix tests ([a730e69](https://github.com/okta/odyssey/commit/a730e69216735829d0e448dc4a8f39d41fe93a1e))
+- loading in autocomplete ([f99e09e](https://github.com/okta/odyssey/commit/f99e09ed70ba941a22875dc41abef35282d9459b))
+- make return implicit in label ([e2a26df](https://github.com/okta/odyssey/commit/e2a26df5082bfb5e7573c83a9ab53b364941713b))
+- move Drawer from labs to Odyssey OKTA-700393 ([247b30a](https://github.com/okta/odyssey/commit/247b30af6e598119b78d97c971f490c48cd1dfca))
+- prevent mixing old and new button props ([7aed65b](https://github.com/okta/odyssey/commit/7aed65be175c12525c9aee5fca18af0251dd2fec))
+- re-add support for "callToAction" button usage ([0eb6ec7](https://github.com/okta/odyssey/commit/0eb6ec704ba6a0a9da12dcd6d864a6d1d1421915))
+- remove invalid pseudo element from theme overrides ([#2310](https://github.com/okta/odyssey/issues/2310)) ([fea0793](https://github.com/okta/odyssey/commit/fea0793acf0800494270a87e4e5d65129942b99e))
+- rename new variant ([28466a4](https://github.com/okta/odyssey/commit/28466a46c8a254f543f595d2abf26115eff7b66b))
+- rename tests ([85b59a0](https://github.com/okta/odyssey/commit/85b59a02d8999c1d4cd6d9fc7c86556266c63c63))
+- resolve eslint error ([6be8bd0](https://github.com/okta/odyssey/commit/6be8bd0ca6f333949d80cbe59e28fac48528388b))
+- resolve type issues in storybook ([1e11cbe](https://github.com/okta/odyssey/commit/1e11cbe40299c62c6a47a419ef0026d932765129))
+- revert changes for radio group stories ([b9e3007](https://github.com/okta/odyssey/commit/b9e30071649ff9a0a723b2aa4d546a16973bd43f))
+- revert last commit ([beefba3](https://github.com/okta/odyssey/commit/beefba3fe35de567abed72c914048e2662f35b0f))
+- revert stories update ([47d5dc4](https://github.com/okta/odyssey/commit/47d5dc4b7f8756648fe20adbb5e267c9352f694a))
+- revert type change ([9d9e16b](https://github.com/okta/odyssey/commit/9d9e16b83cc3047b7dd6c5eb7e8027b2dd0898cb))
+- show code block in storybook ([b2bd444](https://github.com/okta/odyssey/commit/b2bd444d11af21ef3aa53fde651863c84f763f13))
+- show form components with different attribute settings in storybook for visual testing ([f21a9eb](https://github.com/okta/odyssey/commit/f21a9eb028308b6c2c9d97e84d30392ad8ec8e1d))
+- storybook tests ([2b3f92d](https://github.com/okta/odyssey/commit/2b3f92dfdceecef3fd425d9040bbfaef2b22249c))
+- style in breadcrumbs ([a01ab07](https://github.com/okta/odyssey/commit/a01ab079397ad8d570e44e5573e1e9dd2e41c0b8))
+- tests ([a2d7ec9](https://github.com/okta/odyssey/commit/a2d7ec9144456e0abe3d0bd8c249d38dedf82b2d))
+- tests ([5a8dd46](https://github.com/okta/odyssey/commit/5a8dd4626ddb6e7bc8ea963b5bfb8c3d9fae2266))
+- text update, follow HTML-style prop additions ([a8eb111](https://github.com/okta/odyssey/commit/a8eb1111fa5891901af769e1fdd9af13c7d0d909))
+- tooltip ([395047a](https://github.com/okta/odyssey/commit/395047ac00c0ec3656e2e6aa3088cbb176c3e73d))
+- tooltip test ([d413a9e](https://github.com/okta/odyssey/commit/d413a9edcce6316bc5bf76e62a0e34325d759fc7))
+- update callout storybook docs ([2ce411a](https://github.com/okta/odyssey/commit/2ce411ac3b07a98e2b9b052ea06170d936f832c3))
+- update glob to v9 ([#2275](https://github.com/okta/odyssey/issues/2275)) ([c4d73ea](https://github.com/okta/odyssey/commit/c4d73eaf2ae972ad4b9afda13428bd96f6b626e0))
+- update roadmap page ([bf2af54](https://github.com/okta/odyssey/commit/bf2af54bae0109ddca86006d5bc648104ccd1391))
+- update story ([b453549](https://github.com/okta/odyssey/commit/b453549866aa997988bba568f479ce66084d377b))
+- update story to fix a11y test ([63c0e62](https://github.com/okta/odyssey/commit/63c0e623cdcb4faad64af03c0ee80e9cf3952b08))
+- update storybook to show Label not Title ([9378fae](https://github.com/okta/odyssey/commit/9378faeead9e226150d448c19acd99154cace297))
+- update tests ([3aa9976](https://github.com/okta/odyssey/commit/3aa9976ac37de4bc5b82833b7d94c1e15604a0a4))
+- updated vulnerable packages per Snyk ([#2268](https://github.com/okta/odyssey/issues/2268)) ([1efe177](https://github.com/okta/odyssey/commit/1efe177f79c2a13a8d2c942c472120b30d42410f))
+
+## [1.20.0](https://github.com/okta/odyssey/compare/v1.19.0...v1.20.0) (2024-07-25)
+
+### Features
+
+- pageTemplate and Layout component ([#2219](https://github.com/okta/odyssey/issues/2219)) ([a04eb1d](https://github.com/okta/odyssey/commit/a04eb1df24702ef23b436d0df58e0571974b0454))
+
+### Bug Fixes
+
+- data Table legacy improvements ([#2294](https://github.com/okta/odyssey/issues/2294)) ([3146cd1](https://github.com/okta/odyssey/commit/3146cd1edeb145aa727682659eaba422533ba0f1))
+- english leak for "Close" in Autocomplete ([#2291](https://github.com/okta/odyssey/issues/2291)) ([0959c71](https://github.com/okta/odyssey/commit/0959c71f7c2dc6ddc1cde3281534f19222f4df6d))
+
+## [1.19.0](https://github.com/okta/odyssey/compare/v1.18.0...v1.19.0) (2024-07-15)
+
+### Features
+
+- adds new side navigation component for unified nav design ([#2269](https://github.com/okta/odyssey/issues/2269)) ([e54a470](https://github.com/okta/odyssey/commit/e54a470aaa71eec4fd85f19ac8519425f1d64e8f))
+
+### Bug Fixes
+
+- update glob to v9 ([#2275](https://github.com/okta/odyssey/issues/2275)) ([c4d73ea](https://github.com/okta/odyssey/commit/c4d73eaf2ae972ad4b9afda13428bd96f6b626e0))
+
+## [1.18.0](https://github.com/okta/odyssey/compare/v1.15.9...v1.18.0) (2024-06-26)
+
+### Features
+
+- add backwards compatible empty state export ([#2266](https://github.com/okta/odyssey/issues/2266)) ([0fe3203](https://github.com/okta/odyssey/commit/0fe3203629dc85f7c91c58e3ff078c9a89360407))
+- add initial search prop to DataTable ([#2265](https://github.com/okta/odyssey/issues/2265)) ([5829534](https://github.com/okta/odyssey/commit/582953472b9a4e9946a57c852b78cd890a6ab674))
+- bumps lerna version ([#2238](https://github.com/okta/odyssey/issues/2238)) ([615f080](https://github.com/okta/odyssey/commit/615f080082ea42ded591a262fb2affe36d51cbf7))
+- EmptyState component ([#2175](https://github.com/okta/odyssey/issues/2175)) ([8c86845](https://github.com/okta/odyssey/commit/8c868450b6e1b8c63775afe1f38219507e9bacc7))
+- move Pagination to its own component ([#2166](https://github.com/okta/odyssey/issues/2166)) ([61eda40](https://github.com/okta/odyssey/commit/61eda40aaf1a5dc5477799694594ea5625715fe0))
+- Test Selectors ([#2209](https://github.com/okta/odyssey/issues/2209)) ([dfa8451](https://github.com/okta/odyssey/commit/dfa8451d0cb6ed63cbd3ac1ce740203b638348f7))
+
+### Bug Fixes
+
+- add changes back, remove required label ([cccce45](https://github.com/okta/odyssey/commit/cccce454c33588369786b2dc8cc6e39bbace4678))
+- add clarification in TextField label ([e6f7d80](https://github.com/okta/odyssey/commit/e6f7d8007dcdf0e0738c647342d901252061b705))
+- add comment ([9af7d11](https://github.com/okta/odyssey/commit/9af7d11f2964fa1b17be673c4e84a0bbb1a47ab9))
+- add errorMessageList to form components ([ad6de75](https://github.com/okta/odyssey/commit/ad6de75175043491b10c966646f95858b3217bea))
+- add floating action button variant ([a32110d](https://github.com/okta/odyssey/commit/a32110d5aa71efd7fcbf3f1606eae613a639c721))
+- add hint text to Radio and RadioGroup ([6518de5](https://github.com/okta/odyssey/commit/6518de5b38e54ec6aa3146a310c7c02a3b7d8a4e))
+- add more tests ([0149621](https://github.com/okta/odyssey/commit/0149621f7f762f0106149d6d9533d8c8596c62e8))
+- add optional href prop to button ([f46123b](https://github.com/okta/odyssey/commit/f46123b538947aa0040b29832dafaf6df9da332e))
+- add secondary danger button variant ([170e6e0](https://github.com/okta/odyssey/commit/170e6e03476d3a7fdef9bdca9f94a8d7e0d6f00a))
+- add secondary danger button variant ([d398e39](https://github.com/okta/odyssey/commit/d398e391e2d80d2f95f54182bf01adb8c78d3c63))
+- add test ([37755b4](https://github.com/okta/odyssey/commit/37755b48c1be6a7d82e9f0e6ac377049abcab8a8))
+- add test for no options ([d997be1](https://github.com/okta/odyssey/commit/d997be145086c9f3142f8c24e733a7f7abdb9133))
+- add tests ([0774e0a](https://github.com/okta/odyssey/commit/0774e0ae7dfc5f8ee2cd355e2186ad29827fa0b4))
+- address comments ([c335306](https://github.com/okta/odyssey/commit/c335306a727b7879348cdacfdafda57a878af631))
+- alphabetize props ([988bd74](https://github.com/okta/odyssey/commit/988bd74e98794f2f48589e6be3e37f608f87a07a))
+- alphabetize props in imports ([ca56f0a](https://github.com/okta/odyssey/commit/ca56f0a3ad5b3a4902bf38111bc6c229ad1533f6))
+- await on toBeVisible ([74038da](https://github.com/okta/odyssey/commit/74038daca8211c7ba74971610e49332a0ffee054))
+- bump version to 1.17 ([0e32aba](https://github.com/okta/odyssey/commit/0e32aba973ef00d5a872dbd408a84fb54c8a7408))
+- button tests ([b427ee5](https://github.com/okta/odyssey/commit/b427ee5cf2901d380112eaae10a813a4f1781f53))
+- checkbox test ([69101bb](https://github.com/okta/odyssey/commit/69101bb4fc7f980116f1e1cef2ee736a7126d998))
+- expose "filled" variant of search ([af345d6](https://github.com/okta/odyssey/commit/af345d6e3265bd3addf0a3153695a0c03d30ba70))
+- fix props issue in storybook ([967fd49](https://github.com/okta/odyssey/commit/967fd494dcf7394b3c182f7d7bd6d95884e39a5c))
+- fix storybook error ([a7f3179](https://github.com/okta/odyssey/commit/a7f3179dd78969341744d8d29d903ee706a3ad61))
+- fix tests ([a730e69](https://github.com/okta/odyssey/commit/a730e69216735829d0e448dc4a8f39d41fe93a1e))
+- loading in autocomplete ([f99e09e](https://github.com/okta/odyssey/commit/f99e09ed70ba941a22875dc41abef35282d9459b))
+- make return implicit in label ([e2a26df](https://github.com/okta/odyssey/commit/e2a26df5082bfb5e7573c83a9ab53b364941713b))
+- move Drawer from labs to Odyssey OKTA-700393 ([247b30a](https://github.com/okta/odyssey/commit/247b30af6e598119b78d97c971f490c48cd1dfca))
+- prevent mixing old and new button props ([7aed65b](https://github.com/okta/odyssey/commit/7aed65be175c12525c9aee5fca18af0251dd2fec))
+- re-add support for "callToAction" button usage ([0eb6ec7](https://github.com/okta/odyssey/commit/0eb6ec704ba6a0a9da12dcd6d864a6d1d1421915))
+- rename new variant ([28466a4](https://github.com/okta/odyssey/commit/28466a46c8a254f543f595d2abf26115eff7b66b))
+- rename tests ([85b59a0](https://github.com/okta/odyssey/commit/85b59a02d8999c1d4cd6d9fc7c86556266c63c63))
+- resolve eslint error ([6be8bd0](https://github.com/okta/odyssey/commit/6be8bd0ca6f333949d80cbe59e28fac48528388b))
+- resolve type issues in storybook ([1e11cbe](https://github.com/okta/odyssey/commit/1e11cbe40299c62c6a47a419ef0026d932765129))
+- revert changes for radio group stories ([b9e3007](https://github.com/okta/odyssey/commit/b9e30071649ff9a0a723b2aa4d546a16973bd43f))
+- revert last commit ([beefba3](https://github.com/okta/odyssey/commit/beefba3fe35de567abed72c914048e2662f35b0f))
+- revert stories update ([47d5dc4](https://github.com/okta/odyssey/commit/47d5dc4b7f8756648fe20adbb5e267c9352f694a))
+- revert type change ([9d9e16b](https://github.com/okta/odyssey/commit/9d9e16b83cc3047b7dd6c5eb7e8027b2dd0898cb))
+- show code block in storybook ([b2bd444](https://github.com/okta/odyssey/commit/b2bd444d11af21ef3aa53fde651863c84f763f13))
+- show form components with different attribute settings in storybook for visual testing ([f21a9eb](https://github.com/okta/odyssey/commit/f21a9eb028308b6c2c9d97e84d30392ad8ec8e1d))
+- storybook tests ([2b3f92d](https://github.com/okta/odyssey/commit/2b3f92dfdceecef3fd425d9040bbfaef2b22249c))
+- style in breadcrumbs ([a01ab07](https://github.com/okta/odyssey/commit/a01ab079397ad8d570e44e5573e1e9dd2e41c0b8))
+- tests ([a2d7ec9](https://github.com/okta/odyssey/commit/a2d7ec9144456e0abe3d0bd8c249d38dedf82b2d))
+- tests ([5a8dd46](https://github.com/okta/odyssey/commit/5a8dd4626ddb6e7bc8ea963b5bfb8c3d9fae2266))
+- text update, follow HTML-style prop additions ([a8eb111](https://github.com/okta/odyssey/commit/a8eb1111fa5891901af769e1fdd9af13c7d0d909))
+- tooltip ([395047a](https://github.com/okta/odyssey/commit/395047ac00c0ec3656e2e6aa3088cbb176c3e73d))
+- tooltip test ([d413a9e](https://github.com/okta/odyssey/commit/d413a9edcce6316bc5bf76e62a0e34325d759fc7))
+- update callout storybook docs ([2ce411a](https://github.com/okta/odyssey/commit/2ce411ac3b07a98e2b9b052ea06170d936f832c3))
+- update roadmap page ([bf2af54](https://github.com/okta/odyssey/commit/bf2af54bae0109ddca86006d5bc648104ccd1391))
+- update story ([b453549](https://github.com/okta/odyssey/commit/b453549866aa997988bba568f479ce66084d377b))
+- update story to fix a11y test ([63c0e62](https://github.com/okta/odyssey/commit/63c0e623cdcb4faad64af03c0ee80e9cf3952b08))
+- update storybook to show Label not Title ([9378fae](https://github.com/okta/odyssey/commit/9378faeead9e226150d448c19acd99154cace297))
+- update tests ([3aa9976](https://github.com/okta/odyssey/commit/3aa9976ac37de4bc5b82833b7d94c1e15604a0a4))
+- updated vulnerable packages per Snyk ([#2268](https://github.com/okta/odyssey/issues/2268)) ([1efe177](https://github.com/okta/odyssey/commit/1efe177f79c2a13a8d2c942c472120b30d42410f))
+
+## [1.16.0](https://github.com/okta/odyssey/compare/v1.15.8...odyssey-1.16.0) (2024-06-07)
+
+### Features
+
+- [Admin page template](https://www.figma.com/file/VCboDINbWviK0pOvWlFbbo/Blank-admin-template?type=design&t=hPcrk4QupmBQS9dW-6) - [Figma] A blank canvas for designers containing the basic framework with which to create any type of UI.
+- [Data Table](https://odyssey.okta.design/latest/components/data-table/design-j0LLQfAR) [[2042]](https://github.com/okta/odyssey/pull/2042) - Data table organizes and displays information so it’s easy for users to scan, sort, analyze, compare, and take action.
+- [Date Picker (Labs)](https://odyssey.okta.design/latest/components/date-picker/design-I91EF1Cm) [[2200]](https://github.com/okta/odyssey/pull/2200) - A date picker allows people to select a single date or time.
+- [Drawer](https://odyssey.okta.design/latest/components/drawer/design-wu4zfglp) [2198](https://github.com/okta/odyssey/pull/2198) - A new modal content container that’s perfect for supplemental filtering workflows and editing short lists of item.
+- EmptyState component [[2175]](https://github.com/okta/odyssey/pull/2175)
+- [File uploader (Labs)](https://odyssey.okta.design/latest/components/file-uploader/design-7RVlRb8E) [2088](https://github.com/okta/odyssey/pull/2088) - File uploader lets users upload files from a computer or device to a specific location.
+- Odyssey's [Roadmap page](https://odyssey.okta.design/latest/about-odyssey/roadmap-tEKvs7fF) now includes a customizable table view of FY2025 timing estimates and current phases for each planned component and pattern.
+- Pagination component [[2166]](https://github.com/okta/odyssey/pull/2166)
+
+### Enhancements
+
+- Add clarification for textarea usage in `TextField` [[2227]](https://github.com/okta/odyssey/pull/2227)
+- Add href prop and "Floating Action" variant to `Button` [[2232]](https://github.com/okta/odyssey/pull/2232)
+- Add option to truncate or wrap `DataTable` cells [[2178]](https://github.com/okta/odyssey/pull/2178)
+- Add row expansion to `DataTable` [[2162]](https://github.com/okta/odyssey/pull/2162)
+- Add `info` variant to `Status` [[2235]](https://github.com/okta/odyssey/pull/2235)
+- Add Secondary Danger `Button` variant [[2228]](https://github.com/okta/odyssey/pull/2228)
+- Add stories for min/max date prop in `DatePicker` [[2213]](https://github.com/okta/odyssey/pull/2213)
+- Display empty values in `Select` [[2205]](https://github.com/okta/odyssey/pull/2205)
+- Generate new odyssey icons [[2233]](https://github.com/okta/odyssey/pull/2233)
+- Improve `DataTable` density handling [[2177]](https://github.com/okta/odyssey/pull/2177)
+- Navigation icons in Figma. We’ve also updated the glyph grid, and made file organization updates, and visual optimizations.
+- Move `tsx` dependency to `dev` and upgrade [[2212]](https://github.com/okta/odyssey/pull/2212)
+- Test selector library for Odyssey components [2209](https://github.com/okta/odyssey/pull/2209)
+- [Universal Okta icons](https://okta.slack.com/archives/C7T2H3KNJ/p1709857064692349) in Figma
+- Updated disabled `Button` guidance [[2214]](https://github.com/okta/odyssey/pull/2214)
+
+### Fixes
+
+- Add Applitools Yarn dependencies to cache [[2187]](https://github.com/okta/odyssey/pull/2187)
+- Add support for lists in `Callout` [[2189]](https://github.com/okta/odyssey/pull/2189)
+- Add `tabindex` to enable `Menu` KB navigation [[2225]](https://github.com/okta/odyssey/pull/2225)
+- Allow multi `Select` to pass value to filter [[2231]](https://github.com/okta/odyssey/pull/2231)
+- Change how mui tooltip ref is assigned in `Button` [[2206]](https://github.com/okta/odyssey/pull/2206)
+- Checkbox item size issue in hidden instances [Figma] [[DES-5855]](https://oktainc.atlassian.net/browse/DES-5855)
+- Expose "filled" variant of `SearchField` [[2226]](https://github.com/okta/odyssey/pull/2226)
+- Fix `Autocomplete` style issues [[2192]](https://github.com/okta/odyssey/pull/2192)
+- Fix `Autocomplete` dropdown height [[2234]](https://github.com/okta/odyssey/pull/2234)
+- Fix broken height on multi `Select` [[2183]](https://github.com/okta/odyssey/pull/2183)
+- Fix missing callback dependencies in `DataTable` [[2188]](https://github.com/okta/odyssey/pull/2188)
+- Remove HTML lang attr [[2197]](https://github.com/okta/odyssey/pull/2197)
+- Re-add support for "callToAction" `Button` usage [[2229]](https://github.com/okta/odyssey/pull/2229)
+- Rename text wrapping prop in `DataTable` [[2195]](https://github.com/okta/odyssey/pull/2195)
+- Truncate long `Breadcrumbs` [[2182]](https://github.com/okta/odyssey/pull/2182)
+- Update `Callout` storybook docs [[2204]](https://github.com/okta/odyssey/pull/2204)
+
 ## [1.15.9](https://github.com/okta/odyssey/compare/v1.15.8...v1.15.9) (2024-03-26)
 
 ### Bug Fixes

@@ -10,29 +10,30 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import styled from "@emotion/styled";
 import { InputBase } from "@mui/material";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Paragraph } from "../Typography";
-import { Button } from "../Button";
+import { useTranslation } from "react-i18next";
+
+import { Box } from "../Box";
+import { Button } from "../Buttons";
+import { paginationTypeValues } from "./constants";
 import { ArrowLeftIcon, ArrowRightIcon } from "../icons.generated";
-import styled from "@emotion/styled";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../OdysseyDesignTokensContext";
-import { Box } from "../Box";
-import { paginationTypeValues } from "./constants";
 import { usePagination } from "./usePagination";
+import { Paragraph } from "../Typography";
 
-const PaginationContainer = styled("div")({
+const PaginationContainer = styled("nav")({
   display: "flex",
-  alignItems: "center",
   justifyContent: "space-between",
 });
 
 const PaginationSegment = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   display: "flex",
   alignItems: "center",
   gap: odysseyDesignTokens.Spacing4,
@@ -45,7 +46,7 @@ const PaginationSegment = styled("div", {
 
 const PaginationInput = styled(InputBase, {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   borderColor: odysseyDesignTokens.HueNeutral200,
   borderRadius: odysseyDesignTokens.BorderRadiusTight,
   height: odysseyDesignTokens.Spacing6,
@@ -66,13 +67,55 @@ const PaginationButtonContainer = styled("div")({
 
 export type PaginationProps = {
   /**
-   * The current page index
+   * The labeled rendered for the current page index
    */
-  pageIndex: number;
+  currentPageLabel?: string;
   /**
-   * The current page size
+   * The number of items currently visible on the page
    */
-  pageSize: number;
+  currentRowsCount?: number;
+  /**
+   * If true, the page input will be visible and the user can directly manipulate which page
+   * is visible.
+   */
+  hasPageInput?: boolean;
+  /**
+   * If true, the row count input will be visible and the user can directly manipulate how many rows
+   * are visible.
+   */
+  hasRowCountInput?: boolean;
+  /**
+   * If true, the "X - X of total X" label will be visible
+   */
+  hasRowCountLabel?: boolean;
+  /**
+   * If true, the pagination controls will be disabled
+   */
+  isDisabled?: boolean;
+  /**
+   * If true, the next or Show More button will be disabled
+   */
+  isMoreDisabled?: boolean;
+  /**
+   * The current page last row index
+   */
+  lastRow?: number;
+  /**
+   * If the pagination is of "loadMore" variant, then this is the the load more label
+   */
+  loadMoreLabel?: string;
+  /**
+   * The max page
+   */
+  maxPageIndex?: number;
+  /**
+   * The max rows per page
+   */
+  maxPageSize?: number;
+  /**
+   * The label for the next control
+   */
+  nextLabel?: string;
   /**
    * Page index and page size setter
    */
@@ -84,84 +127,117 @@ export type PaginationProps = {
     pageSize: number;
   }) => void;
   /**
-   * The current page last row index
+   * The current page index
    */
-  lastRow: number;
+  pageIndex: number;
+  /**
+   * The current page size
+   */
+  pageSize: number;
+  /**
+   * The label for the previous control
+   */
+  previousLabel?: string;
+  /**
+   * The label that shows how many results are rendered per page
+   */
+  rowsPerPageLabel?: string;
   /**
    * Total rows count
    */
   totalRows?: number;
   /**
-   * If true, the pagination controls will be disabled
-   */
-  isDisabled?: boolean;
-  /**
    * The type of pagination controls shown. Defaults to next/prev buttons, but can be
    * set to a simple "Load more" button by setting to "loadMore".
    */
   variant?: (typeof paginationTypeValues)[number];
-  /**
-   * The label that shows how many results are rendered per page
-   */
-  rowsPerPageLabel: string;
-  /**
-   * The labeled rendered for the current page index
-   */
-  currentPageLabel: string;
-  /**
-   * The label for the previous control
-   */
-  previousLabel: string;
-  /**
-   * The label for the next control
-   */
-  nextLabel: string;
-  /**
-   * If the pagination is of "loadMore" variant, then this is the the load more label
-   */
-  loadMoreLabel: string;
 };
 
 const Pagination = ({
+  currentPageLabel: currentPageLabelProp,
+  currentRowsCount,
+  hasPageInput = true,
+  hasRowCountInput = true,
+  hasRowCountLabel = true,
+  isDisabled,
+  isMoreDisabled,
+  lastRow,
+  loadMoreLabel: loadMoreLabelProp,
+  maxPageIndex,
+  maxPageSize,
+  nextLabel: nextLabelProp,
+  onPaginationChange: onPaginationChangeProp,
   pageIndex,
   pageSize,
-  onPaginationChange,
-  lastRow,
+  previousLabel: previousLabelProp,
+  rowsPerPageLabel: rowsPerPageLabelProp,
   totalRows,
-  isDisabled,
   variant,
-  rowsPerPageLabel,
-  currentPageLabel,
-  previousLabel,
-  nextLabel,
-  loadMoreLabel,
 }: PaginationProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const { t } = useTranslation();
 
   const [page, setPage] = useState<number>(pageIndex);
   const [rowsPerPage, setRowsPerPage] = useState<number>(pageSize);
   const initialRowsPerPage = useRef<number>(pageSize);
+
+  const currentPageLabel = currentPageLabelProp ?? t("pagination.page");
+  const loadMoreLabel = loadMoreLabelProp ?? t("pagination.loadmore");
+  const nextLabel = nextLabelProp ?? t("pagination.next");
+  const previousLabel = previousLabelProp ?? t("pagination.previous");
+  const rowsPerPageLabel = rowsPerPageLabelProp ?? t("pagination.rowsperpage");
 
   useEffect(() => {
     setPage(pageIndex);
     setRowsPerPage(pageSize);
   }, [pageIndex, pageSize]);
 
-  const { totalRowsLabel } = usePagination({ pageIndex, pageSize, totalRows });
+  const onPaginationChange = useCallback(
+    ({ pageIndex, pageSize }: { pageIndex: number; pageSize: number }) => {
+      onPaginationChangeProp({ pageIndex, pageSize });
+    },
+    [onPaginationChangeProp],
+  );
+
+  const { totalRowsLabel } = usePagination({
+    pageIndex,
+    pageSize,
+    currentRowsCount: currentRowsCount || pageSize,
+    totalRows,
+  });
 
   const handlePaginationChange = useCallback(() => {
-    const updatedPage =
-      totalRows && page * totalRows > lastRow
-        ? Math.ceil(totalRows / rowsPerPage)
-        : page;
-    const updatedRowsPerPage =
-      totalRows && rowsPerPage > totalRows ? totalRows : rowsPerPage;
+    let updatedPage = page;
+    let updatedRowsPerPage = rowsPerPage;
+
+    if (totalRows) {
+      const maxPageIndex = Math.ceil(totalRows / updatedRowsPerPage);
+
+      // Ensure rowsPerPage does not exceed totalRows
+      if (updatedRowsPerPage > totalRows) {
+        updatedRowsPerPage = totalRows;
+      }
+
+      // Ensure page is within valid range
+      if (updatedPage > maxPageIndex) {
+        updatedPage = maxPageIndex;
+      } else if (updatedPage < 1) {
+        updatedPage = 1;
+      }
+    }
+
+    console.log({
+      page,
+      updatedPage,
+      rowsPerPage,
+      updatedRowsPerPage,
+    });
 
     onPaginationChange({
       pageIndex: updatedPage,
       pageSize: updatedRowsPerPage,
     });
-  }, [page, rowsPerPage, lastRow, onPaginationChange, totalRows]);
+  }, [page, rowsPerPage, onPaginationChange, totalRows]);
 
   // The following handlers use React.KeyboardEvent (rather than just KeyboardEvent) becuase React.KeyboardEvent
   // is generic, while plain KeyboardEvent is not. We need this generic so we can specify the HTMLInputElement,
@@ -192,16 +268,24 @@ const Pagination = ({
 
   const setPageFromEvent = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      setPage(parseInt(event.target.value));
+      const value = maxPageIndex
+        ? Math.min(parseInt(event.target.value), maxPageIndex)
+        : parseInt(event.target.value);
+      setPage(value);
     },
-    [setPage],
+    [setPage, maxPageIndex],
   );
 
   const setRowsPerPageFromEvent = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      setRowsPerPage(parseInt(event.target.value));
+      const value = maxPageSize
+        ? Math.min(parseInt(event.target.value), maxPageSize)
+        : parseInt(event.target.value);
+
+      // Ensure the value can't be less than 1
+      setRowsPerPage(Math.max(1, value));
     },
-    [setRowsPerPage],
+    [setRowsPerPage, maxPageSize],
   );
 
   const handleLoadMore = useCallback(() => {
@@ -220,12 +304,15 @@ const Pagination = ({
   }, [onPaginationChange, page, rowsPerPage]);
 
   const loadMoreIsDisabled = useMemo(() => {
-    return totalRows ? rowsPerPage >= totalRows : false;
-  }, [rowsPerPage, totalRows]);
+    return isMoreDisabled || (totalRows ? rowsPerPage >= totalRows : false);
+  }, [isMoreDisabled, rowsPerPage, totalRows]);
 
   const nextButtonDisabled = useMemo(
-    () => (totalRows ? lastRow >= totalRows : false) || isDisabled,
-    [totalRows, lastRow, isDisabled],
+    () =>
+      isMoreDisabled ||
+      (lastRow && (totalRows ? lastRow >= totalRows : false)) ||
+      isDisabled,
+    [isMoreDisabled, totalRows, lastRow, isDisabled],
   );
 
   const previousButtonDisabled = useMemo(
@@ -236,42 +323,48 @@ const Pagination = ({
   const rowsPerPageInputProps = useMemo(
     () => ({
       "aria-label": rowsPerPageLabel,
+      max: maxPageSize || totalRows,
     }),
-    [rowsPerPageLabel],
+    [maxPageSize, rowsPerPageLabel, totalRows],
   );
 
   const currentPageInputProps = useMemo(
     () => ({
       "aria-label": currentPageLabel,
+      max: maxPageIndex,
     }),
-    [currentPageLabel],
+    [currentPageLabel, maxPageIndex],
   );
 
   return variant === "paged" ? (
-    <PaginationContainer>
+    <PaginationContainer aria-label={t("pagination.label")}>
       <PaginationSegment odysseyDesignTokens={odysseyDesignTokens}>
-        <Box>
+        {hasRowCountInput && (
+          <Box>
+            <Paragraph component="span" color="textSecondary">
+              {rowsPerPageLabel}
+            </Paragraph>
+            <PaginationInput
+              odysseyDesignTokens={odysseyDesignTokens}
+              type="number"
+              value={rowsPerPage}
+              onChange={setRowsPerPageFromEvent}
+              onBlur={handlePaginationChange}
+              onKeyDown={handleRowsPerPageSubmit}
+              disabled={isDisabled}
+              inputProps={rowsPerPageInputProps}
+            />
+          </Box>
+        )}
+        {hasRowCountLabel && (
           <Paragraph component="span" color="textSecondary">
-            {rowsPerPageLabel}
+            {totalRowsLabel}
           </Paragraph>
-          <PaginationInput
-            odysseyDesignTokens={odysseyDesignTokens}
-            type="number"
-            value={rowsPerPage}
-            onChange={setRowsPerPageFromEvent}
-            onBlur={handlePaginationChange}
-            onKeyDown={handleRowsPerPageSubmit}
-            disabled={isDisabled}
-            inputProps={rowsPerPageInputProps}
-          />
-        </Box>
-        <Paragraph component="span" color="textSecondary">
-          {totalRowsLabel}
-        </Paragraph>
+        )}
       </PaginationSegment>
 
       <PaginationSegment odysseyDesignTokens={odysseyDesignTokens}>
-        {totalRows && (
+        {totalRows && hasPageInput && (
           <Box>
             <Paragraph component="span" color="textSecondary">
               {currentPageLabel}

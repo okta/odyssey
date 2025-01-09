@@ -13,7 +13,7 @@
 import { FormEventHandler, memo, ReactElement } from "react";
 import styled from "@emotion/styled";
 
-import { Button } from "./Button";
+import { Button } from "./Buttons";
 import { Callout } from "./Callout";
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { HtmlProps } from "./HtmlProps";

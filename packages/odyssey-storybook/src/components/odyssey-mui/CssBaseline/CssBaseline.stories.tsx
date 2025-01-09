@@ -11,24 +11,21 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
-import {
-  CssBaseline,
-  CssBaselineProps,
-  ScopedCssBaseline,
-  ScopedCssBaselineProps,
-} from "@okta/odyssey-react-mui";
+import { CssBaseline, ScopedCssBaseline } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-const storybookMeta: Meta<CssBaselineProps> = {
+const meta = {
   title: "MUI Components/CSS Baseline",
   component: CssBaseline,
   decorators: [MuiThemeDecorator],
-};
+} satisfies Meta<typeof CssBaseline>;
 
-export default storybookMeta;
+export default meta;
 
-export const Abbr: StoryObj<ScopedCssBaselineProps> = {
-  render: function C({}) {
+type Story = StoryObj<typeof meta>;
+
+export const Abbr: Story = {
+  render: function C() {
     return (
       <ScopedCssBaseline>
         <p>
@@ -40,8 +37,8 @@ export const Abbr: StoryObj<ScopedCssBaselineProps> = {
   },
 };
 
-export const Address: StoryObj = {
-  render: function C({}) {
+export const Address: Story = {
+  render: function C() {
     return (
       <ScopedCssBaseline>
         <address>
@@ -55,8 +52,8 @@ export const Address: StoryObj = {
   },
 };
 
-export const Blockquote: StoryObj = {
-  render: function C({}) {
+export const Blockquote: Story = {
+  render: function C() {
     return (
       <ScopedCssBaseline>
         <blockquote cite="https://books.google.com/books?id=dlYEAAAAMBAJ&lpg=PP1&dq=Life,+2+May+1955&pg=PA61&hl=en#v=onepage&q=Life%2C%202%20May%201955&f=false">
@@ -77,8 +74,8 @@ export const Blockquote: StoryObj = {
   },
 };
 
-export const Cite: StoryObj = {
-  render: function C({}) {
+export const Cite: Story = {
+  render: function C() {
     return (
       <ScopedCssBaseline>
         <blockquote>
@@ -101,8 +98,8 @@ export const Cite: StoryObj = {
   },
 };
 
-export const Code: StoryObj = {
-  render: function C({}) {
+export const Code: Story = {
+  render: function C() {
     return (
       <ScopedCssBaseline>
         <p>
@@ -114,8 +111,8 @@ export const Code: StoryObj = {
   },
 };
 
-export const Del: StoryObj = {
-  render: function C({}) {
+export const Del: Story = {
+  render: function C() {
     return (
       <ScopedCssBaseline>
         <p>
@@ -139,8 +136,8 @@ export const Del: StoryObj = {
   },
 };
 
-export const Details: StoryObj = {
-  render: function C({}) {
+export const Details: Story = {
+  render: function C() {
     return (
       <ScopedCssBaseline>
         <details>
@@ -157,8 +154,8 @@ export const Details: StoryObj = {
   },
 };
 
-export const Dfn: StoryObj = {
-  render: function C({}) {
+export const Dfn: Story = {
+  render: function C() {
     return (
       <ScopedCssBaseline>
         <p>
@@ -170,8 +167,8 @@ export const Dfn: StoryObj = {
   },
 };
 
-export const DfnWAbbr: StoryObj = {
-  render: function C({}) {
+export const DfnWAbbr: Story = {
+  render: function C() {
     return (
       <ScopedCssBaseline>
         <p>
@@ -185,8 +182,8 @@ export const DfnWAbbr: StoryObj = {
   },
 };
 
-export const Dl: StoryObj = {
-  render: function C({}) {
+export const Dl: Story = {
+  render: function C() {
     return (
       <ScopedCssBaseline>
         <h4>Citizens of Planet Mushroom</h4>
@@ -206,8 +203,8 @@ export const Dl: StoryObj = {
   },
 };
 
-export const Em: StoryObj = {
-  render: function C({}) {
+export const Em: Story = {
+  render: function C() {
     return (
       <ScopedCssBaseline>
         <p>
@@ -218,8 +215,8 @@ export const Em: StoryObj = {
   },
 };
 
-export const EmEm: StoryObj = {
-  render: function C({}) {
+export const EmEm: Story = {
+  render: function C() {
     return (
       <ScopedCssBaseline>
         <p>
@@ -234,8 +231,8 @@ export const EmEm: StoryObj = {
   },
 };
 
-export const Figure: StoryObj = {
-  render: function C({}) {
+export const Figure: Story = {
+  render: function C() {
     return (
       <ScopedCssBaseline>
         <figure>
@@ -341,8 +338,8 @@ export const Figure: StoryObj = {
   },
 };
 
-export const Hr: StoryObj = {
-  render: function C({}) {
+export const Hr: Story = {
+  render: function C() {
     return (
       <ScopedCssBaseline>
         <p>
@@ -355,8 +352,8 @@ export const Hr: StoryObj = {
   },
 };
 
-export const Ins: StoryObj = {
-  render: function C({}) {
+export const Ins: Story = {
+  render: function C() {
     return (
       <ScopedCssBaseline>
         <p>
@@ -380,8 +377,8 @@ export const Ins: StoryObj = {
   },
 };
 
-export const Kbd: StoryObj = {
-  render: function C({}) {
+export const Kbd: Story = {
+  render: function C() {
     return (
       <ScopedCssBaseline>
         <p>
@@ -392,8 +389,8 @@ export const Kbd: StoryObj = {
   },
 };
 
-export const Mark: StoryObj = {
-  render: function C({}) {
+export const Mark: Story = {
+  render: function C() {
     return (
       <ScopedCssBaseline>
         <p>Search results for "malfunction":</p>
@@ -425,8 +422,8 @@ export const Mark: StoryObj = {
   },
 };
 
-export const Paragraph: StoryObj = {
-  render: function C({}) {
+export const Paragraph: Story = {
+  render: function C() {
     return (
       <ScopedCssBaseline>
         <p>
@@ -447,8 +444,8 @@ export const Paragraph: StoryObj = {
   },
 };
 
-export const Pre: StoryObj = {
-  render: function C({}) {
+export const Pre: Story = {
+  render: function C() {
     return (
       <ScopedCssBaseline>
         <pre>const planetColors = mars: 'red', venus: 'yellow'</pre>
@@ -457,8 +454,8 @@ export const Pre: StoryObj = {
   },
 };
 
-export const Ol: StoryObj = {
-  render: function C({}) {
+export const Ol: Story = {
+  render: function C() {
     return (
       <ScopedCssBaseline>
         <p>To initiate launch:</p>
@@ -483,8 +480,8 @@ export const Ol: StoryObj = {
   },
 };
 
-export const Q: StoryObj = {
-  render: function C({}) {
+export const Q: Story = {
+  render: function C() {
     return (
       <ScopedCssBaseline>
         <p>
@@ -498,8 +495,8 @@ export const Q: StoryObj = {
   },
 };
 
-export const S: StoryObj = {
-  render: function C({}) {
+export const S: Story = {
+  render: function C() {
     return (
       <ScopedCssBaseline>
         <p>
@@ -513,8 +510,8 @@ export const S: StoryObj = {
   },
 };
 
-export const Samp: StoryObj = {
-  render: function C({}) {
+export const Samp: Story = {
+  render: function C() {
     return (
       <ScopedCssBaseline>
         <p>Before we crashed, the console displayed:</p>
@@ -530,8 +527,8 @@ export const Samp: StoryObj = {
   },
 };
 
-export const Small: StoryObj = {
-  render: function C({}) {
+export const Small: Story = {
+  render: function C() {
     return (
       <ScopedCssBaseline>
         <p>
@@ -542,8 +539,8 @@ export const Small: StoryObj = {
   },
 };
 
-export const Strong: StoryObj = {
-  render: function C({}) {
+export const Strong: Story = {
+  render: function C() {
     return (
       <ScopedCssBaseline>
         <p>
@@ -554,8 +551,8 @@ export const Strong: StoryObj = {
   },
 };
 
-export const Sub: StoryObj = {
-  render: function C({}) {
+export const Sub: Story = {
+  render: function C() {
     return (
       <ScopedCssBaseline>
         <p>
@@ -567,8 +564,8 @@ export const Sub: StoryObj = {
   },
 };
 
-export const Sup: StoryObj = {
-  render: function C({}) {
+export const Sup: Story = {
+  render: function C() {
     return (
       <ScopedCssBaseline>
         <p>
@@ -592,8 +589,8 @@ export const Sup: StoryObj = {
   },
 };
 
-export const Ul: StoryObj = {
-  render: function C({}) {
+export const Ul: Story = {
+  render: function C() {
     return (
       <ScopedCssBaseline>
         <p>Don't forget to pack:</p>
@@ -618,8 +615,8 @@ export const Ul: StoryObj = {
   },
 };
 
-export const Var: StoryObj = {
-  render: function C({}) {
+export const Var: Story = {
+  render: function C() {
     return (
       <ScopedCssBaseline>
         <p>

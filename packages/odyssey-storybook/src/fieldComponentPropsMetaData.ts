@@ -27,7 +27,7 @@ export const fieldComponentPropsMetaData: Partial<
     },
   },
   errorMessageList: {
-    control: null,
+    // control: null,
     description:
       "The list of error messages rendered at the buttom of the `error` message",
     table: {
@@ -45,21 +45,21 @@ export const fieldComponentPropsMetaData: Partial<
       },
     },
   },
-  id: {
-    control: "text",
-    description: "The id of the `input` element.",
-    table: {
-      type: {
-        summary: "string",
-      },
-    },
-  },
   HintLinkComponent: {
     description:
       "A `HintLink` component to provide greater context that is rendered at the end of the `hint` text",
     table: {
       type: {
         summary: "ReactNode",
+      },
+    },
+  },
+  id: {
+    control: "text",
+    description: "The id of the `input` element.",
+    table: {
+      type: {
+        summary: "string",
       },
     },
   },
@@ -71,7 +71,7 @@ export const fieldComponentPropsMetaData: Partial<
         summary: "boolean",
       },
       defaultValue: {
-        summary: false,
+        summary: "false",
       },
     },
   },
@@ -84,7 +84,7 @@ export const fieldComponentPropsMetaData: Partial<
         summary: "boolean",
       },
       defaultValue: {
-        summary: false,
+        summary: "false",
       },
     },
   },
@@ -96,7 +96,7 @@ export const fieldComponentPropsMetaData: Partial<
         summary: "boolean",
       },
       defaultValue: {
-        summary: false,
+        summary: "false",
       },
     },
   },
