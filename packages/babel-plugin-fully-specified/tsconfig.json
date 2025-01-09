@@ -1,7 +1,0 @@
-{
-  "extends": "@okta/odyssey-typescript/tsconfig.node12.json",
-  "include": ["./src"],
-  "compilerOptions": {
-    "outDir": "dist"
-  }
-}

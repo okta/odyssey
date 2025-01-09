@@ -17,7 +17,7 @@ import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaDat
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { ChangeEvent, useCallback, useState } from "react";
 
-const storybookMeta: Meta<typeof SearchField> = {
+const meta = {
   title: "MUI Components/Forms/SearchField",
   component: SearchField,
   argTypes: {
@@ -75,7 +75,6 @@ const storybookMeta: Meta<typeof SearchField> = {
     },
     name: fieldComponentPropsMetaData.name,
     onBlur: {
-      control: "function",
       description: "Callback fired when the `input` element loses focus",
       table: {
         type: {
@@ -84,7 +83,6 @@ const storybookMeta: Meta<typeof SearchField> = {
       },
     },
     onClear: {
-      control: "function",
       description: "Callback fired when the clear button is pressed",
       table: {
         type: {
@@ -93,7 +91,6 @@ const storybookMeta: Meta<typeof SearchField> = {
       },
     },
     onChange: {
-      control: "function",
       description: "Callback fired when the value is changed",
       table: {
         type: {
@@ -102,7 +99,6 @@ const storybookMeta: Meta<typeof SearchField> = {
       },
     },
     onFocus: {
-      control: "function",
       description: "Callback fired when the `input` element gets focus",
       table: {
         type: {
@@ -158,34 +154,38 @@ const storybookMeta: Meta<typeof SearchField> = {
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
-};
+} satisfies Meta<typeof SearchField>;
 
-export default storybookMeta;
+export default meta;
 
-export const Default: StoryObj<typeof SearchField> = {
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
   args: {
     defaultValue: "",
   },
 };
-export const FilledVariant: StoryObj<typeof SearchField> = {
+
+export const FilledVariant: Story = {
   args: {
     defaultValue: "",
     variant: "filled",
   },
 };
-export const Disabled: StoryObj<typeof SearchField> = {
+
+export const Disabled: Story = {
   args: {
     isDisabled: true,
   },
 };
 
-export const FullWidth: StoryObj<typeof SearchField> = {
+export const FullWidth: Story = {
   args: {
     isFullWidth: true,
   },
 };
 
-export const ControlledSearch: StoryObj<typeof SearchField> = {
+export const ControlledSearch: Story = {
   parameters: {
     docs: {
       description: {

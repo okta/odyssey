@@ -58,14 +58,36 @@ const preview: Preview = {
         ],
       },
     },
+    backgrounds: {
+      values: [
+        {
+          name: "White",
+          value: "#ffffff",
+        },
+        {
+          name: "Gray",
+          value: "#f4f4f4",
+        },
+      ],
+    },
     controls: {
       expanded: true,
       sort: "requiredFirst",
     },
+    docs: {
+      argTypes: {
+        sort: "alpha",
+      },
+      controls: {
+        sort: "alpha",
+      },
+      source: {
+        excludeDecorators: true,
+      },
+    },
     grid: {
       cellSize: 10,
     },
-    actions: { argTypesRegex: "^on[A-Z].*" },
     options: {
       storySort: {
         method: "alphabetical",
@@ -84,33 +106,13 @@ const preview: Preview = {
         locales: "",
       },
     },
-    viewMode: "docs",
+    react: {
+      strictMode: true,
+    },
     previewTabs: {
       "storybook/docs/panel": { index: -1 },
     },
-    backgrounds: {
-      values: [
-        {
-          name: "White",
-          value: "#ffffff",
-        },
-        {
-          name: "Gray",
-          value: "#f4f4f4",
-        },
-      ],
-    },
-    docs: {
-      argTypes: {
-        sort: "alpha",
-      },
-      controls: {
-        sort: "alpha",
-      },
-      source: {
-        excludeDecorators: true,
-      },
-    },
+    viewMode: "docs",
   },
 };
 

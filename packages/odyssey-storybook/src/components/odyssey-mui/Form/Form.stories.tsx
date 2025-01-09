@@ -53,7 +53,7 @@ const storybookMeta: Meta<FormProps> = {
       },
     },
     children: {
-      control: "obj",
+      control: "object",
       description: "Field or FieldSet components within the Form",
       table: {
         type: {
@@ -67,7 +67,6 @@ const storybookMeta: Meta<FormProps> = {
       },
     },
     alert: {
-      control: null,
       description: "A Callout indicating a Form-wide error or status update",
       table: {
         type: {
@@ -110,7 +109,7 @@ const storybookMeta: Meta<FormProps> = {
           summary: "boolean",
         },
         defaultValue: {
-          summary: false,
+          summary: "false",
         },
       },
     },
@@ -146,7 +145,7 @@ const storybookMeta: Meta<FormProps> = {
       },
     },
     formActions: {
-      control: "obj",
+      control: "object",
       description: "One or more Buttons that conclude the form.",
       table: {
         type: {

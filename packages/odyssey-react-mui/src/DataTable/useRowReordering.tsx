@@ -174,11 +174,15 @@ export const useRowReordering = <TData extends MRT_RowData>({
 
         if (isArrowDown || isArrowUp) {
           const nextIndex = isArrowDown ? index + 1 : index - 1;
+          // This is a legacy file, and this type isn't a problem in `DataView` --Kevin Ghadyani
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
           setHoveredRow(table, data[nextIndex]?.id);
         }
       } else {
         if (isArrowDown || isArrowUp) {
           const nextIndex = isArrowDown ? row.index + 1 : row.index - 1;
+          // This is a legacy file, and this type isn't a problem in `DataView` --Kevin Ghadyani
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
           setHoveredRow(table, data[nextIndex]?.id);
         }
       }
@@ -196,8 +200,8 @@ export const useRowReordering = <TData extends MRT_RowData>({
     const { draggingRow, hoveredRow } = table.getState();
     if (draggingRow) {
       updateRowOrder({
+        newRowIndex: (hoveredRow as TData).index as number,
         rowId: draggingRow.id,
-        newRowIndex: (hoveredRow as TData).index,
       });
     }
 

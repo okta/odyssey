@@ -138,17 +138,13 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
     });
 
     const localInputRef = useRef<HTMLInputElement>(null);
-    useImperativeHandle(
-      inputRef,
-      () => {
-        return {
-          focus: () => {
-            localInputRef.current?.focus();
-          },
-        };
-      },
-      [],
-    );
+    useImperativeHandle(inputRef, () => {
+      return {
+        focus: () => {
+          localInputRef.current?.focus();
+        },
+      };
+    }, []);
 
     const onChange = useCallback<
       ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>

@@ -16,15 +16,13 @@ import {
   fileUploadVariants,
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
-// TODO: Write tests for this component @see https://oktainc.atlassian.net/browse/OKTA-704264
-// import { userEvent, within } from "@storybook/testing-library";
-// import { expect } from "@storybook/jest";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
-// import { axeRun } from "../../../axe-util";
+import { fn } from "@storybook/test";
 
-const storybookMeta: Meta<typeof FileUploader> = {
+// TODO: Write tests for this component @see https://oktainc.atlassian.net/browse/OKTA-704264
+const meta = {
   title: "MUI Components/Forms/FileUploader",
   component: FileUploader,
   argTypes: {
@@ -66,7 +64,6 @@ const storybookMeta: Meta<typeof FileUploader> = {
       },
     },
     onChange: {
-      control: null,
       description: "Callback fired when a file is uploaded or deleted",
       table: {
         type: {
@@ -84,55 +81,61 @@ const storybookMeta: Meta<typeof FileUploader> = {
       description: "How the component appears visually",
       table: {
         type: {
-          required: true,
           summary: fileUploadVariants.join(" | "),
         },
+      },
+      type: {
+        name: "string",
+        required: true,
       },
     },
   },
   args: {
     hint: "Maybe some helpful text about what format to use",
     label: "Upload your files here",
+    onChange: fn(),
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
-};
+} satisfies Meta<typeof FileUploader>;
 
-export default storybookMeta;
+export default meta;
 
-export const ButtonOnly: StoryObj<typeof FileUploader> = {
+type Story = StoryObj<typeof meta>;
+
+export const ButtonOnly: Story = {
   args: {
     variant: "button",
   },
 };
 
-export const DragAndDropWithIcon: StoryObj<typeof FileUploader> = {
+export const DragAndDropWithIcon: Story = {
   args: {
     type: "multiple",
     variant: "dragAndDropWithIcon",
   },
 };
 
-export const DragAndDropWithoutIcon: StoryObj<typeof FileUploader> = {
+export const DragAndDropWithoutIcon: Story = {
   args: {
     variant: "dragAndDrop",
   },
 };
 
-export const SingleFileAllowed: StoryObj<typeof FileUploader> = {
+export const SingleFileAllowed: Story = {
   args: {
     variant: "dragAndDropWithIcon",
   },
 };
 
-export const MultipleFileAllowed: StoryObj<typeof FileUploader> = {
+export const MultipleFileAllowed: Story = {
   args: {
     type: "multiple",
     variant: "dragAndDropWithIcon",
   },
 };
 
-export const SpecificFileTypes: StoryObj<typeof FileUploader> = {
+export const SpecificFileTypes: Story = {
   args: {
     acceptedFileTypes: [".jpg", ".png"],
     variant: "dragAndDropWithIcon",

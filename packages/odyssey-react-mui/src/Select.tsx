@@ -285,17 +285,13 @@ const Select = <
   const localInputRef = useRef<HTMLSelectElement>(null);
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
-  useImperativeHandle(
-    inputRef,
-    () => {
-      return {
-        focus: () => {
-          localInputRef.current?.focus();
-        },
-      };
-    },
-    [],
-  );
+  useImperativeHandle(inputRef, () => {
+    return {
+      focus: () => {
+        localInputRef.current?.focus();
+      },
+    };
+  }, []);
 
   useEffect(() => {
     if (controlledStateRef.current === CONTROLLED) {

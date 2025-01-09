@@ -125,17 +125,13 @@ const Typography = ({
   }, [componentProp, variant]);
 
   const localTypographyRef = useRef<HTMLElement>(null);
-  useImperativeHandle(
-    typographyRef,
-    () => {
-      return {
-        focus: () => {
-          localTypographyRef.current?.focus();
-        },
-      };
-    },
-    [],
-  );
+  useImperativeHandle(typographyRef, () => {
+    return {
+      focus: () => {
+        localTypographyRef.current?.focus();
+      },
+    };
+  }, []);
 
   return (
     <MuiTypography

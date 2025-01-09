@@ -13,7 +13,7 @@
 import { createTheme } from "@mui/material/styles";
 import * as Tokens from "@okta/odyssey-design-tokens";
 
-import { components } from "./components";
+import { getComponents } from "./components";
 import { mixins } from "./mixins";
 import { palette } from "./palette";
 import { shape } from "./shape";
@@ -41,7 +41,7 @@ export const createOdysseyMuiTheme = ({
   shadowRootElement?: HTMLElement;
 }) =>
   createTheme({
-    components: components({
+    components: getComponents({
       contrastMode,
       odysseyTokens,
       shadowRootElement: shadowRootElement || shadowDomElement,

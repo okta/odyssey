@@ -22,7 +22,7 @@ import { MuiPropsContext, MuiPropsContextType } from "../../MuiPropsContext";
 
 const AppSwitcherAppWrapperComponent = styled("li", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   margin: "auto",
   marginBlockEnd: odysseyDesignTokens.Spacing3,
   textAlign: "center",
@@ -57,7 +57,7 @@ const AppSwitcherAppLinkComponent = styled("a", {
 // Similar to AppSwitcherAppLinkComponent
 const AppSwitcherAppSkeletonWrapperComponent = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   display: "inline-block",
   margin: "auto",
   padding: odysseyDesignTokens.Spacing1,
@@ -65,7 +65,7 @@ const AppSwitcherAppSkeletonWrapperComponent = styled("div", {
 
 const AppSwitcherAppImgComponent = styled("img", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   display: "block",
   width: odysseyDesignTokens.Spacing6,
   height: odysseyDesignTokens.Spacing6,

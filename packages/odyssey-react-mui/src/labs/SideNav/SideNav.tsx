@@ -40,7 +40,6 @@ import { SideNavItemContentContext } from "./SideNavItemContentContext";
 import { SideNavToggleButton } from "./SideNavToggleButton";
 import { SortableList } from "./SortableList/SortableList";
 import { Overline } from "../../Typography";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { arrayMove } from "@dnd-kit/sortable";
 
 export const DEFAULT_SIDE_NAV_WIDTH = "300px";
@@ -52,28 +51,23 @@ export const SIDENAV_COLLAPSE_ICON_POSITION = "77px";
 const StyledCollapsibleContent = styled("div", {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" && prop !== "isSideNavCollapsed",
-})(
-  ({
-    odysseyDesignTokens,
-    isSideNavCollapsed,
-  }: {
-    odysseyDesignTokens: DesignTokens;
-    isSideNavCollapsed: boolean;
-  }) => ({
-    position: "relative",
-    display: "inline-grid",
-    gridTemplateColumns: DEFAULT_SIDE_NAV_WIDTH,
-    height: "100%",
-    transition: `grid-template-columns ${odysseyDesignTokens.TransitionDurationMain}, opacity 300ms`,
-    transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
-    overflow: "hidden",
+})<{
+  odysseyDesignTokens: DesignTokens;
+  isSideNavCollapsed: boolean;
+}>(({ odysseyDesignTokens, isSideNavCollapsed }) => ({
+  position: "relative",
+  display: "inline-grid",
+  gridTemplateColumns: DEFAULT_SIDE_NAV_WIDTH,
+  height: "100%",
+  transition: `grid-template-columns ${odysseyDesignTokens.TransitionDurationMain}, opacity 300ms`,
+  transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
+  overflow: "hidden",
 
-    ...(isSideNavCollapsed && {
-      gridTemplateColumns: 0,
-      opacity: 0,
-    }),
+  ...(isSideNavCollapsed && {
+    gridTemplateColumns: 0,
+    opacity: 0,
   }),
-);
+}));
 
 const StyledOpacityTransitionContainer = styled("div", {
   shouldForwardProp: (prop) =>
@@ -102,56 +96,51 @@ const StyledOpacityTransitionContainer = styled("div", {
 const StyledSideNav = styled("nav", {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" && prop !== "isSideNavCollapsed",
-})(
-  ({
-    odysseyDesignTokens,
-    isSideNavCollapsed,
-  }: {
-    odysseyDesignTokens: DesignTokens;
-    isSideNavCollapsed: boolean;
-  }) => ({
-    position: "relative",
-    display: "inline-block",
+})<{
+  odysseyDesignTokens: DesignTokens;
+  isSideNavCollapsed: boolean;
+}>(({ odysseyDesignTokens, isSideNavCollapsed }) => ({
+  position: "relative",
+  display: "inline-block",
+  height: "100%",
+  backgroundColor: odysseyDesignTokens.HueNeutralWhite,
+
+  "&::after": {
+    backgroundColor: odysseyDesignTokens.HueNeutral200,
+    content: "''",
     height: "100%",
-    backgroundColor: odysseyDesignTokens.HueNeutralWhite,
+    opacity: 0,
+    position: "absolute",
+    right: 0,
+    top: 0,
+    transform: `translateX(0)`,
+    transition: `opacity ${odysseyDesignTokens.TransitionDurationMain}, transform ${odysseyDesignTokens.TransitionDurationMain}`,
+    width: odysseyDesignTokens.Spacing2,
+    zIndex: 2,
+  },
 
-    "&::after": {
-      backgroundColor: odysseyDesignTokens.HueNeutral200,
-      content: "''",
-      height: "100%",
-      opacity: 0,
-      position: "absolute",
-      right: 0,
-      top: 0,
-      transform: `translateX(0)`,
-      transition: `opacity ${odysseyDesignTokens.TransitionDurationMain}, transform ${odysseyDesignTokens.TransitionDurationMain}`,
-      width: odysseyDesignTokens.Spacing2,
-      zIndex: 2,
+  "&:has([data-sidenav-toggle='true']:hover), &:has([data-sidenav-toggle='true']:focus-visible)":
+    {
+      ...(isSideNavCollapsed && {
+        "&::after": {
+          opacity: 1,
+          transform: `translateX(100%)`,
+        },
+
+        "[data-sidenav-toggle='true']": {
+          transform: `translate3d(calc(100% + ${odysseyDesignTokens.Spacing3}), 0, 0)`,
+        },
+      }),
     },
 
-    "&:has([data-sidenav-toggle='true']:hover), &:has([data-sidenav-toggle='true']:focus-visible)":
-      {
-        ...(isSideNavCollapsed && {
-          "&::after": {
-            opacity: 1,
-            transform: `translateX(100%)`,
-          },
-
-          "[data-sidenav-toggle='true']": {
-            transform: `translate3d(calc(100% + ${odysseyDesignTokens.Spacing3}), 0, 0)`,
-          },
-        }),
-      },
-
-    "[data-sidenav-toggle='true']": {
-      position: "absolute",
-      top: SIDENAV_COLLAPSE_ICON_POSITION,
-      right: 0,
-      transition: `transform ${odysseyDesignTokens.TransitionDurationMain}`,
-      transform: `translate3d(100%, 0, 0)`,
-    },
-  }),
-);
+  "[data-sidenav-toggle='true']": {
+    position: "absolute",
+    top: SIDENAV_COLLAPSE_ICON_POSITION,
+    right: 0,
+    transition: `transform ${odysseyDesignTokens.TransitionDurationMain}`,
+    transform: `translate3d(100%, 0, 0)`,
+  },
+}));
 
 const SideNavHeaderContainer = styled("div", {
   shouldForwardProp: (prop) =>
@@ -182,7 +171,7 @@ const SideNavListContainer = styled("ul")(() => ({
 
 const SideNavScrollableContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   display: "grid",
   gridTemplateRows: "1fr max-content",
   flex: "1 1 100%",
@@ -192,7 +181,7 @@ const SideNavScrollableContainer = styled("div", {
 
 const SectionHeaderContainer = styled("li", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   paddingBlock: odysseyDesignTokens.Spacing1,
   paddingInline: odysseyDesignTokens.Spacing4,
   marginBlock: `${odysseyDesignTokens.Spacing3}`,
@@ -201,7 +190,7 @@ const SectionHeaderContainer = styled("li", {
 
 const SideNavFooter = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   flexShrink: 0,
   padding: odysseyDesignTokens.Spacing4,
   backgroundColor: odysseyDesignTokens.HueNeutralWhite,
@@ -231,7 +220,7 @@ const PersistentSideNavFooter = styled(SideNavFooter, {
 
 const SideNavFooterItemsContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   display: "flex",
   flexWrap: "wrap",
   alignItems: "center",
@@ -254,7 +243,7 @@ const SideNavFooterItemsContainer = styled("div", {
 
 const LoadingItemContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   alignItems: "center",
   display: "flex",
   gap: odysseyDesignTokens.Spacing2,
@@ -501,7 +490,12 @@ const SideNav = ({
   ]);
 
   const sideNavExpandClickHandler = useCallback(() => {
-    isSideNavCollapsed ? onExpand?.() : onCollapse?.();
+    if (isSideNavCollapsed) {
+      onExpand?.();
+    } else {
+      onCollapse?.();
+    }
+
     setSideNavCollapsed(!isSideNavCollapsed);
   }, [isSideNavCollapsed, setSideNavCollapsed, onExpand, onCollapse]);
 
@@ -578,7 +572,9 @@ const SideNav = ({
             >
               <SideNavListContainer role="none" ref={scrollableContentRef}>
                 {isLoading
-                  ? [...Array(6)].map((_, index) => <LoadingItem key={index} />)
+                  ? Array(6)
+                      .fill(null)
+                      .map((_, index) => <LoadingItem key={index} />)
                   : processedSideNavItems?.map((item) => {
                       const {
                         id,

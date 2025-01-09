@@ -19,7 +19,7 @@ import {
 
 const OktaAuraSvgComponent = styled("svg", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   width: odysseyDesignTokens.Spacing6,
   height: odysseyDesignTokens.Spacing6,
   margin: "auto",

@@ -22,16 +22,13 @@ const modern = literalTuple(
   "Firefox ESR",
 );
 
-const ie11 = literalTuple("IE 11");
-
-const all = literalTuple(...modern, ...ie11);
+const all = literalTuple(...modern);
 
 const config = {
   all,
-  ie11,
+  development: modern,
   modern,
   production: all,
-  development: modern,
   test: modern,
 };
 

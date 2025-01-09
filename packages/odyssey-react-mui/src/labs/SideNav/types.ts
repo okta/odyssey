@@ -81,15 +81,15 @@ export type SideNavProps = {
   /**
    *  Triggers when the side nav is collapsed
    */
-  onCollapse?(): void;
+  onCollapse?: () => void;
   /**
    *  Triggers when the side nav is expanded
    */
-  onExpand?(): void;
+  onExpand?: () => void;
   /**
    *  Triggers when the item is reordered
    */
-  onSort?(reorderedItems: SideNavItem[]): void;
+  onSort?: (reorderedItems: SideNavItem[]) => void;
   /**
    * Nav items in the side nav
    */

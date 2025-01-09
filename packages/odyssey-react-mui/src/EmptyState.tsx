@@ -21,7 +21,7 @@ import {
 
 const EmptyContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   display: "flex",
   flexDirection: "column",
   marginBlock: odysseyDesignTokens.Spacing9,

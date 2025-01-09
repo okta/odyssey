@@ -13,11 +13,11 @@
 import { render, screen } from "@testing-library/react";
 import { DatePicker } from "./DatePicker";
 
-jest.mock("react-i18next", () => ({
+vitest.mock("react-i18next", () => ({
   // this mock makes sure any components using the translate hook can use it without a warning being shown
   useTranslation: () => {
     return {
-      t: jest.fn((str) => str),
+      t: vi.fn((string: string) => string),
       i18n: {
         language: "en",
       },
@@ -30,14 +30,14 @@ jest.mock("react-i18next", () => ({
 }));
 
 describe("DateTimePicker", () => {
-  it("displays the DateTimePicker", async () => {
+  it("displays the DateTimePicker", () => {
     render(<DatePicker label="date time picker label" />);
 
-    const input = await screen.getByLabelText("date time picker label");
+    const input = screen.getByLabelText("date time picker label");
     expect(input).toBeInTheDocument();
   });
 
-  it("displays the correct date when a value is passed in ", async () => {
+  it("displays the correct date when a value is passed in ", () => {
     render(
       <DatePicker
         label="date time picker label"
@@ -46,12 +46,12 @@ describe("DateTimePicker", () => {
       />,
     );
 
-    const input = await screen.getByLabelText("date time picker label");
+    const input = screen.getByLabelText("date time picker label");
     expect(input).toBeInTheDocument();
     expect(input).toHaveDisplayValue("07/20/2024");
   });
 
-  it("displays the correct date when timezone is changed", async () => {
+  it("displays the correct date when timezone is changed", () => {
     render(
       <DatePicker
         label="date time picker label"

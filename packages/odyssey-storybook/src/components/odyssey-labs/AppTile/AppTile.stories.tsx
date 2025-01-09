@@ -12,12 +12,8 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { jest } from "@storybook/jest";
-import {
-  AppTile,
-  AppTileProps,
-  appTileVariantValues,
-} from "@okta/odyssey-react-mui/labs";
+import { fn } from "@storybook/test";
+import { AppTile, appTileVariantValues } from "@okta/odyssey-react-mui/labs";
 import {
   Box,
   Drawer,
@@ -29,7 +25,7 @@ import {
 import { useCallback, useState } from "react";
 import { MoreIcon, SettingsIcon } from "@okta/odyssey-react-mui/icons";
 
-const storybookMeta: Meta<AppTileProps> = {
+const meta = {
   title: "Labs Components/AppTile",
   component: AppTile,
   argTypes: {
@@ -54,7 +50,6 @@ const storybookMeta: Meta<AppTileProps> = {
       },
     },
     actionAriaHasPopup: {
-      control: null,
       description:
         "Should be filled if the button controls a popup element such as a Drawer or Dialog.",
       table: {
@@ -65,7 +60,6 @@ const storybookMeta: Meta<AppTileProps> = {
       },
     },
     actionIcon: {
-      control: null,
       description: "An icon for the action button.",
       table: {
         type: {
@@ -93,7 +87,6 @@ const storybookMeta: Meta<AppTileProps> = {
       },
     },
     children: {
-      control: null,
       description:
         "Arbitrary content to render underneath any other tile content.",
       table: {
@@ -112,7 +105,6 @@ const storybookMeta: Meta<AppTileProps> = {
       },
     },
     image: {
-      control: null,
       description: "An image or icon at the top of the tile.",
       table: {
         type: {
@@ -130,7 +122,6 @@ const storybookMeta: Meta<AppTileProps> = {
       },
     },
     onActionClick: {
-      control: null,
       description:
         "Event that fires when the user clicks the action button in the upper-right corner. If this isn't set, the other action props can't be set either",
       table: {
@@ -140,7 +131,6 @@ const storybookMeta: Meta<AppTileProps> = {
       },
     },
     onClick: {
-      control: null,
       description: "Event handler for when the user clicks the tile.",
       table: {
         type: {
@@ -169,28 +159,19 @@ const storybookMeta: Meta<AppTileProps> = {
     },
   },
   args: {
-    title: "App name",
     description: "This is a description of the app.",
     image: <img src="https://placehold.co/128" alt="Example logo" />,
-    onClick: jest.fn(),
-    onActionClick: undefined,
+    onClick: fn(),
     variant: "comfortable",
   },
   decorators: [MuiThemeDecorator],
-  parameters: {
-    backgrounds: {
-      default: "gray",
-      values: [
-        { name: "gray", value: "#f4f4f4" },
-        { name: "white", value: "#ffffff" },
-      ],
-    },
-  },
-};
+} satisfies Meta<typeof AppTile>;
 
-export default storybookMeta;
+export default meta;
 
-export const Default: StoryObj<AppTileProps> = {
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
   args: {
     children: (
       <TagList>
@@ -201,7 +182,7 @@ export const Default: StoryObj<AppTileProps> = {
   },
 };
 
-export const Multiple: StoryObj<AppTileProps> = {
+export const Multiple: Story = {
   render: function C() {
     return (
       <Box
@@ -218,26 +199,26 @@ export const Multiple: StoryObj<AppTileProps> = {
         <AppTile
           title="App name"
           image={<img src="https://placehold.co/128" alt="Example logo" />}
-          onClick={() => {}}
+          onClick={fn()}
         />
         <AppTile
           title="App name"
           description="Lorem ipsum dolor sit amet."
           image={<img src="https://placehold.co/128" alt="Example logo" />}
           isLoading
-          onClick={() => {}}
+          onClick={fn()}
         />
         <AppTile
           title="App name"
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac lectus vel dui ullamcorper commodo at vitae lectus. Proin porta urna vitae quam hendrerit pellentesque. Nam nec neque a sapien pharetra commodo. Curabitur ut lacinia dolor. Sed pulvinar nibh nec rutrum interdum. Duis velit nunc, fringilla ut eleifend lacinia, porta at neque. Nulla quis magna sollicitudin, feugiat tellus vitae, tristique magna. Pellentesque pretium leo vitae odio aliquet, eu placerat orci luctus. Nunc sagittis leo nec nulla rhoncus, ut tempus libero maximus."
-          onClick={() => {}}
+          onClick={fn()}
         />
       </Box>
     );
   },
 };
 
-export const Compact: StoryObj<AppTileProps> = {
+export const Compact: Story = {
   render: function C() {
     return (
       <Box
@@ -255,37 +236,37 @@ export const Compact: StoryObj<AppTileProps> = {
           variant="compact"
           title="App name"
           image={<img src="https://placehold.co/128" alt="Example logo" />}
-          onClick={() => {}}
+          onClick={fn()}
           actionIcon={<MoreIcon />}
           actionLabel="Open app settings"
-          onActionClick={() => {}}
+          onActionClick={fn()}
         />
         <AppTile
           variant="compact"
           title="App name"
           image={<img src="https://placehold.co/256x48" alt="Example logo" />}
-          onClick={() => {}}
+          onClick={fn()}
           actionIcon={<MoreIcon />}
           actionLabel="Open app settings"
-          onActionClick={() => {}}
+          onActionClick={fn()}
         />
         <AppTile
           variant="compact"
           title="App name"
           image={<img src="https://placehold.co/256x96" alt="Example logo" />}
-          onClick={() => {}}
+          onClick={fn()}
           actionIcon={<MoreIcon />}
           actionLabel="Open app settings"
-          onActionClick={() => {}}
+          onActionClick={fn()}
         />
         <AppTile
           variant="compact"
           title="App name"
           image={<img src="https://placehold.co/128" alt="Example logo" />}
-          onClick={() => {}}
+          onClick={fn()}
           actionIcon={<MoreIcon />}
           actionLabel="Open app settings"
-          onActionClick={() => {}}
+          onActionClick={fn()}
           isLoading
         />
       </Box>
@@ -293,21 +274,8 @@ export const Compact: StoryObj<AppTileProps> = {
   },
 };
 
-export const ActionButton: StoryObj<AppTileProps> = {
-  args: {
-    actionAriaControls: "",
-    actionAriaExpanded: false,
-    actionAriaHasPopup: "menu",
-    actionIcon: <SettingsIcon />,
-    actionLabel: "Open app settings",
-    children: (
-      <TagList>
-        <Tag label="Tag 1" />
-        <Tag label="Tag 2" />
-      </TagList>
-    ),
-  },
-  render: function C({ ...args }) {
+export const ActionButton: Story = {
+  render: function C() {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const toggleDrawer = useCallback(
       () => setIsDrawerOpen(!isDrawerOpen),
@@ -323,47 +291,54 @@ export const ActionButton: StoryObj<AppTileProps> = {
         />
         <Box sx={{ maxWidth: 262 }}>
           <AppTile
-            {...args}
-            onClick={args.onClick}
+            actionAriaControls={""}
             actionAriaExpanded={isDrawerOpen}
+            actionAriaHasPopup={"menu"}
+            actionIcon={<SettingsIcon />}
+            actionLabel={"Open app settings"}
             onActionClick={toggleDrawer}
-            actionIcon={args.actionIcon}
-            actionLabel={args.actionLabel}
-          />
+            onClick={fn()}
+          >
+            <TagList>
+              <Tag label="Tag 1" />
+              <Tag label="Tag 2" />
+            </TagList>
+          </AppTile>
         </Box>
       </>
     );
   },
 };
 
-export const SquareImage: StoryObj<AppTileProps> = {
+export const SquareImage: Story = {
   args: {
     image: <img src="https://placehold.co/600" alt="Square logo" />,
   },
 };
 
-export const TallImage: StoryObj<AppTileProps> = {
+export const TallImage: Story = {
   args: {
     image: <img src="https://placehold.co/400x800" alt="Tall logo" />,
   },
 };
 
-export const WideImage: StoryObj<AppTileProps> = {
+export const WideImage: Story = {
   args: {
     image: <img src="https://placehold.co/800x400" alt="Wide logo" />,
   },
 };
 
-export const WideImageWithActionButton: StoryObj<AppTileProps> = {
+export const WideImageWithActionButton: Story = {
   args: {
     actionIcon: <SettingsIcon />,
     actionLabel: "Open app settings",
     auxiliaryText: "Single sign-on",
     image: <img src="https://placehold.co/800x400" alt="Wide logo" />,
+    onActionClick: fn(),
   },
 };
 
-export const AuxiliaryText: StoryObj<AppTileProps> = {
+export const AuxiliaryText: Story = {
   args: {
     auxiliaryText: "Single sign-on",
     children: (
@@ -375,22 +350,10 @@ export const AuxiliaryText: StoryObj<AppTileProps> = {
   },
 };
 
-export const ActionButtonAndAuxiliaryText: StoryObj<AppTileProps> = {
-  args: {
-    actionAriaControls: "",
-    actionAriaHasPopup: "menu",
-    actionIcon: <SettingsIcon />,
-    actionLabel: "Open app settings",
-    auxiliaryText: "Single sign-on",
-    children: (
-      <TagList>
-        <Tag label="Tag 1" />
-        <Tag label="Tag 2" />
-      </TagList>
-    ),
-  },
-  render: function C({ ...args }) {
-    const [isDrawerOpen, setIsDrawerOpen] = useState(args.actionAriaExpanded);
+export const ActionButtonAndAuxiliaryText: Story = {
+  render: function C() {
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
     const toggleDrawer = useCallback(
       () => setIsDrawerOpen(!isDrawerOpen),
       [isDrawerOpen],
@@ -405,24 +368,28 @@ export const ActionButtonAndAuxiliaryText: StoryObj<AppTileProps> = {
         />
         <Box sx={{ maxWidth: 262 }}>
           <AppTile
-            {...args}
-            onClick={args.onClick}
+            actionAriaControls={""}
             actionAriaExpanded={isDrawerOpen}
+            actionAriaHasPopup={"menu"}
+            actionIcon={<SettingsIcon />}
+            actionLabel={"Open app settings"}
+            auxiliaryText={"Single sign-on"}
             onActionClick={toggleDrawer}
-            actionIcon={args.actionIcon}
-            actionLabel={args.actionLabel}
-          />
+            onClick={fn()}
+          >
+            <TagList>
+              <Tag label="Tag 1" />
+              <Tag label="Tag 2" />
+            </TagList>
+          </AppTile>
         </Box>
       </>
     );
   },
 };
 
-export const FullyCustomContent: StoryObj<AppTileProps> = {
+export const FullyCustomContent: Story = {
   args: {
-    title: undefined,
-    description: undefined,
-    image: undefined,
     children: (
       <>
         <Box sx={{ marginBottom: 2 }}>
@@ -435,12 +402,14 @@ export const FullyCustomContent: StoryObj<AppTileProps> = {
         </TagList>
       </>
     ),
+    description: undefined,
+    image: undefined,
+    title: undefined,
   },
 };
 
-export const Loading: StoryObj<AppTileProps> = {
+export const Loading: Story = {
   args: {
-    isLoading: true,
     actionAriaControls: "",
     actionAriaExpanded: false,
     actionAriaHasPopup: "menu",
@@ -453,5 +422,7 @@ export const Loading: StoryObj<AppTileProps> = {
         <Tag label="Tag 2" />
       </TagList>
     ),
+    isLoading: true,
+    onActionClick: fn(),
   },
 };

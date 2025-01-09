@@ -37,14 +37,15 @@ import {
   KeyboardEvent,
 } from "react";
 import {
-  ArrowTopIcon,
   ArrowBottomIcon,
   ArrowDownIcon,
+  ArrowTopIcon,
+  ArrowUnsortedIcon,
   ArrowUpIcon,
   DragIndicatorIcon,
   ListIcon,
-  ShowIcon,
   MoreIcon,
+  ShowIcon,
 } from "../icons.generated";
 import { Checkbox as MuiCheckbox } from "@mui/material";
 import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext";
@@ -56,7 +57,6 @@ import { DataFilter, DataFilters } from "./DataFilters";
 import { Button } from "../Buttons";
 import { Box } from "../Box";
 import { MenuButton, MenuItem } from "..";
-import { ArrowUnsortedIcon } from "../icons.generated";
 import { useTranslation } from "react-i18next";
 
 export const densityValues = ["comfortable", "spacious", "compact"] as const;
@@ -219,7 +219,9 @@ export type DataTableProps<TData extends MRT_RowData> = {
     search?: string;
     filters?: DataFilter[];
     sort?: MRT_SortingState;
-  }) => MRT_TableOptions<TData>["data"];
+  }) =>
+    | MRT_TableOptions<TData>["data"]
+    | Promise<MRT_TableOptions<TData>["data"]>;
   /**
    * Callback that fires when the user reorders rows within the table. Can be used
    * to propogate order change to the backend.
@@ -324,7 +326,7 @@ const DataTable = <TData extends MRT_RowData>({
 
   const initialColumnVisibility = useMemo(() => {
     return columns.reduce((acc, column) => {
-      acc[column.accessorKey as string] = true;
+      acc[column.accessorKey] = true;
       return acc;
     }, {} as MRT_VisibilityState);
   }, [columns]);
@@ -347,16 +349,19 @@ const DataTable = <TData extends MRT_RowData>({
   const refreshData = useCallback(async () => {
     setShowSkeletons(true);
     try {
-      const newData = await fetchDataFn({
+      const newData = fetchDataFn({
         page: page,
         resultsPerPage: resultsPerPage,
         sort: sorting,
         search: globalFilter,
         filters: filters,
       });
-      setData(newData);
+
+      setData(newData instanceof Promise ? await newData : newData);
+
       setShowSkeletons(false);
     } catch (error) {
+      console.error(error);
       setShowSkeletons(false);
     }
   }, [page, resultsPerPage, sorting, globalFilter, filters, fetchDataFn]);
@@ -504,12 +509,14 @@ const DataTable = <TData extends MRT_RowData>({
 
           if (isArrowDown || isArrowUp) {
             const nextIndex = isArrowDown ? index + 1 : index - 1;
-            setHoveredRow(table, data[nextIndex]?.id);
+            // This is a legacy file. In general, we shouldn't have `as` here. Newer versions will have this fixed. --Kevin Ghadyani
+            setHoveredRow(table, data[nextIndex]?.id as TData["id"]);
           }
         } else {
           if (isArrowDown || isArrowUp) {
             const nextIndex = isArrowDown ? row.index + 1 : row.index - 1;
-            setHoveredRow(table, data[nextIndex]?.id);
+            // This is a legacy file. In general, we shouldn't have `as` here. Newer versions will have this fixed. --Kevin Ghadyani
+            setHoveredRow(table, data[nextIndex]?.id as TData["id"]);
           }
         }
       } else {
@@ -536,10 +543,11 @@ const DataTable = <TData extends MRT_RowData>({
       cols[0].toggleVisibility();
 
       const { draggingRow, hoveredRow } = table.getState();
+
       if (draggingRow) {
         updateRowOrder({
+          newIndex: (hoveredRow as TData).index as number,
           rowId: draggingRow.id,
-          newIndex: (hoveredRow as TData).index,
         });
       }
 
@@ -793,14 +801,10 @@ const DataTable = <TData extends MRT_RowData>({
                 .map((column) => (
                   <MenuItem
                     key={column.accessorKey}
-                    onClick={() =>
-                      handleColumnVisibility(column.accessorKey as string)
-                    }
+                    onClick={() => handleColumnVisibility(column.accessorKey)}
                   >
                     <MuiCheckbox
-                      checked={
-                        columnVisibility[column.accessorKey as string] !== false
-                      }
+                      checked={columnVisibility[column.accessorKey] !== false}
                     />
                     {column.header}
                   </MenuItem>
@@ -834,7 +838,7 @@ const DataTable = <TData extends MRT_RowData>({
                 .filter((column) => column.enableColumnFilter !== false)
                 .map((column) => {
                   return {
-                    id: column.accessorKey as string,
+                    id: column.accessorKey,
                     label: column.header,
                     variant: column.filterVariant ?? "text",
                     options: column.filterSelectOptions,

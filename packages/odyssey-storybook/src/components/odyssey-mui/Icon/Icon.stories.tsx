@@ -13,8 +13,8 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { createElement } from "react";
 import {
-  DataTableColumn,
   DataTable,
+  DataTableColumn,
   DataTableRowData,
 } from "@okta/odyssey-react-mui";
 import * as iconDictionary from "@okta/odyssey-react-mui/icons";
@@ -32,25 +32,6 @@ type IconData = {
   name: keyof typeof iconDictionary;
   use: string;
 };
-
-const columns: DataTableColumn<DataTableRowData>[] = [
-  {
-    accessorKey: "icon",
-    Cell: ({ row }) =>
-      createElement(iconDictionary[row.id as keyof typeof iconDictionary]),
-    header: "Icon",
-  },
-  {
-    accessorKey: "name",
-    header: "Name",
-  },
-  {
-    accessorKey: "className",
-    Cell: ({ row }) =>
-      iconDictionary[row.id as keyof typeof iconDictionary]?.displayName ?? "",
-    header: "Class Name",
-  },
-];
 
 const icons: IconData[] = [
   { name: "AddCircleIcon", use: "To add" },
@@ -128,13 +109,28 @@ const icons: IconData[] = [
   { name: "WarningIcon", use: "" },
 ];
 
-const iconTableData = icons.map((icon) => {
-  return {
-    name: icon.name,
-    use: icon.use,
-    id: icon.name,
-  };
-});
+const columns: DataTableColumn<IconData>[] = [
+  {
+    accessorKey: "icon",
+    Cell: ({ row }) =>
+      // TODO: Fix this. There's an error about being unable to validate a computed value.
+      // eslint-disable-next-line import/namespace
+      createElement(iconDictionary[row.original.name]),
+    header: "Icon",
+  },
+  {
+    accessorKey: "name",
+    header: "Name",
+  },
+  {
+    accessorKey: "className",
+    Cell: ({ row }) =>
+      // TODO: Fix this. There's an error about being unable to validate a computed value.
+      // eslint-disable-next-line import/namespace
+      iconDictionary[row.original.name]?.displayName ?? "",
+    header: "Class Name",
+  },
+];
 
 export const Default: StoryObj = {
   parameters: {
@@ -148,9 +144,13 @@ export const Default: StoryObj = {
   render: function C() {
     return (
       <DataTable
-        columns={columns}
-        getRowId={({ id }) => id}
-        getData={() => iconTableData}
+        // The `as` here shouldn't be required because `DataTable` should be inferring the type of `columns`, but it doesn't take a generic to know that. --Kevin Ghadyani
+        columns={columns as DataTableColumn<DataTableRowData>[]}
+        // The `as` here shouldn't be required because `DataTable` should know the return type of `getData` and infer the rest. It needs to ta generic to fix that. --Kevin Ghadyani
+        getRowId={(originalRow) =>
+          originalRow.name as keyof typeof iconDictionary
+        }
+        getData={() => icons}
         hasSorting={false}
       />
     );

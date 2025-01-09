@@ -10,14 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useCallback, useMemo, useRef, useState } from "react";
-import { Meta, StoryObj } from "@storybook/react";
-import { Button } from "@okta/odyssey-react-mui";
+import { Button, DataTableColumn } from "@okta/odyssey-react-mui";
 import {
   PaginatedTable,
   PaginatedTableProps,
 } from "@okta/odyssey-react-mui/labs";
-import { DataTableColumn } from "@okta/odyssey-react-mui";
+import { Meta, StoryObj } from "@storybook/react";
+import { fn } from "@storybook/test";
+import { useCallback, useMemo, useRef, useState } from "react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
@@ -26,7 +26,7 @@ const storybookMeta: Meta = {
   component: PaginatedTable,
   argTypes: {
     columns: {
-      control: "array",
+      control: "object",
       type: {
         required: true,
         name: "other",
@@ -41,12 +41,8 @@ const storybookMeta: Meta = {
         value: "MaterialReactTableProps<TData>",
       },
     },
-    getRowId: {
-      control: "function",
-    },
-    fetchMoreData: {
-      control: "function",
-    },
+    getRowId: {},
+    fetchMoreData: {},
     hasError: {
       control: "boolean",
     },
@@ -59,28 +55,24 @@ const storybookMeta: Meta = {
     isFetching: {
       control: "boolean",
     },
-    onGlobalFilterChange: {
-      control: "function",
-    },
-    onPaginationChange: {
-      control: "function",
-    },
-    onRowSelectionChange: {
-      control: "function",
-    },
+    onGlobalFilterChange: {},
+    onPaginationChange: {},
+    onRowSelectionChange: {},
     state: {
       control: "object",
     },
-    ToolbarButtons: {
-      control: "function",
-    },
+    ToolbarButtons: {},
     rowsPerPage: {
       table: {
         defaultValue: {
-          summary: 10,
+          summary: "10",
         },
       },
     },
+  },
+  args: {
+    onPaginationChange: fn(),
+    onRowSelectionChange: fn(),
   },
   decorators: [MuiThemeDecorator],
 };
@@ -688,7 +680,6 @@ export const CustomToolbar: StoryObj<PaginatedTableProps<Person>> = {
 - Pass component to expanded row. -- NOT TODAY
 - Infinite scroll.
 */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 // export const Reports: StoryObj<TableProps<any>> = {
 //   args: {
 //     columns: reportColumns,

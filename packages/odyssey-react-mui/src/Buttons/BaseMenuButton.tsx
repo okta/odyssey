@@ -24,14 +24,19 @@ import {
   PopoverOrigin,
 } from "@mui/material";
 
-import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext";
-import { Box, buttonSizeValues, buttonVariantValues, useUniqueId } from "..";
-import { BaseButton } from "./BaseButton";
-import { ChevronDownIcon, MoreIcon } from "../icons.generated";
+import { Box } from "../Box";
+import {
+  BaseButton,
+  buttonSizeValues,
+  buttonVariantValues,
+} from "./BaseButton";
 import { FieldComponentProps } from "../FieldComponentProps";
+import type { HtmlProps } from "../HtmlProps";
+import { ChevronDownIcon, MoreIcon } from "../icons.generated";
 import { MenuContext, MenuContextType } from "./MenuContext";
 import { NullElement } from "../NullElement";
-import type { HtmlProps } from "../HtmlProps";
+import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext";
+import { useUniqueId } from "../useUniqueId";
 
 export const menuAlignmentValues = ["left", "right"] as const;
 

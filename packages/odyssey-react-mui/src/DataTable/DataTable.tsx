@@ -268,57 +268,53 @@ const ScrollableTableContainer = styled("div", {
     prop !== "odysseyDesignTokens" &&
     prop !== "isScrollableStart" &&
     prop !== "isScrollableEnd",
-})(
-  ({
-    odysseyDesignTokens,
-    isScrollableStart,
-    isScrollableEnd,
-  }: {
-    odysseyDesignTokens: DesignTokens;
-    isScrollableStart: boolean;
-    isScrollableEnd: boolean;
-  }) => ({
-    marginBlockEnd: odysseyDesignTokens.Spacing4,
-    position: "relative",
-    borderInlineStartColor: isScrollableStart
-      ? odysseyDesignTokens.HueNeutral200
-      : "transparent",
-    borderInlineStartStyle: "solid",
-    borderInlineStartWidth: odysseyDesignTokens.BorderWidthMain,
-    "::before": {
-      background:
-        "linear-gradient(-90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.33) 50%, rgba(0, 0, 0, 1) 100%)",
-      content: '""',
-      opacity: isScrollableStart ? "0.075" : "0",
-      pointerEvents: "none",
-      position: "absolute",
-      top: 0,
-      left: 0,
-      bottom: 0,
-      width: odysseyDesignTokens.Spacing6,
-      zIndex: 100,
-      transition: `opacity ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
-    },
-    borderInlineEndColor: isScrollableEnd
-      ? odysseyDesignTokens.HueNeutral200
-      : "transparent",
-    borderInlineEndStyle: "solid",
-    borderInlineEndWidth: odysseyDesignTokens.BorderWidthMain,
-    "::after": {
-      background:
-        "linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.33) 50%, rgba(0, 0, 0, 1) 100%)",
-      content: '""',
-      opacity: isScrollableEnd ? "0.075" : "0",
-      pointerEvents: "none",
-      position: "absolute",
-      top: 0,
-      right: 0,
-      bottom: 0,
-      width: odysseyDesignTokens.Spacing6,
-      transition: `opacity ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
-    },
-  }),
-);
+})<{
+  odysseyDesignTokens: DesignTokens;
+  isScrollableStart: boolean;
+  isScrollableEnd: boolean;
+}>(({ odysseyDesignTokens, isScrollableStart, isScrollableEnd }) => ({
+  marginBlockEnd: odysseyDesignTokens.Spacing4,
+  position: "relative",
+  borderInlineStartColor: isScrollableStart
+    ? odysseyDesignTokens.HueNeutral200
+    : "transparent",
+  borderInlineStartStyle: "solid",
+  borderInlineStartWidth: odysseyDesignTokens.BorderWidthMain,
+  "::before": {
+    background:
+      "linear-gradient(-90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.33) 50%, rgba(0, 0, 0, 1) 100%)",
+    content: '""',
+    opacity: isScrollableStart ? "0.075" : "0",
+    pointerEvents: "none",
+    position: "absolute",
+    top: 0,
+    left: 0,
+    bottom: 0,
+    width: odysseyDesignTokens.Spacing6,
+    zIndex: 100,
+    transition: `opacity ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
+  },
+  borderInlineEndColor: isScrollableEnd
+    ? odysseyDesignTokens.HueNeutral200
+    : "transparent",
+  borderInlineEndStyle: "solid",
+  borderInlineEndWidth: odysseyDesignTokens.BorderWidthMain,
+  "::after": {
+    background:
+      "linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.33) 50%, rgba(0, 0, 0, 1) 100%)",
+    content: '""',
+    opacity: isScrollableEnd ? "0.075" : "0",
+    pointerEvents: "none",
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    width: odysseyDesignTokens.Spacing6,
+    transition: `opacity ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
+  },
+}));
+
+const defaultGetRowId: DataTableProps["getRowId"] = (row) => row.id as string;
 
 const DataTable = ({
   additionalActionButton,
@@ -330,7 +326,7 @@ const DataTable = ({
   errorMessage: errorMessageProp,
   filters: filtersProp,
   getData,
-  getRowId: getRowIdProp,
+  getRowId = defaultGetRowId,
   hasChangeableDensity,
   hasColumnResizing,
   hasColumnVisibility,
@@ -422,10 +418,6 @@ const DataTable = ({
     page: pagination.pageIndex,
   });
 
-  const getRowId = getRowIdProp
-    ? getRowIdProp
-    : (row: DataTableRowData) => row.id;
-
   const rowDensityClassName = useMemo(() => {
     return rowDensity === "spacious"
       ? "MuiTableBody-spacious"
@@ -477,8 +469,9 @@ const DataTable = ({
           : {
               // If the option isn't a string, it must have value and/or option defined
               // If either is undefined, use the other
-              label: option.label ?? option.value,
-              value: option.value ?? option.label,
+              // These shouldn't need `as`, but this is a legacy file now. --Kevin Ghadyani
+              label: (option.label ?? option.value) as string,
+              value: (option.value ?? option.label) as string,
             },
       ),
     [],
@@ -606,7 +599,7 @@ const DataTable = ({
   const dataTable = useMaterialReactTable({
     columns: columns,
     data: data,
-    getRowId: getRowId,
+    getRowId,
     state: {
       sorting: columnSorting,
       globalFilter: search,
