@@ -18,7 +18,6 @@ import {
 } from "@mui/material";
 import { memo, useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { Box } from "../.././Box";
 import { Button } from "../../Buttons";
 import { HtmlProps } from "../../HtmlProps";
 import { CheckIcon } from "../../icons.generated";
@@ -92,124 +91,134 @@ const StyledStep = styled(MuiStep, {
 }));
 
 const StepperContainer = styled(MuiStepper, {
-  shouldForwardProp: (prop) =>
-    !["odysseyDesignTokens", "allowBackStep", "nonLinear"].includes(
-      prop as string,
-    ),
+  shouldForwardProp: (prop) => {
+    console.log("shouldForwardProp checking:", prop);
+    return ![
+      "odysseyDesignTokens",
+      "allowBackStep",
+      "nonLinear",
+      "stepVariant",
+    ].includes(prop as string);
+  },
 })<{
   odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
   orientation?: "horizontal" | "vertical";
   allowBackStep?: boolean;
   nonLinear?: boolean;
   activeStep: number;
-}>(({ orientation, odysseyDesignTokens, allowBackStep, nonLinear }) => ({
-  ...(orientation === "horizontal" && {
-    justifyContent: "flex-start",
-    "& .MuiStep-root": {
-      flex: "0 0 auto",
-      padding: `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
-      borderRadius: odysseyDesignTokens.BorderRadiusMain,
+  stepVariant?: "numeric" | "nonNumeric";
+}>(({
+  orientation,
+  odysseyDesignTokens,
+  allowBackStep,
+  nonLinear,
+  stepVariant,
+}) => {
+  console.log("StepperContainer styled props:", { orientation, stepVariant });
+  return {
+    ...(orientation === "horizontal" && {
+      justifyContent: "flex-start",
+      "& .MuiStep-root": {
+        flex: "0 0 auto",
+        padding: `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
+        borderRadius: odysseyDesignTokens.BorderRadiusMain,
+        "&:not(:has(.Mui-active))": {
+          "&.Mui-completed": {
+            "&:hover": {
+              backgroundColor:
+                nonLinear || allowBackStep
+                  ? odysseyDesignTokens.HueGreen50
+                  : "transparent",
+              cursor: nonLinear || allowBackStep ? "pointer" : "default",
 
-      "&:not(:has(.Mui-active))": {
-        // Exclude steps with active labels
-        "&.Mui-completed": {
-          "&:hover": {
-            backgroundColor:
-              nonLinear || allowBackStep
-                ? odysseyDesignTokens.HueGreen50
+              "& .MuiStepLabel-label": {
+                color:
+                  nonLinear || allowBackStep
+                    ? odysseyDesignTokens.HueNeutral800
+                    : odysseyDesignTokens.HueNeutral800,
+              },
+              "& .MuiStepLabel-labelContainer div": {
+                color:
+                  nonLinear || allowBackStep
+                    ? odysseyDesignTokens.HueNeutral800
+                    : odysseyDesignTokens.HueNeutral500,
+              },
+            },
+          },
+          "&:not(.Mui-completed)": {
+            "&:hover": {
+              backgroundColor: nonLinear
+                ? odysseyDesignTokens.HueNeutral300
                 : "transparent",
-            cursor: nonLinear || allowBackStep ? "pointer" : "default",
-
-            "& .MuiStepLabel-label": {
-              color:
-                nonLinear || allowBackStep
+              cursor: nonLinear ? "pointer" : "default",
+              "& .MuiStepLabel-label": {
+                color: nonLinear
                   ? odysseyDesignTokens.HueNeutral800
-                  : odysseyDesignTokens.HueNeutral800,
-            },
-            "& .MuiStepLabel-labelContainer div": {
-              color:
-                nonLinear || allowBackStep
+                  : odysseyDesignTokens.HueNeutral900,
+              },
+              "& .MuiStepLabel-labelContainer div": {
+                color: nonLinear
                   ? odysseyDesignTokens.HueNeutral800
-                  : odysseyDesignTokens.HueNeutral500,
-            },
-          },
-        },
-        "&:not(.Mui-completed)": {
-          "&:hover": {
-            backgroundColor: nonLinear
-              ? odysseyDesignTokens.HueNeutral300
-              : "transparent",
-            cursor: nonLinear ? "pointer" : "default",
-            // Apply hover text colors
-            "& .MuiStepLabel-label": {
-              color: nonLinear
-                ? odysseyDesignTokens.HueNeutral800
-                : odysseyDesignTokens.HueNeutral900,
-            },
-            // Apply hover description colors
-            "& .MuiStepLabel-labelContainer div": {
-              color: nonLinear
-                ? odysseyDesignTokens.HueNeutral800
-                : odysseyDesignTokens.HueNeutral600,
+                  : odysseyDesignTokens.HueNeutral600,
+              },
             },
           },
         },
       },
-    },
-  }),
-  ...(orientation === "vertical" && {
-    width: "fit-content",
-    "& .MuiStep-root": {
-      flex: 1,
-    },
-  }),
-  padding:
-    orientation === "horizontal"
-      ? `${odysseyDesignTokens.Spacing1} ${odysseyDesignTokens.Spacing2}`
-      : odysseyDesignTokens.Spacing3,
-  borderRadius: odysseyDesignTokens.BorderRadiusMain,
-  ...(orientation === "vertical" && {
-    "& .MuiStep-root": {
-      position: "relative",
-      paddingLeft: odysseyDesignTokens.Spacing5,
-      "&::before": {
-        content: '""',
-        position: "absolute",
-        left: "35.5px",
-        top: "46px",
-        height: "calc(100% - 46px)", // Subtract top offset to end at the right position
-        width: "1px",
-        backgroundColor: odysseyDesignTokens.HueNeutral200,
+    }),
+    ...(orientation === "vertical" && {
+      width: "fit-content",
+      "& .MuiStep-root": {
+        flex: 1,
+        paddingBottom: 0,
+        paddongTop: 0,
       },
-      "&:last-child::before": {
-        display: "none", // Remove connector from last step
+    }),
+    padding: 0,
+    borderRadius: odysseyDesignTokens.BorderRadiusMain,
+    ...(orientation === "vertical" && {
+      "& .MuiStep-root": {
+        position: "relative",
+        paddingLeft: odysseyDesignTokens.Spacing5,
+        paddingTop: odysseyDesignTokens.Spacing2,
+        paddingBottom: odysseyDesignTokens.Spacing2,
+        "&::before": {
+          content: '""',
+          position: "absolute",
+          left: stepVariant === "nonNumeric" ? "29.5px" : "35.5px",
+          top: "46px",
+          height: "calc(100% - 46px)",
+          width: "1px",
+          backgroundColor: odysseyDesignTokens.HueNeutral200,
+        },
+        "&:last-child::before": {
+          display: "none",
+        },
+        "& .MuiStepConnector-root": {
+          display: "none",
+        },
       },
-      // Hide default MUI connector
-      "& .MuiStepConnector-root": {
-        display: "none",
-      },
+    }),
+    "& .MuiStepConnector-line": {
+      borderColor: odysseyDesignTokens.HueNeutral200,
+      borderWidth: "1px",
+      minWidth: "16px",
+      minHeight: orientation === "vertical" ? "8px" : undefined,
     },
-  }),
-  "& .MuiStepConnector-line": {
-    borderColor: odysseyDesignTokens.HueNeutral200,
-    borderWidth: "1px",
-    minWidth: "16px",
-    minHeight: orientation === "vertical" ? "24px" : undefined,
-  },
-  "& .MuiStepConnector-root": {
-    ...(orientation === "horizontal"
-      ? {
-          top: "24px",
-          left: "calc(-50% + 20px)",
-          right: "calc(50% + 20px)",
-          margin: `0 ${odysseyDesignTokens.Spacing2}`,
-        }
-      : {
-          marginLeft: "35.5px", // Center connector with circle
-        }),
-  },
-}));
-
+    "& .MuiStepConnector-root": {
+      ...(orientation === "horizontal"
+        ? {
+            top: "24px",
+            left: "calc(-50% + 20px)",
+            right: "calc(50% + 20px)",
+            margin: `0 ${odysseyDesignTokens.Spacing2}`,
+          }
+        : {
+            marginLeft: stepVariant === "nonNumeric" ? "29.5px" : "35.5px",
+          }),
+    },
+  };
+});
 const StyledStepIconContainer = styled("div")<{
   completed: boolean;
   active: boolean;
@@ -267,6 +276,7 @@ const StepLabel = styled(MuiStepLabel, {
       "allowBackStep",
       "nonLinear",
       "orientation",
+      "variant",
     ].includes(prop as string),
 })<{
   odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
@@ -275,6 +285,7 @@ const StepLabel = styled(MuiStepLabel, {
   allowBackStep?: boolean;
   nonLinear?: boolean;
   orientation?: "horizontal" | "vertical";
+  variant?: "numeric" | "nonNumeric";
 }>(
   ({
     completed,
@@ -283,10 +294,18 @@ const StepLabel = styled(MuiStepLabel, {
     allowBackStep,
     odysseyDesignTokens,
     orientation,
+    variant,
   }) => ({
     "& .MuiStepLabel-iconContainer": {
       paddingRight: odysseyDesignTokens.Spacing3,
-      alignSelf: orientation === "horizontal" ? "center" : "flex-start",
+      alignSelf:
+        orientation === "vertical" && variant === "nonNumeric"
+          ? "center"
+          : orientation === "horizontal" && variant === "numeric"
+            ? "flex-start"
+            : variant === "nonNumeric" && orientation === "horizontal"
+              ? "center"
+              : "flex-start",
       paddingTop: odysseyDesignTokens.Spacing0,
     },
     "& .MuiStepLabel-label": {
@@ -305,6 +324,7 @@ const StepLabel = styled(MuiStepLabel, {
       },
     },
 
+    "&.MuiStepLabel-root": { paddingTop: 0, paddingBottom: 0 },
     "&:hover": {
       cursor:
         !active && (nonLinear || (allowBackStep && completed))
@@ -371,6 +391,25 @@ const StyledStepperDot = styled("div")<{
     : undefined,
 }));
 
+const StepperNavigationContainer = styled("div")<{
+  odysseyDesignTokens: ReturnType<typeof useOdysseyDesignTokens>;
+}>(({ odysseyDesignTokens }) => ({
+  display: "grid",
+  gridTemplateColumns: "1fr auto 1fr",
+  alignItems: "center",
+  marginTop: odysseyDesignTokens.Spacing3,
+  gap: odysseyDesignTokens.Spacing3,
+}));
+
+const NavigationSection = styled("div")<{
+  align: "start" | "center" | "end";
+}>(({ align }) => ({
+  display: "flex",
+  justifySelf:
+    align === "start" ? "flex-start" : align === "end" ? "flex-end" : "center",
+  alignItems: "center",
+}));
+
 const StepperNavigation = ({
   totalSteps,
   currentStep,
@@ -378,7 +417,6 @@ const StepperNavigation = ({
   onNext,
   previousButtonLabel,
   nextButtonLabel,
-
   odysseyDesignTokens,
   onStepClick,
   isStepClickable,
@@ -425,16 +463,8 @@ const StepperNavigation = ({
   });
 
   return (
-    <Box
-      sx={{
-        display: "grid",
-        gridTemplateColumns: "1fr auto 1fr",
-        alignItems: "center",
-        mt: 2,
-        gap: 2,
-      }}
-    >
-      <Box sx={{ justifySelf: "flex-start" }}>
+    <StepperNavigationContainer odysseyDesignTokens={odysseyDesignTokens}>
+      <NavigationSection align="start">
         {currentStep > 0 && (
           <Button
             label={labels.previous}
@@ -443,9 +473,9 @@ const StepperNavigation = ({
             size="small"
           />
         )}
-      </Box>
-      <Box sx={{ display: "flex", alignItems: "center" }}>{dots}</Box>
-      <Box sx={{ justifySelf: "flex-end" }}>
+      </NavigationSection>
+      <NavigationSection align="center">{dots}</NavigationSection>
+      <NavigationSection align="end">
         {currentStep < totalSteps - 1 && (
           <Button
             label={labels.next}
@@ -454,8 +484,8 @@ const StepperNavigation = ({
             size="small"
           />
         )}
-      </Box>
-    </Box>
+      </NavigationSection>
+    </StepperNavigationContainer>
   );
 };
 const StepIcon = ({
@@ -526,6 +556,7 @@ const Stepper = ({
       data-se={testId}
       allowBackStep={allowBackStep}
       nonLinear={nonLinear}
+      stepVariant={variant}
     >
       {steps.map((step, index) => {
         const completed = index < activeStep;
@@ -549,6 +580,7 @@ const Stepper = ({
               allowBackStep={allowBackStep}
               nonLinear={nonLinear}
               orientation={orientation}
+              variant={variant}
               StepIconComponent={(props) => (
                 <StepIcon
                   {...props}

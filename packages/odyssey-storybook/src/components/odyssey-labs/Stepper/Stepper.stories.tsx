@@ -184,6 +184,9 @@ export const Vertical: StoryObj<StepperProps> = {
   ...DefaultTemplate,
   args: {
     orientation: "vertical",
+    variant: "nonNumeric",
+    nonLinear: true,
+    allowBackStep: true,
   },
 };
 
