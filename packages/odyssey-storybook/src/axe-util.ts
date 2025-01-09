@@ -10,10 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-// eslint-disable-next-line import/no-extraneous-dependencies
 import axe from "axe-core";
 
-export const axeRun = async (interaction = "") => {
+export const axeRun = async (interaction = "") =>
   await axe
     .run({
       runOnly: {
@@ -39,9 +38,8 @@ export const axeRun = async (interaction = "") => {
         );
       }
     })
-    .catch((e) => {
+    .catch((error) => {
       throw new Error(
-        e instanceof Error ? e.message : "Unknown Error in play-test",
+        error instanceof Error ? error.message : "Unknown Error in axe test.",
       );
     });
-};

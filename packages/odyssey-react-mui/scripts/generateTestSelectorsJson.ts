@@ -13,7 +13,12 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 
-const distDirectory = join(__dirname, "../dist/test-selectors");
+const distDirectory = join(
+  import.meta.url.replace("file:", ""),
+  "..",
+  "..",
+  "dist",
+);
 
 import("../src/test-selectors/index").then(
   ({ odysseyTestSelector: testSelector }) =>

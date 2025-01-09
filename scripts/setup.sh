@@ -13,8 +13,8 @@ fi
 
 cd ${OKTA_HOME}/${REPO}
 
-# Temporary Puppeteer fix until Applitools upgrades their version to >22.1.0 https://github.com/puppeteer/puppeteer/issues/12094#issuecomment-1999345951
-export PUPPETEER_DOWNLOAD_BASE_URL="https://storage.googleapis.com/chrome-for-testing-public"
+# ESLint takes up too much RAM after upgrading to v9. This is a workaround: https://stackoverflow.com/a/54456814.
+export NODE_OPTIONS="--max-old-space-size=4096"
 
 if ! yarn install --immutable; then
   echo "yarn install command failed! Exiting..."

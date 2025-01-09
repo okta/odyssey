@@ -11,7 +11,6 @@
  */
 
 import {
-  OdysseyThemeProvider,
   Box,
   Button,
   buttonSizeValues,
@@ -20,14 +19,12 @@ import {
   type ButtonProps,
 } from "@okta/odyssey-react-mui";
 import { AddIcon } from "@okta/odyssey-react-mui/icons";
+import type { Meta, StoryObj } from "@storybook/react";
+import { expect, fn, userEvent, waitFor, within } from "@storybook/test";
 
-import { expect } from "@storybook/jest";
-import { userEvent, waitFor, within } from "@storybook/testing-library";
-import type { Meta, StoryObj, StoryFn, StoryContext } from "@storybook/react";
-
+import { axeRun } from "../../../axe-util";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import icons from "../../../../.storybook/components/iconUtils";
-import { axeRun } from "../../../axe-util";
 import type { PlaywrightProps } from "../storybookTypes";
 
 type playType = {
@@ -53,7 +50,6 @@ const storybookMeta: Meta<ButtonProps> = {
       table: { type: { summary: "string" } },
     },
     id: {
-      control: null,
       description: "An optional ID for the button",
       table: { type: { summary: "string" } },
     },
@@ -123,16 +119,10 @@ const storybookMeta: Meta<ButtonProps> = {
   },
   args: {
     label: "Add crew",
+    onClick: fn(),
     variant: "primary",
   },
-  decorators: [
-    MuiThemeDecorator,
-    (Story: StoryFn<ButtonProps>, context: StoryContext<ButtonProps>) => (
-      <OdysseyThemeProvider>
-        <Story {...context.args} />
-      </OdysseyThemeProvider>
-    ),
-  ],
+  decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
 };
 
@@ -158,7 +148,7 @@ const interactWithButton =
         expect(args.onClick).toHaveBeenCalledTimes(1);
         axeRun(actionName);
         if (!hoverState) {
-          waitFor(() => userEvent.tab());
+          await waitFor(() => userEvent.tab());
         }
       });
     }
@@ -386,7 +376,7 @@ export const IconOnly: StoryObj<ButtonProps> = {
 
 export const KitchenSink: StoryObj<ButtonProps> = {
   name: "Kitchen sink",
-  render: ({}) => (
+  render: () => (
     <Box sx={{ display: "flex", flexWrap: "wrap", rowGap: 2 }}>
       <Button label="Primary" variant="primary" />
       <Button label="Secondary" variant="secondary" />

@@ -8,12 +8,12 @@ import { Meta } from "@storybook/blocks";
 
 Sometimes, you may need to sandbox your application's styles so Odyssey components show up correctly in other applications. This typically happens when other global styles are on the page.
 
-To sandbox your application's styles, you need to use a Web Component which also includes a Shadow DOM. Odyssey natively supports the use of a Shadow DOM and even exports a helper function.
+To sandbox your application's styles, you need to use a Shadow DOM. We now recommend rendering into a Web Component which includes a Shadow DOM.
 
-To create a Shadow DOM, simply use the `renderReactInWebComponent` in your app's top-level file (typically `index.ts`):
+Odyssey natively supports rendering React in a Web Component's Shadow DOM. Simply use the `renderReactInWebComponent` in your app's top-level file (typically `index.ts`):
 
 ```tsx
-import { renderReactInWebComponent } from "@okta/odyssey-react-mui/ui-shell";
+import { renderReactInWebComponent } from "@okta/odyssey-react-mui/web-component";
 
 const appRootElement = document.createElement("div");
 const containerRootElement = document.getElementById("container-root");

@@ -66,7 +66,7 @@ const OdysseyCacheProvider = ({
       key: uniqueAlphabeticalId,
       nonce: nonce ?? window.cspNonce,
       prepend: true,
-      speedy: hasShadowDom ? false : true, // <-- Needs to be set to false when shadow-dom is used!! https://github.com/emotion-js/emotion/issues/2053#issuecomment-713429122
+      speedy: hasShadowDom ? false : true, // <-- Needs to be set to false when shadow-dom is used! https://github.com/emotion-js/emotion/issues/2053#issuecomment-713429122
       ...(stylisPlugins && { stylisPlugins }),
     });
   }, [

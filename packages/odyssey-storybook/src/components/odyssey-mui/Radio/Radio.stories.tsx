@@ -10,16 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Radio, RadioProps } from "@okta/odyssey-react-mui";
+import { Radio } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { userEvent, within } from "@storybook/testing-library";
-import { expect } from "@storybook/jest";
+import { expect, fn, userEvent, within } from "@storybook/test";
 
-import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { axeRun } from "../../../axe-util";
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-const storybookMeta: Meta<RadioProps> = {
+const meta = {
   title: "MUI Components/Forms/Radio",
   component: Radio,
   argTypes: {
@@ -59,7 +58,7 @@ const storybookMeta: Meta<RadioProps> = {
           summary: "boolean",
         },
         defaultValue: {
-          summary: false,
+          summary: "false",
         },
       },
     },
@@ -77,7 +76,6 @@ const storybookMeta: Meta<RadioProps> = {
       },
     },
     onChange: {
-      control: null,
       description: "Callback fired when the the radio button value changes",
       table: {
         type: {
@@ -86,7 +84,6 @@ const storybookMeta: Meta<RadioProps> = {
       },
     },
     onBlur: {
-      control: null,
       description: "Callback fired when the blur event happens",
       table: {
         type: {
@@ -111,19 +108,23 @@ const storybookMeta: Meta<RadioProps> = {
   },
   args: {
     label: "Label",
+    onBlur: fn(),
+    onChange: fn(),
     value: "Value",
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
-};
+} satisfies Meta<typeof Radio>;
 
-export default storybookMeta;
+export default meta;
 
-export const Default: StoryObj<typeof Radio> = {
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
   play: async ({ canvasElement, step }) => {
     await step("select the radio button", async ({ args }) => {
       const canvas = within(canvasElement);
-      const radio = canvas.getByRole("radio") as HTMLInputElement;
+      const radio = canvas.getByRole("radio");
       if (radio) {
         await userEvent.click(radio);
       }
@@ -135,18 +136,21 @@ export const Default: StoryObj<typeof Radio> = {
     });
   },
 };
-export const Checked: StoryObj<typeof Radio> = {
+
+export const Checked: Story = {
   args: {
     label: "Automatically assign Okta Admin Console",
     isChecked: true,
   },
 };
-export const Disabled: StoryObj<typeof Radio> = {
+
+export const Disabled: Story = {
   args: {
     isDisabled: true,
   },
 };
-export const Hint: StoryObj<typeof Radio> = {
+
+export const Hint: Story = {
   parameters: {
     docs: {
       description: {
@@ -159,7 +163,8 @@ export const Hint: StoryObj<typeof Radio> = {
     hint: "All admin roles get access when the role is assigned.",
   },
 };
-export const ReadOnly: StoryObj<typeof Radio> = {
+
+export const ReadOnly: Story = {
   args: {
     label: "Automatically assign Okta Admin Console",
     isReadOnly: true,
@@ -167,7 +172,7 @@ export const ReadOnly: StoryObj<typeof Radio> = {
   },
 };
 
-export const Invalid: StoryObj<typeof Radio> = {
+export const Invalid: Story = {
   args: {
     isChecked: true,
     isInvalid: true,

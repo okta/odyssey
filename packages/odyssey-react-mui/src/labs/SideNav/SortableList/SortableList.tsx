@@ -10,22 +10,22 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { useMemo, useState } from "react";
-import type { ReactNode } from "react";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import {
+  Active,
+  Announcements,
   DndContext,
   KeyboardSensor,
   PointerSensor,
+  UniqueIdentifier,
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
-import type { Active, Announcements, UniqueIdentifier } from "@dnd-kit/core";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import {
   SortableContext,
   sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
+import React, { useMemo, useState } from "react";
+import type { ReactNode } from "react";
 
 import { SortableItem } from "./SortableItem";
 import { SortableOverlay } from "./SortableOverlay";
@@ -42,8 +42,8 @@ export interface BaseItem {
 interface ListProps<T extends BaseItem> {
   parentId: string;
   items: T[];
-  onChange(parentId: string, activeIndex: number, overIndex: number): void;
-  renderItem(item: T): ReactNode;
+  onChange: (parentId: string, activeIndex: number, overIndex: number) => void;
+  renderItem: (item: T) => ReactNode;
 }
 
 export const SortableList = <T extends BaseItem>({

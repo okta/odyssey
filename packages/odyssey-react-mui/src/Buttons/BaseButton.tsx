@@ -23,7 +23,7 @@ import {
   useRef,
 } from "react";
 
-import { useButton } from "../Buttons";
+import { useButton } from "./ButtonContext";
 import type { HtmlProps } from "../HtmlProps";
 import { FocusHandle } from "../inputUtils";
 import {

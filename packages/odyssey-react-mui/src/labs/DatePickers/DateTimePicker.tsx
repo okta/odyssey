@@ -56,7 +56,7 @@ const DatePickerWidthContainer = styled.div<{
 
 const TimeZonePickerContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   marginBlockStart: odysseyDesignTokens.Spacing3,
 }));
 
@@ -214,7 +214,8 @@ const DateTimePicker = ({
   const slots = useMemo<DateTimePickerSlots<DateTime>>(
     () => ({
       actionBar: DateFieldActionBar,
-      field: (muiProps) => renderDateTimeField(muiProps),
+      field: (muiProps: RenderDateTimeFieldProps) =>
+        renderDateTimeField(muiProps),
       leftArrowIcon: () => <commonIcons.ArrowLeftIcon />,
       rightArrowIcon: () => <commonIcons.ArrowRightIcon />,
       switchViewIcon: () => <commonIcons.ChevronDownIcon />,

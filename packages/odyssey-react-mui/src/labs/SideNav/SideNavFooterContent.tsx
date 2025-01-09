@@ -28,7 +28,7 @@ const StyledFooterNav = styled("nav")({
 
 const StyledFooterItemContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   "& + &": {
     marginInlineStart: odysseyDesignTokens.Spacing4,
     paddingInlineStart: odysseyDesignTokens.Spacing4,

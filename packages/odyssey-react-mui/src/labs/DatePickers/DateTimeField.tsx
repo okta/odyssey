@@ -94,17 +94,13 @@ const DateTimeField = ({
   const internalValidationError = useRef<string | undefined>();
   const localInputRef = useRef<HTMLInputElement>(null);
 
-  useImperativeHandle(
-    inputRef,
-    () => {
-      return {
-        focus: () => {
-          localInputRef.current?.focus();
-        },
-      };
-    },
-    [],
-  );
+  useImperativeHandle(inputRef, () => {
+    return {
+      focus: () => {
+        localInputRef.current?.focus();
+      },
+    };
+  }, []);
 
   const checkMinMaxValidity = useCallback(
     (value: DateTime) => {

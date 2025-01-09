@@ -12,18 +12,21 @@
 
 import { render, screen } from "@testing-library/react";
 import { ComposablePicker } from "./ComposablePicker";
+import { OdysseyProvider } from "../../OdysseyProvider";
 
 describe("ComposablePicker", () => {
-  it("displays the ComposablePicker", async () => {
+  it("displays the ComposablePicker", () => {
     render(
-      <ComposablePicker
-        label="picker label"
-        options={[]}
-        renderOption={() => <></>}
-      />,
+      <OdysseyProvider>
+        <ComposablePicker
+          label="picker label"
+          options={[]}
+          renderOption={() => <></>}
+        />
+      </OdysseyProvider>,
     );
 
-    const input = await screen.getByLabelText("picker label");
-    expect(input).toBeInTheDocument();
+    const input = screen.getByLabelText("picker label");
+    expect(input).toBeVisible();
   });
 });

@@ -25,12 +25,19 @@ export type TranslationOverrides<
   SupportedLanguages extends string = DefaultSupportedLanguages,
 > = Record<SupportedLanguages, Partial<OdysseyI18nResourceKeys>>;
 
-const mergeBundleOverrides = <SupportedLanguages extends string>(
+const mergeBundleOverrides = <
+  SupportedLanguages extends string = DefaultSupportedLanguages,
+>(
   languageCode: SupportedLanguages,
   translationOverrides: TranslationOverrides<SupportedLanguages>,
 ) => {
-  const translationStrings = resources[languageCode] || {};
   const translationStringOverrides = translationOverrides[languageCode];
+
+  const translationStrings =
+    languageCode in resources
+      ? resources[languageCode as DefaultSupportedLanguages]
+      : {};
+
   return {
     ...translationStrings,
     ...translationStringOverrides,
@@ -51,7 +58,6 @@ export const OdysseyTranslationProvider = <SupportedLanguages extends string>({
   translationOverrides,
 }: OdysseyTranslationProviderProps<SupportedLanguages>) => {
   useEffect(() => {
-    // Defaults to the browser's language if available otherwise `en` will be used
     i18n.changeLanguage(languageCode || window.navigator.language);
   }, [languageCode]);
 

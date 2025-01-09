@@ -24,14 +24,14 @@ import {
 } from "node:fs";
 import { readdir } from "node:fs/promises";
 import properties from "properties";
+import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import yargs from "yargs/yargs";
 
 const convert = (baseFiles: string[], propertiesTargetDir: string) => {
   baseFiles.forEach((src) => {
     const extension = extname(src);
     const filename = basename(src, extension);
-    const source = `${readFileSync(src)}`;
+    const source = readFileSync(src).toString();
 
     properties.parse(source, (error, propertiesJson) => {
       if (error) {
@@ -48,13 +48,13 @@ const convert = (baseFiles: string[], propertiesTargetDir: string) => {
   });
 };
 
-async function convertPropertiesToJson({
+const convertPropertiesToJson = async ({
   jsonOutputPath,
   propertiesFilesPath,
 }: {
   jsonOutputPath: string;
   propertiesFilesPath: string;
-}) {
+}) => {
   const sourceDirectory = resolve(propertiesFilesPath);
   const propertiesTargetDirectory = resolve(jsonOutputPath);
 
@@ -65,7 +65,6 @@ async function convertPropertiesToJson({
   if (existsSync(propertiesTargetDirectory)) {
     rmSync(propertiesTargetDirectory, { recursive: true, force: true });
   }
-
   mkdirSync(propertiesTargetDirectory);
 
   const propertiesFilePaths = await readdir(sourceDirectory, {
@@ -80,7 +79,7 @@ async function convertPropertiesToJson({
       .map((propertiesFilePath) => join(sourceDirectory, propertiesFilePath)),
     propertiesTargetDirectory,
   );
-}
+};
 
 yargs(hideBin(process.argv))
   .scriptName("properties-to-ts")
@@ -107,4 +106,6 @@ yargs(hideBin(process.argv))
       });
     },
   )
-  .help().argv;
+  .strictCommands()
+  .demandCommand(1)
+  .parse();

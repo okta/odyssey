@@ -32,7 +32,7 @@ export type AppSwitcherProps = {
 
 const AppSwitcherWrapperComponent = styled("nav", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   position: "relative",
   display: "inline-block",
   height: "100%",
@@ -44,7 +44,7 @@ const AppSwitcherWrapperComponent = styled("nav", {
 
 const AppSwitcherOktaAuraWrapperComponent = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   height: TOP_NAV_HEIGHT,
   padding: odysseyDesignTokens.Spacing4,
   margin: "auto",
@@ -53,7 +53,7 @@ const AppSwitcherOktaAuraWrapperComponent = styled("div", {
 
 const AppSwitcherAppIconULComponent = styled("ul", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   listStyleType: "none",
   margin: odysseyDesignTokens.Spacing0,
   padding: odysseyDesignTokens.Spacing0,

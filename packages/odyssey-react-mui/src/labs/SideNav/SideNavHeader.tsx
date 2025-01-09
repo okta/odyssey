@@ -25,7 +25,7 @@ import { TOP_NAV_HEIGHT } from "../TopNav";
 
 const SideNavHeaderContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   position: "relative",
   display: "flex",
   flexDirection: "column",
@@ -35,7 +35,7 @@ const SideNavHeaderContainer = styled("div", {
 
 const SideNavLogoContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   display: "flex",
   alignItems: "center",
   height: TOP_NAV_HEIGHT,
@@ -51,7 +51,7 @@ const SideNavLogoContainer = styled("div", {
 
 const SideNavHeadingContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})(({ odysseyDesignTokens }: { odysseyDesignTokens: DesignTokens }) => ({
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",

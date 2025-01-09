@@ -11,10 +11,8 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
-import { within } from "@storybook/testing-library";
 import { PasswordField, odysseyTranslate } from "@okta/odyssey-react-mui";
-import { userEvent, waitFor } from "@storybook/testing-library";
-import { expect } from "@storybook/jest";
+import { expect, fn, userEvent, waitFor, within } from "@storybook/test";
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { axeRun } from "../../../axe-util";
@@ -22,7 +20,7 @@ import { axeRun } from "../../../axe-util";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { ChangeEvent, useCallback, useState } from "react";
 
-const storybookMeta: Meta<typeof PasswordField> = {
+const meta = {
   title: "MUI Components/Forms/PasswordField",
   component: PasswordField,
   argTypes: {
@@ -68,7 +66,7 @@ const storybookMeta: Meta<typeof PasswordField> = {
           summary: "boolean",
         },
         defaultValue: {
-          summary: true,
+          summary: "true",
         },
       },
     },
@@ -92,7 +90,6 @@ const storybookMeta: Meta<typeof PasswordField> = {
       },
     },
     onBlur: {
-      control: null,
       description:
         "Callback fired when the autocomplete component loses focus.",
       table: {
@@ -102,7 +99,6 @@ const storybookMeta: Meta<typeof PasswordField> = {
       },
     },
     onChange: {
-      control: null,
       description: "Callback fired when the password value is changed.",
       table: {
         type: {
@@ -111,7 +107,6 @@ const storybookMeta: Meta<typeof PasswordField> = {
       },
     },
     onFocus: {
-      control: null,
       description:
         "Callback fired when the autocomplete component gains focus.",
       table: {
@@ -144,16 +139,21 @@ const storybookMeta: Meta<typeof PasswordField> = {
   args: {
     autoCompleteType: "current-password",
     hasShowPassword: true,
-    isOptional: false,
     id: "password-input",
+    isOptional: false,
     label: "Password",
+    onBlur: fn(),
+    onChange: fn(),
+    onFocus: fn(),
   },
   decorators: [MuiThemeDecorator],
-};
+} satisfies Meta<typeof PasswordField>;
 
-export default storybookMeta;
+export default meta;
 
-export const Default: StoryObj<typeof PasswordField> = {
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
   play: async ({ canvasElement, step }) => {
     await step("toggle password", async () => {
       const canvas = within(canvasElement);
@@ -190,7 +190,7 @@ export const Default: StoryObj<typeof PasswordField> = {
   },
 };
 
-export const Disabled: StoryObj<typeof PasswordField> = {
+export const Disabled: Story = {
   parameters: {
     docs: {
       description: {
@@ -204,14 +204,14 @@ export const Disabled: StoryObj<typeof PasswordField> = {
   },
 };
 
-export const Error: StoryObj<typeof PasswordField> = {
+export const Error: Story = {
   args: {
     errorMessage: "This password is incorrect",
     defaultValue: "",
   },
 };
 
-export const ErrorsList: StoryObj<typeof PasswordField> = {
+export const ErrorsList: Story = {
   args: {
     errorMessage: "Password requires: ",
     errorMessageList: [
@@ -223,20 +223,20 @@ export const ErrorsList: StoryObj<typeof PasswordField> = {
   },
 };
 
-export const Hint: StoryObj<typeof PasswordField> = {
+export const Hint: Story = {
   args: {
     hint: "Your first pet's name",
     defaultValue: "",
   },
 };
 
-export const NoShowPassword: StoryObj<typeof PasswordField> = {
+export const NoShowPassword: Story = {
   args: {
     hasShowPassword: false,
     defaultValue: "",
   },
   play: async ({ canvasElement, step }) => {
-    await step("toggle password", async () => {
+    await step("toggle password", () => {
       const canvas = within(canvasElement);
       const fieldElement = canvas.getByRole("textbox", {
         name: "Password",
@@ -251,14 +251,14 @@ export const NoShowPassword: StoryObj<typeof PasswordField> = {
   },
 };
 
-export const Optional: StoryObj<typeof PasswordField> = {
+export const Optional: Story = {
   args: {
     isOptional: true,
     defaultValue: "",
   },
 };
 
-export const ReadOnly: StoryObj<typeof PasswordField> = {
+export const ReadOnly: Story = {
   parameters: {
     docs: {
       description: {
@@ -272,7 +272,7 @@ export const ReadOnly: StoryObj<typeof PasswordField> = {
   },
 };
 
-export const Controlled: StoryObj<typeof PasswordField> = {
+export const Controlled: Story = {
   parameters: {
     docs: {
       description: {
@@ -302,7 +302,7 @@ export const Controlled: StoryObj<typeof PasswordField> = {
   },
 };
 
-export const ControlledDefaultInput: StoryObj<typeof PasswordField> = {
+export const ControlledDefaultInput: Story = {
   parameters: {
     docs: {
       description: {

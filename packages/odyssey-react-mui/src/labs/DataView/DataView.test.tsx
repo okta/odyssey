@@ -12,25 +12,37 @@
 
 import { render, screen, waitFor, within } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
-import { DataOnReorderRowsType, DataRow, DataView } from "./index";
-import { data, columns, filterData, reorderData } from "./testSupportData";
-import { EmptyState } from "../../EmptyState";
-import { DataTableRowData } from "../../DataTable";
-import { Button } from "../../Buttons";
-import { MenuItem } from "../../Buttons";
+import { OdysseyProvider } from "../../OdysseyProvider";
 import { MRT_RowSelectionState } from "material-react-table";
+
+import {
+  CardLayoutProps,
+  DataOnReorderRowsType,
+  DataView,
+  TableLayoutProps,
+} from "./index";
+import {
+  data,
+  columns,
+  filterData,
+  reorderData,
+  Person,
+} from "./testSupportData";
+import { Button, MenuItem } from "../../Buttons";
+import { DataTableRowData } from "../../DataTable";
+import { EmptyState } from "../../EmptyState";
 import { getControlledElement } from "../../test-selectors/linkedHtmlSelectors";
 
 const getData = ({ ...props }) => {
   return filterData({ data, ...props });
 };
 
-const listItemProps = (row: DataRow) => ({
+const listItemProps: CardLayoutProps<Person>["itemProps"] = (row) => ({
   title: row.name,
   overline: "List card",
 });
 
-const gridItemProps = (row: DataRow) => ({
+const gridItemProps: CardLayoutProps<Person>["itemProps"] = (row) => ({
   title: row.name,
   overline: "Grid card",
 });
@@ -43,13 +55,15 @@ describe("DataView", () => {
   describe("DataView layouts", () => {
     test("displays a table view", async () => {
       const { container } = render(
-        <DataView
-          availableLayouts={["table"]}
-          getData={getData}
-          tableLayoutOptions={{
-            columns,
-          }}
-        />,
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["table"]}
+            getData={getData}
+            tableLayoutOptions={{
+              columns,
+            }}
+          />
+        </OdysseyProvider>,
       );
 
       await waitUntilTableLoadedHack();
@@ -60,13 +74,15 @@ describe("DataView", () => {
 
     test("displays a list view", async () => {
       const { container } = render(
-        <DataView
-          availableLayouts={["list"]}
-          getData={getData}
-          cardLayoutOptions={{
-            itemProps: listItemProps,
-          }}
-        />,
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["list"]}
+            getData={getData}
+            cardLayoutOptions={{
+              itemProps: listItemProps,
+            }}
+          />
+        </OdysseyProvider>,
       );
 
       await waitUntilTableLoadedHack();
@@ -77,13 +93,15 @@ describe("DataView", () => {
 
     test("displays a grid view", async () => {
       const { container } = render(
-        <DataView
-          availableLayouts={["grid"]}
-          getData={getData}
-          cardLayoutOptions={{
-            itemProps: gridItemProps,
-          }}
-        />,
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["grid"]}
+            getData={getData}
+            cardLayoutOptions={{
+              itemProps: gridItemProps,
+            }}
+          />
+        </OdysseyProvider>,
       );
 
       await waitUntilTableLoadedHack();
@@ -96,16 +114,18 @@ describe("DataView", () => {
       const user = userEvent.setup();
 
       render(
-        <DataView
-          availableLayouts={["table", "list"]}
-          getData={getData}
-          tableLayoutOptions={{
-            columns,
-          }}
-          cardLayoutOptions={{
-            itemProps: listItemProps,
-          }}
-        />,
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["table", "list"]}
+            getData={getData}
+            tableLayoutOptions={{
+              columns,
+            }}
+            cardLayoutOptions={{
+              itemProps: listItemProps,
+            }}
+          />
+        </OdysseyProvider>,
       );
 
       const layoutSwitcherButton = screen.getByLabelText("Layout", {
@@ -129,18 +149,20 @@ describe("DataView", () => {
     });
   });
 
-  test("can display meta text", async () => {
+  test("can display meta text", () => {
     const metaText = "Last updated 12 hours ago";
 
     render(
-      <DataView
-        availableLayouts={["table"]}
-        getData={getData}
-        tableLayoutOptions={{
-          columns,
-        }}
-        metaText={metaText}
-      />,
+      <OdysseyProvider>
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          tableLayoutOptions={{
+            columns,
+          }}
+          metaText={metaText}
+        />
+      </OdysseyProvider>,
     );
 
     expect(screen.getByText(metaText)).toBeVisible();
@@ -151,14 +173,16 @@ describe("DataView", () => {
       const user = userEvent.setup();
 
       render(
-        <DataView
-          availableLayouts={["table"]}
-          hasFilters
-          getData={getData}
-          tableLayoutOptions={{
-            columns,
-          }}
-        />,
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["table"]}
+            hasFilters
+            getData={getData}
+            tableLayoutOptions={{
+              columns,
+            }}
+          />
+        </OdysseyProvider>,
       );
 
       expect(await screen.findByText(data[0].name)).toBeVisible();
@@ -194,15 +218,17 @@ describe("DataView", () => {
       const user = userEvent.setup();
 
       render(
-        <DataView
-          availableLayouts={["table"]}
-          hasSearch
-          hasSearchSubmitButton
-          getData={getData}
-          tableLayoutOptions={{
-            columns,
-          }}
-        />,
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["table"]}
+            hasSearch
+            hasSearchSubmitButton
+            getData={getData}
+            tableLayoutOptions={{
+              columns,
+            }}
+          />
+        </OdysseyProvider>,
       );
 
       expect(await screen.findByText(data[0].name)).toBeVisible();
@@ -223,15 +249,17 @@ describe("DataView", () => {
       const user = userEvent.setup();
 
       render(
-        <DataView
-          availableLayouts={["table"]}
-          hasSearch
-          hasSearchSubmitButton
-          getData={getData}
-          tableLayoutOptions={{
-            columns,
-          }}
-        />,
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["table"]}
+            hasSearch
+            hasSearchSubmitButton
+            getData={getData}
+            tableLayoutOptions={{
+              columns,
+            }}
+          />
+        </OdysseyProvider>,
       );
 
       expect(await screen.findByText(data[0].name)).toBeVisible();
@@ -265,19 +293,20 @@ describe("DataView", () => {
     test("can display row action menu", async () => {
       const user = userEvent.setup();
 
-      const rowActionMenuItems = (row: DataTableRowData) => (
-        <MenuItem>Action for {row.original.name}</MenuItem>
-      );
+      const rowActionMenuItems: TableLayoutProps<Person>["rowActionMenuItems"] =
+        (row) => <MenuItem>Action for {row.original.name}</MenuItem>;
 
       render(
-        <DataView
-          availableLayouts={["table"]}
-          getData={getData}
-          tableLayoutOptions={{
-            columns,
-            rowActionMenuItems: rowActionMenuItems,
-          }}
-        />,
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["table"]}
+            getData={getData}
+            tableLayoutOptions={{
+              columns,
+              rowActionMenuItems,
+            }}
+          />
+        </OdysseyProvider>,
       );
 
       await waitUntilTableLoadedHack();
@@ -297,19 +326,23 @@ describe("DataView", () => {
     });
 
     test("can display row action buttons", async () => {
-      const rowActionButtons = (row: DataTableRowData) => (
-        <Button variant="primary" label={`Button for ${row?.original?.name}`} />
+      const rowActionButtons: TableLayoutProps<Person>["rowActionButtons"] = (
+        row,
+      ) => (
+        <Button variant="primary" label={`Button for ${row.original?.name}`} />
       );
 
       render(
-        <DataView
-          availableLayouts={["table"]}
-          getData={getData}
-          tableLayoutOptions={{
-            columns,
-            rowActionButtons: rowActionButtons,
-          }}
-        />,
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["table"]}
+            getData={getData}
+            tableLayoutOptions={{
+              columns,
+              rowActionButtons,
+            }}
+          />
+        </OdysseyProvider>,
       );
 
       await waitUntilTableLoadedHack();
@@ -330,14 +363,16 @@ describe("DataView", () => {
       const user = userEvent.setup();
 
       render(
-        <DataView
-          availableLayouts={["table"]}
-          getData={getData}
-          hasRowSelection
-          tableLayoutOptions={{
-            columns,
-          }}
-        />,
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["table"]}
+            getData={getData}
+            hasRowSelection
+            tableLayoutOptions={{
+              columns,
+            }}
+          />
+        </OdysseyProvider>,
       );
 
       await waitUntilTableLoadedHack();
@@ -355,14 +390,16 @@ describe("DataView", () => {
       const user = userEvent.setup();
 
       render(
-        <DataView
-          availableLayouts={["table"]}
-          getData={getData}
-          hasRowSelection
-          tableLayoutOptions={{
-            columns,
-          }}
-        />,
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["table"]}
+            getData={getData}
+            hasRowSelection
+            tableLayoutOptions={{
+              columns,
+            }}
+          />
+        </OdysseyProvider>,
       );
 
       await waitUntilTableLoadedHack();
@@ -380,14 +417,16 @@ describe("DataView", () => {
       const user = userEvent.setup();
 
       render(
-        <DataView
-          availableLayouts={["grid"]}
-          getData={getData}
-          hasRowSelection
-          cardLayoutOptions={{
-            itemProps: gridItemProps,
-          }}
-        />,
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["grid"]}
+            getData={getData}
+            hasRowSelection
+            cardLayoutOptions={{
+              itemProps: gridItemProps,
+            }}
+          />
+        </OdysseyProvider>,
       );
 
       await waitUntilTableLoadedHack();
@@ -405,14 +444,16 @@ describe("DataView", () => {
       const user = userEvent.setup();
 
       render(
-        <DataView
-          availableLayouts={["table"]}
-          getData={getData}
-          hasRowSelection
-          tableLayoutOptions={{
-            columns,
-          }}
-        />,
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["table"]}
+            getData={getData}
+            hasRowSelection
+            tableLayoutOptions={{
+              columns,
+            }}
+          />
+        </OdysseyProvider>,
       );
 
       await waitUntilTableLoadedHack();
@@ -430,14 +471,16 @@ describe("DataView", () => {
       const user = userEvent.setup();
 
       render(
-        <DataView
-          availableLayouts={["table"]}
-          getData={getData}
-          hasRowSelection
-          tableLayoutOptions={{
-            columns,
-          }}
-        />,
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["table"]}
+            getData={getData}
+            hasRowSelection
+            tableLayoutOptions={{
+              columns,
+            }}
+          />
+        </OdysseyProvider>,
       );
 
       await waitUntilTableLoadedHack();
@@ -461,14 +504,16 @@ describe("DataView", () => {
       const user = userEvent.setup();
 
       render(
-        <DataView
-          availableLayouts={["table"]}
-          getData={getData}
-          hasRowSelection
-          tableLayoutOptions={{
-            columns,
-          }}
-        />,
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["table"]}
+            getData={getData}
+            hasRowSelection
+            tableLayoutOptions={{
+              columns,
+            }}
+          />
+        </OdysseyProvider>,
       );
 
       await waitUntilTableLoadedHack();
@@ -496,15 +541,17 @@ describe("DataView", () => {
       );
 
       render(
-        <DataView
-          availableLayouts={["table"]}
-          getData={getData}
-          hasRowSelection
-          tableLayoutOptions={{
-            columns,
-          }}
-          bulkActionMenuItems={bulkActionMenuItems}
-        />,
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["table"]}
+            getData={getData}
+            hasRowSelection
+            tableLayoutOptions={{
+              columns,
+            }}
+            bulkActionMenuItems={bulkActionMenuItems}
+          />
+        </OdysseyProvider>,
       );
 
       await waitUntilTableLoadedHack();
@@ -541,15 +588,17 @@ describe("DataView", () => {
       };
 
       render(
-        <DataView
-          availableLayouts={["table"]}
-          getData={() => updatedData}
-          hasRowReordering
-          onReorderRows={handleReorderRows}
-          tableLayoutOptions={{
-            columns,
-          }}
-        />,
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["table"]}
+            getData={() => updatedData}
+            hasRowReordering
+            onReorderRows={handleReorderRows}
+            tableLayoutOptions={{
+              columns,
+            }}
+          />
+        </OdysseyProvider>,
       );
 
       expect(await screen.findByText(data[0].name)).toBeVisible();
@@ -588,15 +637,17 @@ describe("DataView", () => {
       };
 
       render(
-        <DataView
-          availableLayouts={["table"]}
-          getData={() => updatedData}
-          hasRowReordering
-          onReorderRows={handleReorderRows}
-          tableLayoutOptions={{
-            columns,
-          }}
-        />,
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["table"]}
+            getData={() => updatedData}
+            hasRowReordering
+            onReorderRows={handleReorderRows}
+            tableLayoutOptions={{
+              columns,
+            }}
+          />
+        </OdysseyProvider>,
       );
 
       expect(await screen.findByText(data[0].name)).toBeVisible();
@@ -635,16 +686,18 @@ describe("DataView", () => {
       };
 
       render(
-        <DataView
-          availableLayouts={["table"]}
-          getData={() => updatedData}
-          hasRowReordering
-          onReorderRows={handleReorderRows}
-          totalRows={updatedData.length}
-          tableLayoutOptions={{
-            columns,
-          }}
-        />,
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["table"]}
+            getData={() => updatedData}
+            hasRowReordering
+            onReorderRows={handleReorderRows}
+            totalRows={updatedData.length}
+            tableLayoutOptions={{
+              columns,
+            }}
+          />
+        </OdysseyProvider>,
       );
 
       expect(await screen.findByText(data[0].name)).toBeVisible();
@@ -672,19 +725,23 @@ describe("DataView", () => {
     test("can expand table rows", async () => {
       const user = userEvent.setup();
 
-      const tableDetails = ({ row }: { row: DataTableRowData }) => {
+      const tableDetails: TableLayoutProps<Person>["renderDetailPanel"] = ({
+        row,
+      }) => {
         return <p>This is additional content for {row.original.name}</p>;
       };
 
       render(
-        <DataView
-          availableLayouts={["table"]}
-          getData={getData}
-          tableLayoutOptions={{
-            columns,
-            renderDetailPanel: tableDetails,
-          }}
-        />,
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["table"]}
+            getData={getData}
+            tableLayoutOptions={{
+              columns,
+              renderDetailPanel: tableDetails,
+            }}
+          />
+        </OdysseyProvider>,
       );
 
       await waitUntilTableLoadedHack();
@@ -713,14 +770,16 @@ describe("DataView", () => {
     };
 
     render(
-      <DataView
-        availableLayouts={["grid"]}
-        getData={getData}
-        cardLayoutOptions={{
-          itemProps: gridItemProps,
-          renderDetailPanel: cardDetails,
-        }}
-      />,
+      <OdysseyProvider>
+        <DataView
+          availableLayouts={["grid"]}
+          getData={getData}
+          cardLayoutOptions={{
+            itemProps: gridItemProps,
+            renderDetailPanel: cardDetails,
+          }}
+        />
+      </OdysseyProvider>,
     );
 
     expect(await screen.findAllByText(data[0].name)).toHaveLength(1);
@@ -743,16 +802,18 @@ describe("DataView", () => {
     const emptyText = "This is the empty state text.";
 
     render(
-      <DataView
-        availableLayouts={["table"]}
-        getData={() => []}
-        tableLayoutOptions={{
-          columns,
-        }}
-        emptyPlaceholder={
-          <EmptyState heading="Empty" description={emptyText} />
-        }
-      />,
+      <OdysseyProvider>
+        <DataView
+          availableLayouts={["table"]}
+          getData={() => []}
+          tableLayoutOptions={{
+            columns,
+          }}
+          emptyPlaceholder={
+            <EmptyState heading="Empty" description={emptyText} />
+          }
+        />
+      </OdysseyProvider>,
     );
 
     expect(await screen.findByText(emptyText)).not.toBeNull();
@@ -762,16 +823,18 @@ describe("DataView", () => {
     const noResultsText = "This is the no results state text.";
 
     render(
-      <DataView
-        availableLayouts={["table"]}
-        getData={() => []}
-        tableLayoutOptions={{
-          columns,
-        }}
-        noResultsPlaceholder={
-          <EmptyState heading="No results" description={noResultsText} />
-        }
-      />,
+      <OdysseyProvider>
+        <DataView
+          availableLayouts={["table"]}
+          getData={() => []}
+          tableLayoutOptions={{
+            columns,
+          }}
+          noResultsPlaceholder={
+            <EmptyState heading="No results" description={noResultsText} />
+          }
+        />
+      </OdysseyProvider>,
     );
 
     expect(await screen.findByText(noResultsText)).not.toBeNull();
@@ -781,14 +844,16 @@ describe("DataView", () => {
     const user = userEvent.setup();
 
     render(
-      <DataView
-        availableLayouts={["table"]}
-        getData={getData}
-        tableLayoutOptions={{
-          columns,
-          hasSorting: true,
-        }}
-      />,
+      <OdysseyProvider>
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          tableLayoutOptions={{
+            columns,
+            hasSorting: true,
+          }}
+        />
+      </OdysseyProvider>,
     );
 
     await waitUntilTableLoadedHack();
@@ -811,14 +876,16 @@ describe("DataView", () => {
     const user = userEvent.setup();
 
     render(
-      <DataView
-        availableLayouts={["table"]}
-        getData={getData}
-        tableLayoutOptions={{
-          columns,
-          hasChangeableDensity: true,
-        }}
-      />,
+      <OdysseyProvider>
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          tableLayoutOptions={{
+            columns,
+            hasChangeableDensity: true,
+          }}
+        />
+      </OdysseyProvider>,
     );
 
     await waitUntilTableLoadedHack();
@@ -846,14 +913,16 @@ describe("DataView", () => {
     const user = userEvent.setup();
 
     render(
-      <DataView
-        availableLayouts={["table"]}
-        getData={getData}
-        tableLayoutOptions={{
-          columns,
-          hasColumnVisibility: true,
-        }}
-      />,
+      <OdysseyProvider>
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          tableLayoutOptions={{
+            columns,
+            hasColumnVisibility: true,
+          }}
+        />
+      </OdysseyProvider>,
     );
 
     // Detect if the data has loaded in
@@ -874,14 +943,16 @@ describe("DataView", () => {
 
   test("can resize columns", async () => {
     render(
-      <DataView
-        availableLayouts={["table"]}
-        getData={getData}
-        tableLayoutOptions={{
-          columns,
-          hasColumnResizing: true,
-        }}
-      />,
+      <OdysseyProvider>
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          tableLayoutOptions={{
+            columns,
+            hasColumnResizing: true,
+          }}
+        />
+      </OdysseyProvider>,
     );
 
     await waitUntilTableLoadedHack();
@@ -898,15 +969,17 @@ describe("DataView", () => {
   describe("Pagination", () => {
     test("displays paged pagination", async () => {
       render(
-        <DataView
-          availableLayouts={["table"]}
-          getData={getData}
-          hasPagination
-          paginationType="paged"
-          tableLayoutOptions={{
-            columns,
-          }}
-        />,
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["table"]}
+            getData={getData}
+            hasPagination
+            paginationType="paged"
+            tableLayoutOptions={{
+              columns,
+            }}
+          />
+        </OdysseyProvider>,
       );
 
       await waitUntilTableLoadedHack();
@@ -923,16 +996,18 @@ describe("DataView", () => {
 
     test("displays loadMore pagination", async () => {
       render(
-        <DataView
-          availableLayouts={["table"]}
-          getData={getData}
-          hasPagination
-          paginationType="loadMore"
-          enableVirtualization={false}
-          tableLayoutOptions={{
-            columns,
-          }}
-        />,
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["table"]}
+            getData={getData}
+            hasPagination
+            paginationType="loadMore"
+            enableVirtualization={false}
+            tableLayoutOptions={{
+              columns,
+            }}
+          />
+        </OdysseyProvider>,
       );
 
       await waitUntilTableLoadedHack();
@@ -946,17 +1021,19 @@ describe("DataView", () => {
       const user = userEvent.setup();
 
       render(
-        <DataView
-          availableLayouts={["table"]}
-          getData={getData}
-          hasPagination
-          paginationType="loadMore"
-          resultsPerPage={3}
-          enableVirtualization={false}
-          tableLayoutOptions={{
-            columns,
-          }}
-        />,
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["table"]}
+            getData={getData}
+            hasPagination
+            paginationType="loadMore"
+            resultsPerPage={3}
+            enableVirtualization={false}
+            tableLayoutOptions={{
+              columns,
+            }}
+          />
+        </OdysseyProvider>,
       );
 
       await waitUntilTableLoadedHack();
@@ -977,16 +1054,18 @@ describe("DataView", () => {
       const user = userEvent.setup();
 
       render(
-        <DataView
-          availableLayouts={["table"]}
-          getData={getData}
-          hasPagination
-          paginationType="paged"
-          resultsPerPage={2}
-          tableLayoutOptions={{
-            columns,
-          }}
-        />,
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["table"]}
+            getData={getData}
+            hasPagination
+            paginationType="paged"
+            resultsPerPage={2}
+            tableLayoutOptions={{
+              columns,
+            }}
+          />
+        </OdysseyProvider>,
       );
 
       await waitUntilTableLoadedHack();
@@ -1009,16 +1088,18 @@ describe("DataView", () => {
       const user = userEvent.setup();
 
       render(
-        <DataView
-          availableLayouts={["table"]}
-          getData={getData}
-          hasPagination
-          paginationType="paged"
-          resultsPerPage={2}
-          tableLayoutOptions={{
-            columns,
-          }}
-        />,
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["table"]}
+            getData={getData}
+            hasPagination
+            paginationType="paged"
+            resultsPerPage={2}
+            tableLayoutOptions={{
+              columns,
+            }}
+          />
+        </OdysseyProvider>,
       );
 
       await waitUntilTableLoadedHack();
@@ -1051,17 +1132,19 @@ describe("DataView", () => {
       const user = userEvent.setup();
 
       render(
-        <DataView
-          availableLayouts={["table"]}
-          getData={getData}
-          hasPagination
-          paginationType="paged"
-          resultsPerPage={data.length - 1}
-          totalRows={data.length}
-          tableLayoutOptions={{
-            columns,
-          }}
-        />,
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["table"]}
+            getData={getData}
+            hasPagination
+            paginationType="paged"
+            resultsPerPage={data.length - 1}
+            totalRows={data.length}
+            tableLayoutOptions={{
+              columns,
+            }}
+          />
+        </OdysseyProvider>,
       );
 
       await waitUntilTableLoadedHack();
