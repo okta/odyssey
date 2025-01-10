@@ -39,6 +39,10 @@ export type StepData = {
 
 export type StepperProps = {
   /**
+   * Aria label for the stepper container
+   */
+  ariaLabel?: string;
+  /**
    * Current active step (0-based index)
    */
   activeStep: number;
@@ -74,10 +78,6 @@ export type StepperProps = {
    * Button label for the next navigation button
    */
   nextButtonLabel?: string;
-  /**
-   * Aria label for the stepper container
-   */
-  ariaLabel?: string;
 } & Pick<HtmlProps, "testId" | "translate">;
 
 const createShouldForwardProp = (excludedProps: string[]) => (prop: string) =>
