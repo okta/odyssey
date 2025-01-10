@@ -78,7 +78,7 @@ export type StepperProps = {
    * Aria label for the stepper container
    */
   ariaLabel?: string;
-} & Pick<HtmlProps, "testId">;
+} & Pick<HtmlProps, "testId" | "translate">;
 
 const createShouldForwardProp = (excludedProps: string[]) => (prop: string) =>
   !excludedProps.includes(prop);
@@ -465,6 +465,45 @@ const NavigationSection = styled("div", {
   alignItems: "center",
 }));
 
+export type StepperNavigationProps = {
+  /**
+   * Total number of steps
+   */
+  totalSteps: number;
+  /**
+   * Current active step (0-based index)
+   */
+  currentStep: number;
+  /**
+   * Callback fired when back button is clicked
+   */
+  onBack: () => void;
+  /**
+   * Callback fired when next button is clicked
+   */
+  onNext: () => void;
+  /**
+   * Callback fired when a step dot is clicked
+   */
+  onStepClick: (step: number) => void;
+  /**
+   * Function to determine if a step is clickable
+   */
+  isStepClickable: (step: number) => boolean;
+  /**
+   * Custom label for the previous button
+   */
+  previousButtonLabel?: string;
+  /**
+   * Custom label for the next button
+   */
+  nextButtonLabel?: string;
+  /**
+   * Design tokens for styling
+   */
+  odysseyDesignTokens: DesignTokens;
+};
+
 const StepperNavigation = ({
   totalSteps,
   currentStep,
@@ -475,17 +514,7 @@ const StepperNavigation = ({
   odysseyDesignTokens,
   onStepClick,
   isStepClickable,
-}: {
-  totalSteps: number;
-  currentStep: number;
-  onBack: () => void;
-  onNext: () => void;
-  onStepClick: (step: number) => void;
-  isStepClickable: (step: number) => boolean;
-  previousButtonLabel?: string;
-  nextButtonLabel?: string;
-  odysseyDesignTokens: DesignTokens;
-}) => {
+}: StepperNavigationProps) => {
   const { t } = useTranslation();
 
   const labels = useMemo(
@@ -503,7 +532,7 @@ const StepperNavigation = ({
         i === currentStep ? "current" : i < currentStep ? "previous" : "next";
       const isClickable = isStepClickable(i);
 
-      const handleKeyDown = (event: React.KeyboardEvent) => {
+      const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
         if (!isClickable) return;
 
         if (event.key === "Enter" || event.key === " ") {
@@ -518,11 +547,11 @@ const StepperNavigation = ({
           status={status}
           odysseyDesignTokens={odysseyDesignTokens}
           isClickable={isClickable}
-          onClick={() => isClickable && onStepClick(i)}
+          onClick={isClickable ? () => onStepClick(i) : undefined}
           onKeyDown={handleKeyDown}
           role="button"
           tabIndex={isClickable ? 0 : -1}
-          aria-label={`Go to step ${i + 1}`} //TODO: Need translation string
+          aria-label={`Go to step ${i + 1}`}
         />
       );
     });
