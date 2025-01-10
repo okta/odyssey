@@ -13,35 +13,35 @@
 import react from "@vitejs/plugin-react";
 // import react from "@vitejs/plugin-react-swc";
 import { defineConfig } from "vite";
-import babel from "vite-plugin-babel";
+// import babel from "vite-plugin-babel";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    babel({
-      babelConfig: {
-        plugins: [
-          [
-            "babel-plugin-import",
-            {
-              libraryName: "@mui/material",
-              libraryDirectory: "",
-              camel2DashComponentName: false,
-            },
-            "core",
-          ],
-          [
-            "babel-plugin-import",
-            {
-              libraryName: "@mui/icons-material",
-              libraryDirectory: "",
-              camel2DashComponentName: false,
-            },
-            "icons",
-          ],
-        ],
-      },
-    }),
+    // babel({
+    //   babelConfig: {
+    //     plugins: [
+    //       [
+    //         "babel-plugin-import",
+    //         {
+    //           libraryName: "@mui/material",
+    //           libraryDirectory: "",
+    //           camel2DashComponentName: false,
+    //         },
+    //         "core",
+    //       ],
+    //       [
+    //         "babel-plugin-import",
+    //         {
+    //           libraryName: "@mui/icons-material",
+    //           libraryDirectory: "",
+    //           camel2DashComponentName: false,
+    //         },
+    //         "icons",
+    //       ],
+    //     ],
+    //   },
+    // }),
     react(),
   ],
 });

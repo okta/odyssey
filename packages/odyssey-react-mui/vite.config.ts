@@ -34,12 +34,12 @@ export default defineConfig({
       },
       formats: ["es"],
     },
-    outDir: "dist/vite",
+    outDir: "dist",
     sourcemap: true,
     rollupOptions: {
       output: {
         preserveModules: true, // Preserve module structure and output separate files
-        preserveModulesRoot: "src", // Ensure output mirrors your `src` folder structure
+        preserveModulesRoot: ".", // Ensure output mirrors your `src` folder structure
         entryFileNames: "[name].js", // Custom file names (optional)
       },
     },
