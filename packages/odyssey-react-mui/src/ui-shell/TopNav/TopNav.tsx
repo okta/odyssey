@@ -21,7 +21,7 @@ import {
 import {
   UiShellColors,
   useUiShellContrastColorContext,
-} from "../../ui-shell/UiShell/UiShellColorsProvider";
+} from "../../ui-shell/UiShellColorsProvider";
 
 export const TOP_NAV_HEIGHT = `${64 / 14}rem`;
 

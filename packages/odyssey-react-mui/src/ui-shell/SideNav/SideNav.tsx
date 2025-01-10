@@ -106,22 +106,40 @@ const StyledSideNav = styled("nav", {
     prop !== "odysseyDesignTokens" &&
     prop !== "isAppContentWhiteBackground" &&
     prop !== "isSideNavCollapsed",
-})(
+})<{
+  isAppContentWhiteBackground: boolean;
+  backgroundColor?: UiShellColors["sideNavBackgroundColor"];
+  isSideNavCollapsed: boolean;
+  odysseyDesignTokens: DesignTokens;
+}>(
   ({
     backgroundColor,
     isAppContentWhiteBackground,
     isSideNavCollapsed,
     odysseyDesignTokens,
-  }: {
-    isAppContentWhiteBackground: boolean;
-    backgroundColor?: UiShellColors["sideNavBackgroundColor"];
-    isSideNavCollapsed: boolean;
-    odysseyDesignTokens: DesignTokens;
   }) => ({
     position: "relative",
     display: "inline-block",
     height: "100%",
     backgroundColor: backgroundColor || odysseyDesignTokens.HueNeutralWhite,
+
+    ...(isAppContentWhiteBackground && {
+      borderRight: `${odysseyDesignTokens.BorderWidthMain} ${odysseyDesignTokens.BorderStyleMain} ${odysseyDesignTokens.HueNeutral100}`,
+    }),
+
+    "&::after": {
+      backgroundColor: odysseyDesignTokens.HueNeutral200,
+      content: "''",
+      height: "100%",
+      opacity: 0,
+      position: "absolute",
+      right: 0,
+      top: 0,
+      transform: `translateX(0)`,
+      transition: `opacity ${odysseyDesignTokens.TransitionDurationMain}, transform ${odysseyDesignTokens.TransitionDurationMain}`,
+      width: odysseyDesignTokens.Spacing2,
+      zIndex: 2,
+    },
 
     "&:has([data-sidenav-toggle='true']:hover), &:has([data-sidenav-toggle='true']:focus-visible)":
       {
@@ -144,10 +162,6 @@ const StyledSideNav = styled("nav", {
       transition: `transform ${odysseyDesignTokens.TransitionDurationMain}`,
       transform: `translate3d(100%, 0, 0)`,
     },
-
-    ...(isAppContentWhiteBackground && {
-      borderRight: `${odysseyDesignTokens.BorderWidthMain} ${odysseyDesignTokens.BorderStyleMain} ${odysseyDesignTokens.HueNeutral100}`,
-    }),
   }),
 );
 
@@ -260,46 +274,41 @@ const PersistentSideNavFooter = styled(SideNavFooter, {
 const SideNavFooterItemsContainer = styled("div", {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" && prop !== "sideNavContrastColors",
-})(
-  ({
-    odysseyDesignTokens,
-    sideNavContrastColors,
-  }: {
-    odysseyDesignTokens: DesignTokens;
-    sideNavContrastColors: UiShellColors["sideNavContrastColors"];
-  }) => ({
-    display: "flex",
-    flexWrap: "wrap",
-    alignItems: "center",
-    fontSize: odysseyDesignTokens.TypographySizeOverline,
+})<{
+  odysseyDesignTokens: DesignTokens;
+  sideNavContrastColors: UiShellColors["sideNavContrastColors"];
+}>(({ odysseyDesignTokens, sideNavContrastColors }) => ({
+  display: "flex",
+  flexWrap: "wrap",
+  alignItems: "center",
+  fontSize: odysseyDesignTokens.TypographySizeOverline,
 
-    "a, span": {
+  "a, span": {
+    color: odysseyDesignTokens.HueNeutral600,
+    transition: `color ${odysseyDesignTokens.TransitionDurationMain}`,
+
+    "&:visited": {
       color: odysseyDesignTokens.HueNeutral600,
-      transition: `color ${odysseyDesignTokens.TransitionDurationMain}`,
-
-      "&:visited": {
-        color: odysseyDesignTokens.HueNeutral600,
-
-        ...(sideNavContrastColors?.fontColor && {
-          color: sideNavContrastColors?.fontColor,
-        }),
-      },
-
-      "&:hover": {
-        textDecoration: "none",
-        color: odysseyDesignTokens.HueNeutral900,
-
-        ...(sideNavContrastColors?.fontColor && {
-          color: sideNavContrastColors?.fontColor,
-        }),
-      },
 
       ...(sideNavContrastColors?.fontColor && {
         color: sideNavContrastColors?.fontColor,
       }),
     },
-  }),
-);
+
+    "&:hover": {
+      textDecoration: "none",
+      color: odysseyDesignTokens.HueNeutral900,
+
+      ...(sideNavContrastColors?.fontColor && {
+        color: sideNavContrastColors?.fontColor,
+      }),
+    },
+
+    ...(sideNavContrastColors?.fontColor && {
+      color: sideNavContrastColors?.fontColor,
+    }),
+  },
+}));
 
 const LoadingItemContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",

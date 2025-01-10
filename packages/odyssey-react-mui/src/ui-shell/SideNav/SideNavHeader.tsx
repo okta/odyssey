@@ -23,42 +23,37 @@ import { SideNavLogoProps, SideNavProps } from "./types";
 import { Heading5 } from "../../Typography";
 import { TOP_NAV_HEIGHT } from "../TopNav";
 import { ContrastColors } from "../../createContrastColors";
-import { useUiShellContrastColorContext } from "../../ui-shell/UiShell/UiShellColorsProvider";
+import { useUiShellContrastColorContext } from "../../ui-shell/UiShellColorsProvider";
 
-const SideNavHeaderContainer = styled("div")(() => ({
+const SideNavHeaderContainer = styled("div")({
   position: "relative",
   display: "flex",
   flexDirection: "column",
   zIndex: 1,
-}));
+});
 
 const SideNavLogoContainer = styled("div", {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" && prop !== "isSameBackgroundAsMain",
-})(
-  ({
-    isSameBackgroundAsMain,
-    odysseyDesignTokens,
-  }: {
-    isSameBackgroundAsMain: SideNavLogoProps["isSameBackgroundAsMain"];
-    odysseyDesignTokens: DesignTokens;
-  }) => ({
-    display: "flex",
-    alignItems: "center",
-    height: TOP_NAV_HEIGHT,
-    paddingBlock: odysseyDesignTokens.Spacing4,
-    paddingInline: odysseyDesignTokens.Spacing5,
-    backgroundColor: isSameBackgroundAsMain
-      ? "transparent"
-      : odysseyDesignTokens.HueNeutralWhite,
+})<{
+  isSameBackgroundAsMain: SideNavLogoProps["isSameBackgroundAsMain"];
+  odysseyDesignTokens: DesignTokens;
+}>(({ isSameBackgroundAsMain, odysseyDesignTokens }) => ({
+  display: "flex",
+  alignItems: "center",
+  height: TOP_NAV_HEIGHT,
+  paddingBlock: odysseyDesignTokens.Spacing4,
+  paddingInline: odysseyDesignTokens.Spacing5,
+  backgroundColor: isSameBackgroundAsMain
+    ? "transparent"
+    : odysseyDesignTokens.HueNeutralWhite,
 
-    "svg, img": {
-      maxHeight: "100%",
-      width: "auto",
-      maxWidth: "100%",
-    },
-  }),
-);
+  "svg, img": {
+    maxHeight: "100%",
+    width: "auto",
+    maxWidth: "100%",
+  },
+}));
 
 const SideNavHeadingContainer = styled("div", {
   shouldForwardProp: (prop) =>

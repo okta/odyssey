@@ -35,7 +35,7 @@ import { ExternalLinkIcon } from "../../icons.generated";
 import {
   UiShellColors,
   useUiShellContrastColorContext,
-} from "../../ui-shell/UiShell/UiShellColorsProvider";
+} from "../../ui-shell/UiShellColorsProvider";
 
 export const StyledSideNavListItem = styled("li", {
   shouldForwardProp: (prop) =>

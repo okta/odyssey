@@ -30,7 +30,7 @@ import { useUniqueId } from "../../useUniqueId";
 import {
   UiShellColors,
   useUiShellContrastColorContext,
-} from "../../ui-shell/UiShell/UiShellColorsProvider";
+} from "../../ui-shell/UiShellColorsProvider";
 import { ContrastColors } from "../../createContrastColors";
 
 const SideNavAccordionContainer = styled("div", {
