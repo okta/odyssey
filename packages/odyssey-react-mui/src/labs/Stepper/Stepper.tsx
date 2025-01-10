@@ -503,6 +503,15 @@ const StepperNavigation = ({
         i === currentStep ? "current" : i < currentStep ? "previous" : "next";
       const isClickable = isStepClickable(i);
 
+      const handleKeyDown = (event: React.KeyboardEvent) => {
+        if (!isClickable) return;
+
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault(); // Prevent page scroll on space
+          onStepClick(i);
+        }
+      };
+
       return (
         <StyledStepperDot
           key={i}
@@ -510,9 +519,10 @@ const StepperNavigation = ({
           odysseyDesignTokens={odysseyDesignTokens}
           isClickable={isClickable}
           onClick={() => isClickable && onStepClick(i)}
+          onKeyDown={handleKeyDown}
           role="button"
           tabIndex={isClickable ? 0 : -1}
-          aria-label={`Go to step ${i + 1}`}
+          aria-label={`Go to step ${i + 1}`} //TODO: Need translation string
         />
       );
     });
