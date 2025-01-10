@@ -38,7 +38,9 @@ import { useUiShellContrastColorContext } from "../../ui-shell/UiShellColorsProv
 
 const StyledToggleButton = styled(MuiButton, {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "isSideNavCollapsed",
+    prop !== "odysseyDesignTokens" &&
+    prop !== "isSideNavCollapsed" &&
+    prop !== "toggleContrastColors",
 })<{
   isSideNavCollapsed: boolean;
   odysseyDesignTokens: DesignTokens;
