@@ -1,5 +1,5 @@
 {
-  "extends": "@okta/odyssey-typescript/tsconfig.react.types.json",
+  "extends": "@okta/odyssey-typescript/tsconfig.react.production.json",
   "compilerOptions": {
     "composite": true,
     "emitDeclarationOnly": false,
