@@ -10,14 +10,18 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { TopNav, TopNavProps, UserProfile } from "@okta/odyssey-react-mui/labs";
+import {
+  TopNav,
+  TopNavProps,
+  UserProfile,
+} from "@okta/odyssey-react-mui/ui-shell";
 import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { Button, SearchField } from "@okta/odyssey-react-mui";
 import { UserIcon } from "@okta/odyssey-react-mui/icons";
 
 const storybookMeta: Meta<TopNavProps> = {
-  title: "Labs Components/TopNav",
+  title: "UI Shell Components/TopNav",
   component: TopNav,
   argTypes: {
     leftSideComponent: {

@@ -13,7 +13,6 @@
 export * from "./AppSwitcher";
 export * from "./renderUiShell";
 export * from "./SideNav";
-export * from "./SideNav/NavAccordion";
 export * from "./TopNav";
 export * from "./useHasUiShell";
 export * from "../web-component/renderReactInWebComponent"; // This is located here because some teams use React v17, and this uses React v18's `ReactDOM/client` import which isn't in older versions.
