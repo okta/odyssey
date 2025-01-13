@@ -5,8 +5,8 @@
     "emitDeclarationOnly": false,
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
-    // "noEmit": false,
-    "outDir": "dist",
+    "noEmit": false,
+    "outDir": "dist/tsc",
     "sourceMap": true,
     "types": ["vitest/globals"]
   },

@@ -34,27 +34,27 @@
   "exports": {
     "./icons": {
       "types": "./dist/src/icons.generated/index.d.ts",
-      "default": "./dist/vite/icons.js"
+      "default": "./dist/src/icons.js"
     },
     "./labs": {
       "types": "./dist/src/labs/index.d.ts",
-      "default": "./dist/vite/labs.js"
+      "default": "./dist/src/labs.js"
     },
     "./test-selectors": {
       "types": "./dist/src/test-selectors/index.d.ts",
-      "default": "./dist/vite/testSelectors.js"
+      "default": "./dist/src/testSelectors.js"
     },
     "./ui-shell": {
       "types": "./dist/src/ui-shell/index.d.ts",
-      "default": "./dist/vite/uiShell.js"
+      "default": "./dist/src/uiShell.js"
     },
     "./web-component": {
       "types": "./dist/src/web-component/index.d.ts",
-      "default": "./dist/vite/webComponent.js"
+      "default": "./dist/src/webComponent.js"
     },
     ".": {
       "types": "./dist/src/index.d.ts",
-      "default": "./dist/vite/index.js"
+      "default": "./dist/src/index.js"
     },
     "./README.md": "./README.md"
   },
@@ -66,8 +66,10 @@
     "build": "yarn build:clean && yarn build:translationsJson && yarn build:source",
     "ci:coverage": "NODE_ENV=test yarn vitest run --coverage",
     "dev:coverage": "NODE_ENV=test yarn vitest --coverage",
-    "dev:source2": "tsc --project tsconfig.json --watch",
-    "dev:source": "NODE_ENV=development vite build --watch",
+    "dev:source:babel": "babel dist/tsc/src --out-dir dist/src --source-maps --watch",
+    "dev:source:typescript": "tsc --project tsconfig.json --watch",
+    "dev:source": "concurrently \"npm run dev:source:typescript\" \"npm run dev:source:babel\"",
+    "dev:source2": "NODE_ENV=development vite build --watch",
     "dev:test": "NODE_ENV=test vitest",
     "dev:translationsJson": "yarn build:translationsJson --watch",
     "dev": "yarn concurrently npm:dev:translationsJson npm:dev:source",
@@ -111,8 +113,8 @@
     "word-wrap": "^1.2.5"
   },
   "devDependencies": {
-    "@babel/cli": "^7.23.9",
-    "@babel/core": "^7.23.9",
+    "@babel/cli": "^7.26.4",
+    "@babel/core": "^7.26.0",
     "@happy-dom/jest-environment": "^15.7.4",
     "@okta/browserslist-config-odyssey": "workspace:*",
     "@okta/odyssey-icons": "workspace:*",
@@ -129,7 +131,7 @@
     "@types/react-window": "^1.8.8",
     "@vitejs/plugin-react-swc": "^3.7.2",
     "@vitest/coverage-v8": "^2.1.8",
-    "babel-plugin-import": "^1.13.5",
+    "babel-plugin-import": "^1.13.8",
     "concurrently": "^8.2.2",
     "jest-axe": "^5.0.1",
     "properties": "1.2.1",
