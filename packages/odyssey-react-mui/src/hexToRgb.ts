@@ -10,8 +10,20 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+type RgbComponents = {
+  red: number;
+  green: number;
+  blue: number;
+};
+
 export const isValidHexString = (hexString: string) =>
   hexString.includes("#") && (hexString.length === 4 || hexString.length === 7);
+
+export const rgbComponentsToString = (rgbComponents: RgbComponents) => {
+  const { red, green, blue } = rgbComponents;
+
+  return `${red}, ${green}, ${blue}`;
+};
 
 export const hexToRgb = (hexString: string) => {
   const hexNumber = parseInt(hexString.slice(1), 16);
@@ -23,6 +35,6 @@ export const hexToRgb = (hexString: string) => {
     red,
     green,
     blue,
-    asFormattedString: `rgb(${red}, ${green}, ${blue})`,
+    asFormattedString: `rgb(${rgbComponentsToString({ red, green, blue })})`,
   };
 };

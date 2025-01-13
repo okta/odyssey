@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { hexToRgb, isValidHexString } from "./hexToRgb";
+import { hexToRgb, isValidHexString, rgbComponentsToString } from "./hexToRgb";
 import { DesignTokens } from "./OdysseyDesignTokensContext";
 
 export type ContrastColors = {
@@ -60,9 +60,23 @@ export const generateContrastColors = (
   const lightFontColorInRgb = hexToRgb(odysseyDesignTokens.HueNeutralWhite);
   const darkFontColorInRgb = hexToRgb(odysseyDesignTokens.TypographyColorBody);
 
-  const calculatedFontRgbString = `${calculatedFontColorInRgb?.red}, ${calculatedFontColorInRgb?.green}, ${calculatedFontColorInRgb?.blue}`;
-  const lightFontRgbString = `${lightFontColorInRgb?.red}, ${lightFontColorInRgb?.green}, ${lightFontColorInRgb?.blue}`;
-  const darkFontRgbString = `${darkFontColorInRgb?.red}, ${darkFontColorInRgb?.green}, ${darkFontColorInRgb?.blue}`;
+  const calculatedFontRgbString = rgbComponentsToString({
+    red: calculatedFontColorInRgb?.red,
+    green: calculatedFontColorInRgb?.green,
+    blue: calculatedFontColorInRgb?.blue,
+  });
+
+  const lightFontRgbString = rgbComponentsToString({
+    red: lightFontColorInRgb?.red,
+    green: lightFontColorInRgb?.green,
+    blue: lightFontColorInRgb?.blue,
+  });
+
+  const darkFontRgbString = rgbComponentsToString({
+    red: darkFontColorInRgb?.red,
+    green: darkFontColorInRgb?.green,
+    blue: darkFontColorInRgb?.blue,
+  });
 
   const getHighlightColor: (
     luminanceValueInEdgeRange: boolean,
