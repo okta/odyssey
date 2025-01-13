@@ -364,7 +364,6 @@ export const WithNavigation: StoryObj<StepperProps> = {
     };
 
     const isStepClickable = (step: number) => {
-      // Follow same rules as the step clicking logic
       const isCompleted = step < activeStep;
       return (
         (isCompleted && (args.allowBackStep ?? false)) ||
