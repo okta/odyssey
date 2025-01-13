@@ -11,5 +11,6 @@
  */
 
 export { SideNav } from "./SideNav";
+export * from "./NavAccordion";
 
 export * from "./types";
