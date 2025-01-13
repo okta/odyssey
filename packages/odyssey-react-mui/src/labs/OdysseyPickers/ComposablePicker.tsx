@@ -106,6 +106,7 @@ const ComposablePicker = <
   HintLinkComponent,
   label,
   name: nameOverride,
+  noOptionsText,
   onBlur,
   onChange,
   onInputChange,
@@ -164,6 +165,7 @@ const ComposablePicker = <
       isOptionEqualToValue={getIsOptionEqualToValue}
       loading={isLoading}
       multiple={hasMultipleChoices}
+      noOptionsText={noOptionsText}
       onBlur={onBlur}
       onChange={onChange}
       onInputChange={onInputChange}

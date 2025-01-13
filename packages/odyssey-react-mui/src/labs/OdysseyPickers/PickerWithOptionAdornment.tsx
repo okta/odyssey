@@ -306,6 +306,7 @@ const PickerWithOptionAdornment: PickerWithOptionAdornmentComponentType = <
   HintLinkComponent,
   label,
   name: nameOverride,
+  noOptionsText,
   onBlur,
   onChange: onChangeProp,
   onInputChange: onInputChangeProp,
@@ -405,6 +406,7 @@ const PickerWithOptionAdornment: PickerWithOptionAdornmentComponentType = <
       HintLinkComponent={HintLinkComponent}
       label={label}
       name={nameOverride}
+      noOptionsText={noOptionsText}
       onBlur={onBlur}
       onChange={onChangeProp}
       onInputChange={onInputChangeProp}

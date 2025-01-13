@@ -288,6 +288,7 @@ const Picker: PickerComponentType = <
   HintLinkComponent,
   label,
   name: nameOverride,
+  noOptionsText,
   onBlur,
   onChange: onChangeProp,
   onInputChange: onInputChangeProp,
@@ -360,6 +361,7 @@ const Picker: PickerComponentType = <
       HintLinkComponent={HintLinkComponent}
       label={label}
       name={nameOverride}
+      noOptionsText={noOptionsText}
       onBlur={onBlur}
       onChange={onChangeProp}
       onInputChange={onInputChangeProp}
