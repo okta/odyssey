@@ -152,13 +152,7 @@ const StepperContainer = styled(MuiStepper, {
   nonLinear?: boolean;
   activeStep: number;
   stepVariant?: "numeric" | "nonNumeric";
-}>(({
-  orientation,
-  odysseyDesignTokens,
-  allowBackStep,
-  nonLinear,
-  stepVariant,
-}) => {
+}>(({ orientation, odysseyDesignTokens, nonLinear, stepVariant }) => {
   return {
     alignItems: "start",
     ...(orientation === "horizontal" && {
@@ -176,16 +170,10 @@ const StepperContainer = styled(MuiStepper, {
           "&.Mui-completed": {
             "&:hover": {
               "& .MuiStepLabel-label": {
-                color:
-                  nonLinear || allowBackStep
-                    ? odysseyDesignTokens.HueNeutral800
-                    : odysseyDesignTokens.HueNeutral800,
+                color: odysseyDesignTokens.HueNeutral800,
               },
               "& .MuiStepLabel-labelContainer div": {
-                color:
-                  nonLinear || allowBackStep
-                    ? odysseyDesignTokens.HueNeutral800
-                    : odysseyDesignTokens.HueNeutral500,
+                color: odysseyDesignTokens.HueNeutral800,
               },
             },
           },
