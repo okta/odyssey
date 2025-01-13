@@ -655,6 +655,47 @@ const Stepper = ({
 }: StepperProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLDivElement>, stepIndex: number) => {
+      if (!onChange) return;
+
+      const isCompleted = stepIndex < activeStep;
+      const canAdvance = nonLinear;
+      const canGoBack = allowBackStep;
+      const isClickable =
+        (isCompleted && canGoBack) || (!isCompleted && canAdvance);
+
+      if (!isClickable) return;
+
+      switch (event.key) {
+        case "Enter":
+        case " ":
+          event.preventDefault();
+          onChange(stepIndex);
+          break;
+        case "ArrowRight":
+          event.preventDefault();
+          if (stepIndex < steps.length - 1) {
+            const nextElement = document.querySelector(
+              `[data-step-index="${stepIndex + 1}"]`,
+            ) as HTMLElement;
+            nextElement?.focus();
+          }
+          break;
+        case "ArrowLeft":
+          event.preventDefault();
+          if (stepIndex > 0) {
+            const prevElement = document.querySelector(
+              `[data-step-index="${stepIndex - 1}"]`,
+            ) as HTMLElement;
+            prevElement?.focus();
+          }
+          break;
+      }
+    },
+    [onChange, activeStep, nonLinear, allowBackStep, steps.length],
+  );
+
   // Generates unique IDs, used by aria attirbutes to associate and describe a step's description
   const stepDescriptionIds = useMemo(
     () => steps.map((_, index) => `step-description-${index}`),
@@ -682,6 +723,9 @@ const Stepper = ({
       const completed = index < activeStep;
       const active = index === activeStep;
       const stepDescriptionId = stepDescriptionIds[index];
+      const isClickable = nonLinear
+        ? (completed && allowBackStep) || !completed
+        : index === activeStep;
 
       const getStepAriaLabel = (
         index: number,
@@ -715,11 +759,15 @@ const Stepper = ({
           key={index}
           completed={completed}
           onClick={() => handleStepClick(index)}
+          onKeyDown={(e) => handleKeyDown(e, index)}
           odysseyDesignTokens={odysseyDesignTokens}
           orientation={orientation}
           isClickable={
             nonLinear ? (completed && allowBackStep) || !completed : false
           }
+          role="tab"
+          tabIndex={isClickable ? 0 : -1}
+          data-step-index={index}
           {...ariaProps}
         >
           <StepLabel
@@ -773,6 +821,7 @@ const Stepper = ({
     allowBackStep,
     nonLinear,
     handleStepClick,
+    handleKeyDown,
     odysseyDesignTokens,
     orientation,
     variant,
@@ -789,7 +838,7 @@ const Stepper = ({
       nonLinear={nonLinear}
       stepVariant={variant}
       aria-label={ariaLabel || "Progress steps"} // TODO: Use Trasnlated string
-      role="navigation"
+      role="tablist"
     >
       {renderedSteps}
     </StepperContainer>
