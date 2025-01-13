@@ -34,8 +34,8 @@ import {
 } from "../../../OdysseyDesignTokensContext";
 import {
   UiShellColors,
-  useUiShellContrastColorContext,
-} from "../../../ui-shell/UiShellColorsProvider";
+  useUiShellContext,
+} from "../../../ui-shell/UiShellProvider";
 import { ContrastColors } from "../../../createContrastColors";
 
 type ItemProps = {
@@ -154,7 +154,7 @@ export const DragHandle = ({ isDragging }: DragHandleProps) => {
   const { attributes, listeners, ref } = useContext(SortableItemContext);
   const odysseyDesignTokens: DesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
-  const shellContrastColors = useUiShellContrastColorContext();
+  const shellContrastColors = useUiShellContext();
 
   return (
     <StyledDragHandleButton
@@ -219,7 +219,7 @@ export const SortableItem = ({
     transition,
   };
 
-  const shellContrastColors = useUiShellContrastColorContext();
+  const shellContrastColors = useUiShellContext();
   const odysseyDesignTokens: DesignTokens = useOdysseyDesignTokens();
 
   return (

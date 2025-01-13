@@ -23,10 +23,7 @@ import {
 } from "../OdysseyDesignTokensContext";
 import { useScrollState } from "./useScrollState";
 import { ContrastMode } from "../useContrastMode";
-import {
-  UiShellColors,
-  useUiShellContrastColorContext,
-} from "./UiShellColorsProvider";
+import { UiShellColors, useUiShellContext } from "./UiShellProvider";
 
 const emptySideNavItems = [] satisfies SideNavProps["sideNavItems"];
 
@@ -169,7 +166,7 @@ const UiShellContent = ({
 }: UiShellContentProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { isContentScrolled, scrollableContentRef } = useScrollState();
-  const shellColors = useUiShellContrastColorContext();
+  const shellColors = useUiShellContext();
 
   return (
     <StyledShellContainer odysseyDesignTokens={odysseyDesignTokens}>

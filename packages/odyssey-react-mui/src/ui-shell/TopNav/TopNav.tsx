@@ -20,8 +20,8 @@ import {
 } from "../../OdysseyDesignTokensContext";
 import {
   UiShellColors,
-  useUiShellContrastColorContext,
-} from "../../ui-shell/UiShellColorsProvider";
+  useUiShellContext,
+} from "../../ui-shell/UiShellProvider";
 
 export const TOP_NAV_HEIGHT = `${64 / 14}rem`;
 
@@ -85,7 +85,7 @@ const TopNav = ({
   rightSideComponent,
 }: TopNavProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
-  const shellColors = useUiShellContrastColorContext();
+  const shellColors = useUiShellContext();
 
   return (
     <StyledTopNavContainer

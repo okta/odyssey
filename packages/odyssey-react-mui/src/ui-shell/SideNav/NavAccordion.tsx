@@ -29,8 +29,8 @@ import { Support } from "../../Typography";
 import { useUniqueId } from "../../useUniqueId";
 import {
   UiShellColors,
-  useUiShellContrastColorContext,
-} from "../../ui-shell/UiShellColorsProvider";
+  useUiShellContext,
+} from "../../ui-shell/UiShellProvider";
 import { ContrastColors } from "../../createContrastColors";
 
 const SideNavAccordionContainer = styled("div", {
@@ -192,7 +192,7 @@ const NavAccordion = ({
   const headerId = `${id}-header`;
   const contentId = `${id}-content`;
   const odysseyDesignTokens = useOdysseyDesignTokens();
-  const shellContrastColors = useUiShellContrastColorContext();
+  const shellContrastColors = useUiShellContext();
 
   return (
     <SideNavAccordionContainer

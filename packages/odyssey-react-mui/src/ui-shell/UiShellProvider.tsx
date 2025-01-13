@@ -10,7 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createContext, memo, PropsWithChildren, useContext } from "react";
+import {
+  createContext,
+  memo,
+  PropsWithChildren,
+  useContext,
+  useMemo,
+} from "react";
 import {
   generateContrastColors,
   ContrastColors,
@@ -24,28 +30,26 @@ export type UiShellColors = {
   topNavBackgroundColor: string;
 };
 
-const UiShellColorsContext = createContext<UiShellColors | undefined>(
-  undefined,
-);
+const UiShellContext = createContext<UiShellColors | undefined>(undefined);
 
-export const useUiShellContrastColorContext = () => {
-  return useContext(UiShellColorsContext);
+export const useUiShellContext = () => {
+  return useContext(UiShellContext);
 };
 
-export type UiShellColorsProviderProps = {
+export type UiShellProviderProps = {
   appBackgroundColor?: string;
   sideNavBackgroundColor?: string;
   topNavBackgroundColor?: string;
   appBackgroundContrastMode?: string;
 };
 
-const UiShellColorsProvider = ({
+const UiShellProvider = ({
   appBackgroundColor,
   appBackgroundContrastMode = "lowContrast",
   sideNavBackgroundColor,
   topNavBackgroundColor,
   children,
-}: PropsWithChildren<UiShellColorsProviderProps>) => {
+}: PropsWithChildren<UiShellProviderProps>) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const defaultedSideNavBackgroundColor =
     sideNavBackgroundColor || odysseyDesignTokens.HueNeutralWhite;
@@ -70,21 +74,30 @@ const UiShellColorsProvider = ({
   const appContentBackgroundColor =
     appBackgroundColor || defaultTopAndAppBackgroundColor;
 
+  const memoizedContextValue = useMemo(
+    () => ({
+      appBackgroundColor: appContentBackgroundColor,
+      sideNavBackgroundColor:
+        sideNavBackgroundColor || odysseyDesignTokens.HueNeutralWhite,
+      sideNavContrastColors,
+      topNavBackgroundColor: topNavColor,
+    }),
+    [
+      appContentBackgroundColor,
+      odysseyDesignTokens,
+      sideNavBackgroundColor,
+      sideNavContrastColors,
+      topNavColor,
+    ],
+  );
+
   return (
-    <UiShellColorsContext.Provider
-      value={{
-        appBackgroundColor: appContentBackgroundColor,
-        sideNavBackgroundColor:
-          sideNavBackgroundColor || odysseyDesignTokens.HueNeutralWhite,
-        sideNavContrastColors,
-        topNavBackgroundColor: topNavColor,
-      }}
-    >
+    <UiShellContext.Provider value={memoizedContextValue}>
       {children}
-    </UiShellColorsContext.Provider>
+    </UiShellContext.Provider>
   );
 };
 
-const MemoizedUiShellColorsProvider = memo(UiShellColorsProvider);
+const MemoizedUiShellProvider = memo(UiShellProvider);
 
-export { MemoizedUiShellColorsProvider as UiShellColorsProvider };
+export { MemoizedUiShellProvider as UiShellProvider };

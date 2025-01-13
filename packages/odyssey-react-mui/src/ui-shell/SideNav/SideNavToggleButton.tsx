@@ -34,7 +34,7 @@ import {
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
 import { Tooltip } from "../../Tooltip";
-import { useUiShellContrastColorContext } from "../../ui-shell/UiShellColorsProvider";
+import { useUiShellContext } from "../../ui-shell/UiShellProvider";
 
 const StyledToggleButton = styled(MuiButton, {
   shouldForwardProp: (prop) =>
@@ -176,7 +176,7 @@ const SideNavToggleButton = ({
 }: SideNavToggleButtonProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
-  const shellColors = useUiShellContrastColorContext();
+  const shellColors = useUiShellContext();
 
   const localButtonRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
 

@@ -23,7 +23,7 @@ import { SideNavLogoProps, SideNavProps } from "./types";
 import { Heading5 } from "../../Typography";
 import { TOP_NAV_HEIGHT } from "../TopNav";
 import { ContrastColors } from "../../createContrastColors";
-import { useUiShellContrastColorContext } from "../../ui-shell/UiShellColorsProvider";
+import { useUiShellContext } from "../../ui-shell/UiShellProvider";
 
 const SideNavHeaderContainer = styled("div")({
   position: "relative",
@@ -98,7 +98,7 @@ const SideNavHeader = ({
   logoProps,
 }: SideNavHeaderProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
-  const shellContrastColors = useUiShellContrastColorContext();
+  const shellContrastColors = useUiShellContext();
 
   return (
     <SideNavHeaderContainer>

@@ -21,7 +21,7 @@ import {
   type UiShellNavComponentProps,
 } from "./UiShellContent";
 import { type ReactRootElements } from "../web-component/renderReactInWebComponent";
-import { UiShellColorsProvider } from "./UiShellColorsProvider";
+import { UiShellProvider } from "./UiShellProvider";
 
 export const defaultComponentProps: UiShellNavComponentProps = {
   sideNavProps: undefined,
@@ -111,7 +111,7 @@ const UiShell = ({
       >
         <ErrorBoundary fallback={appComponent} onError={onError}>
           <CssBaseline />
-          <UiShellColorsProvider
+          <UiShellProvider
             appBackgroundColor={appBackgroundColor}
             appBackgroundContrastMode={appBackgroundContrastMode}
             sideNavBackgroundColor={sideNavBackgroundColor}
@@ -125,7 +125,7 @@ const UiShell = ({
               onError={onError}
               optionalComponents={optionalComponents}
             />
-          </UiShellColorsProvider>
+          </UiShellProvider>
         </ErrorBoundary>
       </OdysseyProvider>
     </ErrorBoundary>

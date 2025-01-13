@@ -21,7 +21,7 @@ import type { SideNavFooterItem } from "./types";
 import { Box } from "../../Box";
 import { Link } from "../../Link";
 import { useTranslation } from "react-i18next";
-import { useUiShellContrastColorContext } from "../../ui-shell/UiShellColorsProvider";
+import { useUiShellContext } from "../../ui-shell/UiShellProvider";
 import { ContrastColors } from "../../createContrastColors";
 
 const StyledFooterNav = styled("nav")({
@@ -54,7 +54,7 @@ const SideNavFooterContent = ({
 }) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
-  const shellColors = useUiShellContrastColorContext();
+  const shellColors = useUiShellContext();
 
   const memoizedFooterContent = useMemo(() => {
     return footerItems?.map((item) => (

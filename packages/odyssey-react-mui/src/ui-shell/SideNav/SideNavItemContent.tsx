@@ -34,8 +34,8 @@ import {
 import { ExternalLinkIcon } from "../../icons.generated";
 import {
   UiShellColors,
-  useUiShellContrastColorContext,
-} from "../../ui-shell/UiShellColorsProvider";
+  useUiShellContext,
+} from "../../ui-shell/UiShellProvider";
 
 export const StyledSideNavListItem = styled("li", {
   shouldForwardProp: (prop) =>
@@ -272,7 +272,7 @@ const SideNavItemContent = ({
   scrollRef?: React.RefObject<ScrollIntoViewHandle>;
   onItemSelected?: (selectedItemId: string) => void;
 }) => {
-  const shellContrastColors = useUiShellContrastColorContext();
+  const shellContrastColors = useUiShellContext();
   const sidenavItemContentContext = useSideNavItemContent();
   const contextValue = useMemo(
     () => sidenavItemContentContext,

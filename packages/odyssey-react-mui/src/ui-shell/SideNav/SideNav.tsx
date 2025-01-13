@@ -46,8 +46,8 @@ import { SortableList } from "./SortableList/SortableList";
 import { Overline } from "../../Typography";
 import {
   UiShellColors,
-  useUiShellContrastColorContext,
-} from "../../ui-shell/UiShellColorsProvider";
+  useUiShellContext,
+} from "../../ui-shell/UiShellProvider";
 
 export const DEFAULT_SIDE_NAV_WIDTH = "300px";
 
@@ -356,7 +356,7 @@ const SideNav = ({
   const [isContentScrollable, setIsContentScrollable] = useState(false);
   const [sideNavItemsList, updateSideNavItemsList] = useState(sideNavItems);
 
-  const shellColors = useUiShellContrastColorContext();
+  const shellColors = useUiShellContext();
   const odysseyDesignTokens: DesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
 
