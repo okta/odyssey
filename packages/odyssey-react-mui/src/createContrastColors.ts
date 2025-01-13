@@ -26,6 +26,9 @@ const LUMINANCE_THRESHOLD = 128;
 const LUMINANCE_EDGE_MIN = 108;
 const LUMINANCE_EDGE_MAX = 142;
 
+const BLACK_FONT_COLOR = "#000000";
+const WHITE_FONT_COLOR = "#FFFFFF";
+
 export const generateContrastColors = (
   backgroundColor: string,
   odysseyDesignTokens: DesignTokens,
@@ -51,28 +54,32 @@ export const generateContrastColors = (
   const isLight = luminance > LUMINANCE_THRESHOLD;
 
   const fontColor = luminanceValueInEdgeRange
-    ? "#000000"
+    ? BLACK_FONT_COLOR
     : isLight
       ? odysseyDesignTokens.TypographyColorBody
-      : odysseyDesignTokens.HueNeutralWhite;
+      : WHITE_FONT_COLOR;
 
   const calculatedFontColorInRgb = hexToRgb(fontColor);
-  const lightFontColorInRgb = hexToRgb(odysseyDesignTokens.HueNeutralWhite);
-  const darkFontColorInRgb = hexToRgb(odysseyDesignTokens.TypographyColorBody);
+  const lightFontColorInRgb = hexToRgb(WHITE_FONT_COLOR);
+  const darkFontColorInRgb = hexToRgb(
+    luminanceValueInEdgeRange
+      ? BLACK_FONT_COLOR
+      : odysseyDesignTokens.TypographyColorBody,
+  );
 
-  const calculatedFontRgbString = rgbComponentsToString({
+  const calculatedFontRgbComponentsString = rgbComponentsToString({
     red: calculatedFontColorInRgb?.red,
     green: calculatedFontColorInRgb?.green,
     blue: calculatedFontColorInRgb?.blue,
   });
 
-  const lightFontRgbString = rgbComponentsToString({
+  const lightFontRgbComponentsString = rgbComponentsToString({
     red: lightFontColorInRgb?.red,
     green: lightFontColorInRgb?.green,
     blue: lightFontColorInRgb?.blue,
   });
 
-  const darkFontRgbString = rgbComponentsToString({
+  const darkFontRgbComponentsString = rgbComponentsToString({
     red: darkFontColorInRgb?.red,
     green: darkFontColorInRgb?.green,
     blue: darkFontColorInRgb?.blue,
@@ -83,16 +90,18 @@ export const generateContrastColors = (
     isLight: boolean,
   ) => string = (luminanceValueInEdgeRange, isLight) => {
     if (luminanceValueInEdgeRange) {
-      return isLight ? darkFontRgbString : lightFontRgbString;
+      return isLight
+        ? darkFontRgbComponentsString
+        : lightFontRgbComponentsString;
     }
 
-    return calculatedFontRgbString;
+    return calculatedFontRgbComponentsString;
   };
 
   return {
     fontColor,
-    focusRingColor: `rgba(${calculatedFontRgbString}, .8)`,
-    itemDisabledFontColor: `rgba(${calculatedFontRgbString}, .4)`,
+    focusRingColor: `rgba(${calculatedFontRgbComponentsString}, .8)`,
+    itemDisabledFontColor: `rgba(${calculatedFontRgbComponentsString}, .4)`,
     itemHoverBackgroundColor: `rgba(${getHighlightColor(luminanceValueInEdgeRange, isLight)}, .1)`,
     itemSelectedBackgroundColor: `rgba(${getHighlightColor(luminanceValueInEdgeRange, isLight)}, .15)`,
   };
