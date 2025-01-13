@@ -10,11 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {
-  TopNav,
-  TopNavProps,
-  UserProfile,
-} from "@okta/odyssey-react-mui/ui-shell";
+import { UserProfile } from "@okta/odyssey-react-mui/labs";
+import { TopNav, TopNavProps } from "@okta/odyssey-react-mui/ui-shell";
 import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { Button, SearchField } from "@okta/odyssey-react-mui";
