@@ -238,13 +238,11 @@ export const WithLongDescription: StoryObj<StepperProps> = {
     steps: [
       {
         label: "Account setup",
-        description:
-          "Configure your account settings including authentication preferences, security options, and basic profile information.",
+        description: "Configure your account settings.",
       },
       {
         label: "User profile",
-        description:
-          "Tell us more about yourself including your role, department, and any relevant professional details.",
+        description: "Tell us more about yourself.",
       },
       { label: "Review", description: "Confirm the details." },
     ],

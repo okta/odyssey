@@ -175,12 +175,6 @@ const StepperContainer = styled(MuiStepper, {
         "&:not(:has(.Mui-active))": {
           "&.Mui-completed": {
             "&:hover": {
-              backgroundColor:
-                nonLinear || allowBackStep
-                  ? odysseyDesignTokens.HueGreen50
-                  : "transparent",
-              cursor: nonLinear || allowBackStep ? "pointer" : "default",
-
               "& .MuiStepLabel-label": {
                 color:
                   nonLinear || allowBackStep
@@ -195,22 +189,20 @@ const StepperContainer = styled(MuiStepper, {
               },
             },
           },
-          "&:not(.Mui-completed)": {
-            "&:hover": {
-              backgroundColor: nonLinear
-                ? odysseyDesignTokens.HueNeutral200
-                : "transparent",
-              cursor: nonLinear ? "pointer" : "default",
-              "& .MuiStepLabel-label": {
-                color: nonLinear
-                  ? odysseyDesignTokens.HueNeutral900
-                  : odysseyDesignTokens.HueNeutral600,
-              },
-              "& .MuiStepLabel-labelContainer div": {
-                color: nonLinear
-                  ? odysseyDesignTokens.HueNeutral800
-                  : odysseyDesignTokens.HueNeutral600,
-              },
+          "&:hover": {
+            backgroundColor: nonLinear
+              ? odysseyDesignTokens.HueNeutral200
+              : "transparent",
+            cursor: nonLinear ? "pointer" : "default",
+            "& .MuiStepLabel-label": {
+              color: nonLinear
+                ? odysseyDesignTokens.HueNeutral900
+                : odysseyDesignTokens.HueNeutral600,
+            },
+            "& .MuiStepLabel-labelContainer div": {
+              color: nonLinear
+                ? odysseyDesignTokens.HueNeutral800
+                : odysseyDesignTokens.HueNeutral600,
             },
           },
         },
@@ -309,8 +301,6 @@ const StyledStepIconContainer = styled("div", {
       ? odysseyDesignTokens.HueBlue600
       : "transparent",
   transition: `all ${odysseyDesignTokens.TransitionDurationMain}`,
-  outline: completed ? odysseyDesignTokens.HueGreen100 : "none",
-
   ".MuiStep-root:hover &": {
     border:
       !active && !completed && nonLinear
