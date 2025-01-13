@@ -10,6 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+export const isValidHexString = (hexString: string) =>
+  hexString.includes("#") && (hexString.length === 4 || hexString.length === 7);
+
 export const hexToRgb = (hexString: string) => {
   const hexNumber = parseInt(hexString.slice(1), 16);
   const red = (hexNumber >> 16) & 255;

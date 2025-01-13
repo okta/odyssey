@@ -176,25 +176,26 @@ const SideNavToggleButton = ({
 }: SideNavToggleButtonProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
-  const shellColors = useUiShellContext();
+  const uiShellContext = useUiShellContext();
 
   const localButtonRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
 
   const toggleContrastColors = useMemo(() => {
     const hasNonStandardAppBackgroundColor =
-      shellColors?.appBackgroundColor &&
-      shellColors?.appBackgroundColor !== odysseyDesignTokens.HueNeutralWhite &&
-      shellColors?.appBackgroundColor !== odysseyDesignTokens.HueNeutral50;
+      uiShellContext?.appBackgroundColor &&
+      uiShellContext?.appBackgroundColor !==
+        odysseyDesignTokens.HueNeutralWhite &&
+      uiShellContext?.appBackgroundColor !== odysseyDesignTokens.HueNeutral50;
 
     if (hasNonStandardAppBackgroundColor) {
       return generateContrastColors(
-        shellColors.appBackgroundColor,
+        uiShellContext.appBackgroundColor,
         odysseyDesignTokens,
       );
     }
 
     return undefined;
-  }, [odysseyDesignTokens, shellColors]);
+  }, [odysseyDesignTokens, uiShellContext]);
 
   useImperativeHandle(
     buttonRef,

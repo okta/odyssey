@@ -154,16 +154,14 @@ export const DragHandle = ({ isDragging }: DragHandleProps) => {
   const { attributes, listeners, ref } = useContext(SortableItemContext);
   const odysseyDesignTokens: DesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
-  const shellContrastColors = useUiShellContext();
+  const uiShellContext = useUiShellContext();
 
   return (
     <StyledDragHandleButton
       {...attributes}
       {...listeners}
       aria-label={t("navigation.drag.handle")}
-      focusRingColor={
-        shellContrastColors?.sideNavContrastColors?.focusRingColor
-      }
+      focusRingColor={uiShellContext?.sideNavContrastColors?.focusRingColor}
       isDragging={isDragging}
       ref={ref}
       odysseyDesignTokens={odysseyDesignTokens}
@@ -219,7 +217,7 @@ export const SortableItem = ({
     transition,
   };
 
-  const shellContrastColors = useUiShellContext();
+  const uiShellContext = useUiShellContext();
   const odysseyDesignTokens: DesignTokens = useOdysseyDesignTokens();
 
   return (
@@ -229,7 +227,7 @@ export const SortableItem = ({
         isSelected={isSelected}
         odysseyDesignTokens={odysseyDesignTokens}
         ref={setNodeRef}
-        sideNavContrastColors={shellContrastColors?.sideNavContrastColors}
+        sideNavContrastColors={uiShellContext?.sideNavContrastColors}
         style={style}
       >
         {!isDisabled && isSortable && <DragHandle isDragging={isDragging} />}

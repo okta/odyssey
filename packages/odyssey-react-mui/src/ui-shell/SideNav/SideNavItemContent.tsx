@@ -272,7 +272,7 @@ const SideNavItemContent = ({
   scrollRef?: React.RefObject<ScrollIntoViewHandle>;
   onItemSelected?: (selectedItemId: string) => void;
 }) => {
-  const shellContrastColors = useUiShellContext();
+  const uiShellContext = useUiShellContext();
   const sidenavItemContentContext = useSideNavItemContent();
   const contextValue = useMemo(
     () => sidenavItemContentContext,
@@ -323,7 +323,7 @@ const SideNavItemContent = ({
       key={id}
       odysseyDesignTokens={odysseyDesignTokens}
       ref={localScrollRef}
-      sideNavContrastColors={shellContrastColors?.sideNavContrastColors}
+      sideNavContrastColors={uiShellContext?.sideNavContrastColors}
     >
       {
         // Use Link for nav items with links and div for disabled or non-link items
@@ -333,7 +333,7 @@ const SideNavItemContent = ({
             isDisabled={isDisabled}
             isSelected={isSelected}
             odysseyDesignTokens={odysseyDesignTokens}
-            sideNavContrastColors={shellContrastColors?.sideNavContrastColors}
+            sideNavContrastColors={uiShellContext?.sideNavContrastColors}
           >
             <SideNavItemLinkContent
               count={count}
@@ -353,7 +353,7 @@ const SideNavItemContent = ({
             onKeyDown={sideNavItemContentKeyHandler}
             odysseyDesignTokens={odysseyDesignTokens}
             role="button"
-            sideNavContrastColors={shellContrastColors?.sideNavContrastColors}
+            sideNavContrastColors={uiShellContext?.sideNavContrastColors}
             tabIndex={0}
           >
             <SideNavItemLinkContent
@@ -373,7 +373,7 @@ const SideNavItemContent = ({
             isSelected={isSelected}
             odysseyDesignTokens={odysseyDesignTokens}
             onClick={itemClickHandler}
-            sideNavContrastColors={shellContrastColors?.sideNavContrastColors}
+            sideNavContrastColors={uiShellContext?.sideNavContrastColors}
             target={target}
           >
             <SideNavItemLinkContent

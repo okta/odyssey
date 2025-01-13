@@ -192,11 +192,11 @@ const NavAccordion = ({
   const headerId = `${id}-header`;
   const contentId = `${id}-content`;
   const odysseyDesignTokens = useOdysseyDesignTokens();
-  const shellContrastColors = useUiShellContext();
+  const uiShellContext = useUiShellContext();
 
   return (
     <SideNavAccordionContainer
-      backgroundColor={shellContrastColors?.sideNavBackgroundColor}
+      backgroundColor={uiShellContext?.sideNavBackgroundColor}
     >
       <MuiAccordion
         defaultExpanded={isDefaultExpanded}
@@ -209,7 +209,7 @@ const NavAccordion = ({
           aria-controls={contentId}
           className="nav-accordion-summary"
           expandIcon={<ChevronDownIcon />}
-          sideNavContrastColors={shellContrastColors?.sideNavContrastColors}
+          sideNavContrastColors={uiShellContext?.sideNavContrastColors}
           id={headerId}
           isCompact={isCompact}
           isDisabled={isDisabled}
@@ -218,7 +218,7 @@ const NavAccordion = ({
           <Support component="div" translate={translate}>
             {startIcon && startIcon}
             <AccordionLabelContainer
-              sideNavContrastColors={shellContrastColors?.sideNavContrastColors}
+              sideNavContrastColors={uiShellContext?.sideNavContrastColors}
               isIconVisible={Boolean(startIcon)}
               odysseyDesignTokens={odysseyDesignTokens}
             >

@@ -85,13 +85,13 @@ const TopNav = ({
   rightSideComponent,
 }: TopNavProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
-  const shellColors = useUiShellContext();
+  const uiShellContext = useUiShellContext();
 
   return (
     <StyledTopNavContainer
       odysseyDesignTokens={odysseyDesignTokens}
       isScrolled={isScrolled}
-      topNavBackgroundColor={shellColors?.topNavBackgroundColor}
+      topNavBackgroundColor={uiShellContext?.topNavBackgroundColor}
     >
       <StyledLeftSideContainer>
         {leftSideComponent ?? <div />}

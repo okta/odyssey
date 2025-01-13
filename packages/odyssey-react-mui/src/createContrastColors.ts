@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { hexToRgb } from "./hexToRgb";
+import { hexToRgb, isValidHexString } from "./hexToRgb";
 import { DesignTokens } from "./OdysseyDesignTokensContext";
 
 export type ContrastColors = {
@@ -26,31 +26,15 @@ const LUMINANCE_THRESHOLD = 128;
 const LUMINANCE_EDGE_MIN = 108;
 const LUMINANCE_EDGE_MAX = 142;
 
-// const hexToRgb = (hexBackgroundColor: string): RgbColorObject | undefined => {
-//   const formattedHexString = hexBackgroundColor.includes("#")
-//     ? hexBackgroundColor.split("#")[1]
-//     : hexBackgroundColor;
-
-//   const red = parseInt(formattedHexString.slice(0, 2), 16);
-//   const green = parseInt(formattedHexString.slice(2, 4), 16);
-//   const blue = parseInt(formattedHexString.slice(4, 6), 16);
-
-//   const isValidColor = !isNaN(red) && !isNaN(green) && !isNaN(blue);
-
-//   return isValidColor ? {
-//     red,
-//     green,
-//     blue,
-//   } : undefined;
-// };
-
 export const generateContrastColors = (
   backgroundColor: string,
   odysseyDesignTokens: DesignTokens,
 ) => {
   // Convert hex to RGB
-  const rgbFromHex = hexToRgb(backgroundColor);
-  console.log({ rgbFromHex });
+  const rgbFromHex = isValidHexString(backgroundColor)
+    ? hexToRgb(backgroundColor)
+    : hexToRgb(odysseyDesignTokens.HueNeutralWhite);
+
   const { red, green, blue } = rgbFromHex;
 
   // Calculate relative luminance

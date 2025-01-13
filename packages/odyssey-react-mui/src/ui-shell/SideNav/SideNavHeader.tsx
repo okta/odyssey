@@ -98,7 +98,7 @@ const SideNavHeader = ({
   logoProps,
 }: SideNavHeaderProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
-  const shellContrastColors = useUiShellContext();
+  const uiShellContext = useUiShellContext();
 
   return (
     <SideNavHeaderContainer>
@@ -116,9 +116,7 @@ const SideNavHeader = ({
 
       {appName && (
         <SideNavHeadingContainer
-          contrastFontColor={
-            shellContrastColors?.sideNavContrastColors?.fontColor
-          }
+          contrastFontColor={uiShellContext?.sideNavContrastColors?.fontColor}
           odysseyDesignTokens={odysseyDesignTokens}
         >
           <Heading5 component="h2">

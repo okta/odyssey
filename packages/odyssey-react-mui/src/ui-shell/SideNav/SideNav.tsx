@@ -356,7 +356,7 @@ const SideNav = ({
   const [isContentScrollable, setIsContentScrollable] = useState(false);
   const [sideNavItemsList, updateSideNavItemsList] = useState(sideNavItems);
 
-  const shellColors = useUiShellContext();
+  const uiShellContext = useUiShellContext();
   const odysseyDesignTokens: DesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
 
@@ -613,10 +613,11 @@ const SideNav = ({
   return (
     <StyledSideNav
       aria-label={t("navigation.label")}
-      backgroundColor={shellColors?.sideNavBackgroundColor}
+      backgroundColor={uiShellContext?.sideNavBackgroundColor}
       id="side-nav-expandable"
       isAppContentWhiteBackground={
-        shellColors?.appBackgroundColor === odysseyDesignTokens.HueNeutralWhite
+        uiShellContext?.appBackgroundColor ===
+        odysseyDesignTokens.HueNeutralWhite
       }
       isSideNavCollapsed={isSideNavCollapsed}
       odysseyDesignTokens={odysseyDesignTokens}
@@ -642,7 +643,7 @@ const SideNav = ({
             <SideNavHeaderContainer
               hasContentScrolled={hasContentScrolled}
               odysseyDesignTokens={odysseyDesignTokens}
-              borderColor={shellColors?.sideNavContrastColors?.fontColor}
+              borderColor={uiShellContext?.sideNavContrastColors?.fontColor}
             >
               <SideNavHeader
                 appName={appName}
@@ -677,7 +678,7 @@ const SideNav = ({
                           <ErrorBoundary fallback={blankElement}>
                             <SectionHeaderContainer
                               contrastFontColor={
-                                shellColors?.sideNavContrastColors?.fontColor
+                                uiShellContext?.sideNavContrastColors?.fontColor
                               }
                               id={id}
                               key={id}
@@ -755,11 +756,15 @@ const SideNav = ({
               {!isLoading && footerItems && !hasCustomFooter && (
                 <SideNavFooter
                   odysseyDesignTokens={odysseyDesignTokens}
-                  sideNavBackgroundColor={shellColors?.sideNavBackgroundColor}
+                  sideNavBackgroundColor={
+                    uiShellContext?.sideNavBackgroundColor
+                  }
                 >
                   <SideNavFooterItemsContainer
                     odysseyDesignTokens={odysseyDesignTokens}
-                    sideNavContrastColors={shellColors?.sideNavContrastColors}
+                    sideNavContrastColors={
+                      uiShellContext?.sideNavContrastColors
+                    }
                   >
                     <SideNavFooterContent footerItems={footerItems} />
                   </SideNavFooterItemsContainer>

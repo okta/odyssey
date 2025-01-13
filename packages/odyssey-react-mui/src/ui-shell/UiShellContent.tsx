@@ -166,7 +166,7 @@ const UiShellContent = ({
 }: UiShellContentProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { isContentScrolled, scrollableContentRef } = useScrollState();
-  const shellColors = useUiShellContext();
+  const uiShellContext = useUiShellContext();
 
   return (
     <StyledShellContainer odysseyDesignTokens={odysseyDesignTokens}>
@@ -252,7 +252,7 @@ const UiShellContent = ({
       </StyledTopNavContainer>
 
       <StyledAppContainer
-        appBackgroundColor={shellColors?.appBackgroundColor}
+        appBackgroundColor={uiShellContext?.appBackgroundColor}
         hasStandardAppContentPadding={hasStandardAppContentPadding}
         odysseyDesignTokens={odysseyDesignTokens}
         ref={scrollableContentRef}
