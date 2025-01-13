@@ -11,5 +11,3 @@
  */
 
 export * from "./TopNav";
-export * from "./UserProfile";
-export * from "./UserProfileMenuButton";

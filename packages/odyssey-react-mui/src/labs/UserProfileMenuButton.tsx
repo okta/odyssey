@@ -12,12 +12,12 @@
 
 import { memo } from "react";
 import { UserProfile, UserProfileProps } from "./UserProfile";
-import { ChevronDownIcon } from "../../icons.generated";
+import { ChevronDownIcon } from "../icons.generated";
 import {
   AdditionalBaseMenuButtonProps,
   BaseMenuButton,
   BaseMenuButtonProps,
-} from "../../Buttons/BaseMenuButton";
+} from "../Buttons/BaseMenuButton";
 
 export type UserProfileMenuButtonProps = Omit<
   BaseMenuButtonProps,

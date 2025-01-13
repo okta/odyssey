@@ -17,21 +17,7 @@ import {
   SideNavProps,
 } from "@okta/odyssey-react-mui/ui-shell";
 import { Meta, StoryObj } from "@storybook/react";
-import {
-  AppsIcon,
-  ClockIcon,
-  SettingsIcon,
-  HomeIcon,
-  Fido2Icon,
-  LockIcon,
-  AddCircleIcon,
-  DownloadIcon,
-  UserIcon,
-  DirectoryIcon,
-  ServerIcon,
-  FolderIcon,
-  NotificationIcon,
-} from "@okta/odyssey-react-mui/icons";
+
 import { configure, expect, userEvent, waitFor, within } from "@storybook/test";
 import { useEffect, useState } from "react";
 
@@ -151,7 +137,7 @@ const storybookMeta: Meta<SideNavProps> = {
       {
         id: "item1",
         label: "Add new folder",
-        endIconName: AddCircleIcon,
+        endIconName: "AddCircleIcon",
         onClick: () => {},
       },
       {
@@ -163,12 +149,12 @@ const storybookMeta: Meta<SideNavProps> = {
         id: "item3",
         href: "/?path=/docs/mui-components-typography--docs",
         label: "Users",
-        startIconName: UserIcon,
+        startIconName: "UserIcon",
       },
       {
         id: "item4",
         label: "Dashboard",
-        startIconName: HomeIcon,
+        startIconName: "HomeIcon",
         isDisabled: true,
         nestedNavItems: [
           {
@@ -182,12 +168,12 @@ const storybookMeta: Meta<SideNavProps> = {
         id: "item5",
         href: "/",
         label: "Applications",
-        startIconName: AppsIcon,
+        startIconName: "AppsIcon",
       },
       {
         id: "item6",
         label: "Onboarding",
-        startIconName: FolderIcon,
+        startIconName: "FolderIcon",
         nestedNavItems: [
           {
             id: "item6-1",
@@ -210,7 +196,7 @@ const storybookMeta: Meta<SideNavProps> = {
         id: "item7",
         href: "/",
         label: "Directory",
-        startIconName: DirectoryIcon,
+        startIconName: "DirectoryIcon",
       },
       {
         id: "item8",
@@ -221,7 +207,7 @@ const storybookMeta: Meta<SideNavProps> = {
         id: "item9",
         href: "/",
         label: "Kubernetes",
-        startIconName: ServerIcon,
+        startIconName: "ServerIcon",
         severity: "info",
         statusLabel: "BETA",
       },
@@ -229,7 +215,7 @@ const storybookMeta: Meta<SideNavProps> = {
         id: "item10",
         href: "/",
         label: "Reports",
-        startIconName: DownloadIcon,
+        startIconName: "DownloadIcon",
       },
       {
         id: "item11",
@@ -237,14 +223,14 @@ const storybookMeta: Meta<SideNavProps> = {
         label: "Identify Governance",
         target: "_blank",
         isDisabled: true,
-        startIconName: Fido2Icon,
+        startIconName: "Fido2Icon",
       },
       {
         id: "item12",
         href: "/",
         label: "Workflows",
         target: "_blank",
-        startIconName: ClockIcon,
+        startIconName: "ClockIcon",
       },
       {
         id: "item13",
@@ -255,15 +241,14 @@ const storybookMeta: Meta<SideNavProps> = {
         id: "item14",
         href: "/",
         label: "Security",
-        startIconName: LockIcon,
-        endIconName: LockIcon,
+        startIconName: "LockIcon",
       },
       {
         id: "item15",
         label: "Settings",
         isDefaultExpanded: true,
         isSortable: true,
-        startIconName: SettingsIcon,
+        startIconName: "SettingsIcon",
         nestedNavItems: [
           {
             id: "item15-1",
@@ -297,7 +282,7 @@ const storybookMeta: Meta<SideNavProps> = {
         id: "item16",
         href: "/",
         label: "System Configuration",
-        startIconName: FolderIcon,
+        startIconName: "FolderIcon",
       },
     ],
     footerItems: [
@@ -399,7 +384,7 @@ export const SortableSideNav: StoryObj<typeof SideNav> = {
         label: "My Apps",
         isDefaultExpanded: true,
         isSortable: true,
-        startIconName: HomeIcon,
+        startIconName: "HomeIcon",
         nestedNavItems: [
           {
             id: "item17-1",
@@ -424,7 +409,7 @@ export const SortableSideNav: StoryObj<typeof SideNav> = {
           {
             id: "item17-5",
             label: "Add section",
-            endIconName: AddCircleIcon,
+            endIconName: "AddCircleIcon",
             isSortable: false,
           },
         ],
@@ -432,13 +417,13 @@ export const SortableSideNav: StoryObj<typeof SideNav> = {
       {
         id: "item18",
         label: "Notifications",
-        startIconName: NotificationIcon,
+        startIconName: "NotificationIcon",
         count: 1,
       },
       {
         id: "item19",
         label: "Add apps",
-        startIconName: AppsIcon,
+        startIconName: "AppsIcon",
       },
     ],
   },

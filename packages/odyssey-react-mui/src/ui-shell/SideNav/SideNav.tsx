@@ -689,8 +689,8 @@ const SideNav = ({
                                   item.id,
                                 )}
                                 startIcon={getIcon({
-                                  iconName: item.endIconName,
-                                  icon: item.endIcon,
+                                  iconName: item.startIconName,
+                                  icon: item.startIcon,
                                 })}
                               />
                             </SideNavItemContentContext.Provider>
