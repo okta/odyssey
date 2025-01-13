@@ -34,27 +34,27 @@
   "exports": {
     "./icons": {
       "types": "./dist/src/icons.generated/index.d.ts",
-      "default": "./dist/src/icons.generated/index.js"
+      "default": "./dist/vite/icons.js"
     },
     "./labs": {
       "types": "./dist/src/labs/index.d.ts",
-      "default": "./dist/src/labs/index.js"
+      "default": "./dist/vite/labs.js"
     },
     "./test-selectors": {
       "types": "./dist/src/test-selectors/index.d.ts",
-      "default": "./dist/src/test-selectors/index.js"
+      "default": "./dist/vite/testSelectors.js"
     },
     "./ui-shell": {
       "types": "./dist/src/ui-shell/index.d.ts",
-      "default": "./dist/src/ui-shell/index.js"
+      "default": "./dist/vite/uiShell.js"
     },
     "./web-component": {
       "types": "./dist/src/web-component/index.d.ts",
-      "default": "./dist/src/web-component/index.js"
+      "default": "./dist/vite/webComponent.js"
     },
     ".": {
       "types": "./dist/src/index.d.ts",
-      "default": "./dist/src/index.js"
+      "default": "./dist/vite/index.js"
     },
     "./README.md": "./README.md"
   },
@@ -66,8 +66,8 @@
     "build": "yarn build:clean && yarn build:translationsJson && yarn build:source",
     "ci:coverage": "NODE_ENV=test yarn vitest run --coverage",
     "dev:coverage": "NODE_ENV=test yarn vitest --coverage",
-    "dev:source": "tsc --project tsconfig.json --watch",
-    "dev:source2": "vite dev",
+    "dev:source2": "tsc --project tsconfig.json --watch",
+    "dev:source": "NODE_ENV=development vite build --watch",
     "dev:test": "NODE_ENV=test vitest",
     "dev:translationsJson": "yarn build:translationsJson --watch",
     "dev": "yarn concurrently npm:dev:translationsJson npm:dev:source",

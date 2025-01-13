@@ -34,9 +34,10 @@ export default defineConfig({
       },
       formats: ["es"],
     },
-    outDir: "dist",
+    outDir: "dist/vite",
     sourcemap: true,
     rollupOptions: {
+      external: ["react", "react-dom"],
       output: {
         preserveModules: true, // Preserve module structure and output separate files
         preserveModulesRoot: ".", // Ensure output mirrors your `src` folder structure
