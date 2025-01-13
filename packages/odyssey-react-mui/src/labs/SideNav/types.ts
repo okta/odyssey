@@ -11,8 +11,10 @@
  */
 
 import type { ReactElement, SyntheticEvent } from "react";
+
 import type { HtmlProps } from "../../HtmlProps";
 import type { statusSeverityValues } from "../../Status";
+import * as iconDictionary from "../../icons.generated";
 
 type LogoWithLink = {
   href: string;
@@ -119,10 +121,6 @@ export type SideNavItem = {
    * The number to display as a count alongside the nav item
    */
   count?: number;
-  /**
-   * The icon element to display at the end of the Nav Item
-   */
-  endIcon?: ReactElement;
   id: string;
   /**
    * Whether the item is disabled. When set to true the nav item is set to Disabled color,
@@ -143,10 +141,6 @@ export type SideNavItem = {
    */
   severity?: (typeof statusSeverityValues)[number];
   /**
-   * The icon element to display at the start of the Nav Item
-   */
-  startIcon?: ReactElement;
-  /**
    * The label to display inside the status
    */
   statusLabel?: string;
@@ -156,51 +150,86 @@ export type SideNavItem = {
   target?: string;
 } & (
   | {
-      nestedNavItems?: never;
-      href?: never;
-      isDefaultExpanded?: never;
-      isExpanded?: never;
-      /**
-       * Determines if the side nav item is a section header
-       */
-      isSectionHeader: true;
-      isSortable?: never;
-    }
-  | {
-      nestedNavItems?: never;
-      /**
-       * link added to the nav item. if it is undefined, static text will be displayed.
-       * fires onClick event when it is passed
-       */
-      href?: string;
-      isDefaultExpanded?: never;
-      isExpanded?: never;
-      isSectionHeader?: never;
-      isSortable?: never;
-    }
-  | {
-      /**
-       * An array of side nav items to be displayed as nestedNavItems within Accordion
-       */
-      nestedNavItems?: Array<Omit<SideNavItem, "startIcon" | "nestedNavItems">>;
       endIcon?: never;
-      href?: never;
       /**
-       * Whether the accordion (nav item with nestedNavItems) is expanded by default
+       * Name of the icon to display after the nav item text.
        */
-      isDefaultExpanded?: boolean;
-      /**
-       * If true, expands the accordion, otherwise collapse it.
-       * Setting this prop enables control over the accordion.
-       */
-      isExpanded?: boolean;
-      /**
-       * If true, enables sorting for the accordion items
-       */
-      isSectionHeader?: never;
-      isSortable?: boolean;
+      endIconName?: keyof typeof iconDictionary;
     }
-);
+  | {
+      /**
+       * The icon element to display after the nav item text. Only use this with images that don't have React context. Even the official Odyssey Icons use MUI which references the MUI theme in context and will error when rendered in Unified UI Shell.
+       */
+      endIcon?: ReactElement;
+      endIconName?: never;
+    }
+) &
+  (
+    | {
+        startIcon?: never;
+        /**
+         * Name of the icon to display before the text.
+         */
+        startIconName?: keyof typeof iconDictionary;
+      }
+    | {
+        /**
+         * The icon element to display before the nav item text. Only use this with images that don't have React context. Even the official Odyssey Icons use MUI which references the MUI theme in context and will error when rendered in Unified UI Shell.
+         */
+        startIcon?: ReactElement;
+        startIconName?: never;
+      }
+  ) &
+  (
+    | {
+        nestedNavItems?: never;
+        href?: never;
+        isDefaultExpanded?: never;
+        isExpanded?: never;
+        /**
+         * Determines if the side nav item is a section header
+         */
+        isSectionHeader: true;
+        isSortable?: never;
+      }
+    | {
+        nestedNavItems?: never;
+        /**
+         * link added to the nav item. if it is undefined, static text will be displayed.
+         * fires onClick event when it is passed
+         */
+        href?: string;
+        isDefaultExpanded?: never;
+        isExpanded?: never;
+        isSectionHeader?: never;
+        isSortable?: never;
+      }
+    | {
+        /**
+         * An array of side nav items to be displayed as nestedNavItems within Accordion
+         */
+        nestedNavItems?: Array<
+          Omit<SideNavItem, "nestedNavItems" | "startIcon" | "startIconName">
+        >;
+        endIcon?: never;
+        endIconName?: never;
+        href?: never;
+        /**
+         * Whether the accordion (nav item with nestedNavItems) is expanded by default
+         */
+        isDefaultExpanded?: boolean;
+        /**
+         * If true, expands the accordion, otherwise collapse it.
+         * Setting this prop enables control over the accordion.
+         */
+        isExpanded?: boolean;
+        /**
+         * If true, enables sorting for the accordion items
+         */
+        isSectionHeader?: never;
+        isSortable?: boolean;
+      }
+  );
 
 export type SideNavFooterItem = {
   href?: string;

@@ -19,6 +19,8 @@ import {
   useRef,
   useEffect,
   KeyboardEventHandler,
+  createElement,
+  ReactElement,
 } from "react";
 import { Skeleton } from "@mui/material";
 import { useTranslation } from "react-i18next";
@@ -42,6 +44,7 @@ import { SortableList } from "./SortableList/SortableList";
 import { Overline } from "../../Typography";
 import { arrayMove } from "@dnd-kit/sortable";
 import { ErrorBoundary } from "react-error-boundary";
+import * as iconDictionary from "../../icons.generated";
 
 export const DEFAULT_SIDE_NAV_WIDTH = "300px";
 
@@ -269,6 +272,19 @@ const LoadingItem = () => {
   );
 };
 
+const getIcon = ({
+  icon,
+  iconName,
+}: {
+  icon?: ReactElement;
+  iconName?: keyof typeof iconDictionary;
+}) =>
+  iconName && iconName in iconDictionary
+    ? // We can't do `iconDictionary[iconName]` because `iconDictionary` is generated at runtime.
+      // eslint-disable-next-line import/namespace
+      createElement(iconDictionary[iconName])
+    : icon;
+
 const SideNav = ({
   appName,
   footerComponent,
@@ -477,6 +493,10 @@ const SideNav = ({
             >
               <SideNavItemContent
                 {...childProps}
+                endIcon={getIcon({
+                  iconName: childProps.endIconName,
+                  icon: childProps.endIcon,
+                })}
                 scrollRef={getRefIfThisIsFirstNodeWithIsSelected(childProps.id)}
                 onItemSelected={setSelectedItem}
               />
@@ -584,6 +604,7 @@ const SideNav = ({
                         label,
                         isSectionHeader,
                         startIcon,
+                        startIconName,
                         childNavItems,
                         isSortable,
                         isDefaultExpanded,
@@ -618,7 +639,10 @@ const SideNav = ({
                                 isCompact={isCompact}
                                 isDefaultExpanded={isDefaultExpanded}
                                 isExpanded={isExpanded}
-                                startIcon={startIcon}
+                                startIcon={getIcon({
+                                  iconName: startIconName,
+                                  icon: startIcon,
+                                })}
                                 isDisabled={isDisabled}
                               >
                                 <SideNavListContainer role="none">
@@ -655,11 +679,19 @@ const SideNav = ({
                             >
                               <SideNavItemContent
                                 {...item}
+                                endIcon={getIcon({
+                                  iconName: item.endIconName,
+                                  icon: item.endIcon,
+                                })}
                                 key={item.id}
+                                onItemSelected={setSelectedItem}
                                 scrollRef={getRefIfThisIsFirstNodeWithIsSelected(
                                   item.id,
                                 )}
-                                onItemSelected={setSelectedItem}
+                                startIcon={getIcon({
+                                  iconName: item.endIconName,
+                                  icon: item.endIcon,
+                                })}
                               />
                             </SideNavItemContentContext.Provider>
                           </ErrorBoundary>
