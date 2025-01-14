@@ -16,7 +16,7 @@ import {
   StepLabel as MuiStepLabel,
   Stepper as MuiStepper,
 } from "@mui/material";
-import { memo, useCallback, useMemo } from "react";
+import { memo, useCallback, useEffect, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "../../Buttons";
 import { HtmlProps } from "../../HtmlProps";
@@ -555,7 +555,7 @@ const StepperNavigation = ({
           onKeyDown={handleKeyDown}
           role="button"
           tabIndex={isClickable ? 0 : -1}
-          aria-label={`Go to step ${i + 1}`}
+          aria-label={`Go to step ${i + 1}`} //TODO: Translation string
         />
       );
     });
@@ -643,6 +643,14 @@ const Stepper = ({
 }: StepperProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
+  // Create a refs array to store references to each step
+  const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  // Initialize the refs array when steps change
+  useEffect(() => {
+    stepRefs.current = new Array(steps.length).fill(null);
+  }, [steps.length]);
+
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>, stepIndex: number) => {
       if (!onChange) return;
@@ -664,19 +672,15 @@ const Stepper = ({
         case "ArrowRight":
           event.preventDefault();
           if (stepIndex < steps.length - 1) {
-            const nextElement = document.querySelector(
-              `[data-step-index="${stepIndex + 1}"]`,
-            ) as HTMLElement;
-            nextElement?.focus();
+            // Use the ref instead of querySelector
+            stepRefs.current[stepIndex + 1]?.focus();
           }
           break;
         case "ArrowLeft":
           event.preventDefault();
           if (stepIndex > 0) {
-            const prevElement = document.querySelector(
-              `[data-step-index="${stepIndex - 1}"]`,
-            ) as HTMLElement;
-            prevElement?.focus();
+            // Use the ref instead of querySelector
+            stepRefs.current[stepIndex - 1]?.focus();
           }
           break;
       }
@@ -718,7 +722,7 @@ const Stepper = ({
       const getStepAriaLabel = (
         index: number,
         total: number,
-        status: "completed" | "active" | "pending",
+        status: "completed" | "active" | "pending", //TODO: Translate
       ) => {
         const statusText = {
           completed: "Completed",
@@ -745,6 +749,7 @@ const Stepper = ({
       return (
         <StyledStep
           key={index}
+          ref={(el) => (stepRefs.current[index] = el)}
           completed={completed}
           onClick={() => handleStepClick(index)}
           onKeyDown={(e) => handleKeyDown(e, index)}
