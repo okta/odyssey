@@ -10,14 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {
-  HTMLAttributes,
-  memo,
-  ReactElement,
-  ReactNode,
-  useCallback,
-} from "react";
+import { memo, ReactElement, ReactNode, useCallback } from "react";
 import styled from "@emotion/styled";
+import { AutocompleteProps as MuiAutocompleteProps } from "@mui/material";
 
 import { Box } from "../../Box";
 import {
@@ -356,29 +351,41 @@ const PickerWithOptionAdornment: PickerWithOptionAdornmentComponentType = <
   );
 
   const customOptionRender = useCallback<
-    (props: HTMLAttributes<HTMLLIElement>, option: OptionType) => ReactNode
+    NonNullable<
+      MuiAutocompleteProps<
+        OptionType,
+        HasMultipleChoices,
+        undefined,
+        IsCustomValueAllowed
+      >["renderOption"]
+    >
   >(
     (muiProps, option) => {
       const hasMetadata = "metaData" in option && option.metaData;
+      const { key, ...restMuiProps } = muiProps;
 
       if (hasMetadata) {
         return (
-          <OptionWithLabelDescriptionMetadata
-            adornmentSize={adornmentSize}
-            muiProps={muiProps}
-            odysseyDesignTokens={odysseyDesignTokens}
-            option={option}
-          />
+          <div key={key}>
+            <OptionWithLabelDescriptionMetadata
+              adornmentSize={adornmentSize}
+              muiProps={restMuiProps}
+              odysseyDesignTokens={odysseyDesignTokens}
+              option={option}
+            />
+          </div>
         );
       }
 
       return (
-        <OptionWithLabelDescriptionOnly
-          adornmentSize={adornmentSize}
-          muiProps={muiProps}
-          odysseyDesignTokens={odysseyDesignTokens}
-          option={option}
-        />
+        <div key={key}>
+          <OptionWithLabelDescriptionOnly
+            adornmentSize={adornmentSize}
+            muiProps={restMuiProps}
+            odysseyDesignTokens={odysseyDesignTokens}
+            option={option}
+          />
+        </div>
       );
     },
     [adornmentSize, odysseyDesignTokens],

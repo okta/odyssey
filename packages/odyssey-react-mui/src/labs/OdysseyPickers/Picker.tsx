@@ -15,10 +15,10 @@ import {
   memo,
   PropsWithChildren,
   ReactElement,
-  ReactNode,
   useCallback,
 } from "react";
 import styled from "@emotion/styled";
+import { AutocompleteProps as MuiAutocompleteProps } from "@mui/material";
 
 import {
   ComposablePicker,
@@ -82,17 +82,16 @@ export type BaseOptionProps = {
 
 type OptionComponentProps = {
   hasAdornment?: boolean;
-  key: string | number;
+  // key: string | number;
   muiProps: BaseOptionProps["muiProps"];
 };
 
 export const Option = ({
   children,
   hasAdornment = false,
-  key,
   muiProps,
 }: PropsWithChildren<OptionComponentProps>) => (
-  <StyledOption {...muiProps} hasAdornment={hasAdornment} key={key}>
+  <StyledOption {...muiProps} hasAdornment={hasAdornment}>
     {children}
   </StyledOption>
 );
@@ -148,10 +147,10 @@ export const OptionLabelOnlyComponent = <OptionType extends OptionLabelOnly>({
   odysseyDesignTokens,
   option,
 }: BaseOptionProps & OptionProps<OptionType>) => {
-  const { label, value } = option;
+  const { label } = option;
 
   return (
-    <Option muiProps={muiProps} key={value}>
+    <Option muiProps={muiProps}>
       <OptionLabelContainer odysseyDesignTokens={odysseyDesignTokens}>
         <Paragraph>{label}</Paragraph>
       </OptionLabelContainer>
@@ -164,10 +163,10 @@ const OptionLabelDescription = <OptionType extends LabelDescription>({
   odysseyDesignTokens,
   option,
 }: BaseOptionProps & OptionProps<OptionType>) => {
-  const { description, label, value } = option;
+  const { description, label } = option;
 
   return (
-    <Option muiProps={muiProps} key={value}>
+    <Option muiProps={muiProps}>
       <OptionLabelContainer odysseyDesignTokens={odysseyDesignTokens}>
         <Heading6 component="p">{label}</Heading6>
         <OptionDescriptionComponent
@@ -301,39 +300,53 @@ const Picker: PickerComponentType = <
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const customOptionRender = useCallback<
-    (props: HTMLAttributes<HTMLLIElement>, option: OptionType) => ReactNode
+    NonNullable<
+      MuiAutocompleteProps<
+        OptionType,
+        HasMultipleChoices,
+        undefined,
+        IsCustomValueAllowed
+      >["renderOption"]
+    >
   >(
     (muiProps, option) => {
       const hasDescription = "description" in option && option.description;
       const hasMetadata = "metaData" in option && option.metaData;
       const isLabelOnly = !hasMetadata && !hasDescription;
+      const { key, ...restMuiProps } = muiProps;
 
       if (isLabelOnly) {
         return (
-          <OptionLabelOnlyComponent
-            muiProps={muiProps}
-            odysseyDesignTokens={odysseyDesignTokens}
-            option={option}
-          />
+          <div key={key}>
+            <OptionLabelOnlyComponent
+              muiProps={restMuiProps}
+              odysseyDesignTokens={odysseyDesignTokens}
+              option={option}
+            />
+          </div>
         );
       }
 
       if (hasMetadata) {
         return (
-          <OptionLabelDescriptionMetadata
-            muiProps={muiProps}
-            odysseyDesignTokens={odysseyDesignTokens}
-            option={option}
-          />
+          <div key={key}>
+            <OptionLabelDescriptionMetadata
+              muiProps={restMuiProps}
+              odysseyDesignTokens={odysseyDesignTokens}
+              option={option}
+            />
+          </div>
         );
       }
 
       return (
-        <OptionLabelDescription
-          muiProps={muiProps}
-          odysseyDesignTokens={odysseyDesignTokens}
-          option={option}
-        />
+        <div key={key}>
+          <OptionLabelDescription
+            muiProps={restMuiProps}
+            odysseyDesignTokens={odysseyDesignTokens}
+            option={option}
+          />
+        </div>
       );
     },
     [odysseyDesignTokens],
