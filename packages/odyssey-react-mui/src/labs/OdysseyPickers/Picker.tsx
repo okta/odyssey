@@ -15,6 +15,7 @@ import {
   memo,
   PropsWithChildren,
   ReactElement,
+  ReactNode,
   useCallback,
 } from "react";
 import styled from "@emotion/styled";
@@ -236,28 +237,28 @@ export type PickerComponentType = {
     IsCustomValueAllowed extends boolean | undefined,
   >(
     props: PickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>,
-  ): ReactElement;
+  ): ReactNode;
   <
     OptionType extends LabelDescriptionMetadata,
     HasMultipleChoices extends boolean | undefined,
     IsCustomValueAllowed extends boolean | undefined,
   >(
     props: PickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>,
-  ): ReactElement;
+  ): ReactNode;
   <
     OptionType extends LabelDescription,
     HasMultipleChoices extends boolean | undefined,
     IsCustomValueAllowed extends boolean | undefined,
   >(
     props: PickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>,
-  ): ReactElement;
+  ): ReactNode;
   <
     OptionType extends LabelDescriptionMetadata,
     HasMultipleChoices extends boolean | undefined,
     IsCustomValueAllowed extends boolean | undefined,
   >(
     props: PickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>,
-  ): ReactElement;
+  ): ReactNode;
 };
 
 const Picker: PickerComponentType = <

@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, ReactElement, ReactNode, useCallback } from "react";
+import { memo, ReactNode, useCallback } from "react";
 import styled from "@emotion/styled";
 import { AutocompleteProps as MuiAutocompleteProps } from "@mui/material";
 
@@ -261,7 +261,7 @@ type PickerWithOptionAdornmentComponentType = {
       HasMultipleChoices,
       IsCustomValueAllowed
     >,
-  ): ReactElement;
+  ): ReactNode;
   <
     OptionType extends AdornmentLabelDescriptionMetadata,
     HasMultipleChoices extends boolean | undefined,
@@ -272,7 +272,7 @@ type PickerWithOptionAdornmentComponentType = {
       HasMultipleChoices,
       IsCustomValueAllowed
     >,
-  ): ReactElement;
+  ): ReactNode;
 };
 
 const PickerWithOptionAdornment: PickerWithOptionAdornmentComponentType = <
