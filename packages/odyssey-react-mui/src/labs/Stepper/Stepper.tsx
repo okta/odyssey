@@ -136,9 +136,16 @@ const StyledStep = styled(MuiStep, {
   odysseyDesignTokens: DesignTokens;
   orientation?: "horizontal" | "vertical";
   isClickable: boolean;
-}>(({ orientation, odysseyDesignTokens }) => ({
+}>(({ orientation, odysseyDesignTokens, isClickable }) => ({
   flex: orientation === "vertical" ? 1 : "none",
   padding: orientation === "vertical" ? `${odysseyDesignTokens.Spacing1} 0` : 0,
+  "&:focus-visible": isClickable
+    ? {
+        boxShadow: `0 0 0 2px ${odysseyDesignTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyDesignTokens.PalettePrimaryMain}`,
+        outline: "2px solid transparent",
+        outlineOffset: "1px",
+      }
+    : undefined,
 }));
 
 const StepperContainer = styled(MuiStepper, {
@@ -433,6 +440,13 @@ const StyledStepperDot = styled("div", {
         borderColor: odysseyDesignTokens.HueNeutral500,
       }
     : undefined,
+  "&:focus-visible": isClickable
+    ? {
+        boxShadow: `0 0 0 2px ${odysseyDesignTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyDesignTokens.PalettePrimaryMain}`,
+        outline: "2px solid transparent",
+        outlineOffset: "1px",
+      }
+    : undefined,
 }));
 
 const StepperNavigationContainer = styled("div", {
@@ -719,6 +733,7 @@ const Stepper = ({
           {...ariaProps}
         >
           <StepLabel
+            id={`step-label-${index}`}
             odysseyDesignTokens={odysseyDesignTokens}
             completed={completed}
             active={active}
@@ -756,9 +771,7 @@ const Stepper = ({
               id={`step-content-${index}`}
               role="region"
               aria-labelledby={`step-label-${index}`}
-            >
-              {/* Step content would go here */}
-            </div>
+            ></div>
           )}
         </StyledStep>
       );
