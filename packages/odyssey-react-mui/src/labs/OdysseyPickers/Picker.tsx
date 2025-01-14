@@ -83,7 +83,6 @@ export type BaseOptionProps = {
 
 type OptionComponentProps = {
   hasAdornment?: boolean;
-  // key: string | number;
   muiProps: BaseOptionProps["muiProps"];
 };
 
