@@ -10,9 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { TransformOptions } from "@babel/core";
-
-const babelConfig: TransformOptions = {
+/**
+ * @type {import('@babel/core').TransformOptions}
+ */
+const babelConfig = {
   plugins: [
     [
       "babel-plugin-import",
@@ -39,4 +40,4 @@ const babelConfig: TransformOptions = {
   sourceMaps: "both",
 };
 
-export default babelConfig;
+module.exports = babelConfig;
