@@ -16,7 +16,7 @@ import {
   StepLabel as MuiStepLabel,
   Stepper as MuiStepper,
 } from "@mui/material";
-import { memo, useCallback, useEffect, useMemo, useRef } from "react";
+import { memo, useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "../../Buttons";
 import { HtmlProps } from "../../HtmlProps";
@@ -133,8 +133,6 @@ const shouldForwardNavigationSectionProps = createShouldForwardProp(["align"]);
 const StyledStep = styled(MuiStep, {
   shouldForwardProp: shouldForwardStepProps,
 })<{
-  previousButtonLabel?: string;
-  nextButtonLabel?: string;
   odysseyDesignTokens: DesignTokens;
   orientation?: "horizontal" | "vertical";
   isClickable: boolean;
@@ -148,9 +146,7 @@ const StepperContainer = styled(MuiStepper, {
 })<{
   odysseyDesignTokens: DesignTokens;
   orientation?: "horizontal" | "vertical";
-  allowBackStep?: boolean;
   nonLinear?: boolean;
-  activeStep: number;
   stepVariant?: "numeric" | "nonNumeric";
 }>(({ orientation, odysseyDesignTokens, nonLinear, stepVariant }) => {
   return {
@@ -196,19 +192,13 @@ const StepperContainer = styled(MuiStepper, {
         },
       },
     }),
-    ...(orientation === "vertical" && {
-      width: "fit-content",
-      "& .MuiStep-root": {
-        flex: 1,
-        paddingBottom: 0,
-        paddingTop: 0,
-      },
-    }),
     padding: 0,
     borderRadius: odysseyDesignTokens.BorderRadiusMain,
     ...(orientation === "vertical" && {
+      width: "fit-content",
       "& .MuiStep-root": {
         position: "relative",
+        flex: 1,
         paddingLeft: odysseyDesignTokens.Spacing5,
         paddingTop: odysseyDesignTokens.Spacing2,
         paddingBottom: 0,
@@ -392,7 +382,6 @@ const StyledStepDescription = styled("div", {
     : completed
       ? odysseyDesignTokens.HueNeutral700
       : odysseyDesignTokens.HueNeutral600,
-  className: "MuiStepDescription-root",
 }));
 
 const StyledStepNumber = styled("span", {
@@ -538,7 +527,7 @@ const StepperNavigation = ({
 
       const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
         if (!isClickable) return;
-
+        // Only handle Enter/Space for selection
         if (event.key === "Enter" || event.key === " ") {
           event.preventDefault(); // Prevent page scroll on space
           onStepClick(i);
@@ -643,51 +632,27 @@ const Stepper = ({
 }: StepperProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
-  // Create a refs array to store references to each step
-  const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  // Initialize the refs array when steps change
-  useEffect(() => {
-    stepRefs.current = new Array(steps.length).fill(null);
-  }, [steps.length]);
+  const isStepClickable = useCallback(
+    (stepIndex: number) => {
+      const isCompleted = stepIndex < activeStep;
+      return nonLinear
+        ? (isCompleted && allowBackStep) || !isCompleted
+        : stepIndex === activeStep;
+    },
+    [activeStep, allowBackStep, nonLinear],
+  );
 
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>, stepIndex: number) => {
-      if (!onChange) return;
+      if (!onChange || !isStepClickable(stepIndex)) return;
 
-      const isCompleted = stepIndex < activeStep;
-      const canAdvance = nonLinear;
-      const canGoBack = allowBackStep;
-      const isClickable =
-        (isCompleted && canGoBack) || (!isCompleted && canAdvance);
-
-      if (!isClickable) return;
-
-      switch (event.key) {
-        case "Enter":
-        case " ":
-          event.preventDefault();
-          onChange(stepIndex);
-          break;
-        case "ArrowRight":
-          event.preventDefault();
-          if (stepIndex < steps.length - 1) {
-            // Use the ref instead of querySelector
-            stepRefs.current[stepIndex + 1]?.focus();
-          }
-          break;
-        case "ArrowLeft":
-          event.preventDefault();
-          if (stepIndex > 0) {
-            // Use the ref instead of querySelector
-            stepRefs.current[stepIndex - 1]?.focus();
-          }
-          break;
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        onChange(stepIndex);
       }
     },
-    [onChange, activeStep, nonLinear, allowBackStep, steps.length],
+    [onChange, isStepClickable],
   );
-
   // Generates unique IDs, used by aria attirbutes to associate and describe a step's description
   const stepDescriptionIds = useMemo(
     () => steps.map((_, index) => `step-description-${index}`),
@@ -696,17 +661,10 @@ const Stepper = ({
 
   const handleStepClick = useCallback(
     (step: number) => {
-      if (!onChange) return;
-
-      const isCompleted = step < activeStep;
-      const canAdvance = nonLinear;
-      const canGoBack = allowBackStep;
-
-      if ((isCompleted && canGoBack) || (!isCompleted && canAdvance)) {
-        onChange(step);
-      }
+      if (!onChange || !isStepClickable(step)) return;
+      onChange(step);
     },
-    [activeStep, allowBackStep, nonLinear, onChange],
+    [onChange, isStepClickable],
   );
 
   // Memoize steps mapping to prevent unnecessary recalculations
@@ -715,9 +673,7 @@ const Stepper = ({
       const completed = index < activeStep;
       const active = index === activeStep;
       const stepDescriptionId = stepDescriptionIds[index];
-      const isClickable = nonLinear
-        ? (completed && allowBackStep) || !completed
-        : index === activeStep;
+      const isClickable = isStepClickable(index);
 
       const getStepAriaLabel = (
         index: number,
@@ -733,7 +689,8 @@ const Stepper = ({
       };
 
       const ariaProps = {
-        "aria-current": active ? ("step" as const) : undefined, // Type assertion to ensure correct aria-current value
+        // Type assertion here ensures we're using a valid WAI-ARIA value
+        "aria-current": active ? ("step" as const) : undefined,
         "aria-label": getStepAriaLabel(
           index,
           steps.length,
@@ -744,12 +701,11 @@ const Stepper = ({
           "aria-expanded": active,
           "aria-controls": `step-content-${index}`,
         }),
-      };
+      } as const;
 
       return (
         <StyledStep
           key={index}
-          ref={(el) => (stepRefs.current[index] = el)}
           completed={completed}
           onClick={() => handleStepClick(index)}
           onKeyDown={(e) => handleKeyDown(e, index)}
@@ -760,7 +716,6 @@ const Stepper = ({
           }
           role="tab"
           tabIndex={isClickable ? 0 : -1}
-          data-step-index={index}
           {...ariaProps}
         >
           <StepLabel
@@ -800,7 +755,7 @@ const Stepper = ({
             <div
               id={`step-content-${index}`}
               role="region"
-              aria-labelledby={stepDescriptionId}
+              aria-labelledby={`step-label-${index}`}
             >
               {/* Step content would go here */}
             </div>
@@ -819,6 +774,7 @@ const Stepper = ({
     orientation,
     variant,
     stepDescriptionIds,
+    isStepClickable,
   ]);
 
   return (
@@ -827,7 +783,6 @@ const Stepper = ({
       orientation={orientation}
       odysseyDesignTokens={odysseyDesignTokens}
       data-se={testId}
-      allowBackStep={allowBackStep}
       nonLinear={nonLinear}
       stepVariant={variant}
       aria-label={ariaLabel || "Progress steps"} // TODO: Use Trasnlated string
