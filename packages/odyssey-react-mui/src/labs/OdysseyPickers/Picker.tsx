@@ -11,6 +11,7 @@
  */
 
 import {
+  Fragment,
   HTMLAttributes,
   memo,
   PropsWithChildren,
@@ -107,12 +108,9 @@ export const OptionMetadataComponent = ({
     <OptionDetails odysseyDesignTokens={odysseyDesignTokens}>
       {metaData.map((meta: OptionMetadata, index: number) => {
         const { detailText, icon } = meta;
-
+        const key = `${detailText}-${index}`;
         return (
-          <OptionDetail
-            key={`${index}-${detailText}`}
-            odysseyDesignTokens={odysseyDesignTokens}
-          >
+          <OptionDetail key={key} odysseyDesignTokens={odysseyDesignTokens}>
             {icon}
             {detailText}
           </OptionDetail>
@@ -185,10 +183,10 @@ const OptionLabelDescriptionMetadata = <
   odysseyDesignTokens,
   option,
 }: BaseOptionProps & OptionProps<OptionType>) => {
-  const { description, label, metaData, value } = option;
+  const { description, label, metaData } = option;
 
   return (
-    <Option key={value} muiProps={muiProps}>
+    <Option muiProps={muiProps}>
       <OptionLabelContainer odysseyDesignTokens={odysseyDesignTokens}>
         <Heading6 component="p">{label}</Heading6>
         <OptionDescriptionComponent
@@ -270,6 +268,7 @@ const Picker: PickerComponentType = <
 >({
   ariaDescribedBy,
   defaultValue,
+  emptyOptionsText,
   errorMessage,
   errorMessageList,
   getIsOptionEqualToValue,
@@ -287,7 +286,6 @@ const Picker: PickerComponentType = <
   HintLinkComponent,
   label,
   name: nameOverride,
-  noOptionsText,
   onBlur,
   onChange: onChangeProp,
   onInputChange: onInputChangeProp,
@@ -313,40 +311,30 @@ const Picker: PickerComponentType = <
       const hasDescription = "description" in option && option.description;
       const hasMetadata = "metaData" in option && option.metaData;
       const isLabelOnly = !hasMetadata && !hasDescription;
-      const { key, ...restMuiProps } = muiProps;
-
-      if (isLabelOnly) {
-        return (
-          <div key={key}>
-            <OptionLabelOnlyComponent
-              muiProps={restMuiProps}
-              odysseyDesignTokens={odysseyDesignTokens}
-              option={option}
-            />
-          </div>
-        );
-      }
-
-      if (hasMetadata) {
-        return (
-          <div key={key}>
-            <OptionLabelDescriptionMetadata
-              muiProps={restMuiProps}
-              odysseyDesignTokens={odysseyDesignTokens}
-              option={option}
-            />
-          </div>
-        );
-      }
+      const key = option.label;
 
       return (
-        <div key={key}>
-          <OptionLabelDescription
-            muiProps={restMuiProps}
-            odysseyDesignTokens={odysseyDesignTokens}
-            option={option}
-          />
-        </div>
+        <Fragment key={key}>
+          {isLabelOnly ? (
+            <OptionLabelOnlyComponent
+              muiProps={muiProps}
+              odysseyDesignTokens={odysseyDesignTokens}
+              option={option}
+            />
+          ) : hasMetadata ? (
+            <OptionLabelDescriptionMetadata
+              muiProps={muiProps}
+              odysseyDesignTokens={odysseyDesignTokens}
+              option={option}
+            />
+          ) : (
+            <OptionLabelDescription
+              muiProps={muiProps}
+              odysseyDesignTokens={odysseyDesignTokens}
+              option={option}
+            />
+          )}
+        </Fragment>
       );
     },
     [odysseyDesignTokens],
@@ -356,6 +344,7 @@ const Picker: PickerComponentType = <
     <ComposablePicker<OptionType, HasMultipleChoices, IsCustomValueAllowed>
       ariaDescribedBy={ariaDescribedBy}
       defaultValue={defaultValue}
+      emptyOptionsText={emptyOptionsText}
       errorMessage={errorMessage}
       errorMessageList={errorMessageList}
       getIsOptionEqualToValue={getIsOptionEqualToValue}
@@ -374,7 +363,6 @@ const Picker: PickerComponentType = <
       HintLinkComponent={HintLinkComponent}
       label={label}
       name={nameOverride}
-      noOptionsText={noOptionsText}
       onBlur={onBlur}
       onChange={onChangeProp}
       onInputChange={onInputChangeProp}

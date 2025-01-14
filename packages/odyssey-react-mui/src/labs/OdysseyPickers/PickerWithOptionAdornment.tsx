@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, ReactNode, useCallback } from "react";
+import { Fragment, memo, ReactNode, useCallback } from "react";
 import styled from "@emotion/styled";
 import { AutocompleteProps as MuiAutocompleteProps } from "@mui/material";
 
@@ -283,6 +283,7 @@ const PickerWithOptionAdornment: PickerWithOptionAdornmentComponentType = <
   adornmentSize = "small",
   ariaDescribedBy,
   defaultValue,
+  emptyOptionsText,
   errorMessage,
   errorMessageList,
   getIsOptionEqualToValue,
@@ -301,7 +302,6 @@ const PickerWithOptionAdornment: PickerWithOptionAdornmentComponentType = <
   HintLinkComponent,
   label,
   name: nameOverride,
-  noOptionsText,
   onBlur,
   onChange: onChangeProp,
   onInputChange: onInputChangeProp,
@@ -362,30 +362,26 @@ const PickerWithOptionAdornment: PickerWithOptionAdornmentComponentType = <
   >(
     (muiProps, option) => {
       const hasMetadata = "metaData" in option && option.metaData;
-      const { key, ...restMuiProps } = muiProps;
+      const key = option.label;
 
-      if (hasMetadata) {
-        return (
-          <div key={key}>
+      return (
+        <Fragment key={key}>
+          {hasMetadata ? (
             <OptionWithLabelDescriptionMetadata
               adornmentSize={adornmentSize}
-              muiProps={restMuiProps}
+              muiProps={muiProps}
               odysseyDesignTokens={odysseyDesignTokens}
               option={option}
             />
-          </div>
-        );
-      }
-
-      return (
-        <div key={key}>
-          <OptionWithLabelDescriptionOnly
-            adornmentSize={adornmentSize}
-            muiProps={restMuiProps}
-            odysseyDesignTokens={odysseyDesignTokens}
-            option={option}
-          />
-        </div>
+          ) : (
+            <OptionWithLabelDescriptionOnly
+              adornmentSize={adornmentSize}
+              muiProps={muiProps}
+              odysseyDesignTokens={odysseyDesignTokens}
+              option={option}
+            />
+          )}
+        </Fragment>
       );
     },
     [adornmentSize, odysseyDesignTokens],
@@ -395,6 +391,7 @@ const PickerWithOptionAdornment: PickerWithOptionAdornmentComponentType = <
     <ComposablePicker<OptionType, HasMultipleChoices, IsCustomValueAllowed>
       ariaDescribedBy={ariaDescribedBy}
       defaultValue={defaultValue}
+      emptyOptionsText={emptyOptionsText}
       errorMessage={errorMessage}
       errorMessageList={errorMessageList}
       getIsOptionEqualToValue={getIsOptionEqualToValue}
@@ -413,7 +410,6 @@ const PickerWithOptionAdornment: PickerWithOptionAdornmentComponentType = <
       HintLinkComponent={HintLinkComponent}
       label={label}
       name={nameOverride}
-      noOptionsText={noOptionsText}
       onBlur={onBlur}
       onChange={onChangeProp}
       onInputChange={onInputChangeProp}
