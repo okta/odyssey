@@ -11,6 +11,7 @@
  */
 
 import {
+  Fragment,
   HTMLAttributes,
   memo,
   PropsWithChildren,
@@ -19,6 +20,7 @@ import {
   useCallback,
 } from "react";
 import styled from "@emotion/styled";
+import { AutocompleteProps as MuiAutocompleteProps } from "@mui/material";
 
 import {
   ComposablePicker,
@@ -82,17 +84,15 @@ export type BaseOptionProps = {
 
 type OptionComponentProps = {
   hasAdornment?: boolean;
-  key: string | number;
   muiProps: BaseOptionProps["muiProps"];
 };
 
 export const Option = ({
   children,
   hasAdornment = false,
-  key,
   muiProps,
 }: PropsWithChildren<OptionComponentProps>) => (
-  <StyledOption {...muiProps} hasAdornment={hasAdornment} key={key}>
+  <StyledOption {...muiProps} hasAdornment={hasAdornment}>
     {children}
   </StyledOption>
 );
@@ -108,10 +108,9 @@ export const OptionMetadataComponent = ({
     <OptionDetails odysseyDesignTokens={odysseyDesignTokens}>
       {metaData.map((meta: OptionMetadata, index: number) => {
         const { detailText, icon } = meta;
-
         return (
           <OptionDetail
-            key={`${index}-${detailText}`}
+            key={`${detailText}-${index}`}
             odysseyDesignTokens={odysseyDesignTokens}
           >
             {icon}
@@ -148,10 +147,10 @@ export const OptionLabelOnlyComponent = <OptionType extends OptionLabelOnly>({
   odysseyDesignTokens,
   option,
 }: BaseOptionProps & OptionProps<OptionType>) => {
-  const { label, value } = option;
+  const { label } = option;
 
   return (
-    <Option muiProps={muiProps} key={value}>
+    <Option muiProps={muiProps}>
       <OptionLabelContainer odysseyDesignTokens={odysseyDesignTokens}>
         <Paragraph>{label}</Paragraph>
       </OptionLabelContainer>
@@ -164,10 +163,10 @@ const OptionLabelDescription = <OptionType extends LabelDescription>({
   odysseyDesignTokens,
   option,
 }: BaseOptionProps & OptionProps<OptionType>) => {
-  const { description, label, value } = option;
+  const { description, label } = option;
 
   return (
-    <Option muiProps={muiProps} key={value}>
+    <Option muiProps={muiProps}>
       <OptionLabelContainer odysseyDesignTokens={odysseyDesignTokens}>
         <Heading6 component="p">{label}</Heading6>
         <OptionDescriptionComponent
@@ -186,10 +185,10 @@ const OptionLabelDescriptionMetadata = <
   odysseyDesignTokens,
   option,
 }: BaseOptionProps & OptionProps<OptionType>) => {
-  const { description, label, metaData, value } = option;
+  const { description, label, metaData } = option;
 
   return (
-    <Option key={value} muiProps={muiProps}>
+    <Option muiProps={muiProps}>
       <OptionLabelContainer odysseyDesignTokens={odysseyDesignTokens}>
         <Heading6 component="p">{label}</Heading6>
         <OptionDescriptionComponent
@@ -237,28 +236,28 @@ export type PickerComponentType = {
     IsCustomValueAllowed extends boolean | undefined,
   >(
     props: PickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>,
-  ): ReactElement;
+  ): ReactNode;
   <
     OptionType extends LabelDescriptionMetadata,
     HasMultipleChoices extends boolean | undefined,
     IsCustomValueAllowed extends boolean | undefined,
   >(
     props: PickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>,
-  ): ReactElement;
+  ): ReactNode;
   <
     OptionType extends LabelDescription,
     HasMultipleChoices extends boolean | undefined,
     IsCustomValueAllowed extends boolean | undefined,
   >(
     props: PickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>,
-  ): ReactElement;
+  ): ReactNode;
   <
     OptionType extends LabelDescriptionMetadata,
     HasMultipleChoices extends boolean | undefined,
     IsCustomValueAllowed extends boolean | undefined,
   >(
     props: PickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>,
-  ): ReactElement;
+  ): ReactNode;
 };
 
 const Picker: PickerComponentType = <
@@ -271,6 +270,7 @@ const Picker: PickerComponentType = <
 >({
   ariaDescribedBy,
   defaultValue,
+  emptyOptionsText,
   errorMessage,
   errorMessageList,
   getIsOptionEqualToValue,
@@ -300,39 +300,42 @@ const Picker: PickerComponentType = <
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const customOptionRender = useCallback<
-    (props: HTMLAttributes<HTMLLIElement>, option: OptionType) => ReactNode
+    NonNullable<
+      MuiAutocompleteProps<
+        OptionType,
+        HasMultipleChoices,
+        undefined,
+        IsCustomValueAllowed
+      >["renderOption"]
+    >
   >(
     (muiProps, option) => {
       const hasDescription = "description" in option && option.description;
       const hasMetadata = "metaData" in option && option.metaData;
       const isLabelOnly = !hasMetadata && !hasDescription;
 
-      if (isLabelOnly) {
-        return (
-          <OptionLabelOnlyComponent
-            muiProps={muiProps}
-            odysseyDesignTokens={odysseyDesignTokens}
-            option={option}
-          />
-        );
-      }
-
-      if (hasMetadata) {
-        return (
-          <OptionLabelDescriptionMetadata
-            muiProps={muiProps}
-            odysseyDesignTokens={odysseyDesignTokens}
-            option={option}
-          />
-        );
-      }
-
       return (
-        <OptionLabelDescription
-          muiProps={muiProps}
-          odysseyDesignTokens={odysseyDesignTokens}
-          option={option}
-        />
+        <Fragment key={option.label}>
+          {isLabelOnly ? (
+            <OptionLabelOnlyComponent
+              muiProps={muiProps}
+              odysseyDesignTokens={odysseyDesignTokens}
+              option={option}
+            />
+          ) : hasMetadata ? (
+            <OptionLabelDescriptionMetadata
+              muiProps={muiProps}
+              odysseyDesignTokens={odysseyDesignTokens}
+              option={option}
+            />
+          ) : (
+            <OptionLabelDescription
+              muiProps={muiProps}
+              odysseyDesignTokens={odysseyDesignTokens}
+              option={option}
+            />
+          )}
+        </Fragment>
       );
     },
     [odysseyDesignTokens],
@@ -342,6 +345,7 @@ const Picker: PickerComponentType = <
     <ComposablePicker<OptionType, HasMultipleChoices, IsCustomValueAllowed>
       ariaDescribedBy={ariaDescribedBy}
       defaultValue={defaultValue}
+      emptyOptionsText={emptyOptionsText}
       errorMessage={errorMessage}
       errorMessageList={errorMessageList}
       getIsOptionEqualToValue={getIsOptionEqualToValue}

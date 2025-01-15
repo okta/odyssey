@@ -10,14 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {
-  HTMLAttributes,
-  memo,
-  ReactElement,
-  ReactNode,
-  useCallback,
-} from "react";
+import { Fragment, memo, ReactNode, useCallback } from "react";
 import styled from "@emotion/styled";
+import { AutocompleteProps as MuiAutocompleteProps } from "@mui/material";
 
 import { Box } from "../../Box";
 import {
@@ -266,7 +261,7 @@ type PickerWithOptionAdornmentComponentType = {
       HasMultipleChoices,
       IsCustomValueAllowed
     >,
-  ): ReactElement;
+  ): ReactNode;
   <
     OptionType extends AdornmentLabelDescriptionMetadata,
     HasMultipleChoices extends boolean | undefined,
@@ -277,7 +272,7 @@ type PickerWithOptionAdornmentComponentType = {
       HasMultipleChoices,
       IsCustomValueAllowed
     >,
-  ): ReactElement;
+  ): ReactNode;
 };
 
 const PickerWithOptionAdornment: PickerWithOptionAdornmentComponentType = <
@@ -288,6 +283,7 @@ const PickerWithOptionAdornment: PickerWithOptionAdornmentComponentType = <
   adornmentSize = "small",
   ariaDescribedBy,
   defaultValue,
+  emptyOptionsText,
   errorMessage,
   errorMessageList,
   getIsOptionEqualToValue,
@@ -355,29 +351,36 @@ const PickerWithOptionAdornment: PickerWithOptionAdornmentComponentType = <
   );
 
   const customOptionRender = useCallback<
-    (props: HTMLAttributes<HTMLLIElement>, option: OptionType) => ReactNode
+    NonNullable<
+      MuiAutocompleteProps<
+        OptionType,
+        HasMultipleChoices,
+        undefined,
+        IsCustomValueAllowed
+      >["renderOption"]
+    >
   >(
     (muiProps, option) => {
       const hasMetadata = "metaData" in option && option.metaData;
 
-      if (hasMetadata) {
-        return (
-          <OptionWithLabelDescriptionMetadata
-            adornmentSize={adornmentSize}
-            muiProps={muiProps}
-            odysseyDesignTokens={odysseyDesignTokens}
-            option={option}
-          />
-        );
-      }
-
       return (
-        <OptionWithLabelDescriptionOnly
-          adornmentSize={adornmentSize}
-          muiProps={muiProps}
-          odysseyDesignTokens={odysseyDesignTokens}
-          option={option}
-        />
+        <Fragment key={option.label}>
+          {hasMetadata ? (
+            <OptionWithLabelDescriptionMetadata
+              adornmentSize={adornmentSize}
+              muiProps={muiProps}
+              odysseyDesignTokens={odysseyDesignTokens}
+              option={option}
+            />
+          ) : (
+            <OptionWithLabelDescriptionOnly
+              adornmentSize={adornmentSize}
+              muiProps={muiProps}
+              odysseyDesignTokens={odysseyDesignTokens}
+              option={option}
+            />
+          )}
+        </Fragment>
       );
     },
     [adornmentSize, odysseyDesignTokens],
@@ -387,6 +390,7 @@ const PickerWithOptionAdornment: PickerWithOptionAdornmentComponentType = <
     <ComposablePicker<OptionType, HasMultipleChoices, IsCustomValueAllowed>
       ariaDescribedBy={ariaDescribedBy}
       defaultValue={defaultValue}
+      emptyOptionsText={emptyOptionsText}
       errorMessage={errorMessage}
       errorMessageList={errorMessageList}
       getIsOptionEqualToValue={getIsOptionEqualToValue}
