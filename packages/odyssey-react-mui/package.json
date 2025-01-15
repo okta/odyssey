@@ -90,7 +90,7 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^5.16.14",
     "@mui/lab": "^5.0.0-alpha.175",
-    "@mui/material": "^5.16.14",
+    "@mui/material": "^6.4.0",
     "@mui/system": "^5.16.14",
     "@mui/utils": "^5.16.14",
     "@mui/x-date-pickers": "^7.2.0",

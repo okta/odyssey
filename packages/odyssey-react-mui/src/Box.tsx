@@ -24,7 +24,7 @@ export type BoxProps = {
 } & Pick<HtmlProps, "testId" | "translate">;
 
 const Box = forwardRef<HTMLElement, BoxProps>(
-  ({ children, component, id, role, sx, testId, translate }, ref) => (
+  ({ children, component = "div", id, role, sx, testId, translate }, ref) => (
     <MuiBox
       ref={ref}
       children={children}
