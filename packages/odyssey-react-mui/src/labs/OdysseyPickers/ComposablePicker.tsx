@@ -30,6 +30,12 @@ export type BasePickerProps<
   IsCustomValueAllowed extends boolean | undefined,
 > = AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed> & {
   adornmentSize?: AdornmentSize;
+  emptyOptionsText?: MuiAutocompleteProps<
+    OptionType,
+    HasMultipleChoices,
+    undefined,
+    IsCustomValueAllowed
+  >["noOptionsText"];
   groupOptionsBy?: MuiAutocompleteProps<
     OptionType,
     HasMultipleChoices,
@@ -87,6 +93,7 @@ const ComposablePicker = <
 >({
   ariaDescribedBy,
   defaultValue,
+  emptyOptionsText,
   errorMessage,
   errorMessageList,
   getIsOptionEqualToValue,
@@ -164,6 +171,7 @@ const ComposablePicker = <
       isOptionEqualToValue={getIsOptionEqualToValue}
       loading={isLoading}
       multiple={hasMultipleChoices}
+      noOptionsText={emptyOptionsText}
       onBlur={onBlur}
       onChange={onChange}
       onInputChange={onInputChange}
