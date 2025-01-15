@@ -16,9 +16,9 @@ import {
   StepperNavigation,
   StepperProps,
 } from "@okta/odyssey-react-mui/labs";
-import { expect } from "@storybook/jest";
 import { Meta, StoryObj } from "@storybook/react";
-import { userEvent, waitFor, within } from "@storybook/testing-library";
+import { waitFor, within } from "@storybook/test";
+import { userEvent } from "@testing-library/user-event";
 import { useState } from "react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { axeRun } from "../../../axe-util";
@@ -32,9 +32,7 @@ const storybookMeta: Meta<StepperProps> = {
       control: "number",
       description: "Current active step (0-based index)",
       table: {
-        type: {
-          summary: "number",
-        },
+        type: { summary: "number" },
       },
       type: {
         required: true,
@@ -45,24 +43,16 @@ const storybookMeta: Meta<StepperProps> = {
       control: "boolean",
       description: "Allow navigation to completed steps",
       table: {
-        type: {
-          summary: "boolean",
-        },
-        defaultValue: {
-          summary: false,
-        },
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
       },
     },
     nonLinear: {
       control: "boolean",
       description: "Allow skipping to future steps",
       table: {
-        type: {
-          summary: "boolean",
-        },
-        defaultValue: {
-          summary: false,
-        },
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
       },
     },
     orientation: {
@@ -70,12 +60,8 @@ const storybookMeta: Meta<StepperProps> = {
       options: ["horizontal", "vertical"],
       description: "Layout orientation of the stepper",
       table: {
-        type: {
-          summary: '"horizontal" | "vertical"',
-        },
-        defaultValue: {
-          summary: "horizontal",
-        },
+        type: { summary: '"horizontal" | "vertical"' },
+        defaultValue: { summary: "horizontal" },
       },
     },
     variant: {
@@ -83,21 +69,15 @@ const storybookMeta: Meta<StepperProps> = {
       options: ["numeric", "nonNumeric"],
       description: "Visual variant of steps",
       table: {
-        type: {
-          summary: '"numeric" | "nonNumeric"',
-        },
-        defaultValue: {
-          summary: "numeric",
-        },
+        type: { summary: '"numeric" | "nonNumeric"' },
+        defaultValue: { summary: "numeric" },
       },
     },
     onChange: {
-      control: null,
+      control: { type: "object" },
       description: "Callback fired when a step is clicked",
       table: {
-        type: {
-          summary: "func",
-        },
+        type: { summary: "func" },
       },
     },
   },
@@ -130,10 +110,10 @@ const navigateSteps = async (
   await step(`navigate to ${stepLabel}`, async () => {
     await axeRun("Step Navigation");
 
-    await waitFor(() => {
+    await waitFor(async () => {
       const canvas = within(canvasElement);
       const stepElement = canvas.getByText(stepLabel);
-      userEvent.click(stepElement);
+      await userEvent.click(stepElement);
     });
   });
 };
@@ -156,12 +136,14 @@ const DefaultTemplate: StoryObj<StepperProps> = {
     );
   },
   play: async ({ canvasElement, step }) => {
-    // Just verify the stepper renders correctly
+    // Verify the stepper renders correctly
     await step("verify stepper renders", async () => {
       const canvas = within(canvasElement);
-      expect(canvas.getByText("Account details")).toBeInTheDocument();
-      expect(canvas.getByText("Personal info")).toBeInTheDocument();
-      expect(canvas.getByText("Review")).toBeInTheDocument();
+      await waitFor(() => {
+        expect(canvas.getByText("Account details")).toBeTruthy();
+        expect(canvas.getByText("Personal info")).toBeTruthy();
+        expect(canvas.getByText("Review")).toBeTruthy();
+      });
     });
   },
 };
@@ -202,32 +184,30 @@ export const NonLinearNavigation: StoryObj<StepperProps> = {
     // Test that future steps are not clickable by default
     await step("verify future steps not clickable", async () => {
       const reviewStep = canvas.getByText("Review");
-      userEvent.click(reviewStep);
+      await userEvent.click(reviewStep);
       await waitFor(() => {
         // Should still be on first step
-        expect(canvas.getByText("Account details")).toHaveAttribute(
-          "aria-selected",
-          "true",
-        );
+        const element = canvas.getByText("Account details");
+        expect(element.getAttribute("aria-selected")).toBe("true");
       });
     });
 
     // Test skipping to last step when nonLinear is true
     await navigateSteps({ canvasElement, step }, "Review");
     await step("verify navigation allowed with nonLinear", async () => {
-      expect(canvas.getByText("Review")).toHaveAttribute(
-        "aria-selected",
-        "true",
-      );
+      await waitFor(() => {
+        const element = canvas.getByText("Review");
+        expect(element.getAttribute("aria-selected")).toBe("true");
+      });
     });
 
     // Test going back is allowed when allowBackStep is true
     await navigateSteps({ canvasElement, step }, "Account details");
     await step("verify back navigation allowed", async () => {
-      expect(canvas.getByText("Account details")).toHaveAttribute(
-        "aria-selected",
-        "true",
-      );
+      await waitFor(() => {
+        const element = canvas.getByText("Account details");
+        expect(element.getAttribute("aria-selected")).toBe("true");
+      });
     });
   },
 };
