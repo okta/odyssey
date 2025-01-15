@@ -20,7 +20,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@faker-js/faker": "^8.4.1",
-    "@mui/material": "^5.16.14",
+    "@mui/material": "^6.4.0",
     "@okta/odyssey-design-tokens": "workspace:*",
     "@okta/odyssey-react-mui": "workspace:*",
     "@okta/odyssey-typescript": "workspace:*",

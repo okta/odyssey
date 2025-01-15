@@ -14,7 +14,7 @@ import {
   useMaterialReactTable,
   type MRT_ColumnFiltersState,
   type MRT_TableInstance,
-  type MRT_Virtualizer,
+  type MRT_RowVirtualizer,
   MaterialReactTable,
 } from "material-react-table";
 import {
@@ -57,7 +57,7 @@ const StaticTable = <TData extends DefaultMaterialReactTableData>({
   const { t } = useTranslation();
 
   const rowVirtualizerInstanceRef =
-    useRef<MRT_Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
+    useRef<MRT_RowVirtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
 
   const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>(
     [],

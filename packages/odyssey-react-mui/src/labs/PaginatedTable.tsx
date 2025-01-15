@@ -17,7 +17,7 @@ import {
   type MRT_ColumnFiltersState,
   type MRT_RowSelectionState,
   type MRT_TableInstance,
-  type MRT_Virtualizer,
+  type MRT_RowVirtualizer,
   useMaterialReactTable,
   MaterialReactTable,
 } from "material-react-table";
@@ -73,7 +73,7 @@ const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
   const { t } = useTranslation();
 
   const rowVirtualizerInstanceRef =
-    useRef<MRT_Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
+    useRef<MRT_RowVirtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
 
   const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>(
     [],

@@ -960,10 +960,10 @@ describe("DataView", () => {
     const rows = await screen.findAllByRole("row");
     const tHead = rows[0].parentElement;
 
-    // Ensure that the resize handle is displayed when
-    // hasColumnResizing is true
-    const hrElement = tHead!.querySelector("hr");
-    expect(tHead).toContainElement(hrElement);
+    // Get all separators and pick the first one
+    const separators = within(tHead!).getAllByRole("separator");
+    expect(separators.length).toBeGreaterThan(0);
+    expect(tHead).toContainElement(separators[0]);
   });
 
   describe("Pagination", () => {
