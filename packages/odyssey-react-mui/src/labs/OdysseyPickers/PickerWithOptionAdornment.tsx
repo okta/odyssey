@@ -362,10 +362,9 @@ const PickerWithOptionAdornment: PickerWithOptionAdornmentComponentType = <
   >(
     (muiProps, option) => {
       const hasMetadata = "metaData" in option && option.metaData;
-      const key = option.label;
 
       return (
-        <Fragment key={key}>
+        <Fragment key={option.label}>
           {hasMetadata ? (
             <OptionWithLabelDescriptionMetadata
               adornmentSize={adornmentSize}

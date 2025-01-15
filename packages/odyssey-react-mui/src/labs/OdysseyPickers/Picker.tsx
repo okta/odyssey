@@ -108,9 +108,11 @@ export const OptionMetadataComponent = ({
     <OptionDetails odysseyDesignTokens={odysseyDesignTokens}>
       {metaData.map((meta: OptionMetadata, index: number) => {
         const { detailText, icon } = meta;
-        const key = `${detailText}-${index}`;
         return (
-          <OptionDetail key={key} odysseyDesignTokens={odysseyDesignTokens}>
+          <OptionDetail
+            key={`${detailText}-${index}`}
+            odysseyDesignTokens={odysseyDesignTokens}
+          >
             {icon}
             {detailText}
           </OptionDetail>
@@ -311,10 +313,9 @@ const Picker: PickerComponentType = <
       const hasDescription = "description" in option && option.description;
       const hasMetadata = "metaData" in option && option.metaData;
       const isLabelOnly = !hasMetadata && !hasDescription;
-      const key = option.label;
 
       return (
-        <Fragment key={key}>
+        <Fragment key={option.label}>
           {isLabelOnly ? (
             <OptionLabelOnlyComponent
               muiProps={muiProps}
