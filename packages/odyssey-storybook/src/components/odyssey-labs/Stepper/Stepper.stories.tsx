@@ -307,6 +307,49 @@ export const HorizontalWorkflow: StoryObj<StepperProps> = {
   },
 };
 
+export const BackNavigation = () => {
+  const [activeStep, setActiveStep] = useState(1);
+  const odysseyDesignTokens = useOdysseyDesignTokens();
+
+  const steps = [
+    { label: "Account Details", description: "Basic information" },
+    { label: "Preferences", description: "Set your preferences" },
+    { label: "Review", description: "Review your information" },
+    { label: "Submit", description: "Complete registration" },
+  ];
+
+  return (
+    <>
+      <Stepper
+        steps={steps}
+        activeStep={activeStep}
+        allowBackStep={true}
+        onChange={setActiveStep}
+      />
+      <StepperNavigation
+        totalSteps={steps.length}
+        currentStep={activeStep}
+        onBack={() => setActiveStep((prev) => Math.max(0, prev - 1))}
+        onNext={() =>
+          setActiveStep((prev) => Math.min(steps.length - 1, prev + 1))
+        }
+        onStepClick={setActiveStep}
+        isStepClickable={(step) => step <= activeStep}
+        odysseyDesignTokens={odysseyDesignTokens}
+      />
+    </>
+  );
+};
+
+BackNavigation.parameters = {
+  docs: {
+    description: {
+      story:
+        "Users can navigate back to previously completed steps but are not able to move forward without completing the current step",
+    },
+  },
+};
+
 export const DescriptionTest: StoryObj<StepperProps> = {
   render: function C() {
     const [activeStep, setActiveStep] = useState(0);

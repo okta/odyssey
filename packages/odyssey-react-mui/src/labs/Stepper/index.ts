@@ -10,4 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export * from "./Stepper";
+export { Stepper } from "./Stepper";
+export { StepperNavigation } from "./StepperNavigation";
+export type {
+  StepData,
+  StepperProps,
+  StepperNavigationProps,
+} from "./Stepper.types";
