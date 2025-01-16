@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { memo, useMemo } from "react";
+import { memo, useMemo } from "react";
 import styled from "@emotion/styled";
 import { useTranslation } from "react-i18next";
 import { Button } from "../../Buttons";
@@ -44,7 +44,7 @@ const NavigationSection = styled("div", {
   alignItems: "center",
 }));
 
-const StyledStepperDot = styled("div", {
+const StyledStepperDot = styled("button", {
   shouldForwardProp: shouldForwardStepperDotProps,
 })<{
   status: "previous" | "current" | "next";
@@ -53,8 +53,9 @@ const StyledStepperDot = styled("div", {
 }>(({ status, odysseyDesignTokens, isClickable }) => ({
   width: odysseyDesignTokens.Spacing2,
   height: odysseyDesignTokens.Spacing2,
-  borderRadius: "50%",
+  padding: 0,
   border: "1px solid",
+  borderRadius: "50%",
   borderColor:
     status === "current"
       ? odysseyDesignTokens.HueNeutral500
@@ -79,7 +80,23 @@ const StyledStepperDot = styled("div", {
       }
     : undefined,
 }));
+const StyledNav = styled("nav")({
+  display: "flex",
+  gap: "2px",
+});
 
+const StyledList = styled("ul")({
+  display: "flex",
+  gap: "2px",
+  margin: 0,
+  padding: 0,
+  listStyle: "none",
+});
+
+const StyledListItem = styled("li")({
+  margin: 0,
+  padding: 0,
+});
 const StepperNavigation = ({
   totalSteps,
   currentStep,
@@ -95,47 +112,52 @@ const StepperNavigation = ({
 
   const labels = useMemo(
     () => ({
-      previous: previousButtonLabel ?? t("pagination.previous"),
-      next: nextButtonLabel ?? t("pagination.next"),
+      previous: previousButtonLabel ?? t("stepper.navigation.previous"),
+      next: nextButtonLabel ?? t("stepper.navigation.next"),
     }),
     [previousButtonLabel, nextButtonLabel, t],
   );
 
   const dots = useMemo(() => {
-    return Array.from({ length: totalSteps }, (_, i) => {
-      const status: "previous" | "current" | "next" =
-        i === currentStep ? "current" : i < currentStep ? "previous" : "next";
-      const isClickable = isStepClickable(i);
+    return (
+      <StyledNav aria-label={t("stepper.aria.progress")}>
+        <StyledList>
+          {Array.from({ length: totalSteps }, (_, i) => {
+            const status: "previous" | "current" | "next" =
+              i === currentStep
+                ? "current"
+                : i < currentStep
+                  ? "previous"
+                  : "next";
+            const isClickable = isStepClickable(i);
 
-      const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-        if (!isClickable) return;
-        // Only handle Enter/Space for selection
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault(); // Prevent page scroll on space
-          onStepClick(i);
-        }
-      };
-
-      return (
-        <StyledStepperDot
-          key={i}
-          status={status}
-          odysseyDesignTokens={odysseyDesignTokens}
-          isClickable={isClickable}
-          onClick={isClickable ? () => onStepClick(i) : undefined}
-          onKeyDown={handleKeyDown}
-          role="button"
-          tabIndex={isClickable ? 0 : -1}
-          aria-label={`Go to step ${i + 1}`} //TODO: Translation string
-        />
-      );
-    });
+            return (
+              <StyledListItem key={i}>
+                <StyledStepperDot
+                  type="button"
+                  status={status}
+                  odysseyDesignTokens={odysseyDesignTokens}
+                  isClickable={isClickable}
+                  onClick={isClickable ? () => onStepClick(i) : undefined}
+                  disabled={!isClickable}
+                  aria-label={t("stepper.navigation.gotoStep", {
+                    number: i + 1,
+                  })}
+                  aria-current={status === "current" ? "step" : undefined}
+                />
+              </StyledListItem>
+            );
+          })}
+        </StyledList>
+      </StyledNav>
+    );
   }, [
     totalSteps,
     currentStep,
     isStepClickable,
     onStepClick,
     odysseyDesignTokens,
+    t,
   ]);
 
   return (

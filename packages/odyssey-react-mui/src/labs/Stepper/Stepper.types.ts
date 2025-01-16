@@ -26,7 +26,7 @@ export type StepData = {
 
 export type StepperProps = {
   /**
-   * Aria label for the stepper container
+   * Aria label for the stepper container,  Falls back to "Progress steps"
    */
   ariaLabel?: string;
   /**
@@ -93,11 +93,11 @@ export type StepperNavigationProps = {
    */
   isStepClickable: (step: number) => boolean;
   /**
-   * Custom label for the previous button
+   * Custom label for the previous button, defaults to "Previous"
    */
   previousButtonLabel?: string;
   /**
-   * Custom label for the next button
+   * Custom label for the next button, defaults to "Next"
    */
   nextButtonLabel?: string;
   /**

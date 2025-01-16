@@ -30,7 +30,7 @@ import {
   shouldForwardStepperProps,
   shouldForwardStepProps,
 } from "./Stepper.utils";
-//import { useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 const StyledStep = styled(MuiStep, {
   shouldForwardProp: shouldForwardStepProps,
@@ -217,7 +217,7 @@ const StepLabel = styled(MuiStepLabel, {
       "odysseyDesignTokens",
       "orientation",
       "variant",
-    ].includes(prop as string),
+    ].includes(prop),
 })<{
   active: boolean;
   allowBackStep?: boolean;
@@ -314,6 +314,13 @@ const StyledStepNumber = styled("span", {
         : undefined,
   },
 }));
+type StepAriaProps = {
+  "aria-current"?: "step";
+  "aria-label": string;
+  "aria-describedby"?: string;
+  "aria-expanded"?: boolean;
+  "aria-controls"?: string;
+};
 
 const Stepper = ({
   activeStep,
@@ -327,7 +334,7 @@ const Stepper = ({
   ariaLabel,
 }: StepperProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
-
+  const { t } = useTranslation();
   const StepIcon = ({
     completed,
     active,
@@ -418,19 +425,16 @@ const Stepper = ({
       const getStepAriaLabel = (
         index: number,
         total: number,
-        status: "completed" | "active" | "pending", //TODO: Translate
+        status: "completed" | "active" | "pending",
       ) => {
-        const statusText = {
-          completed: "Completed",
-          active: "Current",
-          pending: "Pending",
-        }[status];
+        const statusText = t(
+          `stepper.aria.step.${status === "active" ? "current" : status}`,
+        );
         return `Step ${index + 1} of ${total}: ${statusText}`;
       };
 
-      const ariaProps = {
-        // Type assertion here ensures we're using a valid WAI-ARIA value
-        "aria-current": active ? ("step" as const) : undefined,
+      const ariaProps: StepAriaProps = {
+        "aria-current": active ? "step" : undefined,
         "aria-label": getStepAriaLabel(
           index,
           steps.length,
@@ -441,7 +445,7 @@ const Stepper = ({
           "aria-expanded": active,
           "aria-controls": `step-content-${index}`,
         }),
-      } as const;
+      };
 
       return (
         <StyledStep
@@ -512,6 +516,7 @@ const Stepper = ({
     variant,
     stepDescriptionIds,
     isStepClickable,
+    t,
   ]);
 
   return (
@@ -522,7 +527,7 @@ const Stepper = ({
       data-se={testId}
       nonLinear={nonLinear}
       stepVariant={variant}
-      aria-label={ariaLabel || "Progress steps"} // TODO: Use Trasnlated string
+      aria-label={ariaLabel || t("stepper.aria.progress")}
       role="tablist"
     >
       {renderedSteps}
