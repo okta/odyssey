@@ -11,6 +11,7 @@
  */
 
 export { Stepper } from "./Stepper";
+export { StepIcon } from "./StepIcon";
 export { StepperNavigation } from "./StepperNavigation";
 export type {
   StepData,

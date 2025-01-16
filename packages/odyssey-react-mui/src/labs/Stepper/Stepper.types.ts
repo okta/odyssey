@@ -24,9 +24,12 @@ export type StepData = {
   description?: string;
 };
 
+// Define handler types for public API
+export type StepChangeHandler = (step: number) => void;
+
 export type StepperProps = {
   /**
-   * Aria label for the stepper container,  Falls back to "Progress steps"
+   * Aria label for the stepper container, Falls back to "Progress steps"
    */
   ariaLabel?: string;
   /**
@@ -56,7 +59,7 @@ export type StepperProps = {
   /**
    * Callback fired when a step is clicked
    */
-  onChange?: (step: number) => void;
+  onChange?: StepChangeHandler;
   /**
    * Button label for the previous navigation button
    */
@@ -66,6 +69,33 @@ export type StepperProps = {
    */
   nextButtonLabel?: string;
 } & Pick<HtmlProps, "testId" | "translate">;
+
+export type StepIconProps = {
+  /**
+   * Whether the step is completed
+   */
+  completed: boolean;
+  /**
+   * Whether the step is currently active
+   */
+  active: boolean;
+  /**
+   * The index number of the step (0-based)
+   */
+  stepNumber: number;
+  /**
+   * Visual variant of the step icon
+   */
+  variant: NonNullable<StepperProps["variant"]>;
+  /**
+   * Design tokens for styling
+   */
+  odysseyDesignTokens: DesignTokens;
+  /**
+   * Whether non-linear navigation is enabled
+   */
+  nonLinear: boolean;
+};
 
 export type StepperNavigationProps = {
   /**
@@ -87,17 +117,17 @@ export type StepperNavigationProps = {
   /**
    * Callback fired when a step dot is clicked
    */
-  onStepClick: (step: number) => void;
+  onStepClick: StepChangeHandler;
   /**
    * Function to determine if a step is clickable
    */
   isStepClickable: (step: number) => boolean;
   /**
-   * Custom label for the previous button, defaults to "Previous"
+   * Custom label for the previous button
    */
   previousButtonLabel?: string;
   /**
-   * Custom label for the next button, defaults to "Next"
+   * Custom label for the next button
    */
   nextButtonLabel?: string;
   /**

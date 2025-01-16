@@ -17,16 +17,15 @@ import {
   Stepper as MuiStepper,
 } from "@mui/material";
 import { memo, useCallback, useMemo } from "react";
-import { CheckIcon } from "../../icons.generated";
+
 import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
+import { StepIcon } from "./StepIcon";
 import { StepperProps } from "./Stepper.types";
 import {
   shouldForwardStepDescriptionProps,
-  shouldForwardStepIconContainerProps,
-  shouldForwardStepNumberProps,
   shouldForwardStepperProps,
   shouldForwardStepProps,
 } from "./Stepper.utils";
@@ -131,14 +130,14 @@ const StepperContainer = styled(MuiStepper, {
     "& .MuiStepConnector-line": {
       borderColor: odysseyDesignTokens.HueNeutral200,
       borderWidth: "1px",
-      minWidth: "16px",
+      minWidth: odysseyDesignTokens.Spacing4,
       minHeight:
         orientation === "vertical" ? odysseyDesignTokens.Spacing3 : undefined,
     },
     "& .MuiStepConnector-root": {
       ...(orientation === "horizontal"
         ? {
-            top: "24px",
+            top: odysseyDesignTokens.Spacing5,
             left: "calc(-50% + 20px)",
             right: "calc(50% + 20px)",
             margin: `auto ${odysseyDesignTokens.Spacing2}`,
@@ -149,63 +148,6 @@ const StepperContainer = styled(MuiStepper, {
     },
   };
 });
-
-const StyledStepIconContainer = styled("div", {
-  shouldForwardProp: shouldForwardStepIconContainerProps,
-})<{
-  active: boolean;
-  completed: boolean;
-  nonLinear: boolean;
-  odysseyDesignTokens: DesignTokens;
-  variant: "numeric" | "nonNumeric";
-}>(({ active, completed, variant, nonLinear, odysseyDesignTokens }) => ({
-  width:
-    variant === "numeric"
-      ? odysseyDesignTokens.Spacing5
-      : odysseyDesignTokens.Spacing3,
-  height:
-    variant === "numeric"
-      ? odysseyDesignTokens.Spacing5
-      : odysseyDesignTokens.Spacing3,
-  borderRadius: "50%",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  color:
-    completed || active
-      ? odysseyDesignTokens.HueNeutralWhite
-      : odysseyDesignTokens.HueNeutral700,
-  border: `1px solid ${
-    completed
-      ? odysseyDesignTokens.HueGreen400
-      : active
-        ? odysseyDesignTokens.HueBlue700
-        : odysseyDesignTokens.HueNeutral600
-  }`,
-  background: completed
-    ? odysseyDesignTokens.HueGreen400
-    : active
-      ? odysseyDesignTokens.HueBlue600
-      : "transparent",
-  transition: `all ${odysseyDesignTokens.TransitionDurationMain}`,
-  ".MuiStep-root:hover &": {
-    border:
-      !active && !completed && nonLinear
-        ? `1px solid ${odysseyDesignTokens.HueNeutral900}`
-        : undefined,
-  },
-
-  "& svg": {
-    width:
-      variant === "numeric"
-        ? odysseyDesignTokens.Spacing4
-        : odysseyDesignTokens.Spacing3,
-    height:
-      variant === "numeric"
-        ? odysseyDesignTokens.Spacing4
-        : odysseyDesignTokens.Spacing3,
-  },
-}));
 
 const StepLabel = styled(MuiStepLabel, {
   shouldForwardProp: (prop) =>
@@ -293,28 +235,6 @@ const StyledStepDescription = styled("div", {
       : odysseyDesignTokens.HueNeutral600,
 }));
 
-const StyledStepNumber = styled("span", {
-  shouldForwardProp: shouldForwardStepNumberProps,
-})<{
-  odysseyDesignTokens: DesignTokens;
-  completed: boolean;
-  active: boolean;
-  nonLinear: boolean;
-}>(({ completed, active, nonLinear, odysseyDesignTokens }) => ({
-  fontWeight: odysseyDesignTokens.TypographyWeightHeadingBold,
-  color:
-    completed || active
-      ? odysseyDesignTokens.HueNeutralWhite
-      : odysseyDesignTokens.HueNeutral600,
-
-  ".MuiStep-root:hover &": {
-    color:
-      !active && !completed && nonLinear
-        ? odysseyDesignTokens.HueNeutral900
-        : undefined,
-  },
-}));
-
 const Stepper = ({
   activeStep,
   allowBackStep = false,
@@ -328,42 +248,6 @@ const Stepper = ({
 }: StepperProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
-  const StepIcon = ({
-    completed,
-    active,
-    stepNumber,
-    variant,
-    odysseyDesignTokens,
-    nonLinear,
-  }: {
-    completed: boolean;
-    active: boolean;
-    stepNumber: number;
-    variant: "numeric" | "nonNumeric";
-    odysseyDesignTokens: DesignTokens;
-    nonLinear: boolean;
-  }) => (
-    <StyledStepIconContainer
-      completed={completed}
-      active={active}
-      variant={variant}
-      odysseyDesignTokens={odysseyDesignTokens}
-      nonLinear={nonLinear}
-    >
-      {completed && variant === "numeric" ? (
-        <CheckIcon />
-      ) : variant === "numeric" ? (
-        <StyledStepNumber
-          completed={completed}
-          active={active}
-          odysseyDesignTokens={odysseyDesignTokens}
-          nonLinear={nonLinear}
-        >
-          {stepNumber + 1}
-        </StyledStepNumber>
-      ) : null}
-    </StyledStepIconContainer>
-  );
 
   const isStepClickable = useCallback(
     (stepIndex: number) => {
@@ -383,7 +267,7 @@ const Stepper = ({
   );
 
   const handleKeyDown = useCallback(
-    (event: React.KeyboardEvent<HTMLDivElement>, stepIndex: number) => {
+    (event: React.KeyboardEvent<HTMLDivElement>, stepIndex: number): void => {
       if (!onChange || !isStepClickable(stepIndex)) return;
 
       if (event.key === "Enter" || event.key === " ") {
@@ -427,17 +311,13 @@ const Stepper = ({
       };
 
       const ariaProps = {
-        "aria-current": active ? ("step" as const) : undefined, // Keep this type assertion
+        "aria-current": active ? ("step" as const) : undefined,
         "aria-label": getStepAriaLabel(
           index,
           steps.length,
           completed ? "completed" : active ? "active" : "pending",
         ),
         ...(step.description && { "aria-describedby": stepDescriptionId }),
-        ...(orientation === "vertical" && {
-          "aria-expanded": active,
-          "aria-controls": `step-content-${index}`,
-        }),
       };
 
       return (
@@ -487,13 +367,6 @@ const Stepper = ({
               </StyledStepDescription>
             )}
           </StepLabel>
-          {orientation === "vertical" && (
-            <div
-              id={`step-content-${index}`}
-              role="region"
-              aria-labelledby={`step-label-${index}`}
-            ></div>
-          )}
         </StyledStep>
       );
     });
