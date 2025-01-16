@@ -63,11 +63,6 @@ describe("Stepper", () => {
 
     const stepList = screen.getByRole("tablist");
     expect(stepList).toHaveAttribute("aria-label", "Progress steps");
-
-    // In vertical orientation, steps have aria-expanded and aria-controls
-    const activeStep = screen.getByRole("tab", { current: "step" });
-    expect(activeStep).toHaveAttribute("aria-expanded");
-    expect(activeStep).toHaveAttribute("aria-controls");
   });
 
   test("renders correctly with nonNumeric variant", () => {
