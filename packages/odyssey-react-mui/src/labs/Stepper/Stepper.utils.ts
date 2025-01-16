@@ -10,9 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-/**
- * Creates a prop forwarding filter function that excludes specific props
- */
 export const createShouldForwardProp =
   (excludedProps: string[]) => (prop: string) =>
     !excludedProps.includes(prop);

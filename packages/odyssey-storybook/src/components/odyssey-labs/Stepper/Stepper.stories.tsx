@@ -55,6 +55,13 @@ const storybookMeta: Meta<StepperProps> = {
         defaultValue: { summary: "false" },
       },
     },
+    onChange: {
+      control: { type: "object" },
+      description: "Callback fired when a step is clicked",
+      table: {
+        type: { summary: "func" },
+      },
+    },
     orientation: {
       control: { type: "radio" },
       options: ["horizontal", "vertical"],
@@ -71,13 +78,6 @@ const storybookMeta: Meta<StepperProps> = {
       table: {
         type: { summary: '"numeric" | "nonNumeric"' },
         defaultValue: { summary: "numeric" },
-      },
-    },
-    onChange: {
-      control: { type: "object" },
-      description: "Callback fired when a step is clicked",
-      table: {
-        type: { summary: "func" },
       },
     },
   },
