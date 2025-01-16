@@ -426,8 +426,14 @@ const Stepper = ({
         return `Step ${index + 1} of ${total}: ${statusText}`;
       };
 
-      const ariaProps = {
-        "aria-current": active ? "step" : undefined, // Remove the "as const"
+      const ariaProps: {
+        "aria-current"?: "step";
+        "aria-label": string;
+        "aria-describedby"?: string;
+        "aria-expanded"?: boolean;
+        "aria-controls"?: string;
+      } = {
+        "aria-current": active ? "step" : undefined,
         "aria-label": getStepAriaLabel(
           index,
           steps.length,
@@ -438,12 +444,6 @@ const Stepper = ({
           "aria-expanded": active,
           "aria-controls": `step-content-${index}`,
         }),
-      } satisfies {
-        "aria-current"?: "step" | undefined;
-        "aria-label": string;
-        "aria-describedby"?: string;
-        "aria-expanded"?: boolean;
-        "aria-controls"?: string;
       };
 
       return (
