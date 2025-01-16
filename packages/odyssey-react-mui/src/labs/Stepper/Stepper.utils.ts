@@ -14,7 +14,6 @@ export const createShouldForwardProp =
   (excludedProps: string[]) => (prop: string) =>
     !excludedProps.includes(prop);
 
-// Prop forwarding filters for various styled components
 export const shouldForwardStepProps = createShouldForwardProp([
   "odysseyDesignTokens",
   "orientation",
