@@ -1959,6 +1959,10 @@ export const getComponents = ({
           ["&[data-ods-type='search']"]: {
             borderColor: odysseyTokens.HueNeutral400,
 
+            ...(contrastMode === "highContrast" && {
+              border: "none",
+            }),
+
             [`& .${inputBaseClasses.input}::placeholder`]: {
               color: odysseyTokens.TypographyColorSupport,
               opacity: 1,
