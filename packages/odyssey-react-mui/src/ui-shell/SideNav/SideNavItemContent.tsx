@@ -57,8 +57,8 @@ export const StyledSideNavListItem = styled("li", {
 
   ...(isSelected && {
     color: sideNavContrastColors?.fontColor
-      ? `${sideNavContrastColors.fontColor} !important`
-      : `${odysseyDesignTokens.TypographyColorAction} !important`,
+      ? `${sideNavContrastColors.fontColor}`
+      : `${odysseyDesignTokens.TypographyColorAction}`,
     backgroundColor:
       sideNavContrastColors?.itemSelectedBackgroundColor ||
       odysseyDesignTokens.HueBlue50,
@@ -94,6 +94,7 @@ export const getBaseNavItemContentStyles = ({
   alignItems: "center",
   width: "100%",
   textDecoration: "none",
+  // !important needed here to override more specific base link styling
   color: sideNavContrastColors?.fontColor
     ? `${sideNavContrastColors?.fontColor} !important`
     : `${odysseyDesignTokens.TypographyColorHeading} !important`,
@@ -104,27 +105,26 @@ export const getBaseNavItemContentStyles = ({
   transition: `backgroundColor ${odysseyDesignTokens.TransitionDurationMain}, color ${odysseyDesignTokens.TransitionDurationMain}`,
   cursor: "pointer",
 
-  // `[data-sortable-container='true']:has(button:hover) &` - when the sortable item's drag handle is hovered we want to trigger the same hover behavior as if you were hovering the actual item
-  "&:hover, [data-sortable-container='true']:has(button:hover, button:focus, button:focus-visible) &":
-    {
-      textDecoration: "none",
+  // When hover or focus of the drag handle, apply general hover styles
+  "&:hover, li:has(> button:hover, > button:focus, > button:focus-visible) &": {
+    textDecoration: "none",
+    backgroundColor:
+      sideNavContrastColors?.itemHoverBackgroundColor ||
+      odysseyDesignTokens.HueNeutral50,
+
+    ...(isSelected && {
       backgroundColor:
-        sideNavContrastColors?.itemHoverBackgroundColor ||
-        odysseyDesignTokens.HueNeutral50,
+        sideNavContrastColors?.itemSelectedBackgroundColor ||
+        odysseyDesignTokens.HueBlue50,
+      color:
+        sideNavContrastColors?.fontColor ||
+        odysseyDesignTokens.TypographyColorAction,
+    }),
 
-      ...(isSelected && {
-        backgroundColor:
-          sideNavContrastColors?.itemSelectedBackgroundColor ||
-          odysseyDesignTokens.HueBlue50,
-        color:
-          sideNavContrastColors?.fontColor ||
-          odysseyDesignTokens.TypographyColorAction,
-      }),
-
-      ...(isDisabled && {
-        backgroundColor: "unset",
-      }),
-    },
+    ...(isDisabled && {
+      backgroundColor: "unset",
+    }),
+  },
 
   ...(isSelected && {
     color: sideNavContrastColors?.fontColor

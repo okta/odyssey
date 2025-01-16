@@ -223,7 +223,6 @@ export const SortableItem = ({
   return (
     <SortableItemContext.Provider value={context}>
       <StyledSortableListItem
-        data-sortable-container="true"
         isSelected={isSelected}
         odysseyDesignTokens={odysseyDesignTokens}
         ref={setNodeRef}
