@@ -291,7 +291,6 @@ const Stepper = ({
     [onChange, isStepClickable],
   );
 
-  // Memoize steps mapping to prevent unnecessary recalculations
   const renderedSteps = useMemo(() => {
     return steps.map((step, index) => {
       const completed = index < activeStep;

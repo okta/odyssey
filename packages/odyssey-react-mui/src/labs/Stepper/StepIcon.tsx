@@ -79,12 +79,11 @@ const StyledStepIconContainer = styled("div", {
       ? odysseyDesignTokens.HueBlue600
       : "transparent",
   transition: `all ${odysseyDesignTokens.TransitionDurationMain}`,
-  ".MuiStep-root:hover &": {
-    border:
-      !active && !completed && nonLinear
-        ? `1px solid ${odysseyDesignTokens.HueNeutral900}`
-        : undefined,
-  },
+
+  ".MuiStep-root:hover &":
+    !active && !completed && nonLinear
+      ? { border: `1px solid ${odysseyDesignTokens.HueNeutral900}` }
+      : undefined,
 
   "& svg": {
     width:
