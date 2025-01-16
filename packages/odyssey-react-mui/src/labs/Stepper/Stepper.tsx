@@ -426,14 +426,8 @@ const Stepper = ({
         return `Step ${index + 1} of ${total}: ${statusText}`;
       };
 
-      const ariaProps: {
-        "aria-current"?: "step";
-        "aria-label": string;
-        "aria-describedby"?: string;
-        "aria-expanded"?: boolean;
-        "aria-controls"?: string;
-      } = {
-        "aria-current": active ? "step" : undefined,
+      const ariaProps = {
+        "aria-current": active ? ("step" as const) : undefined, // Keep this type assertion
         "aria-label": getStepAriaLabel(
           index,
           steps.length,
