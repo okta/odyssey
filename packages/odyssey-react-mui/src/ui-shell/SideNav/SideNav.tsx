@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import styled, { CSSObject } from "@emotion/styled";
+import styled from "@emotion/styled";
 import {
   memo,
   useMemo,
@@ -25,6 +25,7 @@ import { useTranslation } from "react-i18next";
 import { arrayMove } from "@dnd-kit/sortable";
 import { UniqueIdentifier } from "@dnd-kit/core";
 import { ErrorBoundary } from "react-error-boundary";
+import { Property } from "csstype";
 
 import { ContrastColors } from "../../createContrastColors";
 import { NavAccordion } from "./NavAccordion";
@@ -124,7 +125,10 @@ const StyledSideNav = styled("nav", {
     backgroundColor: backgroundColor || odysseyDesignTokens.HueNeutralWhite,
 
     ...(isAppContentWhiteBackground && {
-      borderRight: `${odysseyDesignTokens.BorderWidthMain} ${odysseyDesignTokens.BorderStyleMain} ${odysseyDesignTokens.HueNeutral100}`,
+      borderRightWidth: odysseyDesignTokens.BorderWidthMain,
+      borderRightStyle:
+        odysseyDesignTokens.BorderStyleMain as Property.BorderRightStyle,
+      borderRightColor: odysseyDesignTokens.HueNeutral100,
     }),
 
     "&::after": {
@@ -182,14 +186,16 @@ const SideNavHeaderContainer = styled("div", {
   }) => ({
     flexShrink: 0,
     // The bottom border should appear only if the scrollable region has been scrolled
-    ...(hasContentScrolled &&
-      ({
-        borderBottom: `${odysseyDesignTokens.BorderWidthMain} ${odysseyDesignTokens.BorderStyleMain} ${odysseyDesignTokens.HueNeutral100}`,
+    ...(hasContentScrolled && {
+      borderBottomWidth: odysseyDesignTokens.BorderWidthMain,
+      borderBottomStyle:
+        odysseyDesignTokens.BorderStyleMain as Property.BorderBottomStyle,
+      borderBottomColor: odysseyDesignTokens.HueNeutral100,
 
-        ...(borderColor && {
-          borderBottom: `${odysseyDesignTokens.BorderWidthMain} ${odysseyDesignTokens.BorderStyleMain} ${borderColor + 15}`,
-        }),
-      } satisfies CSSObject)),
+      ...(borderColor && {
+        borderBottomColor: borderColor.concat("15"),
+      }),
+    }),
   }),
 );
 
