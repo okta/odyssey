@@ -183,11 +183,8 @@ export type SideNavItem = {
       /**
        * An array of side nav items to be displayed as nestedNavItems within Accordion
        */
-      nestedNavItems: Array<
-        Omit<SideNavItem, "nestedNavItems" | "startIcon" | "startIconName">
-      >;
+      nestedNavItems: Array<Omit<SideNavItem, "nestedNavItems" | "startIcon">>;
       endIcon?: never;
-      endIconName?: never;
       href?: never;
       /**
        * Whether the accordion (nav item with nestedNavItems) is expanded by default

@@ -477,7 +477,6 @@ const SideNav = ({
             >
               <SideNavItemContent
                 {...childProps}
-                endIcon={childProps.endIcon}
                 scrollRef={getRefIfThisIsFirstNodeWithIsSelected(childProps.id)}
                 onItemSelected={setSelectedItem}
               />
@@ -656,7 +655,6 @@ const SideNav = ({
                             >
                               <SideNavItemContent
                                 {...item}
-                                endIcon={item.endIcon}
                                 key={item.id}
                                 onItemSelected={setSelectedItem}
                                 scrollRef={getRefIfThisIsFirstNodeWithIsSelected(
