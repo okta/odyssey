@@ -22,6 +22,8 @@ import { ChevronDownIcon } from "./icons.generated";
 import { Support } from "./Typography";
 import { useUniqueId } from "./useUniqueId";
 
+export const accordionVariantValues = ["default", "borderless"] as const;
+
 export type AccordionProps = {
   /**
    * The content of the Accordion itself
@@ -50,6 +52,10 @@ export type AccordionProps = {
   /**
    * Event fired when the expansion state of the accordion is changed
    */
+  /**
+   * Visual style for the accordion (default or borderless)
+   */
+  variant?: (typeof accordionVariantValues)[number];
   onChange?: MuiAccordionProps["onChange"];
 } & (
   | {
@@ -73,6 +79,7 @@ const Accordion = ({
   onChange,
   testId,
   translate,
+  variant = "default",
 }: AccordionProps) => {
   const id = useUniqueId(idOverride);
   const headerId = `${id}-header`;
@@ -81,6 +88,7 @@ const Accordion = ({
   return (
     <MuiAccordion
       data-se={testId}
+      data-ods-variant={variant}
       defaultExpanded={isDefaultExpanded}
       disabled={isDisabled}
       disableGutters
