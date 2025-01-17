@@ -41,6 +41,7 @@ import { SideNavToggleButton } from "./SideNavToggleButton";
 import { SortableList } from "./SortableList/SortableList";
 import { Overline } from "../../Typography";
 import { arrayMove } from "@dnd-kit/sortable";
+import { UniqueIdentifier } from "@dnd-kit/core";
 
 export const DEFAULT_SIDE_NAV_WIDTH = "300px";
 
@@ -512,7 +513,12 @@ const SideNav = ({
   );
 
   const setSortedItems = useCallback(
-    (parentId: string, activeIndex: number, overIndex: number) => {
+    (
+      parentId: string,
+      activeId: UniqueIdentifier,
+      activeIndex: number,
+      overIndex: number,
+    ) => {
       const sortedSideNavItems = sideNavItemsList.map((item) =>
         item.id === parentId && item.nestedNavItems
           ? {
@@ -526,7 +532,7 @@ const SideNav = ({
           : item,
       );
       updateSideNavItemsList(sortedSideNavItems);
-      onSort?.(sortedSideNavItems);
+      onSort?.(sortedSideNavItems, parentId, activeId, activeIndex, overIndex);
     },
     [onSort, sideNavItemsList],
   );
