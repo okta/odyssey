@@ -49,6 +49,7 @@ const StyledTopNavContainer = styled("div", {
   paddingBlock: odysseyDesignTokens.Spacing2,
   paddingInline: odysseyDesignTokens.Spacing8,
   transition: `box-shadow ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
+  position: "relative",
   zIndex: 1,
 }));
 
