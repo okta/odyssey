@@ -16,11 +16,8 @@ export type { LocalizationProviderProps } from "@mui/x-date-pickers";
 
 // export * from "./AdaptablePicker";
 export * from "./AppTile";
-
 export * from "./DatePickers";
-
 export * from "./DataView";
-
 /** @deprecated Will be removed in a future Odyssey version in lieu of the one shipping with DataTable */
 export * from "./DataTablePagination";
 export * from "./DataFilters";
@@ -31,6 +28,14 @@ export * from "./OdysseyPickers";
 export * from "./PageTemplate";
 /** @deprecated Will be removed in a future Odyssey version in lieu of DataTable */
 export * from "./PaginatedTable";
+export * from "./UserProfile";
+export * from "./UserProfileMenuButton";
+/** @deprecated Will be removed in a future Odyssey version. Use the `/ui-shell` export unless your app is running React v17. */
+export * from "../ui-shell/AppSwitcher";
+/** @deprecated Will be removed in a future Odyssey version. Use the `/ui-shell` export unless your app is running React v17. */
+export * from "../ui-shell/SideNav";
+/** @deprecated Will be removed in a future Odyssey version. Use the `/ui-shell` export unless your app is running React v17. */
+export * from "../ui-shell/TopNav";
 
 export {
   /** @deprecated Will be removed in a future Odyssey version. Use `PickerWithOptionAdornment` */
@@ -38,9 +43,3 @@ export {
   type GroupPickerOptionType,
   type GroupPickerProps,
 } from "./GroupPicker";
-
-// Unified UI
-export * from "./AppSwitcher";
-export * from "./SideNav";
-export * from "./SideNav/NavAccordion";
-export * from "./TopNav";

@@ -73,7 +73,7 @@
     "dev:types": "tsc --build --noEmit --watch",
     "dev:visualRegressionTest": "yarn build && yarn concurrently --kill-others --success first --names \"STORYBOOK-SERVER,VISUAL-REGRESSION-TEST\" --prefix-colors \"magenta,green\" npm:ci:server \"wait-on tcp:127.0.0.1:6006 && yarn eyes-storybook --conf ./applitools.config.cjs -u http://127.0.0.1:6006\"",
     "prepack": "yarn build",
-    "start": "yarn concurrently npm:dev:types npm:dev:storybook",
+    "start": "storybook dev -p 6006",
     "typecheck": "tsc --noEmit"
   }
 }

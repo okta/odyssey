@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export * from "./TopNav";
-export * from "./UserProfile";
-export * from "./UserProfileMenuButton";
+export { SideNav } from "./SideNav";
+export * from "./NavAccordion";
+
+export * from "./types";

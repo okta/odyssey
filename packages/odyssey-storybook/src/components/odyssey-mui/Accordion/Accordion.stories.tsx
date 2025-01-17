@@ -36,7 +36,7 @@ const storybookMeta: Meta<AccordionProps> = {
       description: "",
       table: {
         type: {
-          summary: "ReactNode",
+          summary: "string",
         },
       },
     },
@@ -58,12 +58,24 @@ const storybookMeta: Meta<AccordionProps> = {
         },
       },
     },
+    variant: {
+      control: "select",
+      options: ["default", "borderless"],
+      description: "Visual style for the accordion",
+      table: {
+        type: {
+          summary: "string",
+        },
+        defaultValue: { summary: "default" },
+      },
+    },
   },
   args: {
     children: "Lorem ipsum dolor sit amet.",
     isDisabled: false,
     isExpanded: undefined,
     label: "Label",
+    variant: "default",
   },
   decorators: [MuiThemeDecorator],
 };
@@ -80,6 +92,7 @@ export const Single: StoryObj<AccordionProps> = {
         label={props.label}
         isDisabled={props.isDisabled}
         isExpanded={props.isExpanded}
+        variant={props.variant}
       >
         {props.children}
       </Accordion>
@@ -87,6 +100,24 @@ export const Single: StoryObj<AccordionProps> = {
   },
 };
 
+export const Borderless: StoryObj<AccordionProps> = {
+  args: {
+    children: "This is the content of the box.",
+    variant: "borderless",
+  },
+  render: function C(props: AccordionProps) {
+    return (
+      <Accordion
+        label={props.label}
+        isDisabled={props.isDisabled}
+        isExpanded={props.isExpanded}
+        variant={props.variant}
+      >
+        {props.children}
+      </Accordion>
+    );
+  },
+};
 export const Multi: StoryObj<AccordionProps> = {
   args: {
     children: "This is the content of the box.",

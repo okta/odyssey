@@ -41,6 +41,8 @@ import { SideNavToggleButton } from "./SideNavToggleButton";
 import { SortableList } from "./SortableList/SortableList";
 import { Overline } from "../../Typography";
 import { arrayMove } from "@dnd-kit/sortable";
+import { UniqueIdentifier } from "@dnd-kit/core";
+import { ErrorBoundary } from "react-error-boundary";
 
 export const DEFAULT_SIDE_NAV_WIDTH = "300px";
 
@@ -292,6 +294,8 @@ const SideNav = ({
   const { t } = useTranslation();
   const [sideNavItemsList, updateSideNavItemsList] = useState(sideNavItems);
 
+  const blankElement = useMemo(() => <div />, []);
+
   // The default value (sideNavItems) passed to useState is ONLY used by the useState hook for
   // the very first value. Subsequent updates to the prop (sideNavItems) need to cause the state
   // to update!
@@ -512,7 +516,12 @@ const SideNav = ({
   );
 
   const setSortedItems = useCallback(
-    (parentId: string, activeIndex: number, overIndex: number) => {
+    (
+      parentId: string,
+      activeId: UniqueIdentifier,
+      activeIndex: number,
+      overIndex: number,
+    ) => {
       const sortedSideNavItems = sideNavItemsList.map((item) =>
         item.id === parentId && item.nestedNavItems
           ? {
@@ -526,7 +535,7 @@ const SideNav = ({
           : item,
       );
       updateSideNavItemsList(sortedSideNavItems);
-      onSort?.(sortedSideNavItems);
+      onSort?.(sortedSideNavItems, parentId, activeId, activeIndex, overIndex);
     },
     [onSort, sideNavItemsList],
   );
@@ -590,70 +599,77 @@ const SideNav = ({
 
                       if (isSectionHeader) {
                         return (
-                          <SectionHeaderContainer
-                            id={id}
-                            key={id}
-                            odysseyDesignTokens={odysseyDesignTokens}
-                          >
-                            <Overline component="h3">{label}</Overline>
-                          </SectionHeaderContainer>
+                          <ErrorBoundary fallback={blankElement}>
+                            <SectionHeaderContainer
+                              id={id}
+                              key={id}
+                              odysseyDesignTokens={odysseyDesignTokens}
+                            >
+                              <Overline component="h3">{label}</Overline>
+                            </SectionHeaderContainer>
+                          </ErrorBoundary>
                         );
                       } else if (childNavItems) {
                         return (
-                          <StyledSideNavListItem
-                            id={id}
-                            key={id}
-                            odysseyDesignTokens={odysseyDesignTokens}
-                            disabled={isDisabled}
-                            aria-disabled={isDisabled}
-                          >
-                            <NavAccordion
-                              label={label}
-                              isCompact={isCompact}
-                              isDefaultExpanded={isDefaultExpanded}
-                              isExpanded={isExpanded}
-                              startIcon={startIcon}
-                              isDisabled={isDisabled}
+                          <ErrorBoundary fallback={blankElement}>
+                            <StyledSideNavListItem
+                              id={id}
+                              key={id}
+                              odysseyDesignTokens={odysseyDesignTokens}
+                              disabled={isDisabled}
+                              aria-disabled={isDisabled}
                             >
-                              <SideNavListContainer role="none">
-                                {isSortable ? (
-                                  <SortableList
-                                    parentId={item.id}
-                                    items={childNavItems}
-                                    onChange={setSortedItems}
-                                    renderItem={(sortableItem) => (
-                                      <SortableList.Item
-                                        id={sortableItem.id}
-                                        isDisabled={sortableItem.isDisabled}
-                                        isSelected={sortableItem.isSelected}
-                                        isSortable={sortableItem.isSortable}
-                                      >
-                                        {sortableItem.navItem}
-                                      </SortableList.Item>
-                                    )}
-                                  />
-                                ) : (
-                                  childNavItems.map((item) => item.navItem)
-                                )}
-                              </SideNavListContainer>
-                            </NavAccordion>
-                          </StyledSideNavListItem>
+                              <NavAccordion
+                                label={label}
+                                isCompact={isCompact}
+                                isDefaultExpanded={isDefaultExpanded}
+                                isExpanded={isExpanded}
+                                startIcon={startIcon}
+                                isDisabled={isDisabled}
+                              >
+                                <SideNavListContainer role="none">
+                                  {isSortable ? (
+                                    <SortableList
+                                      parentId={item.id}
+                                      items={childNavItems}
+                                      onChange={setSortedItems}
+                                      renderItem={(sortableItem) => (
+                                        <SortableList.Item
+                                          id={sortableItem.id}
+                                          isDisabled={sortableItem.isDisabled}
+                                          isSelected={sortableItem.isSelected}
+                                          isSortable={sortableItem.isSortable}
+                                        >
+                                          {sortableItem.navItem}
+                                        </SortableList.Item>
+                                      )}
+                                    />
+                                  ) : (
+                                    childNavItems.map((item) => item.navItem)
+                                  )}
+                                </SideNavListContainer>
+                              </NavAccordion>
+                            </StyledSideNavListItem>
+                          </ErrorBoundary>
                         );
                       } else {
                         return (
-                          <SideNavItemContentContext.Provider
-                            key={item.id}
-                            value={sideNavItemContentProviderValue}
-                          >
-                            <SideNavItemContent
-                              {...item}
+                          <ErrorBoundary fallback={blankElement}>
+                            <SideNavItemContentContext.Provider
                               key={item.id}
-                              scrollRef={getRefIfThisIsFirstNodeWithIsSelected(
-                                item.id,
-                              )}
-                              onItemSelected={setSelectedItem}
-                            />
-                          </SideNavItemContentContext.Provider>
+                              value={sideNavItemContentProviderValue}
+                            >
+                              <SideNavItemContent
+                                {...item}
+                                key={item.id}
+                                onItemSelected={setSelectedItem}
+                                scrollRef={getRefIfThisIsFirstNodeWithIsSelected(
+                                  item.id,
+                                )}
+                                startIcon={item.startIcon}
+                              />
+                            </SideNavItemContentContext.Provider>
+                          </ErrorBoundary>
                         );
                       }
                     })}

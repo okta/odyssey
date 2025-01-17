@@ -48,6 +48,7 @@ const StyledTopNavContainer = styled("div", {
   minHeight: TOP_NAV_HEIGHT,
   paddingBlock: odysseyDesignTokens.Spacing2,
   paddingInline: odysseyDesignTokens.Spacing8,
+  position: "relative",
   transition: `box-shadow ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
   zIndex: 1,
 }));
