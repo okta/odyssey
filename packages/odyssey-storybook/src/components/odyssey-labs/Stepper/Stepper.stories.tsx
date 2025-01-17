@@ -100,7 +100,6 @@ const defaultSteps = [
   },
 ];
 
-// Default template with controlled state
 const DefaultTemplate: StoryObj<StepperProps> = {
   render: function C(args) {
     const [activeStep, setActiveStep] = useState(args.activeStep || 0);
@@ -128,10 +127,8 @@ const DefaultTemplate: StoryObj<StepperProps> = {
 
         // Verify that each step has the expected structure
         steps.forEach((step) => {
-          // Each step should have a label
           expect(step.querySelector(".MuiStepLabel-label")).toBeTruthy();
 
-          // Each step should have an icon container
           expect(
             step.querySelector(".MuiStepLabel-iconContainer"),
           ).toBeTruthy();
@@ -181,10 +178,8 @@ export const NonLinearNavigation: StoryObj<StepperProps> = {
     const canvas = within(canvasElement);
 
     await step("verify future steps not clickable", async () => {
-      // Get the step elements - need to get the parent tab element
       const findStep = (text: string) => {
         const element = canvas.getByText(text);
-        // Find the parent element with role="tab"
         return element.closest('[role="tab"]');
       };
       const reviewStep = findStep("Review");

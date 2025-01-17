@@ -10,15 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, useMemo } from "react";
 import styled from "@emotion/styled";
+import { memo, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "../../Buttons";
 import { StepperNavigationProps } from "./Stepper.types";
 import {
-  shouldForwardStepperNavigationProps,
   shouldForwardNavigationSectionProps,
   shouldForwardStepperDotProps,
+  shouldForwardStepperNavigationProps,
 } from "./Stepper.utils";
 
 const StepperNavigationContainer = styled("div", {
@@ -98,15 +98,15 @@ const StyledListItem = styled("li")({
   padding: 0,
 });
 const StepperNavigation = ({
-  totalSteps,
   currentStep,
-  onBack,
-  onNext,
-  previousButtonLabel,
+  isStepClickable,
   nextButtonLabel,
   odysseyDesignTokens,
+  onBack,
+  onNext,
   onStepClick,
-  isStepClickable,
+  previousButtonLabel,
+  totalSteps,
 }: StepperNavigationProps) => {
   const { t } = useTranslation();
 
@@ -152,12 +152,12 @@ const StepperNavigation = ({
       </StyledNav>
     );
   }, [
-    totalSteps,
     currentStep,
+    odysseyDesignTokens,
     isStepClickable,
     onStepClick,
-    odysseyDesignTokens,
     t,
+    totalSteps,
   ]);
 
   return (

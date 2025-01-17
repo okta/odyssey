@@ -48,7 +48,7 @@ describe("Stepper", () => {
       expect(screen.getByText(step.description)).toBeInTheDocument();
     });
   });
-
+  // Note: Horizontal orientation (default) is covered by base test cases
   test("renders correctly in vertical orientation", () => {
     render(
       <OdysseyProvider>
@@ -124,8 +124,6 @@ describe("Stepper", () => {
     expect(stepList).toHaveAttribute("aria-label", "Progress steps");
   });
 
-  // NavigationTest uses the actual StepperNavigationProps type but omits the designTokens
-  // since we'll get those from the hook
   type NavigationTestProps = Omit<
     StepperNavigationProps,
     "odysseyDesignTokens"
@@ -181,8 +179,6 @@ describe("Stepper", () => {
         }),
       );
       expect(mockOnChange).toHaveBeenCalledWith(2);
-
-      // Cleanup before next render
       unmountNonLinear();
       mockOnChange.mockClear();
 
@@ -204,8 +200,6 @@ describe("Stepper", () => {
         }),
       );
       expect(mockOnChange).not.toHaveBeenCalled();
-
-      // Cleanup before next render
       unmountLinear();
       mockOnChange.mockClear();
 
@@ -227,8 +221,6 @@ describe("Stepper", () => {
         }),
       );
       expect(mockOnChange).toHaveBeenCalledWith(0);
-
-      // Cleanup before next render
       unmountBackStep();
       mockOnChange.mockClear();
 
