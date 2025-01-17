@@ -23,11 +23,10 @@ import { Subordinate } from "../Typography";
 
 const UserProfileContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
+})<{ odysseyDesignTokens: DesignTokens }>({
   display: "flex",
   alignItems: "center",
-  paddingInlineEnd: odysseyDesignTokens.Spacing4,
-}));
+});
 
 const UserProfileIconContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
@@ -35,12 +34,6 @@ const UserProfileIconContainer = styled("div", {
   display: "flex",
   paddingInlineEnd: odysseyDesignTokens.Spacing2,
 }));
-
-const UserProfileInfoContainer = styled("div")({
-  display: "flex",
-  flexDirection: "column",
-  textAlign: "left",
-});
 
 export type UserProfileProps = {
   /**
@@ -78,7 +71,7 @@ const UserProfile = ({
         </UserProfileIconContainer>
       )}
 
-      <UserProfileInfoContainer translate={translate}>
+      <div translate={translate}>
         {userNameEndIcon ? (
           <Box
             sx={{
@@ -94,7 +87,7 @@ const UserProfile = ({
           <Subordinate color="textPrimary">{userName}</Subordinate>
         )}
         <Subordinate color="textSecondary">{orgName}</Subordinate>
-      </UserProfileInfoContainer>
+      </div>
     </UserProfileContainer>
   );
 };
