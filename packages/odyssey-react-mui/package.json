@@ -50,7 +50,7 @@
     },
     "./web-component": {
       "types": "./dist/src/web-component/index.d.ts",
-      "default": "./dist/src/webComponent/index.js"
+      "default": "./dist/src/web-component/index.js"
     },
     ".": {
       "types": "./dist/src/index.d.ts",
