@@ -34,23 +34,23 @@
   "exports": {
     "./icons": {
       "types": "./dist/src/icons.generated/index.d.ts",
-      "default": "./dist/src/icons.js"
+      "default": "./dist/src/icons.generated/index.js"
     },
     "./labs": {
       "types": "./dist/src/labs/index.d.ts",
-      "default": "./dist/src/labs.js"
+      "default": "./dist/src/labs/index.js"
     },
     "./test-selectors": {
       "types": "./dist/src/test-selectors/index.d.ts",
-      "default": "./dist/src/testSelectors.js"
+      "default": "./dist/src/test-selectors/index.js"
     },
     "./ui-shell": {
       "types": "./dist/src/ui-shell/index.d.ts",
-      "default": "./dist/src/uiShell.js"
+      "default": "./dist/src/ui-shell/index.js"
     },
     "./web-component": {
       "types": "./dist/src/web-component/index.d.ts",
-      "default": "./dist/src/webComponent.js"
+      "default": "./dist/src/webComponent/index.js"
     },
     ".": {
       "types": "./dist/src/index.d.ts",
