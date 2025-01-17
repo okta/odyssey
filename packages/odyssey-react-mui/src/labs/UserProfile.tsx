@@ -71,7 +71,7 @@ const UserProfile = ({
         </UserProfileIconContainer>
       )}
 
-      <div translate={translate}>
+      <div>
         {userNameEndIcon ? (
           <Box
             sx={{
@@ -80,13 +80,17 @@ const UserProfile = ({
               gap: odysseyDesignTokens.Spacing2,
             }}
           >
-            <Subordinate color="textPrimary">{userName}</Subordinate>
+            <Subordinate color="textPrimary" translate={translate}>
+              {userName}
+            </Subordinate>
             {userNameEndIcon}
           </Box>
         ) : (
-          <Subordinate color="textPrimary">{userName}</Subordinate>
+          <Subordinate color="textPrimary" translate={translate}>
+            {userName}
+          </Subordinate>
         )}
-        <Subordinate color="textSecondary">{orgName}</Subordinate>
+        <Subordinate color="textSecondary" translate={translate}>{orgName}</Subordinate>
       </div>
     </UserProfileContainer>
   );
