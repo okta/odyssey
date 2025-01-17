@@ -15,7 +15,7 @@ import { memo, type ReactElement } from "react";
 
 import type { HtmlProps } from "../../HtmlProps";
 import { TopNavListItem, TopNavListItemProps } from "./TopNavListItem";
-import { UserProfileProps } from "./UserProfile";
+import { UserProfileProps } from "../../labs/UserProfile";
 
 export type TopNavLinksListProps = {
   /**

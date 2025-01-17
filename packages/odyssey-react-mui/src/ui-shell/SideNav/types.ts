@@ -11,6 +11,7 @@
  */
 
 import type { ReactElement, SyntheticEvent } from "react";
+
 import type { HtmlProps } from "../../HtmlProps";
 import type { statusSeverityValues } from "../../Status";
 import { UniqueIdentifier } from "@dnd-kit/core";
@@ -127,7 +128,7 @@ export type SideNavItem = {
    */
   count?: number;
   /**
-   * The icon element to display at the end of the Nav Item
+   * The icon element to display after the nav item text. Only use this with images that don't have React context. Even the official Odyssey Icons use MUI which references the MUI theme in context and will error when rendered in Unified UI Shell.
    */
   endIcon?: ReactElement;
   id: string;
@@ -150,7 +151,7 @@ export type SideNavItem = {
    */
   severity?: (typeof statusSeverityValues)[number];
   /**
-   * The icon element to display at the start of the Nav Item
+   * The icon element to display before the nav item text. Only use this with images that don't have React context. Even the official Odyssey Icons use MUI which references the MUI theme in context and will error when rendered in Unified UI Shell.
    */
   startIcon?: ReactElement;
   /**
@@ -189,7 +190,7 @@ export type SideNavItem = {
       /**
        * An array of side nav items to be displayed as nestedNavItems within Accordion
        */
-      nestedNavItems?: Array<Omit<SideNavItem, "startIcon" | "nestedNavItems">>;
+      nestedNavItems: Array<Omit<SideNavItem, "nestedNavItems" | "startIcon">>;
       endIcon?: never;
       href?: never;
       /**

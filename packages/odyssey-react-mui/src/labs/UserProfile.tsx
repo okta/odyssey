@@ -13,13 +13,13 @@
 import styled from "@emotion/styled";
 import { memo, type ReactElement } from "react";
 
-import { Box } from "../../Box";
-import { HtmlProps } from "../../HtmlProps";
+import { Box } from "../Box";
+import { HtmlProps } from "../HtmlProps";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "../../OdysseyDesignTokensContext";
-import { Subordinate } from "../../Typography";
+} from "../OdysseyDesignTokensContext";
+import { Subordinate } from "../Typography";
 
 const UserProfileContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
