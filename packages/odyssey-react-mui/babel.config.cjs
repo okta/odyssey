@@ -11,33 +11,89 @@
  */
 
 /**
- * @type {import('@babel/core').TransformOptions}
+ * @type {(api: import('@babel/core').ConfigAPI) => import('@babel/core').TransformOptions}
  */
-const babelConfig = {
-  plugins: [
-    [
-      "babel-plugin-import",
-      {
-        libraryName: "@mui/material",
-        libraryDirectory: "",
-        camel2DashComponentName: false,
-      },
-      "core",
+const babelConfig = (api) => {
+  // @ts-expect-error Something is wrong with this type as this function does exist.
+  api.cache(true);
+
+  return {
+    plugins: [
+      [
+        "babel-plugin-import",
+        {
+          libraryName: "@mui/material",
+          libraryDirectory: "",
+          camel2DashComponentName: false,
+        },
+        "core",
+      ],
+      [
+        "babel-plugin-import",
+        {
+          libraryName: "@mui/icons-material",
+          libraryDirectory: "",
+          camel2DashComponentName: false,
+        },
+        "icons",
+      ],
     ],
-    [
-      "babel-plugin-import",
-      {
-        libraryName: "@mui/icons-material",
-        libraryDirectory: "",
-        camel2DashComponentName: false,
-      },
-      "icons",
+    presets: [
+      "@babel/preset-env",
+      [
+        "@babel/preset-react",
+        {
+          runtime: "automatic",
+        },
+      ],
+      "@babel/preset-typescript",
     ],
-  ],
-  compact: true,
-  minified: process.env.NODE_ENV === "production",
-  retainLines: true,
-  sourceMaps: "both",
+
+    env: {
+      production: {
+        comments: false,
+        ignore: [/\.test\.|\.stories\./i],
+        plugins: [
+          [
+            "babel-plugin-import",
+            {
+              libraryName: "@mui/material",
+              libraryDirectory: "",
+              camel2DashComponentName: false,
+            },
+            "core",
+          ],
+          [
+            "babel-plugin-import",
+            {
+              libraryName: "@mui/icons-material",
+              libraryDirectory: "",
+              camel2DashComponentName: false,
+            },
+            "icons",
+          ],
+        ],
+        presets: [
+          [
+            "@babel/preset-env",
+            {
+              modules: false,
+            },
+          ],
+          [
+            "@babel/preset-react",
+            {
+              runtime: "automatic",
+            },
+          ],
+          "@babel/preset-typescript",
+        ],
+        shouldPrintComment: (val) => {
+          return /Okta, Inc\.|@license|@preserve/.test(val);
+        },
+      },
+    },
+  };
 };
 
 module.exports = babelConfig;
