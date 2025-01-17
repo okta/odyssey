@@ -42,7 +42,12 @@ export interface BaseItem {
 interface ListProps<T extends BaseItem> {
   parentId: string;
   items: T[];
-  onChange: (parentId: string, activeIndex: number, overIndex: number) => void;
+  onChange: (
+    parentId: string,
+    activeId: UniqueIdentifier,
+    activeIndex: number,
+    overIndex: number,
+  ) => void;
   renderItem: (item: T) => ReactNode;
 }
 
@@ -100,8 +105,9 @@ export const SortableList = <T extends BaseItem>({
         if (over && active.id !== over?.id) {
           const activeIndex = items.findIndex(({ id }) => id === active.id);
           const overIndex = items.findIndex(({ id }) => id === over.id);
-          if (items[overIndex].isSortable) {
-            onChange(parentId, activeIndex, overIndex);
+          // allow sorting by default except when isSortable is set to false explicitly
+          if (items[overIndex].isSortable !== false) {
+            onChange(parentId, active.id, activeIndex, overIndex);
           }
         }
         setActive(null);
