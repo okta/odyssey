@@ -33,7 +33,7 @@ const config: StorybookConfig = {
     getAbsolutePath("@storybook/addon-essentials"),
     getAbsolutePath("@storybook/addon-interactions"),
     getAbsolutePath("@storybook/addon-mdx-gfm"),
-    // getAbsolutePath("storybook-addon-rtl-direction"),
+    getAbsolutePath("storybook-addon-rtl"),
   ],
   core: {
     builder: "@storybook/builder-vite",
