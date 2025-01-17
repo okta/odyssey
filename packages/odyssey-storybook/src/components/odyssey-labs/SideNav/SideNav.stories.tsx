@@ -409,17 +409,14 @@ export const SortableSideNav: StoryObj<typeof SideNav> = {
           {
             id: "item17-2",
             label: "Work",
-            isSortable: true,
           },
           {
             id: "item17-3",
             label: "Group 1",
-            isSortable: true,
           },
           {
             id: "item17-4",
             label: "Group 2",
-            isSortable: true,
           },
           {
             id: "item17-5",

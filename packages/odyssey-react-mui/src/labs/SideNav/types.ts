@@ -13,6 +13,7 @@
 import type { ReactElement, SyntheticEvent } from "react";
 import type { HtmlProps } from "../../HtmlProps";
 import type { statusSeverityValues } from "../../Status";
+import { UniqueIdentifier } from "@dnd-kit/core";
 
 type LogoWithLink = {
   href: string;
@@ -89,7 +90,13 @@ export type SideNavProps = {
   /**
    *  Triggers when the item is reordered
    */
-  onSort?: (reorderedItems: SideNavItem[]) => void;
+  onSort?: (
+    reorderedItems: SideNavItem[],
+    parentId: string,
+    activeId: UniqueIdentifier,
+    activeIndex: number,
+    overIndex: number,
+  ) => void;
   /**
    * Nav items in the side nav
    */
