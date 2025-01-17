@@ -158,7 +158,7 @@ const CardLayoutContent = <TData extends MRT_RowData>({
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const handleRowSelectionChange = useCallback(
-    (row: MRT_RowData) => {
+    (row: TData) => {
       setRowSelection((rowSelection) =>
         Object.fromEntries(
           row.id in rowSelection
@@ -228,13 +228,10 @@ const CardLayoutContent = <TData extends MRT_RowData>({
                       (cardLayoutOptions.rowActionMenuItems ||
                         hasRowReordering) && (
                         <RowActions
-                          row={row as unknown as MRT_Row<MRT_RowData>} // TODO: FIX THIS! The types are wrong. `row` is incorrectly set in `RowActions` to not be TData.
+                          row={row}
                           rowIndex={currentIndex}
                           rowActionMenuItems={
-                            // TODO: FIX THIS! The types are wrong. `row` is incorrectly set in `RowActions` to not be TData.
-                            cardLayoutOptions.rowActionMenuItems as unknown as (
-                              row: MRT_Row<MRT_RowData>,
-                            ) => any // eslint-disable-line @typescript-eslint/no-explicit-any
+                            cardLayoutOptions.rowActionMenuItems as CardLayoutProps<MRT_RowData>["rowActionMenuItems"]
                           }
                           isRowReorderingDisabled={isRowReorderingDisabled}
                           totalRows={totalRows}

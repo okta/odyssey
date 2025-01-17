@@ -49,6 +49,7 @@ import {
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
 import styled from "@emotion/styled";
+import { createUniqueId } from "../../createUniqueId";
 
 export type DataViewProps<TData extends MRT_RowData> = UniversalProps<TData> &
   ViewProps<TData, DataLayout>;
@@ -210,10 +211,18 @@ const DataView = <TData extends MRT_RowData>({
     ],
   );
 
-  const getRowId = useCallback<Required<DataViewProps<TData>>["getRowId"]>(
-    (originalRow) => originalRow.id as string,
-    [],
-  );
+  const getRowId = useCallback(
+    (row: TData, index: number, parentRow: MRT_Row<TData>) => {
+      if (getRowIdProp) {
+        return getRowIdProp(row, index, parentRow);
+      }
+      if (row.id) {
+        return row.id as string;
+      }
+      return createUniqueId();
+    },
+    [getRowIdProp],
+  ) as (row: TData, index: number, parentRow?: MRT_Row<TData>) => string;
 
   // Update pagination state if props change
   useEffect(() => {

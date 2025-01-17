@@ -27,7 +27,7 @@ export const useFilterConversion = <TData extends MRT_RowData>({
   filters,
 }: FilterConversionType<TData>) => {
   const convertFilterSelectOptions = useCallback(
-    (options: DataTableColumn<MRT_RowData>["filterSelectOptions"]) =>
+    (options: DataTableColumn<TData>["filterSelectOptions"]) =>
       options?.map((option) =>
         typeof option === "string"
           ? {

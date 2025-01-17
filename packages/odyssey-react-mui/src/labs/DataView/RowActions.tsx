@@ -23,13 +23,18 @@ import {
 import { Button, MenuButtonProps, MenuItem } from "../../Buttons";
 import { DataTableProps } from "./DataTable";
 
+// Rows coming from TableLayoutContent will be in the MRT-expected row format,
+// while rows coming from CardLayoutContent will be pure data
+// type RowOrTableRow<TData extends MRT_RowData> = MRT_Row<TData> | TData | MRT_Row<MRT_RowData>;
+type RowOrTableRow<TData extends MRT_RowData> = MRT_Row<TData> | TData;
+
 export type RowActionsProps<TData extends MRT_RowData> = {
   isRowReorderingDisabled?: boolean;
-  row: MRT_Row<TData>;
+  row: RowOrTableRow<TData>;
   rowActionButtons?: (
-    row: MRT_Row<TData>,
+    row?: TData,
   ) => ReactElement<typeof Button> | ReactElement<typeof Fragment>;
-  rowActionMenuItems?: (row: MRT_Row<TData>) => MenuButtonProps["children"];
+  rowActionMenuItems?: (row: TData) => MenuButtonProps["children"];
   rowIndex: number;
   totalRows?: DataTableProps<TData>["totalRows"];
   updateRowOrder?: ({
@@ -43,13 +48,17 @@ export type RowActionsProps<TData extends MRT_RowData> = {
 
 const RowActions = <TData extends MRT_RowData>({
   isRowReorderingDisabled,
-  row,
+  row: incomingRow,
   rowActionMenuItems,
   rowIndex,
   totalRows,
   updateRowOrder,
 }: RowActionsProps<TData>) => {
   const { t } = useTranslation();
+
+  const row = (
+    incomingRow.original ? incomingRow.original : incomingRow
+  ) as TData & { id: string };
 
   const handleToFrontClick = useCallback(() => {
     if (updateRowOrder) {

@@ -25,7 +25,7 @@ import {
 } from "../../OdysseyDesignTokensContext";
 
 export type BulkActionsMenuProps<TData extends MRT_RowData> = {
-  data: MRT_RowData[];
+  data: TData[];
   menuItems: UniversalProps<TData>["bulkActionMenuItems"];
   rowSelection: MRT_RowSelectionState;
   setRowSelection: Dispatch<SetStateAction<MRT_RowSelectionState>>;
