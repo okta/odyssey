@@ -10,14 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { AppSwitcher } from "@okta/odyssey-react-mui/labs";
+import { AppSwitcher } from "@okta/odyssey-react-mui/ui-shell";
 import { Meta, StoryObj } from "@storybook/react";
 import { expect, within } from "@storybook/test";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const meta = {
-  title: "Labs Components/AppSwitcher",
+  title: "UI Shell Components/AppSwitcher",
   component: AppSwitcher,
   argTypes: {
     appIcons: {

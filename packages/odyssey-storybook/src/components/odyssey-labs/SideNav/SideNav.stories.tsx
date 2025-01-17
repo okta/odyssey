@@ -12,26 +12,27 @@
 
 import { Box, Heading5, Support } from "@okta/odyssey-react-mui";
 import {
+  AddCircleIcon,
+  AppsIcon,
+  ClockIcon,
+  DirectoryIcon,
+  DownloadIcon,
+  Fido2Icon,
+  FolderIcon,
+  HomeIcon,
+  LockIcon,
+  NotificationIcon,
+  ServerIcon,
+  SettingsIcon,
+  UserIcon,
+} from "@okta/odyssey-react-mui/icons";
+import {
   SideNav,
   SideNavItem,
   SideNavProps,
-} from "@okta/odyssey-react-mui/labs";
+} from "@okta/odyssey-react-mui/ui-shell";
 import { Meta, StoryObj } from "@storybook/react";
-import {
-  AppsIcon,
-  ClockIcon,
-  SettingsIcon,
-  HomeIcon,
-  Fido2Icon,
-  LockIcon,
-  AddCircleIcon,
-  DownloadIcon,
-  UserIcon,
-  DirectoryIcon,
-  ServerIcon,
-  FolderIcon,
-  NotificationIcon,
-} from "@okta/odyssey-react-mui/icons";
+
 import { configure, expect, userEvent, waitFor, within } from "@storybook/test";
 import { useEffect, useState } from "react";
 
@@ -54,7 +55,7 @@ const CustomFooterComponent = () => {
   );
 };
 const storybookMeta: Meta<SideNavProps> = {
-  title: "Labs Components/SideNav",
+  title: "UI Shell Components/SideNav",
   component: SideNav,
   argTypes: {
     appName: {
@@ -256,7 +257,6 @@ const storybookMeta: Meta<SideNavProps> = {
         href: "/",
         label: "Security",
         startIcon: <LockIcon />,
-        endIcon: <LockIcon />,
       },
       {
         id: "item15",
