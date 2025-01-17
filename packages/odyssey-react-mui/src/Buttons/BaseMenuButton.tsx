@@ -68,8 +68,8 @@ const StyledMenuButtonContainer = styled("div", {
       height: odysseyDesignTokens.Spacing6,
       backgroundColor: odysseyDesignTokens.HueNeutral300,
       content: '""',
-      transform: "translateY(-50%) scale(1)",
-      transition: "transform 250ms",
+      transform: "translate3d(0, -50%, 0)",
+      transition: `opacity 200ms`,
 
       ...(verticalDividerAlignment === "end" && {
         left: "unset",
@@ -79,7 +79,7 @@ const StyledMenuButtonContainer = styled("div", {
 
     ":has(> button:hover)": {
       "&:before": {
-        transform: "translateY(-50%) scale(0)",
+        opacity: 0,
       },
     },
 
