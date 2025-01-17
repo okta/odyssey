@@ -13,11 +13,11 @@
 import styled from "@emotion/styled";
 import { CheckIcon } from "../../icons.generated";
 import { DesignTokens } from "../../OdysseyDesignTokensContext";
+import type { StepIconProps } from "./Stepper.types";
 import {
   shouldForwardStepIconContainerProps,
   shouldForwardStepNumberProps,
 } from "./Stepper.utils";
-import type { StepIconProps } from "./Stepper.types";
 
 const StyledStepNumber = styled("span", {
   shouldForwardProp: shouldForwardStepNumberProps,
@@ -98,28 +98,28 @@ const StyledStepIconContainer = styled("div", {
 }));
 
 export const StepIcon = ({
-  completed,
   active,
+  completed,
+  nonLinear,
+  odysseyDesignTokens,
   stepNumber,
   variant,
-  odysseyDesignTokens,
-  nonLinear,
 }: StepIconProps) => (
   <StyledStepIconContainer
-    completed={completed}
     active={active}
-    variant={variant}
-    odysseyDesignTokens={odysseyDesignTokens}
+    completed={completed}
     nonLinear={nonLinear}
+    odysseyDesignTokens={odysseyDesignTokens}
+    variant={variant}
   >
     {completed && variant === "numeric" ? (
       <CheckIcon />
     ) : variant === "numeric" ? (
       <StyledStepNumber
-        completed={completed}
         active={active}
-        odysseyDesignTokens={odysseyDesignTokens}
+        completed={completed}
         nonLinear={nonLinear}
+        odysseyDesignTokens={odysseyDesignTokens}
       >
         {stepNumber + 1}
       </StyledStepNumber>

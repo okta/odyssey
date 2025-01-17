@@ -15,23 +15,19 @@ import { DesignTokens } from "../../OdysseyDesignTokensContext";
 
 export type StepData = {
   /**
-   * The label text for the step
-   */
-  label: string;
-  /**
    * Optional description text below step label
    */
   description?: string;
+  /**
+   * The label text for the step
+   */
+  label: string;
 };
 
 // Define handler types for public API
 export type StepChangeHandler = (step: number) => void;
 
 export type StepperProps = {
-  /**
-   * Aria label for the stepper container, Falls back to "Progress steps"
-   */
-  ariaLabel?: string;
   /**
    * Current active step (0-based index)
    */
@@ -41,44 +37,56 @@ export type StepperProps = {
    */
   allowBackStep?: boolean;
   /**
+   * Aria label for the stepper container, Falls back to "Progress steps"
+   */
+  ariaLabel?: string;
+  /**
+   * Button label for the next navigation button
+   */
+  nextButtonLabel?: string;
+  /**
    * Allow skipping to future steps
    */
   nonLinear?: boolean;
-  /**
-   * Layout orientation of the stepper
-   */
-  orientation?: "horizontal" | "vertical";
-  /**
-   * Visual variant of steps
-   */
-  variant?: "numeric" | "nonNumeric";
-  /**
-   * Array of step data
-   */
-  steps: StepData[];
   /**
    * Callback fired when a step is clicked
    */
   onChange?: StepChangeHandler;
   /**
+   * Layout orientation of the stepper
+   */
+  orientation?: "horizontal" | "vertical";
+  /**
    * Button label for the previous navigation button
    */
   previousButtonLabel?: string;
   /**
-   * Button label for the next navigation button
+   * Array of step data
    */
-  nextButtonLabel?: string;
+  steps: StepData[];
+  /**
+   * Visual variant of steps
+   */
+  variant?: "numeric" | "nonNumeric";
 } & Pick<HtmlProps, "testId" | "translate">;
 
 export type StepIconProps = {
+  /**
+   * Whether the step is currently active
+   */
+  active: boolean;
   /**
    * Whether the step is completed
    */
   completed: boolean;
   /**
-   * Whether the step is currently active
+   * Whether non-linear navigation is enabled
    */
-  active: boolean;
+  nonLinear: boolean;
+  /**
+   * Design tokens for styling
+   */
+  odysseyDesignTokens: DesignTokens;
   /**
    * The index number of the step (0-based)
    */
@@ -87,25 +95,17 @@ export type StepIconProps = {
    * Visual variant of the step icon
    */
   variant: NonNullable<StepperProps["variant"]>;
-  /**
-   * Design tokens for styling
-   */
-  odysseyDesignTokens: DesignTokens;
-  /**
-   * Whether non-linear navigation is enabled
-   */
-  nonLinear: boolean;
 };
 
 export type StepperNavigationProps = {
   /**
-   * Total number of steps
-   */
-  totalSteps: number;
-  /**
    * Current active step (0-based index)
    */
   currentStep: number;
+  /**
+   * Function to determine if a step is clickable
+   */
+  isStepClickable: (step: number) => boolean;
   /**
    * Callback fired when back button is clicked
    */
@@ -119,14 +119,6 @@ export type StepperNavigationProps = {
    */
   onStepClick: StepChangeHandler;
   /**
-   * Function to determine if a step is clickable
-   */
-  isStepClickable: (step: number) => boolean;
-  /**
-   * Custom label for the previous button
-   */
-  previousButtonLabel?: string;
-  /**
    * Custom label for the next button
    */
   nextButtonLabel?: string;
@@ -134,4 +126,12 @@ export type StepperNavigationProps = {
    * Design tokens for styling
    */
   odysseyDesignTokens: DesignTokens;
+  /**
+   * Custom label for the previous button
+   */
+  previousButtonLabel?: string;
+  /**
+   * Total number of steps
+   */
+  totalSteps: number;
 };

@@ -18,6 +18,7 @@ import {
 } from "@mui/material";
 import { memo, useCallback, useMemo } from "react";
 
+import { useTranslation } from "react-i18next";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
@@ -29,7 +30,6 @@ import {
   shouldForwardStepperProps,
   shouldForwardStepProps,
 } from "./Stepper.utils";
-import { useTranslation } from "react-i18next";
 
 const StyledStep = styled(MuiStep, {
   shouldForwardProp: shouldForwardStepProps,
@@ -113,7 +113,7 @@ const StepperContainer = styled(MuiStepper, {
         "&::before": {
           content: '""',
           position: "absolute",
-          left: stepVariant === "nonNumeric" ? "29.5px" : "35.5px",
+          left: stepVariant === "nonNumeric" ? "29.5px" : "35.5px", //half pixel values used for absolute center positioning
           top: "46px",
           height: "calc(100% - 46px)",
           width: "1px",
@@ -238,13 +238,13 @@ const StyledStepDescription = styled("div", {
 const Stepper = ({
   activeStep,
   allowBackStep = false,
-  nonLinear = false,
-  orientation = "horizontal",
-  variant = "numeric",
-  steps,
-  onChange,
-  testId,
   ariaLabel,
+  nonLinear = false,
+  onChange,
+  orientation = "horizontal",
+  steps,
+  testId,
+  variant = "numeric",
 }: StepperProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
@@ -370,18 +370,18 @@ const Stepper = ({
       );
     });
   }, [
-    steps,
     activeStep,
     allowBackStep,
-    nonLinear,
     handleStepClick,
     handleKeyDown,
+    isStepClickable,
+    nonLinear,
     odysseyDesignTokens,
     orientation,
-    variant,
     stepDescriptionIds,
-    isStepClickable,
+    steps,
     t,
+    variant,
   ]);
 
   return (
