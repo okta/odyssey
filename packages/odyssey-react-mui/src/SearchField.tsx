@@ -37,10 +37,6 @@ export const searchVariantValues = ["outline", "filled"] as const;
 
 const StyledContainerToEnsureThemeProviderDivIsFullWidth = styled("div")({
   width: "100%",
-
-  "> div": {
-    width: "100%",
-  },
 });
 
 export type SearchFieldProps = {
