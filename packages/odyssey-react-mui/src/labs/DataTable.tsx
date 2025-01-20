@@ -122,7 +122,7 @@ export type DataTableColumn<TData extends MRT_RowData> = {
    */
   enableResizing?: boolean;
   /**
-   * If set to false, the column won't be hideable
+   * If set to false, the column won't be hidable
    */
   enableHiding?: boolean;
 };
@@ -224,7 +224,7 @@ export type DataTableProps<TData extends MRT_RowData> = {
     | Promise<MRT_TableOptions<TData>["data"]>;
   /**
    * Callback that fires when the user reorders rows within the table. Can be used
-   * to propogate order change to the backend.
+   * to propagate order change to the backend.
    */
   reorderDataFn?: ({
     rowId,

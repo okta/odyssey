@@ -198,7 +198,7 @@ const Drawer = ({
       onClose={onClose}
       variant={variant}
       sx={{
-        //Overrides defualt MUI inline style
+        //Overrides default MUI inline style
         ...(variant === "persistent" && {
           "& .MuiDrawer-paper": {
             transition: "none",

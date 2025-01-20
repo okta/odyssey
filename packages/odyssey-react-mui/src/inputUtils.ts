@@ -57,7 +57,7 @@ type InputValue<Value> =
 
 /**
  * In components that support being used in a controlled or uncontrolled way, the defaultValue and value props need
- * to be suppled values in a mutually exclusive way.
+ * to be supplied values in a mutually exclusive way.
  * If a `value` is being provided to the component, then it is being used in a controlled manner and `defaultValue` needs to be undefined.
  * If `value` is undefined, then that means the component is being used in an uncontrolled way and `defaultValue` is either Value or undefined.
  * This helper helps ensure this mutual exclusivity between the 2 props so the component can operate as expected.

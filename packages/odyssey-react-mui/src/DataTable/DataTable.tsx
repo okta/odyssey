@@ -239,7 +239,7 @@ export type DataTableProps = {
   onChangeRowSelection?: (rowSelection: DataTableRowSelectionState) => void;
   /**
    * Callback that fires when the user reorders rows within the table. Can be used
-   * to propogate order change to the backend.
+   * to propagate order change to the backend.
    */
   onReorderRows?: ({ rowId, newRowIndex }: DataTableOnReorderRowsType) => void;
   /**
