@@ -137,7 +137,7 @@ const OptionAdornment = ({
         odysseyDesignTokens={odysseyDesignTokens}
       >
         {/* NOTE: Intentionally leaving alt as an empty string here so screen readers will ignore this image */}
-        {/* Image should be suffciently described by the adjacent title and/or description of the option */}
+        {/* Image should be sufficiently described by the adjacent title and/or description of the option */}
         <img src={adornment} alt="" role="presentation" />
       </OptionAdornmentContainer>
     );
