@@ -170,6 +170,25 @@ export const ErrorsList: Story = {
   } as Story["args"], // This is a hack.,
 };
 
+export const IndividualStates: Story = {
+  args: {
+    label: "Service Tier",
+  } as Story["args"],
+  render: function C(props) {
+    return (
+      <RadioGroup {...props}>
+        <Radio label="Basic" value="basic" />
+        <Radio label="Standard" value="standard" />
+        <Radio
+          label="Premium (Unavailable in your region)"
+          value="premium"
+          isDisabled={true}
+        />
+      </RadioGroup>
+    );
+  },
+};
+
 export const UncontrolledRadioGroup: Story = {
   ...Template,
   args: {
