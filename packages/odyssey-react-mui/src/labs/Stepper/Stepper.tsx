@@ -113,7 +113,7 @@ const StepperContainer = styled(MuiStepper, {
         "&::before": {
           content: '""',
           position: "absolute",
-          left: stepVariant === "nonNumeric" ? "29.5px" : "35.5px", //half pixel values used for absolute center positioning
+          left: stepVariant === "nonNumeric" ? "31.5px" : "35.5px", //half pixel values used for absolute center positioning
           top: "46px",
           height: "calc(100% - 46px)",
           width: "1px",
@@ -143,7 +143,7 @@ const StepperContainer = styled(MuiStepper, {
             margin: `auto ${odysseyDesignTokens.Spacing2}`,
           }
         : {
-            marginLeft: stepVariant === "nonNumeric" ? "29.5px" : "35.5px",
+            marginLeft: stepVariant === "nonNumeric" ? "31.5px" : "35.5px",
           }),
     },
   };
@@ -202,7 +202,7 @@ const StepLabel = styled(MuiStepLabel, {
           : odysseyDesignTokens.HueNeutral600,
 
       "&.Mui-active": {
-        color: odysseyDesignTokens.HueBlue700,
+        color: odysseyDesignTokens.HueBlue600,
       },
     },
 

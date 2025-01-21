@@ -53,11 +53,11 @@ const StyledStepIconContainer = styled("div", {
   width:
     variant === "numeric"
       ? odysseyDesignTokens.Spacing5
-      : odysseyDesignTokens.Spacing3,
+      : odysseyDesignTokens.Spacing4,
   height:
     variant === "numeric"
       ? odysseyDesignTokens.Spacing5
-      : odysseyDesignTokens.Spacing3,
+      : odysseyDesignTokens.Spacing4,
   borderRadius: "50%",
   display: "flex",
   alignItems: "center",
@@ -70,7 +70,7 @@ const StyledStepIconContainer = styled("div", {
     completed
       ? odysseyDesignTokens.HueGreen400
       : active
-        ? odysseyDesignTokens.HueBlue700
+        ? odysseyDesignTokens.HueBlue600
         : odysseyDesignTokens.HueNeutral600
   }`,
   background: completed
