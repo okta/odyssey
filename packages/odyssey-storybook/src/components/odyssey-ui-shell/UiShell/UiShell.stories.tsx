@@ -45,118 +45,119 @@ import { fn } from "@storybook/test";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-const storybookMeta: Meta<UiShellProps & { sideNavBackgroundColor?: string }> = {
-  title: "UI Shell Components/UI Shell",
-  component: UiShell,
-  argTypes: {
-    appComponent: {
-      control: undefined,
-      description: "App component that renders inside the content area.",
-      table: {
-        type: {
-          summary: "InputType",
-        },
-      },
-      hasStandardAppContentPadding: {
-        control: "boolean",
-        description:
-          "defaults to `true`. If `false`, the content area will have no padding provided",
+const storybookMeta: Meta<UiShellProps & { sideNavBackgroundColor?: string }> =
+  {
+    title: "UI Shell Components/UI Shell",
+    component: UiShell,
+    argTypes: {
+      appComponent: {
+        control: undefined,
+        description: "App component that renders inside the content area.",
         table: {
           type: {
-            summary: "boolean",
+            summary: "InputType",
+          },
+        },
+        hasStandardAppContentPadding: {
+          control: "boolean",
+          description:
+            "defaults to `true`. If `false`, the content area will have no padding provided",
+          table: {
+            type: {
+              summary: "boolean",
+            },
+          },
+        },
+        initialVisibleSections: {
+          control: "text",
+          description:
+            "A list of UiShell components that should be (minimally) rendered initially, with their isLoading property set when applicable. Allows the initial visibility of UiShell components to be influenced.",
+          table: {
+            type: {
+              summary: "string",
+            },
           },
         },
       },
-      initialVisibleSections: {
-        control: "text",
+      onError: {
         description:
-          "A list of UiShell components that should be (minimally) rendered initially, with their isLoading property set when applicable. Allows the initial visibility of UiShell components to be influenced.",
+          'Notifies when a React rendering error occurs. This could be useful for logging, flagging "p0"s, and recovering UI Shell when errors occur.',
+        table: {
+          defaultValue: {
+            summary: "console.error",
+          },
+          type: {
+            summary: "string",
+          },
+        },
+      },
+      onSubscriptionCreated: {
+        description:
+          "Notifies when subscribed to prop changes. UI Shell listens to prop updates, and it won't subscribe synchronously. Because of that, this callback notifies when that subscription is ready.",
         table: {
           type: {
             summary: "string",
           },
         },
       },
-    },
-    onError: {
-      description:
-        'Notifies when a React rendering error occurs. This could be useful for logging, flagging "p0"s, and recovering UI Shell when errors occur.',
-      table: {
-        defaultValue: {
-          summary: "console.error",
+      optionalComponents: {
+        description:
+          "Components that will render as children of various other components such as the top nav or side nav.",
+        table: {
+          type: {
+            summary: "ReactElement",
+          },
         },
-        type: {
-          summary: "string",
+      },
+      subscribeToPropChanges: {
+        description:
+          "This is a callback that provides a subscriber callback to listen for changes to state. It allows UI Shell to listen for state changes. The props coming in this callback go directly to a React state; therefore, it shares the same signature and provides a previous state.",
+        table: {
+          type: {
+            summary: "MouseEventHandler",
+          },
+        },
+      },
+      appBackgroundColor: {
+        control: "color",
+        description:
+          "Custom color for app content background. Should only be used as a stop-gap to allow support for dark mode.",
+        table: {
+          type: {
+            summary: "hex color code",
+          },
+        },
+      },
+      sideNavBackgroundColor: {
+        control: "color",
+        description: "Custom color for side nav background",
+        table: {
+          type: {
+            summary: "hex color code",
+          },
+        },
+      },
+      topNavBackgroundColor: {
+        control: "color",
+        description:
+          "Custom color for top nav background. Should only be used as a stop-gap to allow support for dark mode.",
+        table: {
+          type: {
+            summary: "hex color code",
+          },
         },
       },
     },
-    onSubscriptionCreated: {
-      description:
-        "Notifies when subscribed to prop changes. UI Shell listens to prop updates, and it won't subscribe synchronously. Because of that, this callback notifies when that subscription is ready.",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
+    args: {
+      appComponent: <div />,
+      onSubscriptionCreated: fn(),
+      subscribeToPropChanges: () => fn(),
     },
-    optionalComponents: {
-      description:
-        "Components that will render as children of various other components such as the top nav or side nav.",
-      table: {
-        type: {
-          summary: "ReactElement",
-        },
-      },
+    decorators: [MuiThemeDecorator],
+    parameters: {
+      layout: "fullscreen",
     },
-    subscribeToPropChanges: {
-      description:
-        "This is a callback that provides a subscriber callback to listen for changes to state. It allows UI Shell to listen for state changes. The props coming in this callback go directly to a React state; therefore, it shares the same signature and provides a previous state.",
-      table: {
-        type: {
-          summary: "MouseEventHandler",
-        },
-      },
-    },
-    appBackgroundColor: {
-      control: "color",
-      description:
-        "Custom color for app content background. Should only be used as a stop-gap to allow support for dark mode.",
-      table: {
-        type: {
-          summary: "hex color code",
-        },
-      },
-    },
-    sideNavBackgroundColor: {
-      control: "color",
-      description: "Custom color for side nav background",
-      table: {
-        type: {
-          summary: "hex color code",
-        },
-      },
-    },
-    topNavBackgroundColor: {
-      control: "color",
-      description:
-        "Custom color for top nav background. Should only be used as a stop-gap to allow support for dark mode.",
-      table: {
-        type: {
-          summary: "hex color code",
-        },
-      },
-    },
-  },
-  args: {
-    appComponent: <div />,
-    onSubscriptionCreated: fn(),
-    subscribeToPropChanges: () => fn(),
-  },
-  decorators: [MuiThemeDecorator],
-  parameters: {
-    layout: "fullscreen",
-  },
-};
+  };
 
 export default storybookMeta;
 
