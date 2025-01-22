@@ -349,6 +349,7 @@ const SideNav = ({
   footerItems,
   hasCustomFooter,
   isCollapsible,
+  isCollapsed = false,
   isCompact,
   isLoading,
   logoProps,
@@ -357,7 +358,7 @@ const SideNav = ({
   onSort,
   sideNavItems,
 }: SideNavProps) => {
-  const [isSideNavCollapsed, setSideNavCollapsed] = useState(false);
+  const [isSideNavCollapsed, setSideNavCollapsed] = useState(isCollapsed);
   const [hasContentScrolled, setHasContentScrolled] = useState(false);
   const [isContentScrollable, setIsContentScrollable] = useState(false);
   const [sideNavItemsList, updateSideNavItemsList] = useState(sideNavItems);
@@ -376,6 +377,9 @@ const SideNav = ({
   // the very first value. Subsequent updates to the prop (sideNavItems) need to cause the state
   // to update!
   useEffect(() => updateSideNavItemsList(sideNavItems), [sideNavItems]);
+
+  // update sidenav collapse status
+  useEffect(() => setSideNavCollapsed(isCollapsed), [isCollapsed]);
 
   useEffect(() => {
     // This is called directly in this effect AND perhaps as a result of the ResizeObserver
