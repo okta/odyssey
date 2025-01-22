@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import styled, { CSSObject } from "@emotion/styled";
+import styled from "@emotion/styled";
 import {
   memo,
   useMemo,
@@ -22,7 +22,12 @@ import {
 } from "react";
 import { Skeleton } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { arrayMove } from "@dnd-kit/sortable";
+import { UniqueIdentifier } from "@dnd-kit/core";
+import { ErrorBoundary } from "react-error-boundary";
+import { Property } from "csstype";
 
+import { ContrastColors } from "../../createContrastColors";
 import { NavAccordion } from "./NavAccordion";
 import {
   DesignTokens,
@@ -40,9 +45,10 @@ import { SideNavItemContentContext } from "./SideNavItemContentContext";
 import { SideNavToggleButton } from "./SideNavToggleButton";
 import { SortableList } from "./SortableList/SortableList";
 import { Overline } from "../../Typography";
-import { arrayMove } from "@dnd-kit/sortable";
-import { UniqueIdentifier } from "@dnd-kit/core";
-import { ErrorBoundary } from "react-error-boundary";
+import {
+  UiShellColors,
+  useUiShellContext,
+} from "../../ui-shell/UiShellProvider";
 
 export const DEFAULT_SIDE_NAV_WIDTH = "300px";
 
@@ -97,70 +103,99 @@ const StyledOpacityTransitionContainer = styled("div", {
 
 const StyledSideNav = styled("nav", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "isSideNavCollapsed",
+    prop !== "backgroundColor" &&
+    prop !== "odysseyDesignTokens" &&
+    prop !== "isAppContentWhiteBackground" &&
+    prop !== "isSideNavCollapsed",
 })<{
-  odysseyDesignTokens: DesignTokens;
+  isAppContentWhiteBackground: boolean;
+  backgroundColor?: UiShellColors["sideNavBackgroundColor"];
   isSideNavCollapsed: boolean;
-}>(({ odysseyDesignTokens, isSideNavCollapsed }) => ({
-  position: "relative",
-  display: "inline-block",
-  height: "100%",
-  backgroundColor: odysseyDesignTokens.HueNeutralWhite,
-
-  "&::after": {
-    backgroundColor: odysseyDesignTokens.HueNeutral200,
-    content: "''",
+  odysseyDesignTokens: DesignTokens;
+}>(
+  ({
+    backgroundColor,
+    isAppContentWhiteBackground,
+    isSideNavCollapsed,
+    odysseyDesignTokens,
+  }) => ({
+    position: "relative",
+    display: "inline-block",
     height: "100%",
-    opacity: 0,
-    position: "absolute",
-    right: 0,
-    top: 0,
-    transform: `translateX(0)`,
-    transition: `opacity ${odysseyDesignTokens.TransitionDurationMain}, transform ${odysseyDesignTokens.TransitionDurationMain}`,
-    width: odysseyDesignTokens.Spacing2,
-    zIndex: 2,
-  },
+    backgroundColor: backgroundColor || odysseyDesignTokens.HueNeutralWhite,
 
-  "&:has([data-sidenav-toggle='true']:hover), &:has([data-sidenav-toggle='true']:focus-visible)":
-    {
-      ...(isSideNavCollapsed && {
-        "&::after": {
-          opacity: 1,
-          transform: `translateX(100%)`,
-        },
+    ...(isAppContentWhiteBackground && {
+      borderRightWidth: odysseyDesignTokens.BorderWidthMain,
+      borderRightStyle:
+        odysseyDesignTokens.BorderStyleMain as Property.BorderRightStyle,
+      borderRightColor: odysseyDesignTokens.HueNeutral100,
+    }),
 
-        "[data-sidenav-toggle='true']": {
-          transform: `translate3d(calc(100% + ${odysseyDesignTokens.Spacing3}), 0, 0)`,
-        },
-      }),
+    "&::after": {
+      backgroundColor: odysseyDesignTokens.HueNeutral200,
+      content: "''",
+      height: "100%",
+      opacity: 0,
+      position: "absolute",
+      right: 0,
+      top: 0,
+      transform: `translateX(0)`,
+      transition: `opacity ${odysseyDesignTokens.TransitionDurationMain}, transform ${odysseyDesignTokens.TransitionDurationMain}`,
+      width: odysseyDesignTokens.Spacing2,
+      zIndex: 2,
     },
 
-  "[data-sidenav-toggle='true']": {
-    position: "absolute",
-    top: SIDENAV_COLLAPSE_ICON_POSITION,
-    right: 0,
-    transition: `transform ${odysseyDesignTokens.TransitionDurationMain}`,
-    transform: `translate3d(100%, 0, 0)`,
-  },
-}));
+    "&:has([data-sidenav-toggle='true']:hover), &:has([data-sidenav-toggle='true']:focus-visible)":
+      {
+        ...(isSideNavCollapsed && {
+          "&::after": {
+            opacity: 1,
+            transform: `translateX(100%)`,
+          },
+
+          "[data-sidenav-toggle='true']": {
+            transform: `translate3d(calc(100% + ${odysseyDesignTokens.Spacing3}), 0, 0)`,
+          },
+        }),
+      },
+
+    "[data-sidenav-toggle='true']": {
+      position: "absolute",
+      top: SIDENAV_COLLAPSE_ICON_POSITION,
+      right: 0,
+      transition: `transform ${odysseyDesignTokens.TransitionDurationMain}`,
+      transform: `translate3d(100%, 0, 0)`,
+    },
+  }),
+);
 
 const SideNavHeaderContainer = styled("div", {
   shouldForwardProp: (prop) =>
-    prop !== "hasContentScrolled" && prop !== "odysseyDesignTokens",
+    prop !== "borderColor" &&
+    prop !== "hasContentScrolled" &&
+    prop !== "odysseyDesignTokens",
 })(
   ({
+    borderColor,
     hasContentScrolled,
     odysseyDesignTokens,
   }: {
+    borderColor: ContrastColors["fontColor"];
     hasContentScrolled: boolean;
     odysseyDesignTokens: DesignTokens;
   }) => ({
     flexShrink: 0,
     // The bottom border should appear only if the scrollable region has been scrolled
-    ...(hasContentScrolled &&
-      ({
-        borderBottom: `${odysseyDesignTokens.BorderWidthMain} ${odysseyDesignTokens.BorderStyleMain} ${odysseyDesignTokens.HueNeutral50}`,
-      } satisfies CSSObject)),
+    ...(hasContentScrolled && {
+      borderBottomWidth: odysseyDesignTokens.BorderWidthMain,
+      borderBottomStyle:
+        odysseyDesignTokens.BorderStyleMain as Property.BorderBottomStyle,
+      borderBottomColor: odysseyDesignTokens.HueNeutral100,
+
+      ...(borderColor && {
+        borderBottomColor: borderColor.concat("15"),
+      }),
+    }),
   }),
 );
 
@@ -182,21 +217,43 @@ const SideNavScrollableContainer = styled("div", {
 }));
 
 const SectionHeaderContainer = styled("li", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
-  paddingBlock: odysseyDesignTokens.Spacing1,
-  paddingInline: odysseyDesignTokens.Spacing4,
-  marginBlock: `${odysseyDesignTokens.Spacing3}`,
-  color: odysseyDesignTokens.HueNeutral600,
-}));
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "contrastFontColor",
+})(
+  ({
+    contrastFontColor,
+    odysseyDesignTokens,
+  }: {
+    contrastFontColor: ContrastColors["fontColor"];
+    odysseyDesignTokens: DesignTokens;
+  }) => ({
+    paddingBlock: odysseyDesignTokens.Spacing1,
+    paddingInline: odysseyDesignTokens.Spacing4,
+    marginBlock: `${odysseyDesignTokens.Spacing3}`,
+    color: contrastFontColor || odysseyDesignTokens.HueNeutral600,
+  }),
+);
 
 const SideNavFooter = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
-  flexShrink: 0,
-  padding: odysseyDesignTokens.Spacing4,
-  backgroundColor: odysseyDesignTokens.HueNeutralWhite,
-}));
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "sideNavBackgroundColor",
+})(
+  ({
+    odysseyDesignTokens,
+    sideNavBackgroundColor,
+  }: {
+    odysseyDesignTokens: DesignTokens;
+    sideNavBackgroundColor?: UiShellColors["sideNavBackgroundColor"];
+  }) => ({
+    flexShrink: 0,
+    padding: odysseyDesignTokens.Spacing4,
+    backgroundColor: odysseyDesignTokens.HueNeutralWhite,
+
+    ...(sideNavBackgroundColor && {
+      backgroundColor: sideNavBackgroundColor,
+    }),
+  }),
+);
 
 const PersistentSideNavFooter = styled(SideNavFooter, {
   shouldForwardProp: (prop) =>
@@ -221,8 +278,12 @@ const PersistentSideNavFooter = styled(SideNavFooter, {
 );
 
 const SideNavFooterItemsContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "sideNavContrastColors",
+})<{
+  odysseyDesignTokens: DesignTokens;
+  sideNavContrastColors: UiShellColors["sideNavContrastColors"];
+}>(({ odysseyDesignTokens, sideNavContrastColors }) => ({
   display: "flex",
   flexWrap: "wrap",
   alignItems: "center",
@@ -234,12 +295,24 @@ const SideNavFooterItemsContainer = styled("div", {
 
     "&:visited": {
       color: odysseyDesignTokens.HueNeutral600,
+
+      ...(sideNavContrastColors?.fontColor && {
+        color: sideNavContrastColors?.fontColor,
+      }),
     },
 
     "&:hover": {
       textDecoration: "none",
       color: odysseyDesignTokens.HueNeutral900,
+
+      ...(sideNavContrastColors?.fontColor && {
+        color: sideNavContrastColors?.fontColor,
+      }),
     },
+
+    ...(sideNavContrastColors?.fontColor && {
+      color: sideNavContrastColors?.fontColor,
+    }),
   },
 }));
 
@@ -287,12 +360,15 @@ const SideNav = ({
   const [isSideNavCollapsed, setSideNavCollapsed] = useState(false);
   const [hasContentScrolled, setHasContentScrolled] = useState(false);
   const [isContentScrollable, setIsContentScrollable] = useState(false);
+  const [sideNavItemsList, updateSideNavItemsList] = useState(sideNavItems);
+
+  const uiShellContext = useUiShellContext();
+  const odysseyDesignTokens: DesignTokens = useOdysseyDesignTokens();
+  const { t } = useTranslation();
+
   const scrollableContentRef = useRef<HTMLUListElement>(null);
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
   const intersectionObserverRef = useRef<IntersectionObserver | null>(null);
-  const odysseyDesignTokens: DesignTokens = useOdysseyDesignTokens();
-  const { t } = useTranslation();
-  const [sideNavItemsList, updateSideNavItemsList] = useState(sideNavItems);
 
   const blankElement = useMemo(() => <div />, []);
 
@@ -543,7 +619,12 @@ const SideNav = ({
   return (
     <StyledSideNav
       aria-label={t("navigation.label")}
+      backgroundColor={uiShellContext?.sideNavBackgroundColor}
       id="side-nav-expandable"
+      isAppContentWhiteBackground={
+        uiShellContext?.appBackgroundColor ===
+        odysseyDesignTokens.HueNeutralWhite
+      }
       isSideNavCollapsed={isSideNavCollapsed}
       odysseyDesignTokens={odysseyDesignTokens}
     >
@@ -566,8 +647,9 @@ const SideNav = ({
             odysseyDesignTokens={odysseyDesignTokens}
           >
             <SideNavHeaderContainer
-              odysseyDesignTokens={odysseyDesignTokens}
               hasContentScrolled={hasContentScrolled}
+              odysseyDesignTokens={odysseyDesignTokens}
+              borderColor={uiShellContext?.sideNavContrastColors?.fontColor}
             >
               <SideNavHeader
                 appName={appName}
@@ -601,6 +683,9 @@ const SideNav = ({
                         return (
                           <ErrorBoundary fallback={blankElement}>
                             <SectionHeaderContainer
+                              contrastFontColor={
+                                uiShellContext?.sideNavContrastColors?.fontColor
+                              }
                               id={id}
                               key={id}
                               odysseyDesignTokens={odysseyDesignTokens}
@@ -675,9 +760,17 @@ const SideNav = ({
                     })}
               </SideNavListContainer>
               {!isLoading && footerItems && !hasCustomFooter && (
-                <SideNavFooter odysseyDesignTokens={odysseyDesignTokens}>
+                <SideNavFooter
+                  odysseyDesignTokens={odysseyDesignTokens}
+                  sideNavBackgroundColor={
+                    uiShellContext?.sideNavBackgroundColor
+                  }
+                >
                   <SideNavFooterItemsContainer
                     odysseyDesignTokens={odysseyDesignTokens}
+                    sideNavContrastColors={
+                      uiShellContext?.sideNavContrastColors
+                    }
                   >
                     <SideNavFooterContent footerItems={footerItems} />
                   </SideNavFooterItemsContainer>

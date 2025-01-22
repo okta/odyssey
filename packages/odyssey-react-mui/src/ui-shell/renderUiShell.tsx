@@ -40,11 +40,14 @@ export const optionalComponentSlotNames: Record<
  * It also provides you with other elements fitted to slots in the web component. **In React, you can portal to these components.**
  */
 export const renderUiShell = ({
+  appBackgroundColor,
   appBackgroundContrastMode,
   appRootElement: explicitAppRootElement,
   hasStandardAppContentPadding,
   initialVisibleSections,
   onError = console.error,
+  sideNavBackgroundColor,
+  topNavBackgroundColor,
   uiShellRootElement,
 }: {
   /**
@@ -61,9 +64,12 @@ export const renderUiShell = ({
   uiShellRootElement: HTMLElement;
 } & Pick<
   UiShellProps,
+  | "appBackgroundColor"
   | "appBackgroundContrastMode"
   | "hasStandardAppContentPadding"
   | "initialVisibleSections"
+  | "sideNavBackgroundColor"
+  | "topNavBackgroundColor"
 >) => {
   const appRootElement =
     explicitAppRootElement || document.createElement("div");
@@ -108,6 +114,7 @@ export const renderUiShell = ({
     getReactComponent: (reactRootElements) => (
       <ErrorBoundary fallback={appComponent} onError={onError}>
         <UiShell
+          appBackgroundColor={appBackgroundColor}
           appBackgroundContrastMode={appBackgroundContrastMode}
           appComponent={appComponent}
           appRootElement={reactRootElements.appRootElement}
@@ -124,8 +131,10 @@ export const renderUiShell = ({
               ],
             ),
           )}
+          sideNavBackgroundColor={sideNavBackgroundColor}
           stylesRootElement={reactRootElements.stylesRootElement}
           subscribeToPropChanges={subscribeToPropChanges}
+          topNavBackgroundColor={topNavBackgroundColor}
         />
       </ErrorBoundary>
     ),
