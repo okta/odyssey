@@ -5552,7 +5552,7 @@ __metadata:
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
     storybook: "npm:^8.4.7"
-    storybook-addon-rtl-direction: "npm:^0.0.19"
+    storybook-addon-rtl: "npm:^1.0.1"
     typescript: "npm:^5.6.3"
     vite: "npm:^6.0.7"
     wait-on: "npm:^7.2.0"
@@ -6218,6 +6218,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/csf@npm:0.1.12":
+  version: 0.1.12
+  resolution: "@storybook/csf@npm:0.1.12"
+  dependencies:
+    type-fest: "npm:^2.19.0"
+  checksum: 10/f661709de5bd68bfd4ced67df31ef26341168d6679bc13564cb024cfdbc8fdfa94d384267c20b3c858a3058b1ee8dbd71cea169245fcf7b28298890d6c3e1da4
+  languageName: node
+  linkType: hard
+
 "@storybook/csf@npm:^0.1.11":
   version: 0.1.11
   resolution: "@storybook/csf@npm:0.1.11"
@@ -6253,6 +6262,18 @@ __metadata:
   peerDependencies:
     storybook: ^8.4.7
   checksum: 10/8142789e7dd32f881cf9de551078fb3574cc54b47bb8fd2c8b66ea1fb100f14af702f4cbd4bc11a8d1dd4c89f5d0ce7574d2e232b197c43bbebd0a30c06c7e75
+  languageName: node
+  linkType: hard
+
+"@storybook/instrumenter@npm:8.5.0":
+  version: 8.5.0
+  resolution: "@storybook/instrumenter@npm:8.5.0"
+  dependencies:
+    "@storybook/global": "npm:^5.0.0"
+    "@vitest/utils": "npm:^2.1.1"
+  peerDependencies:
+    storybook: ^8.5.0
+  checksum: 10/e826f450f1eb9b10be6ca05b8a8abd661f65126fdf0e49fb662e027018cccb4205bc9bbd8957a136307eeafea273642e24b0ff8d2e585f3e2ff00628f16c6e78
   languageName: node
   linkType: hard
 
@@ -6378,6 +6399,24 @@ __metadata:
   peerDependencies:
     storybook: ^8.4.7
   checksum: 10/e6e8c2b5b63337e297362716a9de81818f8d94107cc1eea6c1aef75d0ad93d417d277fa90068ee1960acba98ea2658660514148d106a547419c9088c20905f02
+  languageName: node
+  linkType: hard
+
+"@storybook/test@npm:^8.0.6":
+  version: 8.5.0
+  resolution: "@storybook/test@npm:8.5.0"
+  dependencies:
+    "@storybook/csf": "npm:0.1.12"
+    "@storybook/global": "npm:^5.0.0"
+    "@storybook/instrumenter": "npm:8.5.0"
+    "@testing-library/dom": "npm:10.4.0"
+    "@testing-library/jest-dom": "npm:6.5.0"
+    "@testing-library/user-event": "npm:14.5.2"
+    "@vitest/expect": "npm:2.0.5"
+    "@vitest/spy": "npm:2.0.5"
+  peerDependencies:
+    storybook: ^8.5.0
+  checksum: 10/14fd4f8b83efd4b545afcef0f63e2c82c86c015d7cac4fa0c3b5e1ae6e474816ad238ae0a4f7ad5ee1c352d215d23e93f2e7db794bdf6c1b031f63ac07edec07
   languageName: node
   linkType: hard
 
@@ -20852,23 +20891,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"storybook-addon-rtl-direction@npm:^0.0.19":
-  version: 0.0.19
-  resolution: "storybook-addon-rtl-direction@npm:0.0.19"
-  peerDependencies:
-    "@storybook/addons": ^6.5.8
-    "@storybook/api": ^6.5.8
-    "@storybook/components": ^6.5.8
-    "@storybook/core-events": ^6.5.8
-    "@storybook/theming": ^6.5.8
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  peerDependenciesMeta:
-    react:
-      optional: true
-    react-dom:
-      optional: true
-  checksum: 10/5191a0f6437759b00e84c4f0a0e80a7a2c0ffd8fb93bf5426e6cf491472b3821b67ac7f7de139c316c0c8537fdf5e1fe7236af953799612503cc1c091610cc0d
+"storybook-addon-rtl@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "storybook-addon-rtl@npm:1.0.1"
+  dependencies:
+    "@storybook/test": "npm:^8.0.6"
+  checksum: 10/5dd8033faa6cfb5af8246bd2264cefeccf43343ed74a11ab68184b49b136564e7d691baf92ce0b1529652448717009053c6e8056689000795a1d4d704a7a214c
   languageName: node
   linkType: hard
 

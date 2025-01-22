@@ -17,6 +17,9 @@ export {
 } from "./BaseButton";
 export * from "./Button";
 export * from "./ButtonContext";
-export { menuAlignmentValues } from "./BaseMenuButton";
+export {
+  menuAlignmentValues,
+  verticalDividerAlignmentValues,
+} from "./BaseMenuButton";
 export * from "./MenuButton";
 export * from "./MenuItem";
