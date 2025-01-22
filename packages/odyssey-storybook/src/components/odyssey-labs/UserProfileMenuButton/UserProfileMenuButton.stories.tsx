@@ -17,6 +17,7 @@ import {
   menuAlignmentValues,
   Subordinate,
   useOdysseyDesignTokens,
+  verticalDividerAlignmentValues,
 } from "@okta/odyssey-react-mui";
 import {
   UserProfileMenuButton,
@@ -46,6 +47,12 @@ const storybookMeta: Meta<UserProfileMenuButtonProps> = {
   title: "Labs Components/UserProfileMenuButton",
   component: UserProfileMenuButton,
   argTypes: {
+    hasVerticalDivider: {
+      control: { type: "boolean" },
+      description:
+        "Add a vertical rule to divide the button from surrounding content",
+      table: { type: { summary: "boolean" } },
+    },
     profileIcon: {
       control: { type: "select" },
       options: Object.keys(icons),
@@ -97,6 +104,19 @@ const storybookMeta: Meta<UserProfileMenuButtonProps> = {
         value: "[ReactNode]",
       },
     },
+    verticalDividerAlignment: {
+      options: verticalDividerAlignmentValues,
+      control: { type: "radio" },
+      description: "Show vertical rule before or after the button",
+      table: {
+        type: {
+          summary: verticalDividerAlignmentValues.join(" | "),
+        },
+        defaultValue: {
+          summary: "start",
+        },
+      },
+    },
   },
   args: {
     userName: "test.user@test.com",
@@ -145,5 +165,11 @@ export const WithRightPopoverAlignment: StoryObj<UserProfileMenuButtonProps> = {
 export const WithoutProfileIcon: StoryObj<UserProfileMenuButtonProps> = {
   args: {
     profileIcon: undefined,
+  },
+};
+
+export const WithVerticalDivider: StoryObj<UserProfileMenuButtonProps> = {
+  args: {
+    hasVerticalDivider: true,
   },
 };

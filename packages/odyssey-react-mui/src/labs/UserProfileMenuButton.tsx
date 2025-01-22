@@ -11,13 +11,31 @@
  */
 
 import { memo } from "react";
-import { UserProfile, UserProfileProps } from "./UserProfile";
+import styled from "@emotion/styled";
+
 import { ChevronDownIcon } from "../icons.generated";
 import {
   AdditionalBaseMenuButtonProps,
   BaseMenuButton,
   BaseMenuButtonProps,
 } from "../Buttons/BaseMenuButton";
+import {
+  DesignTokens,
+  useOdysseyDesignTokens,
+} from "../OdysseyDesignTokensContext";
+import { UserProfile, UserProfileProps } from "./UserProfile";
+
+const StyledUnsetButtonHeightContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  button: {
+    height: "unset",
+    paddingBlock: odysseyDesignTokens.Spacing2,
+    textAlign: "unset",
+  },
+}));
 
 export type UserProfileMenuButtonProps = Omit<
   BaseMenuButtonProps,
@@ -34,27 +52,31 @@ export type UserProfileMenuButtonProps = Omit<
 
 const UserProfileMenuButton = ({
   profileIcon,
-  userName,
   orgName,
   translate,
   userNameEndIcon,
+  userName,
   ...menuButtonProps
 }: UserProfileMenuButtonProps) => {
+  const odysseyDesignTokens = useOdysseyDesignTokens();
+
   return (
-    <BaseMenuButton
-      {...menuButtonProps}
-      buttonVariant="floating"
-      omitEndIcon={true}
-      buttonChildren={
-        <UserProfile
-          profileIcon={profileIcon}
-          userName={userName}
-          orgName={orgName}
-          translate={translate}
-          userNameEndIcon={userNameEndIcon ?? <ChevronDownIcon />}
-        />
-      }
-    />
+    <StyledUnsetButtonHeightContainer odysseyDesignTokens={odysseyDesignTokens}>
+      <BaseMenuButton
+        {...menuButtonProps}
+        buttonVariant="floating"
+        omitEndIcon={true}
+        buttonChildren={
+          <UserProfile
+            profileIcon={profileIcon}
+            userName={userName}
+            orgName={orgName}
+            translate={translate}
+            userNameEndIcon={userNameEndIcon ?? <ChevronDownIcon />}
+          />
+        }
+      />
+    </StyledUnsetButtonHeightContainer>
   );
 };
 

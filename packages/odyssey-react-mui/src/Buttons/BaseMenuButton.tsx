@@ -23,6 +23,7 @@ import {
   Popover as MuiPopover,
   PopoverOrigin,
 } from "@mui/material";
+import styled from "@emotion/styled";
 
 import { Box } from "../Box";
 import {
@@ -35,10 +36,65 @@ import type { HtmlProps } from "../HtmlProps";
 import { ChevronDownIcon, MoreIcon } from "../icons.generated";
 import { MenuContext, MenuContextType } from "./MenuContext";
 import { NullElement } from "../NullElement";
-import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext";
+import {
+  useOdysseyDesignTokens,
+  DesignTokens,
+} from "../OdysseyDesignTokensContext";
 import { useUniqueId } from "../useUniqueId";
 
 export const menuAlignmentValues = ["left", "right"] as const;
+export const verticalDividerAlignmentValues = ["start", "end"] as const;
+
+const StyledMenuButtonContainer = styled("div", {
+  shouldForwardProp: (prop) =>
+    prop !== "hasVerticalDivider" &&
+    prop !== "odysseyDesignTokens" &&
+    prop !== "verticalDividerAlignment",
+})<{
+  hasVerticalDivider: BaseMenuButtonProps["hasVerticalDivider"];
+  odysseyDesignTokens: DesignTokens;
+  verticalDividerAlignment: BaseMenuButtonProps["verticalDividerAlignment"];
+}>(({ hasVerticalDivider, odysseyDesignTokens, verticalDividerAlignment }) => ({
+  position: "relative",
+
+  ...(hasVerticalDivider && {
+    display: "inline-block",
+
+    "&:before": {
+      position: "absolute",
+      top: "50%",
+      left: 0,
+      width: 1,
+      height: odysseyDesignTokens.Spacing6,
+      backgroundColor: odysseyDesignTokens.HueNeutral300,
+      content: '""',
+      transform: "translate3d(0, -50%, 0)",
+      transition: `opacity 200ms`,
+
+      ...(verticalDividerAlignment === "end" && {
+        left: "unset",
+        right: 0,
+      }),
+    },
+
+    ":has(> button:hover)": {
+      "&:before": {
+        opacity: 0,
+      },
+    },
+
+    ":dir(rtl)": {
+      "&:before": {
+        left: "unset",
+        right: 0,
+        ...(verticalDividerAlignment === "end" && {
+          right: "unset",
+          left: 0,
+        }),
+      },
+    },
+  }),
+}));
 
 export type BaseMenuButtonProps = {
   /**
@@ -57,6 +113,10 @@ export type BaseMenuButtonProps = {
    * The end Icon on the trigggering Button
    */
   endIcon?: ReactElement;
+  /**
+   * Add a vertical rule to divide the button from surrounding content
+   */
+  hasVerticalDivider?: boolean;
   /**
    * Whether to omit the endIcon if not set (rather than use a default value for it based on overflow)
    */
@@ -86,6 +146,11 @@ export type BaseMenuButtonProps = {
    * The tooltip text for the Button if it's icon-only
    */
   tooltipText?: string;
+
+  /**
+   * Show vertical rule before or after the button
+   */
+  verticalDividerAlignment?: (typeof verticalDividerAlignmentValues)[number];
 };
 
 // These are split and exported separately from the above because wrappers of this (e.g. MenuButton) will
@@ -139,17 +204,19 @@ const BaseMenuButton = ({
   buttonVariant = "secondary",
   children,
   popoverContent,
-  shouldCloseOnSelect = true,
   endIcon: endIconProp,
+  hasVerticalDivider = false,
   id: idOverride,
   isDisabled,
   isOverflow,
   menuAlignment = "left",
   omitEndIcon = false,
+  shouldCloseOnSelect = true,
   size,
   testId,
   tooltipText,
   translate,
+  verticalDividerAlignment = "start",
 }: BaseMenuButtonProps & AdditionalBaseMenuButtonProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -207,7 +274,11 @@ const BaseMenuButton = ({
   );
 
   return (
-    <div>
+    <StyledMenuButtonContainer
+      hasVerticalDivider={hasVerticalDivider}
+      odysseyDesignTokens={odysseyDesignTokens}
+      verticalDividerAlignment={verticalDividerAlignment}
+    >
       <BaseButton
         ariaControls={isOpen ? `${uniqueId}-menu` : undefined}
         ariaExpanded={isOpen ? "true" : undefined}
@@ -261,7 +332,7 @@ const BaseMenuButton = ({
           </Box>
         </MuiPopover>
       )}
-    </div>
+    </StyledMenuButtonContainer>
   );
 };
 
