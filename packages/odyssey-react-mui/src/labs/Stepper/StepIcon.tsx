@@ -112,7 +112,7 @@ export const StepIcon = ({
     odysseyDesignTokens={odysseyDesignTokens}
     variant={variant}
   >
-    {completed && variant === "numeric" ? (
+    {completed ? (
       <CheckIcon />
     ) : variant === "numeric" ? (
       <StyledStepNumber
