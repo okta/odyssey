@@ -31,22 +31,32 @@ const StyledAppContainer = styled("div", {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" &&
     prop !== "appBackgroundColor" &&
-    prop !== "hasStandardAppContentPadding",
+    prop !== "hasStandardAppContentPadding" &&
+    prop !== "scrollableContentElement",
 })<{
   appBackgroundColor?: UiShellColors["appBackgroundColor"];
   hasStandardAppContentPadding: UiShellContentProps["hasStandardAppContentPadding"];
   odysseyDesignTokens: DesignTokens;
+  scrollableContentElement?: HTMLDivElement;
 }>(
   ({
     appBackgroundColor,
     hasStandardAppContentPadding,
     odysseyDesignTokens,
+    scrollableContentElement,
   }) => ({
     gridArea: "app-content",
-    overflowX: "hidden",
-    overflowY: "auto",
     backgroundColor: appBackgroundColor,
-
+    ...(scrollableContentElement
+      ? {
+          width: "100%",
+          height: "100%",
+          overflow: "hidden",
+        }
+      : {
+          overflowX: "hidden",
+          overflowY: "auto",
+        }),
     ...(hasStandardAppContentPadding && {
       paddingBlock: odysseyDesignTokens.Spacing5,
       paddingInline: odysseyDesignTokens.Spacing8,
@@ -108,6 +118,12 @@ export type UiShellNavComponentProps = {
     TopNavProps,
     "leftSideComponent" | "rightSideComponent"
   > | null;
+  /**
+   * If the consumer has an element that should be the scroll container for the content area, they should pass it here.
+   * They will set e.g. height: 100%; overflow-y: scroll; or whatnot on their own. We use this element to monitor scroll
+   * state and apply the bottom border to TopNav
+   */
+  scrollableContentElement?: HTMLDivElement;
 };
 
 export type UiShellContentProps = {
@@ -163,9 +179,12 @@ const UiShellContent = ({
   appSwitcherProps,
   sideNavProps,
   topNavProps,
+  scrollableContentElement,
 }: UiShellContentProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
-  const { isContentScrolled, scrollableContentRef } = useScrollState();
+  const { isContentScrolled, scrollableContentRef } = useScrollState(
+    scrollableContentElement,
+  );
   const uiShellContext = useUiShellContext();
 
   return (
@@ -255,8 +274,10 @@ const UiShellContent = ({
         appBackgroundColor={uiShellContext?.appBackgroundColor}
         hasStandardAppContentPadding={hasStandardAppContentPadding}
         odysseyDesignTokens={odysseyDesignTokens}
-        ref={scrollableContentRef}
         tabIndex={0}
+        {...(!scrollableContentElement
+          ? { ref: scrollableContentRef }
+          : { scrollableContentElement })}
       >
         {appComponent}
       </StyledAppContainer>

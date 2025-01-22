@@ -10,44 +10,47 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 export const useScrollState = <
   ScrollableContentElement extends HTMLElement = HTMLDivElement,
->() => {
+>(
+  scrollableContentElement?: ScrollableContentElement,
+) => {
   const [isContentScrolled, setIsContentScrolled] = useState(false);
 
   const scrollableContentRef = useRef<ScrollableContentElement>(null);
 
+  const scrollableElement = useMemo(
+    () => scrollableContentElement ?? scrollableContentRef.current,
+    [scrollableContentElement, scrollableContentRef.current],
+  );
+
   useEffect(() => {
-    if (scrollableContentRef.current) {
+    if (scrollableElement) {
       let requestedAnimationFrameId: number;
-      const scrollableContentElement = scrollableContentRef.current;
 
       const updateScrollState = () => {
         cancelAnimationFrame(requestedAnimationFrameId);
 
         requestedAnimationFrameId = requestAnimationFrame(() => {
-          setIsContentScrolled(scrollableContentElement.scrollTop > 0);
+          setIsContentScrolled(scrollableElement.scrollTop > 0);
         });
       };
 
-      scrollableContentElement.addEventListener("scroll", updateScrollState);
+      scrollableElement.addEventListener("scroll", updateScrollState);
 
       updateScrollState();
 
       return () => {
-        scrollableContentElement.removeEventListener(
-          "scroll",
-          updateScrollState,
-        );
+        scrollableElement.removeEventListener("scroll", updateScrollState);
 
         cancelAnimationFrame(requestedAnimationFrameId);
       };
     }
 
     return () => {};
-  }, []);
+  }, [scrollableElement]);
 
   return {
     isContentScrolled,
