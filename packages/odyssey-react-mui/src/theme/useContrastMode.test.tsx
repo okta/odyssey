@@ -14,12 +14,12 @@ import * as Tokens from "@okta/odyssey-design-tokens";
 import { act, render, renderHook, waitFor } from "@testing-library/react";
 import { MockInstance } from "vitest";
 
+import { hexToRgb } from "../hexToRgb";
 import {
   ContrastModeContext,
   defaultParentBackgroundColor,
   getBackgroundColor,
   getElementComputedBackgroundColor,
-  hexToRgb,
   hueNeutral50Rgb,
   isTransparentColor,
   normalizeBackgroundColor,
@@ -377,19 +377,21 @@ describe("useContrastMode and related functions", () => {
   describe("Color utility functions", () => {
     describe("hexToRgb", () => {
       it("converts black hex to rgb", () => {
-        expect(hexToRgb("#000000")).toBe("rgb(0, 0, 0)");
+        expect(hexToRgb("#000000").asFormattedString).toBe("rgb(0, 0, 0)");
       });
 
       it("converts white hex to rgb", () => {
-        expect(hexToRgb("#ffffff")).toBe("rgb(255, 255, 255)");
+        expect(hexToRgb("#ffffff").asFormattedString).toBe(
+          "rgb(255, 255, 255)",
+        );
       });
 
       it("converts mixed color hex to rgb", () => {
-        expect(hexToRgb("#ff0088")).toBe("rgb(255, 0, 136)");
+        expect(hexToRgb("#ff0088").asFormattedString).toBe("rgb(255, 0, 136)");
       });
 
       it("correctly converts HueNeutral50 token to rgb", () => {
-        const result = hexToRgb(Tokens.HueNeutral50);
+        const result = hexToRgb(Tokens.HueNeutral50).asFormattedString;
         expect(result).toBe(hueNeutral50Rgb);
       });
     });

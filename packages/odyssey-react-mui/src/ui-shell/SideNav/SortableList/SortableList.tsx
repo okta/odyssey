@@ -10,6 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import React, { useMemo, useState } from "react";
+import type { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import {
   Active,
   Announcements,
@@ -24,12 +28,9 @@ import {
   SortableContext,
   sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
-import React, { useMemo, useState } from "react";
-import type { ReactNode } from "react";
 
 import { SortableItem } from "./SortableItem";
 import { SortableOverlay } from "./SortableOverlay";
-import { useTranslation } from "react-i18next";
 
 export interface BaseItem {
   id: UniqueIdentifier;
@@ -58,6 +59,7 @@ export const SortableList = <T extends BaseItem>({
   renderItem,
 }: ListProps<T>) => {
   const [active, setActive] = useState<Active | null>(null);
+
   const activeItem = useMemo(
     () => items.find((item) => item.id === active?.id),
     [active, items],

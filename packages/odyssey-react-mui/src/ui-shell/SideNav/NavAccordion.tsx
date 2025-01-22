@@ -27,6 +27,26 @@ import {
 } from "../../OdysseyDesignTokensContext";
 import { Support } from "../../Typography";
 import { useUniqueId } from "../../useUniqueId";
+import {
+  UiShellColors,
+  useUiShellContext,
+} from "../../ui-shell/UiShellProvider";
+import { ContrastColors } from "../../createContrastColors";
+
+const SideNavAccordionContainer = styled("div", {
+  shouldForwardProp: (prop) =>
+    prop !== "backgroundColor" && prop !== "fontColor",
+})<{
+  backgroundColor?: UiShellColors["sideNavBackgroundColor"];
+  fontColor?: ContrastColors["fontColor"];
+}>(({ backgroundColor, fontColor }) => ({
+  width: "100%",
+
+  ".MuiAccordion-root": {
+    backgroundColor: backgroundColor,
+    color: fontColor || "inherit",
+  },
+}));
 
 export type NavAccordionProps = {
   /**
@@ -66,46 +86,94 @@ export type NavAccordionProps = {
 
 const AccordionLabelContainer = styled("span", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "isIconVisible",
+    prop !== "odysseyDesignTokens" &&
+    prop !== "isIconVisible" &&
+    prop !== "sideNavContrastColors",
 })<{
-  odysseyDesignTokens: DesignTokens;
+  sideNavContrastColors?: UiShellColors["sideNavContrastColors"];
   isIconVisible: boolean;
-}>(({ odysseyDesignTokens, isIconVisible }) => ({
+  odysseyDesignTokens: DesignTokens;
+}>(({ sideNavContrastColors, odysseyDesignTokens, isIconVisible }) => ({
   width: "100%",
   marginInlineStart: isIconVisible ? odysseyDesignTokens.Spacing3 : 0,
   fontWeight: odysseyDesignTokens.TypographyWeightHeading,
-  color: odysseyDesignTokens.TypographyColorHeading,
+  color:
+    sideNavContrastColors?.fontColor ||
+    odysseyDesignTokens.TypographyColorHeading,
+
+  ".Mui-disabled &": {
+    color: odysseyDesignTokens.TypographyColorDisabled,
+
+    ...(sideNavContrastColors?.itemDisabledFontColor && {
+      color: sideNavContrastColors?.itemDisabledFontColor,
+    }),
+  },
 }));
 
 const AccordionSummaryContainer = styled(MuiAccordionSummary, {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" &&
     prop !== "isCompact" &&
-    prop !== "isDisabled",
+    prop !== "isDisabled" &&
+    prop !== "sideNavContrastColors",
 })<{
-  odysseyDesignTokens: DesignTokens;
+  sideNavContrastColors?: UiShellColors["sideNavContrastColors"];
   isCompact?: boolean;
   isDisabled?: boolean;
-}>(({ odysseyDesignTokens, isCompact, isDisabled }) => ({
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens, sideNavContrastColors, isCompact, isDisabled }) => ({
   borderRadius: odysseyDesignTokens.BorderRadiusMain,
   paddingBlock: odysseyDesignTokens.Spacing3,
   paddingInline: odysseyDesignTokens.Spacing4,
 
-  "&:focus-visible": {
-    backgroundColor: "unset",
-    outline: "none",
-    boxShadow: `inset 0 0 0 2px ${odysseyDesignTokens.PalettePrimaryMain}`,
-  },
+  ...(isDisabled && {
+    opacity: "1 !important",
 
-  ...(isCompact && {
-    paddingBlock: odysseyDesignTokens.Spacing2,
-    minHeight: "unset",
+    ...(sideNavContrastColors?.itemDisabledFontColor && {
+      svg: {
+        path: {
+          fill: `${sideNavContrastColors.itemDisabledFontColor} !important`,
+        },
+      },
+    }),
   }),
 
   ...(!isDisabled && {
     "&:hover": {
       backgroundColor: odysseyDesignTokens.HueNeutral50,
     },
+  }),
+
+  ...(!isDisabled &&
+    sideNavContrastColors?.fontColor && {
+      svg: {
+        path: {
+          fill: `${sideNavContrastColors.fontColor} !important`,
+        },
+      },
+    }),
+
+  ...(sideNavContrastColors?.itemHoverBackgroundColor && {
+    ...(!isDisabled && {
+      "&:hover": {
+        backgroundColor: sideNavContrastColors.itemHoverBackgroundColor,
+      },
+    }),
+  }),
+
+  "&:focus-visible": {
+    backgroundColor: "unset",
+    outline: "none",
+    boxShadow: `inset 0 0 0 2px ${odysseyDesignTokens.PalettePrimaryMain}`,
+
+    ...(sideNavContrastColors?.focusRingColor && {
+      boxShadow: `inset 0 0 0 2px ${sideNavContrastColors.focusRingColor}`,
+    }),
+  },
+
+  ...(isCompact && {
+    paddingBlock: odysseyDesignTokens.Spacing2,
+    minHeight: "unset",
   }),
 }));
 
@@ -124,41 +192,48 @@ const NavAccordion = ({
   const headerId = `${id}-header`;
   const contentId = `${id}-content`;
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const uiShellContext = useUiShellContext();
 
   return (
-    <MuiAccordion
-      defaultExpanded={isDefaultExpanded}
-      disabled={isDisabled}
-      disableGutters
-      expanded={isExpanded}
-      className="nav-accordion"
+    <SideNavAccordionContainer
+      backgroundColor={uiShellContext?.sideNavBackgroundColor}
     >
-      <AccordionSummaryContainer
-        className="nav-accordion-summary"
-        aria-controls={contentId}
-        expandIcon={<ChevronDownIcon />}
-        id={headerId}
-        odysseyDesignTokens={odysseyDesignTokens}
-        isCompact={isCompact}
-        isDisabled={isDisabled}
+      <MuiAccordion
+        defaultExpanded={isDefaultExpanded}
+        disabled={isDisabled}
+        disableGutters
+        expanded={isExpanded}
+        className="nav-accordion"
       >
-        <Support component="div" translate={translate}>
-          {startIcon && startIcon}
-          <AccordionLabelContainer
-            odysseyDesignTokens={odysseyDesignTokens}
-            isIconVisible={Boolean(startIcon)}
-          >
-            {label}
-          </AccordionLabelContainer>
-        </Support>
-      </AccordionSummaryContainer>
-      <MuiAccordionDetails
-        className="nav-accordion-details"
-        aria-labelledby={headerId}
-      >
-        {children}
-      </MuiAccordionDetails>
-    </MuiAccordion>
+        <AccordionSummaryContainer
+          aria-controls={contentId}
+          className="nav-accordion-summary"
+          expandIcon={<ChevronDownIcon />}
+          sideNavContrastColors={uiShellContext?.sideNavContrastColors}
+          id={headerId}
+          isCompact={isCompact}
+          isDisabled={isDisabled}
+          odysseyDesignTokens={odysseyDesignTokens}
+        >
+          <Support component="div" translate={translate}>
+            {startIcon && startIcon}
+            <AccordionLabelContainer
+              sideNavContrastColors={uiShellContext?.sideNavContrastColors}
+              isIconVisible={Boolean(startIcon)}
+              odysseyDesignTokens={odysseyDesignTokens}
+            >
+              {label}
+            </AccordionLabelContainer>
+          </Support>
+        </AccordionSummaryContainer>
+        <MuiAccordionDetails
+          className="nav-accordion-details"
+          aria-labelledby={headerId}
+        >
+          {children}
+        </MuiAccordionDetails>
+      </MuiAccordion>
+    </SideNavAccordionContainer>
   );
 };
 

@@ -32,15 +32,23 @@ import {
   useSideNavItemContent,
 } from "./SideNavItemContentContext";
 import { ExternalLinkIcon } from "../../icons.generated";
+import {
+  UiShellColors,
+  useUiShellContext,
+} from "../../ui-shell/UiShellProvider";
 
 export const StyledSideNavListItem = styled("li", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "isSelected",
+    prop !== "isSelected" &&
+    prop !== "odysseyDesignTokens" &&
+    prop !== "sideNavContrastColors",
 })<{
+  sideNavContrastColors?: UiShellColors["sideNavContrastColors"];
   odysseyDesignTokens: DesignTokens;
   isSelected?: boolean;
+  itemSelectedBackgroundColor?: string;
   disabled?: boolean;
-}>(({ odysseyDesignTokens, isSelected }) => ({
+}>(({ isSelected, odysseyDesignTokens, sideNavContrastColors }) => ({
   display: "flex",
   alignItems: "center",
   backgroundColor: "unset",
@@ -48,8 +56,12 @@ export const StyledSideNavListItem = styled("li", {
   transition: `backgroundColor ${odysseyDesignTokens.TransitionDurationMain}, color ${odysseyDesignTokens.TransitionDurationMain}`,
 
   ...(isSelected && {
-    color: `${odysseyDesignTokens.TypographyColorAction} !important`,
-    backgroundColor: odysseyDesignTokens.HueBlue50,
+    color: sideNavContrastColors?.fontColor
+      ? `${sideNavContrastColors.fontColor}`
+      : `${odysseyDesignTokens.TypographyColorAction}`,
+    backgroundColor:
+      sideNavContrastColors?.itemSelectedBackgroundColor ||
+      odysseyDesignTokens.HueBlue50,
   }),
 }));
 
@@ -68,19 +80,24 @@ type ScrollIntoViewHandle = {
 };
 
 export const getBaseNavItemContentStyles = ({
-  odysseyDesignTokens,
   isDisabled,
   isSelected,
+  odysseyDesignTokens,
+  sideNavContrastColors,
 }: {
-  odysseyDesignTokens: DesignTokens;
-  isDisabled?: boolean;
   isSelected?: boolean;
+  isDisabled?: boolean;
+  odysseyDesignTokens: DesignTokens;
+  sideNavContrastColors: UiShellColors["sideNavContrastColors"];
 }) => ({
   display: "flex",
   alignItems: "center",
   width: "100%",
   textDecoration: "none",
-  color: `${odysseyDesignTokens.TypographyColorHeading} !important`,
+  // !important needed here to override more specific base link styling
+  color: sideNavContrastColors?.fontColor
+    ? `${sideNavContrastColors?.fontColor} !important`
+    : `${odysseyDesignTokens.TypographyColorHeading} !important`,
   minHeight: "unset",
   paddingBlock: odysseyDesignTokens.Spacing3,
   paddingInlineEnd: odysseyDesignTokens.Spacing4,
@@ -88,35 +105,46 @@ export const getBaseNavItemContentStyles = ({
   transition: `backgroundColor ${odysseyDesignTokens.TransitionDurationMain}, color ${odysseyDesignTokens.TransitionDurationMain}`,
   cursor: "pointer",
 
-  // `[data-sortable-container='true']:has(button:hover) &` - when the sortable item's drag handle is hovered we want to trigger the same hover behavior as if you were hovering the actual item
-  "&:hover, [data-sortable-container='true']:has(button:hover, button:focus, button:focus-visible) &":
-    {
-      textDecoration: "none",
-      backgroundColor: odysseyDesignTokens.HueNeutral50,
+  // When hover or focus of the drag handle, apply general hover styles
+  "&:hover, li:has(> button:hover, > button:focus, > button:focus-visible) &": {
+    textDecoration: "none",
+    backgroundColor:
+      sideNavContrastColors?.itemHoverBackgroundColor ||
+      odysseyDesignTokens.HueNeutral50,
 
-      ...(isSelected && {
-        backgroundColor: odysseyDesignTokens.HueBlue50,
-        color: odysseyDesignTokens.TypographyColorAction,
-      }),
+    ...(isSelected && {
+      backgroundColor:
+        sideNavContrastColors?.itemSelectedBackgroundColor ||
+        odysseyDesignTokens.HueBlue50,
+      color:
+        sideNavContrastColors?.fontColor ||
+        odysseyDesignTokens.TypographyColorAction,
+    }),
 
-      ...(isDisabled && {
-        backgroundColor: "unset",
-      }),
-    },
+    ...(isDisabled && {
+      backgroundColor: "unset",
+    }),
+  },
 
   ...(isSelected && {
-    color: `${odysseyDesignTokens.TypographyColorAction}`,
+    color: sideNavContrastColors?.fontColor
+      ? `${sideNavContrastColors?.fontColor} !important`
+      : `${odysseyDesignTokens.TypographyColorAction} !important`,
     fontWeight: odysseyDesignTokens.TypographyWeightBodyBold,
   }),
 
   ...(isDisabled && {
     cursor: "default",
     color: `${odysseyDesignTokens.TypographyColorDisabled} !important`,
+
+    ...(sideNavContrastColors?.itemDisabledFontColor && {
+      color: `${sideNavContrastColors?.itemDisabledFontColor} !important`,
+    }),
   }),
 
   "&:focus-visible": {
     outline: "none",
-    boxShadow: `inset 0 0 0 2px ${odysseyDesignTokens.PalettePrimaryMain}`,
+    boxShadow: `inset 0 0 0 2px ${sideNavContrastColors?.focusRingColor || odysseyDesignTokens.PalettePrimaryMain}`,
   },
 });
 
@@ -143,48 +171,70 @@ const NavItemContentContainer = styled("div", {
     prop !== "odysseyDesignTokens" &&
     prop != "contextValue" &&
     prop !== "isDisabled" &&
+    prop !== "sideNavContrastColors" &&
     prop !== "isSelected",
 })<{
   contextValue: SideNavItemContentContextValue;
   odysseyDesignTokens: DesignTokens;
+  sideNavContrastColors: UiShellColors["sideNavContrastColors"];
   isSelected?: boolean;
   isDisabled?: boolean;
-}>(({ contextValue, odysseyDesignTokens, isDisabled, isSelected }) => ({
-  ...getBaseNavItemContentStyles({
-    odysseyDesignTokens,
+}>(
+  ({
     isDisabled,
     isSelected,
-  }),
-
-  ...getNavItemContentStyles({
-    odysseyDesignTokens,
     contextValue,
+    odysseyDesignTokens,
+    sideNavContrastColors,
+  }) => ({
+    ...getBaseNavItemContentStyles({
+      isDisabled,
+      isSelected,
+      odysseyDesignTokens,
+      sideNavContrastColors,
+    }),
+
+    ...getNavItemContentStyles({
+      odysseyDesignTokens,
+      contextValue,
+    }),
   }),
-}));
+);
 
 const StyledNavItemLink = styled(NavItemLink, {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" &&
     prop != "contextValue" &&
     prop !== "isDisabled" &&
-    prop !== "isSelected",
+    prop !== "isSelected" &&
+    prop !== "odysseyDesignTokens" &&
+    prop !== "sideNavContrastColors",
 })<{
   contextValue: SideNavItemContentContextValue;
   odysseyDesignTokens: DesignTokens;
+  sideNavContrastColors: UiShellColors["sideNavContrastColors"];
   isSelected?: boolean;
   isDisabled?: boolean;
-}>(({ contextValue, odysseyDesignTokens, isDisabled, isSelected }) => ({
-  ...getBaseNavItemContentStyles({
-    odysseyDesignTokens,
+}>(
+  ({
     isDisabled,
     isSelected,
-  }),
-
-  ...getNavItemContentStyles({
-    odysseyDesignTokens,
     contextValue,
+    odysseyDesignTokens,
+    sideNavContrastColors,
+  }) => ({
+    ...getBaseNavItemContentStyles({
+      isDisabled,
+      isSelected,
+      odysseyDesignTokens,
+      sideNavContrastColors,
+    }),
+
+    ...getNavItemContentStyles({
+      odysseyDesignTokens,
+      contextValue,
+    }),
   }),
-}));
+);
 
 const SideNavItemContent = ({
   count,
@@ -222,11 +272,13 @@ const SideNavItemContent = ({
   scrollRef?: React.RefObject<ScrollIntoViewHandle>;
   onItemSelected?: (selectedItemId: string) => void;
 }) => {
+  const uiShellContext = useUiShellContext();
   const sidenavItemContentContext = useSideNavItemContent();
   const contextValue = useMemo(
     () => sidenavItemContentContext,
     [sidenavItemContentContext],
   );
+
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const localScrollRef = useRef<HTMLLIElement>(null);
@@ -263,23 +315,25 @@ const SideNavItemContent = ({
 
   return (
     <StyledSideNavListItem
-      ref={localScrollRef}
-      id={id}
-      key={id}
-      isSelected={isSelected}
-      disabled={isDisabled}
       aria-disabled={isDisabled}
       aria-current={isSelected ? "page" : undefined}
+      disabled={isDisabled}
+      id={id}
+      isSelected={isSelected}
+      key={id}
       odysseyDesignTokens={odysseyDesignTokens}
+      ref={localScrollRef}
+      sideNavContrastColors={uiShellContext?.sideNavContrastColors}
     >
       {
         // Use Link for nav items with links and div for disabled or non-link items
         isDisabled ? (
           <NavItemContentContainer
-            odysseyDesignTokens={odysseyDesignTokens}
             contextValue={contextValue}
             isDisabled={isDisabled}
             isSelected={isSelected}
+            odysseyDesignTokens={odysseyDesignTokens}
+            sideNavContrastColors={uiShellContext?.sideNavContrastColors}
           >
             <SideNavItemLinkContent
               count={count}
@@ -292,14 +346,15 @@ const SideNavItemContent = ({
           </NavItemContentContainer>
         ) : !href ? (
           <NavItemContentContainer
-            odysseyDesignTokens={odysseyDesignTokens}
             contextValue={contextValue}
             isDisabled={isDisabled}
-            tabIndex={0}
-            role="button"
+            isSelected={isSelected}
             onClick={itemClickHandler}
             onKeyDown={sideNavItemContentKeyHandler}
-            isSelected={isSelected}
+            odysseyDesignTokens={odysseyDesignTokens}
+            role="button"
+            sideNavContrastColors={uiShellContext?.sideNavContrastColors}
+            tabIndex={0}
           >
             <SideNavItemLinkContent
               count={count}
@@ -312,13 +367,14 @@ const SideNavItemContent = ({
           </NavItemContentContainer>
         ) : (
           <StyledNavItemLink
-            odysseyDesignTokens={odysseyDesignTokens}
             contextValue={contextValue}
+            href={href}
             isDisabled={isDisabled}
             isSelected={isSelected}
-            href={href}
-            target={target}
+            odysseyDesignTokens={odysseyDesignTokens}
             onClick={itemClickHandler}
+            sideNavContrastColors={uiShellContext?.sideNavContrastColors}
+            target={target}
           >
             <SideNavItemLinkContent
               count={count}

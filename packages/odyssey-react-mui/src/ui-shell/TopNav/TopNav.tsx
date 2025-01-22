@@ -18,6 +18,10 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext";
+import {
+  UiShellColors,
+  useUiShellContext,
+} from "../../ui-shell/UiShellProvider";
 
 export const TOP_NAV_HEIGHT = `${64 / 14}rem`;
 
@@ -31,13 +35,16 @@ const StyledRightSideContainer = styled("div")(() => ({
 
 const StyledTopNavContainer = styled("div", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "isScrolled",
+    prop !== "odysseyDesignTokens" &&
+    prop !== "isScrolled" &&
+    prop !== "topNavBackgroundColor",
 })<{
-  odysseyDesignTokens: DesignTokens;
   isScrolled?: boolean;
-}>(({ odysseyDesignTokens, isScrolled }) => ({
+  odysseyDesignTokens: DesignTokens;
+  topNavBackgroundColor?: UiShellColors["topNavBackgroundColor"];
+}>(({ odysseyDesignTokens, isScrolled, topNavBackgroundColor }) => ({
   alignItems: "center",
-  backgroundColor: odysseyDesignTokens.HueNeutral50,
+  backgroundColor: topNavBackgroundColor,
   boxShadow: isScrolled ? odysseyDesignTokens.DepthMedium : undefined,
   clipPath: "inset(0 0 -100vh 0)",
   display: "flex",
@@ -51,6 +58,10 @@ const StyledTopNavContainer = styled("div", {
   position: "relative",
   transition: `box-shadow ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
   zIndex: 1,
+
+  ...(topNavBackgroundColor === odysseyDesignTokens.HueNeutralWhite && {
+    borderBottom: `${odysseyDesignTokens.BorderWidthMain} ${odysseyDesignTokens.BorderStyleMain} ${odysseyDesignTokens.HueNeutral100}`,
+  }),
 }));
 
 export type TopNavProps = {
@@ -74,11 +85,13 @@ const TopNav = ({
   rightSideComponent,
 }: TopNavProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const uiShellContext = useUiShellContext();
 
   return (
     <StyledTopNavContainer
       odysseyDesignTokens={odysseyDesignTokens}
       isScrolled={isScrolled}
+      topNavBackgroundColor={uiShellContext?.topNavBackgroundColor}
     >
       <StyledLeftSideContainer>
         {leftSideComponent ?? <div />}

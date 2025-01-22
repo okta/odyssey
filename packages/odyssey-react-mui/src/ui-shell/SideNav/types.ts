@@ -25,7 +25,10 @@ type LogoWithNoLink = {
   ariaLabel?: never;
 };
 
-export type SideNavLogoProps = (LogoWithLink | LogoWithNoLink) &
+export type SideNavLogoProps = { isSameBackgroundAsMain?: boolean } & (
+  | LogoWithLink
+  | LogoWithNoLink
+) &
   (
     | {
         /**

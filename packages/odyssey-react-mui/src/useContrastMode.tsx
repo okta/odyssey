@@ -20,6 +20,8 @@ import {
 } from "react";
 import * as Tokens from "@okta/odyssey-design-tokens";
 
+import { hexToRgb } from "./hexToRgb";
+
 export type ContrastMode = "lowContrast" | "highContrast";
 export type ContrastModeContextType = {
   contrastMode: ContrastMode;
@@ -33,15 +35,7 @@ export const defaultContrast = "lowContrast";
 
 export const useContrastModeContext = () => useContext(ContrastModeContext);
 
-export const hexToRgb = (hexString: string) => {
-  const hexNumber = parseInt(hexString.slice(1), 16);
-  const red = (hexNumber >> 16) & 255;
-  const green = (hexNumber >> 8) & 255;
-  const blue = hexNumber & 255;
-  return `rgb(${red}, ${green}, ${blue})`;
-};
-
-export const hueNeutral50Rgb = hexToRgb(Tokens.HueNeutral50);
+export const hueNeutral50Rgb = hexToRgb(Tokens.HueNeutral50).asFormattedString;
 
 export const isTransparentColor = (color: string) =>
   color === "rgba(0, 0, 0, 0)" || color === "transparent";
