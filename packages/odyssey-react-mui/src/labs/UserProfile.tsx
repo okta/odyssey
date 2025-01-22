@@ -90,7 +90,9 @@ const UserProfile = ({
             {userName}
           </Subordinate>
         )}
-        <Subordinate color="textSecondary" translate={translate}>{orgName}</Subordinate>
+        <Subordinate color="textSecondary" translate={translate}>
+          {orgName}
+        </Subordinate>
       </div>
     </UserProfileContainer>
   );
