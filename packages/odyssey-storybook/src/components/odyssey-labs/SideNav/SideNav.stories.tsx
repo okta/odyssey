@@ -98,6 +98,15 @@ const storybookMeta: Meta<SideNavProps> = {
         },
       },
     },
+    isCollapsed: {
+      control: "boolean",
+      description: "Controls whether the side nav is collapsed",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
     isCompact: {
       control: "boolean",
       description: "Controls whether the side nav uses compact layout",
@@ -147,6 +156,7 @@ const storybookMeta: Meta<SideNavProps> = {
   args: {
     appName: "Admin Console",
     isCollapsible: true,
+    isCollapsed: false,
     isCompact: false,
     sideNavItems: [
       {

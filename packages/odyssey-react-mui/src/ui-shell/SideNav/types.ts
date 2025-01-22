@@ -72,6 +72,10 @@ export type SideNavProps = {
    */
   isCollapsible?: boolean;
   /**
+   *  Determines whether the side nav is collapsed
+   */
+  isCollapsed?: boolean;
+  /**
    *  Determines whether the side nav items use compact layout
    */
   isCompact?: boolean;
