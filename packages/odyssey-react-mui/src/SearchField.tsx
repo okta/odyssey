@@ -21,6 +21,7 @@ import {
   useCallback,
   useRef,
 } from "react";
+import styled from "@emotion/styled";
 
 import { CloseCircleFilledIcon, SearchIcon } from "./icons.generated";
 import { Field } from "./Field";
@@ -30,8 +31,13 @@ import {
 } from "./FieldComponentProps";
 import type { HtmlProps } from "./HtmlProps";
 import { getControlState, useInputValues } from "./inputUtils";
+import { OdysseyThemeProvider } from "./OdysseyThemeProvider";
 
 export const searchVariantValues = ["outline", "filled"] as const;
+
+const StyledContainerToEnsureThemeProviderDivIsFullWidth = styled("div")({
+  width: "100%",
+});
 
 export type SearchFieldProps = {
   /**
@@ -209,17 +215,21 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
     );
 
     return (
-      <Field
-        ariaDescribedBy={ariaDescribedBy}
-        fieldType="single"
-        hasVisibleLabel={false}
-        id={idOverride}
-        isDisabled={isDisabled}
-        isFullWidth={isFullWidth}
-        isOptional={true}
-        label={label}
-        renderFieldComponent={renderFieldComponent}
-      />
+      <StyledContainerToEnsureThemeProviderDivIsFullWidth>
+        <OdysseyThemeProvider>
+          <Field
+            ariaDescribedBy={ariaDescribedBy}
+            fieldType="single"
+            hasVisibleLabel={false}
+            id={idOverride}
+            isDisabled={isDisabled}
+            isFullWidth={isFullWidth}
+            isOptional={true}
+            label={label}
+            renderFieldComponent={renderFieldComponent}
+          />
+        </OdysseyThemeProvider>
+      </StyledContainerToEnsureThemeProviderDivIsFullWidth>
     );
   },
 );
