@@ -83,7 +83,7 @@ const StepperContainer = styled(MuiStepper, {
           },
           "&:hover": {
             backgroundColor: nonLinear
-              ? odysseyDesignTokens.HueNeutral200
+              ? odysseyDesignTokens.HueNeutral100
               : "transparent",
             cursor: nonLinear ? "pointer" : "default",
             "& .MuiStepLabel-label": {
@@ -108,22 +108,52 @@ const StepperContainer = styled(MuiStepper, {
         position: "relative",
         flex: 1,
         paddingLeft: odysseyDesignTokens.Spacing5,
-        paddingTop: odysseyDesignTokens.Spacing2,
+        paddingTop:
+          stepVariant === "nonNumeric" ? 0 : odysseyDesignTokens.Spacing2,
         paddingBottom: 0,
+        borderRadius: odysseyDesignTokens.BorderRadiusMain,
         "&::before": {
           content: '""',
           position: "absolute",
-          left: stepVariant === "nonNumeric" ? "31.5px" : "35.5px", //half pixel values used for absolute center positioning
-          top: "46px",
-          height: "calc(100% - 46px)",
+          left: stepVariant === "nonNumeric" ? "31.5px" : "35.5px", //Half pixel values used for absolute center positioning
+          top: stepVariant === "nonNumeric" ? "35px" : "40px",
+          height:
+            stepVariant === "nonNumeric"
+              ? "calc(100% - 35px)"
+              : "calc(100% - 40px)",
           width: "1px",
           backgroundColor: odysseyDesignTokens.HueNeutral200,
         },
         "&:last-child::before": {
           display: "none",
         },
-        "& .MuiStepConnector-root": {
-          display: "none",
+        "& .MuiStepLabel-labelContainer": {
+          minHeight: stepVariant === "nonNumeric" ? "20px" : "38px", //For proper verical alignment of the connector line
+        },
+        "&:not(:has(.Mui-active))": {
+          "&.Mui-completed": {
+            "&:hover": {
+              "& .MuiStepLabel-label": {
+                color: odysseyDesignTokens.HueNeutral800,
+              },
+              "& .MuiStepLabel-labelContainer div": {
+                color: odysseyDesignTokens.HueNeutral800,
+              },
+            },
+          },
+          "&:hover": {
+            cursor: nonLinear ? "pointer" : "default",
+            "& .MuiStepLabel-label": {
+              color: nonLinear
+                ? odysseyDesignTokens.HueNeutral900
+                : odysseyDesignTokens.HueNeutral600,
+            },
+            "& .MuiStepLabel-labelContainer div": {
+              color: nonLinear
+                ? odysseyDesignTokens.HueNeutral800
+                : odysseyDesignTokens.HueNeutral600,
+            },
+          },
         },
       },
     }),
@@ -132,7 +162,7 @@ const StepperContainer = styled(MuiStepper, {
       borderWidth: "1px",
       minWidth: odysseyDesignTokens.Spacing4,
       minHeight:
-        orientation === "vertical" ? odysseyDesignTokens.Spacing3 : undefined,
+        orientation === "vertical" ? odysseyDesignTokens.Spacing4 : undefined,
     },
     "& .MuiStepConnector-root": {
       ...(orientation === "horizontal"
