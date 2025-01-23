@@ -36,7 +36,7 @@ readdir("./src/icons.generated")
     headerCopyrightLicense.concat(
       filenames
         .map((filename) => basename(filename, extname(filename)))
-        .map((filename) => `export * from "./${filename}";`)
+        .map((filename) => `export * from "./${filename}.js";`)
         .join("\n"),
     ),
   )

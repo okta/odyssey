@@ -11,13 +11,13 @@
  */
 
 import { ReactNode, memo } from "react";
-import { Heading4, Paragraph } from "./Typography";
-import { Box } from "./Box";
+import { Heading4, Paragraph } from "./Typography.js";
+import { Box } from "./Box.js";
 import styled from "@emotion/styled";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
-} from "./OdysseyDesignTokensContext";
+} from "./OdysseyDesignTokensContext.js";
 
 const EmptyContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",

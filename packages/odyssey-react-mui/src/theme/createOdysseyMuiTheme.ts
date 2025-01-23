@@ -13,17 +13,17 @@
 import { createTheme } from "@mui/material/styles";
 import * as Tokens from "@okta/odyssey-design-tokens";
 
-import { getComponents } from "./components";
-import { mixins } from "./mixins";
-import { palette } from "./palette";
-import { shape } from "./shape";
-import { spacing } from "./spacing";
-import { typography } from "./typography";
-import "./components.types";
-import "./mixins.types";
-import "./palette.types";
-import "./typography.types";
-import { type ContrastMode, defaultContrast } from "../useContrastMode";
+import { getComponents } from "./components.js";
+import { mixins } from "./mixins.js";
+import { palette } from "./palette.js";
+import { shape } from "./shape.js";
+import { spacing } from "./spacing.js";
+import { typography } from "./typography.js";
+import "./components.types.js";
+import "./mixins.types.js";
+import "./palette.types.js";
+import "./typography.types.js";
+import { type ContrastMode, defaultContrast } from "../useContrastMode.js";
 
 export type DesignTokens = typeof Tokens;
 export type DesignTokensOverride = Partial<typeof Tokens>;

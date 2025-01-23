@@ -13,12 +13,12 @@
 import { type SetStateAction } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
-import { bufferLatest } from "./bufferLatest";
-import { createMessageBus } from "./createMessageBus";
-import { UiShell, UiShellProps } from "./UiShell";
-import { renderReactInWebComponent } from "../web-component/renderReactInWebComponent";
-import { type UiShellNavComponentProps } from "./UiShellContent";
-import { uiShellDataAttribute } from "./useHasUiShell";
+import { bufferLatest } from "./bufferLatest.js";
+import { createMessageBus } from "./createMessageBus.js";
+import { UiShell, UiShellProps } from "./UiShell.js";
+import { renderReactInWebComponent } from "../web-component/renderReactInWebComponent.js";
+import { type UiShellNavComponentProps } from "./UiShellContent.js";
+import { uiShellDataAttribute } from "./useHasUiShell.js";
 
 export const optionalComponentSlotNames: Record<
   keyof Required<UiShellProps>["optionalComponents"],

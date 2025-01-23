@@ -26,15 +26,15 @@ import { useTranslation } from "react-i18next";
 import {
   ContrastColors,
   generateContrastColors,
-} from "../../createContrastColors";
-import { FocusHandle } from "../../inputUtils";
-import { MuiPropsContext, MuiPropsContextType } from "../../MuiPropsContext";
+} from "../../createContrastColors.js";
+import { FocusHandle } from "../../inputUtils.js";
+import { MuiPropsContext, MuiPropsContextType } from "../../MuiPropsContext.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "../../OdysseyDesignTokensContext";
-import { Tooltip } from "../../Tooltip";
-import { useUiShellContext } from "../../ui-shell/UiShellProvider";
+} from "../../OdysseyDesignTokensContext.js";
+import { Tooltip } from "../../Tooltip.js";
+import { useUiShellContext } from "../../ui-shell/UiShellProvider.js";
 
 const StyledToggleButton = styled(MuiButton, {
   shouldForwardProp: (prop) =>

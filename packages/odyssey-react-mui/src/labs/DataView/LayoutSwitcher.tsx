@@ -13,8 +13,8 @@
 import { Dispatch, memo, useCallback, SetStateAction, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import { AvailableLayouts, DataLayout } from "./componentTypes";
-import { MenuButton, MenuItem } from "../../Buttons";
+import { AvailableLayouts, DataLayout } from "./componentTypes.js";
+import { MenuButton, MenuItem } from "../../Buttons/index.js";
 
 export type LayoutSwitcherProps = {
   availableLayouts: AvailableLayouts;

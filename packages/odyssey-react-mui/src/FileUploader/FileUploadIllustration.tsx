@@ -16,7 +16,7 @@ import styled from "@emotion/styled";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
-} from "../OdysseyDesignTokensContext";
+} from "../OdysseyDesignTokensContext.js";
 
 const UploadIllustrationContainer = styled.div<{
   odysseyDesignTokens: DesignTokens;

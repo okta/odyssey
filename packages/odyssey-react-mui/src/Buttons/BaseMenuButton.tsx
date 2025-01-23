@@ -25,22 +25,22 @@ import {
 } from "@mui/material";
 import styled from "@emotion/styled";
 
-import { Box } from "../Box";
+import { Box } from "../Box.js";
 import {
   BaseButton,
   buttonSizeValues,
   buttonVariantValues,
-} from "./BaseButton";
-import { FieldComponentProps } from "../FieldComponentProps";
-import type { HtmlProps } from "../HtmlProps";
-import { ChevronDownIcon, MoreIcon } from "../icons.generated";
-import { MenuContext, MenuContextType } from "./MenuContext";
-import { NullElement } from "../NullElement";
+} from "./BaseButton.js";
+import { FieldComponentProps } from "../FieldComponentProps.js";
+import type { HtmlProps } from "../HtmlProps.js";
+import { ChevronDownIcon, MoreIcon } from "../icons.generated/index.js";
+import { MenuContext, MenuContextType } from "./MenuContext.js";
+import { NullElement } from "../NullElement.js";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
-} from "../OdysseyDesignTokensContext";
-import { useUniqueId } from "../useUniqueId";
+} from "../OdysseyDesignTokensContext.js";
+import { useUniqueId } from "../useUniqueId.js";
 
 export const menuAlignmentValues = ["left", "right"] as const;
 export const verticalDividerAlignmentValues = ["start", "end"] as const;

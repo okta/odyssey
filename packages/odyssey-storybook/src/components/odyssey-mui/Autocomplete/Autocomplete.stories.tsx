@@ -22,10 +22,10 @@ import {
 } from "@storybook/test";
 import { SyntheticEvent, useCallback, useState } from "react";
 
-import { LargeDataSet, largeDataSet } from "./large-data-collection";
-import { axeRun } from "../../../axe-util";
-import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { LargeDataSet, largeDataSet } from "./large-data-collection.js";
+import { axeRun } from "../../../axe-util.js";
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData.js";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 
 const stations: ReadonlyArray<StationType> = [
   { label: "Anderson Station" },

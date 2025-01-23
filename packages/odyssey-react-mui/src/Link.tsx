@@ -11,9 +11,9 @@
  */
 
 import { memo, ReactElement, useImperativeHandle, useRef } from "react";
-import { ExternalLinkIcon } from "./icons.generated";
-import type { HtmlProps } from "./HtmlProps";
-import { FocusHandle } from "./inputUtils";
+import { ExternalLinkIcon } from "./icons.generated/index.js";
+import type { HtmlProps } from "./HtmlProps.js";
+import { FocusHandle } from "./inputUtils.js";
 
 import { Link as MuiLink, LinkProps as MuiLinkProps } from "@mui/material";
 

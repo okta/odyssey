@@ -13,15 +13,15 @@
 import { memo, ReactElement, useMemo } from "react";
 import styled from "@emotion/styled";
 
-import { Callout } from "./Callout";
-import { FieldsetContext } from "./FieldsetContext";
-import type { HtmlProps } from "./HtmlProps";
-import { Legend, Support } from "./Typography";
+import { Callout } from "./Callout.js";
+import { FieldsetContext } from "./FieldsetContext.js";
+import type { HtmlProps } from "./HtmlProps.js";
+import { Legend, Support } from "./Typography.js";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
-} from "./OdysseyDesignTokensContext";
-import { useUniqueId } from "./useUniqueId";
+} from "./OdysseyDesignTokensContext.js";
+import { useUniqueId } from "./useUniqueId.js";
 
 const StyledFieldset = styled.fieldset<{
   odysseyDesignTokens: DesignTokens;

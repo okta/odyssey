@@ -21,16 +21,16 @@ import {
 import { DateTime } from "luxon";
 import { useTranslation } from "react-i18next";
 
-import { FieldComponentProps } from "../FieldComponentProps";
+import { FieldComponentProps } from "../FieldComponentProps.js";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
   CalendarIcon,
   ChevronDownIcon,
-} from "../icons.generated";
-import { ComponentControlledState, getControlState } from "../inputUtils";
-import { TimeZoneOption, TimeZonePickerProps } from "./TimeZonePicker";
-import { useDateFieldsTranslations } from "./useDateFieldsTranslations";
+} from "../icons.generated/index.js";
+import { ComponentControlledState, getControlState } from "../inputUtils.js";
+import { TimeZoneOption, TimeZonePickerProps } from "./TimeZonePicker.js";
+import { useDateFieldsTranslations } from "./useDateFieldsTranslations.js";
 
 const { CONTROLLED } = ComponentControlledState;
 

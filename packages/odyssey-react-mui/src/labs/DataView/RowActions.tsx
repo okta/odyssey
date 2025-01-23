@@ -19,9 +19,9 @@ import {
   ArrowDownIcon,
   ArrowTopIcon,
   ArrowUpIcon,
-} from "../../icons.generated";
-import { Button, MenuButtonProps, MenuItem } from "../../Buttons";
-import { DataTableProps } from "./DataTable";
+} from "../../icons.generated/index.js";
+import { Button, MenuButtonProps, MenuItem } from "../../Buttons/index.js";
+import { DataTableProps } from "./DataTable.js";
 
 export type RowActionsProps<TData extends MRT_RowData> = {
   isRowReorderingDisabled?: boolean;

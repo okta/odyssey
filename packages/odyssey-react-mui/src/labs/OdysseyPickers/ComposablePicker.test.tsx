@@ -11,8 +11,8 @@
  */
 
 import { render, screen } from "@testing-library/react";
-import { ComposablePicker } from "./ComposablePicker";
-import { OdysseyProvider } from "../../OdysseyProvider";
+import { ComposablePicker } from "./ComposablePicker.js";
+import { OdysseyProvider } from "../../OdysseyProvider.js";
 
 describe("ComposablePicker", () => {
   it("displays the ComposablePicker", () => {

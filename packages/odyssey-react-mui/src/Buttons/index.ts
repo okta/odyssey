@@ -14,12 +14,12 @@ export {
   buttonSizeValues,
   buttonTypeValues,
   buttonVariantValues,
-} from "./BaseButton";
-export * from "./Button";
-export * from "./ButtonContext";
+} from "./BaseButton.js";
+export * from "./Button.js";
+export * from "./ButtonContext.js";
 export {
   menuAlignmentValues,
   verticalDividerAlignmentValues,
-} from "./BaseMenuButton";
-export * from "./MenuButton";
-export * from "./MenuItem";
+} from "./BaseMenuButton.js";
+export * from "./MenuButton.js";
+export * from "./MenuItem.js";

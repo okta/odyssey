@@ -15,14 +15,14 @@ import { MRT_RowData, MRT_RowSelectionState } from "material-react-table";
 import styled from "@emotion/styled";
 import { useTranslation } from "react-i18next";
 
-import { Box } from "../../Box";
-import { Button, MenuButton } from "../../Buttons";
-import { ChevronDownIcon } from "../../icons.generated";
-import { UniversalProps } from "./componentTypes";
+import { Box } from "../../Box.js";
+import { Button, MenuButton } from "../../Buttons/index.js";
+import { ChevronDownIcon } from "../../icons.generated/index.js";
+import { UniversalProps } from "./componentTypes.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "../../OdysseyDesignTokensContext";
+} from "../../OdysseyDesignTokensContext.js";
 
 export type BulkActionsMenuProps<TData extends MRT_RowData> = {
   data: MRT_RowData[];

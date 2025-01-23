@@ -17,8 +17,8 @@ export {
   type DataTableGetDataType,
   type DataTableOnReorderRowsType,
   type DataTableRenderDetailPanelType,
-} from "./DataTable";
-export { densityValues } from "./constants";
+} from "./DataTable.js";
+export { densityValues } from "./constants.js";
 export type {
   MRT_ColumnFiltersState as DataTableFiltersState,
   MRT_SortingState as DataTableSortingState,

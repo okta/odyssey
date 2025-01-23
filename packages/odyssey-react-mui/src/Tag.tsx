@@ -14,15 +14,15 @@ import { Chip as MuiChip, ChipProps as MuiChipProps } from "@mui/material";
 import { memo, ReactElement, useCallback, useContext } from "react";
 import styled from "@emotion/styled";
 
-import { CloseCircleFilledIcon } from "./icons.generated";
-import { HtmlProps } from "./HtmlProps";
-import { MuiPropsContext, MuiPropsContextType } from "./MuiPropsContext";
+import { CloseCircleFilledIcon } from "./icons.generated/index.js";
+import { HtmlProps } from "./HtmlProps.js";
+import { MuiPropsContext, MuiPropsContextType } from "./MuiPropsContext.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "./OdysseyDesignTokensContext";
-import { TagListContext } from "./TagListContext";
-import { ContrastMode, useContrastModeContext } from "./useContrastMode";
+} from "./OdysseyDesignTokensContext.js";
+import { TagListContext } from "./TagListContext.js";
+import { ContrastMode, useContrastModeContext } from "./useContrastMode.js";
 
 export const tagSizeValues = ["medium", "small"] as const;
 

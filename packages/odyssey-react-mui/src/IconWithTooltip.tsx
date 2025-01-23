@@ -15,13 +15,13 @@ import styled from "@emotion/styled";
 import { Tooltip as MuiTooltip } from "@mui/material";
 import type { TooltipProps as MuiTooltipProps } from "@mui/material";
 
-import { HtmlProps } from "./HtmlProps";
-import { InformationCircleIcon } from "./icons.generated";
-import { useMuiProps } from "./MuiPropsContext";
+import { HtmlProps } from "./HtmlProps.js";
+import { InformationCircleIcon } from "./icons.generated/index.js";
+import { useMuiProps } from "./MuiPropsContext.js";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
-} from "./OdysseyDesignTokensContext";
+} from "./OdysseyDesignTokensContext.js";
 
 const IconContainer = styled.span<{
   odysseyDesignTokens: DesignTokens;

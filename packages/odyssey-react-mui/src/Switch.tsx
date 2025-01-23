@@ -23,19 +23,19 @@ import { SwitchProps as MuiSwitchProps, FormLabel } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import styled from "@emotion/styled";
 
-import { Box } from "./Box";
-import { FieldComponentProps } from "./FieldComponentProps";
-import { FieldHint } from "./FieldHint";
-import { CheckedFieldProps } from "./FormCheckedProps";
-import type { HtmlProps } from "./HtmlProps";
-import { CheckIcon } from "./icons.generated";
-import { ComponentControlledState, getControlState } from "./inputUtils";
+import { Box } from "./Box.js";
+import { FieldComponentProps } from "./FieldComponentProps.js";
+import { FieldHint } from "./FieldHint.js";
+import { CheckedFieldProps } from "./FormCheckedProps.js";
+import type { HtmlProps } from "./HtmlProps.js";
+import { CheckIcon } from "./icons.generated/index.js";
+import { ComponentControlledState, getControlState } from "./inputUtils.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "./OdysseyDesignTokensContext";
-import { stripRem, toRem } from "./remUtils";
-import { useUniqueId } from "./useUniqueId";
+} from "./OdysseyDesignTokensContext.js";
+import { stripRem, toRem } from "./remUtils.js";
+import { useUniqueId } from "./useUniqueId.js";
 
 const { CONTROLLED } = ComponentControlledState;
 

@@ -23,15 +23,15 @@ import {
 } from "react";
 import styled from "@emotion/styled";
 
-import { CloseCircleFilledIcon, SearchIcon } from "./icons.generated";
-import { Field } from "./Field";
+import { CloseCircleFilledIcon, SearchIcon } from "./icons.generated/index.js";
+import { Field } from "./Field.js";
 import {
   FieldComponentProps,
   FieldComponentRenderProps,
-} from "./FieldComponentProps";
-import type { HtmlProps } from "./HtmlProps";
-import { getControlState, useInputValues } from "./inputUtils";
-import { OdysseyThemeProvider } from "./OdysseyThemeProvider";
+} from "./FieldComponentProps.js";
+import type { HtmlProps } from "./HtmlProps.js";
+import { getControlState, useInputValues } from "./inputUtils.js";
+import { OdysseyThemeProvider } from "./OdysseyThemeProvider.js";
 
 export const searchVariantValues = ["outline", "filled"] as const;
 

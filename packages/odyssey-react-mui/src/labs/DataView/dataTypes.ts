@@ -19,7 +19,7 @@ import {
   MRT_SortingState,
 } from "material-react-table";
 
-import { DataFilter } from "../DataFilters";
+import { DataFilter } from "../DataFilters.js";
 
 export type DataQueryParamsType = {
   filters?: DataFilter[];

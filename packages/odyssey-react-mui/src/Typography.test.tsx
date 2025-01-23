@@ -11,7 +11,7 @@
  */
 
 import { render, screen } from "@testing-library/react";
-import { Typography } from "./Typography";
+import { Typography } from "./Typography.js";
 
 describe("Typography", () => {
   test("renders Overline", () => {

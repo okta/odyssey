@@ -17,8 +17,8 @@ import {
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 
-import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData.js";
 import { fn } from "@storybook/test";
 
 // TODO: Write tests for this component @see https://oktainc.atlassian.net/browse/OKTA-704264

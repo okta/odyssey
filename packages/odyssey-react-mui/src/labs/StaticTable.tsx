@@ -31,7 +31,7 @@ import { useTranslation } from "react-i18next";
 import type {
   DefaultMaterialReactTableData,
   MaterialReactTableProps,
-} from "./materialReactTableTypes";
+} from "./materialReactTableTypes.js";
 
 export type StaticTableProps<TData extends DefaultMaterialReactTableData> = {
   columns: MaterialReactTableProps<TData>["columns"];

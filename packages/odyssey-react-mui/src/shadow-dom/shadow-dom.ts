@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createReactRootElements } from "../web-component/createReactRootElements";
+import { createReactRootElements } from "../web-component/createReactRootElements.js";
 
 /**
  * @deprecated Use `renderReactInWebComponent` from `@okta/odyssey-react-mui/ui-shell` instead. This function was necessary when using bare Shadow DOM, but with UI Shell rendering in a Web Component, you won't be able to render your Shadow DOM in its Shadow DOM without using a Web Component.

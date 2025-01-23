@@ -30,17 +30,17 @@ import {
   DataTableColumn,
   DataTableRowData,
 } from "@okta/odyssey-react-mui";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 import {
   Planet,
   columns as planetColumns,
   data as planetData,
-} from "./planetData";
+} from "./planetData.js";
 import {
   Person,
   columns as personColumns,
   data as personData,
-} from "./personData";
+} from "./personData.js";
 import { useCallback, useMemo, useState } from "react";
 import { fn } from "@storybook/test";
 

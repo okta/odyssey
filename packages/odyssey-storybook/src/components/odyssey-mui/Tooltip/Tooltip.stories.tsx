@@ -19,9 +19,9 @@ import {
   TooltipProps,
 } from "@okta/odyssey-react-mui";
 import { DownloadIcon } from "@okta/odyssey-react-mui/icons";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 import { userEvent, within } from "@storybook/test";
-import { axeRun } from "../../../axe-util";
+import { axeRun } from "../../../axe-util.js";
 
 const meta = {
   title: "MUI Components/Tooltip",

@@ -10,12 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export * from "./AppSwitcher";
-export * from "./renderUiShell";
-export * from "./SideNav";
-export * from "./TopNav";
-export * from "./useHasUiShell";
-export * from "../web-component/renderReactInWebComponent"; // This is located here because some teams use React v17, and this uses React v18's `ReactDOM/client` import which isn't in older versions.
+export * from "./AppSwitcher/index.js";
+export * from "./renderUiShell.js";
+export * from "./SideNav/index.js";
+export * from "./TopNav/index.js";
+export * from "./useHasUiShell.js";
+export * from "../web-component/renderReactInWebComponent.js"; // This is located here because some teams use React v17, and this uses React v18's `ReactDOM/client` import which isn't in older versions.
 
-export { UiShell, type UiShellProps } from "./UiShell";
-export { type UiShellNavComponentProps } from "./UiShellContent";
+export { UiShell, type UiShellProps } from "./UiShell.js";
+export { type UiShellNavComponentProps } from "./UiShellContent.js";

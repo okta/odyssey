@@ -11,7 +11,7 @@
  */
 
 import { List as MuiList, ListItem as MuiListItem } from "@mui/material";
-import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
+import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext.js";
 import { memo, useMemo } from "react";
 
 export type ErrorMessageListProps = {

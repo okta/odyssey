@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createShadowDomElements } from "./shadow-dom";
+import { createShadowDomElements } from "./shadow-dom.js";
 
 describe("createShadowDomElements", () => {
   test("returns two elements attached to a Shadow DOM", () => {

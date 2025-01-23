@@ -17,13 +17,13 @@ import {
   AutocompleteRenderInputParams,
 } from "@mui/material";
 
-import { AutocompleteProps } from "./Autocomplete";
-import { Field } from "./Field";
+import { AutocompleteProps } from "./Autocomplete.js";
+import { Field } from "./Field.js";
 import {
   ComponentControlledState,
   useInputValues,
   getControlState,
-} from "./inputUtils";
+} from "./inputUtils.js";
 
 export type UseAutocompleteProps<
   OptionType,

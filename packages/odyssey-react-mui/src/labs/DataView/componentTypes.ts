@@ -20,19 +20,19 @@ import {
 } from "material-react-table";
 import { ReactNode } from "react";
 
-import { availableLayouts, availableCardLayouts } from "./constants";
-import { DataFilter } from "../DataFilters";
+import { availableLayouts, availableCardLayouts } from "./constants.js";
+import { DataFilter } from "../DataFilters.js";
 import {
   DataGetDataType,
   DataOnReorderRowsType,
   DataRowSelectionState,
   DataTableColumn,
-} from "./dataTypes";
-import { MenuButtonProps } from "../..";
-import { paginationTypeValues } from "../DataTablePagination";
-import { DataCardProps } from "./DataCard";
-import { type PaginationProps } from "../../Pagination";
-import { RowActionsProps } from "./RowActions";
+} from "./dataTypes.js";
+import { MenuButtonProps } from "../../index.js";
+import { paginationTypeValues } from "../DataTablePagination.js";
+import { DataCardProps } from "./DataCard.js";
+import { type PaginationProps } from "../../Pagination/index.js";
+import { RowActionsProps } from "./RowActions.js";
 
 export type DataLayout = (typeof availableLayouts)[number];
 export type CardLayout = (typeof availableCardLayouts)[number];

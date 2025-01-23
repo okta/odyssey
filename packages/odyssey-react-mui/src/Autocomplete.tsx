@@ -18,11 +18,11 @@ import {
   UseAutocompleteProps as MuiUseAutocompleteProps,
 } from "@mui/material";
 
-import { FieldComponentProps } from "./FieldComponentProps";
-import type { HtmlProps } from "./HtmlProps";
-import { PickerVirtualizationListBox } from "./labs/OdysseyPickers/PickerVirtualizationListBox";
-import { useAutocomplete } from "./useAutocomplete";
-import { TestSelector } from "./test-selectors";
+import { FieldComponentProps } from "./FieldComponentProps.js";
+import type { HtmlProps } from "./HtmlProps.js";
+import { PickerVirtualizationListBox } from "./labs/OdysseyPickers/PickerVirtualizationListBox.js";
+import { useAutocomplete } from "./useAutocomplete.js";
+import { TestSelector } from "./test-selectors/index.js";
 
 export const AutocompleteTestSelector = {
   accessibleText: {

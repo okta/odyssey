@@ -21,17 +21,17 @@ import {
 import styled from "@emotion/styled";
 import { useTranslation } from "react-i18next";
 
-import { Button } from "../Buttons";
-import { UploadIcon } from "../icons.generated";
-import { Field, RenderFieldComponentProps } from "../Field";
-import { FieldComponentProps } from "../FieldComponentProps";
-import { FileUploadPreview } from "./FileUploadPreview";
-import { FileUploadIllustration } from "./FileUploadIllustration";
+import { Button } from "../Buttons/index.js";
+import { UploadIcon } from "../icons.generated/index.js";
+import { Field, RenderFieldComponentProps } from "../Field.js";
+import { FieldComponentProps } from "../FieldComponentProps.js";
+import { FileUploadPreview } from "./FileUploadPreview.js";
+import { FileUploadIllustration } from "./FileUploadIllustration.js";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
-} from "../OdysseyDesignTokensContext";
-import { Support } from "../Typography";
+} from "../OdysseyDesignTokensContext.js";
+import { Support } from "../Typography.js";
 
 export const fileUploadTypes = ["single", "multiple"] as const;
 export const fileUploadVariants = [

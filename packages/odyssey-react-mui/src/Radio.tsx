@@ -20,15 +20,15 @@ import {
 } from "@mui/material";
 import styled from "@emotion/styled";
 
-import { FieldComponentProps } from "./FieldComponentProps";
-import type { HtmlProps } from "./HtmlProps";
-import { FocusHandle } from "./inputUtils";
+import { FieldComponentProps } from "./FieldComponentProps.js";
+import type { HtmlProps } from "./HtmlProps.js";
+import { FocusHandle } from "./inputUtils.js";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
-} from "./OdysseyDesignTokensContext";
-import { Typography } from "./Typography";
-import { useUniqueId } from "./useUniqueId";
+} from "./OdysseyDesignTokensContext.js";
+import { Typography } from "./Typography.js";
+import { useUniqueId } from "./useUniqueId.js";
 
 const HintContainerWithInlineStartSpacing = styled.div<{
   odysseyDesignTokens: DesignTokens;

@@ -18,7 +18,7 @@ import {
 
 import { Meta, StoryObj } from "@storybook/react";
 
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 import demoImage from "./demo.png";
 
 const stations: ReadonlyArray<GroupPickerOptionType> = [

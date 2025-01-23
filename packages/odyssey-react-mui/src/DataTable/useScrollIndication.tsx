@@ -17,7 +17,7 @@ import {
   useEffect,
   useRef,
 } from "react";
-import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext";
+import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext.js";
 
 type UseScrollIndicationProps = {
   tableOuterContainer: HTMLDivElement | null;

@@ -25,10 +25,10 @@ import {
   VideoIcon,
 } from "@okta/odyssey-react-mui/icons";
 
-import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
-import { pickerComponentPropsMetadata } from "../../../pickerComponentPropsMetadata";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
-import PlaceholderLogo from "./PlaceholderLogo";
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData.js";
+import { pickerComponentPropsMetadata } from "../../../pickerComponentPropsMetadata.js";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
+import PlaceholderLogo from "./PlaceholderLogo.js";
 
 const optionsSmall = [
   {

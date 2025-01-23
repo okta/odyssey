@@ -13,15 +13,15 @@
 import styled from "@emotion/styled";
 import { memo, ReactElement, ReactNode } from "react";
 
-import { DrawerProps } from "../../Drawer";
-import { DocumentationIcon } from "../../icons.generated";
-import { Link } from "../../Link";
+import { DrawerProps } from "../../Drawer.js";
+import { DocumentationIcon } from "../../icons.generated/index.js";
+import { Link } from "../../Link.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "../../OdysseyDesignTokensContext";
-import { Heading4, Subordinate } from "../../Typography";
-import { useHasUiShell } from "../../ui-shell";
+} from "../../OdysseyDesignTokensContext.js";
+import { Heading4, Subordinate } from "../../Typography.js";
+import { useHasUiShell } from "../../ui-shell/index.js";
 
 export type PageTemplateProps = {
   /**

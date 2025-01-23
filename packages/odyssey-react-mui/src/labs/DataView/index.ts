@@ -10,10 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export { DataTable, type DataTableProps } from "./DataTable";
-export { DataView, type DataViewProps } from "./DataView";
-export { type DataCardProps } from "./DataCard";
+export { DataTable, type DataTableProps } from "./DataTable.js";
+export { DataView, type DataViewProps } from "./DataView.js";
+export { type DataCardProps } from "./DataCard.js";
 
-export * from "./componentTypes";
-export * from "./constants";
-export * from "./dataTypes";
+export * from "./componentTypes.js";
+export * from "./constants.js";
+export * from "./dataTypes.js";

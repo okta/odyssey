@@ -20,7 +20,7 @@ const distDirectory = join(
   "dist",
 );
 
-import("../src/test-selectors/index").then(
+import("../src/test-selectors/index.js").then(
   ({ odysseyTestSelector: testSelector }) =>
     mkdir(distDirectory)
       .catch(() => null)

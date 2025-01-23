@@ -29,8 +29,8 @@ import {
   sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
 
-import { SortableItem } from "./SortableItem";
-import { SortableOverlay } from "./SortableOverlay";
+import { SortableItem } from "./SortableItem.js";
+import { SortableOverlay } from "./SortableOverlay.js";
 
 export interface BaseItem {
   id: UniqueIdentifier;

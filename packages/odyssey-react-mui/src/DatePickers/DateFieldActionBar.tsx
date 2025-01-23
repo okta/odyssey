@@ -15,11 +15,11 @@ import { useTranslation } from "react-i18next";
 import { PickersActionBarProps } from "@mui/x-date-pickers";
 import styled from "@emotion/styled";
 
-import { Button } from "../Buttons";
+import { Button } from "../Buttons/index.js";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
-} from "../OdysseyDesignTokensContext";
+} from "../OdysseyDesignTokensContext.js";
 
 const ActionContainer = styled.div<{ odysseyDesignTokens: DesignTokens }>(
   ({ odysseyDesignTokens }) => ({

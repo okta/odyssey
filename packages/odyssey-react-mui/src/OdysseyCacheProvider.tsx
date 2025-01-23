@@ -18,7 +18,7 @@ declare global {
 
 import createCache, { StylisPlugin } from "@emotion/cache";
 import { memo, useMemo, ReactNode } from "react";
-import { useUniqueAlphabeticalId } from "./useUniqueAlphabeticalId";
+import { useUniqueAlphabeticalId } from "./useUniqueAlphabeticalId.js";
 import { CacheProvider } from "@emotion/react";
 
 export type OdysseyCacheProviderProps = {

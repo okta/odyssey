@@ -10,6 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export { paginationTypeValues } from "./constants";
-export * from "./Pagination";
-export { usePagination } from "./usePagination";
+export { paginationTypeValues } from "./constants.js";
+export * from "./Pagination.js";
+export { usePagination } from "./usePagination.js";

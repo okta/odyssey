@@ -19,19 +19,19 @@ import {
 } from "@mui/material";
 import { PropsWithChildren, ReactNode, memo } from "react";
 
-import type { HtmlProps } from "../../HtmlProps";
-import { ChevronDownIcon } from "../../icons.generated";
+import type { HtmlProps } from "../../HtmlProps.js";
+import { ChevronDownIcon } from "../../icons.generated/index.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "../../OdysseyDesignTokensContext";
-import { Support } from "../../Typography";
-import { useUniqueId } from "../../useUniqueId";
+} from "../../OdysseyDesignTokensContext.js";
+import { Support } from "../../Typography.js";
+import { useUniqueId } from "../../useUniqueId.js";
 import {
   UiShellColors,
   useUiShellContext,
-} from "../../ui-shell/UiShellProvider";
-import { ContrastColors } from "../../createContrastColors";
+} from "../../ui-shell/UiShellProvider.js";
+import { ContrastColors } from "../../createContrastColors.js";
 
 const SideNavAccordionContainer = styled("div", {
   shouldForwardProp: (prop) =>

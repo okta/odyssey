@@ -18,8 +18,8 @@ import {
   DialogContentText,
   DialogActions,
 } from "@mui/material";
-import { Button } from "./Buttons";
-import { CloseIcon } from "./icons.generated";
+import { Button } from "./Buttons/index.js";
+import { CloseIcon } from "./icons.generated/index.js";
 import {
   cloneElement,
   memo,
@@ -30,7 +30,7 @@ import {
   ReactNode,
 } from "react";
 
-import type { HtmlProps } from "./HtmlProps";
+import type { HtmlProps } from "./HtmlProps.js";
 
 export type DialogProps = {
   /**

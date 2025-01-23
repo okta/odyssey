@@ -13,8 +13,8 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { SearchField, searchVariantValues } from "@okta/odyssey-react-mui";
 
-import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData.js";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 import { ChangeEvent, useCallback, useState } from "react";
 
 const meta = {

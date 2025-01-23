@@ -57,7 +57,7 @@ $ yarn add @mui/material
 ```jsx
 import { OdysseyThemeProvider } from "@okta/odyssey-react-mui";
 
-import { myMaterialUiTheme } from "./myMaterialUiTheme";
+import { myMaterialUiTheme } from "./myMaterialUiTheme.js";
 
 const YourAppRoot = ({ children }) => (
   <OdysseyThemeProvider theme={myMaterialUiTheme}>{children}<OdysseyThemeProvider>
@@ -87,7 +87,7 @@ It is possible to provide `nonce`, `themeOverride`, `languageCode` and `translat
 
 ```jsx
 import { OdysseyProvider } from "@okta/odyssey-react-mui";
-import { theme } from "./themeOverride";
+import { theme } from "./themeOverride.js";
 
 const nonce =
   "K6ybeaqlwaAKk0hQF?hE2qZ0Ar3M=G4Bpr-XFk1x4XbL3dH3T5=mk0aXeWX9ifn9";

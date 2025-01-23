@@ -14,9 +14,9 @@ import { Link, LinkProps, linkVariantValues } from "@okta/odyssey-react-mui";
 import { InformationCircleFilledIcon } from "@okta/odyssey-react-mui/icons";
 import type { StoryObj } from "@storybook/react";
 import { expect, within } from "@storybook/test";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 
-import icons from "../../../../.storybook/components/iconUtils";
+import icons from "../../../../.storybook/components/iconUtils.js";
 
 export default {
   title: "MUI Components/Link",

@@ -19,16 +19,20 @@ import {
   MRT_TableInstance,
 } from "material-react-table";
 
-import { Box } from "../../Box";
+import { Box } from "../../Box.js";
 import { Checkbox as MuiCheckbox } from "@mui/material";
-import { CircularProgress } from "../../CircularProgress";
+import { CircularProgress } from "../../CircularProgress.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "../../OdysseyDesignTokensContext";
-import { RowActions } from "./RowActions";
-import { DataCard } from "./DataCard";
-import { CardLayout, CardLayoutProps, UniversalProps } from "./componentTypes";
+} from "../../OdysseyDesignTokensContext.js";
+import { RowActions } from "./RowActions.js";
+import { DataCard } from "./DataCard.js";
+import {
+  CardLayout,
+  CardLayoutProps,
+  UniversalProps,
+} from "./componentTypes.js";
 
 export type CardLayoutContentProps<TData extends MRT_RowData> = {
   currentLayout: CardLayout;

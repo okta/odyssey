@@ -20,7 +20,7 @@ import {
 } from "react";
 import * as Tokens from "@okta/odyssey-design-tokens";
 
-import { hexToRgb } from "./hexToRgb";
+import { hexToRgb } from "./hexToRgb.js";
 
 export type ContrastMode = "lowContrast" | "highContrast";
 export type ContrastModeContextType = {

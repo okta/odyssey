@@ -22,8 +22,8 @@ import { Meta, StoryObj } from "@storybook/react";
 import { userEvent, waitFor, within } from "@storybook/test";
 import { useCallback, useState } from "react";
 
-import { axeRun } from "../../../axe-util";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { axeRun } from "../../../axe-util.js";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 
 const gridStubText = (
   <>

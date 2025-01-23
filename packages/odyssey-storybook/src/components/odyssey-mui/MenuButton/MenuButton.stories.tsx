@@ -34,12 +34,12 @@ import {
 import { Meta, StoryObj } from "@storybook/react";
 import type { ReactNode } from "react";
 
-import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
-import icons from "../../../../.storybook/components/iconUtils";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData.js";
+import icons from "../../../../.storybook/components/iconUtils.js";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 import { expect, userEvent, waitFor, within } from "@storybook/test";
-import { axeRun } from "../../../axe-util";
-import type { PlaywrightProps } from "../storybookTypes";
+import { axeRun } from "../../../axe-util.js";
+import type { PlaywrightProps } from "../storybookTypes.js";
 
 const BoxWithBottomMargin = ({ children }: { children: ReactNode }) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();

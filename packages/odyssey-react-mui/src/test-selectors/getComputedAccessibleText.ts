@@ -15,8 +15,8 @@ import {
   computeAccessibleDescription,
 } from "dom-accessibility-api";
 
-import { type AccessibleTextSelectorValue } from "./testSelector";
-import { getComputedAccessibleErrorMessageText } from "./getComputedAccessibleErrorMessageText";
+import { type AccessibleTextSelectorValue } from "./testSelector.js";
+import { getComputedAccessibleErrorMessageText } from "./getComputedAccessibleErrorMessageText.js";
 
 export const accessibleTextSelector = {
   description: computeAccessibleDescription,

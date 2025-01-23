@@ -12,7 +12,7 @@
 
 import { ReactElement } from "react";
 
-import { HintLink } from "./HintLink";
+import { HintLink } from "./HintLink.js";
 
 export type FieldComponentProps = {
   /**

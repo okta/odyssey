@@ -17,9 +17,9 @@ import { Paper as MuiPaper } from "@mui/material";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "./OdysseyDesignTokensContext";
-import { OdysseyThemeProvider } from "./OdysseyThemeProvider";
-import { useContrastModeContext, ContrastMode } from "./useContrastMode";
+} from "./OdysseyDesignTokensContext.js";
+import { OdysseyThemeProvider } from "./OdysseyThemeProvider.js";
+import { useContrastModeContext, ContrastMode } from "./useContrastMode.js";
 
 const StyledContainer = styled(MuiPaper, {
   shouldForwardProp: (prop) =>

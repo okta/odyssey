@@ -10,8 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { hexToRgb, isValidHexString, rgbComponentsToString } from "./hexToRgb";
-import { DesignTokens } from "./OdysseyDesignTokensContext";
+import {
+  hexToRgb,
+  isValidHexString,
+  rgbComponentsToString,
+} from "./hexToRgb.js";
+import { DesignTokens } from "./OdysseyDesignTokensContext.js";
 
 export type ContrastColors = {
   focusRingColor: string | undefined;

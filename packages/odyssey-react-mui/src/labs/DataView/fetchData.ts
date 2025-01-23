@@ -14,8 +14,8 @@ import { Dispatch, SetStateAction } from "react";
 import { MRT_RowData } from "material-react-table";
 import { t } from "i18next";
 
-import { DataQueryParamsType } from "./dataTypes";
-import { UniversalProps } from "./componentTypes";
+import { DataQueryParamsType } from "./dataTypes.js";
+import { UniversalProps } from "./componentTypes.js";
 
 type DataRequestType<TData extends MRT_RowData> = {
   dataQueryParams: DataQueryParamsType;

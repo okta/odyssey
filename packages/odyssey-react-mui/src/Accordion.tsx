@@ -11,16 +11,16 @@
  */
 
 import { ReactNode, memo } from "react";
-import type { HtmlProps } from "./HtmlProps";
+import type { HtmlProps } from "./HtmlProps.js";
 import {
   Accordion as MuiAccordion,
   AccordionDetails as MuiAccordionDetails,
   AccordionSummary as MuiAccordionSummary,
   AccordionProps as MuiAccordionProps,
 } from "@mui/material";
-import { ChevronDownIcon } from "./icons.generated";
-import { Support } from "./Typography";
-import { useUniqueId } from "./useUniqueId";
+import { ChevronDownIcon } from "./icons.generated/index.js";
+import { Support } from "./Typography.js";
+import { useUniqueId } from "./useUniqueId.js";
 
 export const accordionVariantValues = ["default", "borderless"] as const;
 

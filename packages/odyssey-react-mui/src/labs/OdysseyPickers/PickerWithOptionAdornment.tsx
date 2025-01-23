@@ -19,18 +19,18 @@ import {
 } from "react";
 import styled from "@emotion/styled";
 
-import { Box } from "../../Box";
+import { Box } from "../../Box.js";
 import {
   ComposablePicker,
   ComposablePickerProps,
   type AdornmentSize,
   type BasePickerProps,
   type BasePickerType,
-} from "./ComposablePicker";
+} from "./ComposablePicker.js";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
-} from "../../OdysseyDesignTokensContext";
+} from "../../OdysseyDesignTokensContext.js";
 import {
   type BaseOptionProps,
   type LabelDescription,
@@ -40,9 +40,9 @@ import {
   OptionLabelContainer,
   OptionMetadataComponent,
   OptionProps,
-} from "./Picker";
-import { Heading6 } from "../../Typography";
-import { Tag } from "../../Tag";
+} from "./Picker.js";
+import { Heading6 } from "../../Typography.js";
+import { Tag } from "../../Tag.js";
 
 type Adornment = ReactNode | string;
 

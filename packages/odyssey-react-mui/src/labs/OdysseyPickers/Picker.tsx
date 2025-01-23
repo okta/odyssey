@@ -24,12 +24,12 @@ import {
   ComposablePicker,
   type BasePickerProps,
   type BasePickerType,
-} from "./ComposablePicker";
+} from "./ComposablePicker.js";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
-} from "../../OdysseyDesignTokensContext";
-import { Heading6, Paragraph } from "../../Typography";
+} from "../../OdysseyDesignTokensContext.js";
+import { Heading6, Paragraph } from "../../Typography.js";
 
 export const StyledOption = styled.li<{ hasAdornment?: boolean }>(
   ({ hasAdornment }) => ({

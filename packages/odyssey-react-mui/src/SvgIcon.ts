@@ -10,7 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { SvgIconProps } from "./SvgIcon";
+import { SvgIconProps } from "@mui/material";
+
+export { SvgIcon } from "@mui/material";
 
 export interface SvgIconNoChildrenProps extends Omit<SvgIconProps, "children"> {
   /**
@@ -18,6 +20,3 @@ export interface SvgIconNoChildrenProps extends Omit<SvgIconProps, "children"> {
    */
   children?: never;
 }
-
-export { default as SvgIcon } from "@mui/material/SvgIcon";
-export * from "@mui/material/SvgIcon";

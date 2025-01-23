@@ -12,7 +12,7 @@
 
 import { render, waitFor, within } from "@testing-library/react";
 
-import { defaultComponentProps, UiShell, UiShellProps } from "./UiShell";
+import { defaultComponentProps, UiShell, UiShellProps } from "./UiShell.js";
 import { ReactElement } from "react";
 
 describe("UiShell", () => {

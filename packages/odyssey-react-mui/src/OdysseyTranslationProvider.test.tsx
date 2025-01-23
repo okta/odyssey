@@ -11,9 +11,9 @@
  */
 
 import { render, screen } from "@testing-library/react";
-import { OdysseyTranslationProvider } from "./OdysseyTranslationProvider";
-import { odysseyTranslate } from "./i18n";
-import { TextField } from "./TextField";
+import { OdysseyTranslationProvider } from "./OdysseyTranslationProvider.js";
+import { odysseyTranslate } from "./i18n.js";
+import { TextField } from "./TextField.js";
 
 describe("OdysseyTranslationProvider", () => {
   it("defaults to 'en' translation bundle", () => {

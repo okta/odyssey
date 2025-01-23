@@ -17,13 +17,13 @@ import { Skeleton } from "@mui/material";
 import {
   type DesignTokens,
   useOdysseyDesignTokens,
-} from "../../OdysseyDesignTokensContext";
-import { SideNavLogo } from "./SideNavLogo";
-import { SideNavLogoProps, SideNavProps } from "./types";
-import { Heading5 } from "../../Typography";
-import { TOP_NAV_HEIGHT } from "../TopNav";
-import { ContrastColors } from "../../createContrastColors";
-import { useUiShellContext } from "../../ui-shell/UiShellProvider";
+} from "../../OdysseyDesignTokensContext.js";
+import { SideNavLogo } from "./SideNavLogo.js";
+import { SideNavLogoProps, SideNavProps } from "./types.js";
+import { Heading5 } from "../../Typography.js";
+import { TOP_NAV_HEIGHT } from "../TopNav/index.js";
+import { ContrastColors } from "../../createContrastColors.js";
+import { useUiShellContext } from "../../ui-shell/UiShellProvider.js";
 
 const SideNavHeaderContainer = styled("div")({
   position: "relative",

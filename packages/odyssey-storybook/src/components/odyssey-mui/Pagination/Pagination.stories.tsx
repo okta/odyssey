@@ -16,7 +16,7 @@ import {
   paginationTypeValues,
   type PaginationProps,
 } from "@okta/odyssey-react-mui";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 
 const meta = {
   title: "MUI Components/Pagination",

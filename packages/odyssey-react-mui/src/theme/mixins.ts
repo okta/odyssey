@@ -12,7 +12,7 @@
 
 import type { ThemeOptions } from "@mui/material";
 
-import { DesignTokens } from "./theme";
+import { DesignTokens } from "./theme.js";
 
 export const mixins = ({
   odysseyTokens,

@@ -15,16 +15,16 @@ import { InputBase } from "@mui/material";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Box } from "../Box";
-import { Button } from "../Buttons";
-import { paginationTypeValues } from "./constants";
-import { ArrowLeftIcon, ArrowRightIcon } from "../icons.generated";
+import { Box } from "../Box.js";
+import { Button } from "../Buttons/index.js";
+import { paginationTypeValues } from "./constants.js";
+import { ArrowLeftIcon, ArrowRightIcon } from "../icons.generated/index.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "../OdysseyDesignTokensContext";
-import { usePagination } from "./usePagination";
-import { Paragraph } from "../Typography";
+} from "../OdysseyDesignTokensContext.js";
+import { usePagination } from "./usePagination.js";
+import { Paragraph } from "../Typography.js";
 
 const PaginationContainer = styled("nav")({
   display: "flex",

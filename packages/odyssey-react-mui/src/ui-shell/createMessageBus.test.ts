@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createMessageBus } from "./createMessageBus";
+import { createMessageBus } from "./createMessageBus.js";
 
 describe("createEventBus", () => {
   test("messages are not sent once unsubscribed", () => {

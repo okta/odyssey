@@ -15,31 +15,31 @@ export { LocalizationProvider } from "@mui/x-date-pickers";
 export type { LocalizationProviderProps } from "@mui/x-date-pickers";
 
 // export * from "./AdaptablePicker";
-export * from "./AppTile";
-export * from "./DatePickers";
-export * from "./DataView";
+export * from "./AppTile.js";
+export * from "./DatePickers/index.js";
+export * from "./DataView/index.js";
 /** @deprecated Will be removed in a future Odyssey version in lieu of the one shipping with DataTable */
-export * from "./DataTablePagination";
-export * from "./DataFilters";
-export * from "./materialReactTableTypes";
+export * from "./DataTablePagination.js";
+export * from "./DataFilters.js";
+export * from "./materialReactTableTypes.js";
 /** @deprecated Will be removed in a future Odyssey version in lieu of DataTable */
-export * from "./StaticTable";
-export * from "./OdysseyPickers";
-export * from "./PageTemplate";
+export * from "./StaticTable.js";
+export * from "./OdysseyPickers/index.js";
+export * from "./PageTemplate/index.js";
 /** @deprecated Will be removed in a future Odyssey version in lieu of DataTable */
-export * from "./PaginatedTable";
-export * from "./UserProfile";
-export * from "./UserProfileMenuButton";
+export * from "./PaginatedTable.js";
+export * from "./UserProfile.js";
+export * from "./UserProfileMenuButton.js";
 /** @deprecated Will be removed in a future Odyssey version. Use the `/ui-shell` export unless your app is running React v17. */
-export * from "../ui-shell/AppSwitcher";
+export * from "../ui-shell/AppSwitcher/index.js";
 /** @deprecated Will be removed in a future Odyssey version. Use the `/ui-shell` export unless your app is running React v17. */
-export * from "../ui-shell/SideNav";
+export * from "../ui-shell/SideNav/index.js";
 /** @deprecated Will be removed in a future Odyssey version. Use the `/ui-shell` export unless your app is running React v17. */
-export * from "../ui-shell/TopNav";
+export * from "../ui-shell/TopNav/index.js";
 
 export {
   /** @deprecated Will be removed in a future Odyssey version. Use `PickerWithOptionAdornment` */
   GroupPicker,
   type GroupPickerOptionType,
   type GroupPickerProps,
-} from "./GroupPicker";
+} from "./GroupPicker.js";

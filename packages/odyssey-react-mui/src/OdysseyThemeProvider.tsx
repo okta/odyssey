@@ -18,15 +18,15 @@ import {
 import { ThemeOptions } from "@mui/material";
 import { deepmerge } from "@mui/utils";
 import styled from "@emotion/styled";
-import { createOdysseyMuiTheme, DesignTokensOverride } from "./theme";
+import { createOdysseyMuiTheme, DesignTokensOverride } from "./theme/index.js";
 import * as Tokens from "@okta/odyssey-design-tokens";
 
 import {
   ContrastMode,
   ContrastModeContext,
   useContrastMode,
-} from "./useContrastMode";
-import { OdysseyDesignTokensContext } from "./OdysseyDesignTokensContext";
+} from "./useContrastMode.js";
+import { OdysseyDesignTokensContext } from "./OdysseyDesignTokensContext.js";
 
 export type OdysseyThemeProviderProps = {
   children: ReactNode;

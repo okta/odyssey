@@ -29,8 +29,8 @@ import {
   typographyVariantMapping,
   TypographyVariantValue,
 } from "@okta/odyssey-react-mui";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { axeRun } from "../../../axe-util";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
+import { axeRun } from "../../../axe-util.js";
 import { createElement } from "react";
 
 const variantMapping = {

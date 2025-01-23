@@ -4,9 +4,9 @@
   "compilerOptions": {
     "isolatedModules": true,
     "jsx": "react",
-    "lib": ["dom", "es2022"],
-    "module": "es2020",
-    "moduleResolution": "Bundler",
+    "lib": ["DOM", "ESNext"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "noEmit": true,
     "target": "es2020"
   }

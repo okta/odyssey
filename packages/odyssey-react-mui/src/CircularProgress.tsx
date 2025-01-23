@@ -13,7 +13,7 @@
 import { memo } from "react";
 import { CircularProgress as MuiCircularProgress } from "@mui/material";
 
-import type { HtmlProps } from "./HtmlProps";
+import type { HtmlProps } from "./HtmlProps.js";
 
 export type CircularProgressProps = {
   /**

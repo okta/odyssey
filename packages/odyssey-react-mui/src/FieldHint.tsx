@@ -14,12 +14,12 @@ import { memo } from "react";
 import styled from "@emotion/styled";
 import { FormHelperText } from "@mui/material";
 
-import { FieldComponentProps } from "./FieldComponentProps";
-import type { HtmlProps } from "./HtmlProps";
+import { FieldComponentProps } from "./FieldComponentProps.js";
+import type { HtmlProps } from "./HtmlProps.js";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
-} from "./OdysseyDesignTokensContext";
+} from "./OdysseyDesignTokensContext.js";
 
 const HintLinkContainer = styled.span<{ odysseyDesignTokens: DesignTokens }>(
   ({ odysseyDesignTokens }) => ({

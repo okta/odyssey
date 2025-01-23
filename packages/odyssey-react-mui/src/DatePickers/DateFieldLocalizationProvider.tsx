@@ -14,7 +14,7 @@ import { memo, PropsWithChildren } from "react";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
 
-import { DateFieldsTranslations } from "./useDateFieldsTranslations";
+import { DateFieldsTranslations } from "./useDateFieldsTranslations.js";
 
 type DateFieldLocalizationProviderProps = {
   localeText: DateFieldsTranslations;

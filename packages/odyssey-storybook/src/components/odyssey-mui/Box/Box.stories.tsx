@@ -14,7 +14,7 @@ import { Box, TextField } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 import { expect, within } from "@storybook/test";
 
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 
 const meta = {
   title: "MUI Components/Box",

@@ -11,7 +11,7 @@
  */
 
 import { type AriaRole } from "react";
-import { ElementError } from "./sanityChecks";
+import { ElementError } from "./sanityChecks.js";
 import { getRole } from "dom-accessibility-api";
 
 /**

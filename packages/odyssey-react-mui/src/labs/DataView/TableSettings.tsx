@@ -15,10 +15,10 @@ import { Checkbox as MuiCheckbox } from "@mui/material";
 import { MRT_DensityState, MRT_RowData } from "material-react-table";
 import { useTranslation } from "react-i18next";
 
-import { densityValues } from "./constants";
-import { ListIcon, ShowIcon } from "../../icons.generated";
-import { MenuButton, MenuItem } from "../../Buttons";
-import { TableLayoutProps, TableState } from "./componentTypes";
+import { densityValues } from "./constants.js";
+import { ListIcon, ShowIcon } from "../../icons.generated/index.js";
+import { MenuButton, MenuItem } from "../../Buttons/index.js";
+import { TableLayoutProps, TableState } from "./componentTypes.js";
 
 export type TableSettingsProps<TData extends MRT_RowData> = {
   setTableState: Dispatch<SetStateAction<TableState>>;

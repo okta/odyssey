@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createUniqueAlphabeticalId } from "./createUniqueAlphabeticalId";
+import { createUniqueAlphabeticalId } from "./createUniqueAlphabeticalId.js";
 
 describe("createUniqueAlphabeticalId", () => {
   test("only has lowercase letters", () => {
