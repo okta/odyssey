@@ -24,8 +24,8 @@ import {
   UserProfileMenuButtonProps,
 } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
-import icons from "../../../../.storybook/components/iconUtils";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
+import icons from "../../../../.storybook/components/iconUtils.js";
 import { UserIcon } from "@okta/odyssey-react-mui/icons";
 import { ReactNode } from "react";
 

@@ -28,24 +28,24 @@ import {
 import styled from "@emotion/styled";
 import { useTranslation } from "react-i18next";
 
-import { Box } from "../../Box";
+import { Box } from "../../Box.js";
 import {
   Button,
   ButtonContext,
   MenuButton,
   MenuButtonProps,
-} from "../../Buttons";
+} from "../../Buttons/index.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "../../OdysseyDesignTokensContext";
-import { Heading5, Paragraph, Support } from "../../Typography";
+} from "../../OdysseyDesignTokensContext.js";
+import { Heading5, Paragraph, Support } from "../../Typography.js";
 import {
   ChevronDownIcon,
   ChevronUpIcon,
   MoreIcon,
-} from "../../icons.generated";
-import { CardLayoutProps } from "./componentTypes";
+} from "../../icons.generated/index.js";
+import { CardLayoutProps } from "./componentTypes.js";
 import { MRT_RowData } from "material-react-table";
 
 export const CARD_IMAGE_SIZE = "64px";

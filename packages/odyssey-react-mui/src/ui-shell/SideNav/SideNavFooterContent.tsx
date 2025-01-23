@@ -16,13 +16,13 @@ import styled from "@emotion/styled";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
-} from "../../OdysseyDesignTokensContext";
-import type { SideNavFooterItem } from "./types";
-import { Box } from "../../Box";
-import { Link } from "../../Link";
+} from "../../OdysseyDesignTokensContext.js";
+import type { SideNavFooterItem } from "./types.js";
+import { Box } from "../../Box.js";
+import { Link } from "../../Link.js";
 import { useTranslation } from "react-i18next";
-import { useUiShellContext } from "../../ui-shell/UiShellProvider";
-import { ContrastColors } from "../../createContrastColors";
+import { useUiShellContext } from "../../ui-shell/UiShellProvider.js";
+import { ContrastColors } from "../../createContrastColors.js";
 
 const StyledFooterNav = styled("nav")({
   display: "flex",

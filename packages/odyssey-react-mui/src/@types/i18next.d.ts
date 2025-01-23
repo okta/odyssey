@@ -11,7 +11,7 @@
  */
 
 import "i18next";
-import { defaultNS, keySeparator, resources } from "../i18n";
+import { defaultNS, keySeparator, resources } from "../i18n.js";
 
 declare module "i18next" {
   interface CustomTypeOptions {

@@ -12,7 +12,7 @@
 
 import { forwardRef, memo, ReactNode, useMemo } from "react";
 
-import { MuiPropsContext, MuiPropsContextType } from "./MuiPropsContext";
+import { MuiPropsContext, MuiPropsContextType } from "./MuiPropsContext.js";
 
 export type MuiPropsChildProps = {
   children: ReactNode;

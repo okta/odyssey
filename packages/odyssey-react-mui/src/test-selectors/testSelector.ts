@@ -18,7 +18,7 @@ import {
 import {
   type RoleSelectorMethod,
   type TextSelectorMethod,
-} from "./getByQuerySelector";
+} from "./getByQuerySelector.js";
 
 /**
  * We can't use React's `AriaRole` because it allows any string value. We want to be very specific. This is otherwise copied straight from React's code.

@@ -24,10 +24,10 @@ import {
 import { BugIcon } from "@okta/odyssey-react-mui/icons";
 import { expect, userEvent, waitFor, within } from "@storybook/test";
 
-import { MuiThemeDecorator } from "../../../../.storybook/components";
-import icons from "../../../../.storybook/components/iconUtils";
-import { axeRun } from "../../../axe-util";
-import type { PlaywrightProps } from "../storybookTypes";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
+import icons from "../../../../.storybook/components/iconUtils.js";
+import { axeRun } from "../../../axe-util.js";
+import type { PlaywrightProps } from "../storybookTypes.js";
 
 const storybookMeta: Meta<TabsProps & TabItemProps> = {
   title: "MUI Components/Tabs",

@@ -26,11 +26,11 @@ import {
 } from "@mui/lab";
 import { Tab as MuiTab } from "@mui/material";
 
-import { Badge, BadgeProps } from "./Badge";
-import { Box } from "./Box";
-import { HtmlProps } from "./HtmlProps";
-import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
-import { type TestSelector } from "./test-selectors";
+import { Badge, BadgeProps } from "./Badge.js";
+import { Box } from "./Box.js";
+import { HtmlProps } from "./HtmlProps.js";
+import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext.js";
+import { type TestSelector } from "./test-selectors/index.js";
 
 export const TabsTestSelector = {
   children: {

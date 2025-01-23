@@ -47,10 +47,10 @@ import {
   InformationCircleFilledIcon,
   SubtractIcon,
   WarningFilledIcon,
-} from "../icons.generated";
-import { DesignTokens } from "./theme";
+} from "../icons.generated/index.js";
+import { DesignTokens } from "./theme.js";
 import { CSSProperties } from "react";
-import { ContrastMode } from "../useContrastMode";
+import { ContrastMode } from "../useContrastMode.js";
 import { CSSObject } from "@emotion/react";
 
 //Widths used in `Drawer` component

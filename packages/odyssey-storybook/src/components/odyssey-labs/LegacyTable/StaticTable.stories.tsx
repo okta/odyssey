@@ -14,7 +14,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { Button, DataTableColumn } from "@okta/odyssey-react-mui";
 import { StaticTable, StaticTableProps } from "@okta/odyssey-react-mui/labs";
 
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 
 const storybookMeta: Meta = {
   title: "Labs Components/Legacy Table/StaticTable",

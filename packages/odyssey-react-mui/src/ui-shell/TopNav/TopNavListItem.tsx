@@ -18,11 +18,11 @@ import {
   MouseEventHandler,
 } from "react";
 
-import { Link } from "../../Link";
+import { Link } from "../../Link.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "../../OdysseyDesignTokensContext";
+} from "../../OdysseyDesignTokensContext.js";
 
 const StyledTopNavItemLabelContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",

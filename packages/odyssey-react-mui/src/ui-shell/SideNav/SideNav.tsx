@@ -27,28 +27,28 @@ import { UniqueIdentifier } from "@dnd-kit/core";
 import { ErrorBoundary } from "react-error-boundary";
 import { Property } from "csstype";
 
-import { ContrastColors } from "../../createContrastColors";
-import { NavAccordion } from "./NavAccordion";
+import { ContrastColors } from "../../createContrastColors.js";
+import { NavAccordion } from "./NavAccordion.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "../../OdysseyDesignTokensContext";
-import { OdysseyThemeProvider } from "../../OdysseyThemeProvider";
-import type { SideNavProps } from "./types";
-import { SideNavHeader } from "./SideNavHeader";
+} from "../../OdysseyDesignTokensContext.js";
+import { OdysseyThemeProvider } from "../../OdysseyThemeProvider.js";
+import type { SideNavProps } from "./types.js";
+import { SideNavHeader } from "./SideNavHeader.js";
 import {
   SideNavItemContent,
   StyledSideNavListItem,
-} from "./SideNavItemContent";
-import { SideNavFooterContent } from "./SideNavFooterContent";
-import { SideNavItemContentContext } from "./SideNavItemContentContext";
-import { SideNavToggleButton } from "./SideNavToggleButton";
-import { SortableList } from "./SortableList/SortableList";
-import { Overline } from "../../Typography";
+} from "./SideNavItemContent.js";
+import { SideNavFooterContent } from "./SideNavFooterContent.js";
+import { SideNavItemContentContext } from "./SideNavItemContentContext.js";
+import { SideNavToggleButton } from "./SideNavToggleButton.js";
+import { SortableList } from "./SortableList/SortableList.js";
+import { Overline } from "../../Typography.js";
 import {
   UiShellColors,
   useUiShellContext,
-} from "../../ui-shell/UiShellProvider";
+} from "../../ui-shell/UiShellProvider.js";
 
 export const DEFAULT_SIDE_NAV_WIDTH = "300px";
 

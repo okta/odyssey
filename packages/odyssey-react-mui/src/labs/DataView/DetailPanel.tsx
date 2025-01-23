@@ -11,7 +11,7 @@
  */
 
 import { memo } from "react";
-import { CardLayoutProps } from "./componentTypes";
+import { CardLayoutProps } from "./componentTypes.js";
 import { MRT_RowData } from "material-react-table";
 
 const DetailPanel = <TData extends MRT_RowData>({

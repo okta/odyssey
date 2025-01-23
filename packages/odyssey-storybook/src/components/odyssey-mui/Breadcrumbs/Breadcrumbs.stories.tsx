@@ -18,7 +18,7 @@ import {
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect, within } from "@storybook/test";
 
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 
 const storybookMeta: Meta<BreadcrumbsProps> = {
   title: "MUI Components/Breadcrumbs",

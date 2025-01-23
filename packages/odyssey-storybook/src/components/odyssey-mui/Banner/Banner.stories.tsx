@@ -19,9 +19,9 @@ import {
 import { Meta, StoryObj } from "@storybook/react";
 import { expect, fn, userEvent, within } from "@storybook/test";
 
-import { axeRun } from "../../../axe-util";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
-import type { PlaywrightProps } from "../storybookTypes";
+import { axeRun } from "../../../axe-util.js";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
+import type { PlaywrightProps } from "../storybookTypes.js";
 
 type PlayType = {
   args: BannerProps;

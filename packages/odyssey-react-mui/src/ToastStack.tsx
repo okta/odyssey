@@ -12,7 +12,7 @@
 
 import { memo, ReactElement } from "react";
 import { Box, Snackbar } from "@mui/material";
-import { Toast } from "./Toast";
+import { Toast } from "./Toast.js";
 
 export type ToastListProps = {
   /**

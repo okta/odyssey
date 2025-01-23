@@ -25,13 +25,13 @@ import {
 } from "@mui/material";
 import styled from "@emotion/styled";
 
-import { Button } from "../Buttons";
+import { Button } from "../Buttons/index.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from ".././OdysseyDesignTokensContext";
-import { Heading5, Paragraph, Subordinate } from ".././Typography";
-import { Box } from ".././Box";
+} from ".././OdysseyDesignTokensContext.js";
+import { Heading5, Paragraph, Subordinate } from ".././Typography.js";
+import { Box } from ".././Box.js";
 
 export const APP_TILE_COMPACT_IMAGE_HEIGHT = "2.85714286rem"; // 40px
 export const APP_TILE_IMAGE_HEIGHT = "4.57142857rem"; // 64px

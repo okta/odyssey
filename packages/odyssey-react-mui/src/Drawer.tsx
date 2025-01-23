@@ -24,14 +24,14 @@ import { Drawer as MuiDrawer } from "@mui/material";
 import styled from "@emotion/styled";
 import { useTranslation } from "react-i18next";
 
-import { Button } from "./Buttons";
-import { CloseIcon } from "./icons.generated";
+import { Button } from "./Buttons/index.js";
+import { CloseIcon } from "./icons.generated/index.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "./OdysseyDesignTokensContext";
-import { Heading5 } from "./Typography";
-import type { HtmlProps } from "./HtmlProps";
+} from "./OdysseyDesignTokensContext.js";
+import { Heading5 } from "./Typography.js";
+import type { HtmlProps } from "./HtmlProps.js";
 
 export const variantValues = ["temporary", "persistent"] as const;
 

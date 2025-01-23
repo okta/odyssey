@@ -14,7 +14,10 @@
 import { deepmerge } from "@mui/utils";
 import { ThemeOptions } from "@mui/material";
 
-import { datePickerTheme, dateStyles } from "../../DatePickers/datePickerTheme";
+import {
+  datePickerTheme,
+  dateStyles,
+} from "../../DatePickers/datePickerTheme.js";
 
 const theme: ThemeOptions = {
   components: {

@@ -13,8 +13,8 @@
 import { memo } from "react";
 import { Chip } from "@mui/material";
 
-import { useMuiProps } from "./MuiPropsContext";
-import type { HtmlProps } from "./HtmlProps";
+import { useMuiProps } from "./MuiPropsContext.js";
+import type { HtmlProps } from "./HtmlProps.js";
 
 export const statusSeverityValues = [
   "default",

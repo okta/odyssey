@@ -15,8 +15,8 @@ import { Meta, StoryObj } from "@storybook/react";
 import { Menu as MuiMenu } from "@mui/material";
 import { MenuItem, MenuItemProps } from "@okta/odyssey-react-mui";
 
-import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData.js";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 
 const storybookMeta: Meta<typeof MenuItem> = {
   title: "MUI Components/MenuItem",

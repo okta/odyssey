@@ -41,27 +41,31 @@ import {
   ChevronDownIcon,
   DragIndicatorIcon,
   MoreIcon,
-} from "../icons.generated";
-import { densityValues } from "./constants";
-import { Pagination, paginationTypeValues, usePagination } from "../Pagination";
-import { DataFilter, DataFilters } from "../labs/DataFilters";
+} from "../icons.generated/index.js";
+import { densityValues } from "./constants.js";
+import {
+  Pagination,
+  paginationTypeValues,
+  usePagination,
+} from "../Pagination/index.js";
+import { DataFilter, DataFilters } from "../labs/DataFilters.js";
 import {
   DataTableRowActions,
   DataTableRowActionsProps,
-} from "./DataTableRowActions";
-import { useRowReordering } from "./useRowReordering";
-import { DataTableSettings } from "./DataTableSettings";
-import { Box } from "../Box";
-import { DataTableRowSelectionState, DataTableRowData } from ".";
+} from "./DataTableRowActions.js";
+import { useRowReordering } from "./useRowReordering.js";
+import { DataTableSettings } from "./DataTableSettings.js";
+import { Box } from "../Box.js";
+import { DataTableRowSelectionState, DataTableRowData } from "./index.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "../OdysseyDesignTokensContext";
-import { useScrollIndication } from "./useScrollIndication";
+} from "../OdysseyDesignTokensContext.js";
+import { useScrollIndication } from "./useScrollIndication.js";
 import styled from "@emotion/styled";
-import { EmptyState } from "../EmptyState";
-import { Button, MenuButton, MenuButtonProps } from "../Buttons";
-import { Callout } from "../Callout";
+import { EmptyState } from "../EmptyState.js";
+import { Button, MenuButton, MenuButtonProps } from "../Buttons/index.js";
+import { Callout } from "../Callout.js";
 
 export type DataTableColumn<T extends DataTableRowData> = MRT_ColumnDef<T> & {
   /**

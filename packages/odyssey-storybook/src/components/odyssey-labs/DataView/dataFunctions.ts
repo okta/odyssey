@@ -11,7 +11,7 @@
  */
 
 import { DataFilter, DataGetDataType } from "@okta/odyssey-react-mui/labs";
-import { Person } from "./personData";
+import { Person } from "./personData.js";
 
 export const filterData = ({
   data,

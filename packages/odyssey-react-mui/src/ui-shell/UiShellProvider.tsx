@@ -20,8 +20,8 @@ import {
 import {
   generateContrastColors,
   ContrastColors,
-} from "../createContrastColors";
-import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext";
+} from "../createContrastColors.js";
+import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext.js";
 
 export type UiShellColors = {
   appBackgroundColor: string;

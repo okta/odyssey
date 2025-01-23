@@ -13,15 +13,15 @@
 import styled from "@emotion/styled";
 import { memo, type ReactElement } from "react";
 
-import type { HtmlProps } from "../../HtmlProps";
+import type { HtmlProps } from "../../HtmlProps.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "../../OdysseyDesignTokensContext";
+} from "../../OdysseyDesignTokensContext.js";
 import {
   UiShellColors,
   useUiShellContext,
-} from "../../ui-shell/UiShellProvider";
+} from "../../ui-shell/UiShellProvider.js";
 
 export const TOP_NAV_HEIGHT = `${64 / 14}rem`;
 

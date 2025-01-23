@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createStore } from "./createStore";
+import { createStore } from "./createStore.js";
 
 describe("createStore", () => {
   test("starts with no initial state", () => {

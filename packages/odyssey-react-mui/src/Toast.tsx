@@ -14,11 +14,11 @@ import { useEffect, memo, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert, AlertTitle, Snackbar } from "@mui/material";
 
-import { Button } from "./Buttons";
-import { HtmlProps } from "./HtmlProps";
-import { CloseIcon } from "./icons.generated";
-import { Link } from "./Link";
-import { ScreenReaderText } from "./ScreenReaderText";
+import { Button } from "./Buttons/index.js";
+import { HtmlProps } from "./HtmlProps.js";
+import { CloseIcon } from "./icons.generated/index.js";
+import { Link } from "./Link.js";
+import { ScreenReaderText } from "./ScreenReaderText.js";
 
 export const toastRoleValues = ["status", "alert"] as const;
 export const toastSeverityValues = [

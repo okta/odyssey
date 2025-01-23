@@ -27,8 +27,8 @@ import {
   TextField,
 } from "@okta/odyssey-react-mui";
 
-import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData.js";
 
 const storybookMeta: Meta<FormProps> = {
   title: "MUI Components/Forms/Form",

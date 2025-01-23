@@ -15,15 +15,15 @@ import { Alert, AlertTitle, Box } from "@mui/material";
 import { memo, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
-import type { HtmlProps } from "./HtmlProps";
-import { Link, LinkProps } from "./Link";
+import type { HtmlProps } from "./HtmlProps.js";
+import { Link, LinkProps } from "./Link.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "./OdysseyDesignTokensContext";
-import { type TestSelector } from "./test-selectors";
-import { Paragraph } from "./Typography";
-import { useUniqueId } from "./useUniqueId";
+} from "./OdysseyDesignTokensContext.js";
+import { type TestSelector } from "./test-selectors/index.js";
+import { Paragraph } from "./Typography.js";
+import { useUniqueId } from "./useUniqueId.js";
 
 export const CalloutTestSelector = {
   accessibleText: {

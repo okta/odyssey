@@ -21,33 +21,33 @@ import { useTranslation } from "react-i18next";
 import {
   availableLayouts as allAvailableLayouts,
   densityValues,
-} from "./constants";
+} from "./constants.js";
 import {
   DataLayout,
   UniversalProps,
   ViewProps,
   TableState,
-} from "./componentTypes";
-import { Box } from "../../Box";
-import { BulkActionsMenu } from "./BulkActionsMenu";
-import { Callout } from "../../Callout";
-import { DataFilters } from "../DataFilters";
-import { EmptyState } from "../../EmptyState";
-import { fetchData } from "./fetchData";
-import { LayoutSwitcher } from "./LayoutSwitcher";
-import { MenuButton } from "../../Buttons";
-import { MoreIcon } from "../../icons.generated";
-import { TableSettings } from "./TableSettings";
-import { Pagination, usePagination } from "../../Pagination";
-import { TableLayoutContent } from "./TableLayoutContent";
-import { CardLayoutContent } from "./CardLayoutContent";
-import { useFilterConversion } from "./useFilterConversion";
-import { useRowReordering } from "../../DataTable/useRowReordering";
-import { Typography } from "../../Typography";
+} from "./componentTypes.js";
+import { Box } from "../../Box.js";
+import { BulkActionsMenu } from "./BulkActionsMenu.js";
+import { Callout } from "../../Callout.js";
+import { DataFilters } from "../DataFilters.js";
+import { EmptyState } from "../../EmptyState.js";
+import { fetchData } from "./fetchData.js";
+import { LayoutSwitcher } from "./LayoutSwitcher.js";
+import { MenuButton } from "../../Buttons/index.js";
+import { MoreIcon } from "../../icons.generated/index.js";
+import { TableSettings } from "./TableSettings.js";
+import { Pagination, usePagination } from "../../Pagination/index.js";
+import { TableLayoutContent } from "./TableLayoutContent.js";
+import { CardLayoutContent } from "./CardLayoutContent.js";
+import { useFilterConversion } from "./useFilterConversion.js";
+import { useRowReordering } from "../../DataTable/useRowReordering.js";
+import { Typography } from "../../Typography.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "../../OdysseyDesignTokensContext";
+} from "../../OdysseyDesignTokensContext.js";
 import styled from "@emotion/styled";
 
 export type DataViewProps<TData extends MRT_RowData> = UniversalProps<TData> &

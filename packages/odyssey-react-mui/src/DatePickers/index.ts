@@ -10,6 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export * from "./DatePicker";
-export * from "./datePickerTheme";
-export * from "./TimeZonePicker";
+export * from "./DatePicker.js";
+export * from "./datePickerTheme.js";
+export * from "./TimeZonePicker.js";

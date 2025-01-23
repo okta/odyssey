@@ -15,15 +15,15 @@ import {
   FormControl as MuiFormControl,
   FormLabel as MuiFormLabel,
 } from "@mui/material";
-import { FieldComponentProps } from "./FieldComponentProps";
-import { FieldError } from "./FieldError";
-import { FieldHint } from "./FieldHint";
-import { FieldLabel } from "./FieldLabel";
-import { HtmlProps } from "./HtmlProps";
-import { Typography } from "./Typography";
-import { useFieldset } from "./FieldsetContext";
+import { FieldComponentProps } from "./FieldComponentProps.js";
+import { FieldError } from "./FieldError.js";
+import { FieldHint } from "./FieldHint.js";
+import { FieldLabel } from "./FieldLabel.js";
+import { HtmlProps } from "./HtmlProps.js";
+import { Typography } from "./Typography.js";
+import { useFieldset } from "./FieldsetContext.js";
 import { useTranslation } from "react-i18next";
-import { useUniqueId } from "./useUniqueId";
+import { useUniqueId } from "./useUniqueId.js";
 
 export const fieldTypeValues = ["single", "group"] as const;
 

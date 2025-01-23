@@ -16,9 +16,9 @@ import { useCallback } from "react";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "../../OdysseyDesignTokensContext";
-import { Tooltip } from "../../Tooltip";
-import { MuiPropsContext, MuiPropsContextType } from "../../MuiPropsContext";
+} from "../../OdysseyDesignTokensContext.js";
+import { Tooltip } from "../../Tooltip.js";
+import { MuiPropsContext, MuiPropsContextType } from "../../MuiPropsContext.js";
 
 const AppSwitcherAppWrapperComponent = styled("li", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",

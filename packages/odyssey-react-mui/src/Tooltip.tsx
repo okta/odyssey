@@ -13,9 +13,9 @@
 import { Tooltip as MuiTooltip } from "@mui/material";
 import type { TooltipProps as MuiTooltipProps } from "@mui/material";
 
-import { MuiPropsChild } from "./MuiPropsChild";
+import { MuiPropsChild } from "./MuiPropsChild.js";
 import { ReactElement, memo } from "react";
-import { HtmlProps } from "./HtmlProps";
+import { HtmlProps } from "./HtmlProps.js";
 
 export type TooltipProps = {
   /**

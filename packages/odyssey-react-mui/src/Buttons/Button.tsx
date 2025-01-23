@@ -15,7 +15,7 @@ import {
   AdditionalBaseButtonProps,
   BaseButton,
   BaseButtonProps,
-} from "./BaseButton";
+} from "./BaseButton.js";
 
 export type ButtonProps = Omit<BaseButtonProps, "children"> &
   AdditionalBaseButtonProps;

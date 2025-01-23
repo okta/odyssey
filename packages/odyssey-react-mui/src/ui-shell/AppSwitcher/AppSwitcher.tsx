@@ -15,14 +15,14 @@ import { memo } from "react";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "../../OdysseyDesignTokensContext";
-import { OktaAura } from "./OktaAura";
+} from "../../OdysseyDesignTokensContext.js";
+import { OktaAura } from "./OktaAura.js";
 import {
   AppSwitcherApp,
   AppSwitcherAppIconData,
   AppSwitcherAppSkeleton,
-} from "./AppSwitcherApp";
-import { TOP_NAV_HEIGHT } from "../TopNav";
+} from "./AppSwitcherApp.js";
+import { TOP_NAV_HEIGHT } from "../TopNav/index.js";
 
 export type AppSwitcherProps = {
   appIcons: AppSwitcherAppIconData[];

@@ -12,8 +12,8 @@
 
 import type { ReactElement, SyntheticEvent } from "react";
 
-import type { HtmlProps } from "../../HtmlProps";
-import type { statusSeverityValues } from "../../Status";
+import type { HtmlProps } from "../../HtmlProps.js";
+import type { statusSeverityValues } from "../../Status.js";
 import { UniqueIdentifier } from "@dnd-kit/core";
 
 type LogoWithLink = {

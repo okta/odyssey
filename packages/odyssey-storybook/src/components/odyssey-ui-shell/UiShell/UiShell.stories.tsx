@@ -44,7 +44,7 @@ import {
 import { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 import { useRef } from "react";
 
 const storybookMeta: Meta<UiShellProps & { sideNavBackgroundColor?: string }> =

@@ -14,9 +14,9 @@ import { InputLabel as MuiInputLabel } from "@mui/material";
 import { memo, useMemo } from "react";
 
 import { useTranslation } from "react-i18next";
-import { ScreenReaderText } from "./ScreenReaderText";
-import { Subordinate } from "./Typography";
-import type { HtmlProps } from "./HtmlProps";
+import { ScreenReaderText } from "./ScreenReaderText.js";
+import { Subordinate } from "./Typography.js";
+import type { HtmlProps } from "./HtmlProps.js";
 
 export type FieldLabelProps = {
   hasVisibleLabel: boolean;

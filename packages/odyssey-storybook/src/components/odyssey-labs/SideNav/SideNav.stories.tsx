@@ -36,9 +36,9 @@ import { Meta, StoryObj } from "@storybook/react";
 import { configure, expect, userEvent, waitFor, within } from "@storybook/test";
 import { useEffect, useState } from "react";
 
-import { PlaywrightProps } from "../../odyssey-mui/storybookTypes";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
-import PlaceholderLogo from "../PickerWithOptionAdornment/PlaceholderLogo";
+import { PlaywrightProps } from "../../odyssey-mui/storybookTypes.js";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
+import PlaceholderLogo from "../PickerWithOptionAdornment/PlaceholderLogo.js";
 
 const CustomFooterComponent = () => {
   return (

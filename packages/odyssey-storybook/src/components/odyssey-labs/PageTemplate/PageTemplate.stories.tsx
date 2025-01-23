@@ -12,12 +12,12 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 import {
   Person,
   columns as personColumns,
   data as personData,
-} from "../../odyssey-mui/DataTable/personData";
+} from "../../odyssey-mui/DataTable/personData.js";
 import {
   Layout,
   PageTemplate,

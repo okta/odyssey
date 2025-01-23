@@ -25,12 +25,12 @@ import {
 import { avatarClasses } from "@mui/material/Avatar";
 import { HTMLAttributes, memo, useCallback } from "react";
 
-import { AutocompleteProps } from "../Autocomplete";
-import { Field } from "../Field";
-import { Subordinate } from "../Typography";
-import { Tag } from "../Tag";
-import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext";
-import { UserIcon, GridIcon, GroupIcon } from "../icons.generated";
+import { AutocompleteProps } from "../Autocomplete.js";
+import { Field } from "../Field.js";
+import { Subordinate } from "../Typography.js";
+import { Tag } from "../Tag.js";
+import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext.js";
+import { UserIcon, GridIcon, GroupIcon } from "../icons.generated/index.js";
 
 export type GroupPickerOptionType = {
   appsCount?: number;

@@ -10,8 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { bufferLatest } from "./bufferLatest";
-import { createMessageBus } from "./createMessageBus";
+import { bufferLatest } from "./bufferLatest.js";
+import { createMessageBus } from "./createMessageBus.js";
 
 describe("bufferLatest", () => {
   test("calls subscriber after ready", () => {

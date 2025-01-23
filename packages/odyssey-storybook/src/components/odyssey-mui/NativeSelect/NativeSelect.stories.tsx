@@ -15,8 +15,8 @@ import { Meta, StoryObj } from "@storybook/react";
 import { NativeSelect, Link, NativeSelectProps } from "@okta/odyssey-react-mui";
 import { useCallback, useState } from "react";
 
-import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData.js";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 
 const storybookMeta: Meta<typeof NativeSelect> = {
   title: "MUI Components/Forms/NativeSelect",

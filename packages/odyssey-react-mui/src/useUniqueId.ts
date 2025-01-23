@@ -12,7 +12,7 @@
 
 import { useMemo } from "react";
 
-import { createUniqueId } from "./createUniqueId";
+import { createUniqueId } from "./createUniqueId.js";
 
 export const useUniqueId = (id?: string) => {
   const uniqueId = useMemo(() => createUniqueId(), []);

@@ -13,9 +13,9 @@
 import styled from "@emotion/styled";
 import { memo, type ReactElement } from "react";
 
-import type { HtmlProps } from "../../HtmlProps";
-import { TopNavListItem, TopNavListItemProps } from "./TopNavListItem";
-import { UserProfileProps } from "../../labs/UserProfile";
+import type { HtmlProps } from "../../HtmlProps.js";
+import { TopNavListItem, TopNavListItemProps } from "./TopNavListItem.js";
+import { UserProfileProps } from "../../labs/UserProfile.js";
 
 export type TopNavLinksListProps = {
   /**

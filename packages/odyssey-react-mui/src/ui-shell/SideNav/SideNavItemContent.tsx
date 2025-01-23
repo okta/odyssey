@@ -24,18 +24,18 @@ import { Link as NavItemLink } from "@mui/material";
 import {
   type DesignTokens,
   useOdysseyDesignTokens,
-} from "../../OdysseyDesignTokensContext";
-import { SideNavItemLinkContent } from "./SideNavItemLinkContent";
-import type { SideNavItem } from "./types";
+} from "../../OdysseyDesignTokensContext.js";
+import { SideNavItemLinkContent } from "./SideNavItemLinkContent.js";
+import type { SideNavItem } from "./types.js";
 import {
   SideNavItemContentContextValue,
   useSideNavItemContent,
-} from "./SideNavItemContentContext";
-import { ExternalLinkIcon } from "../../icons.generated";
+} from "./SideNavItemContentContext.js";
+import { ExternalLinkIcon } from "../../icons.generated/index.js";
 import {
   UiShellColors,
   useUiShellContext,
-} from "../../ui-shell/UiShellProvider";
+} from "../../ui-shell/UiShellProvider.js";
 
 export const StyledSideNavListItem = styled("li", {
   shouldForwardProp: (prop) =>

@@ -21,20 +21,20 @@ import {
 } from "@mui/material";
 import styled from "@emotion/styled";
 
-import { CheckedFieldProps } from "./FormCheckedProps";
-import type { HtmlProps } from "./HtmlProps";
+import { CheckedFieldProps } from "./FormCheckedProps.js";
+import type { HtmlProps } from "./HtmlProps.js";
 import {
   ComponentControlledState,
   FocusHandle,
   getControlState,
-} from "./inputUtils";
-import { FieldComponentProps } from "./FieldComponentProps";
+} from "./inputUtils.js";
+import { FieldComponentProps } from "./FieldComponentProps.js";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
-} from "./OdysseyDesignTokensContext";
-import { Typography } from "./Typography";
-import { useUniqueId } from "./useUniqueId";
+} from "./OdysseyDesignTokensContext.js";
+import { Typography } from "./Typography.js";
+import { useUniqueId } from "./useUniqueId.js";
 
 export const checkboxValidityValues = ["valid", "invalid", "inherit"] as const;
 

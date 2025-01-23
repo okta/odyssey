@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createReactRootElements } from "./createReactRootElements";
+import { createReactRootElements } from "./createReactRootElements.js";
 
 describe("createReactRootElements", () => {
   test("returns two elements at attach to a Shadow DOM", () => {

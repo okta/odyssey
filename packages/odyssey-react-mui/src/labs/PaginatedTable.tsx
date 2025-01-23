@@ -11,7 +11,7 @@
  */
 
 import { AlertProps, CheckboxProps } from "@mui/material";
-import { Typography } from "../Typography";
+import { Typography } from "../Typography.js";
 import {
   MRT_PaginationState,
   type MRT_ColumnFiltersState,
@@ -35,7 +35,7 @@ import { Trans, useTranslation } from "react-i18next";
 import type {
   DefaultMaterialReactTableData,
   MaterialReactTableProps,
-} from "./materialReactTableTypes";
+} from "./materialReactTableTypes.js";
 
 export type PaginatedTableProps<TData extends DefaultMaterialReactTableData> = {
   columns: MaterialReactTableProps<TData>["columns"];

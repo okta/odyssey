@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export { SideNav } from "./SideNav";
-export * from "./NavAccordion";
+export { SideNav } from "./SideNav.js";
+export * from "./NavAccordion.js";
 
-export * from "./types";
+export * from "./types.js";

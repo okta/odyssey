@@ -12,7 +12,7 @@
 
 import type { ThemeOptions } from "@mui/material";
 
-import type { DesignTokens } from "./theme";
+import type { DesignTokens } from "./theme.js";
 
 export const spacing = ({
   odysseyTokens,

@@ -12,8 +12,8 @@
 
 import { memo, useMemo } from "react";
 
-import { DataView } from "./DataView";
-import { TableLayoutProps, UniversalProps } from "./componentTypes";
+import { DataView } from "./DataView.js";
+import { TableLayoutProps, UniversalProps } from "./componentTypes.js";
 import { MRT_RowData } from "material-react-table";
 
 export type DataTableProps<TData extends MRT_RowData> = UniversalProps<TData> &

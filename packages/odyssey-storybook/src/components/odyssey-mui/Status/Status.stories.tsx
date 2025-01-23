@@ -17,7 +17,7 @@ import {
   statusSeverityValues,
   statusVariantValues,
 } from "@okta/odyssey-react-mui";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 
 const storybookMeta: Meta<StatusProps> = {
   title: "MUI Components/Status",

@@ -14,10 +14,10 @@ import { memo } from "react";
 import { FormHelperText } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
-import { Box } from "./Box";
-import { ErrorMessageList } from "./ErrorMessageList";
-import type { HtmlProps } from "./HtmlProps";
-import { ScreenReaderText } from "./ScreenReaderText";
+import { Box } from "./Box.js";
+import { ErrorMessageList } from "./ErrorMessageList.js";
+import type { HtmlProps } from "./HtmlProps.js";
+import { ScreenReaderText } from "./ScreenReaderText.js";
 
 export type FieldErrorProps = {
   id?: string;

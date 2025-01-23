@@ -13,8 +13,8 @@
 import { memo, useMemo } from "react";
 import styled from "@emotion/styled";
 
-import { OktaLogo } from "./OktaLogo";
-import { SideNavLogoProps } from "./types";
+import { OktaLogo } from "./OktaLogo.js";
+import { SideNavLogoProps } from "./types.js";
 
 const StyledLogoContainer = styled("div")(() => ({
   display: "flex",
