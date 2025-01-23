@@ -10,10 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { useMemo, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import {
   Active,
   Announcements,
@@ -120,7 +119,7 @@ export const SortableList = <T extends BaseItem>({
     >
       <SortableContext items={items}>
         {items.map((item) => (
-          <React.Fragment key={item.id}>{renderItem(item)}</React.Fragment>
+          <Fragment key={item.id}>{renderItem(item)}</Fragment>
         ))}
       </SortableContext>
       <SortableOverlay>
