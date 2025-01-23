@@ -12,7 +12,7 @@
 
 import { render, waitFor, within } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
-import { Pagination } from "./Pagination";
+import { Pagination } from "./Pagination.js";
 
 describe("Pagination", () => {
   it("renders the expected controls in 'paged' variant", () => {

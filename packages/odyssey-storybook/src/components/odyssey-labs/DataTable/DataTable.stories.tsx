@@ -23,13 +23,13 @@ import {
   CardLayoutProps,
 } from "@okta/odyssey-react-mui/labs";
 import { PauseIcon, RefreshIcon } from "@okta/odyssey-react-mui/icons";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 import {
   Person,
   columns as personColumns,
   data as personData,
-} from "../DataView/personData";
-import { filterData, reorderData } from "../DataView/dataFunctions";
+} from "../DataView/personData.js";
+import { filterData, reorderData } from "../DataView/dataFunctions.js";
 import { Dispatch, SetStateAction, useCallback, useState } from "react";
 import {
   Box,

@@ -13,9 +13,9 @@
 import { useCallback, useMemo } from "react";
 import { MRT_RowData } from "material-react-table";
 
-import { DataFilter } from "../DataFilters";
-import { DataTableColumn } from "../../DataTable";
-import { UniversalProps, TableLayoutProps } from "./componentTypes";
+import { DataFilter } from "../DataFilters.js";
+import { DataTableColumn } from "../../DataTable/index.js";
+import { UniversalProps, TableLayoutProps } from "./componentTypes.js";
 
 type FilterConversionType<TData extends MRT_RowData> = {
   columns?: TableLayoutProps<TData>["columns"];

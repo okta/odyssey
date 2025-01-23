@@ -15,9 +15,9 @@ import { userEvent, within } from "@storybook/test";
 import { IconWithTooltip, IconWithTooltipProps } from "@okta/odyssey-react-mui";
 import { GroupIcon } from "@okta/odyssey-react-mui/icons";
 
-import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { axeRun } from "../../../axe-util";
-import type { PlaywrightProps } from "../storybookTypes";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
+import { axeRun } from "../../../axe-util.js";
+import type { PlaywrightProps } from "../storybookTypes.js";
 
 const storybookMeta: Meta<IconWithTooltipProps> = {
   title: "MUI Components/IconWithTooltip",

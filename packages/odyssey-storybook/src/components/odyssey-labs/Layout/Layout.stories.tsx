@@ -15,7 +15,7 @@ import styled from "@emotion/styled";
 
 import { Layout, LayoutProps } from "@okta/odyssey-react-mui/labs";
 import { Subordinate } from "@okta/odyssey-react-mui";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 // import { Surface } from "@okta/odyssey-react-mui";
 
 const VisibleRegion = styled.div({

@@ -11,7 +11,7 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 import { Box, Button, Card, MenuItem } from "@okta/odyssey-react-mui";
 
 const meta = {

@@ -11,7 +11,7 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 import { fn } from "@storybook/test";
 import { AppTile, appTileVariantValues } from "@okta/odyssey-react-mui/labs";
 import {

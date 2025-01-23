@@ -15,11 +15,11 @@ import { memo, ReactNode, useMemo } from "react";
 import {
   type DesignTokens,
   useOdysseyDesignTokens,
-} from "../../OdysseyDesignTokensContext";
-import { Box } from "../../Box";
-import { Status } from "../../Status";
-import type { SideNavItem } from "./types";
-import { Badge } from "../../Badge";
+} from "../../OdysseyDesignTokensContext.js";
+import { Box } from "../../Box.js";
+import { Status } from "../../Status.js";
+import type { SideNavItem } from "./types.js";
+import { Badge } from "../../Badge.js";
 
 const SideNavItemLabelContainer = styled("div", {
   shouldForwardProp: (prop) =>

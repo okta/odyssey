@@ -23,8 +23,8 @@ import {
   TypographyProps as MuiTypographyProps,
 } from "@mui/material";
 
-import { HtmlProps } from "./HtmlProps";
-import { FocusHandle } from "./inputUtils";
+import { HtmlProps } from "./HtmlProps.js";
+import { FocusHandle } from "./inputUtils.js";
 
 export type TypographyVariantValue =
   | "h1"

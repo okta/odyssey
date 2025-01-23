@@ -16,16 +16,16 @@ import { ScopedCssBaseline } from "@mui/material";
 import {
   OdysseyCacheProvider,
   OdysseyCacheProviderProps,
-} from "./OdysseyCacheProvider";
+} from "./OdysseyCacheProvider.js";
 import {
   OdysseyThemeProvider,
   OdysseyThemeProviderProps,
-} from "./OdysseyThemeProvider";
+} from "./OdysseyThemeProvider.js";
 import {
   OdysseyTranslationProvider,
   OdysseyTranslationProviderProps,
-} from "./OdysseyTranslationProvider";
-import { DefaultSupportedLanguages } from "./OdysseyTranslationProvider.types";
+} from "./OdysseyTranslationProvider.js";
+import { DefaultSupportedLanguages } from "./OdysseyTranslationProvider.types.js";
 const scopedCssBaselineStyles = {
   height: "inherit",
 };

@@ -14,7 +14,7 @@ import * as Tokens from "@okta/odyssey-design-tokens";
 import { act, render, renderHook, waitFor } from "@testing-library/react";
 import { MockInstance } from "vitest";
 
-import { hexToRgb } from "../hexToRgb";
+import { hexToRgb } from "../hexToRgb.js";
 import {
   ContrastModeContext,
   defaultParentBackgroundColor,
@@ -26,7 +26,7 @@ import {
   normalizeRgbaToRgb,
   useContrastMode,
   useContrastModeContext,
-} from "../useContrastMode";
+} from "../useContrastMode.js";
 
 describe("useContrastMode and related functions", () => {
   afterEach(() => {

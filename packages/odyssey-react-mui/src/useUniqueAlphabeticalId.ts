@@ -12,7 +12,7 @@
 
 import { useMemo } from "react";
 
-import { createUniqueAlphabeticalId } from "./createUniqueAlphabeticalId";
+import { createUniqueAlphabeticalId } from "./createUniqueAlphabeticalId.js";
 
 export const useUniqueAlphabeticalId = (id?: string) => {
   const uniqueAlphabeticalId = useMemo(() => createUniqueAlphabeticalId(), []);

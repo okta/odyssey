@@ -17,8 +17,8 @@ import {
 import { menuItemClasses } from "@mui/material/MenuItem";
 import { memo, useCallback, useContext, type ReactNode } from "react";
 
-import { MenuContext } from "./MenuContext";
-import type { HtmlProps } from "../HtmlProps";
+import { MenuContext } from "./MenuContext.js";
+import type { HtmlProps } from "../HtmlProps.js";
 
 export type MenuItemProps = {
   /**

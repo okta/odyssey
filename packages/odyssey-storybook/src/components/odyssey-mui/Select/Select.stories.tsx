@@ -17,9 +17,9 @@ import { queryOdysseySelector } from "@okta/odyssey-react-mui/test-selectors";
 import { expect, fn, screen, userEvent, waitFor } from "@storybook/test";
 import { useCallback, useState } from "react";
 
-import { axeRun } from "../../../axe-util";
-import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { axeRun } from "../../../axe-util.js";
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData.js";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 
 const optionsArray: SelectProps<string | string[], boolean>["options"] = [
   "Roles and permissions",

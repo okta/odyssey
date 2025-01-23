@@ -26,10 +26,10 @@ import {
   useMemo,
   useState,
 } from "react";
-import { GroupIcon, HomeIcon, UserIcon } from "./icons.generated";
-import { Subordinate } from "./Typography";
+import { GroupIcon, HomeIcon, UserIcon } from "./icons.generated/index.js";
+import { Subordinate } from "./Typography.js";
 import { useTranslation } from "react-i18next";
-import { HtmlProps } from "./HtmlProps";
+import { HtmlProps } from "./HtmlProps.js";
 import styled from "@emotion/styled";
 
 export type BreadcrumbType = "listItem" | "menuItem" | "currentPage";

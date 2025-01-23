@@ -10,11 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Tag } from "./Tag";
+import { Tag } from "./Tag.js";
 import { Stack } from "@mui/material";
 import { memo, ReactElement, useMemo } from "react";
-import { ChipElementType, TagListContext } from "./TagListContext";
-import { HtmlProps } from "./HtmlProps";
+import { ChipElementType, TagListContext } from "./TagListContext.js";
+import { HtmlProps } from "./HtmlProps.js";
 
 export type TagListProps = {
   /**

@@ -24,13 +24,13 @@ import {
   Select as MuiSelect,
   SelectProps as MuiSelectProps,
 } from "@mui/material";
-import { Field } from "./Field";
+import { Field } from "./Field.js";
 import {
   FieldComponentProps,
   FieldComponentRenderProps,
-} from "./FieldComponentProps";
-import type { HtmlProps } from "./HtmlProps";
-import { FocusHandle, getControlState, useInputValues } from "./inputUtils";
+} from "./FieldComponentProps.js";
+import type { HtmlProps } from "./HtmlProps.js";
+import { FocusHandle, getControlState, useInputValues } from "./inputUtils.js";
 
 export type NativeSelectOption = {
   text: string;

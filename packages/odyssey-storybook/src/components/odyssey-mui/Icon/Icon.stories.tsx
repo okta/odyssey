@@ -18,7 +18,7 @@ import {
   DataTableRowData,
 } from "@okta/odyssey-react-mui";
 import * as iconDictionary from "@okta/odyssey-react-mui/icons";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 
 const storybookMeta: Meta = {
   title: "MUI Components/Icons",

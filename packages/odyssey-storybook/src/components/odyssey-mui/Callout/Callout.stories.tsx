@@ -20,8 +20,8 @@ import { queryOdysseySelector } from "@okta/odyssey-react-mui/test-selectors";
 import { expect } from "@storybook/test";
 import { Meta, StoryObj } from "@storybook/react";
 
-import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { PlaywrightProps } from "../storybookTypes";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
+import { PlaywrightProps } from "../storybookTypes.js";
 
 const storybookMeta: Meta<CalloutProps> = {
   title: "MUI Components/Callout",

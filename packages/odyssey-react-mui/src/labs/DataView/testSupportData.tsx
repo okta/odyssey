@@ -10,8 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Status } from "../../Status";
-import { DataColumns, DataFilter, DataGetDataType } from "../";
+import { Status } from "../../Status.js";
+import { DataColumns, DataFilter, DataGetDataType } from "../index.js";
 
 export type Person = {
   order: number;

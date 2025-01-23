@@ -13,7 +13,7 @@
 import { Box as MuiBox, BoxProps as MuiBoxProps } from "@mui/material";
 import { AriaRole, ReactNode, forwardRef, memo } from "react";
 
-import type { HtmlProps } from "./HtmlProps";
+import type { HtmlProps } from "./HtmlProps.js";
 
 export type BoxProps = {
   children?: ReactNode;

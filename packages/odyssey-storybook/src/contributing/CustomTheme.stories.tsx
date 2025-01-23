@@ -29,7 +29,7 @@ import {
   OdysseyProvider,
 } from "@okta/odyssey-react-mui";
 
-import { MuiThemeDecorator } from "../../.storybook/components/MuiThemeDecorator";
+import { MuiThemeDecorator } from "../../.storybook/components/MuiThemeDecorator.js";
 import { useMemo } from "react";
 import * as odysseyTokens from "@okta/odyssey-design-tokens";
 

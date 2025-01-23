@@ -11,10 +11,10 @@
  */
 
 import { memo } from "react";
-import { Box } from "../Box";
-import { Button } from "../Buttons";
-import { Support } from "../Typography";
-import { ArrowLeftIcon, ArrowRightIcon } from "../icons.generated";
+import { Box } from "../Box.js";
+import { Button } from "../Buttons/index.js";
+import { Support } from "../Typography.js";
+import { ArrowLeftIcon, ArrowRightIcon } from "../icons.generated/index.js";
 
 export const paginationTypeValues = ["paged", "loadMore"] as const;
 

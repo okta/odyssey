@@ -16,7 +16,7 @@ import {
   ReactInWebComponentElement,
   reactWebComponentElementName,
   renderReactInWebComponent,
-} from "./renderReactInWebComponent";
+} from "./renderReactInWebComponent.js";
 
 describe("renderReactInWebComponent", () => {
   afterEach(() => {

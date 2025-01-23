@@ -13,17 +13,17 @@
 import { memo } from "react";
 import styled from "@emotion/styled";
 
-import { ChevronDownIcon } from "../icons.generated";
+import { ChevronDownIcon } from "../icons.generated/index.js";
 import {
   AdditionalBaseMenuButtonProps,
   BaseMenuButton,
   BaseMenuButtonProps,
-} from "../Buttons/BaseMenuButton";
+} from "../Buttons/BaseMenuButton.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "../OdysseyDesignTokensContext";
-import { UserProfile, UserProfileProps } from "./UserProfile";
+} from "../OdysseyDesignTokensContext.js";
+import { UserProfile, UserProfileProps } from "./UserProfile.js";
 
 const StyledUnsetButtonHeightContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",

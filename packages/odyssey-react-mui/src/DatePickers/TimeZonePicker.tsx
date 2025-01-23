@@ -12,7 +12,7 @@
 
 import { memo, useCallback } from "react";
 
-import { Autocomplete, AutocompleteProps } from "../Autocomplete";
+import { Autocomplete, AutocompleteProps } from "../Autocomplete.js";
 
 export type TimeZoneOption = {
   label: string;

@@ -10,6 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export { adornmentSizeValues } from "./ComposablePicker";
-export * from "./Picker";
-export * from "./PickerWithOptionAdornment";
+export { adornmentSizeValues } from "./ComposablePicker.js";
+export * from "./Picker.js";
+export * from "./PickerWithOptionAdornment.js";

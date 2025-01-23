@@ -16,9 +16,9 @@ import * as Tokens from "@okta/odyssey-design-tokens";
 import { useContext } from "react";
 import { MockInstance } from "vitest";
 
-import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
-import { OdysseyThemeProvider } from "./OdysseyThemeProvider";
-import { ContrastModeContext } from "./useContrastMode";
+import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext.js";
+import { OdysseyThemeProvider } from "./OdysseyThemeProvider.js";
+import { ContrastModeContext } from "./useContrastMode.js";
 
 describe("OdysseyThemeProvider", () => {
   afterEach(() => {

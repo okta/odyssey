@@ -23,15 +23,15 @@ import {
   useRef,
 } from "react";
 
-import { useButton } from "./ButtonContext";
-import type { HtmlProps } from "../HtmlProps";
-import { FocusHandle } from "../inputUtils";
+import { useButton } from "./ButtonContext.js";
+import type { HtmlProps } from "../HtmlProps.js";
+import { FocusHandle } from "../inputUtils.js";
 import {
   MuiPropsContext,
   MuiPropsContextType,
   useMuiProps,
-} from "../MuiPropsContext";
-import { Tooltip } from "../Tooltip";
+} from "../MuiPropsContext.js";
+import { Tooltip } from "../Tooltip.js";
 
 export const buttonSizeValues = ["small", "medium", "large"] as const;
 export const buttonTypeValues = ["button", "submit", "reset"] as const;

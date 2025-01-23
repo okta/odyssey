@@ -13,7 +13,7 @@
 import { memo, ReactNode } from "react";
 import { Box } from "@mui/material";
 import { visuallyHidden } from "@mui/utils";
-import { HtmlProps } from "./HtmlProps";
+import { HtmlProps } from "./HtmlProps.js";
 
 export type ScreenReaderTextProps = {
   /**

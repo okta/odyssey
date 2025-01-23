@@ -16,14 +16,14 @@ import {
 } from "@mui/material";
 import React, { memo, ReactNode, useCallback, useRef, useMemo } from "react";
 
-import { Field } from "./Field";
+import { Field } from "./Field.js";
 import {
   FieldComponentProps,
   FieldComponentRenderProps,
-} from "./FieldComponentProps";
-import type { HtmlProps } from "./HtmlProps";
-import { getControlState, useInputValues } from "./inputUtils";
-import { Radio, RadioProps } from "./Radio";
+} from "./FieldComponentProps.js";
+import type { HtmlProps } from "./HtmlProps.js";
+import { getControlState, useInputValues } from "./inputUtils.js";
+import { Radio, RadioProps } from "./Radio.js";
 
 export type RadioGroupProps = {
   /**

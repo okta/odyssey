@@ -12,7 +12,7 @@
 
 import { memo } from "react";
 
-import { Link, LinkProps } from "./Link";
+import { Link, LinkProps } from "./Link.js";
 
 const HintLink = (
   props: Pick<

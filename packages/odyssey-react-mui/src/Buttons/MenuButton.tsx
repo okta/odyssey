@@ -15,7 +15,7 @@ import {
   AdditionalBaseMenuButtonProps,
   BaseMenuButton,
   BaseMenuButtonProps,
-} from "./BaseMenuButton";
+} from "./BaseMenuButton.js";
 
 export type MenuButtonProps = Omit<
   BaseMenuButtonProps,

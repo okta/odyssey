@@ -12,7 +12,7 @@
 
 import { render, screen, waitFor, within } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
-import { OdysseyProvider } from "../../OdysseyProvider";
+import { OdysseyProvider } from "../../OdysseyProvider.js";
 import { MRT_RowSelectionState } from "material-react-table";
 
 import {
@@ -20,18 +20,18 @@ import {
   DataOnReorderRowsType,
   DataView,
   TableLayoutProps,
-} from "./index";
+} from "./index.js";
 import {
   data,
   columns,
   filterData,
   reorderData,
   Person,
-} from "./testSupportData";
-import { Button, MenuItem } from "../../Buttons";
-import { DataTableRowData } from "../../DataTable";
-import { EmptyState } from "../../EmptyState";
-import { getControlledElement } from "../../test-selectors/linkedHtmlSelectors";
+} from "./testSupportData.js";
+import { Button, MenuItem } from "../../Buttons/index.js";
+import { DataTableRowData } from "../../DataTable/index.js";
+import { EmptyState } from "../../EmptyState.js";
+import { getControlledElement } from "../../test-selectors/linkedHtmlSelectors.js";
 
 const getData = ({ ...props }) => {
   return filterData({ data, ...props });

@@ -15,9 +15,9 @@ import { CSSProperties, memo, useMemo } from "react";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
-} from "./OdysseyDesignTokensContext";
-import { Box } from "./Box";
-import type { HtmlProps } from "./HtmlProps";
+} from "./OdysseyDesignTokensContext.js";
+import { Box } from "./Box.js";
+import type { HtmlProps } from "./HtmlProps.js";
 
 export const badgeContentMaxValues = [
   10, 20, 30, 40, 50, 60, 70, 80, 90, 100,

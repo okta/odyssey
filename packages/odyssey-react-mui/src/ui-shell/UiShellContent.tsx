@@ -14,16 +14,16 @@ import styled from "@emotion/styled";
 import { memo, type ReactElement, type ReactNode } from "react";
 import { ErrorBoundary, ErrorBoundaryProps } from "react-error-boundary";
 
-import { AppSwitcher, type AppSwitcherProps } from "./AppSwitcher";
-import { SideNav, type SideNavProps } from "./SideNav";
-import { TopNav, type TopNavProps } from "./TopNav";
+import { AppSwitcher, type AppSwitcherProps } from "./AppSwitcher/index.js";
+import { SideNav, type SideNavProps } from "./SideNav/index.js";
+import { TopNav, type TopNavProps } from "./TopNav/index.js";
 import {
   useOdysseyDesignTokens,
   type DesignTokens,
-} from "../OdysseyDesignTokensContext";
-import { useScrollState } from "./useScrollState";
-import { ContrastMode } from "../useContrastMode";
-import { UiShellColors, useUiShellContext } from "./UiShellProvider";
+} from "../OdysseyDesignTokensContext.js";
+import { useScrollState } from "./useScrollState.js";
+import { ContrastMode } from "../useContrastMode.js";
+import { UiShellColors, useUiShellContext } from "./UiShellProvider.js";
 
 const emptySideNavItems = [] satisfies SideNavProps["sideNavItems"];
 

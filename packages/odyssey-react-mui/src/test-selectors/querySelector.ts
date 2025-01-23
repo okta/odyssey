@@ -16,15 +16,15 @@ import {
   type ElementChildSelector,
   type TestSelector,
   type ElementSelector,
-} from "./testSelector";
-import { getComputedAccessibleText } from "./getComputedAccessibleText";
+} from "./testSelector.js";
+import { getComputedAccessibleText } from "./getComputedAccessibleText.js";
 import {
   getByRoleQuerySelector,
   getByTextQuerySelector,
   type QueryMethod,
-} from "./getByQuerySelector";
-import { getControlledElement } from "./linkedHtmlSelectors";
-import { ElementError } from "./sanityChecks";
+} from "./getByQuerySelector.js";
+import { getControlledElement } from "./linkedHtmlSelectors.js";
+import { ElementError } from "./sanityChecks.js";
 
 export type InnerQuerySelectorProps<
   LocalTestSelector extends TestSelector,

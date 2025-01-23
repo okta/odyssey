@@ -13,11 +13,11 @@
 import { Children, ReactNode, memo } from "react";
 import styled from "@emotion/styled";
 
-import { Box } from "../../Box";
+import { Box } from "../../Box.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "../../OdysseyDesignTokensContext";
+} from "../../OdysseyDesignTokensContext.js";
 
 type SupportedRegionRatios =
   | [1]

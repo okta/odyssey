@@ -19,9 +19,9 @@ import {
   odysseyTranslate,
 } from "@okta/odyssey-react-mui";
 
-import { axeRun } from "../../../axe-util";
-import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { axeRun } from "../../../axe-util.js";
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData.js";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 
 const meta = {
   title: "MUI Components/DatePickers/DatePicker",

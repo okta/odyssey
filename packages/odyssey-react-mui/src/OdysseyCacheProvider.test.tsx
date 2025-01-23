@@ -12,8 +12,8 @@
 
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { Button } from "./";
-import { OdysseyCacheProvider } from "./OdysseyCacheProvider";
+import { Button } from "./index.js";
+import { OdysseyCacheProvider } from "./OdysseyCacheProvider.js";
 
 // This component needs to be tested, even if it doesn't make much sense, because it can't be loaded by Storybook; therefore, any issues will only be seen by consumers of Odyssey.
 describe("OdysseyCacheProvider", () => {

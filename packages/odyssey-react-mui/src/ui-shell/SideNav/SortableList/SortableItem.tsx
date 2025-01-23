@@ -31,12 +31,12 @@ import { useTranslation } from "react-i18next";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "../../../OdysseyDesignTokensContext";
+} from "../../../OdysseyDesignTokensContext.js";
 import {
   UiShellColors,
   useUiShellContext,
-} from "../../../ui-shell/UiShellProvider";
-import { ContrastColors } from "../../../createContrastColors";
+} from "../../../ui-shell/UiShellProvider.js";
+import { ContrastColors } from "../../../createContrastColors.js";
 
 type ItemProps = {
   id: UniqueIdentifier;

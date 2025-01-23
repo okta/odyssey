@@ -40,19 +40,23 @@ import {
   ChevronDownIcon,
   DragIndicatorIcon,
   MoreIcon,
-} from "../../icons.generated";
-import { Box } from "../../Box";
-import { Button, MenuButton } from "../../Buttons";
-import { TableLayoutProps, TableState, UniversalProps } from "./componentTypes";
-import { DataTableCell } from "./dataTypes";
+} from "../../icons.generated/index.js";
+import { Box } from "../../Box.js";
+import { Button, MenuButton } from "../../Buttons/index.js";
+import {
+  TableLayoutProps,
+  TableState,
+  UniversalProps,
+} from "./componentTypes.js";
+import { DataTableCell } from "./dataTypes.js";
 import {
   dataTableImmutableSettings,
   displayColumnDefOptions,
   ScrollableTableContainer,
-} from "./tableConstants";
-import { RowActions } from "./RowActions";
-import { useOdysseyDesignTokens } from "../../OdysseyDesignTokensContext";
-import { useScrollIndication } from "../../DataTable/useScrollIndication";
+} from "./tableConstants.js";
+import { RowActions } from "./RowActions.js";
+import { useOdysseyDesignTokens } from "../../OdysseyDesignTokensContext.js";
+import { useScrollIndication } from "../../DataTable/useScrollIndication.js";
 
 const TextWrapper = styled("div")({
   whiteSpace: "nowrap",

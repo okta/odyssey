@@ -26,11 +26,11 @@ import { InputAdornment, InputBase } from "@mui/material";
 import {
   FieldComponentProps,
   FieldComponentRenderProps,
-} from "./FieldComponentProps";
-import { Field } from "./Field";
-import { HtmlProps } from "./HtmlProps";
-import { FocusHandle, useInputValues, getControlState } from "./inputUtils";
-import { type TestSelector } from "./test-selectors";
+} from "./FieldComponentProps.js";
+import { Field } from "./Field.js";
+import { HtmlProps } from "./HtmlProps.js";
+import { FocusHandle, useInputValues, getControlState } from "./inputUtils.js";
+import { type TestSelector } from "./test-selectors/index.js";
 
 export const TextFieldTestSelector = {
   accessibleText: {

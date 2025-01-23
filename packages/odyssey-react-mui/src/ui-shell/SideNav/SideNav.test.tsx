@@ -12,8 +12,8 @@
 
 import { render, screen, waitFor, within } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
-import { SideNav } from "./SideNav";
-import { OdysseyProvider } from "../../OdysseyProvider";
+import { SideNav } from "./SideNav.js";
+import { OdysseyProvider } from "../../OdysseyProvider.js";
 
 describe("SideNav", () => {
   test("can show the default Okta logo", () => {

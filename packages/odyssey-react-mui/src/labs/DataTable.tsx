@@ -46,17 +46,17 @@ import {
   ListIcon,
   MoreIcon,
   ShowIcon,
-} from "../icons.generated";
+} from "../icons.generated/index.js";
 import { Checkbox as MuiCheckbox } from "@mui/material";
-import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext";
+import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext.js";
 import {
   DataTablePagination,
   paginationTypeValues,
-} from "./DataTablePagination";
-import { DataFilter, DataFilters } from "./DataFilters";
-import { Button } from "../Buttons";
-import { Box } from "../Box";
-import { MenuButton, MenuItem } from "..";
+} from "./DataTablePagination.js";
+import { DataFilter, DataFilters } from "./DataFilters.js";
+import { Button } from "../Buttons/index.js";
+import { Box } from "../Box.js";
+import { MenuButton, MenuItem } from "../index.js";
 import { useTranslation } from "react-i18next";
 
 export const densityValues = ["comfortable", "spacious", "compact"] as const;

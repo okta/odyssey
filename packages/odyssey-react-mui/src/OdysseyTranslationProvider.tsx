@@ -12,11 +12,11 @@
 
 import { ReactNode, useEffect } from "react";
 
-import { DefaultSupportedLanguages } from "./OdysseyTranslationProvider.types";
+import { DefaultSupportedLanguages } from "./OdysseyTranslationProvider.types.js";
 
-import { i18n, defaultNS, resources } from "./i18n";
+import { i18n, defaultNS, resources } from "./i18n.js";
 import { I18nextProvider } from "react-i18next";
-import { getTypedObjectKeys } from "./getTypedObjectKeys";
+import { getTypedObjectKeys } from "./getTypedObjectKeys.js";
 
 export type OdysseyI18nResourceKeys = (typeof resources)["en"];
 export const odysseyI18nResourceKeysList = getTypedObjectKeys(resources["en"]);

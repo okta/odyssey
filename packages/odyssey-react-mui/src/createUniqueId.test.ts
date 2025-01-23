@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createUniqueId, uniqueIdLength } from "./createUniqueId";
+import { createUniqueId, uniqueIdLength } from "./createUniqueId.js";
 
 describe("createUniqueId", () => {
   test("returns a nice id string", () => {

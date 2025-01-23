@@ -14,9 +14,9 @@ import { memo } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert, AlertColor, AlertTitle, AlertProps } from "@mui/material";
 
-import type { HtmlProps } from "./HtmlProps";
-import { Link, LinkProps } from "./Link";
-import { ScreenReaderText } from "./ScreenReaderText";
+import type { HtmlProps } from "./HtmlProps.js";
+import { Link, LinkProps } from "./Link.js";
+import { ScreenReaderText } from "./ScreenReaderText.js";
 
 export const bannerRoleValues = ["status", "alert"] as const;
 export const bannerSeverityValues: AlertColor[] = [

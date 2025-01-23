@@ -13,15 +13,15 @@
 import { memo, useEffect, useState, type SetStateAction } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
-import { CssBaseline } from "../CssBaseline";
-import { OdysseyProvider } from "../OdysseyProvider";
+import { CssBaseline } from "../CssBaseline.js";
+import { OdysseyProvider } from "../OdysseyProvider.js";
 import {
   UiShellContent,
   type UiShellContentProps,
   type UiShellNavComponentProps,
-} from "./UiShellContent";
-import { type ReactRootElements } from "../web-component/renderReactInWebComponent";
-import { UiShellProvider } from "./UiShellProvider";
+} from "./UiShellContent.js";
+import { type ReactRootElements } from "../web-component/renderReactInWebComponent.js";
+import { UiShellProvider } from "./UiShellProvider.js";
 
 export const defaultComponentProps: UiShellNavComponentProps = {
   sideNavProps: undefined,

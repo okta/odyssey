@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { SwitchBaseProps } from "@mui/material/internal/SwitchBase";
+import { SwitchBaseProps } from "@mui/material/internal/SwitchBase.js";
 
 type SwitchOnChangeProp = Pick<SwitchBaseProps, "onChange">;
 

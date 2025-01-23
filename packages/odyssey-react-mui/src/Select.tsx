@@ -32,25 +32,25 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 
-import { Field } from "./Field";
+import { Field } from "./Field.js";
 import {
   FieldComponentProps,
   FieldComponentRenderProps,
-} from "./FieldComponentProps";
-import { CheckIcon, CloseCircleFilledIcon } from "./icons.generated";
-import type { HtmlProps } from "./HtmlProps";
+} from "./FieldComponentProps.js";
+import { CheckIcon, CloseCircleFilledIcon } from "./icons.generated/index.js";
+import type { HtmlProps } from "./HtmlProps.js";
 import {
   ComponentControlledState,
   FocusHandle,
   useInputValues,
   getControlState,
-} from "./inputUtils";
+} from "./inputUtils.js";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
-} from "./OdysseyDesignTokensContext";
-import { TestSelector } from "./test-selectors";
-import { normalizedKey } from "./useNormalizedKey";
+} from "./OdysseyDesignTokensContext.js";
+import { TestSelector } from "./test-selectors/index.js";
+import { normalizedKey } from "./useNormalizedKey.js";
 
 export const SelectTestSelector = {
   accessibleText: {

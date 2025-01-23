@@ -28,8 +28,8 @@ import {
 import { DateTime } from "luxon";
 import { useTranslation } from "react-i18next";
 
-import { Field, RenderFieldComponentProps } from "../Field";
-import { TextFieldProps } from "../TextField";
+import { Field, RenderFieldComponentProps } from "../Field.js";
+import { TextFieldProps } from "../TextField.js";
 
 export type DateFieldProps = {
   onChange?: (value: string) => void;

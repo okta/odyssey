@@ -24,14 +24,19 @@ import {
 } from "@mui/material";
 import styled from "@emotion/styled";
 
-import { Button, ButtonContext, MenuButton, MenuButtonProps } from "./Buttons";
-import { MoreIcon } from "./icons.generated";
+import {
+  Button,
+  ButtonContext,
+  MenuButton,
+  MenuButtonProps,
+} from "./Buttons/index.js";
+import { MoreIcon } from "./icons.generated/index.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "./OdysseyDesignTokensContext";
-import { Heading5, Paragraph, Support } from "./Typography";
-import { Box } from "./Box";
+} from "./OdysseyDesignTokensContext.js";
+import { Heading5, Paragraph, Support } from "./Typography.js";
+import { Box } from "./Box.js";
 
 export const CARD_IMAGE_HEIGHT = "64px";
 

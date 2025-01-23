@@ -12,7 +12,7 @@
 
 import type { Meta, StoryObj } from "@storybook/react";
 import { DataFilter, DataFilters } from "@okta/odyssey-react-mui/labs";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 import { BugIcon, SettingsIcon } from "@okta/odyssey-react-mui/icons";
 import { Box, Button } from "@okta/odyssey-react-mui";
 import { fn } from "@storybook/test";

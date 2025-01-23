@@ -21,23 +21,23 @@ import {
 import { DateTime } from "luxon";
 import styled from "@emotion/styled";
 
-import { Button } from "../../Buttons";
-import { DateFieldActionBar } from "../../DatePickers/DateFieldActionBar";
-import { DateFieldLocalizationProvider } from "../../DatePickers/DateFieldLocalizationProvider";
-import { TimeZonePicker } from "../../DatePickers/TimeZonePicker";
+import { Button } from "../../Buttons/index.js";
+import { DateFieldActionBar } from "../../DatePickers/DateFieldActionBar.js";
+import { DateFieldLocalizationProvider } from "../../DatePickers/DateFieldLocalizationProvider.js";
+import { TimeZonePicker } from "../../DatePickers/TimeZonePicker.js";
 import {
   useOdysseyDateFields,
   OdysseyDateFieldProps,
-} from "../../DatePickers/useOdysseyDateFields";
-import { DateTimeField, DateTimeFieldProps } from "./DateTimeField";
-import { dateTimePickerTheme } from "./dateTimePickerTheme";
-import { FieldComponentProps } from "../../FieldComponentProps";
-import { CalendarIcon, ClockIcon } from "../../icons.generated";
+} from "../../DatePickers/useOdysseyDateFields.js";
+import { DateTimeField, DateTimeFieldProps } from "./DateTimeField.js";
+import { dateTimePickerTheme } from "./dateTimePickerTheme.js";
+import { FieldComponentProps } from "../../FieldComponentProps.js";
+import { CalendarIcon, ClockIcon } from "../../icons.generated/index.js";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
-} from "../../OdysseyDesignTokensContext";
-import { OdysseyThemeProvider } from "../../OdysseyThemeProvider";
+} from "../../OdysseyDesignTokensContext.js";
+import { OdysseyThemeProvider } from "../../OdysseyThemeProvider.js";
 
 const DatePickerContainer = styled.div({
   ".MuiFormControl-root": {

@@ -15,7 +15,7 @@ import { memo } from "react";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "../../OdysseyDesignTokensContext";
+} from "../../OdysseyDesignTokensContext.js";
 
 const OktaAuraSvgComponent = styled("svg", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",

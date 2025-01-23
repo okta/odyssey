@@ -20,7 +20,7 @@ import {
   stackSpacingValues,
   useOdysseyDesignTokens,
 } from "@okta/odyssey-react-mui";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 
 const ContentBox = styled.div<{ odysseyDesignTokens: DesignTokens }>(
   ({ odysseyDesignTokens }) => ({

@@ -15,8 +15,8 @@ import { Accordion, AccordionProps } from "@okta/odyssey-react-mui";
 import { expect, userEvent, within, waitFor } from "@storybook/test";
 import { useCallback, useState } from "react";
 
-import { PlaywrightProps } from "../storybookTypes";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { PlaywrightProps } from "../storybookTypes.js";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 
 const storybookMeta: Meta<AccordionProps> = {
   title: "MUI Components/Accordion",

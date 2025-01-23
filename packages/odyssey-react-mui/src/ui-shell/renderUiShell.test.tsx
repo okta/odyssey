@@ -12,11 +12,11 @@
 
 import { act, waitFor } from "@testing-library/react";
 
-import { renderUiShell } from "./renderUiShell";
+import { renderUiShell } from "./renderUiShell.js";
 import {
   ReactInWebComponentElement,
   reactWebComponentElementName,
-} from "../web-component/renderReactInWebComponent";
+} from "../web-component/renderReactInWebComponent.js";
 
 describe("renderUiShell", () => {
   afterEach(() => {

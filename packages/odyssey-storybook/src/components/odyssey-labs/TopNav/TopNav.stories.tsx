@@ -13,7 +13,7 @@
 import { UserProfile } from "@okta/odyssey-react-mui/labs";
 import { TopNav, TopNavProps } from "@okta/odyssey-react-mui/ui-shell";
 import { Meta, StoryObj } from "@storybook/react";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 import { Button, SearchField } from "@okta/odyssey-react-mui";
 import { UserIcon } from "@okta/odyssey-react-mui/icons";
 

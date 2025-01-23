@@ -14,10 +14,10 @@ import { Meta, StoryObj } from "@storybook/react";
 import { PasswordField, odysseyTranslate } from "@okta/odyssey-react-mui";
 import { expect, fn, userEvent, waitFor, within } from "@storybook/test";
 
-import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
-import { axeRun } from "../../../axe-util";
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData.js";
+import { axeRun } from "../../../axe-util.js";
 
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 import { ChangeEvent, useCallback, useState } from "react";
 
 const meta = {

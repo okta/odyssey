@@ -1,2 +1,2 @@
-export { MuiThemeDecorator } from "./MuiThemeDecorator";
-export { TokenTables } from "./TokenTables";
+export { MuiThemeDecorator } from "./MuiThemeDecorator.js";
+export { TokenTables } from "./TokenTables.js";

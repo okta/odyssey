@@ -22,15 +22,15 @@ import {
   useState,
 } from "react";
 
-import { ShowIcon, HideIcon } from "./icons.generated";
-import { Field } from "./Field";
+import { ShowIcon, HideIcon } from "./icons.generated/index.js";
+import { Field } from "./Field.js";
 import {
   FieldComponentProps,
   FieldComponentRenderProps,
-} from "./FieldComponentProps";
-import type { HtmlProps } from "./HtmlProps";
+} from "./FieldComponentProps.js";
+import type { HtmlProps } from "./HtmlProps.js";
 import { useTranslation } from "react-i18next";
-import { FocusHandle, getControlState, useInputValues } from "./inputUtils";
+import { FocusHandle, getControlState, useInputValues } from "./inputUtils.js";
 
 export type PasswordFieldProps = {
   /**

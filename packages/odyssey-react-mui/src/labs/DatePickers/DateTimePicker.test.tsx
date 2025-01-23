@@ -11,7 +11,7 @@
  */
 
 import { render, screen } from "@testing-library/react";
-import { DateTimePicker } from "./DateTimePicker";
+import { DateTimePicker } from "./DateTimePicker.js";
 
 describe("DateTimePicker", () => {
   afterEach(() => {

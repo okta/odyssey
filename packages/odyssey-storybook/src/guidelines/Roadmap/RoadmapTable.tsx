@@ -11,7 +11,7 @@
  */
 
 import { memo, useCallback } from "react";
-import { useColumns, data, OdysseyComponent } from "./roadmapData";
+import { useColumns, data, OdysseyComponent } from "./roadmapData.js";
 import {
   Box,
   Callout,

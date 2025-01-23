@@ -20,9 +20,9 @@ import {
 } from "@okta/odyssey-react-mui";
 import { useCallback, useState } from "react";
 
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 import { expect, userEvent, waitFor, within } from "@storybook/test";
-import { axeRun } from "../../../axe-util";
+import { axeRun } from "../../../axe-util.js";
 
 const meta = {
   title: "MUI Components/Toast",

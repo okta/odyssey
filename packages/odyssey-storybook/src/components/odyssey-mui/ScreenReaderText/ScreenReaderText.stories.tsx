@@ -16,7 +16,7 @@ import {
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 
 const storybookMeta: Meta<typeof ScreenReaderText> = {
   title: "MUI Components/ScreenReaderText",

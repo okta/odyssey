@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createStore } from "./createStore";
+import { createStore } from "./createStore.js";
 
 /**
  * Buffers the values passed to a publisher, keeping only the latest value, until the subscriber emits.

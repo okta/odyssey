@@ -15,14 +15,14 @@ import styled from "@emotion/styled";
 import { IconButton } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
-import { FileUploaderProps } from "./FileUploader";
+import { FileUploaderProps } from "./FileUploader.js";
 import {
   useOdysseyDesignTokens,
   DesignTokens,
-} from "../OdysseyDesignTokensContext";
-import { DeleteIcon } from "../icons.generated";
-import { MuiPropsContext, MuiPropsContextType } from "../MuiPropsContext";
-import { Tooltip } from "../Tooltip";
+} from "../OdysseyDesignTokensContext.js";
+import { DeleteIcon } from "../icons.generated/index.js";
+import { MuiPropsContext, MuiPropsContextType } from "../MuiPropsContext.js";
+import { Tooltip } from "../Tooltip.js";
 
 const PreviewContainer = styled.div<{
   isDisabled: FileUploaderProps["isDisabled"];

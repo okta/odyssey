@@ -17,9 +17,9 @@ import {
   AutocompleteProps as MuiAutocompleteProps,
 } from "@mui/material";
 
-import { AutocompleteProps } from "../../Autocomplete";
-import { PickerVirtualizationListBox } from "./PickerVirtualizationListBox";
-import { useAutocomplete } from "../../useAutocomplete";
+import { AutocompleteProps } from "../../Autocomplete.js";
+import { PickerVirtualizationListBox } from "./PickerVirtualizationListBox.js";
+import { useAutocomplete } from "../../useAutocomplete.js";
 
 export const adornmentSizeValues = ["small", "large"] as const;
 export type AdornmentSize = (typeof adornmentSizeValues)[number];

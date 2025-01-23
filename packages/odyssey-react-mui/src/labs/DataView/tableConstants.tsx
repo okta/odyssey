@@ -13,9 +13,9 @@
 import styled from "@emotion/styled";
 import { MRT_RowData, MRT_TableOptions } from "material-react-table";
 
-import { Box } from "../../Box";
-import { DesignTokens } from "../../OdysseyDesignTokensContext";
-import { DragIndicatorIcon } from "../../icons.generated";
+import { Box } from "../../Box.js";
+import { DesignTokens } from "../../OdysseyDesignTokensContext.js";
+import { DragIndicatorIcon } from "../../icons.generated/index.js";
 
 export const dataTableImmutableSettings = {
   enableColumnActions: false,

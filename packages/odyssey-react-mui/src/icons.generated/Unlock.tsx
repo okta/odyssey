@@ -13,7 +13,7 @@
 // Code automatically generated; DO NOT EDIT.
 
 import { forwardRef, memo } from "react";
-import { SvgIcon, type SvgIconNoChildrenProps } from "../SvgIcon";
+import { SvgIcon, type SvgIconNoChildrenProps } from "../SvgIcon.js";
 
 export type UnlockIconProps = SvgIconNoChildrenProps;
 

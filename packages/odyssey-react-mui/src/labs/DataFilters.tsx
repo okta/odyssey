@@ -31,28 +31,28 @@ import {
 import { MRT_ColumnDef, MRT_RowData } from "material-react-table";
 import styled from "@emotion/styled";
 
-import { Autocomplete } from "../Autocomplete";
-import { Box } from "../Box";
-import { Button } from "../Buttons";
-import { CheckboxGroup } from "../CheckboxGroup";
-import { Checkbox } from "../Checkbox";
+import { Autocomplete } from "../Autocomplete.js";
+import { Box } from "../Box.js";
+import { Button } from "../Buttons/index.js";
+import { CheckboxGroup } from "../CheckboxGroup.js";
+import { Checkbox } from "../Checkbox.js";
 import {
   CheckIcon,
   ChevronRightIcon,
   CloseCircleFilledIcon,
   FilterIcon,
-} from "../icons.generated";
+} from "../icons.generated/index.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "../OdysseyDesignTokensContext";
-import { RadioGroup } from "../RadioGroup";
-import { Radio } from "../Radio";
-import { SearchField } from "../SearchField";
-import { Tag } from "../Tag";
-import { TagList } from "../TagList";
-import { TextField } from "../TextField";
-import { Subordinate } from "../Typography";
+} from "../OdysseyDesignTokensContext.js";
+import { RadioGroup } from "../RadioGroup.js";
+import { Radio } from "../Radio.js";
+import { SearchField } from "../SearchField.js";
+import { Tag } from "../Tag.js";
+import { TagList } from "../TagList.js";
+import { TextField } from "../TextField.js";
+import { Subordinate } from "../Typography.js";
 
 const AutocompleteOuterContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",

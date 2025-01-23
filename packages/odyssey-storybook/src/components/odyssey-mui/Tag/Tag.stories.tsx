@@ -15,9 +15,9 @@ import { GroupIcon } from "@okta/odyssey-react-mui/icons";
 import { Meta, StoryObj } from "@storybook/react";
 import { expect, fn, userEvent, within } from "@storybook/test";
 
-import { MuiThemeDecorator } from "../../../../.storybook/components";
-import icons from "../../../../.storybook/components/iconUtils";
-import { axeRun } from "../../../axe-util";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
+import icons from "../../../../.storybook/components/iconUtils.js";
+import { axeRun } from "../../../axe-util.js";
 
 const meta = {
   title: "MUI Components/Tag",

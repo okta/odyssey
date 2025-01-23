@@ -12,8 +12,8 @@
 
 import { UserProfile, UserProfileProps } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
-import icons from "../../../../.storybook/components/iconUtils";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
+import icons from "../../../../.storybook/components/iconUtils.js";
 import { ChevronDownIcon, UserIcon } from "@okta/odyssey-react-mui/icons";
 
 const storybookMeta: Meta<UserProfileProps> = {

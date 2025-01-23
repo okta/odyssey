@@ -15,9 +15,9 @@ import { Switch, SwitchProps, HintLink } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 import { expect, userEvent, within } from "@storybook/test";
 
-import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
-import { axeRun } from "../../../axe-util";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData.js";
+import { axeRun } from "../../../axe-util.js";
 
 const storybookMeta: Meta<SwitchProps> = {
   title: "MUI Components/Forms/Switch",
