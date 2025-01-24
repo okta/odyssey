@@ -81,7 +81,7 @@
     "generate:icons:index": "tsx scripts/generateIconsIndex.ts",
     "generate:icons": "yarn generate:icons:clean && yarn generate:icons:components && yarn generate:icons:index",
     "test": "NODE_ENV=test vitest run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit --rootDir ./"
   },
   "repository": {
     "type": "git",
