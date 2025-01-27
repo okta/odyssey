@@ -10,16 +10,25 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { ReactNode, useRef } from "react";
+
 import {
   Banner,
+  Box,
   Button,
+  Heading3,
+  Link,
   OdysseyProvider,
   Paragraph,
   SearchField,
+  Subordinate,
   Surface,
   useOdysseyDesignTokens,
 } from "@okta/odyssey-react-mui";
-import { PageTemplate, UserProfile } from "@okta/odyssey-react-mui/labs";
+import {
+  PageTemplate,
+  UserProfileMenuButton,
+} from "@okta/odyssey-react-mui/labs";
 import {
   UiShell,
   uiShellDataAttribute,
@@ -45,7 +54,6 @@ import { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
-import { useRef } from "react";
 
 const storybookMeta: Meta<UiShellProps & { sideNavBackgroundColor?: string }> =
   {
@@ -162,6 +170,20 @@ const storybookMeta: Meta<UiShellProps & { sideNavBackgroundColor?: string }> =
   };
 
 export default storybookMeta;
+
+const BoxWithBottomMargin = ({ children }: { children: ReactNode }) => {
+  const odysseyDesignTokens = useOdysseyDesignTokens();
+
+  return (
+    <Box
+      sx={{
+        marginBottom: odysseyDesignTokens.Spacing4,
+      }}
+    >
+      {children}
+    </Box>
+  );
+};
 
 const sharedAppSwitcherProps: UiShellNavComponentProps["appSwitcherProps"] = {
   appIcons: [
@@ -430,17 +452,33 @@ const sharedTopNavProps: UiShellNavComponentProps["topNavProps"] = {
 };
 
 const sharedOptionalComponents: UiShellProps["optionalComponents"] = {
-  topNavLeftSide: (
-    <div>
-      <SearchField label="Search" placeholder="Search..." />
-    </div>
-  ),
+  topNavLeftSide: <SearchField label="Search" placeholder="Search..." />,
   topNavRightSide: (
-    <UserProfile
-      profileIcon={<UserIcon />}
-      orgName="ORG123"
-      userName="test.user@test.com"
-    />
+    <>
+      <UserProfileMenuButton
+        ariaLabel="User profile button"
+        profileIcon={<UserIcon />}
+        orgName="ORG123"
+        userName="test.user@test.com"
+        popoverContent={
+          <Box sx={{ minWidth: "392px" }}>
+            <BoxWithBottomMargin>
+              <Heading3>Add-Min O'Cloudy Tud</Heading3>
+            </BoxWithBottomMargin>
+            <BoxWithBottomMargin>
+              <Subordinate>administrator1@clouditude.net</Subordinate>
+              <Subordinate>rain.okta1.com</Subordinate>
+            </BoxWithBottomMargin>
+            <BoxWithBottomMargin>
+              <Link href="#">My Settings</Link>
+            </BoxWithBottomMargin>
+            <BoxWithBottomMargin>
+              <Link href="#">Sign Out</Link>
+            </BoxWithBottomMargin>
+          </Box>
+        }
+      />
+    </>
   ),
 };
 

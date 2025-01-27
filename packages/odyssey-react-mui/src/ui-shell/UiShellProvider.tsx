@@ -16,6 +16,7 @@ import {
   PropsWithChildren,
   useContext,
   useMemo,
+  // useState
 } from "react";
 import {
   generateContrastColors,
@@ -50,6 +51,7 @@ const UiShellProvider = ({
   topNavBackgroundColor,
   children,
 }: PropsWithChildren<UiShellProviderProps>) => {
+  // const [isSideNavMobile, setIsSideNavMobile] = useState(false);
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const defaultedSideNavBackgroundColor =
     sideNavBackgroundColor || odysseyDesignTokens.HueNeutralWhite;

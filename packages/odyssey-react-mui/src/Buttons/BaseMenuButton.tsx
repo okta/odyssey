@@ -179,7 +179,7 @@ export type AdditionalBaseMenuButtonProps = Pick<
          */
         children: ReactNode | NullElement;
         /**
-         * popoverConten is disallowed if children are present
+         * popoverContent is disallowed if children are present
          */
         popoverContent?: never;
       }

@@ -11,7 +11,7 @@
  */
 
 import styled from "@emotion/styled";
-import { memo, type ReactElement } from "react";
+import { memo, useRef, type ReactElement } from "react";
 
 import type { HtmlProps } from "../../HtmlProps.js";
 import {
@@ -22,6 +22,7 @@ import {
   UiShellColors,
   useUiShellContext,
 } from "../../ui-shell/UiShellProvider.js";
+import useResizeObserver from "../../useResizeObserver.js";
 
 export const TOP_NAV_HEIGHT = `${64 / 14}rem`;
 
@@ -86,17 +87,37 @@ const TopNav = ({
 }: TopNavProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const uiShellContext = useUiShellContext();
+  const topNavContentContainerRef = useRef<HTMLDivElement>(null);
+  const leftSideContainerRef = useRef<HTMLDivElement>(null);
+  const rightSideContainerRef = useRef<HTMLDivElement>(null);
+
+  const { width: topNavContainerWidth } = useResizeObserver(
+    topNavContentContainerRef,
+  );
+
+  const { width: leftSideContainerWidth } =
+    useResizeObserver(leftSideContainerRef);
+
+  const { width: rightSideContainerWidth } = useResizeObserver(
+    rightSideContainerRef,
+  );
+  console.log(
+    { topNavContainerWidth },
+    { leftSideContainerWidth },
+    { rightSideContainerWidth },
+  );
 
   return (
     <StyledTopNavContainer
-      odysseyDesignTokens={odysseyDesignTokens}
       isScrolled={isScrolled}
+      odysseyDesignTokens={odysseyDesignTokens}
+      ref={topNavContentContainerRef}
       topNavBackgroundColor={uiShellContext?.topNavBackgroundColor}
     >
-      <StyledLeftSideContainer>
+      <StyledLeftSideContainer ref={leftSideContainerRef}>
         {leftSideComponent ?? <div />}
       </StyledLeftSideContainer>
-      <StyledRightSideContainer>
+      <StyledRightSideContainer ref={rightSideContainerRef}>
         {rightSideComponent ?? <div />}
       </StyledRightSideContainer>
     </StyledTopNavContainer>
