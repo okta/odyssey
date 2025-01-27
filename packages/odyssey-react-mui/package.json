@@ -6,8 +6,8 @@
   "license": "Apache-2.0",
   "sideEffects": false,
   "type": "module",
-  "module": "dist/esm/index.js",
-  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.mjs",
+  "main": "dist/cjs/index.cjs",
   "types": "dist/types/index.d.ts",
   "typesVersions": {
     "*": {
@@ -34,36 +34,42 @@
   "exports": {
     "./icons": {
       "types": "./dist/types/icons.generated/index.d.ts",
-      "default": "./dist/esm/icons.generated/index.js"
+      "import": "./dist/esm/icons.generated/index.mjs",
+      "require": "./dist/cjs/icons.generated/index.cjs"
     },
     "./labs": {
       "types": "./dist/types/labs/index.d.ts",
-      "default": "./dist/esm/labs/index.js"
+      "import": "./dist/esm/labs/index.mjs",
+      "require": "./dist/cjs/labs/index.cjs"
     },
     "./test-selectors": {
       "types": "./dist/types/test-selectors/index.d.ts",
-      "default": "./dist/esm/test-selectors/index.js"
+      "import": "./dist/esm/test-selectors/index.mjs",
+      "require": "./dist/cjs/test-selectors/index.cjs"
     },
     "./ui-shell": {
       "types": "./dist/types/ui-shell/index.d.ts",
-      "default": "./dist/esm/ui-shell/index.js"
+      "import": "./dist/esm/ui-shell/index.mjs",
+      "require": "./dist/cjs/ui-shell/index.cjs"
     },
     "./web-component": {
       "types": "./dist/types/web-component/index.d.ts",
-      "default": "./dist/esm/web-component/index.js"
+      "import": "./dist/esm/web-component/index.mjs",
+      "require": "./dist/cjs/web-component/index.cjs"
     },
     ".": {
       "types": "./dist/types/index.d.ts",
-      "default": "./dist/esm/index.js"
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/cjs/index.cjs"
     },
     "./README.md": "./README.md"
   },
   "scripts": {
     "build:clean": "rimraf dist",
     "build:source": "yarn build:source:esm && yarn build:source:cjs",
-    "build:source:esm": "NODE_ENV=production BROWSERSLIST_ENV=modern babel src --out-dir dist/esm --extensions .js,.jsx,.ts,.tsx --source-maps",
+    "build:source:esm": "NODE_ENV=production BROWSERSLIST_ENV=modern babel src --out-dir dist/esm --extensions .js,.jsx,.ts,.tsx --source-maps --out-file-extension .mjs",
     "build:source:esm:watch": "yarn build:source:esm --watch",
-    "build:source:cjs": "ODYSSEY_CJS_BUILD=true NODE_ENV=production BROWSERSLIST_ENV=modern babel src --out-dir dist/cjs --extensions .js,.jsx,.ts,.tsx --source-maps",
+    "build:source:cjs": "ODYSSEY_CJS_BUILD=true NODE_ENV=production BROWSERSLIST_ENV=modern babel src --out-dir dist/cjs --extensions .js,.jsx,.ts,.tsx --source-maps --out-file-extension .cjs",
     "build:source:cjs:watch": "yarn build:source:cjs --watch",
     "build:testSelectors": "tsx scripts/generateTestSelectorsJson.ts",
     "build:translationsJson": "tsx scripts/properties-to-ts.ts bundle",

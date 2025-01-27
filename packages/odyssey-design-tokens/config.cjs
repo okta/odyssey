@@ -19,7 +19,11 @@ module.exports = {
       files: [
         {
           format: "javascript/es6",
-          destination: "index.js",
+          destination: "index.mjs",
+        },
+        {
+          format: "javascript/module-flat",
+          destination: "index.cjs",
         },
         {
           format: "typescript/es6-declarations",
