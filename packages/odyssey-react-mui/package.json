@@ -143,6 +143,7 @@
     "@vitest/coverage-v8": "^2.1.8",
     "@vitest/ui": "^2.1.5",
     "babel-plugin-import": "^1.13.8",
+    "babel-plugin-replace-import-extension": "^1.1.4",
     "chokidar-cli": "^3.0.0",
     "concurrently": "^8.2.2",
     "jest-axe": "^5.0.1",
