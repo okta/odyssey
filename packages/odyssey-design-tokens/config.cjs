@@ -27,5 +27,16 @@ module.exports = {
         },
       ],
     },
+    scss: {
+      transformGroup: "scss",
+      buildPath: "dist/",
+      files: [
+        {
+          format: "scss/map-deep",
+          destination: "index.scss",
+          mapName: "ods-tokens",
+        },
+      ],
+    },
   },
 };
