@@ -107,15 +107,15 @@ const RadioGroup = ({
       React.Children.map(children, (child) => {
         if (React.isValidElement<RadioProps>(child) && child.type === Radio) {
           return React.cloneElement(child, {
-            isDisabled: isDisabled,
-            isReadOnly: isReadOnly,
+            ...child.props,
+            isDisabled: isDisabled || child.props.isDisabled,
+            isReadOnly: isReadOnly || child.props.isReadOnly,
           });
         }
         return child;
       }),
     [children, isDisabled, isReadOnly],
   );
-
   const renderFieldComponent = useCallback(
     ({
       ariaDescribedBy,
