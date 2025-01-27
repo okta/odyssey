@@ -160,6 +160,7 @@ export type UiShellContentProps = {
     sideNavFooter?: SideNavProps["footerComponent"];
     topNavLeftSide?: TopNavProps["leftSideComponent"];
     topNavRightSide?: TopNavProps["rightSideComponent"];
+    topNavRightSideMobileMenu?: TopNavProps["mobileMenuContentComponent"];
   };
 } & UiShellNavComponentProps;
 

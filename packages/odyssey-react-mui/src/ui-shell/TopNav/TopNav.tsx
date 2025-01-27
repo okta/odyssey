@@ -23,6 +23,8 @@ import {
   useUiShellContext,
 } from "../../ui-shell/UiShellProvider.js";
 import useResizeObserver from "../../useResizeObserver.js";
+import { Button } from "../../Buttons/Button.js";
+import { MenuButton } from "../../Buttons/MenuButton.js";
 
 export const TOP_NAV_HEIGHT = `${64 / 14}rem`;
 
@@ -34,18 +36,25 @@ const StyledRightSideContainer = styled("div")(() => ({
   flexShrink: 0,
 }));
 
+const nonForwardedProps = [
+  "isMobile",
+  "isScrolled",
+  "odysseyDesignTokens",
+  "topNavBackgroundColor",
+];
+
 const StyledTopNavContainer = styled("div", {
-  shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" &&
-    prop !== "isScrolled" &&
-    prop !== "topNavBackgroundColor",
+  shouldForwardProp: (prop) => !nonForwardedProps.includes(prop),
 })<{
+  isMobile: TopNavProps["isMobile"];
   isScrolled?: boolean;
   odysseyDesignTokens: DesignTokens;
   topNavBackgroundColor?: UiShellColors["topNavBackgroundColor"];
-}>(({ odysseyDesignTokens, isScrolled, topNavBackgroundColor }) => ({
+}>(({ isMobile, odysseyDesignTokens, isScrolled, topNavBackgroundColor }) => ({
   alignItems: "center",
-  backgroundColor: topNavBackgroundColor,
+  backgroundColor: isMobile
+    ? odysseyDesignTokens.HueNeutralWhite
+    : topNavBackgroundColor,
   boxShadow: isScrolled ? odysseyDesignTokens.DepthMedium : undefined,
   clipPath: "inset(0 0 -100vh 0)",
   display: "flex",
@@ -67,6 +76,10 @@ const StyledTopNavContainer = styled("div", {
 
 export type TopNavProps = {
   /**
+   * Whether or not the topnav should render in a mobile friendly manner
+   */
+  isMobile?: boolean;
+  /**
    * Whether or not the underlying content has been scrolled
    */
   isScrolled?: boolean;
@@ -78,9 +91,14 @@ export type TopNavProps = {
    * React components that render into the right side of the top nav.
    */
   rightSideComponent?: ReactElement;
+  /**
+   * React components that render into the popover of the mobile menu button.
+   */
+  mobileMenuContentComponent?: ReactElement;
 } & Pick<HtmlProps, "testId">;
 
 const TopNav = ({
+  isMobile = true,
   isScrolled,
   leftSideComponent,
   rightSideComponent,
@@ -109,17 +127,30 @@ const TopNav = ({
 
   return (
     <StyledTopNavContainer
+      isMobile={isMobile}
       isScrolled={isScrolled}
       odysseyDesignTokens={odysseyDesignTokens}
       ref={topNavContentContainerRef}
       topNavBackgroundColor={uiShellContext?.topNavBackgroundColor}
     >
-      <StyledLeftSideContainer ref={leftSideContainerRef}>
-        {leftSideComponent ?? <div />}
-      </StyledLeftSideContainer>
-      <StyledRightSideContainer ref={rightSideContainerRef}>
-        {rightSideComponent ?? <div />}
-      </StyledRightSideContainer>
+      {isMobile ? (
+        <>
+          <Button label="open mobile menu" variant="floating" />
+          <MenuButton
+            buttonLabel="open right side"
+            popoverContent={rightSideComponent}
+          />
+        </>
+      ) : (
+        <>
+          <StyledLeftSideContainer ref={leftSideContainerRef}>
+            {leftSideComponent ?? <div />}
+          </StyledLeftSideContainer>
+          <StyledRightSideContainer ref={rightSideContainerRef}>
+            {rightSideComponent ?? <div />}
+          </StyledRightSideContainer>
+        </>
+      )}
     </StyledTopNavContainer>
   );
 };
