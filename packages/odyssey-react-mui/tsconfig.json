@@ -6,7 +6,8 @@
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
     "noEmit": false,
-    "outDir": "dist",
+    "rootDir": "src",
+    "outDir": "dist/types",
     "sourceMap": true,
     "types": ["vitest/globals"]
   },

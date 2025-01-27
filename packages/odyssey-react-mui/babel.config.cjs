@@ -76,9 +76,11 @@ const babelConfig = (api) => {
         presets: [
           [
             "@babel/preset-env",
-            {
-              modules: false,
-            },
+            process.env.ODYSSEY_CJS_BUILD
+              ? {}
+              : {
+                  modules: false,
+                },
           ],
           [
             "@babel/preset-react",
