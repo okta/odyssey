@@ -126,6 +126,7 @@
     "@babel/preset-react": "^7.26.3",
     "@babel/preset-typescript": "^7.26.0",
     "@happy-dom/jest-environment": "^15.7.4",
+    "@okta/babel-plugin-fully-specified": "workspace:*",
     "@okta/browserslist-config-odyssey": "workspace:*",
     "@okta/odyssey-icons": "workspace:*",
     "@okta/odyssey-typescript": "workspace:*",

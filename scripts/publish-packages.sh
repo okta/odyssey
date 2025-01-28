@@ -24,7 +24,7 @@ git checkout .
 # All packages are built by `prepack`.
 
 # update version with commit SHA to allow lerna to publish
-FILES_TO_UPDATE_VERSION="lerna.json packages/odyssey-design-tokens/package.json packages/odyssey-react-mui/package.json packages/browserslist-config-odyssey/package.json packages/odyssey-storybook/package.json"
+FILES_TO_UPDATE_VERSION="lerna.json packages/babel-plugin-fully-specified/package.json packages/odyssey-design-tokens/package.json packages/odyssey-react-mui/package.json packages/browserslist-config-odyssey/package.json packages/odyssey-storybook/package.json"
 for PATH_AND_FILE in $FILES_TO_UPDATE_VERSION; do
   FULL_PATH="$OKTA_HOME/$REPO/$PATH_AND_FILE"
   json_contents="$(jq '.version = "'$TAGGED_VERSION'"' $FULL_PATH)" && \

@@ -4943,6 +4943,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@okta/babel-plugin-fully-specified@workspace:*, @okta/babel-plugin-fully-specified@workspace:packages/babel-plugin-fully-specified":
+  version: 0.0.0-use.local
+  resolution: "@okta/babel-plugin-fully-specified@workspace:packages/babel-plugin-fully-specified"
+  dependencies:
+    "@babel/core": "npm:^7.26.0"
+    "@babel/types": "npm:^7.26.0"
+    "@okta/odyssey-typescript": "workspace:*"
+    "@vitest/ui": "npm:^2.1.5"
+    typescript: "npm:^5.6.3"
+    vitest: "npm:^2.1.5"
+  languageName: unknown
+  linkType: soft
+
 "@okta/browserslist-config-odyssey@workspace:*, @okta/browserslist-config-odyssey@workspace:packages/browserslist-config-odyssey":
   version: 0.0.0-use.local
   resolution: "@okta/browserslist-config-odyssey@workspace:packages/browserslist-config-odyssey"
@@ -5044,6 +5057,7 @@ __metadata:
     "@mui/system": "npm:^5.16.14"
     "@mui/utils": "npm:^5.16.14"
     "@mui/x-date-pickers": "npm:^7.2.0"
+    "@okta/babel-plugin-fully-specified": "workspace:*"
     "@okta/browserslist-config-odyssey": "workspace:*"
     "@okta/odyssey-design-tokens": "workspace:^"
     "@okta/odyssey-icons": "workspace:*"
