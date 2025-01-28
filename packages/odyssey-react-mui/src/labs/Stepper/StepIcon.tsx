@@ -11,13 +11,13 @@
  */
 
 import styled from "@emotion/styled";
-import { CheckIcon } from "../../icons.generated";
-import { DesignTokens } from "../../OdysseyDesignTokensContext";
-import type { StepIconProps } from "./Stepper.types";
+import { CheckIcon } from "../../icons.generated/index.js";
+import { DesignTokens } from "../../OdysseyDesignTokensContext.js";
+import type { StepIconProps } from "./Stepper.types.js";
 import {
   shouldForwardStepIconContainerProps,
   shouldForwardStepNumberProps,
-} from "./Stepper.utils";
+} from "./Stepper.utils.js";
 
 const StyledStepNumber = styled("span", {
   shouldForwardProp: shouldForwardStepNumberProps,
@@ -28,16 +28,24 @@ const StyledStepNumber = styled("span", {
   nonLinear: boolean;
 }>(({ completed, active, nonLinear, odysseyDesignTokens }) => ({
   fontWeight: odysseyDesignTokens.TypographyWeightHeadingBold,
-  color:
-    completed || active
-      ? odysseyDesignTokens.HueNeutralWhite
-      : odysseyDesignTokens.HueNeutral600,
+  //Base color
+  color: odysseyDesignTokens.HueNeutral600,
 
+  //Override color for completed or active states
+  ...(completed && {
+    color: odysseyDesignTokens.HueNeutralWhite,
+  }),
+  ...(active && {
+    color: odysseyDesignTokens.HueNeutralWhite,
+  }),
+
+  //Hover state
   ".MuiStep-root:hover &": {
-    color:
-      !active && !completed && nonLinear
-        ? odysseyDesignTokens.HueNeutral900
-        : undefined,
+    ...(!active &&
+      !completed &&
+      nonLinear && {
+        color: odysseyDesignTokens.HueNeutral900,
+      }),
   },
 }));
 
@@ -49,53 +57,64 @@ const StyledStepIconContainer = styled("div", {
   nonLinear: boolean;
   odysseyDesignTokens: DesignTokens;
   variant: "numeric" | "nonNumeric";
-}>(({ active, completed, variant, nonLinear, odysseyDesignTokens }) => ({
-  width:
-    variant === "numeric"
+}>(({ active, completed, variant, nonLinear, odysseyDesignTokens }) => {
+  const isNumeric = variant === "numeric";
+
+  return {
+    width: isNumeric
       ? odysseyDesignTokens.Spacing5
       : odysseyDesignTokens.Spacing4,
-  height:
-    variant === "numeric"
+    height: isNumeric
       ? odysseyDesignTokens.Spacing5
       : odysseyDesignTokens.Spacing4,
-  borderRadius: "50%",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  color:
-    completed || active
-      ? odysseyDesignTokens.HueNeutralWhite
-      : odysseyDesignTokens.HueNeutral700,
-  border: `1px solid ${
-    completed
-      ? odysseyDesignTokens.HueGreen400
-      : active
-        ? odysseyDesignTokens.HueBlue600
-        : odysseyDesignTokens.HueNeutral600
-  }`,
-  background: completed
-    ? odysseyDesignTokens.HueGreen400
-    : active
-      ? odysseyDesignTokens.HueBlue600
-      : "transparent",
-  transition: `all ${odysseyDesignTokens.TransitionDurationMain}`,
+    borderRadius: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    transition: `color ${odysseyDesignTokens.TransitionDurationMain}, 
+    background-color ${odysseyDesignTokens.TransitionDurationMain}, 
+    border ${odysseyDesignTokens.TransitionDurationMain}`,
 
-  ".MuiStep-root:hover &":
-    !active && !completed && nonLinear
-      ? { border: `1px solid ${odysseyDesignTokens.HueNeutral900}` }
-      : undefined,
+    //Base color state
+    color: odysseyDesignTokens.HueNeutral700,
+    backgroundColor: "transparent",
+    border: "1px solid",
+    borderColor: `1px solid ${odysseyDesignTokens.HueNeutral600}`,
 
-  "& svg": {
-    width:
-      variant === "numeric"
-        ? odysseyDesignTokens.Spacing4
-        : odysseyDesignTokens.Spacing3,
-    height:
-      variant === "numeric"
-        ? odysseyDesignTokens.Spacing4
-        : odysseyDesignTokens.Spacing3,
-  },
-}));
+    ...(completed && {
+      color: odysseyDesignTokens.HueNeutralWhite,
+      backgroundColor: odysseyDesignTokens.HueGreen400,
+      borderColor: odysseyDesignTokens.HueGreen400,
+    }),
+
+    ...(active && {
+      color: odysseyDesignTokens.HueNeutralWhite,
+      backgroundColor: odysseyDesignTokens.HueBlue600,
+      borderColor: odysseyDesignTokens.HueBlue600,
+    }),
+
+    //Hover state for non-linear, non-active, non-completed
+    ".MuiStep-root:hover &": {
+      ...(!active &&
+        !completed &&
+        nonLinear && {
+          border: `1px solid ${odysseyDesignTokens.HueNeutral900}`,
+        }),
+    },
+
+    svg: {
+      ...(isNumeric
+        ? {
+            width: odysseyDesignTokens.Spacing4,
+            height: odysseyDesignTokens.Spacing4,
+          }
+        : {
+            width: odysseyDesignTokens.Spacing3,
+            height: odysseyDesignTokens.Spacing3,
+          }),
+    },
+  };
+});
 
 export const StepIcon = ({
   active,

@@ -14,11 +14,9 @@ export const createShouldForwardProp =
   (excludedProps: string[]) => (prop: string) =>
     !excludedProps.includes(prop);
 
-export const shouldForwardStepProps = createShouldForwardProp([
-  "odysseyDesignTokens",
-  "orientation",
-  "isClickable",
-]);
+export const filterExcludedProps =
+  (excludedProps: string[]) => (prop: string) =>
+    !excludedProps.includes(prop);
 
 export const shouldForwardStepIconContainerProps = createShouldForwardProp([
   "completed",

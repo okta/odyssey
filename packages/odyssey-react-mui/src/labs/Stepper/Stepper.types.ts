@@ -10,8 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { HtmlProps } from "../../HtmlProps";
-import { DesignTokens } from "../../OdysseyDesignTokensContext";
+import { HtmlProps } from "../../HtmlProps.js";
+import { DesignTokens } from "../../OdysseyDesignTokensContext.js";
 
 export type StepData = {
   /**
@@ -24,7 +24,7 @@ export type StepData = {
   label: string;
 };
 
-// Define handler types for public API
+//Define handler types for public API
 export type StepChangeHandler = (step: number) => void;
 
 export type StepperProps = {
@@ -37,9 +37,10 @@ export type StepperProps = {
    */
   allowBackStep?: boolean;
   /**
-   * Aria label for the stepper container, Falls back to "Progress steps"
+   * Aria label for the stepper container,
+   * Falls back to "Progress steps"
    */
-  ariaLabel?: string;
+  ariaLabel?: HtmlProps["ariaLabel"];
   /**
    * Button label for the next navigation button
    */
@@ -107,13 +108,18 @@ export type StepperNavigationProps = {
    */
   isStepClickable: (step: number) => boolean;
   /**
-   * Callback fired when back button is clicked
+   * Callback fired when back button is clicked.
+   * @param currentStep - The index of the current step (before navigation)
+   * @param targetStep - The index of the previous step (where navigation will go)
    */
-  onBack: () => void;
+  onBack: (currentStep: number, targetStep: number) => void;
+
   /**
-   * Callback fired when next button is clicked
+   * Callback fired when next button is clicked.
+   * @param currentStep - The index of the current step (before navigation)
+   * @param targetStep - The index of the next step (where navigation will go)
    */
-  onNext: () => void;
+  onNext: (currentStep: number, targetStep: number) => void;
   /**
    * Callback fired when a step dot is clicked
    */

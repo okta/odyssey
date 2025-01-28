@@ -20,7 +20,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { expect, waitFor, within } from "@storybook/test";
 import { userEvent } from "@testing-library/user-event";
 import { useState } from "react";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 
 const storybookMeta: Meta<StepperProps> = {
   title: "Labs Components/Stepper",

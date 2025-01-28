@@ -28,7 +28,7 @@ export * from "./OdysseyPickers/index.js";
 export * from "./PageTemplate/index.js";
 /** @deprecated Will be removed in a future Odyssey version in lieu of DataTable */
 export * from "./PaginatedTable.js";
-export * from "./Stepper";
+export * from "./Stepper/index.js";
 export * from "./UserProfile.js";
 export * from "./UserProfileMenuButton.js";
 /** @deprecated Will be removed in a future Odyssey version. Use the `/ui-shell` export unless your app is running React v17. */

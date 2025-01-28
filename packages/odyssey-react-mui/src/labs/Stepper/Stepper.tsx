@@ -22,31 +22,41 @@ import { useTranslation } from "react-i18next";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
-} from "../../OdysseyDesignTokensContext";
-import { StepIcon } from "./StepIcon";
-import { StepperProps } from "./Stepper.types";
+} from "../../OdysseyDesignTokensContext.js";
+import { StepIcon } from "./StepIcon.js";
+import { StepperProps } from "./Stepper.types.js";
 import {
   shouldForwardStepDescriptionProps,
   shouldForwardStepperProps,
-  shouldForwardStepProps,
-} from "./Stepper.utils";
+  filterExcludedProps,
+} from "./Stepper.utils.js";
 
 const StyledStep = styled(MuiStep, {
-  shouldForwardProp: shouldForwardStepProps,
+  shouldForwardProp: filterExcludedProps([
+    "odysseyDesignTokens",
+    "orientation",
+    "isClickable",
+  ]),
 })<{
   odysseyDesignTokens: DesignTokens;
   orientation?: "horizontal" | "vertical";
   isClickable: boolean;
 }>(({ orientation, odysseyDesignTokens, isClickable }) => ({
-  flex: orientation === "vertical" ? 1 : "none",
-  padding: orientation === "vertical" ? `${odysseyDesignTokens.Spacing1} 0` : 0,
-  "&:focus-visible": isClickable
-    ? {
-        boxShadow: `0 0 0 2px ${odysseyDesignTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyDesignTokens.PalettePrimaryMain}`,
-        outline: "2px solid transparent",
-        outlineOffset: "1px",
-      }
-    : undefined,
+  padding: 0,
+
+  ...(orientation === "vertical" && {
+    flex: 1,
+    padding: `${odysseyDesignTokens.Spacing1} 0`,
+  }),
+
+  //Clickable focus styles
+  ...(isClickable && {
+    "&:focus-visible": {
+      boxShadow: `0 0 0 2px ${odysseyDesignTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyDesignTokens.PalettePrimaryMain}`,
+      outline: "2px solid transparent",
+      outlineOffset: "1px",
+    },
+  }),
 }));
 
 const StepperContainer = styled(MuiStepper, {
@@ -56,128 +66,137 @@ const StepperContainer = styled(MuiStepper, {
   odysseyDesignTokens: DesignTokens;
   orientation?: "horizontal" | "vertical";
   stepVariant?: "numeric" | "nonNumeric";
-}>(({ nonLinear, odysseyDesignTokens, orientation, stepVariant }) => {
-  return {
-    alignItems: "start",
-    ...(orientation === "horizontal" && {
-      justifyContent: "flex-start",
-      "& .MuiStep-root": {
-        flex: "0 0 auto",
-        padding: `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
-        borderRadius: odysseyDesignTokens.BorderRadiusMain,
+}>(({ nonLinear, odysseyDesignTokens, orientation, stepVariant }) => ({
+  alignItems: "start",
+  padding: 0,
+  borderRadius: odysseyDesignTokens.BorderRadiusMain,
 
-        "&:has(.Mui-active)": {
-          backgroundColor: odysseyDesignTokens.HueNeutralWhite,
-        },
+  //Horizontal orientation styles
+  ...(orientation === "horizontal" && {
+    justifyContent: "flex-start",
+    "& .MuiStep-root": {
+      flex: "0 0 auto",
+      padding: `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
+      borderRadius: odysseyDesignTokens.BorderRadiusMain,
 
-        "&:not(:has(.Mui-active))": {
-          "&.Mui-completed": {
-            "&:hover": {
-              "& .MuiStepLabel-label": {
-                color: odysseyDesignTokens.HueNeutral800,
-              },
-              "& .MuiStepLabel-labelContainer div": {
-                color: odysseyDesignTokens.HueNeutral800,
-              },
-            },
-          },
+      "&:has(.Mui-active)": {
+        backgroundColor: odysseyDesignTokens.HueNeutralWhite,
+      },
+
+      "&:not(:has(.Mui-active))": {
+        "&.Mui-completed": {
           "&:hover": {
-            backgroundColor: nonLinear
-              ? odysseyDesignTokens.HueNeutral100
-              : "transparent",
-            cursor: nonLinear ? "pointer" : "default",
             "& .MuiStepLabel-label": {
-              color: nonLinear
-                ? odysseyDesignTokens.HueNeutral900
-                : odysseyDesignTokens.HueNeutral600,
+              color: odysseyDesignTokens.HueNeutral800,
             },
             "& .MuiStepLabel-labelContainer div": {
-              color: nonLinear
-                ? odysseyDesignTokens.HueNeutral800
-                : odysseyDesignTokens.HueNeutral600,
+              color: odysseyDesignTokens.HueNeutral800,
             },
           },
         },
-      },
-    }),
-    padding: 0,
-    borderRadius: odysseyDesignTokens.BorderRadiusMain,
-    ...(orientation === "vertical" && {
-      width: "fit-content",
-      "& .MuiStep-root": {
-        position: "relative",
-        flex: 1,
-        paddingLeft: odysseyDesignTokens.Spacing5,
-        paddingTop:
-          stepVariant === "nonNumeric" ? 0 : odysseyDesignTokens.Spacing2,
-        paddingBottom: 0,
-        borderRadius: odysseyDesignTokens.BorderRadiusMain,
-        "&::before": {
-          content: '""',
-          position: "absolute",
-          left: stepVariant === "nonNumeric" ? "31.5px" : "35.5px", //Half pixel values used for absolute center positioning
-          top: stepVariant === "nonNumeric" ? "35px" : "40px",
-          height:
-            stepVariant === "nonNumeric"
-              ? "calc(100% - 35px)"
-              : "calc(100% - 40px)",
-          width: "1px",
-          backgroundColor: odysseyDesignTokens.HueNeutral200,
-        },
-        "&:last-child::before": {
-          display: "none",
-        },
-        "& .MuiStepLabel-labelContainer": {
-          minHeight: stepVariant === "nonNumeric" ? "20px" : "38px", //For proper verical alignment of the connector line
-        },
-        "&:not(:has(.Mui-active))": {
-          "&.Mui-completed": {
-            "&:hover": {
-              "& .MuiStepLabel-label": {
-                color: odysseyDesignTokens.HueNeutral800,
-              },
-              "& .MuiStepLabel-labelContainer div": {
-                color: odysseyDesignTokens.HueNeutral800,
-              },
-            },
-          },
-          "&:hover": {
-            cursor: nonLinear ? "pointer" : "default",
-            "& .MuiStepLabel-label": {
-              color: nonLinear
-                ? odysseyDesignTokens.HueNeutral900
-                : odysseyDesignTokens.HueNeutral600,
-            },
-            "& .MuiStepLabel-labelContainer div": {
-              color: nonLinear
-                ? odysseyDesignTokens.HueNeutral800
-                : odysseyDesignTokens.HueNeutral600,
-            },
-          },
-        },
-      },
-    }),
-    "& .MuiStepConnector-line": {
-      borderColor: odysseyDesignTokens.HueNeutral200,
-      borderWidth: "1px",
-      minWidth: odysseyDesignTokens.Spacing4,
-      minHeight:
-        orientation === "vertical" ? odysseyDesignTokens.Spacing4 : undefined,
-    },
-    "& .MuiStepConnector-root": {
-      ...(orientation === "horizontal"
-        ? {
-            top: odysseyDesignTokens.Spacing5,
-            left: "calc(-50% + 20px)",
-            right: "calc(50% + 20px)",
-            margin: `auto ${odysseyDesignTokens.Spacing2}`,
-          }
-        : {
-            marginLeft: stepVariant === "nonNumeric" ? "31.5px" : "35.5px",
+        "&:hover": {
+          ...(nonLinear && {
+            backgroundColor: odysseyDesignTokens.HueNeutral100,
+            cursor: "pointer",
           }),
+          "& .MuiStepLabel-label": {
+            color: nonLinear
+              ? odysseyDesignTokens.HueNeutral900
+              : odysseyDesignTokens.HueNeutral600,
+          },
+          "& .MuiStepLabel-labelContainer div": {
+            color: nonLinear
+              ? odysseyDesignTokens.HueNeutral800
+              : odysseyDesignTokens.HueNeutral600,
+          },
+        },
+      },
     },
-  };
-});
+  }),
+
+  //Vertical orientation styles
+  ...(orientation === "vertical" && {
+    width: "fit-content",
+    "& .MuiStep-root": {
+      position: "relative" as const,
+      flex: 1,
+      paddingLeft: odysseyDesignTokens.Spacing5,
+      paddingTop:
+        stepVariant === "nonNumeric" ? 0 : odysseyDesignTokens.Spacing2,
+      paddingBottom: 0,
+      borderRadius: odysseyDesignTokens.BorderRadiusMain,
+
+      "&::before": {
+        content: '""',
+        position: "absolute" as const,
+        left: stepVariant === "nonNumeric" ? "31.5px" : "35.5px",
+        top: stepVariant === "nonNumeric" ? "35px" : "40px",
+        height:
+          stepVariant === "nonNumeric"
+            ? "calc(100% - 35px)"
+            : "calc(100% - 40px)",
+        width: "1px",
+        backgroundColor: odysseyDesignTokens.HueNeutral200,
+      },
+
+      "&:last-child::before": {
+        display: "none",
+      },
+
+      "& .MuiStepLabel-labelContainer": {
+        minHeight: stepVariant === "nonNumeric" ? "20px" : "38px",
+      },
+
+      "&:not(:has(.Mui-active))": {
+        "&.Mui-completed": {
+          "&:hover": {
+            "& .MuiStepLabel-label": {
+              color: odysseyDesignTokens.HueNeutral800,
+            },
+            "& .MuiStepLabel-labelContainer div": {
+              color: odysseyDesignTokens.HueNeutral800,
+            },
+          },
+        },
+        "&:hover": {
+          cursor: nonLinear ? "pointer" : "default",
+          "& .MuiStepLabel-label": {
+            color: nonLinear
+              ? odysseyDesignTokens.HueNeutral900
+              : odysseyDesignTokens.HueNeutral600,
+          },
+          "& .MuiStepLabel-labelContainer div": {
+            color: nonLinear
+              ? odysseyDesignTokens.HueNeutral800
+              : odysseyDesignTokens.HueNeutral600,
+          },
+        },
+      },
+    },
+  }),
+
+  //Connector styles
+  "& .MuiStepConnector-line": {
+    borderColor: odysseyDesignTokens.HueNeutral200,
+    borderWidth: "1px",
+    minWidth: odysseyDesignTokens.Spacing4,
+    ...(orientation === "vertical" && {
+      minHeight: odysseyDesignTokens.Spacing4,
+    }),
+  },
+
+  "& .MuiStepConnector-root": {
+    ...(orientation === "horizontal" && {
+      top: odysseyDesignTokens.Spacing5,
+      left: "calc(-50% + 20px)",
+      right: "calc(50% + 20px)",
+      margin: `auto ${odysseyDesignTokens.Spacing2}`,
+    }),
+    ...(orientation === "vertical" && {
+      marginLeft: stepVariant === "nonNumeric" ? "31.5px" : "35.5px",
+    }),
+  },
+}));
 
 const StepLabel = styled(MuiStepLabel, {
   shouldForwardProp: (prop) =>
@@ -208,40 +227,55 @@ const StepLabel = styled(MuiStepLabel, {
     orientation,
     variant,
   }) => ({
+    "&.MuiStepLabel-root": {
+      paddingTop: 0,
+      paddingBottom: 0,
+    },
+
     "& .MuiStepLabel-iconContainer": {
       paddingRight: odysseyDesignTokens.Spacing3,
-      alignSelf:
-        orientation === "vertical" && variant === "nonNumeric"
-          ? "center"
-          : orientation === "horizontal" && variant === "numeric"
-            ? "flex-start"
-            : variant === "nonNumeric" && orientation === "horizontal"
-              ? "center"
-              : "flex-start",
       paddingTop: odysseyDesignTokens.Spacing0,
+
+      ...(orientation === "vertical" &&
+        variant === "numeric" && {
+          alignSelf: "flex-start",
+        }),
+
+      ...(variant === "nonNumeric" && {
+        alignSelf: "center",
+      }),
     },
+
+    //Label styles
     "& .MuiStepLabel-label": {
       fontFamily: "inherit",
       fontSize: odysseyDesignTokens.TypographySizeHeading6,
       fontWeight: odysseyDesignTokens.TypographyWeightHeadingBold,
       lineHeight: odysseyDesignTokens.TypographyLineHeightHeading6,
-      color: active
-        ? odysseyDesignTokens.HueBlue600
-        : completed
-          ? odysseyDesignTokens.HueNeutral800
-          : odysseyDesignTokens.HueNeutral600,
+
+      ...(active && {
+        color: odysseyDesignTokens.HueBlue600,
+      }),
+
+      ...(completed && {
+        color: odysseyDesignTokens.HueNeutral800,
+      }),
+
+      ...(!active &&
+        !completed && {
+          color: odysseyDesignTokens.HueNeutral600,
+        }),
 
       "&.Mui-active": {
         color: odysseyDesignTokens.HueBlue600,
       },
     },
 
-    "&.MuiStepLabel-root": { paddingTop: 0, paddingBottom: 0 },
     "&:hover": {
-      cursor:
-        !active && (nonLinear || (allowBackStep && completed))
-          ? "pointer"
-          : "default",
+      ...(!active &&
+        (nonLinear || (allowBackStep && completed)) && {
+          cursor: "pointer",
+        }),
     },
   }),
 );
@@ -254,15 +288,23 @@ const StyledStepDescription = styled("div", {
   odysseyDesignTokens: DesignTokens;
   orientation?: "horizontal" | "vertical";
 }>(({ active, completed, odysseyDesignTokens, orientation }) => ({
+  //Base styles
   fontSize: odysseyDesignTokens.TypographySizeSubordinate,
   fontWeight: odysseyDesignTokens.TypographyWeightBody,
   lineHeight: odysseyDesignTokens.TypographyLineHeightBody,
   maxWidth: orientation === "horizontal" ? "200px" : "170px",
-  color: active
-    ? odysseyDesignTokens.HueBlue600
-    : completed
-      ? odysseyDesignTokens.HueNeutral700
-      : odysseyDesignTokens.HueNeutral600,
+
+  //State-based colors
+  ...(active && {
+    color: odysseyDesignTokens.HueBlue600,
+  }),
+  ...(completed && {
+    color: odysseyDesignTokens.HueNeutral700,
+  }),
+  ...(!active &&
+    !completed && {
+      color: odysseyDesignTokens.HueNeutral600,
+    }),
 }));
 
 const Stepper = ({
@@ -284,14 +326,14 @@ const Stepper = ({
       const isCompleted = stepIndex < activeStep;
 
       if (isCompleted && allowBackStep) {
-        return true; // Allow clicking completed steps if allowBackStep is true
+        return true; //Allow clicking completed steps if allowBackStep is true
       }
 
       if (nonLinear) {
-        return !isCompleted; // Allow clicking future steps if nonLinear
+        return !isCompleted; //Allow clicking future steps if nonLinear
       }
 
-      return stepIndex === activeStep; // Only allow clicking current step in linear mode
+      return stepIndex === activeStep; //Only allow clicking current step in linear mode
     },
     [activeStep, allowBackStep, nonLinear],
   );
@@ -307,7 +349,7 @@ const Stepper = ({
     },
     [onChange, isStepClickable],
   );
-  // Generates unique IDs, used by aria attirbutes to associate and describe a step's description
+  //Generates unique IDs, used by aria attirbutes to associate and describe a step's description
   const stepDescriptionIds = useMemo(
     () => steps.map((_, index) => `step-description-${index}`),
     [steps],
