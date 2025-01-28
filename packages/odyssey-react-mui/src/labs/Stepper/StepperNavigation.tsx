@@ -13,13 +13,13 @@
 import styled from "@emotion/styled";
 import { memo, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { Button } from "../../Buttons";
-import { StepperNavigationProps } from "./Stepper.types";
+import { Button } from "../../Buttons/index.js";
+import { StepperNavigationProps } from "./Stepper.types.js";
 import {
   shouldForwardNavigationSectionProps,
   shouldForwardStepperDotProps,
   shouldForwardStepperNavigationProps,
-} from "./Stepper.utils";
+} from "./Stepper.utils.js";
 
 const StepperNavigationContainer = styled("div", {
   shouldForwardProp: shouldForwardStepperNavigationProps,
@@ -29,7 +29,7 @@ const StepperNavigationContainer = styled("div", {
   display: "grid",
   gridTemplateColumns: "1fr auto 1fr",
   alignItems: "center",
-  marginTop: odysseyDesignTokens.Spacing3,
+  marginBlockStart: odysseyDesignTokens.Spacing3,
   gap: odysseyDesignTokens.Spacing3,
 }));
 
@@ -51,35 +51,64 @@ const StyledStepperDot = styled("button", {
   odysseyDesignTokens: StepperNavigationProps["odysseyDesignTokens"];
   isClickable: boolean;
 }>(({ status, odysseyDesignTokens, isClickable }) => ({
-  width: odysseyDesignTokens.Spacing2,
-  height: odysseyDesignTokens.Spacing2,
+  //Base styles
+  position: "relative",
+  width: odysseyDesignTokens.Spacing5,
+  height: odysseyDesignTokens.Spacing5,
   padding: 0,
-  border: "1px solid",
-  borderRadius: "50%",
-  borderColor:
-    status === "current"
-      ? odysseyDesignTokens.HueNeutral500
-      : status === "previous"
-        ? odysseyDesignTokens.HueNeutral400
-        : odysseyDesignTokens.HueNeutral300,
-  background:
-    status === "current" ? odysseyDesignTokens.HueNeutral500 : "transparent",
-  margin: "0 2px",
-  cursor: isClickable ? "pointer" : "default",
-  "&:hover": isClickable
-    ? {
-        background: odysseyDesignTokens.HueNeutral300,
-        borderColor: odysseyDesignTokens.HueNeutral500,
-      }
-    : undefined,
-  "&:focus-visible": isClickable
-    ? {
-        boxShadow: `0 0 0 2px ${odysseyDesignTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyDesignTokens.PalettePrimaryMain}`,
-        outline: "2px solid transparent",
-        outlineOffset: "1px",
-      }
-    : undefined,
+  border: "none",
+  background: "transparent",
+
+  ...(isClickable && {
+    cursor: "pointer",
+  }),
+
+  //Visual dot styles
+  "&::after": {
+    content: '""',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: odysseyDesignTokens.Spacing2,
+    height: odysseyDesignTokens.Spacing2,
+    borderRadius: "50%",
+    border: "1px solid",
+
+    //Status-based styles
+    ...(status === "current" && {
+      borderColor: odysseyDesignTokens.HueNeutral500,
+      background: odysseyDesignTokens.HueNeutral500,
+    }),
+    ...(status === "previous" && {
+      borderColor: odysseyDesignTokens.HueNeutral400,
+      background: "transparent",
+    }),
+    ...(status === "next" && {
+      borderColor: odysseyDesignTokens.HueNeutral300,
+      background: "transparent",
+    }),
+  },
+
+  ...(isClickable && {
+    //Hover styles - only apply when not current
+    "&:hover": {
+      ...(status !== "current" && {
+        "&::after": {
+          background: odysseyDesignTokens.HueNeutral300,
+          borderColor: odysseyDesignTokens.HueNeutral500,
+        },
+      }),
+    },
+    //Focus styles - apply for all clickable states
+    "&:focus-visible": {
+      boxShadow: `0 0 0 2px ${odysseyDesignTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyDesignTokens.PalettePrimaryMain}`,
+      outline: "2px solid transparent",
+      outlineOffset: "1px",
+    },
+  }),
 }));
+
 const StyledNav = styled("nav")({
   display: "flex",
   gap: "2px",
@@ -167,7 +196,7 @@ const StepperNavigation = ({
           <Button
             label={labels.previous}
             variant="secondary"
-            onClick={onBack}
+            onClick={() => onBack(currentStep, currentStep - 1)}
             size="small"
           />
         )}
@@ -178,7 +207,7 @@ const StepperNavigation = ({
           <Button
             label={labels.next}
             variant="secondary"
-            onClick={onNext}
+            onClick={() => onNext(currentStep, currentStep + 1)}
             size="small"
           />
         )}

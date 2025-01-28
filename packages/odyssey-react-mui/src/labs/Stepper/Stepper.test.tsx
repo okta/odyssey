@@ -11,13 +11,13 @@
  */
 
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { userEvent } from "@testing-library/user-event";
 import { vi } from "vitest";
-import { Stepper } from "./Stepper";
-import { StepperNavigation } from "./StepperNavigation";
-import { OdysseyProvider } from "../../OdysseyProvider";
-import { useOdysseyDesignTokens } from "../../OdysseyDesignTokensContext";
-import { StepperNavigationProps } from "./Stepper.types";
+import { Stepper } from "./Stepper.js";
+import { StepperNavigation } from "./StepperNavigation.js";
+import { OdysseyProvider } from "../../OdysseyProvider.js";
+import { useOdysseyDesignTokens } from "../../OdysseyDesignTokensContext.js";
+import { StepperNavigationProps } from "./Stepper.types.js";
 import { useState } from "react";
 
 const defaultSteps = [

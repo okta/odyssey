@@ -105,7 +105,6 @@ export * from "./shadow-dom/index.js";
 export * from "./Stack.js";
 export * from "./Status.js";
 export * from "./Surface.js";
-export * from "./Stepper";
 export * from "./Switch.js";
 export * from "./Tabs.js";
 export * from "./Tag.js";
