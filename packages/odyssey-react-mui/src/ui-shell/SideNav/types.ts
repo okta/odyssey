@@ -148,6 +148,10 @@ export type SideNavItem = {
    * Whether the item is active/selected
    */
   isSelected?: boolean;
+  /**
+   * Whether the item is sortable within a sortable list
+   */
+  isSortable?: boolean;
   label: string;
   /**
    * Event fired when the nav item is clicked
@@ -179,7 +183,6 @@ export type SideNavItem = {
        * Determines if the side nav item is a section header
        */
       isSectionHeader: true;
-      isSortable?: never;
     }
   | {
       nestedNavItems?: never;
@@ -191,14 +194,12 @@ export type SideNavItem = {
       isDefaultExpanded?: never;
       isExpanded?: never;
       isSectionHeader?: never;
-      isSortable?: never;
     }
   | {
       /**
        * An array of side nav items to be displayed as nestedNavItems within Accordion
        */
       nestedNavItems: Array<Omit<SideNavItem, "nestedNavItems" | "startIcon">>;
-      endIcon?: never;
       href?: never;
       /**
        * Whether the accordion (nav item with nestedNavItems) is expanded by default
@@ -213,7 +214,6 @@ export type SideNavItem = {
        * If true, enables sorting for the accordion items
        */
       isSectionHeader?: never;
-      isSortable?: boolean;
     }
 );
 
