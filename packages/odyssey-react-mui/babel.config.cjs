@@ -37,7 +37,6 @@ const babelConfig = (api) => {
         },
         "icons",
       ],
-      "@okta/fully-specified",
     ],
     presets: [
       "@babel/preset-env",
@@ -83,7 +82,6 @@ const babelConfig = (api) => {
                   extMapping: { ".js": ".mjs" },
                 },
           ],
-          "@okta/fully-specified",
         ],
         presets: [
           [
