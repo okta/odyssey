@@ -36,119 +36,118 @@ const defaultSteps = [
 ];
 
 describe("Stepper", () => {
-  test("displays steps with labels and descriptions", () => {
-    render(
-      <OdysseyProvider>
-        <Stepper activeStep={0} steps={defaultSteps} onChange={() => {}} />
-      </OdysseyProvider>,
-    );
-
-    defaultSteps.forEach((step) => {
-      expect(screen.getByText(step.label)).toBeInTheDocument();
-      expect(screen.getByText(step.description)).toBeInTheDocument();
-    });
-  });
-  // Note: Horizontal orientation (default) is covered by base test cases
-  test("renders correctly in vertical orientation", () => {
-    render(
-      <OdysseyProvider>
-        <Stepper
-          activeStep={1}
-          steps={defaultSteps}
-          onChange={() => {}}
-          orientation="vertical"
-        />
-      </OdysseyProvider>,
-    );
-
-    const stepList = screen.getByRole("tablist");
-    expect(stepList).toHaveAttribute("aria-label", "Progress steps");
-  });
-
-  test("renders correctly with nonNumeric variant", () => {
-    render(
-      <OdysseyProvider>
-        <Stepper
-          activeStep={1}
-          steps={defaultSteps}
-          onChange={() => {}}
-          variant="nonNumeric"
-        />
-      </OdysseyProvider>,
-    );
-
-    // Check that step numbers aren't displayed
-    const stepLabels = screen.getAllByRole("tab");
-    stepLabels.forEach((step) => {
-      expect(step).not.toHaveTextContent(/^\d+$/); // Should not have just a number
-    });
-  });
-
-  test("associates descriptions with steps correctly", () => {
-    render(
-      <OdysseyProvider>
-        <Stepper activeStep={0} steps={defaultSteps} onChange={() => {}} />
-      </OdysseyProvider>,
-    );
-
-    const steps = screen.getAllByRole("tab");
-    steps.forEach((step, index) => {
-      const descriptionId = step.getAttribute("aria-describedby");
-      expect(screen.getByText(defaultSteps[index].description)).toHaveAttribute(
-        "id",
-        descriptionId,
+  // Rendering tests
+  describe("rendering", () => {
+    test("displays steps with labels and descriptions", () => {
+      render(
+        <OdysseyProvider>
+          <Stepper activeStep={0} steps={defaultSteps} onChange={() => {}} />
+        </OdysseyProvider>,
       );
+
+      defaultSteps.forEach((step) => {
+        expect(screen.getByText(step.label)).toBeInTheDocument();
+        expect(screen.getByText(step.description)).toBeInTheDocument();
+      });
+    });
+
+    test("renders correctly in vertical orientation", () => {
+      render(
+        <OdysseyProvider>
+          <Stepper
+            activeStep={1}
+            steps={defaultSteps}
+            onChange={() => {}}
+            orientation="vertical"
+          />
+        </OdysseyProvider>,
+      );
+
+      const stepList = screen.getByRole("tablist");
+      expect(stepList).toHaveAttribute("aria-label", "Progress steps");
+    });
+
+    test("renders correctly with nonNumeric variant", () => {
+      render(
+        <OdysseyProvider>
+          <Stepper
+            activeStep={1}
+            steps={defaultSteps}
+            onChange={() => {}}
+            variant="nonNumeric"
+          />
+        </OdysseyProvider>,
+      );
+
+      const stepLabels = screen.getAllByRole("tab");
+      stepLabels.forEach((step) => {
+        expect(step).not.toHaveTextContent(/^\d+$/);
+      });
     });
   });
 
-  test("highlights active step correctly", () => {
-    render(
-      <OdysseyProvider>
-        <Stepper activeStep={1} steps={defaultSteps} onChange={() => {}} />
-      </OdysseyProvider>,
-    );
+  // Accessibility tests
+  describe("accessibility", () => {
+    test("associates descriptions with steps correctly", () => {
+      render(
+        <OdysseyProvider>
+          <Stepper activeStep={0} steps={defaultSteps} onChange={() => {}} />
+        </OdysseyProvider>,
+      );
 
-    const steps = screen.getAllByRole("tab");
-    expect(steps[1]).toHaveAttribute("aria-current", "step");
-    expect(steps[0]).not.toHaveAttribute("aria-current", "step");
+      const steps = screen.getAllByRole("tab");
+      steps.forEach((step, index) => {
+        const descriptionId = step.getAttribute("aria-describedby");
+        expect(
+          screen.getByText(defaultSteps[index].description),
+        ).toHaveAttribute("id", descriptionId);
+      });
+    });
+
+    test("highlights active step correctly", () => {
+      render(
+        <OdysseyProvider>
+          <Stepper activeStep={1} steps={defaultSteps} onChange={() => {}} />
+        </OdysseyProvider>,
+      );
+
+      const steps = screen.getAllByRole("tab");
+      expect(steps[1]).toHaveAttribute("aria-current", "step");
+      expect(steps[0]).not.toHaveAttribute("aria-current", "step");
+    });
+
+    test("renders stepper with correct ARIA attributes", () => {
+      render(
+        <OdysseyProvider>
+          <Stepper activeStep={0} steps={defaultSteps} onChange={() => {}} />
+        </OdysseyProvider>,
+      );
+
+      const stepList = screen.getByRole("tablist");
+      expect(stepList).toHaveAttribute("aria-label", "Progress steps");
+    });
   });
 
-  test("renders stepper with correct ARIA attributes", () => {
-    render(
-      <OdysseyProvider>
-        <Stepper activeStep={0} steps={defaultSteps} onChange={() => {}} />
-      </OdysseyProvider>,
-    );
-
-    const stepList = screen.getByRole("tablist");
-    expect(stepList).toHaveAttribute("aria-label", "Progress steps");
-  });
-
+  // Helper component for navigation tests
   type NavigationTestProps = Omit<
     StepperNavigationProps,
     "odysseyDesignTokens"
   >;
-
   const NavigationTest = ({
     totalSteps,
     currentStep,
     onBack,
     onNext,
-    onStepClick,
-    isStepClickable,
     previousButtonLabel,
     nextButtonLabel,
   }: NavigationTestProps) => {
     const odysseyDesignTokens = useOdysseyDesignTokens();
-
     return (
       <StepperNavigation
         totalSteps={totalSteps}
         currentStep={currentStep}
         onBack={onBack}
         onNext={onNext}
-        onStepClick={onStepClick}
-        isStepClickable={isStepClickable}
         previousButtonLabel={previousButtonLabel}
         nextButtonLabel={nextButtonLabel}
         odysseyDesignTokens={odysseyDesignTokens}
@@ -156,7 +155,8 @@ describe("Stepper", () => {
     );
   };
 
-  describe("step navigation", () => {
+  // Navigation tests
+  describe("navigation", () => {
     test("enforces navigation rules based on mode", async () => {
       const user = userEvent.setup();
       const mockOnChange = vi.fn();
@@ -211,15 +211,13 @@ describe("Stepper", () => {
             steps={defaultSteps}
             onChange={mockOnChange}
             allowBackStep
+            completedSteps={new Set([0, 1])}
           />
         </OdysseyProvider>,
       );
 
-      await user.click(
-        screen.getByRole("tab", {
-          name: "Step 1 of 3: Completed",
-        }),
-      );
+      const steps = screen.getAllByRole("tab");
+      await user.click(steps[0]);
       expect(mockOnChange).toHaveBeenCalledWith(0);
       unmountBackStep();
       mockOnChange.mockClear();
@@ -236,16 +234,41 @@ describe("Stepper", () => {
         </OdysseyProvider>,
       );
 
-      await user.click(
-        screen.getByRole("tab", {
-          name: "Step 1 of 3: Completed",
-        }),
-      );
+      const disabledSteps = screen.getAllByRole("tab");
+      await user.click(disabledSteps[0]);
       expect(mockOnChange).not.toHaveBeenCalled();
     });
-  });
 
-  describe("navigation controls", () => {
+    test("supports keyboard navigation", async () => {
+      const user = userEvent.setup();
+      const mockOnChange = vi.fn();
+
+      render(
+        <OdysseyProvider>
+          <Stepper
+            activeStep={1}
+            steps={defaultSteps}
+            onChange={mockOnChange}
+            allowBackStep
+            completedSteps={new Set([0])}
+          />
+        </OdysseyProvider>,
+      );
+
+      const steps = screen.getAllByRole("tab");
+      const firstStep = steps[0];
+
+      await user.tab();
+      expect(document.activeElement).toBe(firstStep);
+
+      await user.keyboard("{Enter}");
+      expect(mockOnChange).toHaveBeenCalledWith(0);
+      mockOnChange.mockClear();
+
+      await user.keyboard(" ");
+      expect(mockOnChange).toHaveBeenCalledWith(0);
+    });
+
     test("handles navigation controls and button states correctly", async () => {
       const user = userEvent.setup();
       const TestComponent = () => {
@@ -264,8 +287,6 @@ describe("Stepper", () => {
               currentStep={activeStep}
               onBack={() => setActiveStep((prev) => prev - 1)}
               onNext={() => setActiveStep((prev) => prev + 1)}
-              onStepClick={setActiveStep}
-              isStepClickable={(step) => step <= activeStep}
             />
           </>
         );
@@ -299,63 +320,6 @@ describe("Stepper", () => {
         "aria-current",
         "step",
       );
-    });
-  });
-  describe("StepperNavigation", () => {
-    test("renders dots with correct states", () => {
-      const mockIsStepClickable = vi.fn((step) => step <= 1);
-      render(
-        <OdysseyProvider>
-          <NavigationTest
-            totalSteps={3}
-            currentStep={1}
-            onBack={() => {}}
-            onNext={() => {}}
-            onStepClick={() => {}}
-            isStepClickable={mockIsStepClickable}
-          />
-        </OdysseyProvider>,
-      );
-
-      const dots = screen
-        .getAllByRole("button")
-        .filter((elem) =>
-          elem.getAttribute("aria-label")?.startsWith("Go to step"),
-        );
-
-      expect(dots[0].getAttribute("aria-label")).toBe("Go to step 1");
-      expect(dots[1].getAttribute("aria-label")).toBe("Go to step 2");
-      expect(dots[2].getAttribute("aria-label")).toBe("Go to step 3");
-
-      // Previous step should be clickable
-      expect(dots[0]).not.toBeDisabled();
-      // Current step is step 1, matching array index
-      expect(dots[1]).not.toBeDisabled();
-      // Next step should not be clickable
-      expect(dots[2]).toBeDisabled();
-    });
-
-    test("supports keyboard navigation", async () => {
-      const user = userEvent.setup();
-      const mockOnChange = vi.fn();
-
-      render(
-        <OdysseyProvider>
-          <Stepper
-            activeStep={1}
-            steps={defaultSteps}
-            onChange={mockOnChange}
-            allowBackStep
-          />
-        </OdysseyProvider>,
-      );
-
-      await user.tab();
-      await user.keyboard("{Enter}");
-      expect(mockOnChange).toHaveBeenCalledWith(0);
-
-      await user.keyboard("{Space}");
-      expect(mockOnChange).toHaveBeenCalledWith(0);
     });
   });
 });
