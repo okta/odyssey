@@ -54,9 +54,10 @@ import {
   paginationTypeValues,
 } from "./DataTablePagination.js";
 import { DataFilter, DataFilters } from "./DataFilters.js";
-import { Button } from "../Buttons/index.js";
+import { Button } from "../Buttons/Button.js";
+import { MenuButton } from "../Buttons/MenuButton.js";
+import { MenuItem } from "../Buttons/MenuItem.js";
 import { Box } from "../Box.js";
-import { MenuButton, MenuItem } from "../index.js";
 import { useTranslation } from "react-i18next";
 
 export const densityValues = ["comfortable", "spacious", "compact"] as const;
