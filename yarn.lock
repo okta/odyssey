@@ -4951,6 +4951,7 @@ __metadata:
     "@babel/types": "npm:^7.26.0"
     "@okta/odyssey-typescript": "workspace:*"
     "@vitest/ui": "npm:^2.1.5"
+    rimraf: "npm:^5.0.1"
     typescript: "npm:^5.6.3"
     vitest: "npm:^2.1.5"
   languageName: unknown

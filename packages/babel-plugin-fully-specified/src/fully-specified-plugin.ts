@@ -12,6 +12,7 @@
 
 import type * as Babel from "@babel/core";
 import * as BabelTypes from "@babel/types";
+import { basename, join } from "node:path";
 
 const getNodeModulePath = (filePath: string) => {
   if (
@@ -93,9 +94,7 @@ export function plugin({
         }
 
         const fullySpecifiedLiteral = babelTypes.stringLiteral(
-          nodeModulePath.endsWith("/index.js")
-            ? `${candidate}${candidate.endsWith("/") ? "" : "/"}index.js`
-            : `${candidate}.js`,
+          join(candidate, basename(nodeModulePath)),
         );
 
         switch (path.node.type) {
