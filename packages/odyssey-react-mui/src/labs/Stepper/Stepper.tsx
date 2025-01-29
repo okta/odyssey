@@ -311,6 +311,7 @@ const Stepper = ({
   activeStep,
   allowBackStep = false,
   ariaLabel,
+  completedSteps = new Set(),
   nonLinear = false,
   onChange,
   orientation = "horizontal",
@@ -323,19 +324,19 @@ const Stepper = ({
 
   const isStepClickable = useCallback(
     (stepIndex: number) => {
-      const isCompleted = stepIndex < activeStep;
+      const isCompleted = completedSteps.has(stepIndex);
 
       if (isCompleted && allowBackStep) {
         return true; //Allow clicking completed steps if allowBackStep is true
       }
 
       if (nonLinear) {
-        return !isCompleted; //Allow clicking future steps if nonLinear
+        return stepIndex !== activeStep; //Allow clicking any non-active step if nonLinear
       }
 
       return stepIndex === activeStep; //Only allow clicking current step in linear mode
     },
-    [activeStep, allowBackStep, nonLinear],
+    [activeStep, allowBackStep, nonLinear, completedSteps],
   );
 
   const handleKeyDown = useCallback(
@@ -365,7 +366,7 @@ const Stepper = ({
 
   const renderedSteps = useMemo(() => {
     return steps.map((step, index) => {
-      const completed = index < activeStep;
+      const completed = completedSteps.has(index);
       const active = index === activeStep;
       const stepDescriptionId = stepDescriptionIds[index];
       const isClickable = isStepClickable(index);
@@ -399,7 +400,7 @@ const Stepper = ({
           onKeyDown={(e) => handleKeyDown(e, index)}
           odysseyDesignTokens={odysseyDesignTokens}
           orientation={orientation}
-          isClickable={isStepClickable(index)}
+          isClickable={isClickable}
           role="tab"
           tabIndex={isClickable ? 0 : -1}
           {...ariaProps}
@@ -444,6 +445,7 @@ const Stepper = ({
   }, [
     activeStep,
     allowBackStep,
+    completedSteps,
     handleStepClick,
     handleKeyDown,
     isStepClickable,

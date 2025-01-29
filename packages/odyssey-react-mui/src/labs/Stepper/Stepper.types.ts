@@ -42,6 +42,10 @@ export type StepperProps = {
    */
   ariaLabel?: HtmlProps["ariaLabel"];
   /**
+   * Tracks completed steps
+   */
+  completedSteps?: Set<number>;
+  /**
    * Button label for the next navigation button
    */
   nextButtonLabel?: string;
