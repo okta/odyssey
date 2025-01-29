@@ -103,7 +103,21 @@ const defaultSteps = [
 const DefaultTemplate: StoryObj<StepperProps> = {
   render: function C(args) {
     const [activeStep, setActiveStep] = useState(args.activeStep || 0);
+    const [completedSteps, setCompletedSteps] = useState<Set<number>>(
+      //Initialize with completed steps based on activeStep for linear mode
+      new Set(Array.from({ length: args.activeStep || 0 }, (_, i) => i)),
+    );
+
     const handleStepChange = (step: number) => {
+      if (args.nonLinear) {
+        //For non-linear, we update completed steps only when moving forward
+        if (step > activeStep) {
+          setCompletedSteps((prev) => new Set([...prev, activeStep]));
+        }
+      } else {
+        //For linear mode, all steps before the new active step are completed
+        setCompletedSteps(new Set(Array.from({ length: step }, (_, i) => i)));
+      }
       setActiveStep(step);
     };
 
@@ -113,6 +127,7 @@ const DefaultTemplate: StoryObj<StepperProps> = {
         activeStep={activeStep}
         steps={args.steps || defaultSteps}
         onChange={handleStepChange}
+        completedSteps={completedSteps}
       />
     );
   },
@@ -121,11 +136,11 @@ const DefaultTemplate: StoryObj<StepperProps> = {
       const canvas = within(canvasElement);
 
       await waitFor(() => {
-        // Verify basic structure
+        //Verify basic structure
         const steps = canvas.getAllByRole("tab");
-        expect(steps.length).toBeGreaterThan(0); // At least one step exists
+        expect(steps.length).toBeGreaterThan(0); //At least one step exists
 
-        // Verify that each step has the expected structure
+        //Verify that each step has the expected structure
         steps.forEach((step) => {
           expect(step.querySelector(".MuiStepLabel-label")).toBeTruthy();
 
@@ -133,7 +148,7 @@ const DefaultTemplate: StoryObj<StepperProps> = {
             step.querySelector(".MuiStepLabel-iconContainer"),
           ).toBeTruthy();
 
-          // At least one step should be active
+          //At least one step should be active
           expect(
             steps.some((s) => s.getAttribute("aria-current") === "step"),
           ).toBeTruthy();
@@ -270,6 +285,7 @@ export const HorizontalWorkflow: StoryObj<StepperProps> = {
 
 export const BackNavigation = () => {
   const [activeStep, setActiveStep] = useState(1);
+  const [completedSteps] = useState<Set<number>>(new Set([0])); //Step 0 starts completed
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const steps = [
@@ -286,6 +302,7 @@ export const BackNavigation = () => {
         activeStep={activeStep}
         allowBackStep={true}
         onChange={setActiveStep}
+        completedSteps={completedSteps}
       />
       <StepperNavigation
         totalSteps={steps.length}
@@ -351,9 +368,14 @@ export const WithNavigation: StoryObj<StepperProps> = {
   },
   render: function C(args) {
     const [activeStep, setActiveStep] = useState(0);
+    const [completedSteps, setCompletedSteps] = useState<Set<number>>(
+      new Set(),
+    );
     const odysseyDesignTokens = useOdysseyDesignTokens();
 
     const handleNext = () => {
+      //Mark current step as completed when moving forward
+      setCompletedSteps((prev) => new Set([...prev, activeStep]));
       setActiveStep((prevStep) =>
         Math.min(prevStep + 1, defaultSteps.length - 1),
       );
@@ -364,11 +386,15 @@ export const WithNavigation: StoryObj<StepperProps> = {
     };
 
     const handleStepClick = (step: number) => {
+      if (step > activeStep) {
+        //Mark current step as completed when skipping forward
+        setCompletedSteps((prev) => new Set([...prev, activeStep]));
+      }
       setActiveStep(step);
     };
 
     const isStepClickable = (step: number) => {
-      const isCompleted = step < activeStep;
+      const isCompleted = completedSteps.has(step);
       return (
         (isCompleted && (args.allowBackStep ?? false)) ||
         (!isCompleted && (args.nonLinear ?? false))
@@ -382,6 +408,7 @@ export const WithNavigation: StoryObj<StepperProps> = {
           activeStep={activeStep}
           steps={defaultSteps}
           onChange={handleStepClick}
+          completedSteps={completedSteps}
         />
         <StepperNavigation
           totalSteps={defaultSteps.length}
