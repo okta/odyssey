@@ -47,12 +47,6 @@ export const shouldForwardStepNumberProps = createShouldForwardProp([
   "nonLinear",
 ]);
 
-export const shouldForwardStepperDotProps = createShouldForwardProp([
-  "status",
-  "odysseyDesignTokens",
-  "isClickable",
-]);
-
 export const shouldForwardStepperNavigationProps = createShouldForwardProp([
   "odysseyDesignTokens",
 ]);

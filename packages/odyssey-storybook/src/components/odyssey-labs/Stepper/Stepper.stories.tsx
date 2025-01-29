@@ -169,9 +169,19 @@ export const NonNumeric: StoryObj<StepperProps> = {
   ...DefaultTemplate,
   args: {
     variant: "nonNumeric",
+    steps: [
+      {
+        label: "Account details",
+      },
+      {
+        label: "Personal info",
+      },
+      {
+        label: "Review",
+      },
+    ],
   },
 };
-
 export const Vertical: StoryObj<StepperProps> = {
   ...DefaultTemplate,
   args: {
@@ -185,29 +195,62 @@ export const Vertical: StoryObj<StepperProps> = {
 export const NonLinearNavigation: StoryObj<StepperProps> = {
   ...DefaultTemplate,
   args: {
-    nonLinear: false,
-    allowBackStep: false,
+    nonLinear: true,
+    allowBackStep: true,
     activeStep: 0,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "This example demonstrates non-linear navigation with completion state tracking. In non-linear mode, users can access steps in any order, and steps are automatically marked as complete when navigating forward. Previous steps maintain their completed state even when jumping to future steps. Users can also revisit completed steps when `allowBackStep` is enabled.",
+      },
+    },
+  },
+  render: function NonLinearExample(args) {
+    const [activeStep, setActiveStep] = useState(args.activeStep || 0);
+    const [completedSteps, setCompletedSteps] = useState<Set<number>>(
+      new Set(),
+    );
+
+    const handleStepChange = (step: number) => {
+      if (step > activeStep) {
+        setCompletedSteps((prev) => new Set([...prev, activeStep]));
+      }
+      setActiveStep(step);
+    };
+
+    return (
+      <Stepper
+        {...args}
+        activeStep={activeStep}
+        steps={args.steps || defaultSteps}
+        onChange={handleStepChange}
+        completedSteps={completedSteps}
+      />
+    );
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
 
-    await step("verify future steps not clickable", async () => {
-      const findStep = (text: string) => {
-        const element = canvas.getByText(text);
-        return element.closest('[role="tab"]');
-      };
-      const reviewStep = findStep("Review");
-      await userEvent.click(reviewStep!);
+    await step("verify initial state", async () => {
+      const steps = await canvas.findAllByRole("tab");
+      const firstStep = steps[0];
+      expect(firstStep.getAttribute("aria-current")).toBe("step");
+    });
+
+    await step("verify non-linear navigation and completion", async () => {
+      const steps = await canvas.findAllByRole("tab");
+
+      await userEvent.click(steps[2]);
 
       await waitFor(() => {
-        const firstStep = findStep("Account details");
-        expect(firstStep?.getAttribute("aria-current")).toBe("step");
+        expect(steps[0].classList.contains("Mui-completed")).toBe(true);
+        expect(steps[2].getAttribute("aria-current")).toBe("step");
       });
     });
   },
 };
-
 export const WithLongDescription: StoryObj<StepperProps> = {
   ...DefaultTemplate,
   args: {
@@ -225,7 +268,8 @@ export const WithLongDescription: StoryObj<StepperProps> = {
   },
 };
 
-export const VerticalUserOnboarding: StoryObj<StepperProps> = {
+export const VerticalWithLongDescriptions: StoryObj<StepperProps> = {
+  storyName: "Vertical with long descriptions",
   ...DefaultTemplate,
   args: {
     activeStep: 2,
@@ -311,8 +355,6 @@ export const BackNavigation = () => {
         onNext={() =>
           setActiveStep((prev) => Math.min(steps.length - 1, prev + 1))
         }
-        onStepClick={setActiveStep}
-        isStepClickable={(step) => step <= activeStep}
         odysseyDesignTokens={odysseyDesignTokens}
       />
     </>
@@ -366,6 +408,13 @@ export const WithNavigation: StoryObj<StepperProps> = {
     allowBackStep: true,
     nonLinear: true,
   },
+  parameters: {
+    docs: {
+      description: {
+        story: "With clickable steps (`nonLinear`)",
+      },
+    },
+  },
   render: function C(args) {
     const [activeStep, setActiveStep] = useState(0);
     const [completedSteps, setCompletedSteps] = useState<Set<number>>(
@@ -393,14 +442,6 @@ export const WithNavigation: StoryObj<StepperProps> = {
       setActiveStep(step);
     };
 
-    const isStepClickable = (step: number) => {
-      const isCompleted = completedSteps.has(step);
-      return (
-        (isCompleted && (args.allowBackStep ?? false)) ||
-        (!isCompleted && (args.nonLinear ?? false))
-      );
-    };
-
     return (
       <>
         <Stepper
@@ -415,8 +456,6 @@ export const WithNavigation: StoryObj<StepperProps> = {
           currentStep={activeStep}
           onBack={handleBack}
           onNext={handleNext}
-          onStepClick={handleStepClick}
-          isStepClickable={isStepClickable}
           odysseyDesignTokens={odysseyDesignTokens}
         />
       </>
