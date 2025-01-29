@@ -36,6 +36,10 @@ export type OdysseyProviderProps<
   OdysseyThemeProviderProps &
   OdysseyTranslationProviderProps<SupportedLanguages> & {
     children: ReactNode;
+    /**
+     * Whether to emit the ScopedCssBaseline. Defaults to true.
+     */
+    hasScopedCssBaseline?: boolean;
   };
 
 const OdysseyProvider = <SupportedLanguages extends string>({
@@ -51,6 +55,7 @@ const OdysseyProvider = <SupportedLanguages extends string>({
   stylisPlugins,
   themeOverride,
   translationOverrides,
+  hasScopedCssBaseline = true,
 }: OdysseyProviderProps<SupportedLanguages>) => (
   <OdysseyCacheProvider
     emotionRootElement={emotionRootElement || emotionRoot}
@@ -65,15 +70,18 @@ const OdysseyProvider = <SupportedLanguages extends string>({
       shadowRootElement={shadowRootElement}
       themeOverride={themeOverride}
     >
-      {/* This component creates a div; for flexibility of layout of children, make it inherit its parent's height */}
-      <ScopedCssBaseline sx={scopedCssBaselineStyles}>
-        <OdysseyTranslationProvider<SupportedLanguages>
-          languageCode={languageCode}
-          translationOverrides={translationOverrides}
-        >
-          {children}
-        </OdysseyTranslationProvider>
-      </ScopedCssBaseline>
+      <OdysseyTranslationProvider<SupportedLanguages>
+        languageCode={languageCode}
+        translationOverrides={translationOverrides}
+      >
+        {hasScopedCssBaseline ? (
+          <ScopedCssBaseline sx={scopedCssBaselineStyles}>
+            {children}
+          </ScopedCssBaseline>
+        ) : (
+          children
+        )}
+      </OdysseyTranslationProvider>
     </OdysseyThemeProvider>
   </OdysseyCacheProvider>
 );
