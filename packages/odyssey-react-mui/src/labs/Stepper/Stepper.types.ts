@@ -108,10 +108,6 @@ export type StepperNavigationProps = {
    */
   currentStep: number;
   /**
-   * Function to determine if a step is clickable
-   */
-  isStepClickable: (step: number) => boolean;
-  /**
    * Callback fired when back button is clicked.
    * @param currentStep - The index of the current step (before navigation)
    * @param targetStep - The index of the previous step (where navigation will go)
@@ -124,10 +120,6 @@ export type StepperNavigationProps = {
    * @param targetStep - The index of the next step (where navigation will go)
    */
   onNext: (currentStep: number, targetStep: number) => void;
-  /**
-   * Callback fired when a step dot is clicked
-   */
-  onStepClick: StepChangeHandler;
   /**
    * Custom label for the next button
    */

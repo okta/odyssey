@@ -17,7 +17,6 @@ import { Button } from "../../Buttons/index.js";
 import { StepperNavigationProps } from "./Stepper.types.js";
 import {
   shouldForwardNavigationSectionProps,
-  shouldForwardStepperDotProps,
   shouldForwardStepperNavigationProps,
 } from "./Stepper.utils.js";
 
@@ -44,96 +43,12 @@ const NavigationSection = styled("div", {
   alignItems: "center",
 }));
 
-const StyledStepperDot = styled("button", {
-  shouldForwardProp: shouldForwardStepperDotProps,
-})<{
-  status: "previous" | "current" | "next";
-  odysseyDesignTokens: StepperNavigationProps["odysseyDesignTokens"];
-  isClickable: boolean;
-}>(({ status, odysseyDesignTokens, isClickable }) => ({
-  //Base styles
-  position: "relative",
-  width: odysseyDesignTokens.Spacing5,
-  height: odysseyDesignTokens.Spacing5,
-  padding: 0,
-  border: "none",
-  background: "transparent",
-
-  ...(isClickable && {
-    cursor: "pointer",
-  }),
-
-  //Visual dot styles
-  "&::after": {
-    content: '""',
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: odysseyDesignTokens.Spacing2,
-    height: odysseyDesignTokens.Spacing2,
-    borderRadius: "50%",
-    border: "1px solid",
-
-    //Status-based styles
-    ...(status === "current" && {
-      borderColor: odysseyDesignTokens.HueNeutral500,
-      background: odysseyDesignTokens.HueNeutral500,
-    }),
-    ...(status === "previous" && {
-      borderColor: odysseyDesignTokens.HueNeutral400,
-      background: "transparent",
-    }),
-    ...(status === "next" && {
-      borderColor: odysseyDesignTokens.HueNeutral300,
-      background: "transparent",
-    }),
-  },
-
-  ...(isClickable && {
-    //Hover styles - only apply when not current
-    "&:hover": {
-      ...(status !== "current" && {
-        "&::after": {
-          background: odysseyDesignTokens.HueNeutral300,
-          borderColor: odysseyDesignTokens.HueNeutral500,
-        },
-      }),
-    },
-    //Focus styles - apply for all clickable states
-    "&:focus-visible": {
-      boxShadow: `0 0 0 2px ${odysseyDesignTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyDesignTokens.PalettePrimaryMain}`,
-      outline: "2px solid transparent",
-      outlineOffset: "1px",
-    },
-  }),
-}));
-
-const StyledNav = styled("nav")({
-  display: "flex",
-  gap: "2px",
-});
-
-const StyledList = styled("ul")({
-  display: "flex",
-  gap: "2px",
-  margin: 0,
-  padding: 0,
-  listStyle: "none",
-});
-
-const StyledListItem = styled("li")({
-  margin: 0,
-  padding: 0,
-});
 const StepperNavigation = ({
   currentStep,
-  isStepClickable,
   nextButtonLabel,
   odysseyDesignTokens,
   onBack,
   onNext,
-  onStepClick,
   previousButtonLabel,
   totalSteps,
 }: StepperNavigationProps) => {
@@ -147,48 +62,6 @@ const StepperNavigation = ({
     [previousButtonLabel, nextButtonLabel, t],
   );
 
-  const dots = useMemo(() => {
-    return (
-      <StyledNav aria-label={t("stepper.aria.progress")}>
-        <StyledList>
-          {Array.from({ length: totalSteps }, (_, i) => {
-            const status: "previous" | "current" | "next" =
-              i === currentStep
-                ? "current"
-                : i < currentStep
-                  ? "previous"
-                  : "next";
-            const isClickable = isStepClickable(i);
-
-            return (
-              <StyledListItem key={i}>
-                <StyledStepperDot
-                  type="button"
-                  status={status}
-                  odysseyDesignTokens={odysseyDesignTokens}
-                  isClickable={isClickable}
-                  onClick={isClickable ? () => onStepClick(i) : undefined}
-                  disabled={!isClickable}
-                  aria-label={t("stepper.navigation.gotoStep", {
-                    number: i + 1,
-                  })}
-                  aria-current={status === "current" ? "step" : undefined}
-                />
-              </StyledListItem>
-            );
-          })}
-        </StyledList>
-      </StyledNav>
-    );
-  }, [
-    currentStep,
-    odysseyDesignTokens,
-    isStepClickable,
-    onStepClick,
-    t,
-    totalSteps,
-  ]);
-
   return (
     <StepperNavigationContainer odysseyDesignTokens={odysseyDesignTokens}>
       <NavigationSection align="start">
@@ -201,7 +74,7 @@ const StepperNavigation = ({
           />
         )}
       </NavigationSection>
-      <NavigationSection align="center">{dots}</NavigationSection>
+      <NavigationSection align="center" />
       <NavigationSection align="end">
         {currentStep < totalSteps - 1 && (
           <Button
