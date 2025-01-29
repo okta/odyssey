@@ -57,7 +57,7 @@ const StyledTopNavContainer = styled("div", {
   paddingInline: odysseyDesignTokens.Spacing8,
   position: "relative",
   transition: `box-shadow ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
-  zIndex: 1,
+  zIndex: 100,
 
   ...(topNavBackgroundColor === odysseyDesignTokens.HueNeutralWhite && {
     borderBottom: `${odysseyDesignTokens.BorderWidthMain} ${odysseyDesignTokens.BorderStyleMain} ${odysseyDesignTokens.HueNeutral100}`,
