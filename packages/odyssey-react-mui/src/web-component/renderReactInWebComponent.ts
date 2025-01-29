@@ -23,7 +23,12 @@ export type GetReactComponentInWebComponent = (
   reactRootElements: ReactRootElements,
 ) => ReactNode;
 
-export class ReactInWebComponentElement extends HTMLElement {
+const SsrFriendlyHtmlElementClass =
+  "HTMLElement" in globalThis
+    ? HTMLElement
+    : (class {} as unknown as typeof globalThis.HTMLElement);
+
+export class ReactInWebComponentElement extends SsrFriendlyHtmlElementClass {
   getReactComponent: GetReactComponentInWebComponent;
   reactRootElements: ReactRootElements;
   reactRootPromise: Promise<Root>;
@@ -67,7 +72,10 @@ export class ReactInWebComponentElement extends HTMLElement {
   }
 }
 
-if (!customElements.get(reactWebComponentElementName)) {
+if (
+  "customElements" in globalThis &&
+  !customElements.get(reactWebComponentElementName)
+) {
   customElements.define(
     reactWebComponentElementName,
     ReactInWebComponentElement,
