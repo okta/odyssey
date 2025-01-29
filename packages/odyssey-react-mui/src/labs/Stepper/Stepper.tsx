@@ -79,10 +79,6 @@ const StepperContainer = styled(MuiStepper, {
       padding: `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
       borderRadius: odysseyDesignTokens.BorderRadiusMain,
 
-      "&:has(.Mui-active)": {
-        backgroundColor: odysseyDesignTokens.HueNeutralWhite,
-      },
-
       "&:not(:has(.Mui-active))": {
         "&.Mui-completed": {
           "&:hover": {
