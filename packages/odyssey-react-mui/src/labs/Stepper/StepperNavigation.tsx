@@ -70,7 +70,6 @@ const StepperNavigation = ({
             label={labels.previous}
             variant="secondary"
             onClick={() => onBack(currentStep, currentStep - 1)}
-            size="small"
           />
         )}
       </NavigationSection>
@@ -81,7 +80,6 @@ const StepperNavigation = ({
             label={labels.next}
             variant="secondary"
             onClick={() => onNext(currentStep, currentStep + 1)}
-            size="small"
           />
         )}
       </NavigationSection>

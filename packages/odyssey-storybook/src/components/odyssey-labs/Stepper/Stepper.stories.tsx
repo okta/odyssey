@@ -256,14 +256,20 @@ export const WithLongDescription: StoryObj<StepperProps> = {
   args: {
     steps: [
       {
-        label: "Account setup",
-        description: "Configure your account settings.",
+        label: "Organization Details",
+        description:
+          "Set up your organization's name, domain, and basic information.",
       },
       {
-        label: "User profile",
-        description: "Tell us more about yourself.",
+        label: "Security Settings",
+        description:
+          "Configure multi-factor authentication and password policies.",
       },
-      { label: "Review", description: "Confirm the details." },
+      {
+        label: "Directory Setup",
+        description:
+          "Connect your user directory or create a new one for user management.",
+      },
     ],
   },
 };
@@ -327,83 +333,7 @@ export const HorizontalWorkflow: StoryObj<StepperProps> = {
   },
 };
 
-export const BackNavigation = () => {
-  const [activeStep, setActiveStep] = useState(1);
-  const [completedSteps] = useState<Set<number>>(new Set([0])); //Step 0 starts completed
-  const odysseyDesignTokens = useOdysseyDesignTokens();
-
-  const steps = [
-    { label: "Account Details", description: "Basic information" },
-    { label: "Preferences", description: "Set your preferences" },
-    { label: "Review", description: "Review your information" },
-    { label: "Submit", description: "Complete registration" },
-  ];
-
-  return (
-    <>
-      <Stepper
-        steps={steps}
-        activeStep={activeStep}
-        allowBackStep={true}
-        onChange={setActiveStep}
-        completedSteps={completedSteps}
-      />
-      <StepperNavigation
-        totalSteps={steps.length}
-        currentStep={activeStep}
-        onBack={() => setActiveStep((prev) => Math.max(0, prev - 1))}
-        onNext={() =>
-          setActiveStep((prev) => Math.min(steps.length - 1, prev + 1))
-        }
-        odysseyDesignTokens={odysseyDesignTokens}
-      />
-    </>
-  );
-};
-
-BackNavigation.parameters = {
-  docs: {
-    description: {
-      story:
-        "Users can navigate back to previously completed steps but are not able to move forward without completing the current step",
-    },
-  },
-};
-
-export const DescriptionTest: StoryObj<StepperProps> = {
-  render: function C() {
-    const [activeStep, setActiveStep] = useState(0);
-    const handleStepChange = (step: number) => {
-      setActiveStep(step);
-    };
-
-    const stepsWithDescription = [
-      {
-        label: "Step One",
-        description: "First step description",
-      },
-      {
-        label: "Step Two",
-        description: "Second step description",
-      },
-      {
-        label: "Step Three",
-        description: "Third step description",
-      },
-    ];
-
-    return (
-      <Stepper
-        orientation="horizontal"
-        activeStep={activeStep}
-        steps={stepsWithDescription}
-        onChange={handleStepChange}
-      />
-    );
-  },
-};
-
-export const WithNavigation: StoryObj<StepperProps> = {
+export const Navigation: StoryObj<StepperProps> = {
   args: {
     allowBackStep: true,
     nonLinear: true,
@@ -460,5 +390,64 @@ export const WithNavigation: StoryObj<StepperProps> = {
         />
       </>
     );
+  },
+};
+
+export const OnlyBackNavigation = () => {
+  const [activeStep, setActiveStep] = useState(1);
+  const [completedSteps, setCompletedSteps] = useState<Set<number>>(
+    new Set([0]),
+  ); // Step 0 starts completed
+  const odysseyDesignTokens = useOdysseyDesignTokens();
+
+  const steps = [
+    { label: "Account Details", description: "Basic information" },
+    { label: "Preferences", description: "Set your preferences" },
+    { label: "Review", description: "Review your information" },
+    { label: "Submit", description: "Complete registration" },
+  ];
+
+  const handleNext = () => {
+    // Mark current step as complete when moving forward
+    setCompletedSteps((prev) => new Set([...prev, activeStep]));
+    setActiveStep((prev) => Math.min(steps.length - 1, prev + 1));
+  };
+
+  const handleBack = () => {
+    setActiveStep((prev) => Math.max(0, prev - 1));
+  };
+
+  const handleStepChange = (step: number) => {
+    // Only allow backward navigation
+    if (step < activeStep) {
+      setActiveStep(step);
+    }
+  };
+
+  return (
+    <>
+      <Stepper
+        steps={steps}
+        activeStep={activeStep}
+        allowBackStep={true}
+        onChange={handleStepChange}
+        completedSteps={completedSteps}
+      />
+      <StepperNavigation
+        totalSteps={steps.length}
+        currentStep={activeStep}
+        onBack={handleBack}
+        onNext={handleNext}
+        odysseyDesignTokens={odysseyDesignTokens}
+      />
+    </>
+  );
+};
+OnlyBackNavigation.parameters = {
+  docs: {
+    description: {
+      story:
+        "Users can navigate back to previously completed steps by clicking the step but cannot move forward without completing the current step",
+    },
   },
 };
