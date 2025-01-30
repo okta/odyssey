@@ -79,7 +79,7 @@ const StyledStepIconContainer = styled("div", {
     color: odysseyDesignTokens.HueNeutral700,
     backgroundColor: "transparent",
     border: "1px solid",
-    borderColor: `1px solid ${odysseyDesignTokens.HueNeutral600}`,
+    borderColor: odysseyDesignTokens.HueNeutral600,
 
     ...(completed && {
       color: odysseyDesignTokens.HueNeutralWhite,

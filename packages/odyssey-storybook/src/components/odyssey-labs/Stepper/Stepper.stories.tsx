@@ -262,13 +262,11 @@ export const WithLongDescription: StoryObj<StepperProps> = {
       },
       {
         label: "Security Settings",
-        description:
-          "Configure multi-factor authentication and password policies.",
+        description: "Configure multi-factor authentication and password.",
       },
       {
         label: "Directory Setup",
-        description:
-          "Connect your user directory or create a new one for user management.",
+        description: "Connect your user directory or create a new one.",
       },
     ],
   },
