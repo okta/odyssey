@@ -32,12 +32,11 @@ export default defineConfig({
     outDir: "dist",
     sourcemap: true,
     rollupOptions: {
-      external: ["react", "react/jsx-runtime", "react-dom"],
+      external: ["react"],
       output: {
         entryFileNames: "[format]/[name].js",
         globals: {
           react: "React",
-          "react-dom": "ReactDOM",
         },
         preserveModules: true,
         preserveModulesRoot: "src",
