@@ -29,7 +29,7 @@ const StyledStepNumber = styled("span", {
 }>(({ completed, active, nonLinear, odysseyDesignTokens }) => ({
   fontWeight: odysseyDesignTokens.TypographyWeightHeadingBold,
   //Base color
-  color: odysseyDesignTokens.HueNeutral600,
+  color: odysseyDesignTokens.PaletteNeutralMain,
 
   //Override color for completed or active states
   ...(completed && {
@@ -44,7 +44,7 @@ const StyledStepNumber = styled("span", {
     ...(!active &&
       !completed &&
       nonLinear && {
-        color: odysseyDesignTokens.HueNeutral900,
+        color: odysseyDesignTokens.PaletteNeutralDark,
       }),
   },
 }));
@@ -79,7 +79,7 @@ const StyledStepIconContainer = styled("div", {
     color: odysseyDesignTokens.HueNeutral700,
     backgroundColor: "transparent",
     border: "1px solid",
-    borderColor: odysseyDesignTokens.HueNeutral600,
+    borderColor: odysseyDesignTokens.PaletteNeutralMain,
 
     ...(completed && {
       color: odysseyDesignTokens.HueNeutralWhite,
@@ -89,8 +89,8 @@ const StyledStepIconContainer = styled("div", {
 
     ...(active && {
       color: odysseyDesignTokens.HueNeutralWhite,
-      backgroundColor: odysseyDesignTokens.HueBlue600,
-      borderColor: odysseyDesignTokens.HueBlue600,
+      backgroundColor: odysseyDesignTokens.PalettePrimaryText,
+      borderColor: odysseyDesignTokens.PalettePrimaryText,
     }),
 
     //Hover state for non-linear, non-active, non-completed
@@ -98,7 +98,7 @@ const StyledStepIconContainer = styled("div", {
       ...(!active &&
         !completed &&
         nonLinear && {
-          border: `1px solid ${odysseyDesignTokens.HueNeutral900}`,
+          border: `1px solid ${odysseyDesignTokens.PaletteNeutralDark}`,
         }),
     },
 
