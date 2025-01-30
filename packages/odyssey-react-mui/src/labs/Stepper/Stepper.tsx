@@ -86,7 +86,7 @@ const StepperContainer = styled(MuiStepper, {
               color: odysseyDesignTokens.HueNeutral800,
             },
             "& .MuiStepLabel-labelContainer div": {
-              color: odysseyDesignTokens.HueNeutral800,
+              color: odysseyDesignTokens.PaletteNeutralDark,
             },
           },
         },
@@ -97,13 +97,13 @@ const StepperContainer = styled(MuiStepper, {
           }),
           "& .MuiStepLabel-label": {
             color: nonLinear
-              ? odysseyDesignTokens.HueNeutral900
-              : odysseyDesignTokens.HueNeutral600,
+              ? odysseyDesignTokens.PaletteNeutralDark
+              : odysseyDesignTokens.PaletteNeutralMain,
           },
           "& .MuiStepLabel-labelContainer div": {
             color: nonLinear
               ? odysseyDesignTokens.HueNeutral800
-              : odysseyDesignTokens.HueNeutral600,
+              : odysseyDesignTokens.PaletteNeutralMain,
           },
         },
       },
@@ -133,7 +133,7 @@ const StepperContainer = styled(MuiStepper, {
             ? "calc(100% - 35px)"
             : "calc(100% - 40px)",
         width: "1px",
-        backgroundColor: odysseyDesignTokens.HueNeutral200,
+        backgroundColor: odysseyDesignTokens.BorderColorDisplay,
       },
 
       "&:last-child::before": {
@@ -159,13 +159,13 @@ const StepperContainer = styled(MuiStepper, {
           cursor: nonLinear ? "pointer" : "default",
           "& .MuiStepLabel-label": {
             color: nonLinear
-              ? odysseyDesignTokens.HueNeutral900
-              : odysseyDesignTokens.HueNeutral600,
+              ? odysseyDesignTokens.PaletteNeutralDark
+              : odysseyDesignTokens.PaletteNeutralMain,
           },
           "& .MuiStepLabel-labelContainer div": {
             color: nonLinear
-              ? odysseyDesignTokens.HueNeutral800
-              : odysseyDesignTokens.HueNeutral600,
+              ? odysseyDesignTokens.HueNeutral700
+              : odysseyDesignTokens.PaletteNeutralMain,
           },
         },
       },
@@ -174,7 +174,7 @@ const StepperContainer = styled(MuiStepper, {
 
   //Connector styles
   "& .MuiStepConnector-line": {
-    borderColor: odysseyDesignTokens.HueNeutral200,
+    borderColor: odysseyDesignTokens.BorderColorDisplay,
     borderWidth: "1px",
     minWidth: odysseyDesignTokens.Spacing4,
     ...(orientation === "vertical" && {
@@ -208,20 +208,24 @@ const StepLabel = styled(MuiStepLabel, {
     ].includes(prop),
 })<{
   active: boolean;
+  activeStep: number; // Add this
   allowBackStep?: boolean;
   completed: boolean;
   odysseyDesignTokens: DesignTokens;
   nonLinear?: boolean;
   orientation?: "horizontal" | "vertical";
+  stepIndex: number;
   variant?: "numeric" | "nonNumeric";
 }>(
   ({
     active,
+    activeStep,
     allowBackStep,
     completed,
     nonLinear,
     odysseyDesignTokens,
     orientation,
+    stepIndex,
     variant,
   }) => ({
     "&.MuiStepLabel-root": {
@@ -251,26 +255,28 @@ const StepLabel = styled(MuiStepLabel, {
       lineHeight: odysseyDesignTokens.TypographyLineHeightHeading6,
 
       ...(active && {
-        color: odysseyDesignTokens.HueBlue600,
+        color: odysseyDesignTokens.PalettePrimaryText,
       }),
 
       ...(completed && {
-        color: odysseyDesignTokens.HueNeutral800,
+        color: odysseyDesignTokens.PaletteNeutralDark,
       }),
 
       ...(!active &&
         !completed && {
-          color: odysseyDesignTokens.HueNeutral600,
+          color: odysseyDesignTokens.PaletteNeutralMain,
         }),
 
       "&.Mui-active": {
-        color: odysseyDesignTokens.HueBlue600,
+        color: odysseyDesignTokens.PalettePrimaryText,
       },
     },
 
     "&:hover": {
+      //Only show pointer cursor on clickable steps when allowBackStep and not nonLinear isn't
       ...(!active &&
-        (nonLinear || (allowBackStep && completed)) && {
+        (nonLinear ||
+          (allowBackStep && completed && stepIndex < activeStep)) && {
           cursor: "pointer",
         }),
     },
@@ -293,14 +299,14 @@ const StyledStepDescription = styled("div", {
 
   //State-based colors
   ...(active && {
-    color: odysseyDesignTokens.HueBlue600,
+    color: odysseyDesignTokens.PalettePrimaryText,
   }),
   ...(completed && {
-    color: odysseyDesignTokens.HueNeutral700,
+    color: odysseyDesignTokens.PaletteNeutralDark,
   }),
   ...(!active &&
     !completed && {
-      color: odysseyDesignTokens.HueNeutral600,
+      color: odysseyDesignTokens.PaletteNeutralMain,
     }),
 }));
 
@@ -407,10 +413,12 @@ const Stepper = ({
             odysseyDesignTokens={odysseyDesignTokens}
             completed={completed}
             active={active}
+            activeStep={activeStep}
             allowBackStep={allowBackStep}
             nonLinear={nonLinear}
             orientation={orientation}
             variant={variant}
+            stepIndex={index}
             StepIconComponent={(props) => (
               <StepIcon
                 {...props}
