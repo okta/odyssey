@@ -294,7 +294,7 @@ describe("DataView", () => {
       const user = userEvent.setup();
 
       const rowActionMenuItems: TableLayoutProps<Person>["rowActionMenuItems"] =
-        (row) => <MenuItem>Action for {row.original.name}</MenuItem>;
+        (row) => <MenuItem>Action for {row.name}</MenuItem>;
 
       render(
         <OdysseyProvider>
@@ -328,9 +328,7 @@ describe("DataView", () => {
     test("can display row action buttons", async () => {
       const rowActionButtons: TableLayoutProps<Person>["rowActionButtons"] = (
         row,
-      ) => (
-        <Button variant="primary" label={`Button for ${row.original?.name}`} />
-      );
+      ) => <Button variant="primary" label={`Button for ${row?.name}`} />;
 
       render(
         <OdysseyProvider>
