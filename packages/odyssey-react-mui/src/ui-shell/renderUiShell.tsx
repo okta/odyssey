@@ -28,6 +28,7 @@ export const optionalComponentSlotNames: Record<
   sideNavFooter: "side-nav-footer",
   topNavLeftSide: "top-nav-left-side",
   topNavRightSide: "top-nav-right-side",
+  topNavRightSideMobileMenu: "top-nav-right-side-mobile-menu",
 };
 
 /**

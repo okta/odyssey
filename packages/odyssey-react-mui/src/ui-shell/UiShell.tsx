@@ -103,6 +103,9 @@ const UiShell = ({
     };
   }, [onSubscriptionCreated, subscribeToPropChanges]);
 
+  const hasAppSwitcher = Boolean(componentProps?.appSwitcherProps);
+  const hasSideNav = Boolean(componentProps?.sideNavProps);
+
   return (
     <ErrorBoundary fallback={appComponent} onError={onError}>
       <OdysseyProvider
@@ -114,6 +117,9 @@ const UiShell = ({
           <UiShellProvider
             appBackgroundColor={appBackgroundColor}
             appBackgroundContrastMode={appBackgroundContrastMode}
+            hasAppSwitcher={hasAppSwitcher}
+            hasSideNav={hasSideNav}
+            isSideNavCollapsed={componentProps?.sideNavProps?.isCollapsed}
             sideNavBackgroundColor={sideNavBackgroundColor}
             topNavBackgroundColor={topNavBackgroundColor}
           >

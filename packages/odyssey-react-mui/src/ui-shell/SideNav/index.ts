@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export { SideNav } from "./SideNav.js";
+export { DEFAULT_SIDE_NAV_WIDTH, SideNav } from "./SideNav.js";
 export * from "./NavAccordion.js";
 
 export * from "./types.js";

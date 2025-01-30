@@ -12,17 +12,23 @@
 
 import {
   createContext,
+  Dispatch,
   memo,
   PropsWithChildren,
+  SetStateAction,
   useContext,
+  useEffect,
   useMemo,
-  // useState
+  useState,
 } from "react";
 import {
   generateContrastColors,
   ContrastColors,
 } from "../createContrastColors.js";
 import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext.js";
+import { DEFAULT_SIDE_NAV_WIDTH, SideNavProps } from "./SideNav/index.js";
+
+const pxToRem = (px: number, rootFontSize: number) => px / rootFontSize;
 
 export type UiShellColors = {
   appBackgroundColor: string;
@@ -31,7 +37,15 @@ export type UiShellColors = {
   topNavBackgroundColor: string;
 };
 
-const UiShellContext = createContext<UiShellColors | undefined>(undefined);
+export type UiShellContextValue = UiShellColors & {
+  isMobile: boolean;
+  isSideNavCollapsed: SideNavProps["isCollapsed"];
+  setIsSideNavCollapsed: Dispatch<SetStateAction<boolean | undefined>>;
+};
+
+const UiShellContext = createContext<UiShellContextValue | undefined>(
+  undefined,
+);
 
 export const useUiShellContext = () => {
   return useContext(UiShellContext);
@@ -39,20 +53,96 @@ export const useUiShellContext = () => {
 
 export type UiShellProviderProps = {
   appBackgroundColor?: string;
+  appBackgroundContrastMode?: string;
+  hasAppSwitcher?: boolean;
+  hasSideNav?: boolean;
+  isSideNavCollapsed?: SideNavProps["isCollapsed"];
   sideNavBackgroundColor?: string;
   topNavBackgroundColor?: string;
-  appBackgroundContrastMode?: string;
 };
+
+const useMediaQuery = (query: string) => {
+  const [matches, setMatches] = useState(false);
+  // console.log(window.innerWidth);
+  useEffect(() => {
+    const media = window.matchMedia(query);
+
+    if (media.matches !== matches) {
+      setMatches(media.matches);
+    }
+
+    const listener = () => setMatches(media.matches);
+
+    media.addEventListener("change", listener);
+
+    return () => media.removeEventListener("change", listener);
+  }, [matches, query]);
+
+  return matches;
+};
+
+const BASE_MOBILE_BREAKPOINT = 768;
+const APP_SWITCHER_WIDTH = 64;
 
 const UiShellProvider = ({
   appBackgroundColor,
   appBackgroundContrastMode = "lowContrast",
+  hasAppSwitcher,
+  hasSideNav,
+  isSideNavCollapsed: isSideNavCollapsedProp,
   sideNavBackgroundColor,
   topNavBackgroundColor,
   children,
 }: PropsWithChildren<UiShellProviderProps>) => {
-  // const [isSideNavMobile, setIsSideNavMobile] = useState(false);
+  const [isSideNavCollapsed, setIsSideNavCollapsed] = useState(
+    isSideNavCollapsedProp,
+  );
+
   const odysseyDesignTokens = useOdysseyDesignTokens();
+
+  // 87.5
+  const odysseyBaseFontSizeAsNumber = parseFloat(
+    odysseyDesignTokens.TypographySizeBase,
+  );
+
+  // 87.5 needs to be applied as a percentage of the baseFontSize of 16
+  const rootFontSize = (16 * odysseyBaseFontSizeAsNumber) / 100;
+
+  const [mobileBreakPoint, setMobileBreakpoint] = useState<number>(
+    pxToRem(BASE_MOBILE_BREAKPOINT, rootFontSize),
+  );
+
+  useEffect(() => {
+    if (hasSideNav) {
+      const baseBreakpoint =
+        BASE_MOBILE_BREAKPOINT + parseInt(DEFAULT_SIDE_NAV_WIDTH);
+
+      if (hasAppSwitcher) {
+        const breakpointWithAppSwitcher = baseBreakpoint + APP_SWITCHER_WIDTH;
+
+        setMobileBreakpoint(pxToRem(breakpointWithAppSwitcher, rootFontSize));
+      } else {
+        setMobileBreakpoint(pxToRem(baseBreakpoint, rootFontSize));
+      }
+    }
+
+    if (hasAppSwitcher && !hasSideNav) {
+      setMobileBreakpoint(
+        pxToRem(BASE_MOBILE_BREAKPOINT + APP_SWITCHER_WIDTH, rootFontSize),
+      );
+    }
+  }, [hasAppSwitcher, hasSideNav, rootFontSize]);
+
+  const isMobile = useMediaQuery(`(max-width: ${mobileBreakPoint}rem)`);
+
+  useEffect(() => {
+    if (isMobile) {
+      setIsSideNavCollapsed(true);
+    } else {
+      setIsSideNavCollapsed(isSideNavCollapsedProp || false);
+    }
+  }, [isMobile, isSideNavCollapsed, isSideNavCollapsedProp]);
+
   const defaultedSideNavBackgroundColor =
     sideNavBackgroundColor || odysseyDesignTokens.HueNeutralWhite;
 
@@ -79,6 +169,9 @@ const UiShellProvider = ({
   const memoizedContextValue = useMemo(
     () => ({
       appBackgroundColor: appContentBackgroundColor,
+      isMobile,
+      isSideNavCollapsed,
+      setIsSideNavCollapsed,
       sideNavBackgroundColor:
         sideNavBackgroundColor || odysseyDesignTokens.HueNeutralWhite,
       sideNavContrastColors,
@@ -86,7 +179,10 @@ const UiShellProvider = ({
     }),
     [
       appContentBackgroundColor,
+      isMobile,
+      isSideNavCollapsed,
       odysseyDesignTokens,
+      setIsSideNavCollapsed,
       sideNavBackgroundColor,
       sideNavContrastColors,
       topNavColor,

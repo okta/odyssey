@@ -11,9 +11,13 @@
  */
 
 import styled from "@emotion/styled";
-import { memo, useRef, type ReactElement } from "react";
+import { memo, useCallback, type ReactElement } from "react";
+import { useTranslation } from "react-i18next";
 
+import { Button } from "../../Buttons/Button.js";
 import type { HtmlProps } from "../../HtmlProps.js";
+import { MenuIcon } from "../../icons.generated/Menu.js";
+
 import {
   DesignTokens,
   useOdysseyDesignTokens,
@@ -22,9 +26,7 @@ import {
   UiShellColors,
   useUiShellContext,
 } from "../../ui-shell/UiShellProvider.js";
-import useResizeObserver from "../../useResizeObserver.js";
-import { Button } from "../../Buttons/Button.js";
-import { MenuButton } from "../../Buttons/MenuButton.js";
+import { MoreIcon } from "../../icons.generated/More.js";
 
 export const TOP_NAV_HEIGHT = `${64 / 14}rem`;
 
@@ -98,55 +100,50 @@ export type TopNavProps = {
 } & Pick<HtmlProps, "testId">;
 
 const TopNav = ({
-  isMobile = true,
   isScrolled,
   leftSideComponent,
   rightSideComponent,
 }: TopNavProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const uiShellContext = useUiShellContext();
-  const topNavContentContainerRef = useRef<HTMLDivElement>(null);
-  const leftSideContainerRef = useRef<HTMLDivElement>(null);
-  const rightSideContainerRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
 
-  const { width: topNavContainerWidth } = useResizeObserver(
-    topNavContentContainerRef,
-  );
-
-  const { width: leftSideContainerWidth } =
-    useResizeObserver(leftSideContainerRef);
-
-  const { width: rightSideContainerWidth } = useResizeObserver(
-    rightSideContainerRef,
-  );
-  console.log(
-    { topNavContainerWidth },
-    { leftSideContainerWidth },
-    { rightSideContainerWidth },
-  );
+  const toggleMobileSideNav = useCallback(() => {
+    uiShellContext?.setIsSideNavCollapsed?.(
+      !uiShellContext?.isSideNavCollapsed,
+    );
+  }, [uiShellContext]);
 
   return (
     <StyledTopNavContainer
-      isMobile={isMobile}
+      isMobile={uiShellContext?.isMobile}
       isScrolled={isScrolled}
       odysseyDesignTokens={odysseyDesignTokens}
-      ref={topNavContentContainerRef}
       topNavBackgroundColor={uiShellContext?.topNavBackgroundColor}
     >
-      {isMobile ? (
+      {uiShellContext?.isMobile ? (
         <>
-          <Button label="open mobile menu" variant="floating" />
-          <MenuButton
-            buttonLabel="open right side"
-            popoverContent={rightSideComponent}
+          <Button
+            onClick={toggleMobileSideNav}
+            size="small"
+            startIcon={<MenuIcon />}
+            tooltipText={t("sidenav.toggle.expand")}
+            variant="floating"
+          />
+          <Button
+            onClick={toggleMobileSideNav}
+            size="small"
+            startIcon={<MoreIcon />}
+            tooltipText={t("sidenav.toggle.expand")}
+            variant="floating"
           />
         </>
       ) : (
         <>
-          <StyledLeftSideContainer ref={leftSideContainerRef}>
+          <StyledLeftSideContainer>
             {leftSideComponent ?? <div />}
           </StyledLeftSideContainer>
-          <StyledRightSideContainer ref={rightSideContainerRef}>
+          <StyledRightSideContainer>
             {rightSideComponent ?? <div />}
           </StyledRightSideContainer>
         </>

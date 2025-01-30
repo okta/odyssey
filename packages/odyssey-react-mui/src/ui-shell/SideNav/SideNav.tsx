@@ -358,14 +358,14 @@ const SideNav = ({
   onSort,
   sideNavItems,
 }: SideNavProps) => {
-  const [isSideNavCollapsed, setSideNavCollapsed] = useState(isCollapsed);
-  const [hasContentScrolled, setHasContentScrolled] = useState(false);
-  const [isContentScrollable, setIsContentScrollable] = useState(false);
-  const [sideNavItemsList, updateSideNavItemsList] = useState(sideNavItems);
-
   const uiShellContext = useUiShellContext();
   const odysseyDesignTokens: DesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
+
+  const [isSideNavCollapsed, setIsSideNavCollapsed] = useState(isCollapsed);
+  const [hasContentScrolled, setHasContentScrolled] = useState(false);
+  const [isContentScrollable, setIsContentScrollable] = useState(false);
+  const [sideNavItemsList, updateSideNavItemsList] = useState(sideNavItems);
 
   const scrollableContentRef = useRef<HTMLUListElement>(null);
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
@@ -379,7 +379,7 @@ const SideNav = ({
   useEffect(() => updateSideNavItemsList(sideNavItems), [sideNavItems]);
 
   // update sidenav collapse status
-  useEffect(() => setSideNavCollapsed(isCollapsed), [isCollapsed]);
+  useEffect(() => setIsSideNavCollapsed(isCollapsed), [isCollapsed]);
 
   useEffect(() => {
     // This is called directly in this effect AND perhaps as a result of the ResizeObserver
@@ -580,8 +580,8 @@ const SideNav = ({
       onCollapse?.();
     }
 
-    setSideNavCollapsed(!isSideNavCollapsed);
-  }, [isSideNavCollapsed, setSideNavCollapsed, onExpand, onCollapse]);
+    setIsSideNavCollapsed(!isSideNavCollapsed);
+  }, [isSideNavCollapsed, setIsSideNavCollapsed, onExpand, onCollapse]);
 
   const sideNavExpandKeyHandler = useCallback<
     KeyboardEventHandler<HTMLButtonElement>

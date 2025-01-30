@@ -16,11 +16,18 @@ import styled from "@emotion/styled";
 import { OktaLogo } from "./OktaLogo.js";
 import { SideNavLogoProps } from "./types.js";
 
-const StyledLogoContainer = styled("div")(() => ({
-  display: "flex",
-  alignItems: "center",
-  height: "100%",
-}));
+const StyledLogoContainer = styled("div")<{ isOktaLogo: boolean }>(
+  ({ isOktaLogo }) => ({
+    display: "flex",
+    alignItems: "center",
+    height: "100%",
+
+    ...(isOktaLogo && {
+      // 4px of padding to visually align logo with app switcher aura
+      paddingBlockEnd: 4,
+    }),
+  }),
+);
 
 const StyledLogoLink = styled("a")(() => ({
   display: "flex",
@@ -34,6 +41,11 @@ const SideNavLogo = ({
   imageUrl,
   ...optionalProps
 }: SideNavLogoProps) => {
+  const isOktaLogo = useMemo(
+    () => !imageUrl && !logoComponent,
+    [imageUrl, logoComponent],
+  );
+
   const logo = useMemo(() => {
     if (logoComponent) {
       return logoComponent;
@@ -55,7 +67,9 @@ const SideNavLogo = ({
       {logo}
     </StyledLogoLink>
   ) : (
-    <StyledLogoContainer role="presentation">{logo}</StyledLogoContainer>
+    <StyledLogoContainer isOktaLogo={isOktaLogo} role="presentation">
+      {logo}
+    </StyledLogoContainer>
   );
 };
 

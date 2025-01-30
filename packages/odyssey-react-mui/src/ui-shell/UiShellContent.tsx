@@ -186,6 +186,7 @@ const UiShellContent = ({
   const { isContentScrolled, scrollableContentRef } = useScrollState(
     scrollableContentElement,
   );
+
   const uiShellContext = useUiShellContext();
 
   return (
@@ -194,22 +195,24 @@ const UiShellContent = ({
         {optionalComponents?.banners}
       </StyledBannersContainer>
 
-      <StyledAppSwitcherContainer>
-        {
-          /* If AppSwitcher should be initially visible and we have not yet received props, render AppSwitcher in the loading state */
-          initialVisibleSections?.includes("AppSwitcher") &&
-            !appSwitcherProps && (
-              <ErrorBoundary fallback={null} onError={onError}>
-                <AppSwitcher isLoading appIcons={[]} selectedAppName="" />
-              </ErrorBoundary>
-            )
-        }
-        {appSwitcherProps && (
-          <ErrorBoundary fallback={null} onError={onError}>
-            <AppSwitcher {...appSwitcherProps} />
-          </ErrorBoundary>
-        )}
-      </StyledAppSwitcherContainer>
+      {!uiShellContext?.isMobile && (
+        <StyledAppSwitcherContainer>
+          {
+            /* If AppSwitcher should be initially visible and we have not yet received props, render AppSwitcher in the loading state */
+            initialVisibleSections?.includes("AppSwitcher") &&
+              !appSwitcherProps && (
+                <ErrorBoundary fallback={null} onError={onError}>
+                  <AppSwitcher isLoading appIcons={[]} selectedAppName="" />
+                </ErrorBoundary>
+              )
+          }
+          {appSwitcherProps && (
+            <ErrorBoundary fallback={null} onError={onError}>
+              <AppSwitcher {...appSwitcherProps} />
+            </ErrorBoundary>
+          )}
+        </StyledAppSwitcherContainer>
+      )}
 
       <StyledSideNavContainer>
         {
@@ -230,6 +233,7 @@ const UiShellContent = ({
             <SideNav
               {...{
                 ...sideNavProps,
+                isCollapsed: uiShellContext?.isSideNavCollapsed,
                 ...(sideNavProps.hasCustomFooter &&
                 optionalComponents?.sideNavFooter
                   ? {
