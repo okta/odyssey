@@ -15,9 +15,9 @@
 import { forwardRef, memo } from "react";
 import { SvgIcon, type SvgIconNoChildrenProps } from "../SvgIcon.js";
 
-export type ResetIconProps = SvgIconNoChildrenProps;
+export type MenuIconProps = SvgIconNoChildrenProps;
 
-const ResetIcon = forwardRef<SVGSVGElement, ResetIconProps>((props, ref) => {
+const MenuIcon = forwardRef<SVGSVGElement, MenuIconProps>((props, ref) => {
   return (
     <SvgIcon
       viewBox="0 0 24 24"
@@ -30,7 +30,7 @@ const ResetIcon = forwardRef<SVGSVGElement, ResetIconProps>((props, ref) => {
         <path
           fillRule="evenodd"
           clipRule="evenodd"
-          d="M3 12a9 9 0 0 1 16.485-5H16v2h5.223c.12 0 .262 0 .387-.01a1.51 1.51 0 0 0 .571-.153 1.5 1.5 0 0 0 .655-.656c.112-.218.142-.426.154-.571.01-.125.01-.268.01-.387V2h-2v3.674A10.987 10.987 0 0 0 12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11h-2a9 9 0 1 1-18 0Z"
+          d="M23 5H2V3h21v2Zm0 8H2v-2h21v2ZM2 21h21v-2H2v2Z"
           fill="currentColor"
         />
       </>
@@ -38,7 +38,7 @@ const ResetIcon = forwardRef<SVGSVGElement, ResetIconProps>((props, ref) => {
   );
 });
 
-const MemoizedResetIcon = memo(ResetIcon);
-MemoizedResetIcon.displayName = "ResetIcon";
+const MemoizedMenuIcon = memo(MenuIcon);
+MemoizedMenuIcon.displayName = "MenuIcon";
 
-export { MemoizedResetIcon as ResetIcon };
+export { MemoizedMenuIcon as MenuIcon };
