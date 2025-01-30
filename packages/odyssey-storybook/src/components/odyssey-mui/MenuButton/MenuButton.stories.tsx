@@ -55,7 +55,7 @@ const BoxWithBottomMargin = ({ children }: { children: ReactNode }) => {
   );
 };
 
-const storybookMeta: Meta<typeof MenuButton> = {
+const meta = {
   title: "MUI Components/Menu Button",
   component: MenuButton,
   argTypes: {
@@ -203,9 +203,11 @@ const storybookMeta: Meta<typeof MenuButton> = {
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
-};
+} satisfies Meta<typeof MenuButton>;
 
-export default storybookMeta;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
 
 const clickMenuButton =
   ({ canvasElement, step }: PlaywrightProps<MenuButtonProps>) =>
@@ -222,7 +224,7 @@ const clickMenuButton =
     });
   };
 
-export const Simple: StoryObj<MenuButtonProps> = {
+export const Simple: Story = {
   args: {
     buttonLabel: "More actions",
     children: [
@@ -244,7 +246,7 @@ export const Simple: StoryObj<MenuButtonProps> = {
   },
 };
 
-export const ActionIcons: StoryObj<MenuButtonProps> = {
+export const ActionIcons: Story = {
   args: {
     children: [
       <MenuItem key="1" isDisabled>
@@ -277,7 +279,7 @@ export const ActionIcons: StoryObj<MenuButtonProps> = {
   },
 };
 
-export const ButtonVariant: StoryObj<MenuButtonProps> = {
+export const ButtonVariant: Story = {
   args: {
     buttonLabel: "More actions",
     buttonVariant: "floating",
@@ -297,7 +299,7 @@ export const ButtonVariant: StoryObj<MenuButtonProps> = {
   },
 };
 
-export const Groupings: StoryObj<MenuButtonProps> = {
+export const Groupings: Story = {
   args: {
     buttonLabel: "More actions",
     children: [
@@ -327,7 +329,7 @@ export const Groupings: StoryObj<MenuButtonProps> = {
   },
 };
 
-export const WithDestructive: StoryObj<MenuButtonProps> = {
+export const WithDestructive: Story = {
   args: {
     buttonLabel: "Cargo options",
     children: [
@@ -354,7 +356,7 @@ export const WithDestructive: StoryObj<MenuButtonProps> = {
   },
 };
 
-export const IconButton: StoryObj<MenuButtonProps> = {
+export const IconButton: Story = {
   args: {
     ariaLabel: "More actions",
     buttonLabel: "",
@@ -374,7 +376,7 @@ export const IconButton: StoryObj<MenuButtonProps> = {
   },
 };
 
-export const EndIcon: StoryObj<MenuButtonProps> = {
+export const EndIcon: Story = {
   args: {
     ariaLabel: "More actions",
     endIcon: <GroupIcon />,
@@ -387,7 +389,7 @@ export const EndIcon: StoryObj<MenuButtonProps> = {
   },
 };
 
-export const Overflow: StoryObj<MenuButtonProps> = {
+export const Overflow: Story = {
   args: {
     buttonLabel: "Cargo options",
     children: [
@@ -399,7 +401,7 @@ export const Overflow: StoryObj<MenuButtonProps> = {
   },
 };
 
-export const Disabled: StoryObj<MenuButtonProps> = {
+export const Disabled: Story = {
   args: {
     buttonLabel: "Cargo options",
     isDisabled: true,
@@ -412,7 +414,7 @@ export const Disabled: StoryObj<MenuButtonProps> = {
   },
 };
 
-export const Alignment: StoryObj<MenuButtonProps> = {
+export const Alignment: Story = {
   args: {
     buttonVariant: "secondary",
     children: [
@@ -451,7 +453,7 @@ export const Alignment: StoryObj<MenuButtonProps> = {
   },
 };
 
-export const HelpPopover: StoryObj<MenuButtonProps> = {
+export const HelpPopover: Story = {
   args: {
     buttonLabel: "",
     endIcon: <QuestionCircleIcon />,

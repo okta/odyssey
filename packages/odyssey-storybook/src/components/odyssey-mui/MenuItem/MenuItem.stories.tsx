@@ -18,7 +18,7 @@ import { MenuItem, MenuItemProps } from "@okta/odyssey-react-mui";
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData.js";
 import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 
-const storybookMeta: Meta<typeof MenuItem> = {
+const meta = {
   title: "MUI Components/MenuItem",
   component: MenuItem,
   argTypes: {
@@ -75,9 +75,11 @@ const storybookMeta: Meta<typeof MenuItem> = {
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
-};
+} satisfies Meta<typeof MenuItem>;
 
-export default storybookMeta;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
 
 const BaseStory = (props: MenuItemProps) => {
   const anchorRef = useRef<HTMLDivElement>(null);
@@ -91,13 +93,13 @@ const BaseStory = (props: MenuItemProps) => {
   );
 };
 
-export const Simple: StoryObj<MenuItemProps> = {
+export const Simple: Story = {
   render: function C(props: MenuItemProps) {
     return <BaseStory {...props} />;
   },
 };
 
-export const Destructive: StoryObj<MenuItemProps> = {
+export const Destructive: Story = {
   args: {
     variant: "destructive",
     children: "Destructive MenuItem",
@@ -107,7 +109,7 @@ export const Destructive: StoryObj<MenuItemProps> = {
   },
 };
 
-export const Disabled: StoryObj<MenuItemProps> = {
+export const Disabled: Story = {
   args: {
     isDisabled: true,
     children: "Disabled MenuItem",
@@ -117,7 +119,7 @@ export const Disabled: StoryObj<MenuItemProps> = {
   },
 };
 
-export const Selected: StoryObj<MenuItemProps> = {
+export const Selected: Story = {
   args: {
     isSelected: true,
     children: "Selected MenuItem",
