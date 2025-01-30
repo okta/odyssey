@@ -67,7 +67,6 @@ const StepperContainer = styled(MuiStepper, {
   orientation?: "horizontal" | "vertical";
   stepVariant?: "numeric" | "nonNumeric";
 }>(({ nonLinear, odysseyDesignTokens, orientation, stepVariant }) => ({
-  alignItems: "start",
   padding: 0,
   borderRadius: odysseyDesignTokens.BorderRadiusMain,
 
@@ -78,6 +77,7 @@ const StepperContainer = styled(MuiStepper, {
       flex: "0 0 auto",
       padding: `${odysseyDesignTokens.Spacing3} ${odysseyDesignTokens.Spacing4}`,
       borderRadius: odysseyDesignTokens.BorderRadiusMain,
+      alignItems: "center",
 
       "&:not(:has(.Mui-active))": {
         "&.Mui-completed": {
@@ -113,6 +113,7 @@ const StepperContainer = styled(MuiStepper, {
   //Vertical orientation styles
   ...(orientation === "vertical" && {
     width: "fit-content",
+    alignItems: "start",
     "& .MuiStep-root": {
       position: "relative" as const,
       flex: 1,
