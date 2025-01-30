@@ -35,6 +35,10 @@ export default defineConfig({
       external: ["react", "react-dom"],
       output: {
         entryFileNames: "[format]/[name].js",
+        globals: {
+          react: "React",
+          "react-dom": "ReactDOM",
+        },
         preserveModules: true,
         preserveModulesRoot: "src",
       },
