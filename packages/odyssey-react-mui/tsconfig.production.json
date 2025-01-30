@@ -8,6 +8,6 @@
     "rootDir": "src",
     "outDir": "dist/types"
   },
-  "include": ["./src/**/*", "**/properties/**/*"],
-  "exclude": ["./test", "**/*.test.**", "**/dist/**/*"]
+  "include": ["./src/**/*"],
+  "exclude": ["**/*.test.**", "**/dist/**/*"]
 }
