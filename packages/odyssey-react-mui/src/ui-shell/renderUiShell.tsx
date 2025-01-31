@@ -108,7 +108,7 @@ export const renderUiShell = ({
   const appWindowElement = document.createElement("div");
   appWindowElement.appendChild(appRootElement);
 
-  const webComponentChildren = Object.values(slottedElements); // .concat(appRootPositionElement);
+  const webComponentChildren = Object.values(slottedElements);
 
   const appComponent = <slot />;
 

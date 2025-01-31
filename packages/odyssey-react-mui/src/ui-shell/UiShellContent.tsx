@@ -133,7 +133,6 @@ export type UiShellContentProps = {
 } & UiShellNavComponentProps;
 
 const appWindowStyles = {
-  border: "1px solid red",
   "overflow-x": "hidden",
   "overflow-y": "auto",
 };
