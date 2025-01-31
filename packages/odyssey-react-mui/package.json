@@ -5,9 +5,9 @@
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "sideEffects": false,
-  "type": "module",
+  "browser": "dist/cjs/index.cjs",
+  "main": "dist/node/index.cjs",
   "module": "dist/esm/index.mjs",
-  "main": "dist/cjs/index.cjs",
   "types": "dist/types/index.d.ts",
   "typesVersions": {
     "*": {
