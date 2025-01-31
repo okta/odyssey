@@ -22,11 +22,15 @@ describe("UiShell", () => {
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(rootElement);
 
+    const appContainerElement = document.createElement("div");
+    document.body.append(appContainerElement);
+
     const stylesRootElement = document.createElement("div");
 
     render(
       <UiShell
         appComponent={<div />}
+        appContainerElement={appContainerElement}
         appRootElement={document.createElement("div")}
         onSubscriptionCreated={() => {}}
         stylesRootElement={stylesRootElement}
@@ -37,23 +41,10 @@ describe("UiShell", () => {
     expect(Array.from(stylesRootElement.children).length).toBeGreaterThan(0);
   });
 
-  test("renders `appComponent`", () => {
-    const testId = "app-component";
-
-    const { container } = render(
-      <UiShell
-        appComponent={<div data-testid={testId} />}
-        appRootElement={document.createElement("div")}
-        onSubscriptionCreated={() => {}}
-        stylesRootElement={document.createElement("div")}
-        subscribeToPropChanges={() => () => {}}
-      />,
-    );
-
-    expect(within(container).getByTestId(testId)).toBeVisible();
-  });
-
   test("renders always-available `componentSlots`", async () => {
+    const appContainerElement = document.createElement("div");
+    document.body.append(appContainerElement);
+
     const optionalComponentTestIds: Array<
       keyof Required<UiShellProps>["optionalComponents"]
     > = ["banners", "topNavLeftSide", "topNavRightSide"];
@@ -74,6 +65,7 @@ describe("UiShell", () => {
     const { container } = render(
       <UiShell
         appComponent={<div />}
+        appContainerElement={appContainerElement}
         appRootElement={document.createElement("div")}
         onSubscriptionCreated={() => {}}
         optionalComponents={
@@ -97,6 +89,9 @@ describe("UiShell", () => {
   });
 
   test("renders optionally-available `componentSlots`", () => {
+    const appContainerElement = document.createElement("div");
+    document.body.append(appContainerElement);
+
     const optionalComponentTestIds: Array<
       keyof Required<UiShellProps>["optionalComponents"]
     > = ["sideNavFooter"];
@@ -120,6 +115,7 @@ describe("UiShell", () => {
     const { container } = render(
       <UiShell
         appComponent={<div />}
+        appContainerElement={appContainerElement}
         appRootElement={document.createElement("div")}
         onSubscriptionCreated={() => {}}
         optionalComponents={
@@ -146,12 +142,16 @@ describe("UiShell", () => {
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(rootElement);
 
+    const appContainerElement = document.createElement("div");
+    document.body.append(appContainerElement);
+
     const unsubscribeFromPropChanges = vi.fn();
     const subscribeToPropChanges = vi.fn(() => unsubscribeFromPropChanges);
 
     const { unmount } = render(
       <UiShell
         appComponent={<div />}
+        appContainerElement={appContainerElement}
         appRootElement={document.createElement("div")}
         onSubscriptionCreated={() => {}}
         stylesRootElement={document.createElement("div")}
@@ -171,6 +171,9 @@ describe("UiShell", () => {
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(rootElement);
+
+    const appContainerElement = document.createElement("div");
+    document.body.append(appContainerElement);
 
     // This is the subscription we give the component, and then once subscribed, we're going to immediately call it with new props.
     const subscribeToPropChanges: UiShellProps["subscribeToPropChanges"] = (
@@ -196,6 +199,7 @@ describe("UiShell", () => {
     const { container } = render(
       <UiShell
         appComponent={<div />}
+        appContainerElement={appContainerElement}
         appRootElement={document.createElement("div")}
         onSubscriptionCreated={() => {}}
         stylesRootElement={document.createElement("div")}
@@ -212,6 +216,9 @@ describe("UiShell", () => {
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(rootElement);
 
+    const appContainerElement = document.createElement("div");
+    document.body.append(appContainerElement);
+
     // This is the subscription we give the component, and then once subscribed, we're going to immediately call it with new props.
     const subscribeToPropChanges: UiShellProps["subscribeToPropChanges"] = (
       subscriber,
@@ -225,6 +232,7 @@ describe("UiShell", () => {
     const { container } = render(
       <UiShell
         appComponent={<div />}
+        appContainerElement={appContainerElement}
         appRootElement={document.createElement("div")}
         onSubscriptionCreated={() => {}}
         stylesRootElement={document.createElement("div")}
@@ -241,6 +249,9 @@ describe("UiShell", () => {
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(rootElement);
 
+    const appContainerElement = document.createElement("div");
+    document.body.append(appContainerElement);
+
     // This passed to React's state setter. The return value here prevents a test error. It wouldn't be required otherwise as this test could care less what's returned.
     const stateUpdater = vi.fn(() => defaultComponentProps);
 
@@ -256,6 +267,7 @@ describe("UiShell", () => {
     render(
       <UiShell
         appComponent={<div />}
+        appContainerElement={appContainerElement}
         appRootElement={document.createElement("div")}
         onSubscriptionCreated={() => {}}
         stylesRootElement={document.createElement("div")}
