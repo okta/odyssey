@@ -10,27 +10,32 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { defineConfig } from "vitest/config";
+import { defineConfig, mergeConfig } from "vitest/config";
 
-export default defineConfig({
-  test: {
-    // browser: {
-    //   enabled: true,
-    //   name: 'chromium',
-    //   provider: 'playwright',
-    // },
-    coverage: {
-      reporter:
-        process.env.NODE_ENV === "test" ? ["text-summary"] : ["text", "html"],
-      thresholds: {
-        branches: 76,
-        functions: 44,
-        lines: 36,
-        statements: 36,
+import viteConfig from "./vite.config.js";
+
+export default mergeConfig(
+  viteConfig,
+  defineConfig({
+    test: {
+      // browser: {
+      //   enabled: true,
+      //   name: 'chromium',
+      //   provider: 'playwright',
+      // },
+      coverage: {
+        reporter:
+          process.env.NODE_ENV === "test" ? ["text-summary"] : ["text", "html"],
+        thresholds: {
+          branches: 76,
+          functions: 44,
+          lines: 36,
+          statements: 36,
+        },
       },
+      environment: "happy-dom",
+      globals: true,
+      setupFiles: ["./vitest.setup.ts"],
     },
-    environment: "happy-dom",
-    globals: true,
-    setupFiles: ["./vitest.setup.ts"],
-  },
-});
+  }),
+);

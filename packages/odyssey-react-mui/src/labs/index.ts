@@ -36,6 +36,8 @@ export * from "../ui-shell/AppSwitcher/index.js";
 export * from "../ui-shell/SideNav/index.js";
 /** @deprecated Will be removed in a future Odyssey version. Use the `/ui-shell` export unless your app is running React v17. */
 export * from "../ui-shell/TopNav/index.js";
+/** @deprecated Will be removed in a future Odyssey version. Use the `/ui-shell` export unless your app is running React v17. */
+export * from "../ui-shell/UiShell.js";
 
 export {
   /** @deprecated Will be removed in a future Odyssey version. Use `PickerWithOptionAdornment` */

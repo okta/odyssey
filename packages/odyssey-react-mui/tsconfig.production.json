@@ -9,5 +9,5 @@
     "outDir": "dist/types"
   },
   "include": ["./src/**/*"],
-  "exclude": ["./test", "**/*.test.**", "**/dist/**/*"]
+  "exclude": ["**/*.test.**", "**/dist/**/*"]
 }
