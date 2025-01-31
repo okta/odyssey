@@ -32,11 +32,12 @@ export default defineConfig({
     outDir: "dist",
     sourcemap: true,
     rollupOptions: {
-      external: ["react"],
+      external: ["react", "react-dom"],
       output: {
         entryFileNames: "[format]/[name].js",
         globals: {
           react: "React",
+          "react-dom": "ReactDOM",
         },
         preserveModules: true,
         preserveModulesRoot: "src",
