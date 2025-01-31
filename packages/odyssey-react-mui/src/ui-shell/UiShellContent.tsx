@@ -107,7 +107,7 @@ export type UiShellContentProps = {
   /**
    * The element within which the app will be rendered. This will be positioned appropriately while being kept out of the shadow DOM.
    */
-  appWindowElement: HTMLDivElement;
+  appContainerElement: HTMLDivElement;
   /**
    * defaults to `true`. If `false`, the content area will have no padding provided
    */
@@ -161,7 +161,7 @@ const setStylesToMatchElement = (
  * If an error occurs, this will revert to only showing the app.
  */
 const UiShellContent = ({
-  appWindowElement,
+  appContainerElement,
   hasStandardAppContentPadding = true,
   initialVisibleSections = ["TopNav", "SideNav", "AppSwitcher"],
   onError = console.error,
@@ -172,7 +172,7 @@ const UiShellContent = ({
 }: UiShellContentProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { isContentScrolled, scrollableContentRef: appContainerRef } =
-    useScrollState(appWindowElement);
+    useScrollState(appContainerElement);
   const uiShellContext = useUiShellContext();
 
   const paddingStyles = useMemo<Record<string, string | null>>(
@@ -188,8 +188,8 @@ const UiShellContent = ({
   );
 
   useEffect(() => {
-    // Once appContainerRef is rendered, we can position appWindowElement on top
-    if (appContainerRef.current && appWindowElement) {
+    // Once appContainerRef is rendered, we can position appContainerElement on top
+    if (appContainerRef.current && appContainerElement) {
       let animationFrameId: number;
 
       const updateStyles = () => {
@@ -197,7 +197,7 @@ const UiShellContent = ({
         animationFrameId = requestAnimationFrame(() => {
           if (appContainerRef.current) {
             setStylesToMatchElement(
-              appWindowElement,
+              appContainerElement,
               appContainerRef.current,
               paddingStyles,
             );
@@ -214,7 +214,7 @@ const UiShellContent = ({
       return () => observer.disconnect();
     }
     return () => {};
-  }, [appContainerRef, appWindowElement, paddingStyles]);
+  }, [appContainerRef, appContainerElement, paddingStyles]);
 
   return (
     <StyledShellContainer odysseyDesignTokens={odysseyDesignTokens}>
