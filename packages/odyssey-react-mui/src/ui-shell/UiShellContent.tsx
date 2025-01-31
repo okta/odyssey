@@ -132,7 +132,7 @@ export type UiShellContentProps = {
   };
 } & UiShellNavComponentProps;
 
-const appWindowStyles = {
+const appContainerStyles = {
   "overflow-x": "hidden",
   "overflow-y": "auto",
 };
@@ -179,11 +179,11 @@ const UiShellContent = ({
     () =>
       hasStandardAppContentPadding
         ? {
+            ...appContainerStyles,
             "padding-block": odysseyDesignTokens.Spacing5 ?? null,
             "padding-inline": odysseyDesignTokens.Spacing8 ?? null,
-            ...appWindowStyles,
           }
-        : appWindowStyles,
+        : appContainerStyles,
     [hasStandardAppContentPadding, odysseyDesignTokens],
   );
 
