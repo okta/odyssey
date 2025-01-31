@@ -105,8 +105,10 @@ export const renderUiShell = ({
     HTMLDivElement
   >;
 
-  const webComponentChildren =
-    Object.values(slottedElements).concat(appRootElement);
+  const appWindowElement = document.createElement("div");
+  appWindowElement.appendChild(appRootElement);
+
+  const webComponentChildren = Object.values(slottedElements); // .concat(appRootPositionElement);
 
   const appComponent = <slot />;
 
@@ -117,6 +119,7 @@ export const renderUiShell = ({
           appBackgroundColor={appBackgroundColor}
           appBackgroundContrastMode={appBackgroundContrastMode}
           appComponent={appComponent}
+          appWindowElement={appWindowElement}
           appRootElement={reactRootElements.appRootElement}
           hasStandardAppContentPadding={hasStandardAppContentPadding}
           initialVisibleSections={initialVisibleSections}
@@ -141,6 +144,7 @@ export const renderUiShell = ({
     webComponentRootElement: uiShellRootElement,
     webComponentChildren,
   });
+  uiShellRootElement.appendChild(appWindowElement);
 
   return {
     appRootElement,

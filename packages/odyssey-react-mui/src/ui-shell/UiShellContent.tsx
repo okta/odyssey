@@ -11,7 +11,7 @@
  */
 
 import styled from "@emotion/styled";
-import { memo, type ReactElement, type ReactNode } from "react";
+import { memo, useEffect, useMemo, type ReactElement } from "react";
 import { ErrorBoundary, ErrorBoundaryProps } from "react-error-boundary";
 
 import { AppSwitcher, type AppSwitcherProps } from "./AppSwitcher/index.js";
@@ -31,41 +31,13 @@ const fullHeightStyles = { height: "100%" };
 const emptySideNavItems = [] satisfies SideNavProps["sideNavItems"];
 
 const StyledAppContainer = styled("div", {
-  shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" &&
-    prop !== "appBackgroundColor" &&
-    prop !== "hasStandardAppContentPadding" &&
-    prop !== "scrollableContentElement",
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{
   appBackgroundColor?: UiShellColors["appBackgroundColor"];
-  hasStandardAppContentPadding: UiShellContentProps["hasStandardAppContentPadding"];
-  odysseyDesignTokens: DesignTokens;
-  scrollableContentElement?: HTMLDivElement;
-}>(
-  ({
-    appBackgroundColor,
-    hasStandardAppContentPadding,
-    odysseyDesignTokens,
-    scrollableContentElement,
-  }) => ({
-    gridArea: "app-content",
-    backgroundColor: appBackgroundColor,
-    ...(scrollableContentElement
-      ? {
-          width: "100%",
-          height: "100%",
-          overflow: "hidden",
-        }
-      : {
-          overflowX: "hidden",
-          overflowY: "auto",
-        }),
-    ...(hasStandardAppContentPadding && {
-      paddingBlock: odysseyDesignTokens.Spacing5,
-      paddingInline: odysseyDesignTokens.Spacing8,
-    }),
-  }),
-);
+}>(({ appBackgroundColor }) => ({
+  gridArea: "app-content",
+  backgroundColor: appBackgroundColor,
+}));
 
 const StyledBannersContainer = styled("div")(() => ({
   gridArea: "banners",
@@ -121,12 +93,6 @@ export type UiShellNavComponentProps = {
     TopNavProps,
     "leftSideComponent" | "rightSideComponent"
   > | null;
-  /**
-   * If the consumer has an element that should be the scroll container for the content area, they should pass it here.
-   * They will set e.g. height: 100%; overflow-y: scroll; or whatnot on their own. We use this element to monitor scroll
-   * state and apply the bottom border to TopNav
-   */
-  scrollableContentElement?: HTMLDivElement;
 };
 
 export type UiShellContentProps = {
@@ -139,9 +105,9 @@ export type UiShellContentProps = {
    */
   appBackgroundContrastMode?: ContrastMode;
   /**
-   * React app component that renders as children in the correct location of the shell.
+   * The element within which the app will be rendered. This will be positioned appropriately while being kept out of the shadow DOM.
    */
-  appComponent: ReactNode;
+  appWindowElement: HTMLDivElement;
   /**
    * defaults to `true`. If `false`, the content area will have no padding provided
    */
@@ -166,6 +132,28 @@ export type UiShellContentProps = {
   };
 } & UiShellNavComponentProps;
 
+const appWindowStyles = {
+  border: "1px solid red",
+  "overflow-x": "hidden",
+  "overflow-y": "auto",
+};
+
+const setStylesToMatchElement = (
+  elementToStyle: HTMLElement,
+  elementToReference: HTMLElement,
+  additionalStyles: Record<string, string | null>,
+) => {
+  const boundingRect = elementToReference.getBoundingClientRect();
+  elementToStyle.style.setProperty("position", "absolute");
+  elementToStyle.style.setProperty("top", `${boundingRect.y}px`);
+  elementToStyle.style.setProperty("left", `${boundingRect.x}px`);
+  elementToStyle.style.setProperty("width", `${boundingRect.width}px`);
+  elementToStyle.style.setProperty("height", `${boundingRect.height}px`);
+  for (const key in additionalStyles) {
+    elementToStyle.style.setProperty(key, additionalStyles[key]);
+  }
+};
+
 /**
  * Our new Unified Platform UI Shell.
  *
@@ -174,7 +162,7 @@ export type UiShellContentProps = {
  * If an error occurs, this will revert to only showing the app.
  */
 const UiShellContent = ({
-  appComponent,
+  appWindowElement,
   hasStandardAppContentPadding = true,
   initialVisibleSections = ["TopNav", "SideNav", "AppSwitcher"],
   onError = console.error,
@@ -182,13 +170,54 @@ const UiShellContent = ({
   appSwitcherProps,
   sideNavProps,
   topNavProps,
-  scrollableContentElement,
 }: UiShellContentProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
-  const { isContentScrolled, scrollableContentRef } = useScrollState(
-    scrollableContentElement,
-  );
+  const { isContentScrolled, scrollableContentRef: appContainerRef } =
+    useScrollState(appWindowElement);
   const uiShellContext = useUiShellContext();
+
+  const paddingStyles = useMemo<Record<string, string | null>>(
+    () =>
+      hasStandardAppContentPadding
+        ? {
+            "padding-block": odysseyDesignTokens.Spacing5 ?? null,
+            "padding-inline": odysseyDesignTokens.Spacing8 ?? null,
+            ...appWindowStyles,
+          }
+        : appWindowStyles,
+    [hasStandardAppContentPadding, odysseyDesignTokens],
+  );
+
+  useEffect(() => {
+    // Once appContainerRef is rendered, we can position appWindowElement on top
+    if (appContainerRef.current && appWindowElement) {
+      // Set the initial style
+      setStylesToMatchElement(
+        appWindowElement,
+        appContainerRef.current,
+        paddingStyles,
+      );
+
+      let animationFrameId: number;
+
+      // Setup a mutation observer to sync later updates
+      const observer = new ResizeObserver(() => {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = requestAnimationFrame(() => {
+          if (appContainerRef.current) {
+            setStylesToMatchElement(
+              appWindowElement,
+              appContainerRef.current,
+              paddingStyles,
+            );
+          }
+        });
+      });
+      observer.observe(appContainerRef.current);
+      return () => observer.disconnect();
+    }
+    return () => {};
+  }, [appContainerRef, appWindowElement, paddingStyles]);
 
   return (
     <StyledShellContainer odysseyDesignTokens={odysseyDesignTokens}>
@@ -281,15 +310,9 @@ const UiShellContent = ({
 
       <StyledAppContainer
         appBackgroundColor={uiShellContext?.appBackgroundColor}
-        hasStandardAppContentPadding={hasStandardAppContentPadding}
-        odysseyDesignTokens={odysseyDesignTokens}
         tabIndex={0}
-        {...(!scrollableContentElement
-          ? { ref: scrollableContentRef }
-          : { scrollableContentElement })}
-      >
-        {appComponent}
-      </StyledAppContainer>
+        ref={appContainerRef}
+      />
     </StyledShellContainer>
   );
 };
