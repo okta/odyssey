@@ -86,7 +86,8 @@ const babelConfig = (api) => {
           ],
           [
             "replace-import-extension",
-            process.env.ODYSSEY_CJS_BUILD
+            process.env.ODYSSEY_BUILD_MODE === "cjs" ||
+            process.env.ODYSSEY_BUILD_MODE === "node"
               ? {
                   extMapping: { ".js": ".cjs" },
                 }
