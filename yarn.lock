@@ -4973,7 +4973,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-design-tokens@workspace:*, @okta/odyssey-design-tokens@workspace:^, @okta/odyssey-design-tokens@workspace:packages/odyssey-design-tokens":
+"@okta/odyssey-design-tokens@workspace:*, @okta/odyssey-design-tokens@workspace:packages/odyssey-design-tokens":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-design-tokens@workspace:packages/odyssey-design-tokens"
   dependencies:
@@ -5045,7 +5045,7 @@ __metadata:
     "@mui/utils": "npm:^5.16.14"
     "@mui/x-date-pickers": "npm:^7.2.0"
     "@okta/browserslist-config-odyssey": "workspace:*"
-    "@okta/odyssey-design-tokens": "workspace:^"
+    "@okta/odyssey-design-tokens": "workspace:*"
     "@okta/odyssey-icons": "workspace:*"
     "@okta/odyssey-typescript": "workspace:*"
     "@svgr/cli": "npm:^7.0.0"

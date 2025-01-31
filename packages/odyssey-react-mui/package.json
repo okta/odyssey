@@ -6,10 +6,10 @@
   "license": "Apache-2.0",
   "sideEffects": false,
   "type": "module",
+  "types": "dist/types/index.d.ts",
   "browser": "dist/cjs/index.cjs",
   "main": "dist/cjs/index.cjs",
   "module": "dist/esm/index.mjs",
-  "types": "dist/types/index.d.ts",
   "typesVersions": {
     "*": {
       "*": [
@@ -34,45 +34,45 @@
   },
   "exports": {
     "./icons": {
-      "import": "./dist/esm/icons.generated/index.mjs",
-      "node": "./dist/cjs/icons.generated/index.cjs",
-      "require": "./dist/cjs/icons.generated/index.cjs",
       "types": "./dist/types/icons.generated/index.d.ts",
+      "node": "./dist/cjs/icons.generated/index.cjs",
+      "import": "./dist/esm/icons.generated/index.mjs",
+      "require": "./dist/cjs/icons.generated/index.cjs",
       "default": "./dist/cjs/icons.generated/index.cjs"
     },
     "./labs": {
-      "import": "./dist/esm/labs/index.mjs",
-      "node": "./dist/cjs/labs/index.cjs",
-      "require": "./dist/cjs/labs/index.cjs",
       "types": "./dist/types/labs/index.d.ts",
+      "node": "./dist/cjs/labs/index.cjs",
+      "import": "./dist/esm/labs/index.mjs",
+      "require": "./dist/cjs/labs/index.cjs",
       "default": "./dist/cjs/labs/index.cjs"
     },
     "./test-selectors": {
-      "import": "./dist/esm/test-selectors/index.mjs",
-      "node": "./dist/cjs/test-selectors/index.cjs",
-      "require": "./dist/cjs/test-selectors/index.cjs",
       "types": "./dist/types/test-selectors/index.d.ts",
+      "node": "./dist/cjs/test-selectors/index.cjs",
+      "import": "./dist/esm/test-selectors/index.mjs",
+      "require": "./dist/cjs/test-selectors/index.cjs",
       "default": "./dist/cjs/test-selectors/index.cjs"
     },
     "./ui-shell": {
-      "import": "./dist/esm/ui-shell/index.mjs",
-      "node": "./dist/cjs/ui-shell/index.cjs",
-      "require": "./dist/cjs/ui-shell/index.cjs",
       "types": "./dist/types/ui-shell/index.d.ts",
+      "node": "./dist/cjs/ui-shell/index.cjs",
+      "import": "./dist/esm/ui-shell/index.mjs",
+      "require": "./dist/cjs/ui-shell/index.cjs",
       "default": "./dist/cjs/ui-shell/index.cjs"
     },
     "./web-component": {
-      "import": "./dist/esm/web-component/index.mjs",
-      "node": "./dist/cjs/web-component/index.cjs",
-      "require": "./dist/cjs/web-component/index.cjs",
       "types": "./dist/types/web-component/index.d.ts",
+      "node": "./dist/cjs/web-component/index.cjs",
+      "import": "./dist/esm/web-component/index.mjs",
+      "require": "./dist/cjs/web-component/index.cjs",
       "default": "./dist/cjs/web-component/index.cjs"
     },
     ".": {
-      "import": "./dist/esm/index.mjs",
-      "node": "./dist/cjs/index.cjs",
-      "require": "./dist/cjs/index.cjs",
       "types": "./dist/types/index.d.ts",
+      "node": "./dist/cjs/index.cjs",
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/cjs/index.cjs",
       "default": "./dist/cjs/index.cjs"
     },
     "./README.md": "./README.md"
@@ -119,7 +119,7 @@
     "@mui/system": "^5.16.14",
     "@mui/utils": "^5.16.14",
     "@mui/x-date-pickers": "^7.2.0",
-    "@okta/odyssey-design-tokens": "workspace:^",
+    "@okta/odyssey-design-tokens": "workspace:*",
     "@types/luxon": "^3.4.2",
     "date-fns": "^2.30.0",
     "dom-accessibility-api": "^0.7.0",
