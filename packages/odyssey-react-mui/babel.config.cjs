@@ -10,6 +10,18 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+const presetEnvConfig = {
+  esm: {
+    modules: false,
+  },
+  cjs: {},
+  node: {
+    targets: {
+      node: "current",
+    },
+  },
+};
+
 /**
  * @type {(api: import('@babel/core').ConfigAPI) => import('@babel/core').TransformOptions}
  */
@@ -86,11 +98,7 @@ const babelConfig = (api) => {
         presets: [
           [
             "@babel/preset-env",
-            process.env.ODYSSEY_CJS_BUILD
-              ? {}
-              : {
-                  modules: false,
-                },
+            presetEnvConfig[process.env.ODYSSEY_BUILD_MODE],
           ],
           [
             "@babel/preset-react",

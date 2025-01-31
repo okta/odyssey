@@ -33,51 +33,59 @@
   },
   "exports": {
     "./icons": {
-      "types": "./dist/types/icons.generated/index.d.ts",
       "import": "./dist/esm/icons.generated/index.mjs",
-      "require": "./dist/cjs/icons.generated/index.cjs"
+      "node": "./dist/node/icons.generated/index.cjs",
+      "require": "./dist/cjs/icons.generated/index.cjs",
+      "types": "./dist/types/icons.generated/index.d.ts"
     },
     "./labs": {
-      "types": "./dist/types/labs/index.d.ts",
       "import": "./dist/esm/labs/index.mjs",
-      "require": "./dist/cjs/labs/index.cjs"
+      "node": "./dist/node/labs/index.cjs",
+      "require": "./dist/cjs/labs/index.cjs",
+      "types": "./dist/types/labs/index.d.ts"
     },
     "./test-selectors": {
-      "types": "./dist/types/test-selectors/index.d.ts",
       "import": "./dist/esm/test-selectors/index.mjs",
-      "require": "./dist/cjs/test-selectors/index.cjs"
+      "node": "./dist/node/test-selectors/index.cjs",
+      "require": "./dist/cjs/test-selectors/index.cjs",
+      "types": "./dist/types/test-selectors/index.d.ts"
     },
     "./ui-shell": {
-      "types": "./dist/types/ui-shell/index.d.ts",
       "import": "./dist/esm/ui-shell/index.mjs",
-      "require": "./dist/cjs/ui-shell/index.cjs"
+      "node": "./dist/node/ui-shell/index.cjs",
+      "require": "./dist/cjs/ui-shell/index.cjs",
+      "types": "./dist/types/ui-shell/index.d.ts"
     },
     "./web-component": {
-      "types": "./dist/types/web-component/index.d.ts",
       "import": "./dist/esm/web-component/index.mjs",
-      "require": "./dist/cjs/web-component/index.cjs"
+      "node": "./dist/node/web-component/index.cjs",
+      "require": "./dist/cjs/web-component/index.cjs",
+      "types": "./dist/types/web-component/index.d.ts"
     },
     ".": {
-      "types": "./dist/types/index.d.ts",
       "import": "./dist/esm/index.mjs",
-      "require": "./dist/cjs/index.cjs"
+      "node": "./dist/node/index.cjs",
+      "require": "./dist/cjs/index.cjs",
+      "types": "./dist/types/index.d.ts"
     },
     "./README.md": "./README.md"
   },
   "scripts": {
     "build:clean": "rimraf dist",
-    "build:source": "yarn build:source:esm && yarn build:source:cjs",
-    "build:source:esm": "NODE_ENV=production BROWSERSLIST_ENV=modern babel src --out-dir dist/esm --extensions .js,.jsx,.ts,.tsx --source-maps --out-file-extension .mjs",
+    "build:source": "yarn build:source:esm && yarn build:source:cjs && yarn build:source:node",
+    "build:source:esm": "ODYSSEY_BUILD_MODE=esm NODE_ENV=production BROWSERSLIST_ENV=modern babel src --out-dir dist/esm --extensions .js,.jsx,.ts,.tsx --source-maps --out-file-extension .mjs",
     "build:source:esm:watch": "yarn build:source:esm --watch",
-    "build:source:cjs": "ODYSSEY_CJS_BUILD=true NODE_ENV=production BROWSERSLIST_ENV=modern babel src --out-dir dist/cjs --extensions .js,.jsx,.ts,.tsx --source-maps --out-file-extension .cjs",
+    "build:source:cjs": "ODYSSEY_BUILD_MODE=cjs NODE_ENV=production BROWSERSLIST_ENV=modern babel src --out-dir dist/cjs --extensions .js,.jsx,.ts,.tsx --source-maps --out-file-extension .cjs",
     "build:source:cjs:watch": "yarn build:source:cjs --watch",
+    "build:source:node": "ODYSSEY_BUILD_MODE=node NODE_ENV=production BROWSERSLIST_ENV=modern babel src --out-dir dist/node --extensions .js,.jsx,.ts,.tsx --source-maps --out-file-extension .cjs",
+    "build:source:node:watch": "yarn build:source:node --watch",
     "build:testSelectors": "tsx scripts/generateTestSelectorsJson.ts",
     "build:translationsJson": "tsx scripts/properties-to-ts.ts bundle",
     "build:types": "tsc --project tsconfig.production.json",
     "build": "yarn build:clean && yarn build:translationsJson && yarn build:types && yarn build:source && yarn build:testSelectors",
     "ci:coverage": "NODE_ENV=test yarn vitest run --coverage",
     "dev:coverage": "NODE_ENV=test yarn vitest --coverage",
-    "dev:source": "yarn concurrently npm:build:source:esm:watch npm:build:source:cjs:watch",
+    "dev:source": "build:source:esm:watch",
     "dev:test": "NODE_ENV=test vitest",
     "dev:translationsJson": "yarn build:translationsJson --watch",
     "dev:types": "yarn build:types --watch",
