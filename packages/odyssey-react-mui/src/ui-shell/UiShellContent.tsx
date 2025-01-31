@@ -190,17 +190,9 @@ const UiShellContent = ({
   useEffect(() => {
     // Once appContainerRef is rendered, we can position appWindowElement on top
     if (appContainerRef.current && appWindowElement) {
-      // Set the initial style
-      setStylesToMatchElement(
-        appWindowElement,
-        appContainerRef.current,
-        paddingStyles,
-      );
-
       let animationFrameId: number;
 
-      // Setup a mutation observer to sync later updates
-      const observer = new ResizeObserver(() => {
+      const updateStyles = () => {
         cancelAnimationFrame(animationFrameId);
         animationFrameId = requestAnimationFrame(() => {
           if (appContainerRef.current) {
@@ -211,8 +203,14 @@ const UiShellContent = ({
             );
           }
         });
-      });
+      };
+
+      // Setup a mutation observer to sync later updates
+      const observer = new ResizeObserver(updateStyles);
       observer.observe(appContainerRef.current);
+
+      // Set the initial style
+      updateStyles();
       return () => observer.disconnect();
     }
     return () => {};
