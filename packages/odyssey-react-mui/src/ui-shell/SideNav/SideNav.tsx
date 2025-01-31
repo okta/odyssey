@@ -257,14 +257,18 @@ const SideNavFooter = styled("div", {
 
 const PersistentSideNavFooter = styled(SideNavFooter, {
   shouldForwardProp: (prop) =>
-    prop !== "isContentScrollable" && prop !== "odysseyDesignTokens",
+    prop !== "isContentScrollable" &&
+    prop !== "odysseyDesignTokens" &&
+    prop !== "sideNavBackgroundColor",
 })(
   ({
     isContentScrollable,
     odysseyDesignTokens,
+    sideNavBackgroundColor,
   }: {
     isContentScrollable: boolean;
     odysseyDesignTokens: DesignTokens;
+    sideNavBackgroundColor?: UiShellColors["sideNavBackgroundColor"];
   }) => ({
     transitionProperty: "box-shadow",
     transitionDuration: odysseyDesignTokens.TransitionDurationMain,
@@ -273,6 +277,9 @@ const PersistentSideNavFooter = styled(SideNavFooter, {
     // The box shadow should appear above the footer only if the scrollable region has overflow
     ...(isContentScrollable && {
       boxShadow: "0px -8px 8px -8px rgba(39, 39, 39, 0.08)",
+    }),
+    ...(sideNavBackgroundColor && {
+      backgroundColor: sideNavBackgroundColor,
     }),
   }),
 );
@@ -785,6 +792,7 @@ const SideNav = ({
               <PersistentSideNavFooter
                 isContentScrollable={isContentScrollable}
                 odysseyDesignTokens={odysseyDesignTokens}
+                sideNavBackgroundColor={uiShellContext?.sideNavBackgroundColor}
               >
                 {footerComponent}
               </PersistentSideNavFooter>
