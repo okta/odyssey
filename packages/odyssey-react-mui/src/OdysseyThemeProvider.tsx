@@ -100,6 +100,7 @@ const OdysseyThemeProvider = ({
     </StyledContrastContainerStyles>
   );
 };
+OdysseyThemeProvider.displayName = "OdysseyThemeProvider";
 
 const MemoizedOdysseyThemeProvider = memo(
   OdysseyThemeProvider,

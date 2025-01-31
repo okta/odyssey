@@ -10,7 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, useEffect, useState, type SetStateAction } from "react";
+import {
+  memo,
+  ReactNode,
+  useEffect,
+  useState,
+  type SetStateAction,
+} from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 import { CssBaseline } from "../CssBaseline.js";
@@ -54,12 +60,16 @@ export type UiShellProps = {
    * Sets a custom background color for the top nav area.
    */
   topNavBackgroundColor?: string;
+  /**
+   * React app component that renders as children in the correct location of the shell. Only used as fallback for ErrorBoundary.
+   */
+  appComponent?: ReactNode;
 } & Pick<ReactRootElements, "appRootElement" | "stylesRootElement"> &
   Pick<
     UiShellContentProps,
     | "appBackgroundColor"
     | "appBackgroundContrastMode"
-    | "appComponent"
+    | "appContainerElement"
     | "hasStandardAppContentPadding"
     | "initialVisibleSections"
     | "onError"
@@ -78,6 +88,7 @@ const UiShell = ({
   appBackgroundContrastMode,
   appComponent,
   appRootElement,
+  appContainerElement,
   hasStandardAppContentPadding,
   initialVisibleSections,
   onError = console.error,
@@ -120,7 +131,7 @@ const UiShell = ({
           >
             <UiShellContent
               {...componentProps}
-              appComponent={appComponent}
+              appContainerElement={appContainerElement}
               hasStandardAppContentPadding={hasStandardAppContentPadding}
               initialVisibleSections={initialVisibleSections}
               onError={onError}
