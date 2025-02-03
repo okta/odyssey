@@ -861,6 +861,11 @@ export const getComponents = ({
           position: "relative",
           transition: `all ${odysseyTokens.TransitionDurationMain} ${odysseyTokens.TransitionTimingMain}`,
 
+          "&.ods-card-bordered": {
+            boxShadow: "none",
+            border: `${odysseyTokens.BorderWidthMain} ${odysseyTokens.BorderStyleMain} ${odysseyTokens.HueNeutral50}`,
+          },
+
           "&.ods-card-compact": {
             marginBlockEnd: odysseyTokens.Spacing2,
             padding: odysseyTokens.Spacing4,
