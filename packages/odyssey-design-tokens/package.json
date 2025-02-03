@@ -6,12 +6,16 @@
   "license": "Apache-2.0",
   "sideEffects": false,
   "type": "module",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "default": "./dist/index.js"
+      "types": "./dist/index.d.ts",
+      "node": "./dist/index.cjs",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.cjs"
     }
   },
   "repository": {

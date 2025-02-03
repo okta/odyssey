@@ -10,11 +10,18 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+const presetEnvConfig = {
+  cjs: {},
+  esm: {
+    modules: false,
+  },
+};
+
 /**
  * @type {(api: import('@babel/core').ConfigAPI) => import('@babel/core').TransformOptions}
  */
 const babelConfig = (api) => {
-  // @ts-expect-error Something is wrong with this type as this function does exist.
+  // @ts-expect-error Something is wrong with this type. The function exists.
   api.cache(true);
 
   return {
@@ -72,15 +79,21 @@ const babelConfig = (api) => {
             },
             "icons",
           ],
+          [
+            "replace-import-extension",
+            process.env.ODYSSEY_BUILD_MODE === "cjs"
+              ? {
+                  extMapping: { ".js": ".cjs" },
+                }
+              : {
+                  extMapping: { ".js": ".mjs" },
+                },
+          ],
         ],
         presets: [
           [
             "@babel/preset-env",
-            process.env.ODYSSEY_CJS_BUILD
-              ? {}
-              : {
-                  modules: false,
-                },
+            presetEnvConfig[process.env.ODYSSEY_BUILD_MODE],
           ],
           [
             "@babel/preset-react",

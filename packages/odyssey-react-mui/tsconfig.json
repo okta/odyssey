@@ -11,6 +11,6 @@
     "sourceMap": true,
     "types": ["vitest/globals"]
   },
-  "include": ["*", "./src/**/*", "./scripts/**/*"],
+  "include": ["*", "**/src/**/*", "**/properties/**/*", "**/scripts/**/*"],
   "exclude": ["**/dist/**/*"]
 }

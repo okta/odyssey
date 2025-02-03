@@ -146,7 +146,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:^7.11.6, @babel/core@npm:^7.12.3, @babel/core@npm:^7.18.9, @babel/core@npm:^7.21.3, @babel/core@npm:^7.22.5, @babel/core@npm:^7.23.9, @babel/core@npm:^7.7.5":
+"@babel/core@npm:^7.11.6, @babel/core@npm:^7.12.3, @babel/core@npm:^7.18.9, @babel/core@npm:^7.21.3, @babel/core@npm:^7.22.5, @babel/core@npm:^7.7.5":
   version: 7.23.9
   resolution: "@babel/core@npm:7.23.9"
   dependencies:
@@ -4973,7 +4973,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-design-tokens@workspace:*, @okta/odyssey-design-tokens@workspace:^, @okta/odyssey-design-tokens@workspace:packages/odyssey-design-tokens":
+"@okta/odyssey-design-tokens@workspace:*, @okta/odyssey-design-tokens@workspace:packages/odyssey-design-tokens":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-design-tokens@workspace:packages/odyssey-design-tokens"
   dependencies:
@@ -5045,7 +5045,7 @@ __metadata:
     "@mui/utils": "npm:^5.16.14"
     "@mui/x-date-pickers": "npm:^7.2.0"
     "@okta/browserslist-config-odyssey": "workspace:*"
-    "@okta/odyssey-design-tokens": "workspace:^"
+    "@okta/odyssey-design-tokens": "workspace:*"
     "@okta/odyssey-icons": "workspace:*"
     "@okta/odyssey-typescript": "workspace:*"
     "@svgr/cli": "npm:^7.0.0"
@@ -5063,6 +5063,7 @@ __metadata:
     "@vitest/coverage-v8": "npm:^2.1.8"
     "@vitest/ui": "npm:^2.1.5"
     babel-plugin-import: "npm:^1.13.8"
+    babel-plugin-replace-import-extension: "npm:^1.1.4"
     chokidar-cli: "npm:^3.0.0"
     concurrently: "npm:^8.2.2"
     date-fns: "npm:^2.30.0"
@@ -5095,7 +5096,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-storybook@workspace:packages/odyssey-storybook"
   dependencies:
-    "@babel/core": "npm:^7.23.9"
     "@emotion/react": "npm:^11.14.0"
     "@emotion/styled": "npm:^11.14.0"
     "@faker-js/faker": "npm:^8.4.1"
@@ -5104,21 +5104,21 @@ __metadata:
     "@okta/odyssey-react-mui": "workspace:*"
     "@okta/odyssey-typescript": "workspace:*"
     "@pxblue/storybook-rtl-addon": "npm:^1.1.0"
-    "@storybook/addon-a11y": "npm:^8.4.7"
-    "@storybook/addon-essentials": "npm:^8.4.7"
-    "@storybook/addon-interactions": "npm:^8.4.7"
-    "@storybook/addon-links": "npm:^8.4.7"
-    "@storybook/addon-mdx-gfm": "npm:^8.4.7"
-    "@storybook/blocks": "npm:^8.4.7"
-    "@storybook/components": "npm:^8.4.7"
-    "@storybook/core-events": "npm:^8.4.7"
-    "@storybook/manager-api": "npm:^8.4.7"
-    "@storybook/preview-api": "npm:^8.4.7"
-    "@storybook/react": "npm:^8.4.7"
-    "@storybook/react-vite": "npm:^8.4.7"
-    "@storybook/test": "npm:^8.4.7"
+    "@storybook/addon-a11y": "npm:8.4.7"
+    "@storybook/addon-essentials": "npm:8.4.7"
+    "@storybook/addon-interactions": "npm:8.4.7"
+    "@storybook/addon-links": "npm:8.4.7"
+    "@storybook/addon-mdx-gfm": "npm:8.4.7"
+    "@storybook/blocks": "npm:8.4.7"
+    "@storybook/components": "npm:8.4.7"
+    "@storybook/core-events": "npm:8.4.7"
+    "@storybook/manager-api": "npm:8.4.7"
+    "@storybook/preview-api": "npm:8.4.7"
+    "@storybook/react": "npm:8.4.7"
+    "@storybook/react-vite": "npm:8.4.7"
+    "@storybook/test": "npm:8.4.7"
     "@storybook/test-runner": "npm:^0.21.0"
-    "@storybook/theming": "npm:^8.4.7"
+    "@storybook/theming": "npm:8.4.7"
     "@types/mdx": "npm:^2.0.11"
     "@types/react": "npm:^18.2.55"
     "@types/react-dom": "npm:^18.2.19"
@@ -5133,7 +5133,7 @@ __metadata:
     prop-types: "npm:^15.8.1"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
-    storybook: "npm:^8.4.7"
+    storybook: "npm:8.4.7"
     storybook-addon-rtl: "npm:^1.0.1"
     typescript: "npm:^5.6.3"
     vite: "npm:^6.0.7"
@@ -5473,7 +5473,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-a11y@npm:^8.4.7":
+"@storybook/addon-a11y@npm:8.4.7":
   version: 8.4.7
   resolution: "@storybook/addon-a11y@npm:8.4.7"
   dependencies:
@@ -5543,7 +5543,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-essentials@npm:^8.4.7":
+"@storybook/addon-essentials@npm:8.4.7":
   version: 8.4.7
   resolution: "@storybook/addon-essentials@npm:8.4.7"
   dependencies:
@@ -5574,7 +5574,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-interactions@npm:^8.4.7":
+"@storybook/addon-interactions@npm:8.4.7":
   version: 8.4.7
   resolution: "@storybook/addon-interactions@npm:8.4.7"
   dependencies:
@@ -5589,7 +5589,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-links@npm:^8.4.7":
+"@storybook/addon-links@npm:8.4.7":
   version: 8.4.7
   resolution: "@storybook/addon-links@npm:8.4.7"
   dependencies:
@@ -5606,7 +5606,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-mdx-gfm@npm:^8.4.7":
+"@storybook/addon-mdx-gfm@npm:8.4.7":
   version: 8.4.7
   resolution: "@storybook/addon-mdx-gfm@npm:8.4.7"
   dependencies:
@@ -5662,7 +5662,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/blocks@npm:8.4.7, @storybook/blocks@npm:^8.4.7":
+"@storybook/blocks@npm:8.4.7":
   version: 8.4.7
   resolution: "@storybook/blocks@npm:8.4.7"
   dependencies:
@@ -5696,7 +5696,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/components@npm:8.4.7, @storybook/components@npm:^8.4.7":
+"@storybook/components@npm:8.4.7":
   version: 8.4.7
   resolution: "@storybook/components@npm:8.4.7"
   peerDependencies:
@@ -5705,7 +5705,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/core-events@npm:^8.4.7":
+"@storybook/core-events@npm:8.4.7":
   version: 8.4.7
   resolution: "@storybook/core-events@npm:8.4.7"
   peerDependencies:
@@ -5808,7 +5808,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/manager-api@npm:8.4.7, @storybook/manager-api@npm:^8.4.7":
+"@storybook/manager-api@npm:8.4.7":
   version: 8.4.7
   resolution: "@storybook/manager-api@npm:8.4.7"
   peerDependencies:
@@ -5817,7 +5817,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/preview-api@npm:8.4.7, @storybook/preview-api@npm:^8.4.7":
+"@storybook/preview-api@npm:8.4.7":
   version: 8.4.7
   resolution: "@storybook/preview-api@npm:8.4.7"
   peerDependencies:
@@ -5837,7 +5837,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react-vite@npm:^8.4.7":
+"@storybook/react-vite@npm:8.4.7":
   version: 8.4.7
   resolution: "@storybook/react-vite@npm:8.4.7"
   dependencies:
@@ -5859,7 +5859,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react@npm:8.4.7, @storybook/react@npm:^8.4.7":
+"@storybook/react@npm:8.4.7":
   version: 8.4.7
   resolution: "@storybook/react@npm:8.4.7"
   dependencies:
@@ -5915,7 +5915,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/test@npm:8.4.7, @storybook/test@npm:^8.4.7":
+"@storybook/test@npm:8.4.7":
   version: 8.4.7
   resolution: "@storybook/test@npm:8.4.7"
   dependencies:
@@ -5951,7 +5951,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/theming@npm:8.4.7, @storybook/theming@npm:^8.4.7":
+"@storybook/theming@npm:8.4.7":
   version: 8.4.7
   resolution: "@storybook/theming@npm:8.4.7"
   peerDependencies:
@@ -8001,6 +8001,13 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.4.0 || ^8.0.0-0 <8.0.0
   checksum: 10/d12696e6b3f280eb78fac551619ca4389262db62c7352cd54bf679d830df8b35596eef2de77cf00db6648eada1c99d49c4f40636dbc9c335a1e5420cfef96750
+  languageName: node
+  linkType: hard
+
+"babel-plugin-replace-import-extension@npm:^1.1.4":
+  version: 1.1.4
+  resolution: "babel-plugin-replace-import-extension@npm:1.1.4"
+  checksum: 10/9371b7d541f09e68b8d43d9df27a9932ebaac21eafc669a4cc3d5771dcdbf329347fc58cd4f0cf3022131b1f2c86357946e48f7fd4b943ad7e2ed42990f66efc
   languageName: node
   linkType: hard
 
@@ -18767,7 +18774,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"storybook@npm:^8.4.7":
+"storybook@npm:8.4.7":
   version: 8.4.7
   resolution: "storybook@npm:8.4.7"
   dependencies:
