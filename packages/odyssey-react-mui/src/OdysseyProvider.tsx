@@ -85,6 +85,7 @@ const OdysseyProvider = <SupportedLanguages extends string>({
     </OdysseyThemeProvider>
   </OdysseyCacheProvider>
 );
+OdysseyProvider.displayName = "OdysseyProvider";
 
 const MemoizedOdysseyProvider = memo(OdysseyProvider) as typeof OdysseyProvider;
 
