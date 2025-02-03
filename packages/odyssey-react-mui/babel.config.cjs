@@ -11,14 +11,9 @@
  */
 
 const presetEnvConfig = {
+  cjs: {},
   esm: {
     modules: false,
-  },
-  cjs: {},
-  node: {
-    targets: {
-      node: "current",
-    },
   },
 };
 
@@ -26,7 +21,7 @@ const presetEnvConfig = {
  * @type {(api: import('@babel/core').ConfigAPI) => import('@babel/core').TransformOptions}
  */
 const babelConfig = (api) => {
-  // @ts-expect-error Something is wrong with this type as this function does exist.
+  // @ts-expect-error Something is wrong with this type. The function exists.
   api.cache(true);
 
   return {
@@ -86,8 +81,7 @@ const babelConfig = (api) => {
           ],
           [
             "replace-import-extension",
-            process.env.ODYSSEY_BUILD_MODE === "cjs" ||
-            process.env.ODYSSEY_BUILD_MODE === "node"
+            process.env.ODYSSEY_BUILD_MODE === "cjs"
               ? {
                   extMapping: { ".js": ".cjs" },
                 }
