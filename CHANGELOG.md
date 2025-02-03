@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.31.4](https://github.com/okta/odyssey/compare/v1.31.3...v1.31.4) (2025-02-03)
+
+### Bug Fixes
+
+- get app content out of shadow DOM altogether ([bab1cb2](https://github.com/okta/odyssey/commit/bab1cb28f185f1676bf97e1239ef89d055a04820))
+- sidenav footer component does not use the theme background color ([#2489](https://github.com/okta/odyssey/issues/2489)) ([e2e90ec](https://github.com/okta/odyssey/commit/e2e90ec90580fd5b9324a1f7142ad8444424dfec))
+
 ## [1.31.1](https://github.com/okta/odyssey/compare/v1.31.0...v1.31.1) (2025-01-23)
 
 **Note:** Version bump only for package odyssey
