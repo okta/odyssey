@@ -6,9 +6,10 @@
   "license": "Apache-2.0",
   "sideEffects": false,
   "type": "module",
-  "module": "dist/esm/index.js",
-  "main": "dist/cjs/index.js",
   "types": "dist/types/index.d.ts",
+  "browser": "dist/cjs/index.cjs",
+  "main": "dist/cjs/index.cjs",
+  "module": "dist/esm/index.mjs",
   "typesVersions": {
     "*": {
       "*": [
@@ -34,44 +35,60 @@
   "exports": {
     "./icons": {
       "types": "./dist/types/icons.generated/index.d.ts",
-      "default": "./dist/esm/icons.generated/index.js"
+      "node": "./dist/cjs/icons.generated/index.cjs",
+      "import": "./dist/esm/icons.generated/index.mjs",
+      "require": "./dist/cjs/icons.generated/index.cjs",
+      "default": "./dist/cjs/icons.generated/index.cjs"
     },
     "./labs": {
       "types": "./dist/types/labs/index.d.ts",
-      "default": "./dist/esm/labs/index.js"
+      "node": "./dist/cjs/labs/index.cjs",
+      "import": "./dist/esm/labs/index.mjs",
+      "require": "./dist/cjs/labs/index.cjs",
+      "default": "./dist/cjs/labs/index.cjs"
     },
     "./test-selectors": {
       "types": "./dist/types/test-selectors/index.d.ts",
-      "default": "./dist/esm/test-selectors/index.js"
+      "node": "./dist/cjs/test-selectors/index.cjs",
+      "import": "./dist/esm/test-selectors/index.mjs",
+      "require": "./dist/cjs/test-selectors/index.cjs",
+      "default": "./dist/cjs/test-selectors/index.cjs"
     },
     "./ui-shell": {
       "types": "./dist/types/ui-shell/index.d.ts",
-      "default": "./dist/esm/ui-shell/index.js"
+      "node": "./dist/cjs/ui-shell/index.cjs",
+      "import": "./dist/esm/ui-shell/index.mjs",
+      "require": "./dist/cjs/ui-shell/index.cjs",
+      "default": "./dist/cjs/ui-shell/index.cjs"
     },
     "./web-component": {
       "types": "./dist/types/web-component/index.d.ts",
-      "default": "./dist/esm/web-component/index.js"
+      "node": "./dist/cjs/web-component/index.cjs",
+      "import": "./dist/esm/web-component/index.mjs",
+      "require": "./dist/cjs/web-component/index.cjs",
+      "default": "./dist/cjs/web-component/index.cjs"
     },
     ".": {
       "types": "./dist/types/index.d.ts",
-      "default": "./dist/esm/index.js"
+      "node": "./dist/cjs/index.cjs",
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/cjs/index.cjs",
+      "default": "./dist/cjs/index.cjs"
     },
     "./README.md": "./README.md"
   },
   "scripts": {
     "build:clean": "rimraf dist",
+    "build:source:cjs": "ODYSSEY_BUILD_MODE=cjs NODE_ENV=production BROWSERSLIST_ENV=modern babel src --out-dir dist/cjs --extensions .js,.jsx,.ts,.tsx --source-maps --out-file-extension .cjs",
+    "build:source:esm": "ODYSSEY_BUILD_MODE=esm NODE_ENV=production BROWSERSLIST_ENV=modern babel src --out-dir dist/esm --extensions .js,.jsx,.ts,.tsx --source-maps --out-file-extension .mjs",
     "build:source": "yarn build:source:esm && yarn build:source:cjs",
-    "build:source:esm": "NODE_ENV=production BROWSERSLIST_ENV=modern babel src --out-dir dist/esm --extensions .js,.jsx,.ts,.tsx --source-maps",
-    "build:source:esm:watch": "yarn build:source:esm --watch",
-    "build:source:cjs": "ODYSSEY_CJS_BUILD=true NODE_ENV=production BROWSERSLIST_ENV=modern babel src --out-dir dist/cjs --extensions .js,.jsx,.ts,.tsx --source-maps",
-    "build:source:cjs:watch": "yarn build:source:cjs --watch",
     "build:testSelectors": "tsx scripts/generateTestSelectorsJson.ts",
     "build:translationsJson": "tsx scripts/properties-to-ts.ts bundle",
     "build:types": "tsc --project tsconfig.production.json",
     "build": "yarn build:clean && yarn build:translationsJson && yarn build:types && yarn build:source && yarn build:testSelectors",
     "ci:coverage": "NODE_ENV=test yarn vitest run --coverage",
     "dev:coverage": "NODE_ENV=test yarn vitest --coverage",
-    "dev:source": "yarn concurrently npm:build:source:esm:watch npm:build:source:cjs:watch",
+    "dev:source": "yarn build:source:esm --watch",
     "dev:test": "NODE_ENV=test vitest",
     "dev:translationsJson": "yarn build:translationsJson --watch",
     "dev:types": "yarn build:types --watch",
@@ -101,7 +118,7 @@
     "@mui/system": "^5.16.14",
     "@mui/utils": "^5.16.14",
     "@mui/x-date-pickers": "^7.2.0",
-    "@okta/odyssey-design-tokens": "workspace:^",
+    "@okta/odyssey-design-tokens": "workspace:*",
     "@types/luxon": "^3.4.2",
     "date-fns": "^2.30.0",
     "dom-accessibility-api": "^0.7.0",
@@ -137,6 +154,7 @@
     "@vitest/coverage-v8": "^2.1.8",
     "@vitest/ui": "^2.1.5",
     "babel-plugin-import": "^1.13.8",
+    "babel-plugin-replace-import-extension": "^1.1.4",
     "chokidar-cli": "^3.0.0",
     "concurrently": "^8.2.2",
     "jest-axe": "^5.0.1",
