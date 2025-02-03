@@ -39,7 +39,7 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext.js";
-import { Heading5, Paragraph, Support } from "../../Typography.js";
+import { Paragraph, Support, Typography } from "../../Typography.js";
 import {
   ChevronDownIcon,
   ChevronUpIcon,
@@ -274,7 +274,14 @@ const DataCard: DataCardComponent = <TData extends MRT_RowData>({
             variant={variant}
           >
             {overline && <Support component="div">{overline}</Support>}
-            {title && <Heading5 component="div">{title}</Heading5>}
+            {title && (
+              <Typography
+                variant={variant === "compact" ? "h6" : "h5"}
+                component="div"
+              >
+                {title}
+              </Typography>
+            )}
             {description && (
               <Paragraph color="textSecondary">{description}</Paragraph>
             )}
@@ -321,7 +328,7 @@ const DataCard: DataCardComponent = <TData extends MRT_RowData>({
 
   return (
     <MuiCard
-      className={`${onClick ? "isClickable" : ""} ${Accessory ? "hasAccessory" : ""} ods-card-${variant}`}
+      className={`${onClick ? "isClickable" : ""} ${Accessory ? "hasAccessory" : ""} ods-card-bordered ods-card-${variant}`}
       role="listitem"
     >
       {onClick ? (
