@@ -133,8 +133,7 @@ export type UiShellContentProps = {
 } & UiShellNavComponentProps;
 
 const appContainerStyles = {
-  "overflow-x": "hidden",
-  "overflow-y": "auto",
+  overflow: "auto",
 };
 
 const setStylesToMatchElement = (
