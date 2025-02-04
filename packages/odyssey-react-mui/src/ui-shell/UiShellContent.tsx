@@ -109,6 +109,10 @@ export type UiShellContentProps = {
    */
   appContainerElement: HTMLDivElement;
   /**
+   * Controls the scrolling behavior of the app content area. Defaults to "vertical".
+   */
+  appContainerScrollingMode?: "none" | "horizontal" | "vertical" | "both";
+  /**
    * defaults to `true`. If `false`, the content area will have no padding provided
    */
   hasStandardAppContentPadding?: boolean;
@@ -131,10 +135,6 @@ export type UiShellContentProps = {
     topNavRightSide?: TopNavProps["rightSideComponent"];
   };
 } & UiShellNavComponentProps;
-
-const appContainerStyles = {
-  overflow: "auto",
-};
 
 const setStylesToMatchElement = (
   elementToStyle: HTMLElement,
@@ -162,6 +162,7 @@ const setStylesToMatchElement = (
 const UiShellContent = ({
   appContainerElement,
   hasStandardAppContentPadding = true,
+  appContainerScrollingMode = "vertical",
   initialVisibleSections = ["TopNav", "SideNav", "AppSwitcher"],
   onError = console.error,
   optionalComponents,
@@ -175,15 +176,35 @@ const UiShellContent = ({
   const uiShellContext = useUiShellContext();
 
   const paddingStyles = useMemo<Record<string, string | null>>(
-    () =>
-      hasStandardAppContentPadding
+    () => ({
+      ...(hasStandardAppContentPadding
         ? {
-            ...appContainerStyles,
             "padding-block": odysseyDesignTokens.Spacing5 ?? null,
             "padding-inline": odysseyDesignTokens.Spacing8 ?? null,
           }
-        : appContainerStyles,
-    [hasStandardAppContentPadding, odysseyDesignTokens],
+        : {}),
+      ...(appContainerScrollingMode === "horizontal" ||
+      appContainerScrollingMode === "both"
+        ? {
+            "overflow-x": "auto",
+          }
+        : {
+            "overflow-x": "hidden",
+          }),
+      ...(appContainerScrollingMode === "vertical" ||
+      appContainerScrollingMode === "both"
+        ? {
+            "overflow-y": "auto",
+          }
+        : {
+            "overflow-y": "hidden",
+          }),
+    }),
+    [
+      hasStandardAppContentPadding,
+      appContainerScrollingMode,
+      odysseyDesignTokens,
+    ],
   );
 
   useEffect(() => {
