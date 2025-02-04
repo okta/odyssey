@@ -70,6 +70,7 @@ export type UiShellProps = {
     | "appBackgroundColor"
     | "appBackgroundContrastMode"
     | "appContainerElement"
+    | "appContainerScrollingMode"
     | "hasStandardAppContentPadding"
     | "initialVisibleSections"
     | "onError"
@@ -89,6 +90,7 @@ const UiShell = ({
   appComponent,
   appRootElement,
   appContainerElement,
+  appContainerScrollingMode,
   hasStandardAppContentPadding,
   initialVisibleSections,
   onError = console.error,
@@ -132,6 +134,7 @@ const UiShell = ({
             <UiShellContent
               {...componentProps}
               appContainerElement={appContainerElement}
+              appContainerScrollingMode={appContainerScrollingMode}
               hasStandardAppContentPadding={hasStandardAppContentPadding}
               initialVisibleSections={initialVisibleSections}
               onError={onError}

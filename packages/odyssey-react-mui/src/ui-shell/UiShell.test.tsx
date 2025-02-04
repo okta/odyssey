@@ -278,4 +278,89 @@ describe("UiShell", () => {
     expect(stateUpdater).toHaveBeenCalledWith(defaultComponentProps);
     expect(stateUpdater).toHaveBeenCalledTimes(1);
   });
+
+  test("places expected padding on appContainerElement", async () => {
+    const rootElement = document.createElement("div");
+
+    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
+    document.body.append(rootElement);
+
+    const appContainerElement = document.createElement("div");
+    document.body.append(appContainerElement);
+
+    const stylesRootElement = document.createElement("div");
+
+    render(
+      <UiShell
+        appComponent={<div />}
+        appContainerElement={appContainerElement}
+        appContainerScrollingMode="both"
+        appRootElement={document.createElement("div")}
+        onSubscriptionCreated={() => {}}
+        stylesRootElement={stylesRootElement}
+        subscribeToPropChanges={() => () => {}}
+      />,
+    );
+
+    await waitFor(() => {
+      expect(appContainerElement.style.getPropertyValue("position")).toEqual(
+        "absolute",
+      );
+      expect(appContainerElement.style.getPropertyValue("overflow-x")).toEqual(
+        "auto",
+      );
+      expect(appContainerElement.style.getPropertyValue("overflow-y")).toEqual(
+        "auto",
+      );
+      expect(
+        appContainerElement.style.getPropertyValue("padding-inline"),
+      ).toEqual("3.42857143rem");
+      expect(
+        appContainerElement.style.getPropertyValue("padding-block"),
+      ).toEqual("1.71428571rem");
+    });
+  });
+
+  test("places expected padding on appContainerElement", async () => {
+    const rootElement = document.createElement("div");
+
+    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
+    document.body.append(rootElement);
+
+    const appContainerElement = document.createElement("div");
+    document.body.append(appContainerElement);
+
+    const stylesRootElement = document.createElement("div");
+
+    render(
+      <UiShell
+        appComponent={<div />}
+        appContainerElement={appContainerElement}
+        appContainerScrollingMode="none"
+        appRootElement={document.createElement("div")}
+        hasStandardAppContentPadding={false}
+        onSubscriptionCreated={() => {}}
+        stylesRootElement={stylesRootElement}
+        subscribeToPropChanges={() => () => {}}
+      />,
+    );
+
+    await waitFor(() => {
+      expect(appContainerElement.style.getPropertyValue("position")).toEqual(
+        "absolute",
+      );
+      expect(appContainerElement.style.getPropertyValue("overflow-x")).toEqual(
+        "hidden",
+      );
+      expect(appContainerElement.style.getPropertyValue("overflow-y")).toEqual(
+        "hidden",
+      );
+      expect(
+        appContainerElement.style.getPropertyValue("padding-inline"),
+      ).toEqual("");
+      expect(
+        appContainerElement.style.getPropertyValue("padding-block"),
+      ).toEqual("");
+    });
+  });
 });
