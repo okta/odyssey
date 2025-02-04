@@ -42,6 +42,7 @@ export const optionalComponentSlotNames: Record<
 export const renderUiShell = ({
   appBackgroundColor,
   appBackgroundContrastMode,
+  appContainerScrollingMode,
   appRootElement: explicitAppRootElement,
   hasStandardAppContentPadding,
   initialVisibleSections,
@@ -66,6 +67,7 @@ export const renderUiShell = ({
   UiShellProps,
   | "appBackgroundColor"
   | "appBackgroundContrastMode"
+  | "appContainerScrollingMode"
   | "hasStandardAppContentPadding"
   | "initialVisibleSections"
   | "sideNavBackgroundColor"
@@ -120,6 +122,7 @@ export const renderUiShell = ({
           appBackgroundContrastMode={appBackgroundContrastMode}
           appComponent={appComponent}
           appContainerElement={appContainerElement}
+          appContainerScrollingMode={appContainerScrollingMode}
           appRootElement={reactRootElements.appRootElement}
           hasStandardAppContentPadding={hasStandardAppContentPadding}
           initialVisibleSections={initialVisibleSections}
