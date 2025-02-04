@@ -20,7 +20,7 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext.js";
-import { Heading4, Subordinate } from "../../Typography.js";
+import { Heading3, Subordinate } from "../../Typography.js";
 import { useHasUiShell } from "../../ui-shell/useHasUiShell.js";
 
 export type PageTemplateProps = {
@@ -193,7 +193,7 @@ const PageTemplate = ({
     >
       <TemplateHeader>
         <TemplateHeaderPrimaryContent>
-          {title && <Heading4>{title}</Heading4>}
+          {title && <Heading3>{title}</Heading3>}
           {description && <Subordinate>{description}</Subordinate>}
         </TemplateHeaderPrimaryContent>
 
