@@ -79,6 +79,14 @@ const babelConfig = (api) => {
             },
             "icons",
           ],
+          [
+            "replace-import-extension",
+            process.env.ODYSSEY_BUILD_MODE === "cjs"
+              ? {
+                  extMapping: { ".js": ".cjs" },
+                }
+              : {},
+          ],
         ],
         presets: [
           [
