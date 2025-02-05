@@ -11,9 +11,8 @@
  */
 
 declare global {
-  interface Window {
-    cspNonce: string;
-  }
+  // eslint-disable-next-line no-var
+  var cspNonce: string; // Adding types to `globalThis` requires we use `var`.
 }
 
 import createCache, { StylisPlugin } from "@emotion/cache";
@@ -64,7 +63,7 @@ const OdysseyCacheProvider = ({
         container: emotionRootElement || emotionRoot,
       }),
       key: uniqueAlphabeticalId,
-      nonce: nonce ?? window.cspNonce,
+      nonce: nonce ?? globalThis.cspNonce,
       prepend: true,
       speedy: hasShadowDom ? false : true, // <-- Needs to be set to false when shadow-dom is used! https://github.com/emotion-js/emotion/issues/2053#issuecomment-713429122
       ...(stylisPlugins && { stylisPlugins }),
