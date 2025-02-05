@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.32.0](https://github.com/okta/odyssey/compare/v1.31.0...v1.32.0) (2025-02-05)
+
+### Bug Fixes
+
+- generate scss file to include in published package ([#2482](https://github.com/okta/odyssey/issues/2482)) ([e0352e5](https://github.com/okta/odyssey/commit/e0352e52be9c272c29e516ec85403e8726f6dee9))
+- Next.js esm and cjs issues with SSR ([#2491](https://github.com/okta/odyssey/issues/2491)) ([8f0ac43](https://github.com/okta/odyssey/commit/8f0ac431cb398bf07e8946fc4eb915044916f239))
+
 ## [1.31.4](https://github.com/okta/odyssey/compare/v1.31.3...v1.31.4) (2025-02-03)
 
 **Note:** Version bump only for package @okta/odyssey-design-tokens
