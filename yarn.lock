@@ -5063,7 +5063,6 @@ __metadata:
     "@vitest/coverage-v8": "npm:^2.1.8"
     "@vitest/ui": "npm:^2.1.5"
     babel-plugin-import: "npm:^1.13.8"
-    babel-plugin-replace-import-extension: "npm:^1.1.4"
     chokidar-cli: "npm:^3.0.0"
     concurrently: "npm:^8.2.2"
     date-fns: "npm:^2.30.0"
@@ -8001,13 +8000,6 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.4.0 || ^8.0.0-0 <8.0.0
   checksum: 10/d12696e6b3f280eb78fac551619ca4389262db62c7352cd54bf679d830df8b35596eef2de77cf00db6648eada1c99d49c4f40636dbc9c335a1e5420cfef96750
-  languageName: node
-  linkType: hard
-
-"babel-plugin-replace-import-extension@npm:^1.1.4":
-  version: 1.1.4
-  resolution: "babel-plugin-replace-import-extension@npm:1.1.4"
-  checksum: 10/9371b7d541f09e68b8d43d9df27a9932ebaac21eafc669a4cc3d5771dcdbf329347fc58cd4f0cf3022131b1f2c86357946e48f7fd4b943ad7e2ed42990f66efc
   languageName: node
   linkType: hard
 
