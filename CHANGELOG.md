@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.32.0](https://github.com/okta/odyssey/compare/v1.31.0...v1.32.0) (2025-02-05)
+
+### Features
+
+- cjs export ([#2480](https://github.com/okta/odyssey/issues/2480)) ([9482a70](https://github.com/okta/odyssey/commit/9482a7058750c9fa4448ade37e97b4d56c4f7e4a))
+- do not put ScopedCssBaseline around app content in UiShell ([#2486](https://github.com/okta/odyssey/issues/2486)) ([a8c5a5f](https://github.com/okta/odyssey/commit/a8c5a5fc5d2d2a61aaef11e0fc4953cf021c947e))
+
+### Bug Fixes
+
+- generate scss file to include in published package ([#2482](https://github.com/okta/odyssey/issues/2482)) ([e0352e5](https://github.com/okta/odyssey/commit/e0352e52be9c272c29e516ec85403e8726f6dee9))
+- move vitest deps to devDeps ([#2481](https://github.com/okta/odyssey/issues/2481)) ([4a3cc37](https://github.com/okta/odyssey/commit/4a3cc37bd4947a360a609d695e5b36d76fa8c9e4))
+- Next.js esm and cjs issues with SSR ([#2491](https://github.com/okta/odyssey/issues/2491)) ([8f0ac43](https://github.com/okta/odyssey/commit/8f0ac431cb398bf07e8946fc4eb915044916f239))
+- sidenav footer component does not use the theme background color ([#2489](https://github.com/okta/odyssey/issues/2489)) ([bb4538d](https://github.com/okta/odyssey/commit/bb4538dcfb27c64575c27a426e7f4fe08850a251))
+- type update for sidenavitem to ignore isSortable prop ([#2485](https://github.com/okta/odyssey/issues/2485)) ([bfae7b2](https://github.com/okta/odyssey/commit/bfae7b269a3e6021de4d3bb543120e7a66ac4580))
+- UI Shell App Container ([#2495](https://github.com/okta/odyssey/issues/2495)) ([e93061c](https://github.com/okta/odyssey/commit/e93061cd7a4ac04c9b3167e52474c2f9568e48cd))
+- uishell should allow horizontal scrolling if necessary ([#2493](https://github.com/okta/odyssey/issues/2493)) ([b134f23](https://github.com/okta/odyssey/commit/b134f237af9d1b7bf5d4ff8a80ea00405fabfe6b))
+
 ## [1.31.4](https://github.com/okta/odyssey/compare/v1.31.3...v1.31.4) (2025-02-03)
 
 ### Bug Fixes
