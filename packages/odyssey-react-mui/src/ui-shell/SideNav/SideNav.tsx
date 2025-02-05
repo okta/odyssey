@@ -212,7 +212,7 @@ const SideNavScrollableContainer = styled("div", {
   display: "grid",
   gridTemplateRows: "1fr max-content",
   flex: "1 1 100%",
-  overflowY: "scroll",
+  overflowY: "auto",
   paddingInline: odysseyDesignTokens.Spacing2,
 }));
 

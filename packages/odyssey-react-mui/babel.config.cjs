@@ -85,9 +85,7 @@ const babelConfig = (api) => {
               ? {
                   extMapping: { ".js": ".cjs" },
                 }
-              : {
-                  extMapping: { ".js": ".mjs" },
-                },
+              : {},
           ],
         ],
         presets: [

@@ -11,7 +11,7 @@
  */
 
 import styled from "@emotion/styled";
-import { memo, useEffect, useMemo, type ReactElement } from "react";
+import { memo, useEffect, useMemo, useRef, type ReactElement } from "react";
 import { ErrorBoundary, ErrorBoundaryProps } from "react-error-boundary";
 
 import { AppSwitcher, type AppSwitcherProps } from "./AppSwitcher/index.js";
@@ -173,6 +173,8 @@ const UiShellContent = ({
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { isContentScrolled, scrollableContentRef: appContainerRef } =
     useScrollState(appContainerElement);
+  const sideNavContainerRef = useRef<HTMLDivElement>(null);
+  const topNavContainerRef = useRef<HTMLDivElement>(null);
   const uiShellContext = useUiShellContext();
 
   const paddingStyles = useMemo<Record<string, string | null>>(
@@ -229,6 +231,14 @@ const UiShellContent = ({
       const observer = new ResizeObserver(updateStyles);
       observer.observe(appContainerRef.current);
 
+      if (sideNavContainerRef.current) {
+        observer.observe(sideNavContainerRef.current);
+      }
+
+      if (topNavContainerRef.current) {
+        observer.observe(topNavContainerRef.current);
+      }
+
       // Set the initial style
       updateStyles();
       return () => observer.disconnect();
@@ -261,7 +271,7 @@ const UiShellContent = ({
         </ScopedCssBaseline>
       </StyledAppSwitcherContainer>
 
-      <StyledSideNavContainer>
+      <StyledSideNavContainer ref={sideNavContainerRef}>
         <ScopedCssBaseline sx={fullHeightStyles}>
           {
             /* If SideNav should be initially visible and we have not yet received props, render SideNav with minimal inputs */
@@ -298,7 +308,7 @@ const UiShellContent = ({
           )}
         </ScopedCssBaseline>
       </StyledSideNavContainer>
-      <StyledTopNavContainer>
+      <StyledTopNavContainer ref={topNavContainerRef}>
         <ScopedCssBaseline sx={fullHeightStyles}>
           {
             /* If TopNav should be initially visible and we have not yet received props, render Topnav with minimal inputs */
