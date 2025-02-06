@@ -253,12 +253,17 @@ const UiShellContent = ({
         });
       };
 
+      // This element might have changed from `.current`, so it's important to keep track of the old one when we attach event listeners.
+      const sideNavElement = sideNavContainerRef.current;
+
+      sideNavElement?.addEventListener("transitionend", updateStyles);
+
       // Setup a mutation observer to sync later updates
       const observer = new ResizeObserver(updateStyles);
       observer.observe(appContainerRef.current);
 
-      if (sideNavContainerRef.current) {
-        observer.observe(sideNavContainerRef.current);
+      if (sideNavElement) {
+        observer.observe(sideNavElement);
       }
 
       if (topNavContainerRef.current) {
@@ -270,6 +275,7 @@ const UiShellContent = ({
 
       return () => {
         observer.disconnect();
+        sideNavElement?.removeEventListener("transitionend", updateStyles);
       };
     }
     return () => {};
