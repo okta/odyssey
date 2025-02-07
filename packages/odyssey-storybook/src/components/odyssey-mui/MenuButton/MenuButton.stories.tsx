@@ -216,9 +216,7 @@ const clickMenuButton =
         name: args.buttonLabel,
       });
       userEvent.click(buttonElement);
-      await waitFor(() => {
-        axeRun(actionName);
-      });
+      await waitFor(async () => axeRun(actionName));
     });
   };
 
