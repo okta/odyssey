@@ -11,7 +11,14 @@
  */
 
 import styled from "@emotion/styled";
-import { memo, useEffect, useMemo, useRef, type ReactElement } from "react";
+import {
+  CSSProperties,
+  memo,
+  useEffect,
+  useMemo,
+  useRef,
+  type ReactElement,
+} from "react";
 import { ErrorBoundary, ErrorBoundaryProps } from "react-error-boundary";
 
 import { AppSwitcher, type AppSwitcherProps } from "./AppSwitcher/index.js";
@@ -105,7 +112,7 @@ export type UiShellContentProps = {
    */
   appBackgroundContrastMode?: ContrastMode;
   /**
-   * The element within which the app will be rendered. This will be positioned appropriately while being kept out of the shadow DOM.
+   * When passed, the app is expected to render into this element, not the Shadow DOM. UI Shell will position this element appropriately as if it was rendered in the app content area of the Shadow DOM.
    */
   appContainerElement: HTMLDivElement;
   /**
@@ -136,20 +143,39 @@ export type UiShellContentProps = {
   };
 } & UiShellNavComponentProps;
 
-const setStylesToMatchElement = (
-  elementToStyle: HTMLElement,
-  elementToReference: HTMLElement,
-  additionalStyles: Record<string, string | null>,
-) => {
-  const boundingRect = elementToReference.getBoundingClientRect();
-  elementToStyle.style.setProperty("position", "absolute");
-  elementToStyle.style.setProperty("top", `${boundingRect.y}px`);
-  elementToStyle.style.setProperty("left", `${boundingRect.x}px`);
-  elementToStyle.style.setProperty("width", `${boundingRect.width}px`);
-  elementToStyle.style.setProperty("height", `${boundingRect.height}px`);
-  for (const key in additionalStyles) {
-    elementToStyle.style.setProperty(key, additionalStyles[key]);
-  }
+export const convertCamelCaseToKebabCase = (string: string) =>
+  string.replace(/([A-Z])/g, "-$1").toLowerCase();
+
+export const setStylesToMatchElement = ({
+  additionalStyles,
+  appContainerElement,
+  appContentReferenceElement,
+}: {
+  additionalStyles: CSSProperties;
+  appContainerElement: HTMLElement;
+  appContentReferenceElement: HTMLElement;
+}) => {
+  const boundingRect = appContentReferenceElement.getBoundingClientRect();
+
+  appContainerElement.style.setProperty("position", "absolute");
+  appContainerElement.style.setProperty("top", `${boundingRect.y}px`);
+  appContainerElement.style.setProperty("left", `${boundingRect.x}px`);
+  appContainerElement.style.setProperty("width", `${boundingRect.width}px`);
+  appContainerElement.style.setProperty("height", `${boundingRect.height}px`);
+
+  (
+    Object.entries(additionalStyles) as Array<
+      [
+        keyof typeof additionalStyles,
+        (typeof additionalStyles)[keyof typeof additionalStyles],
+      ]
+    >
+  ).forEach(([cssPropertyName, cssPropertyValue]) => {
+    appContainerElement.style.setProperty(
+      convertCamelCaseToKebabCase(cssPropertyName),
+      String(cssPropertyValue),
+    );
+  });
 };
 
 /**
@@ -177,29 +203,29 @@ const UiShellContent = ({
   const topNavContainerRef = useRef<HTMLDivElement>(null);
   const uiShellContext = useUiShellContext();
 
-  const paddingStyles = useMemo<Record<string, string | null>>(
+  const appContainerElementStyles = useMemo<CSSProperties>(
     () => ({
       ...(hasStandardAppContentPadding
         ? {
-            "padding-block": odysseyDesignTokens.Spacing5 ?? null,
-            "padding-inline": odysseyDesignTokens.Spacing8 ?? null,
+            paddingBlock: odysseyDesignTokens.Spacing5 ?? null,
+            paddingInline: odysseyDesignTokens.Spacing8 ?? null,
           }
         : {}),
       ...(appContainerScrollingMode === "horizontal" ||
       appContainerScrollingMode === "both"
         ? {
-            "overflow-x": "auto",
+            overflowX: "auto",
           }
         : {
-            "overflow-x": "hidden",
+            overflowX: "hidden",
           }),
       ...(appContainerScrollingMode === "vertical" ||
       appContainerScrollingMode === "both"
         ? {
-            "overflow-y": "auto",
+            overflowY: "auto",
           }
         : {
-            "overflow-y": "hidden",
+            overflowY: "hidden",
           }),
     }),
     [
@@ -218,33 +244,42 @@ const UiShellContent = ({
         cancelAnimationFrame(animationFrameId);
         animationFrameId = requestAnimationFrame(() => {
           if (appContainerRef.current) {
-            setStylesToMatchElement(
+            setStylesToMatchElement({
+              additionalStyles: appContainerElementStyles,
+              appContentReferenceElement: appContainerRef.current,
               appContainerElement,
-              appContainerRef.current,
-              paddingStyles,
-            );
+            });
           }
         });
       };
+
+      // This element might have changed from `.current`, so it's important to keep track of the old one when we attach event listeners.
+      const sideNavElement = sideNavContainerRef.current;
+
+      sideNavElement?.addEventListener("transitionend", updateStyles);
 
       // Setup a mutation observer to sync later updates
       const observer = new ResizeObserver(updateStyles);
       observer.observe(appContainerRef.current);
 
-      if (sideNavContainerRef.current) {
-        observer.observe(sideNavContainerRef.current);
+      if (sideNavElement) {
+        observer.observe(sideNavElement);
       }
 
       if (topNavContainerRef.current) {
         observer.observe(topNavContainerRef.current);
       }
 
-      // Set the initial style
+      // Set the initial styles
       updateStyles();
-      return () => observer.disconnect();
+
+      return () => {
+        observer.disconnect();
+        sideNavElement?.removeEventListener("transitionend", updateStyles);
+      };
     }
     return () => {};
-  }, [appContainerRef, appContainerElement, paddingStyles]);
+  }, [appContainerElement, appContainerElementStyles, appContainerRef]);
 
   return (
     <StyledShellContainer odysseyDesignTokens={odysseyDesignTokens}>
