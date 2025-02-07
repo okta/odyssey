@@ -12,11 +12,11 @@
 
 import {
   createContext,
-  useContext,
-  useRef,
-  useLayoutEffect,
-  useState,
   useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
 } from "react";
 import * as Tokens from "@okta/odyssey-design-tokens";
 
@@ -109,7 +109,7 @@ export const useContrastMode = ({
     }
   }, [explicitContrastMode]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const observer = new MutationObserver(updateBackgroundColor);
     observer.observe(document.querySelector("html") as HTMLHtmlElement, {
       attributes: true,
