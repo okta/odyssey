@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.32.1](https://github.com/okta/odyssey/compare/v1.32.0...v1.32.1) (2025-02-07)
+
+### Bug Fixes
+
+- shell content area overlaps side nav in mobile view ([#2497](https://github.com/okta/odyssey/issues/2497)) ([e37b872](https://github.com/okta/odyssey/commit/e37b87285b011f111a5199d93c7d340e7423b64c))
+
 ## [1.32.0](https://github.com/okta/odyssey/compare/v1.31.0...v1.32.0) (2025-02-05)
 
 ### Features
