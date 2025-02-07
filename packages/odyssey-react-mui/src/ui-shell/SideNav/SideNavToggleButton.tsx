@@ -51,7 +51,7 @@ const StyledToggleButton = styled(MuiButton, {
   width: odysseyDesignTokens.Spacing6,
   height: odysseyDesignTokens.Spacing6,
   border: 0,
-  zIndex: 2,
+  zIndex: 200,
 
   "&:focus-visible": {
     boxShadow: `inset 0 0 0 2px ${odysseyDesignTokens.PalettePrimaryMain}`,

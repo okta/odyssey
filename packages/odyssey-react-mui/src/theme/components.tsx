@@ -1217,7 +1217,7 @@ export const getComponents = ({
           [`.${inputBaseClasses.root}.${inputBaseClasses.disabled} &`]: {
             color: odysseyTokens.TypographyColorDisabled,
             WebkitTextFillColor: odysseyTokens.TypographyColorDisabled,
-          } as CSSProperties,
+          } satisfies CSSProperties,
         },
 
         deleteIcon: {
