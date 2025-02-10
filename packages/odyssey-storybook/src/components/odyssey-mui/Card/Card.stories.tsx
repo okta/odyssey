@@ -196,3 +196,47 @@ export const ButtonWithoutImage: Story = {
     </Box>
   ),
 };
+
+export const TileVariant: Story = {
+  render: (args) => {
+    return (
+      <Box sx={{ maxWidth: 262 }}>
+        <Card
+          title={args.title}
+          description={args.description}
+          overline={args.overline}
+          image={<img src="https://placehold.co/128" alt="Example logo" />}
+          variant="tile"
+        />
+      </Box>
+    );
+  },
+};
+
+export const StackVariant: Story = {
+  render: (args) => {
+    return (
+      <Card
+        title={args.title}
+        description={args.description}
+        overline={args.overline}
+        image={<img src="https://placehold.co/128" alt="Example logo" />}
+        variant="stack"
+      />
+    );
+  },
+};
+
+export const CompactVariant: Story = {
+  render: (args) => {
+    return (
+      <Card
+        title={args.title}
+        description={args.description}
+        overline={args.overline}
+        image={<img src="https://placehold.co/128" alt="Example logo" />}
+        variant="compact"
+      />
+    );
+  },
+};
