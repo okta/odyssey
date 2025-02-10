@@ -19,6 +19,7 @@ import {
   useImperativeHandle,
   useMemo,
   useRef,
+  useState,
 } from "react";
 import { Link as NavItemLink } from "@mui/material";
 import {
@@ -84,11 +85,13 @@ export const getBaseNavItemContentStyles = ({
   isSelected,
   odysseyDesignTokens,
   sideNavContrastColors,
+  isActiveDropTarget,
 }: {
   isSelected?: boolean;
   isDisabled?: boolean;
   odysseyDesignTokens: DesignTokens;
   sideNavContrastColors: UiShellColors["sideNavContrastColors"];
+  isActiveDropTarget: boolean;
 }) => ({
   display: "flex",
   alignItems: "center",
@@ -104,6 +107,11 @@ export const getBaseNavItemContentStyles = ({
   borderRadius: odysseyDesignTokens.BorderRadiusMain,
   transition: `backgroundColor ${odysseyDesignTokens.TransitionDurationMain}, color ${odysseyDesignTokens.TransitionDurationMain}`,
   cursor: "pointer",
+  ...(isActiveDropTarget && {
+    backgroundColor:
+      sideNavContrastColors?.itemHoverBackgroundColor ||
+      odysseyDesignTokens.HueNeutral50,
+  }),
 
   // When hover or focus of the drag handle, apply general hover styles
   "&:hover, li:has(> button:hover, > button:focus, > button:focus-visible) &": {
@@ -172,13 +180,15 @@ const NavItemContentContainer = styled("div", {
     prop != "contextValue" &&
     prop !== "isDisabled" &&
     prop !== "sideNavContrastColors" &&
-    prop !== "isSelected",
+    prop !== "isSelected" &&
+    prop !== "isActiveDropTarget",
 })<{
   contextValue: SideNavItemContentContextValue;
   odysseyDesignTokens: DesignTokens;
   sideNavContrastColors: UiShellColors["sideNavContrastColors"];
   isSelected?: boolean;
   isDisabled?: boolean;
+  isActiveDropTarget: boolean;
 }>(
   ({
     isDisabled,
@@ -186,12 +196,14 @@ const NavItemContentContainer = styled("div", {
     contextValue,
     odysseyDesignTokens,
     sideNavContrastColors,
+    isActiveDropTarget,
   }) => ({
     ...getBaseNavItemContentStyles({
       isDisabled,
       isSelected,
       odysseyDesignTokens,
       sideNavContrastColors,
+      isActiveDropTarget,
     }),
 
     ...getNavItemContentStyles({
@@ -207,13 +219,15 @@ const StyledNavItemLink = styled(NavItemLink, {
     prop !== "isDisabled" &&
     prop !== "isSelected" &&
     prop !== "odysseyDesignTokens" &&
-    prop !== "sideNavContrastColors",
+    prop !== "sideNavContrastColors" &&
+    prop !== "isActiveDropTarget",
 })<{
   contextValue: SideNavItemContentContextValue;
   odysseyDesignTokens: DesignTokens;
   sideNavContrastColors: UiShellColors["sideNavContrastColors"];
   isSelected?: boolean;
   isDisabled?: boolean;
+  isActiveDropTarget: boolean;
 }>(
   ({
     isDisabled,
@@ -221,12 +235,14 @@ const StyledNavItemLink = styled(NavItemLink, {
     contextValue,
     odysseyDesignTokens,
     sideNavContrastColors,
+    isActiveDropTarget,
   }) => ({
     ...getBaseNavItemContentStyles({
       isDisabled,
       isSelected,
       odysseyDesignTokens,
       sideNavContrastColors,
+      isActiveDropTarget,
     }),
 
     ...getNavItemContentStyles({
@@ -251,6 +267,7 @@ const SideNavItemContent = ({
   isSelected,
   scrollRef,
   onItemSelected,
+  translate,
 }: Pick<
   SideNavItem,
   | "count"
@@ -265,6 +282,7 @@ const SideNavItemContent = ({
   | "onClick"
   | "isDisabled"
   | "isSelected"
+  | "translate"
 > & {
   /**
    * The ref used to scroll to this item
@@ -280,6 +298,7 @@ const SideNavItemContent = ({
   );
 
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const [isActiveDropTarget, setIsActiveDropTarget] = useState(false);
 
   const localScrollRef = useRef<HTMLLIElement>(null);
   useImperativeHandle(scrollRef, () => {
@@ -324,6 +343,15 @@ const SideNavItemContent = ({
       odysseyDesignTokens={odysseyDesignTokens}
       ref={localScrollRef}
       sideNavContrastColors={uiShellContext?.sideNavContrastColors}
+      onDragOver={() => {
+        setIsActiveDropTarget(true);
+      }}
+      onDragLeave={() => {
+        setIsActiveDropTarget(false);
+      }}
+      onDrop={() => {
+        setIsActiveDropTarget(false);
+      }}
     >
       {
         // Use Link for nav items with links and div for disabled or non-link items
@@ -334,6 +362,7 @@ const SideNavItemContent = ({
             isSelected={isSelected}
             odysseyDesignTokens={odysseyDesignTokens}
             sideNavContrastColors={uiShellContext?.sideNavContrastColors}
+            isActiveDropTarget={false}
           >
             <SideNavItemLinkContent
               count={count}
@@ -342,6 +371,7 @@ const SideNavItemContent = ({
               endIcon={endIcon}
               statusLabel={statusLabel}
               severity={severity}
+              translate={translate}
             />
           </NavItemContentContainer>
         ) : !href ? (
@@ -355,6 +385,7 @@ const SideNavItemContent = ({
             role="button"
             sideNavContrastColors={uiShellContext?.sideNavContrastColors}
             tabIndex={0}
+            isActiveDropTarget={isActiveDropTarget}
           >
             <SideNavItemLinkContent
               count={count}
@@ -363,6 +394,7 @@ const SideNavItemContent = ({
               endIcon={endIcon}
               statusLabel={statusLabel}
               severity={severity}
+              translate={translate}
             />
           </NavItemContentContainer>
         ) : (
@@ -375,6 +407,7 @@ const SideNavItemContent = ({
             onClick={itemClickHandler}
             sideNavContrastColors={uiShellContext?.sideNavContrastColors}
             target={target}
+            isActiveDropTarget={isActiveDropTarget}
           >
             <SideNavItemLinkContent
               count={count}
@@ -383,6 +416,7 @@ const SideNavItemContent = ({
               endIcon={endIcon}
               statusLabel={statusLabel}
               severity={severity}
+              translate={translate}
             />
             {target === "_blank" && (
               <span className="Link-indicator" role="presentation">
