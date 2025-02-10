@@ -53,7 +53,6 @@ const StyledTopNavContainer = styled("div", {
   justifyContent: "space-between",
   maxHeight: TOP_NAV_HEIGHT,
   minHeight: TOP_NAV_HEIGHT,
-  overflowX: "hidden",
   paddingBlock: odysseyDesignTokens.Spacing2,
   paddingInline: odysseyDesignTokens.Spacing8,
   position: "relative",

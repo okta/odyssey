@@ -38,7 +38,8 @@ const fullHeightStyles = { height: "100%" };
 const emptySideNavItems = [] satisfies SideNavProps["sideNavItems"];
 
 const StyledAppContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+  shouldForwardProp: (prop) =>
+    prop !== "appBackgroundColor" && prop !== "odysseyDesignTokens",
 })<{
   appBackgroundColor?: UiShellColors["appBackgroundColor"];
 }>(({ appBackgroundColor }) => ({
@@ -46,17 +47,17 @@ const StyledAppContainer = styled("div", {
   backgroundColor: appBackgroundColor,
 }));
 
-const StyledBannersContainer = styled("div")(() => ({
+const StyledBannersContainer = styled("div")({
   gridArea: "banners",
-}));
+});
 
-const StyledAppSwitcherContainer = styled("div")(() => ({
+const StyledAppSwitcherContainer = styled("div")({
   gridArea: "app-switcher",
-}));
+});
 
-const StyledSideNavContainer = styled("div")(() => ({
+const StyledSideNavContainer = styled("div")({
   gridArea: "side-nav",
-}));
+});
 
 const StyledShellContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
@@ -77,9 +78,9 @@ const StyledShellContainer = styled("div", {
   width: "100vw",
 }));
 
-const StyledTopNavContainer = styled("div")(() => ({
+const StyledTopNavContainer = styled("div")({
   gridArea: "top-nav",
-}));
+});
 
 export const subComponentNames = ["TopNav", "SideNav", "AppSwitcher"] as const;
 export type SubComponentName = (typeof subComponentNames)[number];
