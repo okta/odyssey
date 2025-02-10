@@ -1261,6 +1261,12 @@ export const getComponents = ({
     },
     MuiCssBaseline: {
       styleOverrides: (themeParam) => `
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
       html {
         font-size: calc((${themeParam.typography.fontSize} / 16) * 100%);
       }
