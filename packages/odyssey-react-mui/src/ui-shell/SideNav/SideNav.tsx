@@ -567,6 +567,7 @@ const SideNav = ({
                 {...childProps}
                 scrollRef={getRefIfThisIsFirstNodeWithIsSelected(childProps.id)}
                 onItemSelected={setSelectedItem}
+                translate={childProps.translate}
               />
             </SideNavItemContentContext.Provider>
           ),

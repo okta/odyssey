@@ -43,9 +43,16 @@ const SideNavItemLinkContent = ({
   endIcon,
   severity,
   statusLabel,
+  translate,
 }: Pick<
   SideNavItem,
-  "count" | "label" | "startIcon" | "endIcon" | "severity" | "statusLabel"
+  | "count"
+  | "label"
+  | "startIcon"
+  | "endIcon"
+  | "severity"
+  | "statusLabel"
+  | "translate"
 >): ReactNode => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
@@ -65,6 +72,7 @@ const SideNavItemLinkContent = ({
       <SideNavItemLabelContainer
         odysseyDesignTokens={odysseyDesignTokens}
         isIconVisible={Boolean(startIcon)}
+        className={translate === "no" ? "no-translate" : ""}
       >
         {label}
         {!count && severity && (

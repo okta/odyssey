@@ -204,6 +204,7 @@ const storybookMeta: Meta<SideNavProps> = {
             id: "item6-1",
             href: "/",
             label: "Start",
+            translate: "no",
           },
           {
             id: "item6-2",
@@ -279,6 +280,7 @@ const storybookMeta: Meta<SideNavProps> = {
             id: "item15-1",
             href: "/",
             label: "General",
+            translate: "no",
           },
           {
             id: "item15-2",
@@ -289,6 +291,7 @@ const storybookMeta: Meta<SideNavProps> = {
           {
             id: "item15-3",
             label: "Account Management",
+            translate: "no",
           },
           {
             id: "item15-4",

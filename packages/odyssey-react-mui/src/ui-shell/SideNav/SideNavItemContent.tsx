@@ -266,6 +266,7 @@ const SideNavItemContent = ({
   isSelected,
   scrollRef,
   onItemSelected,
+  translate,
 }: Pick<
   SideNavItem,
   | "count"
@@ -280,6 +281,7 @@ const SideNavItemContent = ({
   | "onClick"
   | "isDisabled"
   | "isSelected"
+  | "translate"
 > & {
   /**
    * The ref used to scroll to this item
@@ -365,6 +367,7 @@ const SideNavItemContent = ({
               endIcon={endIcon}
               statusLabel={statusLabel}
               severity={severity}
+              translate={translate}
             />
           </NavItemContentContainer>
         ) : !href ? (
@@ -387,6 +390,7 @@ const SideNavItemContent = ({
               endIcon={endIcon}
               statusLabel={statusLabel}
               severity={severity}
+              translate={translate}
             />
           </NavItemContentContainer>
         ) : (
@@ -408,6 +412,7 @@ const SideNavItemContent = ({
               endIcon={endIcon}
               statusLabel={statusLabel}
               severity={severity}
+              translate={translate}
             />
             {target === "_blank" && (
               <span className="Link-indicator" role="presentation">
