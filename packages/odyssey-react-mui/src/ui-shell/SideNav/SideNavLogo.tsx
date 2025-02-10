@@ -16,10 +16,17 @@ import styled from "@emotion/styled";
 import { OktaLogo } from "./OktaLogo.js";
 import { SideNavLogoProps } from "./types.js";
 
-const StyledLogoContainer = styled("div")(() => ({
+const StyledLogoContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "isLogoInteractive",
+})<{
+  isLogoInteractive?: boolean;
+}>(({ isLogoInteractive }) => ({
   display: "flex",
   alignItems: "center",
   height: "100%",
+  ...(isLogoInteractive && {
+    cursor: "pointer",
+  }),
 }));
 
 const StyledLogoLink = styled("a")(() => ({
@@ -51,11 +58,20 @@ const SideNavLogo = ({
       aria-label={optionalProps.ariaLabel}
       data-se="sidenav-header-logo"
       href={optionalProps.href}
+      onClick={optionalProps.onClick}
     >
       {logo}
     </StyledLogoLink>
   ) : (
-    <StyledLogoContainer role="presentation">{logo}</StyledLogoContainer>
+    <StyledLogoContainer
+      role="presentation"
+      aria-label={optionalProps.ariaLabel}
+      data-se="sidenav-header-logo"
+      onClick={optionalProps.onClick}
+      isLogoInteractive={Boolean(optionalProps.onClick) || optionalProps.href}
+    >
+      {logo}
+    </StyledLogoContainer>
   );
 };
 
