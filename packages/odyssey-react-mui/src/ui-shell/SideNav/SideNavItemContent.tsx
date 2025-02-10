@@ -19,6 +19,7 @@ import {
   useImperativeHandle,
   useMemo,
   useRef,
+  useState,
 } from "react";
 import { Link as NavItemLink } from "@mui/material";
 import {
@@ -84,11 +85,13 @@ export const getBaseNavItemContentStyles = ({
   isSelected,
   odysseyDesignTokens,
   sideNavContrastColors,
+  isDraggedOver,
 }: {
   isSelected?: boolean;
   isDisabled?: boolean;
   odysseyDesignTokens: DesignTokens;
   sideNavContrastColors: UiShellColors["sideNavContrastColors"];
+  isDraggedOver: boolean;
 }) => ({
   display: "flex",
   alignItems: "center",
@@ -104,6 +107,10 @@ export const getBaseNavItemContentStyles = ({
   borderRadius: odysseyDesignTokens.BorderRadiusMain,
   transition: `backgroundColor ${odysseyDesignTokens.TransitionDurationMain}, color ${odysseyDesignTokens.TransitionDurationMain}`,
   cursor: "pointer",
+  backgroundColor: isDraggedOver
+    ? sideNavContrastColors?.itemHoverBackgroundColor ||
+      odysseyDesignTokens.HueNeutral50
+    : "transparent",
 
   // When hover or focus of the drag handle, apply general hover styles
   "&:hover, li:has(> button:hover, > button:focus, > button:focus-visible) &": {
@@ -172,13 +179,15 @@ const NavItemContentContainer = styled("div", {
     prop != "contextValue" &&
     prop !== "isDisabled" &&
     prop !== "sideNavContrastColors" &&
-    prop !== "isSelected",
+    prop !== "isSelected" &&
+    prop !== "isDraggedOver",
 })<{
   contextValue: SideNavItemContentContextValue;
   odysseyDesignTokens: DesignTokens;
   sideNavContrastColors: UiShellColors["sideNavContrastColors"];
   isSelected?: boolean;
   isDisabled?: boolean;
+  isDraggedOver: boolean;
 }>(
   ({
     isDisabled,
@@ -186,12 +195,14 @@ const NavItemContentContainer = styled("div", {
     contextValue,
     odysseyDesignTokens,
     sideNavContrastColors,
+    isDraggedOver,
   }) => ({
     ...getBaseNavItemContentStyles({
       isDisabled,
       isSelected,
       odysseyDesignTokens,
       sideNavContrastColors,
+      isDraggedOver,
     }),
 
     ...getNavItemContentStyles({
@@ -207,13 +218,15 @@ const StyledNavItemLink = styled(NavItemLink, {
     prop !== "isDisabled" &&
     prop !== "isSelected" &&
     prop !== "odysseyDesignTokens" &&
-    prop !== "sideNavContrastColors",
+    prop !== "sideNavContrastColors" &&
+    prop !== "isDraggedOver",
 })<{
   contextValue: SideNavItemContentContextValue;
   odysseyDesignTokens: DesignTokens;
   sideNavContrastColors: UiShellColors["sideNavContrastColors"];
   isSelected?: boolean;
   isDisabled?: boolean;
+  isDraggedOver: boolean;
 }>(
   ({
     isDisabled,
@@ -221,12 +234,14 @@ const StyledNavItemLink = styled(NavItemLink, {
     contextValue,
     odysseyDesignTokens,
     sideNavContrastColors,
+    isDraggedOver,
   }) => ({
     ...getBaseNavItemContentStyles({
       isDisabled,
       isSelected,
       odysseyDesignTokens,
       sideNavContrastColors,
+      isDraggedOver,
     }),
 
     ...getNavItemContentStyles({
@@ -280,6 +295,7 @@ const SideNavItemContent = ({
   );
 
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const [isDraggedOver, setIsDraggedOver] = useState(false);
 
   const localScrollRef = useRef<HTMLLIElement>(null);
   useImperativeHandle(scrollRef, () => {
@@ -324,6 +340,12 @@ const SideNavItemContent = ({
       odysseyDesignTokens={odysseyDesignTokens}
       ref={localScrollRef}
       sideNavContrastColors={uiShellContext?.sideNavContrastColors}
+      onDragOver={() => {
+        setIsDraggedOver(true);
+      }}
+      onDrop={() => {
+        setIsDraggedOver(false);
+      }}
     >
       {
         // Use Link for nav items with links and div for disabled or non-link items
@@ -334,6 +356,7 @@ const SideNavItemContent = ({
             isSelected={isSelected}
             odysseyDesignTokens={odysseyDesignTokens}
             sideNavContrastColors={uiShellContext?.sideNavContrastColors}
+            isDraggedOver={false}
           >
             <SideNavItemLinkContent
               count={count}
@@ -355,6 +378,7 @@ const SideNavItemContent = ({
             role="button"
             sideNavContrastColors={uiShellContext?.sideNavContrastColors}
             tabIndex={0}
+            isDraggedOver={isDraggedOver}
           >
             <SideNavItemLinkContent
               count={count}
@@ -375,6 +399,7 @@ const SideNavItemContent = ({
             onClick={itemClickHandler}
             sideNavContrastColors={uiShellContext?.sideNavContrastColors}
             target={target}
+            isDraggedOver={isDraggedOver}
           >
             <SideNavItemLinkContent
               count={count}
