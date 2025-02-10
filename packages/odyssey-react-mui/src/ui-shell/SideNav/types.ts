@@ -25,10 +25,13 @@ type LogoWithNoLink = {
   ariaLabel?: never;
 };
 
-export type SideNavLogoProps = { isSameBackgroundAsMain?: boolean } & (
-  | LogoWithLink
-  | LogoWithNoLink
-) &
+export type SideNavLogoProps = {
+  isSameBackgroundAsMain?: boolean;
+  /**
+   * Event fired when the logo is clicked
+   */
+  onClick?: (event: SyntheticEvent) => void;
+} & (LogoWithLink | LogoWithNoLink) &
   (
     | {
         /**
@@ -215,7 +218,8 @@ export type SideNavItem = {
        */
       isSectionHeader?: never;
     }
-);
+) &
+  Pick<HtmlProps, "translate">;
 
 export type SideNavFooterItem = {
   href?: string;
