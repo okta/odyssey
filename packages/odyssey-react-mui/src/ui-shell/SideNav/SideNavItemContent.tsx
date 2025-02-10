@@ -345,6 +345,9 @@ const SideNavItemContent = ({
       onDragOver={() => {
         setIsDraggedOver(true);
       }}
+      onDragLeave={() => {
+        setIsDraggedOver(false);
+      }}
       onDrop={() => {
         setIsDraggedOver(false);
       }}

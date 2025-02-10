@@ -72,7 +72,7 @@ const SideNavItemLinkContent = ({
       <SideNavItemLabelContainer
         odysseyDesignTokens={odysseyDesignTokens}
         isIconVisible={Boolean(startIcon)}
-        className={translate === "no" ? "no-translate" : ""}
+        translate={translate}
       >
         {label}
         {!count && severity && (

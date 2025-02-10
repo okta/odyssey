@@ -176,10 +176,6 @@ export type SideNavItem = {
    * The link target prop. e.g., "_blank"
    */
   target?: string;
-  /**
-   * This prop puts a `translate` attribute on an HTML element. It should be used to indicate whether text within the element should be translated.
-   */
-  translate?: "yes" | "no";
 } & (
   | {
       nestedNavItems?: never;
@@ -222,7 +218,8 @@ export type SideNavItem = {
        */
       isSectionHeader?: never;
     }
-);
+) &
+  Pick<HtmlProps, "translate">;
 
 export type SideNavFooterItem = {
   href?: string;
