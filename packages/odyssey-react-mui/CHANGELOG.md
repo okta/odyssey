@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.32.3](https://github.com/okta/odyssey/compare/v1.32.0...v1.32.3) (2025-02-10)
+
+### Bug Fixes
+
+- adds missing border-box box-sizing to CSSBaseline ([fa8e445](https://github.com/okta/odyssey/commit/fa8e445f43f2829d13ca3e249dcce009c5076aaa))
+- shell content area overlaps side nav in mobile view ([#2497](https://github.com/okta/odyssey/issues/2497)) ([e37b872](https://github.com/okta/odyssey/commit/e37b87285b011f111a5199d93c7d340e7423b64c))
+- top-nav overflow with scrollbar ([a970e7e](https://github.com/okta/odyssey/commit/a970e7ecd1835ee36f08fb51bbefb0986eda51e1))
+
 ## [1.32.2](https://github.com/okta/odyssey/compare/v1.32.0...v1.32.2) (2025-02-07)
 
 ### Bug Fixes
