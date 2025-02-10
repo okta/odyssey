@@ -17,14 +17,14 @@ import { OktaLogo } from "./OktaLogo.js";
 import { SideNavLogoProps } from "./types.js";
 
 const StyledLogoContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "isLogoClickable",
+  shouldForwardProp: (prop) => prop !== "isLogoInteractive",
 })<{
-  isLogoClickable?: boolean;
-}>(({ isLogoClickable }) => ({
+  isLogoInteractive?: boolean;
+}>(({ isLogoInteractive }) => ({
   display: "flex",
   alignItems: "center",
   height: "100%",
-  ...(isLogoClickable && {
+  ...(isLogoInteractive && {
     cursor: "pointer",
   }),
 }));
@@ -68,7 +68,7 @@ const SideNavLogo = ({
       aria-label={optionalProps.ariaLabel}
       data-se="sidenav-header-logo"
       onClick={optionalProps.onClick}
-      isLogoClickable={!!optionalProps.onClick || optionalProps.href}
+      isLogoInteractive={Boolean(optionalProps.onClick) || optionalProps.href}
     >
       {logo}
     </StyledLogoContainer>
