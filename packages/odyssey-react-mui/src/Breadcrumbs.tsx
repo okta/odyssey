@@ -38,6 +38,7 @@ export type BreadcrumbProps = {
   children?: string;
   href: string;
   iconName?: "user" | "group";
+  onClick?: MouseEventHandler;
 };
 
 export type BreadcrumbsProps = {
@@ -61,8 +62,24 @@ const BreadcrumbContent = styled.span`
   text-overflow: ellipsis;
 `;
 
-export const Breadcrumb = ({ children, href, iconName }: BreadcrumbProps) => {
+export const Breadcrumb = ({
+  children,
+  href,
+  iconName,
+  onClick,
+}: BreadcrumbProps) => {
   const { breadcrumbType } = useContext(BreadcrumbContext);
+
+  const onClickHandler = useCallback<MouseEventHandler<HTMLAnchorElement>>(
+    (event) => {
+      if (onClick) {
+        event.preventDefault();
+        event.stopPropagation();
+        onClick(event);
+      }
+    },
+    [onClick],
+  );
 
   const breadcrumbContent = (
     <>
@@ -76,7 +93,11 @@ export const Breadcrumb = ({ children, href, iconName }: BreadcrumbProps) => {
   );
 
   if (breadcrumbType === "menuItem") {
-    return <MenuItem href={href}>{breadcrumbContent}</MenuItem>;
+    return (
+      <MenuItem onClick={onClickHandler} href={href}>
+        {breadcrumbContent}
+      </MenuItem>
+    );
   }
 
   if (breadcrumbType === "currentPage") {
@@ -90,7 +111,11 @@ export const Breadcrumb = ({ children, href, iconName }: BreadcrumbProps) => {
   // breadcrumbType === "listItem" is the default
   // Provided here without a conditional to get TS to be quiet
   // about potential undefined returns
-  return <ButtonBase href={href}>{breadcrumbContent}</ButtonBase>;
+  return (
+    <ButtonBase onClick={onClickHandler} href={href}>
+      {breadcrumbContent}
+    </ButtonBase>
+  );
 };
 
 const breadcrumbProviderValue: Record<
@@ -166,8 +191,11 @@ const BreadcrumbList = ({
         </ButtonBase>
       )}
 
-      {breadcrumbSections.beforeMenu.map((breadcrumb) => (
-        <BreadcrumbContext.Provider value={breadcrumbProviderValue.listItem}>
+      {breadcrumbSections.beforeMenu.map((breadcrumb, index) => (
+        <BreadcrumbContext.Provider
+          key={index}
+          value={breadcrumbProviderValue.listItem}
+        >
           {breadcrumb}
         </BreadcrumbContext.Provider>
       ))}
@@ -195,10 +223,11 @@ const BreadcrumbList = ({
         </>
       )}
 
-      {breadcrumbSections.remainingBreadcrumbs.map((breadcrumb, i) => {
-        if (i === breadcrumbSections.remainingBreadcrumbs.length - 1) {
+      {breadcrumbSections.remainingBreadcrumbs.map((breadcrumb, index) => {
+        if (index === breadcrumbSections.remainingBreadcrumbs.length - 1) {
           return (
             <BreadcrumbContext.Provider
+              key={index}
               value={breadcrumbProviderValue.currentPage}
             >
               {breadcrumb}
@@ -206,7 +235,10 @@ const BreadcrumbList = ({
           );
         }
         return (
-          <BreadcrumbContext.Provider value={breadcrumbProviderValue.listItem}>
+          <BreadcrumbContext.Provider
+            key={index}
+            value={breadcrumbProviderValue.listItem}
+          >
             {breadcrumb}
           </BreadcrumbContext.Provider>
         );
