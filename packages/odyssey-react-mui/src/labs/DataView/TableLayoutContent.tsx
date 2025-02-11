@@ -70,7 +70,7 @@ const RowActionsContainer = styled("div")({
 
 export type TableLayoutContentProps<TData extends MRT_RowData> = {
   columns: TableLayoutProps<TData>["columns"];
-  data: MRT_RowData[];
+  data: TData[];
   draggingRow?: MRT_Row<TData> | null;
   emptyState: ReactNode;
   enableVirtualization?: boolean;
@@ -231,7 +231,7 @@ const TableLayoutContent = <TData extends MRT_RowData>({
         row.index + (pagination.pageIndex - 1) * pagination.pageSize;
       return (
         <RowActionsContainer>
-          {tableLayoutOptions.rowActionButtons?.(row)}
+          {tableLayoutOptions.rowActionButtons?.(row.original)}
           {(tableLayoutOptions.rowActionMenuItems || hasRowReordering) && (
             <MenuButton
               ariaLabel={t("table.moreactions.arialabel")}
@@ -242,14 +242,9 @@ const TableLayoutContent = <TData extends MRT_RowData>({
             >
               <RowActions
                 isRowReorderingDisabled={isRowReorderingDisabled}
-                row={
-                  row as unknown as MRT_Row<MRT_RowData> // TODO: FIX THIS! The types are wrong. `row` is incorrectly set in `RowActions` to not be TData.
-                }
+                row={row}
                 rowActionMenuItems={
-                  // TODO: FIX THIS! The types are wrong. `row` is incorrectly set in `RowActions` to not be TData.
-                  tableLayoutOptions.rowActionMenuItems as unknown as (
-                    row: MRT_Row<MRT_RowData>,
-                  ) => any // eslint-disable-line @typescript-eslint/no-explicit-any
+                  tableLayoutOptions.rowActionMenuItems as TableLayoutProps<MRT_RowData>["rowActionMenuItems"]
                 }
                 rowIndex={currentIndex}
                 totalRows={totalRows}
@@ -325,7 +320,7 @@ const TableLayoutContent = <TData extends MRT_RowData>({
   const hasColumnWithGrow = columns.some((column) => column.grow === true);
 
   const dataTable = useMaterialReactTable<TData>({
-    data: (!isEmpty && !isNoResults ? data : []) as TData[],
+    data: !isEmpty && !isNoResults ? data : [],
     columns,
     getRowId,
     state: {
@@ -366,8 +361,7 @@ const TableLayoutContent = <TData extends MRT_RowData>({
           children: (
             <Box sx={{ display: "flex", visibility: "hidden" }}>
               {tableLayoutOptions.rowActionButtons &&
-                // @ts-expect-error TODO: This type is wrong and needs to be fixed
-                tableLayoutOptions.rowActionButtons({ id: null })}
+                tableLayoutOptions.rowActionButtons()}
               {((hasRowReordering === true && onReorderRows) ||
                 tableLayoutOptions.rowActionMenuItems) && (
                 <Box>
