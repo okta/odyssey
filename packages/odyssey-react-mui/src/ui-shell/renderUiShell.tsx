@@ -108,6 +108,7 @@ export const renderUiShell = ({
   >;
 
   const appContainerElement = document.createElement("div");
+  appContainerElement.setAttribute("style", "height: inherit;");
   appContainerElement.appendChild(appRootElement);
 
   const webComponentChildren = Object.values(slottedElements);
