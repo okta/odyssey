@@ -36,15 +36,18 @@ import {
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext.js";
 import { Heading5, Paragraph, Support } from "./Typography.js";
-import { Box } from "./Box.js";
 
 export const CARD_IMAGE_HEIGHT = "64px";
+export const CARD_IMAGE_HEIGHT_COMPACT = "48px";
+
+export const cardVariantValues = ["tile", "stack", "compact"] as const;
 
 export type CardProps = {
   description?: string;
   image?: ReactElement;
   overline?: string;
   title?: string;
+  variant?: (typeof cardVariantValues)[number];
 } & (
   | {
       onClick: MouseEventHandler;
@@ -60,29 +63,66 @@ export type CardProps = {
 
 const ImageContainer = styled("div", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "hasMenuButtonChildren",
+    prop !== "odysseyDesignTokens" &&
+    prop !== "hasMenuButtonChildren" &&
+    prop !== "variant",
 })<{
   odysseyDesignTokens: DesignTokens;
   hasMenuButtonChildren: boolean;
-}>(({ odysseyDesignTokens, hasMenuButtonChildren }) => ({
+  variant: (typeof cardVariantValues)[number];
+}>(({ odysseyDesignTokens, hasMenuButtonChildren, variant }) => ({
   display: "flex",
   alignItems: "flex-start",
-  maxHeight: CARD_IMAGE_HEIGHT,
-  height: CARD_IMAGE_HEIGHT,
-  marginBlockEnd: odysseyDesignTokens.Spacing5,
-  paddingRight: hasMenuButtonChildren ? odysseyDesignTokens.Spacing5 : 0,
+  height: variant === "compact" ? CARD_IMAGE_HEIGHT_COMPACT : CARD_IMAGE_HEIGHT,
+  maxHeight:
+    variant === "compact" ? CARD_IMAGE_HEIGHT_COMPACT : CARD_IMAGE_HEIGHT,
+  marginBlockEnd: variant === "tile" ? odysseyDesignTokens.Spacing5 : 0,
+  paddingRight:
+    hasMenuButtonChildren || ["stack", "compact"].includes(variant)
+      ? odysseyDesignTokens.Spacing5
+      : 0,
 }));
 
 const MenuButtonContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
+})<{
+  odysseyDesignTokens: DesignTokens;
+  variant: (typeof cardVariantValues)[number];
+}>(({ odysseyDesignTokens, variant }) => ({
   position: "absolute",
   right: odysseyDesignTokens.Spacing3,
-  top: odysseyDesignTokens.Spacing3,
+  top:
+    variant === "compact"
+      ? odysseyDesignTokens.Spacing4
+      : odysseyDesignTokens.Spacing3,
+  height: variant === "compact" ? CARD_IMAGE_HEIGHT_COMPACT : "auto",
+  display: "flex",
+  alignItems: "center",
 }));
 
 const CardContentContainer = styled("div")(() => ({
   display: "flex",
+}));
+
+const CardImageAndContentContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "variant",
+})<{ variant: (typeof cardVariantValues)[number] }>(({ variant }) => ({
+  display: "flex",
+  flexDirection: variant === "tile" ? "column" : "row",
+}));
+
+const CardContent = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+  variant: (typeof cardVariantValues)[number];
+}>(({ odysseyDesignTokens, variant }) => ({
+  "& > .MuiTypography-h5:not(:last-child)": {
+    marginBlockEnd: `${variant === "compact" ? odysseyDesignTokens.Spacing1 : odysseyDesignTokens.Spacing3} !important`,
+  },
+  "& > *:last-child": {
+    marginBlockEnd: 0,
+  },
 }));
 
 const buttonProviderValue = { isFullWidth: true };
@@ -95,36 +135,43 @@ const Card = ({
   onClick,
   overline,
   title,
+  variant = "tile",
 }: CardProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const cardContent = useMemo(
     () => (
       <CardContentContainer>
-        <Box>
+        <CardImageAndContentContainer variant={variant}>
           {image && (
             <ImageContainer
               odysseyDesignTokens={odysseyDesignTokens}
               hasMenuButtonChildren={Boolean(menuButtonChildren)}
+              variant={variant}
             >
               {image}
             </ImageContainer>
           )}
 
-          {overline && <Support component="div">{overline}</Support>}
-          {title && <Heading5 component="div">{title}</Heading5>}
-          {description && (
-            <Paragraph color="textSecondary">{description}</Paragraph>
-          )}
+          <CardContent
+            odysseyDesignTokens={odysseyDesignTokens}
+            variant={variant}
+          >
+            {overline && <Support component="div">{overline}</Support>}
+            {title && <Heading5 component="div">{title}</Heading5>}
+            {description && (
+              <Paragraph color="textSecondary">{description}</Paragraph>
+            )}
 
-          {button && (
-            <MuiCardActions>
-              <ButtonContext.Provider value={buttonProviderValue}>
-                {button}
-              </ButtonContext.Provider>
-            </MuiCardActions>
-          )}
-        </Box>
+            {button && (
+              <MuiCardActions>
+                <ButtonContext.Provider value={buttonProviderValue}>
+                  {button}
+                </ButtonContext.Provider>
+              </MuiCardActions>
+            )}
+          </CardContent>
+        </CardImageAndContentContainer>
       </CardContentContainer>
     ),
     [
@@ -135,11 +182,12 @@ const Card = ({
       overline,
       title,
       odysseyDesignTokens,
+      variant,
     ],
   );
 
   return (
-    <MuiCard className={onClick ? "isClickable" : ""}>
+    <MuiCard className={`${onClick ? "isClickable" : ""} ods-card-${variant}`}>
       {onClick ? (
         <MuiCardActionArea onClick={onClick}>{cardContent}</MuiCardActionArea>
       ) : (
@@ -147,7 +195,10 @@ const Card = ({
       )}
 
       {menuButtonChildren && (
-        <MenuButtonContainer odysseyDesignTokens={odysseyDesignTokens}>
+        <MenuButtonContainer
+          odysseyDesignTokens={odysseyDesignTokens}
+          variant={variant}
+        >
           <MenuButton
             endIcon={<MoreIcon />}
             ariaLabel="Card menu"
