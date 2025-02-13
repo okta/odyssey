@@ -142,7 +142,7 @@ const StyledSideNav = styled("nav", {
       transform: `translateX(0)`,
       transition: `opacity ${odysseyDesignTokens.TransitionDurationMain}, transform ${odysseyDesignTokens.TransitionDurationMain}`,
       width: odysseyDesignTokens.Spacing2,
-      zIndex: 2,
+      zIndex: 200,
     },
 
     "&:has([data-sidenav-toggle='true']:hover), &:has([data-sidenav-toggle='true']:focus-visible)":
