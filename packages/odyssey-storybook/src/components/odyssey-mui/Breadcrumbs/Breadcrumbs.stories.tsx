@@ -145,3 +145,16 @@ export const WithOnClick: StoryObj<BreadcrumbsProps> = {
     </BreadcrumbList>
   ),
 };
+
+export const Subordinate: StoryObj<BreadcrumbsProps> = {
+  args: {
+    homeHref: "#home",
+  },
+  render: (args) => (
+    <BreadcrumbList {...args}>
+      <Breadcrumb>One</Breadcrumb>
+      <Breadcrumb href="#two">Two</Breadcrumb>
+      <Breadcrumb href="#three">Three</Breadcrumb>
+    </BreadcrumbList>
+  ),
+};
