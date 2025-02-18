@@ -36,7 +36,7 @@ export type BreadcrumbType = "listItem" | "menuItem" | "currentPage";
 
 export type BreadcrumbProps = {
   children?: string;
-  href: string;
+  href?: string;
   iconName?: "user" | "group";
   onClick?: MouseEventHandler;
 };
@@ -91,6 +91,10 @@ export const Breadcrumb = ({
       <BreadcrumbContent>{children}</BreadcrumbContent>
     </>
   );
+
+  if (!href) {
+    return <Subordinate color="textPrimary">{breadcrumbContent}</Subordinate>;
+  }
 
   if (breadcrumbType === "menuItem") {
     return (
