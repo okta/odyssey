@@ -42,22 +42,22 @@ import { useEffect, useState } from "react";
 
 // export const isMobile = useMediaQuery(`(max-width: ${mobileBreakPoint}rem)`);
 
-export const useMediaQuery = (query: string) => {
-  const [matches, setMatches] = useState(false);
+export const useMediaQuery = (mediaQuery: string) => {
+  const [hasMatches, setHasMatches] = useState(false);
 
   useEffect(() => {
-    const media = window.matchMedia(query);
+    const mediaQueryList = window.matchMedia(mediaQuery);
 
-    if (media.matches !== matches) {
-      setMatches(media.matches);
-    }
+    const updateHasMatches = () => setHasMatches(mediaQueryList.matches);
 
-    const listener = () => setMatches(media.matches);
+    mediaQueryList.addEventListener("change", updateHasMatches);
 
-    media.addEventListener("change", listener);
+    updateHasMatches();
 
-    return () => media.removeEventListener("change", listener);
-  }, [matches, query]);
+    return () => {
+      mediaQueryList.removeEventListener("change", updateHasMatches);
+    };
+  }, [hasMatches, mediaQuery]);
 
-  return matches;
+  return hasMatches;
 };

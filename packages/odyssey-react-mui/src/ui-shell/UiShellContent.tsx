@@ -11,27 +11,22 @@
  */
 
 import styled from "@emotion/styled";
-import {
-  CSSProperties,
-  memo,
-  useEffect,
-  useMemo,
-  useRef,
-  type ReactElement,
-} from "react";
+import { ScopedCssBaseline } from "@mui/material";
+import { memo, useRef, type ReactElement } from "react";
 import { ErrorBoundary, ErrorBoundaryProps } from "react-error-boundary";
 
 import { AppSwitcher, type AppSwitcherProps } from "./AppSwitcher/index.js";
-import { SideNav, type SideNavProps } from "./SideNav/index.js";
-import { TopNav, type TopNavProps } from "./TopNav/index.js";
 import {
   useOdysseyDesignTokens,
   type DesignTokens,
 } from "../OdysseyDesignTokensContext.js";
-import { useScrollState } from "./useScrollState.js";
+import { SharedUnifiedUiShellProps } from "./SharedUnifiedUiShellProps.js";
+import { SideNav, type SideNavProps } from "./SideNav/index.js";
+import { TopNav, type TopNavProps } from "./TopNav/index.js";
 import { ContrastMode } from "../useContrastMode.js";
+import { useScrollState } from "./useScrollState.js";
+import { useRepositionAppElementToContainer } from "./useRepositionAppElementToContainer.js";
 import { UiShellColors, useUiShellContext } from "./UiShellProvider.js";
-import { ScopedCssBaseline } from "@mui/material";
 
 const fullHeightStyles = { height: "100%" };
 
@@ -113,18 +108,6 @@ export type UiShellContentProps = {
    */
   appBackgroundContrastMode?: ContrastMode;
   /**
-   * When passed, the app is expected to render into this element, not the Shadow DOM. UI Shell will position this element appropriately as if it was rendered in the app content area of the Shadow DOM.
-   */
-  appContainerElement: HTMLDivElement;
-  /**
-   * Controls the scrolling behavior of the app content area. Defaults to "vertical".
-   */
-  appContainerScrollingMode?: "none" | "horizontal" | "vertical" | "both";
-  /**
-   * defaults to `true`. If `false`, the content area will have no padding provided
-   */
-  hasStandardAppContentPadding?: boolean;
-  /**
    * Which parts of the UI Shell should be visible initially? For example,
    * if sideNavProps is undefined, should the space for the sidenav be initially visible?
    */
@@ -142,42 +125,8 @@ export type UiShellContentProps = {
     topNavLeftSide?: TopNavProps["leftSideComponent"];
     topNavRightSide?: TopNavProps["rightSideComponent"];
   };
-} & UiShellNavComponentProps;
-
-export const convertCamelCaseToKebabCase = (string: string) =>
-  string.replace(/([A-Z])/g, "-$1").toLowerCase();
-
-export const setStylesToMatchElement = ({
-  additionalStyles,
-  appContainerElement,
-  appContentReferenceElement,
-}: {
-  additionalStyles: CSSProperties;
-  appContainerElement: HTMLElement;
-  appContentReferenceElement: HTMLElement;
-}) => {
-  const boundingRect = appContentReferenceElement.getBoundingClientRect();
-
-  appContainerElement.style.setProperty("position", "absolute");
-  appContainerElement.style.setProperty("top", `${boundingRect.y}px`);
-  appContainerElement.style.setProperty("left", `${boundingRect.x}px`);
-  appContainerElement.style.setProperty("width", `${boundingRect.width}px`);
-  appContainerElement.style.setProperty("height", `${boundingRect.height}px`);
-
-  (
-    Object.entries(additionalStyles) as Array<
-      [
-        keyof typeof additionalStyles,
-        (typeof additionalStyles)[keyof typeof additionalStyles],
-      ]
-    >
-  ).forEach(([cssPropertyName, cssPropertyValue]) => {
-    appContainerElement.style.setProperty(
-      convertCamelCaseToKebabCase(cssPropertyName),
-      String(cssPropertyValue),
-    );
-  });
-};
+} & UiShellNavComponentProps &
+  SharedUnifiedUiShellProps;
 
 /**
  * Our new Unified Platform UI Shell.
@@ -189,7 +138,7 @@ export const setStylesToMatchElement = ({
 const UiShellContent = ({
   appContainerElement,
   hasStandardAppContentPadding = true,
-  appContainerScrollingMode = "vertical",
+  appContainerScrollingMode,
   initialVisibleSections = ["TopNav", "SideNav", "AppSwitcher"],
   onError = console.error,
   optionalComponents,
@@ -204,83 +153,14 @@ const UiShellContent = ({
   const topNavContainerRef = useRef<HTMLDivElement>(null);
   const uiShellContext = useUiShellContext();
 
-  const appContainerElementStyles = useMemo<CSSProperties>(
-    () => ({
-      ...(hasStandardAppContentPadding
-        ? {
-            paddingBlock: odysseyDesignTokens.Spacing5 ?? null,
-            paddingInline: odysseyDesignTokens.Spacing8 ?? null,
-          }
-        : {}),
-      ...(appContainerScrollingMode === "horizontal" ||
-      appContainerScrollingMode === "both"
-        ? {
-            overflowX: "auto",
-          }
-        : {
-            overflowX: "hidden",
-          }),
-      ...(appContainerScrollingMode === "vertical" ||
-      appContainerScrollingMode === "both"
-        ? {
-            overflowY: "auto",
-          }
-        : {
-            overflowY: "hidden",
-          }),
-    }),
-    [
-      hasStandardAppContentPadding,
-      appContainerScrollingMode,
-      odysseyDesignTokens,
-    ],
-  );
-
-  useEffect(() => {
-    // Once appContainerRef is rendered, we can position appContainerElement on top
-    if (appContainerRef.current && appContainerElement) {
-      let animationFrameId: number;
-
-      const updateStyles = () => {
-        cancelAnimationFrame(animationFrameId);
-        animationFrameId = requestAnimationFrame(() => {
-          if (appContainerRef.current) {
-            setStylesToMatchElement({
-              additionalStyles: appContainerElementStyles,
-              appContentReferenceElement: appContainerRef.current,
-              appContainerElement,
-            });
-          }
-        });
-      };
-
-      // This element might have changed from `.current`, so it's important to keep track of the old one when we attach event listeners.
-      const sideNavElement = sideNavContainerRef.current;
-
-      sideNavElement?.addEventListener("transitionend", updateStyles);
-
-      // Setup a mutation observer to sync later updates
-      const observer = new ResizeObserver(updateStyles);
-      observer.observe(appContainerRef.current);
-
-      if (sideNavElement) {
-        observer.observe(sideNavElement);
-      }
-
-      if (topNavContainerRef.current) {
-        observer.observe(topNavContainerRef.current);
-      }
-
-      // Set the initial styles
-      updateStyles();
-
-      return () => {
-        observer.disconnect();
-        sideNavElement?.removeEventListener("transitionend", updateStyles);
-      };
-    }
-    return () => {};
-  }, [appContainerElement, appContainerElementStyles, appContainerRef]);
+  useRepositionAppElementToContainer({
+    appContainerElement,
+    appContainerRef,
+    appContainerScrollingMode,
+    hasStandardAppContentPadding,
+    odysseyDesignTokens,
+    resizingRefs: [sideNavContainerRef, topNavContainerRef],
+  });
 
   return (
     <StyledShellContainer odysseyDesignTokens={odysseyDesignTokens}>

@@ -14,11 +14,7 @@ import * as odysseyDesignTokens from "@okta/odyssey-design-tokens";
 import { Button, SearchField } from "@okta/odyssey-react-mui";
 import { UserIcon } from "@okta/odyssey-react-mui/icons";
 import { UserProfile } from "@okta/odyssey-react-mui/labs";
-import {
-  NarrowTopNav,
-  TopNav,
-  TopNavProps,
-} from "@okta/odyssey-react-mui/ui-shell";
+import { TopNav, TopNavProps } from "@okta/odyssey-react-mui/ui-shell";
 import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 
@@ -74,27 +70,4 @@ export const Default: StoryObj<TopNavProps> = {
       </div>
     ),
   },
-};
-
-export const Narrow: StoryObj<TopNavProps> = {
-  args: {
-    leftSideComponent: <SearchField label="Search" placeholder="Search..." />,
-    rightSideComponent: (
-      <div
-        style={{
-          display: "flex",
-          gap: odysseyDesignTokens.Spacing5,
-        }}
-      >
-        <Button variant="secondary" label="Connect Builder" />
-
-        <UserProfile
-          profileIcon={<UserIcon />}
-          orgName="ORG123"
-          userName="test.user@test.com"
-        />
-      </div>
-    ),
-  },
-  render: (args) => <NarrowTopNav {...args} />,
 };

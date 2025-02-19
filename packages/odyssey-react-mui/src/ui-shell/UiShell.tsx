@@ -28,6 +28,7 @@ import {
 } from "./UiShellContent.js";
 import { type ReactRootElements } from "../web-component/renderReactInWebComponent.js";
 import { UiShellProvider } from "./UiShellProvider.js";
+// import { NarrowUiShellContent } from "./NarrowUiShellContent.js";
 
 export const defaultComponentProps: UiShellNavComponentProps = {
   sideNavProps: undefined,
@@ -125,6 +126,7 @@ const UiShell = ({
       >
         <ErrorBoundary fallback={appComponent} onError={onError}>
           <CssBaseline />
+
           <UiShellProvider
             appBackgroundColor={appBackgroundColor}
             appBackgroundContrastMode={appBackgroundContrastMode}
@@ -140,6 +142,15 @@ const UiShell = ({
               onError={onError}
               optionalComponents={optionalComponents}
             />
+            {/* <NarrowUiShellContent
+              {...componentProps}
+              appContainerElement={appContainerElement}
+              appContainerScrollingMode={appContainerScrollingMode}
+              hasStandardAppContentPadding={hasStandardAppContentPadding}
+              initialVisibleSections={initialVisibleSections}
+              onError={onError}
+              optionalComponents={optionalComponents}
+            /> */}
           </UiShellProvider>
         </ErrorBoundary>
       </OdysseyProvider>

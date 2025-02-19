@@ -151,6 +151,7 @@ const storybookMeta: Meta<UiShellProps & { sideNavBackgroundColor?: string }> =
     },
     args: {
       appComponent: <div />,
+      appContainerScrollingMode: "vertical",
       onSubscriptionCreated: fn(),
       subscribeToPropChanges: () => fn(),
     },
