@@ -121,7 +121,7 @@ const StyledSideNavContainer = styled("nav", {
   }) => ({
     position: "relative",
     display: "inline-block",
-    height: "100%",
+    height: "auto",
     backgroundColor: backgroundColor || odysseyDesignTokens.HueNeutralWhite,
 
     ...(isAppContentWhiteBackground && {
@@ -642,6 +642,7 @@ const SideNav = ({
           onKeyDown={sideNavExpandKeyHandler}
         />
       )}
+
       <OdysseyThemeProvider>
         <StyledCollapsibleContent
           data-se="collapsible-region"
@@ -652,7 +653,7 @@ const SideNav = ({
             isSideNavCollapsed={isSideNavCollapsed}
             odysseyDesignTokens={odysseyDesignTokens}
           >
-            {appName || logoProps ? (
+            {(appName || logoProps) && (
               <StyledSideNavHeaderContainer
                 hasContentScrolled={hasContentScrolled}
                 odysseyDesignTokens={odysseyDesignTokens}
@@ -664,8 +665,6 @@ const SideNav = ({
                   logoProps={logoProps}
                 />
               </StyledSideNavHeaderContainer>
-            ) : (
-              <div />
             )}
 
             <StyledSideNavScrollableContainer

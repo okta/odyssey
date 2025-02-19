@@ -48,6 +48,15 @@ import { useRepositionAppElementToContainer } from "./useRepositionAppElementToC
 const StyledAppContentArea = styled("div")({
   gridArea: "app-content",
   position: "relative",
+  display: "grid",
+  gridGap: 0,
+  gridTemplateAreas: `
+    "left-side app-container right-side"
+  `,
+  gridTemplateColumns: "auto 1fr auto",
+  gridTemplateRows: "1fr",
+  height: "100%",
+  width: "100%",
 });
 
 const StyledAppContainer = styled("div", {
@@ -58,6 +67,7 @@ const StyledAppContainer = styled("div", {
 }>(({ appBackgroundColor }) => ({
   backgroundColor: appBackgroundColor,
   height: "100%",
+  gridArea: "app-container",
   width: "100%",
 }));
 
@@ -71,9 +81,14 @@ const StyledLeftSideContainer = styled("div", {
   isOpen: boolean;
 }>(({ isOpen }) => ({
   display: isOpen ? "block" : "none",
-  left: 0,
+  height: "100%",
+  // left: 0,
+  gridArea: "left-side",
+  overflowY: "auto",
   position: "absolute",
-  top: 0,
+  // top: 0,
+  // width: 0,
+  zIndex: 100,
 }));
 
 const StyledRightSideContainer = styled("div", {
@@ -82,9 +97,14 @@ const StyledRightSideContainer = styled("div", {
   isOpen: boolean;
 }>(({ isOpen }) => ({
   display: isOpen ? "block" : "none",
-  right: 0,
+  height: "100%",
+  gridArea: "right-side",
+  overflowY: "auto",
   position: "absolute",
-  top: 0,
+  right: 0,
+  // top: 0,
+  // width: 0,
+  zIndex: 100,
 }));
 
 const StyledMenuLogo = styled("div", {
@@ -255,13 +275,14 @@ const NarrowUiShellContent = ({
 
   const [isLeftSideMenuOpen, setIsLeftSideMenuOpen] = useState(false);
   const [isRightSideMenuOpen, setIsRightSideMenuOpen] = useState(false);
-  console.log({ isLeftSideMenuOpen });
 
   const toggleLeftSideMenu = useCallback(() => {
+    setIsRightSideMenuOpen(false);
     setIsLeftSideMenuOpen((isLeftSideMenuOpen) => !isLeftSideMenuOpen);
   }, []);
 
   const toggleRightSideMenu = useCallback(() => {
+    setIsLeftSideMenuOpen(false);
     setIsRightSideMenuOpen((isRightSideMenuOpen) => !isRightSideMenuOpen);
   }, []);
 
@@ -360,11 +381,9 @@ const NarrowUiShellContent = ({
           )}
         </StyledLeftSideContainer>
 
-        <ErrorBoundary fallback={null} onError={onError}>
-          <StyledRightSideContainer isOpen={isRightSideMenuOpen}>
-            {rightSideMenuComponent ?? <div />}
-          </StyledRightSideContainer>
-        </ErrorBoundary>
+        <StyledRightSideContainer isOpen={isRightSideMenuOpen}>
+          {rightSideMenuComponent ?? <div />}
+        </StyledRightSideContainer>
 
         <StyledAppContainer
           appBackgroundColor={uiShellContext?.appBackgroundColor}

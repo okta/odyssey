@@ -20,15 +20,15 @@ import {
 import { ErrorBoundary } from "react-error-boundary";
 
 import { CssBaseline } from "../CssBaseline.js";
+import { NarrowUiShellContent } from "./NarrowUiShellContent.js";
 import { OdysseyProvider } from "../OdysseyProvider.js";
 import {
-  UiShellContent,
+  // UiShellContent,
   type UiShellContentProps,
   type UiShellNavComponentProps,
 } from "./UiShellContent.js";
-import { type ReactRootElements } from "../web-component/renderReactInWebComponent.js";
 import { UiShellProvider } from "./UiShellProvider.js";
-// import { NarrowUiShellContent } from "./NarrowUiShellContent.js";
+import { type ReactRootElements } from "../web-component/renderReactInWebComponent.js";
 
 export const defaultComponentProps: UiShellNavComponentProps = {
   sideNavProps: undefined,
@@ -133,16 +133,7 @@ const UiShell = ({
             sideNavBackgroundColor={sideNavBackgroundColor}
             topNavBackgroundColor={topNavBackgroundColor}
           >
-            <UiShellContent
-              {...componentProps}
-              appContainerElement={appContainerElement}
-              appContainerScrollingMode={appContainerScrollingMode}
-              hasStandardAppContentPadding={hasStandardAppContentPadding}
-              initialVisibleSections={initialVisibleSections}
-              onError={onError}
-              optionalComponents={optionalComponents}
-            />
-            {/* <NarrowUiShellContent
+            {/* <UiShellContent
               {...componentProps}
               appContainerElement={appContainerElement}
               appContainerScrollingMode={appContainerScrollingMode}
@@ -151,6 +142,15 @@ const UiShell = ({
               onError={onError}
               optionalComponents={optionalComponents}
             /> */}
+            <NarrowUiShellContent
+              {...componentProps}
+              appContainerElement={appContainerElement}
+              appContainerScrollingMode={appContainerScrollingMode}
+              hasStandardAppContentPadding={hasStandardAppContentPadding}
+              initialVisibleSections={initialVisibleSections}
+              onError={onError}
+              optionalComponents={optionalComponents}
+            />
           </UiShellProvider>
         </ErrorBoundary>
       </OdysseyProvider>

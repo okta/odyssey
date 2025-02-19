@@ -28,8 +28,8 @@ const HamburgerMenu = forwardRef<SVGSVGElement, HamburgerMenuProps>(
         {...props}
       >
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M21.333 5.778H2.667V4H21.333V5.778ZM21.333 12.885H2.667V11.111H21.333V12.885ZM2.667 20H21.333V18.221H2.667V20Z"
           fill="currentColor"
         />
