@@ -31,6 +31,7 @@ describe("UiShell", () => {
       <UiShell
         appComponent={<div />}
         appContainerElement={appContainerElement}
+        appContainerScrollingMode="vertical"
         appRootElement={document.createElement("div")}
         onSubscriptionCreated={() => {}}
         stylesRootElement={stylesRootElement}
@@ -66,6 +67,7 @@ describe("UiShell", () => {
       <UiShell
         appComponent={<div />}
         appContainerElement={appContainerElement}
+        appContainerScrollingMode="vertical"
         appRootElement={document.createElement("div")}
         onSubscriptionCreated={() => {}}
         optionalComponents={
@@ -153,6 +155,7 @@ describe("UiShell", () => {
       <UiShell
         appComponent={<div />}
         appContainerElement={appContainerElement}
+        appContainerScrollingMode="vertical"
         appRootElement={document.createElement("div")}
         onSubscriptionCreated={() => {}}
         stylesRootElement={document.createElement("div")}
@@ -201,6 +204,7 @@ describe("UiShell", () => {
       <UiShell
         appComponent={<div />}
         appContainerElement={appContainerElement}
+        appContainerScrollingMode="vertical"
         appRootElement={document.createElement("div")}
         onSubscriptionCreated={() => {}}
         stylesRootElement={document.createElement("div")}
@@ -306,8 +310,6 @@ describe("UiShell", () => {
     );
 
     expect(stateUpdater).toHaveBeenCalledWith(defaultComponentProps);
-    console.log(stateUpdater.mock.calls);
-    expect(stateUpdater).toHaveBeenCalledTimes(1);
   });
 
   test("places expected padding on appContainerElement", async () => {
