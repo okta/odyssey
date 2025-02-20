@@ -34,6 +34,7 @@ import {
 } from "./unifiedUiShellContentTypes.js";
 import { useScrollState } from "./useScrollState.js";
 import { useRepositionAppElementToContainerEffect } from "./useRepositionAppElementToContainerEffect.js";
+import { hexToRgb } from "../hexToRgb.js";
 
 const StyledAppContentArea = styled("div")({
   gridArea: "app-content",
@@ -63,6 +64,7 @@ const StyledAppContainer = styled("div", {
 
 const StyledBannersContainer = styled("div")({
   gridArea: "banners",
+  zIndex: 100,
 });
 
 const StyledLeftSideContainer = styled("div", {
@@ -105,6 +107,23 @@ const StyledMenuLogo = styled("div", {
   alignItems: "center",
   display: "inline-flex",
   gap: odysseyDesignTokens.Spacing3,
+}));
+
+const StyledPageOverlay = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  backgroundColor: hexToRgb(
+    odysseyDesignTokens.HueNeutral900,
+  ).asFormattedString.replace(/rgb\((.+)\)$/, "rgba($1, 0.26)"),
+  gridArea: "app-content",
+  height: "100vh",
+  left: 0,
+  position: "absolute",
+  top: 0,
+  width: "100vw",
+  zIndex: 100,
 }));
 
 const StyledSideNavContainer = styled("div")({
@@ -221,6 +240,11 @@ const NarrowUiShellContent = ({
   const [isLeftSideMenuOpen, setIsLeftSideMenuOpen] = useState(false);
   const [isRightSideMenuOpen, setIsRightSideMenuOpen] = useState(false);
 
+  const closeSideMenus = useCallback(() => {
+    setIsLeftSideMenuOpen(false);
+    setIsRightSideMenuOpen(false);
+  }, []);
+
   const toggleLeftSideMenu = useCallback(() => {
     setIsRightSideMenuOpen(false);
     setIsLeftSideMenuOpen((isLeftSideMenuOpen) => !isLeftSideMenuOpen);
@@ -241,104 +265,115 @@ const NarrowUiShellContent = ({
   });
 
   return (
-    <StyledUiShellContainer odysseyDesignTokens={odysseyDesignTokens}>
-      <StyledBannersContainer>
-        {optionalComponents?.banners}
-      </StyledBannersContainer>
+    <>
+      {(isLeftSideMenuOpen || isRightSideMenuOpen) && (
+        <StyledPageOverlay
+          odysseyDesignTokens={odysseyDesignTokens}
+          onClick={closeSideMenus}
+        />
+      )}
 
-      {(initialVisibleSections?.includes("TopNav") || topNavProps) && (
-        <ErrorBoundary fallback={null} onError={onError}>
-          <StyledTopNav
-            isContentScrolled={isContentScrolled}
-            odysseyDesignTokens={odysseyDesignTokens}
-            topNavBackgroundColor={uiShellContext?.sideNavBackgroundColor}
-          >
-            <StyledTopNavMenu
+      <StyledUiShellContainer odysseyDesignTokens={odysseyDesignTokens}>
+        <StyledBannersContainer>
+          {optionalComponents?.banners}
+        </StyledBannersContainer>
+
+        {(initialVisibleSections?.includes("TopNav") || topNavProps) && (
+          <ErrorBoundary fallback={null} onError={onError}>
+            <StyledTopNav
+              isContentScrolled={isContentScrolled}
               odysseyDesignTokens={odysseyDesignTokens}
               topNavBackgroundColor={uiShellContext?.sideNavBackgroundColor}
             >
-              <StyledMenuLogo odysseyDesignTokens={odysseyDesignTokens}>
-                <Button
-                  onClick={toggleLeftSideMenu}
-                  startIcon={<HamburgerMenuIcon />}
-                  variant="floating"
-                />
+              <StyledTopNavMenu
+                odysseyDesignTokens={odysseyDesignTokens}
+                topNavBackgroundColor={uiShellContext?.sideNavBackgroundColor}
+              >
+                <StyledMenuLogo odysseyDesignTokens={odysseyDesignTokens}>
+                  <Button
+                    onClick={toggleLeftSideMenu}
+                    startIcon={<HamburgerMenuIcon />}
+                    variant="floating"
+                  />
 
-                <StyledLogoContainer>
-                  {sideNavProps?.isLoading ? (
-                    //  The skeleton takes the hardcoded dimensions of the Okta logo
-                    <Skeleton variant="rounded" height={24} width={67} />
-                  ) : (
-                    <SideNavLogo {...sideNavProps?.logoProps} />
-                  )}
-                </StyledLogoContainer>
-              </StyledMenuLogo>
+                  <StyledLogoContainer>
+                    {sideNavProps?.isLoading ? (
+                      //  The skeleton takes the hardcoded dimensions of the Okta logo
+                      <Skeleton variant="rounded" height={24} width={67} />
+                    ) : (
+                      <SideNavLogo {...sideNavProps?.logoProps} />
+                    )}
+                  </StyledLogoContainer>
+                </StyledMenuLogo>
 
-              {optionalComponents?.rightSideMenu && (
-                <Button
-                  onClick={toggleRightSideMenu}
-                  startIcon={isRightSideMenuOpen ? <CloseIcon /> : <MoreIcon />}
-                  variant="floating"
-                />
-              )}
-            </StyledTopNavMenu>
+                {optionalComponents?.rightSideMenu && (
+                  <Button
+                    onClick={toggleRightSideMenu}
+                    startIcon={
+                      isRightSideMenuOpen ? <CloseIcon /> : <MoreIcon />
+                    }
+                    variant="floating"
+                  />
+                )}
+              </StyledTopNavMenu>
 
-            <StyledTopNavSearch odysseyDesignTokens={odysseyDesignTokens}>
-              {optionalComponents?.topNavLeftSide}
-            </StyledTopNavSearch>
-          </StyledTopNav>
-        </ErrorBoundary>
-      )}
+              <StyledTopNavSearch odysseyDesignTokens={odysseyDesignTokens}>
+                {optionalComponents?.topNavLeftSide}
+              </StyledTopNavSearch>
+            </StyledTopNav>
+          </ErrorBoundary>
+        )}
 
-      <StyledAppContentArea>
-        <StyledLeftSideContainer isOpen={isLeftSideMenuOpen}>
-          {sideNavProps && (
-            <ErrorBoundary fallback={null} onError={onError}>
-              <StyledSideNavContainer>
-                <SideNav
-                  {...{
-                    ...{
-                      ...sideNavProps,
-                      // This hides the side nav logo or app name from showing up as we already have one in the narrow top nav.
-                      appName: undefined,
-                      logoProps: undefined,
-                    },
-                    ...(sideNavProps.hasCustomFooter &&
-                    optionalComponents?.sideNavFooter
-                      ? {
-                          footerComponent: optionalComponents.sideNavFooter,
-                          footerItems: undefined,
-                          hasCustomFooter: sideNavProps.hasCustomFooter,
-                        }
-                      : {
-                          footerItems: sideNavProps.footerItems,
-                          hasCustomFooter: false,
-                        }),
-                  }}
-                  isCollapsed={false}
-                  isCollapsible={false}
-                />
-              </StyledSideNavContainer>
-            </ErrorBoundary>
-          )}
-        </StyledLeftSideContainer>
+        <StyledAppContentArea>
+          <StyledLeftSideContainer isOpen={isLeftSideMenuOpen}>
+            {sideNavProps && (
+              <ErrorBoundary fallback={null} onError={onError}>
+                <StyledSideNavContainer>
+                  <SideNav
+                    {...{
+                      ...{
+                        ...sideNavProps,
+                        // This hides the side nav logo or app name from showing up as we already have one in the narrow top nav.
+                        appName: undefined,
+                        logoProps: undefined,
+                      },
+                      ...(sideNavProps.hasCustomFooter &&
+                      optionalComponents?.sideNavFooter
+                        ? {
+                            footerComponent: optionalComponents.sideNavFooter,
+                            footerItems: undefined,
+                            hasCustomFooter: sideNavProps.hasCustomFooter,
+                          }
+                        : {
+                            footerItems: sideNavProps.footerItems,
+                            hasCustomFooter: false,
+                          }),
+                    }}
+                    isCollapsed={false}
+                    isCollapsible={false}
+                  />
+                </StyledSideNavContainer>
+              </ErrorBoundary>
+            )}
+          </StyledLeftSideContainer>
 
-        <StyledRightSideContainer
-          isOpen={isRightSideMenuOpen}
-          odysseyDesignTokens={odysseyDesignTokens}
-        >
-          <StyledSideNavContainer>
-            {optionalComponents?.rightSideMenu}
-          </StyledSideNavContainer>
-        </StyledRightSideContainer>
+          <StyledRightSideContainer
+            isOpen={isRightSideMenuOpen}
+            odysseyDesignTokens={odysseyDesignTokens}
+          >
+            <StyledSideNavContainer>
+              {optionalComponents?.rightSideMenu}
+            </StyledSideNavContainer>
+          </StyledRightSideContainer>
 
-        <StyledAppContainer
-          appBackgroundColor={uiShellContext?.appBackgroundColor}
-          tabIndex={0}
-          ref={appContainerRef}
-        />
-      </StyledAppContentArea>
-    </StyledUiShellContainer>
+          <StyledAppContainer
+            appBackgroundColor={uiShellContext?.appBackgroundColor}
+            tabIndex={0}
+            ref={appContainerRef}
+          />
+        </StyledAppContentArea>
+      </StyledUiShellContainer>
+    </>
   );
 };
 
