@@ -44,12 +44,12 @@ const StyledAppContainer = styled("div", {
   backgroundColor: appBackgroundColor,
 }));
 
-const StyledBannersContainer = styled("div")({
-  gridArea: "banners",
-});
-
 const StyledAppSwitcherContainer = styled("div")({
   gridArea: "app-switcher",
+});
+
+const StyledBannersContainer = styled("div")({
+  gridArea: "banners",
 });
 
 const StyledSideNavContainer = styled("div")({
