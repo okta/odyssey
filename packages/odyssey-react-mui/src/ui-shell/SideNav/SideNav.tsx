@@ -234,7 +234,7 @@ const StyledSectionHeaderContainer = styled("li", {
   }),
 );
 
-const SideNavFooterStyles = styled("div", {
+const StyledSideNavFooter = styled("div", {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" && prop !== "sideNavBackgroundColor",
 })(
@@ -256,7 +256,7 @@ const SideNavFooterStyles = styled("div", {
   }),
 );
 
-const StyledPersistentSideNavFooter = styled(SideNavFooterStyles, {
+const StyledPersistentSideNavFooter = styled(StyledSideNavFooter, {
   shouldForwardProp: (prop) =>
     prop !== "isContentScrollable" &&
     prop !== "odysseyDesignTokens" &&
@@ -787,7 +787,7 @@ const SideNav = ({
                     })}
               </StyledSideNavListContainer>
               {!isLoading && footerItems && !hasCustomFooter && (
-                <SideNavFooterStyles
+                <StyledSideNavFooter
                   odysseyDesignTokens={odysseyDesignTokens}
                   sideNavBackgroundColor={
                     uiShellContext?.sideNavBackgroundColor
@@ -801,7 +801,7 @@ const SideNav = ({
                   >
                     <SideNavFooterContent footerItems={footerItems} />
                   </StyledSideNavFooterItemsContainer>
-                </SideNavFooterStyles>
+                </StyledSideNavFooter>
               )}
             </StyledSideNavScrollableContainer>
             {!isLoading && !footerItems && hasCustomFooter && (
