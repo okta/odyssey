@@ -121,7 +121,7 @@ const StyledSideNavContainer = styled("nav", {
   }) => ({
     position: "relative",
     display: "inline-block",
-    height: "100%", // TODO: Change to "auto" when in narrow view.
+    height: "100%",
     backgroundColor: backgroundColor || odysseyDesignTokens.HueNeutralWhite,
 
     ...(isAppContentWhiteBackground && {
