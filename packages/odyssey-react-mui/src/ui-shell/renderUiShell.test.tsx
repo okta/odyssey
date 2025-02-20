@@ -35,6 +35,7 @@ describe("renderUiShell", () => {
 
     act(() => {
       const { appRootElement } = renderUiShell({
+        appContainerScrollingMode: "vertical",
         uiShellRootElement: rootElement,
       });
 
@@ -50,6 +51,7 @@ describe("renderUiShell", () => {
 
     act(() => {
       const { slottedElements } = renderUiShell({
+        appContainerScrollingMode: "vertical",
         uiShellRootElement: rootElement,
       });
 
@@ -68,6 +70,7 @@ describe("renderUiShell", () => {
 
     act(() => {
       const { uiShellElement } = renderUiShell({
+        appContainerScrollingMode: "vertical",
         uiShellRootElement: rootElement,
       });
 
@@ -84,6 +87,7 @@ describe("renderUiShell", () => {
     // This needs to be wrapped in `act` because the web component mounts the React app, and React events have to be wrapped in `act`.
     act(() => {
       renderUiShell({
+        appContainerScrollingMode: "vertical",
         uiShellRootElement: rootElement,
       });
     });
@@ -110,6 +114,7 @@ describe("renderUiShell", () => {
     // This needs to be wrapped in `act` because the web component mounts the React app, and React events have to be wrapped in `act`.
     act(() => {
       const renderUiShellReturnValue = renderUiShell({
+        appContainerScrollingMode: "vertical",
         uiShellRootElement: rootElement,
       });
 
@@ -143,6 +148,7 @@ describe("renderUiShell", () => {
     // This needs to be wrapped in `act` because the web component mounts the React app, and React events have to be wrapped in `act`.
     act(() => {
       const { setComponentProps } = renderUiShell({
+        appContainerScrollingMode: "vertical",
         uiShellRootElement: rootElement,
       });
 
@@ -176,6 +182,7 @@ describe("renderUiShell", () => {
 
     act(() => {
       const { setComponentProps } = renderUiShell({
+        appContainerScrollingMode: "vertical",
         onError,
         uiShellRootElement: rootElement,
       });
