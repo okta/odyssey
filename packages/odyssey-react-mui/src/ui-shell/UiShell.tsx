@@ -127,7 +127,7 @@ const UiShell = ({
     };
   }, [onSubscriptionCreated, subscribeToPropChanges]);
 
-  return (
+  return activeBreakpoint === "none" ? null : (
     <ErrorBoundary fallback={appComponent} onError={onError}>
       <OdysseyProvider
         emotionRootElement={stylesRootElement}

@@ -18,7 +18,13 @@ export const uiShellBreakpoint = {
   wide: 800,
 } as const;
 
-export const useUiShellBreakpoints = (): keyof typeof uiShellBreakpoint => {
+export const useUiShellBreakpoints = ():
+  | keyof typeof uiShellBreakpoint
+  | "none" => {
+  const isNarrowView = useMediaQuery(
+    `(min-width: ${uiShellBreakpoint.narrow}px)`,
+  );
+
   const isConstrainedView = useMediaQuery(
     `(min-width: ${uiShellBreakpoint.constrained}px)`,
   );
@@ -33,5 +39,9 @@ export const useUiShellBreakpoints = (): keyof typeof uiShellBreakpoint => {
     return "constrained";
   }
 
-  return "narrow";
+  if (isNarrowView) {
+    return "narrow";
+  }
+
+  return "none";
 };
