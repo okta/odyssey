@@ -14,8 +14,8 @@ import { useMediaQuery } from "../theme/useMediaQuery.js";
 
 export const uiShellBreakpoint = {
   narrow: 0,
-  constrained: 520,
-  wide: 1024,
+  constrained: 600,
+  wide: 800,
 } as const;
 
 export const useUiShellBreakpoints = (): keyof typeof uiShellBreakpoint => {

@@ -51,6 +51,16 @@ const storybookMeta: Meta<UiShellProps & { sideNavBackgroundColor?: string }> =
     title: "UI Shell Components/UI Shell",
     component: UiShell,
     argTypes: {
+      appBackgroundColor: {
+        control: "color",
+        description:
+          "Custom color for app content background. Should only be used as a stop-gap to allow support for dark mode.",
+        table: {
+          type: {
+            summary: "hex color code",
+          },
+        },
+      },
       appComponent: {
         control: undefined,
         description: "App component that renders inside the content area.",
@@ -59,24 +69,24 @@ const storybookMeta: Meta<UiShellProps & { sideNavBackgroundColor?: string }> =
             summary: "InputType",
           },
         },
-        hasStandardAppContentPadding: {
-          control: "boolean",
-          description:
-            "defaults to `true`. If `false`, the content area will have no padding provided",
-          table: {
-            type: {
-              summary: "boolean",
-            },
+      },
+      hasStandardAppContentPadding: {
+        control: "boolean",
+        description:
+          "defaults to `true`. If `false`, the content area will have no padding provided",
+        table: {
+          type: {
+            summary: "boolean",
           },
         },
-        initialVisibleSections: {
-          control: "text",
-          description:
-            "A list of UiShell components that should be (minimally) rendered initially, with their isLoading property set when applicable. Allows the initial visibility of UiShell components to be influenced.",
-          table: {
-            type: {
-              summary: "string",
-            },
+      },
+      initialVisibleSections: {
+        control: "text",
+        description:
+          "A list of UiShell components that should be (minimally) rendered initially, with their isLoading property set when applicable. Allows the initial visibility of UiShell components to be influenced.",
+        table: {
+          type: {
+            summary: "string",
           },
         },
       },
@@ -110,31 +120,21 @@ const storybookMeta: Meta<UiShellProps & { sideNavBackgroundColor?: string }> =
           },
         },
       },
-      subscribeToPropChanges: {
-        description:
-          "This is a callback that provides a subscriber callback to listen for changes to state. It allows UI Shell to listen for state changes. The props coming in this callback go directly to a React state; therefore, it shares the same signature and provides a previous state.",
-        table: {
-          type: {
-            summary: "MouseEventHandler",
-          },
-        },
-      },
-      appBackgroundColor: {
-        control: "color",
-        description:
-          "Custom color for app content background. Should only be used as a stop-gap to allow support for dark mode.",
-        table: {
-          type: {
-            summary: "hex color code",
-          },
-        },
-      },
       sideNavBackgroundColor: {
         control: "color",
         description: "Custom color for side nav background",
         table: {
           type: {
             summary: "hex color code",
+          },
+        },
+      },
+      subscribeToPropChanges: {
+        description:
+          "This is a callback that provides a subscriber callback to listen for changes to state. It allows UI Shell to listen for state changes. The props coming in this callback go directly to a React state; therefore, it shares the same signature and provides a previous state.",
+        table: {
+          type: {
+            summary: "MouseEventHandler",
           },
         },
       },
@@ -162,7 +162,7 @@ const storybookMeta: Meta<UiShellProps & { sideNavBackgroundColor?: string }> =
 
 export default storybookMeta;
 
-const sharedAppSwitcherProps: UiShellNavComponentProps["appSwitcherProps"] = {
+const sharedAppSwitcherProps = {
   appIcons: [
     {
       appIconDefaultUrl: "/appswitcher/admin-app-default.svg",
@@ -188,9 +188,9 @@ const sharedAppSwitcherProps: UiShellNavComponentProps["appSwitcherProps"] = {
   ],
   isLoading: false,
   selectedAppName: "okta_enduser",
-};
+} as const satisfies UiShellNavComponentProps["appSwitcherProps"];
 
-const sharedSideNavProps: UiShellNavComponentProps["sideNavProps"] = {
+const sharedSideNavProps = {
   appName: "Enduser",
   isCollapsible: true,
   sideNavItems: [
@@ -400,9 +400,9 @@ const sharedSideNavProps: UiShellNavComponentProps["sideNavProps"] = {
       href: "/",
     },
   ],
-};
+} as const satisfies UiShellNavComponentProps["sideNavProps"];
 
-const sharedTopNavProps: UiShellNavComponentProps["topNavProps"] = {
+const sharedTopNavProps = {
   // topNavLinkItems: [
   //   {
   //     id: "link-01",
@@ -426,9 +426,9 @@ const sharedTopNavProps: UiShellNavComponentProps["topNavProps"] = {
   //     onClick: () => {},
   //   },
   // ],
-};
+} as const satisfies UiShellNavComponentProps["topNavProps"];
 
-const sharedOptionalComponents: UiShellProps["optionalComponents"] = {
+const sharedOptionalComponents = {
   topNavLeftSide: (
     <div>
       <SearchField label="Search" placeholder="Search..." />
@@ -441,7 +441,7 @@ const sharedOptionalComponents: UiShellProps["optionalComponents"] = {
       userName="test.user@test.com"
     />
   ),
-};
+} as const satisfies UiShellProps["optionalComponents"];
 
 const useRefWithRerenderHack = () => {
   /**
@@ -797,6 +797,13 @@ export const WithOdysseyAppContent: StoryObj<UiShellProps> = {
     optionalComponents: {
       ...sharedOptionalComponents,
       banners: <Banner severity="success" text="This is an app!" />,
+      rightSideMenu: (
+        <UserProfile
+          profileIcon={<UserIcon />}
+          orgName="ORG123"
+          userName="test.user@test.com"
+        />
+      ),
     },
     subscribeToPropChanges: (subscriber) => {
       subscriber({

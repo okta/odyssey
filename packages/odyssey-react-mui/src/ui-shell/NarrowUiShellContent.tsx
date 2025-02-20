@@ -12,38 +12,28 @@
 
 import styled from "@emotion/styled";
 import { Skeleton } from "@mui/material";
-import {
-  CSSProperties,
-  memo,
-  useCallback,
-  useRef,
-  useState,
-  type ReactElement,
-} from "react";
-import { ErrorBoundary, ErrorBoundaryProps } from "react-error-boundary";
+import { CSSProperties, memo, useCallback, useRef, useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 
 import { Button } from "../Buttons/Button.js";
 import type { HtmlProps } from "../HtmlProps.js";
+import { CloseIcon } from "../icons.generated/Close.js";
 import { MoreIcon } from "../icons.generated/More.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../OdysseyDesignTokensContext.js";
-import { SharedUnifiedUiShellProps } from "./SharedUnifiedUiShellProps.js";
-import { SideNav } from "./SideNav/SideNav.js";
+import { DEFAULT_SIDE_NAV_WIDTH, SideNav } from "./SideNav/SideNav.js";
 import { SideNavLogo } from "./SideNav/SideNavLogo.js";
-import { SideNavProps } from "./SideNav/types.js";
-import { OktaLogo } from "./SideNav/OktaLogo.js";
-import { HamburgerMenu } from "./TopNav/HamburgerMenuIcon.js";
-import { TOP_NAV_HEIGHT, TopNavProps } from "./TopNav/TopNav.js";
-import {
-  SubComponentName,
-  UiShellNavComponentProps,
-} from "./UiShellContent.js";
+import { HamburgerMenuIcon } from "./TopNav/HamburgerMenuIcon.js";
+import { TOP_NAV_HEIGHT } from "./TopNav/TopNav.js";
 import { UiShellColors, useUiShellContext } from "./UiShellProvider.js";
-import { ContrastMode } from "../useContrastMode.js";
+import {
+  UiShellNavComponentProps,
+  UnifiedUiShellContentProps,
+} from "./unifiedUiShellContentTypes.js";
 import { useScrollState } from "./useScrollState.js";
-import { useRepositionAppElementToContainer } from "./useRepositionAppElementToContainer.js";
+import { useRepositionAppElementToContainerEffect } from "./useRepositionAppElementToContainerEffect.js";
 
 const StyledAppContentArea = styled("div")({
   gridArea: "app-content",
@@ -82,28 +72,28 @@ const StyledLeftSideContainer = styled("div", {
 }>(({ isOpen }) => ({
   display: isOpen ? "block" : "none",
   height: "100%",
-  // left: 0,
   gridArea: "left-side",
   overflowY: "auto",
   position: "absolute",
-  // top: 0,
-  // width: 0,
   zIndex: 100,
 }));
 
 const StyledRightSideContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "isOpen",
+  shouldForwardProp: (prop) =>
+    prop !== "isOpen" && prop !== "odysseyDesignTokens",
 })<{
   isOpen: boolean;
-}>(({ isOpen }) => ({
+  odysseyDesignTokens: DesignTokens;
+}>(({ isOpen, odysseyDesignTokens }) => ({
+  backgroundColor: odysseyDesignTokens.HueNeutralWhite,
   display: isOpen ? "block" : "none",
-  height: "100%",
   gridArea: "right-side",
+  height: "100%",
+  maxWidth: DEFAULT_SIDE_NAV_WIDTH,
   overflowY: "auto",
   position: "absolute",
   right: 0,
-  // top: 0,
-  // width: 0,
+  width: DEFAULT_SIDE_NAV_WIDTH,
   zIndex: 100,
 }));
 
@@ -170,13 +160,6 @@ const StyledTopNav = styled("div", {
   position: "relative",
   transition: `box-shadow ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
   zIndex: 100,
-
-  ...(topNavBackgroundColor === odysseyDesignTokens.HueNeutralWhite &&
-    ({
-      borderBottomColor: odysseyDesignTokens.HueNeutral100,
-      borderBottomStyle: odysseyDesignTokens.BorderStyleMain,
-      borderBottomWidth: odysseyDesignTokens.BorderWidthMain,
-    } as CSSProperties)),
 }));
 
 const StyledTopNavMenu = styled("div", {
@@ -214,61 +197,19 @@ const StyledTopNavSearch = styled("div", {
   paddingInline: odysseyDesignTokens.Spacing3,
 }));
 
-export type NarrowUiShellContentProps = {
-  /**
-   * Sets a custom background color for the app content area.
-   */
-  appBackgroundColor?: string;
-  /**
-   * Sets either a gray or white background color for the app content area.
-   */
-  appBackgroundContrastMode?: ContrastMode;
-  /**
-   * Which parts of the UI Shell should be visible initially? For example,
-   * if sideNavProps is undefined, should the space for the sidenav be initially visible?
-   */
-  initialVisibleSections?: SubComponentName[];
-  /**
-   *  Before the side nav has items, it will be in a loading state.
-   */
-  isLoading?: boolean;
-  /**
-   * React components that render under the top nav. This is typically a search bar.
-   */
-  lowerTopNavComponent?: ReactElement;
-  /**
-   * Notifies when a React rendering error occurs. This could be useful for logging, flagging "p0"s, and recovering UI Shell when errors occur.
-   */
-  onError?: ErrorBoundaryProps["onError"];
-  /**
-   * Components that will render as children of various other components such as the top nav or side nav.
-   */
-  optionalComponents?: {
-    banners?: ReactElement;
-    sideNavFooter?: SideNavProps["footerComponent"];
-    topNavLeftSide?: TopNavProps["leftSideComponent"];
-    topNavRightSide?: TopNavProps["rightSideComponent"];
-  };
-  /**
-   * React components that render into the right side menu of the top nav.
-   */
-  rightSideMenuComponent?: ReactElement;
-} & Pick<HtmlProps, "testId"> &
+export type NarrowUiShellContentProps = Pick<HtmlProps, "testId"> &
   Pick<UiShellNavComponentProps, "sideNavProps" | "topNavProps"> &
-  SharedUnifiedUiShellProps;
+  UnifiedUiShellContentProps;
 
 const NarrowUiShellContent = ({
   appContainerElement,
   appContainerScrollingMode,
   hasStandardAppContentPadding = true,
-  // initialVisibleSections = ["TopNav", "SideNav", "AppSwitcher"],
-  isLoading,
-  lowerTopNavComponent,
+  initialVisibleSections = ["TopNav", "SideNav", "AppSwitcher"],
   onError = console.error,
   optionalComponents,
-  rightSideMenuComponent,
   sideNavProps,
-  // topNavProps,
+  topNavProps,
 }: NarrowUiShellContentProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { isContentScrolled, scrollableContentRef: appContainerRef } =
@@ -290,7 +231,7 @@ const NarrowUiShellContent = ({
     setIsRightSideMenuOpen((isRightSideMenuOpen) => !isRightSideMenuOpen);
   }, []);
 
-  useRepositionAppElementToContainer({
+  useRepositionAppElementToContainerEffect({
     appContainerElement,
     appContainerRef,
     appContainerScrollingMode,
@@ -299,63 +240,58 @@ const NarrowUiShellContent = ({
     resizingRefs: [sideNavContainerRef, topNavContainerRef],
   });
 
-  // TODO: Change this to use passed-in props.
-  const logoProps = {
-    logoComponent: <OktaLogo />,
-  };
-
   return (
     <StyledUiShellContainer odysseyDesignTokens={odysseyDesignTokens}>
       <StyledBannersContainer>
         {optionalComponents?.banners}
       </StyledBannersContainer>
 
-      <ErrorBoundary fallback={null} onError={onError}>
-        <StyledTopNav
-          odysseyDesignTokens={odysseyDesignTokens}
-          isContentScrolled={isContentScrolled}
-          topNavBackgroundColor={uiShellContext?.sideNavBackgroundColor}
-        >
-          <StyledTopNavMenu
+      {(initialVisibleSections?.includes("TopNav") || topNavProps) && (
+        <ErrorBoundary fallback={null} onError={onError}>
+          <StyledTopNav
+            isContentScrolled={isContentScrolled}
             odysseyDesignTokens={odysseyDesignTokens}
             topNavBackgroundColor={uiShellContext?.sideNavBackgroundColor}
           >
-            <StyledMenuLogo odysseyDesignTokens={odysseyDesignTokens}>
-              <Button
-                onClick={toggleLeftSideMenu}
-                startIcon={<HamburgerMenu />}
-                variant="floating"
-              />
+            <StyledTopNavMenu
+              odysseyDesignTokens={odysseyDesignTokens}
+              topNavBackgroundColor={uiShellContext?.sideNavBackgroundColor}
+            >
+              <StyledMenuLogo odysseyDesignTokens={odysseyDesignTokens}>
+                <Button
+                  onClick={toggleLeftSideMenu}
+                  startIcon={<HamburgerMenuIcon />}
+                  variant="floating"
+                />
 
-              <StyledLogoContainer>
-                {isLoading ? (
-                  //  The skeleton takes the hardcoded dimensions of the Okta logo
-                  <Skeleton variant="rounded" height={24} width={67} />
-                ) : (
-                  <SideNavLogo {...logoProps} />
-                )}
-              </StyledLogoContainer>
-            </StyledMenuLogo>
+                <StyledLogoContainer>
+                  {sideNavProps?.isLoading ? (
+                    //  The skeleton takes the hardcoded dimensions of the Okta logo
+                    <Skeleton variant="rounded" height={24} width={67} />
+                  ) : (
+                    <SideNavLogo {...sideNavProps?.logoProps} />
+                  )}
+                </StyledLogoContainer>
+              </StyledMenuLogo>
 
-            <Button
-              onClick={toggleRightSideMenu}
-              startIcon={<MoreIcon />}
-              variant="floating"
-            />
-          </StyledTopNavMenu>
+              {optionalComponents?.rightSideMenu && (
+                <Button
+                  onClick={toggleRightSideMenu}
+                  startIcon={isRightSideMenuOpen ? <CloseIcon /> : <MoreIcon />}
+                  variant="floating"
+                />
+              )}
+            </StyledTopNavMenu>
 
-          <StyledTopNavSearch odysseyDesignTokens={odysseyDesignTokens}>
-            {optionalComponents?.topNavLeftSide}
-          </StyledTopNavSearch>
-        </StyledTopNav>
-      </ErrorBoundary>
+            <StyledTopNavSearch odysseyDesignTokens={odysseyDesignTokens}>
+              {optionalComponents?.topNavLeftSide}
+            </StyledTopNavSearch>
+          </StyledTopNav>
+        </ErrorBoundary>
+      )}
 
       <StyledAppContentArea>
         <StyledLeftSideContainer isOpen={isLeftSideMenuOpen}>
-          <ErrorBoundary fallback={null} onError={onError}>
-            {lowerTopNavComponent ?? <div />}
-          </ErrorBoundary>
-
           {sideNavProps && (
             <ErrorBoundary fallback={null} onError={onError}>
               <StyledSideNavContainer>
@@ -387,8 +323,13 @@ const NarrowUiShellContent = ({
           )}
         </StyledLeftSideContainer>
 
-        <StyledRightSideContainer isOpen={isRightSideMenuOpen}>
-          {rightSideMenuComponent ?? <div />}
+        <StyledRightSideContainer
+          isOpen={isRightSideMenuOpen}
+          odysseyDesignTokens={odysseyDesignTokens}
+        >
+          <StyledSideNavContainer>
+            {optionalComponents?.rightSideMenu}
+          </StyledSideNavContainer>
         </StyledRightSideContainer>
 
         <StyledAppContainer

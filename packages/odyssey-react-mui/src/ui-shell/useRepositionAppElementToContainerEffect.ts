@@ -12,7 +12,7 @@
 
 import { CSSProperties, RefObject, useEffect, useMemo } from "react";
 import { DesignTokens } from "../OdysseyDesignTokensContext.js";
-import { SharedUnifiedUiShellProps } from "./SharedUnifiedUiShellProps.js";
+import { UnifiedUiShellContentProps } from "./unifiedUiShellContentTypes.js";
 
 export const convertCamelCaseToKebabCase = (string: string) =>
   string.replace(/([A-Z])/g, "-$1").toLowerCase();
@@ -33,6 +33,7 @@ export const setStylesToMatchElement = ({
   appContainerElement.style.setProperty("left", `${boundingRect.x}px`);
   appContainerElement.style.setProperty("width", `${boundingRect.width}px`);
   appContainerElement.style.setProperty("height", `${boundingRect.height}px`);
+  appContainerElement.style.setProperty("z-index", "1");
 
   (
     Object.entries(additionalStyles) as Array<
@@ -56,9 +57,9 @@ export type UseRepositionAppElementToContainerProps = {
    * Array of refs of items that indirectly resize the app content area such as "side nav" and "top nav".
    */
   resizingRefs: Array<RefObject<HTMLDivElement>>;
-} & SharedUnifiedUiShellProps;
+} & UnifiedUiShellContentProps;
 
-export const useRepositionAppElementToContainer = ({
+export const useRepositionAppElementToContainerEffect = ({
   appContainerElement,
   appContainerScrollingMode,
   appContainerRef,

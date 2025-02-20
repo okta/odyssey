@@ -12,20 +12,22 @@
 
 import styled from "@emotion/styled";
 import { ScopedCssBaseline } from "@mui/material";
-import { memo, useRef, type ReactElement } from "react";
-import { ErrorBoundary, ErrorBoundaryProps } from "react-error-boundary";
+import { memo, useRef } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 
-import { AppSwitcher, type AppSwitcherProps } from "./AppSwitcher/index.js";
+import { AppSwitcher } from "./AppSwitcher/index.js";
 import {
   useOdysseyDesignTokens,
   type DesignTokens,
 } from "../OdysseyDesignTokensContext.js";
-import { SharedUnifiedUiShellProps } from "./SharedUnifiedUiShellProps.js";
+import {
+  UiShellNavComponentProps,
+  UnifiedUiShellContentProps,
+} from "./unifiedUiShellContentTypes.js";
 import { SideNav, type SideNavProps } from "./SideNav/index.js";
-import { TopNav, type TopNavProps } from "./TopNav/index.js";
-import { ContrastMode } from "../useContrastMode.js";
+import { TopNav } from "./TopNav/index.js";
 import { useScrollState } from "./useScrollState.js";
-import { useRepositionAppElementToContainer } from "./useRepositionAppElementToContainer.js";
+import { useRepositionAppElementToContainerEffect } from "./useRepositionAppElementToContainerEffect.js";
 import { UiShellColors, useUiShellContext } from "./UiShellProvider.js";
 
 const fullHeightStyles = { height: "100%" };
@@ -77,56 +79,8 @@ const StyledTopNavContainer = styled("div")({
   gridArea: "top-nav",
 });
 
-export const subComponentNames = ["TopNav", "SideNav", "AppSwitcher"] as const;
-export type SubComponentName = (typeof subComponentNames)[number];
-
-export type UiShellNavComponentProps = {
-  /**
-   * Object that gets pass directly to the app switcher component.
-   */
-  appSwitcherProps?: AppSwitcherProps;
-  /**
-   * Object that gets pass directly to the side nav component. If `undefined` and in `initialVisibleSections`, SideNav will be initially rendered. Pass `null` to hide a previously-visible SideNav.
-   */
-  sideNavProps?: Omit<SideNavProps, "footerComponent"> | null;
-  /**
-   * Object that gets pass directly to the top nav component. If `undefined` and in `initialVisibleSections`, TopNav will be initially rendered. Pass `null` to hide a previously-visible TopNav.
-   */
-  topNavProps?: Omit<
-    TopNavProps,
-    "leftSideComponent" | "rightSideComponent"
-  > | null;
-};
-
-export type UiShellContentProps = {
-  /**
-   * Sets a custom background color for the app content area.
-   */
-  appBackgroundColor?: string;
-  /**
-   * Sets either a gray or white background color for the app content area.
-   */
-  appBackgroundContrastMode?: ContrastMode;
-  /**
-   * Which parts of the UI Shell should be visible initially? For example,
-   * if sideNavProps is undefined, should the space for the sidenav be initially visible?
-   */
-  initialVisibleSections?: SubComponentName[];
-  /**
-   * Notifies when a React rendering error occurs. This could be useful for logging, flagging "p0"s, and recovering UI Shell when errors occur.
-   */
-  onError?: ErrorBoundaryProps["onError"];
-  /**
-   * Components that will render as children of various other components such as the top nav or side nav.
-   */
-  optionalComponents?: {
-    banners?: ReactElement;
-    sideNavFooter?: SideNavProps["footerComponent"];
-    topNavLeftSide?: TopNavProps["leftSideComponent"];
-    topNavRightSide?: TopNavProps["rightSideComponent"];
-  };
-} & UiShellNavComponentProps &
-  SharedUnifiedUiShellProps;
+export type WideUiShellContentProps = UiShellNavComponentProps &
+  UnifiedUiShellContentProps;
 
 /**
  * Our new Unified Platform UI Shell.
@@ -135,7 +89,7 @@ export type UiShellContentProps = {
  *
  * If an error occurs, this will revert to only showing the app.
  */
-const UiShellContent = ({
+const WideUiShellContent = ({
   appContainerElement,
   hasStandardAppContentPadding = true,
   appContainerScrollingMode,
@@ -145,7 +99,7 @@ const UiShellContent = ({
   appSwitcherProps,
   sideNavProps,
   topNavProps,
-}: UiShellContentProps) => {
+}: WideUiShellContentProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { isContentScrolled, scrollableContentRef: appContainerRef } =
     useScrollState(appContainerElement);
@@ -153,7 +107,7 @@ const UiShellContent = ({
   const topNavContainerRef = useRef<HTMLDivElement>(null);
   const uiShellContext = useUiShellContext();
 
-  useRepositionAppElementToContainer({
+  useRepositionAppElementToContainerEffect({
     appContainerElement,
     appContainerRef,
     appContainerScrollingMode,
@@ -179,6 +133,7 @@ const UiShellContent = ({
                 </ErrorBoundary>
               )
           }
+
           {appSwitcherProps && (
             <ErrorBoundary fallback={null} onError={onError}>
               <AppSwitcher {...appSwitcherProps} />
@@ -224,6 +179,7 @@ const UiShellContent = ({
           )}
         </ScopedCssBaseline>
       </StyledSideNavContainer>
+
       <StyledTopNavContainer ref={topNavContainerRef}>
         <ScopedCssBaseline sx={fullHeightStyles}>
           {
@@ -238,6 +194,7 @@ const UiShellContent = ({
                 </ErrorBoundary>
               )
           }
+
           {topNavProps && (
             <ErrorBoundary fallback={null} onError={onError}>
               <TopNav
@@ -260,7 +217,7 @@ const UiShellContent = ({
   );
 };
 
-const MemoizedUiShellContent = memo(UiShellContent);
-MemoizedUiShellContent.displayName = "UiShellContent";
+const MemoizedWideUiShellContent = memo(WideUiShellContent);
+MemoizedWideUiShellContent.displayName = "WideUiShellContent";
 
-export { MemoizedUiShellContent as UiShellContent };
+export { MemoizedWideUiShellContent as WideUiShellContent };

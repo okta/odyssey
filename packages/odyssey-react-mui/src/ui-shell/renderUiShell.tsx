@@ -17,7 +17,7 @@ import { bufferLatest } from "./bufferLatest.js";
 import { createMessageBus } from "./createMessageBus.js";
 import { UiShell, UiShellProps } from "./UiShell.js";
 import { renderReactInWebComponent } from "../web-component/renderReactInWebComponent.js";
-import { type UiShellNavComponentProps } from "./UiShellContent.js";
+import { type UiShellNavComponentProps } from "./WideUiShellContent.js";
 import { uiShellDataAttribute } from "./useHasUiShell.js";
 
 export const optionalComponentSlotNames: Record<
@@ -25,6 +25,7 @@ export const optionalComponentSlotNames: Record<
   string
 > = {
   banners: "banners",
+  rightSideMenu: "right-side-menu",
   sideNavFooter: "side-nav-footer",
   topNavLeftSide: "top-nav-left-side",
   topNavRightSide: "top-nav-right-side",

@@ -17,7 +17,7 @@ import { SvgIcon, type SvgIconNoChildrenProps } from "../../SvgIcon.js";
 
 export type HamburgerMenuProps = SvgIconNoChildrenProps;
 
-const HamburgerMenu = forwardRef<SVGSVGElement, HamburgerMenuProps>(
+const HamburgerMenuIcon = forwardRef<SVGSVGElement, HamburgerMenuProps>(
   (props, ref) => {
     return (
       <SvgIcon
@@ -38,7 +38,7 @@ const HamburgerMenu = forwardRef<SVGSVGElement, HamburgerMenuProps>(
   },
 );
 
-const MemoizedHamburgerMenu = memo(HamburgerMenu);
-MemoizedHamburgerMenu.displayName = "HamburgerMenu";
+const MemoizedHamburgerMenuIcon = memo(HamburgerMenuIcon);
+MemoizedHamburgerMenuIcon.displayName = "HamburgerMenuIcon";
 
-export { MemoizedHamburgerMenu as HamburgerMenu };
+export { MemoizedHamburgerMenuIcon as HamburgerMenuIcon };
