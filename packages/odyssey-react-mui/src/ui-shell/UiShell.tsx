@@ -23,12 +23,13 @@ import { CssBaseline } from "../CssBaseline.js";
 import { NarrowUiShellContent } from "./NarrowUiShellContent.js";
 import { OdysseyProvider } from "../OdysseyProvider.js";
 import {
-  // UiShellContent,
+  UiShellContent,
   type UiShellContentProps,
   type UiShellNavComponentProps,
 } from "./UiShellContent.js";
 import { UiShellProvider } from "./UiShellProvider.js";
 import { type ReactRootElements } from "../web-component/renderReactInWebComponent.js";
+import { useUiShellBreakpoints } from "./useUiShellBreakpoints.js";
 
 export const defaultComponentProps: UiShellNavComponentProps = {
   sideNavProps: undefined,
@@ -104,6 +105,9 @@ const UiShell = ({
 }: UiShellProps) => {
   const [componentProps, setComponentProps] = useState(defaultComponentProps);
 
+  const { isConstrainedView, isNarrowView, isWideView } =
+    useUiShellBreakpoints();
+
   useEffect(() => {
     const unsubscribe = subscribeToPropChanges((componentProps) => {
       // If for some reason nothing is passed as `componentProps`, we fallback on `defaultComponentProps` as a safety mechanism to ensure nothing breaks.
@@ -133,24 +137,39 @@ const UiShell = ({
             sideNavBackgroundColor={sideNavBackgroundColor}
             topNavBackgroundColor={topNavBackgroundColor}
           >
-            {/* <UiShellContent
-              {...componentProps}
-              appContainerElement={appContainerElement}
-              appContainerScrollingMode={appContainerScrollingMode}
-              hasStandardAppContentPadding={hasStandardAppContentPadding}
-              initialVisibleSections={initialVisibleSections}
-              onError={onError}
-              optionalComponents={optionalComponents}
-            /> */}
-            <NarrowUiShellContent
-              {...componentProps}
-              appContainerElement={appContainerElement}
-              appContainerScrollingMode={appContainerScrollingMode}
-              hasStandardAppContentPadding={hasStandardAppContentPadding}
-              initialVisibleSections={initialVisibleSections}
-              onError={onError}
-              optionalComponents={optionalComponents}
-            />
+            {(isConstrainedView || isWideView) && (
+              <UiShellContent
+                {...{
+                  ...componentProps,
+                  sideNavProps: {
+                    ...componentProps.sideNavProps,
+                    isCollapsed:
+                      isConstrainedView ||
+                      componentProps.sideNavProps?.isCollapsed,
+                    isCollapsible:
+                      isConstrainedView ||
+                      componentProps.sideNavProps?.isCollapsible,
+                  } as typeof componentProps.sideNavProps,
+                }}
+                appContainerElement={appContainerElement}
+                appContainerScrollingMode={appContainerScrollingMode}
+                hasStandardAppContentPadding={hasStandardAppContentPadding}
+                initialVisibleSections={initialVisibleSections}
+                onError={onError}
+                optionalComponents={optionalComponents}
+              />
+            )}
+            {isNarrowView && (
+              <NarrowUiShellContent
+                {...componentProps}
+                appContainerElement={appContainerElement}
+                appContainerScrollingMode={appContainerScrollingMode}
+                hasStandardAppContentPadding={hasStandardAppContentPadding}
+                initialVisibleSections={initialVisibleSections}
+                onError={onError}
+                optionalComponents={optionalComponents}
+              />
+            )}
           </UiShellProvider>
         </ErrorBoundary>
       </OdysseyProvider>
