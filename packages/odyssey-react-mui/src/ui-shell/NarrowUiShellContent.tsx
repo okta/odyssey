@@ -117,6 +117,10 @@ const StyledMenuLogo = styled("div", {
   gap: odysseyDesignTokens.Spacing3,
 }));
 
+const StyledSideNavContainer = styled("div")({
+  height: "auto", // Without `height: "auto"`, side nav won't scroll.
+});
+
 const StyledUiShellContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{
@@ -354,29 +358,31 @@ const NarrowUiShellContent = ({
 
           {sideNavProps && (
             <ErrorBoundary fallback={null} onError={onError}>
-              <SideNav
-                {...{
-                  ...{
-                    ...sideNavProps,
-                    // This hides the side nav logo or app name from showing up as we already have one in the narrow top nav.
-                    appName: undefined,
-                    logoProps: undefined,
-                  },
-                  ...(sideNavProps.hasCustomFooter &&
-                  optionalComponents?.sideNavFooter
-                    ? {
-                        footerComponent: optionalComponents.sideNavFooter,
-                        footerItems: undefined,
-                        hasCustomFooter: sideNavProps.hasCustomFooter,
-                      }
-                    : {
-                        footerItems: sideNavProps.footerItems,
-                        hasCustomFooter: false,
-                      }),
-                }}
-                isCollapsed={false}
-                isCollapsible={false}
-              />
+              <StyledSideNavContainer>
+                <SideNav
+                  {...{
+                    ...{
+                      ...sideNavProps,
+                      // This hides the side nav logo or app name from showing up as we already have one in the narrow top nav.
+                      appName: undefined,
+                      logoProps: undefined,
+                    },
+                    ...(sideNavProps.hasCustomFooter &&
+                    optionalComponents?.sideNavFooter
+                      ? {
+                          footerComponent: optionalComponents.sideNavFooter,
+                          footerItems: undefined,
+                          hasCustomFooter: sideNavProps.hasCustomFooter,
+                        }
+                      : {
+                          footerItems: sideNavProps.footerItems,
+                          hasCustomFooter: false,
+                        }),
+                  }}
+                  isCollapsed={false}
+                  isCollapsible={false}
+                />
+              </StyledSideNavContainer>
             </ErrorBoundary>
           )}
         </StyledLeftSideContainer>

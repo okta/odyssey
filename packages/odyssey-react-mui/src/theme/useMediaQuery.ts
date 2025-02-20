@@ -12,36 +12,6 @@
 
 import { useEffect, useState } from "react";
 
-// const defaultedMobileBreakpoint =
-// mobileBreakpointOverride || BASE_MOBILE_BREAKPOINT;
-
-// const [mobileBreakPoint, setMobileBreakpoint] = useState<number>(
-// pxToRem(defaultedMobileBreakpoint, ROOT_FONT_SIZE),
-// );
-
-// useEffect(() => {
-// if (hasSideNav) {
-//   const baseBreakpoint =
-//     defaultedMobileBreakpoint + parseInt(DEFAULT_SIDE_NAV_WIDTH);
-
-//   if (hasAppSwitcher) {
-//     const breakpointWithAppSwitcher = baseBreakpoint + APP_SWITCHER_WIDTH;
-
-//     setMobileBreakpoint(pxToRem(breakpointWithAppSwitcher, ROOT_FONT_SIZE));
-//   } else {
-//     setMobileBreakpoint(pxToRem(baseBreakpoint, ROOT_FONT_SIZE));
-//   }
-// }
-
-// if (hasAppSwitcher && !hasSideNav) {
-//   setMobileBreakpoint(
-//     pxToRem(defaultedMobileBreakpoint + APP_SWITCHER_WIDTH, ROOT_FONT_SIZE),
-//   );
-// }
-// }, [defaultedMobileBreakpoint, hasAppSwitcher, hasSideNav]);
-
-// export const isMobile = useMediaQuery(`(max-width: ${mobileBreakPoint}rem)`);
-
 export const useMediaQuery = (mediaQuery: string) => {
   const [hasMatches, setHasMatches] = useState(false);
 

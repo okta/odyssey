@@ -14,24 +14,24 @@ import { useMediaQuery } from "../theme/useMediaQuery.js";
 
 export const uiShellBreakpoint = {
   narrow: 0,
-  constrained: 480,
+  constrained: 520,
   wide: 1024,
 } as const;
 
-export const useUiShellBreakpoints = () => {
+export const useUiShellBreakpoints = (): keyof typeof uiShellBreakpoint => {
+  const isConstrainedView = useMediaQuery(
+    `(min-width: ${uiShellBreakpoint.constrained}px)`,
+  );
+
   const isWideView = useMediaQuery(`(min-width: ${uiShellBreakpoint.wide}px)`);
 
-  const isConstrainedView = useMediaQuery(
-    `(min-width: ${uiShellBreakpoint.constrained}px) and (max-width: ${uiShellBreakpoint.wide - 1}px)`,
-  );
+  if (isWideView) {
+    return "wide";
+  }
 
-  const isNarrowView = useMediaQuery(
-    `(min-width: ${uiShellBreakpoint.narrow}px) and (max-width: ${uiShellBreakpoint.constrained - 1}px)`,
-  );
+  if (isConstrainedView) {
+    return "constrained";
+  }
 
-  return {
-    isWideView,
-    isConstrainedView,
-    isNarrowView,
-  };
+  return "narrow";
 };
