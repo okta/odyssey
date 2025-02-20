@@ -11,7 +11,8 @@
  */
 
 import { Status } from "../../Status.js";
-import { DataColumns, DataFilter, DataGetDataType } from "../index.js";
+import { DataColumns, DataGetDataType } from "./dataTypes.js";
+import { DataFilter } from "../DataFilters.js";
 
 export type Person = {
   order: number;
