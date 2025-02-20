@@ -19,6 +19,7 @@ import {
   useRef,
   useEffect,
   KeyboardEventHandler,
+  CSSProperties,
 } from "react";
 import { Skeleton } from "@mui/material";
 import { useTranslation } from "react-i18next";
@@ -71,10 +72,11 @@ const StyledCollapsibleContent = styled("div", {
   transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
   overflow: "hidden",
 
-  ...(isSideNavCollapsed && {
-    gridTemplateColumns: 0,
-    opacity: 0,
-  }),
+  ...(isSideNavCollapsed &&
+    ({
+      gridTemplateColumns: 0,
+      opacity: 0,
+    } as CSSProperties)),
 }));
 
 const StyledOpacityTransitionContainer = styled("div", {
@@ -95,9 +97,10 @@ const StyledOpacityTransitionContainer = styled("div", {
     transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
     overflow: "hidden",
 
-    ...(isSideNavCollapsed && {
-      opacity: 0,
-    }),
+    ...(isSideNavCollapsed &&
+      ({
+        opacity: 0,
+      } as CSSProperties)),
   }),
 );
 
@@ -124,12 +127,13 @@ const StyledSideNavContainer = styled("nav", {
     height: "100%",
     backgroundColor: backgroundColor || odysseyDesignTokens.HueNeutralWhite,
 
-    ...(isAppContentWhiteBackground && {
-      borderRightWidth: odysseyDesignTokens.BorderWidthMain,
-      borderRightStyle:
-        odysseyDesignTokens.BorderStyleMain as Property.BorderRightStyle,
-      borderRightColor: odysseyDesignTokens.HueNeutral100,
-    }),
+    ...(isAppContentWhiteBackground &&
+      ({
+        borderRightWidth: odysseyDesignTokens.BorderWidthMain,
+        borderRightStyle:
+          odysseyDesignTokens.BorderStyleMain as Property.BorderRightStyle,
+        borderRightColor: odysseyDesignTokens.HueNeutral100,
+      } as CSSProperties)),
 
     "&::after": {
       backgroundColor: odysseyDesignTokens.HueNeutral200,
@@ -147,16 +151,17 @@ const StyledSideNavContainer = styled("nav", {
 
     "&:has([data-sidenav-toggle='true']:hover), &:has([data-sidenav-toggle='true']:focus-visible)":
       {
-        ...(isSideNavCollapsed && {
-          "&::after": {
-            opacity: 1,
-            transform: `translateX(100%)`,
-          },
+        ...(isSideNavCollapsed &&
+          ({
+            "&::after": {
+              opacity: 1,
+              transform: `translateX(100%)`,
+            } as CSSProperties,
 
-          "[data-sidenav-toggle='true']": {
-            transform: `translate3d(calc(100% + ${odysseyDesignTokens.Spacing3}), 0, 0)`,
-          },
-        }),
+            "[data-sidenav-toggle='true']": {
+              transform: `translate3d(calc(100% + ${odysseyDesignTokens.Spacing3}), 0, 0)`,
+            } as CSSProperties,
+          } as CSSProperties)),
       },
 
     "[data-sidenav-toggle='true']": {
@@ -181,16 +186,17 @@ const StyledSideNavHeaderContainer = styled("div", {
 }>(({ borderColor, hasContentScrolled, odysseyDesignTokens }) => ({
   flexShrink: 0,
   // The bottom border should appear only if the scrollable region has been scrolled
-  ...(hasContentScrolled && {
-    borderBottomWidth: odysseyDesignTokens.BorderWidthMain,
-    borderBottomStyle:
-      odysseyDesignTokens.BorderStyleMain as Property.BorderBottomStyle,
-    borderBottomColor: odysseyDesignTokens.HueNeutral100,
+  ...(hasContentScrolled &&
+    ({
+      borderBottomWidth: odysseyDesignTokens.BorderWidthMain,
+      borderBottomStyle: odysseyDesignTokens.BorderStyleMain,
+      borderBottomColor: odysseyDesignTokens.HueNeutral100,
 
-    ...(borderColor && {
-      borderBottomColor: borderColor.concat("15"),
-    }),
-  }),
+      ...(borderColor &&
+        ({
+          borderBottomColor: borderColor.concat("15"),
+        } as CSSProperties)),
+    } as CSSProperties)),
 }));
 
 const StyledSideNavListContainer = styled("ul")(() => ({
@@ -243,9 +249,10 @@ const SideNavFooterStyles = styled("div", {
     padding: odysseyDesignTokens.Spacing4,
     backgroundColor: odysseyDesignTokens.HueNeutralWhite,
 
-    ...(sideNavBackgroundColor && {
-      backgroundColor: sideNavBackgroundColor,
-    }),
+    ...(sideNavBackgroundColor &&
+      ({
+        backgroundColor: sideNavBackgroundColor,
+      } as CSSProperties)),
   }),
 );
 
@@ -268,13 +275,17 @@ const StyledPersistentSideNavFooter = styled(SideNavFooterStyles, {
     transitionDuration: odysseyDesignTokens.TransitionDurationMain,
     transitionTiming: odysseyDesignTokens.TransitionTimingMain,
     zIndex: 2,
+
     // The box shadow should appear above the footer only if the scrollable region has overflow
-    ...(isContentScrollable && {
-      boxShadow: "0px -8px 8px -8px rgba(39, 39, 39, 0.08)",
-    }),
-    ...(sideNavBackgroundColor && {
-      backgroundColor: sideNavBackgroundColor,
-    }),
+    ...(isContentScrollable &&
+      ({
+        boxShadow: "0px -8px 8px -8px rgba(39, 39, 39, 0.08)",
+      } as CSSProperties)),
+
+    ...(sideNavBackgroundColor &&
+      ({
+        backgroundColor: sideNavBackgroundColor,
+      } as CSSProperties)),
   }),
 );
 
@@ -297,23 +308,26 @@ const StyledSideNavFooterItemsContainer = styled("div", {
     "&:visited": {
       color: odysseyDesignTokens.HueNeutral600,
 
-      ...(sideNavContrastColors?.fontColor && {
-        color: sideNavContrastColors?.fontColor,
-      }),
+      ...(sideNavContrastColors?.fontColor &&
+        ({
+          color: sideNavContrastColors?.fontColor,
+        } as CSSProperties)),
     },
 
     "&:hover": {
       textDecoration: "none",
       color: odysseyDesignTokens.HueNeutral900,
 
-      ...(sideNavContrastColors?.fontColor && {
-        color: sideNavContrastColors?.fontColor,
-      }),
+      ...(sideNavContrastColors?.fontColor &&
+        ({
+          color: sideNavContrastColors?.fontColor,
+        } as CSSProperties)),
     },
 
-    ...(sideNavContrastColors?.fontColor && {
-      color: sideNavContrastColors?.fontColor,
-    }),
+    ...(sideNavContrastColors?.fontColor &&
+      ({
+        color: sideNavContrastColors?.fontColor,
+      } as CSSProperties)),
   },
 }));
 
