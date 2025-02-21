@@ -132,7 +132,6 @@ const UiShell = ({
       <OdysseyProvider
         emotionRootElement={stylesRootElement}
         shadowRootElement={appRootElement}
-        hasScopedCssBaseline={false}
       >
         <ErrorBoundary fallback={appComponent} onError={onError}>
           <CssBaseline />

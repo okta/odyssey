@@ -72,10 +72,12 @@ const StyledBannersContainer = styled("div")({
 });
 
 const StyledLeftSideContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "isOpen",
+  shouldForwardProp: (prop) => prop !== "backgroundColor" && prop !== "isOpen",
 })<{
+  backgroundColor?: UiShellColors["sideNavBackgroundColor"];
   isOpen: boolean;
-}>(({ isOpen }) => ({
+}>(({ backgroundColor, isOpen }) => ({
+  backgroundColor,
   display: isOpen ? "block" : "none",
   height: "100%",
   gridArea: "left-side",
@@ -146,7 +148,8 @@ const StyledPageOverlay = styled("div", {
 }));
 
 const StyledSideNavContainer = styled("div")({
-  height: "auto", // Without `height: "auto"`, side nav won't scroll.
+  // -webkit-fill-available
+  height: "-webkit-fill-available", // Side nav won't scroll without this value. "auto" is too short when the content isn't tall enough. "stretch" avoids the need to add a `ResizeObserver`.
 });
 
 const StyledUiShellContainer = styled("div", {
@@ -338,7 +341,10 @@ const NarrowUiShellContent = ({
         )}
 
         <StyledAppContentArea>
-          <StyledLeftSideContainer isOpen={isLeftSideMenuOpen}>
+          <StyledLeftSideContainer
+            backgroundColor={uiShellContext?.sideNavBackgroundColor}
+            isOpen={isLeftSideMenuOpen}
+          >
             {sideNavProps && (
               <ErrorBoundary fallback={null} onError={onError}>
                 <StyledSideNavContainer>

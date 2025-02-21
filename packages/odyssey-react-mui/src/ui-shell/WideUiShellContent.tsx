@@ -11,7 +11,6 @@
  */
 
 import styled from "@emotion/styled";
-import { ScopedCssBaseline } from "@mui/material";
 import { memo, useRef } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
@@ -29,8 +28,6 @@ import { TopNav } from "./TopNav/index.js";
 import { useScrollState } from "./useScrollState.js";
 import { useRepositionAppElementToContainerEffect } from "./useRepositionAppElementToContainerEffect.js";
 import { UiShellColors, useUiShellContext } from "./UiShellProvider.js";
-
-const fullHeightStyles = { height: "100%" };
 
 const emptySideNavItems = [] satisfies SideNavProps["sideNavItems"];
 
@@ -123,86 +120,80 @@ const WideUiShellContent = ({
       </StyledBannersContainer>
 
       <StyledAppSwitcherContainer>
-        <ScopedCssBaseline sx={fullHeightStyles}>
-          {
-            /* If AppSwitcher should be initially visible and we have not yet received props, render AppSwitcher in the loading state */
-            initialVisibleSections?.includes("AppSwitcher") &&
-              !appSwitcherProps && (
-                <ErrorBoundary fallback={null} onError={onError}>
-                  <AppSwitcher isLoading appIcons={[]} selectedAppName="" />
-                </ErrorBoundary>
-              )
-          }
+        {
+          /* If AppSwitcher should be initially visible and we have not yet received props, render AppSwitcher in the loading state */
+          initialVisibleSections?.includes("AppSwitcher") &&
+            !appSwitcherProps && (
+              <ErrorBoundary fallback={null} onError={onError}>
+                <AppSwitcher isLoading appIcons={[]} selectedAppName="" />
+              </ErrorBoundary>
+            )
+        }
 
-          {appSwitcherProps && (
-            <ErrorBoundary fallback={null} onError={onError}>
-              <AppSwitcher {...appSwitcherProps} />
-            </ErrorBoundary>
-          )}
-        </ScopedCssBaseline>
+        {appSwitcherProps && (
+          <ErrorBoundary fallback={null} onError={onError}>
+            <AppSwitcher {...appSwitcherProps} />
+          </ErrorBoundary>
+        )}
       </StyledAppSwitcherContainer>
 
       <StyledSideNavContainer ref={sideNavContainerRef}>
-        <ScopedCssBaseline sx={fullHeightStyles}>
-          {
-            /* If SideNav should be initially visible and we have not yet received props, render SideNav with minimal inputs */
-            initialVisibleSections?.includes("SideNav") &&
-              sideNavProps === undefined && (
-                <ErrorBoundary fallback={null} onError={onError}>
-                  <SideNav isLoading sideNavItems={emptySideNavItems} />
-                </ErrorBoundary>
-              )
-          }
+        {
+          /* If SideNav should be initially visible and we have not yet received props, render SideNav with minimal inputs */
+          initialVisibleSections?.includes("SideNav") &&
+            sideNavProps === undefined && (
+              <ErrorBoundary fallback={null} onError={onError}>
+                <SideNav isLoading sideNavItems={emptySideNavItems} />
+              </ErrorBoundary>
+            )
+        }
 
-          {sideNavProps && (
-            <ErrorBoundary fallback={null} onError={onError}>
-              <SideNav
-                {...{
-                  ...sideNavProps,
-                  ...(sideNavProps.hasCustomFooter &&
-                  optionalComponents?.sideNavFooter
-                    ? {
-                        footerComponent: optionalComponents.sideNavFooter,
-                        footerItems: undefined,
-                        hasCustomFooter: sideNavProps.hasCustomFooter,
-                      }
-                    : {
-                        footerItems: sideNavProps.footerItems,
-                        hasCustomFooter: false,
-                      }),
-                }}
-              />
-            </ErrorBoundary>
-          )}
-        </ScopedCssBaseline>
+        {sideNavProps && (
+          <ErrorBoundary fallback={null} onError={onError}>
+            <SideNav
+              {...{
+                ...sideNavProps,
+                ...(sideNavProps.hasCustomFooter &&
+                optionalComponents?.sideNavFooter
+                  ? {
+                      footerComponent: optionalComponents.sideNavFooter,
+                      footerItems: undefined,
+                      hasCustomFooter: sideNavProps.hasCustomFooter,
+                    }
+                  : {
+                      footerItems: sideNavProps.footerItems,
+                      hasCustomFooter: false,
+                    }),
+              }}
+            />
+          </ErrorBoundary>
+        )}
       </StyledSideNavContainer>
 
       <StyledTopNavContainer ref={topNavContainerRef}>
-        <ScopedCssBaseline sx={fullHeightStyles}>
-          {
-            /* If TopNav should be initially visible and we have not yet received props, render Topnav with minimal inputs */
-            initialVisibleSections?.includes("TopNav") &&
-              topNavProps === undefined && (
-                <ErrorBoundary fallback={null} onError={onError}>
-                  <TopNav
-                    leftSideComponent={optionalComponents?.topNavLeftSide}
-                    rightSideComponent={optionalComponents?.topNavRightSide}
-                  />
-                </ErrorBoundary>
-              )
-          }
+        {
+          /* If TopNav should be initially visible and we have not yet received props, render Topnav with minimal inputs */
+          initialVisibleSections?.includes("TopNav") &&
+            topNavProps === undefined && (
+              <ErrorBoundary fallback={null} onError={onError}>
+                <TopNav
+                  leftSideComponent={optionalComponents?.topNavLeftSide}
+                  rightSideComponent={optionalComponents?.topNavRightSide}
+                />
+              </ErrorBoundary>
+            )
+        }
 
-          {topNavProps && (
-            <ErrorBoundary fallback={null} onError={onError}>
-              <TopNav
-                {...topNavProps}
-                isScrolled={isContentScrolled}
-                leftSideComponent={optionalComponents?.topNavLeftSide}
-                rightSideComponent={optionalComponents?.topNavRightSide}
-              />
-            </ErrorBoundary>
-          )}
-        </ScopedCssBaseline>
+        {topNavProps && (
+          <ErrorBoundary fallback={null} onError={onError}>
+            <TopNav
+              {...topNavProps}
+              isScrolled={isContentScrolled}
+              leftSideComponent={optionalComponents?.topNavLeftSide}
+              rightSideComponent={optionalComponents?.topNavRightSide}
+            />
+          </ErrorBoundary>
+        )}
       </StyledTopNavContainer>
 
       <StyledAppContainer
