@@ -125,6 +125,7 @@ const StyledSideNavContainer = styled("nav", {
     backgroundColor: backgroundColor || odysseyDesignTokens.HueNeutralWhite,
     height: "100%",
     position: "relative",
+    width: "fit-content",
 
     ...(isAppContentWhiteBackground &&
       ({
