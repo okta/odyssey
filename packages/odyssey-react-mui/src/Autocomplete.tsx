@@ -157,7 +157,7 @@ export type AutocompleteProps<
   /**
    * The text to display when no options are available
    *
-   * default: "No Options"
+   * default: "No options"
    */
   noOptionsText?: string;
   /**
