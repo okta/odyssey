@@ -113,6 +113,21 @@ const StyledMenuLogo = styled("div", {
   gap: odysseyDesignTokens.Spacing3,
 }));
 
+const StyledLogoContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  height: TOP_NAV_HEIGHT,
+  paddingBlock: odysseyDesignTokens.Spacing4,
+
+  "svg, img": {
+    maxHeight: "100%",
+    width: "auto",
+    maxWidth: "100%",
+  },
+}));
+
 const StyledPageOverlay = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{
@@ -152,14 +167,6 @@ const StyledUiShellContainer = styled("div", {
   height: "100vh",
   width: "100vw",
 }));
-
-const StyledLogoContainer = styled("div")({
-  "svg, img": {
-    maxHeight: "100%",
-    width: "auto",
-    maxWidth: "100%",
-  },
-});
 
 const StyledTopNav = styled("div", {
   shouldForwardProp: (prop) =>
@@ -300,7 +307,9 @@ const NarrowUiShellContent = ({
                     variant="floating"
                   />
 
-                  <StyledLogoContainer>
+                  <StyledLogoContainer
+                    odysseyDesignTokens={odysseyDesignTokens}
+                  >
                     {sideNavProps?.isLoading ? (
                       //  The skeleton takes the hardcoded dimensions of the Okta logo
                       <Skeleton variant="rounded" height={24} width={67} />

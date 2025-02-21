@@ -45,6 +45,7 @@ import { fn } from "@storybook/test";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 import { useEffect, useRef, useState } from "react";
+import PlaceholderLogo from "../../odyssey-labs/PickerWithOptionAdornment/PlaceholderLogo.js";
 
 const storybookMeta: Meta<UiShellProps & { sideNavBackgroundColor?: string }> =
   {
@@ -581,7 +582,12 @@ export const WithTallAppContentAndNoStorybookDecorator: StoryObj<UiShellProps> =
       subscribeToPropChanges: (subscriber) => {
         subscriber({
           appSwitcherProps: sharedAppSwitcherProps,
-          sideNavProps: sharedSideNavProps,
+          sideNavProps: {
+            ...sharedSideNavProps,
+            logoProps: {
+              logoComponent: <PlaceholderLogo.One />,
+            },
+          },
           topNavProps: sharedTopNavProps,
         });
 
