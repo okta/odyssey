@@ -64,7 +64,7 @@ const StyledCollapsibleContent = styled("div", {
   isSideNavCollapsed: boolean;
 }>(({ odysseyDesignTokens, isSideNavCollapsed }) => ({
   position: "relative",
-  display: "inline-grid",
+  display: "grid",
   gridTemplateColumns: SIDE_NAV_WIDTH,
   height: "100%",
   transition: `grid-template-columns ${odysseyDesignTokens.TransitionDurationMain}, opacity 300ms`,
@@ -89,7 +89,7 @@ const StyledOpacityTransitionContainer = styled("div", {
     odysseyDesignTokens: DesignTokens;
     isSideNavCollapsed: boolean;
   }) => ({
-    display: "inline-grid",
+    display: "grid",
     gridTemplateRows: "max-content 1fr max-content",
     height: "100%",
     transition: `opacity 50ms`,
@@ -121,10 +121,9 @@ const StyledSideNavContainer = styled("nav", {
     isSideNavCollapsed,
     odysseyDesignTokens,
   }) => ({
-    position: "relative",
-    display: "inline-block",
-    height: "100%",
     backgroundColor: backgroundColor || odysseyDesignTokens.HueNeutralWhite,
+    height: "100%",
+    position: "relative",
 
     ...(isAppContentWhiteBackground &&
       ({
@@ -208,9 +207,8 @@ const StyledSideNavListContainer = styled("ul")(() => ({
 const StyledSideNavScrollableContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
-  display: "grid",
+  display: "inline-grid",
   gridTemplateRows: "1fr max-content",
-  flex: "1 1 100%",
   overflowY: "auto",
   paddingInline: odysseyDesignTokens.Spacing2,
 }));
@@ -666,7 +664,7 @@ const SideNav = ({
             isSideNavCollapsed={isSideNavCollapsed}
             odysseyDesignTokens={odysseyDesignTokens}
           >
-            {(appName || isLoading || logoProps) && (
+            {appName || isLoading || logoProps ? (
               <StyledSideNavHeaderContainer
                 hasContentScrolled={hasContentScrolled}
                 odysseyDesignTokens={odysseyDesignTokens}
@@ -682,6 +680,8 @@ const SideNav = ({
                   />
                 )}
               </StyledSideNavHeaderContainer>
+            ) : (
+              <div />
             )}
 
             <StyledSideNavScrollableContainer
