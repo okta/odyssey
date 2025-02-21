@@ -38,9 +38,9 @@ export type OdysseyThemeProviderProps = {
   themeOverride?: ThemeOptions;
 };
 
-const StyledContrastContainerStyles = styled("div")(() => ({
-  height: "inherit",
-}));
+const StyledContrastContainerStyles = styled("div")({
+  height: "100%",
+});
 
 /**
  * This function doesn't include the Emotion Cache or Translations. You should probably be using `OdysseyProvider`.
