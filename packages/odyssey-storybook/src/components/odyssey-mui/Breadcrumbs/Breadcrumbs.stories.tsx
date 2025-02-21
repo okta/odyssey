@@ -17,6 +17,7 @@ import {
 } from "@okta/odyssey-react-mui";
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect, within } from "@storybook/test";
+import { action } from "@storybook/addon-actions";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 
@@ -128,5 +129,32 @@ export const Simple: StoryObj<BreadcrumbsProps> = {
   },
   render: (args: BreadcrumbsProps) => (
     <BreadcrumbList>{args.children}</BreadcrumbList>
+  ),
+};
+
+export const WithOnClick: StoryObj<BreadcrumbsProps> = {
+  args: {
+    homeHref: "#home",
+  },
+  render: (args) => (
+    <BreadcrumbList {...args}>
+      <Breadcrumb onClick={action("onClick")} href="#one">
+        One
+      </Breadcrumb>
+      <Breadcrumb href="#two">Two</Breadcrumb>
+    </BreadcrumbList>
+  ),
+};
+
+export const Subordinate: StoryObj<BreadcrumbsProps> = {
+  args: {
+    homeHref: "#home",
+  },
+  render: (args) => (
+    <BreadcrumbList {...args}>
+      <Breadcrumb>One</Breadcrumb>
+      <Breadcrumb href="#two">Two</Breadcrumb>
+      <Breadcrumb href="#three">Three</Breadcrumb>
+    </BreadcrumbList>
   ),
 };

@@ -22,7 +22,10 @@ import { SideNavLogo } from "./SideNavLogo.js";
 import { SideNavLogoProps, SideNavProps } from "./types.js";
 import { Heading5 } from "../../Typography.js";
 import { ContrastColors } from "../../createContrastColors.js";
-import { useUiShellContext } from "../../ui-shell/UiShellProvider.js";
+import {
+  UiShellColors,
+  useUiShellContext,
+} from "../../ui-shell/UiShellProvider.js";
 import {
   TOP_NAV_HEIGHT,
   UI_SHELL_BASE_Z_INDEX,
@@ -37,26 +40,31 @@ const SideNavHeaderContainer = styled("div")({
 
 const SideNavLogoContainer = styled("div", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" && prop !== "isSameBackgroundAsMain",
+    prop !== "headerBackgroundColor" &&
+    prop !== "isSameBackgroundAsMain" &&
+    prop !== "odysseyDesignTokens",
 })<{
+  headerBackgroundColor?: UiShellColors["sideNavBackgroundColor"];
   isSameBackgroundAsMain: SideNavLogoProps["isSameBackgroundAsMain"];
   odysseyDesignTokens: DesignTokens;
-}>(({ isSameBackgroundAsMain, odysseyDesignTokens }) => ({
-  display: "flex",
-  alignItems: "center",
-  height: TOP_NAV_HEIGHT,
-  paddingBlock: odysseyDesignTokens.Spacing4,
-  paddingInline: odysseyDesignTokens.Spacing5,
-  backgroundColor: isSameBackgroundAsMain
-    ? "transparent"
-    : odysseyDesignTokens.HueNeutralWhite,
+}>(
+  ({ headerBackgroundColor, isSameBackgroundAsMain, odysseyDesignTokens }) => ({
+    display: "flex",
+    alignItems: "center",
+    height: TOP_NAV_HEIGHT,
+    paddingBlock: odysseyDesignTokens.Spacing4,
+    paddingInline: odysseyDesignTokens.Spacing5,
+    backgroundColor: isSameBackgroundAsMain
+      ? headerBackgroundColor
+      : odysseyDesignTokens.HueNeutralWhite,
 
-  "svg, img": {
-    maxHeight: "100%",
-    width: "auto",
-    maxWidth: "100%",
-  },
-}));
+    "svg, img": {
+      maxHeight: "100%",
+      width: "auto",
+      maxWidth: "100%",
+    },
+  }),
+);
 
 const SideNavHeadingContainer = styled("div", {
   shouldForwardProp: (prop) =>
@@ -107,7 +115,9 @@ const SideNavHeader = ({
     <SideNavHeaderContainer>
       <SideNavLogoContainer
         isSameBackgroundAsMain={logoProps?.isSameBackgroundAsMain}
+        headerBackgroundColor={uiShellContext?.sideNavBackgroundColor}
         odysseyDesignTokens={odysseyDesignTokens}
+        data-se="sidenav-header-logo-container"
       >
         {isLoading ? (
           //  The skeleton takes the hardcoded dimensions of the Okta logo

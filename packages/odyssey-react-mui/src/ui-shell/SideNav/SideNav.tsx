@@ -54,6 +54,7 @@ import {
   SIDE_NAV_VISIBILITY_TOGGLE_ICON_POSITION,
   SIDE_NAV_WIDTH,
   UI_SHELL_BASE_Z_INDEX,
+  UI_SHELL_OVERLAY_Z_INDEX,
 } from "../uiShellSharedConstants.js";
 
 const StyledCollapsibleContent = styled("div", {
@@ -144,7 +145,7 @@ const StyledSideNavContainer = styled("nav", {
       transform: `translateX(0)`,
       transition: `opacity ${odysseyDesignTokens.TransitionDurationMain}, transform ${odysseyDesignTokens.TransitionDurationMain}`,
       width: odysseyDesignTokens.Spacing2,
-      zIndex: UI_SHELL_BASE_Z_INDEX,
+      zIndex: UI_SHELL_OVERLAY_Z_INDEX,
     },
 
     "&:has([data-sidenav-toggle='true']:hover), &:has([data-sidenav-toggle='true']:focus-visible)":

@@ -363,6 +363,7 @@ const SideNavItemContent = ({
             odysseyDesignTokens={odysseyDesignTokens}
             sideNavContrastColors={uiShellContext?.sideNavContrastColors}
             isActiveDropTarget={false}
+            data-se="tb--sidenav-text-container"
           >
             <SideNavItemLinkContent
               count={count}
@@ -386,6 +387,7 @@ const SideNavItemContent = ({
             sideNavContrastColors={uiShellContext?.sideNavContrastColors}
             tabIndex={0}
             isActiveDropTarget={isActiveDropTarget}
+            data-se="tb--sidenav-text-container"
           >
             <SideNavItemLinkContent
               count={count}
@@ -408,6 +410,7 @@ const SideNavItemContent = ({
             sideNavContrastColors={uiShellContext?.sideNavContrastColors}
             target={target}
             isActiveDropTarget={isActiveDropTarget}
+            data-se="tb--sidenav-text-container"
           >
             <SideNavItemLinkContent
               count={count}
