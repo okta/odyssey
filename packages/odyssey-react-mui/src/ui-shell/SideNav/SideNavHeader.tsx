@@ -21,31 +21,34 @@ import {
 import { SideNavLogo } from "./SideNavLogo.js";
 import { SideNavLogoProps, SideNavProps } from "./types.js";
 import { Heading5 } from "../../Typography.js";
-import { TOP_NAV_HEIGHT } from "../TopNav/index.js";
 import { ContrastColors } from "../../createContrastColors.js";
 import {
   UiShellColors,
   useUiShellContext,
 } from "../../ui-shell/UiShellProvider.js";
+import {
+  TOP_NAV_HEIGHT,
+  UI_SHELL_BASE_Z_INDEX,
+} from "../uiShellSharedConstants.js";
 
 const SideNavHeaderContainer = styled("div")({
   position: "relative",
   display: "flex",
   flexDirection: "column",
-  zIndex: 1,
+  zIndex: UI_SHELL_BASE_Z_INDEX,
 });
 
 const SideNavLogoContainer = styled("div", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" &&
+    prop !== "headerBackgroundColor" &&
     prop !== "isSameBackgroundAsMain" &&
-    prop !== "headerBackgroundColor",
+    prop !== "odysseyDesignTokens",
 })<{
-  odysseyDesignTokens: DesignTokens;
-  isSameBackgroundAsMain: SideNavLogoProps["isSameBackgroundAsMain"];
   headerBackgroundColor?: UiShellColors["sideNavBackgroundColor"];
+  isSameBackgroundAsMain: SideNavLogoProps["isSameBackgroundAsMain"];
+  odysseyDesignTokens: DesignTokens;
 }>(
-  ({ isSameBackgroundAsMain, odysseyDesignTokens, headerBackgroundColor }) => ({
+  ({ headerBackgroundColor, isSameBackgroundAsMain, odysseyDesignTokens }) => ({
     display: "flex",
     alignItems: "center",
     height: TOP_NAV_HEIGHT,

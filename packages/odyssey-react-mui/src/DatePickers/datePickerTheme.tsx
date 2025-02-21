@@ -298,12 +298,12 @@ export const datePickerTheme: ThemeOptions = {
     MuiPickersPopper: {
       styleOverrides: {
         paper: ({ theme }) => ({
-          boxShadow: `0 ${(1 / 16) * (16 / 14)}rem ${
-            (4 / 16) * (16 / 14)
-          }rem rgba(29, 29, 33, 0.08), 0 ${(4 / 16) * (16 / 14)}rem ${
-            (10 / 16) * (16 / 14)
-          }rem rgba(29, 29, 33, 0.08), 0 ${(8 / 16) * (16 / 14)}rem ${
-            (30 / 16) * (16 / 14)
+          boxShadow: `0 ${1 / 14}rem ${
+            4 / 14
+          }rem rgba(29, 29, 33, 0.08), 0 ${4 / 14}rem ${
+            10 / 14
+          }rem rgba(29, 29, 33, 0.08), 0 ${8 / 14}rem ${
+            30 / 14
           }rem rgba(29, 29, 33, 0.1)`,
           marginTop: theme.spacing(1),
         }),

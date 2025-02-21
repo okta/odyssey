@@ -395,6 +395,7 @@ export const Default: StoryObj<typeof SideNav> = {
 
     await step("Side Nav Expand", async () => {
       await userEvent.click(toggleButton);
+
       await waitFor(() => {
         expect(toggleButton.ariaExpanded).toEqual("true");
         expect(navElement).toBeVisible();
@@ -405,7 +406,10 @@ export const Default: StoryObj<typeof SideNav> = {
 
 export const SortableSideNav: StoryObj<typeof SideNav> = {
   args: {
-    appName: "",
+    appName: undefined,
+    logoProps: {
+      logoComponent: <PlaceholderLogo.One />,
+    },
     sideNavItems: [
       {
         id: "item17",

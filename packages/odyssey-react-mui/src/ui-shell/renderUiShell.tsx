@@ -16,15 +16,16 @@ import { ErrorBoundary } from "react-error-boundary";
 import { bufferLatest } from "./bufferLatest.js";
 import { createMessageBus } from "./createMessageBus.js";
 import { UiShell, UiShellProps } from "./UiShell.js";
-import { renderReactInWebComponent } from "../web-component/renderReactInWebComponent.js";
-import { type UiShellNavComponentProps } from "./UiShellContent.js";
+import { UiShellNavComponentProps } from "./uiShellContentTypes.js";
 import { uiShellDataAttribute } from "./useHasUiShell.js";
+import { renderReactInWebComponent } from "../web-component/renderReactInWebComponent.js";
 
 export const optionalComponentSlotNames: Record<
   keyof Required<UiShellProps>["optionalComponents"],
   string
 > = {
   banners: "banners",
+  rightSideMenu: "right-side-menu",
   sideNavFooter: "side-nav-footer",
   topNavLeftSide: "top-nav-left-side",
   topNavRightSide: "top-nav-right-side",

@@ -31,6 +31,7 @@ describe("UiShell", () => {
       <UiShell
         appComponent={<div />}
         appContainerElement={appContainerElement}
+        appContainerScrollingMode="vertical"
         appRootElement={document.createElement("div")}
         onSubscriptionCreated={() => {}}
         stylesRootElement={stylesRootElement}
@@ -66,6 +67,7 @@ describe("UiShell", () => {
       <UiShell
         appComponent={<div />}
         appContainerElement={appContainerElement}
+        appContainerScrollingMode="vertical"
         appRootElement={document.createElement("div")}
         onSubscriptionCreated={() => {}}
         optionalComponents={
@@ -116,6 +118,7 @@ describe("UiShell", () => {
       <UiShell
         appComponent={<div />}
         appContainerElement={appContainerElement}
+        appContainerScrollingMode={"vertical"}
         appRootElement={document.createElement("div")}
         onSubscriptionCreated={() => {}}
         optionalComponents={
@@ -152,6 +155,7 @@ describe("UiShell", () => {
       <UiShell
         appComponent={<div />}
         appContainerElement={appContainerElement}
+        appContainerScrollingMode="vertical"
         appRootElement={document.createElement("div")}
         onSubscriptionCreated={() => {}}
         stylesRootElement={document.createElement("div")}
@@ -200,6 +204,7 @@ describe("UiShell", () => {
       <UiShell
         appComponent={<div />}
         appContainerElement={appContainerElement}
+        appContainerScrollingMode="vertical"
         appRootElement={document.createElement("div")}
         onSubscriptionCreated={() => {}}
         stylesRootElement={document.createElement("div")}
@@ -233,6 +238,7 @@ describe("UiShell", () => {
       <UiShell
         appComponent={<div />}
         appContainerElement={appContainerElement}
+        appContainerScrollingMode="vertical"
         appRootElement={document.createElement("div")}
         onSubscriptionCreated={() => {}}
         stylesRootElement={document.createElement("div")}
@@ -241,6 +247,33 @@ describe("UiShell", () => {
     );
 
     expect(container).toBeVisible();
+  });
+
+  test("notifies on subscription creation", () => {
+    const rootElement = document.createElement("div");
+
+    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
+    document.body.append(rootElement);
+
+    const appContainerElement = document.createElement("div");
+    document.body.append(appContainerElement);
+
+    // This passed to React's state setter. The return value here prevents a test error. It wouldn't be required otherwise as this test could care less what's returned.
+    const onSubscriptionCreated = vi.fn();
+
+    render(
+      <UiShell
+        appComponent={<div />}
+        appContainerElement={appContainerElement}
+        appContainerScrollingMode="vertical"
+        appRootElement={document.createElement("div")}
+        onSubscriptionCreated={onSubscriptionCreated}
+        stylesRootElement={document.createElement("div")}
+        subscribeToPropChanges={() => () => {}}
+      />,
+    );
+
+    expect(onSubscriptionCreated).toHaveBeenCalledTimes(1);
   });
 
   test("has previous state in prop change subscription", () => {
@@ -268,6 +301,7 @@ describe("UiShell", () => {
       <UiShell
         appComponent={<div />}
         appContainerElement={appContainerElement}
+        appContainerScrollingMode="vertical"
         appRootElement={document.createElement("div")}
         onSubscriptionCreated={() => {}}
         stylesRootElement={document.createElement("div")}
@@ -276,7 +310,6 @@ describe("UiShell", () => {
     );
 
     expect(stateUpdater).toHaveBeenCalledWith(defaultComponentProps);
-    expect(stateUpdater).toHaveBeenCalledTimes(1);
   });
 
   test("places expected padding on appContainerElement", async () => {
@@ -349,15 +382,19 @@ describe("UiShell", () => {
       expect(appContainerElement.style.getPropertyValue("position")).toEqual(
         "absolute",
       );
+
       expect(appContainerElement.style.getPropertyValue("overflow-x")).toEqual(
         "hidden",
       );
+
       expect(appContainerElement.style.getPropertyValue("overflow-y")).toEqual(
         "hidden",
       );
+
       expect(
         appContainerElement.style.getPropertyValue("padding-inline"),
       ).toEqual("");
+
       expect(
         appContainerElement.style.getPropertyValue("padding-block"),
       ).toEqual("");

@@ -20,14 +20,17 @@ import {
 import { ErrorBoundary } from "react-error-boundary";
 
 import { CssBaseline } from "../CssBaseline.js";
+import { NarrowUiShellContent } from "./NarrowUiShellContent.js";
 import { OdysseyProvider } from "../OdysseyProvider.js";
-import {
-  UiShellContent,
-  type UiShellContentProps,
-  type UiShellNavComponentProps,
-} from "./UiShellContent.js";
-import { type ReactRootElements } from "../web-component/renderReactInWebComponent.js";
 import { UiShellProvider } from "./UiShellProvider.js";
+import {
+  UiShellNavComponentProps,
+  UiShellContentProps,
+} from "./uiShellContentTypes.js";
+import { useUiShellBreakpoints } from "./useUiShellBreakpoints.js";
+import { ContrastMode } from "../useContrastMode.js";
+import { type ReactRootElements } from "../web-component/renderReactInWebComponent.js";
+import { WideUiShellContent } from "./WideUiShellContent.js";
 
 export const defaultComponentProps: UiShellNavComponentProps = {
   sideNavProps: undefined,
@@ -35,6 +38,18 @@ export const defaultComponentProps: UiShellNavComponentProps = {
 } as const;
 
 export type UiShellProps = {
+  /**
+   * Sets a custom background color for the app content area.
+   */
+  appBackgroundColor?: string;
+  /**
+   * Sets either a gray or white background color for the app content area.
+   */
+  appBackgroundContrastMode?: ContrastMode;
+  /**
+   * React app component that renders as children in the correct location of the shell. Only used as fallback for ErrorBoundary.
+   */
+  appComponent?: ReactNode;
   /**
    * Notifies when subscribed to prop changes.
    *
@@ -60,15 +75,9 @@ export type UiShellProps = {
    * Sets a custom background color for the top nav area.
    */
   topNavBackgroundColor?: string;
-  /**
-   * React app component that renders as children in the correct location of the shell. Only used as fallback for ErrorBoundary.
-   */
-  appComponent?: ReactNode;
 } & Pick<ReactRootElements, "appRootElement" | "stylesRootElement"> &
   Pick<
     UiShellContentProps,
-    | "appBackgroundColor"
-    | "appBackgroundContrastMode"
     | "appContainerElement"
     | "appContainerScrollingMode"
     | "hasStandardAppContentPadding"
@@ -103,6 +112,8 @@ const UiShell = ({
 }: UiShellProps) => {
   const [componentProps, setComponentProps] = useState(defaultComponentProps);
 
+  const activeBreakpoint = useUiShellBreakpoints();
+
   useEffect(() => {
     const unsubscribe = subscribeToPropChanges((componentProps) => {
       // If for some reason nothing is passed as `componentProps`, we fallback on `defaultComponentProps` as a safety mechanism to ensure nothing breaks.
@@ -116,30 +127,61 @@ const UiShell = ({
     };
   }, [onSubscriptionCreated, subscribeToPropChanges]);
 
-  return (
+  return activeBreakpoint === "none" ? null : (
     <ErrorBoundary fallback={appComponent} onError={onError}>
       <OdysseyProvider
         emotionRootElement={stylesRootElement}
         shadowRootElement={appRootElement}
-        hasScopedCssBaseline={false}
       >
         <ErrorBoundary fallback={appComponent} onError={onError}>
           <CssBaseline />
+
           <UiShellProvider
             appBackgroundColor={appBackgroundColor}
             appBackgroundContrastMode={appBackgroundContrastMode}
             sideNavBackgroundColor={sideNavBackgroundColor}
             topNavBackgroundColor={topNavBackgroundColor}
           >
-            <UiShellContent
-              {...componentProps}
-              appContainerElement={appContainerElement}
-              appContainerScrollingMode={appContainerScrollingMode}
-              hasStandardAppContentPadding={hasStandardAppContentPadding}
-              initialVisibleSections={initialVisibleSections}
-              onError={onError}
-              optionalComponents={optionalComponents}
-            />
+            {activeBreakpoint === "narrow" && (
+              <NarrowUiShellContent
+                {...componentProps}
+                appContainerElement={appContainerElement}
+                appContainerScrollingMode={appContainerScrollingMode}
+                hasStandardAppContentPadding={hasStandardAppContentPadding}
+                initialVisibleSections={initialVisibleSections}
+                onError={onError}
+                optionalComponents={optionalComponents}
+              />
+            )}
+
+            {(activeBreakpoint === "constrained" ||
+              activeBreakpoint === "wide") && (
+              <WideUiShellContent
+                {...{
+                  ...componentProps,
+                  ...(componentProps.sideNavProps
+                    ? {
+                        sideNavProps: {
+                          ...componentProps.sideNavProps,
+                          isCollapsed:
+                            activeBreakpoint === "constrained" ||
+                            componentProps.sideNavProps?.isCollapsed,
+                          isCollapsible:
+                            activeBreakpoint === "constrained" ||
+                            componentProps.sideNavProps?.isCollapsible,
+                          // We have to use `as` because sideNavProps expects you to have `sideNavItems` defined even though it had to be passed in `...componentProps.sideNavProps`.
+                        } as typeof componentProps.sideNavProps,
+                      }
+                    : {}),
+                }}
+                appContainerElement={appContainerElement}
+                appContainerScrollingMode={appContainerScrollingMode}
+                hasStandardAppContentPadding={hasStandardAppContentPadding}
+                initialVisibleSections={initialVisibleSections}
+                onError={onError}
+                optionalComponents={optionalComponents}
+              />
+            )}
           </UiShellProvider>
         </ErrorBoundary>
       </OdysseyProvider>

@@ -10,12 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import * as odysseyDesignTokens from "@okta/odyssey-design-tokens";
+import { Button, SearchField } from "@okta/odyssey-react-mui";
+import { UserIcon } from "@okta/odyssey-react-mui/icons";
 import { UserProfile } from "@okta/odyssey-react-mui/labs";
 import { TopNav, TopNavProps } from "@okta/odyssey-react-mui/ui-shell";
 import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
-import { Button, SearchField } from "@okta/odyssey-react-mui";
-import { UserIcon } from "@okta/odyssey-react-mui/icons";
 
 const storybookMeta: Meta<TopNavProps> = {
   title: "UI Shell Components/TopNav",
@@ -40,43 +41,6 @@ const storybookMeta: Meta<TopNavProps> = {
       },
     },
   },
-  args: {
-    leftSideComponent: <SearchField label="Search" placeholder="Search..." />,
-    rightSideComponent: (
-      <>
-        <Button variant="secondary" label="Connect Builder" />
-
-        <UserProfile
-          profileIcon={<UserIcon />}
-          orgName="ORG123"
-          userName="test.user@test.com"
-        />
-      </>
-    ),
-    // topNavLinkItems: [
-    //   {
-    //     id: "link-01",
-    //     label: "Home",
-    //     href: "#none",
-    //   },
-    //   {
-    //     id: "link-02",
-    //     label: "Flows",
-    //     href: "#none",
-    //   },
-    //   {
-    //     id: "link-03",
-    //     label: "Connections",
-    //     href: "#none",
-    //     isDisabled: true,
-    //   },
-    //   {
-    //     id: "link-04",
-    //     label: "Template",
-    //     onClick: () => {},
-    //   },
-    // ],
-  },
   decorators: [MuiThemeDecorator],
   parameters: {
     layout: "fullscreen",
@@ -86,4 +50,24 @@ const storybookMeta: Meta<TopNavProps> = {
 
 export default storybookMeta;
 
-export const Default: StoryObj<TopNavProps> = {};
+export const Default: StoryObj<TopNavProps> = {
+  args: {
+    leftSideComponent: <SearchField label="Search" placeholder="Search..." />,
+    rightSideComponent: (
+      <div
+        style={{
+          display: "flex",
+          gap: odysseyDesignTokens.Spacing5,
+        }}
+      >
+        <Button variant="secondary" label="Connect Builder" />
+
+        <UserProfile
+          profileIcon={<UserIcon />}
+          orgName="ORG123"
+          userName="test.user@test.com"
+        />
+      </div>
+    ),
+  },
+};

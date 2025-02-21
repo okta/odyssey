@@ -35,6 +35,7 @@ import {
 } from "../../OdysseyDesignTokensContext.js";
 import { Tooltip } from "../../Tooltip.js";
 import { useUiShellContext } from "../../ui-shell/UiShellProvider.js";
+import { UI_SHELL_OVERLAY_Z_INDEX } from "../uiShellSharedConstants.js";
 
 const StyledToggleButton = styled(MuiButton, {
   shouldForwardProp: (prop) =>
@@ -51,7 +52,7 @@ const StyledToggleButton = styled(MuiButton, {
   width: odysseyDesignTokens.Spacing6,
   height: odysseyDesignTokens.Spacing6,
   border: 0,
-  zIndex: 200,
+  zIndex: UI_SHELL_OVERLAY_Z_INDEX,
 
   "&:focus-visible": {
     boxShadow: `inset 0 0 0 2px ${odysseyDesignTokens.PalettePrimaryMain}`,

@@ -27,6 +27,7 @@ export const rgbComponentsToString = (rgbComponents: RgbComponents) => {
 
 export const hexToRgb = (hexString: string) => {
   const hexNumber = parseInt(hexString.slice(1), 16);
+
   const red = (hexNumber >> 16) & 255;
   const green = (hexNumber >> 8) & 255;
   const blue = hexNumber & 255;

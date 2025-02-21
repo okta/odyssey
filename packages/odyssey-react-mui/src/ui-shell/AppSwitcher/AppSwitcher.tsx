@@ -12,17 +12,18 @@
 
 import styled from "@emotion/styled";
 import { memo } from "react";
-import {
-  DesignTokens,
-  useOdysseyDesignTokens,
-} from "../../OdysseyDesignTokensContext.js";
-import { OktaAura } from "./OktaAura.js";
+
 import {
   AppSwitcherApp,
   AppSwitcherAppIconData,
   AppSwitcherAppSkeleton,
 } from "./AppSwitcherApp.js";
-import { TOP_NAV_HEIGHT } from "../TopNav/index.js";
+import {
+  DesignTokens,
+  useOdysseyDesignTokens,
+} from "../../OdysseyDesignTokensContext.js";
+import { OktaAura } from "./OktaAura.js";
+import { TOP_NAV_HEIGHT } from "../uiShellSharedConstants.js";
 
 export type AppSwitcherProps = {
   appIcons: AppSwitcherAppIconData[];

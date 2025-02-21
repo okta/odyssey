@@ -64,11 +64,11 @@ const SideNavLogo = ({
     </StyledLogoLink>
   ) : (
     <StyledLogoContainer
-      role="presentation"
       aria-label={optionalProps.ariaLabel}
       data-se="sidenav-header-logo"
-      onClick={optionalProps.onClick}
       isLogoInteractive={Boolean(optionalProps.onClick) || optionalProps.href}
+      onClick={optionalProps.onClick}
+      role="presentation"
     >
       {logo}
     </StyledLogoContainer>
