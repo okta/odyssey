@@ -50,12 +50,11 @@ import {
   UiShellColors,
   useUiShellContext,
 } from "../../ui-shell/UiShellProvider.js";
-
-export const DEFAULT_SIDE_NAV_WIDTH = "300px";
-
-// The side nav collapse icon is placed absolutely from the top (Logo container + nav header height)
-// to align it in the middle of the nav header text
-export const SIDENAV_COLLAPSE_ICON_POSITION = "77px";
+import {
+  SIDE_NAV_VISIBILITY_TOGGLE_ICON_POSITION,
+  SIDE_NAV_WIDTH,
+  UI_SHELL_BASE_Z_INDEX,
+} from "../uiShellSharedConstants.js";
 
 const StyledCollapsibleContent = styled("div", {
   shouldForwardProp: (prop) =>
@@ -66,7 +65,7 @@ const StyledCollapsibleContent = styled("div", {
 }>(({ odysseyDesignTokens, isSideNavCollapsed }) => ({
   position: "relative",
   display: "inline-grid",
-  gridTemplateColumns: DEFAULT_SIDE_NAV_WIDTH,
+  gridTemplateColumns: SIDE_NAV_WIDTH,
   height: "100%",
   transition: `grid-template-columns ${odysseyDesignTokens.TransitionDurationMain}, opacity 300ms`,
   transitionTimingFunction: odysseyDesignTokens.TransitionTimingMain,
@@ -146,7 +145,7 @@ const StyledSideNavContainer = styled("nav", {
       transform: `translateX(0)`,
       transition: `opacity ${odysseyDesignTokens.TransitionDurationMain}, transform ${odysseyDesignTokens.TransitionDurationMain}`,
       width: odysseyDesignTokens.Spacing2,
-      zIndex: 2,
+      zIndex: UI_SHELL_BASE_Z_INDEX,
     },
 
     "&:has([data-sidenav-toggle='true']:hover), &:has([data-sidenav-toggle='true']:focus-visible)":
@@ -166,7 +165,7 @@ const StyledSideNavContainer = styled("nav", {
 
     "[data-sidenav-toggle='true']": {
       position: "absolute",
-      top: SIDENAV_COLLAPSE_ICON_POSITION,
+      top: SIDE_NAV_VISIBILITY_TOGGLE_ICON_POSITION,
       right: 0,
       transition: `transform ${odysseyDesignTokens.TransitionDurationMain}`,
       transform: `translate3d(100%, 0, 0)`,
@@ -274,7 +273,7 @@ const StyledPersistentSideNavFooter = styled(StyledSideNavFooter, {
     transitionProperty: "box-shadow",
     transitionDuration: odysseyDesignTokens.TransitionDurationMain,
     transitionTiming: odysseyDesignTokens.TransitionTimingMain,
-    zIndex: 2,
+    zIndex: UI_SHELL_BASE_Z_INDEX,
 
     // The box shadow should appear above the footer only if the scrollable region has overflow
     ...(isContentScrollable &&
@@ -667,17 +666,21 @@ const SideNav = ({
             isSideNavCollapsed={isSideNavCollapsed}
             odysseyDesignTokens={odysseyDesignTokens}
           >
-            {(appName || logoProps) && (
+            {(appName || isLoading || logoProps) && (
               <StyledSideNavHeaderContainer
                 hasContentScrolled={hasContentScrolled}
                 odysseyDesignTokens={odysseyDesignTokens}
                 borderColor={uiShellContext?.sideNavContrastColors?.fontColor}
               >
-                <SideNavHeader
-                  appName={appName}
-                  isLoading={isLoading}
-                  logoProps={logoProps}
-                />
+                {isLoading && !appName && !logoProps ? (
+                  <SideNavHeader isLoading={isLoading} />
+                ) : (
+                  <SideNavHeader
+                    appName={appName}
+                    isLoading={isLoading}
+                    logoProps={logoProps}
+                  />
+                )}
               </StyledSideNavHeaderContainer>
             )}
 

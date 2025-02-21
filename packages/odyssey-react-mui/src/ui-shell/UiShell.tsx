@@ -25,8 +25,8 @@ import { OdysseyProvider } from "../OdysseyProvider.js";
 import { UiShellProvider } from "./UiShellProvider.js";
 import {
   UiShellNavComponentProps,
-  UnifiedUiShellContentProps,
-} from "./unifiedUiShellContentTypes.js";
+  UiShellContentProps,
+} from "./uiShellContentTypes.js";
 import { useUiShellBreakpoints } from "./useUiShellBreakpoints.js";
 import { ContrastMode } from "../useContrastMode.js";
 import { type ReactRootElements } from "../web-component/renderReactInWebComponent.js";
@@ -77,7 +77,7 @@ export type UiShellProps = {
   topNavBackgroundColor?: string;
 } & Pick<ReactRootElements, "appRootElement" | "stylesRootElement"> &
   Pick<
-    UnifiedUiShellContentProps,
+    UiShellContentProps,
     | "appContainerElement"
     | "appContainerScrollingMode"
     | "hasStandardAppContentPadding"
@@ -160,16 +160,20 @@ const UiShell = ({
               <WideUiShellContent
                 {...{
                   ...componentProps,
-                  sideNavProps: {
-                    ...componentProps.sideNavProps,
-                    isCollapsed:
-                      activeBreakpoint === "constrained" ||
-                      componentProps.sideNavProps?.isCollapsed,
-                    isCollapsible:
-                      activeBreakpoint === "constrained" ||
-                      componentProps.sideNavProps?.isCollapsible,
-                    // We have to use `as` because sideNavProps expects you to have `sideNavItems` defined even though it had to be passed in `...componentProps.sideNavProps`.
-                  } as typeof componentProps.sideNavProps,
+                  ...(componentProps.sideNavProps
+                    ? {
+                        sideNavProps: {
+                          ...componentProps.sideNavProps,
+                          isCollapsed:
+                            activeBreakpoint === "constrained" ||
+                            componentProps.sideNavProps?.isCollapsed,
+                          isCollapsible:
+                            activeBreakpoint === "constrained" ||
+                            componentProps.sideNavProps?.isCollapsible,
+                          // We have to use `as` because sideNavProps expects you to have `sideNavItems` defined even though it had to be passed in `...componentProps.sideNavProps`.
+                        } as typeof componentProps.sideNavProps,
+                      }
+                    : {}),
                 }}
                 appContainerElement={appContainerElement}
                 appContainerScrollingMode={appContainerScrollingMode}

@@ -23,15 +23,19 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../OdysseyDesignTokensContext.js";
-import { DEFAULT_SIDE_NAV_WIDTH, SideNav } from "./SideNav/SideNav.js";
+import { SideNav } from "./SideNav/SideNav.js";
 import { SideNavLogo } from "./SideNav/SideNavLogo.js";
 import { HamburgerMenuIcon } from "./TopNav/HamburgerMenuIcon.js";
-import { TOP_NAV_HEIGHT } from "./TopNav/TopNav.js";
 import { UiShellColors, useUiShellContext } from "./UiShellProvider.js";
 import {
   UiShellNavComponentProps,
-  UnifiedUiShellContentProps,
-} from "./unifiedUiShellContentTypes.js";
+  UiShellContentProps,
+} from "./uiShellContentTypes.js";
+import {
+  SIDE_NAV_WIDTH,
+  TOP_NAV_HEIGHT,
+  UI_SHELL_BASE_Z_INDEX,
+} from "./uiShellSharedConstants.js";
 import { useScrollState } from "./useScrollState.js";
 import { useRepositionAppElementToContainerEffect } from "./useRepositionAppElementToContainerEffect.js";
 import { hexToRgb } from "../hexToRgb.js";
@@ -64,7 +68,7 @@ const StyledAppContainer = styled("div", {
 
 const StyledBannersContainer = styled("div")({
   gridArea: "banners",
-  zIndex: 100,
+  zIndex: UI_SHELL_BASE_Z_INDEX,
 });
 
 const StyledLeftSideContainer = styled("div", {
@@ -77,7 +81,7 @@ const StyledLeftSideContainer = styled("div", {
   gridArea: "left-side",
   overflowY: "auto",
   position: "absolute",
-  zIndex: 100,
+  zIndex: UI_SHELL_BASE_Z_INDEX,
 }));
 
 const StyledRightSideContainer = styled("div", {
@@ -91,12 +95,12 @@ const StyledRightSideContainer = styled("div", {
   display: isOpen ? "block" : "none",
   gridArea: "right-side",
   height: "100%",
-  maxWidth: DEFAULT_SIDE_NAV_WIDTH,
+  maxWidth: SIDE_NAV_WIDTH,
   overflowY: "auto",
   position: "absolute",
   right: 0,
-  width: DEFAULT_SIDE_NAV_WIDTH,
-  zIndex: 100,
+  width: SIDE_NAV_WIDTH,
+  zIndex: UI_SHELL_BASE_Z_INDEX,
 }));
 
 const StyledMenuLogo = styled("div", {
@@ -123,7 +127,7 @@ const StyledPageOverlay = styled("div", {
   position: "absolute",
   top: 0,
   width: "100vw",
-  zIndex: 100,
+  zIndex: UI_SHELL_BASE_Z_INDEX,
 }));
 
 const StyledSideNavContainer = styled("div")({
@@ -178,7 +182,7 @@ const StyledTopNav = styled("div", {
   justifyContent: "center",
   position: "relative",
   transition: `box-shadow ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
-  zIndex: 100,
+  zIndex: UI_SHELL_BASE_Z_INDEX,
 }));
 
 const StyledTopNavMenu = styled("div", {
@@ -218,7 +222,7 @@ const StyledTopNavSearch = styled("div", {
 
 export type NarrowUiShellContentProps = Pick<HtmlProps, "testId"> &
   Pick<UiShellNavComponentProps, "sideNavProps" | "topNavProps"> &
-  UnifiedUiShellContentProps;
+  UiShellContentProps;
 
 const NarrowUiShellContent = ({
   appContainerElement,

@@ -22,8 +22,8 @@ import {
 } from "../OdysseyDesignTokensContext.js";
 import {
   UiShellNavComponentProps,
-  UnifiedUiShellContentProps,
-} from "./unifiedUiShellContentTypes.js";
+  UiShellContentProps,
+} from "./uiShellContentTypes.js";
 import { SideNav, type SideNavProps } from "./SideNav/index.js";
 import { TopNav } from "./TopNav/index.js";
 import { useScrollState } from "./useScrollState.js";
@@ -80,7 +80,7 @@ const StyledTopNavContainer = styled("div")({
 });
 
 export type WideUiShellContentProps = UiShellNavComponentProps &
-  UnifiedUiShellContentProps;
+  UiShellContentProps;
 
 /**
  * Our new Unified Platform UI Shell.
@@ -149,14 +149,11 @@ const WideUiShellContent = ({
             initialVisibleSections?.includes("SideNav") &&
               sideNavProps === undefined && (
                 <ErrorBoundary fallback={null} onError={onError}>
-                  <SideNav
-                    isLoading
-                    appName=""
-                    sideNavItems={emptySideNavItems}
-                  />
+                  <SideNav isLoading sideNavItems={emptySideNavItems} />
                 </ErrorBoundary>
               )
           }
+
           {sideNavProps && (
             <ErrorBoundary fallback={null} onError={onError}>
               <SideNav

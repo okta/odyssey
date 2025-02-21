@@ -21,15 +21,18 @@ import {
 import { SideNavLogo } from "./SideNavLogo.js";
 import { SideNavLogoProps, SideNavProps } from "./types.js";
 import { Heading5 } from "../../Typography.js";
-import { TOP_NAV_HEIGHT } from "../TopNav/index.js";
 import { ContrastColors } from "../../createContrastColors.js";
 import { useUiShellContext } from "../../ui-shell/UiShellProvider.js";
+import {
+  TOP_NAV_HEIGHT,
+  UI_SHELL_BASE_Z_INDEX,
+} from "../uiShellSharedConstants.js";
 
 const SideNavHeaderContainer = styled("div")({
   position: "relative",
   display: "flex",
   flexDirection: "column",
-  zIndex: 1,
+  zIndex: UI_SHELL_BASE_Z_INDEX,
 });
 
 const SideNavLogoContainer = styled("div", {

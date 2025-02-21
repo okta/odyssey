@@ -16,7 +16,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { bufferLatest } from "./bufferLatest.js";
 import { createMessageBus } from "./createMessageBus.js";
 import { UiShell, UiShellProps } from "./UiShell.js";
-import { UiShellNavComponentProps } from "./unifiedUiShellContentTypes.js";
+import { UiShellNavComponentProps } from "./uiShellContentTypes.js";
 import { uiShellDataAttribute } from "./useHasUiShell.js";
 import { renderReactInWebComponent } from "../web-component/renderReactInWebComponent.js";
 

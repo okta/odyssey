@@ -38,7 +38,7 @@ export type UiShellNavComponentProps = {
   > | null;
 };
 
-export type UnifiedUiShellContentProps = {
+export type UiShellContentProps = {
   /**
    * When passed, the app is expected to render into this element, not the Shadow DOM. UI Shell will position this element appropriately as if it was rendered in the app content area of the Shadow DOM.
    */

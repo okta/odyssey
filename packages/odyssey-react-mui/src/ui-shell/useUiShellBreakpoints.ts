@@ -43,5 +43,6 @@ export const useUiShellBreakpoints = ():
     return "narrow";
   }
 
+  // Initial page load.
   return "none";
 };

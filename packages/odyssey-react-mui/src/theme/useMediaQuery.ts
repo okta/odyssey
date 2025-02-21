@@ -18,11 +18,12 @@ export const useMediaQuery = (mediaQuery: string) => {
   useEffect(() => {
     const mediaQueryList = window.matchMedia(mediaQuery);
 
-    const updateHasMatches = () => setHasMatches(mediaQueryList.matches);
+    const updateHasMatches = (event: MediaQueryListEvent | MediaQueryList) =>
+      setHasMatches(event.matches);
 
     mediaQueryList.addEventListener("change", updateHasMatches);
 
-    updateHasMatches();
+    updateHasMatches(mediaQueryList);
 
     return () => {
       mediaQueryList.removeEventListener("change", updateHasMatches);
