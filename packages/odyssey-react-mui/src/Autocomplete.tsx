@@ -157,7 +157,7 @@ export type AutocompleteProps<
   /**
    * The text to display when no options are available
    *
-   * default: "No Options"
+   * default: "No options"
    */
   noOptionsText?: string;
   /**
@@ -298,7 +298,7 @@ const Autocomplete = <
       fullWidth={isFullWidth}
       loading={isLoading}
       multiple={hasMultipleChoices}
-      noOptionsText={noOptionsText}
+      noOptionsText={noOptionsText || t("autocomplete.nooptions")}
       onBlur={onBlur}
       onChange={onChange}
       onInputChange={onInputChange}
