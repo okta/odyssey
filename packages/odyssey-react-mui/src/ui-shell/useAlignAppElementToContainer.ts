@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { CSSProperties, RefObject, useEffect, useMemo } from "react";
+import { CSSProperties, RefObject, useEffect, useMemo, useRef } from "react";
 import { DesignTokens } from "../OdysseyDesignTokensContext.js";
 import { UiShellContentProps } from "./uiShellContentTypes.js";
 
@@ -21,18 +21,34 @@ export const setStylesToMatchElement = ({
   additionalStyles,
   appContainerElement,
   appContentReferenceElement,
+  parentElement,
 }: {
   additionalStyles: CSSProperties;
   appContainerElement: HTMLElement;
   appContentReferenceElement: HTMLElement;
+  parentElement: HTMLElement;
 }) => {
-  const boundingRect = appContentReferenceElement.getBoundingClientRect();
+  const appContentReferenceRectangle =
+    appContentReferenceElement.getBoundingClientRect();
+  const parentElementRectangle = parentElement.getBoundingClientRect();
 
   appContainerElement.style.setProperty("position", "absolute");
-  appContainerElement.style.setProperty("top", `${boundingRect.y}px`);
-  appContainerElement.style.setProperty("left", `${boundingRect.x}px`);
-  appContainerElement.style.setProperty("width", `${boundingRect.width}px`);
-  appContainerElement.style.setProperty("height", `${boundingRect.height}px`);
+  appContainerElement.style.setProperty(
+    "top",
+    `${appContentReferenceRectangle.top - parentElementRectangle.top}px`,
+  );
+  appContainerElement.style.setProperty(
+    "left",
+    `${appContentReferenceRectangle.left - parentElementRectangle.left}px`,
+  );
+  appContainerElement.style.setProperty(
+    "width",
+    `${appContentReferenceRectangle.width}px`,
+  );
+  appContainerElement.style.setProperty(
+    "height",
+    `${appContentReferenceRectangle.height}px`,
+  );
   appContainerElement.style.setProperty("z-index", "1");
 
   (
@@ -50,7 +66,7 @@ export const setStylesToMatchElement = ({
   });
 };
 
-export type UseRepositionAppElementToContainerProps = {
+export type UseAlignAppElementToContainerProps = {
   appContainerRef: RefObject<HTMLDivElement>;
   odysseyDesignTokens: DesignTokens;
   /**
@@ -59,14 +75,16 @@ export type UseRepositionAppElementToContainerProps = {
   resizingRefs: Array<RefObject<HTMLDivElement>>;
 } & UiShellContentProps;
 
-export const useRepositionAppElementToContainerEffect = ({
+export const useAlignAppElementToContainer = ({
   appContainerElement,
   appContainerScrollingMode,
   appContainerRef,
   hasStandardAppContentPadding,
   odysseyDesignTokens,
   resizingRefs,
-}: UseRepositionAppElementToContainerProps) => {
+}: UseAlignAppElementToContainerProps) => {
+  const parentContainerRef = useRef<HTMLDivElement>(null);
+
   const appContainerElementStyles = useMemo<CSSProperties>(
     () => ({
       ...(hasStandardAppContentPadding
@@ -101,18 +119,23 @@ export const useRepositionAppElementToContainerEffect = ({
 
   useEffect(() => {
     // Once `appContainerRef` is rendered, we can position `appContainerElement` on top to match.
-    if (appContainerRef.current && appContainerElement) {
+    if (
+      appContainerRef.current &&
+      appContainerElement &&
+      parentContainerRef.current
+    ) {
       let animationFrameId: number;
 
       const updateStyles = () => {
         cancelAnimationFrame(animationFrameId);
 
         animationFrameId = requestAnimationFrame(() => {
-          if (appContainerRef.current) {
+          if (appContainerRef.current && parentContainerRef.current) {
             setStylesToMatchElement({
               additionalStyles: appContainerElementStyles,
               appContentReferenceElement: appContainerRef.current,
               appContainerElement,
+              parentElement: parentContainerRef.current,
             });
           }
         });
@@ -125,10 +148,10 @@ export const useRepositionAppElementToContainerEffect = ({
           Boolean(element),
         );
 
-      // Setup a mutation observer to sync later updates
+      // Set up a mutation observer to sync later updates
       const observer = new ResizeObserver(updateStyles);
 
-      observer.observe(appContainerRef.current);
+      // document.addEventListener("ready", updateStyles);
 
       resizingElements.forEach((resizingElement) => {
         resizingElement.addEventListener("transitionend", updateStyles);
@@ -139,8 +162,12 @@ export const useRepositionAppElementToContainerEffect = ({
       // Set the initial styles
       updateStyles();
 
+      // setTimeout(updateStyles, 5000)
+
       return () => {
         observer.disconnect();
+
+        // document.removeEventListener("ready", updateStyles);
 
         resizingElements.forEach((resizingElement) => {
           resizingElement.removeEventListener("transitionend", updateStyles);
@@ -149,4 +176,8 @@ export const useRepositionAppElementToContainerEffect = ({
     }
     return () => {};
   }, [appContainerElement, appContainerElementStyles, appContainerRef]);
+
+  return {
+    parentContainerRef,
+  };
 };

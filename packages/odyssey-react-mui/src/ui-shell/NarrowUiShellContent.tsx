@@ -37,7 +37,7 @@ import {
   UI_SHELL_BASE_Z_INDEX,
 } from "./uiShellSharedConstants.js";
 import { useScrollState } from "./useScrollState.js";
-import { useRepositionAppElementToContainerEffect } from "./useRepositionAppElementToContainerEffect.js";
+import { useAlignAppElementToContainer } from "./useAlignAppElementToContainer.js";
 import { hexToRgb } from "../hexToRgb.js";
 
 const StyledAppContentArea = styled("div")({
@@ -63,6 +63,7 @@ const StyledAppContainer = styled("div", {
   backgroundColor: appBackgroundColor,
   height: "100%",
   gridArea: "app-container",
+  overflow: "hidden",
   width: "100%",
 }));
 
@@ -165,6 +166,7 @@ const StyledUiShellContainer = styled("div", {
   gridTemplateColumns: "1fr",
   gridTemplateRows: "auto auto 1fr",
   height: "100vh",
+  overflow: "hidden",
   width: "100vw",
 }));
 
@@ -242,10 +244,12 @@ const NarrowUiShellContent = ({
   topNavProps,
 }: NarrowUiShellContentProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+
   const { isContentScrolled, scrollableContentRef: appContainerRef } =
     useScrollState(appContainerElement);
   const sideNavContainerRef = useRef<HTMLDivElement>(null);
   const topNavContainerRef = useRef<HTMLDivElement>(null);
+
   const uiShellContext = useUiShellContext();
 
   const [isLeftSideMenuOpen, setIsLeftSideMenuOpen] = useState(false);
@@ -266,13 +270,13 @@ const NarrowUiShellContent = ({
     setIsRightSideMenuOpen((isRightSideMenuOpen) => !isRightSideMenuOpen);
   }, []);
 
-  useRepositionAppElementToContainerEffect({
+  const { parentContainerRef } = useAlignAppElementToContainer({
     appContainerElement,
     appContainerRef,
     appContainerScrollingMode,
     hasStandardAppContentPadding,
     odysseyDesignTokens,
-    resizingRefs: [sideNavContainerRef, topNavContainerRef],
+    resizingRefs: [appContainerRef, sideNavContainerRef, topNavContainerRef],
   });
 
   return (
@@ -284,7 +288,10 @@ const NarrowUiShellContent = ({
         />
       )}
 
-      <StyledUiShellContainer odysseyDesignTokens={odysseyDesignTokens}>
+      <StyledUiShellContainer
+        odysseyDesignTokens={odysseyDesignTokens}
+        ref={parentContainerRef}
+      >
         <StyledBannersContainer>
           {optionalComponents?.banners}
         </StyledBannersContainer>
@@ -330,9 +337,11 @@ const NarrowUiShellContent = ({
                 )}
               </StyledTopNavMenu>
 
-              <StyledTopNavSearch odysseyDesignTokens={odysseyDesignTokens}>
-                {optionalComponents?.topNavLeftSide}
-              </StyledTopNavSearch>
+              {optionalComponents?.topNavLeftSide && (
+                <StyledTopNavSearch odysseyDesignTokens={odysseyDesignTokens}>
+                  {optionalComponents?.topNavLeftSide}
+                </StyledTopNavSearch>
+              )}
             </StyledTopNav>
           </ErrorBoundary>
         )}

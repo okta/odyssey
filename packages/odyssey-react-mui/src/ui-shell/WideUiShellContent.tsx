@@ -26,7 +26,7 @@ import {
 import { SideNav, type SideNavProps } from "./SideNav/index.js";
 import { TopNav } from "./TopNav/index.js";
 import { useScrollState } from "./useScrollState.js";
-import { useRepositionAppElementToContainerEffect } from "./useRepositionAppElementToContainerEffect.js";
+import { useAlignAppElementToContainer } from "./useAlignAppElementToContainer.js";
 import { UiShellColors, useUiShellContext } from "./UiShellProvider.js";
 
 const emptySideNavItems = [] satisfies SideNavProps["sideNavItems"];
@@ -104,17 +104,20 @@ const WideUiShellContent = ({
   const topNavContainerRef = useRef<HTMLDivElement>(null);
   const uiShellContext = useUiShellContext();
 
-  useRepositionAppElementToContainerEffect({
+  const { parentContainerRef } = useAlignAppElementToContainer({
     appContainerElement,
     appContainerRef,
     appContainerScrollingMode,
     hasStandardAppContentPadding,
     odysseyDesignTokens,
-    resizingRefs: [sideNavContainerRef, topNavContainerRef],
+    resizingRefs: [appContainerRef, sideNavContainerRef, topNavContainerRef],
   });
 
   return (
-    <StyledShellContainer odysseyDesignTokens={odysseyDesignTokens}>
+    <StyledShellContainer
+      odysseyDesignTokens={odysseyDesignTokens}
+      ref={parentContainerRef}
+    >
       <StyledBannersContainer>
         {optionalComponents?.banners}
       </StyledBannersContainer>
