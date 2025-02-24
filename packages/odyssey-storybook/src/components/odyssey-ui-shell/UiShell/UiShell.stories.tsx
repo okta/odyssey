@@ -47,121 +47,125 @@ import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 import { useEffect, useRef, useState } from "react";
 import PlaceholderLogo from "../../odyssey-labs/PickerWithOptionAdornment/PlaceholderLogo.js";
 
-const storybookMeta: Meta<UiShellProps & { sideNavBackgroundColor?: string }> =
-  {
-    title: "UI Shell Components/UI Shell",
-    component: UiShell,
-    argTypes: {
-      appBackgroundColor: {
-        control: "color",
-        description:
-          "Custom color for app content background. Should only be used as a stop-gap to allow support for dark mode.",
-        table: {
-          type: {
-            summary: "hex color code",
-          },
-        },
-      },
-      appComponent: {
-        control: undefined,
-        description: "App component that renders inside the content area.",
-        table: {
-          type: {
-            summary: "InputType",
-          },
-        },
-      },
-      hasStandardAppContentPadding: {
-        control: "boolean",
-        description:
-          "defaults to `true`. If `false`, the content area will have no padding provided",
-        table: {
-          type: {
-            summary: "boolean",
-          },
-        },
-      },
-      initialVisibleSections: {
-        control: "text",
-        description:
-          "A list of UiShell components that should be (minimally) rendered initially, with their isLoading property set when applicable. Allows the initial visibility of UiShell components to be influenced.",
-        table: {
-          type: {
-            summary: "string",
-          },
-        },
-      },
-      onError: {
-        description:
-          'Notifies when a React rendering error occurs. This could be useful for logging, flagging "p0"s, and recovering UI Shell when errors occur.',
-        table: {
-          defaultValue: {
-            summary: "console.error",
-          },
-          type: {
-            summary: "string",
-          },
-        },
-      },
-      onSubscriptionCreated: {
-        description:
-          "Notifies when subscribed to prop changes. UI Shell listens to prop updates, and it won't subscribe synchronously. Because of that, this callback notifies when that subscription is ready.",
-        table: {
-          type: {
-            summary: "string",
-          },
-        },
-      },
-      optionalComponents: {
-        description:
-          "Components that will render as children of various other components such as the top nav or side nav.",
-        table: {
-          type: {
-            summary: "ReactElement",
-          },
-        },
-      },
-      sideNavBackgroundColor: {
-        control: "color",
-        description: "Custom color for side nav background",
-        table: {
-          type: {
-            summary: "hex color code",
-          },
-        },
-      },
-      subscribeToPropChanges: {
-        description:
-          "This is a callback that provides a subscriber callback to listen for changes to state. It allows UI Shell to listen for state changes. The props coming in this callback go directly to a React state; therefore, it shares the same signature and provides a previous state.",
-        table: {
-          type: {
-            summary: "MouseEventHandler",
-          },
-        },
-      },
-      topNavBackgroundColor: {
-        control: "color",
-        description:
-          "Custom color for top nav background. Should only be used as a stop-gap to allow support for dark mode.",
-        table: {
-          type: {
-            summary: "hex color code",
-          },
+const meta = {
+  title: "UI Shell Components/UI Shell",
+  component: UiShell,
+  argTypes: {
+    appBackgroundColor: {
+      control: "color",
+      description:
+        "Custom color for app content background. Should only be used as a stop-gap to allow support for dark mode.",
+      table: {
+        type: {
+          summary: "hex color code",
         },
       },
     },
-    args: {
-      appComponent: <div />,
-      appContainerScrollingMode: "vertical",
-      onSubscriptionCreated: fn(),
-      subscribeToPropChanges: () => fn(),
+    appComponent: {
+      control: undefined,
+      description: "App component that renders inside the content area.",
+      table: {
+        type: {
+          summary: "InputType",
+        },
+      },
     },
-    parameters: {
-      layout: "fullscreen",
+    hasStandardAppContentPadding: {
+      control: "boolean",
+      description:
+        "defaults to `true`. If `false`, the content area will have no padding provided",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
     },
-  };
+    initialVisibleSections: {
+      control: "text",
+      description:
+        "A list of UiShell components that should be (minimally) rendered initially, with their isLoading property set when applicable. Allows the initial visibility of UiShell components to be influenced.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    onError: {
+      description:
+        'Notifies when a React rendering error occurs. This could be useful for logging, flagging "p0"s, and recovering UI Shell when errors occur.',
+      table: {
+        defaultValue: {
+          summary: "console.error",
+        },
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    onSubscriptionCreated: {
+      description:
+        "Notifies when subscribed to prop changes. UI Shell listens to prop updates, and it won't subscribe synchronously. Because of that, this callback notifies when that subscription is ready.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    optionalComponents: {
+      description:
+        "Components that will render as children of various other components such as the top nav or side nav.",
+      table: {
+        type: {
+          summary: "ReactElement",
+        },
+      },
+    },
+    sideNavBackgroundColor: {
+      control: "color",
+      description: "Custom color for side nav background",
+      table: {
+        type: {
+          summary: "hex color code",
+        },
+      },
+    },
+    subscribeToPropChanges: {
+      description:
+        "This is a callback that provides a subscriber callback to listen for changes to state. It allows UI Shell to listen for state changes. The props coming in this callback go directly to a React state; therefore, it shares the same signature and provides a previous state.",
+      table: {
+        type: {
+          summary: "MouseEventHandler",
+        },
+      },
+    },
+    topNavBackgroundColor: {
+      control: "color",
+      description:
+        "Custom color for top nav background. Should only be used as a stop-gap to allow support for dark mode.",
+      table: {
+        type: {
+          summary: "hex color code",
+        },
+      },
+    },
+  },
+  args: {
+    appComponent: <div />,
+    appContainerElement: document.createElement("div"),
+    appContainerScrollingMode: "vertical",
+    appRootElement: document.createElement("div"),
+    onSubscriptionCreated: fn(),
+    stylesRootElement: document.head,
+  },
+  parameters: {
+    // docs: {
+    //   inlineStories: false,
+    // },
+    layout: "fullscreen",
+  },
+} satisfies Meta<typeof UiShell>;
 
-export default storybookMeta;
+export default meta;
 
 const sharedAppSwitcherProps = {
   appIcons: [
@@ -403,6 +407,8 @@ const sharedSideNavProps = {
   ],
 } as const satisfies UiShellNavComponentProps["sideNavProps"];
 
+type Story = StoryObj<typeof meta>;
+
 const sharedTopNavProps = {
   // topNavLinkItems: [
   //   {
@@ -449,6 +455,7 @@ const useRefWithRerenderHack = () => {
    * We need to force a rerender due to the funky ref stuff
    */
   const [, setHack] = useState(0);
+
   useEffect(() => {
     setHack(1);
   }, []);
@@ -456,7 +463,7 @@ const useRefWithRerenderHack = () => {
   return useRef<HTMLDivElement>(null);
 };
 
-export const Default: StoryObj<UiShellProps> = {
+export const Default: Story = {
   args: {
     subscribeToPropChanges: (subscriber) => {
       subscriber({
@@ -472,18 +479,22 @@ export const Default: StoryObj<UiShellProps> = {
   decorators: [MuiThemeDecorator],
 };
 
-export const LoadingFirstRender: StoryObj<UiShellProps> = {
-  decorators: [MuiThemeDecorator],
-};
-
-export const InvisibleFirstRender: StoryObj<UiShellProps> = {
+export const LoadingFirstRender: Story = {
   args: {
-    initialVisibleSections: [],
+    subscribeToPropChanges: () => fn(),
   },
   decorators: [MuiThemeDecorator],
 };
 
-export const TopNavOnly: StoryObj<UiShellProps> = {
+export const InvisibleFirstRender: Story = {
+  args: {
+    initialVisibleSections: [],
+    subscribeToPropChanges: () => fn(),
+  },
+  decorators: [MuiThemeDecorator],
+};
+
+export const TopNavOnly: Story = {
   args: {
     initialVisibleSections: ["TopNav"],
     optionalComponents: sharedOptionalComponents,
@@ -498,7 +509,7 @@ export const TopNavOnly: StoryObj<UiShellProps> = {
   decorators: [MuiThemeDecorator],
 };
 
-export const AppSwitcherOnly: StoryObj<UiShellProps> = {
+export const AppSwitcherOnly: Story = {
   args: {
     hasStandardAppContentPadding: false,
     initialVisibleSections: ["AppSwitcher"],
@@ -513,7 +524,7 @@ export const AppSwitcherOnly: StoryObj<UiShellProps> = {
   decorators: [MuiThemeDecorator],
 };
 
-export const LoadingData: StoryObj<UiShellProps> = {
+export const LoadingData: Story = {
   args: {
     optionalComponents: sharedOptionalComponents,
     subscribeToPropChanges: (subscriber) => {
@@ -535,7 +546,7 @@ export const LoadingData: StoryObj<UiShellProps> = {
   decorators: [MuiThemeDecorator],
 };
 
-export const WithCustomColors: StoryObj<UiShellProps> = {
+export const WithCustomColors: Story = {
   args: {
     sideNavBackgroundColor: undefined,
     topNavBackgroundColor: undefined,
@@ -558,7 +569,7 @@ export const WithCustomColors: StoryObj<UiShellProps> = {
   decorators: [MuiThemeDecorator],
 };
 
-export const WithoutAppContent: StoryObj<UiShellProps> = {
+export const WithoutAppContent: Story = {
   args: {
     optionalComponents: sharedOptionalComponents,
     subscribeToPropChanges: (subscriber) => {
@@ -575,230 +586,225 @@ export const WithoutAppContent: StoryObj<UiShellProps> = {
 };
 
 const EXPECTED_LINE_HEIGHT = "30px";
-export const WithTallAppContentAndNoStorybookDecorator: StoryObj<UiShellProps> =
-  {
-    args: {
-      optionalComponents: sharedOptionalComponents,
-      subscribeToPropChanges: (subscriber) => {
-        subscriber({
-          appSwitcherProps: sharedAppSwitcherProps,
-          sideNavProps: {
-            ...sharedSideNavProps,
-            logoProps: {
-              logoComponent: <PlaceholderLogo.One />,
-            },
+export const WithTallAppContentAndNoStorybookDecorator: Story = {
+  args: {
+    optionalComponents: sharedOptionalComponents,
+    subscribeToPropChanges: (subscriber) => {
+      subscriber({
+        appSwitcherProps: sharedAppSwitcherProps,
+        sideNavProps: {
+          ...sharedSideNavProps,
+          logoProps: {
+            logoComponent: <PlaceholderLogo.One />,
           },
-          topNavProps: sharedTopNavProps,
-        });
+        },
+        topNavProps: sharedTopNavProps,
+      });
 
-        return () => {};
-      },
+      return () => {};
     },
-    render: function C(props) {
-      const appContainerElementRef = useRefWithRerenderHack();
-      useEffect(() => {
-        const outputSpan = document.getElementById("lineHeightOutput");
-        if (outputSpan) {
-          outputSpan.innerText = getComputedStyle(outputSpan).lineHeight;
-        }
-      }, []);
+  },
+  render: function C(props) {
+    const appContainerElementRef = useRefWithRerenderHack();
 
-      return (
-        <>
-          <div ref={appContainerElementRef}>
-            <style>
-              {`body {
+    useEffect(() => {
+      const outputSpan = document.getElementById("lineHeightOutput");
+      if (outputSpan) {
+        outputSpan.innerText = getComputedStyle(outputSpan).lineHeight;
+      }
+    }, []);
+
+    return (
+      <>
+        <div ref={appContainerElementRef}>
+          <style>
+            {`body {
           line-height: ${EXPECTED_LINE_HEIGHT} !important;
         }`}
-            </style>
-            <div
-              style={{
-                float: "right",
-                width: "200px",
-                height: "200px",
-                padding: "20px",
-                backgroundColor: "white",
-                zIndex: 1,
-                position: "relative",
-              }}
-            >
-              A box to demonstrate whether the TopNav shadow clips or not (it
-              should not since{" "}
-              <a href="https://github.com/okta/odyssey/pull/2461/files#diff-45b62c71e0e59aaed6b2683e0efe6fb7239b2bcf5573f4946340992efeff3c4a">
-                this PR
-              </a>
-              ).
-            </div>
-            <p>
-              Line Height: <span id="lineHeightOutput"></span> &lt;- THIS VALUE
-              SHOULD BE "{EXPECTED_LINE_HEIGHT}" if there hasn't been a
-              regression.
-            </p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
-            lacinia leo quis sodales scelerisque. Maecenas tempor eget nunc sit
-            amet ultrices. Maecenas et varius ante. Nulla eu quam sit amet orci
-            fermentum dictum sit amet scelerisque libero. Proin luctus semper
-            elit, ut pretium massa tristique a. Mauris hendrerit ex eu commodo
-            egestas. Etiam a lacus aliquet, convallis metus et, sollicitudin
-            odio. Fusce vehicula purus sed orci elementum, ut cursus diam
-            sollicitudin. Pellentesque pulvinar nibh turpis, eu finibus dolor
-            egestas eget. Duis tellus mauris, pulvinar sit amet ante a, aliquet
-            laoreet sapien. Ut quis tempus massa. Fusce fringilla mattis
-            lacinia. Cras at pharetra quam, eu ultrices ipsum. Etiam malesuada,
-            ex consectetur fringilla faucibus, quam lorem luctus diam, vitae
-            lobortis urna lorem ac libero. Nulla a fermentum ligula, ut pulvinar
-            odio. Cras in dictum nibh. Ut et orci sodales, laoreet sem nec,
-            volutpat sapien. Phasellus dui turpis, euismod vitae euismod porta,
-            semper a tellus. Morbi bibendum eros quam, et suscipit ex blandit
-            eu. Etiam placerat, tellus viverra rutrum porttitor, elit arcu
-            molestie nibh, at porta arcu odio ut neque. Donec id odio ut neque
-            malesuada pulvinar a in tortor. Fusce eu urna lobortis, rhoncus odio
-            nec, scelerisque dolor. Donec tempor eros sed condimentum rutrum.
-            Vivamus ac odio ac erat bibendum ultricies. Cras nec libero sit amet
-            leo luctus gravida. Praesent placerat massa ex. Donec vehicula orci
-            ac consequat mollis. Sed vitae magna ligula. Nulla pulvinar lectus
-            ex, sed varius enim pulvinar vel. Morbi viverra vitae dui sit amet
-            mattis. Phasellus quis augue viverra, rhoncus tellus non, elementum
-            massa. Donec posuere luctus ultrices. Ut eu massa sem. Aliquam sed
-            mattis nulla, ac fermentum magna. Vestibulum ac ex ut massa molestie
-            gravida. Cras est arcu, varius nec fringilla semper, aliquet id
-            nunc. Quisque facilisis, nulla nec ornare vehicula, justo urna
-            feugiat lorem, nec pretium odio nisl facilisis diam. Sed a quam in
-            risus semper convallis sed eget mauris. Proin vitae purus augue. Ut
-            et risus justo. Mauris porta, leo non vestibulum cursus, ante nisi
-            sagittis magna, et convallis enim arcu a diam. Ut tincidunt urna ac
-            massa consectetur euismod. Aenean sagittis nisi mi, eu bibendum arcu
-            auctor at. Sed et urna sit amet sapien euismod vulputate molestie eu
-            ipsum. Phasellus mattis semper neque, et porttitor mi scelerisque
-            eget. Donec non egestas ex, ac consequat nunc. Nunc sed risus ac
-            orci ullamcorper lacinia vel at risus. Nulla et odio eros. Vivamus
-            tempor ultricies mi sed luctus. Duis faucibus sollicitudin odio,
-            quis rhoncus orci volutpat nec. Vivamus id eros et est aliquam
-            porttitor. Maecenas maximus magna sed est condimentum hendrerit.
-            Integer fringilla posuere nisl, vitae molestie magna dictum id.
-            Suspendisse volutpat pharetra mauris, sed vehicula nulla suscipit a.
-            Morbi sed augue sodales, molestie purus et, egestas enim. Proin ut
-            metus tempus, ultricies neque vel, vulputate lectus. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Mauris lacinia leo quis
-            sodales scelerisque. Maecenas tempor eget nunc sit amet ultrices.
-            Maecenas et varius ante. Nulla eu quam sit amet orci fermentum
-            dictum sit amet scelerisque libero. Proin luctus semper elit, ut
-            pretium massa tristique a. Mauris hendrerit ex eu commodo egestas.
-            Etiam a lacus aliquet, convallis metus et, sollicitudin odio. Fusce
-            vehicula purus sed orci elementum, ut cursus diam sollicitudin.
-            Pellentesque pulvinar nibh turpis, eu finibus dolor egestas eget.
-            Duis tellus mauris, pulvinar sit amet ante a, aliquet laoreet
-            sapien. Ut quis tempus massa. Fusce fringilla mattis lacinia. Cras
-            at pharetra quam, eu ultrices ipsum. Etiam malesuada, ex consectetur
-            fringilla faucibus, quam lorem luctus diam, vitae lobortis urna
-            lorem ac libero. Nulla a fermentum ligula, ut pulvinar odio. Cras in
-            dictum nibh. Ut et orci sodales, laoreet sem nec, volutpat sapien.
-            Phasellus dui turpis, euismod vitae euismod porta, semper a tellus.
-            Morbi bibendum eros quam, et suscipit ex blandit eu. Etiam placerat,
-            tellus viverra rutrum porttitor, elit arcu molestie nibh, at porta
-            arcu odio ut neque. Donec id odio ut neque malesuada pulvinar a in
-            tortor. Fusce eu urna lobortis, rhoncus odio nec, scelerisque dolor.
-            Donec tempor eros sed condimentum rutrum. Vivamus ac odio ac erat
-            bibendum ultricies. Cras nec libero sit amet leo luctus gravida.
-            Praesent placerat massa ex. Donec vehicula orci ac consequat mollis.
-            Sed vitae magna ligula. Nulla pulvinar lectus ex, sed varius enim
-            pulvinar vel. Morbi viverra vitae dui sit amet mattis. Phasellus
-            quis augue viverra, rhoncus tellus non, elementum massa. Donec
-            posuere luctus ultrices. Ut eu massa sem. Aliquam sed mattis nulla,
-            ac fermentum magna. Vestibulum ac ex ut massa molestie gravida. Cras
-            est arcu, varius nec fringilla semper, aliquet id nunc. Quisque
-            facilisis, nulla nec ornare vehicula, justo urna feugiat lorem, nec
-            pretium odio nisl facilisis diam. Sed a quam in risus semper
-            convallis sed eget mauris. Proin vitae purus augue. Ut et risus
-            justo. Mauris porta, leo non vestibulum cursus, ante nisi sagittis
-            magna, et convallis enim arcu a diam. Ut tincidunt urna ac massa
-            consectetur euismod. Aenean sagittis nisi mi, eu bibendum arcu
-            auctor at. Sed et urna sit amet sapien euismod vulputate molestie eu
-            ipsum. Phasellus mattis semper neque, et porttitor mi scelerisque
-            eget. Donec non egestas ex, ac consequat nunc. Nunc sed risus ac
-            orci ullamcorper lacinia vel at risus. Nulla et odio eros. Vivamus
-            tempor ultricies mi sed luctus. Duis faucibus sollicitudin odio,
-            quis rhoncus orci volutpat nec. Vivamus id eros et est aliquam
-            porttitor. Maecenas maximus magna sed est condimentum hendrerit.
-            Integer fringilla posuere nisl, vitae molestie magna dictum id.
-            Suspendisse volutpat pharetra mauris, sed vehicula nulla suscipit a.
-            Morbi sed augue sodales, molestie purus et, egestas enim. Proin ut
-            metus tempus, ultricies neque vel, vulputate lectus. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Mauris lacinia leo quis
-            sodales scelerisque. Maecenas tempor eget nunc sit amet ultrices.
-            Maecenas et varius ante. Nulla eu quam sit amet orci fermentum
-            dictum sit amet scelerisque libero. Proin luctus semper elit, ut
-            pretium massa tristique a. Mauris hendrerit ex eu commodo egestas.
-            Etiam a lacus aliquet, convallis metus et, sollicitudin odio. Fusce
-            vehicula purus sed orci elementum, ut cursus diam sollicitudin.
-            Pellentesque pulvinar nibh turpis, eu finibus dolor egestas eget.
-            Duis tellus mauris, pulvinar sit amet ante a, aliquet laoreet
-            sapien. Ut quis tempus massa. Fusce fringilla mattis lacinia. Cras
-            at pharetra quam, eu ultrices ipsum. Etiam malesuada, ex consectetur
-            fringilla faucibus, quam lorem luctus diam, vitae lobortis urna
-            lorem ac libero. Nulla a fermentum ligula, ut pulvinar odio. Cras in
-            dictum nibh. Ut et orci sodales, laoreet sem nec, volutpat sapien.
-            Phasellus dui turpis, euismod vitae euismod porta, semper a tellus.
-            Morbi bibendum eros quam, et suscipit ex blandit eu. Etiam placerat,
-            tellus viverra rutrum porttitor, elit arcu molestie nibh, at porta
-            arcu odio ut neque. Donec id odio ut neque malesuada pulvinar a in
-            tortor. Fusce eu urna lobortis, rhoncus odio nec, scelerisque dolor.
-            Donec tempor eros sed condimentum rutrum. Vivamus ac odio ac erat
-            bibendum ultricies. Cras nec libero sit amet leo luctus gravida.
-            Praesent placerat massa ex. Donec vehicula orci ac consequat mollis.
-            Sed vitae magna ligula. Nulla pulvinar lectus ex, sed varius enim
-            pulvinar vel. Morbi viverra vitae dui sit amet mattis. Phasellus
-            quis augue viverra, rhoncus tellus non, elementum massa. Donec
-            posuere luctus ultrices. Ut eu massa sem. Aliquam sed mattis nulla,
-            ac fermentum magna. Vestibulum ac ex ut massa molestie gravida. Cras
-            est arcu, varius nec fringilla semper, aliquet id nunc. Quisque
-            facilisis, nulla nec ornare vehicula, justo urna feugiat lorem, nec
-            pretium odio nisl facilisis diam. Sed a quam in risus semper
-            convallis sed eget mauris. Proin vitae purus augue. Ut et risus
-            justo. Mauris porta, leo non vestibulum cursus, ante nisi sagittis
-            magna, et convallis enim arcu a diam. Ut tincidunt urna ac massa
-            consectetur euismod. Aenean sagittis nisi mi, eu bibendum arcu
-            auctor at. Sed et urna sit amet sapien euismod vulputate molestie eu
-            ipsum. Phasellus mattis semper neque, et porttitor mi scelerisque
-            eget. Donec non egestas ex, ac consequat nunc. Nunc sed risus ac
-            orci ullamcorper lacinia vel at risus. Nulla et odio eros. Vivamus
-            tempor ultricies mi sed luctus. Duis faucibus sollicitudin odio,
-            quis rhoncus orci volutpat nec. Vivamus id eros et est aliquam
-            porttitor. Maecenas maximus magna sed est condimentum hendrerit.
-            Integer fringilla posuere nisl, vitae molestie magna dictum id.
-            Suspendisse volutpat pharetra mauris, sed vehicula nulla suscipit a.
-            Morbi sed augue sodales, molestie purus et, egestas enim. Proin ut
-            metus tempus, ultricies neque vel, vulputate lectus. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Mauris lacinia leo quis
-            sodales scelerisque. Maecenas tempor eget nunc sit amet ultrices.
-            Maecenas et varius ante. Nulla eu quam sit amet orci fermentum
-            dictum sit amet scelerisque libero. Proin luctus semper elit, ut
-            pretium massa tristique a. Mauris hendrerit ex eu commodo egestas.
-            Etiam a lacus aliquet, convallis metus et, sollicitudin odio. Fusce
-            vehicula purus sed orci elementum, ut cursus diam sollicitudin.
-            Pellentesque pulvinar nibh turpis, eu finibus dolor egestas eget.
-            Duis tellus mauris, pulvinar sit amet ante a, aliquet laoreet
-            sapien. Ut quis tempus massa. Fusce fringilla mattis lacinia. Cras
-            at pharetra quam, eu ultrices ipsum. Etiam malesuada, ex consectetur
-            fringilla faucibus, quam lorem luctus diam, vitae lobortis urna
-            lorem ac libero. Nulla a fermentum ligula, ut pulvinar odio. Cras in
-            dictum nibh. Ut et orci sodales, laoreet sem nec, volutpat sapien.
-            Phasellus dui turpis, euismod vitae euismod porta, semper a tellus.
-            Morbi bibendum eros quam, et suscipit ex blandit eu. Et…
+          </style>
+          <div
+            style={{
+              float: "right",
+              width: "200px",
+              height: "200px",
+              padding: "20px",
+              backgroundColor: "white",
+              zIndex: 1,
+              position: "relative",
+            }}
+          >
+            A box to demonstrate whether the TopNav shadow clips or not (it
+            should not since{" "}
+            <a href="https://github.com/okta/odyssey/pull/2461/files#diff-45b62c71e0e59aaed6b2683e0efe6fb7239b2bcf5573f4946340992efeff3c4a">
+              this PR
+            </a>
+            ).
           </div>
-          <UiShell
-            {...props}
-            appContainerElement={appContainerElementRef.current!}
-          />
-        </>
-      );
-    },
+          <p>
+            Line Height: <span id="lineHeightOutput"></span> &lt;- THIS VALUE
+            SHOULD BE "{EXPECTED_LINE_HEIGHT}" if there hasn't been a
+            regression.
+          </p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
+          lacinia leo quis sodales scelerisque. Maecenas tempor eget nunc sit
+          amet ultrices. Maecenas et varius ante. Nulla eu quam sit amet orci
+          fermentum dictum sit amet scelerisque libero. Proin luctus semper
+          elit, ut pretium massa tristique a. Mauris hendrerit ex eu commodo
+          egestas. Etiam a lacus aliquet, convallis metus et, sollicitudin odio.
+          Fusce vehicula purus sed orci elementum, ut cursus diam sollicitudin.
+          Pellentesque pulvinar nibh turpis, eu finibus dolor egestas eget. Duis
+          tellus mauris, pulvinar sit amet ante a, aliquet laoreet sapien. Ut
+          quis tempus massa. Fusce fringilla mattis lacinia. Cras at pharetra
+          quam, eu ultrices ipsum. Etiam malesuada, ex consectetur fringilla
+          faucibus, quam lorem luctus diam, vitae lobortis urna lorem ac libero.
+          Nulla a fermentum ligula, ut pulvinar odio. Cras in dictum nibh. Ut et
+          orci sodales, laoreet sem nec, volutpat sapien. Phasellus dui turpis,
+          euismod vitae euismod porta, semper a tellus. Morbi bibendum eros
+          quam, et suscipit ex blandit eu. Etiam placerat, tellus viverra rutrum
+          porttitor, elit arcu molestie nibh, at porta arcu odio ut neque. Donec
+          id odio ut neque malesuada pulvinar a in tortor. Fusce eu urna
+          lobortis, rhoncus odio nec, scelerisque dolor. Donec tempor eros sed
+          condimentum rutrum. Vivamus ac odio ac erat bibendum ultricies. Cras
+          nec libero sit amet leo luctus gravida. Praesent placerat massa ex.
+          Donec vehicula orci ac consequat mollis. Sed vitae magna ligula. Nulla
+          pulvinar lectus ex, sed varius enim pulvinar vel. Morbi viverra vitae
+          dui sit amet mattis. Phasellus quis augue viverra, rhoncus tellus non,
+          elementum massa. Donec posuere luctus ultrices. Ut eu massa sem.
+          Aliquam sed mattis nulla, ac fermentum magna. Vestibulum ac ex ut
+          massa molestie gravida. Cras est arcu, varius nec fringilla semper,
+          aliquet id nunc. Quisque facilisis, nulla nec ornare vehicula, justo
+          urna feugiat lorem, nec pretium odio nisl facilisis diam. Sed a quam
+          in risus semper convallis sed eget mauris. Proin vitae purus augue. Ut
+          et risus justo. Mauris porta, leo non vestibulum cursus, ante nisi
+          sagittis magna, et convallis enim arcu a diam. Ut tincidunt urna ac
+          massa consectetur euismod. Aenean sagittis nisi mi, eu bibendum arcu
+          auctor at. Sed et urna sit amet sapien euismod vulputate molestie eu
+          ipsum. Phasellus mattis semper neque, et porttitor mi scelerisque
+          eget. Donec non egestas ex, ac consequat nunc. Nunc sed risus ac orci
+          ullamcorper lacinia vel at risus. Nulla et odio eros. Vivamus tempor
+          ultricies mi sed luctus. Duis faucibus sollicitudin odio, quis rhoncus
+          orci volutpat nec. Vivamus id eros et est aliquam porttitor. Maecenas
+          maximus magna sed est condimentum hendrerit. Integer fringilla posuere
+          nisl, vitae molestie magna dictum id. Suspendisse volutpat pharetra
+          mauris, sed vehicula nulla suscipit a. Morbi sed augue sodales,
+          molestie purus et, egestas enim. Proin ut metus tempus, ultricies
+          neque vel, vulputate lectus. Lorem ipsum dolor sit amet, consectetur
+          adipiscing elit. Mauris lacinia leo quis sodales scelerisque. Maecenas
+          tempor eget nunc sit amet ultrices. Maecenas et varius ante. Nulla eu
+          quam sit amet orci fermentum dictum sit amet scelerisque libero. Proin
+          luctus semper elit, ut pretium massa tristique a. Mauris hendrerit ex
+          eu commodo egestas. Etiam a lacus aliquet, convallis metus et,
+          sollicitudin odio. Fusce vehicula purus sed orci elementum, ut cursus
+          diam sollicitudin. Pellentesque pulvinar nibh turpis, eu finibus dolor
+          egestas eget. Duis tellus mauris, pulvinar sit amet ante a, aliquet
+          laoreet sapien. Ut quis tempus massa. Fusce fringilla mattis lacinia.
+          Cras at pharetra quam, eu ultrices ipsum. Etiam malesuada, ex
+          consectetur fringilla faucibus, quam lorem luctus diam, vitae lobortis
+          urna lorem ac libero. Nulla a fermentum ligula, ut pulvinar odio. Cras
+          in dictum nibh. Ut et orci sodales, laoreet sem nec, volutpat sapien.
+          Phasellus dui turpis, euismod vitae euismod porta, semper a tellus.
+          Morbi bibendum eros quam, et suscipit ex blandit eu. Etiam placerat,
+          tellus viverra rutrum porttitor, elit arcu molestie nibh, at porta
+          arcu odio ut neque. Donec id odio ut neque malesuada pulvinar a in
+          tortor. Fusce eu urna lobortis, rhoncus odio nec, scelerisque dolor.
+          Donec tempor eros sed condimentum rutrum. Vivamus ac odio ac erat
+          bibendum ultricies. Cras nec libero sit amet leo luctus gravida.
+          Praesent placerat massa ex. Donec vehicula orci ac consequat mollis.
+          Sed vitae magna ligula. Nulla pulvinar lectus ex, sed varius enim
+          pulvinar vel. Morbi viverra vitae dui sit amet mattis. Phasellus quis
+          augue viverra, rhoncus tellus non, elementum massa. Donec posuere
+          luctus ultrices. Ut eu massa sem. Aliquam sed mattis nulla, ac
+          fermentum magna. Vestibulum ac ex ut massa molestie gravida. Cras est
+          arcu, varius nec fringilla semper, aliquet id nunc. Quisque facilisis,
+          nulla nec ornare vehicula, justo urna feugiat lorem, nec pretium odio
+          nisl facilisis diam. Sed a quam in risus semper convallis sed eget
+          mauris. Proin vitae purus augue. Ut et risus justo. Mauris porta, leo
+          non vestibulum cursus, ante nisi sagittis magna, et convallis enim
+          arcu a diam. Ut tincidunt urna ac massa consectetur euismod. Aenean
+          sagittis nisi mi, eu bibendum arcu auctor at. Sed et urna sit amet
+          sapien euismod vulputate molestie eu ipsum. Phasellus mattis semper
+          neque, et porttitor mi scelerisque eget. Donec non egestas ex, ac
+          consequat nunc. Nunc sed risus ac orci ullamcorper lacinia vel at
+          risus. Nulla et odio eros. Vivamus tempor ultricies mi sed luctus.
+          Duis faucibus sollicitudin odio, quis rhoncus orci volutpat nec.
+          Vivamus id eros et est aliquam porttitor. Maecenas maximus magna sed
+          est condimentum hendrerit. Integer fringilla posuere nisl, vitae
+          molestie magna dictum id. Suspendisse volutpat pharetra mauris, sed
+          vehicula nulla suscipit a. Morbi sed augue sodales, molestie purus et,
+          egestas enim. Proin ut metus tempus, ultricies neque vel, vulputate
+          lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Mauris lacinia leo quis sodales scelerisque. Maecenas tempor eget nunc
+          sit amet ultrices. Maecenas et varius ante. Nulla eu quam sit amet
+          orci fermentum dictum sit amet scelerisque libero. Proin luctus semper
+          elit, ut pretium massa tristique a. Mauris hendrerit ex eu commodo
+          egestas. Etiam a lacus aliquet, convallis metus et, sollicitudin odio.
+          Fusce vehicula purus sed orci elementum, ut cursus diam sollicitudin.
+          Pellentesque pulvinar nibh turpis, eu finibus dolor egestas eget. Duis
+          tellus mauris, pulvinar sit amet ante a, aliquet laoreet sapien. Ut
+          quis tempus massa. Fusce fringilla mattis lacinia. Cras at pharetra
+          quam, eu ultrices ipsum. Etiam malesuada, ex consectetur fringilla
+          faucibus, quam lorem luctus diam, vitae lobortis urna lorem ac libero.
+          Nulla a fermentum ligula, ut pulvinar odio. Cras in dictum nibh. Ut et
+          orci sodales, laoreet sem nec, volutpat sapien. Phasellus dui turpis,
+          euismod vitae euismod porta, semper a tellus. Morbi bibendum eros
+          quam, et suscipit ex blandit eu. Etiam placerat, tellus viverra rutrum
+          porttitor, elit arcu molestie nibh, at porta arcu odio ut neque. Donec
+          id odio ut neque malesuada pulvinar a in tortor. Fusce eu urna
+          lobortis, rhoncus odio nec, scelerisque dolor. Donec tempor eros sed
+          condimentum rutrum. Vivamus ac odio ac erat bibendum ultricies. Cras
+          nec libero sit amet leo luctus gravida. Praesent placerat massa ex.
+          Donec vehicula orci ac consequat mollis. Sed vitae magna ligula. Nulla
+          pulvinar lectus ex, sed varius enim pulvinar vel. Morbi viverra vitae
+          dui sit amet mattis. Phasellus quis augue viverra, rhoncus tellus non,
+          elementum massa. Donec posuere luctus ultrices. Ut eu massa sem.
+          Aliquam sed mattis nulla, ac fermentum magna. Vestibulum ac ex ut
+          massa molestie gravida. Cras est arcu, varius nec fringilla semper,
+          aliquet id nunc. Quisque facilisis, nulla nec ornare vehicula, justo
+          urna feugiat lorem, nec pretium odio nisl facilisis diam. Sed a quam
+          in risus semper convallis sed eget mauris. Proin vitae purus augue. Ut
+          et risus justo. Mauris porta, leo non vestibulum cursus, ante nisi
+          sagittis magna, et convallis enim arcu a diam. Ut tincidunt urna ac
+          massa consectetur euismod. Aenean sagittis nisi mi, eu bibendum arcu
+          auctor at. Sed et urna sit amet sapien euismod vulputate molestie eu
+          ipsum. Phasellus mattis semper neque, et porttitor mi scelerisque
+          eget. Donec non egestas ex, ac consequat nunc. Nunc sed risus ac orci
+          ullamcorper lacinia vel at risus. Nulla et odio eros. Vivamus tempor
+          ultricies mi sed luctus. Duis faucibus sollicitudin odio, quis rhoncus
+          orci volutpat nec. Vivamus id eros et est aliquam porttitor. Maecenas
+          maximus magna sed est condimentum hendrerit. Integer fringilla posuere
+          nisl, vitae molestie magna dictum id. Suspendisse volutpat pharetra
+          mauris, sed vehicula nulla suscipit a. Morbi sed augue sodales,
+          molestie purus et, egestas enim. Proin ut metus tempus, ultricies
+          neque vel, vulputate lectus. Lorem ipsum dolor sit amet, consectetur
+          adipiscing elit. Mauris lacinia leo quis sodales scelerisque. Maecenas
+          tempor eget nunc sit amet ultrices. Maecenas et varius ante. Nulla eu
+          quam sit amet orci fermentum dictum sit amet scelerisque libero. Proin
+          luctus semper elit, ut pretium massa tristique a. Mauris hendrerit ex
+          eu commodo egestas. Etiam a lacus aliquet, convallis metus et,
+          sollicitudin odio. Fusce vehicula purus sed orci elementum, ut cursus
+          diam sollicitudin. Pellentesque pulvinar nibh turpis, eu finibus dolor
+          egestas eget. Duis tellus mauris, pulvinar sit amet ante a, aliquet
+          laoreet sapien. Ut quis tempus massa. Fusce fringilla mattis lacinia.
+          Cras at pharetra quam, eu ultrices ipsum. Etiam malesuada, ex
+          consectetur fringilla faucibus, quam lorem luctus diam, vitae lobortis
+          urna lorem ac libero. Nulla a fermentum ligula, ut pulvinar odio. Cras
+          in dictum nibh. Ut et orci sodales, laoreet sem nec, volutpat sapien.
+          Phasellus dui turpis, euismod vitae euismod porta, semper a tellus.
+          Morbi bibendum eros quam, et suscipit ex blandit eu. Et…
+        </div>
+        <UiShell
+          {...props}
+          appContainerElement={appContainerElementRef.current!}
+        />
+      </>
+    );
+  },
 
-    // NOTE: NO `decorators` HERE as we explicitly don't want the `<OdysseyProvider>` present in the decorator.
-    // ALL OTHER STORIES in this file should have `decorators` specified.
-  };
+  // NOTE: NO `decorators` HERE as we explicitly don't want the `<OdysseyProvider>` present in the decorator.
+  // ALL OTHER STORIES in this file should have `decorators` specified.
+};
 
-export const WithOdysseyAppContent: StoryObj<UiShellProps> = {
+export const WithOdysseyAppContent: Story = {
   args: {
     optionalComponents: {
       ...sharedOptionalComponents,

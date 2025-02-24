@@ -13,9 +13,10 @@
 import { type ReactNode } from "react";
 import type { Root } from "react-dom/client";
 
-import { createReactRootElements } from "./createReactRootElements.js";
-
-export type ReactRootElements = ReturnType<typeof createReactRootElements>;
+import {
+  createReactRootElements,
+  type ReactRootElements,
+} from "./createReactRootElements.js";
 
 export const reactWebComponentElementName = "odyssey-react-web-component";
 

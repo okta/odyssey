@@ -19,6 +19,7 @@ import {
 } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
+import { type ReactRootElements } from "../web-component/createReactRootElements.js";
 import { CssBaseline } from "../CssBaseline.js";
 import { NarrowUiShellContent } from "./NarrowUiShellContent.js";
 import { OdysseyProvider } from "../OdysseyProvider.js";
@@ -29,7 +30,6 @@ import {
 } from "./uiShellContentTypes.js";
 import { useUiShellBreakpoints } from "./useUiShellBreakpoints.js";
 import { ContrastMode } from "../useContrastMode.js";
-import { type ReactRootElements } from "../web-component/renderReactInWebComponent.js";
 import { WideUiShellContent } from "./WideUiShellContent.js";
 
 export const defaultComponentProps: UiShellNavComponentProps = {
