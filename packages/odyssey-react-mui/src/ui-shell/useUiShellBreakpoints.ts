@@ -13,36 +13,38 @@
 import { useMediaQuery } from "../theme/useMediaQuery.js";
 
 export const uiShellBreakpoint = {
-  narrow: 0,
-  constrained: 600,
-  wide: 800,
+  comfortable: 800,
+  compact: 600,
+  constrained: 0,
 } as const;
 
 export const useUiShellBreakpoints = ():
   | keyof typeof uiShellBreakpoint
   | "none" => {
-  const isNarrowView = useMediaQuery(
-    `(min-width: ${uiShellBreakpoint.narrow}px)`,
-  );
-
   const isConstrainedView = useMediaQuery(
     `(min-width: ${uiShellBreakpoint.constrained}px)`,
   );
 
-  const isWideView = useMediaQuery(`(min-width: ${uiShellBreakpoint.wide}px)`);
+  const isCompactView = useMediaQuery(
+    `(min-width: ${uiShellBreakpoint.compact}px)`,
+  );
 
-  if (isWideView) {
-    return "wide";
+  const isComfortableView = useMediaQuery(
+    `(min-width: ${uiShellBreakpoint.comfortable}px)`,
+  );
+
+  if (isComfortableView) {
+    return "comfortable";
+  }
+
+  if (isCompactView) {
+    return "compact";
   }
 
   if (isConstrainedView) {
     return "constrained";
   }
 
-  if (isNarrowView) {
-    return "narrow";
-  }
-
-  // Initial page load.
+  // For the initial page load as we don't have media queries until the page loads.
   return "none";
 };

@@ -274,8 +274,7 @@ const NarrowUiShellContent = ({
     appContainerElement,
     appContainerRef,
     appContainerScrollingMode,
-    hasStandardAppContentPadding,
-    odysseyDesignTokens,
+    appContentPadding: hasStandardAppContentPadding ? "compact" : "none",
     resizingRefs: [appContainerRef, sideNavContainerRef, topNavContainerRef],
   });
 

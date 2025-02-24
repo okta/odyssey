@@ -11,7 +11,8 @@
  */
 
 import { CSSProperties, RefObject, useEffect, useMemo, useRef } from "react";
-import { DesignTokens } from "../OdysseyDesignTokensContext.js";
+
+import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext.js";
 import { UiShellContentProps } from "./uiShellContentTypes.js";
 
 export const convertCamelCaseToKebabCase = (string: string) =>
@@ -67,30 +68,46 @@ export const setStylesToMatchElement = ({
 };
 
 export type UseAlignAppElementToContainerProps = {
+  /**
+   * Ref for the App Container in UI Shell. This should be the one inside the Shell, **not** the element we're going to align.
+   */
   appContainerRef: RefObject<HTMLDivElement>;
-  odysseyDesignTokens: DesignTokens;
+  /**
+   * Padding around the app area. "comfortable" is designed for wider views whereas "compact" is designed for narrower views.
+   */
+  appContentPadding: "comfortable" | "compact" | "none";
   /**
    * Array of refs of items that indirectly resize the app content area such as "side nav" and "top nav".
    */
   resizingRefs: Array<RefObject<HTMLDivElement>>;
-} & UiShellContentProps;
+} & Pick<
+  UiShellContentProps,
+  "appContainerElement" | "appContainerScrollingMode"
+>;
 
 export const useAlignAppElementToContainer = ({
   appContainerElement,
-  appContainerScrollingMode,
   appContainerRef,
-  hasStandardAppContentPadding,
-  odysseyDesignTokens,
+  appContainerScrollingMode,
+  appContentPadding,
   resizingRefs,
 }: UseAlignAppElementToContainerProps) => {
+  const odysseyDesignTokens = useOdysseyDesignTokens();
+
   const parentContainerRef = useRef<HTMLDivElement>(null);
 
   const appContainerElementStyles = useMemo<CSSProperties>(
     () => ({
-      ...(hasStandardAppContentPadding
+      ...(appContentPadding === "comfortable"
         ? {
-            paddingBlock: odysseyDesignTokens.Spacing5 ?? null,
-            paddingInline: odysseyDesignTokens.Spacing8 ?? null,
+            paddingBlock: odysseyDesignTokens.Spacing5,
+            paddingInline: odysseyDesignTokens.Spacing8,
+          }
+        : {}),
+      ...(appContentPadding === "compact"
+        ? {
+            paddingBlock: odysseyDesignTokens.Spacing5,
+            paddingInline: odysseyDesignTokens.Spacing5,
           }
         : {}),
       ...(appContainerScrollingMode === "horizontal" ||
@@ -110,11 +127,7 @@ export const useAlignAppElementToContainer = ({
             overflowY: "hidden",
           }),
     }),
-    [
-      hasStandardAppContentPadding,
-      appContainerScrollingMode,
-      odysseyDesignTokens,
-    ],
+    [appContainerScrollingMode, appContentPadding, odysseyDesignTokens],
   );
 
   useEffect(() => {

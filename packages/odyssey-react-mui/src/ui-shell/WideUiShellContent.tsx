@@ -108,8 +108,7 @@ const WideUiShellContent = ({
     appContainerElement,
     appContainerRef,
     appContainerScrollingMode,
-    hasStandardAppContentPadding,
-    odysseyDesignTokens,
+    appContentPadding: hasStandardAppContentPadding ? "comfortable" : "none",
     resizingRefs: [appContainerRef, sideNavContainerRef, topNavContainerRef],
   });
 

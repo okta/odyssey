@@ -142,7 +142,7 @@ const UiShell = ({
             sideNavBackgroundColor={sideNavBackgroundColor}
             topNavBackgroundColor={topNavBackgroundColor}
           >
-            {activeBreakpoint === "narrow" && (
+            {activeBreakpoint === "constrained" && (
               <NarrowUiShellContent
                 {...componentProps}
                 appContainerElement={appContainerElement}
@@ -154,8 +154,8 @@ const UiShell = ({
               />
             )}
 
-            {(activeBreakpoint === "constrained" ||
-              activeBreakpoint === "wide") && (
+            {(activeBreakpoint === "compact" ||
+              activeBreakpoint === "comfortable") && (
               <WideUiShellContent
                 {...{
                   ...componentProps,
@@ -164,10 +164,10 @@ const UiShell = ({
                         sideNavProps: {
                           ...componentProps.sideNavProps,
                           isCollapsed:
-                            activeBreakpoint === "constrained" ||
+                            activeBreakpoint === "compact" ||
                             componentProps.sideNavProps?.isCollapsed,
                           isCollapsible:
-                            activeBreakpoint === "constrained" ||
+                            activeBreakpoint === "compact" ||
                             componentProps.sideNavProps?.isCollapsible,
                           // We have to use `as` because sideNavProps expects you to have `sideNavItems` defined even though it had to be passed in `...componentProps.sideNavProps`.
                         } as typeof componentProps.sideNavProps,
