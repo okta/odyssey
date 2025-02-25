@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { CSSProperties, memo, ReactNode, useMemo } from "react";
+import { memo, ReactNode, useMemo } from "react";
 import {
   createTheme,
   ThemeProvider as MuiThemeProvider,
@@ -28,27 +28,19 @@ import {
 } from "./useContrastMode.js";
 import { OdysseyDesignTokensContext } from "./OdysseyDesignTokensContext.js";
 
-const StyledContrastContainerStyles = styled("div", {
-  shouldForwardProp: (prop) => prop !== "height",
-})<{
-  height: CSSProperties["height"];
-}>(({ height }) => ({
-  height: height || "inherit",
-}));
-
 export type OdysseyThemeProviderProps = {
   children: ReactNode;
   contrastMode?: ContrastMode;
   designTokensOverride?: DesignTokensOverride;
-  /**
-   * Defaults to "inherit". This is the height used by by top-level `<div>`s in our providers. Sometimes, this may need to be "100%" rather than inheriting the parent's height.
-   */
-  height?: CSSProperties["height"];
   /** @deprecated Use shadowRootElement instead */
   shadowDomElement?: HTMLDivElement | HTMLElement;
   shadowRootElement?: HTMLDivElement | HTMLElement;
   themeOverride?: ThemeOptions;
 };
+
+const StyledContrastContainerStyles = styled("div")({
+  height: "100%",
+});
 
 /**
  * This function doesn't include the Emotion Cache or Translations. You should probably be using `OdysseyProvider`.
@@ -59,7 +51,6 @@ const OdysseyThemeProvider = ({
   children,
   contrastMode: explicitContrastMode,
   designTokensOverride,
-  height,
   shadowDomElement,
   shadowRootElement,
   themeOverride,
@@ -98,7 +89,7 @@ const OdysseyThemeProvider = ({
   );
 
   return (
-    <StyledContrastContainerStyles height={height} ref={contrastContainerRef}>
+    <StyledContrastContainerStyles ref={contrastContainerRef}>
       <ContrastModeContext.Provider value={contrastModeProviderValue}>
         <MuiThemeProvider theme={customOdysseyTheme}>
           <OdysseyDesignTokensContext.Provider value={odysseyTokens}>

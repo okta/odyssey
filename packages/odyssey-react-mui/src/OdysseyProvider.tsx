@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, ReactNode, useMemo } from "react";
+import { memo, ReactNode } from "react";
 import { ScopedCssBaseline } from "@mui/material";
 
 import {
@@ -26,6 +26,10 @@ import {
   OdysseyTranslationProviderProps,
 } from "./OdysseyTranslationProvider.js";
 import { DefaultSupportedLanguages } from "./OdysseyTranslationProvider.types.js";
+
+const scopedCssBaselineStyles = {
+  height: "100%",
+};
 
 export type OdysseyProviderProps<
   SupportedLanguages extends string = DefaultSupportedLanguages,
@@ -45,8 +49,6 @@ const OdysseyProvider = <SupportedLanguages extends string>({
   designTokensOverride,
   emotionRoot,
   emotionRootElement,
-  hasScopedCssBaseline = true,
-  height,
   languageCode,
   nonce,
   shadowDomElement,
@@ -54,46 +56,36 @@ const OdysseyProvider = <SupportedLanguages extends string>({
   stylisPlugins,
   themeOverride,
   translationOverrides,
-}: OdysseyProviderProps<SupportedLanguages>) => {
-  const scopedCssBaselineStyles = useMemo(
-    () => ({
-      height: height || "inherit",
-    }),
-    [height],
-  );
-
-  return (
-    <OdysseyCacheProvider
-      emotionRootElement={emotionRootElement || emotionRoot}
-      hasShadowDom={Boolean(shadowRootElement || shadowDomElement)}
-      nonce={nonce}
-      stylisPlugins={stylisPlugins}
+  hasScopedCssBaseline = true,
+}: OdysseyProviderProps<SupportedLanguages>) => (
+  <OdysseyCacheProvider
+    emotionRootElement={emotionRootElement || emotionRoot}
+    hasShadowDom={Boolean(shadowRootElement || shadowDomElement)}
+    nonce={nonce}
+    stylisPlugins={stylisPlugins}
+  >
+    <OdysseyThemeProvider
+      contrastMode={contrastMode}
+      designTokensOverride={designTokensOverride}
+      shadowDomElement={shadowDomElement}
+      shadowRootElement={shadowRootElement}
+      themeOverride={themeOverride}
     >
-      <OdysseyThemeProvider
-        contrastMode={contrastMode}
-        designTokensOverride={designTokensOverride}
-        height={height}
-        shadowDomElement={shadowDomElement}
-        shadowRootElement={shadowRootElement}
-        themeOverride={themeOverride}
+      <OdysseyTranslationProvider<SupportedLanguages>
+        languageCode={languageCode}
+        translationOverrides={translationOverrides}
       >
-        <OdysseyTranslationProvider<SupportedLanguages>
-          languageCode={languageCode}
-          translationOverrides={translationOverrides}
-        >
-          {hasScopedCssBaseline ? (
-            <ScopedCssBaseline sx={scopedCssBaselineStyles}>
-              {children}
-            </ScopedCssBaseline>
-          ) : (
-            children
-          )}
-        </OdysseyTranslationProvider>
-      </OdysseyThemeProvider>
-    </OdysseyCacheProvider>
-  );
-};
-
+        {hasScopedCssBaseline ? (
+          <ScopedCssBaseline sx={scopedCssBaselineStyles}>
+            {children}
+          </ScopedCssBaseline>
+        ) : (
+          children
+        )}
+      </OdysseyTranslationProvider>
+    </OdysseyThemeProvider>
+  </OdysseyCacheProvider>
+);
 OdysseyProvider.displayName = "OdysseyProvider";
 
 const MemoizedOdysseyProvider = memo(OdysseyProvider) as typeof OdysseyProvider;

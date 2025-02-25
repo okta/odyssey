@@ -22,7 +22,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { type ReactRootElements } from "../web-component/createReactRootElements.js";
 import { CssBaseline } from "../CssBaseline.js";
 import { NarrowUiShellContent } from "./NarrowUiShellContent.js";
-import { OdysseyProvider, OdysseyProviderProps } from "../OdysseyProvider.js";
+import { OdysseyProvider } from "../OdysseyProvider.js";
 import { UiShellProvider } from "./UiShellProvider.js";
 import {
   UiShellNavComponentProps,
@@ -84,8 +84,7 @@ export type UiShellProps = {
     | "initialVisibleSections"
     | "onError"
     | "optionalComponents"
-  > &
-  Pick<OdysseyProviderProps, "height">;
+  >;
 
 /**
  * Our new Unified Platform UI Shell.
@@ -98,11 +97,10 @@ const UiShell = ({
   appBackgroundColor,
   appBackgroundContrastMode,
   appComponent,
+  appRootElement,
   appContainerElement,
   appContainerScrollingMode,
-  appRootElement,
   hasStandardAppContentPadding,
-  height,
   initialVisibleSections,
   onError = console.error,
   onSubscriptionCreated,
@@ -133,7 +131,6 @@ const UiShell = ({
     <ErrorBoundary fallback={appComponent} onError={onError}>
       <OdysseyProvider
         emotionRootElement={stylesRootElement}
-        height={height}
         shadowRootElement={appRootElement}
       >
         <ErrorBoundary fallback={appComponent} onError={onError}>
