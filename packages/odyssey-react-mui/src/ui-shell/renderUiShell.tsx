@@ -46,6 +46,7 @@ export const renderUiShell = ({
   appContainerScrollingMode,
   appRootElement: explicitAppRootElement,
   hasStandardAppContentPadding,
+  height,
   initialVisibleSections,
   onError = console.error,
   sideNavBackgroundColor,
@@ -70,6 +71,7 @@ export const renderUiShell = ({
   | "appBackgroundContrastMode"
   | "appContainerScrollingMode"
   | "hasStandardAppContentPadding"
+  | "height"
   | "initialVisibleSections"
   | "sideNavBackgroundColor"
   | "topNavBackgroundColor"
@@ -126,6 +128,7 @@ export const renderUiShell = ({
           appContainerScrollingMode={appContainerScrollingMode}
           appRootElement={reactRootElements.appRootElement}
           hasStandardAppContentPadding={hasStandardAppContentPadding}
+          height={height}
           initialVisibleSections={initialVisibleSections}
           onError={onError}
           onSubscriptionCreated={publishSubscriptionCreated}
