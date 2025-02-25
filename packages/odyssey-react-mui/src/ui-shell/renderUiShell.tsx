@@ -73,8 +73,11 @@ export const renderUiShell = ({
   | "sideNavBackgroundColor"
   | "topNavBackgroundColor"
 >) => {
-  const appRootElement =
-    explicitAppRootElement || document.createElement("div");
+  let appRootElement = explicitAppRootElement;
+  if (!appRootElement) {
+    appRootElement = document.createElement("div");
+    appRootElement.style.height = "inherit";
+  }
 
   // Add this attribute so `PageTemplate` and potentially other components will know if they're in UI Shell with special padding already available.
   uiShellRootElement.setAttribute(uiShellDataAttribute, "");
