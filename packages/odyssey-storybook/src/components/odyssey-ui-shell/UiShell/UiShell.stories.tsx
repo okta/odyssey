@@ -61,9 +61,28 @@ const meta = {
         },
       },
     },
-    appComponent: {
+    appElement: {
       control: undefined,
-      description: "App component that renders inside the content area.",
+      description: "Element that the consuming app renders into.",
+      table: {
+        type: {
+          summary: "InputType",
+        },
+      },
+    },
+    appElementScrollingMode: {
+      control: undefined,
+      description: "Mode used for scrolling.",
+      table: {
+        type: {
+          summary: "InputType",
+        },
+      },
+    },
+    appScrollElement: {
+      control: undefined,
+      description:
+        "Element that the consuming app uses as a scroll container if opting out of UI Shell scrolling.",
       table: {
         type: {
           summary: "InputType",
