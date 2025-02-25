@@ -28,6 +28,10 @@ import {
 } from "./useContrastMode.js";
 import { OdysseyDesignTokensContext } from "./OdysseyDesignTokensContext.js";
 
+const StyledContrastContainerStyles = styled("div")({
+  height: "100%",
+});
+
 export type OdysseyThemeProviderProps = {
   children: ReactNode;
   contrastMode?: ContrastMode;
@@ -37,10 +41,6 @@ export type OdysseyThemeProviderProps = {
   shadowRootElement?: HTMLDivElement | HTMLElement;
   themeOverride?: ThemeOptions;
 };
-
-const StyledContrastContainerStyles = styled("div")({
-  height: "100%",
-});
 
 /**
  * This function doesn't include the Emotion Cache or Translations. You should probably be using `OdysseyProvider`.
