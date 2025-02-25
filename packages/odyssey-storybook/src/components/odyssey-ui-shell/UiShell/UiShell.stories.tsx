@@ -150,12 +150,11 @@ const meta = {
     },
   },
   args: {
-    appComponent: <div />,
-    appContainerElement: document.createElement("div"),
-    appContainerScrollingMode: "vertical",
-    appRootElement: document.createElement("div"),
+    appElement: document.createElement("div"),
+    appElementScrollingMode: "vertical",
     onSubscriptionCreated: fn(),
-    stylesRootElement: document.head,
+    uiShellAppElement: document.createElement("div"),
+    uiShellStylesElement: document.head,
   },
   parameters: {
     // docs: {
@@ -548,10 +547,9 @@ export const LoadingData: Story = {
 
 export const WithCustomColors: Story = {
   args: {
-    sideNavBackgroundColor: undefined,
-    topNavBackgroundColor: undefined,
     appBackgroundColor: undefined,
     optionalComponents: sharedOptionalComponents,
+    sideNavBackgroundColor: undefined,
     subscribeToPropChanges: (subscriber) => {
       subscriber({
         topNavProps: sharedTopNavProps,
@@ -565,6 +563,7 @@ export const WithCustomColors: Story = {
 
       return () => {};
     },
+    topNavBackgroundColor: undefined,
   },
   decorators: [MuiThemeDecorator],
 };
@@ -605,7 +604,7 @@ export const WithTallAppContentAndNoStorybookDecorator: Story = {
     },
   },
   render: function C(props) {
-    const appContainerElementRef = useRefWithRerenderHack();
+    const appElementRef = useRefWithRerenderHack();
 
     useEffect(() => {
       const outputSpan = document.getElementById("lineHeightOutput");
@@ -616,186 +615,190 @@ export const WithTallAppContentAndNoStorybookDecorator: Story = {
 
     return (
       <>
-        <div ref={appContainerElementRef}>
+        <div ref={appElementRef}>
           <style>
-            {`body {
-          line-height: ${EXPECTED_LINE_HEIGHT} !important;
-        }`}
+            {`body { line-height: ${EXPECTED_LINE_HEIGHT} !important; }`}
           </style>
-          <div
-            style={{
-              float: "right",
-              width: "200px",
-              height: "200px",
-              padding: "20px",
-              backgroundColor: "white",
-              zIndex: 1,
-              position: "relative",
-            }}
-          >
-            A box to demonstrate whether the TopNav shadow clips or not (it
-            should not since{" "}
-            <a href="https://github.com/okta/odyssey/pull/2461/files#diff-45b62c71e0e59aaed6b2683e0efe6fb7239b2bcf5573f4946340992efeff3c4a">
-              this PR
-            </a>
-            ).
-          </div>
-          <p>
-            Line Height: <span id="lineHeightOutput"></span> &lt;- THIS VALUE
-            SHOULD BE "{EXPECTED_LINE_HEIGHT}" if there hasn't been a
-            regression.
-          </p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
-          lacinia leo quis sodales scelerisque. Maecenas tempor eget nunc sit
-          amet ultrices. Maecenas et varius ante. Nulla eu quam sit amet orci
-          fermentum dictum sit amet scelerisque libero. Proin luctus semper
-          elit, ut pretium massa tristique a. Mauris hendrerit ex eu commodo
-          egestas. Etiam a lacus aliquet, convallis metus et, sollicitudin odio.
-          Fusce vehicula purus sed orci elementum, ut cursus diam sollicitudin.
-          Pellentesque pulvinar nibh turpis, eu finibus dolor egestas eget. Duis
-          tellus mauris, pulvinar sit amet ante a, aliquet laoreet sapien. Ut
-          quis tempus massa. Fusce fringilla mattis lacinia. Cras at pharetra
-          quam, eu ultrices ipsum. Etiam malesuada, ex consectetur fringilla
-          faucibus, quam lorem luctus diam, vitae lobortis urna lorem ac libero.
-          Nulla a fermentum ligula, ut pulvinar odio. Cras in dictum nibh. Ut et
-          orci sodales, laoreet sem nec, volutpat sapien. Phasellus dui turpis,
-          euismod vitae euismod porta, semper a tellus. Morbi bibendum eros
-          quam, et suscipit ex blandit eu. Etiam placerat, tellus viverra rutrum
-          porttitor, elit arcu molestie nibh, at porta arcu odio ut neque. Donec
-          id odio ut neque malesuada pulvinar a in tortor. Fusce eu urna
-          lobortis, rhoncus odio nec, scelerisque dolor. Donec tempor eros sed
-          condimentum rutrum. Vivamus ac odio ac erat bibendum ultricies. Cras
-          nec libero sit amet leo luctus gravida. Praesent placerat massa ex.
-          Donec vehicula orci ac consequat mollis. Sed vitae magna ligula. Nulla
-          pulvinar lectus ex, sed varius enim pulvinar vel. Morbi viverra vitae
-          dui sit amet mattis. Phasellus quis augue viverra, rhoncus tellus non,
-          elementum massa. Donec posuere luctus ultrices. Ut eu massa sem.
-          Aliquam sed mattis nulla, ac fermentum magna. Vestibulum ac ex ut
-          massa molestie gravida. Cras est arcu, varius nec fringilla semper,
-          aliquet id nunc. Quisque facilisis, nulla nec ornare vehicula, justo
-          urna feugiat lorem, nec pretium odio nisl facilisis diam. Sed a quam
-          in risus semper convallis sed eget mauris. Proin vitae purus augue. Ut
-          et risus justo. Mauris porta, leo non vestibulum cursus, ante nisi
-          sagittis magna, et convallis enim arcu a diam. Ut tincidunt urna ac
-          massa consectetur euismod. Aenean sagittis nisi mi, eu bibendum arcu
-          auctor at. Sed et urna sit amet sapien euismod vulputate molestie eu
-          ipsum. Phasellus mattis semper neque, et porttitor mi scelerisque
-          eget. Donec non egestas ex, ac consequat nunc. Nunc sed risus ac orci
-          ullamcorper lacinia vel at risus. Nulla et odio eros. Vivamus tempor
-          ultricies mi sed luctus. Duis faucibus sollicitudin odio, quis rhoncus
-          orci volutpat nec. Vivamus id eros et est aliquam porttitor. Maecenas
-          maximus magna sed est condimentum hendrerit. Integer fringilla posuere
-          nisl, vitae molestie magna dictum id. Suspendisse volutpat pharetra
-          mauris, sed vehicula nulla suscipit a. Morbi sed augue sodales,
-          molestie purus et, egestas enim. Proin ut metus tempus, ultricies
-          neque vel, vulputate lectus. Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit. Mauris lacinia leo quis sodales scelerisque. Maecenas
-          tempor eget nunc sit amet ultrices. Maecenas et varius ante. Nulla eu
-          quam sit amet orci fermentum dictum sit amet scelerisque libero. Proin
-          luctus semper elit, ut pretium massa tristique a. Mauris hendrerit ex
-          eu commodo egestas. Etiam a lacus aliquet, convallis metus et,
-          sollicitudin odio. Fusce vehicula purus sed orci elementum, ut cursus
-          diam sollicitudin. Pellentesque pulvinar nibh turpis, eu finibus dolor
-          egestas eget. Duis tellus mauris, pulvinar sit amet ante a, aliquet
-          laoreet sapien. Ut quis tempus massa. Fusce fringilla mattis lacinia.
-          Cras at pharetra quam, eu ultrices ipsum. Etiam malesuada, ex
-          consectetur fringilla faucibus, quam lorem luctus diam, vitae lobortis
-          urna lorem ac libero. Nulla a fermentum ligula, ut pulvinar odio. Cras
-          in dictum nibh. Ut et orci sodales, laoreet sem nec, volutpat sapien.
-          Phasellus dui turpis, euismod vitae euismod porta, semper a tellus.
-          Morbi bibendum eros quam, et suscipit ex blandit eu. Etiam placerat,
-          tellus viverra rutrum porttitor, elit arcu molestie nibh, at porta
-          arcu odio ut neque. Donec id odio ut neque malesuada pulvinar a in
-          tortor. Fusce eu urna lobortis, rhoncus odio nec, scelerisque dolor.
-          Donec tempor eros sed condimentum rutrum. Vivamus ac odio ac erat
-          bibendum ultricies. Cras nec libero sit amet leo luctus gravida.
-          Praesent placerat massa ex. Donec vehicula orci ac consequat mollis.
-          Sed vitae magna ligula. Nulla pulvinar lectus ex, sed varius enim
-          pulvinar vel. Morbi viverra vitae dui sit amet mattis. Phasellus quis
-          augue viverra, rhoncus tellus non, elementum massa. Donec posuere
-          luctus ultrices. Ut eu massa sem. Aliquam sed mattis nulla, ac
-          fermentum magna. Vestibulum ac ex ut massa molestie gravida. Cras est
-          arcu, varius nec fringilla semper, aliquet id nunc. Quisque facilisis,
-          nulla nec ornare vehicula, justo urna feugiat lorem, nec pretium odio
-          nisl facilisis diam. Sed a quam in risus semper convallis sed eget
-          mauris. Proin vitae purus augue. Ut et risus justo. Mauris porta, leo
-          non vestibulum cursus, ante nisi sagittis magna, et convallis enim
-          arcu a diam. Ut tincidunt urna ac massa consectetur euismod. Aenean
-          sagittis nisi mi, eu bibendum arcu auctor at. Sed et urna sit amet
-          sapien euismod vulputate molestie eu ipsum. Phasellus mattis semper
-          neque, et porttitor mi scelerisque eget. Donec non egestas ex, ac
-          consequat nunc. Nunc sed risus ac orci ullamcorper lacinia vel at
-          risus. Nulla et odio eros. Vivamus tempor ultricies mi sed luctus.
-          Duis faucibus sollicitudin odio, quis rhoncus orci volutpat nec.
-          Vivamus id eros et est aliquam porttitor. Maecenas maximus magna sed
-          est condimentum hendrerit. Integer fringilla posuere nisl, vitae
-          molestie magna dictum id. Suspendisse volutpat pharetra mauris, sed
-          vehicula nulla suscipit a. Morbi sed augue sodales, molestie purus et,
-          egestas enim. Proin ut metus tempus, ultricies neque vel, vulputate
-          lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Mauris lacinia leo quis sodales scelerisque. Maecenas tempor eget nunc
-          sit amet ultrices. Maecenas et varius ante. Nulla eu quam sit amet
-          orci fermentum dictum sit amet scelerisque libero. Proin luctus semper
-          elit, ut pretium massa tristique a. Mauris hendrerit ex eu commodo
-          egestas. Etiam a lacus aliquet, convallis metus et, sollicitudin odio.
-          Fusce vehicula purus sed orci elementum, ut cursus diam sollicitudin.
-          Pellentesque pulvinar nibh turpis, eu finibus dolor egestas eget. Duis
-          tellus mauris, pulvinar sit amet ante a, aliquet laoreet sapien. Ut
-          quis tempus massa. Fusce fringilla mattis lacinia. Cras at pharetra
-          quam, eu ultrices ipsum. Etiam malesuada, ex consectetur fringilla
-          faucibus, quam lorem luctus diam, vitae lobortis urna lorem ac libero.
-          Nulla a fermentum ligula, ut pulvinar odio. Cras in dictum nibh. Ut et
-          orci sodales, laoreet sem nec, volutpat sapien. Phasellus dui turpis,
-          euismod vitae euismod porta, semper a tellus. Morbi bibendum eros
-          quam, et suscipit ex blandit eu. Etiam placerat, tellus viverra rutrum
-          porttitor, elit arcu molestie nibh, at porta arcu odio ut neque. Donec
-          id odio ut neque malesuada pulvinar a in tortor. Fusce eu urna
-          lobortis, rhoncus odio nec, scelerisque dolor. Donec tempor eros sed
-          condimentum rutrum. Vivamus ac odio ac erat bibendum ultricies. Cras
-          nec libero sit amet leo luctus gravida. Praesent placerat massa ex.
-          Donec vehicula orci ac consequat mollis. Sed vitae magna ligula. Nulla
-          pulvinar lectus ex, sed varius enim pulvinar vel. Morbi viverra vitae
-          dui sit amet mattis. Phasellus quis augue viverra, rhoncus tellus non,
-          elementum massa. Donec posuere luctus ultrices. Ut eu massa sem.
-          Aliquam sed mattis nulla, ac fermentum magna. Vestibulum ac ex ut
-          massa molestie gravida. Cras est arcu, varius nec fringilla semper,
-          aliquet id nunc. Quisque facilisis, nulla nec ornare vehicula, justo
-          urna feugiat lorem, nec pretium odio nisl facilisis diam. Sed a quam
-          in risus semper convallis sed eget mauris. Proin vitae purus augue. Ut
-          et risus justo. Mauris porta, leo non vestibulum cursus, ante nisi
-          sagittis magna, et convallis enim arcu a diam. Ut tincidunt urna ac
-          massa consectetur euismod. Aenean sagittis nisi mi, eu bibendum arcu
-          auctor at. Sed et urna sit amet sapien euismod vulputate molestie eu
-          ipsum. Phasellus mattis semper neque, et porttitor mi scelerisque
-          eget. Donec non egestas ex, ac consequat nunc. Nunc sed risus ac orci
-          ullamcorper lacinia vel at risus. Nulla et odio eros. Vivamus tempor
-          ultricies mi sed luctus. Duis faucibus sollicitudin odio, quis rhoncus
-          orci volutpat nec. Vivamus id eros et est aliquam porttitor. Maecenas
-          maximus magna sed est condimentum hendrerit. Integer fringilla posuere
-          nisl, vitae molestie magna dictum id. Suspendisse volutpat pharetra
-          mauris, sed vehicula nulla suscipit a. Morbi sed augue sodales,
-          molestie purus et, egestas enim. Proin ut metus tempus, ultricies
-          neque vel, vulputate lectus. Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit. Mauris lacinia leo quis sodales scelerisque. Maecenas
-          tempor eget nunc sit amet ultrices. Maecenas et varius ante. Nulla eu
-          quam sit amet orci fermentum dictum sit amet scelerisque libero. Proin
-          luctus semper elit, ut pretium massa tristique a. Mauris hendrerit ex
-          eu commodo egestas. Etiam a lacus aliquet, convallis metus et,
-          sollicitudin odio. Fusce vehicula purus sed orci elementum, ut cursus
-          diam sollicitudin. Pellentesque pulvinar nibh turpis, eu finibus dolor
-          egestas eget. Duis tellus mauris, pulvinar sit amet ante a, aliquet
-          laoreet sapien. Ut quis tempus massa. Fusce fringilla mattis lacinia.
-          Cras at pharetra quam, eu ultrices ipsum. Etiam malesuada, ex
-          consectetur fringilla faucibus, quam lorem luctus diam, vitae lobortis
-          urna lorem ac libero. Nulla a fermentum ligula, ut pulvinar odio. Cras
-          in dictum nibh. Ut et orci sodales, laoreet sem nec, volutpat sapien.
-          Phasellus dui turpis, euismod vitae euismod porta, semper a tellus.
-          Morbi bibendum eros quam, et suscipit ex blandit eu. Et…
+
+          <Surface>
+            <div
+              style={{
+                float: "right",
+                width: "200px",
+                height: "200px",
+                padding: "20px",
+                backgroundColor: "lightgray",
+                zIndex: 1,
+                position: "relative",
+              }}
+            >
+              A box to demonstrate whether the TopNav shadow clips or not (it
+              should not since{" "}
+              <a href="https://github.com/okta/odyssey/pull/2461/files#diff-45b62c71e0e59aaed6b2683e0efe6fb7239b2bcf5573f4946340992efeff3c4a">
+                this PR
+              </a>
+              ).
+            </div>
+            <p>
+              Line Height: <span id="lineHeightOutput"></span> &lt;- THIS VALUE
+              SHOULD BE "{EXPECTED_LINE_HEIGHT}" if there hasn't been a
+              regression.
+            </p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
+            lacinia leo quis sodales scelerisque. Maecenas tempor eget nunc sit
+            amet ultrices. Maecenas et varius ante. Nulla eu quam sit amet orci
+            fermentum dictum sit amet scelerisque libero. Proin luctus semper
+            elit, ut pretium massa tristique a. Mauris hendrerit ex eu commodo
+            egestas. Etiam a lacus aliquet, convallis metus et, sollicitudin
+            odio. Fusce vehicula purus sed orci elementum, ut cursus diam
+            sollicitudin. Pellentesque pulvinar nibh turpis, eu finibus dolor
+            egestas eget. Duis tellus mauris, pulvinar sit amet ante a, aliquet
+            laoreet sapien. Ut quis tempus massa. Fusce fringilla mattis
+            lacinia. Cras at pharetra quam, eu ultrices ipsum. Etiam malesuada,
+            ex consectetur fringilla faucibus, quam lorem luctus diam, vitae
+            lobortis urna lorem ac libero. Nulla a fermentum ligula, ut pulvinar
+            odio. Cras in dictum nibh. Ut et orci sodales, laoreet sem nec,
+            volutpat sapien. Phasellus dui turpis, euismod vitae euismod porta,
+            semper a tellus. Morbi bibendum eros quam, et suscipit ex blandit
+            eu. Etiam placerat, tellus viverra rutrum porttitor, elit arcu
+            molestie nibh, at porta arcu odio ut neque. Donec id odio ut neque
+            malesuada pulvinar a in tortor. Fusce eu urna lobortis, rhoncus odio
+            nec, scelerisque dolor. Donec tempor eros sed condimentum rutrum.
+            Vivamus ac odio ac erat bibendum ultricies. Cras nec libero sit amet
+            leo luctus gravida. Praesent placerat massa ex. Donec vehicula orci
+            ac consequat mollis. Sed vitae magna ligula. Nulla pulvinar lectus
+            ex, sed varius enim pulvinar vel. Morbi viverra vitae dui sit amet
+            mattis. Phasellus quis augue viverra, rhoncus tellus non, elementum
+            massa. Donec posuere luctus ultrices. Ut eu massa sem. Aliquam sed
+            mattis nulla, ac fermentum magna. Vestibulum ac ex ut massa molestie
+            gravida. Cras est arcu, varius nec fringilla semper, aliquet id
+            nunc. Quisque facilisis, nulla nec ornare vehicula, justo urna
+            feugiat lorem, nec pretium odio nisl facilisis diam. Sed a quam in
+            risus semper convallis sed eget mauris. Proin vitae purus augue. Ut
+            et risus justo. Mauris porta, leo non vestibulum cursus, ante nisi
+            sagittis magna, et convallis enim arcu a diam. Ut tincidunt urna ac
+            massa consectetur euismod. Aenean sagittis nisi mi, eu bibendum arcu
+            auctor at. Sed et urna sit amet sapien euismod vulputate molestie eu
+            ipsum. Phasellus mattis semper neque, et porttitor mi scelerisque
+            eget. Donec non egestas ex, ac consequat nunc. Nunc sed risus ac
+            orci ullamcorper lacinia vel at risus. Nulla et odio eros. Vivamus
+            tempor ultricies mi sed luctus. Duis faucibus sollicitudin odio,
+            quis rhoncus orci volutpat nec. Vivamus id eros et est aliquam
+            porttitor. Maecenas maximus magna sed est condimentum hendrerit.
+            Integer fringilla posuere nisl, vitae molestie magna dictum id.
+            Suspendisse volutpat pharetra mauris, sed vehicula nulla suscipit a.
+            Morbi sed augue sodales, molestie purus et, egestas enim. Proin ut
+            metus tempus, ultricies neque vel, vulputate lectus. Lorem ipsum
+            dolor sit amet, consectetur adipiscing elit. Mauris lacinia leo quis
+            sodales scelerisque. Maecenas tempor eget nunc sit amet ultrices.
+            Maecenas et varius ante. Nulla eu quam sit amet orci fermentum
+            dictum sit amet scelerisque libero. Proin luctus semper elit, ut
+            pretium massa tristique a. Mauris hendrerit ex eu commodo egestas.
+            Etiam a lacus aliquet, convallis metus et, sollicitudin odio. Fusce
+            vehicula purus sed orci elementum, ut cursus diam sollicitudin.
+            Pellentesque pulvinar nibh turpis, eu finibus dolor egestas eget.
+            Duis tellus mauris, pulvinar sit amet ante a, aliquet laoreet
+            sapien. Ut quis tempus massa. Fusce fringilla mattis lacinia. Cras
+            at pharetra quam, eu ultrices ipsum. Etiam malesuada, ex consectetur
+            fringilla faucibus, quam lorem luctus diam, vitae lobortis urna
+            lorem ac libero. Nulla a fermentum ligula, ut pulvinar odio. Cras in
+            dictum nibh. Ut et orci sodales, laoreet sem nec, volutpat sapien.
+            Phasellus dui turpis, euismod vitae euismod porta, semper a tellus.
+            Morbi bibendum eros quam, et suscipit ex blandit eu. Etiam placerat,
+            tellus viverra rutrum porttitor, elit arcu molestie nibh, at porta
+            arcu odio ut neque. Donec id odio ut neque malesuada pulvinar a in
+            tortor. Fusce eu urna lobortis, rhoncus odio nec, scelerisque dolor.
+            Donec tempor eros sed condimentum rutrum. Vivamus ac odio ac erat
+            bibendum ultricies. Cras nec libero sit amet leo luctus gravida.
+            Praesent placerat massa ex. Donec vehicula orci ac consequat mollis.
+            Sed vitae magna ligula. Nulla pulvinar lectus ex, sed varius enim
+            pulvinar vel. Morbi viverra vitae dui sit amet mattis. Phasellus
+            quis augue viverra, rhoncus tellus non, elementum massa. Donec
+            posuere luctus ultrices. Ut eu massa sem. Aliquam sed mattis nulla,
+            ac fermentum magna. Vestibulum ac ex ut massa molestie gravida. Cras
+            est arcu, varius nec fringilla semper, aliquet id nunc. Quisque
+            facilisis, nulla nec ornare vehicula, justo urna feugiat lorem, nec
+            pretium odio nisl facilisis diam. Sed a quam in risus semper
+            convallis sed eget mauris. Proin vitae purus augue. Ut et risus
+            justo. Mauris porta, leo non vestibulum cursus, ante nisi sagittis
+            magna, et convallis enim arcu a diam. Ut tincidunt urna ac massa
+            consectetur euismod. Aenean sagittis nisi mi, eu bibendum arcu
+            auctor at. Sed et urna sit amet sapien euismod vulputate molestie eu
+            ipsum. Phasellus mattis semper neque, et porttitor mi scelerisque
+            eget. Donec non egestas ex, ac consequat nunc. Nunc sed risus ac
+            orci ullamcorper lacinia vel at risus. Nulla et odio eros. Vivamus
+            tempor ultricies mi sed luctus. Duis faucibus sollicitudin odio,
+            quis rhoncus orci volutpat nec. Vivamus id eros et est aliquam
+            porttitor. Maecenas maximus magna sed est condimentum hendrerit.
+            Integer fringilla posuere nisl, vitae molestie magna dictum id.
+            Suspendisse volutpat pharetra mauris, sed vehicula nulla suscipit a.
+            Morbi sed augue sodales, molestie purus et, egestas enim. Proin ut
+            metus tempus, ultricies neque vel, vulputate lectus. Lorem ipsum
+            dolor sit amet, consectetur adipiscing elit. Mauris lacinia leo quis
+            sodales scelerisque. Maecenas tempor eget nunc sit amet ultrices.
+            Maecenas et varius ante. Nulla eu quam sit amet orci fermentum
+            dictum sit amet scelerisque libero. Proin luctus semper elit, ut
+            pretium massa tristique a. Mauris hendrerit ex eu commodo egestas.
+            Etiam a lacus aliquet, convallis metus et, sollicitudin odio. Fusce
+            vehicula purus sed orci elementum, ut cursus diam sollicitudin.
+            Pellentesque pulvinar nibh turpis, eu finibus dolor egestas eget.
+            Duis tellus mauris, pulvinar sit amet ante a, aliquet laoreet
+            sapien. Ut quis tempus massa. Fusce fringilla mattis lacinia. Cras
+            at pharetra quam, eu ultrices ipsum. Etiam malesuada, ex consectetur
+            fringilla faucibus, quam lorem luctus diam, vitae lobortis urna
+            lorem ac libero. Nulla a fermentum ligula, ut pulvinar odio. Cras in
+            dictum nibh. Ut et orci sodales, laoreet sem nec, volutpat sapien.
+            Phasellus dui turpis, euismod vitae euismod porta, semper a tellus.
+            Morbi bibendum eros quam, et suscipit ex blandit eu. Etiam placerat,
+            tellus viverra rutrum porttitor, elit arcu molestie nibh, at porta
+            arcu odio ut neque. Donec id odio ut neque malesuada pulvinar a in
+            tortor. Fusce eu urna lobortis, rhoncus odio nec, scelerisque dolor.
+            Donec tempor eros sed condimentum rutrum. Vivamus ac odio ac erat
+            bibendum ultricies. Cras nec libero sit amet leo luctus gravida.
+            Praesent placerat massa ex. Donec vehicula orci ac consequat mollis.
+            Sed vitae magna ligula. Nulla pulvinar lectus ex, sed varius enim
+            pulvinar vel. Morbi viverra vitae dui sit amet mattis. Phasellus
+            quis augue viverra, rhoncus tellus non, elementum massa. Donec
+            posuere luctus ultrices. Ut eu massa sem. Aliquam sed mattis nulla,
+            ac fermentum magna. Vestibulum ac ex ut massa molestie gravida. Cras
+            est arcu, varius nec fringilla semper, aliquet id nunc. Quisque
+            facilisis, nulla nec ornare vehicula, justo urna feugiat lorem, nec
+            pretium odio nisl facilisis diam. Sed a quam in risus semper
+            convallis sed eget mauris. Proin vitae purus augue. Ut et risus
+            justo. Mauris porta, leo non vestibulum cursus, ante nisi sagittis
+            magna, et convallis enim arcu a diam. Ut tincidunt urna ac massa
+            consectetur euismod. Aenean sagittis nisi mi, eu bibendum arcu
+            auctor at. Sed et urna sit amet sapien euismod vulputate molestie eu
+            ipsum. Phasellus mattis semper neque, et porttitor mi scelerisque
+            eget. Donec non egestas ex, ac consequat nunc. Nunc sed risus ac
+            orci ullamcorper lacinia vel at risus. Nulla et odio eros. Vivamus
+            tempor ultricies mi sed luctus. Duis faucibus sollicitudin odio,
+            quis rhoncus orci volutpat nec. Vivamus id eros et est aliquam
+            porttitor. Maecenas maximus magna sed est condimentum hendrerit.
+            Integer fringilla posuere nisl, vitae molestie magna dictum id.
+            Suspendisse volutpat pharetra mauris, sed vehicula nulla suscipit a.
+            Morbi sed augue sodales, molestie purus et, egestas enim. Proin ut
+            metus tempus, ultricies neque vel, vulputate lectus. Lorem ipsum
+            dolor sit amet, consectetur adipiscing elit. Mauris lacinia leo quis
+            sodales scelerisque. Maecenas tempor eget nunc sit amet ultrices.
+            Maecenas et varius ante. Nulla eu quam sit amet orci fermentum
+            dictum sit amet scelerisque libero. Proin luctus semper elit, ut
+            pretium massa tristique a. Mauris hendrerit ex eu commodo egestas.
+            Etiam a lacus aliquet, convallis metus et, sollicitudin odio. Fusce
+            vehicula purus sed orci elementum, ut cursus diam sollicitudin.
+            Pellentesque pulvinar nibh turpis, eu finibus dolor egestas eget.
+            Duis tellus mauris, pulvinar sit amet ante a, aliquet laoreet
+            sapien. Ut quis tempus massa. Fusce fringilla mattis lacinia. Cras
+            at pharetra quam, eu ultrices ipsum. Etiam malesuada, ex consectetur
+            fringilla faucibus, quam lorem luctus diam, vitae lobortis urna
+            lorem ac libero. Nulla a fermentum ligula, ut pulvinar odio. Cras in
+            dictum nibh. Ut et orci sodales, laoreet sem nec, volutpat sapien.
+            Phasellus dui turpis, euismod vitae euismod porta, semper a tellus.
+            Morbi bibendum eros quam, et suscipit ex blandit eu. Et…
+          </Surface>
         </div>
-        <UiShell
-          {...props}
-          appContainerElement={appContainerElementRef.current!}
-        />
+
+        <UiShell {...props} appElement={appElementRef.current!} />
       </>
     );
   },
@@ -829,11 +832,11 @@ export const WithOdysseyAppContent: Story = {
   },
   decorators: [MuiThemeDecorator],
   render: function C(props) {
-    const appContainerElementRef = useRefWithRerenderHack();
+    const appElementRef = useRefWithRerenderHack();
 
     return (
       <>
-        <div ref={appContainerElementRef}>
+        <div ref={appElementRef}>
           <OdysseyProvider>
             {/* This is normally rendered by `renderUiShell`, but we're rendering `UiShell` outside of a web component, so we need to add this data attribute ourselves. */}
             <div {...{ [uiShellDataAttribute]: "" }} />
@@ -867,10 +870,8 @@ export const WithOdysseyAppContent: Story = {
             </PageTemplate>
           </OdysseyProvider>
         </div>
-        <UiShell
-          {...props}
-          appContainerElement={appContainerElementRef.current!}
-        />
+
+        <UiShell {...props} appElement={appElementRef.current!} />
       </>
     );
   },

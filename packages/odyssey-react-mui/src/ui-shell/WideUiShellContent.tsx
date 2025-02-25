@@ -26,7 +26,7 @@ import {
 import { SideNav, type SideNavProps } from "./SideNav/index.js";
 import { TopNav } from "./TopNav/index.js";
 import { useScrollState } from "./useScrollState.js";
-import { useAlignAppElementToContainer } from "./useAlignAppElementToContainer.js";
+import { useMatchAppElementToUiShellAppArea } from "./useMatchAppElementToUiShellAppArea.js";
 import { UiShellColors, useUiShellContext } from "./UiShellProvider.js";
 
 const emptySideNavItems = [] satisfies SideNavProps["sideNavItems"];
@@ -87,29 +87,36 @@ export type WideUiShellContentProps = UiShellNavComponentProps &
  * If an error occurs, this will revert to only showing the app.
  */
 const WideUiShellContent = ({
-  appContainerElement,
+  appElement,
+  appElementScrollingMode,
+  appScrollElement,
+  appSwitcherProps,
   hasStandardAppContentPadding = true,
-  appContainerScrollingMode,
   initialVisibleSections = ["TopNav", "SideNav", "AppSwitcher"],
   onError = console.error,
   optionalComponents,
-  appSwitcherProps,
   sideNavProps,
   topNavProps,
 }: WideUiShellContentProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
-  const { isContentScrolled, scrollableContentRef: appContainerRef } =
-    useScrollState(appContainerElement);
-  const sideNavContainerRef = useRef<HTMLDivElement>(null);
-  const topNavContainerRef = useRef<HTMLDivElement>(null);
   const uiShellContext = useUiShellContext();
 
-  const { parentContainerRef } = useAlignAppElementToContainer({
-    appContainerElement,
-    appContainerRef,
-    appContainerScrollingMode,
-    appContentPadding: hasStandardAppContentPadding ? "comfortable" : "none",
-    resizingRefs: [appContainerRef, sideNavContainerRef, topNavContainerRef],
+  const { isContentScrolled } = useScrollState(appScrollElement || appElement);
+
+  const sideNavContainerRef = useRef<HTMLDivElement>(null);
+  const topNavContainerRef = useRef<HTMLDivElement>(null);
+  const uiShellAppAreaRef = useRef<HTMLDivElement>(null);
+
+  const { parentContainerRef } = useMatchAppElementToUiShellAppArea({
+    appElement,
+    appElementScrollingMode,
+    paddingMode: hasStandardAppContentPadding ? "comfortable" : "none",
+    uiShellAppAreaRef,
+    uiShellResizableRefs: [
+      sideNavContainerRef,
+      topNavContainerRef,
+      uiShellAppAreaRef,
+    ],
   });
 
   return (
@@ -201,7 +208,7 @@ const WideUiShellContent = ({
       <StyledAppContainer
         appBackgroundColor={uiShellContext?.appBackgroundColor}
         tabIndex={0}
-        ref={appContainerRef}
+        ref={uiShellAppAreaRef}
       />
     </StyledShellContainer>
   );

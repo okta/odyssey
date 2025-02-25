@@ -67,59 +67,56 @@ export const setStylesToMatchElement = ({
   });
 };
 
-export type UseAlignAppElementToContainerProps = {
-  /**
-   * Ref for the App Container in UI Shell. This should be the one inside the Shell, **not** the element we're going to align.
-   */
-  appContainerRef: RefObject<HTMLDivElement>;
+export type UseMatchAppElementToUiShellAppAreaProps = {
   /**
    * Padding around the app area. "comfortable" is designed for wider views whereas "compact" is designed for narrower views.
    */
-  appContentPadding: "comfortable" | "compact" | "none";
+  paddingMode: "comfortable" | "compact" | "none";
+  /**
+   * Ref for the App Container in UI Shell. This should be the one inside the Shell, **not** the element we're going to align.
+   */
+  uiShellAppAreaRef: RefObject<HTMLDivElement>;
   /**
    * Array of refs of items that indirectly resize the app content area such as "side nav" and "top nav".
    */
-  resizingRefs: Array<RefObject<HTMLDivElement>>;
-} & Pick<
-  UiShellContentProps,
-  "appContainerElement" | "appContainerScrollingMode"
->;
+  uiShellResizableRefs: Array<RefObject<HTMLDivElement>>;
+} & Pick<UiShellContentProps, "appElement" | "appElementScrollingMode">;
 
-export const useAlignAppElementToContainer = ({
-  appContainerElement,
-  appContainerRef,
-  appContainerScrollingMode,
-  appContentPadding,
-  resizingRefs,
-}: UseAlignAppElementToContainerProps) => {
+export const useMatchAppElementToUiShellAppArea = ({
+  appElement,
+  appElementScrollingMode,
+  paddingMode,
+  uiShellAppAreaRef,
+  uiShellResizableRefs,
+}: UseMatchAppElementToUiShellAppAreaProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const parentContainerRef = useRef<HTMLDivElement>(null);
 
   const appContainerElementStyles = useMemo<CSSProperties>(
     () => ({
-      ...(appContentPadding === "comfortable"
+      ...(paddingMode === "comfortable"
         ? {
             paddingBlock: odysseyDesignTokens.Spacing5,
             paddingInline: odysseyDesignTokens.Spacing8,
           }
         : {}),
-      ...(appContentPadding === "compact"
+      ...(paddingMode === "compact"
         ? {
             paddingBlock: odysseyDesignTokens.Spacing5,
             paddingInline: odysseyDesignTokens.Spacing5,
           }
         : {}),
-      ...(appContainerScrollingMode === "horizontal" ||
-      appContainerScrollingMode === "both"
+      ...(appElementScrollingMode === "horizontal" ||
+      appElementScrollingMode === "both"
         ? {
             overflowX: "auto",
           }
         : {
             overflowX: "hidden",
           }),
-      ...(appContainerScrollingMode === "vertical" ||
-      appContainerScrollingMode === "both"
+      ...(appElementScrollingMode === "vertical" ||
+      appElementScrollingMode === "both"
         ? {
             overflowY: "auto",
           }
@@ -127,27 +124,23 @@ export const useAlignAppElementToContainer = ({
             overflowY: "hidden",
           }),
     }),
-    [appContainerScrollingMode, appContentPadding, odysseyDesignTokens],
+    [appElementScrollingMode, paddingMode, odysseyDesignTokens],
   );
 
   useEffect(() => {
     // Once `appContainerRef` is rendered, we can position `appContainerElement` on top to match.
-    if (
-      appContainerRef.current &&
-      appContainerElement &&
-      parentContainerRef.current
-    ) {
+    if (uiShellAppAreaRef.current && appElement && parentContainerRef.current) {
       let animationFrameId: number;
 
       const updateStyles = () => {
         cancelAnimationFrame(animationFrameId);
 
         animationFrameId = requestAnimationFrame(() => {
-          if (appContainerRef.current && parentContainerRef.current) {
+          if (uiShellAppAreaRef.current && parentContainerRef.current) {
             setStylesToMatchElement({
               additionalStyles: appContainerElementStyles,
-              appContentReferenceElement: appContainerRef.current,
-              appContainerElement,
+              appContentReferenceElement: uiShellAppAreaRef.current,
+              appContainerElement: appElement,
               parentElement: parentContainerRef.current,
             });
           }
@@ -155,7 +148,7 @@ export const useAlignAppElementToContainer = ({
       };
 
       // These refs might change by the time we unsubscribe, so we need to keep references to the original elements.
-      const resizingElements = resizingRefs
+      const resizingElements = uiShellResizableRefs
         .map((resizingRef) => resizingRef.current)
         .filter((element): element is NonNullable<typeof element> =>
           Boolean(element),
@@ -188,7 +181,7 @@ export const useAlignAppElementToContainer = ({
       };
     }
     return () => {};
-  }, [appContainerElement, appContainerElementStyles, appContainerRef]);
+  }, [appElement, appContainerElementStyles, uiShellAppAreaRef]);
 
   return {
     parentContainerRef,

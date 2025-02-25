@@ -12,10 +12,8 @@
 
 export type ReactRootElements = {
   /**
-   * The element your React root component renders into.
+   * The element your root React component renders into.
    * React has to render or portal somewhere, and this element can be used for that root element.
-   *
-   * In the case of a web component, there is no defined root element, so you have to define it yourself.
    */
   appRootElement: HTMLDivElement;
   /**

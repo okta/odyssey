@@ -16,35 +16,31 @@ import { defaultComponentProps, UiShell, UiShellProps } from "./UiShell.js";
 import { ReactElement } from "react";
 
 describe("UiShell", () => {
-  test("renders `stylesRootElement`", () => {
-    const rootElement = document.createElement("div");
+  test("renders `uiShellStylesElement`", () => {
+    const appElement = document.createElement("div");
 
-    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
-    document.body.append(rootElement);
+    document.body.append(appElement);
 
-    const appContainerElement = document.createElement("div");
-    document.body.append(appContainerElement);
-
-    const stylesRootElement = document.createElement("div");
+    const uiShellStylesElement = document.createElement("div");
 
     render(
       <UiShell
-        appComponent={<div />}
-        appContainerElement={appContainerElement}
-        appContainerScrollingMode="vertical"
-        appRootElement={document.createElement("div")}
+        appElement={appElement}
+        appElementScrollingMode="vertical"
         onSubscriptionCreated={() => {}}
-        stylesRootElement={stylesRootElement}
         subscribeToPropChanges={() => () => {}}
+        uiShellAppElement={document.createElement("div")}
+        uiShellStylesElement={uiShellStylesElement}
       />,
     );
 
-    expect(Array.from(stylesRootElement.children).length).toBeGreaterThan(0);
+    expect(Array.from(uiShellStylesElement.children).length).toBeGreaterThan(0);
   });
 
   test("renders always-available `componentSlots`", async () => {
-    const appContainerElement = document.createElement("div");
-    document.body.append(appContainerElement);
+    const appElement = document.createElement("div");
+
+    document.body.append(appElement);
 
     const optionalComponentTestIds: Array<
       keyof Required<UiShellProps>["optionalComponents"]
@@ -65,10 +61,8 @@ describe("UiShell", () => {
 
     const { container } = render(
       <UiShell
-        appComponent={<div />}
-        appContainerElement={appContainerElement}
-        appContainerScrollingMode="vertical"
-        appRootElement={document.createElement("div")}
+        appElement={appElement}
+        appElementScrollingMode="vertical"
         onSubscriptionCreated={() => {}}
         optionalComponents={
           Object.fromEntries(
@@ -78,8 +72,9 @@ describe("UiShell", () => {
             ]),
           ) as Record<keyof UiShellProps["optionalComponents"], ReactElement>
         }
-        stylesRootElement={document.createElement("div")}
         subscribeToPropChanges={subscribeToPropChanges}
+        uiShellAppElement={document.createElement("div")}
+        uiShellStylesElement={document.createElement("div")}
       />,
     );
 
@@ -116,10 +111,8 @@ describe("UiShell", () => {
 
     const { container } = render(
       <UiShell
-        appComponent={<div />}
-        appContainerElement={appContainerElement}
-        appContainerScrollingMode={"vertical"}
-        appRootElement={document.createElement("div")}
+        appElement={appContainerElement}
+        appElementScrollingMode={"vertical"}
         onSubscriptionCreated={() => {}}
         optionalComponents={
           Object.fromEntries(
@@ -129,8 +122,9 @@ describe("UiShell", () => {
             ]),
           ) as Record<keyof UiShellProps["optionalComponents"], ReactElement>
         }
-        stylesRootElement={document.createElement("div")}
         subscribeToPropChanges={subscribeToPropChanges}
+        uiShellAppElement={document.createElement("div")}
+        uiShellStylesElement={document.createElement("div")}
       />,
     );
 
@@ -145,21 +139,21 @@ describe("UiShell", () => {
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(rootElement);
 
-    const appContainerElement = document.createElement("div");
-    document.body.append(appContainerElement);
+    const appElement = document.createElement("div");
+
+    document.body.append(appElement);
 
     const unsubscribeFromPropChanges = vi.fn();
     const subscribeToPropChanges = vi.fn(() => unsubscribeFromPropChanges);
 
     const { unmount } = render(
       <UiShell
-        appComponent={<div />}
-        appContainerElement={appContainerElement}
-        appContainerScrollingMode="vertical"
-        appRootElement={document.createElement("div")}
+        appElement={appElement}
+        appElementScrollingMode="vertical"
         onSubscriptionCreated={() => {}}
-        stylesRootElement={document.createElement("div")}
         subscribeToPropChanges={subscribeToPropChanges}
+        uiShellAppElement={document.createElement("div")}
+        uiShellStylesElement={document.createElement("div")}
       />,
     );
 
@@ -176,8 +170,9 @@ describe("UiShell", () => {
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(rootElement);
 
-    const appContainerElement = document.createElement("div");
-    document.body.append(appContainerElement);
+    const appElement = document.createElement("div");
+
+    document.body.append(appElement);
 
     // This is the subscription we give the component, and then once subscribed, we're going to immediately call it with new props.
     const subscribeToPropChanges: UiShellProps["subscribeToPropChanges"] = (
@@ -202,13 +197,12 @@ describe("UiShell", () => {
 
     const { container } = render(
       <UiShell
-        appComponent={<div />}
-        appContainerElement={appContainerElement}
-        appContainerScrollingMode="vertical"
-        appRootElement={document.createElement("div")}
+        appElement={appElement}
+        appElementScrollingMode="vertical"
         onSubscriptionCreated={() => {}}
-        stylesRootElement={document.createElement("div")}
         subscribeToPropChanges={subscribeToPropChanges}
+        uiShellAppElement={document.createElement("div")}
+        uiShellStylesElement={document.createElement("div")}
       />,
     );
 
@@ -221,8 +215,9 @@ describe("UiShell", () => {
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(rootElement);
 
-    const appContainerElement = document.createElement("div");
-    document.body.append(appContainerElement);
+    const appElement = document.createElement("div");
+
+    document.body.append(appElement);
 
     // This is the subscription we give the component, and then once subscribed, we're going to immediately call it with new props.
     const subscribeToPropChanges: UiShellProps["subscribeToPropChanges"] = (
@@ -236,13 +231,12 @@ describe("UiShell", () => {
 
     const { container } = render(
       <UiShell
-        appComponent={<div />}
-        appContainerElement={appContainerElement}
-        appContainerScrollingMode="vertical"
-        appRootElement={document.createElement("div")}
+        appElement={appElement}
+        appElementScrollingMode="vertical"
         onSubscriptionCreated={() => {}}
-        stylesRootElement={document.createElement("div")}
         subscribeToPropChanges={subscribeToPropChanges}
+        uiShellAppElement={document.createElement("div")}
+        uiShellStylesElement={document.createElement("div")}
       />,
     );
 
@@ -255,21 +249,21 @@ describe("UiShell", () => {
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(rootElement);
 
-    const appContainerElement = document.createElement("div");
-    document.body.append(appContainerElement);
+    const appElement = document.createElement("div");
+
+    document.body.append(appElement);
 
     // This passed to React's state setter. The return value here prevents a test error. It wouldn't be required otherwise as this test could care less what's returned.
     const onSubscriptionCreated = vi.fn();
 
     render(
       <UiShell
-        appComponent={<div />}
-        appContainerElement={appContainerElement}
-        appContainerScrollingMode="vertical"
-        appRootElement={document.createElement("div")}
+        appElement={appElement}
+        appElementScrollingMode="vertical"
         onSubscriptionCreated={onSubscriptionCreated}
-        stylesRootElement={document.createElement("div")}
         subscribeToPropChanges={() => () => {}}
+        uiShellAppElement={document.createElement("div")}
+        uiShellStylesElement={document.createElement("div")}
       />,
     );
 
@@ -282,8 +276,9 @@ describe("UiShell", () => {
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(rootElement);
 
-    const appContainerElement = document.createElement("div");
-    document.body.append(appContainerElement);
+    const appElement = document.createElement("div");
+
+    document.body.append(appElement);
 
     // This passed to React's state setter. The return value here prevents a test error. It wouldn't be required otherwise as this test could care less what's returned.
     const stateUpdater = vi.fn(() => defaultComponentProps);
@@ -299,105 +294,88 @@ describe("UiShell", () => {
 
     render(
       <UiShell
-        appComponent={<div />}
-        appContainerElement={appContainerElement}
-        appContainerScrollingMode="vertical"
-        appRootElement={document.createElement("div")}
+        appElement={appElement}
+        appElementScrollingMode="vertical"
         onSubscriptionCreated={() => {}}
-        stylesRootElement={document.createElement("div")}
         subscribeToPropChanges={subscribeToPropChanges}
+        uiShellAppElement={document.createElement("div")}
+        uiShellStylesElement={document.createElement("div")}
       />,
     );
 
     expect(stateUpdater).toHaveBeenCalledWith(defaultComponentProps);
   });
 
-  test("places expected padding on appContainerElement", async () => {
+  test("places expected padding on appElement", async () => {
     const rootElement = document.createElement("div");
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(rootElement);
 
-    const appContainerElement = document.createElement("div");
-    document.body.append(appContainerElement);
+    const appElement = document.createElement("div");
 
-    const stylesRootElement = document.createElement("div");
+    document.body.append(appElement);
+
+    const uiShellStylesElement = document.createElement("div");
 
     render(
       <UiShell
-        appComponent={<div />}
-        appContainerElement={appContainerElement}
-        appContainerScrollingMode="both"
-        appRootElement={document.createElement("div")}
+        appElement={appElement}
+        appElementScrollingMode="both"
         onSubscriptionCreated={() => {}}
-        stylesRootElement={stylesRootElement}
         subscribeToPropChanges={() => () => {}}
+        uiShellAppElement={document.createElement("div")}
+        uiShellStylesElement={uiShellStylesElement}
       />,
     );
 
     await waitFor(() => {
-      expect(appContainerElement.style.getPropertyValue("position")).toEqual(
-        "absolute",
+      expect(appElement.style.getPropertyValue("position")).toEqual("absolute");
+      expect(appElement.style.getPropertyValue("overflow-x")).toEqual("auto");
+      expect(appElement.style.getPropertyValue("overflow-y")).toEqual("auto");
+      expect(appElement.style.getPropertyValue("padding-inline")).toEqual(
+        "3.42857143rem",
       );
-      expect(appContainerElement.style.getPropertyValue("overflow-x")).toEqual(
-        "auto",
+      expect(appElement.style.getPropertyValue("padding-block")).toEqual(
+        "1.71428571rem",
       );
-      expect(appContainerElement.style.getPropertyValue("overflow-y")).toEqual(
-        "auto",
-      );
-      expect(
-        appContainerElement.style.getPropertyValue("padding-inline"),
-      ).toEqual("3.42857143rem");
-      expect(
-        appContainerElement.style.getPropertyValue("padding-block"),
-      ).toEqual("1.71428571rem");
     });
   });
 
-  test("places expected padding on appContainerElement", async () => {
+  test("places expected padding on appElement", async () => {
     const rootElement = document.createElement("div");
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(rootElement);
 
-    const appContainerElement = document.createElement("div");
-    document.body.append(appContainerElement);
+    const appElement = document.createElement("div");
 
-    const stylesRootElement = document.createElement("div");
+    document.body.append(appElement);
+
+    const uiShellStylesElement = document.createElement("div");
 
     render(
       <UiShell
-        appComponent={<div />}
-        appContainerElement={appContainerElement}
-        appContainerScrollingMode="none"
-        appRootElement={document.createElement("div")}
+        appElement={appElement}
+        appElementScrollingMode="none"
         hasStandardAppContentPadding={false}
         onSubscriptionCreated={() => {}}
-        stylesRootElement={stylesRootElement}
         subscribeToPropChanges={() => () => {}}
+        uiShellAppElement={document.createElement("div")}
+        uiShellStylesElement={uiShellStylesElement}
       />,
     );
 
     await waitFor(() => {
-      expect(appContainerElement.style.getPropertyValue("position")).toEqual(
-        "absolute",
-      );
+      expect(appElement.style.getPropertyValue("position")).toEqual("absolute");
 
-      expect(appContainerElement.style.getPropertyValue("overflow-x")).toEqual(
-        "hidden",
-      );
+      expect(appElement.style.getPropertyValue("overflow-x")).toEqual("hidden");
 
-      expect(appContainerElement.style.getPropertyValue("overflow-y")).toEqual(
-        "hidden",
-      );
+      expect(appElement.style.getPropertyValue("overflow-y")).toEqual("hidden");
 
-      expect(
-        appContainerElement.style.getPropertyValue("padding-inline"),
-      ).toEqual("");
+      expect(appElement.style.getPropertyValue("padding-inline")).toEqual("");
 
-      expect(
-        appContainerElement.style.getPropertyValue("padding-block"),
-      ).toEqual("");
+      expect(appElement.style.getPropertyValue("padding-block")).toEqual("");
     });
   });
 });

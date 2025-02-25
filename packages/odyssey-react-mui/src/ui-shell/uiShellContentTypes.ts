@@ -40,20 +40,41 @@ export type UiShellNavComponentProps = {
 
 export type UiShellContentProps = {
   /**
-   * When passed, the app is expected to render into this element, not the Shadow DOM. UI Shell will position this element appropriately as if it was rendered in the app content area of the Shadow DOM.
+   * **WARNING:** UI Shell will modify the styling of this element.
+   * HTML element where the app gets rendered. This typically called the React root element for your app.
+   *
+   * When passed, the app is expected to render into this element, not the Shadow DOM.
+   *
+   * UI Shell will position this element appropriately to match the content area inside the Shadow DOM.
+   *
+   * A major benefit to having this element separate from UI Shell is related to encapsulation. UI Shell has the capability of rendering inside a web component, but in doing so, the app would be subject to the styles in the web component and not the page itself.
+   * The app should either be in its own web component or use the global styles, and having this separate element allows us to accomplish that goal.
    */
-  appContainerElement: HTMLDivElement;
+  appElement: HTMLDivElement;
   /**
-   * Controls the scrolling behavior of the app content area. Defaults to "vertical".
+   * Controls the scrolling behavior of the app element area.
+   *
+   * In the case of an app wanting to control their own scrolling, use `"none"`.
+   *
+   * Most apps will want to use `"vertical"` and let UI Shell manage scrolling behavior.
    */
-  appContainerScrollingMode: "none" | "horizontal" | "vertical" | "both";
+  appElementScrollingMode: "none" | "horizontal" | "vertical" | "both";
   /**
-   * defaults to `true`. If `false`, the content area will have no padding provided
+   * This is the element used inside `appElement` for scrolling.
+   *
+   * UI Shell will handle scrolling itself, but some apps already have an element maintaining the scroll position, and for UI Shell to work properly, it needs to be passed in.
+   */
+  appScrollElement?: HTMLElement;
+  /**
+   * Defaults to `true`.
+   *
+   * If `false`, the content area will have no padding provided. This is for the case where an app wants to manage this separate from UI Shell.
    */
   hasStandardAppContentPadding?: boolean;
   /**
-   * Which parts of the UI Shell should be visible initially? For example,
-   * if sideNavProps is undefined, should the space for the sidenav be initially visible?
+   * Parts of UI Shell that are visible when rendered.
+   *
+   * For example, if `sideNavProps` is `undefined`, should there be a space left for side nav or should that space not exist?
    */
   initialVisibleSections?: SubComponentName[];
   /**

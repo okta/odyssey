@@ -37,7 +37,7 @@ import {
   UI_SHELL_BASE_Z_INDEX,
 } from "./uiShellSharedConstants.js";
 import { useScrollState } from "./useScrollState.js";
-import { useAlignAppElementToContainer } from "./useAlignAppElementToContainer.js";
+import { useMatchAppElementToUiShellAppArea } from "./useMatchAppElementToUiShellAppArea.js";
 import { hexToRgb } from "../hexToRgb.js";
 
 const StyledAppContentArea = styled("div")({
@@ -234,8 +234,9 @@ export type NarrowUiShellContentProps = Pick<HtmlProps, "testId"> &
   UiShellContentProps;
 
 const NarrowUiShellContent = ({
-  appContainerElement,
-  appContainerScrollingMode,
+  appElement,
+  appElementScrollingMode,
+  appScrollElement,
   hasStandardAppContentPadding = true,
   initialVisibleSections = ["TopNav", "SideNav", "AppSwitcher"],
   onError = console.error,
@@ -244,13 +245,13 @@ const NarrowUiShellContent = ({
   topNavProps,
 }: NarrowUiShellContentProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const uiShellContext = useUiShellContext();
 
-  const { isContentScrolled, scrollableContentRef: appContainerRef } =
-    useScrollState(appContainerElement);
+  const { isContentScrolled } = useScrollState(appScrollElement || appElement);
+
   const sideNavContainerRef = useRef<HTMLDivElement>(null);
   const topNavContainerRef = useRef<HTMLDivElement>(null);
-
-  const uiShellContext = useUiShellContext();
+  const uiShellAppAreaRef = useRef<HTMLDivElement>(null);
 
   const [isLeftSideMenuOpen, setIsLeftSideMenuOpen] = useState(false);
   const [isRightSideMenuOpen, setIsRightSideMenuOpen] = useState(false);
@@ -270,12 +271,16 @@ const NarrowUiShellContent = ({
     setIsRightSideMenuOpen((isRightSideMenuOpen) => !isRightSideMenuOpen);
   }, []);
 
-  const { parentContainerRef } = useAlignAppElementToContainer({
-    appContainerElement,
-    appContainerRef,
-    appContainerScrollingMode,
-    appContentPadding: hasStandardAppContentPadding ? "compact" : "none",
-    resizingRefs: [appContainerRef, sideNavContainerRef, topNavContainerRef],
+  const { parentContainerRef } = useMatchAppElementToUiShellAppArea({
+    appElement,
+    appElementScrollingMode,
+    paddingMode: hasStandardAppContentPadding ? "compact" : "none",
+    uiShellAppAreaRef,
+    uiShellResizableRefs: [
+      sideNavContainerRef,
+      topNavContainerRef,
+      uiShellAppAreaRef,
+    ],
   });
 
   return (
@@ -300,7 +305,7 @@ const NarrowUiShellContent = ({
             <StyledTopNav
               isContentScrolled={isContentScrolled}
               odysseyDesignTokens={odysseyDesignTokens}
-              topNavBackgroundColor={uiShellContext?.sideNavBackgroundColor}
+              topNavBackgroundColor={uiShellContext?.topNavBackgroundColor}
             >
               <StyledTopNavMenu
                 odysseyDesignTokens={odysseyDesignTokens}
@@ -390,7 +395,7 @@ const NarrowUiShellContent = ({
           <StyledAppContainer
             appBackgroundColor={uiShellContext?.appBackgroundColor}
             tabIndex={0}
-            ref={appContainerRef}
+            ref={uiShellAppAreaRef}
           />
         </StyledAppContentArea>
       </StyledUiShellContainer>

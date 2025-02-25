@@ -10,13 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {
-  memo,
-  ReactNode,
-  useEffect,
-  useState,
-  type SetStateAction,
-} from "react";
+import { memo, useEffect, useState, type SetStateAction } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 import { type ReactRootElements } from "../web-component/createReactRootElements.js";
@@ -37,6 +31,8 @@ export const defaultComponentProps: UiShellNavComponentProps = {
   topNavProps: undefined,
 } as const;
 
+const errorComponent = <div data-error />;
+
 export type UiShellProps = {
   /**
    * Sets a custom background color for the app content area.
@@ -46,10 +42,6 @@ export type UiShellProps = {
    * Sets either a gray or white background color for the app content area.
    */
   appBackgroundContrastMode?: ContrastMode;
-  /**
-   * React app component that renders as children in the correct location of the shell. Only used as fallback for ErrorBoundary.
-   */
-  appComponent?: ReactNode;
   /**
    * Notifies when subscribed to prop changes.
    *
@@ -75,16 +67,24 @@ export type UiShellProps = {
    * Sets a custom background color for the top nav area.
    */
   topNavBackgroundColor?: string;
-} & Pick<ReactRootElements, "appRootElement" | "stylesRootElement"> &
-  Pick<
-    UiShellContentProps,
-    | "appContainerElement"
-    | "appContainerScrollingMode"
-    | "hasStandardAppContentPadding"
-    | "initialVisibleSections"
-    | "onError"
-    | "optionalComponents"
-  >;
+  /**
+   * Element inside UI Shell's React root component renders into. If using a web component, this is going to exist inside it.
+   */
+  uiShellAppElement: ReactRootElements["appRootElement"];
+  /**
+   * Typically, this is your `<head>` element. If using a web component, you need to create one yourself as Shadow DOM's don't have a `<head>`.
+   */
+  uiShellStylesElement: ReactRootElements["stylesRootElement"];
+} & Pick<
+  UiShellContentProps,
+  | "appElement"
+  | "appElementScrollingMode"
+  | "appScrollElement"
+  | "hasStandardAppContentPadding"
+  | "initialVisibleSections"
+  | "onError"
+  | "optionalComponents"
+>;
 
 /**
  * Our new Unified Platform UI Shell.
@@ -96,19 +96,19 @@ export type UiShellProps = {
 const UiShell = ({
   appBackgroundColor,
   appBackgroundContrastMode,
-  appComponent,
-  appRootElement,
-  appContainerElement,
-  appContainerScrollingMode,
+  appElement,
+  appElementScrollingMode,
+  appScrollElement,
   hasStandardAppContentPadding,
   initialVisibleSections,
   onError = console.error,
   onSubscriptionCreated,
   optionalComponents,
   sideNavBackgroundColor,
-  stylesRootElement,
-  topNavBackgroundColor,
   subscribeToPropChanges,
+  topNavBackgroundColor,
+  uiShellAppElement,
+  uiShellStylesElement,
 }: UiShellProps) => {
   const [componentProps, setComponentProps] = useState(defaultComponentProps);
 
@@ -128,12 +128,12 @@ const UiShell = ({
   }, [onSubscriptionCreated, subscribeToPropChanges]);
 
   return activeBreakpoint === "none" ? null : (
-    <ErrorBoundary fallback={appComponent} onError={onError}>
+    <ErrorBoundary fallback={errorComponent} onError={onError}>
       <OdysseyProvider
-        emotionRootElement={stylesRootElement}
-        shadowRootElement={appRootElement}
+        emotionRootElement={uiShellStylesElement}
+        shadowRootElement={uiShellAppElement}
       >
-        <ErrorBoundary fallback={appComponent} onError={onError}>
+        <ErrorBoundary fallback={errorComponent} onError={onError}>
           <CssBaseline />
 
           <UiShellProvider
@@ -145,8 +145,9 @@ const UiShell = ({
             {activeBreakpoint === "constrained" && (
               <NarrowUiShellContent
                 {...componentProps}
-                appContainerElement={appContainerElement}
-                appContainerScrollingMode={appContainerScrollingMode}
+                appElement={appElement}
+                appElementScrollingMode={appElementScrollingMode}
+                appScrollElement={appScrollElement}
                 hasStandardAppContentPadding={hasStandardAppContentPadding}
                 initialVisibleSections={initialVisibleSections}
                 onError={onError}
@@ -174,8 +175,9 @@ const UiShell = ({
                       }
                     : {}),
                 }}
-                appContainerElement={appContainerElement}
-                appContainerScrollingMode={appContainerScrollingMode}
+                appElement={appElement}
+                appElementScrollingMode={appElementScrollingMode}
+                appScrollElement={appScrollElement}
                 hasStandardAppContentPadding={hasStandardAppContentPadding}
                 initialVisibleSections={initialVisibleSections}
                 onError={onError}
