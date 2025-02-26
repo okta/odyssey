@@ -29,7 +29,7 @@ import {
 import { OdysseyDesignTokensContext } from "./OdysseyDesignTokensContext.js";
 
 const StyledContrastContainerStyles = styled("div")({
-  height: "100%",
+  height: "inherit",
 });
 
 export type OdysseyThemeProviderProps = {
