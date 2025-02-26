@@ -181,7 +181,7 @@ const StyledTopNav = styled("div", {
   topNavBackgroundColor?: UiShellColors["topNavBackgroundColor"];
 }>(({ odysseyDesignTokens, isContentScrolled, topNavBackgroundColor }) => ({
   alignItems: "stretch",
-  backgroundColor: topNavBackgroundColor,
+  backgroundColor: odysseyDesignTokens.HueNeutralWhite || topNavBackgroundColor, // This logic doesn't make sense, but I wanted to leave it here for when we eventually make a decision on `topNavBackgroundColor`. --Kevin Ghadyani
   boxShadow: isContentScrolled ? odysseyDesignTokens.DepthMedium : undefined,
   clipPath: "inset(0 0 -100vh 0)",
   display: "flex",
