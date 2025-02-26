@@ -168,12 +168,8 @@ export const useMatchAppElementToUiShellAppArea = ({
       // Set the initial styles
       updateStyles();
 
-      // setTimeout(updateStyles, 5000)
-
       return () => {
         observer.disconnect();
-
-        // document.removeEventListener("ready", updateStyles);
 
         resizingElements.forEach((resizingElement) => {
           resizingElement.removeEventListener("transitionend", updateStyles);
