@@ -93,6 +93,7 @@ const WideUiShellContent = ({
   appSwitcherProps,
   hasStandardAppContentPadding = true,
   initialVisibleSections = ["TopNav", "SideNav", "AppSwitcher"],
+
   onError = console.error,
   optionalComponents,
   sideNavProps,

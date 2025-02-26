@@ -12,7 +12,14 @@
 
 import styled from "@emotion/styled";
 import { Skeleton } from "@mui/material";
-import { CSSProperties, memo, useCallback, useRef, useState } from "react";
+import {
+  CSSProperties,
+  memo,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 import { Button } from "../Buttons/Button.js";
@@ -261,6 +268,16 @@ const NarrowUiShellContent = ({
     setIsRightSideMenuOpen(false);
   }, []);
 
+  useEffect(() => {
+    const unsubscribe = uiShellContext?.subscribeSideNavItemClicked(() => {
+      closeSideMenus();
+    });
+
+    return () => {
+      unsubscribe?.();
+    };
+  }, [closeSideMenus, uiShellContext]);
+
   const toggleLeftSideMenu = useCallback(() => {
     setIsRightSideMenuOpen(false);
     setIsLeftSideMenuOpen((isLeftSideMenuOpen) => !isLeftSideMenuOpen);
@@ -377,6 +394,7 @@ const NarrowUiShellContent = ({
                     }}
                     isCollapsed={false}
                     isCollapsible={false}
+                    isObtrusive
                   />
                 </StyledSideNavContainer>
               </ErrorBoundary>

@@ -366,13 +366,14 @@ const SideNav = ({
   isCollapsed = false,
   isCompact,
   isLoading,
+  isObtrusive,
   logoProps,
   onCollapse,
   onExpand,
   onSort,
   sideNavItems,
 }: SideNavProps) => {
-  const [isSideNavCollapsed, setSideNavCollapsed] = useState(isCollapsed);
+  const [isSideNavCollapsed, setIsSideNavCollapsed] = useState(isCollapsed);
   const [hasContentScrolled, setHasContentScrolled] = useState(false);
   const [isContentScrollable, setIsContentScrollable] = useState(false);
   const [sideNavItemsList, updateSideNavItemsList] = useState(sideNavItems);
@@ -393,7 +394,7 @@ const SideNav = ({
   useEffect(() => updateSideNavItemsList(sideNavItems), [sideNavItems]);
 
   // update sidenav collapse status
-  useEffect(() => setSideNavCollapsed(isCollapsed), [isCollapsed]);
+  useEffect(() => setIsSideNavCollapsed(isCollapsed), [isCollapsed]);
 
   useEffect(() => {
     // This is called directly in this effect AND perhaps as a result of the ResizeObserver
@@ -548,8 +549,12 @@ const SideNav = ({
           : item;
       });
       updateSideNavItemsList(updatedSideNavItems);
+
+      if (isCollapsed || isObtrusive) {
+        uiShellContext?.publishSideNavItemClicked();
+      }
     },
-    [sideNavItemsList],
+    [isCollapsed, isObtrusive, sideNavItemsList, uiShellContext],
   );
 
   const processedSideNavItems = useMemo(() => {
@@ -589,14 +594,16 @@ const SideNav = ({
   ]);
 
   const sideNavExpandClickHandler = useCallback(() => {
-    if (isSideNavCollapsed) {
-      onExpand?.();
-    } else {
-      onCollapse?.();
-    }
+    setIsSideNavCollapsed((isSideNavCollapsed) => {
+      if (isSideNavCollapsed) {
+        onExpand?.();
+      } else {
+        onCollapse?.();
+      }
 
-    setSideNavCollapsed(!isSideNavCollapsed);
-  }, [isSideNavCollapsed, setSideNavCollapsed, onExpand, onCollapse]);
+      return !isSideNavCollapsed;
+    });
+  }, [onExpand, onCollapse]);
 
   const sideNavExpandKeyHandler = useCallback<
     KeyboardEventHandler<HTMLButtonElement>
@@ -609,6 +616,17 @@ const SideNav = ({
     },
     [sideNavExpandClickHandler],
   );
+
+  useEffect(() => {
+    const unsubscribe = uiShellContext?.subscribeSideNavItemClicked(() => {
+      onCollapse?.();
+      setIsSideNavCollapsed(true);
+    });
+
+    return () => {
+      unsubscribe?.();
+    };
+  }, [onCollapse, uiShellContext]);
 
   const setSortedItems = useCallback(
     (
