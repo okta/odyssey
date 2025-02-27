@@ -139,9 +139,17 @@ const Dialog = ({
   ].filter(Boolean);
 
   return (
-    <MuiDialog data-se={testId} open={isOpen} onClose={onClose}>
-      <DialogTitle translate={translate}>
-        {title}
+    <MuiDialog
+      data-se={testId}
+      open={isOpen}
+      onClose={onClose}
+      aria-labelledby="ods-dialog-title"
+    >
+      <DialogTitle
+        id="" // mui automatically set id based on aria-labelledby from MuiDialog, explicitly unset it to use id from span
+        translate={translate}
+      >
+        <span id="ods-dialog-title">{title}</span>.
         <Button
           ariaLabel={t("close.text")}
           onClick={onClose}

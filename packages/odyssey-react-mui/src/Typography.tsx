@@ -93,6 +93,7 @@ export type TypographyProps = {
   | "ariaLabelledBy"
   | "testId"
   | "translate"
+  | "role"
 >;
 
 const Typography = ({
@@ -107,6 +108,7 @@ const Typography = ({
   translate,
   typographyRef,
   variant = "body",
+  role,
 }: TypographyProps) => {
   const component = useMemo(() => {
     if (!componentProp) {
@@ -147,6 +149,7 @@ const Typography = ({
       tabIndex={-1}
       translate={translate}
       variant={typographyVariantMapping[variant]}
+      role={role}
     />
   );
 };
@@ -164,6 +167,7 @@ const Heading1 = ({
   component,
   testId,
   translate,
+  role,
 }: TypographyProps) => (
   <Typography
     ariaCurrent={ariaCurrent}
@@ -176,6 +180,7 @@ const Heading1 = ({
     testId={testId}
     translate={translate}
     variant="h1"
+    role={role}
   />
 );
 
@@ -192,6 +197,7 @@ const Heading2 = ({
   component,
   testId,
   translate,
+  role,
 }: TypographyProps) => (
   <Typography
     ariaCurrent={ariaCurrent}
@@ -204,6 +210,7 @@ const Heading2 = ({
     testId={testId}
     translate={translate}
     variant="h2"
+    role={role}
   />
 );
 
@@ -220,6 +227,7 @@ const Heading3 = ({
   component,
   testId,
   translate,
+  role,
 }: TypographyProps) => (
   <Typography
     ariaCurrent={ariaCurrent}
@@ -232,6 +240,7 @@ const Heading3 = ({
     testId={testId}
     translate={translate}
     variant="h3"
+    role={role}
   />
 );
 
@@ -248,6 +257,7 @@ const Heading4 = ({
   component,
   testId,
   translate,
+  role,
 }: TypographyProps) => (
   <Typography
     ariaCurrent={ariaCurrent}
@@ -260,6 +270,7 @@ const Heading4 = ({
     testId={testId}
     translate={translate}
     variant="h4"
+    role={role}
   />
 );
 
@@ -276,6 +287,7 @@ const Heading5 = ({
   component,
   testId,
   translate,
+  role,
 }: TypographyProps) => (
   <Typography
     ariaCurrent={ariaCurrent}
@@ -288,6 +300,7 @@ const Heading5 = ({
     testId={testId}
     translate={translate}
     variant="h5"
+    role={role}
   />
 );
 
@@ -304,6 +317,7 @@ const Heading6 = ({
   component,
   testId,
   translate,
+  role,
 }: TypographyProps) => (
   <Typography
     ariaCurrent={ariaCurrent}
@@ -316,6 +330,7 @@ const Heading6 = ({
     testId={testId}
     translate={translate}
     variant="h6"
+    role={role}
   />
 );
 
@@ -332,6 +347,7 @@ const Paragraph = ({
   component,
   testId,
   translate,
+  role,
 }: TypographyProps) => (
   <Typography
     ariaCurrent={ariaCurrent}
@@ -344,6 +360,7 @@ const Paragraph = ({
     testId={testId}
     translate={translate}
     variant="body"
+    role={role}
   />
 );
 
@@ -360,6 +377,7 @@ const Subordinate = ({
   component,
   testId,
   translate,
+  role,
 }: TypographyProps) => (
   <Typography
     ariaCurrent={ariaCurrent}
@@ -372,6 +390,7 @@ const Subordinate = ({
     testId={testId}
     translate={translate}
     variant="subordinate"
+    role={role}
   />
 );
 
@@ -388,6 +407,7 @@ const Support = ({
   component,
   testId,
   translate,
+  role,
 }: TypographyProps) => (
   <Typography
     ariaCurrent={ariaCurrent}
@@ -400,6 +420,7 @@ const Support = ({
     testId={testId}
     translate={translate}
     variant="support"
+    role={role}
   />
 );
 
@@ -415,6 +436,7 @@ const Legend = ({
   component,
   testId,
   translate,
+  role,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
@@ -426,6 +448,7 @@ const Legend = ({
     testId={testId}
     translate={translate}
     variant="legend"
+    role={role}
   />
 );
 
@@ -441,6 +464,7 @@ const Overline = ({
   component,
   testId,
   translate,
+  role,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
@@ -452,6 +476,7 @@ const Overline = ({
     testId={testId}
     translate={translate}
     variant="overline"
+    role={role}
   />
 );
 
