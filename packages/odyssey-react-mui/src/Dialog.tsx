@@ -140,7 +140,7 @@ const Dialog = ({
 
   return (
     <MuiDialog data-se={testId} open={isOpen} onClose={onClose}>
-      <DialogTitle translate={translate}>
+      <DialogTitle translate={translate} role="presentation">
         {title}
         <Button
           ariaLabel={t("close.text")}

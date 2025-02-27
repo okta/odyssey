@@ -23,4 +23,28 @@ describe("Typography", () => {
 
     expect(screen.getByLabelText("overline")).toBeVisible();
   });
+
+  test("renders with role", () => {
+    render(
+      <Typography ariaLabel="heading" variant="h1" role="presentation">
+        Heading test
+      </Typography>,
+    );
+
+    const element = screen.getByLabelText("heading");
+    expect(element).toBeVisible();
+    expect(element).toHaveAttribute("role", "presentation");
+  });
+
+  test("does not render role attribute when undefined", () => {
+    render(
+      <Typography ariaLabel="heading" variant="h1" role={undefined}>
+        Heading test
+      </Typography>,
+    );
+
+    const element = screen.getByLabelText("heading");
+    expect(element).toBeVisible();
+    expect(element).not.toHaveAttribute("role");
+  });
 });
