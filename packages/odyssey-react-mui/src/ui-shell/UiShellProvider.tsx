@@ -18,10 +18,11 @@ import {
   useMemo,
 } from "react";
 import {
-  generateContrastColors,
   ContrastColors,
+  generateContrastColors,
 } from "../createContrastColors.js";
 import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext.js";
+import { createMessageBus, MessageBus } from "./createMessageBus.js";
 
 export type UiShellColors = {
   appBackgroundColor: string;
@@ -30,25 +31,32 @@ export type UiShellColors = {
   topNavBackgroundColor: string;
 };
 
-const UiShellContext = createContext<UiShellColors | undefined>(undefined);
+export type UiShellContext = {
+  publishSideNavItemClicked: MessageBus<void>["publish"];
+  subscribeSideNavItemClicked: MessageBus<void>["subscribe"];
+} & UiShellColors;
+
+const UiShellContext = createContext<UiShellContext | undefined>(undefined);
 
 export const useUiShellContext = () => {
   return useContext(UiShellContext);
 };
 
 export type UiShellProviderProps = {
-  appBackgroundColor?: string;
-  sideNavBackgroundColor?: string;
-  topNavBackgroundColor?: string;
   appBackgroundContrastMode?: string;
-};
+} & Partial<
+  Pick<
+    UiShellColors,
+    "appBackgroundColor" | "sideNavBackgroundColor" | "topNavBackgroundColor"
+  >
+>;
 
 const UiShellProvider = ({
   appBackgroundColor,
   appBackgroundContrastMode = "lowContrast",
+  children,
   sideNavBackgroundColor,
   topNavBackgroundColor,
-  children,
 }: PropsWithChildren<UiShellProviderProps>) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const defaultedSideNavBackgroundColor =
@@ -74,19 +82,28 @@ const UiShellProvider = ({
   const appContentBackgroundColor =
     appBackgroundColor || defaultTopAndAppBackgroundColor;
 
+  const {
+    publish: publishSideNavItemClicked,
+    subscribe: subscribeSideNavItemClicked,
+  } = useMemo(() => createMessageBus(), []);
+
   const memoizedContextValue = useMemo(
     () => ({
       appBackgroundColor: appContentBackgroundColor,
+      publishSideNavItemClicked,
       sideNavBackgroundColor:
         sideNavBackgroundColor || odysseyDesignTokens.HueNeutralWhite,
       sideNavContrastColors,
+      subscribeSideNavItemClicked,
       topNavBackgroundColor: topNavColor,
     }),
     [
       appContentBackgroundColor,
       odysseyDesignTokens,
+      publishSideNavItemClicked,
       sideNavBackgroundColor,
       sideNavContrastColors,
+      subscribeSideNavItemClicked,
       topNavColor,
     ],
   );

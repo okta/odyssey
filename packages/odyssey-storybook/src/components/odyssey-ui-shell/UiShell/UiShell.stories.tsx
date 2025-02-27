@@ -45,123 +45,137 @@ import { fn } from "@storybook/test";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 import { useEffect, useRef, useState } from "react";
+import PlaceholderLogo from "../../odyssey-labs/PickerWithOptionAdornment/PlaceholderLogo.js";
 
-const storybookMeta: Meta<UiShellProps & { sideNavBackgroundColor?: string }> =
-  {
-    title: "UI Shell Components/UI Shell",
-    component: UiShell,
-    argTypes: {
-      appComponent: {
-        control: undefined,
-        description: "App component that renders inside the content area.",
-        table: {
-          type: {
-            summary: "InputType",
-          },
-        },
-        hasStandardAppContentPadding: {
-          control: "boolean",
-          description:
-            "defaults to `true`. If `false`, the content area will have no padding provided",
-          table: {
-            type: {
-              summary: "boolean",
-            },
-          },
-        },
-        initialVisibleSections: {
-          control: "text",
-          description:
-            "A list of UiShell components that should be (minimally) rendered initially, with their isLoading property set when applicable. Allows the initial visibility of UiShell components to be influenced.",
-          table: {
-            type: {
-              summary: "string",
-            },
-          },
-        },
-      },
-      onError: {
-        description:
-          'Notifies when a React rendering error occurs. This could be useful for logging, flagging "p0"s, and recovering UI Shell when errors occur.',
-        table: {
-          defaultValue: {
-            summary: "console.error",
-          },
-          type: {
-            summary: "string",
-          },
-        },
-      },
-      onSubscriptionCreated: {
-        description:
-          "Notifies when subscribed to prop changes. UI Shell listens to prop updates, and it won't subscribe synchronously. Because of that, this callback notifies when that subscription is ready.",
-        table: {
-          type: {
-            summary: "string",
-          },
-        },
-      },
-      optionalComponents: {
-        description:
-          "Components that will render as children of various other components such as the top nav or side nav.",
-        table: {
-          type: {
-            summary: "ReactElement",
-          },
-        },
-      },
-      subscribeToPropChanges: {
-        description:
-          "This is a callback that provides a subscriber callback to listen for changes to state. It allows UI Shell to listen for state changes. The props coming in this callback go directly to a React state; therefore, it shares the same signature and provides a previous state.",
-        table: {
-          type: {
-            summary: "MouseEventHandler",
-          },
-        },
-      },
-      appBackgroundColor: {
-        control: "color",
-        description:
-          "Custom color for app content background. Should only be used as a stop-gap to allow support for dark mode.",
-        table: {
-          type: {
-            summary: "hex color code",
-          },
-        },
-      },
-      sideNavBackgroundColor: {
-        control: "color",
-        description: "Custom color for side nav background",
-        table: {
-          type: {
-            summary: "hex color code",
-          },
-        },
-      },
-      topNavBackgroundColor: {
-        control: "color",
-        description:
-          "Custom color for top nav background. Should only be used as a stop-gap to allow support for dark mode.",
-        table: {
-          type: {
-            summary: "hex color code",
-          },
+const meta = {
+  title: "UI Shell Components/UI Shell",
+  component: UiShell,
+  argTypes: {
+    appBackgroundColor: {
+      control: "color",
+      description:
+        "Custom color for app content background. Should only be used as a stop-gap to allow support for dark mode.",
+      table: {
+        type: {
+          summary: "hex color code",
         },
       },
     },
-    args: {
-      appComponent: <div />,
-      onSubscriptionCreated: fn(),
-      subscribeToPropChanges: () => fn(),
+    appElement: {
+      control: undefined,
+      description: "Element that the consuming app renders into.",
+      table: {
+        type: {
+          summary: "InputType",
+        },
+      },
     },
-    parameters: {
-      layout: "fullscreen",
+    appElementScrollingMode: {
+      control: undefined,
+      description: "Mode used for scrolling.",
+      table: {
+        type: {
+          summary: "InputType",
+        },
+      },
     },
-  };
+    hasStandardAppContentPadding: {
+      control: "boolean",
+      description:
+        "defaults to `true`. If `false`, the content area will have no padding provided",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    initialVisibleSections: {
+      control: "text",
+      description:
+        "A list of UiShell components that should be (minimally) rendered initially, with their isLoading property set when applicable. Allows the initial visibility of UiShell components to be influenced.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    onError: {
+      description:
+        'Notifies when a React rendering error occurs. This could be useful for logging, flagging "p0"s, and recovering UI Shell when errors occur.',
+      table: {
+        defaultValue: {
+          summary: "console.error",
+        },
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    onSubscriptionCreated: {
+      description:
+        "Notifies when subscribed to prop changes. UI Shell listens to prop updates, and it won't subscribe synchronously. Because of that, this callback notifies when that subscription is ready.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    optionalComponents: {
+      description:
+        "Components that will render as children of various other components such as the top nav or side nav.",
+      table: {
+        type: {
+          summary: "ReactElement",
+        },
+      },
+    },
+    sideNavBackgroundColor: {
+      control: "color",
+      description: "Custom color for side nav background",
+      table: {
+        type: {
+          summary: "hex color code",
+        },
+      },
+    },
+    subscribeToPropChanges: {
+      description:
+        "This is a callback that provides a subscriber callback to listen for changes to state. It allows UI Shell to listen for state changes. The props coming in this callback go directly to a React state; therefore, it shares the same signature and provides a previous state.",
+      table: {
+        type: {
+          summary: "MouseEventHandler",
+        },
+      },
+    },
+    topNavBackgroundColor: {
+      control: "color",
+      description:
+        "Custom color for top nav background. Should only be used as a stop-gap to allow support for dark mode.",
+      table: {
+        type: {
+          summary: "hex color code",
+        },
+      },
+    },
+  },
+  args: {
+    appElement: document.createElement("div"),
+    appElementScrollingMode: "vertical",
+    onSubscriptionCreated: fn(),
+    uiShellAppElement: document.createElement("div"),
+    uiShellStylesElement: document.head,
+  },
+  parameters: {
+    // docs: {
+    //   inlineStories: false,
+    // },
+    layout: "fullscreen",
+  },
+} satisfies Meta<typeof UiShell>;
 
-export default storybookMeta;
+export default meta;
 
-const sharedAppSwitcherProps: UiShellNavComponentProps["appSwitcherProps"] = {
+const sharedAppSwitcherProps = {
   appIcons: [
     {
       appIconDefaultUrl: "/appswitcher/admin-app-default.svg",
@@ -187,9 +201,9 @@ const sharedAppSwitcherProps: UiShellNavComponentProps["appSwitcherProps"] = {
   ],
   isLoading: false,
   selectedAppName: "okta_enduser",
-};
+} as const satisfies UiShellNavComponentProps["appSwitcherProps"];
 
-const sharedSideNavProps: UiShellNavComponentProps["sideNavProps"] = {
+const sharedSideNavProps = {
   appName: "Enduser",
   isCollapsible: true,
   sideNavItems: [
@@ -399,9 +413,11 @@ const sharedSideNavProps: UiShellNavComponentProps["sideNavProps"] = {
       href: "/",
     },
   ],
-};
+} as const satisfies UiShellNavComponentProps["sideNavProps"];
 
-const sharedTopNavProps: UiShellNavComponentProps["topNavProps"] = {
+type Story = StoryObj<typeof meta>;
+
+const sharedTopNavProps = {
   // topNavLinkItems: [
   //   {
   //     id: "link-01",
@@ -425,9 +441,9 @@ const sharedTopNavProps: UiShellNavComponentProps["topNavProps"] = {
   //     onClick: () => {},
   //   },
   // ],
-};
+} as const satisfies UiShellNavComponentProps["topNavProps"];
 
-const sharedOptionalComponents: UiShellProps["optionalComponents"] = {
+const sharedOptionalComponents = {
   topNavLeftSide: (
     <div>
       <SearchField label="Search" placeholder="Search..." />
@@ -440,13 +456,14 @@ const sharedOptionalComponents: UiShellProps["optionalComponents"] = {
       userName="test.user@test.com"
     />
   ),
-};
+} as const satisfies UiShellProps["optionalComponents"];
 
 const useRefWithRerenderHack = () => {
   /**
    * We need to force a rerender due to the funky ref stuff
    */
   const [, setHack] = useState(0);
+
   useEffect(() => {
     setHack(1);
   }, []);
@@ -454,7 +471,7 @@ const useRefWithRerenderHack = () => {
   return useRef<HTMLDivElement>(null);
 };
 
-export const Default: StoryObj<UiShellProps> = {
+export const Default: Story = {
   args: {
     subscribeToPropChanges: (subscriber) => {
       subscriber({
@@ -470,18 +487,22 @@ export const Default: StoryObj<UiShellProps> = {
   decorators: [MuiThemeDecorator],
 };
 
-export const LoadingFirstRender: StoryObj<UiShellProps> = {
-  decorators: [MuiThemeDecorator],
-};
-
-export const InvisibleFirstRender: StoryObj<UiShellProps> = {
+export const LoadingFirstRender: Story = {
   args: {
-    initialVisibleSections: [],
+    subscribeToPropChanges: () => fn(),
   },
   decorators: [MuiThemeDecorator],
 };
 
-export const TopNavOnly: StoryObj<UiShellProps> = {
+export const InvisibleFirstRender: Story = {
+  args: {
+    initialVisibleSections: [],
+    subscribeToPropChanges: () => fn(),
+  },
+  decorators: [MuiThemeDecorator],
+};
+
+export const TopNavOnly: Story = {
   args: {
     initialVisibleSections: ["TopNav"],
     optionalComponents: sharedOptionalComponents,
@@ -496,7 +517,7 @@ export const TopNavOnly: StoryObj<UiShellProps> = {
   decorators: [MuiThemeDecorator],
 };
 
-export const AppSwitcherOnly: StoryObj<UiShellProps> = {
+export const AppSwitcherOnly: Story = {
   args: {
     hasStandardAppContentPadding: false,
     initialVisibleSections: ["AppSwitcher"],
@@ -511,7 +532,7 @@ export const AppSwitcherOnly: StoryObj<UiShellProps> = {
   decorators: [MuiThemeDecorator],
 };
 
-export const LoadingData: StoryObj<UiShellProps> = {
+export const LoadingData: Story = {
   args: {
     optionalComponents: sharedOptionalComponents,
     subscribeToPropChanges: (subscriber) => {
@@ -533,12 +554,11 @@ export const LoadingData: StoryObj<UiShellProps> = {
   decorators: [MuiThemeDecorator],
 };
 
-export const WithCustomColors: StoryObj<UiShellProps> = {
+export const WithCustomColors: Story = {
   args: {
-    sideNavBackgroundColor: undefined,
-    topNavBackgroundColor: undefined,
     appBackgroundColor: undefined,
     optionalComponents: sharedOptionalComponents,
+    sideNavBackgroundColor: undefined,
     subscribeToPropChanges: (subscriber) => {
       subscriber({
         topNavProps: sharedTopNavProps,
@@ -552,11 +572,12 @@ export const WithCustomColors: StoryObj<UiShellProps> = {
 
       return () => {};
     },
+    topNavBackgroundColor: undefined,
   },
   decorators: [MuiThemeDecorator],
 };
 
-export const WithoutAppContent: StoryObj<UiShellProps> = {
+export const WithoutAppContent: Story = {
   args: {
     optionalComponents: sharedOptionalComponents,
     subscribeToPropChanges: (subscriber) => {
@@ -573,44 +594,49 @@ export const WithoutAppContent: StoryObj<UiShellProps> = {
 };
 
 const EXPECTED_LINE_HEIGHT = "30px";
-export const WithTallAppContentAndNoStorybookDecorator: StoryObj<UiShellProps> =
-  {
-    args: {
-      optionalComponents: sharedOptionalComponents,
-      subscribeToPropChanges: (subscriber) => {
-        subscriber({
-          appSwitcherProps: sharedAppSwitcherProps,
-          sideNavProps: sharedSideNavProps,
-          topNavProps: sharedTopNavProps,
-        });
+export const WithTallAppContentAndNoStorybookDecorator: Story = {
+  args: {
+    optionalComponents: sharedOptionalComponents,
+    subscribeToPropChanges: (subscriber) => {
+      subscriber({
+        appSwitcherProps: sharedAppSwitcherProps,
+        sideNavProps: {
+          ...sharedSideNavProps,
+          logoProps: {
+            logoComponent: <PlaceholderLogo.One />,
+          },
+        },
+        topNavProps: sharedTopNavProps,
+      });
 
-        return () => {};
-      },
+      return () => {};
     },
-    render: function C(props) {
-      const appContainerElementRef = useRefWithRerenderHack();
-      useEffect(() => {
-        const outputSpan = document.getElementById("lineHeightOutput");
-        if (outputSpan) {
-          outputSpan.innerText = getComputedStyle(outputSpan).lineHeight;
-        }
-      }, []);
+  },
+  render: function C(props) {
+    const appElementRef = useRefWithRerenderHack();
 
-      return (
-        <>
-          <div ref={appContainerElementRef}>
-            <style>
-              {`body {
-          line-height: ${EXPECTED_LINE_HEIGHT} !important;
-        }`}
-            </style>
+    useEffect(() => {
+      const outputSpan = document.getElementById("lineHeightOutput");
+      if (outputSpan) {
+        outputSpan.innerText = getComputedStyle(outputSpan).lineHeight;
+      }
+    }, []);
+
+    return (
+      <>
+        <div ref={appElementRef}>
+          <style>
+            {`body { line-height: ${EXPECTED_LINE_HEIGHT} !important; }`}
+          </style>
+
+          <Surface>
             <div
               style={{
                 float: "right",
                 width: "200px",
                 height: "200px",
                 padding: "20px",
-                backgroundColor: "white",
+                backgroundColor: "lightgray",
                 zIndex: 1,
                 position: "relative",
               }}
@@ -778,24 +804,30 @@ export const WithTallAppContentAndNoStorybookDecorator: StoryObj<UiShellProps> =
             dictum nibh. Ut et orci sodales, laoreet sem nec, volutpat sapien.
             Phasellus dui turpis, euismod vitae euismod porta, semper a tellus.
             Morbi bibendum eros quam, et suscipit ex blandit eu. Et…
-          </div>
-          <UiShell
-            {...props}
-            appContainerElement={appContainerElementRef.current!}
-          />
-        </>
-      );
-    },
+          </Surface>
+        </div>
 
-    // NOTE: NO `decorators` HERE as we explicitly don't want the `<OdysseyProvider>` present in the decorator.
-    // ALL OTHER STORIES in this file should have `decorators` specified.
-  };
+        <UiShell {...props} appElement={appElementRef.current!} />
+      </>
+    );
+  },
 
-export const WithOdysseyAppContent: StoryObj<UiShellProps> = {
+  // NOTE: NO `decorators` HERE as we explicitly don't want the `<OdysseyProvider>` present in the decorator.
+  // ALL OTHER STORIES in this file should have `decorators` specified.
+};
+
+export const WithOdysseyAppContent: Story = {
   args: {
     optionalComponents: {
       ...sharedOptionalComponents,
       banners: <Banner severity="success" text="This is an app!" />,
+      rightSideMenu: (
+        <UserProfile
+          profileIcon={<UserIcon />}
+          orgName="ORG123"
+          userName="test.user@test.com"
+        />
+      ),
     },
     subscribeToPropChanges: (subscriber) => {
       subscriber({
@@ -809,11 +841,11 @@ export const WithOdysseyAppContent: StoryObj<UiShellProps> = {
   },
   decorators: [MuiThemeDecorator],
   render: function C(props) {
-    const appContainerElementRef = useRefWithRerenderHack();
+    const appElementRef = useRefWithRerenderHack();
 
     return (
       <>
-        <div ref={appContainerElementRef}>
+        <div ref={appElementRef}>
           <OdysseyProvider>
             {/* This is normally rendered by `renderUiShell`, but we're rendering `UiShell` outside of a web component, so we need to add this data attribute ourselves. */}
             <div {...{ [uiShellDataAttribute]: "" }} />
@@ -847,10 +879,8 @@ export const WithOdysseyAppContent: StoryObj<UiShellProps> = {
             </PageTemplate>
           </OdysseyProvider>
         </div>
-        <UiShell
-          {...props}
-          appContainerElement={appContainerElementRef.current!}
-        />
+
+        <UiShell {...props} appElement={appElementRef.current!} />
       </>
     );
   },
