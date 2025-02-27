@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.32.5](https://github.com/okta/odyssey/compare/v1.32.0...v1.32.5) (2025-02-13)
+
+### Bug Fixes
+
+- add same background color to logo container and date-se for sidenav ([#2501](https://github.com/okta/odyssey/issues/2501)) ([6bb5aa3](https://github.com/okta/odyssey/commit/6bb5aa3014eaffb827142eefc96dc2d3d29891c4))
+- adds missing border-box box-sizing to CSSBaseline ([fa8e445](https://github.com/okta/odyssey/commit/fa8e445f43f2829d13ca3e249dcce009c5076aaa))
+- fixes MenuButton axe timing ([10fc426](https://github.com/okta/odyssey/commit/10fc426d992159aba669eacae190aa036ed635fc))
+- shell content area overlaps side nav in mobile view ([#2497](https://github.com/okta/odyssey/issues/2497)) ([e37b872](https://github.com/okta/odyssey/commit/e37b87285b011f111a5199d93c7d340e7423b64c))
+- sidenav expand element z-index should be higher than topnav ([#2503](https://github.com/okta/odyssey/issues/2503)) ([8fa4e58](https://github.com/okta/odyssey/commit/8fa4e58d759750853170fa9990e0193e7152a9c7))
+- top-nav overflow with scrollbar ([a970e7e](https://github.com/okta/odyssey/commit/a970e7ecd1835ee36f08fb51bbefb0986eda51e1))
+
 ## [1.32.4](https://github.com/okta/odyssey/compare/v1.32.0...v1.32.4) (2025-02-10)
 
 ### Bug Fixes
