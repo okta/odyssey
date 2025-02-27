@@ -618,15 +618,19 @@ const SideNav = ({
   );
 
   useEffect(() => {
-    const unsubscribe = uiShellContext?.subscribeSideNavItemClicked(() => {
-      onCollapse?.();
-      setIsSideNavCollapsed(true);
-    });
+    if (isCollapsed) {
+      const unsubscribe = uiShellContext?.subscribeSideNavItemClicked(() => {
+        onCollapse?.();
+        setIsSideNavCollapsed(true);
+      });
 
-    return () => {
-      unsubscribe?.();
-    };
-  }, [onCollapse, uiShellContext]);
+      return () => {
+        unsubscribe?.();
+      };
+    }
+
+    return () => {};
+  }, [isCollapsed, onCollapse, uiShellContext]);
 
   const setSortedItems = useCallback(
     (
