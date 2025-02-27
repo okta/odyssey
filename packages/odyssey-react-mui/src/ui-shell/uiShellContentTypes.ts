@@ -60,12 +60,6 @@ export type UiShellContentProps = {
    */
   appElementScrollingMode: "none" | "horizontal" | "vertical" | "both";
   /**
-   * This is the element used inside `appElement` for scrolling.
-   *
-   * UI Shell will handle scrolling itself, but some apps already have an element maintaining the scroll position, and for UI Shell to work properly, it needs to be passed in.
-   */
-  appScrollElement?: HTMLElement;
-  /**
    * Defaults to `true`.
    *
    * If `false`, the content area will have no padding provided. This is for the case where an app wants to manage this separate from UI Shell.

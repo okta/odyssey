@@ -243,7 +243,6 @@ export type NarrowUiShellContentProps = Pick<HtmlProps, "testId"> &
 const NarrowUiShellContent = ({
   appElement,
   appElementScrollingMode,
-  appScrollElement,
   hasStandardAppContentPadding = true,
   initialVisibleSections = ["TopNav", "SideNav", "AppSwitcher"],
   onError = console.error,
@@ -254,7 +253,7 @@ const NarrowUiShellContent = ({
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const uiShellContext = useUiShellContext();
 
-  const { isContentScrolled } = useScrollState(appScrollElement || appElement);
+  const { isContentScrolled } = useScrollState(appElement);
 
   const sideNavContainerRef = useRef<HTMLDivElement>(null);
   const topNavContainerRef = useRef<HTMLDivElement>(null);

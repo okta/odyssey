@@ -79,16 +79,6 @@ const meta = {
         },
       },
     },
-    appScrollElement: {
-      control: undefined,
-      description:
-        "Element that the consuming app uses as a scroll container if opting out of UI Shell scrolling.",
-      table: {
-        type: {
-          summary: "InputType",
-        },
-      },
-    },
     hasStandardAppContentPadding: {
       control: "boolean",
       description:

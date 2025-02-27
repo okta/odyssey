@@ -89,11 +89,9 @@ export type WideUiShellContentProps = UiShellNavComponentProps &
 const WideUiShellContent = ({
   appElement,
   appElementScrollingMode,
-  appScrollElement,
   appSwitcherProps,
   hasStandardAppContentPadding = true,
   initialVisibleSections = ["TopNav", "SideNav", "AppSwitcher"],
-
   onError = console.error,
   optionalComponents,
   sideNavProps,
@@ -102,7 +100,7 @@ const WideUiShellContent = ({
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const uiShellContext = useUiShellContext();
 
-  const { isContentScrolled } = useScrollState(appScrollElement || appElement);
+  const { isContentScrolled } = useScrollState(appElement);
 
   const sideNavContainerRef = useRef<HTMLDivElement>(null);
   const topNavContainerRef = useRef<HTMLDivElement>(null);

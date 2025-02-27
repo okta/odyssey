@@ -45,7 +45,6 @@ export const renderUiShell = ({
   appBackgroundContrastMode,
   appElement: providedAppElement,
   appElementScrollingMode,
-  appScrollElement,
   hasStandardAppContentPadding,
   initialVisibleSections,
   onError = console.error,
@@ -66,7 +65,6 @@ export const renderUiShell = ({
   | "appBackgroundColor"
   | "appBackgroundContrastMode"
   | "appElementScrollingMode"
-  | "appScrollElement"
   | "hasStandardAppContentPadding"
   | "initialVisibleSections"
   | "sideNavBackgroundColor"
@@ -116,7 +114,6 @@ export const renderUiShell = ({
           appBackgroundContrastMode={appBackgroundContrastMode}
           appElement={appElement}
           appElementScrollingMode={appElementScrollingMode}
-          appScrollElement={appScrollElement}
           hasStandardAppContentPadding={hasStandardAppContentPadding}
           initialVisibleSections={initialVisibleSections}
           onError={onError}
