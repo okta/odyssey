@@ -16,15 +16,16 @@ import { ErrorBoundary } from "react-error-boundary";
 import { bufferLatest } from "./bufferLatest.js";
 import { createMessageBus } from "./createMessageBus.js";
 import { UiShell, UiShellProps } from "./UiShell.js";
-import { renderReactInWebComponent } from "../web-component/renderReactInWebComponent.js";
-import { type UiShellNavComponentProps } from "./UiShellContent.js";
+import { UiShellNavComponentProps } from "./uiShellContentTypes.js";
 import { uiShellDataAttribute } from "./useHasUiShell.js";
+import { renderReactInWebComponent } from "../web-component/renderReactInWebComponent.js";
 
 export const optionalComponentSlotNames: Record<
   keyof Required<UiShellProps>["optionalComponents"],
   string
 > = {
   banners: "banners",
+  rightSideMenu: "right-side-menu",
   sideNavFooter: "side-nav-footer",
   topNavLeftSide: "top-nav-left-side",
   topNavRightSide: "top-nav-right-side",
@@ -42,42 +43,38 @@ export const optionalComponentSlotNames: Record<
 export const renderUiShell = ({
   appBackgroundColor,
   appBackgroundContrastMode,
-  appContainerScrollingMode,
-  appRootElement: explicitAppRootElement,
+  appElement: providedAppElement,
+  appElementScrollingMode,
   hasStandardAppContentPadding,
   initialVisibleSections,
   onError = console.error,
+  parentElement,
   sideNavBackgroundColor,
   topNavBackgroundColor,
-  uiShellRootElement,
 }: {
-  /**
-   * HTML element used as the root for a React app.
-   */
-  appRootElement?: HTMLDivElement;
   /**
    * Notifies when a React rendering error occurs. This could be useful for logging, reporting priority 0 issues, and recovering UI Shell when errors occur.
    */
   onError?: () => void;
   /**
-   * HTML element used as the root for UI Shell.
+   * HTML element used as the container for UI Shell and the App. They're siblings inside this element.
    */
-  uiShellRootElement: HTMLElement;
+  parentElement: HTMLElement;
 } & Pick<
   UiShellProps,
   | "appBackgroundColor"
   | "appBackgroundContrastMode"
-  | "appContainerScrollingMode"
+  | "appElementScrollingMode"
   | "hasStandardAppContentPadding"
   | "initialVisibleSections"
   | "sideNavBackgroundColor"
   | "topNavBackgroundColor"
->) => {
-  const appRootElement =
-    explicitAppRootElement || document.createElement("div");
+> &
+  Partial<Pick<UiShellProps, "appElement">>) => {
+  const appElement = providedAppElement || document.createElement("div");
 
   // Add this attribute so `PageTemplate` and potentially other components will know if they're in UI Shell with special padding already available.
-  uiShellRootElement.setAttribute(uiShellDataAttribute, "");
+  parentElement.setAttribute(uiShellDataAttribute, "");
 
   const { publish: publishPropChanges, subscribe: subscribeToPropChanges } =
     createMessageBus<SetStateAction<UiShellNavComponentProps>>();
@@ -107,28 +104,21 @@ export const renderUiShell = ({
     HTMLDivElement
   >;
 
-  const appContainerElement = document.createElement("div");
-  appContainerElement.appendChild(appRootElement);
-
   const webComponentChildren = Object.values(slottedElements);
-
-  const appComponent = <slot />;
 
   const uiShellElement = renderReactInWebComponent({
     getReactComponent: (reactRootElements) => (
-      <ErrorBoundary fallback={appComponent} onError={onError}>
+      <ErrorBoundary fallback={<div data-error />} onError={onError}>
         <UiShell
           appBackgroundColor={appBackgroundColor}
           appBackgroundContrastMode={appBackgroundContrastMode}
-          appComponent={appComponent}
-          appContainerElement={appContainerElement}
-          appContainerScrollingMode={appContainerScrollingMode}
-          appRootElement={reactRootElements.appRootElement}
+          appElement={appElement}
+          appElementScrollingMode={appElementScrollingMode}
           hasStandardAppContentPadding={hasStandardAppContentPadding}
           initialVisibleSections={initialVisibleSections}
           onError={onError}
           onSubscriptionCreated={publishSubscriptionCreated}
-          // `optionalComponents` doesn't need to be memoized because gets passed in once.
+          // `optionalComponents` doesn't need to be memoized because gets passed in once, and this isn't a React component.
           optionalComponents={Object.fromEntries(
             Object.entries(optionalComponentSlotNames).map(
               ([optionalComponentKey, slotName]) => [
@@ -138,19 +128,21 @@ export const renderUiShell = ({
             ),
           )}
           sideNavBackgroundColor={sideNavBackgroundColor}
-          stylesRootElement={reactRootElements.stylesRootElement}
           subscribeToPropChanges={subscribeToPropChanges}
           topNavBackgroundColor={topNavBackgroundColor}
+          uiShellAppElement={reactRootElements.appRootElement}
+          uiShellStylesElement={reactRootElements.stylesRootElement}
         />
       </ErrorBoundary>
     ),
-    webComponentRootElement: uiShellRootElement,
+    webComponentParentElement: parentElement,
     webComponentChildren,
   });
-  uiShellRootElement.appendChild(appContainerElement);
+
+  parentElement.appendChild(appElement);
 
   return {
-    appRootElement,
+    appElement,
     setComponentProps: publishAfterReactAppReadyForProps,
     slottedElements,
     uiShellElement,

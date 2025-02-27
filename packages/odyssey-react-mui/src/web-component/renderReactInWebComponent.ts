@@ -13,9 +13,10 @@
 import { type ReactNode } from "react";
 import type { Root } from "react-dom/client";
 
-import { createReactRootElements } from "./createReactRootElements.js";
-
-export type ReactRootElements = ReturnType<typeof createReactRootElements>;
+import {
+  createReactRootElements,
+  type ReactRootElements,
+} from "./createReactRootElements.js";
 
 export const reactWebComponentElementName = "odyssey-react-web-component";
 
@@ -100,13 +101,24 @@ export type RenderReactInWebComponentProps = {
    * You will need to have rendered `<slot>` elements in your React component or `children` won't show up.
    */
   webComponentChildren?: HTMLElement | HTMLElement[];
-  /**
-   * You React app renders in the web component, but the web component needs to be rendered in the document.
-   *
-   * This is the element the web component is rendered into.
-   */
-  webComponentRootElement: HTMLElement;
-};
+} & (
+  | {
+      /**
+       * The React app renders in the web component, but the web component needs to be rendered in the document.
+       *
+       * This is the element the web component is rendered into.
+       */
+      webComponentParentElement: HTMLElement;
+      webComponentRootElement?: never;
+    }
+  | {
+      webComponentParentElement?: HTMLElement;
+      /**
+       * @deprecated Use `webComponentParentElement` instead.
+       */
+      webComponentRootElement: HTMLElement;
+    }
+);
 
 /**
  * Lets you render React apps or components in a Web Component.
@@ -116,6 +128,7 @@ export type RenderReactInWebComponentProps = {
 export const renderReactInWebComponent = ({
   getReactComponent,
   webComponentChildren,
+  webComponentParentElement,
   webComponentRootElement,
 }: RenderReactInWebComponentProps) => {
   const reactElement = new ReactInWebComponentElement(getReactComponent);
@@ -129,7 +142,13 @@ export const renderReactInWebComponent = ({
     });
   }
 
-  webComponentRootElement.appendChild(reactElement);
+  if (webComponentParentElement) {
+    webComponentParentElement.appendChild(reactElement);
+  }
+  // Remove this condition when `webComponentRootElement` is no longer a prop.
+  else if (webComponentRootElement) {
+    webComponentRootElement.appendChild(reactElement);
+  }
 
   return reactElement;
 };

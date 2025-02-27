@@ -75,7 +75,7 @@ export type SideNavProps = {
    */
   isCollapsible?: boolean;
   /**
-   *  Determines whether the side nav is collapsed
+   *  Determines whether the side nav is collapsed by default. When `true`, side nav also closes once and item is clicked.
    */
   isCollapsed?: boolean;
   /**
@@ -86,6 +86,12 @@ export type SideNavProps = {
    *  Before the side nav has items, it will be in a loading state.
    */
   isLoading?: boolean;
+  /**
+   *  If the side nav is up too much screen real estate. For instance, if you're in a narrower view, and it displays next to the content.
+   *
+   * When `true`, side nav will close itself after nav items are clicked.
+   */
+  isObtrusive?: boolean;
   /**
    * An optional logo component or src string for an img to display in the header. If not provided, will default to the Okta logo
    */

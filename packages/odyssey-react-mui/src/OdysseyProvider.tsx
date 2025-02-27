@@ -26,6 +26,7 @@ import {
   OdysseyTranslationProviderProps,
 } from "./OdysseyTranslationProvider.js";
 import { DefaultSupportedLanguages } from "./OdysseyTranslationProvider.types.js";
+
 const scopedCssBaselineStyles = {
   height: "inherit",
 };
@@ -48,6 +49,7 @@ const OdysseyProvider = <SupportedLanguages extends string>({
   designTokensOverride,
   emotionRoot,
   emotionRootElement,
+  hasScopedCssBaseline = true,
   languageCode,
   nonce,
   shadowDomElement,
@@ -55,7 +57,6 @@ const OdysseyProvider = <SupportedLanguages extends string>({
   stylisPlugins,
   themeOverride,
   translationOverrides,
-  hasScopedCssBaseline = true,
 }: OdysseyProviderProps<SupportedLanguages>) => (
   <OdysseyCacheProvider
     emotionRootElement={emotionRootElement || emotionRoot}

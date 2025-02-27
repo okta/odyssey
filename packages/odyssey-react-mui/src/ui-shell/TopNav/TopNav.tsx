@@ -22,8 +22,10 @@ import {
   UiShellColors,
   useUiShellContext,
 } from "../../ui-shell/UiShellProvider.js";
-
-export const TOP_NAV_HEIGHT = `${64 / 14}rem`;
+import {
+  TOP_NAV_HEIGHT,
+  UI_SHELL_BASE_Z_INDEX,
+} from "../uiShellSharedConstants.js";
 
 const StyledLeftSideContainer = styled("div")(() => ({
   flexGrow: 1,
@@ -53,12 +55,11 @@ const StyledTopNavContainer = styled("div", {
   justifyContent: "space-between",
   maxHeight: TOP_NAV_HEIGHT,
   minHeight: TOP_NAV_HEIGHT,
-  overflowX: "hidden",
   paddingBlock: odysseyDesignTokens.Spacing2,
   paddingInline: odysseyDesignTokens.Spacing8,
   position: "relative",
   transition: `box-shadow ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
-  zIndex: 100,
+  zIndex: UI_SHELL_BASE_Z_INDEX,
 
   ...(topNavBackgroundColor === odysseyDesignTokens.HueNeutralWhite && {
     borderBottom: `${odysseyDesignTokens.BorderWidthMain} ${odysseyDesignTokens.BorderStyleMain} ${odysseyDesignTokens.HueNeutral100}`,

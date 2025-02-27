@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export const useScrollState = <
   ScrollableContentElement extends HTMLElement = HTMLDivElement,
@@ -19,11 +19,9 @@ export const useScrollState = <
 ) => {
   const [isContentScrolled, setIsContentScrolled] = useState(false);
 
-  const scrollableContentRef = useRef<ScrollableContentElement>(null);
-
   const scrollableElement = useMemo(
-    () => scrollableContentElement ?? scrollableContentRef.current,
-    [scrollableContentElement, scrollableContentRef.current],
+    () => scrollableContentElement,
+    [scrollableContentElement],
   );
 
   useEffect(() => {
@@ -54,6 +52,5 @@ export const useScrollState = <
 
   return {
     isContentScrolled,
-    scrollableContentRef,
   };
 };
