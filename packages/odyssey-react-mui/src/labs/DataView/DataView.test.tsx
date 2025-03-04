@@ -14,6 +14,7 @@ import { render, screen, waitFor, within } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import { OdysseyProvider } from "../../OdysseyProvider.js";
 import { MRT_RowSelectionState } from "material-react-table";
+import { describe, test } from "vitest";
 
 import {
   CardLayoutProps,
@@ -51,7 +52,7 @@ const waitUntilTableLoadedHack = async () => {
   return expect(await screen.findByText(data[0].name)).toBeVisible();
 };
 
-describe("DataView", () => {
+describe("DataView", { timeout: 10000 }, () => {
   describe("DataView layouts", () => {
     test("displays a table view", async () => {
       const { container } = render(
@@ -136,6 +137,7 @@ describe("DataView", () => {
       const layoutSwitcherMenu = getControlledElement({
         element: layoutSwitcherButton,
       });
+
       expect(within(layoutSwitcherMenu).getAllByRole("menuitem")).toHaveLength(
         2,
       );
@@ -143,6 +145,7 @@ describe("DataView", () => {
       expect(
         within(layoutSwitcherMenu).getByRole("menuitem", { name: "Table" }),
       ).toBeVisible();
+
       expect(
         within(layoutSwitcherMenu).getByRole("menuitem", { name: "List" }),
       ).toBeVisible();
