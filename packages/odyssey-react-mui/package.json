@@ -136,7 +136,6 @@
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.26.3",
     "@babel/preset-typescript": "^7.26.0",
-    "@happy-dom/jest-environment": "^15.7.4",
     "@okta/browserslist-config-odyssey": "workspace:*",
     "@okta/odyssey-icons": "workspace:*",
     "@okta/odyssey-typescript": "workspace:*",
@@ -157,6 +156,7 @@
     "babel-plugin-replace-import-extension": "^1.1.4",
     "chokidar-cli": "^3.0.0",
     "concurrently": "^8.2.2",
+    "happy-dom": "^17.1.9",
     "jest-axe": "^5.0.1",
     "properties": "1.2.1",
     "react": "^18.3.1",
@@ -166,7 +166,7 @@
     "tsd": "^0.31.2",
     "tsx": "^4.7.3",
     "typescript": "^5.6.3",
-    "vitest": "^2.1.5",
+    "vitest": "^3.0.7",
     "yargs": "^17.7.2"
   },
   "peerDependencies": {

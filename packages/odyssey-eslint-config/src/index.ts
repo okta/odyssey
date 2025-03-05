@@ -16,7 +16,6 @@ import headerPlugin from "eslint-plugin-header";
 import importPlugin from "eslint-plugin-import";
 import jsxA11yPlugin from "eslint-plugin-jsx-a11y";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
-import globals from "globals";
 import {
   config as createTsEslintConfig,
   configs as tsEslintConfigs,
@@ -111,9 +110,8 @@ const eslintConfig = createTsEslintConfig(
     //         "**/*.stories.*",
     //         "**/*.test.*",
     //         "**/*.ts",
-    //         "**/jest.setup.js",
     //         "**/scripts/*",
-    //         "**/vite.config.js",
+    //         "**/vitest.config.js",
     //       ],
     //     },
     //   ],
@@ -142,9 +140,8 @@ const eslintConfig = createTsEslintConfig(
       //       "**/*.stories.*",
       //       "**/*.test.*",
       //       "**/*.ts",
-      //       "**/jest.setup.js",
       //       "**/scripts/*",
-      //       "**/vite.config.js",
+      //       "**/vitest.config.js",
       //     ],
       //   },
       // ],
@@ -176,7 +173,6 @@ const eslintConfig = createTsEslintConfig(
     files: ["**/vitest.setup.*", "**/*.test.*"],
     languageOptions: {
       globals: {
-        ...globals.jest,
         vi: true,
         vitest: true,
       },
