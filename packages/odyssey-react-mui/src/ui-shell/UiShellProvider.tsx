@@ -23,17 +23,42 @@ import {
 } from "../createContrastColors.js";
 import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext.js";
 import { createMessageBus, MessageBus } from "./createMessageBus.js";
+import { ContrastMode } from "../useContrastMode.js";
+
+export const defaultCloseSideNavMessageBus = createMessageBus();
+export const defaultSubscribeToCloseRightSideMenu = () => () => {};
 
 export type UiShellColors = {
+  /**
+   * Sets a custom background color for the app content area.
+   */
   appBackgroundColor: string;
+  /**
+   * Sets a custom background color for the side nav area.
+   */
   sideNavBackgroundColor: string;
-  sideNavContrastColors?: ContrastColors | undefined;
+  sideNavContrastColors?: ContrastColors;
+  /**
+   * Sets a custom background color for the top nav area.
+   */
   topNavBackgroundColor: string;
 };
 
 export type UiShellContext = {
-  publishSideNavItemClicked: MessageBus<void>["publish"];
-  subscribeSideNavItemClicked: MessageBus<void>["subscribe"];
+  /**
+   * This is a callback that publishes a change to all subscribers listening for when to close the side nav.
+   */
+  closeSideNavMenu: MessageBus<void>["publish"];
+  /**
+   * This is a callback that provides a subscriber callback to listen for changes to state.
+   * It allows UI Shell to listen for a publisher that asks us to close the side nav.
+   */
+  subscribeToCloseSideNavMenu: MessageBus<void>["subscribe"];
+  /**
+   * This is a callback that provides a subscriber callback to listen for changes to state.
+   * It allows UI Shell to listen for a publisher that asks us to close the right-side menu.
+   */
+  subscribeToCloseRightSideMenu: MessageBus<void>["subscribe"];
 } & UiShellColors;
 
 const UiShellContext = createContext<UiShellContext | undefined>(undefined);
@@ -43,19 +68,20 @@ export const useUiShellContext = () => {
 };
 
 export type UiShellProviderProps = {
-  appBackgroundContrastMode?: string;
-} & Partial<
-  Pick<
-    UiShellColors,
-    "appBackgroundColor" | "sideNavBackgroundColor" | "topNavBackgroundColor"
-  >
->;
+  /**
+   * Sets either a gray or white background color for the app content area.
+   */
+  appBackgroundContrastMode?: ContrastMode;
+} & Partial<UiShellContext>;
 
 const UiShellProvider = ({
   appBackgroundColor,
   appBackgroundContrastMode = "lowContrast",
   children,
+  closeSideNavMenu,
   sideNavBackgroundColor,
+  subscribeToCloseRightSideMenu,
+  subscribeToCloseSideNavMenu,
   topNavBackgroundColor,
 }: PropsWithChildren<UiShellProviderProps>) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
@@ -82,28 +108,28 @@ const UiShellProvider = ({
   const appContentBackgroundColor =
     appBackgroundColor || defaultTopAndAppBackgroundColor;
 
-  const {
-    publish: publishSideNavItemClicked,
-    subscribe: subscribeSideNavItemClicked,
-  } = useMemo(() => createMessageBus(), []);
-
   const memoizedContextValue = useMemo(
     () => ({
       appBackgroundColor: appContentBackgroundColor,
-      publishSideNavItemClicked,
+      closeSideNavMenu:
+        closeSideNavMenu ?? defaultCloseSideNavMessageBus.publish,
       sideNavBackgroundColor:
         sideNavBackgroundColor || odysseyDesignTokens.HueNeutralWhite,
       sideNavContrastColors,
-      subscribeSideNavItemClicked,
+      subscribeToCloseSideNavMenu:
+        subscribeToCloseSideNavMenu ?? defaultCloseSideNavMessageBus.subscribe,
+      subscribeToCloseRightSideMenu:
+        subscribeToCloseRightSideMenu ?? defaultSubscribeToCloseRightSideMenu,
       topNavBackgroundColor: topNavColor,
     }),
     [
       appContentBackgroundColor,
-      odysseyDesignTokens,
-      publishSideNavItemClicked,
+      odysseyDesignTokens.HueNeutralWhite,
+      closeSideNavMenu,
       sideNavBackgroundColor,
       sideNavContrastColors,
-      subscribeSideNavItemClicked,
+      subscribeToCloseRightSideMenu,
+      subscribeToCloseSideNavMenu,
       topNavColor,
     ],
   );

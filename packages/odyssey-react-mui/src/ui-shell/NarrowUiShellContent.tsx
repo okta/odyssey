@@ -268,12 +268,19 @@ const NarrowUiShellContent = ({
   }, []);
 
   useEffect(() => {
-    const unsubscribe = uiShellContext?.subscribeSideNavItemClicked(() => {
-      closeSideMenus();
-    });
+    const unsubscribeFromCloseRightSideMenu =
+      uiShellContext?.subscribeToCloseRightSideMenu(() => {
+        closeSideMenus();
+      });
+
+    const unsubscribeFromSideNavItemClicked =
+      uiShellContext?.subscribeToCloseSideNavMenu(() => {
+        closeSideMenus();
+      });
 
     return () => {
-      unsubscribe?.();
+      unsubscribeFromCloseRightSideMenu?.();
+      unsubscribeFromSideNavItemClicked?.();
     };
   }, [closeSideMenus, uiShellContext]);
 
