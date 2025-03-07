@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { SelectChangeEvent } from "@mui/material";
+import { SelectChangeEvent, menuItemClasses } from "@mui/material";
 import { Meta, StoryObj } from "@storybook/react";
 import { Select, SelectProps, Link } from "@okta/odyssey-react-mui";
 import { queryOdysseySelector } from "@okta/odyssey-react-mui/test-selectors";
@@ -236,6 +236,15 @@ export const Default: Story = {
         const listboxElement = screen.getByRole("listbox");
         await expect(listboxElement).toBeInTheDocument();
         const listItem = listboxElement.children[0];
+
+        // Change body overflow to visible to test a11y in MUI Popover content
+        document.body.style.overflow = "visible";
+        // Sadly this will not add ':hover' pseudo-class
+        await userEvent.hover(listItem);
+        // Simulate adding ':hover' pseudo-class with adding 'MuiMenuItem-root-hover' class
+        listItem.classList.add(`${menuItemClasses.root}-hover`);
+        await waitFor(() => axeRun("Hovered Option"));
+
         await userEvent.click(listItem);
         await userEvent.tab();
         await waitFor(() => {
@@ -275,6 +284,10 @@ export const DefaultValue: Story = {
       await waitFor(() => {
         expect(list.element).toBeVisible();
       });
+
+      // Change body overflow to visible to test a11y in MUI Popover content
+      document.body.style.overflow = "visible";
+      await waitFor(async () => await axeRun("Selected Hovered Option"));
 
       const listItemElement = list.selectChild({
         name: "listItem",
