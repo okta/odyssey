@@ -84,6 +84,11 @@ export const renderUiShell = ({
     subscribe: subscribeToReactAppSubscribed,
   } = createMessageBus();
 
+  const {
+    publish: closeRightSideMenu,
+    subscribe: subscribeToCloseRightSideMenu,
+  } = createMessageBus();
+
   const publishAfterReactAppReadyForProps = bufferLatest({
     publish: publishPropChanges,
     subscribe: subscribeToReactAppSubscribed,
@@ -128,6 +133,7 @@ export const renderUiShell = ({
             ),
           )}
           sideNavBackgroundColor={sideNavBackgroundColor}
+          subscribeToCloseRightSideMenu={subscribeToCloseRightSideMenu}
           subscribeToPropChanges={subscribeToPropChanges}
           topNavBackgroundColor={topNavBackgroundColor}
           uiShellAppElement={reactRootElements.appRootElement}
@@ -143,6 +149,7 @@ export const renderUiShell = ({
 
   return {
     appElement,
+    closeRightSideMenu,
     setComponentProps: publishAfterReactAppReadyForProps,
     slottedElements,
     uiShellElement,

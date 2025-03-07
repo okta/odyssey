@@ -17,14 +17,14 @@ import { type ReactRootElements } from "../web-component/createReactRootElements
 import { CssBaseline } from "../CssBaseline.js";
 import { NarrowUiShellContent } from "./NarrowUiShellContent.js";
 import { OdysseyProvider } from "../OdysseyProvider.js";
-import { UiShellProvider } from "./UiShellProvider.js";
+import { UiShellProvider, UiShellProviderProps } from "./UiShellProvider.js";
 import {
   UiShellNavComponentProps,
   UiShellContentProps,
 } from "./uiShellContentTypes.js";
 import { useUiShellBreakpoints } from "./useUiShellBreakpoints.js";
-import { ContrastMode } from "../useContrastMode.js";
 import { WideUiShellContent } from "./WideUiShellContent.js";
+import { MessageBus } from "./createMessageBus.js";
 
 export const defaultComponentProps: UiShellNavComponentProps = {
   sideNavProps: undefined,
@@ -34,14 +34,6 @@ export const defaultComponentProps: UiShellNavComponentProps = {
 const errorComponent = <div data-error />;
 
 export type UiShellProps = {
-  /**
-   * Sets a custom background color for the app content area.
-   */
-  appBackgroundColor?: string;
-  /**
-   * Sets either a gray or white background color for the app content area.
-   */
-  appBackgroundContrastMode?: ContrastMode;
   /**
    * Notifies when subscribed to prop changes.
    *
@@ -54,19 +46,9 @@ export type UiShellProps = {
    *
    * The props coming in this callback go directly to a React state; therefore, it shares the same signature and provides a previous state.
    */
-  subscribeToPropChanges: (
-    subscriber: (
-      componentProps: SetStateAction<UiShellNavComponentProps>,
-    ) => void,
-  ) => () => void;
-  /**
-   * Sets a custom background color for the side nav area.
-   */
-  sideNavBackgroundColor?: string;
-  /**
-   * Sets a custom background color for the top nav area.
-   */
-  topNavBackgroundColor?: string;
+  subscribeToPropChanges: MessageBus<
+    SetStateAction<UiShellNavComponentProps>
+  >["subscribe"];
   /**
    * Element inside UI Shell's React root component renders into. If using a web component, this is going to exist inside it.
    */
@@ -75,15 +57,16 @@ export type UiShellProps = {
    * Typically, this is your `<head>` element. If using a web component, you need to create one yourself as Shadow DOM's don't have a `<head>`.
    */
   uiShellStylesElement: ReactRootElements["stylesRootElement"];
-} & Pick<
-  UiShellContentProps,
-  | "appElement"
-  | "appElementScrollingMode"
-  | "hasStandardAppContentPadding"
-  | "initialVisibleSections"
-  | "onError"
-  | "optionalComponents"
->;
+} & UiShellProviderProps &
+  Pick<
+    UiShellContentProps,
+    | "appElement"
+    | "appElementScrollingMode"
+    | "hasStandardAppContentPadding"
+    | "initialVisibleSections"
+    | "onError"
+    | "optionalComponents"
+  >;
 
 /**
  * Our new Unified Platform UI Shell.
@@ -103,6 +86,7 @@ const UiShell = ({
   onSubscriptionCreated,
   optionalComponents,
   sideNavBackgroundColor,
+  subscribeToCloseRightSideMenu,
   subscribeToPropChanges,
   topNavBackgroundColor,
   uiShellAppElement,
@@ -138,6 +122,7 @@ const UiShell = ({
             appBackgroundColor={appBackgroundColor}
             appBackgroundContrastMode={appBackgroundContrastMode}
             sideNavBackgroundColor={sideNavBackgroundColor}
+            subscribeToCloseRightSideMenu={subscribeToCloseRightSideMenu}
             topNavBackgroundColor={topNavBackgroundColor}
           >
             {activeBreakpoint === "constrained" && (

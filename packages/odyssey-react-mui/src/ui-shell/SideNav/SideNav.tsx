@@ -619,7 +619,7 @@ const SideNav = ({
 
   useEffect(() => {
     if (isCollapsed) {
-      const unsubscribe = uiShellContext?.subscribeSideNavItemClicked(() => {
+      const unsubscribe = uiShellContext?.subscribeToSideNavItemClicked(() => {
         onCollapse?.();
         setIsSideNavCollapsed(true);
       });
