@@ -21,24 +21,25 @@ const StyledLogoContainer = styled("div", {
 })<{
   isLogoInteractive?: boolean;
 }>(({ isLogoInteractive }) => ({
-  display: "flex",
   alignItems: "center",
+  display: "flex",
   height: "100%",
+
   ...(isLogoInteractive && {
     cursor: "pointer",
   }),
 }));
 
 const StyledLogoLink = styled("a")(() => ({
-  display: "flex",
   alignItems: "center",
+  display: "flex",
   height: "100%",
 }));
 
 const SideNavLogo = ({
   imageAltText,
-  logoComponent,
   imageUrl,
+  logoComponent,
   ...optionalProps
 }: SideNavLogoProps) => {
   const logo = useMemo(() => {
