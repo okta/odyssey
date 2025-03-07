@@ -269,12 +269,12 @@ const NarrowUiShellContent = ({
 
   useEffect(() => {
     const unsubscribeFromCloseRightSideMenu =
-      uiShellContext?.subscribeToCloseRightSideMenu?.(() => {
+      uiShellContext?.subscribeToCloseRightSideMenu(() => {
         closeSideMenus();
       });
 
     const unsubscribeFromSideNavItemClicked =
-      uiShellContext?.subscribeToSideNavItemClicked(() => {
+      uiShellContext?.subscribeToCloseSideNavMenu(() => {
         closeSideMenus();
       });
 

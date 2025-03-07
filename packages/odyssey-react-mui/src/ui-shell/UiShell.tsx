@@ -80,6 +80,7 @@ const UiShell = ({
   appBackgroundContrastMode,
   appElement,
   appElementScrollingMode,
+  closeSideNavMenu,
   hasStandardAppContentPadding,
   initialVisibleSections,
   onError = console.error,
@@ -87,6 +88,7 @@ const UiShell = ({
   optionalComponents,
   sideNavBackgroundColor,
   subscribeToCloseRightSideMenu,
+  subscribeToCloseSideNavMenu,
   subscribeToPropChanges,
   topNavBackgroundColor,
   uiShellAppElement,
@@ -121,8 +123,10 @@ const UiShell = ({
           <UiShellProvider
             appBackgroundColor={appBackgroundColor}
             appBackgroundContrastMode={appBackgroundContrastMode}
+            closeSideNavMenu={closeSideNavMenu}
             sideNavBackgroundColor={sideNavBackgroundColor}
             subscribeToCloseRightSideMenu={subscribeToCloseRightSideMenu}
+            subscribeToCloseSideNavMenu={subscribeToCloseSideNavMenu}
             topNavBackgroundColor={topNavBackgroundColor}
           >
             {activeBreakpoint === "constrained" && (

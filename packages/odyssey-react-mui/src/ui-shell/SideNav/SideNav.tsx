@@ -551,7 +551,7 @@ const SideNav = ({
       updateSideNavItemsList(updatedSideNavItems);
 
       if (isCollapsed || isObtrusive) {
-        uiShellContext?.publishSideNavItemClicked();
+        uiShellContext?.closeSideNavMenu();
       }
     },
     [isCollapsed, isObtrusive, sideNavItemsList, uiShellContext],
@@ -619,7 +619,7 @@ const SideNav = ({
 
   useEffect(() => {
     if (isCollapsed) {
-      const unsubscribe = uiShellContext?.subscribeToSideNavItemClicked(() => {
+      const unsubscribe = uiShellContext?.subscribeToCloseSideNavMenu(() => {
         onCollapse?.();
         setIsSideNavCollapsed(true);
       });
