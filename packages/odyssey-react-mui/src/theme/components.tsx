@@ -2239,7 +2239,6 @@ export const getComponents = ({
           [`&:hover, &.${menuItemClasses.root}-hover`]: {
             textDecoration: "none",
             backgroundColor: odysseyTokens.HueNeutral100,
-            color: odysseyTokens.HueNeutral400, // simulate a11y violation
 
             // Reset on touch devices, it doesn't add specificity
             "@media (hover: none)": {
