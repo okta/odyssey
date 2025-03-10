@@ -39,6 +39,7 @@ import {
   UiShellContentProps,
 } from "./uiShellContentTypes.js";
 import {
+  emptySideNavItems,
   SIDE_NAV_WIDTH,
   TOP_NAV_HEIGHT,
   UI_SHELL_BASE_Z_INDEX,
@@ -335,11 +336,14 @@ const NarrowUiShellContent = ({
                 topNavBackgroundColor={uiShellContext?.sideNavBackgroundColor}
               >
                 <StyledMenuLogo odysseyDesignTokens={odysseyDesignTokens}>
-                  <Button
-                    onClick={toggleLeftSideMenu}
-                    startIcon={<HamburgerMenuIcon />}
-                    variant="floating"
-                  />
+                  {(sideNavProps?.isCollapsible ||
+                    !sideNavProps?.isCollapsed) && (
+                    <Button
+                      onClick={toggleLeftSideMenu}
+                      startIcon={<HamburgerMenuIcon />}
+                      variant="floating"
+                    />
+                  )}
 
                   <StyledLogoContainer
                     odysseyDesignTokens={odysseyDesignTokens}
@@ -375,6 +379,16 @@ const NarrowUiShellContent = ({
 
         <StyledAppContentArea>
           <StyledLeftSideContainer isOpen={isLeftSideMenuOpen}>
+            {
+              /* If SideNav should be initially visible and we have not yet received props, render SideNav with minimal inputs */
+              initialVisibleSections?.includes("SideNav") &&
+                sideNavProps === undefined && (
+                  <ErrorBoundary fallback={null} onError={onError}>
+                    <SideNav isLoading sideNavItems={emptySideNavItems} />
+                  </ErrorBoundary>
+                )
+            }
+
             {sideNavProps && (
               <ErrorBoundary fallback={null} onError={onError}>
                 <StyledSideNavContainer>
