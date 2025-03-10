@@ -12,6 +12,7 @@
 
 import {
   Banner,
+  Box,
   Button,
   OdysseyProvider,
   Paragraph,
@@ -46,6 +47,8 @@ import { fn } from "@storybook/test";
 import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
 import { useEffect, useRef, useState } from "react";
 import PlaceholderLogo from "../../odyssey-labs/PickerWithOptionAdornment/PlaceholderLogo.js";
+import { createMessageBus } from "../../../../../odyssey-react-mui/src/ui-shell/createMessageBus.js";
+import { BaseButton } from "../../../../../odyssey-react-mui/src/Buttons/BaseButton.js";
 
 const meta = {
   title: "UI Shell Components/UI Shell",
@@ -816,19 +819,34 @@ export const WithTallAppContentAndNoStorybookDecorator: Story = {
   // ALL OTHER STORIES in this file should have `decorators` specified.
 };
 
+const {
+  publish: closeRightSideMenu,
+  subscribe: subscribeToCloseRightSideMenu,
+} = createMessageBus();
+
 export const WithOdysseyAppContent: Story = {
   args: {
     optionalComponents: {
       ...sharedOptionalComponents,
       banners: <Banner severity="success" text="This is an app!" />,
       rightSideMenu: (
-        <UserProfile
-          profileIcon={<UserIcon />}
-          orgName="ORG123"
-          userName="test.user@test.com"
-        />
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <BaseButton onClick={() => closeRightSideMenu()} variant="floating">
+            <UserProfile
+              orgName="ORG123"
+              profileIcon={<UserIcon />}
+              userName="test.user@test.com"
+            />
+          </BaseButton>
+        </Box>
       ),
     },
+    subscribeToCloseRightSideMenu,
     subscribeToPropChanges: (subscriber) => {
       subscriber({
         appSwitcherProps: sharedAppSwitcherProps,

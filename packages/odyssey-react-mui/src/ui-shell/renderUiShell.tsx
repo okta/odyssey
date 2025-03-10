@@ -89,6 +89,14 @@ export const renderUiShell = ({
     subscribe: subscribeToReactAppSubscribed,
   });
 
+  const {
+    publish: closeRightSideMenu,
+    subscribe: subscribeToCloseRightSideMenu,
+  } = createMessageBus();
+
+  const { publish: closeSideNavMenu, subscribe: subscribeToCloseSideNavMenu } =
+    createMessageBus();
+
   const slottedElements = Object.fromEntries(
     Object.entries(optionalComponentSlotNames).map(
       ([optionalComponentKey, slotName]) => {
@@ -114,6 +122,7 @@ export const renderUiShell = ({
           appBackgroundContrastMode={appBackgroundContrastMode}
           appElement={appElement}
           appElementScrollingMode={appElementScrollingMode}
+          closeSideNavMenu={closeSideNavMenu}
           hasStandardAppContentPadding={hasStandardAppContentPadding}
           initialVisibleSections={initialVisibleSections}
           onError={onError}
@@ -128,6 +137,8 @@ export const renderUiShell = ({
             ),
           )}
           sideNavBackgroundColor={sideNavBackgroundColor}
+          subscribeToCloseRightSideMenu={subscribeToCloseRightSideMenu}
+          subscribeToCloseSideNavMenu={subscribeToCloseSideNavMenu}
           subscribeToPropChanges={subscribeToPropChanges}
           topNavBackgroundColor={topNavBackgroundColor}
           uiShellAppElement={reactRootElements.appRootElement}
@@ -143,6 +154,8 @@ export const renderUiShell = ({
 
   return {
     appElement,
+    closeRightSideMenu,
+    closeSideNavMenu,
     setComponentProps: publishAfterReactAppReadyForProps,
     slottedElements,
     uiShellElement,
