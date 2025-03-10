@@ -341,6 +341,7 @@ const NarrowUiShellContent = ({
                     <Button
                       onClick={toggleLeftSideMenu}
                       startIcon={<HamburgerMenuIcon />}
+                      testId="sidenav-menu--icon"
                       variant="floating"
                     />
                   )}
@@ -363,6 +364,7 @@ const NarrowUiShellContent = ({
                     startIcon={
                       isRightSideMenuOpen ? <CloseIcon /> : <MoreIcon />
                     }
+                    testId="userprofile-menu--icon"
                     variant="floating"
                   />
                 )}
