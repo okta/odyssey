@@ -596,6 +596,27 @@ export const WithoutAppContent: Story = {
   decorators: [MuiThemeDecorator],
 };
 
+export const WithoutSideNav: Story = {
+  args: {
+    initialVisibleSections: ["AppSwitcher", "TopNav"],
+    optionalComponents: sharedOptionalComponents,
+    subscribeToPropChanges: (subscriber) => {
+      subscriber({
+        appSwitcherProps: sharedAppSwitcherProps,
+        sideNavProps: {
+          ...sharedSideNavProps,
+          isCollapsed: true,
+          isCollapsible: false,
+        },
+        topNavProps: sharedTopNavProps,
+      });
+
+      return () => {};
+    },
+  },
+  decorators: [MuiThemeDecorator],
+};
+
 const EXPECTED_LINE_HEIGHT = "30px";
 export const WithTallAppContentAndNoStorybookDecorator: Story = {
   args: {

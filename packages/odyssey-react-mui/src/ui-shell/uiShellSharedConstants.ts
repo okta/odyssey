@@ -10,6 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { SideNavProps } from "./SideNav/types.js";
+
 // It's important to bring all our constant values together, so we can change them in one location and ensure the values are all correct relative to each other.
 // This also lends us the capability of swapping these out for a more robust solution in the future.
 
@@ -23,3 +25,5 @@ export const TOP_NAV_HEIGHT = `${64 / 14}rem`;
 export const UI_SHELL_BASE_Z_INDEX = 100;
 
 export const UI_SHELL_OVERLAY_Z_INDEX = 200;
+
+export const emptySideNavItems = [] satisfies SideNavProps["sideNavItems"];

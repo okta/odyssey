@@ -23,13 +23,12 @@ import {
   UiShellNavComponentProps,
   UiShellContentProps,
 } from "./uiShellContentTypes.js";
-import { SideNav, type SideNavProps } from "./SideNav/index.js";
+import { SideNav } from "./SideNav/index.js";
 import { TopNav } from "./TopNav/index.js";
 import { useScrollState } from "./useScrollState.js";
 import { useMatchAppElementToUiShellAppArea } from "./useMatchAppElementToUiShellAppArea.js";
 import { UiShellColors, useUiShellContext } from "./UiShellProvider.js";
-
-const emptySideNavItems = [] satisfies SideNavProps["sideNavItems"];
+import { emptySideNavItems } from "./uiShellSharedConstants.js";
 
 const StyledAppContainer = styled("div", {
   shouldForwardProp: (prop) =>
