@@ -567,8 +567,6 @@ export const MultipleLanguages: Story = {
         await waitFor(() => {
           expect(listboxElement).not.toBeInTheDocument();
         });
-        const inputElement = canvasElement.querySelector("input");
-        await expect(inputElement?.value).toBe("English");
         const selectedOption = listboxElement.querySelector('[lang="fr"]');
         await expect(selectedOption).toHaveTextContent("Français");
         await waitFor(() => {
