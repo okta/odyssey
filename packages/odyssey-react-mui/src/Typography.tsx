@@ -167,8 +167,10 @@ const Heading1 = ({
   component,
   testId,
   translate,
-  role,
-}: TypographyProps) => (
+  isPresentational,
+}: TypographyProps & {
+  isPresentational?: boolean;
+}) => (
   <Typography
     ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
@@ -180,7 +182,7 @@ const Heading1 = ({
     testId={testId}
     translate={translate}
     variant="h1"
-    role={role}
+    role={isPresentational ? "presentation" : undefined}
   />
 );
 

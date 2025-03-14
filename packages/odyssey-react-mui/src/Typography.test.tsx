@@ -11,7 +11,7 @@
  */
 
 import { render, screen } from "@testing-library/react";
-import { Typography } from "./Typography.js";
+import { Typography, Heading1 } from "./Typography.js";
 
 describe("Typography", () => {
   test("renders Overline", () => {
@@ -46,5 +46,31 @@ describe("Typography", () => {
     const element = screen.getByLabelText("heading");
     expect(element).toBeVisible();
     expect(element).not.toHaveAttribute("role");
+  });
+
+  describe("Heading1", () => {
+    test("renders correctly with isPresentional prop", () => {
+      render(
+        <Heading1 ariaLabel="heading" variant="h1" isPresentational>
+          Heading test
+        </Heading1>,
+      );
+
+      const element = screen.getByLabelText("heading");
+      expect(element).toBeVisible();
+      expect(element).toHaveAttribute("role", "presentation");
+    });
+
+    test("renders correctly with isPresentional prop", () => {
+      render(
+        <Heading1 ariaLabel="heading" variant="h1">
+          Heading test
+        </Heading1>,
+      );
+
+      const element = screen.getByLabelText("heading");
+      expect(element).toBeVisible();
+      expect(element).not.toHaveAttribute("role");
+    });
   });
 });
