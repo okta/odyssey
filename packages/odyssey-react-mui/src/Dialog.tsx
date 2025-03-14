@@ -149,7 +149,7 @@ const Dialog = ({
         id="" // mui automatically set id based on aria-labelledby from MuiDialog, explicitly unset it to use id from span
         translate={translate}
       >
-        <span id="ods-dialog-title">{title}</span>.
+        <span id="ods-dialog-title">{title}</span>
         <Button
           ariaLabel={t("close.text")}
           onClick={onClose}
