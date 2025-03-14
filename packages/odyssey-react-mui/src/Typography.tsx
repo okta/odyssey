@@ -96,6 +96,8 @@ export type TypographyProps = {
   | "role"
 >;
 
+type PublicTypographProps = Omit<TypographyProps, "role">;
+
 const Typography = ({
   ariaCurrent,
   ariaDescribedBy,
@@ -168,7 +170,7 @@ const Heading1 = ({
   testId,
   translate,
   isPresentational,
-}: TypographyProps & {
+}: PublicTypographProps & {
   isPresentational?: boolean;
 }) => (
   <Typography
@@ -199,7 +201,7 @@ const Heading2 = ({
   component,
   testId,
   translate,
-}: TypographyProps) => (
+}: PublicTypographProps) => (
   <Typography
     ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
@@ -227,7 +229,7 @@ const Heading3 = ({
   component,
   testId,
   translate,
-}: TypographyProps) => (
+}: PublicTypographProps) => (
   <Typography
     ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
@@ -255,7 +257,7 @@ const Heading4 = ({
   component,
   testId,
   translate,
-}: TypographyProps) => (
+}: PublicTypographProps) => (
   <Typography
     ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
@@ -283,7 +285,7 @@ const Heading5 = ({
   component,
   testId,
   translate,
-}: TypographyProps) => (
+}: PublicTypographProps) => (
   <Typography
     ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
@@ -311,7 +313,7 @@ const Heading6 = ({
   component,
   testId,
   translate,
-}: TypographyProps) => (
+}: PublicTypographProps) => (
   <Typography
     ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
@@ -339,7 +341,7 @@ const Paragraph = ({
   component,
   testId,
   translate,
-}: TypographyProps) => (
+}: PublicTypographProps) => (
   <Typography
     ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
@@ -367,7 +369,7 @@ const Subordinate = ({
   component,
   testId,
   translate,
-}: TypographyProps) => (
+}: PublicTypographProps) => (
   <Typography
     ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
@@ -395,7 +397,7 @@ const Support = ({
   component,
   testId,
   translate,
-}: TypographyProps) => (
+}: PublicTypographProps) => (
   <Typography
     ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
@@ -422,7 +424,7 @@ const Legend = ({
   component,
   testId,
   translate,
-}: TypographyProps) => (
+}: PublicTypographProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
@@ -448,7 +450,7 @@ const Overline = ({
   component,
   testId,
   translate,
-}: TypographyProps) => (
+}: PublicTypographProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
