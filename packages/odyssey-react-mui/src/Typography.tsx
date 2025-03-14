@@ -93,7 +93,10 @@ export type TypographyProps = {
   | "ariaLabelledBy"
   | "testId"
   | "translate"
+  | "role"
 >;
+
+type PublicTypographProps = Omit<TypographyProps, "role">;
 
 const Typography = ({
   ariaCurrent,
@@ -107,6 +110,7 @@ const Typography = ({
   translate,
   typographyRef,
   variant = "body",
+  role,
 }: TypographyProps) => {
   const component = useMemo(() => {
     if (!componentProp) {
@@ -147,6 +151,7 @@ const Typography = ({
       tabIndex={-1}
       translate={translate}
       variant={typographyVariantMapping[variant]}
+      role={role}
     />
   );
 };
@@ -164,7 +169,10 @@ const Heading1 = ({
   component,
   testId,
   translate,
-}: TypographyProps) => (
+  isPresentational,
+}: PublicTypographProps & {
+  isPresentational?: boolean;
+}) => (
   <Typography
     ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
@@ -176,6 +184,7 @@ const Heading1 = ({
     testId={testId}
     translate={translate}
     variant="h1"
+    role={isPresentational ? "presentation" : undefined}
   />
 );
 
@@ -192,7 +201,7 @@ const Heading2 = ({
   component,
   testId,
   translate,
-}: TypographyProps) => (
+}: PublicTypographProps) => (
   <Typography
     ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
@@ -220,7 +229,7 @@ const Heading3 = ({
   component,
   testId,
   translate,
-}: TypographyProps) => (
+}: PublicTypographProps) => (
   <Typography
     ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
@@ -248,7 +257,7 @@ const Heading4 = ({
   component,
   testId,
   translate,
-}: TypographyProps) => (
+}: PublicTypographProps) => (
   <Typography
     ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
@@ -276,7 +285,7 @@ const Heading5 = ({
   component,
   testId,
   translate,
-}: TypographyProps) => (
+}: PublicTypographProps) => (
   <Typography
     ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
@@ -304,7 +313,7 @@ const Heading6 = ({
   component,
   testId,
   translate,
-}: TypographyProps) => (
+}: PublicTypographProps) => (
   <Typography
     ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
@@ -332,7 +341,7 @@ const Paragraph = ({
   component,
   testId,
   translate,
-}: TypographyProps) => (
+}: PublicTypographProps) => (
   <Typography
     ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
@@ -360,7 +369,7 @@ const Subordinate = ({
   component,
   testId,
   translate,
-}: TypographyProps) => (
+}: PublicTypographProps) => (
   <Typography
     ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
@@ -388,7 +397,7 @@ const Support = ({
   component,
   testId,
   translate,
-}: TypographyProps) => (
+}: PublicTypographProps) => (
   <Typography
     ariaCurrent={ariaCurrent}
     ariaDescribedBy={ariaDescribedBy}
@@ -415,7 +424,7 @@ const Legend = ({
   component,
   testId,
   translate,
-}: TypographyProps) => (
+}: PublicTypographProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
@@ -441,7 +450,7 @@ const Overline = ({
   component,
   testId,
   translate,
-}: TypographyProps) => (
+}: PublicTypographProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
