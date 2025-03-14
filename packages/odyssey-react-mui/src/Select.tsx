@@ -93,6 +93,7 @@ export type SelectOption = {
   text: string;
   type?: "heading" | "option";
   value?: string;
+  lang?: string;
 };
 
 const SelectContainer = styled.div`
@@ -341,6 +342,7 @@ const Select = <
           text: option.text,
           value,
           type: option.type === "heading" ? "heading" : "option",
+          lang: option.lang,
         };
       }
 
@@ -460,6 +462,7 @@ const Select = <
             key={normalizedKey(option.text, index.toString())}
             value={option.value}
             selected={isSelected}
+            lang={option.lang}
           >
             {hasMultipleChoices && <MuiCheckbox checked={isSelected} />}
             {option.text}
