@@ -107,14 +107,14 @@ const optionsGrouped: SelectProps<string | string[], boolean>["options"] = [
 ];
 
 const optionsLanguages: SelectProps<string | string[], boolean>["options"] = [
-  { text: "English", value: "en" },
-  { text: "Español", value: "es" },
-  { text: "Français", value: "fr" },
-  { text: "Deutsch", value: "de" },
-  { text: "中文", value: "zh" },
-  { text: "日本語", value: "ja" },
-  { text: "한국어", value: "ko" },
-].map((item) => ({ ...item, useLangAttr: true }));
+  { text: "English", value: "en", lang: "en" },
+  { text: "Español", value: "es", lang: "es" },
+  { text: "Français", value: "fr", lang: "fr" },
+  { text: "Deutsch", value: "de", lang: "de" },
+  { text: "中文", value: "zh", lang: "zh" },
+  { text: "日本語", value: "ja", lang: "ja" },
+  { text: "한국어", value: "ko", lang: "ko" },
+];
 
 const meta = {
   title: "MUI Components/Forms/Select",
