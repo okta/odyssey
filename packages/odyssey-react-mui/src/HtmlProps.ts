@@ -113,8 +113,6 @@ export type HtmlProps = {
   /**
    * The `role` attribute defines the role of an element in the context of accessibility.
    * It helps assistive technologies understand the purpose and behavior of an element.
-   *
-   * Value: A string representing the role of the element.
    */
   role?: HTMLAttributes<HTMLElement>["role"];
 };
