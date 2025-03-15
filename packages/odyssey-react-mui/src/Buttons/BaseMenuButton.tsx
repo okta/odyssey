@@ -110,7 +110,7 @@ export type BaseMenuButtonProps = {
    */
   buttonVariant?: (typeof buttonVariantValues)[number];
   /**
-   * The end Icon on the trigggering Button
+   * The end Icon on the triggering Button
    */
   endIcon?: ReactElement;
   /**
@@ -179,7 +179,7 @@ export type AdditionalBaseMenuButtonProps = Pick<
          */
         children: ReactNode | NullElement;
         /**
-         * popoverConten is disallowed if children are present
+         * popoverContent is disallowed if children are present
          */
         popoverContent?: never;
       }

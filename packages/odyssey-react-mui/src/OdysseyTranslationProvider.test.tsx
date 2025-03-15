@@ -26,7 +26,7 @@ describe("OdysseyTranslationProvider", () => {
     expect(screen.getByText("Optional"));
   });
 
-  it("defaults to 'en' for unsupported langauges", () => {
+  it("defaults to 'en' for unsupported languages", () => {
     render(
       <OdysseyTranslationProvider languageCode="test">
         <span>{odysseyTranslate("fieldlabel.optional.text")}</span>
@@ -58,7 +58,7 @@ describe("OdysseyTranslationProvider", () => {
     );
   });
 
-  it("can modify a translation bundle with translantionOverrides", () => {
+  it("can modify a translation bundle with translationOverrides", () => {
     const translationOverrides = {
       en: {
         "fieldlabel.optional.text": "Non Required",
