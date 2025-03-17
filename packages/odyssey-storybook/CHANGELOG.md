@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.33.0](https://github.com/okta/odyssey/compare/v1.32.4...v1.33.0) (2025-02-27)
+
+### Features
+
+- add noninteractive mode to breadcrumb item (by making href optional) ([#2504](https://github.com/okta/odyssey/issues/2504)) ([fcc235c](https://github.com/okta/odyssey/commit/fcc235c19eaba1efde4eeff958e16645d28b6b8f))
+
+## [1.32.5](https://github.com/okta/odyssey/compare/v1.32.0...v1.32.5) (2025-02-13)
+
+### Bug Fixes
+
+- fixes MenuButton axe timing ([10fc426](https://github.com/okta/odyssey/commit/10fc426d992159aba669eacae190aa036ed635fc))
+
 ## [1.32.4](https://github.com/okta/odyssey/compare/v1.32.0...v1.32.4) (2025-02-10)
 
 ### Bug Fixes

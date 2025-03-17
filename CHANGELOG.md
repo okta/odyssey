@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.33.0](https://github.com/okta/odyssey/compare/v1.32.4...v1.33.0) (2025-02-27)
+
+### Features
+
+- add noninteractive mode to breadcrumb item (by making href optional) ([#2504](https://github.com/okta/odyssey/issues/2504)) ([fcc235c](https://github.com/okta/odyssey/commit/fcc235c19eaba1efde4eeff958e16645d28b6b8f))
+
+### Bug Fixes
+
+- add same background color to logo container and date-se for sidenav ([#2501](https://github.com/okta/odyssey/issues/2501)) ([6bb5aa3](https://github.com/okta/odyssey/commit/6bb5aa3014eaffb827142eefc96dc2d3d29891c4))
+- add same background color to logo container and date-se for sidenav ([#2501](https://github.com/okta/odyssey/issues/2501)) ([12d3c97](https://github.com/okta/odyssey/commit/12d3c9777b8b2b1c80614fa331ec0ac00b3fcda2))
+- globalize autocomplete noOptionsText default value ([#2509](https://github.com/okta/odyssey/issues/2509)) ([55451fc](https://github.com/okta/odyssey/commit/55451fcdead20021c127136f265dca885d353e58))
+- remove unused Storybook Coverage bacon script ([19168a4](https://github.com/okta/odyssey/commit/19168a4610030c55db45303eb0e41e3f143cd463))
+- sidenav expand element z-index should be higher than topnav ([#2503](https://github.com/okta/odyssey/issues/2503)) ([8fa4e58](https://github.com/okta/odyssey/commit/8fa4e58d759750853170fa9990e0193e7152a9c7))
+- sidenav expand element z-index should be higher than topnav ([#2503](https://github.com/okta/odyssey/issues/2503)) ([1a8e36c](https://github.com/okta/odyssey/commit/1a8e36c2311a5eaa0231d645f4072b6d7b0e1607))
+
+## [1.32.5](https://github.com/okta/odyssey/compare/v1.32.0...v1.32.5) (2025-02-13)
+
+### Bug Fixes
+
+- add same background color to logo container and date-se for sidenav ([#2501](https://github.com/okta/odyssey/issues/2501)) ([6bb5aa3](https://github.com/okta/odyssey/commit/6bb5aa3014eaffb827142eefc96dc2d3d29891c4))
+- adds missing border-box box-sizing to CSSBaseline ([fa8e445](https://github.com/okta/odyssey/commit/fa8e445f43f2829d13ca3e249dcce009c5076aaa))
+- fixes MenuButton axe timing ([10fc426](https://github.com/okta/odyssey/commit/10fc426d992159aba669eacae190aa036ed635fc))
+- shell content area overlaps side nav in mobile view ([#2497](https://github.com/okta/odyssey/issues/2497)) ([e37b872](https://github.com/okta/odyssey/commit/e37b87285b011f111a5199d93c7d340e7423b64c))
+- sidenav expand element z-index should be higher than topnav ([#2503](https://github.com/okta/odyssey/issues/2503)) ([8fa4e58](https://github.com/okta/odyssey/commit/8fa4e58d759750853170fa9990e0193e7152a9c7))
+- top-nav overflow with scrollbar ([a970e7e](https://github.com/okta/odyssey/commit/a970e7ecd1835ee36f08fb51bbefb0986eda51e1))
+
 ## [1.32.4](https://github.com/okta/odyssey/compare/v1.32.0...v1.32.4) (2025-02-10)
 
 ### Bug Fixes
