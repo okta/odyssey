@@ -26,7 +26,7 @@ describe("Typography", () => {
 
   test("renders with role", () => {
     render(
-      <Typography ariaLabel="heading" variant="h1" role="presentation">
+      <Typography ariaLabel="heading" variant="h1" isPresentational>
         Heading test
       </Typography>,
     );
@@ -38,7 +38,7 @@ describe("Typography", () => {
 
   test("does not render role attribute when undefined", () => {
     render(
-      <Typography ariaLabel="heading" variant="h1" role={undefined}>
+      <Typography ariaLabel="heading" variant="h1">
         Heading test
       </Typography>,
     );

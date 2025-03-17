@@ -109,10 +109,4 @@ export type HtmlProps = {
    * This prop puts a `translate` attribute on an HTML element. It should be used to indicate whether text within the element should be translated.
    */
   translate?: "yes" | "no";
-
-  /**
-   * The `role` attribute defines the role of an element in the context of accessibility.
-   * It helps assistive technologies understand the purpose and behavior of an element.
-   */
-  role?: HTMLAttributes<HTMLElement>["role"];
 };
