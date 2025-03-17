@@ -12,7 +12,7 @@
 
 import { useMemo, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { expect, userEvent, within, screen, waitFor } from "@storybook/test";
+import { expect, userEvent, waitFor, within } from "@storybook/test";
 
 import { odysseyTranslate } from "@okta/odyssey-react-mui";
 import {
@@ -232,7 +232,7 @@ export const Controlled: StoryObj<DateTimePickerProps> = {
         );
         await userEvent.click(datepickerCalendarOpenButton);
 
-        const dialog = screen.getByRole("dialog");
+        const dialog = canvas.getByRole("dialog");
         const dialogCanvas = within(dialog);
         const dateButton = dialogCanvas.getByText("26");
         await userEvent.click(dateButton);
