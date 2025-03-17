@@ -14,7 +14,14 @@ import { SelectChangeEvent } from "@mui/material";
 import { Meta, StoryObj } from "@storybook/react";
 import { Select, SelectProps, Link } from "@okta/odyssey-react-mui";
 import { queryOdysseySelector } from "@okta/odyssey-react-mui/test-selectors";
-import { expect, fn, screen, userEvent, waitFor } from "@storybook/test";
+import {
+  expect,
+  fn,
+  screen,
+  userEvent,
+  waitFor,
+  within,
+} from "@storybook/test";
 import { useCallback, useState } from "react";
 
 import { axeRun } from "../../../axe-util.js";
@@ -569,6 +576,11 @@ export const MultipleLanguages: Story = {
         });
         const selectedOption = listboxElement.querySelector('[lang="fr"]');
         await expect(selectedOption).toHaveTextContent("Français");
+
+        const frenchOptionElement =
+          within(listboxElement).getByText("Français");
+        expect(frenchOptionElement).toHaveAttribute("lang", "fr");
+
         await waitFor(() => {
           axeRun("Select Multiple Languages");
         });
