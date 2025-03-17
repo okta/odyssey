@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.34.0](https://github.com/okta/odyssey/compare/v1.32.4...v1.34.0) (2025-03-17)
+
+### Features
+
+- add noninteractive mode to breadcrumb item (by making href optional) ([#2504](https://github.com/okta/odyssey/issues/2504)) ([fcc235c](https://github.com/okta/odyssey/commit/fcc235c19eaba1efde4eeff958e16645d28b6b8f))
+
+### Bug Fixes
+
+- add data-se to narrow UI Shell ([#2512](https://github.com/okta/odyssey/issues/2512)) ([6570d57](https://github.com/okta/odyssey/commit/6570d578ed7eee22ddeaf2aebace1aba8a51dc49))
+- add same background color to logo container and date-se for sidenav ([#2501](https://github.com/okta/odyssey/issues/2501)) ([6bb5aa3](https://github.com/okta/odyssey/commit/6bb5aa3014eaffb827142eefc96dc2d3d29891c4))
+- add same background color to logo container and date-se for sidenav ([#2501](https://github.com/okta/odyssey/issues/2501)) ([12d3c97](https://github.com/okta/odyssey/commit/12d3c9777b8b2b1c80614fa331ec0ac00b3fcda2))
+- closing right-side menu outside of UI Shell ([#2514](https://github.com/okta/odyssey/issues/2514)) ([815c6ae](https://github.com/okta/odyssey/commit/815c6ae4582e83bc0c2bb0fe6f7e6deb6ddf3e28))
+- globalize autocomplete noOptionsText default value ([#2509](https://github.com/okta/odyssey/issues/2509)) ([55451fc](https://github.com/okta/odyssey/commit/55451fcdead20021c127136f265dca885d353e58))
+- optional side nav in Narrow UI Shell ([#2515](https://github.com/okta/odyssey/issues/2515)) ([7528894](https://github.com/okta/odyssey/commit/7528894c81abb02011c034fd8aadfb49a7018b7e))
+- remove unused Storybook Coverage bacon script ([19168a4](https://github.com/okta/odyssey/commit/19168a4610030c55db45303eb0e41e3f143cd463))
+- sidenav expand element z-index should be higher than topnav ([#2503](https://github.com/okta/odyssey/issues/2503)) ([8fa4e58](https://github.com/okta/odyssey/commit/8fa4e58d759750853170fa9990e0193e7152a9c7))
+- sidenav expand element z-index should be higher than topnav ([#2503](https://github.com/okta/odyssey/issues/2503)) ([1a8e36c](https://github.com/okta/odyssey/commit/1a8e36c2311a5eaa0231d645f4072b6d7b0e1607))
+
 ## [1.33.0](https://github.com/okta/odyssey/compare/v1.32.4...v1.33.0) (2025-02-27)
 
 ### Features
