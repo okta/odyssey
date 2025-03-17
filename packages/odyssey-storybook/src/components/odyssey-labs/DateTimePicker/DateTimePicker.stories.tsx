@@ -226,24 +226,32 @@ export const Controlled: StoryObj<DateTimePickerProps> = {
   play: async ({ canvasElement, step }) => {
     await step("select date", async () => {
       const canvas = within(canvasElement);
-      await waitFor(async () => {
-        const datepickerCalendarOpenButton = canvas.getByLabelText(
-          odysseyTranslate("picker.labels.date.choose"),
-        );
-        await userEvent.click(datepickerCalendarOpenButton);
 
-        const dialog = canvas.getByRole("dialog");
-        const dialogCanvas = within(dialog);
-        const dateButton = dialogCanvas.getByText("26");
-        await userEvent.click(dateButton);
+      // Hack because of MUI `DateTimePicker` issues.
+      await new Promise((resolve) => {
+        setTimeout(resolve, 250);
       });
+
+      const datepickerCalendarOpenButton = await canvas.findByLabelText(
+        odysseyTranslate("picker.labels.date.choose"),
+      );
+
+      await userEvent.click(datepickerCalendarOpenButton);
+
+      const dialog = await within(canvasElement.ownerDocument.body).findByRole(
+        "dialog",
+      );
+
+      const dialogCanvas = within(dialog);
+      const dateButton = dialogCanvas.getByText("26");
+      await userEvent.click(dateButton);
 
       const input = canvas.getByRole<HTMLInputElement>("textbox");
       expect(input.value).toBe("07/26/2024 11:00 PM");
+    });
 
-      await step("Check for a11y errors", async () => {
-        await waitFor(() => axeRun("Selecting a date"));
-      });
+    await step("Check for a11y errors", async () => {
+      await waitFor(() => axeRun("Selecting a date"));
     });
   },
 };
