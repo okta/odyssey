@@ -101,6 +101,7 @@ const Dialog = ({
   const { t } = useTranslation();
   const [isContentScrollable, setIsContentScrollable] = useState(false);
   const dialogContentRef = useRef<HTMLDivElement>(null);
+  const dialogTitleId = `ods-dialog-title__container-${useUniqueId()}`;
 
   useEffect(() => {
     let frameId: number;
@@ -147,7 +148,7 @@ const Dialog = ({
       aria-labelledby="ods-dialog-title"
     >
       <DialogTitle
-        id={`ods-dialog-title__container-${useUniqueId()}`} // We need to explicitly unset `id` for MUI to automatically set it based on the `aria-labelledby` prop passed to `MuiDialog`
+        id={dialogTitleId} // We need to explicitly unset `id` for MUI to automatically set it based on the `aria-labelledby` prop passed to `MuiDialog`
         translate={translate}
       >
         <span id="ods-dialog-title">{title}</span>
