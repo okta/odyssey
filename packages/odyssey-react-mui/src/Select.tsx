@@ -93,7 +93,7 @@ export type SelectOption = {
   text: string;
   type?: "heading" | "option";
   value?: string;
-  lang?: string;
+  language?: string;
 };
 
 const SelectContainer = styled.div`
@@ -342,7 +342,7 @@ const Select = <
           text: option.text,
           value,
           type: option.type === "heading" ? "heading" : "option",
-          lang: option.lang,
+          lang: option.language,
         };
       }
 
