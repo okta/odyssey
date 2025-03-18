@@ -114,13 +114,13 @@ const optionsGrouped: SelectProps<string | string[], boolean>["options"] = [
 ];
 
 const optionsLanguages: SelectProps<string | string[], boolean>["options"] = [
-  { text: "English", value: "en", lang: "en" },
-  { text: "Español", value: "es", lang: "es" },
-  { text: "Français", value: "fr", lang: "fr" },
-  { text: "Deutsch", value: "de", lang: "de" },
-  { text: "中文", value: "zh", lang: "zh" },
-  { text: "日本語", value: "ja", lang: "ja" },
-  { text: "한국어", value: "ko", lang: "ko" },
+  { text: "English", value: "en", language: "en" },
+  { text: "Español", value: "es", language: "es" },
+  { text: "Français", value: "fr", language: "fr" },
+  { text: "Deutsch", value: "de", language: "de" },
+  { text: "中文", value: "zh", language: "zh" },
+  { text: "日本語", value: "ja", language: "ja" },
+  { text: "한국어", value: "ko", language: "ko" },
 ];
 
 const meta = {
