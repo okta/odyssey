@@ -14,7 +14,14 @@ import { SelectChangeEvent } from "@mui/material";
 import { Meta, StoryObj } from "@storybook/react";
 import { Select, SelectProps, Link } from "@okta/odyssey-react-mui";
 import { queryOdysseySelector } from "@okta/odyssey-react-mui/test-selectors";
-import { expect, fn, screen, userEvent, waitFor } from "@storybook/test";
+import {
+  expect,
+  fn,
+  screen,
+  userEvent,
+  waitFor,
+  within,
+} from "@storybook/test";
 import { useCallback, useState } from "react";
 
 import { axeRun } from "../../../axe-util.js";
@@ -104,6 +111,16 @@ const optionsGrouped: SelectProps<string | string[], boolean>["options"] = [
   "Related Info",
   "Actor",
   "Date",
+];
+
+const optionsLanguages: SelectProps<string | string[], boolean>["options"] = [
+  { text: "English", value: "en", language: "en" },
+  { text: "Español", value: "es", language: "es" },
+  { text: "Français", value: "fr", language: "fr" },
+  { text: "Deutsch", value: "de", language: "de" },
+  { text: "中文", value: "zh", language: "zh" },
+  { text: "日本語", value: "ja", language: "ja" },
+  { text: "한국어", value: "ko", language: "ko" },
 ];
 
 const meta = {
@@ -525,5 +542,49 @@ export const ControlledPreselectedMultipleSelect: Story = {
       [],
     );
     return <Select {...props} value={localValue} onChange={onChange} />;
+  },
+};
+
+export const MultipleLanguages: Story = {
+  args: {
+    label: "Select Language",
+    options: optionsLanguages,
+    defaultValue: "",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Showcase the Select component with options for multiple different languages.",
+      },
+    },
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("Select English from the listbox", async () => {
+      const comboBoxElement = canvasElement.querySelector(
+        '[aria-haspopup="listbox"]',
+      );
+      if (comboBoxElement) {
+        await userEvent.click(comboBoxElement);
+        const listboxElement = screen.getByRole("listbox");
+        await expect(listboxElement).toBeInTheDocument();
+        const listItem = listboxElement.children[0];
+        await userEvent.click(listItem);
+        await userEvent.tab();
+        await waitFor(() => {
+          expect(listboxElement).not.toBeInTheDocument();
+        });
+        const selectedOption = listboxElement.querySelector('[lang="fr"]');
+        await expect(selectedOption).toHaveTextContent("Français");
+
+        const frenchOptionElement =
+          within(listboxElement).getByText("Français");
+        expect(frenchOptionElement).toHaveAttribute("lang", "fr");
+
+        await waitFor(() => {
+          axeRun("Select Multiple Languages");
+        });
+      }
+    });
   },
 };
