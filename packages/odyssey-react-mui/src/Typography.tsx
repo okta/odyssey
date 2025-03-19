@@ -85,6 +85,10 @@ export type TypographyProps = {
    * The variant of Typography to render.
    */
   variant?: keyof typeof typographyVariantMapping;
+  /**
+   * If true, the component is presentational and should be ignored by screen readers.
+   */
+  isPresentational?: boolean;
 } & Pick<
   HtmlProps,
   | "ariaCurrent"
@@ -107,6 +111,7 @@ const Typography = ({
   translate,
   typographyRef,
   variant = "body",
+  isPresentational,
 }: TypographyProps) => {
   const component = useMemo(() => {
     if (!componentProp) {
@@ -147,6 +152,7 @@ const Typography = ({
       tabIndex={-1}
       translate={translate}
       variant={typographyVariantMapping[variant]}
+      role={isPresentational ? "presentation" : undefined}
     />
   );
 };
@@ -164,6 +170,7 @@ const Heading1 = ({
   component,
   testId,
   translate,
+  isPresentational,
 }: TypographyProps) => (
   <Typography
     ariaCurrent={ariaCurrent}
@@ -176,6 +183,7 @@ const Heading1 = ({
     testId={testId}
     translate={translate}
     variant="h1"
+    isPresentational={isPresentational}
   />
 );
 

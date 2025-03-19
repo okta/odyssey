@@ -31,6 +31,7 @@ import {
 } from "react";
 
 import type { HtmlProps } from "./HtmlProps.js";
+import { useUniqueId } from "./useUniqueId.js";
 
 export type DialogProps = {
   /**
@@ -100,6 +101,8 @@ const Dialog = ({
   const { t } = useTranslation();
   const [isContentScrollable, setIsContentScrollable] = useState(false);
   const dialogContentRef = useRef<HTMLDivElement>(null);
+  const dialogTitleId = useUniqueId();
+  const dialogLabelId = useUniqueId();
 
   useEffect(() => {
     let frameId: number;
@@ -139,9 +142,17 @@ const Dialog = ({
   ].filter(Boolean);
 
   return (
-    <MuiDialog data-se={testId} open={isOpen} onClose={onClose}>
-      <DialogTitle translate={translate}>
-        {title}
+    <MuiDialog
+      data-se={testId}
+      open={isOpen}
+      onClose={onClose}
+      aria-labelledby={dialogLabelId}
+    >
+      <DialogTitle
+        id={dialogTitleId} // We need to explicitly unset `id` for MUI to automatically set it based on the `aria-labelledby` prop passed to `MuiDialog`
+        translate={translate}
+      >
+        <span id={dialogLabelId}>{title}</span>
         <Button
           ariaLabel={t("close.text")}
           onClick={onClose}
