@@ -108,6 +108,51 @@ const optionsLarge = [
   },
 ];
 
+const optionsWithRightAdornment = [
+  {
+    value: "an",
+    label: "An Option label",
+    adornment: <FolderIcon />,
+    rightAdornment: {
+      content: <SettingsIcon />,
+      onClick: () => alert("Click on rightAdornment: an"),
+    },
+  },
+  {
+    value: "the",
+    label: "The Option label",
+    description: "Some optional descriptive text",
+    adornment: <GlobeIcon />,
+    rightAdornment: {
+      content: <SyncIcon />,
+      onClick: () => alert("Click on rightAdornment: the"),
+    },
+  },
+  {
+    value: "another",
+    label: "Another Option label",
+    description: "Some optional descriptive text",
+    adornment: <SettingsIcon />,
+    rightAdornment: {
+      content: <VideoIcon />,
+      onClick: () => alert("Click on rightAdornment: another"),
+    },
+    onClick: () => alert("Click on option item: another"),
+  },
+  {
+    value: "unselectable",
+    label: "Another Option label (Unselectable)",
+    description: "Some optional descriptive text",
+    isInteractive: false,
+    adornment: <SettingsIcon />,
+    rightAdornment: {
+      content: <VideoIcon />,
+      onClick: () => alert("Click on rightAdornment: another"),
+    },
+    onClick: () => alert("Click on option item: another"),
+  },
+];
+
 type PickerWithOptionAdornmentType = typeof PickerWithOptionAdornment<
   AdornmentOptionType,
   boolean,
@@ -235,5 +280,20 @@ export const MultiSelectDisabled: StoryObj<PickerWithOptionAdornmentPropsType> =
       isDisabled: true,
       hasMultipleChoices: true,
       value: [optionsSmall[0], optionsSmall[1]],
+    },
+  };
+
+export const SmallAdornmentWithRightAdornment: StoryObj<PickerWithOptionAdornmentPropsType> =
+  {
+    args: {
+      options: optionsWithRightAdornment,
+    },
+  };
+
+export const LargeAdornmentWithRightAdornment: StoryObj<PickerWithOptionAdornmentPropsType> =
+  {
+    args: {
+      adornmentSize: "large",
+      options: optionsWithRightAdornment,
     },
   };
