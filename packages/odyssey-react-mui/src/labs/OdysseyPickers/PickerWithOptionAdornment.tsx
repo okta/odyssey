@@ -45,16 +45,21 @@ import { Heading6 } from "../../Typography.js";
 import { Tag } from "../../Tag.js";
 
 type Adornment = ReactNode | string;
+type RightAdornment = {
+  content: ReactNode | string;
+  onClick: () => void;
+};
 
 type AdornmentLabelDescription = LabelDescription & {
   adornment: Adornment;
+  rightAdornment?: RightAdornment;
+  onClick?: () => void;
+  isInteractive?: boolean;
 };
 
-type AdornmentLabelDescriptionMetadata = AdornmentLabelDescription & Metadata;
+type CustomOptionType = AdornmentLabelDescription & Metadata;
 
-export type AdornmentOptionType =
-  | AdornmentLabelDescription
-  | AdornmentLabelDescriptionMetadata;
+export type AdornmentOptionType = AdornmentLabelDescription | CustomOptionType;
 
 const OptionAdornmentContainer = styled("div", {
   shouldForwardProp: (prop) =>
@@ -65,11 +70,13 @@ const OptionAdornmentContainer = styled("div", {
   adornmentSize?: AdornmentSize;
   isTagContainer?: boolean;
   odysseyDesignTokens: DesignTokens;
+  position?: "left" | "right";
 }>(
   ({
     adornmentSize = "small",
     isTagContainer = false,
     odysseyDesignTokens,
+    position = "left",
   }) => ({
     position: "relative",
     // push icon up by one px for better visual alignment
@@ -78,7 +85,13 @@ const OptionAdornmentContainer = styled("div", {
     width: odysseyDesignTokens.Spacing5,
     height: odysseyDesignTokens.Spacing5,
     overflow: "hidden",
-    marginInlineEnd: odysseyDesignTokens.Spacing3,
+
+    ...(position === "left" && {
+      marginInlineEnd: odysseyDesignTokens.Spacing3,
+    }),
+    ...(position === "right" && {
+      marginInlineStart: odysseyDesignTokens.Spacing3,
+    }),
 
     svg: {
       width: "100%",
@@ -121,31 +134,56 @@ type OptionAdornmentProps = {
   adornment: Adornment;
   adornmentSize: AdornmentSize;
   odysseyDesignTokens: DesignTokens;
+  position?: "left" | "right";
+  onClick?: () => void;
 };
+
+export const CustomOptionContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{ odysseyDesignTokens: DesignTokens }>(() => ({
+  display: "flex",
+  justifyContent: "space-between",
+  width: "100%",
+}));
+
+export const CustomOptionLeftContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{ odysseyDesignTokens: DesignTokens }>(() => ({
+  display: "flex",
+}));
 
 const OptionAdornment = ({
   adornment,
   adornmentSize,
   odysseyDesignTokens,
+  position = "left",
+  onClick,
 }: OptionAdornmentProps) => {
   const isImageAdornment = typeof adornment === "string";
+
+  const handleClick = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    onClick?.();
+  };
 
   if (isImageAdornment) {
     return (
       <OptionAdornmentContainer
+        position={position}
         adornmentSize={adornmentSize}
         odysseyDesignTokens={odysseyDesignTokens}
+        onClick={handleClick}
       >
-        {/* NOTE: Intentionally leaving alt as an empty string here so screen readers will ignore this image */}
-        {/* Image should be sufficiently described by the adjacent title and/or description of the option */}
         <img src={adornment} alt="" role="presentation" />
       </OptionAdornmentContainer>
     );
   } else {
     return (
       <OptionAdornmentContainer
+        position={position}
         adornmentSize={adornmentSize}
         odysseyDesignTokens={odysseyDesignTokens}
+        onClick={handleClick}
       >
         {adornment}
       </OptionAdornmentContainer>
@@ -153,37 +191,7 @@ const OptionAdornment = ({
   }
 };
 
-const OptionWithLabelDescriptionOnly = <
-  OptionType extends AdornmentLabelDescription,
->({
-  adornmentSize,
-  muiProps,
-  odysseyDesignTokens,
-  option,
-}: BaseOptionProps &
-  OptionProps<OptionType> & { adornmentSize: AdornmentSize }) => {
-  const { adornment, description, label, value } = option;
-  return (
-    <Option hasAdornment key={value} muiProps={muiProps}>
-      <OptionAdornment
-        adornment={adornment}
-        adornmentSize={adornmentSize}
-        odysseyDesignTokens={odysseyDesignTokens}
-      />
-      <OptionLabelContainer odysseyDesignTokens={odysseyDesignTokens}>
-        <Heading6 component="p">{label}</Heading6>
-        <OptionDescriptionComponent
-          description={description}
-          odysseyDesignTokens={odysseyDesignTokens}
-        />
-      </OptionLabelContainer>
-    </Option>
-  );
-};
-
-const OptionWithLabelDescriptionMetadata = <
-  OptionType extends AdornmentLabelDescriptionMetadata,
->({
+const CustomOption = <OptionType extends CustomOptionType>({
   adornmentSize,
   muiProps,
   odysseyDesignTokens,
@@ -192,28 +200,70 @@ const OptionWithLabelDescriptionMetadata = <
   OptionProps<OptionType> & {
     adornmentSize: AdornmentSize;
   }) => {
-  const { adornment, description, label, metaData, value } = option;
+  const {
+    adornment,
+    description,
+    label,
+    metaData,
+    rightAdornment,
+    value,
+    onClick,
+    isInteractive = true,
+  } = option;
+
+  const handleOptionClick = (event: React.MouseEvent) => {
+    if (!isInteractive) {
+      event.preventDefault();
+      return;
+    }
+    event.stopPropagation();
+    onClick?.();
+  };
 
   return (
-    <Option hasAdornment key={value} muiProps={muiProps}>
-      <OptionAdornment
-        adornment={adornment}
-        adornmentSize={adornmentSize}
-        odysseyDesignTokens={odysseyDesignTokens}
-      />
-      <div>
-        <OptionLabelContainer odysseyDesignTokens={odysseyDesignTokens}>
-          <Heading6 component="p">{label}</Heading6>
-          <OptionDescriptionComponent
-            description={description}
+    <Option
+      hasAdornment
+      key={value}
+      muiProps={{
+        ...muiProps,
+        onClick: isInteractive ? handleOptionClick : undefined,
+        "aria-disabled": !isInteractive ? "true" : undefined,
+        role: "option",
+      }}
+    >
+      <CustomOptionContainer odysseyDesignTokens={odysseyDesignTokens}>
+        <CustomOptionLeftContainer odysseyDesignTokens={odysseyDesignTokens}>
+          <OptionAdornment
+            adornment={adornment}
+            adornmentSize={adornmentSize}
             odysseyDesignTokens={odysseyDesignTokens}
           />
-        </OptionLabelContainer>
-        <OptionMetadataComponent
-          metaData={metaData}
-          odysseyDesignTokens={odysseyDesignTokens}
-        />
-      </div>
+          <div>
+            <OptionLabelContainer odysseyDesignTokens={odysseyDesignTokens}>
+              <Heading6 component="p">{label}</Heading6>
+              <OptionDescriptionComponent
+                description={description}
+                odysseyDesignTokens={odysseyDesignTokens}
+              />
+            </OptionLabelContainer>
+            {metaData && (
+              <OptionMetadataComponent
+                metaData={metaData}
+                odysseyDesignTokens={odysseyDesignTokens}
+              />
+            )}
+          </div>
+        </CustomOptionLeftContainer>
+        {rightAdornment && (
+          <OptionAdornment
+            position="right"
+            adornment={rightAdornment.content}
+            adornmentSize={adornmentSize}
+            odysseyDesignTokens={odysseyDesignTokens}
+            onClick={rightAdornment.onClick}
+          />
+        )}
+      </CustomOptionContainer>
     </Option>
   );
 };
@@ -268,7 +318,7 @@ type PickerWithOptionAdornmentComponentType = {
     >,
   ): ReactElement;
   <
-    OptionType extends AdornmentLabelDescriptionMetadata,
+    OptionType extends CustomOptionType,
     HasMultipleChoices extends boolean | undefined,
     IsCustomValueAllowed extends boolean | undefined,
   >(
@@ -281,7 +331,7 @@ type PickerWithOptionAdornmentComponentType = {
 };
 
 const PickerWithOptionAdornment: PickerWithOptionAdornmentComponentType = <
-  OptionType extends AdornmentOptionType,
+  OptionType extends CustomOptionType,
   HasMultipleChoices extends boolean | undefined,
   IsCustomValueAllowed extends boolean | undefined,
 >({
@@ -358,21 +408,8 @@ const PickerWithOptionAdornment: PickerWithOptionAdornmentComponentType = <
     (props: HTMLAttributes<HTMLLIElement>, option: OptionType) => ReactNode
   >(
     (muiProps, option) => {
-      const hasMetadata = "metaData" in option && option.metaData;
-
-      if (hasMetadata) {
-        return (
-          <OptionWithLabelDescriptionMetadata
-            adornmentSize={adornmentSize}
-            muiProps={muiProps}
-            odysseyDesignTokens={odysseyDesignTokens}
-            option={option}
-          />
-        );
-      }
-
       return (
-        <OptionWithLabelDescriptionOnly
+        <CustomOption
           adornmentSize={adornmentSize}
           muiProps={muiProps}
           odysseyDesignTokens={odysseyDesignTokens}
