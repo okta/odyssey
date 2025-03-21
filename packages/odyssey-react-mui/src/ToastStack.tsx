@@ -23,7 +23,7 @@ export type ToastListProps = {
 
 const ToastStack = ({ children }: ToastListProps) => {
   return (
-    <Snackbar open={true}>
+    <Snackbar open={true} role="status">
       <Box
         sx={{
           display: "flex",
