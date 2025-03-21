@@ -21,7 +21,7 @@ import {
 import { useCallback, useState } from "react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components/index.js";
-import { expect, userEvent, waitFor, within } from "@storybook/test";
+import { expect, userEvent, waitFor, within, configure } from "@storybook/test";
 import { axeRun } from "../../../axe-util.js";
 
 const meta = {
@@ -188,6 +188,7 @@ const Single: Story = {
             role={args.role}
             severity={args.severity}
             text={args.text}
+            testId="toast"
           />
         </ToastStack>
       </>
@@ -243,6 +244,8 @@ export const Dismissible: Story = {
     linkUrl: "#",
   },
   play: async ({ args, canvasElement, step }) => {
+    configure({ testIdAttribute: "data-se" });
+
     const canvas = within(canvasElement);
     await step(`open Dismissible Toast}`, async () => {
       await waitFor(async () => {
@@ -262,7 +265,7 @@ export const Dismissible: Story = {
 
     await step("dismiss toast and reopen", async () => {
       await waitFor(async () => {
-        const toastElement = canvas.getByRole("status");
+        const toastElement = canvas.getByTestId("toast");
         if (toastElement) {
           const dismissToastButton = within(toastElement).getByRole("button", {
             name: "Close",
@@ -344,7 +347,7 @@ export const MultipleToasts: Story = {
           onClick={addToast}
           variant="primary"
         />
-        <ToastStack>{toasts}</ToastStack>
+        <ToastStack ariaLive="polite">{toasts}</ToastStack>
       </>
     );
   },
