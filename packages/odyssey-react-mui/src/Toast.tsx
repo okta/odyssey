@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useEffect, memo, useState, useCallback } from "react";
+import { useEffect, memo, useState, useCallback, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert, AlertTitle, Snackbar } from "@mui/material";
 
@@ -70,7 +70,7 @@ export type ToastProps = {
   /**
    * The text content of the Toast
    */
-  text: string;
+  text: string | ReactNode;
 } & Pick<HtmlProps, "testId" | "translate">;
 
 const ClickAwayListenerProps = { onClickAway: () => false };
