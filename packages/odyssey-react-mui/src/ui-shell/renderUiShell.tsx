@@ -45,6 +45,7 @@ export const renderUiShell = ({
   appBackgroundContrastMode,
   appElement: providedAppElement,
   appElementScrollingMode,
+  breakpointConfig,
   hasStandardAppContentPadding,
   initialVisibleSections,
   onError = console.error,
@@ -65,6 +66,7 @@ export const renderUiShell = ({
   | "appBackgroundColor"
   | "appBackgroundContrastMode"
   | "appElementScrollingMode"
+  | "breakpointConfig"
   | "hasStandardAppContentPadding"
   | "initialVisibleSections"
   | "sideNavBackgroundColor"
@@ -118,6 +120,7 @@ export const renderUiShell = ({
     getReactComponent: (reactRootElements) => (
       <ErrorBoundary fallback={<div data-error />} onError={onError}>
         <UiShell
+          breakpointConfig={breakpointConfig}
           appBackgroundColor={appBackgroundColor}
           appBackgroundContrastMode={appBackgroundContrastMode}
           appElement={appElement}

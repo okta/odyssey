@@ -22,7 +22,10 @@ import {
   UiShellNavComponentProps,
   UiShellContentProps,
 } from "./uiShellContentTypes.js";
-import { useUiShellBreakpoints } from "./useUiShellBreakpoints.js";
+import {
+  UiShellBreakpointConfig,
+  useUiShellBreakpoints,
+} from "./useUiShellBreakpoints.js";
 import { WideUiShellContent } from "./WideUiShellContent.js";
 import { MessageBus } from "./createMessageBus.js";
 
@@ -34,6 +37,12 @@ export const defaultComponentProps: UiShellNavComponentProps = {
 const errorComponent = <div data-error />;
 
 export type UiShellProps = {
+  /**
+   * Customized breakpoints for UI Shell.
+   *
+   * The defaults are set for you. Pass these only if your app doesn't work properly with the defaults (like Admin).
+   */
+  breakpointConfig?: UiShellBreakpointConfig;
   /**
    * Notifies when subscribed to prop changes.
    *
@@ -80,6 +89,7 @@ const UiShell = ({
   appBackgroundContrastMode,
   appElement,
   appElementScrollingMode,
+  breakpointConfig,
   closeSideNavMenu,
   hasStandardAppContentPadding,
   initialVisibleSections,
@@ -96,7 +106,7 @@ const UiShell = ({
 }: UiShellProps) => {
   const [componentProps, setComponentProps] = useState(defaultComponentProps);
 
-  const activeBreakpoint = useUiShellBreakpoints();
+  const activeBreakpoint = useUiShellBreakpoints(breakpointConfig);
 
   useEffect(() => {
     const unsubscribe = subscribeToPropChanges((componentProps) => {

@@ -12,25 +12,36 @@
 
 import { useMediaQuery } from "../theme/useMediaQuery.js";
 
-export const uiShellBreakpoint = {
+export type UiShellBreakpointConfig = Record<
+  "comfortable" | "compact" | "constrained",
+  number
+>;
+
+export const defaultUiShellBreakpointConfig = {
   comfortable: 800,
   compact: 600,
   constrained: 0,
-} as const;
+} as const satisfies UiShellBreakpointConfig;
 
-export const useUiShellBreakpoints = ():
-  | keyof typeof uiShellBreakpoint
-  | "none" => {
+export const adminAppUiShellBreakpoints = {
+  comfortable: 1304,
+  compact: 600,
+  constrained: 0,
+} as const satisfies UiShellBreakpointConfig;
+
+export const useUiShellBreakpoints = (
+  breakpointConfig: UiShellBreakpointConfig = defaultUiShellBreakpointConfig,
+): keyof UiShellBreakpointConfig | "none" => {
   const isConstrainedView = useMediaQuery(
-    `(min-width: ${uiShellBreakpoint.constrained}px)`,
+    `(min-width: ${breakpointConfig.constrained}px)`,
   );
 
   const isCompactView = useMediaQuery(
-    `(min-width: ${uiShellBreakpoint.compact}px)`,
+    `(min-width: ${breakpointConfig.compact}px)`,
   );
 
   const isComfortableView = useMediaQuery(
-    `(min-width: ${uiShellBreakpoint.comfortable}px)`,
+    `(min-width: ${breakpointConfig.comfortable}px)`,
   );
 
   if (isComfortableView) {
