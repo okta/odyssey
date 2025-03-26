@@ -10,17 +10,27 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
-export const useMediaQuery = (mediaQuery: string) => {
-  const [hasMatches, setHasMatches] = useState(false);
+import { StringWithValue } from "./StringWithValue.js";
+
+export const useMediaQuery = <MediaQuery extends string>(
+  mediaQuery: StringWithValue<MediaQuery>,
+) => {
+  const mediaQueryList = useMemo(
+    () => window.matchMedia(mediaQuery),
+    [mediaQuery],
+  );
+
+  const [hasMatches, setHasMatches] = useState(() => mediaQueryList.matches);
+
+  const updateHasMatches = useCallback(
+    (event: MediaQueryListEvent | MediaQueryList) =>
+      setHasMatches(event.matches),
+    [],
+  );
 
   useEffect(() => {
-    const mediaQueryList = window.matchMedia(mediaQuery);
-
-    const updateHasMatches = (event: MediaQueryListEvent | MediaQueryList) =>
-      setHasMatches(event.matches);
-
     mediaQueryList.addEventListener("change", updateHasMatches);
 
     updateHasMatches(mediaQueryList);
@@ -28,7 +38,7 @@ export const useMediaQuery = (mediaQuery: string) => {
     return () => {
       mediaQueryList.removeEventListener("change", updateHasMatches);
     };
-  }, [hasMatches, mediaQuery]);
+  }, [mediaQueryList]);
 
   return hasMatches;
 };
