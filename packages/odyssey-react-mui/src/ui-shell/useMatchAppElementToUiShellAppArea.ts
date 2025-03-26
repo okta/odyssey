@@ -101,12 +101,14 @@ export const useMatchAppElementToUiShellAppArea = ({
             paddingInline: odysseyDesignTokens.Spacing8,
           }
         : {}),
+
       ...(paddingMode === "compact"
         ? {
             paddingBlock: odysseyDesignTokens.Spacing5,
             paddingInline: odysseyDesignTokens.Spacing5,
           }
         : {}),
+
       ...(appElementScrollingMode === "horizontal" ||
       appElementScrollingMode === "both"
         ? {
@@ -115,6 +117,7 @@ export const useMatchAppElementToUiShellAppArea = ({
         : {
             overflowX: "hidden",
           }),
+
       ...(appElementScrollingMode === "vertical" ||
       appElementScrollingMode === "both"
         ? {
