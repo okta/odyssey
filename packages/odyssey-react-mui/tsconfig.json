@@ -9,7 +9,7 @@
     "rootDir": "src",
     "outDir": "dist/types",
     "sourceMap": true,
-    "types": ["happy-dom", "vitest/globals"]
+    "types": ["vitest/globals"]
   },
   "include": ["*", "**/src/**/*", "**/properties/**/*", "**/scripts/**/*"],
   "exclude": ["**/dist/**/*"]
