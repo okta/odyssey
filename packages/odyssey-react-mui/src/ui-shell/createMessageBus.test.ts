@@ -12,7 +12,7 @@
 
 import { createMessageBus } from "./createMessageBus.js";
 
-describe("createEventBus", () => {
+describe(createMessageBus.name, () => {
   test("messages are not sent once unsubscribed", () => {
     const { publish, subscribe } = createMessageBus<null>();
 

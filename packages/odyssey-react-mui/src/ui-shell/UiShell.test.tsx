@@ -15,7 +15,7 @@ import { render, waitFor, within } from "@testing-library/react";
 import { defaultComponentProps, UiShell, UiShellProps } from "./UiShell.js";
 import { ReactElement } from "react";
 
-describe("UiShell", () => {
+describe(UiShell.name, () => {
   test("renders `uiShellStylesElement`", () => {
     const appElement = document.createElement("div");
 

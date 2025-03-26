@@ -12,7 +12,7 @@
 
 import { createUniqueId, uniqueIdLength } from "./createUniqueId.js";
 
-describe("createUniqueId", () => {
+describe(createUniqueId.name, () => {
   test("returns a nice id string", () => {
     const result = createUniqueId();
 

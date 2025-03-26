@@ -12,7 +12,7 @@
 
 import { createUniqueAlphabeticalId } from "./createUniqueAlphabeticalId.js";
 
-describe("createUniqueAlphabeticalId", () => {
+describe(createUniqueAlphabeticalId.name, () => {
   test("only has lowercase letters", () => {
     const uniqueAlphabeticalId = createUniqueAlphabeticalId();
 

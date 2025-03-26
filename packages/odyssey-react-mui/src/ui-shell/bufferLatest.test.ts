@@ -13,7 +13,7 @@
 import { bufferLatest } from "./bufferLatest.js";
 import { createMessageBus } from "./createMessageBus.js";
 
-describe("bufferLatest", () => {
+describe(bufferLatest.name, () => {
   test("calls subscriber after ready", () => {
     const { publish: publish1, subscribe: subscribe1 } = createMessageBus();
 

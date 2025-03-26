@@ -12,7 +12,7 @@
 
 import { createReactRootElements } from "./createReactRootElements.js";
 
-describe("createReactRootElements", () => {
+describe(createReactRootElements.name, () => {
   test("returns two elements at attach to a Shadow DOM", () => {
     const { appRootElement, stylesRootElement } = createReactRootElements();
 

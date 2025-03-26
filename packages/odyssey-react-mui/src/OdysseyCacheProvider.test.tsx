@@ -16,7 +16,7 @@ import { Button } from "./index.js";
 import { OdysseyCacheProvider } from "./OdysseyCacheProvider.js";
 
 // This component needs to be tested, even if it doesn't make much sense, because it can't be loaded by Storybook; therefore, any issues will only be seen by consumers of Odyssey.
-describe("OdysseyCacheProvider", () => {
+describe(OdysseyCacheProvider.name, () => {
   it("renders without crashing the app", () => {
     expect(() =>
       render(
