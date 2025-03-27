@@ -347,7 +347,7 @@ export const MultipleToasts: Story = {
           onClick={addToast}
           variant="primary"
         />
-        <ToastStack ariaLive="polite">{toasts}</ToastStack>
+        <ToastStack>{toasts}</ToastStack>
       </>
     );
   },
