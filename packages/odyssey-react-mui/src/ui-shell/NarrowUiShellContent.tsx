@@ -60,6 +60,7 @@ const StyledAppContentArea = styled("div")({
   gridTemplateColumns: "auto 1fr auto",
   gridTemplateRows: "1fr",
   height: "100%",
+  pointerEvents: "none",
   width: "100%",
 });
 

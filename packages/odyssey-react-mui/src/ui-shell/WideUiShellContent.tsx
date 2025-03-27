@@ -39,6 +39,7 @@ const StyledAppContainer = styled("div", {
 }>(({ appBackgroundColor }) => ({
   backgroundColor: appBackgroundColor,
   gridArea: "app-content",
+  pointerEvents: "none",
   position: "relative",
 }));
 
