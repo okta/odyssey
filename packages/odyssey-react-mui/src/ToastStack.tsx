@@ -13,17 +13,18 @@
 import { memo, ReactElement } from "react";
 import { Box, Snackbar } from "@mui/material";
 import { Toast } from "./Toast.js";
+import { HtmlProps } from "./HtmlProps.js";
 
 export type ToastListProps = {
   /**
    * The Toast or array of Toasts within the ToastStack
    */
   children: ReactElement<typeof Toast> | Array<ReactElement<typeof Toast>>;
-};
+} & Pick<HtmlProps, "role">;
 
-const ToastStack = ({ children }: ToastListProps) => {
+const ToastStack = ({ children, role = "status" }: ToastListProps) => {
   return (
-    <Snackbar open={true}>
+    <Snackbar open={true} role={role}>
       <Box
         sx={{
           display: "flex",

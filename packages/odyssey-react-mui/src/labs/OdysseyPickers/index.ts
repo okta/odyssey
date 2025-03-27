@@ -13,3 +13,8 @@
 export { adornmentSizeValues } from "./ComposablePicker.js";
 export * from "./Picker.js";
 export * from "./PickerWithOptionAdornment.js";
+export { SearchDropdown } from "./SearchDropdown.js";
+export type {
+  SearchDropdownProps,
+  CustomOptionType,
+} from "./SearchDropdown.js";
