@@ -33,27 +33,25 @@ export const adminAppUiShellBreakpoints = {
 export const useUiShellBreakpoints = (
   breakpointConfig: UiShellBreakpointConfig = defaultUiShellBreakpointConfig,
 ): keyof UiShellBreakpointConfig | "none" => {
-  const isConstrainedView = useMediaQuery(
+  const isNarrowView = useMediaQuery(
     `(min-width: ${breakpointConfig.narrow}px)`,
   );
 
-  const isCompactView = useMediaQuery(
+  const isMediumView = useMediaQuery(
     `(min-width: ${breakpointConfig.medium}px)`,
   );
 
-  const isComfortableView = useMediaQuery(
-    `(min-width: ${breakpointConfig.wide}px)`,
-  );
+  const isWideView = useMediaQuery(`(min-width: ${breakpointConfig.wide}px)`);
 
-  if (isComfortableView) {
+  if (isWideView) {
     return "wide";
   }
 
-  if (isCompactView) {
+  if (isMediumView) {
     return "medium";
   }
 
-  if (isConstrainedView) {
+  if (isNarrowView) {
     return "narrow";
   }
 
