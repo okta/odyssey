@@ -94,16 +94,6 @@ export type HtmlProps = {
    */
   ariaPressed?: HTMLAttributes<HTMLElement>["aria-pressed"];
   /**
-   * The `aria-live` attribute indicates how updates to the content of an element should be announced
-   * by assistive technologies. It is used to define the priority of updates in live regions.
-   *
-   * Possible values:
-   * - `off`: Updates are not announced.
-   * - `polite`: Updates are announced when the user is idle.
-   * - `assertive`: Updates are announced immediately, interrupting the user if necessary.
-   */
-  ariaLive?: HTMLAttributes<HTMLElement>["aria-live"];
-  /**
    * The `tabindex` global attribute allows developers to make HTML elements focusable, allow or prevent them from being sequentially focusable
    *
    * Note: Manipulating the natural tab order is generally advised against
