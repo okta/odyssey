@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.35.1](https://github.com/okta/odyssey/compare/v1.35.0...v1.35.1) (2025-03-27)
+
+### Bug Fixes
+
+- adds customizable UI Shell breakpoints for Admin ([#2519](https://github.com/okta/odyssey/issues/2519)) ([44920c3](https://github.com/okta/odyssey/commit/44920c3e52172b56c97c30f16a759713aa4c0236))
+- adds inner shadow to app container and not top nav ([#2520](https://github.com/okta/odyssey/issues/2520)) ([d18b350](https://github.com/okta/odyssey/commit/d18b35078714ceb73195661ace04ea83fb6627b4))
+
 ## [1.35.0](https://github.com/okta/odyssey/compare/v1.32.4...v1.35.0) (2025-03-27)
 
 ### Features
