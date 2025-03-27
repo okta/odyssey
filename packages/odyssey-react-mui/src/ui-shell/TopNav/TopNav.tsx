@@ -37,18 +37,13 @@ const StyledRightSideContainer = styled("div")(() => ({
 
 const StyledTopNavContainer = styled("div", {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" &&
-    prop !== "isScrolled" &&
-    prop !== "topNavBackgroundColor",
+    prop !== "odysseyDesignTokens" && prop !== "topNavBackgroundColor",
 })<{
-  isScrolled?: boolean;
   odysseyDesignTokens: DesignTokens;
   topNavBackgroundColor?: UiShellColors["topNavBackgroundColor"];
-}>(({ odysseyDesignTokens, isScrolled, topNavBackgroundColor }) => ({
+}>(({ odysseyDesignTokens, topNavBackgroundColor }) => ({
   alignItems: "center",
   backgroundColor: topNavBackgroundColor,
-  boxShadow: isScrolled ? odysseyDesignTokens.DepthMedium : undefined,
-  clipPath: "inset(0 0 -100vh 0)",
   display: "flex",
   gap: odysseyDesignTokens.Spacing4,
   height: "100%",
@@ -81,18 +76,13 @@ export type TopNavProps = {
   rightSideComponent?: ReactElement;
 } & Pick<HtmlProps, "testId">;
 
-const TopNav = ({
-  isScrolled,
-  leftSideComponent,
-  rightSideComponent,
-}: TopNavProps) => {
+const TopNav = ({ leftSideComponent, rightSideComponent }: TopNavProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const uiShellContext = useUiShellContext();
 
   return (
     <StyledTopNavContainer
       odysseyDesignTokens={odysseyDesignTokens}
-      isScrolled={isScrolled}
       topNavBackgroundColor={uiShellContext?.topNavBackgroundColor}
     >
       <StyledLeftSideContainer>
