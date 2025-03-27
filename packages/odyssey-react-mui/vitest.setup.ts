@@ -11,16 +11,21 @@
  */
 
 import { PropertySymbol } from "happy-dom";
+import type DetachedWindowAPI from "happy-dom/lib/window/DetachedWindowAPI.js";
 import "@testing-library/jest-dom/vitest";
 import "jest-axe/extend-expect";
 import "regenerator-runtime/runtime";
 
+declare global {
+  // Hack to ensure `happyDOM` is seen on the global `Window` by TypeScript.
+  // eslint-disable-next-line no-var
+  var happyDOM: DetachedWindowAPI;
+}
+
+// This is straight from the Happy-DOM docs: https://github.com/capricorn86/happy-dom/wiki/Setup-as-Test-Environment
 /* eslint-disable */
-const browserWindow =
-  // @ts-expect-error
-  global.document[PropertySymbol.ownerWindow] ||
-  // @ts-expect-error
-  global.document[PropertySymbol.window];
+// @ts-expect-error TypeScript doesn't like this, but Happy-DOM requires it.
+const browserWindow = global.document[PropertySymbol.window];
 
 global.setTimeout = browserWindow.setTimeout;
 global.clearTimeout = browserWindow.clearTimeout;

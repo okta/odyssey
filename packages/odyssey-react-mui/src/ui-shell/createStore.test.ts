@@ -12,7 +12,7 @@
 
 import { createStore } from "./createStore.js";
 
-describe("createStore", () => {
+describe(createStore.name, () => {
   test("starts with no initial state", () => {
     const store = createStore<{
       value: null;

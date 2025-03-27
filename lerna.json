@@ -1,6 +1,7 @@
 {
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
   "changelogPreset": "@okta/conventional-changelog-odyssey",
+  "exact": true,
   "npmClient": "yarn",
   "packages": ["packages/*"],
   "useNx": false,

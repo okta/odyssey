@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -10,13 +10,4 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createUniqueAlphabeticalId } from "./createUniqueAlphabeticalId.js";
-
-describe(createUniqueAlphabeticalId.name, () => {
-  test("only has lowercase letters", () => {
-    const uniqueAlphabeticalId = createUniqueAlphabeticalId();
-
-    expect(uniqueAlphabeticalId.match(/[a-z]/)).not.toBeNull();
-    expect(uniqueAlphabeticalId.toLowerCase()).toBe(uniqueAlphabeticalId);
-  });
-});
+export type StringWithValue<T extends string> = T extends "" ? never : T;

@@ -17,7 +17,9 @@ export * from "./SideNav/index.js";
 export * from "./TopNav/index.js";
 export * from "./uiShellContentTypes.js";
 export * from "./useHasUiShell.js";
-export * from "../web-component/renderReactInWebComponent.js"; // This is located here because some teams use React v17, and this uses React v18's `ReactDOM/client` import which isn't in older versions.
 export * from "./WideUiShellContent.js";
 
+export * from "../web-component/renderReactInWebComponent.js"; // This is located here because some teams use React v17, and this uses React v18's `ReactDOM/client` import which isn't in older versions.
+
 export { UiShell, type UiShellProps } from "./UiShell.js";
+export { adminAppUiShellBreakpoints } from "./useUiShellBreakpoints.js";
