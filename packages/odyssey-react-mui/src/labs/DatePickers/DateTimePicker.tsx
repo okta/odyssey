@@ -281,6 +281,7 @@ const DateTimePicker = ({
             />
           </DatePickerWidthContainer>
         </DatePickerContainer>
+
         {timeZoneOptions && timeZonePickerLabel && (
           <TimeZonePickerContainer odysseyDesignTokens={odysseyDesignTokens}>
             <TimeZonePicker
