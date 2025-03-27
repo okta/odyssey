@@ -11,6 +11,7 @@
  */
 
 export * from "./AppSwitcher/index.js";
+export * from "./InnerAppContainer.js";
 export * from "./NarrowUiShellContent.js";
 export * from "./renderUiShell.js";
 export * from "./SideNav/index.js";
