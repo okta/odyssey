@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.35.0](https://github.com/okta/odyssey/compare/v1.32.4...v1.35.0) (2025-03-27)
+
+### Features
+
+- add noninteractive mode to breadcrumb item (by making href optional) ([#2504](https://github.com/okta/odyssey/issues/2504)) ([fcc235c](https://github.com/okta/odyssey/commit/fcc235c19eaba1efde4eeff958e16645d28b6b8f))
+- add SearchDropdown component ([#2517](https://github.com/okta/odyssey/issues/2517)) ([41eed3d](https://github.com/okta/odyssey/commit/41eed3d6a39c70083a03c9f59b6b7e5776107f04))
+
+### Bug Fixes
+
+- closing right-side menu outside of UI Shell ([#2514](https://github.com/okta/odyssey/issues/2514)) ([815c6ae](https://github.com/okta/odyssey/commit/815c6ae4582e83bc0c2bb0fe6f7e6deb6ddf3e28))
+- fixes DateTimePicker integration test ([3d9baac](https://github.com/okta/odyssey/commit/3d9baacd1a6ae8bd5854a7ff8741d844dbd42244))
+- fixes DateTimePicker timing issue in Storybook integration test ([6d4e582](https://github.com/okta/odyssey/commit/6d4e5829cb460ed369d9009ec805a18014683a50))
+- optional side nav in Narrow UI Shell ([#2515](https://github.com/okta/odyssey/issues/2515)) ([7528894](https://github.com/okta/odyssey/commit/7528894c81abb02011c034fd8aadfb49a7018b7e))
+
+## [1.34.0](https://github.com/okta/odyssey/compare/v1.32.4...v1.34.0) (2025-03-17)
+
+### Features
+
+- add noninteractive mode to breadcrumb item (by making href optional) ([#2504](https://github.com/okta/odyssey/issues/2504)) ([fcc235c](https://github.com/okta/odyssey/commit/fcc235c19eaba1efde4eeff958e16645d28b6b8f))
+
+### Bug Fixes
+
+- closing right-side menu outside of UI Shell ([#2514](https://github.com/okta/odyssey/issues/2514)) ([815c6ae](https://github.com/okta/odyssey/commit/815c6ae4582e83bc0c2bb0fe6f7e6deb6ddf3e28))
+- optional side nav in Narrow UI Shell ([#2515](https://github.com/okta/odyssey/issues/2515)) ([7528894](https://github.com/okta/odyssey/commit/7528894c81abb02011c034fd8aadfb49a7018b7e))
+
+## [1.33.0](https://github.com/okta/odyssey/compare/v1.32.4...v1.33.0) (2025-02-27)
+
+### Features
+
+- add noninteractive mode to breadcrumb item (by making href optional) ([#2504](https://github.com/okta/odyssey/issues/2504)) ([fcc235c](https://github.com/okta/odyssey/commit/fcc235c19eaba1efde4eeff958e16645d28b6b8f))
+
+## [1.32.5](https://github.com/okta/odyssey/compare/v1.32.0...v1.32.5) (2025-02-13)
+
+### Bug Fixes
+
+- fixes MenuButton axe timing ([10fc426](https://github.com/okta/odyssey/commit/10fc426d992159aba669eacae190aa036ed635fc))
+
 ## [1.32.4](https://github.com/okta/odyssey/compare/v1.32.0...v1.32.4) (2025-02-10)
 
 ### Bug Fixes
