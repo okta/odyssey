@@ -16,6 +16,7 @@ import {
   ReactElement,
   ReactNode,
   useCallback,
+  useMemo,
 } from "react";
 import styled from "@emotion/styled";
 
@@ -183,10 +184,13 @@ const OptionAdornment = ({
 };
 
 const Extra = ({ content, size, odysseyDesignTokens, onClick }: ExtraProps) => {
-  const handleClick = (event: React.MouseEvent) => {
-    event.stopPropagation();
-    onClick();
-  };
+  const handleClick = useCallback(
+    (event: React.MouseEvent) => {
+      event.stopPropagation();
+      onClick();
+    },
+    [onClick],
+  );
 
   return (
     <OptionAdornmentContainer
@@ -219,26 +223,29 @@ const CustomOption = <OptionType extends CustomOptionType>({
     isInteractive = true,
   } = option;
 
-  const handleOptionClick = (event: React.MouseEvent) => {
-    if (!isInteractive) {
-      event.preventDefault();
-      return;
-    }
-    event.stopPropagation();
-    onClick?.();
-  };
+  const handleOptionClick = useCallback(
+    (event: React.MouseEvent) => {
+      if (!isInteractive) {
+        event.preventDefault();
+        return;
+      }
+      event.stopPropagation();
+      onClick?.();
+    },
+    [onClick, isInteractive],
+  );
+
+  const extendedMuiProps = useMemo(() => {
+    return {
+      ...muiProps,
+      onClick: isInteractive ? handleOptionClick : undefined,
+      "aria-disabled": !isInteractive ? "true" : undefined,
+      role: "option",
+    } as HTMLAttributes<HTMLLIElement>;
+  }, [muiProps, isInteractive, handleOptionClick]);
 
   return (
-    <Option
-      hasAdornment
-      key={value}
-      muiProps={{
-        ...muiProps,
-        onClick: isInteractive ? handleOptionClick : undefined,
-        "aria-disabled": !isInteractive ? "true" : undefined,
-        role: "option",
-      }}
-    >
+    <Option hasAdornment key={value} muiProps={extendedMuiProps}>
       <CustomOptionContainer odysseyDesignTokens={odysseyDesignTokens}>
         <CustomOptionLeftContainer odysseyDesignTokens={odysseyDesignTokens}>
           <OptionAdornment
