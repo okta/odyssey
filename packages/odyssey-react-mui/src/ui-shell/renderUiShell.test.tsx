@@ -18,7 +18,7 @@ import {
   reactWebComponentElementName,
 } from "../web-component/renderReactInWebComponent.js";
 
-describe("renderUiShell", () => {
+describe(renderUiShell.name, () => {
   afterEach(() => {
     // This needs to be wrapped in `act` because the web component unmounts the React app, and React events have to be wrapped in `act`.
     act(() => {

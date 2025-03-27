@@ -18,7 +18,7 @@ import {
   renderReactInWebComponent,
 } from "./renderReactInWebComponent.js";
 
-describe("renderReactInWebComponent", () => {
+describe(renderReactInWebComponent.name, () => {
   afterEach(() => {
     // Remove any appended elements
     document.body.innerHTML = "";

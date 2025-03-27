@@ -15,7 +15,7 @@ import { userEvent } from "@testing-library/user-event";
 import { SideNav } from "./SideNav.js";
 import { OdysseyProvider } from "../../OdysseyProvider.js";
 
-describe("SideNav", () => {
+describe(SideNav.name, () => {
   test("can show the default Okta logo", () => {
     render(
       <OdysseyProvider>

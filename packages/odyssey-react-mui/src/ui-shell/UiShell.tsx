@@ -22,7 +22,10 @@ import {
   UiShellNavComponentProps,
   UiShellContentProps,
 } from "./uiShellContentTypes.js";
-import { useUiShellBreakpoints } from "./useUiShellBreakpoints.js";
+import {
+  UiShellBreakpointConfig,
+  useUiShellBreakpoints,
+} from "./useUiShellBreakpoints.js";
 import { WideUiShellContent } from "./WideUiShellContent.js";
 import { MessageBus } from "./createMessageBus.js";
 
@@ -34,6 +37,12 @@ export const defaultComponentProps: UiShellNavComponentProps = {
 const errorComponent = <div data-error />;
 
 export type UiShellProps = {
+  /**
+   * Customized breakpoints for UI Shell.
+   *
+   * The defaults are set for you. Pass these only if your app doesn't work properly with the defaults (like Admin).
+   */
+  breakpointConfig?: UiShellBreakpointConfig;
   /**
    * Notifies when subscribed to prop changes.
    *
@@ -80,6 +89,7 @@ const UiShell = ({
   appBackgroundContrastMode,
   appElement,
   appElementScrollingMode,
+  breakpointConfig,
   closeSideNavMenu,
   hasStandardAppContentPadding,
   initialVisibleSections,
@@ -96,7 +106,7 @@ const UiShell = ({
 }: UiShellProps) => {
   const [componentProps, setComponentProps] = useState(defaultComponentProps);
 
-  const activeBreakpoint = useUiShellBreakpoints();
+  const activeBreakpoint = useUiShellBreakpoints(breakpointConfig);
 
   useEffect(() => {
     const unsubscribe = subscribeToPropChanges((componentProps) => {
@@ -129,7 +139,7 @@ const UiShell = ({
             subscribeToCloseSideNavMenu={subscribeToCloseSideNavMenu}
             topNavBackgroundColor={topNavBackgroundColor}
           >
-            {activeBreakpoint === "constrained" && (
+            {activeBreakpoint === "narrow" && (
               <NarrowUiShellContent
                 {...componentProps}
                 appElement={appElement}
@@ -141,8 +151,7 @@ const UiShell = ({
               />
             )}
 
-            {(activeBreakpoint === "compact" ||
-              activeBreakpoint === "comfortable") && (
+            {(activeBreakpoint === "medium" || activeBreakpoint === "wide") && (
               <WideUiShellContent
                 {...{
                   ...componentProps,
@@ -151,10 +160,10 @@ const UiShell = ({
                         sideNavProps: {
                           ...componentProps.sideNavProps,
                           isCollapsed:
-                            activeBreakpoint === "compact" ||
+                            activeBreakpoint === "medium" ||
                             componentProps.sideNavProps?.isCollapsed,
                           isCollapsible:
-                            activeBreakpoint === "compact" ||
+                            activeBreakpoint === "medium" ||
                             componentProps.sideNavProps?.isCollapsible,
                           // We have to use `as` because sideNavProps expects you to have `sideNavItems` defined even though it had to be passed in `...componentProps.sideNavProps`.
                         } as typeof componentProps.sideNavProps,

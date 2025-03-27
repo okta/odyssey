@@ -12,39 +12,49 @@
 
 import { useMediaQuery } from "../theme/useMediaQuery.js";
 
-export const uiShellBreakpoint = {
-  comfortable: 800,
-  compact: 600,
-  constrained: 0,
-} as const;
+export type UiShellBreakpointConfig = {
+  narrow: number;
+  medium: number;
+  wide: number;
+};
 
-export const useUiShellBreakpoints = ():
-  | keyof typeof uiShellBreakpoint
-  | "none" => {
-  const isConstrainedView = useMediaQuery(
-    `(min-width: ${uiShellBreakpoint.constrained}px)`,
+export const defaultUiShellBreakpointConfig = {
+  narrow: 0,
+  medium: 600,
+  wide: 800,
+} as const satisfies UiShellBreakpointConfig;
+
+export const adminAppUiShellBreakpoints = {
+  narrow: 0,
+  medium: 600,
+  wide: 1304,
+} as const satisfies UiShellBreakpointConfig;
+
+export const useUiShellBreakpoints = (
+  breakpointConfig: UiShellBreakpointConfig = defaultUiShellBreakpointConfig,
+): keyof UiShellBreakpointConfig | "none" => {
+  const isNarrowView = useMediaQuery(
+    `(min-width: ${breakpointConfig.narrow}px)`,
   );
 
-  const isCompactView = useMediaQuery(
-    `(min-width: ${uiShellBreakpoint.compact}px)`,
+  const isMediumView = useMediaQuery(
+    `(min-width: ${breakpointConfig.medium}px)`,
   );
 
-  const isComfortableView = useMediaQuery(
-    `(min-width: ${uiShellBreakpoint.comfortable}px)`,
-  );
+  const isWideView = useMediaQuery(`(min-width: ${breakpointConfig.wide}px)`);
 
-  if (isComfortableView) {
-    return "comfortable";
+  if (isWideView) {
+    return "wide";
   }
 
-  if (isCompactView) {
-    return "compact";
+  if (isMediumView) {
+    return "medium";
   }
 
-  if (isConstrainedView) {
-    return "constrained";
+  if (isNarrowView) {
+    return "narrow";
   }
 
-  // For the initial page load as we don't have media queries until the page loads.
+  // This is a failsafe in case we don't have any media queries on page load or if media queries were improperly defined (no `0` case). With the default breakpoints, it will never be `"none"`.
   return "none";
 };
