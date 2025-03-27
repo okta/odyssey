@@ -15,18 +15,19 @@ import { memo, useRef } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 import { AppSwitcher } from "./AppSwitcher/index.js";
+import { InnerAppContainer } from "./InnerAppContainer.js";
 import {
   useOdysseyDesignTokens,
   type DesignTokens,
 } from "../OdysseyDesignTokensContext.js";
-import {
-  UiShellNavComponentProps,
-  UiShellContentProps,
-} from "./uiShellContentTypes.js";
 import { SideNav } from "./SideNav/index.js";
 import { TopNav } from "./TopNav/index.js";
 import { useScrollState } from "./useScrollState.js";
 import { useMatchAppElementToUiShellAppArea } from "./useMatchAppElementToUiShellAppArea.js";
+import {
+  UiShellNavComponentProps,
+  UiShellContentProps,
+} from "./uiShellContentTypes.js";
 import { UiShellColors, useUiShellContext } from "./UiShellProvider.js";
 import { emptySideNavItems } from "./uiShellSharedConstants.js";
 
@@ -36,8 +37,10 @@ const StyledAppContainer = styled("div", {
 })<{
   appBackgroundColor?: UiShellColors["appBackgroundColor"];
 }>(({ appBackgroundColor }) => ({
-  gridArea: "app-content",
   backgroundColor: appBackgroundColor,
+  gridArea: "app-content",
+  pointerEvents: "none",
+  position: "relative",
 }));
 
 const StyledAppSwitcherContainer = styled("div")({
@@ -195,7 +198,6 @@ const WideUiShellContent = ({
           <ErrorBoundary fallback={null} onError={onError}>
             <TopNav
               {...topNavProps}
-              isScrolled={isContentScrolled}
               leftSideComponent={optionalComponents?.topNavLeftSide}
               rightSideComponent={optionalComponents?.topNavRightSide}
             />
@@ -207,7 +209,9 @@ const WideUiShellContent = ({
         appBackgroundColor={uiShellContext?.appBackgroundColor}
         tabIndex={0}
         ref={uiShellAppAreaRef}
-      />
+      >
+        <InnerAppContainer isContentScrolled={isContentScrolled} />
+      </StyledAppContainer>
     </StyledShellContainer>
   );
 };

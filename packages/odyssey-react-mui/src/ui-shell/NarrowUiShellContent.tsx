@@ -26,6 +26,7 @@ import { Button } from "../Buttons/Button.js";
 import type { HtmlProps } from "../HtmlProps.js";
 import { CloseIcon } from "../icons.generated/Close.js";
 import { MoreIcon } from "../icons.generated/More.js";
+import { InnerAppContainer } from "./InnerAppContainer.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
@@ -59,6 +60,7 @@ const StyledAppContentArea = styled("div")({
   gridTemplateColumns: "auto 1fr auto",
   gridTemplateRows: "1fr",
   height: "100%",
+  pointerEvents: "none",
   width: "100%",
 });
 
@@ -436,7 +438,9 @@ const NarrowUiShellContent = ({
             appBackgroundColor={uiShellContext?.appBackgroundColor}
             tabIndex={0}
             ref={uiShellAppAreaRef}
-          />
+          >
+            <InnerAppContainer isContentScrolled={isContentScrolled} />
+          </StyledAppContainer>
         </StyledAppContentArea>
       </StyledUiShellContainer>
     </>
