@@ -32,7 +32,7 @@ const SsrFriendlyHtmlElementClass =
 export class ReactInWebComponentElement extends SsrFriendlyHtmlElementClass {
   getReactComponent: GetReactComponentInWebComponent;
   reactRootElements: ReactRootElements;
-  reactRootPromise: Promise<Root>;
+  reactRootPromise: Promise<Root | null> = Promise.resolve(null);
 
   constructor(getReactComponent: GetReactComponentInWebComponent) {
     super();
@@ -55,21 +55,43 @@ export class ReactInWebComponentElement extends SsrFriendlyHtmlElementClass {
     this.reactRootElements.stylesRootElement.appendChild(styleElement);
     shadowRoot.appendChild(this.reactRootElements.stylesRootElement);
     shadowRoot.appendChild(this.reactRootElements.appRootElement);
-
-    // If we want to support React v17 in the future, we can use a try-catch on the import to grab the old `ReactDOM.render` function if `react-dom/client` errors. --Kevin Ghadyani
-    this.reactRootPromise = import("react-dom/client").then(({ createRoot }) =>
-      createRoot(this.reactRootElements.appRootElement),
-    );
   }
 
   connectedCallback() {
-    this.reactRootPromise.then((reactRoot) =>
-      reactRoot.render(this.getReactComponent(this.reactRootElements)),
-    );
+    this.reactRootPromise = this.reactRootPromise
+      .then((reactRoot) => {
+        if (reactRoot) {
+          // Shouldn't ever happen
+          throw new Error(
+            `connectedCallback fired when reactRoot is already mounted.`,
+          );
+        }
+
+        // Ensure react root is available before mounting
+        // If we want to support React v17 in the future, we can use a try-catch on the import to grab the old `ReactDOM.render` function if `react-dom/client` errors. --Kevin Ghadyani
+        return import("react-dom/client").then(({ createRoot }) =>
+          createRoot(this.reactRootElements.appRootElement),
+        );
+      })
+      .then((reactRoot) => {
+        reactRoot.render(this.getReactComponent(this.reactRootElements));
+        return reactRoot;
+      });
   }
 
   disconnectedCallback() {
-    this.reactRootPromise.then((reactRoot) => reactRoot.unmount());
+    this.reactRootPromise = this.reactRootPromise.then((reactRoot) => {
+      if (!reactRoot) {
+        // Shouldn't ever happen
+        throw new Error(
+          `disconnectedCallback fired when reactRoot is already unmounted.`,
+        );
+      }
+
+      reactRoot.unmount();
+      // Set root to null. We don't want to attempt to render to a root that's already been unmounted.
+      return null;
+    });
   }
 }
 
