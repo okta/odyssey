@@ -400,6 +400,19 @@ const TableLayoutContent = <TData extends MRT_RowData>({
     muiTableBodyProps: () => ({
       className: rowDensityClassName,
       tabIndex: 0,
+      /**
+       * This is a fix for an issue related to the empty state creating a
+       * vertical scrollbar when virtualization is enabled. The root cause
+       * is tablebody having height: 0 when virtualization is enabled and there
+       * being no data
+       * https://okta.slack.com/archives/C7T2H3KNJ/p1742842106148929
+       */
+      sx:
+        isEmpty || isNoResults
+          ? {
+              height: "unset",
+            }
+          : undefined,
     }),
     enableColumnResizing: tableLayoutOptions.hasColumnResizing,
     defaultColumn: {
