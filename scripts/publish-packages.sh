@@ -23,6 +23,8 @@ git checkout .
 
 # All packages are built by `prepack`.
 
+# THIS IS A TEST CHANGE
+
 # update version with commit SHA to allow lerna to publish
 FILES_TO_UPDATE_VERSION="lerna.json packages/odyssey-design-tokens/package.json packages/odyssey-react-mui/package.json packages/browserslist-config-odyssey/package.json packages/odyssey-storybook/package.json"
 for PATH_AND_FILE in $FILES_TO_UPDATE_VERSION; do
