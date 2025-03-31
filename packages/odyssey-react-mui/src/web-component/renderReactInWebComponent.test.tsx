@@ -125,4 +125,65 @@ describe(renderReactInWebComponent.name, () => {
     expect(document.querySelector("[slot=app]")).toBe(webComponentChild1);
     expect(document.querySelector("[slot=footer]")).toBe(webComponentChild2);
   });
+
+  describe("Throws errors if connected/disconnected are called out of order", () => {
+    const rootElement = document.createElement("div");
+
+    test("init -> connect -> disconnect -> connect passes", async () => {
+      const reactInWebComponentElement = renderReactInWebComponent({
+        getReactComponent: () => <div></div>,
+        webComponentRootElement: rootElement,
+      });
+
+      reactInWebComponentElement.connectedCallback();
+      reactInWebComponentElement.disconnectedCallback();
+      reactInWebComponentElement.connectedCallback();
+
+      await expect(
+        reactInWebComponentElement.reactRootPromise,
+      ).resolves.not.toThrow();
+    });
+
+    test("init -> disconnect fails", async () => {
+      const reactInWebComponentElement = renderReactInWebComponent({
+        getReactComponent: () => <div></div>,
+        webComponentRootElement: rootElement,
+      });
+
+      reactInWebComponentElement.disconnectedCallback();
+
+      await expect(
+        reactInWebComponentElement.reactRootPromise,
+      ).rejects.toThrow();
+    });
+
+    test("init -> connect -> connect fails", async () => {
+      const reactInWebComponentElement = renderReactInWebComponent({
+        getReactComponent: () => <div></div>,
+        webComponentRootElement: rootElement,
+      });
+
+      reactInWebComponentElement.connectedCallback();
+      reactInWebComponentElement.connectedCallback();
+
+      await expect(
+        reactInWebComponentElement.reactRootPromise,
+      ).rejects.toThrow();
+    });
+
+    test("init -> connect -> disconnect -> disconnect fails", async () => {
+      const reactInWebComponentElement = renderReactInWebComponent({
+        getReactComponent: () => <div></div>,
+        webComponentRootElement: rootElement,
+      });
+
+      reactInWebComponentElement.connectedCallback();
+      reactInWebComponentElement.disconnectedCallback();
+      reactInWebComponentElement.disconnectedCallback();
+
+      await expect(
+        reactInWebComponentElement.reactRootPromise,
+      ).rejects.toThrow();
+    });
+  });
 });
