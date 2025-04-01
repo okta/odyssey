@@ -95,6 +95,7 @@ export const useMatchAppElementToUiShellAppArea = ({
 
   const appContainerElementStyles = useMemo<CSSProperties>(
     () => ({
+      boxSizing: "border-box",
       ...(paddingMode === "comfortable"
         ? {
             paddingBlock: odysseyDesignTokens.Spacing5,
