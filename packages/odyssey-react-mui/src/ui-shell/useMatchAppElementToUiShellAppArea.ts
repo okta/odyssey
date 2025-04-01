@@ -50,7 +50,6 @@ export const setStylesToMatchElement = ({
     "height",
     `${appContentReferenceRectangle.height}px`,
   );
-  appContainerElement.style.setProperty("z-index", "1");
 
   (
     Object.entries(additionalStyles) as Array<
@@ -96,6 +95,7 @@ export const useMatchAppElementToUiShellAppArea = ({
   const appContainerElementStyles = useMemo<CSSProperties>(
     () => ({
       boxSizing: "border-box",
+      zIndex: 1,
       ...(paddingMode === "comfortable"
         ? {
             paddingBlock: odysseyDesignTokens.Spacing5,
