@@ -294,20 +294,23 @@ const additionalActionButton = <Button variant="primary" label="Add widget" />;
 
 const additionalActionMenuItems = (
   <>
-    <MenuItem onClick={() => console.log("Action 1")}>Action 1</MenuItem>
-    <MenuItem onClick={() => console.log("Action 2")}>Action 2</MenuItem>
+    <MenuItem onClick={() => console.log("Additional action 1")}>
+      Additional action 1
+    </MenuItem>
+    <MenuItem onClick={() => console.log("Additional action 2")}>
+      Additional action 2
+    </MenuItem>
   </>
 );
 
-// Common action menu items
-const actionMenuItems = (selectedRows: DataRowSelectionState) => (
+const bulkActionMenuItems = (selectedRows: DataRowSelectionState) => (
   <>
     <MenuItem onClick={() => console.log(selectedRows)}>Action 1</MenuItem>
     <MenuItem onClick={() => console.log(selectedRows)}>Action 2</MenuItem>
   </>
 );
 
-const actionButtons = () => (
+const rowActionButtons = () => (
   <Box
     sx={{
       display: "flex",
@@ -330,6 +333,16 @@ const actionButtons = () => (
   </Box>
 );
 
+const rowActionMenuItems = (row: Person) => (
+  <>
+    <MenuItem onClick={() => console.log(`Action 1 for ${row.name}`)}>
+      Action 1
+    </MenuItem>
+    <MenuItem onClick={() => console.log(`Action 2 for ${row.name}`)}>
+      Action 2
+    </MenuItem>
+  </>
+);
 const customEmptyPlaceholder = (
   <EmptyState
     heading="Start by adding data assets"
@@ -390,7 +403,7 @@ const BaseStory: Story = {
         onReorderRows={onReorderRows}
         onChangeRowSelection={onChangeRowSelection}
         bulkActionMenuItems={
-          args.hasActionMenuItems ? actionMenuItems : undefined
+          args.hasActionMenuItems ? bulkActionMenuItems : undefined
         }
         enableVirtualization={args.enableVirtualization}
         hasRowReordering={args.hasRowReordering}
@@ -424,11 +437,12 @@ const BaseStory: Story = {
         tableLayoutOptions={{
           columns: personColumns,
           hasSorting: args.hasSorting,
-          // @ts-expect-error TODO: We need to fix this.
           rowActionMenuItems: args.hasActionMenuItems
-            ? actionMenuItems
+            ? rowActionMenuItems
             : undefined,
-          rowActionButtons: args.hasActionButtons ? actionButtons : undefined,
+          rowActionButtons: args.hasActionButtons
+            ? rowActionButtons
+            : undefined,
           renderDetailPanel: undefined,
           hasColumnVisibility: args.hasColumnVisibility,
           hasColumnResizing: args.hasColumnResizing,
@@ -437,9 +451,8 @@ const BaseStory: Story = {
         }}
         cardLayoutOptions={{
           itemProps,
-          // @ts-expect-error TODO: We need to fix this.
           rowActionMenuItems: args.hasActionMenuItems
-            ? actionMenuItems
+            ? rowActionMenuItems
             : undefined,
           maxGridColumns: args.maxGridColumns,
         }}
