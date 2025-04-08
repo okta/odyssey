@@ -14,9 +14,10 @@ import { act, waitFor } from "@testing-library/react";
 
 import { renderUiShell } from "./renderUiShell.js";
 import {
-  ReactInWebComponentElement,
-  reactWebComponentElementName,
+  seleniumAttrName,
+  versionedWebComponentName,
 } from "../web-component/renderReactInWebComponent.js";
+const webComponentSelector = `[${seleniumAttrName}]`;
 
 describe(renderUiShell.name, () => {
   afterEach(() => {
@@ -74,7 +75,7 @@ describe(renderUiShell.name, () => {
         parentElement,
       });
 
-      expect(uiShellElement).toBeInstanceOf(ReactInWebComponentElement);
+      expect(uiShellElement.elementName).toEqual(versionedWebComponentName);
     });
   });
 
@@ -94,8 +95,7 @@ describe(renderUiShell.name, () => {
 
     expect(
       Array.from(
-        parentElement.querySelector(reactWebComponentElementName)!.shadowRoot!
-          .children,
+        parentElement.querySelector(webComponentSelector)!.shadowRoot!.children,
       ).length,
     ).toBeGreaterThan(0);
   });
@@ -133,7 +133,7 @@ describe(renderUiShell.name, () => {
 
     await waitFor(() => {
       expect(
-        parentElement.querySelector(reactWebComponentElementName)!.shadowRoot,
+        parentElement.querySelector(webComponentSelector)!.shadowRoot,
       ).toHaveTextContent(appName);
     });
   });
@@ -163,7 +163,7 @@ describe(renderUiShell.name, () => {
 
     await waitFor(() => {
       expect(
-        parentElement.querySelector(reactWebComponentElementName)!.shadowRoot,
+        parentElement.querySelector(webComponentSelector)!.shadowRoot,
       ).toHaveTextContent(appName);
     });
   });
@@ -201,7 +201,7 @@ describe(renderUiShell.name, () => {
       expect(consoleError).toHaveBeenCalledTimes(1);
       expect(
         parentElement
-          .querySelector(reactWebComponentElementName)!
+          .querySelector(webComponentSelector)!
           .shadowRoot?.querySelector("[data-error]"),
       ).toBeInstanceOf(HTMLDivElement);
     });
