@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -14,11 +14,6 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   test: {
-    // browser: {
-    //   enabled: true,
-    //   name: 'chromium',
-    //   provider: 'playwright',
-    // },
     coverage: {
       reporter:
         process.env.NODE_ENV === "test" ? ["text-summary"] : ["text", "html"],
@@ -29,8 +24,43 @@ export default defineConfig({
         statements: 36,
       },
     },
-    environment: "happy-dom",
-    globals: true,
-    setupFiles: ["./vitest.setup.ts"],
+    workspace: [
+      {
+        test: {
+          environment: "node",
+          globals: true,
+          include: ["**/*.node.test.ts"],
+          name: "unit",
+          setupFiles: ["./vitest-node-setup.ts"],
+        },
+      },
+      {
+        test: {
+          browser: {
+            // actionTimeout: 5000,
+            enabled: true,
+            headless: true,
+            instances: [
+              {
+                browser: "chromium",
+                screenshotDirectory: "__vitest-screenshots",
+                // context: {},
+                // launch: {},
+                // setupFile: './chromium-setup.ts',
+              },
+            ],
+            provider: "playwright",
+            viewport: {
+              height: 768,
+              width: 1024,
+            },
+          },
+          globals: true,
+          include: ["**/*.browser.test.ts"],
+          name: "integration",
+          setupFiles: ["./vitest-browser-setup.ts"],
+        },
+      },
+    ],
   },
 });

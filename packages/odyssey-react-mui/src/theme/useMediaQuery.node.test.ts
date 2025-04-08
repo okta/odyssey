@@ -10,4 +10,17 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export default ["packages/*"];
+import { expectError } from "tsd";
+
+import { useMediaQuery } from "./useMediaQuery.js";
+
+describe(useMediaQuery.name, () => {
+  test("errors if no media query passed", () => {
+    expectError(() => {
+      useMediaQuery(
+        // @ts-expect-error We're purposefully passing an invalid value for this test. You cannot use `""`.
+        "",
+      );
+    });
+  });
+});

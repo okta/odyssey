@@ -12,45 +12,101 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-export const useScrollState = <
-  ScrollableContentElement extends HTMLElement = HTMLDivElement,
->(
-  scrollableContentElement?: ScrollableContentElement,
-) => {
-  const [isContentScrolled, setIsContentScrolled] = useState(false);
+export const getIsScrollHeightElement = ({
+  containerElement,
+  scrollableElement,
+}: {
+  containerElement: HTMLElement;
+  scrollableElement: HTMLElement;
+}) => {
+  const containerElementHeight =
+    containerElement.getBoundingClientRect().height;
+  const scrollableElementHeight =
+    scrollableElement.getBoundingClientRect().height;
 
-  const scrollableElement = useMemo(
-    () => scrollableContentElement,
-    [scrollableContentElement],
+  return scrollableElementHeight - containerElementHeight >= 0;
+};
+
+export const getIsYAxisScrollContainer = (element: HTMLElement) => {
+  const overflowY = window.getComputedStyle(element).overflowY;
+
+  return overflowY === "auto" || overflowY === "scroll";
+};
+
+export const getIsYAxisScrolling = (element: HTMLElement) =>
+  element.scrollHeight > element.clientHeight
+    ? getIsYAxisScrollContainer(element)
+    : false;
+
+// export const getIsEqualScrollingZone = ({
+//   element,
+// }: {
+//   element: HTMLElement,
+// }) => (
+//   element.scrollHeight > element.clientHeight
+//   ? getIsYAxisScrollContainer(element)
+//   : false
+// )
+
+export const getNestedScrollContainers = (containerElement: HTMLElement) =>
+  Array.from(containerElement.querySelectorAll<HTMLElement>("*"))
+    .filter((element) => getIsYAxisScrollContainer(element))
+    .filter((scrollableElement) =>
+      getIsScrollHeightElement({
+        containerElement,
+        scrollableElement,
+      }),
+    );
+
+export const useScrollState = <
+  ContainerElement extends HTMLElement = HTMLDivElement,
+>(
+  /**
+   * The element containing a scroll area.
+   */
+  containerElement: ContainerElement,
+) => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // TODO: This will need to be part of `MutationObserver` and `useEffect`.
+  const scrollableElements = useMemo(
+    () => getNestedScrollContainers(containerElement).concat(containerElement),
+    [containerElement],
   );
 
   useEffect(() => {
-    if (scrollableElement) {
-      let requestedAnimationFrameId: number;
+    let requestedAnimationFrameId: number;
 
-      const updateScrollState = () => {
-        cancelAnimationFrame(requestedAnimationFrameId);
+    const updateScrollState = () => {
+      cancelAnimationFrame(requestedAnimationFrameId);
 
-        requestedAnimationFrameId = requestAnimationFrame(() => {
-          setIsContentScrolled(scrollableElement.scrollTop > 0);
-        });
-      };
+      requestedAnimationFrameId = requestAnimationFrame(() => {
+        setIsScrolled(
+          scrollableElements.reduce(
+            (isScrolled, scrollableElement) =>
+              isScrolled || scrollableElement.scrollTop > 0,
+            false,
+          ),
+        );
+      });
+    };
 
+    scrollableElements.forEach((scrollableElement) => {
       scrollableElement.addEventListener("scroll", updateScrollState);
+    });
 
-      updateScrollState();
+    updateScrollState();
 
-      return () => {
+    return () => {
+      scrollableElements.forEach((scrollableElement) => {
         scrollableElement.removeEventListener("scroll", updateScrollState);
+      });
 
-        cancelAnimationFrame(requestedAnimationFrameId);
-      };
-    }
-
-    return () => {};
-  }, [scrollableElement]);
+      cancelAnimationFrame(requestedAnimationFrameId);
+    };
+  }, [scrollableElements]);
 
   return {
-    isContentScrolled,
+    isContentScrolled: isScrolled,
   };
 };
