@@ -23,10 +23,9 @@ import {
 import styled from "@emotion/styled";
 import { useTranslation } from "react-i18next";
 
-import {
-  ContrastColors,
-  generateContrastColors,
-} from "../../createContrastColors.js";
+// import {
+//   generateContrastColors,
+// } from "../../createContrastColors.js";
 import { FocusHandle } from "../../inputUtils.js";
 import { MuiPropsContext, MuiPropsContextType } from "../../MuiPropsContext.js";
 import {
@@ -34,115 +33,156 @@ import {
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext.js";
 import { Tooltip } from "../../Tooltip.js";
-import { useUiShellContext } from "../../ui-shell/UiShellProvider.js";
+// import { useUiShellContext } from "../../ui-shell/UiShellProvider.js";
 import { UI_SHELL_OVERLAY_Z_INDEX } from "../uiShellSharedConstants.js";
+import { ChevronRightIcon } from "../../icons.generated/ChevronRight.js";
 
 const StyledToggleButton = styled(MuiButton, {
-  shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" &&
-    prop !== "isSideNavCollapsed" &&
-    prop !== "toggleContrastColors",
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{
-  isSideNavCollapsed: boolean;
   odysseyDesignTokens: DesignTokens;
-  toggleContrastColors?: ContrastColors;
-}>(({ isSideNavCollapsed, odysseyDesignTokens, toggleContrastColors }) => ({
-  backgroundColor: "transparent",
-  position: "relative",
-  width: odysseyDesignTokens.Spacing6,
-  height: odysseyDesignTokens.Spacing6,
+}>(({ odysseyDesignTokens }) => ({
   border: 0,
+  fontSize: "75%", // TODO: Make this the correct `font-size`.
+  height: odysseyDesignTokens.Spacing5,
+  padding: 0,
+  position: "relative",
+  width: odysseyDesignTokens.Spacing5,
   zIndex: UI_SHELL_OVERLAY_Z_INDEX,
 
+  "&&": {
+    // `&&` is a CSS specificity override.
+    backgroundColor: "white",
+    borderColor: "transparent",
+    borderRadius: "50%",
+    boxShadow:
+      "0px 8px 30px 0px #1D1D211A, 0px 4px 10px 0px #1D1D2114, 0px 1px 4px 0px #1D1D2114",
+    color: "#3F59E4",
+  },
+
   "&:focus-visible": {
-    boxShadow: `inset 0 0 0 2px ${odysseyDesignTokens.PalettePrimaryMain}`,
     outline: "none",
   },
 
   "&:hover, &:focus-visible": {
-    backgroundColor: "transparent",
+    backgroundColor: "#3F59E4",
+    color: "white",
+    // backgroundColor: "transparent",
 
-    "#lineOne": {
-      animation: `lineOne-animate-to-collapse ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
-      animationFillMode: "forwards",
-      "@keyframes lineOne-animate-to-collapse": {
-        "0%": {
-          transform: "translate3d(-50%, -50%, 0)",
-        },
-        "50%": {
-          transform: "translate3d(-50%, -50%, 0) rotate(-90deg) scaleY(.75)",
-        },
-        "100%": {
-          transform: "translate3d(-50%, -27%, 0) rotate(-45deg) scaleY(.75)",
-        },
-      },
-    },
+    // "#lineOne": {
+    //   animation: `lineOne-animate-to-collapse ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
+    //   animationFillMode: "forwards",
+    //   "@keyframes lineOne-animate-to-collapse": {
+    //     "0%": {
+    //       transform: "translate3d(-50%, -50%, 0)",
+    //     },
+    //     "50%": {
+    //       transform: "translate3d(-50%, -50%, 0) rotate(-90deg) scaleY(.75)",
+    //     },
+    //     "100%": {
+    //       transform: "translate3d(-50%, -27%, 0) rotate(-45deg) scaleY(.75)",
+    //     },
+    //   },
+    // },
 
-    "#lineTwo": {
-      animation: `lineTwo-animate-to-collapse ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
-      animationFillMode: "forwards",
-      "@keyframes lineTwo-animate-to-collapse": {
-        "0%": {
-          transform: "translate3d(-50%, -50%, 0)",
-        },
-        "50%": {
-          transform: "translate3d(-50%, -50%, 0) rotate(-90deg) scaleY(.75)",
-        },
-        "100%": {
-          transform: "translate3d(-50%, -73%, 0) rotate(-135deg) scaleY(.75)",
-        },
-      },
-    },
+    // "#lineTwo": {
+    //   animation: `lineTwo-animate-to-collapse ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
+    //   animationFillMode: "forwards",
+    //   "@keyframes lineTwo-animate-to-collapse": {
+    //     "0%": {
+    //       transform: "translate3d(-50%, -50%, 0)",
+    //     },
+    //     "50%": {
+    //       transform: "translate3d(-50%, -50%, 0) rotate(-90deg) scaleY(.75)",
+    //     },
+    //     "100%": {
+    //       transform: "translate3d(-50%, -73%, 0) rotate(-135deg) scaleY(.75)",
+    //     },
+    //   },
+    // },
 
-    ...(isSideNavCollapsed && {
-      "#lineOne": {
-        animation: `lineOne-animate-to-expand ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
-        animationFillMode: "forwards",
-        "@keyframes lineOne-animate-to-expand": {
-          "0%": {
-            transform: "translate3d(-50%, -50%, 0)",
-          },
-          "50%": {
-            transform: "translate3d(-50%, -50%, 0) rotate(90deg) scaleY(.75)",
-          },
-          "100%": {
-            transform: "translate3d(-50%, -73%, 0) rotate(135deg) scaleY(.75)",
-          },
-        },
-      },
+    // ...(isSideNavCollapsed && {
+    //   "#lineOne": {
+    //     animation: `lineOne-animate-to-expand ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
+    //     animationFillMode: "forwards",
+    //     "@keyframes lineOne-animate-to-expand": {
+    //       "0%": {
+    //         transform: "translate3d(-50%, -50%, 0)",
+    //       },
+    //       "50%": {
+    //         transform: "translate3d(-50%, -50%, 0) rotate(90deg) scaleY(.75)",
+    //       },
+    //       "100%": {
+    //         transform: "translate3d(-50%, -73%, 0) rotate(135deg) scaleY(.75)",
+    //       },
+    //     },
+    //   },
 
-      "#lineTwo": {
-        animation: `lineTwo-animate-to-expand ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
-        animationFillMode: "forwards",
-        "@keyframes lineTwo-animate-to-expand": {
-          "0%": {
-            transform: "translate3d(-50%, -50%, 0)",
-          },
-          "50%": {
-            transform: "translate3d(-50%, -50%, 0) rotate(90deg) scaleY(.75)",
-          },
-          "100%": {
-            transform: "translate3d(-50%, -27%, 0) rotate(45deg) scaleY(.75)",
-          },
-        },
-      },
-    }),
+    //   "#lineTwo": {
+    //     animation: `lineTwo-animate-to-expand ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
+    //     animationFillMode: "forwards",
+    //     "@keyframes lineTwo-animate-to-expand": {
+    //       "0%": {
+    //         transform: "translate3d(-50%, -50%, 0)",
+    //       },
+    //       "50%": {
+    //         transform: "translate3d(-50%, -50%, 0) rotate(90deg) scaleY(.75)",
+    //       },
+    //       "100%": {
+    //         transform: "translate3d(-50%, -27%, 0) rotate(45deg) scaleY(.75)",
+    //       },
+    //     },
+    //   },
+    // }),
   },
 
-  span: {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    width: "2px",
-    height: odysseyDesignTokens.Spacing4,
-    backgroundColor: odysseyDesignTokens.HueNeutral600,
-    transform: "translate3d(-50%, -50%, 0)",
-    transition: `transform ${odysseyDesignTokens.TransitionDurationMain}`,
+  // span: {
+  //   position: "absolute",
+  //   top: "50%",
+  //   left: "50%",
+  //   width: "2px",
+  //   height: odysseyDesignTokens.Spacing4,
+  //   backgroundColor: odysseyDesignTokens.HueNeutral600,
+  //   transform: "translate3d(-50%, -50%, 0)",
+  //   transition: `transform ${odysseyDesignTokens.TransitionDurationMain}`,
 
-    ...(toggleContrastColors?.fontColor && {
-      backgroundColor: toggleContrastColors.fontColor,
-    }),
-  },
+  //   ...(toggleContrastColors?.fontColor && {
+  //     backgroundColor: toggleContrastColors.fontColor,
+  //   }),
+  // },
+
+  // "&::before": {
+  //   border: "1px solid #CBCBCB",
+  //   borderRadius: "50%",
+  //   boxShadow: "0px 8px 30px 0px #1D1D211A, 0px 4px 10px 0px #1D1D2114, 0px 1px 4px 0px #1D1D2114",
+  //   content: "''",
+  //   height: "24px",
+  //   position: "absolute",
+  //   width: "24px",
+
+  //   backgroundColor: "white",
+  // },
+}));
+
+const StyledChevronRightIcon = styled(ChevronRightIcon, {
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "isSideNavCollapsed",
+})<{
+  isSideNavCollapsed: boolean;
+  odysseyDesignTokens: DesignTokens;
+}>(({ isSideNavCollapsed, odysseyDesignTokens }) => ({
+  // color: "#3F59E4",
+  fontSize: "1.3rem",
+  position: "absolute",
+  transform: isSideNavCollapsed ? "rotate(0deg)" : "rotate(-180deg)", // Leave this as `-180deg` so it rotates over the top, not the bottom.
+  transitionDuration: `${odysseyDesignTokens.TransitionDurationMain}`,
+  transitionProperty: "transform",
+  transitionTimingFunction: "ease-in-out",
+
+  // "&:hover": {
+  //   backgroundColor: "#3F59E4",
+  //   color: "white",
+  // },
 }));
 
 export type SideNavToggleButtonProps = {
@@ -167,6 +207,9 @@ export type SideNavToggleButtonProps = {
   onKeyDown?: MuiButtonProps["onKeyDown"];
 };
 
+// This allows us to mutate the value with TypeScript. A singleton is fine because it gets overridden on render.
+const defaultLocalButton = document.createElement("button");
+
 const SideNavToggleButton = ({
   ariaControls,
   buttonRef,
@@ -177,32 +220,32 @@ const SideNavToggleButton = ({
 }: SideNavToggleButtonProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
-  const uiShellContext = useUiShellContext();
+  // const uiShellContext = useUiShellContext();
 
-  const localButtonRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
+  const localButtonRef = useRef(defaultLocalButton);
 
-  const toggleContrastColors = useMemo(() => {
-    const hasNonStandardAppBackgroundColor =
-      uiShellContext?.appBackgroundColor &&
-      uiShellContext?.appBackgroundColor !==
-        odysseyDesignTokens.HueNeutralWhite &&
-      uiShellContext?.appBackgroundColor !== odysseyDesignTokens.HueNeutral50;
+  // const toggleContrastColors = useMemo(() => {
+  //   const hasNonStandardAppBackgroundColor =
+  //     uiShellContext?.appBackgroundColor &&
+  //     uiShellContext?.appBackgroundColor !==
+  //       odysseyDesignTokens.HueNeutralWhite &&
+  //     uiShellContext?.appBackgroundColor !== odysseyDesignTokens.HueNeutral50;
 
-    if (hasNonStandardAppBackgroundColor) {
-      return generateContrastColors(
-        uiShellContext.appBackgroundColor,
-        odysseyDesignTokens,
-      );
-    }
+  //   if (hasNonStandardAppBackgroundColor) {
+  //     return generateContrastColors(
+  //       uiShellContext.appBackgroundColor,
+  //       odysseyDesignTokens,
+  //     );
+  //   }
 
-    return undefined;
-  }, [odysseyDesignTokens, uiShellContext]);
+  //   return undefined;
+  // }, [odysseyDesignTokens, uiShellContext]);
 
   useImperativeHandle(
     buttonRef,
     () => ({
       focus: () => {
-        localButtonRef.current?.focus();
+        localButtonRef.current.focus();
       },
     }),
     [],
@@ -225,26 +268,26 @@ const SideNavToggleButton = ({
           aria-expanded={!isSideNavCollapsed}
           aria-label={toggleLabel}
           data-se="sidenav-toggle-button"
-          data-sidenav-toggle={true}
+          data-sidenav-toggle
           id={id}
-          isSideNavCollapsed={isSideNavCollapsed}
+          // isSideNavCollapsed={isSideNavCollapsed}
           odysseyDesignTokens={odysseyDesignTokens}
           onClick={onClick}
-          ref={(element) => {
+          ref={(element: HTMLButtonElement) => {
             if (element) {
-              (
-                localButtonRef as React.MutableRefObject<HTMLButtonElement>
-              ).current = element;
-              //@ts-expect-error ref is not an optional prop on the props context type
-              muiProps?.ref?.(element);
+              localButtonRef.current = element;
+              //@ts-expect-error `ref` is an optional prop, but TypeScript doesn't know this.
+              muiProps.ref?.(element);
             }
           }}
           tabIndex={tabIndex}
-          toggleContrastColors={toggleContrastColors}
+          // toggleContrastColors={toggleContrastColors}
           variant="floating"
         >
-          <span id="lineOne" />
-          <span id="lineTwo" />
+          <StyledChevronRightIcon
+            isSideNavCollapsed={isSideNavCollapsed}
+            odysseyDesignTokens={odysseyDesignTokens}
+          />
         </StyledToggleButton>
       );
     },
@@ -255,7 +298,6 @@ const SideNavToggleButton = ({
       odysseyDesignTokens,
       onClick,
       tabIndex,
-      toggleContrastColors,
       toggleLabel,
     ],
   );

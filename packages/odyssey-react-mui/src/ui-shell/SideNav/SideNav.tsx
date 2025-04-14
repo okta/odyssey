@@ -76,7 +76,7 @@ const StyledCollapsibleContent = styled("div", {
     ({
       gridTemplateColumns: 0,
       opacity: 0,
-    } as CSSProperties)),
+    } satisfies CSSProperties)),
 }));
 
 const StyledOpacityTransitionContainer = styled("div", {
@@ -100,7 +100,7 @@ const StyledOpacityTransitionContainer = styled("div", {
     ...(isSideNavCollapsed &&
       ({
         opacity: 0,
-      } as CSSProperties)),
+      } satisfies CSSProperties)),
   }),
 );
 
@@ -133,43 +133,45 @@ const StyledSideNavContainer = styled("nav", {
         borderRightStyle:
           odysseyDesignTokens.BorderStyleMain as Property.BorderRightStyle,
         borderRightColor: odysseyDesignTokens.HueNeutral100,
-      } as CSSProperties)),
+      } satisfies CSSProperties)),
 
     "&::after": {
       backgroundColor: odysseyDesignTokens.HueNeutral200,
       content: "''",
       height: "100%",
       opacity: 0,
+      pointerEvents: "none",
       position: "absolute",
       right: 0,
       top: 0,
-      transform: `translateX(0)`,
+      transform: "translateX(0)",
       transition: `opacity ${odysseyDesignTokens.TransitionDurationMain}, transform ${odysseyDesignTokens.TransitionDurationMain}`,
-      width: odysseyDesignTokens.Spacing2,
+      userSelect: "none",
+      width: odysseyDesignTokens.Spacing4,
       zIndex: UI_SHELL_OVERLAY_Z_INDEX,
     },
 
-    "&:has([data-sidenav-toggle='true']:hover), &:has([data-sidenav-toggle='true']:focus-visible)":
+    "&:has([data-sidenav-toggle]:hover), &:has([data-sidenav-toggle]:focus-visible)":
       {
-        ...(isSideNavCollapsed &&
-          ({
-            "&::after": {
-              opacity: 1,
-              transform: `translateX(100%)`,
-            } as CSSProperties,
+        ...(isSideNavCollapsed && {
+          "&::after": {
+            opacity: 1,
+            transform: "translateX(100%)",
+          } satisfies CSSProperties,
 
-            "[data-sidenav-toggle='true']": {
-              transform: `translate3d(calc(100% + ${odysseyDesignTokens.Spacing3}), 0, 0)`,
-            } as CSSProperties,
-          } as CSSProperties)),
+          "[data-sidenav-toggle]": {
+            transform: `translate3d(calc(100% + ${odysseyDesignTokens.Spacing4}), 0, 0)`,
+          } satisfies CSSProperties,
+        }),
       },
 
-    "[data-sidenav-toggle='true']": {
+    "[data-sidenav-toggle]": {
       position: "absolute",
+      right: "12px",
       top: SIDE_NAV_VISIBILITY_TOGGLE_ICON_POSITION,
-      right: 0,
       transition: `transform ${odysseyDesignTokens.TransitionDurationMain}`,
       transform: `translate3d(100%, 0, 0)`,
+      zIndex: UI_SHELL_OVERLAY_Z_INDEX + 1,
     },
   }),
 );
@@ -195,7 +197,7 @@ const StyledSideNavHeaderContainer = styled("div", {
       ...(borderColor &&
         ({
           borderBottomColor: borderColor.concat("15"),
-        } as CSSProperties)),
+        } satisfies CSSProperties)),
     } as CSSProperties)),
 }));
 
@@ -251,7 +253,7 @@ const StyledSideNavFooter = styled("div", {
     ...(sideNavBackgroundColor &&
       ({
         backgroundColor: sideNavBackgroundColor,
-      } as CSSProperties)),
+      } satisfies CSSProperties)),
   }),
 );
 
@@ -279,12 +281,12 @@ const StyledPersistentSideNavFooter = styled(StyledSideNavFooter, {
     ...(isContentScrollable &&
       ({
         boxShadow: "0px -8px 8px -8px rgba(39, 39, 39, 0.08)",
-      } as CSSProperties)),
+      } satisfies CSSProperties)),
 
     ...(sideNavBackgroundColor &&
       ({
         backgroundColor: sideNavBackgroundColor,
-      } as CSSProperties)),
+      } satisfies CSSProperties)),
   }),
 );
 
@@ -310,7 +312,7 @@ const StyledSideNavFooterItemsContainer = styled("div", {
       ...(sideNavContrastColors?.fontColor &&
         ({
           color: sideNavContrastColors?.fontColor,
-        } as CSSProperties)),
+        } satisfies CSSProperties)),
     },
 
     "&:hover": {
@@ -320,13 +322,13 @@ const StyledSideNavFooterItemsContainer = styled("div", {
       ...(sideNavContrastColors?.fontColor &&
         ({
           color: sideNavContrastColors?.fontColor,
-        } as CSSProperties)),
+        } satisfies CSSProperties)),
     },
 
     ...(sideNavContrastColors?.fontColor &&
       ({
         color: sideNavContrastColors?.fontColor,
-      } as CSSProperties)),
+      } satisfies CSSProperties)),
   },
 }));
 
