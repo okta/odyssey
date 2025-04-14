@@ -16,7 +16,7 @@ import {
   HTMLAttributes,
   memo,
   useCallback,
-  useImperativeHandle,
+  useEffect,
   useMemo,
   useRef,
 } from "react";
@@ -26,7 +26,6 @@ import { useTranslation } from "react-i18next";
 // import {
 //   generateContrastColors,
 // } from "../../createContrastColors.js";
-import { FocusHandle } from "../../inputUtils.js";
 import { MuiPropsContext, MuiPropsContextType } from "../../MuiPropsContext.js";
 import {
   DesignTokens,
@@ -187,10 +186,6 @@ const StyledChevronRightIcon = styled(ChevronRightIcon, {
 
 export type SideNavToggleButtonProps = {
   /**
-   * The ref forwarded to the Button
-   */
-  buttonRef?: React.RefObject<FocusHandle>;
-  /**
    * The `id` of the item this button controls
    */
   ariaControls: string;
@@ -204,6 +199,7 @@ export type SideNavToggleButtonProps = {
    * The click event handler for the Button
    */
   onClick?: MuiButtonProps["onClick"];
+  onHighlight?: (isHighlighted: boolean) => void;
   onKeyDown?: MuiButtonProps["onKeyDown"];
 };
 
@@ -212,17 +208,17 @@ const defaultLocalButton = document.createElement("button");
 
 const SideNavToggleButton = ({
   ariaControls,
-  buttonRef,
   id,
   isSideNavCollapsed,
   onClick,
+  onHighlight,
   tabIndex,
 }: SideNavToggleButtonProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
   // const uiShellContext = useUiShellContext();
 
-  const localButtonRef = useRef(defaultLocalButton);
+  const buttonRef = useRef(defaultLocalButton);
 
   // const toggleContrastColors = useMemo(() => {
   //   const hasNonStandardAppBackgroundColor =
@@ -241,15 +237,39 @@ const SideNavToggleButton = ({
   //   return undefined;
   // }, [odysseyDesignTokens, uiShellContext]);
 
-  useImperativeHandle(
-    buttonRef,
-    () => ({
-      focus: () => {
-        localButtonRef.current.focus();
-      },
-    }),
-    [],
-  );
+  useEffect(() => {
+    const setHighlighted = () => {
+      onHighlight?.(true);
+    };
+
+    const setUnhighlighted = () => {
+      onHighlight?.(false);
+    };
+
+    const setFocusHighlighted = () => {
+      onHighlight?.(buttonRef.current.matches(":focus-visible"));
+    };
+
+    buttonRef.current.addEventListener("mouseenter", setHighlighted);
+
+    buttonRef.current.addEventListener("mouseleave", setUnhighlighted);
+
+    buttonRef.current.addEventListener("focus", setFocusHighlighted, true);
+
+    buttonRef.current.addEventListener("blur", setFocusHighlighted, true);
+
+    setUnhighlighted();
+
+    return () => {
+      buttonRef.current.removeEventListener("mouseenter", setHighlighted);
+
+      buttonRef.current.removeEventListener("mouseleave", setUnhighlighted);
+
+      buttonRef.current.removeEventListener("focus", setFocusHighlighted, true);
+
+      buttonRef.current.removeEventListener("blur", setFocusHighlighted, true);
+    };
+  }, [onHighlight]);
 
   const toggleLabel = useMemo(
     () =>
@@ -275,7 +295,7 @@ const SideNavToggleButton = ({
           onClick={onClick}
           ref={(element: HTMLButtonElement) => {
             if (element) {
-              localButtonRef.current = element;
+              buttonRef.current = element;
               //@ts-expect-error `ref` is an optional prop, but TypeScript doesn't know this.
               muiProps.ref?.(element);
             }
