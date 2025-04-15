@@ -62,8 +62,8 @@ import {
   UI_SHELL_OVERLAY_Z_INDEX,
 } from "../uiShellSharedConstants.js";
 
-export const SIDE_NAV_COLLAPSE_PADDING_HIGHLIGHTED = 12;
-export const SIDE_NAV_COLLAPSE_PADDING_UNHIGHLIGHTED = 2;
+export const SIDE_NAV_COLLAPSED_PADDING_HIGHLIGHTED = 12;
+export const SIDE_NAV_COLLAPSED_PADDING_UNHIGHLIGHTED = 2;
 
 const StyledCollapsibleContent = styled("div", {
   shouldForwardProp: (prop) =>
@@ -171,19 +171,19 @@ const StyledSideNavContainer = styled("nav", {
     // Side nav vertical fill line when no neighboring content
     "&::after": {
       backgroundColor: odysseyDesignTokens.HueNeutral200,
-      opacity: isSideNavCollapsed && !hasNeighboringContent ? 1 : 0,
+      opacity: isSideNavCollapsed ? 1 : 0,
       transform:
         isSideNavCollapsed && !hasNeighboringContent
           ? isSideNavToggleHighlighted
             ? `translateX(calc(100% - (${odysseyDesignTokens.BorderWidthMain} * 2)))`
-            : `translateX(calc(100% - ${SIDE_NAV_COLLAPSE_PADDING_HIGHLIGHTED}px))`
+            : `translateX(calc(100% - ${SIDE_NAV_COLLAPSED_PADDING_HIGHLIGHTED}px))`
           : "translateX(0)",
-      width: `calc(${SIDE_NAV_TOGGLE_ICON_HALF_SIZE + SIDE_NAV_COLLAPSE_PADDING_HIGHLIGHTED}px + ${odysseyDesignTokens.BorderWidthMain} * 2)`,
+      width: hasNeighboringContent
+        ? 0
+        : `calc(${SIDE_NAV_TOGGLE_ICON_HALF_SIZE + SIDE_NAV_COLLAPSED_PADDING_HIGHLIGHTED}px + ${odysseyDesignTokens.BorderWidthMain} * 2)`,
 
       // Right-side vertical line when collapsed
-      ...((isSideNavCollapsed &&
-      !hasNeighboringContent &&
-      isSideNavToggleHighlighted
+      ...((isSideNavCollapsed && isSideNavToggleHighlighted
         ? {
             borderRightColor: odysseyDesignTokens.BorderColorPrimaryControl,
             borderRightStyle:
@@ -219,8 +219,8 @@ const StyledSideNavToggleButtonContainer = styled("div", {
     transform:
       isSideNavCollapsed && !hasNeighboringContent
         ? isSideNavToggleHighlighted
-          ? `translate3d(calc(100% + ${SIDE_NAV_TOGGLE_ICON_HALF_SIZE + SIDE_NAV_COLLAPSE_PADDING_HIGHLIGHTED}px), 0, 0)`
-          : `translate3d(calc(100% + ${SIDE_NAV_TOGGLE_ICON_HALF_SIZE + SIDE_NAV_COLLAPSE_PADDING_UNHIGHLIGHTED}px), 0, 0)`
+          ? `translate3d(calc(100% + ${SIDE_NAV_TOGGLE_ICON_HALF_SIZE + SIDE_NAV_COLLAPSED_PADDING_HIGHLIGHTED}px), 0, 0)`
+          : `translate3d(calc(100% + ${SIDE_NAV_TOGGLE_ICON_HALF_SIZE + SIDE_NAV_COLLAPSED_PADDING_UNHIGHLIGHTED}px), 0, 0)`
         : "translate3d(100%, 0, 0)",
     transition: `transform ${odysseyDesignTokens.TransitionDurationMain}`,
     zIndex: UI_SHELL_OVERLAY_Z_INDEX + 1,
