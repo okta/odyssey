@@ -136,23 +136,26 @@ const StyledSideNavContainer = styled("nav", {
     isSideNavToggleHighlighted,
     odysseyDesignTokens,
   }) => ({
+    // Side nav container styles
     backgroundColor: backgroundColor || odysseyDesignTokens.HueNeutralWhite,
     height: "100%",
     position: "relative",
     width: "fit-content",
 
+    // Right-side vertical line shared
     "&::before, &::after": {
       content: "''",
       height: "100%",
       pointerEvents: "none",
       position: "absolute",
-      right: 0,
+      right: `-${odysseyDesignTokens.BorderWidthMain}`,
       top: 0,
       transition: `opacity ${odysseyDesignTokens.TransitionDurationMain}, transform ${odysseyDesignTokens.TransitionDurationMain}, width ${odysseyDesignTokens.TransitionDurationMain}`,
       userSelect: "none",
       zIndex: UI_SHELL_OVERLAY_Z_INDEX,
     },
 
+    // Right-side vertical line when open
     "&::before": {
       backgroundColor: isSideNavToggleHighlighted
         ? odysseyDesignTokens.BorderColorPrimaryControl
@@ -165,6 +168,7 @@ const StyledSideNavContainer = styled("nav", {
       width: `calc(${odysseyDesignTokens.BorderWidthMain} * 2)`,
     },
 
+    // Side nav vertical fill line when no neighboring content
     "&::after": {
       backgroundColor: odysseyDesignTokens.HueNeutral200,
       opacity: isSideNavCollapsed && !hasNeighboringContent ? 1 : 0,
@@ -176,6 +180,7 @@ const StyledSideNavContainer = styled("nav", {
           : "translateX(0)",
       width: `calc(${SIDE_NAV_TOGGLE_ICON_HALF_SIZE + SIDE_NAV_COLLAPSE_PADDING_HIGHLIGHTED}px + ${odysseyDesignTokens.BorderWidthMain} * 2)`,
 
+      // Right-side vertical line when collapsed
       ...((isSideNavCollapsed &&
       !hasNeighboringContent &&
       isSideNavToggleHighlighted

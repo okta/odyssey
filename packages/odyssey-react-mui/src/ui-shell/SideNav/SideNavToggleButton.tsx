@@ -23,9 +23,6 @@ import {
 import styled from "@emotion/styled";
 import { useTranslation } from "react-i18next";
 
-// import {
-//   generateContrastColors,
-// } from "../../createContrastColors.js";
 import { MuiPropsContext, MuiPropsContextType } from "../../MuiPropsContext.js";
 import {
   DesignTokens,
@@ -43,12 +40,12 @@ const StyledToggleButton = styled(MuiButton, {
   shouldForwardProp: (prop) =>
     prop !== "clickAreaPadding" && prop !== "odysseyDesignTokens",
 })<{
-  clickAreaPadding?: number;
+  clickAreaPadding: number;
   odysseyDesignTokens: DesignTokens;
-}>(({ clickAreaPadding = 0, odysseyDesignTokens }) => ({
+}>(({ clickAreaPadding, odysseyDesignTokens }) => ({
   border: 0,
   height: `${SIDE_NAV_TOGGLE_ICON_SIZE}px`,
-  left: `-${clickAreaPadding}px`,
+  left: `-${clickAreaPadding * 2}px`,
   padding: 0,
   position: "relative",
   width: `calc(${SIDE_NAV_TOGGLE_ICON_SIZE}px + (${clickAreaPadding}px * 2))`,
@@ -78,7 +75,7 @@ const StyledToggleButton = styled(MuiButton, {
     color: odysseyDesignTokens.PalettePrimaryText,
     content: "''",
     height: `${SIDE_NAV_TOGGLE_ICON_SIZE}px`,
-    left: `${clickAreaPadding}px`,
+    left: `${clickAreaPadding * 2}px`,
     position: "absolute",
     top: 0,
     width: `${SIDE_NAV_TOGGLE_ICON_SIZE}px`,
@@ -87,103 +84,6 @@ const StyledToggleButton = styled(MuiButton, {
   "&:hover::before, &:focus-visible::before": {
     backgroundColor: odysseyDesignTokens.PalettePrimaryText,
   },
-
-  // "&:hover, &:focus-visible": {
-  // backgroundColor: "transparent",
-
-  // "#lineOne": {
-  //   animation: `lineOne-animate-to-collapse ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
-  //   animationFillMode: "forwards",
-  //   "@keyframes lineOne-animate-to-collapse": {
-  //     "0%": {
-  //       transform: "translate3d(-50%, -50%, 0)",
-  //     },
-  //     "50%": {
-  //       transform: "translate3d(-50%, -50%, 0) rotate(-90deg) scaleY(.75)",
-  //     },
-  //     "100%": {
-  //       transform: "translate3d(-50%, -27%, 0) rotate(-45deg) scaleY(.75)",
-  //     },
-  //   },
-  // },
-
-  // "#lineTwo": {
-  //   animation: `lineTwo-animate-to-collapse ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
-  //   animationFillMode: "forwards",
-  //   "@keyframes lineTwo-animate-to-collapse": {
-  //     "0%": {
-  //       transform: "translate3d(-50%, -50%, 0)",
-  //     },
-  //     "50%": {
-  //       transform: "translate3d(-50%, -50%, 0) rotate(-90deg) scaleY(.75)",
-  //     },
-  //     "100%": {
-  //       transform: "translate3d(-50%, -73%, 0) rotate(-135deg) scaleY(.75)",
-  //     },
-  //   },
-  // },
-
-  // ...(isSideNavCollapsed && {
-  //   "#lineOne": {
-  //     animation: `lineOne-animate-to-expand ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
-  //     animationFillMode: "forwards",
-  //     "@keyframes lineOne-animate-to-expand": {
-  //       "0%": {
-  //         transform: "translate3d(-50%, -50%, 0)",
-  //       },
-  //       "50%": {
-  //         transform: "translate3d(-50%, -50%, 0) rotate(90deg) scaleY(.75)",
-  //       },
-  //       "100%": {
-  //         transform: "translate3d(-50%, -73%, 0) rotate(135deg) scaleY(.75)",
-  //       },
-  //     },
-  //   },
-
-  //   "#lineTwo": {
-  //     animation: `lineTwo-animate-to-expand ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
-  //     animationFillMode: "forwards",
-  //     "@keyframes lineTwo-animate-to-expand": {
-  //       "0%": {
-  //         transform: "translate3d(-50%, -50%, 0)",
-  //       },
-  //       "50%": {
-  //         transform: "translate3d(-50%, -50%, 0) rotate(90deg) scaleY(.75)",
-  //       },
-  //       "100%": {
-  //         transform: "translate3d(-50%, -27%, 0) rotate(45deg) scaleY(.75)",
-  //       },
-  //     },
-  //   },
-  // }),
-  // }
-
-  // span: {
-  //   position: "absolute",
-  //   top: "50%",
-  //   left: "50%",
-  //   width: "2px",
-  //   height: odysseyDesignTokens.Spacing4,
-  //   backgroundColor: odysseyDesignTokens.HueNeutral600,
-  //   transform: "translate3d(-50%, -50%, 0)",
-  //   transition: `transform ${odysseyDesignTokens.TransitionDurationMain}`,
-
-  //   ...(toggleContrastColors?.fontColor && {
-  //     backgroundColor: toggleContrastColors.fontColor,
-  //   }),
-  // },
-
-  // "&::before": {
-  //   border: "1px solid #CBCBCB",
-  //   borderRadius: "50%",
-  //   boxShadow: "0px 8px 30px 0px #1D1D211A, 0px 4px 10px 0px #1D1D2114, 0px 1px 4px 0px #1D1D2114",
-  //   content: "''",
-  //   height: "24px",
-  //   position: "absolute",
-  //   width: "24px",
-
-  //   backgroundColor: "white",
-  // },
 }));
 
 const StyledChevronRightIcon = styled(ChevronRightIcon, {
@@ -193,10 +93,13 @@ const StyledChevronRightIcon = styled(ChevronRightIcon, {
   isSideNavCollapsed: boolean;
   odysseyDesignTokens: DesignTokens;
 }>(({ isSideNavCollapsed, odysseyDesignTokens }) => ({
-  fontSize: "1.3rem", // TODO: Make this the correct `font-size`.
+  fontSize: "125%",
+  left: isSideNavCollapsed ? undefined : "4px",
   position: "absolute",
+  right: isSideNavCollapsed ? "4px" : undefined,
+  top: "3px",
   transform: isSideNavCollapsed ? "rotate(0deg)" : "rotate(-180deg)", // Leave this as `-180deg` so it rotates over the top, not the bottom.
-  transitionDuration: `${odysseyDesignTokens.TransitionDurationMain}`,
+  transitionDuration: odysseyDesignTokens.TransitionDurationMain,
   transitionProperty: "transform",
   transitionTimingFunction: "ease-in-out",
 }));
@@ -211,7 +114,7 @@ export type SideNavToggleButtonProps = {
    *
    * Useful when moving the button around when trying to click it. This ensures the click area doesn't move to the right along with the button.
    */
-  clickAreaPadding: number;
+  clickAreaPadding?: number;
   /**
    * HTML `id` attribute for the `<button>` element.
    */
@@ -234,7 +137,7 @@ const defaultLocalButton = document.createElement("button");
 
 const SideNavToggleButton = ({
   ariaControls,
-  clickAreaPadding,
+  clickAreaPadding = 0,
   id,
   isSideNavCollapsed,
   onClick,
@@ -243,26 +146,8 @@ const SideNavToggleButton = ({
 }: SideNavToggleButtonProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
-  // const uiShellContext = useUiShellContext();
 
   const buttonRef = useRef(defaultLocalButton);
-
-  // const toggleContrastColors = useMemo(() => {
-  //   const hasNonStandardAppBackgroundColor =
-  //     uiShellContext?.appBackgroundColor &&
-  //     uiShellContext?.appBackgroundColor !==
-  //       odysseyDesignTokens.HueNeutralWhite &&
-  //     uiShellContext?.appBackgroundColor !== odysseyDesignTokens.HueNeutral50;
-
-  //   if (hasNonStandardAppBackgroundColor) {
-  //     return generateContrastColors(
-  //       uiShellContext.appBackgroundColor,
-  //       odysseyDesignTokens,
-  //     );
-  //   }
-
-  //   return undefined;
-  // }, [odysseyDesignTokens, uiShellContext]);
 
   useEffect(() => {
     const setHighlighted = () => {
@@ -318,7 +203,6 @@ const SideNavToggleButton = ({
           data-se="sidenav-toggle-button"
           data-sidenav-toggle
           id={id}
-          // isSideNavCollapsed={isSideNavCollapsed}
           odysseyDesignTokens={odysseyDesignTokens}
           onClick={onClick}
           ref={(element: HTMLButtonElement) => {
@@ -329,7 +213,6 @@ const SideNavToggleButton = ({
             }
           }}
           tabIndex={tabIndex}
-          // toggleContrastColors={toggleContrastColors}
           variant="floating"
         >
           <StyledChevronRightIcon
@@ -341,6 +224,7 @@ const SideNavToggleButton = ({
     },
     [
       ariaControls,
+      clickAreaPadding,
       id,
       isSideNavCollapsed,
       odysseyDesignTokens,
