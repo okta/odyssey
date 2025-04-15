@@ -51,8 +51,8 @@ const StyledToggleButton = styled(MuiButton, {
   width: `${SIDE_NAV_TOGGLE_ICON_SIZE}px`,
   zIndex: UI_SHELL_OVERLAY_Z_INDEX,
 
+  // `&&` is a CSS specificity override. Used here to counteract MUI Button styles.
   "&&": {
-    // `&&` is a CSS specificity override.
     backgroundColor: odysseyDesignTokens.HueNeutralWhite,
     borderColor: "transparent",
     borderRadius: "50%",

@@ -140,33 +140,51 @@ const StyledSideNavContainer = styled("nav", {
     position: "relative",
     width: "fit-content",
 
-    ...(isAppContentWhiteBackground &&
-      ({
-        borderRightWidth: odysseyDesignTokens.BorderWidthMain,
-        borderRightStyle:
-          odysseyDesignTokens.BorderStyleMain as Property.BorderRightStyle,
-        borderRightColor: odysseyDesignTokens.HueNeutral100,
-      } satisfies CSSProperties)),
-
-    "&::after": {
-      backgroundColor: odysseyDesignTokens.HueNeutral200,
+    "&::before, &::after": {
       content: "''",
       height: "100%",
-      opacity: isSideNavCollapsed && !hasNeighboringContent ? 1 : 0,
       pointerEvents: "none",
       position: "absolute",
       right: 0,
       top: 0,
+      transition: `opacity ${odysseyDesignTokens.TransitionDurationMain}, transform ${odysseyDesignTokens.TransitionDurationMain}, width ${odysseyDesignTokens.TransitionDurationMain}`,
+      userSelect: "none",
+      zIndex: UI_SHELL_OVERLAY_Z_INDEX,
+    },
+
+    "&::before": {
+      backgroundColor: isSideNavToggleHighlighted
+        ? odysseyDesignTokens.BorderColorPrimaryControl
+        : odysseyDesignTokens.HueNeutral100,
+      opacity:
+        isAppContentWhiteBackground ||
+        (!isSideNavCollapsed && isSideNavToggleHighlighted)
+          ? 1
+          : 0,
+      width: `calc(${odysseyDesignTokens.BorderWidthMain} * 2)`,
+    },
+
+    "&::after": {
+      backgroundColor: odysseyDesignTokens.HueNeutral200,
+      opacity: isSideNavCollapsed && !hasNeighboringContent ? 1 : 0,
       transform:
         isSideNavCollapsed && !hasNeighboringContent
           ? isSideNavToggleHighlighted
-            ? "translateX(100%)"
+            ? `translateX(calc(100% - (${odysseyDesignTokens.BorderWidthMain} * 2)))`
             : `translateX(calc(100% - ${SIDE_NAV_COLLAPSE_PADDING_HIGHLIGHTED}px))`
           : "translateX(0)",
-      transition: `opacity ${odysseyDesignTokens.TransitionDurationMain}, transform ${odysseyDesignTokens.TransitionDurationMain}`,
-      userSelect: "none",
-      width: `${SIDE_NAV_TOGGLE_ICON_HALF_SIZE + SIDE_NAV_COLLAPSE_PADDING_HIGHLIGHTED}px`,
-      zIndex: UI_SHELL_OVERLAY_Z_INDEX,
+      width: `calc(${SIDE_NAV_TOGGLE_ICON_HALF_SIZE + SIDE_NAV_COLLAPSE_PADDING_HIGHLIGHTED}px + ${odysseyDesignTokens.BorderWidthMain} * 2)`,
+
+      ...((isSideNavCollapsed &&
+      !hasNeighboringContent &&
+      isSideNavToggleHighlighted
+        ? {
+            borderRightColor: odysseyDesignTokens.BorderColorPrimaryControl,
+            borderRightStyle:
+              odysseyDesignTokens.BorderStyleMain as Property.BorderRightStyle,
+            borderRightWidth: `calc(${odysseyDesignTokens.BorderWidthMain} * 2)`,
+          }
+        : {}) satisfies CSSProperties),
     },
   }),
 );
