@@ -45,6 +45,7 @@ import { SideNavFooterContent } from "./SideNavFooterContent.js";
 import { SideNavItemContentContext } from "./SideNavItemContentContext.js";
 import {
   SIDE_NAV_TOGGLE_ICON_HALF_SIZE,
+  SIDE_NAV_TOGGLE_ICON_SIZE,
   SideNavToggleButton,
   SideNavToggleButtonProps,
 } from "./SideNavToggleButton.js";
@@ -745,6 +746,11 @@ const SideNav = ({
           odysseyDesignTokens={odysseyDesignTokens}
         >
           <SideNavToggleButton
+            clickAreaPadding={
+              isSideNavCollapsed && !hasNeighboringContent
+                ? SIDE_NAV_TOGGLE_ICON_SIZE / 2
+                : 0
+            }
             ariaControls="side-nav-expandable"
             isSideNavCollapsed={isSideNavCollapsed}
             onClick={sideNavExpandClickHandler}

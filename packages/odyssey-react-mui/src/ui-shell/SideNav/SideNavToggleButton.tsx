@@ -40,23 +40,25 @@ export const SIDE_NAV_TOGGLE_ICON_SIZE = 24;
 export const SIDE_NAV_TOGGLE_ICON_HALF_SIZE = SIDE_NAV_TOGGLE_ICON_SIZE / 2;
 
 const StyledToggleButton = styled(MuiButton, {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+  shouldForwardProp: (prop) =>
+    prop !== "clickAreaPadding" && prop !== "odysseyDesignTokens",
 })<{
+  clickAreaPadding?: number;
   odysseyDesignTokens: DesignTokens;
-}>(({ odysseyDesignTokens }) => ({
+}>(({ clickAreaPadding = 0, odysseyDesignTokens }) => ({
   border: 0,
   height: `${SIDE_NAV_TOGGLE_ICON_SIZE}px`,
+  left: `-${clickAreaPadding}px`,
   padding: 0,
   position: "relative",
-  width: `${SIDE_NAV_TOGGLE_ICON_SIZE}px`,
+  width: `calc(${SIDE_NAV_TOGGLE_ICON_SIZE}px + (${clickAreaPadding}px * 2))`,
   zIndex: UI_SHELL_OVERLAY_Z_INDEX,
 
   // `&&` is a CSS specificity override. Used here to counteract MUI Button styles.
   "&&": {
-    backgroundColor: odysseyDesignTokens.HueNeutralWhite,
+    backgroundColor: "transparent",
     borderColor: "transparent",
-    borderRadius: "50%",
-    boxShadow: odysseyDesignTokens.ShadowScale1,
+    boxShadow: "none",
     color: odysseyDesignTokens.PalettePrimaryText,
   },
 
@@ -65,76 +67,96 @@ const StyledToggleButton = styled(MuiButton, {
   },
 
   "&:hover, &:focus-visible": {
-    backgroundColor: odysseyDesignTokens.PalettePrimaryText,
     color: odysseyDesignTokens.HueNeutralWhite,
-    // backgroundColor: "transparent",
-
-    // "#lineOne": {
-    //   animation: `lineOne-animate-to-collapse ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
-    //   animationFillMode: "forwards",
-    //   "@keyframes lineOne-animate-to-collapse": {
-    //     "0%": {
-    //       transform: "translate3d(-50%, -50%, 0)",
-    //     },
-    //     "50%": {
-    //       transform: "translate3d(-50%, -50%, 0) rotate(-90deg) scaleY(.75)",
-    //     },
-    //     "100%": {
-    //       transform: "translate3d(-50%, -27%, 0) rotate(-45deg) scaleY(.75)",
-    //     },
-    //   },
-    // },
-
-    // "#lineTwo": {
-    //   animation: `lineTwo-animate-to-collapse ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
-    //   animationFillMode: "forwards",
-    //   "@keyframes lineTwo-animate-to-collapse": {
-    //     "0%": {
-    //       transform: "translate3d(-50%, -50%, 0)",
-    //     },
-    //     "50%": {
-    //       transform: "translate3d(-50%, -50%, 0) rotate(-90deg) scaleY(.75)",
-    //     },
-    //     "100%": {
-    //       transform: "translate3d(-50%, -73%, 0) rotate(-135deg) scaleY(.75)",
-    //     },
-    //   },
-    // },
-
-    // ...(isSideNavCollapsed && {
-    //   "#lineOne": {
-    //     animation: `lineOne-animate-to-expand ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
-    //     animationFillMode: "forwards",
-    //     "@keyframes lineOne-animate-to-expand": {
-    //       "0%": {
-    //         transform: "translate3d(-50%, -50%, 0)",
-    //       },
-    //       "50%": {
-    //         transform: "translate3d(-50%, -50%, 0) rotate(90deg) scaleY(.75)",
-    //       },
-    //       "100%": {
-    //         transform: "translate3d(-50%, -73%, 0) rotate(135deg) scaleY(.75)",
-    //       },
-    //     },
-    //   },
-
-    //   "#lineTwo": {
-    //     animation: `lineTwo-animate-to-expand ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
-    //     animationFillMode: "forwards",
-    //     "@keyframes lineTwo-animate-to-expand": {
-    //       "0%": {
-    //         transform: "translate3d(-50%, -50%, 0)",
-    //       },
-    //       "50%": {
-    //         transform: "translate3d(-50%, -50%, 0) rotate(90deg) scaleY(.75)",
-    //       },
-    //       "100%": {
-    //         transform: "translate3d(-50%, -27%, 0) rotate(45deg) scaleY(.75)",
-    //       },
-    //     },
-    //   },
-    // }),
   },
+
+  "&::before": {
+    backgroundColor: odysseyDesignTokens.HueNeutralWhite,
+    borderColor: "transparent",
+    borderRadius: "50%",
+    boxShadow: odysseyDesignTokens.ShadowScale1,
+    color: odysseyDesignTokens.PalettePrimaryText,
+    content: "''",
+    height: `${SIDE_NAV_TOGGLE_ICON_SIZE}px`,
+    left: `${clickAreaPadding}px`,
+    position: "absolute",
+    top: 0,
+    width: `${SIDE_NAV_TOGGLE_ICON_SIZE}px`,
+  },
+
+  "&:hover::before, &:focus-visible::before": {
+    backgroundColor: odysseyDesignTokens.PalettePrimaryText,
+  },
+
+  // "&:hover, &:focus-visible": {
+  // backgroundColor: "transparent",
+
+  // "#lineOne": {
+  //   animation: `lineOne-animate-to-collapse ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
+  //   animationFillMode: "forwards",
+  //   "@keyframes lineOne-animate-to-collapse": {
+  //     "0%": {
+  //       transform: "translate3d(-50%, -50%, 0)",
+  //     },
+  //     "50%": {
+  //       transform: "translate3d(-50%, -50%, 0) rotate(-90deg) scaleY(.75)",
+  //     },
+  //     "100%": {
+  //       transform: "translate3d(-50%, -27%, 0) rotate(-45deg) scaleY(.75)",
+  //     },
+  //   },
+  // },
+
+  // "#lineTwo": {
+  //   animation: `lineTwo-animate-to-collapse ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
+  //   animationFillMode: "forwards",
+  //   "@keyframes lineTwo-animate-to-collapse": {
+  //     "0%": {
+  //       transform: "translate3d(-50%, -50%, 0)",
+  //     },
+  //     "50%": {
+  //       transform: "translate3d(-50%, -50%, 0) rotate(-90deg) scaleY(.75)",
+  //     },
+  //     "100%": {
+  //       transform: "translate3d(-50%, -73%, 0) rotate(-135deg) scaleY(.75)",
+  //     },
+  //   },
+  // },
+
+  // ...(isSideNavCollapsed && {
+  //   "#lineOne": {
+  //     animation: `lineOne-animate-to-expand ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
+  //     animationFillMode: "forwards",
+  //     "@keyframes lineOne-animate-to-expand": {
+  //       "0%": {
+  //         transform: "translate3d(-50%, -50%, 0)",
+  //       },
+  //       "50%": {
+  //         transform: "translate3d(-50%, -50%, 0) rotate(90deg) scaleY(.75)",
+  //       },
+  //       "100%": {
+  //         transform: "translate3d(-50%, -73%, 0) rotate(135deg) scaleY(.75)",
+  //       },
+  //     },
+  //   },
+
+  //   "#lineTwo": {
+  //     animation: `lineTwo-animate-to-expand ${odysseyDesignTokens.TransitionDurationMain} cubic-bezier(0, 0, 0.2, 1)`,
+  //     animationFillMode: "forwards",
+  //     "@keyframes lineTwo-animate-to-expand": {
+  //       "0%": {
+  //         transform: "translate3d(-50%, -50%, 0)",
+  //       },
+  //       "50%": {
+  //         transform: "translate3d(-50%, -50%, 0) rotate(90deg) scaleY(.75)",
+  //       },
+  //       "100%": {
+  //         transform: "translate3d(-50%, -27%, 0) rotate(45deg) scaleY(.75)",
+  //       },
+  //     },
+  //   },
+  // }),
+  // }
 
   // span: {
   //   position: "absolute",
@@ -185,15 +207,24 @@ export type SideNavToggleButtonProps = {
    */
   ariaControls: string;
   /**
-   * The ID of the Button
+   * Left padding in pixels for the click area of the button.
+   *
+   * Useful when moving the button around when trying to click it. This ensures the click area doesn't move to the right along with the button.
+   */
+  clickAreaPadding: number;
+  /**
+   * HTML `id` attribute for the `<button>` element.
    */
   id?: string;
   isSideNavCollapsed: boolean;
   tabIndex?: HTMLAttributes<HTMLElement>["tabIndex"];
   /**
-   * The click event handler for the Button
+   * Click event handler for the `<button>` element.
    */
   onClick?: MuiButtonProps["onClick"];
+  /**
+   * Provides the hovered or focused state of the `<button>` element.
+   */
   onHighlight?: (isHighlighted: boolean) => void;
   onKeyDown?: MuiButtonProps["onKeyDown"];
 };
@@ -203,6 +234,7 @@ const defaultLocalButton = document.createElement("button");
 
 const SideNavToggleButton = ({
   ariaControls,
+  clickAreaPadding,
   id,
   isSideNavCollapsed,
   onClick,
@@ -282,6 +314,7 @@ const SideNavToggleButton = ({
           aria-controls={ariaControls}
           aria-expanded={!isSideNavCollapsed}
           aria-label={toggleLabel}
+          clickAreaPadding={clickAreaPadding}
           data-se="sidenav-toggle-button"
           data-sidenav-toggle
           id={id}
