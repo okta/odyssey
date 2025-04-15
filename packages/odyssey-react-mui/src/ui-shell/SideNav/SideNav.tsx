@@ -44,6 +44,7 @@ import {
 import { SideNavFooterContent } from "./SideNavFooterContent.js";
 import { SideNavItemContentContext } from "./SideNavItemContentContext.js";
 import {
+  SIDE_NAV_TOGGLE_ICON_HALF_SIZE,
   SideNavToggleButton,
   SideNavToggleButtonProps,
 } from "./SideNavToggleButton.js";
@@ -59,6 +60,9 @@ import {
   UI_SHELL_BASE_Z_INDEX,
   UI_SHELL_OVERLAY_Z_INDEX,
 } from "../uiShellSharedConstants.js";
+
+export const SIDE_NAV_COLLAPSE_PADDING_HIGHLIGHTED = 12;
+export const SIDE_NAV_COLLAPSE_PADDING_UNHIGHLIGHTED = 2;
 
 const StyledCollapsibleContent = styled("div", {
   shouldForwardProp: (prop) =>
@@ -128,7 +132,7 @@ const StyledSideNavContainer = styled("nav", {
     hasNeighboringContent,
     isAppContentWhiteBackground,
     isSideNavCollapsed,
-    // isSideNavToggleHighlighted,
+    isSideNavToggleHighlighted,
     odysseyDesignTokens,
   }) => ({
     backgroundColor: backgroundColor || odysseyDesignTokens.HueNeutralWhite,
@@ -155,11 +159,13 @@ const StyledSideNavContainer = styled("nav", {
       top: 0,
       transform:
         isSideNavCollapsed && !hasNeighboringContent
-          ? "translateX(100%)"
+          ? isSideNavToggleHighlighted
+            ? "translateX(100%)"
+            : `translateX(calc(100% - ${SIDE_NAV_COLLAPSE_PADDING_HIGHLIGHTED}px))`
           : "translateX(0)",
       transition: `opacity ${odysseyDesignTokens.TransitionDurationMain}, transform ${odysseyDesignTokens.TransitionDurationMain}`,
       userSelect: "none",
-      width: odysseyDesignTokens.Spacing4,
+      width: `${SIDE_NAV_TOGGLE_ICON_HALF_SIZE + SIDE_NAV_COLLAPSE_PADDING_HIGHLIGHTED}px`,
       zIndex: UI_SHELL_OVERLAY_Z_INDEX,
     },
   }),
@@ -180,16 +186,18 @@ const StyledSideNavToggleButtonContainer = styled("div", {
   ({
     hasNeighboringContent,
     isSideNavCollapsed,
-    // isSideNavToggleHighlighted,
+    isSideNavToggleHighlighted,
     odysseyDesignTokens,
   }) => ({
     position: "absolute",
-    right: "12px",
+    right: `${SIDE_NAV_TOGGLE_ICON_HALF_SIZE}px`,
     top: SIDE_NAV_VISIBILITY_TOGGLE_ICON_POSITION,
     transform:
       isSideNavCollapsed && !hasNeighboringContent
-        ? `translate3d(calc(100% + ${odysseyDesignTokens.Spacing4}), 0, 0)`
-        : `translate3d(100%, 0, 0)`,
+        ? isSideNavToggleHighlighted
+          ? `translate3d(calc(100% + ${SIDE_NAV_TOGGLE_ICON_HALF_SIZE + SIDE_NAV_COLLAPSE_PADDING_HIGHLIGHTED}px), 0, 0)`
+          : `translate3d(calc(100% + ${SIDE_NAV_TOGGLE_ICON_HALF_SIZE + SIDE_NAV_COLLAPSE_PADDING_UNHIGHLIGHTED}px), 0, 0)`
+        : "translate3d(100%, 0, 0)",
     transition: `transform ${odysseyDesignTokens.TransitionDurationMain}`,
     zIndex: UI_SHELL_OVERLAY_Z_INDEX + 1,
   }),

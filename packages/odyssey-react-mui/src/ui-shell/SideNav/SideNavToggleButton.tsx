@@ -36,27 +36,28 @@ import { Tooltip } from "../../Tooltip.js";
 import { UI_SHELL_OVERLAY_Z_INDEX } from "../uiShellSharedConstants.js";
 import { ChevronRightIcon } from "../../icons.generated/ChevronRight.js";
 
+export const SIDE_NAV_TOGGLE_ICON_SIZE = 24;
+export const SIDE_NAV_TOGGLE_ICON_HALF_SIZE = SIDE_NAV_TOGGLE_ICON_SIZE / 2;
+
 const StyledToggleButton = styled(MuiButton, {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{
   odysseyDesignTokens: DesignTokens;
 }>(({ odysseyDesignTokens }) => ({
   border: 0,
-  fontSize: "75%", // TODO: Make this the correct `font-size`.
-  height: odysseyDesignTokens.Spacing5,
+  height: `${SIDE_NAV_TOGGLE_ICON_SIZE}px`,
   padding: 0,
   position: "relative",
-  width: odysseyDesignTokens.Spacing5,
+  width: `${SIDE_NAV_TOGGLE_ICON_SIZE}px`,
   zIndex: UI_SHELL_OVERLAY_Z_INDEX,
 
   "&&": {
     // `&&` is a CSS specificity override.
-    backgroundColor: "white",
+    backgroundColor: odysseyDesignTokens.HueNeutralWhite,
     borderColor: "transparent",
     borderRadius: "50%",
-    boxShadow:
-      "0px 8px 30px 0px #1D1D211A, 0px 4px 10px 0px #1D1D2114, 0px 1px 4px 0px #1D1D2114",
-    color: "#3F59E4",
+    boxShadow: odysseyDesignTokens.ShadowScale1,
+    color: odysseyDesignTokens.PalettePrimaryText,
   },
 
   "&:focus-visible": {
@@ -64,8 +65,8 @@ const StyledToggleButton = styled(MuiButton, {
   },
 
   "&:hover, &:focus-visible": {
-    backgroundColor: "#3F59E4",
-    color: "white",
+    backgroundColor: odysseyDesignTokens.PalettePrimaryText,
+    color: odysseyDesignTokens.HueNeutralWhite,
     // backgroundColor: "transparent",
 
     // "#lineOne": {
@@ -170,18 +171,12 @@ const StyledChevronRightIcon = styled(ChevronRightIcon, {
   isSideNavCollapsed: boolean;
   odysseyDesignTokens: DesignTokens;
 }>(({ isSideNavCollapsed, odysseyDesignTokens }) => ({
-  // color: "#3F59E4",
-  fontSize: "1.3rem",
+  fontSize: "1.3rem", // TODO: Make this the correct `font-size`.
   position: "absolute",
   transform: isSideNavCollapsed ? "rotate(0deg)" : "rotate(-180deg)", // Leave this as `-180deg` so it rotates over the top, not the bottom.
   transitionDuration: `${odysseyDesignTokens.TransitionDurationMain}`,
   transitionProperty: "transform",
   transitionTimingFunction: "ease-in-out",
-
-  // "&:hover": {
-  //   backgroundColor: "#3F59E4",
-  //   color: "white",
-  // },
 }));
 
 export type SideNavToggleButtonProps = {
