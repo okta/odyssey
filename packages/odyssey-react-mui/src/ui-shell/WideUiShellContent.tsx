@@ -15,6 +15,7 @@ import { memo, useRef } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 import { AppSwitcher } from "./AppSwitcher/index.js";
+import { AppSwitcherAppIconData } from "./AppSwitcher/AppSwitcherApp.js";
 import { InnerAppContainer } from "./InnerAppContainer.js";
 import {
   useOdysseyDesignTokens,
@@ -30,6 +31,8 @@ import {
 } from "./uiShellContentTypes.js";
 import { UiShellColors, useUiShellContext } from "./UiShellProvider.js";
 import { emptySideNavItems } from "./uiShellSharedConstants.js";
+
+const appSwitcherDefaultAppIcons = [] satisfies AppSwitcherAppIconData[];
 
 const StyledAppContainer = styled("div", {
   shouldForwardProp: (prop) =>
@@ -135,7 +138,11 @@ const WideUiShellContent = ({
           initialVisibleSections?.includes("AppSwitcher") &&
             !appSwitcherProps && (
               <ErrorBoundary fallback={null} onError={onError}>
-                <AppSwitcher isLoading appIcons={[]} selectedAppName="" />
+                <AppSwitcher
+                  appIcons={appSwitcherDefaultAppIcons}
+                  isLoading
+                  selectedAppName=""
+                />
               </ErrorBoundary>
             )
         }
