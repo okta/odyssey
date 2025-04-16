@@ -29,7 +29,6 @@ import {
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext.js";
 import { Tooltip } from "../../Tooltip.js";
-// import { useUiShellContext } from "../../ui-shell/UiShellProvider.js";
 import { UI_SHELL_OVERLAY_Z_INDEX } from "../uiShellSharedConstants.js";
 import { ChevronRightIcon } from "../../icons.generated/ChevronRight.js";
 
