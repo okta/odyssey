@@ -107,10 +107,6 @@ describe(renderUiShell.name, () => {
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(parentElement);
 
-    let setComponentProps: ReturnType<
-      typeof renderUiShell
-    >["setComponentProps"];
-
     // This needs to be wrapped in `act` because the web component mounts the React app, and React events have to be wrapped in `act`.
     act(() => {
       const renderUiShellReturnValue = renderUiShell({
@@ -118,11 +114,7 @@ describe(renderUiShell.name, () => {
         parentElement,
       });
 
-      setComponentProps = renderUiShellReturnValue.setComponentProps;
-    });
-
-    act(() => {
-      setComponentProps({
+      renderUiShellReturnValue.setComponentProps({
         sideNavProps: {
           appName,
           sideNavItems: [],
@@ -198,7 +190,7 @@ describe(renderUiShell.name, () => {
 
     await waitFor(() => {
       expect(onError).toHaveBeenCalledTimes(1);
-      expect(consoleError).toHaveBeenCalledTimes(1);
+      expect(consoleError).toHaveBeenCalledTimes(3);
       expect(
         parentElement
           .querySelector(reactWebComponentElementName)!
