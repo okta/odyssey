@@ -154,7 +154,7 @@ const eslintConfig = createTsEslintConfig(
       jsxA11yPlugin.flatConfigs.recommended,
       modifiedReactHooksPlugin.configs.recommended,
     ],
-    files: ["**/*.jsx", "**/*.tsx"],
+    files: ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"],
     name: getPrefixedEslintConfigName("react"),
     plugins: {
       "react-hooks": modifiedReactHooksPlugin,
