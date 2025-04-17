@@ -175,7 +175,7 @@ describe("DataView", { timeout: 10000 }, () => {
   });
 
   describe("Filter and search", () => {
-    test.only("can filter rows", async () => {
+    test("can filter rows", async () => {
       const user = userEvent.setup();
 
       render(
