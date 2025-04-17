@@ -12,7 +12,6 @@
 
 import { act, renderHook, waitFor } from "@testing-library/react";
 import { page } from "@vitest/browser/context";
-// import { expectError } from "tsd";
 
 import { useMediaQuery } from "./useMediaQuery.js";
 

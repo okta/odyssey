@@ -37,16 +37,12 @@ export default defineConfig({
       {
         test: {
           browser: {
-            // actionTimeout: 5000,
             enabled: true,
             headless: true,
             instances: [
               {
                 browser: "chromium",
                 screenshotDirectory: "__vitest-screenshots",
-                // context: {},
-                // launch: {},
-                // setupFile: './chromium-setup.ts',
               },
             ],
             provider: "playwright",
