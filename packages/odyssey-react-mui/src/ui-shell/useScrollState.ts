@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export const getIsScrollHeightElement = ({
   containerElement,
@@ -68,43 +68,67 @@ export const useScrollState = <
 ) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // TODO: This will need to be part of `MutationObserver` and `useEffect`.
-  const scrollableElements = useMemo(
-    () => getNestedScrollContainers(containerElement).concat(containerElement),
-    [containerElement],
-  );
+  const requestedAnimationFrameIdRef = useRef(0);
+  const scrollableElementsRef = useRef<HTMLElement[]>([]);
 
-  useEffect(() => {
-    let requestedAnimationFrameId: number;
-
-    const updateScrollState = () => {
-      cancelAnimationFrame(requestedAnimationFrameId);
-
-      requestedAnimationFrameId = requestAnimationFrame(() => {
-        setIsScrolled(
-          scrollableElements.reduce(
-            (isScrolled, scrollableElement) =>
-              isScrolled || scrollableElement.scrollTop > 0,
-            false,
-          ),
-        );
-      });
-    };
-
-    scrollableElements.forEach((scrollableElement) => {
+  const addScrollEventListeners = useCallback(() => {
+    scrollableElementsRef.current.forEach((scrollableElement) => {
       scrollableElement.addEventListener("scroll", updateScrollState);
     });
+  }, []);
 
+  const removeScrollEventListeners = useCallback(() => {
+    scrollableElementsRef.current.forEach((scrollableElement) => {
+      scrollableElement.removeEventListener("scroll", updateScrollState);
+    });
+  }, []);
+
+  const updateScrollableElements = useCallback(() => {
+    scrollableElementsRef.current =
+      getNestedScrollContainers(containerElement).concat(containerElement);
+  }, []);
+
+  const updateScrollState = useCallback(() => {
+    cancelAnimationFrame(requestedAnimationFrameIdRef.current);
+
+    requestedAnimationFrameIdRef.current = requestAnimationFrame(() => {
+      setIsScrolled(
+        scrollableElementsRef.current.reduce(
+          (isScrolled, scrollableElement) =>
+            isScrolled || scrollableElement.scrollTop > 0,
+          false,
+        ),
+      );
+    });
+  }, []);
+
+  const updateScrollListeners = useCallback(() => {
+    removeScrollEventListeners();
+    updateScrollableElements();
+    addScrollEventListeners();
     updateScrollState();
+  }, []);
+
+  useEffect(() => {
+    const mutationObserver = new MutationObserver(() => {
+      updateScrollListeners();
+    });
+
+    mutationObserver.observe(containerElement, {
+      attributes: true,
+      attributeFilter: ["style"],
+      childList: true,
+      subtree: true,
+    });
+
+    updateScrollListeners();
 
     return () => {
-      scrollableElements.forEach((scrollableElement) => {
-        scrollableElement.removeEventListener("scroll", updateScrollState);
-      });
-
-      cancelAnimationFrame(requestedAnimationFrameId);
+      cancelAnimationFrame(requestedAnimationFrameIdRef.current);
+      removeScrollEventListeners();
+      mutationObserver.disconnect();
     };
-  }, [scrollableElements]);
+  }, []);
 
   return {
     isContentScrolled: isScrolled,

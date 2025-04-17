@@ -617,8 +617,10 @@ describe(useScrollState.name, () => {
         expect(result.current.isContentScrolled).toBe(true);
       });
     });
+  });
 
-    test.skip("when overflow added after render then scrolled", async () => {
+  describe("is scrolling after DOM update", () => {
+    test("when overflow added after render then scrolled", async () => {
       const { containerElement, scrollableElement } = renderElements({
         containerElementHeight: "100px",
         scrollableElementHeight: "100px",
@@ -642,7 +644,37 @@ describe(useScrollState.name, () => {
       expect(result.current.isContentScrolled).toBe(false);
 
       scrollableElement.append(nestedContainerElement);
+      scrollableElement.scrollTo(0, 1);
 
+      await waitFor(() => {
+        expect(result.current.isContentScrolled).toBe(true);
+      });
+    });
+
+    test("when nested container added after render then scrolled", async () => {
+      const { containerElement, scrollableElement } = renderElements({
+        containerElementHeight: "100px",
+        scrollableElementHeight: "100px",
+      });
+
+      const { containerElement: nestedContainerElement } = renderElements({
+        containerElementHeight: "101px",
+        isNested: true,
+        scrollableElementHeight: "0px",
+      });
+
+      const { result } = renderHook(() => useScrollState(containerElement));
+
+      expect(result.current.isContentScrolled).toBe(false);
+
+      scrollableElement.scrollTo(0, 1);
+
+      await waitFor100ms();
+
+      expect(result.current.isContentScrolled).toBe(false);
+
+      scrollableElement.append(nestedContainerElement);
+      scrollableElement.style.setProperty("overflow-y", "auto");
       scrollableElement.scrollTo(0, 1);
 
       await waitFor(() => {
