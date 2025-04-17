@@ -38,16 +38,6 @@ export const getIsYAxisScrolling = (element: HTMLElement) =>
     ? getIsYAxisScrollContainer(element)
     : false;
 
-// export const getIsEqualScrollingZone = ({
-//   element,
-// }: {
-//   element: HTMLElement,
-// }) => (
-//   element.scrollHeight > element.clientHeight
-//   ? getIsYAxisScrollContainer(element)
-//   : false
-// )
-
 export const getNestedScrollContainers = (containerElement: HTMLElement) =>
   Array.from(containerElement.querySelectorAll<HTMLElement>("*"))
     .filter((element) => getIsYAxisScrollContainer(element))
@@ -58,35 +48,20 @@ export const getNestedScrollContainers = (containerElement: HTMLElement) =>
       }),
     );
 
+export const fakeDefaultContainerElement = document.createElement("div");
+
 export const useScrollState = <
   ContainerElement extends HTMLElement = HTMLDivElement,
 >(
   /**
    * The element containing a scroll area.
    */
-  containerElement: ContainerElement,
+  containerElement: ContainerElement | null,
 ) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const requestedAnimationFrameIdRef = useRef(0);
   const scrollableElementsRef = useRef<HTMLElement[]>([]);
-
-  const addScrollEventListeners = useCallback(() => {
-    scrollableElementsRef.current.forEach((scrollableElement) => {
-      scrollableElement.addEventListener("scroll", updateScrollState);
-    });
-  }, []);
-
-  const removeScrollEventListeners = useCallback(() => {
-    scrollableElementsRef.current.forEach((scrollableElement) => {
-      scrollableElement.removeEventListener("scroll", updateScrollState);
-    });
-  }, []);
-
-  const updateScrollableElements = useCallback(() => {
-    scrollableElementsRef.current =
-      getNestedScrollContainers(containerElement).concat(containerElement);
-  }, []);
 
   const updateScrollState = useCallback(() => {
     cancelAnimationFrame(requestedAnimationFrameIdRef.current);
@@ -102,24 +77,52 @@ export const useScrollState = <
     });
   }, []);
 
+  const addScrollEventListeners = useCallback(() => {
+    scrollableElementsRef.current.forEach((scrollableElement) => {
+      scrollableElement.addEventListener("scroll", updateScrollState);
+    });
+  }, [updateScrollState]);
+
+  const removeScrollEventListeners = useCallback(() => {
+    scrollableElementsRef.current.forEach((scrollableElement) => {
+      scrollableElement.removeEventListener("scroll", updateScrollState);
+    });
+  }, [updateScrollState]);
+
+  const updateScrollableElements = useCallback(() => {
+    const computedContainerElement =
+      containerElement || fakeDefaultContainerElement;
+
+    scrollableElementsRef.current = getNestedScrollContainers(
+      computedContainerElement,
+    ).concat(computedContainerElement);
+  }, [containerElement]);
+
   const updateScrollListeners = useCallback(() => {
     removeScrollEventListeners();
     updateScrollableElements();
     addScrollEventListeners();
     updateScrollState();
-  }, []);
+  }, [
+    addScrollEventListeners,
+    removeScrollEventListeners,
+    updateScrollableElements,
+    updateScrollState,
+  ]);
 
   useEffect(() => {
     const mutationObserver = new MutationObserver(() => {
       updateScrollListeners();
     });
 
-    mutationObserver.observe(containerElement, {
-      attributes: true,
-      attributeFilter: ["style"],
-      childList: true,
-      subtree: true,
-    });
+    if (containerElement) {
+      mutationObserver.observe(containerElement, {
+        attributes: true,
+        attributeFilter: ["style"],
+        childList: true,
+        subtree: true,
+      });
+    }
 
     updateScrollListeners();
 
@@ -128,7 +131,7 @@ export const useScrollState = <
       removeScrollEventListeners();
       mutationObserver.disconnect();
     };
-  }, []);
+  }, [containerElement, removeScrollEventListeners, updateScrollListeners]);
 
   return {
     isContentScrolled: isScrolled,
