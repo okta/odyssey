@@ -15,8 +15,6 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   test: {
     coverage: {
-      reporter:
-        process.env.NODE_ENV === "test" ? ["text-summary"] : ["text", "html"],
       thresholds: {
         branches: 76,
         functions: 44,
