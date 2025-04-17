@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.35.3](https://github.com/okta/odyssey/compare/v1.35.0...v1.35.3) (2025-04-17)
+
+### Bug Fixes
+
+- upgrades MUI version ([80bf886](https://github.com/okta/odyssey/commit/80bf8862611385cbef725058fa65ba096dad2e6f))
+
 ## [1.35.2](https://github.com/okta/odyssey/compare/v1.35.0...v1.35.2) (2025-04-03)
 
 ### Bug Fixes

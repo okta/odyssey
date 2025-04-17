@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.35.3](https://github.com/okta/odyssey/compare/v1.35.0...v1.35.3) (2025-04-17)
+
+**Note:** Version bump only for package @okta/odyssey-design-tokens
+
 ## [1.35.2](https://github.com/okta/odyssey/compare/v1.35.0...v1.35.2) (2025-04-03)
 
 **Note:** Version bump only for package @okta/odyssey-design-tokens
