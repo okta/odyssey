@@ -1,6 +1,6 @@
 {
   "name": "@okta/browserslist-config-odyssey",
-  "version": "1.35.2",
+  "version": "1.35.3",
   "description": "Browserslist config for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
