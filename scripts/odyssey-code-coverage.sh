@@ -5,6 +5,7 @@ source $OKTA_HOME/$REPO/scripts/setup.sh
 
 cd $OKTA_HOME/$REPO
 
+export NODE_ENV=test
 export TEST_SUITE_TYPE="junit" # Bacon required config
 
 # Additional bacon required config for reporting results
