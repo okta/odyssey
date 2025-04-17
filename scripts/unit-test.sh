@@ -9,6 +9,13 @@ export TEST_RESULT_FILE_DIR="${REPO}/src/v3/build2/reports/unit"
 echo $TEST_SUITE_TYPE > $TEST_SUITE_TYPE_FILE
 echo $TEST_RESULT_FILE_DIR > $TEST_RESULT_FILE_DIR_FILE
 
+# Odyssey tests require playwright dependency installation (and uses its own chromium browser)
+if ! yarn workspace @okta/odyssey-mui playwright install --with-deps chromium; then
+  echo "Failed to install Playwright and its dependencies!"
+  report_results FAILURE publish_type_and_result_dir_but_always_fail
+  exit "$BUILD_FAILURE"
+fi
+
 COMMAND=$(yarn test)
 EXIT_CODE=$?
 
