@@ -17,6 +17,7 @@ import {
   ReactInWebComponentElement,
   reactWebComponentElementName,
 } from "../web-component/renderReactInWebComponent.js";
+import { appRootElementId } from "../web-component/createReactRootElements.js";
 
 describe(renderUiShell.name, () => {
   afterEach(() => {
@@ -109,12 +110,12 @@ describe(renderUiShell.name, () => {
 
     // This needs to be wrapped in `act` because the web component mounts the React app, and React events have to be wrapped in `act`.
     act(() => {
-      const renderUiShellReturnValue = renderUiShell({
+      const { setComponentProps } = renderUiShell({
         appElementScrollingMode: "vertical",
         parentElement,
       });
 
-      renderUiShellReturnValue.setComponentProps({
+      setComponentProps({
         sideNavProps: {
           appName,
           sideNavItems: [],
@@ -125,7 +126,9 @@ describe(renderUiShell.name, () => {
 
     await waitFor(() => {
       expect(
-        parentElement.querySelector(reactWebComponentElementName)!.shadowRoot,
+        parentElement
+          .querySelector(reactWebComponentElementName)!
+          .shadowRoot?.getElementById(appRootElementId),
       ).toHaveTextContent(appName);
     });
   });
@@ -155,7 +158,9 @@ describe(renderUiShell.name, () => {
 
     await waitFor(() => {
       expect(
-        parentElement.querySelector(reactWebComponentElementName)!.shadowRoot,
+        parentElement
+          .querySelector(reactWebComponentElementName)!
+          .shadowRoot?.getElementById(appRootElementId),
       ).toHaveTextContent(appName);
     });
   });
@@ -163,6 +168,7 @@ describe(renderUiShell.name, () => {
   test("renders `<div>` in the event of an error", async () => {
     const consoleError = vi.fn();
     const onError = vi.fn();
+    const testBreakError = new Error("TEST BREAK!");
 
     const parentElement = document.createElement("div");
 
@@ -183,14 +189,16 @@ describe(renderUiShell.name, () => {
       setComponentProps(
         // We're purposefully testing an error state, so we need to send something that will cause an error.
         () => {
-          throw new Error("TEST BREAK!");
+          throw testBreakError;
         },
       );
     });
 
     await waitFor(() => {
       expect(onError).toHaveBeenCalledTimes(1);
-      expect(consoleError).toHaveBeenCalledTimes(3);
+
+      expect(consoleError).toHaveBeenCalledWith(testBreakError);
+
       expect(
         parentElement
           .querySelector(reactWebComponentElementName)!
