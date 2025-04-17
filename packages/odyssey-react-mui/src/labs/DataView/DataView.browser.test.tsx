@@ -283,7 +283,7 @@ describe("DataView", { timeout: 10000 }, () => {
       });
       await user.click(clearButton);
 
-      waitFor(() => {
+      await waitFor(() => {
         expect(searchInput).toHaveValue("");
         expect(screen.getAllByRole("row")).toHaveLength(7);
         expect(screen.getByText(data[0].name)).toBeVisible();
