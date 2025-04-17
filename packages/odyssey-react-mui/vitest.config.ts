@@ -15,11 +15,22 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   test: {
     coverage: {
+      exclude: [
+        "**/@types/**",
+        // '**/*.cjs',
+        // '**/*.config.ts',
+        "**/icons.generated/**",
+        "**/index.ts",
+        "**/properties/**",
+        // '**/scripts/**',
+        "**/types.ts",
+      ],
+      include: ["src/**/*.{ts,tsx}"],
       thresholds: {
-        branches: 76,
-        functions: 44,
-        lines: 36,
-        statements: 36,
+        branches: 78,
+        functions: 56,
+        lines: 57,
+        statements: 57,
       },
     },
     workspace: [
@@ -27,7 +38,7 @@ export default defineConfig({
         test: {
           environment: "node",
           globals: true,
-          include: ["**/*.node.test.ts"],
+          include: ["**/*.node.test.{ts,tsx}"],
           name: "unit",
           setupFiles: ["./vitest-node-setup.ts"],
         },
@@ -50,7 +61,7 @@ export default defineConfig({
             },
           },
           globals: true,
-          include: ["**/*.browser.test.ts"],
+          include: ["**/*.browser.test.{ts,tsx}"],
           name: "integration",
           setupFiles: ["./vitest-browser-setup.ts"],
         },

@@ -86,7 +86,7 @@
     "build:translationsJson": "tsx scripts/properties-to-ts.ts bundle",
     "build:types": "tsc --project tsconfig.production.json",
     "build": "yarn build:clean && yarn build:translationsJson && yarn build:types && yarn build:source && yarn build:testSelectors",
-    "ci:coverage": "NODE_ENV=test yarn vitest run --coverage",
+    "ci:coverage": "NODE_ENV=test yarn vitest run --coverage --reporter=default",
     "dev:coverage": "NODE_ENV=test yarn vitest --coverage",
     "dev:source": "yarn build:source:esm --watch",
     "dev:test": "NODE_ENV=test vitest",
