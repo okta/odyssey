@@ -83,7 +83,7 @@ type DataCardComponent = (<TData extends MRT_RowData>(
   displayName?: string;
 };
 
-const AccessoryContainer = styled("div", {
+const StyledAccessoryContainer = styled("div", {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" && prop !== "variant",
 })<{
@@ -97,7 +97,7 @@ const AccessoryContainer = styled("div", {
   height: variant === "compact" ? CARD_IMAGE_SIZE_COMPACT : "auto",
 }));
 
-const ImageContainer = styled("div", {
+const StyledImageContainer = styled("div", {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" &&
     prop !== "hasMenuButtonChildren" &&
@@ -115,7 +115,7 @@ const ImageContainer = styled("div", {
   paddingRight: hasMenuButtonChildren ? odysseyDesignTokens.Spacing5 : 0,
 }));
 
-const MenuButtonContainer = styled("div", {
+const StyledMenuButtonContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{
   odysseyDesignTokens: DesignTokens;
@@ -132,14 +132,14 @@ const MenuButtonContainer = styled("div", {
   alignItems: "center",
 }));
 
-const CardInnerContainer = styled("div", {
+const StyledCardInnerContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   display: "flex",
   gap: odysseyDesignTokens.Spacing3,
 }));
 
-const CardImageAndContentContainer = styled("div", {
+const StyledCardImageAndContentContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "variant" && prop !== "centerContent",
 })<{ variant: (typeof cardVariantValues)[number]; centerContent: boolean }>(
   ({ variant, centerContent }) => ({
@@ -149,8 +149,9 @@ const CardImageAndContentContainer = styled("div", {
   }),
 );
 
-const CardContent = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+const StyledCardContent = styled("div", {
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "variant",
 })<{
   odysseyDesignTokens: DesignTokens;
   variant: (typeof cardVariantValues)[number];
@@ -163,7 +164,7 @@ const CardContent = styled("div", {
   },
 }));
 
-const CardChildrenContainer = styled("div", {
+const StyledCardChildrenContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   ["&:not(:first-child)"]: {
@@ -171,7 +172,7 @@ const CardChildrenContainer = styled("div", {
   },
 }));
 
-const AccessoryPlaceholder = styled(MuiIconButton)({
+const StyledAccessoryPlaceholder = styled(MuiIconButton)({
   visibility: "hidden",
 });
 
@@ -216,21 +217,21 @@ const DataCard: DataCardComponent = <TData extends MRT_RowData>({
         />
       </MuiTooltip>
     ) : (
-      <AccessoryPlaceholder disabled>
+      <StyledAccessoryPlaceholder disabled>
         <ChevronDownIcon />
-      </AccessoryPlaceholder>
+      </StyledAccessoryPlaceholder>
     );
   }, [isDetailPanelOpen, renderDetailPanel, row, t]);
 
   const Accessory = useMemo(() => {
     return (
-      <AccessoryContainer
+      <StyledAccessoryContainer
         odysseyDesignTokens={odysseyDesignTokens}
         variant={variant}
       >
         {AccessoryProp}
         {renderDetailPanel && ExpansionToggle}
-      </AccessoryContainer>
+      </StyledAccessoryContainer>
     );
   }, [
     AccessoryProp,
@@ -253,23 +254,23 @@ const DataCard: DataCardComponent = <TData extends MRT_RowData>({
       countDefinedProps([title, description, overline, button, children]) <= 2;
 
     return (
-      <CardInnerContainer odysseyDesignTokens={odysseyDesignTokens}>
+      <StyledCardInnerContainer odysseyDesignTokens={odysseyDesignTokens}>
         {(AccessoryProp || renderDetailPanel) && <Box>{Accessory}</Box>}
-        <CardImageAndContentContainer
+        <StyledCardImageAndContentContainer
           variant={variant}
           centerContent={shouldCenterContent}
         >
           {image && (
-            <ImageContainer
+            <StyledImageContainer
               odysseyDesignTokens={odysseyDesignTokens}
               hasMenuButtonChildren={Boolean(menuButtonChildren)}
               variant={variant}
             >
               {image}
-            </ImageContainer>
+            </StyledImageContainer>
           )}
 
-          <CardContent
+          <StyledCardContent
             odysseyDesignTokens={odysseyDesignTokens}
             variant={variant}
           >
@@ -288,19 +289,23 @@ const DataCard: DataCardComponent = <TData extends MRT_RowData>({
             )}
 
             {children && (
-              <CardChildrenContainer odysseyDesignTokens={odysseyDesignTokens}>
+              <StyledCardChildrenContainer
+                odysseyDesignTokens={odysseyDesignTokens}
+              >
                 {children}
-              </CardChildrenContainer>
+              </StyledCardChildrenContainer>
             )}
 
             {renderDetailPanel && isDetailPanelOpen && (
-              <CardChildrenContainer odysseyDesignTokens={odysseyDesignTokens}>
+              <StyledCardChildrenContainer
+                odysseyDesignTokens={odysseyDesignTokens}
+              >
                 {renderDetailPanel({ row })}
-              </CardChildrenContainer>
+              </StyledCardChildrenContainer>
             )}
-          </CardContent>
-        </CardImageAndContentContainer>
-      </CardInnerContainer>
+          </StyledCardContent>
+        </StyledCardImageAndContentContainer>
+      </StyledCardInnerContainer>
     );
   }, [
     odysseyDesignTokens,
@@ -331,7 +336,7 @@ const DataCard: DataCardComponent = <TData extends MRT_RowData>({
       )}
 
       {menuButtonChildren && (
-        <MenuButtonContainer
+        <StyledMenuButtonContainer
           odysseyDesignTokens={odysseyDesignTokens}
           variant={variant}
         >
@@ -345,7 +350,7 @@ const DataCard: DataCardComponent = <TData extends MRT_RowData>({
           >
             {menuButtonChildren}
           </MenuButton>
-        </MenuButtonContainer>
+        </StyledMenuButtonContainer>
       )}
     </MuiCard>
   );

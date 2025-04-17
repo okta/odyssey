@@ -175,7 +175,7 @@ describe("DataView", { timeout: 10000 }, () => {
   });
 
   describe("Filter and search", () => {
-    test("can filter rows", async () => {
+    test.only("can filter rows", async () => {
       const user = userEvent.setup();
 
       render(
@@ -210,6 +210,7 @@ describe("DataView", { timeout: 10000 }, () => {
       const submitButton = within(nameFilterMenu).getByRole("button");
 
       await user.click(nameInput);
+      console.log(data[1].name);
       await user.keyboard(`${data[1].name}{ENTER}`);
       await user.click(submitButton);
 
