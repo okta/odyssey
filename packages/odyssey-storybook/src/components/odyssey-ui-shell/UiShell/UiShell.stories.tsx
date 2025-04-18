@@ -646,11 +646,14 @@ export const WithTallAppContentAndNoStorybookDecorator: Story = {
     }, []);
 
     useEffect(() => {
-      const outputSpan = document.getElementById("lineHeightOutput");
-      if (outputSpan) {
-        outputSpan.innerText = getComputedStyle(outputSpan).lineHeight;
+      if (isReady) {
+        const outputSpan = document.getElementById("lineHeightOutput");
+
+        if (outputSpan) {
+          outputSpan.innerText = getComputedStyle(outputSpan).lineHeight;
+        }
       }
-    }, []);
+    }, [isReady]);
 
     return (
       <>
