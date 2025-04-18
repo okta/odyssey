@@ -20,11 +20,12 @@ import {
 import { appRootElementId } from "../web-component/createReactRootElements.js";
 
 describe(renderUiShell.name, () => {
-  afterEach(() => {
+  afterEach(async () => {
     // This needs to be wrapped in `act` because the web component unmounts the React app, and React events have to be wrapped in `act`.
-    act(() => {
+    await act(async () => {
       // Remove any appended elements because of this hacky process of rendering to the global DOM.
       document.body.innerHTML = "";
+      await Promise.resolve();
     });
   });
 
@@ -108,12 +109,22 @@ describe(renderUiShell.name, () => {
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(parentElement);
 
+    let setComponentProps: ReturnType<
+      typeof renderUiShell
+    >["setComponentProps"];
+
     // This needs to be wrapped in `act` because the web component mounts the React app, and React events have to be wrapped in `act`.
     act(() => {
-      const { setComponentProps } = renderUiShell({
+      const renderUiShellReturnValue = renderUiShell({
         appElementScrollingMode: "vertical",
         parentElement,
       });
+
+      setComponentProps = renderUiShellReturnValue.setComponentProps;
+    });
+
+    await act(async () => {
+      await Promise.resolve();
 
       setComponentProps({
         sideNavProps: {
