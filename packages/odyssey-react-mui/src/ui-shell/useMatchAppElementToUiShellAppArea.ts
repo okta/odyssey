@@ -181,7 +181,12 @@ export const useMatchAppElementToUiShellAppArea = ({
       };
     }
     return () => {};
-  }, [appElement, appContainerElementStyles, uiShellAppAreaRef]);
+  }, [
+    appElement,
+    appContainerElementStyles,
+    uiShellAppAreaRef,
+    uiShellResizableRefs,
+  ]);
 
   return {
     parentContainerRef,

@@ -226,13 +226,6 @@ const Pagination = ({
       }
     }
 
-    console.log({
-      page,
-      updatedPage,
-      rowsPerPage,
-      updatedRowsPerPage,
-    });
-
     onPaginationChange({
       pageIndex: updatedPage,
       pageSize: updatedRowsPerPage,

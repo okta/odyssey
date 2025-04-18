@@ -24,6 +24,9 @@ export type ReactRootElements = {
   stylesRootElement: HTMLDivElement | HTMLHeadElement;
 };
 
+export const appRootElementId = "app-root";
+export const stylesRootElementId = "style-root";
+
 export const createReactRootElements = () => {
   const appRootElement = document.createElement("div");
   const stylesRootElement = document.createElement("div");
@@ -31,8 +34,8 @@ export const createReactRootElements = () => {
   // This `div` may cause layout issues unless it inherits the parent's height.
   appRootElement.style.setProperty("height", "inherit");
 
-  appRootElement.setAttribute("id", "app-root");
-  stylesRootElement.setAttribute("id", "style-root");
+  appRootElement.setAttribute("id", appRootElementId);
+  stylesRootElement.setAttribute("id", stylesRootElementId);
   stylesRootElement.setAttribute("nonce", window.cspNonce);
 
   return {

@@ -138,8 +138,8 @@ const Field = ({
         Boolean(errorMessage) ||
         (Array.isArray(errorMessageList) && errorMessageList.length > 0)
       }
-      role={isRadioGroup ? "radiogroup" : undefined}
       fullWidth={isFullWidth}
+      role={isRadioGroup ? "radiogroup" : undefined}
     >
       {fieldType === "group" ? (
         <MuiFormLabel component="legend" id={labelElementId}>

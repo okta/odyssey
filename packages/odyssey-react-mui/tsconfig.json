@@ -6,10 +6,10 @@
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
     "noEmit": false,
-    "rootDir": "src",
     "outDir": "dist/types",
+    "rootDir": "src",
     "sourceMap": true,
-    "types": ["vitest/globals"]
+    "types": ["@vitest/browser/matchers", "vitest/globals"]
   },
   "include": ["*", "**/src/**/*", "**/properties/**/*", "**/scripts/**/*"],
   "exclude": ["**/dist/**/*"]

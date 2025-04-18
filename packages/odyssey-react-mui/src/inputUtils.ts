@@ -75,6 +75,6 @@ export const useInputValues = <Value>({
       return { value };
     }
     return { defaultValue };
-  }, [defaultValue, value]);
+  }, [controlState, defaultValue, value]);
   return inputValues;
 };

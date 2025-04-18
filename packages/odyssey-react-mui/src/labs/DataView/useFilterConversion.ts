@@ -82,7 +82,7 @@ export const useFilterConversion = <TData extends MRT_RowData>({
 
       return accumulator;
     }, []);
-  }, [columns, filters]);
+  }, [columns, convertColumnToFilter, filters]);
 
   return dataTableFilters;
 };

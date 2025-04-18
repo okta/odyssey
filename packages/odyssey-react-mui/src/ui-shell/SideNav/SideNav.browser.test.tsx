@@ -15,7 +15,7 @@ import { userEvent } from "@testing-library/user-event";
 import { SideNav } from "./SideNav.js";
 import { OdysseyProvider } from "../../OdysseyProvider.js";
 
-describe(SideNav.name, () => {
+describe(SideNav.displayName!, () => {
   test("can show the default Okta logo", () => {
     render(
       <OdysseyProvider>
@@ -103,12 +103,17 @@ describe(SideNav.name, () => {
     const collapseButton = screen.getByLabelText("Close navigation");
     await userEvent.click(collapseButton);
 
-    expect(screen.getByText(menuItemText)).not.toBeVisible();
+    await waitFor(() => {
+      expect(screen.getByText(menuItemText)).not.toBeVisible();
+    });
 
     const expandButton = screen.getByLabelText("Open navigation");
+
     await userEvent.click(expandButton);
 
-    expect(screen.getByText(menuItemText)).toBeVisible();
+    await waitFor(() => {
+      expect(screen.getByText(menuItemText)).toBeVisible();
+    });
   });
 
   test("can fire onCollapse event", async () => {
@@ -293,6 +298,7 @@ describe(SideNav.name, () => {
 
     const accordion = screen.getByText(accordionOuter);
     expect(screen.getByText(accordionInner)).not.toBeVisible();
+
     await userEvent.click(accordion);
     expect(screen.getByText(accordionInner)).toBeVisible();
   });

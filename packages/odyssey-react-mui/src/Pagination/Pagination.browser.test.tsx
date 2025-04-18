@@ -14,8 +14,8 @@ import { render, waitFor, within } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import { Pagination } from "./Pagination.js";
 
-describe("Pagination", () => {
-  it("renders the expected controls in 'paged' variant", () => {
+describe(Pagination.displayName!, () => {
+  test("renders the expected controls in 'paged' variant", () => {
     const onPaginationChange = vi.fn();
 
     const { container } = render(
@@ -48,7 +48,7 @@ describe("Pagination", () => {
     // expect(within(container).getByText("1-10 of 100")).toBeInTheDocument();
   });
 
-  it("calls onPaginationChange with correct pageIndex when clicking next", async () => {
+  test("calls onPaginationChange with correct pageIndex when clicking next", async () => {
     const onPaginationChange = vi.fn();
 
     const { container } = render(
@@ -77,7 +77,7 @@ describe("Pagination", () => {
     });
   });
 
-  it("calls onPaginationChange with correct pageIndex when clicking previous", async () => {
+  test("calls onPaginationChange with correct pageIndex when clicking previous", async () => {
     const onPaginationChange = vi.fn();
 
     const { container } = render(
@@ -106,7 +106,7 @@ describe("Pagination", () => {
     });
   });
 
-  it("disables previous button on first page", () => {
+  test("disables previous button on first page", () => {
     const onPaginationChange = vi.fn();
 
     const { container } = render(
@@ -128,7 +128,7 @@ describe("Pagination", () => {
     expect(within(container).getByLabelText("Previous page")).toBeDisabled();
   });
 
-  it("disables next button on last page", () => {
+  test("disables next button on last page", () => {
     const onPaginationChange = vi.fn();
 
     const { container } = render(
@@ -150,7 +150,7 @@ describe("Pagination", () => {
     expect(within(container).getByLabelText("Next page")).toBeDisabled();
   });
 
-  it("updates pageIndex when entering a new page number", async () => {
+  test("updates pageIndex when entering a new page number", async () => {
     const onPaginationChange = vi.fn();
 
     const { container } = render(
@@ -183,7 +183,7 @@ describe("Pagination", () => {
     });
   });
 
-  it("updates pageSize when entering a new rows per page value", async () => {
+  test("updates pageSize when entering a new rows per page value", async () => {
     const onPaginationChange = vi.fn();
 
     const { container } = render(
@@ -217,7 +217,7 @@ describe("Pagination", () => {
     });
   });
 
-  it("renders 'Load more' button in 'loadMore' variant", () => {
+  test("renders 'Load more' button in 'loadMore' variant", () => {
     const onPaginationChange = vi.fn();
 
     const { container } = render(
@@ -234,7 +234,7 @@ describe("Pagination", () => {
     expect(within(container).getByText("Load more")).toBeInTheDocument();
   });
 
-  it("calls onPaginationChange with increased pageSize when clicking 'Load more'", async () => {
+  test("calls onPaginationChange with increased pageSize when clicking 'Load more'", async () => {
     const onPaginationChange = vi.fn();
 
     const { container } = render(
@@ -258,7 +258,7 @@ describe("Pagination", () => {
     });
   });
 
-  it("disables 'Load more' button when isMoreDisabled is true", () => {
+  test("disables 'Load more' button when isMoreDisabled is true", () => {
     const onPaginationChange = vi.fn();
 
     const { container } = render(
@@ -276,7 +276,7 @@ describe("Pagination", () => {
     expect(within(container).getByText("Load more")).toBeDisabled();
   });
 
-  it("disables 'Next page' button when isMoreDisabled is true", () => {
+  test("disables 'Next page' button when isMoreDisabled is true", () => {
     const onPaginationChange = vi.fn();
 
     const { container } = render(
@@ -299,7 +299,7 @@ describe("Pagination", () => {
     expect(within(container).getByLabelText("Next page")).toBeDisabled();
   });
 
-  it("disables all controls when isDisabled is true", () => {
+  test("disables all controls when isDisabled is true", () => {
     const onPaginationChange = vi.fn();
 
     const { container } = render(

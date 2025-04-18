@@ -15,7 +15,11 @@ import { render, waitFor, within } from "@testing-library/react";
 import { defaultComponentProps, UiShell, UiShellProps } from "./UiShell.js";
 import { ReactElement } from "react";
 
-describe(UiShell.name, () => {
+describe(UiShell.displayName!, () => {
+  afterEach(() => {
+    document.body.innerHTML = "";
+  });
+
   test("renders `uiShellStylesElement`", () => {
     const appElement = document.createElement("div");
 
@@ -330,14 +334,18 @@ describe(UiShell.name, () => {
     );
 
     await waitFor(() => {
-      expect(appElement.style.getPropertyValue("position")).toEqual("absolute");
-      expect(appElement.style.getPropertyValue("overflow-x")).toEqual("auto");
-      expect(appElement.style.getPropertyValue("overflow-y")).toEqual("auto");
-      expect(appElement.style.getPropertyValue("padding-inline")).toEqual(
-        "3.42857143rem",
+      expect(appElement.style.getPropertyValue("position")).toBe("absolute");
+
+      expect(appElement.style.getPropertyValue("overflow-x")).toBe("auto");
+
+      expect(appElement.style.getPropertyValue("overflow-y")).toBe("auto");
+
+      expect(appElement.style.getPropertyValue("padding-inline")).toBe(
+        "3.42857rem",
       );
-      expect(appElement.style.getPropertyValue("padding-block")).toEqual(
-        "1.71428571rem",
+
+      expect(appElement.style.getPropertyValue("padding-block")).toBe(
+        "1.71429rem",
       );
     });
   });
@@ -367,15 +375,15 @@ describe(UiShell.name, () => {
     );
 
     await waitFor(() => {
-      expect(appElement.style.getPropertyValue("position")).toEqual("absolute");
+      expect(appElement.style.getPropertyValue("position")).toBe("absolute");
 
-      expect(appElement.style.getPropertyValue("overflow-x")).toEqual("hidden");
+      expect(appElement.style.getPropertyValue("overflow-x")).toBe("hidden");
 
-      expect(appElement.style.getPropertyValue("overflow-y")).toEqual("hidden");
+      expect(appElement.style.getPropertyValue("overflow-y")).toBe("hidden");
 
-      expect(appElement.style.getPropertyValue("padding-inline")).toEqual("");
+      expect(appElement.style.getPropertyValue("padding-inline")).toBe("");
 
-      expect(appElement.style.getPropertyValue("padding-block")).toEqual("");
+      expect(appElement.style.getPropertyValue("padding-block")).toBe("");
     });
   });
 });

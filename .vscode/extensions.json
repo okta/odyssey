@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "vitest.explorer",
+    "dbaeumer.vscode-eslint",
+    "mariusschulz.yarn-lock-syntax",
+    "arcanis.vscode-zipfs"
+  ]
+}
