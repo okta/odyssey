@@ -18,15 +18,6 @@ import { useMediaQuery } from "./useMediaQuery.js";
 const MINIMUM_SIZE = 1;
 
 describe(useMediaQuery.name, () => {
-  // test("errors if no media query passed", () => {
-  //   expectError(() => {
-  //     useMediaQuery(
-  //       // @ts-expect-error We're purposefully passing an invalid value for this test. You cannot use `""`.
-  //       "",
-  //     );
-  //   });
-  // });
-
   test("responds to the given simple min-width media query", async () => {
     await page.viewport(MINIMUM_SIZE, MINIMUM_SIZE);
 
