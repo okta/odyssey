@@ -10,26 +10,4 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-// import { PropertySymbol } from "happy-dom";
-// import type DetachedWindowAPI from "happy-dom/lib/window/DetachedWindowAPI.js";
 import "regenerator-runtime/runtime";
-
-// declare global {
-//   // Hack to ensure `happyDOM` is seen on the global `Window` by TypeScript.
-//   // eslint-disable-next-line no-var
-//   var happyDOM: DetachedWindowAPI;
-// }
-
-// // This is straight from the Happy-DOM docs: https://github.com/capricorn86/happy-dom/wiki/Setup-as-Test-Environment
-// /* eslint-disable */
-// // @ts-expect-error TypeScript doesn't like this, but Happy-DOM requires it.
-// const browserWindow = global.document[PropertySymbol.window];
-
-// global.setTimeout = browserWindow.setTimeout;
-// global.clearTimeout = browserWindow.clearTimeout;
-// global.setInterval = browserWindow.setInterval;
-// global.clearInterval = browserWindow.clearInterval;
-// global.requestAnimationFrame = browserWindow.requestAnimationFrame;
-// global.cancelAnimationFrame = browserWindow.cancelAnimationFrame;
-// global.queueMicrotask = browserWindow.queueMicrotask;
-// /* eslint-enable @typescript-eslint/no-unsafe-assignment */

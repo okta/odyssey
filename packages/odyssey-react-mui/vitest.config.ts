@@ -17,12 +17,9 @@ export default defineConfig({
     coverage: {
       exclude: [
         "**/@types/**",
-        // '**/*.cjs',
-        // '**/*.config.ts',
         "**/icons.generated/**",
         "**/index.ts",
         "**/properties/**",
-        // '**/scripts/**',
         "**/types.ts",
       ],
       include: ["src/**/*.{ts,tsx}"],
