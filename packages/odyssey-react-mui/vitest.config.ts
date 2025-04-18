@@ -41,6 +41,9 @@ export default defineConfig({
         },
       },
       {
+        optimizeDeps: {
+          include: ["@emotion/react/jsx-dev-runtime"],
+        },
         test: {
           browser: {
             enabled: true,

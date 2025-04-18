@@ -20,9 +20,6 @@ if ! yarn workspace @okta/odyssey-react-mui playwright install --with-deps chrom
   exit "$BUILD_FAILURE"
 fi
 
-# This command is a hack that will exit with code `1`. It forces vitest to build deps in `node_modules/.vite/deps`. Those deps need to exist for tests to run correctly.
-yarn workspace @okta/odyssey-react-mui vitest list
-
 COMMAND=$(yarn workspace @okta/odyssey-react-mui ci:coverage)
 EXIT_CODE=$?
 
