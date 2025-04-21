@@ -38,7 +38,7 @@ export const useMediaQuery = <MediaQuery extends string>(
     return () => {
       mediaQueryList.removeEventListener("change", updateHasMatches);
     };
-  }, [mediaQueryList]);
+  }, [mediaQueryList, updateHasMatches]);
 
   return hasMatches;
 };

@@ -48,9 +48,10 @@ const gridItemProps: CardLayoutProps<Person>["itemProps"] = (row) => ({
   overline: "Grid card",
 });
 
-const waitUntilTableLoadedHack = async () => {
-  return expect(await screen.findByText(data[0].name)).toBeVisible();
-};
+const waitUntilTableLoadedHack = async () =>
+  await waitFor(async () =>
+    expect(await screen.findByText(data[0].name)).toBeVisible(),
+  );
 
 describe("DataView", { timeout: 10000 }, () => {
   describe("DataView layouts", () => {
@@ -138,17 +139,19 @@ describe("DataView", { timeout: 10000 }, () => {
         element: layoutSwitcherButton,
       });
 
-      expect(within(layoutSwitcherMenu).getAllByRole("menuitem")).toHaveLength(
-        2,
-      );
+      await waitFor(() => {
+        expect(
+          within(layoutSwitcherMenu).getAllByRole("menuitem"),
+        ).toHaveLength(2);
 
-      expect(
-        within(layoutSwitcherMenu).getByRole("menuitem", { name: "Table" }),
-      ).toBeVisible();
+        expect(
+          within(layoutSwitcherMenu).getByRole("menuitem", { name: "Table" }),
+        ).toBeVisible();
 
-      expect(
-        within(layoutSwitcherMenu).getByRole("menuitem", { name: "List" }),
-      ).toBeVisible();
+        expect(
+          within(layoutSwitcherMenu).getByRole("menuitem", { name: "List" }),
+        ).toBeVisible();
+      });
     });
   });
 
@@ -207,6 +210,7 @@ describe("DataView", { timeout: 10000 }, () => {
       const submitButton = within(nameFilterMenu).getByRole("button");
 
       await user.click(nameInput);
+      console.log(data[1].name);
       await user.keyboard(`${data[1].name}{ENTER}`);
       await user.click(submitButton);
 
@@ -283,7 +287,7 @@ describe("DataView", { timeout: 10000 }, () => {
       });
       await user.click(clearButton);
 
-      waitFor(() => {
+      await waitFor(() => {
         expect(searchInput).toHaveValue("");
         expect(screen.getAllByRole("row")).toHaveLength(7);
         expect(screen.getByText(data[0].name)).toBeVisible();
@@ -323,9 +327,12 @@ describe("DataView", { timeout: 10000 }, () => {
         element: firstBodyRowActionButton,
       });
       const actionMenuItem = within(actionMenu).getByRole("menuitem");
-      expect(
-        within(actionMenuItem).getByText(`Action for ${data[0].name}`),
-      ).toBeVisible();
+
+      await waitFor(() => {
+        expect(
+          within(actionMenuItem).getByText(`Action for ${data[0].name}`),
+        ).toBeVisible();
+      });
     });
 
     test("can display row action buttons", async () => {
