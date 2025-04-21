@@ -10,47 +10,130 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+
+export const getIsScrollHeightElement = ({
+  containerElement,
+  scrollableElement,
+}: {
+  containerElement: HTMLElement;
+  scrollableElement: HTMLElement;
+}) => {
+  const containerElementHeight =
+    containerElement.getBoundingClientRect().height;
+  const scrollableElementHeight =
+    scrollableElement.getBoundingClientRect().height;
+
+  return scrollableElementHeight - containerElementHeight >= 0;
+};
+
+export const getIsYAxisScrollContainer = (element: HTMLElement) => {
+  const overflowY = window.getComputedStyle(element).overflowY;
+
+  return overflowY === "auto" || overflowY === "scroll";
+};
+
+export const getIsYAxisScrolling = (element: HTMLElement) =>
+  element.scrollHeight > element.clientHeight
+    ? getIsYAxisScrollContainer(element)
+    : false;
+
+export const getNestedScrollContainers = (containerElement: HTMLElement) =>
+  Array.from(containerElement.querySelectorAll<HTMLElement>("*"))
+    .filter((element) => getIsYAxisScrollContainer(element))
+    .filter((scrollableElement) =>
+      getIsScrollHeightElement({
+        containerElement,
+        scrollableElement,
+      }),
+    );
+
+export const fakeDefaultContainerElement = document.createElement("div");
 
 export const useScrollState = <
-  ScrollableContentElement extends HTMLElement = HTMLDivElement,
+  ContainerElement extends HTMLElement = HTMLDivElement,
 >(
-  scrollableContentElement?: ScrollableContentElement,
+  /**
+   * The element containing a scroll area.
+   */
+  containerElement: ContainerElement | null,
 ) => {
-  const [isContentScrolled, setIsContentScrolled] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  const scrollableElement = useMemo(
-    () => scrollableContentElement,
-    [scrollableContentElement],
-  );
+  const requestedAnimationFrameIdRef = useRef(0);
+  const scrollableElementsRef = useRef<HTMLElement[]>([]);
+
+  const updateScrollState = useCallback(() => {
+    cancelAnimationFrame(requestedAnimationFrameIdRef.current);
+
+    requestedAnimationFrameIdRef.current = requestAnimationFrame(() => {
+      setIsScrolled(
+        scrollableElementsRef.current.reduce(
+          (isScrolled, scrollableElement) =>
+            isScrolled || scrollableElement.scrollTop > 0,
+          false,
+        ),
+      );
+    });
+  }, []);
+
+  const addScrollEventListeners = useCallback(() => {
+    scrollableElementsRef.current.forEach((scrollableElement) => {
+      scrollableElement.addEventListener("scroll", updateScrollState);
+    });
+  }, [updateScrollState]);
+
+  const removeScrollEventListeners = useCallback(() => {
+    scrollableElementsRef.current.forEach((scrollableElement) => {
+      scrollableElement.removeEventListener("scroll", updateScrollState);
+    });
+  }, [updateScrollState]);
+
+  const updateScrollableElements = useCallback(() => {
+    const computedContainerElement =
+      containerElement || fakeDefaultContainerElement;
+
+    scrollableElementsRef.current = getNestedScrollContainers(
+      computedContainerElement,
+    ).concat(computedContainerElement);
+  }, [containerElement]);
+
+  const updateScrollListeners = useCallback(() => {
+    removeScrollEventListeners();
+    updateScrollableElements();
+    addScrollEventListeners();
+    updateScrollState();
+  }, [
+    addScrollEventListeners,
+    removeScrollEventListeners,
+    updateScrollableElements,
+    updateScrollState,
+  ]);
 
   useEffect(() => {
-    if (scrollableElement) {
-      let requestedAnimationFrameId: number;
+    const mutationObserver = new MutationObserver(() => {
+      updateScrollListeners();
+    });
 
-      const updateScrollState = () => {
-        cancelAnimationFrame(requestedAnimationFrameId);
-
-        requestedAnimationFrameId = requestAnimationFrame(() => {
-          setIsContentScrolled(scrollableElement.scrollTop > 0);
-        });
-      };
-
-      scrollableElement.addEventListener("scroll", updateScrollState);
-
-      updateScrollState();
-
-      return () => {
-        scrollableElement.removeEventListener("scroll", updateScrollState);
-
-        cancelAnimationFrame(requestedAnimationFrameId);
-      };
+    if (containerElement) {
+      mutationObserver.observe(containerElement, {
+        attributes: true,
+        attributeFilter: ["style"],
+        childList: true,
+        subtree: true,
+      });
     }
 
-    return () => {};
-  }, [scrollableElement]);
+    updateScrollListeners();
+
+    return () => {
+      cancelAnimationFrame(requestedAnimationFrameIdRef.current);
+      removeScrollEventListeners();
+      mutationObserver.disconnect();
+    };
+  }, [containerElement, removeScrollEventListeners, updateScrollListeners]);
 
   return {
-    isContentScrolled,
+    isContentScrolled: isScrolled,
   };
 };
