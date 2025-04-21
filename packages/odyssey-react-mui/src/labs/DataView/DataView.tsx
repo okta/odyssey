@@ -58,7 +58,7 @@ type DataViewComponent = (<TData extends MRT_RowData>(
   displayName?: string;
 };
 
-const DataViewContainer = styled("div", {
+const StyledDataViewContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   display: "flex",
@@ -66,12 +66,12 @@ const DataViewContainer = styled("div", {
   gap: odysseyDesignTokens.Spacing4,
 }));
 
-const BulkActionsContainer = styled("div")(() => ({
+const StyledBulkActionsContainer = styled("div")(() => ({
   display: "flex",
   justifyContent: "space-between",
 }));
 
-const AdditionalActionsContainer = styled("div", {
+const StyledAdditionalActionsContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   display: "flex",
@@ -79,7 +79,7 @@ const AdditionalActionsContainer = styled("div", {
   gap: odysseyDesignTokens.Spacing2,
 }));
 
-const AdditionalActionsInner = styled("div", {
+const StyledAdditionalActionsInner = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   display: "flex",
@@ -87,7 +87,7 @@ const AdditionalActionsInner = styled("div", {
   gap: odysseyDesignTokens.Spacing2,
 }));
 
-const MetaTextContainer = styled("div", {
+const StyledMetaTextContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   marginInlineEnd: odysseyDesignTokens.Spacing2,
@@ -308,11 +308,11 @@ const DataView = <TData extends MRT_RowData>({
         availableLayouts.length > 1 ||
         additionalActionButton ||
         additionalActionMenuItems) && (
-        <AdditionalActionsInner odysseyDesignTokens={odysseyDesignTokens}>
+        <StyledAdditionalActionsInner odysseyDesignTokens={odysseyDesignTokens}>
           {metaText && (
-            <MetaTextContainer odysseyDesignTokens={odysseyDesignTokens}>
+            <StyledMetaTextContainer odysseyDesignTokens={odysseyDesignTokens}>
               <Typography color="textSecondary">{metaText}</Typography>
-            </MetaTextContainer>
+            </StyledMetaTextContainer>
           )}
 
           {currentLayout === "table" && tableLayoutOptions && (
@@ -343,7 +343,7 @@ const DataView = <TData extends MRT_RowData>({
               {additionalActionMenuItems}
             </MenuButton>
           )}
-        </AdditionalActionsInner>
+        </StyledAdditionalActionsInner>
       )
     );
   }, [
@@ -382,7 +382,7 @@ const DataView = <TData extends MRT_RowData>({
   });
 
   return (
-    <DataViewContainer odysseyDesignTokens={odysseyDesignTokens}>
+    <StyledDataViewContainer odysseyDesignTokens={odysseyDesignTokens}>
       {errorMessage && (
         <Box>
           <Callout severity="error" text={errorMessage} />
@@ -402,7 +402,7 @@ const DataView = <TData extends MRT_RowData>({
       )}
 
       {(bulkActionMenuItems || hasRowSelection) && (
-        <BulkActionsContainer>
+        <StyledBulkActionsContainer>
           <BulkActionsMenu
             data={data}
             menuItems={bulkActionMenuItems}
@@ -410,16 +410,18 @@ const DataView = <TData extends MRT_RowData>({
             setRowSelection={setRowSelection}
           />
           {!shouldShowFilters && additionalActions}
-        </BulkActionsContainer>
+        </StyledBulkActionsContainer>
       )}
 
       {!shouldShowFilters &&
         !bulkActionMenuItems &&
         !hasRowSelection &&
         additionalActions && (
-          <AdditionalActionsContainer odysseyDesignTokens={odysseyDesignTokens}>
+          <StyledAdditionalActionsContainer
+            odysseyDesignTokens={odysseyDesignTokens}
+          >
             {additionalActions}
-          </AdditionalActionsContainer>
+          </StyledAdditionalActionsContainer>
         )}
 
       {currentLayout === "table" && tableLayoutOptions && (
@@ -494,7 +496,7 @@ const DataView = <TData extends MRT_RowData>({
           variant={paginationType}
         />
       )}
-    </DataViewContainer>
+    </StyledDataViewContainer>
   );
 };
 

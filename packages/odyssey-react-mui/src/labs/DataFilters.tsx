@@ -54,7 +54,7 @@ import { TagList } from "../TagList.js";
 import { TextField } from "../TextField.js";
 import { Subordinate } from "../Typography.js";
 
-const AutocompleteOuterContainer = styled("div", {
+const StyledAutocompleteOuterContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   display: "flex",
@@ -62,7 +62,7 @@ const AutocompleteOuterContainer = styled("div", {
   gap: odysseyDesignTokens.Spacing2,
 }));
 
-const AutocompleteInnerContainer = styled("div")({
+const StyledAutocompleteInnerContainer = styled("div")({
   width: "100%",
 });
 
@@ -608,10 +608,10 @@ const DataFilters = ({
                         {filterPopoverCurrentFilter?.variant ===
                           "autocomplete" &&
                           filterPopoverCurrentFilter?.options && (
-                            <AutocompleteOuterContainer
+                            <StyledAutocompleteOuterContainer
                               odysseyDesignTokens={odysseyDesignTokens}
                             >
-                              <AutocompleteInnerContainer>
+                              <StyledAutocompleteInnerContainer>
                                 <Autocomplete
                                   hasMultipleChoices
                                   isCustomValueAllowed={
@@ -627,14 +627,14 @@ const DataFilters = ({
                                   }}
                                   options={autocompleteOptions}
                                 />
-                              </AutocompleteInnerContainer>
+                              </StyledAutocompleteInnerContainer>
                               <Button
                                 variant="primary"
                                 endIcon={<CheckIcon />}
                                 type="submit"
                                 ariaLabel={t("filters.submit.label")}
                               />
-                            </AutocompleteOuterContainer>
+                            </StyledAutocompleteOuterContainer>
                           )}
                         {/* Text, Number, or undefined */}
                         {(filterPopoverCurrentFilter?.variant === "text" ||

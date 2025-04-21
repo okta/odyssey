@@ -193,8 +193,10 @@ export const useOdysseyDateFields = ({
     ? "en-US"
     : language.replaceAll("_", "-");
 
-  const isValidTimeZone = (timeZone: string) =>
-    DateTime.local().setZone(timeZone).isValid;
+  const isValidTimeZone = useCallback(
+    (timeZone: string) => DateTime.local().setZone(timeZone).isValid,
+    [],
+  );
 
   const formatDateTimeToUtcIsoDateString =
     useCallback<FormatDateTimeToUtcIsoDateString>(
@@ -239,7 +241,7 @@ export const useOdysseyDateFields = ({
     }
 
     return null;
-  }, [defaultValue, validationDateRanges, value]);
+  }, [defaultValue, value]);
 
   const onTimeZoneChange = useCallback(
     (timeZone: string | undefined) => {
