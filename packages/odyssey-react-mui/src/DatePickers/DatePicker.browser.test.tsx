@@ -28,11 +28,15 @@ const getMockedDatePicker = async () => {
     },
   }));
 
-  return (await import("./DatePicker.js")).DatePicker;
+  const { DatePicker } = await import("./DatePicker.js");
+
+  vi.doUnmock("react-i18next");
+
+  return DatePicker;
 };
 
 describe("DatePicker", () => {
-  it("displays the DatePicker", async () => {
+  test("displays the DatePicker", async () => {
     const MockedDatePicker = await getMockedDatePicker();
 
     render(<MockedDatePicker label="date time picker label" />);
@@ -41,7 +45,7 @@ describe("DatePicker", () => {
     expect(input).toBeInTheDocument();
   });
 
-  it("displays the correct date when a value is passed in ", async () => {
+  test("displays the correct date when a value is passed in ", async () => {
     const MockedDatePicker = await getMockedDatePicker();
 
     render(
@@ -57,7 +61,7 @@ describe("DatePicker", () => {
     expect(input).toHaveDisplayValue("07/20/2024");
   });
 
-  it("displays the correct date when timezone is changed", async () => {
+  test("displays the correct date when timezone is changed", async () => {
     const MockedDatePicker = await getMockedDatePicker();
 
     render(

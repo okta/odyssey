@@ -28,14 +28,14 @@ const getMockedDateTimePicker = async () => {
     },
   }));
 
-  return (await import("./DateTimePicker.js")).DateTimePicker;
+  const { DateTimePicker } = await import("./DateTimePicker.js");
+
+  vi.doUnmock("react-i18next");
+
+  return DateTimePicker;
 };
 
 describe("DateTimePicker", () => {
-  afterEach(() => {
-    vi.resetModules();
-  });
-
   test("displays the DateTimePicker", async () => {
     const MockedDateTimePicker = await getMockedDateTimePicker();
 
