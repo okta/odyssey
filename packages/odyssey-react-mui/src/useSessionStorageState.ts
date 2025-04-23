@@ -11,6 +11,7 @@
  */
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useMountLifecycleEffect } from "./useMountLifecycleEffect.js";
 
 export const getSessionStorageValue = <Value>(key: string): Value | null => {
   const sessionStorageValue = window.sessionStorage.getItem(key);
@@ -41,36 +42,38 @@ export const useSessionStorageState = <Value>({
     throw new Error("You must pass a value for `key`.");
   }
 
-  const initialSessionState = useMemo(
-    () => getSessionStorageValue<Value>(key) || initialState || null,
-    [initialState, key],
-  );
-
-  const [state, setState] =
-    useState<ReturnType<typeof getSessionStorageValue<Value>>>(
-      initialSessionState,
-    );
+  const sessionState = useMemo(() => getSessionStorageValue<Value>(key), [key]);
 
   const setSessionState = useCallback(
-    (value: Value) => {
-      window.sessionStorage.setItem(key, JSON.stringify(value || ""));
+    (value: Value | null) => {
+      const sessionStorageState =
+        typeof value === "undefined" ? "" : JSON.stringify(value);
 
-      setState(value);
+      window.sessionStorage.setItem(key, sessionStorageState);
     },
     [key],
   );
 
-  const updateState = useCallback(() => {
-    console.log({ key });
-    setState(getSessionStorageValue<Value>(key));
-  }, [key]);
+  const [localState, setLocalState] = useState<
+    ReturnType<typeof getSessionStorageValue<Value>>
+  >(() => sessionState || initialState || null);
 
+  // This keeps session storage's state based on local state.
   useEffect(() => {
-    updateState();
-  }, [updateState]);
+    setSessionState(localState);
+  }, [localState, setSessionState]);
+
+  // This updates when `key` is updated.
+  const onUpdate = useCallback(() => {
+    setLocalState(sessionState);
+  }, [sessionState]);
+
+  useMountLifecycleEffect({
+    onUpdate,
+  });
 
   return {
-    sessionState: state,
-    setSessionState,
+    sessionState: localState,
+    setSessionState: setLocalState,
   };
 };

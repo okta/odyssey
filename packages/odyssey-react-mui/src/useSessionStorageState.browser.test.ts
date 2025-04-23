@@ -74,117 +74,212 @@ describe(useSessionStorageState.name, () => {
     window.sessionStorage.clear();
   });
 
-  test("throws error when no key passed", () => {
-    expect(() => {
-      useSessionStorageState<null>({
-        key: "",
-      });
-    }).toThrowError();
-  });
-
-  test("`sessionState` is `null` with an unused key", () => {
-    const { result } = renderHook(() =>
-      useSessionStorageState<null>({
-        key: "testKey",
-      }),
-    );
-
-    expect(result.current.sessionState).toBe(null);
-  });
-
-  test("`sessionState` is gets value after set in storage", () => {
-    const expectedSessionStorageValue = {
-      a: "Test A",
-      b: "Test B",
-    } as const;
-
-    window.sessionStorage.setItem(
-      "testKey",
-      JSON.stringify(expectedSessionStorageValue),
-    );
-
-    const { result } = renderHook(() =>
-      useSessionStorageState<typeof expectedSessionStorageValue>({
-        key: "testKey",
-      }),
-    );
-
-    expect(result.current.sessionState).toEqual(expectedSessionStorageValue);
-  });
-
-  test("updates session storage with value", () => {
-    const expectedSessionStorageValue = {
-      a: "Test A",
-      b: "Test B",
-    } as const;
-
-    const { result } = renderHook(() =>
-      useSessionStorageState({
-        key: "testKey",
-      }),
-    );
-
-    act(() => {
-      result.current.setSessionState(expectedSessionStorageValue);
+  describe("key", () => {
+    test("throws error when no key passed", () => {
+      expect(() => {
+        useSessionStorageState<null>({
+          key: "",
+        });
+      }).toThrowError();
     });
 
-    expect(result.current.sessionState).toEqual(expectedSessionStorageValue);
-  });
-
-  test("updates session storage to latest value after 2 updates", () => {
-    const expectedSessionStorageValue = "This is the expected value.";
-
-    const { result } = renderHook(() =>
-      useSessionStorageState<string>({
-        key: "testKey",
-      }),
-    );
-
-    act(() => {
-      result.current.setSessionState("This is a test.");
-    });
-
-    act(() => {
-      result.current.setSessionState(expectedSessionStorageValue);
-    });
-
-    expect(result.current.sessionState).toEqual(expectedSessionStorageValue);
-  });
-
-  test("gets correct session storage value after updating `key`", () => {
-    const expectedSessionStorageValueA = "Test A";
-    const expectedSessionStorageValueB = "Test B";
-
-    const { result, rerender } = renderHook(
-      (key: string) =>
-        useSessionStorageState<string>({
-          key,
+    test("`sessionState` is `null` with an unused key", () => {
+      const { result } = renderHook(() =>
+        useSessionStorageState<null>({
+          key: "testKey",
         }),
-      {
-        initialProps: "testKey",
-      },
-    );
+      );
 
-    act(() => {
-      result.current.setSessionState(expectedSessionStorageValueA);
+      expect(result.current.sessionState).toBe(null);
     });
 
-    act(() => {
-      rerender("newTestKey");
+    test("`sessionState` is gets value after set in storage", () => {
+      const expectedSessionStorageValue = {
+        a: "Test A",
+        b: "Test B",
+      } as const;
+
+      window.sessionStorage.setItem(
+        "testKey",
+        JSON.stringify(expectedSessionStorageValue),
+      );
+
+      const { result } = renderHook(() =>
+        useSessionStorageState<typeof expectedSessionStorageValue>({
+          key: "testKey",
+        }),
+      );
+
+      expect(result.current.sessionState).toEqual(expectedSessionStorageValue);
     });
 
-    act(() => {
-      result.current.setSessionState(expectedSessionStorageValueB);
+    test("updates session storage with value", () => {
+      const expectedSessionStorageValue = {
+        a: "Test A",
+        b: "Test B",
+      } as const;
+
+      const { result } = renderHook(() =>
+        useSessionStorageState({
+          key: "testKey",
+        }),
+      );
+
+      act(() => {
+        result.current.setSessionState(expectedSessionStorageValue);
+      });
+
+      expect(result.current.sessionState).toEqual(expectedSessionStorageValue);
     });
 
-    expect(result.current.sessionState).toBe(expectedSessionStorageValueB);
+    test("updates session storage to latest value after 2 updates", () => {
+      const expectedSessionStorageValue = "This is the expected value.";
 
-    act(() => {
-      rerender("testKey");
+      const { result } = renderHook(() =>
+        useSessionStorageState<string>({
+          key: "testKey",
+        }),
+      );
+
+      act(() => {
+        result.current.setSessionState("This is a test.");
+      });
+
+      act(() => {
+        result.current.setSessionState(expectedSessionStorageValue);
+      });
+
+      expect(result.current.sessionState).toEqual(expectedSessionStorageValue);
     });
 
-    expect(result.current.sessionState).toBe(expectedSessionStorageValueA);
+    test("gets correct session storage value after updating `key`", () => {
+      const expectedSessionStorageValueA = "Test A";
+      const expectedSessionStorageValueB = "Test B";
+
+      const { result, rerender } = renderHook(
+        (key: string) =>
+          useSessionStorageState<string>({
+            key,
+          }),
+        {
+          initialProps: "testKey",
+        },
+      );
+
+      act(() => {
+        result.current.setSessionState(expectedSessionStorageValueA);
+      });
+
+      act(() => {
+        rerender("newTestKey");
+      });
+
+      act(() => {
+        result.current.setSessionState(expectedSessionStorageValueB);
+      });
+
+      expect(result.current.sessionState).toBe(expectedSessionStorageValueB);
+
+      act(() => {
+        rerender("testKey");
+      });
+
+      expect(result.current.sessionState).toBe(expectedSessionStorageValueA);
+    });
   });
 
-  // TODO: Add tests for initial state changes.
+  describe("initial state", () => {
+    test("is null when undefined", () => {
+      const { result } = renderHook(() =>
+        useSessionStorageState({
+          key: "testKey",
+        }),
+      );
+
+      expect(result.current.sessionState).toBe(null);
+    });
+
+    test("is null when null", () => {
+      const { result } = renderHook(() =>
+        useSessionStorageState({
+          initialState: null,
+          key: "testKey",
+        }),
+      );
+
+      expect(result.current.sessionState).toBe(null);
+    });
+
+    test("is string when string", () => {
+      const expectedValue = "This is a test.";
+
+      const { result } = renderHook(() =>
+        useSessionStorageState({
+          initialState: expectedValue,
+          key: "testKey",
+        }),
+      );
+
+      expect(result.current.sessionState).toBe(expectedValue);
+    });
+
+    test("is object when object", () => {
+      const expectedValue = {
+        a: "Test A",
+        b: "Test B",
+      };
+
+      const { result } = renderHook(() =>
+        useSessionStorageState({
+          initialState: expectedValue,
+          key: "testKey",
+        }),
+      );
+
+      expect(result.current.sessionState).toBe(expectedValue);
+    });
+
+    test("retains state after update", () => {
+      const expectedValue = {
+        a: "Test A",
+        b: "Test B",
+      };
+
+      const { result } = renderHook(() =>
+        useSessionStorageState({
+          initialState: {},
+          key: "testKey",
+        }),
+      );
+
+      act(() => {
+        result.current.setSessionState(expectedValue);
+      });
+
+      expect(result.current.sessionState).toBe(expectedValue);
+    });
+
+    test("makes no changes session storage state after updating `initialState`", () => {
+      const expectedSessionStorageValue = "Test A";
+
+      const { result, rerender } = renderHook(
+        (initialState: string) =>
+          useSessionStorageState({
+            initialState,
+            key: "testKey",
+          }),
+        {
+          initialProps: expectedSessionStorageValue,
+        },
+      );
+
+      expect(result.current.sessionState).toBe(expectedSessionStorageValue);
+
+      act(() => {
+        rerender("Test B");
+      });
+
+      expect(result.current.sessionState).toBe(expectedSessionStorageValue);
+    });
+  });
 });
