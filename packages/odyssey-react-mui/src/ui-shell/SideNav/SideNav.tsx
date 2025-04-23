@@ -62,6 +62,7 @@ import {
   UI_SHELL_OVERLAY_Z_INDEX,
 } from "../uiShellSharedConstants.js";
 import { useIsSideNavCollapsedSessionStorage } from "./useIsSideNavCollapsedSessionStorage.js";
+import { useMountLifecycleEffect } from "../../useMountLifecycleEffect.js";
 
 export const SIDE_NAV_COLLAPSED_PADDING_HIGHLIGHTED = 12;
 export const SIDE_NAV_COLLAPSED_PADDING_UNHIGHLIGHTED = 2;
@@ -465,6 +466,24 @@ const SideNav = ({
     // We want this listening to `isCollapsed`.
   }, [isCollapsed]);
 
+  // In the case that you can't control the side nav, then it should use whatever state was passed (app control) rather than what's stored in session storage (user control).
+  const onMount = useCallback(() => {
+    if (!isCollapsible) {
+      setIsSideNavCollapsed(isCollapsed);
+    }
+  }, [isCollapsed, isCollapsible, setIsSideNavCollapsed]);
+
+  const onUpdate = useCallback(() => {
+    setIsSideNavCollapsed(isCollapsed);
+  }, [isCollapsed, setIsSideNavCollapsed]);
+
+  useMountLifecycleEffect({
+    onMount,
+    onUpdate,
+  });
+
+  console.log({ isCollapsed, isSideNavCollapsed });
+
   useEffect(() => {
     // This is called directly in this effect AND perhaps as a result of the ResizeObserver
     const updateIsContentScrollable = () => {
@@ -687,19 +706,15 @@ const SideNav = ({
   );
 
   useEffect(() => {
-    if (isCollapsed) {
-      const unsubscribe = uiShellContext?.subscribeToCloseSideNavMenu(() => {
-        onCollapse?.();
-        setIsSideNavCollapsed(true);
-      });
+    const unsubscribe = uiShellContext?.subscribeToCloseSideNavMenu(() => {
+      onCollapse?.();
+      setIsSideNavCollapsed(true);
+    });
 
-      return () => {
-        unsubscribe?.();
-      };
-    }
-
-    return () => {};
-  }, [isCollapsed, onCollapse, setIsSideNavCollapsed, uiShellContext]);
+    return () => {
+      unsubscribe?.();
+    };
+  }, [onCollapse, setIsSideNavCollapsed, uiShellContext]);
 
   const setSortedItems = useCallback(
     (
