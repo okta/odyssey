@@ -77,7 +77,8 @@ describe(useSessionStorageState.name, () => {
   describe("key", () => {
     test("throws error when no key passed", () => {
       expect(() => {
-        useSessionStorageState<null>({
+        useSessionStorageState({
+          initialState: null,
           key: "",
         });
       }).toThrowError();
@@ -85,7 +86,8 @@ describe(useSessionStorageState.name, () => {
 
     test("`sessionState` is `null` with an unused key", () => {
       const { result } = renderHook(() =>
-        useSessionStorageState<null>({
+        useSessionStorageState({
+          initialState: null,
           key: "testKey",
         }),
       );
@@ -105,7 +107,8 @@ describe(useSessionStorageState.name, () => {
       );
 
       const { result } = renderHook(() =>
-        useSessionStorageState<typeof expectedSessionStorageValue>({
+        useSessionStorageState({
+          initialState: {},
           key: "testKey",
         }),
       );
@@ -121,6 +124,7 @@ describe(useSessionStorageState.name, () => {
 
       const { result } = renderHook(() =>
         useSessionStorageState({
+          initialState: {},
           key: "testKey",
         }),
       );
@@ -136,7 +140,8 @@ describe(useSessionStorageState.name, () => {
       const expectedSessionStorageValue = "This is the expected value.";
 
       const { result } = renderHook(() =>
-        useSessionStorageState<string>({
+        useSessionStorageState({
+          initialState: "",
           key: "testKey",
         }),
       );
@@ -158,7 +163,8 @@ describe(useSessionStorageState.name, () => {
 
       const { result, rerender } = renderHook(
         (key: string) =>
-          useSessionStorageState<string>({
+          useSessionStorageState({
+            initialState: "",
             key,
           }),
         {
@@ -189,16 +195,6 @@ describe(useSessionStorageState.name, () => {
   });
 
   describe("initial state", () => {
-    test("is null when undefined", () => {
-      const { result } = renderHook(() =>
-        useSessionStorageState({
-          key: "testKey",
-        }),
-      );
-
-      expect(result.current.sessionState).toBe(null);
-    });
-
     test("is null when null", () => {
       const { result } = renderHook(() =>
         useSessionStorageState({

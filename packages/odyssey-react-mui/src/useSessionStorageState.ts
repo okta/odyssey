@@ -35,7 +35,7 @@ export const useSessionStorageState = <Value>({
   initialState,
   key,
 }: {
-  initialState?: Value;
+  initialState: Value;
   key: string;
 }) => {
   if (!key) {
@@ -54,9 +54,9 @@ export const useSessionStorageState = <Value>({
     [key],
   );
 
-  const [localState, setLocalState] = useState<
-    ReturnType<typeof getSessionStorageValue<Value>>
-  >(() => sessionState || initialState || null);
+  const [localState, setLocalState] = useState<Value>(
+    () => sessionState ?? initialState,
+  );
 
   // This keeps session storage's state based on local state.
   useEffect(() => {
@@ -65,7 +65,9 @@ export const useSessionStorageState = <Value>({
 
   // This updates when `key` is updated.
   const onUpdate = useCallback(() => {
-    setLocalState(sessionState);
+    if (sessionState) {
+      setLocalState(sessionState);
+    }
   }, [sessionState]);
 
   useMountLifecycleEffect({
