@@ -61,6 +61,7 @@ import {
   UI_SHELL_BASE_Z_INDEX,
   UI_SHELL_OVERLAY_Z_INDEX,
 } from "../uiShellSharedConstants.js";
+import { useIsSideNavCollapsedSessionStorage } from "./useIsSideNavCollapsedSessionStorage.js";
 
 export const SIDE_NAV_COLLAPSED_PADDING_HIGHLIGHTED = 12;
 export const SIDE_NAV_COLLAPSED_PADDING_UNHIGHLIGHTED = 2;
@@ -429,10 +430,14 @@ const SideNav = ({
   const [hasContentScrolled, setHasContentScrolled] = useState(false);
   const [hasNeighboringContent, setHasNeighboringContent] = useState(false);
   const [isContentScrollable, setIsContentScrollable] = useState(false);
-  const [isSideNavCollapsed, setIsSideNavCollapsed] = useState(isCollapsed);
   const [isSideNavToggleHighlighted, setIsSideNavToggleHighlighted] =
     useState(false);
   const [sideNavItemsList, updateSideNavItemsList] = useState(sideNavItems);
+
+  const {
+    sessionState: isSideNavCollapsed,
+    setSessionState: setIsSideNavCollapsed,
+  } = useIsSideNavCollapsedSessionStorage(isCollapsed);
 
   const uiShellContext = useUiShellContext();
   const odysseyDesignTokens: DesignTokens = useOdysseyDesignTokens();
@@ -452,13 +457,12 @@ const SideNav = ({
 
   // update sidenav collapse status
   useEffect(() => {
-    setIsSideNavCollapsed(isCollapsed);
-
     if (sideNavRef.current) {
       setHasNeighboringContent(
         sideNavRef.current.getBoundingClientRect().x > 0,
       );
     }
+    // We want this listening to `isCollapsed`.
   }, [isCollapsed]);
 
   useEffect(() => {
@@ -668,7 +672,7 @@ const SideNav = ({
 
       return !isSideNavCollapsed;
     });
-  }, [onExpand, onCollapse]);
+  }, [onCollapse, onExpand, setIsSideNavCollapsed]);
 
   const sideNavExpandKeyHandler = useCallback<
     KeyboardEventHandler<HTMLButtonElement>
@@ -695,7 +699,7 @@ const SideNav = ({
     }
 
     return () => {};
-  }, [isCollapsed, onCollapse, uiShellContext]);
+  }, [isCollapsed, onCollapse, setIsSideNavCollapsed, uiShellContext]);
 
   const setSortedItems = useCallback(
     (
