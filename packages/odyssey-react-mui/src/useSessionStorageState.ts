@@ -45,7 +45,7 @@ export const useSessionStorageState = <Value>({
   const sessionState = useMemo(() => getSessionStorageValue<Value>(key), [key]);
 
   const setSessionState = useCallback(
-    (value: Value | null) => {
+    (value: Value) => {
       const sessionStorageState =
         typeof value === "undefined" ? "" : JSON.stringify(value);
 
@@ -65,10 +65,8 @@ export const useSessionStorageState = <Value>({
 
   // This updates when `key` is updated.
   const onUpdate = useCallback(() => {
-    if (sessionState) {
-      setLocalState(sessionState);
-    }
-  }, [sessionState]);
+    setLocalState(sessionState ?? initialState);
+  }, [initialState, sessionState]);
 
   useMountLifecycleEffect({
     onUpdate,
