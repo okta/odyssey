@@ -11,15 +11,9 @@
  */
 
 import { render, screen } from "@testing-library/react";
-import { DateTimePicker } from "./DateTimePicker.js";
 
-describe("DateTimePicker", () => {
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
-  vitest.mock("react-i18next", () => ({
-    // this mock makes sure any components using the translate hook can use it without a warning being shown
+const getMockedDateTimePicker = async () => {
+  vi.doMock("react-i18next", () => ({
     useTranslation: () => {
       return {
         t: vi.fn((value: string) => value),
@@ -34,16 +28,28 @@ describe("DateTimePicker", () => {
     },
   }));
 
-  it("displays the DateTimePicker", () => {
-    render(<DateTimePicker label="date time picker label" />);
+  const { DateTimePicker } = await import("./DateTimePicker.js");
+
+  vi.doUnmock("react-i18next");
+
+  return DateTimePicker;
+};
+
+describe("DateTimePicker", () => {
+  test("displays the DateTimePicker", async () => {
+    const MockedDateTimePicker = await getMockedDateTimePicker();
+
+    render(<MockedDateTimePicker label="date time picker label" />);
 
     const input = screen.getByLabelText("date time picker label");
     expect(input).toBeInTheDocument();
   });
 
-  it("displays the correct date and time when a value is passed in ", () => {
+  test("displays the correct date and time when a value is passed in ", async () => {
+    const MockedDateTimePicker = await getMockedDateTimePicker();
+
     render(
-      <DateTimePicker
+      <MockedDateTimePicker
         label="date time picker label"
         value="2024-07-11T03:00:00.000Z"
         timeZone="America/New_York"
@@ -55,9 +61,11 @@ describe("DateTimePicker", () => {
     expect(input).toHaveDisplayValue("07/10/2024 11:00 PM");
   });
 
-  it("displays the correct date and time when timezone is changed", () => {
+  test("displays the correct date and time when timezone is changed", async () => {
+    const MockedDateTimePicker = await getMockedDateTimePicker();
+
     render(
-      <DateTimePicker
+      <MockedDateTimePicker
         label="date time picker label"
         value="2024-07-11T03:00:00.000Z"
         timeZone="America/Los_Angeles"

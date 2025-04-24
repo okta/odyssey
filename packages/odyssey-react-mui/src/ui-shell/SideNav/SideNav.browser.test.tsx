@@ -16,6 +16,10 @@ import { SideNav } from "./SideNav.js";
 import { OdysseyProvider } from "../../OdysseyProvider.js";
 
 describe(SideNav.displayName!, () => {
+  afterEach(() => {
+    window.sessionStorage.clear();
+  });
+
   test("can show the default Okta logo", () => {
     render(
       <OdysseyProvider>

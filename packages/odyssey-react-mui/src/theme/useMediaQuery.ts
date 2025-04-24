@@ -12,7 +12,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 
-import { StringWithValue } from "./StringWithValue.js";
+import { StringWithValue } from "../StringWithValue.js";
 
 export const useMediaQuery = <MediaQuery extends string>(
   mediaQuery: StringWithValue<MediaQuery>,
