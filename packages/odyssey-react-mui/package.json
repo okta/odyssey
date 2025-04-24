@@ -89,7 +89,7 @@
     "ci:coverage": "NODE_ENV=test yarn vitest run --coverage --reporter=default",
     "dev:coverage": "NODE_ENV=test yarn vitest --coverage",
     "dev:source": "yarn build:source:esm --watch",
-    "dev:test": "NODE_ENV=test vitest",
+    "dev:test": "NODE_ENV=test vitest --reporter=verbose",
     "dev:translationsJson": "yarn build:translationsJson --watch",
     "dev:types": "yarn build:types --watch",
     "dev": "yarn concurrently npm:dev:translationsJson npm:dev:types npm:dev:source",
