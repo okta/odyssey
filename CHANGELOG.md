@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.35.4](https://github.com/okta/odyssey/compare/v1.35.3...v1.35.4) (2025-04-21)
+
+### Bug Fixes
+
+- nested scroll containers dynamically handled by UI Shell ([#2529](https://github.com/okta/odyssey/issues/2529)) ([66460df](https://github.com/okta/odyssey/commit/66460df14e260f3bc9f522e61309219bae89eeef))
+
+## [1.35.3](https://github.com/okta/odyssey/compare/v1.35.0...v1.35.3) (2025-04-17)
+
+### Bug Fixes
+
+- adds customizable UI Shell breakpoints for Admin ([#2519](https://github.com/okta/odyssey/issues/2519)) ([44920c3](https://github.com/okta/odyssey/commit/44920c3e52172b56c97c30f16a759713aa4c0236))
+- adds inner shadow to app container and not top nav ([#2520](https://github.com/okta/odyssey/issues/2520)) ([d18b350](https://github.com/okta/odyssey/commit/d18b35078714ceb73195661ace04ea83fb6627b4))
+- empty tables creating scrollbar ([#2525](https://github.com/okta/odyssey/issues/2525)) ([d1f5825](https://github.com/okta/odyssey/commit/d1f58251989ee6946c9a0ef3441df52424dbaff9))
+- fixed render function ([#2523](https://github.com/okta/odyssey/issues/2523)) ([0c09f26](https://github.com/okta/odyssey/commit/0c09f26d409c44632892e8e4c063ee2a2783db44))
+- restyle side nav in UI Shell ([#2528](https://github.com/okta/odyssey/issues/2528)) ([4a93e9c](https://github.com/okta/odyssey/commit/4a93e9c20dc70a9b0f4b17cb74e7737118182358))
+- upgrades MUI version ([80bf886](https://github.com/okta/odyssey/commit/80bf8862611385cbef725058fa65ba096dad2e6f))
+
+## [1.35.2](https://github.com/okta/odyssey/compare/v1.35.0...v1.35.2) (2025-04-03)
+
+### Bug Fixes
+
+- adds customizable UI Shell breakpoints for Admin ([#2519](https://github.com/okta/odyssey/issues/2519)) ([44920c3](https://github.com/okta/odyssey/commit/44920c3e52172b56c97c30f16a759713aa4c0236))
+- adds inner shadow to app container and not top nav ([#2520](https://github.com/okta/odyssey/issues/2520)) ([d18b350](https://github.com/okta/odyssey/commit/d18b35078714ceb73195661ace04ea83fb6627b4))
+- empty tables creating scrollbar ([#2525](https://github.com/okta/odyssey/issues/2525)) ([d1f5825](https://github.com/okta/odyssey/commit/d1f58251989ee6946c9a0ef3441df52424dbaff9))
+- fixed render function ([#2523](https://github.com/okta/odyssey/issues/2523)) ([0c09f26](https://github.com/okta/odyssey/commit/0c09f26d409c44632892e8e4c063ee2a2783db44))
+- upgrades MUI version ([80bf886](https://github.com/okta/odyssey/commit/80bf8862611385cbef725058fa65ba096dad2e6f))
+
+## [1.35.1](https://github.com/okta/odyssey/compare/v1.35.0...v1.35.1) (2025-03-27)
+
+### Bug Fixes
+
+- adds customizable UI Shell breakpoints for Admin ([#2519](https://github.com/okta/odyssey/issues/2519)) ([44920c3](https://github.com/okta/odyssey/commit/44920c3e52172b56c97c30f16a759713aa4c0236))
+- adds inner shadow to app container and not top nav ([#2520](https://github.com/okta/odyssey/issues/2520)) ([d18b350](https://github.com/okta/odyssey/commit/d18b35078714ceb73195661ace04ea83fb6627b4))
+
 ## [1.35.0](https://github.com/okta/odyssey/compare/v1.32.4...v1.35.0) (2025-03-27)
 
 ### Features
