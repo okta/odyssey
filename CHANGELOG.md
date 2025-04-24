@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.36.0](https://github.com/okta/odyssey/compare/v1.35.4...v1.36.0) (2025-04-24)
+
+### Features
+
+- side nav collapse state saved in session storage ([#2530](https://github.com/okta/odyssey/issues/2530)) ([845509b](https://github.com/okta/odyssey/commit/845509b17dcd443c337a9c52adb7bcedb9ba4227))
+
+### Bug Fixes
+
+- nested scroll containers dynamically handled by UI Shell ([#2529](https://github.com/okta/odyssey/issues/2529)) ([94dd7ca](https://github.com/okta/odyssey/commit/94dd7ca53c578c02652d40985734613086842b73))
+- restyle side nav in UI Shell ([#2528](https://github.com/okta/odyssey/issues/2528)) ([4e2c312](https://github.com/okta/odyssey/commit/4e2c3124ae058ae237d24c579f99345e701ce387))
+
 ## [1.35.4](https://github.com/okta/odyssey/compare/v1.35.3...v1.35.4) (2025-04-21)
 
 ### Bug Fixes
