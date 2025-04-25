@@ -13,9 +13,9 @@
 import { waitFor } from "@testing-library/dom";
 
 import {
-  ReactInWebComponentElement,
-  reactWebComponentElementName,
   renderReactInWebComponent,
+  seleniumAttrName,
+  versionedWebComponentName,
 } from "./renderReactInWebComponent.js";
 
 describe(renderReactInWebComponent.name, () => {
@@ -37,8 +37,8 @@ describe(renderReactInWebComponent.name, () => {
     });
 
     await waitFor(() => {
-      expect(reactInWebComponentElement).toBeInstanceOf(
-        ReactInWebComponentElement,
+      expect(reactInWebComponentElement.elementName).toEqual(
+        versionedWebComponentName,
       );
       expect(reactInWebComponentElement.shadowRoot).toBeInstanceOf(ShadowRoot);
       expect(reactInWebComponentElement).toBeInTheDocument();
@@ -80,9 +80,7 @@ describe(renderReactInWebComponent.name, () => {
       webComponentParentElement: rootElement,
     });
 
-    expect(
-      document.querySelectorAll(reactWebComponentElementName),
-    ).toHaveLength(2);
+    expect(document.querySelectorAll(`[${seleniumAttrName}]`)).toHaveLength(2);
   });
 
   test("renders a single element as children of the web component", () => {

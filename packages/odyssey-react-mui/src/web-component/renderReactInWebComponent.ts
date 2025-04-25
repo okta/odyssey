@@ -12,56 +12,82 @@
 
 import { type ReactNode } from "react";
 import type { Root } from "react-dom/client";
+import version from "./odysseyWebComponentVersion.generated.js";
 
 import {
   createReactRootElements,
   type ReactRootElements,
 } from "./createReactRootElements.js";
 
-export const reactWebComponentElementName = "odyssey-react-web-component";
+interface GetReactWebComponentOptions {
+  webComponentName?: string;
+  getReactComponent: (reactRootElements: ReactRootElements) => ReactNode;
+}
 
-export type GetReactComponentInWebComponent = (
-  reactRootElements: ReactRootElements,
-) => ReactNode;
+// Used by selenium when selecting for odyssey web components regardless of their name.
+export const seleniumAttrName = "odyssey-react-web-component";
+// Unique name to avoid multiple versions of odyssey overwriting each other's implementations
+export const versionedWebComponentName =
+  `odyssey-react-wc-${version}`.toLowerCase();
 
 const SsrFriendlyHtmlElementClass =
   "HTMLElement" in globalThis
     ? HTMLElement
     : (class {} as unknown as typeof globalThis.HTMLElement);
 
-export class ReactInWebComponentElement extends SsrFriendlyHtmlElementClass {
-  getReactComponent: GetReactComponentInWebComponent;
-  reactRootElements: ReactRootElements;
-  reactRootPromise: Promise<Root | null> = Promise.resolve(null);
+class WebComponentClass extends SsrFriendlyHtmlElementClass {
+  #getReactComponent: GetReactComponentInWebComponent | null = null;
+  readonly #reactRootElements: ReactRootElements;
+  public readonly elementName: string = this.localName;
+  // public for testing
+  public reactRootPromise: Promise<Root | null> = Promise.resolve(null);
 
-  constructor(getReactComponent: GetReactComponentInWebComponent) {
+  constructor() {
     super();
 
-    this.getReactComponent = getReactComponent;
-    this.reactRootElements = createReactRootElements();
+    this.#reactRootElements = createReactRootElements();
+    const { appRootElement, stylesRootElement } = this.#reactRootElements;
 
-    const styleElement = document.createElement("style");
     const shadowRoot = this.attachShadow({ mode: "open" });
+    shadowRoot.appendChild(stylesRootElement);
+    shadowRoot.appendChild(appRootElement);
 
-    styleElement.innerHTML = `
+    const styleHostElement = document.createElement("style");
+    styleHostElement.setAttribute("nonce", window.cspNonce);
+    styleHostElement.innerHTML = `
       :host {
         all: initial;
         contain: content;
       }
     `;
+    stylesRootElement.appendChild(styleHostElement);
+  }
 
-    styleElement.setAttribute("nonce", window.cspNonce);
+  /**
+   * Provides the function used to initialize react content that is specific to this instance
+   * of the web component, which is used later in the connectedCallback.
+   *
+   * Always set immediately after creation via document.createElement
+   */
+  setGetReactComponent(getReactComponent: GetReactComponentInWebComponent) {
+    this.reactRootPromise = this.reactRootPromise.then((reactRoot) => {
+      this.#getReactComponent = getReactComponent;
+      if (reactRoot) {
+        // connectedCallback has already been fired. Need to mount this content to the existing root
+        reactRoot.render(this.#getReactComponent(this.#reactRootElements));
+      } else {
+        // Nothing to do. Content will be mounted when connectedCallback is called
+      }
 
-    this.reactRootElements.stylesRootElement.appendChild(styleElement);
-    shadowRoot.appendChild(this.reactRootElements.stylesRootElement);
-    shadowRoot.appendChild(this.reactRootElements.appRootElement);
+      return reactRoot;
+    });
   }
 
   connectedCallback() {
     this.reactRootPromise = this.reactRootPromise
       .then((reactRoot) => {
         if (reactRoot) {
-          // Shouldn't ever happen
+          // Shouldn't ever happen. connected and disconnected should never be called out of order
           throw new Error(
             `connectedCallback fired when reactRoot is already mounted.`,
           );
@@ -70,11 +96,15 @@ export class ReactInWebComponentElement extends SsrFriendlyHtmlElementClass {
         // Ensure react root is available before mounting
         // If we want to support React v17 in the future, we can use a try-catch on the import to grab the old `ReactDOM.render` function if `react-dom/client` errors. --Kevin Ghadyani
         return import("react-dom/client").then(({ createRoot }) =>
-          createRoot(this.reactRootElements.appRootElement),
+          createRoot(this.#reactRootElements.appRootElement),
         );
       })
       .then((reactRoot) => {
-        reactRoot.render(this.getReactComponent(this.reactRootElements));
+        if (!this.#getReactComponent) {
+          // getReactComponent hasn't been set yet. Content will be mounted once it's set.
+        } else {
+          reactRoot.render(this.#getReactComponent(this.#reactRootElements));
+        }
         return reactRoot;
       });
   }
@@ -95,17 +125,39 @@ export class ReactInWebComponentElement extends SsrFriendlyHtmlElementClass {
   }
 }
 
-if (
-  "customElements" in globalThis &&
-  !customElements.get(reactWebComponentElementName)
-) {
-  customElements.define(
-    reactWebComponentElementName,
-    ReactInWebComponentElement,
-  );
-}
+/**
+ * Returns a constructed web component which manages it's own shadow dom and react dom roots
+ * A custom name can be specified, otherwise a default is provided
+ */
+export const getReactWebComponent = ({
+  webComponentName = versionedWebComponentName,
+  getReactComponent,
+}: GetReactWebComponentOptions) => {
+  // This name hasn't been defined yet. Add a definition for it before constructing one.
+  if (!customElements.get(webComponentName)) {
+    customElements.define(webComponentName, WebComponentClass);
+  }
+
+  const element = document.createElement(webComponentName) as InstanceType<
+    typeof WebComponentClass
+  >;
+  // Set selenium attribute so this can be selected
+  element.setAttribute(seleniumAttrName, "");
+  // function used for creating react content
+  element.setGetReactComponent(getReactComponent);
+  return element;
+};
+
+export type GetReactComponentInWebComponent = (
+  reactRootElements: ReactRootElements,
+) => ReactNode;
 
 export type RenderReactInWebComponentProps = {
+  /**
+   * Optional name given to this web component.
+   * Defaults to a 'odyssey-react-wc-' plus the current odyssey version
+   */
+  webComponentName?: string;
   /**
    * This is a callback function for rendering your React component or app in the Web Component.
    * It gives you access to the Shadow DOM elements if you need them for Odyssey, Emotion, or MUI.
@@ -148,12 +200,16 @@ export type RenderReactInWebComponentProps = {
  * This is useful when global styles are causing conflicts with your React components.
  */
 export const renderReactInWebComponent = ({
+  webComponentName,
   getReactComponent,
   webComponentChildren,
   webComponentParentElement,
   webComponentRootElement,
 }: RenderReactInWebComponentProps) => {
-  const reactElement = new ReactInWebComponentElement(getReactComponent);
+  const reactElement = getReactWebComponent({
+    getReactComponent,
+    webComponentName,
+  });
 
   if (webComponentChildren) {
     (Array.isArray(webComponentChildren)

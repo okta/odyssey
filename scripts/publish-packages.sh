@@ -32,6 +32,8 @@ for PATH_AND_FILE in $FILES_TO_UPDATE_VERSION; do
   git update-index --assume-unchanged $FULL_PATH
 done
 
+yarn workspace @okta/odyssey-react-mui generate:wcVersion
+
 echo "Publishing to artifactory"
 if ! lerna_publish; then
   echo "ERROR: Lerna Publish has failed."
