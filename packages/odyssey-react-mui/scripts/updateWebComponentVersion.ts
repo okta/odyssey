@@ -11,7 +11,6 @@
  */
 
 import { writeFile } from "node:fs/promises";
-import { fileURLToPath } from "node:url";
 import * as path from "path";
 import { version } from "../package.json" with { type: "json" };
 
@@ -35,7 +34,7 @@ const content = `/*!
 export default "${version.replaceAll(".", "-")}";
 `;
 
-const repoPath = path.resolve(fileURLToPath(import.meta.url), "../../");
+const repoPath = path.resolve(import.meta.dirname, "../");
 const versionFile = path.resolve(
   repoPath,
   "src/web-component/odysseyWebComponentVersion.generated.ts",

@@ -99,7 +99,7 @@
     "generate:icons": "yarn generate:icons:clean && yarn generate:icons:components && yarn generate:icons:index",
     "playwright-install": "NODE_TLS_REJECT_UNAUTHORIZED=0 yarn playwright install --with-deps chromium",
     "test": "NODE_ENV=test vitest run --reporter=default",
-    "generate:wcVersion": "tsx scripts/updateWebComponentVersion.ts",
+    "generate:webComponentVersion": "tsx scripts/updateWebComponentVersion.ts",
     "typecheck": "tsc --noEmit --rootDir ./"
   },
   "repository": {

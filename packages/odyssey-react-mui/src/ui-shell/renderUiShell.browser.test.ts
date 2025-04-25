@@ -14,11 +14,11 @@ import { act, waitFor } from "@testing-library/react";
 
 import { renderUiShell } from "./renderUiShell.js";
 import {
-  seleniumAttrName,
+  webComponentDataAttributeName,
   versionedWebComponentName,
 } from "../web-component/renderReactInWebComponent.js";
 import { appRootElementId } from "../web-component/createReactRootElements.js";
-const webComponentSelector = `[${seleniumAttrName}]`;
+const webComponentSelector = `[${webComponentDataAttributeName}]`;
 
 describe(renderUiShell.name, () => {
   afterEach(async () => {

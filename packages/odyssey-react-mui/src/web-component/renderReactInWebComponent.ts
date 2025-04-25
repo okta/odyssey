@@ -25,10 +25,10 @@ interface GetReactWebComponentOptions {
 }
 
 // Used by selenium when selecting for odyssey web components regardless of their name.
-export const seleniumAttrName = "odyssey-react-web-component";
+export const webComponentDataAttributeName = "data-odyssey-react-web-component";
 // Unique name to avoid multiple versions of odyssey overwriting each other's implementations
 export const versionedWebComponentName =
-  `odyssey-react-wc-${version}`.toLowerCase();
+  `odyssey-react-web-component-${version}`.toLowerCase();
 
 const SsrFriendlyHtmlElementClass =
   "HTMLElement" in globalThis
@@ -142,7 +142,7 @@ export const getReactWebComponent = ({
     typeof WebComponentClass
   >;
   // Set selenium attribute so this can be selected
-  element.setAttribute(seleniumAttrName, "");
+  element.setAttribute(webComponentDataAttributeName, "");
   // function used for creating react content
   element.setGetReactComponent(getReactComponent);
   return element;

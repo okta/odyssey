@@ -14,7 +14,7 @@ import { waitFor } from "@testing-library/dom";
 
 import {
   renderReactInWebComponent,
-  seleniumAttrName,
+  webComponentDataAttributeName,
   versionedWebComponentName,
 } from "./renderReactInWebComponent.js";
 
@@ -80,7 +80,9 @@ describe(renderReactInWebComponent.name, () => {
       webComponentParentElement: rootElement,
     });
 
-    expect(document.querySelectorAll(`[${seleniumAttrName}]`)).toHaveLength(2);
+    expect(
+      document.querySelectorAll(`[${webComponentDataAttributeName}]`),
+    ).toHaveLength(2);
   });
 
   test("renders a single element as children of the web component", () => {
