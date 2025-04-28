@@ -60,7 +60,6 @@ const StyledAppContentArea = styled("div")({
   gridTemplateColumns: "auto 1fr auto",
   gridTemplateRows: "1fr",
   height: "100%",
-  pointerEvents: "none",
   width: "100%",
 });
 
@@ -71,8 +70,8 @@ const StyledAppContainer = styled("div", {
   appBackgroundColor?: UiShellColors["appBackgroundColor"];
 }>(({ appBackgroundColor }) => ({
   backgroundColor: appBackgroundColor,
-  height: "100%",
   gridArea: "app-container",
+  height: "100%",
   overflow: "hidden",
   width: "100%",
 }));
