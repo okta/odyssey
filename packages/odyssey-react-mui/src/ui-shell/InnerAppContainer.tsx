@@ -17,6 +17,7 @@ import { UI_SHELL_BASE_Z_INDEX } from "./uiShellSharedConstants.js";
 // Shared styles for fake inset shadow. Not rendered anywhere.
 const StyledAppContainerShadowShared = styled("div")({
   left: 0,
+  pointerEvents: "none",
   position: "absolute",
   top: 0,
   width: "100%",
