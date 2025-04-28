@@ -35,7 +35,7 @@ const SsrFriendlyHtmlElementClass =
     ? HTMLElement
     : (class {} as unknown as typeof globalThis.HTMLElement);
 
-class WebComponentClass extends SsrFriendlyHtmlElementClass {
+export class WebComponentClass extends SsrFriendlyHtmlElementClass {
   #getReactComponent: GetReactComponentInWebComponent | null = null;
   readonly #reactRootElements: ReactRootElements;
   public readonly elementName: string = this.localName;

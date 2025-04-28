@@ -11,6 +11,12 @@
     "sourceMap": true,
     "types": ["@vitest/browser/matchers", "vitest/globals"]
   },
-  "include": ["*", "**/src/**/*", "**/properties/**/*", "**/scripts/**/*"],
+  "include": [
+    "*",
+    "**/src/**/*",
+    "**/properties/**/*",
+    "**/scripts/**/*",
+    "package.json"
+  ],
   "exclude": ["**/dist/**/*"]
 }
