@@ -210,7 +210,7 @@ describe("DataView", { timeout: 10000 }, () => {
       const submitButton = within(nameFilterMenu).getByRole("button");
 
       await user.click(nameInput);
-      console.log(data[1].name);
+
       await user.keyboard(`${data[1].name}{ENTER}`);
       await user.click(submitButton);
 

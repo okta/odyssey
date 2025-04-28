@@ -482,8 +482,6 @@ const SideNav = ({
     onUpdate,
   });
 
-  console.log({ isCollapsed, isSideNavCollapsed });
-
   useEffect(() => {
     // This is called directly in this effect AND perhaps as a result of the ResizeObserver
     const updateIsContentScrollable = () => {
