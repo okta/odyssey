@@ -2236,7 +2236,7 @@ export const getComponents = ({
             gap: "unset",
           },
 
-          "&:hover": {
+          [`&:hover, &.${menuItemClasses.root}-hover`]: {
             textDecoration: "none",
             backgroundColor: odysseyTokens.HueNeutral100,
 
@@ -2271,7 +2271,7 @@ export const getComponents = ({
             color: odysseyTokens.TypographyColorAction,
             fontWeight: odysseyTokens.TypographyWeightBodyBold,
 
-            "&:hover": {
+            [`&:hover, &.${menuItemClasses.root}-hover`]: {
               backgroundColor: odysseyTokens.PalettePrimaryLighter,
 
               "@media (hover: none)": {
@@ -2281,9 +2281,8 @@ export const getComponents = ({
 
             [`&.${menuItemClasses.focusVisible}`]: {
               backgroundColor: odysseyTokens.PalettePrimaryLighter,
-              color: odysseyTokens.TypographyColorAction,
 
-              "&:hover": {
+              [`&:hover, &.${menuItemClasses.root}-hover`]: {
                 backgroundColor: odysseyTokens.PalettePrimaryLighter,
 
                 "@media (hover: none)": {
@@ -2297,7 +2296,7 @@ export const getComponents = ({
             backgroundColor: "transparent",
             boxShadow: theme.mixins.insetFocusRing,
 
-            "&:hover": {
+            [`&:hover, &.${menuItemClasses.root}-hover`]: {
               backgroundColor: odysseyTokens.HueNeutral100,
 
               // Reset on touch devices, it doesn't add specificity
