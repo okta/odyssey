@@ -889,7 +889,7 @@ const SideNav = ({
                             />
 
                             <StyledSideNavListItem
-                              id={id}
+                              id={`${id}-items`}
                               odysseyDesignTokens={odysseyDesignTokens}
                               disabled={isDisabled}
                               aria-disabled={isDisabled}
