@@ -205,10 +205,6 @@ export type SideNavItem = {
       isSectionHeader?: never;
     }
   | {
-      /**
-       * An array of side nav items to be displayed as nestedNavItems within Accordion
-       */
-      nestedNavItems: Array<Omit<SideNavItem, "nestedNavItems" | "startIcon">>;
       href?: never;
       /**
        * Whether the accordion (nav item with nestedNavItems) is expanded by default
@@ -223,6 +219,20 @@ export type SideNavItem = {
        * If true, enables sorting for the accordion items
        */
       isSectionHeader?: never;
+      /**
+       * An array of side nav items to be displayed as nestedNavItems within Accordion
+       */
+      nestedNavItems: Array<Omit<SideNavItem, "nestedNavItems" | "startIcon">>;
+    }
+  | {
+      href: string;
+      isDefaultExpanded?: never;
+      isExpanded?: never;
+      isSectionHeader?: never;
+      /**
+       * An array of side nav items to be displayed as nestedNavItems within Accordion
+       */
+      nestedNavItems: Array<Omit<SideNavItem, "nestedNavItems" | "startIcon">>;
     }
 ) &
   Pick<HtmlProps, "translate">;

@@ -31,6 +31,7 @@ import {
   SideNavItem,
   SideNavProps,
 } from "@okta/odyssey-react-mui/ui-shell";
+import { action } from "@storybook/addon-actions";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { configure, expect, userEvent, waitFor, within } from "@storybook/test";
@@ -412,9 +413,13 @@ export const SortableSideNav: StoryObj<typeof SideNav> = {
     },
     sideNavItems: [
       {
+        href: "#",
         id: "item17",
         label: "My Apps",
-        isDefaultExpanded: true,
+        onClick: (event) => {
+          event.preventDefault();
+          action('onClick: "My Apps"')(event);
+        },
         isSortable: true,
         startIcon: <HomeIcon />,
         nestedNavItems: [
