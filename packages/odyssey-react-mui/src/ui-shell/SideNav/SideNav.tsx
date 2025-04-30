@@ -876,31 +876,28 @@ const SideNav = ({
                           </StyledSideNavListContainer>
                         );
 
-                        return (
-                          href
-                          ? (
-                            <ErrorBoundary fallback={blankElement} key={id}>
-                              <SideNavItemContent
-                                {...item}
-                                href={href}
-                                onItemSelected={setSelectedItem}
-                                scrollRef={getRefIfThisIsFirstNodeWithIsSelected(
-                                  item.id,
-                                )}
-                                startIcon={item.startIcon}
-                              />
+                        return href ? (
+                          <ErrorBoundary fallback={blankElement} key={id}>
+                            <SideNavItemContent
+                              {...item}
+                              href={href}
+                              onItemSelected={setSelectedItem}
+                              scrollRef={getRefIfThisIsFirstNodeWithIsSelected(
+                                item.id,
+                              )}
+                              startIcon={item.startIcon}
+                            />
 
-                              <StyledSideNavListItem
-                                id={id}
-                                odysseyDesignTokens={odysseyDesignTokens}
-                                disabled={isDisabled}
-                                aria-disabled={isDisabled}
-                              >
-                                {nestedChildren}
-                              </StyledSideNavListItem>
-                            </ErrorBoundary>
-                          )
-                          : (
+                            <StyledSideNavListItem
+                              id={id}
+                              odysseyDesignTokens={odysseyDesignTokens}
+                              disabled={isDisabled}
+                              aria-disabled={isDisabled}
+                            >
+                              {nestedChildren}
+                            </StyledSideNavListItem>
+                          </ErrorBoundary>
+                        ) : (
                           <ErrorBoundary fallback={blankElement} key={id}>
                             <StyledSideNavListItem
                               id={id}
