@@ -14,10 +14,11 @@ import { act, waitFor } from "@testing-library/react";
 
 import { renderUiShell } from "./renderUiShell.js";
 import {
-  ReactInWebComponentElement,
-  reactWebComponentElementName,
+  webComponentDataAttributeName,
+  versionedWebComponentName,
 } from "../web-component/renderReactInWebComponent.js";
 import { appRootElementId } from "../web-component/createReactRootElements.js";
+const webComponentSelector = `[${webComponentDataAttributeName}]`;
 
 describe(renderUiShell.name, () => {
   afterEach(async () => {
@@ -76,7 +77,7 @@ describe(renderUiShell.name, () => {
         parentElement,
       });
 
-      expect(uiShellElement).toBeInstanceOf(ReactInWebComponentElement);
+      expect(uiShellElement.elementName).toEqual(versionedWebComponentName);
     });
   });
 
@@ -96,8 +97,7 @@ describe(renderUiShell.name, () => {
 
     expect(
       Array.from(
-        parentElement.querySelector(reactWebComponentElementName)!.shadowRoot!
-          .children,
+        parentElement.querySelector(webComponentSelector)!.shadowRoot!.children,
       ).length,
     ).toBeGreaterThan(0);
   });
@@ -138,7 +138,7 @@ describe(renderUiShell.name, () => {
     await waitFor(() => {
       expect(
         parentElement
-          .querySelector(reactWebComponentElementName)!
+          .querySelector(webComponentSelector)!
           .shadowRoot?.getElementById(appRootElementId),
       ).toHaveTextContent(appName);
     });
@@ -170,7 +170,7 @@ describe(renderUiShell.name, () => {
     await waitFor(() => {
       expect(
         parentElement
-          .querySelector(reactWebComponentElementName)!
+          .querySelector(webComponentSelector)!
           .shadowRoot?.getElementById(appRootElementId),
       ).toHaveTextContent(appName);
     });
@@ -212,7 +212,7 @@ describe(renderUiShell.name, () => {
 
       expect(
         parentElement
-          .querySelector(reactWebComponentElementName)!
+          .querySelector(webComponentSelector)!
           .shadowRoot?.querySelector("[data-error]"),
       ).toBeInstanceOf(HTMLDivElement);
     });

@@ -18,6 +18,7 @@ __vitest-screenshots/
 
 # Jetbrains
 .idea/
+*.iml
 
 # Lerna
 lerna-debug.log
