@@ -876,8 +876,9 @@ const SideNav = ({
                           </StyledSideNavListContainer>
                         );
 
-                        if (href) {
-                          return (
+                        return (
+                          href
+                          ? (
                             <ErrorBoundary fallback={blankElement} key={id}>
                               <SideNavItemContent
                                 {...item}
@@ -898,10 +899,8 @@ const SideNav = ({
                                 {nestedChildren}
                               </StyledSideNavListItem>
                             </ErrorBoundary>
-                          );
-                        }
-
-                        return (
+                          )
+                          : (
                           <ErrorBoundary fallback={blankElement} key={id}>
                             <StyledSideNavListItem
                               id={id}
