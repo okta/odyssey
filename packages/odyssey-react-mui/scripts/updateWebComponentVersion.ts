@@ -11,7 +11,7 @@
  */
 
 import { writeFile } from "node:fs/promises";
-import * as path from "path";
+import { resolve } from "node:path";
 import { version } from "../package.json" with { type: "json" };
 
 const content = `/*!
@@ -25,18 +25,17 @@ const content = `/*!
  *
  * See the License for the specific language governing permissions and limitations under the License.
  */
- 
- /**
-  * DO NOT UPDATE THIS FILE MANUALLY
-  * This file is managed by scripts/updateWebComponentVersion.ts and any changes made will be overwritten
-  * This script only needs to be run during release, and shouldn't be used during local development.
-  */
+
+/**
+ * DO NOT UPDATE THIS FILE MANUALLY
+ * This file is managed by scripts/updateWebComponentVersion.ts and any changes made will be overwritten
+ * This script only needs to be run during release, and shouldn't be used during local development.
+ */
 export default "${version.replaceAll(".", "-")}";
 `;
 
-const repoPath = path.resolve(import.meta.dirname, "../");
-const versionFile = path.resolve(
-  repoPath,
-  "src/web-component/odysseyWebComponentVersion.generated.ts",
-);
-await writeFile(versionFile, content, "utf8");
+const versionFile = import.meta
+  .resolve("../src/web-component/odysseyWebComponentVersion.generated.ts")
+  .replace("file://", "");
+
+await writeFile(versionFile, content, "utf-8");
