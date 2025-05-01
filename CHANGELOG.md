@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.36.1](https://github.com/okta/odyssey/compare/v1.36.0...v1.36.1) (2025-05-01)
+
+**Note:** Version bump only for package odyssey
+
 ## [1.36.0](https://github.com/okta/odyssey/compare/v1.35.4...v1.36.0) (2025-04-24)
 
 ### Features
