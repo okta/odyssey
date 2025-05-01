@@ -15,7 +15,7 @@ test_suites:
 
   - name: "Code Coverage"
     criteria: MERGE
-    queue_name: ci-queue-prodJenga-Ubuntu20 # Playwright only works with certain distros of Linux
+    queue_name: ci-queue-prodJenga-Ubuntu22 # Playwright only works with certain distros of Linux
     script_name: odyssey-code-coverage
     script_path: /root/okta/odyssey/scripts
     sort_order: "6"
@@ -23,7 +23,7 @@ test_suites:
 
   - name: "Interaction Test"
     criteria: MERGE
-    queue_name: ci-queue-prodJenga-Ubuntu20 # Playwright only works with certain distros of Linux
+    queue_name: ci-queue-prodJenga-Ubuntu22 # Playwright only works with certain distros of Linux
     script_path: /root/okta/odyssey/scripts
     script_name: interaction-test
     sort_order: "5"
@@ -69,7 +69,7 @@ test_suites:
 
   - name: "Test"
     criteria: MERGE
-    queue_name: ci-queue-prodJenga-Ubuntu20 # Playwright only works with certain distros of Linux
+    queue_name: ci-queue-prodJenga-Ubuntu22 # Playwright only works with certain distros of Linux
     script_name: unit-test
     script_path: /root/okta/odyssey/scripts
     sort_order: "3"

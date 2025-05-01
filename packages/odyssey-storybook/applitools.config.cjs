@@ -10,24 +10,24 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const branchName = process.env.CURRENT_BRANCH_NAME;
+const branchName = process.env.CURRENT_BRANCH_NAME || "";
 const parentBranchName =
   process.env.BASE_BRANCH_NAME === "null" || !process.env.BASE_BRANCH_NAME
     ? "main"
     : process.env.BASE_BRANCH_NAME;
-const commitHash = process.env.SHA;
+const commitHash = process.env.SHA || "";
 
 const applitoolsConfig = {
   accessibilityValidation: {
     level: "AA",
     guidelinesVersion: "WCAG_2_1",
   },
-  branchName,
   batch: {
-    name: (branchName || "").concat(" ", commitHash || ""),
+    name: `${branchName} ${commitHash}`,
     notifyOnCompletion: true,
     sequenceName: "Regression",
   },
+  branchName,
   browser: [{ width: 1024, height: 768, name: "chrome" }],
   dontCloseBatches: false,
   exitcode: true,
@@ -39,6 +39,7 @@ const applitoolsConfig = {
   },
   runInDocker: true,
   saveNewTests: true,
+  sendDom: true,
   serverUrl: "https://oktaeyes.applitools.com",
   testConcurrency: 20,
   waitBeforeCapture: 2000,
