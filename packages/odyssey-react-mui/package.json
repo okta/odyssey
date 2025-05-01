@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-react-mui",
-  "version": "1.36.0",
+  "version": "1.36.1",
   "description": "React MUI components for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -97,9 +97,9 @@
     "generate:icons:components": "svgr ../odyssey-icons/dist/icons --out-dir ./src/icons.generated",
     "generate:icons:index": "tsx scripts/generateIconsIndex.ts",
     "generate:icons": "yarn generate:icons:clean && yarn generate:icons:components && yarn generate:icons:index",
+    "generate:webComponentVersion": "tsx scripts/updateWebComponentVersion.ts",
     "playwright-install": "NODE_TLS_REJECT_UNAUTHORIZED=0 yarn playwright install --with-deps chromium",
     "test": "NODE_ENV=test vitest run --reporter=default",
-    "generate:webComponentVersion": "tsx scripts/updateWebComponentVersion.ts",
     "typecheck": "tsc --noEmit --rootDir ./"
   },
   "repository": {
