@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.36.0](https://github.com/okta/odyssey/compare/v1.35.4...v1.36.0) (2025-04-24)
+
+**Note:** Version bump only for package @okta/odyssey-storybook
+
+## [1.35.4](https://github.com/okta/odyssey/compare/v1.35.3...v1.35.4) (2025-04-21)
+
+### Bug Fixes
+
+- nested scroll containers dynamically handled by UI Shell ([#2529](https://github.com/okta/odyssey/issues/2529)) ([66460df](https://github.com/okta/odyssey/commit/66460df14e260f3bc9f522e61309219bae89eeef))
+
+## [1.35.3](https://github.com/okta/odyssey/compare/v1.35.0...v1.35.3) (2025-04-17)
+
+### Bug Fixes
+
+- upgrades MUI version ([80bf886](https://github.com/okta/odyssey/commit/80bf8862611385cbef725058fa65ba096dad2e6f))
+
+## [1.35.2](https://github.com/okta/odyssey/compare/v1.35.0...v1.35.2) (2025-04-03)
+
+### Bug Fixes
+
+- upgrades MUI version ([80bf886](https://github.com/okta/odyssey/commit/80bf8862611385cbef725058fa65ba096dad2e6f))
+
+## [1.35.1](https://github.com/okta/odyssey/compare/v1.35.0...v1.35.1) (2025-03-27)
+
+**Note:** Version bump only for package @okta/odyssey-storybook
+
 ## [1.35.0](https://github.com/okta/odyssey/compare/v1.32.4...v1.35.0) (2025-03-27)
 
 ### Features
