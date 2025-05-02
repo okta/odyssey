@@ -638,10 +638,21 @@ const SideNav = ({
       updateSideNavItemsList(updatedSideNavItems);
 
       if (isCollapsed || isObtrusive) {
-        uiShellContext?.closeSideNavMenu();
+        if (isCollapsible) {
+          uiShellContext?.closeSideNavMenu();
+        } else {
+          onCollapse?.();
+        }
       }
     },
-    [isCollapsed, isObtrusive, sideNavItemsList, uiShellContext],
+    [
+      isCollapsed,
+      isCollapsible,
+      isObtrusive,
+      onCollapse,
+      sideNavItemsList,
+      uiShellContext,
+    ],
   );
 
   const processedSideNavItems = useMemo(() => {
