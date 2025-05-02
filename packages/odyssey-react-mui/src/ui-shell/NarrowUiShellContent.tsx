@@ -418,6 +418,7 @@ const NarrowUiShellContent = ({
                     isCollapsed={false}
                     isCollapsible={false}
                     isObtrusive
+                    onCollapse={closeSideMenus}
                   />
                 </StyledSideNavContainer>
               </ErrorBoundary>
