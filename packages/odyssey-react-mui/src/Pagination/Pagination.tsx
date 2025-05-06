@@ -202,7 +202,7 @@ const Pagination = ({
   const { totalRowsLabel } = usePagination({
     pageIndex,
     pageSize,
-    currentRowsCount: currentRowsCount || pageSize,
+    currentRowsCount: currentRowsCount || 0,
     totalRows,
   });
 

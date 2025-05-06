@@ -32,9 +32,12 @@ export const usePagination = ({
     const firstRow = pageSize * (pageIndex - 1) + 1;
     const lastRow = firstRow + (currentRowsCount - 1);
 
-    const totalRowsLabel = totalRows
-      ? t("pagination.rowswithtotal", { firstRow, lastRow, totalRows })
-      : t("pagination.rowswithouttotal", { firstRow, lastRow });
+    const totalRowsLabel =
+      currentRowsCount === 0
+        ? t("pagination.totalrows", { totalRows: 0 })
+        : totalRows
+          ? t("pagination.rowswithtotal", { firstRow, lastRow, totalRows })
+          : t("pagination.rowswithouttotal", { firstRow, lastRow });
 
     return {
       firstRow,
