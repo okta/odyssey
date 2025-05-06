@@ -15,7 +15,7 @@ import { memo, ReactElement, ReactNode } from "react";
 
 import { DrawerProps } from "../../Drawer.js";
 import { DocumentationIcon } from "../../icons.generated/index.js";
-import { Link } from "../../Link.js";
+import { DocumentationLink } from "./DocumentationLink.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
@@ -90,13 +90,23 @@ const TemplateContainer = styled("div", {
   padding: hasUiShell ? 0 : odysseyDesignTokens.Spacing6,
 }));
 
-const TemplateHeader = styled("div")(() => ({
+const TemplateHeader = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
   display: "flex",
-  alignItems: "flex-end",
+  alignItems: "flex-start",
   justifyContent: "space-between",
+  gap: odysseyDesignTokens.Spacing4,
 }));
 
-const TemplateHeaderPrimaryContent = styled("div")(() => ({
+const TemplateHeaderPrimaryContent = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{
+  odysseyDesignTokens: DesignTokens;
+}>(({ odysseyDesignTokens }) => ({
+  maxWidth: odysseyDesignTokens.TypographyLineLengthMax,
   [".MuiTypography-root:last-child"]: {
     marginBlockEnd: "0",
   },
@@ -110,9 +120,10 @@ const TemplateHeaderSecondaryContent = styled("div", {
   alignItems: "flex-end",
   display: "flex",
   flexDirection: "column",
-  gap: odysseyDesignTokens.Spacing2,
+  gap: odysseyDesignTokens.Spacing4,
   minHeight: odysseyDesignTokens.Spacing7,
   justifyContent: "center",
+  whiteSpace: "nowrap",
 }));
 
 const TemplateHeaderButtons = styled("div", {
@@ -191,8 +202,8 @@ const PageTemplate = ({
       isFullWidth={isFullWidth}
       odysseyDesignTokens={odysseyDesignTokens}
     >
-      <TemplateHeader>
-        <TemplateHeaderPrimaryContent>
+      <TemplateHeader odysseyDesignTokens={odysseyDesignTokens}>
+        <TemplateHeaderPrimaryContent odysseyDesignTokens={odysseyDesignTokens}>
           {title && <Heading4>{title}</Heading4>}
           {description && <Subordinate>{description}</Subordinate>}
         </TemplateHeaderPrimaryContent>
@@ -201,9 +212,13 @@ const PageTemplate = ({
           odysseyDesignTokens={odysseyDesignTokens}
         >
           {documentationLink && (
-            <Link href={documentationLink} icon={<DocumentationIcon />}>
+            <DocumentationLink
+              href={documentationLink}
+              icon={<DocumentationIcon />}
+              target="_blank"
+            >
               {documentationText}
-            </Link>
+            </DocumentationLink>
           )}
           {(primaryCallToActionComponent ||
             secondaryCallToActionComponent ||
