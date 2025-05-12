@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.36.2](https://github.com/okta/odyssey/compare/v1.36.1...v1.36.2) (2025-05-02)
+
+### Bug Fixes
+
+- side nav stuck closed after clicking item in narrow view ([#2535](https://github.com/okta/odyssey/issues/2535)) ([c3b167d](https://github.com/okta/odyssey/commit/c3b167de0a543e44edf788fa20d2482ffe394752))
+
 ## [1.36.1](https://github.com/okta/odyssey/compare/v1.36.0...v1.36.1) (2025-05-01)
 
 **Note:** Version bump only for package odyssey
