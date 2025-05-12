@@ -30,7 +30,7 @@ export type DocumentationLinkProps = {
    */
   icon?: ReactElement;
   /**
-   * The HTML `target` attribute for the Link
+   * The HTML `target` attribute for the Link test
    */
   target?:
     | "_self"
