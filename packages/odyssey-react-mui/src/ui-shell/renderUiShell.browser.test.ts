@@ -30,6 +30,25 @@ describe(renderUiShell.name, () => {
     });
   });
 
+  test("notifies on render", () => {
+    const parentElement = document.createElement("div");
+
+    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
+    document.body.append(parentElement);
+
+    const onRender = vi.fn();
+
+    renderUiShell({
+      appElementScrollingMode: "vertical",
+      onRender,
+      parentElement,
+    });
+
+    waitFor(() => {
+      expect(onRender).toHaveBeenCalled();
+    });
+  });
+
   test("returns app's element", () => {
     const parentElement = document.createElement("div");
 
