@@ -92,6 +92,7 @@ export type DataTableGetDataType = {
   search?: string;
   filters?: DataFilter[];
   sort?: MRT_SortingState;
+  rowSelection?: MRT_RowSelectionState;
 };
 
 export type DataTableOnReorderRowsType = {
@@ -823,6 +824,7 @@ const DataTable = ({
           search,
           filters,
           sort: columnSorting,
+          rowSelection,
         });
         setData(incomingData);
       } catch (error) {
