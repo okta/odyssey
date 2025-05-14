@@ -55,14 +55,12 @@ describe(renderUiShell.name, () => {
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(parentElement);
 
-    act(() => {
-      const { appElement } = renderUiShell({
-        appElementScrollingMode: "vertical",
-        parentElement,
-      });
-
-      expect(appElement).toBeInstanceOf(HTMLDivElement);
+    const { appElement } = renderUiShell({
+      appElementScrollingMode: "vertical",
+      parentElement,
     });
+
+    expect(appElement).toBeInstanceOf(HTMLDivElement);
   });
 
   test("returns slotted elements from inside the web component", () => {
@@ -71,17 +69,15 @@ describe(renderUiShell.name, () => {
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(parentElement);
 
-    act(() => {
-      const { slottedElements } = renderUiShell({
-        appElementScrollingMode: "vertical",
-        parentElement,
-      });
-
-      expect(slottedElements.banners).toBeInstanceOf(HTMLDivElement);
-      expect(slottedElements.sideNavFooter).toBeInstanceOf(HTMLDivElement);
-      expect(slottedElements.topNavLeftSide).toBeInstanceOf(HTMLDivElement);
-      expect(slottedElements.topNavRightSide).toBeInstanceOf(HTMLDivElement);
+    const { slottedElements } = renderUiShell({
+      appElementScrollingMode: "vertical",
+      parentElement,
     });
+
+    expect(slottedElements.banners).toBeInstanceOf(HTMLDivElement);
+    expect(slottedElements.sideNavFooter).toBeInstanceOf(HTMLDivElement);
+    expect(slottedElements.topNavLeftSide).toBeInstanceOf(HTMLDivElement);
+    expect(slottedElements.topNavRightSide).toBeInstanceOf(HTMLDivElement);
   });
 
   test("returns UI Shell web component element", () => {
@@ -90,14 +86,12 @@ describe(renderUiShell.name, () => {
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(parentElement);
 
-    act(() => {
-      const { uiShellElement } = renderUiShell({
-        appElementScrollingMode: "vertical",
-        parentElement,
-      });
-
-      expect(uiShellElement.elementName).toEqual(versionedWebComponentName);
+    const { uiShellElement } = renderUiShell({
+      appElementScrollingMode: "vertical",
+      parentElement,
     });
+
+    expect(uiShellElement.elementName).toEqual(versionedWebComponentName);
   });
 
   test("renders `UiShell` component in a web component", () => {
@@ -106,12 +100,9 @@ describe(renderUiShell.name, () => {
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(parentElement);
 
-    // This needs to be wrapped in `act` because the web component mounts the React app, and React events have to be wrapped in `act`.
-    act(() => {
-      renderUiShell({
-        appElementScrollingMode: "vertical",
-        parentElement,
-      });
+    renderUiShell({
+      appElementScrollingMode: "vertical",
+      parentElement,
     });
 
     expect(
@@ -128,18 +119,9 @@ describe(renderUiShell.name, () => {
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(parentElement);
 
-    let setComponentProps: ReturnType<
-      typeof renderUiShell
-    >["setComponentProps"];
-
-    // This needs to be wrapped in `act` because the web component mounts the React app, and React events have to be wrapped in `act`.
-    act(() => {
-      const renderUiShellReturnValue = renderUiShell({
-        appElementScrollingMode: "vertical",
-        parentElement,
-      });
-
-      setComponentProps = renderUiShellReturnValue.setComponentProps;
+    const { setComponentProps } = renderUiShell({
+      appElementScrollingMode: "vertical",
+      parentElement,
     });
 
     await act(async () => {
@@ -170,20 +152,17 @@ describe(renderUiShell.name, () => {
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(parentElement);
 
-    // This needs to be wrapped in `act` because the web component mounts the React app, and React events have to be wrapped in `act`.
-    act(() => {
-      const { setComponentProps } = renderUiShell({
-        appElementScrollingMode: "vertical",
-        parentElement,
-      });
+    const { setComponentProps } = renderUiShell({
+      appElementScrollingMode: "vertical",
+      parentElement,
+    });
 
-      setComponentProps({
-        sideNavProps: {
-          appName,
-          sideNavItems: [],
-        },
-        topNavProps: {},
-      });
+    setComponentProps({
+      sideNavProps: {
+        appName,
+        sideNavItems: [],
+      },
+      topNavProps: {},
     });
 
     await waitFor(() => {
@@ -209,20 +188,18 @@ describe(renderUiShell.name, () => {
       .spyOn(console, "error")
       .mockImplementation(consoleError);
 
-    act(() => {
-      const { setComponentProps } = renderUiShell({
-        appElementScrollingMode: "vertical",
-        onError,
-        parentElement,
-      });
-
-      setComponentProps(
-        // We're purposefully testing an error state, so we need to send something that will cause an error.
-        () => {
-          throw testBreakError;
-        },
-      );
+    const { setComponentProps } = renderUiShell({
+      appElementScrollingMode: "vertical",
+      onError,
+      parentElement,
     });
+
+    setComponentProps(
+      // We're purposefully testing an error state, so we need to send something that will cause an error.
+      () => {
+        throw testBreakError;
+      },
+    );
 
     await waitFor(() => {
       expect(onError).toHaveBeenCalledTimes(1);
