@@ -30,13 +30,14 @@ describe(renderUiShell.name, () => {
     });
   });
 
-  test("notifies on render", () => {
+  test("`UiShell` renders after `onRender`", async () => {
+    const onRender = vi.fn();
     const parentElement = document.createElement("div");
 
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(parentElement);
 
-    const onRender = vi.fn();
+    expect(parentElement.innerHTML).toBe("");
 
     renderUiShell({
       appElementScrollingMode: "vertical",
@@ -44,9 +45,11 @@ describe(renderUiShell.name, () => {
       parentElement,
     });
 
-    waitFor(() => {
+    await waitFor(() => {
       expect(onRender).toHaveBeenCalled();
     });
+
+    expect(parentElement.innerHTML).not.toBe("");
   });
 
   test("returns app's element", () => {
