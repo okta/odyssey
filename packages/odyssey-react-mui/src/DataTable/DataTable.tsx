@@ -265,6 +265,11 @@ export type DataTableProps = {
    * The highest page number allowed to be manually input in pagination
    */
   maxPages?: number;
+  /**
+   * Optional intial list of selected rows
+   * Use when row selection is enabled
+   */
+  initialRowSelection?: MRT_RowSelectionState;
 };
 
 const ScrollableTableContainer = styled("div", {
@@ -356,6 +361,7 @@ const DataTable = ({
   rowActionMenuItems,
   searchDelayTime,
   totalRows,
+  initialRowSelection,
 }: DataTableProps) => {
   const { t } = useTranslation();
 
@@ -382,7 +388,7 @@ const DataTable = ({
     useState<MRT_VisibilityState>();
   const [rowDensity, setRowDensity] =
     useState<MRT_DensityState>(initialDensity);
-  const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
+  const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>(initialRowSelection || {});
   const [search, setSearch] = useState<string>(initialSearchValue);
   const [filters, setFilters] = useState<DataFilter[]>();
   const [initialFilters, setInitialFilters] = useState<DataFilter[]>();
