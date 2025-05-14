@@ -59,9 +59,52 @@ describe(renderUiShell.name, () => {
       expect(onRender).toHaveBeenCalled();
     });
 
-    expect(
-      uiShellElement.shadowRoot!.getElementById(appRootElementId)!.innerHTML,
-    ).not.toBe("");
+    act(() => {
+      expect(
+        uiShellElement.shadowRoot!.getElementById(appRootElementId)!.innerHTML,
+      ).not.toBe("");
+
+      expect(onRender).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  test("`onRender` contains UI Shell return values", async () => {
+    const onRender =
+      vi.fn<NonNullable<Parameters<typeof renderUiShell>[0]["onRender"]>>();
+    const parentElement = document.createElement("div");
+
+    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
+    document.body.append(parentElement);
+
+    act(() => {
+      renderUiShell({
+        appElementScrollingMode: "vertical",
+        onRender,
+        parentElement,
+      });
+    });
+
+    await waitFor(() => {
+      expect(onRender).toHaveBeenCalled();
+    });
+
+    act(() => {
+      const {
+        appElement,
+        closeRightSideMenu,
+        closeSideNavMenu,
+        setComponentProps,
+        slottedElements,
+        uiShellElement,
+      } = onRender.mock.calls[0][0];
+
+      expect(appElement).toBeInstanceOf(HTMLDivElement);
+      expect(closeRightSideMenu).toBeInstanceOf(Function);
+      expect(closeSideNavMenu).toBeInstanceOf(Function);
+      expect(setComponentProps).toBeInstanceOf(Function);
+      expect(slottedElements).toBeInstanceOf(Object);
+      expect(uiShellElement).toHaveAttribute(webComponentDataAttributeName);
+    });
   });
 
   test("returns app's element", () => {
