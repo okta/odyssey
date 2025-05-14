@@ -49,6 +49,7 @@ export const renderUiShell = ({
   hasStandardAppContentPadding,
   initialVisibleSections,
   onError = console.error,
+  onRender,
   parentElement,
   sideNavBackgroundColor,
   topNavBackgroundColor,
@@ -57,6 +58,10 @@ export const renderUiShell = ({
    * Notifies when a React rendering error occurs. This could be useful for logging, reporting priority 0 issues, and recovering UI Shell when errors occur.
    */
   onError?: () => void;
+  /**
+   * Notify once when React has rendered UI Shell the first time.
+   */
+  onRender?: () => void;
   /**
    * HTML element used as the container for UI Shell and the App. They're siblings inside this element.
    */
@@ -90,6 +95,13 @@ export const renderUiShell = ({
     publish: publishPropChanges,
     subscribe: subscribeToReactAppSubscribed,
   });
+
+  const unsubscribeFromUnifiedUiShellRendered = subscribeToReactAppSubscribed(
+    () => {
+      unsubscribeFromUnifiedUiShellRendered();
+      onRender?.();
+    },
+  );
 
   const {
     publish: closeRightSideMenu,
