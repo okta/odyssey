@@ -39,17 +39,29 @@ describe(renderUiShell.name, () => {
 
     expect(parentElement.innerHTML).toBe("");
 
-    renderUiShell({
-      appElementScrollingMode: "vertical",
-      onRender,
-      parentElement,
+    const uiShellElement = await act(() => {
+      const { uiShellElement } = renderUiShell({
+        appElementScrollingMode: "vertical",
+        onRender,
+        parentElement,
+      });
+
+      return uiShellElement;
     });
+
+    expect(parentElement.innerHTML).not.toBe("");
+
+    expect(
+      uiShellElement.shadowRoot!.getElementById(appRootElementId)!.innerHTML,
+    ).toBe("");
 
     await waitFor(() => {
       expect(onRender).toHaveBeenCalled();
     });
 
-    expect(parentElement.innerHTML).not.toBe("");
+    expect(
+      uiShellElement.shadowRoot!.getElementById(appRootElementId)!.innerHTML,
+    ).not.toBe("");
   });
 
   test("returns app's element", () => {
