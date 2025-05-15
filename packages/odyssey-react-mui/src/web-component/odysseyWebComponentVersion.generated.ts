@@ -15,4 +15,4 @@
  * This file is managed by scripts/updateWebComponentVersion.ts and any changes made will be overwritten
  * This script only needs to be run during release, and shouldn't be used during local development.
  */
-export default "1-36-1";
+export default "1-37-0";
