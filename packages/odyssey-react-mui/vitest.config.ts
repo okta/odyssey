@@ -52,13 +52,13 @@ export default defineConfig({
               {
                 browser: "chromium",
                 screenshotDirectory: "__vitest-screenshots",
+                viewport: {
+                  height: 768,
+                  width: 1024,
+                },
               },
             ],
             provider: "playwright",
-            viewport: {
-              height: 768,
-              width: 1024,
-            },
           },
           globals: true,
           include: ["**/*.browser.test.{ts,tsx}"],

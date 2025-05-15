@@ -26,6 +26,7 @@ interface GetReactWebComponentOptions {
 
 // Used by selenium when selecting for odyssey web components regardless of their name.
 export const webComponentDataAttributeName = "data-odyssey-react-web-component";
+
 // Unique name to avoid multiple versions of odyssey overwriting each other's implementations
 export const versionedWebComponentName =
   `odyssey-react-web-component-${version}`.toLowerCase();
