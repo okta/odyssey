@@ -18,6 +18,12 @@ import {
   datePickerTheme,
   dateStyles,
 } from "../../DatePickers/datePickerTheme.js";
+import { DateTimePickerSize } from "./DateTimePicker.js";
+
+const DateTimePickerComponentSize = {
+  dateCalendarMaxHeight: "23rem", // ~322px
+  slideTransitionMinHeight: "17.14rem", // ~240px
+};
 
 const theme: ThemeOptions = {
   components: {
@@ -49,6 +55,8 @@ const theme: ThemeOptions = {
         root: {
           display: "block",
           width: "100%",
+          maxHeight: DateTimePickerComponentSize.dateCalendarMaxHeight,
+          height: DateTimePickerComponentSize.dateCalendarMaxHeight,
         },
       },
     },
@@ -75,6 +83,10 @@ const theme: ThemeOptions = {
     },
     MuiPickersLayout: {
       styleOverrides: {
+        root: () => ({
+          width: DateTimePickerSize.maxWidth,
+          maxWidth: DateTimePickerSize.maxWidth,
+        }),
         contentWrapper: ({ theme }) => ({
           padding: theme.spacing(3),
           gridTemplateColumns: "1fr 16px auto",
@@ -85,6 +97,7 @@ const theme: ThemeOptions = {
       styleOverrides: {
         root: {
           width: "auto",
+          maxHeight: DateTimePickerComponentSize.dateCalendarMaxHeight,
         },
         item: ({ theme }) => [
           dateStyles.default({ theme }),
@@ -201,6 +214,13 @@ const theme: ThemeOptions = {
             },
           },
         }),
+      },
+    },
+    MuiDayCalendar: {
+      styleOverrides: {
+        slideTransition: {
+          minHeight: DateTimePickerComponentSize.slideTransitionMinHeight,
+        },
       },
     },
     MuiTimeClock: {

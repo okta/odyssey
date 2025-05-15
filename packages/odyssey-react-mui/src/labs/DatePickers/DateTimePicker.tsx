@@ -39,6 +39,10 @@ import {
 } from "../../OdysseyDesignTokensContext.js";
 import { OdysseyThemeProvider } from "../../OdysseyThemeProvider.js";
 
+export const DateTimePickerSize = {
+  maxWidth: "34.7rem", // ~485.75px
+};
+
 const DatePickerContainer = styled.div({
   ".MuiFormControl-root": {
     marginBlockEnd: 0,
@@ -47,10 +51,10 @@ const DatePickerContainer = styled.div({
 
 const DatePickerWidthContainer = styled.div<{
   odysseyDesignTokens: DesignTokens;
-}>(({ odysseyDesignTokens }) => ({
+}>(() => ({
   ".MuiInput-root": {
     width: "100%",
-    maxWidth: odysseyDesignTokens.TypographyLineLengthMax,
+    maxWidth: DateTimePickerSize.maxWidth,
   },
 }));
 
