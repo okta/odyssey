@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { renderHook, waitFor } from "@testing-library/react";
+import { act, renderHook, waitFor } from "@testing-library/react";
 import { page } from "@vitest/browser/context";
 
 import {
@@ -30,13 +30,25 @@ describe(useUiShellBreakpoints.name, () => {
 
     expect(breakpointNameRef.current).toBe("narrow");
 
-    await page.viewport(defaultUiShellBreakpointConfig.medium, VIEWPORT_HEIGHT);
+    await act(
+      async () =>
+        await page.viewport(
+          defaultUiShellBreakpointConfig.medium,
+          VIEWPORT_HEIGHT,
+        ),
+    );
 
     await waitFor(() => {
       expect(breakpointNameRef.current).toBe("medium");
     });
 
-    await page.viewport(defaultUiShellBreakpointConfig.wide, VIEWPORT_HEIGHT);
+    await act(
+      async () =>
+        await page.viewport(
+          defaultUiShellBreakpointConfig.wide,
+          VIEWPORT_HEIGHT,
+        ),
+    );
 
     await waitFor(() => {
       expect(breakpointNameRef.current).toBe("wide");
@@ -54,15 +66,24 @@ describe(useUiShellBreakpoints.name, () => {
       expect(breakpointNameRef.current).toBe("narrow");
     });
 
-    await page.viewport(defaultUiShellBreakpointConfig.medium, VIEWPORT_HEIGHT);
+    await act(
+      async () =>
+        await page.viewport(
+          defaultUiShellBreakpointConfig.medium,
+          VIEWPORT_HEIGHT,
+        ),
+    );
 
     await waitFor(() => {
       expect(breakpointNameRef.current).toBe("narrow");
     });
 
-    await page.viewport(
-      defaultUiShellBreakpointConfig.wide - 1,
-      VIEWPORT_HEIGHT,
+    await act(
+      async () =>
+        await page.viewport(
+          defaultUiShellBreakpointConfig.wide - 1,
+          VIEWPORT_HEIGHT,
+        ),
     );
 
     await waitFor(() => {
@@ -87,19 +108,27 @@ describe(useUiShellBreakpoints.name, () => {
       expect(breakpointNameRef.current).toBe("none");
     });
 
-    await page.viewport(customBreakpoints.narrow, VIEWPORT_HEIGHT);
+    await act(
+      async () =>
+        await page.viewport(customBreakpoints.narrow, VIEWPORT_HEIGHT),
+    );
 
     await waitFor(() => {
       expect(breakpointNameRef.current).toBe("narrow");
     });
 
-    await page.viewport(customBreakpoints.medium, VIEWPORT_HEIGHT);
+    await act(
+      async () =>
+        await page.viewport(customBreakpoints.medium, VIEWPORT_HEIGHT),
+    );
 
     await waitFor(() => {
       expect(breakpointNameRef.current).toBe("medium");
     });
 
-    await page.viewport(customBreakpoints.wide, VIEWPORT_HEIGHT);
+    await act(
+      async () => await page.viewport(customBreakpoints.wide, VIEWPORT_HEIGHT),
+    );
 
     await waitFor(() => {
       expect(breakpointNameRef.current).toBe("wide");
