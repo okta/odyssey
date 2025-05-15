@@ -4,7 +4,9 @@
   "description": "React MUI components for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
-  "sideEffects": false,
+  "sideEffects": [
+    "./src/i18n.ts"
+  ],
   "type": "module",
   "types": "dist/types/index.d.ts",
   "browser": "dist/cjs/index.cjs",
