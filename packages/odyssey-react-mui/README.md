@@ -44,14 +44,17 @@ Add the Odyssey `OdysseyProvider` around your whole app:
 import { OdysseyProvider } from "@okta/odyssey-react-mui";
 
 const YourAppRoot = ({ children }) => (
-  <OdysseyProvider>{children}</OdysseyProvider>
+  <OdysseyProvider>
+    <CssBaseline />
+    {children}
+  </OdysseyProvider>
 );
 ```
 
 Add Material-UI components not exported from Odyssey with Odyssey styling or add your own theme to MUI:
 
 ```sh
-$ yarn add @mui/material
+yarn add @mui/material
 ```
 
 ```jsx
@@ -60,7 +63,9 @@ import { OdysseyThemeProvider } from "@okta/odyssey-react-mui";
 import { myMaterialUiTheme } from "./myMaterialUiTheme.js";
 
 const YourAppRoot = ({ children }) => (
-  <OdysseyThemeProvider theme={myMaterialUiTheme}>{children}<OdysseyThemeProvider>
+  <OdysseyThemeProvider theme={myMaterialUiTheme}>
+    {children}
+  <OdysseyThemeProvider>
 );
 ```
 

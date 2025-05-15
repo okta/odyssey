@@ -30,6 +30,83 @@ describe(renderUiShell.name, () => {
     });
   });
 
+  test("`UiShell` renders after `onRender`", async () => {
+    const onRender = vi.fn();
+    const parentElement = document.createElement("div");
+
+    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
+    document.body.append(parentElement);
+
+    expect(parentElement.innerHTML).toBe("");
+
+    const uiShellElement = await act(() => {
+      const { uiShellElement } = renderUiShell({
+        appElementScrollingMode: "vertical",
+        onRender,
+        parentElement,
+      });
+
+      return uiShellElement;
+    });
+
+    expect(parentElement.innerHTML).not.toBe("");
+
+    expect(
+      uiShellElement.shadowRoot!.getElementById(appRootElementId)!.innerHTML,
+    ).toBe("");
+
+    await waitFor(() => {
+      expect(onRender).toHaveBeenCalled();
+    });
+
+    act(() => {
+      expect(
+        uiShellElement.shadowRoot!.getElementById(appRootElementId)!.innerHTML,
+      ).not.toBe("");
+
+      expect(onRender).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  test("`onRender` contains UI Shell return values", async () => {
+    const onRender =
+      vi.fn<NonNullable<Parameters<typeof renderUiShell>[0]["onRender"]>>();
+    const parentElement = document.createElement("div");
+
+    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
+    document.body.append(parentElement);
+
+    act(() => {
+      renderUiShell({
+        appElementScrollingMode: "vertical",
+        onRender,
+        parentElement,
+      });
+    });
+
+    await waitFor(() => {
+      expect(onRender).toHaveBeenCalled();
+    });
+
+    act(() => {
+      const {
+        appElement,
+        closeRightSideMenu,
+        closeSideNavMenu,
+        setComponentProps,
+        slottedElements,
+        uiShellElement,
+      } = onRender.mock.calls[0][0];
+
+      expect(appElement).toBeInstanceOf(HTMLDivElement);
+      expect(closeRightSideMenu).toBeInstanceOf(Function);
+      expect(closeSideNavMenu).toBeInstanceOf(Function);
+      expect(setComponentProps).toBeInstanceOf(Function);
+      expect(slottedElements).toBeInstanceOf(Object);
+      expect(uiShellElement).toHaveAttribute(webComponentDataAttributeName);
+    });
+  });
+
   test("returns app's element", () => {
     const parentElement = document.createElement("div");
 
@@ -109,18 +186,14 @@ describe(renderUiShell.name, () => {
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(parentElement);
 
-    let setComponentProps: ReturnType<
-      typeof renderUiShell
-    >["setComponentProps"];
-
     // This needs to be wrapped in `act` because the web component mounts the React app, and React events have to be wrapped in `act`.
-    act(() => {
-      const renderUiShellReturnValue = renderUiShell({
+    const setComponentProps = await act(() => {
+      const { setComponentProps } = renderUiShell({
         appElementScrollingMode: "vertical",
         parentElement,
       });
 
-      setComponentProps = renderUiShellReturnValue.setComponentProps;
+      return setComponentProps;
     });
 
     await act(async () => {

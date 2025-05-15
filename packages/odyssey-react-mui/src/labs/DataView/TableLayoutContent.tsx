@@ -331,9 +331,9 @@ const TableLayoutContent = <TData extends MRT_RowData>({
     state: {
       sorting: tableState.columnSorting,
       columnVisibility: tableState.columnVisibility,
-      isLoading: isLoading,
-      rowSelection: rowSelection,
-      columnOrder: columnOrder,
+      isLoading,
+      rowSelection,
+      columnOrder,
     },
     icons: {
       ArrowDownwardIcon: ArrowDownIcon,

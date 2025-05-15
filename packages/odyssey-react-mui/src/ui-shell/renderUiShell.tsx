@@ -14,7 +14,7 @@ import { type SetStateAction } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 import { bufferLatest } from "./bufferLatest.js";
-import { createMessageBus } from "./createMessageBus.js";
+import { createMessageBus, PublishMessage } from "./createMessageBus.js";
 import { UiShell, UiShellProps } from "./UiShell.js";
 import { UiShellNavComponentProps } from "./uiShellContentTypes.js";
 import { uiShellDataAttribute } from "./useHasUiShell.js";
@@ -30,6 +30,21 @@ export const optionalComponentSlotNames: Record<
   topNavLeftSide: "top-nav-left-side",
   topNavRightSide: "top-nav-right-side",
 };
+
+export type SlottedElements = Record<
+  keyof Required<UiShellProps>["optionalComponents"],
+  HTMLDivElement
+>;
+
+export type RenderedUiShell = {
+  closeRightSideMenu: PublishMessage<void>;
+  closeSideNavMenu: PublishMessage<void>;
+  setComponentProps: ReturnType<
+    typeof bufferLatest<SetStateAction<UiShellNavComponentProps>>
+  >;
+  slottedElements: SlottedElements;
+  uiShellElement: ReturnType<typeof renderReactInWebComponent>;
+} & Partial<Pick<UiShellProps, "appElement">>;
 
 /**
  * This function renders UI Shell in a web component.
@@ -49,6 +64,7 @@ export const renderUiShell = ({
   hasStandardAppContentPadding,
   initialVisibleSections,
   onError = console.error,
+  onRender,
   parentElement,
   sideNavBackgroundColor,
   topNavBackgroundColor,
@@ -57,6 +73,10 @@ export const renderUiShell = ({
    * Notifies when a React rendering error occurs. This could be useful for logging, reporting priority 0 issues, and recovering UI Shell when errors occur.
    */
   onError?: () => void;
+  /**
+   * Notify once when React has rendered UI Shell the first time.
+   */
+  onRender?: (renderedUiShell: RenderedUiShell) => void;
   /**
    * HTML element used as the container for UI Shell and the App. They're siblings inside this element.
    */
@@ -109,10 +129,7 @@ export const renderUiShell = ({
         return [optionalComponentKey, element];
       },
     ),
-  ) as Record<
-    keyof Required<UiShellProps>["optionalComponents"],
-    HTMLDivElement
-  >;
+  ) as SlottedElements;
 
   const webComponentChildren = Object.values(slottedElements);
 
@@ -152,6 +169,21 @@ export const renderUiShell = ({
     webComponentParentElement: parentElement,
     webComponentChildren,
   });
+
+  const unsubscribeFromUnifiedUiShellRendered = subscribeToReactAppSubscribed(
+    () => {
+      unsubscribeFromUnifiedUiShellRendered();
+
+      onRender?.({
+        appElement,
+        closeRightSideMenu,
+        closeSideNavMenu,
+        setComponentProps: publishAfterReactAppReadyForProps,
+        slottedElements,
+        uiShellElement,
+      });
+    },
+  );
 
   parentElement.appendChild(appElement);
 
