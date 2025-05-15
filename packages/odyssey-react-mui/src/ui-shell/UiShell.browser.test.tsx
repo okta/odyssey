@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render, waitFor, within } from "@testing-library/react";
+import { act, render, waitFor, within } from "@testing-library/react";
 
 import { defaultComponentProps, UiShell, UiShellProps } from "./UiShell.js";
 import { ReactElement } from "react";
@@ -36,9 +36,14 @@ const getTestDomElements = () => {
   };
 };
 
-describe.only(UiShell.displayName!, () => {
-  afterEach(() => {
-    document.body.innerHTML = "";
+describe("UiShell", () => {
+  afterEach(async () => {
+    // This needs to be wrapped in `act` because the web component unmounts the React app, and React events have to be wrapped in `act`.
+    await act(async () => {
+      // Remove any appended elements because of this hacky process of rendering to the global DOM.
+      document.body.innerHTML = "";
+      return Promise.resolve();
+    });
   });
 
   describe("Rendering", () => {
