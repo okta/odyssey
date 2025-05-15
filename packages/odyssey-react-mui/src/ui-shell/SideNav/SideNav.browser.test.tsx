@@ -20,7 +20,7 @@ describe(SideNav.displayName!, () => {
     window.sessionStorage.clear();
   });
 
-  test("can show the default Okta logo", () => {
+  test("can show the default Okta logo", async () => {
     render(
       <OdysseyProvider>
         <SideNav
@@ -36,7 +36,9 @@ describe(SideNav.displayName!, () => {
       </OdysseyProvider>,
     );
 
-    expect(screen.getByTitle("Okta")).toBeVisible();
+    await waitFor(() => {
+      expect(screen.getByTitle("Okta")).toBeVisible();
+    });
   });
 
   test("can show a custom logo", () => {
@@ -331,6 +333,88 @@ describe(SideNav.displayName!, () => {
       expect(screen.getByRole("listitem")).toHaveTextContent(
         String(badgeCount),
       );
+    });
+  });
+
+  describe("`sessionStorage`", () => {
+    describe("Collapsible", () => {
+      test("collapses side nav when collapsed", async () => {
+        const appName = "My App";
+
+        const { getByText } = render(
+          <OdysseyProvider>
+            <SideNav
+              appName={appName}
+              isCollapsible
+              isCollapsed
+              sideNavItems={[]}
+            />
+          </OdysseyProvider>,
+        );
+
+        await waitFor(() => {
+          expect(getByText(appName)).not.toBeVisible();
+        });
+      });
+
+      test("opens side nav when not collapsed", async () => {
+        const appName = "My App";
+
+        const { getByText } = render(
+          <OdysseyProvider>
+            <SideNav
+              appName={appName}
+              isCollapsible
+              isCollapsed={false}
+              sideNavItems={[]}
+            />
+          </OdysseyProvider>,
+        );
+
+        await waitFor(() => {
+          expect(getByText(appName)).toBeVisible();
+        });
+      });
+    });
+
+    describe("Not collapsible", () => {
+      test("collapses side nav when collapsed", async () => {
+        const appName = "My App";
+
+        const { getByText } = render(
+          <OdysseyProvider>
+            <SideNav
+              appName={appName}
+              isCollapsible={false}
+              isCollapsed
+              sideNavItems={[]}
+            />
+          </OdysseyProvider>,
+        );
+
+        await waitFor(() => {
+          expect(getByText(appName)).not.toBeVisible();
+        });
+      });
+
+      test("opens side nav when not collapsed", async () => {
+        const appName = "My App";
+
+        const { getByText } = render(
+          <OdysseyProvider>
+            <SideNav
+              appName={appName}
+              isCollapsible={false}
+              isCollapsed={false}
+              sideNavItems={[]}
+            />
+          </OdysseyProvider>,
+        );
+
+        await waitFor(() => {
+          expect(getByText(appName)).toBeVisible();
+        });
+      });
     });
   });
 });
