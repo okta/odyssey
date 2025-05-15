@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.37.0](https://github.com/okta/odyssey/compare/v1.36.1...v1.37.0) (2025-05-15)
+
+### Features
+
+- adds `onRender` callback for `renderUiShell` ([#2546](https://github.com/okta/odyssey/issues/2546)) ([380ef08](https://github.com/okta/odyssey/commit/380ef08a0579588a157fe04d075bdb9b53d9f729))
+
+### Bug Fixes
+
+- row indicator issue when no result in DataView ([#2536](https://github.com/okta/odyssey/issues/2536)) ([bb8fd41](https://github.com/okta/odyssey/commit/bb8fd41ef16b5f22ca0bffa0d6cb201115d2d57e))
+- side nav stuck closed after clicking item in narrow view ([#2535](https://github.com/okta/odyssey/issues/2535)) ([c3b167d](https://github.com/okta/odyssey/commit/c3b167de0a543e44edf788fa20d2482ffe394752))
+
 ## [1.36.2](https://github.com/okta/odyssey/compare/v1.36.1...v1.36.2) (2025-05-02)
 
 ### Bug Fixes
