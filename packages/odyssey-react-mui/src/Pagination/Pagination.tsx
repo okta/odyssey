@@ -25,6 +25,7 @@ import {
 } from "../OdysseyDesignTokensContext.js";
 import { usePagination } from "./usePagination.js";
 import { Paragraph } from "../Typography.js";
+import "../i18n.js";
 
 const PaginationContainer = styled("nav")({
   display: "flex",

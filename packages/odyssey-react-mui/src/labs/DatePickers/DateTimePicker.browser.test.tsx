@@ -12,44 +12,20 @@
 
 import { render, screen } from "@testing-library/react";
 
-const getMockedDateTimePicker = async () => {
-  vi.doMock("react-i18next", () => ({
-    useTranslation: () => {
-      return {
-        t: vi.fn((value: string) => value),
-        i18n: {
-          language: "en",
-        },
-      };
-    },
-    initReactI18next: {
-      type: "3rdParty",
-      init: () => {},
-    },
-  }));
-
-  const { DateTimePicker } = await import("./DateTimePicker.js");
-
-  vi.doUnmock("react-i18next");
-
-  return DateTimePicker;
-};
+import { DateTimePicker } from "./DateTimePicker.js";
+import "../../i18n.js";
 
 describe("DateTimePicker", () => {
-  test("displays the DateTimePicker", async () => {
-    const MockedDateTimePicker = await getMockedDateTimePicker();
-
-    render(<MockedDateTimePicker label="date time picker label" />);
+  test("displays the DateTimePicker", () => {
+    render(<DateTimePicker label="date time picker label" />);
 
     const input = screen.getByLabelText("date time picker label");
     expect(input).toBeInTheDocument();
   });
 
-  test("displays the correct date and time when a value is passed in ", async () => {
-    const MockedDateTimePicker = await getMockedDateTimePicker();
-
+  test("displays the correct date and time when a value is passed in ", () => {
     render(
-      <MockedDateTimePicker
+      <DateTimePicker
         label="date time picker label"
         value="2024-07-11T03:00:00.000Z"
         timeZone="America/New_York"
@@ -61,11 +37,9 @@ describe("DateTimePicker", () => {
     expect(input).toHaveDisplayValue("07/10/2024 11:00 PM");
   });
 
-  test("displays the correct date and time when timezone is changed", async () => {
-    const MockedDateTimePicker = await getMockedDateTimePicker();
-
+  test("displays the correct date and time when timezone is changed", () => {
     render(
-      <MockedDateTimePicker
+      <DateTimePicker
         label="date time picker label"
         value="2024-07-11T03:00:00.000Z"
         timeZone="America/Los_Angeles"
