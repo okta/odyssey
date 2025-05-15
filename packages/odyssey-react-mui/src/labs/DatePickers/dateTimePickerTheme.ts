@@ -21,7 +21,7 @@ import {
 import { DateTimePickerSize } from "./DateTimePicker.js";
 
 const DateTimePickerComponentSize = {
-  dateCalendarMaxHeight: "23rem", // ~322px
+  dateCalendarMaxHeight: "24rem", // ~336px
   slideTransitionMinHeight: "17.14rem", // ~240px
 };
 
@@ -92,6 +92,23 @@ const theme: ThemeOptions = {
           gridTemplateColumns: "1fr 16px auto",
         }),
       },
+    },
+    MuiMultiSectionDigitalClock: {
+      styleOverrides: {
+        root: {
+          maxHeight: `${DateTimePickerComponentSize.dateCalendarMaxHeight} !important`,
+          // Target all possible variations at once with the highest specificity
+          '&.MuiMultiSectionDigitalClock-root': {
+            maxHeight: `${DateTimePickerComponentSize.dateCalendarMaxHeight} !important`,
+          },
+          '& .MuiMultiSectionDigitalClockSection-root': {
+            maxHeight: `${DateTimePickerComponentSize.dateCalendarMaxHeight} !important`,
+          },
+          '&.MuiDigitalClock-root': {
+            maxHeight: `${DateTimePickerComponentSize.dateCalendarMaxHeight} !important`,
+          }
+        }
+      }
     },
     MuiMultiSectionDigitalClockSection: {
       styleOverrides: {
