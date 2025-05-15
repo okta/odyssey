@@ -11,9 +11,11 @@
  */
 
 import { act, render, waitFor, within } from "@testing-library/react";
+import { page } from "@vitest/browser/context";
 
 import { defaultComponentProps, UiShell, UiShellProps } from "./UiShell.js";
 import { ReactElement } from "react";
+import { defaultUiShellBreakpointConfig } from "./useUiShellBreakpoints.js";
 
 const getTestDomElements = () => {
   const rootElement = document.createElement("div");
@@ -26,7 +28,7 @@ const getTestDomElements = () => {
   document.body.append(appElement);
 
   const uiShellAppElement = document.createElement("div");
-  const uiShellStylesElement = document.createElement("div");
+  const uiShellStylesElement = document.head;
 
   return {
     appElement,
@@ -41,7 +43,9 @@ describe("UiShell", () => {
     // This needs to be wrapped in `act` because the web component unmounts the React app, and React events have to be wrapped in `act`.
     await act(async () => {
       // Remove any appended elements because of this hacky process of rendering to the global DOM.
+      document.head.innerHTML = "";
       document.body.innerHTML = "";
+      sessionStorage.clear();
       return Promise.resolve();
     });
   });
@@ -364,6 +368,76 @@ describe("UiShell", () => {
         expect(appElement.style.getPropertyValue("padding-inline")).toBe("");
 
         expect(appElement.style.getPropertyValue("padding-block")).toBe("");
+      });
+    });
+  });
+
+  describe("SideNav Collapsed State", () => {
+    const appName = "My Test App";
+    const PAGE_HEIGHT = 1000;
+
+    const getContainer = () => {
+      const { appElement, uiShellAppElement, uiShellStylesElement } =
+        getTestDomElements();
+
+      const { container } = render(
+        <UiShell
+          appElement={appElement}
+          appElementScrollingMode="none"
+          hasStandardAppContentPadding={false}
+          onSubscriptionCreated={() => {}}
+          subscribeToPropChanges={(subscriber) => {
+            subscriber({
+              ...defaultComponentProps,
+              sideNavProps: {
+                appName,
+                // isCollapsed: true,
+                sideNavItems: [],
+              },
+            });
+
+            return () => {};
+          }}
+          uiShellAppElement={uiShellAppElement}
+          uiShellStylesElement={uiShellStylesElement}
+        />,
+      );
+
+      return container;
+    };
+
+    test("small width", async () => {
+      await page.viewport(
+        defaultUiShellBreakpointConfig.medium - 1,
+        PAGE_HEIGHT,
+      );
+
+      const container = getContainer();
+
+      await waitFor(() => {
+        expect(within(container).getByText(appName)).not.toBeVisible();
+      });
+    });
+
+    test("medium width", async () => {
+      await page.viewport(defaultUiShellBreakpointConfig.medium, PAGE_HEIGHT);
+
+      const container = getContainer();
+
+      await waitFor(() => {
+        expect(within(container).getByText(appName)).not.toBeVisible();
+      });
+
+      await new Promise((resolve) => setTimeout(resolve, 20000));
+    });
+
+    test("wide width", async () => {
+      await page.viewport(defaultUiShellBreakpointConfig.wide, PAGE_HEIGHT);
+
+      const container = getContainer();
+
+      await waitFor(() => {
+        expect(within(container).getByText(appName)).toBeVisible();
       });
     });
   });
