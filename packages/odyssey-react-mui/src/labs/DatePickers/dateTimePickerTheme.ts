@@ -98,17 +98,17 @@ const theme: ThemeOptions = {
         root: {
           maxHeight: `${DateTimePickerComponentSize.dateCalendarMaxHeight} !important`,
           // Target all possible variations at once with the highest specificity
-          '&.MuiMultiSectionDigitalClock-root': {
+          "&.MuiMultiSectionDigitalClock-root": {
             maxHeight: `${DateTimePickerComponentSize.dateCalendarMaxHeight} !important`,
           },
-          '& .MuiMultiSectionDigitalClockSection-root': {
+          "& .MuiMultiSectionDigitalClockSection-root": {
             maxHeight: `${DateTimePickerComponentSize.dateCalendarMaxHeight} !important`,
           },
-          '&.MuiDigitalClock-root': {
+          "&.MuiDigitalClock-root": {
             maxHeight: `${DateTimePickerComponentSize.dateCalendarMaxHeight} !important`,
-          }
-        }
-      }
+          },
+        },
+      },
     },
     MuiMultiSectionDigitalClockSection: {
       styleOverrides: {
