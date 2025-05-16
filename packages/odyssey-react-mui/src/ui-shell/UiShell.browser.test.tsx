@@ -12,10 +12,11 @@
 
 import { act, render, waitFor, within } from "@testing-library/react";
 import { page } from "@vitest/browser/context";
+import { type ReactElement } from "react";
 
 import { defaultComponentProps, UiShell, UiShellProps } from "./UiShell.js";
-import { ReactElement } from "react";
 import { defaultUiShellBreakpointConfig } from "./useUiShellBreakpoints.js";
+import { AddCircleIcon } from "../icons.generated/AddCircle.js";
 
 const getTestDomElements = () => {
   const rootElement = document.createElement("div");
@@ -374,6 +375,7 @@ describe("UiShell", () => {
 
   describe("SideNav Collapsed State", () => {
     const appName = "My Test App";
+    const itemLabel = "Add new folder";
     const PAGE_HEIGHT = 1000;
 
     const getContainer = () => {
@@ -392,7 +394,14 @@ describe("UiShell", () => {
               sideNavProps: {
                 appName,
                 // isCollapsed: true,
-                sideNavItems: [],
+                sideNavItems: [
+                  {
+                    id: "item1",
+                    label: itemLabel,
+                    endIcon: <AddCircleIcon />,
+                    onClick: () => {},
+                  },
+                ],
               },
             });
 
@@ -406,7 +415,7 @@ describe("UiShell", () => {
       return container;
     };
 
-    test("small width", async () => {
+    test("narrow width", async () => {
       await page.viewport(
         defaultUiShellBreakpointConfig.medium - 1,
         PAGE_HEIGHT,
@@ -415,7 +424,8 @@ describe("UiShell", () => {
       const container = getContainer();
 
       await waitFor(() => {
-        expect(within(container).getByText(appName)).not.toBeVisible();
+        // No app name in narrow view
+        expect(within(container).getByText(itemLabel)).not.toBeVisible();
       });
     });
 
@@ -426,9 +436,8 @@ describe("UiShell", () => {
 
       await waitFor(() => {
         expect(within(container).getByText(appName)).not.toBeVisible();
+        expect(within(container).getByText(itemLabel)).not.toBeVisible();
       });
-
-      await new Promise((resolve) => setTimeout(resolve, 20000));
     });
 
     test("wide width", async () => {
@@ -438,6 +447,7 @@ describe("UiShell", () => {
 
       await waitFor(() => {
         expect(within(container).getByText(appName)).toBeVisible();
+        expect(within(container).getByText(itemLabel)).toBeVisible();
       });
     });
   });
