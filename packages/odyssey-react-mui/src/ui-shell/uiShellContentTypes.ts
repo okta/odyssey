@@ -60,6 +60,10 @@ export type UiShellContentProps = {
    */
   appElementScrollingMode: "none" | "horizontal" | "vertical" | "both";
   /**
+   * Says if `sideNavProps` has been passed in. This is important for rendering as we will override `sideNavProps` internally, but we need to know if they were passed in for showing the loading state.
+   */
+  hasSideNavProps: boolean;
+  /**
    * Defaults to `true`.
    *
    * If `false`, the content area will have no padding provided. This is for the case where an app wants to manage this separate from UI Shell.

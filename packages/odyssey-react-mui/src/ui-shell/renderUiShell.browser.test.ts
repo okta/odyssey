@@ -26,7 +26,7 @@ describe(renderUiShell.name, () => {
     await act(async () => {
       // Remove any appended elements because of this hacky process of rendering to the global DOM.
       document.body.innerHTML = "";
-      await Promise.resolve();
+      return Promise.resolve();
     });
   });
 

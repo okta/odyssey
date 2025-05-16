@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { waitFor } from "@testing-library/dom";
+import { act, waitFor } from "@testing-library/react";
 
 import {
   renderReactInWebComponent,
@@ -19,9 +19,13 @@ import {
 } from "./renderReactInWebComponent.js";
 
 describe(renderReactInWebComponent.name, () => {
-  afterEach(() => {
-    // Remove any appended elements
-    document.body.innerHTML = "";
+  afterEach(async () => {
+    // This needs to be wrapped in `act` because the web component unmounts the React app, and React events have to be wrapped in `act`.
+    await act(async () => {
+      // Remove any appended elements because of this hacky process of rendering to the global DOM.
+      document.body.innerHTML = "";
+      return Promise.resolve();
+    });
   });
 
   test("returns web component element", async () => {

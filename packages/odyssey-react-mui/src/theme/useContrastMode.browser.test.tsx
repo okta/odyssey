@@ -117,7 +117,7 @@ describe("useContrastMode and related functions", () => {
           Object.assign(transitionEvent, { propertyName: "background-color" }),
         );
 
-        await Promise.resolve();
+        return Promise.resolve();
       });
 
       await waitFor(() => {

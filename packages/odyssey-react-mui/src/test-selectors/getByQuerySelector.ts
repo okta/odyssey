@@ -18,7 +18,7 @@ import {
   type ByRoleOptions,
   type Matcher,
   type SelectorMatcherOptions,
-} from "@testing-library/dom";
+} from "@testing-library/react";
 
 export type RoleSelectorMethod = "ByRole";
 
