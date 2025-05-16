@@ -71,6 +71,10 @@ export type SideNavProps = {
    */
   appName?: string;
   /**
+   *  If we want the collapse state to be based on session storage, then this needs to be `true`.
+   */
+  hasSessionStorageState?: boolean;
+  /**
    *  Determines whether the side nav is collapsible
    */
   isCollapsible?: boolean;

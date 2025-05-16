@@ -385,14 +385,15 @@ const NarrowUiShellContent = ({
             {
               /* If SideNav should be initially visible and we have not yet received props, render SideNav with minimal inputs */
               initialVisibleSections?.includes("SideNav") &&
-                sideNavProps === undefined && (
+                (sideNavProps === undefined ||
+                  sideNavProps?.sideNavItems.length === 0) && (
                   <ErrorBoundary fallback={null} onError={onError}>
                     <SideNav isLoading sideNavItems={emptySideNavItems} />
                   </ErrorBoundary>
                 )
             }
 
-            {sideNavProps && (
+            {sideNavProps && sideNavProps?.sideNavItems.length > 0 && (
               <ErrorBoundary fallback={null} onError={onError}>
                 <StyledSideNavContainer>
                   <SideNav

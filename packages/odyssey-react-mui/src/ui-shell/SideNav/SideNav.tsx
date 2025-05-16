@@ -418,6 +418,7 @@ const SideNav = ({
   footerComponent,
   footerItems,
   hasCustomFooter,
+  hasSessionStorageState,
   isCollapsible,
   isCollapsed = false,
   isCompact,
@@ -436,10 +437,20 @@ const SideNav = ({
     useState(false);
   const [sideNavItemsList, updateSideNavItemsList] = useState(sideNavItems);
 
+  const [isSideNavCollapsedLocalState, setIsSideNavCollapsedLocalState] =
+    useState(isCollapsed);
+
   const {
-    sessionState: isSideNavCollapsed,
-    setSessionState: setIsSideNavCollapsed,
+    sessionState: isSideNavCollapsedSessionState,
+    setSessionState: setIsSideNavCollapsedSessionState,
   } = useIsSideNavCollapsedSessionStorage(isCollapsed);
+
+  const isSideNavCollapsed = hasSessionStorageState
+    ? isSideNavCollapsedSessionState
+    : isSideNavCollapsedLocalState;
+  const setIsSideNavCollapsed = hasSessionStorageState
+    ? setIsSideNavCollapsedSessionState
+    : setIsSideNavCollapsedLocalState;
 
   const uiShellContext = useUiShellContext();
   const odysseyDesignTokens: DesignTokens = useOdysseyDesignTokens();
@@ -464,7 +475,7 @@ const SideNav = ({
         sideNavRef.current.getBoundingClientRect().x > 0,
       );
     }
-    // We want this listening to `isCollapsed`.
+    // We want this listening to `isCollapsed` because that changes what's next to the side nav.
   }, [isCollapsed]);
 
   // In the case that you can't control the side nav, then it should use whatever state was passed (app control) rather than what's stored in session storage (user control).

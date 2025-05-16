@@ -159,6 +159,7 @@ const UiShell = ({
                     sideNavProps: {
                       sideNavItems: [],
                       ...componentProps.sideNavProps,
+                      hasSessionStorageState: activeBreakpoint === "wide",
                       isCollapsed:
                         activeBreakpoint === "medium" ||
                         componentProps.sideNavProps?.isCollapsed,
