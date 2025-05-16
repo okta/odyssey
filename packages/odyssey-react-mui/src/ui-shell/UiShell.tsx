@@ -144,6 +144,7 @@ const UiShell = ({
                 {...componentProps}
                 appElement={appElement}
                 appElementScrollingMode={appElementScrollingMode}
+                hasSideNavProps={Boolean(componentProps.sideNavProps)}
                 hasStandardAppContentPadding={hasStandardAppContentPadding}
                 initialVisibleSections={initialVisibleSections}
                 onError={onError}
@@ -157,7 +158,6 @@ const UiShell = ({
                   ...componentProps,
                   ...{
                     sideNavProps: {
-                      sideNavItems: [],
                       ...componentProps.sideNavProps,
                       hasSessionStorageState: activeBreakpoint === "wide",
                       isCollapsed:
@@ -173,6 +173,7 @@ const UiShell = ({
                 appElement={appElement}
                 appElementScrollingMode={appElementScrollingMode}
                 hasStandardAppContentPadding={hasStandardAppContentPadding}
+                hasSideNavProps={Boolean(componentProps.sideNavProps)}
                 initialVisibleSections={initialVisibleSections}
                 onError={onError}
                 optionalComponents={optionalComponents}

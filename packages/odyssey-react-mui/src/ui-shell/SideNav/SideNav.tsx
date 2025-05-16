@@ -435,7 +435,9 @@ const SideNav = ({
   const [isContentScrollable, setIsContentScrollable] = useState(false);
   const [isSideNavToggleHighlighted, setIsSideNavToggleHighlighted] =
     useState(false);
-  const [sideNavItemsList, updateSideNavItemsList] = useState(sideNavItems);
+  const [sideNavItemsList, updateSideNavItemsList] = useState(
+    sideNavItems || [],
+  );
 
   const [isSideNavCollapsedLocalState, setIsSideNavCollapsedLocalState] =
     useState(isCollapsed);
@@ -466,7 +468,7 @@ const SideNav = ({
   // The default value (sideNavItems) passed to useState is ONLY used by the useState hook for
   // the very first value. Subsequent updates to the prop (sideNavItems) need to cause the state
   // to update!
-  useEffect(() => updateSideNavItemsList(sideNavItems), [sideNavItems]);
+  useEffect(() => updateSideNavItemsList(sideNavItems || []), [sideNavItems]);
 
   // update sidenav collapse status
   useEffect(() => {

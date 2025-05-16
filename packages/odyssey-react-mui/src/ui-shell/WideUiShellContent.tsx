@@ -95,6 +95,7 @@ const WideUiShellContent = ({
   appElementScrollingMode,
   appSwitcherProps,
   hasStandardAppContentPadding = true,
+  hasSideNavProps,
   initialVisibleSections = ["TopNav", "SideNav", "AppSwitcher"],
   onError = console.error,
   optionalComponents,
@@ -156,16 +157,14 @@ const WideUiShellContent = ({
       <StyledSideNavContainer ref={sideNavContainerRef}>
         {
           /* If SideNav should be initially visible and we have not yet received props, render SideNav with minimal inputs */
-          initialVisibleSections?.includes("SideNav") &&
-            (sideNavProps === undefined ||
-              sideNavProps?.sideNavItems.length === 0) && (
-              <ErrorBoundary fallback={null} onError={onError}>
-                <SideNav isLoading sideNavItems={emptySideNavItems} />
-              </ErrorBoundary>
-            )
+          initialVisibleSections?.includes("SideNav") && !hasSideNavProps && (
+            <ErrorBoundary fallback={null} onError={onError}>
+              <SideNav isLoading sideNavItems={emptySideNavItems} />
+            </ErrorBoundary>
+          )
         }
 
-        {sideNavProps && sideNavProps?.sideNavItems.length > 0 && (
+        {hasSideNavProps && sideNavProps && (
           <ErrorBoundary fallback={null} onError={onError}>
             <SideNav
               {...{
