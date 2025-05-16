@@ -557,7 +557,7 @@ export const DelayedSideNavItems: StoryObj<typeof SideNav> = {
     const [isLoadingInState, setIsLoadingInState] = useState(isLoading);
     useEffect(() => {
       setTimeout(() => {
-        setSideNavItemsInState(sideNavItems);
+        setSideNavItemsInState(sideNavItems || []);
         setIsLoadingInState(false);
       }, 1000);
     });
