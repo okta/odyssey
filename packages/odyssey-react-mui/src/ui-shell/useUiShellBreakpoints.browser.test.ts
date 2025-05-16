@@ -75,7 +75,7 @@ describe(useUiShellBreakpoints.name, () => {
     );
 
     await waitFor(() => {
-      expect(breakpointNameRef.current).toBe("narrow");
+      expect(breakpointNameRef.current).toBe("medium");
     });
 
     await act(
