@@ -13,16 +13,22 @@
 // import { CSSInterpolation } from "@mui/material/styles";
 import { deepmerge } from "@mui/utils";
 import { ThemeOptions } from "@mui/material";
-
+import { digitalClockClasses } from "@mui/x-date-pickers/DigitalClock";
+import {
+  multiSectionDigitalClockSectionClasses,
+  multiSectionDigitalClockClasses,
+} from "@mui/x-date-pickers/MultiSectionDigitalClock";
 import {
   datePickerTheme,
   dateStyles,
 } from "../../DatePickers/datePickerTheme.js";
 import { DateTimePickerSize } from "./DateTimePicker.js";
+import { pxToRem } from "../../theme/index.js";
+import { addSpecificity } from "../../styleSpecifictyUtils.js";
 
 const DateTimePickerComponentSize = {
-  dateCalendarMaxHeight: "24rem", // ~336px
-  slideTransitionMinHeight: "17.14rem", // ~240px
+  dateCalendarMaxHeight: `${pxToRem(336)}rem`,
+  slideTransitionMinHeight: `${pxToRem(240)}rem`,
 };
 
 const theme: ThemeOptions = {
@@ -96,17 +102,10 @@ const theme: ThemeOptions = {
     MuiMultiSectionDigitalClock: {
       styleOverrides: {
         root: {
-          maxHeight: `${DateTimePickerComponentSize.dateCalendarMaxHeight} !important`,
-          // Target all possible variations at once with the highest specificity
-          "&.MuiMultiSectionDigitalClock-root": {
-            maxHeight: `${DateTimePickerComponentSize.dateCalendarMaxHeight} !important`,
-          },
-          "& .MuiMultiSectionDigitalClockSection-root": {
-            maxHeight: `${DateTimePickerComponentSize.dateCalendarMaxHeight} !important`,
-          },
-          "&.MuiDigitalClock-root": {
-            maxHeight: `${DateTimePickerComponentSize.dateCalendarMaxHeight} !important`,
-          },
+          [`${addSpecificity(2, multiSectionDigitalClockClasses.root)}, ${addSpecificity(2, multiSectionDigitalClockSectionClasses.root, false)}, ${addSpecificity(2, digitalClockClasses.root)}`]:
+            {
+              maxHeight: DateTimePickerComponentSize.dateCalendarMaxHeight,
+            },
         },
       },
     },
@@ -114,7 +113,6 @@ const theme: ThemeOptions = {
       styleOverrides: {
         root: {
           width: "auto",
-          maxHeight: DateTimePickerComponentSize.dateCalendarMaxHeight,
         },
         item: ({ theme }) => [
           dateStyles.default({ theme }),
