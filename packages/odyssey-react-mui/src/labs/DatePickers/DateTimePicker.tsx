@@ -41,7 +41,7 @@ import { OdysseyThemeProvider } from "../../OdysseyThemeProvider.js";
 import { pxToRem } from "../../theme/index.js";
 
 export const DateTimePickerSize = {
-  maxWidth: `${pxToRem(485.75)}rem`,
+  maxWidth: `${pxToRem(486)}rem`,
 };
 
 const DatePickerContainer = styled.div({

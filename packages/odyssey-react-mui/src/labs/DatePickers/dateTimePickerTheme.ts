@@ -24,7 +24,7 @@ import {
 } from "../../DatePickers/datePickerTheme.js";
 import { DateTimePickerSize } from "./DateTimePicker.js";
 import { pxToRem } from "../../theme/index.js";
-import { addSpecificity } from "../../styleSpecifictyUtils.js";
+import { addSpecificity } from "../../addSpecificity.js";
 
 const DateTimePickerComponentSize = {
   dateCalendarMaxHeight: `${pxToRem(336)}rem`,
@@ -102,10 +102,11 @@ const theme: ThemeOptions = {
     MuiMultiSectionDigitalClock: {
       styleOverrides: {
         root: {
-          [`${addSpecificity(2, multiSectionDigitalClockClasses.root)}, ${addSpecificity(2, multiSectionDigitalClockSectionClasses.root, false)}, ${addSpecificity(2, digitalClockClasses.root)}`]:
-            {
-              maxHeight: DateTimePickerComponentSize.dateCalendarMaxHeight,
-            },
+          [`${addSpecificity(2, ".", multiSectionDigitalClockClasses.root)}, 
+            ${addSpecificity(2, " .", multiSectionDigitalClockSectionClasses.root)}, 
+            ${addSpecificity(2, ".", digitalClockClasses.root)}`]: {
+            maxHeight: DateTimePickerComponentSize.dateCalendarMaxHeight,
+          },
         },
       },
     },
