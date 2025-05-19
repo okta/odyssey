@@ -12,44 +12,20 @@
 
 import { render, screen } from "@testing-library/react";
 
-const getMockedDatePicker = async () => {
-  vi.doMock("react-i18next", () => ({
-    useTranslation: () => {
-      return {
-        t: vi.fn((value: string) => value),
-        i18n: {
-          language: "en",
-        },
-      };
-    },
-    initReactI18next: {
-      type: "3rdParty",
-      init: () => {},
-    },
-  }));
-
-  const { DatePicker } = await import("./DatePicker.js");
-
-  vi.doUnmock("react-i18next");
-
-  return DatePicker;
-};
+import { DatePicker } from "./DatePicker.js";
+import "../i18n.js";
 
 describe("DatePicker", () => {
-  test("displays the DatePicker", async () => {
-    const MockedDatePicker = await getMockedDatePicker();
-
-    render(<MockedDatePicker label="date time picker label" />);
+  test("displays the DatePicker", () => {
+    render(<DatePicker label="date time picker label" />);
 
     const input = screen.getByLabelText("date time picker label");
     expect(input).toBeInTheDocument();
   });
 
-  test("displays the correct date when a value is passed in ", async () => {
-    const MockedDatePicker = await getMockedDatePicker();
-
+  test("displays the correct date when a value is passed in ", () => {
     render(
-      <MockedDatePicker
+      <DatePicker
         label="date time picker label"
         value="2024-07-21T03:00:00.000Z"
         timeZone="America/New_York"
@@ -61,11 +37,9 @@ describe("DatePicker", () => {
     expect(input).toHaveDisplayValue("07/20/2024");
   });
 
-  test("displays the correct date when timezone is changed", async () => {
-    const MockedDatePicker = await getMockedDatePicker();
-
+  test("displays the correct date when timezone is changed", () => {
     render(
-      <MockedDatePicker
+      <DatePicker
         label="date time picker label"
         value="2024-07-21T03:00:00.000Z"
         timeZone="Asia/Hong_Kong"

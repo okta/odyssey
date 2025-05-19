@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { renderHook, waitFor } from "@testing-library/react";
+import { act, renderHook, waitFor } from "@testing-library/react";
 
 import {
   getIsYAxisScrollContainer,
@@ -48,7 +48,7 @@ const renderElements = ({
   childElement.style.setProperty("height", scrollableElementHeight);
 
   // For these Elements to have height, they need to be appended to the DOM.
-  window.document.body.append(containerElement);
+  document.body.append(containerElement);
   containerElement.append(childElement);
 
   return {
@@ -59,7 +59,7 @@ const renderElements = ({
 
 describe(getIsScrollHeightElement.name, () => {
   afterEach(() => {
-    window.document.body.innerHTML = "";
+    document.body.innerHTML = "";
   });
 
   test("is scroll height when equal height", async () => {
@@ -113,7 +113,7 @@ describe(getIsScrollHeightElement.name, () => {
 
 describe(getIsYAxisScrollContainer.name, () => {
   afterEach(() => {
-    window.document.body.innerHTML = "";
+    document.body.innerHTML = "";
   });
 
   describe("is not y-axis scroll container", () => {
@@ -227,7 +227,7 @@ describe(getIsYAxisScrollContainer.name, () => {
 
 describe(getIsYAxisScrolling.name, () => {
   afterEach(() => {
-    window.document.body.innerHTML = "";
+    document.body.innerHTML = "";
   });
 
   describe("is not y-axis scrolling", () => {
@@ -352,7 +352,7 @@ describe(getIsYAxisScrolling.name, () => {
 
 describe(getNestedScrollContainers.name, () => {
   afterEach(() => {
-    window.document.body.innerHTML = "";
+    document.body.innerHTML = "";
   });
 
   test("finds scroll container when content has overflow", async () => {
@@ -447,8 +447,13 @@ describe(getNestedScrollContainers.name, () => {
 });
 
 describe(useScrollState.name, () => {
-  afterEach(() => {
-    window.document.body.innerHTML = "";
+  afterEach(async () => {
+    // This needs to be wrapped in `act` because the web component unmounts the React app, and React events have to be wrapped in `act`.
+    await act(async () => {
+      // Remove any appended elements because of this hacky process of rendering to the global DOM.
+      document.body.innerHTML = "";
+      return Promise.resolve();
+    });
   });
 
   describe("is scrolling", () => {

@@ -10,380 +10,445 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render, waitFor, within } from "@testing-library/react";
+import { act, render, waitFor, within } from "@testing-library/react";
+import { page } from "@vitest/browser/context";
+import { type ReactElement } from "react";
 
 import { defaultComponentProps, UiShell, UiShellProps } from "./UiShell.js";
-import { ReactElement } from "react";
+import { defaultUiShellBreakpointConfig } from "./useUiShellBreakpoints.js";
+import { AddCircleIcon } from "../icons.generated/AddCircle.js";
 
-describe(UiShell.displayName!, () => {
-  afterEach(() => {
-    document.body.innerHTML = "";
+const getTestDomElements = () => {
+  const rootElement = document.createElement("div");
+
+  // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
+  document.body.append(rootElement);
+
+  const appElement = document.createElement("div");
+
+  document.body.append(appElement);
+
+  const uiShellAppElement = document.createElement("div");
+  const uiShellStylesElement = document.head;
+
+  return {
+    appElement,
+    rootElement,
+    uiShellAppElement,
+    uiShellStylesElement,
+  };
+};
+
+describe("UiShell", () => {
+  afterEach(async () => {
+    // This needs to be wrapped in `act` because the web component unmounts the React app, and React events have to be wrapped in `act`.
+    await act(async () => {
+      // Remove any appended elements because of this hacky process of rendering to the global DOM.
+      document.head.innerHTML = "";
+      document.body.innerHTML = "";
+      sessionStorage.clear();
+      return Promise.resolve();
+    });
   });
 
-  test("renders `uiShellStylesElement`", () => {
-    const appElement = document.createElement("div");
+  describe("Rendering", () => {
+    test("renders `uiShellStylesElement`", () => {
+      const { appElement, uiShellAppElement, uiShellStylesElement } =
+        getTestDomElements();
 
-    document.body.append(appElement);
+      render(
+        <UiShell
+          appElement={appElement}
+          appElementScrollingMode="vertical"
+          onSubscriptionCreated={() => {}}
+          subscribeToPropChanges={() => () => {}}
+          uiShellAppElement={uiShellAppElement}
+          uiShellStylesElement={uiShellStylesElement}
+        />,
+      );
 
-    const uiShellStylesElement = document.createElement("div");
+      expect(Array.from(uiShellStylesElement.children).length).toBeGreaterThan(
+        0,
+      );
+    });
 
-    render(
-      <UiShell
-        appElement={appElement}
-        appElementScrollingMode="vertical"
-        onSubscriptionCreated={() => {}}
-        subscribeToPropChanges={() => () => {}}
-        uiShellAppElement={document.createElement("div")}
-        uiShellStylesElement={uiShellStylesElement}
-      />,
-    );
+    test("renders always-available `componentSlots`", async () => {
+      const { appElement, uiShellAppElement, uiShellStylesElement } =
+        getTestDomElements();
 
-    expect(Array.from(uiShellStylesElement.children).length).toBeGreaterThan(0);
-  });
+      const optionalComponentTestIds: Array<
+        keyof Required<UiShellProps>["optionalComponents"]
+      > = ["banners", "topNavLeftSide", "topNavRightSide"];
 
-  test("renders always-available `componentSlots`", async () => {
-    const appElement = document.createElement("div");
+      // This is the subscription we give the component, and then once subscribed, we're going to immediately call it with new props.
+      // TopNav won't render unless we pass something into it.
+      const subscribeToPropChanges: UiShellProps["subscribeToPropChanges"] = (
+        subscriber,
+      ) => {
+        subscriber({
+          ...defaultComponentProps,
+          topNavProps: {},
+        });
 
-    document.body.append(appElement);
+        return () => {};
+      };
 
-    const optionalComponentTestIds: Array<
-      keyof Required<UiShellProps>["optionalComponents"]
-    > = ["banners", "topNavLeftSide", "topNavRightSide"];
+      const { container } = render(
+        <UiShell
+          appElement={appElement}
+          appElementScrollingMode="vertical"
+          onSubscriptionCreated={() => {}}
+          optionalComponents={
+            Object.fromEntries(
+              optionalComponentTestIds.map((testId) => [
+                testId,
+                <div data-testid={testId} />,
+              ]),
+            ) as Record<keyof UiShellProps["optionalComponents"], ReactElement>
+          }
+          subscribeToPropChanges={subscribeToPropChanges}
+          uiShellAppElement={uiShellAppElement}
+          uiShellStylesElement={uiShellStylesElement}
+        />,
+      );
 
-    // This is the subscription we give the component, and then once subscribed, we're going to immediately call it with new props.
-    // TopNav won't render unless we pass something into it.
-    const subscribeToPropChanges: UiShellProps["subscribeToPropChanges"] = (
-      subscriber,
-    ) => {
-      subscriber({
-        ...defaultComponentProps,
-        topNavProps: {},
+      await waitFor(() => {
+        optionalComponentTestIds.forEach((testId) => {
+          expect(within(container).getByTestId(testId)).toBeVisible();
+        });
       });
+    });
 
-      return () => {};
-    };
+    test("renders optionally-available `componentSlots`", () => {
+      const { appElement, uiShellAppElement, uiShellStylesElement } =
+        getTestDomElements();
 
-    const { container } = render(
-      <UiShell
-        appElement={appElement}
-        appElementScrollingMode="vertical"
-        onSubscriptionCreated={() => {}}
-        optionalComponents={
-          Object.fromEntries(
-            optionalComponentTestIds.map((testId) => [
-              testId,
-              <div data-testid={testId} />,
-            ]),
-          ) as Record<keyof UiShellProps["optionalComponents"], ReactElement>
-        }
-        subscribeToPropChanges={subscribeToPropChanges}
-        uiShellAppElement={document.createElement("div")}
-        uiShellStylesElement={document.createElement("div")}
-      />,
-    );
+      const optionalComponentTestIds: Array<
+        keyof Required<UiShellProps>["optionalComponents"]
+      > = ["sideNavFooter"];
 
-    await waitFor(() => {
+      // This is the subscription we give the component, and then once subscribed, we're going to immediately call it with new props.
+      const subscribeToPropChanges: UiShellProps["subscribeToPropChanges"] = (
+        subscriber,
+      ) => {
+        subscriber({
+          ...defaultComponentProps,
+          sideNavProps: {
+            appName: "",
+            hasCustomFooter: true,
+            sideNavItems: [],
+          },
+        });
+
+        return () => {};
+      };
+
+      const { container } = render(
+        <UiShell
+          appElement={appElement}
+          appElementScrollingMode={"vertical"}
+          onSubscriptionCreated={() => {}}
+          optionalComponents={
+            Object.fromEntries(
+              optionalComponentTestIds.map((testId) => [
+                testId,
+                <div data-testid={testId} />,
+              ]),
+            ) as Record<keyof UiShellProps["optionalComponents"], ReactElement>
+          }
+          subscribeToPropChanges={subscribeToPropChanges}
+          uiShellAppElement={uiShellAppElement}
+          uiShellStylesElement={uiShellStylesElement}
+        />,
+      );
+
       optionalComponentTestIds.forEach((testId) => {
         expect(within(container).getByTestId(testId)).toBeVisible();
       });
     });
-  });
 
-  test("renders optionally-available `componentSlots`", () => {
-    const appContainerElement = document.createElement("div");
-    document.body.append(appContainerElement);
+    test("unsubscribes from prop changes when unmounted", () => {
+      const { appElement, uiShellAppElement, uiShellStylesElement } =
+        getTestDomElements();
 
-    const optionalComponentTestIds: Array<
-      keyof Required<UiShellProps>["optionalComponents"]
-    > = ["sideNavFooter"];
+      const unsubscribeFromPropChanges = vi.fn();
+      const subscribeToPropChanges = vi.fn(() => unsubscribeFromPropChanges);
 
-    // This is the subscription we give the component, and then once subscribed, we're going to immediately call it with new props.
-    const subscribeToPropChanges: UiShellProps["subscribeToPropChanges"] = (
-      subscriber,
-    ) => {
-      subscriber({
-        ...defaultComponentProps,
-        sideNavProps: {
-          appName: "",
-          hasCustomFooter: true,
-          sideNavItems: [],
-        },
+      const { unmount } = render(
+        <UiShell
+          appElement={appElement}
+          appElementScrollingMode="vertical"
+          onSubscriptionCreated={() => {}}
+          subscribeToPropChanges={subscribeToPropChanges}
+          uiShellAppElement={uiShellAppElement}
+          uiShellStylesElement={uiShellStylesElement}
+        />,
+      );
+
+      unmount();
+
+      expect(subscribeToPropChanges).toHaveBeenCalledTimes(1);
+      expect(unsubscribeFromPropChanges).toHaveBeenCalledTimes(1);
+    });
+
+    test("allows changing props through the subscription", () => {
+      const { appElement, uiShellAppElement, uiShellStylesElement } =
+        getTestDomElements();
+
+      const sideNavItemText = "Add New Folder";
+
+      // This is the subscription we give the component, and then once subscribed, we're going to immediately call it with new props.
+      const subscribeToPropChanges: UiShellProps["subscribeToPropChanges"] = (
+        subscriber,
+      ) => {
+        subscriber({
+          ...defaultComponentProps,
+          sideNavProps: {
+            appName: "",
+            sideNavItems: [
+              {
+                id: "AddNewFolder",
+                label: sideNavItemText,
+                onClick: () => {},
+              },
+            ],
+          },
+        });
+
+        return () => {};
+      };
+
+      const { container } = render(
+        <UiShell
+          appElement={appElement}
+          appElementScrollingMode="vertical"
+          onSubscriptionCreated={() => {}}
+          subscribeToPropChanges={subscribeToPropChanges}
+          uiShellAppElement={uiShellAppElement}
+          uiShellStylesElement={uiShellStylesElement}
+        />,
+      );
+
+      expect(container).toHaveTextContent(sideNavItemText);
+    });
+
+    test("uses default props if no value passed to subscription", () => {
+      const { appElement, uiShellAppElement, uiShellStylesElement } =
+        getTestDomElements();
+
+      // This is the subscription we give the component, and then once subscribed, we're going to immediately call it with new props.
+      const subscribeToPropChanges: UiShellProps["subscribeToPropChanges"] = (
+        subscriber,
+      ) => {
+        // @ts-expect-error This unit test is checking what happens when we don't pass a value.
+        subscriber();
+
+        return () => {};
+      };
+
+      const { container } = render(
+        <UiShell
+          appElement={appElement}
+          appElementScrollingMode="vertical"
+          onSubscriptionCreated={() => {}}
+          subscribeToPropChanges={subscribeToPropChanges}
+          uiShellAppElement={uiShellAppElement}
+          uiShellStylesElement={uiShellStylesElement}
+        />,
+      );
+
+      expect(container).toBeVisible();
+    });
+
+    test("notifies on subscription creation", () => {
+      const { appElement, uiShellAppElement, uiShellStylesElement } =
+        getTestDomElements();
+
+      // This passed to React's state setter. The return value here prevents a test error. It wouldn't be required otherwise as this test could care less what's returned.
+      const onSubscriptionCreated = vi.fn();
+
+      render(
+        <UiShell
+          appElement={appElement}
+          appElementScrollingMode="vertical"
+          onSubscriptionCreated={onSubscriptionCreated}
+          subscribeToPropChanges={() => () => {}}
+          uiShellAppElement={uiShellAppElement}
+          uiShellStylesElement={uiShellStylesElement}
+        />,
+      );
+
+      expect(onSubscriptionCreated).toHaveBeenCalledTimes(1);
+    });
+
+    test("has previous state in prop change subscription", () => {
+      const { appElement, uiShellAppElement, uiShellStylesElement } =
+        getTestDomElements();
+
+      // This passed to React's state setter. The return value here prevents a test error. It wouldn't be required otherwise as this test could care less what's returned.
+      const stateUpdater = vi.fn(() => defaultComponentProps);
+
+      // This is the subscription we give the component, and then once subscribed, we're going to immediately call it to see if it passes us the previous state.
+      const subscribeToPropChanges: UiShellProps["subscribeToPropChanges"] = (
+        subscriber,
+      ) => {
+        subscriber(stateUpdater);
+
+        return () => {};
+      };
+
+      render(
+        <UiShell
+          appElement={appElement}
+          appElementScrollingMode="vertical"
+          onSubscriptionCreated={() => {}}
+          subscribeToPropChanges={subscribeToPropChanges}
+          uiShellAppElement={uiShellAppElement}
+          uiShellStylesElement={uiShellStylesElement}
+        />,
+      );
+
+      expect(stateUpdater).toHaveBeenCalledWith(defaultComponentProps);
+    });
+
+    test("places expected padding on appElement", async () => {
+      const { appElement, uiShellAppElement, uiShellStylesElement } =
+        getTestDomElements();
+
+      render(
+        <UiShell
+          appElement={appElement}
+          appElementScrollingMode="both"
+          onSubscriptionCreated={() => {}}
+          subscribeToPropChanges={() => () => {}}
+          uiShellAppElement={uiShellAppElement}
+          uiShellStylesElement={uiShellStylesElement}
+        />,
+      );
+
+      await waitFor(() => {
+        expect(appElement.style.getPropertyValue("position")).toBe("absolute");
+
+        expect(appElement.style.getPropertyValue("overflow-x")).toBe("auto");
+
+        expect(appElement.style.getPropertyValue("overflow-y")).toBe("auto");
+
+        expect(appElement.style.getPropertyValue("padding-inline")).toBe(
+          "3.42857rem",
+        );
+
+        expect(appElement.style.getPropertyValue("padding-block")).toBe(
+          "1.71429rem",
+        );
       });
+    });
 
-      return () => {};
-    };
+    test("places expected padding on appElement", async () => {
+      const { appElement, uiShellAppElement, uiShellStylesElement } =
+        getTestDomElements();
 
-    const { container } = render(
-      <UiShell
-        appElement={appContainerElement}
-        appElementScrollingMode={"vertical"}
-        onSubscriptionCreated={() => {}}
-        optionalComponents={
-          Object.fromEntries(
-            optionalComponentTestIds.map((testId) => [
-              testId,
-              <div data-testid={testId} />,
-            ]),
-          ) as Record<keyof UiShellProps["optionalComponents"], ReactElement>
-        }
-        subscribeToPropChanges={subscribeToPropChanges}
-        uiShellAppElement={document.createElement("div")}
-        uiShellStylesElement={document.createElement("div")}
-      />,
-    );
+      render(
+        <UiShell
+          appElement={appElement}
+          appElementScrollingMode="none"
+          hasStandardAppContentPadding={false}
+          onSubscriptionCreated={() => {}}
+          subscribeToPropChanges={() => () => {}}
+          uiShellAppElement={uiShellAppElement}
+          uiShellStylesElement={uiShellStylesElement}
+        />,
+      );
 
-    optionalComponentTestIds.forEach((testId) => {
-      expect(within(container).getByTestId(testId)).toBeVisible();
+      await waitFor(() => {
+        expect(appElement.style.getPropertyValue("position")).toBe("absolute");
+
+        expect(appElement.style.getPropertyValue("overflow-x")).toBe("hidden");
+
+        expect(appElement.style.getPropertyValue("overflow-y")).toBe("hidden");
+
+        expect(appElement.style.getPropertyValue("padding-inline")).toBe("");
+
+        expect(appElement.style.getPropertyValue("padding-block")).toBe("");
+      });
     });
   });
 
-  test("unsubscribes from prop changes when unmounted", () => {
-    const rootElement = document.createElement("div");
+  describe("SideNav Collapsed State", () => {
+    const appName = "My Test App";
+    const itemLabel = "Add new folder";
+    const PAGE_HEIGHT = 1000;
 
-    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
-    document.body.append(rootElement);
+    const getContainer = () => {
+      const { appElement, uiShellAppElement, uiShellStylesElement } =
+        getTestDomElements();
 
-    const appElement = document.createElement("div");
+      const { container } = render(
+        <UiShell
+          appElement={appElement}
+          appElementScrollingMode="none"
+          hasStandardAppContentPadding={false}
+          onSubscriptionCreated={() => {}}
+          subscribeToPropChanges={(subscriber) => {
+            subscriber({
+              ...defaultComponentProps,
+              sideNavProps: {
+                appName,
+                // isCollapsed: true,
+                sideNavItems: [
+                  {
+                    id: "item1",
+                    label: itemLabel,
+                    endIcon: <AddCircleIcon />,
+                    onClick: () => {},
+                  },
+                ],
+              },
+            });
 
-    document.body.append(appElement);
+            return () => {};
+          }}
+          uiShellAppElement={uiShellAppElement}
+          uiShellStylesElement={uiShellStylesElement}
+        />,
+      );
 
-    const unsubscribeFromPropChanges = vi.fn();
-    const subscribeToPropChanges = vi.fn(() => unsubscribeFromPropChanges);
+      return container;
+    };
 
-    const { unmount } = render(
-      <UiShell
-        appElement={appElement}
-        appElementScrollingMode="vertical"
-        onSubscriptionCreated={() => {}}
-        subscribeToPropChanges={subscribeToPropChanges}
-        uiShellAppElement={document.createElement("div")}
-        uiShellStylesElement={document.createElement("div")}
-      />,
-    );
+    test("narrow width", async () => {
+      await page.viewport(
+        defaultUiShellBreakpointConfig.medium - 1,
+        PAGE_HEIGHT,
+      );
 
-    unmount();
+      const container = getContainer();
 
-    expect(subscribeToPropChanges).toHaveBeenCalledTimes(1);
-    expect(unsubscribeFromPropChanges).toHaveBeenCalledTimes(1);
-  });
-
-  test("allows changing props through the subscription", () => {
-    const rootElement = document.createElement("div");
-    const sideNavItemText = "Add New Folder";
-
-    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
-    document.body.append(rootElement);
-
-    const appElement = document.createElement("div");
-
-    document.body.append(appElement);
-
-    // This is the subscription we give the component, and then once subscribed, we're going to immediately call it with new props.
-    const subscribeToPropChanges: UiShellProps["subscribeToPropChanges"] = (
-      subscriber,
-    ) => {
-      subscriber({
-        ...defaultComponentProps,
-        sideNavProps: {
-          appName: "",
-          sideNavItems: [
-            {
-              id: "AddNewFolder",
-              label: sideNavItemText,
-              onClick: () => {},
-            },
-          ],
-        },
+      await waitFor(() => {
+        // No app name in narrow view
+        expect(within(container).getByText(itemLabel)).not.toBeVisible();
       });
-
-      return () => {};
-    };
-
-    const { container } = render(
-      <UiShell
-        appElement={appElement}
-        appElementScrollingMode="vertical"
-        onSubscriptionCreated={() => {}}
-        subscribeToPropChanges={subscribeToPropChanges}
-        uiShellAppElement={document.createElement("div")}
-        uiShellStylesElement={document.createElement("div")}
-      />,
-    );
-
-    expect(container).toHaveTextContent(sideNavItemText);
-  });
-
-  test("uses default props if no value passed to subscription", () => {
-    const rootElement = document.createElement("div");
-
-    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
-    document.body.append(rootElement);
-
-    const appElement = document.createElement("div");
-
-    document.body.append(appElement);
-
-    // This is the subscription we give the component, and then once subscribed, we're going to immediately call it with new props.
-    const subscribeToPropChanges: UiShellProps["subscribeToPropChanges"] = (
-      subscriber,
-    ) => {
-      // @ts-expect-error This unit test is checking what happens when we don't pass a value.
-      subscriber();
-
-      return () => {};
-    };
-
-    const { container } = render(
-      <UiShell
-        appElement={appElement}
-        appElementScrollingMode="vertical"
-        onSubscriptionCreated={() => {}}
-        subscribeToPropChanges={subscribeToPropChanges}
-        uiShellAppElement={document.createElement("div")}
-        uiShellStylesElement={document.createElement("div")}
-      />,
-    );
-
-    expect(container).toBeVisible();
-  });
-
-  test("notifies on subscription creation", () => {
-    const rootElement = document.createElement("div");
-
-    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
-    document.body.append(rootElement);
-
-    const appElement = document.createElement("div");
-
-    document.body.append(appElement);
-
-    // This passed to React's state setter. The return value here prevents a test error. It wouldn't be required otherwise as this test could care less what's returned.
-    const onSubscriptionCreated = vi.fn();
-
-    render(
-      <UiShell
-        appElement={appElement}
-        appElementScrollingMode="vertical"
-        onSubscriptionCreated={onSubscriptionCreated}
-        subscribeToPropChanges={() => () => {}}
-        uiShellAppElement={document.createElement("div")}
-        uiShellStylesElement={document.createElement("div")}
-      />,
-    );
-
-    expect(onSubscriptionCreated).toHaveBeenCalledTimes(1);
-  });
-
-  test("has previous state in prop change subscription", () => {
-    const rootElement = document.createElement("div");
-
-    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
-    document.body.append(rootElement);
-
-    const appElement = document.createElement("div");
-
-    document.body.append(appElement);
-
-    // This passed to React's state setter. The return value here prevents a test error. It wouldn't be required otherwise as this test could care less what's returned.
-    const stateUpdater = vi.fn(() => defaultComponentProps);
-
-    // This is the subscription we give the component, and then once subscribed, we're going to immediately call it to see if it passes us the previous state.
-    const subscribeToPropChanges: UiShellProps["subscribeToPropChanges"] = (
-      subscriber,
-    ) => {
-      subscriber(stateUpdater);
-
-      return () => {};
-    };
-
-    render(
-      <UiShell
-        appElement={appElement}
-        appElementScrollingMode="vertical"
-        onSubscriptionCreated={() => {}}
-        subscribeToPropChanges={subscribeToPropChanges}
-        uiShellAppElement={document.createElement("div")}
-        uiShellStylesElement={document.createElement("div")}
-      />,
-    );
-
-    expect(stateUpdater).toHaveBeenCalledWith(defaultComponentProps);
-  });
-
-  test("places expected padding on appElement", async () => {
-    const rootElement = document.createElement("div");
-
-    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
-    document.body.append(rootElement);
-
-    const appElement = document.createElement("div");
-
-    document.body.append(appElement);
-
-    const uiShellStylesElement = document.createElement("div");
-
-    render(
-      <UiShell
-        appElement={appElement}
-        appElementScrollingMode="both"
-        onSubscriptionCreated={() => {}}
-        subscribeToPropChanges={() => () => {}}
-        uiShellAppElement={document.createElement("div")}
-        uiShellStylesElement={uiShellStylesElement}
-      />,
-    );
-
-    await waitFor(() => {
-      expect(appElement.style.getPropertyValue("position")).toBe("absolute");
-
-      expect(appElement.style.getPropertyValue("overflow-x")).toBe("auto");
-
-      expect(appElement.style.getPropertyValue("overflow-y")).toBe("auto");
-
-      expect(appElement.style.getPropertyValue("padding-inline")).toBe(
-        "3.42857rem",
-      );
-
-      expect(appElement.style.getPropertyValue("padding-block")).toBe(
-        "1.71429rem",
-      );
     });
-  });
 
-  test("places expected padding on appElement", async () => {
-    const rootElement = document.createElement("div");
+    test("medium width", async () => {
+      await page.viewport(defaultUiShellBreakpointConfig.medium, PAGE_HEIGHT);
 
-    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
-    document.body.append(rootElement);
+      const container = getContainer();
 
-    const appElement = document.createElement("div");
+      await waitFor(() => {
+        expect(within(container).getByText(appName)).not.toBeVisible();
+        expect(within(container).getByText(itemLabel)).not.toBeVisible();
+      });
+    });
 
-    document.body.append(appElement);
+    test("wide width", async () => {
+      await page.viewport(defaultUiShellBreakpointConfig.wide, PAGE_HEIGHT);
 
-    const uiShellStylesElement = document.createElement("div");
+      const container = getContainer();
 
-    render(
-      <UiShell
-        appElement={appElement}
-        appElementScrollingMode="none"
-        hasStandardAppContentPadding={false}
-        onSubscriptionCreated={() => {}}
-        subscribeToPropChanges={() => () => {}}
-        uiShellAppElement={document.createElement("div")}
-        uiShellStylesElement={uiShellStylesElement}
-      />,
-    );
-
-    await waitFor(() => {
-      expect(appElement.style.getPropertyValue("position")).toBe("absolute");
-
-      expect(appElement.style.getPropertyValue("overflow-x")).toBe("hidden");
-
-      expect(appElement.style.getPropertyValue("overflow-y")).toBe("hidden");
-
-      expect(appElement.style.getPropertyValue("padding-inline")).toBe("");
-
-      expect(appElement.style.getPropertyValue("padding-block")).toBe("");
+      await waitFor(() => {
+        expect(within(container).getByText(appName)).toBeVisible();
+        expect(within(container).getByText(itemLabel)).toBeVisible();
+      });
     });
   });
 });
