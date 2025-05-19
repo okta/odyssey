@@ -144,6 +144,7 @@ const UiShell = ({
                 {...componentProps}
                 appElement={appElement}
                 appElementScrollingMode={appElementScrollingMode}
+                hasSideNavProps={Boolean(componentProps.sideNavProps)}
                 hasStandardAppContentPadding={hasStandardAppContentPadding}
                 initialVisibleSections={initialVisibleSections}
                 onError={onError}
@@ -155,24 +156,24 @@ const UiShell = ({
               <WideUiShellContent
                 {...{
                   ...componentProps,
-                  ...(componentProps.sideNavProps
-                    ? {
-                        sideNavProps: {
-                          ...componentProps.sideNavProps,
-                          isCollapsed:
-                            activeBreakpoint === "medium" ||
-                            componentProps.sideNavProps?.isCollapsed,
-                          isCollapsible:
-                            activeBreakpoint === "medium" ||
-                            componentProps.sideNavProps?.isCollapsible,
-                          // We have to use `as` because sideNavProps expects you to have `sideNavItems` defined even though it had to be passed in `...componentProps.sideNavProps`.
-                        } as typeof componentProps.sideNavProps,
-                      }
-                    : {}),
+                  ...{
+                    sideNavProps: {
+                      ...componentProps.sideNavProps,
+                      hasSessionStorageState: activeBreakpoint === "wide",
+                      isCollapsed:
+                        activeBreakpoint === "medium" ||
+                        componentProps.sideNavProps?.isCollapsed,
+                      isCollapsible:
+                        activeBreakpoint === "medium" ||
+                        componentProps.sideNavProps?.isCollapsible,
+                      // We have to use `as` because sideNavProps expects you to have `sideNavItems` defined even though it had to be passed in `...componentProps.sideNavProps`.
+                    } as typeof componentProps.sideNavProps,
+                  },
                 }}
                 appElement={appElement}
                 appElementScrollingMode={appElementScrollingMode}
                 hasStandardAppContentPadding={hasStandardAppContentPadding}
+                hasSideNavProps={Boolean(componentProps.sideNavProps)}
                 initialVisibleSections={initialVisibleSections}
                 onError={onError}
                 optionalComponents={optionalComponents}

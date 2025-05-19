@@ -13,7 +13,7 @@
 import {
   type ByRoleOptions,
   type SelectorMatcherOptions,
-} from "@testing-library/dom";
+} from "@testing-library/react";
 
 import {
   type RoleSelectorMethod,
