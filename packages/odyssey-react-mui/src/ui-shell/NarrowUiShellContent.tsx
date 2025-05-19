@@ -246,6 +246,7 @@ const NarrowUiShellContent = ({
   appElement,
   appElementScrollingMode,
   hasStandardAppContentPadding = true,
+  hasSideNavProps,
   initialVisibleSections = ["TopNav", "SideNav", "AppSwitcher"],
   onError = console.error,
   optionalComponents,
@@ -385,14 +386,14 @@ const NarrowUiShellContent = ({
             {
               /* If SideNav should be initially visible and we have not yet received props, render SideNav with minimal inputs */
               initialVisibleSections?.includes("SideNav") &&
-                sideNavProps === undefined && (
+                !hasSideNavProps && (
                   <ErrorBoundary fallback={null} onError={onError}>
                     <SideNav isLoading sideNavItems={emptySideNavItems} />
                   </ErrorBoundary>
                 )
             }
 
-            {sideNavProps && (
+            {hasSideNavProps && sideNavProps && (
               <ErrorBoundary fallback={null} onError={onError}>
                 <StyledSideNavContainer>
                   <SideNav
