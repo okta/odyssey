@@ -237,6 +237,11 @@ export type DataTableProps = {
    * this doesn't do anything.
    */
   searchDelayTime?: number;
+  /** 
+   * Allows for external control of the selected row state
+   * use in tandem with onChangeRowSelection to manage your state
+   */
+  selectedRows?: DataTableRowSelectionState;
   /**
    * Callback that fires when a row (or rows) is selected or unselected.
    */
@@ -345,6 +350,7 @@ const DataTable = ({
   initialSearchValue = "",
   isPaginationMoreDisabled,
   noResultsPlaceholder,
+  selectedRows,
   onChangeRowSelection,
   onReorderRows,
   paginationType = "paged",
@@ -382,7 +388,6 @@ const DataTable = ({
     useState<MRT_VisibilityState>();
   const [rowDensity, setRowDensity] =
     useState<MRT_DensityState>(initialDensity);
-  const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
   const [search, setSearch] = useState<string>(initialSearchValue);
   const [filters, setFilters] = useState<DataFilter[]>();
   const [initialFilters, setInitialFilters] = useState<DataFilter[]>();
@@ -391,6 +396,8 @@ const DataTable = ({
   const [errorMessage, setErrorMessage] = useState<string | undefined>(
     errorMessageProp,
   );
+  const [_rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
+  const rowSelection = selectedRows || _rowSelection;
 
   useScrollIndication({
     tableOuterContainer: tableOuterContainerRef.current,
