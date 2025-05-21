@@ -14,10 +14,9 @@
  * Adds CSS specificity to class selectors by prepending a specified number of ampersands.
  * This function helps override MUI component styles by increasing selector specificity.
  *
- * @param {number} specificity - Number of ampersands to prepend (e.g., 2 results in "&&")
- * @param {...string} selectors - One or more selector strings to add specificity to.
- *                               The selectors are joined together without separator.
- *                               Include spaces in the parameters if needed for descendant selectors.
+ * @param {number} specificityCount - Number of ampersands to prepend (e.g., 2 results in "&&")
+ * @param {string} selector - The selector string to add specificity to.
+ *                            Include spaces in the selector if needed for descendant selectors.
  * @returns {string} The selector with added specificity
  *
  * @example
@@ -27,19 +26,19 @@
  * // Descendant selector: "&& .MuiButton-root"
  * addSpecificity(2, " .MuiButton-root")
  *
- * // Direct selector with class reference: "&&.MuiButton-root"
- * addSpecificity(2, ".", buttonClasses.root)
+ * // Direct selector with class reference:
+ * addSpecificity(2, `.${buttonClasses.root}`)
  *
- * // Descendant selector with class reference: "&& .MuiButton-root"
- * addSpecificity(2, " .", buttonClasses.root)
+ * // Descendant selector with class reference:
+ * addSpecificity(2, ` .${buttonClasses.root}`)
  *
- * // Multiple selectors combined: "&&.MuiButton-root:hover"
- * addSpecificity(2, ".MuiButton-root", ":hover")
+ * // Combined selector: "&&.MuiButton-root:hover"
+ * addSpecificity(2, ".MuiButton-root:hover")
  */
 export const addSpecificity = (
-  specificity: number,
-  ...selectors: string[]
+  specificityCount: number,
+  selector: string,
 ): string => {
-  const ampersands = "&".repeat(specificity);
-  return `${ampersands}${selectors.join("")}`;
+  const ampersands = "&".repeat(specificityCount);
+  return `${ampersands}${selector}`;
 };
