@@ -168,7 +168,7 @@ const DataView = <TData extends MRT_RowData>({
 
   useEffect(() => {
     onRowSelectionChange?.(rowSelection);
-  }, [rowSelection]);
+  }, [rowSelection, onRowSelectionChange]);
 
   const [pagination, setPagination] = useState({
     pageIndex: currentPage,
