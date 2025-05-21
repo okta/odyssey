@@ -23,20 +23,21 @@ describe("addSpecificity", () => {
 
   it("should work with class references", () => {
     const buttonClasses = { root: "MuiButton-root" };
-    expect(addSpecificity(2, ".", buttonClasses.root)).toBe(
+    expect(addSpecificity(2, `.${buttonClasses.root}`)).toBe(
       "&&.MuiButton-root",
     );
   });
 
   it("should work with descendant selector and class references", () => {
     const buttonClasses = { root: "MuiButton-root" };
-    expect(addSpecificity(2, " .", buttonClasses.root)).toBe(
+    expect(addSpecificity(2, ` .${buttonClasses.root}`)).toBe(
       "&& .MuiButton-root",
     );
   });
 
   it("should combine multiple selectors", () => {
-    expect(addSpecificity(2, ".MuiButton-root", ":hover")).toBe(
+    // Updated test to pass a single concatenated string instead of multiple params
+    expect(addSpecificity(2, ".MuiButton-root:hover")).toBe(
       "&&.MuiButton-root:hover",
     );
   });
@@ -47,8 +48,9 @@ describe("addSpecificity", () => {
   });
 
   it("should handle more complex selector combinations", () => {
-    expect(
-      addSpecificity(2, ".MuiButton-root", ":not(", ".MuiButton-disabled", ")"),
-    ).toBe("&&.MuiButton-root:not(.MuiButton-disabled)");
+    // Updated test to pass a single concatenated string
+    expect(addSpecificity(2, ".MuiButton-root:not(.MuiButton-disabled)")).toBe(
+      "&&.MuiButton-root:not(.MuiButton-disabled)",
+    );
   });
 });

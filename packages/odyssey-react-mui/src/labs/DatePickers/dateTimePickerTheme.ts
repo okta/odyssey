@@ -102,9 +102,9 @@ const theme: ThemeOptions = {
     MuiMultiSectionDigitalClock: {
       styleOverrides: {
         root: {
-          [`${addSpecificity(2, ".", multiSectionDigitalClockClasses.root)}, 
-            ${addSpecificity(2, " .", multiSectionDigitalClockSectionClasses.root)}, 
-            ${addSpecificity(2, ".", digitalClockClasses.root)}`]: {
+          [`${addSpecificity(2, `.${multiSectionDigitalClockClasses.root}`)}, 
+            ${addSpecificity(2, ` .${multiSectionDigitalClockSectionClasses.root}`)}, 
+            ${addSpecificity(2, `.${digitalClockClasses.root}`)}`]: {
             maxHeight: DateTimePickerComponentSize.dateCalendarMaxHeight,
           },
         },
