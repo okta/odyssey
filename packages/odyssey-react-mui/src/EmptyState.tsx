@@ -31,6 +31,12 @@ const EmptyContainer = styled("div", {
   alignItems: "center",
 }));
 
+const TextContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
+  maxWidth: odysseyDesignTokens.TypographyLineLengthMax,
+}));
+
 export type EmptyStateProps = {
   /**
    * Main heading of the empty state
@@ -60,8 +66,10 @@ const EmptyState = ({
 
   return (
     <EmptyContainer odysseyDesignTokens={odysseyDesignTokens}>
-      <Heading4>{heading}</Heading4>
-      <Paragraph>{description}</Paragraph>
+      <TextContainer odysseyDesignTokens={odysseyDesignTokens}>
+        <Heading4>{heading}</Heading4>
+        <Paragraph>{description}</Paragraph>
+      </TextContainer>
       {(PrimaryCallToActionComponent || SecondaryCallToActionComponent) && (
         <Box sx={{ marginBlockStart: 5 }}>
           {SecondaryCallToActionComponent}
