@@ -10,6 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+/**
+ * blah blah
+ */
 export type ReactRootElements = {
   /**
    * The element your root React component renders into.
