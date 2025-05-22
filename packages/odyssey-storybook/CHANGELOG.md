@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.37.1](https://github.com/okta/odyssey/compare/v1.37.0...v1.37.1) (2025-05-22)
+
+### Bug Fixes
+
+- side nav collapsed with session state in medium view ([#2549](https://github.com/okta/odyssey/issues/2549)) ([dad8f8b](https://github.com/okta/odyssey/commit/dad8f8b036c03f9298f24f4c74d8d4e8553357f9))
+
 ## [1.37.0](https://github.com/okta/odyssey/compare/v1.36.1...v1.37.0) (2025-05-15)
 
 **Note:** Version bump only for package @okta/odyssey-storybook
