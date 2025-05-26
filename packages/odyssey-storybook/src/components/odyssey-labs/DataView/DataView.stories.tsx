@@ -176,6 +176,11 @@ const meta = {
     renderDetailPanel: {
       name: "tableLayoutOptions.renderDetailPanel",
     },
+    expandColumnPosition: {
+      control: "number",
+      description:
+        "If given a position, expand button will be placed in that particular position.",
+    },
     rowActionButtons: {
       name: "tableLayoutOptions.rowActionButtons",
     },
@@ -526,6 +531,7 @@ export const ExpandableRowsAndCards: Story = {
         tableLayoutOptions={{
           columns: personColumns,
           renderDetailPanel: renderAdditionalContent,
+          expandColumnPosition: 0,
         }}
         cardLayoutOptions={{
           itemProps: itemProps,
