@@ -28,7 +28,7 @@ import {
   DataRowSelectionState,
   DataTableColumn,
 } from "./dataTypes.js";
-import { MenuButtonProps } from "../../index.js";
+import { MenuButtonProps } from "../../Buttons/MenuButton.js";
 import { paginationTypeValues } from "../DataTablePagination.js";
 import { DataCardProps } from "./DataCard.js";
 import { type PaginationProps } from "../../Pagination/index.js";
