@@ -179,7 +179,7 @@ const meta = {
     expandColumnPosition: {
       control: "number",
       description:
-        "If given a position, expand button will be placed in that particular position.",
+        "If given a position, expand button will be placed in that particular position. Only applicable in Table view.",
     },
     rowActionButtons: {
       name: "tableLayoutOptions.rowActionButtons",
