@@ -90,6 +90,7 @@ const theme: ThemeOptions = {
     MuiPickersLayout: {
       styleOverrides: {
         root: () => ({
+          display: "block",
           width: DateTimePickerSize.maxWidth,
           maxWidth: DateTimePickerSize.maxWidth,
         }),
