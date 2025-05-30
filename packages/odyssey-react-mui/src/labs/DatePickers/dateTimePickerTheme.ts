@@ -13,11 +13,23 @@
 // import { CSSInterpolation } from "@mui/material/styles";
 import { deepmerge } from "@mui/utils";
 import { ThemeOptions } from "@mui/material";
-
+import { digitalClockClasses } from "@mui/x-date-pickers/DigitalClock";
+import {
+  multiSectionDigitalClockSectionClasses,
+  multiSectionDigitalClockClasses,
+} from "@mui/x-date-pickers/MultiSectionDigitalClock";
 import {
   datePickerTheme,
   dateStyles,
 } from "../../DatePickers/datePickerTheme.js";
+import { DateTimePickerSize } from "./DateTimePicker.js";
+import { pxToRem } from "../../theme/index.js";
+import { addSpecificity } from "../../addSpecificity.js";
+
+const DateTimePickerComponentSize = {
+  dateCalendarMaxHeight: `${pxToRem(336)}rem`,
+  slideTransitionMinHeight: `${pxToRem(240)}rem`,
+};
 
 const theme: ThemeOptions = {
   components: {
@@ -49,6 +61,8 @@ const theme: ThemeOptions = {
         root: {
           display: "block",
           width: "100%",
+          maxHeight: DateTimePickerComponentSize.dateCalendarMaxHeight,
+          height: DateTimePickerComponentSize.dateCalendarMaxHeight,
         },
       },
     },
@@ -75,10 +89,26 @@ const theme: ThemeOptions = {
     },
     MuiPickersLayout: {
       styleOverrides: {
+        root: () => ({
+          display: "block",
+          width: DateTimePickerSize.maxWidth,
+          maxWidth: DateTimePickerSize.maxWidth,
+        }),
         contentWrapper: ({ theme }) => ({
           padding: theme.spacing(3),
           gridTemplateColumns: "1fr 16px auto",
         }),
+      },
+    },
+    MuiMultiSectionDigitalClock: {
+      styleOverrides: {
+        root: {
+          [`${addSpecificity(2, `.${multiSectionDigitalClockClasses.root}`)}, 
+            ${addSpecificity(2, ` .${multiSectionDigitalClockSectionClasses.root}`)}, 
+            ${addSpecificity(2, `.${digitalClockClasses.root}`)}`]: {
+            maxHeight: DateTimePickerComponentSize.dateCalendarMaxHeight,
+          },
+        },
       },
     },
     MuiMultiSectionDigitalClockSection: {
@@ -201,6 +231,13 @@ const theme: ThemeOptions = {
             },
           },
         }),
+      },
+    },
+    MuiDayCalendar: {
+      styleOverrides: {
+        slideTransition: {
+          minHeight: DateTimePickerComponentSize.slideTransitionMinHeight,
+        },
       },
     },
     MuiTimeClock: {
