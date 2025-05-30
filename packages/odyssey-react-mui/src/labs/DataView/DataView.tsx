@@ -124,6 +124,7 @@ const DataView = <TData extends MRT_RowData>({
   noResultsPlaceholder,
   onChangeRowSelection,
   onReorderRows,
+  onRowSelectionChange,
   paginationType = "paged",
   resultsPerPage = 20,
   searchDelayTime,
@@ -164,6 +165,10 @@ const DataView = <TData extends MRT_RowData>({
   useEffect(() => {
     onChangeRowSelection?.(rowSelection);
   }, [rowSelection, onChangeRowSelection]);
+
+  useEffect(() => {
+    onRowSelectionChange?.(rowSelection);
+  }, [rowSelection, onRowSelectionChange]);
 
   const [pagination, setPagination] = useState({
     pageIndex: currentPage,
