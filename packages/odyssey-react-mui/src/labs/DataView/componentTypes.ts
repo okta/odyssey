@@ -104,6 +104,7 @@ export type TableLayoutProps<TData extends MRT_RowData> = {
   hasSorting?: boolean;
   initialDensity?: MRT_DensityState;
   renderDetailPanel?: MRT_TableOptions<TData>["renderDetailPanel"];
+  expandColumnPosition?: number;
   rowActionButtons?: RowActionsProps<TData>["rowActionButtons"];
   rowActionMenuItems?: RowActionsProps<TData>["rowActionMenuItems"];
 };
