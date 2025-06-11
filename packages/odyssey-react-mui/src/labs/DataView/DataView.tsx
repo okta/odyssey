@@ -452,6 +452,7 @@ const DataView = <TData extends MRT_RowData>({
           tableLayoutOptions={tableLayoutOptions}
           tableState={tableState}
           totalRows={totalRows}
+          expandColumnPosition={tableLayoutOptions.expandColumnPosition}
         />
       )}
       {(currentLayout === "list" || currentLayout === "grid") &&

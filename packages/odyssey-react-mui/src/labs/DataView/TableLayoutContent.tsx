@@ -127,12 +127,20 @@ export type TableLayoutContentProps<TData extends MRT_RowData> = {
   tableLayoutOptions: TableLayoutProps<TData>;
   tableState: TableState;
   totalRows: UniversalProps<TData>["totalRows"];
+  expandColumnPosition?: TableLayoutProps<TData>["expandColumnPosition"];
 };
 
 type TableLayoutContentComponent = (<TData extends MRT_RowData>(
   props: TableLayoutContentProps<TData>,
 ) => JSX.Element) & {
   displayName?: string;
+};
+
+const TABLE_COLUMNS = {
+  ROW_DRAG: "mrt-row-drag",
+  ROW_SELECT: "mrt-row-select",
+  ROW_EXPAND: "mrt-row-expand",
+  ROW_ACTIONS: "mrt-row-actions",
 };
 
 const TableLayoutContent = <TData extends MRT_RowData>({
@@ -157,6 +165,7 @@ const TableLayoutContent = <TData extends MRT_RowData>({
   tableLayoutOptions,
   tableState,
   totalRows,
+  expandColumnPosition,
 }: TableLayoutContentProps<TData>) => {
   const [isTableContainerScrolledToStart, setIsTableContainerScrolledToStart] =
     useState(true);
@@ -184,17 +193,44 @@ const TableLayoutContent = <TData extends MRT_RowData>({
     return columns.map((column) => column.accessorKey) ?? [];
   }, [columns]);
 
-  const columnOrder = useMemo(
-    () => [
-      "mrt-row-drag",
-      "mrt-row-select",
-      "mrt-row-expand",
+  const columnOrder = useMemo(() => {
+    if (typeof expandColumnPosition === "number") {
+      // Get regular columns added by user
+      const regularColumns =
+        columnIds?.filter(
+          (id): id is string =>
+            typeof id === "string" &&
+            id !== TABLE_COLUMNS.ROW_DRAG &&
+            id !== TABLE_COLUMNS.ROW_SELECT &&
+            id !== TABLE_COLUMNS.ROW_EXPAND &&
+            id !== TABLE_COLUMNS.ROW_ACTIONS,
+        ) || [];
+
+      const baseColumns = [TABLE_COLUMNS.ROW_DRAG, TABLE_COLUMNS.ROW_SELECT];
+
+      // Place at specific position in the regularColumns
+      const position = Math.max(
+        0,
+        Math.min(regularColumns.length, expandColumnPosition),
+      );
+      return [
+        ...baseColumns,
+        ...regularColumns.slice(0, position),
+        TABLE_COLUMNS.ROW_EXPAND,
+        ...regularColumns.slice(position),
+        TABLE_COLUMNS.ROW_ACTIONS,
+      ];
+    }
+    // Original logic when expandColumnPosition is undefined
+    return [
+      TABLE_COLUMNS.ROW_DRAG,
+      TABLE_COLUMNS.ROW_SELECT,
+      TABLE_COLUMNS.ROW_EXPAND,
       ...(columnIds?.filter((id): id is string => typeof id === "string") ||
         []),
-      "mrt-row-actions",
-    ],
-    [columnIds],
-  );
+      TABLE_COLUMNS.ROW_ACTIONS,
+    ];
+  }, [columnIds, expandColumnPosition]);
 
   const rowDensityClassName = useMemo(() => {
     return tableState.rowDensity === "spacious"
