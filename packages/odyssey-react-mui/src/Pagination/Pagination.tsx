@@ -240,7 +240,7 @@ const Pagination = ({
     (event: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       if (event.key === "Enter") {
         onPaginationChange({
-          pageIndex: parseInt(event.currentTarget.value),
+          pageIndex: Number(event.currentTarget.value),
           pageSize: rowsPerPage,
         });
       }
@@ -253,7 +253,7 @@ const Pagination = ({
       if (event.key === "Enter") {
         onPaginationChange({
           pageIndex: page,
-          pageSize: parseInt(event.currentTarget.value),
+          pageSize: Number(event.currentTarget.value),
         });
       }
     },
@@ -263,8 +263,8 @@ const Pagination = ({
   const setPageFromEvent = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const value = maxPageIndex
-        ? Math.min(parseInt(event.target.value), maxPageIndex)
-        : parseInt(event.target.value);
+        ? Math.min(Number(event.target.value), maxPageIndex)
+        : Number(event.target.value);
       setPage(value);
     },
     [setPage, maxPageIndex],
@@ -273,8 +273,8 @@ const Pagination = ({
   const setRowsPerPageFromEvent = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const value = maxPageSize
-        ? Math.min(parseInt(event.target.value), maxPageSize)
-        : parseInt(event.target.value);
+        ? Math.min(Number(event.target.value), maxPageSize)
+        : Number(event.target.value);
 
       // Ensure the value can't be less than 1
       setRowsPerPage(Math.max(1, value));
