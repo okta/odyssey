@@ -265,7 +265,9 @@ const Pagination = ({
       const value = maxPageIndex
         ? Math.min(Number(event.target.value), maxPageIndex)
         : Number(event.target.value);
-      setPage(value);
+
+      // Ensure the value can't be less than 1
+      setPage(Math.max(1, value));
     },
     [setPage, maxPageIndex],
   );
