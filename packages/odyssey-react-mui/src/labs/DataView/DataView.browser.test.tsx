@@ -11,7 +11,7 @@
  */
 
 import { render, screen, waitFor, within } from "@testing-library/react";
-import { userEvent } from "@testing-library/user-event";
+import { userEvent } from "@vitest/browser/context";
 import { OdysseyProvider } from "../../OdysseyProvider.js";
 import { MRT_RowSelectionState } from "material-react-table";
 import { describe, test } from "vitest";
