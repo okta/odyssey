@@ -11,7 +11,7 @@
  */
 
 import { render, waitFor, within } from "@testing-library/react";
-import { userEvent } from "@testing-library/user-event";
+import { userEvent } from "@vitest/browser/context";
 import { Pagination } from "./Pagination.js";
 
 describe(Pagination.displayName!, () => {
@@ -323,5 +323,39 @@ describe(Pagination.displayName!, () => {
     expect(within(container).getByLabelText("Page")).toBeDisabled();
     expect(within(container).getByLabelText("Previous page")).toBeDisabled();
     expect(within(container).getByLabelText("Next page")).toBeDisabled();
+  });
+
+  test("prevents setting the page to values less than 1", async () => {
+    const user = userEvent.setup();
+    const onPaginationChange = vi.fn();
+
+    const { container } = render(
+      <Pagination
+        currentPageLabel="Page"
+        nextLabel="Next page"
+        previousLabel="Previous page"
+        rowsPerPageLabel="Rows per page"
+        loadMoreLabel="Load more"
+        totalRows={100}
+        lastRow={10}
+        pageIndex={1}
+        pageSize={10}
+        onPaginationChange={onPaginationChange}
+        variant="paged"
+        hasPageInput={true}
+      />,
+    );
+
+    const pageInput = within(container).getByRole<HTMLInputElement>(
+      "spinbutton",
+      {
+        name: "Page",
+      },
+    );
+    await user.click(pageInput);
+    await user.keyboard("{ArrowDown}");
+
+    // Assert that the value is still 1
+    expect(pageInput.value).toBe("1");
   });
 });
