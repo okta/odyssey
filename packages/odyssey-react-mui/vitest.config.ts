@@ -41,6 +41,17 @@ export default defineConfig({
         },
       },
       {
+        test: {
+          environment: "jsdom",
+          globals: true,
+          include: [
+            "**/DatePicker.jsdom.test.tsx, **/DateTimePicker.jsdom.test.tsx",
+          ],
+          name: "integration-jsdom",
+          setupFiles: ["./vitest-jsdom-setup.ts"],
+        },
+      },
+      {
         optimizeDeps: {
           include: ["@emotion/react/jsx-dev-runtime"],
         },
@@ -62,7 +73,7 @@ export default defineConfig({
           },
           globals: true,
           include: ["**/*.browser.test.{ts,tsx}"],
-          name: "integration",
+          name: "integration-browser",
           setupFiles: ["./vitest-browser-setup.ts"],
         },
       },
