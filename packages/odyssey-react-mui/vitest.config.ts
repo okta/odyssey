@@ -42,6 +42,7 @@ export default defineConfig({
       },
       {
         test: {
+          // TODO: revert these changes once MUI Upgrade is done, see OKTA-960544
           environment: "jsdom",
           globals: true,
           include: [
@@ -74,7 +75,7 @@ export default defineConfig({
           },
           globals: true,
           include: ["**/*.browser.test.{ts,tsx}"],
-          name: "integration-browser",
+          name: "browser",
           setupFiles: ["./vitest-browser-setup.ts"],
         },
       },
