@@ -45,7 +45,8 @@ export default defineConfig({
           environment: "jsdom",
           globals: true,
           include: [
-            "**/DatePicker.jsdom.test.tsx, **/DateTimePicker.jsdom.test.tsx",
+            "**/DatePicker.jsdom.test.tsx",
+            "**/DateTimePicker.jsdom.test.tsx",
           ],
           name: "integration-jsdom",
           setupFiles: ["./vitest-jsdom-setup.ts"],
