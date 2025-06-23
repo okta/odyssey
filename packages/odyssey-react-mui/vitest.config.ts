@@ -41,6 +41,19 @@ export default defineConfig({
         },
       },
       {
+        test: {
+          // TODO: revert these changes once MUI Upgrade is done, see OKTA-960544
+          environment: "jsdom",
+          globals: true,
+          include: [
+            "**/DatePicker.jsdom.test.tsx",
+            "**/DateTimePicker.jsdom.test.tsx",
+          ],
+          name: "integration-jsdom",
+          setupFiles: ["./vitest-jsdom-setup.ts"],
+        },
+      },
+      {
         optimizeDeps: {
           include: ["@emotion/react/jsx-dev-runtime"],
         },
@@ -62,7 +75,7 @@ export default defineConfig({
           },
           globals: true,
           include: ["**/*.browser.test.{ts,tsx}"],
-          name: "integration",
+          name: "browser",
           setupFiles: ["./vitest-browser-setup.ts"],
         },
       },
