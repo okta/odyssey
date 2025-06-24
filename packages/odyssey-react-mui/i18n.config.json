@@ -6,5 +6,6 @@
   "commitPrefix": "chore(odyssey-react-mui): ",
   "reviewers": ["okta/eng-globalizationcore", "okta/design-system"],
   "slackChannel": "odyssey",
-  "guardian": ""
+  "guardian": "",
+  "jiraComponent": "Team: UICore Odyssey"
 }
