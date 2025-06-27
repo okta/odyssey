@@ -749,6 +749,7 @@ describe("DataView", { timeout: 10000 }, () => {
             tableLayoutOptions={{
               columns,
               renderDetailPanel: tableDetails,
+              expandColumnPosition: 3,
             }}
           />
         </OdysseyProvider>,
@@ -760,6 +761,16 @@ describe("DataView", { timeout: 10000 }, () => {
       ).toBeNull();
 
       const firstBodyRow = (await screen.findAllByRole("row"))[1];
+      const cellsInRow = within(firstBodyRow).getAllByRole("cell");
+      const expandButtonCell = cellsInRow.find((cell) =>
+        within(cell).queryByLabelText("Expand", { selector: "button" }),
+      );
+      const expandButtonCellIndex = expandButtonCell
+        ? cellsInRow.indexOf(expandButtonCell)
+        : -1;
+
+      expect(expandButtonCellIndex).toBe(3);
+
       const firstBodyRowExpandButton = within(firstBodyRow).getByLabelText(
         "Expand",
         { selector: "button" },
