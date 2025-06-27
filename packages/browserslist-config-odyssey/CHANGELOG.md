@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.39.0 (2025-06-27)
+
+### Features
+
+- add DatePicker styles to Labs ([#1672](https://github.com/okta/odyssey/issues/1672)) ([f8d8b5e](https://github.com/okta/odyssey/commit/f8d8b5e4f8d30f8bce346e4dca47f88c8350a26b))
+- added missing `"sideEffects": false` to all packages ([61ee25b](https://github.com/okta/odyssey/commit/61ee25b461f27a473f1a82dcc1647e044fed8a3d))
+- **browserslist-config-odyssey:** add new package ([e324eae](https://github.com/okta/odyssey/commit/e324eaeac38337e6b0565af7feef267a8c92214b))
+- **browserslist-config-odyssey:** expose development and test configs ([5deb33a](https://github.com/okta/odyssey/commit/5deb33aa0715b0cffad427ba364af350d675282e))
+- **browserslist-config-odyssey:** make package public ([d0341bf](https://github.com/okta/odyssey/commit/d0341bfba4d9f1c55c80d663763abfef38e8c636))
+
+### Bug Fixes
+
+- another potential Lerna build order fix ([b4eb393](https://github.com/okta/odyssey/commit/b4eb39322204682e0b33dd76a7901370de754020))
+- bump version to 1.17 ([0e32aba](https://github.com/okta/odyssey/commit/0e32aba973ef00d5a872dbd408a84fb54c8a7408))
+- explicitly call yarn in prepack lifecycle script for lerna ([613d00a](https://github.com/okta/odyssey/commit/613d00a5912d51221d92d977d423ce0aa22b5a06))
+- inclusive language adjustments ([#1995](https://github.com/okta/odyssey/issues/1995)) ([82f4cb5](https://github.com/okta/odyssey/commit/82f4cb5290d418623c35fdb2504da37ab05a2d89))
+- updated Babel to latest to fix yarn install issues ([5eccaf0](https://github.com/okta/odyssey/commit/5eccaf0470eb6b6d36c36ce11301dbd7f7748652))
+- Upgrade every package ([#2136](https://github.com/okta/odyssey/issues/2136)) ([89b6534](https://github.com/okta/odyssey/commit/89b65342755a30d0e947f5ffb75e6bbe00268442))
+
 ## [1.38.0](https://github.com/okta/odyssey/compare/v1.37.1...v1.38.0) (2025-06-09)
 
 **Note:** Version bump only for package @okta/browserslist-config-odyssey

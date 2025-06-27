@@ -3,6 +3,70 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.39.0 (2025-06-27)
+
+### ⚠ BREAKING CHANGES
+
+- **odyssey-design-tokens:** Shadow tokens now utilize a scale palette, matching
+  color, spacing, and type.
+- **odyssey-design-tokens:** set space scale under "scale"
+- **odyssey-design-tokens:** removes prior space tokens from dict
+- **odyssey-design-tokens:** updates type tokens to match new scale
+- **odyssey-design-tokens:** migrates all focus tokens under Focus; renames outlines
+  tokens
+- **odyssey-design-tokens:** define explicit exports and module type
+- **odyssey-design-tokens:** renames "title" tokens to "heading"
+- **odyssey-react:** Text prop fontWeight "regular" renamed to "normal"
+- **odyssey-react:** Text props color "heading" "danger-disabled" and "code" removed
+- **odyssey-react:** Text prop fontSize "lede" removed
+- **odyssey-react:** Text props textTransform "full-width" and "full-size-kana" removed
+- **odyssey-react:** Text prop lineHeight "font" removed
+- **odyssey-react:** Text prop overflowWrap "anywhere" removed
+
+### Features
+
+- added missing `"sideEffects": false` to all packages ([61ee25b](https://github.com/okta/odyssey/commit/61ee25b461f27a473f1a82dcc1647e044fed8a3d))
+- **odyssey-design-tokens:** add heading color token ([2e55f7b](https://github.com/okta/odyssey/commit/2e55f7bf3ba1e1512df2cbd0afd13f59bd61a6d2))
+- **odyssey-design-tokens:** add new functional colors ([a7890f8](https://github.com/okta/odyssey/commit/a7890f8f69c5d3608254879bfb0c4853b1a0445e))
+- **odyssey-design-tokens:** add new spacing scale ([faf6f19](https://github.com/okta/odyssey/commit/faf6f19ff1f6a46d925724507ae37c7960685bb3))
+- **odyssey-design-tokens:** add space tokens ([e8ff2de](https://github.com/okta/odyssey/commit/e8ff2de7ed80e8ca6f51914e63873e006de721c3))
+- **odyssey-design-tokens:** add token for Caution Dark ([217dc74](https://github.com/okta/odyssey/commit/217dc743bfd6f431d8965ee9c6ddf94877d7ca23))
+- **odyssey-design-tokens:** add tokens for sizing, addl colors ([6b8d9a0](https://github.com/okta/odyssey/commit/6b8d9a0978f002e208dad9ee2c85b4309aeb0b30))
+- **odyssey-design-tokens:** add transition and line height tokens ([b8a1d9f](https://github.com/okta/odyssey/commit/b8a1d9f5f2ade6ea8c9e8a90759f70827b680946))
+- **odyssey-design-tokens:** make Neutral Dark color available ([a718368](https://github.com/okta/odyssey/commit/a7183684e885016c20ace0d8b3d23a5ad20b48d3))
+- **odyssey-design-tokens:** standardize focus styles for outline ([c6556a0](https://github.com/okta/odyssey/commit/c6556a0bf37011da8ab30082e748c22edf022283))
+- **odyssey-design-tokens:** updates type tokens to match new scale ([b763705](https://github.com/okta/odyssey/commit/b76370513ad7ea74c215de0f732698bc33b52436))
+- **odyssey-lifecycle:** add new package to reduce duplication for lifecycle scripts ([aff7760](https://github.com/okta/odyssey/commit/aff776066345b8942a7f94c2b1c47ccd8f6357b0))
+- **odyssey-react-mui:** add overline typography variant ([#2349](https://github.com/okta/odyssey/issues/2349)) ([4530f69](https://github.com/okta/odyssey/commit/4530f699dffc11117f366ca26826e7ca51f4f296))
+- **odyssey-react:** add base styles and theme variables to TextInput ([3216e72](https://github.com/okta/odyssey/commit/3216e7286dd3c42ebe693267669915158f2b120c))
+- **odyssey-react:** add themeing variables to Checkbox ([fbf79e5](https://github.com/okta/odyssey/commit/fbf79e5e158efb88b4c62b4776459caf147f8952))
+- **odyssey-react:** align theme variables between components ([97ee069](https://github.com/okta/odyssey/commit/97ee069cd6d0780ad01a1f75ce79aaaed1d50865))
+- **odyssey-react:** heading withTheme ([d8cbae5](https://github.com/okta/odyssey/commit/d8cbae50a3d1f82ee998ab072a0916272b9fa4ad))
+- **odyssey-react:** withTheme for Box ([6916b7a](https://github.com/okta/odyssey/commit/6916b7abb73ef3e3501ba30e649168c2ac24eb35))
+- **odyssey-react:** withTheme for Button ([fe466a7](https://github.com/okta/odyssey/commit/fe466a7099c201704de1452052e02e61f65dadf0))
+- **odyssey-react:** withTheme for Text ([83ddd3f](https://github.com/okta/odyssey/commit/83ddd3f534156e545d8e37725d88c0e778361d2f))
+- **odyssey-tokens:** adds odyssey-tokens package ([#1124](https://github.com/okta/odyssey/issues/1124)) ([a7ecd65](https://github.com/okta/odyssey/commit/a7ecd6519464ebbf9ccd84a15cdc21c138adc969))
+
+### Bug Fixes
+
+- another potential Lerna build order fix ([b4eb393](https://github.com/okta/odyssey/commit/b4eb39322204682e0b33dd76a7901370de754020))
+- bump version to 1.17 ([0e32aba](https://github.com/okta/odyssey/commit/0e32aba973ef00d5a872dbd408a84fb54c8a7408))
+- explicitly call yarn in prepack lifecycle script for lerna ([613d00a](https://github.com/okta/odyssey/commit/613d00a5912d51221d92d977d423ce0aa22b5a06))
+- generate scss file to include in published package ([#2482](https://github.com/okta/odyssey/issues/2482)) ([e0352e5](https://github.com/okta/odyssey/commit/e0352e52be9c272c29e516ec85403e8726f6dee9))
+- inclusive language adjustments ([#1995](https://github.com/okta/odyssey/issues/1995)) ([82f4cb5](https://github.com/okta/odyssey/commit/82f4cb5290d418623c35fdb2504da37ab05a2d89))
+- Next.js esm and cjs issues with SSR ([#2491](https://github.com/okta/odyssey/issues/2491)) ([8f0ac43](https://github.com/okta/odyssey/commit/8f0ac431cb398bf07e8946fc4eb915044916f239))
+- **odyssey-design-tokens:** fix em to rem ([4774ae5](https://github.com/okta/odyssey/commit/4774ae58616d90d6db3715aeb3c49eb351efe1cf))
+- Upgrade every package ([#2136](https://github.com/okta/odyssey/issues/2136)) ([89b6534](https://github.com/okta/odyssey/commit/89b65342755a30d0e947f5ffb75e6bbe00268442))
+- upgraded libraries depending on minimist ([29dfd9b](https://github.com/okta/odyssey/commit/29dfd9bd1503277bde0217beb33c15ef4f541736))
+
+### Code Refactoring
+
+- **odyssey-design-tokens:** define explicit exports and module type ([fdb56c5](https://github.com/okta/odyssey/commit/fdb56c552b8f7e876969ccdcf583522a727c776b))
+- **odyssey-design-tokens:** removes prior space tokens from dict ([f35b3f5](https://github.com/okta/odyssey/commit/f35b3f5878df7dd94864bfdb4f5143ae724cb244))
+- **odyssey-design-tokens:** renames "title" tokens to "heading" ([fd650fd](https://github.com/okta/odyssey/commit/fd650fdd4c5d57ebdba83445877db833076c7098))
+- **odyssey-design-tokens:** set space scale under "scale" ([5ddbe65](https://github.com/okta/odyssey/commit/5ddbe65ea5844365389aef98599444734c47bda3))
+- **odyssey-design-tokens:** update Shadow names and styles ([78d0fc7](https://github.com/okta/odyssey/commit/78d0fc75a24cfda4239379bf27b39893b02cbe7d))
+
 ## [1.38.0](https://github.com/okta/odyssey/compare/v1.37.1...v1.38.0) (2025-06-09)
 
 **Note:** Version bump only for package @okta/odyssey-design-tokens

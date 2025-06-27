@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.39.0 (2025-06-27)
+
+### ⚠ BREAKING CHANGES
+
+- **odyssey-icons:** icons deleted and renamed
+
+### Features
+
+- added missing `"sideEffects": false` to all packages ([61ee25b](https://github.com/okta/odyssey/commit/61ee25b461f27a473f1a82dcc1647e044fed8a3d))
+- **odyssey-icons:** add arrow-up-down asset ([b6a3872](https://github.com/okta/odyssey/commit/b6a38729d03378596ed92b55727a834596c6360d))
+- **odyssey-icons:** add eye and eye off icons ([d44a241](https://github.com/okta/odyssey/commit/d44a241537fa84fcf7679b7e96e52655d83d846f))
+- **odyssey-icons:** add UserGroup assets ([b205264](https://github.com/okta/odyssey/commit/b205264b1bab5f7f9a2278024ef647436248e54d))
+- **odyssey-icons:** update icons with new designs ([c46a433](https://github.com/okta/odyssey/commit/c46a4338e85ae5d48339fe7c1c0b5902adacb6f1))
+- **odyssey-react-mui:** add Icon components ([9ba7b4b](https://github.com/okta/odyssey/commit/9ba7b4bdbc17fed37d54e68406dc3527bfc7d703))
+- **odyssey-react:** add arrow and caret ui indicators ([bb64905](https://github.com/okta/odyssey/commit/bb64905f4c01f74580c9a0f5c9c526748ff74dd8))
+
+### Bug Fixes
+
+- Icon generation now using newest version of SVGR and SVGO ([#1755](https://github.com/okta/odyssey/issues/1755)) ([89a30a3](https://github.com/okta/odyssey/commit/89a30a3685d1bd1600abf3876d910a19ff236f9b))
+- **odyssey-icons:** remove svgo yml ([35f26ed](https://github.com/okta/odyssey/commit/35f26eda4da9850834898a42c5e79ca479bffa2a))
+- Upgrade every package ([#2136](https://github.com/okta/odyssey/issues/2136)) ([89b6534](https://github.com/okta/odyssey/commit/89b65342755a30d0e947f5ffb75e6bbe00268442))
+- upgraded libraries depending on minimist ([29dfd9b](https://github.com/okta/odyssey/commit/29dfd9bd1503277bde0217beb33c15ef4f541736))
+
 ## [1.15.9](https://github.com/okta/odyssey/compare/v1.15.8...v1.15.9) (2024-03-26)
 
 **Note:** Version bump only for package @okta/odyssey-icons
