@@ -33,5 +33,6 @@
   },
   "peerDependencies": {
     "eslint": "^9.14.0"
-  }
+  },
+  "version": "1.39.0"
 }
