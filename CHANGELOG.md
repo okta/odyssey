@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.39.1](https://github.com/okta/odyssey/compare/v1.39.0...v1.39.1) (2025-07-02)
+
+### Bug Fixes
+
+- improve scroll detection for longer lists with useScrollState ([#2566](https://github.com/okta/odyssey/issues/2566)) ([baf0785](https://github.com/okta/odyssey/commit/baf07858493074c911b1fe65227d0214de29ca88))
+
 ## 1.39.0(2025-07-02)
 
 ### ⚠ BREAKING CHANGES
