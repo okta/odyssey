@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.39.0(2025-07-02)
+
+### Features
+
+- added missing `"sideEffects": false` to all packages ([61ee25b](https://github.com/okta/odyssey/commit/61ee25b461f27a473f1a82dcc1647e044fed8a3d))
+- adds the ability to render an encapsulated Unified UI Shell ([#2373](https://github.com/okta/odyssey/issues/2373)) ([f964a29](https://github.com/okta/odyssey/commit/f964a29c7eb956fc05cb16fd51963a03c6b08507))
+- no invalid theme properties eslint rule ([847d506](https://github.com/okta/odyssey/commit/847d5061f18e1ad6372cb538b559e136535bca33))
+
+### Bug Fixes
+
+- another potential Lerna build order fix ([b4eb393](https://github.com/okta/odyssey/commit/b4eb39322204682e0b33dd76a7901370de754020))
+- nested scroll containers dynamically handled by UI Shell ([#2529](https://github.com/okta/odyssey/issues/2529)) ([94dd7ca](https://github.com/okta/odyssey/commit/94dd7ca53c578c02652d40985734613086842b73))
+- Upgrade every package ([#2136](https://github.com/okta/odyssey/issues/2136)) ([89b6534](https://github.com/okta/odyssey/commit/89b65342755a30d0e947f5ffb75e6bbe00268442))
+- upgraded @typescript-eslint/\* packages to remove ESLint plugin warning about estree ([bd9a3af](https://github.com/okta/odyssey/commit/bd9a3af5f316c3b9b5f368a146c967c77bab7a2d))
+- upgraded eslint-plugin-import ([c37a96e](https://github.com/okta/odyssey/commit/c37a96eade7804acb8424ad24da2be52228ca373))
+
 ## [1.15.9](https://github.com/okta/odyssey/compare/v1.15.8...v1.15.9) (2024-03-26)
 
 **Note:** Version bump only for package @okta/odyssey-eslint-config

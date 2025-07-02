@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.39.0(2025-07-02)
+
+### Features
+
+- add DatePicker styles to Labs ([#1672](https://github.com/okta/odyssey/issues/1672)) ([f8d8b5e](https://github.com/okta/odyssey/commit/f8d8b5e4f8d30f8bce346e4dca47f88c8350a26b))
+- added missing `"sideEffects": false` to all packages ([61ee25b](https://github.com/okta/odyssey/commit/61ee25b461f27a473f1a82dcc1647e044fed8a3d))
+- **odyssey-typescript:** refactor tsconfig ([f0933f8](https://github.com/okta/odyssey/commit/f0933f8d1528e0217405b04b0ee854ea0298f5c0))
+- **odyssey-typescript:** type declaration tsconfig ([9692749](https://github.com/okta/odyssey/commit/9692749505dc4cf8b9dc3cf2b7f5b6dd3c45f8a9))
+- **odyssey-typescript:** upgrade to 4.4.2 ([6133699](https://github.com/okta/odyssey/commit/6133699295aee655178ac9564f98668c4db665bc))
+
+### Bug Fixes
+
+- added TypeScript project references for VSCode ([#1708](https://github.com/okta/odyssey/issues/1708)) ([44e2783](https://github.com/okta/odyssey/commit/44e2783b6a87bca49fb1d5bcffa45b22adc77bbc))
+- fixes building MUI styles in Storybook ([#2460](https://github.com/okta/odyssey/issues/2460)) ([e65f615](https://github.com/okta/odyssey/commit/e65f6154176f92bad6f171a245a7036046107d57))
+- updated Babel to latest to fix yarn install issues ([5eccaf0](https://github.com/okta/odyssey/commit/5eccaf0470eb6b6d36c36ce11301dbd7f7748652))
+- Upgrade every package ([#2136](https://github.com/okta/odyssey/issues/2136)) ([89b6534](https://github.com/okta/odyssey/commit/89b65342755a30d0e947f5ffb75e6bbe00268442))
+
 ## [1.15.9](https://github.com/okta/odyssey/compare/v1.15.8...v1.15.9) (2024-03-26)
 
 **Note:** Version bump only for package @okta/odyssey-typescript
