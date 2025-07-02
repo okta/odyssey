@@ -14,17 +14,16 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 export const getIsScrollHeightElement = ({
   containerElement,
-  scrollableElement,
+  element,
 }: {
   containerElement: HTMLElement;
-  scrollableElement: HTMLElement;
+  element: HTMLElement;
 }) => {
   const containerElementHeight =
     containerElement.getBoundingClientRect().height;
-  const scrollableElementHeight =
-    scrollableElement.getBoundingClientRect().height;
+  const elementHeight = element.getBoundingClientRect().height;
 
-  return scrollableElementHeight - containerElementHeight >= 0;
+  return elementHeight - containerElementHeight >= 0;
 };
 
 export const getIsYAxisScrollContainer = (element: HTMLElement) => {
@@ -40,12 +39,14 @@ export const getIsYAxisScrolling = (element: HTMLElement) =>
 
 export const getNestedScrollContainers = (containerElement: HTMLElement) =>
   Array.from(containerElement.querySelectorAll<HTMLElement>("*"))
-    .filter((element) => getIsYAxisScrollContainer(element))
-    .filter((scrollableElement) =>
+    .filter((element) =>
       getIsScrollHeightElement({
         containerElement,
-        scrollableElement,
+        element,
       }),
+    )
+    .filter((scrollHeightElement) =>
+      getIsYAxisScrollContainer(scrollHeightElement),
     );
 
 export const fakeDefaultContainerElement = document.createElement("div");
