@@ -72,7 +72,7 @@ describe(getIsScrollHeightElement.name, () => {
       expect(
         getIsScrollHeightElement({
           containerElement,
-          scrollableElement,
+          element: scrollableElement,
         }),
       ).toBe(true);
     });
@@ -88,7 +88,7 @@ describe(getIsScrollHeightElement.name, () => {
       expect(
         getIsScrollHeightElement({
           containerElement,
-          scrollableElement,
+          element: scrollableElement,
         }),
       ).toBe(true);
     });
@@ -104,7 +104,7 @@ describe(getIsScrollHeightElement.name, () => {
       expect(
         getIsScrollHeightElement({
           containerElement,
-          scrollableElement,
+          element: scrollableElement,
         }),
       ).toBe(false);
     });
