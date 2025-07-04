@@ -79,7 +79,8 @@ interface DrawerStyleProps {
   showDividers: boolean;
 }
 const DrawerHeader = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "showDividers",
 })<DrawerStyleProps>`
   position: sticky;
   top: 0;
@@ -105,7 +106,8 @@ const DrawerContentWrapper = styled("div", {
 `;
 
 const DrawerContent = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "showDividers",
 })<DrawerStyleProps>`
   padding: ${({ showDividers, odysseyDesignTokens }) =>
     showDividers
@@ -114,7 +116,8 @@ const DrawerContent = styled("div", {
 `;
 
 const DrawerFooter = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "showDividers",
 })<DrawerStyleProps>`
   position: sticky;
   bottom: 0;
