@@ -169,7 +169,7 @@ const meta = {
       },
     },
     showDividers: {
-      control: "text",
+      control: "boolean",
       description:
         "Shows divider lines separating header, content, and footer (if using action buttons)",
       table: {
