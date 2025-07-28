@@ -132,7 +132,8 @@ export type SideNavToggleButtonProps = {
 };
 
 // This allows us to mutate the value with TypeScript. A singleton is fine because it gets overridden on render.
-const defaultLocalButton = document.createElement("button");
+const defaultLocalButton =
+  typeof window === "undefined" ? null : document.createElement("button");
 
 const SideNavToggleButton = ({
   ariaControls,
@@ -158,27 +159,31 @@ const SideNavToggleButton = ({
     };
 
     const setFocusHighlighted = () => {
-      onHighlight?.(buttonRef.current.matches(":focus-visible"));
+      onHighlight?.(Boolean(buttonRef.current?.matches(":focus-visible")));
     };
 
-    buttonRef.current.addEventListener("mouseenter", setHighlighted);
+    buttonRef.current?.addEventListener("mouseenter", setHighlighted);
 
-    buttonRef.current.addEventListener("mouseleave", setUnhighlighted);
+    buttonRef.current?.addEventListener("mouseleave", setUnhighlighted);
 
-    buttonRef.current.addEventListener("focus", setFocusHighlighted, true);
+    buttonRef.current?.addEventListener("focus", setFocusHighlighted, true);
 
-    buttonRef.current.addEventListener("blur", setFocusHighlighted, true);
+    buttonRef.current?.addEventListener("blur", setFocusHighlighted, true);
 
     setUnhighlighted();
 
     return () => {
-      buttonRef.current.removeEventListener("mouseenter", setHighlighted);
+      buttonRef.current?.removeEventListener("mouseenter", setHighlighted);
 
-      buttonRef.current.removeEventListener("mouseleave", setUnhighlighted);
+      buttonRef.current?.removeEventListener("mouseleave", setUnhighlighted);
 
-      buttonRef.current.removeEventListener("focus", setFocusHighlighted, true);
+      buttonRef.current?.removeEventListener(
+        "focus",
+        setFocusHighlighted,
+        true,
+      );
 
-      buttonRef.current.removeEventListener("blur", setFocusHighlighted, true);
+      buttonRef.current?.removeEventListener("blur", setFocusHighlighted, true);
     };
   }, [onHighlight]);
 

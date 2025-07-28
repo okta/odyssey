@@ -92,12 +92,7 @@ const preview: Preview = {
       storySort: {
         method: "alphabetical",
         order: [
-          "Welcome",
-          ["Introduction (README)", "Docs Status"],
-          "Installation",
           "Odyssey-React-MUI",
-          "Guidelines",
-          "Contributing",
           "MUI Components",
           "Labs Components",
           "UI Shell Components",

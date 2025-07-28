@@ -98,7 +98,7 @@ export const Breadcrumb = ({
 
   if (breadcrumbType === "menuItem") {
     return (
-      <MenuItem onClick={onClickHandler} href={href}>
+      <MenuItem onClick={onClickHandler} href={href} component="a">
         {breadcrumbContent}
       </MenuItem>
     );

@@ -143,7 +143,7 @@ Follow these steps for local [Odyssey development](https://odyssey-storybook.okt
 
 ## License
 
-[Apache Version 2.0](https://github.com/okta/odyssey/blob/main/LICENSE)
+[Apache Version 2.0](https://github.com/atko-eng/odyssey-design-system/blob/master/LICENSE)
 
 ## Support Disclaimer
 

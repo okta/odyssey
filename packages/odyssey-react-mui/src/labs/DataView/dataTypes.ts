@@ -76,7 +76,7 @@ export type DataOnReorderRowsType = {
 
 export type DataRowSelectionState = MRT_RowSelectionState;
 
-// Provided for backwards compatibilty with old DataTable types
+// Provided for backwards compatibility with old DataTable types
 export type DataTableGetDataType = DataGetDataType;
 export type DataTableOnReorderRowsType = DataOnReorderRowsType;
 export type DataTableRowSelectionState = DataRowSelectionState;
