@@ -19,7 +19,7 @@ import {
   Tooltip,
 } from "@okta/odyssey-react-mui";
 
-import rawData from "./roadmap.json";
+import roadmapData from "./roadmap.json" with { type: "json" };
 
 export type OdysseyComponent = {
   name: string;
@@ -31,7 +31,7 @@ export type OdysseyComponent = {
   deliverableTiming: string;
 };
 
-export const data: OdysseyComponent[] = rawData as OdysseyComponent[];
+export const data: OdysseyComponent[] = roadmapData as OdysseyComponent[];
 
 const severityMap = new Map<string, (typeof statusSeverityValues)[number]>([
   ["Released", "success"],

@@ -12,6 +12,7 @@ import {
   TypographyFamilyBody,
   TypographyFamilyMono,
 } from "@okta/odyssey-design-tokens";
+import packageJson from "../package.json";
 
 export default create({
   base: "light",
@@ -44,7 +45,7 @@ export default create({
   inputTextColor: TypographyColorBody,
   inputBorderRadius: 4,
 
-  brandTitle: "Odyssey Design System",
+  brandTitle: `Odyssey Design System v${packageJson.version}`,
   //brandUrl: 'https://odyssey.okta.com',
   //brandImage: 'https://place-hold.it/350x150',
 });

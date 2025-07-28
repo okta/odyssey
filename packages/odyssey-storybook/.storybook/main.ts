@@ -46,7 +46,10 @@ const config: StorybookConfig = {
     name: getAbsolutePath("@storybook/react-vite"),
     options: {},
   },
-  stories: ["../src/**/*.stories.@(js|jsx|ts|tsx)", "../src/**/*.mdx"],
+  stories: [
+    "../src/**/*.stories.@(js|jsx|ts|tsx)",
+    "../src/components/**/*.mdx",
+  ],
   typescript: {
     check: false,
     reactDocgen: "react-docgen-typescript",

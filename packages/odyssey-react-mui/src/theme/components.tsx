@@ -1212,6 +1212,7 @@ export const getComponents = ({
 
       label: {
         padding: 0,
+        flex: 1,
 
         [`.${inputBaseClasses.root}.${inputBaseClasses.disabled} &`]: {
           color: odysseyTokens.TypographyColorDisabled,

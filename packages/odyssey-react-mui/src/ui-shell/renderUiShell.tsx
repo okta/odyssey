@@ -166,8 +166,8 @@ export const renderUiShell = ({
         />
       </ErrorBoundary>
     ),
-    webComponentParentElement: parentElement,
     webComponentChildren,
+    webComponentParentElement: parentElement,
   });
 
   const unsubscribeFromUnifiedUiShellRendered = subscribeToReactAppSubscribed(

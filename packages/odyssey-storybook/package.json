@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-storybook",
-  "version": "1.39.1",
+  "version": "1.41.1",
   "description": "Documentation for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/okta/odyssey",
+    "url": "https://github.com/atko-eng/odyssey-design-system",
     "directory": "packages/odyssey-storybook"
   },
   "devDependencies": {
@@ -48,13 +48,12 @@
     "concurrently": "^8.2.2",
     "http-server": "^14.1.1",
     "markdown-to-jsx": "^7.4.1",
-    "playwright": "^1.52.0",
-    "prop-types": "^15.8.1",
+    "playwright": "^1.53.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "storybook": "^8.6.14",
     "storybook-addon-rtl": "^1.1.0",
-    "typescript": "^5.6.3",
+    "typescript": "^5.8.3",
     "vite": "^6.3.5",
     "wait-on": "^7.2.0"
   },

@@ -106,9 +106,9 @@ export const useAutocomplete = <
   }, [defaultValue, hasMultipleChoices, value]);
 
   const valueProps = useInputValues({
-    defaultValue: defaultValueProp,
-    value: value,
     controlState: controlledStateRef.current,
+    defaultValue: defaultValueProp,
+    value,
   });
 
   const inputValueProp = useMemo(() => {

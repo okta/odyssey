@@ -1,6 +1,6 @@
 {
   "name": "@okta/browserslist-config-odyssey",
-  "version": "1.39.1",
+  "version": "1.41.1",
   "description": "Browserslist config for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -9,7 +9,7 @@
   "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/okta/odyssey",
+    "url": "https://github.com/atko-eng/odyssey-design-system",
     "directory": "packages/browserslist-config-odyssey"
   },
   "scripts": {
@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@okta/odyssey-typescript": "workspace:*",
-    "rimraf": "^5.0.1",
-    "typescript": "^5.6.3"
+    "rimraf": "^6.0.1",
+    "typescript": "^5.8.3"
   }
 }

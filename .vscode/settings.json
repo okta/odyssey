@@ -1,7 +1,4 @@
 {
   "eslint.experimental.useFlatConfig": true,
-  "eslint.options": {
-    "flags": ["unstable_ts_config"]
-  },
   "typescript.tsdk": "node_modules/typescript/lib"
 }

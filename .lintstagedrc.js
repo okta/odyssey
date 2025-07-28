@@ -12,5 +12,5 @@
 
 module.exports = {
   "*": "prettier --ignore-unknown --loglevel warn --write",
-  "*.{js,jsx,ts,tsx}": "eslint --flag unstable_ts_config",
+  "*.{js,jsx,ts,tsx}": "eslint",
 };

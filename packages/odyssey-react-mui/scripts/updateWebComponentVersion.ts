@@ -11,7 +11,8 @@
  */
 
 import { writeFile } from "node:fs/promises";
-import { version } from "../package.json" with { type: "json" };
+
+import packageJson from "../package.json" with { type: "json" };
 
 const content = `/*!
  * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
@@ -30,7 +31,8 @@ const content = `/*!
  * This file is managed by scripts/updateWebComponentVersion.ts and any changes made will be overwritten
  * This script only needs to be run during release, and shouldn't be used during local development.
  */
-export default "${version.replaceAll(".", "-")}";
+
+export default "${packageJson.version.replaceAll(".", "-")}";
 `;
 
 const versionFile = import.meta

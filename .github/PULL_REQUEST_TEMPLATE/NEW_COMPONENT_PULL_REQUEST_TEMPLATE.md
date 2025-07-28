@@ -19,7 +19,7 @@ Thank you for contributing! Please follow the steps below to help us process you
 
 ## Component checklist
 
-<!-- Pease track and mark relevant items as part of the component development process. Remove any non-applicable items. -->
+<!-- Please track and mark relevant items as part of the component development process. Remove any non-applicable items. -->
 
 ### Code structure
 

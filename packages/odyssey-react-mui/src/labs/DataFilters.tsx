@@ -460,7 +460,7 @@ const DataFilters = ({
         >
           {filtersProp.map((filter) => {
             // Unintuitively, we can't just use filter.value to grab the filter value.
-            // `filter` is the initial set of filters provided to the comoponent, so its
+            // `filter` is the initial set of filters provided to the component, so its
             // value prop may not reflect the current value of the filter.
             const latestFilterValue = filters.find(
               (f) => f.id === filter.id,
