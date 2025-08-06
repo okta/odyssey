@@ -67,6 +67,7 @@ export const renderUiShell = ({
   onRender,
   parentElement,
   sideNavBackgroundColor,
+  sideNavBackgroundContrastColor,
   topNavBackgroundColor,
 }: {
   /**
@@ -90,6 +91,7 @@ export const renderUiShell = ({
   | "hasStandardAppContentPadding"
   | "initialVisibleSections"
   | "sideNavBackgroundColor"
+  | "sideNavBackgroundContrastColor"
   | "topNavBackgroundColor"
 > &
   Partial<Pick<UiShellProps, "appElement">>) => {
@@ -157,6 +159,7 @@ export const renderUiShell = ({
             ),
           )}
           sideNavBackgroundColor={sideNavBackgroundColor}
+          sideNavBackgroundContrastColor={sideNavBackgroundContrastColor}
           subscribeToCloseRightSideMenu={subscribeToCloseRightSideMenu}
           subscribeToCloseSideNavMenu={subscribeToCloseSideNavMenu}
           subscribeToPropChanges={subscribeToPropChanges}
@@ -166,8 +169,8 @@ export const renderUiShell = ({
         />
       </ErrorBoundary>
     ),
-    webComponentParentElement: parentElement,
     webComponentChildren,
+    webComponentParentElement: parentElement,
   });
 
   const unsubscribeFromUnifiedUiShellRendered = subscribeToReactAppSubscribed(

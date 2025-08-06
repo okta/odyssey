@@ -89,7 +89,6 @@ const StyledLeftSideContainer = styled("div", {
   display: isOpen ? "block" : "none",
   height: "100%",
   gridArea: "left-side",
-  overflowY: "auto",
   position: "absolute",
   zIndex: UI_SHELL_BASE_Z_INDEX,
 }));

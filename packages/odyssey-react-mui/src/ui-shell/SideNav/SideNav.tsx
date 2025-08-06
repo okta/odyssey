@@ -34,6 +34,7 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext.js";
+import { useElementAtContainerEdge } from "../useElementAtContainerEdge.js";
 import { OdysseyThemeProvider } from "../../OdysseyThemeProvider.js";
 import type { SideNavProps } from "./types.js";
 import { SideNavHeader } from "./SideNavHeader.js";
@@ -117,14 +118,14 @@ const StyledOpacityTransitionContainer = styled("div", {
 const StyledSideNavContainer = styled("nav", {
   shouldForwardProp: (prop) =>
     prop !== "backgroundColor" &&
-    prop !== "hasNeighboringContent" &&
+    prop !== "hasNeighbouringContentAtInlineStart" &&
     prop !== "isAppContentWhiteBackground" &&
     prop !== "isSideNavCollapsed" &&
     prop !== "isSideNavToggleHighlighted" &&
     prop !== "odysseyDesignTokens",
 })<{
   backgroundColor?: UiShellColors["sideNavBackgroundColor"];
-  hasNeighboringContent: boolean;
+  hasNeighbouringContentAtInlineStart: boolean;
   isAppContentWhiteBackground: boolean;
   isSideNavCollapsed: boolean;
   isSideNavToggleHighlighted: boolean;
@@ -132,7 +133,7 @@ const StyledSideNavContainer = styled("nav", {
 }>(
   ({
     backgroundColor,
-    hasNeighboringContent,
+    hasNeighbouringContentAtInlineStart,
     isAppContentWhiteBackground,
     isSideNavCollapsed,
     isSideNavToggleHighlighted,
@@ -175,12 +176,12 @@ const StyledSideNavContainer = styled("nav", {
       backgroundColor: odysseyDesignTokens.HueNeutral200,
       opacity: isSideNavCollapsed ? 1 : 0,
       transform:
-        isSideNavCollapsed && !hasNeighboringContent
+        isSideNavCollapsed && !hasNeighbouringContentAtInlineStart
           ? isSideNavToggleHighlighted
             ? `translateX(calc(100% - (${odysseyDesignTokens.BorderWidthMain} * 2)))`
             : `translateX(calc(100% - ${SIDE_NAV_COLLAPSED_PADDING_HIGHLIGHTED}px))`
           : "translateX(0)",
-      width: hasNeighboringContent
+      width: hasNeighbouringContentAtInlineStart
         ? 0
         : `calc(${SIDE_NAV_TOGGLE_ICON_HALF_SIZE + SIDE_NAV_COLLAPSED_PADDING_HIGHLIGHTED}px + ${odysseyDesignTokens.BorderWidthMain} * 2)`,
 
@@ -199,18 +200,18 @@ const StyledSideNavContainer = styled("nav", {
 
 const StyledSideNavToggleButtonContainer = styled("div", {
   shouldForwardProp: (prop) =>
-    prop !== "hasNeighboringContent" &&
+    prop !== "hasNeighbouringContentAtInlineStart" &&
     prop !== "isSideNavCollapsed" &&
     prop !== "isSideNavToggleHighlighted" &&
     prop !== "odysseyDesignTokens",
 })<{
-  hasNeighboringContent: boolean;
+  hasNeighbouringContentAtInlineStart: boolean;
   isSideNavCollapsed: boolean;
   isSideNavToggleHighlighted: boolean;
   odysseyDesignTokens: DesignTokens;
 }>(
   ({
-    hasNeighboringContent,
+    hasNeighbouringContentAtInlineStart,
     isSideNavCollapsed,
     isSideNavToggleHighlighted,
     odysseyDesignTokens,
@@ -219,7 +220,7 @@ const StyledSideNavToggleButtonContainer = styled("div", {
     right: `${SIDE_NAV_TOGGLE_ICON_HALF_SIZE}px`,
     top: SIDE_NAV_VISIBILITY_TOGGLE_ICON_POSITION,
     transform:
-      isSideNavCollapsed && !hasNeighboringContent
+      isSideNavCollapsed && !hasNeighbouringContentAtInlineStart
         ? isSideNavToggleHighlighted
           ? `translate3d(calc(100% + ${SIDE_NAV_TOGGLE_ICON_HALF_SIZE + SIDE_NAV_COLLAPSED_PADDING_HIGHLIGHTED}px), 0, 0)`
           : `translate3d(calc(100% + ${SIDE_NAV_TOGGLE_ICON_HALF_SIZE + SIDE_NAV_COLLAPSED_PADDING_UNHIGHLIGHTED}px), 0, 0)`
@@ -263,13 +264,17 @@ const StyledSideNavListContainer = styled("ul")(() => ({
 }));
 
 const StyledSideNavScrollableContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
-  display: "inline-grid",
-  gridTemplateRows: "1fr max-content",
-  overflowY: "auto",
-  paddingInline: odysseyDesignTokens.Spacing2,
-}));
+  shouldForwardProp: (prop) =>
+    prop !== "odysseyDesignTokens" && prop !== "hasBlockStartPadding",
+})<{ odysseyDesignTokens: DesignTokens; hasBlockStartPadding?: boolean }>(
+  ({ odysseyDesignTokens, hasBlockStartPadding }) => ({
+    display: "inline-grid",
+    gridTemplateRows: "1fr max-content",
+    overflowY: "auto",
+    paddingBlockStart: hasBlockStartPadding ? odysseyDesignTokens.Spacing2 : 0,
+    paddingInline: odysseyDesignTokens.Spacing2,
+  }),
+);
 
 const StyledSectionHeaderContainer = styled("li", {
   shouldForwardProp: (prop) =>
@@ -431,7 +436,6 @@ const SideNav = ({
   sideNavItems,
 }: SideNavProps) => {
   const [hasContentScrolled, setHasContentScrolled] = useState(false);
-  const [hasNeighboringContent, setHasNeighboringContent] = useState(false);
   const [isContentScrollable, setIsContentScrollable] = useState(false);
   const [isSideNavToggleHighlighted, setIsSideNavToggleHighlighted] =
     useState(false);
@@ -463,22 +467,19 @@ const SideNav = ({
   const intersectionObserverRef = useRef<IntersectionObserver | null>(null);
   const sideNavRef = useRef<HTMLDivElement>(null);
 
+  const { isAtContainerInlineStart } = useElementAtContainerEdge({
+    element: sideNavRef.current,
+    monitoringElement: sideNavRef.current?.parentElement?.parentElement,
+  });
+
+  const hasNeighbouringContentAtInlineStart = !isAtContainerInlineStart;
+
   const blankElement = useMemo(() => <div />, []);
 
   // The default value (sideNavItems) passed to useState is ONLY used by the useState hook for
   // the very first value. Subsequent updates to the prop (sideNavItems) need to cause the state
   // to update!
   useEffect(() => updateSideNavItemsList(sideNavItems || []), [sideNavItems]);
-
-  // update sidenav collapse status
-  useEffect(() => {
-    if (sideNavRef.current) {
-      setHasNeighboringContent(
-        sideNavRef.current.getBoundingClientRect().x > 0,
-      );
-    }
-    // We want this listening to `isCollapsed` because that changes what's next to the side nav.
-  }, [isCollapsed]);
 
   // In the case that you can't control the side nav, then it should use whatever state was passed (app control) rather than what's stored in session storage (user control).
   const onMount = useCallback(() => {
@@ -772,7 +773,7 @@ const SideNav = ({
     <StyledSideNavContainer
       aria-label={t("navigation.label")}
       backgroundColor={uiShellContext?.sideNavBackgroundColor}
-      hasNeighboringContent={hasNeighboringContent}
+      hasNeighbouringContentAtInlineStart={hasNeighbouringContentAtInlineStart}
       id="side-nav-expandable"
       isAppContentWhiteBackground={
         uiShellContext?.appBackgroundColor ===
@@ -785,14 +786,16 @@ const SideNav = ({
     >
       {isCollapsible && (
         <StyledSideNavToggleButtonContainer
-          hasNeighboringContent={hasNeighboringContent}
+          hasNeighbouringContentAtInlineStart={
+            hasNeighbouringContentAtInlineStart
+          }
           isSideNavCollapsed={isSideNavCollapsed}
           isSideNavToggleHighlighted={isSideNavToggleHighlighted}
           odysseyDesignTokens={odysseyDesignTokens}
         >
           <SideNavToggleButton
             clickAreaPadding={
-              isSideNavCollapsed && !hasNeighboringContent
+              isSideNavCollapsed && !hasNeighbouringContentAtInlineStart
                 ? SIDE_NAV_TOGGLE_ICON_SIZE / 2
                 : 0
             }
@@ -838,6 +841,7 @@ const SideNav = ({
             <StyledSideNavScrollableContainer
               odysseyDesignTokens={odysseyDesignTokens}
               data-se="scrollable-region"
+              hasBlockStartPadding={!appName}
             >
               <StyledSideNavListContainer
                 role="none"

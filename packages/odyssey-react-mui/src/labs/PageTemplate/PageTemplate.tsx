@@ -11,7 +11,7 @@
  */
 
 import styled from "@emotion/styled";
-import { memo, ReactElement, ReactNode } from "react";
+import { memo, ReactElement, ReactNode, useCallback, useRef } from "react";
 
 import { DrawerProps } from "../../Drawer.js";
 import { DocumentationIcon } from "../../icons.generated/index.js";
@@ -22,6 +22,7 @@ import {
 } from "../../OdysseyDesignTokensContext.js";
 import { Heading4, Paragraph } from "../../Typography.js";
 import { useHasUiShell } from "../../ui-shell/useHasUiShell.js";
+import { useMountLifecycleEffect } from "../../useMountLifecycleEffect.js";
 
 export type PageTemplateProps = {
   /**
@@ -67,9 +68,10 @@ export type PageTemplateProps = {
 };
 
 type TemplateContentProps = {
-  odysseyDesignTokens: DesignTokens;
-  isDrawerOpen?: boolean;
   drawerVariant?: string;
+  isDrawerOpen?: boolean;
+  isFirstRender: boolean;
+  odysseyDesignTokens: DesignTokens;
 };
 
 const TemplateContainer = styled("div", {
@@ -137,9 +139,14 @@ const TemplateHeaderButtons = styled("div", {
 
 const TemplateContent = styled("div", {
   shouldForwardProp: (prop) =>
-    !["odysseyDesignTokens", "isDrawerOpen", "drawerVariant"].includes(prop),
+    ![
+      "drawerVariant",
+      "isDrawerOpen",
+      "isFirstRender",
+      "odysseyDesignTokens",
+    ].includes(prop),
 })<TemplateContentProps>(
-  ({ odysseyDesignTokens, isDrawerOpen, drawerVariant }) => ({
+  ({ drawerVariant, isDrawerOpen, isFirstRender, odysseyDesignTokens }) => ({
     "@keyframes animate-drawer-open": {
       "0%": {
         gridTemplateColumns: "minmax(0, 1fr) 0",
@@ -173,9 +180,9 @@ const TemplateContent = styled("div", {
           : "minmax(0, 1fr) 0"
         : "minmax(0, 1fr)",
     animation:
-      drawerVariant === "persistent" && isDrawerOpen
-        ? "animate-drawer-open 225ms cubic-bezier(0, 0, 0.2, 1)"
-        : "animate-drawer-close 225ms cubic-bezier(0, 0, 0.2, 1)",
+      drawerVariant === "persistent" && (!isFirstRender || isDrawerOpen)
+        ? `animate-drawer-${isDrawerOpen ? "open" : "close"} 225ms cubic-bezier(0, 0, 0.2, 1)`
+        : undefined,
   }),
 );
 
@@ -195,6 +202,18 @@ const PageTemplate = ({
   const { isOpen: isDrawerOpen, variant: drawerVariant } = drawer?.props ?? {};
 
   const hasUiShell = useHasUiShell();
+
+  const firstRenderRef = useRef(true);
+
+  const isFirstRender = firstRenderRef.current;
+
+  const onMount = useCallback(() => {
+    firstRenderRef.current = false;
+  }, []);
+
+  useMountLifecycleEffect({
+    onMount,
+  });
 
   return (
     <TemplateContainer
@@ -235,6 +254,7 @@ const PageTemplate = ({
         odysseyDesignTokens={odysseyDesignTokens}
         isDrawerOpen={isDrawerOpen}
         drawerVariant={drawerVariant}
+        isFirstRender={isFirstRender}
       >
         {children}
         {drawer}

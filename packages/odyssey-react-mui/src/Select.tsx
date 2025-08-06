@@ -385,8 +385,10 @@ const Select = <
 
       const hasNonInteractiveIcon =
         !isInteractive &&
+        !isReadOnly &&
         controlledStateRef.current === CONTROLLED &&
         hasMultipleChoices;
+
       return (
         Array.isArray(internalSelectedValues) && (
           <ChipsInnerContainer

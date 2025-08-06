@@ -54,9 +54,10 @@ import {
   paginationTypeValues,
 } from "./DataTablePagination.js";
 import { DataFilter, DataFilters } from "./DataFilters.js";
-import { Button } from "../Buttons/index.js";
+import { Button } from "../Buttons/Button.js";
+import { MenuButton } from "../Buttons/MenuButton.js";
+import { MenuItem } from "../Buttons/MenuItem.js";
 import { Box } from "../Box.js";
-import { MenuButton, MenuItem } from "../index.js";
 import { useTranslation } from "react-i18next";
 
 export const densityValues = ["comfortable", "spacious", "compact"] as const;
@@ -122,7 +123,7 @@ export type DataTableColumn<TData extends MRT_RowData> = {
    */
   enableResizing?: boolean;
   /**
-   * If set to false, the column won't be hideable
+   * If set to false, the column won't be hidable
    */
   enableHiding?: boolean;
 };
@@ -224,7 +225,7 @@ export type DataTableProps<TData extends MRT_RowData> = {
     | Promise<MRT_TableOptions<TData>["data"]>;
   /**
    * Callback that fires when the user reorders rows within the table. Can be used
-   * to propogate order change to the backend.
+   * to propagate order change to the backend.
    */
   reorderDataFn?: ({
     rowId,

@@ -11,7 +11,6 @@
  */
 
 declare global {
-  // eslint-disable-next-line no-var
   var cspNonce: string; // Adding types to `globalThis` requires we use `var`.
 }
 

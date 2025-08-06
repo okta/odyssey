@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.42.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.41.1...v1.42.0) (2025-08-06)
+
+### Features
+
+- improve bacon scripts logging ([#30](https://github.com/atko-eng/odyssey-design-system/issues/30)) ([83353e1](https://github.com/atko-eng/odyssey-design-system/commit/83353e1c9528f5ebb13278575cd82373c4d965e7))
+
+### Bug Fixes
+
+- side nav contrast comes from passed-in value ([#33](https://github.com/atko-eng/odyssey-design-system/issues/33)) ([4172a58](https://github.com/atko-eng/odyssey-design-system/commit/4172a58f6d42c1a673e9733a07c4642469aa207e))
+- SideNav wraps long text ([#36](https://github.com/atko-eng/odyssey-design-system/issues/36)) ([6e3d56a](https://github.com/atko-eng/odyssey-design-system/commit/6e3d56ae8a7004ae43a580b2b0c3a0fb76df2d85))
+
+## [1.41.1](https://github.com/atko-eng/odyssey-design-system/compare/v1.41.0...v1.41.1) (2025-07-23)
+
+**Note:** Version bump only for package @okta/odyssey-storybook
+
+## [1.41.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.40.0...v1.41.0) (2025-07-21)
+
+### Bug Fixes
+
+- ensure lamp status chip dot is not cutoff when label overflows ([#17](https://github.com/atko-eng/odyssey-design-system/issues/17)) ([6472887](https://github.com/atko-eng/odyssey-design-system/commit/64728879eb2937668ca974ca4d1df9d60a39b6d0))
+
+## 1.40.0 (2025-07-09)
+
+### Miscellaneous Chores
+
+- wipe and import odyssey ([8627d29](https://github.com/atko-eng/odyssey-design-system/commit/8627d292d4ff9086094411e75ecd14c1d691f021))
+
 ## [1.39.1](https://github.com/okta/odyssey/compare/v1.39.0...v1.39.1) (2025-07-02)
 
 **Note:** Version bump only for package @okta/odyssey-storybook

@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.42.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.41.1...v1.42.0) (2025-08-06)
+
+### Features
+
+- implement sync script for public Odyssey repositories ([#21](https://github.com/atko-eng/odyssey-design-system/issues/21)) ([82cbe3b](https://github.com/atko-eng/odyssey-design-system/commit/82cbe3b1ac70162e3de7aa28f02a2da7e53ad024))
+- improve bacon scripts logging ([#30](https://github.com/atko-eng/odyssey-design-system/issues/30)) ([83353e1](https://github.com/atko-eng/odyssey-design-system/commit/83353e1c9528f5ebb13278575cd82373c4d965e7))
+
+### Bug Fixes
+
+- prevent drawer animation in PageTemplate when drawer is initially closed or non-existent ([#22](https://github.com/atko-eng/odyssey-design-system/issues/22)) ([b15d7a5](https://github.com/atko-eng/odyssey-design-system/commit/b15d7a5970256366b3e62ab0119fe223aa4cd46d))
+- side nav contrast comes from passed-in value ([#33](https://github.com/atko-eng/odyssey-design-system/issues/33)) ([4172a58](https://github.com/atko-eng/odyssey-design-system/commit/4172a58f6d42c1a673e9733a07c4642469aa207e))
+- side nav neighboring content awareness ([#31](https://github.com/atko-eng/odyssey-design-system/issues/31)) ([8184481](https://github.com/atko-eng/odyssey-design-system/commit/818448169331cc1c4a38eccde552c3252f59e70e))
+- sidenav visual bugs ([#35](https://github.com/atko-eng/odyssey-design-system/issues/35)) ([d6a7e2d](https://github.com/atko-eng/odyssey-design-system/commit/d6a7e2dd97512cd957b42be7cc72c5d23e5c34e1))
+- SideNav wraps long text ([#36](https://github.com/atko-eng/odyssey-design-system/issues/36)) ([6e3d56a](https://github.com/atko-eng/odyssey-design-system/commit/6e3d56ae8a7004ae43a580b2b0c3a0fb76df2d85))
+
+## [1.41.1](https://github.com/atko-eng/odyssey-design-system/compare/v1.41.0...v1.41.1) (2025-07-23)
+
+**Note:** Version bump only for package odyssey
+
+## [1.41.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.40.0...v1.41.0) (2025-07-21)
+
+### Bug Fixes
+
+- add translation for remove tag and implement tests for delete icon ([#24](https://github.com/atko-eng/odyssey-design-system/issues/24)) ([e9f9a30](https://github.com/atko-eng/odyssey-design-system/commit/e9f9a3053becc76a3e1e3aaa6c4aab1c48b95082))
+- ensure button creation is safe in non-browser environments ([#15](https://github.com/atko-eng/odyssey-design-system/issues/15)) ([93b6e3b](https://github.com/atko-eng/odyssey-design-system/commit/93b6e3bb6c625002174d164a2aec0af04660b05d))
+- ensure lamp status chip dot is not cutoff when label overflows ([#17](https://github.com/atko-eng/odyssey-design-system/issues/17)) ([6472887](https://github.com/atko-eng/odyssey-design-system/commit/64728879eb2937668ca974ca4d1df9d60a39b6d0))
+- update Breadcrumb component to use 'component="a"' for menu items ([#23](https://github.com/atko-eng/odyssey-design-system/issues/23)) ([1b1ca07](https://github.com/atko-eng/odyssey-design-system/commit/1b1ca075776325e548b4a5eb71d9dd091ccf8860))
+
+## 1.40.0 (2025-07-09)
+
+### Miscellaneous Chores
+
+- Move okta/Odyssey PRs to atko ([4c1f869](https://github.com/atko-eng/odyssey-design-system/commit/4c1f869a9ec300fecc1e10bf6b16e67807b77681))
+- update dependencies to latest secure versions ([0293eed](https://github.com/atko-eng/odyssey-design-system/commit/83a5fc093cd7d7bc8073862207f2c549714563a6))
+- Add dependency scan test suite and script ([2e2db39](https://github.com/atko-eng/odyssey-design-system/commit/0293eed141360b893c19aaf601699f0ec1981610))
+- Correct typo in pull request template and README ([5b537c9](https://github.com/atko-eng/odyssey-design-system/commit/2e2db39195126857bf048757fd91b8555850fd77))
+- Add missing .yarnrc registry configuration ([f945ce6](https://github.com/atko-eng/odyssey-design-system/commit/5b537c9ffce47d455081822c7200e313071f4d54))
+- fixes old odyssey urls in documentation ([be3d8ae](https://github.com/atko-eng/odyssey-design-system/commit/f945ce6c6ebfe05263bd82e42b3f1f6337e83363))
+- import outstanding odyssey files ([be3d8ae](https://github.com/atko-eng/odyssey-design-system/commit/be3d8aee7ea9705df2be1a4efb5308f18f8dcd72))
+- wipe and import odyssey ([8627d29](https://github.com/atko-eng/odyssey-design-system/commit/8627d292d4ff9086094411e75ecd14c1d691f021))
+
 ## [1.39.1](https://github.com/okta/odyssey/compare/v1.39.0...v1.39.1) (2025-07-02)
 
 ### Bug Fixes

@@ -313,6 +313,18 @@ const storybookMeta: Meta<SideNavProps> = {
         label: "System Configuration",
         startIcon: <FolderIcon />,
       },
+      {
+        id: "item17",
+        href: "/",
+        label: "Really Long Item Name With Spaces",
+        startIcon: <DirectoryIcon />,
+      },
+      {
+        id: "item18",
+        href: "/",
+        label: "ReallyLongSingleItemNameWithoutSpaces",
+        startIcon: <DirectoryIcon />,
+      },
     ],
     footerItems: [
       {
@@ -414,7 +426,7 @@ export const SortableSideNav: StoryObj<typeof SideNav> = {
     sideNavItems: [
       {
         href: "#",
-        id: "item17",
+        id: "sortable-item1",
         label: "My Apps",
         onClick: (event) => {
           event.preventDefault();
@@ -424,24 +436,24 @@ export const SortableSideNav: StoryObj<typeof SideNav> = {
         startIcon: <HomeIcon />,
         nestedNavItems: [
           {
-            id: "item17-1",
+            id: "sortable-item1-1",
             label: "Recently Used",
             isSortable: false,
           },
           {
-            id: "item17-2",
+            id: "sortable-item1-2",
             label: "Work",
           },
           {
-            id: "item17-3",
+            id: "sortable-item1-3",
             label: "Group 1",
           },
           {
-            id: "item17-4",
+            id: "sortable-item1-4",
             label: "Group 2",
           },
           {
-            id: "item17-5",
+            id: "sortable-item1-5",
             label: "Add section",
             endIcon: <AddCircleIcon />,
             isSortable: false,
@@ -449,13 +461,13 @@ export const SortableSideNav: StoryObj<typeof SideNav> = {
         ],
       },
       {
-        id: "item18",
+        id: "sortable-item2",
         label: "Notifications",
         startIcon: <NotificationIcon />,
         count: 1,
       },
       {
-        id: "item19",
+        id: "sortable-item3",
         label: "Add apps",
         startIcon: <AppsIcon />,
       },

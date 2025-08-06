@@ -14,7 +14,9 @@ import { Meta, StoryObj } from "@storybook/react";
 import {
   Button,
   Toast,
+  ToastProps,
   ToastStack,
+  createUniqueId,
   toastRoleValues,
   toastSeverityValues,
 } from "@okta/odyssey-react-mui";
@@ -296,46 +298,56 @@ export const MultipleToasts: Story = {
     },
   },
   render: function C() {
-    const [toasts, setToasts] = useState([
-      <Toast
-        isDismissable
-        isVisible={true}
-        severity="info"
-        text="The mission to Sagittarius A is set for January 7."
-        key={Math.random()}
-      />,
-      <Toast
-        isDismissable
-        isVisible={true}
-        severity="success"
-        text="Docking completed."
-        key={Math.random()}
-      />,
-    ]);
+    type ToastWithId = ToastProps & { id: string };
 
-    const addToast = () => {
+    const unstableToasts = [
+      {
+        id: createUniqueId(),
+        severity: "info" as const,
+        text: "The mission to Sagittarius A is set for January 7.",
+        isDismissable: true,
+        isVisible: true,
+      },
+      {
+        id: createUniqueId(),
+        severity: "success" as const,
+        text: "Docking completed.",
+        isDismissable: true,
+        isVisible: true,
+      },
+    ];
+
+    const [toasts, setToasts] = useState<ToastWithId[]>(unstableToasts);
+
+    const addToast = useCallback(() => {
       const toastOptions = [
-        <Toast
-          isVisible={true}
-          severity="warning"
-          isDismissable
-          text={`Severe solar winds may delay local system flights.`}
-          key={Math.random()}
-        />,
-        <Toast
-          isVisible={true}
-          severity="error"
-          isDismissable
-          text={`Security breach in Hangar 10.`}
-          key={Math.random()}
-        />,
+        {
+          severity: "warning" as const,
+          text: "Severe solar winds may delay local system flights.",
+          isDismissable: true,
+          isVisible: true,
+        },
+        {
+          severity: "error" as const,
+          text: "Security breach in Hangar 10.",
+          isDismissable: true,
+          isVisible: true,
+        },
       ];
 
-      setToasts([
-        ...toasts,
-        toastOptions[Math.floor(Math.random() * toastOptions.length)],
+      const randomToast =
+        toastOptions[Math.floor(Math.random() * toastOptions.length)];
+      setToasts((prevToasts) => [
+        ...prevToasts,
+        { ...randomToast, id: createUniqueId() },
       ]);
-    };
+    }, []);
+
+    const handleDismiss = useCallback((toastId: string) => {
+      setToasts((prevToasts) =>
+        prevToasts.filter((toast) => toast.id !== toastId),
+      );
+    }, []);
 
     return (
       <>
@@ -344,7 +356,18 @@ export const MultipleToasts: Story = {
           onClick={addToast}
           variant="primary"
         />
-        <ToastStack>{toasts}</ToastStack>
+        <ToastStack>
+          {toasts.map((toast) => (
+            <Toast
+              key={toast.id}
+              isDismissable={toast.isDismissable}
+              isVisible={toast.isVisible}
+              severity={toast.severity}
+              text={toast.text}
+              onHide={() => handleDismiss(toast.id)}
+            />
+          ))}
+        </ToastStack>
       </>
     );
   },

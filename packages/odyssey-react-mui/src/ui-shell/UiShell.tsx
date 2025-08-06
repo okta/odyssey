@@ -97,6 +97,7 @@ const UiShell = ({
   onSubscriptionCreated,
   optionalComponents,
   sideNavBackgroundColor,
+  sideNavBackgroundContrastColor,
   subscribeToCloseRightSideMenu,
   subscribeToCloseSideNavMenu,
   subscribeToPropChanges,
@@ -135,6 +136,7 @@ const UiShell = ({
             appBackgroundContrastMode={appBackgroundContrastMode}
             closeSideNavMenu={closeSideNavMenu}
             sideNavBackgroundColor={sideNavBackgroundColor}
+            sideNavBackgroundContrastColor={sideNavBackgroundContrastColor}
             subscribeToCloseRightSideMenu={subscribeToCloseRightSideMenu}
             subscribeToCloseSideNavMenu={subscribeToCloseSideNavMenu}
             topNavBackgroundColor={topNavBackgroundColor}

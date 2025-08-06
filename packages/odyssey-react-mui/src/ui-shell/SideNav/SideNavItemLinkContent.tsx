@@ -28,12 +28,13 @@ const SideNavItemLabelContainer = styled("div", {
   odysseyDesignTokens: DesignTokens;
   isIconVisible: boolean;
 }>(({ odysseyDesignTokens, isIconVisible }) => ({
-  width: "100%",
+  alignItems: "center",
   display: "flex",
   flexWrap: "wrap",
-  alignItems: "center",
   fontSize: odysseyDesignTokens.TypographySizeBody,
   marginInlineStart: isIconVisible ? odysseyDesignTokens.Spacing3 : 0,
+  overflowWrap: "anywhere", // New way to do `wordBreak: "break-word"`. Source: https://developer.mozilla.org/en-US/docs/Web/CSS/word-break#break-word
+  width: "100%",
 }));
 
 const SideNavItemLinkContent = ({

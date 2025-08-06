@@ -30,16 +30,22 @@ export const defaultSubscribeToCloseRightSideMenu = () => () => {};
 
 export type UiShellColors = {
   /**
-   * Sets a custom background color for the app content area.
+   * Custom background color for the app content area.
    */
   appBackgroundColor: string;
   /**
-   * Sets a custom background color for the side nav area.
+   * Custom background color for the side nav area.
    */
   sideNavBackgroundColor: string;
+  /**
+   * Custom color for fonts and other contrasted colors in the side nav area. Other contrast colors are derived from this one.
+   *
+   * If not passed, it gets computed from Odyssey.
+   */
+  sideNavBackgroundContrastColor?: string;
   sideNavContrastColors?: ContrastColors;
   /**
-   * Sets a custom background color for the top nav area.
+   * Custom background color for the top nav area.
    */
   topNavBackgroundColor: string;
 };
@@ -80,6 +86,7 @@ const UiShellProvider = ({
   children,
   closeSideNavMenu,
   sideNavBackgroundColor,
+  sideNavBackgroundContrastColor,
   subscribeToCloseRightSideMenu,
   subscribeToCloseSideNavMenu,
   topNavBackgroundColor,
@@ -90,10 +97,12 @@ const UiShellProvider = ({
 
   const sideNavContrastColors =
     defaultedSideNavBackgroundColor !== odysseyDesignTokens.HueNeutralWhite
-      ? generateContrastColors(
-          defaultedSideNavBackgroundColor,
+      ? generateContrastColors({
+          backgroundColor:
+            sideNavBackgroundColor || defaultedSideNavBackgroundColor,
+          backgroundContrastColor: sideNavBackgroundContrastColor,
           odysseyDesignTokens,
-        )
+        })
       : undefined;
 
   const isAppBackgroundHightContrast =

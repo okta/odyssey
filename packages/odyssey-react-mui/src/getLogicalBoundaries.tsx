@@ -10,24 +10,22 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useEffect, useRef } from "react";
+/**
+ * Retrieves the logical boundaries (top, bottom, left, right) of a given HTML element.
+ *
+ * The function considers the document's text direction (`dir` attribute) to determine
+ * whether the left and right boundaries should be swapped.
+ */
+export const getLogicalBoundaries = (element: HTMLElement) => {
+  const isRTL = document.documentElement.getAttribute("dir") === "rtl";
 
-export const useMountLifecycleEffect = ({
-  onMount,
-  onUpdate,
-}: {
-  onMount?: () => void;
-  onUpdate?: () => void;
-}) => {
-  const isMounted = useRef(false);
-  const onMountRef = useRef(onMount);
+  const { top, bottom, left, right } = element.getBoundingClientRect();
 
-  useEffect(() => {
-    if (isMounted.current) {
-      onUpdate?.();
-    } else {
-      isMounted.current = true;
-      onMountRef.current?.();
-    }
-  }, [onUpdate]);
+  return {
+    top,
+    bottom,
+    // left and right are swapped for RTL
+    left: isRTL ? right : left,
+    right: isRTL ? left : right,
+  };
 };

@@ -33,10 +33,15 @@ const LUMINANCE_EDGE_MAX = 142;
 const BLACK_FONT_COLOR = "#000000";
 const WHITE_FONT_COLOR = "#FFFFFF";
 
-export const generateContrastColors = (
-  backgroundColor: string,
-  odysseyDesignTokens: DesignTokens,
-) => {
+export const generateContrastColors = ({
+  backgroundColor,
+  backgroundContrastColor,
+  odysseyDesignTokens,
+}: {
+  backgroundColor: string;
+  backgroundContrastColor?: string;
+  odysseyDesignTokens: DesignTokens;
+}) => {
   // Convert hex to RGB
   const rgbFromHex = isValidHexString(backgroundColor)
     ? hexToRgb(backgroundColor)
@@ -57,11 +62,13 @@ export const generateContrastColors = (
   // Determine if the color is light or dark.
   const isLight = luminance > LUMINANCE_THRESHOLD;
 
-  const fontColor = luminanceValueInEdgeRange
-    ? BLACK_FONT_COLOR
-    : isLight
-      ? odysseyDesignTokens.TypographyColorBody
-      : WHITE_FONT_COLOR;
+  const fontColor =
+    backgroundContrastColor ||
+    (luminanceValueInEdgeRange
+      ? BLACK_FONT_COLOR
+      : isLight
+        ? odysseyDesignTokens.TypographyColorBody
+        : WHITE_FONT_COLOR);
 
   const calculatedFontColorInRgb = hexToRgb(fontColor);
   const lightFontColorInRgb = hexToRgb(WHITE_FONT_COLOR);

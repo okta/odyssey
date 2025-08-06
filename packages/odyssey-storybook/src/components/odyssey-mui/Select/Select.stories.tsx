@@ -471,6 +471,19 @@ export const ReadOnlyMultiSelect: Story = {
     ],
   },
 };
+
+export const ReadOnlyMultiSelectValue: Story = {
+  args: {
+    isMultiSelect: true,
+    isReadOnly: true,
+    value: [
+      "Roles and permissions",
+      "Security administration",
+      "Deploy and manage servers",
+    ],
+  },
+};
+
 export const ControlledSelect: Story = {
   parameters: {
     docs: {

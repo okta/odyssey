@@ -53,6 +53,7 @@ import { BaseButton } from "../../../../../odyssey-react-mui/src/Buttons/BaseBut
 const meta = {
   title: "UI Shell Components/UI Shell",
   component: UiShell,
+  tags: ["!autodocs"],
   argTypes: {
     appBackgroundColor: {
       control: "color",
