@@ -28,3 +28,4 @@ lerna-debug.log
 **/src/properties/ts/.ts.DS_Store
 
 *.tsbuildinfo
+release/.sync_state

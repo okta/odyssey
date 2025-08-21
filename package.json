@@ -5,7 +5,7 @@
   "private": true,
   "packageManager": "yarn@4.9.1",
   "workspaces": [
-    "packages/*"
+    "packages/**/*"
   ],
   "engines": {
     "yarn": "^4.6.0",
@@ -15,6 +15,7 @@
     "build": "lerna run build --ignore @okta/odyssey-storybook --ignore @okta/odyssey-icons",
     "eslint": "eslint .",
     "generate:icons": "yarn workspace @okta/odyssey-icons build && yarn workspace @okta/odyssey-react-mui generate:icons",
+    "generate:pseudoLocales": "yarn workspaces foreach --all run generate:pseudoLocales",
     "lerna-publish": "lerna publish from-package --no-verify-registry --no-push --force-publish",
     "lerna-version": "lerna version --no-git-tag-version --include-merged-tags --conventional-commits --no-push --force-publish",
     "lint": "yarn eslint && yarn prettier-check",
@@ -26,7 +27,7 @@
     "start:storybook": "yarn workspace @okta/odyssey-storybook start",
     "start": "yarn install && yarn build && yarn concurrently npm:start:mui npm:start:storybook",
     "test": "lerna run test",
-    "typecheck": "lerna run typecheck",
+    "typecheck": "lerna run typecheck"
   },
   "dependencies": {
     "@okta/odyssey-commitlint": "workspace:*",

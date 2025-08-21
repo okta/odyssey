@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.42.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.41.1...v1.42.0) (2025-08-06)
+
+### Features
+
+- implement sync script for public Odyssey repositories ([#21](https://github.com/atko-eng/odyssey-design-system/issues/21)) ([82cbe3b](https://github.com/atko-eng/odyssey-design-system/commit/82cbe3b1ac70162e3de7aa28f02a2da7e53ad024))
+- improve bacon scripts logging ([#30](https://github.com/atko-eng/odyssey-design-system/issues/30)) ([83353e1](https://github.com/atko-eng/odyssey-design-system/commit/83353e1c9528f5ebb13278575cd82373c4d965e7))
+
+### Bug Fixes
+
+- prevent drawer animation in PageTemplate when drawer is initially closed or non-existent ([#22](https://github.com/atko-eng/odyssey-design-system/issues/22)) ([b15d7a5](https://github.com/atko-eng/odyssey-design-system/commit/b15d7a5970256366b3e62ab0119fe223aa4cd46d))
+- side nav contrast comes from passed-in value ([#33](https://github.com/atko-eng/odyssey-design-system/issues/33)) ([4172a58](https://github.com/atko-eng/odyssey-design-system/commit/4172a58f6d42c1a673e9733a07c4642469aa207e))
+- side nav neighboring content awareness ([#31](https://github.com/atko-eng/odyssey-design-system/issues/31)) ([8184481](https://github.com/atko-eng/odyssey-design-system/commit/818448169331cc1c4a38eccde552c3252f59e70e))
+- sidenav visual bugs ([#35](https://github.com/atko-eng/odyssey-design-system/issues/35)) ([d6a7e2d](https://github.com/atko-eng/odyssey-design-system/commit/d6a7e2dd97512cd957b42be7cc72c5d23e5c34e1))
+- SideNav wraps long text ([#36](https://github.com/atko-eng/odyssey-design-system/issues/36)) ([6e3d56a](https://github.com/atko-eng/odyssey-design-system/commit/6e3d56ae8a7004ae43a580b2b0c3a0fb76df2d85))
+
 ## [1.41.1](https://github.com/atko-eng/odyssey-design-system/compare/v1.41.0...v1.41.1) (2025-07-23)
 
 **Note:** Version bump only for package odyssey
