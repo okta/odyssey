@@ -23,6 +23,7 @@ import {
 } from "./OdysseyDesignTokensContext.js";
 import { TagListContext } from "./TagListContext.js";
 import { ContrastMode, useContrastModeContext } from "./useContrastMode.js";
+import { useTranslation } from "react-i18next";
 
 export const tagSizeValues = ["medium", "small"] as const;
 
@@ -267,6 +268,7 @@ const Tag = ({
   testId,
   translate,
 }: TagProps) => {
+  const { t } = useTranslation();
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { chipElementType } = useContext(TagListContext);
   const { contrastMode } = useContrastModeContext();
@@ -281,7 +283,9 @@ const Tag = ({
         colorVariant={colorVariant}
         contrastMode={contrastMode}
         data-se={testId}
-        deleteIcon={<CloseCircleFilledIcon />}
+        deleteIcon={
+          <CloseCircleFilledIcon role="button" titleAccess={t("tag.remove")} />
+        }
         disabled={isDisabled}
         icon={icon}
         label={label}
@@ -293,6 +297,7 @@ const Tag = ({
       />
     ),
     [
+      t,
       chipElementType,
       colorVariant,
       contrastMode,

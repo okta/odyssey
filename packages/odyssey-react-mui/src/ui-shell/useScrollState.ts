@@ -49,7 +49,8 @@ export const getNestedScrollContainers = (containerElement: HTMLElement) =>
       getIsYAxisScrollContainer(scrollHeightElement),
     );
 
-export const fakeDefaultContainerElement = document.createElement("div");
+export const fakeDefaultContainerElement =
+  typeof window === "undefined" ? null : document.createElement("div");
 
 export const useScrollState = <
   ContainerElement extends HTMLElement = HTMLDivElement,
@@ -94,9 +95,11 @@ export const useScrollState = <
     const computedContainerElement =
       containerElement || fakeDefaultContainerElement;
 
-    scrollableElementsRef.current = getNestedScrollContainers(
-      computedContainerElement,
-    ).concat(computedContainerElement);
+    if (computedContainerElement) {
+      scrollableElementsRef.current = getNestedScrollContainers(
+        computedContainerElement,
+      ).concat(computedContainerElement);
+    }
   }, [containerElement]);
 
   const updateScrollListeners = useCallback(() => {

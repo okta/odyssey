@@ -4,7 +4,7 @@
   "compilerOptions": {
     "isolatedModules": true,
     "jsx": "react",
-    "lib": ["DOM", "ESNext"],
+    "lib": ["DOM", "ESNext", "ES2021"],
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "noEmit": true,

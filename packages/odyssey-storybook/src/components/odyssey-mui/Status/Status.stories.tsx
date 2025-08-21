@@ -138,3 +138,18 @@ export const WarningLamp: StoryObj<StatusProps> = {
     variant: "lamp",
   },
 };
+
+export const OverflowLamp: StoryObj<StatusProps> = {
+  args: {
+    label:
+      "A really long label that will overflow the container and should be truncated",
+    variant: "lamp",
+  },
+  render: function C(props) {
+    return (
+      <div style={{ width: "200px" }}>
+        <Status {...props} />
+      </div>
+    );
+  },
+};

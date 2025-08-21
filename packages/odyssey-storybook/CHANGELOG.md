@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.41.1](https://github.com/atko-eng/odyssey-design-system/compare/v1.41.0...v1.41.1) (2025-07-23)
+
+**Note:** Version bump only for package @okta/odyssey-storybook
+
+## [1.41.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.40.0...v1.41.0) (2025-07-21)
+
+### Bug Fixes
+
+- ensure lamp status chip dot is not cutoff when label overflows ([#17](https://github.com/atko-eng/odyssey-design-system/issues/17)) ([6472887](https://github.com/atko-eng/odyssey-design-system/commit/64728879eb2937668ca974ca4d1df9d60a39b6d0))
+
+## 1.40.0 (2025-07-09)
+
+### Miscellaneous Chores
+
+- wipe and import odyssey ([8627d29](https://github.com/atko-eng/odyssey-design-system/commit/8627d292d4ff9086094411e75ecd14c1d691f021))
+
 ## [1.39.1](https://github.com/okta/odyssey/compare/v1.39.0...v1.39.1) (2025-07-02)
 
 **Note:** Version bump only for package @okta/odyssey-storybook

@@ -233,7 +233,7 @@ const Pagination = ({
     });
   }, [page, rowsPerPage, onPaginationChange, totalRows]);
 
-  // The following handlers use React.KeyboardEvent (rather than just KeyboardEvent) becuase React.KeyboardEvent
+  // The following handlers use React.KeyboardEvent (rather than just KeyboardEvent) because React.KeyboardEvent
   // is generic, while plain KeyboardEvent is not. We need this generic so we can specify the HTMLInputElement,
   // which allows us to use currentTarget.value
   const handlePageSubmit = useCallback(

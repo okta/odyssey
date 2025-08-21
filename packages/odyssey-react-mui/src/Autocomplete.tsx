@@ -231,8 +231,11 @@ const Autocomplete = <
   defaultValue,
   errorMessage,
   errorMessageList,
+  getIsOptionEqualToValue,
   getOptionLabel,
   hasMultipleChoices,
+  hint,
+  HintLinkComponent,
   id: idOverride,
   inputValue,
   isCustomValueAllowed,
@@ -242,20 +245,17 @@ const Autocomplete = <
   isOptional = false,
   isReadOnly,
   isVirtualized = false,
-  hint,
-  HintLinkComponent,
   label,
   name: nameOverride,
   noOptionsText,
   onBlur,
   onChange,
-  onInputChange,
   onFocus,
+  onInputChange,
   options,
-  value,
-  getIsOptionEqualToValue,
   testId,
   translate,
+  value,
 }: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
   const { t } = useTranslation();
   const { inputValueProp, isVirtualizedRef, renderInput, valueProps } =
@@ -291,23 +291,23 @@ const Autocomplete = <
       closeText={t("close.text")}
       disableCloseOnSelect={hasMultipleChoices}
       disabled={isDisabled}
-      freeSolo={isCustomValueAllowed}
       filterSelectedOptions={true}
+      freeSolo={isCustomValueAllowed}
+      fullWidth={isFullWidth}
       getOptionLabel={getOptionLabel}
       id={idOverride}
-      fullWidth={isFullWidth}
+      isOptionEqualToValue={getIsOptionEqualToValue}
       loading={isLoading}
       multiple={hasMultipleChoices}
       noOptionsText={noOptionsText || t("autocomplete.nooptions")}
       onBlur={onBlur}
       onChange={onChange}
-      onInputChange={onInputChange}
       onFocus={onFocus}
+      onInputChange={onInputChange}
       openText={t("open.text")}
       options={options}
       readOnly={isReadOnly}
       renderInput={renderInput}
-      isOptionEqualToValue={getIsOptionEqualToValue}
       translate={translate}
     />
   );
