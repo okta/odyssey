@@ -1,0 +1,25 @@
+{
+  "name": "@okta/browserslist-config-odyssey",
+  "version": "1.43.0",
+  "description": "Browserslist config for Odyssey, Okta's design system",
+  "author": "Okta, Inc.",
+  "license": "Apache-2.0",
+  "sideEffects": false,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atko-eng/odyssey-design-system",
+    "directory": "packages/core/browserslist-config-odyssey"
+  },
+  "scripts": {
+    "build:clean": "rimraf dist",
+    "build:source": "tsc",
+    "build": "yarn build:clean && yarn build:source"
+  },
+  "devDependencies": {
+    "@okta/odyssey-typescript": "workspace:*",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.8.3"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "@okta/odyssey-design-tokens",
+  "version": "1.43.0",
+  "description": "Design tokens for Odyssey, Okta's design system",
+  "author": "Okta, Inc.",
+  "license": "Apache-2.0",
+  "sideEffects": false,
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "node": "./dist/index.cjs",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.cjs"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atko-eng/odyssey-design-system",
+    "directory": "packages/core/odyssey-design-tokens"
+  },
+  "devDependencies": {
+    "style-dictionary": "^3.9.2"
+  },
+  "scripts": {
+    "prebuild": "style-dictionary clean --config ./config.cjs",
+    "build": "style-dictionary build --config ./config.cjs"
+  }
+}
