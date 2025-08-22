@@ -5,7 +5,7 @@
   "private": true,
   "packageManager": "yarn@4.9.1",
   "workspaces": [
-    "packages/*"
+    "packages/**/*"
   ],
   "engines": {
     "yarn": "^4.6.0",
@@ -24,6 +24,7 @@
     "prettier-write": "prettier --ignore-unknown --log-level warn --write .",
     "start:mui": "yarn workspace @okta/odyssey-react-mui dev",
     "start:storybook": "yarn workspace @okta/odyssey-storybook start",
+    "generate:pseudoLocales": "yarn workspaces foreach --all run generate:pseudoLocales",
     "start": "yarn install && yarn build && yarn concurrently npm:start:mui npm:start:storybook",
     "test": "lerna run test",
     "typecheck": "lerna run typecheck",
