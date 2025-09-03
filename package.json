@@ -5,7 +5,7 @@
   "private": true,
   "packageManager": "yarn@4.9.1",
   "workspaces": [
-    "packages/*"
+    "packages/**/*"
   ],
   "engines": {
     "yarn": "^4.6.0",
@@ -14,7 +14,9 @@
   "scripts": {
     "build": "lerna run build --ignore @okta/odyssey-storybook --ignore @okta/odyssey-icons",
     "eslint": "eslint .",
+    "eslint:fix": "HAS_SORTING=true yarn run eslint --fix",
     "generate:icons": "yarn workspace @okta/odyssey-icons build && yarn workspace @okta/odyssey-react-mui generate:icons",
+    "generate:pseudoLocales": "yarn workspaces foreach --all run generate:pseudoLocales",
     "lerna-publish": "lerna publish from-package --no-verify-registry --no-push --force-publish",
     "lerna-version": "lerna version --no-git-tag-version --include-merged-tags --conventional-commits --no-push --force-publish",
     "lint": "yarn eslint && yarn prettier-check",
@@ -26,10 +28,9 @@
     "start:storybook": "yarn workspace @okta/odyssey-storybook start",
     "start": "yarn install && yarn build && yarn concurrently npm:start:mui npm:start:storybook",
     "test": "lerna run test",
-    "typecheck": "lerna run typecheck",
+    "typecheck": "lerna run typecheck"
   },
   "dependencies": {
-    "@okta/odyssey-commitlint": "workspace:*",
     "@okta/odyssey-eslint-config": "workspace:*",
     "@okta/odyssey-storybook": "workspace:^",
     "concurrently": "^8.2.2",
@@ -41,7 +42,6 @@
     "workspace": "^0.0.1-preview.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.5.0",
     "@faker-js/faker": "^9.2.0",
     "@okta/odyssey-eslint-config": "workspace:*",
     "caniuse-lite": "^1.0.30001677",
@@ -53,7 +53,6 @@
     "prettier": "^3.3.3"
   },
   "resolutions": {
-    "@commitlint/config-lerna-scopes/glob@^8.0.3": "^9.0.0",
     "@joshwooding/vite-plugin-react-docgen-typescript/glob@^7.2.0": "^9.0.0",
     "@lerna/create@npm:7.2.0/npm-packlist": "^6.0.0",
     "@svgr/cli/glob@^8.0.3": "^9.0.0",
