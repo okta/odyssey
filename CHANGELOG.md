@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.44.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.43.0...v1.44.0) (2025-09-03)
+
+### Features
+
+- **odyssey-icons:** add send icon ([#57](https://github.com/atko-eng/odyssey-design-system/issues/57)) ([b66430a](https://github.com/atko-eng/odyssey-design-system/commit/b66430ae346921164c169dfc9d053d37878303d0))
+- remove commitlint from odyssey repository ([#55](https://github.com/atko-eng/odyssey-design-system/issues/55)) ([f255359](https://github.com/atko-eng/odyssey-design-system/commit/f2553590acc883cbb5ceb72e0e7d6eaa31287c0b))
+
+### Bug Fixes
+
+- add missing translations ([#53](https://github.com/atko-eng/odyssey-design-system/issues/53)) ([2d3adbc](https://github.com/atko-eng/odyssey-design-system/commit/2d3adbc11fa4455c97bcf927bfe4eaab7c030414))
+- support id in date and datetime picker ([#58](https://github.com/atko-eng/odyssey-design-system/issues/58)) ([3dcdc83](https://github.com/atko-eng/odyssey-design-system/commit/3dcdc835b6886d34ead1eb44c7ca76f53cc5bace))
+
+## [1.43.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.42.0...v1.43.0) (2025-08-20)
+
+### Features
+
+- add ariaDescribedBy to Status component and id to Typography ([#47](https://github.com/atko-eng/odyssey-design-system/issues/47)) ([a2ac757](https://github.com/atko-eng/odyssey-design-system/commit/a2ac7571366c0164ef136b8baeb33e47e990447b))
+- moves Odyssey packages to core/ and adds contributions/ ([#46](https://github.com/atko-eng/odyssey-design-system/issues/46)) ([c9c0663](https://github.com/atko-eng/odyssey-design-system/commit/c9c0663d819b9a21456750e97ee8359a97d34428))
+
+### Bug Fixes
+
+- add disabled state to filter's search button ([#44](https://github.com/atko-eng/odyssey-design-system/issues/44)) ([f12d7d6](https://github.com/atko-eng/odyssey-design-system/commit/f12d7d64ed9f0e5432c6d8557a9031758224f2fe))
+- add Info variants for Lamp Status component ([#39](https://github.com/atko-eng/odyssey-design-system/issues/39)) ([79f226e](https://github.com/atko-eng/odyssey-design-system/commit/79f226e9610caff1aef1b3639d48d4cba1439d2d))
+- add missing pseudo locale translations ([#40](https://github.com/atko-eng/odyssey-design-system/issues/40)) ([f3c5bd4](https://github.com/atko-eng/odyssey-design-system/commit/f3c5bd470b6965fdafadc3db54e3fe9224262b76))
+- add MuiThemeDecorator as a decorator in storybook preview.ts and remove from all other stories ([#48](https://github.com/atko-eng/odyssey-design-system/issues/48)) ([ff7c385](https://github.com/atko-eng/odyssey-design-system/commit/ff7c3858a54b8f5003ca6bc53cd8765d49430654))
+- adjust margin properties for both chip containers ([#42](https://github.com/atko-eng/odyssey-design-system/issues/42)) ([8a51f69](https://github.com/atko-eng/odyssey-design-system/commit/8a51f693dd53d2d2596a01ea2cee616114a82814))
+- adornment shrinking on picker with option adornment ([#50](https://github.com/atko-eng/odyssey-design-system/issues/50)) ([2b772c9](https://github.com/atko-eng/odyssey-design-system/commit/2b772c9ee1a173908809404ab4e5ae346f925a42))
+- change aria-label to always use "show" text ([#45](https://github.com/atko-eng/odyssey-design-system/issues/45)) ([847f845](https://github.com/atko-eng/odyssey-design-system/commit/847f845c942f1b1a99e2cf8c9ccf5049cfdb0adb))
+- flashing on design token storybook page ([#38](https://github.com/atko-eng/odyssey-design-system/issues/38)) ([dba628e](https://github.com/atko-eng/odyssey-design-system/commit/dba628e7aa4713347e87714ff98916de3b06bec2))
+- set width for SideNav toggle button container ([#43](https://github.com/atko-eng/odyssey-design-system/issues/43)) ([963882f](https://github.com/atko-eng/odyssey-design-system/commit/963882fcf993a19f7c45bf9de3b739743463d0f3))
+- truncation issue in DataTable ([#18](https://github.com/atko-eng/odyssey-design-system/issues/18)) ([36f1708](https://github.com/atko-eng/odyssey-design-system/commit/36f1708e777db9f9a46a97d62723250f833082f1))
+- update key prop in Picker component to use value instead ([#49](https://github.com/atko-eng/odyssey-design-system/issues/49)) ([557d27b](https://github.com/atko-eng/odyssey-design-system/commit/557d27bcbaa8f35951bfdfa211c64fcbcb6de80d))
+- update shouldForwardProp in DrawerFooter to include showDividers ([#41](https://github.com/atko-eng/odyssey-design-system/issues/41)) ([f5d3f08](https://github.com/atko-eng/odyssey-design-system/commit/f5d3f0819eebcfa78b3eaed9af0775a13a16e684))
+
+## [1.42.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.41.1...v1.42.0) (2025-08-06)
+
+### Features
+
+- implement sync script for public Odyssey repositories ([#21](https://github.com/atko-eng/odyssey-design-system/issues/21)) ([82cbe3b](https://github.com/atko-eng/odyssey-design-system/commit/82cbe3b1ac70162e3de7aa28f02a2da7e53ad024))
+- improve bacon scripts logging ([#30](https://github.com/atko-eng/odyssey-design-system/issues/30)) ([83353e1](https://github.com/atko-eng/odyssey-design-system/commit/83353e1c9528f5ebb13278575cd82373c4d965e7))
+
+### Bug Fixes
+
+- prevent drawer animation in PageTemplate when drawer is initially closed or non-existent ([#22](https://github.com/atko-eng/odyssey-design-system/issues/22)) ([b15d7a5](https://github.com/atko-eng/odyssey-design-system/commit/b15d7a5970256366b3e62ab0119fe223aa4cd46d))
+- side nav contrast comes from passed-in value ([#33](https://github.com/atko-eng/odyssey-design-system/issues/33)) ([4172a58](https://github.com/atko-eng/odyssey-design-system/commit/4172a58f6d42c1a673e9733a07c4642469aa207e))
+- side nav neighboring content awareness ([#31](https://github.com/atko-eng/odyssey-design-system/issues/31)) ([8184481](https://github.com/atko-eng/odyssey-design-system/commit/818448169331cc1c4a38eccde552c3252f59e70e))
+- sidenav visual bugs ([#35](https://github.com/atko-eng/odyssey-design-system/issues/35)) ([d6a7e2d](https://github.com/atko-eng/odyssey-design-system/commit/d6a7e2dd97512cd957b42be7cc72c5d23e5c34e1))
+- SideNav wraps long text ([#36](https://github.com/atko-eng/odyssey-design-system/issues/36)) ([6e3d56a](https://github.com/atko-eng/odyssey-design-system/commit/6e3d56ae8a7004ae43a580b2b0c3a0fb76df2d85))
+
 ## [1.41.1](https://github.com/atko-eng/odyssey-design-system/compare/v1.41.0...v1.41.1) (2025-07-23)
 
 **Note:** Version bump only for package odyssey

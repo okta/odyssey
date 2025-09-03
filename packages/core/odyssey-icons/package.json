@@ -1,0 +1,39 @@
+{
+  "name": "@okta/odyssey-icons",
+  "private": true,
+  "description": "The home for Odyssey's supported icons.",
+  "homepage": "https://github.com/atko-eng/odyssey-design-system",
+  "license": "Apache-2.0",
+  "sideEffects": false,
+  "author": "Okta, Inc.",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/svgr.config.js",
+  "module": "dist/svgr.config.js",
+  "types": "dist/src/svgr.config.d.ts",
+  "scripts": {
+    "build:clean": "rimraf dist",
+    "build:icons": "svgo --config='dist/svgo.config.js' --folder src/figma.generated --output dist/icons",
+    "build:source": "tsc",
+    "build": "yarn build:clean && yarn build:source && yarn build:icons"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atko-eng/odyssey-design-system.git"
+  },
+  "bugs": {
+    "url": "https://github.com/atko-eng/odyssey-design-system/issues"
+  },
+  "devDependencies": {
+    "@babel/generator": "^7.23.6",
+    "@babel/types": "^7.23.9",
+    "@okta/odyssey-typescript": "workspace:*",
+    "@svgr/babel-plugin-transform-svg-component": "^8.0.0",
+    "@svgr/core": "^8.1.0",
+    "rimraf": "^6.0.1",
+    "svgo": "^3.0.2",
+    "typescript": "^5.8.3"
+  },
+  "version": "1.44.0"
+}
