@@ -30,7 +30,7 @@ export default defineConfig({
         statements: 57,
       },
     },
-    workspace: [
+    projects: [
       {
         test: {
           environment: "node",
@@ -49,7 +49,7 @@ export default defineConfig({
             "**/DatePicker.jsdom.test.tsx",
             "**/DateTimePicker.jsdom.test.tsx",
           ],
-          name: "integration-jsdom",
+          name: "jsdom-hack",
           setupFiles: ["./vitest-jsdom-setup.ts"],
         },
       },

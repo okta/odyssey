@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.45.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.44.0...v1.45.0) (2025-09-17)
+
+### Features
+
+- add odyssey version check to bacon ([#54](https://github.com/atko-eng/odyssey-design-system/issues/54)) ([b19dcd8](https://github.com/atko-eng/odyssey-design-system/commit/b19dcd852459bf404868bdd1120a7f3bde4b4f2d))
+- add semantic release for contribution packages ([#68](https://github.com/atko-eng/odyssey-design-system/issues/68)) ([686c1bd](https://github.com/atko-eng/odyssey-design-system/commit/686c1bd61516e146d492bb197046e07296326f2f))
+- adds example Contributions to Storybook ([#64](https://github.com/atko-eng/odyssey-design-system/issues/64)) ([2fdac63](https://github.com/atko-eng/odyssey-design-system/commit/2fdac63a894759feb2c1501efe95b289aba1aa75))
+- adds Odyssey Contributions builds stack and Unified UI Shell ([#61](https://github.com/atko-eng/odyssey-design-system/issues/61)) ([ca817cd](https://github.com/atko-eng/odyssey-design-system/commit/ca817cd456b32177709b4685d0908e55becad24e))
+- adds PageHeader contribution for Resource Access Policy ([#71](https://github.com/atko-eng/odyssey-design-system/issues/71)) ([875faf3](https://github.com/atko-eng/odyssey-design-system/commit/875faf3bf4fe9e0a191836dc72e62fd01b35221d))
+
+### Bug Fixes
+
+- pin @applitoons/eye-storybook to version 3.58.2 ([#62](https://github.com/atko-eng/odyssey-design-system/issues/62)) ([65ab725](https://github.com/atko-eng/odyssey-design-system/commit/65ab725d946353670e539ed91528cd705eb066ad))
+- rename Storybook to include export label ([#72](https://github.com/atko-eng/odyssey-design-system/issues/72)) ([4de9c9a](https://github.com/atko-eng/odyssey-design-system/commit/4de9c9a0270254cada6c4d88e44bea8899acc0c6))
+- renames Contributions package names in Storybook sidenav ([#66](https://github.com/atko-eng/odyssey-design-system/issues/66)) ([4351e02](https://github.com/atko-eng/odyssey-design-system/commit/4351e02249c46bd1375ad88e323353a655a3fe94))
+- update guardian and commitPrefix in i18n config file ([#69](https://github.com/atko-eng/odyssey-design-system/issues/69)) ([a0faf17](https://github.com/atko-eng/odyssey-design-system/commit/a0faf17b618c5a778ebf10ad967e90ba4a612cfa))
+- update package paths in lerna.json ([#74](https://github.com/atko-eng/odyssey-design-system/issues/74)) ([87a56f5](https://github.com/atko-eng/odyssey-design-system/commit/87a56f5c72e8f4d7351e31f6c00a7b4e1bfe97e7))
+
 ## [1.44.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.43.0...v1.44.0) (2025-09-03)
 
 ### Features

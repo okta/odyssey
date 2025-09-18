@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-react-mui",
-  "version": "1.44.0",
+  "version": "1.45.0",
   "description": "React MUI components for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -101,7 +101,7 @@
     "generate:icons": "yarn generate:icons:clean && yarn generate:icons:components && yarn generate:icons:index",
     "generate:pseudoLocales": "yarn pseudo-loc generate --resourcePath src/properties",
     "generate:webComponentVersion": "tsx scripts/updateWebComponentVersion.ts",
-    "playwright-install": "NODE_TLS_REJECT_UNAUTHORIZED=0 yarn playwright install --with-deps chromium",
+    "playwright-install": "yarn playwright install --with-deps chromium",
     "test": "NODE_ENV=test vitest run --reporter=default",
     "test:downstream": "yarn ok-ui downstream",
     "typecheck": "tsc --noEmit --rootDir ./"
@@ -132,7 +132,7 @@
     "luxon": "^3.4.4",
     "material-react-table": "^2.11.3",
     "react-error-boundary": "^4.1.1",
-    "react-i18next": "^15.1.1",
+    "react-i18next": "^15.7.3",
     "react-window": "^1.8.10",
     "word-wrap": "^1.2.5"
   },
@@ -173,7 +173,7 @@
     "rimraf": "^6.0.1",
     "tsd": "^0.31.2",
     "tsx": "^4.7.3",
-    "typescript": "^5.8.3",
+    "typescript": "^5.9.2",
     "vitest": "^3.2.4",
     "yargs": "^17.7.2"
   },

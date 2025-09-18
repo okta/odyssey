@@ -1,0 +1,164 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta />
+
+# Globalization within Odyssey
+
+Odyssey has its own globalization system which other devs can hook into.
+
+## OdysseyTranslationProvider
+
+Odyssey comes out of the box with support for the following 30 languages:
+
+```ts
+export const defaultSupportedLanguages = [
+  "cs", // Czech
+  "da", // Danish
+  "de", // German
+  "el", // Greek
+  "en", // English
+  "es", // Spanish
+  "fi", // Finnish
+  "fr", // French
+  "ht", // Haitian Creole
+  "hu", // Hungarian
+  "id", // Indonesian
+  "it", // Italian
+  "ja", // Japanese
+  "ko", // Korean
+  "ms", // Malaysian
+  "nb", // Norwegian
+  "nl_NL", // Dutch
+  "ok_PL", // (Test Language) Pseudo-loc
+  "ok_SK", // (Test Language) Show Keys
+  "pl", // Polish
+  "pt_BR", // Portuguese (Brazil)
+  "ro", // Romanian
+  "ru", // Russian
+  "sv", // Swedish
+  "th", // Thai
+  "tr", // Turkish
+  "uk", // Ukrainian
+  "vi", // Vietnamese
+  "zh_CN", // Chinese (PRC)
+  "zh_TW", // Chinese
+] as const;
+```
+
+### Provider customization
+
+By default, it will use the `window.navigator.language` (browser setting) or `en` as the selected language code. It is possible to provide `languageCode` to the provider via props:
+
+```jsx
+import { OdysseyTranslationProvider } from "@okta/odyssey-react-mui";
+
+const languageCode = "cs";
+
+const YourAppRoot = ({ children }) => (
+  <OdysseyTranslationProvider languageCode={languageCode}>
+    {children}
+  </OdysseyTranslationProvider>
+);
+```
+
+If you want to override translation bundles, you can do so by providing the `translationOverrides` prop as such:
+
+```jsx
+import { OdysseyTranslationProvider } from "@okta/odyssey-react-mui";
+
+const translationOverrides = {
+  en: {
+    "fieldlabel.optional.text": "Not Required",
+  },
+  fr: {
+    "fieldlabel.optional.text": "Non Requis",
+  },
+};
+
+const YourAppRoot = ({ children }) => (
+  <OdysseyTranslationProvider languageCode={languageCode}>
+    {children}
+  </OdysseyTranslationProvider>
+);
+```
+
+The following keys can have their values overridden:
+
+- `breadcrumbs.home.text`
+- `breadcrumbs.label.text`
+- `close.text`
+- `clear.text`
+- `open.text`
+- `fielderror.screenreader.text`
+- `fieldlabel.optional.text`
+- `fieldlabel.required.text`
+- `filters.clear.label`
+- `filters.filter.any`
+- `filters.filter.clear`
+- `filters.filters.arialabel`
+- `filters.menuitem.any`
+- `filters.menuitem.selected`
+- `filters.search.label`
+- `fileupload.button.text`
+- `fileupload.prompt.text`
+- `fileupload.removefile.text`
+- `passwordfield.icon.label.show`
+- `severity.error`
+- `severity.info`
+- `severity.success`
+- `severity.warning`
+- `switch.active`
+- `switch.inactive`
+- `table.columnvisibility.arialabel`
+- `table.density.arialabel`
+- `table.draghandle.arialabel`
+- `table.draghandle.tooltip`
+- `table.actions`
+- `table.columnvisibility.arialabel`
+- `table.density.arialabel`
+- `table.draghandle.arialabel`
+- `table.draghandle.tooltip`
+- `table.error`
+- `table.fetchedrows.text`
+- `table.fetchedrows.text_plural`
+- `table.moreactions.arialabel`
+- `table.noresults.heading`
+- `table.noresults.text`
+- `table.reorder.backward`
+- `table.reorder.forward`
+- `table.reorder.toback`
+- `table.reorder.tofront`
+- `table.rows.text`
+- `table.rows.text_plural`
+- `pagination.loadmore`
+- `pagination.next`
+- `pagination.previous`
+- `pagination.page`
+- `pagination.rowsperpage`
+- `pagination.rowswithtotal`
+- `pagination.rowswithouttotal`
+- `table.actions.selectall`
+- `table.actions.selectnone`
+- `table.actions.selectsome`
+- `table.rowexpansion.expand`
+- `table.rowexpansion.expandall`
+- `table.rowexpansion.collapse`
+- `table.rowexpansion.collapseall`
+- `dataview.layout.table`
+- `dataview.layout.grid`
+- `dataview.layout.list`
+
+## Passing the language from the Monolith
+
+```
+import { getOktaLocale } from '@okta/ui-libraries-monolith';
+
+<OdysseyProvider languageCode={getOktaLocale()}>
+  <CssBaseline>
+
+    // Add code here
+
+  </CssBaseline>
+</OdysseyProvider>
+
+```

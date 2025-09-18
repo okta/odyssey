@@ -15,8 +15,8 @@ import { ErrorBoundary } from "react-error-boundary";
 
 import { CssBaseline } from "../CssBaseline.js";
 import { OdysseyProvider } from "../OdysseyProvider.js";
+import { MessageBus } from "../tools/createMessageBus.js";
 import { type ReactRootElements } from "../web-component/createReactRootElements.js";
-import { MessageBus } from "./createMessageBus.js";
 import { NarrowUiShellContent } from "./NarrowUiShellContent.js";
 import {
   UiShellContentProps,

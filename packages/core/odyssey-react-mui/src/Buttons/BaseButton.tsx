@@ -18,6 +18,7 @@ import {
   memo,
   ReactElement,
   ReactNode,
+  RefObject,
   useCallback,
   useImperativeHandle,
   useMemo,
@@ -50,7 +51,7 @@ export type BaseButtonProps = {
   /**
    * The ref forwarded to the Button
    */
-  buttonRef?: React.RefObject<FocusHandle>;
+  buttonRef?: RefObject<FocusHandle>;
   /**
    * The contents of the button. Only available internal to Odyssey here in BaseButton. If set, label is ignored.
    */

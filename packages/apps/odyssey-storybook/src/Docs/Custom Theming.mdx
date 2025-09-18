@@ -1,0 +1,168 @@
+import { Canvas, Meta } from "@storybook/blocks";
+
+import * as CustomThemeStories from "./Custom Theming.stories";
+
+<Meta />
+
+# Custom Theming Odyssey Components
+
+Odyssey has its own theming system which other devs can hook into.
+
+While our internal system relies on Material-UI, you don't need to know any of that to interact with it.
+
+## Custom Component with Odyssey styles
+
+Customizing component styles with Odyssey theming is very simple. Just import `useOdysseyDesignTokens`, and everything is in there ready for you.
+
+```tsx
+import { css } from "@emotion/react";
+import { useOdysseyDesignTokens } from "@okta/odyssey-react-mui";
+import { MouseEventHandler, ReactNode, useMemo } from "react";
+
+export type WhatchamacallitProps = {
+  children: ReactNode;
+  onClick: MouseEventHandler;
+};
+
+export const Whatchamacallit = ({
+  children,
+  onClick,
+}: WhatchamacallitProps) => {
+  const odysseyDesignTokens = useOdysseyDesignTokens();
+
+  const whatchamacallitStyles = useMemo(
+    () => css`
+      border-radius: ${odysseyDesignTokens.BorderRadiusMain};
+      color: ${odysseyDesignTokens.PaletteDangerText};
+      padding: ${odysseyDesignTokens.Spacing2};
+    `,
+    [odysseyDesignTokens],
+  );
+
+  return (
+    <button css={whatchamacallitStyles} onClick={onClick}>
+      {children}
+    </button>
+  );
+};
+```
+
+If the global theme switches from light to dark mode, you'll get that change as well. You can find out the current mode under `theme.pallet.mode`.
+
+### Theme Variables
+
+When using `useOdysseyDesignTokens`, you have access to these configuration variables:
+
+- `breakpoints`
+- `components`
+- `direction`
+- `mixins`
+- `palette`
+- `shadows`
+- `shape`
+- `spacing`
+- `transitions`
+- `typography`
+- `zIndex`
+
+Light and dark modes are defined by `palette.mode`.
+
+If you need to know about right-to-left, that's `direction`. It gives you either `'ltr'` or `'rtl'`.
+
+## Overridding Global Theme Properties
+
+You can also override Odyssey's global theme. Doing so is much more complex than adding styles to a component and should only be used by teams that absolutely need customizing global styles.
+
+In general, we advise teams never shift any colors or spacing values from the defaults unless you have an explict design reason to do so.
+
+To customize your theme, you need to use `MuiThemeProvider` directly after merging your theme changes with the Odyssey theme.
+
+Our theming utilizes MUI's `ThemeOptions` under-the-hood, so you can find more in-depth information customizing the theme [in their docs](https://mui.com/material-ui/customization/theming/).
+
+```jsx
+import * as Tokens from "@okta/odyssey-design-tokens";
+import {
+  ThemeOptions,
+  OdysseyCacheProvider,
+  DesignTokensOverride,
+  createOdysseyMuiTheme,
+  createTheme,
+  deepmerge,
+  MuiThemeProvider,
+} from "@okta/odyssey-react-mui";
+
+import { useMemo } from "react";
+import * as Tokens from "@okta/odyssey-design-tokens";
+
+const themeOverrides: ThemeOptions = useMemo(() => {
+  return {
+    components: {
+      MuiAlert: {
+        styleOverrides: {
+          root: ({ theme }) => ({
+            color: theme.palette.text.secondary,
+          }),
+        },
+      },
+    },
+    mixins: {
+      borderWidth: Tokens.BorderWidthBase + 2,
+    },
+    palette: {
+      primary: {
+        main: Tokens.ColorPaletteNeutral900,
+      }
+    },
+    shape: {
+      borderRadius: 4,
+    },
+    spacing: [
+      Tokens.SpaceScale0,
+      Tokens.SpaceScale1,
+      Tokens.SpaceScale2,
+      Tokens.SpaceScale3,
+      Tokens.SpaceScale4,
+      Tokens.SpaceScale5,
+      Tokens.SpaceScale6,
+      Tokens.SpaceScale7,
+      Tokens.SpaceScale8,
+      Tokens.SpaceScale9,
+    ],
+    typography: {
+      fontSize: 16,
+    },
+}, []);
+
+const odysseyTheme = createOdysseyMuiTheme(Tokens);
+const customOdysseyTheme = useMemo(
+  () =>
+    themeOverrides && createTheme(deepmerge(odysseyTheme, themeOverrides)),
+  [odysseyTheme, themeOverrides]
+);
+
+const YourAppRoot = ({ children }) => (
+  <OdysseyProvider muiTheme={muiTheme}>
+    {children}
+  </OdysseyProvider>
+);
+```
+
+## Custom Theme Examples
+
+A way to use a custom theme to override the Odyssey default theme.
+
+### Behavior
+
+Visually, the MUI components under `OdysseyThemeProvider` with a custom theme would consume that theme.
+
+#### Button Primary
+
+<Canvas of={CustomThemeStories.ButtonStory} />
+
+#### Input Default
+
+<Canvas of={CustomThemeStories.TextFieldStory} />
+
+#### Radio Default
+
+<Canvas of={CustomThemeStories.RadioGroupStory} />

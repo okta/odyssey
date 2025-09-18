@@ -23,8 +23,8 @@ import {
   generateContrastColors,
 } from "../createContrastColors.js";
 import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext.js";
+import { createMessageBus, MessageBus } from "../tools/createMessageBus.js";
 import { ContrastMode } from "../useContrastMode.js";
-import { createMessageBus, MessageBus } from "./createMessageBus.js";
 
 export const defaultCloseSideNavMessageBus = createMessageBus();
 export const defaultSubscribeToCloseRightSideMenu = () => () => {};

@@ -1,0 +1,43 @@
+/*!
+ * Copyright (c) 2023-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
+
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
+
+import { getContributionPackagePaths } from "./src/tools/getContributionPackagePaths.js";
+
+// https://vitejs.dev/config/
+export default defineConfig(async () =>
+  getContributionPackagePaths()
+    .then((contributionsPackagePaths) => ({
+      contributionsPackageNames: contributionsPackagePaths.map(
+        ({ packageName }) => packageName,
+      ),
+      viteAlias: Object.fromEntries(
+        contributionsPackagePaths.map(({ packageName, sourcePath }) => [
+          packageName,
+          sourcePath,
+        ]),
+      ),
+    }))
+    .then(({ viteAlias }) => ({
+      ...(process.env.NODE_ENV === "test" ||
+      process.env.NODE_ENV === "production"
+        ? {
+            resolve: {
+              alias: viteAlias,
+            },
+          }
+        : {}),
+      plugins: [react()],
+    })),
+);

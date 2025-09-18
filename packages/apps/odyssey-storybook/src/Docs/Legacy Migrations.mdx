@@ -1,0 +1,105 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta />
+
+# Migrations
+
+## `v0.21.x` ➡️ `v0.23.x`
+
+### New Components
+
+- `Autocomplete`
+- `Fieldset`
+- `Form`
+- `PasswordField`
+- `SearchField`
+- `Toast`
+
+### Components with Props Changes
+
+- `Banner`
+- `Button`
+- `Checkbox`
+- `Dialog`
+- `Icon`
+- `Callout`
+- `MenuButton`
+- `Radio`
+- `RadioGroup`
+- `Tag`
+- `TagList`
+- `TextField`
+- `Toast`
+
+### Component API
+
+**All components are now being wrapped and many prop names have changed. Prop names and APIs will now be more consistent across Odyssey.**
+
+### Deprecations
+
+1. `InputAdornment` is no longer erquired for `startAdronment` and `endAdornment` on `TextField`.
+1. `InputBase` should be replaced with `TextField`.
+1. The `size` prop on `Icon` is now required.
+
+## `v0.17.x` ➡️ `v0.21.x`
+
+### New Components
+
+- `Banner`
+- `Checkbox`
+- `CheckboxGroup`
+- `Chip`
+- `DatePicker` (Labs)
+- `Callout`
+- `ListSubheader`
+- `Radio`
+- `RadioGroup`
+- `ScopedCssBaseline`
+- `ScreenReaderText`
+- `Status`
+- `TextField`
+
+### Components with Props Changes
+
+- `Checkbox`
+- `Radio`
+- `RadioGroup`
+
+### Component API
+
+1. Many new components have been added and wrapped; although, prop names in these versions are not necessarily following Odyssey guidelines.
+1. MUI-passthrough is still allowed even for wrapped components. This will change in later versions.
+
+### Deprecations
+
+1. `InputBase` should be replaced with `TextField`.
+1. `InputLabel` should not be used. We build it into our field components and created an internal `Field` component to ensure matching styles. If you have custom field components that we don't support, message in `#odyssey` to see if we should add your field or expose `Field`.
+
+## `v0.14.x` ➡️ `0.17.x`
+
+### Importing from Odyssey
+
+As of `0.15.2`, all MUI and Odyssey components are exported from `@okta/odyssey-react-mui`. No further need to maintain a separate version of MUI.
+
+If you're using components not supported by Odyssey, please get your product designers in touch with Odyssey to see what we need to do going forward.
+
+It's possible you need to still have your own MUI version, but it's possible there's an Odyssey design solution.
+
+Also, Odyssey-Labs exists for this very purpose; things that you want in Odyssey, but we haven't had a finalized design.
+
+### Theming
+
+Odyssey now includes theme components and CSP nonce built into it's `OdysseyProvider` wrapper. Just like MUI's `ThemeProvider`, this needs to go at the top-level of your app and takes no props.
+
+In a later update, this component will be renamed `OdysseyProvider`.
+
+#### Custom Theming
+
+It's possible you want to customize Odyssey's theme because of your app's requirements. You'll want `OdysseyProvider` (MUI and Odyssey theme wrapper).
+
+At this point, we still export `MuiThemeProvider`
+
+### `useTheme`
+
+- `typography.body` is now `typography.body1`.
+- `typography.caption` is now `typography.subtitle`.

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.45.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.44.0...v1.45.0) (2025-09-17)
+
+### Features
+
+- adds example Contributions to Storybook ([#64](https://github.com/atko-eng/odyssey-design-system/issues/64)) ([2fdac63](https://github.com/atko-eng/odyssey-design-system/commit/2fdac63a894759feb2c1501efe95b289aba1aa75))
+- adds Odyssey Contributions builds stack and Unified UI Shell ([#61](https://github.com/atko-eng/odyssey-design-system/issues/61)) ([ca817cd](https://github.com/atko-eng/odyssey-design-system/commit/ca817cd456b32177709b4685d0908e55becad24e))
+
+### Bug Fixes
+
+- rename Storybook to include export label ([#72](https://github.com/atko-eng/odyssey-design-system/issues/72)) ([4de9c9a](https://github.com/atko-eng/odyssey-design-system/commit/4de9c9a0270254cada6c4d88e44bea8899acc0c6))
+- update guardian and commitPrefix in i18n config file ([#69](https://github.com/atko-eng/odyssey-design-system/issues/69)) ([a0faf17](https://github.com/atko-eng/odyssey-design-system/commit/a0faf17b618c5a778ebf10ad967e90ba4a612cfa))
+
 ## [1.44.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.43.0...v1.44.0) (2025-09-03)
 
 ### Features

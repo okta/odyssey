@@ -861,11 +861,6 @@ export const getComponents = ({
         position: "relative",
         transition: `all ${odysseyTokens.TransitionDurationMain} ${odysseyTokens.TransitionTimingMain}`,
 
-        "&.ods-card-compact": {
-          marginBlockEnd: odysseyTokens.Spacing2,
-          padding: odysseyTokens.Spacing4,
-        },
-
         "& img": {
           maxHeight: "100%",
           height: "auto",
