@@ -3,7 +3,7 @@
   "changelogPreset": "@okta/conventional-changelog-odyssey",
   "exact": true,
   "npmClient": "yarn",
-  "packages": ["packages/**/*"],
+  "packages": ["packages/core/*", "packages/tools/*", "packages/apps/*"],
   "useNx": false,
-  "version": "1.44.0"
+  "version": "1.45.0"
 }

@@ -19,12 +19,12 @@ import {
   multiSectionDigitalClockSectionClasses,
 } from "@mui/x-date-pickers/MultiSectionDigitalClock";
 
-import { addSpecificity } from "../../addSpecificity.js";
 import {
   datePickerTheme,
   dateStyles,
 } from "../../DatePickers/datePickerTheme.js";
 import { pxToRem } from "../../theme/index.js";
+import { addSpecificity } from "../../tools/addSpecificity.js";
 import { DateTimePickerSize } from "./DateTimePicker.js";
 
 const DateTimePickerComponentSize = {
@@ -104,8 +104,8 @@ const theme: ThemeOptions = {
     MuiMultiSectionDigitalClock: {
       styleOverrides: {
         root: {
-          [`${addSpecificity(2, `.${multiSectionDigitalClockClasses.root}`)}, 
-            ${addSpecificity(2, ` .${multiSectionDigitalClockSectionClasses.root}`)}, 
+          [`${addSpecificity(2, `.${multiSectionDigitalClockClasses.root}`)},
+            ${addSpecificity(2, ` .${multiSectionDigitalClockSectionClasses.root}`)},
             ${addSpecificity(2, `.${digitalClockClasses.root}`)}`]: {
             maxHeight: DateTimePickerComponentSize.dateCalendarMaxHeight,
           },

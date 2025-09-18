@@ -109,7 +109,7 @@ export type TableLayoutProps<TData extends MRT_RowData> = {
 };
 
 export type CardLayoutProps<TData extends MRT_RowData> = {
-  itemProps: (row: TData) => Omit<DataCardProps<TData>, "row">;
+  itemProps: (row: TData) => DataCardProps;
   maxGridColumns?: number;
   renderDetailPanel?: (props: { row: TData }) => ReactNode;
   rowActionMenuItems?: RowActionsProps<TData>["rowActionMenuItems"];

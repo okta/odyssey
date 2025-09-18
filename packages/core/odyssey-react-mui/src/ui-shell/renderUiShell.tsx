@@ -13,9 +13,9 @@
 import { type SetStateAction } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
+import { bufferLatest } from "../tools/bufferLatest.js";
+import { createMessageBus, PublishMessage } from "../tools/createMessageBus.js";
 import { renderReactInWebComponent } from "../web-component/renderReactInWebComponent.js";
-import { bufferLatest } from "./bufferLatest.js";
-import { createMessageBus, PublishMessage } from "./createMessageBus.js";
 import { UiShell, UiShellProps } from "./UiShell.js";
 import { UiShellNavComponentProps } from "./uiShellContentTypes.js";
 import { uiShellDataAttribute } from "./useHasUiShell.js";

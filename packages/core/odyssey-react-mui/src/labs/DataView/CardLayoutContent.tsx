@@ -11,14 +11,20 @@
  */
 
 import styled, { CSSObject } from "@emotion/styled";
-import { Checkbox as MuiCheckbox } from "@mui/material";
 import {
   MRT_Row,
   MRT_RowData,
   MRT_RowSelectionState,
   MRT_TableInstance,
 } from "material-react-table";
-import { Dispatch, memo, ReactNode, SetStateAction, useCallback } from "react";
+import {
+  Dispatch,
+  memo,
+  ReactNode,
+  SetStateAction,
+  useCallback,
+  useMemo,
+} from "react";
 
 import { Box } from "../../Box.js";
 import { CircularProgress } from "../../CircularProgress.js";
@@ -93,6 +99,26 @@ type CardLayoutContentComponent = (<TData extends MRT_RowData>(
 ) => JSX.Element) & {
   displayName?: string;
 };
+type RowDataCardProps<TData extends MRT_RowData> = {
+  currentIndex: number;
+  handleRowSelectionChange: (row: TData) => void;
+  row: TData;
+} & Pick<
+  CardLayoutContentProps<TData>,
+  | "cardLayoutOptions"
+  | "hasRowReordering"
+  | "hasRowSelection"
+  | "isRowReorderingDisabled"
+  | "onReorderRows"
+  | "rowReorderingUtilities"
+  | "rowSelection"
+  | "totalRows"
+>;
+type RowDataCardComponent = (<TData extends MRT_RowData>(
+  props: RowDataCardProps<TData>,
+) => JSX.Element) & {
+  displayName?: string;
+};
 
 const StackContainer = styled("div", {
   shouldForwardProp: (prop) =>
@@ -133,13 +159,82 @@ const LoadingContainer = styled("div", {
   paddingBlock: odysseyDesignTokens.Spacing5,
 }));
 
-const CheckboxContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
-})<{
-  odysseyDesignTokens: DesignTokens;
-}>(({ odysseyDesignTokens }) => ({
-  marginBlockStart: `-${odysseyDesignTokens.Spacing1}`,
-}));
+const RowDataCard = <TData extends MRT_RowData>({
+  cardLayoutOptions,
+  currentIndex,
+  handleRowSelectionChange,
+  hasRowReordering,
+  hasRowSelection,
+  isRowReorderingDisabled,
+  onReorderRows,
+  row,
+  rowReorderingUtilities,
+  rowSelection,
+  totalRows,
+}: RowDataCardProps<TData>) => {
+  const { overline, title, description, image, children, variant } =
+    cardLayoutOptions.itemProps(row);
+
+  const onSelectionChange = useCallback(
+    () => handleRowSelectionChange(row),
+    [handleRowSelectionChange, row],
+  );
+
+  const detailPanel = useMemo(
+    () => cardLayoutOptions.renderDetailPanel?.({ row }),
+    [cardLayoutOptions, row],
+  );
+
+  const menuButtonChildren = useMemo(
+    () =>
+      cardLayoutOptions.rowActionMenuItems || hasRowReordering ? (
+        <RowActions
+          isRowReorderingDisabled={isRowReorderingDisabled}
+          row={row}
+          rowActionMenuItems={
+            cardLayoutOptions.rowActionMenuItems as CardLayoutProps<MRT_RowData>["rowActionMenuItems"]
+          }
+          rowIndex={currentIndex}
+          totalRows={totalRows}
+          updateRowOrder={
+            hasRowReordering && onReorderRows
+              ? rowReorderingUtilities.updateRowOrder
+              : undefined
+          }
+        />
+      ) : null,
+    [
+      cardLayoutOptions.rowActionMenuItems,
+      currentIndex,
+      hasRowReordering,
+      isRowReorderingDisabled,
+      onReorderRows,
+      row,
+      rowReorderingUtilities,
+      totalRows,
+    ],
+  );
+
+  return (
+    <DataCard
+      children={children}
+      description={description}
+      detailPanel={detailPanel}
+      hasSelection={hasRowSelection}
+      image={image}
+      isSelected={rowSelection[row.id as number] ?? false}
+      key={row.id as string}
+      menuButtonChildren={menuButtonChildren}
+      onSelectionChange={onSelectionChange}
+      overline={overline}
+      title={title}
+      variant={variant}
+    />
+  );
+};
+
+const MemoizedRowDataCard = memo(RowDataCard) as RowDataCardComponent;
+MemoizedRowDataCard.displayName = "RowDataCard";
 
 const CardLayoutContent = <TData extends MRT_RowData>({
   currentLayout,
@@ -174,8 +269,6 @@ const CardLayoutContent = <TData extends MRT_RowData>({
     [setRowSelection],
   );
 
-  const { updateRowOrder } = rowReorderingUtilities;
-
   return (
     <Box>
       {isLoading ? (
@@ -194,62 +287,23 @@ const CardLayoutContent = <TData extends MRT_RowData>({
               role="list"
             >
               {data.map((row, index) => {
-                const {
-                  overline,
-                  title,
-                  description,
-                  image,
-                  children,
-                  variant,
-                  button,
-                } = cardLayoutOptions.itemProps(row);
                 const currentIndex =
                   index + (pagination.pageIndex - 1) * pagination.pageSize;
 
                 return (
-                  <DataCard
-                    Accessory={
-                      hasRowSelection && (
-                        // Negative margin to counteract the checkbox's inbuilt spacing
-                        <CheckboxContainer
-                          odysseyDesignTokens={odysseyDesignTokens}
-                        >
-                          <MuiCheckbox
-                            checked={rowSelection[row.id as string] ?? false}
-                            onChange={() => handleRowSelectionChange(row)}
-                          />
-                        </CheckboxContainer>
-                      )
-                    }
-                    button={button}
-                    children={children}
-                    description={description}
-                    image={image}
+                  <MemoizedRowDataCard
+                    cardLayoutOptions={cardLayoutOptions}
+                    currentIndex={currentIndex}
+                    handleRowSelectionChange={handleRowSelectionChange}
+                    hasRowReordering={hasRowReordering}
+                    hasRowSelection={hasRowSelection}
+                    isRowReorderingDisabled={isRowReorderingDisabled}
                     key={row.id as string}
-                    menuButtonChildren={
-                      (cardLayoutOptions.rowActionMenuItems ||
-                        hasRowReordering) && (
-                        <RowActions
-                          isRowReorderingDisabled={isRowReorderingDisabled}
-                          row={row}
-                          rowActionMenuItems={
-                            cardLayoutOptions.rowActionMenuItems as CardLayoutProps<MRT_RowData>["rowActionMenuItems"]
-                          }
-                          rowIndex={currentIndex}
-                          totalRows={totalRows}
-                          updateRowOrder={
-                            hasRowReordering && onReorderRows
-                              ? updateRowOrder
-                              : undefined
-                          }
-                        />
-                      )
-                    }
-                    overline={overline}
-                    renderDetailPanel={cardLayoutOptions.renderDetailPanel}
+                    onReorderRows={onReorderRows}
                     row={row}
-                    title={title}
-                    variant={variant}
+                    rowReorderingUtilities={rowReorderingUtilities}
+                    rowSelection={rowSelection}
+                    totalRows={totalRows}
                   />
                 );
               })}

@@ -81,6 +81,7 @@ const eslintConfig = createTsEslintConfig(
 
   {
     name: getPrefixedEslintConfigName("header-plugin"),
+    ignores: ["packages/contributions/**/*"],
     plugins: {
       header: modifiedHeaderPlugin,
     },
