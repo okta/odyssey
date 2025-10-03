@@ -13,8 +13,8 @@
 import styled from "@emotion/styled";
 import { IconButton } from "@mui/material";
 import { memo, useCallback } from "react";
-import { useTranslation } from "react-i18next";
 
+import { useTranslation } from "../i18n.generated/i18n.js";
 import { DeleteIcon } from "../icons.generated/index.js";
 import { MuiPropsContext, MuiPropsContextType } from "../MuiPropsContext.js";
 import {

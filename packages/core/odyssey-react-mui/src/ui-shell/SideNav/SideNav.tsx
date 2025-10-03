@@ -26,11 +26,11 @@ import {
   useState,
 } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { useTranslation } from "react-i18next";
 
 import type { SideNavProps } from "./types.js";
 
 import { ContrastColors } from "../../createContrastColors.js";
+import { useTranslation } from "../../i18n.generated/i18n.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,

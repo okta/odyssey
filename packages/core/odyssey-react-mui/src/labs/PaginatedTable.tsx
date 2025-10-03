@@ -29,13 +29,13 @@ import {
   useRef,
   useState,
 } from "react";
-import { Trans, useTranslation } from "react-i18next";
 
 import type {
   DefaultMaterialReactTableData,
   MaterialReactTableProps,
 } from "./materialReactTableTypes.js";
 
+import { Trans, useTranslation } from "../i18n.generated/i18n.js";
 import { Typography } from "../Typography.js";
 
 export type PaginatedTableProps<TData extends DefaultMaterialReactTableData> = {

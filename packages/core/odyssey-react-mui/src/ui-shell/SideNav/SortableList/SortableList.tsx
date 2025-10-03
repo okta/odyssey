@@ -27,8 +27,8 @@ import {
   sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
 import { Fragment, useMemo, useState } from "react";
-import { useTranslation } from "react-i18next";
 
+import { useTranslation } from "../../../i18n.generated/i18n.js";
 import { SortableItem } from "./SortableItem.js";
 import { SortableOverlay } from "./SortableOverlay.js";
 

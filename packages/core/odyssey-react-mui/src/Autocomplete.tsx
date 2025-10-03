@@ -16,11 +16,11 @@ import {
   UseAutocompleteProps as MuiUseAutocompleteProps,
 } from "@mui/material";
 import { memo } from "react";
-import { useTranslation } from "react-i18next";
 
 import type { HtmlProps } from "./HtmlProps.js";
 
 import { FieldComponentProps } from "./FieldComponentProps.js";
+import { useTranslation } from "./i18n.generated/i18n.js";
 import { PickerVirtualizationListBox } from "./labs/OdysseyPickers/PickerVirtualizationListBox.js";
 import { TestSelector } from "./test-selectors/index.js";
 import { useAutocomplete } from "./useAutocomplete.js";

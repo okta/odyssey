@@ -13,7 +13,7 @@
 import { render, screen } from "@testing-library/react";
 
 import { DateTimePicker } from "./DateTimePicker.js";
-import "../../i18n.js";
+import "../../i18n.generated/i18n.js";
 
 describe("DateTimePicker", () => {
   test("displays the DateTimePicker", () => {

@@ -12,11 +12,13 @@
 
 import { render, screen } from "@testing-library/react";
 
-import { odysseyTranslate } from "./i18n.js";
-import { OdysseyTranslationProvider } from "./OdysseyTranslationProvider.js";
+import {
+  translate as odysseyTranslate,
+  TranslationProvider as OdysseyTranslationProvider,
+} from "./i18n.generated/i18n.js";
 import { TextField } from "./TextField.js";
 
-describe("OdysseyTranslationProvider", () => {
+describe(OdysseyTranslationProvider.name, () => {
   it("defaults to 'en' translation bundle", () => {
     render(
       <OdysseyTranslationProvider>

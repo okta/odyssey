@@ -21,7 +21,6 @@ import {
   useRef,
   useState,
 } from "react";
-import { useTranslation } from "react-i18next";
 
 import type { HtmlProps } from "./HtmlProps.js";
 
@@ -29,6 +28,7 @@ import { Box } from "./Box.js";
 import { FieldComponentProps } from "./FieldComponentProps.js";
 import { FieldHint } from "./FieldHint.js";
 import { CheckedFieldProps } from "./FormCheckedProps.js";
+import { useTranslation } from "./i18n.generated/i18n.js";
 import { CheckIcon } from "./icons.generated/index.js";
 import { ComponentControlledState, getControlState } from "./inputUtils.js";
 import {

@@ -13,7 +13,6 @@
 import { Box as MuiBox } from "@mui/material";
 import { MRT_Row, MRT_RowData } from "material-react-table";
 import { Fragment, memo, ReactElement, useCallback } from "react";
-import { Trans, useTranslation } from "react-i18next";
 
 import {
   Button,
@@ -21,6 +20,7 @@ import {
   MenuButtonProps,
   MenuItem,
 } from "../Buttons/index.js";
+import { Trans, useTranslation } from "../i18n.generated/i18n.js";
 import {
   ArrowBottomIcon,
   ArrowDownIcon,

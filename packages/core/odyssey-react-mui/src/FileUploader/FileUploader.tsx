@@ -19,11 +19,11 @@ import {
   useRef,
   useState,
 } from "react";
-import { useTranslation } from "react-i18next";
 
 import { Button } from "../Buttons/index.js";
 import { Field, RenderFieldComponentProps } from "../Field.js";
 import { FieldComponentProps } from "../FieldComponentProps.js";
+import { useTranslation } from "../i18n.generated/i18n.js";
 import { UploadIcon } from "../icons.generated/index.js";
 import {
   DesignTokens,

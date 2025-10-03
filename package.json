@@ -15,6 +15,7 @@
     "build": "yarn workspaces foreach --all --topological-dev --parallel --interlaced --exclude=@okta/odyssey-icons --exclude=@okta/odyssey-storybook run build",
     "create-contribution": "ok-ui create-package --type component-library --dir $(pwd)/packages/contributions/${name} --name '@okta/odyssey-contribution-${name}'",
     "eslint": "eslint .",
+    "generate:i18n": "yarn workspace @okta/odyssey-cli build && yarn workspaces foreach --all run generate:i18n",
     "generate:icons": "yarn workspace @okta/odyssey-icons build && yarn workspace @okta/odyssey-react-mui generate:icons",
     "generate:pseudoLocales": "yarn workspaces foreach --all --parallel run generate:pseudoLocales",
     "lerna-publish": "lerna publish from-package --no-verify-registry --no-push --force-publish --ignore-changes 'packages/contributions/**'",
@@ -33,6 +34,7 @@
     "typecheck": "yarn workspaces foreach --all --parallel --interlaced run typecheck"
   },
   "devDependencies": {
+    "@okta/odyssey-cli": "workspace:*",
     "@okta/odyssey-eslint-config": "workspace:*",
     "@okta/odyssey-storybook": "workspace:^",
     "@okta/ok-ui": "^4.13.1",

@@ -26,9 +26,9 @@ import {
   useRef,
   useState,
 } from "react";
-import { useTranslation } from "react-i18next";
 
 import { Field, RenderFieldComponentProps } from "../Field.js";
+import { useTranslation } from "../i18n.generated/i18n.js";
 import { TextFieldProps } from "../TextField.js";
 
 export type DateFieldProps = {

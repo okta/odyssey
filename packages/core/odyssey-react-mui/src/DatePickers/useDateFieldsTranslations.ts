@@ -12,7 +12,8 @@
 
 import { PickersLocaleText } from "@mui/x-date-pickers";
 import { DateTime } from "luxon";
-import { useTranslation } from "react-i18next";
+
+import { useTranslation } from "../i18n.generated/i18n.js";
 
 export type DateFieldsTranslations = PickersLocaleText<DateTime>;
 

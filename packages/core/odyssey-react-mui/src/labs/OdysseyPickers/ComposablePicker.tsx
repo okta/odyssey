@@ -15,9 +15,9 @@ import {
   AutocompleteProps as MuiAutocompleteProps,
 } from "@mui/material";
 import { HTMLAttributes, Key, memo, ReactNode } from "react";
-import { useTranslation } from "react-i18next";
 
 import { AutocompleteProps } from "../../Autocomplete.js";
+import { useTranslation } from "../../i18n.generated/i18n.js";
 import { useAutocomplete } from "../../useAutocomplete.js";
 import { PickerVirtualizationListBox } from "./PickerVirtualizationListBox.js";
 

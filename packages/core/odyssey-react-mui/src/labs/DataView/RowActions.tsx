@@ -12,9 +12,9 @@
 
 import { MRT_Row, MRT_RowData } from "material-react-table";
 import { Fragment, memo, ReactElement, useCallback } from "react";
-import { useTranslation } from "react-i18next";
 
 import { Button, MenuButtonProps, MenuItem } from "../../Buttons/index.js";
+import { useTranslation } from "../../i18n.generated/i18n.js";
 import {
   ArrowBottomIcon,
   ArrowDownIcon,
