@@ -13,9 +13,9 @@
 import { Checkbox as MuiCheckbox } from "@mui/material";
 import { MRT_DensityState, MRT_RowData } from "material-react-table";
 import { Dispatch, memo, SetStateAction, useCallback, useMemo } from "react";
-import { useTranslation } from "react-i18next";
 
 import { MenuButton, MenuItem } from "../../Buttons/index.js";
+import { useTranslation } from "../../i18n.generated/i18n.js";
 import { ListIcon, ShowIcon } from "../../icons.generated/index.js";
 import { TableLayoutProps, TableState } from "./componentTypes.js";
 import { densityValues } from "./constants.js";

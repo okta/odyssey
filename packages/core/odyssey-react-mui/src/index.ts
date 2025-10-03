@@ -54,7 +54,12 @@ export type {
   ThemeOptions,
 } from "@mui/material";
 
-export { odysseyTranslate } from "./i18n.js";
+export {
+  translate as odysseyTranslate,
+  TranslationProvider as OdysseyTranslationProvider,
+  type TranslationProviderProps as OdysseyTranslationProviderProps,
+  type TranslationOverrides,
+} from "./i18n.generated/i18n.js";
 export type { FocusHandle } from "./inputUtils.js";
 export { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext.js";
 
@@ -93,7 +98,6 @@ export * from "./NullElement.js";
 export * from "./OdysseyCacheProvider.js";
 export * from "./OdysseyProvider.js";
 export * from "./OdysseyThemeProvider.js";
-export * from "./OdysseyTranslationProvider.js";
 export * from "./Pagination/index.js";
 export * from "./PasswordField.js";
 export * from "./Radio.js";

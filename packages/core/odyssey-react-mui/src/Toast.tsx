@@ -12,10 +12,10 @@
 
 import { Alert, AlertTitle, Snackbar } from "@mui/material";
 import { memo, useCallback, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 
 import { Button } from "./Buttons/index.js";
 import { HtmlProps } from "./HtmlProps.js";
+import { useTranslation } from "./i18n.generated/i18n.js";
 import { CloseIcon } from "./icons.generated/index.js";
 import { Link } from "./Link.js";
 import { ScreenReaderText } from "./ScreenReaderText.js";

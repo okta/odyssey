@@ -11,9 +11,9 @@
  */
 
 import { Dispatch, memo, SetStateAction, useCallback, useMemo } from "react";
-import { useTranslation } from "react-i18next";
 
 import { MenuButton, MenuItem } from "../../Buttons/index.js";
+import { useTranslation } from "../../i18n.generated/i18n.js";
 import { AvailableLayouts, DataLayout } from "./componentTypes.js";
 
 export type LayoutSwitcherProps = {

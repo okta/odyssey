@@ -92,6 +92,11 @@ export const Single: StoryObj<LayoutProps> = {
   args: {
     regions: [1],
   },
+  argTypes: {
+    regions: {
+      control: "object",
+    },
+  },
   render: function C(args) {
     return (
       <Layout {...args}>
@@ -106,6 +111,11 @@ export const Single: StoryObj<LayoutProps> = {
 export const Split: StoryObj<LayoutProps> = {
   args: {
     regions: [1, 1],
+  },
+  argTypes: {
+    regions: {
+      control: "object",
+    },
   },
   render: function C(args) {
     return (
@@ -125,6 +135,11 @@ export const TwoThirdsStart: StoryObj<LayoutProps> = {
   args: {
     regions: [2, 1],
   },
+  argTypes: {
+    regions: {
+      control: "object",
+    },
+  },
   render: function C(args) {
     return (
       <Layout {...args}>
@@ -142,6 +157,11 @@ export const TwoThirdsStart: StoryObj<LayoutProps> = {
 export const TwoThirdsEnd: StoryObj<LayoutProps> = {
   args: {
     regions: [1, 2],
+  },
+  argTypes: {
+    regions: {
+      control: "object",
+    },
   },
   render: function C(args) {
     return (
@@ -161,6 +181,11 @@ export const ThreeFourthsStart: StoryObj<LayoutProps> = {
   args: {
     regions: [3, 1],
   },
+  argTypes: {
+    regions: {
+      control: "object",
+    },
+  },
   render: function C(args) {
     return (
       <Layout {...args}>
@@ -179,6 +204,11 @@ export const ThreeFourthsEnd: StoryObj<LayoutProps> = {
   args: {
     regions: [1, 3],
   },
+  argTypes: {
+    regions: {
+      control: "object",
+    },
+  },
   render: function C(args) {
     return (
       <Layout {...args}>
@@ -196,6 +226,11 @@ export const ThreeFourthsEnd: StoryObj<LayoutProps> = {
 export const ThreeRegionSplit: StoryObj<LayoutProps> = {
   args: {
     regions: [1, 1, 1],
+  },
+  argTypes: {
+    regions: {
+      control: "object",
+    },
   },
   render: function C(args) {
     return (
@@ -218,9 +253,46 @@ export const FourRegionSplit: StoryObj<LayoutProps> = {
   args: {
     regions: [1, 1, 1, 1],
   },
+  argTypes: {
+    regions: {
+      control: "object",
+    },
+  },
   render: function C(args) {
     return (
       <Layout {...args}>
+        <VisibleRegion>
+          <RegionLabel>Region</RegionLabel>
+        </VisibleRegion>
+        <VisibleRegion>
+          <RegionLabel>Region</RegionLabel>
+        </VisibleRegion>
+        <VisibleRegion>
+          <RegionLabel>Region</RegionLabel>
+        </VisibleRegion>
+        <VisibleRegion>
+          <RegionLabel>Region</RegionLabel>
+        </VisibleRegion>
+      </Layout>
+    );
+  },
+};
+
+export const Stacking: StoryObj<LayoutProps> = {
+  args: {
+    regions: [1, 1],
+  },
+  argTypes: {
+    regions: {
+      control: "object",
+    },
+  },
+  render: function C(args) {
+    return (
+      <Layout {...args}>
+        <VisibleRegion>
+          <RegionLabel>Region</RegionLabel>
+        </VisibleRegion>
         <VisibleRegion>
           <RegionLabel>Region</RegionLabel>
         </VisibleRegion>

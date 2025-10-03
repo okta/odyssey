@@ -36,12 +36,12 @@ import {
   useRef,
   useState,
 } from "react";
-import { useTranslation } from "react-i18next";
 
 import { Box } from "../Box.js";
 import { Button, MenuButton, MenuButtonProps } from "../Buttons/index.js";
 import { Callout } from "../Callout.js";
 import { EmptyState } from "../EmptyState.js";
+import { useTranslation } from "../i18n.generated/i18n.js";
 import {
   ArrowDownIcon,
   ArrowUnsortedIcon,

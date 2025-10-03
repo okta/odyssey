@@ -13,7 +13,7 @@
 import { render, screen } from "@testing-library/react";
 
 import { DatePicker } from "./DatePicker.js";
-import "../i18n.js";
+import "../i18n.generated/i18n.js";
 
 describe("DatePicker", () => {
   test("displays the DatePicker", () => {

@@ -15,7 +15,6 @@ import {
   FormLabel as MuiFormLabel,
 } from "@mui/material";
 import { memo, ReactElement, useMemo } from "react";
-import { useTranslation } from "react-i18next";
 
 import { FieldComponentProps } from "./FieldComponentProps.js";
 import { FieldError } from "./FieldError.js";
@@ -23,6 +22,7 @@ import { FieldHint } from "./FieldHint.js";
 import { FieldLabel } from "./FieldLabel.js";
 import { useFieldset } from "./FieldsetContext.js";
 import { HtmlProps } from "./HtmlProps.js";
+import { useTranslation } from "./i18n.generated/i18n.js";
 import { Typography } from "./Typography.js";
 import { useUniqueId } from "./useUniqueId.js";
 

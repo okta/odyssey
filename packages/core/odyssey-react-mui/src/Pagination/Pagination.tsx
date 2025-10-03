@@ -13,10 +13,10 @@
 import styled from "@emotion/styled";
 import { InputBase } from "@mui/material";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
 
 import { Box } from "../Box.js";
 import { Button } from "../Buttons/index.js";
+import { useTranslation } from "../i18n.generated/i18n.js";
 import { ArrowLeftIcon, ArrowRightIcon } from "../icons.generated/index.js";
 import {
   DesignTokens,
@@ -25,7 +25,6 @@ import {
 import { Paragraph } from "../Typography.js";
 import { paginationTypeValues } from "./constants.js";
 import { usePagination } from "./usePagination.js";
-import "../i18n.js";
 
 const PaginationContainer = styled("nav")({
   display: "flex",

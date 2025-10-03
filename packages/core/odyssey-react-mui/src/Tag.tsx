@@ -13,9 +13,9 @@
 import styled from "@emotion/styled";
 import { Chip as MuiChip, ChipProps as MuiChipProps } from "@mui/material";
 import { memo, ReactElement, useCallback, useContext } from "react";
-import { useTranslation } from "react-i18next";
 
 import { HtmlProps } from "./HtmlProps.js";
+import { useTranslation } from "./i18n.generated/i18n.js";
 import { CloseCircleFilledIcon } from "./icons.generated/index.js";
 import { MuiPropsContext, MuiPropsContextType } from "./MuiPropsContext.js";
 import {

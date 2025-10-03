@@ -14,6 +14,11 @@ import { ScopedCssBaseline } from "@mui/material";
 import { memo, ReactNode } from "react";
 
 import {
+  type DefaultSupportedLanguages,
+  TranslationProvider as OdysseyTranslationProvider,
+  type TranslationProviderProps as OdysseyTranslationProviderProps,
+} from "./i18n.generated/i18n.js";
+import {
   OdysseyCacheProvider,
   OdysseyCacheProviderProps,
 } from "./OdysseyCacheProvider.js";
@@ -21,11 +26,6 @@ import {
   OdysseyThemeProvider,
   OdysseyThemeProviderProps,
 } from "./OdysseyThemeProvider.js";
-import {
-  OdysseyTranslationProvider,
-  OdysseyTranslationProviderProps,
-} from "./OdysseyTranslationProvider.js";
-import { DefaultSupportedLanguages } from "./OdysseyTranslationProvider.types.js";
 
 const scopedCssBaselineStyles = {
   height: "inherit",

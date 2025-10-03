@@ -19,7 +19,6 @@ import {
 } from "@mui/x-date-pickers";
 import { DateTime } from "luxon";
 import { memo, useCallback, useEffect, useMemo, useRef } from "react";
-import { useTranslation } from "react-i18next";
 
 import { Button } from "../../Buttons/index.js";
 import { DateFieldActionBar } from "../../DatePickers/DateFieldActionBar.js";
@@ -30,6 +29,7 @@ import {
   useOdysseyDateFields,
 } from "../../DatePickers/useOdysseyDateFields.js";
 import { FieldComponentProps } from "../../FieldComponentProps.js";
+import { useTranslation } from "../../i18n.generated/i18n.js";
 import { CalendarIcon, ClockIcon } from "../../icons.generated/index.js";
 import {
   DesignTokens,

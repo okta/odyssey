@@ -53,8 +53,8 @@ const LayoutContent = styled("div", {
 })<LayoutContentProps>(({ odysseyDesignTokens, regions }) => ({
   display: "grid",
   gridTemplateColumns: regions,
-  gridColumnGap: odysseyDesignTokens.Spacing4,
-  columnGap: odysseyDesignTokens.Spacing4,
+  gridGap: odysseyDesignTokens.Spacing4,
+  gap: odysseyDesignTokens.Spacing4,
 
   "& + &": {
     marginBlockStart: odysseyDesignTokens.Spacing4,

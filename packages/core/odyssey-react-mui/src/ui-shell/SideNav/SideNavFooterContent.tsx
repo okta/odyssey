@@ -12,12 +12,12 @@
 
 import styled from "@emotion/styled";
 import { memo, useMemo } from "react";
-import { useTranslation } from "react-i18next";
 
 import type { SideNavFooterItem } from "./types.js";
 
 import { Box } from "../../Box.js";
 import { ContrastColors } from "../../createContrastColors.js";
+import { useTranslation } from "../../i18n.generated/i18n.js";
 import { Link } from "../../Link.js";
 import {
   DesignTokens,

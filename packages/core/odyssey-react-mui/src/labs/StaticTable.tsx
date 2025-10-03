@@ -26,12 +26,13 @@ import {
   useRef,
   useState,
 } from "react";
-import { useTranslation } from "react-i18next";
 
 import type {
   DefaultMaterialReactTableData,
   MaterialReactTableProps,
 } from "./materialReactTableTypes.js";
+
+import { useTranslation } from "../i18n.generated/i18n.js";
 
 export type StaticTableProps<TData extends DefaultMaterialReactTableData> = {
   columns: MaterialReactTableProps<TData>["columns"];

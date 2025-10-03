@@ -27,9 +27,9 @@ import {
   useMemo,
   useState,
 } from "react";
-import { useTranslation } from "react-i18next";
 
 import { HtmlProps } from "./HtmlProps.js";
+import { useTranslation } from "./i18n.generated/i18n.js";
 import { GroupIcon, HomeIcon, UserIcon } from "./icons.generated/index.js";
 import { Subordinate } from "./Typography.js";
 

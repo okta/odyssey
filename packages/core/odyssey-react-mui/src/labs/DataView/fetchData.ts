@@ -10,10 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { t } from "i18next";
 import { MRT_RowData } from "material-react-table";
 import { Dispatch, SetStateAction } from "react";
 
+import { translate as odysseyTranslate } from "../../i18n.generated/i18n.js";
 import { UniversalProps } from "./componentTypes.js";
 import { DataQueryParamsType } from "./dataTypes.js";
 
@@ -42,7 +42,9 @@ export const fetchData = async <TData extends MRT_RowData>({
     const incomingData = await getData?.(dataQueryParams);
     setData(incomingData);
   } catch (error) {
-    setErrorMessage(typeof error === "string" ? error : t("table.error"));
+    setErrorMessage(
+      typeof error === "string" ? error : odysseyTranslate("table.error"),
+    );
   } finally {
     setIsLoading?.(false);
   }

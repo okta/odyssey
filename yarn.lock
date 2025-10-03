@@ -2018,13 +2018,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.27.6":
-  version: 7.28.4
-  resolution: "@babel/runtime@npm:7.28.4"
-  checksum: 10/6c9a70452322ea80b3c9b2a412bcf60771819213a67576c8cec41e88a95bb7bf01fc983754cda35dc19603eef52df22203ccbf7777b9d6316932f9fb77c25163
-  languageName: node
-  linkType: hard
-
 "@babel/template@npm:^7.22.5, @babel/template@npm:^7.27.1, @babel/template@npm:^7.27.2, @babel/template@npm:^7.3.3":
   version: 7.27.2
   resolution: "@babel/template@npm:7.27.2"
@@ -5650,6 +5643,54 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@okta/odyssey-cli@workspace:*, @okta/odyssey-cli@workspace:packages/tools/odyssey-cli":
+  version: 0.0.0-use.local
+  resolution: "@okta/odyssey-cli@workspace:packages/tools/odyssey-cli"
+  dependencies:
+    "@types/node": "npm:^24.1.0"
+    properties: "npm:1.2.1"
+    rimraf: "npm:^6.0.1"
+    tsx: "npm:^4.7.3"
+    typescript: "npm:^5.8.3"
+    vitest: "npm:^3.2.4"
+    yargs: "npm:^17.7.2"
+  bin:
+    odyssey-cli: ./dist/index.js
+  languageName: unknown
+  linkType: soft
+
+"@okta/odyssey-contribution-tooling@workspace:*, @okta/odyssey-contribution-tooling@workspace:packages/core/odyssey-contribution-tooling":
+  version: 0.0.0-use.local
+  resolution: "@okta/odyssey-contribution-tooling@workspace:packages/core/odyssey-contribution-tooling"
+  dependencies:
+    "@okta/ok-ui": "npm:^4.13.1"
+    "@okta/ui-stacks-component-libraries-odyssey-contributions": "npm:1.1.3"
+    "@testing-library/dom": "npm:^10.4"
+    "@testing-library/jest-dom": "npm:^6.8"
+    "@testing-library/react": "npm:^16.3"
+    "@testing-library/user-event": "npm:14.x"
+    "@types/react": "npm:18.x"
+    "@vitejs/plugin-react": "npm:^5.0"
+    "@vitest/browser": "npm:^3.2"
+    "@vitest/coverage-v8": "npm:^3.2"
+    "@vitest/ui": "npm:^3.2"
+    concurrently: "npm:^9.2.1"
+    i18next: "npm:^23.15.1"
+    jest-axe: "npm:^10.0"
+    jsdom: "npm:^26.1"
+    msw: "npm:^2.10.5"
+    playwright: "npm:^1.55.0"
+    react: "npm:^18.3.1"
+    react-dom: "npm:^18.3.1"
+    react-i18next: "npm:15.4.1"
+    regenerator-runtime: "npm:^0.14.1"
+    typescript: "npm:^5.9.2"
+    vite: "npm:^7.1"
+    vite-plugin-svgr: "npm:^4.5"
+    vitest: "npm:^3.2"
+  languageName: unknown
+  linkType: soft
+
 "@okta/odyssey-contributions-example-components@workspace:packages/contributions/example-components":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-contributions-example-components@workspace:packages/contributions/example-components"
@@ -5743,6 +5784,9 @@ __metadata:
     vite: "npm:^7.1"
     vite-plugin-svgr: "npm:^4.5"
     vitest: "npm:^3.2"
+  peerDependencies:
+    react: ^18.3.1
+    react-dom: ^18.3.1
   languageName: unknown
   linkType: soft
 
@@ -5769,7 +5813,6 @@ __metadata:
     playwright: "npm:^1.55.0"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
-    react-i18next: "npm:^15.7.3"
     regenerator-runtime: "npm:^0.14.1"
     typescript: "npm:^5.9.2"
     vite: "npm:^7.1"
@@ -5915,6 +5958,8 @@ __metadata:
     "@mui/utils": "npm:^5.17.1"
     "@mui/x-date-pickers": "npm:^7.2.0"
     "@okta/browserslist-config-odyssey": "workspace:*"
+    "@okta/odyssey-cli": "workspace:*"
+    "@okta/odyssey-contribution-tooling": "workspace:*"
     "@okta/odyssey-design-tokens": "workspace:*"
     "@okta/odyssey-icons": "workspace:*"
     "@okta/odyssey-typescript": "workspace:*"
@@ -5939,7 +5984,6 @@ __metadata:
     concurrently: "npm:^8.2.2"
     date-fns: "npm:^2.30.0"
     dom-accessibility-api: "npm:^0.7.0"
-    i18next: "npm:^23.15.1"
     jest-axe: "npm:^5.0.1"
     jsdom: "npm:^26.1.0"
     luxon: "npm:^3.4.4"
@@ -5949,7 +5993,6 @@ __metadata:
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
     react-error-boundary: "npm:^4.1.1"
-    react-i18next: "npm:^15.7.3"
     react-window: "npm:^1.8.10"
     regenerator-runtime: "npm:^0.14.1"
     rimraf: "npm:^6.0.1"
@@ -21151,6 +21194,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "odyssey@workspace:."
   dependencies:
+    "@okta/odyssey-cli": "workspace:*"
     "@okta/odyssey-eslint-config": "workspace:*"
     "@okta/odyssey-storybook": "workspace:^"
     "@okta/ok-ui": "npm:^4.13.1"
@@ -22531,6 +22575,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-i18next@npm:15.4.1":
+  version: 15.4.1
+  resolution: "react-i18next@npm:15.4.1"
+  dependencies:
+    "@babel/runtime": "npm:^7.25.0"
+    html-parse-stringify: "npm:^3.0.1"
+  peerDependencies:
+    i18next: ">= 23.2.3"
+    react: ">= 16.8.0"
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+    react-native:
+      optional: true
+  checksum: 10/fd1f2dbffd579d6ea35d5510734f997c11d4a09372a24db194daf5f3201a0f536992d558aa58863d20da4002994d1b6e6bd35cd1eab623f90afb97ea783a01b1
+  languageName: node
+  linkType: hard
+
 "react-i18next@npm:^15.1.1":
   version: 15.1.1
   resolution: "react-i18next@npm:15.1.1"
@@ -22546,27 +22608,6 @@ __metadata:
     react-native:
       optional: true
   checksum: 10/bde93043b2a9ca986bcf021686a0045f9208dabd6e6a7aab75f8c7e38f30410f7dae6bc4b3be47502863621b10ac8a46c1a8c929708fbd822633d76cbb41ae3a
-  languageName: node
-  linkType: hard
-
-"react-i18next@npm:^15.7.3":
-  version: 15.7.3
-  resolution: "react-i18next@npm:15.7.3"
-  dependencies:
-    "@babel/runtime": "npm:^7.27.6"
-    html-parse-stringify: "npm:^3.0.1"
-  peerDependencies:
-    i18next: ">= 25.4.1"
-    react: ">= 16.8.0"
-    typescript: ^5
-  peerDependenciesMeta:
-    react-dom:
-      optional: true
-    react-native:
-      optional: true
-    typescript:
-      optional: true
-  checksum: 10/6cf6cf03534fdd505c3c5cbd36220b6c0f0b6fdd8c4792a55efb7833cb6c4c1252e2bbe13cc077a34ee06eb11fbf83e4085a39b67b9c69f2346e2b7c35ccb2d9
   languageName: node
   linkType: hard
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.45.2](https://github.com/atko-eng/odyssey-design-system/compare/v1.45.1...v1.45.2) (2025-10-03)
+
+### Reverts
+
+- update z-index values for shadow and app container styles ed79ddb ([#82](https://github.com/atko-eng/odyssey-design-system/issues/82)) ([c773d8e](https://github.com/atko-eng/odyssey-design-system/commit/c773d8ecf19db835b43c1a54863b12d9fcfc01a5))
+
+## [1.45.1](https://github.com/atko-eng/odyssey-design-system/compare/v1.45.0...v1.45.1) (2025-09-26)
+
+### Bug Fixes
+
+- fix: remove zIndex property from useMatchAppElementToUiShellAppArea ([#81](https://github.com/atko-eng/odyssey-design-system/issues/81)) ([a9cab01](https://github.com/atko-eng/odyssey-design-system/commit/a9cab01afd9f1151d8407d2a268700ec376fb36b))
+
 ## [1.45.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.44.0...v1.45.0) (2025-09-17)
 
 ### Features

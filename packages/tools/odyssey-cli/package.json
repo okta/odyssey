@@ -1,0 +1,28 @@
+{
+  "name": "@okta/odyssey-cli",
+  "author": "Okta, Inc.",
+  "license": "Apache-2.0",
+  "sideEffects": false,
+  "private": true,
+  "description": "Internal CLI tools for the Odyssey monorepo",
+  "bin": "./dist/index.js",
+  "main": "./dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build:clean": "rimraf dist",
+    "build": "yarn build:clean && tsc",
+    "test": "NODE_ENV=test vitest run --reporter=default"
+  },
+  "devDependencies": {
+    "@types/node": "^24.1.0",
+    "properties": "1.2.1",
+    "rimraf": "^6.0.1",
+    "tsx": "^4.7.3",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4",
+    "yargs": "^17.7.2"
+  },
+  "version": "1.45.2"
+}

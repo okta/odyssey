@@ -1,5 +1,6 @@
 downstream:
   additionalWorkspaces:
+    - "@okta/odyssey-contribution-tooling"
     - "@okta/odyssey-design-tokens"
 
   repos:

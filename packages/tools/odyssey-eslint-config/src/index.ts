@@ -81,7 +81,11 @@ const eslintConfig = createTsEslintConfig(
 
   {
     name: getPrefixedEslintConfigName("header-plugin"),
-    ignores: ["packages/contributions/**/*"],
+    ignores: [
+      "packages/contributions/**/*",
+      "packages/core/odyssey-contribution-tooling/**/*",
+      "packages/tools/odyssey-cli/**/*",
+    ],
     plugins: {
       header: modifiedHeaderPlugin,
     },

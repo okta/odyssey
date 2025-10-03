@@ -12,8 +12,8 @@
 
 import { MRT_Row, MRT_RowData, MRT_TableInstance } from "material-react-table";
 import { Dispatch, KeyboardEvent, SetStateAction } from "react";
-import { useTranslation } from "react-i18next";
 
+import { useTranslation } from "../i18n.generated/i18n.js";
 import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext.js";
 import { DataTableProps } from "./DataTable.js";
 import { reorderDataRowsLocally } from "./reorderDataRowsLocally.js";

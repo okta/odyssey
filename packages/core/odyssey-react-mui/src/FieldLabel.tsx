@@ -12,10 +12,10 @@
 
 import { InputLabel as MuiInputLabel } from "@mui/material";
 import { memo, useMemo } from "react";
-import { useTranslation } from "react-i18next";
 
 import type { HtmlProps } from "./HtmlProps.js";
 
+import { useTranslation } from "./i18n.generated/i18n.js";
 import { ScreenReaderText } from "./ScreenReaderText.js";
 import { Subordinate } from "./Typography.js";
 

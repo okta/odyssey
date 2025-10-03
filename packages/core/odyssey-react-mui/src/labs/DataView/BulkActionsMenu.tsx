@@ -13,10 +13,10 @@
 import styled from "@emotion/styled";
 import { MRT_RowData, MRT_RowSelectionState } from "material-react-table";
 import { Dispatch, memo, SetStateAction, useCallback } from "react";
-import { useTranslation } from "react-i18next";
 
 import { Box } from "../../Box.js";
 import { Button, MenuButton } from "../../Buttons/index.js";
+import { useTranslation } from "../../i18n.generated/i18n.js";
 import { ChevronDownIcon } from "../../icons.generated/index.js";
 import {
   DesignTokens,

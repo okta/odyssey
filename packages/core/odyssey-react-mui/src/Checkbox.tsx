@@ -19,12 +19,12 @@ import {
   FormControlLabelProps as MuiFormControlLabelProps,
 } from "@mui/material";
 import { memo, useCallback, useImperativeHandle, useMemo, useRef } from "react";
-import { useTranslation } from "react-i18next";
 
 import type { HtmlProps } from "./HtmlProps.js";
 
 import { FieldComponentProps } from "./FieldComponentProps.js";
 import { CheckedFieldProps } from "./FormCheckedProps.js";
+import { useTranslation } from "./i18n.generated/i18n.js";
 import {
   ComponentControlledState,
   FocusHandle,

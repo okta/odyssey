@@ -27,9 +27,9 @@ import {
   useContext,
   useMemo,
 } from "react";
-import { useTranslation } from "react-i18next";
 
 import { ContrastColors } from "../../../createContrastColors.js";
+import { useTranslation } from "../../../i18n.generated/i18n.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,

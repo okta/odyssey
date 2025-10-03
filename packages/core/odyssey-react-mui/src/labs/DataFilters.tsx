@@ -29,13 +29,13 @@ import {
   useRef,
   useState,
 } from "react";
-import { Trans, useTranslation } from "react-i18next";
 
 import { Autocomplete } from "../Autocomplete.js";
 import { Box } from "../Box.js";
 import { Button } from "../Buttons/index.js";
 import { Checkbox } from "../Checkbox.js";
 import { CheckboxGroup } from "../CheckboxGroup.js";
+import { Trans, useTranslation } from "../i18n.generated/i18n.js";
 import {
   CheckIcon,
   ChevronRightIcon,

@@ -17,7 +17,6 @@ import {
   MRT_RowSelectionState,
 } from "material-react-table";
 import { memo, useCallback, useEffect, useMemo, useState } from "react";
-import { useTranslation } from "react-i18next";
 
 import { Box } from "../../Box.js";
 import { MenuButton } from "../../Buttons/index.js";
@@ -25,6 +24,7 @@ import { Callout } from "../../Callout.js";
 import { createUniqueId } from "../../createUniqueId.js";
 import { useRowReordering } from "../../DataTable/useRowReordering.js";
 import { EmptyState } from "../../EmptyState.js";
+import { useTranslation } from "../../i18n.generated/i18n.js";
 import { MoreIcon } from "../../icons.generated/index.js";
 import {
   DesignTokens,

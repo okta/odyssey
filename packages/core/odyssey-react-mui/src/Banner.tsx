@@ -12,10 +12,10 @@
 
 import { Alert, AlertColor, AlertProps, AlertTitle } from "@mui/material";
 import { memo } from "react";
-import { useTranslation } from "react-i18next";
 
 import type { HtmlProps } from "./HtmlProps.js";
 
+import { useTranslation } from "./i18n.generated/i18n.js";
 import { Link, LinkProps } from "./Link.js";
 import { ScreenReaderText } from "./ScreenReaderText.js";
 

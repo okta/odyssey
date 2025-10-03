@@ -13,9 +13,9 @@
 import styled from "@emotion/styled";
 import { PickersActionBarProps } from "@mui/x-date-pickers";
 import { memo } from "react";
-import { useTranslation } from "react-i18next";
 
 import { Button } from "../Buttons/index.js";
+import { useTranslation } from "../i18n.generated/i18n.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,

@@ -22,8 +22,8 @@ import {
   useMemo,
   useRef,
 } from "react";
-import { useTranslation } from "react-i18next";
 
+import { useTranslation } from "../../i18n.generated/i18n.js";
 import { ChevronRightIcon } from "../../icons.generated/ChevronRight.js";
 import { MuiPropsContext, MuiPropsContextType } from "../../MuiPropsContext.js";
 import {

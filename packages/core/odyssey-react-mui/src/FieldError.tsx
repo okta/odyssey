@@ -12,12 +12,12 @@
 
 import { FormHelperText } from "@mui/material";
 import { memo } from "react";
-import { useTranslation } from "react-i18next";
 
 import type { HtmlProps } from "./HtmlProps.js";
 
 import { Box } from "./Box.js";
 import { ErrorMessageList } from "./ErrorMessageList.js";
+import { useTranslation } from "./i18n.generated/i18n.js";
 import { ScreenReaderText } from "./ScreenReaderText.js";
 
 export type FieldErrorProps = {
