@@ -17,9 +17,11 @@ import { InformationCircleFilledIcon } from "@okta/odyssey-react-mui/icons";
 import { expect, within } from "@storybook/test";
 
 import icons from "../../tools/iconUtils.js";
+import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
 export default {
   component: Link,
+  decorators: [OdysseyStorybookThemeDecorator],
   argTypes: {
     children: {
       control: "text",

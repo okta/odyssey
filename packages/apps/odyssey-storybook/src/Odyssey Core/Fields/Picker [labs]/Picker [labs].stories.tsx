@@ -23,6 +23,7 @@ import {
 } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react";
 
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 import { pickerComponentPropsMetadata } from "../pickerComponentPropsMetadata.js";
 
@@ -120,6 +121,8 @@ type PickerType = typeof Picker<
 
 const meta = {
   component: Picker,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     ...(pickerComponentPropsMetadata as Partial<PickerType>),
     hint: fieldComponentPropsMetaData.hint,
@@ -130,7 +133,6 @@ const meta = {
     hint: "Optional hint text for picker",
     options: languagesNoDescription,
   },
-  tags: ["autodocs"],
 } satisfies Meta<typeof Picker>;
 
 export default meta;

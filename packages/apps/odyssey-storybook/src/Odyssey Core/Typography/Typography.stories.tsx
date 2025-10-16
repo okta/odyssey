@@ -32,6 +32,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { createElement } from "react";
 
 import { axeRun } from "../../axeRun.js";
+import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
 const variantMapping = {
   h1: Heading1,
@@ -49,6 +50,7 @@ const variantMapping = {
 
 const storybookMeta: Meta<TypographyProps> = {
   component: Typography,
+  decorators: [OdysseyStorybookThemeDecorator],
   parameters: {
     docs: {
       description: "",

@@ -221,6 +221,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
 
     return (
       <StyledContainerToEnsureThemeProviderDivIsFullWidth>
+        {/* Required for `contrastMode`. */}
         <OdysseyThemeProvider>
           <Field
             ariaDescribedBy={ariaDescribedBy}

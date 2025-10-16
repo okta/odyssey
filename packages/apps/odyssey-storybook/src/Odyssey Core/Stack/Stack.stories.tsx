@@ -21,6 +21,8 @@ import {
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 
+import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
+
 const ContentBox = styled.div<{ odysseyDesignTokens: DesignTokens }>(
   ({ odysseyDesignTokens }) => ({
     display: "flex",
@@ -49,6 +51,8 @@ const Content = () => {
 
 const storybookMeta: Meta<OdysseyStackProps> = {
   component: Stack,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     children: {
       control: <></>,
@@ -92,7 +96,6 @@ const storybookMeta: Meta<OdysseyStackProps> = {
     children: <Content />,
     spacing: 2,
   },
-  tags: ["autodocs"],
 };
 
 export default storybookMeta;

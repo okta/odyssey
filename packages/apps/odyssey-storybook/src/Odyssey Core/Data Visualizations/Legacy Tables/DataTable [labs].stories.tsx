@@ -35,6 +35,7 @@ import {
 import { fn } from "@storybook/test";
 import { Dispatch, SetStateAction, useCallback, useState } from "react";
 
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { filterData, reorderData } from "../DataView [labs]/dataFunctions.js";
 import {
   Person,
@@ -56,6 +57,7 @@ type DataTableMetaProps = DataViewProps<Person> &
 
 const storybookMeta: Meta<DataTableMetaProps> = {
   component: DataView,
+  decorators: [OdysseyStorybookThemeDecorator],
   argTypes: {
     getData: {
       table: {

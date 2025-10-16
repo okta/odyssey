@@ -21,12 +21,16 @@ import { Button } from "@okta/odyssey-react-mui";
 import { useCallback } from "react";
 
 import { IgaComponentsLegacyOdysseyDecorator } from "../../tools/IgaComponentsLegacyOdysseyDecorator.js";
+import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
 const meta = {
+  component: ToastManager,
+  decorators: [
+    OdysseyStorybookThemeDecorator,
+    IgaComponentsLegacyOdysseyDecorator,
+  ],
   args: {},
   argTypes: {},
-  component: ToastManager,
-  decorators: [IgaComponentsLegacyOdysseyDecorator],
 } satisfies Meta<ToastManagerProps>;
 
 export default meta;

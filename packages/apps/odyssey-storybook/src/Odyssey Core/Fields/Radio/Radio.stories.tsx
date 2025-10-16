@@ -15,9 +15,13 @@ import { Meta, StoryObj } from "@storybook/react";
 import { expect, fn, userEvent, within } from "@storybook/test";
 
 import { axeRun } from "../../../axeRun.js";
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
+
 const meta = {
   component: Radio,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     isChecked: {
       control: "boolean",
@@ -109,7 +113,6 @@ const meta = {
     onChange: fn(),
     value: "Value",
   },
-  tags: ["autodocs"],
 } satisfies Meta<typeof Radio>;
 
 export default meta;

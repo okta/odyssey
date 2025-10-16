@@ -188,7 +188,7 @@ export type RenderReactInWebComponentProps = {
       webComponentRootElement?: never;
     }
   | {
-      webComponentParentElement?: HTMLElement;
+      webComponentParentElement?: never;
       /**
        * @deprecated Use `webComponentParentElement` instead.
        */

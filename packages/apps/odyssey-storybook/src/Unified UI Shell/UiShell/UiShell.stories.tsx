@@ -34,13 +34,18 @@ import {
   SettingsIcon,
   UserIcon,
 } from "@okta/odyssey-react-mui/icons";
-import { PageTemplate, UserProfile } from "@okta/odyssey-react-mui/labs";
+import {
+  Layout,
+  PageTemplate,
+  UserProfile,
+} from "@okta/odyssey-react-mui/labs";
 import {
   UiShell,
   uiShellDataAttribute,
   type UiShellNavComponentProps,
   type UiShellProps,
 } from "@okta/odyssey-react-mui/ui-shell";
+import { action } from "@storybook/addon-actions";
 import { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -48,9 +53,13 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { BaseButton } from "../../../../../core/odyssey-react-mui/src/Buttons/BaseButton.js";
 import { createMessageBus } from "../../../../../core/odyssey-react-mui/src/tools/createMessageBus.js";
 import PlaceholderLogo from "../../Odyssey Core/Fields/PickerWithOptionAdornment [labs]/PlaceholderLogo.js";
+import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
 const meta = {
   component: UiShell,
+  parameters: {
+    layout: "fullscreen",
+  },
   tags: ["!autodocs"],
   argTypes: {
     appBackgroundColor: {
@@ -163,19 +172,15 @@ const meta = {
   args: {
     appElement: document.createElement("div"),
     appElementScrollingMode: "vertical",
-    onSubscriptionCreated: fn(),
+    onSubscriptionCreated: action("onSubscriptionCreated"),
     uiShellAppElement: document.createElement("div"),
     uiShellStylesElement: document.head,
-  },
-  parameters: {
-    // docs: {
-    //   inlineStories: false,
-    // },
-    layout: "fullscreen",
   },
 } satisfies Meta<typeof UiShell>;
 
 export default meta;
+
+type Story = StoryObj<typeof meta>;
 
 const sharedAppSwitcherProps = {
   appIcons: [
@@ -417,8 +422,6 @@ const sharedSideNavProps = {
   ],
 } as const satisfies UiShellNavComponentProps["sideNavProps"];
 
-type Story = StoryObj<typeof meta>;
-
 const sharedTopNavProps = {
   // topNavLinkItems: [
   //   {
@@ -474,6 +477,7 @@ const useRefWithRerenderHack = () => {
 };
 
 export const Default: Story = {
+  decorators: [OdysseyStorybookThemeDecorator],
   args: {
     subscribeToPropChanges: (subscriber) => {
       subscriber({
@@ -489,12 +493,14 @@ export const Default: Story = {
 };
 
 export const LoadingFirstRender: Story = {
+  decorators: [OdysseyStorybookThemeDecorator],
   args: {
     subscribeToPropChanges: () => fn(),
   },
 };
 
 export const InvisibleFirstRender: Story = {
+  decorators: [OdysseyStorybookThemeDecorator],
   args: {
     initialVisibleSections: [],
     subscribeToPropChanges: () => fn(),
@@ -502,6 +508,7 @@ export const InvisibleFirstRender: Story = {
 };
 
 export const TopNavOnly: Story = {
+  decorators: [OdysseyStorybookThemeDecorator],
   args: {
     initialVisibleSections: ["TopNav"],
     optionalComponents: sharedOptionalComponents,
@@ -516,6 +523,7 @@ export const TopNavOnly: Story = {
 };
 
 export const AppSwitcherOnly: Story = {
+  decorators: [OdysseyStorybookThemeDecorator],
   args: {
     hasStandardAppContentPadding: false,
     initialVisibleSections: ["AppSwitcher"],
@@ -530,6 +538,7 @@ export const AppSwitcherOnly: Story = {
 };
 
 export const LoadingData: Story = {
+  decorators: [OdysseyStorybookThemeDecorator],
   args: {
     optionalComponents: sharedOptionalComponents,
     subscribeToPropChanges: (subscriber) => {
@@ -551,6 +560,7 @@ export const LoadingData: Story = {
 };
 
 export const WithCustomColors: Story = {
+  decorators: [OdysseyStorybookThemeDecorator],
   args: {
     appBackgroundColor: undefined,
     optionalComponents: sharedOptionalComponents,
@@ -573,6 +583,7 @@ export const WithCustomColors: Story = {
 };
 
 export const WithoutAppContent: Story = {
+  decorators: [OdysseyStorybookThemeDecorator],
   args: {
     optionalComponents: sharedOptionalComponents,
     subscribeToPropChanges: (subscriber) => {
@@ -588,6 +599,7 @@ export const WithoutAppContent: Story = {
 };
 
 export const WithoutSideNav: Story = {
+  decorators: [OdysseyStorybookThemeDecorator],
   args: {
     initialVisibleSections: ["AppSwitcher", "TopNav"],
     optionalComponents: sharedOptionalComponents,
@@ -608,6 +620,9 @@ export const WithoutSideNav: Story = {
 };
 
 const EXPECTED_LINE_HEIGHT = "30px";
+
+// NOTE: NO `decorators` HERE as we explicitly don't want the `<OdysseyProvider>` present in the decorator.
+// ALL OTHER STORIES in this file should have `decorators` specified.
 export const WithTallAppContentAndNoStorybookDecorator: Story = {
   args: {
     optionalComponents: sharedOptionalComponents,
@@ -625,9 +640,6 @@ export const WithTallAppContentAndNoStorybookDecorator: Story = {
 
       return () => {};
     },
-  },
-  parameters: {
-    hasThemeDecorator: false,
   },
   render: function C(props) {
     const appElementRef = useRefWithRerenderHack();
@@ -850,9 +862,6 @@ export const WithTallAppContentAndNoStorybookDecorator: Story = {
       </>
     );
   },
-
-  // NOTE: NO `decorators` HERE as we explicitly don't want the `<OdysseyProvider>` present in the decorator.
-  // ALL OTHER STORIES in this file should have `decorators` specified.
 };
 
 const {
@@ -861,6 +870,7 @@ const {
 } = createMessageBus();
 
 export const WithOdysseyAppContent: Story = {
+  decorators: [OdysseyStorybookThemeDecorator],
   args: {
     optionalComponents: {
       ...sharedOptionalComponents,
@@ -914,28 +924,31 @@ export const WithOdysseyAppContent: Story = {
                 description="This is my app."
                 title="Access Certification"
               >
-                <Surface>
-                  <div style={{ marginBlockEnd: `${16 / 14}rem` }}>
-                    <Paragraph>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Mauris lacinia leo quis sodales scelerisque. Maecenas
-                      tempor eget nunc sit amet ultrices. Maecenas et varius
-                      ante. Nulla eu quam sit amet orci fermentum dictum sit
-                      amet scelerisque libero. Proin luctus semper elit, ut
-                      pretium massa tristique a. Mauris hendrerit ex eu commodo
-                      egestas. Etiam a lacus aliquet, convallis metus et,
-                      sollicitudin odio. Fusce vehicula purus sed orci
-                      elementum, ut cursus diam sollicitudin. Pellentesque
-                      pulvinar nibh turpis, eu finibus dolor egestas eget. Duis
-                      tellus mauris, pulvinar sit amet ante a, aliquet laoreet
-                      sapien. Ut quis tempus massa. Fusce fringilla mattis
-                      lacinia. Cras at pharetra quam, eu ultrices ipsum.
-                    </Paragraph>
-                  </div>
-                  <div>
-                    <Button label="I understand" variant="primary" />
-                  </div>
-                </Surface>
+                <Layout regions={[1]}>
+                  <Surface>
+                    <div style={{ marginBlockEnd: `${16 / 14}rem` }}>
+                      <Paragraph>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Mauris lacinia leo quis sodales scelerisque. Maecenas
+                        tempor eget nunc sit amet ultrices. Maecenas et varius
+                        ante. Nulla eu quam sit amet orci fermentum dictum sit
+                        amet scelerisque libero. Proin luctus semper elit, ut
+                        pretium massa tristique a. Mauris hendrerit ex eu
+                        commodo egestas. Etiam a lacus aliquet, convallis metus
+                        et, sollicitudin odio. Fusce vehicula purus sed orci
+                        elementum, ut cursus diam sollicitudin. Pellentesque
+                        pulvinar nibh turpis, eu finibus dolor egestas eget.
+                        Duis tellus mauris, pulvinar sit amet ante a, aliquet
+                        laoreet sapien. Ut quis tempus massa. Fusce fringilla
+                        mattis lacinia. Cras at pharetra quam, eu ultrices
+                        ipsum.
+                      </Paragraph>
+                    </div>
+                    <div>
+                      <Button label="I understand" variant="primary" />
+                    </div>
+                  </Surface>
+                </Layout>
               </PageTemplate>
             </OdysseyProvider>
           )}

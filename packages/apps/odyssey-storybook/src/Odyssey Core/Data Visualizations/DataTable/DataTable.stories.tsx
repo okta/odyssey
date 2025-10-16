@@ -34,6 +34,7 @@ import {
 import { fn } from "@storybook/test";
 import { useCallback, useMemo, useState } from "react";
 
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import {
   Person,
   columns as personColumns,
@@ -47,6 +48,7 @@ import {
 
 const storybookMeta: Meta<DataTableProps> = {
   component: DataTable,
+  decorators: [OdysseyStorybookThemeDecorator],
   argTypes: {
     columns: {
       description: "The columns that make up the table.",

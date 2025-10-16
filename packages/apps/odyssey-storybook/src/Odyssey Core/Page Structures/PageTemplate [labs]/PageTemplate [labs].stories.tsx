@@ -28,14 +28,11 @@ import {
   TextField,
   useOdysseyDesignTokens,
 } from "@okta/odyssey-react-mui";
-import {
-  Layout,
-  PageTemplate,
-  PageTemplateProps,
-} from "@okta/odyssey-react-mui/labs";
+import { Layout, PageTemplate } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react";
 import { useCallback, useState } from "react";
 
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import {
   Person,
   columns as personColumns,
@@ -93,8 +90,12 @@ const drawerShortText = (
   </div>
 );
 
-const storybookMeta: Meta<PageTemplateProps> = {
+const meta = {
   component: PageTemplate,
+  decorators: [OdysseyStorybookThemeDecorator],
+  parameters: {
+    layout: "fullscreen",
+  },
   argTypes: {
     title: {
       control: "text",
@@ -194,11 +195,13 @@ const storybookMeta: Meta<PageTemplateProps> = {
       },
     },
   },
-};
+} satisfies Meta<typeof PageTemplate>;
 
-export default storybookMeta;
+export default meta;
 
-export const KitchenSink: StoryObj<PageTemplateProps> = {
+type Story = StoryObj<typeof meta>;
+
+export const KitchenSink: Story = {
   args: {
     title: "Table title",
     description: "Optional brief description about the page",
@@ -257,11 +260,7 @@ export const KitchenSink: StoryObj<PageTemplateProps> = {
         isFullWidth={args.isFullWidth}
         primaryCallToActionComponent={
           <Button
-            label={
-              isOverlayDrawerVisible
-                ? "Close overlay drawer"
-                : "Open overlay drawer"
-            }
+            label="Open overlay drawer"
             onClick={
               isOverlayDrawerVisible
                 ? onCloseOverlayDrawer
@@ -272,7 +271,7 @@ export const KitchenSink: StoryObj<PageTemplateProps> = {
         }
         secondaryCallToActionComponent={
           <Button
-            label={isDialogVisible ? "Close dialog" : "Open dialog"}
+            label="Open dialog"
             onClick={isDialogVisible ? onCloseDialog : onOpenDialog}
             variant="secondary"
           />
@@ -339,7 +338,7 @@ export const KitchenSink: StoryObj<PageTemplateProps> = {
   },
 };
 
-export const EmbeddedDrawer: StoryObj<PageTemplateProps> = {
+export const EmbeddedDrawer: Story = {
   args: {
     title: "Table title",
     description: "Optional brief description about the page",
@@ -420,7 +419,7 @@ export const EmbeddedDrawer: StoryObj<PageTemplateProps> = {
   },
 };
 
-export const Form: StoryObj<PageTemplateProps> = {
+export const Form: Story = {
   args: {
     title: "People",
     description: "Optional brief description about the page",
@@ -463,7 +462,7 @@ export const Form: StoryObj<PageTemplateProps> = {
   },
 };
 
-export const Dashboard: StoryObj<PageTemplateProps> = {
+export const Dashboard: Story = {
   args: {
     title: "Account",
     documentationLink: "https://www.okta.com",
@@ -678,7 +677,7 @@ export const Dashboard: StoryObj<PageTemplateProps> = {
   },
 };
 
-export const FullWidth: StoryObj<PageTemplateProps> = {
+export const FullWidth: Story = {
   args: {
     title: "Full-width Table",
     documentationLink: "https://www.okta.com",

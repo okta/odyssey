@@ -50,45 +50,7 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext.js";
-import { TestSelector } from "./test-selectors/index.js";
 import { normalizedKey } from "./useNormalizedKey.js";
-
-export const SelectTestSelector = {
-  accessibleText: {
-    errorMessage: "errorMessage",
-    hint: "description",
-    label: "label",
-  },
-  children: {
-    list: {
-      accessibleText: {
-        label: "label",
-      },
-      children: {
-        listItem: {
-          accessibleText: {
-            label: "label",
-          },
-          elementSelector: {
-            method: "ByRole",
-            options: {
-              label: "name",
-            },
-            role: "option",
-          },
-        },
-      },
-      isControlledElement: true,
-    },
-  },
-  elementSelector: {
-    method: "ByRole",
-    options: {
-      label: "name",
-    },
-    role: "combobox",
-  },
-} as const satisfies TestSelector;
 
 export type SelectOption = {
   language?: string;

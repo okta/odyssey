@@ -10,13 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { AutocompleteTestSelector } from "../Autocomplete.js";
-import { CalloutTestSelector } from "../Callout.js";
-import { SelectTestSelector } from "../Select.js";
-import { TabsTestSelector } from "../Tabs.js";
-import { TextFieldTestSelector } from "../TextField.js";
+import { AutocompleteTestSelector } from "./AutocompleteTestSelector.js";
+import { CalloutTestSelector } from "./CalloutTestSelector.js";
 import { querySelector } from "./querySelector.js";
+import { SelectTestSelector } from "./SelectTestSelector.js";
+import { TabsTestSelector } from "./TabsTestSelector.js";
 import { type TestSelector } from "./testSelector.js";
+import { TextFieldTestSelector } from "./TextFieldTestSelector.js";
 
 export const odysseyTestSelector = {
   Autocomplete: AutocompleteTestSelector,

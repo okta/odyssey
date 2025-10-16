@@ -22,34 +22,8 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext.js";
-import { type TestSelector } from "./test-selectors/index.js";
 import { Paragraph } from "./Typography.js";
 import { useUniqueId } from "./useUniqueId.js";
-
-export const CalloutTestSelector = {
-  accessibleText: {
-    text: "description",
-    title: "label",
-  },
-  children: {
-    link: {
-      elementSelector: {
-        method: "ByRole",
-        options: {
-          linkText: "name",
-        },
-        role: "link",
-      },
-    },
-  },
-  elementSelector: {
-    method: "ByRole",
-    options: {
-      title: "name",
-    },
-    role: ["alert", "status"],
-  },
-} as const satisfies TestSelector;
 
 export const calloutRoleValues = ["status", "alert"] as const;
 export const calloutSeverityValues = [

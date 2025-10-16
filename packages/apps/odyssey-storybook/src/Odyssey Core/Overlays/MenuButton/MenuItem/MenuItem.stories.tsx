@@ -15,10 +15,13 @@ import { MenuItem, MenuItemProps } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 import { useRef } from "react";
 
-import { fieldComponentPropsMetaData } from "../../Fields/fieldComponentPropsMetaData.js";
+import { OdysseyStorybookThemeDecorator } from "../../../../tools/OdysseyStorybookThemeDecorator.js";
+import { fieldComponentPropsMetaData } from "../../../Fields/fieldComponentPropsMetaData.js";
 
 const storybookMeta: Meta<typeof MenuItem> = {
   component: MenuItem,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     children: {
       control: "object",
@@ -71,7 +74,6 @@ const storybookMeta: Meta<typeof MenuItem> = {
   args: {
     children: "MenuItem content",
   },
-  tags: ["autodocs"],
 };
 
 export default storybookMeta;

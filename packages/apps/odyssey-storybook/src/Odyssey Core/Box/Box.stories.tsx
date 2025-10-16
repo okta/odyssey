@@ -14,8 +14,11 @@ import { Box, TextField } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 import { expect, within } from "@storybook/test";
 
+import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
+
 const meta = {
   component: Box,
+  decorators: [OdysseyStorybookThemeDecorator],
   argTypes: {
     children: {
       description:

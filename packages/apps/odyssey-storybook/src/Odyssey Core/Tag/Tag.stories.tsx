@@ -17,12 +17,15 @@ import { expect, fn, userEvent, within } from "@storybook/test";
 
 import { axeRun } from "../../axeRun.js";
 import icons from "../../tools/iconUtils.js";
+import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
 const meta = {
   component: Tag,
+  decorators: [OdysseyStorybookThemeDecorator],
   parameters: {
     actions: { argTypesRegex: null },
   },
+  tags: ["autodocs"],
   argTypes: {
     icon: {
       control: {
@@ -127,7 +130,6 @@ const meta = {
     onClick: fn(),
     size: "medium",
   },
-  tags: ["autodocs"],
 } satisfies Meta<typeof Tag>;
 
 export default meta;

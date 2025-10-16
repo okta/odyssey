@@ -15,10 +15,12 @@ import { Meta, StoryObj } from "@storybook/react";
 import { expect, userEvent, waitFor, within } from "@storybook/test";
 import { useCallback, useState } from "react";
 
+import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 import { PlaywrightProps } from "../../tools/storybookTypes.js";
 
 const storybookMeta: Meta<AccordionProps> = {
   component: Accordion,
+  decorators: [OdysseyStorybookThemeDecorator],
   argTypes: {
     children: {
       control: "text",

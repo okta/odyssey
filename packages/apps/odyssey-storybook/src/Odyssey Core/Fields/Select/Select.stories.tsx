@@ -25,6 +25,7 @@ import {
 import { useCallback, useState } from "react";
 
 import { axeRun } from "../../../axeRun.js";
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 
 const optionsArray: SelectProps<string | string[], boolean>["options"] = [
@@ -124,6 +125,8 @@ const optionsLanguages: SelectProps<string | string[], boolean>["options"] = [
 
 const meta = {
   component: Select,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     defaultValue: {
       control: "text",
@@ -231,7 +234,6 @@ const meta = {
     onFocus: fn(),
     options: optionsArray,
   },
-  tags: ["autodocs"],
 } satisfies Meta<typeof Select>;
 
 export default meta;
@@ -314,8 +316,8 @@ export const DefaultValue: Story = {
 
 export const Disabled: Story = {
   args: {
-    isDisabled: true,
     defaultValue: "",
+    isDisabled: true,
   },
 };
 export const Error: Story = {

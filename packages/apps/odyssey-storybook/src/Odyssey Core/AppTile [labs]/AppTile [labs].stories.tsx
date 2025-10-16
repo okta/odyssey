@@ -24,8 +24,11 @@ import { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 import { useCallback, useState } from "react";
 
+import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
+
 const meta = {
   component: AppTile,
+  decorators: [OdysseyStorybookThemeDecorator],
   argTypes: {
     actionAriaControls: {
       control: "text",

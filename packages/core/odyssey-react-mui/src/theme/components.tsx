@@ -590,8 +590,8 @@ export const getComponents = ({
   },
   MuiButton: {
     defaultProps: {
-      variant: "primary",
       disableElevation: true,
+      variant: "primary",
     },
     styleOverrides: {
       root: ({ ownerState }) => {
@@ -922,10 +922,10 @@ export const getComponents = ({
   },
   MuiCheckbox: {
     defaultProps: {
-      size: "small",
-      icon: <></>,
       checkedIcon: <CheckIcon />,
+      icon: <></>,
       indeterminateIcon: <SubtractIcon />,
+      size: "small",
     },
     styleOverrides: {
       root: ({ ownerState, theme }) => {

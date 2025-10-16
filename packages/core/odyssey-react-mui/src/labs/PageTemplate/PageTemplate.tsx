@@ -226,7 +226,6 @@ const PageTemplate = ({
           {title && <Heading4>{title}</Heading4>}
           {description && <Paragraph>{description}</Paragraph>}
         </TemplateHeaderPrimaryContent>
-
         <TemplateHeaderSecondaryContent
           odysseyDesignTokens={odysseyDesignTokens}
         >

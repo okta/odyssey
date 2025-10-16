@@ -17,8 +17,11 @@ import { BugIcon, SettingsIcon } from "@okta/odyssey-react-mui/icons";
 import { DataFilter, DataFilters } from "@okta/odyssey-react-mui/labs";
 import { fn } from "@storybook/test";
 
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
+
 const meta = {
   component: DataFilters,
+  decorators: [OdysseyStorybookThemeDecorator],
   argTypes: {
     onChangeSearch: {
       description: "",

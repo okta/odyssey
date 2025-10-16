@@ -23,6 +23,7 @@ import {
 import { SyntheticEvent, useCallback, useState } from "react";
 
 import { axeRun } from "../../../axeRun.js";
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 import { LargeDataSet, largeDataSet } from "./large-data-collection.js";
 
@@ -56,6 +57,8 @@ const stations: ReadonlyArray<StationType> = [
 
 const storybookMeta: Meta<typeof Autocomplete> = {
   component: Autocomplete,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     errorMessage: fieldComponentPropsMetaData.errorMessage,
     errorMessageList: fieldComponentPropsMetaData.errorMessageList,
@@ -187,7 +190,6 @@ const storybookMeta: Meta<typeof Autocomplete> = {
     onInputChange: fn(),
     options: stations,
   },
-  tags: ["autodocs"],
 };
 
 export default storybookMeta;

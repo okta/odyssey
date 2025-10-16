@@ -28,6 +28,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { ReactNode } from "react";
 
 import icons from "../../tools/iconUtils.js";
+import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
 const BoxWithBottomMargin = ({ children }: { children: ReactNode }) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
@@ -45,6 +46,8 @@ const BoxWithBottomMargin = ({ children }: { children: ReactNode }) => {
 
 const storybookMeta: Meta<UserProfileMenuButtonProps> = {
   component: UserProfileMenuButton,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     hasVerticalDivider: {
       control: { type: "boolean" },
@@ -140,7 +143,6 @@ const storybookMeta: Meta<UserProfileMenuButtonProps> = {
       </Box>
     ),
   },
-  tags: ["autodocs"],
 };
 
 export default storybookMeta;

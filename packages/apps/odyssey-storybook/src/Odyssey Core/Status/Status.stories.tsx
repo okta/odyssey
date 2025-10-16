@@ -18,8 +18,12 @@ import {
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 
+import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
+
 const storybookMeta: Meta<StatusProps> = {
   component: Status,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     label: {
       control: "text",
@@ -66,7 +70,6 @@ const storybookMeta: Meta<StatusProps> = {
     label: "Warp drive in standby",
     severity: "default",
   },
-  tags: ["autodocs"],
 };
 
 export default storybookMeta;

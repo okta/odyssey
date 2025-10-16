@@ -15,10 +15,13 @@ import { Link, NativeSelect, NativeSelectProps } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 import { useCallback, useState } from "react";
 
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 
 const storybookMeta: Meta<typeof NativeSelect> = {
   component: NativeSelect,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     children: {
       description:
@@ -120,7 +123,6 @@ const storybookMeta: Meta<typeof NativeSelect> = {
     id: "SolarDestination",
     defaultValue: "",
   },
-  tags: ["autodocs"],
 };
 
 export default storybookMeta;

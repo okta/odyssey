@@ -17,6 +17,7 @@ import {
 } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react";
 
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import demoImage from "./demo.png";
 
 const stations: ReadonlyArray<GroupPickerOptionType> = [
@@ -50,6 +51,8 @@ const stations: ReadonlyArray<GroupPickerOptionType> = [
 
 const storybookMeta: Meta<typeof GroupPicker> = {
   component: GroupPicker,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     hasMultipleChoices: {
       control: "boolean",
@@ -166,7 +169,6 @@ const storybookMeta: Meta<typeof GroupPicker> = {
     hint: "Languages supported by the system",
     options: stations,
   },
-  tags: ["autodocs"],
 };
 
 export default storybookMeta;

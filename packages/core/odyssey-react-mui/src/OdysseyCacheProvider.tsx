@@ -23,9 +23,10 @@ import { useUniqueAlphabeticalId } from "./useUniqueAlphabeticalId.js";
 export type OdysseyCacheProviderProps = {
   children: ReactNode;
   /**
+   * @deprecated Use `EmotionRootElement` instead. This was incorrectly configured as an `HTMLStyleElement`, but then we're rendering `<style>` inside `<style>`. We need this to be a `<div>` instead.
+   *
    * Emotion caches styles into the style element.
    * When enabling this prop, Emotion caches the styles at this element, rather than in <head>.
-   * @deprecated Use `EmotionRootElement` instead. This was incorrectly configured as an `HTMLStyleElement`, but then we're rendering `<style>` inside `<style>`. We need this to be a `<div>` instead.
    */
   emotionRoot?: HTMLStyleElement;
   /**
@@ -33,12 +34,18 @@ export type OdysseyCacheProviderProps = {
    * This is useful if you want to render into a Shadow DOM or iframe.
    */
   emotionRootElement?: HTMLElement;
+  /**
+   * @deprecated No longer necessary.
+   *
+   * Required to know if a Shadow DOM is in use. This tells Emotion to change its cache configuration.
+   */
   hasShadowDom?: boolean;
   nonce?: string;
   /**
+   * @deprecated No longer necessary.
+   *
    * Emotion renders into this HTML element.
    * When enabling this prop, Emotion renders at the top of this component rather than the bottom like it does in the HTML `<head>`.
-   * @deprecated Will be removed in a future Odyssey version. Use `hasShadowDomElement` instead.
    */
   shadowDomElement?: HTMLDivElement | HTMLElement;
   stylisPlugins?: StylisPlugin[];
@@ -48,34 +55,31 @@ const OdysseyCacheProvider = ({
   children,
   emotionRoot,
   emotionRootElement,
-  hasShadowDom: hasShadowDomProp,
   nonce,
-  shadowDomElement,
   stylisPlugins,
 }: OdysseyCacheProviderProps) => {
   const uniqueAlphabeticalId = useUniqueAlphabeticalId();
 
-  const hasShadowDom = hasShadowDomProp || shadowDomElement;
-
-  const emotionCache = useMemo(() => {
-    return createCache({
-      ...((emotionRootElement || emotionRoot) && {
-        container: emotionRootElement || emotionRoot,
+  const emotionCache = useMemo(
+    () =>
+      createCache({
+        ...((emotionRootElement || emotionRoot) && {
+          container: emotionRootElement || emotionRoot,
+        }),
+        key: uniqueAlphabeticalId,
+        nonce: nonce ?? globalThis.cspNonce,
+        prepend: true,
+        speedy: true,
+        ...(stylisPlugins && { stylisPlugins }),
       }),
-      key: uniqueAlphabeticalId,
-      nonce: nonce ?? globalThis.cspNonce,
-      prepend: true,
-      speedy: hasShadowDom ? false : true, // <-- Needs to be set to false when shadow-dom is used! https://github.com/emotion-js/emotion/issues/2053#issuecomment-713429122
-      ...(stylisPlugins && { stylisPlugins }),
-    });
-  }, [
-    emotionRoot,
-    emotionRootElement,
-    hasShadowDom,
-    nonce,
-    stylisPlugins,
-    uniqueAlphabeticalId,
-  ]);
+    [
+      emotionRoot,
+      emotionRootElement,
+      nonce,
+      stylisPlugins,
+      uniqueAlphabeticalId,
+    ],
+  );
 
   return <CacheProvider value={emotionCache}>{children}</CacheProvider>;
 };

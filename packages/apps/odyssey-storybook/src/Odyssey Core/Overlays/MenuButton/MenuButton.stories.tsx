@@ -40,6 +40,7 @@ import type { PlaywrightProps } from "../../../tools/storybookTypes.js";
 
 import { axeRun } from "../../../axeRun.js";
 import icons from "../../../tools/iconUtils.js";
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../../Fields/fieldComponentPropsMetaData.js";
 
 const BoxWithBottomMargin = ({ children }: { children: ReactNode }) => {
@@ -58,6 +59,8 @@ const BoxWithBottomMargin = ({ children }: { children: ReactNode }) => {
 
 const storybookMeta: Meta<typeof MenuButton> = {
   component: MenuButton,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     ariaDescribedBy: {
       control: "text",
@@ -201,7 +204,6 @@ const storybookMeta: Meta<typeof MenuButton> = {
     buttonVariant: "secondary",
     menuAlignment: "left",
   },
-  tags: ["autodocs"],
 };
 
 export default storybookMeta;

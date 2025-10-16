@@ -8,5 +8,5 @@
   "dependencies": {
     "conventional-changelog-conventionalcommits": "^7.0.2"
   },
-  "version": "1.45.2"
+  "version": "1.46.0"
 }

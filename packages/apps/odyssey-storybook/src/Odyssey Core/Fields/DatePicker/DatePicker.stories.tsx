@@ -21,10 +21,13 @@ import { expect, screen, userEvent, waitFor, within } from "@storybook/test";
 import { useMemo, useState } from "react";
 
 import { axeRun } from "../../../axeRun.js";
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 
 const meta = {
   component: DatePicker,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     label: {
       control: "text",
@@ -93,7 +96,6 @@ const meta = {
     label: "Date picker label",
     hint: "Select a date.",
   },
-  tags: ["autodocs"],
 } satisfies Meta<typeof DatePicker>;
 
 export default meta;

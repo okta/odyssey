@@ -37,6 +37,7 @@ import { configure, expect, userEvent, waitFor, within } from "@storybook/test";
 import { useEffect, useState } from "react";
 
 import PlaceholderLogo from "../../Odyssey Core/Fields/PickerWithOptionAdornment [labs]/PlaceholderLogo.js";
+import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 import { PlaywrightProps } from "../../tools/storybookTypes.js";
 
 const CustomFooterComponent = () => {
@@ -53,8 +54,13 @@ const CustomFooterComponent = () => {
     </Box>
   );
 };
-const storybookMeta: Meta<SideNavProps> = {
+const meta = {
   component: SideNav,
+  decorators: [OdysseyStorybookThemeDecorator],
+  parameters: {
+    layout: "fullscreen",
+  },
+  tags: ["autodocs"],
   argTypes: {
     appName: {
       control: "text",
@@ -340,15 +346,13 @@ const storybookMeta: Meta<SideNavProps> = {
       },
     ],
   },
-  parameters: {
-    layout: "fullscreen",
-  },
-  tags: ["autodocs"],
-};
+} satisfies Meta<typeof SideNav>;
 
-export default storybookMeta;
+export default meta;
 
-export const Default: StoryObj<typeof SideNav> = {
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
   render: (props) => {
     return (
       <div style={{ height: "100vh" }}>
@@ -413,7 +417,7 @@ export const Default: StoryObj<typeof SideNav> = {
   },
 };
 
-export const SortableSideNav: StoryObj<typeof SideNav> = {
+export const SortableSideNav: Story = {
   args: {
     appName: undefined,
     logoProps: {
@@ -478,7 +482,7 @@ export const SortableSideNav: StoryObj<typeof SideNav> = {
   },
 };
 
-export const Loading: StoryObj<typeof SideNav> = {
+export const Loading: Story = {
   args: {
     isLoading: true,
   },
@@ -491,7 +495,7 @@ export const Loading: StoryObj<typeof SideNav> = {
   },
 };
 
-export const CustomLogoElement: StoryObj<typeof SideNav> = {
+export const CustomLogoElement: Story = {
   args: {
     logoProps: {
       logoComponent: <PlaceholderLogo.One />,
@@ -506,7 +510,7 @@ export const CustomLogoElement: StoryObj<typeof SideNav> = {
   },
 };
 
-export const CustomLogoImage: StoryObj<typeof SideNav> = {
+export const CustomLogoImage: Story = {
   args: {
     logoProps: {
       imageUrl: "https://placehold.co/600x60",
@@ -522,7 +526,7 @@ export const CustomLogoImage: StoryObj<typeof SideNav> = {
   },
 };
 
-export const LogoWithLink: StoryObj<typeof SideNav> = {
+export const LogoWithLink: Story = {
   args: {
     logoProps: {
       href: "/",
@@ -539,7 +543,7 @@ export const LogoWithLink: StoryObj<typeof SideNav> = {
   },
 };
 
-export const CustomFooterContent: StoryObj<typeof SideNav> = {
+export const CustomFooterContent: Story = {
   args: {
     footerItems: undefined,
     hasCustomFooter: true,
@@ -554,7 +558,7 @@ export const CustomFooterContent: StoryObj<typeof SideNav> = {
   },
 };
 
-export const DelayedSideNavItems: StoryObj<typeof SideNav> = {
+export const DelayedSideNavItems: Story = {
   args: {
     isLoading: true,
   },

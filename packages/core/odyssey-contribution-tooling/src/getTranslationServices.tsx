@@ -1,7 +1,7 @@
 import type { UseTranslationOptions as UseI18NextTranslationOptions } from "react-i18next";
 
 import i18n, { createInstance, TOptions } from "i18next";
-import { ReactElement, ReactNode, useEffect } from "react";
+import { memo, ReactElement, ReactNode, useEffect } from "react";
 import {
   I18nextProvider,
   initReactI18next,
@@ -52,9 +52,9 @@ export type TranslationProviderProps<
   translationOverrides?: TranslationOverrides<SupportedLanguageCodes>;
 };
 
-type ExtractPlaceholders<S extends string> =
-  S extends `${string}{{${infer P}}}${infer Rest}`
-    ? P | ExtractPlaceholders<Rest>
+type ExtractPlaceholders<TString extends string> =
+  TString extends `${string}{{${infer PlaceholderId}}}${infer Rest}`
+    ? PlaceholderId | ExtractPlaceholders<Rest>
     : never;
 
 export type PlaceholderValues =
@@ -102,7 +102,7 @@ export type TypedUseTranslationResponse<
 export interface IGenericTranslationProvider {
   <SupportedLanguageCodes extends string = DefaultSupportedLanguages>(
     props: TranslationProviderProps<SupportedLanguageCodes>,
-  ): JSX.Element;
+  ): ReactNode;
 }
 
 export type UseTranslationOptions<TNamespace extends string> = Omit<
@@ -242,6 +242,9 @@ export function getTranslationServices<
     return <I18nextProvider i18n={i18nInstance}>{children}</I18nextProvider>;
   };
 
+  const MemoizedTranslationProvider = memo(TranslationProvider);
+  MemoizedTranslationProvider.displayName = "TranslationProvider";
+
   const Trans: TypedTrans<TNamespace, TResources[TDefaultLanguageCode]> = (
     props,
   ) => {
@@ -276,7 +279,7 @@ export function getTranslationServices<
 
   return {
     i18n: i18nInstance,
-    TranslationProvider: TranslationProvider,
+    TranslationProvider: MemoizedTranslationProvider,
     Trans,
     useTranslation,
   };

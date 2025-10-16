@@ -28,13 +28,13 @@ const StyledContainer = styled(MuiPaper, {
   contrastMode: ContrastMode;
   odysseyDesignTokens: DesignTokens;
 }>(({ contrastMode, odysseyDesignTokens }) => ({
-  borderRadius: odysseyDesignTokens.Spacing4,
-  padding: odysseyDesignTokens.Spacing5,
   border:
     contrastMode === "lowContrast"
       ? `1px solid ${odysseyDesignTokens.HueNeutral100}`
       : "none",
+  borderRadius: odysseyDesignTokens.Spacing4,
   boxShadow: "none",
+  padding: odysseyDesignTokens.Spacing5,
 }));
 
 export type SurfaceProps = {
@@ -50,6 +50,7 @@ const Surface = ({ children }: SurfaceProps) => {
       contrastMode={contrastMode}
       odysseyDesignTokens={odysseyDesignTokens}
     >
+      {/* Required for `contrastMode`. */}
       <OdysseyThemeProvider>{children}</OdysseyThemeProvider>
     </StyledContainer>
   );

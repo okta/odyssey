@@ -20,10 +20,13 @@ import { queryOdysseySelector } from "@okta/odyssey-react-mui/test-selectors";
 import { Meta, StoryObj } from "@storybook/react";
 import { expect } from "@storybook/test";
 
+import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 import { PlaywrightProps } from "../../tools/storybookTypes.js";
 
 const storybookMeta: Meta<CalloutProps> = {
   component: Callout,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     children: {
       control: "text",
@@ -128,7 +131,6 @@ const storybookMeta: Meta<CalloutProps> = {
     text: "You're signed in from Moonbase Alpha-6, located on Luna.",
     severity: "info",
   },
-  tags: ["autodocs"],
 };
 
 export default storybookMeta;

@@ -12,10 +12,7 @@
 
 import type { Meta, StoryObj } from "@storybook/react";
 
-import {
-  PageHeader,
-  type PageHeaderProps,
-} from "@okta/odyssey-contributions-resource-access-policy-components";
+import { PageHeader } from "@okta/odyssey-contributions-resource-access-policy-components";
 import {
   Breadcrumb,
   Button,
@@ -31,96 +28,101 @@ import { ResourceAccessPolicyComponentsStorybookThemeDecorator } from "../../too
 const sampleMetadata = ["Metadata A", "Metadata B", "Metadata C"];
 
 const meta = {
-  component: PageHeader as React.ComponentType<PageHeaderProps>,
-  argTypes: {
-    title: { control: "text", description: "Page title (required)" },
-    overline: {
-      control: "text",
-      description: "Optional overline above the title",
-    },
-    description: { control: "text" },
-    breadcrumbs: { control: false },
-    status: { control: "object", description: "Status pill configuration" },
-    metadata: { control: "object" },
-    documentation: { control: "object" },
-    actions: {
-      control: false,
-      description: "Array of React elements or ButtonProps objects",
-    },
-    image: { control: false, description: "Custom image / logo node" },
-  },
-  args: {
-    title: "Page title",
-    description:
-      "Optional brief description about the section or page you are about to encounter below.",
-  },
-  tags: ["autodocs"],
+  component: PageHeader,
   decorators: [
     OdysseyStorybookThemeDecorator,
     ResourceAccessPolicyComponentsStorybookThemeDecorator,
   ],
-} satisfies Meta<PageHeaderProps>;
+  tags: ["autodocs"],
+} satisfies Meta<typeof PageHeader>;
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<{ testId?: string }>;
 
 export const AllFeatures: Story = {
-  args: {
-    overline: "OVERLINE",
-    breadcrumbs: {
-      items: [
-        <Breadcrumb href="#" onClick={action("Page Title click")}>
+  render: (args) => (
+    <PageHeader testId={args.testId}>
+      <PageHeader.Breadcrumbs homeHref="#">
+        <Breadcrumb href="#" key="page1" onClick={action("Page Title click")}>
           Page Title
-        </Breadcrumb>,
-        <Breadcrumb>Current Page</Breadcrumb>,
-      ],
-      homeHref: "#",
+        </Breadcrumb>
+        <Breadcrumb key="current">Current Page</Breadcrumb>
+      </PageHeader.Breadcrumbs>
+      <PageHeader.Image>
+        <span style={{ fontSize: 48 }}>👤</span>
+      </PageHeader.Image>
+      <PageHeader.Title
+        overline="OVERLINE"
+        status={{ label: "BETA", severity: "info" }}
+      >
+        Page title
+      </PageHeader.Title>
+      <PageHeader.Metadata items={sampleMetadata} />
+      <PageHeader.Description>
+        Optional brief description about the section or page you are about to
+        encounter below.
+      </PageHeader.Description>
+      <PageHeader.Documentation href="#" label="Documentation" />
+      <PageHeader.Actions>
+        <MenuButton buttonLabel="Secondary">
+          <MenuItem onClick={action("Action click")}>Action</MenuItem>
+        </MenuButton>
+        <Button
+          label="Primary"
+          onClick={action("primary click")}
+          variant="primary"
+        />
+      </PageHeader.Actions>
+    </PageHeader>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Demonstrates the composable API with all features. Components are automatically organized into the correct layout sections regardless of their order in the JSX.",
+      },
     },
-    image: <span style={{ fontSize: 48 }}>👤</span>,
-    status: { label: "BETA", severity: "info" },
-    metadata: sampleMetadata,
-    documentation: { label: "Documentation", href: "#" },
-    actions: [
-      <MenuButton buttonLabel="Secondary" key="secondary">
-        <MenuItem onClick={action("Action click")}>Action</MenuItem>
-      </MenuButton>,
-      <Button
-        key="primary"
-        label="Primary"
-        onClick={action("primary click")}
-        variant="primary"
-      />,
-    ],
-    description:
-      "Cultellus conforto bos adinventitias compello delibero usitas confugo statim. Tres tenax comes quaerat arguo cibus absorbeo debilito.",
   },
 };
 
-export const Default: Story = {};
+export const Default: Story = {
+  render: () => (
+    <PageHeader>
+      <PageHeader.Title>Page title</PageHeader.Title>
+      <PageHeader.Description>
+        Optional brief description about the section or page you are about to
+        encounter below.
+      </PageHeader.Description>
+    </PageHeader>
+  ),
+};
 
 export const WithBreadcrumbs: Story = {
-  args: {
-    breadcrumbs: {
-      items: [
-        <Breadcrumb href="#" onClick={action("Page Title click")}>
+  render: () => (
+    <PageHeader>
+      <PageHeader.Breadcrumbs homeHref="#">
+        <Breadcrumb href="#" key="page1" onClick={action("Page Title click")}>
           Page Title
-        </Breadcrumb>,
-        <Breadcrumb>Current Page</Breadcrumb>,
-      ],
-      homeHref: "#",
-    },
-  },
+        </Breadcrumb>
+        <Breadcrumb key="current">Current Page</Breadcrumb>
+      </PageHeader.Breadcrumbs>
+      <PageHeader.Title>Page title</PageHeader.Title>
+    </PageHeader>
+  ),
 };
 
 export const WithBackLink: Story = {
-  args: {
-    backLink: {
-      href: "#",
-      label: "Back to list",
-      onClick: action("Back to list click"),
-    },
-  },
+  render: () => (
+    <PageHeader>
+      <PageHeader.BackLink
+        href="#"
+        label="Back to list"
+        onClick={action("Back to list click")}
+      />
+      <PageHeader.Title>Page title</PageHeader.Title>
+    </PageHeader>
+  ),
   parameters: {
     docs: {
       description: {
@@ -132,16 +134,23 @@ export const WithBackLink: Story = {
 };
 
 export const WithStatus: Story = {
-  args: {
-    status: { label: "BETA", severity: "info" },
-    metadata: sampleMetadata.slice(0, 2),
-  },
+  render: () => (
+    <PageHeader>
+      <PageHeader.Title status={{ label: "BETA", severity: "info" }}>
+        Page title
+      </PageHeader.Title>
+      <PageHeader.Metadata items={sampleMetadata.slice(0, 2)} />
+    </PageHeader>
+  ),
 };
 
 export const WithDocumentation: Story = {
-  args: {
-    documentation: { label: "Documentation", href: "#" },
-  },
+  render: () => (
+    <PageHeader>
+      <PageHeader.Title>Page title</PageHeader.Title>
+      <PageHeader.Documentation href="#" label="Documentation" />
+    </PageHeader>
+  ),
   parameters: {
     docs: {
       description: {
@@ -152,22 +161,23 @@ export const WithDocumentation: Story = {
 };
 
 export const WithActions: Story = {
-  args: {
-    actions: [
-      <Button
-        key="secondary"
-        label="Secondary"
-        onClick={action("secondary click")}
-        variant="secondary"
-      />,
-      <Button
-        key="primary"
-        label="Primary"
-        onClick={action("primary click")}
-        variant="primary"
-      />,
-    ],
-  },
+  render: () => (
+    <PageHeader>
+      <PageHeader.Title>Page title</PageHeader.Title>
+      <PageHeader.Actions>
+        <Button
+          label="Secondary"
+          onClick={action("secondary click")}
+          variant="secondary"
+        />
+        <Button
+          label="Primary"
+          onClick={action("primary click")}
+          variant="primary"
+        />
+      </PageHeader.Actions>
+    </PageHeader>
+  ),
   parameters: {
     docs: {
       description: {
@@ -178,20 +188,18 @@ export const WithActions: Story = {
 };
 
 export const WithMixedActions: Story = {
-  args: {
-    actions: [
-      <MenuButton buttonLabel="Menu" buttonVariant="secondary" key="menu">
-        <MenuItem onClick={action("Option 1 click")}>Option 1</MenuItem>
-        <MenuItem onClick={action("Option 2 click")}>Option 2</MenuItem>
-      </MenuButton>,
-      <Button
-        key="save"
-        label="Save"
-        onClick={action("save click")}
-        variant="primary"
-      />,
-    ],
-  },
+  render: () => (
+    <PageHeader>
+      <PageHeader.Title>Page title</PageHeader.Title>
+      <PageHeader.Actions>
+        <MenuButton buttonLabel="Menu" buttonVariant="secondary">
+          <MenuItem onClick={action("Option 1 click")}>Option 1</MenuItem>
+          <MenuItem onClick={action("Option 2 click")}>Option 2</MenuItem>
+        </MenuButton>
+        <Button label="Save" onClick={action("save click")} variant="primary" />
+      </PageHeader.Actions>
+    </PageHeader>
+  ),
   parameters: {
     docs: {
       description: {
@@ -203,40 +211,38 @@ export const WithMixedActions: Story = {
 };
 
 export const WithTooManyActions: Story = {
-  args: {
-    actions: [
-      <Button
-        key="action1"
-        label="Action 1"
-        onClick={action("action 1")}
-        variant="secondary"
-      />,
-      <Button
-        key="action2"
-        label="Action 2"
-        onClick={action("action 2")}
-        variant="secondary"
-      />,
-      <Button
-        key="action3"
-        label="Action 3"
-        onClick={action("action 3")}
-        variant="secondary"
-      />,
-      <Button
-        key="action4"
-        label="Action 4"
-        onClick={action("action 4")}
-        variant="primary"
-      />,
-      <Button
-        key="action5"
-        label="Action 5"
-        onClick={action("action 5")}
-        variant="primary"
-      />,
-    ],
-  },
+  render: () => (
+    <PageHeader>
+      <PageHeader.Title>Page title</PageHeader.Title>
+      <PageHeader.Actions>
+        <Button
+          label="Action 1"
+          onClick={action("action 1")}
+          variant="secondary"
+        />
+        <Button
+          label="Action 2"
+          onClick={action("action 2")}
+          variant="secondary"
+        />
+        <Button
+          label="Action 3"
+          onClick={action("action 3")}
+          variant="secondary"
+        />
+        <Button
+          label="Action 4"
+          onClick={action("action 4")}
+          variant="primary"
+        />
+        <Button
+          label="Action 5"
+          onClick={action("action 5")}
+          variant="primary"
+        />
+      </PageHeader.Actions>
+    </PageHeader>
+  ),
   parameters: {
     docs: {
       description: {
@@ -248,9 +254,90 @@ export const WithTooManyActions: Story = {
 };
 
 export const WithImage: Story = {
-  args: {
-    image: <span style={{ fontSize: 48 }}>👤</span>,
-    status: { label: "ACTIVE", severity: "success" },
-    metadata: sampleMetadata,
+  render: () => (
+    <PageHeader>
+      <PageHeader.Title status={{ label: "ACTIVE", severity: "success" }}>
+        Page title
+      </PageHeader.Title>
+      <PageHeader.Metadata items={sampleMetadata} />
+      <PageHeader.Image>
+        <span style={{ fontSize: 48 }}>👤</span>
+      </PageHeader.Image>
+    </PageHeader>
+  ),
+};
+
+export const OrderIndependent: Story = {
+  render: () => (
+    <PageHeader>
+      {/* Actions declared first but will appear in sidebar */}
+      <PageHeader.Actions>
+        <Button label="Action First" variant="primary" />
+      </PageHeader.Actions>
+
+      {/* Title declared second but will appear in main content */}
+      <PageHeader.Title>Title comes after actions in code</PageHeader.Title>
+
+      {/* Breadcrumbs declared last but will appear at top */}
+      <PageHeader.Breadcrumbs homeHref="#">
+        <Breadcrumb href="#" key="parent">
+          Parent
+        </Breadcrumb>
+        <Breadcrumb key="current">Current</Breadcrumb>
+      </PageHeader.Breadcrumbs>
+
+      {/* Documentation also in sidebar */}
+      <PageHeader.Documentation href="#" label="Help" />
+    </PageHeader>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Demonstrates that component order in JSX doesn't matter - they are automatically organized into the correct layout sections.",
+      },
+    },
+  },
+};
+
+export const MetadataBeforeTitle: Story = {
+  render: () => (
+    <PageHeader>
+      {/* Metadata declared before title in JSX */}
+      <PageHeader.Metadata
+        items={["Created: 2024", "Updated: 2025", "Version: 1.0"]}
+      />
+
+      {/* But title will still render first */}
+      <PageHeader.Title>Title Always Appears First</PageHeader.Title>
+
+      <PageHeader.Description>
+        Even when metadata is declared before the title in JSX, the title will
+        always render first.
+      </PageHeader.Description>
+    </PageHeader>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Demonstrates that title always renders before metadata, regardless of their order in JSX. This ensures consistent visual hierarchy.",
+      },
+    },
+  },
+};
+
+export const Minimal: Story = {
+  render: () => (
+    <PageHeader>
+      <PageHeader.Title>Minimal Page</PageHeader.Title>
+    </PageHeader>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: "Minimal example with just a title.",
+      },
+    },
   },
 };

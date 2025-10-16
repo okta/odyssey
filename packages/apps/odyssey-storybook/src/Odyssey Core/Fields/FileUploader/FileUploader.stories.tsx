@@ -18,11 +18,14 @@ import {
 import { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 
 // TODO: Write tests for this component @see https://oktainc.atlassian.net/browse/OKTA-704264
 const meta = {
   component: FileUploader,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     acceptedFileTypes: {
       description:
@@ -93,7 +96,6 @@ const meta = {
     label: "Upload your files here",
     onChange: fn(),
   },
-  tags: ["autodocs"],
 } satisfies Meta<typeof FileUploader>;
 
 export default meta;

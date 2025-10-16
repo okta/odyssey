@@ -15,7 +15,6 @@ import type { Decorator } from "@storybook/react";
 import * as odysseyTokens from "@okta/odyssey-design-tokens";
 import {
   createOdysseyMuiTheme,
-  CssBaseline,
   OdysseyProvider,
 } from "@okta/odyssey-react-mui";
 import { ThemeProvider as StorybookThemeProvider } from "@storybook/theming";
@@ -29,17 +28,16 @@ const odysseyTheme = createOdysseyMuiTheme({
   odysseyTokens,
 });
 
-export const OdysseyStorybookThemeDecorator: Decorator = (Story, context) =>
-  context.parameters.hasThemeDecorator ? (
-    <OdysseyProvider languageCode={context.globals.locale as string}>
-      {/* @ts-expect-error type mismatch on "typography" */}
-      <StorybookThemeProvider theme={odysseyTheme}>
-        <CssBaseline />
-        <div lang={context.globals.locale as string} style={styles}>
-          <Story />
-        </div>
-      </StorybookThemeProvider>
-    </OdysseyProvider>
-  ) : (
-    <Story />
-  );
+export const OdysseyStorybookThemeDecorator: Decorator = (Story, context) => (
+  <OdysseyProvider
+    hasCssBaseline
+    languageCode={context.globals.locale as string}
+  >
+    {/* @ts-expect-error type mismatch on "typography" */}
+    <StorybookThemeProvider theme={odysseyTheme}>
+      <div lang={context.globals.locale as string} style={styles}>
+        <Story />
+      </div>
+    </StorybookThemeProvider>
+  </OdysseyProvider>
+);

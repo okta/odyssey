@@ -16,10 +16,13 @@ import { expect, userEvent, within } from "@storybook/test";
 import { useCallback, useState } from "react";
 
 import { axeRun } from "../../../axeRun.js";
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 
 const storybookMeta: Meta<SwitchProps> = {
   component: Switch,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     isChecked: {
       control: "boolean",
@@ -89,7 +92,6 @@ const storybookMeta: Meta<SwitchProps> = {
     value: "Switch value",
     HintLinkComponent: <HintLink href="">Some hint link</HintLink>,
   },
-  tags: ["autodocs"],
 };
 
 export default storybookMeta;

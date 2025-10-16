@@ -19,8 +19,11 @@ import { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 import { useCallback, useMemo, useRef, useState } from "react";
 
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
+
 const storybookMeta: Meta = {
   component: PaginatedTable,
+  decorators: [OdysseyStorybookThemeDecorator],
   argTypes: {
     columns: {
       control: "object",

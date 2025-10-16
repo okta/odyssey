@@ -23,6 +23,7 @@ import { userEvent, waitFor, within } from "@storybook/test";
 import { useCallback, useState } from "react";
 
 import { axeRun } from "../../../axeRun.js";
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 
 const gridStubText = (
   <>
@@ -102,6 +103,8 @@ const drawerLongText = (
 
 const meta = {
   component: Drawer,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     primaryCallToActionComponent: {
       description:
@@ -244,7 +247,6 @@ const meta = {
     children: drawerLongText,
     ariaLabel: "close",
   },
-  tags: ["autodocs"],
 } satisfies Meta<typeof Drawer>;
 
 export default meta;

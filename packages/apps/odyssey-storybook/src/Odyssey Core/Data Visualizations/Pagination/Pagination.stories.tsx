@@ -17,8 +17,12 @@ import {
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
+
 const meta = {
   component: Pagination,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     pageIndex: {
       control: {
@@ -243,7 +247,6 @@ const meta = {
     loadMoreLabel: "Show more",
     totalRows: 100,
   },
-  tags: ["autodocs"],
 } satisfies Meta<PaginationProps>;
 
 export default meta;
