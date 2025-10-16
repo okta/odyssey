@@ -22,6 +22,7 @@ import { expect, fn, userEvent, within } from "@storybook/test";
 import type { PlaywrightProps } from "../../tools/storybookTypes.js";
 
 import { axeRun } from "../../axeRun.js";
+import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
 type PlayType = {
   args: BannerProps;
@@ -31,6 +32,8 @@ type PlayType = {
 
 const storybookMeta: Meta<BannerProps> = {
   component: Banner,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     linkRel: {
       control: "text",
@@ -125,7 +128,6 @@ const storybookMeta: Meta<BannerProps> = {
     text: "The mission to Sagittarius A is set for January 7.",
     onClose: undefined,
   },
-  tags: ["autodocs"],
 };
 
 export default storybookMeta;

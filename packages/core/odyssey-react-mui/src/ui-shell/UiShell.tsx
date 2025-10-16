@@ -13,7 +13,6 @@
 import { memo, type SetStateAction, useEffect, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
-import { CssBaseline } from "../CssBaseline.js";
 import { OdysseyProvider } from "../OdysseyProvider.js";
 import { MessageBus } from "../tools/createMessageBus.js";
 import { type ReactRootElements } from "../web-component/createReactRootElements.js";
@@ -126,11 +125,10 @@ const UiShell = ({
     <ErrorBoundary fallback={errorComponent} onError={onError}>
       <OdysseyProvider
         emotionRootElement={uiShellStylesElement}
+        hasCssBaseline
         shadowRootElement={uiShellAppElement}
       >
         <ErrorBoundary fallback={errorComponent} onError={onError}>
-          <CssBaseline />
-
           <UiShellProvider
             appBackgroundColor={appBackgroundColor}
             appBackgroundContrastMode={appBackgroundContrastMode}

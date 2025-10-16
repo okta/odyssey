@@ -18,6 +18,7 @@ import {
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 
 // type CheckboxGroupStoryProps = CheckboxGroupProps & {
@@ -27,6 +28,8 @@ import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 
 const meta = {
   component: CheckboxGroup,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     children: {
       description: "A single Checkbox element or an array of Checkbox elements",
@@ -86,7 +89,6 @@ const meta = {
       },
     },
   },
-  tags: ["autodocs"],
 } satisfies Meta<typeof CheckboxGroup>;
 
 export default meta;

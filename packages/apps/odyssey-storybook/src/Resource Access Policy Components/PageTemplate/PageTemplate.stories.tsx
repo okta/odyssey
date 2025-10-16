@@ -15,7 +15,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 import {
   PageHeader,
   PageTemplate,
-  PageTemplateProps,
 } from "@okta/odyssey-contributions-resource-access-policy-components";
 import {
   Breadcrumb,
@@ -35,89 +34,84 @@ import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThem
 import { ResourceAccessPolicyComponentsStorybookThemeDecorator } from "../../tools/ResourceAccessPolicyComponentsStorybookThemeDecorator.js";
 
 const meta = {
-  component: PageTemplate as React.ComponentType<PageTemplateProps>,
-  argTypes: {
-    headerComponent: {
-      description:
-        "An optional `PageHeader` object. Can be of variant 'temporary' or 'persistent'.",
-      table: {
-        type: {
-          summary: "ReactElement<typeof PageHeader>",
-        },
-      },
-    },
-    drawer: {
-      description:
-        "An optional `Drawer` object. Can be of variant 'temporary' or 'persistent'.",
-      table: {
-        type: {
-          summary: "ReactElement<typeof Drawer>",
-        },
-      },
-    },
-    children: {
-      description:
-        "The content of the `PageTemplate`. May be a `string` or any other `ReactNode` or array of `ReactNode`s. Will often be `Grid` objects.",
-      table: {
-        type: {
-          summary: "ReactNode",
-        },
-      },
-    },
-    isFullWidth: {
-      control: "boolean",
-      description:
-        "When set to `true`, the `PageTemplate` expands past its max width of 1440px and spans the entire available screen width.",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-        defaultValue: {
-          summary: "false",
-        },
-      },
-    },
+  component: PageTemplate,
+  decorators: [
+    OdysseyStorybookThemeDecorator,
+    ResourceAccessPolicyComponentsStorybookThemeDecorator,
+  ],
+  parameters: {
+    layout: "fullscreen",
   },
-  args: {
-    headerComponent: (
-      <PageHeader
-        actions={[
-          <MenuButton buttonLabel="Secondary" key="secondary">
-            <MenuItem onClick={action("Action click")}>Action</MenuItem>
-          </MenuButton>,
-          <Button
-            key="primary"
-            label="Primary"
-            onClick={action("primary click")}
-            variant="primary"
-          />,
-        ]}
-        breadcrumbs={{
-          items: [
-            <Breadcrumb href="#" onClick={action("Page Title click")}>
+  tags: ["autodocs"],
+} satisfies Meta<typeof PageTemplate>;
+
+export default meta;
+
+type Story = StoryObj<{ isFullWidth?: boolean; testId?: string }>;
+
+export const Default: Story = {
+  render: (args) => (
+    <PageTemplate
+      headerComponent={
+        <PageHeader>
+          <PageHeader.Breadcrumbs homeHref="#" key="breadcrumbs">
+            <Breadcrumb
+              href="#"
+              key="page1"
+              onClick={action("Page Title click")}
+            >
               Page Title
-            </Breadcrumb>,
-            <Breadcrumb>Current Page</Breadcrumb>,
-          ],
-          homeHref: "#",
-        }}
-        description="Cultellus conforto bos adinventitias compello delibero usitas confugo statim. Tres tenax comes quaerat arguo cibus absorbeo debilito."
-        documentation={{ label: "Documentation", href: "#" }}
-        metadata={["Metadata A", "Metadata B", "Metadata C"]}
-        overline={"OVERLINE"}
-        status={{ label: "BETA", severity: "info" }}
-        title="Title"
-      />
-    ),
-    isFullWidth: false,
-    children: (
+            </Breadcrumb>
+            <Breadcrumb key="current">Current Page</Breadcrumb>
+          </PageHeader.Breadcrumbs>
+          <PageHeader.Title
+            key="title"
+            overline="OVERLINE"
+            status={{ label: "BETA", severity: "info" }}
+          >
+            Title
+          </PageHeader.Title>
+          <PageHeader.Metadata
+            items={["Metadata A", "Metadata B", "Metadata C"]}
+            key="metadata"
+          />
+          <PageHeader.Description key="description">
+            Cultellus conforto bos adinventitias compello delibero usitas
+            confugo statim. Tres tenax comes quaerat arguo cibus absorbeo
+            debilito.
+          </PageHeader.Description>
+          <PageHeader.Documentation
+            href="#"
+            key="documentation"
+            label="Documentation"
+          />
+          <PageHeader.Actions key="actions">
+            <MenuButton buttonLabel="Secondary" key="secondary">
+              <MenuItem onClick={action("Action click")}>Action</MenuItem>
+            </MenuButton>
+            <Button
+              key="primary"
+              label="Primary"
+              onClick={action("primary click")}
+              variant="primary"
+            />
+          </PageHeader.Actions>
+        </PageHeader>
+      }
+      isFullWidth={args.isFullWidth}
+    >
       <Layout regions={[1]}>
         <Surface>
           <Form
             formActions={
               <>
-                <Button label="Reset" variant="secondary" />
-                <Button label="Submit" type="submit" variant="primary" />
+                <Button key="reset" label="Reset" variant="secondary" />
+                <Button
+                  key="submit"
+                  label="Submit"
+                  type="submit"
+                  variant="primary"
+                />
               </>
             }
             name="Add Person"
@@ -129,31 +123,20 @@ const meta = {
           </Form>
         </Surface>
       </Layout>
-    ),
-  },
-  tags: ["autodocs"],
-  decorators: [
-    OdysseyStorybookThemeDecorator,
-    ResourceAccessPolicyComponentsStorybookThemeDecorator,
-  ],
-} satisfies Meta<PageTemplateProps>;
+    </PageTemplate>
+  ),
+};
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {};
-
-export const OverlayDrawer: StoryObj<PageTemplateProps> = {
-  render: function C(args) {
-    const [isEmbeddedDrawerVisible, setIsEmbeddedVisible] = useState(false);
+export const OverlayDrawer: Story = {
+  render: function C() {
+    const [isDrawerVisible, setIsDrawerVisible] = useState(false);
 
     const onOpenEmbeddedDrawer = useCallback(() => {
-      setIsEmbeddedVisible(true);
+      setIsDrawerVisible(true);
     }, []);
 
     const onCloseEmbeddedDrawer = useCallback(() => {
-      setIsEmbeddedVisible(false);
+      setIsDrawerVisible(false);
     }, []);
 
     return (
@@ -161,7 +144,7 @@ export const OverlayDrawer: StoryObj<PageTemplateProps> = {
         drawer={
           <Drawer
             hasDividers
-            isOpen={isEmbeddedDrawerVisible}
+            isOpen={isDrawerVisible}
             onClose={onCloseEmbeddedDrawer}
             primaryCallToActionComponent={
               <Button
@@ -187,45 +170,72 @@ export const OverlayDrawer: StoryObj<PageTemplateProps> = {
           </Drawer>
         }
         headerComponent={
-          <PageHeader
-            actions={[
+          <PageHeader>
+            <PageHeader.Title key="title">Title</PageHeader.Title>
+            <PageHeader.Description key="description">
+              Cultellus conforto bos adinventitias compello delibero usitas
+              confugo statim. Tres tenax comes quaerat arguo cibus absorbeo
+              debilito.
+            </PageHeader.Description>
+            <PageHeader.Documentation
+              href="#"
+              key="documentation"
+              label="Documentation"
+            />
+            <PageHeader.Actions key="actions">
               <Button
                 label={
-                  isEmbeddedDrawerVisible
+                  isDrawerVisible
                     ? "Close embedded drawer"
                     : "Open embedded drawer"
                 }
                 onClick={
-                  isEmbeddedDrawerVisible
-                    ? onCloseEmbeddedDrawer
-                    : onOpenEmbeddedDrawer
+                  isDrawerVisible ? onCloseEmbeddedDrawer : onOpenEmbeddedDrawer
                 }
                 variant="primary"
-              />,
-            ]}
-            description="Cultellus conforto bos adinventitias compello delibero usitas confugo statim. Tres tenax comes quaerat arguo cibus absorbeo debilito."
-            documentation={{ label: "Documentation", href: "#" }}
-            title="Title"
-          />
+              />
+            </PageHeader.Actions>
+          </PageHeader>
         }
-        isFullWidth
       >
-        {args.children}
+        <Layout regions={[1]}>
+          <Surface>
+            <Form
+              formActions={
+                <>
+                  <Button key="reset" label="Reset" variant="secondary" />
+                  <Button
+                    key="submit"
+                    label="Submit"
+                    type="submit"
+                    variant="primary"
+                  />
+                </>
+              }
+              name="Add Person"
+              title="Add Person"
+            >
+              <TextField label="First name" />
+              <TextField label="Last name" />
+              <TextField label="Email" />
+            </Form>
+          </Surface>
+        </Layout>
       </PageTemplate>
     );
   },
 };
 
-export const EmbeddedDrawer: StoryObj<PageTemplateProps> = {
-  render: function C(args) {
-    const [isEmbeddedDrawerVisible, setIsEmbeddedVisible] = useState(false);
+export const EmbeddedDrawer: Story = {
+  render: function C() {
+    const [isDrawerVisible, setIsDrawerVisible] = useState(false);
 
     const onOpenEmbeddedDrawer = useCallback(() => {
-      setIsEmbeddedVisible(true);
+      setIsDrawerVisible(true);
     }, []);
 
     const onCloseEmbeddedDrawer = useCallback(() => {
-      setIsEmbeddedVisible(false);
+      setIsDrawerVisible(false);
     }, []);
 
     return (
@@ -233,7 +243,7 @@ export const EmbeddedDrawer: StoryObj<PageTemplateProps> = {
         drawer={
           <Drawer
             hasDividers
-            isOpen={isEmbeddedDrawerVisible}
+            isOpen={isDrawerVisible}
             onClose={onCloseEmbeddedDrawer}
             primaryCallToActionComponent={
               <Button
@@ -259,41 +269,136 @@ export const EmbeddedDrawer: StoryObj<PageTemplateProps> = {
           </Drawer>
         }
         headerComponent={
-          <PageHeader
-            actions={[
+          <PageHeader>
+            <PageHeader.Title key="title">Title</PageHeader.Title>
+            <PageHeader.Description key="description">
+              Cultellus conforto bos adinventitias compello delibero usitas
+              confugo statim. Tres tenax comes quaerat arguo cibus absorbeo
+              debilito.
+            </PageHeader.Description>
+            <PageHeader.Documentation
+              href="#"
+              key="documentation"
+              label="Documentation"
+            />
+            <PageHeader.Actions key="actions">
               <Button
                 label={
-                  isEmbeddedDrawerVisible
+                  isDrawerVisible
                     ? "Close embedded drawer"
                     : "Open embedded drawer"
                 }
                 onClick={
-                  isEmbeddedDrawerVisible
-                    ? onCloseEmbeddedDrawer
-                    : onOpenEmbeddedDrawer
+                  isDrawerVisible ? onCloseEmbeddedDrawer : onOpenEmbeddedDrawer
                 }
                 variant="primary"
-              />,
-            ]}
-            description="Cultellus conforto bos adinventitias compello delibero usitas confugo statim. Tres tenax comes quaerat arguo cibus absorbeo debilito."
-            documentation={{ label: "Documentation", href: "#" }}
-            title="Title"
-          />
+              />
+            </PageHeader.Actions>
+          </PageHeader>
         }
-        isFullWidth
       >
-        {args.children}
+        <Layout regions={[1]}>
+          <Surface>
+            <Form
+              formActions={
+                <>
+                  <Button key="reset" label="Reset" variant="secondary" />
+                  <Button
+                    key="submit"
+                    label="Submit"
+                    type="submit"
+                    variant="primary"
+                  />
+                </>
+              }
+              name="Add Person"
+              title="Add Person"
+            >
+              <TextField label="First name" />
+              <TextField label="Last name" />
+              <TextField label="Email" />
+            </Form>
+          </Surface>
+        </Layout>
       </PageTemplate>
     );
   },
 };
 
-export const FullWidth: StoryObj<PageTemplateProps> = {
-  render: function C(args) {
-    return (
-      <PageTemplate headerComponent={args.headerComponent} isFullWidth>
-        {args.children}
-      </PageTemplate>
-    );
-  },
+export const FullWidth: Story = {
+  render: () => (
+    <PageTemplate
+      headerComponent={
+        <PageHeader>
+          <PageHeader.Breadcrumbs homeHref="#" key="breadcrumbs">
+            <Breadcrumb
+              href="#"
+              key="page1"
+              onClick={action("Page Title click")}
+            >
+              Page Title
+            </Breadcrumb>
+            <Breadcrumb key="current">Current Page</Breadcrumb>
+          </PageHeader.Breadcrumbs>
+          <PageHeader.Title
+            key="title"
+            overline="OVERLINE"
+            status={{ label: "BETA", severity: "info" }}
+          >
+            Title
+          </PageHeader.Title>
+          <PageHeader.Metadata
+            items={["Metadata A", "Metadata B", "Metadata C"]}
+            key="metadata"
+          />
+          <PageHeader.Description key="description">
+            Cultellus conforto bos adinventitias compello delibero usitas
+            confugo statim. Tres tenax comes quaerat arguo cibus absorbeo
+            debilito.
+          </PageHeader.Description>
+          <PageHeader.Documentation
+            href="#"
+            key="documentation"
+            label="Documentation"
+          />
+          <PageHeader.Actions key="actions">
+            <MenuButton buttonLabel="Secondary" key="secondary">
+              <MenuItem onClick={action("Action click")}>Action</MenuItem>
+            </MenuButton>
+            <Button
+              key="primary"
+              label="Primary"
+              onClick={action("primary click")}
+              variant="primary"
+            />
+          </PageHeader.Actions>
+        </PageHeader>
+      }
+      isFullWidth
+    >
+      <Layout regions={[1]}>
+        <Surface>
+          <Form
+            formActions={
+              <>
+                <Button key="reset" label="Reset" variant="secondary" />
+                <Button
+                  key="submit"
+                  label="Submit"
+                  type="submit"
+                  variant="primary"
+                />
+              </>
+            }
+            name="Add Person"
+            title="Add Person"
+          >
+            <TextField label="First name" />
+            <TextField label="Last name" />
+            <TextField label="Email" />
+          </Form>
+        </Surface>
+      </Layout>
+    </PageTemplate>
+  ),
 };

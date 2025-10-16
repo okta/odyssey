@@ -16,10 +16,13 @@ import { expect, fn, userEvent, within } from "@storybook/test";
 import { ChangeEvent, useCallback, useState } from "react";
 
 import { axeRun } from "../../../axeRun.js";
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 
 const meta = {
   component: Checkbox,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     ariaLabel: {
       control: "text",
@@ -152,7 +155,6 @@ const meta = {
     onBlur: fn(),
     onChange: fn(),
   },
-  tags: ["autodocs"],
 } satisfies Meta<typeof Checkbox>;
 
 export default meta;

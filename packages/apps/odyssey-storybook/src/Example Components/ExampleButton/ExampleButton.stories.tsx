@@ -22,6 +22,11 @@ import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThem
 
 const meta = {
   component: Button,
+  decorators: [
+    OdysseyStorybookThemeDecorator,
+    ExampleComponentsStorybookThemeDecorator,
+  ],
+  tags: ["autodocs"],
   argTypes: {
     id: {
       description: "An optional ID for the button",
@@ -53,11 +58,6 @@ const meta = {
     label: "Add crew",
     variant: "primary",
   },
-  tags: ["autodocs"],
-  decorators: [
-    OdysseyStorybookThemeDecorator,
-    ExampleComponentsStorybookThemeDecorator,
-  ],
 } satisfies Meta<typeof Button>;
 
 export default meta;

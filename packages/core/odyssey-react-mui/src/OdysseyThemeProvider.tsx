@@ -11,7 +11,6 @@
  */
 
 import styled from "@emotion/styled";
-import { ThemeOptions } from "@mui/material";
 import {
   createTheme,
   ThemeProvider as MuiThemeProvider,
@@ -21,7 +20,12 @@ import * as Tokens from "@okta/odyssey-design-tokens";
 import { memo, ReactNode, useMemo } from "react";
 
 import { OdysseyDesignTokensContext } from "./OdysseyDesignTokensContext.js";
-import { createOdysseyMuiTheme, DesignTokensOverride } from "./theme/index.js";
+import {
+  type OdysseyThemeProviderContextProps,
+  OdysseyThemeProviderPropsProvider,
+  useOdysseyThemeProviderPropsContext,
+} from "./OdysseyThemeProviderPropsContext.js";
+import { createOdysseyMuiTheme } from "./theme/index.js";
 import {
   ContrastMode,
   ContrastModeContext,
@@ -32,14 +36,15 @@ const StyledContrastContainerStyles = styled("div")({
   height: "inherit",
 });
 
-export type OdysseyThemeProviderProps = {
+export type OdysseyThemeProviderProps = OdysseyThemeProviderContextProps & {
   children: ReactNode;
   contrastMode?: ContrastMode;
-  designTokensOverride?: DesignTokensOverride;
+  /**
+   * Odyssey adds a wrapper `div` for contrast changes and height calculations. This is not necessary if you're not changing the background color or rendering into full-height element.
+   */
+  hasWrapperElement?: boolean;
   /** @deprecated Use shadowRootElement instead */
   shadowDomElement?: HTMLDivElement | HTMLElement;
-  shadowRootElement?: HTMLDivElement | HTMLElement;
-  themeOverride?: ThemeOptions;
 };
 
 /**
@@ -49,14 +54,30 @@ export type OdysseyThemeProviderProps = {
  */
 const OdysseyThemeProvider = ({
   children,
-  contrastMode: explicitContrastMode,
-  designTokensOverride,
+  contrastMode: contrastModeProp,
+  designTokensOverride: designTokensOverrideProp,
+  hasWrapperElement = true,
   shadowDomElement,
-  shadowRootElement,
-  themeOverride,
+  shadowRootElement: shadowRootElementProp,
+  themeOverride: themeOverrideProp,
 }: OdysseyThemeProviderProps) => {
+  const odysseyThemeProviderPropsContext =
+    useOdysseyThemeProviderPropsContext();
+
+  const designTokensOverride =
+    designTokensOverrideProp ??
+    odysseyThemeProviderPropsContext.designTokensOverride;
+
+  const shadowRootElement =
+    shadowRootElementProp ??
+    shadowDomElement ??
+    odysseyThemeProviderPropsContext.shadowRootElement; // Adding `odysseyThemeProviderPropsContext.shadowRootElement` fixes popovers not being styled in `Surface`.
+
+  const themeOverride =
+    themeOverrideProp ?? odysseyThemeProviderPropsContext.themeOverride;
+
   const { contrastMode, contrastContainerRef } = useContrastMode({
-    contrastMode: explicitContrastMode,
+    contrastMode: contrastModeProp,
   });
 
   const odysseyTokens = useMemo(
@@ -64,16 +85,14 @@ const OdysseyThemeProvider = ({
     [designTokensOverride],
   );
 
-  const effectiveShadowRootElement = shadowRootElement || shadowDomElement;
-
   const odysseyTheme = useMemo(
     () =>
       createOdysseyMuiTheme({
         contrastMode,
         odysseyTokens,
-        shadowRootElement: effectiveShadowRootElement,
+        shadowRootElement,
       }),
-    [contrastMode, odysseyTokens, effectiveShadowRootElement],
+    [contrastMode, odysseyTokens, shadowRootElement],
   );
 
   const customOdysseyTheme = useMemo(
@@ -88,22 +107,43 @@ const OdysseyThemeProvider = ({
     [contrastMode],
   );
 
-  return (
-    <StyledContrastContainerStyles ref={contrastContainerRef}>
+  const providerComponents = useMemo(
+    () => (
       <ContrastModeContext.Provider value={contrastModeProviderValue}>
         <MuiThemeProvider theme={customOdysseyTheme}>
-          <OdysseyDesignTokensContext.Provider value={odysseyTokens}>
-            {children}
-          </OdysseyDesignTokensContext.Provider>
+          <OdysseyThemeProviderPropsProvider
+            designTokensOverride={designTokensOverride}
+            shadowRootElement={shadowRootElement}
+            themeOverride={themeOverride}
+          >
+            <OdysseyDesignTokensContext.Provider value={odysseyTokens}>
+              {children}
+            </OdysseyDesignTokensContext.Provider>
+          </OdysseyThemeProviderPropsProvider>
         </MuiThemeProvider>
       </ContrastModeContext.Provider>
+    ),
+    [
+      children,
+      contrastModeProviderValue,
+      customOdysseyTheme,
+      designTokensOverride,
+      odysseyTokens,
+      shadowRootElement,
+      themeOverride,
+    ],
+  );
+
+  return hasWrapperElement ? (
+    <StyledContrastContainerStyles ref={contrastContainerRef}>
+      {providerComponents}
     </StyledContrastContainerStyles>
+  ) : (
+    providerComponents
   );
 };
-OdysseyThemeProvider.displayName = "OdysseyThemeProvider";
 
-const MemoizedOdysseyThemeProvider = memo(
-  OdysseyThemeProvider,
-) as typeof OdysseyThemeProvider;
+const MemoizedOdysseyThemeProvider = memo(OdysseyThemeProvider);
+MemoizedOdysseyThemeProvider.displayName = "OdysseyThemeProvider";
 
 export { MemoizedOdysseyThemeProvider as OdysseyThemeProvider };

@@ -5,7 +5,7 @@
   },
   "references": [
     {
-      "path": "../../core/odyssey-react-mui/tsconfig.production.json"
+      "path": "../../core/odyssey-react-mui"
     },
     {
       "path": "../../contributions/example-components"

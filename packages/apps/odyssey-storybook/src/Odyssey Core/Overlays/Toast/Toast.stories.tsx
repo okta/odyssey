@@ -24,9 +24,12 @@ import { expect, userEvent, waitFor, within } from "@storybook/test";
 import { useCallback, useState } from "react";
 
 import { axeRun } from "../../../axeRun.js";
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 
 const meta = {
   component: Toast,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     autoHideDuration: {
       control: "number",
@@ -136,7 +139,6 @@ const meta = {
     text: "The mission to Sagittarius A is set for January 7.",
     autoHideDuration: 10000,
   },
-  tags: ["autodocs"],
 } satisfies Meta<typeof Toast>;
 
 export default meta;

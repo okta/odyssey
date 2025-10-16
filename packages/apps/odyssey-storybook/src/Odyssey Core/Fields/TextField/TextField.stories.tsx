@@ -20,10 +20,13 @@ import { Meta, StoryObj } from "@storybook/react";
 import { expect, fn, userEvent, within } from "@storybook/test";
 import { ChangeEvent, useCallback, useState } from "react";
 
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 
 const meta = {
   component: TextField,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     autoCompleteType: {
       control: "text",
@@ -176,7 +179,6 @@ const meta = {
     onChange: fn(),
     onFocus: fn(),
   },
-  tags: ["autodocs"],
 } satisfies Meta<typeof TextField>;
 
 export default meta;

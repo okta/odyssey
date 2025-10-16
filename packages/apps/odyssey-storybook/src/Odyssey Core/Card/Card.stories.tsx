@@ -26,6 +26,8 @@ import { action } from "@storybook/addon-actions";
 import { type Meta, StoryObj } from "@storybook/react";
 import { MouseEventHandler, useCallback, useState } from "react";
 
+import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
+
 type CardMetaProps = Omit<
   CardProps,
   | "children"
@@ -52,6 +54,7 @@ const onClick = action("onClick");
 const button = (
   <Button label="Access app" onClick={onClick} variant="primary" />
 );
+
 const menuButtonChildren = (
   <>
     <MenuItem onClick={onClick}>Action 1</MenuItem>
@@ -60,13 +63,14 @@ const menuButtonChildren = (
 );
 
 const CheckboxContainer = styled("div")(() => ({
-  "& *": {
-    margin: 0,
-    display: "block",
+  "& label": {
+    // TODO: This is a fix for existing styles that were here. We need to remove these as we can't expect app dev teams to override Odyssey styles.
+    gap: 0,
   },
 }));
 
 const meta = {
+  decorators: [OdysseyStorybookThemeDecorator],
   argTypes: {
     children: {
       control: "boolean",
@@ -274,12 +278,12 @@ export const Tile: Story = {
 
 export const Stack: Story = {
   args: {
-    image: true,
-    children: true,
-    menuButtonChildren: true,
-    detailPanel: true,
     accessory: true,
     button: true,
+    children: true,
+    detailPanel: true,
+    image: true,
+    menuButtonChildren: true,
     variant: "stack",
   },
 };

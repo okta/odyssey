@@ -16,10 +16,12 @@ import { expect, fn, userEvent, waitFor, within } from "@storybook/test";
 import { ChangeEvent, useCallback, useState } from "react";
 
 import { axeRun } from "../../../axeRun.js";
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 
 const meta = {
   component: PasswordField,
+  decorators: [OdysseyStorybookThemeDecorator],
   argTypes: {
     autoCompleteType: {
       control: "text",

@@ -18,8 +18,12 @@ import {
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
+
 const meta = {
   component: Fieldset,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     alert: {
       description:
@@ -103,7 +107,6 @@ const meta = {
     ),
     legend: "Docking registration",
   },
-  tags: ["autodocs"],
 } satisfies Meta<typeof Fieldset>;
 
 export default meta;

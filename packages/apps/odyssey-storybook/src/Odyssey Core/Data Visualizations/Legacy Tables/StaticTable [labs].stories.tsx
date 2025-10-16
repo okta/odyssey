@@ -14,8 +14,11 @@ import { Button, DataTableColumn } from "@okta/odyssey-react-mui";
 import { StaticTable, StaticTableProps } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react";
 
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
+
 const storybookMeta: Meta = {
   component: StaticTable,
+  decorators: [OdysseyStorybookThemeDecorator],
   argTypes: {
     columns: {
       control: "object",

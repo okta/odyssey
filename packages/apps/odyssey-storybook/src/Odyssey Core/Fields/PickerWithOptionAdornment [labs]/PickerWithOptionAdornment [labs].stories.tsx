@@ -25,6 +25,7 @@ import {
 } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react";
 
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 import { pickerComponentPropsMetadata } from "../pickerComponentPropsMetadata.js";
 import PlaceholderLogo from "./PlaceholderLogo.js";
@@ -117,6 +118,8 @@ type PickerWithOptionAdornmentType = typeof PickerWithOptionAdornment<
 
 const storybookMeta: Meta<PickerWithOptionAdornmentType> = {
   component: PickerWithOptionAdornment,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     ...(pickerComponentPropsMetadata as Partial<PickerWithOptionAdornmentType>),
     adornmentSize: {
@@ -138,7 +141,6 @@ const storybookMeta: Meta<PickerWithOptionAdornmentType> = {
     hint: "Optional hint text for picker",
     options: optionsSmall,
   },
-  tags: ["autodocs"],
 };
 
 export default storybookMeta;

@@ -22,9 +22,13 @@ import { useCallback, useState } from "react";
 
 import type { PlaywrightProps } from "../../../tools/storybookTypes.js";
 
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
+
 // Explicitly type the Meta object
 const storybookMeta: Meta<typeof Dialog> = {
   component: Dialog,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     primaryCallToActionComponent: {
       description:
@@ -74,7 +78,6 @@ const storybookMeta: Meta<typeof Dialog> = {
       "You are initiating this ship's self-destruct protocol. This ship, and its occupants, will be destroyed.",
     title: "Initiate self-destruct protocol",
   },
-  tags: ["autodocs"],
 };
 
 export default storybookMeta;

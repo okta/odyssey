@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-contribution-tooling",
-  "version": "1.45.2",
+  "version": "1.46.0",
   "type": "module",
   "sideEffects": false,
   "main": "./dist/index.umd.cjs",
@@ -27,6 +27,10 @@
   "dependencies": {
     "i18next": "^23.15.1",
     "react-i18next": "15.4.1"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@okta/ok-ui": "^4.13.1",

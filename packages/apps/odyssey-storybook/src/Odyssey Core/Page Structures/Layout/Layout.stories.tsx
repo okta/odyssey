@@ -14,7 +14,8 @@ import styled from "@emotion/styled";
 import { Subordinate } from "@okta/odyssey-react-mui";
 import { Layout, LayoutProps } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react";
-// import { Surface } from "@okta/odyssey-react-mui";
+
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 
 const VisibleRegion = styled.div({
   display: "flex",
@@ -53,6 +54,15 @@ const MarginContainer = styled.div({
 
 const storybookMeta: Meta<LayoutProps> = {
   component: Layout,
+  decorators: [
+    (Story) => (
+      <>
+        <RegionDisclaimer />
+        <Story />
+      </>
+    ),
+    OdysseyStorybookThemeDecorator,
+  ],
   argTypes: {
     regions: {
       control: "text",
@@ -74,16 +84,6 @@ const storybookMeta: Meta<LayoutProps> = {
       },
     },
   },
-  decorators: [
-    (Story) => {
-      return (
-        <>
-          <RegionDisclaimer />
-          <Story />
-        </>
-      );
-    },
-  ],
 };
 
 export default storybookMeta;

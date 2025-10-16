@@ -18,7 +18,14 @@ import {
   Radio as MuiRadio,
   RadioProps as MuiRadioProps,
 } from "@mui/material";
-import { memo, useCallback, useImperativeHandle, useMemo, useRef } from "react";
+import {
+  InputHTMLAttributes,
+  memo,
+  useCallback,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+} from "react";
 
 import type { HtmlProps } from "./HtmlProps.js";
 
@@ -132,11 +139,42 @@ const Radio = ({
     },
     [isReadOnly],
   );
+
   const onBlur = useCallback<NonNullable<MuiFormControlLabelProps["onBlur"]>>(
     (event) => {
       onBlurProp?.(event);
     },
     [onBlurProp],
+  );
+
+  const radioStyles = useMemo(
+    () => ({
+      ...(isReadOnly && {
+        cursor: "default",
+        "& .MuiTypography-root": {
+          cursor: "default",
+        } as CSSStyleDeclaration,
+      }),
+
+      ...(hint && {
+        // needed to override specific :not(:last-child) selector
+        ":not(:last-child)": {
+          marginBlockEnd: "0",
+        } as CSSStyleDeclaration,
+      }),
+    }),
+    [hint, isReadOnly],
+  );
+
+  const inputProps = useMemo<InputHTMLAttributes<HTMLInputElement>>(
+    () => ({
+      "aria-describedby": hintId,
+      "aria-disabled": isDisabled || isReadOnly,
+      "data-se": testId,
+      readOnly: isReadOnly,
+      tabIndex: isReadOnly ? 0 : undefined,
+    }),
+    [hintId, isDisabled, isReadOnly, testId],
   );
 
   return (
@@ -147,13 +185,7 @@ const Radio = ({
         control={
           <MuiRadio
             disabled={isDisabled}
-            inputProps={{
-              "aria-describedby": hintId,
-              "aria-disabled": isDisabled || isReadOnly,
-              "data-se": testId,
-              readOnly: isReadOnly,
-              tabIndex: isReadOnly ? 0 : undefined,
-            }}
+            inputProps={inputProps}
             inputRef={localInputRef}
             onChange={onChange}
             onClick={onClick || handleClick}
@@ -163,21 +195,7 @@ const Radio = ({
         label={label}
         name={name}
         onBlur={onBlur}
-        sx={{
-          ...(isReadOnly && {
-            cursor: "default",
-            "& .MuiTypography-root": {
-              cursor: "default",
-            },
-          }),
-
-          ...(hint && {
-            // needed to override specific :not(:last-child) selector
-            ":not(:last-child)": {
-              marginBlockEnd: 0,
-            },
-          }),
-        }}
+        sx={radioStyles}
         translate={translate}
         value={value}
       />

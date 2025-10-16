@@ -14,8 +14,14 @@ import { AppSwitcher } from "@okta/odyssey-react-mui/ui-shell";
 import { Meta, StoryObj } from "@storybook/react";
 import { expect, within } from "@storybook/test";
 
+import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
+
 const meta = {
   component: AppSwitcher,
+  decorators: [OdysseyStorybookThemeDecorator],
+  parameters: {
+    layout: "fullscreen",
+  },
   argTypes: {
     appIcons: {
       description: "",
@@ -35,9 +41,6 @@ const meta = {
   },
   args: {
     appIcons: [],
-  },
-  parameters: {
-    layout: "fullscreen",
   },
 } satisfies Meta<typeof AppSwitcher>;
 

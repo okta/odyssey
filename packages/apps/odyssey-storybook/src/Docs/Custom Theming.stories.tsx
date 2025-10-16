@@ -41,17 +41,21 @@ export const ButtonStory: StoryObj = {
     (Story, context) => {
       const odysseyDesignTokensOverrides: DesignTokensOverride = {
         BorderRadiusMain: "12px",
-        HueBlue500: "green", //base background color
-        HueBlue900: "rgb(150,0,0,1)", //used for hover/focus
+        PalettePrimaryMain: "green", //base background color
+        PalettePrimaryDark: "rgb(150,0,0,1)", //used for hover/focus
+        PalettePrimaryDarker: "rgb(150,0,0,1)", //used for hover/focus
         TypographyLineHeightHeading1: 1.2,
         Spacing0: "1rem",
       };
+
       const shadowRootElement =
         context.canvasElement.parentElement ?? undefined;
+
       return (
         <OdysseyProvider
           designTokensOverride={odysseyDesignTokensOverrides}
-          shadowDomElement={shadowRootElement}
+          hasCssBaseline
+          shadowRootElement={shadowRootElement}
         >
           <Story />
         </OdysseyProvider>
@@ -79,7 +83,8 @@ export const TextFieldStory: StoryObj = {
       return (
         <OdysseyProvider
           designTokensOverride={odysseyDesignTokensOverrides}
-          shadowDomElement={shadowRootElement}
+          hasCssBaseline
+          shadowRootElement={shadowRootElement}
         >
           <Story />
         </OdysseyProvider>
@@ -108,7 +113,8 @@ export const RadioGroupStory: StoryObj = {
       return (
         <OdysseyProvider
           designTokensOverride={odysseyDesignTokensOverrides}
-          shadowDomElement={shadowRootElement}
+          hasCssBaseline
+          shadowRootElement={shadowRootElement}
         >
           <Story />
         </OdysseyProvider>

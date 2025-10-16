@@ -15,9 +15,12 @@ import { UserProfile, UserProfileProps } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react";
 
 import icons from "../../tools/iconUtils.js";
+import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
 const storybookMeta: Meta<UserProfileProps> = {
   component: UserProfile,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     profileIcon: {
       control: { type: "select" },
@@ -48,7 +51,6 @@ const storybookMeta: Meta<UserProfileProps> = {
     userName: "test.user@test.com",
     orgName: "ORG123",
   },
-  tags: ["autodocs"],
 };
 
 export default storybookMeta;

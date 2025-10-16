@@ -27,10 +27,13 @@ import {
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 
 const storybookMeta: Meta<FormProps> = {
   component: Form,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     title: {
       control: "text",
@@ -177,7 +180,6 @@ const storybookMeta: Meta<FormProps> = {
       </>
     ),
   },
-  tags: ["autodocs"],
 };
 
 export default storybookMeta;

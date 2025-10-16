@@ -12,10 +12,7 @@
 
 import type { Meta, StoryObj } from "@storybook/react";
 
-import {
-  PageHeader,
-  type PageHeaderProps,
-} from "@okta/odyssey-contributions-workflows-components";
+import { PageHeader } from "@okta/odyssey-contributions-workflows-components";
 import { action } from "@storybook/addon-actions";
 
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
@@ -23,6 +20,11 @@ import { WorkflowsComponentsStorybookThemeDecorator } from "../../tools/Workflow
 
 const meta = {
   component: PageHeader,
+  decorators: [
+    OdysseyStorybookThemeDecorator,
+    WorkflowsComponentsStorybookThemeDecorator,
+  ],
+  tags: ["autodocs"],
   argTypes: {
     buttonLabel: {
       control: "text",
@@ -56,12 +58,7 @@ const meta = {
     headingText: "Header",
     isLookAndFeelEnabled: true,
   },
-  tags: ["autodocs"],
-  decorators: [
-    OdysseyStorybookThemeDecorator,
-    WorkflowsComponentsStorybookThemeDecorator,
-  ],
-} satisfies Meta<PageHeaderProps>;
+} satisfies Meta<typeof PageHeader>;
 
 export default meta;
 

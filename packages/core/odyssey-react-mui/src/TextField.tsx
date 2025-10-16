@@ -30,33 +30,6 @@ import {
 } from "./FieldComponentProps.js";
 import { HtmlProps } from "./HtmlProps.js";
 import { FocusHandle, getControlState, useInputValues } from "./inputUtils.js";
-import { type TestSelector } from "./test-selectors/index.js";
-
-export const TextFieldTestSelector = {
-  accessibleText: {
-    errorMessage: "errorMessage",
-    hint: "description",
-    label: "label",
-  },
-  children: {
-    link: {
-      elementSelector: {
-        method: "ByRole",
-        options: {
-          label: "name",
-        },
-        role: "link",
-      },
-    },
-  },
-  elementSelector: {
-    method: "ByRole",
-    options: {
-      label: "name",
-    },
-    role: "textbox",
-  },
-} as const satisfies TestSelector;
 
 export const textFieldTypeValues = [
   "email",

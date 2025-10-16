@@ -330,6 +330,7 @@ const Card = ({
             <MuiSkeleton variant="circular" />
           </ImageContainer>
         )}
+
         <ContentContainer odysseyDesignTokens={odysseyDesignTokens}>
           <UpperContentContainer
             hasMenuButton={Boolean(menuButtonChildren)}
@@ -342,6 +343,7 @@ const Card = ({
                   <MuiSkeleton width="50%" />
                 </Support>
               )}
+
               {title && (
                 <Typography
                   component="div"
@@ -351,6 +353,7 @@ const Card = ({
                 </Typography>
               )}
             </OverlineTitleContainer>
+
             {description && (
               <Paragraph>
                 <MuiSkeleton width="100%" />
@@ -410,6 +413,7 @@ const Card = ({
             {image}
           </ImageContainer>
         )}
+
         <ContentContainer odysseyDesignTokens={odysseyDesignTokens}>
           <UpperContentContainer
             hasMenuButton={Boolean(menuButtonChildren)}
@@ -418,6 +422,7 @@ const Card = ({
           >
             <OverlineTitleContainer odysseyDesignTokens={odysseyDesignTokens}>
               {overline && <Support component="div">{overline}</Support>}
+
               {title && (
                 <Typography
                   component="div"
@@ -428,6 +433,7 @@ const Card = ({
                 </Typography>
               )}
             </OverlineTitleContainer>
+
             {description && (
               <Paragraph color="textSecondary">{description}</Paragraph>
             )}
@@ -484,6 +490,7 @@ const Card = ({
           {isLoading ? <MuiSkeleton variant="circular" /> : accessory}
         </AccessoriesContainer>
       )}
+
       {isLoading ? (
         loadingContent
       ) : onClick ? (

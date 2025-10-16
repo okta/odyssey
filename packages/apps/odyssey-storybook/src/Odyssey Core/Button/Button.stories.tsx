@@ -27,6 +27,7 @@ import type { PlaywrightProps } from "../../tools/storybookTypes.js";
 
 import { axeRun } from "../../axeRun.js";
 import icons from "../../tools/iconUtils.js";
+import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
 type playType = {
   args: ButtonProps;
@@ -36,6 +37,8 @@ type playType = {
 
 const meta = {
   component: Button,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     endIcon: {
       control: { type: "select" },
@@ -122,7 +125,6 @@ const meta = {
     onClick: fn(),
     variant: "primary",
   },
-  tags: ["autodocs"],
 } satisfies Meta<ButtonProps>;
 
 export default meta;

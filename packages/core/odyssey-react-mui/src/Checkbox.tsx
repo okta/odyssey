@@ -18,7 +18,14 @@ import {
   CheckboxProps as MuiCheckboxProps,
   FormControlLabelProps as MuiFormControlLabelProps,
 } from "@mui/material";
-import { memo, useCallback, useImperativeHandle, useMemo, useRef } from "react";
+import {
+  InputHTMLAttributes,
+  memo,
+  useCallback,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+} from "react";
 
 import type { HtmlProps } from "./HtmlProps.js";
 
@@ -186,17 +193,35 @@ const Checkbox = ({
         cursor: "default",
         "& .MuiTypography-root": {
           cursor: "default",
-        },
+        } as CSSStyleDeclaration,
       }),
 
       ...(hint && {
         // needed to override specific :not(:last-child) selector
         ":not(:last-child)": {
-          marginBlockEnd: 0,
-        },
+          marginBlockEnd: "0",
+        } as CSSStyleDeclaration,
       }),
     }),
     [hint, isReadOnly],
+  );
+
+  // TODO: Is there a better way to handle these styles? Why pixels? Isn't this tying Checkbox to the label's font size? -Kevin
+  const checkboxInputStyles = useMemo(
+    () => ({
+      marginBlockStart: "2px",
+    }),
+    [],
+  );
+
+  const inputProps = useMemo<InputHTMLAttributes<HTMLInputElement>>(
+    () => ({
+      "aria-describedby": hintId,
+      "aria-readonly": isReadOnly,
+      "data-se": testId,
+      readOnly: isReadOnly,
+    }),
+    [hintId, isReadOnly, testId],
   );
 
   return (
@@ -216,21 +241,12 @@ const Checkbox = ({
             {...inputValues}
             disabled={isDisabled}
             indeterminate={isIndeterminate}
-            inputProps={{
-              "aria-describedby": hintId,
-              "aria-readonly": isReadOnly,
-              "data-se": testId,
-              readOnly: isReadOnly,
-            }}
+            inputProps={inputProps}
             inputRef={localInputRef}
             onChange={onChange}
-            onClick={
-              onClick as unknown as React.MouseEventHandler<HTMLButtonElement>
-            }
+            onClick={onClick}
             required={isRequired}
-            sx={{
-              marginBlockStart: "2px",
-            }}
+            sx={checkboxInputStyles}
           />
         }
         disabled={isDisabled}
@@ -243,6 +259,7 @@ const Checkbox = ({
         translate={translate}
         value={value}
       />
+
       {hint && (
         <HintContainerWithInlineStartSpacing
           odysseyDesignTokens={odysseyDesignTokens}

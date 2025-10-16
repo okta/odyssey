@@ -16,8 +16,11 @@ import {
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 
+import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
+
 const storybookMeta: Meta<typeof ScreenReaderText> = {
   component: ScreenReaderText,
+  decorators: [OdysseyStorybookThemeDecorator],
   argTypes: {
     children: {
       control: "text",

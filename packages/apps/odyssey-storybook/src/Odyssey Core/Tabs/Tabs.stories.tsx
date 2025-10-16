@@ -27,9 +27,11 @@ import type { PlaywrightProps } from "../../tools/storybookTypes.js";
 
 import { axeRun } from "../../axeRun.js";
 import icons from "../../tools/iconUtils.js";
+import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
 const storybookMeta: Meta<TabsProps & TabItemProps> = {
   component: Tabs,
+  decorators: [OdysseyStorybookThemeDecorator],
   argTypes: {
     children: {
       control: "text",

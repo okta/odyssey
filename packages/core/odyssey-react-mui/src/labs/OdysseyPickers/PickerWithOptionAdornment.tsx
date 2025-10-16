@@ -20,6 +20,7 @@ import {
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext.js";
 import { Tag } from "../../Tag.js";
+import { pxToRem } from "../../theme/index.js";
 import { Heading6 } from "../../Typography.js";
 import {
   type AdornmentSize,
@@ -103,6 +104,10 @@ const OptionAdornmentContainer = styled("div", {
       height: "auto",
       maxHeight: odysseyDesignTokens.Spacing4,
       marginInlineEnd: odysseyDesignTokens.Spacing2,
+
+      "&:has(> img)": {
+        height: `${pxToRem(16)}rem`,
+      },
 
       svg: {
         display: "flex",

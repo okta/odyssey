@@ -29,6 +29,7 @@ import {
 import type { HtmlProps } from "./HtmlProps.js";
 
 import { Button, ButtonProps } from "./Buttons/index.js";
+import { FullScreenOverlay } from "./FullScreenOverlay.js";
 import { useTranslation } from "./i18n.generated/i18n.js";
 import { CloseIcon } from "./icons.generated/index.js";
 import {
@@ -104,10 +105,11 @@ export type DrawerProps = {
       }
   );
 
-interface DrawerStyleProps {
+type DrawerStyleProps = {
   hasDividers: boolean;
   odysseyDesignTokens: DesignTokens;
-}
+};
+
 const DrawerHeader = styled("div", {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" && prop !== "hasDividers",
@@ -230,62 +232,90 @@ const Drawer = ({
     NonNullable<ButtonProps["onClick"]>
   >((event) => onClose(event, "closeButtonClick"), [onClose]);
 
-  return (
-    <MuiDrawer
-      anchor={anchorDirection}
-      data-se={testId}
-      onClose={onClose}
-      open={isOpen}
-      sx={{
-        //Overrides default MUI inline style
-        ...(variant === "persistent" && {
-          "& .MuiDrawer-paper": {
-            transition: "none",
-          },
-        }),
-      }}
-      variant={variant}
-    >
-      <DrawerContentWrapper
-        {...(isContentScrollable && {
-          //Sets tabIndex on content element if scrollable so content is easier to navigate with the keyboard
-          tabIndex: 0,
-        })}
-        odysseyDesignTokens={odysseyDesignTokens}
-        ref={drawerContentRef}
+  const muiDrawerComponent = useMemo(
+    () => (
+      <MuiDrawer
+        anchor={anchorDirection}
+        data-se={testId}
+        onClose={onClose}
+        open={isOpen}
+        sx={{
+          //Overrides default MUI inline style
+          ...(variant === "persistent" && {
+            "& .MuiDrawer-paper": {
+              transition: "none",
+            },
+          }),
+        }}
+        variant={variant}
       >
-        <DrawerHeader
-          hasDividers={dividersVisible}
+        <DrawerContentWrapper
+          {...(isContentScrollable && {
+            //Sets tabIndex on content element if scrollable so content is easier to navigate with the keyboard
+            tabIndex: 0,
+          })}
           odysseyDesignTokens={odysseyDesignTokens}
-          translate={translate}
+          ref={drawerContentRef}
         >
-          <Heading5>{title}</Heading5>
-          <Button
-            ariaLabel={ariaLabel}
-            onClick={handleCloseButtonClick}
-            size="small"
-            startIcon={<CloseIcon />}
-            variant="floating"
-          />
-        </DrawerHeader>
-        <DrawerContent
-          hasDividers={dividersVisible}
-          odysseyDesignTokens={odysseyDesignTokens}
-        >
-          {children}
-        </DrawerContent>
-      </DrawerContentWrapper>
-      {hasFooter && (
-        <DrawerFooter
-          hasDividers={dividersVisible}
-          odysseyDesignTokens={odysseyDesignTokens}
-        >
-          {tertiaryCallToActionComponent}
-          {secondaryCallToActionComponent}
-          {primaryCallToActionComponent}
-        </DrawerFooter>
-      )}
-    </MuiDrawer>
+          <DrawerHeader
+            hasDividers={dividersVisible}
+            odysseyDesignTokens={odysseyDesignTokens}
+            translate={translate}
+          >
+            <Heading5>{title}</Heading5>
+
+            <Button
+              ariaLabel={ariaLabel}
+              onClick={handleCloseButtonClick}
+              size="small"
+              startIcon={<CloseIcon />}
+              variant="floating"
+            />
+          </DrawerHeader>
+          <DrawerContent
+            hasDividers={dividersVisible}
+            odysseyDesignTokens={odysseyDesignTokens}
+          >
+            {children}
+          </DrawerContent>
+        </DrawerContentWrapper>
+        {hasFooter && (
+          <DrawerFooter
+            hasDividers={dividersVisible}
+            odysseyDesignTokens={odysseyDesignTokens}
+          >
+            {tertiaryCallToActionComponent}
+            {secondaryCallToActionComponent}
+            {primaryCallToActionComponent}
+          </DrawerFooter>
+        )}
+      </MuiDrawer>
+    ),
+    [
+      anchorDirection,
+      ariaLabel,
+      children,
+      dividersVisible,
+      handleCloseButtonClick,
+      hasFooter,
+      isContentScrollable,
+      isOpen,
+      odysseyDesignTokens,
+      onClose,
+      primaryCallToActionComponent,
+      secondaryCallToActionComponent,
+      tertiaryCallToActionComponent,
+      testId,
+      title,
+      translate,
+      variant,
+    ],
+  );
+
+  return variant === "temporary" ? (
+    <FullScreenOverlay>{muiDrawerComponent}</FullScreenOverlay>
+  ) : (
+    muiDrawerComponent
   );
 };
 

@@ -22,40 +22,7 @@ import type { HtmlProps } from "./HtmlProps.js";
 import { FieldComponentProps } from "./FieldComponentProps.js";
 import { useTranslation } from "./i18n.generated/i18n.js";
 import { PickerVirtualizationListBox } from "./labs/OdysseyPickers/PickerVirtualizationListBox.js";
-import { TestSelector } from "./test-selectors/index.js";
 import { useAutocomplete } from "./useAutocomplete.js";
-
-export const AutocompleteTestSelector = {
-  accessibleText: {
-    errorMessage: "errorMessage",
-    hint: "description",
-    label: "label",
-  },
-  children: {
-    list: {
-      children: {
-        listItem: {
-          elementSelector: {
-            method: "ByRole",
-            options: {
-              label: "name",
-            },
-            role: "option",
-          },
-        },
-      },
-      isControlledElement: true,
-    },
-  },
-  elementSelector: {
-    method: "ByRole",
-    options: {
-      label: "name",
-    },
-    role: "combobox",
-  },
-} as const satisfies TestSelector;
-// type SetItemSize = (size: number) => void;
 
 export type AutocompleteProps<
   OptionType,

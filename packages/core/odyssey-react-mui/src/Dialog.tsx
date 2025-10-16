@@ -11,12 +11,12 @@
  */
 
 import {
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
   Dialog as MuiDialog,
+  DialogActions as MuiDialogActions,
+  DialogContent as MuiDialogContent,
+  DialogContentText as MuiDialogContentText,
   DialogProps as MuiDialogProps,
+  DialogTitle as MuiDialogTitle,
 } from "@mui/material";
 import {
   cloneElement,
@@ -32,6 +32,7 @@ import {
 import type { HtmlProps } from "./HtmlProps.js";
 
 import { Button, ButtonProps } from "./Buttons/index.js";
+import { FullScreenOverlay } from "./FullScreenOverlay.js";
 import { useTranslation } from "./i18n.generated/i18n.js";
 import { CloseIcon } from "./icons.generated/index.js";
 import { useUniqueId } from "./useUniqueId.js";
@@ -136,7 +137,7 @@ const Dialog = ({
 
   const content =
     typeof children === "string" ? (
-      <DialogContentText>{children}</DialogContentText>
+      <MuiDialogContentText>{children}</MuiDialogContentText>
     ) : (
       children
     );
@@ -153,44 +154,47 @@ const Dialog = ({
   >((event) => onClose(event, "closeButtonClick"), [onClose]);
 
   return (
-    <MuiDialog
-      aria-labelledby={dialogLabelId}
-      data-se={testId}
-      onClose={onClose}
-      open={isOpen}
-    >
-      <DialogTitle
-        id={dialogTitleId} // We need to explicitly unset `id` for MUI to automatically set it based on the `aria-labelledby` prop passed to `MuiDialog`
-        translate={translate}
+    <FullScreenOverlay>
+      <MuiDialog
+        aria-labelledby={dialogLabelId}
+        data-se={testId}
+        onClose={onClose}
+        open={isOpen}
       >
-        <span id={dialogLabelId}>{title}</span>
-        <Button
-          ariaLabel={t("close.text")}
-          onClick={handleCloseButtonClick}
-          size="small"
-          startIcon={<CloseIcon />}
-          variant="floating"
-        />
-      </DialogTitle>
-      <DialogContent
-        {...(isContentScrollable && {
-          // Sets tabIndex on content element if scrollable so content is easier to navigate with the keyboard
-          tabIndex: 0,
-        })}
-        dividers={isContentScrollable}
-        ref={dialogContentRef}
-      >
-        {content}
-      </DialogContent>
+        <MuiDialogTitle
+          id={dialogTitleId} // We need to explicitly unset `id` for MUI to automatically set it based on the `aria-labelledby` prop passed to `MuiDialog`
+          translate={translate}
+        >
+          <span id={dialogLabelId}>{title}</span>
+          <Button
+            ariaLabel={t("close.text")}
+            onClick={handleCloseButtonClick}
+            size="small"
+            startIcon={<CloseIcon />}
+            variant="floating"
+          />
+        </MuiDialogTitle>
 
-      {actionButtons.length > 0 && (
-        <DialogActions>
-          {actionButtons.map((actionButton, index) =>
-            actionButton ? cloneElement(actionButton, { key: index }) : null,
-          )}
-        </DialogActions>
-      )}
-    </MuiDialog>
+        <MuiDialogContent
+          {...(isContentScrollable && {
+            // Sets tabIndex on content element if scrollable so content is easier to navigate with the keyboard
+            tabIndex: 0,
+          })}
+          dividers={isContentScrollable}
+          ref={dialogContentRef}
+        >
+          {content}
+        </MuiDialogContent>
+
+        {actionButtons.length > 0 && (
+          <MuiDialogActions>
+            {actionButtons.map((actionButton, index) =>
+              actionButton ? cloneElement(actionButton, { key: index }) : null,
+            )}
+          </MuiDialogActions>
+        )}
+      </MuiDialog>
+    </FullScreenOverlay>
   );
 };
 

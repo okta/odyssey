@@ -16,10 +16,12 @@ import { expect, userEvent, within } from "@storybook/test";
 import { ChangeEvent, useCallback, useState } from "react";
 
 import { axeRun } from "../../../axeRun.js";
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 
 const meta = {
   component: RadioGroup,
+  decorators: [OdysseyStorybookThemeDecorator],
   argTypes: {
     children: {
       description: "An array of Radio components within the group",

@@ -26,7 +26,7 @@
     "postinstall": "yarn build && [ -z ${CI:-} ] && husky install || exit 0",
     "prettier-check": "prettier --ignore-unknown --log-level warn --check .",
     "prettier-write": "prettier --ignore-unknown --log-level warn --write .",
-    "start:dev": "yarn workspaces foreach --all --parallel --interlaced --exclude=@okta/odyssey-icons --exclude=@okta/odyssey-storybook run dev",
+    "start:dev": "yarn workspaces foreach --all --parallel --interlaced --jobs unlimited --exclude=@okta/odyssey-icons --exclude=@okta/odyssey-storybook run dev",
     "start:storybook": "yarn workspace @okta/odyssey-storybook start",
     "start": "yarn install && yarn build && yarn concurrently npm:start:dev npm:start:storybook",
     "test": "yarn workspaces foreach --all --parallel --interlaced run test",

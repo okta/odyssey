@@ -20,8 +20,12 @@ import {
 import { action } from "@storybook/addon-actions";
 import { expect, within } from "@storybook/test";
 
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
+
 const storybookMeta: Meta<BreadcrumbsProps> = {
   component: BreadcrumbList,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     children: {
       control: "object",
@@ -55,7 +59,6 @@ const storybookMeta: Meta<BreadcrumbsProps> = {
   args: {
     maxVisibleItems: 5,
   },
-  tags: ["autodocs"],
 };
 
 export default storybookMeta;

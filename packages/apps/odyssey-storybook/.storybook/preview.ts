@@ -1,7 +1,5 @@
 import type { Preview } from "@storybook/react";
 
-import { OdysseyStorybookThemeDecorator } from "../src/tools/OdysseyStorybookThemeDecorator.js";
-
 export const globalTypes = {
   rtlDirection: "ltr",
   locale: {
@@ -47,7 +45,6 @@ export const globalTypes = {
 };
 
 const preview: Preview = {
-  decorators: [OdysseyStorybookThemeDecorator],
   parameters: {
     a11y: {
       options: {
@@ -91,7 +88,6 @@ const preview: Preview = {
     grid: {
       cellSize: 10,
     },
-    hasThemeDecorator: true,
     options: {
       storySort: {
         method: "alphabetical",

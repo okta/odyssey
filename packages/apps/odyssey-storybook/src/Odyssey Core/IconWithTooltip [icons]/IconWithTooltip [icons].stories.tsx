@@ -18,9 +18,12 @@ import { userEvent, within } from "@storybook/test";
 import type { PlaywrightProps } from "../../tools/storybookTypes.js";
 
 import { axeRun } from "../../axeRun.js";
+import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
 const storybookMeta: Meta<IconWithTooltipProps> = {
   component: IconWithTooltip,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     IconComponent: {
       description: "The icon to render",
@@ -67,7 +70,6 @@ const storybookMeta: Meta<IconWithTooltipProps> = {
   args: {
     testId: "tooltip",
   },
-  tags: ["autodocs"],
 };
 
 export default storybookMeta;

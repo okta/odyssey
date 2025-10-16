@@ -19,7 +19,10 @@ import * as iconDictionary from "@okta/odyssey-react-mui/icons";
 import { Meta, StoryObj } from "@storybook/react";
 import { createElement } from "react";
 
+import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
+
 const storybookMeta: Meta = {
+  decorators: [OdysseyStorybookThemeDecorator],
   tags: ["autodocs"],
 };
 

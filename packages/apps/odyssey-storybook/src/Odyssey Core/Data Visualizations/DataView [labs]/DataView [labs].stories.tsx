@@ -46,6 +46,7 @@ import {
   useState,
 } from "react";
 
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { filterData, reorderData } from "./dataFunctions.js";
 import {
   Person,
@@ -68,6 +69,7 @@ type DataViewMetaProps = DataViewProps<Person> &
 
 const meta = {
   component: DataView,
+  decorators: [OdysseyStorybookThemeDecorator],
   argTypes: {
     getData: {
       table: {
@@ -365,7 +367,9 @@ const useDataCallbacks = (
   const onChangeRowSelection = useCallback(
     (rowSelection: DataRowSelectionState) => {
       if (Object.keys(rowSelection).length > 0) {
-        console.log(`${Object.keys(rowSelection).length} selected`);
+        action("onChangeRowSelection")(
+          `${Object.keys(rowSelection).length} selected`,
+        );
       }
     },
     [],
@@ -1023,7 +1027,7 @@ export const PaginationHook: Story = {
     const onPaginationChange = useCallback<
       Required<DataViewProps<Person>>["onPaginationChange"]
     >((pagination: { pageIndex: number; pageSize: number }) => {
-      console.log(pagination);
+      action("onPaginationChange")(pagination);
     }, []);
 
     const tableLayoutOptions = useMemo(

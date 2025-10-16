@@ -25,6 +25,7 @@ import {
 import { Meta, StoryObj } from "@storybook/react";
 import { expect, fn, screen, userEvent, within } from "@storybook/test";
 
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 import { pickerComponentPropsMetadata } from "../pickerComponentPropsMetadata.js";
 
@@ -75,6 +76,8 @@ type PickerWithOptionAdornmentType = typeof SearchDropdown<
 
 const storybookMeta: Meta<PickerWithOptionAdornmentType> = {
   component: SearchDropdown,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     ...(pickerComponentPropsMetadata as Partial<PickerWithOptionAdornmentType>),
     adornmentSize: {
@@ -96,7 +99,6 @@ const storybookMeta: Meta<PickerWithOptionAdornmentType> = {
     hint: "Optional hint text for picker",
     options: optionsWithExtra,
   },
-  tags: ["autodocs"],
 };
 
 export default storybookMeta;

@@ -13,8 +13,12 @@
 import { Button, EmptyState } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
+
 const meta = {
   component: EmptyState,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     heading: {
       control: "text",
@@ -43,7 +47,6 @@ const meta = {
       description: "Secondary call to action",
     },
   },
-  tags: ["autodocs"],
 } satisfies Meta<typeof EmptyState>;
 
 export default meta;

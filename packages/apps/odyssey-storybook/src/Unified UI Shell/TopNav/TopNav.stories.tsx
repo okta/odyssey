@@ -14,11 +14,18 @@ import * as odysseyDesignTokens from "@okta/odyssey-design-tokens";
 import { Button, SearchField } from "@okta/odyssey-react-mui";
 import { UserIcon } from "@okta/odyssey-react-mui/icons";
 import { UserProfile } from "@okta/odyssey-react-mui/labs";
-import { TopNav, TopNavProps } from "@okta/odyssey-react-mui/ui-shell";
+import { TopNav } from "@okta/odyssey-react-mui/ui-shell";
 import { Meta, StoryObj } from "@storybook/react";
 
-const storybookMeta: Meta<TopNavProps> = {
+import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
+
+const meta = {
   component: TopNav,
+  decorators: [OdysseyStorybookThemeDecorator],
+  parameters: {
+    layout: "fullscreen",
+  },
+  tags: ["autodocs"],
   argTypes: {
     leftSideComponent: {
       control: undefined,
@@ -39,15 +46,13 @@ const storybookMeta: Meta<TopNavProps> = {
       },
     },
   },
-  parameters: {
-    layout: "fullscreen",
-  },
-  tags: ["autodocs"],
-};
+} satisfies Meta<typeof TopNav>;
 
-export default storybookMeta;
+export default meta;
 
-export const Default: StoryObj<TopNavProps> = {
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
   args: {
     leftSideComponent: <SearchField label="Search" placeholder="Search..." />,
     rightSideComponent: (

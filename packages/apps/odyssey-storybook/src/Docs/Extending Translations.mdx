@@ -153,12 +153,11 @@ The following keys can have their values overridden:
 ```
 import { getOktaLocale } from '@okta/ui-libraries-monolith';
 
-<OdysseyProvider languageCode={getOktaLocale()}>
-  <CssBaseline>
-
-    // Add code here
-
-  </CssBaseline>
+<OdysseyProvider
+  hasCssBaseline
+  languageCode={getOktaLocale()}
+>
+  // Add code here
 </OdysseyProvider>
 
 ```

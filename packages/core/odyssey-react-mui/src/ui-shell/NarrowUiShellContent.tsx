@@ -46,6 +46,7 @@ import {
   SIDE_NAV_WIDTH,
   TOP_NAV_HEIGHT,
   UI_SHELL_BASE_Z_INDEX,
+  UI_SHELL_OVERLAY_Z_INDEX,
 } from "./uiShellSharedConstants.js";
 import { useMatchAppElementToUiShellAppArea } from "./useMatchAppElementToUiShellAppArea.js";
 import { useScrollState } from "./useScrollState.js";
@@ -53,13 +54,6 @@ import { useScrollState } from "./useScrollState.js";
 const StyledAppContentArea = styled("div")({
   gridArea: "app-content",
   position: "relative",
-  display: "grid",
-  gridGap: 0,
-  gridTemplateAreas: `
-    "left-side app-container right-side"
-  `,
-  gridTemplateColumns: "auto 1fr auto",
-  gridTemplateRows: "1fr",
   height: "100%",
   width: "100%",
 });
@@ -71,7 +65,6 @@ const StyledAppContainer = styled("div", {
   appBackgroundColor?: UiShellColors["appBackgroundColor"];
 }>(({ appBackgroundColor }) => ({
   backgroundColor: appBackgroundColor,
-  gridArea: "app-container",
   height: "100%",
   overflow: "hidden",
   width: "100%",
@@ -89,9 +82,8 @@ const StyledLeftSideContainer = styled("div", {
 }>(({ isOpen }) => ({
   display: isOpen ? "block" : "none",
   height: "100%",
-  gridArea: "left-side",
   position: "absolute",
-  zIndex: UI_SHELL_BASE_Z_INDEX,
+  zIndex: UI_SHELL_OVERLAY_Z_INDEX,
 }));
 
 const StyledRightSideContainer = styled("div", {
@@ -103,14 +95,13 @@ const StyledRightSideContainer = styled("div", {
 }>(({ isOpen, odysseyDesignTokens }) => ({
   backgroundColor: odysseyDesignTokens.HueNeutralWhite,
   display: isOpen ? "block" : "none",
-  gridArea: "right-side",
   height: "100%",
   maxWidth: SIDE_NAV_WIDTH,
   overflowY: "auto",
   position: "absolute",
   right: 0,
   width: SIDE_NAV_WIDTH,
-  zIndex: UI_SHELL_BASE_Z_INDEX,
+  zIndex: UI_SHELL_OVERLAY_Z_INDEX,
 }));
 
 const StyledMenuLogo = styled("div", {

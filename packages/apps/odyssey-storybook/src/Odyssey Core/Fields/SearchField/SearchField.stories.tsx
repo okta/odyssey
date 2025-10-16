@@ -14,10 +14,13 @@ import { SearchField, searchVariantValues } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 import { ChangeEvent, useCallback, useState } from "react";
 
+import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 
 const meta = {
   component: SearchField,
+  decorators: [OdysseyStorybookThemeDecorator],
+  tags: ["autodocs"],
   argTypes: {
     autoCompleteType: {
       control: "text",
@@ -150,7 +153,6 @@ const meta = {
     label: "Search",
     placeholder: "Search planets",
   },
-  tags: ["autodocs"],
 } satisfies Meta<typeof SearchField>;
 
 export default meta;
