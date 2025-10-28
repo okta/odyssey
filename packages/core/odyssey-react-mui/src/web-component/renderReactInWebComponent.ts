@@ -19,6 +19,7 @@ import {
   type ReactRootElements,
 } from "./createReactRootElements.js";
 import version from "./odysseyWebComponentVersion.generated.js";
+import { removeGlobalStylesFromShadowDom } from "./removeGlobalStylesFromShadowDom.js";
 
 interface GetReactWebComponentOptions {
   getReactComponent: (reactRootElements: ReactRootElements) => ReactNode;
@@ -54,15 +55,10 @@ export class WebComponentClass extends SsrFriendlyHtmlElementClass {
     shadowRoot.appendChild(stylesRootElement);
     shadowRoot.appendChild(appRootElement);
 
-    const styleHostElement = document.createElement("style");
-    styleHostElement.setAttribute("nonce", window.cspNonce);
-    styleHostElement.innerHTML = `
-      :host {
-        all: initial;
-        contain: content;
-      }
-    `;
-    stylesRootElement.appendChild(styleHostElement);
+    removeGlobalStylesFromShadowDom({
+      nonce: window.cspNonce,
+      stylesRootElement,
+    });
   }
 
   /**

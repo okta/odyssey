@@ -40,6 +40,7 @@ import {
   UserProfile,
 } from "@okta/odyssey-react-mui/labs";
 import {
+  TURN_OFF_APP_SWITCHER,
   UiShell,
   uiShellDataAttribute,
   type UiShellNavComponentProps,
@@ -530,6 +531,21 @@ export const AppSwitcherOnly: Story = {
     subscribeToPropChanges: (subscriber) => {
       subscriber({
         appSwitcherProps: sharedAppSwitcherProps,
+      });
+
+      return () => {};
+    },
+  },
+};
+
+export const ErroredAppSwitcher: Story = {
+  decorators: [OdysseyStorybookThemeDecorator],
+  args: {
+    hasStandardAppContentPadding: false,
+    initialVisibleSections: ["AppSwitcher", "SideNav", "TopNav"],
+    subscribeToPropChanges: (subscriber) => {
+      subscriber({
+        appSwitcherProps: TURN_OFF_APP_SWITCHER,
       });
 
       return () => {};

@@ -24,6 +24,7 @@ import { InnerAppContainer } from "./InnerAppContainer.js";
 import { SideNav } from "./SideNav/index.js";
 import { TopNav } from "./TopNav/index.js";
 import {
+  TURN_OFF_APP_SWITCHER,
   UiShellContentProps,
   UiShellNavComponentProps,
 } from "./uiShellContentTypes.js";
@@ -147,7 +148,7 @@ const WideUiShellContent = ({
             )
         }
 
-        {appSwitcherProps && (
+        {appSwitcherProps && appSwitcherProps !== TURN_OFF_APP_SWITCHER && (
           <ErrorBoundary fallback={null} onError={onError}>
             <AppSwitcher {...appSwitcherProps} />
           </ErrorBoundary>

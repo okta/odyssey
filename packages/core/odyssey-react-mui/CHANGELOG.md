@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.47.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.46.0...v1.47.0) (2025-10-28)
+
+### Features
+
+- allow recursive SideNav ([#65](https://github.com/atko-eng/odyssey-design-system/issues/65)) ([3fe2409](https://github.com/atko-eng/odyssey-design-system/commit/3fe24091c0b8a889f2d8106ad55bc5f0bce3dc6a))
+
+### Bug Fixes
+
+- add internal module for component exports and utilities ([#112](https://github.com/atko-eng/odyssey-design-system/issues/112)) ([c95f002](https://github.com/atko-eng/odyssey-design-system/commit/c95f002f8edc73841ff0757adeeaf89621cc2875))
+- adds code to remove global CSS from Shadow DOM ([#105](https://github.com/atko-eng/odyssey-design-system/issues/105)) ([9d9d714](https://github.com/atko-eng/odyssey-design-system/commit/9d9d714f4285f7434e6ee1e60c5c2b1e5627bc2b))
+- avoids infinite loading spinner on AppSwitcher error with Symbol ([#95](https://github.com/atko-eng/odyssey-design-system/issues/95)) ([b907918](https://github.com/atko-eng/odyssey-design-system/commit/b907918af6dc43985dcafa21cb29df7cc9dc615a))
+- bundle size of odyssey-react-mui ([#97](https://github.com/atko-eng/odyssey-design-system/issues/97)) ([d69f672](https://github.com/atko-eng/odyssey-design-system/commit/d69f6728e6d01bb5489df8a9443a0f5c792c24ba))
+
 ## [1.46.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.45.2...v1.46.0) (2025-10-16)
 
 ### Bug Fixes

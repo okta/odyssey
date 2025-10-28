@@ -16,4 +16,4 @@
  * This script only needs to be run during release, and shouldn't be used during local development.
  */
 
-export default "1-45-3";
+export default "1-47-0";

@@ -27,7 +27,7 @@ import {
 } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
-import type { SideNavProps } from "./types.js";
+import type { SideNavItem, SideNavProps } from "./types.js";
 
 import { ContrastColors } from "../../createContrastColors.js";
 import { useTranslation } from "../../i18n.generated/i18n.js";
@@ -57,17 +57,27 @@ import {
   StyledSideNavListItem,
 } from "./SideNavItemContent.js";
 import { SideNavItemContentContext } from "./SideNavItemContentContext.js";
+import { SideNavSortableList } from "./SideNavSortableList.js";
 import {
   SIDE_NAV_TOGGLE_ICON_HALF_SIZE,
   SIDE_NAV_TOGGLE_ICON_SIZE,
   SideNavToggleButton,
   SideNavToggleButtonProps,
 } from "./SideNavToggleButton.js";
-import { SortableList } from "./SortableList/SortableList.js";
+import { BaseItem } from "./SortableList/SortableList.js";
 import { useIsSideNavCollapsedSessionStorage } from "./useIsSideNavCollapsedSessionStorage.js";
 
 export const SIDE_NAV_COLLAPSED_PADDING_HIGHLIGHTED = 12;
 export const SIDE_NAV_COLLAPSED_PADDING_UNHIGHLIGHTED = 2;
+
+const flattenNestedItems = (items: SideNavItem[]): SideNavItem[] => {
+  return items.flatMap((item) => {
+    if (item.nestedNavItems) {
+      return [item, ...flattenNestedItems(item.nestedNavItems)];
+    }
+    return item;
+  });
+};
 
 const StyledCollapsibleContent = styled("div", {
   shouldForwardProp: (prop) =>
@@ -432,6 +442,7 @@ const SideNav = ({
   isLoading,
   isObtrusive,
   logoProps,
+  leavesPaddingStart,
   onCollapse,
   onExpand,
   onSort,
@@ -589,11 +600,7 @@ const SideNav = ({
    * call scrollIntoView in the effect
    */
   const firstSideNavItemIdWithIsSelected = useMemo(() => {
-    const flattenedItems = sideNavItemsList.flatMap((sideNavItem) =>
-      sideNavItem.nestedNavItems
-        ? [sideNavItem, ...sideNavItem.nestedNavItems]
-        : sideNavItem,
-    );
+    const flattenedItems = flattenNestedItems(sideNavItemsList);
     const firstItemWithIsSelected = flattenedItems.find(
       (sideNavItem) => sideNavItem.isSelected,
     );
@@ -623,34 +630,27 @@ const SideNav = ({
     [firstSideNavItemIdWithIsSelected],
   );
 
-  const sideNavItemContentProviderValue = useMemo(
-    () => ({ isCompact, depth: 1 }),
-    [isCompact],
-  );
-
   const setSelectedItem = useCallback(
     (selectedItemId: string) => {
-      const updatedSideNavItems = sideNavItemsList.map((item) => {
-        if (item.id === selectedItemId) {
-          item.isSelected = true;
-        } else if (item.isSelected) {
-          delete item.isSelected;
-        }
-
-        return item.nestedNavItems
-          ? {
+      // Recursive function to update nested items
+      const updateNestedSelection = (items: SideNavItem[]): SideNavItem[] => {
+        return items.map((item) => {
+          if (item.nestedNavItems) {
+            return {
               ...item,
-              nestedNavItems: item.nestedNavItems.map((childItem) => {
-                if (childItem.id === selectedItemId) {
-                  childItem.isSelected = true;
-                } else if (childItem.isSelected) {
-                  delete childItem.isSelected;
-                }
-                return childItem;
-              }),
-            }
-          : item;
-      });
+              isSelected: item.id === selectedItemId,
+              nestedNavItems: updateNestedSelection(item.nestedNavItems),
+            };
+          }
+
+          return {
+            ...item,
+            isSelected: item.id === selectedItemId,
+          };
+        });
+      };
+
+      const updatedSideNavItems = updateNestedSelection(sideNavItemsList);
       updateSideNavItemsList(updatedSideNavItems);
 
       if (isCollapsed || isObtrusive) {
@@ -671,39 +671,151 @@ const SideNav = ({
     ],
   );
 
-  const processedSideNavItems = useMemo(() => {
-    return sideNavItemsList?.map((item) => ({
-      ...item,
-      childNavItems: item.nestedNavItems?.map((childProps) => ({
-        id: childProps.id,
-        isSelected: childProps.isSelected,
-        isDisabled: childProps.isDisabled,
-        isSortable: childProps.isSortable,
-        navItem: (
+  const createAccordionContextValue = useCallback(
+    (depth: number) => ({
+      depth,
+    }),
+    [],
+  );
+
+  const createLeafItemContextValue = useCallback(
+    (depth: number, isSortable?: boolean) => ({
+      isCompact,
+      depth,
+      isSortable,
+      absolutePaddingStart: leavesPaddingStart,
+    }),
+    [isCompact, leavesPaddingStart],
+  );
+
+  const renderSideNavItem = (item: SideNavItem, depth: number = 1) => {
+    const {
+      href,
+      id,
+      isDefaultExpanded,
+      isDisabled,
+      isExpanded,
+      isSectionHeader,
+      label,
+      startIcon,
+      nestedNavItems,
+      isSortable,
+      translate,
+    } = item;
+
+    if (isSectionHeader) {
+      return (
+        <ErrorBoundary fallback={blankElement} key={id}>
+          <StyledSectionHeaderContainer
+            contrastFontColor={uiShellContext?.sideNavContrastColors?.fontColor}
+            id={id}
+            odysseyDesignTokens={odysseyDesignTokens}
+          >
+            <Overline component="h3">{label}</Overline>
+          </StyledSectionHeaderContainer>
+        </ErrorBoundary>
+      );
+    } else if (nestedNavItems && nestedNavItems.length > 0) {
+      // Recursive case: item has nested children - ALWAYS render as accordion
+      const nestedChildren = (
+        <StyledSideNavListContainer role="presentation">
+          {isSortable ? (
+            <SideNavSortableList
+              depth={depth + 1}
+              items={nestedNavItems}
+              onChange={setSortedItems}
+              parentId={item.id}
+              processSideNavItems={processSideNavItems}
+            />
+          ) : (
+            processSideNavItems(nestedNavItems, depth + 1).map(
+              (item) => item.sortableItem.navItem,
+            )
+          )}
+        </StyledSideNavListContainer>
+      );
+
+      return href ? (
+        <ErrorBoundary fallback={blankElement} key={id}>
+          <SideNavItemContent
+            {...item}
+            href={href}
+            onItemSelected={setSelectedItem}
+            scrollRef={getRefIfThisIsFirstNodeWithIsSelected(item.id)}
+            startIcon={item.startIcon}
+          />
+
+          <StyledSideNavListItem
+            aria-disabled={isDisabled}
+            disabled={isDisabled}
+            id={`${id}-items`}
+            odysseyDesignTokens={odysseyDesignTokens}
+          >
+            {nestedChildren}
+          </StyledSideNavListItem>
+        </ErrorBoundary>
+      ) : (
+        <ErrorBoundary fallback={blankElement} key={id}>
+          <StyledSideNavListItem
+            aria-disabled={isDisabled}
+            disabled={isDisabled}
+            id={id}
+            odysseyDesignTokens={odysseyDesignTokens}
+          >
+            <SideNavItemContentContext.Provider
+              key={id}
+              value={createAccordionContextValue(depth)}
+            >
+              <NavAccordion
+                isCompact={isCompact}
+                isDefaultExpanded={isDefaultExpanded}
+                isDisabled={isDisabled}
+                isExpanded={isExpanded}
+                label={label}
+                startIcon={startIcon}
+              >
+                {nestedChildren}
+              </NavAccordion>
+            </SideNavItemContentContext.Provider>
+          </StyledSideNavListItem>
+        </ErrorBoundary>
+      );
+    } else {
+      // Base case: leaf item with no children
+      return (
+        <ErrorBoundary fallback={blankElement} key={id}>
           <SideNavItemContentContext.Provider
-            key={childProps.id}
-            value={{
-              ...sideNavItemContentProviderValue,
-              depth: 2,
-              isSortable: item.isSortable,
-            }}
+            key={id}
+            value={createLeafItemContextValue(depth, isSortable)}
           >
             <SideNavItemContent
-              {...childProps}
+              {...item}
               onItemSelected={setSelectedItem}
-              scrollRef={getRefIfThisIsFirstNodeWithIsSelected(childProps.id)}
-              translate={childProps.translate}
+              scrollRef={getRefIfThisIsFirstNodeWithIsSelected(id)}
+              startIcon={startIcon}
+              translate={translate}
             />
           </SideNavItemContentContext.Provider>
-        ),
-      })),
+        </ErrorBoundary>
+      );
+    }
+  };
+
+  const processSideNavItems = (
+    items: SideNavItem[],
+    depth: number = 1,
+  ): (SideNavItem & { sortableItem: BaseItem })[] => {
+    return items?.map((item) => ({
+      ...item,
+      sortableItem: {
+        id: item.id,
+        isSelected: item.isSelected,
+        isDisabled: item.isDisabled,
+        isSortable: item.isSortable,
+        navItem: renderSideNavItem(item, depth),
+      },
     }));
-  }, [
-    getRefIfThisIsFirstNodeWithIsSelected,
-    setSelectedItem,
-    sideNavItemContentProviderValue,
-    sideNavItemsList,
-  ]);
+  };
 
   const sideNavExpandClickHandler = useCallback(() => {
     setIsSideNavCollapsed((isSideNavCollapsed) => {
@@ -853,120 +965,9 @@ const SideNav = ({
                   ? Array(6)
                       .fill(null)
                       .map((_, index) => <LoadingItem key={index} />)
-                  : processedSideNavItems?.map((item) => {
-                      const {
-                        childNavItems,
-                        href,
-                        id,
-                        isDefaultExpanded,
-                        isDisabled,
-                        isExpanded,
-                        isSectionHeader,
-                        isSortable,
-                        label,
-                        startIcon,
-                      } = item;
-
-                      if (isSectionHeader) {
-                        return (
-                          <ErrorBoundary fallback={blankElement} key={id}>
-                            <StyledSectionHeaderContainer
-                              contrastFontColor={
-                                uiShellContext?.sideNavContrastColors?.fontColor
-                              }
-                              id={id}
-                              odysseyDesignTokens={odysseyDesignTokens}
-                            >
-                              <Overline component="h3">{label}</Overline>
-                            </StyledSectionHeaderContainer>
-                          </ErrorBoundary>
-                        );
-                      } else if (childNavItems) {
-                        const nestedChildren = (
-                          <StyledSideNavListContainer role="presentation">
-                            {isSortable ? (
-                              <SortableList
-                                items={childNavItems}
-                                onChange={setSortedItems}
-                                parentId={item.id}
-                                renderItem={(sortableItem) => (
-                                  <SortableList.Item
-                                    id={sortableItem.id}
-                                    isDisabled={sortableItem.isDisabled}
-                                    isSelected={sortableItem.isSelected}
-                                    isSortable={sortableItem.isSortable}
-                                  >
-                                    {sortableItem.navItem}
-                                  </SortableList.Item>
-                                )}
-                              />
-                            ) : (
-                              childNavItems.map((item) => item.navItem)
-                            )}
-                          </StyledSideNavListContainer>
-                        );
-
-                        return href ? (
-                          <ErrorBoundary fallback={blankElement} key={id}>
-                            <SideNavItemContent
-                              {...item}
-                              href={href}
-                              onItemSelected={setSelectedItem}
-                              scrollRef={getRefIfThisIsFirstNodeWithIsSelected(
-                                item.id,
-                              )}
-                              startIcon={item.startIcon}
-                            />
-
-                            <StyledSideNavListItem
-                              aria-disabled={isDisabled}
-                              disabled={isDisabled}
-                              id={`${id}-items`}
-                              odysseyDesignTokens={odysseyDesignTokens}
-                            >
-                              {nestedChildren}
-                            </StyledSideNavListItem>
-                          </ErrorBoundary>
-                        ) : (
-                          <ErrorBoundary fallback={blankElement} key={id}>
-                            <StyledSideNavListItem
-                              aria-disabled={isDisabled}
-                              disabled={isDisabled}
-                              id={id}
-                              odysseyDesignTokens={odysseyDesignTokens}
-                            >
-                              <NavAccordion
-                                isCompact={isCompact}
-                                isDefaultExpanded={isDefaultExpanded}
-                                isDisabled={isDisabled}
-                                isExpanded={isExpanded}
-                                label={label}
-                                startIcon={startIcon}
-                              >
-                                {nestedChildren}
-                              </NavAccordion>
-                            </StyledSideNavListItem>
-                          </ErrorBoundary>
-                        );
-                      } else {
-                        return (
-                          <ErrorBoundary fallback={blankElement} key={item.id}>
-                            <SideNavItemContentContext.Provider
-                              value={sideNavItemContentProviderValue}
-                            >
-                              <SideNavItemContent
-                                {...item}
-                                onItemSelected={setSelectedItem}
-                                scrollRef={getRefIfThisIsFirstNodeWithIsSelected(
-                                  item.id,
-                                )}
-                                startIcon={item.startIcon}
-                              />
-                            </SideNavItemContentContext.Provider>
-                          </ErrorBoundary>
-                        );
-                      }
-                    })}
+                  : processSideNavItems(sideNavItemsList).map(
+                      (item) => item.sortableItem.navItem,
+                    )}
               </StyledSideNavListContainer>
               {!isLoading && footerItems && !hasCustomFooter && (
                 <StyledSideNavFooter

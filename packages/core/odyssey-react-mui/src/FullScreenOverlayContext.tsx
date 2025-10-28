@@ -19,7 +19,7 @@ import {
   useMemo,
 } from "react";
 
-import { createShadowDomElements } from "./shadow-dom/shadow-dom.js";
+import { createShadowDomElements } from "./web-component/createShadowDomElements.js";
 
 export type FullScreenOverlayContextType = {
   overlayEmotionRootElement?: HTMLDivElement | HTMLElement;

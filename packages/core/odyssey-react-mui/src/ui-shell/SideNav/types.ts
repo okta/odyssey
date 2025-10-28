@@ -15,7 +15,26 @@ import type { ReactElement, SyntheticEvent } from "react";
 import { UniqueIdentifier } from "@dnd-kit/core";
 
 import type { HtmlProps } from "../../HtmlProps.js";
+import type { DesignTokens } from "../../OdysseyDesignTokensContext.js";
 import type { statusSeverityValues } from "../../Status.js";
+
+/**
+ * Type representing spacing values from the design tokens.
+ * odysseyDesignTokens.Spacing0, odysseyDesignTokens.Spacing1, etc.
+ */
+export type OdysseySpacingValue = DesignTokens[keyof Pick<
+  DesignTokens,
+  | "Spacing0"
+  | "Spacing1"
+  | "Spacing2"
+  | "Spacing3"
+  | "Spacing4"
+  | "Spacing5"
+  | "Spacing6"
+  | "Spacing7"
+  | "Spacing8"
+  | "Spacing9"
+>];
 
 type LogoWithLink = {
   ariaLabel: string;
@@ -97,6 +116,11 @@ export type SideNavProps = {
    * When `true`, side nav will close itself after nav items are clicked.
    */
   isObtrusive?: boolean;
+  /**
+   * Optional padding to apply to the start of the leaves (items which are not expanded).
+   * Should be one of the Odyssey design token spacing values (e.g., odysseyDesignTokens.Spacing1, odysseyDesignTokens.Spacing2, etc.)
+   */
+  leavesPaddingStart?: OdysseySpacingValue;
   /**
    * An optional logo component or src string for an img to display in the header. If not provided, will default to the Okta logo
    */
@@ -227,7 +251,7 @@ export type SideNavItem = {
       /**
        * An array of side nav items to be displayed as nestedNavItems within Accordion
        */
-      nestedNavItems: Array<Omit<SideNavItem, "nestedNavItems" | "startIcon">>;
+      nestedNavItems: Array<SideNavItem>;
     }
   | {
       href: string;
@@ -237,7 +261,7 @@ export type SideNavItem = {
       /**
        * An array of side nav items to be displayed as nestedNavItems within Accordion
        */
-      nestedNavItems: Array<Omit<SideNavItem, "nestedNavItems" | "startIcon">>;
+      nestedNavItems: Array<SideNavItem>;
     }
 ) &
   Pick<HtmlProps, "translate">;

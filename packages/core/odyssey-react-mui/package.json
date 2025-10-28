@@ -1,9 +1,10 @@
 {
   "name": "@okta/odyssey-react-mui",
-  "version": "1.46.0",
+  "version": "1.47.0",
   "description": "React MUI components for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
+  "sideEffects": false,
   "type": "module",
   "types": "dist/types/index.d.ts",
   "browser": "dist/cjs/index.cjs",
@@ -13,6 +14,9 @@
     "*": {
       "*": [
         "./dist/types/index.d.ts"
+      ],
+      "__internal": [
+        "./dist/types/__internal.d.ts"
       ],
       "icons": [
         "./dist/types/icons.generated/index.d.ts"
@@ -32,6 +36,13 @@
     }
   },
   "exports": {
+    "./__internal": {
+      "types": "./dist/types/__internal.d.ts",
+      "node": "./dist/cjs/__internal.cjs",
+      "import": "./dist/esm/__internal.js",
+      "require": "./dist/cjs/__internal.cjs",
+      "default": "./dist/cjs/__internal.cjs"
+    },
     "./icons": {
       "types": "./dist/types/icons.generated/index.d.ts",
       "node": "./dist/cjs/icons.generated/index.cjs",
