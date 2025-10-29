@@ -13,6 +13,7 @@
 import { createContext, useContext } from "react";
 
 export type SideNavItemContentContextValue = {
+  absolutePaddingStart?: string;
   depth: number;
   isCompact?: boolean;
   isSortable?: boolean;

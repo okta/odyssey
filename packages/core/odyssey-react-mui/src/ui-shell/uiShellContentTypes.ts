@@ -20,11 +20,17 @@ import { TopNavProps } from "./TopNav/TopNav.js";
 export const subComponentNames = ["TopNav", "SideNav", "AppSwitcher"] as const;
 export type SubComponentName = (typeof subComponentNames)[number];
 
+export const TURN_OFF_APP_SWITCHER = Symbol(
+  "Turn off AppSwitcher in the event of an error.",
+);
+
 export type UiShellNavComponentProps = {
   /**
    * Object that gets pass directly to the app switcher component.
+   *
+   * In this special case, a value of `TURN_OFF_APP_SWITCHER` tells the `appSwitcher` to not appear. This can occur if there's an error loading the items. In that case, we don't want it to appear.
    */
-  appSwitcherProps?: AppSwitcherProps;
+  appSwitcherProps?: AppSwitcherProps | typeof TURN_OFF_APP_SWITCHER;
   /**
    * Object that gets pass directly to the side nav component. If `undefined` and in `initialVisibleSections`, SideNav will be initially rendered. Pass `null` to hide a previously-visible SideNav.
    */

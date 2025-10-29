@@ -161,11 +161,13 @@ export const getBaseNavItemContentStyles = ({
 export const getNavItemContentStyles = ({
   odysseyDesignTokens,
   contextValue,
+  paddingInlineStart = odysseyDesignTokens.Spacing6,
 }: {
   contextValue: SideNavItemContentContextValue;
   odysseyDesignTokens: DesignTokens;
+  paddingInlineStart?: string;
 }) => ({
-  paddingInlineStart: `calc(${odysseyDesignTokens.Spacing4} * ${contextValue.depth} + ${odysseyDesignTokens.Spacing6})`,
+  paddingInlineStart: `calc(${odysseyDesignTokens.Spacing4} * ${contextValue.depth} + ${paddingInlineStart})`,
 
   ...(contextValue.depth === 1 && {
     paddingInlineStart: odysseyDesignTokens.Spacing4,
@@ -211,6 +213,7 @@ const NavItemContentContainer = styled("div", {
     ...getNavItemContentStyles({
       odysseyDesignTokens,
       contextValue,
+      paddingInlineStart: contextValue.absolutePaddingStart,
     }),
   }),
 );
@@ -250,6 +253,7 @@ const StyledNavItemLink = styled(NavItemLink, {
     ...getNavItemContentStyles({
       odysseyDesignTokens,
       contextValue,
+      paddingInlineStart: contextValue.absolutePaddingStart,
     }),
   }),
 );

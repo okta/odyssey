@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export * from "../shadow-dom/shadow-dom.js";
 export * from "./createReactRootElements.js";
+export * from "./createShadowDomElements.js";
+export * from "./removeGlobalStylesFromShadowDom.js";
 export * from "./renderReactInWebComponent.js";

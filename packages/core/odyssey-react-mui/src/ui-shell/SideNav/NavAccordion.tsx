@@ -27,12 +27,12 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext.js";
-import { Support } from "../../Typography.js";
 import {
   UiShellColors,
   useUiShellContext,
 } from "../../ui-shell/UiShellProvider.js";
 import { useUniqueId } from "../../useUniqueId.js";
+import { useSideNavItemContent } from "./SideNavItemContentContext.js";
 
 const SideNavAccordionContainer = styled("div", {
   shouldForwardProp: (prop) =>
@@ -97,7 +97,7 @@ const AccordionLabelContainer = styled("span", {
 }>(({ sideNavContrastColors, odysseyDesignTokens, isIconVisible }) => ({
   width: "100%",
   marginInlineStart: isIconVisible ? odysseyDesignTokens.Spacing3 : 0,
-  fontWeight: odysseyDesignTokens.TypographyWeightHeading,
+  fontWeight: odysseyDesignTokens.TypographyWeightBody,
   color:
     sideNavContrastColors?.fontColor ||
     odysseyDesignTokens.TypographyColorHeading,
@@ -116,67 +116,83 @@ const AccordionSummaryContainer = styled(MuiAccordionSummary, {
     prop !== "odysseyDesignTokens" &&
     prop !== "isCompact" &&
     prop !== "isDisabled" &&
-    prop !== "sideNavContrastColors",
+    prop !== "sideNavContrastColors" &&
+    prop !== "depth",
 })<{
+  depth?: number;
   isCompact?: boolean;
   isDisabled?: boolean;
   odysseyDesignTokens: DesignTokens;
   sideNavContrastColors?: UiShellColors["sideNavContrastColors"];
-}>(({ odysseyDesignTokens, sideNavContrastColors, isCompact, isDisabled }) => ({
-  borderRadius: odysseyDesignTokens.BorderRadiusMain,
-  paddingBlock: odysseyDesignTokens.Spacing3,
-  paddingInline: odysseyDesignTokens.Spacing4,
+}>(
+  ({
+    odysseyDesignTokens,
+    sideNavContrastColors,
+    isCompact,
+    isDisabled,
+    depth = 1,
+  }) => ({
+    borderRadius: odysseyDesignTokens.BorderRadiusMain,
+    paddingBlock: odysseyDesignTokens.Spacing3,
+    paddingInlineStart: `calc(${odysseyDesignTokens.Spacing4} * ${depth})`,
+    paddingInlineEnd: odysseyDesignTokens.Spacing4,
+    alignItems: "center",
 
-  ...(isDisabled && {
-    opacity: "1 !important",
-
-    ...(sideNavContrastColors?.itemDisabledFontColor && {
-      svg: {
-        path: {
-          fill: `${sideNavContrastColors.itemDisabledFontColor} !important`,
-        },
-      },
-    }),
-  }),
-
-  ...(!isDisabled && {
-    "&:hover": {
-      backgroundColor: odysseyDesignTokens.HueNeutral50,
+    ".MuiAccordionSummary-content": {
+      alignItems: "center",
     },
-  }),
 
-  ...(!isDisabled &&
-    sideNavContrastColors?.fontColor && {
-      svg: {
-        path: {
-          fill: `${sideNavContrastColors.fontColor} !important`,
+    ...(isDisabled && {
+      opacity: "1 !important",
+
+      ...(sideNavContrastColors?.itemDisabledFontColor && {
+        svg: {
+          path: {
+            fill: `${sideNavContrastColors.itemDisabledFontColor} !important`,
+          },
         },
-      },
+      }),
     }),
 
-  ...(sideNavContrastColors?.itemHoverBackgroundColor && {
     ...(!isDisabled && {
       "&:hover": {
-        backgroundColor: sideNavContrastColors.itemHoverBackgroundColor,
+        backgroundColor: odysseyDesignTokens.HueNeutral50,
       },
     }),
-  }),
 
-  "&:focus-visible": {
-    backgroundColor: "unset",
-    outline: "none",
-    boxShadow: `inset 0 0 0 2px ${odysseyDesignTokens.PalettePrimaryMain}`,
+    ...(!isDisabled &&
+      sideNavContrastColors?.fontColor && {
+        svg: {
+          path: {
+            fill: `${sideNavContrastColors.fontColor} !important`,
+          },
+        },
+      }),
 
-    ...(sideNavContrastColors?.focusRingColor && {
-      boxShadow: `inset 0 0 0 2px ${sideNavContrastColors.focusRingColor}`,
+    ...(sideNavContrastColors?.itemHoverBackgroundColor && {
+      ...(!isDisabled && {
+        "&:hover": {
+          backgroundColor: sideNavContrastColors.itemHoverBackgroundColor,
+        },
+      }),
     }),
-  },
 
-  ...(isCompact && {
-    paddingBlock: odysseyDesignTokens.Spacing2,
-    minHeight: "unset",
+    "&:focus-visible": {
+      backgroundColor: "unset",
+      outline: "none",
+      boxShadow: `inset 0 0 0 2px ${odysseyDesignTokens.PalettePrimaryMain}`,
+
+      ...(sideNavContrastColors?.focusRingColor && {
+        boxShadow: `inset 0 0 0 2px ${sideNavContrastColors.focusRingColor}`,
+      }),
+    },
+
+    ...(isCompact && {
+      paddingBlock: odysseyDesignTokens.Spacing2,
+      minHeight: "unset",
+    }),
   }),
-}));
+);
 
 const NavAccordion = ({
   children,
@@ -194,6 +210,7 @@ const NavAccordion = ({
   const contentId = `${id}-content`;
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const uiShellContext = useUiShellContext();
+  const sideNavItemContentContext = useSideNavItemContent();
 
   return (
     <SideNavAccordionContainer
@@ -209,6 +226,7 @@ const NavAccordion = ({
         <AccordionSummaryContainer
           aria-controls={contentId}
           className="nav-accordion-summary"
+          depth={sideNavItemContentContext.depth}
           expandIcon={<ChevronDownIcon />}
           id={headerId}
           isCompact={isCompact}
@@ -216,16 +234,15 @@ const NavAccordion = ({
           odysseyDesignTokens={odysseyDesignTokens}
           sideNavContrastColors={uiShellContext?.sideNavContrastColors}
         >
-          <Support component="div" translate={translate}>
-            {startIcon && startIcon}
-            <AccordionLabelContainer
-              isIconVisible={Boolean(startIcon)}
-              odysseyDesignTokens={odysseyDesignTokens}
-              sideNavContrastColors={uiShellContext?.sideNavContrastColors}
-            >
-              {label}
-            </AccordionLabelContainer>
-          </Support>
+          {startIcon && startIcon}
+          <AccordionLabelContainer
+            isIconVisible={Boolean(startIcon)}
+            odysseyDesignTokens={odysseyDesignTokens}
+            sideNavContrastColors={uiShellContext?.sideNavContrastColors}
+            translate={translate}
+          >
+            {label}
+          </AccordionLabelContainer>
         </AccordionSummaryContainer>
         <MuiAccordionDetails
           aria-labelledby={headerId}

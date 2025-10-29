@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.47.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.46.0...v1.47.0) (2025-10-28)
+
+### Bug Fixes
+
+- fixes React v19 forward-compatibility ([#102](https://github.com/atko-eng/odyssey-design-system/issues/102)) ([5e20038](https://github.com/atko-eng/odyssey-design-system/commit/5e2003829a19e43bfb0d94b4b8437c7ae9204d7c))
+
 ## [1.46.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.45.2...v1.46.0) (2025-10-16)
 
 ### Bug Fixes

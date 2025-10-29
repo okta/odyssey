@@ -10,14 +10,18 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createReactRootElements } from "../web-component/createReactRootElements.js";
+import { createReactRootElements } from "./createReactRootElements.js";
+import { removeGlobalStylesFromShadowDom } from "./removeGlobalStylesFromShadowDom.js";
 
 /**
  * This function is necessary only when using bare Shadow DOM, but with UI Shell rendering in a Web Component, you won't be able to render your Shadow DOM in its Shadow DOM without using a Web Component.
  *
  * In most cases, you'll want to use `renderReactInWebComponent` from `@okta/odyssey-react-mui/web-component` instead.
  */
-export const createShadowDomElements = (containerElement: HTMLElement) => {
+export const createShadowDomElements = (
+  containerElement: HTMLElement,
+  nonce: string = window.cspNonce,
+) => {
   const shadowRoot = containerElement.attachShadow({ mode: "open" });
 
   // Container for Emotion `<style>` elements.
@@ -25,6 +29,11 @@ export const createShadowDomElements = (containerElement: HTMLElement) => {
 
   shadowRoot.appendChild(appRootElement);
   shadowRoot.appendChild(stylesRootElement);
+
+  removeGlobalStylesFromShadowDom({
+    nonce,
+    stylesRootElement,
+  });
 
   return {
     emotionRootElement: stylesRootElement,

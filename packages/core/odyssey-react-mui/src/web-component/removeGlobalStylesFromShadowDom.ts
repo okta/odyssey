@@ -10,4 +10,27 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export * from "./shadow-dom.js";
+import { ReactRootElements } from "./createReactRootElements.js";
+
+export const shadowDomHostStyles = `
+  :host {
+    all: initial;
+    contain: content;
+  }
+`;
+
+export const removeGlobalStylesFromShadowDom = ({
+  nonce,
+  stylesRootElement,
+}: {
+  nonce: string;
+  stylesRootElement: ReactRootElements["stylesRootElement"];
+}) => {
+  const styleHostElement = document.createElement("style");
+
+  styleHostElement.setAttribute("nonce", nonce);
+
+  styleHostElement.innerHTML = shadowDomHostStyles;
+
+  stylesRootElement.appendChild(styleHostElement);
+};

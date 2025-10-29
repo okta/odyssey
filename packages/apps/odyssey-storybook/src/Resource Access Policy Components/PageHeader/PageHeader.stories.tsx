@@ -341,3 +341,130 @@ export const Minimal: Story = {
     },
   },
 };
+
+export const TitleWithClampLines: Story = {
+  render: () => (
+    <div style={{ maxWidth: "600px" }}>
+      <PageHeader>
+        <PageHeader.Title clampLines={2}>
+          This Is A Very Long Page Title That Should Be Clamped To Two Lines And
+          Show Ellipsis When It Overflows The Container Width
+        </PageHeader.Title>
+        <PageHeader.Description>
+          Description text appears below the clamped title.
+        </PageHeader.Description>
+      </PageHeader>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Demonstrates using `clampLines` on the title to limit it to 2 lines with ellipsis overflow.",
+      },
+    },
+  },
+};
+
+export const TitleWithWordBreak: Story = {
+  render: () => (
+    <div style={{ maxWidth: "600px" }}>
+      <PageHeader>
+        <PageHeader.Title wordBreak="break-all">
+          ThisIsAnExtremelyLongWordWithoutSpacesThatWouldNormallyOverflowTheContainer_LikeAVeryLongIdentifierOrURL
+        </PageHeader.Title>
+        <PageHeader.Description>
+          The title above uses wordBreak to handle long unbroken strings.
+        </PageHeader.Description>
+      </PageHeader>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Demonstrates using `wordBreak` on the title to handle long words or identifiers without spaces.",
+      },
+    },
+  },
+};
+
+export const DescriptionWithClampLines: Story = {
+  render: () => (
+    <div style={{ maxWidth: "600px" }}>
+      <PageHeader>
+        <PageHeader.Title>Resource Details</PageHeader.Title>
+        <PageHeader.Description clampLines={3}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident.
+        </PageHeader.Description>
+        <PageHeader.Actions>
+          <Button label="View More" variant="secondary" />
+        </PageHeader.Actions>
+      </PageHeader>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Demonstrates using `clampLines` on the description to truncate long text after 3 lines.",
+      },
+    },
+  },
+};
+
+export const DescriptionWithWordBreak: Story = {
+  render: () => (
+    <div style={{ maxWidth: "600px" }}>
+      <PageHeader>
+        <PageHeader.Title>API Endpoint</PageHeader.Title>
+        <PageHeader.Description wordBreak="break-all">
+          Endpoint URL:
+          https://api.example.com/v1/resources/very-long-resource-identifier/sub-resources/another-long-identifier/actions
+        </PageHeader.Description>
+      </PageHeader>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Demonstrates using `wordBreak` on the description to handle long URLs or paths.",
+      },
+    },
+  },
+};
+
+export const CombinedTitleAndDescriptionOverflow: Story = {
+  render: () => (
+    <div style={{ maxWidth: "600px" }}>
+      <PageHeader>
+        <PageHeader.Title clampLines={1} wordBreak="break-word">
+          VeryLongResourceName_WithUnderscores_ThatNeedsToBeHandledProperly
+        </PageHeader.Title>
+        <PageHeader.Metadata items={["Created: 2024", "Status: Active"]} />
+        <PageHeader.Description clampLines={2} wordBreak="break-word">
+          This resource has a very long description with URLs like
+          https://example.com/very-long-path/to/resource that need to wrap
+          properly. The description will be clamped to 2 lines with ellipsis.
+        </PageHeader.Description>
+        <PageHeader.Actions>
+          <Button label="Edit" variant="primary" />
+        </PageHeader.Actions>
+      </PageHeader>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Demonstrates combining `wordBreak` and `clampLines` on both title and description to handle complex overflow scenarios.",
+      },
+    },
+  },
+};
