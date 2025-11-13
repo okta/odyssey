@@ -38,7 +38,14 @@ const convertPropertiesToJson = async ({
   const outputDirectory = resolve(jsonOutputPath);
 
   if (!existsSync(sourceDirectory)) {
-    throw new Error(`Source directory does not exist: ${sourceDirectory}`);
+    log.warn(
+      `Translations are not yet setup.
+
+If translations are required for your project, run the following command:
+\`odyssey-cli initialize:i18n\``,
+    );
+
+    return;
   }
 
   const allFilePaths = await readdir(sourceDirectory, { recursive: true });

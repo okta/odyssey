@@ -14,12 +14,9 @@ import { Box as MuiBox } from "@mui/material";
 import { MRT_Row, MRT_RowData } from "material-react-table";
 import { Fragment, memo, ReactElement, useCallback } from "react";
 
-import {
-  Button,
-  MenuButton,
-  MenuButtonProps,
-  MenuItem,
-} from "../Buttons/index.js";
+import { Button } from "../Buttons/Button.js";
+import { MenuButton, type MenuButtonProps } from "../Buttons/MenuButton.js";
+import { MenuItem } from "../Buttons/MenuItem.js";
 import { Trans, useTranslation } from "../i18n.generated/i18n.js";
 import {
   ArrowBottomIcon,

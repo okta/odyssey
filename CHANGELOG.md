@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.48.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.47.0...v1.48.0) (2025-11-13)
+
+### Features
+
+- add api-extractor to bundle ts correctly ([#121](https://github.com/atko-eng/odyssey-design-system/issues/121)) ([c4daedf](https://github.com/atko-eng/odyssey-design-system/commit/c4daedf040fde5bfd5fa70fe2bb533d9841050db))
+- adds TURN_OFF_APP_SWITCHER from Odyssey for Admin UI ([#115](https://github.com/atko-eng/odyssey-design-system/issues/115)) ([a7f262c](https://github.com/atko-eng/odyssey-design-system/commit/a7f262c255fcbceebaff7110da737a75edb01228))
+- **odyssey-react-mui:** configurable nonce in renderReactInWebComponent ([#123](https://github.com/atko-eng/odyssey-design-system/issues/123)) ([330509b](https://github.com/atko-eng/odyssey-design-system/commit/330509b0b2c9d441e48ba491e4ef89e174484ea6))
+- Odyssey: DataView missing ability to change row background color ([#120](https://github.com/atko-eng/odyssey-design-system/issues/120)) ([0a528db](https://github.com/atko-eng/odyssey-design-system/commit/0a528db069c2c3b2a2e465511cb8d786632b590d))
+- Odyssey: DataView missing ability to conditionally pin columns ([#122](https://github.com/atko-eng/odyssey-design-system/issues/122)) ([e54011e](https://github.com/atko-eng/odyssey-design-system/commit/e54011e012c75ee6ac4319b0d67a11b215856a47))
+- Odyssey: Ensure IGA DataView component styles match Core DataView component styles ([#108](https://github.com/atko-eng/odyssey-design-system/issues/108)) ([eae8467](https://github.com/atko-eng/odyssey-design-system/commit/eae8467c38ab065775b48a08f551dc7d22a22690))
+- update \_\_internal exports ([#104](https://github.com/atko-eng/odyssey-design-system/issues/104)) ([0b734d8](https://github.com/atko-eng/odyssey-design-system/commit/0b734d8b9667b4708c102695158c49572243ea1d))
+- update example-components to be used by new ok-ui create command ([#106](https://github.com/atko-eng/odyssey-design-system/issues/106)) ([3c11ba0](https://github.com/atko-eng/odyssey-design-system/commit/3c11ba0a07fd5268c8e01cd6018d0a805decb2ca))
+- use \_\_internals instead of local copies ([#113](https://github.com/atko-eng/odyssey-design-system/issues/113)) ([5adddf3](https://github.com/atko-eng/odyssey-design-system/commit/5adddf344fd5256d79c3e475c60c831443d9e302))
+
+### Bug Fixes
+
+- fix downstream version fetch for master/release branches ([#129](https://github.com/atko-eng/odyssey-design-system/issues/129)) ([8da4c7d](https://github.com/atko-eng/odyssey-design-system/commit/8da4c7dd5dcd0b2189b89f74db956737a81e6b77))
+- prevent Drawer content from overlapping header during scroll ([#114](https://github.com/atko-eng/odyssey-design-system/issues/114)) ([e4664f7](https://github.com/atko-eng/odyssey-design-system/commit/e4664f78f019bf0bd26e823dbe03fe1b0a81497b))
+- refine package.json file search and dependency extraction in version check script ([#111](https://github.com/atko-eng/odyssey-design-system/issues/111)) ([d594789](https://github.com/atko-eng/odyssey-design-system/commit/d594789172d4866393d2bf9cf346364b20c1d91a))
+- remove \_\_internal changes ([#124](https://github.com/atko-eng/odyssey-design-system/issues/124)) ([c7fe027](https://github.com/atko-eng/odyssey-design-system/commit/c7fe0279902a5ba0b7b7ff85fac8f4459b2299d6))
+- Remove duplicate code in Custom Theming example OKTA-1055171 ([#127](https://github.com/atko-eng/odyssey-design-system/issues/127)) ([a0b3d9d](https://github.com/atko-eng/odyssey-design-system/commit/a0b3d9dc2a1502a3d3b5c5a835d992c7d01e0f5a))
+- specify error class for hint text in Radio component ([#119](https://github.com/atko-eng/odyssey-design-system/issues/119)) ([da4a55f](https://github.com/atko-eng/odyssey-design-system/commit/da4a55f5841052bf9879e7da76d180457a333191))
+
 ## [1.47.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.46.0...v1.47.0) (2025-10-28)
 
 ### Features

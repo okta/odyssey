@@ -10,12 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export * from "./AppSwitcher/index.js";
+export * from "./AppSwitcher/AppSwitcher.js";
 export * from "./InnerAppContainer.js";
 export * from "./NarrowUiShellContent.js";
 export * from "./renderUiShell.js";
-export * from "./SideNav/index.js";
-export * from "./TopNav/index.js";
+export * from "./SideNav/SideNav.js";
+export * from "./SideNav/types.js";
+export * from "./TopNav/TopNav.js";
 export * from "./uiShellContentTypes.js";
 export * from "./useHasUiShell.js";
 export * from "./WideUiShellContent.js";

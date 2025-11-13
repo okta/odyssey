@@ -12,7 +12,8 @@
 
 import { Dispatch, memo, SetStateAction, useCallback, useMemo } from "react";
 
-import { MenuButton, MenuItem } from "../../Buttons/index.js";
+import { MenuButton } from "../../Buttons/MenuButton.js";
+import { MenuItem } from "../../Buttons/MenuItem.js";
 import { useTranslation } from "../../i18n.generated/i18n.js";
 import { AvailableLayouts, DataLayout } from "./componentTypes.js";
 

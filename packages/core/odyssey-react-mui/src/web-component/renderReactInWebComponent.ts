@@ -18,11 +18,12 @@ import {
   createReactRootElements,
   type ReactRootElements,
 } from "./createReactRootElements.js";
+import { encapsulateShadowDomFromGlobalStyles } from "./encapsulateShadowDomFromGlobalStyles.js";
 import version from "./odysseyWebComponentVersion.generated.js";
-import { removeGlobalStylesFromShadowDom } from "./removeGlobalStylesFromShadowDom.js";
 
 interface GetReactWebComponentOptions {
   getReactComponent: (reactRootElements: ReactRootElements) => ReactNode;
+  nonce: string;
   webComponentName?: string;
 }
 
@@ -54,11 +55,6 @@ export class WebComponentClass extends SsrFriendlyHtmlElementClass {
     const shadowRoot = this.attachShadow({ mode: "open" });
     shadowRoot.appendChild(stylesRootElement);
     shadowRoot.appendChild(appRootElement);
-
-    removeGlobalStylesFromShadowDom({
-      nonce: window.cspNonce,
-      stylesRootElement,
-    });
   }
 
   /**
@@ -82,6 +78,11 @@ export class WebComponentClass extends SsrFriendlyHtmlElementClass {
   }
 
   connectedCallback() {
+    encapsulateShadowDomFromGlobalStyles({
+      nonce: this.getAttribute("nonce") || window.cspNonce,
+      stylesRootElement: this.#reactRootElements.stylesRootElement,
+    });
+
     this.reactRootPromise = this.reactRootPromise
       .then((reactRoot) => {
         if (reactRoot) {
@@ -130,6 +131,7 @@ export class WebComponentClass extends SsrFriendlyHtmlElementClass {
 export const getReactWebComponent = ({
   webComponentName = versionedWebComponentName,
   getReactComponent,
+  nonce,
 }: GetReactWebComponentOptions) => {
   // This name hasn't been defined yet. Add a definition for it before constructing one.
   if (!customElements.get(webComponentName)) {
@@ -141,6 +143,8 @@ export const getReactWebComponent = ({
   >;
   // Set selenium attribute so this can be selected
   element.setAttribute(webComponentDataAttributeName, "");
+  // Set the nonce for CSP compliance
+  element.setAttribute("nonce", nonce);
   // function used for creating react content
   element.setGetReactComponent(getReactComponent);
   return element;
@@ -159,6 +163,11 @@ export type RenderReactInWebComponentProps = {
    * You can have multiple slots in your app if you add a `name` attribute to your `<slot>` elements.
    */
   getReactComponent: GetReactComponentInWebComponent;
+  /**
+   * Optional nonce for CSP compliance.
+   * Defaults to `window.cspNonce`.
+   */
+  nonce?: string;
   /**
    * One or more HTML elements that are going to render as `children` of the web component.
    * If your React component doesn't take children, this is unnecessary.
@@ -203,10 +212,12 @@ export const renderReactInWebComponent = ({
   webComponentChildren,
   webComponentParentElement,
   webComponentRootElement,
+  nonce = window.cspNonce,
 }: RenderReactInWebComponentProps) => {
   const reactElement = getReactWebComponent({
     getReactComponent,
     webComponentName,
+    nonce,
   });
 
   if (webComponentChildren) {

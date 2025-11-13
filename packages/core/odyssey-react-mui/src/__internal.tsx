@@ -20,14 +20,38 @@ export * from "./Field.js";
 export * from "./HtmlProps.js";
 export * from "./inputUtils.js";
 
+// Badge
+export * from "./Badge.js";
+// Buttons
+export * from "./Buttons/BaseButton.js";
+export * from "./Buttons/BaseMenuButton.js";
 // DataView & DataTable
 export * from "./DataTable/useRowReordering.js";
+export * from "./DataTable/useScrollIndication.js";
+// DatePickers
+export * from "./DatePickers/DateField.js";
+export * from "./DatePickers/DateFieldActionBar.js";
+export * from "./DatePickers/DateFieldLocalizationProvider.js";
+// FileUploader
+export * from "./FileUploader/FileUploader.js";
+export * from "./FileUploader/FileUploadIllustration.js";
+export * from "./FileUploader/FileUploadPreview.js";
 export * from "./labs/DataFilters.js";
 export * from "./labs/DataView/BulkActionsMenu.js";
 export * from "./labs/DataView/CardLayoutContent.js";
+export * from "./labs/DataView/constants.js";
+export * from "./labs/DataView/DataCard.js";
 export * from "./labs/DataView/fetchData.js";
 export * from "./labs/DataView/LayoutSwitcher.js";
+export * from "./labs/DataView/RowActions.js";
+export * from "./labs/DataView/tableConstants.js";
 export * from "./labs/DataView/TableLayoutContent.js";
 export * from "./labs/DataView/TableSettings.js";
 export * from "./labs/DataView/testSupportData.js";
 export * from "./labs/DataView/useFilterConversion.js";
+// Odyssey Pickers
+export * from "./labs/OdysseyPickers/ComposablePicker.js";
+// OdysseyDesignTokensContext
+export * from "./OdysseyDesignTokensContext.js";
+// SearchField
+export * from "./SearchField.js";

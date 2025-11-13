@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-react-mui",
-  "version": "1.47.0",
+  "version": "1.48.0",
   "description": "React MUI components for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -154,7 +154,7 @@
     "@okta/odyssey-cli": "workspace:*",
     "@okta/odyssey-icons": "workspace:*",
     "@okta/odyssey-typescript": "workspace:*",
-    "@okta/ok-ui": "^4.12.2",
+    "@okta/ok-ui": "^4.15.1",
     "@okta/tools.i18n.pseudo-loc": "^1.0.0-99-gc858246",
     "@svgr/cli": "^7.0.0",
     "@testing-library/jest-dom": "^6.6.3",

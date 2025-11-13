@@ -15,7 +15,8 @@ import { MRT_RowData, MRT_RowSelectionState } from "material-react-table";
 import { Dispatch, memo, SetStateAction, useCallback } from "react";
 
 import { Box } from "../../Box.js";
-import { Button, MenuButton } from "../../Buttons/index.js";
+import { Button } from "../../Buttons/Button.js";
+import { MenuButton } from "../../Buttons/MenuButton.js";
 import { useTranslation } from "../../i18n.generated/i18n.js";
 import { ChevronDownIcon } from "../../icons.generated/index.js";
 import {

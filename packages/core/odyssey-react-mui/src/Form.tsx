@@ -15,7 +15,7 @@ import { FormEventHandler, memo, ReactElement } from "react";
 
 import type { HtmlProps } from "./HtmlProps.js";
 
-import { Button } from "./Buttons/index.js";
+import { Button } from "./Buttons/Button.js";
 import { Callout } from "./Callout.js";
 import { FieldComponentProps } from "./FieldComponentProps.js";
 import {

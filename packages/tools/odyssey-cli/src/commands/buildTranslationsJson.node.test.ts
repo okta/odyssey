@@ -87,17 +87,17 @@ describe("buildTranslationsJsonCommand", () => {
     );
   });
 
-  test("throws an error if the source directory does not exist", async () => {
+  test("warns the user that the translations are not setup if the source directory does not exist", async () => {
     mockedExistsSync.mockReturnValue(false);
 
     const propertiesFilesPath = "fake/source/path";
-    await expect(
-      buildTranslationsJsonCommand.handler(
-        getHandlerArgs({ propertiesFilesPath }),
-      ),
-    ).rejects.toThrow(
-      `Source directory does not exist: ${testPackagePath}/${propertiesFilesPath}`,
+    await buildTranslationsJsonCommand.handler(
+      getHandlerArgs({ propertiesFilesPath }),
     );
+
+    expect(mockedRm).not.toHaveBeenCalled();
+    expect(mockedMkdir).not.toHaveBeenCalled();
+    expect(mockedWriteFile).not.toHaveBeenCalled();
   });
 
   test("throws an error if the source directory does not contain any properties files", async () => {

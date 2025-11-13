@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.48.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.47.0...v1.48.0) (2025-11-13)
+
+### Features
+
+- update example-components to be used by new ok-ui create command ([#106](https://github.com/atko-eng/odyssey-design-system/issues/106)) ([3c11ba0](https://github.com/atko-eng/odyssey-design-system/commit/3c11ba0a07fd5268c8e01cd6018d0a805decb2ca))
+
 ## [1.47.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.46.0...v1.47.0) (2025-10-28)
 
 **Note:** Version bump only for package @okta/odyssey-cli

@@ -28,7 +28,7 @@ import {
 
 import type { HtmlProps } from "./HtmlProps.js";
 
-import { Button, ButtonProps } from "./Buttons/index.js";
+import { Button, ButtonProps } from "./Buttons/Button.js";
 import { FullScreenOverlay } from "./FullScreenOverlay.js";
 import { useTranslation } from "./i18n.generated/i18n.js";
 import { CloseIcon } from "./icons.generated/index.js";
@@ -114,6 +114,7 @@ const DrawerHeader = styled("div", {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" && prop !== "hasDividers",
 })<DrawerStyleProps>`
+  grid-area: header;
   position: sticky;
   top: 0;
   display: flex;
@@ -133,14 +134,23 @@ const DrawerContentWrapper = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{
   odysseyDesignTokens: DesignTokens;
-}>`
-  overflow-y: auto;
-`;
+}>({
+  display: "grid",
+  gridTemplateAreas: `
+    "header"
+    "content"
+    "footer"
+  `,
+  gridTemplateRows: "auto 1fr auto",
+  overflow: "hidden",
+});
 
 const DrawerContent = styled("div", {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" && prop !== "hasDividers",
 })<DrawerStyleProps>`
+  grid-area: content;
+  overflow-y: auto;
   padding: ${({ hasDividers, odysseyDesignTokens }) =>
     hasDividers
       ? `${odysseyDesignTokens.Spacing5}`
@@ -151,6 +161,7 @@ const DrawerFooter = styled("div", {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" && prop !== "hasDividers",
 })<DrawerStyleProps>`
+  grid-area: footer;
   position: sticky;
   bottom: 0;
   display: flex;
@@ -249,21 +260,13 @@ const Drawer = ({
         }}
         variant={variant}
       >
-        <DrawerContentWrapper
-          {...(isContentScrollable && {
-            //Sets tabIndex on content element if scrollable so content is easier to navigate with the keyboard
-            tabIndex: 0,
-          })}
-          odysseyDesignTokens={odysseyDesignTokens}
-          ref={drawerContentRef}
-        >
+        <DrawerContentWrapper odysseyDesignTokens={odysseyDesignTokens}>
           <DrawerHeader
             hasDividers={dividersVisible}
             odysseyDesignTokens={odysseyDesignTokens}
             translate={translate}
           >
             <Heading5>{title}</Heading5>
-
             <Button
               ariaLabel={ariaLabel}
               onClick={handleCloseButtonClick}
@@ -273,22 +276,27 @@ const Drawer = ({
             />
           </DrawerHeader>
           <DrawerContent
+            {...(isContentScrollable && {
+              //Sets tabIndex on content element if scrollable so content is easier to navigate with the keyboard
+              tabIndex: 0,
+            })}
             hasDividers={dividersVisible}
             odysseyDesignTokens={odysseyDesignTokens}
+            ref={drawerContentRef}
           >
             {children}
           </DrawerContent>
+          {hasFooter && (
+            <DrawerFooter
+              hasDividers={dividersVisible}
+              odysseyDesignTokens={odysseyDesignTokens}
+            >
+              {tertiaryCallToActionComponent}
+              {secondaryCallToActionComponent}
+              {primaryCallToActionComponent}
+            </DrawerFooter>
+          )}
         </DrawerContentWrapper>
-        {hasFooter && (
-          <DrawerFooter
-            hasDividers={dividersVisible}
-            odysseyDesignTokens={odysseyDesignTokens}
-          >
-            {tertiaryCallToActionComponent}
-            {secondaryCallToActionComponent}
-            {primaryCallToActionComponent}
-          </DrawerFooter>
-        )}
       </MuiDrawer>
     ),
     [

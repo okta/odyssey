@@ -14,7 +14,7 @@ import styled from "@emotion/styled";
 import { PickersActionBarProps } from "@mui/x-date-pickers";
 import { memo } from "react";
 
-import { Button } from "../Buttons/index.js";
+import { Button } from "../Buttons/Button.js";
 import { useTranslation } from "../i18n.generated/i18n.js";
 import {
   DesignTokens,

@@ -21,7 +21,7 @@ import {
 import { ReactNode } from "react";
 
 import { MenuButtonProps } from "../../Buttons/MenuButton.js";
-import { type PaginationProps } from "../../Pagination/index.js";
+import { type PaginationProps } from "../../Pagination/Pagination.js";
 import { DataFilter } from "../DataFilters.js";
 import { paginationTypeValues } from "../DataTablePagination.js";
 import { availableCardLayouts, availableLayouts } from "./constants.js";

@@ -13,7 +13,7 @@
 import { MRT_RowData } from "material-react-table";
 import { useCallback, useMemo } from "react";
 
-import { DataTableColumn } from "../../DataTable/index.js";
+import { DataTableColumn } from "../../DataTable/DataTable.js";
 import { DataFilter } from "../DataFilters.js";
 import { TableLayoutProps, UniversalProps } from "./componentTypes.js";
 

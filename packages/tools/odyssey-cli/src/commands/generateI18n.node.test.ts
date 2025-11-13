@@ -1,4 +1,5 @@
-import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
+import { mkdir, readdir, writeFile } from "node:fs/promises";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 
 import { generateI18nCommand } from "./generateI18n";
@@ -7,8 +8,10 @@ import { generateI18nCommand } from "./generateI18n";
 vi.mock("node:fs/promises");
 const mockedMkdir = vi.mocked(mkdir);
 const mockedReaddir = vi.mocked<(path: string) => Promise<string[]>>(readdir);
-const mockedReadFile = vi.mocked(readFile);
 const mockedWriteFile = vi.mocked(writeFile);
+
+vi.mock("node:fs");
+const mockedExistsSync = vi.mocked(existsSync);
 
 const spyOnProcessCwd = vi.spyOn(process, "cwd");
 
@@ -16,6 +19,8 @@ describe("generateI18nCommand", () => {
   beforeEach(() => {
     // Reset all mocks and the captured content before each test
     vi.clearAllMocks();
+
+    mockedExistsSync.mockReturnValue(true);
 
     spyOnProcessCwd.mockImplementation(
       () => "packages/contributions/my-package",
@@ -26,33 +31,6 @@ describe("generateI18nCommand", () => {
       "my-package_fr.ts",
       "my-package_pt_BR.ts",
     ]);
-
-    mockedReadFile.mockImplementation(async (filePath) => {
-      if (typeof filePath !== "string") {
-        throw new Error(
-          `readFile mock only supports string paths, but received a ${typeof filePath}.`,
-        );
-      }
-
-      if (filePath.endsWith("package.json")) {
-        return Promise.resolve(JSON.stringify({ name: "@okta/my-package" }));
-      }
-      if (filePath.endsWith("my-package.ts")) {
-        return Promise.resolve(
-          `export const translation = { hello: "Hello" };`,
-        );
-      }
-      if (filePath.endsWith("my-package_fr.ts")) {
-        return Promise.resolve(
-          `export const translation = { hello: "Bonjour" };`,
-        );
-      }
-      if (filePath.endsWith("my-package_pt_BR.ts")) {
-        return Promise.resolve(`export const translation = { hello: "Olá" };`);
-      }
-
-      throw new Error(`readFile mock called with unhandled path: ${filePath}`);
-    });
   });
 
   const getCapturedWrites = () => {
@@ -78,6 +56,11 @@ describe("generateI18nCommand", () => {
 
   test("generates all i18n files correctly based on a virtual file system as odyssey-react-mui package", async () => {
     spyOnProcessCwd.mockImplementation(() => "packages/core/odyssey-react-mui");
+    mockedReaddir.mockResolvedValue([
+      "odyssey-react-mui.ts",
+      "odyssey-react-mui_fr.ts",
+      "odyssey-react-mui_pt_BR.ts",
+    ]);
 
     // --- ACT: Run the actual handler ---
     await generateI18nCommand.handler(getHandlerArgs());
@@ -159,31 +142,20 @@ describe("generateI18nCommand", () => {
     }
   });
 
+  test("warns the user that the translations are not setup if the source directory does not exist", async () => {
+    mockedExistsSync.mockReturnValue(false);
+
+    await generateI18nCommand.handler(getHandlerArgs());
+
+    expect(mockedMkdir).not.toHaveBeenCalled();
+    expect(mockedWriteFile).not.toHaveBeenCalled();
+  });
+
   test("throws an error if there are no translation files", async () => {
     mockedReaddir.mockResolvedValue([]);
 
     await expect(generateI18nCommand.handler(getHandlerArgs())).rejects.toThrow(
       /No translation files found in/,
-    );
-  });
-
-  test("throws an error if the package.json name is empty", async () => {
-    mockedReadFile.mockImplementation(async (filePath) => {
-      if (typeof filePath !== "string") {
-        throw new Error(
-          `readFile mock only supports string paths, but received a ${typeof filePath}.`,
-        );
-      }
-
-      if (filePath.endsWith("package.json")) {
-        return Promise.resolve(JSON.stringify({ name: "" }));
-      }
-
-      throw new Error(`readFile mock called with unhandled path: ${filePath}`);
-    });
-
-    await expect(generateI18nCommand.handler(getHandlerArgs())).rejects.toThrow(
-      /No package name found in/,
     );
   });
 });

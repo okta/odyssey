@@ -10,7 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import styled from "@emotion/styled";
 import {
   FormControlLabel,
   FormHelperText,
@@ -27,37 +26,22 @@ import {
   useRef,
 } from "react";
 
-import type { HtmlProps } from "./HtmlProps.js";
+import type { HtmlProps } from "../HtmlProps.js";
 
-import { FieldComponentProps } from "./FieldComponentProps.js";
-import { CheckedFieldProps } from "./FormCheckedProps.js";
-import { useTranslation } from "./i18n.generated/i18n.js";
+import { FieldComponentProps } from "../FieldComponentProps.js";
+import { CheckedFieldProps } from "../FormCheckedProps.js";
+import { useTranslation } from "../i18n.generated/i18n.js";
 import {
   ComponentControlledState,
   FocusHandle,
   getControlState,
-} from "./inputUtils.js";
-import {
-  DesignTokens,
-  useOdysseyDesignTokens,
-} from "./OdysseyDesignTokensContext.js";
-import { Typography } from "./Typography.js";
-import { useUniqueId } from "./useUniqueId.js";
+} from "../inputUtils.js";
+import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext.js";
+import { Typography } from "../Typography.js";
+import { useUniqueId } from "../useUniqueId.js";
+import { HintContainerWithInlineStartSpacing } from "./Hint.js";
 
 export const checkboxValidityValues = ["valid", "invalid", "inherit"] as const;
-
-const HintContainerWithInlineStartSpacing = styled.div<{
-  odysseyDesignTokens: DesignTokens;
-}>(({ odysseyDesignTokens }) => ({
-  paddingInlineStart: `calc(${odysseyDesignTokens.TypographyLineHeightUi}em + ${odysseyDesignTokens.Spacing2})`,
-  marginBlockEnd: odysseyDesignTokens.Spacing2,
-
-  // MUI applies the '.Mui-error' class to this hint text when the checkbox is invalid which turns the copy red
-  // We want to keep the hint text gray in the error state
-  ".Mui-error": {
-    color: odysseyDesignTokens.TypographyColorSubordinate,
-  },
-}));
 
 export type CheckboxProps = {
   /**

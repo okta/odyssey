@@ -18,11 +18,11 @@ import {
   type DesignTokens,
   useOdysseyDesignTokens,
 } from "../OdysseyDesignTokensContext.js";
+import { AppSwitcher } from "./AppSwitcher/AppSwitcher.js";
 import { AppSwitcherAppIconData } from "./AppSwitcher/AppSwitcherApp.js";
-import { AppSwitcher } from "./AppSwitcher/index.js";
 import { InnerAppContainer } from "./InnerAppContainer.js";
-import { SideNav } from "./SideNav/index.js";
-import { TopNav } from "./TopNav/index.js";
+import { SideNav } from "./SideNav/SideNav.js";
+import { TopNav } from "./TopNav/TopNav.js";
 import {
   TURN_OFF_APP_SWITCHER,
   UiShellContentProps,

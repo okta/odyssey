@@ -169,6 +169,25 @@ export const ErrorsList: Story = {
   } as Story["args"], // This is a hack.,
 };
 
+export const ErrorWithIndividualHint: Story = {
+  args: {
+    errorMessage: "This field is required.",
+  } as Story["args"],
+  render: function C(props) {
+    return (
+      <RadioGroup {...props}>
+        <Radio hint="Hint Text" label="Light Speed" value="Light Speed" />
+        <Radio hint="Hint Text" label="Warp Speed" value="Warp Speed" />
+        <Radio
+          hint="Hint Text"
+          label="Ludicrous Speed"
+          value="Ludicrous Speed"
+        />
+      </RadioGroup>
+    );
+  },
+};
+
 export const IndividualStates: Story = {
   args: {
     label: "Service Tier",

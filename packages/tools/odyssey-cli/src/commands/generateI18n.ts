@@ -1,6 +1,7 @@
 import type { CommandModule } from "yargs";
 
-import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
+import { mkdir, readdir, writeFile } from "node:fs/promises";
 import { format, parse, relative, resolve } from "node:path";
 
 import { getLogger } from "../utils";
@@ -69,38 +70,27 @@ const tsPathToJs = (tsPath: string): string => {
   });
 };
 
-const getPackageName = async () => {
-  const packageJsonPath = resolve("package.json");
-  const packageJson = JSON.parse(await readFile(packageJsonPath, "utf-8")) as {
-    name: string;
-  };
+const getPackageName = () => {
+  const pathSegments = process.cwd().split("/");
 
-  const packageName = packageJson.name.trim().split("/").pop();
-
-  if (!packageName) {
-    throw new Error(`No package name found in ${packageJsonPath}`);
-  }
-
-  return packageName;
+  return pathSegments[pathSegments.length - 1];
 };
 
 const getTranslationFiles = async ({
   defaultLanguageCode,
   packageName,
+  translationFilesDirectory,
 }: {
   defaultLanguageCode: GenerateI18nArgs["defaultLanguageCode"];
   packageName: string;
+  translationFilesDirectory: string;
 }) => {
-  const translationFilesDirectory = resolve(
-    ...CONFIG.TRANSLATION_PATH_SEGMENTS,
-  );
-
   const files = await readdir(translationFilesDirectory);
   const translationFiles = files.filter(
     (file) => file.startsWith(packageName) && file.endsWith(".ts"),
   );
 
-  const translationData = translationFiles
+  return translationFiles
     .map<TranslationData | null>((file) => {
       // Regex to capture the language code.
       // It handles both 'namespace.ts' and 'namespace_fr.ts'
@@ -132,11 +122,6 @@ const getTranslationFiles = async ({
       };
     })
     .filter((value): value is TranslationData => value !== null);
-
-  return {
-    translationData,
-    translationFilesDirectory,
-  };
 };
 
 const getTranslationFileDuplicates = ({
@@ -370,10 +355,28 @@ This often happens if a file like 'package-name_en.ts' exists and the default la
 };
 
 const generateI18nFiles = async ({ defaultLanguageCode }: GenerateI18nArgs) => {
-  const packageName = await getPackageName();
+  const packageName = getPackageName();
 
-  const { translationData, translationFilesDirectory } =
-    await getTranslationFiles({ defaultLanguageCode, packageName });
+  const translationFilesDirectory = resolve(
+    ...CONFIG.TRANSLATION_PATH_SEGMENTS,
+  );
+
+  if (!existsSync(translationFilesDirectory)) {
+    log.warn(
+      `Translations are not yet setup.
+
+If translations are required for your project, run the following command:
+\`odyssey-cli initialize:i18n\``,
+    );
+
+    return;
+  }
+
+  const translationData = await getTranslationFiles({
+    defaultLanguageCode,
+    packageName,
+    translationFilesDirectory,
+  });
 
   // Validate the translation data before proceeding
   validateTranslationData({ translationData, translationFilesDirectory });

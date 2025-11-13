@@ -34,7 +34,8 @@ import {
 } from "react";
 
 import { Box } from "../../Box.js";
-import { Button, MenuButton } from "../../Buttons/index.js";
+import { Button } from "../../Buttons/Button.js";
+import { MenuButton } from "../../Buttons/MenuButton.js";
 import { useScrollIndication } from "../../DataTable/useScrollIndication.js";
 import { useTranslation } from "../../i18n.generated/i18n.js";
 import {

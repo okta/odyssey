@@ -31,7 +31,7 @@ import {
 
 import type { HtmlProps } from "./HtmlProps.js";
 
-import { Button, ButtonProps } from "./Buttons/index.js";
+import { Button, ButtonProps } from "./Buttons/Button.js";
 import { FullScreenOverlay } from "./FullScreenOverlay.js";
 import { useTranslation } from "./i18n.generated/i18n.js";
 import { CloseIcon } from "./icons.generated/index.js";

@@ -19,7 +19,7 @@ export const shadowDomHostStyles = `
   }
 `;
 
-export const removeGlobalStylesFromShadowDom = ({
+export const encapsulateShadowDomFromGlobalStyles = ({
   nonce,
   stylesRootElement,
 }: {

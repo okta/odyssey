@@ -31,7 +31,7 @@ import {
   useOdysseyDesignTokens,
 } from ".././OdysseyDesignTokensContext.js";
 import { Heading5, Paragraph, Subordinate } from ".././Typography.js";
-import { Button } from "../Buttons/index.js";
+import { Button } from "../Buttons/Button.js";
 
 export const APP_TILE_COMPACT_IMAGE_HEIGHT = "2.85714286rem"; // 40px
 export const APP_TILE_IMAGE_HEIGHT = "4.57142857rem"; // 64px

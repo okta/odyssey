@@ -13,7 +13,7 @@
   },
   "scripts": {
     "build": "yarn workspaces foreach --all --topological-dev --parallel --interlaced --exclude=@okta/odyssey-icons --exclude=@okta/odyssey-storybook run build",
-    "create-contribution": "ok-ui create-package --type component-library --dir $(pwd)/packages/contributions/${name} --name '@okta/odyssey-contribution-${name}'",
+    "create-contribution": "ok-ui create-package --from ./packages/contributions/example-components --output-dir ./packages/contributions",
     "eslint": "eslint .",
     "generate:i18n": "yarn workspace @okta/odyssey-cli build && yarn workspaces foreach --all run generate:i18n",
     "generate:icons": "yarn workspace @okta/odyssey-icons build && yarn workspace @okta/odyssey-react-mui generate:icons",
@@ -37,7 +37,7 @@
     "@okta/odyssey-cli": "workspace:*",
     "@okta/odyssey-eslint-config": "workspace:*",
     "@okta/odyssey-storybook": "workspace:^",
-    "@okta/ok-ui": "^4.13.1",
+    "@okta/ok-ui": "^4.15.2",
     "caniuse-lite": "^1.0.30001677",
     "concurrently": "^9.1.0",
     "decode-uri-component": "^0.4.1",

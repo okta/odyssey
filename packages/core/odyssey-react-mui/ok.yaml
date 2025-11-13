@@ -9,7 +9,7 @@ downstream:
       packages:
         - pkgName: "@okta/example-react-spa"
     - repoName: "admin-ui"
-      buildCmd: "yarn workspace @okta/admin-v2.admin-app-react run build && yarn workspace @okta/admin-v2.admin-dashboard run build"
+      buildCmd: "yarn workspace @okta/admin-v2.capabilities run build && yarn workspace @okta/admin-v2.org-plan-widget run build && yarn workspace @okta/admin-v2.admin-app-react run build && yarn workspace @okta/admin-v2.admin-dashboard run build"
       url: "https://github.com/atko-eng/admin-ui.git"
       packages:
         - pkgName: "@okta/admin-v2.admin-app-react"

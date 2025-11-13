@@ -10,7 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import styled from "@emotion/styled";
 import {
   FormControlLabel,
   FormHelperText,
@@ -27,29 +26,14 @@ import {
   useRef,
 } from "react";
 
-import type { HtmlProps } from "./HtmlProps.js";
+import type { HtmlProps } from "../HtmlProps.js";
 
-import { FieldComponentProps } from "./FieldComponentProps.js";
-import { FocusHandle } from "./inputUtils.js";
-import {
-  DesignTokens,
-  useOdysseyDesignTokens,
-} from "./OdysseyDesignTokensContext.js";
-import { Typography } from "./Typography.js";
-import { useUniqueId } from "./useUniqueId.js";
-
-const HintContainerWithInlineStartSpacing = styled.div<{
-  odysseyDesignTokens: DesignTokens;
-}>(({ odysseyDesignTokens }) => ({
-  paddingInlineStart: `calc(${odysseyDesignTokens.TypographyLineHeightUi}em + ${odysseyDesignTokens.Spacing2})`,
-  marginBlockEnd: odysseyDesignTokens.Spacing2,
-
-  // MUI applies the '.Mui-error' class to this hint text when the checkbox is invalid which turns the copy red
-  // We want to keep the hint text gray in the error state
-  ".Mui-error": {
-    color: odysseyDesignTokens.TypographyColorSubordinate,
-  },
-}));
+import { FieldComponentProps } from "../FieldComponentProps.js";
+import { FocusHandle } from "../inputUtils.js";
+import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext.js";
+import { Typography } from "../Typography.js";
+import { useUniqueId } from "../useUniqueId.js";
+import { HintContainerWithInlineStartSpacing } from "./Hint.js";
 
 export type RadioProps = {
   /**

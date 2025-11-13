@@ -67,8 +67,8 @@ import {
 import { BaseItem } from "./SortableList/SortableList.js";
 import { useIsSideNavCollapsedSessionStorage } from "./useIsSideNavCollapsedSessionStorage.js";
 
-export const SIDE_NAV_COLLAPSED_PADDING_HIGHLIGHTED = 12;
-export const SIDE_NAV_COLLAPSED_PADDING_UNHIGHLIGHTED = 2;
+const SIDE_NAV_COLLAPSED_PADDING_HIGHLIGHTED = 12;
+const SIDE_NAV_COLLAPSED_PADDING_UNHIGHLIGHTED = 2;
 
 const flattenNestedItems = (items: SideNavItem[]): SideNavItem[] => {
   return items.flatMap((item) => {
@@ -699,6 +699,7 @@ const SideNav = ({
       label,
       startIcon,
       nestedNavItems,
+      onChange,
       isSortable,
       translate,
     } = item;
@@ -772,6 +773,7 @@ const SideNav = ({
                 isDisabled={isDisabled}
                 isExpanded={isExpanded}
                 label={label}
+                onChange={onChange}
                 startIcon={startIcon}
               >
                 {nestedChildren}
