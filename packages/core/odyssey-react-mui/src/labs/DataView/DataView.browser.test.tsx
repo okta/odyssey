@@ -15,17 +15,18 @@ import { userEvent } from "@testing-library/user-event";
 import { MRT_RowSelectionState } from "material-react-table";
 import { describe, test } from "vitest";
 
-import { Button, MenuItem } from "../../Buttons/index.js";
-import { DataTableRowData } from "../../DataTable/index.js";
+import { Button } from "../../Buttons/Button.js";
+import { MenuItem } from "../../Buttons/MenuItem.js";
 import { EmptyState } from "../../EmptyState.js";
+import { DataTableRowData } from "../../index.js";
 import { OdysseyProvider } from "../../OdysseyProvider.js";
 import { getControlledElement } from "../../test-selectors/linkedHtmlSelectors.js";
 import {
-  CardLayoutProps,
-  DataOnReorderRowsType,
-  DataView,
-  TableLayoutProps,
-} from "./index.js";
+  type CardLayoutProps,
+  type TableLayoutProps,
+} from "./componentTypes.js";
+import { type DataOnReorderRowsType } from "./dataTypes.js";
+import { DataView } from "./DataView.js";
 import {
   columns,
   data,

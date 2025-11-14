@@ -29,6 +29,8 @@ describe(renderReactInWebComponent.name, () => {
   });
 
   test("returns web component element", async () => {
+    const nonce = "test-nonce";
+    globalThis.cspNonce = nonce;
     const rootElement = document.createElement("div");
     const testElementText = "I'm a test component!";
 
@@ -46,10 +48,12 @@ describe(renderReactInWebComponent.name, () => {
       );
       expect(reactInWebComponentElement.shadowRoot).toBeInstanceOf(ShadowRoot);
       expect(reactInWebComponentElement).toBeInTheDocument();
+      expect(reactInWebComponentElement).toHaveAttribute("nonce", nonce);
     });
   });
 
   test("renders a React app into a web component", async () => {
+    const nonce = "test-nonce-2";
     const rootElement = document.createElement("div");
     const testElementText = "I'm a test component!";
 
@@ -59,12 +63,14 @@ describe(renderReactInWebComponent.name, () => {
     const reactInWebComponentElement = renderReactInWebComponent({
       getReactComponent: () => <div>{testElementText}</div>,
       webComponentParentElement: rootElement,
+      nonce,
     });
 
     await waitFor(() => {
       expect(reactInWebComponentElement.shadowRoot).toHaveTextContent(
         testElementText,
       );
+      expect(reactInWebComponentElement).toHaveAttribute("nonce", nonce);
     });
   });
 

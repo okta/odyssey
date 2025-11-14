@@ -25,7 +25,7 @@ import {
   OdysseyThemeProviderPropsProvider,
   useOdysseyThemeProviderPropsContext,
 } from "./OdysseyThemeProviderPropsContext.js";
-import { createOdysseyMuiTheme } from "./theme/index.js";
+import { createOdysseyMuiTheme } from "./theme/theme.js";
 import {
   ContrastMode,
   ContrastModeContext,

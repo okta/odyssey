@@ -12,5 +12,5 @@
 
 export * from "./createReactRootElements.js";
 export * from "./createShadowDomElements.js";
-export * from "./removeGlobalStylesFromShadowDom.js";
+export * from "./encapsulateShadowDomFromGlobalStyles.js";
 export * from "./renderReactInWebComponent.js";

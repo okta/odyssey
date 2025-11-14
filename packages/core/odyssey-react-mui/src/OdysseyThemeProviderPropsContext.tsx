@@ -19,7 +19,7 @@ import {
   useMemo,
 } from "react";
 
-import { DesignTokensOverride } from "./theme/index.js";
+import { DesignTokensOverride } from "./theme/theme.js";
 
 export type OdysseyThemeProviderContextProps = {
   designTokensOverride?: DesignTokensOverride;

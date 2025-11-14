@@ -21,11 +21,6 @@ import { Meta, StoryObj } from "@storybook/react";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 
-// type CheckboxGroupStoryProps = CheckboxGroupProps & {
-//   isDefaultChecked: Parameters<typeof Checkbox>[0]["isDefaultChecked"];
-//   isIndeterminate: Parameters<typeof Checkbox>[0]["isIndeterminate"];
-// };
-
 const meta = {
   component: CheckboxGroup,
   decorators: [OdysseyStorybookThemeDecorator],
@@ -180,6 +175,36 @@ export const ErrorsList: Story = {
       "Select no more than 3 items",
     ],
   } as CheckboxGroupProps, // This is a hack
+};
+
+export const ErrorWithIndividualHint: Story = {
+  args: {
+    errorMessage: "This field is required.",
+  } as CheckboxGroupProps,
+  render: function C(props) {
+    return (
+      <CheckboxGroup {...props}>
+        <Checkbox
+          hint="Help Text"
+          label="Life support"
+          name="life-support"
+          value="life-support"
+        />
+        <Checkbox
+          hint="Help Text"
+          label="Warp core containment"
+          name="warp-core"
+          value="warp-core"
+        />
+        <Checkbox
+          hint="Help Text"
+          label="Cetacean ops"
+          name="cetacean-ops"
+          value="cetacean-ops"
+        />
+      </CheckboxGroup>
+    );
+  },
 };
 
 export const Hint: Story = {

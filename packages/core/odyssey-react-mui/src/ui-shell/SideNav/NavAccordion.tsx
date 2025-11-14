@@ -202,6 +202,7 @@ const NavAccordion = ({
   isDefaultExpanded,
   isDisabled,
   isExpanded,
+  onChange,
   translate,
   startIcon,
 }: PropsWithChildren<NavAccordionProps>) => {
@@ -222,6 +223,7 @@ const NavAccordion = ({
         disabled={isDisabled}
         disableGutters
         expanded={isExpanded}
+        onChange={onChange}
       >
         <AccordionSummaryContainer
           aria-controls={contentId}

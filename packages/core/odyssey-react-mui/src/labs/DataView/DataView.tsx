@@ -19,7 +19,7 @@ import {
 import { memo, useCallback, useEffect, useMemo, useState } from "react";
 
 import { Box } from "../../Box.js";
-import { MenuButton } from "../../Buttons/index.js";
+import { MenuButton } from "../../Buttons/MenuButton.js";
 import { Callout } from "../../Callout.js";
 import { createUniqueId } from "../../createUniqueId.js";
 import { useRowReordering } from "../../DataTable/useRowReordering.js";
@@ -30,7 +30,8 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext.js";
-import { Pagination, usePagination } from "../../Pagination/index.js";
+import { Pagination } from "../../Pagination/Pagination.js";
+import { usePagination } from "../../Pagination/usePagination.js";
 import { Typography } from "../../Typography.js";
 import { DataFilters } from "../DataFilters.js";
 import { BulkActionsMenu } from "./BulkActionsMenu.js";

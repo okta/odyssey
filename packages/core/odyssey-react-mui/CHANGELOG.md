@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.48.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.47.0...v1.48.0) (2025-11-13)
+
+### Features
+
+- **odyssey-react-mui:** configurable nonce in renderReactInWebComponent ([#123](https://github.com/atko-eng/odyssey-design-system/issues/123)) ([330509b](https://github.com/atko-eng/odyssey-design-system/commit/330509b0b2c9d441e48ba491e4ef89e174484ea6))
+- update \_\_internal exports ([#104](https://github.com/atko-eng/odyssey-design-system/issues/104)) ([0b734d8](https://github.com/atko-eng/odyssey-design-system/commit/0b734d8b9667b4708c102695158c49572243ea1d))
+
+### Bug Fixes
+
+- prevent Drawer content from overlapping header during scroll ([#114](https://github.com/atko-eng/odyssey-design-system/issues/114)) ([e4664f7](https://github.com/atko-eng/odyssey-design-system/commit/e4664f78f019bf0bd26e823dbe03fe1b0a81497b))
+- specify error class for hint text in Radio component ([#119](https://github.com/atko-eng/odyssey-design-system/issues/119)) ([da4a55f](https://github.com/atko-eng/odyssey-design-system/commit/da4a55f5841052bf9879e7da76d180457a333191))
+
 ## [1.47.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.46.0...v1.47.0) (2025-10-28)
 
 ### Features

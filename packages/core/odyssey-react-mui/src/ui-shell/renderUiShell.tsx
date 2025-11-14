@@ -69,7 +69,12 @@ export const renderUiShell = ({
   sideNavBackgroundColor,
   sideNavBackgroundContrastColor,
   topNavBackgroundColor,
+  nonce = window.cspNonce,
 }: {
+  /**
+   * Optional nonce for CSP compliance.
+   */
+  nonce?: string;
   /**
    * Notifies when a React rendering error occurs. This could be useful for logging, reporting priority 0 issues, and recovering UI Shell when errors occur.
    */
@@ -171,6 +176,7 @@ export const renderUiShell = ({
     ),
     webComponentChildren,
     webComponentParentElement: parentElement,
+    nonce,
   });
 
   const unsubscribeFromUnifiedUiShellRendered = subscribeToReactAppSubscribed(

@@ -192,6 +192,10 @@ export type SideNavItem = {
   isSortable?: boolean;
   label: string;
   /**
+   * Event fired when the nav item is changed (for instance, capturing clicks on Accordion)
+   */
+  onChange?: (event: SyntheticEvent) => void;
+  /**
    * Event fired when the nav item is clicked
    */
   onClick?: (event: SyntheticEvent) => void;

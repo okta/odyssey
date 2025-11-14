@@ -13,7 +13,9 @@
 import { MRT_Row, MRT_RowData } from "material-react-table";
 import { Fragment, memo, ReactElement, useCallback } from "react";
 
-import { Button, MenuButtonProps, MenuItem } from "../../Buttons/index.js";
+import { Button } from "../../Buttons/Button.js";
+import { type MenuButtonProps } from "../../Buttons/MenuButton.js";
+import { MenuItem } from "../../Buttons/MenuItem.js";
 import { useTranslation } from "../../i18n.generated/i18n.js";
 import {
   ArrowBottomIcon,

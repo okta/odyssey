@@ -11,7 +11,7 @@
  */
 
 import { createReactRootElements } from "./createReactRootElements.js";
-import { removeGlobalStylesFromShadowDom } from "./removeGlobalStylesFromShadowDom.js";
+import { encapsulateShadowDomFromGlobalStyles } from "./encapsulateShadowDomFromGlobalStyles.js";
 
 /**
  * This function is necessary only when using bare Shadow DOM, but with UI Shell rendering in a Web Component, you won't be able to render your Shadow DOM in its Shadow DOM without using a Web Component.
@@ -30,7 +30,7 @@ export const createShadowDomElements = (
   shadowRoot.appendChild(appRootElement);
   shadowRoot.appendChild(stylesRootElement);
 
-  removeGlobalStylesFromShadowDom({
+  encapsulateShadowDomFromGlobalStyles({
     nonce,
     stylesRootElement,
   });

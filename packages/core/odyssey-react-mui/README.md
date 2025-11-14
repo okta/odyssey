@@ -143,6 +143,27 @@ Follow these steps for local [Odyssey development](https://odyssey-storybook.okt
 
 ## Downstream Testing
 
+### Remote
+
+Remote downstream tests run the entire bacon suite for a target repo with the latest version of odyssey
+published from your branch.
+
+The script used for this is the `scripts/downstream-bacon.sh` file, which is used by the `Init * Downstream` bacon suites.
+It performs the commits and triggers bacon suites using the `update-ui-packages` script found here: https://github.com/atko-eng/update-ui-packages.
+The version to be tested is determined using the `ok-ui artifacts` command, which is implemented here: https://github.com/atko-eng/ui-build-tools/blob/master/packages/clis/ok-ui/src/commands/artifacts.ts
+
+However, these bacon suites will only report a success/failure of whether the downstream tests were initiated, not if they actually succeeded.
+It's up to the developer merging their changes to ensure that the downstream suites have passed.
+
+Each downstream suite will display custom messages to show:
+
+- A link to the created commit in Bacon
+- Information about the artifact/commit being tests
+
+Check these messages and make sure the artifact being tested is the one you expect. And whether the downstream test suites are passing.
+
+### Local
+
 Local changes can be tested in various other okta packages using the `yarn ok-ui downstream` command, which will clone
 the specified repos, applies the changes from your local version via linking, and then run the build and test commands
 for the specified packages. Logs for the output of these individual commands can be found under `ok-ui-logs/downstream`.

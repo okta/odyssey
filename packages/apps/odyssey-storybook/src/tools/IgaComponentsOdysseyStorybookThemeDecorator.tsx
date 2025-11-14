@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -10,4 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export * from "./AppSwitcher.js";
+import type { Decorator } from "@storybook/react";
+
+import { IgaComponentsProvider } from "@okta/odyssey-contributions-iga-components";
+
+export const IgaComponentsOdysseyStorybookThemeDecorator: Decorator = (
+  Story,
+  context,
+) => (
+  <IgaComponentsProvider languageCode={context.globals.locale as string}>
+    <Story />
+  </IgaComponentsProvider>
+);

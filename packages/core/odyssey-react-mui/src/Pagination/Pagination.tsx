@@ -15,7 +15,7 @@ import { InputBase } from "@mui/material";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { Box } from "../Box.js";
-import { Button } from "../Buttons/index.js";
+import { Button } from "../Buttons/Button.js";
 import { useTranslation } from "../i18n.generated/i18n.js";
 import { ArrowLeftIcon, ArrowRightIcon } from "../icons.generated/index.js";
 import {

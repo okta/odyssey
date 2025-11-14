@@ -32,9 +32,11 @@ import {
 
 import { Autocomplete } from "../Autocomplete.js";
 import { Box } from "../Box.js";
-import { Button } from "../Buttons/index.js";
-import { Checkbox } from "../Checkbox.js";
-import { CheckboxGroup } from "../CheckboxGroup.js";
+import { Button } from "../Buttons/Button.js";
+import { Checkbox } from "../Fields/Checkbox.js";
+import { CheckboxGroup } from "../Fields/CheckboxGroup.js";
+import { Radio } from "../Fields/Radio.js";
+import { RadioGroup } from "../Fields/RadioGroup.js";
 import { Trans, useTranslation } from "../i18n.generated/i18n.js";
 import {
   CheckIcon,
@@ -46,8 +48,6 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../OdysseyDesignTokensContext.js";
-import { Radio } from "../Radio.js";
-import { RadioGroup } from "../RadioGroup.js";
 import { SearchField } from "../SearchField.js";
 import { Tag } from "../Tag.js";
 import { TagList } from "../TagList.js";

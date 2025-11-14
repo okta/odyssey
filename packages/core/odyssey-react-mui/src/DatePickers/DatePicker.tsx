@@ -20,7 +20,7 @@ import {
 import { DateTime } from "luxon";
 import { memo, useCallback, useEffect, useMemo, useRef } from "react";
 
-import { Button } from "../Buttons/index.js";
+import { Button } from "../Buttons/Button.js";
 import { FieldComponentProps } from "../FieldComponentProps.js";
 import { useTranslation } from "../i18n.generated/i18n.js";
 import {

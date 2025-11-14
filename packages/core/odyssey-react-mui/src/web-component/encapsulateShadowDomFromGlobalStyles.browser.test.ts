@@ -11,15 +11,15 @@
  */
 
 import {
-  removeGlobalStylesFromShadowDom,
+  encapsulateShadowDomFromGlobalStyles,
   shadowDomHostStyles,
-} from "./removeGlobalStylesFromShadowDom.js";
+} from "./encapsulateShadowDomFromGlobalStyles.js";
 
-describe(removeGlobalStylesFromShadowDom.name, () => {
+describe(encapsulateShadowDomFromGlobalStyles.name, () => {
   test("adds styles to DOM element", () => {
     const stylesRootElement = document.createElement("div");
 
-    removeGlobalStylesFromShadowDom({
+    encapsulateShadowDomFromGlobalStyles({
       nonce: "",
       stylesRootElement,
     });
@@ -37,7 +37,7 @@ describe(removeGlobalStylesFromShadowDom.name, () => {
     const stylesRootElement = document.createElement("div");
     const nonce = "abf52f";
 
-    removeGlobalStylesFromShadowDom({
+    encapsulateShadowDomFromGlobalStyles({
       nonce,
       stylesRootElement,
     });

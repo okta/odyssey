@@ -13,14 +13,14 @@
 import { FormGroup as MuiFormGroup } from "@mui/material";
 import React, { memo, ReactNode, useCallback, useMemo } from "react";
 
-import type { HtmlProps } from "./HtmlProps.js";
+import type { HtmlProps } from "../HtmlProps.js";
 
-import { CheckboxProps } from "./Checkbox.js";
-import { Field } from "./Field.js";
+import { Field } from "../Field.js";
 import {
   FieldComponentProps,
   FieldComponentRenderProps,
-} from "./FieldComponentProps.js";
+} from "../FieldComponentProps.js";
+import { CheckboxProps } from "./Checkbox.js";
 
 export type CheckboxGroupProps = {
   /**

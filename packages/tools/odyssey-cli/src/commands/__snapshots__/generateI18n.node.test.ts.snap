@@ -19,9 +19,9 @@ exports[`generateI18nCommand > generates all i18n files correctly based on a vir
  *************************************************************************
  */
 
-import { translation as fr } from "../properties/ts/my-package_fr.js";
-import { translation as pt_BR } from "../properties/ts/my-package_pt_BR.js";
-import { translation as en } from "../properties/ts/my-package.js";
+import { translation as fr } from "../properties/ts/odyssey-react-mui_fr.js";
+import { translation as pt_BR } from "../properties/ts/odyssey-react-mui_pt_BR.js";
+import { translation as en } from "../properties/ts/odyssey-react-mui.js";
 import { ResourceRecord } from "./i18n.types.js";
 
 export const resources = {
@@ -97,14 +97,14 @@ exports[`generateI18nCommand > generates all i18n files correctly based on a vir
  *************************************************************************
  */
 
-import { translation as defaultTranslation } from "../properties/ts/my-package.js";
+import { translation as defaultTranslation } from "../properties/ts/odyssey-react-mui.js";
 
 export const defaultLanguageCode = "en" as const;
 
 /**
- * The namespace for the my-package package.
+ * The namespace for the odyssey-react-mui package.
  */
-export const namespace = "my-package" as const;
+export const namespace = "odyssey-react-mui" as const;
 export type i18nNamespace = typeof namespace;
 
 /**
@@ -115,7 +115,7 @@ export type i18nNamespace = typeof namespace;
 export type i18nResourceType = typeof defaultTranslation;
 
 /**
- * Supported languages for translations for the my-package package.
+ * Supported languages for translations for the odyssey-react-mui package.
  */
 export type SupportedLanguages =
   | "en"

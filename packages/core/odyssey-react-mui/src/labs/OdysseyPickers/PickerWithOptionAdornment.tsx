@@ -20,7 +20,7 @@ import {
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext.js";
 import { Tag } from "../../Tag.js";
-import { pxToRem } from "../../theme/index.js";
+import { pxToRem } from "../../theme/pxToRem.js";
 import { Heading6 } from "../../Typography.js";
 import {
   type AdornmentSize,

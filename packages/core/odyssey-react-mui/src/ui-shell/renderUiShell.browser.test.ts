@@ -31,6 +31,8 @@ describe(renderUiShell.name, () => {
   });
 
   test("`UiShell` renders after `onRender`", async () => {
+    const nonce = "test-nonce";
+    globalThis.cspNonce = nonce;
     const onRender = vi.fn();
     const parentElement = document.createElement("div");
 
@@ -50,7 +52,7 @@ describe(renderUiShell.name, () => {
     });
 
     expect(parentElement.innerHTML).not.toBe("");
-
+    expect(uiShellElement).toHaveAttribute("nonce", nonce);
     expect(
       uiShellElement.shadowRoot!.getElementById(appRootElementId)!.innerHTML,
     ).toBe("");
@@ -69,6 +71,7 @@ describe(renderUiShell.name, () => {
   });
 
   test("`onRender` contains UI Shell return values", async () => {
+    const nonce = "test-nonce-2";
     const onRender =
       vi.fn<NonNullable<Parameters<typeof renderUiShell>[0]["onRender"]>>();
     const parentElement = document.createElement("div");
@@ -76,13 +79,17 @@ describe(renderUiShell.name, () => {
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
     document.body.append(parentElement);
 
-    act(() => {
-      renderUiShell({
+    const uiShellElement = await act(() => {
+      const { uiShellElement } = renderUiShell({
         appElementScrollingMode: "vertical",
         onRender,
         parentElement,
+        nonce,
       });
+
+      return uiShellElement;
     });
+    expect(uiShellElement).toHaveAttribute("nonce", nonce);
 
     await waitFor(() => {
       expect(onRender).toHaveBeenCalled();

@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.48.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.47.0...v1.48.0) (2025-11-13)
+
+**Note:** Version bump only for package @okta/odyssey-icons
+
 ## [1.47.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.46.0...v1.47.0) (2025-10-28)
 
 **Note:** Version bump only for package @okta/odyssey-icons

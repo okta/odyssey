@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.48.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.47.0...v1.48.0) (2025-11-13)
+
+### Features
+
+- Odyssey: DataView missing ability to change row background color ([#120](https://github.com/atko-eng/odyssey-design-system/issues/120)) ([0a528db](https://github.com/atko-eng/odyssey-design-system/commit/0a528db069c2c3b2a2e465511cb8d786632b590d))
+- Odyssey: DataView missing ability to conditionally pin columns ([#122](https://github.com/atko-eng/odyssey-design-system/issues/122)) ([e54011e](https://github.com/atko-eng/odyssey-design-system/commit/e54011e012c75ee6ac4319b0d67a11b215856a47))
+- Odyssey: Ensure IGA DataView component styles match Core DataView component styles ([#108](https://github.com/atko-eng/odyssey-design-system/issues/108)) ([eae8467](https://github.com/atko-eng/odyssey-design-system/commit/eae8467c38ab065775b48a08f551dc7d22a22690))
+- update example-components to be used by new ok-ui create command ([#106](https://github.com/atko-eng/odyssey-design-system/issues/106)) ([3c11ba0](https://github.com/atko-eng/odyssey-design-system/commit/3c11ba0a07fd5268c8e01cd6018d0a805decb2ca))
+
+### Bug Fixes
+
+- Remove duplicate code in Custom Theming example OKTA-1055171 ([#127](https://github.com/atko-eng/odyssey-design-system/issues/127)) ([a0b3d9d](https://github.com/atko-eng/odyssey-design-system/commit/a0b3d9dc2a1502a3d3b5c5a835d992c7d01e0f5a))
+- specify error class for hint text in Radio component ([#119](https://github.com/atko-eng/odyssey-design-system/issues/119)) ([da4a55f](https://github.com/atko-eng/odyssey-design-system/commit/da4a55f5841052bf9879e7da76d180457a333191))
+
 ## [1.47.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.46.0...v1.47.0) (2025-10-28)
 
 ### Bug Fixes

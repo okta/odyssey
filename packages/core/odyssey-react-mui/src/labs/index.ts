@@ -15,11 +15,14 @@ export type { LocalizationProviderProps } from "@mui/x-date-pickers";
 export { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 /** @deprecated Will be removed in a future Odyssey version. Use the `/ui-shell` export unless your app is running React v17. */
-export * from "../ui-shell/AppSwitcher/index.js";
+export * from "../ui-shell/AppSwitcher/AppSwitcher.js";
 /** @deprecated Will be removed in a future Odyssey version. Use the `/ui-shell` export unless your app is running React v17. */
-export * from "../ui-shell/SideNav/index.js";
+export * from "../ui-shell/SideNav/NavAccordion.js";
+export * from "../ui-shell/SideNav/SideNav.js";
+export * from "../ui-shell/SideNav/types.js";
+
 /** @deprecated Will be removed in a future Odyssey version. Use the `/ui-shell` export unless your app is running React v17. */
-export * from "../ui-shell/TopNav/index.js";
+export * from "../ui-shell/TopNav/TopNav.js";
 /** @deprecated Will be removed in a future Odyssey version. Use the `/ui-shell` export unless your app is running React v17. */
 export * from "../ui-shell/UiShell.js";
 // export * from "./AdaptablePicker";
@@ -27,11 +30,22 @@ export * from "./AppTile.js";
 export * from "./DataFilters.js";
 /** @deprecated Will be removed in a future Odyssey version in lieu of the one shipping with DataTable */
 export * from "./DataTablePagination.js";
-export * from "./DataView/index.js";
-export * from "./DatePickers/index.js";
+export * from "./DataView/componentTypes.js";
+export * from "./DataView/constants.js";
+export { type DataCardProps } from "./DataView/DataCard.js";
+export * from "./DataView/DataTable.js";
+export * from "./DataView/dataTypes.js";
+export * from "./DataView/DataView.js";
+
+export * from "./DatePickers/DateTimeField.js";
+export * from "./DatePickers/DateTimePicker.js";
 export * from "./materialReactTableTypes.js";
-export * from "./OdysseyPickers/index.js";
-export * from "./PageTemplate/index.js";
+export { adornmentSizeValues } from "./OdysseyPickers/ComposablePicker.js";
+export * from "./OdysseyPickers/Picker.js";
+export * from "./OdysseyPickers/PickerWithOptionAdornment.js";
+export * from "./OdysseyPickers/SearchDropdown.js";
+export * from "./PageTemplate/Layout.js";
+export * from "./PageTemplate/PageTemplate.js";
 /** @deprecated Will be removed in a future Odyssey version in lieu of DataTable */
 export * from "./PaginatedTable.js";
 /** @deprecated Will be removed in a future Odyssey version in lieu of DataTable */

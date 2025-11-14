@@ -13,7 +13,7 @@
 import { Alert, AlertTitle, Snackbar } from "@mui/material";
 import { memo, useCallback, useEffect, useState } from "react";
 
-import { Button } from "./Buttons/index.js";
+import { Button } from "./Buttons/Button.js";
 import { HtmlProps } from "./HtmlProps.js";
 import { useTranslation } from "./i18n.generated/i18n.js";
 import { CloseIcon } from "./icons.generated/index.js";

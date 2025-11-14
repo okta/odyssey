@@ -23,7 +23,7 @@ import {
   datePickerTheme,
   dateStyles,
 } from "../../DatePickers/datePickerTheme.js";
-import { pxToRem } from "../../theme/index.js";
+import { pxToRem } from "../../theme/theme.js";
 import { addSpecificity } from "../../tools/addSpecificity.js";
 import { DateTimePickerSize } from "./DateTimePicker.js";
 

@@ -20,7 +20,7 @@ import {
   useState,
 } from "react";
 
-import { Button } from "../Buttons/index.js";
+import { Button } from "../Buttons/Button.js";
 import { Field, RenderFieldComponentProps } from "../Field.js";
 import { FieldComponentProps } from "../FieldComponentProps.js";
 import { useTranslation } from "../i18n.generated/i18n.js";
@@ -307,5 +307,7 @@ const FileUploader = ({
 const MemoizedFileUploader = memo(FileUploader);
 MemoizedFileUploader.displayName = "FileUploader";
 
-export { MemoizedFileUploader as FileUpload };
-export { MemoizedFileUploader as FileUploader };
+export {
+  MemoizedFileUploader as FileUpload,
+  MemoizedFileUploader as FileUploader,
+};

@@ -38,7 +38,8 @@ import {
 } from "react";
 
 import { Box } from "../Box.js";
-import { Button, MenuButton, MenuButtonProps } from "../Buttons/index.js";
+import { Button } from "../Buttons/Button.js";
+import { MenuButton, type MenuButtonProps } from "../Buttons/MenuButton.js";
 import { Callout } from "../Callout.js";
 import { EmptyState } from "../EmptyState.js";
 import { useTranslation } from "../i18n.generated/i18n.js";
@@ -49,23 +50,21 @@ import {
   DragIndicatorIcon,
   MoreIcon,
 } from "../icons.generated/index.js";
+import { DataTableRowData, DataTableRowSelectionState } from "../index.js";
 import { DataFilter, DataFilters } from "../labs/DataFilters.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../OdysseyDesignTokensContext.js";
-import {
-  Pagination,
-  paginationTypeValues,
-  usePagination,
-} from "../Pagination/index.js";
+import { paginationTypeValues } from "../Pagination/constants.js";
+import { Pagination } from "../Pagination/Pagination.js";
+import { usePagination } from "../Pagination/usePagination.js";
 import { densityValues } from "./constants.js";
 import {
   DataTableRowActions,
   DataTableRowActionsProps,
 } from "./DataTableRowActions.js";
 import { DataTableSettings } from "./DataTableSettings.js";
-import { DataTableRowData, DataTableRowSelectionState } from "./index.js";
 import { useRowReordering } from "./useRowReordering.js";
 import { useScrollIndication } from "./useScrollIndication.js";
 

@@ -14,7 +14,8 @@ import { Checkbox as MuiCheckbox } from "@mui/material";
 import { MRT_VisibilityState } from "material-react-table";
 import { Dispatch, memo, SetStateAction, useCallback, useMemo } from "react";
 
-import { MenuButton, MenuItem } from "../Buttons/index.js";
+import { MenuButton } from "../Buttons/MenuButton.js";
+import { MenuItem } from "../Buttons/MenuItem.js";
 import { useTranslation } from "../i18n.generated/i18n.js";
 import { ListIcon, ShowIcon } from "../icons.generated/index.js";
 import { densityValues } from "./constants.js";

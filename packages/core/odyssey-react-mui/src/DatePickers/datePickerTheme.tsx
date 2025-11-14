@@ -14,7 +14,7 @@ import { ThemeOptions } from "@mui/material";
 import { CSSInterpolation } from "@mui/material/styles";
 import * as odysseyTokens from "@okta/odyssey-design-tokens";
 
-import { createOdysseyMuiTheme } from "../theme/index.js";
+import { createOdysseyMuiTheme } from "../theme/theme.js";
 
 const popupSpacingValue = 5;
 

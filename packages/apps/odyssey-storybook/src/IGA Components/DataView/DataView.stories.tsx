@@ -14,12 +14,13 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import {
   DataView,
-  type DataViewProps,
+  DataViewProps,
+  TableLayoutProps,
 } from "@okta/odyssey-contributions-iga-components";
 import {
   Box,
   Button,
-  type DataTableRowData,
+  DataTableRowData,
   EmptyState,
   MenuItem,
   paginationTypeValues,
@@ -28,37 +29,39 @@ import {
 import { PauseIcon, RefreshIcon } from "@okta/odyssey-react-mui/icons";
 import {
   availableLayouts,
-  type CardLayoutProps,
-  type DataCardProps,
-  type DataGetDataType,
-  type DataOnReorderRowsType,
-  type DataRowSelectionState,
-  type DataViewLayout,
+  CardLayoutProps,
+  DataCardProps,
+  DataGetDataType,
+  DataOnReorderRowsType,
+  DataRowSelectionState,
+  DataViewLayout,
   densityValues,
-  type TableLayoutProps,
-  type UpdateFiltersOrValues,
+  UpdateFiltersOrValues,
 } from "@okta/odyssey-react-mui/labs";
 import { action } from "@storybook/addon-actions";
 import { fn } from "@storybook/test";
 import {
-  type Dispatch,
-  type SetStateAction,
+  Dispatch,
+  SetStateAction,
   useCallback,
   useMemo,
   useState,
 } from "react";
 
-import { IgaComponentsLegacyOdysseyDecorator } from "../../tools/IgaComponentsLegacyOdysseyDecorator.js";
-import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
-import { filterData, reorderData } from "./dataFunctions.js";
 import {
-  type Person,
+  filterData,
+  reorderData,
+} from "../../Odyssey Core/Data Visualizations/DataView [labs]/dataFunctions.js";
+import {
+  Person,
   columns as personColumns,
   data as personData,
-} from "./personData.js";
+} from "../../Odyssey Core/Data Visualizations/DataView [labs]/personData.js";
+import { IgaComponentsOdysseyStorybookThemeDecorator } from "../../tools/IgaComponentsOdysseyStorybookThemeDecorator.js";
+import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
 type DataViewMetaProps = DataViewProps<Person> &
-  TableLayoutProps<Person> &
+  Omit<TableLayoutProps<Person>, "selectPinnedColumns"> &
   CardLayoutProps<Person> & {
     cardRowActionMenuItems: CardLayoutProps<Person>["rowActionMenuItems"];
     hasActionButtons: boolean;
@@ -67,6 +70,8 @@ type DataViewMetaProps = DataViewProps<Person> &
     hasAdditionalActionMenuItems: boolean;
     hasCustomEmptyPlaceholder: boolean;
     hasCustomNoResultsPlaceholder: boolean;
+    pinnedLeftColumns?: string[];
+    pinnedRightColumns?: string[];
     tableRowActionMenuItems: TableLayoutProps<Person>["rowActionMenuItems"];
   };
 
@@ -74,7 +79,7 @@ const meta = {
   component: DataView,
   decorators: [
     OdysseyStorybookThemeDecorator,
-    IgaComponentsLegacyOdysseyDecorator,
+    IgaComponentsOdysseyStorybookThemeDecorator,
   ],
   argTypes: {
     getData: {
@@ -88,6 +93,15 @@ const meta = {
       table: {
         type: {
           summary: "",
+        },
+      },
+    },
+    hasColumnPinning: {
+      control: "boolean",
+      name: "tableLayoutOptions.hasColumnPinning",
+      table: {
+        defaultValue: {
+          summary: "false",
         },
       },
     },
@@ -126,6 +140,28 @@ const meta = {
     paginationType: {
       control: "select",
       options: paginationTypeValues,
+    },
+    pinnedLeftColumns: {
+      control: "check",
+      options: personColumns.map((col) => col.id),
+      name: "Pinned Left Columns",
+      table: {
+        category: "Column Pinning",
+        defaultValue: {
+          summary: "[]",
+        },
+      },
+    },
+    pinnedRightColumns: {
+      control: "check",
+      options: personColumns.map((col) => col.id),
+      name: "Pinned Right Columns",
+      table: {
+        category: "Column Pinning",
+        defaultValue: {
+          summary: "[]",
+        },
+      },
     },
     resultsPerPage: {
       control: "number",
@@ -169,6 +205,15 @@ const meta = {
       control: "select",
       options: densityValues,
       name: "tableLayoutOptions.columns",
+    },
+    getCustomRowStyles: {
+      control: false,
+      name: "tableLayoutOptions.getCustomRowStyles",
+      table: {
+        defaultValue: {
+          summary: "undefined",
+        },
+      },
     },
     hasChangeableDensity: {
       control: "boolean",
@@ -254,6 +299,7 @@ const meta = {
     currentPage: 1,
     hasActionButtons: false,
     hasActionMenuItems: false,
+    hasColumnPinning: false,
     hasCustomEmptyPlaceholder: false,
     hasCustomNoResultsPlaceholder: false,
     maxGridColumns: 3,
@@ -267,6 +313,14 @@ const meta = {
       data,
       setData,
     );
+
+    const selectPinnedColumns =
+      args.pinnedLeftColumns?.length || args.pinnedRightColumns?.length
+        ? () => ({
+            left: args.pinnedLeftColumns || [],
+            right: args.pinnedRightColumns || [],
+          })
+        : undefined;
 
     return (
       <DataView
@@ -321,6 +375,7 @@ const meta = {
         searchDelayTime={args.searchDelayTime}
         tableLayoutOptions={{
           columns: personColumns,
+          getCustomRowStyles: args.getCustomRowStyles,
           hasSorting: args.hasSorting,
           rowActionMenuItems: args.hasActionMenuItems
             ? actionMenuItems
@@ -328,7 +383,9 @@ const meta = {
           rowActionButtons: args.hasActionButtons
             ? rowActionButtons
             : undefined,
+          selectPinnedColumns,
           renderDetailPanel: undefined,
+          hasColumnPinning: args.hasColumnPinning,
           hasColumnVisibility: args.hasColumnVisibility,
           hasColumnResizing: args.hasColumnResizing,
           hasChangeableDensity: args.hasChangeableDensity,
@@ -526,6 +583,7 @@ export const ExpandableRowsAndCards: Story = {
     const tableLayoutOptions = useMemo<TableLayoutProps<Person>>(
       () => ({
         columns: personColumns,
+        hasColumnPinning: false,
         renderDetailPanel: renderAdditionalContent,
       }),
       [renderAdditionalContent],
@@ -578,6 +636,7 @@ export const Truncation: Story = {
             hasTextWrapping: true,
           },
         ],
+        hasColumnPinning: false,
         hasColumnResizing: true,
       }),
       [],
@@ -634,6 +693,7 @@ export const Empty: Story = {
       () => ({
         columns: personColumns,
         hasChangeableDensity: hasChangeableDensity,
+        hasColumnPinning: false,
         hasColumnResizing: hasColumnResizing,
         hasColumnVisibility: hasColumnVisibility,
         hasSorting: hasSorting,
@@ -758,6 +818,7 @@ export const CustomFilters: Story = {
       () => ({
         columns: personColumns,
         hasChangeableDensity: hasChangeableDensity,
+        hasColumnPinning: false,
         hasColumnResizing: hasColumnResizing,
         hasColumnVisibility: hasColumnVisibility,
         hasSorting: hasSorting,
@@ -851,6 +912,7 @@ export const FilterWithCustomRender: Story = {
       () => ({
         columns: personColumns,
         hasChangeableDensity: hasChangeableDensity,
+        hasColumnPinning: false,
         hasColumnResizing: hasColumnResizing,
         hasColumnVisibility: hasColumnVisibility,
         hasSorting: hasSorting,
@@ -923,6 +985,7 @@ export const CustomFilterWithDefaultVariant: Story = {
       () => ({
         columns: personColumns,
         hasChangeableDensity: hasChangeableDensity,
+        hasColumnPinning: false,
         hasColumnResizing: hasColumnResizing,
         hasColumnVisibility: hasColumnVisibility,
         hasSorting: hasSorting,
@@ -984,6 +1047,7 @@ export const ColumnGrowDemo: Story = {
 
     const tableLayoutOptions = useMemo<TableLayoutProps<Privilege>>(
       () => ({
+        hasColumnPinning: false,
         hasColumnResizing: true,
         hasSorting: true,
         columns: [
@@ -1039,6 +1103,7 @@ export const PaginationHook: Story = {
     const tableLayoutOptions = useMemo(
       () => ({
         columns: personColumns,
+        hasColumnPinning: false,
       }),
       [],
     );
@@ -1143,6 +1208,7 @@ export const GrowColumnWithoutActions: Story = {
             header: "City",
           },
         ],
+        hasColumnPinning: false,
         hasColumnResizing: true,
       }),
       [],
@@ -1193,6 +1259,7 @@ export const GrowColumnWithActions: Story = {
             header: "City",
           },
         ],
+        hasColumnPinning: false,
         hasColumnResizing: true,
         rowActionButtons: rowActions,
       }),
@@ -1206,5 +1273,43 @@ export const GrowColumnWithActions: Story = {
         tableLayoutOptions={tableLayoutOptions}
       />
     );
+  },
+};
+
+export const GetCustomRowStyles: Story = {
+  args: {
+    availableLayouts: tableLayoutOnly,
+    getCustomRowStyles: (row) =>
+      row.original.age < 30
+        ? {
+            backgroundColor: "rgba(63, 181, 179, 1)",
+          }
+        : undefined,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "This story updates the background color of rows where the person's age is less than 30 by applying a `light blue` background color using the `getCustomRowStyles` function.",
+      },
+    },
+  },
+};
+
+export const ColumnPinning: Story = {
+  args: {
+    availableLayouts: tableLayoutOnly,
+    hasColumnPinning: true,
+    pinnedLeftColumns: [personColumns[0].accessorKey as string],
+    pinnedRightColumns: [
+      personColumns[personColumns.length - 1].accessorKey as string,
+    ],
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "This story shows the DataView with column pinning enabled.",
+      },
+    },
   },
 };
