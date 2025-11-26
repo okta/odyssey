@@ -18,13 +18,13 @@ using its binary name.
 
 ```bash
 # General usage format
-odyssey-cli <command> [options]
+yarn odyssey-cli <command> [options]
 ```
 
 To see a list of all available commands and options, you can use the --help flag.
 
 ```bash
-odyssey-cli --help
+yarn odyssey-cli --help
 ```
 
 ## Commands
@@ -43,7 +43,7 @@ By default, running the command in a package will read from `./src/properties` a
 This is the first step in our i18n pipeline.
 
 ```bash
-odyssey-cli build:translationsJson [options]
+yarn odyssey-cli build:translationsJson [options]
 ```
 
 #### Options
@@ -77,7 +77,45 @@ ready-to-use hooks and functions.
 #### Usage
 
 ```bash
-odyssey-cli generate:i18n
+yarn odyssey-cli generate:i18n
+```
+
+### `init:i18n`
+
+This command is the **primary setup tool** for adding internationalization (`i18n`) to a package. It is an **interactive wizard** that guides you through the process of configuring the translation pipeline, creating necessary files, installing tooling, and kicking off the final setup steps.
+
+It is designed to be run once when a package first requires `i18n` support.
+
+#### Steps Performed
+
+This command automates the following steps:
+
+1.  **Configuration Check:** Checks for existing configuration (`i18n.config.json` or `src/properties`) and prompts the user to overwrite if found.
+2.  **Interactive Prompts:** Collects necessary details via the command line, including:
+
+- Team name (with an autocomplete option by fetching available teams).
+- GitHub reviewer alias.
+- JIRA component, guardian and Slack channel (if manual details are required).
+
+3.  **File Generation:**
+
+- Creates the necessary `i18n.config.json` file with the collected information.
+- Creates a base `<package-name>.properties` file in `src/properties` with a placeholder value.
+
+4.  **Tooling Setup:** Installs the required contribution tooling (`@okta/odyssey-contribution-tooling`) and runs follow-up commands:
+
+- `yarn generate:pseudoLocales`
+- `yarn build:translationsJson`
+- `yarn generate:i18n` (to create the final typed resources).
+
+5.  **JIRA Ticket Prompt:** Prompts the user to open a **JIRA ticket** for the UI Global Access team to register the new translation bundle.
+
+#### Usage
+
+This command takes no arguments. It determines configuration details interactively.
+
+```bash
+yarn odyssey-cli init:i18n
 ```
 
 ### Contributing: Adding a New Command
@@ -158,7 +196,6 @@ Adding new commands to the Odyssey CLI is straightforward. Follow the steps belo
      .catch(console.error);
    ```
 
-5. **Add a Test File**
+5. **Add Tests**
 
-   Remember to add a corresponding test file (e.g., `myNewCommand.node.test.ts`) in the `src/commands/` directory to
-   ensure your command works as expected.
+   Remember to add corresponding tests in `cli-parser.node.test.ts` to ensure your command works as expected.

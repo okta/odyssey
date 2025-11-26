@@ -29,7 +29,7 @@
     "start:dev": "yarn workspaces foreach --all --parallel --interlaced --jobs unlimited --exclude=@okta/odyssey-icons --exclude=@okta/odyssey-storybook run dev",
     "start:storybook": "yarn workspace @okta/odyssey-storybook start",
     "start": "yarn install && yarn build && yarn concurrently npm:start:dev npm:start:storybook",
-    "test": "yarn workspaces foreach --all --parallel --interlaced run test",
+    "test": "yarn workspaces foreach --all --parallel --interlaced --exclude=@okta/ui-stacks-component-libraries-odyssey-contributions run test",
     "topic": "OKTA_NPM_REGISTRY_SERVER=https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-all yarn",
     "typecheck": "yarn workspaces foreach --all --parallel --interlaced run typecheck"
   },
@@ -82,6 +82,7 @@
     "node-gyp@npm:latest": "^10.0.0",
     "nyc@^15.1.0": "patch:nyc@npm:15.1.0#.yarn/patches/nyc-npm-15.1.0-f134b19668.patch",
     "playwright@npm:1.34.2": "^1.53.0",
+    "puppeteer@npm:24.11.1": "24.31.0",
     "rimraf@npm:^2.5.4": "^4.2.0",
     "rimraf@npm:^2.6.1": "^4.2.0",
     "rimraf@npm:^2.6.3": "^4.2.0",

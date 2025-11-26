@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.49.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.48.0...v1.49.0) (2025-11-26)
+
+### Features
+
+- add i18n init script ([#137](https://github.com/atko-eng/odyssey-design-system/issues/137)) ([6ef92bb](https://github.com/atko-eng/odyssey-design-system/commit/6ef92bb6ef7202e69274170226ce4d1afb4cca1c))
+- add new component ProgressBar ([#140](https://github.com/atko-eng/odyssey-design-system/issues/140)) ([2ec02eb](https://github.com/atko-eng/odyssey-design-system/commit/2ec02ebdea561dc4c3f29070de6df353e72b4478))
+- adds @okta/fonts package to Odyssey ([#126](https://github.com/atko-eng/odyssey-design-system/issues/126)) ([f81200c](https://github.com/atko-eng/odyssey-design-system/commit/f81200cf39c88ea7dceae4906e17c887293ce429))
+- filter storybook VRT by section changed ([#133](https://github.com/atko-eng/odyssey-design-system/issues/133)) ([2a8b348](https://github.com/atko-eng/odyssey-design-system/commit/2a8b34849497c916b6514424f122e48be7485f39))
+- improve visual regression test script to handle only unresolved tests ([#141](https://github.com/atko-eng/odyssey-design-system/issues/141)) ([316b4cc](https://github.com/atko-eng/odyssey-design-system/commit/316b4ccbd09484957d0d973cdef4ac549640afd0))
+- relocate & upgrade odyssey contributions stack ([#134](https://github.com/atko-eng/odyssey-design-system/issues/134)) ([b2eb9e1](https://github.com/atko-eng/odyssey-design-system/commit/b2eb9e1f176f57dffeb4b753bcf938ca957d4eef))
+- restructure packages ([#139](https://github.com/atko-eng/odyssey-design-system/issues/139)) ([dcad1a4](https://github.com/atko-eng/odyssey-design-system/commit/dcad1a4f621c3b52f6eba9bfaf21428440a12e3c))
+
+### Bug Fixes
+
+- peer dep issue in Unified UI Shell for Aerial team ([#132](https://github.com/atko-eng/odyssey-design-system/issues/132)) ([7955114](https://github.com/atko-eng/odyssey-design-system/commit/7955114f9f2300168ac6106a1d21c5000b826dfd))
+- update lerna config and scripts for odyssey release ([#145](https://github.com/atko-eng/odyssey-design-system/issues/145)) ([ed9ef66](https://github.com/atko-eng/odyssey-design-system/commit/ed9ef66d4261011ef5bdd72d75d5f1beaa859504))
+
 ## [1.48.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.47.0...v1.48.0) (2025-11-13)
 
 ### Features

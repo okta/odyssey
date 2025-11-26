@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.49.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.48.0...v1.49.0) (2025-11-26)
+
+### Features
+
+- add new component ProgressBar ([#140](https://github.com/atko-eng/odyssey-design-system/issues/140)) ([2ec02eb](https://github.com/atko-eng/odyssey-design-system/commit/2ec02ebdea561dc4c3f29070de6df353e72b4478))
+- filter storybook VRT by section changed ([#133](https://github.com/atko-eng/odyssey-design-system/issues/133)) ([2a8b348](https://github.com/atko-eng/odyssey-design-system/commit/2a8b34849497c916b6514424f122e48be7485f39))
+
 ## [1.48.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.47.0...v1.48.0) (2025-11-13)
 
 ### Features

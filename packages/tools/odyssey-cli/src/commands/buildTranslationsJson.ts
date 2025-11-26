@@ -1,13 +1,12 @@
 // This was originally copied over from `@okta/ui-build-tools` own internal node script:
 // https://github.com/okta/ui-build-tools/blob/main/packages/clis/i18n/properties-to-json.js
 
-import { existsSync } from "node:fs";
 import { mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import { basename, extname, join, resolve } from "node:path";
 import properties from "properties";
 import { type CommandModule } from "yargs";
 
-import { getLogger } from "../utils";
+import { getHasFileOrDirectory, getLogger } from "../utils";
 
 export type BuildTranslationsJsonArgs = {
   jsonOutputPath: string;
@@ -37,7 +36,8 @@ const convertPropertiesToJson = async ({
   const sourceDirectory = resolve(propertiesFilesPath);
   const outputDirectory = resolve(jsonOutputPath);
 
-  if (!existsSync(sourceDirectory)) {
+  const hasSourceDirectory = await getHasFileOrDirectory(sourceDirectory);
+  if (!hasSourceDirectory) {
     log.warn(
       `Translations are not yet setup.
 
