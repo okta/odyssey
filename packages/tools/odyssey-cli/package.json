@@ -3,20 +3,30 @@
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "sideEffects": false,
-  "private": true,
   "description": "Internal CLI tools for the Odyssey monorepo",
   "bin": "./dist/index.js",
   "main": "./dist/index.js",
   "files": [
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atko-eng/odyssey-design-system",
+    "directory": "packages/tools/odyssey-cli"
+  },
   "scripts": {
     "build:clean": "rimraf dist",
     "build": "yarn build:clean && tsc",
+    "build:watch": "yarn build:clean && tsc --watch",
     "test": "NODE_ENV=test vitest run --reporter=default"
   },
   "devDependencies": {
     "@types/node": "^24.1.0",
+    "inquirer": "^12.10.0",
+    "inquirer-autocomplete-standalone": "^0.8.1",
+    "memfs": "^4.50.0",
+    "msw": "^2.10.5",
+    "open": "^11.0.0",
     "properties": "1.2.1",
     "rimraf": "^6.0.1",
     "tsx": "^4.7.3",
@@ -24,5 +34,5 @@
     "vitest": "^3.2.4",
     "yargs": "^17.7.2"
   },
-  "version": "1.48.0"
+  "version": "1.49.0"
 }

@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.49.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.48.0...v1.49.0) (2025-11-26)
+
+### Features
+
+- add i18n init script ([#137](https://github.com/atko-eng/odyssey-design-system/issues/137)) ([6ef92bb](https://github.com/atko-eng/odyssey-design-system/commit/6ef92bb6ef7202e69274170226ce4d1afb4cca1c))
+- restructure packages ([#139](https://github.com/atko-eng/odyssey-design-system/issues/139)) ([dcad1a4](https://github.com/atko-eng/odyssey-design-system/commit/dcad1a4f621c3b52f6eba9bfaf21428440a12e3c))
+
 ## [1.48.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.47.0...v1.48.0) (2025-11-13)
 
 ### Features

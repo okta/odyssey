@@ -13,7 +13,7 @@
 const branchName = process.env.CURRENT_BRANCH_NAME || "";
 const parentBranchName =
   process.env.BASE_BRANCH_NAME === "null" || !process.env.BASE_BRANCH_NAME
-    ? "main"
+    ? "master"
     : process.env.BASE_BRANCH_NAME;
 const commitHash = process.env.SHA || "";
 
@@ -43,6 +43,7 @@ const applitoolsConfig = {
   serverUrl: "https://oktaeyes.applitools.com",
   testConcurrency: 20,
   waitBeforeCapture: 2000,
+  include: new RegExp(process.env.SCOPED_COMPONENTS || ".*", "i"),
 };
 
 module.exports = applitoolsConfig;

@@ -1,0 +1,86 @@
+{
+  "name": "@okta/ui-stacks-component-libraries-odyssey-contributions",
+  "version": "1.0.0",
+  "stackVersion": 3,
+  "type": "build",
+  "examplePackage": "@okta/odyssey-contributions-example-components",
+  "files": [
+    "files/api-extractor.json",
+    "files/tsconfig.json",
+    {
+      "name": "files/tsconfig.project.json",
+      "allowEdit": true
+    },
+    "files/tsconfig.production.json",
+    {
+      "name": "files/tsconfig.production.project.json",
+      "allowEdit": true
+    },
+    "files/vite.config.ts",
+    {
+      "name": "files/vite.config.project.ts",
+      "allowEdit": true
+    },
+    "files/vitest.config.ts",
+    {
+      "name": "files/vitest.config.project.ts",
+      "allowEdit": true
+    },
+    "files/vitest-browser-setup.ts",
+    "files/vitest-jsdom-setup.ts",
+    "files/vitest-node-setup.ts",
+    {
+      "name": "files/src/tsconfig.json",
+      "allowEdit": false,
+      "destinationPath": "src/tsconfig.json"
+    }
+  ],
+  "packageJson": {
+    "devDependencies": {
+      "@microsoft/api-extractor": "^7.53.3",
+      "@okta/odyssey-cli": "workspace:*",
+      "@okta/odyssey-react-mui": "1.44.0",
+      "@okta/ok-ui": "^4.16.0",
+      "@okta/tools.i18n.pseudo-loc": "^1.0.0-99-gc858246",
+      "@testing-library/dom": "^10.4",
+      "@testing-library/jest-dom": "^6.8",
+      "@testing-library/react": "^16.3",
+      "@testing-library/user-event": "14.x",
+      "@types/react": "18.x",
+      "@types/react-dom": "18.x",
+      "@vitejs/plugin-react": "^5.0",
+      "@vitest/browser": "^3.2",
+      "@vitest/coverage-v8": "^3.2",
+      "@vitest/ui": "^3.2",
+      "concurrently": "^9.2.1",
+      "jest-axe": "^10.0",
+      "jsdom": "^26.1",
+      "msw": "^2.10.5",
+      "playwright": "^1.55.0",
+      "react": "^18.3.1",
+      "react-dom": "^18.3.1",
+      "regenerator-runtime": "^0.14.1",
+      "rimraf": "^6.0.1",
+      "typescript": "^5.9.2",
+      "vite": "^7.1",
+      "vite-plugin-svgr": "^4.5",
+      "vitest": "^3.2"
+    },
+    "scripts": {
+      "build:clean": "rimraf dist",
+      "build:source": "yarn vite build",
+      "build:translationsJson": "odyssey-cli build:translationsJson",
+      "build:types": "tsc --project tsconfig.production.project.json && api-extractor run --local && rimraf dist/.temp-types",
+      "build": "yarn build:clean && yarn build:source && yarn build:translationsJson && yarn build:types",
+      "dev:build-source": "yarn build:source --watch",
+      "dev:build-types": "yarn build:types --watch",
+      "dev": "yarn concurrently npm:dev:build-source npm:dev:build-types",
+      "generate:pseudoLocales": "yarn pseudo-loc generate --resourcePath src/properties",
+      "generate:i18n": "odyssey-cli generate:i18n",
+      "playwright-install": "yarn playwright install --with-deps chromium",
+      "provision": "yarn ok-ui stack-provision",
+      "test": "NODE_ENV=test vitest run --reporter=default",
+      "typecheck": "tsc --project src/tsconfig.json"
+    }
+  }
+}
