@@ -48,21 +48,27 @@ export type BannerProps = {
    */
   text: string;
 } & Pick<HtmlProps, "testId" | "translate"> &
-  (
-    | {
+  // if linkText is provided, either linkUrl or onLinkClick must be provided
+  (| {
         linkRel?: LinkProps["rel"];
         linkTarget?: LinkProps["target"];
         linkText: string;
-        /**
-         * If defined, the Banner will include a link to the URL
-         */
         linkUrl: LinkProps["href"];
+        onLinkClick?: never;
+      }
+    | {
+        linkRel?: never;
+        linkTarget?: never;
+        linkText: string;
+        linkUrl?: never;
+        onLinkClick: LinkProps["onClick"];
       }
     | {
         linkRel?: never;
         linkTarget?: never;
         linkText?: never;
         linkUrl?: never;
+        onLinkClick?: never;
       }
   );
 
@@ -72,10 +78,11 @@ const Banner = ({
   linkText,
   linkUrl,
   onClose,
+  onLinkClick,
   role,
   severity,
-  text,
   testId,
+  text,
   translate,
 }: BannerProps) => {
   const { t } = useTranslation();
@@ -92,9 +99,10 @@ const Banner = ({
         {t(`severity.${severity}`)}
       </ScreenReaderText>
       <AlertTitle translate={translate}>{text}</AlertTitle>
-      {linkUrl && (
+      {linkText && (
         <Link
-          href={linkUrl}
+          href={linkUrl ?? "#"}
+          onClick={onLinkClick}
           rel={linkRel}
           target={linkTarget}
           translate={translate}

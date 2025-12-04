@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -23,14 +23,14 @@ const CopyIcon = forwardRef<SVGSVGElement, CopyIconProps>((props, ref) => {
     <SvgIcon
       fill="none"
       ref={ref}
-      viewBox="0 0 24 24"
+      viewBox="0 0 16 16"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
       <>
         <path
           clipRule="evenodd"
-          d="M3.063 2.125h-1V15a3 3 0 0 0 3 3H18V5.125a3 3 0 0 0-3-3H3.062Zm1 12.875V4.125H15a1 1 0 0 1 1 1V16H5.062a1 1 0 0 1-1-1ZM20 7v12a1 1 0 0 1-1 1H6v2h13a3 3 0 0 0 3-3V7h-2Z"
+          d="M2.042 1.417h-.667V10a2 2 0 0 0 2 2H12V3.417a2 2 0 0 0-2-2H2.042ZM2.708 10V2.75H10c.368 0 .667.298.667.667v7.25H3.375A.667.667 0 0 1 2.708 10Zm10.625-5.333v8a.667.667 0 0 1-.666.666H4v1.334h8.667a2 2 0 0 0 2-2v-8h-1.334Z"
           fill="currentColor"
           fillRule="evenodd"
         />

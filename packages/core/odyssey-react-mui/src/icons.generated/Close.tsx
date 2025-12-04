@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -23,14 +23,14 @@ const CloseIcon = forwardRef<SVGSVGElement, CloseIconProps>((props, ref) => {
     <SvgIcon
       fill="none"
       ref={ref}
-      viewBox="0 0 24 24"
+      viewBox="0 0 16 16"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
       <>
         <path
           clipRule="evenodd"
-          d="m10.586 12-4.293 4.293 1.414 1.414L12 13.414l4.293 4.293 1.414-1.414L13.414 12l4.293-4.293-1.414-1.414L12 10.586 7.707 6.293 6.293 7.707 10.586 12Z"
+          d="M8 7.057 4.471 3.53l-.942.942 3.528 3.53-3.528 3.528.942.943 3.53-3.53 3.528 3.53.942-.943L8.943 8l3.528-3.528-.942-.943L8 7.057Z"
           fill="currentColor"
           fillRule="evenodd"
         />

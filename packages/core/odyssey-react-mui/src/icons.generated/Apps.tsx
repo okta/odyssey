@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -23,14 +23,14 @@ const AppsIcon = forwardRef<SVGSVGElement, AppsIconProps>((props, ref) => {
     <SvgIcon
       fill="none"
       ref={ref}
-      viewBox="0 0 24 24"
+      viewBox="0 0 16 16"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
       <>
         <path
           clipRule="evenodd"
-          d="M6.5 2a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9ZM4 6.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0ZM6.5 13a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9ZM4 17.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0Zm9-11a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM17.5 4a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 9a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9ZM15 17.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0Z"
+          d="M4.333 1.333a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-1.666 3a1.667 1.667 0 1 1 3.333 0 1.667 1.667 0 0 1-3.333 0Zm1.666 4.334a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-1.666 3a1.667 1.667 0 1 1 3.333 0 1.667 1.667 0 0 1-3.333 0Zm6-7.334a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-1.666a1.667 1.667 0 1 0 0 3.333 1.667 1.667 0 0 0 0-3.333Zm0 6a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-1.667 3a1.667 1.667 0 1 1 3.333 0 1.667 1.667 0 0 1-3.333 0Z"
           fill="currentColor"
           fillRule="evenodd"
         />

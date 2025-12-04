@@ -66,21 +66,27 @@ export type CalloutProps = {
       text?: never;
     }
 ) &
-  (
-    | {
+  // if linkText is provided, either linkUrl or onLinkClick must be provided
+  (| {
         linkRel?: LinkProps["rel"];
         linkTarget?: LinkProps["target"];
         linkText: string;
-        /**
-         * If defined, the Callout will include a link to the URL
-         */
         linkUrl: LinkProps["href"];
+        onLinkClick?: never;
+      }
+    | {
+        linkRel?: never;
+        linkTarget?: never;
+        linkText: string;
+        linkUrl?: never;
+        onLinkClick: LinkProps["onClick"];
       }
     | {
         linkRel?: never;
         linkTarget?: never;
         linkText?: never;
         linkUrl?: never;
+        onLinkClick?: never;
       }
   ) &
   Pick<HtmlProps, "testId" | "translate">;
@@ -99,6 +105,7 @@ const Callout = ({
   linkTarget,
   linkText,
   linkUrl,
+  onLinkClick,
   role,
   severity,
   testId,
@@ -128,10 +135,11 @@ const Callout = ({
       <ContentContainer odysseyDesignTokens={odysseyDesignTokens}>
         {children && <Box component="div">{children}</Box>}
         {text && <Paragraph>{text}</Paragraph>}
-        {linkUrl && (
+        {linkText && (
           <Box>
             <Link
-              href={linkUrl}
+              href={linkUrl ?? "#"}
+              onClick={onLinkClick}
               rel={linkRel}
               target={linkTarget}
               variant="monochrome"

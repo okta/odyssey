@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -24,14 +24,14 @@ const RefreshIcon = forwardRef<SVGSVGElement, RefreshIconProps>(
       <SvgIcon
         fill="none"
         ref={ref}
-        viewBox="0 0 24 24"
+        viewBox="0 0 16 16"
         xmlns="http://www.w3.org/2000/svg"
         {...props}
       >
         <>
           <path
             clipRule="evenodd"
-            d="M12 3a9 9 0 0 0-9 9H1C1 5.925 5.925 1 12 1c3.722 0 7.01 1.848 9 4.674V2h2v5.223c0 .12 0 .262-.01.387a1.508 1.508 0 0 1-.153.571 1.5 1.5 0 0 1-.656.656 1.507 1.507 0 0 1-.571.153c-.125.01-.268.01-.387.01H16V7h3.485A8.991 8.991 0 0 0 12 3Zm0 18a9 9 0 0 0 9-9h2c0 6.075-4.925 11-11 11-3.722 0-7.01-1.848-9-4.674V22H1v-5.223c0-.12 0-.262.01-.387a1.51 1.51 0 0 1 .153-.571 1.5 1.5 0 0 1 .656-.655c.218-.112.426-.142.571-.154.125-.01.268-.01.387-.01H8v2H4.515A8.991 8.991 0 0 0 12 21Z"
+            d="M8 2a6 6 0 0 0-6 6H.667A7.333 7.333 0 0 1 14 3.783v-2.45h1.333v3.482c0 .08 0 .175-.006.258a1.004 1.004 0 0 1-.103.381 1 1 0 0 1-.437.437 1.005 1.005 0 0 1-.38.102C14.323 6 14.228 6 14.149 6h-3.482V4.667h2.323A5.994 5.994 0 0 0 8 2Zm0 12a6 6 0 0 0 6-6h1.333A7.333 7.333 0 0 1 2 12.217v2.45H.667v-3.482c0-.08 0-.175.006-.258a1.01 1.01 0 0 1 .103-.381 1 1 0 0 1 .437-.437c.145-.074.284-.094.38-.102.084-.007.179-.007.258-.007h3.482v1.333H3.01A5.994 5.994 0 0 0 8 14Z"
             fill="currentColor"
             fillRule="evenodd"
           />
