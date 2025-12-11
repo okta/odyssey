@@ -19,6 +19,11 @@ import {
   MenuButton,
   MenuItem,
 } from "@okta/odyssey-react-mui";
+import {
+  LinkIcon,
+  NotificationIcon,
+  SyncIcon,
+} from "@okta/odyssey-react-mui/icons";
 import { action } from "@storybook/addon-actions";
 
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
@@ -63,7 +68,9 @@ export const AllFeatures: Story = {
         Optional brief description about the section or page you are about to
         encounter below.
       </PageHeader.Description>
-      <PageHeader.Documentation href="#" label="Documentation" />
+      <PageHeader.Documentation href="#">
+        Documentation
+      </PageHeader.Documentation>
       <PageHeader.Actions>
         <MenuButton buttonLabel="Secondary">
           <MenuItem onClick={action("Action click")}>Action</MenuItem>
@@ -115,11 +122,9 @@ export const WithBreadcrumbs: Story = {
 export const WithBackLink: Story = {
   render: () => (
     <PageHeader>
-      <PageHeader.BackLink
-        href="#"
-        label="Back to list"
-        onClick={action("Back to list click")}
-      />
+      <PageHeader.BackLink href="#" onClick={action("Back to list click")}>
+        Back to list
+      </PageHeader.BackLink>
       <PageHeader.Title>Page title</PageHeader.Title>
     </PageHeader>
   ),
@@ -148,7 +153,9 @@ export const WithDocumentation: Story = {
   render: () => (
     <PageHeader>
       <PageHeader.Title>Page title</PageHeader.Title>
-      <PageHeader.Documentation href="#" label="Documentation" />
+      <PageHeader.Documentation href="#">
+        Documentation
+      </PageHeader.Documentation>
     </PageHeader>
   ),
   parameters: {
@@ -287,7 +294,7 @@ export const OrderIndependent: Story = {
       </PageHeader.Breadcrumbs>
 
       {/* Documentation also in sidebar */}
-      <PageHeader.Documentation href="#" label="Help" />
+      <PageHeader.Documentation href="#">Help</PageHeader.Documentation>
     </PageHeader>
   ),
   parameters: {
@@ -464,6 +471,37 @@ export const CombinedTitleAndDescriptionOverflow: Story = {
       description: {
         story:
           "Demonstrates combining `wordBreak` and `clampLines` on both title and description to handle complex overflow scenarios.",
+      },
+    },
+  },
+};
+
+export const WithRichMetadata: Story = {
+  render: () => (
+    <PageHeader>
+      <PageHeader.Title>Default policy</PageHeader.Title>
+      <PageHeader.Metadata
+        items={[
+          { text: "Staged branch created", icon: <SyncIcon /> },
+          {
+            text: "Monitoring staged branch",
+            icon: <NotificationIcon />,
+            status: { label: "ENABLED", severity: "success" },
+          },
+          { text: "Connection: con_DM5TbREdm8tDPR", icon: <LinkIcon /> },
+        ]}
+      />
+      <PageHeader.Description>
+        Demonstrates metadata with icons, status badges, and mixed content
+        types.
+      </PageHeader.Description>
+    </PageHeader>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Shows how metadata can include Odyssey icons, status badges, and mixed content. Icons provide visual context and help users quickly identify different types of information.",
       },
     },
   },

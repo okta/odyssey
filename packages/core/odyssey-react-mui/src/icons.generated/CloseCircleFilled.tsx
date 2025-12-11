@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -26,14 +26,14 @@ const CloseCircleFilledIcon = forwardRef<
     <SvgIcon
       fill="none"
       ref={ref}
-      viewBox="0 0 24 24"
+      viewBox="0 0 16 16"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
       <>
         <path
           clipRule="evenodd"
-          d="M23 12c0 6.075-4.925 11-11 11S1 18.075 1 12 5.925 1 12 1s11 4.925 11 11ZM7.05 15.536 10.586 12 7.05 8.464 8.464 7.05 12 10.586l3.536-3.536 1.414 1.414L13.414 12l3.536 3.536-1.414 1.414L12 13.414 8.464 16.95 7.05 15.536Z"
+          d="M15.333 8A7.333 7.333 0 1 1 .667 8a7.333 7.333 0 0 1 14.666 0ZM4.7 10.357 7.057 8 4.7 5.643l.943-.943L8 7.057 10.357 4.7l.943.943L8.943 8l2.357 2.357-.943.943L8 8.943 5.643 11.3l-.943-.943Z"
           fill="currentColor"
           fillRule="evenodd"
         />

@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -23,14 +23,14 @@ const UploadIcon = forwardRef<SVGSVGElement, UploadIconProps>((props, ref) => {
     <SvgIcon
       fill="none"
       ref={ref}
-      viewBox="0 0 24 24"
+      viewBox="0 0 16 16"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
       <>
         <path
           clipRule="evenodd"
-          d="M5.707 9.707 11 4.414V18h2V4.414l5.293 5.293 1.414-1.414-6.434-6.434-.016-.017c-.085-.084-.185-.185-.281-.266a1.508 1.508 0 0 0-.512-.295 1.5 1.5 0 0 0-.927 0 1.508 1.508 0 0 0-.513.295 4.949 4.949 0 0 0-.28.266l-.017.017-6.434 6.434 1.414 1.414ZM5 20v-4H3v4a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3v-4h-2v4a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1Z"
+          d="m3.805 6.471 3.528-3.528V12h1.334V2.943l3.528 3.528.943-.942-4.29-4.29-.01-.01a2.89 2.89 0 0 0-.187-.178 1.005 1.005 0 0 0-.342-.197 1 1 0 0 0-.618 0 .994.994 0 0 0-.341.197c-.064.054-.131.121-.188.177l-.01.011-4.29 4.29.943.942Zm-.472 6.862v-2.666H2v2.666a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-2.666h-1.333v2.666A.667.667 0 0 1 12 14H4a.667.667 0 0 1-.667-.667Z"
           fill="currentColor"
           fillRule="evenodd"
         />

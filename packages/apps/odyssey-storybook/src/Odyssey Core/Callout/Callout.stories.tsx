@@ -18,10 +18,16 @@ import {
 } from "@okta/odyssey-react-mui";
 import { queryOdysseySelector } from "@okta/odyssey-react-mui/test-selectors";
 import { Meta, StoryObj } from "@storybook/react";
-import { expect } from "@storybook/test";
+import { expect, fn, userEvent, within } from "@storybook/test";
 
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 import { PlaywrightProps } from "../../tools/storybookTypes.js";
+
+type PlayType = {
+  args: CalloutProps;
+  canvasElement: HTMLElement;
+  step: PlaywrightProps<CalloutProps>["step"];
+};
 
 const storybookMeta: Meta<CalloutProps> = {
   component: Callout,
@@ -77,6 +83,14 @@ const storybookMeta: Meta<CalloutProps> = {
       table: {
         type: {
           summary: "string",
+        },
+      },
+    },
+    onLinkClick: {
+      description: "Function to call when the link is clicked",
+      table: {
+        type: {
+          summary: "func",
         },
       },
     },
@@ -258,6 +272,27 @@ export const TitleWithLink: StoryObj<CalloutProps> = {
       }).element;
 
       expect(element).toBeVisible();
+    });
+  },
+};
+
+export const TitleWithLinkWithOnLinkClick: StoryObj<CalloutProps> = {
+  args: {
+    linkText: "Visit fueling console",
+    onLinkClick: fn(),
+    role: "alert",
+    severity: "error",
+    text: undefined,
+    title: "Safety checks failed",
+  },
+  play: async ({ args, canvasElement, step }: PlayType) => {
+    await step("check for the link text and click it", async () => {
+      const canvas = within(canvasElement);
+      const link = canvas.getByText<HTMLAnchorElement>("Visit fueling console");
+      await expect(link?.tagName).toBe("A");
+      await expect(link?.href).toBe(`${link?.baseURI}#`);
+      await userEvent.click(link);
+      await expect(args.onLinkClick).toHaveBeenCalled();
     });
   },
 };

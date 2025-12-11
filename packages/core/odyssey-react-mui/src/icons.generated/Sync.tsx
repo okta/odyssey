@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -23,14 +23,14 @@ const SyncIcon = forwardRef<SVGSVGElement, SyncIconProps>((props, ref) => {
     <SvgIcon
       fill="none"
       ref={ref}
-      viewBox="0 0 24 24"
+      viewBox="0 0 16 16"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
       <>
         <path
           clipRule="evenodd"
-          d="M17.293 2.707 19.586 5H5a3 3 0 0 0-3 3v5.757l2-2V8a1 1 0 0 1 1-1h14.586l-2.293 2.293 1.414 1.414 3.434-3.434.017-.017c.084-.084.185-.184.266-.28.094-.111.22-.28.296-.512a1.5 1.5 0 0 0 0-.928 1.508 1.508 0 0 0-.296-.512c-.081-.096-.182-.196-.266-.28l-.017-.017-3.434-3.434-1.414 1.414ZM20 16v-3.757l2-2V16a3 3 0 0 1-3 3H4.414l2.293 2.293-1.414 1.414-3.434-3.434-.017-.017c-.084-.084-.185-.184-.266-.28a1.506 1.506 0 0 1-.295-.512 1.5 1.5 0 0 1 0-.927c.075-.233.2-.402.295-.513.081-.096.182-.196.266-.28l.017-.017 3.434-3.434 1.414 1.414L4.414 17H19a1 1 0 0 0 1-1Z"
+          d="M3.333 4.667h9.724L11.53 6.195l.942.943 2.29-2.29.01-.01c.057-.057.124-.124.178-.187a1 1 0 0 0 .197-.342 1 1 0 0 0 0-.618 1.006 1.006 0 0 0-.197-.342c-.054-.063-.121-.13-.177-.187l-.011-.01-2.29-2.29-.942.943 1.528 1.528H3.333a2 2 0 0 0-2 2v3.839l1.334-1.334V5.333c0-.368.298-.666.666-.666Zm10 6V8.162l1.334-1.334v3.839a2 2 0 0 1-2 2H2.943l1.528 1.528-.942.943-2.29-2.29-.01-.01a3.274 3.274 0 0 1-.178-.187 1.006 1.006 0 0 1-.197-.342 1 1 0 0 1 0-.618 1 1 0 0 1 .197-.342c.054-.063.121-.13.177-.187l.011-.01 2.29-2.29.942.943-1.528 1.528h9.724a.667.667 0 0 0 .666-.666Z"
           fill="currentColor"
           fillRule="evenodd"
         />

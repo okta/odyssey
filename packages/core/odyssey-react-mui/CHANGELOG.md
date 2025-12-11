@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.50.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.49.0...v1.50.0) (2025-12-11)
+
+### Features
+
+- add onLinkClick functionality to Banner and Callout components ([#142](https://github.com/atko-eng/odyssey-design-system/issues/142)) ([d7adb0a](https://github.com/atko-eng/odyssey-design-system/commit/d7adb0a211cecb0c43bd5f9864220da7d00dbcf9))
+- cleanup odyssey-cli commands ([#143](https://github.com/atko-eng/odyssey-design-system/issues/143)) ([9f7af0d](https://github.com/atko-eng/odyssey-design-system/commit/9f7af0d1239b3152ccca3e74157bb8ffd7d72425))
+
+### Bug Fixes
+
+- add new icons and adjust viewbox to 16x16 ([#130](https://github.com/atko-eng/odyssey-design-system/issues/130)) ([d606673](https://github.com/atko-eng/odyssey-design-system/commit/d606673837136aa1fd043a0e573bdc709654f04b))
+- adds 101 z-index for top nav ([#154](https://github.com/atko-eng/odyssey-design-system/issues/154)) ([8dae2d4](https://github.com/atko-eng/odyssey-design-system/commit/8dae2d4489619deab1cbec0556c68a39d8f665e9))
+- prevent layout shift from time picker scrollbars ([#148](https://github.com/atko-eng/odyssey-design-system/issues/148)) ([50fdc10](https://github.com/atko-eng/odyssey-design-system/commit/50fdc1001ef267fa971ec36ae189523ccb7e39ec))
+
 ## [1.49.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.48.0...v1.49.0) (2025-11-26)
 
 **Note:** Version bump only for package @okta/odyssey-react-mui

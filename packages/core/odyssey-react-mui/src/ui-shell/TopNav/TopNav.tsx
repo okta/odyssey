@@ -25,7 +25,7 @@ import {
 } from "../../ui-shell/UiShellProvider.js";
 import {
   TOP_NAV_HEIGHT,
-  UI_SHELL_BASE_Z_INDEX,
+  UI_SHELL_RAISED_Z_INDEX,
 } from "../uiShellSharedConstants.js";
 
 const StyledLeftSideContainer = styled("div")(() => ({
@@ -55,7 +55,7 @@ const StyledTopNavContainer = styled("div", {
   paddingInline: odysseyDesignTokens.Spacing8,
   position: "relative",
   transition: `box-shadow ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
-  zIndex: UI_SHELL_BASE_Z_INDEX,
+  zIndex: UI_SHELL_RAISED_Z_INDEX,
 
   ...(topNavBackgroundColor === odysseyDesignTokens.HueNeutralWhite && {
     borderBottom: `${odysseyDesignTokens.BorderWidthMain} ${odysseyDesignTokens.BorderStyleMain} ${odysseyDesignTokens.HueNeutral100}`,

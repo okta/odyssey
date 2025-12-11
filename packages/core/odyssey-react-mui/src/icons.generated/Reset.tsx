@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -23,14 +23,14 @@ const ResetIcon = forwardRef<SVGSVGElement, ResetIconProps>((props, ref) => {
     <SvgIcon
       fill="none"
       ref={ref}
-      viewBox="0 0 24 24"
+      viewBox="0 0 16 16"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
       <>
         <path
           clipRule="evenodd"
-          d="M3 12a9 9 0 0 1 16.485-5H16v2h5.223c.12 0 .262 0 .387-.01a1.51 1.51 0 0 0 .571-.153 1.5 1.5 0 0 0 .655-.656c.112-.218.142-.426.154-.571.01-.125.01-.268.01-.387V2h-2v3.674A10.987 10.987 0 0 0 12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11h-2a9 9 0 1 1-18 0Z"
+          d="M2 8a6 6 0 0 1 10.99-3.333h-2.323V6h3.482c.08 0 .174 0 .258-.007.096-.008.235-.028.38-.102a1 1 0 0 0 .437-.437 1.01 1.01 0 0 0 .103-.38c.006-.084.006-.18.006-.259V1.333H14v2.45A7.333 7.333 0 1 0 15.333 8H14A6 6 0 0 1 2 8Z"
           fill="currentColor"
           fillRule="evenodd"
         />

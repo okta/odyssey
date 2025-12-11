@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -24,14 +24,14 @@ const CollapseRightIcon = forwardRef<SVGSVGElement, CollapseRightIconProps>(
       <SvgIcon
         fill="none"
         ref={ref}
-        viewBox="0 0 24 24"
+        viewBox="0 0 16 16"
         xmlns="http://www.w3.org/2000/svg"
         {...props}
       >
         <>
           <path
             clipRule="evenodd"
-            d="M22 22h-2V2h2v20Zm-7.414-9H1v-2h13.586L9.293 5.707l1.414-1.414 6.434 6.434.017.017c.084.084.185.184.266.28.094.111.22.28.296.513a1.5 1.5 0 0 1 0 .926 1.506 1.506 0 0 1-.296.513 4.876 4.876 0 0 1-.266.28l-.017.017-6.434 6.434-1.414-1.414L14.586 13Z"
+            d="M14.667 14.667h-1.334V1.333h1.334v13.334Zm-4.943-6H.667V7.333h9.057L6.195 3.805l.943-.943 4.29 4.29.01.01c.057.057.124.124.178.187a1 1 0 0 1 .197.342 1 1 0 0 1 0 .618 1 1 0 0 1-.197.342 3.26 3.26 0 0 1-.178.187l-.01.01-4.29 4.29-.943-.943 3.529-3.528Z"
             fill="currentColor"
             fillRule="evenodd"
           />

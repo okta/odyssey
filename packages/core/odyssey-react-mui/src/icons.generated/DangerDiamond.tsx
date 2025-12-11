@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -24,14 +24,14 @@ const DangerDiamondIcon = forwardRef<SVGSVGElement, DangerDiamondIconProps>(
       <SvgIcon
         fill="none"
         ref={ref}
-        viewBox="0 0 24 24"
+        viewBox="0 0 16 16"
         xmlns="http://www.w3.org/2000/svg"
         {...props}
       >
         <>
           <path
             clipRule="evenodd"
-            d="M14.121 1.707a3 3 0 0 0-4.242 0L1.707 9.88a3 3 0 0 0 0 4.242l8.172 8.172a3 3 0 0 0 4.242 0l8.172-8.172a3 3 0 0 0 0-4.242L14.12 1.707Zm-2.828 1.414a1 1 0 0 1 1.414 0l8.172 8.172a1 1 0 0 1 0 1.414l-8.172 8.172a1 1 0 0 1-1.414 0L3.12 12.707a1 1 0 0 1 0-1.414l8.172-8.172ZM12 13a1 1 0 0 1-1-1V7h2v5a1 1 0 0 1-1 1Zm0 1.75a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z"
+            d="M9.414 1.138a2 2 0 0 0-2.828 0L1.138 6.586a2 2 0 0 0 0 2.828l5.448 5.448a2 2 0 0 0 2.828 0l5.448-5.448a2 2 0 0 0 0-2.828L9.414 1.138Zm-1.885.943c.26-.26.682-.26.942 0l5.448 5.448c.26.26.26.682 0 .942L8.471 13.92a.667.667 0 0 1-.942 0L2.08 8.471a.667.667 0 0 1 0-.942L7.529 2.08ZM8 8.667A.667.667 0 0 1 7.333 8V4.667h1.334V8A.667.667 0 0 1 8 8.667Zm0 1.166A.833.833 0 1 0 8 11.5a.833.833 0 0 0 0-1.667Z"
             fill="currentColor"
             fillRule="evenodd"
           />

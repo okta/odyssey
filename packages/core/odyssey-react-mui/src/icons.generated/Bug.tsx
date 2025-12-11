@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -23,14 +23,14 @@ const BugIcon = forwardRef<SVGSVGElement, BugIconProps>((props, ref) => {
     <SvgIcon
       fill="none"
       ref={ref}
-      viewBox="0 0 24 24"
+      viewBox="0 0 16 16"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
       <>
         <path
           clipRule="evenodd"
-          d="M17 16V8h-4v12.9a5.002 5.002 0 0 0 4-4.9Zm-6-8H7v8a5.002 5.002 0 0 0 4 4.9V8ZM5 8v4.382l-3.447 1.724.894 1.788L5 14.618V16c0 1.05.231 2.046.646 2.94l-2.353 2.353 1.414 1.414 2.059-2.059A6.983 6.983 0 0 0 12 23a6.983 6.983 0 0 0 5.234-2.352l2.059 2.06 1.414-1.415-2.353-2.353c.415-.894.646-1.89.646-2.94v-1.382l2.553 1.276.894-1.788L19 12.382V8h4V6h-6A5 5 0 0 0 7 6H1v2h4Zm4-2h6a3 3 0 1 0-6 0Z"
+          d="M11.333 10.667V5.333H8.667v8.6a3.334 3.334 0 0 0 2.666-3.266Zm-4-5.334H4.667v5.334a3.334 3.334 0 0 0 2.666 3.266v-8.6Zm-4 0v2.922L1.035 9.404l.596 1.192 1.702-.85v.92c0 .7.154 1.365.43 1.96l-1.568 1.57.943.942 1.373-1.373A4.655 4.655 0 0 0 8 15.333a4.655 4.655 0 0 0 3.49-1.568l1.372 1.373.943-.943-1.569-1.568a4.65 4.65 0 0 0 .43-1.96v-.922l1.702.851.597-1.192-2.298-1.15v-2.92h2.666V4h-4a3.333 3.333 0 1 0-6.666 0h-4v1.333h2.666Zm4-1.333H10a2 2 0 1 0-4 0h1.333Z"
           fill="currentColor"
           fillRule="evenodd"
         />

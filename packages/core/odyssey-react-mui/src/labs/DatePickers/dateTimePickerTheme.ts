@@ -115,7 +115,7 @@ const theme: ThemeOptions = {
     MuiMultiSectionDigitalClockSection: {
       styleOverrides: {
         root: {
-          width: "auto",
+          scrollbarWidth: "thin",
         },
         item: ({ theme }) => [
           dateStyles.default({ theme }),

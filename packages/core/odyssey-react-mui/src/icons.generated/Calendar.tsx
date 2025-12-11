@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -24,14 +24,14 @@ const CalendarIcon = forwardRef<SVGSVGElement, CalendarIconProps>(
       <SvgIcon
         fill="none"
         ref={ref}
-        viewBox="0 0 24 24"
+        viewBox="0 0 16 16"
         xmlns="http://www.w3.org/2000/svg"
         {...props}
       >
         <>
           <path
             clipRule="evenodd"
-            d="M9 1v3h6V1h2v3h5v15a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V4h5V1h2Zm6 5v2h2V6h3v3H4V6h3v2h2V6h6ZM4 11v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8H4Z"
+            d="M6 .667v2h4v-2h1.333v2h3.334v10a2 2 0 0 1-2 2H3.333a2 2 0 0 1-2-2v-10h3.334v-2H6ZM10 4v1.333h1.333V4h2v2H2.667V4h2v1.333H6V4h4ZM2.667 7.333v5.334c0 .368.298.666.666.666h9.334a.667.667 0 0 0 .666-.666V7.333H2.667Z"
             fill="currentColor"
             fillRule="evenodd"
           />

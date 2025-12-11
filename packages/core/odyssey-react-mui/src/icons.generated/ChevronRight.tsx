@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -24,16 +24,14 @@ const ChevronRightIcon = forwardRef<SVGSVGElement, ChevronRightIconProps>(
       <SvgIcon
         fill="none"
         ref={ref}
-        viewBox="0 0 24 24"
+        viewBox="0 0 16 16"
         xmlns="http://www.w3.org/2000/svg"
         {...props}
       >
         <>
           <path
-            clipRule="evenodd"
-            d="m16.707 12.707-6 6-1.414-1.414L14.586 12 9.293 6.707l1.414-1.414 6 6a1 1 0 0 1 0 1.414Z"
+            d="m11.138 8.471-4.333 4.334-.943-.943L9.724 8 5.862 4.138l.943-.943 4.333 4.334a.667.667 0 0 1 0 .942Z"
             fill="currentColor"
-            fillRule="evenodd"
           />
         </>
       </SvgIcon>

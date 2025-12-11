@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -24,14 +24,14 @@ const WarningFilledIcon = forwardRef<SVGSVGElement, WarningFilledIconProps>(
       <SvgIcon
         fill="none"
         ref={ref}
-        viewBox="0 0 24 24"
+        viewBox="0 0 16 16"
         xmlns="http://www.w3.org/2000/svg"
         {...props}
       >
         <>
           <path
             clipRule="evenodd"
-            d="M9.342 2.918c1.123-2.144 4.192-2.144 5.315 0l7.695 14.69C23.398 19.605 21.95 22 19.695 22H4.305c-2.255 0-3.703-2.395-2.657-4.392l7.694-14.69ZM12 14a1 1 0 0 1-1-1V8h2v5a1 1 0 0 1-1 1Zm0 1.75a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z"
+            d="M6.228 1.946c.749-1.43 2.795-1.43 3.544 0l5.13 9.793c.697 1.331-.269 2.928-1.772 2.928H2.87c-1.503 0-2.469-1.597-1.771-2.928l5.13-9.793ZM8 9.333a.667.667 0 0 1-.667-.666V5.333h1.334v3.334A.667.667 0 0 1 8 9.333ZM8 10.5a.833.833 0 1 0 0 1.667.833.833 0 0 0 0-1.667Z"
             fill="currentColor"
             fillRule="evenodd"
           />

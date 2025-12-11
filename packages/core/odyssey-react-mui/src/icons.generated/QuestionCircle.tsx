@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -24,14 +24,14 @@ const QuestionCircleIcon = forwardRef<SVGSVGElement, QuestionCircleIconProps>(
       <SvgIcon
         fill="none"
         ref={ref}
-        viewBox="0 0 24 24"
+        viewBox="0 0 16 16"
         xmlns="http://www.w3.org/2000/svg"
         {...props}
       >
         <>
           <path
             clipRule="evenodd"
-            d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18ZM1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12Zm11.022-4c-.82 0-1.494.675-1.494 1.494h-2A3.501 3.501 0 0 1 12.022 6a3.501 3.501 0 0 1 3.494 3.494c0 1.406-.736 2.462-1.875 3.113l-.024.014-.025.012a2.027 2.027 0 0 0-.676.579c-.195.26-.268.49-.268.647a1 1 0 1 1-2 0c0-.717.302-1.36.668-1.847a4.03 4.03 0 0 1 1.353-1.153c.592-.345.847-.782.847-1.365A1.5 1.5 0 0 0 12.022 8Zm.928 9.25a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0Z"
+            d="M8 2a6 6 0 1 0 0 12A6 6 0 0 0 8 2ZM.667 8a7.333 7.333 0 1 1 14.666 0A7.333 7.333 0 0 1 .667 8Zm7.348-2.667c-.546 0-.996.45-.996.996H5.685A2.334 2.334 0 0 1 8.015 4a2.334 2.334 0 0 1 2.33 2.33c0 .937-.492 1.64-1.251 2.075l-.016.009-.017.008a1.35 1.35 0 0 0-.45.386c-.13.173-.179.327-.179.431a.667.667 0 0 1-1.333 0c0-.478.2-.906.445-1.231a2.68 2.68 0 0 1 .902-.769c.395-.23.565-.52.565-.91 0-.546-.45-.996-.996-.996Zm.618 6.167a.833.833 0 1 1-1.666 0 .833.833 0 0 1 1.666 0Z"
             fill="currentColor"
             fillRule="evenodd"
           />

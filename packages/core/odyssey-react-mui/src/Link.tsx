@@ -16,6 +16,7 @@ import {
   ReactElement,
   ReactNode,
   RefObject,
+  useCallback,
   useImperativeHandle,
   useRef,
 } from "react";
@@ -91,12 +92,23 @@ const Link = ({
     };
   }, []);
 
+  const handleClick = useCallback(
+    (event: React.MouseEvent<HTMLAnchorElement>) => {
+      // Prevent default navigation when onClick is provided
+      if (onClick && (href === "#" || href === "")) {
+        event.preventDefault();
+      }
+      onClick?.(event);
+    },
+    [onClick, href],
+  );
+
   return (
     <MuiLink
       aria-label={ariaLabel}
       data-se={testId}
       href={href}
-      onClick={onClick}
+      onClick={onClick ? handleClick : undefined}
       ref={localLinkRef}
       rel={rel}
       target={target}

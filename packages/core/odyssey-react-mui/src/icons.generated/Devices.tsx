@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -24,14 +24,14 @@ const DevicesIcon = forwardRef<SVGSVGElement, DevicesIconProps>(
       <SvgIcon
         fill="none"
         ref={ref}
-        viewBox="0 0 24 24"
+        viewBox="0 0 16 16"
         xmlns="http://www.w3.org/2000/svg"
         {...props}
       >
         <>
           <path
             clipRule="evenodd"
-            d="M5 2a3 3 0 0 0-3 3v7a3 3 0 0 0 3 3h4v2H6v2h7v1.5a1.5 1.5 0 0 0 1.5 1.5h6a1.5 1.5 0 0 0 1.5-1.5v-10A1.5 1.5 0 0 0 20.5 9H18V5a3 3 0 0 0-3-3H5Zm11 7V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h8v-2.5A1.5 1.5 0 0 1 14.5 9H16Zm-3 6h-2v2h2v-2Zm2 5v-9h5v9h-5Z"
+            d="M3.333 1.333a2 2 0 0 0-2 2V8a2 2 0 0 0 2 2H6v1.333H4v1.334h4.667v1a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H12V3.333a2 2 0 0 0-2-2H3.333ZM10.667 6V3.333A.667.667 0 0 0 10 2.667H3.333a.667.667 0 0 0-.666.666V8c0 .368.298.667.666.667h5.334V7a1 1 0 0 1 1-1h1Zm-2 4H7.333v1.333h1.334V10ZM10 13.333v-6h3.333v6H10Z"
             fill="currentColor"
             fillRule="evenodd"
           />
