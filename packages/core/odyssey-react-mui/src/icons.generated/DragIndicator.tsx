@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -24,14 +24,14 @@ const DragIndicatorIcon = forwardRef<SVGSVGElement, DragIndicatorIconProps>(
       <SvgIcon
         fill="none"
         ref={ref}
-        viewBox="0 0 24 24"
+        viewBox="0 0 16 16"
         xmlns="http://www.w3.org/2000/svg"
         {...props}
       >
         <>
           <path
             clipRule="evenodd"
-            d="M9 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM16.5 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm0 5.667a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm1.5 4.166a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM16.5 22a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm-9-11.333a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM9 14.833a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM7.5 22a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+            d="M6 2.333a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm5 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm0 3.778a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm1 2.778a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm-1 4.778a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM5 7.11a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm1 2.78a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm-1 4.778a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
             fill="currentColor"
             fillRule="evenodd"
           />

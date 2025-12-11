@@ -9,15 +9,15 @@
   ],
   "engines": {
     "yarn": "^4.6.0",
-    "node": "<=20"
+    "node": "<=22"
   },
   "scripts": {
     "build": "yarn workspaces foreach --all --topological-dev --parallel --interlaced --exclude=@okta/odyssey-icons --exclude=@okta/odyssey-storybook run build",
     "create-contribution": "ok-ui create-package --from ./packages/contributions/example-components --output-dir ./packages/contributions",
     "eslint": "eslint .",
-    "generate:i18n": "yarn workspace @okta/odyssey-cli build && yarn workspaces foreach --all run generate:i18n",
+    "generate:i18n": "yarn workspace @okta/odyssey-cli build && yarn workspaces foreach --all --parallel run generate:i18n",
     "generate:icons": "yarn workspace @okta/odyssey-icons build && yarn workspace @okta/odyssey-react-mui generate:icons",
-    "generate:pseudoLocales": "yarn workspaces foreach --all --parallel run generate:pseudoLocales",
+    "generate:i18n:pseudoLocaleProperties": "yarn workspace @okta/odyssey-cli build && yarn workspaces foreach --all --parallel run generate:i18n:pseudoLocaleProperties",
     "lerna-publish": "lerna publish from-package --no-verify-registry --no-push --force-publish --ignore-changes 'packages/contributions/**'",
     "lerna-version": "lerna version --no-git-tag-version --include-merged-tags --conventional-commits --no-push --force-publish --ignore-changes 'packages/contributions/**'",
     "lint:fix": "HAS_SORTING=true yarn run eslint --fix",

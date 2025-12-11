@@ -1,3 +1,1 @@
-export * from "./buildTranslationsJson";
-export * from "./generateI18n";
-export * from "./initI18n";
+export { i18nCommand } from "./i18n";

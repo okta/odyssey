@@ -80,11 +80,9 @@ export const Default: Story = {
             confugo statim. Tres tenax comes quaerat arguo cibus absorbeo
             debilito.
           </PageHeader.Description>
-          <PageHeader.Documentation
-            href="#"
-            key="documentation"
-            label="Documentation"
-          />
+          <PageHeader.Documentation href="#" key="documentation">
+            Documentation
+          </PageHeader.Documentation>
           <PageHeader.Actions key="actions">
             <MenuButton buttonLabel="Secondary" key="secondary">
               <MenuItem onClick={action("Action click")}>Action</MenuItem>
@@ -177,11 +175,9 @@ export const OverlayDrawer: Story = {
               confugo statim. Tres tenax comes quaerat arguo cibus absorbeo
               debilito.
             </PageHeader.Description>
-            <PageHeader.Documentation
-              href="#"
-              key="documentation"
-              label="Documentation"
-            />
+            <PageHeader.Documentation href="#" key="documentation">
+              Documentation
+            </PageHeader.Documentation>
             <PageHeader.Actions key="actions">
               <Button
                 label={
@@ -276,11 +272,9 @@ export const EmbeddedDrawer: Story = {
               confugo statim. Tres tenax comes quaerat arguo cibus absorbeo
               debilito.
             </PageHeader.Description>
-            <PageHeader.Documentation
-              href="#"
-              key="documentation"
-              label="Documentation"
-            />
+            <PageHeader.Documentation href="#" key="documentation">
+              Documentation
+            </PageHeader.Documentation>
             <PageHeader.Actions key="actions">
               <Button
                 label={
@@ -356,11 +350,9 @@ export const FullWidth: Story = {
             confugo statim. Tres tenax comes quaerat arguo cibus absorbeo
             debilito.
           </PageHeader.Description>
-          <PageHeader.Documentation
-            href="#"
-            key="documentation"
-            label="Documentation"
-          />
+          <PageHeader.Documentation href="#" key="documentation">
+            Documentation
+          </PageHeader.Documentation>
           <PageHeader.Actions key="actions">
             <MenuButton buttonLabel="Secondary" key="secondary">
               <MenuItem onClick={action("Action click")}>Action</MenuItem>

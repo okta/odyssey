@@ -1,13 +1,13 @@
 {
   "name": "@okta/odyssey-storybook",
-  "version": "1.49.0",
+  "version": "1.50.1",
   "description": "Documentation for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "sideEffects": false,
   "type": "module",
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
     "@mui/material": "^5.18.0",
     "@okta/odyssey-contributions-example-components": "workspace:*",
     "@okta/odyssey-contributions-iga-components": "workspace:*",
+    "@okta/odyssey-contributions-oin-components": "workspace:*",
     "@okta/odyssey-contributions-resource-access-policy-components": "workspace:*",
     "@okta/odyssey-contributions-workflows-components": "workspace:*",
     "@okta/odyssey-design-tokens": "workspace:*",

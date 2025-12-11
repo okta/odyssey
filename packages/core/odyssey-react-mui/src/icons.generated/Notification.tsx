@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -24,14 +24,14 @@ const NotificationIcon = forwardRef<SVGSVGElement, NotificationIconProps>(
       <SvgIcon
         fill="none"
         ref={ref}
-        viewBox="0 0 24 24"
+        viewBox="0 0 16 16"
         xmlns="http://www.w3.org/2000/svg"
         {...props}
       >
         <>
           <path
             clipRule="evenodd"
-            d="M12 1C7.544 1 4.03 4.556 3.637 8.899c-.298 3.284-.794 6.258-1.591 8.802L1.639 19h5.458c.454 2.302 2.454 4 4.903 4 2.45 0 4.448-1.698 4.903-4h5.458l-.407-1.3c-.797-2.543-1.293-5.517-1.59-8.801C19.968 4.556 16.455 1 12 1Zm2.837 18H9.163c.402 1.179 1.502 2 2.837 2 1.335 0 2.435-.821 2.837-2ZM5.628 9.08C5.938 5.67 8.673 3 12 3s6.062 2.671 6.372 6.08c.257 2.84.664 5.513 1.3 7.92H4.328c.636-2.407 1.043-5.08 1.3-7.92Z"
+            d="M8 .667c-2.97 0-5.313 2.37-5.576 5.266-.198 2.19-.529 4.171-1.06 5.868l-.272.866h3.639A3.303 3.303 0 0 0 8 15.333a3.303 3.303 0 0 0 3.269-2.666h3.639l-.272-.866c-.531-1.697-.862-3.679-1.06-5.868C13.313 3.038 10.97.667 8 .667Zm1.891 12H6.11A1.97 1.97 0 0 0 8 14a1.97 1.97 0 0 0 1.891-1.333ZM3.752 6.053C3.958 3.781 5.782 2 8 2c2.218 0 4.042 1.78 4.248 4.053.171 1.894.443 3.676.866 5.28H2.886c.423-1.604.695-3.386.866-5.28Z"
             fill="currentColor"
             fillRule="evenodd"
           />

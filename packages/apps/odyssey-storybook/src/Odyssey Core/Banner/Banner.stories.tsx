@@ -173,6 +173,26 @@ export const Linked: StoryObj<BannerProps> = {
   },
 };
 
+export const LinkedWithOnLinkClick: StoryObj<BannerProps> = {
+  args: {
+    linkText: "View report",
+    onLinkClick: fn(),
+    role: "status",
+    severity: "error",
+    text: "An unidentified flying object compromised Hangar 18.",
+  },
+  play: async ({ args, canvasElement, step }: PlayType) => {
+    await step("check for the link text and click it", async () => {
+      const canvas = within(canvasElement);
+      const link = canvas.getByText<HTMLAnchorElement>("View report");
+      await expect(link?.tagName).toBe("A");
+      await expect(link?.href).toBe(`${link?.baseURI}#`);
+      await userEvent.click(link);
+      await expect(args.onLinkClick).toHaveBeenCalled();
+    });
+  },
+};
+
 export const LinkWithTarget: StoryObj<BannerProps> = {
   args: {
     linkTarget: "_blank",

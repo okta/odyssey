@@ -24,6 +24,8 @@ export const TOP_NAV_HEIGHT = `${64 / 14}rem`;
 
 export const UI_SHELL_BASE_Z_INDEX = 100;
 
+export const UI_SHELL_RAISED_Z_INDEX = 101;
+
 export const UI_SHELL_OVERLAY_Z_INDEX = 200;
 
 export const emptySideNavItems = [] satisfies SideNavProps["sideNavItems"];

@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -24,14 +24,14 @@ const ArrowUpIcon = forwardRef<SVGSVGElement, ArrowUpIconProps>(
       <SvgIcon
         fill="none"
         ref={ref}
-        viewBox="0 0 24 24"
+        viewBox="0 0 16 16"
         xmlns="http://www.w3.org/2000/svg"
         {...props}
       >
         <>
           <path
             clipRule="evenodd"
-            d="m10.94 5.646-4.647 4.647 1.414 1.414L11 8.414V19h2V8.414l3.293 3.293 1.414-1.414-4.646-4.647a1.5 1.5 0 0 0-2.122 0Z"
+            d="M7.293 3.098 4.195 6.195l.943.943 2.195-2.195v8.39h1.334v-8.39l2.195 2.195.943-.943-3.098-3.097a1 1 0 0 0-1.414 0Z"
             fill="currentColor"
             fillRule="evenodd"
           />

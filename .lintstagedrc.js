@@ -15,8 +15,8 @@ process.env.IS_COMMITTING = "true";
 module.exports = {
   "*": "prettier --ignore-unknown --loglevel warn --write",
   "*.{js,jsx,ts,tsx}": "eslint --fix",
-  "packages/**/**/properties/*.properties": [
-    "yarn generate:pseudoLocales",
+  "packages/**/**/properties/*.properties": () => [
+    "yarn generate:i18n:pseudoLocaleProperties",
     "git add packages/**/**/properties/*ok_SK.properties",
     "git add packages/**/**/properties/*ok_PL.properties",
   ],

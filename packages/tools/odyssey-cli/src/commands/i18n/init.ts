@@ -5,13 +5,13 @@ import { join, resolve, sep } from "node:path";
 import openLink from "open";
 import { CommandModule } from "yargs";
 
-import { fetchTeams } from "../api";
+import { fetchTeams } from "../../api";
 import {
   execAsync,
   getHasFileOrDirectory,
   getLogger,
   getPackageName,
-} from "../utils";
+} from "../../utils";
 
 const PROPERTIES_PATH_SEGMENTS = ["src", "properties"] as const;
 const CONFIG = {
@@ -264,15 +264,15 @@ const runFollowUpI18nCommands = async () => {
     },
     {
       title: "Generating pseudo locales",
-      cmd: "yarn generate:pseudoLocales",
+      cmd: "yarn odyssey-cli i18n generate:pseudoLocaleProperties",
     },
     {
       title: "Building translation types",
-      cmd: "yarn build:translationsJson",
+      cmd: "yarn odyssey-cli i18n build:ts",
     },
     {
       title: "Generating i18n files",
-      cmd: "yarn generate:i18n",
+      cmd: "yarn odyssey-cli i18n generate",
     },
   ];
 
@@ -365,7 +365,7 @@ const initI18n = async () => {
 };
 
 export const initI18nCommand: CommandModule = {
-  command: "init:i18n",
-  describe: "Initialize i18n configuration for the project",
+  command: "init",
+  describe: "Initializes i18n configuration for the project.",
   handler: initI18n,
 };

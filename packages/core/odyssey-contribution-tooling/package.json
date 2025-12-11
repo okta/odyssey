@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-contribution-tooling",
-  "version": "1.49.0",
+  "version": "1.50.1",
   "type": "module",
   "sideEffects": false,
   "main": "./dist/index.umd.cjs",

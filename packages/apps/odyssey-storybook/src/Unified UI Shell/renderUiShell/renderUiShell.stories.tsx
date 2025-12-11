@@ -211,6 +211,11 @@ export const OpenedDatePickerInSurface: Story = {
 
       const canvas = within(appRootElement);
 
+      // Hack because of MUI `DatePicker` issues.
+      await new Promise((resolve) => {
+        setTimeout(resolve, 250);
+      });
+
       const inputElement = canvas.getByRole("textbox", {
         name: "Test DatePicker",
       });
@@ -221,6 +226,8 @@ export const OpenedDatePickerInSurface: Story = {
       );
 
       await userEvent.click(buttonElement);
+
+      expect(await canvas.findByRole("dialog")).toBeVisible();
     }),
 };
 

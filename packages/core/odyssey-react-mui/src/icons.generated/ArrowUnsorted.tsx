@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -24,14 +24,14 @@ const ArrowUnsortedIcon = forwardRef<SVGSVGElement, ArrowUnsortedIconProps>(
       <SvgIcon
         fill="none"
         ref={ref}
-        viewBox="0 0 24 24"
+        viewBox="0 0 16 16"
         xmlns="http://www.w3.org/2000/svg"
         {...props}
       >
         <>
           <path
             clipRule="evenodd"
-            d="M17 15.586V5h-2v10.586l-2.293-2.293-1.414 1.414 3.646 3.646a1.5 1.5 0 0 0 2.122 0l3.646-3.646-1.414-1.414L17 15.586ZM6.94 5.646 3.292 9.293l1.414 1.414L7 8.414V19h2V8.414l2.293 2.293 1.414-1.414-3.646-3.647a1.5 1.5 0 0 0-2.122 0Z"
+            d="M11.333 10.39V3.333H10v7.057L8.471 8.862l-.942.943 2.43 2.43a1 1 0 0 0 1.415 0l2.43-2.43-.942-.943-1.529 1.528ZM4.626 3.764l-2.43 2.431.942.943L4.667 5.61v7.058H6V5.609l1.529 1.53.942-.944-2.43-2.43a1 1 0 0 0-1.415 0Z"
             fill="currentColor"
             fillRule="evenodd"
           />

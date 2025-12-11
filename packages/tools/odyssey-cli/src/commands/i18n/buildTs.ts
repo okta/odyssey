@@ -6,11 +6,12 @@ import { basename, extname, join, resolve } from "node:path";
 import properties from "properties";
 import { type CommandModule } from "yargs";
 
-import { getHasFileOrDirectory, getLogger } from "../utils";
+import { getHasFileOrDirectory, getLogger, runWatchTask } from "../../utils";
 
-export type BuildTranslationsJsonArgs = {
-  jsonOutputPath: string;
+export type BuildTranslationModulesArgs = {
   propertiesFilesPath: string;
+  tsModuleOutputPath: string;
+  watch?: boolean;
 };
 
 type PropertiesJson = Record<string, unknown>;
@@ -29,12 +30,12 @@ function parseProperties(data: string): Promise<PropertiesJson> {
 
 const log = getLogger("translations-json");
 
-const convertPropertiesToJson = async ({
-  jsonOutputPath,
+const convertPropertiesToTypescript = async ({
+  tsModuleOutputPath,
   propertiesFilesPath,
-}: BuildTranslationsJsonArgs) => {
+}: BuildTranslationModulesArgs) => {
   const sourceDirectory = resolve(propertiesFilesPath);
-  const outputDirectory = resolve(jsonOutputPath);
+  const outputDirectory = resolve(tsModuleOutputPath);
 
   const hasSourceDirectory = await getHasFileOrDirectory(sourceDirectory);
   if (!hasSourceDirectory) {
@@ -42,7 +43,7 @@ const convertPropertiesToJson = async ({
       `Translations are not yet setup.
 
 If translations are required for your project, run the following command:
-\`odyssey-cli initialize:i18n\``,
+\`yarn odyssey-cli i18n init\``,
     );
 
     return;
@@ -86,9 +87,27 @@ If translations are required for your project, run the following command:
   );
 };
 
-export const buildTranslationsJsonCommand: CommandModule<
+const convertPropertiesToTypescriptWithWatch = async (
+  args: BuildTranslationModulesArgs,
+) => {
+  await convertPropertiesToTypescript(args);
+
+  if (args.watch) {
+    runWatchTask({
+      chokidarOptions: {
+        ignored: (path, stats) =>
+          Boolean(stats?.isFile()) && !path.endsWith(".properties"),
+      },
+      onChange: () => convertPropertiesToTypescript(args),
+      path: resolve(args.propertiesFilesPath),
+      logger: log,
+    });
+  }
+};
+
+export const buildTsI18nCommand: CommandModule<
   object,
-  BuildTranslationsJsonArgs
+  BuildTranslationModulesArgs
 > = {
   builder: (yargs) =>
     yargs
@@ -97,12 +116,18 @@ export const buildTranslationsJsonCommand: CommandModule<
         describe: "A relative path to resources based on cwd.",
         type: "string",
       })
-      .option("jsonOutputPath", {
+      .option("tsModuleOutputPath", {
         default: "src/properties/ts",
         describe: "A relative path to directory for ts file output",
         type: "string",
+      })
+      .option("watch", {
+        alias: "w",
+        default: false,
+        describe: "Watch for changes in the base .properties file and rebuild",
+        type: "boolean",
       }),
-  command: "build:translationsJson",
-  describe: "Converts `properties` files to TypeScript types.",
-  handler: convertPropertiesToJson,
+  command: "build:ts",
+  describe: "Converts `properties` files to TypeScript modules.",
+  handler: convertPropertiesToTypescriptWithWatch,
 };
