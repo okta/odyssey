@@ -67,6 +67,7 @@ const storybookMeta: Meta<typeof MenuButton> = {
       description:
         "The ID of the element that describes the MenuButton, if one exists.",
       table: {
+        category: "Functional",
         type: {
           summary: "string",
         },
@@ -77,6 +78,7 @@ const storybookMeta: Meta<typeof MenuButton> = {
       description:
         "aria-label to describe the MenuButton when the button label is empty",
       table: {
+        category: "Functional",
         type: {
           summary: "string",
         },
@@ -87,6 +89,7 @@ const storybookMeta: Meta<typeof MenuButton> = {
       description:
         "The ID of the element that labels the MenuButton. Only needed if the button has no text and `ariaLabel` is empty.",
       table: {
+        category: "Functional",
         type: {
           summary: "string",
         },
@@ -96,6 +99,7 @@ const storybookMeta: Meta<typeof MenuButton> = {
       control: "text",
       description: "The label on the triggering Button",
       table: {
+        category: "Visual",
         type: {
           summary: "string",
         },
@@ -106,6 +110,7 @@ const storybookMeta: Meta<typeof MenuButton> = {
       control: { type: "radio" },
       description: "The variant of the triggering Button",
       table: {
+        category: "Visual",
         type: {
           summary: buttonVariantValues.join(" | "),
         },
@@ -115,9 +120,11 @@ const storybookMeta: Meta<typeof MenuButton> = {
       },
     },
     children: {
-      control: "object",
-      description: "The <MenuItem> components within the Menu",
+      control: false,
+      description:
+        "Menu content composed from [MenuItem](../?path=/docs/odyssey-core-overlays-menubutton-menuitem--docs), [Divider](../?path=/docs/odyssey-core-overlays-menubutton-divider--docs), and [ListSubheader](../?path=/docs/odyssey-core-overlays-menubutton-listsubheader--docs)",
       table: {
+        category: "Visual",
         type: {
           summary: "[MenuItem | Divider | ListSubheader | NullElement]",
         },
@@ -129,10 +136,11 @@ const storybookMeta: Meta<typeof MenuButton> = {
       },
     },
     popoverContent: {
-      control: "object",
+      control: false,
       description:
         "The contents to display in the popover (instead of children)",
       table: {
+        category: "Visual",
         type: {
           summary: "[ReactNode | NullElement]",
         },
@@ -151,6 +159,7 @@ const storybookMeta: Meta<typeof MenuButton> = {
       mapping: icons,
       description: "The end Icon on the triggering Button",
       table: {
+        category: "Visual",
         type: {
           summary: "<Icon />",
         },
@@ -160,6 +169,7 @@ const storybookMeta: Meta<typeof MenuButton> = {
       control: "text",
       description: "The id of the Button",
       table: {
+        category: "Functional",
         type: {
           summary: "string",
         },
@@ -170,6 +180,7 @@ const storybookMeta: Meta<typeof MenuButton> = {
       control: "boolean",
       description: "If the MenuButton is an overflow menu or standard menu.",
       table: {
+        category: "Visual",
         type: {
           summary: "boolean",
         },
@@ -180,6 +191,7 @@ const storybookMeta: Meta<typeof MenuButton> = {
       control: { type: "radio" },
       description: "The horizontal alignment of the menu.",
       table: {
+        category: "Visual",
         type: {
           summary: menuAlignmentValues.join(" | "),
         },
@@ -193,6 +205,7 @@ const storybookMeta: Meta<typeof MenuButton> = {
       description:
         "If defined, the button will include a tooltip that contains the string.",
       table: {
+        category: "Visual",
         type: {
           summary: "string",
         },
@@ -200,7 +213,7 @@ const storybookMeta: Meta<typeof MenuButton> = {
     },
   },
   args: {
-    buttonLabel: "More actions",
+    buttonLabel: "Button label",
     buttonVariant: "secondary",
     menuAlignment: "left",
   },
@@ -223,11 +236,11 @@ const clickMenuButton =
 
 export const Simple: StoryObj<MenuButtonProps> = {
   args: {
-    buttonLabel: "More actions",
+    buttonLabel: "Button label",
     children: [
-      <MenuItem key="1">View details</MenuItem>,
-      <MenuItem key="2">Edit configuration</MenuItem>,
-      <MenuItem key="3">Launch</MenuItem>,
+      <MenuItem key="1">Menu item label 1</MenuItem>,
+      <MenuItem key="2">Menu item label 2</MenuItem>,
+      <MenuItem key="3">Menu item label 3</MenuItem>,
     ],
   },
   play: async ({
@@ -248,15 +261,15 @@ export const ActionIcons: StoryObj<MenuButtonProps> = {
     children: [
       <MenuItem isDisabled key="1">
         <GroupIcon />
-        Assign crew
+        Menu item label 1
       </MenuItem>,
       <MenuItem key="2">
         <GlobeIcon />
-        View destination
+        Menu item label 2
       </MenuItem>,
       <MenuItem key="3">
         <CalendarIcon />
-        Schedule launch
+        Menu item label 3
       </MenuItem>,
     ],
   },
@@ -278,19 +291,19 @@ export const ActionIcons: StoryObj<MenuButtonProps> = {
 
 export const ButtonVariant: StoryObj<MenuButtonProps> = {
   args: {
-    buttonLabel: "More actions",
+    buttonLabel: "Button label",
     buttonVariant: "floating",
     children: [
-      <MenuItem key="1">View details</MenuItem>,
-      <MenuItem key="2">Edit configuration</MenuItem>,
-      <MenuItem key="3">Launch</MenuItem>,
+      <MenuItem key="1">Menu item label 1</MenuItem>,
+      <MenuItem key="2">Menu item label 2</MenuItem>,
+      <MenuItem key="3">Menu item label 3</MenuItem>,
     ],
     id: "floating",
   },
   play: async ({ canvasElement, step }: PlaywrightProps<MenuButtonProps>) => {
     await step("Filter and Select from listbox", async () => {
       const canvas = within(canvasElement);
-      const button = canvas.getByRole("button", { name: "More actions" });
+      const button = canvas.getByRole("button", { name: "Button label" });
       await expect(button).toHaveAttribute("id", "floating-button");
     });
   },
@@ -298,16 +311,16 @@ export const ButtonVariant: StoryObj<MenuButtonProps> = {
 
 export const Groupings: StoryObj<MenuButtonProps> = {
   args: {
-    buttonLabel: "More actions",
+    buttonLabel: "Button label",
     children: [
-      <ListSubheader key="sh1">Crew</ListSubheader>,
-      <MenuItem key="1">Assign captain</MenuItem>,
-      <MenuItem key="2">View roster</MenuItem>,
-      <ListSubheader key="sh2">Ship</ListSubheader>,
-      <MenuItem key="3">Configure thrusters</MenuItem>,
-      <MenuItem key="4">View cargo</MenuItem>,
+      <ListSubheader key="sh1">Menu section label 1</ListSubheader>,
+      <MenuItem key="1">Menu item label 1</MenuItem>,
+      <MenuItem key="2">Menu item label 2</MenuItem>,
+      <ListSubheader key="sh2">Menu section label 2</ListSubheader>,
+      <MenuItem key="3">Menu item label 3</MenuItem>,
+      <MenuItem key="4">Menu item label 4</MenuItem>,
       <Divider key="div2" />,
-      <MenuItem key="5">Log out</MenuItem>,
+      <MenuItem key="5">Menu item label 5</MenuItem>,
     ],
   },
   play: async ({
@@ -328,12 +341,12 @@ export const Groupings: StoryObj<MenuButtonProps> = {
 
 export const WithDestructive: StoryObj<MenuButtonProps> = {
   args: {
-    buttonLabel: "Cargo options",
+    buttonLabel: "Button label",
     children: [
-      <MenuItem key="1">View details</MenuItem>,
-      <MenuItem key="2">Edit inventory</MenuItem>,
+      <MenuItem key="1">Menu item label 1</MenuItem>,
+      <MenuItem key="2">Menu item label 2</MenuItem>,
       <MenuItem key="3" variant="destructive">
-        Jettison cargo
+        Menu item label 3
       </MenuItem>,
     ],
   },
@@ -355,19 +368,19 @@ export const WithDestructive: StoryObj<MenuButtonProps> = {
 
 export const IconButton: StoryObj<MenuButtonProps> = {
   args: {
-    ariaLabel: "More actions",
+    ariaLabel: "Button label",
     buttonLabel: "",
     children: [
-      <MenuItem key="1">View details</MenuItem>,
-      <MenuItem key="2">Edit configuration</MenuItem>,
-      <MenuItem key="3">Launch</MenuItem>,
+      <MenuItem key="1">Menu item label 1</MenuItem>,
+      <MenuItem key="2">Menu item label 2</MenuItem>,
+      <MenuItem key="3">Menu item label 3</MenuItem>,
     ],
-    tooltipText: "More actions",
+    tooltipText: "Button tooltip text",
   },
   play: async ({ canvasElement, step }: PlaywrightProps<MenuButtonProps>) => {
     await step("MenuButton Aria-Label", async () => {
       const canvas = within(canvasElement);
-      const menuButton = canvas.queryByRole("button", { name: "More actions" });
+      const menuButton = canvas.queryByRole("button", { name: "Button label" });
       await expect(menuButton).not.toBeNull();
     });
   },
@@ -375,24 +388,24 @@ export const IconButton: StoryObj<MenuButtonProps> = {
 
 export const EndIcon: StoryObj<MenuButtonProps> = {
   args: {
-    ariaLabel: "More actions",
+    ariaLabel: "Button label",
     endIcon: <GroupIcon />,
     children: [
-      <MenuItem key="1">View details</MenuItem>,
-      <MenuItem key="2">Edit configuration</MenuItem>,
-      <MenuItem key="3">Launch</MenuItem>,
+      <MenuItem key="1">Menu item label 1</MenuItem>,
+      <MenuItem key="2">Menu item label 2</MenuItem>,
+      <MenuItem key="3">Menu item label 3</MenuItem>,
     ],
-    tooltipText: "Learn more",
+    tooltipText: "Button tooltip text",
   },
 };
 
 export const Overflow: StoryObj<MenuButtonProps> = {
   args: {
-    buttonLabel: "Cargo options",
+    buttonLabel: "Button label",
     children: [
-      <MenuItem key="1">View details</MenuItem>,
-      <MenuItem key="2">Edit configuration</MenuItem>,
-      <MenuItem key="3">Launch</MenuItem>,
+      <MenuItem key="1">Menu item label 1</MenuItem>,
+      <MenuItem key="2">Menu item label 2</MenuItem>,
+      <MenuItem key="3">Menu item label 3</MenuItem>,
     ],
     isOverflow: true,
   },
@@ -400,14 +413,14 @@ export const Overflow: StoryObj<MenuButtonProps> = {
 
 export const Disabled: StoryObj<MenuButtonProps> = {
   args: {
-    buttonLabel: "Cargo options",
+    buttonLabel: "Button label",
     isDisabled: true,
     children: [
-      <MenuItem key="1">View details</MenuItem>,
-      <MenuItem key="2">Edit configuration</MenuItem>,
-      <MenuItem key="3">Launch</MenuItem>,
+      <MenuItem key="1">Menu item label 1</MenuItem>,
+      <MenuItem key="2">Menu item label 2</MenuItem>,
+      <MenuItem key="3">Menu item label 3</MenuItem>,
     ],
-    tooltipText: "More actions",
+    tooltipText: "Button tooltip text",
   },
 };
 
@@ -415,9 +428,9 @@ export const Alignment: StoryObj<MenuButtonProps> = {
   args: {
     buttonVariant: "secondary",
     children: [
-      <MenuItem key="1">View details</MenuItem>,
-      <MenuItem key="2">Edit configuration</MenuItem>,
-      <MenuItem key="3">Launch</MenuItem>,
+      <MenuItem key="1">Menu item label 1</MenuItem>,
+      <MenuItem key="2">Menu item label 2</MenuItem>,
+      <MenuItem key="3">Menu item label 3</MenuItem>,
     ],
     menuAlignment: "right",
   },
@@ -425,7 +438,7 @@ export const Alignment: StoryObj<MenuButtonProps> = {
     return (
       <Box sx={{ ml: "50px" }}>
         <MenuButton
-          buttonLabel="More actions"
+          buttonLabel="Button label"
           buttonVariant={props.buttonVariant}
           menuAlignment={props.menuAlignment}
         >
@@ -506,12 +519,12 @@ export const HelpPopover: StoryObj<MenuButtonProps> = {
       </Box>,
     ],
     id: "floating",
-    tooltipText: "More actions",
+    tooltipText: "Tooltip text",
   },
   play: async ({ canvasElement, step }: PlaywrightProps<MenuButtonProps>) => {
     await step("MenuButton Aria-Label", () => {
       const canvas = within(canvasElement);
-      const menuButton = canvas.queryByRole("button", { name: "More actions" });
+      const menuButton = canvas.queryByRole("button", { name: "Tooltip text" });
       expect(menuButton).not.toBeNull();
     });
   },

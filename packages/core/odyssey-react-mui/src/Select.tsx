@@ -338,9 +338,11 @@ const Select = <
 
   const Chips = useCallback(
     ({
+      ariaLabel,
       isInteractive,
       isReadOnly,
     }: {
+      ariaLabel?: string;
       isInteractive: boolean;
       isReadOnly?: boolean;
     }) => {
@@ -356,9 +358,11 @@ const Select = <
       return (
         Array.isArray(internalSelectedValues) && (
           <ChipsInnerContainer
+            aria-label={ariaLabel}
             isInteractive={isInteractive}
             isReadOnly={isReadOnly}
             odysseyDesignTokens={odysseyDesignTokens}
+            role="list"
           >
             {internalSelectedValues.map(
               (item) =>
@@ -389,6 +393,7 @@ const Select = <
                         ? () => removeSelectedValue(item)
                         : undefined
                     }
+                    role="listitem"
                     tabIndex={-1}
                   />
                 ),
@@ -496,7 +501,11 @@ const Select = <
             <ChipsPositioningContainer
               odysseyDesignTokens={odysseyDesignTokens}
             >
-              <Chips isInteractive={!isReadOnly} isReadOnly={isReadOnly} />
+              <Chips
+                ariaLabel="Selected options"
+                isInteractive={!isReadOnly}
+                isReadOnly={isReadOnly}
+              />
             </ChipsPositioningContainer>
           </>
         )}

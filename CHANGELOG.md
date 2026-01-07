@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.51.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.50.1...v1.51.0) (2026-01-07)
+
+### Features
+
+- conditionally wrap Translation Provider ([#162](https://github.com/atko-eng/odyssey-design-system/issues/162)) ([2201266](https://github.com/atko-eng/odyssey-design-system/commit/2201266218cf6cf47346513c3a6ed63de773c955))
+- full screen overlay selector attr ([#159](https://github.com/atko-eng/odyssey-design-system/issues/159)) ([61481a8](https://github.com/atko-eng/odyssey-design-system/commit/61481a8a59287e2bfc0feffcefe7de7aa36c2a72))
+
+### Bug Fixes
+
+- properly pass testId to page-header box ([#163](https://github.com/atko-eng/odyssey-design-system/issues/163)) ([12a4f87](https://github.com/atko-eng/odyssey-design-system/commit/12a4f87a3647e2825fe723fd6df6ddf2529b3aa6))
+- update @okta/odyssey-react-mui to version 1.50.1 ([#158](https://github.com/atko-eng/odyssey-design-system/issues/158)) ([52e32b3](https://github.com/atko-eng/odyssey-design-system/commit/52e32b302045b051a0960b06c39335457a5b396b))
+- update font weight for active and completed step labels, adjust maxWidth for step description ([#160](https://github.com/atko-eng/odyssey-design-system/issues/160)) ([e9a7e0d](https://github.com/atko-eng/odyssey-design-system/commit/e9a7e0d99673f497fad50d3a079e93f48637ffae))
+
 ## [1.50.1](https://github.com/atko-eng/odyssey-design-system/compare/v1.50.0...v1.50.1) (2025-12-11)
 
 ### Bug Fixes

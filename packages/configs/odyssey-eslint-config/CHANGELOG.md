@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.51.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.50.1...v1.51.0) (2026-01-07)
+
+**Note:** Version bump only for package @okta/odyssey-eslint-config
+
 ## [1.50.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.49.0...v1.50.0) (2025-12-11)
 
 **Note:** Version bump only for package @okta/odyssey-eslint-config

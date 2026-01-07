@@ -27,8 +27,10 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {
     children: {
+      control: false,
       description: "A single Checkbox element or an array of Checkbox elements",
       table: {
+        category: "Functional",
         type: {
           summary:
             "ReactElement<typeof Checkbox> | Array<ReactElement<typeof Checkbox>>",
@@ -50,6 +52,7 @@ const meta = {
       control: "boolean",
       description: "If `true`, the checkbox group is read-only",
       table: {
+        category: "Visual",
         type: {
           summary: "boolean",
         },
@@ -62,6 +65,7 @@ const meta = {
       control: "boolean",
       description: "If `true`, the checkbox group is required",
       table: {
+        category: "Visual",
         type: {
           summary: "boolean",
         },
@@ -74,6 +78,7 @@ const meta = {
       control: "text",
       description: "The label text for the checkbox group",
       table: {
+        category: "Visual",
         type: {
           summary: "string",
         },
@@ -83,6 +88,53 @@ const meta = {
         name: "string",
       },
     },
+    ariaDescribedBy: {
+      control: "text",
+      description: "The ID of the element that describes the checkbox group",
+      table: {
+        category: "Functional",
+        type: {
+          summary: "string",
+        },
+      },
+      type: {
+        name: "string",
+      },
+    },
+    testId: {
+      control: "text",
+      description: "The data-testid attribute for the checkbox group",
+      table: {
+        category: "Functional",
+        type: {
+          summary: "string",
+        },
+      },
+      type: {
+        name: "string",
+      },
+    },
+    translate: {
+      control: "radio",
+      options: ["yes", "no", undefined],
+      description:
+        "Indicates whether the element's content should be translated",
+      table: {
+        category: "Functional",
+        type: {
+          summary: "yes | no",
+        },
+      },
+      type: {
+        name: "string",
+      },
+    },
+  },
+  args: {
+    label: "Label",
+    isDisabled: false,
+    isReadOnly: false,
+    isRequired: false,
   },
 } satisfies Meta<typeof CheckboxGroup>;
 
@@ -94,6 +146,7 @@ const GroupTemplate: Story = {
   args: {} as CheckboxGroupProps, // This is a hack,
   render: (args) => (
     <CheckboxGroup
+      ariaDescribedBy={args.ariaDescribedBy}
       errorMessage={args.errorMessage}
       errorMessageList={args.errorMessageList}
       hint={args.hint}
@@ -101,15 +154,13 @@ const GroupTemplate: Story = {
       isDisabled={args.isDisabled}
       isReadOnly={args.isReadOnly}
       isRequired={args.isRequired}
-      label="Systems check"
+      label={args.label}
+      testId={args.testId}
+      translate={args.translate}
     >
-      <Checkbox label="Life support" name="life-support" value="life-support" />
-      <Checkbox
-        label="Warp core containment"
-        name="warp-core"
-        value="warp-core"
-      />
-      <Checkbox label="Cetacean ops" name="cetacean-ops" value="cetacean-ops" />
+      <Checkbox label="Item label 1" name="item-1" value="item-1" />
+      <Checkbox label="Item label 2" name="item-2" value="item-2" />
+      <Checkbox label="Item label 3" name="item-3" value="item-3" />
     </CheckboxGroup>
   ),
   parameters: {
@@ -119,7 +170,7 @@ const GroupTemplate: Story = {
   },
 };
 
-export const Group: Story = {
+export const Default: Story = {
   ...GroupTemplate,
 };
 
@@ -161,7 +212,7 @@ export const Error: Story = {
     },
   },
   args: {
-    errorMessage: "Select 1 or more systems to check before initiating warp.",
+    errorMessage: "Error Message",
   } as CheckboxGroupProps, // This is a hack
 };
 
@@ -169,38 +220,33 @@ export const ErrorsList: Story = {
   ...GroupTemplate,
   args: {
     isRequired: true,
-    errorMessage: "System check is required",
-    errorMessageList: [
-      "Select at least one item",
-      "Select no more than 3 items",
-    ],
+    errorMessage: "Error Message",
+    errorMessageList: ["Error A"],
   } as CheckboxGroupProps, // This is a hack
 };
 
 export const ErrorWithIndividualHint: Story = {
-  args: {
-    errorMessage: "This field is required.",
-  } as CheckboxGroupProps,
+  ...GroupTemplate,
   render: function C(props) {
     return (
       <CheckboxGroup {...props}>
         <Checkbox
-          hint="Help Text"
-          label="Life support"
-          name="life-support"
-          value="life-support"
+          hint="Hint text 1"
+          label="Item label 1"
+          name="item-1"
+          value="item-1"
         />
         <Checkbox
-          hint="Help Text"
-          label="Warp core containment"
-          name="warp-core"
-          value="warp-core"
+          hint="Hint text 2"
+          label="Item label 2"
+          name="item-2"
+          value="item-2"
         />
         <Checkbox
-          hint="Help Text"
-          label="Cetacean ops"
-          name="cetacean-ops"
-          value="cetacean-ops"
+          hint="Hint text 3"
+          label="Item label 3"
+          name="item-3"
+          value="item-3"
         />
       </CheckboxGroup>
     );
@@ -210,15 +256,15 @@ export const ErrorWithIndividualHint: Story = {
 export const Hint: Story = {
   ...GroupTemplate,
   args: {
-    hint: "Select 1 or more systems to check before initiating warp.",
+    hint: "Hint text",
   } as CheckboxGroupProps, // This is a hack
 };
 
 export const HintLink: Story = {
   ...GroupTemplate,
   args: {
-    hint: "Select 1 or more systems to check before initiating warp.",
-    HintLinkComponent: <Link href="/learn-more">Learn more</Link>,
+    hint: "Hint text",
+    HintLinkComponent: <Link href="#link">Link</Link>,
   } as CheckboxGroupProps, // This is a hack
 };
 
@@ -236,26 +282,25 @@ export const MixedError: Story = {
       hint={args.hint}
       isDisabled={args.isDisabled}
       isRequired={args.isRequired}
-      label="Who will you invite to your birthday?"
+      label="Label"
     >
-      <Checkbox label="Alfred" name="alfred" validity="valid" value="alfred" />
       <Checkbox
-        isDefaultChecked
-        label="Barbara Gordon"
-        name="barbara-gordon"
-        value="barbara-gordon"
+        isDefaultChecked={true}
+        label="Item label 1"
+        name="item-1"
+        value="item-1"
       />
       <Checkbox
-        label="Hal Jordan"
-        name="hal-jordan"
+        label="Item label 2"
+        name="item-2"
         validity="valid"
-        value="hal-jordan"
+        value="item-2"
       />
       <Checkbox
-        isDefaultChecked
-        label="The Joker"
-        name="the-joker"
-        value="the-joker"
+        isDefaultChecked={true}
+        label="Item Label 3"
+        name="item-3"
+        value="item-3"
       />
     </CheckboxGroup>
   ),
@@ -271,6 +316,6 @@ export const MixedError: Story = {
     },
   },
   args: {
-    errorMessage: "These choices are incompatible.",
+    errorMessage: "Error Message",
   } as CheckboxGroupProps, // This is a hack
 };

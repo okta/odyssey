@@ -235,7 +235,7 @@ export const Optional: StoryObj<typeof NativeSelect> = {
 export const HintLink: StoryObj<typeof NativeSelect> = {
   ...Template,
   args: {
-    HintLinkComponent: <Link href="/learn-more">Learn more</Link>,
+    HintLinkComponent: <Link href="#link">Learn more</Link>,
   },
 };
 

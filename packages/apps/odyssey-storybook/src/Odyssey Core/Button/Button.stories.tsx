@@ -45,44 +45,46 @@ const meta = {
       options: Object.keys(icons),
       mapping: icons,
       description: "An optional icon to display at the end of the button",
-      table: { type: { summary: "<Icon />" } },
+      table: { category: "Visual", type: { summary: "<Icon />" } },
     },
     href: {
       control: "text",
       description: "Optional href to render the button as a link",
-      table: { type: { summary: "string" } },
+      table: { category: "Functional", type: { summary: "string" } },
     },
     id: {
+      control: "text",
       description: "An optional ID for the button",
-      table: { type: { summary: "string" } },
+      table: { category: "Functional", type: { summary: "string" } },
     },
     isDisabled: {
       control: "boolean",
       description: "If `true`, the button is disabled",
-      table: { type: { summary: "boolean" } },
+      table: { category: "Visual", type: { summary: "boolean" } },
     },
     isFullWidth: {
       control: "boolean",
       description:
         "If `true`, the button will take up the full width available",
-      table: { type: { summary: "boolean" } },
+      table: { category: "Visual", type: { summary: "boolean" } },
     },
     label: {
       control: "text",
       description:
         "The button text. If blank, the button must include an icon.",
-      table: { type: { summary: "string" } },
+      table: { category: "Visual", type: { summary: "string" } },
     },
     onClick: {
       action: true,
       description: "Callback fired when the button is clicked",
-      table: { type: { summary: "(() => void)" } },
+      table: { category: "Functional", type: { summary: "(() => void)" } },
     },
     size: {
       options: buttonSizeValues,
       control: { type: "radio" },
       description: "The size of the button",
       table: {
+        category: "Visual",
         type: { summary: buttonSizeValues.join(" | ") },
         defaultValue: { summary: "medium" },
       },
@@ -92,19 +94,20 @@ const meta = {
       options: Object.keys(icons),
       mapping: icons,
       description: "An optional icon to display at the start of the button",
-      table: { type: { summary: "<Icon />" } },
+      table: { category: "Visual", type: { summary: "<Icon />" } },
     },
     tooltipText: {
       control: "text",
       description:
         "If defined, the button will include a tooltip that contains the string.",
-      table: { type: { summary: "string" } },
+      table: { category: "Visual", type: { summary: "string" } },
     },
     type: {
       options: buttonTypeValues,
       control: { type: "radio" },
       description: "The type of the HTML button element.",
       table: {
+        category: "Functional",
         type: { summary: buttonTypeValues.join(" | ") },
         defaultValue: { summary: "button" },
       },
@@ -114,14 +117,19 @@ const meta = {
       control: { type: "radio" },
       description: "The color and style of the button",
       table: {
+        category: "Visual",
         type: { summary: buttonVariantValues.join(" | ") },
         defaultValue: { summary: "secondary" },
       },
-      type: { required: true, name: "other", value: "radio" },
+      type: {
+        required: true,
+        name: "other",
+        value: "radio",
+      },
     },
   },
   args: {
-    label: "Add crew",
+    label: "Button label",
     onClick: fn(),
     variant: "primary",
   },
@@ -146,10 +154,10 @@ const interactWithButton =
       await step("hover and click", async () => {
         const canvas = within(canvasElement);
         const button = canvas.getByRole("button", { name: args.label });
-        userEvent.tab();
+        await userEvent.tab();
         await userEvent.click(button);
         expect(args.onClick).toHaveBeenCalledTimes(1);
-        axeRun(actionName);
+        await axeRun(actionName);
         if (!hoverState) {
           await waitFor(() => userEvent.tab());
         }
@@ -172,7 +180,7 @@ export const ButtonPrimaryDisabled: Story = {
   name: "Primary, Disabled",
   args: {
     isDisabled: true,
-    label: "Add crew",
+    label: "Button label",
     variant: "primary",
   },
 };
@@ -180,7 +188,7 @@ export const ButtonPrimaryDisabled: Story = {
 export const ButtonSecondary: Story = {
   name: "Secondary",
   args: {
-    label: "Add crew",
+    label: "Button label",
     variant: "secondary",
   },
   play: async ({ args, canvasElement, step }: playType) => {
@@ -196,7 +204,7 @@ export const ButtonSecondaryDisabled: Story = {
   name: "Secondary, Disabled",
   args: {
     isDisabled: true,
-    label: "Add crew",
+    label: "Button label",
     variant: "secondary",
   },
 };
@@ -204,7 +212,7 @@ export const ButtonSecondaryDisabled: Story = {
 export const ButtonDanger: Story = {
   name: "Danger",
   args: {
-    label: "Add crew",
+    label: "Button label",
     variant: "danger",
   },
   play: async ({ args, canvasElement, step }: playType) => {
@@ -219,7 +227,7 @@ export const ButtonDanger: Story = {
 export const ButtonDangerSecondary: Story = {
   name: "Danger Secondary",
   args: {
-    label: "Add crew",
+    label: "Button label",
     variant: "dangerSecondary",
   },
 };
@@ -227,7 +235,7 @@ export const ButtonDangerSecondary: Story = {
 export const ButtonDangerDisabled: Story = {
   name: "Danger, Disabled",
   args: {
-    label: "Add crew",
+    label: "Button label",
     isDisabled: true,
     variant: "danger",
   },
@@ -236,7 +244,7 @@ export const ButtonDangerDisabled: Story = {
 export const ButtonFloating: Story = {
   name: "Floating",
   args: {
-    label: "Add crew",
+    label: "Button label",
     variant: "floating",
   },
   play: async ({ args, canvasElement, step }: playType) => {
@@ -251,7 +259,7 @@ export const ButtonFloating: Story = {
 export const ButtonFloatingAction: Story = {
   name: "Floating Action",
   args: {
-    label: "Add crew",
+    label: "Button label",
     variant: "floatingAction",
   },
   play: async ({ args, canvasElement, step }: playType) => {
@@ -266,7 +274,7 @@ export const ButtonFloatingAction: Story = {
 export const ButtonFloatingDisabled: Story = {
   name: "Floating, Disabled",
   args: {
-    label: "Add crew",
+    label: "Button label",
     isDisabled: true,
     variant: "floating",
   },
@@ -285,7 +293,7 @@ export const ButtonSecondaryAsLink: Story = {
 export const ButtonSmall: Story = {
   name: "Small",
   args: {
-    label: "Add crew",
+    label: "Button label",
     size: "small",
   },
   play: async ({ args, canvasElement, step }: playType) => {
@@ -300,7 +308,7 @@ export const ButtonSmall: Story = {
 export const ButtonMedium: Story = {
   name: "Medium",
   args: {
-    label: "Add crew",
+    label: "Button label",
     size: "medium",
     variant: "secondary",
   },
@@ -316,7 +324,7 @@ export const ButtonMedium: Story = {
 export const ButtonLarge: Story = {
   name: "Large",
   args: {
-    label: "Add crew",
+    label: "Button label",
     size: "large",
     variant: "danger",
   },
@@ -332,7 +340,7 @@ export const ButtonLarge: Story = {
 export const ButtonFullWidth: Story = {
   name: "Full-width",
   args: {
-    label: "Add crew",
+    label: "Button label",
     isFullWidth: true,
   },
   play: async ({ args, canvasElement, step }: playType) => {
@@ -347,7 +355,7 @@ export const ButtonFullWidth: Story = {
 export const ButtonWithIcon: Story = {
   name: "Icon",
   args: {
-    label: "Add crew",
+    label: "Button label",
     startIcon: <AddIcon />,
   },
   play: async ({ args, canvasElement, step }: playType) => {
@@ -371,9 +379,9 @@ export const IconOnly: Story = {
   },
   args: {
     startIcon: <AddIcon />,
-    ariaLabel: "Add crew",
+    ariaLabel: "Button label",
     label: undefined,
-    tooltipText: "Add crew",
+    tooltipText: "Button label",
   },
 };
 

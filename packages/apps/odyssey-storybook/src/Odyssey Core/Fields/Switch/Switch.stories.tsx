@@ -10,16 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { HintLink, Switch, SwitchProps } from "@okta/odyssey-react-mui";
+import { deepmerge, Link, Switch, SwitchProps } from "@okta/odyssey-react-mui";
+import { useCallback } from "@storybook/preview-api";
 import { Meta, StoryObj } from "@storybook/react";
-import { expect, userEvent, within } from "@storybook/test";
-import { useCallback, useState } from "react";
+import { fn } from "@storybook/test";
 
-import { axeRun } from "../../../axeRun.js";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
+import { useStoryArgOrLocalState } from "../../../tools/useStoryArgOrLocalState.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 
-const storybookMeta: Meta<SwitchProps> = {
+const meta = {
   component: Switch,
   decorators: [OdysseyStorybookThemeDecorator],
   tags: ["autodocs"],
@@ -28,6 +28,7 @@ const storybookMeta: Meta<SwitchProps> = {
       control: "boolean",
       description: "If `true`, the Switch button is checked",
       table: {
+        category: "Visual",
         type: {
           summary: "boolean",
         },
@@ -37,6 +38,7 @@ const storybookMeta: Meta<SwitchProps> = {
       control: "boolean",
       description: "If `true`, the Switch button is checked by default",
       table: {
+        category: "Functional",
         type: {
           summary: "boolean",
         },
@@ -46,10 +48,12 @@ const storybookMeta: Meta<SwitchProps> = {
     HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
     id: fieldComponentPropsMetaData.id,
     isDisabled: fieldComponentPropsMetaData.isDisabled,
+    isFullWidth: fieldComponentPropsMetaData.isFullWidth,
     isReadOnly: {
       control: "boolean",
-      description: "The value attribute of the Switch",
+      description: "If `true`, the Switch renders as read-only",
       table: {
+        category: "Visual",
         type: {
           summary: "boolean",
         },
@@ -62,6 +66,7 @@ const storybookMeta: Meta<SwitchProps> = {
       control: "text",
       description: "The label text for the Switch button",
       table: {
+        category: "Visual",
         type: {
           summary: "string",
         },
@@ -72,10 +77,31 @@ const storybookMeta: Meta<SwitchProps> = {
       },
     },
     name: fieldComponentPropsMetaData.name,
+    onChange: {
+      description: "Callback fired when the user toggles the Switch",
+      table: {
+        category: "Functional",
+        type: {
+          summary: "({ checked, value }: OnChangeCallbackArguments) => void",
+        },
+      },
+    },
+    testId: {
+      control: "text",
+      description:
+        "Adds a `data-se` attribute so automated tests can target the Switch.",
+      table: {
+        category: "Functional",
+        type: {
+          summary: "string",
+        },
+      },
+    },
     value: {
       control: "text",
       description: "The value attribute of the Switch button",
       table: {
+        category: "Functional",
         type: {
           summary: "string",
         },
@@ -87,56 +113,125 @@ const storybookMeta: Meta<SwitchProps> = {
     },
   },
   args: {
-    hint: "Optional hint text",
-    label: "Switch label",
-    value: "Switch value",
-    HintLinkComponent: <HintLink href="">Some hint link</HintLink>,
+    isChecked: false,
+    label: "label",
+    onChange: fn(),
+    value: "value",
   },
-};
+} satisfies Meta<typeof Switch>;
 
-export default storybookMeta;
+export default meta;
 
-export const Default: StoryObj<typeof Switch> = {
-  play: async ({ canvasElement, step }) => {
-    await step("select the switch button", async () => {
-      const canvas = within(canvasElement);
-      const switchCheckbox = canvas.getByRole("checkbox");
-      if (switchCheckbox) {
-        await userEvent.click(switchCheckbox);
-      }
-      await expect(switchCheckbox).toBeChecked();
-      await axeRun("Switch Default");
-      await userEvent.tab();
+type Story = StoryObj<typeof meta>;
+
+const SwitchTemplate: Story = {
+  args: {
+    isChecked: false,
+  },
+  argTypes: {
+    isDefaultChecked: { control: false },
+  },
+  render: function Render(args, context) {
+    const { value: checked, setValue } = useStoryArgOrLocalState<
+      SwitchProps,
+      "isChecked"
+    >({
+      args,
+      context,
+      argKey: "isChecked",
+      defaultValue: args.isChecked ?? false,
     });
-  },
-};
 
-export const Disabled: StoryObj<typeof Switch> = {
-  args: {
-    isDisabled: true,
-  },
-};
-
-export const CheckedDisabled: StoryObj<typeof Switch> = {
-  args: {
-    isDisabled: true,
-    isDefaultChecked: true,
-  },
-};
-export const CheckedReadOnly: StoryObj<typeof Switch> = {
-  args: {
-    isReadOnly: true,
-    isDefaultChecked: true,
-  },
-};
-export const Controlled: StoryObj<typeof Switch> = {
-  render: function C({ ...props }) {
-    const [checked, setChecked] = useState(true);
-
-    const onChange = useCallback<NonNullable<SwitchProps["onChange"]>>(
-      ({ checked }) => setChecked(checked),
-      [],
+    const handleChange = useCallback(
+      (changeEvent: { checked: boolean; value: string }) => {
+        setValue(changeEvent.checked);
+      },
+      [setValue],
     );
-    return <Switch {...props} isChecked={checked} onChange={onChange} />;
+
+    return (
+      <Switch
+        {...args}
+        isChecked={checked}
+        isDefaultChecked={undefined}
+        onChange={handleChange}
+      />
+    );
   },
+};
+
+export const Default: Story = {
+  ...deepmerge(SwitchTemplate, {
+    tags: ["!autodocs"],
+  }),
+};
+
+export const Checked: Story = {
+  ...deepmerge(SwitchTemplate, {
+    args: {
+      isChecked: true,
+    },
+  }),
+};
+
+export const Hint: Story = {
+  ...deepmerge(SwitchTemplate, {
+    args: {
+      hint: "Hint text",
+    },
+  }),
+};
+
+export const HintLink: Story = {
+  ...deepmerge(SwitchTemplate, {
+    args: {
+      hint: "Hint text",
+      HintLinkComponent: <Link href="#link">Link</Link>,
+    },
+  }),
+};
+
+export const Disabled: Story = {
+  ...deepmerge(SwitchTemplate, {
+    args: {
+      isDisabled: true,
+    },
+  }),
+};
+
+export const CheckedDisabled: Story = {
+  ...deepmerge(SwitchTemplate, {
+    args: {
+      isDisabled: true,
+      isChecked: true,
+    },
+  }),
+};
+
+export const CheckedReadOnly: Story = {
+  ...deepmerge(SwitchTemplate, {
+    args: {
+      isReadOnly: true,
+      isChecked: true,
+    },
+  }),
+};
+
+export const Uncontrolled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "When `isChecked` is omitted the Switch manages its own state via `isDefaultChecked`",
+      },
+    },
+  },
+  args: {
+    isDefaultChecked: false,
+    isChecked: undefined,
+  },
+  argTypes: {
+    isChecked: { control: false },
+  },
+  render: (props) => <Switch {...props} />,
 };

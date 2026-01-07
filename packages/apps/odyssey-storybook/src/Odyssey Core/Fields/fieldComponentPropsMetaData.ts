@@ -21,16 +21,19 @@ export const fieldComponentPropsMetaData: Partial<
     description:
       "If `error` is not undefined, the `input` will indicate an error",
     table: {
+      category: "Visual",
       type: {
         summary: "string",
       },
     },
   },
   errorMessageList: {
-    // control: null,
+    control: { type: "check" },
+    options: ["Error A", "Error B", "Error C"],
     description:
       "The list of error messages rendered at the buttom of the `error` message",
     table: {
+      category: "Visual",
       type: {
         summary: "array",
       },
@@ -38,17 +41,20 @@ export const fieldComponentPropsMetaData: Partial<
   },
   hint: {
     control: "text",
-    description: "The helper text content",
+    description: "A helper text that is displayed under the label",
     table: {
+      category: "Visual",
       type: {
         summary: "string",
       },
     },
   },
   HintLinkComponent: {
+    control: false,
     description:
-      "A `HintLink` component to provide greater context that is rendered at the end of the `hint` text",
+      "A `HintLink` component rendered alongside the `hint` text to provide greater context. See [HintLink](../?path=/docs/odyssey-core-fields-hintlink--docs) for usage and available props",
     table: {
+      category: "Visual",
       type: {
         summary: "ReactNode",
       },
@@ -56,8 +62,9 @@ export const fieldComponentPropsMetaData: Partial<
   },
   id: {
     control: "text",
-    description: "The id of the `input` element.",
+    description: "The id of the `input` element",
     table: {
+      category: "Functional",
       type: {
         summary: "string",
       },
@@ -67,6 +74,7 @@ export const fieldComponentPropsMetaData: Partial<
     control: "boolean",
     description: "If `true`, the component is disabled",
     table: {
+      category: "Visual",
       type: {
         summary: "boolean",
       },
@@ -80,6 +88,7 @@ export const fieldComponentPropsMetaData: Partial<
     description:
       "If `true`, the component can stretch to fill the width of the container",
     table: {
+      category: "Visual",
       type: {
         summary: "boolean",
       },
@@ -92,6 +101,7 @@ export const fieldComponentPropsMetaData: Partial<
     control: "boolean",
     description: "If `true`, the `input` element is not required",
     table: {
+      category: "Visual",
       type: {
         summary: "boolean",
       },
@@ -102,8 +112,10 @@ export const fieldComponentPropsMetaData: Partial<
   },
   isReadOnly: {
     control: "boolean",
-    description: "It prevents the user from changing the value of the field",
+    description:
+      "If `true`, it prevents the user from changing the value of the field",
     table: {
+      category: "Visual",
       type: {
         summary: "boolean",
       },
@@ -112,8 +124,9 @@ export const fieldComponentPropsMetaData: Partial<
   name: {
     control: "text",
     description:
-      "The name of the `input` element. Defaults to the `id` if not set.",
+      "The name of the `input` element. Defaults to the `id` if not set",
     table: {
+      category: "Functional",
       type: {
         summary: "string",
       },

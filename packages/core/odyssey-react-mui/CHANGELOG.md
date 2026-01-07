@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.51.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.50.1...v1.51.0) (2026-01-07)
+
+### Features
+
+- conditionally wrap Translation Provider ([#162](https://github.com/atko-eng/odyssey-design-system/issues/162)) ([2201266](https://github.com/atko-eng/odyssey-design-system/commit/2201266218cf6cf47346513c3a6ed63de773c955))
+- full screen overlay selector attr ([#159](https://github.com/atko-eng/odyssey-design-system/issues/159)) ([61481a8](https://github.com/atko-eng/odyssey-design-system/commit/61481a8a59287e2bfc0feffcefe7de7aa36c2a72))
+
 ## [1.50.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.49.0...v1.50.0) (2025-12-11)
 
 ### Features

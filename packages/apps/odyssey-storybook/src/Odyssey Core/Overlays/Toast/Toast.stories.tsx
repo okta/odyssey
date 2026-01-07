@@ -19,12 +19,13 @@ import {
   toastSeverityValues,
   ToastStack,
 } from "@okta/odyssey-react-mui";
+import { useCallback, useState } from "@storybook/preview-api";
 import { Meta, StoryObj } from "@storybook/react";
 import { expect, userEvent, waitFor, within } from "@storybook/test";
-import { useCallback, useState } from "react";
 
 import { axeRun } from "../../../axeRun.js";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
+import { useStoryArgOrLocalState } from "../../../tools/useStoryArgOrLocalState.js";
 
 const meta = {
   component: Toast,
@@ -36,6 +37,7 @@ const meta = {
       description:
         "If set, this determines how long the toast should appear before automatically disappearing in milliseconds. It will only take effect if the toast is not dismissible. If left blank, it defaults to 6000",
       table: {
+        category: "Functional",
         type: {
           summary: "number",
         },
@@ -48,6 +50,7 @@ const meta = {
       control: "boolean",
       description: "If `true`, the alert will include a close button",
       table: {
+        category: "Visual",
         type: {
           summary: "boolean",
         },
@@ -57,9 +60,10 @@ const meta = {
       },
     },
     isVisible: {
-      control: "boolean",
+      control: { type: "boolean" },
       description: "If true, the Toast is visible",
       table: {
+        category: "Functional",
         type: {
           summary: "boolean",
         },
@@ -70,6 +74,7 @@ const meta = {
       description:
         "If linkUrl is defined, this is the text of the link. If left blank, it defaults to 'Learn more'. Note that linkText does nothing if linkUrl is not defined",
       table: {
+        category: "Visual",
         type: {
           summary: "string",
         },
@@ -79,14 +84,17 @@ const meta = {
       control: "text",
       description: "If defined, the alert will include a link to the URL",
       table: {
+        category: "Functional",
         type: {
           summary: "string",
         },
       },
     },
     onHide: {
+      control: false,
       description: "An optional function to run when the Toast is closed",
       table: {
+        category: "Functional",
         type: {
           summary: "func",
         },
@@ -98,6 +106,7 @@ const meta = {
       description:
         "Sets the ARIA role of the alert ('status' for something that dynamically updates, 'alert' for errors, null for something unchanging)",
       table: {
+        category: "Functional",
         type: {
           summary: toastRoleValues.join(" | "),
         },
@@ -108,6 +117,7 @@ const meta = {
       control: { type: "radio" },
       description: "Determine the color and icon of the alert",
       table: {
+        category: "Visual",
         type: {
           summary: toastSeverityValues.join(" | "),
         },
@@ -122,6 +132,7 @@ const meta = {
       control: "text",
       description: "The text content of the alert",
       table: {
+        category: "Visual",
         type: {
           summary: "string",
         },
@@ -133,6 +144,7 @@ const meta = {
     },
   },
   args: {
+    isVisible: false,
     severity: "info",
     role: "status",
     linkText: "Info",
@@ -166,10 +178,25 @@ const Single: Story = {
     isVisible: false,
     role: "status",
   },
-  render: function C(args) {
-    const [isVisible, setIsVisible] = useState(args.isVisible);
-    const showToast = useCallback(() => setIsVisible(true), []);
-    const hideToast = useCallback(() => setIsVisible(false), []);
+  render: function C(args, context) {
+    const { value, setValue } = useStoryArgOrLocalState<
+      ToastProps,
+      "isVisible"
+    >({
+      args,
+      context,
+      argKey: "isVisible",
+      defaultValue: args.isVisible,
+      defaultStoryName: "Info",
+    });
+
+    const showToast = useCallback(() => {
+      setValue(true);
+    }, [setValue]);
+
+    const handleHide = useCallback(() => {
+      setValue(false);
+    }, [setValue]);
 
     return (
       <>
@@ -179,17 +206,7 @@ const Single: Story = {
           variant="primary"
         />
         <ToastStack>
-          <Toast
-            autoHideDuration={args.autoHideDuration}
-            isDismissable={args.isDismissable}
-            isVisible={isVisible}
-            linkText={args.linkText}
-            linkUrl={args.linkUrl}
-            onHide={hideToast}
-            role={args.role}
-            severity={args.severity}
-            text={args.text}
-          />
+          <Toast {...args} isVisible={value} onHide={handleHide} />
         </ToastStack>
       </>
     );
@@ -203,6 +220,7 @@ export const Info: Story = {
     severity: "info",
   },
   play: openToast("Info Toast"),
+  tags: ["!autodocs"],
 };
 
 export const ErrorToast: Story = {
@@ -288,6 +306,17 @@ export const Dismissible: Story = {
 };
 
 export const MultipleToasts: Story = {
+  argTypes: {
+    autoHideDuration: { control: false },
+    isDismissable: { control: false },
+    isVisible: { control: false },
+    linkText: { control: false },
+    linkUrl: { control: false },
+    onHide: { control: false },
+    role: { control: false },
+    severity: { control: false },
+    text: { control: false },
+  },
   parameters: {
     docs: {
       description: {

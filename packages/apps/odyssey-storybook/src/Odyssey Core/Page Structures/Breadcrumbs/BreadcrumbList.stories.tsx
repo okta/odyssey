@@ -12,25 +12,31 @@
 
 import type { Meta, StoryObj } from "@storybook/react";
 
-import {
-  Breadcrumb,
-  BreadcrumbList,
-  type BreadcrumbsProps,
-} from "@okta/odyssey-react-mui";
+import { Breadcrumb, BreadcrumbList } from "@okta/odyssey-react-mui";
 import { action } from "@storybook/addon-actions";
 import { expect, within } from "@storybook/test";
 
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 
-const storybookMeta: Meta<BreadcrumbsProps> = {
+const storybookMeta: Meta<typeof BreadcrumbList> = {
   component: BreadcrumbList,
   decorators: [OdysseyStorybookThemeDecorator],
   tags: ["autodocs"],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "`BreadcrumbList` arranges [Breadcrumb](../?path=/docs/odyssey-core-page-structures-breadcrumbs-breadcrumb--docs) items to describe the user's location. Use these components together to ensure correct styling and accessibility behavior.",
+      },
+    },
+  },
   argTypes: {
     children: {
-      control: "object",
-      description: "Multiple Breadcrumb components.",
+      control: false,
+      description:
+        "Multiple Breadcrumb components. See [Breadcrumb](../?path=/docs/odyssey-core-page-structures-breadcrumbs-breadcrumb--docs) for usage and available props",
       table: {
+        category: "Visual",
         type: {
           summary: "Breadcrumb",
         },
@@ -38,20 +44,49 @@ const storybookMeta: Meta<BreadcrumbsProps> = {
     },
     homeHref: {
       control: "text",
-      description: 'URL of the "Home" breadcrumb.',
+      description:
+        'URL used for the automatically rendered "Home" breadcrumb with icon',
       table: {
+        category: "Visual",
         type: {
           summary: "string",
         },
       },
     },
     maxVisibleItems: {
-      control: "number",
+      control: { type: "number" },
       description:
-        "The number of breadcrumbs displayed. Any additional breadcrumbs will be shown in a dropdown menu.",
+        "Number of breadcrumbs shown before older ones collapse into the overflow menu",
       table: {
+        category: "Visual",
         type: {
           summary: "number",
+        },
+        defaultValue: {
+          summary: "5",
+        },
+      },
+    },
+    testId: {
+      control: "text",
+      description:
+        "Adds a legacy `data-se` attribute. Prefer semantic queries in new tests",
+      table: {
+        category: "Functional",
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    translate: {
+      control: { type: "radio" },
+      options: ["yes", "no"],
+      description:
+        "Sets the HTML `translate` attribute to opt the breadcrumb trail in or out of machine translation",
+      table: {
+        category: "Functional",
+        type: {
+          summary: '"yes" | "no"',
         },
       },
     },
@@ -63,7 +98,9 @@ const storybookMeta: Meta<BreadcrumbsProps> = {
 
 export default storybookMeta;
 
-export const Default: StoryObj<BreadcrumbsProps> = {
+type BreadcrumbListStory = StoryObj<typeof BreadcrumbList>;
+
+export const Default: BreadcrumbListStory = {
   args: {
     homeHref: "#home",
   },
@@ -94,7 +131,7 @@ export const Default: StoryObj<BreadcrumbsProps> = {
   },
 };
 
-export const Truncation: StoryObj<BreadcrumbsProps> = {
+export const Truncation: BreadcrumbListStory = {
   args: {
     homeHref: "#home",
   },
@@ -120,33 +157,29 @@ export const Truncation: StoryObj<BreadcrumbsProps> = {
   ),
 };
 
-export const Simple: StoryObj<BreadcrumbsProps> = {
+export const Simple: BreadcrumbListStory = {
   args: {
     children: [
       <Breadcrumb href="#one">One</Breadcrumb>,
       <Breadcrumb href="#two">Two</Breadcrumb>,
     ],
   },
-  render: (args: BreadcrumbsProps) => (
-    <BreadcrumbList>{args.children}</BreadcrumbList>
-  ),
+  render: (args) => <BreadcrumbList {...args} />,
 };
 
-export const WithOnClick: StoryObj<BreadcrumbsProps> = {
+export const WithOnClick: BreadcrumbListStory = {
   args: {
     homeHref: "#home",
   },
   render: (args) => (
     <BreadcrumbList {...args}>
-      <Breadcrumb href="#one" onClick={action("onClick")}>
-        One
-      </Breadcrumb>
+      <Breadcrumb onClick={action("onClick")}>One</Breadcrumb>
       <Breadcrumb href="#two">Two</Breadcrumb>
     </BreadcrumbList>
   ),
 };
 
-export const Subordinate: StoryObj<BreadcrumbsProps> = {
+export const Subordinate: BreadcrumbListStory = {
   args: {
     homeHref: "#home",
   },

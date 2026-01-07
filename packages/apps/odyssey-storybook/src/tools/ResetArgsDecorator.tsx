@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2022-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -10,19 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo } from "react";
+import { useArgs } from "@storybook/preview-api";
+import { Decorator } from "@storybook/react";
+import { useEffect } from "react";
 
-import { Link, LinkProps } from "./Link.js";
+export const ResetArgsDecorator: Decorator = (Story) => {
+  const [, , resetArgs] = useArgs();
 
-const HintLink = (
-  props: Pick<
-    LinkProps,
-    "children" | "href" | "onClick" | "rel" | "target" | "testId"
-  >,
-) => <Link {...props} variant="monochrome" />;
+  useEffect(() => {
+    return () => resetArgs();
+  }, [resetArgs]);
 
-const MemoizedHintLink = memo(HintLink);
-
-MemoizedHintLink.displayName = "HintLink";
-
-export { MemoizedHintLink as HintLink };
+  return <Story />;
+};

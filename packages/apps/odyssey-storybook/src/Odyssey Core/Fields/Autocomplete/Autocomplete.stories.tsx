@@ -278,7 +278,7 @@ export const FullWidth: StoryObj<AutocompleteType> = {
 
 export const HintLink: StoryObj<AutocompleteType> = {
   args: {
-    HintLinkComponent: <Link href="/learn-more">Learn more</Link>,
+    HintLinkComponent: <Link href="#link">Learn more</Link>,
   },
 };
 

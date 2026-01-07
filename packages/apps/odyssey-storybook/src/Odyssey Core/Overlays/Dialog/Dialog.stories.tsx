@@ -16,13 +16,14 @@ import {
   DialogContentText,
   DialogProps,
 } from "@okta/odyssey-react-mui";
+import { useCallback } from "@storybook/preview-api";
 import { Meta, StoryObj } from "@storybook/react";
 import { screen, userEvent, within } from "@storybook/test";
-import { useCallback, useState } from "react";
 
 import type { PlaywrightProps } from "../../../tools/storybookTypes.js";
 
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
+import { useStoryArgOrLocalState } from "../../../tools/useStoryArgOrLocalState.js";
 
 // Explicitly type the Meta object
 const storybookMeta: Meta<typeof Dialog> = {
@@ -31,25 +32,40 @@ const storybookMeta: Meta<typeof Dialog> = {
   tags: ["autodocs"],
   argTypes: {
     primaryCallToActionComponent: {
+      control: false,
       description:
-        "An optional Button object to be situated in the Dialog footer. Should almost always be of variant `primary`.",
-      table: { type: { summary: "<Button />" } },
+        "An optional Button object to be situated in the Dialog footer. Should almost always be of variant `primary`, see [Button](../?path=/docs/odyssey-core-button--docs) for usage and available props",
+      table: {
+        category: "Visual",
+        type: { summary: "<Button />" },
+      },
     },
     secondaryCallToActionComponent: {
+      control: false,
       description:
-        "An optional Button object to be situated in the Dialog footer, alongside the `callToActionPrimaryComponent`.",
-      table: { type: { summary: "<Button />" } },
+        "An optional Button object to be situated in the Dialog footer, alongside the `primaryCallToActionComponent`, see [Button](../?path=/docs/odyssey-core-button--docs) for usage and available props",
+      table: {
+        category: "Visual",
+        type: { summary: "<Button />" },
+      },
     },
     tertiaryCallToActionComponent: {
+      control: false,
       description:
-        "An optional Button object to be situated in the Dialog footer, alongside the other two `callToAction` components.",
-      table: { type: { summary: "<Button />" } },
+        "An optional Button object to be situated in the Dialog footer, alongside the other two `callToAction` components, see [Button](../?path=/docs/odyssey-core-button--docs) for usage and available props",
+      table: {
+        category: "Visual",
+        type: { summary: "<Button />" },
+      },
     },
     children: {
       control: "text",
       description:
-        "The content of the Dialog. May be a `string` or any other `ReactNode` or array of `ReactNode`s.",
-      table: { type: { summary: "ReactNode | Array<ReactNode>" } },
+        "The content of the Dialog. May be a `string` or any other `ReactNode` or array of `ReactNode`s",
+      table: {
+        category: "Visual",
+        type: { summary: "ReactNode | Array<ReactNode>" },
+      },
       type: {
         required: true,
         name: "other",
@@ -58,25 +74,36 @@ const storybookMeta: Meta<typeof Dialog> = {
     },
     isOpen: {
       control: "boolean",
-      description: "When set to `true`, the Dialog will be visible.",
-      table: { type: { summary: "boolean" } },
+      description: "When set to `true`, the Dialog will be visible",
+      table: {
+        category: "Functional",
+        type: { summary: "boolean" },
+      },
       type: { required: true, name: "boolean" },
     },
     onClose: {
+      control: false,
       description:
         "Callback that controls what happens when the dialog is dismissed",
-      table: { type: { summary: "func" } },
+      table: {
+        category: "Functional",
+        type: { summary: "func" },
+      },
     },
     title: {
       control: "text",
-      table: { type: { summary: "string" } },
+      table: {
+        category: "Visual",
+        type: { summary: "string" },
+      },
       type: { required: true, name: "string" },
     },
   },
   args: {
     children:
-      "You are initiating this ship's self-destruct protocol. This ship, and its occupants, will be destroyed.",
-    title: "Initiate self-destruct protocol",
+      "Description text explaining the consequences and any alternatives. Limit to two lines if possible",
+    isOpen: false,
+    title: "Dialog title",
   },
 };
 
@@ -95,40 +122,49 @@ const findDialogElement = async ({
 };
 
 const DefaultTemplate: StoryObj<DialogProps> = {
-  render: function C(props: DialogProps) {
-    const [isVisible, setIsVisible] = useState(false);
+  render: function C(args, context) {
+    const { value, setValue } = useStoryArgOrLocalState<DialogProps, "isOpen">({
+      args,
+      context,
+      argKey: "isOpen",
+      defaultValue: args.isOpen ?? false,
+    });
 
-    const onOpen = useCallback(() => {
-      setIsVisible(true);
-    }, []);
+    const handleOpen = useCallback(() => {
+      setValue(true);
+    }, [setValue]);
 
-    const onClose = useCallback(() => {
-      setIsVisible(false);
-    }, []);
+    const handleClose = useCallback(() => {
+      setValue(false);
+    }, [setValue]);
 
     return (
       <>
-        <Button label="Open dialog" onClick={onOpen} variant="primary" />
+        <Button label="Open dialog" onClick={handleOpen} variant="primary" />
         <Dialog
-          {...props}
-          isOpen={isVisible}
-          onClose={onClose}
+          {...args}
+          isOpen={value}
+          onClose={handleClose}
           primaryCallToActionComponent={
             <Button
               label="Primary action"
-              onClick={onClose}
+              onClick={handleClose}
               variant="primary"
             />
           }
           secondaryCallToActionComponent={
             <Button
               label="Secondary action"
-              onClick={onClose}
+              onClick={handleClose}
               variant="secondary"
             />
           }
           tertiaryCallToActionComponent={
-            <Button label="Cancel" onClick={onClose} variant="floating" />
+            <Button
+              label="Tertiary action"
+              onClick={handleClose}
+              variant="floating"
+            />
           }
         />
       </>
@@ -138,14 +174,10 @@ const DefaultTemplate: StoryObj<DialogProps> = {
 
 export const Default: StoryObj<DialogProps> = {
   ...DefaultTemplate,
-  args: {
-    children:
-      "You are initiating this ship's self-destruct protocol. This ship, and its occupants, will be destroyed.",
-    title: "Initiate self-destruct protocol",
-  },
   play: async ({ canvasElement, step }: PlaywrightProps<DialogProps>) => {
     await findDialogElement({ canvasElement, step });
   },
+  tags: ["!autodocs"],
 };
 
 export const Long: StoryObj<DialogProps> = {
@@ -154,8 +186,13 @@ export const Long: StoryObj<DialogProps> = {
     docs: {
       description: {
         story:
-          "If the `Dialog` content is longer than the available space, the body will automatically receive top and bottom borders to indicate scrollability.",
+          "If the `Dialog` content is longer than the available space, the body will automatically receive top and bottom borders to indicate scrollability",
       },
+    },
+  },
+  argTypes: {
+    children: {
+      control: false,
     },
   },
   args: {
@@ -306,28 +343,28 @@ export const Long: StoryObj<DialogProps> = {
 };
 
 export const NoButtons: StoryObj<DialogProps> = {
-  render: function C(props: DialogProps) {
-    const [isVisible, setIsVisible] = useState(false);
+  render: function C(args, context) {
+    const { value, setValue } = useStoryArgOrLocalState<DialogProps, "isOpen">({
+      args,
+      context,
+      argKey: "isOpen",
+      defaultValue: args.isOpen ?? false,
+    });
 
-    const onOpen = useCallback(() => {
-      setIsVisible(true);
-    }, []);
+    const handleOpen = useCallback(() => {
+      setValue(true);
+    }, [setValue]);
 
-    const onClose = useCallback(() => {
-      setIsVisible(false);
-    }, []);
+    const handleClose = useCallback(() => {
+      setValue(false);
+    }, [setValue]);
 
     return (
       <>
-        <Button label="Open dialog" onClick={onOpen} variant="primary" />
-        <Dialog {...props} isOpen={isVisible} onClose={onClose} />
+        <Button label="Open dialog" onClick={handleOpen} variant="primary" />
+        <Dialog {...args} isOpen={value} onClose={handleClose} />
       </>
     );
-  },
-  args: {
-    children:
-      "By closing this Dialog you agree to adhere to the Ceres Station terms of use.",
-    title: "Ceres Station docking terms",
   },
   play: async ({ canvasElement, step }: PlaywrightProps<DialogProps>) => {
     await findDialogElement({ canvasElement, step });

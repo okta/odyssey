@@ -154,7 +154,7 @@ const Dialog = ({
   >((event) => onClose(event, "closeButtonClick"), [onClose]);
 
   return (
-    <FullScreenOverlay>
+    <FullScreenOverlay overlayType="dialog">
       <MuiDialog
         aria-labelledby={dialogLabelId}
         data-se={testId}

@@ -13,5 +13,9 @@
 // This is a random number chosen to shrink down the unique ID to an arbitrary length.
 export const uniqueIdLength = 6;
 
-export const createUniqueId = () =>
-  Math.random().toString(36).slice(-uniqueIdLength);
+export const createUniqueId = () => {
+  const id = Math.random()
+    .toString(36)
+    .slice(2, 2 + uniqueIdLength);
+  return /^[a-z]/i.test(id) ? id : `a${id.slice(1)}`;
+};
