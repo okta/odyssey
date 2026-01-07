@@ -29,6 +29,7 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {
     id: {
+      control: "text",
       description: "An optional ID for the button",
       table: { type: { summary: "string" } },
     },
@@ -55,7 +56,7 @@ const meta = {
     },
   },
   args: {
-    label: "Add crew",
+    label: "Button label",
     variant: "primary",
   },
 } satisfies Meta<typeof Button>;

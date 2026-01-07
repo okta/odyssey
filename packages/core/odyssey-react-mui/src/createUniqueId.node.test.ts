@@ -18,5 +18,6 @@ describe(createUniqueId.name, () => {
 
     expect(typeof result).toBe("string");
     expect(result).toHaveLength(uniqueIdLength);
+    expect(result).toMatch(/^[a-z]/i);
   });
 });

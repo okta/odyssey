@@ -48,18 +48,37 @@ const variantMapping = {
   support: Support,
 };
 
-const storybookMeta: Meta<TypographyProps> = {
+const ariaCurrentOptions = [
+  "false",
+  "page",
+  "step",
+  "location",
+  "date",
+  "time",
+  "true",
+] as const;
+
+const storybookMeta: Meta<typeof Typography> = {
   component: Typography,
   decorators: [OdysseyStorybookThemeDecorator],
-  parameters: {
-    docs: {
-      description: "",
-    },
-  },
   argTypes: {
-    ariaDescribedBy: {
-      description: "The ID of the element that describes the component.",
+    ariaCurrent: {
+      control: { type: "select" },
+      options: ariaCurrentOptions,
+      description:
+        "Sets `aria-current` to indicate the active item within a related set (e.g. current step or page)",
       table: {
+        category: "Functional",
+        type: {
+          summary: ariaCurrentOptions.join(" | "),
+        },
+      },
+    },
+    ariaDescribedBy: {
+      control: "text",
+      description: "The ID of the element that describes the component",
+      table: {
+        category: "Functional",
         type: {
           summary: "string",
         },
@@ -67,16 +86,19 @@ const storybookMeta: Meta<TypographyProps> = {
     },
     ariaLabel: {
       control: "text",
-      description: "The ARIA label for the component.",
+      description: "The ARIA label for the component",
       table: {
+        category: "Functional",
         type: {
           summary: "string",
         },
       },
     },
     ariaLabelledBy: {
-      description: "The ID of the element that labels the component.",
+      control: "text",
+      description: "The ID of the element that labels the component",
       table: {
+        category: "Functional",
         type: {
           summary: "string",
         },
@@ -84,22 +106,25 @@ const storybookMeta: Meta<TypographyProps> = {
     },
     children: {
       control: "text",
-      description: "The text content of the component.",
+      description: "The text content of the component",
       table: {
+        category: "Visual",
         type: {
           summary: "ReactNode",
         },
       },
       type: {
         required: true,
-        name: "string",
+        name: "other",
+        value: "ReactNode",
       },
     },
     color: {
       options: typographyColorValues,
       control: { type: "select" },
-      description: "The color of the text.",
+      description: "The color of the text",
       table: {
+        category: "Visual",
         type: {
           summary: typographyColorValues.join(" | "),
         },
@@ -109,16 +134,62 @@ const storybookMeta: Meta<TypographyProps> = {
       description:
         "The HTML element the component should render, if different from the default",
       table: {
+        category: "Functional",
         type: {
           summary: "ElementType",
+        },
+      },
+    },
+    id: {
+      control: "text",
+      description: "Sets the `id` attribute on the rendered element",
+      table: {
+        category: "Functional",
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    isPresentational: {
+      control: "boolean",
+      description:
+        'If `true`, renders with `role="presentation"` so screen readers ignore the content',
+      table: {
+        category: "Functional",
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    testId: {
+      control: "text",
+      description:
+        "Adds a legacy `data-se` attribute. Prefer semantic selectors in new tests",
+      table: {
+        category: "Functional",
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    translate: {
+      control: { type: "radio" },
+      options: ["yes", "no"],
+      description:
+        "Sets the HTML `translate` attribute to opt the text in or out of machine translation",
+      table: {
+        category: "Functional",
+        type: {
+          summary: '"yes" | "no"',
         },
       },
     },
     variant: {
       options: Object.keys(typographyVariantMapping),
       control: { type: "select" },
-      description: "The variant of Typography to render.",
+      description: "The variant of Typography to render",
       table: {
+        category: "Visual",
         type: {
           summary: Object.keys(typographyVariantMapping).join(" | "),
         },

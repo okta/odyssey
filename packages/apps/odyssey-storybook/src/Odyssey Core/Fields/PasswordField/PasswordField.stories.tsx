@@ -10,13 +10,21 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { odysseyTranslate, PasswordField } from "@okta/odyssey-react-mui";
+import {
+  deepmerge,
+  odysseyTranslate,
+  PasswordField,
+  PasswordFieldProps,
+  Stack,
+} from "@okta/odyssey-react-mui";
+import { useCallback } from "@storybook/preview-api";
 import { Meta, StoryObj } from "@storybook/react";
-import { expect, fn, userEvent, waitFor, within } from "@storybook/test";
-import { ChangeEvent, useCallback, useState } from "react";
+import { expect, fn, userEvent, within } from "@storybook/test";
+import { ChangeEvent } from "react";
 
 import { axeRun } from "../../../axeRun.js";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
+import { useStoryArgOrLocalState } from "../../../tools/useStoryArgOrLocalState.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 
 const meta = {
@@ -26,8 +34,9 @@ const meta = {
     autoCompleteType: {
       control: "text",
       description:
-        "This prop helps users to fill forms faster, especially on mobile devices. The name can be confusing, as it's more like an autofill. You can learn more about it [following the specification](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill)",
+        "The native HTML [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) attribute for enabling browser autofill (e.g., `email`, `username`, `current-password`)",
       table: {
+        category: "Functional",
         type: {
           summary: "string",
         },
@@ -36,8 +45,9 @@ const meta = {
     defaultValue: {
       control: "text",
       description:
-        "The value of the `input` element. Use when the component is not controlled",
+        "If `value` is undefined, the field is uncontrolled and `defaultValue` provides its initial text",
       table: {
+        category: "Functional",
         type: {
           summary: "string",
         },
@@ -49,9 +59,10 @@ const meta = {
     errorMessage: fieldComponentPropsMetaData.errorMessage,
     errorMessageList: fieldComponentPropsMetaData.errorMessageList,
     hasInitialFocus: {
-      control: "boolean",
+      control: false,
       description: "If `true`, the component will receive focus automatically",
       table: {
+        category: "Functional",
         type: {
           summary: "boolean",
         },
@@ -61,6 +72,7 @@ const meta = {
       control: "boolean",
       description: "If `true`, the show/hide eye icon is not shown to the user",
       table: {
+        category: "Visual",
         type: {
           summary: "boolean",
         },
@@ -77,8 +89,9 @@ const meta = {
     isReadOnly: fieldComponentPropsMetaData.isReadOnly,
     label: {
       control: "text",
-      description: "The label text for the password field input",
+      description: "The label for the `input` element",
       table: {
+        category: "Visual",
         type: {
           summary: "string",
         },
@@ -90,16 +103,19 @@ const meta = {
     },
     onBlur: {
       description:
-        "Callback fired when the autocomplete component loses focus.",
+        "Callback fired after the input loses focus; useful for validation or analytics hooks",
       table: {
+        category: "Functional",
         type: {
           summary: "func",
         },
       },
     },
     onChange: {
-      description: "Callback fired when the password value is changed.",
+      description:
+        "Callback fired whenever the value changes; required when controlling the component via `value`",
       table: {
+        category: "Functional",
         type: {
           summary: "func",
         },
@@ -107,8 +123,9 @@ const meta = {
     },
     onFocus: {
       description:
-        "Callback fired when the autocomplete component gains focus.",
+        "Callback fired when the input gains focus; helpful for analytics or guided workflows",
       table: {
+        category: "Functional",
         type: {
           summary: "func",
         },
@@ -119,6 +136,7 @@ const meta = {
       description:
         "The short hint displayed in the `input` before the user enters a value",
       table: {
+        category: "Visual",
         type: {
           summary: "string",
         },
@@ -127,8 +145,9 @@ const meta = {
     value: {
       control: "text",
       description:
-        "The value of the `input` element. Use when component is controlled",
+        "If `value` is provided, you control the input externally and must handle updates with `onChange`",
       table: {
+        category: "Functional",
         type: {
           summary: "string",
         },
@@ -144,6 +163,7 @@ const meta = {
     onBlur: fn(),
     onChange: fn(),
     onFocus: fn(),
+    value: "",
   },
 } satisfies Meta<typeof PasswordField>;
 
@@ -151,182 +171,232 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  play: async ({ canvasElement, step }) => {
-    await step("toggle password", async () => {
-      const canvas = within(canvasElement);
-      const fieldElement = canvas.getByRole("textbox", {
-        name: "Password",
-      });
-      expect(fieldElement).toHaveAttribute("type", "password");
-
-      const buttonElement = canvas.getByRole("button", {
-        name: odysseyTranslate("passwordfield.icon.label.show"),
-      });
-      if (buttonElement) {
-        await userEvent.type(fieldElement, "qwerty");
-        await userEvent.click(buttonElement);
-        await userEvent.tab();
-
-        expect(fieldElement).toHaveAttribute("type", "text");
-        expect(buttonElement.ariaLabel).toBe(
-          odysseyTranslate("passwordfield.icon.label.show"),
-        );
-        expect(buttonElement.ariaPressed).toBe("true");
-
-        await userEvent.click(buttonElement);
-
-        expect(fieldElement).toHaveAttribute("type", "password");
-        expect(buttonElement.ariaLabel).toBe(
-          odysseyTranslate("passwordfield.icon.label.show"),
-        );
-        expect(buttonElement.ariaPressed).toBe("false");
-      }
-      await waitFor(() => {
-        axeRun("Password Field Default");
-      });
-    });
-  },
-};
-
-export const Disabled: Story = {
-  parameters: {
-    docs: {
-      description: {
-        story: "The values of disabled inputs will not be submitted.",
-      },
-    },
-  },
-  args: {
-    isDisabled: true,
-    defaultValue: "PasswordValue",
-  },
-};
-
-export const Error: Story = {
-  args: {
-    errorMessage: "This password is incorrect",
-    defaultValue: "",
-  },
-};
-
-export const ErrorsList: Story = {
-  args: {
-    errorMessage: "Password requires: ",
-    errorMessageList: [
-      "At least 8 chars",
-      "An uppercase letter",
-      "A number",
-      "A symbol",
-    ],
-  },
-};
-
-export const Hint: Story = {
-  args: {
-    hint: "Your first pet's name",
-    defaultValue: "",
-  },
-};
-
-export const NoShowPassword: Story = {
-  args: {
-    hasShowPassword: false,
-    defaultValue: "",
-  },
-  play: async ({ canvasElement, step }) => {
-    await step("toggle password", () => {
-      const canvas = within(canvasElement);
-      const fieldElement = canvas.getByRole("textbox", {
-        name: "Password",
-      });
-      expect(fieldElement).toHaveAttribute("type", "password");
-
-      const buttonElement = canvas.queryByRole("button", {
-        name: odysseyTranslate("passwordfield.icon.label.show"),
-      });
-      expect(buttonElement).toBe(null);
-    });
-  },
-};
-
-export const Optional: Story = {
-  args: {
-    isOptional: true,
-    defaultValue: "",
-  },
-};
-
-export const ReadOnly: Story = {
-  parameters: {
-    docs: {
-      description: {
-        story: "The values of readonly inputs will be submitted.",
-      },
-    },
-  },
-  args: {
-    isReadOnly: true,
-    defaultValue: "PasswordValue",
-  },
-};
-
-export const Controlled: Story = {
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "Provide `value` when component is to be controlled by parent. Update `value` based on updates from `onChange` event.",
-      },
-    },
-  },
+const PasswordFieldTemplate: Story = {
   args: {
     value: "",
   },
-  render: function C(props) {
-    const [localValue, setLocalValue] = useState("");
-    const onChange = useCallback(
-      (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-        setLocalValue(event?.target.value),
-      [],
+  argTypes: {
+    defaultValue: { control: false },
+  },
+  render: function Render(args, context) {
+    const { defaultValue, ...props } = args;
+    void defaultValue;
+
+    const { value, setValue } = useStoryArgOrLocalState<
+      PasswordFieldProps,
+      "value"
+    >({
+      args,
+      argKey: "value",
+      context,
+      defaultValue: args.value ?? "",
+    });
+
+    const handleChange = useCallback(
+      (event: ChangeEvent<HTMLInputElement>) => {
+        setValue(event.target.value);
+      },
+      [setValue],
     );
-    return (
-      <PasswordField
-        {...props}
-        defaultValue={undefined}
-        onChange={onChange}
-        value={localValue}
-      />
-    );
+
+    return <PasswordField {...props} onChange={handleChange} value={value} />;
   },
 };
 
-export const ControlledDefaultInput: Story = {
+const passwordFieldPlay: NonNullable<Story["play"]> = async ({
+  canvasElement,
+  step,
+}) => {
+  await step("toggle password", async () => {
+    const canvas = within(canvasElement);
+    const fieldElement = canvas.getByRole("textbox", {
+      name: "Password",
+    });
+    expect(fieldElement).toHaveAttribute("type", "password");
+
+    const buttonElement = canvas.getByRole("button", {
+      name: odysseyTranslate("passwordfield.icon.label.show"),
+    });
+    if (buttonElement) {
+      await userEvent.type(fieldElement, "password", { delay: 50 });
+      await userEvent.click(buttonElement);
+      await userEvent.tab();
+
+      expect(fieldElement).toHaveAttribute("type", "text");
+      expect(buttonElement.ariaLabel).toBe(
+        odysseyTranslate("passwordfield.icon.label.show"),
+      );
+      expect(buttonElement.ariaPressed).toBe("true");
+
+      await userEvent.click(buttonElement);
+
+      expect(fieldElement).toHaveAttribute("type", "password");
+      expect(buttonElement.ariaLabel).toBe(
+        odysseyTranslate("passwordfield.icon.label.show"),
+      );
+      expect(buttonElement.ariaPressed).toBe("false");
+    }
+    await axeRun("Password Field Default");
+  });
+};
+
+const noShowPasswordPlay: NonNullable<Story["play"]> = async ({
+  canvasElement,
+  step,
+}) => {
+  await step("toggle password", () => {
+    const canvas = within(canvasElement);
+    const fieldElement = canvas.getByRole("textbox", {
+      name: "Password",
+    });
+    expect(fieldElement).toHaveAttribute("type", "password");
+
+    const buttonElement = canvas.queryByRole("button", {
+      name: odysseyTranslate("passwordfield.icon.label.show"),
+    });
+    expect(buttonElement).toBe(null);
+  });
+};
+
+export const Default: Story = {
+  ...deepmerge(PasswordFieldTemplate, {
+    play: passwordFieldPlay,
+  }),
+};
+
+export const Disabled: Story = {
+  ...deepmerge(PasswordFieldTemplate, {
+    parameters: {
+      docs: {
+        description: {
+          story: "The values of disabled inputs will not be submitted.",
+        },
+      },
+    },
+    args: {
+      isDisabled: true,
+      value: "password",
+    },
+  }),
+};
+
+export const Error: Story = {
+  ...deepmerge(PasswordFieldTemplate, {
+    args: {
+      errorMessage: "Error Message",
+    },
+  }),
+};
+
+export const ErrorsList: Story = {
+  ...deepmerge(PasswordFieldTemplate, {
+    args: {
+      errorMessage: "Error Message",
+      errorMessageList: ["Error A"],
+    },
+  }),
+};
+
+export const Hint: Story = {
+  ...deepmerge(PasswordFieldTemplate, {
+    args: {
+      hint: "Hint text",
+    },
+  }),
+};
+
+export const NoShowPassword: Story = {
+  ...deepmerge(PasswordFieldTemplate, {
+    args: {
+      hasShowPassword: false,
+    },
+    play: noShowPasswordPlay,
+  }),
+};
+
+export const Optional: Story = {
+  ...deepmerge(PasswordFieldTemplate, {
+    args: {
+      isOptional: true,
+    },
+  }),
+};
+
+export const ReadOnly: Story = {
+  ...deepmerge(PasswordFieldTemplate, {
+    parameters: {
+      docs: {
+        description: {
+          story: "The values of readonly inputs will be submitted.",
+        },
+      },
+    },
+    args: {
+      isReadOnly: true,
+      value: "password",
+    },
+  }),
+};
+
+export const Focused: Story = {
   parameters: {
     docs: {
       description: {
-        story:
-          "Provide `value` when component is to be controlled by parent. Update `value` based on updates from `onChange` event.",
+        story: "This `PasswordField` will receive focus when the page loads",
       },
     },
   },
   args: {
-    value: "PasswordValue",
+    hasInitialFocus: true,
+    label: "Label",
+    value: "",
   },
-  render: function C(props) {
-    const [localValue, setLocalValue] = useState("PasswordValue");
-    const onChange = useCallback(
-      (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-        setLocalValue(event?.target.value),
-      [],
+  render: function Render(args, context) {
+    const { value, setValue } = useStoryArgOrLocalState<
+      PasswordFieldProps,
+      "value"
+    >({
+      args,
+      argKey: "value",
+      context,
+      defaultValue: args.value ?? "",
+    });
+
+    const handleChange = useCallback(
+      (event: ChangeEvent<HTMLInputElement>) => {
+        setValue(event.target.value);
+      },
+      [setValue],
     );
+
     return (
-      <PasswordField
-        {...props}
-        defaultValue={undefined}
-        onChange={onChange}
-        value={localValue}
-      />
+      <Stack spacing={2}>
+        <PasswordField label="Not Focused" />
+        <PasswordField {...args} onChange={handleChange} value={value} />
+      </Stack>
     );
+  },
+};
+
+export const Uncontrolled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "When `value` is omitted the field manages its own state via `defaultValue`.",
+      },
+    },
+  },
+  args: {
+    defaultValue: "Initial password",
+    value: undefined,
+  },
+  argTypes: {
+    value: { control: false },
+  },
+  render: (props) => {
+    const { value, ...rest } = props;
+    void value;
+    return <PasswordField {...rest} />;
   },
 };

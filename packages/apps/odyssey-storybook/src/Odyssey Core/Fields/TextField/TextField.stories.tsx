@@ -11,16 +11,22 @@
  */
 
 import {
+  deepmerge,
   InputAdornment,
   Link,
+  Stack,
   TextField,
+  TextFieldProps,
   textFieldTypeValues,
 } from "@okta/odyssey-react-mui";
+import { AddCircleIcon, CallIcon } from "@okta/odyssey-react-mui/icons";
+import { useCallback } from "@storybook/preview-api";
 import { Meta, StoryObj } from "@storybook/react";
-import { expect, fn, userEvent, within } from "@storybook/test";
-import { ChangeEvent, useCallback, useState } from "react";
+import { fn, userEvent, within } from "@storybook/test";
+import { ChangeEvent } from "react";
 
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
+import { useStoryArgOrLocalState } from "../../../tools/useStoryArgOrLocalState.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 
 const meta = {
@@ -31,8 +37,9 @@ const meta = {
     autoCompleteType: {
       control: "text",
       description:
-        "This prop helps users to fill forms faster, especially on mobile devices. You can learn more about it [following the specification](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill)",
+        "The native HTML [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) attribute for enabling browser autofill (e.g., `email`, `username`, `current-password`)",
       table: {
+        category: "Functional",
         type: {
           summary: "string",
         },
@@ -41,8 +48,9 @@ const meta = {
     defaultValue: {
       control: "text",
       description:
-        "The value of the `input` element. Use when the component is not controlled",
+        "If `value` is undefined, the field is uncontrolled and `defaultValue` provides its initial text",
       table: {
+        category: "Functional",
         type: {
           summary: "string",
         },
@@ -52,9 +60,17 @@ const meta = {
       },
     },
     endAdornment: {
-      control: "text",
-      description: "End `InputAdornment` for this component",
+      control: { type: "select" },
+      options: ["None", "String", "Icon"],
+      mapping: {
+        None: undefined,
+        String: "%",
+        Icon: <CallIcon />,
+      },
+      description:
+        "Content displayed at the end of the input. Use string for units and symbols, or an Odyssey icon for actions",
       table: {
+        category: "Visual",
         type: {
           summary: "string | ReactElement<typeof Icon>",
         },
@@ -63,9 +79,10 @@ const meta = {
     errorMessage: fieldComponentPropsMetaData.errorMessage,
     errorMessageList: fieldComponentPropsMetaData.errorMessageList,
     hasInitialFocus: {
-      control: "boolean",
+      control: false,
       description: "If `true`, the component will receive focus automatically",
       table: {
+        category: "Functional",
         type: {
           summary: "boolean",
         },
@@ -78,8 +95,9 @@ const meta = {
     isFullWidth: fieldComponentPropsMetaData.isFullWidth,
     isMultiline: {
       control: "boolean",
-      description: "If `true`, a TextareaAutosize element is rendered",
+      description: "If `true`, a `textarea` element is rendered",
       table: {
+        category: "Visual",
         type: {
           summary: "boolean",
         },
@@ -94,6 +112,7 @@ const meta = {
       control: "text",
       description: "The label for the `input` element",
       table: {
+        category: "Visual",
         type: {
           summary: "string",
         },
@@ -105,24 +124,30 @@ const meta = {
     },
     name: fieldComponentPropsMetaData.name,
     onBlur: {
-      description: "Callback fired when the `input` element loses focus",
+      description:
+        "Callback fired after the input loses focus; useful for validation or analytics hooks",
       table: {
+        category: "Functional",
         type: {
           summary: "func",
         },
       },
     },
     onChange: {
-      description: "Callback fired when the value is changed",
+      description:
+        "Callback fired whenever the value changes; required when controlling the component via `value`",
       table: {
+        category: "Functional",
         type: {
           summary: "func",
         },
       },
     },
     onFocus: {
-      description: "Callback fired when the `input` element gets focus",
+      description:
+        "Callback fired when the input gains focus; helpful for analytics or guided workflows",
       table: {
+        category: "Functional",
         type: {
           summary: "func",
         },
@@ -133,15 +158,24 @@ const meta = {
       description:
         "The short hint displayed in the `input` before the user enters a value",
       table: {
+        category: "Visual",
         type: {
           summary: "string",
         },
       },
     },
     startAdornment: {
-      control: "text",
-      description: "Start `InputAdornment` for this component",
+      control: { type: "select" },
+      options: ["None", "String", "Icon"],
+      mapping: {
+        None: undefined,
+        String: "$",
+        Icon: <AddCircleIcon />,
+      },
+      description:
+        "Content displayed at the start of the input. Use string for units or symbols, or an Odyssey icon for actions",
       table: {
+        category: "Visual",
         type: {
           summary: "string | ReactElement<typeof Icon>",
         },
@@ -153,6 +187,7 @@ const meta = {
       description:
         "Type of the `input` element. It should be [a valid HTML5 input type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types)",
       table: {
+        category: "Functional",
         type: {
           summary: textFieldTypeValues.join(" | "),
         },
@@ -164,8 +199,9 @@ const meta = {
     value: {
       control: "text",
       description:
-        "The value of the `input` element, required for a controlled component",
+        "If `value` is provided, you control the input externally and must handle updates with `onChange`",
       table: {
+        category: "Functional",
         type: {
           summary: "string",
         },
@@ -173,11 +209,13 @@ const meta = {
     },
   },
   args: {
-    defaultValue: undefined,
-    label: "Destination",
+    endAdornment: "None",
+    label: "Label",
     onBlur: fn(),
     onChange: fn(),
     onFocus: fn(),
+    startAdornment: "None",
+    value: "",
   },
 } satisfies Meta<typeof TextField>;
 
@@ -185,182 +223,252 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+const TextFieldTemplate: Story = {
   args: {
-    defaultValue: "",
+    value: "",
   },
-  play: async ({ args, canvasElement, step }) => {
-    await step("Textfield callback", async () => {
-      const canvas = within(canvasElement);
-      const textbox = canvas.getByRole("textbox");
-      await userEvent.click(textbox);
-      await expect(args.onFocus).toHaveBeenCalledTimes(1);
-      await userEvent.type(textbox, "Earth");
-      await expect(args.onChange).toHaveBeenCalledTimes(5);
-      await userEvent.clear(textbox);
-      await userEvent.tab();
-      await expect(args.onBlur).toHaveBeenCalledTimes(1);
+  argTypes: {
+    defaultValue: { control: false },
+  },
+  render: function Render(args, context) {
+    const { defaultValue, ...props } = args;
+    void defaultValue;
+
+    const { value, setValue } = useStoryArgOrLocalState<
+      TextFieldProps,
+      "value"
+    >({
+      args,
+      context,
+      argKey: "value",
+      defaultValue: args.value ?? "",
     });
+
+    const handleChange = useCallback(
+      (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setValue(event.target.value);
+      },
+      [setValue],
+    );
+    return <TextField {...props} onChange={handleChange} value={value} />;
   },
+};
+
+const textFieldPlay: NonNullable<Story["play"]> = async ({
+  canvasElement,
+  step,
+}) => {
+  await step("Textfield callback", async () => {
+    const canvas = within(canvasElement);
+    const textbox = await canvas.findByRole("textbox");
+    await userEvent.click(textbox);
+    await userEvent.type(textbox, "v");
+    await userEvent.clear(textbox);
+    await userEvent.tab();
+  });
+};
+
+export const Default: Story = {
+  ...deepmerge(TextFieldTemplate, {
+    play: textFieldPlay,
+    tags: ["!autodocs"],
+  }),
 };
 
 export const Disabled: Story = {
-  parameters: {
-    docs: {
-      description: {
-        story: "The values of disabled inputs will not be submitted.",
+  ...deepmerge(TextFieldTemplate, {
+    parameters: {
+      docs: {
+        description: {
+          story: "The values of disabled inputs will not be submitted.",
+        },
       },
     },
-  },
-  args: {
-    isDisabled: true,
-    defaultValue: "Earth",
-  },
+    args: {
+      isDisabled: true,
+      value: "Value",
+    },
+  }),
 };
 
 export const Optional: Story = {
-  args: {
-    isOptional: true,
-    defaultValue: "",
-  },
+  ...deepmerge(TextFieldTemplate, {
+    args: {
+      isOptional: true,
+      value: "",
+    },
+  }),
 };
 
 export const ReadOnly: Story = {
-  parameters: {
-    docs: {
-      description: {
-        story: "The values of readonly inputs will be submitted.",
+  ...deepmerge(TextFieldTemplate, {
+    parameters: {
+      docs: {
+        description: {
+          story: "The values of readonly inputs will be submitted.",
+        },
       },
     },
-  },
-  args: {
-    isReadOnly: true,
-    value: "Earth",
-  },
+    args: {
+      isReadOnly: true,
+      value: "Value",
+    },
+  }),
 };
 
 export const Error: Story = {
-  args: {
-    errorMessage: "This field is required.",
-    defaultValue: "",
-  },
+  ...deepmerge(TextFieldTemplate, {
+    args: {
+      errorMessage: "Error Message",
+      value: "",
+    },
+  }),
 };
 
 export const ErrorsList: Story = {
-  args: {
-    errorMessage: "This field is required:",
-    errorMessageList: ["At least 2 chars", "No more than 20 chars"],
-    defaultValue: "",
-  },
+  ...deepmerge(TextFieldTemplate, {
+    args: {
+      errorMessage: "Error Message",
+      errorMessageList: ["Error A"],
+      value: "",
+    },
+  }),
 };
 
 export const FullWidth: Story = {
-  args: {
-    isFullWidth: true,
-  },
+  ...deepmerge(TextFieldTemplate, {
+    args: {
+      isFullWidth: true,
+    },
+  }),
 };
 
 export const Hint: Story = {
-  args: {
-    hint: "Specify your destination within the Sol system.",
-    defaultValue: "",
-  },
+  ...deepmerge(TextFieldTemplate, {
+    args: {
+      hint: "Hint text",
+      value: "",
+    },
+  }),
 };
 
 export const HintLink: Story = {
-  args: {
-    hint: "Specify your destination within the Sol system. Learn more",
-    HintLinkComponent: <Link href="/learn-more">about the Sol system</Link>,
-    defaultValue: "",
-  },
+  ...deepmerge(TextFieldTemplate, {
+    args: {
+      hint: "Hint text",
+      HintLinkComponent: <Link href="#link">Link</Link>,
+      value: "",
+    },
+  }),
 };
 
-export const Adornment: Story = {
-  parameters: {
-    docs: {
-      description: {
-        story: "TextField supports both `string` and `<Icon />` adornments.",
+export const Adornments: Story = {
+  ...deepmerge(TextFieldTemplate, {
+    parameters: {
+      docs: {
+        description: {
+          story: "TextField supports both `string` and `<Icon />` adornments.",
+        },
       },
     },
-  },
-  args: {
-    label: "Cargo weight",
-    endAdornment: <InputAdornment position="end">kg</InputAdornment>,
-    defaultValue: "",
-  },
-};
-
-// Types
-export const Email: Story = {
-  args: {
-    autoCompleteType: "work email",
-    label: "Company email",
-    type: "email",
-    defaultValue: "",
-  },
+    args: {
+      label: "Label",
+      endAdornment: "String",
+      startAdornment: "Icon",
+      value: "",
+    },
+  }),
 };
 
 export const Multiline: Story = {
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "As the user types, the field will grow vertically to accommodate the new lines.",
+  ...deepmerge(TextFieldTemplate, {
+    parameters: {
+      docs: {
+        description: {
+          story:
+            "As the user types, the field will grow vertically to accommodate the new lines.",
+        },
       },
     },
-  },
-  args: {
-    autoCompleteType: "shipping street-address",
-    label: "Permanent residence",
-    isMultiline: true,
-    defaultValue: "",
-  },
+    args: {
+      autoCompleteType: "shipping street-address",
+      label: "Label",
+      isMultiline: true,
+      value: "",
+    },
+  }),
   name: "Multiline (Textarea)",
 };
 
-export const Placeholder: Story = {
-  args: {
-    placeholder: "Destination within the Sol system",
+export const Focused: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: "This `TextField` will receive focus when the page loads",
+      },
+    },
   },
+  args: {
+    hasInitialFocus: true,
+    label: "Label",
+    value: "",
+  },
+  render: (args) => {
+    return (
+      <Stack spacing={2}>
+        <TextField label="Not Focused" />
+        <TextField {...args} />
+      </Stack>
+    );
+  },
+};
+
+export const Placeholder: Story = {
+  ...deepmerge(TextFieldTemplate, {
+    args: {
+      placeholder: "Placeholder text",
+    },
+  }),
 };
 
 export const Tel: Story = {
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "TextFields of type `tel` are not automatically validated because global formats are so varied.",
+  ...deepmerge(TextFieldTemplate, {
+    parameters: {
+      docs: {
+        description: {
+          story:
+            "TextFields of type `tel` are not automatically validated because global formats are so varied.",
+        },
       },
     },
-  },
-  args: {
-    autoCompleteType: "mobile tel",
-    label: "Phone number",
-    startAdornment: <InputAdornment position="start">+1</InputAdornment>,
-    type: "tel",
-    defaultValue: "",
-  },
+    args: {
+      autoCompleteType: "mobile tel",
+      label: "Phone number",
+      startAdornment: <InputAdornment position="start">+1</InputAdornment>,
+      type: "tel",
+      value: "",
+    },
+  }),
 };
-
-export const ControlledTextField: Story = {
+export const Uncontrolled: Story = {
   parameters: {
     docs: {
       description: {
         story:
-          "When the component is controlled, the parent component is responsible for passing `value` to the component and listening for changes with `onChange`",
+          "When `value` is omitted the field manages its own state via `defaultValue`.",
       },
     },
   },
   args: {
-    value: "Initial state",
+    defaultValue: "Initial state",
+    value: undefined,
   },
-  render: function C({ ...props }) {
-    const [localValue, setLocalValue] = useState("Initial state");
-    const onChange = useCallback(
-      (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-        setLocalValue(event.target.value),
-      [],
-    );
-    return <TextField {...props} onChange={onChange} value={localValue} />;
+  argTypes: {
+    value: { control: false },
+  },
+  render: (props) => {
+    const { value, ...rest } = props;
+    void value;
+    return <TextField {...rest} />;
   },
 };

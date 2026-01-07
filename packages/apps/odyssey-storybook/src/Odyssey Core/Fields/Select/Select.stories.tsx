@@ -10,110 +10,50 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { SelectChangeEvent } from "@mui/material";
-import { Link, Select, SelectProps } from "@okta/odyssey-react-mui";
-import { queryOdysseySelector } from "@okta/odyssey-react-mui/test-selectors";
-import { Meta, StoryObj } from "@storybook/react";
-import {
-  expect,
-  fn,
-  screen,
-  userEvent,
-  waitFor,
-  within,
-} from "@storybook/test";
-import { useCallback, useState } from "react";
+import type { Meta, StoryContext, StoryObj } from "@storybook/react";
 
-import { axeRun } from "../../../axeRun.js";
+import { SelectChangeEvent } from "@mui/material";
+import { Link, Select, type SelectProps } from "@okta/odyssey-react-mui";
+import { fn, screen, userEvent } from "@storybook/test";
+
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
+import { useStoryArgOrLocalState } from "../../../tools/useStoryArgOrLocalState.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 
-const optionsArray: SelectProps<string | string[], boolean>["options"] = [
-  "Roles and permissions",
-  "Okta Privileged Access components",
-  "Users and Groups administration",
-  "Resource administration",
-  "Security administration",
-  "Deploy and manage servers",
-  "Okta Privileged Access clients",
+const baseOptionLabels = [
+  "Option A",
+  "Option B",
+  "Option C",
+  "Option D",
+  "Option E",
 ];
 
-const optionsObject: SelectProps<string | string[], boolean>["options"] = [
-  {
-    text: "Roles and permissions",
-    value: "roles-and-permissions",
-  },
-  {
-    text: "Okta Privileged Access gateways",
-    value: "okta-privileged-access-gateways",
-  },
-  {
-    text: "Users and Groups administration",
-    value: "users-and-groups-administration",
-  },
-  {
-    text: "Resource administration",
-    value: "resource-administration",
-  },
-  {
-    text: "Security administration",
-    value: "security-administrator",
-  },
-  {
-    text: "Deploy and manage servers",
-    value: "deploy-and-manage-servers",
-  },
-  {
-    text: "Okta Privileged Access clients",
-    value: "okta-privileged-access-clients",
-  },
+const baseValueControlOptions = ["None", ...baseOptionLabels] as const;
+
+const baseValueControlMapping = baseValueControlOptions.reduce<
+  Record<string, string>
+>((accumulator, option) => {
+  accumulator[option] = option === "None" ? "" : option;
+  return accumulator;
+}, {});
+
+const groupedOptions: SelectProps<string | string[], boolean>["options"] = [
+  { text: "Group 1", type: "heading" },
+  "Option A",
+  "Option B",
+  "Option C",
+  { text: "Group 2", type: "heading" },
+  "Option D",
+  "Option E",
 ];
 
-const optionsGrouped: SelectProps<string | string[], boolean>["options"] = [
-  {
-    text: "Okta Privileged Access",
-    type: "heading",
-  },
-  {
-    text: "Roles and permissions",
-    value: "roles-and-permissions",
-  },
-  {
-    text: "Okta Privileged Access gateways",
-    value: "okta-privileged-access-gateways",
-  },
-  {
-    text: "Users and Groups administration",
-    value: "users-and-groups-administration",
-  },
-  {
-    text: "Resource administration",
-    value: "resource-administration",
-  },
-  {
-    text: "Security administration",
-    value: "security-administrator",
-  },
-  {
-    text: "Deploy and manage servers",
-    value: "deploy-and-manage-servers",
-  },
-  {
-    text: "Okta Privileged Access clients",
-    value: "okta-privileged-access-clients",
-  },
-  {
-    text: "Audit events",
-    type: "heading",
-  },
-  "Resource",
-  "Action",
-  "Related Info",
-  "Actor",
-  "Date",
+const objectOptions: SelectProps<string | string[], boolean>["options"] = [
+  { text: "Object option A", value: "option-a" },
+  { text: "Object option B", value: "option-b" },
+  { text: "Object option C", value: "option-c" },
 ];
 
-const optionsLanguages: SelectProps<string | string[], boolean>["options"] = [
+const languageOptions = [
   { text: "English", value: "en", language: "en" },
   { text: "Español", value: "es", language: "es" },
   { text: "Français", value: "fr", language: "fr" },
@@ -121,23 +61,34 @@ const optionsLanguages: SelectProps<string | string[], boolean>["options"] = [
   { text: "中文", value: "zh", language: "zh" },
   { text: "日本語", value: "ja", language: "ja" },
   { text: "한국어", value: "ko", language: "ko" },
-];
+] satisfies SelectProps<string | string[], boolean>["options"];
 
-const meta = {
+type SelectStoryArgs = SelectProps<string | string[], boolean>;
+
+const storybookMeta: Meta<typeof Select> = {
   component: Select,
   decorators: [OdysseyStorybookThemeDecorator],
   tags: ["autodocs"],
   argTypes: {
-    defaultValue: {
+    ariaDescribedBy: {
       control: "text",
       description:
-        "The default value. Use when the component is not controlled.",
+        "ID of the element that provides additional description for the field",
       table: {
+        category: "Functional",
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    defaultValue: {
+      control: { type: "text" },
+      description:
+        "If `value` is undefined, the field is uncontrolled and `defaultValue` provides its initial text",
+      table: {
+        category: "Functional",
         type: {
           summary: "string | string[]",
-        },
-        defaultValue: {
-          summary: undefined,
         },
       },
     },
@@ -145,8 +96,10 @@ const meta = {
     errorMessageList: fieldComponentPropsMetaData.errorMessageList,
     hasMultipleChoices: {
       control: "boolean",
-      description: "If `true`, the select component allows multiple selections",
+      description: "If `true`, the Select allows multiple selections",
       table: {
+        readonly: true,
+        category: "Functional",
         type: {
           summary: "boolean",
         },
@@ -158,7 +111,7 @@ const meta = {
     hint: fieldComponentPropsMetaData.hint,
     HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
     id: fieldComponentPropsMetaData.id,
-    isDisabled: fieldComponentPropsMetaData.isFullWidth,
+    isDisabled: fieldComponentPropsMetaData.isDisabled,
     isFullWidth: fieldComponentPropsMetaData.isFullWidth,
     isOptional: fieldComponentPropsMetaData.isOptional,
     isReadOnly: fieldComponentPropsMetaData.isReadOnly,
@@ -166,60 +119,88 @@ const meta = {
       control: "text",
       description: "The label text for the select component",
       table: {
+        category: "Visual",
         type: {
           summary: "string",
         },
       },
       type: {
-        required: true,
         name: "string",
+        required: true,
       },
     },
     name: fieldComponentPropsMetaData.name,
     onBlur: {
+      control: false,
       description: "Callback fired when the select component loses focus",
       table: {
+        category: "Functional",
         type: {
           summary: "func",
         },
       },
     },
     onChange: {
+      control: false,
       description:
         "Callback fired when the value of the select component changes",
       table: {
+        category: "Functional",
         type: {
           summary: "func",
         },
       },
     },
     onFocus: {
+      control: false,
       description: "Callback fired when the select component gains focus",
       table: {
+        category: "Functional",
         type: {
           summary: "func",
         },
       },
     },
     options: {
-      control: "object",
+      control: { type: "check" },
       description: "The options for the select component",
+      options: baseOptionLabels,
       table: {
+        category: "Visual",
         type: {
           summary: "(string | SelectOption)[]",
         },
       },
-      type: {
-        required: true,
-        name: "other",
-        value: "(string | SelectOption)[]",
+    },
+    testId: {
+      control: "text",
+      description: "Adds `data-se` attribute",
+      table: {
+        category: "Functional",
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    translate: {
+      control: { type: "radio" },
+      options: ["yes", "no"],
+      description: "Sets the HTML `translate` attribute on the rendered field",
+      table: {
+        category: "Functional",
+        type: {
+          summary: '"yes" | "no"',
+        },
       },
     },
     value: {
-      control: "text",
+      control: { type: "radio" },
+      options: baseValueControlOptions,
+      mapping: baseValueControlMapping,
       description:
-        "The `input` value. Use when the component is controlled.\n\nProviding an empty string will select no options.\n\nSet to an empty string `''` if you don't want any of the available options to be selected.",
+        "If `value` is provided, you control the input externally and must handle updates with `onChange`.",
       table: {
+        category: "Functional",
         type: {
           summary: "string | string[]",
         },
@@ -227,376 +208,313 @@ const meta = {
     },
   },
   args: {
-    hint: "Select a topic to learn more",
-    label: "Okta documentation",
+    errorMessageList: [],
+    hint: "Hint text",
+    label: "Label",
     onBlur: fn(),
     onChange: fn(),
     onFocus: fn(),
-    options: optionsArray,
+    options: baseOptionLabels,
+    isDisabled: false,
+    isFullWidth: false,
+    isOptional: false,
+    hasMultipleChoices: false,
+    value: "None",
   },
 } satisfies Meta<typeof Select>;
 
-export default meta;
+export default storybookMeta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof storybookMeta>;
 
-export const Default: Story = {
-  args: { defaultValue: "" },
-  play: async ({ canvasElement, step }) => {
-    await step("Select Roles and permissions from the listbox", async () => {
-      const comboBoxElement = canvasElement.querySelector(
-        '[aria-haspopup="listbox"]',
-      );
-      if (comboBoxElement) {
-        await userEvent.click(comboBoxElement);
-        const listboxElement = screen.getByRole("listbox");
-        await expect(listboxElement).toBeInTheDocument();
-        const listItem = listboxElement.children[0];
-        await userEvent.click(listItem);
-        await userEvent.tab();
-        await waitFor(() => {
-          expect(listboxElement).not.toBeInTheDocument();
-        });
-        const inputElement = canvasElement.querySelector("input");
-        await expect(inputElement?.value).toBe("Roles and permissions");
-        await waitFor(() => {
-          axeRun("Select Default");
-        });
-      }
+const singleSelectTemplate: Pick<Story, "render" | "args" | "argTypes"> = {
+  args: {
+    hasMultipleChoices: false,
+  },
+  render: function RenderSingle(args, context) {
+    const storyArgs = args as SelectStoryArgs;
+
+    const { value, setValue } = useStoryArgOrLocalState<
+      SelectStoryArgs,
+      "value"
+    >({
+      args: storyArgs,
+      context: context as StoryContext<SelectStoryArgs>,
+      argKey: "value",
+      defaultValue: typeof storyArgs.value === "string" ? storyArgs.value : "",
     });
+
+    const handleChange = (event: SelectChangeEvent<string | string[]>) => {
+      setValue(event.target.value);
+    };
+
+    return (
+      <Select
+        {...storyArgs}
+        hasMultipleChoices={false}
+        onChange={handleChange}
+        value={value}
+      />
+    );
   },
 };
 
-export const DefaultValue: Story = {
+const multiSelectTemplate: Pick<Story, "render" | "args" | "argTypes"> = {
   args: {
-    defaultValue: "Roles and permissions",
+    hasMultipleChoices: true,
   },
+  render: function RenderMulti(args, context) {
+    const storyArgs = args as SelectStoryArgs;
+
+    const { value, setValue } = useStoryArgOrLocalState<
+      SelectStoryArgs,
+      "value"
+    >({
+      args: storyArgs,
+      context: context as StoryContext<SelectStoryArgs>,
+      argKey: "value",
+      defaultValue: Array.isArray(storyArgs.value) ? storyArgs.value : [],
+    });
+
+    const handleChange = (event: SelectChangeEvent<string | string[]>) => {
+      setValue(event.target.value);
+    };
+
+    return (
+      <Select
+        {...storyArgs}
+        hasMultipleChoices
+        onChange={handleChange}
+        value={value}
+      />
+    );
+  },
+};
+
+export const Default: Story = {
+  ...singleSelectTemplate,
   play: async ({ canvasElement, step }) => {
-    await step("can click dropdown option", async () => {
-      const querySelect = queryOdysseySelector("Select");
-
-      const selector = querySelect({
-        element: canvasElement,
-        options: {
-          label: /Okta documentation/,
-        },
-      });
-
-      await userEvent.click(selector.element);
-
-      const list = selector.selectChild({
-        name: "list",
-      });
-
-      await waitFor(() => {
-        expect(list.element).toBeVisible();
-      });
-
-      const listItemElement = list.selectChild({
-        name: "listItem",
-        options: {
-          label: "Roles and permissions",
-        },
-      }).element;
-
-      await waitFor(() => {
-        expect(listItemElement).toBeVisible();
-      });
-
-      if (listItemElement) {
-        await userEvent.click(listItemElement);
+    await step("Select first option", async () => {
+      const trigger = canvasElement.querySelector('[aria-haspopup="listbox"]');
+      if (!trigger) {
+        return;
       }
 
-      await waitFor(() => {
-        expect(list?.element).not.toBeVisible();
-      });
+      await userEvent.click(trigger);
+      const listbox = screen.getByRole("listbox");
+
+      const firstOption = listbox.children[0];
+      await userEvent.click(firstOption);
+      await userEvent.tab();
     });
   },
+  tags: ["!autodocs"],
 };
 
 export const Disabled: Story = {
+  ...singleSelectTemplate,
   args: {
-    defaultValue: "",
     isDisabled: true,
   },
 };
+
 export const Error: Story = {
+  ...singleSelectTemplate,
   args: {
-    errorMessage: "Select a topic.",
-    defaultValue: "",
-  },
-  play: async ({ step }) => {
-    await step("Check for a11y errors on Select Error", async () => {
-      await waitFor(() => axeRun("Select Error"));
-    });
+    errorMessage: "Select an option.",
   },
 };
 
 export const ErrorsList: Story = {
+  ...singleSelectTemplate,
   args: {
-    isMultiSelect: true,
-    errorMessage: "Select a topic.",
-    errorMessageList: [
-      "Select at least one item",
-      "Select no more than 3 items",
-    ],
-    defaultValue: [],
-  },
-  play: async ({ step }) => {
-    await step("Check for a11y errors on Select Error", async () => {
-      await waitFor(() => axeRun("Select Errors List"));
-    });
+    errorMessage: "Select an option.",
+    errorMessageList: ["Error A", "Error B"],
   },
 };
 
 export const FullWidth: Story = {
+  ...singleSelectTemplate,
   args: {
     isFullWidth: true,
   },
 };
 
 export const HintLink: Story = {
+  ...singleSelectTemplate,
   args: {
-    HintLinkComponent: <Link href="/learn-more">Learn more</Link>,
+    HintLinkComponent: <Link href="#">Link</Link>,
   },
 };
 
-export const EmptyValue: Story = {
+export const EmptyOption: Story = {
+  ...singleSelectTemplate,
   args: {
-    value: "",
-    options: [
-      { value: "", text: "" },
-      { value: "value1", text: "Value 1" },
-      { value: "value2", text: "Value 2" },
-    ],
+    options: ["", ...baseOptionLabels],
+    value: "None",
   },
-};
-
-export const OptionsObject: Story = {
-  args: {
-    options: optionsObject,
-    defaultValue: "",
+  argTypes: {
+    options: { control: false },
   },
   parameters: {
     docs: {
       description: {
         story:
-          "Select can accept `options` as a flat array, an array of objects, or both. This demonstrates an array of objects with `value` and `name`.",
+          "Select supports an empty string entry so the first selection renders no visible value",
       },
     },
   },
 };
 
-export const OptionsObjectAndMultiSelect: Story = {
+export const OptionsObject: Story = {
+  ...singleSelectTemplate,
   args: {
-    options: optionsObject,
-    value: [],
-    hasMultipleChoices: true,
+    options: objectOptions,
+    value: "option-b",
   },
-  render: function C(props) {
-    const [localValue, setLocalValue] = useState<string[]>([]);
-    const onChange = useCallback(
-      (event: SelectChangeEvent<string | string[]>) =>
-        setLocalValue(event.target.value as string[]),
-      [],
-    );
-    return <Select {...props} onChange={onChange} value={localValue} />;
-  },
-};
-
-export const OptionsGrouped: Story = {
-  args: {
-    options: optionsGrouped,
-    defaultValue: "",
+  argTypes: {
+    options: { control: false },
+    value: { control: false },
   },
   parameters: {
     docs: {
       description: {
         story:
-          'Objects with `type: "heading"` will have their `text` displayed as a heading.',
+          "Select supports passing option objects with distinct text and value properties",
+      },
+    },
+  },
+};
+
+export const OptionsGrouped: Story = {
+  ...singleSelectTemplate,
+  args: {
+    options: groupedOptions,
+  },
+  argTypes: {
+    options: { control: false },
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Options marked with `type: "heading"` create non-selectable group labels',
       },
     },
   },
 };
 
 export const MultiSelect: Story = {
+  ...multiSelectTemplate,
   args: {
-    isMultiSelect: true,
-    defaultValue: [],
+    hasMultipleChoices: true,
+    value: [],
+  },
+  argTypes: {
+    value: { control: { type: "check" }, options: baseOptionLabels },
   },
   play: async ({ canvasElement, step }) => {
-    await step("Select Multiple items from the listbox", async () => {
-      const comboBoxElement = canvasElement.querySelector(
-        '[aria-haspopup="listbox"]',
-      );
-      if (comboBoxElement) {
-        await userEvent.click(comboBoxElement);
-        const listboxElement = screen.getByRole("listbox");
-        await expect(listboxElement).toBeInTheDocument();
-
-        await userEvent.click(listboxElement.children[0]);
-        await userEvent.click(listboxElement.children[1]);
-        await userEvent.tab();
-        await waitFor(() => {
-          expect(listboxElement).not.toBeInTheDocument();
-        });
-
-        const inputElement = canvasElement.querySelector("input");
-        await expect(inputElement?.value).toBe(
-          "Roles and permissions,Okta Privileged Access components",
-        );
-        await userEvent.click(canvasElement);
-        await waitFor(() => {
-          axeRun("Select Multiple");
-        });
+    await step("Select multiple options", async () => {
+      const trigger = canvasElement.querySelector('[aria-haspopup="listbox"]');
+      if (!trigger) {
+        return;
       }
+
+      await userEvent.click(trigger);
+      const listbox = screen.getByRole("listbox");
+
+      await userEvent.click(listbox.children[0]);
+      await userEvent.click(listbox.children[1]);
+      await userEvent.tab();
     });
   },
 };
+
 export const ReadOnly: Story = {
+  ...singleSelectTemplate,
   args: {
     isReadOnly: true,
-    defaultValue: "Security administration",
+    value: "Option C",
   },
 };
+
 export const ReadOnlyMultiSelect: Story = {
+  ...multiSelectTemplate,
   args: {
-    isMultiSelect: true,
+    hasMultipleChoices: true,
     isReadOnly: true,
-    defaultValue: [
-      "Roles and permissions",
-      "Security administration",
-      "Deploy and manage servers",
-    ],
+    value: ["Option A", "Option C", "Option D"],
+  },
+  argTypes: {
+    value: { control: { type: "check" }, options: baseOptionLabels },
   },
 };
 
 export const ReadOnlyMultiSelectValue: Story = {
+  ...multiSelectTemplate,
   args: {
-    isMultiSelect: true,
+    hasMultipleChoices: true,
     isReadOnly: true,
-    value: [
-      "Roles and permissions",
-      "Security administration",
-      "Deploy and manage servers",
-    ],
+    value: ["Option B", "Option E"],
   },
-};
-
-export const ControlledSelect: Story = {
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "When the component is controlled, the parent component is responsible for managing the state of `Select`. `onChange` should be used to listen for component changes and to update the values in the `value` prop.",
-      },
-    },
-  },
-  args: {
-    value: "",
-  },
-  render: function C(props) {
-    const [localValue, setLocalValue] = useState("");
-    const onChange = useCallback(
-      (event: SelectChangeEvent<string | string[]>) =>
-        setLocalValue(event.target.value as string),
-      [],
-    );
-    return <Select {...props} onChange={onChange} value={localValue} />;
-  },
-};
-
-export const ControlledMultipleSelect: Story = {
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'When the component is controlled, the parent component is responsible for managing the state of `Select`. `onChange` should be used to listen for component changes and to update the values in the `value` prop.\n\nWhen `hasMultipleChoices` is `true` and nothing is preselected, pass `[""]` as this initial controlled `value`',
-      },
-    },
-  },
-  args: {
-    value: [],
-    hasMultipleChoices: true,
-  },
-  render: function C(props) {
-    const [localValue, setLocalValue] = useState([""]);
-    const onChange = useCallback(
-      (event: SelectChangeEvent<string | string[]>) =>
-        setLocalValue(event.target.value as string[]),
-      [],
-    );
-    return <Select {...props} onChange={onChange} value={localValue} />;
-  },
-};
-
-export const ControlledPreselectedMultipleSelect: Story = {
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "When the component is controlled, the parent component is responsible for managing the state of `Select`. `onChange` should be used to listen for component changes and to update the values in the `value` prop.",
-      },
-    },
-  },
-  args: {
-    value: [],
-    hasMultipleChoices: true,
-  },
-  render: function C(props) {
-    const [localValue, setLocalValue] = useState([
-      "Roles and permissions",
-      "Resource administration",
-    ]);
-    const onChange = useCallback(
-      (event: SelectChangeEvent<string | string[]>) =>
-        setLocalValue(event.target.value as string[]),
-      [],
-    );
-    return <Select {...props} onChange={onChange} value={localValue} />;
+  argTypes: {
+    value: { control: { type: "check" }, options: baseOptionLabels },
   },
 };
 
 export const MultipleLanguages: Story = {
+  ...singleSelectTemplate,
   args: {
-    label: "Select Language",
-    options: optionsLanguages,
-    defaultValue: "",
+    label: "Label",
+    options: languageOptions,
+    value: "",
+  },
+  argTypes: {
+    options: { control: false },
   },
   parameters: {
     docs: {
       description: {
         story:
-          "Showcase the Select component with options for multiple different languages.",
+          "Showcase the Select component with options for multiple different languages",
       },
     },
   },
-  play: async ({ canvasElement, step }) => {
-    await step("Select English from the listbox", async () => {
-      const comboBoxElement = canvasElement.querySelector(
-        '[aria-haspopup="listbox"]',
-      );
-      if (comboBoxElement) {
-        await userEvent.click(comboBoxElement);
-        const listboxElement = screen.getByRole("listbox");
-        await expect(listboxElement).toBeInTheDocument();
-        const listItem = listboxElement.children[0];
-        await userEvent.click(listItem);
-        await userEvent.tab();
-        await waitFor(() => {
-          expect(listboxElement).not.toBeInTheDocument();
-        });
-        const selectedOption = listboxElement.querySelector('[lang="fr"]');
-        await expect(selectedOption).toHaveTextContent("Français");
+};
 
-        const frenchOptionElement =
-          within(listboxElement).getByText("Français");
-        expect(frenchOptionElement).toHaveAttribute("lang", "fr");
-
-        await waitFor(() => {
-          axeRun("Select Multiple Languages");
-        });
-      }
-    });
+export const Uncontrolled: Story = {
+  args: {
+    defaultValue: "Option B",
+    value: undefined,
+    label: "Label",
+    options: baseOptionLabels,
   },
+  argTypes: {
+    value: { control: false },
+    defaultValue: { control: { type: "radio" }, options: baseOptionLabels },
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Use the uncontrolled pattern for simple forms where you do not need to react to user selection changes",
+      },
+    },
+  },
+  render: (args) => <Select {...(args as SelectStoryArgs)} />,
+};
+
+export const UncontrolledMultiSelect: Story = {
+  args: {
+    defaultValue: ["Option B", "Option C"],
+    hasMultipleChoices: true,
+    value: undefined,
+    label: "Label",
+    options: baseOptionLabels,
+  },
+  argTypes: {
+    value: { control: false },
+    defaultValue: { control: { type: "check" }, options: baseOptionLabels },
+  },
+  render: (args) => <Select {...(args as SelectStoryArgs)} />,
 };

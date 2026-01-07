@@ -13,16 +13,20 @@
 import { memo, type ReactNode } from "react";
 
 import {
-  type FullScreenOverlayProviderProps,
+  type OverlayType,
   useFullScreenOverlayContext,
 } from "./FullScreenOverlayContext.js";
 import { OdysseyProvider } from "./OdysseyProvider.js";
 
 export type FullScreenOverlayProps = {
   children: ReactNode;
+  overlayType?: OverlayType;
 };
 
-const FullScreenOverlay = ({ children }: FullScreenOverlayProviderProps) => {
+const FullScreenOverlay = ({
+  children,
+  overlayType,
+}: FullScreenOverlayProps) => {
   const { overlayEmotionRootElement, overlayShadowRootElement } =
     useFullScreenOverlayContext();
 
@@ -30,7 +34,9 @@ const FullScreenOverlay = ({ children }: FullScreenOverlayProviderProps) => {
     <OdysseyProvider
       emotionRootElement={overlayEmotionRootElement}
       hasScopedCssBaseline={false}
+      hasTranslationProvider={false}
       hasWrapperElement={false}
+      overlayType={overlayType}
       shadowRootElement={overlayShadowRootElement}
     >
       {children}

@@ -126,7 +126,7 @@ export const HintLink: Story = {
   ...Template,
   args: {
     hint: "Select the speed at which you wish to travel.",
-    HintLinkComponent: <Link href="/learn-more">Learn more</Link>,
+    HintLinkComponent: <Link href="#link">Learn more</Link>,
   } as Story["args"], // This is a hack.,
 };
 

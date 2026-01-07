@@ -25,6 +25,8 @@ export * from "./Badge.js";
 // Buttons
 export * from "./Buttons/BaseButton.js";
 export * from "./Buttons/BaseMenuButton.js";
+// ConditionalWrapper
+export * from "./ConditionalWrapper.js";
 // DataView & DataTable
 export * from "./DataTable/useRowReordering.js";
 export * from "./DataTable/useScrollIndication.js";

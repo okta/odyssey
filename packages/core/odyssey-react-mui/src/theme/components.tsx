@@ -2125,11 +2125,11 @@ export const getComponents = ({
         },
 
         "&:focus-visible": {
-          borderRadius: odysseyTokens.BorderRadiusMain,
+          borderRadius: odysseyTokens.BorderRadiusTight,
           outlineColor: odysseyTokens.FocusOutlineColorPrimary,
           outlineOffset: odysseyTokens.FocusOutlineOffsetMain,
           outlineStyle: odysseyTokens.FocusOutlineStyle,
-          outlineWidth: odysseyTokens.FocusOutlineWidthTight,
+          outlineWidth: odysseyTokens.FocusOutlineWidthMain,
           textDecoration: "none",
         },
 

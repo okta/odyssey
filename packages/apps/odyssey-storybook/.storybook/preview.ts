@@ -1,5 +1,7 @@
 import type { Preview } from "@storybook/react";
 
+import { ResetArgsDecorator } from "../src/tools/ResetArgsDecorator.js";
+
 export const globalTypes = {
   rtlDirection: "ltr",
   locale: {
@@ -45,6 +47,7 @@ export const globalTypes = {
 };
 
 const preview: Preview = {
+  decorators: [ResetArgsDecorator],
   parameters: {
     a11y: {
       options: {

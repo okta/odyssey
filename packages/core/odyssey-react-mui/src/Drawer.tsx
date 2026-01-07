@@ -321,7 +321,9 @@ const Drawer = ({
   );
 
   return variant === "temporary" ? (
-    <FullScreenOverlay>{muiDrawerComponent}</FullScreenOverlay>
+    <FullScreenOverlay overlayType="drawer">
+      {muiDrawerComponent}
+    </FullScreenOverlay>
   ) : (
     muiDrawerComponent
   );

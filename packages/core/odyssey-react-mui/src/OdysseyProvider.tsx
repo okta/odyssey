@@ -11,8 +11,12 @@
  */
 
 import { ScopedCssBaseline } from "@mui/material";
-import { memo, ReactNode } from "react";
+import { memo, ReactNode, useMemo } from "react";
 
+import {
+  ConditionalWrapper,
+  ConditionalWrapperProps,
+} from "./ConditionalWrapper.js";
 import { CssBaseline } from "./CssBaseline.js";
 import {
   FullScreenOverlayProvider,
@@ -51,6 +55,12 @@ export type OdysseyProviderProps<
      * Adds the `ScopedCssBaseline` wrapper. This also adds a `div`, so it might not be what you want.
      */
     hasScopedCssBaseline?: boolean;
+    /**
+     * If `true`, the `OdysseyTranslationProvider` wrapper will be added. Defaults to `true`.
+     * This should only be set to `false` if there exists an OdysseyTranslationProvider higher up in the tree.
+     * @default true
+     */
+    hasTranslationProvider?: boolean;
   };
 
 const OdysseyProvider = <SupportedLanguages extends string>({
@@ -61,50 +71,67 @@ const OdysseyProvider = <SupportedLanguages extends string>({
   emotionRootElement,
   hasCssBaseline: hasGlobalCss,
   hasScopedCssBaseline = true,
+  hasTranslationProvider = true,
   hasWrapperElement,
   languageCode,
   nonce,
   overlayParentElement,
+  overlayType,
   shadowDomElement,
   shadowRootElement,
   stylisPlugins,
   themeOverride,
   translationOverrides,
-}: OdysseyProviderProps<SupportedLanguages>) => (
-  <OdysseyCacheProvider
-    emotionRootElement={emotionRootElement || emotionRoot}
-    nonce={nonce}
-    stylisPlugins={stylisPlugins}
-  >
-    <OdysseyThemeProvider
-      contrastMode={contrastMode}
-      designTokensOverride={designTokensOverride}
-      hasWrapperElement={hasWrapperElement}
-      shadowRootElement={shadowRootElement ?? shadowDomElement}
-      themeOverride={themeOverride}
-    >
+}: OdysseyProviderProps<SupportedLanguages>) => {
+  const TranslationWrapper = useMemo<ConditionalWrapperProps["Wrapper"]>(
+    () => (children) => (
       <OdysseyTranslationProvider<SupportedLanguages>
         languageCode={languageCode}
         translationOverrides={translationOverrides}
       >
-        <FullScreenOverlayProvider
-          hasShadowDom={Boolean(shadowRootElement || shadowDomElement)}
-          overlayParentElement={overlayParentElement}
-        >
-          {hasGlobalCss && <CssBaseline />}
-
-          {hasScopedCssBaseline ? (
-            <ScopedCssBaseline sx={scopedCssBaselineStyles}>
-              {children}
-            </ScopedCssBaseline>
-          ) : (
-            children
-          )}
-        </FullScreenOverlayProvider>
+        {children}
       </OdysseyTranslationProvider>
-    </OdysseyThemeProvider>
-  </OdysseyCacheProvider>
-);
+    ),
+    [languageCode, translationOverrides],
+  );
+
+  return (
+    <OdysseyCacheProvider
+      emotionRootElement={emotionRootElement || emotionRoot}
+      nonce={nonce}
+      stylisPlugins={stylisPlugins}
+    >
+      <OdysseyThemeProvider
+        contrastMode={contrastMode}
+        designTokensOverride={designTokensOverride}
+        hasWrapperElement={hasWrapperElement}
+        shadowRootElement={shadowRootElement ?? shadowDomElement}
+        themeOverride={themeOverride}
+      >
+        <ConditionalWrapper
+          isWrapped={hasTranslationProvider}
+          Wrapper={TranslationWrapper}
+        >
+          <FullScreenOverlayProvider
+            hasShadowDom={Boolean(shadowRootElement || shadowDomElement)}
+            overlayParentElement={overlayParentElement}
+            overlayType={overlayType}
+          >
+            {hasGlobalCss && <CssBaseline />}
+
+            {hasScopedCssBaseline ? (
+              <ScopedCssBaseline sx={scopedCssBaselineStyles}>
+                {children}
+              </ScopedCssBaseline>
+            ) : (
+              children
+            )}
+          </FullScreenOverlayProvider>
+        </ConditionalWrapper>
+      </OdysseyThemeProvider>
+    </OdysseyCacheProvider>
+  );
+};
 
 const MemoizedOdysseyProvider = memo(OdysseyProvider);
 MemoizedOdysseyProvider.displayName = "OdysseyProvider";

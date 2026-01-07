@@ -32,6 +32,14 @@ export const FullScreenOverlayContext =
 export const useFullScreenOverlayContext = () =>
   useContext(FullScreenOverlayContext);
 
+export const OVERLAY_DATA_ATTRIBUTES = {
+  dialog: "data-odyssey-react-dialog-overlay-component",
+  drawer: "data-odyssey-react-drawer-overlay-component",
+  default: "data-odyssey-react-overlay-component",
+} as const;
+
+export type OverlayType = keyof typeof OVERLAY_DATA_ATTRIBUTES;
+
 export type FullScreenOverlayProviderProps = {
   children: ReactNode;
   hasShadowDom?: boolean;
@@ -41,12 +49,18 @@ export type FullScreenOverlayProviderProps = {
    * If you specify this value , it will render overlays into this container, such as the `shadowRootElement` over the document body. Most likely, you don't need to change this value, but you might run into strange issues related iframes and other shadow roots. This is here as a safeguard; not meant to be used.
    */
   overlayParentElement?: HTMLDivElement | HTMLElement;
+  /**
+   * Type of overlay being rendered. This controls the data attribute set on the overlay parent element.
+   * @default "default"
+   */
+  overlayType?: OverlayType;
 };
 
 const FullScreenOverlayProvider = ({
   children,
   hasShadowDom,
   overlayParentElement: overlayParentElementProp,
+  overlayType = "default",
 }: FullScreenOverlayProviderProps) => {
   const {
     overlayEmotionRootElement,
@@ -76,13 +90,17 @@ const FullScreenOverlayProvider = ({
 
   useEffect(() => {
     if (overlayParentElement) {
+      overlayParentElement.setAttribute(
+        OVERLAY_DATA_ATTRIBUTES[overlayType],
+        "",
+      );
       document.body.append(overlayParentElement);
     }
 
     return () => {
       overlayParentElement.remove();
     };
-  }, [overlayParentElement]);
+  }, [overlayParentElement, overlayType]);
 
   const providerValue = useMemo(
     () => ({

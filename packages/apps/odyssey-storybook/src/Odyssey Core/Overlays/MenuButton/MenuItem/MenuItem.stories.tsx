@@ -10,10 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Menu as MuiMenu } from "@mui/material";
-import { MenuItem, MenuItemProps } from "@okta/odyssey-react-mui";
+import { MenuItem, MenuItemProps, MenuList } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
-import { useRef } from "react";
 
 import { OdysseyStorybookThemeDecorator } from "../../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../../../Fields/fieldComponentPropsMetaData.js";
@@ -22,11 +20,20 @@ const storybookMeta: Meta<typeof MenuItem> = {
   component: MenuItem,
   decorators: [OdysseyStorybookThemeDecorator],
   tags: ["autodocs"],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "`MenuItem` composes `MenuButton` menus. It is not supported as a standalone Odyssey component.",
+      },
+    },
+  },
   argTypes: {
     children: {
-      control: "object",
+      control: "text",
       description: "The content for the `MenuItem` components within the Menu",
       table: {
+        category: "Visual",
         type: {
           summary: "ReactNode",
         },
@@ -38,9 +45,10 @@ const storybookMeta: Meta<typeof MenuItem> = {
       },
     },
     hasInitialFocus: {
-      control: "boolean",
+      control: false,
       description: "If `true`, focuses the item when the parent menu opens",
       table: {
+        category: "Functional",
         type: {
           summary: "boolean",
         },
@@ -52,6 +60,7 @@ const storybookMeta: Meta<typeof MenuItem> = {
       description:
         "If `true`, the menu item will be visually marked as selected.",
       table: {
+        category: "Visual",
         type: {
           summary: "boolean",
         },
@@ -62,6 +71,7 @@ const storybookMeta: Meta<typeof MenuItem> = {
       control: { type: "radio" },
       description: "The variant of the triggering Button",
       table: {
+        category: "Visual",
         type: {
           summary: ["default", "destructive"].join(" | "),
         },
@@ -73,55 +83,66 @@ const storybookMeta: Meta<typeof MenuItem> = {
   },
   args: {
     children: "MenuItem content",
+    variant: "default",
+    isDisabled: false,
   },
 };
 
 export default storybookMeta;
 
 const BaseStory = (props: MenuItemProps) => {
-  const anchorRef = useRef<HTMLDivElement>(null);
-
   return (
-    <div ref={anchorRef}>
-      <MuiMenu anchorEl={anchorRef.current} open>
-        <MenuItem {...props}>{props.children}</MenuItem>
-      </MuiMenu>
+    <div role="menu">
+      <MenuItem {...props}>{props.children}</MenuItem>
     </div>
   );
 };
 
 export const Simple: StoryObj<MenuItemProps> = {
-  render: function C(props: MenuItemProps) {
-    return <BaseStory {...props} />;
-  },
+  render: BaseStory,
 };
 
 export const Destructive: StoryObj<MenuItemProps> = {
   args: {
     variant: "destructive",
-    children: "Destructive MenuItem",
   },
-  render: function C(props: MenuItemProps) {
-    return <BaseStory {...props} />;
-  },
+  render: BaseStory,
 };
 
 export const Disabled: StoryObj<MenuItemProps> = {
   args: {
     isDisabled: true,
-    children: "Disabled MenuItem",
+  },
+  render: BaseStory,
+};
+
+export const Selected: StoryObj<MenuItemProps> = {
+  args: {
+    isSelected: true,
   },
   render: function C(props: MenuItemProps) {
     return <BaseStory {...props} />;
   },
 };
 
-export const Selected: StoryObj<MenuItemProps> = {
-  args: {
-    isSelected: true,
-    children: "Selected MenuItem",
+export const Focused: StoryObj<MenuItemProps> = {
+  parameters: {
+    docs: {
+      description: {
+        story: "This `MenuItem` will receive focus when the page loads",
+      },
+    },
   },
-  render: function C(props: MenuItemProps) {
-    return <BaseStory {...props} />;
+  args: {
+    hasInitialFocus: true,
+    value: "",
+  },
+  render: (args) => {
+    return (
+      <MenuList>
+        <MenuItem>Not Focused</MenuItem>
+        <MenuItem {...args} />
+      </MenuList>
+    );
   },
 };
