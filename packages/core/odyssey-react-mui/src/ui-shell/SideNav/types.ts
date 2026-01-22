@@ -17,6 +17,7 @@ import { UniqueIdentifier } from "@dnd-kit/core";
 import type { HtmlProps } from "../../HtmlProps.js";
 import type { DesignTokens } from "../../OdysseyDesignTokensContext.js";
 import type { statusSeverityValues } from "../../Status.js";
+import type { UiShellLogoProps } from "../UiShellLogo.js";
 
 /**
  * Type representing spacing values from the design tokens.
@@ -35,55 +36,6 @@ export type OdysseySpacingValue = DesignTokens[keyof Pick<
   | "Spacing8"
   | "Spacing9"
 >];
-
-type LogoWithLink = {
-  ariaLabel: string;
-  href: string;
-};
-type LogoWithNoLink = {
-  ariaLabel?: never;
-  href?: never;
-};
-
-export type SideNavLogoProps = {
-  isSameBackgroundAsMain?: boolean;
-  /**
-   * Event fired when the logo is clicked
-   */
-  onClick?: (event: SyntheticEvent) => void;
-} & (LogoWithLink | LogoWithNoLink) &
-  (
-    | {
-        imageAltText?: never;
-        imageUrl?: never;
-        /**
-         * a component to render as the logo
-         */
-        logoComponent: ReactElement;
-      }
-    | {
-        /**
-         * alt text for the img logo
-         */
-        imageAltText: string;
-        /**
-         * The src url to render in an `img` tag
-         */
-        imageUrl: string;
-        logoComponent?: never;
-      }
-    | {
-        /**
-         * alt text for the img logo
-         */
-        imageAltText?: never;
-        /**
-         * The src url to render in an `img` tag
-         */
-        imageUrl?: never;
-        logoComponent?: never;
-      }
-  );
 
 export type SideNavProps = {
   /**
@@ -122,9 +74,11 @@ export type SideNavProps = {
    */
   leavesPaddingStart?: OdysseySpacingValue;
   /**
+   * @deprecated use `logoProps` next to `sideNavProps` instead. This was moved to the top level.
+   *
    * An optional logo component or src string for an img to display in the header. If not provided, will default to the Okta logo
    */
-  logoProps?: SideNavLogoProps;
+  logoProps?: UiShellLogoProps;
   /**
    *  Triggers when the side nav is collapsed
    */

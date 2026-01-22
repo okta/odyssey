@@ -16,16 +16,14 @@ import {
   StepperProps,
 } from "@okta/odyssey-contributions-oin-components";
 import { useOdysseyDesignTokens } from "@okta/odyssey-react-mui";
-import { Meta, StoryObj } from "@storybook/react";
-import { expect, waitFor, within } from "@storybook/test";
-import { userEvent } from "@testing-library/user-event";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
+import { expect, userEvent, waitFor, within } from "storybook/test";
 
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 import { OinComponentsStorybookThemeDecorator } from "../../tools/OinComponentsStorybookThemeDecorator.js";
 
 const storybookMeta: Meta<StepperProps> = {
-  title: "OIN Components/Stepper",
   component: Stepper,
   argTypes: {
     activeStep: {
@@ -278,7 +276,7 @@ export const WithLongDescription: StoryObj<StepperProps> = {
 };
 
 export const VerticalWithLongDescriptions: StoryObj<StepperProps> = {
-  storyName: "Vertical with long descriptions",
+  name: "Vertical with long descriptions",
   ...DefaultTemplate,
   args: {
     activeStep: 2,

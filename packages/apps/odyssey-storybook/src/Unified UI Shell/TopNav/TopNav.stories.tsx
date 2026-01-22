@@ -15,7 +15,7 @@ import { Button, SearchField } from "@okta/odyssey-react-mui";
 import { UserIcon } from "@okta/odyssey-react-mui/icons";
 import { UserProfile } from "@okta/odyssey-react-mui/labs";
 import { TopNav } from "@okta/odyssey-react-mui/ui-shell";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 

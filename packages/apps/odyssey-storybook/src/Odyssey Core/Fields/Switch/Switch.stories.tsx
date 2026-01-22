@@ -11,9 +11,9 @@
  */
 
 import { deepmerge, Link, Switch, SwitchProps } from "@okta/odyssey-react-mui";
-import { useCallback } from "@storybook/preview-api";
-import { Meta, StoryObj } from "@storybook/react";
-import { fn } from "@storybook/test";
+import { Meta, StoryObj } from "@storybook/react-vite";
+import { useCallback } from "storybook/preview-api";
+import { fn } from "storybook/test";
 
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { useStoryArgOrLocalState } from "../../../tools/useStoryArgOrLocalState.js";

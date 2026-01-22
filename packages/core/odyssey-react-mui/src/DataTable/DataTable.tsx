@@ -415,8 +415,9 @@ const DataTable = ({
   const [errorMessage, setErrorMessage] = useState<string | undefined>(
     errorMessageProp,
   );
-  const [_rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
-  const rowSelection = selectedRows || _rowSelection;
+  const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>(
+    selectedRows ?? {},
+  );
 
   useScrollIndication({
     tableOuterContainer: tableOuterContainerRef.current,

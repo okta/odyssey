@@ -11,9 +11,9 @@
  */
 
 import { Accordion, AccordionProps } from "@okta/odyssey-react-mui";
-import { Meta, StoryObj } from "@storybook/react";
-import { expect, userEvent, waitFor, within } from "@storybook/test";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { useCallback, useState } from "react";
+import { expect, userEvent, waitFor, within } from "storybook/test";
 
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 import { PlaywrightProps } from "../../tools/storybookTypes.js";

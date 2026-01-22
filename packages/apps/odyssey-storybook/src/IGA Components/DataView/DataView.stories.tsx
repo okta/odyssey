@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import {
   DataView,
@@ -38,8 +38,6 @@ import {
   densityValues,
   UpdateFiltersOrValues,
 } from "@okta/odyssey-react-mui/labs";
-import { action } from "@storybook/addon-actions";
-import { fn } from "@storybook/test";
 import {
   Dispatch,
   SetStateAction,
@@ -47,16 +45,18 @@ import {
   useMemo,
   useState,
 } from "react";
+import { action } from "storybook/actions";
+import { fn } from "storybook/test";
 
 import {
   filterData,
   reorderData,
-} from "../../Odyssey Core/Data Visualizations/DataView [labs]/dataFunctions.js";
+} from "../../Odyssey Core/Data Visualizations/DataView/dataFunctions.js";
 import {
   Person,
   columns as personColumns,
   data as personData,
-} from "../../Odyssey Core/Data Visualizations/DataView [labs]/personData.js";
+} from "../../Odyssey Core/Data Visualizations/DataView/personData.js";
 import { IgaComponentsOdysseyStorybookThemeDecorator } from "../../tools/IgaComponentsOdysseyStorybookThemeDecorator.js";
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 

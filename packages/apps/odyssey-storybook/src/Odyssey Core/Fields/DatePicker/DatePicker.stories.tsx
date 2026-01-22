@@ -10,15 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import {
   DatePicker,
   DatePickerProps,
   odysseyTranslate,
 } from "@okta/odyssey-react-mui";
-import { expect, screen, userEvent, waitFor, within } from "@storybook/test";
 import { useMemo, useState } from "react";
+import { expect, screen, userEvent, waitFor, within } from "storybook/test";
 
 import { axeRun } from "../../../axeRun.js";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";

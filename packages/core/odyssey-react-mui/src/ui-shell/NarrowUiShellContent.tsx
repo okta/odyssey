@@ -11,7 +11,6 @@
  */
 
 import styled from "@emotion/styled";
-import { Skeleton } from "@mui/material";
 import {
   CSSProperties,
   memo,
@@ -34,12 +33,12 @@ import {
 } from "../OdysseyDesignTokensContext.js";
 import { InnerAppContainer } from "./InnerAppContainer.js";
 import { SideNav } from "./SideNav/SideNav.js";
-import { SideNavLogo } from "./SideNav/SideNavLogo.js";
 import { HamburgerMenuIcon } from "./TopNav/HamburgerMenuIcon.js";
 import {
   UiShellContentProps,
   UiShellNavComponentProps,
 } from "./uiShellContentTypes.js";
+import { UiShellLogo } from "./UiShellLogo.js";
 import { UiShellColors, useUiShellContext } from "./UiShellProvider.js";
 import {
   emptySideNavItems,
@@ -230,15 +229,16 @@ const StyledTopNavSearch = styled("div", {
 }));
 
 export type NarrowUiShellContentProps = Pick<HtmlProps, "testId"> &
-  Pick<UiShellNavComponentProps, "sideNavProps" | "topNavProps"> &
+  Pick<UiShellNavComponentProps, "logoProps" | "sideNavProps" | "topNavProps"> &
   UiShellContentProps;
 
 const NarrowUiShellContent = ({
   appElement,
   appElementScrollingMode,
-  hasStandardAppContentPadding = true,
   hasSideNavProps,
+  hasStandardAppContentPadding = true,
   initialVisibleSections = ["TopNav", "SideNav", "AppSwitcher"],
+  logoProps,
   onError = console.error,
   optionalComponents,
   sideNavProps,
@@ -329,25 +329,21 @@ const NarrowUiShellContent = ({
                 topNavBackgroundColor={uiShellContext?.sideNavBackgroundColor}
               >
                 <StyledMenuLogo odysseyDesignTokens={odysseyDesignTokens}>
-                  {(sideNavProps?.isCollapsible ||
-                    !sideNavProps?.isCollapsed) && (
-                    <Button
-                      onClick={toggleLeftSideMenu}
-                      startIcon={<HamburgerMenuIcon />}
-                      testId="sidenav-menu--icon"
-                      variant="floating"
-                    />
-                  )}
+                  {hasSideNavProps &&
+                    (sideNavProps?.isCollapsible ||
+                      !sideNavProps?.isCollapsed) && (
+                      <Button
+                        onClick={toggleLeftSideMenu}
+                        startIcon={<HamburgerMenuIcon />}
+                        testId="sidenav-menu--icon"
+                        variant="floating"
+                      />
+                    )}
 
                   <StyledLogoContainer
                     odysseyDesignTokens={odysseyDesignTokens}
                   >
-                    {sideNavProps?.isLoading ? (
-                      //  The skeleton takes the hardcoded dimensions of the Okta logo
-                      <Skeleton height={24} variant="rounded" width={67} />
-                    ) : (
-                      <SideNavLogo {...sideNavProps?.logoProps} />
-                    )}
+                    <UiShellLogo {...(sideNavProps?.logoProps || logoProps)} />
                   </StyledLogoContainer>
                 </StyledMenuLogo>
 

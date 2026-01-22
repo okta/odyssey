@@ -1,3 +1,5 @@
+// This file has been automatically migrated to valid ESM format by Storybook.
+import { createRequire } from "node:module";
 /*!
  * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
@@ -13,6 +15,8 @@
 import type { StorybookConfig } from "@storybook/react-vite";
 import { dirname, join } from "node:path";
 
+const require = createRequire(import.meta.url);
+
 /**
  * This function is used to resolve the absolute path of a package.
  * It is needed in projects that use Yarn PnP or are set up within a monorepo.
@@ -24,31 +28,29 @@ const getAbsolutePath = (value: string): any => {
 const config: StorybookConfig = {
   addons: [
     {
-      name: "@storybook/addon-docs",
+      name: getAbsolutePath("@storybook/addon-docs"),
       options: {
         transcludeMarkdown: true,
       },
     },
     getAbsolutePath("@storybook/addon-links"),
     getAbsolutePath("@storybook/addon-a11y"),
-    getAbsolutePath("@storybook/addon-essentials"),
-    getAbsolutePath("@storybook/addon-interactions"),
-    getAbsolutePath("@storybook/addon-mdx-gfm"),
-    getAbsolutePath("storybook-addon-rtl"),
+    "storybook-addon-rtl",
+    getAbsolutePath("storybook-addon-tag-badges"),
   ],
+
   core: {
-    builder: "@storybook/builder-vite",
     disableTelemetry: true,
   },
-  docs: {
-    autodocs: true,
-  },
+
   framework: {
     name: getAbsolutePath("@storybook/react-vite"),
     options: {},
   },
+
   staticDirs: ["../src/static"],
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
+
   typescript: {
     check: false,
     reactDocgen: false,
@@ -63,6 +65,17 @@ const config: StorybookConfig = {
       tsconfigPath: require.resolve("../tsconfig.json"),
     },
   },
+
+  viteFinal: async (config) => ({
+    ...config,
+    resolve: {
+      ...config.resolve,
+      alias: {
+        ...config.resolve?.alias,
+        "@emotion/styled": "@emotion/styled",
+      },
+    },
+  }),
 };
 
 export default config;

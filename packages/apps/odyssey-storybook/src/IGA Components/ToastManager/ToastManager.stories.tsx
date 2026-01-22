@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import {
   ToastManager,
@@ -53,11 +53,10 @@ const ChildComponent = () => {
 };
 
 export const Example: Story = {
-  name: "Example",
-  render: (args) => {
-    return <ToastManager>{args.children}</ToastManager>;
-  },
   args: {
     children: <ChildComponent />,
+  },
+  render: (args) => {
+    return <ToastManager>{args.children}</ToastManager>;
   },
 };

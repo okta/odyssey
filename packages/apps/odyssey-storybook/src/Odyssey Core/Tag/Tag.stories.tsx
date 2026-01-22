@@ -12,8 +12,8 @@
 
 import { Tag, TagList } from "@okta/odyssey-react-mui";
 import { GroupIcon } from "@okta/odyssey-react-mui/icons";
-import { Meta, StoryObj } from "@storybook/react";
-import { expect, fn, userEvent, within } from "@storybook/test";
+import { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, fn, userEvent, within } from "storybook/test";
 
 import { axeRun } from "../../axeRun.js";
 import icons from "../../tools/iconUtils.js";

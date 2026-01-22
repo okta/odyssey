@@ -46,14 +46,14 @@ import {
   type UiShellNavComponentProps,
   type UiShellProps,
 } from "@okta/odyssey-react-mui/ui-shell";
-import { action } from "@storybook/addon-actions";
-import { Meta, StoryObj } from "@storybook/react";
-import { fn } from "@storybook/test";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { action } from "storybook/actions";
+import { fn } from "storybook/test";
 
 import { BaseButton } from "../../../../../core/odyssey-react-mui/src/Buttons/BaseButton.js";
 import { createMessageBus } from "../../../../../core/odyssey-react-mui/src/tools/createMessageBus.js";
-import PlaceholderLogo from "../../Odyssey Core/Fields/PickerWithOptionAdornment [labs]/PlaceholderLogo.js";
+import PlaceholderLogo from "../../Odyssey Core/Fields/PickerWithOptionAdornment/PlaceholderLogo.js";
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
 const meta = {
@@ -511,10 +511,11 @@ export const InvisibleFirstRender: Story = {
 export const TopNavOnly: Story = {
   decorators: [OdysseyStorybookThemeDecorator],
   args: {
-    initialVisibleSections: ["TopNav"],
+    initialVisibleSections: ["AppSwitcher", "TopNav"],
     optionalComponents: sharedOptionalComponents,
     subscribeToPropChanges: (subscriber) => {
       subscriber({
+        appSwitcherProps: TURN_OFF_APP_SWITCHER,
         topNavProps: sharedTopNavProps,
       });
 

@@ -11,7 +11,7 @@
  */
 
 import { WorkflowsComponentsProvider } from "@okta/odyssey-contributions-workflows-components";
-import { Decorator } from "@storybook/react";
+import { Decorator } from "@storybook/react-vite";
 
 export const WorkflowsComponentsStorybookThemeDecorator: Decorator = (
   Story,

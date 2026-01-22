@@ -108,6 +108,12 @@ const UiShell = ({
 
   const activeBreakpoint = useUiShellBreakpoints(breakpointConfig);
 
+  if (componentProps.sideNavProps?.logoProps && componentProps.logoProps) {
+    throw new Error(
+      "Unified UI Shell: You passed both `logoProps` and `sideNavProps.logoProps` as component props. Please only use the top-level `logoProps` instead.",
+    );
+  }
+
   useEffect(() => {
     const unsubscribe = subscribeToPropChanges((componentProps) => {
       // If for some reason nothing is passed as `componentProps`, we fallback on `defaultComponentProps` as a safety mechanism to ensure nothing breaks.
@@ -166,8 +172,10 @@ const UiShell = ({
                       isCollapsible:
                         activeBreakpoint === "medium" ||
                         componentProps.sideNavProps?.isCollapsible,
-                      // We have to use `as` because sideNavProps expects you to have `sideNavItems` defined even though it had to be passed in `...componentProps.sideNavProps`.
-                    } as typeof componentProps.sideNavProps,
+                      logoProps:
+                        componentProps.sideNavProps?.logoProps ||
+                        componentProps.logoProps,
+                    } as typeof componentProps.sideNavProps, // We have to use `as` because sideNavProps expects you to have `sideNavItems` defined even though it had to be passed in `...componentProps.sideNavProps`.
                   },
                 }}
                 appElement={appElement}

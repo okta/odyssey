@@ -24,7 +24,7 @@ import {
   UserProfileMenuButton,
   UserProfileMenuButtonProps,
 } from "@okta/odyssey-react-mui/labs";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { ReactNode } from "react";
 
 import icons from "../../tools/iconUtils.js";

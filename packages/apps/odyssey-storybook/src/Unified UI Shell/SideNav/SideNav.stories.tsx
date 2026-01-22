@@ -31,12 +31,12 @@ import {
   SideNavItem,
   SideNavProps,
 } from "@okta/odyssey-react-mui/ui-shell";
-import { action } from "@storybook/addon-actions";
-import { Meta, StoryObj } from "@storybook/react";
-import { configure, expect, userEvent, waitFor, within } from "@storybook/test";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { useEffect, useState } from "react";
+import { action } from "storybook/actions";
+import { configure, expect, userEvent, waitFor, within } from "storybook/test";
 
-import PlaceholderLogo from "../../Odyssey Core/Fields/PickerWithOptionAdornment [labs]/PlaceholderLogo.js";
+import PlaceholderLogo from "../../Odyssey Core/Fields/PickerWithOptionAdornment/PlaceholderLogo.js";
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 import { PlaywrightProps } from "../../tools/storybookTypes.js";
 

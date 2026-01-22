@@ -58,7 +58,7 @@ export const normalizeBackgroundColor = (bgColor: string): string => {
   return bgColor === hueNeutral50Rgb ? Tokens.HueNeutral50 : bgColor;
 };
 
-export const defaultParentBackgroundColor = "#ffffff";
+export const defaultParentBackgroundColor = Tokens.HueNeutral50;
 
 /**
  * Determines the effective background color of an element.
@@ -78,7 +78,7 @@ export const getBackgroundColor = (element: HTMLElement | null): string => {
     }
     element = element.parentElement;
   }
-  return defaultParentBackgroundColor; // Default to white/low contrast if no background color is found
+  return defaultParentBackgroundColor; // Default to gray/high contrast if no background color is found
 };
 
 type UseContrastModeProps = {

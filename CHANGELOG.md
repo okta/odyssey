@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.52.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.51.0...v1.52.0) (2026-01-21)
+
+### Features
+
+- add variant prop to Dialog ([#164](https://github.com/atko-eng/odyssey-design-system/issues/164)) ([503aba4](https://github.com/atko-eng/odyssey-design-system/commit/503aba43f6c380cefb873b52596a3eb4ef103cd3))
+- adds logoProps to UiShell ([#165](https://github.com/atko-eng/odyssey-design-system/issues/165)) ([5b39f67](https://github.com/atko-eng/odyssey-design-system/commit/5b39f67d8b2360363fa18fdc7ae66c44e48be15d))
+- create wp-components contribution package ([#169](https://github.com/atko-eng/odyssey-design-system/issues/169)) ([41c2757](https://github.com/atko-eng/odyssey-design-system/commit/41c2757340e77aa369d2942a5697947f3b3d0573))
+- show tooltip on disabled Button/MenuButton/MenuItem ([#167](https://github.com/atko-eng/odyssey-design-system/issues/167)) ([ca0ac54](https://github.com/atko-eng/odyssey-design-system/commit/ca0ac54e22e8469eaaf1643fb7d4dedd5f33e2eb))
+- update playwright version to latest ([#175](https://github.com/atko-eng/odyssey-design-system/issues/175)) ([1afc2a7](https://github.com/atko-eng/odyssey-design-system/commit/1afc2a7bd312f963e72ec391f5cde0567f9a3f44))
+- updates Storybook to v10 ([#170](https://github.com/atko-eng/odyssey-design-system/issues/170)) ([e357522](https://github.com/atko-eng/odyssey-design-system/commit/e3575222203a0ae1fc77b2dd8a4952fb90e8ab5e))
+
+### Bug Fixes
+
+- changes default background from white to gray ([#153](https://github.com/atko-eng/odyssey-design-system/issues/153)) ([c5e1864](https://github.com/atko-eng/odyssey-design-system/commit/c5e1864e9f0e0525bbd87868e275764e88aeb221))
+- fixes broken stories ([#176](https://github.com/atko-eng/odyssey-design-system/issues/176)) ([3da92b1](https://github.com/atko-eng/odyssey-design-system/commit/3da92b1ec97335eb5fa91cef88a4b598ae94b49e))
+
 ## [1.51.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.50.1...v1.51.0) (2026-01-07)
 
 ### Features

@@ -51,18 +51,12 @@ describe("useContrastMode and related functions", () => {
     });
 
     it("should return lowContrast mode by default", () => {
-      const { result } = renderHook(() => useContrastMode({}), {
-        wrapper: ({ children }) => (
-          <ContrastModeContext.Provider value={{ contrastMode: "lowContrast" }}>
-            {children}
-          </ContrastModeContext.Provider>
-        ),
-      });
+      const { result } = renderHook(() => useContrastMode({}));
 
       expect(result.current.parentBackgroundColor).toBe(
         defaultParentBackgroundColor,
       );
-      expect(result.current.contrastMode).toBe("lowContrast");
+      expect(result.current.contrastMode).toBe("highContrast");
       expect(result.current.contrastContainerRef.current).toBe(null);
     });
 

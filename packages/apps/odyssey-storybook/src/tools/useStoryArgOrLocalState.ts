@@ -10,8 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useArgs, useState } from "@storybook/preview-api";
-import { StoryContext } from "@storybook/react";
+import { StoryContext } from "@storybook/react-vite";
+import { useArgs, useState } from "storybook/preview-api";
 
 /**
  * Provides a stateful value that uses Storybook args in Canvas,

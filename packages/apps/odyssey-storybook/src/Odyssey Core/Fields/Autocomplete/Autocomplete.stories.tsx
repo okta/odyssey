@@ -11,16 +11,9 @@
  */
 
 import { Autocomplete, Link } from "@okta/odyssey-react-mui";
-import { Meta, StoryObj } from "@storybook/react";
-import {
-  expect,
-  fn,
-  screen,
-  userEvent,
-  waitFor,
-  within,
-} from "@storybook/test";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { SyntheticEvent, useCallback, useState } from "react";
+import { expect, fn, screen, userEvent, waitFor, within } from "storybook/test";
 
 import { axeRun } from "../../../axeRun.js";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";

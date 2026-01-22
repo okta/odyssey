@@ -11,7 +11,7 @@
  */
 
 import { SearchField, searchVariantValues } from "@okta/odyssey-react-mui";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { ChangeEvent, useCallback, useState } from "react";
 
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";

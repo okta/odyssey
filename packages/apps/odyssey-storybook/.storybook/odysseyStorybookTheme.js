@@ -1,4 +1,4 @@
-import { create } from "@storybook/theming";
+import { create } from "storybook/theming";
 import {
   HueNeutral50,
   HueNeutral200,

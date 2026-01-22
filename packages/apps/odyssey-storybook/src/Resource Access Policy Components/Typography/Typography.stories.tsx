@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import {
   Heading2,
@@ -28,13 +28,11 @@ const containerStyle: React.CSSProperties = {
 };
 
 const meta = {
-  title: "Resource Access Policy Components/Typography",
   component: Typography,
   decorators: [
     OdysseyStorybookThemeDecorator,
     WorkflowsComponentsStorybookThemeDecorator,
   ],
-  tags: ["autodocs"],
   argTypes: {
     children: {
       control: "text",

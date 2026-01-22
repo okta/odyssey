@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ReactRenderer } from "@storybook/react";
+import type { ReactRenderer } from "@storybook/react-vite";
 
 import { PlayFunctionContext } from "storybook/internal/types";
 
