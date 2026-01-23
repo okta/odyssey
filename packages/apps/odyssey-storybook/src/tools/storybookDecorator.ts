@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { Decorator } from "@storybook/react";
+import type { Decorator } from "@storybook/react-vite";
 
 export type OdysseyStorybookDecorator = Decorator<{
   globals: { locale: string | undefined };

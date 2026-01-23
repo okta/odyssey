@@ -16,9 +16,9 @@ import {
   DialogContentText,
   DialogProps,
 } from "@okta/odyssey-react-mui";
-import { useCallback } from "@storybook/preview-api";
-import { Meta, StoryObj } from "@storybook/react";
-import { screen, userEvent, within } from "@storybook/test";
+import { Meta, StoryObj } from "@storybook/react-vite";
+import { useCallback } from "storybook/preview-api";
+import { screen, userEvent, within } from "storybook/test";
 
 import type { PlaywrightProps } from "../../../tools/storybookTypes.js";
 
@@ -72,6 +72,21 @@ const storybookMeta: Meta<typeof Dialog> = {
         value: "ReactNode | Array<ReactNode>",
       },
     },
+    variant: {
+      control: "radio",
+      options: ["default", "security"],
+      description:
+        "When set to `security`, the Dialog backdrop will be blurred.",
+      table: {
+        category: "Visual",
+        type: {
+          summary: "default | security",
+        },
+      },
+      type: {
+        name: "string",
+      },
+    },
     isOpen: {
       control: "boolean",
       description: "When set to `true`, the Dialog will be visible",
@@ -104,6 +119,7 @@ const storybookMeta: Meta<typeof Dialog> = {
       "Description text explaining the consequences and any alternatives. Limit to two lines if possible",
     isOpen: false,
     title: "Dialog title",
+    variant: "default",
   },
 };
 

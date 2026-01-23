@@ -16,8 +16,8 @@ import {
   bannerRoleValues,
   bannerSeverityValues,
 } from "@okta/odyssey-react-mui";
-import { Meta, StoryObj } from "@storybook/react";
-import { expect, fn, userEvent, within } from "@storybook/test";
+import { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, fn, userEvent, within } from "storybook/test";
 
 import type { PlaywrightProps } from "../../tools/storybookTypes.js";
 

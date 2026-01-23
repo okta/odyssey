@@ -12,7 +12,7 @@
 
 import { ChevronDownIcon, UserIcon } from "@okta/odyssey-react-mui/icons";
 import { UserProfile, UserProfileProps } from "@okta/odyssey-react-mui/labs";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 
 import icons from "../../tools/iconUtils.js";
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";

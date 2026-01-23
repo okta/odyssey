@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import {
   Box,
@@ -21,7 +21,7 @@ import {
   buttonVariantValues,
 } from "@okta/odyssey-react-mui";
 import { AddIcon } from "@okta/odyssey-react-mui/icons";
-import { expect, fn, userEvent, waitFor, within } from "@storybook/test";
+import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 
 import type { PlaywrightProps } from "../../tools/storybookTypes.js";
 

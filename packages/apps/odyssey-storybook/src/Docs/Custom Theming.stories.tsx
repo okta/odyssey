@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import * as odysseyTokens from "@okta/odyssey-design-tokens";
 import {
@@ -32,7 +32,9 @@ import {
 } from "@okta/odyssey-react-mui";
 import { useMemo } from "react";
 
-const meta = {} satisfies Meta;
+const meta = {
+  component: () => null,
+} satisfies Meta;
 
 export default meta;
 

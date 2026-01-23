@@ -1,9 +1,11 @@
-import type { Preview } from "@storybook/react";
+import type { Preview } from "@storybook/react-vite";
+import { setupOdysseyDebugListener } from "@okta/odyssey-contributions-ui-component-identifier";
 
 import { ResetArgsDecorator } from "../src/tools/ResetArgsDecorator.js";
 
+setupOdysseyDebugListener();
+
 export const globalTypes = {
-  rtlDirection: "ltr",
   locale: {
     name: "Locale",
     description: "Internationalization locale",
@@ -46,8 +48,9 @@ export const globalTypes = {
   },
 };
 
-const preview: Preview = {
+const preview = {
   decorators: [ResetArgsDecorator],
+
   parameters: {
     a11y: {
       options: {
@@ -62,16 +65,17 @@ const preview: Preview = {
       },
     },
     backgrounds: {
-      values: [
-        {
+      options: {
+        white: {
           name: "White",
           value: "#ffffff",
         },
-        {
+
+        gray: {
           name: "Gray",
           value: "#f4f4f4",
         },
-      ],
+      },
     },
     controls: {
       expanded: true,
@@ -81,6 +85,7 @@ const preview: Preview = {
       argTypes: {
         sort: "alpha",
       },
+      codePanel: true,
       controls: {
         sort: "alpha",
       },
@@ -111,6 +116,8 @@ const preview: Preview = {
     },
     viewMode: "docs",
   },
-};
+
+  tags: ["autodocs"],
+} satisfies Preview;
 
 export default preview;

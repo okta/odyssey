@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.52.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.51.0...v1.52.0) (2026-01-21)
+
+### Features
+
+- update playwright version to latest ([#175](https://github.com/atko-eng/odyssey-design-system/issues/175)) ([1afc2a7](https://github.com/atko-eng/odyssey-design-system/commit/1afc2a7bd312f963e72ec391f5cde0567f9a3f44))
+
 ## [1.51.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.50.1...v1.51.0) (2026-01-07)
 
 **Note:** Version bump only for package @okta/odyssey-contribution-tooling

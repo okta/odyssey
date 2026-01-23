@@ -10,11 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { Meta, StoryContext, StoryObj } from "@storybook/react";
+import type { Meta, StoryContext, StoryObj } from "@storybook/react-vite";
 
 import { SelectChangeEvent } from "@mui/material";
 import { Link, Select, type SelectProps } from "@okta/odyssey-react-mui";
-import { fn, screen, userEvent } from "@storybook/test";
+import { fn, screen, userEvent } from "storybook/test";
 
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { useStoryArgOrLocalState } from "../../../tools/useStoryArgOrLocalState.js";

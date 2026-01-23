@@ -28,7 +28,7 @@ import {
   typographyVariantMapping,
   TypographyVariantValue,
 } from "@okta/odyssey-react-mui";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { createElement } from "react";
 
 import { axeRun } from "../../axeRun.js";

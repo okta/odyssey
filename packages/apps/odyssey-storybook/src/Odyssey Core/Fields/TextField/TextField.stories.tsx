@@ -20,10 +20,10 @@ import {
   textFieldTypeValues,
 } from "@okta/odyssey-react-mui";
 import { AddCircleIcon, CallIcon } from "@okta/odyssey-react-mui/icons";
-import { useCallback } from "@storybook/preview-api";
-import { Meta, StoryObj } from "@storybook/react";
-import { fn, userEvent, within } from "@storybook/test";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { ChangeEvent } from "react";
+import { useCallback } from "storybook/preview-api";
+import { fn, userEvent, within } from "storybook/test";
 
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { useStoryArgOrLocalState } from "../../../tools/useStoryArgOrLocalState.js";

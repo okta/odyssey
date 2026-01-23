@@ -11,7 +11,7 @@
  */
 
 import { ExampleComponentsProvider } from "@okta/odyssey-contributions-example-components";
-import { Decorator } from "@storybook/react";
+import { Decorator } from "@storybook/react-vite";
 
 export const ExampleComponentsStorybookThemeDecorator: Decorator = (
   Story,

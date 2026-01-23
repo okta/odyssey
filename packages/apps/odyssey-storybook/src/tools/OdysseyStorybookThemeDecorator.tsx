@@ -10,14 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { Decorator } from "@storybook/react";
+import type { Decorator } from "@storybook/react-vite";
 
 import * as odysseyTokens from "@okta/odyssey-design-tokens";
 import {
   createOdysseyMuiTheme,
   OdysseyProvider,
 } from "@okta/odyssey-react-mui";
-import { ThemeProvider as StorybookThemeProvider } from "@storybook/theming";
+import { ThemeProvider as StorybookThemeProvider } from "storybook/theming";
 
 const styles = {
   fontFamily:

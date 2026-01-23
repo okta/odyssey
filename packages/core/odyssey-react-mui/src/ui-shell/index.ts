@@ -18,6 +18,7 @@ export * from "./SideNav/SideNav.js";
 export * from "./SideNav/types.js";
 export * from "./TopNav/TopNav.js";
 export * from "./uiShellContentTypes.js";
+export * from "./UiShellLogo.js";
 export * from "./useHasUiShell.js";
 export * from "./WideUiShellContent.js";
 

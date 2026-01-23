@@ -16,6 +16,7 @@ import { ErrorBoundaryProps } from "react-error-boundary";
 import { AppSwitcherProps } from "./AppSwitcher/AppSwitcher.js";
 import { SideNavProps } from "./SideNav/types.js";
 import { TopNavProps } from "./TopNav/TopNav.js";
+import { UiShellLogoProps } from "./UiShellLogo.js";
 
 export const subComponentNames = ["TopNav", "SideNav", "AppSwitcher"] as const;
 export type SubComponentName = (typeof subComponentNames)[number];
@@ -31,6 +32,12 @@ export type UiShellNavComponentProps = {
    * In this special case, a value of `TURN_OFF_APP_SWITCHER` tells the `appSwitcher` to not appear. This can occur if there's an error loading the items. In that case, we don't want it to appear.
    */
   appSwitcherProps?: AppSwitcherProps | typeof TURN_OFF_APP_SWITCHER;
+  /**
+   * Logo that displays in the side nav header and narrow top nav.
+   *
+   * This used to be `sideNavProps.logoProps`, but the logo is used both in the side nav and narrow top nav. If you don't have a side nav, you still need a logo in narrow view.
+   */
+  logoProps?: UiShellLogoProps;
   /**
    * Object that gets pass directly to the side nav component. If `undefined` and in `initialVisibleSections`, SideNav will be initially rendered. Pass `null` to hide a previously-visible SideNav.
    */

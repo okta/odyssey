@@ -22,9 +22,9 @@ import {
   CheckboxProps as MuiCheckboxProps,
 } from "@okta/odyssey-react-mui";
 import { ChevronDownIcon, ChevronUpIcon } from "@okta/odyssey-react-mui/icons";
-import { action } from "@storybook/addon-actions";
-import { type Meta, StoryObj } from "@storybook/react";
+import { type Meta, StoryObj } from "@storybook/react-vite";
 import { MouseEventHandler, useCallback, useState } from "react";
+import { action } from "storybook/actions";
 
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
@@ -70,6 +70,7 @@ const CheckboxContainer = styled("div")(() => ({
 }));
 
 const meta = {
+  component: () => null, // This should be `Card`, but this Story errors when using it.
   decorators: [OdysseyStorybookThemeDecorator],
   argTypes: {
     children: {

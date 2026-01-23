@@ -12,21 +12,41 @@
 
 import { SelectChangeEvent } from "@mui/material";
 import { Link, NativeSelect, NativeSelectProps } from "@okta/odyssey-react-mui";
-import { Meta, StoryObj } from "@storybook/react";
-import { useCallback, useState } from "react";
+import { Meta, StoryObj } from "@storybook/react-vite";
+import { fn } from "storybook/test";
 
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
+import { useStoryArgOrLocalState } from "../../../tools/useStoryArgOrLocalState.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
+
+const valueControlOptions = [
+  "Option A",
+  "Option B",
+  "Option C",
+  "Option D",
+  "Option E",
+];
+
+const baseOptions = (
+  <>
+    {valueControlOptions.map((option) => (
+      <option key={option} value={option}>
+        {option}
+      </option>
+    ))}
+  </>
+);
 
 const storybookMeta: Meta<typeof NativeSelect> = {
   component: NativeSelect,
   decorators: [OdysseyStorybookThemeDecorator],
-  tags: ["autodocs"],
   argTypes: {
     children: {
+      control: false,
       description:
         "The options or optgroup elements within the native select component",
       table: {
+        category: "Visual",
         type: {
           summary:
             "ReactElement<'option'> | ReactElement<'optgroup'> | undefined",
@@ -38,6 +58,7 @@ const storybookMeta: Meta<typeof NativeSelect> = {
       description:
         "The default value of the native select component. Only applicable if `value` is not provided",
       table: {
+        category: "Functional",
         type: {
           summary: "string | string[] | undefined",
         },
@@ -55,6 +76,8 @@ const storybookMeta: Meta<typeof NativeSelect> = {
       description:
         "If `true`, the native select component allows multiple selections",
       table: {
+        readonly: true,
+        category: "Visual",
         type: {
           summary: "boolean",
         },
@@ -68,6 +91,7 @@ const storybookMeta: Meta<typeof NativeSelect> = {
       control: "text",
       description: "The label text for the native select component",
       table: {
+        category: "Visual",
         type: {
           summary: "string",
         },
@@ -78,37 +102,45 @@ const storybookMeta: Meta<typeof NativeSelect> = {
       },
     },
     onBlur: {
+      control: false,
       description:
         "Callback fired when the native select component loses focus",
       table: {
+        category: "Functional",
         type: {
           summary: "func",
         },
       },
     },
     onChange: {
+      control: false,
       description:
         "Callback fired when the value of the native select component changes",
       table: {
+        category: "Functional",
         type: {
           summary: "func",
         },
       },
     },
     onFocus: {
+      control: false,
       description:
         "Callback fired when the native select component gains focus",
       table: {
+        category: "Functional",
         type: {
           summary: "func",
         },
       },
     },
     value: {
-      control: "text",
+      control: { type: "radio" },
+      options: valueControlOptions,
       description:
-        "The value or values selected in the native select component",
+        "If `value` is provided, you control the field externally and must handle updates with `onChange`.",
       table: {
+        category: "Functional",
         type: {
           summary: "string | string[]",
         },
@@ -116,329 +148,205 @@ const storybookMeta: Meta<typeof NativeSelect> = {
     },
   },
   args: {
+    hasMultipleChoices: false,
+    hint: "Hint text",
+    id: "native-select",
     isDisabled: false,
-    hint: "Select your destination in the Sol system.",
+    isFullWidth: false,
     isOptional: false,
-    label: "Destination",
-    id: "SolarDestination",
-    defaultValue: "",
+    label: "Label",
+    onBlur: fn(),
+    onFocus: fn(),
+    value: "Option A",
   },
 };
 
 export default storybookMeta;
 
-const Template: StoryObj<typeof NativeSelect> = {
-  render: function C(args) {
+type NativeSelectStoryArgs = NativeSelectProps<string | string[], boolean>;
+
+const singleTemplate: StoryObj<typeof NativeSelect> = {
+  args: {
+    hasMultipleChoices: false,
+  },
+  render: function C(args, context) {
+    const { value, setValue } = useStoryArgOrLocalState<
+      NativeSelectStoryArgs,
+      "value"
+    >({
+      args,
+      context,
+      argKey: "value",
+      defaultValue: args.defaultValue ?? "",
+    });
+
+    const handleChange = (event: SelectChangeEvent<string | string[]>) => {
+      const target = event.target as HTMLSelectElement;
+      setValue(target.value);
+    };
+
     return (
       <NativeSelect
         {...args}
-        children={
-          <>
-            <option value="earth">Earth</option>
-            <option value="mars">Mars</option>
-            <option value="ceres">Ceres</option>
-            <option value="eros">Eros</option>
-            <option value="tycho-station">Tycho Station</option>
-            <option value="phoebe">Phoebe</option>
-            <option value="ganymede">Ganymede</option>
-          </>
-        }
-        defaultValue={args.defaultValue}
-        errorMessage={args.errorMessage}
-        errorMessageList={args.errorMessageList}
-        hint={args.hint}
-        id={args.id}
-        isDisabled={args.isDisabled}
-        isMultiSelect={args.isMultiSelect}
-        isOptional={args.isOptional}
-        label={args.label}
+        children={args.children ?? baseOptions}
+        defaultValue={undefined}
+        hasMultipleChoices={false}
+        onChange={handleChange}
+        value={value}
       />
     );
   },
 };
 
-const GroupTemplate: StoryObj<typeof NativeSelect> = {
-  render: function C(args) {
+const multiTemplate: StoryObj<typeof NativeSelect> = {
+  args: {
+    hasMultipleChoices: true,
+    value: [],
+  },
+  render: function C(args, context) {
+    const { value, setValue } = useStoryArgOrLocalState<
+      NativeSelectStoryArgs,
+      "value"
+    >({
+      args,
+      context,
+      argKey: "value",
+      defaultValue: args.value ?? [],
+    });
+
+    const handleChange = (event: SelectChangeEvent<string | string[]>) => {
+      const target = event.target as HTMLSelectElement;
+      const selectedValues = Array.from(target.selectedOptions).map(
+        (option) => option.value,
+      );
+      setValue(selectedValues);
+    };
+
     return (
       <NativeSelect
         {...args}
-        children={
-          <>
-            <optgroup label="Sol System">
-              <option value="earth">Earth</option>
-              <option value="mars">Mars</option>
-              <option value="ceres">Ceres</option>
-              <option value="eros">Eros</option>
-              <option value="tycho-station">Tycho Station</option>
-              <option value="phoebe">Phoebe</option>
-              <option value="ganymede">Ganymede</option>
-            </optgroup>
-            <optgroup label="Extrasolar">
-              <option value="auberon">Auberon</option>
-              <option value="al-halub">Al-Halub</option>
-              <option value="freehold">Freehold</option>
-              <option value="laconia">Laconia</option>
-              <option value="new-terra">New Terra</option>
-            </optgroup>
-          </>
-        }
+        children={args.children ?? baseOptions}
+        defaultValue={undefined}
+        hasMultipleChoices
+        onChange={handleChange}
+        value={value}
       />
     );
   },
 };
 
 export const Default: StoryObj<typeof NativeSelect> = {
-  ...Template,
+  ...singleTemplate,
+  tags: ["!autodocs"],
 };
 
-export const DefaultDisabled: StoryObj<typeof NativeSelect> = {
-  ...Template,
+export const Disabled: StoryObj<typeof NativeSelect> = {
+  ...singleTemplate,
   args: {
     isDisabled: true,
   },
 };
 
-export const DefaultError: StoryObj<typeof NativeSelect> = {
-  ...Template,
+export const Error: StoryObj<typeof NativeSelect> = {
+  ...singleTemplate,
   args: {
-    errorMessage: "Select your destination.",
+    errorMessage: "Select an option.",
   },
 };
 
 export const ErrorsList: StoryObj<typeof NativeSelect> = {
-  ...Template,
+  ...singleTemplate,
   args: {
-    errorMessage: "Select your destination.",
-    errorMessageList: ["Select 1 planet", "Select 1 moon"],
+    errorMessage: "Select an option.",
+    errorMessageList: ["Error A", "Error B"],
   },
 };
 
-export const DefaultGrouped: StoryObj<typeof NativeSelect> = {
-  ...GroupTemplate,
+export const Grouped: StoryObj<typeof NativeSelect> = {
+  ...singleTemplate,
+  args: {
+    children: (
+      <>
+        <optgroup label="Group 1">
+          <option value="Option A">Option A</option>
+          <option value="Option B">Option B</option>
+          <option value="Option C">Option C</option>
+        </optgroup>
+        <optgroup label="Group 2">
+          <option value="Option D">Option D</option>
+          <option value="Option E">Option E</option>
+        </optgroup>
+      </>
+    ),
+    value: "Option A",
+  },
+  argTypes: {
+    children: { control: false },
+  },
 };
 
 export const Multi: StoryObj<typeof NativeSelect> = {
-  ...Template,
-  args: {
-    hasMultipleChoices: true,
-    defaultValue: [],
+  ...multiTemplate,
+  argTypes: {
+    value: { control: { type: "check" }, options: valueControlOptions },
   },
 };
 
 export const Optional: StoryObj<typeof NativeSelect> = {
-  ...Template,
+  ...singleTemplate,
   args: {
     isOptional: true,
   },
 };
 
 export const HintLink: StoryObj<typeof NativeSelect> = {
-  ...Template,
+  ...singleTemplate,
   args: {
     HintLinkComponent: <Link href="#link">Learn more</Link>,
   },
 };
 
-export const Controlled: StoryObj<typeof NativeSelect> = {
+export const Uncontrolled: StoryObj<typeof NativeSelect> = {
+  args: {
+    defaultValue: "Option B",
+    value: undefined,
+  },
+  argTypes: {
+    value: { control: false },
+    defaultValue: { control: { type: "radio" }, options: valueControlOptions },
+  },
   parameters: {
     docs: {
       description: {
         story:
-          "When the component is controlled, the parent component is responsible for passing `value` to the component and listening for changes with `onChange`",
+          "When the component is uncontrolled, it manages its own value. Provide `defaultValue` and omit `value`/`onChange` to let the component handle state internally.",
       },
     },
   },
-  args: {},
-  render: function C(args) {
-    const [localValue, setLocalValue] = useState("");
-    const onChange = useCallback(
-      (event: SelectChangeEvent<string | string[]>) =>
-        setLocalValue(event.target.value as string),
-      [],
-    );
-    return (
-      <NativeSelect
-        {...args}
-        children={
-          <>
-            <optgroup label="Sol System">
-              <option value="earth">Earth</option>
-              <option value="mars">Mars</option>
-              <option value="ceres">Ceres</option>
-              <option value="eros">Eros</option>
-              <option value="tycho-station">Tycho Station</option>
-              <option value="phoebe">Phoebe</option>
-              <option value="ganymede">Ganymede</option>
-            </optgroup>
-            <optgroup label="Extrasolar">
-              <option value="auberon">Auberon</option>
-              <option value="al-halub">Al-Halub</option>
-              <option value="freehold">Freehold</option>
-              <option value="laconia">Laconia</option>
-              <option value="new-terra">New Terra</option>
-            </optgroup>
-          </>
-        }
-        onChange={onChange}
-        value={localValue}
-      />
-    );
+  render: function UncontrolledStory(args) {
+    return <NativeSelect {...args} children={baseOptions} />;
   },
 };
 
-export const ControlledMultiselect: StoryObj<typeof NativeSelect> = {
+export const UncontrolledMulti: StoryObj<typeof NativeSelect> = {
+  args: {
+    hasMultipleChoices: true,
+    defaultValue: ["Option B", "Option C"],
+    value: undefined,
+  },
+  argTypes: {
+    value: { control: false },
+    defaultValue: { control: { type: "check" }, options: valueControlOptions },
+  },
   parameters: {
     docs: {
       description: {
         story:
-          "When the component is controlled, the parent component is responsible for passing `value` to the component and listening for changes with `onChange`",
+          "When the component is uncontrolled, it manages its own value. Provide `defaultValue` and omit `value`/`onChange` to let the component handle state internally.",
       },
     },
   },
-  render: function C(args) {
-    const [localValue, setLocalValue] = useState([""]);
-
-    const onChange = useCallback<
-      Required<NativeSelectProps<typeof localValue, true>>["onChange"]
-    >((event) => {
-      const selectedOptions = [event.target]
-        .filter((option) => option instanceof HTMLOptionElement)
-        .filter((option) => option.selected)
-        .map((selectedOption) => selectedOption.value);
-
-      setLocalValue(selectedOptions);
-    }, []);
-
-    return (
-      <NativeSelect
-        {...args}
-        defaultValue={undefined}
-        hasMultipleChoices={true}
-        // @ts-expect-error This is going to break because generics aren't passed through.
-        onChange={onChange}
-        value={localValue}
-      >
-        <>
-          <optgroup label="Sol System">
-            <option value="earth">Earth</option>
-            <option value="mars">Mars</option>
-            <option value="ceres">Ceres</option>
-            <option value="eros">Eros</option>
-            <option value="tycho-station">Tycho Station</option>
-            <option value="phoebe">Phoebe</option>
-            <option value="ganymede">Ganymede</option>
-          </optgroup>
-          <optgroup label="Extrasolar">
-            <option value="auberon">Auberon</option>
-            <option value="al-halub">Al-Halub</option>
-            <option value="freehold">Freehold</option>
-            <option value="laconia">Laconia</option>
-            <option value="new-terra">New Terra</option>
-          </optgroup>
-        </>
-      </NativeSelect>
-    );
-  },
-};
-
-export const ControlledPreselected: StoryObj<typeof NativeSelect> = {
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "When the component is controlled, the parent component is responsible for passing `value` to the component and listening for changes with `onChange`",
-      },
-    },
-  },
-  args: {},
-  render: function C(args) {
-    const [localValue, setLocalValue] = useState("Laconia");
-    const onChange = useCallback(
-      (event: SelectChangeEvent<string | string[]>) =>
-        setLocalValue(event.target.value as string),
-      [],
-    );
-    return (
-      <NativeSelect
-        {...args}
-        children={
-          <>
-            <optgroup label="Sol System">
-              <option value="earth">Earth</option>
-              <option value="mars">Mars</option>
-              <option value="ceres">Ceres</option>
-              <option value="eros">Eros</option>
-              <option value="tycho-station">Tycho Station</option>
-              <option value="phoebe">Phoebe</option>
-              <option value="ganymede">Ganymede</option>
-            </optgroup>
-            <optgroup label="Extrasolar">
-              <option value="auberon">Auberon</option>
-              <option value="al-halub">Al-Halub</option>
-              <option value="freehold">Freehold</option>
-              <option value="laconia">Laconia</option>
-              <option value="new-terra">New Terra</option>
-            </optgroup>
-          </>
-        }
-        onChange={onChange}
-        value={localValue}
-      />
-    );
-  },
-};
-
-export const ControlledPreselectedMultiselect: StoryObj<typeof NativeSelect> = {
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "When the component is controlled, the parent component is responsible for passing `value` to the component and listening for changes with `onChange`.\n\nPreselected values are referenced by the value of the `value` attritube on `option` elements.",
-      },
-    },
-  },
-  render: function C(args) {
-    const [localValue, setLocalValue] = useState(["laconia", "new-terra"]);
-
-    const onChange = useCallback<
-      Required<NativeSelectProps<typeof localValue, true>>["onChange"]
-    >((event) => {
-      const selectedOptions = [event.target]
-        .filter((option) => option instanceof HTMLOptionElement)
-        .filter((option) => option.selected)
-        .map((selectedOption) => selectedOption.value);
-
-      setLocalValue(selectedOptions);
-    }, []);
-
-    return (
-      <NativeSelect
-        {...args}
-        defaultValue={undefined}
-        hasMultipleChoices
-        // @ts-expect-error This is going to break because generics aren't passed through.
-        onChange={onChange}
-        value={localValue}
-      >
-        <>
-          <optgroup label="Sol System">
-            <option value="earth">Earth</option>
-            <option value="mars">Mars</option>
-            <option value="ceres">Ceres</option>
-            <option value="eros">Eros</option>
-            <option value="tycho-station">Tycho Station</option>
-            <option value="phoebe">Phoebe</option>
-            <option value="ganymede">Ganymede</option>
-          </optgroup>
-          <optgroup label="Extrasolar">
-            <option value="auberon">Auberon</option>
-            <option value="al-halub">Al-Halub</option>
-            <option value="freehold">Freehold</option>
-            <option value="laconia">Laconia</option>
-            <option value="new-terra">New Terra</option>
-          </optgroup>
-        </>
-      </NativeSelect>
-    );
+  render: function UncontrolledMultiStory(args) {
+    return <NativeSelect {...args} children={baseOptions} />;
   },
 };

@@ -10,9 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useArgs } from "@storybook/preview-api";
-import { Decorator } from "@storybook/react";
+import { Decorator } from "@storybook/react-vite";
 import { useEffect } from "react";
+import { useArgs } from "storybook/preview-api";
 
 export const ResetArgsDecorator: Decorator = (Story) => {
   const [, , resetArgs] = useArgs();

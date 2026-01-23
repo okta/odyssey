@@ -11,7 +11,7 @@
  */
 
 import { ResourceAccessPolicyComponentsProvider } from "@okta/odyssey-contributions-resource-access-policy-components";
-import { Decorator } from "@storybook/react";
+import { Decorator } from "@storybook/react-vite";
 
 export const ResourceAccessPolicyComponentsStorybookThemeDecorator: Decorator =
   (Story, context) => (

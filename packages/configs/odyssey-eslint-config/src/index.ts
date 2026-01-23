@@ -17,6 +17,8 @@ import importPlugin from "eslint-plugin-import";
 import jsxA11yPlugin from "eslint-plugin-jsx-a11y";
 import perfectionistPlugin from "eslint-plugin-perfectionist";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+import { configs as storybookPluginConfigs } from "eslint-plugin-storybook";
 import {
   config as createTsEslintConfig,
   configs as tsEslintConfigs,
@@ -160,6 +162,16 @@ const eslintConfig = createTsEslintConfig(
         },
       ],
     },
+  },
+
+  {
+    extends: [
+      ...storybookPluginConfigs["flat/recommended"],
+      ...storybookPluginConfigs["flat/addon-interactions"],
+      ...storybookPluginConfigs["flat/csf-strict"],
+    ],
+    files: ["**/*.stories.tsx"],
+    name: getPrefixedEslintConfigName("storybook"),
   },
 
   {

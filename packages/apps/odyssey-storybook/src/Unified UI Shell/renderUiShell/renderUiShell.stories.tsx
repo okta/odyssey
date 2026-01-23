@@ -32,14 +32,15 @@ import {
   webComponentDataAttributeName,
 } from "@okta/odyssey-react-mui/web-component";
 import { renderUiShell } from "@okta/unified-ui-shell";
-import { action } from "@storybook/addon-actions";
-import { Meta, StoryObj } from "@storybook/react";
-import { expect, userEvent, waitFor, within } from "@storybook/test";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { type ReactNode, useEffect, useRef } from "react";
+import { action } from "storybook/actions";
+import { expect, userEvent, waitFor, within } from "storybook/test";
 
 import { appRootElementId } from "../../../../../core/odyssey-react-mui/src/web-component/createReactRootElements.js";
 
 const meta = {
+  component: () => null,
   parameters: {
     a11y: {
       disable: true, // As these are only visual tests, we don't need to worry about Axe. It has a lot of issues because of the Shadow DOM and throws a bunch of random errors because of those issues.

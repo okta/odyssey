@@ -5,6 +5,8 @@ import {
 } from "@storybook/test-runner";
 import { injectAxe, checkA11y } from "axe-playwright";
 
+import type { A11yConfig } from "./a11yTypes.js";
+
 const testRunnerConfig: TestRunnerConfig = {
   setup() {},
 
@@ -31,6 +33,14 @@ const testRunnerConfig: TestRunnerConfig = {
 
       await new Promise((resolve) => setTimeout(resolve, 500));
 
+      // Get story-level a11y config for rule overrides
+      const storyA11yConfig: A11yConfig | undefined =
+        storyContext.parameters?.a11y?.config;
+      const disabledRules =
+        storyA11yConfig?.rules
+          ?.filter((rule) => !rule.enabled)
+          ?.map((rule) => rule.id) ?? [];
+
       // https://github.com/abhinaba-ghosh/axe-playwright#parameters-on-checka11y-axerun
       return await checkA11y(
         // Playwright page instance.
@@ -53,6 +63,12 @@ const testRunnerConfig: TestRunnerConfig = {
                 "wcag22aa",
               ],
             },
+            // Disable specific rules from story parameters
+            ...(disabledRules.length > 0 && {
+              rules: Object.fromEntries(
+                disabledRules.map((id: string) => [id, { enabled: false }]),
+              ),
+            }),
           },
           detailedReport: true,
           detailedReportOptions: {

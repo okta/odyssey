@@ -11,7 +11,7 @@
  */
 
 import { FieldComponentProps } from "@okta/odyssey-react-mui";
-import { ArgTypes } from "@storybook/react";
+import { ArgTypes } from "@storybook/react-vite";
 
 export const fieldComponentPropsMetaData: Partial<
   ArgTypes<FieldComponentProps>

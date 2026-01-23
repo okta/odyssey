@@ -11,7 +11,7 @@
  */
 
 import { OdysseyLegacyThemeProvider } from "@okta/odyssey-contributions-iga-components";
-import { Decorator } from "@storybook/react";
+import { Decorator } from "@storybook/react-vite";
 
 export const IgaComponentsLegacyOdysseyDecorator: Decorator = (Story) => {
   return (

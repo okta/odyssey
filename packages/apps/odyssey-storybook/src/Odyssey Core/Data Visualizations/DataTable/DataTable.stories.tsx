@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import {
   Box,
@@ -31,8 +31,8 @@ import {
   paginationTypeValues,
   UpdateFiltersOrValues,
 } from "@okta/odyssey-react-mui/labs";
-import { fn } from "@storybook/test";
 import { useCallback, useMemo, useState } from "react";
+import { fn } from "storybook/test";
 
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import {
@@ -359,6 +359,7 @@ const storybookMeta: Meta<DataTableProps> = {
   args: {
     onChangeRowSelection: fn(),
   },
+  tags: ["deprecated"],
 };
 
 export default storybookMeta;

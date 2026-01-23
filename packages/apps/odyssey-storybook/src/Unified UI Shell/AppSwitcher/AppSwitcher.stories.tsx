@@ -11,8 +11,8 @@
  */
 
 import { AppSwitcher } from "@okta/odyssey-react-mui/ui-shell";
-import { Meta, StoryObj } from "@storybook/react";
-import { expect, within } from "@storybook/test";
+import { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, within } from "storybook/test";
 
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
@@ -52,22 +52,22 @@ export const AllApps: Story = {
   args: {
     appIcons: [
       {
-        appIconDefaultUrl: "/AppSwitcher/admin-app-default.svg",
-        appIconSelectedUrl: "/AppSwitcher/admin-app-selected.svg",
+        appIconDefaultUrl: "/appswitcher/admin-app-default.svg",
+        appIconSelectedUrl: "/appswitcher/admin-app-selected.svg",
         appName: "saasure",
         label: "Admin Dashboard",
         linkUrl: "http://rain-admin.okta1.com:1802/admin/dashboard",
       },
       {
-        appIconDefaultUrl: "/AppSwitcher/okta-dashboard-default.svg",
-        appIconSelectedUrl: "/AppSwitcher/okta-dashboard-selected.svg",
+        appIconDefaultUrl: "/appswitcher/okta-dashboard-default.svg",
+        appIconSelectedUrl: "/appswitcher/okta-dashboard-selected.svg",
         appName: "okta_enduser",
         label: "Okta Dashboard",
         linkUrl: "http://rain.okta1.com:1802/app/UserHome",
       },
       {
-        appIconDefaultUrl: "/AppSwitcher/workflows-default.svg",
-        appIconSelectedUrl: "/AppSwitcher/workflows-selected.svg",
+        appIconDefaultUrl: "/appswitcher/workflows-default.svg",
+        appIconSelectedUrl: "/appswitcher/workflows-selected.svg",
         appName: "okta_flow_sso",
         label: "Okta Workflows",
         linkUrl: "http://rain-admin.okta1.com:1802/flow/go",

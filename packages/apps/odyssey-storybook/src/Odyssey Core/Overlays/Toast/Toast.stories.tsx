@@ -19,9 +19,9 @@ import {
   toastSeverityValues,
   ToastStack,
 } from "@okta/odyssey-react-mui";
-import { useCallback, useState } from "@storybook/preview-api";
-import { Meta, StoryObj } from "@storybook/react";
-import { expect, userEvent, waitFor, within } from "@storybook/test";
+import { Meta, StoryObj } from "@storybook/react-vite";
+import { useCallback, useState } from "storybook/preview-api";
+import { expect, userEvent, waitFor, within } from "storybook/test";
 
 import { axeRun } from "../../../axeRun.js";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";

@@ -10,11 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { Breadcrumb, BreadcrumbList } from "@okta/odyssey-react-mui";
-import { action } from "@storybook/addon-actions";
-import { expect, within } from "@storybook/test";
+import { action } from "storybook/actions";
+import { expect, within } from "storybook/test";
 
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 
@@ -160,8 +160,12 @@ export const Truncation: BreadcrumbListStory = {
 export const Simple: BreadcrumbListStory = {
   args: {
     children: [
-      <Breadcrumb href="#one">One</Breadcrumb>,
-      <Breadcrumb href="#two">Two</Breadcrumb>,
+      <Breadcrumb href="#one" key="one">
+        One
+      </Breadcrumb>,
+      <Breadcrumb href="#two" key="two">
+        Two
+      </Breadcrumb>,
     ],
   },
   render: (args) => <BreadcrumbList {...args} />,

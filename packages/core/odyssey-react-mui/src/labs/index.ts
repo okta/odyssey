@@ -18,13 +18,17 @@ export { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 export * from "../ui-shell/AppSwitcher/AppSwitcher.js";
 /** @deprecated Will be removed in a future Odyssey version. Use the `/ui-shell` export unless your app is running React v17. */
 export * from "../ui-shell/SideNav/NavAccordion.js";
+/** @deprecated Will be removed in a future Odyssey version. Use the `/ui-shell` export unless your app is running React v17. */
 export * from "../ui-shell/SideNav/SideNav.js";
+/** @deprecated Will be removed in a future Odyssey version. Use the `/ui-shell` export unless your app is running React v17. */
 export * from "../ui-shell/SideNav/types.js";
-
 /** @deprecated Will be removed in a future Odyssey version. Use the `/ui-shell` export unless your app is running React v17. */
 export * from "../ui-shell/TopNav/TopNav.js";
 /** @deprecated Will be removed in a future Odyssey version. Use the `/ui-shell` export unless your app is running React v17. */
 export * from "../ui-shell/UiShell.js";
+/** @deprecated Will be removed in a future Odyssey version. Use the `/ui-shell` export unless your app is running React v17. */
+export * from "../ui-shell/UiShellLogo.js";
+
 // export * from "./AdaptablePicker";
 export * from "./AppTile.js";
 export * from "./DataFilters.js";

@@ -24,12 +24,11 @@ import {
   UiShellColors,
   useUiShellContext,
 } from "../../ui-shell/UiShellProvider.js";
+import { UiShellLogo, UiShellLogoProps } from "../UiShellLogo.js";
 import {
   TOP_NAV_HEIGHT,
   UI_SHELL_BASE_Z_INDEX,
 } from "../uiShellSharedConstants.js";
-import { SideNavLogo } from "./SideNavLogo.js";
-import { SideNavLogoProps, SideNavProps } from "./types.js";
 
 const SideNavHeaderContainer = styled("div")({
   position: "relative",
@@ -45,7 +44,7 @@ const SideNavLogoContainer = styled("div", {
     prop !== "odysseyDesignTokens",
 })<{
   headerBackgroundColor?: UiShellColors["sideNavBackgroundColor"];
-  isSameBackgroundAsMain: SideNavLogoProps["isSameBackgroundAsMain"];
+  isSameBackgroundAsMain: UiShellLogoProps["isSameBackgroundAsMain"];
   odysseyDesignTokens: DesignTokens;
 }>(
   ({ headerBackgroundColor, isSameBackgroundAsMain, odysseyDesignTokens }) => ({
@@ -101,7 +100,11 @@ export type SideNavHeaderProps = {
    * If the side nav currently has no items, it will be loading.
    */
   isLoading?: boolean;
-} & Pick<SideNavProps, "logoProps">;
+  /**
+   * Properties for displaying the logo image or passing a logo image component instead.
+   */
+  logoProps?: UiShellLogoProps;
+};
 
 const SideNavHeader = ({
   appName,
@@ -123,7 +126,7 @@ const SideNavHeader = ({
           //  The skeleton takes the hardcoded dimensions of the Okta logo
           <Skeleton height={24} variant="rounded" width={67} />
         ) : (
-          <SideNavLogo {...logoProps} />
+          <UiShellLogo {...logoProps} />
         )}
       </SideNavLogoContainer>
 

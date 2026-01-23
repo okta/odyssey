@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.52.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.51.0...v1.52.0) (2026-01-21)
+
+### Features
+
+- updates Storybook to v10 ([#170](https://github.com/atko-eng/odyssey-design-system/issues/170)) ([e357522](https://github.com/atko-eng/odyssey-design-system/commit/e3575222203a0ae1fc77b2dd8a4952fb90e8ab5e))
+
 ## [1.51.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.50.1...v1.51.0) (2026-01-07)
 
 **Note:** Version bump only for package @okta/odyssey-eslint-config

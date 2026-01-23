@@ -25,6 +25,7 @@ import {
   ReactNode,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -75,7 +76,6 @@ export type DialogProps = {
    * An optional Button object to be situated in the Dialog footer as the primary call to action.
    */
   primaryCallToActionComponent?: ReactElement<typeof Button>;
-
   /**
    * An optional Button object to be situated in the Dialog footer as the secondary call to action, alongside the `primaryCallToActionComponent`.
    */
@@ -90,6 +90,11 @@ export type DialogProps = {
    * The title of the Dialog.
    */
   title: string;
+
+  /**
+   * When set to `security`, the Dialog backdrop will be opaque.
+   */
+  variant?: "default" | "security";
 } & Pick<HtmlProps, "testId" | "translate">;
 
 const Dialog = ({
@@ -105,6 +110,7 @@ const Dialog = ({
   testId,
   title,
   translate,
+  variant = "default",
 }: DialogProps) => {
   const { t } = useTranslation();
   const [isContentScrollable, setIsContentScrollable] = useState(false);
@@ -153,6 +159,13 @@ const Dialog = ({
     NonNullable<ButtonProps["onClick"]>
   >((event) => onClose(event, "closeButtonClick"), [onClose]);
 
+  const slotProps = useMemo<MuiDialogProps["slotProps"]>(
+    () => ({
+      backdrop: { variant: variant },
+    }),
+    [variant],
+  );
+
   return (
     <FullScreenOverlay overlayType="dialog">
       <MuiDialog
@@ -160,6 +173,7 @@ const Dialog = ({
         data-se={testId}
         onClose={onClose}
         open={isOpen}
+        slotProps={slotProps}
       >
         <MuiDialogTitle
           id={dialogTitleId} // We need to explicitly unset `id` for MUI to automatically set it based on the `aria-labelledby` prop passed to `MuiDialog`

@@ -536,6 +536,10 @@ export const getComponents = ({
       root: ({ ownerState }) => ({
         backgroundColor: "rgba(29,29,33,0.75)",
 
+        ...(ownerState.variant === "security" && {
+          backdropFilter: "blur(10px)",
+        }),
+
         ...(ownerState.invisible === true && {
           backgroundColor: "transparent",
         }),
