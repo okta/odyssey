@@ -30,7 +30,7 @@ const FullScreenOverlay = ({
   const { overlayEmotionRootElement, overlayShadowRootElement } =
     useFullScreenOverlayContext();
 
-  return (
+  return overlayShadowRootElement ? (
     <OdysseyProvider
       emotionRootElement={overlayEmotionRootElement}
       hasScopedCssBaseline={false}
@@ -41,6 +41,8 @@ const FullScreenOverlay = ({
     >
       {children}
     </OdysseyProvider>
+  ) : (
+    <>{children}</>
   );
 };
 

@@ -23,7 +23,7 @@ import { FieldLabel } from "./FieldLabel.js";
 import { useFieldset } from "./FieldsetContext.js";
 import { HtmlProps } from "./HtmlProps.js";
 import { useTranslation } from "./i18n.generated/i18n.js";
-import { Typography } from "./Typography.js";
+import { Subordinate } from "./Typography.js";
 import { useUniqueId } from "./useUniqueId.js";
 
 export const fieldTypeValues = ["single", "group"] as const;
@@ -146,9 +146,7 @@ const Field = ({
         <MuiFormLabel component="legend" id={labelElementId}>
           {label}{" "}
           {isOptional && label && (
-            <Typography color="textSecondary" component="span">
-              ({t("fieldlabel.optional.text")})
-            </Typography>
+            <Subordinate>{t("fieldlabel.optional.text")}</Subordinate>
           )}
         </MuiFormLabel>
       ) : (

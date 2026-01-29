@@ -13,6 +13,7 @@
 import styled from "@emotion/styled";
 import { AutocompleteProps as MuiAutocompleteProps } from "@mui/material";
 import {
+  FC,
   Fragment,
   memo,
   PropsWithChildren,
@@ -28,7 +29,6 @@ import {
 import { Heading6, Paragraph } from "../../Typography.js";
 import {
   type BasePickerProps,
-  type BasePickerType,
   type BaseRenderOptionProps,
   ComposablePicker,
 } from "./ComposablePicker.js";
@@ -227,21 +227,20 @@ export type LabelDescription = BaseOptionType & { description?: string };
 export type LabelDescriptionMetadata = LabelDescription & Metadata;
 
 export type PickerProps<
-  OptionType extends LabelDescription | LabelDescriptionMetadata,
+  OptionType extends
+    | OptionLabelOnly
+    | LabelDescription
+    | LabelDescriptionMetadata,
   HasMultipleChoices extends boolean | undefined,
   IsCustomValueAllowed extends boolean | undefined,
-> = BasePickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>;
+> = Omit<
+  BasePickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>,
+  "adornmentSize" | "getOptionLabel" | "noOptionsText"
+>;
 
 export type PickerComponentType = {
   <
     OptionType extends OptionLabelOnly,
-    HasMultipleChoices extends boolean | undefined,
-    IsCustomValueAllowed extends boolean | undefined,
-  >(
-    props: PickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>,
-  ): ReactNode;
-  <
-    OptionType extends LabelDescriptionMetadata,
     HasMultipleChoices extends boolean | undefined,
     IsCustomValueAllowed extends boolean | undefined,
   >(
@@ -277,6 +276,7 @@ const Picker: PickerComponentType = <
   errorMessage,
   errorMessageList,
   getIsOptionEqualToValue,
+  groupOptionsBy,
   hasMultipleChoices,
   id: idOverride,
   inputValue,
@@ -352,6 +352,7 @@ const Picker: PickerComponentType = <
       errorMessage={errorMessage}
       errorMessageList={errorMessageList}
       getIsOptionEqualToValue={getIsOptionEqualToValue}
+      groupOptionsBy={groupOptionsBy}
       hasMultipleChoices={hasMultipleChoices}
       hint={hint}
       HintLinkComponent={HintLinkComponent}
@@ -379,9 +380,8 @@ const Picker: PickerComponentType = <
   );
 };
 
-// Need the `as BasePickerType` because generics don't get passed through
-const MemoizedPicker = memo(Picker) as BasePickerType;
-
+const MemoizedPicker = memo(Picker) as PickerComponentType &
+  Pick<FC, "displayName">;
 MemoizedPicker.displayName = "Picker";
 
 export { MemoizedPicker as Picker };

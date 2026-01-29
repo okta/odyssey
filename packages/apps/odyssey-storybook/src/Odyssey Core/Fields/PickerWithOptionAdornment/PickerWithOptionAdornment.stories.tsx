@@ -25,9 +25,9 @@ import {
 } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react-vite";
 
+import { StrictArgTypes } from "../../../../.storybook/types.js";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
-import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
-import { pickerComponentPropsMetadata } from "../pickerComponentPropsMetadata.js";
+import { pickerComponentPropsMetaData } from "../pickerComponentPropsMetaData.js";
 import PlaceholderLogo from "./PlaceholderLogo.js";
 
 const optionsSmall = [
@@ -110,131 +110,153 @@ const optionsLarge = [
   },
 ];
 
-type PickerWithOptionAdornmentType = typeof PickerWithOptionAdornment<
-  AdornmentOptionType,
-  boolean,
-  boolean
->;
+type StoryPickerWithOptionAdornmentType<
+  T extends AdornmentOptionType = AdornmentOptionType,
+> = PickerWithOptionAdornmentProps<T, boolean, boolean>;
 
-const storybookMeta: Meta<PickerWithOptionAdornmentType> = {
-  component: PickerWithOptionAdornment,
-  decorators: [OdysseyStorybookThemeDecorator],
-  argTypes: {
-    ...(pickerComponentPropsMetadata as Partial<PickerWithOptionAdornmentType>),
-    adornmentSize: {
-      control: "radio",
-      options: adornmentSizeValues,
-      description:
-        "Choose the size for the leading adornment. 'small' or 'large'",
-      table: {
-        type: {
-          summary: adornmentSizeValues.join(" | "),
-        },
+const argTypes: StrictArgTypes<StoryPickerWithOptionAdornmentType> = {
+  ...pickerComponentPropsMetaData(true),
+  adornmentSize: {
+    control: "radio",
+    options: adornmentSizeValues,
+    description: "The size for the leading adornment.",
+    table: {
+      category: "Visual",
+      defaultValue: { summary: "small" },
+      type: {
+        summary: adornmentSizeValues.join(" | "),
       },
     },
-    hint: fieldComponentPropsMetaData.hint,
-    HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
   },
+};
+
+const storybookMeta = {
+  component: PickerWithOptionAdornment,
+  decorators: [OdysseyStorybookThemeDecorator],
+  argTypes,
   args: {
     label: "Picker with option adornment label",
     hint: "Optional hint text for picker",
     options: optionsSmall,
   },
   tags: ["labs-export"],
-};
+} satisfies Meta<StoryPickerWithOptionAdornmentType>;
 
 export default storybookMeta;
 
-type PickerWithOptionAdornmentPropsType = PickerWithOptionAdornmentProps<
-  AdornmentOptionType,
-  boolean | undefined,
-  boolean | undefined
+type Story<T extends AdornmentOptionType = AdornmentOptionType> = StoryObj<
+  StoryPickerWithOptionAdornmentType<T>
 >;
 
-export const SmallAdornment: StoryObj<PickerWithOptionAdornmentPropsType> = {};
+export const SmallAdornment: Story = {};
 
-export const SmallAdornmentAndMetaData: StoryObj<PickerWithOptionAdornmentPropsType> =
-  {
-    args: {
-      options: optionsSmall.map((option) => ({
-        ...option,
-        metaData: [
-          {
-            icon: <SettingsIcon />,
-            detailText: "10",
-          },
-          {
-            icon: <GlobeIcon />,
-            detailText: "1",
-          },
-          {
-            icon: <FolderIcon />,
-            detailText: 40,
-          },
-        ],
-      })),
-    },
-  };
+export const SmallAdornmentAndMetaData: Story = {
+  args: {
+    options: optionsSmall.map((option) => ({
+      ...option,
+      metaData: [
+        {
+          icon: <SettingsIcon />,
+          detailText: "10",
+        },
+        {
+          icon: <GlobeIcon />,
+          detailText: "1",
+        },
+        {
+          icon: <FolderIcon />,
+          detailText: 40,
+        },
+      ],
+    })),
+  },
+};
 
-export const LargeAdornment: StoryObj<PickerWithOptionAdornmentPropsType> = {
+export const LargeAdornment: Story = {
   args: {
     adornmentSize: "large",
     options: optionsLarge,
   },
 };
 
-export const LargeAdornmentAndMetaData: StoryObj<PickerWithOptionAdornmentPropsType> =
-  {
-    args: {
-      adornmentSize: "large",
-      options: optionsLarge.map((option) => ({
-        ...option,
-        metaData: [
-          {
-            icon: <SettingsIcon />,
-            detailText: "10",
-          },
-          {
-            icon: <GlobeIcon />,
-            detailText: "1",
-          },
-          {
-            icon: <FolderIcon />,
-            detailText: 40,
-          },
-        ],
-      })),
-    },
-  };
+export const LargeAdornmentAndMetaData: Story = {
+  args: {
+    adornmentSize: "large",
+    options: optionsLarge.map((option) => ({
+      ...option,
+      metaData: [
+        {
+          icon: <SettingsIcon />,
+          detailText: "10",
+        },
+        {
+          icon: <GlobeIcon />,
+          detailText: "1",
+        },
+        {
+          icon: <FolderIcon />,
+          detailText: 40,
+        },
+      ],
+    })),
+  },
+};
 
-export const Disabled: StoryObj<PickerWithOptionAdornmentPropsType> = {
+export const WithGroups: Story = {
+  args: {
+    options: [
+      {
+        value: "an",
+        label: "An Option label",
+        description: "Some optional descriptive text",
+        adornment: <FolderIcon />,
+        group: "Icons",
+      },
+      {
+        value: "the",
+        label: "The Option label",
+        description:
+          "Some optional descriptive text that in this particular case is really quite long and verbose and if this were real should probably be shortened.",
+        adornment: <GlobeIcon />,
+        group: "Icons",
+      },
+      {
+        value: "image",
+        label: "This adornment is an image",
+        description: "Some optional descriptive text.",
+        adornment: "https://placehold.co/400x600",
+        group: "Image Strings",
+      },
+    ],
+    groupOptionsBy: (option) => option.group ?? "",
+  },
+};
+
+export const Disabled: Story = {
   args: {
     isDisabled: true,
     value: optionsSmall[0],
   },
 };
 
-export const SmallAdornmentMultiSelect: StoryObj<PickerWithOptionAdornmentPropsType> =
-  {
-    args: {
-      hasMultipleChoices: true,
-    },
-  };
+export const SmallAdornmentMultiSelect: Story = {
+  args: {
+    hasMultipleChoices: true,
+  },
+};
 
-export const LargeAdornmentMultiSelect: StoryObj<PickerWithOptionAdornmentPropsType> =
-  {
-    args: {
-      hasMultipleChoices: true,
-      adornmentSize: "large",
-      options: optionsLarge,
-    },
-  };
+export const LargeAdornmentMultiSelect: Story = {
+  args: {
+    hasMultipleChoices: true,
+    adornmentSize: "large",
+    options: optionsLarge,
+  },
+};
 
-export const MultiSelectDisabled: StoryObj<PickerWithOptionAdornmentPropsType> =
-  {
-    args: {
-      isDisabled: true,
-      hasMultipleChoices: true,
-      value: [optionsSmall[0], optionsSmall[1]],
-    },
-  };
+export const MultiSelectDisabled: Story = {
+  args: {
+    isDisabled: true,
+    hasMultipleChoices: true,
+    value: [optionsSmall[0], optionsSmall[1]],
+  },
+};

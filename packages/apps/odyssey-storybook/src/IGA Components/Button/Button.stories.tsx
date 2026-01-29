@@ -146,3 +146,117 @@ export const DisabledWithTooltip: Story = {
     tooltipText: "This action is currently unavailable",
   },
 };
+
+const ariaDisabledA11yParameters = {
+  config: {
+    rules: [{ id: "color-contrast", enabled: false }],
+  },
+} satisfies A11yParameters;
+
+export const DisabledPrimaryWithTooltip: Story = {
+  name: "Disabled Primary with Tooltip",
+  parameters: {
+    docs: {
+      description: {
+        story: "Primary button with `ariaDisabled` and tooltip.",
+      },
+    },
+    a11y: ariaDisabledA11yParameters,
+  },
+  args: {
+    ariaDisabled: true,
+    label: "Primary",
+    variant: "primary",
+    tooltipText: "This action is currently unavailable",
+  },
+};
+
+export const DisabledSecondaryWithTooltip: Story = {
+  name: "Disabled Secondary with Tooltip",
+  parameters: {
+    docs: {
+      description: {
+        story: "Secondary button with `ariaDisabled` and tooltip.",
+      },
+    },
+    a11y: ariaDisabledA11yParameters,
+  },
+  args: {
+    ariaDisabled: true,
+    label: "Secondary",
+    variant: "secondary",
+    tooltipText: "This action is currently unavailable",
+  },
+};
+
+export const DisabledDangerWithTooltip: Story = {
+  name: "Disabled Danger with Tooltip",
+  parameters: {
+    docs: {
+      description: {
+        story: "Danger button with `ariaDisabled` and tooltip.",
+      },
+    },
+    a11y: ariaDisabledA11yParameters,
+  },
+  args: {
+    ariaDisabled: true,
+    label: "Danger",
+    variant: "danger",
+    tooltipText: "This action is currently unavailable",
+  },
+};
+
+export const DisabledDangerSecondaryWithTooltip: Story = {
+  name: "Disabled Danger Secondary with Tooltip",
+  parameters: {
+    docs: {
+      description: {
+        story: "Danger Secondary button with `ariaDisabled` and tooltip.",
+      },
+    },
+    a11y: ariaDisabledA11yParameters,
+  },
+  args: {
+    ariaDisabled: true,
+    label: "Danger Secondary",
+    variant: "dangerSecondary",
+    tooltipText: "This action is currently unavailable",
+  },
+};
+
+export const DisabledFloatingWithTooltip: Story = {
+  name: "Disabled Floating with Tooltip",
+  parameters: {
+    docs: {
+      description: {
+        story: "Floating button with `ariaDisabled` and tooltip.",
+      },
+    },
+    a11y: ariaDisabledA11yParameters,
+  },
+  args: {
+    ariaDisabled: true,
+    label: "Floating",
+    variant: "floating",
+    tooltipText: "This action is currently unavailable",
+  },
+};
+
+export const DisabledFloatingActionWithTooltip: Story = {
+  name: "Disabled Floating Action with Tooltip",
+  parameters: {
+    docs: {
+      description: {
+        story: "Floating Action button with `ariaDisabled` and tooltip.",
+      },
+    },
+    a11y: ariaDisabledA11yParameters,
+  },
+  args: {
+    ariaDisabled: true,
+    label: "Floating Action",
+    variant: "floatingAction",
+    tooltipText: "This action is currently unavailable",
+  },
+};

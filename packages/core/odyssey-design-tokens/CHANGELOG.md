@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.52.1](https://github.com/atko-eng/odyssey-design-system/compare/v1.51.0...v1.52.1) (2026-01-29)
+
+### Bug Fixes
+
+- fix: correct return statement structure in FullScreenOverlay component ([#181](https://github.com/atko-eng/odyssey-design-system/issues/181)) ([41f74c](https://github.com/atko-eng/odyssey-design-system/commit/41f74cc0ad69108e8bdf70a7466ef4cc65c3c2b2))
+
 ## [1.52.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.51.0...v1.52.0) (2026-01-21)
 
 **Note:** Version bump only for package @okta/odyssey-design-tokens

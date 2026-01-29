@@ -27,7 +27,7 @@ import { expect, fn, screen, userEvent, within } from "storybook/test";
 
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
-import { pickerComponentPropsMetadata } from "../pickerComponentPropsMetadata.js";
+import { pickerComponentPropsMetaData } from "../pickerComponentPropsMetaData.js";
 
 const optionOnClick = fn();
 const optionExtraOnClick = fn();
@@ -78,7 +78,7 @@ const storybookMeta: Meta<PickerWithOptionAdornmentType> = {
   component: SearchDropdown,
   decorators: [OdysseyStorybookThemeDecorator],
   argTypes: {
-    ...(pickerComponentPropsMetadata as Partial<PickerWithOptionAdornmentType>),
+    ...pickerComponentPropsMetaData(true),
     adornmentSize: {
       control: "radio",
       options: adornmentSizeValues,

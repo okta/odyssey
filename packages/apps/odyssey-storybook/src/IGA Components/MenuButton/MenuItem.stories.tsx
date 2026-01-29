@@ -79,7 +79,7 @@ export const DisabledWithTooltip: Story = {
     docs: {
       description: {
         story:
-          "Menu items can display tooltips when disabled by using `ariaDisabled` instead of `isDisabled`. Wrap the MenuItem with a Tooltip component to show the tooltip on hover.",
+          "Menu items can display tooltips when disabled by using `ariaDisabled` instead of `isDisabled`. Wrap the MenuItem with a Tooltip component to show the tooltip on hover. This example shows both default and destructive variants.",
       },
     },
   },
@@ -87,7 +87,12 @@ export const DisabledWithTooltip: Story = {
     <MenuButton buttonLabel="Open Menu">
       <MenuItem>Enabled action</MenuItem>
       <Tooltip placement="right" text="This action is currently unavailable">
-        <MenuItem ariaDisabled>Disabled action with tooltip</MenuItem>
+        <MenuItem ariaDisabled>Disabled default with tooltip</MenuItem>
+      </Tooltip>
+      <Tooltip placement="right" text="You do not have permission to delete">
+        <MenuItem ariaDisabled variant="destructive">
+          Disabled destructive with tooltip
+        </MenuItem>
       </Tooltip>
       <MenuItem>Another enabled action</MenuItem>
     </MenuButton>

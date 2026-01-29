@@ -94,3 +94,84 @@ export const DisabledWithTooltip: Story = {
     );
   },
 };
+
+const ariaDisabledA11yParameters = {
+  config: {
+    rules: [{ id: "color-contrast", enabled: false }],
+  },
+} satisfies A11yParameters;
+
+export const DisabledPrimaryWithTooltip: Story = {
+  name: "Disabled Primary with Tooltip",
+  parameters: {
+    docs: {
+      description: {
+        story: "Primary menu button with `ariaDisabled` and tooltip.",
+      },
+    },
+    a11y: ariaDisabledA11yParameters,
+  },
+  render: function Render() {
+    return (
+      <MenuButton
+        ariaDisabled
+        buttonLabel="Primary Actions"
+        buttonVariant="primary"
+        tooltipText="You do not have permission to perform actions."
+      >
+        <MenuItem>Edit</MenuItem>
+        <MenuItem>Delete</MenuItem>
+      </MenuButton>
+    );
+  },
+};
+
+export const DisabledSecondaryWithTooltip: Story = {
+  name: "Disabled Secondary with Tooltip",
+  parameters: {
+    docs: {
+      description: {
+        story: "Secondary menu button with `ariaDisabled` and tooltip.",
+      },
+    },
+    a11y: ariaDisabledA11yParameters,
+  },
+  render: function Render() {
+    return (
+      <MenuButton
+        ariaDisabled
+        buttonLabel="Secondary Actions"
+        buttonVariant="secondary"
+        tooltipText="You do not have permission to perform actions."
+      >
+        <MenuItem>Edit</MenuItem>
+        <MenuItem>Delete</MenuItem>
+      </MenuButton>
+    );
+  },
+};
+
+export const DisabledFloatingWithTooltip: Story = {
+  name: "Disabled Floating with Tooltip",
+  parameters: {
+    docs: {
+      description: {
+        story: "Floating menu button with `ariaDisabled` and tooltip.",
+      },
+    },
+    a11y: ariaDisabledA11yParameters,
+  },
+  render: function Render() {
+    return (
+      <MenuButton
+        ariaDisabled
+        buttonLabel="Floating Actions"
+        buttonVariant="floating"
+        tooltipText="You do not have permission to perform actions."
+      >
+        <MenuItem>Edit</MenuItem>
+        <MenuItem>Delete</MenuItem>
+      </MenuButton>
+    );
+  },
+};
