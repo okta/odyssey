@@ -12,7 +12,7 @@
 
 import styled from "@emotion/styled";
 import { AutocompleteProps as MuiAutocompleteProps } from "@mui/material";
-import { Fragment, memo, ReactNode, useCallback } from "react";
+import { FC, Fragment, memo, ReactNode, useCallback } from "react";
 
 import { Box } from "../../Box.js";
 import {
@@ -25,7 +25,6 @@ import { Heading6 } from "../../Typography.js";
 import {
   type AdornmentSize,
   type BasePickerProps,
-  type BasePickerType,
   ComposablePicker,
   ComposablePickerProps,
 } from "./ComposablePicker.js";
@@ -252,9 +251,10 @@ export type PickerWithOptionAdornmentProps<
   OptionType extends AdornmentOptionType,
   HasMultipleChoices extends boolean | undefined,
   IsCustomValueAllowed extends boolean | undefined,
-> = BasePickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed> & {
-  adornmentSize?: AdornmentSize;
-};
+> = Omit<
+  BasePickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>,
+  "getOptionLabel" | "noOptionsText"
+>;
 
 type PickerWithOptionAdornmentComponentType = {
   <
@@ -429,11 +429,9 @@ const PickerWithOptionAdornment: PickerWithOptionAdornmentComponentType = <
   );
 };
 
-// Need the `as BasePickerType` because generics don't get passed through
 const MemoizedPickerWithOptionAdornment = memo(
   PickerWithOptionAdornment,
-) as BasePickerType;
-
+) as PickerWithOptionAdornmentComponentType & Pick<FC, "displayName">;
 MemoizedPickerWithOptionAdornment.displayName = "PickerWithOptionAdornment";
 
 export { MemoizedPickerWithOptionAdornment as PickerWithOptionAdornment };

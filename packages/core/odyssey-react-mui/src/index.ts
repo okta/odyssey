@@ -183,6 +183,7 @@ export {
   type FormProps,
 } from "./Form.js";
 export { HintLink } from "./HintLink.js";
+export { type HtmlProps } from "./HtmlProps.js";
 export {
   IconWithTooltip,
   type IconWithTooltipProps,

@@ -14,36 +14,28 @@ import {
   FolderIcon,
   GlobeIcon,
   SettingsIcon,
-  VideoIcon,
 } from "@okta/odyssey-react-mui/icons";
 import {
   LabelDescription,
   LabelDescriptionMetadata,
+  OptionLabelOnly,
   Picker,
+  PickerProps,
 } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react-vite";
 
+import { StrictArgTypes } from "../../../../.storybook/types.js";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
-import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
-import { pickerComponentPropsMetadata } from "../pickerComponentPropsMetadata.js";
+import { pickerComponentPropsMetaData } from "../pickerComponentPropsMetaData.js";
 
-const languagesNoDescription = [
-  { value: "en", label: "English", description: "", icon: <VideoIcon /> },
-  {
-    value: "fr",
-    label: "French",
-  },
-  {
-    value: "jp",
-    label: "Japanese",
-  },
-  {
-    value: "es",
-    label: "Spanish",
-  },
+const languagesNoDescription: OptionLabelOnly[] = [
+  { value: "en", label: "English" },
+  { value: "fr", label: "French" },
+  { value: "es", label: "Spanish" },
+  { value: "jp", label: "Japanese" },
 ];
 
-const languagesNoMetadata = [
+const languagesNoMetadata: LabelDescription[] = [
   {
     value: "en",
     label: "English",
@@ -66,7 +58,7 @@ const languagesNoMetadata = [
   },
 ];
 
-const languagesKitchenSink = [
+const languagesKitchenSink: LabelDescriptionMetadata[] = [
   {
     value: "en",
     label: "English",
@@ -113,31 +105,32 @@ const languagesKitchenSink = [
   },
 ];
 
-type PickerType = typeof Picker<
-  LabelDescription | LabelDescriptionMetadata,
-  boolean,
-  boolean
->;
+type PickerOptionTypes =
+  | OptionLabelOnly
+  | LabelDescription
+  | LabelDescriptionMetadata;
+type StoryPickerProps<T extends PickerOptionTypes = PickerOptionTypes> =
+  PickerProps<T, boolean, boolean>;
+const argTypes: StrictArgTypes<StoryPickerProps> =
+  pickerComponentPropsMetaData();
 
 const meta = {
   component: Picker,
   decorators: [OdysseyStorybookThemeDecorator],
   tags: ["labs-export"],
-  argTypes: {
-    ...(pickerComponentPropsMetadata as Partial<PickerType>),
-    hint: fieldComponentPropsMetaData.hint,
-    HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
-  },
+  argTypes,
   args: {
     label: "Picker label",
     hint: "Optional hint text for picker",
     options: languagesNoDescription,
   },
-} satisfies Meta<typeof Picker>;
+} satisfies Meta<StoryPickerProps>;
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story<T extends PickerOptionTypes = PickerOptionTypes> = StoryObj<
+  StoryPickerProps<T>
+>;
 
 export const LabelOnly: Story = {};
 
@@ -153,9 +146,28 @@ export const WithMetadata: Story = {
   },
 };
 
+export const WithGroups: Story<Required<OptionLabelOnly>> = {
+  args: {
+    options: [
+      { value: "en", label: "English", group: "Germanic Languages" },
+      { value: "fr", label: "French", group: "Romance Languages" },
+      { value: "es", label: "Spanish", group: "Romance Languages" },
+      { value: "jp", label: "Japanese", group: "Japonic Languages" },
+    ],
+    groupOptionsBy: (option) => option.group,
+  },
+};
+
 export const MultipleSelect: Story = {
   args: {
     hasMultipleChoices: true,
+  },
+};
+
+export const Loading: Story = {
+  args: {
+    isLoading: true,
+    options: [],
   },
 };
 

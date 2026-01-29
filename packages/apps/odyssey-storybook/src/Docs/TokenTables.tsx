@@ -123,13 +123,14 @@ const RenderSpace = ({ token }: { token: TokenDataItem }) => (
   ></span>
 );
 
+const typographySizeAndScaleRegex = /Typography(Size|Scale)/;
 const RenderFont = ({ token }: { token: TokenDataItem }) => (
   <span
     style={{
       backgroundColor: `${token.name.includes("LineHeight") ? "#ebebed" : ""}`,
       display: `${token.name.includes("LineHeight") ? "inline-block" : ""}`,
       fontFamily: `${token.name.includes("TypographyFamily") ? token.value : ""}`,
-      fontSize: `${token.name.includes("TypographySize") ? token.value : ""}`,
+      fontSize: `${typographySizeAndScaleRegex.test(token.name) ? token.value : ""}`,
       fontWeight: `${token.name.includes("TypographyWeight") ? token.value : ""}`,
       lineHeight: `${token.name.includes("LineHeight") ? token.value : ""}`,
       maxWidth: `${token.name.includes("LineLength") ? token.value : ""}`,
@@ -238,18 +239,10 @@ const tokenTables = Object.entries(Tokens as Record<TokenName, TokenValue>)
             value,
           })
           .sort((a, b) => {
-            const nameA = a.name.toUpperCase();
-            const nameB = b.name.toUpperCase();
-
-            if (nameA < nameB) {
-              return -1;
-            }
-
-            if (nameA > nameB) {
-              return 1;
-            }
-
-            return 0;
+            return a.name.localeCompare(b.name, "en", {
+              numeric: true,
+              sensitivity: "base",
+            });
           }),
       });
   }, [] as Array<TableData>);

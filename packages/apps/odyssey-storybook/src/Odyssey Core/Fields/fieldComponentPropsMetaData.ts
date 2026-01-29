@@ -13,8 +13,8 @@
 import { FieldComponentProps } from "@okta/odyssey-react-mui";
 import { ArgTypes } from "@storybook/react-vite";
 
-export const fieldComponentPropsMetaData: Partial<
-  ArgTypes<FieldComponentProps>
+export const fieldComponentPropsMetaData: ArgTypes<
+  Required<FieldComponentProps>
 > = {
   errorMessage: {
     control: "text",
@@ -31,7 +31,7 @@ export const fieldComponentPropsMetaData: Partial<
     control: { type: "check" },
     options: ["Error A", "Error B", "Error C"],
     description:
-      "The list of error messages rendered at the buttom of the `error` message",
+      "The list of error messages rendered at the bottom of the `error` message",
     table: {
       category: "Visual",
       type: {

@@ -5255,16 +5255,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@okta/odyssey-contribution-tooling@npm:1.50.1":
-  version: 1.50.1
-  resolution: "@okta/odyssey-contribution-tooling@npm:1.50.1::__archiveUrl=https%3A%2F%2Fartifacts.aue1e.internal%2Fartifactory%2Fapi%2Fnpm%2Fnpm-okta-master%2F%40okta%2Fodyssey-contribution-tooling%2F-%2F%40okta%2Fodyssey-contribution-tooling-1.50.1.tgz"
+"@okta/odyssey-contribution-tooling@npm:1.52.0":
+  version: 1.52.0
+  resolution: "@okta/odyssey-contribution-tooling@npm:1.52.0::__archiveUrl=https%3A%2F%2Fartifacts.aue1e.internal%2Fartifactory%2Fapi%2Fnpm%2Fnpm-okta-master%2F%40okta%2Fodyssey-contribution-tooling%2F-%2F%40okta%2Fodyssey-contribution-tooling-1.52.0.tgz"
   dependencies:
     i18next: "npm:^23.15.1"
     react-i18next: "npm:15.4.1"
   peerDependencies:
     react: ">=18"
     react-dom: ">=18"
-  checksum: 10/c0fe252054c9f6f29cac256d85eeaf851f9d07b4b2e65eed43ce845ffe956945be3f811e5a3ad39c067323e254dedb3d2874a88a215441179aa3140a1624ffaf
+  checksum: 10/8221ce1b60ef62971c1f05ff72ced7c8eac880b29c1f402a672f36ac49d761a7372a127c64dc0b3d4b67460f11ebea3e63c86c4644c04ca87d3867f17c0f4b8f
   languageName: node
   linkType: hard
 
@@ -5371,6 +5371,9 @@ __metadata:
     vite: "npm:^7.1"
     vite-plugin-svgr: "npm:^4.5"
     vitest: "npm:^3.2"
+  peerDependencies:
+    react: ^18.3.1
+    react-dom: ^18.3.1
   languageName: unknown
   linkType: soft
 
@@ -5619,10 +5622,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@okta/odyssey-design-tokens@npm:1.50.1":
-  version: 1.50.1
-  resolution: "@okta/odyssey-design-tokens@npm:1.50.1::__archiveUrl=https%3A%2F%2Fartifacts.aue1e.internal%2Fartifactory%2Fapi%2Fnpm%2Fnpm-okta-master%2F%40okta%2Fodyssey-design-tokens%2F-%2F%40okta%2Fodyssey-design-tokens-1.50.1.tgz"
-  checksum: 10/d75286fdb398e7597e854d2fcc08c4b9f294d191c93eec76e95a84a954a4573a915800c2b57d2c0c307a813d68cb8522202d89bb55157cd1bb09ee71a9eaffc5
+"@okta/odyssey-design-tokens@npm:1.52.0":
+  version: 1.52.0
+  resolution: "@okta/odyssey-design-tokens@npm:1.52.0::__archiveUrl=https%3A%2F%2Fartifacts.aue1e.internal%2Fartifactory%2Fapi%2Fnpm%2Fnpm-okta-master%2F%40okta%2Fodyssey-design-tokens%2F-%2F%40okta%2Fodyssey-design-tokens-1.52.0.tgz"
+  checksum: 10/b0256369fcf93c4f4b99565b0f02f4e30ade72f9849da9118660e7bab99f12a4dd31a6ea4144adfd3b036be0823a70d0d5a60c9775636e890a5077cd230db24a
   languageName: node
   linkType: hard
 
@@ -5827,9 +5830,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@okta/odyssey-react-mui@npm:1.50.1":
-  version: 1.50.1
-  resolution: "@okta/odyssey-react-mui@npm:1.50.1::__archiveUrl=https%3A%2F%2Fartifacts.aue1e.internal%2Fartifactory%2Fapi%2Fnpm%2Fnpm-okta-master%2F%40okta%2Fodyssey-react-mui%2F-%2F%40okta%2Fodyssey-react-mui-1.50.1.tgz"
+"@okta/odyssey-react-mui@npm:1.52.0":
+  version: 1.52.0
+  resolution: "@okta/odyssey-react-mui@npm:1.52.0::__archiveUrl=https%3A%2F%2Fartifacts.aue1e.internal%2Fartifactory%2Fapi%2Fnpm%2Fnpm-okta-master%2F%40okta%2Fodyssey-react-mui%2F-%2F%40okta%2Fodyssey-react-mui-1.52.0.tgz"
   dependencies:
     "@dnd-kit/core": "npm:6.0.3"
     "@dnd-kit/sortable": "npm:7.0.0"
@@ -5843,8 +5846,8 @@ __metadata:
     "@mui/system": "npm:^5.18.0"
     "@mui/utils": "npm:^5.17.1"
     "@mui/x-date-pickers": "npm:^7.2.0"
-    "@okta/odyssey-contribution-tooling": "npm:1.50.1"
-    "@okta/odyssey-design-tokens": "npm:1.50.1"
+    "@okta/odyssey-contribution-tooling": "npm:1.52.0"
+    "@okta/odyssey-design-tokens": "npm:1.52.0"
     "@types/luxon": "npm:^3.4.2"
     date-fns: "npm:^2.30.0"
     dom-accessibility-api: "npm:^0.7.0"
@@ -5856,7 +5859,7 @@ __metadata:
   peerDependencies:
     react: ^18.3.1
     react-dom: ^18.3.1
-  checksum: 10/e404d8deecb04c0686c621b8c59c1624ea9d3479e9a489d747d3c8cc9b1bcdd14b02655ed0db5715e50ae3050e4fa6d8fdad623550eb11d1769f7a03c2454c7c
+  checksum: 10/540d51c189b8498111c4081e7d51861aac7a6935f9f165be59c1c5bbdbef3c16f2376eb90ef85487b4f7b78fc63ae2fd3f04a1efbca0b03c9b8da46fad47fd05
   languageName: node
   linkType: hard
 
@@ -6114,7 +6117,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@okta/unified-ui-shell@workspace:packages/contributions/unified-ui-shell"
   dependencies:
-    "@okta/odyssey-react-mui": "npm:1.50.1"
+    "@okta/odyssey-react-mui": "npm:1.52.0"
     "@okta/ok-ui": "npm:^4.15.1"
     "@okta/ui-stacks-component-libraries-odyssey-contributions": "npm:1.1.3"
     "@testing-library/dom": "npm:^10.4"
@@ -6139,7 +6142,9 @@ __metadata:
     vite-plugin-svgr: "npm:^4.5"
     vitest: "npm:^3.2"
   peerDependencies:
-    "@okta/odyssey-react-mui": ^1.50.1
+    "@okta/odyssey-react-mui": ^1.52.0
+    react: ^18.3.1
+    react-dom: ^18.3.1
   languageName: unknown
   linkType: soft
 
