@@ -5482,6 +5482,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@okta/odyssey-contributions-ui-component-identifier@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@okta/odyssey-contributions-ui-component-identifier@npm:1.0.0::__archiveUrl=https%3A%2F%2Fartifacts.aue1e.internal%2Fartifactory%2Fapi%2Fnpm%2Fnpm-okta-master%2F%40okta%2Fodyssey-contributions-ui-component-identifier%2F-%2F%40okta%2Fodyssey-contributions-ui-component-identifier-1.0.0.tgz"
+  checksum: 10/b8222271d5a5fd3bccc27f8fe726094353916f23c5e8a63a8a009f338382dfd36e83695f6c48fbeb18e47fa06f5b74fc3194247dd08d5bac893ccf55594bb839
+  languageName: node
+  linkType: hard
+
 "@okta/odyssey-contributions-ui-component-identifier@workspace:*, @okta/odyssey-contributions-ui-component-identifier@workspace:packages/contributions/ui-component-identifier":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-contributions-ui-component-identifier@workspace:packages/contributions/ui-component-identifier"
@@ -5896,6 +5903,7 @@ __metadata:
     "@testing-library/react": "npm:^16.3.0"
     "@testing-library/user-event": "npm:^14.6.1"
     "@types/jest-axe": "npm:^3.5.9"
+    "@types/lodash.isequal": "npm:^4"
     "@types/luxon": "npm:^3.4.2"
     "@types/react": "npm:^18.3.12"
     "@types/react-dom": "npm:^18.3.1"
@@ -5912,6 +5920,7 @@ __metadata:
     dom-accessibility-api: "npm:^0.7.0"
     jest-axe: "npm:^5.0.1"
     jsdom: "npm:^26.1.0"
+    lodash.isequal: "npm:^4.5.0"
     luxon: "npm:^3.4.4"
     material-react-table: "npm:^2.11.3"
     playwright: "npm:^1.57.0"
@@ -6117,6 +6126,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@okta/unified-ui-shell@workspace:packages/contributions/unified-ui-shell"
   dependencies:
+    "@okta/odyssey-contributions-ui-component-identifier": "npm:1.0.0"
     "@okta/odyssey-react-mui": "npm:1.52.0"
     "@okta/ok-ui": "npm:^4.15.1"
     "@okta/ui-stacks-component-libraries-odyssey-contributions": "npm:1.1.3"
@@ -7747,6 +7757,22 @@ __metadata:
   dependencies:
     "@types/node": "npm:*"
   checksum: 10/e009a2bfb50e90ca9b7c6e8f648f8464067271fd99116f881073fa6fa76dc8d0133181dd65e6614d5fb1220d671d67b0124aef7d97dc02d7e342ab143a47779d
+  languageName: node
+  linkType: hard
+
+"@types/lodash.isequal@npm:^4":
+  version: 4.5.8
+  resolution: "@types/lodash.isequal@npm:4.5.8"
+  dependencies:
+    "@types/lodash": "npm:*"
+  checksum: 10/f3180c2d2925514fff1908a1303c11468c9f39b47fd7b053416aad3f1447f8e4a9894dd0460187ac9ac19387e25aec8dd8214d13a50a0967e0dc9cca8e4c5353
+  languageName: node
+  linkType: hard
+
+"@types/lodash@npm:*":
+  version: 4.17.23
+  resolution: "@types/lodash@npm:4.17.23"
+  checksum: 10/05935534a44aadef67c2158b2fb4a042a226970088106a40ddc67e4f063783149fe5cf02279d7dd4a1e72c98d9189b9430face659645dbf77270f8c4c3e387f5
   languageName: node
   linkType: hard
 
@@ -17177,6 +17203,13 @@ __metadata:
   version: 3.0.3
   resolution: "lodash.isboolean@npm:3.0.3"
   checksum: 10/b70068b4a8b8837912b54052557b21fc4774174e3512ed3c5b94621e5aff5eb6c68089d0a386b7e801d679cd105d2e35417978a5e99071750aa2ed90bffd0250
+  languageName: node
+  linkType: hard
+
+"lodash.isequal@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "lodash.isequal@npm:4.5.0"
+  checksum: 10/82fc58a83a1555f8df34ca9a2cd300995ff94018ac12cc47c349655f0ae1d4d92ba346db4c19bbfc90510764e0c00ddcc985a358bdcd4b3b965abf8f2a48a214
   languageName: node
   linkType: hard
 
