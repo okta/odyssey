@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-react-mui",
-  "version": "1.52.1",
+  "version": "1.53.0",
   "description": "React MUI components for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -138,6 +138,7 @@
     "@types/luxon": "^3.4.2",
     "date-fns": "^2.30.0",
     "dom-accessibility-api": "^0.7.0",
+    "lodash.isequal": "^4.5.0",
     "luxon": "^3.4.4",
     "material-react-table": "^2.11.3",
     "react-error-boundary": "^4.1.1",
@@ -160,6 +161,7 @@
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
     "@types/jest-axe": "^3.5.9",
+    "@types/lodash.isequal": "^4",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@types/react-virtualized-auto-sizer": "^1.0.4",

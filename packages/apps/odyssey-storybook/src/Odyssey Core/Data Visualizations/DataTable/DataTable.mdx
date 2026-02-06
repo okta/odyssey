@@ -31,6 +31,105 @@ DataTable is "bring-your-own functionality." It offers the UI and local function
 your own data handling. This means that the table can render a robust filtering and searching UI out-of-the-box, and you can provide
 a function that retrieves the relevant data based on the user's query.
 
+> ⚠️ **Deprecated:** DataTable is deprecated. Use **DataView** for all new work.
+
+## Migrating to DataView
+
+### Imports
+
+```tsx
+// Before
+import { DataTable, DataTableColumn } from "@okta/odyssey-react-mui";
+
+// After
+import {
+  DataView,
+  type DataTableColumn,
+  type TableLayoutProps,
+} from "@okta/odyssey-react-mui/labs";
+```
+
+### Prop mapping
+
+- **columns** → `tableLayoutOptions.columns`
+- **getData** / **fetchDataFn** → `getData` (same args and return shape)
+- **hasChangeableDensity** → `tableLayoutOptions.hasChangeableDensity`
+- **hasColumnResizing** → `tableLayoutOptions.hasColumnResizing`
+- **hasColumnVisibility** → `tableLayoutOptions.hasColumnVisibility`
+- **hasSorting** → `tableLayoutOptions.hasSorting`
+- **initialDensity** → `tableLayoutOptions.initialDensity`
+- **rowActionButtons** → `tableLayoutOptions.rowActionButtons`
+- **rowActionMenuItems** → `tableLayoutOptions.rowActionMenuItems`
+- **renderDetailPanel** → `tableLayoutOptions.renderDetailPanel`
+- **onChangeRowSelection** → `onRowSelectionChange`
+- **hasFilters**, **hasSearch**, **hasSearchSubmitButton** → same prop names on DataView
+- **hasPagination**, **paginationType**, **currentPage**, **resultsPerPage**, **totalRows** → same prop names on DataView
+- **hasRowSelection**, **hasRowReordering**, **onReorderRows** → same prop names on DataView
+- **emptyPlaceholder**, **noResultsPlaceholder** → same props; optionally set `isEmpty` and `isNoResults` to control which state shows
+- **searchDelayTime** → same prop name on DataView
+
+### Keep a table-only layout
+
+Lock layouts to keep the table experience while you migrate:
+
+```tsx
+<DataView
+  availableLayouts={["table"]}
+  getData={getData}
+  hasFilters
+  hasSearch
+  hasSearchSubmitButton
+  hasPagination
+  hasRowSelection
+  hasSorting
+  tableLayoutOptions={{
+    columns,
+    hasChangeableDensity: true,
+    hasColumnResizing: true,
+    hasColumnVisibility: false,
+    rowActionButtons: (row) => (
+      <Button
+        ariaLabel="Edit"
+        endIcon={<EditIcon />}
+        size="small"
+        variant="floating"
+      />
+    ),
+  }}
+/>
+```
+
+### Row reordering
+
+Same API, just on DataView:
+
+```tsx
+<DataView
+  getData={getData}
+  hasRowReordering
+  onReorderRows={({ rowId, newRowIndex }) => {
+    const updated = reorderData({ data, rowId, newRowIndex });
+    setData(updated);
+  }}
+  tableLayoutOptions={{ columns }}
+/>
+```
+
+### Empty states
+
+- Both DataTable and DataView support `emptyPlaceholder` and `noResultsPlaceholder`.
+- DataView adds optional control flags:
+  - `isEmpty`: force the empty state (e.g., onboarding) instead of relying on automatic detection.
+  - `isNoResults`: force the “no results” state when data exists but the current query is empty.
+
+### Migration checklist
+
+1. Swap the import to DataView from `@okta/odyssey-react-mui/labs`.
+2. Move column/table props into `tableLayoutOptions`.
+3. Keep your existing `getData`, pagination, search, filter, and row selection hooks; rename `onChangeRowSelection` to `onRowSelectionChange`.
+4. Lock `availableLayouts` to `["table"]` if you do not want list/grid yet.
+5. Adopt `emptyPlaceholder` / `noResultsPlaceholder` and `errorMessage` as needed.
+
 ## Getting started
 
 A simple `<DataTable>` only needs two props: `columns` and `getData`:

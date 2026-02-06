@@ -11,6 +11,7 @@
  */
 
 import styled from "@emotion/styled";
+import isEqual from "lodash.isequal";
 import {
   MRT_Row,
   MRT_RowData,
@@ -193,6 +194,11 @@ const DataView = <TData extends MRT_RowData>({
     filters: filters,
     columns: tableLayoutOptions?.columns,
   });
+  // will format the initial filters to be used for comparison
+  const initialAvailableFilters = useFilterConversion({
+    filters: initialFilters,
+    columns: tableLayoutOptions?.columns,
+  });
 
   useEffect(() => {
     if (!initialFilters && availableFilters) {
@@ -266,11 +272,13 @@ const DataView = <TData extends MRT_RowData>({
 
   // When data is updated
   useEffect(() => {
+    const hasEmptyOrInitialFilters =
+      !hasFilters || isEqual(filters, initialAvailableFilters);
     setIsEmpty(
       pagination.pageIndex === currentPage &&
         pagination.pageSize === resultsPerPage &&
         search === "" &&
-        (!hasFilters || filters === initialFilters) &&
+        hasEmptyOrInitialFilters &&
         data.length === 0,
     );
   }, [
@@ -278,11 +286,20 @@ const DataView = <TData extends MRT_RowData>({
     data,
     filters,
     hasFilters,
-    initialFilters,
+    initialAvailableFilters,
     pagination,
     resultsPerPage,
     search,
   ]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      // DB isn't actually empty (!isEmpty) and we have zero rows
+      const hasNoResults = !isEmpty && data.length === 0;
+
+      setIsNoResults(isNoResultsProp ?? hasNoResults);
+    }
+  }, [data.length, isEmpty, isNoResultsProp, isLoading]);
 
   // Change loading, empty and noResults state on prop change
   useEffect(() => {
@@ -317,9 +334,15 @@ const DataView = <TData extends MRT_RowData>({
   }, [noResultsPlaceholder, t, isEmpty, isNoResults, emptyPlaceholder]);
 
   const additionalActions = useMemo(() => {
+    const hasTableSettings =
+      currentLayout === "table" &&
+      tableLayoutOptions &&
+      (tableLayoutOptions.hasColumnVisibility ||
+        tableLayoutOptions.hasChangeableDensity);
+
     return (
       (metaText ||
-        (currentLayout === "table" && tableLayoutOptions) ||
+        hasTableSettings ||
         availableLayouts.length > 1 ||
         additionalActionButton ||
         additionalActionMenuItems) && (
@@ -330,7 +353,7 @@ const DataView = <TData extends MRT_RowData>({
             </StyledMetaTextContainer>
           )}
 
-          {currentLayout === "table" && tableLayoutOptions && (
+          {hasTableSettings && (
             <TableSettings
               setTableState={setTableState}
               tableLayoutOptions={tableLayoutOptions}

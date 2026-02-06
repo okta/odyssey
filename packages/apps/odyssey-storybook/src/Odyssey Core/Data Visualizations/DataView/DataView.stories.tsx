@@ -455,6 +455,73 @@ const itemProps: CardLayoutProps<Person>["itemProps"] = (row) => ({
   ),
 });
 
+const startLetterFilter = {
+  id: "startLetter",
+  label: "Name starting with...",
+  render: (updateFilters: UpdateFiltersOrValues) => (
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignContent: "stretch",
+        gap: 2,
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "stretch",
+          flexDirection: "column",
+        }}
+      >
+        <Button
+          isFullWidth
+          label="Vowel"
+          onClick={() =>
+            updateFilters({ filterId: "startLetter", value: "vowel" })
+          }
+          variant="secondary"
+        />
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "stretch",
+          flexDirection: "column",
+        }}
+      >
+        <Button
+          isFullWidth
+          label="Consonant"
+          onClick={() =>
+            updateFilters({
+              filterId: "startLetter",
+              value: "consonant",
+            })
+          }
+          variant="secondary"
+        />
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "stretch",
+          flexDirection: "column",
+        }}
+      >
+        <Button
+          isFullWidth
+          label="Any"
+          onClick={() =>
+            updateFilters({ filterId: "startLetter", value: "any" })
+          }
+          variant="secondary"
+        />
+      </Box>
+    </Box>
+  ),
+};
+
 export const Default: Story = {
   args: {},
 };
@@ -675,78 +742,7 @@ export const CustomFilters: Story = {
     const [data, setData] = useState<Person[]>(personData);
     const { getData, onReorderRows } = useDataCallbacks(data, setData);
 
-    const filters = useMemo(
-      () => [
-        ...personColumns,
-        {
-          id: "startLetter",
-          label: "Name starting with...",
-          render: (updateFilters: UpdateFiltersOrValues) => (
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignContent: "stretch",
-                gap: 2,
-              }}
-            >
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "stretch",
-                  flexDirection: "column",
-                }}
-              >
-                <Button
-                  isFullWidth
-                  label="Vowel"
-                  onClick={() =>
-                    updateFilters({ filterId: "startLetter", value: "vowel" })
-                  }
-                  variant="secondary"
-                />
-              </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "stretch",
-                  flexDirection: "column",
-                }}
-              >
-                <Button
-                  isFullWidth
-                  label="Consonant"
-                  onClick={() =>
-                    updateFilters({
-                      filterId: "startLetter",
-                      value: "consonant",
-                    })
-                  }
-                  variant="secondary"
-                />
-              </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "stretch",
-                  flexDirection: "column",
-                }}
-              >
-                <Button
-                  isFullWidth
-                  label="Any"
-                  onClick={() =>
-                    updateFilters({ filterId: "startLetter", value: "any" })
-                  }
-                  variant="secondary"
-                />
-              </Box>
-            </Box>
-          ),
-        },
-      ],
-      [],
-    );
+    const filters = useMemo(() => [...personColumns, startLetterFilter], []);
 
     const tableLayoutOptions = useMemo<TableLayoutProps<Person>>(
       () => ({
@@ -767,6 +763,74 @@ export const CustomFilters: Story = {
     return (
       <DataView
         {...props}
+        filters={filters}
+        getData={getData}
+        onReorderRows={onReorderRows}
+        tableLayoutOptions={tableLayoutOptions}
+      />
+    );
+  },
+};
+
+export const CustomFilterWithEmptyData: Story = {
+  args: {
+    hasChangeableDensity: true,
+    hasColumnResizing: true,
+    hasColumnVisibility: false,
+    hasFilters: true,
+    hasPagination: false,
+    hasRowSelection: false,
+    hasSearch: true,
+    hasSorting: true,
+    hasRowReordering: false,
+  },
+  render: function C({
+    hasChangeableDensity,
+    hasColumnResizing,
+    hasColumnVisibility,
+    hasSorting,
+    ...props
+  }) {
+    const [data, setData] = useState<Person[]>(personData);
+    const { onReorderRows } = useDataCallbacks(data, setData);
+
+    const filters = useMemo(
+      () => [
+        // ensure that filter cleansing occurs in initial filter comparison
+        ...personColumns.map((column) => ({
+          ...column,
+          enableColumnFilter: false,
+        })),
+        startLetterFilter,
+      ],
+      [],
+    );
+
+    const tableLayoutOptions = useMemo<TableLayoutProps<Person>>(
+      () => ({
+        columns: personColumns,
+        hasChangeableDensity: hasChangeableDensity,
+        hasColumnResizing: hasColumnResizing,
+        hasColumnVisibility: hasColumnVisibility,
+        hasSorting: hasSorting,
+      }),
+      [
+        hasChangeableDensity,
+        hasColumnResizing,
+        hasColumnVisibility,
+        hasSorting,
+      ],
+    );
+
+    const getData = useCallback(() => [], []);
+
+    return (
+      <DataView
+        {...props}
+        cardLayoutOptions={{
+          itemProps: itemProps,
+        }}
+        emptyPlaceholder={customEmptyPlaceholder}
         filters={filters}
         getData={getData}
         onReorderRows={onReorderRows}
