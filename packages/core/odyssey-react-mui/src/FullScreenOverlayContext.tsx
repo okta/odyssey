@@ -42,6 +42,10 @@ export type OverlayType = keyof typeof OVERLAY_DATA_ATTRIBUTES;
 
 export type FullScreenOverlayProviderProps = {
   children: ReactNode;
+  /**
+   * An optional HTML `id` attribute to be applied to the overlay's container element.
+   */
+  fullScreenOverlayId?: string;
   hasShadowDom?: boolean;
   /**
    * @experimental This is the element overlays will render into. By default, it's set to `document.body`.
@@ -61,6 +65,7 @@ const FullScreenOverlayProvider = ({
   hasShadowDom,
   overlayParentElement: overlayParentElementProp,
   overlayType = "default",
+  fullScreenOverlayId,
 }: FullScreenOverlayProviderProps) => {
   const {
     overlayEmotionRootElement,
@@ -90,6 +95,11 @@ const FullScreenOverlayProvider = ({
 
   useEffect(() => {
     if (overlayParentElement) {
+      if (fullScreenOverlayId) {
+        overlayParentElement.id = fullScreenOverlayId;
+      } else {
+        overlayParentElement.removeAttribute("id");
+      }
       overlayParentElement.setAttribute(
         OVERLAY_DATA_ATTRIBUTES[overlayType],
         "",
@@ -100,7 +110,7 @@ const FullScreenOverlayProvider = ({
     return () => {
       overlayParentElement.remove();
     };
-  }, [overlayParentElement, overlayType]);
+  }, [fullScreenOverlayId, overlayParentElement, overlayType]);
 
   const providerValue = useMemo(
     () => ({

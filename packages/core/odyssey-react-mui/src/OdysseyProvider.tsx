@@ -69,6 +69,7 @@ const OdysseyProvider = <SupportedLanguages extends string>({
   designTokensOverride,
   emotionRoot,
   emotionRootElement,
+  fullScreenOverlayId,
   hasCssBaseline: hasGlobalCss,
   hasScopedCssBaseline = true,
   hasTranslationProvider = true,
@@ -113,6 +114,7 @@ const OdysseyProvider = <SupportedLanguages extends string>({
           Wrapper={TranslationWrapper}
         >
           <FullScreenOverlayProvider
+            fullScreenOverlayId={fullScreenOverlayId}
             hasShadowDom={Boolean(shadowRootElement || shadowDomElement)}
             overlayParentElement={overlayParentElement}
             overlayType={overlayType}
