@@ -131,6 +131,7 @@ const UiShell = ({
     <ErrorBoundary fallback={errorComponent} onError={onError}>
       <OdysseyProvider
         emotionRootElement={uiShellStylesElement}
+        fullScreenOverlayId="odyssey-react-overlay-component-render-ui-shell"
         hasCssBaseline
         shadowRootElement={uiShellAppElement}
       >

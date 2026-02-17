@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.54.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.53.0...v1.54.0) (2026-02-17)
+
+### Features
+
+- Add custom Dialog component with flexible width ([#155](https://github.com/atko-eng/odyssey-design-system/issues/155)) ([39c81da](https://github.com/atko-eng/odyssey-design-system/commit/39c81da060aa6c8a89cce3f82189daabc9863f62))
+- add EmptyState and support icons ([#188](https://github.com/atko-eng/odyssey-design-system/issues/188)) ([7360b6a](https://github.com/atko-eng/odyssey-design-system/commit/7360b6a6416de23f574a0186be0f2d29af46c2ef))
+- add optional id to FullScreenOverlay ([#189](https://github.com/atko-eng/odyssey-design-system/issues/189)) ([f639632](https://github.com/atko-eng/odyssey-design-system/commit/f6396329867a680ee1778c10e64eea6ebdb6559a))
+
+### Bug Fixes
+
+- prevent activeStep and stepIndex props from forwarding to DOM ([#191](https://github.com/atko-eng/odyssey-design-system/issues/191)) ([972456b](https://github.com/atko-eng/odyssey-design-system/commit/972456b605f4368d0a9648c44d64d2b5dab00dae))
+
 ## [1.52.1](https://github.com/atko-eng/odyssey-design-system/compare/v1.51.0...v1.52.1) (2026-01-29)
 
 ### Bug Fixes
