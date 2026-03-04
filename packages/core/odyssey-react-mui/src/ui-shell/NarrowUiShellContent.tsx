@@ -25,6 +25,7 @@ import type { HtmlProps } from "../HtmlProps.js";
 
 import { Button } from "../Buttons/Button.js";
 import { hexToRgb } from "../hexToRgb.js";
+import { useTranslation } from "../i18n.generated/i18n.js";
 import { CloseIcon } from "../icons.generated/Close.js";
 import { MoreIcon } from "../icons.generated/More.js";
 import {
@@ -244,6 +245,8 @@ const NarrowUiShellContent = ({
   sideNavProps,
   topNavProps,
 }: NarrowUiShellContentProps) => {
+  const { t } = useTranslation();
+
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const uiShellContext = useUiShellContext();
 
@@ -287,6 +290,20 @@ const NarrowUiShellContent = ({
     setIsLeftSideMenuOpen(false);
     setIsRightSideMenuOpen((isRightSideMenuOpen) => !isRightSideMenuOpen);
   }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeSideMenus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [closeSideMenus]);
 
   const { parentContainerRef } = useMatchAppElementToUiShellAppArea({
     appElement,
@@ -333,6 +350,7 @@ const NarrowUiShellContent = ({
                     (sideNavProps?.isCollapsible ||
                       !sideNavProps?.isCollapsed) && (
                       <Button
+                        ariaLabel={t("topnav.sidenavmenu.toggle")}
                         onClick={toggleLeftSideMenu}
                         startIcon={<HamburgerMenuIcon />}
                         testId="sidenav-menu--icon"
@@ -349,6 +367,7 @@ const NarrowUiShellContent = ({
 
                 {optionalComponents?.rightSideMenu && (
                   <Button
+                    ariaLabel={t("topnav.usermenu.toggle")}
                     onClick={toggleRightSideMenu}
                     startIcon={
                       isRightSideMenuOpen ? <CloseIcon /> : <MoreIcon />

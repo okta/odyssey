@@ -3,7 +3,11 @@ import type { CommandModule } from "yargs";
 import { mkdir, readdir, writeFile } from "node:fs/promises";
 import { format, parse, relative, resolve } from "node:path";
 
-import { getHasFileOrDirectory, getLogger, getPackageName } from "../../utils";
+import {
+  getHasFileOrDirectory,
+  getLogger,
+  getPackageName,
+} from "../../utils.js";
 
 const CONFIG = {
   TRANSLATION_TYPESCRIPT_PATH_SEGMENTS: ["src", "properties", "ts"],

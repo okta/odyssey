@@ -4,7 +4,8 @@ import autocomplete from "inquirer-autocomplete-standalone";
 import { vol, type Volume } from "memfs";
 import { http, HttpResponse } from "msw";
 import { execSync } from "node:child_process";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import open from "open";
 import {
   afterAll,
@@ -18,9 +19,12 @@ import {
 } from "vitest";
 
 import { buildParser } from "./cli-parser.js";
-import { getTeamsUrl } from "./mocks/handlers";
-import { server } from "./mocks/server";
-import { execAsync, runWatchTask } from "./utils";
+import { ciMigrate, interactiveMigrate } from "./commands/migrate/init.js";
+import { getTeamsUrl } from "./mocks/handlers.js";
+import { server } from "./mocks/server.js";
+import { execAsync, runWatchTask } from "./utils.js";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const FIXTURES_BASE = join(__dirname, "__tests__", "expected_outputs");
 
@@ -39,14 +43,23 @@ vi.mock("node:child_process", async () => {
   };
 });
 vi.mock("open");
-vi.mock("./utils", async () => {
+vi.mock("./utils.js", async () => {
   return {
-    ...(await vi.importActual("./utils")),
+    ...(await vi.importActual("./utils.js")),
     execAsync: vi.fn(),
     runWatchTask: vi.fn(),
   };
 });
 
+vi.mock("./commands/migrate/init.js", () => {
+  return {
+    ciMigrate: vi.fn(),
+    interactiveMigrate: vi.fn(),
+  };
+});
+
+const mockedciMigrate = vi.mocked(ciMigrate);
+const mockedInteractiveMigrate = vi.mocked(interactiveMigrate);
 const mockedAutocomplete = vi.mocked(autocomplete);
 const mockedInquirerPrompt = vi.mocked(inquirer.prompt);
 const mockedExecSync = vi.mocked(execSync);
@@ -845,6 +858,48 @@ describe("odyssey-cli", () => {
           homeTeam,
           reviewers: ["atko-eng/a-globalizationcore", secondaryReviewer],
         });
+      });
+    });
+  });
+
+  describe("migrate", () => {
+    const runCliMigrate = async (args: string) => {
+      return runCli(`migrate ${args}`);
+    };
+    test("calls ciMigrate with correct args when components and paths are provided", async () => {
+      await runCliMigrate(
+        "--components DataTable,Uploader --paths src/ src/other/ --dryRun --updateOdyssey",
+      );
+      expect(mockedciMigrate).toHaveBeenCalledWith({
+        components: "DataTable,Uploader",
+        dryRun: true,
+        paths: ["src/", "src/other/"],
+        updateOdyssey: true,
+      });
+      expect(mockedInteractiveMigrate).not.toHaveBeenCalled();
+    });
+    test("calls interactiveMigrate when components or paths are missing", async () => {
+      await runCliMigrate("");
+      expect(mockedInteractiveMigrate).toHaveBeenCalled();
+      expect(mockedciMigrate).not.toHaveBeenCalled();
+    });
+    test("calls interactiveMigrate when only components is provided", async () => {
+      await runCliMigrate("--components DataTable");
+      expect(mockedInteractiveMigrate).toHaveBeenCalled();
+      expect(mockedciMigrate).not.toHaveBeenCalled();
+    });
+    test("calls interactiveMigrate when only paths is provided", async () => {
+      await runCliMigrate("--paths src/");
+      expect(mockedInteractiveMigrate).toHaveBeenCalled();
+      expect(mockedciMigrate).not.toHaveBeenCalled();
+    });
+    test("defaults dryRun and updateOdyssey to false if not provided", async () => {
+      await runCliMigrate("--components DataTable --paths src/");
+      expect(mockedciMigrate).toHaveBeenCalledWith({
+        components: "DataTable",
+        dryRun: false,
+        paths: ["src/"],
+        updateOdyssey: false,
       });
     });
   });

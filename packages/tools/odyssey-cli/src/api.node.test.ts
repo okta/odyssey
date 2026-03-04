@@ -11,9 +11,9 @@ import {
   vi,
 } from "vitest";
 
-import { fetchTeams, getAurmToken } from "./api";
-import { getTeamsUrl } from "./mocks/handlers";
-import { server } from "./mocks/server";
+import { fetchTeams, getAurmToken } from "./api.js";
+import { getTeamsUrl } from "./mocks/handlers.js";
+import { server } from "./mocks/server.js";
 
 vi.mock("node:child_process", async () => {
   return {

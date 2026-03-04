@@ -11,9 +11,11 @@
  */
 
 import { act, render, waitFor, within } from "@testing-library/react";
+import { userEvent } from "@testing-library/user-event";
 import { page } from "@vitest/browser/context";
 import { type ReactElement } from "react";
 
+import { translate as odysseyTranslate } from "../i18n.generated/i18n.js";
 import { AddCircleIcon } from "../icons.generated/AddCircle.js";
 import { defaultComponentProps, UiShell, UiShellProps } from "./UiShell.js";
 import { defaultUiShellBreakpointConfig } from "./useUiShellBreakpoints.js";
@@ -448,6 +450,115 @@ describe("UiShell", () => {
       await waitFor(() => {
         expect(within(container).getByText(appName)).toBeVisible();
         expect(within(container).getByText(itemLabel)).toBeVisible();
+      });
+    });
+  });
+
+  describe("Keyboard Interactions", () => {
+    const appName = "My Test App";
+    const itemLabel = "Add new folder";
+    const PAGE_HEIGHT = 1000;
+
+    test("closes left side menu in narrow view when Escape key is pressed", async () => {
+      await page.viewport(
+        defaultUiShellBreakpointConfig.medium - 1,
+        PAGE_HEIGHT,
+      );
+
+      const { appElement, uiShellAppElement, uiShellStylesElement } =
+        getTestDomElements();
+
+      const { container } = render(
+        <UiShell
+          appElement={appElement}
+          appElementScrollingMode="none"
+          hasStandardAppContentPadding={false}
+          onSubscriptionCreated={() => {}}
+          subscribeToPropChanges={(subscriber) => {
+            subscriber({
+              ...defaultComponentProps,
+              sideNavProps: {
+                appName,
+                sideNavItems: [
+                  {
+                    id: "item1",
+                    label: itemLabel,
+                    onClick: () => {},
+                  },
+                ],
+              },
+            });
+
+            return () => {};
+          }}
+          uiShellAppElement={uiShellAppElement}
+          uiShellStylesElement={uiShellStylesElement}
+        />,
+      );
+
+      const sideNavButton = within(container).getByRole("button", {
+        name: odysseyTranslate("topnav.sidenavmenu.toggle"),
+      });
+
+      act(() => {
+        sideNavButton.click();
+      });
+
+      await waitFor(() => {
+        expect(within(container).getByText(itemLabel)).toBeVisible();
+      });
+
+      await userEvent.keyboard("{Escape}");
+
+      await waitFor(() => {
+        expect(within(container).queryByText(itemLabel)).not.toBeVisible();
+      });
+    });
+
+    test("closes right side menu in narrow view when Escape key is pressed", async () => {
+      await page.viewport(
+        defaultUiShellBreakpointConfig.medium - 1,
+        PAGE_HEIGHT,
+      );
+
+      const { appElement, uiShellAppElement, uiShellStylesElement } =
+        getTestDomElements();
+
+      const { container } = render(
+        <UiShell
+          appElement={appElement}
+          appElementScrollingMode="none"
+          hasStandardAppContentPadding={false}
+          onSubscriptionCreated={() => {}}
+          optionalComponents={{
+            rightSideMenu: <div>{itemLabel}</div>,
+          }}
+          subscribeToPropChanges={(subscriber) => {
+            subscriber(defaultComponentProps);
+
+            return () => {};
+          }}
+          uiShellAppElement={uiShellAppElement}
+          uiShellStylesElement={uiShellStylesElement}
+        />,
+      );
+
+      const userProfileButton = within(container).getByRole("button", {
+        name: odysseyTranslate("topnav.usermenu.toggle"),
+      });
+
+      act(() => {
+        userProfileButton.click();
+      });
+
+      await waitFor(() => {
+        expect(within(container).getByText(itemLabel)).toBeVisible();
+      });
+
+      await userEvent.keyboard("{Escape}");
+
+      await waitFor(() => {
+        expect(within(container).queryByText(itemLabel)).not.toBeVisible();
       });
     });
   });

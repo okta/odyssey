@@ -83,20 +83,45 @@ export const getPackageName = () => {
   return pathSegments[pathSegments.length - 1];
 };
 
-export const execAsync = async (command: string): Promise<void> => {
+type ExecAsyncOptions = {
+  stdio?: "inherit" | "pipe";
+};
+
+export const execAsync = async (
+  command: string,
+  options: ExecAsyncOptions = {},
+): Promise<{ stderr: string; stdout: string }> => {
+  const { stdio = "inherit" } = options;
+
   return new Promise((resolve, reject) => {
     // spawn returns a ChildProcess object
     const child = spawn(command, {
-      stdio: "inherit", // allows live output and relays signals (like CTRL+C) to the child process.
-      shell: true, // use shell to automatically find `yarn`
+      stdio, // allows live output and relays signals (like CTRL+C) to the child process when "inherit"
+      shell: true, // use shell to automatically find commands like `yarn`
     });
+
+    // Collect stdout/stderr when piped so we can surface it on failure
+    const stdoutChunks: string[] = [];
+    const stderrChunks: string[] = [];
+
+    if (stdio === "pipe") {
+      child.stdout?.on("data", (data: Buffer) => {
+        stdoutChunks.push(data.toString());
+      });
+      child.stderr?.on("data", (data: Buffer) => {
+        stderrChunks.push(data.toString());
+      });
+    }
 
     // listen for the 'close' event (when the process exits)
     child.on("close", (code) => {
+      const stdout = stdoutChunks.join("");
+      const stderr = stderrChunks.join("");
       if (code === 0) {
-        resolve();
+        resolve({ stdout, stderr });
       } else {
-        reject(new Error(`Command failed with exit code ${code}`));
+        const detail = stderr.trim() ? `\n${stderr.trim()}` : "";
+        reject(new Error(`Command failed with exit code ${code}${detail}`));
       }
     });
 

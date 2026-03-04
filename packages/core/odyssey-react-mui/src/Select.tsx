@@ -97,21 +97,18 @@ const NonInteractiveIcon = styled(CloseCircleFilledIcon, {
 
 const ChipsInnerContainer = styled(MuiBox, {
   shouldForwardProp: (prop) =>
-    prop !== "odysseyDesignTokens" &&
-    prop !== "isInteractive" &&
-    prop !== "isReadOnly",
+    prop !== "odysseyDesignTokens" && prop !== "isVisible",
 })<{
-  isInteractive?: boolean;
-  isReadOnly?: boolean;
+  isVisible?: boolean;
   odysseyDesignTokens: DesignTokens;
-}>(({ isInteractive, isReadOnly, odysseyDesignTokens }) => ({
+}>(({ isVisible, odysseyDesignTokens }) => ({
   display: "flex",
   flexWrap: "wrap",
   gap: odysseyDesignTokens.Spacing1,
   marginBlock: `-${odysseyDesignTokens.Spacing2}`,
   marginInlineEnd: odysseyDesignTokens.Spacing1,
   minHeight: odysseyDesignTokens.Spacing6,
-  opacity: isInteractive || isReadOnly ? 1 : 0,
+  opacity: isVisible ? 1 : 0,
   pointerEvents: "none",
 }));
 
@@ -272,7 +269,7 @@ const Select = <
 
   const onChange = useCallback<NonNullable<MuiSelectProps<Value>["onChange"]>>(
     (event, child) => {
-      if (isReadOnly) {
+      if (isDisabled || isReadOnly) {
         event.preventDefault();
       } else {
         const {
@@ -288,7 +285,7 @@ const Select = <
         onChangeProp?.(event, child);
       }
     },
-    [hasMultipleChoices, onChangeProp, isReadOnly],
+    [hasMultipleChoices, isDisabled, onChangeProp, isReadOnly],
   );
   // Normalize the options array to accommodate the various
   // data types that might be passed
@@ -339,19 +336,19 @@ const Select = <
   const Chips = useCallback(
     ({
       ariaLabel,
-      isInteractive,
-      isReadOnly,
+      isDismissable,
+      isVisible,
     }: {
       ariaLabel?: string;
-      isInteractive: boolean;
-      isReadOnly?: boolean;
+      isDismissable: boolean;
+      isVisible?: boolean;
     }) => {
       const stopPropagation = (event: React.MouseEvent<SVGSVGElement>) =>
         event.stopPropagation();
 
       const hasNonInteractiveIcon =
-        !isInteractive &&
-        !isReadOnly &&
+        !isDismissable &&
+        !isVisible &&
         controlledStateRef.current === CONTROLLED &&
         hasMultipleChoices;
 
@@ -359,8 +356,7 @@ const Select = <
         Array.isArray(internalSelectedValues) && (
           <ChipsInnerContainer
             aria-label={ariaLabel}
-            isInteractive={isInteractive}
-            isReadOnly={isReadOnly}
+            isVisible={isVisible}
             odysseyDesignTokens={odysseyDesignTokens}
             role="list"
           >
@@ -389,7 +385,7 @@ const Select = <
                       </>
                     }
                     onDelete={
-                      isInteractive && controlledStateRef.current === CONTROLLED
+                      isDismissable && controlledStateRef.current === CONTROLLED
                         ? () => removeSelectedValue(item)
                         : undefined
                     }
@@ -449,7 +445,7 @@ const Select = <
   );
 
   const renderValue = useCallback(
-    (value: Value) => Array.isArray(value) && <Chips isInteractive={false} />,
+    (value: Value) => Array.isArray(value) && <Chips isDismissable={false} />,
     [Chips],
   );
 
@@ -503,8 +499,8 @@ const Select = <
             >
               <Chips
                 ariaLabel="Selected options"
-                isInteractive={!isReadOnly}
-                isReadOnly={isReadOnly}
+                isDismissable={!isReadOnly && !isDisabled}
+                isVisible
               />
             </ChipsPositioningContainer>
           </>

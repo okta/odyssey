@@ -38,6 +38,10 @@ export * from "./DatePickers/DateFieldLocalizationProvider.js";
 export * from "./FileUploader/FileUploader.js";
 export * from "./FileUploader/FileUploadIllustration.js";
 export * from "./FileUploader/FileUploadPreview.js";
+// FullScreenOverlay
+export * from "./FullScreenOverlay.js";
+export * from "./FullScreenOverlayContext.js";
+// Miscellaneous Labs
 export * from "./labs/DataFilters.js";
 export * from "./labs/DataView/BulkActionsMenu.js";
 export * from "./labs/DataView/CardLayoutContent.js";

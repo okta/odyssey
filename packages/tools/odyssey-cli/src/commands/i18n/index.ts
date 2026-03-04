@@ -1,9 +1,9 @@
 import type { CommandModule } from "yargs";
 
-import { buildTsI18nCommand } from "./buildTs";
-import { generateI18nCommand } from "./generate";
-import { generatePseudoLocaleProperties } from "./generatePseudoLocaleProperties";
-import { initI18nCommand } from "./init";
+import { buildTsI18nCommand } from "./buildTs.js";
+import { generateI18nCommand } from "./generate.js";
+import { generatePseudoLocaleProperties } from "./generatePseudoLocaleProperties.js";
+import { initI18nCommand } from "./init.js";
 
 export const i18nCommand: CommandModule = {
   command: "i18n",

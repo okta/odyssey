@@ -12,6 +12,7 @@ common development tasks and enforce consistency across packages, particularly f
   - [`i18n generate`](#i18n-generate)
   - [`i18n generate:psuedoLocalProperties`](#i18n-generatepsuedolocaleproperties)
 - [Contributing: Adding a New Command](#contributing-adding-a-new-command)
+- [Migration Commands](#migration-commands)
 
 ## Usage
 
@@ -43,21 +44,21 @@ It is designed to be run once when a package first requires `i18n` support.
 
 This command automates the following steps:
 
-1.  **Configuration Check:** Checks for existing configuration (`i18n.config.json` or `src/properties`) and prompts the user to overwrite if found.
-2.  **Interactive Prompts:** Collects necessary details via the command line, including:
+1. **Configuration Check:** Checks for existing configuration (`i18n.config.json` or `src/properties`) and prompts the user to overwrite if found.
+2. **Interactive Prompts:** Collects necessary details via the command line, including:
 
 - Team name (with an autocomplete option by fetching available teams).
 - GitHub reviewer alias.
 - JIRA component, guardian and Slack channel (if manual details are required).
 
-3.  **File Generation:**
+3. **File Generation:**
 
 - Creates the necessary `i18n.config.json` file with the collected information.
 - Creates a base `<package-name>.properties` file in `src/properties` with a placeholder value.
 
-4.  **Tooling Setup:** Installs the required contribution tooling package (`@okta/odyssey-contribution-tooling`) and runs the other `i18n` commands to complete setup:
+4. **Tooling Setup:** Installs the required contribution tooling package (`@okta/odyssey-contribution-tooling`) and runs the other `i18n` commands to complete setup:
 
-5.  **JIRA Ticket Prompt:** Prompts the user to open a **JIRA ticket** for the UI Global Access team to register the new translation bundle.
+5. **JIRA Ticket Prompt:** Prompts the user to open a **JIRA ticket** for the UI Global Access team to register the new translation bundle.
 
 #### Usage
 
@@ -209,3 +210,94 @@ Adding new commands to the Odyssey CLI is straightforward. Follow the steps belo
 5. **Add Tests**
 
    Remember to add corresponding tests in `cli-parser.node.test.ts` to ensure your command works as expected.
+
+## Migration Commands
+
+Odyssey CLI provides a migration command to automate the migration of contribution components to their Odyssey equivalents. This leverages a codemod system that handles import rewriting, component renaming, prop remapping, default prop injection, and more.
+
+### `migrate` Command
+
+The migrate command is an interactive wizard and also supports CI mode.
+
+It automates:
+
+- Import rewriting
+- Component renaming
+- Prop remapping (including nested paths)
+- Default prop injection
+- Spread attribute preservation
+- Leading comment preservation
+- Retention of all `data-*` and `aria-*` attributes
+
+#### Usage
+
+Interactive mode:
+
+```bash
+yarn odyssey-cli migrate
+```
+
+CI mode:
+
+```bash
+yarn odyssey-cli migrate --components DataTable --paths src/ --dryRun
+```
+
+#### Options
+
+- `--components` (string): Comma-separated list of component mapping keys to migrate (e.g., `DataTable,Uploader`).
+- `--paths` (string[]): File paths or directories to transform.
+- `--dryRun` (boolean): Preview changes without writing files.
+- `--updateOdyssey` (boolean): Updates odyssey to the latest version
+
+#### Example
+
+```bash
+yarn odyssey-cli migrate --components DataTable --paths src/ --dryRun
+```
+
+### Component Mappings
+
+Each entry in `COMPONENT_MAPPINGS` describes a single component migration:
+
+```ts
+{
+  source: {
+    component: "DataTable",           // Original component name
+    packages: ["@okta/odyssey-react-mui"], // Package(s) to match imports from
+    propsType: "DataTableProps",       // Props type name
+  },
+  target: {
+    component: "DataView",            // New component name
+    package: "@okta/odyssey-react-mui", // Target package
+    propsType: "DataViewProps",        // New props type name
+    minimumVersion: undefined,         // Optional minimum version gate
+  },
+  defaultProps: {
+    availableLayouts: ["table"],       // Props injected into every migrated element
+  },
+  // Map for what props will be transformed into
+  propMap: {
+    columns: "tableLayoutOptions.columns",
+    hasColumnResizing: "tableLayoutOptions.hasColumnResizing",
+    fetchDataFn: "getData",
+    onChangeRowSelection: "onRowSelectionChange",
+  },
+}
+```
+
+### What the codemod handles
+
+- **Import rewriting** — Moves named imports from source packages to the target package. Cleans up empty
+  import declarations. Also rewrites the props type import (e.g., `DataTableProps` → `DataViewProps`).
+- **Component renaming** — Renames JSX opening and closing tags.
+- **Prop remapping** — Renames props according to `propMap`. Supports nested target paths
+  (e.g., `columns` → `tableLayoutOptions.columns`), which are grouped into object expressions automatically.
+- **Default prop injection** — Inserts `defaultProps` as JSX attributes on every migrated element.
+- **Spread preservation** — `{...rest}` spread attributes are kept as-is.
+- **Leading comments** — Preserves comments attached to JSX attributes and elements during migration.
+- **data- & aria- attributes** — Retains all `data-*` and `aria-*` attributes on migrated components.
+
+### Eligibility check
+
+You might notice that the CLI will sometimes not show all the components within the mapping file, that's because before running a migration, Odyssey CLI checks which mappings are eligible based on installed dependencies and version constraints. Ineligible mappings are filtered and reported with the reason. The `getEligibleMappings` function handles version validation against the `minimumVersion` constraint defined in each mapping:
