@@ -170,9 +170,10 @@ type FilterTagsProps = {
 };
 
 type FiltersToRender = {
-  id: string;
-  label: string;
-  value: string;
+  filterId: string;
+  filterLabel: string;
+  optionLabel: string;
+  optionValue: string;
 };
 
 const FilterTags = ({
@@ -187,20 +188,24 @@ const FilterTags = ({
   filtersWithValues.forEach((filter) => {
     if (Array.isArray(filter.value)) {
       filter.value.forEach((filterValue) => {
-        const formattedValue =
+        const optionLabel =
+          typeof filterValue === "string" ? filterValue : filterValue.label;
+        const optionValue =
           typeof filterValue === "string" ? filterValue : filterValue.value;
         filtersToRender.push({
-          id: filter.id,
-          label: filter.label,
-          value: formattedValue,
+          filterId: filter.id,
+          filterLabel: filter.label,
+          optionLabel,
+          optionValue,
         });
       });
     }
     if (typeof filter.value === "string") {
       filtersToRender.push({
-        id: filter.id,
-        label: filter.label,
-        value: filter.value,
+        filterId: filter.id,
+        filterLabel: filter.label,
+        optionLabel: filter.value,
+        optionValue: filter.value,
       });
     }
   });
@@ -239,12 +244,12 @@ const FilterTags = ({
 
   return (
     <TagList>
-      {filtersToRender.map((filter) => (
+      {filtersToRender.map((chip) => (
         <Tag
-          key={`${filter.label}: ${filter.value}`}
-          label={`${filter.label}: ${filter.value}`}
+          key={`${chip.filterLabel}: ${chip.optionValue}`}
+          label={`${chip.filterLabel}: ${chip.optionLabel}`}
           onRemove={() =>
-            removeValueFromFilterAndInput(filter.id, filter.value)
+            removeValueFromFilterAndInput(chip.filterId, chip.optionValue)
           }
         />
       ))}

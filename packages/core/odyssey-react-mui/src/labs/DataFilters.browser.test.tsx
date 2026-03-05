@@ -18,6 +18,32 @@ import { OdysseyProvider } from "../OdysseyProvider.js";
 import { DataFilters } from "./DataFilters.js";
 
 describe("DataFilters", () => {
+  test("renders filter tags using option labels for option object values", () => {
+    render(
+      <OdysseyProvider>
+        <DataFilters
+          filters={[
+            {
+              id: "priority",
+              label: "Priority",
+              options: [
+                { label: "Low", value: "low" },
+                { label: "Medium", value: "medium" },
+                { label: "High", value: "high" },
+              ],
+              value: [{ label: "Low", value: "low" }],
+              variant: "multi-select",
+            },
+          ]}
+          onChangeFilters={() => {}}
+        />
+      </OdysseyProvider>,
+    );
+
+    expect(screen.getByText("Priority: Low")).toBeVisible();
+    expect(screen.queryByText("Priority: low")).not.toBeInTheDocument();
+  });
+
   test("renders searchbox only", () => {
     render(
       <OdysseyProvider>

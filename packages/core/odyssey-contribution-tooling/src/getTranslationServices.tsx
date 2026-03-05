@@ -75,14 +75,14 @@ export type PlaceholderRecord<
 export type TypedTFunction<TResourceBundle extends I18nTranslationBundle> = <
   TKey extends keyof TResourceBundle & string,
 >(
-  ...args: [ExtractPlaceholders<TResourceBundle[TKey]>] extends [never]
-    ? // if no placeholders, options are optional
-      [key: TKey | TKey[], options?: TOptions]
-    : // if placeholders exist, placeholder values are required
-      [
-        key: TKey | TKey[],
-        options: TOptions<PlaceholderRecord<TResourceBundle, TKey>>,
-      ]
+  key: TKey | TKey[],
+  ...options: TKey extends keyof TResourceBundle
+    ? // key exists in the resource bundle, we check for placeholders
+      [ExtractPlaceholders<TResourceBundle[TKey]>] extends [never]
+      ? [options?: TOptions] // no placeholders, options are optional
+      : [options: TOptions<PlaceholderRecord<TResourceBundle, TKey>>] // placeholders exist, placeholder values are required
+    : // key does not exist in the resource bundle
+      [never]
 ) => string;
 
 /**
@@ -264,7 +264,9 @@ export function getTranslationServices<
       ...options,
       i18n: i18nInstance,
     });
-    const typedT = t as TypedTFunction<TResources[TDefaultLanguageCode]>;
+    const typedT = t as unknown as TypedTFunction<
+      TResources[TDefaultLanguageCode]
+    >;
 
     const result = [typedT, i18n, ready] as TypedUseTranslationResponse<
       TResources[TDefaultLanguageCode]

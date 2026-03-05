@@ -6,7 +6,7 @@ import { basename, extname, join, resolve } from "node:path";
 import properties from "properties";
 import { type CommandModule } from "yargs";
 
-import { getHasFileOrDirectory, getLogger, runWatchTask } from "../../utils";
+import { getHasFileOrDirectory, getLogger, runWatchTask } from "../../utils.js";
 
 export type BuildTranslationModulesArgs = {
   propertiesFilesPath: string;

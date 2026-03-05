@@ -1,7 +1,7 @@
 import { type FSWatcher, type MatchFunction, watch } from "chokidar";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 
-import { type Logger, runWatchTask } from "./utils";
+import { type Logger, runWatchTask } from "./utils.js";
 
 vi.mock("chokidar", async () => {
   return {

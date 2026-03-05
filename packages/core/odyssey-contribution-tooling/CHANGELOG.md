@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.55.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.54.0...v1.55.0) (2026-03-04)
+
+### Bug Fixes
+
+- update TypedTFunction typing to correctly verify unknown keys ([#200](https://github.com/atko-eng/odyssey-design-system/issues/200)) ([5fee1cd](https://github.com/atko-eng/odyssey-design-system/commit/5fee1cdbba85ada5b8f650c23852e0c00953be05))
+
 ## [1.54.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.53.0...v1.54.0) (2026-02-17)
 
 **Note:** Version bump only for package @okta/odyssey-contribution-tooling

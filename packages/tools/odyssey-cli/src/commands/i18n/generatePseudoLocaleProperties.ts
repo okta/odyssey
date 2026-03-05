@@ -1,8 +1,9 @@
+import { createRequire } from "node:module";
 import { dirname, resolve } from "node:path";
 import { type CommandModule } from "yargs";
 
-import { execAsync } from "../../utils";
-
+import { execAsync } from "../../utils.js";
+const require = createRequire(import.meta.url);
 export type GeneratePLPropertiesArgs = {
   "--"?: string[];
 };

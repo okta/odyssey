@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.55.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.54.0...v1.55.0) (2026-03-04)
+
+**Note:** Version bump only for package @okta/conventional-changelog-odyssey
+
 ## [1.54.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.53.0...v1.54.0) (2026-02-17)
 
 **Note:** Version bump only for package @okta/conventional-changelog-odyssey

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.55.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.54.0...v1.55.0) (2026-03-04)
+
+### Features
+
+- add FullScreenOverlay to \_\_internal exports ([#201](https://github.com/atko-eng/odyssey-design-system/issues/201)) ([820152e](https://github.com/atko-eng/odyssey-design-system/commit/820152efbf94ad568a24a3b905324093796a82d3))
+- close UI Shell menus when pressing Escape in narrow view ([#198](https://github.com/atko-eng/odyssey-design-system/issues/198)) ([f1ecafa](https://github.com/atko-eng/odyssey-design-system/commit/f1ecafa8b8afb0435fce1562fddc9f455e2ec92d))
+
+### Bug Fixes
+
+- update data filter value handling ([#193](https://github.com/atko-eng/odyssey-design-system/issues/193)) ([981a0f3](https://github.com/atko-eng/odyssey-design-system/commit/981a0f3286a44ac109941c79694cebd2c77511e4))
+- update disabled multi Select to match read only case ([#206](https://github.com/atko-eng/odyssey-design-system/issues/206)) ([d47fec5](https://github.com/atko-eng/odyssey-design-system/commit/d47fec5a49d3d0ab5c70f170a47079141877164e))
+
 ## [1.54.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.53.0...v1.54.0) (2026-02-17)
 
 ### Features

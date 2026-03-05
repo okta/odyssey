@@ -5,13 +5,13 @@ import { join, resolve, sep } from "node:path";
 import openLink from "open";
 import { CommandModule } from "yargs";
 
-import { fetchTeams } from "../../api";
+import { fetchTeams } from "../../api.js";
 import {
   execAsync,
   getHasFileOrDirectory,
   getLogger,
   getPackageName,
-} from "../../utils";
+} from "../../utils.js";
 
 const PROPERTIES_PATH_SEGMENTS = ["src", "properties"] as const;
 const CONFIG = {

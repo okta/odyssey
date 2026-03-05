@@ -37,7 +37,9 @@ const Template = ({
   ...props
 }: Partial<SelectProps>) => {
   const multiple = Boolean(props.hasMultipleChoices);
-  const [value, setValue] = useState<SelectValue>(multiple ? [] : "");
+  const [value, setValue] = useState<SelectValue>(
+    props.value ?? (multiple ? [] : ""),
+  );
 
   return (
     <OdysseyProvider>
@@ -118,5 +120,37 @@ describe("Select", () => {
     const frenchOption = within(listbox).getByText("Français");
 
     expect(frenchOption).toHaveAttribute("lang", "fr");
+  });
+
+  test("rendering chips not being dismissable when disabled in multi-select mode", async () => {
+    render(<Template hasMultipleChoices isDisabled value={["Option A"]} />);
+
+    const selectedOptions = await screen.findByRole("list", {
+      name: /selected options/i,
+    });
+
+    expect(await within(selectedOptions).findByText("Option A")).toBeVisible();
+
+    const chip = within(selectedOptions).getByRole("listitem");
+
+    expect(
+      within(chip).queryByRole("button", { hidden: true }),
+    ).not.toBeInTheDocument();
+  });
+
+  test("rendering chips not being dismissable when readOnly in multi-select mode", async () => {
+    render(<Template hasMultipleChoices isReadOnly value={["Option A"]} />);
+
+    const selectedOptions = await screen.findByRole("list", {
+      name: /selected options/i,
+    });
+
+    expect(await within(selectedOptions).findByText("Option A")).toBeVisible();
+
+    const chip = within(selectedOptions).getByRole("listitem");
+
+    expect(
+      within(chip).queryByRole("button", { hidden: true }),
+    ).not.toBeInTheDocument();
   });
 });

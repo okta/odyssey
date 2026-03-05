@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.55.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.54.0...v1.55.0) (2026-03-04)
+
+### Features
+
+- add component migration codemod & CLI ([#199](https://github.com/atko-eng/odyssey-design-system/issues/199)) ([bfa08bf](https://github.com/atko-eng/odyssey-design-system/commit/bfa08bf6e5aadbc132b5c71f76e76ed870110148))
+- add FullScreenOverlay to \_\_internal exports ([#201](https://github.com/atko-eng/odyssey-design-system/issues/201)) ([820152e](https://github.com/atko-eng/odyssey-design-system/commit/820152efbf94ad568a24a3b905324093796a82d3))
+- adds AI Instructions ([#194](https://github.com/atko-eng/odyssey-design-system/issues/194)) ([e5ecdcd](https://github.com/atko-eng/odyssey-design-system/commit/e5ecdcd4fb084275c13770bc846482f5441751bb))
+- close UI Shell menus when pressing Escape in narrow view ([#198](https://github.com/atko-eng/odyssey-design-system/issues/198)) ([f1ecafa](https://github.com/atko-eng/odyssey-design-system/commit/f1ecafa8b8afb0435fce1562fddc9f455e2ec92d))
+- make Downstream tests non-blocking ([#195](https://github.com/atko-eng/odyssey-design-system/issues/195)) ([6ab2d4b](https://github.com/atko-eng/odyssey-design-system/commit/6ab2d4bd433a6db6cc26f7c78042970b9199866b))
+- migrate odyssey-cli to ESM by updating imports and adding module type ([#202](https://github.com/atko-eng/odyssey-design-system/issues/202)) ([938894a](https://github.com/atko-eng/odyssey-design-system/commit/938894a657c16e17411005a9d6d3e564aa7af0bc))
+- update i18n configuration and add Japanese translations; remove unused language files ([#204](https://github.com/atko-eng/odyssey-design-system/issues/204)) ([776cdbd](https://github.com/atko-eng/odyssey-design-system/commit/776cdbdb3fdee5680b56b2643aef4ab6056b3e57))
+- update odyssey-react-mui to v1.54.0 in unified-ui-shell ([#192](https://github.com/atko-eng/odyssey-design-system/issues/192)) ([7228d9e](https://github.com/atko-eng/odyssey-design-system/commit/7228d9ef234639171d287049cdea02c120a9aa10))
+
+### Bug Fixes
+
+- update data filter value handling ([#193](https://github.com/atko-eng/odyssey-design-system/issues/193)) ([981a0f3](https://github.com/atko-eng/odyssey-design-system/commit/981a0f3286a44ac109941c79694cebd2c77511e4))
+- update disabled multi Select to match read only case ([#206](https://github.com/atko-eng/odyssey-design-system/issues/206)) ([d47fec5](https://github.com/atko-eng/odyssey-design-system/commit/d47fec5a49d3d0ab5c70f170a47079141877164e))
+- update TypedTFunction typing to correctly verify unknown keys ([#200](https://github.com/atko-eng/odyssey-design-system/issues/200)) ([5fee1cd](https://github.com/atko-eng/odyssey-design-system/commit/5fee1cdbba85ada5b8f650c23852e0c00953be05))
+
 ## [1.54.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.53.0...v1.54.0) (2026-02-17)
 
 ### Features
