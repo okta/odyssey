@@ -1,0 +1,23 @@
+{
+  "extends": "@okta/odyssey-typescript/tsconfig.react.json",
+  "compilerOptions": {
+    "jsx": "react-jsx"
+  },
+  "references": [
+    {
+      "path": "../../core/odyssey-react-mui"
+    },
+    {
+      "path": "../../contributions/iga-components"
+    },
+    {
+      "path": "../../contributions/unified-ui-shell"
+    },
+    {
+      "path": "../../contributions/workflows-components"
+    },
+    {
+      "path": "../../contributions/resource-access-policy-components"
+    }
+  ]
+}

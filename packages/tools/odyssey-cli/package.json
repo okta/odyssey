@@ -1,0 +1,55 @@
+{
+  "name": "@okta/odyssey-cli",
+  "author": "Okta, Inc.",
+  "license": "Apache-2.0",
+  "version": "0.0.0-development",
+  "sideEffects": false,
+  "description": "CLI tools for the Odyssey design system",
+  "bin": "./dist/index.js",
+  "main": "./dist/index.js",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atko-eng/odyssey-design-system",
+    "directory": "packages/tools/odyssey-cli"
+  },
+  "scripts": {
+    "build:clean": "rimraf dist",
+    "build": "yarn build:clean && tsc",
+    "build:watch": "yarn build:clean && tsc --watch",
+    "test": "NODE_ENV=test vitest run --reporter=default"
+  },
+  "dependencies": {
+    "@babel/types": "^7.28.6",
+    "@clack/prompts": "^1.1.0",
+    "@okta/tools.i18n.pseudo-loc": "^1.0.0-99-gc858246",
+    "chokidar": "^4.0.3",
+    "inquirer": "^12.10.0",
+    "inquirer-autocomplete-standalone": "^0.8.1",
+    "jscodeshift": "^17.3.0",
+    "lodash.partition": "^4.6.0",
+    "open": "^11.0.0",
+    "properties": "1.2.1",
+    "read-pkg-up": "^7.0.1",
+    "semver": "^7.7.2",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@types/jscodeshift": "^17.3.0",
+    "@types/lodash.partition": "^4.6.9",
+    "@types/node": "^24.1.0",
+    "@types/semver": "^7.7.0",
+    "memfs": "^4.50.0",
+    "msw": "^2.10.5",
+    "rimraf": "^6.0.1",
+    "tsx": "^4.7.3",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
+  },
+  "engines": {
+    "node": ">=20.12.0"
+  }
+}

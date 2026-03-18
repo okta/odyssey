@@ -1,0 +1,63 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.56.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.55.0...v1.56.0) (2026-03-18)
+
+**Note:** Version bump only for package @okta/odyssey-contribution-tooling
+
+## [1.55.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.54.0...v1.55.0) (2026-03-04)
+
+### Bug Fixes
+
+- update TypedTFunction typing to correctly verify unknown keys ([#200](https://github.com/atko-eng/odyssey-design-system/issues/200)) ([5fee1cd](https://github.com/atko-eng/odyssey-design-system/commit/5fee1cdbba85ada5b8f650c23852e0c00953be05))
+
+## [1.54.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.53.0...v1.54.0) (2026-02-17)
+
+**Note:** Version bump only for package @okta/odyssey-contribution-tooling
+
+## [1.52.1](https://github.com/atko-eng/odyssey-design-system/compare/v1.51.0...v1.52.1) (2026-01-29)
+
+### Bug Fixes
+
+- fix: correct return statement structure in FullScreenOverlay component ([#181](https://github.com/atko-eng/odyssey-design-system/issues/181)) ([41f74c](https://github.com/atko-eng/odyssey-design-system/commit/41f74cc0ad69108e8bdf70a7466ef4cc65c3c2b2))
+
+## [1.52.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.51.0...v1.52.0) (2026-01-21)
+
+### Features
+
+- update playwright version to latest ([#175](https://github.com/atko-eng/odyssey-design-system/issues/175)) ([1afc2a7](https://github.com/atko-eng/odyssey-design-system/commit/1afc2a7bd312f963e72ec391f5cde0567f9a3f44))
+
+## [1.51.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.50.1...v1.51.0) (2026-01-07)
+
+**Note:** Version bump only for package @okta/odyssey-contribution-tooling
+
+## [1.50.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.49.0...v1.50.0) (2025-12-11)
+
+**Note:** Version bump only for package @okta/odyssey-contribution-tooling
+
+## [1.49.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.48.0...v1.49.0) (2025-11-26)
+
+**Note:** Version bump only for package @okta/odyssey-contribution-tooling
+
+## [1.48.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.47.0...v1.48.0) (2025-11-13)
+
+**Note:** Version bump only for package @okta/odyssey-contribution-tooling
+
+## [1.47.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.46.0...v1.47.0) (2025-10-28)
+
+### Bug Fixes
+
+- fixes React v19 forward-compatibility ([#102](https://github.com/atko-eng/odyssey-design-system/issues/102)) ([5e20038](https://github.com/atko-eng/odyssey-design-system/commit/5e2003829a19e43bfb0d94b4b8437c7ae9204d7c))
+
+## [1.46.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.45.2...v1.46.0) (2025-10-16)
+
+### Bug Fixes
+
+- add missing peerDeps to contribution tooling ([#93](https://github.com/atko-eng/odyssey-design-system/issues/93)) ([4f465dd](https://github.com/atko-eng/odyssey-design-system/commit/4f465ddd7249f31a0ad1b002adbb2c6e98341eb2))
+- fixes Odyssey overlays styling when used in Shadow DOM ([#87](https://github.com/atko-eng/odyssey-design-system/issues/87)) ([c7f8746](https://github.com/atko-eng/odyssey-design-system/commit/c7f87461f156d6968472344f3d5f4bd93f116ff4))
+
+## [1.45.2](https://github.com/atko-eng/odyssey-design-system/compare/v1.45.1...v1.45.2) (2025-10-03)
+
+**Note:** Version bump only for package @okta/odyssey-contribution-tooling
