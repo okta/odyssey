@@ -1,0 +1,184 @@
+/*!
+ * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
+
+import {
+  AutocompleteRenderInputParams,
+  AutocompleteValue,
+  InputBase,
+} from "@mui/material";
+import { useCallback, useMemo, useRef } from "react";
+
+import { AutocompleteProps } from "./Autocomplete.js";
+import { Field } from "./Field.js";
+import {
+  ComponentControlledState,
+  getControlState,
+  useInputValues,
+} from "./inputUtils.js";
+
+export type UseAutocompleteProps<
+  OptionType,
+  HasMultipleChoices extends boolean | undefined,
+  IsCustomValueAllowed extends boolean | undefined,
+> = Pick<
+  AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>,
+  | "ariaDescribedBy"
+  | "defaultValue"
+  | "errorMessage"
+  | "errorMessageList"
+  | "hasMultipleChoices"
+  | "hint"
+  | "HintLinkComponent"
+  | "inputValue"
+  | "isFullWidth"
+  | "isOptional"
+  | "isVirtualized"
+  | "label"
+  | "name"
+  | "testId"
+  | "value"
+>;
+
+export const useAutocomplete = <
+  OptionType,
+  HasMultipleChoices extends boolean | undefined,
+  IsCustomValueAllowed extends boolean | undefined,
+>({
+  ariaDescribedBy,
+  defaultValue,
+  errorMessage,
+  errorMessageList,
+  hasMultipleChoices,
+  hint,
+  HintLinkComponent,
+  inputValue,
+  isFullWidth,
+  isOptional,
+  isVirtualized: isVirtualizedProp,
+  label,
+  name: nameOverride,
+  testId,
+  value,
+}: UseAutocompleteProps<
+  OptionType,
+  HasMultipleChoices,
+  IsCustomValueAllowed
+>) => {
+  const controlledStateRef = useRef(
+    getControlState({
+      controlledValue: value,
+      uncontrolledValue: defaultValue,
+    }),
+  );
+
+  const isVirtualizedRef = useRef(Boolean(isVirtualizedProp));
+
+  const defaultValueProp = useMemo<
+    | AutocompleteValue<
+        OptionType,
+        HasMultipleChoices,
+        undefined,
+        IsCustomValueAllowed
+      >
+    | undefined
+  >(() => {
+    if (hasMultipleChoices) {
+      if (value === undefined) {
+        return defaultValue;
+      }
+      return [] as AutocompleteValue<
+        OptionType,
+        HasMultipleChoices,
+        undefined,
+        IsCustomValueAllowed
+      >;
+    }
+    return value === undefined ? defaultValue : undefined;
+  }, [defaultValue, hasMultipleChoices, value]);
+
+  const valueProps = useInputValues({
+    controlState: controlledStateRef.current,
+    defaultValue: defaultValueProp,
+    value,
+  });
+
+  const inputValueProp = useMemo(() => {
+    if (controlledStateRef.current === ComponentControlledState.CONTROLLED) {
+      return { inputValue };
+    }
+    return undefined;
+  }, [inputValue]);
+
+  const renderInput = useCallback(
+    ({
+      InputLabelProps,
+      InputProps,
+      ...params
+    }: AutocompleteRenderInputParams) => (
+      <Field
+        ariaDescribedBy={ariaDescribedBy}
+        errorMessage={errorMessage}
+        errorMessageList={errorMessageList}
+        fieldType="single"
+        hasVisibleLabel
+        hint={hint}
+        HintLinkComponent={HintLinkComponent}
+        //@ts-expect-error htmlFor exists on `InputLabelProps`, but not the type.
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        id={InputLabelProps.htmlFor}
+        isFullWidth={isFullWidth}
+        isOptional={isOptional}
+        label={label}
+        renderFieldComponent={({
+          ariaDescribedBy,
+          id,
+          errorMessageElementId,
+          labelElementId,
+        }) => (
+          <InputBase
+            {...params}
+            {...InputProps}
+            aria-describedby={ariaDescribedBy}
+            id={id}
+            inputProps={{
+              ...params.inputProps,
+              "aria-errormessage": errorMessageElementId,
+              "aria-labelledby": labelElementId,
+              "data-se": testId,
+            }}
+            name={nameOverride ?? id}
+            required={!isOptional}
+          />
+        )}
+      />
+    ),
+    [
+      ariaDescribedBy,
+      errorMessage,
+      errorMessageList,
+      hint,
+      HintLinkComponent,
+      isFullWidth,
+      isOptional,
+      label,
+      nameOverride,
+      testId,
+    ],
+  );
+
+  return {
+    inputValueProp,
+    isVirtualizedRef,
+    renderInput,
+    valueProps,
+  };
+};

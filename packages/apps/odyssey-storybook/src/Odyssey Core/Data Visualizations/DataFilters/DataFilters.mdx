@@ -1,0 +1,89 @@
+import {
+  Canvas,
+  Controls,
+  Description,
+  Meta,
+  Primary,
+  Stories,
+  Story,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs/blocks";
+import * as DataFiltersStories from "./DataFilters.stories";
+
+<Meta of={DataFiltersStories} />
+
+<Title of={DataFiltersStories} />
+<Subtitle of={DataFiltersStories} />
+<Description of={DataFiltersStories} />
+<Primary of={DataFiltersStories} />
+<Controls />
+
+`DataFilters` were created as part of `DataTable` but have been decoupled so we can use this pattern
+anywhere that filters are necessary.
+
+It features a unified UI for filters and search, and provides callbacks so consumers can bring their own
+logic.
+
+When filters are set, they are displayed as chips underneath the filter/search row, and can be cleared via
+a "Clear all" button.
+
+## Filters
+
+Exposing the Filters UI requires two props to be set: `filters` and `onChangeFilters`.
+
+`filters` should be an array of `DataFilter` objects, defined as such:
+
+```tsx
+type DataFilter = {
+  id: string;
+  label: string;
+  variant?: (typeof dataFilterVariantValues)[number];
+  value?: string | string[] | undefined;
+  options?: Array<{ label: string; value: string }>;
+};
+```
+
+A `DataFilter` is of type `text` by default, but can be set to any of the following:
+
+- `autocomplete`
+- `checkbox`
+- `date`
+- `date-range`
+- `multi-select`
+- `range`
+- `range-slider`
+- `select`
+- `text`
+
+The filtering UI for each of these adapts to the variant, though currently only a few variants have
+their own UI: `text`, `checkbox`, `multi-select`, and `select`. Any other variant will have a missing input
+for now.
+
+A typical usage of `onChangeFilters` would be to set the parent component's state to the return value,
+or perform an effect whenever the return value changes. In the case of `DataTable`, it fires the `fetchDataFn` whenever
+the filters change.
+
+<Canvas of={DataFiltersStories.NoSearch} />
+
+## Search
+
+The filtering UI is only visible if `filters` is defined. If `filters` is undefined and `onChangeSearch` is defined,
+the search UI will be displayed without accompanying filters.
+
+By default, `onChangeSearch` fires whenever the user changes the input value, debounced by 200ms. You can change the debounce
+by setting a different number of milliseconds in `searchDelay`. Or, you can force `onChangeSearch` to only fire on submit by setting
+`searchOnSubmit` to `true`.
+
+<Canvas of={DataFiltersStories.JustSearch} />
+
+<Canvas of={DataFiltersStories.SearchOnSubmit} />
+
+## Additional actions
+
+`DataFilters` provides a slot for additional actions by passing a `ReactNode` into `additionalActions`. This is intended exclusively for
+`<Button>` and `<MenuButton>` components, which will be displayed in the same row as the filters and serach, but aligned right.
+
+`DataTable` uses this to expose density and column visibility controls.
+
+<Canvas of={DataFiltersStories.AdditionalActions} />

@@ -23,8 +23,14 @@ __vitest-screenshots/
 # Lerna
 lerna-debug.log
 
+# Storybook
+debug-storybook.log
+
 # bundled properties files (i18n)
 **/src/properties/ts/*.ts
 **/src/properties/ts/.ts.DS_Store
 
 *.tsbuildinfo
+
+# Logs for ok-ui commands
+**/ok-ui-logs

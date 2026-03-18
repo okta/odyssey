@@ -26,5 +26,5 @@ Uncomment the link below, go to "Preview", and click the link to swap the templa
 
 ## Testing & Screenshots
 
-- [ ] I have confirmed this change with my designer and the Odyssey Design Team.
+- [ ] I have confirmed this change with my designer and the Odyssey Pillar Captains.
 <!-- Please include screenshots if it has visuals; otherwise, put "N/A". -->

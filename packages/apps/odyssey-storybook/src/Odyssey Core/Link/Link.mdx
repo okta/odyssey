@@ -1,0 +1,25 @@
+import {
+  Canvas,
+  Meta,
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  Controls,
+  Stories,
+} from "@storybook/addon-docs/blocks";
+import { Story } from "@storybook/addon-docs/blocks";
+import * as LinkStories from "./Link.stories";
+
+<Meta of={LinkStories} />
+
+<Title of={LinkStories} />
+<Subtitle of={LinkStories} />
+<Description of={LinkStories} />
+<Primary of={LinkStories} />
+<Controls />
+<Stories />
+
+## References
+
+- [Google's Developer Documentation](https://developers.google.com/web/tools/lighthouse/audits/noopener) provides backgrounds on security and performance considerations when using external links
