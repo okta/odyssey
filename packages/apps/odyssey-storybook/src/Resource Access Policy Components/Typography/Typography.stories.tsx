@@ -19,7 +19,7 @@ import {
 } from "@okta/odyssey-contributions-resource-access-policy-components";
 
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
-import { WorkflowsComponentsStorybookThemeDecorator } from "../../tools/WorkflowsComponentsStorybookThemeDecorator.js";
+import { ResourceAccessPolicyComponentsStorybookThemeDecorator } from "../../tools/ResourceAccessPolicyComponentsStorybookThemeDecorator.js";
 
 const containerStyle: React.CSSProperties = {
   maxWidth: "400px",
@@ -31,7 +31,7 @@ const meta = {
   component: Typography,
   decorators: [
     OdysseyStorybookThemeDecorator,
-    WorkflowsComponentsStorybookThemeDecorator,
+    ResourceAccessPolicyComponentsStorybookThemeDecorator,
   ],
   argTypes: {
     children: {

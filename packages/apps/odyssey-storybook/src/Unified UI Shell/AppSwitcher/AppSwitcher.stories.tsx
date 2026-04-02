@@ -48,31 +48,47 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const REAL_APP_ICONS = [
+  {
+    appIconDefaultUrl: "/appswitcher/admin-app-default.svg",
+    appIconSelectedUrl: "/appswitcher/admin-app-selected.svg",
+    appName: "saasure",
+    label: "Okta Admin Console",
+    linkUrl: "https://example.okta.com/admin/dashboard",
+  },
+  {
+    appIconDefaultUrl: "/appswitcher/okta-dashboard-default.svg",
+    appIconSelectedUrl: "/appswitcher/okta-dashboard-selected.svg",
+    appName: "okta_enduser",
+    label: "Okta End-User Dashboard",
+    linkUrl: "https://example.okta.com/app/UserHome",
+  },
+  {
+    appIconDefaultUrl: "/appswitcher/workflows-default.svg",
+    appIconSelectedUrl: "/appswitcher/workflows-selected.svg",
+    appName: "okta_flow_sso",
+    label: "Okta Workflows",
+    linkUrl: "https://example.workflows.okta.com",
+  },
+  {
+    appIconDefaultUrl: "/appswitcher/partner-portal-app-default.svg",
+    appIconSelectedUrl: "/appswitcher/partner-portal-app-selected.svg",
+    appName: "partner_portal",
+    label: "Partner Admin Portal",
+    linkUrl: "https://example.okta.com/partner-portal",
+  },
+  {
+    appIconDefaultUrl: "/appswitcher/ispm-default.svg",
+    appIconSelectedUrl: "/appswitcher/ispm-selected.svg",
+    appName: "okta_ispm",
+    label: "Identity Security Posture Management",
+    linkUrl: "https://appswitcher.spera-app.com",
+  },
+];
+
 export const AllApps: Story = {
   args: {
-    appIcons: [
-      {
-        appIconDefaultUrl: "/appswitcher/admin-app-default.svg",
-        appIconSelectedUrl: "/appswitcher/admin-app-selected.svg",
-        appName: "saasure",
-        label: "Admin Dashboard",
-        linkUrl: "http://rain-admin.okta1.com:1802/admin/dashboard",
-      },
-      {
-        appIconDefaultUrl: "/appswitcher/okta-dashboard-default.svg",
-        appIconSelectedUrl: "/appswitcher/okta-dashboard-selected.svg",
-        appName: "okta_enduser",
-        label: "Okta Dashboard",
-        linkUrl: "http://rain.okta1.com:1802/app/UserHome",
-      },
-      {
-        appIconDefaultUrl: "/appswitcher/workflows-default.svg",
-        appIconSelectedUrl: "/appswitcher/workflows-selected.svg",
-        appName: "okta_flow_sso",
-        label: "Okta Workflows",
-        linkUrl: "http://rain-admin.okta1.com:1802/flow/go",
-      },
-    ],
+    appIcons: REAL_APP_ICONS,
     isLoading: false,
     selectedAppName: "saasure",
   },
@@ -88,18 +104,56 @@ export const AllApps: Story = {
 
     await step("App switcher shows all items", async () => {
       await expect(canvas.getByRole("navigation")).toBeVisible();
-      await expect(canvas.queryAllByRole("listitem")).toHaveLength(3);
-      await expect(canvas.queryAllByRole("link")).toHaveLength(3);
+      await expect(canvas.queryAllByRole("listitem")).toHaveLength(5);
+      await expect(canvas.queryAllByRole("link")).toHaveLength(5);
       await expect(
-        canvas.queryByRole("link", { name: "Admin Dashboard" }),
+        canvas.queryByRole("link", { name: "Okta Admin Console" }),
       ).toBeVisible();
       await expect(
-        canvas.queryByRole("link", { name: "Okta Dashboard" }),
+        canvas.queryByRole("link", { name: "Okta End-User Dashboard" }),
       ).toBeVisible();
       await expect(
         canvas.queryByRole("link", { name: "Okta Workflows" }),
       ).toBeVisible();
+      await expect(
+        canvas.queryByRole("link", { name: "Partner Admin Portal" }),
+      ).toBeVisible();
+      await expect(
+        canvas.queryByRole("link", {
+          name: "Identity Security Posture Management",
+        }),
+      ).toBeVisible();
     });
+  },
+};
+
+export const EnduserSelected: Story = {
+  args: {
+    appIcons: REAL_APP_ICONS,
+    isLoading: false,
+    selectedAppName: "okta_enduser",
+  },
+  render: (props) => {
+    return (
+      <div style={{ height: "100vh" }}>
+        <AppSwitcher {...props} />
+      </div>
+    );
+  },
+};
+
+export const WorkflowsSelected: Story = {
+  args: {
+    appIcons: REAL_APP_ICONS,
+    isLoading: false,
+    selectedAppName: "okta_flow_sso",
+  },
+  render: (props) => {
+    return (
+      <div style={{ height: "100vh" }}>
+        <AppSwitcher {...props} />
+      </div>
+    );
   },
 };
 

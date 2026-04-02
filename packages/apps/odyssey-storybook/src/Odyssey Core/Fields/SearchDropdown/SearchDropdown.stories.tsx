@@ -85,6 +85,7 @@ const storybookMeta: Meta<PickerWithOptionAdornmentType> = {
       description:
         "Choose the size for the leading adornment. 'small' or 'large'",
       table: {
+        category: "Visual",
         type: {
           summary: adornmentSizeValues.join(" | "),
         },

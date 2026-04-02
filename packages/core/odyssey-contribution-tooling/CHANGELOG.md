@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.57.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.56.0...v1.57.0) (2026-04-01)
+
+### Features
+
+- adds contributionsMetadata.json to all contributions ([#220](https://github.com/atko-eng/odyssey-design-system/issues/220)) ([ff523d2](https://github.com/atko-eng/odyssey-design-system/commit/ff523d25f381890caa6d4d35af681d0a2193ca0a))
+
 ## [1.56.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.55.0...v1.56.0) (2026-03-18)
 
 **Note:** Version bump only for package @okta/odyssey-contribution-tooling

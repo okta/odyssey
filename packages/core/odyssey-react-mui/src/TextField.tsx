@@ -76,6 +76,14 @@ export type TextFieldProps = {
    */
   label: string;
   /**
+   * The maximum value for a `number` input.
+   */
+  max?: number;
+  /**
+   * The minimum value for a `number` input.
+   */
+  min?: number;
+  /**
    * Callback fired when the `input` element loses focus.
    */
   onBlur?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
@@ -95,6 +103,10 @@ export type TextFieldProps = {
    * Start `InputAdornment` for this component.
    */
   startAdornment?: string | ReactElement;
+  /**
+   * The step interval for a `number` input.
+   */
+  step?: number;
   /**
    * Type of the `input` element. It should be [a valid HTML5 input type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types).
    */
@@ -132,12 +144,15 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       isOptional = false,
       isReadOnly,
       label,
+      max,
+      min,
       name: nameOverride,
       onBlur,
       onChange: onChangeProp,
       onFocus,
       placeholder,
       startAdornment,
+      step,
       testId,
       translate,
       type = "text",
@@ -199,8 +214,12 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           inputProps={{
             "aria-errormessage": errorMessageElementId,
             "aria-labelledby": labelElementId,
+            "aria-readonly": isReadOnly,
             "data-se": testId,
             inputMode,
+            max,
+            min,
+            step,
           }}
           inputRef={localInputRef}
           multiline={isMultiline}
@@ -229,6 +248,8 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         hasInitialFocus,
         endAdornment,
         inputMode,
+        max,
+        min,
         isMultiline,
         nameOverride,
         onBlur,
@@ -239,6 +260,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         isReadOnly,
         ref,
         startAdornment,
+        step,
         testId,
         translate,
         type,
@@ -258,6 +280,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         isDisabled={isDisabled}
         isFullWidth={isFullWidth}
         isOptional={isOptional}
+        isReadOnly={isReadOnly}
         label={label}
         renderFieldComponent={renderFieldComponent}
       />

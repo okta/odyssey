@@ -26,6 +26,7 @@ const babelConfig = (api) => {
 
   return {
     plugins: [
+      "@okta/odyssey-build-tooling/babel-plugin",
       [
         "babel-plugin-import",
         {
@@ -61,6 +62,7 @@ const babelConfig = (api) => {
         comments: false,
         ignore: [/\.test\.|\.stories\./i],
         plugins: [
+          "@okta/odyssey-build-tooling/babel-plugin",
           [
             "babel-plugin-import",
             {

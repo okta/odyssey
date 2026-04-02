@@ -149,6 +149,8 @@ describe(renderReactInWebComponent.name, () => {
       reactInWebComponentElement.disconnectedCallback();
       reactInWebComponentElement.connectedCallback();
 
+      await act(() => reactInWebComponentElement.reactRootPromise);
+
       await expect(
         reactInWebComponentElement.reactRootPromise,
       ).resolves.not.toThrow();

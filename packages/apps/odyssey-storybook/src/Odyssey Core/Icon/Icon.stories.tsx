@@ -144,10 +144,13 @@ const columns: DataTableColumn<IconData>[] = [
   },
   {
     accessorKey: "className",
-    Cell: ({ row }) =>
+    Cell: ({ row }) => {
       // TODO: Fix this. There's an error about being unable to validate a computed value.
       // eslint-disable-next-line import/namespace
-      iconDictionary[row.original.name]?.displayName ?? "",
+      const displayName = iconDictionary[row.original.name]?.displayName ?? "";
+      // Strip the ::key=value metadata stamp added by the build plugin
+      return displayName.split("::")[0];
+    },
     header: "Class Name",
   },
 ];

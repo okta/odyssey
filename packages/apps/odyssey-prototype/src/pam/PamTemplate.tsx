@@ -1,0 +1,26 @@
+/*!
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
+
+// To add a new PAM page:
+//   1. Create the component in src/pam/pages/
+//   2. Import it here and add a route entry to PAM_ROUTES
+//   3. Add a nav item to src/pam/shell/PamSideNavConfig.ts
+
+import { type RouteObject } from "react-router-dom";
+
+import { StubPage } from "./pages/StubPage";
+
+export { PamShell } from "./shell/PamShell";
+
+export const PAM_ROUTES: RouteObject[] = [
+  { index: true, element: <StubPage title="PAM" /> },
+];

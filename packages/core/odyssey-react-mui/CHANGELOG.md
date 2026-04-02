@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.57.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.56.0...v1.57.0) (2026-04-01)
+
+### Features
+
+- add min, max, step props to TextField for type="number" ([#223](https://github.com/atko-eng/odyssey-design-system/issues/223)) ([221d2c1](https://github.com/atko-eng/odyssey-design-system/commit/221d2c17724b7bf7b75ffeb62cc9ec5e92a2af88))
+- odyssey-build-tooling & updated ui-component-identifier ([#219](https://github.com/atko-eng/odyssey-design-system/issues/219)) ([46a81c0](https://github.com/atko-eng/odyssey-design-system/commit/46a81c08495adf6dfcef9b9ca17f6d29766c0d22))
+- Translations for odyssey-design-system:enduser ([#217](https://github.com/atko-eng/odyssey-design-system/issues/217)) ([44b6324](https://github.com/atko-eng/odyssey-design-system/commit/44b63248279314821592454600b620f36ed53a21))
+
+### Bug Fixes
+
+- add aria-readonly to all field components ([#213](https://github.com/atko-eng/odyssey-design-system/issues/213)) ([6674e6a](https://github.com/atko-eng/odyssey-design-system/commit/6674e6a1e5071ba313e844b4f67b2c6b57c49fa4))
+
 ## [1.56.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.55.0...v1.56.0) (2026-03-18)
 
 **Note:** Version bump only for package @okta/odyssey-react-mui

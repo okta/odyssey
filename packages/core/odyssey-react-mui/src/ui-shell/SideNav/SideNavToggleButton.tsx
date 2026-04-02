@@ -103,6 +103,7 @@ const StyledChevronRightIcon = styled(ChevronRightIcon, {
   transitionProperty: "transform",
   transitionTimingFunction: "ease-in-out",
 }));
+StyledChevronRightIcon.displayName = "StyledChevronRightIcon";
 
 export type SideNavToggleButtonProps = {
   /**

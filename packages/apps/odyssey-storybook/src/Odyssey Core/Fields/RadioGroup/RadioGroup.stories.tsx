@@ -26,6 +26,7 @@ const meta = {
     children: {
       description: "An array of Radio components within the group",
       table: {
+        category: "Functional",
         type: {
           summary: "Array<ReactElement<typeof Radio>>",
         },
@@ -41,6 +42,7 @@ const meta = {
       description:
         "The text value of the radio that should be selected by default",
       table: {
+        category: "Functional",
         type: {
           summary: "string",
         },
@@ -57,6 +59,7 @@ const meta = {
       control: "text",
       description: "The text label for the radio group",
       table: {
+        category: "Visual",
         type: {
           summary: "string",
         },
@@ -69,6 +72,7 @@ const meta = {
     onChange: {
       description: "Callback fired when the value of the radio group changes",
       table: {
+        category: "Functional",
         type: {
           summary: "func",
         },
@@ -78,6 +82,7 @@ const meta = {
       control: "text",
       description: "The `value` on the selected radio button",
       table: {
+        category: "Functional",
         type: {
           summary: "string",
         },

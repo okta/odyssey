@@ -1,5 +1,6 @@
 import type { UserConfig } from "vite";
 
+import { odysseyDisplayNameVersionPlugin } from "@okta/odyssey-build-tooling/vite-plugin";
 import { muteWarningsPlugin } from "@okta/vite-plugin-mute-warnings";
 import react from "@vitejs/plugin-react";
 import svgr from "vite-plugin-svgr";
@@ -16,7 +17,12 @@ const viteConfig: UserConfig = {
       external: ["react"],
     },
   },
-  plugins: [react(), svgr(), muteWarningsPlugin(warningsToIgnore)],
+  plugins: [
+    react(),
+    svgr(),
+    muteWarningsPlugin(warningsToIgnore),
+    odysseyDisplayNameVersionPlugin(),
+  ],
 };
 
 export default viteConfig;

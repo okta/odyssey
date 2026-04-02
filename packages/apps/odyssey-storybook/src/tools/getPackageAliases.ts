@@ -10,52 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { access, readdir, readFile } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-
-const contributionsDirectory = join(__dirname, "../../../../contributions");
-
-export const getContributionPackageSourceAliases = () =>
-  readdir(contributionsDirectory, { withFileTypes: true }).then((dirents) =>
-    Promise.all(
-      dirents
-        .map((dirent) => (dirent.isDirectory() ? dirent.name : null))
-        .filter((directoryName) => directoryName !== null)
-        .map((directoryName) => ({
-          packageJsonPath: join(
-            contributionsDirectory,
-            directoryName,
-            "package.json",
-          ),
-          sourcePath: join(contributionsDirectory, directoryName, "src"),
-        }))
-        .map(({ packageJsonPath, ...otherProps }) =>
-          readFile(packageJsonPath, "utf8")
-            .then((packageJsonString) => ({
-              ...otherProps,
-              packageName: (JSON.parse(packageJsonString) as { name: string })
-                .name,
-            }))
-            .catch(() => ({
-              ...otherProps,
-              packageName: "",
-            })),
-        ),
-    ).then((contributionPackagePaths) =>
-      contributionPackagePaths
-        .filter(({ packageName }) => Boolean(packageName))
-        .reduce(
-          (packageAliases, { packageName, sourcePath }) => ({
-            ...packageAliases,
-            [packageName]: sourcePath,
-          }),
-          {},
-        ),
-    ),
-  );
 
 /** Escapes special RegExp characters so the string can be used in `new RegExp()`. */
 const escapeRegExp = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");

@@ -145,6 +145,7 @@ const ComposablePicker = <
       inputValue,
       isFullWidth,
       isOptional,
+      isReadOnly,
       isVirtualized,
       label,
       name: nameOverride,

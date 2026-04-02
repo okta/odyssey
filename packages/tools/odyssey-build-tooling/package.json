@@ -1,0 +1,38 @@
+{
+  "name": "@okta/odyssey-build-tooling",
+  "version": "0.0.0-development",
+  "description": "Build tools for Odyssey design system consumers",
+  "author": "Okta, Inc.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    "./vite-plugin": {
+      "types": "./dist/src/vite-plugin.d.ts",
+      "import": "./dist/src/vite-plugin.js",
+      "default": "./dist/src/vite-plugin.js"
+    },
+    "./babel-plugin": {
+      "types": "./dist/src/babel-plugin.d.cts",
+      "require": "./dist/src/babel-plugin.cjs"
+    }
+  },
+  "scripts": {
+    "build:clean": "rimraf dist",
+    "build:js": "vite build",
+    "build:types": "tsc",
+    "build": "yarn build:clean && yarn build:js && yarn build:types",
+    "test": "NODE_ENV=test vitest run --reporter=default"
+  },
+  "devDependencies": {
+    "@babel/core": "^7",
+    "@okta/odyssey-typescript": "workspace:*",
+    "@types/babel__core": "^7",
+    "@types/node": "^22",
+    "memfs": "^4",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.9.2",
+    "vite": "^7.1",
+    "vitest": "^3.2"
+  }
+}

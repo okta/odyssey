@@ -59,4 +59,16 @@ describe("TextField", () => {
     await userEvent.tab();
     expect(onBlur).toHaveBeenCalledTimes(1);
   });
+
+  test("renders min, max, and step attributes for type='number'", async () => {
+    render(<Template max={100} min={0} step={5} type="number" />);
+
+    const input = (await screen.findByRole(
+      "spinbutton",
+    )) satisfies HTMLInputElement;
+
+    expect(input).toHaveAttribute("min", "0");
+    expect(input).toHaveAttribute("max", "100");
+    expect(input).toHaveAttribute("step", "5");
+  });
 });
