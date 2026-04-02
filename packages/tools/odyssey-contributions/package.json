@@ -15,6 +15,7 @@
     "files/**/*"
   ],
   "dependencies": {
+    "@okta/odyssey-build-tooling": "workspace:*",
     "@okta/ui-stacks-utils": "^1.7.10",
     "@okta/vite-plugin-mute-warnings": "^1.0.0",
     "@vitejs/plugin-react": "^5.0",

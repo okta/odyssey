@@ -29,7 +29,13 @@ Key top-level files:
 
 - Prefer TypeScript over JavaScript where feasible.
 - Prefer functional code over imperative (e.g. use `map`, `filter`, `reduce` and expressions over `for` loops and mutable variables).
+- Use descriptive, domain-specific names; avoid generic names like `child`, `children`, `item`, or `data` for props, variables, and types.
+- Prefer expression-bodied functions and method chaining over intermediate variables when the chain is readable.
+- Prefer non-mutating array methods (`.toSorted()`, `.toReversed()`) over their mutating counterparts (`.sort()`, `.reverse()`).
+- Extract small pure helper functions rather than inlining complex transformations in components or large functions.
+- Compute derived data at the source (where it's produced) rather than recomputing it downstream in consumers.
 - Prefer named exports except for Storybook files where there will always be a default export.
+- Boolean variables and props should use `is` or `has` prefixes (e.g. `isDisabled`, `isVisible`, `hasError`), not bare adjectives like `disabled` or `visible`.
 - Keep existing code style and patterns in each package.
 - Avoid changing public APIs unless required.
 
@@ -117,8 +123,10 @@ Key top-level files:
 - Add/adjust visual tests or stories if UI changes.
 - Keep tests focused and deterministic.
 - For button label assertions in unit tests, use `odysseyTranslate` from `i18n.generated/i18n.js` for localized strings (e.g., `odysseyTranslate("topnav.sidenavmenu.toggle")`).
+- Only use mocks in tests if absolutely required. Prefer real implementations and real localStorage over mocked modules.
 - Avoid `data-testid` queries when testing existing components; prefer accessible queries (`getByRole`, `getByLabelText`, etc.). Using `data-testid` is acceptable when creating test-only elements within the test.
 - Use `userEvent` from Testing Library for simulating user interactions (keyboard, clicks, typing). Do not use `fireEvent` directly or native DOM events; `userEvent` provides more realistic user behavior simulation.
+- In browser tests (vitest browser mode), import `userEvent` from `@vitest/browser/context`, not from `@testing-library/user-event`.
 
 ---
 
@@ -132,10 +140,35 @@ Key top-level files:
 
 ## 8. Git Practices
 
-- Use conventional commits for all commit messages.
-- Keep commit subject lines under 50 characters (required by bacon implementation).
+### Commit Messages
+
+- Use [Conventional Commits](https://conventionalcommits.org/) for all commit messages.
+- Keep commit subject lines under 50 characters (required by Bacon).
+- The first letter after the `:` must be lowercase (e.g. `feat: add button variant`, not `feat: Add button variant`).
 - Keep commits scoped and descriptive.
 - Avoid unrelated changes in a single PR.
+
+#### Allowed commit types
+
+- `feat`: a new feature
+- `fix`: a bug fix
+- `build`: changes to the build process or auxiliary tools and libraries
+- `docs`: documentation-only changes
+- `perf`: a code change that improves performance
+- `refactor`: a code change that neither fixes a bug nor adds a feature
+- `style`: changes that do not affect the meaning of the code (whitespace, formatting, etc.)
+- `test`: adding missing tests or correcting existing tests
+
+> **Note:** `chore` is not allowed — Bacon's validation will reject it.
+
+### Branch Naming
+
+- Branch names cannot contain slashes (`/`) — use underscores (`_`) or hyphens (`-`) instead.
+- Optionally include your Jira ticket (e.g. `rj_fix_button_spacing_OKTA-123456`).
+
+### Pull Requests
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for the full PR process (Jira ticket requirement, Bacon CI, Slack notification, and merge steps).
 
 ---
 

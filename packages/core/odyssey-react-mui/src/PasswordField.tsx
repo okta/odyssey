@@ -187,6 +187,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           inputProps={{
             "aria-errormessage": errorMessageElementId,
             "aria-labelledby": labelElementId,
+            "aria-readonly": isReadOnly,
             "data-se": testId,
             // role: "textbox" Added because password inputs don't have an implicit role assigned. This causes problems with element selection.
             role: "textbox",
@@ -237,6 +238,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
         isDisabled={isDisabled}
         isFullWidth={isFullWidth}
         isOptional={isOptional}
+        isReadOnly={isReadOnly}
         label={label}
         renderFieldComponent={renderFieldComponent}
       />

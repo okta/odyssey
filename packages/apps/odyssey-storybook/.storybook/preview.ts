@@ -104,6 +104,12 @@ const preview = {
       },
       source: {
         excludeDecorators: true,
+        // Strip the ::key=value metadata stamp from displayNames in code snippets.
+        // The vite plugin stamps "Button::pkg=odyssey&odysseyV=1.56.0" for the
+        // scanner, but Storybook should show just "Button".
+        // Handles both JSX tags (<Button::...>) and string literals ("Button::...").
+        transform: (source: string) =>
+          source.replace(/(\w+)::[^"'>\s]+/g, "$1"),
       },
     },
     grid: {

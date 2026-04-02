@@ -238,6 +238,7 @@ const Autocomplete = <
       inputValue,
       isFullWidth,
       isOptional,
+      isReadOnly,
       isVirtualized,
       label,
       name: nameOverride,

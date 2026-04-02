@@ -41,6 +41,7 @@ export type UseAutocompleteProps<
   | "inputValue"
   | "isFullWidth"
   | "isOptional"
+  | "isReadOnly"
   | "isVirtualized"
   | "label"
   | "name"
@@ -63,6 +64,7 @@ export const useAutocomplete = <
   inputValue,
   isFullWidth,
   isOptional,
+  isReadOnly,
   isVirtualized: isVirtualizedProp,
   label,
   name: nameOverride,
@@ -137,6 +139,7 @@ export const useAutocomplete = <
         id={InputLabelProps.htmlFor}
         isFullWidth={isFullWidth}
         isOptional={isOptional}
+        isReadOnly={isReadOnly}
         label={label}
         renderFieldComponent={({
           ariaDescribedBy,
@@ -153,6 +156,7 @@ export const useAutocomplete = <
               ...params.inputProps,
               "aria-errormessage": errorMessageElementId,
               "aria-labelledby": labelElementId,
+              "aria-readonly": isReadOnly,
               "data-se": testId,
             }}
             name={nameOverride ?? id}
@@ -169,6 +173,7 @@ export const useAutocomplete = <
       HintLinkComponent,
       isFullWidth,
       isOptional,
+      isReadOnly,
       label,
       nameOverride,
       testId,

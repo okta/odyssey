@@ -383,6 +383,7 @@ const Switch = ({
                 : `${label}: ${t("switch.inactive")}`
             }
             aria-labelledby={labelElementId}
+            aria-readonly={isReadOnly}
             data-se={testId}
             disabled={isDisabled}
             id={inputId}

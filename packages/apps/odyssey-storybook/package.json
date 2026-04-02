@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-storybook",
-  "version": "1.56.0",
+  "version": "1.57.0",
   "description": "Documentation for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -19,6 +19,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^5.18.0",
+    "@okta/odyssey-build-tooling": "workspace:*",
     "@okta/odyssey-contributions-example-components": "workspace:*",
     "@okta/odyssey-contributions-iga-components": "workspace:*",
     "@okta/odyssey-contributions-oin-components": "workspace:*",

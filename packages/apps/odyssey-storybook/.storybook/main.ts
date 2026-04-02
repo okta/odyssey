@@ -55,6 +55,13 @@ const config: StorybookConfig = {
     check: false,
     reactDocgen: false,
   },
+
+  // BUILD_BASE is set by publish-storybook.sh so asset URLs resolve under the
+  // CDN sub-path (e.g. /storybook). Defaults to undefined (Vite root) for local dev.
+  viteFinal: (config) => ({
+    ...config,
+    base: process.env.BUILD_BASE ?? config.base,
+  }),
 };
 
 export default config;

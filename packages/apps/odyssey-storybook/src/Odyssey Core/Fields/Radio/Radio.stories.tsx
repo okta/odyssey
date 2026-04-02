@@ -27,6 +27,7 @@ const meta = {
       control: "boolean",
       description: "If `true`, the radio button is checked",
       table: {
+        category: "Visual",
         type: {
           summary: "boolean",
         },
@@ -36,6 +37,7 @@ const meta = {
       control: "text",
       description: "The helper text content",
       table: {
+        category: "Visual",
         type: {
           summary: "string",
         },
@@ -46,6 +48,7 @@ const meta = {
       control: "boolean",
       description: "If `true`, the radio button has an invalid value",
       table: {
+        category: "Visual",
         type: {
           summary: "boolean",
         },
@@ -55,6 +58,7 @@ const meta = {
       control: "boolean",
       description: "If `true`, the radio button is read-only",
       table: {
+        category: "Visual",
         type: {
           summary: "boolean",
         },
@@ -67,6 +71,7 @@ const meta = {
       control: "text",
       description: "The label text for the radio button",
       table: {
+        category: "Visual",
         type: {
           summary: "string",
         },
@@ -79,6 +84,7 @@ const meta = {
     onChange: {
       description: "Callback fired when the the radio button value changes",
       table: {
+        category: "Functional",
         type: {
           summary: "func",
         },
@@ -87,6 +93,7 @@ const meta = {
     onBlur: {
       description: "Callback fired when the blur event happens",
       table: {
+        category: "Functional",
         type: {
           summary: "func",
         },
@@ -97,6 +104,7 @@ const meta = {
       control: "text",
       description: "The value attribute of the radio button",
       table: {
+        category: "Functional",
         type: {
           summary: "string",
         },

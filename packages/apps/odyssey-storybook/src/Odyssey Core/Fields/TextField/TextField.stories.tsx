@@ -93,6 +93,26 @@ const meta = {
     id: fieldComponentPropsMetaData.id,
     isDisabled: fieldComponentPropsMetaData.isDisabled,
     isFullWidth: fieldComponentPropsMetaData.isFullWidth,
+    max: {
+      control: "number",
+      description: "The maximum value for a `number` input",
+      table: {
+        category: "Functional",
+        type: {
+          summary: "number",
+        },
+      },
+    },
+    min: {
+      control: "number",
+      description: "The minimum value for a `number` input",
+      table: {
+        category: "Functional",
+        type: {
+          summary: "number",
+        },
+      },
+    },
     isMultiline: {
       control: "boolean",
       description: "If `true`, a `textarea` element is rendered",
@@ -161,6 +181,16 @@ const meta = {
         category: "Visual",
         type: {
           summary: "string",
+        },
+      },
+    },
+    step: {
+      control: "number",
+      description: "The step interval for a `number` input",
+      table: {
+        category: "Functional",
+        type: {
+          summary: "number",
         },
       },
     },
@@ -450,6 +480,27 @@ export const Tel: Story = {
     },
   }),
 };
+export const Number: Story = {
+  ...deepmerge(TextFieldTemplate, {
+    parameters: {
+      docs: {
+        description: {
+          story:
+            "TextFields of type `number` accept `min`, `max`, and `step` props to constrain valid values.",
+        },
+      },
+    },
+    args: {
+      label: "Quantity",
+      type: "number",
+      min: 0,
+      max: 100,
+      step: 5,
+      value: "",
+    },
+  }),
+};
+
 export const Uncontrolled: Story = {
   parameters: {
     docs: {

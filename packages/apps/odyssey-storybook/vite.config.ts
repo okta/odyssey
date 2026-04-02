@@ -10,30 +10,29 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { odysseyDisplayNameVersionPlugin } from "@okta/odyssey-build-tooling/vite-plugin";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
-import {
-  getContributionPackageSourceAliases,
-  getOdysseyReactMuiAliases,
-} from "./src/tools/getPackageAliases.js";
+import { getOdysseyReactMuiAliases } from "./src/tools/getPackageAliases.js";
 
 const isDev =
   process.env.NODE_ENV !== "test" && process.env.NODE_ENV !== "production";
 
 // https://vitejs.dev/config/
 export default defineConfig(async () => {
-  // In dev mode, alias @okta/odyssey-react-mui to its TypeScript source so Vite
-  // processes it directly (fixes styled_default errors).
-  // Note: This does not require core/odyssey-react-mui to be rebuilt on changes, they will be picked up
-  // automatically.
-  // Contribution package aliases are only needed for test/production builds.
-  const alias = isDev
-    ? await getOdysseyReactMuiAliases()
-    : await getContributionPackageSourceAliases();
+  if (!isDev) {
+    return { plugins: [react()] };
+  }
 
+  // In dev mode, alias @okta/odyssey-react-mui to its TypeScript source so Vite
+  // processes it directly (fixes styled_default errors). This does not require
+  // core/odyssey-react-mui to be rebuilt on changes — they are picked up automatically.
+  // The displayName version plugin stamps the Odyssey version into every displayName.
   return {
-    resolve: { alias },
-    plugins: [react()],
+    resolve: {
+      alias: await getOdysseyReactMuiAliases(),
+    },
+    plugins: [react(), odysseyDisplayNameVersionPlugin()],
   };
 });

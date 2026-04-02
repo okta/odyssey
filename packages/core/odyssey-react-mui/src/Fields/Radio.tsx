@@ -153,7 +153,7 @@ const Radio = ({
   const inputProps = useMemo<InputHTMLAttributes<HTMLInputElement>>(
     () => ({
       "aria-describedby": hintId,
-      "aria-disabled": isDisabled || isReadOnly,
+      "aria-disabled": isDisabled,
       "data-se": testId,
       readOnly: isReadOnly,
       tabIndex: isReadOnly ? 0 : undefined,

@@ -43,7 +43,7 @@ export default defineConfig({
       },
       {
         optimizeDeps: {
-          include: ["@emotion/react/jsx-dev-runtime"],
+          include: ["@emotion/react/jsx-dev-runtime", "react-dom/client"],
         },
         test: {
           browser: {

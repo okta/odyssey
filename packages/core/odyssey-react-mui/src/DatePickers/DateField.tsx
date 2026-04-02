@@ -201,6 +201,7 @@ const DateField = ({
           "aria-describedby": ariaDescribedBy,
           "aria-errormessage": errorMessageElementId,
           "aria-labelledby": labelElementId,
+          "aria-readonly": isReadOnly,
         }}
         InputProps={{
           error: Boolean(displayedErrorMessage || errorMessage),
@@ -255,6 +256,7 @@ const DateField = ({
       id={idOverride}
       isDisabled={isDisabled}
       isOptional={isOptional}
+      isReadOnly={isReadOnly}
       label={label}
       renderFieldComponent={renderFieldComponent}
     />

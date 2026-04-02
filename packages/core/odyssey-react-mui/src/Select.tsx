@@ -465,7 +465,8 @@ const Select = <
           id={id}
           inputProps={{
             "data-se": testId,
-            "aria-disabled": isDisabled || isReadOnly,
+            "aria-disabled": isDisabled,
+            "aria-readonly": isReadOnly,
             readOnly: isReadOnly,
           }}
           inputRef={(el: HTMLInputElement | HTMLTextAreaElement | null) => {
@@ -538,6 +539,7 @@ const Select = <
       isDisabled={isDisabled}
       isFullWidth={isFullWidth}
       isOptional={isOptional}
+      isReadOnly={isReadOnly}
       label={label}
       renderFieldComponent={renderFieldComponent}
     />
