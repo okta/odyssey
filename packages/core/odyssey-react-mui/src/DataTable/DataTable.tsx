@@ -861,7 +861,9 @@ const DataTable = ({
 
     // Virtualization
     enableRowVirtualization:
-      paginationType !== "loadMore" && pagination.pageSize > 50,
+      paginationType !== "loadMore" &&
+      pagination.pageSize > 50 &&
+      data.length > 0,
     rowVirtualizerInstanceRef:
       useRef<MRT_RowVirtualizer<HTMLDivElement, HTMLTableRowElement>>(null),
     rowVirtualizerOptions: {

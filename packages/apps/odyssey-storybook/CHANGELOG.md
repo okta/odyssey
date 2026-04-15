@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.58.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.57.0...v1.58.0) (2026-04-15)
+
+### Features
+
+- move packages to new platform directory ([#233](https://github.com/atko-eng/odyssey-design-system/issues/233)) ([35057b6](https://github.com/atko-eng/odyssey-design-system/commit/35057b66a8de600ce104eaa027ce1c819d1fb55e))
+- update autocomplete story props to include translate attribute options ([437697e](https://github.com/atko-eng/odyssey-design-system/commit/437697ecd82812f0d9df3b7c87a954e517004c7f))
+
+### Bug Fixes
+
+- add props to autocomplete stories ([11526a7](https://github.com/atko-eng/odyssey-design-system/commit/11526a7b1819972552545b54084518a303437c8c))
+- disable virtualization when DataTable is empty ([#244](https://github.com/atko-eng/odyssey-design-system/issues/244)) ([051a432](https://github.com/atko-eng/odyssey-design-system/commit/051a4328cf7ec9123dc89b72e3d6b20a08882a03))
+
 ## [1.57.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.56.0...v1.57.0) (2026-04-01)
 
 ### Features

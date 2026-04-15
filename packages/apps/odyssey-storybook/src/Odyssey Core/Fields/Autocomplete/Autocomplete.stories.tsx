@@ -53,8 +53,48 @@ const storybookMeta: Meta<typeof Autocomplete> = {
   decorators: [OdysseyStorybookThemeDecorator],
   tags: ["autodocs"],
   argTypes: {
+    ariaDescribedBy: {
+      control: "text",
+      description:
+        "The id of an external element that describes the input for assistive technologies.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    defaultValue: {
+      control: false,
+      description:
+        "The initial selected value for an uncontrolled component. For a controlled component, use `value` instead.",
+      table: {
+        type: {
+          summary: "OptionType | string | null | Array<OptionType | string>",
+        },
+      },
+    },
     errorMessage: fieldComponentPropsMetaData.errorMessage,
     errorMessageList: fieldComponentPropsMetaData.errorMessageList,
+    getIsOptionEqualToValue: {
+      control: false,
+      description:
+        "Determines whether an option matches the current value. Defaults to strict equality (`===`). Required when options are objects, to compare by a specific property (e.g., `id`) rather than by reference.",
+      table: {
+        type: {
+          summary: "(option: OptionType, value: OptionType) => boolean",
+        },
+      },
+    },
+    getOptionLabel: {
+      control: false,
+      description:
+        "Determines the string label displayed for a given option in the input field and dropdown list. Defaults to the option's `label` property. Required when options do not have a `label` property.",
+      table: {
+        type: {
+          summary: "(option: OptionType) => string",
+        },
+      },
+    },
     hasMultipleChoices: {
       control: "boolean",
       description: "Enables multiple choice selection",
@@ -67,6 +107,16 @@ const storybookMeta: Meta<typeof Autocomplete> = {
     hint: fieldComponentPropsMetaData.hint,
     HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
     id: fieldComponentPropsMetaData.id,
+    inputValue: {
+      control: "text",
+      description:
+        "The controlled value of the text input. Pair with `onInputChange` to update it. Use when controlling the input text independently from the selected value.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     isCustomValueAllowed: {
       control: "boolean",
       description: "Allows the input of custom values",
@@ -94,7 +144,8 @@ const storybookMeta: Meta<typeof Autocomplete> = {
     isReadOnly: fieldComponentPropsMetaData.isReadOnly,
     isVirtualized: {
       control: "boolean",
-      description: "Let's the component know it should virtualize the list",
+      description:
+        "Enables list virtualization for large option sets. Recommended when rendering hundreds of options or more.",
       table: {
         type: {
           summary: "boolean",
@@ -115,6 +166,19 @@ const storybookMeta: Meta<typeof Autocomplete> = {
       },
     },
     name: fieldComponentPropsMetaData.name,
+    noOptionsText: {
+      control: "text",
+      description:
+        "The text displayed in the dropdown when no options match the current input. Defaults to 'No options'.",
+      table: {
+        type: {
+          summary: "string",
+        },
+        defaultValue: {
+          summary: "'No options'",
+        },
+      },
+    },
     onBlur: {
       description:
         "Callback fired when the autocomplete component loses focus.",
@@ -153,15 +217,13 @@ const storybookMeta: Meta<typeof Autocomplete> = {
       description: "The options for the autocomplete input",
       table: {
         type: {
-          summary:
-            "Array<OptionType> | GroupedOptionType<OptionType>[] | Promise<Array<OptionType> | GroupedOptionType<OptionType>[]>",
+          summary: "ReadonlyArray<OptionType>",
         },
       },
       type: {
         required: true,
         name: "other",
-        value:
-          "Array<OptionType> | GroupedOptionType<OptionType>[] | Promise<Array<OptionType> | GroupedOptionType<OptionType>[]>",
+        value: "ReadonlyArray<OptionType>",
       },
     },
     value: {
@@ -169,6 +231,26 @@ const storybookMeta: Meta<typeof Autocomplete> = {
       table: {
         type: {
           summary: "OptionType | OptionType[]",
+        },
+      },
+    },
+    testId: {
+      control: "text",
+      description:
+        "The `data-se` attribute applied to the input element, used to target the component in automated tests.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    translate: {
+      control: { type: "radio" },
+      options: ["yes", "no"],
+      description: "Sets the HTML `translate` attribute on the input field",
+      table: {
+        type: {
+          summary: '"yes" | "no"',
         },
       },
     },

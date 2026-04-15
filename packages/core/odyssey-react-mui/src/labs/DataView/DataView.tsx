@@ -147,10 +147,6 @@ const DataView = <TData extends MRT_RowData>({
 
   const [data, setData] = useState<TData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(isLoadingProp ?? true);
-  const [isEmpty, setIsEmpty] = useState<boolean>(isEmptyProp ?? true);
-  const [isNoResults, setIsNoResults] = useState<boolean>(
-    isNoResultsProp ?? false,
-  );
   const [errorMessage, setErrorMessage] =
     useState<UniversalProps<TData>["errorMessage"]>(errorMessageProp);
 
@@ -199,6 +195,40 @@ const DataView = <TData extends MRT_RowData>({
     filters: initialFilters,
     columns: tableLayoutOptions?.columns,
   });
+
+  const isEmpty = useMemo(() => {
+    const hasEmptyOrInitialFilters =
+      !hasFilters || isEqual(filters, initialAvailableFilters);
+
+    const calculatedIsEmpty =
+      pagination.pageIndex === currentPage &&
+      pagination.pageSize === resultsPerPage &&
+      search === "" &&
+      hasEmptyOrInitialFilters &&
+      data.length === 0;
+
+    return isEmptyProp ?? calculatedIsEmpty;
+  }, [
+    currentPage,
+    data.length,
+    filters,
+    hasFilters,
+    initialAvailableFilters,
+    isEmptyProp,
+    pagination.pageIndex,
+    pagination.pageSize,
+    resultsPerPage,
+    search,
+  ]);
+
+  const isNoResults = useMemo(() => {
+    const hasNoResults = isLoading
+      ? false
+      : // DB isn't actually empty (!isEmpty) and we have zero rows
+        !isEmpty && data.length === 0;
+
+    return isNoResultsProp ?? hasNoResults;
+  }, [data, isEmpty, isLoading, isNoResultsProp]);
 
   useEffect(() => {
     if (!initialFilters && availableFilters) {
@@ -266,53 +296,14 @@ const DataView = <TData extends MRT_RowData>({
       setData,
       setErrorMessage,
       // Only include setIsLoading if that's not being controlled manually
-      setIsLoading: isLoadingProp ? undefined : setIsLoading,
+      setIsLoading: isLoadingProp !== undefined ? undefined : setIsLoading,
     });
   }, [dataQueryParams, errorMessageProp, getData, isLoadingProp]);
 
-  // When data is updated
-  useEffect(() => {
-    const hasEmptyOrInitialFilters =
-      !hasFilters || isEqual(filters, initialAvailableFilters);
-    setIsEmpty(
-      pagination.pageIndex === currentPage &&
-        pagination.pageSize === resultsPerPage &&
-        search === "" &&
-        hasEmptyOrInitialFilters &&
-        data.length === 0,
-    );
-  }, [
-    currentPage,
-    data,
-    filters,
-    hasFilters,
-    initialAvailableFilters,
-    pagination,
-    resultsPerPage,
-    search,
-  ]);
-
-  useEffect(() => {
-    if (!isLoading) {
-      // DB isn't actually empty (!isEmpty) and we have zero rows
-      const hasNoResults = !isEmpty && data.length === 0;
-
-      setIsNoResults(isNoResultsProp ?? hasNoResults);
-    }
-  }, [data.length, isEmpty, isNoResultsProp, isLoading]);
-
-  // Change loading, empty and noResults state on prop change
+  // Change loading state on prop change
   useEffect(() => {
     setIsLoading((prevValue) => isLoadingProp ?? prevValue);
   }, [isLoadingProp]);
-
-  useEffect(() => {
-    setIsEmpty((prevValue) => isEmptyProp ?? prevValue);
-  }, [isEmptyProp]);
-
-  useEffect(() => {
-    setIsNoResults((prevValue) => isNoResultsProp ?? prevValue);
-  }, [isNoResultsProp]);
 
   const emptyState = useMemo(() => {
     const noResultsInnerContent = noResultsPlaceholder || (

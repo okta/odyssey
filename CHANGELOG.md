@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.58.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.57.0...v1.58.0) (2026-04-15)
+
+### Features
+
+- add resolutions for flatted & svgo packages ([#237](https://github.com/atko-eng/odyssey-design-system/issues/237)) ([816f1e9](https://github.com/atko-eng/odyssey-design-system/commit/816f1e92a2c93e255e6ada8785dfe28a175ee682))
+- move packages to new platform directory ([#233](https://github.com/atko-eng/odyssey-design-system/issues/233)) ([35057b6](https://github.com/atko-eng/odyssey-design-system/commit/35057b66a8de600ce104eaa027ce1c819d1fb55e))
+- update autocomplete story props to include translate attribute options ([437697e](https://github.com/atko-eng/odyssey-design-system/commit/437697ecd82812f0d9df3b7c87a954e517004c7f))
+
+### Bug Fixes
+
+- add props to autocomplete stories ([11526a7](https://github.com/atko-eng/odyssey-design-system/commit/11526a7b1819972552545b54084518a303437c8c))
+- dataview controlled props ([#247](https://github.com/atko-eng/odyssey-design-system/issues/247)) ([100e6e6](https://github.com/atko-eng/odyssey-design-system/commit/100e6e642a4a6c3119477d5aa00410a98cee13aa))
+- dev build scripts for some contributions ([#243](https://github.com/atko-eng/odyssey-design-system/issues/243)) ([136f906](https://github.com/atko-eng/odyssey-design-system/commit/136f9067a8ac95337729b60f544c0bbf52c355d0))
+- disable virtualization when DataTable is empty ([#244](https://github.com/atko-eng/odyssey-design-system/issues/244)) ([051a432](https://github.com/atko-eng/odyssey-design-system/commit/051a4328cf7ec9123dc89b72e3d6b20a08882a03))
+- improve setup skill with scope detection, parallelization, and clearer pass criteria ([102cf09](https://github.com/atko-eng/odyssey-design-system/commit/102cf099486b4f687285fd353f2ff2dae1dc10e6))
+- mark breadcrumb separator as translate="no" ([#245](https://github.com/atko-eng/odyssey-design-system/issues/245)) ([5af8854](https://github.com/atko-eng/odyssey-design-system/commit/5af88546da6c7a63cb6cbf441717b2b1569c9176))
+- prevent Autocomplete crash on hasMultipleChoices toggle ([#246](https://github.com/atko-eng/odyssey-design-system/issues/246)) ([9ecf4fe](https://github.com/atko-eng/odyssey-design-system/commit/9ecf4fe7a804320c458557ca9a61c6ba26ecf9c8))
+- update setup skill to execute commands instead of summarizing ([85ae48f](https://github.com/atko-eng/odyssey-design-system/commit/85ae48f24e5bef5990ca179f265b7afef3ba9ad0))
+
 ## [1.57.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.56.0...v1.57.0) (2026-04-01)
 
 ### Features

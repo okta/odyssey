@@ -250,6 +250,10 @@ const Autocomplete = <
     <MuiAutocomplete
       {...valueProps}
       {...inputValueProp}
+      // MUI's value type is incompatible between single (null) and multiple (array)
+      // modes. Changing `multiple` on a live instance causes a null.length crash,
+      // so we force a remount when the mode changes. This resets internal UI state.
+      key={hasMultipleChoices ? "multiple" : "single"}
       // conditionally provide the ListboxComponent if this needs to be virtualized
       {...(isVirtualizedRef.current && {
         ListboxComponent: PickerVirtualizationListBox,
@@ -282,9 +286,9 @@ const Autocomplete = <
   );
 };
 
-// Need the `typeof Autocomplete` because generics don't get passed through
-const MemoizedAutocomplete = memo(Autocomplete) as typeof Autocomplete;
-// @ts-expect-error displayName is expected to not be on `typeof Autocomplete`
+const MemoizedAutocomplete = memo(Autocomplete) as typeof Autocomplete & {
+  displayName?: string;
+};
 MemoizedAutocomplete.displayName = "Autocomplete";
 
 export { MemoizedAutocomplete as Autocomplete };

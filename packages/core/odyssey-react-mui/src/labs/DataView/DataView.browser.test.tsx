@@ -71,8 +71,8 @@ describe("DataView", { timeout: 10000 }, () => {
 
       await waitUntilTableLoadedHack();
 
-      expect(within(container).queryByRole("table")).not.toBeNull();
-      expect(within(container).queryByRole("list")).toBeNull();
+      expect(within(container).queryByRole("table")).toBeVisible();
+      expect(within(container).queryByRole("list")).not.toBeInTheDocument();
     });
 
     test("displays a list view", async () => {
@@ -90,8 +90,8 @@ describe("DataView", { timeout: 10000 }, () => {
 
       await waitUntilTableLoadedHack();
 
-      expect(within(container).queryByRole("table")).toBeNull();
-      expect(within(container).queryByRole("list")).not.toBeNull();
+      expect(within(container).queryByRole("table")).not.toBeInTheDocument();
+      expect(within(container).queryByRole("list")).toBeVisible();
     });
 
     test("displays a grid view", async () => {
@@ -109,8 +109,8 @@ describe("DataView", { timeout: 10000 }, () => {
 
       await waitUntilTableLoadedHack();
 
-      expect(within(container).queryByRole("table")).toBeNull();
-      expect(within(container).queryByRole("list")).not.toBeNull();
+      expect(within(container).queryByRole("table")).not.toBeInTheDocument();
+      expect(within(container).queryByRole("list")).toBeVisible();
     });
 
     test("displays the layout switcher", async () => {
@@ -156,7 +156,7 @@ describe("DataView", { timeout: 10000 }, () => {
     });
   });
 
-  test("can display meta text", () => {
+  test("can display meta text", async () => {
     const metaText = "Last updated 12 hours ago";
 
     render(
@@ -171,6 +171,8 @@ describe("DataView", { timeout: 10000 }, () => {
         />
       </OdysseyProvider>,
     );
+
+    await waitUntilTableLoadedHack();
 
     expect(screen.getByText(metaText)).toBeVisible();
   });
@@ -192,8 +194,11 @@ describe("DataView", { timeout: 10000 }, () => {
         </OdysseyProvider>,
       );
 
+      const table = await screen.findByRole("table");
+
       expect(await screen.findByText(data[0].name)).toBeVisible();
       expect(await screen.findByText(data[1].name)).toBeVisible();
+      expect(await within(table).findAllByRole("row")).toHaveLength(7);
 
       const filterButton = screen.getByLabelText("Filters", {
         selector: "button",
@@ -210,16 +215,14 @@ describe("DataView", { timeout: 10000 }, () => {
       const nameInput = within(nameFilterMenu).getByLabelText("Name");
       const submitButton = within(nameFilterMenu).getByRole("button");
 
-      await user.click(nameInput);
-
-      await user.keyboard(`${data[1].name}{ENTER}`);
+      await user.type(nameInput, data[1].name);
       await user.click(submitButton);
 
-      await screen.findByText("Clear filters");
+      expect(await screen.findByText("Clear filters")).toBeVisible();
 
-      const table = screen.getByRole("table");
-      expect(screen.queryByText(data[0].name)).toBeNull();
+      expect(screen.queryByText(data[0].name)).not.toBeInTheDocument();
       expect(await within(table).findByText(data[1].name)).toBeVisible();
+      expect(await within(table).findAllByRole("row")).toHaveLength(2);
     });
 
     test("can search rows", async () => {
@@ -249,7 +252,7 @@ describe("DataView", { timeout: 10000 }, () => {
       await user.click(submitButton);
 
       const table = screen.getByRole("table");
-      expect(screen.queryByText(data[0].name)).toBeNull();
+      expect(screen.queryByText(data[0].name)).not.toBeInTheDocument();
       expect(await within(table).findByText(data[1].name)).toBeVisible();
     });
 
@@ -280,7 +283,7 @@ describe("DataView", { timeout: 10000 }, () => {
       await user.click(submitButton);
 
       const table = screen.getByRole("table");
-      expect(screen.queryByText(data[0].name)).toBeNull();
+      expect(screen.queryByText(data[0].name)).not.toBeInTheDocument();
       expect(await within(table).findByText(data[1].name)).toBeVisible();
 
       const clearButton = screen.getByLabelText("Clear", {
@@ -539,7 +542,7 @@ describe("DataView", { timeout: 10000 }, () => {
 
       expect(
         screen.queryByText(`${data.length} selected`, { selector: "button" }),
-      ).toBeNull();
+      ).not.toBeInTheDocument();
     });
 
     test("can perform bulk actions on rows", async () => {
@@ -756,7 +759,7 @@ describe("DataView", { timeout: 10000 }, () => {
       await waitUntilTableLoadedHack();
       expect(
         screen.queryByText(`This is additional content for ${data[0].name}`),
-      ).toBeNull();
+      ).not.toBeInTheDocument();
 
       const firstBodyRow = (await screen.findAllByRole("row"))[1];
       const firstBodyRowExpandButton = within(firstBodyRow).getByLabelText(
@@ -767,7 +770,7 @@ describe("DataView", { timeout: 10000 }, () => {
 
       expect(
         screen.queryByText(`This is additional content for ${data[0].name}`),
-      ).not.toBeNull();
+      ).toBeVisible();
     });
   });
 
@@ -794,7 +797,7 @@ describe("DataView", { timeout: 10000 }, () => {
     expect(await screen.findAllByText(data[0].name)).toHaveLength(1);
     expect(
       screen.queryByText(`This is additional content for ${data[0].name}`),
-    ).toBeNull();
+    ).not.toBeInTheDocument();
 
     const firstCard = (await screen.findAllByRole("listitem"))[0];
     const firstCardExpandButton = within(firstCard).getByLabelText("Expand", {
@@ -804,7 +807,7 @@ describe("DataView", { timeout: 10000 }, () => {
 
     expect(
       screen.queryByText(`This is additional content for ${data[0].name}`),
-    ).not.toBeNull();
+    ).toBeVisible();
   });
 
   test("can display empty state", async () => {
@@ -825,7 +828,7 @@ describe("DataView", { timeout: 10000 }, () => {
       </OdysseyProvider>,
     );
 
-    expect(await screen.findByText(emptyText)).not.toBeNull();
+    expect(await screen.findByText(emptyText)).toBeVisible();
   });
 
   test("can display no-results state", async () => {
@@ -846,7 +849,7 @@ describe("DataView", { timeout: 10000 }, () => {
       </OdysseyProvider>,
     );
 
-    expect(await screen.findByText(noResultsText)).not.toBeNull();
+    expect(await screen.findByText(noResultsText)).toBeVisible();
   });
 
   test("can sort rows", async () => {
@@ -947,7 +950,7 @@ describe("DataView", { timeout: 10000 }, () => {
     const cityCheckbox = within(visibilityMenu).getByText("City");
     await user.click(cityCheckbox);
 
-    expect(screen.queryByText(data[0].city)).toBeNull();
+    expect(screen.queryByText(data[0].city)).not.toBeInTheDocument();
   });
 
   test("can resize columns", async () => {
@@ -1000,7 +1003,7 @@ describe("DataView", { timeout: 10000 }, () => {
         within(paginationContainer).getByLabelText("Next page", {
           selector: "button",
         }),
-      ).toBeInTheDocument();
+      ).toBeVisible();
     });
 
     test("displays loadMore pagination", async () => {
@@ -1023,7 +1026,7 @@ describe("DataView", { timeout: 10000 }, () => {
 
       expect(
         screen.getByText("Show more", { selector: "button" }),
-      ).toBeInTheDocument();
+      ).toBeVisible();
     });
 
     test("can load more rows via loadMore pagination", async () => {
@@ -1079,8 +1082,8 @@ describe("DataView", { timeout: 10000 }, () => {
 
       await waitUntilTableLoadedHack();
 
-      expect(screen.queryByText(data[0].name)).not.toBeNull();
-      expect(screen.queryByText(data[2].name)).toBeNull();
+      expect(screen.queryByText(data[0].name)).toBeVisible();
+      expect(screen.queryByText(data[2].name)).not.toBeInTheDocument();
 
       const nextPageButton = screen.getByLabelText("Next page", {
         selector: "button",
@@ -1089,8 +1092,8 @@ describe("DataView", { timeout: 10000 }, () => {
 
       await screen.findByText(data[2].name);
 
-      expect(screen.queryByText(data[0].name)).toBeNull();
-      expect(screen.queryByText(data[2].name)).not.toBeNull();
+      expect(screen.queryByText(data[0].name)).not.toBeInTheDocument();
+      expect(screen.queryByText(data[2].name)).toBeVisible();
     });
 
     test("can go to the previous page", async () => {
@@ -1113,8 +1116,8 @@ describe("DataView", { timeout: 10000 }, () => {
 
       await waitUntilTableLoadedHack();
 
-      expect(screen.queryByText(data[0].name)).not.toBeNull();
-      expect(screen.queryByText(data[2].name)).toBeNull();
+      expect(screen.queryByText(data[0].name)).toBeVisible();
+      expect(screen.queryByText(data[2].name)).not.toBeInTheDocument();
 
       const nextPageButton = screen.getByLabelText("Next page", {
         selector: "button",
@@ -1123,8 +1126,8 @@ describe("DataView", { timeout: 10000 }, () => {
 
       await screen.findByText(data[2].name);
 
-      expect(screen.queryByText(data[0].name)).toBeNull();
-      expect(screen.queryByText(data[2].name)).not.toBeNull();
+      expect(screen.queryByText(data[0].name)).not.toBeInTheDocument();
+      expect(screen.queryByText(data[2].name)).toBeVisible();
 
       const prevPageButton = screen.getByLabelText("Previous page", {
         selector: "button",
@@ -1133,8 +1136,8 @@ describe("DataView", { timeout: 10000 }, () => {
 
       await waitUntilTableLoadedHack();
 
-      expect(screen.queryByText(data[0].name)).not.toBeNull();
-      expect(screen.queryByText(data[2].name)).toBeNull();
+      expect(screen.queryByText(data[0].name)).toBeVisible();
+      expect(screen.queryByText(data[2].name)).not.toBeInTheDocument();
     });
 
     test("can disable the next page button based on max rows", async () => {
@@ -1172,6 +1175,106 @@ describe("DataView", { timeout: 10000 }, () => {
 
       expect(prevPageButton).not.toBeDisabled();
       expect(nextPageButton).toBeDisabled();
+    });
+  });
+
+  describe("Controlled state props", () => {
+    test("isEmpty={false} suppresses empty placeholder after async fetch resolves with no rows", async () => {
+      const emptyText = "Custom empty placeholder";
+
+      render(
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["table"]}
+            emptyPlaceholder={
+              <EmptyState description={emptyText} heading="Empty" />
+            }
+            getData={() => []}
+            isEmpty={false}
+            tableLayoutOptions={{
+              columns,
+            }}
+          />
+        </OdysseyProvider>,
+      );
+
+      // Wait for loading to finish (progressbar disappears when isLoading becomes false)
+      await waitFor(() => {
+        expect(screen.queryByRole("progressbar")).not.toBeInTheDocument();
+      });
+
+      // Since isEmpty={false}, we will see the no results placeholder, rather than isEmpty placeholder
+      expect(await screen.findByText("There are no results.")).toBeVisible();
+      expect(screen.queryByText(emptyText)).not.toBeInTheDocument();
+    });
+
+    test("isNoResults={false} suppresses no-results placeholder when getData returns no rows", async () => {
+      const noResultsText = "Custom no results placeholder";
+
+      render(
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["table"]}
+            getData={() => []}
+            isEmpty={false}
+            isNoResults={false}
+            noResultsPlaceholder={
+              <EmptyState description={noResultsText} heading="No results" />
+            }
+            tableLayoutOptions={{ columns }}
+          />
+        </OdysseyProvider>,
+      );
+
+      // Wait for loading to finish
+      await waitFor(() => {
+        expect(screen.queryByRole("progressbar")).not.toBeInTheDocument();
+      });
+
+      expect(screen.queryByText(noResultsText)).not.toBeInTheDocument();
+    });
+
+    test("isLoading={false} keeps rows visible when dataQueryParams change triggers a refetch", async () => {
+      const user = userEvent.setup();
+
+      const asyncGetData = ({ ...props }) =>
+        new Promise<Person[]>((resolve) =>
+          setTimeout(() => resolve(filterData({ data, ...props })), 50),
+        );
+
+      render(
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["table"]}
+            getData={asyncGetData}
+            hasPagination
+            isLoading={false}
+            paginationType="paged"
+            resultsPerPage={2}
+            tableLayoutOptions={{ columns }}
+          />
+        </OdysseyProvider>,
+      );
+
+      await waitFor(() => {
+        expect(screen.getByText(data[0].name)).toBeVisible();
+      });
+      expect(screen.queryByText(data[2].name)).not.toBeInTheDocument();
+
+      const nextPageButton = screen.getByLabelText("Next page", {
+        selector: "button",
+      });
+      await user.click(nextPageButton);
+
+      // The async fetch for page 2 has started but not resolved yet (50 ms delay).
+      // With the bug, fetchData calls setIsLoading(true) which causes MRT to replace
+      // the actual rows with skeleton placeholders, making data[0].name disappear.
+      // With the fix, setIsLoading is not passed to fetchData when isLoading is controlled,
+      // so the previous page rows remain visible throughout.
+      expect(screen.getByText(data[0].name)).toBeVisible();
+
+      await screen.findByText(data[2].name);
+      expect(screen.queryByText(data[0].name)).not.toBeInTheDocument();
     });
   });
 });
