@@ -1,0 +1,4 @@
+// TSConfig customizations can go in this file. These will override those provided by the stack.
+{
+  "extends": "./tsconfig.production.json"
+}

@@ -1,0 +1,18 @@
+{
+  "name": "@okta/font",
+  "version": "0.0.0-development",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build:clean": "rimraf dist",
+    "build:source": "mkdir -p ./dist/css && lightningcss --minify --sourcemap ./src/css/fonts.css --output-file ./dist/css/fonts.css && cp -R ./src/fonts/ ./dist/fonts/",
+    "build": "yarn build:clean && yarn build:source"
+  },
+  "devDependencies": {
+    "lightningcss-cli": "^1.30.2",
+    "rimraf": "^6.0.1"
+  }
+}

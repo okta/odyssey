@@ -188,6 +188,7 @@ const BreadcrumbList = ({
       aria-label={t("breadcrumbs.label.text")}
       data-se={testId}
       maxItems={children.length + 1}
+      separator={<span translate="no">/</span>}
       translate={translate}
     >
       {homeHref && (

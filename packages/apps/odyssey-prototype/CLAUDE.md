@@ -103,7 +103,7 @@ When a user asks to build a new feature or page:
 
 ### Rule 7: TypeScript Required
 
-All application source files must be `.tsx` or `.ts`. Do not add `.js` or `.jsx` source files. Tooling and build configuration files (for example, `eslint.config.js`, `vite.config.*`, `postcss.config.*`) may remain in JavaScript when that is the tool’s recommended format.
+All application source files must be `.tsx` or `.ts`. Do not add `.js` or `.jsx` source files. Tooling and build configuration files (for example, `eslint.config.js`, `vite.config.*`, `postcss.config.*`) may remain in JavaScript when that is the tool's recommended format.
 
 ### Rule 8: Page Layout Patterns
 

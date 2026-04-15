@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.58.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.57.0...v1.58.0) (2026-04-15)
+
+### Features
+
+- move packages to new platform directory ([#233](https://github.com/atko-eng/odyssey-design-system/issues/233)) ([35057b6](https://github.com/atko-eng/odyssey-design-system/commit/35057b66a8de600ce104eaa027ce1c819d1fb55e))
+
 ## [1.57.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.56.0...v1.57.0) (2026-04-01)
 
 **Note:** Version bump only for package @okta/odyssey-eslint-config

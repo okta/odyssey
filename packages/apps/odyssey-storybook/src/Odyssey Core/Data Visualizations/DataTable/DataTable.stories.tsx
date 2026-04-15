@@ -612,7 +612,11 @@ export const Empty: StoryObj<DataTableProps> = {
     hasColumnResizing: true,
     hasColumnVisibility: false,
     hasFilters: true,
-    hasPagination: false,
+    // resultsPerPage > 50 would normally enable row virtualization,
+    // but this story verifies virtualization stays disabled for empty data
+    // so the empty placeholder is not clipped.
+    hasPagination: true,
+    resultsPerPage: 100,
     hasRowSelection: true,
     hasSearch: true,
     hasSorting: true,

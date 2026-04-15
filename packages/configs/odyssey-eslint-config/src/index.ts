@@ -86,7 +86,7 @@ const eslintConfig = createTsEslintConfig(
     ignores: [
       "packages/contributions/**/*",
       "packages/core/odyssey-contribution-tooling/**/*",
-      "packages/tools/**/*",
+      "packages/platform/**/*",
     ],
     plugins: {
       header: modifiedHeaderPlugin,
@@ -194,7 +194,7 @@ const eslintConfig = createTsEslintConfig(
       "**/dist/**/*",
       "**/node_modules/**/*",
       "**/src/properties/ts/*.ts",
-      "packages/tools/odyssey-contributions/**/files/**/*",
+      "packages/platform/odyssey-contributions-stack/**/files/**/*",
     ],
   },
 
