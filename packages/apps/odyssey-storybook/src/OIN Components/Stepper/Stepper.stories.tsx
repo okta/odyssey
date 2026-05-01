@@ -15,7 +15,12 @@ import {
   StepperNavigation,
   StepperProps,
 } from "@okta/odyssey-contributions-oin-components";
-import { useOdysseyDesignTokens } from "@okta/odyssey-react-mui";
+import {
+  Box,
+  Card,
+  Status,
+  useOdysseyDesignTokens,
+} from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import { expect, userEvent, waitFor, within } from "storybook/test";
@@ -450,5 +455,66 @@ OnlyBackNavigation.parameters = {
       story:
         "Users can navigate back to previously completed steps by clicking the step but cannot move forward without completing the current step",
     },
+  },
+};
+
+export const WithStepContentPreviewCard: StoryObj<StepperProps> = {
+  name: "With custom content",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Steps can include custom React content using MUI's StepContent component, which renders below the step label. This example shows a preview card for the OIN catalog quickstart guide.",
+      },
+    },
+  },
+
+  render: function C() {
+    const PreviewCard = () => (
+      <Box sx={{ maxWidth: 250 }}>
+        <Card
+          description="Optional additional description about the card topic that truncates after three lines to keep it managable."
+          title="Card Title"
+          variant="tile"
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 1,
+            }}
+          >
+            {["SCIM", "OIDC", "SAML"].map((category) => (
+              <Status key={category} label={category} severity="default" />
+            ))}
+          </Box>
+        </Card>
+      </Box>
+    );
+
+    const stepsWithContent = [
+      {
+        label: "Choose integration type",
+        content: <PreviewCard />,
+        description: "Select the integration path that best fits your needs",
+      },
+      {
+        label: "Configure settings",
+        description: "Set up your integration parameters",
+      },
+      {
+        label: "Review and submit",
+        description: "Verify your configuration before submitting",
+      },
+    ];
+
+    return (
+      <Stepper
+        activeStep={0}
+        onChange={() => {}}
+        orientation="vertical"
+        steps={stepsWithContent}
+      />
+    );
   },
 };

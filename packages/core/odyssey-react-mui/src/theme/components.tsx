@@ -1079,16 +1079,17 @@ export const getComponents = ({
             },
           },
 
+          [`&.${chipClasses.focusVisible}`]: {
+            backgroundColor: odysseyTokens.HueNeutral200,
+            outlineColor: odysseyTokens.FocusOutlineColorPrimary,
+            outlineOffset: odysseyTokens.FocusOutlineOffsetTight,
+            outlineStyle: odysseyTokens.FocusOutlineStyle,
+            outlineWidth: odysseyTokens.FocusOutlineWidthMain,
+          },
+
           ...(ownerState.clickable && {
             "&:hover": {
               backgroundColor: odysseyTokens.HueNeutral200,
-            },
-            [`&.${chipClasses.focusVisible}`]: {
-              backgroundColor: odysseyTokens.HueNeutral200,
-              outlineColor: odysseyTokens.FocusOutlineColorPrimary,
-              outlineOffset: odysseyTokens.FocusOutlineOffsetTight,
-              outlineStyle: odysseyTokens.FocusOutlineStyle,
-              outlineWidth: odysseyTokens.FocusOutlineWidthMain,
             },
             "&:active": {
               boxShadow: "none",

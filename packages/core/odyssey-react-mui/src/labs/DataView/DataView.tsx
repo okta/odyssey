@@ -126,11 +126,13 @@ const DataView = <TData extends MRT_RowData>({
   metaText,
   noResultsPlaceholder,
   onChangeRowSelection,
+  onColumnVisibilityChange,
   onReorderRows,
   onRowSelectionChange,
   paginationType = "paged",
   resultsPerPage = 20,
   searchDelayTime,
+  searchFieldLabel,
   cardLayoutOptions,
   tableLayoutOptions,
   totalRows,
@@ -176,7 +178,7 @@ const DataView = <TData extends MRT_RowData>({
 
   const [tableState, setTableState] = useState<TableState>({
     columnSorting: [],
-    columnVisibility: {},
+    columnVisibility: tableLayoutOptions?.initialColumnVisibility ?? {},
     rowDensity: tableLayoutOptions?.initialDensity ?? densityValues[0],
   });
 
@@ -286,6 +288,11 @@ const DataView = <TData extends MRT_RowData>({
   useEffect(() => {
     onPaginationChange?.(pagination);
   }, [onPaginationChange, pagination]);
+
+  // Fire onColumnVisibilityChange if column visibility changes
+  useEffect(() => {
+    onColumnVisibilityChange?.(tableState.columnVisibility);
+  }, [onColumnVisibilityChange, tableState.columnVisibility]);
 
   // Retrieve the data
   useEffect(() => {
@@ -427,6 +434,7 @@ const DataView = <TData extends MRT_RowData>({
           onChangeFilters={hasFilters ? setFilters : undefined}
           onChangeSearch={hasSearch ? setSearch : undefined}
           searchDelayTime={searchDelayTime}
+          searchFieldLabel={searchFieldLabel}
         />
       )}
 

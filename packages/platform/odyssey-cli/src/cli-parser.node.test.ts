@@ -36,12 +36,6 @@ vi.mock("node:fs", async () => {
 vi.mock("node:fs/promises", async () => {
   return ((await vi.importActual("memfs")).fs as Volume).promises;
 });
-vi.mock("node:child_process", async () => {
-  return {
-    ...(await vi.importActual("node:child_process")),
-    execSync: vi.fn(),
-  };
-});
 vi.mock("open");
 const { mockLogger } = vi.hoisted(() => ({
   mockLogger: {
@@ -78,8 +72,6 @@ const mockedExecAsync = vi.mocked(execAsync);
 const mockedRunWatchTask = vi.mocked(runWatchTask);
 const mockedOpen = vi.mocked(open);
 
-const spyOnProcessCwd = vi.spyOn(process, "cwd");
-
 describe("odyssey-cli", () => {
   const CWD = "/packages/contributions/fake-contribution-package";
 
@@ -92,7 +84,7 @@ describe("odyssey-cli", () => {
 
     mockedExecSync.mockReturnValue("FAKE_TOKEN");
 
-    spyOnProcessCwd.mockImplementation(() => CWD);
+    vi.spyOn(process, "cwd").mockImplementation(() => CWD);
 
     vi.spyOn(console, "error").mockImplementation(() => {});
   });
@@ -207,13 +199,13 @@ describe("odyssey-cli", () => {
           chokidarOptions: {
             ignored: expect.any(Function),
           },
-          logger: expect.objectContaining({
+          logger: {
             error: expect.any(Function),
             info: expect.any(Function),
             processStart: expect.any(Function),
             success: expect.any(Function),
             warn: expect.any(Function),
-          }),
+          },
           onChange: expect.any(Function),
           path: "/packages/contributions/fake-contribution-package/src/properties",
         });
@@ -258,7 +250,7 @@ describe("odyssey-cli", () => {
         await runCliI18n("generate");
 
         expect(mockLogger.warn).toHaveBeenCalledWith(
-          expect.stringContaining("Translations are not yet setup."),
+          `Translations are not yet setup.\n\nIf translations are required for your project, run the following command:\n\`yarn odyssey-cli i18n init\``,
         );
 
         // nothing written to the virtual fs
@@ -320,7 +312,7 @@ describe("odyssey-cli", () => {
           // mock date to keep generated copyright date is consistent
           vi.setSystemTime(new Date("2050-06-21"));
 
-          spyOnProcessCwd.mockImplementation(() => cwd);
+          vi.spyOn(process, "cwd").mockImplementation(() => cwd);
 
           const tsDir = `${cwd}/src/properties/ts`;
           vol.mkdirSync(tsDir, { recursive: true });

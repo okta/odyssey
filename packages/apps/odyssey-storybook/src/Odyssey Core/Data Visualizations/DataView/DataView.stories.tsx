@@ -140,6 +140,9 @@ const meta = {
     searchDelayTime: {
       control: "number",
     },
+    searchFieldLabel: {
+      control: "text",
+    },
     enableVirtualization: {
       control: "boolean",
     },
@@ -252,6 +255,7 @@ const meta = {
     hasCustomNoResultsPlaceholder: false,
     maxGridColumns: 3,
     onChangeRowSelection: fn(),
+    onColumnVisibilityChange: fn(),
     paginationType: "paged",
     resultsPerPage: 20,
   },
@@ -309,10 +313,12 @@ const meta = {
             : undefined
         }
         onChangeRowSelection={onChangeRowSelection}
+        onColumnVisibilityChange={args.onColumnVisibilityChange}
         onReorderRows={onReorderRows}
         paginationType={args.paginationType}
         resultsPerPage={args.resultsPerPage}
         searchDelayTime={args.searchDelayTime}
+        searchFieldLabel={args.searchFieldLabel}
         tableLayoutOptions={{
           columns: personColumns,
           hasSorting: args.hasSorting,
@@ -1202,6 +1208,30 @@ export const GrowColumnWithoutActions: Story = {
           },
         ],
         hasColumnResizing: true,
+      }),
+      [],
+    );
+
+    return (
+      <DataView
+        availableLayouts={tableLayoutOnly}
+        getData={getData}
+        tableLayoutOptions={tableLayoutOptions}
+      />
+    );
+  },
+};
+
+export const InitialColumnVisibility: Story = {
+  render: function C() {
+    const [data, setData] = useState<Person[]>(personData);
+    const { getData } = useDataCallbacks(data, setData);
+
+    const tableLayoutOptions = useMemo<TableLayoutProps<Person>>(
+      () => ({
+        columns: personColumns,
+        hasColumnVisibility: true,
+        initialColumnVisibility: { age: false, risk: false },
       }),
       [],
     );

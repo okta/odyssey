@@ -32,8 +32,8 @@
     "@svgr/babel-plugin-transform-svg-component": "^8.0.0",
     "@svgr/core": "^8.1.0",
     "rimraf": "^6.0.1",
-    "svgo": "^3.0.2",
+    "svgo": "^4.0.1",
     "typescript": "^5.8.3"
   },
-  "version": "1.58.0"
+  "version": "1.59.0"
 }

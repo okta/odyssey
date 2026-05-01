@@ -28,4 +28,6 @@ export const UI_SHELL_RAISED_Z_INDEX = 101;
 
 export const UI_SHELL_OVERLAY_Z_INDEX = 200;
 
+export const SKIP_LINKS_Z_INDEX = 300;
+
 export const emptySideNavItems = [] satisfies SideNavProps["sideNavItems"];

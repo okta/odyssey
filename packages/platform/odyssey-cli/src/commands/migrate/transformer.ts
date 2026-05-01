@@ -1,8 +1,7 @@
 import type { ASTPath, FileInfo, API as JSCodeshiftAPI } from "jscodeshift";
 
-import { log } from "@clack/prompts";
+import { createScopedLogger } from "@okta/odyssey-prompts";
 import { namedTypes } from "ast-types";
-import { styleText } from "node:util";
 
 import { transformComponentUsage } from "./codemods/transformComponentUsage.js";
 import {
@@ -11,40 +10,12 @@ import {
 } from "./codemods/transformNamedImport.js";
 import { COMPONENT_MAPPINGS } from "./mappings/index.js";
 import { MigrationOptions } from "./migrate.js";
-import { Logger } from "./utils.js";
 
-type TransformOptions = Pick<MigrationOptions, "components" | "logger"> & {
+type TransformOptions = Pick<
+  MigrationOptions,
+  "components" | "isCI" | "logger"
+> & {
   odysseyVerbose?: boolean;
-};
-
-/**
- * Creates a file-scoped logger that emits the file path header.
- * Uses a closure to maintain `headerEmitted` state across multiple logger calls, ensuring each file gets exactly one header.
- */
-const createScopedLogger = (
-  filePath: string,
-  baseLogger: Logger,
-  verbose: boolean,
-): Logger => {
-  let headerEmitted = false;
-
-  return (args) => {
-    const isActionable = args.type !== "debug";
-
-    // Emit header if: verbose mode, or actionable message
-    if (!headerEmitted && (verbose || isActionable)) {
-      log.message(styleText("bold", filePath), {
-        symbol: styleText("gray", "├──"),
-      });
-      headerEmitted = true;
-    }
-
-    baseLogger({
-      ...args,
-      // Indent messages after the header for better visual grouping.
-      options: headerEmitted ? { indentation: 4 } : undefined,
-    });
-  };
 };
 
 /**
@@ -70,11 +41,12 @@ export default function transformer(
   const componentKeys = options.components.split(",");
 
   let hasChanges = false;
-  const logger = createScopedLogger(
-    fileInfo.path,
-    options.logger,
-    options.odysseyVerbose === true,
-  );
+  const logger = createScopedLogger({
+    label: fileInfo.path,
+    baseLogger: options.logger,
+    isCI: options.isCI,
+    verbose: options.odysseyVerbose,
+  });
 
   try {
     const fileRoot = j(fileInfo.source);

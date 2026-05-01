@@ -1,0 +1,35 @@
+{
+  "name": "@okta/odyssey-prompts",
+  "author": "Okta, Inc.",
+  "license": "UNLICENSED",
+  "version": "0.0.0-development",
+  "description": "Styled wrapper around @clack/prompts for consistent Odyssey CLI styling",
+  "main": "./dist/index.js",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atko-eng/odyssey-design-system",
+    "directory": "packages/platform/odyssey-prompts"
+  },
+  "scripts": {
+    "build:clean": "rimraf dist",
+    "build": "yarn build:clean && tsc",
+    "build:watch": "yarn build:clean && tsc --watch",
+    "test": "NODE_ENV=test vitest run --reporter=default"
+  },
+  "dependencies": {
+    "@clack/prompts": "^1.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.1.0",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
+  },
+  "engines": {
+    "node": ">=20.12.0"
+  }
+}

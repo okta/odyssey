@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.59.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.58.0...v1.59.0) (2026-04-29)
+
+### Features
+
+- add description prop to DataFilter (OKTA-1146774) ([#264](https://github.com/atko-eng/odyssey-design-system/issues/264)) ([1531f73](https://github.com/atko-eng/odyssey-design-system/commit/1531f731e31463a2e4b5b3d7dc35f8f6ceea1669))
+- add searchFieldLabel prop to DataFilters ([#263](https://github.com/atko-eng/odyssey-design-system/issues/263)) ([59d96a4](https://github.com/atko-eng/odyssey-design-system/commit/59d96a41c861a5a531f7c1ea71c2c7852029c818))
+- add SkipToContent accessibility button to UI Shell ([#242](https://github.com/atko-eng/odyssey-design-system/issues/242)) ([b248311](https://github.com/atko-eng/odyssey-design-system/commit/b248311394a486e1d2ae8d3d17b3fe2b548a04db))
+- expose initialColumnVisibility and onColumnVisibilityChange for… ([#262](https://github.com/atko-eng/odyssey-design-system/issues/262)) ([ddf206f](https://github.com/atko-eng/odyssey-design-system/commit/ddf206fc614a11872e03b39fdc604895c8900788))
+
+### Bug Fixes
+
+- improve contrast mode detection — flicker, shadow DOM, and nested containers ([#222](https://github.com/atko-eng/odyssey-design-system/issues/222)) ([7e09c12](https://github.com/atko-eng/odyssey-design-system/commit/7e09c12d1af19fe9a688357e8a6d10cbf53b1b24))
+- tag component accessibility and rendering fixes ([#251](https://github.com/atko-eng/odyssey-design-system/issues/251)) ([ac3112b](https://github.com/atko-eng/odyssey-design-system/commit/ac3112bd2111ea4dc2a9a24d7d90cf7b0cc025cc))
+
 ## [1.58.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.57.0...v1.58.0) (2026-04-15)
 
 ### Bug Fixes

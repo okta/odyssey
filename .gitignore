@@ -17,7 +17,8 @@ __vitest-screenshots/
 !.yarn/versions
 
 # Jetbrains
-.idea/
+.idea/*
+!.idea/jsLinters/
 *.iml
 
 # Lerna
@@ -34,3 +35,7 @@ debug-storybook.log
 
 # Logs for ok-ui commands
 **/ok-ui-logs
+
+# Claude Code local config
+.claude/settings.local.json
+.claude/worktrees/

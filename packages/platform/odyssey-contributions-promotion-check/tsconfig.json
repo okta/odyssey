@@ -1,0 +1,12 @@
+{
+  "extends": "@okta/odyssey-typescript/tsconfig.node16.json",
+  "compilerOptions": {
+    "lib": ["ESNext", "DOM"],
+    "sourceMap": true,
+    "target": "es2020",
+    "outDir": "dist",
+    "rootDir": "src",
+    "types": ["vitest/globals"]
+  },
+  "include": ["src"]
+}

@@ -1,8 +1,7 @@
-import { log } from "@clack/prompts";
+import { type Logger } from "@okta/odyssey-prompts";
 import partition from "lodash.partition";
 import { existsSync } from "node:fs";
 import path from "node:path";
-import { styleText } from "node:util";
 import readPackageUp from "read-pkg-up";
 import { coerce, gte } from "semver";
 
@@ -225,63 +224,5 @@ export const getInstalledDeps = (): Record<string, string> => {
  */
 export const formatMigrationLabel = (key: string): string => {
   const { source, target } = COMPONENT_MAPPINGS[key];
-  return `${styleText("cyan", source.component)} → ${styleText("green", target.component)} ${styleText("dim", `(${source.package} → ${target.package})`)}`;
-};
-
-type LogType = "warn" | "info" | "error";
-
-type LogLevel = LogType | "debug";
-
-type Message = string | { details: string[]; title: string };
-
-type EmitLog = {
-  message: Message;
-  options?: {
-    indentation?: number;
-  };
-  type: LogLevel;
-};
-
-export type Logger = (args: EmitLog) => void;
-
-const logColor = {
-  warn: (message: string) => styleText("yellow", message),
-  info: (message: string) => styleText("cyan", message),
-  error: (message: string) => styleText("red", message),
-  debug: (message: string) => styleText("dim", message),
-} as const;
-
-/**
- * Creates a logger function that emits colorized messages.
- *
- * @param isCI - Whether running in CI mode (affects formatting).
- * @param verbose - When false, suppresses debug-level messages.
- */
-export const createLogger = (isCI: boolean, verbose = false): Logger => {
-  return ({ message, type, options: { indentation = 0 } = {} }: EmitLog) => {
-    const isDebug = type === "debug";
-    const indent = " ".repeat(indentation);
-
-    // Filter debug messages unless verbose is enabled
-    if (isDebug && !verbose) {
-      return;
-    }
-
-    const formattedMessage =
-      typeof message === "string"
-        ? message
-        : `${styleText("bold", message.title)}\n${message.details.map((line) => styleText("yellow", `${indent} - ${line}`)).join("\n")}`;
-
-    if (isCI) {
-      console[type](`[migrateComponent] ${formattedMessage}`);
-    } else {
-      const colored = logColor[type](`${indent}${formattedMessage}`);
-
-      if (isDebug) {
-        log.message(colored, { symbol: styleText("dim", "○") });
-      } else {
-        log[type](colored);
-      }
-    }
-  };
+  return `${source.component} → ${target.component} (${source.package} → ${target.package})`;
 };

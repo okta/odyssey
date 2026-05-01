@@ -921,36 +921,100 @@ describe("DataView", { timeout: 10000 }, () => {
     expect(tBody?.className).toContain("MuiTableBody-compact");
   });
 
-  test("can change column visibility", async () => {
-    const user = userEvent.setup();
+  describe("Column visibility", () => {
+    test("can change column visibility", async () => {
+      const user = userEvent.setup();
 
-    render(
-      <OdysseyProvider>
-        <DataView
-          availableLayouts={["table"]}
-          getData={getData}
-          tableLayoutOptions={{
-            columns,
-            hasColumnVisibility: true,
-          }}
-        />
-      </OdysseyProvider>,
-    );
+      render(
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["table"]}
+            getData={getData}
+            tableLayoutOptions={{
+              columns,
+              hasColumnVisibility: true,
+            }}
+          />
+        </OdysseyProvider>,
+      );
 
-    // Detect if the data has loaded in
-    await screen.findByText(data[0].city);
+      // Detect if the data has loaded in
+      await screen.findByText(data[0].city);
 
-    const visibilityButton = screen.getByLabelText("Show/hide columns", {
-      selector: "button",
+      const visibilityButton = screen.getByLabelText("Show/hide columns", {
+        selector: "button",
+      });
+      await user.click(visibilityButton);
+
+      const visibilityMenu = getControlledElement({
+        element: visibilityButton,
+      });
+
+      const cityCheckbox = within(visibilityMenu).getByText("City");
+      await user.click(cityCheckbox);
+
+      expect(screen.queryByText(data[0].city)).not.toBeInTheDocument();
     });
-    await user.click(visibilityButton);
 
-    const visibilityMenu = getControlledElement({ element: visibilityButton });
+    test("initialColumnVisibility hides specified columns on mount", async () => {
+      render(
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["table"]}
+            getData={getData}
+            tableLayoutOptions={{
+              columns,
+              hasColumnVisibility: true,
+              initialColumnVisibility: { city: false },
+            }}
+          />
+        </OdysseyProvider>,
+      );
 
-    const cityCheckbox = within(visibilityMenu).getByText("City");
-    await user.click(cityCheckbox);
+      await waitUntilTableLoadedHack();
 
-    expect(screen.queryByText(data[0].city)).not.toBeInTheDocument();
+      expect(screen.queryByText(data[0].city)).not.toBeInTheDocument();
+    });
+
+    test("onColumnVisibilityChange called when column is toggled", async () => {
+      const user = userEvent.setup();
+
+      const mockOnColumnVisibilityChange = vi.fn();
+
+      render(
+        <OdysseyProvider>
+          <DataView
+            availableLayouts={["table"]}
+            getData={getData}
+            onColumnVisibilityChange={mockOnColumnVisibilityChange}
+            tableLayoutOptions={{
+              columns,
+              hasColumnVisibility: true,
+            }}
+          />
+        </OdysseyProvider>,
+      );
+
+      await screen.findByText(data[0].city);
+
+      const visibilityButton = screen.getByLabelText("Show/hide columns", {
+        selector: "button",
+      });
+      await user.click(visibilityButton);
+
+      const visibilityMenu = getControlledElement({
+        element: visibilityButton,
+      });
+      const cityLabel = within(visibilityMenu).getByText("City");
+      await user.click(cityLabel);
+
+      await waitFor(() => {
+        expect(screen.queryByText(data[0].city)).not.toBeInTheDocument();
+      });
+      expect(mockOnColumnVisibilityChange).toHaveBeenCalledWith({
+        city: false,
+      });
+    });
   });
 
   test("can resize columns", async () => {

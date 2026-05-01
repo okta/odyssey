@@ -1,9 +1,10 @@
+import type { Logger } from "@okta/odyssey-prompts";
+
 import { namedTypes } from "ast-types";
 import { ASTPath, Collection, JSCodeshift } from "jscodeshift";
 import partition from "lodash.partition";
 
 import { ComponentMapping } from "../mappings/index.js";
-import { Logger } from "../utils.js";
 import {
   findOrCreateImportDeclaration,
   getImportedSpecifierName,

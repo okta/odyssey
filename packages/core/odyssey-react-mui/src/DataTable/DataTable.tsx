@@ -280,6 +280,10 @@ export type DataTableProps = {
    */
   searchDelayTime?: number;
   /**
+   * Overrides the default label for the search field.
+   */
+  searchFieldLabel?: string;
+  /**
    * Allows for external control of the selected row state
    * use in tandem with onChangeRowSelection to manage your state
    */
@@ -364,6 +368,7 @@ const DataTable = ({
   hasRowSelection,
   hasSearch,
   hasSearchSubmitButton,
+  searchFieldLabel,
   hasSorting,
   initialDensity = densityValues[0],
   initialSearchValue = "",
@@ -1023,6 +1028,7 @@ const DataTable = ({
             onChangeFilters={hasFilters ? setFilters : undefined}
             onChangeSearch={hasSearch ? setSearch : undefined}
             searchDelayTime={searchDelayTime}
+            searchFieldLabel={searchFieldLabel}
           />
         </Box>
       )}

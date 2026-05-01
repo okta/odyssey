@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["components"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["libraryName", "componentName"],
+        "additionalProperties": false,
+        "properties": {
+          "libraryName": {
+            "type": "string",
+            "description": "The folder name of the contributions package (e.g. \"wp-components\")"
+          },
+          "componentName": {
+            "type": "string",
+            "description": "The exported component name (e.g. \"Dialog\")"
+          },
+          "similarTo": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?::[A-Za-z][a-zA-Z0-9]*$",
+              "description": "Reference in the format \"libraryName::ComponentName\""
+            },
+            "minItems": 1,
+            "description": "Components with different requirements but matching designs to this one"
+          },
+          "forkedFrom": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?::[A-Za-z][a-zA-Z0-9]*$",
+            "description": "The component this was copy-pasted from, in the format \"libraryName::ComponentName\""
+          },
+          "isIgnoredFromPromotion": {
+            "type": "boolean",
+            "const": true,
+            "description": "When true, this component is excluded from Odyssey Core promotion recommendations. Omit for eligible components."
+          }
+        },
+        "if": {
+          "required": ["similarTo"]
+        },
+        "then": {
+          "not": {
+            "required": ["forkedFrom"]
+          }
+        }
+      }
+    }
+  }
+}

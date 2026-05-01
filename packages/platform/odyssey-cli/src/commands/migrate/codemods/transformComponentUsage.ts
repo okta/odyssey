@@ -1,3 +1,4 @@
+import type { Logger } from "@okta/odyssey-prompts";
 import type { ExpressionKind } from "ast-types/lib/gen/kinds.js";
 
 import { valueToNode } from "@babel/types";
@@ -7,7 +8,6 @@ import partition from "lodash.partition";
 import { print as printAST } from "recast";
 
 import { ComponentMapping } from "../mappings/index.js";
-import { Logger } from "../utils.js";
 import {
   buildTargetAttributes,
   findEnclosingFunction,

@@ -5,18 +5,6 @@ import { describe, expect, it, vi } from "vitest";
 
 import transformer from "./transformer.js";
 
-vi.mock("@clack/prompts", async () => {
-  const actual =
-    await vi.importActual<typeof import("@clack/prompts")>("@clack/prompts");
-  return {
-    ...actual,
-    log: {
-      ...actual.log,
-      message: vi.fn(),
-    },
-  };
-});
-
 vi.mock("./mappings/index.js", () => {
   return {
     COMPONENT_MAPPINGS: {
@@ -693,22 +681,18 @@ const view = <NestedSource options={someVariable} flat={1} />;
     const output = runTransform(input, { components: "NestedSource" });
 
     expect(logger).toHaveBeenCalledTimes(2);
-    expect(logger).toHaveBeenCalledWith(
-      expect.objectContaining({
-        message:
-          'Kept "options" as-is - nested mapping expects an inline object, verify manually',
-        type: "warn",
-        options: { indentation: 4 },
-      }),
-    );
-    expect(logger).toHaveBeenCalledWith(
-      expect.objectContaining({
-        message:
-          "Kept inline arrays/objects/functions as-is - no block body for hooks",
-        type: "warn",
-        options: { indentation: 4 },
-      }),
-    );
+    expect(logger).toHaveBeenCalledWith({
+      message:
+        'Kept "options" as-is - nested mapping expects an inline object, verify manually',
+      type: "warn",
+      options: { indentation: 2 },
+    });
+    expect(logger).toHaveBeenCalledWith({
+      message:
+        "Kept inline arrays/objects/functions as-is - no block body for hooks",
+      type: "warn",
+      options: { indentation: 2 },
+    });
     // The nested prop is passed through as-is (TypeScript will catch type mismatches)
     expect(output.trim()).toBe(`\
 import { NewNestedSource } from "@new/lib";
@@ -1132,16 +1116,14 @@ function App() {
   return <NewGroupedWidget viewOptions={viewOptions} layouts={layouts} />;
 }`);
 
-    expect(logger).toHaveBeenCalledWith(
-      expect.objectContaining({
-        type: "warn",
-        message: {
-          details: ["Verify type assertion (e.g., useMemo<Type>)"],
-          title: 'Created useMemo for "layouts"',
-        },
-        options: { indentation: 4 },
-      }),
-    );
+    expect(logger).toHaveBeenCalledWith({
+      type: "warn",
+      message: {
+        details: ["Verify type assertion (e.g., useMemo<Type>)"],
+        title: 'Created useMemo for "layouts"',
+      },
+      options: { indentation: 2 },
+    });
   });
 
   it("should wrap inline arrow function prop in useCallback", () => {
@@ -1398,18 +1380,16 @@ function App() {
     </>
   );
 }`);
-    expect(logger).toHaveBeenCalledWith(
-      expect.objectContaining({
-        type: "warn",
-        message: {
-          title: `"onPress" references "onPress"`,
-          details: [
-            `These variables [onPress] need to be wrapped in useMemo/useCallback`,
-          ],
-        },
-        options: { indentation: 4 },
-      }),
-    );
+    expect(logger).toHaveBeenCalledWith({
+      type: "warn",
+      message: {
+        title: `"onPress" references "onPress"`,
+        details: [
+          `These variables [onPress] need to be wrapped in useMemo/useCallback`,
+        ],
+      },
+      options: { indentation: 2 },
+    });
   });
 
   it("should fall back to inline for class components and not use useMemo", () => {
@@ -1431,14 +1411,12 @@ class App extends React.Component {
     return <NewGroupedWidget getData={fn} layouts={["list"]} />;
   }
 }`);
-    expect(logger).toHaveBeenCalledWith(
-      expect.objectContaining({
-        type: "warn",
-        message:
-          "Kept inline arrays/objects/functions as-is - hooks not available for class components",
-        options: { indentation: 4 },
-      }),
-    );
+    expect(logger).toHaveBeenCalledWith({
+      type: "warn",
+      message:
+        "Kept inline arrays/objects/functions as-is - hooks not available for class components",
+      options: { indentation: 2 },
+    });
   });
 
   it("should fall back to inline for class components with object defaults", () => {

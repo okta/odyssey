@@ -72,7 +72,7 @@ describe("utils", () => {
 
       expect(onChange).toHaveBeenCalledTimes(1);
       expect(mockLogger.info).toHaveBeenCalledWith(
-        expect.stringContaining("File changed"),
+        "File changed: test.properties",
       );
 
       expect(onChange).toHaveBeenCalled();

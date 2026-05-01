@@ -10,7 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
+import { userEvent } from "@vitest/browser/context";
 import { describe, test } from "vitest";
 
 import { Button } from "../Buttons/Button.js";
@@ -40,7 +41,16 @@ describe("DataFilters", () => {
       </OdysseyProvider>,
     );
 
-    expect(screen.getByText("Priority: Low")).toBeVisible();
+    const activeFiltersList = screen.getByRole("list", {
+      name: "Active filters",
+    });
+    expect(activeFiltersList).toBeVisible();
+    expect(
+      within(activeFiltersList).getByRole("button", {
+        name: "Priority: Low Remove tag",
+      }),
+    ).toBeVisible();
+
     expect(screen.queryByText("Priority: low")).not.toBeInTheDocument();
   });
 
@@ -109,6 +119,24 @@ describe("DataFilters", () => {
     expect(screen.getByLabelText("Filters")).toBeVisible();
   });
 
+  test("custom searchFieldLabel on search field", () => {
+    render(
+      <OdysseyProvider>
+        <DataFilters
+          hasSearchSubmitButton
+          onChangeSearch={vi.fn()}
+          searchFieldLabel="Search applications"
+        />
+      </OdysseyProvider>,
+    );
+
+    expect(screen.getByRole("searchbox")).toHaveAttribute(
+      "placeholder",
+      "Search applications",
+    );
+    expect(screen.getByRole("button", { name: "Search" })).toBeVisible();
+  });
+
   test("renders disabled state", () => {
     render(
       <OdysseyProvider>
@@ -131,5 +159,57 @@ describe("DataFilters", () => {
     expect(screen.getByRole("searchbox")).toBeDisabled();
     expect(screen.getByRole("button", { name: "Search" })).toBeDisabled();
     expect(screen.getByLabelText("Filters")).toBeDisabled();
+  });
+
+  const renderFilterWithDescription = ({ value }: { value?: string } = {}) => {
+    render(
+      <OdysseyProvider>
+        <DataFilters
+          filters={[
+            {
+              id: "app-filter",
+              label: "Application",
+              description:
+                "Filter by the application an AI agent is imported from",
+              variant: "select",
+              options: [
+                { label: "App 1", value: "app1" },
+                { label: "App 2", value: "app2" },
+              ],
+              value,
+            },
+          ]}
+          onChangeFilters={vi.fn()}
+        />
+      </OdysseyProvider>,
+    );
+  };
+
+  test("filter with description and no value shows description and dynamic text", async () => {
+    renderFilterWithDescription();
+
+    await userEvent.click(screen.getByLabelText("Filters"));
+
+    const filterMenu = screen.getByRole("menu");
+    expect(
+      within(filterMenu).getByText(
+        "Filter by the application an AI agent is imported from",
+      ),
+    ).toBeInTheDocument();
+    expect(within(filterMenu).getByText("Any application")).toBeInTheDocument();
+  });
+
+  test("filter with description and selected value shows description and selected value", async () => {
+    renderFilterWithDescription({ value: "app1" });
+
+    await userEvent.click(screen.getByLabelText("Filters"));
+
+    const filterMenu = screen.getByRole("menu");
+    expect(
+      within(filterMenu).getByText(
+        "Filter by the application an AI agent is imported from",
+      ),
+    ).toBeInTheDocument();
+    expect(within(filterMenu).getByText("app1")).toBeInTheDocument();
   });
 });

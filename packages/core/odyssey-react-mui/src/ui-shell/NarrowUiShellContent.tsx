@@ -34,6 +34,7 @@ import {
 } from "../OdysseyDesignTokensContext.js";
 import { InnerAppContainer } from "./InnerAppContainer.js";
 import { SideNav } from "./SideNav/SideNav.js";
+import { SkipToContent } from "./SkipToContent.js";
 import { HamburgerMenuIcon } from "./TopNav/HamburgerMenuIcon.js";
 import {
   UiShellContentProps,
@@ -330,6 +331,8 @@ const NarrowUiShellContent = ({
         odysseyDesignTokens={odysseyDesignTokens}
         ref={parentContainerRef}
       >
+        <SkipToContent appElement={appElement} />
+
         <StyledBannersContainer>
           {optionalComponents?.banners}
         </StyledBannersContainer>

@@ -22,6 +22,7 @@ import { AppSwitcher } from "./AppSwitcher/AppSwitcher.js";
 import { AppSwitcherAppIconData } from "./AppSwitcher/AppSwitcherApp.js";
 import { InnerAppContainer } from "./InnerAppContainer.js";
 import { SideNav } from "./SideNav/SideNav.js";
+import { SkipToContent } from "./SkipToContent.js";
 import { TopNav } from "./TopNav/TopNav.js";
 import {
   TURN_OFF_APP_SWITCHER,
@@ -129,6 +130,8 @@ const WideUiShellContent = ({
       odysseyDesignTokens={odysseyDesignTokens}
       ref={parentContainerRef}
     >
+      <SkipToContent appElement={appElement} />
+
       <StyledBannersContainer>
         {optionalComponents?.banners}
       </StyledBannersContainer>

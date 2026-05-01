@@ -11,6 +11,8 @@
  */
 
 import js from "@eslint/js";
+import json from "@eslint/json";
+import { contributionsPlugin } from "@okta/odyssey-contributions-promotion-check";
 import tsPlugin from "@typescript-eslint/eslint-plugin";
 import headerPlugin from "eslint-plugin-header";
 import importPlugin from "eslint-plugin-import";
@@ -186,6 +188,19 @@ const eslintConfig = createTsEslintConfig(
   },
 
   {
+    files: ["packages/contributions/**/contributionsMetadata.json"],
+    language: "json/json",
+    name: getPrefixedEslintConfigName("contributions-metadata"),
+    plugins: {
+      contributions: contributionsPlugin,
+      json,
+    },
+    rules: {
+      "contributions/metadata-completeness": "error",
+    },
+  },
+
+  {
     name: getPrefixedEslintConfigName("global-ignores"),
     ignores: [
       "**/.*/**/*",
@@ -195,6 +210,7 @@ const eslintConfig = createTsEslintConfig(
       "**/node_modules/**/*",
       "**/src/properties/ts/*.ts",
       "packages/platform/odyssey-contributions-stack/**/files/**/*",
+      "packages/platform/odyssey-contributions-promotion-check/src/utils/componentExports.ts",
     ],
   },
 
