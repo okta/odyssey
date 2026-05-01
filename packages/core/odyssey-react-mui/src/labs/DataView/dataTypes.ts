@@ -17,6 +17,7 @@ import {
   MRT_RowData,
   MRT_RowSelectionState,
   MRT_SortingState,
+  MRT_VisibilityState,
 } from "material-react-table";
 
 import { DataFilter } from "../DataFilters.js";
@@ -74,6 +75,7 @@ export type DataOnReorderRowsType = {
   rowId: string;
 };
 
+export type DataColumnVisibilityState = MRT_VisibilityState;
 export type DataRowSelectionState = MRT_RowSelectionState;
 
 // Provided for backwards compatibility with old DataTable types

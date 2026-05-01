@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.59.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.58.0...v1.59.0) (2026-04-29)
+
+### Features
+
+- add contribution promotion check script ([#226](https://github.com/atko-eng/odyssey-design-system/issues/226)) ([f190064](https://github.com/atko-eng/odyssey-design-system/commit/f19006445952059b31ea33784a7caa03996bb72f))
+- verify contributions metadata eslint ([#261](https://github.com/atko-eng/odyssey-design-system/issues/261)) ([5ce3245](https://github.com/atko-eng/odyssey-design-system/commit/5ce3245b447557508f5a2963c93a8c8b2c2b042f))
+
 ## [1.58.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.57.0...v1.58.0) (2026-04-15)
 
 ### Features

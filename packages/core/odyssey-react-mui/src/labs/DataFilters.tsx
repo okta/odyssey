@@ -84,6 +84,11 @@ export type UpdateFiltersOrValues = ({
 // This is the shape of each individual filter
 export type DataFilter = {
   /**
+   * Optional description for the filter that appears as subtext in the menu,
+   * between the filter label and the dynamic selection text.
+   */
+  description?: string;
+  /**
    * A unique ID for the filter, typically the same id
    * as the column it'll be applied to.
    */
@@ -162,6 +167,10 @@ export type DataFiltersProps = {
    * this doesn't do anything.
    */
   searchDelayTime?: number;
+  /**
+   * Overrides the default label for the search field.
+   */
+  searchFieldLabel?: string;
 };
 
 type FilterTagsProps = {
@@ -180,6 +189,7 @@ const FilterTags = ({
   activeFilters,
   updateFilterAndInputValues,
 }: FilterTagsProps) => {
+  const { t } = useTranslation();
   const filtersWithValues = activeFilters.filter(
     (activeFilter: DataFilter) => activeFilter.value,
   );
@@ -243,7 +253,7 @@ const FilterTags = ({
   };
 
   return (
-    <TagList>
+    <TagList ariaLabel={t("filters.activetags.arialabel")}>
       {filtersToRender.map((chip) => (
         <Tag
           key={`${chip.filterLabel}: ${chip.optionValue}`}
@@ -269,9 +279,12 @@ const DataFilters = ({
   additionalActions,
   filters: filtersProp = [],
   isDisabled,
+  searchFieldLabel,
 }: DataFiltersProps) => {
   const [filters, setFilters] = useState<DataFilter[]>(filtersProp);
   const { t } = useTranslation();
+  const resolvedSearchFieldLabel =
+    searchFieldLabel || t("filters.search.label");
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const initialInputValues = useMemo(() => {
@@ -506,6 +519,13 @@ const DataFilters = ({
                     <MuiTypography fontWeight="500" sx={{ marginBlockEnd: 2 }}>
                       {filter.label}
                     </MuiTypography>
+                    {filter.description && (
+                      <Box sx={{ marginBlockEnd: 1 }}>
+                        <Subordinate component="div">
+                          {filter.description}
+                        </Subordinate>
+                      </Box>
+                    )}
                     <Subordinate component="div">
                       {!latestFilterValue ||
                       (Array.isArray(latestFilterValue) &&
@@ -811,13 +831,13 @@ const DataFilters = ({
               <Box sx={{ display: "flex", gap: 2, width: "100%" }}>
                 <SearchField
                   isDisabled={isDisabled}
-                  label={t("filters.search.label")}
+                  label={resolvedSearchFieldLabel}
                   onChange={(ev) => setSearchValue(ev.target.value)}
                   onClear={() => {
                     setSearchValue("");
                     onChangeSearch("");
                   }}
-                  placeholder={t("filters.search.label")}
+                  placeholder={resolvedSearchFieldLabel}
                   value={searchValue}
                 />
                 {hasSearchSubmitButton && (

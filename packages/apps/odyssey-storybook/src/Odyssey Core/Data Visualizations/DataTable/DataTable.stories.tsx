@@ -201,6 +201,15 @@ const storybookMeta: Meta<DataTableProps> = {
         },
       },
     },
+    searchFieldLabel: {
+      control: "text",
+      description: "Overrides the default label for the search field.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     onChangeRowSelection: {
       description:
         "Callback that fires when a row (or rows) is selected or unselected.",

@@ -15,7 +15,7 @@ import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
+  useLayoutEffect,
   useRef,
   useState,
 } from "react";
@@ -58,7 +58,27 @@ export const normalizeBackgroundColor = (bgColor: string): string => {
   return bgColor === hueNeutral50Rgb ? Tokens.HueNeutral50 : bgColor;
 };
 
+/** Default background color when none is detected: HueNeutral50 (gray = highContrast). */
 export const defaultParentBackgroundColor = Tokens.HueNeutral50;
+
+/**
+ * Returns the parent element, crossing shadow DOM boundaries when necessary.
+ * When `parentElement` is null (e.g., at a shadow root), this checks if the
+ * element is inside a ShadowRoot and jumps to the host element to continue
+ * traversal.
+ */
+const getParentElement = (element: HTMLElement): HTMLElement | null => {
+  if (element.parentElement) {
+    return element.parentElement;
+  }
+
+  const root = element.getRootNode();
+  if (root instanceof ShadowRoot && root.host instanceof HTMLElement) {
+    return root.host;
+  }
+
+  return null;
+};
 
 /**
  * Determines the effective background color of an element.
@@ -67,8 +87,10 @@ export const defaultParentBackgroundColor = Tokens.HueNeutral50;
  * @returns The effective background color. Returns  defaultParentBackgroundColor if no non-transparent background is found.
  *
  * Note:
- * - Low contrast mode is used for white background (defaultParentBackgroundColor or HueNeutralWhite).
- * - High contrast mode is used for gray background (#f4f4f4 or HueNeutral50).
+ * - Low contrast mode is used for white background (HueNeutralWhite).
+ * - High contrast mode is used for gray background (defaultParentBackgroundColor = HueNeutral50).
+ * - Crosses shadow DOM boundaries via `getRootNode().host` to detect backgrounds
+ *   set outside of shadow roots.
  */
 export const getBackgroundColor = (element: HTMLElement | null): string => {
   while (element) {
@@ -76,10 +98,13 @@ export const getBackgroundColor = (element: HTMLElement | null): string => {
     if (!isTransparentColor(bgColor)) {
       return normalizeBackgroundColor(bgColor);
     }
-    element = element.parentElement;
+    element = getParentElement(element);
   }
   return defaultParentBackgroundColor; // Default to gray/high contrast if no background color is found
 };
+
+export const deriveContrastMode = (bgColor: string): ContrastMode =>
+  bgColor === Tokens.HueNeutral50 ? "highContrast" : "lowContrast";
 
 type UseContrastModeProps = {
   contrastMode?: ContrastMode;
@@ -94,46 +119,60 @@ export const useContrastMode = ({
   const [parentBackgroundColor, setParentBackgroundColor] = useState(
     defaultParentBackgroundColor,
   );
-  const [contrastMode, setContrastMode] = useState<ContrastMode>(
-    () => explicitContrastMode || existingContrastMode,
-  );
+  const [detectedContrastMode, setDetectedContrastMode] =
+    useState<ContrastMode>(() => existingContrastMode);
+
+  const contrastMode = explicitContrastMode ?? detectedContrastMode;
 
   const updateBackgroundColor = useCallback(() => {
     const newBgColor = getBackgroundColor(contrastContainerRef.current);
     setParentBackgroundColor(newBgColor);
+    setDetectedContrastMode(deriveContrastMode(newBgColor));
+  }, []);
 
-    if (!explicitContrastMode) {
-      setContrastMode(
-        newBgColor === Tokens.HueNeutral50 ? "highContrast" : "lowContrast",
-      );
-    }
-  }, [explicitContrastMode]);
+  useLayoutEffect(() => {
+    if (explicitContrastMode) return;
 
-  useEffect(() => {
     const observer = new MutationObserver(updateBackgroundColor);
-    observer.observe(document.querySelector("html") as HTMLHtmlElement, {
-      attributes: true,
-      attributeFilter: ["class", "style"],
-    });
-    observer.observe(document.head, {
-      childList: true,
-      subtree: true,
-    });
 
-    const onTransitionEnd = (event: TransitionEvent) => {
-      if (event.propertyName === "background-color") {
+    // In shadow DOM contexts, document.documentElement and
+    // document.head may not be accessible. Guard against null to
+    // prevent observer.observe(null) from throwing.
+    const htmlElement = document.documentElement;
+    if (htmlElement) {
+      observer.observe(htmlElement, {
+        attributes: true,
+        attributeFilter: ["class", "style"],
+      });
+    }
+
+    if (document.head) {
+      observer.observe(document.head, {
+        childList: true,
+        subtree: true,
+      });
+    }
+
+    const onTransitionEnd = (event: Event) => {
+      if (
+        event instanceof TransitionEvent &&
+        event.propertyName === "background-color"
+      ) {
         updateBackgroundColor();
       }
     };
 
-    document.addEventListener("transitionend", onTransitionEnd);
+    // Attach the transitionend listener to the element's root node so it
+    // works inside shadow DOM (where events don't bubble to `document`).
+    const eventRoot = contrastContainerRef.current?.getRootNode() ?? document;
+    eventRoot.addEventListener("transitionend", onTransitionEnd);
     updateBackgroundColor();
 
     return () => {
-      document.removeEventListener("transitionend", onTransitionEnd);
+      eventRoot.removeEventListener("transitionend", onTransitionEnd);
       observer.disconnect();
     };
-  }, [updateBackgroundColor]);
+  }, [explicitContrastMode, updateBackgroundColor]);
 
   return {
     contrastContainerRef,

@@ -1,3 +1,4 @@
+import type { Logger } from "@okta/odyssey-prompts";
 import type { ExpressionKind } from "ast-types/lib/gen/kinds.js";
 
 import { namedTypes } from "ast-types";
@@ -5,7 +6,6 @@ import { ASTPath, JSCodeshift } from "jscodeshift";
 import partition from "lodash.partition";
 
 import type { PropMapping } from "../mappings/index.js";
-import type { Logger } from "../utils.js";
 
 type ResolvedAttr = {
   targetPath: string;

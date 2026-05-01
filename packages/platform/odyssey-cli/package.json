@@ -19,12 +19,14 @@
   "scripts": {
     "build:clean": "rimraf dist",
     "build": "yarn build:clean && tsc",
+    "build:withDeps": "yarn workspaces foreach --from '@okta/odyssey-cli' --recursive --topological run build && yarn build:clean && tsc",
     "build:watch": "yarn build:clean && tsc --watch",
     "test": "NODE_ENV=test vitest run --reporter=default"
   },
   "dependencies": {
     "@babel/types": "^7.28.6",
-    "@clack/prompts": "^1.1.0",
+    "@okta/odyssey-contributions-promotion-check": "workspace:*",
+    "@okta/odyssey-prompts": "workspace:*",
     "@okta/tools.i18n.pseudo-loc": "^1.0.0-99-gc858246",
     "chokidar": "^4.0.3",
     "inquirer": "^12.10.0",

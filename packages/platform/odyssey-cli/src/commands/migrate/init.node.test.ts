@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import * as prompts from "@clack/prompts";
+import * as prompts from "@okta/odyssey-prompts";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 
 import { ciMigrate, interactiveMigrate } from "./init.js";
@@ -8,24 +8,20 @@ import * as utils from "./utils.js";
 
 const logger = vi.fn();
 
-vi.spyOn(process, "exit").mockImplementation((number) => {
-  throw new Error(`process.exit: ${number}`);
-});
-
 vi.mock("./utils.js", async () => {
   return {
     ...(await vi.importActual("./utils.js")),
-    createLogger: () => logger,
     updateOdyssey: vi.fn(),
     getEligibleMappings: vi.fn(),
     formatMigrationLabel: vi.fn((key: string) => key),
   };
 });
 vi.mock("./migrate.js", () => ({ migrate: vi.fn() }));
-vi.mock("@clack/prompts", () => ({
+vi.mock("@okta/odyssey-prompts", () => ({
   autocompleteMultiselect: vi.fn(),
   cancel: vi.fn(),
   confirm: vi.fn(),
+  createLogger: () => logger,
   group: vi.fn(),
   info: vi.fn(),
   intro: vi.fn(),
@@ -74,14 +70,13 @@ describe("init", () => {
 
       await interactiveMigrate();
       expect(mockedUtils.updateOdyssey).toHaveBeenCalled();
-      expect(mockedMigrate).toHaveBeenCalledWith(
-        expect.objectContaining({
-          components: "DataTable",
-          dryRun: false,
-          paths: ["src/"],
-          logger: expect.any(Function),
-        }),
-      );
+      expect(mockedMigrate).toHaveBeenCalledWith({
+        components: "DataTable",
+        dryRun: false,
+        paths: ["src/"],
+        logger: expect.any(Function),
+        verbose: false,
+      });
     });
 
     test("handles no eligible migrations", async () => {
@@ -214,14 +209,14 @@ describe("init", () => {
         verbose: false,
       });
       expect(mockedUtils.updateOdyssey).toHaveBeenCalled();
-      expect(mockedMigrate).toHaveBeenCalledWith(
-        expect.objectContaining({
-          components: "DataTable",
-          dryRun: false,
-          paths: ["src/"],
-          logger: expect.any(Function),
-        }),
-      );
+      expect(mockedMigrate).toHaveBeenCalledWith({
+        components: "DataTable",
+        dryRun: false,
+        isCI: true,
+        paths: ["src/"],
+        logger: expect.any(Function),
+        verbose: false,
+      });
     });
 
     test("handles unknown keys", async () => {

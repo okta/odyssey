@@ -1,11 +1,9 @@
-import { log } from "@clack/prompts";
 import { describe, expect, it, vi } from "vitest";
 
 import type { ComponentMapping } from "./mappings/index.js";
 
 import { execAsync } from "../../utils.js";
 import {
-  createLogger,
   formatMigrationLabel,
   getEligibleMappings,
   updateOdyssey,
@@ -17,11 +15,6 @@ vi.mock("../../utils.js", async () => {
     execAsync: vi.fn(),
   };
 });
-
-vi.mock("node:util", async () => ({
-  ...(await vi.importActual("node:util")),
-  styleText: (_: string[], text: string) => text,
-}));
 
 const mockedExecAsync = vi.mocked(execAsync);
 vi.mock("./mappings/index.js", () => ({
@@ -97,13 +90,11 @@ describe("updateOdyssey", () => {
     mockedExecAsync.mockResolvedValueOnce({ stdout: "", stderr: "" });
 
     expect(await updateOdyssey(logger)).toBe(false);
-    expect(logger).toHaveBeenCalledWith(
-      expect.objectContaining({
-        message:
-          "Failed to fetch latest version of @okta/odyssey-react-mui:\nNo version returned",
-        type: "error",
-      }),
-    );
+    expect(logger).toHaveBeenCalledWith({
+      message:
+        "Failed to fetch latest version of @okta/odyssey-react-mui:\nNo version returned",
+      type: "error",
+    });
   });
 
   it("logs error and returns false if install command fails", async () => {
@@ -112,19 +103,15 @@ describe("updateOdyssey", () => {
     mockedExecAsync.mockRejectedValueOnce(new Error("Install command failed"));
 
     expect(await updateOdyssey(logger)).toBe(false);
-    expect(logger).toHaveBeenCalledWith(
-      expect.objectContaining({
-        message: "Updating @okta/odyssey-react-mui to latest version 1.0.0...",
-        type: "info",
-      }),
-    );
-    expect(logger).toHaveBeenCalledWith(
-      expect.objectContaining({
-        message:
-          "Failed to update @okta/odyssey-react-mui:\nInstall command failed",
-        type: "error",
-      }),
-    );
+    expect(logger).toHaveBeenCalledWith({
+      message: "Updating @okta/odyssey-react-mui to latest version 1.0.0...",
+      type: "info",
+    });
+    expect(logger).toHaveBeenCalledWith({
+      message:
+        "Failed to update @okta/odyssey-react-mui:\nInstall command failed",
+      type: "error",
+    });
   });
 
   it("returns true if install command succeeds", async () => {
@@ -132,12 +119,10 @@ describe("updateOdyssey", () => {
     mockedExecAsync.mockResolvedValueOnce({ stdout: "1.0.0", stderr: "" });
 
     expect(await updateOdyssey(logger)).toBe(true);
-    expect(logger).toHaveBeenCalledWith(
-      expect.objectContaining({
-        message: "Updating @okta/odyssey-react-mui to latest version 1.0.0...",
-        type: "info",
-      }),
-    );
+    expect(logger).toHaveBeenCalledWith({
+      message: "Updating @okta/odyssey-react-mui to latest version 1.0.0...",
+      type: "info",
+    });
   });
 });
 
@@ -146,39 +131,6 @@ describe("formatMigrationLabel", () => {
     const key = Object.keys(MOCK_COMPONENT_MAPPINGS)[0];
     const label = formatMigrationLabel(key);
     expect(label).toEqual("OldWidget → NewWidget (@old/lib → @new/widgets)");
-  });
-});
-
-describe("createLogger", () => {
-  it("emits colorized messages for each log type", () => {
-    const logger = createLogger(false);
-    const logSpy = vi.spyOn(log, "info").mockImplementation(() => {});
-    logger({ message: "info", type: "info" });
-    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("info"));
-  });
-
-  it("uses console methods in CI mode", () => {
-    const logger = createLogger(true);
-    const consoleSpy = vi.spyOn(console, "info").mockImplementation(() => {});
-    logger({ message: "ci info", type: "info" });
-    expect(consoleSpy).toHaveBeenCalled();
-  });
-
-  it("suppresses debug messages by default", () => {
-    const logger = createLogger(false);
-    const logSpy = vi.spyOn(log, "message");
-    logger({ message: "debug message", type: "debug" });
-    expect(logSpy).not.toHaveBeenCalled();
-  });
-
-  it("shows debug messages when verbose is enabled", () => {
-    const logger = createLogger(false, true);
-    const logSpy = vi.spyOn(log, "message").mockImplementation(() => {});
-    logger({ message: "debug message", type: "debug" });
-    expect(logSpy).toHaveBeenCalledWith(
-      expect.stringContaining("debug"),
-      expect.objectContaining({ symbol: "○" }),
-    );
   });
 });
 
@@ -205,14 +157,22 @@ describe("getEligibleMappings", () => {
     const result = getEligibleMappings({});
 
     expect(result.eligible).toEqual([]);
-    expect(result.hidden).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({ key: "NoMinVersion" }),
-        expect.objectContaining({ key: "WithMinVersion" }),
-        expect.objectContaining({ key: "SubpathExport" }),
-        expect.objectContaining({ key: "SubpathWithMinVersion" }),
-      ]),
-    );
+    expect(result.hidden).toEqual([
+      { key: "NoMinVersion", reason: "@new/widgets not installed" },
+      {
+        key: "WithMinVersion",
+        reason: "@new/charts not installed (requires >= 2.0.0)",
+      },
+      {
+        key: "SubpathExport",
+        reason: "@okta/odyssey-react-mui/labs not installed",
+      },
+      {
+        key: "SubpathWithMinVersion",
+        reason:
+          "@okta/odyssey-react-mui/experimental not installed (requires >= 3.0.0)",
+      },
+    ]);
   });
 
   it("should evaluate only the requested keys when a filter is provided", () => {

@@ -227,16 +227,13 @@ export const Clickable: Story = {
 export const Removable: Story = {
   args: {
     label: "Starship",
+    onRemove: fn(),
   },
   play: async ({ args, canvasElement, step }) => {
     await step("remove the tag on click", async () => {
-      const tagElement = canvasElement.querySelector('[role="button"]');
-      const removeIcon = tagElement?.querySelector("svg");
-      if (removeIcon) {
-        await userEvent.click(removeIcon);
-        await userEvent.tab();
-        await expect(args.onRemove).toHaveBeenCalled();
-      }
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("button", { name: "Remove tag" }));
+      await expect(args.onRemove).toHaveBeenCalledTimes(1);
       await axeRun("Removable Tag");
     });
   },

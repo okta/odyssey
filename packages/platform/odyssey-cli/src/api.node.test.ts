@@ -15,13 +15,6 @@ import { fetchTeams, getAurmToken } from "./api.js";
 import { getTeamsUrl } from "./mocks/handlers.js";
 import { server } from "./mocks/server.js";
 
-vi.mock("node:child_process", async () => {
-  return {
-    ...(await vi.importActual("node:child_process")),
-    execSync: vi.fn(),
-  };
-});
-
 vi.mock("./utils.js", async () => {
   return {
     ...(await vi.importActual("./utils.js")),

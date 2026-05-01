@@ -82,6 +82,15 @@ const meta = {
         },
       },
     },
+    searchFieldLabel: {
+      control: "text",
+      description: "Overrides the default label for the search field.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
   },
   args: {
     onChangeFilters: fn(),
@@ -184,6 +193,14 @@ export const JustSearch: Story = {
   },
 };
 
+export const CustomSearchLabel: Story = {
+  args: {
+    filters: [],
+    searchFieldLabel: "Search applications",
+    onChangeSearch: (value) => console.log(value),
+  },
+};
+
 export const SearchOnSubmit: Story = {
   args: {
     filters: [],
@@ -210,5 +227,59 @@ export const AdditionalActions: Story = {
         />
       </Box>
     ),
+  },
+};
+
+export const WithDescriptions: Story = {
+  args: {
+    filters: [
+      {
+        id: "radio-filter",
+        label: "Radio filter",
+        description: "Single-select filter using radio buttons",
+        variant: "select",
+        options: [
+          {
+            label: "Option 1",
+            value: "option1",
+          },
+          {
+            label: "Option 2",
+            value: "option2",
+          },
+          {
+            label: "Option 3",
+            value: "option3",
+          },
+        ],
+      },
+      {
+        id: "checkbox-filter",
+        label: "Checkbox filter",
+        description: "Multi-select filter using checkboxes",
+        variant: "multi-select",
+        options: [
+          {
+            label: "Option 1",
+            value: "option1",
+          },
+          {
+            label: "Option 2",
+            value: "option2",
+          },
+          {
+            label: "Option 3",
+            value: "option3",
+          },
+        ],
+      },
+      {
+        id: "number-filter",
+        label: "Number filter",
+        description: "Range filter using a number input",
+        variant: "range",
+      },
+    ],
+    onChangeSearch: (value) => console.log(value),
   },
 };

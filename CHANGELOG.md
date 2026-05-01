@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.59.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.58.0...v1.59.0) (2026-04-29)
+
+### Features
+
+- add @okta/odyssey-prompts package ([#250](https://github.com/atko-eng/odyssey-design-system/issues/250)) ([d000ae9](https://github.com/atko-eng/odyssey-design-system/commit/d000ae9726232f4eaeac39508976291bcafda6ed))
+- add contribution promotion check script ([#226](https://github.com/atko-eng/odyssey-design-system/issues/226)) ([f190064](https://github.com/atko-eng/odyssey-design-system/commit/f19006445952059b31ea33784a7caa03996bb72f))
+- Add Custom Accordion Component to OIN Contributions Package ([#254](https://github.com/atko-eng/odyssey-design-system/issues/254)) ([a17074b](https://github.com/atko-eng/odyssey-design-system/commit/a17074bba4640468890d099214a6d861ba94a01e))
+- add description prop to DataFilter (OKTA-1146774) ([#264](https://github.com/atko-eng/odyssey-design-system/issues/264)) ([1531f73](https://github.com/atko-eng/odyssey-design-system/commit/1531f731e31463a2e4b5b3d7dc35f8f6ceea1669))
+- add script for contributions promotion check with JSON output ([#248](https://github.com/atko-eng/odyssey-design-system/issues/248)) ([52450bd](https://github.com/atko-eng/odyssey-design-system/commit/52450bdb7548c75021a53ba49fde36a73342f400))
+- add searchFieldLabel prop to DataFilters ([#263](https://github.com/atko-eng/odyssey-design-system/issues/263)) ([59d96a4](https://github.com/atko-eng/odyssey-design-system/commit/59d96a41c861a5a531f7c1ea71c2c7852029c818))
+- add SkipToContent accessibility button to UI Shell ([#242](https://github.com/atko-eng/odyssey-design-system/issues/242)) ([b248311](https://github.com/atko-eng/odyssey-design-system/commit/b248311394a486e1d2ae8d3d17b3fe2b548a04db))
+- create contribution sync command in odyssey-cli ([#259](https://github.com/atko-eng/odyssey-design-system/issues/259)) ([d6fdfc8](https://github.com/atko-eng/odyssey-design-system/commit/d6fdfc81596680c7762de1361312aa090492da2d))
+- enhance Stepper component to support custom content in steps ([#252](https://github.com/atko-eng/odyssey-design-system/issues/252)) ([39777a6](https://github.com/atko-eng/odyssey-design-system/commit/39777a611113124ecf271b1d10f5bca4f6e5af7f))
+- expose initialColumnVisibility and onColumnVisibilityChange for… ([#262](https://github.com/atko-eng/odyssey-design-system/issues/262)) ([ddf206f](https://github.com/atko-eng/odyssey-design-system/commit/ddf206fc614a11872e03b39fdc604895c8900788))
+- fork DataView and DataFilters into wp-components ([#271](https://github.com/atko-eng/odyssey-design-system/issues/271)) ([26b7fa6](https://github.com/atko-eng/odyssey-design-system/commit/26b7fa66016e095c9ca8a163474d37499b8749cc))
+- verify contributions metadata eslint ([#261](https://github.com/atko-eng/odyssey-design-system/issues/261)) ([5ce3245](https://github.com/atko-eng/odyssey-design-system/commit/5ce3245b447557508f5a2963c93a8c8b2c2b042f))
+
+### Bug Fixes
+
+- Change Padding in AccordionSummary ([#268](https://github.com/atko-eng/odyssey-design-system/issues/268)) ([9da7b76](https://github.com/atko-eng/odyssey-design-system/commit/9da7b7692bb48dbb667e4c3e4bb3129cfc77db84))
+- Custom odyssey accordion oin fix margin and update isLoading ([#266](https://github.com/atko-eng/odyssey-design-system/issues/266)) ([13f46be](https://github.com/atko-eng/odyssey-design-system/commit/13f46be40cac9ae00ddad27e7203bbc1f16a985c))
+- add StyledStepContent component to improve step content styling ([#269](https://github.com/atko-eng/odyssey-design-system/issues/269)) ([d7de0ae](https://github.com/atko-eng/odyssey-design-system/commit/d7de0aec6e05b2f7ac0ffe17cd15d57cdf7dd59d))
+- address dependency vulns ([#274](https://github.com/atko-eng/odyssey-design-system/issues/274)) ([eadb239](https://github.com/atko-eng/odyssey-design-system/commit/eadb2398322b40bd573fee774652062668eee4ed))
+- contributions-promotion-check script improvements ([#257](https://github.com/atko-eng/odyssey-design-system/issues/257)) ([0fc7e66](https://github.com/atko-eng/odyssey-design-system/commit/0fc7e664cfd4764ff11a851b71678de74c953b87))
+- correct terminus path for UI_STATS_API_URL ([#255](https://github.com/atko-eng/odyssey-design-system/issues/255)) ([ab25f7f](https://github.com/atko-eng/odyssey-design-system/commit/ab25f7ffd56bf8d457606c038800b8944245cb94))
+- debug contributions-promotion-check ([#256](https://github.com/atko-eng/odyssey-design-system/issues/256)) ([923897a](https://github.com/atko-eng/odyssey-design-system/commit/923897a3969a2cbbdeed42c84f0e1c3dcd27a73d))
+- improve contrast mode detection — flicker, shadow DOM, and nested containers ([#222](https://github.com/atko-eng/odyssey-design-system/issues/222)) ([7e09c12](https://github.com/atko-eng/odyssey-design-system/commit/7e09c12d1af19fe9a688357e8a6d10cbf53b1b24))
+- remove unnecessary repo path from scripts/contributions-promotion-check.sh ([#249](https://github.com/atko-eng/odyssey-design-system/issues/249)) ([560f5ec](https://github.com/atko-eng/odyssey-design-system/commit/560f5ec83bb6335adf6998b55a0b936aeff7a168))
+- skip workspace install in promotion check ([#253](https://github.com/atko-eng/odyssey-design-system/issues/253)) ([66c464f](https://github.com/atko-eng/odyssey-design-system/commit/66c464f7e1ef00cf00de650a59cb25eb6e10c699))
+- tag component accessibility and rendering fixes ([#251](https://github.com/atko-eng/odyssey-design-system/issues/251)) ([ac3112b](https://github.com/atko-eng/odyssey-design-system/commit/ac3112bd2111ea4dc2a9a24d7d90cf7b0cc025cc))
+
 ## [1.58.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.57.0...v1.58.0) (2026-04-15)
 
 ### Features

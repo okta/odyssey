@@ -19,18 +19,21 @@ import { deepmerge } from "@mui/utils";
 import * as Tokens from "@okta/odyssey-design-tokens";
 import { memo, ReactNode, useMemo } from "react";
 
-import { OdysseyDesignTokensContext } from "./OdysseyDesignTokensContext.js";
+import {
+  OdysseyDesignTokensContext,
+  useOdysseyDesignTokens,
+} from "./OdysseyDesignTokensContext.js";
 import {
   type OdysseyThemeProviderContextProps,
   OdysseyThemeProviderPropsProvider,
   useOdysseyThemeProviderPropsContext,
 } from "./OdysseyThemeProviderPropsContext.js";
-import { createOdysseyMuiTheme } from "./theme/theme.js";
 import {
   ContrastMode,
   ContrastModeContext,
   useContrastMode,
 } from "./useContrastMode.js";
+import { ThemeCacheContext, useThemeCache } from "./useThemeCache.js";
 
 const StyledContrastContainerStyles = styled("div")({
   height: "inherit",
@@ -80,19 +83,24 @@ const OdysseyThemeProvider = ({
     contrastMode: contrastModeProp,
   });
 
+  const parentOdysseyTokens = useOdysseyDesignTokens();
+
   const odysseyTokens = useMemo(
-    () => ({ ...Tokens, ...designTokensOverride }),
-    [designTokensOverride],
+    () =>
+      designTokensOverrideProp
+        ? { ...Tokens, ...designTokensOverrideProp }
+        : parentOdysseyTokens,
+    [designTokensOverrideProp, parentOdysseyTokens],
   );
 
+  const { getOrCreateTheme, themeCache } = useThemeCache({
+    odysseyTokens,
+    shadowRootElement,
+  });
+
   const odysseyTheme = useMemo(
-    () =>
-      createOdysseyMuiTheme({
-        contrastMode,
-        odysseyTokens,
-        shadowRootElement,
-      }),
-    [contrastMode, odysseyTokens, shadowRootElement],
+    () => getOrCreateTheme(contrastMode),
+    [getOrCreateTheme, contrastMode],
   );
 
   const customOdysseyTheme = useMemo(
@@ -109,19 +117,21 @@ const OdysseyThemeProvider = ({
 
   const providerComponents = useMemo(
     () => (
-      <ContrastModeContext.Provider value={contrastModeProviderValue}>
-        <MuiThemeProvider theme={customOdysseyTheme}>
-          <OdysseyThemeProviderPropsProvider
-            designTokensOverride={designTokensOverride}
-            shadowRootElement={shadowRootElement}
-            themeOverride={themeOverride}
-          >
-            <OdysseyDesignTokensContext.Provider value={odysseyTokens}>
-              {children}
-            </OdysseyDesignTokensContext.Provider>
-          </OdysseyThemeProviderPropsProvider>
-        </MuiThemeProvider>
-      </ContrastModeContext.Provider>
+      <ThemeCacheContext.Provider value={themeCache}>
+        <ContrastModeContext.Provider value={contrastModeProviderValue}>
+          <MuiThemeProvider theme={customOdysseyTheme}>
+            <OdysseyThemeProviderPropsProvider
+              designTokensOverride={designTokensOverride}
+              shadowRootElement={shadowRootElement}
+              themeOverride={themeOverride}
+            >
+              <OdysseyDesignTokensContext.Provider value={odysseyTokens}>
+                {children}
+              </OdysseyDesignTokensContext.Provider>
+            </OdysseyThemeProviderPropsProvider>
+          </MuiThemeProvider>
+        </ContrastModeContext.Provider>
+      </ThemeCacheContext.Provider>
     ),
     [
       children,
@@ -130,6 +140,7 @@ const OdysseyThemeProvider = ({
       designTokensOverride,
       odysseyTokens,
       shadowRootElement,
+      themeCache,
       themeOverride,
     ],
   );

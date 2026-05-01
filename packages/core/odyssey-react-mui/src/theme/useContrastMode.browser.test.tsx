@@ -18,6 +18,7 @@ import { hexToRgb } from "../hexToRgb.js";
 import {
   ContrastModeContext,
   defaultParentBackgroundColor,
+  deriveContrastMode,
   getBackgroundColor,
   getElementComputedBackgroundColor,
   hueNeutral50Rgb,
@@ -27,6 +28,7 @@ import {
   useContrastMode,
   useContrastModeContext,
 } from "../useContrastMode.js";
+import { createShadowDomElements } from "../web-component/createShadowDomElements.js";
 
 describe("useContrastMode and related functions", () => {
   afterEach(() => {
@@ -50,7 +52,7 @@ describe("useContrastMode and related functions", () => {
       getComputedStyleSpy.mockRestore();
     });
 
-    it("should return lowContrast mode by default", () => {
+    test("defaults to highContrast mode because defaultParentBackgroundColor is HueNeutral50", () => {
       const { result } = renderHook(() => useContrastMode({}));
 
       expect(result.current.parentBackgroundColor).toBe(
@@ -273,6 +275,130 @@ describe("useContrastMode and related functions", () => {
 
       getComputedStyleSpy.mockRestore();
     });
+
+    test("crosses shadow DOM boundaries to find background color on hostElement", () => {
+      const hostElement = document.createElement("div");
+      document.body.appendChild(hostElement);
+      const { shadowRootElement: innerElement } =
+        createShadowDomElements(hostElement);
+
+      const getComputedStyleSpy = vi
+        .spyOn(window, "getComputedStyle")
+        .mockImplementation(
+          (el: Element) =>
+            ({
+              backgroundColor:
+                el === hostElement ? "rgb(244, 244, 244)" : "rgba(0, 0, 0, 0)",
+            }) as CSSStyleDeclaration,
+        );
+
+      expect(getBackgroundColor(innerElement)).toBe(Tokens.HueNeutral50);
+
+      getComputedStyleSpy.mockRestore();
+      document.body.removeChild(hostElement);
+    });
+
+    test("crosses nested shadow DOM boundaries", () => {
+      const outerHost = document.createElement("div");
+      document.body.appendChild(outerHost);
+      const { shadowRootElement: outerShadowRoot } =
+        createShadowDomElements(outerHost);
+      const innerHost = document.createElement("div");
+      outerShadowRoot.parentNode!.appendChild(innerHost);
+      const { shadowRootElement: deepElement } =
+        createShadowDomElements(innerHost);
+
+      const getComputedStyleSpy = vi
+        .spyOn(window, "getComputedStyle")
+        .mockImplementation(
+          (el: Element) =>
+            ({
+              backgroundColor:
+                el === outerHost ? "rgb(0, 128, 0)" : "rgba(0, 0, 0, 0)",
+            }) as CSSStyleDeclaration,
+        );
+
+      expect(getBackgroundColor(deepElement)).toBe("rgb(0, 128, 0)");
+
+      getComputedStyleSpy.mockRestore();
+      document.body.removeChild(outerHost);
+    });
+
+    test("returns default when shadow DOM host also has transparent background", () => {
+      const hostElement = document.createElement("div");
+      document.body.appendChild(hostElement);
+      const { shadowRootElement: innerElement } =
+        createShadowDomElements(hostElement);
+
+      const getComputedStyleSpy = vi
+        .spyOn(window, "getComputedStyle")
+        .mockImplementation(
+          () =>
+            ({ backgroundColor: "rgba(0, 0, 0, 0)" }) as CSSStyleDeclaration,
+        );
+
+      expect(getBackgroundColor(innerElement)).toBe(
+        defaultParentBackgroundColor,
+      );
+
+      getComputedStyleSpy.mockRestore();
+      document.body.removeChild(hostElement);
+    });
+  });
+
+  describe("Shadow DOM safety", () => {
+    // Without the null-safety guard in useContrastMode, calling
+    // `getComputedStyle(document.documentElement)` would throw when
+    // `documentElement` is null (possible in some shadow DOM / SSR contexts).
+    // This test overrides `document.documentElement` to null to verify we
+    // handle that gracefully.
+    test("handles null document.documentElement gracefully", () => {
+      const originalDocumentElement =
+        Object.getOwnPropertyDescriptor(document, "documentElement") ??
+        Object.getOwnPropertyDescriptor(Document.prototype, "documentElement");
+
+      if (originalDocumentElement && !originalDocumentElement.configurable) {
+        return;
+      }
+
+      Object.defineProperty(document, "documentElement", {
+        value: null,
+        configurable: true,
+      });
+
+      const TestComponent = () => {
+        const { contrastContainerRef, contrastMode } = useContrastMode({});
+        return (
+          <div data-testid="shadow-safe" ref={contrastContainerRef}>
+            {contrastMode}
+          </div>
+        );
+      };
+
+      try {
+        // Should not throw
+        const { getByTestId, unmount } = render(
+          <ContrastModeContext.Provider value={{ contrastMode: "lowContrast" }}>
+            <TestComponent />
+          </ContrastModeContext.Provider>,
+        );
+
+        expect(getByTestId("shadow-safe")).toBeTruthy();
+        unmount();
+      } finally {
+        if (originalDocumentElement) {
+          Object.defineProperty(
+            document,
+            "documentElement",
+            originalDocumentElement,
+          );
+        } else {
+          delete (document as unknown as Record<string, unknown>)[
+            "documentElement"
+          ];
+        }
+      }
+    });
   });
 
   describe("MutationObserver functionality", () => {
@@ -493,6 +619,66 @@ describe("useContrastMode and related functions", () => {
 
         expect(getElementComputedBackgroundColor(element)).toBe("transparent");
       });
+    });
+  });
+
+  describe("deriveContrastMode", () => {
+    test("returns highContrast for HueNeutral50", () => {
+      expect(deriveContrastMode(Tokens.HueNeutral50)).toBe("highContrast");
+    });
+
+    test("returns lowContrast for white", () => {
+      expect(deriveContrastMode("rgb(255, 255, 255)")).toBe("lowContrast");
+    });
+
+    test("returns lowContrast for any non-HueNeutral50 color", () => {
+      expect(deriveContrastMode("rgb(0, 0, 255)")).toBe("lowContrast");
+    });
+  });
+
+  describe("observer skip for explicit contrastMode", () => {
+    test("skips MutationObserver when explicit contrastMode is provided", () => {
+      const observeSpy = vi
+        .spyOn(MutationObserver.prototype, "observe")
+        .mockImplementation(vi.fn());
+      const disconnectSpy = vi
+        .spyOn(MutationObserver.prototype, "disconnect")
+        .mockImplementation(vi.fn());
+      const takeRecordsSpy = vi
+        .spyOn(MutationObserver.prototype, "takeRecords")
+        .mockImplementation(vi.fn());
+      const addEventListenerSpy = vi.spyOn(document, "addEventListener");
+
+      const TestComponent = () => {
+        const { contrastContainerRef, contrastMode } = useContrastMode({
+          contrastMode: "highContrast",
+        });
+        return (
+          <div data-testid="explicit" ref={contrastContainerRef}>
+            {contrastMode}
+          </div>
+        );
+      };
+
+      const { getByTestId, unmount } = render(
+        <ContrastModeContext.Provider value={{ contrastMode: "lowContrast" }}>
+          <TestComponent />
+        </ContrastModeContext.Provider>,
+      );
+
+      expect(getByTestId("explicit").textContent).toBe("highContrast");
+      expect(observeSpy).not.toHaveBeenCalled();
+      expect(addEventListenerSpy).not.toHaveBeenCalledWith(
+        "transitionend",
+        expect.any(Function),
+      );
+
+      unmount();
+
+      addEventListenerSpy.mockRestore();
+      disconnectSpy.mockRestore();
+      observeSpy.mockRestore();
+      takeRecordsSpy.mockRestore();
     });
   });
 });

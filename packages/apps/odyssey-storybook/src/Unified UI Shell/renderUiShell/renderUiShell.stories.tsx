@@ -12,6 +12,7 @@
 
 import {
   Autocomplete,
+  Box,
   Button,
   CssBaseline,
   DatePicker,
@@ -22,7 +23,11 @@ import {
   OdysseyProvider,
   Paragraph,
   Select,
+  Stack,
+  Status,
   Surface,
+  Tag,
+  TagList,
   Tooltip,
 } from "@okta/odyssey-react-mui";
 import { DownloadIcon } from "@okta/odyssey-react-mui/icons";
@@ -334,6 +339,39 @@ export const OpenedSelectInSurface: Story = {
 
       await userEvent.click(selectElement);
     }),
+};
+
+export const ContrastModeInShadowDom: Story = {
+  render: function C() {
+    return (
+      <UiShellWrapper
+        surfaceSlot={
+          <>
+            <Paragraph>
+              These components are rendered inside a shadow DOM. The contrast
+              mode hook should cross the shadow boundary and detect the Surface
+              background color.
+            </Paragraph>
+            <Box sx={{ marginBottom: 2 }}>
+              <Stack direction="row" spacing={1}>
+                <Status label="Default" severity="default" />
+                <Status label="Error" severity="error" />
+                <Status label="Info" severity="info" />
+                <Status label="Success" severity="success" />
+                <Status label="Warning" severity="warning" />
+              </Stack>
+            </Box>
+            <TagList>
+              <Tag colorVariant="default" label="Default" />
+              <Tag colorVariant="info" label="Info" />
+              <Tag colorVariant="accentOne" label="Accent One" />
+              <Tag colorVariant="accentTwo" label="Accent Two" />
+            </TagList>
+          </>
+        }
+      />
+    );
+  },
 };
 
 export const OpenedTooltipInSurface: Story = {

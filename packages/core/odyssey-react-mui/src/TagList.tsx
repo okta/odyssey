@@ -22,9 +22,9 @@ export type TagListProps = {
    * The Tag or array of Tags within the TagList
    */
   children: ReactElement<typeof Tag> | Array<ReactElement<typeof Tag>>;
-} & Pick<HtmlProps, "testId">;
+} & Pick<HtmlProps, "ariaLabel" | "testId">;
 
-const TagList = ({ children, testId }: TagListProps) => {
+const TagList = ({ ariaLabel, children, testId }: TagListProps) => {
   const providerValue = useMemo<{
     chipElementType: ChipElementType;
   }>(
@@ -36,6 +36,7 @@ const TagList = ({ children, testId }: TagListProps) => {
 
   return (
     <Stack
+      aria-label={ariaLabel}
       component="ul"
       data-se={testId}
       direction="row"

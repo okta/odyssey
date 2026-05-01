@@ -406,6 +406,19 @@ export const OptionsGrouped: Story = {
 
 export const MultiSelect: Story = {
   ...multiSelectTemplate,
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          // MUI's multi-select renders per-option checkboxes without explicit
+          // <label> elements — the label comes from the parent <li role="option">
+          // via visual association. This is a MUI internals issue that cannot be
+          // fixed without a MUI-level change.
+          { id: "label", enabled: false },
+        ],
+      },
+    },
+  },
   args: {
     hasMultipleChoices: true,
     value: [],

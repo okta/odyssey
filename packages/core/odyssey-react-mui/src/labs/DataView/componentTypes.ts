@@ -27,6 +27,7 @@ import { paginationTypeValues } from "../DataTablePagination.js";
 import { availableCardLayouts, availableLayouts } from "./constants.js";
 import { DataCardProps } from "./DataCard.js";
 import {
+  DataColumnVisibilityState,
   DataGetDataType,
   DataOnReorderRowsType,
   DataRowSelectionState,
@@ -78,6 +79,9 @@ export type UniversalProps<TData extends MRT_RowData> = {
    * @deprecated onChangeRowSelection is now onRowSelectionChange
    */
   onChangeRowSelection?: (rowSelection: DataRowSelectionState) => void;
+  onColumnVisibilityChange?: (
+    columnVisibility: DataColumnVisibilityState,
+  ) => void;
   onPaginationChange?: ({
     pageIndex,
     pageSize,
@@ -90,6 +94,7 @@ export type UniversalProps<TData extends MRT_RowData> = {
   paginationType?: (typeof paginationTypeValues)[number];
   resultsPerPage?: number;
   searchDelayTime?: number;
+  searchFieldLabel?: string;
   totalRows?: number;
 } & Pick<
   PaginationProps,
@@ -102,6 +107,7 @@ export type TableLayoutProps<TData extends MRT_RowData> = {
   hasColumnResizing?: boolean;
   hasColumnVisibility?: boolean;
   hasSorting?: boolean;
+  initialColumnVisibility?: DataColumnVisibilityState;
   initialDensity?: MRT_DensityState;
   renderDetailPanel?: MRT_TableOptions<TData>["renderDetailPanel"];
   rowActionButtons?: RowActionsProps<TData>["rowActionButtons"];

@@ -282,6 +282,7 @@ export {
   typographyVariantMapping,
   type TypographyVariantValue,
 } from "./Typography.js";
+export type { ContrastMode } from "./useContrastMode.js";
 export { useMountLifecycleEffect } from "./useMountLifecycleEffect.js";
 export { useUniqueId } from "./useUniqueId.js";
 export {

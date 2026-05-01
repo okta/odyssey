@@ -12,7 +12,13 @@
 
 import styled from "@emotion/styled";
 import { Chip as MuiChip, ChipProps as MuiChipProps } from "@mui/material";
-import { memo, ReactElement, useCallback, useContext } from "react";
+import {
+  type ElementType,
+  memo,
+  type ReactElement,
+  useCallback,
+  useContext,
+} from "react";
 
 import { HtmlProps } from "./HtmlProps.js";
 import { useTranslation } from "./i18n.generated/i18n.js";
@@ -199,9 +205,9 @@ const StyledTag = styled(MuiChip, {
       prop,
     ),
 })<{
-  as?: React.ElementType; // Allow the 'as' prop to be forwarded
   clickable?: boolean;
   colorVariant: TagColorVariant;
+  component?: ElementType;
   contrastMode: ContrastMode;
   odysseyDesignTokens: DesignTokens;
   size?: TagSize;
@@ -278,9 +284,10 @@ const Tag = ({
       <StyledTag
         {...muiProps}
         aria-disabled={isDisabled}
-        as={chipElementType}
+        aria-keyshortcuts={onRemove && !isDisabled ? "Backspace" : undefined}
         clickable={Boolean(onClick)}
         colorVariant={colorVariant}
+        component={chipElementType}
         contrastMode={contrastMode}
         data-se={testId}
         deleteIcon={

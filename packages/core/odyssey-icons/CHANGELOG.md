@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.59.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.58.0...v1.59.0) (2026-04-29)
+
+### Bug Fixes
+
+- address dependency vulns ([#274](https://github.com/atko-eng/odyssey-design-system/issues/274)) ([eadb239](https://github.com/atko-eng/odyssey-design-system/commit/eadb2398322b40bd573fee774652062668eee4ed))
+
 ## [1.58.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.57.0...v1.58.0) (2026-04-15)
 
 **Note:** Version bump only for package @okta/odyssey-icons

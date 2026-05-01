@@ -1,8 +1,7 @@
+import { type Logger } from "@okta/odyssey-prompts";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-
-import { Logger } from "./utils.js";
 
 const require = createRequire(import.meta.url);
 type RunResult = {
@@ -32,6 +31,7 @@ const TRANSFORMER_PATH = path.resolve(__dirname, "./transformer-bridge.cjs");
 export type MigrationOptions = {
   components: string;
   dryRun: boolean;
+  isCI?: boolean;
   logger: Logger;
   paths: string[];
   verbose: boolean;
@@ -86,6 +86,7 @@ export const migrate = async ({
   dryRun,
   paths,
   components,
+  isCI,
   logger,
   verbose,
 }: MigrationOptions): Promise<MigrationResult> => {
@@ -97,6 +98,7 @@ export const migrate = async ({
       dry: dryRun,
       print: dryRun,
       components,
+      isCI,
       logger,
       odysseyVerbose: verbose,
     },

@@ -1,9 +1,14 @@
 import yargs from "yargs";
 
-import { i18nCommand, migrateCommand } from "./commands/index.js";
+import {
+  contributionsCommand,
+  i18nCommand,
+  migrateCommand,
+} from "./commands/index.js";
 
 export const buildParser = (argv: ReadonlyArray<string> | string) =>
   yargs(argv)
+    .command(contributionsCommand)
     .command(i18nCommand)
     .command(migrateCommand)
     .demandCommand(1, "You must provide a valid command.")

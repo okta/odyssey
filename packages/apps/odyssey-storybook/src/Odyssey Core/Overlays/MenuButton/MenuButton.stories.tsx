@@ -310,6 +310,20 @@ export const ButtonVariant: StoryObj<MenuButtonProps> = {
 };
 
 export const Groupings: StoryObj<MenuButtonProps> = {
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          // MUI renders ListSubheader as <li> inside role="menu", which axe flags
+          // because menuitem roles are required children. This is an established
+          // MUI pattern for grouping menu items and cannot be changed without a
+          // MUI-level fix.
+          { id: "aria-required-children", enabled: false },
+          { id: "listitem", enabled: false },
+        ],
+      },
+    },
+  },
   args: {
     buttonLabel: "Button label",
     children: [

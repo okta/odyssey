@@ -2,6 +2,7 @@ import {
   autocompleteMultiselect,
   cancel,
   confirm,
+  createLogger,
   group,
   intro,
   isCancel,
@@ -9,14 +10,12 @@ import {
   outro,
   spinner,
   text,
-} from "@clack/prompts";
+} from "@okta/odyssey-prompts";
 import partition from "lodash.partition";
-import { styleText } from "node:util";
 
 import { COMPONENT_MAPPINGS } from "./mappings/index.js";
 import { migrate } from "./migrate.js";
 import {
-  createLogger,
   formatMigrationLabel,
   getEligibleMappings,
   getInstalledDeps,
@@ -28,7 +27,7 @@ import {
  * Runs the migration wizard in interactive mode.
  */
 export const interactiveMigrate = async (): Promise<void> => {
-  intro(styleText(["black", "bgCyan"], " odyssey-cli migrate "));
+  intro("odyssey-cli migrate");
 
   const verbose = await confirm({
     message: "Enable verbose logging? (shows detailed transformation info)",
@@ -40,7 +39,11 @@ export const interactiveMigrate = async (): Promise<void> => {
     process.exit(0);
   }
 
-  const logger = createLogger(false, verbose);
+  const logger = createLogger({
+    isCI: false,
+    verbose,
+    prefix: "migrateComponent",
+  });
 
   const shouldUpdateOdyssey = await confirm({
     message: `Update ${ODYSSEY_MUI_PACKAGE} to latest before migrating?`,
@@ -121,8 +124,8 @@ export const interactiveMigrate = async (): Promise<void> => {
     note(
       [
         `Components: ${answers.components.map(formatMigrationLabel).join("\n            ")}`,
-        `Paths:      ${styleText("dim", answers.paths)}`,
-        `Dry run:    ${answers.dryRun ? styleText("yellow", "yes") : styleText("green", "no")}`,
+        `Paths:      ${answers.paths}`,
+        `Dry run:    ${answers.dryRun ? "yes" : "no"}`,
       ].join("\n"),
       "Migration plan",
     );
@@ -170,10 +173,7 @@ export const interactiveMigrate = async (): Promise<void> => {
     }
 
     outro(
-      styleText(
-        "dim",
-        "Make sure to review the logs and changes before committing. Happy migrating! 🚀",
-      ),
+      "Make sure to review the logs and changes before committing. Happy migrating! 🚀",
     );
   }
 };
@@ -206,7 +206,11 @@ export const ciMigrate = async (args: {
   updateOdyssey: boolean;
   verbose: boolean;
 }): Promise<void> => {
-  const logger = createLogger(true, args.verbose);
+  const logger = createLogger({
+    isCI: true,
+    verbose: args.verbose,
+    prefix: "migrateComponent",
+  });
   if (args.updateOdyssey) {
     logger({
       type: "info",
@@ -259,6 +263,7 @@ export const ciMigrate = async (args: {
     const result = await migrate({
       components: eligible.map(({ key }) => key).join(","),
       dryRun: args.dryRun,
+      isCI: true,
       paths: args.paths,
       logger,
       verbose: args.verbose,
