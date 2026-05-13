@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.60.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.59.0...v1.60.0) (2026-05-13)
+
+### Features
+
+- split icons and logos into separate folders ([#284](https://github.com/atko-eng/odyssey-design-system/issues/284)) ([2457134](https://github.com/atko-eng/odyssey-design-system/commit/2457134a3c49f77505712ad566f3a2fb5caa5799))
+
 ## [1.59.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.58.0...v1.59.0) (2026-04-29)
 
 ### Bug Fixes

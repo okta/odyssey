@@ -21,33 +21,51 @@ import {
 
 import { headerCopyrightLicense } from "./headerCopyrightLicense";
 
-export const iconTemplate: Template = ({ componentName, jsx }, { tpl }) => {
-  const iconComponentName = `${componentName.replace(/^Svg/, "")}Icon`;
+/**
+ * SVGR template that generates memoized icon components backed by MUI SvgIcon.
+ *
+ * The generated component:
+ * - wraps the incoming SVG children in SvgIcon
+ * - uses a fixed square viewBox derived from iconSize (default 16)
+ * - forwards the SVG ref and spreads SvgIcon props
+ * - exports props typed as SvgIconNoChildrenProps
+ *
+ * Color behavior differences are handled in SVGO using ODYSSEY_ICONS_TYPE.
+ */
+type IconTemplateParams = {
+  iconSize?: number;
+};
 
-  const iconComponentPropsTypeName = `${iconComponentName}Props`;
-  const memoizedIconComponentName = `Memoized${iconComponentName}`;
+export const iconTemplate =
+  ({ iconSize = 16 }: IconTemplateParams): Template =>
+  ({ componentName, jsx }, { tpl }) => {
+    const iconComponentName = `${componentName.replace(/^Svg/, "")}Icon`;
+    const iconComponentPropsTypeName = `${iconComponentName}Props`;
+    const memoizedIconComponentName = `Memoized${iconComponentName}`;
 
-  const fragmentJsx = jsxFragment(
-    jsxOpeningFragment(),
-    jsxClosingFragment(),
-    jsx.children,
-  );
-  const svgIconChildren = generate(fragmentJsx).code;
+    const fragmentJsx = jsxFragment(
+      jsxOpeningFragment(),
+      jsxClosingFragment(),
+      jsx.children,
+    );
+    const svgIconChildren = generate(fragmentJsx).code;
 
-  const iconChildren = `<SvgIcon
+    const viewBox = `0 0 ${iconSize} ${iconSize}`;
+
+    const iconChildren = `<SvgIcon
   fill="none"
   ref={ref}
-  viewBox="0 0 16 16"
+  viewBox="${viewBox}"
   xmlns="http://www.w3.org/2000/svg"
   {...props}
 >
   ${svgIconChildren}
 </SvgIcon>`;
 
-  const newLine = `
+    const newLine = `
   `;
 
-  return tpl`
+    return tpl`
 ${headerCopyrightLicense}
 
 import { forwardRef, memo } from "react";
@@ -74,4 +92,4 @@ ${newLine}
 
 export { ${memoizedIconComponentName} as ${iconComponentName} };
 `;
-};
+  };

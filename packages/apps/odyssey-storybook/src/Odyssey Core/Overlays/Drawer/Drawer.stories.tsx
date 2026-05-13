@@ -20,9 +20,8 @@ import {
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { useCallback, useState } from "react";
-import { userEvent, waitFor, within } from "storybook/test";
+import { userEvent, within } from "storybook/test";
 
-import { axeRun } from "../../../axeRun.js";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 
 const gridStubText = (
@@ -380,13 +379,11 @@ export const Overlay: Story = {
     title: "Okta Privileged Access",
   } as DrawerProps, // This is a hack,
   play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    await step("open Default Drawer", async () => {
-      const buttonElement = canvas.getByText("Open drawer");
-      await userEvent.click(buttonElement);
-      await waitFor(async () => {
-        await axeRun("Default Drawer");
-      });
+    await step("Open drawer", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(
+        canvas.getByRole("button", { name: "Open drawer" }),
+      );
     });
   },
 };
@@ -418,6 +415,14 @@ export const Persistent: Story = {
     ),
     title: "Profile details",
   } as DrawerProps, // This is a hack,
+  play: async ({ canvasElement, step }) => {
+    await step("Open drawer", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(
+        canvas.getByRole("button", { name: "Open drawer" }),
+      );
+    });
+  },
 };
 
 export const ShowDividers: Story = {
@@ -447,9 +452,25 @@ export const ShowDividers: Story = {
     ),
     title: "Profile details",
   } as DrawerProps, // This is a hack
+  play: async ({ canvasElement, step }) => {
+    await step("Open drawer", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(
+        canvas.getByRole("button", { name: "Open drawer" }),
+      );
+    });
+  },
 };
 
 export const NoFooter: Story = {
+  play: async ({ canvasElement, step }) => {
+    await step("Open drawer", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(
+        canvas.getByRole("button", { name: "Open drawer" }),
+      );
+    });
+  },
   render: function C(props) {
     const [isVisible, setIsVisible] = useState(false);
 

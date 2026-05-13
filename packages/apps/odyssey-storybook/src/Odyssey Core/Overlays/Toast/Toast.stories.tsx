@@ -20,10 +20,10 @@ import {
   ToastStack,
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react-vite";
+import { useMemo } from "react";
 import { useCallback, useState } from "storybook/preview-api";
-import { expect, userEvent, waitFor, within } from "storybook/test";
+import { userEvent, within } from "storybook/test";
 
-import { axeRun } from "../../../axeRun.js";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { useStoryArgOrLocalState } from "../../../tools/useStoryArgOrLocalState.js";
 
@@ -157,22 +157,6 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const openToast =
-  (actionName: string): Story["play"] =>
-  ({ args, canvasElement, step }) =>
-    step(`open ${actionName}`, async () => {
-      await waitFor(async () => {
-        const buttonElement = within(canvasElement).getByText(
-          `Open ${args.severity} toast`,
-        );
-        await userEvent.hover(buttonElement);
-        await userEvent.click(buttonElement);
-        await userEvent.tab();
-      });
-
-      await waitFor(() => axeRun(actionName));
-    });
-
 const Single: Story = {
   args: {
     isVisible: false,
@@ -219,8 +203,13 @@ export const Info: Story = {
     text: "The mission to Sagittarius A is set for January 7.",
     severity: "info",
   },
-  play: openToast("Info Toast"),
   tags: ["!autodocs"],
+  play: async ({ canvasElement, step }) => {
+    await step("Show toast", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("button"));
+    });
+  },
 };
 
 export const ErrorToast: Story = {
@@ -231,7 +220,12 @@ export const ErrorToast: Story = {
     role: "alert",
     severity: "error",
   },
-  play: openToast("Error Toast"),
+  play: async ({ canvasElement, step }) => {
+    await step("Show toast", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("button"));
+    });
+  },
 };
 
 export const Warning: Story = {
@@ -241,7 +235,12 @@ export const Warning: Story = {
     role: "status",
     severity: "warning",
   },
-  play: openToast("Warning Toast"),
+  play: async ({ canvasElement, step }) => {
+    await step("Show toast", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("button"));
+    });
+  },
 };
 
 export const Success: Story = {
@@ -251,7 +250,12 @@ export const Success: Story = {
     role: "status",
     severity: "success",
   },
-  play: openToast("Success Toast"),
+  play: async ({ canvasElement, step }) => {
+    await step("Show toast", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("button"));
+    });
+  },
 };
 
 export const Dismissible: Story = {
@@ -261,46 +265,10 @@ export const Dismissible: Story = {
     linkText: "View report",
     linkUrl: "#",
   },
-  play: async ({ args, canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    await step(`open Dismissible Toast}`, async () => {
-      await waitFor(async () => {
-        const buttonElement = canvas.getByText(`Open ${args.severity} toast`);
-        await userEvent.hover(buttonElement);
-        await userEvent.click(buttonElement);
-        await userEvent.tab();
-      });
-    });
-
-    await step("link in toast", async () => {
-      await waitFor(() => {
-        const toastLink = canvas.getByText(args.linkText || "");
-        expect(toastLink).toHaveAttribute("href", args.linkUrl);
-      });
-    });
-
-    await step("dismiss toast and reopen", async () => {
-      await waitFor(async () => {
-        const toastElement = canvas.getByRole("status");
-        if (toastElement) {
-          const dismissToastButton = within(toastElement).getByRole("button", {
-            name: "Close",
-          });
-          if (dismissToastButton) {
-            await userEvent.click(dismissToastButton);
-            await waitFor(async () => {
-              expect(toastElement).not.toBeVisible();
-
-              const buttonElement = canvas.getByText(
-                `Open ${args.severity} toast`,
-              );
-              await userEvent.click(buttonElement);
-            });
-          }
-        }
-      });
-
-      await waitFor(() => axeRun("Dismissible Toast"));
+  play: async ({ canvasElement, step }) => {
+    await step("Show toast", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("button"));
     });
   },
 };
@@ -328,27 +296,20 @@ export const MultipleToasts: Story = {
   render: function C() {
     type ToastWithId = ToastProps & { id: string };
 
-    const unstableToasts = [
-      {
-        id: createUniqueId(),
-        severity: "info" as const,
-        text: "The mission to Sagittarius A is set for January 7.",
-        isDismissable: true,
-        isVisible: true,
-      },
-      {
-        id: createUniqueId(),
-        severity: "success" as const,
-        text: "Docking completed.",
-        isDismissable: true,
-        isVisible: true,
-      },
-    ];
-
-    const [toasts, setToasts] = useState<ToastWithId[]>(unstableToasts);
-
-    const addToast = useCallback(() => {
-      const toastOptions = [
+    const toastData = useMemo(
+      () => [
+        {
+          severity: "info" as const,
+          text: "The mission to Sagittarius A is set for January 7.",
+          isDismissable: true,
+          isVisible: true,
+        },
+        {
+          severity: "success" as const,
+          text: "Docking completed.",
+          isDismissable: true,
+          isVisible: true,
+        },
         {
           severity: "warning" as const,
           text: "Severe solar winds may delay local system flights.",
@@ -361,15 +322,21 @@ export const MultipleToasts: Story = {
           isDismissable: true,
           isVisible: true,
         },
-      ];
+      ],
+      [],
+    );
 
-      const randomToast =
-        toastOptions[Math.floor(Math.random() * toastOptions.length)];
+    const [toasts, setToasts] = useState<ToastWithId[]>([]);
+
+    const addToast = useCallback(() => {
       setToasts((prevToasts) => [
         ...prevToasts,
-        { ...randomToast, id: createUniqueId() },
+        {
+          ...toastData[prevToasts.length % toastData.length],
+          id: createUniqueId(),
+        },
       ]);
-    }, []);
+    }, [toastData]);
 
     const handleDismiss = useCallback((toastId: string) => {
       setToasts((prevToasts) =>
@@ -398,5 +365,14 @@ export const MultipleToasts: Story = {
         </ToastStack>
       </>
     );
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("Show toasts", async () => {
+      const canvas = within(canvasElement);
+      const button = canvas.getByRole("button", { name: "Open another Toast" });
+      await userEvent.click(button);
+      await userEvent.click(button);
+      await userEvent.click(button);
+    });
   },
 };

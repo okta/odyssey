@@ -12,12 +12,11 @@
 
 import type { ComponentProps } from "react";
 
-import { render, screen, within } from "@testing-library/react";
-import { userEvent } from "@vitest/browser/context";
 import { useState } from "react";
+import { page, userEvent } from "vitest/browser";
 
-import { OdysseyProvider } from "./OdysseyProvider.js";
 import { Select } from "./Select.js";
+import { renderWithOdysseyProvider } from "./test-utils/renderWithOdysseyProvider.js";
 
 type SelectProps = ComponentProps<typeof Select>;
 type SelectValue = SelectProps["value"];
@@ -42,62 +41,64 @@ const Template = ({
   );
 
   return (
-    <OdysseyProvider>
-      <Select
-        {...props}
-        label={label}
-        name={name}
-        onChange={(event) => {
-          const value = event.target.value;
-          setValue(multiple ? (Array.isArray(value) ? value : [value]) : value);
-        }}
-        options={options}
-        value={value}
-      />
-    </OdysseyProvider>
+    <Select
+      {...props}
+      label={label}
+      name={name}
+      onChange={(event) => {
+        const value = event.target.value;
+        setValue(multiple ? (Array.isArray(value) ? value : [value]) : value);
+      }}
+      options={options}
+      value={value}
+    />
   );
 };
 
-describe("Select", () => {
+describe(Select.displayName!, () => {
   test("selecting a single option from the menu", async () => {
-    render(<Template />);
+    const { container } = await renderWithOdysseyProvider(<Template />);
 
-    const trigger = await screen.findByRole("combobox");
+    await expect(container).toBeAccessible();
+
+    const trigger = page.getByRole("combobox");
 
     await userEvent.click(trigger);
-    const firstOption = screen.getByRole("option", {
+    const firstOption = page.getByRole("option", {
       name: "Option A",
     });
 
+    await expect.element(page.getByRole("listbox")).toBeAccessible();
+
     await userEvent.click(firstOption);
 
-    expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
+    await expect.element(page.getByRole("listbox")).not.toBeInTheDocument();
     await userEvent.tab();
 
-    const selectOption = await screen.findByRole("combobox");
-
-    expect(within(selectOption).getByText("Option A")).toBeVisible();
+    await expect
+      .element(page.getByRole("combobox").getByText("Option A"))
+      .toBeVisible();
   });
 
   test("selecting multiple options", async () => {
-    render(<Template hasMultipleChoices />);
+    await renderWithOdysseyProvider(<Template hasMultipleChoices />);
 
-    const trigger = await screen.findByRole("combobox");
+    const trigger = page.getByRole("combobox");
 
     await userEvent.click(trigger);
-    const listbox = await screen.findByRole("listbox");
-    const OptionA = within(listbox).getByRole("option", { name: "Option A" });
-    const OptionB = within(listbox).getByRole("option", { name: "Option B" });
+    const listbox = page.getByRole("listbox");
+    const OptionA = listbox.getByRole("option", { name: "Option A" });
+    const OptionB = listbox.getByRole("option", { name: "Option B" });
     await userEvent.click(OptionA);
     await userEvent.click(OptionB);
     await userEvent.tab();
 
-    const selectOptions = await screen.findByRole("list", {
+    const selectOptions = page.getByRole("list", {
       name: /selected options/i,
     });
 
-    expect(await within(selectOptions).findByText("Option A")).toBeVisible();
-    expect(await within(selectOptions).findByText("Option B")).toBeVisible();
+    await expect.element(selectOptions.getByText("Option A")).toBeVisible();
+    await expect.element(selectOptions.getByText("Option B")).toBeVisible();
   });
 
   test("rendering language metadata attributes", async () => {
@@ -111,46 +112,59 @@ describe("Select", () => {
       { text: "한국어", value: "ko", language: "ko" },
     ] satisfies NonNullable<SelectProps["options"]>;
 
-    render(<Template options={languageOptions} />);
+    await renderWithOdysseyProvider(<Template options={languageOptions} />);
 
-    const trigger = await screen.findByRole("combobox");
+    const trigger = page.getByRole("combobox");
 
     await userEvent.click(trigger);
-    const listbox = await screen.findByRole("listbox");
-    const frenchOption = within(listbox).getByText("Français");
+    const listbox = page.getByRole("listbox");
+    const frenchOption = listbox.getByText("Français");
 
-    expect(frenchOption).toHaveAttribute("lang", "fr");
+    await expect.element(frenchOption).toHaveAttribute("lang", "fr");
   });
 
-  test("rendering chips not being dismissable when disabled in multi-select mode", async () => {
-    render(<Template hasMultipleChoices isDisabled value={["Option A"]} />);
+  test("disabled multi-select mode with pre-selected values", async () => {
+    await renderWithOdysseyProvider(
+      <Template hasMultipleChoices isDisabled value={["Option A"]} />,
+    );
 
-    const selectedOptions = await screen.findByRole("list", {
+    const selectedOptions = page.getByRole("list", {
       name: /selected options/i,
     });
 
-    expect(await within(selectedOptions).findByText("Option A")).toBeVisible();
+    await expect.element(selectedOptions.getByText("Option A")).toBeVisible();
 
-    const chip = within(selectedOptions).getByRole("listitem");
+    const chip = selectedOptions.getByRole("listitem");
 
-    expect(
-      within(chip).queryByRole("button", { hidden: true }),
-    ).not.toBeInTheDocument();
+    await expect.element(chip.getByRole("button")).not.toBeInTheDocument();
   });
 
-  test("rendering chips not being dismissable when readOnly in multi-select mode", async () => {
-    render(<Template hasMultipleChoices isReadOnly value={["Option A"]} />);
+  test("readOnly multi-select mode with pre-selected values", async () => {
+    await renderWithOdysseyProvider(
+      <Template hasMultipleChoices isReadOnly value={["Option A"]} />,
+    );
 
-    const selectedOptions = await screen.findByRole("list", {
+    const selectedOptions = page.getByRole("list", {
       name: /selected options/i,
     });
 
-    expect(await within(selectedOptions).findByText("Option A")).toBeVisible();
+    await expect.element(selectedOptions.getByText("Option A")).toBeVisible();
 
-    const chip = within(selectedOptions).getByRole("listitem");
+    const chip = selectedOptions.getByRole("listitem");
 
-    expect(
-      within(chip).queryByRole("button", { hidden: true }),
-    ).not.toBeInTheDocument();
+    await expect.element(chip.getByRole("button")).not.toBeInTheDocument();
+  });
+
+  test("select in disabled state", async () => {
+    await renderWithOdysseyProvider(
+      <Select
+        isDisabled
+        label="Label"
+        options={["Option A", "Option B", "Option C", "Option D", "Option E"]}
+        value={"Option A"}
+      />,
+    );
+
+    await expect.element(page.getByRole("combobox")).toBeDisabled();
   });
 });

@@ -24,13 +24,19 @@ import {
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext.js";
 import { UniversalProps } from "./componentTypes.js";
+import { GetRowId } from "./dataTypes.js";
 
 export type BulkActionsMenuProps<TData extends MRT_RowData> = {
   data: TData[];
+  getRowId: GetRowId<TData>;
   menuItems: UniversalProps<TData>["bulkActionMenuItems"];
   rowSelection: MRT_RowSelectionState;
   setRowSelection: Dispatch<SetStateAction<MRT_RowSelectionState>>;
 };
+
+type BulkActionsMenuComponent = (<TData extends MRT_RowData>(
+  props: BulkActionsMenuProps<TData>,
+) => React.ReactNode) & { displayName?: string };
 
 const BulkActionsContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
@@ -43,6 +49,7 @@ const BulkActionsContainer = styled("div", {
 
 const BulkActionsMenu = <TData extends MRT_RowData>({
   data,
+  getRowId,
   menuItems,
   rowSelection,
   setRowSelection,
@@ -54,10 +61,10 @@ const BulkActionsMenu = <TData extends MRT_RowData>({
 
   const handleSelectAll = useCallback(() => {
     const rows = Object.fromEntries(
-      data.map((row) => [row.id as string, true]),
+      data.map((row, index) => [getRowId(row, index), true]),
     );
     setRowSelection(rows);
-  }, [data, setRowSelection]);
+  }, [data, getRowId, setRowSelection]);
 
   const handleSelectNone = useCallback(() => {
     setRowSelection({});
@@ -93,7 +100,9 @@ const BulkActionsMenu = <TData extends MRT_RowData>({
   );
 };
 
-const MemoizedBulkActionsMenu = memo(BulkActionsMenu);
+const MemoizedBulkActionsMenu = memo(
+  BulkActionsMenu,
+) as BulkActionsMenuComponent;
 MemoizedBulkActionsMenu.displayName = "BulkActionsMenu";
 
 export { MemoizedBulkActionsMenu as BulkActionsMenu };

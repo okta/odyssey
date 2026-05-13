@@ -13,11 +13,8 @@
 import { IconWithTooltip, IconWithTooltipProps } from "@okta/odyssey-react-mui";
 import { GroupIcon } from "@okta/odyssey-react-mui/icons";
 import { Meta, StoryObj } from "@storybook/react-vite";
-import { userEvent, within } from "storybook/test";
+import { userEvent } from "storybook/test";
 
-import type { PlaywrightProps } from "../../tools/storybookTypes.js";
-
-import { axeRun } from "../../axeRun.js";
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
 const storybookMeta: Meta<IconWithTooltipProps> = {
@@ -74,27 +71,16 @@ const storybookMeta: Meta<IconWithTooltipProps> = {
 
 export default storybookMeta;
 
-const showTooltip =
-  ({ canvasElement, step }: PlaywrightProps<IconWithTooltipProps>) =>
-  async (actionName: string) => {
-    await step("show the tooltip on hover", async () => {
-      const canvas = within(canvasElement);
-      const icon = canvas.getByTitle(
-        "Use the `i` icon to give details that might not be critical but are 'good to know'",
-      );
-      await userEvent.hover(icon);
-      await axeRun(actionName);
-      await userEvent.unhover(icon);
-    });
-  };
-
 export const Default: StoryObj<typeof IconWithTooltip> = {
   args: {
     tooltipText:
       "Use the `i` icon to give details that might not be critical but are 'good to know'",
   },
   play: async ({ canvasElement, step }) => {
-    await showTooltip({ canvasElement, step })("IconWithTooltip");
+    await step("Show tooltip", async () => {
+      await userEvent.click(canvasElement);
+      await userEvent.tab();
+    });
   },
 };
 
@@ -102,5 +88,11 @@ export const AnyIcon: StoryObj<typeof IconWithTooltip> = {
   args: {
     IconComponent: <GroupIcon />,
     tooltipText: "This is a group of people",
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("Show tooltip", async () => {
+      await userEvent.click(canvasElement);
+      await userEvent.tab();
+    });
   },
 };

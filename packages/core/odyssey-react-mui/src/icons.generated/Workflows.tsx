@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -31,7 +31,7 @@ const WorkflowsIcon = forwardRef<SVGSVGElement, WorkflowsIconProps>(
         <>
           <path
             clipRule="evenodd"
-            d="M12.333 1.333a2.333 2.333 0 1 0 0 4.667 2.333 2.333 0 0 0 0-4.667Zm-1 2.334a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm-5.5 0c-.82 0-1.5.68-1.5 1.666v3.334H3V5.333c0-1.613 1.173-3 2.833-3 1.661 0 2.834 1.387 2.834 3v5.334c0 .969.695 1.666 1.5 1.666.786 0 1.5-.73 1.5-1.719v-3.28H13v3.28c0 1.577-1.17 3.053-2.833 3.053-1.645 0-2.834-1.403-2.834-3V5.333c0-.985-.68-1.666-1.5-1.666Zm-4.5 8.666a2.333 2.333 0 1 1 4.667 0 2.333 2.333 0 0 1-4.667 0Zm2.334-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z"
+            d="M12.333 1.333a2.333 2.333 0 1 0 0 4.667 2.333 2.333 0 0 0 0-4.667m-1 2.334a1 1 0 1 1 2 0 1 1 0 0 1-2 0m-5.5 0c-.82 0-1.5.68-1.5 1.666v3.334H3V5.333c0-1.613 1.173-3 2.833-3s2.834 1.387 2.834 3v5.334c0 .969.695 1.666 1.5 1.666.786 0 1.5-.73 1.5-1.719v-3.28H13v3.28c0 1.577-1.17 3.053-2.833 3.053-1.645 0-2.834-1.403-2.834-3V5.333c0-.985-.68-1.666-1.5-1.666m-4.5 8.666a2.333 2.333 0 1 1 4.667 0 2.333 2.333 0 0 1-4.667 0m2.334-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2"
             fill="currentColor"
             fillRule="evenodd"
           />

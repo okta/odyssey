@@ -31,18 +31,50 @@ export const headerCopyrightLicense = `/*!
 
 `;
 
-readdir("./src/icons.generated")
-  .then((filenames) =>
-    headerCopyrightLicense.concat(
-      filenames
-        .map((filename) => basename(filename, extname(filename)))
-        .map((filename) => `export * from "./${filename}.js";`)
-        .join("\n"),
-    ),
+const getExportStatements = async ({
+  directoryPath,
+  exportDirectory,
+}: {
+  directoryPath: string;
+  exportDirectory: string;
+}) => {
+  const filenames = await readdir(directoryPath);
+
+  return filenames
+    .filter((filename) => extname(filename) === ".tsx")
+    .map((filename) => basename(filename, extname(filename)))
+    .map((filename) =>
+      exportDirectory
+        ? `export * from "./${exportDirectory}/${filename}.js";`
+        : `export * from "./${filename}.js";`,
+    )
+    .join("\n");
+};
+
+Promise.all([
+  getExportStatements({
+    directoryPath: "./src/icons.generated",
+    exportDirectory: "",
+  }),
+  getExportStatements({
+    directoryPath: "./src/logos.generated",
+    exportDirectory: "",
+  }),
+])
+  .then(([iconsExportStatements, logosExportStatements]) =>
+    Promise.all([
+      writeFile(
+        "./src/icons.generated/index.ts",
+        `${headerCopyrightLicense}${iconsExportStatements}\n`,
+      ),
+      writeFile(
+        "./src/logos.generated/index.ts",
+        `${headerCopyrightLicense}${logosExportStatements}\n`,
+      ),
+    ]),
   )
-  .then((content) => writeFile("./src/icons.generated/index.ts", content))
   .then(() => {
-    console.info("Completed writing index file.");
+    console.info("Completed writing icon and logo index files.");
   })
   .catch((error) => {
     console.error(error);

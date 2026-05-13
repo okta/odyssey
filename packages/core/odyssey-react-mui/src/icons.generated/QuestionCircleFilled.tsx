@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -33,7 +33,7 @@ const QuestionCircleFilledIcon = forwardRef<
       <>
         <path
           clipRule="evenodd"
-          d="M15.333 8A7.333 7.333 0 1 1 .667 8a7.333 7.333 0 0 1 14.666 0ZM8.015 5.333c-.546 0-.996.45-.996.996H5.685A2.334 2.334 0 0 1 8.015 4a2.334 2.334 0 0 1 2.33 2.33c0 .937-.492 1.64-1.251 2.075l-.016.009-.017.008a1.35 1.35 0 0 0-.45.386c-.13.173-.179.327-.179.431a.667.667 0 0 1-1.333 0c0-.478.2-.906.445-1.231a2.68 2.68 0 0 1 .902-.769c.395-.23.565-.52.565-.91 0-.546-.45-.996-.996-.996Zm-.215 7a.833.833 0 1 0 0-1.666.833.833 0 0 0 0 1.666Z"
+          d="M15.333 8A7.333 7.333 0 1 1 .667 8a7.333 7.333 0 0 1 14.666 0M8.015 5.333c-.546 0-.996.45-.996.996H5.685A2.334 2.334 0 0 1 8.015 4a2.334 2.334 0 0 1 2.33 2.33c0 .937-.492 1.64-1.251 2.075l-.016.009-.017.008a1.35 1.35 0 0 0-.45.386c-.13.173-.179.327-.179.431a.667.667 0 0 1-1.333 0c0-.478.2-.906.445-1.231a2.7 2.7 0 0 1 .902-.769c.395-.23.565-.52.565-.91 0-.546-.45-.996-.996-.996m-.215 7a.833.833 0 1 0 0-1.666.833.833 0 0 0 0 1.666"
           fill="currentColor"
           fillRule="evenodd"
         />

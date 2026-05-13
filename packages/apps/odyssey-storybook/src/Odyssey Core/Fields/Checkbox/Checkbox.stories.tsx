@@ -17,7 +17,7 @@ import {
   deepmerge,
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, fn, userEvent, within } from "storybook/test";
+import { fn } from "storybook/test";
 
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { useStoryArgOrLocalState } from "../../../tools/useStoryArgOrLocalState.js";
@@ -216,20 +216,6 @@ const CheckboxTemplate: Story = {
   },
 };
 
-const checkTheBox =
-  (): Story["play"] =>
-  ({ canvasElement, step }) =>
-    step("check the box", async ({ args }) => {
-      const canvas = within(canvasElement);
-      const checkBox = canvas.getByRole("checkbox");
-      if (checkBox) {
-        await userEvent.click(checkBox);
-      }
-      await userEvent.tab();
-      await expect(checkBox).toBeChecked();
-      await expect(args.onBlur).toHaveBeenCalledTimes(1);
-    });
-
 export const Default: Story = {
   ...deepmerge(CheckboxTemplate, {
     parameters: {
@@ -240,7 +226,6 @@ export const Default: Story = {
         },
       },
     },
-    play: checkTheBox(),
     tags: ["!autodocs"],
   }),
 };
@@ -259,7 +244,6 @@ export const Required: Story = {
       isRequired: true,
       isChecked: false,
     },
-    play: checkTheBox(),
   }),
 };
 
@@ -311,7 +295,6 @@ export const Invalid: Story = {
       validity: "invalid",
       isChecked: false,
     },
-    play: checkTheBox(),
   }),
 };
 
@@ -321,7 +304,6 @@ export const ReadOnly: Story = {
       isReadOnly: true,
       isChecked: true,
     },
-    play: checkTheBox(),
   }),
 };
 
@@ -337,7 +319,6 @@ export const Hint: Story = {
     args: {
       hint: "Hint text",
     },
-    play: checkTheBox(),
   }),
 };
 

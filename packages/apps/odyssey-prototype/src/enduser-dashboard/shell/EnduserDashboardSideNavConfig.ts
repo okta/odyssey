@@ -12,17 +12,50 @@
 
 import type { SideNavItem } from "@okta/odyssey-react-mui/ui-shell";
 
+import {
+  AppsIcon,
+  HomeIcon,
+  NotificationIcon,
+} from "@okta/odyssey-react-mui/icons";
+import { createElement } from "react";
+
+export const ENDUSER_DASHBOARD_ADD_SECTION_EVENT =
+  "enduser-dashboard:open-add-section";
+
 export const ENDUSER_DASHBOARD_SIDE_NAV_CONFIG: SideNavItem[] = [
   {
-    id: "nav-enduser-dashboard",
-    label: "Dashboard",
-    isDefaultExpanded: true,
+    id: "nav-my-apps",
+    label: "My Apps",
+    startIcon: createElement(HomeIcon, { fontSize: "small" }),
+    href: "/enduser-dashboard",
     nestedNavItems: [
       {
-        id: "nav-enduser-dashboard-home",
-        label: "Dashboard",
+        id: "nav-my-apps-work",
+        label: "Work",
         href: "/enduser-dashboard",
       },
+      {
+        id: "nav-my-apps-add-section",
+        label: "Add section",
+        onClick: () => {
+          window.dispatchEvent(
+            new CustomEvent(ENDUSER_DASHBOARD_ADD_SECTION_EVENT),
+          );
+        },
+      },
     ],
+  },
+  {
+    id: "nav-notifications",
+    label: "Notifications",
+    startIcon: createElement(NotificationIcon, { fontSize: "small" }),
+    count: 1,
+    onClick: () => {},
+  },
+  {
+    id: "nav-add-apps",
+    label: "Add apps",
+    startIcon: createElement(AppsIcon, { fontSize: "small" }),
+    onClick: () => {},
   },
 ];

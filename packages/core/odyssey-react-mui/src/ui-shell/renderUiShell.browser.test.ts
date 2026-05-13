@@ -10,45 +10,32 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { act, waitFor } from "@testing-library/react";
-
+import { appendToSandbox } from "../test-utils/appendToSandbox.js";
 import { appRootElementId } from "../web-component/createReactRootElements.js";
 import {
   versionedWebComponentName,
   webComponentDataAttributeName,
 } from "../web-component/renderReactInWebComponent.js";
 import { renderUiShell } from "./renderUiShell.js";
+
 const webComponentSelector = `[${webComponentDataAttributeName}]`;
 
+// `parentElement` in every test is tagged via `appendToSandbox` so the global
+// afterEach in `vitest-browser-setup.ts` removes it.
 describe(renderUiShell.name, () => {
-  afterEach(async () => {
-    // This needs to be wrapped in `act` because the web component unmounts the React app, and React events have to be wrapped in `act`.
-    await act(async () => {
-      // Remove any appended elements because of this hacky process of rendering to the global DOM.
-      document.body.innerHTML = "";
-      return Promise.resolve();
-    });
-  });
-
   test("`UiShell` renders after `onRender`", async () => {
     const nonce = "test-nonce";
     globalThis.cspNonce = nonce;
     const onRender = vi.fn();
-    const parentElement = document.createElement("div");
-
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
-    document.body.append(parentElement);
+    const parentElement = appendToSandbox(document.createElement("div"));
 
     expect(parentElement.innerHTML).toBe("");
 
-    const uiShellElement = await act(() => {
-      const { uiShellElement } = renderUiShell({
-        appElementScrollingMode: "vertical",
-        onRender,
-        parentElement,
-      });
-
-      return uiShellElement;
+    const { uiShellElement } = renderUiShell({
+      appElementScrollingMode: "vertical",
+      onRender,
+      parentElement,
     });
 
     expect(parentElement.innerHTML).not.toBe("");
@@ -57,165 +44,133 @@ describe(renderUiShell.name, () => {
       uiShellElement.shadowRoot!.getElementById(appRootElementId)!.innerHTML,
     ).toBe("");
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onRender).toHaveBeenCalled();
     });
 
-    act(() => {
-      expect(
-        uiShellElement.shadowRoot!.getElementById(appRootElementId)!.innerHTML,
-      ).not.toBe("");
+    expect(
+      uiShellElement.shadowRoot!.getElementById(appRootElementId)!.innerHTML,
+    ).not.toBe("");
 
-      expect(onRender).toHaveBeenCalledTimes(1);
-    });
+    expect(onRender).toHaveBeenCalledTimes(1);
   });
 
   test("`onRender` contains UI Shell return values", async () => {
     const nonce = "test-nonce-2";
     const onRender =
       vi.fn<NonNullable<Parameters<typeof renderUiShell>[0]["onRender"]>>();
-    const parentElement = document.createElement("div");
-
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
-    document.body.append(parentElement);
+    const parentElement = appendToSandbox(document.createElement("div"));
 
-    const uiShellElement = await act(() => {
-      const { uiShellElement } = renderUiShell({
-        appElementScrollingMode: "vertical",
-        onRender,
-        parentElement,
-        nonce,
-      });
-
-      return uiShellElement;
+    const { uiShellElement } = renderUiShell({
+      appElementScrollingMode: "vertical",
+      onRender,
+      parentElement,
+      nonce,
     });
+
     expect(uiShellElement).toHaveAttribute("nonce", nonce);
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onRender).toHaveBeenCalled();
     });
 
-    act(() => {
-      const {
-        appElement,
-        closeRightSideMenu,
-        closeSideNavMenu,
-        setComponentProps,
-        slottedElements,
-        uiShellElement,
-      } = onRender.mock.calls[0][0];
+    const {
+      appElement,
+      closeRightSideMenu,
+      closeSideNavMenu,
+      setComponentProps,
+      slottedElements,
+      uiShellElement: returnedUiShellElement,
+    } = onRender.mock.calls[0][0];
 
-      expect(appElement).toBeInstanceOf(HTMLDivElement);
-      expect(closeRightSideMenu).toBeInstanceOf(Function);
-      expect(closeSideNavMenu).toBeInstanceOf(Function);
-      expect(setComponentProps).toBeInstanceOf(Function);
-      expect(slottedElements).toBeInstanceOf(Object);
-      expect(uiShellElement).toHaveAttribute(webComponentDataAttributeName);
-    });
+    expect(appElement).toBeInstanceOf(HTMLDivElement);
+    expect(closeRightSideMenu).toBeInstanceOf(Function);
+    expect(closeSideNavMenu).toBeInstanceOf(Function);
+    expect(setComponentProps).toBeInstanceOf(Function);
+    expect(slottedElements).toBeInstanceOf(Object);
+    expect(returnedUiShellElement).toHaveAttribute(
+      webComponentDataAttributeName,
+    );
   });
 
   test("returns app's element", () => {
-    const parentElement = document.createElement("div");
-
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
-    document.body.append(parentElement);
+    const parentElement = appendToSandbox(document.createElement("div"));
 
-    act(() => {
-      const { appElement } = renderUiShell({
-        appElementScrollingMode: "vertical",
-        parentElement,
-      });
-
-      expect(appElement).toBeInstanceOf(HTMLDivElement);
+    const { appElement } = renderUiShell({
+      appElementScrollingMode: "vertical",
+      parentElement,
     });
+
+    expect(appElement).toBeInstanceOf(HTMLDivElement);
   });
 
   test("returns slotted elements from inside the web component", () => {
-    const parentElement = document.createElement("div");
-
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
-    document.body.append(parentElement);
+    const parentElement = appendToSandbox(document.createElement("div"));
 
-    act(() => {
-      const { slottedElements } = renderUiShell({
-        appElementScrollingMode: "vertical",
-        parentElement,
-      });
-
-      expect(slottedElements.banners).toBeInstanceOf(HTMLDivElement);
-      expect(slottedElements.sideNavFooter).toBeInstanceOf(HTMLDivElement);
-      expect(slottedElements.topNavLeftSide).toBeInstanceOf(HTMLDivElement);
-      expect(slottedElements.topNavRightSide).toBeInstanceOf(HTMLDivElement);
+    const { slottedElements } = renderUiShell({
+      appElementScrollingMode: "vertical",
+      parentElement,
     });
+
+    expect(slottedElements.banners).toBeInstanceOf(HTMLDivElement);
+    expect(slottedElements.sideNavFooter).toBeInstanceOf(HTMLDivElement);
+    expect(slottedElements.topNavLeftSide).toBeInstanceOf(HTMLDivElement);
+    expect(slottedElements.topNavRightSide).toBeInstanceOf(HTMLDivElement);
   });
 
   test("returns UI Shell web component element", () => {
-    const parentElement = document.createElement("div");
-
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
-    document.body.append(parentElement);
+    const parentElement = appendToSandbox(document.createElement("div"));
 
-    act(() => {
-      const { uiShellElement } = renderUiShell({
-        appElementScrollingMode: "vertical",
-        parentElement,
-      });
-
-      expect(uiShellElement.elementName).toEqual(versionedWebComponentName);
+    const { uiShellElement } = renderUiShell({
+      appElementScrollingMode: "vertical",
+      parentElement,
     });
+
+    expect(uiShellElement.elementName).toEqual(versionedWebComponentName);
   });
 
-  test("renders `UiShell` component in a web component", () => {
-    const parentElement = document.createElement("div");
-
+  test("renders `UiShell` component in a web component", async () => {
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
-    document.body.append(parentElement);
+    const parentElement = appendToSandbox(document.createElement("div"));
 
-    // This needs to be wrapped in `act` because the web component mounts the React app, and React events have to be wrapped in `act`.
-    act(() => {
-      renderUiShell({
-        appElementScrollingMode: "vertical",
-        parentElement,
-      });
+    renderUiShell({
+      appElementScrollingMode: "vertical",
+      parentElement,
     });
 
-    expect(
-      Array.from(
-        parentElement.querySelector(webComponentSelector)!.shadowRoot!.children,
-      ).length,
-    ).toBeGreaterThan(0);
+    await vi.waitFor(() => {
+      expect(
+        Array.from(
+          parentElement.querySelector(webComponentSelector)!.shadowRoot!
+            .children,
+        ).length,
+      ).toBeGreaterThan(0);
+    });
   });
 
   test("renders `UiShell` with updated props", async () => {
-    const parentElement = document.createElement("div");
+    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
+    const parentElement = appendToSandbox(document.createElement("div"));
     const appName = "Hello World!";
 
-    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
-    document.body.append(parentElement);
-
-    // This needs to be wrapped in `act` because the web component mounts the React app, and React events have to be wrapped in `act`.
-    const setComponentProps = await act(() => {
-      const { setComponentProps } = renderUiShell({
-        appElementScrollingMode: "vertical",
-        parentElement,
-      });
-
-      return setComponentProps;
+    const { setComponentProps } = renderUiShell({
+      appElementScrollingMode: "vertical",
+      parentElement,
     });
 
-    await act(async () => {
-      await Promise.resolve();
-
-      setComponentProps({
-        sideNavProps: {
-          appName,
-          sideNavItems: [],
-        },
-        topNavProps: {},
-      });
+    setComponentProps({
+      sideNavProps: {
+        appName,
+        sideNavItems: [],
+      },
+      topNavProps: {},
     });
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(
         parentElement
           .querySelector(webComponentSelector)!
@@ -225,29 +180,24 @@ describe(renderUiShell.name, () => {
   });
 
   test("renders `UiShell` with immediately updated props", async () => {
-    const parentElement = document.createElement("div");
+    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
+    const parentElement = appendToSandbox(document.createElement("div"));
     const appName = "Hello World!";
 
-    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
-    document.body.append(parentElement);
-
-    // This needs to be wrapped in `act` because the web component mounts the React app, and React events have to be wrapped in `act`.
-    act(() => {
-      const { setComponentProps } = renderUiShell({
-        appElementScrollingMode: "vertical",
-        parentElement,
-      });
-
-      setComponentProps({
-        sideNavProps: {
-          appName,
-          sideNavItems: [],
-        },
-        topNavProps: {},
-      });
+    const { setComponentProps } = renderUiShell({
+      appElementScrollingMode: "vertical",
+      parentElement,
     });
 
-    await waitFor(() => {
+    setComponentProps({
+      sideNavProps: {
+        appName,
+        sideNavItems: [],
+      },
+      topNavProps: {},
+    });
+
+    await vi.waitFor(() => {
       expect(
         parentElement
           .querySelector(webComponentSelector)!
@@ -257,38 +207,31 @@ describe(renderUiShell.name, () => {
   });
 
   test("renders `<div>` in the event of an error", async () => {
-    const consoleError = vi.fn();
     const onError = vi.fn();
     const testBreakError = new Error("TEST BREAK!");
 
-    const parentElement = document.createElement("div");
-
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
-    document.body.append(parentElement);
+    const parentElement = appendToSandbox(document.createElement("div"));
 
     const consoleErrorSpy = vi
       .spyOn(console, "error")
-      .mockImplementation(consoleError);
+      .mockImplementation(vi.fn());
 
-    act(() => {
-      const { setComponentProps } = renderUiShell({
-        appElementScrollingMode: "vertical",
-        onError,
-        parentElement,
-      });
-
-      setComponentProps(
-        // We're purposefully testing an error state, so we need to send something that will cause an error.
-        () => {
-          throw testBreakError;
-        },
-      );
+    const { setComponentProps } = renderUiShell({
+      appElementScrollingMode: "vertical",
+      onError,
+      parentElement,
     });
 
-    await waitFor(() => {
-      expect(onError).toHaveBeenCalledTimes(1);
+    setComponentProps(
+      // We're purposefully testing an error state, so we need to send something that will cause an error.
+      () => {
+        throw testBreakError;
+      },
+    );
 
-      expect(consoleError).toHaveBeenCalledWith(testBreakError);
+    await vi.waitFor(() => {
+      expect(onError).toHaveBeenCalledTimes(1);
 
       expect(
         parentElement

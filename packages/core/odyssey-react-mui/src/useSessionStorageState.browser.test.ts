@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { act, renderHook } from "@testing-library/react";
+import { renderHook } from "vitest-browser-react";
 
 import {
   getSessionStorageValue,
@@ -18,10 +18,6 @@ import {
 } from "./useSessionStorageState.js";
 
 describe(getSessionStorageValue.name, () => {
-  afterEach(() => {
-    window.sessionStorage.clear();
-  });
-
   test("Gets `null` with null string key", () => {
     const sessionStorageValue = getSessionStorageValue("");
 
@@ -70,10 +66,6 @@ describe(getSessionStorageValue.name, () => {
 });
 
 describe(useSessionStorageState.name, () => {
-  afterEach(() => {
-    window.sessionStorage.clear();
-  });
-
   describe("key", () => {
     test("throws error when no key passed", () => {
       expect(() => {
@@ -81,11 +73,11 @@ describe(useSessionStorageState.name, () => {
           initialState: null,
           key: "",
         });
-      }).toThrowError();
+      }).toThrow();
     });
 
-    test("state is `null` with an unused key", () => {
-      const { result } = renderHook(() =>
+    test("state is `null` with an unused key", async () => {
+      const { result } = await renderHook(() =>
         useSessionStorageState({
           initialState: null,
           key: "testKey",
@@ -95,7 +87,7 @@ describe(useSessionStorageState.name, () => {
       expect(result.current.sessionState).toBe(null);
     });
 
-    test("gets session state if already set", () => {
+    test("gets session state if already set", async () => {
       const expectedSessionStorageValue = {
         a: "Test A",
         b: "Test B",
@@ -106,7 +98,7 @@ describe(useSessionStorageState.name, () => {
         JSON.stringify(expectedSessionStorageValue),
       );
 
-      const { result } = renderHook(() =>
+      const { result } = await renderHook(() =>
         useSessionStorageState({
           initialState: {},
           key: "testKey",
@@ -116,7 +108,7 @@ describe(useSessionStorageState.name, () => {
       expect(result.current.sessionState).toEqual(expectedSessionStorageValue);
     });
 
-    test("updates session storage with value", () => {
+    test("updates session storage with value", async () => {
       const expectedSessionStorageValue = {
         a: "Test A",
         b: "Test B",
@@ -124,21 +116,23 @@ describe(useSessionStorageState.name, () => {
 
       const initialState = {};
 
-      const { result } = renderHook(() =>
+      const { result } = await renderHook(() =>
         useSessionStorageState({
           initialState,
           key: "testKey",
         }),
       );
 
-      act(() => {
-        result.current.setSessionState(expectedSessionStorageValue);
-      });
+      result.current.setSessionState(expectedSessionStorageValue);
 
-      expect(result.current.sessionState).toEqual(expectedSessionStorageValue);
+      await vi.waitFor(() => {
+        expect(result.current.sessionState).toEqual(
+          expectedSessionStorageValue,
+        );
+      });
     });
 
-    test("updates session storage after local state update", () => {
+    test("updates session storage after local state update", async () => {
       const expectedSessionStorageValue = {
         a: "Test A",
         b: "Test B",
@@ -146,49 +140,53 @@ describe(useSessionStorageState.name, () => {
 
       const initialState = {};
 
-      const { result } = renderHook(() =>
+      const { result } = await renderHook(() =>
         useSessionStorageState({
           initialState,
           key: "testKey",
         }),
       );
 
-      act(() => {
-        result.current.setSessionState(expectedSessionStorageValue);
-      });
+      result.current.setSessionState(expectedSessionStorageValue);
 
-      expect(window.sessionStorage.getItem("testKey")).toBe(
-        JSON.stringify(expectedSessionStorageValue),
-      );
+      await vi.waitFor(() => {
+        expect(window.sessionStorage.getItem("testKey")).toBe(
+          JSON.stringify(expectedSessionStorageValue),
+        );
+      });
     });
 
-    test("updates state after 2 updates", () => {
+    test("updates state after 2 updates", async () => {
       const expectedSessionStorageValue = "This is the expected value.";
 
-      const { result } = renderHook(() =>
+      const { result } = await renderHook(() =>
         useSessionStorageState({
           initialState: "",
           key: "testKey",
         }),
       );
 
-      act(() => {
-        result.current.setSessionState("This is a test.");
+      result.current.setSessionState("This is a test.");
+
+      await vi.waitFor(() => {
+        expect(result.current.sessionState).toBe("This is a test.");
       });
 
-      act(() => {
-        result.current.setSessionState(expectedSessionStorageValue);
-      });
+      result.current.setSessionState(expectedSessionStorageValue);
 
-      expect(result.current.sessionState).toEqual(expectedSessionStorageValue);
+      await vi.waitFor(() => {
+        expect(result.current.sessionState).toEqual(
+          expectedSessionStorageValue,
+        );
+      });
     });
 
-    test("gets correct session storage value after updating `key`", () => {
+    test("gets correct session storage value after updating `key`", async () => {
       const expectedSessionStorageValueA = "Test A";
       const expectedSessionStorageValueB = "Test B";
 
-      const { result, rerender } = renderHook(
-        (key: string) =>
+      const { result, rerender } = await renderHook(
+        (key = "testKey") =>
           useSessionStorageState({
             initialState: "",
             key,
@@ -198,31 +196,31 @@ describe(useSessionStorageState.name, () => {
         },
       );
 
-      act(() => {
-        result.current.setSessionState(expectedSessionStorageValueA);
+      result.current.setSessionState(expectedSessionStorageValueA);
+
+      await vi.waitFor(() => {
+        expect(result.current.sessionState).toBe(expectedSessionStorageValueA);
       });
 
-      act(() => {
-        rerender("newTestKey");
+      await rerender("newTestKey");
+
+      result.current.setSessionState(expectedSessionStorageValueB);
+
+      await vi.waitFor(() => {
+        expect(result.current.sessionState).toBe(expectedSessionStorageValueB);
       });
 
-      act(() => {
-        result.current.setSessionState(expectedSessionStorageValueB);
+      await rerender("testKey");
+
+      await vi.waitFor(() => {
+        expect(result.current.sessionState).toBe(expectedSessionStorageValueA);
       });
-
-      expect(result.current.sessionState).toBe(expectedSessionStorageValueB);
-
-      act(() => {
-        rerender("testKey");
-      });
-
-      expect(result.current.sessionState).toBe(expectedSessionStorageValueA);
     });
   });
 
   describe("initial state", () => {
-    test("is null when null", () => {
-      const { result } = renderHook(() =>
+    test("is null when null", async () => {
+      const { result } = await renderHook(() =>
         useSessionStorageState({
           initialState: null,
           key: "testKey",
@@ -232,10 +230,10 @@ describe(useSessionStorageState.name, () => {
       expect(result.current.sessionState).toBe(null);
     });
 
-    test("is string when string", () => {
+    test("is string when string", async () => {
       const expectedValue = "This is a test.";
 
-      const { result } = renderHook(() =>
+      const { result } = await renderHook(() =>
         useSessionStorageState({
           initialState: expectedValue,
           key: "testKey",
@@ -245,13 +243,13 @@ describe(useSessionStorageState.name, () => {
       expect(result.current.sessionState).toBe(expectedValue);
     });
 
-    test("is object when object", () => {
+    test("is object when object", async () => {
       const expectedValue = {
         a: "Test A",
         b: "Test B",
       };
 
-      const { result } = renderHook(() =>
+      const { result } = await renderHook(() =>
         useSessionStorageState({
           initialState: expectedValue,
           key: "testKey",
@@ -261,7 +259,7 @@ describe(useSessionStorageState.name, () => {
       expect(result.current.sessionState).toBe(expectedValue);
     });
 
-    test("retains state after update", () => {
+    test("retains state after update", async () => {
       const expectedValue = {
         a: "Test A",
         b: "Test B",
@@ -269,26 +267,26 @@ describe(useSessionStorageState.name, () => {
 
       const initialState = {};
 
-      const { result } = renderHook(() =>
+      const { result } = await renderHook(() =>
         useSessionStorageState({
           initialState,
           key: "testKey",
         }),
       );
 
-      act(() => {
-        result.current.setSessionState(expectedValue);
-      });
+      result.current.setSessionState(expectedValue);
 
-      expect(result.current.sessionState).toBe(expectedValue);
+      await vi.waitFor(() => {
+        expect(result.current.sessionState).toBe(expectedValue);
+      });
     });
 
-    test("changes session storage state after updating `initialState`", () => {
+    test("changes session storage state after updating `initialState`", async () => {
       const expectedSessionStorageValueA = "Test A";
       const expectedSessionStorageValueB = "Test B";
 
-      const { result, rerender } = renderHook(
-        (initialState: string) =>
+      const { result, rerender } = await renderHook(
+        (initialState = expectedSessionStorageValueA) =>
           useSessionStorageState({
             initialState,
             key: "testKey",
@@ -300,11 +298,11 @@ describe(useSessionStorageState.name, () => {
 
       expect(result.current.sessionState).toBe(expectedSessionStorageValueA);
 
-      act(() => {
-        rerender("Test B");
-      });
+      await rerender("Test B");
 
-      expect(result.current.sessionState).toBe(expectedSessionStorageValueB);
+      await vi.waitFor(() => {
+        expect(result.current.sessionState).toBe(expectedSessionStorageValueB);
+      });
     });
   });
 });

@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Config } from "@svgr/core";
+import type { Config } from "@svgr/core";
 
 import { iconTemplate } from "./iconTemplate";
 
@@ -20,7 +20,12 @@ const svgrConfig: Config = {
   prettierConfig: {
     parser: "typescript",
   },
-  template: iconTemplate,
+  template:
+    process.env.ODYSSEY_ICONS_TYPE === "icon"
+      ? iconTemplate({})
+      : iconTemplate({
+          iconSize: 32,
+        }),
   typescript: true,
 };
 

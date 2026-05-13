@@ -18,9 +18,7 @@ import {
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { useCallback } from "storybook/preview-api";
-import { screen, userEvent, within } from "storybook/test";
-
-import type { PlaywrightProps } from "../../../tools/storybookTypes.js";
+import { userEvent, within } from "storybook/test";
 
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { useStoryArgOrLocalState } from "../../../tools/useStoryArgOrLocalState.js";
@@ -125,18 +123,6 @@ const storybookMeta: Meta<typeof Dialog> = {
 
 export default storybookMeta;
 
-const findDialogElement = async ({
-  canvasElement,
-  step,
-}: PlaywrightProps<DialogProps>) => {
-  await step("Check Dialog", async () => {
-    const canvas = within(canvasElement);
-    const buttonElement = canvas.getByText("Open dialog");
-    await userEvent.click(buttonElement);
-    await screen.findByRole("dialog");
-  });
-};
-
 const DefaultTemplate: StoryObj<DialogProps> = {
   render: function C(args, context) {
     const { value, setValue } = useStoryArgOrLocalState<DialogProps, "isOpen">({
@@ -190,14 +176,27 @@ const DefaultTemplate: StoryObj<DialogProps> = {
 
 export const Default: StoryObj<DialogProps> = {
   ...DefaultTemplate,
-  play: async ({ canvasElement, step }: PlaywrightProps<DialogProps>) => {
-    await findDialogElement({ canvasElement, step });
-  },
   tags: ["!autodocs"],
+  play: async ({ canvasElement, step }) => {
+    await step("Open dialog", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(
+        canvas.getByRole("button", { name: "Open dialog" }),
+      );
+    });
+  },
 };
 
 export const Long: StoryObj<DialogProps> = {
   ...DefaultTemplate,
+  play: async ({ canvasElement, step }) => {
+    await step("Open dialog", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(
+        canvas.getByRole("button", { name: "Open dialog" }),
+      );
+    });
+  },
   parameters: {
     docs: {
       description: {
@@ -353,12 +352,17 @@ export const Long: StoryObj<DialogProps> = {
     ),
     title: "Cryosleep liability waiver",
   },
-  play: async ({ canvasElement, step }: PlaywrightProps<DialogProps>) => {
-    await findDialogElement({ canvasElement, step });
-  },
 };
 
 export const NoButtons: StoryObj<DialogProps> = {
+  play: async ({ canvasElement, step }) => {
+    await step("Open dialog", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(
+        canvas.getByRole("button", { name: "Open dialog" }),
+      );
+    });
+  },
   render: function C(args, context) {
     const { value, setValue } = useStoryArgOrLocalState<DialogProps, "isOpen">({
       args,
@@ -381,8 +385,5 @@ export const NoButtons: StoryObj<DialogProps> = {
         <Dialog {...args} isOpen={value} onClose={handleClose} />
       </>
     );
-  },
-  play: async ({ canvasElement, step }: PlaywrightProps<DialogProps>) => {
-    await findDialogElement({ canvasElement, step });
   },
 };

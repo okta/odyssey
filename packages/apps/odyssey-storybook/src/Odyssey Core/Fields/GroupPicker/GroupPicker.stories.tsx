@@ -16,6 +16,7 @@ import {
   GroupPickerProps,
 } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react-vite";
+import { screen, userEvent, within } from "storybook/test";
 
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import demoImage from "./demo.png";
@@ -179,11 +180,28 @@ type GroupPickerPropsType = GroupPickerProps<
   boolean | undefined
 >;
 
-export const GroupPickerDefault: StoryObj<GroupPickerPropsType> = {};
+export const GroupPickerDefault: StoryObj<GroupPickerPropsType> = {
+  play: async ({ canvasElement, step }) => {
+    await step("Open dropdown", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("combobox"));
+    });
+  },
+};
 
 export const Multiple: StoryObj<GroupPickerPropsType> = {
   args: {
     hasMultipleChoices: true,
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("Open dropdown", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("combobox"));
+      await userEvent.click(
+        screen.getByRole("option", { name: "English English" }),
+      );
+      await userEvent.click(canvas.getByRole("combobox"));
+    });
   },
 };
 

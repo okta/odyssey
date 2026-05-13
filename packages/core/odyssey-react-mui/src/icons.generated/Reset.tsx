@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -30,7 +30,7 @@ const ResetIcon = forwardRef<SVGSVGElement, ResetIconProps>((props, ref) => {
       <>
         <path
           clipRule="evenodd"
-          d="M2 8a6 6 0 0 1 10.99-3.333h-2.323V6h3.482c.08 0 .174 0 .258-.007.096-.008.235-.028.38-.102a1 1 0 0 0 .437-.437 1.01 1.01 0 0 0 .103-.38c.006-.084.006-.18.006-.259V1.333H14v2.45A7.333 7.333 0 1 0 15.333 8H14A6 6 0 0 1 2 8Z"
+          d="M2 8a6 6 0 0 1 10.99-3.333h-2.323V6h3.482c.08 0 .174 0 .258-.007.096-.008.235-.028.38-.102a1 1 0 0 0 .437-.437 1 1 0 0 0 .103-.38c.006-.084.006-.18.006-.259V1.333H14v2.45A7.333 7.333 0 1 0 15.333 8H14A6 6 0 0 1 2 8"
           fill="currentColor"
           fillRule="evenodd"
         />

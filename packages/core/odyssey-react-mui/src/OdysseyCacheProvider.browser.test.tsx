@@ -10,31 +10,29 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { render } from "vitest-browser-react";
+import { page } from "vitest/browser";
 
 import { Button } from "./index.js";
 import { OdysseyCacheProvider } from "./OdysseyCacheProvider.js";
 
 // This component needs to be tested, even if it doesn't make much sense, because it can't be loaded by Storybook; therefore, any issues will only be seen by consumers of Odyssey.
 describe(OdysseyCacheProvider.displayName!, () => {
-  test("renders without crashing the app", () => {
-    expect(() =>
-      render(
-        <OdysseyCacheProvider>
-          <div />
-        </OdysseyCacheProvider>,
-      ),
-    ).not.toThrow();
+  test("renders without crashing the app", async () => {
+    await render(
+      <OdysseyCacheProvider>
+        <div />
+      </OdysseyCacheProvider>,
+    );
   });
 
-  test("themes a Button", () => {
-    render(
+  test("themes a Button", async () => {
+    await render(
       <OdysseyCacheProvider>
         <Button label="text" variant="primary" />
       </OdysseyCacheProvider>,
     );
 
-    expect(screen.queryByRole("button")).toHaveTextContent("text");
+    await expect.element(page.getByRole("button")).toHaveTextContent("text");
   });
 });

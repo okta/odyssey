@@ -34,7 +34,7 @@ import { Button } from "./Buttons/Button.js";
 import { ButtonContext } from "./Buttons/ButtonContext.js";
 import { MenuButton, MenuButtonProps } from "./Buttons/MenuButton.js";
 import { useTranslation } from "./i18n.generated/i18n.js";
-import { MoreIcon } from "./icons.generated/More.js";
+import { MoreIcon } from "./icons.generated/index.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,

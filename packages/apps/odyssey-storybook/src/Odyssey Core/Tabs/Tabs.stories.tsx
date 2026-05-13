@@ -21,11 +21,7 @@ import {
 import { BugIcon } from "@okta/odyssey-react-mui/icons";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
-import { expect, userEvent, waitFor, within } from "storybook/test";
 
-import type { PlaywrightProps } from "../../tools/storybookTypes.js";
-
-import { axeRun } from "../../axeRun.js";
 import icons from "../../tools/iconUtils.js";
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
@@ -141,25 +137,6 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
 
 export default storybookMeta;
 
-const selectTab =
-  ({ canvasElement, step }: PlaywrightProps<TabItemProps>) =>
-  async (actionName: string, tabName: string) => {
-    await step(`select the ${tabName} tab`, async () => {
-      await axeRun(actionName);
-
-      await waitFor(async () => {
-        const canvas = within(canvasElement);
-        const tabElement = canvas.getByText(tabName);
-
-        await userEvent.click(tabElement);
-        await userEvent.tab();
-
-        const tabData = canvas.getByText(`Information about ${tabName}`);
-        expect(tabData).toBeInTheDocument();
-      });
-    });
-  };
-
 const DefaultTemplate: StoryObj<TabItemProps> = {
   render: function C(args) {
     const tabs: TabItemProps[] = [
@@ -199,9 +176,6 @@ const ExampleTabContent = ({ label }: { label: string }) => {
 
 export const Default: StoryObj<TabItemProps> = {
   ...DefaultTemplate,
-  play: async ({ canvasElement, step }) => {
-    await selectTab({ canvasElement, step })("Tab Default", "Moons");
-  },
 };
 
 export const Disabled: StoryObj<TabItemProps> = {
@@ -211,9 +185,6 @@ export const Disabled: StoryObj<TabItemProps> = {
     label: "Disabled Tab",
     children: "Tab is disabled",
   },
-  play: async ({ canvasElement, step }) => {
-    await selectTab({ canvasElement, step })("Tab Disabled", "Moons");
-  },
 };
 
 export const Icons: StoryObj<TabItemProps> = {
@@ -222,9 +193,6 @@ export const Icons: StoryObj<TabItemProps> = {
     startIcon: <BugIcon />,
     label: "Xenomorphs",
     children: <ExampleTabContent label="Xenomorphs" />,
-  },
-  play: async ({ canvasElement, step }) => {
-    await selectTab({ canvasElement, step })("Tab Icon", "Xenomorphs");
   },
 };
 
@@ -284,9 +252,6 @@ export const WithBadge: StoryObj<TabItemProps> = {
     label: "Xenomorphs",
     value: "xenomorphs",
     children: <ExampleTabContent label="Xenomorphs" />,
-  },
-  play: async ({ canvasElement, step }) => {
-    await selectTab({ canvasElement, step })("Tab Icon", "Xenomorphs");
   },
 };
 

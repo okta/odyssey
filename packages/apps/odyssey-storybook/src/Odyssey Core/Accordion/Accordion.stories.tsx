@@ -13,12 +13,11 @@
 import { Accordion, AccordionProps } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { useCallback, useState } from "react";
-import { expect, userEvent, waitFor, within } from "storybook/test";
+import { userEvent, within } from "storybook/test";
 
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
-import { PlaywrightProps } from "../../tools/storybookTypes.js";
 
-const storybookMeta: Meta<AccordionProps> = {
+const storybookMeta = {
   component: Accordion,
   decorators: [OdysseyStorybookThemeDecorator],
   argTypes: {
@@ -77,11 +76,13 @@ const storybookMeta: Meta<AccordionProps> = {
     label: "Label",
     variant: "default",
   },
-};
+} satisfies Meta<typeof Accordion>;
 
 export default storybookMeta;
 
-export const Single: StoryObj<AccordionProps> = {
+type Story = StoryObj<typeof storybookMeta>;
+
+export const Single: Story = {
   args: {
     children: "This is the content of the box.",
   },
@@ -99,11 +100,17 @@ export const Single: StoryObj<AccordionProps> = {
   },
 };
 
-export const Borderless: StoryObj<AccordionProps> = {
+export const Borderless: Story = {
   args: {
     children: "This is the content of the box.",
     variant: "borderless",
   },
+  play: async ({ canvasElement, step }) => {
+    await step("Expand accordion", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("button", { name: "Label" }));
+    });
+  },
   render: function C(props: AccordionProps) {
     return (
       <Accordion
@@ -117,9 +124,17 @@ export const Borderless: StoryObj<AccordionProps> = {
     );
   },
 };
-export const Multi: StoryObj<AccordionProps> = {
+export const Multi: Story = {
   args: {
     children: "This is the content of the box.",
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("Expand middle accordion", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(
+        canvas.getByRole("button", { name: "Accordion 3" }),
+      );
+    });
   },
   render: function C(props: AccordionProps) {
     return (
@@ -148,7 +163,7 @@ export const Multi: StoryObj<AccordionProps> = {
   },
 };
 
-export const Disabled: StoryObj<AccordionProps> = {
+export const Disabled: Story = {
   args: {
     children: "This is the content of the box.",
     isDisabled: true,
@@ -162,7 +177,7 @@ export const Disabled: StoryObj<AccordionProps> = {
   },
 };
 
-export const Expanded: StoryObj<AccordionProps> = {
+export const Expanded: Story = {
   args: {
     children: "This is the content of the box.",
   },
@@ -177,26 +192,5 @@ export const Expanded: StoryObj<AccordionProps> = {
         {props.children}
       </Accordion>
     );
-  },
-  play: async ({ canvasElement, step }: PlaywrightProps<AccordionProps>) => {
-    await step("Accordion Expanded", async () => {
-      const canvas = within(canvasElement);
-      const accordion = canvas.getByRole("button");
-      const accordionContent = canvas.getByRole("region");
-
-      await waitFor(() => {
-        expect(accordionContent).toBeVisible();
-      });
-
-      await userEvent.click(accordion);
-      await waitFor(() => {
-        expect(accordionContent).not.toBeVisible();
-      });
-
-      await userEvent.click(accordion);
-      await waitFor(() => {
-        expect(accordionContent).toBeVisible();
-      });
-    });
   },
 };

@@ -14,7 +14,6 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { Link, linkVariantValues } from "@okta/odyssey-react-mui";
 import { InformationCircleFilledIcon } from "@okta/odyssey-react-mui/icons";
-import { expect, within } from "storybook/test";
 
 import icons from "../../tools/iconUtils.js";
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
@@ -201,14 +200,5 @@ export const External: Story = {
     rel: "noopener",
     target: "_blank",
     ariaLabel: "External Link",
-  },
-  play: async ({ canvasElement, step }) => {
-    await step("Link Aria-Label", ({ args }) => {
-      const canvas = within(canvasElement);
-      const link = canvas.getByRole("link", { name: "External Link" });
-      expect(link).toHaveAttribute("href", args.href);
-      expect(link).toHaveAttribute("rel", args.rel);
-      expect(link).toHaveAttribute("target", args.target);
-    });
   },
 };

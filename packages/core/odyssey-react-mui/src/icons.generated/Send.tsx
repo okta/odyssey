@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -30,7 +30,7 @@ const SendIcon = forwardRef<SVGSVGElement, SendIconProps>((props, ref) => {
       <>
         <path
           clipRule="evenodd"
-          d="M11.19 3.903 3.839 6.288 7.29 7.82l3.899-3.918ZM8.217 8.781l1.48 3.374 2.446-7.32-3.926 3.946Zm6.07-6.156a.673.673 0 0 0-.846-.854L1.788 5.55a.673.673 0 0 0-.065 1.256l5.182 2.301 2.258 5.15a.673.673 0 0 0 1.255-.057l3.87-11.576Z"
+          d="M11.19 3.903 3.839 6.288 7.29 7.82zM8.217 8.781l1.48 3.374 2.446-7.32zm6.07-6.156a.673.673 0 0 0-.846-.854L1.788 5.55a.673.673 0 0 0-.065 1.256l5.182 2.301 2.258 5.15a.673.673 0 0 0 1.255-.057z"
           fill="currentColor"
           fillRule="evenodd"
         />

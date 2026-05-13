@@ -10,8 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { renderHook, waitFor } from "@testing-library/react";
+import { renderHook } from "vitest-browser-react";
 
+import { appendToSandbox } from "../test-utils/appendToSandbox.js";
 import { useElementAtContainerEdge } from "./useElementAtContainerEdge.js";
 
 const setup = (dir = "ltr") => {
@@ -28,7 +29,8 @@ const setup = (dir = "ltr") => {
   element.textContent = "target";
 
   monitoringElement.appendChild(element);
-  document.body.appendChild(monitoringElement);
+  // Tagged via `appendToSandbox` so the global afterEach removes it.
+  appendToSandbox(monitoringElement);
 
   return { element, monitoringElement };
 };
@@ -75,12 +77,8 @@ const defaultEdgeState = {
 };
 
 describe(useElementAtContainerEdge.name, () => {
-  afterEach(() => {
-    document.body.innerHTML = "";
-  });
-
-  test("should return default edge state when no element is provided", () => {
-    const { result } = renderHook(() => useElementAtContainerEdge({}));
+  test("should return default edge state when no element is provided", async () => {
+    const { result } = await renderHook(() => useElementAtContainerEdge({}));
 
     expect(result.current).toEqual(defaultEdgeState);
   });
@@ -88,11 +86,9 @@ describe(useElementAtContainerEdge.name, () => {
   test("detects content added to the inlineStart", async () => {
     const { element, monitoringElement } = setup();
 
-    const { result } = renderHook(() =>
+    const { result } = await renderHook(() =>
       useElementAtContainerEdge({ element, monitoringElement }),
     );
-
-    expect(result.current).toEqual(defaultEdgeState);
 
     insertElement({
       element,
@@ -100,109 +96,93 @@ describe(useElementAtContainerEdge.name, () => {
       insertPosition: "inlineStart",
     });
 
-    await waitFor(() => {
-      expect(result.current).not.toEqual(defaultEdgeState);
-    });
-
-    expect(result.current).toEqual({
-      isAtContainerInlineStart: false, // isAtContainerInlineStart is false
-      isAtContainerBlockStart: true,
-      isAtContainerInlineEnd: true,
-      isAtContainerBlockEnd: true,
+    await vi.waitFor(() => {
+      expect(result.current).toEqual({
+        isAtContainerInlineStart: false, // isAtContainerInlineStart is false
+        isAtContainerBlockStart: true,
+        isAtContainerInlineEnd: true,
+        isAtContainerBlockEnd: true,
+      });
     });
   });
 
   test("detects content added to the blockStart", async () => {
     const { element, monitoringElement } = setup();
 
-    const { result } = renderHook(() =>
+    const { result } = await renderHook(() =>
       useElementAtContainerEdge({ element, monitoringElement }),
     );
 
-    expect(result.current).toEqual(defaultEdgeState);
-
     insertElement({ element, monitoringElement, insertPosition: "blockStart" });
 
-    await waitFor(() => {
-      expect(result.current).not.toEqual(defaultEdgeState);
-    });
-
-    expect(result.current).toEqual({
-      isAtContainerInlineStart: true,
-      isAtContainerBlockStart: false, // isAtContainerBlockStart is false
-      isAtContainerInlineEnd: true,
-      isAtContainerBlockEnd: true,
+    await vi.waitFor(() => {
+      expect(result.current).toEqual({
+        isAtContainerInlineStart: true,
+        isAtContainerBlockStart: false, // isAtContainerBlockStart is false
+        isAtContainerInlineEnd: true,
+        isAtContainerBlockEnd: true,
+      });
     });
   });
 
   test("detects content added to the inlineEnd", async () => {
     const { element, monitoringElement } = setup();
 
-    const { result } = renderHook(() =>
+    const { result } = await renderHook(() =>
       useElementAtContainerEdge({ element, monitoringElement }),
     );
 
-    expect(result.current).toEqual(defaultEdgeState);
-
     insertElement({ element, monitoringElement, insertPosition: "inlineEnd" });
 
-    await waitFor(() => {
-      expect(result.current).not.toEqual(defaultEdgeState);
-    });
-
-    expect(result.current).toEqual({
-      isAtContainerInlineStart: true,
-      isAtContainerBlockStart: true,
-      isAtContainerInlineEnd: false, // isAtContainerInlineEnd is false
-      isAtContainerBlockEnd: true,
+    await vi.waitFor(() => {
+      expect(result.current).toEqual({
+        isAtContainerInlineStart: true,
+        isAtContainerBlockStart: true,
+        isAtContainerInlineEnd: false, // isAtContainerInlineEnd is false
+        isAtContainerBlockEnd: true,
+      });
     });
   });
 
   test("detects content added to the blockEnd", async () => {
     const { element, monitoringElement } = setup();
 
-    const { result } = renderHook(() =>
+    const { result } = await renderHook(() =>
       useElementAtContainerEdge({ element, monitoringElement }),
     );
 
-    expect(result.current).toEqual(defaultEdgeState);
-
     insertElement({ element, monitoringElement, insertPosition: "blockEnd" });
 
-    await waitFor(() => {
-      expect(result.current).not.toEqual(defaultEdgeState);
-    });
-
-    expect(result.current).toEqual({
-      isAtContainerInlineStart: true,
-      isAtContainerBlockStart: true,
-      isAtContainerInlineEnd: true,
-      isAtContainerBlockEnd: false, // isAtContainerBlockEnd is false
+    await vi.waitFor(() => {
+      expect(result.current).toEqual({
+        isAtContainerInlineStart: true,
+        isAtContainerBlockStart: true,
+        isAtContainerInlineEnd: true,
+        isAtContainerBlockEnd: false, // isAtContainerBlockEnd is false
+      });
     });
   });
 
   test("detects container style changes", async () => {
     const { element, monitoringElement } = setup();
 
-    const { result } = renderHook(() => useElementAtContainerEdge({ element }));
-
-    expect(result.current).toEqual(defaultEdgeState);
+    const { result } = await renderHook(() =>
+      useElementAtContainerEdge({ element }),
+    );
 
     monitoringElement.style.width = "unset";
     monitoringElement.style.height = "unset";
     // Simulate a style change that would affect the element's position
     monitoringElement.style.padding = "20px";
 
-    await waitFor(() => {
-      expect(result.current).not.toEqual(defaultEdgeState);
-    });
-
     // all values should be false now
-    expect(result.current).toEqual({
-      isAtContainerInlineStart: false,
-      isAtContainerBlockStart: false,
-      isAtContainerInlineEnd: false,
-      isAtContainerBlockEnd: false,
+    await vi.waitFor(() => {
+      expect(result.current).toEqual({
+        isAtContainerInlineStart: false,
+        isAtContainerBlockStart: false,
+        isAtContainerInlineEnd: false,
+        isAtContainerBlockEnd: false,
+      });
     });
   });
 
@@ -210,11 +190,9 @@ describe(useElementAtContainerEdge.name, () => {
     test("detects content added to the inlineStart", async () => {
       const { element, monitoringElement } = setup("rtl");
 
-      const { result } = renderHook(() =>
+      const { result } = await renderHook(() =>
         useElementAtContainerEdge({ element, monitoringElement }),
       );
-
-      expect(result.current).toEqual(defaultEdgeState);
 
       insertElement({
         element,
@@ -222,26 +200,22 @@ describe(useElementAtContainerEdge.name, () => {
         insertPosition: "inlineStart",
       });
 
-      await waitFor(() => {
-        expect(result.current).not.toEqual(defaultEdgeState);
-      });
-
-      expect(result.current).toEqual({
-        isAtContainerInlineStart: false, // isAtContainerInlineStart is false
-        isAtContainerInlineEnd: true,
-        isAtContainerBlockStart: true,
-        isAtContainerBlockEnd: true,
+      await vi.waitFor(() => {
+        expect(result.current).toEqual({
+          isAtContainerInlineStart: false, // isAtContainerInlineStart is false
+          isAtContainerInlineEnd: true,
+          isAtContainerBlockStart: true,
+          isAtContainerBlockEnd: true,
+        });
       });
     });
 
     test("detects content added to the inlineEnd", async () => {
       const { element, monitoringElement } = setup("rtl");
 
-      const { result } = renderHook(() =>
+      const { result } = await renderHook(() =>
         useElementAtContainerEdge({ element, monitoringElement }),
       );
-
-      expect(result.current).toEqual(defaultEdgeState);
 
       insertElement({
         element,
@@ -249,15 +223,13 @@ describe(useElementAtContainerEdge.name, () => {
         insertPosition: "inlineEnd",
       });
 
-      await waitFor(() => {
-        expect(result.current).not.toEqual(defaultEdgeState);
-      });
-
-      expect(result.current).toEqual({
-        isAtContainerInlineStart: true,
-        isAtContainerInlineEnd: false, // isAtContainerInlineEnd is false
-        isAtContainerBlockStart: true,
-        isAtContainerBlockEnd: true,
+      await vi.waitFor(() => {
+        expect(result.current).toEqual({
+          isAtContainerInlineStart: true,
+          isAtContainerInlineEnd: false, // isAtContainerInlineEnd is false
+          isAtContainerBlockStart: true,
+          isAtContainerBlockEnd: true,
+        });
       });
     });
   });

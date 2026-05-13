@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -30,7 +30,7 @@ const HomeSelectedIcon = forwardRef<SVGSVGElement, HomeSelectedIconProps>(
       >
         <>
           <path
-            d="M14.667 13.333v-6L8 1.333l-6.667 6v6c0 .737.597 1.334 1.334 1.334h2.666v-4a2.667 2.667 0 0 1 5.334 0v4h2.666c.737 0 1.334-.597 1.334-1.334Z"
+            d="M14.667 13.333v-6L8 1.333l-6.667 6v6c0 .737.597 1.334 1.334 1.334h2.666v-4a2.667 2.667 0 0 1 5.334 0v4h2.666c.737 0 1.334-.597 1.334-1.334"
             fill="currentColor"
           />
         </>

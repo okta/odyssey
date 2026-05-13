@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -33,7 +33,7 @@ const CheckCircleFilledIcon = forwardRef<
       <>
         <path
           clipRule="evenodd"
-          d="M15.333 8A7.333 7.333 0 1 1 .667 8a7.333 7.333 0 0 1 14.666 0ZM5.281 7.471l1.886 1.886 3.77-3.771.944.943-4.007 4.007a1 1 0 0 1-1.414 0L4.338 8.414l.943-.943Z"
+          d="M15.333 8A7.333 7.333 0 1 1 .667 8a7.333 7.333 0 0 1 14.666 0M5.281 7.471l1.886 1.886 3.77-3.771.944.943-4.007 4.007a1 1 0 0 1-1.414 0L4.338 8.414z"
           fill="currentColor"
           fillRule="evenodd"
         />

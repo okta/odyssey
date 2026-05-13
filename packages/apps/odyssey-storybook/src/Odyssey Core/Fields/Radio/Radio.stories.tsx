@@ -12,9 +12,8 @@
 
 import { Radio } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, fn, userEvent, within } from "storybook/test";
+import { fn } from "storybook/test";
 
-import { axeRun } from "../../../axeRun.js";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 
@@ -127,22 +126,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  play: async ({ canvasElement, step }) => {
-    await step("select the radio button", async ({ args }) => {
-      const canvas = within(canvasElement);
-      const radio = canvas.getByRole("radio");
-      if (radio) {
-        await userEvent.click(radio);
-      }
-      await expect(radio).toBeChecked();
-      await expect(args.onChange).toHaveBeenCalledTimes(1);
-      await userEvent.click(canvasElement);
-      await expect(args.onBlur).toHaveBeenCalled();
-      await axeRun("Radio Default");
-    });
-  },
-};
+export const Default: Story = {};
 
 export const Checked: Story = {
   args: {

@@ -78,7 +78,12 @@ const IconWithTooltip = ({
       title={tooltipText}
       translate={translate}
     >
-      <IconContainer odysseyDesignTokens={odysseyDesignTokens} {...muiProps}>
+      <IconContainer
+        aria-label={tooltipText}
+        odysseyDesignTokens={odysseyDesignTokens}
+        role="img"
+        {...muiProps}
+      >
         {IconComponent}
       </IconContainer>
     </MuiTooltip>

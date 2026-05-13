@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -33,7 +33,7 @@ const DangerDiamondFilledIcon = forwardRef<
       <>
         <path
           clipRule="evenodd"
-          d="M6.586 1.138a2 2 0 0 1 2.828 0l5.448 5.448a2 2 0 0 1 0 2.828l-5.448 5.448a2 2 0 0 1-2.828 0L1.138 9.414a2 2 0 0 1 0-2.828l5.448-5.448ZM8 8.667A.667.667 0 0 1 7.333 8V4.667h1.334V8A.667.667 0 0 1 8 8.667Zm0 1.166A.833.833 0 1 0 8 11.5a.833.833 0 0 0 0-1.667Z"
+          d="M6.586 1.138a2 2 0 0 1 2.828 0l5.448 5.448a2 2 0 0 1 0 2.828l-5.448 5.448a2 2 0 0 1-2.828 0L1.138 9.414a2 2 0 0 1 0-2.828zM8 8.667A.667.667 0 0 1 7.333 8V4.667h1.334V8A.667.667 0 0 1 8 8.667m0 1.166A.833.833 0 1 0 8 11.5a.833.833 0 0 0 0-1.667"
           fill="currentColor"
           fillRule="evenodd"
         />

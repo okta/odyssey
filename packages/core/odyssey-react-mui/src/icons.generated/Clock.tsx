@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -30,7 +30,7 @@ const ClockIcon = forwardRef<SVGSVGElement, ClockIconProps>((props, ref) => {
       <>
         <path
           clipRule="evenodd"
-          d="M2 8a6 6 0 1 1 12 0A6 6 0 0 1 2 8ZM8 .667a7.333 7.333 0 1 0 0 14.666A7.333 7.333 0 0 0 8 .667ZM7.333 4v3.667a1 1 0 0 0 1 1H12V7.333H8.667V4H7.333Z"
+          d="M2 8a6 6 0 1 1 12 0A6 6 0 0 1 2 8M8 .667a7.333 7.333 0 1 0 0 14.666A7.333 7.333 0 0 0 8 .667M7.333 4v3.667a1 1 0 0 0 1 1H12V7.333H8.667V4z"
           fill="currentColor"
           fillRule="evenodd"
         />

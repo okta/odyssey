@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -30,7 +30,7 @@ const DenyIcon = forwardRef<SVGSVGElement, DenyIconProps>((props, ref) => {
       <>
         <path
           clipRule="evenodd"
-          d="M2 8a6 6 0 0 1 9.745-4.688l-8.433 8.433A5.974 5.974 0 0 1 2 8Zm2.255 4.688a6 6 0 0 0 8.433-8.433l-8.433 8.433ZM8 .667a7.333 7.333 0 1 0 0 14.666A7.333 7.333 0 0 0 8 .667Z"
+          d="M2 8a6 6 0 0 1 9.745-4.688l-8.433 8.433A5.97 5.97 0 0 1 2 8m2.255 4.688a6 6 0 0 0 8.433-8.433zM8 .667a7.333 7.333 0 1 0 0 14.666A7.333 7.333 0 0 0 8 .667"
           fill="currentColor"
           fillRule="evenodd"
         />

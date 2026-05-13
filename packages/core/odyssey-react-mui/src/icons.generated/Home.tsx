@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -30,7 +30,7 @@ const HomeIcon = forwardRef<SVGSVGElement, HomeIconProps>((props, ref) => {
       <>
         <path
           clipRule="evenodd"
-          d="m8 .436.446.402 6.667 6 .22.198v6.297a2 2 0 0 1-2 2H10v-4.666a2 2 0 1 0-4 0v4.666H2.667a2 2 0 0 1-2-2V7.036l.22-.198 6.667-6L8 .436ZM2 7.63v5.703c0 .368.298.667.667.667h2v-3.333a3.333 3.333 0 1 1 6.666 0V14h2a.667.667 0 0 0 .667-.667V7.63l-6-5.4-6 5.4Z"
+          d="m8 .436.446.402 6.667 6 .22.198v6.297a2 2 0 0 1-2 2H10v-4.666a2 2 0 1 0-4 0v4.666H2.667a2 2 0 0 1-2-2V7.036l.22-.198 6.667-6zM2 7.63v5.703c0 .368.298.667.667.667h2v-3.333a3.333 3.333 0 1 1 6.666 0V14h2a.667.667 0 0 0 .667-.667V7.63l-6-5.4z"
           fill="currentColor"
           fillRule="evenodd"
         />

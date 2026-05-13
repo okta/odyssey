@@ -10,30 +10,44 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render, screen } from "@testing-library/react";
-import { describe, expect, test } from "vitest";
+import { page } from "vitest/browser";
 
 import { Breadcrumb, BreadcrumbList } from "./Breadcrumbs.js";
-import { OdysseyProvider } from "./OdysseyProvider.js";
+import { renderWithOdysseyProvider } from "./test-utils/renderWithOdysseyProvider.js";
 
 describe(BreadcrumbList.name, () => {
-  test("separators are marked to prevent translation", () => {
-    render(
-      <OdysseyProvider>
-        <BreadcrumbList>
-          <Breadcrumb href="/home">Home</Breadcrumb>
-          <Breadcrumb href="/section">Section</Breadcrumb>
-          <Breadcrumb>Current page</Breadcrumb>
-        </BreadcrumbList>
-      </OdysseyProvider>,
+  test("separators are marked to prevent translation", async () => {
+    const { container } = await renderWithOdysseyProvider(
+      <BreadcrumbList>
+        <Breadcrumb href="/home">Home</Breadcrumb>
+        <Breadcrumb href="/section">Section</Breadcrumb>
+        <Breadcrumb>Current page</Breadcrumb>
+      </BreadcrumbList>,
     );
 
-    const separators = screen.getAllByText(/\//);
+    await expect(container).toBeAccessible();
+
+    const separators = page.getByText(/\//).elements();
 
     expect(separators).toHaveLength(2);
 
     separators.forEach((separator) => {
       expect(separator).toHaveAttribute("translate", "no");
     });
+  });
+
+  test("home breadcrumb links to homeHref", async () => {
+    const { container } = await renderWithOdysseyProvider(
+      <BreadcrumbList homeHref="#home">
+        <Breadcrumb href="#one">One</Breadcrumb>
+        <Breadcrumb href="#two">Two</Breadcrumb>
+      </BreadcrumbList>,
+    );
+
+    await expect(container).toBeAccessible();
+
+    await expect
+      .element(page.getByLabelText("Home"))
+      .toHaveAttribute("href", "#home");
   });
 });

@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -31,7 +31,7 @@ const ArrowTopIcon = forwardRef<SVGSVGElement, ArrowTopIconProps>(
         <>
           <path
             clipRule="evenodd"
-            d="M4 4h8V2.667H4V4Zm.195 4.195 3.098-3.097a1 1 0 0 1 1.414 0l3.098 3.097-.943.943-2.195-2.195v6.39H7.333v-6.39L5.138 9.138l-.943-.943Z"
+            d="M4 4h8V2.667H4zm.195 4.195 3.098-3.097a1 1 0 0 1 1.414 0l3.098 3.097-.943.943-2.195-2.195v6.39H7.333v-6.39L5.138 9.138z"
             fill="currentColor"
             fillRule="evenodd"
           />

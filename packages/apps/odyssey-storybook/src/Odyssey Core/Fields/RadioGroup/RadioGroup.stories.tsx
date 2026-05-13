@@ -13,9 +13,7 @@
 import { Link, Radio, RadioGroup } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { ChangeEvent, useCallback, useState } from "react";
-import { expect, userEvent, within } from "storybook/test";
 
-import { axeRun } from "../../../axeRun.js";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 
@@ -244,18 +242,6 @@ export const ControlledRadioGroup: Story = {
         <Radio label="Ludicrous Speed" value="Ludicrous Speed" />
       </RadioGroup>
     );
-  },
-  play: async ({ canvasElement, step }) => {
-    await step("select uncontrolled radio button", async () => {
-      const canvas = within(canvasElement);
-      const radiogroup = canvas.getByRole("radiogroup");
-      const radio = canvas.getByLabelText("Warp Speed");
-      if (radiogroup && radio) {
-        await userEvent.click(radio);
-      }
-      await expect(radio).toBeChecked();
-      await axeRun("select uncontrolled radio button");
-    });
   },
 };
 

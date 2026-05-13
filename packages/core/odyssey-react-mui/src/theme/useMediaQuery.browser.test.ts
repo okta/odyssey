@@ -10,30 +10,35 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { act, renderHook, waitFor } from "@testing-library/react";
-import { page } from "@vitest/browser/context";
+import { renderHook } from "vitest-browser-react";
+import { page } from "vitest/browser";
 
 import { useMediaQuery } from "./useMediaQuery.js";
 
 const MINIMUM_SIZE = 1;
 
 describe(useMediaQuery.name, () => {
+  test("does not accept empty string as media query", async () => {
+    await renderHook(() => {
+      // @ts-expect-error ignore error for test case
+      useMediaQuery("");
+    });
+  });
+
   test("responds to the given simple min-width media query", async () => {
     await page.viewport(MINIMUM_SIZE, MINIMUM_SIZE);
 
-    const { result: hasMatchesRef } = renderHook(() =>
+    const { result: hasMatchesRef } = await renderHook(() =>
       useMediaQuery(`(min-width: 800px)`),
     );
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(hasMatchesRef.current).toBe(false);
     });
 
-    await act(async () => {
-      await page.viewport(800, MINIMUM_SIZE);
-    });
+    await page.viewport(800, MINIMUM_SIZE);
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(hasMatchesRef.current).toBe(true);
     });
   });
@@ -42,29 +47,23 @@ describe(useMediaQuery.name, () => {
   test("responds to the given width range media query", async () => {
     await page.viewport(MINIMUM_SIZE, MINIMUM_SIZE);
 
-    const { result: hasMatchesRef } = await act(() =>
-      renderHook(() =>
-        useMediaQuery(`(min-width: 200px) and (max-width: 800px)`),
-      ),
+    const { result: hasMatchesRef } = await renderHook(() =>
+      useMediaQuery(`(min-width: 200px) and (max-width: 800px)`),
     );
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(hasMatchesRef.current).toBe(false);
     });
 
-    await act(async () => {
-      await page.viewport(200, MINIMUM_SIZE);
-    });
+    await page.viewport(200, MINIMUM_SIZE);
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(hasMatchesRef.current).toBe(true);
     });
 
-    await act(async () => {
-      await page.viewport(801, MINIMUM_SIZE);
-    });
+    await page.viewport(801, MINIMUM_SIZE);
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(hasMatchesRef.current).toBe(false);
     });
   });

@@ -68,8 +68,8 @@ export const ContrastModeToggle = ({ children }: { children: ReactNode }) => {
 
   return (
     <OdysseyProvider>
-      <Stack spacing={2} sx={{ padding: "24px" }}>
-        <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
+      <Stack spacing={2}>
+        <Stack direction="row" spacing={1}>
           <span style={labelStyle}>Background:</span>
           {(["white", "gray", "none"] as const).map((option) => (
             <button

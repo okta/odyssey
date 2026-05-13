@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -31,7 +31,7 @@ const NeutralIcon = forwardRef<SVGSVGElement, NeutralIconProps>(
         <>
           <path
             clipRule="evenodd"
-            d="M14 8A6 6 0 1 1 2 8a6 6 0 0 1 12 0Zm1.333 0A7.333 7.333 0 1 1 .667 8a7.333 7.333 0 0 1 14.666 0ZM6 6.667a.667.667 0 1 0 0-1.334.667.667 0 0 0 0 1.334ZM10.667 6a.667.667 0 1 1-1.334 0 .667.667 0 0 1 1.334 0ZM5 9.333a.667.667 0 0 0 0 1.334h6a.667.667 0 0 0 0-1.334H5Z"
+            d="M14 8A6 6 0 1 1 2 8a6 6 0 0 1 12 0m1.333 0A7.333 7.333 0 1 1 .667 8a7.333 7.333 0 0 1 14.666 0M6 6.667a.667.667 0 1 0 0-1.334.667.667 0 0 0 0 1.334M10.667 6a.667.667 0 1 1-1.334 0 .667.667 0 0 1 1.334 0M5 9.333a.667.667 0 0 0 0 1.334h6a.667.667 0 0 0 0-1.334z"
             fill="currentColor"
             fillRule="evenodd"
           />

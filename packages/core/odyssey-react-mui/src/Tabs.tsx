@@ -120,7 +120,9 @@ const Tabs = ({
   value,
   onChange: onChangeProp,
 }: TabsProps & Pick<HtmlProps, "ariaLabel">) => {
-  const [tabState, setTabState] = useState(initialValue ?? value ?? "0");
+  const [tabState, setTabState] = useState(
+    initialValue ?? value ?? tabs[0]?.value ?? "0",
+  );
   /*
     The scrollButtons prop is initially set to `false`.
     It's then reset to `auto` when the document is visible.

@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -30,7 +30,7 @@ const AddIcon = forwardRef<SVGSVGElement, AddIconProps>((props, ref) => {
       <>
         <path
           clipRule="evenodd"
-          d="M7.333 8.667v4h1.334v-4h4V7.333h-4v-4H7.333v4h-4v1.334h4Z"
+          d="M7.333 8.667v4h1.334v-4h4V7.333h-4v-4H7.333v4h-4v1.334z"
           fill="currentColor"
           fillRule="evenodd"
         />

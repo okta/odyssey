@@ -23,7 +23,7 @@ import {
   SearchDropdownProps,
 } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, fn, screen, userEvent, within } from "storybook/test";
+import { fn, userEvent, within } from "storybook/test";
 
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
@@ -116,40 +116,9 @@ export const SmallAdornmentWithExtra: StoryObj<PickerWithOptionAdornmentPropsTyp
       options: optionsWithExtra,
     },
     play: async ({ canvasElement, step }) => {
-      const canvas = within(canvasElement);
-      const comboBoxElement = canvas.getByRole<HTMLInputElement>("combobox");
-
-      const clearMocks = () => {
-        optionOnClick.mockClear();
-        optionExtraOnClick.mockClear();
-      };
-
-      await step("Click on option triggers option onClick", async () => {
-        clearMocks();
-        await userEvent.click(comboBoxElement);
-        const option = screen.getByText("An Option label");
-        await userEvent.click(option);
-        expect(optionOnClick).toBeCalled();
-        expect(optionExtraOnClick).not.toBeCalled();
-      });
-
-      await step(
-        "Click on option extra triggers option.extra onClick",
-        async () => {
-          clearMocks();
-          const optionExtra = screen.getByTestId("option1-extra");
-          await userEvent.click(optionExtra);
-          expect(optionOnClick).not.toBeCalled();
-          expect(optionExtraOnClick).toBeCalled();
-        },
-      );
-
-      await step("Click on unselectable option not trigger onClick", () => {
-        clearMocks();
-        const unselectableOption = screen.getByText("Unselectable Option");
-        expect(unselectableOption).toHaveStyle("pointer-events: none");
-        const optionExtra = screen.getByTestId("unselectable-extra");
-        expect(optionExtra).toHaveStyle("pointer-events: none");
+      await step("Open dropdown", async () => {
+        const canvas = within(canvasElement);
+        await userEvent.click(canvas.getByRole("combobox"));
       });
     },
   };
@@ -159,5 +128,11 @@ export const LargeAdornmentWithExtra: StoryObj<PickerWithOptionAdornmentPropsTyp
     args: {
       adornmentSize: "large",
       options: optionsWithExtra,
+    },
+    play: async ({ canvasElement, step }) => {
+      await step("Open dropdown", async () => {
+        const canvas = within(canvasElement);
+        await userEvent.click(canvas.getByRole("combobox"));
+      });
     },
   };

@@ -1,7 +1,10 @@
 {
-  "extends": "@okta/odyssey-typescript/tsconfig.node12.json",
+  "extends": "@okta/odyssey-typescript/tsconfig.node16.json",
   "compilerOptions": {
-    "outDir": "dist"
+    "outDir": "dist",
+    "rootDir": "src",
+    "tsBuildInfoFile": "dist/tsconfig.tsbuildinfo",
+    "types": ["node"]
   },
   "include": ["src"]
 }

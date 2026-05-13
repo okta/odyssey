@@ -16,18 +16,10 @@ import {
   calloutRoleValues,
   calloutSeverityValues,
 } from "@okta/odyssey-react-mui";
-import { queryOdysseySelector } from "@okta/odyssey-react-mui/test-selectors";
 import { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, fn, userEvent, within } from "storybook/test";
+import { fn } from "storybook/test";
 
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
-import { PlaywrightProps } from "../../tools/storybookTypes.js";
-
-type PlayType = {
-  args: CalloutProps;
-  canvasElement: HTMLElement;
-  step: PlaywrightProps<CalloutProps>["step"];
-};
 
 const storybookMeta: Meta<CalloutProps> = {
   component: Callout,
@@ -248,32 +240,6 @@ export const TitleWithLink: StoryObj<CalloutProps> = {
     linkText: "Visit fueling console",
     linkUrl: "#",
   },
-  play: async ({
-    canvasElement,
-    step,
-  }: {
-    canvasElement: HTMLElement;
-    step: PlaywrightProps<CalloutProps>["step"];
-  }) => {
-    await step("has visible link", () => {
-      const querySelect = queryOdysseySelector("Callout");
-
-      const element = querySelect({
-        element: canvasElement,
-        role: "alert",
-        options: {
-          title: /Safety checks failed/,
-        },
-      }).selectChild?.({
-        name: "link",
-        options: {
-          linkText: "Visit fueling console",
-        },
-      }).element;
-
-      expect(element).toBeVisible();
-    });
-  },
 };
 
 export const TitleWithLinkWithOnLinkClick: StoryObj<CalloutProps> = {
@@ -284,15 +250,5 @@ export const TitleWithLinkWithOnLinkClick: StoryObj<CalloutProps> = {
     severity: "error",
     text: undefined,
     title: "Safety checks failed",
-  },
-  play: async ({ args, canvasElement, step }: PlayType) => {
-    await step("check for the link text and click it", async () => {
-      const canvas = within(canvasElement);
-      const link = canvas.getByText<HTMLAnchorElement>("Visit fueling console");
-      await expect(link?.tagName).toBe("A");
-      await expect(link?.href).toBe(`${link?.baseURI}#`);
-      await userEvent.click(link);
-      await expect(args.onLinkClick).toHaveBeenCalled();
-    });
   },
 };

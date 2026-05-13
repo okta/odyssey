@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -31,7 +31,7 @@ const AppsSelectedIcon = forwardRef<SVGSVGElement, AppsSelectedIconProps>(
         <>
           <path
             clipRule="evenodd"
-            d="M4.333 1.333a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm0 7.334a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm4.334-4.334a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3 4.334a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"
+            d="M4.333 1.333a3 3 0 1 0 0 6 3 3 0 0 0 0-6m0 7.334a3 3 0 1 0 0 6 3 3 0 0 0 0-6m4.334-4.334a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3 4.334a3 3 0 1 0 0 6 3 3 0 0 0 0-6"
             fill="currentColor"
             fillRule="evenodd"
           />

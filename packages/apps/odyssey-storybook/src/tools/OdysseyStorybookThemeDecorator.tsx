@@ -33,7 +33,6 @@ export const OdysseyStorybookThemeDecorator: Decorator = (Story, context) => (
     hasCssBaseline
     languageCode={context.globals.locale as string}
   >
-    {/* @ts-expect-error type mismatch on "typography" */}
     <StorybookThemeProvider theme={odysseyTheme}>
       <div lang={context.globals.locale as string} style={styles}>
         <Story />

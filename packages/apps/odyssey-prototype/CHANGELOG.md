@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.60.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.59.0...v1.60.0) (2026-05-13)
+
+### Features
+
+- adds playwright to odyssey-prototype ([#282](https://github.com/atko-eng/odyssey-design-system/issues/282)) ([934ad89](https://github.com/atko-eng/odyssey-design-system/commit/934ad89e155752e47a243a127f1cbb86299e20d3))
+
 ## [1.59.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.58.0...v1.59.0) (2026-04-29)
 
 **Note:** Version bump only for package @okta/odyssey-prototype

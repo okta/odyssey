@@ -24,6 +24,7 @@ import {
   PickerWithOptionAdornmentProps,
 } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react-vite";
+import { screen, userEvent, within } from "storybook/test";
 
 import { StrictArgTypes } from "../../../../.storybook/types.js";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
@@ -40,8 +41,7 @@ const optionsSmall = [
   {
     value: "the",
     label: "The Option label",
-    description:
-      "Some optional descriptive text that in this particular case is really quite long and verbose and if this were real should probably be shortened.",
+    description: "Some optional descriptive text",
     adornment: <GlobeIcon />,
   },
   {
@@ -148,7 +148,14 @@ type Story<T extends AdornmentOptionType = AdornmentOptionType> = StoryObj<
   StoryPickerWithOptionAdornmentType<T>
 >;
 
-export const SmallAdornment: Story = {};
+export const SmallAdornment: Story = {
+  play: async ({ canvasElement, step }) => {
+    await step("Open dropdown", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("combobox"));
+    });
+  },
+};
 
 export const SmallAdornmentAndMetaData: Story = {
   args: {
@@ -170,12 +177,24 @@ export const SmallAdornmentAndMetaData: Story = {
       ],
     })),
   },
+  play: async ({ canvasElement, step }) => {
+    await step("Open dropdown", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("combobox"));
+    });
+  },
 };
 
 export const LargeAdornment: Story = {
   args: {
     adornmentSize: "large",
     options: optionsLarge,
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("Open dropdown", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("combobox"));
+    });
   },
 };
 
@@ -200,6 +219,12 @@ export const LargeAdornmentAndMetaData: Story = {
       ],
     })),
   },
+  play: async ({ canvasElement, step }) => {
+    await step("Open dropdown", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("combobox"));
+    });
+  },
 };
 
 export const WithGroups: Story = {
@@ -215,8 +240,7 @@ export const WithGroups: Story = {
       {
         value: "the",
         label: "The Option label",
-        description:
-          "Some optional descriptive text that in this particular case is really quite long and verbose and if this were real should probably be shortened.",
+        description: "Some optional descriptive text",
         adornment: <GlobeIcon />,
         group: "Icons",
       },
@@ -229,6 +253,12 @@ export const WithGroups: Story = {
       },
     ],
     groupOptionsBy: (option) => option.group ?? "",
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("Open dropdown", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("combobox"));
+    });
   },
 };
 
@@ -243,6 +273,17 @@ export const SmallAdornmentMultiSelect: Story = {
   args: {
     hasMultipleChoices: true,
   },
+  play: async ({ canvasElement, step }) => {
+    await step("Open dropdown", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("combobox"));
+      await userEvent.click(
+        screen.getByRole("option", {
+          name: "An Option label Some optional descriptive text",
+        }),
+      );
+    });
+  },
 };
 
 export const LargeAdornmentMultiSelect: Story = {
@@ -250,6 +291,17 @@ export const LargeAdornmentMultiSelect: Story = {
     hasMultipleChoices: true,
     adornmentSize: "large",
     options: optionsLarge,
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("Open dropdown", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("combobox"));
+      await userEvent.click(
+        screen.getByRole("option", {
+          name: "An Option label Some optional descriptive text",
+        }),
+      );
+    });
   },
 };
 

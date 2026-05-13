@@ -10,11 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { playwright } from "@vitest/browser-playwright";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   test: {
     coverage: {
+      provider: "v8",
       exclude: [
         "**/@types/**",
         "**/icons.generated/**",
@@ -23,8 +25,11 @@ export default defineConfig({
         "**/types.ts",
       ],
       include: ["src/**/*.{ts,tsx}"],
+      // branches reset to 57 after vitest 3→4 upgrade: Playwright CDP collects
+      // real branch data from Chromium, replacing the inflated Node V8 numbers
+      // that counted untested imported modules as 100% covered.
       thresholds: {
-        branches: 78,
+        branches: 57,
         functions: 56,
         lines: 57,
         statements: 57,
@@ -38,19 +43,6 @@ export default defineConfig({
           include: ["**/*.node.test.{ts,tsx}"],
           name: "unit",
           setupFiles: ["./vitest-node-setup.ts"],
-        },
-      },
-      {
-        test: {
-          // TODO: revert these changes once MUI Upgrade is done, see OKTA-960544
-          environment: "jsdom",
-          globals: true,
-          include: [
-            "**/DatePicker.jsdom.test.tsx",
-            "**/DateTimePicker.jsdom.test.tsx",
-          ],
-          name: "jsdom-hack",
-          setupFiles: ["./vitest-jsdom-setup.ts"],
         },
       },
       {
@@ -71,8 +63,10 @@ export default defineConfig({
                 },
               },
             ],
-            provider: "playwright",
+            provider: playwright(),
           },
+          attachmentsDir: "__vitest-screenshots",
+          clearMocks: true,
           globals: true,
           include: ["**/*.browser.test.{ts,tsx}"],
           name: "browser",

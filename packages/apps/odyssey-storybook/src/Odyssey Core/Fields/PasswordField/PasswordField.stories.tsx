@@ -12,7 +12,6 @@
 
 import {
   deepmerge,
-  odysseyTranslate,
   PasswordField,
   PasswordFieldProps,
   Stack,
@@ -20,9 +19,8 @@ import {
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { ChangeEvent } from "react";
 import { useCallback } from "storybook/preview-api";
-import { expect, fn, userEvent, within } from "storybook/test";
+import { fn } from "storybook/test";
 
-import { axeRun } from "../../../axeRun.js";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { useStoryArgOrLocalState } from "../../../tools/useStoryArgOrLocalState.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
@@ -203,64 +201,11 @@ const PasswordFieldTemplate: Story = {
   },
 };
 
-const passwordFieldPlay: NonNullable<Story["play"]> = async ({
-  canvasElement,
-  step,
-}) => {
-  await step("toggle password", async () => {
-    const canvas = within(canvasElement);
-    const fieldElement = canvas.getByRole("textbox", {
-      name: "Password",
-    });
-    expect(fieldElement).toHaveAttribute("type", "password");
-
-    const buttonElement = canvas.getByRole("button", {
-      name: odysseyTranslate("passwordfield.icon.label.show"),
-    });
-    if (buttonElement) {
-      await userEvent.type(fieldElement, "password", { delay: 50 });
-      await userEvent.click(buttonElement);
-      await userEvent.tab();
-
-      expect(fieldElement).toHaveAttribute("type", "text");
-      expect(buttonElement.ariaLabel).toBe(
-        odysseyTranslate("passwordfield.icon.label.show"),
-      );
-      expect(buttonElement.ariaPressed).toBe("true");
-
-      await userEvent.click(buttonElement);
-
-      expect(fieldElement).toHaveAttribute("type", "password");
-      expect(buttonElement.ariaLabel).toBe(
-        odysseyTranslate("passwordfield.icon.label.show"),
-      );
-      expect(buttonElement.ariaPressed).toBe("false");
-    }
-    await axeRun("Password Field Default");
-  });
-};
-
-const noShowPasswordPlay: NonNullable<Story["play"]> = async ({
-  canvasElement,
-  step,
-}) => {
-  await step("toggle password", () => {
-    const canvas = within(canvasElement);
-    const fieldElement = canvas.getByRole("textbox", {
-      name: "Password",
-    });
-    expect(fieldElement).toHaveAttribute("type", "password");
-
-    const buttonElement = canvas.queryByRole("button", {
-      name: odysseyTranslate("passwordfield.icon.label.show"),
-    });
-    expect(buttonElement).toBe(null);
-  });
-};
-
 export const Default: Story = {
   ...deepmerge(PasswordFieldTemplate, {
-    play: passwordFieldPlay,
+    args: {
+      value: "password",
+    },
   }),
 };
 
@@ -310,7 +255,6 @@ export const NoShowPassword: Story = {
     args: {
       hasShowPassword: false,
     },
-    play: noShowPasswordPlay,
   }),
 };
 

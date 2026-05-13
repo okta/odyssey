@@ -10,12 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { cleanup, render, screen, waitFor } from "@testing-library/react";
-import { userEvent } from "@vitest/browser/context";
 import { useState } from "react";
+import { page, userEvent } from "vitest/browser";
 
 import { translate as odysseyTranslate } from "../i18n.generated/i18n.js";
-import { OdysseyProvider } from "../OdysseyProvider.js";
+import { appendToSandbox } from "../test-utils/appendToSandbox.js";
+import { renderWithOdysseyProvider } from "../test-utils/renderWithOdysseyProvider.js";
 import { SkipToContent } from "./SkipToContent.js";
 
 const skipToMainContentLabel = odysseyTranslate("skiplinks.main");
@@ -62,116 +62,101 @@ const ResumeScenarioHarness = () => {
   );
 };
 
-const renderSkipToContent = () => {
-  render(
-    <OdysseyProvider>
-      <SkipToContentHarness />
-    </OdysseyProvider>,
-  );
-
-  return { mainContentElement: screen.getByTestId("main-content") };
-};
-
-const renderSkipScenario = () => {
-  render(
-    <OdysseyProvider>
-      <SkipScenarioHarness />
-    </OdysseyProvider>,
+const renderSkipToContent = async () => {
+  const { container } = await renderWithOdysseyProvider(
+    <SkipToContentHarness />,
   );
 
   return {
-    interveningElement: screen.getByTestId("intervening"),
-    mainContentElement: screen.getByTestId("main-content"),
+    container,
+    mainContentElement: page.getByTestId("main-content").element(),
   };
 };
 
-const renderResumeScenario = () => {
-  render(
-    <OdysseyProvider>
-      <ResumeScenarioHarness />
-    </OdysseyProvider>,
-  );
+const renderSkipScenario = async () => {
+  await renderWithOdysseyProvider(<SkipScenarioHarness />);
 
   return {
-    afterInterceptedElement: screen.getByTestId("after-intercepted"),
-    interceptedFromElement: screen.getByTestId("intercepted-from"),
-    mainContentElement: screen.getByTestId("main-content"),
+    interveningElement: page.getByTestId("intervening").element(),
+    mainContentElement: page.getByTestId("main-content").element(),
+  };
+};
+
+const renderResumeScenario = async () => {
+  await renderWithOdysseyProvider(<ResumeScenarioHarness />);
+
+  return {
+    afterInterceptedElement: page.getByTestId("after-intercepted").element(),
+    interceptedFromElement: page.getByTestId("intercepted-from").element(),
+    mainContentElement: page.getByTestId("main-content").element(),
   };
 };
 
 describe(SkipToContent.displayName!, () => {
-  afterEach(() => {
-    cleanup();
-    document.body.innerHTML = "";
-  });
-
   describe("Rendering", () => {
     test("skip to main content button rendered in the DOM and initially not visible", async () => {
-      renderSkipToContent();
+      const { container } = await renderSkipToContent();
 
-      await waitFor(() => {
-        const skipButton = screen.getByRole("button", {
-          name: skipToMainContentLabel,
-        });
-        expect(skipButton).toBeInTheDocument();
-        // Container uses the sr-only clip pattern when not focused — it collapses
-        // to 1×1px and clips its content, visually hiding the button.
-        expect(getComputedStyle(skipButton.closest("div[class]")!).width).toBe(
-          "1px",
-        );
+      await expect(container).toBeAccessible();
+
+      const skipButtonLocator = page.getByRole("button", {
+        name: skipToMainContentLabel,
       });
+
+      await expect.element(skipButtonLocator).toBeInTheDocument();
+      // Container uses the sr-only clip pattern when not focused — it collapses
+      // to 1×1px and clips its content, visually hiding the button.
+      expect(
+        getComputedStyle(skipButtonLocator.element().closest("div[class]")!)
+          .width,
+      ).toBe("1px");
     });
   });
 
   describe("Keyboard Interactions", () => {
     test("`[TAB]` interceptor focuses skip button and makes it visible when external element has focus", async () => {
-      renderSkipToContent();
+      await renderSkipToContent();
 
-      const externalButton = document.createElement("button");
-      document.body.append(externalButton);
+      // Tagged via `appendToSandbox` so the global afterEach removes it.
+      const externalButton = appendToSandbox(document.createElement("button"));
       externalButton.focus();
 
       expect(document.activeElement).toBe(externalButton);
 
       await userEvent.keyboard("{Tab}");
 
-      await waitFor(() => {
-        const skipButton = screen.getByRole("button", {
-          name: skipToMainContentLabel,
-        });
-        expect(document.activeElement).toBe(skipButton);
-        // :focus-within removes the sr-only clip — button should now be visible.
-        expect(skipButton).toBeVisible();
+      const skipButtonLocator = page.getByRole("button", {
+        name: skipToMainContentLabel,
       });
+      // :focus-within removes the sr-only clip — button should now be visible.
+      await expect.element(skipButtonLocator).toBeVisible();
+      expect(document.activeElement).toBe(skipButtonLocator.element());
     });
 
     test("`[TAB]` interceptor does not fire when body has focus", async () => {
-      renderSkipToContent();
+      await renderSkipToContent();
 
       (document.activeElement as HTMLElement | null)?.blur();
 
       await userEvent.keyboard("{Tab}");
 
-      await waitFor(() => {
-        expect(document.activeElement).not.toBe(document.body);
-      });
+      expect(document.activeElement).not.toBe(document.body);
     });
 
     test("`[TAB]` interceptor fires only once per mount", async () => {
-      renderSkipToContent();
+      await renderSkipToContent();
 
-      const externalButton = document.createElement("button");
-      document.body.append(externalButton);
+      // Tagged via `appendToSandbox` so the global afterEach removes it.
+      const externalButton = appendToSandbox(document.createElement("button"));
 
       // First Tab from external: interceptor fires, skip button focused.
       externalButton.focus();
       await userEvent.keyboard("{Tab}");
 
-      await waitFor(() => {
-        expect(document.activeElement).toBe(
-          screen.getByRole("button", { name: skipToMainContentLabel }),
-        );
+      const skipButtonLocator = page.getByRole("button", {
+        name: skipToMainContentLabel,
       });
+      await expect.element(skipButtonLocator).toHaveFocus();
 
       // Move focus back to external element.
       externalButton.focus();
@@ -179,75 +164,58 @@ describe(SkipToContent.displayName!, () => {
       // Second Tab from external: interceptor must NOT fire again.
       await userEvent.keyboard("{Tab}");
 
-      await waitFor(() => {
-        // Focus moved naturally (to the next DOM element), not back to the
-        // skip button via the JavaScript interceptor.
-        expect(document.activeElement).not.toBe(
-          screen.getByRole("button", { name: skipToMainContentLabel }),
-        );
-      });
+      // Focus moved naturally (to the next DOM element), not back to the
+      // skip button via the JavaScript interceptor.
+      expect(document.activeElement).not.toBe(skipButtonLocator.element());
     });
   });
 
   describe("Skip behavior", () => {
     test("clicking skip button bypasses intervening focusable element and focuses main content", async () => {
-      const { interveningElement, mainContentElement } = renderSkipScenario();
+      const { interveningElement, mainContentElement } =
+        await renderSkipScenario();
 
-      await waitFor(() => {
-        expect(
-          screen.getByRole("button", { name: skipToMainContentLabel }),
-        ).toBeInTheDocument();
-      });
-
-      const skipButton = screen.getByRole("button", {
+      const skipButtonLocator = page.getByRole("button", {
         name: skipToMainContentLabel,
       });
+      await expect.element(skipButtonLocator).toBeInTheDocument();
 
-      skipButton.focus();
-
-      await waitFor(() => {
-        expect(skipButton).toBeVisible();
-      });
+      // The button is sr-only until focused — focus it to trigger :focus-within.
+      skipButtonLocator.element().focus();
+      await expect.element(skipButtonLocator).toBeVisible();
 
       // Click the button: should jump to main content, skipping the intervening
       // element that would normally be the next Tab stop.
-      await userEvent.click(skipButton);
+      await userEvent.click(skipButtonLocator);
 
       expect(document.activeElement).toBe(mainContentElement);
       expect(document.activeElement).not.toBe(interveningElement);
     });
 
     test("without clicking skip button, Tab naturally focuses the intervening element first", async () => {
-      const { interveningElement } = renderSkipScenario();
+      const { interveningElement } = await renderSkipScenario();
 
-      await waitFor(() => {
-        expect(
-          screen.getByRole("button", { name: skipToMainContentLabel }),
-        ).toBeInTheDocument();
-      });
-
-      const skipButton = screen.getByRole("button", {
+      const skipButtonLocator = page.getByRole("button", {
         name: skipToMainContentLabel,
       });
+      await expect.element(skipButtonLocator).toBeInTheDocument();
 
       // Focus the skip button, then Tab past it without clicking.
-      skipButton.focus();
+      skipButtonLocator.element().focus();
       await userEvent.keyboard("{Tab}");
 
-      await waitFor(() => {
-        // Focus moves naturally to the intervening element (next in DOM order),
-        // not to main content.
-        expect(document.activeElement).toBe(interveningElement);
-      });
+      // Focus moves naturally to the intervening element (next in DOM order),
+      // not to main content.
+      expect(document.activeElement).toBe(interveningElement);
     });
   });
 
   describe("Resume from intercepted position", () => {
     test("Tab from skip button resumes Tab navigation from the intercepted position", async () => {
       const { afterInterceptedElement, interceptedFromElement } =
-        renderResumeScenario();
+        await renderResumeScenario();
 
-      const skipButton = screen.getByRole("button", {
+      const skipButtonLocator = page.getByRole("button", {
         name: skipToMainContentLabel,
       });
 
@@ -257,74 +225,59 @@ describe(SkipToContent.displayName!, () => {
       // Tab: interceptor fires, skip button receives focus.
       await userEvent.keyboard("{Tab}");
 
-      await waitFor(() => {
-        expect(document.activeElement).toBe(skipButton);
-        expect(skipButton).toBeVisible();
-      });
+      await expect.element(skipButtonLocator).toHaveFocus();
+      await expect.element(skipButtonLocator).toBeVisible();
 
       // Tab from skip button: resume handler fires, restoring focus to the
       // intercepted element so the browser continues Tab from there.
       await userEvent.keyboard("{Tab}");
 
-      await waitFor(() => {
-        expect(document.activeElement).toBe(afterInterceptedElement);
-      });
+      expect(document.activeElement).toBe(afterInterceptedElement);
     });
   });
 
   describe("Focus Navigation", () => {
     test("clicking button moves focus to main content element", async () => {
-      const { mainContentElement } = renderSkipToContent();
+      const { mainContentElement } = await renderSkipToContent();
 
-      await waitFor(() => {
-        expect(
-          screen.getByRole("button", { name: skipToMainContentLabel }),
-        ).toBeInTheDocument();
-      });
-
-      const skipButton = screen.getByRole("button", {
+      const skipButtonLocator = page.getByRole("button", {
         name: skipToMainContentLabel,
       });
+      await expect.element(skipButtonLocator).toBeInTheDocument();
 
       // The button is sr-only until focused — Playwright refuses to click
       // clipped elements, so focus it first to trigger :focus-within.
-      skipButton.focus();
-      await waitFor(() => expect(skipButton).toBeVisible());
+      skipButtonLocator.element().focus();
+      await expect.element(skipButtonLocator).toBeVisible();
 
-      await userEvent.click(skipButton);
+      await userEvent.click(skipButtonLocator);
 
       expect(document.activeElement).toBe(mainContentElement);
     });
 
     test("skip button is not visible after focus moves away", async () => {
-      const { mainContentElement } = renderSkipToContent();
+      const { mainContentElement } = await renderSkipToContent();
 
-      await waitFor(() => {
-        expect(
-          screen.getByRole("button", { name: skipToMainContentLabel }),
-        ).toBeInTheDocument();
-      });
-
-      const skipButton = screen.getByRole("button", {
+      const skipButtonLocator = page.getByRole("button", {
         name: skipToMainContentLabel,
       });
+      await expect.element(skipButtonLocator).toBeInTheDocument();
 
-      skipButton.focus();
+      skipButtonLocator.element().focus();
+      await expect.element(skipButtonLocator).toBeVisible();
 
-      await waitFor(() => {
-        expect(skipButton).toBeVisible();
-      });
-
-      await userEvent.click(skipButton);
+      await userEvent.click(skipButtonLocator);
 
       expect(document.activeElement).toBe(mainContentElement);
 
-      await waitFor(() => {
-        // After navigating away, container loses :focus-within → sr-only clip returns.
-        expect(getComputedStyle(skipButton.closest("div[class]")!).width).toBe(
-          "1px",
-        );
-      });
+      // After navigating away, container loses :focus-within → sr-only clip returns.
+      await expect
+        .poll(
+          () =>
+            getComputedStyle(skipButtonLocator.element().closest("div[class]")!)
+              .width,
+        )
+        .toBe("1px");
     });
   });
 });

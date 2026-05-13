@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -30,7 +30,7 @@ const AppsIcon = forwardRef<SVGSVGElement, AppsIconProps>((props, ref) => {
       <>
         <path
           clipRule="evenodd"
-          d="M4.333 1.333a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-1.666 3a1.667 1.667 0 1 1 3.333 0 1.667 1.667 0 0 1-3.333 0Zm1.666 4.334a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-1.666 3a1.667 1.667 0 1 1 3.333 0 1.667 1.667 0 0 1-3.333 0Zm6-7.334a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-1.666a1.667 1.667 0 1 0 0 3.333 1.667 1.667 0 0 0 0-3.333Zm0 6a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-1.667 3a1.667 1.667 0 1 1 3.333 0 1.667 1.667 0 0 1-3.333 0Z"
+          d="M4.333 1.333a3 3 0 1 0 0 6 3 3 0 0 0 0-6m-1.666 3a1.667 1.667 0 1 1 3.333 0 1.667 1.667 0 0 1-3.333 0m1.666 4.334a3 3 0 1 0 0 6 3 3 0 0 0 0-6m-1.666 3a1.667 1.667 0 1 1 3.333 0 1.667 1.667 0 0 1-3.333 0m6-7.334a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-1.666a1.667 1.667 0 1 0 0 3.333 1.667 1.667 0 0 0 0-3.333m0 6a3 3 0 1 0 0 6 3 3 0 0 0 0-6m-1.667 3a1.667 1.667 0 1 1 3.333 0 1.667 1.667 0 0 1-3.333 0"
           fill="currentColor"
           fillRule="evenodd"
         />

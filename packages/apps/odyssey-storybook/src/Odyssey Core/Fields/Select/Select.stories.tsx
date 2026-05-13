@@ -14,7 +14,7 @@ import type { Meta, StoryContext, StoryObj } from "@storybook/react-vite";
 
 import { SelectChangeEvent } from "@mui/material";
 import { Link, Select, type SelectProps } from "@okta/odyssey-react-mui";
-import { fn, screen, userEvent } from "storybook/test";
+import { fn, screen, userEvent, within } from "storybook/test";
 
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { useStoryArgOrLocalState } from "../../../tools/useStoryArgOrLocalState.js";
@@ -294,18 +294,9 @@ const multiSelectTemplate: Pick<Story, "render" | "args" | "argTypes"> = {
 export const Default: Story = {
   ...singleSelectTemplate,
   play: async ({ canvasElement, step }) => {
-    await step("Select first option", async () => {
-      const trigger = canvasElement.querySelector('[aria-haspopup="listbox"]');
-      if (!trigger) {
-        return;
-      }
-
-      await userEvent.click(trigger);
-      const listbox = screen.getByRole("listbox");
-
-      const firstOption = listbox.children[0];
-      await userEvent.click(firstOption);
-      await userEvent.tab();
+    await step("Open dropdown", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("combobox"));
     });
   },
   tags: ["!autodocs"],
@@ -364,6 +355,12 @@ export const EmptyOption: Story = {
       },
     },
   },
+  play: async ({ canvasElement, step }) => {
+    await step("Open dropdown", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("combobox"));
+    });
+  },
 };
 
 export const OptionsObject: Story = {
@@ -402,6 +399,12 @@ export const OptionsGrouped: Story = {
       },
     },
   },
+  play: async ({ canvasElement, step }) => {
+    await step("Open dropdown", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("combobox"));
+    });
+  },
 };
 
 export const MultiSelect: Story = {
@@ -427,18 +430,13 @@ export const MultiSelect: Story = {
     value: { control: { type: "check" }, options: baseOptionLabels },
   },
   play: async ({ canvasElement, step }) => {
-    await step("Select multiple options", async () => {
-      const trigger = canvasElement.querySelector('[aria-haspopup="listbox"]');
-      if (!trigger) {
-        return;
-      }
-
-      await userEvent.click(trigger);
+    await step("Select one option to show tag", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("combobox"));
       const listbox = screen.getByRole("listbox");
-
-      await userEvent.click(listbox.children[0]);
-      await userEvent.click(listbox.children[1]);
-      await userEvent.tab();
+      await userEvent.click(
+        within(listbox).getByRole("option", { name: "Option A" }),
+      );
     });
   },
 };

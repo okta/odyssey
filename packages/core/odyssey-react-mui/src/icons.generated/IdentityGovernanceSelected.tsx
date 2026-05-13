@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -33,7 +33,7 @@ const IdentityGovernanceSelectedIcon = forwardRef<
       <>
         <path
           clipRule="evenodd"
-          d="m12.943 3.333 1.528 1.529.472.471-.472.472-2.333 2.333-.471.472-.472-.472L9.667 6.61l-1.74 1.739a4 4 0 1 1-.943-.943l1.74-1.74.471-.47 2.334-2.334.471-.471.862-.862.943.942-.862.862Z"
+          d="m12.943 3.333 1.528 1.529.472.471-.472.472-2.333 2.333-.471.472-.472-.472L9.667 6.61l-1.74 1.739a4 4 0 1 1-.943-.943l1.74-1.74.471-.47 2.334-2.334.471-.471.862-.862.943.942z"
           fill="currentColor"
           fillRule="evenodd"
         />

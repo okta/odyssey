@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -31,13 +31,13 @@ const ChevronUpIcon = forwardRef<SVGSVGElement, ChevronUpIconProps>(
         <>
           <path
             clipRule="evenodd"
-            d="M7.293 5.431a1 1 0 0 1 1.414 0l4.098 4.098-.943.942L8 6.61l-3.862 3.862-.943-.942 4.098-4.1.471.471-.471-.471Z"
+            d="M7.293 5.431a1 1 0 0 1 1.414 0l4.098 4.098-.943.942L8 6.61l-3.862 3.862-.943-.942zl.471.471z"
             fill="currentColor"
             fillRule="evenodd"
           />
           <path
             clipRule="evenodd"
-            d="m8.707 5.431 4.098 4.098-.943.942L8 6.61l-3.862 3.862-.943-.942 4.098-4.1a1 1 0 0 1 1.414 0Z"
+            d="m8.707 5.431 4.098 4.098-.943.942L8 6.61l-3.862 3.862-.943-.942 4.098-4.1a1 1 0 0 1 1.414 0"
             fill="currentColor"
             fillRule="evenodd"
           />

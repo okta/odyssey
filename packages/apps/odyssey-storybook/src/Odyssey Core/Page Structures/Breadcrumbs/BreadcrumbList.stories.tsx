@@ -14,7 +14,6 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { Breadcrumb, BreadcrumbList } from "@okta/odyssey-react-mui";
 import { action } from "storybook/actions";
-import { expect, within } from "storybook/test";
 
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 
@@ -122,13 +121,6 @@ export const Default: BreadcrumbListStory = {
       <Breadcrumb href="#ten">Ten</Breadcrumb>
     </BreadcrumbList>
   ),
-  play: async ({ canvasElement, step }) => {
-    await step("Breadcrumbs Home Link", ({ args }) => {
-      const canvas = within(canvasElement);
-      const box = canvas.getByLabelText("Home");
-      expect(box).toHaveAttribute("href", args.homeHref);
-    });
-  },
 };
 
 export const Truncation: BreadcrumbListStory = {

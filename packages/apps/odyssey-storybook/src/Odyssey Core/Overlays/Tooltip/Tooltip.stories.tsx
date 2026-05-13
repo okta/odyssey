@@ -21,7 +21,6 @@ import { DownloadIcon } from "@okta/odyssey-react-mui/icons";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { userEvent, within } from "storybook/test";
 
-import { axeRun } from "../../../axeRun.js";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 
 const meta = {
@@ -109,16 +108,6 @@ const Template: Story = {
   },
 };
 
-const showTooltip =
-  (actionName: string): Story["play"] =>
-  ({ canvasElement, step }) =>
-    step("show the tooltip on hover", async () => {
-      const canvas = within(canvasElement);
-      const button = canvas.getByText("Launch");
-      await userEvent.hover(button);
-      await axeRun(actionName);
-    });
-
 export const Default: Story = {
   ...Template,
   args: {
@@ -127,7 +116,12 @@ export const Default: Story = {
     placement: "top",
     text: "This will begin a 10-second countdown",
   },
-  play: showTooltip("Tooltip Default"),
+  play: async ({ canvasElement, step }) => {
+    await step("Show tooltip", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.hover(canvas.getByRole("button", { name: "Launch" }));
+    });
+  },
 };
 
 export const IconButton: Story = {
@@ -145,11 +139,11 @@ export const IconButton: Story = {
     text: "Download logs",
   },
   play: async ({ canvasElement, step }) => {
-    await step("tooltip text", async () => {
+    await step("Show tooltip", async () => {
       const canvas = within(canvasElement);
-      const button = canvas.getByRole("button");
-      await userEvent.hover(button);
-      await axeRun("Tooltip Icon Button");
+      await userEvent.hover(
+        canvas.getByRole("button", { name: "Download logs" }),
+      );
     });
   },
 };
@@ -163,14 +157,9 @@ export const StatusWrapper: Story = {
     text: "The warp drive is currently online.",
   },
   play: async ({ canvasElement, step }) => {
-    await step("tooltip text", async () => {
+    await step("Show tooltip", async () => {
       const canvas = within(canvasElement);
-      const button = canvas.getByLabelText(
-        "The warp drive is currently online.",
-      );
-      await userEvent.hover(button);
-
-      await axeRun("Tooltip Icon Button");
+      await userEvent.hover(canvas.getByText("Warp drive online"));
     });
   },
 };
@@ -196,4 +185,10 @@ export const Placement: Story = {
       </Tooltip>
     </>
   ),
+  play: async ({ canvasElement, step }) => {
+    await step("Show tooltip", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.hover(canvas.getByText("Bow"));
+    });
+  },
 };

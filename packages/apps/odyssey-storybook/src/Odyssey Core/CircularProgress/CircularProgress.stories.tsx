@@ -12,7 +12,6 @@
 
 import { CircularProgress } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, within } from "storybook/test";
 
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
@@ -45,13 +44,6 @@ export const Indeterminate: Story = {
   },
   args: {
     ariaLabel: "progress",
-  },
-  play: async ({ canvasElement, step }) => {
-    await step("Circular Aria-Label", () => {
-      const canvas = within(canvasElement);
-      const circular = canvas.getByLabelText("progress");
-      expect(circular).toHaveAttribute("role", "progressbar");
-    });
   },
 };
 

@@ -10,18 +10,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render, waitFor, within } from "@testing-library/react";
-import { userEvent } from "@vitest/browser/context";
+import { page, userEvent } from "vitest/browser";
 
+import { renderWithOdysseyProvider } from "../test-utils/renderWithOdysseyProvider.js";
 import { Pagination } from "./Pagination.js";
 
 describe(Pagination.displayName!, () => {
-  test("renders the expected controls in 'paged' variant", () => {
+  test("renders the expected controls in 'paged' variant", async () => {
     const onPaginationChange = vi.fn();
 
-    const { container } = render(
+    const { container } = await renderWithOdysseyProvider(
       <Pagination
         currentPageLabel="Page"
+        currentRowsCount={10}
         lastRow={10}
         loadMoreLabel="Load more"
         nextLabel="Next page"
@@ -35,24 +36,26 @@ describe(Pagination.displayName!, () => {
       />,
     );
 
-    expect(
-      within(container).getByLabelText("Rows per page"),
-    ).toBeInTheDocument();
-    expect(within(container).getByLabelText("Page")).toBeInTheDocument();
-    expect(
-      within(container).getByLabelText("Previous page"),
-    ).toBeInTheDocument();
-    expect(within(container).getByLabelText("Next page")).toBeInTheDocument();
-    // Temporarily disabled while we figure out why i18n string interpolation
-    // isn't playing nicely with testing-library. Can confirm this works properly
-    // via VRT results
-    // expect(within(container).getByText("1-10 of 100")).toBeInTheDocument();
+    await expect(container).toBeAccessible();
+
+    await expect
+      .element(page.getByLabelText("Rows per page"))
+      .toBeInTheDocument();
+    await expect
+      .element(page.getByLabelText("Page", { exact: true }))
+      .toBeInTheDocument();
+    await expect
+      .element(page.getByLabelText("Previous page"))
+      .toBeInTheDocument();
+    await expect.element(page.getByLabelText("Next page")).toBeInTheDocument();
+
+    await expect.element(page.getByText("1-10 of 100")).toBeInTheDocument();
   });
 
   test("calls onPaginationChange with correct pageIndex when clicking next", async () => {
     const onPaginationChange = vi.fn();
 
-    const { container } = render(
+    await renderWithOdysseyProvider(
       <Pagination
         currentPageLabel="Page"
         lastRow={10}
@@ -68,20 +71,18 @@ describe(Pagination.displayName!, () => {
       />,
     );
 
-    await userEvent.click(within(container).getByLabelText("Next page"));
+    await userEvent.click(page.getByLabelText("Next page"));
 
-    await waitFor(() => {
-      expect(onPaginationChange).toHaveBeenCalledWith({
-        pageIndex: 2,
-        pageSize: 10,
-      });
+    expect(onPaginationChange).toHaveBeenCalledWith({
+      pageIndex: 2,
+      pageSize: 10,
     });
   });
 
   test("calls onPaginationChange with correct pageIndex when clicking previous", async () => {
     const onPaginationChange = vi.fn();
 
-    const { container } = render(
+    await renderWithOdysseyProvider(
       <Pagination
         currentPageLabel="Page"
         lastRow={20}
@@ -97,20 +98,18 @@ describe(Pagination.displayName!, () => {
       />,
     );
 
-    await userEvent.click(within(container).getByLabelText("Previous page"));
+    await userEvent.click(page.getByLabelText("Previous page"));
 
-    await waitFor(() => {
-      expect(onPaginationChange).toHaveBeenCalledWith({
-        pageIndex: 1,
-        pageSize: 10,
-      });
+    expect(onPaginationChange).toHaveBeenCalledWith({
+      pageIndex: 1,
+      pageSize: 10,
     });
   });
 
-  test("disables previous button on first page", () => {
+  test("disables previous button on first page", async () => {
     const onPaginationChange = vi.fn();
 
-    const { container } = render(
+    await renderWithOdysseyProvider(
       <Pagination
         currentPageLabel="Page"
         lastRow={10}
@@ -126,13 +125,13 @@ describe(Pagination.displayName!, () => {
       />,
     );
 
-    expect(within(container).getByLabelText("Previous page")).toBeDisabled();
+    await expect.element(page.getByLabelText("Previous page")).toBeDisabled();
   });
 
-  test("disables next button on last page", () => {
+  test("disables next button on last page", async () => {
     const onPaginationChange = vi.fn();
 
-    const { container } = render(
+    await renderWithOdysseyProvider(
       <Pagination
         currentPageLabel="Page"
         lastRow={100}
@@ -148,13 +147,13 @@ describe(Pagination.displayName!, () => {
       />,
     );
 
-    expect(within(container).getByLabelText("Next page")).toBeDisabled();
+    await expect.element(page.getByLabelText("Next page")).toBeDisabled();
   });
 
   test("updates pageIndex when entering a new page number", async () => {
     const onPaginationChange = vi.fn();
 
-    const { container } = render(
+    await renderWithOdysseyProvider(
       <Pagination
         currentPageLabel="Page"
         lastRow={10}
@@ -170,24 +169,78 @@ describe(Pagination.displayName!, () => {
       />,
     );
 
-    const pageElement = await within(container).findByLabelText("Page");
+    const pageElement = page.getByLabelText("Page", { exact: true });
 
     await userEvent.tripleClick(pageElement);
     await userEvent.keyboard("5");
-    await userEvent.click(document.body);
+    await userEvent.click(page.getByRole("document"));
 
-    await waitFor(() => {
-      expect(onPaginationChange).toHaveBeenCalledWith({
-        pageIndex: 5,
-        pageSize: 10,
-      });
+    expect(onPaginationChange).toHaveBeenCalledWith({
+      pageIndex: 5,
+      pageSize: 10,
+    });
+  });
+
+  test("submits page change on Enter key", async () => {
+    const onPaginationChange = vi.fn();
+
+    await renderWithOdysseyProvider(
+      <Pagination
+        currentPageLabel="Page"
+        lastRow={10}
+        loadMoreLabel="Load more"
+        nextLabel="Next page"
+        onPaginationChange={onPaginationChange}
+        pageIndex={1}
+        pageSize={10}
+        previousLabel="Previous page"
+        rowsPerPageLabel="Rows per page"
+        totalRows={100}
+        variant="paged"
+      />,
+    );
+
+    await userEvent.tripleClick(page.getByLabelText("Page", { exact: true }));
+    await userEvent.keyboard("3{Enter}");
+
+    expect(onPaginationChange).toHaveBeenCalledWith({
+      pageIndex: 3,
+      pageSize: 10,
+    });
+  });
+
+  test("submits rows per page change on Enter key", async () => {
+    const onPaginationChange = vi.fn();
+
+    await renderWithOdysseyProvider(
+      <Pagination
+        currentPageLabel="Page"
+        lastRow={10}
+        loadMoreLabel="Load more"
+        nextLabel="Next page"
+        onPaginationChange={onPaginationChange}
+        pageIndex={1}
+        pageSize={10}
+        previousLabel="Previous page"
+        rowsPerPageLabel="Rows per page"
+        totalRows={100}
+        variant="paged"
+      />,
+    );
+
+    await userEvent.tripleClick(page.getByLabelText("Rows per page"));
+    await userEvent.keyboard("20{Enter}");
+
+    expect(onPaginationChange).toHaveBeenCalledWith({
+      pageIndex: 1,
+      pageSize: 20,
     });
   });
 
   test("updates pageSize when entering a new rows per page value", async () => {
     const onPaginationChange = vi.fn();
 
-    const { container } = render(
+    await renderWithOdysseyProvider(
       <Pagination
         currentPageLabel="Page"
         lastRow={10}
@@ -203,25 +256,22 @@ describe(Pagination.displayName!, () => {
       />,
     );
 
-    const rowsPerPageInput =
-      await within(container).findByLabelText("Rows per page");
+    const rowsPerPageInput = page.getByLabelText("Rows per page");
 
     await userEvent.tripleClick(rowsPerPageInput);
     await userEvent.keyboard("20");
-    await userEvent.click(document.body);
+    await userEvent.click(page.getByRole("document"));
 
-    await waitFor(() => {
-      expect(onPaginationChange).toHaveBeenCalledWith({
-        pageIndex: 1,
-        pageSize: 20,
-      });
+    expect(onPaginationChange).toHaveBeenCalledWith({
+      pageIndex: 1,
+      pageSize: 20,
     });
   });
 
-  test("renders 'Load more' button in 'loadMore' variant", () => {
+  test("renders 'Load more' button in 'loadMore' variant", async () => {
     const onPaginationChange = vi.fn();
 
-    const { container } = render(
+    await renderWithOdysseyProvider(
       <Pagination
         loadMoreLabel="Load more"
         onPaginationChange={onPaginationChange}
@@ -232,13 +282,13 @@ describe(Pagination.displayName!, () => {
       />,
     );
 
-    expect(within(container).getByText("Load more")).toBeInTheDocument();
+    await expect.element(page.getByText("Load more")).toBeInTheDocument();
   });
 
   test("calls onPaginationChange with increased pageSize when clicking 'Load more'", async () => {
     const onPaginationChange = vi.fn();
 
-    const { container } = render(
+    await renderWithOdysseyProvider(
       <Pagination
         loadMoreLabel="Load more"
         onPaginationChange={onPaginationChange}
@@ -249,20 +299,18 @@ describe(Pagination.displayName!, () => {
       />,
     );
 
-    await userEvent.click(within(container).getByText("Load more"));
+    await userEvent.click(page.getByText("Load more"));
 
-    await waitFor(() => {
-      expect(onPaginationChange).toHaveBeenCalledWith({
-        pageIndex: 1,
-        pageSize: 40, // Assuming initial pageSize is 20, it should increment by 20
-      });
+    expect(onPaginationChange).toHaveBeenCalledWith({
+      pageIndex: 1,
+      pageSize: 40, // Assuming initial pageSize is 20, it should increment by 20
     });
   });
 
-  test("disables 'Load more' button when isMoreDisabled is true", () => {
+  test("disables 'Load more' button when isMoreDisabled is true", async () => {
     const onPaginationChange = vi.fn();
 
-    const { container } = render(
+    await renderWithOdysseyProvider(
       <Pagination
         isMoreDisabled={true}
         loadMoreLabel="Load more"
@@ -274,13 +322,13 @@ describe(Pagination.displayName!, () => {
       />,
     );
 
-    expect(within(container).getByText("Load more")).toBeDisabled();
+    await expect.element(page.getByText("Load more")).toBeDisabled();
   });
 
-  test("disables 'Next page' button when isMoreDisabled is true", () => {
+  test("disables 'Next page' button when isMoreDisabled is true", async () => {
     const onPaginationChange = vi.fn();
 
-    const { container } = render(
+    await renderWithOdysseyProvider(
       <Pagination
         currentPageLabel="Page"
         isMoreDisabled={true}
@@ -297,13 +345,13 @@ describe(Pagination.displayName!, () => {
       />,
     );
 
-    expect(within(container).getByLabelText("Next page")).toBeDisabled();
+    await expect.element(page.getByLabelText("Next page")).toBeDisabled();
   });
 
-  test("disables all controls when isDisabled is true", () => {
+  test("disables all controls when isDisabled is true", async () => {
     const onPaginationChange = vi.fn();
 
-    const { container } = render(
+    await renderWithOdysseyProvider(
       <Pagination
         currentPageLabel="Page"
         isDisabled={true}
@@ -320,17 +368,19 @@ describe(Pagination.displayName!, () => {
       />,
     );
 
-    expect(within(container).getByLabelText("Rows per page")).toBeDisabled();
-    expect(within(container).getByLabelText("Page")).toBeDisabled();
-    expect(within(container).getByLabelText("Previous page")).toBeDisabled();
-    expect(within(container).getByLabelText("Next page")).toBeDisabled();
+    await expect.element(page.getByLabelText("Rows per page")).toBeDisabled();
+    await expect
+      .element(page.getByLabelText("Page", { exact: true }))
+      .toBeDisabled();
+    await expect.element(page.getByLabelText("Previous page")).toBeDisabled();
+    await expect.element(page.getByLabelText("Next page")).toBeDisabled();
   });
 
   test("prevents setting the page to values less than 1", async () => {
     const user = userEvent.setup();
     const onPaginationChange = vi.fn();
 
-    const { container } = render(
+    await renderWithOdysseyProvider(
       <Pagination
         currentPageLabel="Page"
         hasPageInput={true}
@@ -347,16 +397,14 @@ describe(Pagination.displayName!, () => {
       />,
     );
 
-    const pageInput = within(container).getByRole<HTMLInputElement>(
-      "spinbutton",
-      {
-        name: "Page",
-      },
-    );
+    const pageInput = page.getByRole("spinbutton", {
+      name: "Page",
+      exact: true,
+    });
     await user.click(pageInput);
     await user.keyboard("{ArrowDown}");
 
     // Assert that the value is still 1
-    expect(pageInput.value).toBe("1");
+    await expect.element(pageInput).toHaveValue(1);
   });
 });
